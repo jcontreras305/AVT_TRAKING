@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.106
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "AVT_TRAKING", "AVT_TRAKING\AVT_TRAKING.vbproj", "{7A2324C7-B9CA-4F1D-9129-D1840C081F8B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7A2324C7-B9CA-4F1D-9129-D1840C081F8B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7A2324C7-B9CA-4F1D-9129-D1840C081F8B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7A2324C7-B9CA-4F1D-9129-D1840C081F8B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7A2324C7-B9CA-4F1D-9129-D1840C081F8B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B0F59534-FA1C-41C0-8953-6AC07274B2A3}
+	EndGlobalSection
+EndGlobal
