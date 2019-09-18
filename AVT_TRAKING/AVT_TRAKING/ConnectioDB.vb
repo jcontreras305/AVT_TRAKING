@@ -10,7 +10,7 @@ Public Class ConnectioDB
             conn.Open() 'se abre la conexion
             If conn.State Then 'comprueba si la conexion esta habilitada 
                 'Aqui podemos mandar un mesaje que nos diga si fue o no conectado
-                'MsgBox("Conexion abierta")
+                MsgBox("Conexion abierta")
             Else
                 MsgBox("La Conexion a la base de datos no se pudo realizar") 'mesaje de error
             End If

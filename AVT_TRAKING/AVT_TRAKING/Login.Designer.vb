@@ -28,6 +28,7 @@ Partial Class Login
         Me.Label2 = New System.Windows.Forms.Label()
         Me.btnVer = New System.Windows.Forms.Button()
         Me.btnIniciar = New System.Windows.Forms.Button()
+        Me.btnExit = New System.Windows.Forms.Button()
         Me.SuspendLayout()
         '
         'txtUser
@@ -85,11 +86,21 @@ Partial Class Login
         Me.btnIniciar.Text = "Iniciar"
         Me.btnIniciar.UseVisualStyleBackColor = True
         '
+        'btnExit
+        '
+        Me.btnExit.Location = New System.Drawing.Point(129, 175)
+        Me.btnExit.Name = "btnExit"
+        Me.btnExit.Size = New System.Drawing.Size(75, 23)
+        Me.btnExit.TabIndex = 6
+        Me.btnExit.Text = "Salir"
+        Me.btnExit.UseVisualStyleBackColor = True
+        '
         'Login
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(445, 249)
+        Me.Controls.Add(Me.btnExit)
         Me.Controls.Add(Me.btnIniciar)
         Me.Controls.Add(Me.btnVer)
         Me.Controls.Add(Me.Label2)
@@ -109,4 +120,5 @@ Partial Class Login
     Friend WithEvents Label2 As Label
     Friend WithEvents btnVer As Button
     Friend WithEvents btnIniciar As Button
+    Friend WithEvents btnExit As Button
 End Class
