@@ -3,18 +3,17 @@
     Dim mtdLogin As New MetodosLogin
     Dim flag As Boolean = True
 
-    Private Sub btnVer_Click(sender As Object, e As EventArgs) Handles btnVer.Click
+    Private Sub btnVer_Click(sender As Object, e As EventArgs) Handles btnVer.Click 'Este subproseso es para ver o cultar el contenido del campor de password
         Try
-            If flag = True Then
+            If flag = True Then ' si flag esta en verdadero entra y desactiva la proteccion 
                 txtPassword.UseSystemPasswordChar = False
                 flag = False
             Else
                 txtPassword.UseSystemPasswordChar = True
                 flag = True
+                MsgBox("Ten cuidado al desenmascarar la contraseña")
             End If
-
         Catch ex As Exception
-
         End Try
     End Sub
 
@@ -23,6 +22,7 @@
             If (txtUser.Text <> String.Empty And txtUser.Text.Length > 0) And (txtPassword.Text <> String.Empty And txtPassword.Text.Length > 0) Then
                 If mtdLogin.StartLogin(txtUser.Text, txtPassword.Text) Then
                     MainFrom.Show()
+                    Me.Visible = False
                 Else
                     txtUser.Clear()
                     txtPassword.Clear()
@@ -30,7 +30,12 @@
                 End If
             End If
         Catch ex As Exception
-
         End Try
+    End Sub
+
+    Private Sub btnExit_Click(sender As Object, e As EventArgs) Handles btnExit.Click
+        If MessageBox.Show("Desea salir de la aplicacion", "Advertencia", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) = 1 Then
+            Me.Close()
+        End If
     End Sub
 End Class

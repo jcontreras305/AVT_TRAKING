@@ -29,6 +29,4 @@ Public Class MetodosLogin
             Return False
         End Try
     End Function
-
-
 End Class
