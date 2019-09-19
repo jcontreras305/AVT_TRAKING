@@ -166,6 +166,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Documents\Creacion de DB y de la tabla de Usuarios.sql" />
+    <Content Include="Documents\IsaacSP.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>
