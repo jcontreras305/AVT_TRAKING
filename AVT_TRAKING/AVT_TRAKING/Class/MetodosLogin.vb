@@ -4,7 +4,7 @@ Public Class MetodosLogin
 
     Inherits ConnectioDB 'el inherit nos permite entre clases llamar las funcion y atributos publicos de otra calse como si fuese 1
 
-    Dim con As New ConnectioDB ' tambien podemos hacer una instacia de una clase pero es diferente la forma de llamar las funciones o atributos
+    'Dim con As New ConnectioDB ' tambien podemos hacer una instacia de una clase pero es diferente la forma de llamar las funciones o atributos
 
     Public Function StartLogin(user As String, password As String) As Boolean
         Try

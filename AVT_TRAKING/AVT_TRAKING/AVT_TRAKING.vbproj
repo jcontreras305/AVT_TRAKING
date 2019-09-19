@@ -73,15 +73,16 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class\MetodosEmployees.vb" />
+    <Compile Include="Class\MetodosClients.vb" />
     <Compile Include="Class\MetodosLogin.vb" />
-    <Compile Include="ConnectioDB.vb" />
-    <Compile Include="Froms\Employees.Designer.vb">
-      <DependentUpon>Employees.vb</DependentUpon>
+    <Compile Include="Class\MetodosMaterials.vb" />
+    <Compile Include="Clients.Designer.vb">
+      <DependentUpon>Clients.vb</DependentUpon>
     </Compile>
-    <Compile Include="Froms\Employees.vb">
+    <Compile Include="Clients.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="ConnectioDB.vb" />
     <Compile Include="Froms\MainFrom.Designer.vb">
       <DependentUpon>MainFrom.vb</DependentUpon>
     </Compile>
@@ -93,6 +94,12 @@
     </Compile>
     <Compile Include="Login.Designer.vb">
       <DependentUpon>Login.vb</DependentUpon>
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Materials.Designer.vb">
+      <DependentUpon>Materials.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Materials.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="My Project\AssemblyInfo.vb" />
@@ -112,11 +119,17 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Froms\Employees.resx">
-      <DependentUpon>Employees.vb</DependentUpon>
+    <EmbeddedResource Include="Clients.resx">
+      <DependentUpon>Clients.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Froms\MainFrom.resx">
+      <DependentUpon>MainFrom.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Login.resx">
       <DependentUpon>Login.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Materials.resx">
+      <DependentUpon>Materials.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
