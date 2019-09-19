@@ -10,4 +10,9 @@
         a.Show()
         Me.Finalize()
     End Sub
+
+    Private Sub btnEmployees_Click(sender As Object, e As EventArgs) Handles btnEmployees.Click
+        Employees.Show()
+        Me.Finalize()
+    End Sub
 End Class
