@@ -12,7 +12,8 @@
     End Sub
 
     Private Sub btnEmployees_Click(sender As Object, e As EventArgs) Handles btnEmployees.Click
-        Employees.Show()
+        Dim a As New Employees()
+        a.Show()
         Me.Finalize()
     End Sub
 End Class

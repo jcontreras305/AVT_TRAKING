@@ -162,4 +162,10 @@
 
         End Try
     End Sub
+
+    Private Sub BtnMenu_Click(sender As Object, e As EventArgs) Handles btnMenu.Click
+        Dim a As New MainFrom()
+        a.Show()
+        Me.Finalize()
+    End Sub
 End Class

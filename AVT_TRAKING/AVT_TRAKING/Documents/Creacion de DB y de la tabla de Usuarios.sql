@@ -31,6 +31,7 @@ create table employees(
 	idPayRate varchar(36),
 	estatus char(1)
 )
+drop table employees
 
 alter table employees 
 add constraint fk_idPayRate_employees
@@ -51,6 +52,7 @@ create table contact(
 	phoneNumber2 varchar(13),
 	emial varchar(50)
 )
+drop table contact
 
 create table HomeAddress (
 	idHomeAdress varchar(36) primary key not null,
@@ -60,6 +62,7 @@ create table HomeAddress (
 	providence varchar(20),
 	postalCode int
 )
+drop table HomeAddress
 
 create table payRate(
 	idPayRate varchar(36) primary key not null ,
@@ -67,6 +70,7 @@ create table payRate(
 	payRate2 float, 
 	payRate3 float
 )
+drop table payRate
 
 --############################################################################
 --############# Tables clients ###############################################
