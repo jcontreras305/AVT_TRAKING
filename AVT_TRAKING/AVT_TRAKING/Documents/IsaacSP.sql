@@ -109,3 +109,70 @@ begin
 	end
 end
 go
+
+--##############################################################################################
+--################## PROCEDIMINETO ALMACENADO PARA ACTUALIZAR UN EMPLEADO ######################
+--##############################################################################################
+
+create proc sp_update_Employee
+	--ids para hacer update 4
+	@idEmployee varchar(36),
+	@idAddress varchar(36),
+	@idContact varchar(36),
+	@idPay varchar(36),
+	--general 8
+	@numberEmploye int,
+	@firstName varchar(30),
+	@lastName varchar(25),
+	@middleName varchar(25),
+	@socialNumber varchar(14),
+	@SAPNumber int,
+	@photo image,
+	@estatus char(1),
+	--contact 3
+	@phoneNumber1 varchar(13),
+	@phoneNumber2 varchar(13),
+	@email varchar(50),
+	--address 5
+	@avenue varchar(80),
+	@number int,
+	@city varchar(20), 
+	@providence varchar(20),
+	@postalCode int,
+	--pay 3
+	@payRate1 float,
+	@payRate2 float, 
+	@payRate3 float,
+	--mensaje 1
+	@msg varchar(50) output
+as 
+declare @error int
+begin
+	begin tran
+		begin try
+			set @msg = 'Successfull '
+			update contact set phoneNumber1 = @phoneNumber1, phoneNumber2 = @phoneNumber2, emial = @email where idContact = @idContact 
+			if @@ERROR <> 0 begin set @error = @@ERROR goto solveproblem  set @msg = 'Error in contact'  end 
+			 			
+			update HomeAddress set	avenue = @avenue, number = @number, city = @city , providence = @providence , postalCode = @postalCode where idHomeAdress = @idAddress
+			if @@ERROR <> 0 begin set @error = @@ERROR goto solveproblem set @msg = 'Error in Home address' end 
+			
+			update payRate set	payRate1 = @payRate1 , payRate2 = @payRate2 , payRate3 = @payRate3 where idPayRate = @idPay
+			if @@ERROR <> 0 begin set @error = @@ERROR goto solveproblem set @msg = 'Error in Pay Rate' end 
+			
+			update employees set numberEmploye = @numberEmploye ,firstName = @firstName , lastName = @lastName , middleName = @middleName , socialNumber = @socialNumber, SAPNumber = @SAPNumber, photo = @photo where idEmployee = @idEmployee and idContact = @idContact and idHomeAdress = @idAddress and idPayRate = @idPay
+			if @@ERROR <> 0 begin set @error = @@ERROR goto solveproblem set @msg = 'Error in Data Employee' end 
+		end try	
+		begin catch
+			goto solveproblem  
+		end catch
+	commit tran 
+	solveproblem:
+	if @error <> 0
+	begin 
+		rollback tran
+		set @msg = 'error'
+	end
+end
+go
+
