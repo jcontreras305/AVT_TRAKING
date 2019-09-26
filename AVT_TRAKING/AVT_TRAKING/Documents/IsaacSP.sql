@@ -109,3 +109,5 @@ begin
 	end
 end
 go
+
+select * from employees where  numberEmploye  = 305 and firstName = 'isaac'

@@ -24,10 +24,10 @@ Partial Class Employees
     Private Sub InitializeComponent()
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.tbpEmployees = New System.Windows.Forms.TabPage()
+        Me.Label18 = New System.Windows.Forms.Label()
         Me.txtSearch = New System.Windows.Forms.TextBox()
         Me.chbState = New System.Windows.Forms.CheckBox()
         Me.tblEmployees = New System.Windows.Forms.DataGridView()
-        Me.Button2 = New System.Windows.Forms.Button()
         Me.btnSave = New System.Windows.Forms.Button()
         Me.btnChooseImage = New System.Windows.Forms.Button()
         Me.imgPhoto = New System.Windows.Forms.PictureBox()
@@ -72,6 +72,8 @@ Partial Class Employees
         Me.Label8 = New System.Windows.Forms.Label()
         Me.txtStreat = New System.Windows.Forms.TextBox()
         Me.Label7 = New System.Windows.Forms.Label()
+        Me.btnUpdate = New System.Windows.Forms.Button()
+        Me.btnCancel = New System.Windows.Forms.Button()
         Me.TabControl1.SuspendLayout()
         Me.tbpEmployees.SuspendLayout()
         CType(Me.tblEmployees, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -92,15 +94,17 @@ Partial Class Employees
         Me.TabControl1.Location = New System.Drawing.Point(3, 12)
         Me.TabControl1.Name = "TabControl1"
         Me.TabControl1.SelectedIndex = 0
-        Me.TabControl1.Size = New System.Drawing.Size(795, 367)
+        Me.TabControl1.Size = New System.Drawing.Size(723, 367)
         Me.TabControl1.TabIndex = 0
         '
         'tbpEmployees
         '
+        Me.tbpEmployees.Controls.Add(Me.btnCancel)
+        Me.tbpEmployees.Controls.Add(Me.btnUpdate)
+        Me.tbpEmployees.Controls.Add(Me.Label18)
         Me.tbpEmployees.Controls.Add(Me.txtSearch)
         Me.tbpEmployees.Controls.Add(Me.chbState)
         Me.tbpEmployees.Controls.Add(Me.tblEmployees)
-        Me.tbpEmployees.Controls.Add(Me.Button2)
         Me.tbpEmployees.Controls.Add(Me.btnSave)
         Me.tbpEmployees.Controls.Add(Me.btnChooseImage)
         Me.tbpEmployees.Controls.Add(Me.imgPhoto)
@@ -119,14 +123,23 @@ Partial Class Employees
         Me.tbpEmployees.Location = New System.Drawing.Point(4, 22)
         Me.tbpEmployees.Name = "tbpEmployees"
         Me.tbpEmployees.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbpEmployees.Size = New System.Drawing.Size(787, 341)
+        Me.tbpEmployees.Size = New System.Drawing.Size(715, 341)
         Me.tbpEmployees.TabIndex = 0
         Me.tbpEmployees.Text = "Employee"
         Me.tbpEmployees.UseVisualStyleBackColor = True
         '
+        'Label18
+        '
+        Me.Label18.AutoSize = True
+        Me.Label18.Location = New System.Drawing.Point(27, 150)
+        Me.Label18.Name = "Label18"
+        Me.Label18.Size = New System.Drawing.Size(41, 13)
+        Me.Label18.TabIndex = 19
+        Me.Label18.Text = "Search"
+        '
         'txtSearch
         '
-        Me.txtSearch.Location = New System.Drawing.Point(174, 146)
+        Me.txtSearch.Location = New System.Drawing.Point(79, 147)
         Me.txtSearch.Name = "txtSearch"
         Me.txtSearch.Size = New System.Drawing.Size(216, 20)
         Me.txtSearch.TabIndex = 18
@@ -146,21 +159,13 @@ Partial Class Employees
         Me.tblEmployees.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.tblEmployees.Location = New System.Drawing.Point(6, 184)
         Me.tblEmployees.Name = "tblEmployees"
-        Me.tblEmployees.Size = New System.Drawing.Size(775, 150)
+        Me.tblEmployees.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
+        Me.tblEmployees.Size = New System.Drawing.Size(669, 150)
         Me.tblEmployees.TabIndex = 16
-        '
-        'Button2
-        '
-        Me.Button2.Location = New System.Drawing.Point(396, 144)
-        Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(75, 23)
-        Me.Button2.TabIndex = 15
-        Me.Button2.Text = "Search"
-        Me.Button2.UseVisualStyleBackColor = True
         '
         'btnSave
         '
-        Me.btnSave.Location = New System.Drawing.Point(275, 107)
+        Me.btnSave.Location = New System.Drawing.Point(348, 115)
         Me.btnSave.Name = "btnSave"
         Me.btnSave.Size = New System.Drawing.Size(75, 23)
         Me.btnSave.TabIndex = 14
@@ -178,8 +183,9 @@ Partial Class Employees
         '
         'imgPhoto
         '
-        Me.imgPhoto.BackColor = System.Drawing.Color.Gray
+        Me.imgPhoto.BackColor = System.Drawing.Color.White
         Me.imgPhoto.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.imgPhoto.Image = Global.AVT_TRAKING.My.Resources.Resources.user
         Me.imgPhoto.Location = New System.Drawing.Point(530, 6)
         Me.imgPhoto.Name = "imgPhoto"
         Me.imgPhoto.Size = New System.Drawing.Size(120, 132)
@@ -291,7 +297,7 @@ Partial Class Employees
         Me.tbpOtherData.Location = New System.Drawing.Point(4, 22)
         Me.tbpOtherData.Name = "tbpOtherData"
         Me.tbpOtherData.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbpOtherData.Size = New System.Drawing.Size(787, 341)
+        Me.tbpOtherData.Size = New System.Drawing.Size(715, 341)
         Me.tbpOtherData.TabIndex = 1
         Me.tbpOtherData.Text = "Other Data"
         Me.tbpOtherData.UseVisualStyleBackColor = True
@@ -307,7 +313,7 @@ Partial Class Employees
         Me.GroupBox3.Controls.Add(Me.chbPay)
         Me.GroupBox3.Location = New System.Drawing.Point(375, 170)
         Me.GroupBox3.Name = "GroupBox3"
-        Me.GroupBox3.Size = New System.Drawing.Size(351, 150)
+        Me.GroupBox3.Size = New System.Drawing.Size(334, 150)
         Me.GroupBox3.TabIndex = 2
         Me.GroupBox3.TabStop = False
         Me.GroupBox3.Text = "Pay"
@@ -462,7 +468,7 @@ Partial Class Employees
         Me.GroupBox1.Controls.Add(Me.Label7)
         Me.GroupBox1.Location = New System.Drawing.Point(18, 19)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(708, 145)
+        Me.GroupBox1.Size = New System.Drawing.Size(691, 145)
         Me.GroupBox1.TabIndex = 0
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Address"
@@ -481,7 +487,7 @@ Partial Class Employees
         '
         Me.txtPostalCode.Location = New System.Drawing.Point(383, 51)
         Me.txtPostalCode.Name = "txtPostalCode"
-        Me.txtPostalCode.Size = New System.Drawing.Size(114, 20)
+        Me.txtPostalCode.Size = New System.Drawing.Size(137, 20)
         Me.txtPostalCode.TabIndex = 9
         '
         'Label11
@@ -497,7 +503,7 @@ Partial Class Employees
         '
         Me.txtProvidence.Location = New System.Drawing.Point(383, 14)
         Me.txtProvidence.Name = "txtProvidence"
-        Me.txtProvidence.Size = New System.Drawing.Size(114, 20)
+        Me.txtProvidence.Size = New System.Drawing.Size(137, 20)
         Me.txtProvidence.TabIndex = 7
         '
         'Label10
@@ -513,7 +519,7 @@ Partial Class Employees
         '
         Me.txtCity.Location = New System.Drawing.Point(87, 90)
         Me.txtCity.Name = "txtCity"
-        Me.txtCity.Size = New System.Drawing.Size(114, 20)
+        Me.txtCity.Size = New System.Drawing.Size(156, 20)
         Me.txtCity.TabIndex = 5
         '
         'Label9
@@ -529,7 +535,7 @@ Partial Class Employees
         '
         Me.txtNumber.Location = New System.Drawing.Point(87, 54)
         Me.txtNumber.Name = "txtNumber"
-        Me.txtNumber.Size = New System.Drawing.Size(114, 20)
+        Me.txtNumber.Size = New System.Drawing.Size(156, 20)
         Me.txtNumber.TabIndex = 3
         '
         'Label8
@@ -545,7 +551,7 @@ Partial Class Employees
         '
         Me.txtStreat.Location = New System.Drawing.Point(87, 22)
         Me.txtStreat.Name = "txtStreat"
-        Me.txtStreat.Size = New System.Drawing.Size(114, 20)
+        Me.txtStreat.Size = New System.Drawing.Size(156, 20)
         Me.txtStreat.TabIndex = 1
         '
         'Label7
@@ -557,11 +563,29 @@ Partial Class Employees
         Me.Label7.TabIndex = 0
         Me.Label7.Text = "Streat"
         '
+        'btnUpdate
+        '
+        Me.btnUpdate.Location = New System.Drawing.Point(441, 115)
+        Me.btnUpdate.Name = "btnUpdate"
+        Me.btnUpdate.Size = New System.Drawing.Size(83, 23)
+        Me.btnUpdate.TabIndex = 20
+        Me.btnUpdate.Text = "Update"
+        Me.btnUpdate.UseVisualStyleBackColor = True
+        '
+        'btnCancel
+        '
+        Me.btnCancel.Location = New System.Drawing.Point(441, 147)
+        Me.btnCancel.Name = "btnCancel"
+        Me.btnCancel.Size = New System.Drawing.Size(83, 23)
+        Me.btnCancel.TabIndex = 21
+        Me.btnCancel.Text = "Cancel"
+        Me.btnCancel.UseVisualStyleBackColor = True
+        '
         'Employees
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(800, 380)
+        Me.ClientSize = New System.Drawing.Size(731, 380)
         Me.Controls.Add(Me.TabControl1)
         Me.Name = "Employees"
         Me.Text = "Employees"
@@ -630,8 +654,10 @@ Partial Class Employees
     Friend WithEvents txtStreat As TextBox
     Friend WithEvents Label7 As Label
     Friend WithEvents tblEmployees As DataGridView
-    Friend WithEvents Button2 As Button
     Friend WithEvents btnSave As Button
     Friend WithEvents chbState As CheckBox
     Friend WithEvents txtSearch As TextBox
+    Friend WithEvents Label18 As Label
+    Friend WithEvents btnUpdate As Button
+    Friend WithEvents btnCancel As Button
 End Class
