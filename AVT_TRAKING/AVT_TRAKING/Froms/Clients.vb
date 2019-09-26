@@ -28,8 +28,6 @@
         txtCompanyName.Text = dgv.Cells(1).Value.ToString()
         txtAdress.Text = dgv.Cells(2).Value.ToString()
         txtCity.Text = dgv.Cells(3).Value.ToString()
-        txtStateProvince.Text = dgv.Cells(4).Value.ToString()
-        txtPostalCode.Text = dgv.Cells(5).Value.ToString()
         txtContactFistName.Text = dgv.Cells(6).Value.ToString()
         txtContactLastName.Text = dgv.Cells(7).Value.ToString()
         txtContactTitle.Text = dgv.Cells(8).Value.ToString()
@@ -51,4 +49,6 @@
     Private Sub BtnQueryClient_Click(sender As Object, e As EventArgs) Handles btnQueryClient.Click
         MostrarDatos()
     End Sub
+
+
 End Class

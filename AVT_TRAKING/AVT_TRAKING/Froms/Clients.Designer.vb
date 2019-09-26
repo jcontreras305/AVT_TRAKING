@@ -23,6 +23,21 @@ Partial Class Clients
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.btnQueryClient = New System.Windows.Forms.Button()
+        Me.btnSaveClient = New System.Windows.Forms.Button()
+        Me.txtWorkLumpsum = New System.Windows.Forms.TextBox()
+        Me.txtCostCode = New System.Windows.Forms.TextBox()
+        Me.txtSubJob = New System.Windows.Forms.TextBox()
+        Me.txtJobNumber = New System.Windows.Forms.TextBox()
+        Me.txtPhoneNumber = New System.Windows.Forms.TextBox()
+        Me.txtContactTitle = New System.Windows.Forms.TextBox()
+        Me.txtContactLastName = New System.Windows.Forms.TextBox()
+        Me.txtContactFistName = New System.Windows.Forms.TextBox()
+        Me.txtPostalCode = New System.Windows.Forms.TextBox()
+        Me.txtStateProvince = New System.Windows.Forms.TextBox()
+        Me.txtCity = New System.Windows.Forms.TextBox()
+        Me.txtAdress = New System.Windows.Forms.TextBox()
+        Me.txtCompanyName = New System.Windows.Forms.TextBox()
         Me.txtIdClients = New System.Windows.Forms.TextBox()
         Me.Label14 = New System.Windows.Forms.Label()
         Me.Label13 = New System.Windows.Forms.Label()
@@ -38,22 +53,7 @@ Partial Class Clients
         Me.Label3 = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
-        Me.txtCompanyName = New System.Windows.Forms.TextBox()
-        Me.txtAdress = New System.Windows.Forms.TextBox()
-        Me.txtCity = New System.Windows.Forms.TextBox()
-        Me.txtStateProvince = New System.Windows.Forms.TextBox()
-        Me.txtPostalCode = New System.Windows.Forms.TextBox()
-        Me.txtContactFistName = New System.Windows.Forms.TextBox()
-        Me.txtContactLastName = New System.Windows.Forms.TextBox()
-        Me.txtContactTitle = New System.Windows.Forms.TextBox()
-        Me.txtPhoneNumber = New System.Windows.Forms.TextBox()
-        Me.txtJobNumber = New System.Windows.Forms.TextBox()
-        Me.txtSubJob = New System.Windows.Forms.TextBox()
-        Me.txtCostCode = New System.Windows.Forms.TextBox()
-        Me.txtWorkLumpsum = New System.Windows.Forms.TextBox()
         Me.btnMenu = New System.Windows.Forms.Button()
-        Me.btnSaveClient = New System.Windows.Forms.Button()
-        Me.btnQueryClient = New System.Windows.Forms.Button()
         Me.DataGridView1 = New System.Windows.Forms.DataGridView()
         Me.GroupBox1.SuspendLayout()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -97,6 +97,115 @@ Partial Class Clients
         Me.GroupBox1.TabIndex = 0
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "New Client"
+        '
+        'btnQueryClient
+        '
+        Me.btnQueryClient.Location = New System.Drawing.Point(976, 323)
+        Me.btnQueryClient.Name = "btnQueryClient"
+        Me.btnQueryClient.Size = New System.Drawing.Size(102, 33)
+        Me.btnQueryClient.TabIndex = 29
+        Me.btnQueryClient.Text = "Query"
+        Me.btnQueryClient.UseVisualStyleBackColor = True
+        '
+        'btnSaveClient
+        '
+        Me.btnSaveClient.Location = New System.Drawing.Point(848, 324)
+        Me.btnSaveClient.Name = "btnSaveClient"
+        Me.btnSaveClient.Size = New System.Drawing.Size(102, 32)
+        Me.btnSaveClient.TabIndex = 28
+        Me.btnSaveClient.Text = "Save"
+        Me.btnSaveClient.UseVisualStyleBackColor = True
+        '
+        'txtWorkLumpsum
+        '
+        Me.txtWorkLumpsum.Location = New System.Drawing.Point(1007, 270)
+        Me.txtWorkLumpsum.Name = "txtWorkLumpsum"
+        Me.txtWorkLumpsum.Size = New System.Drawing.Size(215, 26)
+        Me.txtWorkLumpsum.TabIndex = 27
+        '
+        'txtCostCode
+        '
+        Me.txtCostCode.Location = New System.Drawing.Point(934, 195)
+        Me.txtCostCode.Name = "txtCostCode"
+        Me.txtCostCode.Size = New System.Drawing.Size(205, 26)
+        Me.txtCostCode.TabIndex = 26
+        '
+        'txtSubJob
+        '
+        Me.txtSubJob.Location = New System.Drawing.Point(918, 130)
+        Me.txtSubJob.Name = "txtSubJob"
+        Me.txtSubJob.Size = New System.Drawing.Size(210, 26)
+        Me.txtSubJob.TabIndex = 25
+        '
+        'txtJobNumber
+        '
+        Me.txtJobNumber.Location = New System.Drawing.Point(945, 62)
+        Me.txtJobNumber.Name = "txtJobNumber"
+        Me.txtJobNumber.Size = New System.Drawing.Size(209, 26)
+        Me.txtJobNumber.TabIndex = 24
+        '
+        'txtPhoneNumber
+        '
+        Me.txtPhoneNumber.Location = New System.Drawing.Point(559, 344)
+        Me.txtPhoneNumber.Name = "txtPhoneNumber"
+        Me.txtPhoneNumber.Size = New System.Drawing.Size(172, 26)
+        Me.txtPhoneNumber.TabIndex = 23
+        '
+        'txtContactTitle
+        '
+        Me.txtContactTitle.Location = New System.Drawing.Point(542, 267)
+        Me.txtContactTitle.Name = "txtContactTitle"
+        Me.txtContactTitle.Size = New System.Drawing.Size(214, 26)
+        Me.txtContactTitle.TabIndex = 22
+        '
+        'txtContactLastName
+        '
+        Me.txtContactLastName.Location = New System.Drawing.Point(590, 198)
+        Me.txtContactLastName.Name = "txtContactLastName"
+        Me.txtContactLastName.Size = New System.Drawing.Size(180, 26)
+        Me.txtContactLastName.TabIndex = 21
+        '
+        'txtContactFistName
+        '
+        Me.txtContactFistName.Location = New System.Drawing.Point(590, 127)
+        Me.txtContactFistName.Name = "txtContactFistName"
+        Me.txtContactFistName.Size = New System.Drawing.Size(180, 26)
+        Me.txtContactFistName.TabIndex = 20
+        '
+        'txtPostalCode
+        '
+        Me.txtPostalCode.Location = New System.Drawing.Point(539, 62)
+        Me.txtPostalCode.Name = "txtPostalCode"
+        Me.txtPostalCode.Size = New System.Drawing.Size(182, 26)
+        Me.txtPostalCode.TabIndex = 19
+        '
+        'txtStateProvince
+        '
+        Me.txtStateProvince.Location = New System.Drawing.Point(145, 341)
+        Me.txtStateProvince.Name = "txtStateProvince"
+        Me.txtStateProvince.Size = New System.Drawing.Size(161, 26)
+        Me.txtStateProvince.TabIndex = 18
+        '
+        'txtCity
+        '
+        Me.txtCity.Location = New System.Drawing.Point(68, 267)
+        Me.txtCity.Name = "txtCity"
+        Me.txtCity.Size = New System.Drawing.Size(165, 26)
+        Me.txtCity.TabIndex = 17
+        '
+        'txtAdress
+        '
+        Me.txtAdress.Location = New System.Drawing.Point(101, 195)
+        Me.txtAdress.Name = "txtAdress"
+        Me.txtAdress.Size = New System.Drawing.Size(164, 26)
+        Me.txtAdress.TabIndex = 16
+        '
+        'txtCompanyName
+        '
+        Me.txtCompanyName.Location = New System.Drawing.Point(155, 130)
+        Me.txtCompanyName.Name = "txtCompanyName"
+        Me.txtCompanyName.Size = New System.Drawing.Size(197, 26)
+        Me.txtCompanyName.TabIndex = 15
         '
         'txtIdClients
         '
@@ -231,97 +340,6 @@ Partial Class Clients
         Me.Label1.TabIndex = 0
         Me.Label1.Text = "Client #"
         '
-        'txtCompanyName
-        '
-        Me.txtCompanyName.Location = New System.Drawing.Point(155, 130)
-        Me.txtCompanyName.Name = "txtCompanyName"
-        Me.txtCompanyName.Size = New System.Drawing.Size(197, 26)
-        Me.txtCompanyName.TabIndex = 15
-        '
-        'txtAdress
-        '
-        Me.txtAdress.Location = New System.Drawing.Point(101, 195)
-        Me.txtAdress.Name = "txtAdress"
-        Me.txtAdress.Size = New System.Drawing.Size(164, 26)
-        Me.txtAdress.TabIndex = 16
-        '
-        'txtCity
-        '
-        Me.txtCity.Location = New System.Drawing.Point(68, 267)
-        Me.txtCity.Name = "txtCity"
-        Me.txtCity.Size = New System.Drawing.Size(165, 26)
-        Me.txtCity.TabIndex = 17
-        '
-        'txtStateProvince
-        '
-        Me.txtStateProvince.Location = New System.Drawing.Point(145, 341)
-        Me.txtStateProvince.Name = "txtStateProvince"
-        Me.txtStateProvince.Size = New System.Drawing.Size(161, 26)
-        Me.txtStateProvince.TabIndex = 18
-        '
-        'txtPostalCode
-        '
-        Me.txtPostalCode.Location = New System.Drawing.Point(539, 62)
-        Me.txtPostalCode.Name = "txtPostalCode"
-        Me.txtPostalCode.Size = New System.Drawing.Size(182, 26)
-        Me.txtPostalCode.TabIndex = 19
-        '
-        'txtContactFistName
-        '
-        Me.txtContactFistName.Location = New System.Drawing.Point(590, 127)
-        Me.txtContactFistName.Name = "txtContactFistName"
-        Me.txtContactFistName.Size = New System.Drawing.Size(180, 26)
-        Me.txtContactFistName.TabIndex = 20
-        '
-        'txtContactLastName
-        '
-        Me.txtContactLastName.Location = New System.Drawing.Point(590, 198)
-        Me.txtContactLastName.Name = "txtContactLastName"
-        Me.txtContactLastName.Size = New System.Drawing.Size(180, 26)
-        Me.txtContactLastName.TabIndex = 21
-        '
-        'txtContactTitle
-        '
-        Me.txtContactTitle.Location = New System.Drawing.Point(542, 267)
-        Me.txtContactTitle.Name = "txtContactTitle"
-        Me.txtContactTitle.Size = New System.Drawing.Size(214, 26)
-        Me.txtContactTitle.TabIndex = 22
-        '
-        'txtPhoneNumber
-        '
-        Me.txtPhoneNumber.Location = New System.Drawing.Point(559, 344)
-        Me.txtPhoneNumber.Name = "txtPhoneNumber"
-        Me.txtPhoneNumber.Size = New System.Drawing.Size(172, 26)
-        Me.txtPhoneNumber.TabIndex = 23
-        '
-        'txtJobNumber
-        '
-        Me.txtJobNumber.Location = New System.Drawing.Point(945, 62)
-        Me.txtJobNumber.Name = "txtJobNumber"
-        Me.txtJobNumber.Size = New System.Drawing.Size(209, 26)
-        Me.txtJobNumber.TabIndex = 24
-        '
-        'txtSubJob
-        '
-        Me.txtSubJob.Location = New System.Drawing.Point(918, 130)
-        Me.txtSubJob.Name = "txtSubJob"
-        Me.txtSubJob.Size = New System.Drawing.Size(210, 26)
-        Me.txtSubJob.TabIndex = 25
-        '
-        'txtCostCode
-        '
-        Me.txtCostCode.Location = New System.Drawing.Point(934, 195)
-        Me.txtCostCode.Name = "txtCostCode"
-        Me.txtCostCode.Size = New System.Drawing.Size(205, 26)
-        Me.txtCostCode.TabIndex = 26
-        '
-        'txtWorkLumpsum
-        '
-        Me.txtWorkLumpsum.Location = New System.Drawing.Point(1007, 270)
-        Me.txtWorkLumpsum.Name = "txtWorkLumpsum"
-        Me.txtWorkLumpsum.Size = New System.Drawing.Size(215, 26)
-        Me.txtWorkLumpsum.TabIndex = 27
-        '
         'btnMenu
         '
         Me.btnMenu.Location = New System.Drawing.Point(12, 12)
@@ -330,24 +348,6 @@ Partial Class Clients
         Me.btnMenu.TabIndex = 1
         Me.btnMenu.Text = "Menu"
         Me.btnMenu.UseVisualStyleBackColor = True
-        '
-        'btnSaveClient
-        '
-        Me.btnSaveClient.Location = New System.Drawing.Point(848, 324)
-        Me.btnSaveClient.Name = "btnSaveClient"
-        Me.btnSaveClient.Size = New System.Drawing.Size(102, 32)
-        Me.btnSaveClient.TabIndex = 28
-        Me.btnSaveClient.Text = "Save"
-        Me.btnSaveClient.UseVisualStyleBackColor = True
-        '
-        'btnQueryClient
-        '
-        Me.btnQueryClient.Location = New System.Drawing.Point(976, 323)
-        Me.btnQueryClient.Name = "btnQueryClient"
-        Me.btnQueryClient.Size = New System.Drawing.Size(102, 33)
-        Me.btnQueryClient.TabIndex = 29
-        Me.btnQueryClient.Text = "Query"
-        Me.btnQueryClient.UseVisualStyleBackColor = True
         '
         'DataGridView1
         '
