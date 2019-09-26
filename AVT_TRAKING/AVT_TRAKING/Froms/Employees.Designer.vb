@@ -61,6 +61,7 @@ Partial Class Employees
         Me.Label12 = New System.Windows.Forms.Label()
         Me.chbContact = New System.Windows.Forms.CheckBox()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.Label18 = New System.Windows.Forms.Label()
         Me.chbAddress = New System.Windows.Forms.CheckBox()
         Me.txtPostalCode = New System.Windows.Forms.TextBox()
         Me.Label11 = New System.Windows.Forms.Label()
@@ -315,7 +316,7 @@ Partial Class Employees
         Me.tbpOtherData.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.tbpOtherData.Name = "tbpOtherData"
         Me.tbpOtherData.Padding = New System.Windows.Forms.Padding(4, 5, 4, 5)
-        Me.tbpOtherData.Size = New System.Drawing.Size(1184, 532)
+        Me.tbpOtherData.Size = New System.Drawing.Size(1184, 547)
         Me.tbpOtherData.TabIndex = 1
         Me.tbpOtherData.Text = "Other Data"
         Me.tbpOtherData.UseVisualStyleBackColor = True
@@ -491,6 +492,7 @@ Partial Class Employees
         '
         'GroupBox1
         '
+        Me.GroupBox1.Controls.Add(Me.Label18)
         Me.GroupBox1.Controls.Add(Me.chbAddress)
         Me.GroupBox1.Controls.Add(Me.txtPostalCode)
         Me.GroupBox1.Controls.Add(Me.Label11)
@@ -510,6 +512,14 @@ Partial Class Employees
         Me.GroupBox1.TabIndex = 0
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Address"
+        '
+        'Label18
+        '
+        Me.Label18.AutoSize = True
+        Me.Label18.Location = New System.Drawing.Point(513, 179)
+        Me.Label18.Name = "Label18"
+        Me.Label18.Size = New System.Drawing.Size(0, 20)
+        Me.Label18.TabIndex = 11
         '
         'chbAddress
         '
@@ -701,4 +711,5 @@ Partial Class Employees
     Friend WithEvents chbState As CheckBox
     Friend WithEvents txtSearch As TextBox
     Friend WithEvents btnMenu As Button
+    Friend WithEvents Label18 As Label
 End Class
