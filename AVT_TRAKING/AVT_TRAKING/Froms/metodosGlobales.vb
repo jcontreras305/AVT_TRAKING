@@ -1,5 +1,4 @@
 ﻿Module metodosGlobales
-    Public FileNamePicture As String
 
     Public Function imageToByte(ByVal img As Image) As Byte()
         Try
@@ -22,5 +21,4 @@
             Return Nothing
         End Try
     End Function
-
 End Module

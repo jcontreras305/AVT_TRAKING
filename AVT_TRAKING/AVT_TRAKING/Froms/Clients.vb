@@ -51,6 +51,4 @@
     Private Sub BtnQueryClient_Click(sender As Object, e As EventArgs) Handles btnQueryClient.Click
         MostrarDatos()
     End Sub
-
-
 End Class

@@ -22,21 +22,7 @@ Partial Class Clients
     'No lo modifique con el editor de código.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.btnQueryClient = New System.Windows.Forms.Button()
-        Me.btnSaveClient = New System.Windows.Forms.Button()
-        Me.txtWorkLumpsum = New System.Windows.Forms.TextBox()
-        Me.txtCostCode = New System.Windows.Forms.TextBox()
-        Me.txtSubJob = New System.Windows.Forms.TextBox()
-        Me.txtJobNumber = New System.Windows.Forms.TextBox()
-        Me.txtPhoneNumber = New System.Windows.Forms.TextBox()
-        Me.txtContactTitle = New System.Windows.Forms.TextBox()
-        Me.txtContactLastName = New System.Windows.Forms.TextBox()
-        Me.txtContactFistName = New System.Windows.Forms.TextBox()
-        Me.txtPostalCode = New System.Windows.Forms.TextBox()
-        Me.txtStateProvince = New System.Windows.Forms.TextBox()
-        Me.txtCity = New System.Windows.Forms.TextBox()
-        Me.txtAdress = New System.Windows.Forms.TextBox()
-        Me.txtCompanyName = New System.Windows.Forms.TextBox()
+        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.txtIdClients = New System.Windows.Forms.TextBox()
         Me.Label14 = New System.Windows.Forms.Label()
         Me.Label13 = New System.Windows.Forms.Label()
@@ -52,137 +38,77 @@ Partial Class Clients
         Me.Label3 = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
+        Me.txtCompanyName = New System.Windows.Forms.TextBox()
+        Me.txtAdress = New System.Windows.Forms.TextBox()
+        Me.txtCity = New System.Windows.Forms.TextBox()
+        Me.txtStateProvince = New System.Windows.Forms.TextBox()
+        Me.txtPostalCode = New System.Windows.Forms.TextBox()
+        Me.txtContactFistName = New System.Windows.Forms.TextBox()
+        Me.txtContactLastName = New System.Windows.Forms.TextBox()
+        Me.txtContactTitle = New System.Windows.Forms.TextBox()
+        Me.txtPhoneNumber = New System.Windows.Forms.TextBox()
+        Me.txtJobNumber = New System.Windows.Forms.TextBox()
+        Me.txtSubJob = New System.Windows.Forms.TextBox()
+        Me.txtCostCode = New System.Windows.Forms.TextBox()
+        Me.txtWorkLumpsum = New System.Windows.Forms.TextBox()
         Me.btnMenu = New System.Windows.Forms.Button()
+        Me.btnSaveClient = New System.Windows.Forms.Button()
+        Me.btnQueryClient = New System.Windows.Forms.Button()
         Me.DataGridView1 = New System.Windows.Forms.DataGridView()
-        Me.TabControl1 = New System.Windows.Forms.TabControl()
-        Me.TabPage1 = New System.Windows.Forms.TabPage()
-        Me.TabPage2 = New System.Windows.Forms.TabPage()
+        Me.GroupBox1.SuspendLayout()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.TabControl1.SuspendLayout()
-        Me.TabPage1.SuspendLayout()
-        Me.TabPage2.SuspendLayout()
         Me.SuspendLayout()
         '
-        'btnQueryClient
+        'GroupBox1
         '
-        Me.btnQueryClient.Location = New System.Drawing.Point(1014, 164)
-        Me.btnQueryClient.Name = "btnQueryClient"
-        Me.btnQueryClient.Size = New System.Drawing.Size(103, 29)
-        Me.btnQueryClient.TabIndex = 29
-        Me.btnQueryClient.Text = "Query"
-        Me.btnQueryClient.UseVisualStyleBackColor = True
-        '
-        'btnSaveClient
-        '
-        Me.btnSaveClient.Location = New System.Drawing.Point(869, 164)
-        Me.btnSaveClient.Name = "btnSaveClient"
-        Me.btnSaveClient.Size = New System.Drawing.Size(102, 32)
-        Me.btnSaveClient.TabIndex = 28
-        Me.btnSaveClient.Text = "Save"
-        Me.btnSaveClient.UseVisualStyleBackColor = True
-        '
-        'txtWorkLumpsum
-        '
-        Me.txtWorkLumpsum.Location = New System.Drawing.Point(1028, 89)
-        Me.txtWorkLumpsum.Name = "txtWorkLumpsum"
-        Me.txtWorkLumpsum.Size = New System.Drawing.Size(215, 26)
-        Me.txtWorkLumpsum.TabIndex = 27
-        '
-        'txtCostCode
-        '
-        Me.txtCostCode.Location = New System.Drawing.Point(1028, 20)
-        Me.txtCostCode.Name = "txtCostCode"
-        Me.txtCostCode.Size = New System.Drawing.Size(215, 26)
-        Me.txtCostCode.TabIndex = 26
-        '
-        'txtSubJob
-        '
-        Me.txtSubJob.Location = New System.Drawing.Point(591, 205)
-        Me.txtSubJob.Name = "txtSubJob"
-        Me.txtSubJob.Size = New System.Drawing.Size(197, 26)
-        Me.txtSubJob.TabIndex = 25
-        '
-        'txtJobNumber
-        '
-        Me.txtJobNumber.Location = New System.Drawing.Point(591, 146)
-        Me.txtJobNumber.Name = "txtJobNumber"
-        Me.txtJobNumber.Size = New System.Drawing.Size(197, 26)
-        Me.txtJobNumber.TabIndex = 24
-        '
-        'txtPhoneNumber
-        '
-        Me.txtPhoneNumber.Location = New System.Drawing.Point(600, 92)
-        Me.txtPhoneNumber.Name = "txtPhoneNumber"
-        Me.txtPhoneNumber.Size = New System.Drawing.Size(182, 26)
-        Me.txtPhoneNumber.TabIndex = 23
-        '
-        'txtContactTitle
-        '
-        Me.txtContactTitle.Location = New System.Drawing.Point(600, 35)
-        Me.txtContactTitle.Name = "txtContactTitle"
-        Me.txtContactTitle.Size = New System.Drawing.Size(182, 26)
-        Me.txtContactTitle.TabIndex = 22
-        '
-        'txtContactLastName
-        '
-        Me.txtContactLastName.Location = New System.Drawing.Point(213, 89)
-        Me.txtContactLastName.Name = "txtContactLastName"
-        Me.txtContactLastName.Size = New System.Drawing.Size(180, 26)
-        Me.txtContactLastName.TabIndex = 21
-        '
-        'txtContactFistName
-        '
-        Me.txtContactFistName.Location = New System.Drawing.Point(213, 32)
-        Me.txtContactFistName.Name = "txtContactFistName"
-        Me.txtContactFistName.Size = New System.Drawing.Size(180, 26)
-        Me.txtContactFistName.TabIndex = 20
-        '
-        'txtPostalCode
-        '
-        Me.txtPostalCode.Location = New System.Drawing.Point(591, 89)
-        Me.txtPostalCode.Name = "txtPostalCode"
-        Me.txtPostalCode.Size = New System.Drawing.Size(197, 26)
-        Me.txtPostalCode.TabIndex = 19
-        '
-        'txtStateProvince
-        '
-        Me.txtStateProvince.Location = New System.Drawing.Point(591, 23)
-        Me.txtStateProvince.Name = "txtStateProvince"
-        Me.txtStateProvince.Size = New System.Drawing.Size(197, 26)
-        Me.txtStateProvince.TabIndex = 18
-        '
-        'txtCity
-        '
-        Me.txtCity.Location = New System.Drawing.Point(163, 202)
-        Me.txtCity.Name = "txtCity"
-        Me.txtCity.Size = New System.Drawing.Size(197, 26)
-        Me.txtCity.TabIndex = 17
-        '
-        'txtAdress
-        '
-        Me.txtAdress.Location = New System.Drawing.Point(163, 143)
-        Me.txtAdress.Name = "txtAdress"
-        Me.txtAdress.Size = New System.Drawing.Size(197, 26)
-        Me.txtAdress.TabIndex = 16
-        '
-        'txtCompanyName
-        '
-        Me.txtCompanyName.Location = New System.Drawing.Point(163, 86)
-        Me.txtCompanyName.Name = "txtCompanyName"
-        Me.txtCompanyName.Size = New System.Drawing.Size(197, 26)
-        Me.txtCompanyName.TabIndex = 15
+        Me.GroupBox1.Controls.Add(Me.btnQueryClient)
+        Me.GroupBox1.Controls.Add(Me.btnSaveClient)
+        Me.GroupBox1.Controls.Add(Me.txtWorkLumpsum)
+        Me.GroupBox1.Controls.Add(Me.txtCostCode)
+        Me.GroupBox1.Controls.Add(Me.txtSubJob)
+        Me.GroupBox1.Controls.Add(Me.txtJobNumber)
+        Me.GroupBox1.Controls.Add(Me.txtPhoneNumber)
+        Me.GroupBox1.Controls.Add(Me.txtContactTitle)
+        Me.GroupBox1.Controls.Add(Me.txtContactLastName)
+        Me.GroupBox1.Controls.Add(Me.txtContactFistName)
+        Me.GroupBox1.Controls.Add(Me.txtPostalCode)
+        Me.GroupBox1.Controls.Add(Me.txtStateProvince)
+        Me.GroupBox1.Controls.Add(Me.txtCity)
+        Me.GroupBox1.Controls.Add(Me.txtAdress)
+        Me.GroupBox1.Controls.Add(Me.txtCompanyName)
+        Me.GroupBox1.Controls.Add(Me.txtIdClients)
+        Me.GroupBox1.Controls.Add(Me.Label14)
+        Me.GroupBox1.Controls.Add(Me.Label13)
+        Me.GroupBox1.Controls.Add(Me.Label12)
+        Me.GroupBox1.Controls.Add(Me.Label11)
+        Me.GroupBox1.Controls.Add(Me.Label10)
+        Me.GroupBox1.Controls.Add(Me.Label9)
+        Me.GroupBox1.Controls.Add(Me.Label8)
+        Me.GroupBox1.Controls.Add(Me.Label7)
+        Me.GroupBox1.Controls.Add(Me.Label6)
+        Me.GroupBox1.Controls.Add(Me.Label5)
+        Me.GroupBox1.Controls.Add(Me.Label4)
+        Me.GroupBox1.Controls.Add(Me.Label3)
+        Me.GroupBox1.Controls.Add(Me.Label2)
+        Me.GroupBox1.Controls.Add(Me.Label1)
+        Me.GroupBox1.Location = New System.Drawing.Point(6, 64)
+        Me.GroupBox1.Name = "GroupBox1"
+        Me.GroupBox1.Size = New System.Drawing.Size(1259, 423)
+        Me.GroupBox1.TabIndex = 0
+        Me.GroupBox1.TabStop = False
+        Me.GroupBox1.Text = "New Client"
         '
         'txtIdClients
         '
-        Me.txtIdClients.Location = New System.Drawing.Point(163, 20)
+        Me.txtIdClients.Location = New System.Drawing.Point(95, 59)
         Me.txtIdClients.Name = "txtIdClients"
-        Me.txtIdClients.Size = New System.Drawing.Size(197, 26)
+        Me.txtIdClients.Size = New System.Drawing.Size(138, 26)
         Me.txtIdClients.TabIndex = 14
         '
         'Label14
         '
         Me.Label14.AutoSize = True
-        Me.Label14.Location = New System.Drawing.Point(865, 92)
+        Me.Label14.Location = New System.Drawing.Point(844, 273)
         Me.Label14.Name = "Label14"
         Me.Label14.Size = New System.Drawing.Size(157, 20)
         Me.Label14.TabIndex = 13
@@ -191,7 +117,7 @@ Partial Class Clients
         'Label13
         '
         Me.Label13.AutoSize = True
-        Me.Label13.Location = New System.Drawing.Point(865, 26)
+        Me.Label13.Location = New System.Drawing.Point(844, 201)
         Me.Label13.Name = "Label13"
         Me.Label13.Size = New System.Drawing.Size(84, 20)
         Me.Label13.TabIndex = 12
@@ -200,7 +126,7 @@ Partial Class Clients
         'Label12
         '
         Me.Label12.AutoSize = True
-        Me.Label12.Location = New System.Drawing.Point(451, 208)
+        Me.Label12.Location = New System.Drawing.Point(844, 133)
         Me.Label12.Name = "Label12"
         Me.Label12.Size = New System.Drawing.Size(68, 20)
         Me.Label12.TabIndex = 11
@@ -209,7 +135,7 @@ Partial Class Clients
         'Label11
         '
         Me.Label11.AutoSize = True
-        Me.Label11.Location = New System.Drawing.Point(451, 149)
+        Me.Label11.Location = New System.Drawing.Point(844, 65)
         Me.Label11.Name = "Label11"
         Me.Label11.Size = New System.Drawing.Size(95, 20)
         Me.Label11.TabIndex = 10
@@ -218,7 +144,7 @@ Partial Class Clients
         'Label10
         '
         Me.Label10.AutoSize = True
-        Me.Label10.Location = New System.Drawing.Point(479, 95)
+        Me.Label10.Location = New System.Drawing.Point(438, 347)
         Me.Label10.Name = "Label10"
         Me.Label10.Size = New System.Drawing.Size(115, 20)
         Me.Label10.TabIndex = 9
@@ -227,7 +153,7 @@ Partial Class Clients
         'Label9
         '
         Me.Label9.AutoSize = True
-        Me.Label9.Location = New System.Drawing.Point(479, 38)
+        Me.Label9.Location = New System.Drawing.Point(438, 273)
         Me.Label9.Name = "Label9"
         Me.Label9.Size = New System.Drawing.Size(98, 20)
         Me.Label9.TabIndex = 8
@@ -236,7 +162,7 @@ Partial Class Clients
         'Label8
         '
         Me.Label8.AutoSize = True
-        Me.Label8.Location = New System.Drawing.Point(38, 95)
+        Me.Label8.Location = New System.Drawing.Point(438, 201)
         Me.Label8.Name = "Label8"
         Me.Label8.Size = New System.Drawing.Size(146, 20)
         Me.Label8.TabIndex = 7
@@ -245,7 +171,7 @@ Partial Class Clients
         'Label7
         '
         Me.Label7.AutoSize = True
-        Me.Label7.Location = New System.Drawing.Point(38, 38)
+        Me.Label7.Location = New System.Drawing.Point(438, 133)
         Me.Label7.Name = "Label7"
         Me.Label7.Size = New System.Drawing.Size(146, 20)
         Me.Label7.TabIndex = 6
@@ -254,7 +180,7 @@ Partial Class Clients
         'Label6
         '
         Me.Label6.AutoSize = True
-        Me.Label6.Location = New System.Drawing.Point(451, 92)
+        Me.Label6.Location = New System.Drawing.Point(438, 65)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(95, 20)
         Me.Label6.TabIndex = 5
@@ -263,7 +189,7 @@ Partial Class Clients
         'Label5
         '
         Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(451, 26)
+        Me.Label5.Location = New System.Drawing.Point(27, 347)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(112, 20)
         Me.Label5.TabIndex = 4
@@ -272,7 +198,7 @@ Partial Class Clients
         'Label4
         '
         Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(35, 208)
+        Me.Label4.Location = New System.Drawing.Point(27, 273)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(35, 20)
         Me.Label4.TabIndex = 3
@@ -281,7 +207,7 @@ Partial Class Clients
         'Label3
         '
         Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(35, 149)
+        Me.Label3.Location = New System.Drawing.Point(27, 201)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(68, 20)
         Me.Label3.TabIndex = 2
@@ -290,7 +216,7 @@ Partial Class Clients
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(35, 92)
+        Me.Label2.Location = New System.Drawing.Point(27, 133)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(122, 20)
         Me.Label2.TabIndex = 1
@@ -299,11 +225,102 @@ Partial Class Clients
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(35, 26)
+        Me.Label1.Location = New System.Drawing.Point(27, 65)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(62, 20)
         Me.Label1.TabIndex = 0
         Me.Label1.Text = "Client #"
+        '
+        'txtCompanyName
+        '
+        Me.txtCompanyName.Location = New System.Drawing.Point(155, 130)
+        Me.txtCompanyName.Name = "txtCompanyName"
+        Me.txtCompanyName.Size = New System.Drawing.Size(197, 26)
+        Me.txtCompanyName.TabIndex = 15
+        '
+        'txtAdress
+        '
+        Me.txtAdress.Location = New System.Drawing.Point(101, 195)
+        Me.txtAdress.Name = "txtAdress"
+        Me.txtAdress.Size = New System.Drawing.Size(164, 26)
+        Me.txtAdress.TabIndex = 16
+        '
+        'txtCity
+        '
+        Me.txtCity.Location = New System.Drawing.Point(68, 267)
+        Me.txtCity.Name = "txtCity"
+        Me.txtCity.Size = New System.Drawing.Size(165, 26)
+        Me.txtCity.TabIndex = 17
+        '
+        'txtStateProvince
+        '
+        Me.txtStateProvince.Location = New System.Drawing.Point(145, 341)
+        Me.txtStateProvince.Name = "txtStateProvince"
+        Me.txtStateProvince.Size = New System.Drawing.Size(161, 26)
+        Me.txtStateProvince.TabIndex = 18
+        '
+        'txtPostalCode
+        '
+        Me.txtPostalCode.Location = New System.Drawing.Point(539, 62)
+        Me.txtPostalCode.Name = "txtPostalCode"
+        Me.txtPostalCode.Size = New System.Drawing.Size(182, 26)
+        Me.txtPostalCode.TabIndex = 19
+        '
+        'txtContactFistName
+        '
+        Me.txtContactFistName.Location = New System.Drawing.Point(590, 127)
+        Me.txtContactFistName.Name = "txtContactFistName"
+        Me.txtContactFistName.Size = New System.Drawing.Size(180, 26)
+        Me.txtContactFistName.TabIndex = 20
+        '
+        'txtContactLastName
+        '
+        Me.txtContactLastName.Location = New System.Drawing.Point(590, 198)
+        Me.txtContactLastName.Name = "txtContactLastName"
+        Me.txtContactLastName.Size = New System.Drawing.Size(180, 26)
+        Me.txtContactLastName.TabIndex = 21
+        '
+        'txtContactTitle
+        '
+        Me.txtContactTitle.Location = New System.Drawing.Point(542, 267)
+        Me.txtContactTitle.Name = "txtContactTitle"
+        Me.txtContactTitle.Size = New System.Drawing.Size(214, 26)
+        Me.txtContactTitle.TabIndex = 22
+        '
+        'txtPhoneNumber
+        '
+        Me.txtPhoneNumber.Location = New System.Drawing.Point(559, 344)
+        Me.txtPhoneNumber.Name = "txtPhoneNumber"
+        Me.txtPhoneNumber.Size = New System.Drawing.Size(172, 26)
+        Me.txtPhoneNumber.TabIndex = 23
+        '
+        'txtJobNumber
+        '
+        Me.txtJobNumber.Location = New System.Drawing.Point(945, 62)
+        Me.txtJobNumber.Name = "txtJobNumber"
+        Me.txtJobNumber.Size = New System.Drawing.Size(209, 26)
+        Me.txtJobNumber.TabIndex = 24
+        '
+        'txtSubJob
+        '
+        Me.txtSubJob.Location = New System.Drawing.Point(918, 130)
+        Me.txtSubJob.Name = "txtSubJob"
+        Me.txtSubJob.Size = New System.Drawing.Size(210, 26)
+        Me.txtSubJob.TabIndex = 25
+        '
+        'txtCostCode
+        '
+        Me.txtCostCode.Location = New System.Drawing.Point(934, 195)
+        Me.txtCostCode.Name = "txtCostCode"
+        Me.txtCostCode.Size = New System.Drawing.Size(205, 26)
+        Me.txtCostCode.TabIndex = 26
+        '
+        'txtWorkLumpsum
+        '
+        Me.txtWorkLumpsum.Location = New System.Drawing.Point(1007, 270)
+        Me.txtWorkLumpsum.Name = "txtWorkLumpsum"
+        Me.txtWorkLumpsum.Size = New System.Drawing.Size(215, 26)
+        Me.txtWorkLumpsum.TabIndex = 27
         '
         'btnMenu
         '
@@ -314,95 +331,52 @@ Partial Class Clients
         Me.btnMenu.Text = "Menu"
         Me.btnMenu.UseVisualStyleBackColor = True
         '
+        'btnSaveClient
+        '
+        Me.btnSaveClient.Location = New System.Drawing.Point(848, 324)
+        Me.btnSaveClient.Name = "btnSaveClient"
+        Me.btnSaveClient.Size = New System.Drawing.Size(102, 32)
+        Me.btnSaveClient.TabIndex = 28
+        Me.btnSaveClient.Text = "Save"
+        Me.btnSaveClient.UseVisualStyleBackColor = True
+        '
+        'btnQueryClient
+        '
+        Me.btnQueryClient.Location = New System.Drawing.Point(976, 323)
+        Me.btnQueryClient.Name = "btnQueryClient"
+        Me.btnQueryClient.Size = New System.Drawing.Size(102, 33)
+        Me.btnQueryClient.TabIndex = 29
+        Me.btnQueryClient.Text = "Query"
+        Me.btnQueryClient.UseVisualStyleBackColor = True
+        '
         'DataGridView1
         '
         Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DataGridView1.Location = New System.Drawing.Point(12, 418)
+        Me.DataGridView1.Location = New System.Drawing.Point(6, 493)
         Me.DataGridView1.Name = "DataGridView1"
         Me.DataGridView1.RowHeadersWidth = 62
         Me.DataGridView1.RowTemplate.Height = 28
-        Me.DataGridView1.Size = New System.Drawing.Size(1259, 260)
+        Me.DataGridView1.Size = New System.Drawing.Size(1259, 254)
         Me.DataGridView1.TabIndex = 2
-        '
-        'TabControl1
-        '
-        Me.TabControl1.Controls.Add(Me.TabPage1)
-        Me.TabControl1.Controls.Add(Me.TabPage2)
-        Me.TabControl1.Location = New System.Drawing.Point(12, 54)
-        Me.TabControl1.Name = "TabControl1"
-        Me.TabControl1.SelectedIndex = 0
-        Me.TabControl1.Size = New System.Drawing.Size(1265, 358)
-        Me.TabControl1.TabIndex = 3
-        '
-        'TabPage1
-        '
-        Me.TabPage1.Controls.Add(Me.btnQueryClient)
-        Me.TabPage1.Controls.Add(Me.Label1)
-        Me.TabPage1.Controls.Add(Me.btnSaveClient)
-        Me.TabPage1.Controls.Add(Me.txtIdClients)
-        Me.TabPage1.Controls.Add(Me.txtWorkLumpsum)
-        Me.TabPage1.Controls.Add(Me.Label2)
-        Me.TabPage1.Controls.Add(Me.txtCostCode)
-        Me.TabPage1.Controls.Add(Me.txtCompanyName)
-        Me.TabPage1.Controls.Add(Me.txtSubJob)
-        Me.TabPage1.Controls.Add(Me.Label3)
-        Me.TabPage1.Controls.Add(Me.Label14)
-        Me.TabPage1.Controls.Add(Me.txtJobNumber)
-        Me.TabPage1.Controls.Add(Me.txtAdress)
-        Me.TabPage1.Controls.Add(Me.Label4)
-        Me.TabPage1.Controls.Add(Me.Label13)
-        Me.TabPage1.Controls.Add(Me.txtCity)
-        Me.TabPage1.Controls.Add(Me.Label12)
-        Me.TabPage1.Controls.Add(Me.Label5)
-        Me.TabPage1.Controls.Add(Me.txtStateProvince)
-        Me.TabPage1.Controls.Add(Me.Label6)
-        Me.TabPage1.Controls.Add(Me.txtPostalCode)
-        Me.TabPage1.Controls.Add(Me.Label11)
-        Me.TabPage1.Location = New System.Drawing.Point(4, 29)
-        Me.TabPage1.Name = "TabPage1"
-        Me.TabPage1.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage1.Size = New System.Drawing.Size(1257, 325)
-        Me.TabPage1.TabIndex = 0
-        Me.TabPage1.Text = "New Client"
-        Me.TabPage1.UseVisualStyleBackColor = True
-        '
-        'TabPage2
-        '
-        Me.TabPage2.Controls.Add(Me.txtPhoneNumber)
-        Me.TabPage2.Controls.Add(Me.Label7)
-        Me.TabPage2.Controls.Add(Me.Label10)
-        Me.TabPage2.Controls.Add(Me.txtContactTitle)
-        Me.TabPage2.Controls.Add(Me.txtContactFistName)
-        Me.TabPage2.Controls.Add(Me.txtContactLastName)
-        Me.TabPage2.Controls.Add(Me.Label9)
-        Me.TabPage2.Controls.Add(Me.Label8)
-        Me.TabPage2.Location = New System.Drawing.Point(4, 29)
-        Me.TabPage2.Name = "TabPage2"
-        Me.TabPage2.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage2.Size = New System.Drawing.Size(1257, 325)
-        Me.TabPage2.TabIndex = 1
-        Me.TabPage2.Text = "Contact"
-        Me.TabPage2.UseVisualStyleBackColor = True
         '
         'Clients
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 20.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1277, 718)
-        Me.Controls.Add(Me.TabControl1)
+        Me.ClientSize = New System.Drawing.Size(1277, 759)
         Me.Controls.Add(Me.DataGridView1)
         Me.Controls.Add(Me.btnMenu)
+        Me.Controls.Add(Me.GroupBox1)
         Me.Name = "Clients"
         Me.Text = "Clients"
+        Me.GroupBox1.ResumeLayout(False)
+        Me.GroupBox1.PerformLayout()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.TabControl1.ResumeLayout(False)
-        Me.TabPage1.ResumeLayout(False)
-        Me.TabPage1.PerformLayout()
-        Me.TabPage2.ResumeLayout(False)
-        Me.TabPage2.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
+
+    Friend WithEvents GroupBox1 As GroupBox
     Friend WithEvents txtIdClients As TextBox
     Friend WithEvents Label14 As Label
     Friend WithEvents Label13 As Label
@@ -435,7 +409,4 @@ Partial Class Clients
     Friend WithEvents btnSaveClient As Button
     Friend WithEvents btnMenu As Button
     Friend WithEvents DataGridView1 As DataGridView
-    Friend WithEvents TabControl1 As TabControl
-    Friend WithEvents TabPage1 As TabPage
-    Friend WithEvents TabPage2 As TabPage
 End Class

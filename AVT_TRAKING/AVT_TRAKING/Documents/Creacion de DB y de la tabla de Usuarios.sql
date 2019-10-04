@@ -31,7 +31,6 @@ create table employees(
 	idPayRate varchar(36),
 	estatus char(1)
 )
-drop table employees
 
 alter table employees 
 add constraint fk_idPayRate_employees
@@ -52,7 +51,6 @@ create table contact(
 	phoneNumber2 varchar(13),
 	emial varchar(50)
 )
-drop table contact
 
 create table HomeAddress (
 	idHomeAdress varchar(36) primary key not null,
@@ -62,7 +60,6 @@ create table HomeAddress (
 	providence varchar(20),
 	postalCode int
 )
-drop table HomeAddress
 
 create table payRate(
 	idPayRate varchar(36) primary key not null ,
@@ -70,7 +67,6 @@ create table payRate(
 	payRate2 float, 
 	payRate3 float
 )
-drop table payRate
 
 --############################################################################
 --############# Tables clients ###############################################
@@ -124,31 +120,3 @@ insert into materials values(1,'Homedepo','1.5','CS','1.5','$2.56','Tablas','Rol
                             (2,'Homedepo','3.5','CS','2.5','$2.56','Martillos','Roll','CS',3,'$8.76','METAL ALUMINUM ELBOWS'),
 							(3,'Homedepo','2.5','CS','3.5','$2.56','Cascos','Roll','CS',3,'$8.76','METAL ALUMINUM ELBOWS'),
 							(4,'Homedepo','2.0','CS','3.5','$2.56','Palas','Roll','CS',3,'$8.76','METAL ALUMINUM ELBOWS')
-
-use VRT_
-
-create proc sp_Update_Materials
-
-@IdMaterials int, 
-@Vendor varchar(25), 
-@MSize varchar(10), 
-@MType varchar(10), 
-@MThickness varchar(10), 
-@MPrize varchar(15), 
-@MDesc varchar(20), 
-@Class varchar(20),
-@ElbowType varchar(10), 
-@ElbowThickness int, 
-@ElbowPrize varchar(15),
-@ElbowDesc  varchar(40)
-
-as
-
-update materials set Vendor=@Vendor, MSize=@MSize, MType=@MType, 
-		MThickness=@MThickness, MPrize=@MPrize, MDesc=@MDesc, 
-		Class=@Class, ElbowType=@ElbowType, ElbowThickness=@ElbowThickness, 
-		ElbowPrize=@ElbowPrize, ElbowDesc=@ElbowDesc where IdMaterials= @IdMaterials
-
-go
-
-drop proc sp_Update_Materials

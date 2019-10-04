@@ -1,5 +1,11 @@
-﻿Public Class Employees
+﻿
+Public Class Employees
     Dim mtd As New MetodosEmployees
+    Dim emplyeeDataList As New List(Of String)
+    Public idEmployee, idAddress, idContacto, idPay As String
+
+
+
     Private Sub Employees_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         activarCamposAddress(False)
         activarCamposContacto(False)
@@ -7,6 +13,8 @@
         sprPayRate1.DecimalPlaces = 2
         sprPayRate2.DecimalPlaces = 2
         sprPayRate3.DecimalPlaces = 2
+        btnUpdate.Enabled = False
+        btnSave.Enabled = True
     End Sub
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles btnChooseImage.Click
@@ -47,12 +55,14 @@
 
     Private Function activarCamposAddress(flag As Boolean) As Boolean
         If flag Then
+            chbAddress.Checked = True
             txtStreat.Enabled = True
             txtProvidence.Enabled = True
             txtPostalCode.Enabled = True
             txtNumber.Enabled = True
             txtCity.Enabled = True
         Else
+            chbAddress.Checked = False
             txtStreat.Enabled = False
             txtProvidence.Enabled = False
             txtPostalCode.Enabled = False
@@ -64,10 +74,12 @@
 
     Private Function activarCamposContacto(flag As Boolean) As Boolean
         If flag Then
+            chbContact.Checked = True
             txtPhone1.Enabled = True
             txtPhone2.Enabled = True
             txtEmail.Enabled = True
         Else
+            chbContact.Checked = False
             txtPhone1.Enabled = False
             txtPhone2.Enabled = False
             txtEmail.Enabled = False
@@ -77,10 +89,12 @@
 
     Private Function activarCamposPay(flag As Boolean) As Boolean
         If flag = True Then
+            chbPay.Checked = True
             sprPayRate1.Enabled = True
             sprPayRate2.Enabled = True
             sprPayRate3.Enabled = True
         Else
+            chbPay.Checked = False
             sprPayRate1.Enabled = False
             sprPayRate2.Enabled = False
             sprPayRate3.Enabled = False
@@ -89,6 +103,130 @@
     End Function
 
     Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
+        Try
+            Dim datos = recolectar()
+            mtd.guardarEmpleado(datos, imageToByte(imgPhoto.Image))
+        Catch ex As Exception
+            MsgBox(ex.Message)
+        End Try
+    End Sub
+
+    Private Sub btnUpdate_Click(sender As Object, e As EventArgs) Handles btnUpdate.Click
+        Try
+            Dim result = MessageBox.Show("Are you sure that you want to change the user's data?", "Adventence", MessageBoxButtons.OKCancel, MessageBoxIcon.Question)
+            If result = DialogResult.OK Then
+                Dim listNewData = recolectar()
+                mtd.actualizar_Employee(listNewData, idEmployee, idAddress, idContacto, idPay, imageToByte(imgPhoto.Image))
+                mtd.cargarEmpleados(tblEmployees, "%")
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message)
+        End Try
+    End Sub
+
+    Private Sub chbState_CheckedChanged(sender As Object, e As EventArgs) Handles chbState.CheckedChanged
+        If chbState.Checked Then
+            chbState.Text = "Disable"
+        Else
+            chbState.Text = "Enable"
+        End If
+    End Sub
+
+    Private Sub btnCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click
+        Try
+            Dim result = MessageBox.Show("Are you sure to cancel the chaged made?", "Warning", MessageBoxButtons.OKCancel, MessageBoxIcon.Question)
+            If result = DialogResult.OK Then
+                limpiarCampos()
+                btnUpdate.Enabled = False
+                btnSave.Enabled = True
+            End If
+        Catch ex As Exception
+
+        End Try
+    End Sub
+
+    Private Sub tblEmployees_DoubleClick(sender As Object, e As EventArgs) Handles tblEmployees.DoubleClick
+        Dim result = MessageBox.Show("Would you like to load the data of this Employee", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
+        If result = DialogResult.Yes Then
+            btnSave.Enabled = False
+            btnUpdate.Enabled = True
+            emplyeeDataList.Clear()
+            Dim cont As Int16 = 0
+            For Each cell As DataGridViewCell In tblEmployees.CurrentRow.Cells
+                If cont = 2 Then
+                    Exit For
+                Else
+                    emplyeeDataList.Add(cell.Value)
+                    cont += 1
+                End If
+            Next
+            Dim arrayImage As Byte() = mtd.cargar_Imagen_De_Employee(emplyeeDataList(1), emplyeeDataList(0))
+            imgPhoto.Image = BytetoImage(arrayImage)
+            Dim arrayDatos As List(Of String) = mtd.datosEmpleado(emplyeeDataList(1), emplyeeDataList(0))
+            idEmployee = arrayDatos(0)
+            txtEmployeeNumber.Text = arrayDatos(1)
+            txtFirsName.Text = arrayDatos(2)
+            txtLastName.Text = arrayDatos(3)
+            txtMiddleName.Text = arrayDatos(4)
+            txtSocialNumber.Text = arrayDatos(5)
+            txtSapNumber.Text = arrayDatos(6)
+            idAddress = arrayDatos(7)
+            idContacto = arrayDatos(8)
+            idPay = arrayDatos(9)
+            If arrayDatos(10) = "E" Then
+                chbState.Checked = True
+            Else
+                chbState.Checked = False
+            End If
+            If arrayDatos(12) <> "" Or arrayDatos(13) <> "" Or arrayDatos(14) <> "" Then
+                activarCamposAddress(True)
+                txtStreat.Text = arrayDatos(12)
+                txtNumber.Text = arrayDatos(13)
+                txtCity.Text = arrayDatos(14)
+                txtProvidence.Text = arrayDatos(15)
+                txtPostalCode.Text = arrayDatos(16)
+            Else
+                activarCamposAddress(False)
+            End If
+            If arrayDatos(18) <> "" Then
+                activarCamposContacto(True)
+                txtPhone1.Text = arrayDatos(18)
+                txtPhone2.Text = arrayDatos(19)
+                txtEmail.Text = arrayDatos(20)
+            Else
+                activarCamposContacto(False)
+            End If
+            If arrayDatos(22) <> "" Or arrayDatos(22) <> "" Or arrayDatos(22) <> "" Then
+                activarCamposPay(True)
+                sprPayRate1.Value = arrayDatos(22)
+                sprPayRate2.Value = arrayDatos(23)
+                sprPayRate3.Value = arrayDatos(24)
+            Else
+                activarCamposPay(False)
+            End If
+
+        End If
+    End Sub
+
+    Private Sub btnCamera_Click(sender As Object, e As EventArgs) Handles btnCamera.Click
+        Try
+            Dim camera As New Camera
+            AddOwnedForm(camera)
+            camera.ShowDialog()
+        Catch ex As Exception
+
+        End Try
+    End Sub
+
+    Private Sub txtSearch_TextChanged(sender As Object, e As EventArgs) Handles txtSearch.TextChanged
+        Try
+            mtd.cargarEmpleados(tblEmployees, txtSearch.Text)
+        Catch ex As Exception
+
+        End Try
+    End Sub
+
+    Private Function recolectar() As String()
         Try
             Dim dataEmployes(18) As String
             dataEmployes(0) = txtEmployeeNumber.Text
@@ -133,45 +271,36 @@
                 dataEmployes(16) = "0,00"
                 dataEmployes(17) = "0,00"
             End If
-            mtd.guardarEmpleado(dataEmployes, imageToByte(imgPhoto.Image))
+            Return dataEmployes
         Catch ex As Exception
-            MsgBox(ex.Message)
+            Return Nothing
         End Try
+    End Function
 
-
-    End Sub
-
-    Private Sub chbState_CheckedChanged(sender As Object, e As EventArgs) Handles chbState.CheckedChanged
-        If chbState.Checked Then
-            chbState.Text = "Disable"
-        Else
-            chbState.Text = "Enable"
-        End If
-    End Sub
-
-    Private Sub tblEmployees_DoubleClick(sender As Object, e As EventArgs) Handles tblEmployees.DoubleClick
-        If MessageBox.Show("Would you like to load the data of this Employee", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = 1 Then
-
-        End If
-    End Sub
-
-    Private Sub txtSearch_TextChanged(sender As Object, e As EventArgs) Handles txtSearch.TextChanged
-        Try
-            mtd.cargarEmpleados(tblEmployees, txtSearch.Text)
-        Catch ex As Exception
-
-        End Try
-    End Sub
-
-    Private Sub BtnMenu_Click(sender As Object, e As EventArgs) Handles btnMenu.Click
-        Dim a As New MainFrom()
-        a.Show()
-        Me.Finalize()
-    End Sub
-
-    Private Sub GroupBox1_Enter(sender As Object, e As EventArgs) Handles GroupBox1.Enter
-
-    End Sub
-
+    Public Function limpiarCampos() As Boolean
+        txtEmployeeNumber.Text = ""
+        txtFirsName.Text = ""
+        txtLastName.Text = ""
+        txtMiddleName.Text = ""
+        txtSocialNumber.Text = ""
+        txtSapNumber.Text = ""
+        chbState.Checked = False
+        txtCity.Text = ""
+        txtStreat.Text = ""
+        txtPostalCode.Text = ""
+        txtProvidence.Text = ""
+        txtNumber.Text = ""
+        txtPhone1.Text = ""
+        txtPhone2.Text = ""
+        txtEmail.Text = ""
+        sprPayRate1.Value = 0
+        sprPayRate2.Value = 0
+        sprPayRate3.Value = 0
+        imgPhoto.ImageLocation = "C:\Users\ASUS\Source\Repos\AVT_TRAKING\AVT_TRAKING\AVT_TRAKING\Images\user.png"
+        activarCamposAddress(False)
+        activarCamposContacto(False)
+        activarCamposPay(False)
+        Return True
+    End Function
 
 End Class

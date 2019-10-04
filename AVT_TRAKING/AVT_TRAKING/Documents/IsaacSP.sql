@@ -110,6 +110,8 @@ begin
 end
 go
 
+select * from employees where  numberEmploye  = 305 and firstName = 'isaac'
+
 --##############################################################################################
 --################## PROCEDIMINETO ALMACENADO PARA ACTUALIZAR UN EMPLEADO ######################
 --##############################################################################################
@@ -153,13 +155,13 @@ begin
 			set @msg = 'Successfull '
 			update contact set phoneNumber1 = @phoneNumber1, phoneNumber2 = @phoneNumber2, emial = @email where idContact = @idContact 
 			if @@ERROR <> 0 begin set @error = @@ERROR goto solveproblem  set @msg = 'Error in contact'  end 
-			 			
+
 			update HomeAddress set	avenue = @avenue, number = @number, city = @city , providence = @providence , postalCode = @postalCode where idHomeAdress = @idAddress
 			if @@ERROR <> 0 begin set @error = @@ERROR goto solveproblem set @msg = 'Error in Home address' end 
-			
+
 			update payRate set	payRate1 = @payRate1 , payRate2 = @payRate2 , payRate3 = @payRate3 where idPayRate = @idPay
 			if @@ERROR <> 0 begin set @error = @@ERROR goto solveproblem set @msg = 'Error in Pay Rate' end 
-			
+
 			update employees set numberEmploye = @numberEmploye ,firstName = @firstName , lastName = @lastName , middleName = @middleName , socialNumber = @socialNumber, SAPNumber = @SAPNumber, photo = @photo where idEmployee = @idEmployee and idContact = @idContact and idHomeAdress = @idAddress and idPayRate = @idPay
 			if @@ERROR <> 0 begin set @error = @@ERROR goto solveproblem set @msg = 'Error in Data Employee' end 
 		end try	
@@ -175,4 +177,3 @@ begin
 	end
 end
 go
-

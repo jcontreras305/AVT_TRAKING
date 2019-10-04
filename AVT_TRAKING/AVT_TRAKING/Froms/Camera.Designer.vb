@@ -22,56 +22,47 @@ Partial Class Camera
     'No lo modifique con el editor de código.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.wcmCamara = New WebCAM.WebCam()
-        Me.btnTakePicture = New System.Windows.Forms.Button()
-        Me.SaveFileDialog1 = New System.Windows.Forms.SaveFileDialog()
-        Me.pcbImagen = New System.Windows.Forms.PictureBox()
-        CType(Me.pcbImagen, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.wbcCamara = New WebCAM.WebCam()
+        Me.btnTake = New System.Windows.Forms.Button()
+        Me.pbxImage = New System.Windows.Forms.PictureBox()
+        CType(Me.pbxImage, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
-        'wcmCamara
+        'wbcCamara
         '
-        Me.wcmCamara.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
-        Me.wcmCamara.Imagen = Nothing
-        Me.wcmCamara.Location = New System.Drawing.Point(1, -1)
-        Me.wcmCamara.MilisegundosCaptura = 100
-        Me.wcmCamara.Name = "wcmCamara"
-        Me.wcmCamara.Size = New System.Drawing.Size(320, 240)
-        Me.wcmCamara.TabIndex = 0
+        Me.wbcCamara.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D
+        Me.wbcCamara.Imagen = Nothing
+        Me.wbcCamara.Location = New System.Drawing.Point(12, 4)
+        Me.wbcCamara.MilisegundosCaptura = 100
+        Me.wbcCamara.Name = "wbcCamara"
+        Me.wbcCamara.Size = New System.Drawing.Size(334, 236)
+        Me.wbcCamara.TabIndex = 0
         '
-        'btnTakePicture
+        'btnTake
         '
-        Me.btnTakePicture.Location = New System.Drawing.Point(123, 244)
-        Me.btnTakePicture.Name = "btnTakePicture"
-        Me.btnTakePicture.Size = New System.Drawing.Size(75, 23)
-        Me.btnTakePicture.TabIndex = 2
-        Me.btnTakePicture.Text = "Take"
-        Me.btnTakePicture.UseVisualStyleBackColor = True
+        Me.btnTake.Location = New System.Drawing.Point(105, 249)
+        Me.btnTake.Name = "btnTake"
+        Me.btnTake.Size = New System.Drawing.Size(164, 23)
+        Me.btnTake.TabIndex = 2
+        Me.btnTake.Text = "Shot"
+        Me.btnTake.UseVisualStyleBackColor = True
         '
-        'SaveFileDialog1
+        'pbxImage
         '
-        Me.SaveFileDialog1.FileName = "Picture.jpg"
-        Me.SaveFileDialog1.Filter = "Imagenes JPG|*.jpg|Images PNG|*.png"
-        '
-        'pcbImagen
-        '
-        Me.pcbImagen.Location = New System.Drawing.Point(12, 12)
-        Me.pcbImagen.Name = "pcbImagen"
-        Me.pcbImagen.Size = New System.Drawing.Size(298, 214)
-        Me.pcbImagen.TabIndex = 1
-        Me.pcbImagen.TabStop = False
+        Me.pbxImage.Location = New System.Drawing.Point(24, 13)
+        Me.pbxImage.Name = "pbxImage"
+        Me.pbxImage.Size = New System.Drawing.Size(310, 216)
+        Me.pbxImage.TabIndex = 1
+        Me.pbxImage.TabStop = False
         '
         'Camera
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
-        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(322, 279)
-        Me.Controls.Add(Me.btnTakePicture)
-        Me.Controls.Add(Me.pcbImagen)
-        Me.Controls.Add(Me.wcmCamara)
+        Me.ClientSize = New System.Drawing.Size(358, 284)
+        Me.Controls.Add(Me.btnTake)
+        Me.Controls.Add(Me.pbxImage)
+        Me.Controls.Add(Me.wbcCamara)
         Me.Name = "Camera"
-        Me.Text = "Camera"
-        CType(Me.pcbImagen, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.pbxImage, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -79,4 +70,7 @@ Partial Class Camera
     Friend WithEvents SaveFileDialog1 As SaveFileDialog
     Public WithEvents wcmCamara As WebCAM.WebCam
     Public WithEvents pcbImagen As PictureBox
+    Friend WithEvents wbcCamara As WebCAM.WebCam
+    Friend WithEvents pbxImage As PictureBox
+    Friend WithEvents btnTake As Button
 End Class
