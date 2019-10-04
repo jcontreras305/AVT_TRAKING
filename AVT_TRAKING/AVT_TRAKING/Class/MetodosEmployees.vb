@@ -3,7 +3,7 @@
 Public Class MetodosEmployees
     Inherits ConnectioDB
 
-    Dim consultaInner As String = " from employees as em inner join HomeAddress as ads 
+    Dim consultaInner As String = " from employees as em left join HomeAddress as ads 
 		on em.idHomeAdress = ads.idHomeAdress 
 	left join contact as con 
 		on em.idContact = con.idContact 
@@ -43,12 +43,21 @@ pr.payRate1 , pr.payRate2,pr.payRate3" + consultaInner +
             conectar()
             Dim cmd As New SqlCommand("sp_insert_Employee", conn)
             cmd.CommandType = CommandType.StoredProcedure
-            cmd.Parameters.Add("@numberEmploye", SqlDbType.VarChar, 25).Value = datosGeneralesEmpleado(0)
+            If datosGeneralesEmpleado(0).Equals("") Then
+                cmd.Parameters.Add("@numberEmploye", SqlDbType.Int).Value = 0
+            Else
+                cmd.Parameters.Add("@numberEmploye", SqlDbType.Int).Value = datosGeneralesEmpleado(0)
+            End If
             cmd.Parameters.Add("@firstName", SqlDbType.VarChar, 30).Value = datosGeneralesEmpleado(1)
             cmd.Parameters.Add("@lastName", SqlDbType.VarChar, 25).Value = datosGeneralesEmpleado(2)
             cmd.Parameters.Add("@middleName", SqlDbType.VarChar, 25).Value = datosGeneralesEmpleado(3)
             cmd.Parameters.Add("@socialNumber", SqlDbType.VarChar, 14).Value = datosGeneralesEmpleado(4)
-            cmd.Parameters.Add("@SAPNumber", SqlDbType.Int).Value = datosGeneralesEmpleado(5)
+            If datosGeneralesEmpleado(5).Equals("") Then
+                cmd.Parameters.Add("@SAPNumber", SqlDbType.Int).Value = 0
+            Else
+                cmd.Parameters.Add("@SAPNumber", SqlDbType.Int).Value = datosGeneralesEmpleado(5)
+            End If
+
             cmd.Parameters.Add("@photo", SqlDbType.Image).Value = arraybyte
             cmd.Parameters.Add("@estatus", SqlDbType.Char, 1).Value = datosGeneralesEmpleado(6)
             'contacto
@@ -57,10 +66,18 @@ pr.payRate1 , pr.payRate2,pr.payRate3" + consultaInner +
             cmd.Parameters.Add("@email", SqlDbType.VarChar, 50).Value = datosGeneralesEmpleado(9)
             'direccion
             cmd.Parameters.Add("@avenue", SqlDbType.VarChar, 80).Value = datosGeneralesEmpleado(10)
-            cmd.Parameters.Add("@number", SqlDbType.Int).Value = datosGeneralesEmpleado(11)
+            If datosGeneralesEmpleado(11).Equals("") Then
+                cmd.Parameters.Add("@number", SqlDbType.Int).Value = 0
+            Else
+                cmd.Parameters.Add("@number", SqlDbType.Int).Value = datosGeneralesEmpleado(11)
+            End If
             cmd.Parameters.Add("@city", SqlDbType.VarChar, 20).Value = datosGeneralesEmpleado(12)
             cmd.Parameters.Add("@providence", SqlDbType.VarChar, 20).Value = datosGeneralesEmpleado(13)
-            cmd.Parameters.Add("@postalCode", SqlDbType.Int).Value = datosGeneralesEmpleado(14)
+            If datosGeneralesEmpleado(14).Equals("") Then
+                cmd.Parameters.Add("@postalCode", SqlDbType.Int).Value = 0
+            Else
+                cmd.Parameters.Add("@postalCode", SqlDbType.Int).Value = datosGeneralesEmpleado(14)
+            End If
             'pay
             cmd.Parameters.Add("@payRate1", SqlDbType.Float).Value = datosGeneralesEmpleado(15)
             cmd.Parameters.Add("@payRate2", SqlDbType.Float).Value = datosGeneralesEmpleado(16)

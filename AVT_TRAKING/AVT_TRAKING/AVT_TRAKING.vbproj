@@ -58,6 +58,9 @@
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Net.Http" />
+    <Reference Include="WebCAM">
+      <HintPath>..\..\WebCam\WebCam\WebCAM.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Import Include="Microsoft.VisualBasic" />
@@ -75,6 +78,12 @@
   <ItemGroup>
     <Compile Include="Class\MetodosClients.vb" />
     <Compile Include="Class\MetodosEmployees.vb" />
+    <Compile Include="Froms\Camera.Designer.vb">
+      <DependentUpon>Camera.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Froms\Camera.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Froms\metodosGlobales.vb" />
     <Compile Include="Class\MetodosLogin.vb" />
     <Compile Include="Class\MetodosMaterials.vb" />
@@ -127,6 +136,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Froms\Camera.resx">
+      <DependentUpon>Camera.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Froms\Clients.resx">
       <DependentUpon>Clients.vb</DependentUpon>
     </EmbeddedResource>
@@ -165,6 +177,7 @@
   <ItemGroup>
     <Content Include="Documents\Creacion de DB y de la tabla de Usuarios.sql" />
     <Content Include="Documents\IsaacSP.sql" />
+    <Content Include="Images\Camera.jpg" />
     <Content Include="Images\user.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
