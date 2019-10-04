@@ -8,7 +8,7 @@
 
     Public Sub MostrarDatos()
         mate.ConsultaMaterials("select * from materials")
-        Me.DataGridView1.DataSource = mate.ds.Tables("materials")
+        Me.tblMaterials.DataSource = mate.ds.Tables("materials")
 
     End Sub
 
@@ -36,8 +36,8 @@
         End If
     End Sub
 
-    Private Sub DataGridView1_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridView1.CellContentClick
-        Dim dgv As DataGridViewRow = DataGridView1.Rows(e.RowIndex)
+    Private Sub DataGridView1_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles tblMaterials.CellContentClick
+        Dim dgv As DataGridViewRow = tblMaterials.Rows(e.RowIndex)
 
         txtIdMaterials.Text = dgv.Cells(0).Value.ToString()
         txtVendor.Text = dgv.Cells(1).Value.ToString()
@@ -51,6 +51,29 @@
         txtElbowThinckness.Text = dgv.Cells(9).Value.ToString()
         txtElbowPrize.Text = dgv.Cells(10).Value.ToString()
         txtElbowDesc.Text = dgv.Cells(11).Value.ToString()
+
+    End Sub
+
+    Private Sub TxtSearch_TextChanged(sender As Object, e As EventArgs) Handles txtSearch.TextChanged
+        Try
+            mate.cargarMaterials(tblMaterials, txtSearch.Text)
+        Catch ex As Exception
+
+        End Try
+    End Sub
+
+    Private Sub BtnUpdate_Click(sender As Object, e As EventArgs) Handles btnUpdate.Click
+
+        Dim update As String = "insert into materials values (" + txtIdMaterials.Text + ",'" + txtVendor.Text + "','" +
+    txtMsize.Text + "','" + txtMtype.Text + "','" + txtMthickness.Text + "','" + txtMprize.Text + "','" + txtMdesc.Text + "','" + txtClass.Text + "',
+            '" + txtElbowType.Text + "','" + txtElbowThinckness.Text + "','" + txtElbowPrize.Text + "','" + txtElbowDesc.Text + "')"
+
+        If (mate.ModificarMaterials(update)) Then
+            MessageBox.Show("Datos modificados correctamente")
+            MostrarDatos()
+        Else
+            MessageBox.Show("Error al agregar")
+        End If
 
     End Sub
 End Class

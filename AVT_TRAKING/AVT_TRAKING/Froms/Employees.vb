@@ -1,6 +1,5 @@
 ﻿Public Class Employees
     Dim mtd As New MetodosEmployees
-
     Private Sub Employees_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         activarCamposAddress(False)
         activarCamposContacto(False)
@@ -170,10 +169,7 @@
         Me.Finalize()
     End Sub
 
-    Private Sub btnCamera_Click(sender As Object, e As EventArgs) Handles btnCamera.Click
-        Dim camera As New Camera
-        AddOwnedForm(camera)
-        camera.ShowDialog()
+    Private Sub GroupBox1_Enter(sender As Object, e As EventArgs) Handles GroupBox1.Enter
 
     End Sub
 
