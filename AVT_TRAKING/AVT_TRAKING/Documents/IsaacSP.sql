@@ -116,6 +116,10 @@ select * from employees where  numberEmploye  = 305 and firstName = 'isaac'
 --################## PROCEDIMINETO ALMACENADO PARA ACTUALIZAR UN EMPLEADO ######################
 --##############################################################################################
 
+--perdon actualice el procedimiento para actualizar los datos de un empleado
+drop   proc sp_update_Employee
+go
+
 create proc sp_update_Employee
 	--ids para hacer update 4
 	@idEmployee varchar(36),
@@ -153,17 +157,38 @@ begin
 	begin tran
 		begin try
 			set @msg = 'Successfull '
-
-			update contact set phoneNumber1 = @phoneNumber1, phoneNumber2 = @phoneNumber2, emial = @email where idContact = @idContact 
-			if @@ERROR <> 0 begin set @error = @@ERROR goto solveproblem  set @msg = 'Error in contact'  end 
-
-			update HomeAddress set	avenue = @avenue, number = @number, city = @city , providence = @providence , postalCode = @postalCode where idHomeAdress = @idAddress
-			if @@ERROR <> 0 begin set @error = @@ERROR goto solveproblem set @msg = 'Error in Home address' end 
-
-			update payRate set	payRate1 = @payRate1 , payRate2 = @payRate2 , payRate3 = @payRate3 where idPayRate = @idPay
-			if @@ERROR <> 0 begin set @error = @@ERROR goto solveproblem set @msg = 'Error in Pay Rate' end 
-
-			update employees set numberEmploye = @numberEmploye ,firstName = @firstName , lastName = @lastName , middleName = @middleName , socialNumber = @socialNumber, SAPNumber = @SAPNumber, photo = @photo where idEmployee = @idEmployee and idContact = @idContact and idHomeAdress = @idAddress and idPayRate = @idPay
+			--CONTACTO
+			if @idContact <> '' begin --en caso de que tenga contacto solo se actualiza
+				update contact set phoneNumber1 = @phoneNumber1, phoneNumber2 = @phoneNumber2, emial = @email where idContact = @idContact 
+				if @@ERROR <> 0 begin set @error = @@ERROR goto solveproblem  set @msg = 'Error in contact'  end 
+			end
+			else begin -- de no tener id se crea uno
+				set @idContact = NEWID()
+				insert into contact values (@idContact, @phoneNumber1, @phoneNumber2,  @email)
+				if @@ERROR <> 0 begin set @error = @@ERROR goto solveproblem  set @msg = 'Error in contact'  end 
+			end
+			--DIRECCION
+			if @idAddress <> '' begin 
+				update HomeAddress set	avenue = @avenue, number = @number, city = @city , providence = @providence , postalCode = @postalCode where idHomeAdress = @idAddress
+				if @@ERROR <> 0 begin set @error = @@ERROR goto solveproblem set @msg = 'Error in Home address' end 
+			end 
+			else begin
+				set @idAddress = NEWID()
+				insert into HomeAddress values (@idAddress,@avenue,  @number,  @city , @providence ,  @postalCode )
+				if @@ERROR <> 0 begin set @error = @@ERROR goto solveproblem set @msg = 'Error in Home address' end 
+			end
+			--PAGO
+		    if @idPay <> '' begin
+				update payRate set	payRate1 = @payRate1 , payRate2 = @payRate2 , payRate3 = @payRate3 where idPayRate = @idPay
+				if @@ERROR <> 0 begin set @error = @@ERROR goto solveproblem set @msg = 'Error in Pay Rate' end 
+			end
+			else begin
+				set @idPay = NEWID()
+				insert into payRate values (@idPay, @payRate1, @payRate2 , @payRate3)
+				if @@ERROR <> 0 begin set @error = @@ERROR goto solveproblem set @msg = 'Error in Pay Rate' end 
+			end
+			--DATA EMPLOYEE
+			update employees set numberEmploye = @numberEmploye ,firstName = @firstName , lastName = @lastName , middleName = @middleName , socialNumber = @socialNumber, SAPNumber = @SAPNumber, photo = @photo, idContact = @idContact , idHomeAdress = @idAddress , idPayRate = @idPay where idEmployee = @idEmployee 
 			if @@ERROR <> 0 begin set @error = @@ERROR goto solveproblem set @msg = 'Error in Data Employee' end 
 		end try	
 		begin catch
@@ -178,3 +203,4 @@ begin
 	end
 end
 go
+
