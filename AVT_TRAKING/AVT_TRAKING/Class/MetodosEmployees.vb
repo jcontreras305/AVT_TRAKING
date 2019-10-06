@@ -137,9 +137,13 @@ pr.payRate1 , pr.payRate2,pr.payRate3" + consultaInner +
                 Dim cont As Int16 = 0
                 Do
                     If cont <> 7 Then
-                        list.Add(CStr(rd(cont)))
+                        If IsDBNull(rd(cont)) Then
+                            list.Add("")
+                        Else
+                            list.Add(rd(cont))
+                        End If
                     End If
-                    cont += 1
+                        cont += 1
                 Loop While cont < 26
             End While
             Return list
@@ -209,9 +213,7 @@ pr.payRate1 , pr.payRate2,pr.payRate3" + consultaInner +
                 MsgBox(resultado)
             Else
                 MsgBox("Error")
-
             End If
-
         Catch ex As Exception
             MsgBox(ex.Message)
         End Try

@@ -1,4 +1,5 @@
-﻿
+﻿Imports System.Text.RegularExpressions
+
 Public Class Employees
     Dim mtd As New MetodosEmployees
     Dim emplyeeDataList As New List(Of String)
@@ -15,6 +16,9 @@ Public Class Employees
         sprPayRate3.DecimalPlaces = 2
         btnUpdate.Enabled = False
         btnSave.Enabled = True
+        txtPhone1.MaxLength = 10
+        txtPhone2.MaxLength = 10
+        txtSocialNumber = 9
     End Sub
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles btnChooseImage.Click
@@ -105,11 +109,18 @@ Public Class Employees
     Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
         Try
             Dim datos = recolectar()
-            mtd.guardarEmpleado(datos, imageToByte(imgPhoto.Image))
+            If (validar_Correo(txtEmail.Text)) Then
+                mtd.guardarEmpleado(datos, imageToByte(imgPhoto.Image))
+            End If
         Catch ex As Exception
             MsgBox(ex.Message)
         End Try
     End Sub
+    'ESTE CODIGO VALIDA SI LA ESTRUCTURA DE UN CORRERO ES CORRECTO [LETRAS mM Y NUMERO 0-9]@[DOMINIO].[PROTOCOLO]. LO COMETADO ES PARA OTRA ESTRUCTURA MENOS SEGURA
+    Private Function validar_Correo(ByVal mail As String) As Boolean
+        Return Regex.IsMatch(mail, "^[a-zA-Z][\w\.-]*[a-zA-Z0-9]@[a-zA-Z0-9][\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]{2,4}$") '"^[_a-zA-B0-9]+(\._a-zA-B0-9+)*@[a-zA-B0-9-]+(\.[a-zA-B0-9-]+)*(\.[a-z]{2,4})$")
+    End Function
+
 
     Private Sub btnUpdate_Click(sender As Object, e As EventArgs) Handles btnUpdate.Click
         Try
@@ -208,11 +219,13 @@ Public Class Employees
         End If
     End Sub
 
+    'EN  ESTE CODIGO SE ENVIARAN DATOS UNA SEGUNDA INTERFAZ QUE ES LA DE CAMARA LA CUAL NO DARA UNA IMAGEN QUE PARA EL USUARIO
+    'Y PARA ENVIAR DATOS DE UNA INTERFAZ A OTRA ES ASI
     Private Sub btnCamera_Click(sender As Object, e As EventArgs) Handles btnCamera.Click
         Try
-            Dim camera As New Camera
-            AddOwnedForm(camera)
-            camera.ShowDialog()
+            Dim camera As New Camera 'SE HACE INSTANCIA DE LA INTERFAZ A CONECTAR 
+            AddOwnedForm(camera) ' ESTE COMANDO INDICA QUE HACE A EMPLOYEES JEFE DE LA INFORACION PRODUCIDA EN LA OTRA INTERFAZ
+            camera.ShowDialog() ' VISUALIZAMOS LA OTRA INTERFAZ, SE DEBE INCLUIR CODIGO EN LA OTRA INTERFAZ PARA EL RETORNO DE DATOS
         Catch ex As Exception
 
         End Try
@@ -243,7 +256,12 @@ Public Class Employees
             If chbContact.Checked Then
                 dataEmployes(7) = txtPhone1.Text
                 dataEmployes(8) = txtPhone2.Text
-                dataEmployes(9) = txtEmail.Text
+                If validar_Correo(txtEmail.Text) Then
+                    dataEmployes(9) = txtEmail.Text
+                Else
+                    MsgBox("The Email entered is no correct, but the process it will continue without value in this section")
+                    dataEmployes(9) = ""
+                End If
             Else
                 dataEmployes(7) = ""
                 dataEmployes(8) = ""
@@ -302,5 +320,14 @@ Public Class Employees
         activarCamposPay(False)
         Return True
     End Function
+
+    Private Sub txtPhone1_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtPhone1.KeyPress
+        e.Handled = Not IsNumeric(e.KeyChar) And Not Char.IsControl(e.KeyChar)
+
+    End Sub
+
+    Private Sub txtPhone2_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtPhone2.KeyPress
+        e.Handled = Not IsNumeric(e.KeyChar) And Not Char.IsControl(e.KeyChar)
+    End Sub
 
 End Class

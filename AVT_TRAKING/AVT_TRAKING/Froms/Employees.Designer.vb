@@ -24,6 +24,7 @@ Partial Class Employees
     Private Sub InitializeComponent()
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.tbpEmployees = New System.Windows.Forms.TabPage()
+        Me.btnCamera = New System.Windows.Forms.Button()
         Me.btnCancel = New System.Windows.Forms.Button()
         Me.btnUpdate = New System.Windows.Forms.Button()
         Me.Label18 = New System.Windows.Forms.Label()
@@ -32,6 +33,7 @@ Partial Class Employees
         Me.tblEmployees = New System.Windows.Forms.DataGridView()
         Me.btnSave = New System.Windows.Forms.Button()
         Me.btnChooseImage = New System.Windows.Forms.Button()
+        Me.imgPhoto = New System.Windows.Forms.PictureBox()
         Me.txtSapNumber = New System.Windows.Forms.TextBox()
         Me.txtSocialNumber = New System.Windows.Forms.TextBox()
         Me.txtMiddleName = New System.Windows.Forms.TextBox()
@@ -73,11 +75,10 @@ Partial Class Employees
         Me.Label8 = New System.Windows.Forms.Label()
         Me.txtStreat = New System.Windows.Forms.TextBox()
         Me.Label7 = New System.Windows.Forms.Label()
-        Me.btnCamera = New System.Windows.Forms.Button()
-        Me.imgPhoto = New System.Windows.Forms.PictureBox()
         Me.TabControl1.SuspendLayout()
         Me.tbpEmployees.SuspendLayout()
         CType(Me.tblEmployees, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.imgPhoto, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.tbpOtherData.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
         CType(Me.sprPayRate3, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -85,7 +86,6 @@ Partial Class Employees
         CType(Me.sprPayRate1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox2.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
-        CType(Me.imgPhoto, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'TabControl1
@@ -129,6 +129,15 @@ Partial Class Employees
         Me.tbpEmployees.TabIndex = 0
         Me.tbpEmployees.Text = "Employee"
         Me.tbpEmployees.UseVisualStyleBackColor = True
+        '
+        'btnCamera
+        '
+        Me.btnCamera.Image = Global.AVT_TRAKING.My.Resources.Resources.camara
+        Me.btnCamera.Location = New System.Drawing.Point(657, 9)
+        Me.btnCamera.Name = "btnCamera"
+        Me.btnCamera.Size = New System.Drawing.Size(52, 33)
+        Me.btnCamera.TabIndex = 22
+        Me.btnCamera.UseVisualStyleBackColor = True
         '
         'btnCancel
         '
@@ -200,6 +209,18 @@ Partial Class Employees
         Me.btnChooseImage.TabIndex = 13
         Me.btnChooseImage.Text = "Chose Image"
         Me.btnChooseImage.UseVisualStyleBackColor = True
+        '
+        'imgPhoto
+        '
+        Me.imgPhoto.BackColor = System.Drawing.Color.White
+        Me.imgPhoto.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.imgPhoto.Image = Global.AVT_TRAKING.My.Resources.Resources.user
+        Me.imgPhoto.Location = New System.Drawing.Point(530, 6)
+        Me.imgPhoto.Name = "imgPhoto"
+        Me.imgPhoto.Size = New System.Drawing.Size(120, 132)
+        Me.imgPhoto.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
+        Me.imgPhoto.TabIndex = 12
+        Me.imgPhoto.TabStop = False
         '
         'txtSapNumber
         '
@@ -571,27 +592,6 @@ Partial Class Employees
         Me.Label7.TabIndex = 0
         Me.Label7.Text = "Streat"
         '
-        'btnCamera
-        '
-        Me.btnCamera.Image = Global.AVT_TRAKING.My.Resources.Resources.camara
-        Me.btnCamera.Location = New System.Drawing.Point(657, 9)
-        Me.btnCamera.Name = "btnCamera"
-        Me.btnCamera.Size = New System.Drawing.Size(52, 33)
-        Me.btnCamera.TabIndex = 22
-        Me.btnCamera.UseVisualStyleBackColor = True
-        '
-        'imgPhoto
-        '
-        Me.imgPhoto.BackColor = System.Drawing.Color.White
-        Me.imgPhoto.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.imgPhoto.Image = Global.AVT_TRAKING.My.Resources.Resources.user
-        Me.imgPhoto.Location = New System.Drawing.Point(530, 6)
-        Me.imgPhoto.Name = "imgPhoto"
-        Me.imgPhoto.Size = New System.Drawing.Size(120, 132)
-        Me.imgPhoto.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
-        Me.imgPhoto.TabIndex = 12
-        Me.imgPhoto.TabStop = False
-        '
         'Employees
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -604,6 +604,7 @@ Partial Class Employees
         Me.tbpEmployees.ResumeLayout(False)
         Me.tbpEmployees.PerformLayout()
         CType(Me.tblEmployees, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.imgPhoto, System.ComponentModel.ISupportInitialize).EndInit()
         Me.tbpOtherData.ResumeLayout(False)
         Me.GroupBox3.ResumeLayout(False)
         Me.GroupBox3.PerformLayout()
@@ -614,7 +615,6 @@ Partial Class Employees
         Me.GroupBox2.PerformLayout()
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()
-        CType(Me.imgPhoto, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
