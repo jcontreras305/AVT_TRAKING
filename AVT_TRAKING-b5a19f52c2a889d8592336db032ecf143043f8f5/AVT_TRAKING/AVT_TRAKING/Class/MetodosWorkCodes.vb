@@ -1,22 +1,22 @@
 ﻿Imports System.Data.SqlClient
-Public Class MetodosMaterials
+
+Public Class MetodosWorkCodes
 
     Dim conexion As New ConnectioDB
-
     Private cmb As SqlCommandBuilder
     Public ds As DataSet = New DataSet()
     Public da As SqlDataAdapter
     Public comando As SqlCommand
 
-    Public Sub ConsultaMaterials(ByVal sql As String)
+    Public Sub ConsultaWorkCodes(ByVal sql As String)
         conexion.conectar()
         ds.Tables.Clear()
         da = New SqlDataAdapter(sql, conexion.conn)
         cmb = New SqlCommandBuilder(da)
-        da.Fill(ds, "materials")
+        da.Fill(ds, "WorkCode")
     End Sub
 
-    Function InsertarMaterials(ByVal sql)
+    Function InsertarWorkCodes(ByVal sql)
         conexion.conectar()
         comando = New SqlCommand(sql, conexion.conn)
 
@@ -27,10 +27,6 @@ Public Class MetodosMaterials
             Return False
         End If
     End Function
-    Function UpdateMaterial(ByVal sql)
-        conexion.conectar()
-        comando = New SqlCommand(sql, conexion.conn)
-        comando.ExecuteNonQuery()
 
-    End Function
+
 End Class

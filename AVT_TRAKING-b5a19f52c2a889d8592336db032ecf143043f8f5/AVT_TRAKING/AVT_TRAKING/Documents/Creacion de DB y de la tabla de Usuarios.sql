@@ -120,3 +120,24 @@ insert into materials values(1,'Homedepo','1.5','CS','1.5','$2.56','Tablas','Rol
                             (2,'Homedepo','3.5','CS','2.5','$2.56','Martillos','Roll','CS',3,'$8.76','METAL ALUMINUM ELBOWS'),
 							(3,'Homedepo','2.5','CS','3.5','$2.56','Cascos','Roll','CS',3,'$8.76','METAL ALUMINUM ELBOWS'),
 							(4,'Homedepo','2.0','CS','3.5','$2.56','Palas','Roll','CS',3,'$8.76','METAL ALUMINUM ELBOWS')
+
+
+
+--############################################################################
+--############# Tables WorkCodes #############################################
+--############################################################################
+
+create table WorkCode(
+WorkCodeID int not null primary key, 
+JobNumber int, 
+SubJob int, 
+Craft varchar(10),
+WorkCode varchar(10),
+Classification varchar(10),
+BillingRateST varchar(15), 
+BillingRateOT varchar(15), 
+BillingRate3 varchar(15),
+ClassDescription varchar(25)
+)
+
+insert into WorkCode values (1, 234, 456,'110sc','110sc','LMS','$30','$47.77','$65.00','Cementera')

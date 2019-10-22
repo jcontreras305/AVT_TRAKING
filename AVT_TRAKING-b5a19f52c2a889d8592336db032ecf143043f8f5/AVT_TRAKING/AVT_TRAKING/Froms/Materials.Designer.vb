@@ -52,13 +52,57 @@ Partial Class Materials
         Me.btnMenu = New System.Windows.Forms.Button()
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.TabPage1 = New System.Windows.Forms.TabPage()
-        Me.TabPage2 = New System.Windows.Forms.TabPage()
-        Me.Label13 = New System.Windows.Forms.Label()
+        Me.Button3 = New System.Windows.Forms.Button()
         Me.txtFiltro = New System.Windows.Forms.TextBox()
+        Me.Label13 = New System.Windows.Forms.Label()
+        Me.TabPage2 = New System.Windows.Forms.TabPage()
+        Me.Button1 = New System.Windows.Forms.Button()
+        Me.TextBox3 = New System.Windows.Forms.TextBox()
+        Me.TextBox2 = New System.Windows.Forms.TextBox()
+        Me.TextBox1 = New System.Windows.Forms.TextBox()
+        Me.Label19 = New System.Windows.Forms.Label()
+        Me.Label18 = New System.Windows.Forms.Label()
+        Me.Label17 = New System.Windows.Forms.Label()
+        Me.ComboBox3 = New System.Windows.Forms.ComboBox()
+        Me.Label16 = New System.Windows.Forms.Label()
+        Me.ComboBox2 = New System.Windows.Forms.ComboBox()
+        Me.Label15 = New System.Windows.Forms.Label()
+        Me.ComboBox1 = New System.Windows.Forms.ComboBox()
+        Me.Label14 = New System.Windows.Forms.Label()
         Me.TabPage3 = New System.Windows.Forms.TabPage()
+        Me.Button2 = New System.Windows.Forms.Button()
+        Me.TextBox7 = New System.Windows.Forms.TextBox()
+        Me.TextBox6 = New System.Windows.Forms.TextBox()
+        Me.TextBox5 = New System.Windows.Forms.TextBox()
+        Me.TextBox4 = New System.Windows.Forms.TextBox()
+        Me.ComboBox5 = New System.Windows.Forms.ComboBox()
+        Me.ComboBox4 = New System.Windows.Forms.ComboBox()
+        Me.Label25 = New System.Windows.Forms.Label()
+        Me.Label24 = New System.Windows.Forms.Label()
+        Me.Label23 = New System.Windows.Forms.Label()
+        Me.Label22 = New System.Windows.Forms.Label()
+        Me.Label21 = New System.Windows.Forms.Label()
+        Me.Label20 = New System.Windows.Forms.Label()
+        Me.TabPage4 = New System.Windows.Forms.TabPage()
+        Me.Label26 = New System.Windows.Forms.Label()
+        Me.Label27 = New System.Windows.Forms.Label()
+        Me.Label28 = New System.Windows.Forms.Label()
+        Me.Label29 = New System.Windows.Forms.Label()
+        Me.Label30 = New System.Windows.Forms.Label()
+        Me.Label31 = New System.Windows.Forms.Label()
+        Me.TextBox8 = New System.Windows.Forms.TextBox()
+        Me.TextBox9 = New System.Windows.Forms.TextBox()
+        Me.TextBox11 = New System.Windows.Forms.TextBox()
+        Me.TextBox12 = New System.Windows.Forms.TextBox()
+        Me.TextBox13 = New System.Windows.Forms.TextBox()
+        Me.Button4 = New System.Windows.Forms.Button()
+        Me.ComboBox6 = New System.Windows.Forms.ComboBox()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
+        Me.TabPage2.SuspendLayout()
+        Me.TabPage3.SuspendLayout()
+        Me.TabPage4.SuspendLayout()
         Me.SuspendLayout()
         '
         'btnQuery
@@ -295,14 +339,16 @@ Partial Class Materials
         Me.TabControl1.Controls.Add(Me.TabPage1)
         Me.TabControl1.Controls.Add(Me.TabPage2)
         Me.TabControl1.Controls.Add(Me.TabPage3)
+        Me.TabControl1.Controls.Add(Me.TabPage4)
         Me.TabControl1.Location = New System.Drawing.Point(8, 50)
         Me.TabControl1.Name = "TabControl1"
         Me.TabControl1.SelectedIndex = 0
-        Me.TabControl1.Size = New System.Drawing.Size(1154, 439)
+        Me.TabControl1.Size = New System.Drawing.Size(1154, 435)
         Me.TabControl1.TabIndex = 3
         '
         'TabPage1
         '
+        Me.TabPage1.Controls.Add(Me.Button3)
         Me.TabPage1.Controls.Add(Me.txtFiltro)
         Me.TabPage1.Controls.Add(Me.Label13)
         Me.TabPage1.Controls.Add(Me.btnQuery)
@@ -334,20 +380,26 @@ Partial Class Materials
         Me.TabPage1.Location = New System.Drawing.Point(4, 29)
         Me.TabPage1.Name = "TabPage1"
         Me.TabPage1.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage1.Size = New System.Drawing.Size(1146, 406)
+        Me.TabPage1.Size = New System.Drawing.Size(1146, 402)
         Me.TabPage1.TabIndex = 0
         Me.TabPage1.Text = "Materials"
         Me.TabPage1.UseVisualStyleBackColor = True
         '
-        'TabPage2
+        'Button3
         '
-        Me.TabPage2.Location = New System.Drawing.Point(4, 29)
-        Me.TabPage2.Name = "TabPage2"
-        Me.TabPage2.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage2.Size = New System.Drawing.Size(1146, 406)
-        Me.TabPage2.TabIndex = 1
-        Me.TabPage2.Text = "Estimate Removal"
-        Me.TabPage2.UseVisualStyleBackColor = True
+        Me.Button3.Location = New System.Drawing.Point(546, 286)
+        Me.Button3.Name = "Button3"
+        Me.Button3.Size = New System.Drawing.Size(83, 40)
+        Me.Button3.TabIndex = 28
+        Me.Button3.Text = "Update"
+        Me.Button3.UseVisualStyleBackColor = True
+        '
+        'txtFiltro
+        '
+        Me.txtFiltro.Location = New System.Drawing.Point(726, 318)
+        Me.txtFiltro.Name = "txtFiltro"
+        Me.txtFiltro.Size = New System.Drawing.Size(214, 26)
+        Me.txtFiltro.TabIndex = 27
         '
         'Label13
         '
@@ -358,22 +410,395 @@ Partial Class Materials
         Me.Label13.TabIndex = 26
         Me.Label13.Text = "Search"
         '
-        'txtFiltro
+        'TabPage2
         '
-        Me.txtFiltro.Location = New System.Drawing.Point(726, 318)
-        Me.txtFiltro.Name = "txtFiltro"
-        Me.txtFiltro.Size = New System.Drawing.Size(214, 26)
-        Me.txtFiltro.TabIndex = 27
+        Me.TabPage2.Controls.Add(Me.Button1)
+        Me.TabPage2.Controls.Add(Me.TextBox3)
+        Me.TabPage2.Controls.Add(Me.TextBox2)
+        Me.TabPage2.Controls.Add(Me.TextBox1)
+        Me.TabPage2.Controls.Add(Me.Label19)
+        Me.TabPage2.Controls.Add(Me.Label18)
+        Me.TabPage2.Controls.Add(Me.Label17)
+        Me.TabPage2.Controls.Add(Me.ComboBox3)
+        Me.TabPage2.Controls.Add(Me.Label16)
+        Me.TabPage2.Controls.Add(Me.ComboBox2)
+        Me.TabPage2.Controls.Add(Me.Label15)
+        Me.TabPage2.Controls.Add(Me.ComboBox1)
+        Me.TabPage2.Controls.Add(Me.Label14)
+        Me.TabPage2.Location = New System.Drawing.Point(4, 29)
+        Me.TabPage2.Name = "TabPage2"
+        Me.TabPage2.Padding = New System.Windows.Forms.Padding(3)
+        Me.TabPage2.Size = New System.Drawing.Size(1146, 402)
+        Me.TabPage2.TabIndex = 1
+        Me.TabPage2.Text = "Estimate Removal"
+        Me.TabPage2.UseVisualStyleBackColor = True
+        '
+        'Button1
+        '
+        Me.Button1.Location = New System.Drawing.Point(292, 264)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(196, 37)
+        Me.Button1.TabIndex = 12
+        Me.Button1.Text = "Estimate Removal"
+        Me.Button1.UseVisualStyleBackColor = True
+        '
+        'TextBox3
+        '
+        Me.TextBox3.Location = New System.Drawing.Point(578, 186)
+        Me.TextBox3.Name = "TextBox3"
+        Me.TextBox3.Size = New System.Drawing.Size(181, 26)
+        Me.TextBox3.TabIndex = 11
+        '
+        'TextBox2
+        '
+        Me.TextBox2.Location = New System.Drawing.Point(578, 109)
+        Me.TextBox2.Name = "TextBox2"
+        Me.TextBox2.Size = New System.Drawing.Size(181, 26)
+        Me.TextBox2.TabIndex = 10
+        '
+        'TextBox1
+        '
+        Me.TextBox1.Location = New System.Drawing.Point(578, 37)
+        Me.TextBox1.Name = "TextBox1"
+        Me.TextBox1.Size = New System.Drawing.Size(181, 26)
+        Me.TextBox1.TabIndex = 9
+        '
+        'Label19
+        '
+        Me.Label19.AutoSize = True
+        Me.Label19.Location = New System.Drawing.Point(430, 192)
+        Me.Label19.Name = "Label19"
+        Me.Label19.Size = New System.Drawing.Size(85, 20)
+        Me.Label19.TabIndex = 8
+        Me.Label19.Text = "IREq Rate"
+        '
+        'Label18
+        '
+        Me.Label18.AutoSize = True
+        Me.Label18.Location = New System.Drawing.Point(430, 115)
+        Me.Label18.Name = "Label18"
+        Me.Label18.Size = New System.Drawing.Size(92, 20)
+        Me.Label18.TabIndex = 7
+        Me.Label18.Text = "IRMat Rate"
+        '
+        'Label17
+        '
+        Me.Label17.AutoSize = True
+        Me.Label17.Location = New System.Drawing.Point(430, 43)
+        Me.Label17.Name = "Label17"
+        Me.Label17.Size = New System.Drawing.Size(104, 20)
+        Me.Label17.TabIndex = 6
+        Me.Label17.Text = "IRLabor Prod"
+        '
+        'ComboBox3
+        '
+        Me.ComboBox3.FormattingEnabled = True
+        Me.ComboBox3.Location = New System.Drawing.Point(131, 184)
+        Me.ComboBox3.Name = "ComboBox3"
+        Me.ComboBox3.Size = New System.Drawing.Size(132, 28)
+        Me.ComboBox3.TabIndex = 5
+        '
+        'Label16
+        '
+        Me.Label16.AutoSize = True
+        Me.Label16.Location = New System.Drawing.Point(27, 192)
+        Me.Label16.Name = "Label16"
+        Me.Label16.Size = New System.Drawing.Size(97, 20)
+        Me.Label16.TabIndex = 4
+        Me.Label16.Text = "IRThickness"
+        '
+        'ComboBox2
+        '
+        Me.ComboBox2.FormattingEnabled = True
+        Me.ComboBox2.Location = New System.Drawing.Point(131, 107)
+        Me.ComboBox2.Name = "ComboBox2"
+        Me.ComboBox2.Size = New System.Drawing.Size(132, 28)
+        Me.ComboBox2.TabIndex = 3
+        '
+        'Label15
+        '
+        Me.Label15.AutoSize = True
+        Me.Label15.Location = New System.Drawing.Point(27, 115)
+        Me.Label15.Name = "Label15"
+        Me.Label15.Size = New System.Drawing.Size(98, 20)
+        Me.Label15.TabIndex = 2
+        Me.Label15.Text = "IRInsul Type"
+        '
+        'ComboBox1
+        '
+        Me.ComboBox1.FormattingEnabled = True
+        Me.ComboBox1.Location = New System.Drawing.Point(131, 35)
+        Me.ComboBox1.Name = "ComboBox1"
+        Me.ComboBox1.Size = New System.Drawing.Size(132, 28)
+        Me.ComboBox1.TabIndex = 1
+        '
+        'Label14
+        '
+        Me.Label14.AutoSize = True
+        Me.Label14.Location = New System.Drawing.Point(27, 43)
+        Me.Label14.Name = "Label14"
+        Me.Label14.Size = New System.Drawing.Size(57, 20)
+        Me.Label14.TabIndex = 0
+        Me.Label14.Text = "IRSize"
         '
         'TabPage3
         '
+        Me.TabPage3.Controls.Add(Me.Button2)
+        Me.TabPage3.Controls.Add(Me.TextBox7)
+        Me.TabPage3.Controls.Add(Me.TextBox6)
+        Me.TabPage3.Controls.Add(Me.TextBox5)
+        Me.TabPage3.Controls.Add(Me.TextBox4)
+        Me.TabPage3.Controls.Add(Me.ComboBox5)
+        Me.TabPage3.Controls.Add(Me.ComboBox4)
+        Me.TabPage3.Controls.Add(Me.Label25)
+        Me.TabPage3.Controls.Add(Me.Label24)
+        Me.TabPage3.Controls.Add(Me.Label23)
+        Me.TabPage3.Controls.Add(Me.Label22)
+        Me.TabPage3.Controls.Add(Me.Label21)
+        Me.TabPage3.Controls.Add(Me.Label20)
         Me.TabPage3.Location = New System.Drawing.Point(4, 29)
         Me.TabPage3.Name = "TabPage3"
         Me.TabPage3.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage3.Size = New System.Drawing.Size(1146, 406)
+        Me.TabPage3.Size = New System.Drawing.Size(1146, 402)
         Me.TabPage3.TabIndex = 2
         Me.TabPage3.Text = "Estiamte Install"
         Me.TabPage3.UseVisualStyleBackColor = True
+        '
+        'Button2
+        '
+        Me.Button2.Location = New System.Drawing.Point(355, 276)
+        Me.Button2.Name = "Button2"
+        Me.Button2.Size = New System.Drawing.Size(142, 37)
+        Me.Button2.TabIndex = 12
+        Me.Button2.Text = "Estiamte Install"
+        Me.Button2.UseVisualStyleBackColor = True
+        '
+        'TextBox7
+        '
+        Me.TextBox7.Location = New System.Drawing.Point(565, 198)
+        Me.TextBox7.Name = "TextBox7"
+        Me.TextBox7.Size = New System.Drawing.Size(163, 26)
+        Me.TextBox7.TabIndex = 11
+        '
+        'TextBox6
+        '
+        Me.TextBox6.Location = New System.Drawing.Point(565, 117)
+        Me.TextBox6.Name = "TextBox6"
+        Me.TextBox6.Size = New System.Drawing.Size(163, 26)
+        Me.TextBox6.TabIndex = 10
+        '
+        'TextBox5
+        '
+        Me.TextBox5.Location = New System.Drawing.Point(565, 46)
+        Me.TextBox5.Name = "TextBox5"
+        Me.TextBox5.Size = New System.Drawing.Size(163, 26)
+        Me.TextBox5.TabIndex = 9
+        '
+        'TextBox4
+        '
+        Me.TextBox4.Location = New System.Drawing.Point(149, 195)
+        Me.TextBox4.Name = "TextBox4"
+        Me.TextBox4.Size = New System.Drawing.Size(159, 26)
+        Me.TextBox4.TabIndex = 8
+        '
+        'ComboBox5
+        '
+        Me.ComboBox5.FormattingEnabled = True
+        Me.ComboBox5.Location = New System.Drawing.Point(149, 115)
+        Me.ComboBox5.Name = "ComboBox5"
+        Me.ComboBox5.Size = New System.Drawing.Size(159, 28)
+        Me.ComboBox5.TabIndex = 7
+        '
+        'ComboBox4
+        '
+        Me.ComboBox4.FormattingEnabled = True
+        Me.ComboBox4.Location = New System.Drawing.Point(149, 44)
+        Me.ComboBox4.Name = "ComboBox4"
+        Me.ComboBox4.Size = New System.Drawing.Size(159, 28)
+        Me.ComboBox4.TabIndex = 6
+        '
+        'Label25
+        '
+        Me.Label25.AutoSize = True
+        Me.Label25.Location = New System.Drawing.Point(448, 201)
+        Me.Label25.Name = "Label25"
+        Me.Label25.Size = New System.Drawing.Size(68, 20)
+        Me.Label25.TabIndex = 5
+        Me.Label25.Text = "Eq Rate"
+        '
+        'Label24
+        '
+        Me.Label24.AutoSize = True
+        Me.Label24.Location = New System.Drawing.Point(448, 123)
+        Me.Label24.Name = "Label24"
+        Me.Label24.Size = New System.Drawing.Size(75, 20)
+        Me.Label24.TabIndex = 4
+        Me.Label24.Text = "Mat Rate"
+        '
+        'Label23
+        '
+        Me.Label23.AutoSize = True
+        Me.Label23.Location = New System.Drawing.Point(448, 52)
+        Me.Label23.Name = "Label23"
+        Me.Label23.Size = New System.Drawing.Size(87, 20)
+        Me.Label23.TabIndex = 3
+        Me.Label23.Text = "Labor Prod"
+        '
+        'Label22
+        '
+        Me.Label22.AutoSize = True
+        Me.Label22.Location = New System.Drawing.Point(57, 201)
+        Me.Label22.Name = "Label22"
+        Me.Label22.Size = New System.Drawing.Size(35, 20)
+        Me.Label22.TabIndex = 2
+        Me.Label22.Text = "Thk"
+        '
+        'Label21
+        '
+        Me.Label21.AutoSize = True
+        Me.Label21.Location = New System.Drawing.Point(57, 123)
+        Me.Label21.Name = "Label21"
+        Me.Label21.Size = New System.Drawing.Size(43, 20)
+        Me.Label21.TabIndex = 1
+        Me.Label21.Text = "Type"
+        '
+        'Label20
+        '
+        Me.Label20.AutoSize = True
+        Me.Label20.Location = New System.Drawing.Point(57, 52)
+        Me.Label20.Name = "Label20"
+        Me.Label20.Size = New System.Drawing.Size(40, 20)
+        Me.Label20.TabIndex = 0
+        Me.Label20.Text = "Size"
+        '
+        'TabPage4
+        '
+        Me.TabPage4.Controls.Add(Me.ComboBox6)
+        Me.TabPage4.Controls.Add(Me.Button4)
+        Me.TabPage4.Controls.Add(Me.TextBox13)
+        Me.TabPage4.Controls.Add(Me.TextBox12)
+        Me.TabPage4.Controls.Add(Me.TextBox11)
+        Me.TabPage4.Controls.Add(Me.TextBox9)
+        Me.TabPage4.Controls.Add(Me.TextBox8)
+        Me.TabPage4.Controls.Add(Me.Label31)
+        Me.TabPage4.Controls.Add(Me.Label30)
+        Me.TabPage4.Controls.Add(Me.Label29)
+        Me.TabPage4.Controls.Add(Me.Label28)
+        Me.TabPage4.Controls.Add(Me.Label27)
+        Me.TabPage4.Controls.Add(Me.Label26)
+        Me.TabPage4.Location = New System.Drawing.Point(4, 29)
+        Me.TabPage4.Name = "TabPage4"
+        Me.TabPage4.Padding = New System.Windows.Forms.Padding(3)
+        Me.TabPage4.Size = New System.Drawing.Size(1146, 402)
+        Me.TabPage4.TabIndex = 3
+        Me.TabPage4.Text = "Estimate Paint"
+        Me.TabPage4.UseVisualStyleBackColor = True
+        '
+        'Label26
+        '
+        Me.Label26.AutoSize = True
+        Me.Label26.Location = New System.Drawing.Point(33, 32)
+        Me.Label26.Name = "Label26"
+        Me.Label26.Size = New System.Drawing.Size(35, 20)
+        Me.Label26.TabIndex = 0
+        Me.Label26.Text = "Sys"
+        '
+        'Label27
+        '
+        Me.Label27.AutoSize = True
+        Me.Label27.Location = New System.Drawing.Point(33, 104)
+        Me.Label27.Name = "Label27"
+        Me.Label27.Size = New System.Drawing.Size(56, 20)
+        Me.Label27.TabIndex = 1
+        Me.Label27.Text = "Option"
+        '
+        'Label28
+        '
+        Me.Label28.AutoSize = True
+        Me.Label28.Location = New System.Drawing.Point(33, 182)
+        Me.Label28.Name = "Label28"
+        Me.Label28.Size = New System.Drawing.Size(40, 20)
+        Me.Label28.TabIndex = 2
+        Me.Label28.Text = "Size"
+        '
+        'Label29
+        '
+        Me.Label29.AutoSize = True
+        Me.Label29.Location = New System.Drawing.Point(404, 32)
+        Me.Label29.Name = "Label29"
+        Me.Label29.Size = New System.Drawing.Size(87, 20)
+        Me.Label29.TabIndex = 3
+        Me.Label29.Text = "Labor Prod"
+        '
+        'Label30
+        '
+        Me.Label30.AutoSize = True
+        Me.Label30.Location = New System.Drawing.Point(404, 104)
+        Me.Label30.Name = "Label30"
+        Me.Label30.Size = New System.Drawing.Size(75, 20)
+        Me.Label30.TabIndex = 4
+        Me.Label30.Text = "Mat Rate"
+        '
+        'Label31
+        '
+        Me.Label31.AutoSize = True
+        Me.Label31.Location = New System.Drawing.Point(404, 182)
+        Me.Label31.Name = "Label31"
+        Me.Label31.Size = New System.Drawing.Size(68, 20)
+        Me.Label31.TabIndex = 5
+        Me.Label31.Text = "Eq Rate"
+        '
+        'TextBox8
+        '
+        Me.TextBox8.Location = New System.Drawing.Point(110, 26)
+        Me.TextBox8.Name = "TextBox8"
+        Me.TextBox8.Size = New System.Drawing.Size(155, 26)
+        Me.TextBox8.TabIndex = 6
+        '
+        'TextBox9
+        '
+        Me.TextBox9.Location = New System.Drawing.Point(110, 98)
+        Me.TextBox9.Name = "TextBox9"
+        Me.TextBox9.Size = New System.Drawing.Size(155, 26)
+        Me.TextBox9.TabIndex = 7
+        '
+        'TextBox11
+        '
+        Me.TextBox11.Location = New System.Drawing.Point(519, 29)
+        Me.TextBox11.Name = "TextBox11"
+        Me.TextBox11.Size = New System.Drawing.Size(168, 26)
+        Me.TextBox11.TabIndex = 9
+        '
+        'TextBox12
+        '
+        Me.TextBox12.Location = New System.Drawing.Point(519, 101)
+        Me.TextBox12.Name = "TextBox12"
+        Me.TextBox12.Size = New System.Drawing.Size(168, 26)
+        Me.TextBox12.TabIndex = 10
+        '
+        'TextBox13
+        '
+        Me.TextBox13.Location = New System.Drawing.Point(519, 179)
+        Me.TextBox13.Name = "TextBox13"
+        Me.TextBox13.Size = New System.Drawing.Size(168, 26)
+        Me.TextBox13.TabIndex = 11
+        '
+        'Button4
+        '
+        Me.Button4.Location = New System.Drawing.Point(320, 268)
+        Me.Button4.Name = "Button4"
+        Me.Button4.Size = New System.Drawing.Size(171, 37)
+        Me.Button4.TabIndex = 12
+        Me.Button4.Text = "Estimate Paint"
+        Me.Button4.UseVisualStyleBackColor = True
+        '
+        'ComboBox6
+        '
+        Me.ComboBox6.FormattingEnabled = True
+        Me.ComboBox6.Location = New System.Drawing.Point(110, 174)
+        Me.ComboBox6.Name = "ComboBox6"
+        Me.ComboBox6.Size = New System.Drawing.Size(155, 28)
+        Me.ComboBox6.TabIndex = 13
         '
         'Materials
         '
@@ -389,6 +814,12 @@ Partial Class Materials
         Me.TabControl1.ResumeLayout(False)
         Me.TabPage1.ResumeLayout(False)
         Me.TabPage1.PerformLayout()
+        Me.TabPage2.ResumeLayout(False)
+        Me.TabPage2.PerformLayout()
+        Me.TabPage3.ResumeLayout(False)
+        Me.TabPage3.PerformLayout()
+        Me.TabPage4.ResumeLayout(False)
+        Me.TabPage4.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -426,4 +857,45 @@ Partial Class Materials
     Friend WithEvents Label13 As Label
     Friend WithEvents TabPage2 As TabPage
     Friend WithEvents TabPage3 As TabPage
+    Friend WithEvents Button1 As Button
+    Friend WithEvents TextBox3 As TextBox
+    Friend WithEvents TextBox2 As TextBox
+    Friend WithEvents TextBox1 As TextBox
+    Friend WithEvents Label19 As Label
+    Friend WithEvents Label18 As Label
+    Friend WithEvents Label17 As Label
+    Friend WithEvents ComboBox3 As ComboBox
+    Friend WithEvents Label16 As Label
+    Friend WithEvents ComboBox2 As ComboBox
+    Friend WithEvents Label15 As Label
+    Friend WithEvents ComboBox1 As ComboBox
+    Friend WithEvents Label14 As Label
+    Friend WithEvents Button2 As Button
+    Friend WithEvents TextBox7 As TextBox
+    Friend WithEvents TextBox6 As TextBox
+    Friend WithEvents TextBox5 As TextBox
+    Friend WithEvents TextBox4 As TextBox
+    Friend WithEvents ComboBox5 As ComboBox
+    Friend WithEvents ComboBox4 As ComboBox
+    Friend WithEvents Label25 As Label
+    Friend WithEvents Label24 As Label
+    Friend WithEvents Label23 As Label
+    Friend WithEvents Label22 As Label
+    Friend WithEvents Label21 As Label
+    Friend WithEvents Label20 As Label
+    Friend WithEvents Button3 As Button
+    Friend WithEvents TabPage4 As TabPage
+    Friend WithEvents ComboBox6 As ComboBox
+    Friend WithEvents Button4 As Button
+    Friend WithEvents TextBox13 As TextBox
+    Friend WithEvents TextBox12 As TextBox
+    Friend WithEvents TextBox11 As TextBox
+    Friend WithEvents TextBox9 As TextBox
+    Friend WithEvents TextBox8 As TextBox
+    Friend WithEvents Label31 As Label
+    Friend WithEvents Label30 As Label
+    Friend WithEvents Label29 As Label
+    Friend WithEvents Label28 As Label
+    Friend WithEvents Label27 As Label
+    Friend WithEvents Label26 As Label
 End Class

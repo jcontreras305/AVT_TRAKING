@@ -15,4 +15,10 @@
         Employees.Show()
         Me.Finalize()
     End Sub
+
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+        Dim a As New WorkCodes
+        a.Show()
+        Me.Finalize()
+    End Sub
 End Class

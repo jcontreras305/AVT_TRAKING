@@ -64,4 +64,18 @@ Public Class Materials
 
         Me.DataGridView1.DataSource = dt
     End Sub
+
+    Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
+        Dim actulizar As String = ("UPDATE materials SET Vendor ='" & Me.txtVendor.Text & "', MSize ='" & Me.txtMsize.Text & "',MType ='" & Me.txtMtype.Text & "',
+                        MThickness = '" & Me.txtMthickness.Text & "', MPrize ='" & Me.txtMprize.Text & "',MDesc = '" & Me.txtMdesc.Text & "', Class = '" & Me.txtClass.Text & "',
+                        ElbowType = '" & Me.txtElbowType.Text & ", ElbowThickness ='" & Me.txtElbowThinckness.Text & "', ElbowPrize = '" & Me.txtElbowPrize.Text & "', 
+                        ElbowDesc = '" & Me.txtElbowDesc.Text & "' WHERE IdMaterials =" & Conversion.Int(Me.txtIdMaterials.Text) & "")
+
+        If (mate.UpdateMaterial(actulizar)) Then
+            MessageBox.Show("Datos Actualizados correctamente")
+            MostrarDatos()
+        Else
+            MessageBox.Show("Error al Actualizar")
+        End If
+    End Sub
 End Class
