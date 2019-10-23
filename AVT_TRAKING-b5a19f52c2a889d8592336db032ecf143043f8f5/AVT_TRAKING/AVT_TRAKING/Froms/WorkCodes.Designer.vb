@@ -49,6 +49,7 @@ Partial Class WorkCodes
         Me.Button1 = New System.Windows.Forms.Button()
         Me.txtFiltro = New System.Windows.Forms.TextBox()
         Me.Label11 = New System.Windows.Forms.Label()
+        Me.Button2 = New System.Windows.Forms.Button()
         Me.Panel1.SuspendLayout()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
@@ -298,11 +299,22 @@ Partial Class WorkCodes
         Me.Label11.TabIndex = 23
         Me.Label11.Text = "Search"
         '
+        'Button2
+        '
+        Me.Button2.ForeColor = System.Drawing.Color.Red
+        Me.Button2.Location = New System.Drawing.Point(1097, 12)
+        Me.Button2.Name = "Button2"
+        Me.Button2.Size = New System.Drawing.Size(65, 33)
+        Me.Button2.TabIndex = 3
+        Me.Button2.Text = "Exit"
+        Me.Button2.UseVisualStyleBackColor = True
+        '
         'WorkCodes
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 20.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1174, 675)
+        Me.Controls.Add(Me.Button2)
         Me.Controls.Add(Me.Button1)
         Me.Controls.Add(Me.DataGridView1)
         Me.Controls.Add(Me.Panel1)
@@ -342,4 +354,5 @@ Partial Class WorkCodes
     Friend WithEvents btnSave As Button
     Friend WithEvents Label11 As Label
     Friend WithEvents txtFiltro As TextBox
+    Friend WithEvents Button2 As Button
 End Class

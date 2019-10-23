@@ -61,6 +61,7 @@ Partial Class Clients
         Me.TabPage2 = New System.Windows.Forms.TabPage()
         Me.Label15 = New System.Windows.Forms.Label()
         Me.txtEmail = New System.Windows.Forms.TextBox()
+        Me.Button1 = New System.Windows.Forms.Button()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
@@ -424,11 +425,22 @@ Partial Class Clients
         Me.txtEmail.Size = New System.Drawing.Size(336, 26)
         Me.txtEmail.TabIndex = 24
         '
+        'Button1
+        '
+        Me.Button1.ForeColor = System.Drawing.Color.Red
+        Me.Button1.Location = New System.Drawing.Point(1109, 12)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(75, 36)
+        Me.Button1.TabIndex = 4
+        Me.Button1.Text = "Exit"
+        Me.Button1.UseVisualStyleBackColor = True
+        '
         'Clients
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 20.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1191, 670)
+        Me.Controls.Add(Me.Button1)
         Me.Controls.Add(Me.TabControl1)
         Me.Controls.Add(Me.DataGridView1)
         Me.Controls.Add(Me.btnMenu)
@@ -482,4 +494,5 @@ Partial Class Clients
     Friend WithEvents txtEmail As TextBox
     Friend WithEvents btnFiltro As Button
     Friend WithEvents txtFiltro As TextBox
+    Friend WithEvents Button1 As Button
 End Class

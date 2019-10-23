@@ -21,7 +21,8 @@
         Try 'verifico que los campos de usuer y password esten llenos
             If (txtUser.Text <> String.Empty And txtUser.Text.Length > 0) And (txtPassword.Text <> String.Empty And txtPassword.Text.Length > 0) Then
                 If mtdLogin.StartLogin(txtUser.Text, txtPassword.Text) Then
-                    MainFrom.Show()
+                    Dim a As New MainFrom
+                    a.Show()
                     Me.Visible = False
                 Else
                     txtUser.Clear()

@@ -61,4 +61,10 @@ Public Class WorkCodes
 
         Me.DataGridView1.DataSource = dt
     End Sub
+
+    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
+        Dim a As New Login
+        a.Show()
+        Me.Finalize()
+    End Sub
 End Class

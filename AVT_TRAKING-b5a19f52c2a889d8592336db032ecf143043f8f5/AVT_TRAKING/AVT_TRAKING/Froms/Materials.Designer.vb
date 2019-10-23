@@ -84,19 +84,20 @@ Partial Class Materials
         Me.Label21 = New System.Windows.Forms.Label()
         Me.Label20 = New System.Windows.Forms.Label()
         Me.TabPage4 = New System.Windows.Forms.TabPage()
-        Me.Label26 = New System.Windows.Forms.Label()
-        Me.Label27 = New System.Windows.Forms.Label()
-        Me.Label28 = New System.Windows.Forms.Label()
-        Me.Label29 = New System.Windows.Forms.Label()
-        Me.Label30 = New System.Windows.Forms.Label()
-        Me.Label31 = New System.Windows.Forms.Label()
-        Me.TextBox8 = New System.Windows.Forms.TextBox()
-        Me.TextBox9 = New System.Windows.Forms.TextBox()
-        Me.TextBox11 = New System.Windows.Forms.TextBox()
-        Me.TextBox12 = New System.Windows.Forms.TextBox()
-        Me.TextBox13 = New System.Windows.Forms.TextBox()
-        Me.Button4 = New System.Windows.Forms.Button()
         Me.ComboBox6 = New System.Windows.Forms.ComboBox()
+        Me.Button4 = New System.Windows.Forms.Button()
+        Me.TextBox13 = New System.Windows.Forms.TextBox()
+        Me.TextBox12 = New System.Windows.Forms.TextBox()
+        Me.TextBox11 = New System.Windows.Forms.TextBox()
+        Me.TextBox9 = New System.Windows.Forms.TextBox()
+        Me.TextBox8 = New System.Windows.Forms.TextBox()
+        Me.Label31 = New System.Windows.Forms.Label()
+        Me.Label30 = New System.Windows.Forms.Label()
+        Me.Label29 = New System.Windows.Forms.Label()
+        Me.Label28 = New System.Windows.Forms.Label()
+        Me.Label27 = New System.Windows.Forms.Label()
+        Me.Label26 = New System.Windows.Forms.Label()
+        Me.Button5 = New System.Windows.Forms.Button()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
@@ -694,94 +695,13 @@ Partial Class Materials
         Me.TabPage4.Text = "Estimate Paint"
         Me.TabPage4.UseVisualStyleBackColor = True
         '
-        'Label26
+        'ComboBox6
         '
-        Me.Label26.AutoSize = True
-        Me.Label26.Location = New System.Drawing.Point(33, 32)
-        Me.Label26.Name = "Label26"
-        Me.Label26.Size = New System.Drawing.Size(35, 20)
-        Me.Label26.TabIndex = 0
-        Me.Label26.Text = "Sys"
-        '
-        'Label27
-        '
-        Me.Label27.AutoSize = True
-        Me.Label27.Location = New System.Drawing.Point(33, 104)
-        Me.Label27.Name = "Label27"
-        Me.Label27.Size = New System.Drawing.Size(56, 20)
-        Me.Label27.TabIndex = 1
-        Me.Label27.Text = "Option"
-        '
-        'Label28
-        '
-        Me.Label28.AutoSize = True
-        Me.Label28.Location = New System.Drawing.Point(33, 182)
-        Me.Label28.Name = "Label28"
-        Me.Label28.Size = New System.Drawing.Size(40, 20)
-        Me.Label28.TabIndex = 2
-        Me.Label28.Text = "Size"
-        '
-        'Label29
-        '
-        Me.Label29.AutoSize = True
-        Me.Label29.Location = New System.Drawing.Point(404, 32)
-        Me.Label29.Name = "Label29"
-        Me.Label29.Size = New System.Drawing.Size(87, 20)
-        Me.Label29.TabIndex = 3
-        Me.Label29.Text = "Labor Prod"
-        '
-        'Label30
-        '
-        Me.Label30.AutoSize = True
-        Me.Label30.Location = New System.Drawing.Point(404, 104)
-        Me.Label30.Name = "Label30"
-        Me.Label30.Size = New System.Drawing.Size(75, 20)
-        Me.Label30.TabIndex = 4
-        Me.Label30.Text = "Mat Rate"
-        '
-        'Label31
-        '
-        Me.Label31.AutoSize = True
-        Me.Label31.Location = New System.Drawing.Point(404, 182)
-        Me.Label31.Name = "Label31"
-        Me.Label31.Size = New System.Drawing.Size(68, 20)
-        Me.Label31.TabIndex = 5
-        Me.Label31.Text = "Eq Rate"
-        '
-        'TextBox8
-        '
-        Me.TextBox8.Location = New System.Drawing.Point(110, 26)
-        Me.TextBox8.Name = "TextBox8"
-        Me.TextBox8.Size = New System.Drawing.Size(155, 26)
-        Me.TextBox8.TabIndex = 6
-        '
-        'TextBox9
-        '
-        Me.TextBox9.Location = New System.Drawing.Point(110, 98)
-        Me.TextBox9.Name = "TextBox9"
-        Me.TextBox9.Size = New System.Drawing.Size(155, 26)
-        Me.TextBox9.TabIndex = 7
-        '
-        'TextBox11
-        '
-        Me.TextBox11.Location = New System.Drawing.Point(519, 29)
-        Me.TextBox11.Name = "TextBox11"
-        Me.TextBox11.Size = New System.Drawing.Size(168, 26)
-        Me.TextBox11.TabIndex = 9
-        '
-        'TextBox12
-        '
-        Me.TextBox12.Location = New System.Drawing.Point(519, 101)
-        Me.TextBox12.Name = "TextBox12"
-        Me.TextBox12.Size = New System.Drawing.Size(168, 26)
-        Me.TextBox12.TabIndex = 10
-        '
-        'TextBox13
-        '
-        Me.TextBox13.Location = New System.Drawing.Point(519, 179)
-        Me.TextBox13.Name = "TextBox13"
-        Me.TextBox13.Size = New System.Drawing.Size(168, 26)
-        Me.TextBox13.TabIndex = 11
+        Me.ComboBox6.FormattingEnabled = True
+        Me.ComboBox6.Location = New System.Drawing.Point(110, 174)
+        Me.ComboBox6.Name = "ComboBox6"
+        Me.ComboBox6.Size = New System.Drawing.Size(155, 28)
+        Me.ComboBox6.TabIndex = 13
         '
         'Button4
         '
@@ -792,19 +712,111 @@ Partial Class Materials
         Me.Button4.Text = "Estimate Paint"
         Me.Button4.UseVisualStyleBackColor = True
         '
-        'ComboBox6
+        'TextBox13
         '
-        Me.ComboBox6.FormattingEnabled = True
-        Me.ComboBox6.Location = New System.Drawing.Point(110, 174)
-        Me.ComboBox6.Name = "ComboBox6"
-        Me.ComboBox6.Size = New System.Drawing.Size(155, 28)
-        Me.ComboBox6.TabIndex = 13
+        Me.TextBox13.Location = New System.Drawing.Point(519, 179)
+        Me.TextBox13.Name = "TextBox13"
+        Me.TextBox13.Size = New System.Drawing.Size(168, 26)
+        Me.TextBox13.TabIndex = 11
+        '
+        'TextBox12
+        '
+        Me.TextBox12.Location = New System.Drawing.Point(519, 101)
+        Me.TextBox12.Name = "TextBox12"
+        Me.TextBox12.Size = New System.Drawing.Size(168, 26)
+        Me.TextBox12.TabIndex = 10
+        '
+        'TextBox11
+        '
+        Me.TextBox11.Location = New System.Drawing.Point(519, 29)
+        Me.TextBox11.Name = "TextBox11"
+        Me.TextBox11.Size = New System.Drawing.Size(168, 26)
+        Me.TextBox11.TabIndex = 9
+        '
+        'TextBox9
+        '
+        Me.TextBox9.Location = New System.Drawing.Point(110, 98)
+        Me.TextBox9.Name = "TextBox9"
+        Me.TextBox9.Size = New System.Drawing.Size(155, 26)
+        Me.TextBox9.TabIndex = 7
+        '
+        'TextBox8
+        '
+        Me.TextBox8.Location = New System.Drawing.Point(110, 26)
+        Me.TextBox8.Name = "TextBox8"
+        Me.TextBox8.Size = New System.Drawing.Size(155, 26)
+        Me.TextBox8.TabIndex = 6
+        '
+        'Label31
+        '
+        Me.Label31.AutoSize = True
+        Me.Label31.Location = New System.Drawing.Point(404, 182)
+        Me.Label31.Name = "Label31"
+        Me.Label31.Size = New System.Drawing.Size(68, 20)
+        Me.Label31.TabIndex = 5
+        Me.Label31.Text = "Eq Rate"
+        '
+        'Label30
+        '
+        Me.Label30.AutoSize = True
+        Me.Label30.Location = New System.Drawing.Point(404, 104)
+        Me.Label30.Name = "Label30"
+        Me.Label30.Size = New System.Drawing.Size(75, 20)
+        Me.Label30.TabIndex = 4
+        Me.Label30.Text = "Mat Rate"
+        '
+        'Label29
+        '
+        Me.Label29.AutoSize = True
+        Me.Label29.Location = New System.Drawing.Point(404, 32)
+        Me.Label29.Name = "Label29"
+        Me.Label29.Size = New System.Drawing.Size(87, 20)
+        Me.Label29.TabIndex = 3
+        Me.Label29.Text = "Labor Prod"
+        '
+        'Label28
+        '
+        Me.Label28.AutoSize = True
+        Me.Label28.Location = New System.Drawing.Point(33, 182)
+        Me.Label28.Name = "Label28"
+        Me.Label28.Size = New System.Drawing.Size(40, 20)
+        Me.Label28.TabIndex = 2
+        Me.Label28.Text = "Size"
+        '
+        'Label27
+        '
+        Me.Label27.AutoSize = True
+        Me.Label27.Location = New System.Drawing.Point(33, 104)
+        Me.Label27.Name = "Label27"
+        Me.Label27.Size = New System.Drawing.Size(56, 20)
+        Me.Label27.TabIndex = 1
+        Me.Label27.Text = "Option"
+        '
+        'Label26
+        '
+        Me.Label26.AutoSize = True
+        Me.Label26.Location = New System.Drawing.Point(33, 32)
+        Me.Label26.Name = "Label26"
+        Me.Label26.Size = New System.Drawing.Size(35, 20)
+        Me.Label26.TabIndex = 0
+        Me.Label26.Text = "Sys"
+        '
+        'Button5
+        '
+        Me.Button5.ForeColor = System.Drawing.Color.Red
+        Me.Button5.Location = New System.Drawing.Point(1090, 12)
+        Me.Button5.Name = "Button5"
+        Me.Button5.Size = New System.Drawing.Size(72, 32)
+        Me.Button5.TabIndex = 4
+        Me.Button5.Text = "Exit"
+        Me.Button5.UseVisualStyleBackColor = True
         '
         'Materials
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 20.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1174, 708)
+        Me.Controls.Add(Me.Button5)
         Me.Controls.Add(Me.TabControl1)
         Me.Controls.Add(Me.btnMenu)
         Me.Controls.Add(Me.DataGridView1)
@@ -898,4 +910,5 @@ Partial Class Materials
     Friend WithEvents Label28 As Label
     Friend WithEvents Label27 As Label
     Friend WithEvents Label26 As Label
+    Friend WithEvents Button5 As Button
 End Class

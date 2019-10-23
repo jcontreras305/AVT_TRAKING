@@ -67,6 +67,12 @@ Public Class Clients
         Me.DataGridView1.DataSource = dt
     End Sub
 
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+        Dim a As New Login
+        a.Show()
+        Me.Finalize()
+    End Sub
+
     ' Public Sub BuscaDatos()
     '    client.BuscarClients("select * from clients where CompanyName like '" + txtFiltro.Text + "%'")
     'Me.DataGridView1.DataSource = client.ds.Tables("clients")

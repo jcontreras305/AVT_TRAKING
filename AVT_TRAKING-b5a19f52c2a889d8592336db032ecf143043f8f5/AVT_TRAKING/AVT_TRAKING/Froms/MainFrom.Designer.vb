@@ -23,15 +23,17 @@ Partial Class MainFrom
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.Button1 = New System.Windows.Forms.Button()
         Me.btnEmployees = New System.Windows.Forms.Button()
         Me.btnClients = New System.Windows.Forms.Button()
         Me.btnMaterials = New System.Windows.Forms.Button()
-        Me.Button1 = New System.Windows.Forms.Button()
+        Me.Button2 = New System.Windows.Forms.Button()
         Me.Panel1.SuspendLayout()
         Me.SuspendLayout()
         '
         'Panel1
         '
+        Me.Panel1.Controls.Add(Me.Button2)
         Me.Panel1.Controls.Add(Me.Button1)
         Me.Panel1.Controls.Add(Me.btnEmployees)
         Me.Panel1.Controls.Add(Me.btnClients)
@@ -40,6 +42,15 @@ Partial Class MainFrom
         Me.Panel1.Name = "Panel1"
         Me.Panel1.Size = New System.Drawing.Size(795, 443)
         Me.Panel1.TabIndex = 0
+        '
+        'Button1
+        '
+        Me.Button1.Location = New System.Drawing.Point(454, 60)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(122, 37)
+        Me.Button1.TabIndex = 3
+        Me.Button1.Text = "Work Codes"
+        Me.Button1.UseVisualStyleBackColor = True
         '
         'btnEmployees
         '
@@ -68,14 +79,15 @@ Partial Class MainFrom
         Me.btnMaterials.Text = "Materials"
         Me.btnMaterials.UseVisualStyleBackColor = True
         '
-        'Button1
+        'Button2
         '
-        Me.Button1.Location = New System.Drawing.Point(454, 60)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(122, 37)
-        Me.Button1.TabIndex = 3
-        Me.Button1.Text = "Work Codes"
-        Me.Button1.UseVisualStyleBackColor = True
+        Me.Button2.ForeColor = System.Drawing.Color.Red
+        Me.Button2.Location = New System.Drawing.Point(719, 402)
+        Me.Button2.Name = "Button2"
+        Me.Button2.Size = New System.Drawing.Size(67, 30)
+        Me.Button2.TabIndex = 4
+        Me.Button2.Text = "Exit"
+        Me.Button2.UseVisualStyleBackColor = True
         '
         'MainFrom
         '
@@ -95,4 +107,5 @@ Partial Class MainFrom
     Friend WithEvents btnClients As Button
     Friend WithEvents btnMaterials As Button
     Friend WithEvents Button1 As Button
+    Friend WithEvents Button2 As Button
 End Class
