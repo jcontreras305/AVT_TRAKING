@@ -81,12 +81,12 @@ PostalCode int,
 ContactFirstName varchar(20), 
 ContactLastName varchar(20), 
 ContactTitle varchar(20), 
-PhoneNumber varchar(15), 
+PhoneNumber varchar(15),
+Email varchar(50),
 JobNumber int, 
 SubJob int, 
 CostCode varchar(25), 
-WorkLumpsum varchar(10), 
-
+WorkLumpsum varchar(10) 
 )
 insert into clients values(5555,'Cementera','Calle mirador','Jacona','Michoacan',59890,'Andres','Reyes','Supervisor',
 							'815-955-9982',8847,200,'240000000000000','T&M'),
