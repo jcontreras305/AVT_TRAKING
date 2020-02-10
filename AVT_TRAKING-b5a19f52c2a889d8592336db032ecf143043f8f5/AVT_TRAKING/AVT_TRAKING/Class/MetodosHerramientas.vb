@@ -1,5 +1,6 @@
 ﻿Imports System.Data.SqlClient
-Public Class MetodosMaterials
+
+Public Class MetodosHerramientas
 
     Dim conexion As New ConnectioDB
 
@@ -8,14 +9,15 @@ Public Class MetodosMaterials
     Public da As SqlDataAdapter
     Public comando As SqlCommand
 
-    Public Sub ConsultaMaterials(ByVal sql As String)
+    Public Sub ConsultaHerramientas(ByVal sql As String)
         conexion.conectar()
         ds.Tables.Clear()
         da = New SqlDataAdapter(sql, conexion.conn)
         cmb = New SqlCommandBuilder(da)
-        da.Fill(ds, "materials")
+        da.Fill(ds, "herramientas")
     End Sub
-    Function InsertarMaterials(ByVal sql)
+
+    Function InsertarHerramienta(ByVal sql)
         conexion.conectar()
         comando = New SqlCommand(sql, conexion.conn)
 
@@ -27,30 +29,16 @@ Public Class MetodosMaterials
         End If
     End Function
 
-    Function InsertarDetalleMaterial(ByVal sql)
-        conexion.conectar()
-        comando = New SqlCommand(sql, conexion.conn)
 
-        Dim i As Integer = comando.ExecuteNonQuery()
-        If (1 >= 0) Then
-            Return True
-        Else
-            Return False
-        End If
-    End Function
 
-    Public Sub ConsultaDetallesMaterials(ByVal sql As String)
+    'METODOS PARA LA TABLA DETALLES DE HERRAMIENTAS
+
+    Public Sub ConsultaDetallesH(ByVal sql As String)
         conexion.conectar()
         ds.Tables.Clear()
         da = New SqlDataAdapter(sql, conexion.conn)
         cmb = New SqlCommandBuilder(da)
-        da.Fill(ds, "DetallesMaterials")
+        da.Fill(ds, "Detallesherramientas")
     End Sub
 
-    Function UpdateMaterial(ByVal sql)
-        conexion.conectar()
-        comando = New SqlCommand(sql, conexion.conn)
-        comando.ExecuteNonQuery()
-
-    End Function
 End Class

@@ -1,21 +1,23 @@
 ﻿Imports System.Data.SqlClient
-Public Class MetodosMaterials
 
+Public Class MetodosVendor
     Dim conexion As New ConnectioDB
+
 
     Private cmb As SqlCommandBuilder
     Public ds As DataSet = New DataSet()
     Public da As SqlDataAdapter
     Public comando As SqlCommand
 
-    Public Sub ConsultaMaterials(ByVal sql As String)
+    Public Sub ConsultaVendor(ByVal sql As String)
         conexion.conectar()
         ds.Tables.Clear()
         da = New SqlDataAdapter(sql, conexion.conn)
         cmb = New SqlCommandBuilder(da)
-        da.Fill(ds, "materials")
+        da.Fill(ds, "vendor")
     End Sub
-    Function InsertarMaterials(ByVal sql)
+
+    Function InsertarVendor(ByVal sql)
         conexion.conectar()
         comando = New SqlCommand(sql, conexion.conn)
 
@@ -27,30 +29,25 @@ Public Class MetodosMaterials
         End If
     End Function
 
-    Function InsertarDetalleMaterial(ByVal sql)
-        conexion.conectar()
-        comando = New SqlCommand(sql, conexion.conn)
-
-        Dim i As Integer = comando.ExecuteNonQuery()
-        If (1 >= 0) Then
-            Return True
-        Else
-            Return False
-        End If
-    End Function
-
-    Public Sub ConsultaDetallesMaterials(ByVal sql As String)
+    'METODOS PARA LA INTERFAZ DE TIPOS DE VENDOR
+    Public Sub ConsultaVendorTipo(ByVal sql As String)
         conexion.conectar()
         ds.Tables.Clear()
         da = New SqlDataAdapter(sql, conexion.conn)
         cmb = New SqlCommandBuilder(da)
-        da.Fill(ds, "DetallesMaterials")
+        da.Fill(ds, "tipoVendor")
     End Sub
 
-    Function UpdateMaterial(ByVal sql)
+
+    Function InsertarTipoVendor(ByVal sql)
         conexion.conectar()
         comando = New SqlCommand(sql, conexion.conn)
-        comando.ExecuteNonQuery()
 
+        Dim i As String = comando.CommandText
+        If (True) Then
+            Return True
+        Else
+            Return False
+        End If
     End Function
 End Class

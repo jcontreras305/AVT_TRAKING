@@ -75,7 +75,22 @@
   <ItemGroup>
     <Compile Include="Class\MetodosClients.vb" />
     <Compile Include="Class\MetodosEmployees.vb" />
+    <Compile Include="Class\MetodosHerramientas.vb" />
+    <Compile Include="Class\MetodosRenta.vb" />
+    <Compile Include="Class\MetodosVendor.vb" />
     <Compile Include="Class\MetodosWorkCodes.vb" />
+    <Compile Include="Froms\All_Tables.Designer.vb">
+      <DependentUpon>All_Tables.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Froms\All_Tables.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Froms\Herramientas.Designer.vb">
+      <DependentUpon>Herramientas.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Froms\Herramientas.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Froms\metodosGlobales.vb" />
     <Compile Include="Class\MetodosLogin.vb" />
     <Compile Include="Class\MetodosMaterials.vb" />
@@ -96,6 +111,24 @@
       <DependentUpon>MainFrom.vb</DependentUpon>
     </Compile>
     <Compile Include="Froms\MainFrom.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Froms\Precio.Designer.vb">
+      <DependentUpon>Precio.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Froms\Precio.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Froms\Renta.Designer.vb">
+      <DependentUpon>Renta.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Froms\Renta.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Froms\Vendor.Designer.vb">
+      <DependentUpon>Vendor.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Froms\Vendor.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Froms\WorkCodes.Designer.vb">
@@ -134,14 +167,29 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Froms\All_Tables.resx">
+      <DependentUpon>All_Tables.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Froms\Clients.resx">
       <DependentUpon>Clients.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Froms\Employees.resx">
       <DependentUpon>Employees.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Froms\Herramientas.resx">
+      <DependentUpon>Herramientas.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Froms\MainFrom.resx">
       <DependentUpon>MainFrom.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Froms\Precio.resx">
+      <DependentUpon>Precio.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Froms\Renta.resx">
+      <DependentUpon>Renta.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Froms\Vendor.resx">
+      <DependentUpon>Vendor.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Froms\WorkCodes.resx">
       <DependentUpon>WorkCodes.vb</DependentUpon>

@@ -169,6 +169,7 @@ Partial Class Employees
         Me.txtSearch.Name = "txtSearch"
         Me.txtSearch.Size = New System.Drawing.Size(322, 26)
         Me.txtSearch.TabIndex = 18
+        Me.txtSearch.Text = "s"
         '
         'chbState
         '
@@ -342,7 +343,7 @@ Partial Class Employees
         Me.tbpOtherData.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.tbpOtherData.Name = "tbpOtherData"
         Me.tbpOtherData.Padding = New System.Windows.Forms.Padding(4, 5, 4, 5)
-        Me.tbpOtherData.Size = New System.Drawing.Size(1076, 532)
+        Me.tbpOtherData.Size = New System.Drawing.Size(1076, 513)
         Me.tbpOtherData.TabIndex = 1
         Me.tbpOtherData.Text = "Other Data"
         Me.tbpOtherData.UseVisualStyleBackColor = True

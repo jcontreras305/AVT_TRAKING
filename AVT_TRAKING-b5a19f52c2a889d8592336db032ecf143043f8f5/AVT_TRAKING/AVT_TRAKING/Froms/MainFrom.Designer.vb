@@ -23,16 +23,18 @@ Partial Class MainFrom
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.Button2 = New System.Windows.Forms.Button()
         Me.Button1 = New System.Windows.Forms.Button()
         Me.btnEmployees = New System.Windows.Forms.Button()
         Me.btnClients = New System.Windows.Forms.Button()
         Me.btnMaterials = New System.Windows.Forms.Button()
-        Me.Button2 = New System.Windows.Forms.Button()
+        Me.Button3 = New System.Windows.Forms.Button()
         Me.Panel1.SuspendLayout()
         Me.SuspendLayout()
         '
         'Panel1
         '
+        Me.Panel1.Controls.Add(Me.Button3)
         Me.Panel1.Controls.Add(Me.Button2)
         Me.Panel1.Controls.Add(Me.Button1)
         Me.Panel1.Controls.Add(Me.btnEmployees)
@@ -42,6 +44,16 @@ Partial Class MainFrom
         Me.Panel1.Name = "Panel1"
         Me.Panel1.Size = New System.Drawing.Size(795, 443)
         Me.Panel1.TabIndex = 0
+        '
+        'Button2
+        '
+        Me.Button2.ForeColor = System.Drawing.Color.Red
+        Me.Button2.Location = New System.Drawing.Point(719, 402)
+        Me.Button2.Name = "Button2"
+        Me.Button2.Size = New System.Drawing.Size(67, 30)
+        Me.Button2.TabIndex = 4
+        Me.Button2.Text = "Exit"
+        Me.Button2.UseVisualStyleBackColor = True
         '
         'Button1
         '
@@ -79,15 +91,14 @@ Partial Class MainFrom
         Me.btnMaterials.Text = "Materials"
         Me.btnMaterials.UseVisualStyleBackColor = True
         '
-        'Button2
+        'Button3
         '
-        Me.Button2.ForeColor = System.Drawing.Color.Red
-        Me.Button2.Location = New System.Drawing.Point(719, 402)
-        Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(67, 30)
-        Me.Button2.TabIndex = 4
-        Me.Button2.Text = "Exit"
-        Me.Button2.UseVisualStyleBackColor = True
+        Me.Button3.Location = New System.Drawing.Point(27, 392)
+        Me.Button3.Name = "Button3"
+        Me.Button3.Size = New System.Drawing.Size(138, 40)
+        Me.Button3.TabIndex = 5
+        Me.Button3.Text = "View all Tables"
+        Me.Button3.UseVisualStyleBackColor = True
         '
         'MainFrom
         '
@@ -108,4 +119,5 @@ Partial Class MainFrom
     Friend WithEvents btnMaterials As Button
     Friend WithEvents Button1 As Button
     Friend WithEvents Button2 As Button
+    Friend WithEvents Button3 As Button
 End Class

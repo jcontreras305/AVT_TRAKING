@@ -73,6 +73,10 @@ Public Class Clients
         Me.Finalize()
     End Sub
 
+    Private Sub TabPage1_Click(sender As Object, e As EventArgs) Handles TabPage1.Click
+
+    End Sub
+
     ' Public Sub BuscaDatos()
     '    client.BuscarClients("select * from clients where CompanyName like '" + txtFiltro.Text + "%'")
     'Me.DataGridView1.DataSource = client.ds.Tables("clients")

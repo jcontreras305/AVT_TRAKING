@@ -28,4 +28,10 @@
         a.Show()
         Me.Finalize()
     End Sub
+
+    Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
+        Dim a As New All_Tables
+        a.Show()
+        Me.Finalize()
+    End Sub
 End Class
