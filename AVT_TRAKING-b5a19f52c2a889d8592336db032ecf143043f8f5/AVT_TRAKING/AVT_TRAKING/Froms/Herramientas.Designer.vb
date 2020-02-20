@@ -40,7 +40,7 @@ Partial Class Herramientas
         Me.btnQuery = New System.Windows.Forms.Button()
         Me.btnSave = New System.Windows.Forms.Button()
         Me.txtCantidad = New System.Windows.Forms.TextBox()
-        Me.txtHPrice = New System.Windows.Forms.TextBox()
+        Me.txtidPricio = New System.Windows.Forms.TextBox()
         Me.txtDescripcion = New System.Windows.Forms.TextBox()
         Me.txtHSize = New System.Windows.Forms.TextBox()
         Me.txtHType = New System.Windows.Forms.TextBox()
@@ -179,7 +179,7 @@ Partial Class Herramientas
         Me.TabPage2.Controls.Add(Me.btnQuery)
         Me.TabPage2.Controls.Add(Me.btnSave)
         Me.TabPage2.Controls.Add(Me.txtCantidad)
-        Me.TabPage2.Controls.Add(Me.txtHPrice)
+        Me.TabPage2.Controls.Add(Me.txtidPricio)
         Me.TabPage2.Controls.Add(Me.txtDescripcion)
         Me.TabPage2.Controls.Add(Me.txtHSize)
         Me.TabPage2.Controls.Add(Me.txtHType)
@@ -255,12 +255,12 @@ Partial Class Herramientas
         Me.txtCantidad.Size = New System.Drawing.Size(149, 26)
         Me.txtCantidad.TabIndex = 18
         '
-        'txtHPrice
+        'txtidPricio
         '
-        Me.txtHPrice.Location = New System.Drawing.Point(764, 21)
-        Me.txtHPrice.Name = "txtHPrice"
-        Me.txtHPrice.Size = New System.Drawing.Size(149, 26)
-        Me.txtHPrice.TabIndex = 17
+        Me.txtidPricio.Location = New System.Drawing.Point(437, 18)
+        Me.txtidPricio.Name = "txtidPricio"
+        Me.txtidPricio.Size = New System.Drawing.Size(138, 26)
+        Me.txtidPricio.TabIndex = 17
         '
         'txtDescripcion
         '
@@ -271,23 +271,23 @@ Partial Class Herramientas
         '
         'txtHSize
         '
-        Me.txtHSize.Location = New System.Drawing.Point(437, 18)
+        Me.txtHSize.Location = New System.Drawing.Point(437, 96)
         Me.txtHSize.Name = "txtHSize"
         Me.txtHSize.Size = New System.Drawing.Size(138, 26)
         Me.txtHSize.TabIndex = 15
         '
         'txtHType
         '
-        Me.txtHType.Location = New System.Drawing.Point(437, 96)
+        Me.txtHType.Location = New System.Drawing.Point(437, 173)
         Me.txtHType.Name = "txtHType"
         Me.txtHType.Size = New System.Drawing.Size(138, 26)
         Me.txtHType.TabIndex = 14
         '
         'txtHTyckness
         '
-        Me.txtHTyckness.Location = New System.Drawing.Point(437, 173)
+        Me.txtHTyckness.Location = New System.Drawing.Point(764, 21)
         Me.txtHTyckness.Name = "txtHTyckness"
-        Me.txtHTyckness.Size = New System.Drawing.Size(138, 26)
+        Me.txtHTyckness.Size = New System.Drawing.Size(149, 26)
         Me.txtHTyckness.TabIndex = 13
         '
         'txtDHerramienta
@@ -332,16 +332,16 @@ Partial Class Herramientas
         'Label10
         '
         Me.Label10.AutoSize = True
-        Me.Label10.Location = New System.Drawing.Point(666, 24)
+        Me.Label10.Location = New System.Drawing.Point(344, 27)
         Me.Label10.Name = "Label10"
-        Me.Label10.Size = New System.Drawing.Size(56, 20)
+        Me.Label10.Size = New System.Drawing.Size(53, 20)
         Me.Label10.TabIndex = 7
-        Me.Label10.Text = "HPrice"
+        Me.Label10.Text = "Precio"
         '
         'Label9
         '
         Me.Label9.AutoSize = True
-        Me.Label9.Location = New System.Drawing.Point(344, 176)
+        Me.Label9.Location = New System.Drawing.Point(666, 24)
         Me.Label9.Name = "Label9"
         Me.Label9.Size = New System.Drawing.Size(87, 20)
         Me.Label9.TabIndex = 6
@@ -350,7 +350,7 @@ Partial Class Herramientas
         'Label8
         '
         Me.Label8.AutoSize = True
-        Me.Label8.Location = New System.Drawing.Point(344, 99)
+        Me.Label8.Location = New System.Drawing.Point(344, 176)
         Me.Label8.Name = "Label8"
         Me.Label8.Size = New System.Drawing.Size(55, 20)
         Me.Label8.TabIndex = 5
@@ -359,7 +359,7 @@ Partial Class Herramientas
         'Label7
         '
         Me.Label7.AutoSize = True
-        Me.Label7.Location = New System.Drawing.Point(344, 24)
+        Me.Label7.Location = New System.Drawing.Point(344, 99)
         Me.Label7.Name = "Label7"
         Me.Label7.Size = New System.Drawing.Size(52, 20)
         Me.Label7.TabIndex = 4
@@ -450,7 +450,7 @@ Partial Class Herramientas
     Friend WithEvents btnQuery As Button
     Friend WithEvents btnSave As Button
     Friend WithEvents txtCantidad As TextBox
-    Friend WithEvents txtHPrice As TextBox
+    Friend WithEvents txtidPricio As TextBox
     Friend WithEvents txtDescripcion As TextBox
     Friend WithEvents txtHSize As TextBox
     Friend WithEvents txtHType As TextBox

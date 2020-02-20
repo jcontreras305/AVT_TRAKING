@@ -38,7 +38,20 @@ Public Class MetodosHerramientas
         ds.Tables.Clear()
         da = New SqlDataAdapter(sql, conexion.conn)
         cmb = New SqlCommandBuilder(da)
-        da.Fill(ds, "Detallesherramientas")
+        da.Fill(ds, "DetallesHerramientas")
     End Sub
+
+    Function InsertarDetalleHerramientas(ByVal sql)
+        conexion.conectar()
+        comando = New SqlCommand(sql, conexion.conn)
+
+        Dim i As Integer = comando.ExecuteNonQuery()
+        If (1 >= 0) Then
+            Return True
+        Else
+            Return False
+        End If
+    End Function
+
 
 End Class
