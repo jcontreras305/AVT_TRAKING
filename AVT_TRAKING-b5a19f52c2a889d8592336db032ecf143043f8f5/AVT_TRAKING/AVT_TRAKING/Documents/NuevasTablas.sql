@@ -1,7 +1,9 @@
+
+
 create table materials(
-idMaterial int primary key not null identity(1,1),
-idVendor int, 
-idRenta int,
+idMaterial varchar(36) primary key not null,
+idVendor varchar(36), 
+idRenta varchar(36),
 nombre varchar(60)
 )
 
@@ -14,10 +16,11 @@ add constraint fk_idRenta_materials
 foreign key (idRenta) references renta(idRenta)
 
 create table DetallesMaterials(
-idDetalleMaterials INT primary key not null identity(1,1), 
-idMaterial int, 
-idRecursosMaterials int,
-idUnidadM int, 
+idDetalleMaterials varchar(36) primary key not null, 
+idMaterial varchar(36), 
+idRecursosMaterials varchar(36),
+idUnidadM varchar(36),
+idPrecio varchar(36), 
 MSize float, 
 MType varchar(50), 
 MTyckness float,
@@ -37,18 +40,22 @@ foreign key (idRecursosMaterials) references RecursosMateriales(idRecursosMateri
 alter table DetallesMaterials
 add constraint fk_idUnidadM_DetallesMaterials
 foreign key (idUnidadM) references unidadMedida(idUnidadM) 
+
+alter table DetallesMaterials
+add constraint fk_idPrecio_DetallesMaterials
+foreign key (idPrecio) references precio(idPrecio)
 								 
 create table RecursosMateriales(
-idRecursosMaterials INT primary key not null identity(1,1), 
+idRecursosMaterials varchar(36) primary key not null, 
 nombre varchar(200), 
 descrioción text
 )
 
 create table renta(
-idRenta INT PRIMARY key not null identity(1,1), 
-idPrecio int, 
-idHerramienta int,
-idMaterial int, 
+idRenta varchar(36) primary key not null, 
+idPrecio varchar(36), 
+idHerramienta varchar(36),
+idMaterial varchar(36), 
 horas float, 
 CantidadRentadaH float, 
 CantidadRentadaM float
@@ -67,16 +74,16 @@ add constraint fk_idMaterial_renta
 foreign key (idMaterial) references materials(idMaterial)
 
 create table precio(
-idPrecio INT primary key not null identity(1,1), 
+idPrecio varchar(36) primary key not null, 
 PrecioCompra float, 
 PrecioRenta float, 
 PrecioVenta float
 )
 
 create table herramientas(
-idHerramientas int primary key not null identity(1,1), 
-idVendor int, 
-idRenta int, 
+idHerramientas varchar(36) primary key not null, 
+idVendor varchar(36), 
+idRenta varchar(36), 
 nombre varchar(60)
 )
 
@@ -89,8 +96,8 @@ add constraint fk_idRenta_herramientas
 foreign key (idRenta) references renta(idRenta)
 
 create table vendor(
-idVendor int primary key not null identity(1,1), 
-idTipoVendor int,
+idVendor varchar(36) primary key not null, 
+idTipoVendor varchar(36),
 nombre varchar(200), 
 descripcion text
 )
@@ -100,14 +107,43 @@ add constraint fk_idTipoVendor_vendor
 foreign key (idTipoVendor) references tipoVendor(idTipoVendor)
 
 create table tipoVendor(
-idTipoVendor int not null primary key identity(1,1), 
+idTipoVendor varchar(36) primary key not null, 
 tipo varchar(60), 
 descripcion text, 
 estatus char
 )
 
 create table unidadMedida(
-idUnidadM int primary key not null identity(1,1), 
+idUnidadM varchar(36) primary key not null, 
 nombre varchar(60), 
 sigla char(5)
 )
+
+create table DetallesHerramientas(
+idDetallesHerramientas varchar(36) primary key not null, 
+idHerramientas varchar(36), 
+idRecursosMaterials varchar(36),
+idUnidadM varchar(36), 
+idPrecio varchar(36),
+MSize float, 
+HType varchar(50), 
+HTyckness float,
+Descripcion text,
+cantidad float
+)
+
+alter table DetallesHerramientas
+add constraint fk_idHerraminetas_DetallesHerraminetas
+foreign key (idHerramientas) references herramientas(idHerramientas)
+
+alter table DetallesHerramientas
+add constraint fk_idRecursosMaterials_DetallesHerramientas
+foreign key (idRecursosMaterials) references RecursosMateriales(idRecursosMaterials) 
+
+alter table DetallesHerramientas
+add constraint fk_idUnidadM_DetallesHerramientas
+foreign key (idUnidadM) references unidadMedida(idUnidadM)
+
+alter table DetallesHerramientas
+add constraint fk_idPrecio_DetallesHerramientas
+foreign key (idPrecio) references precio(idPrecio)
