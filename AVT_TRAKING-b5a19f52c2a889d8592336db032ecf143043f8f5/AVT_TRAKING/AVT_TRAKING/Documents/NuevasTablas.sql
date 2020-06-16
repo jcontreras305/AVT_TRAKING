@@ -1,9 +1,12 @@
 
 
+use VRT_TRAKING
+
+---###############Creación de la tabla Materiales##############---
 create table materials(
-idMaterial varchar(36) primary key not null,
-idVendor varchar(36), 
-idRenta varchar(36),
+idMaterial int IDENTITY(1,1) PRIMARY KEY not null,
+idVendor int, 
+idRenta int,
 nombre varchar(60)
 )
 
@@ -15,12 +18,14 @@ alter table materials
 add constraint fk_idRenta_materials
 foreign key (idRenta) references renta(idRenta)
 
+
+--#############Creación de la tabla Detalles de los materiales ##############--
 create table DetallesMaterials(
-idDetalleMaterials varchar(36) primary key not null, 
-idMaterial varchar(36), 
-idRecursosMaterials varchar(36),
-idUnidadM varchar(36),
-idPrecio varchar(36), 
+idDetalleMaterials int IDENTITY(1,1) PRIMARY KEY not null, 
+idMaterial int, 
+idRecursosMaterials int,
+idUnidadM int,
+idPrecio int, 
 MSize float, 
 MType varchar(50), 
 MTyckness float,
@@ -44,22 +49,24 @@ foreign key (idUnidadM) references unidadMedida(idUnidadM)
 alter table DetallesMaterials
 add constraint fk_idPrecio_DetallesMaterials
 foreign key (idPrecio) references precio(idPrecio)
-								 
+
+--######### Creación de tabla de recursos materiales #########--								 
 create table RecursosMateriales(
-idRecursosMaterials varchar(36) primary key not null, 
+idRecursosMaterials int IDENTITY(1,1) PRIMARY KEY not null, 
 nombre varchar(200), 
 descrioción text
 )
-
+--########### Creación de tabla Renta #################--
 create table renta(
-idRenta varchar(36) primary key not null, 
-idPrecio varchar(36), 
-idHerramienta varchar(36),
-idMaterial varchar(36), 
+idRenta int IDENTITY(1,1) PRIMARY KEY not null, 
+idPrecio int, 
+idHerramienta int,
+idMaterial int, 
 horas float, 
 CantidadRentadaH float, 
 CantidadRentadaM float
 )
+
 
 alter table renta 
 add constraint fk_idPrecio_renta
@@ -74,16 +81,17 @@ add constraint fk_idMaterial_renta
 foreign key (idMaterial) references materials(idMaterial)
 
 create table precio(
-idPrecio varchar(36) primary key not null, 
+idPrecio int IDENTITY(1,1) PRIMARY KEY not null, 
 PrecioCompra float, 
 PrecioRenta float, 
 PrecioVenta float
 )
 
+--###################Creación de tabla Herramientas################--
 create table herramientas(
-idHerramientas varchar(36) primary key not null, 
-idVendor varchar(36), 
-idRenta varchar(36), 
+idHerramientas int IDENTITY(1,1) PRIMARY KEY not null, 
+idVendor int, 
+idRenta int, 
 nombre varchar(60)
 )
 
@@ -95,36 +103,43 @@ alter table herramientas
 add constraint fk_idRenta_herramientas
 foreign key (idRenta) references renta(idRenta)
 
+
+--#############Creación de tabla Vendor ############--
 create table vendor(
-idVendor varchar(36) primary key not null, 
-idTipoVendor varchar(36),
+idVendor int IDENTITY(1,1) PRIMARY KEY not null, 
+idTipoVendor int,
 nombre varchar(200), 
 descripcion text
 )
+
 
 alter table vendor 
 add constraint fk_idTipoVendor_vendor
 foreign key (idTipoVendor) references tipoVendor(idTipoVendor)
 
+--################ Creación de tabla Tipo Vendor ###########--
 create table tipoVendor(
-idTipoVendor varchar(36) primary key not null, 
+idTipoVendor int IDENTITY(1,1) PRIMARY KEY not null, 
 tipo varchar(60), 
 descripcion text, 
 estatus char
 )
 
+
+--########## Creación de tabla unidad de Medida #########--
 create table unidadMedida(
-idUnidadM varchar(36) primary key not null, 
+idUnidadM int IDENTITY(1,1) PRIMARY KEY not null, 
 nombre varchar(60), 
 sigla char(5)
 )
 
+--######### Creación de tabla detalles de herramientas ##############--
 create table DetallesHerramientas(
-idDetallesHerramientas varchar(36) primary key not null, 
-idHerramientas varchar(36), 
-idRecursosMaterials varchar(36),
-idUnidadM varchar(36), 
-idPrecio varchar(36),
+idDetallesHerramientas int IDENTITY(1,1) PRIMARY KEY not null, 
+idHerramientas int, 
+idRecursosMaterials int,
+idUnidadM int, 
+idPrecio int,
 MSize float, 
 HType varchar(50), 
 HTyckness float,
