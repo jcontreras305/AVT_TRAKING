@@ -4,8 +4,6 @@ Public Class Employees
     Dim emplyeeDataList As New List(Of String)
     Public idEmployee, idAddress, idContacto, idPay As String
 
-
-
     Private Sub Employees_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         activarCamposAddress(False)
         activarCamposContacto(False)
@@ -253,10 +251,10 @@ Public Class Employees
                 dataEmployes(14) = txtPostalCode.Text
             Else
                 dataEmployes(10) = ""
-                dataEmployes(11) = ""
+                dataEmployes(11) = "0"
                 dataEmployes(12) = ""
                 dataEmployes(13) = ""
-                dataEmployes(14) = ""
+                dataEmployes(14) = "0"
             End If
             If chbPay.Checked Then
                 dataEmployes(15) = sprPayRate1.Value

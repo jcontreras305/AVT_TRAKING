@@ -6,7 +6,7 @@ Public Class ConnectioDB
 
     Public Function conectar() 'Esta funcion nos permite abrir la conexion de la base de datos 
         Try
-            conn = New SqlConnection("data source=localhost; initial catalog=VRT_TRAKING; integrated security=true")
+            conn = New SqlConnection("Data Source=localhost; Initial Catalog=VRT_TRAKING ; Integrated Security=true")
             conn.Open() 'se abre la conexion
             If conn.State Then 'comprueba si la conexion esta habilitada 
                 'Aqui podemos mandar un mesaje que nos diga si fue o no conectado
@@ -14,6 +14,8 @@ Public Class ConnectioDB
             Else
                 MsgBox("La Conexion a la base de datos no se pudo realizar") 'mesaje de error
             End If
+
+
 
         Catch ex As Exception
             MsgBox(ex.Message) 'Exepcion de al conectar a la base de datos

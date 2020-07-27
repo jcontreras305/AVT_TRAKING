@@ -44,70 +44,180 @@
 
 
 
-create proc sp_insert_Employee
-	--general
-	@numberEmploye int, 
-	@firstName varchar(30),
-	@lastName varchar(25),
-	@middleName varchar(25),
-	@socialNumber varchar(14),
-	@SAPNumber int,
-	@photo image,
-	@estatus char(1),
-	--contact
-	@phoneNumber1 varchar(13),
-	@phoneNumber2 varchar(13),
+--create proc sp_insert_Employee
+--	--general
+--	@numberEmploye int, 
+--	@firstName varchar(30),
+--	@lastName varchar(25),
+--	@middleName varchar(25),
+--	@socialNumber varchar(14),
+--	@SAPNumber int,
+--	@photo image,
+--	@estatus char(1),
+--	--contact
+--	@phoneNumber1 varchar(13),
+--	@phoneNumber2 varchar(13),
+--	@email varchar(50),
+--	--address
+--	@avenue varchar(80),
+--	@number int,
+--	@city varchar(20), 
+--	@providence varchar(20),
+--	@postalCode int,
+--	--pay
+--	@payRate1 float,
+--	@payRate2 float, 
+--	@payRate3 float
+--as 
+--declare @error int  -- declaro variables para los ID que son nuevos y una variable de error
+--declare @idEmployee varchar(36) 
+--declare @idContact varchar(36)
+--declare @idHomeAdress varchar(36)
+--declare @idPayRate varchar(36)
+--begin
+--	begin tran --inicio tran
+--		begin try --inicio try
+--			--if @phoneNumber1 <> '' or @email<> '' begin -- si existe un telefono o un correo entra 
+--				set @idContact = NEWID() 
+--				insert into contact values(@idContact,@phoneNumber1,@phoneNumber2,@email)
+--				if @@ERROR <> 0 begin set @error = @@ERROR goto solveproblem end  -- si existe un error en al insertar solo vamos a solveproblem y nos evitamos lo demas
+--			--end
+--			--if @avenue <> '' begin -- solo se necesita saber si la calle tiene algo 
+--				set @idHomeAdress = NEWID()
+--				insert into HomeAddress values (@idHomeAdress , @avenue , @number , @city , @providence , @postalCode)
+--				if @@ERROR <> 0 begin set @error = @@ERROR goto solveproblem end 
+				
+--			--end
+--			--if @payRate1 <> '' begin
+--				set @idPayRate = NEWID()
+--				insert into payRate values (@idPayRate,@payRate1,@payRate2 ,@payRate3)
+--				if @@ERROR <> 0 begin set @error = @@ERROR goto solveproblem end 
+--			--end
+--			--if @firstName <> '' or @numberEmploye > 0 begin	
+--				set @idEmployee = NEWID()
+--				insert into employees values (@idEmployee , @numberEmploye , @firstName , @lastName , @middleName, @socialNumber , @SAPNumber, @photo , @idHomeAdress , @idContact , @idPayRate ,@estatus)
+--				if @@ERROR <> 0 begin set @error = @@ERROR goto solveproblem end 
+--			--end
+--		end try	
+--		begin catch
+--			goto solveproblem -- en caso de error capturado en el catch no vamos a solveproblem y evitamos en commit
+--		end catch
+--	commit tran 
+--	solveproblem:
+--	if @error <> 0
+--	begin 
+--		rollback tran -- el rollback es para deshacer todos lo cambios hechos anteriormente
+--	end
+--end
+--go
+
+select * from employees where  numberEmploye  = 305 and firstName = 'isaac'
+
+--create proc sp_Insert_Cient 
+--	@ClientID int,
+--	@FirstName varchar (30),
+--	@MiddleName varchar (30),
+--	@LastName varchar (30),
+--	@CompanyName varchar (50),
+--	@Status char(1),
+--	--Contact
+--	@phoneNumer1 varchar(13),
+--	@phoneNumer2 varchar(13),
+--	@email varchar(50),
+--	--Addres
+--	@avenue varchar(80),
+--	@number int,
+--	@city varchar (20),
+--	@providence varchar (20),
+--	@postalcode int
+--as
+--declare @error int  -- declaro variables para los ID que son nuevos y una variable de error
+--declare @idClient varchar(36) 
+--declare @idContact varchar(36)
+--declare @idHomeAdress varchar(36)
+--begin 
+--	begin tran 
+--		begin try
+--			--se inserta un contacto
+			
+--				set @idContact = NEWID() 
+--				insert into contact values(@idContact,@phoneNumer1,@phoneNumer2,@email)
+--				if @@ERROR <> 0 begin set @error = @@ERROR goto solveproblem end
+			
+--				set @idHomeAdress = NEWID()
+--				insert into HomeAddress values (@idHomeAdress , @avenue , @number , @city , @providence , @postalCode)
+--				if @@ERROR <> 0 begin set @error = @@ERROR goto solveproblem end 
+			
+--				set @idClient = NEWID()
+--				insert into clients values (@idClient , @ClientID, @FirstName, @MiddleName, @LastName , @CompanyName, @idContact , @idHomeAdress ,@Status)
+--				if @@ERROR <> 0 begin set @error = @@ERROR goto solveproblem end 
+			
+--		end try
+--		begin catch
+--			goto solveproblem
+--		end catch
+--	commit tran
+--	solveproblem:
+--	if @error <> 0
+--	begin 
+--		rollback tran 
+--	end
+--end
+--go
+
+select cl.idClient,cl.numberClient,cl.firstName,cl.middleName,cl.lastName,cl.companyName,cl.estatus,ct.idContact,ct.phoneNumber1, ct.phoneNumber2,ct.email,ha.idHomeAdress, ha.avenue ,ha.number, ha.city ,ha.providence,ha.postalCode from
+clients as cl 
+left join contact as ct on cl.idContact = ct.idContact
+left join HomeAddress as ha on cl.idHomeAddress = ha.idHomeAdress
+where cl.numberClient = 1 
+or cl.firstName like ''
+or cl.lastName like ''
+or ct.companyName like ''
+or ha.city like ''
+
+
+create proc sp_Update_Client
+	@idCL varchar(36),
+	@ClientID int,
+	@FirstName varchar (30),
+	@MiddleName varchar (30),
+	@LastName varchar (30),
+	@CompanyName varchar (50),
+	@Status char(1),
+	--Contact
+	@idContact varchar(36),
+	@phoneNumer1 varchar(13),
+	@phoneNumer2 varchar(13),
 	@email varchar(50),
-	--address
+	--Addres
+	@idAddres varchar(36),
 	@avenue varchar(80),
 	@number int,
-	@city varchar(20), 
-	@providence varchar(20),
-	@postalCode int,
-	--pay
-	@payRate1 float,
-	@payRate2 float, 
-	@payRate3 float
-as 
+	@city varchar (20),
+	@providence varchar (20),
+	@postalcode int
+as
 declare @error int  -- declaro variables para los ID que son nuevos y una variable de error
-declare @idEmployee varchar(36) 
-declare @idContact varchar(36)
-declare @idHomeAdress varchar(36)
-declare @idPayRate varchar(36)
-begin
-	begin tran --inicio tran
-		begin try --inicio try
-			if @phoneNumber1 <> '' or @email<> '' begin -- si existe un telefono o un correo entra 
-				set @idContact = NEWID() 
-				insert into contact values(@idContact,@phoneNumber1,@phoneNumber2,@email)
-				if @@ERROR <> 0 begin set @error = @@ERROR goto solveproblem end  -- si existe un error en al insertar solo vamos a solveproblem y nos evitamos lo demas
-			end
-			if @avenue <> '' begin -- solo se necesita saber si la calle tiene algo 
-				set @idHomeAdress = NEWID()
-				insert into HomeAddress values (@idHomeAdress , @avenue , @number , @city , @providence , @postalCode)
+begin 
+	begin tran 
+		begin try
+			--se inserta un contacto
+
+				update contact set phoneNumber1= @phoneNumer1 , phoneNumber2=@phoneNumer2 ,email = @email where idContact = @idContact
+				if @@ERROR <> 0 begin set @error = @@ERROR goto solveproblem end
+				update HomeAddress set avenue= @avenue, number = number , city=@city , providence =@providence, postalCode = @postalcode where idHomeAdress = @idAddres
+				if @@ERROR <> 0 begin set @error = @@ERROR goto solveproblem end
+				update  clients set firstName= @FirstName,middleName= @MiddleName,lastName= @LastName ,companyName=@CompanyName,estatus = @Status where idClient = @idCL
 				if @@ERROR <> 0 begin set @error = @@ERROR goto solveproblem end 
-			end
-			if @payRate1 <> '' begin
-				set @idPayRate = NEWID()
-				insert into payRate values (@idPayRate,@payRate1,@payRate2 ,@payRate3)
-				if @@ERROR <> 0 begin set @error = @@ERROR goto solveproblem end 
-			end
-			if @firstName <> '' or @numberEmploye > 0 begin	
-				set @idEmployee = NEWID()
-				insert into employees values (@idEmployee , @numberEmploye , @firstName , @lastName , @middleName, @socialNumber , @SAPNumber, @photo , @idHomeAdress , @idContact , @idPayRate ,@estatus)
-				if @@ERROR <> 0 begin set @error = @@ERROR goto solveproblem end 
-			end
-		end try	
+		end try
 		begin catch
-			goto solveproblem -- en caso de error capturado en el catch no vamos a solveproblem y evitamos en commit
+			goto solveproblem
 		end catch
-	commit tran 
+	commit tran
 	solveproblem:
 	if @error <> 0
 	begin 
-		rollback tran -- el rollback es para deshacer todos lo cambios hechos anteriormente
+		rollback tran 
 	end
 end
 go
-
-select * from employees where  numberEmploye  = 305 and firstName = 'isaac'
