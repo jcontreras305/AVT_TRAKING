@@ -48,8 +48,7 @@
 
 
     Private Sub btnSaveTV_Click(sender As Object, e As EventArgs) Handles btnSaveTV.Click
-        Dim agregar As String = "insert into tipoVendor values (" + txtTipoVendor.Text + ",'" + txtDescripcionV.Text + "','" +
-        txtStatus.Text + "')"
+        Dim agregar As String = "insert into tipoVendor values (" + txtTipoVendor.Text + ",'" + txtDescripcionV.Text + "','" + "')"
 
         If (vendor.InsertarTipoVendor(agregar)) Then
             MessageBox.Show("Datos agregados correctamente")
@@ -64,7 +63,7 @@
 
         txtTipoVendor.Text = dgv.Cells(0).Value.ToString()
         txtDescripcionV.Text = dgv.Cells(1).Value.ToString()
-        txtStatus.Text = dgv.Cells(2).Value.ToString()
+        'txtStatus.Text = dgv.Cells(2).Value.ToString()
     End Sub
 
     Private Sub btnQueryTV_Click(sender As Object, e As EventArgs) Handles btnQueryTV.Click

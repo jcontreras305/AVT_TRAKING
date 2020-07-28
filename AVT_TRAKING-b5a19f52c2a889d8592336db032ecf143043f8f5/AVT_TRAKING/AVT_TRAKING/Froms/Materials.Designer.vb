@@ -26,6 +26,7 @@ Partial Class Materials
         Me.btnMenu = New System.Windows.Forms.Button()
         Me.Button5 = New System.Windows.Forms.Button()
         Me.TabPage2 = New System.Windows.Forms.TabPage()
+        Me.txtDMaterial = New System.Windows.Forms.TextBox()
         Me.txtUM = New System.Windows.Forms.TextBox()
         Me.txtRM = New System.Windows.Forms.TextBox()
         Me.DataGridView2 = New System.Windows.Forms.DataGridView()
@@ -62,7 +63,6 @@ Partial Class Materials
         Me.Label3 = New System.Windows.Forms.Label()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.TabControl1 = New System.Windows.Forms.TabControl()
-        Me.txtDMaterial = New System.Windows.Forms.TextBox()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.TabPage2.SuspendLayout()
         CType(Me.DataGridView2, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -73,18 +73,20 @@ Partial Class Materials
         'DataGridView1
         '
         Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DataGridView1.Location = New System.Drawing.Point(185, 374)
+        Me.DataGridView1.Location = New System.Drawing.Point(123, 243)
+        Me.DataGridView1.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.DataGridView1.Name = "DataGridView1"
         Me.DataGridView1.RowHeadersWidth = 62
         Me.DataGridView1.RowTemplate.Height = 28
-        Me.DataGridView1.Size = New System.Drawing.Size(710, 205)
+        Me.DataGridView1.Size = New System.Drawing.Size(473, 133)
         Me.DataGridView1.TabIndex = 1
         '
         'btnMenu
         '
-        Me.btnMenu.Location = New System.Drawing.Point(23, 12)
+        Me.btnMenu.Location = New System.Drawing.Point(15, 8)
+        Me.btnMenu.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.btnMenu.Name = "btnMenu"
-        Me.btnMenu.Size = New System.Drawing.Size(101, 32)
+        Me.btnMenu.Size = New System.Drawing.Size(67, 21)
         Me.btnMenu.TabIndex = 2
         Me.btnMenu.Text = "Menu"
         Me.btnMenu.UseVisualStyleBackColor = True
@@ -92,9 +94,10 @@ Partial Class Materials
         'Button5
         '
         Me.Button5.ForeColor = System.Drawing.Color.Red
-        Me.Button5.Location = New System.Drawing.Point(1090, 12)
+        Me.Button5.Location = New System.Drawing.Point(727, 8)
+        Me.Button5.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.Button5.Name = "Button5"
-        Me.Button5.Size = New System.Drawing.Size(72, 32)
+        Me.Button5.Size = New System.Drawing.Size(48, 21)
         Me.Button5.TabIndex = 4
         Me.Button5.Text = "Exit"
         Me.Button5.UseVisualStyleBackColor = True
@@ -125,52 +128,66 @@ Partial Class Materials
         Me.TabPage2.Controls.Add(Me.Label16)
         Me.TabPage2.Controls.Add(Me.Label15)
         Me.TabPage2.Controls.Add(Me.Label14)
-        Me.TabPage2.Location = New System.Drawing.Point(4, 29)
+        Me.TabPage2.Location = New System.Drawing.Point(4, 22)
+        Me.TabPage2.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.TabPage2.Name = "TabPage2"
-        Me.TabPage2.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage2.Size = New System.Drawing.Size(1146, 613)
+        Me.TabPage2.Padding = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.TabPage2.Size = New System.Drawing.Size(761, 394)
         Me.TabPage2.TabIndex = 1
         Me.TabPage2.Text = "Detalles Materials"
         Me.TabPage2.UseVisualStyleBackColor = True
         '
+        'txtDMaterial
+        '
+        Me.txtDMaterial.Location = New System.Drawing.Point(124, 26)
+        Me.txtDMaterial.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.txtDMaterial.Name = "txtDMaterial"
+        Me.txtDMaterial.Size = New System.Drawing.Size(89, 20)
+        Me.txtDMaterial.TabIndex = 27
+        '
         'txtUM
         '
-        Me.txtUM.Location = New System.Drawing.Point(186, 189)
+        Me.txtUM.Location = New System.Drawing.Point(124, 123)
+        Me.txtUM.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.txtUM.Name = "txtUM"
-        Me.txtUM.Size = New System.Drawing.Size(132, 26)
+        Me.txtUM.Size = New System.Drawing.Size(89, 20)
         Me.txtUM.TabIndex = 26
         '
         'txtRM
         '
-        Me.txtRM.Location = New System.Drawing.Point(186, 112)
+        Me.txtRM.Location = New System.Drawing.Point(124, 73)
+        Me.txtRM.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.txtRM.Name = "txtRM"
-        Me.txtRM.Size = New System.Drawing.Size(132, 26)
+        Me.txtRM.Size = New System.Drawing.Size(89, 20)
         Me.txtRM.TabIndex = 25
         '
         'DataGridView2
         '
         Me.DataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DataGridView2.Location = New System.Drawing.Point(31, 375)
+        Me.DataGridView2.Location = New System.Drawing.Point(21, 244)
+        Me.DataGridView2.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.DataGridView2.Name = "DataGridView2"
         Me.DataGridView2.RowHeadersWidth = 62
         Me.DataGridView2.RowTemplate.Height = 28
-        Me.DataGridView2.Size = New System.Drawing.Size(1023, 232)
+        Me.DataGridView2.Size = New System.Drawing.Size(682, 151)
         Me.DataGridView2.TabIndex = 23
         '
         'Button7
         '
-        Me.Button7.Location = New System.Drawing.Point(538, 281)
+        Me.Button7.Location = New System.Drawing.Point(359, 183)
+        Me.Button7.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.Button7.Name = "Button7"
-        Me.Button7.Size = New System.Drawing.Size(79, 37)
+        Me.Button7.Size = New System.Drawing.Size(53, 24)
         Me.Button7.TabIndex = 22
         Me.Button7.Text = "Update"
         Me.Button7.UseVisualStyleBackColor = True
         '
         'btnQueryDetalleM
         '
-        Me.btnQueryDetalleM.Location = New System.Drawing.Point(422, 281)
+        Me.btnQueryDetalleM.Location = New System.Drawing.Point(281, 183)
+        Me.btnQueryDetalleM.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.btnQueryDetalleM.Name = "btnQueryDetalleM"
-        Me.btnQueryDetalleM.Size = New System.Drawing.Size(80, 37)
+        Me.btnQueryDetalleM.Size = New System.Drawing.Size(53, 24)
         Me.btnQueryDetalleM.TabIndex = 21
         Me.btnQueryDetalleM.Text = "Query"
         Me.btnQueryDetalleM.UseVisualStyleBackColor = True
@@ -178,93 +195,105 @@ Partial Class Materials
         'Label7
         '
         Me.Label7.AutoSize = True
-        Me.Label7.Location = New System.Drawing.Point(776, 337)
+        Me.Label7.Location = New System.Drawing.Point(517, 219)
+        Me.Label7.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(60, 20)
+        Me.Label7.Size = New System.Drawing.Size(41, 13)
         Me.Label7.TabIndex = 20
         Me.Label7.Text = "Search"
         '
         'TextBox16
         '
-        Me.TextBox16.Location = New System.Drawing.Point(874, 331)
+        Me.TextBox16.Location = New System.Drawing.Point(583, 215)
+        Me.TextBox16.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.TextBox16.Name = "TextBox16"
-        Me.TextBox16.Size = New System.Drawing.Size(180, 26)
+        Me.TextBox16.Size = New System.Drawing.Size(121, 20)
         Me.TextBox16.TabIndex = 19
         '
         'txtMprice
         '
-        Me.txtMprice.Location = New System.Drawing.Point(874, 40)
+        Me.txtMprice.Location = New System.Drawing.Point(583, 26)
+        Me.txtMprice.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.txtMprice.Name = "txtMprice"
-        Me.txtMprice.Size = New System.Drawing.Size(180, 26)
+        Me.txtMprice.Size = New System.Drawing.Size(121, 20)
         Me.txtMprice.TabIndex = 18
         '
         'txtCantidad
         '
-        Me.txtCantidad.Location = New System.Drawing.Point(874, 186)
+        Me.txtCantidad.Location = New System.Drawing.Point(583, 121)
+        Me.txtCantidad.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.txtCantidad.Name = "txtCantidad"
-        Me.txtCantidad.Size = New System.Drawing.Size(180, 26)
+        Me.txtCantidad.Size = New System.Drawing.Size(121, 20)
         Me.txtCantidad.TabIndex = 17
         '
         'txtDescripcion
         '
-        Me.txtDescripcion.Location = New System.Drawing.Point(874, 109)
+        Me.txtDescripcion.Location = New System.Drawing.Point(583, 71)
+        Me.txtDescripcion.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.txtDescripcion.Name = "txtDescripcion"
-        Me.txtDescripcion.Size = New System.Drawing.Size(180, 26)
+        Me.txtDescripcion.Size = New System.Drawing.Size(121, 20)
         Me.txtDescripcion.TabIndex = 16
         '
         'txtMTychness
         '
-        Me.txtMTychness.Location = New System.Drawing.Point(524, 189)
+        Me.txtMTychness.Location = New System.Drawing.Point(349, 123)
+        Me.txtMTychness.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.txtMTychness.Name = "txtMTychness"
-        Me.txtMTychness.Size = New System.Drawing.Size(181, 26)
+        Me.txtMTychness.Size = New System.Drawing.Size(122, 20)
         Me.txtMTychness.TabIndex = 11
         '
         'txtMType
         '
-        Me.txtMType.Location = New System.Drawing.Point(524, 112)
+        Me.txtMType.Location = New System.Drawing.Point(349, 73)
+        Me.txtMType.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.txtMType.Name = "txtMType"
-        Me.txtMType.Size = New System.Drawing.Size(181, 26)
+        Me.txtMType.Size = New System.Drawing.Size(122, 20)
         Me.txtMType.TabIndex = 10
         '
         'txtMSize
         '
-        Me.txtMSize.Location = New System.Drawing.Point(524, 37)
+        Me.txtMSize.Location = New System.Drawing.Point(349, 24)
+        Me.txtMSize.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.txtMSize.Name = "txtMSize"
-        Me.txtMSize.Size = New System.Drawing.Size(181, 26)
+        Me.txtMSize.Size = New System.Drawing.Size(122, 20)
         Me.txtMSize.TabIndex = 9
         '
         'Label6
         '
         Me.Label6.AutoSize = True
-        Me.Label6.Location = New System.Drawing.Point(776, 192)
+        Me.Label6.Location = New System.Drawing.Point(517, 125)
+        Me.Label6.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(73, 20)
+        Me.Label6.Size = New System.Drawing.Size(49, 13)
         Me.Label6.TabIndex = 15
         Me.Label6.Text = "Cantidad"
         '
         'Label5
         '
         Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(776, 115)
+        Me.Label5.Location = New System.Drawing.Point(517, 75)
+        Me.Label5.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(92, 20)
+        Me.Label5.Size = New System.Drawing.Size(63, 13)
         Me.Label5.TabIndex = 14
         Me.Label5.Text = "Descripcion"
         '
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(776, 43)
+        Me.Label1.Location = New System.Drawing.Point(517, 28)
+        Me.Label1.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(56, 20)
+        Me.Label1.Size = New System.Drawing.Size(39, 13)
         Me.Label1.TabIndex = 13
         Me.Label1.Text = "Mprice"
         '
         'btnSaveDetallesMaterials
         '
-        Me.btnSaveDetallesMaterials.Location = New System.Drawing.Point(305, 281)
+        Me.btnSaveDetallesMaterials.Location = New System.Drawing.Point(203, 183)
+        Me.btnSaveDetallesMaterials.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.btnSaveDetallesMaterials.Name = "btnSaveDetallesMaterials"
-        Me.btnSaveDetallesMaterials.Size = New System.Drawing.Size(67, 37)
+        Me.btnSaveDetallesMaterials.Size = New System.Drawing.Size(45, 24)
         Me.btnSaveDetallesMaterials.TabIndex = 12
         Me.btnSaveDetallesMaterials.Text = "Save"
         Me.btnSaveDetallesMaterials.UseVisualStyleBackColor = True
@@ -272,54 +301,60 @@ Partial Class Materials
         'Label19
         '
         Me.Label19.AutoSize = True
-        Me.Label19.Location = New System.Drawing.Point(430, 192)
+        Me.Label19.Location = New System.Drawing.Point(287, 125)
+        Me.Label19.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label19.Name = "Label19"
-        Me.Label19.Size = New System.Drawing.Size(88, 20)
+        Me.Label19.Size = New System.Drawing.Size(62, 13)
         Me.Label19.TabIndex = 8
         Me.Label19.Text = "MTyckness"
         '
         'Label18
         '
         Me.Label18.AutoSize = True
-        Me.Label18.Location = New System.Drawing.Point(430, 115)
+        Me.Label18.Location = New System.Drawing.Point(287, 75)
+        Me.Label18.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label18.Name = "Label18"
-        Me.Label18.Size = New System.Drawing.Size(56, 20)
+        Me.Label18.Size = New System.Drawing.Size(40, 13)
         Me.Label18.TabIndex = 7
         Me.Label18.Text = "MType"
         '
         'Label17
         '
         Me.Label17.AutoSize = True
-        Me.Label17.Location = New System.Drawing.Point(430, 43)
+        Me.Label17.Location = New System.Drawing.Point(287, 28)
+        Me.Label17.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label17.Name = "Label17"
-        Me.Label17.Size = New System.Drawing.Size(53, 20)
+        Me.Label17.Size = New System.Drawing.Size(36, 13)
         Me.Label17.TabIndex = 6
         Me.Label17.Text = "MSize"
         '
         'Label16
         '
         Me.Label16.AutoSize = True
-        Me.Label16.Location = New System.Drawing.Point(27, 192)
+        Me.Label16.Location = New System.Drawing.Point(18, 125)
+        Me.Label16.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label16.Name = "Label16"
-        Me.Label16.Size = New System.Drawing.Size(116, 20)
+        Me.Label16.Size = New System.Drawing.Size(79, 13)
         Me.Label16.TabIndex = 4
         Me.Label16.Text = "Unidad Medida"
         '
         'Label15
         '
         Me.Label15.AutoSize = True
-        Me.Label15.Location = New System.Drawing.Point(27, 115)
+        Me.Label15.Location = New System.Drawing.Point(18, 75)
+        Me.Label15.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label15.Name = "Label15"
-        Me.Label15.Size = New System.Drawing.Size(145, 20)
+        Me.Label15.Size = New System.Drawing.Size(97, 13)
         Me.Label15.TabIndex = 2
         Me.Label15.Text = "Recursos Materials"
         '
         'Label14
         '
         Me.Label14.AutoSize = True
-        Me.Label14.Location = New System.Drawing.Point(27, 43)
+        Me.Label14.Location = New System.Drawing.Point(18, 28)
+        Me.Label14.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label14.Name = "Label14"
-        Me.Label14.Size = New System.Drawing.Size(65, 20)
+        Me.Label14.Size = New System.Drawing.Size(44, 13)
         Me.Label14.TabIndex = 0
         Me.Label14.Text = "Material"
         '
@@ -337,74 +372,83 @@ Partial Class Materials
         Me.TabPage1.Controls.Add(Me.Label2)
         Me.TabPage1.Controls.Add(Me.Label3)
         Me.TabPage1.Controls.Add(Me.Label4)
-        Me.TabPage1.Location = New System.Drawing.Point(4, 29)
+        Me.TabPage1.Location = New System.Drawing.Point(4, 22)
+        Me.TabPage1.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.TabPage1.Name = "TabPage1"
-        Me.TabPage1.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage1.Size = New System.Drawing.Size(1146, 613)
+        Me.TabPage1.Padding = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.TabPage1.Size = New System.Drawing.Size(761, 394)
         Me.TabPage1.TabIndex = 0
         Me.TabPage1.Text = "Materials"
         Me.TabPage1.UseVisualStyleBackColor = True
         '
         'Button3
         '
-        Me.Button3.Location = New System.Drawing.Point(546, 286)
+        Me.Button3.Location = New System.Drawing.Point(265, 186)
+        Me.Button3.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.Button3.Name = "Button3"
-        Me.Button3.Size = New System.Drawing.Size(83, 40)
+        Me.Button3.Size = New System.Drawing.Size(55, 26)
         Me.Button3.TabIndex = 28
         Me.Button3.Text = "Update"
         Me.Button3.UseVisualStyleBackColor = True
         '
         'txtFiltro
         '
-        Me.txtFiltro.Location = New System.Drawing.Point(726, 318)
+        Me.txtFiltro.Location = New System.Drawing.Point(387, 190)
+        Me.txtFiltro.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.txtFiltro.Name = "txtFiltro"
-        Me.txtFiltro.Size = New System.Drawing.Size(214, 26)
+        Me.txtFiltro.Size = New System.Drawing.Size(144, 20)
         Me.txtFiltro.TabIndex = 27
         '
         'txtIdVendor
         '
-        Me.txtIdVendor.Location = New System.Drawing.Point(198, 140)
+        Me.txtIdVendor.Location = New System.Drawing.Point(132, 91)
+        Me.txtIdVendor.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.txtIdVendor.Name = "txtIdVendor"
-        Me.txtIdVendor.Size = New System.Drawing.Size(167, 26)
+        Me.txtIdVendor.Size = New System.Drawing.Size(113, 20)
         Me.txtIdVendor.TabIndex = 13
         '
         'txtIdRenta
         '
-        Me.txtIdRenta.Location = New System.Drawing.Point(580, 50)
+        Me.txtIdRenta.Location = New System.Drawing.Point(387, 32)
+        Me.txtIdRenta.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.txtIdRenta.Name = "txtIdRenta"
-        Me.txtIdRenta.Size = New System.Drawing.Size(167, 26)
+        Me.txtIdRenta.Size = New System.Drawing.Size(113, 20)
         Me.txtIdRenta.TabIndex = 14
         '
         'txtNameMaterials
         '
-        Me.txtNameMaterials.Location = New System.Drawing.Point(198, 47)
+        Me.txtNameMaterials.Location = New System.Drawing.Point(132, 31)
+        Me.txtNameMaterials.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.txtNameMaterials.Name = "txtNameMaterials"
-        Me.txtNameMaterials.Size = New System.Drawing.Size(167, 26)
+        Me.txtNameMaterials.Size = New System.Drawing.Size(113, 20)
         Me.txtNameMaterials.TabIndex = 15
         '
         'Label13
         '
         Me.Label13.AutoSize = True
-        Me.Label13.Location = New System.Drawing.Point(946, 318)
+        Me.Label13.Location = New System.Drawing.Point(534, 190)
+        Me.Label13.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label13.Name = "Label13"
-        Me.Label13.Size = New System.Drawing.Size(60, 20)
+        Me.Label13.Size = New System.Drawing.Size(41, 13)
         Me.Label13.TabIndex = 26
         Me.Label13.Text = "Search"
         '
         'btnQuery
         '
-        Me.btnQuery.Location = New System.Drawing.Point(441, 286)
+        Me.btnQuery.Location = New System.Drawing.Point(188, 186)
+        Me.btnQuery.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.btnQuery.Name = "btnQuery"
-        Me.btnQuery.Size = New System.Drawing.Size(85, 40)
+        Me.btnQuery.Size = New System.Drawing.Size(57, 26)
         Me.btnQuery.TabIndex = 25
         Me.btnQuery.Text = "Query"
         Me.btnQuery.UseVisualStyleBackColor = True
         '
         'btnSave
         '
-        Me.btnSave.Location = New System.Drawing.Point(330, 286)
+        Me.btnSave.Location = New System.Drawing.Point(123, 186)
+        Me.btnSave.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.btnSave.Name = "btnSave"
-        Me.btnSave.Size = New System.Drawing.Size(81, 40)
+        Me.btnSave.Size = New System.Drawing.Size(54, 26)
         Me.btnSave.TabIndex = 24
         Me.btnSave.Text = "Save"
         Me.btnSave.UseVisualStyleBackColor = True
@@ -412,27 +456,30 @@ Partial Class Materials
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(99, 146)
+        Me.Label2.Location = New System.Drawing.Point(66, 95)
+        Me.Label2.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(75, 20)
+        Me.Label2.Size = New System.Drawing.Size(50, 13)
         Me.Label2.TabIndex = 1
         Me.Label2.Text = "IdVendor"
         '
         'Label3
         '
         Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(492, 53)
+        Me.Label3.Location = New System.Drawing.Point(328, 34)
+        Me.Label3.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(67, 20)
+        Me.Label3.Size = New System.Drawing.Size(45, 13)
         Me.Label3.TabIndex = 2
         Me.Label3.Text = "IdRenta"
         '
         'Label4
         '
         Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(99, 53)
+        Me.Label4.Location = New System.Drawing.Point(66, 34)
+        Me.Label4.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(51, 20)
+        Me.Label4.Size = New System.Drawing.Size(35, 13)
         Me.Label4.TabIndex = 3
         Me.Label4.Text = "Name"
         '
@@ -440,27 +487,22 @@ Partial Class Materials
         '
         Me.TabControl1.Controls.Add(Me.TabPage1)
         Me.TabControl1.Controls.Add(Me.TabPage2)
-        Me.TabControl1.Location = New System.Drawing.Point(8, 50)
+        Me.TabControl1.Location = New System.Drawing.Point(5, 32)
+        Me.TabControl1.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.TabControl1.Name = "TabControl1"
         Me.TabControl1.SelectedIndex = 0
-        Me.TabControl1.Size = New System.Drawing.Size(1154, 646)
+        Me.TabControl1.Size = New System.Drawing.Size(769, 420)
         Me.TabControl1.TabIndex = 3
-        '
-        'txtDMaterial
-        '
-        Me.txtDMaterial.Location = New System.Drawing.Point(186, 40)
-        Me.txtDMaterial.Name = "txtDMaterial"
-        Me.txtDMaterial.Size = New System.Drawing.Size(132, 26)
-        Me.txtDMaterial.TabIndex = 27
         '
         'Materials
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 20.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1174, 708)
+        Me.ClientSize = New System.Drawing.Size(783, 460)
         Me.Controls.Add(Me.Button5)
         Me.Controls.Add(Me.TabControl1)
         Me.Controls.Add(Me.btnMenu)
+        Me.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.Name = "Materials"
         Me.Text = "Materials"
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()

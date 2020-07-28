@@ -32,6 +32,11 @@ create table employees(
 	estatus char(1)
 )
 
+alter table contact 
+--ejecutar si ya se tiene la tabla fuerror de escribir email
+EXECUTE sp_rename 'conact', 'emial', 'email';
+
+
 create table contact(
 	idContact varchar(36) primary key not null,
 	phoneNumber1 varchar(13),
