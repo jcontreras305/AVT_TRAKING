@@ -176,48 +176,203 @@ or ct.companyName like ''
 or ha.city like ''
 
 
-create proc sp_Update_Client
-	@idCL varchar(36),
-	@ClientID int,
-	@FirstName varchar (30),
-	@MiddleName varchar (30),
-	@LastName varchar (30),
-	@CompanyName varchar (50),
-	@Status char(1),
-	--Contact
-	@idContact varchar(36),
-	@phoneNumer1 varchar(13),
-	@phoneNumer2 varchar(13),
-	@email varchar(50),
-	--Addres
-	@idAddres varchar(36),
-	@avenue varchar(80),
-	@number int,
-	@city varchar (20),
-	@providence varchar (20),
-	@postalcode int
-as
-declare @error int  -- declaro variables para los ID que son nuevos y una variable de error
-begin 
-	begin tran 
-		begin try
-			--se inserta un contacto
+--create proc sp_Update_Client
+--	@idCL varchar(36),
+--	@ClientID int,
+--	@FirstName varchar (30),
+--	@MiddleName varchar (30),
+--	@LastName varchar (30),
+--	@CompanyName varchar (50),
+--	@Status char(1),
+--	--Contact
+--	@idContact varchar(36),
+--	@phoneNumer1 varchar(13),
+--	@phoneNumer2 varchar(13),
+--	@email varchar(50),
+--	--Addres
+--	@idAddres varchar(36),
+--	@avenue varchar(80),
+--	@number int,
+--	@city varchar (20),
+--	@providence varchar (20),
+--	@postalcode int
+--as
+--declare @error int  -- declaro variables para los ID que son nuevos y una variable de error
+--begin 
+--	begin tran 
+--		begin try
+--			--se inserta un contacto
 
-				update contact set phoneNumber1= @phoneNumer1 , phoneNumber2=@phoneNumer2 ,email = @email where idContact = @idContact
-				if @@ERROR <> 0 begin set @error = @@ERROR goto solveproblem end
-				update HomeAddress set avenue= @avenue, number = number , city=@city , providence =@providence, postalCode = @postalcode where idHomeAdress = @idAddres
-				if @@ERROR <> 0 begin set @error = @@ERROR goto solveproblem end
-				update  clients set firstName= @FirstName,middleName= @MiddleName,lastName= @LastName ,companyName=@CompanyName,estatus = @Status where idClient = @idCL
-				if @@ERROR <> 0 begin set @error = @@ERROR goto solveproblem end 
-		end try
-		begin catch
-			goto solveproblem
-		end catch
-	commit tran
-	solveproblem:
-	if @error <> 0
-	begin 
-		rollback tran 
-	end
-end
-go
+--				update contact set phoneNumber1= @phoneNumer1 , phoneNumber2=@phoneNumer2 ,email = @email where idContact = @idContact
+--				if @@ERROR <> 0 begin set @error = @@ERROR goto solveproblem end
+--				update HomeAddress set avenue= @avenue, number = number , city=@city , providence =@providence, postalCode = @postalcode where idHomeAdress = @idAddres
+--				if @@ERROR <> 0 begin set @error = @@ERROR goto solveproblem end
+--				update  clients set firstName= @FirstName,middleName= @MiddleName,lastName= @LastName ,companyName=@CompanyName,estatus = @Status where idClient = @idCL
+--				if @@ERROR <> 0 begin set @error = @@ERROR goto solveproblem end 
+--		end try
+--		begin catch
+--			goto solveproblem
+--		end catch
+--	commit tran
+--	solveproblem:
+--	if @error <> 0
+--	begin 
+--		rollback tran 
+--	end
+--end
+--go
+
+
+--#######################################################################################################################
+--########### PROCEDURE OF MATERIALS ####################################################################################
+--#######################################################################################################################
+
+
+--create procedure [dbo].[sp_insert_Material]
+--@nombre varchar(50),
+--@numero int,
+--@idVendor varchar(36),
+--@status char(1),
+--@msg varchar(100) out
+--as
+--declare @idMaterial varchar(36)
+--declare @idDM varchar(36)
+--declare @error int
+--begin
+--	begin tran
+--		begin try	 
+--			set @idMaterial = NEWID()
+--			set @idDM = NEWID()
+--			if not @nombre = '' and not @idVendor = ''
+--			begin 
+--				insert into material values (@idMaterial,@numero,@nombre,@status)
+--				insert into detalleMaterial values (@idDM,'','','',0.0,'',0.0,@idMaterial,@idVendor)
+--				insert into existences values (@idDM , 0.0)
+--			end
+--			else 
+--			begin 
+--				set @error = 1
+--				goto solveProblem
+--			end
+--		end try
+--		begin catch
+
+--		end catch
+--	commit tran
+--	solveProblem:
+--	if @error <> 0 
+--	begin 
+--		rollback tran
+--		set @msg = concat('Is problably that the Material ',@nombre,' have been inserted, or try to changue the Vendor')
+--	end  
+--end
+--go
+
+--ALTER proc [dbo].[sp_actualizaMaterial]
+--@idMaterial varchar(36),
+--@nombreN varchar(50),
+--@numeroN int,
+--@idVendorN varchar(36),
+--@statusN char(1),
+----datos viejos
+--@idVendorV varchar(36),
+--@msg varchar(100) out
+--as 
+--declare @vendor1 varchar(36)
+--declare @vendor2 varchar(36)
+--declare @error int
+--begin
+--	begin tran 
+--		begin try 
+--			set @error = 0
+--			if @idVendorN = @idVendorV
+--			begin --solo cambian los datos de material 
+--				update material set name = @nombreN , estatus = @statusN where idMaterial = @idMaterial 
+--				set @msg = 'Successful.'
+--			end
+--			else --Cambio de Vendedor
+--			begin
+--				set @Vendor2 = (select  top 1 dm.idVendor from material as ma right join detalleMaterial as dm  on ma.idMaterial = dm.idMaterial where ma.name = @nombreN) 
+--				if @vendor2 = @idVendorN begin
+--					set @msg = 'Rigth now exists a material whit the same Vendor.'
+--					set @error = 1
+--				end
+--				else begin
+--				update detalleMaterial set idVendor = @idVendorN where idMaterial = @idMaterial and idVendor = @idVendorV
+--				update material set name = @nombreN , estatus = @statusN where idMaterial = @idMaterial 
+--				set @msg = 'Successful.'
+--				end
+--			end
+--		end try
+--		begin catch
+--			goto solveproblem
+--		end catch
+--	commit tran 
+--	solveproblem:
+--	if @error <> 0 
+--	begin 
+--		rollback tran
+--	end 
+--end
+--go
+
+
+--#######################################################################################################################
+--########### PROCEDURE OF VENDOR ####################################################################################
+--#######################################################################################################################
+
+
+--create procedure sp_insert_Vendor
+--@nombre varchar(50),
+--@numero int,
+--@description varchar(80),
+--@status char(1),
+--@msg varchar(100) out
+--as
+--declare @idVendor varchar(36)
+--declare @error int
+--begin
+--	begin tran
+--		begin try	 
+--			set @idVendor = NEWID()
+--			if (select COUNT(*) from vendor where exists (select name from vendor where name like @nombre or numberVendor = @numero))=0
+--			begin
+--				insert into vendor values (@idVendor,@numero,@nombre,@description,@status)
+--				set @msg = 'Successful'
+--			end 
+--			else 
+--			begin 
+--				set @error = 1
+--				goto solveProblem
+--			end
+--		end try
+--		begin catch
+--			goto solveProblem
+--		end catch
+--	commit tran
+--	solveProblem:
+--	if @error <> 0 
+--	begin 
+--		rollback tran
+--		set @msg = CONCAT('Is probably that the Vendor ',@nombre,' have been registrated.')
+--	end  
+--end
+--go
+
+--#######################################################################################################################
+--########### TABLE materialOrder #######################################################################################
+--#######################################################################################################################
+
+
+--create table materialOrder (
+--	idOrder varchar (36) primary key not null,
+--	quantity float,
+--	price float,
+--	fecha date,
+--	idMaterial varchar(36)
+--)
+
+--alter table MaterialOrder 
+--add constraint fk_idMaterial_MaterialOrder foreign key (idMaterial)
+--references material (idMaterial)
+--go

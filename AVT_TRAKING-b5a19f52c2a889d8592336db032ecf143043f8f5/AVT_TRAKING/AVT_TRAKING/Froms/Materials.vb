@@ -3,15 +3,68 @@ Imports System.Data.SqlClient
 Public Class Materials
 
 
-    Dim mate As MetodosMaterials = New MetodosMaterials()
+
+
+
+
+
+    Public idVedor, idMaterial, idDM, idOrder As String
+    Dim dataVendor, listIdVendors As New List(Of String)
+    Dim dataMaterial(5) As String
+    Dim flagUpdateOrder As Boolean = False
+
+    Dim mtdMaterial As MetodosMaterials = New MetodosMaterials()
     Private Sub Materials_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        txtNumeroMaterial.Enabled = False
+        txtNumeroMaterial.Text = mtdMaterial.valueMaxMaterial
+        txtNumeroVendedor.Enabled = False
+        txtNumeroVendedor.Text = mtdMaterial.valueMaxVendor
 
     End Sub
 
-    Public Sub MostrarDatos()
-        mate.ConsultaMaterials("select * from materials")
-        Me.DataGridView1.DataSource = mate.ds.Tables("materials")
+    Private Sub btnSaveVendor_Click(sender As Object, e As EventArgs) Handles btnSaveVendor.Click
+        Dim dataVendor(3) As String
+        dataVendor(0) = txtNumeroVendedor.Text
+        dataVendor(1) = txtNombreVendedor.Text
+        dataVendor(2) = txtDescripcionVendedor.Text
+        dataVendor(3) = If(chbEnableVendor.Checked, "E", "D")
+        mtdMaterial.insertarVendor(dataVendor)
+        mtdMaterial.selectVedor(tbkVendor, "")
+    End Sub
 
+
+    Private Sub btnUpdateVendor_Click(sender As Object, e As EventArgs) Handles btnUpdateVendor.Click
+        Dim dataVendor(3) As String
+        dataVendor(0) = idVedor
+        dataVendor(1) = txtNombreVendedor.Text
+        dataVendor(2) = txtDescripcionVendedor.Text
+        dataVendor(3) = If(chbEnableVendor.Checked, "E", "D")
+        mtdMaterial.actializarVendor(dataVendor)
+        mtdMaterial.selectVedor(tbkVendor, "")
+    End Sub
+
+    Private Sub txtSearchVendedor_TextChanged(sender As Object, e As EventArgs) Handles txtSearchVendedor.TextChanged
+        mtdMaterial.selectVedor(tbkVendor, txtSearchVendedor.Text)
+    End Sub
+
+    Private Sub btnSaveMaterial_Click(sender As Object, e As EventArgs) Handles btnSaveMaterial.Click
+        Dim dataMaterial(3) As String
+        dataMaterial(0) = txtNameMaterials.Text
+        dataMaterial(1) = txtNumeroMaterial.Text
+        dataMaterial(2) = listIdVendors(cmbVendedor.FindString(cmbVendedor.Text))
+        dataMaterial(3) = If(chbEnableMaterial.Checked, "E", "D")
+        mtdMaterial.insertarMaterial(dataMaterial)
+    End Sub
+
+    Private Sub btnUpdateMaterial_Click(sender As Object, e As EventArgs) Handles btnUpdateMaterial.Click
+        Dim dataMaterialnuevos(4) As String
+        dataMaterialnuevos(0) = txtNameMaterials.Text
+        dataMaterialnuevos(1) = txtNumeroMaterial.Text
+        dataMaterialnuevos(2) = listIdVendors(cmbVendedor.FindString(cmbVendedor.Text))
+        dataMaterialnuevos(3) = If(chbEnableMaterial.Checked, "E", "A")
+        dataMaterialnuevos(4) = idMaterial
+        mtdMaterial.actualizarMaterial(dataMaterialnuevos, dataMaterial(1))
+        mtdMaterial.selectMaterial(tblMaterial, txtFiltro.Text)
     End Sub
 
     Private Sub BtnMenu_Click(sender As Object, e As EventArgs) Handles btnMenu.Click
@@ -20,57 +73,19 @@ Public Class Materials
         Me.Finalize()
     End Sub
 
-    Private Sub BtnQuery_Click(sender As Object, e As EventArgs) Handles btnQuery.Click
-        MostrarDatos()
-
+    Private Sub tblMaterial_CellMouseDoubleClick(sender As Object, e As DataGridViewCellMouseEventArgs) Handles tblMaterial.CellMouseDoubleClick
+        Dim cont As Int32 = 0
+        For Each cell As DataGridViewCell In tblMaterial.CurrentRow.Cells
+            dataMaterial(cont) = cell.Value.ToString
+            cont += 1
+        Next
+        idMaterial = dataMaterial(0)
+        txtNameMaterials.Text = dataMaterial(2)
+        txtNumeroMaterial.Text = dataMaterial(3)
+        chbEnableMaterial.Checked = If(dataMaterial(4).Equals("Enable"), True, False)
+        cmbVendedor.Text = dataMaterial(5)
+        cmbVendedor.SelectedIndex = cmbVendedor.FindString(dataMaterial(5))
     End Sub
-
-    Private Sub BtnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
-        Dim agregar As String = "insert into materials values (" + txtIdVendor.Text + ",'" + txtIdRenta.Text + "','" +
-            txtNameMaterials.Text + "')"
-
-        If (mate.InsertarMaterials(agregar)) Then
-            MessageBox.Show("Datos agregados correctamente")
-            MostrarDatos()
-        Else
-            MessageBox.Show("Error al agregar")
-        End If
-    End Sub
-
-    Private Sub DataGridView1_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridView1.CellContentClick
-        Dim dgv As DataGridViewRow = DataGridView1.Rows(e.RowIndex)
-
-        txtIdVendor.Text = dgv.Cells(0).Value.ToString()
-        txtIdRenta.Text = dgv.Cells(1).Value.ToString()
-        txtNameMaterials.Text = dgv.Cells(2).Value.ToString()
-
-
-
-
-    End Sub
-
-    Private Sub TextBox1_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtFiltro.KeyPress
-        Dim conn = New SqlConnection("data source=localhost; initial catalog=VRT_TRAKING; integrated security=true")
-        Dim da = New SqlDataAdapter("select * from materials where Vendor like '" + txtFiltro.Text + "%'", conn)
-        Dim dt = New DataTable
-        da.Fill(dt)
-
-        Me.DataGridView1.DataSource = dt
-    End Sub
-
-    'Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
-    '   Dim actulizar As String = ("UPDATE materials SET Vendor ='" & Me.txtIdVendor.Text & "', MSize ='" & Me.txtIdRenta.Text & "',MType ='" & Me.txtNameMaterials.Text & "',
-    '                  MThickness = '" & Me.txtMthickness.Text & "', MPrize ='" & Me.txtMprize.Text & "',MDesc = '" & Me.txtMdesc.Text & "', Class = '" & Me.txtClass.Text & "',
-    '                 ElbowType = '" & Me.txtElbowType.Text & ", ElbowThickness ='" & Me.txtElbowThinckness.Text & "', ElbowPrize = '" & Me.txtElbowPrize.Text & "', 
-    '                ElbowDesc = '" & Me.txtElbowDesc.Text & "' WHERE IdMaterials =" & Conversion.Int(Me.txtIdMaterials.Text) & "")
-
-    'If (mate.UpdateMaterial(actulizar)) Then
-    '       MessageBox.Show("Datos Actualizados correctamente")
-    '      MostrarDatos()
-    'Else
-    '       MessageBox.Show("Error al Actualizar")
-    'End If
-    'End Sub
 
     Private Sub Button5_Click(sender As Object, e As EventArgs) Handles Button5.Click
         Dim a As New Login
@@ -78,57 +93,126 @@ Public Class Materials
         Me.Finalize()
     End Sub
 
-    Private Function recolectar() As String()
-        Try
-            Dim dataMaterials(1) As String
-            dataMaterials(0) = txtNameMaterials.Text
+    Private Sub txtFiltro_KeyUp(sender As Object, e As KeyEventArgs) Handles txtFiltro.KeyUp
+        mtdMaterial.selectMaterial(tblMaterial, txtFiltro.Text)
+    End Sub
 
-            Return dataMaterials
-        Catch ex As Exception
-            Return Nothing
-        End Try
+    Private Sub txtDMaterial_MouseClick(sender As Object, e As MouseEventArgs) Handles txtDMaterial.MouseClick
+        Dim SM As New SelectMaterial
+        Dim listIdsVendor As New List(Of String)
+        mtdMaterial.llenarVendorCombo(SM.cmbNombreVendorSM, listIdsVendor)
+        mtdMaterial.selectMaterial(SM.tblMaterialSM, "%", "All", False)
+        SM.cmbNombreVendorSM.Text = "All"
+        AddOwnedForm(SM)
+        SM.ShowDialog()
+    End Sub
 
-    End Function
+    Private Sub btnUpdateMareialData_Click(sender As Object, e As EventArgs) Handles btnUpdateMareialData.Click
+        Dim listDatosNuevos As New List(Of String)
+        listDatosNuevos.Add(idMaterial)
+        listDatosNuevos.Add(txtRM.Text)
+        listDatosNuevos.Add(cmbUnidadDeMedida.Text)
+        listDatosNuevos.Add(sprTamanio.Value)
+        listDatosNuevos.Add(txtTipo.Text)
+        listDatosNuevos.Add(sprPrice.Value)
+        listDatosNuevos.Add(txtDescripcion.Text)
+        mtdMaterial.actualizarDatosMaterial(listDatosNuevos)
+    End Sub
 
-
-
-
-    'AQUÍ INICIAN LOS CODIGOS PARA LA INTERFAZ DE LOS DETALLES DE LOS MATERIALES 
-    Private Sub btnSaveDetallesMaterials_Click(sender As Object, e As EventArgs) Handles btnSaveDetallesMaterials.Click
-        Dim agregar As String = "insert into DetallesMaterials values (" + txtDMaterial.Text + ",'" + txtRM.Text + "','" +
-    txtUM.Text + "','" + txtMSize.Text + "','" + txtMType.Text + "','" + txtMTychness.Text +
-    "','" + txtMprice.Text + "','" + txtDescripcion.Text + "','" + txtCantidad.Text + "')"
-
-        If (mate.InsertarDetalleMaterial(agregar)) Then
-            MessageBox.Show("Datos agregados correctamente")
-            MostrarDetallesMateriales()
+    Private Sub chbOrden_CheckedChanged(sender As Object, e As EventArgs) Handles chbOrden.CheckedChanged
+        If chbOrden.Checked Then
+            sprCantidadOrden.Enabled = True
+            sprPricioOrden.Enabled = True
+            dtpFechaOrden.Enabled = True
+            btnOrderSave.Enabled = True
+            flagUpdateOrder = False
         Else
-            MessageBox.Show("Error al agregar")
+            sprCantidadOrden.Enabled = False
+            sprPricioOrden.Enabled = False
+            dtpFechaOrden.Enabled = False
+            btnOrderSave.Enabled = False
         End If
     End Sub
 
-    Public Sub MostrarDetallesMateriales()
-        mate.ConsultaDetallesMaterials("select * from DetallesMaterials")
-        Me.DataGridView2.DataSource = mate.ds.Tables("DetallesMaterials")
+    Private Sub sprPricioOrden_ValueChanged(sender As Object, e As EventArgs) Handles sprPricioOrden.ValueChanged
+        Dim total As Double = sprPricioOrden.Value * sprCantidadOrden.Value
+        lblTotal.Text = CStr(total.ToString("N"))
+    End Sub
+
+    Private Sub sprCantidadOrden_ValueChanged(sender As Object, e As EventArgs) Handles sprCantidadOrden.ValueChanged
+        Dim total As Double = sprPricioOrden.Value * sprCantidadOrden.Value
+        lblTotal.Text = CStr(total.ToString("N"))
+    End Sub
+
+    Private Sub txtSearch_TextChanged(sender As Object, e As EventArgs) Handles txtSearch.TextChanged
+        mtdMaterial.selectOrdersMaterials(tblMaterialAndOrders, txtSearch.Text)
+    End Sub
+
+    Private Sub btnDeleteOrder_Click(sender As Object, e As EventArgs) Handles btnDeleteOrder.Click
+        If tblMaterialAndOrders.SelectedRows.Count = 1 Then
+            If MessageBox.Show("Are you sure to delete this order", "Advertence", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) = Windows.Forms.DialogResult.OK Then
+                mtdMaterial.EliminarOrden(tblMaterialAndOrders.CurrentRow.Cells(2).Value)
+            End If
+        End If
+    End Sub
+
+    Private Sub btnUpdateOrder_Click(sender As Object, e As EventArgs) Handles btnUpdateOrder.Click
+        If tblMaterialAndOrders.SelectedRows.Count = 1 Then
+            chbOrden.Checked = True
+            sprCantidadOrden.Value = tblMaterialAndOrders.CurrentRow.Cells.Item(7).Value
+            sprPricioOrden.Value = tblMaterialAndOrders.CurrentRow.Cells.Item(5).Value
+            dtpFechaOrden.Value = tblMaterialAndOrders.CurrentRow.Cells.Item(6).Value
+            idMaterial = tblMaterialAndOrders.CurrentRow.Cells.Item(0).Value
+            idOrder = tblMaterialAndOrders.CurrentRow.Cells.Item(2).Value
+            flagUpdateOrder = True
+        End If
+    End Sub
+
+    Private Sub btnOrderSave_Click(sender As Object, e As EventArgs) Handles btnOrderSave.Click
+        If flagUpdateOrder Then
+            Dim date1 As Date = dtpFechaOrden.Value
+            Dim fechaFormato As String = date1.Year.ToString() + "-" + date1.Month.ToString() + "-" + date1.Day.ToString
+            mtdMaterial.UpdateOrden(idOrder, sprCantidadOrden.Value, sprPricioOrden.Value, fechaFormato, idMaterial)
+            mtdMaterial.selectOrdersMaterials(tblMaterialAndOrders, "%")
+        Else
+            If sprCantidadOrden.Value > 0.0 Or sprPricioOrden.Value > 0.0 Then
+                Dim dataOrderLits As New List(Of String)
+                dataOrderLits.Add(idMaterial)
+                dataOrderLits.Add(sprCantidadOrden.Value.ToString)
+                dataOrderLits.Add(sprPricioOrden.Value.ToString)
+                Dim date1 As Date = dtpFechaOrden.Value
+                Dim fechaFomato As String = date1.Year.ToString() + "-" + date1.Month.ToString() + "-" + date1.Day.ToString
+                dataOrderLits.Add(fechaFomato)
+                dataOrderLits.Add(idDM)
+                mtdMaterial.nuevaOrden(dataOrderLits)
+            Else
+                MsgBox("Error. The sistem not permite a 0,0.")
+            End If
+        End If
 
     End Sub
 
+    Private Sub tbkVendor_MouseDoubleClick(sender As Object, e As MouseEventArgs) Handles tbkVendor.MouseDoubleClick
+        If dataVendor.Count > 0 Then
+            dataVendor.Clear()
+        End If
+        For Each cell As DataGridViewCell In tbkVendor.CurrentRow.Cells
+            dataVendor.Add(cell.Value.ToString)
+        Next
+        idVedor = dataVendor(0)
+        txtNumeroVendedor.Text = dataVendor(1)
+        txtNombreVendedor.Text = dataVendor(2)
+        txtDescripcionVendedor.Text = dataVendor(3)
+        chbEnableVendor.Checked = If(dataVendor(4).Equals("Enable"), True, False)
 
-    Private Sub DataGridView2_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles DataGridView2.CellContentClick
-        Dim dgv1 As DataGridViewRow = DataGridView2.Rows(e.RowIndex)
-
-        txtDMaterial.Text = dgv1.Cells(0).Value.ToString()
-        txtRM.Text = dgv1.Cells(1).Value.ToString()
-        txtUM.Text = dgv1.Cells(2).Value.ToString()
-        txtMSize.Text = dgv1.Cells(3).Value.ToString()
-        txtMType.Text = dgv1.Cells(4).Value.ToString()
-        txtMTychness.Text = dgv1.Cells(5).Value.ToString()
-        txtMprice.Text = dgv1.Cells(6).Value.ToString()
-        txtDescripcion.Text = dgv1.Cells(7).Value.ToString()
-        txtCantidad.Text = dgv1.Cells(8).Value.ToString()
     End Sub
 
-    Private Sub btnQueryDetalleM_Click(sender As Object, e As EventArgs) Handles btnQueryDetalleM.Click
-        MostrarDetallesMateriales()
+    Private Sub TabControl1_Selected(sender As Object, e As TabControlEventArgs) Handles TabControl1.Selected
+        mtdMaterial.llenarVendorCombo(cmbVendedor, listIdVendors)
+        mtdMaterial.selectMaterial(tblMaterial, "")
     End Sub
+
+
+
+
 End Class

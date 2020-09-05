@@ -22,9 +22,15 @@ Partial Class WorkCodes
     'No lo modifique con el editor de código.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.DataGridView1 = New System.Windows.Forms.DataGridView()
+        Me.Button1 = New System.Windows.Forms.Button()
+        Me.Button2 = New System.Windows.Forms.Button()
+        Me.TabControl1 = New System.Windows.Forms.TabControl()
+        Me.TabPage1 = New System.Windows.Forms.TabPage()
+        Me.TabPage2 = New System.Windows.Forms.TabPage()
+        Me.Label11 = New System.Windows.Forms.Label()
+        Me.txtFiltro = New System.Windows.Forms.TextBox()
         Me.btnSave = New System.Windows.Forms.Button()
-        Me.btnQuery = New System.Windows.Forms.Button()
         Me.Label10 = New System.Windows.Forms.Label()
         Me.Label9 = New System.Windows.Forms.Label()
         Me.txtClassDescription = New System.Windows.Forms.TextBox()
@@ -45,289 +51,342 @@ Partial Class WorkCodes
         Me.Label3 = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
-        Me.DataGridView1 = New System.Windows.Forms.DataGridView()
-        Me.Button1 = New System.Windows.Forms.Button()
-        Me.txtFiltro = New System.Windows.Forms.TextBox()
-        Me.Label11 = New System.Windows.Forms.Label()
-        Me.Button2 = New System.Windows.Forms.Button()
-        Me.Panel1.SuspendLayout()
+        Me.btnNewWork = New System.Windows.Forms.Button()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.TabControl1.SuspendLayout()
+        Me.TabPage1.SuspendLayout()
         Me.SuspendLayout()
         '
-        'Panel1
+        'DataGridView1
         '
-        Me.Panel1.BackColor = System.Drawing.SystemColors.ButtonHighlight
-        Me.Panel1.Controls.Add(Me.Label11)
-        Me.Panel1.Controls.Add(Me.txtFiltro)
-        Me.Panel1.Controls.Add(Me.btnSave)
-        Me.Panel1.Controls.Add(Me.btnQuery)
-        Me.Panel1.Controls.Add(Me.Label10)
-        Me.Panel1.Controls.Add(Me.Label9)
-        Me.Panel1.Controls.Add(Me.txtClassDescription)
-        Me.Panel1.Controls.Add(Me.txtBillingRate3)
-        Me.Panel1.Controls.Add(Me.txtBillingRateOT)
-        Me.Panel1.Controls.Add(Me.txtBillingRateST)
-        Me.Panel1.Controls.Add(Me.txtClassification)
-        Me.Panel1.Controls.Add(Me.txtWorkCode)
-        Me.Panel1.Controls.Add(Me.Label8)
-        Me.Panel1.Controls.Add(Me.Label7)
-        Me.Panel1.Controls.Add(Me.Label6)
-        Me.Panel1.Controls.Add(Me.Label5)
-        Me.Panel1.Controls.Add(Me.txtCraft)
-        Me.Panel1.Controls.Add(Me.txtSubJob)
-        Me.Panel1.Controls.Add(Me.txtJobNumber)
-        Me.Panel1.Controls.Add(Me.txtWorkCodeID)
-        Me.Panel1.Controls.Add(Me.Label4)
-        Me.Panel1.Controls.Add(Me.Label3)
-        Me.Panel1.Controls.Add(Me.Label2)
-        Me.Panel1.Controls.Add(Me.Label1)
-        Me.Panel1.Location = New System.Drawing.Point(3, 51)
-        Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(1167, 394)
-        Me.Panel1.TabIndex = 0
+        Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.DataGridView1.Location = New System.Drawing.Point(2, 293)
+        Me.DataGridView1.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.DataGridView1.Name = "DataGridView1"
+        Me.DataGridView1.RowHeadersWidth = 62
+        Me.DataGridView1.RowTemplate.Height = 28
+        Me.DataGridView1.Size = New System.Drawing.Size(778, 140)
+        Me.DataGridView1.TabIndex = 1
+        '
+        'Button1
+        '
+        Me.Button1.Location = New System.Drawing.Point(11, 8)
+        Me.Button1.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(66, 21)
+        Me.Button1.TabIndex = 2
+        Me.Button1.Text = "Menu"
+        Me.Button1.UseVisualStyleBackColor = True
+        '
+        'Button2
+        '
+        Me.Button2.ForeColor = System.Drawing.Color.Red
+        Me.Button2.Location = New System.Drawing.Point(731, 8)
+        Me.Button2.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.Button2.Name = "Button2"
+        Me.Button2.Size = New System.Drawing.Size(43, 21)
+        Me.Button2.TabIndex = 3
+        Me.Button2.Text = "Exit"
+        Me.Button2.UseVisualStyleBackColor = True
+        '
+        'TabControl1
+        '
+        Me.TabControl1.Controls.Add(Me.TabPage1)
+        Me.TabControl1.Controls.Add(Me.TabPage2)
+        Me.TabControl1.Location = New System.Drawing.Point(2, 34)
+        Me.TabControl1.Name = "TabControl1"
+        Me.TabControl1.SelectedIndex = 0
+        Me.TabControl1.Size = New System.Drawing.Size(778, 254)
+        Me.TabControl1.TabIndex = 4
+        '
+        'TabPage1
+        '
+        Me.TabPage1.Controls.Add(Me.btnNewWork)
+        Me.TabPage1.Controls.Add(Me.Label11)
+        Me.TabPage1.Controls.Add(Me.txtFiltro)
+        Me.TabPage1.Controls.Add(Me.btnSave)
+        Me.TabPage1.Controls.Add(Me.Label10)
+        Me.TabPage1.Controls.Add(Me.Label9)
+        Me.TabPage1.Controls.Add(Me.txtClassDescription)
+        Me.TabPage1.Controls.Add(Me.txtBillingRate3)
+        Me.TabPage1.Controls.Add(Me.txtBillingRateOT)
+        Me.TabPage1.Controls.Add(Me.txtBillingRateST)
+        Me.TabPage1.Controls.Add(Me.txtClassification)
+        Me.TabPage1.Controls.Add(Me.txtWorkCode)
+        Me.TabPage1.Controls.Add(Me.Label8)
+        Me.TabPage1.Controls.Add(Me.Label7)
+        Me.TabPage1.Controls.Add(Me.Label6)
+        Me.TabPage1.Controls.Add(Me.Label5)
+        Me.TabPage1.Controls.Add(Me.txtCraft)
+        Me.TabPage1.Controls.Add(Me.txtSubJob)
+        Me.TabPage1.Controls.Add(Me.txtJobNumber)
+        Me.TabPage1.Controls.Add(Me.txtWorkCodeID)
+        Me.TabPage1.Controls.Add(Me.Label4)
+        Me.TabPage1.Controls.Add(Me.Label3)
+        Me.TabPage1.Controls.Add(Me.Label2)
+        Me.TabPage1.Controls.Add(Me.Label1)
+        Me.TabPage1.Location = New System.Drawing.Point(4, 22)
+        Me.TabPage1.Name = "TabPage1"
+        Me.TabPage1.Padding = New System.Windows.Forms.Padding(3)
+        Me.TabPage1.Size = New System.Drawing.Size(770, 228)
+        Me.TabPage1.TabIndex = 0
+        Me.TabPage1.Text = "Work"
+        Me.TabPage1.UseVisualStyleBackColor = True
+        '
+        'TabPage2
+        '
+        Me.TabPage2.Location = New System.Drawing.Point(4, 22)
+        Me.TabPage2.Name = "TabPage2"
+        Me.TabPage2.Padding = New System.Windows.Forms.Padding(3)
+        Me.TabPage2.Size = New System.Drawing.Size(770, 228)
+        Me.TabPage2.TabIndex = 1
+        Me.TabPage2.Text = "Sub Jobs"
+        Me.TabPage2.UseVisualStyleBackColor = True
+        '
+        'Label11
+        '
+        Me.Label11.AutoSize = True
+        Me.Label11.Location = New System.Drawing.Point(496, 206)
+        Me.Label11.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.Label11.Name = "Label11"
+        Me.Label11.Size = New System.Drawing.Size(41, 13)
+        Me.Label11.TabIndex = 47
+        Me.Label11.Text = "Search"
+        '
+        'txtFiltro
+        '
+        Me.txtFiltro.Location = New System.Drawing.Point(544, 204)
+        Me.txtFiltro.Margin = New System.Windows.Forms.Padding(2)
+        Me.txtFiltro.Name = "txtFiltro"
+        Me.txtFiltro.Size = New System.Drawing.Size(138, 20)
+        Me.txtFiltro.TabIndex = 46
         '
         'btnSave
         '
-        Me.btnSave.Location = New System.Drawing.Point(810, 193)
+        Me.btnSave.Location = New System.Drawing.Point(613, 141)
+        Me.btnSave.Margin = New System.Windows.Forms.Padding(2)
         Me.btnSave.Name = "btnSave"
-        Me.btnSave.Size = New System.Drawing.Size(85, 36)
-        Me.btnSave.TabIndex = 21
+        Me.btnSave.Size = New System.Drawing.Size(57, 23)
+        Me.btnSave.TabIndex = 45
         Me.btnSave.Text = "Save"
         Me.btnSave.UseVisualStyleBackColor = True
-        '
-        'btnQuery
-        '
-        Me.btnQuery.Location = New System.Drawing.Point(925, 193)
-        Me.btnQuery.Name = "btnQuery"
-        Me.btnQuery.Size = New System.Drawing.Size(90, 36)
-        Me.btnQuery.TabIndex = 20
-        Me.btnQuery.Text = "Query"
-        Me.btnQuery.UseVisualStyleBackColor = True
         '
         'Label10
         '
         Me.Label10.AutoSize = True
-        Me.Label10.Location = New System.Drawing.Point(790, 116)
+        Me.Label10.Location = New System.Drawing.Point(531, 50)
+        Me.Label10.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label10.Name = "Label10"
-        Me.Label10.Size = New System.Drawing.Size(132, 20)
-        Me.Label10.TabIndex = 19
+        Me.Label10.Size = New System.Drawing.Size(88, 13)
+        Me.Label10.TabIndex = 43
         Me.Label10.Text = "Class Description"
         '
         'Label9
         '
         Me.Label9.AutoSize = True
-        Me.Label9.Location = New System.Drawing.Point(790, 52)
+        Me.Label9.Location = New System.Drawing.Point(531, 9)
+        Me.Label9.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label9.Name = "Label9"
-        Me.Label9.Size = New System.Drawing.Size(94, 20)
-        Me.Label9.TabIndex = 18
+        Me.Label9.Size = New System.Drawing.Size(63, 13)
+        Me.Label9.TabIndex = 42
         Me.Label9.Text = "BillingRate3"
         '
         'txtClassDescription
         '
-        Me.txtClassDescription.Location = New System.Drawing.Point(928, 113)
+        Me.txtClassDescription.Location = New System.Drawing.Point(623, 48)
+        Me.txtClassDescription.Margin = New System.Windows.Forms.Padding(2)
         Me.txtClassDescription.Name = "txtClassDescription"
-        Me.txtClassDescription.Size = New System.Drawing.Size(167, 26)
-        Me.txtClassDescription.TabIndex = 17
+        Me.txtClassDescription.Size = New System.Drawing.Size(113, 20)
+        Me.txtClassDescription.TabIndex = 41
         '
         'txtBillingRate3
         '
-        Me.txtBillingRate3.Location = New System.Drawing.Point(928, 49)
+        Me.txtBillingRate3.Location = New System.Drawing.Point(623, 7)
+        Me.txtBillingRate3.Margin = New System.Windows.Forms.Padding(2)
         Me.txtBillingRate3.Name = "txtBillingRate3"
-        Me.txtBillingRate3.Size = New System.Drawing.Size(167, 26)
-        Me.txtBillingRate3.TabIndex = 16
+        Me.txtBillingRate3.Size = New System.Drawing.Size(113, 20)
+        Me.txtBillingRate3.TabIndex = 40
         '
         'txtBillingRateOT
         '
-        Me.txtBillingRateOT.Location = New System.Drawing.Point(547, 268)
+        Me.txtBillingRateOT.Location = New System.Drawing.Point(369, 149)
+        Me.txtBillingRateOT.Margin = New System.Windows.Forms.Padding(2)
         Me.txtBillingRateOT.Name = "txtBillingRateOT"
-        Me.txtBillingRateOT.Size = New System.Drawing.Size(164, 26)
-        Me.txtBillingRateOT.TabIndex = 15
+        Me.txtBillingRateOT.Size = New System.Drawing.Size(111, 20)
+        Me.txtBillingRateOT.TabIndex = 39
         '
         'txtBillingRateST
         '
-        Me.txtBillingRateST.Location = New System.Drawing.Point(547, 188)
+        Me.txtBillingRateST.Location = New System.Drawing.Point(369, 97)
+        Me.txtBillingRateST.Margin = New System.Windows.Forms.Padding(2)
         Me.txtBillingRateST.Name = "txtBillingRateST"
-        Me.txtBillingRateST.Size = New System.Drawing.Size(164, 26)
-        Me.txtBillingRateST.TabIndex = 14
+        Me.txtBillingRateST.Size = New System.Drawing.Size(111, 20)
+        Me.txtBillingRateST.TabIndex = 38
         '
         'txtClassification
         '
-        Me.txtClassification.Location = New System.Drawing.Point(547, 113)
+        Me.txtClassification.Location = New System.Drawing.Point(369, 48)
+        Me.txtClassification.Margin = New System.Windows.Forms.Padding(2)
         Me.txtClassification.Name = "txtClassification"
-        Me.txtClassification.Size = New System.Drawing.Size(164, 26)
-        Me.txtClassification.TabIndex = 13
+        Me.txtClassification.Size = New System.Drawing.Size(111, 20)
+        Me.txtClassification.TabIndex = 37
         '
         'txtWorkCode
         '
-        Me.txtWorkCode.Location = New System.Drawing.Point(547, 49)
+        Me.txtWorkCode.Location = New System.Drawing.Point(369, 7)
+        Me.txtWorkCode.Margin = New System.Windows.Forms.Padding(2)
         Me.txtWorkCode.Name = "txtWorkCode"
-        Me.txtWorkCode.Size = New System.Drawing.Size(164, 26)
-        Me.txtWorkCode.TabIndex = 12
+        Me.txtWorkCode.Size = New System.Drawing.Size(111, 20)
+        Me.txtWorkCode.TabIndex = 36
         '
         'Label8
         '
         Me.Label8.AutoSize = True
-        Me.Label8.Location = New System.Drawing.Point(410, 271)
+        Me.Label8.Location = New System.Drawing.Point(277, 151)
+        Me.Label8.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label8.Name = "Label8"
-        Me.Label8.Size = New System.Drawing.Size(114, 20)
-        Me.Label8.TabIndex = 11
+        Me.Label8.Size = New System.Drawing.Size(78, 13)
+        Me.Label8.TabIndex = 35
         Me.Label8.Text = "Billing Rate OT"
         '
         'Label7
         '
         Me.Label7.AutoSize = True
-        Me.Label7.Location = New System.Drawing.Point(410, 191)
+        Me.Label7.Location = New System.Drawing.Point(277, 99)
+        Me.Label7.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(113, 20)
-        Me.Label7.TabIndex = 10
+        Me.Label7.Size = New System.Drawing.Size(77, 13)
+        Me.Label7.TabIndex = 34
         Me.Label7.Text = "Billing Rate ST"
         '
         'Label6
         '
         Me.Label6.AutoSize = True
-        Me.Label6.Location = New System.Drawing.Point(410, 116)
+        Me.Label6.Location = New System.Drawing.Point(277, 50)
+        Me.Label6.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(102, 20)
-        Me.Label6.TabIndex = 9
+        Me.Label6.Size = New System.Drawing.Size(68, 13)
+        Me.Label6.TabIndex = 33
         Me.Label6.Text = "Classification"
         '
         'Label5
         '
         Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(410, 52)
+        Me.Label5.Location = New System.Drawing.Point(277, 9)
+        Me.Label5.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(88, 20)
-        Me.Label5.TabIndex = 8
+        Me.Label5.Size = New System.Drawing.Size(61, 13)
+        Me.Label5.TabIndex = 32
         Me.Label5.Text = "Work Code"
         '
         'txtCraft
         '
-        Me.txtCraft.Location = New System.Drawing.Point(162, 265)
+        Me.txtCraft.Location = New System.Drawing.Point(112, 147)
+        Me.txtCraft.Margin = New System.Windows.Forms.Padding(2)
         Me.txtCraft.Name = "txtCraft"
-        Me.txtCraft.Size = New System.Drawing.Size(172, 26)
-        Me.txtCraft.TabIndex = 7
+        Me.txtCraft.Size = New System.Drawing.Size(116, 20)
+        Me.txtCraft.TabIndex = 31
         '
         'txtSubJob
         '
-        Me.txtSubJob.Location = New System.Drawing.Point(162, 185)
+        Me.txtSubJob.Location = New System.Drawing.Point(112, 95)
+        Me.txtSubJob.Margin = New System.Windows.Forms.Padding(2)
         Me.txtSubJob.Name = "txtSubJob"
-        Me.txtSubJob.Size = New System.Drawing.Size(172, 26)
-        Me.txtSubJob.TabIndex = 6
+        Me.txtSubJob.Size = New System.Drawing.Size(116, 20)
+        Me.txtSubJob.TabIndex = 30
         '
         'txtJobNumber
         '
-        Me.txtJobNumber.Location = New System.Drawing.Point(162, 110)
+        Me.txtJobNumber.Location = New System.Drawing.Point(112, 46)
+        Me.txtJobNumber.Margin = New System.Windows.Forms.Padding(2)
         Me.txtJobNumber.Name = "txtJobNumber"
-        Me.txtJobNumber.Size = New System.Drawing.Size(172, 26)
-        Me.txtJobNumber.TabIndex = 5
+        Me.txtJobNumber.Size = New System.Drawing.Size(116, 20)
+        Me.txtJobNumber.TabIndex = 29
         '
         'txtWorkCodeID
         '
-        Me.txtWorkCodeID.Location = New System.Drawing.Point(162, 46)
+        Me.txtWorkCodeID.Location = New System.Drawing.Point(112, 5)
+        Me.txtWorkCodeID.Margin = New System.Windows.Forms.Padding(2)
         Me.txtWorkCodeID.Name = "txtWorkCodeID"
-        Me.txtWorkCodeID.Size = New System.Drawing.Size(172, 26)
-        Me.txtWorkCodeID.TabIndex = 4
+        Me.txtWorkCodeID.Size = New System.Drawing.Size(116, 20)
+        Me.txtWorkCodeID.TabIndex = 28
         '
         'Label4
         '
         Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(45, 271)
+        Me.Label4.Location = New System.Drawing.Point(34, 151)
+        Me.Label4.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(44, 20)
-        Me.Label4.TabIndex = 3
+        Me.Label4.Size = New System.Drawing.Size(29, 13)
+        Me.Label4.TabIndex = 27
         Me.Label4.Text = "Craft"
         '
         'Label3
         '
         Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(45, 191)
+        Me.Label3.Location = New System.Drawing.Point(34, 99)
+        Me.Label3.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(68, 20)
-        Me.Label3.TabIndex = 2
+        Me.Label3.Size = New System.Drawing.Size(46, 13)
+        Me.Label3.TabIndex = 26
         Me.Label3.Text = "Sub Job"
         '
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(45, 116)
+        Me.Label2.Location = New System.Drawing.Point(34, 50)
+        Me.Label2.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(95, 20)
-        Me.Label2.TabIndex = 1
+        Me.Label2.Size = New System.Drawing.Size(64, 13)
+        Me.Label2.TabIndex = 25
         Me.Label2.Text = "Job Number"
         '
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(45, 52)
+        Me.Label1.Location = New System.Drawing.Point(34, 9)
+        Me.Label1.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(109, 20)
-        Me.Label1.TabIndex = 0
+        Me.Label1.Size = New System.Drawing.Size(75, 13)
+        Me.Label1.TabIndex = 24
         Me.Label1.Text = "Work Code ID"
         '
-        'DataGridView1
+        'btnNewWork
         '
-        Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DataGridView1.Location = New System.Drawing.Point(3, 451)
-        Me.DataGridView1.Name = "DataGridView1"
-        Me.DataGridView1.RowHeadersWidth = 62
-        Me.DataGridView1.RowTemplate.Height = 28
-        Me.DataGridView1.Size = New System.Drawing.Size(1167, 216)
-        Me.DataGridView1.TabIndex = 1
-        '
-        'Button1
-        '
-        Me.Button1.Location = New System.Drawing.Point(17, 12)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(99, 33)
-        Me.Button1.TabIndex = 2
-        Me.Button1.Text = "Menu"
-        Me.Button1.UseVisualStyleBackColor = True
-        '
-        'txtFiltro
-        '
-        Me.txtFiltro.Location = New System.Drawing.Point(810, 353)
-        Me.txtFiltro.Name = "txtFiltro"
-        Me.txtFiltro.Size = New System.Drawing.Size(205, 26)
-        Me.txtFiltro.TabIndex = 22
-        '
-        'Label11
-        '
-        Me.Label11.AutoSize = True
-        Me.Label11.Location = New System.Drawing.Point(738, 356)
-        Me.Label11.Name = "Label11"
-        Me.Label11.Size = New System.Drawing.Size(60, 20)
-        Me.Label11.TabIndex = 23
-        Me.Label11.Text = "Search"
-        '
-        'Button2
-        '
-        Me.Button2.ForeColor = System.Drawing.Color.Red
-        Me.Button2.Location = New System.Drawing.Point(1097, 12)
-        Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(65, 33)
-        Me.Button2.TabIndex = 3
-        Me.Button2.Text = "Exit"
-        Me.Button2.UseVisualStyleBackColor = True
+        Me.btnNewWork.Location = New System.Drawing.Point(519, 141)
+        Me.btnNewWork.Name = "btnNewWork"
+        Me.btnNewWork.Size = New System.Drawing.Size(75, 23)
+        Me.btnNewWork.TabIndex = 5
+        Me.btnNewWork.Text = "New"
+        Me.btnNewWork.UseVisualStyleBackColor = True
         '
         'WorkCodes
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 20.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1174, 675)
+        Me.ClientSize = New System.Drawing.Size(783, 439)
+        Me.Controls.Add(Me.TabControl1)
         Me.Controls.Add(Me.Button2)
         Me.Controls.Add(Me.Button1)
         Me.Controls.Add(Me.DataGridView1)
-        Me.Controls.Add(Me.Panel1)
+        Me.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.Name = "WorkCodes"
         Me.Text = "WorkCodes"
-        Me.Panel1.ResumeLayout(False)
-        Me.Panel1.PerformLayout()
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.TabControl1.ResumeLayout(False)
+        Me.TabPage1.ResumeLayout(False)
+        Me.TabPage1.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
-
-    Friend WithEvents Panel1 As Panel
+    Friend WithEvents DataGridView1 As DataGridView
+    Friend WithEvents Button1 As Button
+    Friend WithEvents Button2 As Button
+    Friend WithEvents TabControl1 As TabControl
+    Friend WithEvents TabPage1 As TabPage
+    Friend WithEvents Label11 As Label
+    Friend WithEvents txtFiltro As TextBox
+    Friend WithEvents btnSave As Button
     Friend WithEvents Label10 As Label
     Friend WithEvents Label9 As Label
     Friend WithEvents txtClassDescription As TextBox
@@ -348,11 +407,6 @@ Partial Class WorkCodes
     Friend WithEvents Label3 As Label
     Friend WithEvents Label2 As Label
     Friend WithEvents Label1 As Label
-    Friend WithEvents DataGridView1 As DataGridView
-    Friend WithEvents Button1 As Button
-    Friend WithEvents btnQuery As Button
-    Friend WithEvents btnSave As Button
-    Friend WithEvents Label11 As Label
-    Friend WithEvents txtFiltro As TextBox
-    Friend WithEvents Button2 As Button
+    Friend WithEvents TabPage2 As TabPage
+    Friend WithEvents btnNewWork As Button
 End Class

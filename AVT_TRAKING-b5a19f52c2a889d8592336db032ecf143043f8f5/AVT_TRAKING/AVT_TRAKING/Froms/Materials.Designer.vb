@@ -22,69 +22,104 @@ Partial Class Materials
     'No lo modifique con el editor de código.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Me.DataGridView1 = New System.Windows.Forms.DataGridView()
+        Me.tblMaterial = New System.Windows.Forms.DataGridView()
         Me.btnMenu = New System.Windows.Forms.Button()
         Me.Button5 = New System.Windows.Forms.Button()
         Me.TabPage2 = New System.Windows.Forms.TabPage()
-        Me.txtDMaterial = New System.Windows.Forms.TextBox()
-        Me.txtUM = New System.Windows.Forms.TextBox()
-        Me.txtRM = New System.Windows.Forms.TextBox()
-        Me.DataGridView2 = New System.Windows.Forms.DataGridView()
-        Me.Button7 = New System.Windows.Forms.Button()
-        Me.btnQueryDetalleM = New System.Windows.Forms.Button()
-        Me.Label7 = New System.Windows.Forms.Label()
-        Me.TextBox16 = New System.Windows.Forms.TextBox()
-        Me.txtMprice = New System.Windows.Forms.TextBox()
-        Me.txtCantidad = New System.Windows.Forms.TextBox()
-        Me.txtDescripcion = New System.Windows.Forms.TextBox()
-        Me.txtMTychness = New System.Windows.Forms.TextBox()
-        Me.txtMType = New System.Windows.Forms.TextBox()
-        Me.txtMSize = New System.Windows.Forms.TextBox()
-        Me.Label6 = New System.Windows.Forms.Label()
-        Me.Label5 = New System.Windows.Forms.Label()
+        Me.btnDeleteOrder = New System.Windows.Forms.Button()
+        Me.sprPrice = New System.Windows.Forms.NumericUpDown()
+        Me.Label20 = New System.Windows.Forms.Label()
+        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.btnOrderSave = New System.Windows.Forms.Button()
+        Me.chbOrden = New System.Windows.Forms.CheckBox()
         Me.Label1 = New System.Windows.Forms.Label()
-        Me.btnSaveDetallesMaterials = New System.Windows.Forms.Button()
-        Me.Label19 = New System.Windows.Forms.Label()
+        Me.dtpFechaOrden = New System.Windows.Forms.DateTimePicker()
+        Me.Label6 = New System.Windows.Forms.Label()
+        Me.Label9 = New System.Windows.Forms.Label()
+        Me.sprCantidadOrden = New System.Windows.Forms.NumericUpDown()
+        Me.sprPricioOrden = New System.Windows.Forms.NumericUpDown()
+        Me.Label8 = New System.Windows.Forms.Label()
+        Me.lblTotal = New System.Windows.Forms.Label()
+        Me.sprTamanio = New System.Windows.Forms.NumericUpDown()
+        Me.cmbUnidadDeMedida = New System.Windows.Forms.ComboBox()
+        Me.txtDMaterial = New System.Windows.Forms.TextBox()
+        Me.txtRM = New System.Windows.Forms.TextBox()
+        Me.tblMaterialAndOrders = New System.Windows.Forms.DataGridView()
+        Me.btnUpdateMareialData = New System.Windows.Forms.Button()
+        Me.Label7 = New System.Windows.Forms.Label()
+        Me.txtSearch = New System.Windows.Forms.TextBox()
+        Me.txtDescripcion = New System.Windows.Forms.TextBox()
+        Me.txtTipo = New System.Windows.Forms.TextBox()
+        Me.Label5 = New System.Windows.Forms.Label()
         Me.Label18 = New System.Windows.Forms.Label()
         Me.Label17 = New System.Windows.Forms.Label()
         Me.Label16 = New System.Windows.Forms.Label()
         Me.Label15 = New System.Windows.Forms.Label()
         Me.Label14 = New System.Windows.Forms.Label()
         Me.TabPage1 = New System.Windows.Forms.TabPage()
-        Me.Button3 = New System.Windows.Forms.Button()
+        Me.chbEnableMaterial = New System.Windows.Forms.CheckBox()
+        Me.txtNumeroMaterial = New System.Windows.Forms.TextBox()
+        Me.Label3 = New System.Windows.Forms.Label()
+        Me.cmbVendedor = New System.Windows.Forms.ComboBox()
+        Me.btnUpdateMaterial = New System.Windows.Forms.Button()
         Me.txtFiltro = New System.Windows.Forms.TextBox()
-        Me.txtIdVendor = New System.Windows.Forms.TextBox()
-        Me.txtIdRenta = New System.Windows.Forms.TextBox()
         Me.txtNameMaterials = New System.Windows.Forms.TextBox()
         Me.Label13 = New System.Windows.Forms.Label()
-        Me.btnQuery = New System.Windows.Forms.Button()
-        Me.btnSave = New System.Windows.Forms.Button()
+        Me.btnSaveMaterial = New System.Windows.Forms.Button()
         Me.Label2 = New System.Windows.Forms.Label()
-        Me.Label3 = New System.Windows.Forms.Label()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.TabControl1 = New System.Windows.Forms.TabControl()
-        CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.TabPage3 = New System.Windows.Forms.TabPage()
+        Me.Label12 = New System.Windows.Forms.Label()
+        Me.txtSearchVendedor = New System.Windows.Forms.TextBox()
+        Me.txtNumeroVendedor = New System.Windows.Forms.TextBox()
+        Me.Label19 = New System.Windows.Forms.Label()
+        Me.btnUpdateVendor = New System.Windows.Forms.Button()
+        Me.chbEnableVendor = New System.Windows.Forms.CheckBox()
+        Me.tbkVendor = New System.Windows.Forms.DataGridView()
+        Me.btnSaveVendor = New System.Windows.Forms.Button()
+        Me.txtDescripcionVendedor = New System.Windows.Forms.TextBox()
+        Me.txtNombreVendedor = New System.Windows.Forms.TextBox()
+        Me.Label10 = New System.Windows.Forms.Label()
+        Me.Label11 = New System.Windows.Forms.Label()
+        Me.btnUpdateOrder = New System.Windows.Forms.Button()
+        CType(Me.tblMaterial, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.TabPage2.SuspendLayout()
-        CType(Me.DataGridView2, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.sprPrice, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.GroupBox1.SuspendLayout()
+        CType(Me.sprCantidadOrden, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.sprPricioOrden, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.sprTamanio, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.tblMaterialAndOrders, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.TabPage1.SuspendLayout()
         Me.TabControl1.SuspendLayout()
+        Me.TabPage3.SuspendLayout()
+        CType(Me.tbkVendor, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
-        'DataGridView1
+        'tblMaterial
         '
-        Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DataGridView1.Location = New System.Drawing.Point(123, 243)
-        Me.DataGridView1.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
-        Me.DataGridView1.Name = "DataGridView1"
-        Me.DataGridView1.RowHeadersWidth = 62
-        Me.DataGridView1.RowTemplate.Height = 28
-        Me.DataGridView1.Size = New System.Drawing.Size(473, 133)
-        Me.DataGridView1.TabIndex = 1
+        Me.tblMaterial.AllowUserToAddRows = False
+        Me.tblMaterial.AllowUserToDeleteRows = False
+        Me.tblMaterial.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.tblMaterial.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
+        Me.tblMaterial.Location = New System.Drawing.Point(271, 87)
+        Me.tblMaterial.Margin = New System.Windows.Forms.Padding(2)
+        Me.tblMaterial.MultiSelect = False
+        Me.tblMaterial.Name = "tblMaterial"
+        Me.tblMaterial.ReadOnly = True
+        Me.tblMaterial.RowHeadersWidth = 62
+        Me.tblMaterial.RowTemplate.Height = 28
+        Me.tblMaterial.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
+        Me.tblMaterial.Size = New System.Drawing.Size(471, 291)
+        Me.tblMaterial.TabIndex = 1
         '
         'btnMenu
         '
         Me.btnMenu.Location = New System.Drawing.Point(15, 8)
-        Me.btnMenu.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.btnMenu.Margin = New System.Windows.Forms.Padding(2)
         Me.btnMenu.Name = "btnMenu"
         Me.btnMenu.Size = New System.Drawing.Size(67, 21)
         Me.btnMenu.TabIndex = 2
@@ -95,7 +130,7 @@ Partial Class Materials
         '
         Me.Button5.ForeColor = System.Drawing.Color.Red
         Me.Button5.Location = New System.Drawing.Point(727, 8)
-        Me.Button5.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.Button5.Margin = New System.Windows.Forms.Padding(2)
         Me.Button5.Name = "Button5"
         Me.Button5.Size = New System.Drawing.Size(48, 21)
         Me.Button5.TabIndex = 4
@@ -104,254 +139,333 @@ Partial Class Materials
         '
         'TabPage2
         '
+        Me.TabPage2.Controls.Add(Me.btnUpdateOrder)
+        Me.TabPage2.Controls.Add(Me.btnDeleteOrder)
+        Me.TabPage2.Controls.Add(Me.sprPrice)
+        Me.TabPage2.Controls.Add(Me.Label20)
+        Me.TabPage2.Controls.Add(Me.GroupBox1)
+        Me.TabPage2.Controls.Add(Me.sprTamanio)
+        Me.TabPage2.Controls.Add(Me.cmbUnidadDeMedida)
         Me.TabPage2.Controls.Add(Me.txtDMaterial)
-        Me.TabPage2.Controls.Add(Me.txtUM)
         Me.TabPage2.Controls.Add(Me.txtRM)
-        Me.TabPage2.Controls.Add(Me.DataGridView2)
-        Me.TabPage2.Controls.Add(Me.Button7)
-        Me.TabPage2.Controls.Add(Me.btnQueryDetalleM)
+        Me.TabPage2.Controls.Add(Me.tblMaterialAndOrders)
+        Me.TabPage2.Controls.Add(Me.btnUpdateMareialData)
         Me.TabPage2.Controls.Add(Me.Label7)
-        Me.TabPage2.Controls.Add(Me.TextBox16)
-        Me.TabPage2.Controls.Add(Me.txtMprice)
-        Me.TabPage2.Controls.Add(Me.txtCantidad)
+        Me.TabPage2.Controls.Add(Me.txtSearch)
         Me.TabPage2.Controls.Add(Me.txtDescripcion)
-        Me.TabPage2.Controls.Add(Me.txtMTychness)
-        Me.TabPage2.Controls.Add(Me.txtMType)
-        Me.TabPage2.Controls.Add(Me.txtMSize)
-        Me.TabPage2.Controls.Add(Me.Label6)
+        Me.TabPage2.Controls.Add(Me.txtTipo)
         Me.TabPage2.Controls.Add(Me.Label5)
-        Me.TabPage2.Controls.Add(Me.Label1)
-        Me.TabPage2.Controls.Add(Me.btnSaveDetallesMaterials)
-        Me.TabPage2.Controls.Add(Me.Label19)
         Me.TabPage2.Controls.Add(Me.Label18)
         Me.TabPage2.Controls.Add(Me.Label17)
         Me.TabPage2.Controls.Add(Me.Label16)
         Me.TabPage2.Controls.Add(Me.Label15)
         Me.TabPage2.Controls.Add(Me.Label14)
         Me.TabPage2.Location = New System.Drawing.Point(4, 22)
-        Me.TabPage2.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.TabPage2.Margin = New System.Windows.Forms.Padding(2)
         Me.TabPage2.Name = "TabPage2"
-        Me.TabPage2.Padding = New System.Windows.Forms.Padding(2, 2, 2, 2)
-        Me.TabPage2.Size = New System.Drawing.Size(761, 394)
+        Me.TabPage2.Padding = New System.Windows.Forms.Padding(2)
+        Me.TabPage2.Size = New System.Drawing.Size(761, 403)
         Me.TabPage2.TabIndex = 1
-        Me.TabPage2.Text = "Detalles Materials"
+        Me.TabPage2.Text = "Materials bills"
         Me.TabPage2.UseVisualStyleBackColor = True
+        '
+        'btnDeleteOrder
+        '
+        Me.btnDeleteOrder.Location = New System.Drawing.Point(669, 350)
+        Me.btnDeleteOrder.Name = "btnDeleteOrder"
+        Me.btnDeleteOrder.Size = New System.Drawing.Size(73, 40)
+        Me.btnDeleteOrder.TabIndex = 39
+        Me.btnDeleteOrder.Text = "Delete"
+        Me.btnDeleteOrder.UseVisualStyleBackColor = True
+        '
+        'sprPrice
+        '
+        Me.sprPrice.DecimalPlaces = 2
+        Me.sprPrice.Increment = New Decimal(New Integer() {1, 0, 0, 65536})
+        Me.sprPrice.Location = New System.Drawing.Point(351, 86)
+        Me.sprPrice.Maximum = New Decimal(New Integer() {10000, 0, 0, 0})
+        Me.sprPrice.Name = "sprPrice"
+        Me.sprPrice.Size = New System.Drawing.Size(120, 20)
+        Me.sprPrice.TabIndex = 38
+        '
+        'Label20
+        '
+        Me.Label20.AutoSize = True
+        Me.Label20.Location = New System.Drawing.Point(284, 89)
+        Me.Label20.Name = "Label20"
+        Me.Label20.Size = New System.Drawing.Size(31, 13)
+        Me.Label20.TabIndex = 37
+        Me.Label20.Text = "Price"
+        '
+        'GroupBox1
+        '
+        Me.GroupBox1.Controls.Add(Me.btnOrderSave)
+        Me.GroupBox1.Controls.Add(Me.chbOrden)
+        Me.GroupBox1.Controls.Add(Me.Label1)
+        Me.GroupBox1.Controls.Add(Me.dtpFechaOrden)
+        Me.GroupBox1.Controls.Add(Me.Label6)
+        Me.GroupBox1.Controls.Add(Me.Label9)
+        Me.GroupBox1.Controls.Add(Me.sprCantidadOrden)
+        Me.GroupBox1.Controls.Add(Me.sprPricioOrden)
+        Me.GroupBox1.Controls.Add(Me.Label8)
+        Me.GroupBox1.Controls.Add(Me.lblTotal)
+        Me.GroupBox1.Location = New System.Drawing.Point(503, 5)
+        Me.GroupBox1.Name = "GroupBox1"
+        Me.GroupBox1.Size = New System.Drawing.Size(253, 234)
+        Me.GroupBox1.TabIndex = 36
+        Me.GroupBox1.TabStop = False
+        Me.GroupBox1.Text = "New Order"
+        '
+        'btnOrderSave
+        '
+        Me.btnOrderSave.Enabled = False
+        Me.btnOrderSave.Location = New System.Drawing.Point(172, 166)
+        Me.btnOrderSave.Name = "btnOrderSave"
+        Me.btnOrderSave.Size = New System.Drawing.Size(75, 48)
+        Me.btnOrderSave.TabIndex = 37
+        Me.btnOrderSave.Text = "Save"
+        Me.btnOrderSave.UseVisualStyleBackColor = True
+        '
+        'chbOrden
+        '
+        Me.chbOrden.AutoSize = True
+        Me.chbOrden.Location = New System.Drawing.Point(180, 19)
+        Me.chbOrden.Name = "chbOrden"
+        Me.chbOrden.Size = New System.Drawing.Size(48, 17)
+        Me.chbOrden.TabIndex = 36
+        Me.chbOrden.Text = "New"
+        Me.chbOrden.UseVisualStyleBackColor = True
+        '
+        'Label1
+        '
+        Me.Label1.AutoSize = True
+        Me.Label1.Location = New System.Drawing.Point(15, 50)
+        Me.Label1.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(31, 13)
+        Me.Label1.TabIndex = 13
+        Me.Label1.Text = "Price"
+        '
+        'dtpFechaOrden
+        '
+        Me.dtpFechaOrden.CustomFormat = "yyyy-MM-dd"
+        Me.dtpFechaOrden.Enabled = False
+        Me.dtpFechaOrden.Format = System.Windows.Forms.DateTimePickerFormat.Custom
+        Me.dtpFechaOrden.Location = New System.Drawing.Point(81, 124)
+        Me.dtpFechaOrden.Name = "dtpFechaOrden"
+        Me.dtpFechaOrden.Size = New System.Drawing.Size(158, 20)
+        Me.dtpFechaOrden.TabIndex = 35
+        '
+        'Label6
+        '
+        Me.Label6.AutoSize = True
+        Me.Label6.Location = New System.Drawing.Point(15, 90)
+        Me.Label6.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.Label6.Name = "Label6"
+        Me.Label6.Size = New System.Drawing.Size(46, 13)
+        Me.Label6.TabIndex = 15
+        Me.Label6.Text = "Quantity"
+        '
+        'Label9
+        '
+        Me.Label9.AutoSize = True
+        Me.Label9.Location = New System.Drawing.Point(21, 129)
+        Me.Label9.Name = "Label9"
+        Me.Label9.Size = New System.Drawing.Size(30, 13)
+        Me.Label9.TabIndex = 34
+        Me.Label9.Text = "Date"
+        '
+        'sprCantidadOrden
+        '
+        Me.sprCantidadOrden.DecimalPlaces = 2
+        Me.sprCantidadOrden.Enabled = False
+        Me.sprCantidadOrden.Increment = New Decimal(New Integer() {1, 0, 0, 65536})
+        Me.sprCantidadOrden.Location = New System.Drawing.Point(81, 86)
+        Me.sprCantidadOrden.Maximum = New Decimal(New Integer() {10000, 0, 0, 0})
+        Me.sprCantidadOrden.Name = "sprCantidadOrden"
+        Me.sprCantidadOrden.Size = New System.Drawing.Size(120, 20)
+        Me.sprCantidadOrden.TabIndex = 30
+        '
+        'sprPricioOrden
+        '
+        Me.sprPricioOrden.DecimalPlaces = 2
+        Me.sprPricioOrden.Enabled = False
+        Me.sprPricioOrden.Increment = New Decimal(New Integer() {1, 0, 0, 65536})
+        Me.sprPricioOrden.Location = New System.Drawing.Point(81, 47)
+        Me.sprPricioOrden.Maximum = New Decimal(New Integer() {10000, 0, 0, 0})
+        Me.sprPricioOrden.Name = "sprPricioOrden"
+        Me.sprPricioOrden.Size = New System.Drawing.Size(120, 20)
+        Me.sprPricioOrden.TabIndex = 33
+        '
+        'Label8
+        '
+        Me.Label8.AutoSize = True
+        Me.Label8.Location = New System.Drawing.Point(15, 177)
+        Me.Label8.Name = "Label8"
+        Me.Label8.Size = New System.Drawing.Size(31, 13)
+        Me.Label8.TabIndex = 31
+        Me.Label8.Text = "Total"
+        '
+        'lblTotal
+        '
+        Me.lblTotal.AutoSize = True
+        Me.lblTotal.Font = New System.Drawing.Font("Microsoft YaHei", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblTotal.ForeColor = System.Drawing.Color.DodgerBlue
+        Me.lblTotal.Location = New System.Drawing.Point(95, 166)
+        Me.lblTotal.Name = "lblTotal"
+        Me.lblTotal.Size = New System.Drawing.Size(57, 28)
+        Me.lblTotal.TabIndex = 32
+        Me.lblTotal.Text = "0.00"
+        '
+        'sprTamanio
+        '
+        Me.sprTamanio.AutoSize = True
+        Me.sprTamanio.DecimalPlaces = 2
+        Me.sprTamanio.Increment = New Decimal(New Integer() {1, 0, 0, 65536})
+        Me.sprTamanio.Location = New System.Drawing.Point(350, 19)
+        Me.sprTamanio.Maximum = New Decimal(New Integer() {100000, 0, 0, 0})
+        Me.sprTamanio.Name = "sprTamanio"
+        Me.sprTamanio.Size = New System.Drawing.Size(120, 20)
+        Me.sprTamanio.TabIndex = 29
+        '
+        'cmbUnidadDeMedida
+        '
+        Me.cmbUnidadDeMedida.FormattingEnabled = True
+        Me.cmbUnidadDeMedida.Items.AddRange(New Object() {"Each", "Foot", "Yard", "Galon", "Ounce", "Pound"})
+        Me.cmbUnidadDeMedida.Location = New System.Drawing.Point(114, 117)
+        Me.cmbUnidadDeMedida.Name = "cmbUnidadDeMedida"
+        Me.cmbUnidadDeMedida.Size = New System.Drawing.Size(121, 21)
+        Me.cmbUnidadDeMedida.TabIndex = 28
         '
         'txtDMaterial
         '
-        Me.txtDMaterial.Location = New System.Drawing.Point(124, 26)
-        Me.txtDMaterial.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.txtDMaterial.Location = New System.Drawing.Point(114, 20)
+        Me.txtDMaterial.Margin = New System.Windows.Forms.Padding(2)
         Me.txtDMaterial.Name = "txtDMaterial"
-        Me.txtDMaterial.Size = New System.Drawing.Size(89, 20)
+        Me.txtDMaterial.Size = New System.Drawing.Size(121, 20)
         Me.txtDMaterial.TabIndex = 27
-        '
-        'txtUM
-        '
-        Me.txtUM.Location = New System.Drawing.Point(124, 123)
-        Me.txtUM.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
-        Me.txtUM.Name = "txtUM"
-        Me.txtUM.Size = New System.Drawing.Size(89, 20)
-        Me.txtUM.TabIndex = 26
         '
         'txtRM
         '
-        Me.txtRM.Location = New System.Drawing.Point(124, 73)
-        Me.txtRM.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.txtRM.Location = New System.Drawing.Point(112, 67)
+        Me.txtRM.Margin = New System.Windows.Forms.Padding(2)
         Me.txtRM.Name = "txtRM"
-        Me.txtRM.Size = New System.Drawing.Size(89, 20)
+        Me.txtRM.Size = New System.Drawing.Size(123, 20)
         Me.txtRM.TabIndex = 25
         '
-        'DataGridView2
+        'tblMaterialAndOrders
         '
-        Me.DataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DataGridView2.Location = New System.Drawing.Point(21, 244)
-        Me.DataGridView2.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
-        Me.DataGridView2.Name = "DataGridView2"
-        Me.DataGridView2.RowHeadersWidth = 62
-        Me.DataGridView2.RowTemplate.Height = 28
-        Me.DataGridView2.Size = New System.Drawing.Size(682, 151)
-        Me.DataGridView2.TabIndex = 23
+        Me.tblMaterialAndOrders.AllowUserToAddRows = False
+        Me.tblMaterialAndOrders.AllowUserToDeleteRows = False
+        Me.tblMaterialAndOrders.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
+        Me.tblMaterialAndOrders.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.tblMaterialAndOrders.Location = New System.Drawing.Point(11, 244)
+        Me.tblMaterialAndOrders.Margin = New System.Windows.Forms.Padding(2)
+        Me.tblMaterialAndOrders.Name = "tblMaterialAndOrders"
+        Me.tblMaterialAndOrders.RowHeadersWidth = 62
+        Me.tblMaterialAndOrders.RowTemplate.Height = 28
+        Me.tblMaterialAndOrders.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
+        Me.tblMaterialAndOrders.Size = New System.Drawing.Size(653, 146)
+        Me.tblMaterialAndOrders.TabIndex = 23
         '
-        'Button7
+        'btnUpdateMareialData
         '
-        Me.Button7.Location = New System.Drawing.Point(359, 183)
-        Me.Button7.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
-        Me.Button7.Name = "Button7"
-        Me.Button7.Size = New System.Drawing.Size(53, 24)
-        Me.Button7.TabIndex = 22
-        Me.Button7.Text = "Update"
-        Me.Button7.UseVisualStyleBackColor = True
-        '
-        'btnQueryDetalleM
-        '
-        Me.btnQueryDetalleM.Location = New System.Drawing.Point(281, 183)
-        Me.btnQueryDetalleM.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
-        Me.btnQueryDetalleM.Name = "btnQueryDetalleM"
-        Me.btnQueryDetalleM.Size = New System.Drawing.Size(53, 24)
-        Me.btnQueryDetalleM.TabIndex = 21
-        Me.btnQueryDetalleM.Text = "Query"
-        Me.btnQueryDetalleM.UseVisualStyleBackColor = True
+        Me.btnUpdateMareialData.Location = New System.Drawing.Point(14, 153)
+        Me.btnUpdateMareialData.Margin = New System.Windows.Forms.Padding(2)
+        Me.btnUpdateMareialData.Name = "btnUpdateMareialData"
+        Me.btnUpdateMareialData.Size = New System.Drawing.Size(70, 42)
+        Me.btnUpdateMareialData.TabIndex = 22
+        Me.btnUpdateMareialData.Text = "Update"
+        Me.btnUpdateMareialData.UseVisualStyleBackColor = True
         '
         'Label7
         '
         Me.Label7.AutoSize = True
-        Me.Label7.Location = New System.Drawing.Point(517, 219)
+        Me.Label7.Location = New System.Drawing.Point(255, 206)
         Me.Label7.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label7.Name = "Label7"
         Me.Label7.Size = New System.Drawing.Size(41, 13)
         Me.Label7.TabIndex = 20
         Me.Label7.Text = "Search"
         '
-        'TextBox16
+        'txtSearch
         '
-        Me.TextBox16.Location = New System.Drawing.Point(583, 215)
-        Me.TextBox16.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
-        Me.TextBox16.Name = "TextBox16"
-        Me.TextBox16.Size = New System.Drawing.Size(121, 20)
-        Me.TextBox16.TabIndex = 19
-        '
-        'txtMprice
-        '
-        Me.txtMprice.Location = New System.Drawing.Point(583, 26)
-        Me.txtMprice.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
-        Me.txtMprice.Name = "txtMprice"
-        Me.txtMprice.Size = New System.Drawing.Size(121, 20)
-        Me.txtMprice.TabIndex = 18
-        '
-        'txtCantidad
-        '
-        Me.txtCantidad.Location = New System.Drawing.Point(583, 121)
-        Me.txtCantidad.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
-        Me.txtCantidad.Name = "txtCantidad"
-        Me.txtCantidad.Size = New System.Drawing.Size(121, 20)
-        Me.txtCantidad.TabIndex = 17
+        Me.txtSearch.Location = New System.Drawing.Point(297, 204)
+        Me.txtSearch.Margin = New System.Windows.Forms.Padding(2)
+        Me.txtSearch.Name = "txtSearch"
+        Me.txtSearch.Size = New System.Drawing.Size(174, 20)
+        Me.txtSearch.TabIndex = 19
         '
         'txtDescripcion
         '
-        Me.txtDescripcion.Location = New System.Drawing.Point(583, 71)
-        Me.txtDescripcion.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.txtDescripcion.Location = New System.Drawing.Point(350, 118)
+        Me.txtDescripcion.Margin = New System.Windows.Forms.Padding(2)
         Me.txtDescripcion.Name = "txtDescripcion"
         Me.txtDescripcion.Size = New System.Drawing.Size(121, 20)
         Me.txtDescripcion.TabIndex = 16
         '
-        'txtMTychness
+        'txtTipo
         '
-        Me.txtMTychness.Location = New System.Drawing.Point(349, 123)
-        Me.txtMTychness.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
-        Me.txtMTychness.Name = "txtMTychness"
-        Me.txtMTychness.Size = New System.Drawing.Size(122, 20)
-        Me.txtMTychness.TabIndex = 11
-        '
-        'txtMType
-        '
-        Me.txtMType.Location = New System.Drawing.Point(349, 73)
-        Me.txtMType.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
-        Me.txtMType.Name = "txtMType"
-        Me.txtMType.Size = New System.Drawing.Size(122, 20)
-        Me.txtMType.TabIndex = 10
-        '
-        'txtMSize
-        '
-        Me.txtMSize.Location = New System.Drawing.Point(349, 24)
-        Me.txtMSize.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
-        Me.txtMSize.Name = "txtMSize"
-        Me.txtMSize.Size = New System.Drawing.Size(122, 20)
-        Me.txtMSize.TabIndex = 9
-        '
-        'Label6
-        '
-        Me.Label6.AutoSize = True
-        Me.Label6.Location = New System.Drawing.Point(517, 125)
-        Me.Label6.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
-        Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(49, 13)
-        Me.Label6.TabIndex = 15
-        Me.Label6.Text = "Cantidad"
+        Me.txtTipo.Location = New System.Drawing.Point(351, 50)
+        Me.txtTipo.Margin = New System.Windows.Forms.Padding(2)
+        Me.txtTipo.Name = "txtTipo"
+        Me.txtTipo.Size = New System.Drawing.Size(119, 20)
+        Me.txtTipo.TabIndex = 10
         '
         'Label5
         '
         Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(517, 75)
+        Me.Label5.Location = New System.Drawing.Point(284, 122)
         Me.Label5.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(63, 13)
         Me.Label5.TabIndex = 14
         Me.Label5.Text = "Descripcion"
         '
-        'Label1
-        '
-        Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(517, 28)
-        Me.Label1.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(39, 13)
-        Me.Label1.TabIndex = 13
-        Me.Label1.Text = "Mprice"
-        '
-        'btnSaveDetallesMaterials
-        '
-        Me.btnSaveDetallesMaterials.Location = New System.Drawing.Point(203, 183)
-        Me.btnSaveDetallesMaterials.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
-        Me.btnSaveDetallesMaterials.Name = "btnSaveDetallesMaterials"
-        Me.btnSaveDetallesMaterials.Size = New System.Drawing.Size(45, 24)
-        Me.btnSaveDetallesMaterials.TabIndex = 12
-        Me.btnSaveDetallesMaterials.Text = "Save"
-        Me.btnSaveDetallesMaterials.UseVisualStyleBackColor = True
-        '
-        'Label19
-        '
-        Me.Label19.AutoSize = True
-        Me.Label19.Location = New System.Drawing.Point(287, 125)
-        Me.Label19.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
-        Me.Label19.Name = "Label19"
-        Me.Label19.Size = New System.Drawing.Size(62, 13)
-        Me.Label19.TabIndex = 8
-        Me.Label19.Text = "MTyckness"
-        '
         'Label18
         '
         Me.Label18.AutoSize = True
-        Me.Label18.Location = New System.Drawing.Point(287, 75)
+        Me.Label18.Location = New System.Drawing.Point(286, 52)
         Me.Label18.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label18.Name = "Label18"
-        Me.Label18.Size = New System.Drawing.Size(40, 13)
+        Me.Label18.Size = New System.Drawing.Size(31, 13)
         Me.Label18.TabIndex = 7
-        Me.Label18.Text = "MType"
+        Me.Label18.Text = "Type"
         '
         'Label17
         '
         Me.Label17.AutoSize = True
-        Me.Label17.Location = New System.Drawing.Point(287, 28)
+        Me.Label17.Location = New System.Drawing.Point(288, 22)
         Me.Label17.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label17.Name = "Label17"
-        Me.Label17.Size = New System.Drawing.Size(36, 13)
+        Me.Label17.Size = New System.Drawing.Size(27, 13)
         Me.Label17.TabIndex = 6
-        Me.Label17.Text = "MSize"
+        Me.Label17.Text = "Size"
         '
         'Label16
         '
         Me.Label16.AutoSize = True
-        Me.Label16.Location = New System.Drawing.Point(18, 125)
+        Me.Label16.Location = New System.Drawing.Point(8, 121)
         Me.Label16.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label16.Name = "Label16"
-        Me.Label16.Size = New System.Drawing.Size(79, 13)
+        Me.Label16.Size = New System.Drawing.Size(104, 13)
         Me.Label16.TabIndex = 4
-        Me.Label16.Text = "Unidad Medida"
+        Me.Label16.Text = "Unit of measurement"
         '
         'Label15
         '
         Me.Label15.AutoSize = True
-        Me.Label15.Location = New System.Drawing.Point(18, 75)
+        Me.Label15.Location = New System.Drawing.Point(11, 71)
         Me.Label15.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label15.Name = "Label15"
-        Me.Label15.Size = New System.Drawing.Size(97, 13)
+        Me.Label15.Size = New System.Drawing.Size(93, 13)
         Me.Label15.TabIndex = 2
-        Me.Label15.Text = "Recursos Materials"
+        Me.Label15.Text = "Resource Material"
         '
         'Label14
         '
         Me.Label14.AutoSize = True
-        Me.Label14.Location = New System.Drawing.Point(18, 28)
+        Me.Label14.Location = New System.Drawing.Point(29, 24)
         Me.Label14.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label14.Name = "Label14"
         Me.Label14.Size = New System.Drawing.Size(44, 13)
@@ -360,123 +474,123 @@ Partial Class Materials
         '
         'TabPage1
         '
-        Me.TabPage1.Controls.Add(Me.Button3)
+        Me.TabPage1.Controls.Add(Me.chbEnableMaterial)
+        Me.TabPage1.Controls.Add(Me.txtNumeroMaterial)
+        Me.TabPage1.Controls.Add(Me.Label3)
+        Me.TabPage1.Controls.Add(Me.cmbVendedor)
+        Me.TabPage1.Controls.Add(Me.btnUpdateMaterial)
         Me.TabPage1.Controls.Add(Me.txtFiltro)
-        Me.TabPage1.Controls.Add(Me.txtIdVendor)
-        Me.TabPage1.Controls.Add(Me.DataGridView1)
-        Me.TabPage1.Controls.Add(Me.txtIdRenta)
+        Me.TabPage1.Controls.Add(Me.tblMaterial)
         Me.TabPage1.Controls.Add(Me.txtNameMaterials)
         Me.TabPage1.Controls.Add(Me.Label13)
-        Me.TabPage1.Controls.Add(Me.btnQuery)
-        Me.TabPage1.Controls.Add(Me.btnSave)
+        Me.TabPage1.Controls.Add(Me.btnSaveMaterial)
         Me.TabPage1.Controls.Add(Me.Label2)
-        Me.TabPage1.Controls.Add(Me.Label3)
         Me.TabPage1.Controls.Add(Me.Label4)
         Me.TabPage1.Location = New System.Drawing.Point(4, 22)
-        Me.TabPage1.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.TabPage1.Margin = New System.Windows.Forms.Padding(2)
         Me.TabPage1.Name = "TabPage1"
-        Me.TabPage1.Padding = New System.Windows.Forms.Padding(2, 2, 2, 2)
-        Me.TabPage1.Size = New System.Drawing.Size(761, 394)
+        Me.TabPage1.Padding = New System.Windows.Forms.Padding(2)
+        Me.TabPage1.Size = New System.Drawing.Size(761, 403)
         Me.TabPage1.TabIndex = 0
         Me.TabPage1.Text = "Materials"
         Me.TabPage1.UseVisualStyleBackColor = True
         '
-        'Button3
+        'chbEnableMaterial
         '
-        Me.Button3.Location = New System.Drawing.Point(265, 186)
-        Me.Button3.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
-        Me.Button3.Name = "Button3"
-        Me.Button3.Size = New System.Drawing.Size(55, 26)
-        Me.Button3.TabIndex = 28
-        Me.Button3.Text = "Update"
-        Me.Button3.UseVisualStyleBackColor = True
+        Me.chbEnableMaterial.AutoSize = True
+        Me.chbEnableMaterial.Location = New System.Drawing.Point(177, 146)
+        Me.chbEnableMaterial.Name = "chbEnableMaterial"
+        Me.chbEnableMaterial.Size = New System.Drawing.Size(59, 17)
+        Me.chbEnableMaterial.TabIndex = 32
+        Me.chbEnableMaterial.Text = "Enable"
+        Me.chbEnableMaterial.UseVisualStyleBackColor = True
+        '
+        'txtNumeroMaterial
+        '
+        Me.txtNumeroMaterial.Location = New System.Drawing.Point(99, 69)
+        Me.txtNumeroMaterial.Margin = New System.Windows.Forms.Padding(2)
+        Me.txtNumeroMaterial.Name = "txtNumeroMaterial"
+        Me.txtNumeroMaterial.Size = New System.Drawing.Size(137, 20)
+        Me.txtNumeroMaterial.TabIndex = 31
+        '
+        'Label3
+        '
+        Me.Label3.AutoSize = True
+        Me.Label3.Location = New System.Drawing.Point(33, 72)
+        Me.Label3.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.Label3.Name = "Label3"
+        Me.Label3.Size = New System.Drawing.Size(44, 13)
+        Me.Label3.TabIndex = 30
+        Me.Label3.Text = "Number"
+        '
+        'cmbVendedor
+        '
+        Me.cmbVendedor.FormattingEnabled = True
+        Me.cmbVendedor.Location = New System.Drawing.Point(99, 109)
+        Me.cmbVendedor.Name = "cmbVendedor"
+        Me.cmbVendedor.Size = New System.Drawing.Size(137, 21)
+        Me.cmbVendedor.TabIndex = 29
+        '
+        'btnUpdateMaterial
+        '
+        Me.btnUpdateMaterial.Location = New System.Drawing.Point(155, 186)
+        Me.btnUpdateMaterial.Margin = New System.Windows.Forms.Padding(2)
+        Me.btnUpdateMaterial.Name = "btnUpdateMaterial"
+        Me.btnUpdateMaterial.Size = New System.Drawing.Size(55, 35)
+        Me.btnUpdateMaterial.TabIndex = 28
+        Me.btnUpdateMaterial.Text = "Update"
+        Me.btnUpdateMaterial.UseVisualStyleBackColor = True
         '
         'txtFiltro
         '
-        Me.txtFiltro.Location = New System.Drawing.Point(387, 190)
-        Me.txtFiltro.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.txtFiltro.Location = New System.Drawing.Point(369, 48)
+        Me.txtFiltro.Margin = New System.Windows.Forms.Padding(2)
         Me.txtFiltro.Name = "txtFiltro"
         Me.txtFiltro.Size = New System.Drawing.Size(144, 20)
         Me.txtFiltro.TabIndex = 27
         '
-        'txtIdVendor
-        '
-        Me.txtIdVendor.Location = New System.Drawing.Point(132, 91)
-        Me.txtIdVendor.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
-        Me.txtIdVendor.Name = "txtIdVendor"
-        Me.txtIdVendor.Size = New System.Drawing.Size(113, 20)
-        Me.txtIdVendor.TabIndex = 13
-        '
-        'txtIdRenta
-        '
-        Me.txtIdRenta.Location = New System.Drawing.Point(387, 32)
-        Me.txtIdRenta.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
-        Me.txtIdRenta.Name = "txtIdRenta"
-        Me.txtIdRenta.Size = New System.Drawing.Size(113, 20)
-        Me.txtIdRenta.TabIndex = 14
-        '
         'txtNameMaterials
         '
-        Me.txtNameMaterials.Location = New System.Drawing.Point(132, 31)
-        Me.txtNameMaterials.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.txtNameMaterials.Location = New System.Drawing.Point(99, 31)
+        Me.txtNameMaterials.Margin = New System.Windows.Forms.Padding(2)
         Me.txtNameMaterials.Name = "txtNameMaterials"
-        Me.txtNameMaterials.Size = New System.Drawing.Size(113, 20)
+        Me.txtNameMaterials.Size = New System.Drawing.Size(137, 20)
         Me.txtNameMaterials.TabIndex = 15
         '
         'Label13
         '
         Me.Label13.AutoSize = True
-        Me.Label13.Location = New System.Drawing.Point(534, 190)
+        Me.Label13.Location = New System.Drawing.Point(310, 51)
         Me.Label13.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label13.Name = "Label13"
         Me.Label13.Size = New System.Drawing.Size(41, 13)
         Me.Label13.TabIndex = 26
         Me.Label13.Text = "Search"
         '
-        'btnQuery
+        'btnSaveMaterial
         '
-        Me.btnQuery.Location = New System.Drawing.Point(188, 186)
-        Me.btnQuery.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
-        Me.btnQuery.Name = "btnQuery"
-        Me.btnQuery.Size = New System.Drawing.Size(57, 26)
-        Me.btnQuery.TabIndex = 25
-        Me.btnQuery.Text = "Query"
-        Me.btnQuery.UseVisualStyleBackColor = True
-        '
-        'btnSave
-        '
-        Me.btnSave.Location = New System.Drawing.Point(123, 186)
-        Me.btnSave.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
-        Me.btnSave.Name = "btnSave"
-        Me.btnSave.Size = New System.Drawing.Size(54, 26)
-        Me.btnSave.TabIndex = 24
-        Me.btnSave.Text = "Save"
-        Me.btnSave.UseVisualStyleBackColor = True
+        Me.btnSaveMaterial.Location = New System.Drawing.Point(36, 186)
+        Me.btnSaveMaterial.Margin = New System.Windows.Forms.Padding(2)
+        Me.btnSaveMaterial.Name = "btnSaveMaterial"
+        Me.btnSaveMaterial.Size = New System.Drawing.Size(54, 35)
+        Me.btnSaveMaterial.TabIndex = 24
+        Me.btnSaveMaterial.Text = "Save"
+        Me.btnSaveMaterial.UseVisualStyleBackColor = True
         '
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(66, 95)
+        Me.Label2.Location = New System.Drawing.Point(33, 112)
         Me.Label2.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(50, 13)
+        Me.Label2.Size = New System.Drawing.Size(41, 13)
         Me.Label2.TabIndex = 1
-        Me.Label2.Text = "IdVendor"
-        '
-        'Label3
-        '
-        Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(328, 34)
-        Me.Label3.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
-        Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(45, 13)
-        Me.Label3.TabIndex = 2
-        Me.Label3.Text = "IdRenta"
+        Me.Label2.Text = "Vendor"
         '
         'Label4
         '
         Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(66, 34)
+        Me.Label4.Location = New System.Drawing.Point(33, 34)
         Me.Label4.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(35, 13)
@@ -485,75 +599,252 @@ Partial Class Materials
         '
         'TabControl1
         '
+        Me.TabControl1.Controls.Add(Me.TabPage3)
         Me.TabControl1.Controls.Add(Me.TabPage1)
         Me.TabControl1.Controls.Add(Me.TabPage2)
-        Me.TabControl1.Location = New System.Drawing.Point(5, 32)
-        Me.TabControl1.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.TabControl1.Location = New System.Drawing.Point(6, 33)
+        Me.TabControl1.Margin = New System.Windows.Forms.Padding(2)
         Me.TabControl1.Name = "TabControl1"
         Me.TabControl1.SelectedIndex = 0
-        Me.TabControl1.Size = New System.Drawing.Size(769, 420)
+        Me.TabControl1.Size = New System.Drawing.Size(769, 429)
         Me.TabControl1.TabIndex = 3
+        '
+        'TabPage3
+        '
+        Me.TabPage3.Controls.Add(Me.Label12)
+        Me.TabPage3.Controls.Add(Me.txtSearchVendedor)
+        Me.TabPage3.Controls.Add(Me.txtNumeroVendedor)
+        Me.TabPage3.Controls.Add(Me.Label19)
+        Me.TabPage3.Controls.Add(Me.btnUpdateVendor)
+        Me.TabPage3.Controls.Add(Me.chbEnableVendor)
+        Me.TabPage3.Controls.Add(Me.tbkVendor)
+        Me.TabPage3.Controls.Add(Me.btnSaveVendor)
+        Me.TabPage3.Controls.Add(Me.txtDescripcionVendedor)
+        Me.TabPage3.Controls.Add(Me.txtNombreVendedor)
+        Me.TabPage3.Controls.Add(Me.Label10)
+        Me.TabPage3.Controls.Add(Me.Label11)
+        Me.TabPage3.Location = New System.Drawing.Point(4, 22)
+        Me.TabPage3.Name = "TabPage3"
+        Me.TabPage3.Size = New System.Drawing.Size(761, 403)
+        Me.TabPage3.TabIndex = 2
+        Me.TabPage3.Text = "Vendor"
+        Me.TabPage3.UseVisualStyleBackColor = True
+        '
+        'Label12
+        '
+        Me.Label12.AutoSize = True
+        Me.Label12.Location = New System.Drawing.Point(282, 26)
+        Me.Label12.Name = "Label12"
+        Me.Label12.Size = New System.Drawing.Size(41, 13)
+        Me.Label12.TabIndex = 25
+        Me.Label12.Text = "Search"
+        '
+        'txtSearchVendedor
+        '
+        Me.txtSearchVendedor.Location = New System.Drawing.Point(346, 22)
+        Me.txtSearchVendedor.Margin = New System.Windows.Forms.Padding(2)
+        Me.txtSearchVendedor.Name = "txtSearchVendedor"
+        Me.txtSearchVendedor.Size = New System.Drawing.Size(135, 20)
+        Me.txtSearchVendedor.TabIndex = 24
+        '
+        'txtNumeroVendedor
+        '
+        Me.txtNumeroVendedor.Location = New System.Drawing.Point(85, 22)
+        Me.txtNumeroVendedor.Margin = New System.Windows.Forms.Padding(2)
+        Me.txtNumeroVendedor.Name = "txtNumeroVendedor"
+        Me.txtNumeroVendedor.Size = New System.Drawing.Size(108, 20)
+        Me.txtNumeroVendedor.TabIndex = 23
+        '
+        'Label19
+        '
+        Me.Label19.AutoSize = True
+        Me.Label19.Location = New System.Drawing.Point(21, 26)
+        Me.Label19.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.Label19.Name = "Label19"
+        Me.Label19.Size = New System.Drawing.Size(44, 13)
+        Me.Label19.TabIndex = 22
+        Me.Label19.Text = "Number"
+        '
+        'btnUpdateVendor
+        '
+        Me.btnUpdateVendor.Location = New System.Drawing.Point(118, 187)
+        Me.btnUpdateVendor.Name = "btnUpdateVendor"
+        Me.btnUpdateVendor.Size = New System.Drawing.Size(75, 32)
+        Me.btnUpdateVendor.TabIndex = 19
+        Me.btnUpdateVendor.Text = "Update"
+        Me.btnUpdateVendor.UseVisualStyleBackColor = True
+        '
+        'chbEnableVendor
+        '
+        Me.chbEnableVendor.AutoSize = True
+        Me.chbEnableVendor.Location = New System.Drawing.Point(85, 139)
+        Me.chbEnableVendor.Name = "chbEnableVendor"
+        Me.chbEnableVendor.Size = New System.Drawing.Size(59, 17)
+        Me.chbEnableVendor.TabIndex = 18
+        Me.chbEnableVendor.Text = "Enable"
+        Me.chbEnableVendor.UseVisualStyleBackColor = True
+        '
+        'tbkVendor
+        '
+        Me.tbkVendor.AllowUserToAddRows = False
+        Me.tbkVendor.AllowUserToDeleteRows = False
+        Me.tbkVendor.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
+        Me.tbkVendor.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.tbkVendor.Location = New System.Drawing.Point(227, 59)
+        Me.tbkVendor.Margin = New System.Windows.Forms.Padding(2)
+        Me.tbkVendor.MultiSelect = False
+        Me.tbkVendor.Name = "tbkVendor"
+        Me.tbkVendor.ReadOnly = True
+        Me.tbkVendor.RowHeadersWidth = 62
+        Me.tbkVendor.RowTemplate.Height = 28
+        Me.tbkVendor.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
+        Me.tbkVendor.Size = New System.Drawing.Size(512, 340)
+        Me.tbkVendor.TabIndex = 17
+        '
+        'btnSaveVendor
+        '
+        Me.btnSaveVendor.Location = New System.Drawing.Point(24, 187)
+        Me.btnSaveVendor.Margin = New System.Windows.Forms.Padding(2)
+        Me.btnSaveVendor.Name = "btnSaveVendor"
+        Me.btnSaveVendor.Size = New System.Drawing.Size(68, 32)
+        Me.btnSaveVendor.TabIndex = 15
+        Me.btnSaveVendor.Text = "Save"
+        Me.btnSaveVendor.UseVisualStyleBackColor = True
+        '
+        'txtDescripcionVendedor
+        '
+        Me.txtDescripcionVendedor.Location = New System.Drawing.Point(85, 98)
+        Me.txtDescripcionVendedor.Margin = New System.Windows.Forms.Padding(2)
+        Me.txtDescripcionVendedor.Name = "txtDescripcionVendedor"
+        Me.txtDescripcionVendedor.Size = New System.Drawing.Size(109, 20)
+        Me.txtDescripcionVendedor.TabIndex = 14
+        '
+        'txtNombreVendedor
+        '
+        Me.txtNombreVendedor.Location = New System.Drawing.Point(85, 56)
+        Me.txtNombreVendedor.Margin = New System.Windows.Forms.Padding(2)
+        Me.txtNombreVendedor.Name = "txtNombreVendedor"
+        Me.txtNombreVendedor.Size = New System.Drawing.Size(108, 20)
+        Me.txtNombreVendedor.TabIndex = 13
+        '
+        'Label10
+        '
+        Me.Label10.AutoSize = True
+        Me.Label10.Location = New System.Drawing.Point(6, 103)
+        Me.Label10.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.Label10.Name = "Label10"
+        Me.Label10.Size = New System.Drawing.Size(63, 13)
+        Me.Label10.TabIndex = 11
+        Me.Label10.Text = "Descripcion"
+        '
+        'Label11
+        '
+        Me.Label11.AutoSize = True
+        Me.Label11.Location = New System.Drawing.Point(30, 61)
+        Me.Label11.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.Label11.Name = "Label11"
+        Me.Label11.Size = New System.Drawing.Size(35, 13)
+        Me.Label11.TabIndex = 10
+        Me.Label11.Text = "Name"
+        '
+        'btnUpdateOrder
+        '
+        Me.btnUpdateOrder.Location = New System.Drawing.Point(670, 279)
+        Me.btnUpdateOrder.Name = "btnUpdateOrder"
+        Me.btnUpdateOrder.Size = New System.Drawing.Size(72, 41)
+        Me.btnUpdateOrder.TabIndex = 40
+        Me.btnUpdateOrder.Text = "Update"
+        Me.btnUpdateOrder.UseVisualStyleBackColor = True
         '
         'Materials
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(783, 460)
+        Me.ClientSize = New System.Drawing.Size(783, 468)
         Me.Controls.Add(Me.Button5)
         Me.Controls.Add(Me.TabControl1)
         Me.Controls.Add(Me.btnMenu)
-        Me.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.Margin = New System.Windows.Forms.Padding(2)
         Me.Name = "Materials"
         Me.Text = "Materials"
-        CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.tblMaterial, System.ComponentModel.ISupportInitialize).EndInit()
         Me.TabPage2.ResumeLayout(False)
         Me.TabPage2.PerformLayout()
-        CType(Me.DataGridView2, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.sprPrice, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.GroupBox1.ResumeLayout(False)
+        Me.GroupBox1.PerformLayout()
+        CType(Me.sprCantidadOrden, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.sprPricioOrden, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.sprTamanio, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.tblMaterialAndOrders, System.ComponentModel.ISupportInitialize).EndInit()
         Me.TabPage1.ResumeLayout(False)
         Me.TabPage1.PerformLayout()
         Me.TabControl1.ResumeLayout(False)
+        Me.TabPage3.ResumeLayout(False)
+        Me.TabPage3.PerformLayout()
+        CType(Me.tbkVendor, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
-    Friend WithEvents DataGridView1 As DataGridView
+    Friend WithEvents tblMaterial As DataGridView
     Friend WithEvents btnMenu As Button
     Friend WithEvents Button5 As Button
     Friend WithEvents TabPage2 As TabPage
-    Friend WithEvents Button7 As Button
-    Friend WithEvents btnQueryDetalleM As Button
+    Friend WithEvents btnUpdateMareialData As Button
     Friend WithEvents Label7 As Label
-    Friend WithEvents TextBox16 As TextBox
-    Friend WithEvents txtMprice As TextBox
-    Friend WithEvents txtCantidad As TextBox
-    Friend WithEvents txtDescripcion As TextBox
-    Friend WithEvents txtMTychness As TextBox
-    Friend WithEvents txtMType As TextBox
-    Friend WithEvents txtMSize As TextBox
+    Friend WithEvents txtSearch As TextBox
     Friend WithEvents Label6 As Label
     Friend WithEvents Label5 As Label
     Friend WithEvents Label1 As Label
-    Friend WithEvents btnSaveDetallesMaterials As Button
-    Friend WithEvents Label19 As Label
     Friend WithEvents Label18 As Label
     Friend WithEvents Label17 As Label
     Friend WithEvents Label16 As Label
     Friend WithEvents Label15 As Label
     Friend WithEvents Label14 As Label
     Friend WithEvents TabPage1 As TabPage
-    Friend WithEvents Button3 As Button
+    Friend WithEvents btnUpdateMaterial As Button
     Friend WithEvents txtFiltro As TextBox
-    Friend WithEvents txtIdVendor As TextBox
-    Friend WithEvents txtIdRenta As TextBox
     Friend WithEvents txtNameMaterials As TextBox
     Friend WithEvents Label13 As Label
-    Friend WithEvents btnQuery As Button
-    Friend WithEvents btnSave As Button
+    Friend WithEvents btnSaveMaterial As Button
     Friend WithEvents Label2 As Label
-    Friend WithEvents Label3 As Label
     Friend WithEvents Label4 As Label
     Friend WithEvents TabControl1 As TabControl
-    Friend WithEvents txtUM As TextBox
-    Friend WithEvents txtRM As TextBox
-    Friend WithEvents DataGridView2 As DataGridView
-    Friend WithEvents txtDMaterial As TextBox
+    Friend WithEvents tblMaterialAndOrders As DataGridView
+    Friend WithEvents sprPricioOrden As NumericUpDown
+    Friend WithEvents lblTotal As Label
+    Friend WithEvents Label8 As Label
+    Friend WithEvents sprCantidadOrden As NumericUpDown
+    Friend WithEvents txtNumeroMaterial As TextBox
+    Friend WithEvents Label3 As Label
+    Friend WithEvents cmbVendedor As ComboBox
+    Friend WithEvents TabPage3 As TabPage
+    Friend WithEvents tbkVendor As DataGridView
+    Friend WithEvents btnSaveVendor As Button
+    Friend WithEvents txtDescripcionVendedor As TextBox
+    Friend WithEvents txtNombreVendedor As TextBox
+    Friend WithEvents Label10 As Label
+    Friend WithEvents Label11 As Label
+    Friend WithEvents btnUpdateVendor As Button
+    Friend WithEvents chbEnableVendor As CheckBox
+    Friend WithEvents txtNumeroVendedor As TextBox
+    Friend WithEvents Label19 As Label
+    Friend WithEvents Label12 As Label
+    Friend WithEvents txtSearchVendedor As TextBox
+    Friend WithEvents Label9 As Label
+    Friend WithEvents dtpFechaOrden As DateTimePicker
+    Friend WithEvents GroupBox1 As GroupBox
+    Friend WithEvents btnOrderSave As Button
+    Friend WithEvents chbOrden As CheckBox
+    Friend WithEvents chbEnableMaterial As CheckBox
+    Friend WithEvents Label20 As Label
+    Public WithEvents txtDescripcion As TextBox
+    Public WithEvents txtTipo As TextBox
+    Public WithEvents txtRM As TextBox
+    Public WithEvents txtDMaterial As TextBox
+    Public WithEvents sprTamanio As NumericUpDown
+    Public WithEvents cmbUnidadDeMedida As ComboBox
+    Friend WithEvents sprPrice As NumericUpDown
+    Friend WithEvents btnDeleteOrder As Button
+    Friend WithEvents btnUpdateOrder As Button
 End Class

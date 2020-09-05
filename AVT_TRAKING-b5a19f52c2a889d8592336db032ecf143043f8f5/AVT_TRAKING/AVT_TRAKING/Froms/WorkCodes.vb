@@ -5,8 +5,10 @@ Public Class WorkCodes
     Dim workcode As MetodosWorkCodes = New MetodosWorkCodes()
 
     Private Sub WorkCodes_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-
+        btnSave.Enabled = False
+        btnNewWork.Enabled = True
     End Sub
+
 
     Public Sub MostrarDatos()
         workcode.ConsultaWorkCodes("select * from WorkCode")
@@ -14,7 +16,7 @@ Public Class WorkCodes
 
     End Sub
 
-    Private Sub BtnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
+    Private Sub BtnSave_Click(sender As Object, e As EventArgs)
         Dim agregar As String = "insert into WorkCode values (" + txtWorkCodeID.Text + ",'" + txtJobNumber.Text + "','" +
             txtSubJob.Text + "','" + txtCraft.Text + "','" + txtWorkCode.Text + "','" + txtClassification.Text +
             "','" + txtBillingRateST.Text + "','" + txtBillingRateOT.Text + "','" + txtBillingRate3.Text + "','" + txtClassDescription.Text + "')"
@@ -33,7 +35,7 @@ Public Class WorkCodes
         Me.Finalize()
     End Sub
 
-    Private Sub btnQuery_Click(sender As Object, e As EventArgs) Handles btnQuery.Click
+    Private Sub btnQuery_Click(sender As Object, e As EventArgs)
         MostrarDatos()
     End Sub
 
@@ -53,7 +55,7 @@ Public Class WorkCodes
 
     End Sub
 
-    Private Sub txtFiltro_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtFiltro.KeyPress
+    Private Sub txtFiltro_KeyPress(sender As Object, e As KeyPressEventArgs)
         Dim conn = New SqlConnection("data source=localhost; initial catalog=VRT_TRAKING; integrated security=true")
         Dim da = New SqlDataAdapter("select * from WorkCode where JobNumber like '" + txtFiltro.Text + "%'", conn)
         Dim dt = New DataTable
@@ -66,5 +68,9 @@ Public Class WorkCodes
         Dim a As New Login
         a.Show()
         Me.Finalize()
+    End Sub
+
+    Private Sub Button3_Click(sender As Object, e As EventArgs) Handles btnNewWork.Click
+
     End Sub
 End Class
