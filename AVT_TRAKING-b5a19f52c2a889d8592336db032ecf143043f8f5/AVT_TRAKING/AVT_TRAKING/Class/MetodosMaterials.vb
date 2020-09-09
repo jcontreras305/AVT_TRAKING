@@ -17,17 +17,22 @@ Public Class MetodosMaterials
     End Function
 
     Public Function valueMaxMaterial()
-        conectar()
-        Dim cmd As New SqlCommand("select max(number)+1 as max from material", conn)
-        Dim rd As SqlDataReader
-        rd = cmd.ExecuteReader
-        If rd.Read() Then
-            Dim valueMax = If(IsDBNull(rd("max")), 100, rd("max"))
+        Try
+            conectar()
+            Dim cmd As New SqlCommand("select max(number)+1 as max from material", conn)
+            Dim rd As SqlDataReader
+            rd = cmd.ExecuteReader
+            If rd.Read() Then
+                Dim valueMax = If(IsDBNull(rd("max")), 100, rd("max"))
+                Return valueMax
+            Else
+                Return 100
+            End If
+        Catch ex As Exception
+            Dim valueMax = 100
+            desconectar()
             Return valueMax
-        Else
-            Return 100
-        End If
-        desconectar()
+        End Try
     End Function
 
     Public Sub insertarVendor(ByVal datos() As String)
