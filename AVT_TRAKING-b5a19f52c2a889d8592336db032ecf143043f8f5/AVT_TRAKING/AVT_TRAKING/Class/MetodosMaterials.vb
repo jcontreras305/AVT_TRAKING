@@ -3,16 +3,20 @@ Public Class MetodosMaterials
     Inherits ConnectioDB
 
     Public Function valueMaxVendor()
-        conectar()
-        Dim cmd As New SqlCommand("select max(numberVendor)+1 as max from vendor", conn)
-        Dim rd As SqlDataReader
-        rd = cmd.ExecuteReader
-        If rd.Read() Then
-            Dim valueMax = If(IsDBNull(rd("max")), 100, rd("max"))
-            Return valueMax
-        Else
+        Try
+            conectar()
+            Dim cmd As New SqlCommand("select max(numberVendor)+1 as max from vendor", conn)
+            Dim rd As SqlDataReader
+            rd = cmd.ExecuteReader
+            If rd.Read() Then
+                Dim valueMax = If(IsDBNull(rd("max")), 100, rd("max"))
+                Return valueMax
+            Else
+                Return 100
+            End If
+        Catch ex As Exception
             Return 100
-        End If
+        End Try
         desconectar()
     End Function
 
