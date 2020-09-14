@@ -228,7 +228,7 @@ or ha.city like ''
 --#######################################################################################################################
 
 
---create procedure [dbo].[sp_insert_Material]
+--create procedure sp_insert_Material
 --@nombre varchar(50),
 --@numero int,
 --@idVendor varchar(36),
@@ -256,7 +256,7 @@ or ha.city like ''
 --			end
 --		end try
 --		begin catch
-
+--			goto solveProblem
 --		end catch
 --	commit tran
 --	solveProblem:
@@ -268,7 +268,10 @@ or ha.city like ''
 --end
 --go
 
---ALTER proc [dbo].[sp_actualizaMaterial]
+
+
+
+--create proc sp_actualizaMaterial
 --@idMaterial varchar(36),
 --@nombreN varchar(50),
 --@numeroN int,
@@ -314,8 +317,6 @@ or ha.city like ''
 --		rollback tran
 --	end 
 --end
---go
-
 
 --#######################################################################################################################
 --########### PROCEDURE OF VENDOR ####################################################################################
@@ -327,7 +328,7 @@ or ha.city like ''
 --@numero int,
 --@description varchar(80),
 --@status char(1),
---@msg varchar(100) out
+--@msg varchar(100) output
 --as
 --declare @idVendor varchar(36)
 --declare @error int
@@ -357,22 +358,4 @@ or ha.city like ''
 --		set @msg = CONCAT('Is probably that the Vendor ',@nombre,' have been registrated.')
 --	end  
 --end
---go
-
---#######################################################################################################################
---########### TABLE materialOrder #######################################################################################
---#######################################################################################################################
-
-
---create table materialOrder (
---	idOrder varchar (36) primary key not null,
---	quantity float,
---	price float,
---	fecha date,
---	idMaterial varchar(36)
---)
-
---alter table MaterialOrder 
---add constraint fk_idMaterial_MaterialOrder foreign key (idMaterial)
---references material (idMaterial)
 --go

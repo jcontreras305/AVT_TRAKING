@@ -118,18 +118,12 @@ alter table contact
 	--						'815-955-9982',8848,202,'240000000000002','T&M'),
 	--						(5558,'Cementera','Calle mirador','Los Reyes','Michoacan',59890,'Andres','Reyes','Supervisor',
 	--						'815-955-9982',8850,203,'240000000000003','T&M')
---############################################################################
---############# Table Vendor #################################################
---############################################################################
 
---create table Vendor (
---idVendor varchar (36) primary key not null,
---numberVendor int not null,
---name varchar (50),
---descriptions varchar(80),
---estatus char(1)
---)
---go
+
+
+
+
+
 --############################################################################
 --############# Tables vendor ################################################
 --############################################################################
@@ -154,9 +148,11 @@ alter table contact
 --)
 --go
 
-----############################################################################
-----############# Table detalleMaterial ########################################
-----############################################################################
+
+
+----####################################################################################################################################################################################################################################
+----############# Table detalleMaterial ##################################################################### CAMBIOS EN LAS TABLAS REALCIONADAS CON MATERIALES ########################################################################
+----####################################################################################################################################################################################################################################
 
 --create table detalleMaterial(
 --	idDM varchar (36) primary key not null,
@@ -165,12 +161,12 @@ alter table contact
 --	type varchar(30),
 --	price float,
 --	description varchar(100),
---	quantity float,
---	date date,
+--	size float,
 --	idMaterial varchar(36),
 --	idVendor varchar(36) 
 --)
 --go
+
 --alter table detalleMaterial 
 --add constraint fk_idMaterial_DM foreign key (idMaterial)
 --references material (idMaterial)
@@ -193,13 +189,30 @@ alter table contact
 ----aqui se realiza un relacion entre el producto y las exitencias sabiendo que solo ese producto sera el mismo 
 ----debido a que la clave primaria del producto es la clave princiapal de existencias ya que solo se podra alterar
 ----con con inserciones o bajas es por eso que se realiza una tabla diferente.
+
 --alter table existences 
 --add constraint fk_idDM_existenece foreign key (idDM)
 --references DetalleMaterial (idDM)
 --go
 
+----############################################################################
+----############# Table Material Orders ########################################
+----############################################################################
 
 
+
+--create table materialOrder (
+--	idOrder varchar (36) primary key not null,
+--	quantity float,
+--	price float,
+--	fecha date,
+--	idMaterial varchar(36)
+--)
+
+--alter table MaterialOrder 
+--add constraint fk_idMaterial_MaterialOrder foreign key (idMaterial)
+--references material (idMaterial)
+--go
 
 
 
