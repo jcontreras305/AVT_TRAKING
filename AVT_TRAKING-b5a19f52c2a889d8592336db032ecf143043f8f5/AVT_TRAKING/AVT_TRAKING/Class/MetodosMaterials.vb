@@ -274,12 +274,12 @@ where id = '" + listDatosNuevos(0) + "'"
         Try
             conectar()
             Dim cmd As New SqlCommand
-            cmd.CommandText = "select mt.idMaterial, dt.idDM,mo.idOrder, mt.number as 'ID Materia', mt.name as 'Name' ,mo.price As 'Price', mo.fecha as 'Date',mo.quantity 'Quantity', vd.name 'Vendor', ex.quantity as 'Existences'
-from material as mt 
+            cmd.CommandText = "select mt.idMaterial, dt.idDM, mo.idOrder, mt.number as 'ID Materia', mt.name as 'Name' ,mo.price As 'Price', mo.fecha as 'Date',mo.quantity 'Quantity', vd.name 'Vendor', ex.quantity as 'Existences'
+from materialOrder as mo
+inner join material as mt on mt.idMaterial = mo.idMaterial
 inner join detalleMaterial as dt on mt.idMaterial = dt.idMaterial 
 left join vendor as vd on vd.idVendor = dt.idVendor
 left join existences as ex on ex.idDM = dt.idDM
-left join materialOrder as mo on mo.idMaterial = mt.idMaterial
 where vd.name like CONCAT ('%', '" + consulta + "','%')
 OR mt.number like CONCAT ('%', '" + consulta + "','%')
 OR mt.name like CONCAT ('%', '" + consulta + "','%')"

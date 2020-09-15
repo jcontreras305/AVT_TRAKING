@@ -26,6 +26,8 @@ Partial Class Materials
         Me.btnMenu = New System.Windows.Forms.Button()
         Me.Button5 = New System.Windows.Forms.Button()
         Me.TabPage2 = New System.Windows.Forms.TabPage()
+        Me.btnCancelOrder = New System.Windows.Forms.Button()
+        Me.btnUpdateOrder = New System.Windows.Forms.Button()
         Me.btnDeleteOrder = New System.Windows.Forms.Button()
         Me.sprPrice = New System.Windows.Forms.NumericUpDown()
         Me.Label20 = New System.Windows.Forms.Label()
@@ -57,6 +59,7 @@ Partial Class Materials
         Me.Label15 = New System.Windows.Forms.Label()
         Me.Label14 = New System.Windows.Forms.Label()
         Me.TabPage1 = New System.Windows.Forms.TabPage()
+        Me.btnCancelMaterial = New System.Windows.Forms.Button()
         Me.chbEnableMaterial = New System.Windows.Forms.CheckBox()
         Me.txtNumeroMaterial = New System.Windows.Forms.TextBox()
         Me.Label3 = New System.Windows.Forms.Label()
@@ -70,19 +73,19 @@ Partial Class Materials
         Me.Label4 = New System.Windows.Forms.Label()
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.TabPage3 = New System.Windows.Forms.TabPage()
+        Me.btnCancelVendor = New System.Windows.Forms.Button()
         Me.Label12 = New System.Windows.Forms.Label()
         Me.txtSearchVendedor = New System.Windows.Forms.TextBox()
         Me.txtNumeroVendedor = New System.Windows.Forms.TextBox()
         Me.Label19 = New System.Windows.Forms.Label()
         Me.btnUpdateVendor = New System.Windows.Forms.Button()
         Me.chbEnableVendor = New System.Windows.Forms.CheckBox()
-        Me.tbkVendor = New System.Windows.Forms.DataGridView()
+        Me.tblVendor = New System.Windows.Forms.DataGridView()
         Me.btnSaveVendor = New System.Windows.Forms.Button()
         Me.txtDescripcionVendedor = New System.Windows.Forms.TextBox()
         Me.txtNombreVendedor = New System.Windows.Forms.TextBox()
         Me.Label10 = New System.Windows.Forms.Label()
         Me.Label11 = New System.Windows.Forms.Label()
-        Me.btnUpdateOrder = New System.Windows.Forms.Button()
         CType(Me.tblMaterial, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.TabPage2.SuspendLayout()
         CType(Me.sprPrice, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -94,7 +97,7 @@ Partial Class Materials
         Me.TabPage1.SuspendLayout()
         Me.TabControl1.SuspendLayout()
         Me.TabPage3.SuspendLayout()
-        CType(Me.tbkVendor, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.tblVendor, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'tblMaterial
@@ -139,6 +142,7 @@ Partial Class Materials
         '
         'TabPage2
         '
+        Me.TabPage2.Controls.Add(Me.btnCancelOrder)
         Me.TabPage2.Controls.Add(Me.btnUpdateOrder)
         Me.TabPage2.Controls.Add(Me.btnDeleteOrder)
         Me.TabPage2.Controls.Add(Me.sprPrice)
@@ -168,6 +172,24 @@ Partial Class Materials
         Me.TabPage2.TabIndex = 1
         Me.TabPage2.Text = "Materials bills"
         Me.TabPage2.UseVisualStyleBackColor = True
+        '
+        'btnCancelOrder
+        '
+        Me.btnCancelOrder.Location = New System.Drawing.Point(669, 297)
+        Me.btnCancelOrder.Name = "btnCancelOrder"
+        Me.btnCancelOrder.Size = New System.Drawing.Size(72, 41)
+        Me.btnCancelOrder.TabIndex = 41
+        Me.btnCancelOrder.Text = "Cancel"
+        Me.btnCancelOrder.UseVisualStyleBackColor = True
+        '
+        'btnUpdateOrder
+        '
+        Me.btnUpdateOrder.Location = New System.Drawing.Point(669, 245)
+        Me.btnUpdateOrder.Name = "btnUpdateOrder"
+        Me.btnUpdateOrder.Size = New System.Drawing.Size(72, 41)
+        Me.btnUpdateOrder.TabIndex = 40
+        Me.btnUpdateOrder.Text = "Update"
+        Me.btnUpdateOrder.UseVisualStyleBackColor = True
         '
         'btnDeleteOrder
         '
@@ -209,9 +231,9 @@ Partial Class Materials
         Me.GroupBox1.Controls.Add(Me.sprPricioOrden)
         Me.GroupBox1.Controls.Add(Me.Label8)
         Me.GroupBox1.Controls.Add(Me.lblTotal)
-        Me.GroupBox1.Location = New System.Drawing.Point(503, 5)
+        Me.GroupBox1.Location = New System.Drawing.Point(477, 5)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(253, 234)
+        Me.GroupBox1.Size = New System.Drawing.Size(279, 234)
         Me.GroupBox1.TabIndex = 36
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "New Order"
@@ -219,17 +241,17 @@ Partial Class Materials
         'btnOrderSave
         '
         Me.btnOrderSave.Enabled = False
-        Me.btnOrderSave.Location = New System.Drawing.Point(172, 166)
+        Me.btnOrderSave.Location = New System.Drawing.Point(89, 186)
         Me.btnOrderSave.Name = "btnOrderSave"
-        Me.btnOrderSave.Size = New System.Drawing.Size(75, 48)
+        Me.btnOrderSave.Size = New System.Drawing.Size(75, 33)
         Me.btnOrderSave.TabIndex = 37
-        Me.btnOrderSave.Text = "Save"
+        Me.btnOrderSave.Text = "Add"
         Me.btnOrderSave.UseVisualStyleBackColor = True
         '
         'chbOrden
         '
         Me.chbOrden.AutoSize = True
-        Me.chbOrden.Location = New System.Drawing.Point(180, 19)
+        Me.chbOrden.Location = New System.Drawing.Point(225, 33)
         Me.chbOrden.Name = "chbOrden"
         Me.chbOrden.Size = New System.Drawing.Size(48, 17)
         Me.chbOrden.TabIndex = 36
@@ -239,7 +261,7 @@ Partial Class Materials
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(15, 50)
+        Me.Label1.Location = New System.Drawing.Point(5, 37)
         Me.Label1.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(31, 13)
@@ -251,15 +273,15 @@ Partial Class Materials
         Me.dtpFechaOrden.CustomFormat = "yyyy-MM-dd"
         Me.dtpFechaOrden.Enabled = False
         Me.dtpFechaOrden.Format = System.Windows.Forms.DateTimePickerFormat.Custom
-        Me.dtpFechaOrden.Location = New System.Drawing.Point(81, 124)
+        Me.dtpFechaOrden.Location = New System.Drawing.Point(78, 111)
         Me.dtpFechaOrden.Name = "dtpFechaOrden"
-        Me.dtpFechaOrden.Size = New System.Drawing.Size(158, 20)
+        Me.dtpFechaOrden.Size = New System.Drawing.Size(155, 20)
         Me.dtpFechaOrden.TabIndex = 35
         '
         'Label6
         '
         Me.Label6.AutoSize = True
-        Me.Label6.Location = New System.Drawing.Point(15, 90)
+        Me.Label6.Location = New System.Drawing.Point(5, 77)
         Me.Label6.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(46, 13)
@@ -269,7 +291,7 @@ Partial Class Materials
         'Label9
         '
         Me.Label9.AutoSize = True
-        Me.Label9.Location = New System.Drawing.Point(21, 129)
+        Me.Label9.Location = New System.Drawing.Point(11, 116)
         Me.Label9.Name = "Label9"
         Me.Label9.Size = New System.Drawing.Size(30, 13)
         Me.Label9.TabIndex = 34
@@ -280,10 +302,10 @@ Partial Class Materials
         Me.sprCantidadOrden.DecimalPlaces = 2
         Me.sprCantidadOrden.Enabled = False
         Me.sprCantidadOrden.Increment = New Decimal(New Integer() {1, 0, 0, 65536})
-        Me.sprCantidadOrden.Location = New System.Drawing.Point(81, 86)
+        Me.sprCantidadOrden.Location = New System.Drawing.Point(78, 73)
         Me.sprCantidadOrden.Maximum = New Decimal(New Integer() {10000, 0, 0, 0})
         Me.sprCantidadOrden.Name = "sprCantidadOrden"
-        Me.sprCantidadOrden.Size = New System.Drawing.Size(120, 20)
+        Me.sprCantidadOrden.Size = New System.Drawing.Size(130, 20)
         Me.sprCantidadOrden.TabIndex = 30
         '
         'sprPricioOrden
@@ -291,16 +313,16 @@ Partial Class Materials
         Me.sprPricioOrden.DecimalPlaces = 2
         Me.sprPricioOrden.Enabled = False
         Me.sprPricioOrden.Increment = New Decimal(New Integer() {1, 0, 0, 65536})
-        Me.sprPricioOrden.Location = New System.Drawing.Point(81, 47)
+        Me.sprPricioOrden.Location = New System.Drawing.Point(78, 34)
         Me.sprPricioOrden.Maximum = New Decimal(New Integer() {10000, 0, 0, 0})
         Me.sprPricioOrden.Name = "sprPricioOrden"
-        Me.sprPricioOrden.Size = New System.Drawing.Size(120, 20)
+        Me.sprPricioOrden.Size = New System.Drawing.Size(130, 20)
         Me.sprPricioOrden.TabIndex = 33
         '
         'Label8
         '
         Me.Label8.AutoSize = True
-        Me.Label8.Location = New System.Drawing.Point(15, 177)
+        Me.Label8.Location = New System.Drawing.Point(6, 163)
         Me.Label8.Name = "Label8"
         Me.Label8.Size = New System.Drawing.Size(31, 13)
         Me.Label8.TabIndex = 31
@@ -311,7 +333,7 @@ Partial Class Materials
         Me.lblTotal.AutoSize = True
         Me.lblTotal.Font = New System.Drawing.Font("Microsoft YaHei", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblTotal.ForeColor = System.Drawing.Color.DodgerBlue
-        Me.lblTotal.Location = New System.Drawing.Point(95, 166)
+        Me.lblTotal.Location = New System.Drawing.Point(120, 148)
         Me.lblTotal.Name = "lblTotal"
         Me.lblTotal.Size = New System.Drawing.Size(57, 28)
         Me.lblTotal.TabIndex = 32
@@ -331,7 +353,7 @@ Partial Class Materials
         'cmbUnidadDeMedida
         '
         Me.cmbUnidadDeMedida.FormattingEnabled = True
-        Me.cmbUnidadDeMedida.Items.AddRange(New Object() {"Each", "Foot", "Yard", "Galon", "Ounce", "Pound"})
+        Me.cmbUnidadDeMedida.Items.AddRange(New Object() {"Each", "Foot", "Yard", "Galon", "Ounce", "LB", "Square foot"})
         Me.cmbUnidadDeMedida.Location = New System.Drawing.Point(114, 117)
         Me.cmbUnidadDeMedida.Name = "cmbUnidadDeMedida"
         Me.cmbUnidadDeMedida.Size = New System.Drawing.Size(121, 21)
@@ -361,7 +383,9 @@ Partial Class Materials
         Me.tblMaterialAndOrders.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.tblMaterialAndOrders.Location = New System.Drawing.Point(11, 244)
         Me.tblMaterialAndOrders.Margin = New System.Windows.Forms.Padding(2)
+        Me.tblMaterialAndOrders.MultiSelect = False
         Me.tblMaterialAndOrders.Name = "tblMaterialAndOrders"
+        Me.tblMaterialAndOrders.ReadOnly = True
         Me.tblMaterialAndOrders.RowHeadersWidth = 62
         Me.tblMaterialAndOrders.RowTemplate.Height = 28
         Me.tblMaterialAndOrders.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
@@ -474,6 +498,7 @@ Partial Class Materials
         '
         'TabPage1
         '
+        Me.TabPage1.Controls.Add(Me.btnCancelMaterial)
         Me.TabPage1.Controls.Add(Me.chbEnableMaterial)
         Me.TabPage1.Controls.Add(Me.txtNumeroMaterial)
         Me.TabPage1.Controls.Add(Me.Label3)
@@ -495,6 +520,16 @@ Partial Class Materials
         Me.TabPage1.Text = "Materials"
         Me.TabPage1.UseVisualStyleBackColor = True
         '
+        'btnCancelMaterial
+        '
+        Me.btnCancelMaterial.Location = New System.Drawing.Point(155, 255)
+        Me.btnCancelMaterial.Margin = New System.Windows.Forms.Padding(2)
+        Me.btnCancelMaterial.Name = "btnCancelMaterial"
+        Me.btnCancelMaterial.Size = New System.Drawing.Size(81, 35)
+        Me.btnCancelMaterial.TabIndex = 33
+        Me.btnCancelMaterial.Text = "Cancel"
+        Me.btnCancelMaterial.UseVisualStyleBackColor = True
+        '
         'chbEnableMaterial
         '
         Me.chbEnableMaterial.AutoSize = True
@@ -507,7 +542,7 @@ Partial Class Materials
         '
         'txtNumeroMaterial
         '
-        Me.txtNumeroMaterial.Location = New System.Drawing.Point(99, 69)
+        Me.txtNumeroMaterial.Location = New System.Drawing.Point(99, 20)
         Me.txtNumeroMaterial.Margin = New System.Windows.Forms.Padding(2)
         Me.txtNumeroMaterial.Name = "txtNumeroMaterial"
         Me.txtNumeroMaterial.Size = New System.Drawing.Size(137, 20)
@@ -516,7 +551,7 @@ Partial Class Materials
         'Label3
         '
         Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(33, 72)
+        Me.Label3.Location = New System.Drawing.Point(33, 23)
         Me.Label3.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(44, 13)
@@ -525,7 +560,6 @@ Partial Class Materials
         '
         'cmbVendedor
         '
-        Me.cmbVendedor.FormattingEnabled = True
         Me.cmbVendedor.Location = New System.Drawing.Point(99, 109)
         Me.cmbVendedor.Name = "cmbVendedor"
         Me.cmbVendedor.Size = New System.Drawing.Size(137, 21)
@@ -536,7 +570,7 @@ Partial Class Materials
         Me.btnUpdateMaterial.Location = New System.Drawing.Point(155, 186)
         Me.btnUpdateMaterial.Margin = New System.Windows.Forms.Padding(2)
         Me.btnUpdateMaterial.Name = "btnUpdateMaterial"
-        Me.btnUpdateMaterial.Size = New System.Drawing.Size(55, 35)
+        Me.btnUpdateMaterial.Size = New System.Drawing.Size(81, 35)
         Me.btnUpdateMaterial.TabIndex = 28
         Me.btnUpdateMaterial.Text = "Update"
         Me.btnUpdateMaterial.UseVisualStyleBackColor = True
@@ -551,7 +585,7 @@ Partial Class Materials
         '
         'txtNameMaterials
         '
-        Me.txtNameMaterials.Location = New System.Drawing.Point(99, 31)
+        Me.txtNameMaterials.Location = New System.Drawing.Point(99, 62)
         Me.txtNameMaterials.Margin = New System.Windows.Forms.Padding(2)
         Me.txtNameMaterials.Name = "txtNameMaterials"
         Me.txtNameMaterials.Size = New System.Drawing.Size(137, 20)
@@ -572,9 +606,9 @@ Partial Class Materials
         Me.btnSaveMaterial.Location = New System.Drawing.Point(36, 186)
         Me.btnSaveMaterial.Margin = New System.Windows.Forms.Padding(2)
         Me.btnSaveMaterial.Name = "btnSaveMaterial"
-        Me.btnSaveMaterial.Size = New System.Drawing.Size(54, 35)
+        Me.btnSaveMaterial.Size = New System.Drawing.Size(79, 35)
         Me.btnSaveMaterial.TabIndex = 24
-        Me.btnSaveMaterial.Text = "Save"
+        Me.btnSaveMaterial.Text = "Add"
         Me.btnSaveMaterial.UseVisualStyleBackColor = True
         '
         'Label2
@@ -590,7 +624,7 @@ Partial Class Materials
         'Label4
         '
         Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(33, 34)
+        Me.Label4.Location = New System.Drawing.Point(33, 65)
         Me.Label4.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(35, 13)
@@ -611,13 +645,14 @@ Partial Class Materials
         '
         'TabPage3
         '
+        Me.TabPage3.Controls.Add(Me.btnCancelVendor)
         Me.TabPage3.Controls.Add(Me.Label12)
         Me.TabPage3.Controls.Add(Me.txtSearchVendedor)
         Me.TabPage3.Controls.Add(Me.txtNumeroVendedor)
         Me.TabPage3.Controls.Add(Me.Label19)
         Me.TabPage3.Controls.Add(Me.btnUpdateVendor)
         Me.TabPage3.Controls.Add(Me.chbEnableVendor)
-        Me.TabPage3.Controls.Add(Me.tbkVendor)
+        Me.TabPage3.Controls.Add(Me.tblVendor)
         Me.TabPage3.Controls.Add(Me.btnSaveVendor)
         Me.TabPage3.Controls.Add(Me.txtDescripcionVendedor)
         Me.TabPage3.Controls.Add(Me.txtNombreVendedor)
@@ -629,6 +664,15 @@ Partial Class Materials
         Me.TabPage3.TabIndex = 2
         Me.TabPage3.Text = "Vendor"
         Me.TabPage3.UseVisualStyleBackColor = True
+        '
+        'btnCancelVendor
+        '
+        Me.btnCancelVendor.Location = New System.Drawing.Point(118, 245)
+        Me.btnCancelVendor.Name = "btnCancelVendor"
+        Me.btnCancelVendor.Size = New System.Drawing.Size(76, 36)
+        Me.btnCancelVendor.TabIndex = 26
+        Me.btnCancelVendor.Text = "Cancel"
+        Me.btnCancelVendor.UseVisualStyleBackColor = True
         '
         'Label12
         '
@@ -684,22 +728,22 @@ Partial Class Materials
         Me.chbEnableVendor.Text = "Enable"
         Me.chbEnableVendor.UseVisualStyleBackColor = True
         '
-        'tbkVendor
+        'tblVendor
         '
-        Me.tbkVendor.AllowUserToAddRows = False
-        Me.tbkVendor.AllowUserToDeleteRows = False
-        Me.tbkVendor.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
-        Me.tbkVendor.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.tbkVendor.Location = New System.Drawing.Point(227, 59)
-        Me.tbkVendor.Margin = New System.Windows.Forms.Padding(2)
-        Me.tbkVendor.MultiSelect = False
-        Me.tbkVendor.Name = "tbkVendor"
-        Me.tbkVendor.ReadOnly = True
-        Me.tbkVendor.RowHeadersWidth = 62
-        Me.tbkVendor.RowTemplate.Height = 28
-        Me.tbkVendor.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.tbkVendor.Size = New System.Drawing.Size(512, 340)
-        Me.tbkVendor.TabIndex = 17
+        Me.tblVendor.AllowUserToAddRows = False
+        Me.tblVendor.AllowUserToDeleteRows = False
+        Me.tblVendor.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
+        Me.tblVendor.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.tblVendor.Location = New System.Drawing.Point(227, 59)
+        Me.tblVendor.Margin = New System.Windows.Forms.Padding(2)
+        Me.tblVendor.MultiSelect = False
+        Me.tblVendor.Name = "tblVendor"
+        Me.tblVendor.ReadOnly = True
+        Me.tblVendor.RowHeadersWidth = 62
+        Me.tblVendor.RowTemplate.Height = 28
+        Me.tblVendor.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
+        Me.tblVendor.Size = New System.Drawing.Size(512, 340)
+        Me.tblVendor.TabIndex = 17
         '
         'btnSaveVendor
         '
@@ -708,7 +752,7 @@ Partial Class Materials
         Me.btnSaveVendor.Name = "btnSaveVendor"
         Me.btnSaveVendor.Size = New System.Drawing.Size(68, 32)
         Me.btnSaveVendor.TabIndex = 15
-        Me.btnSaveVendor.Text = "Save"
+        Me.btnSaveVendor.Text = "Add"
         Me.btnSaveVendor.UseVisualStyleBackColor = True
         '
         'txtDescripcionVendedor
@@ -747,15 +791,6 @@ Partial Class Materials
         Me.Label11.TabIndex = 10
         Me.Label11.Text = "Name"
         '
-        'btnUpdateOrder
-        '
-        Me.btnUpdateOrder.Location = New System.Drawing.Point(670, 279)
-        Me.btnUpdateOrder.Name = "btnUpdateOrder"
-        Me.btnUpdateOrder.Size = New System.Drawing.Size(72, 41)
-        Me.btnUpdateOrder.TabIndex = 40
-        Me.btnUpdateOrder.Text = "Update"
-        Me.btnUpdateOrder.UseVisualStyleBackColor = True
-        '
         'Materials
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -782,7 +817,7 @@ Partial Class Materials
         Me.TabControl1.ResumeLayout(False)
         Me.TabPage3.ResumeLayout(False)
         Me.TabPage3.PerformLayout()
-        CType(Me.tbkVendor, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.tblVendor, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -819,7 +854,7 @@ Partial Class Materials
     Friend WithEvents Label3 As Label
     Friend WithEvents cmbVendedor As ComboBox
     Friend WithEvents TabPage3 As TabPage
-    Friend WithEvents tbkVendor As DataGridView
+    Friend WithEvents tblVendor As DataGridView
     Friend WithEvents btnSaveVendor As Button
     Friend WithEvents txtDescripcionVendedor As TextBox
     Friend WithEvents txtNombreVendedor As TextBox
@@ -847,4 +882,7 @@ Partial Class Materials
     Friend WithEvents sprPrice As NumericUpDown
     Friend WithEvents btnDeleteOrder As Button
     Friend WithEvents btnUpdateOrder As Button
+    Friend WithEvents btnCancelVendor As Button
+    Friend WithEvents btnCancelMaterial As Button
+    Friend WithEvents btnCancelOrder As Button
 End Class

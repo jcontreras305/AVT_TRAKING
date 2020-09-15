@@ -17,22 +17,24 @@ insert into users values (NEWID(), 'admin' , 'admin')
 --############################################################################
 use VRT_TRAKING
 
-create table employees(
-	idEmployee varchar(36) primary key not null,
-	numberEmploye int not null,
-	firstName varchar(30),
-	lastName varchar(25),
-	middleName varchar(25),
-	socialNumber varchar(14),
-	SAPNumber int,
-	photo image,
-	idHomeAdress varchar(36),
-	idContact varchar(36),
-	idPayRate varchar(36),
-	estatus char(1)
-)
+--create table employees(
+--	idEmployee varchar(36) primary key not null,
+--	numberEmploye int not null,
+--	firstName varchar(30),
+--	lastName varchar(25),
+--	middleName varchar(25),
+--	socialNumber varchar(14),
+--	SAPNumber int,
+--	photo image,
+--	idHomeAdress varchar(36),
+--	idContact varchar(36),
+--	idPayRate varchar(36),
+--	estatus char(1)
+--)
+--go
 
-alter table contact 
+--alter table contact 
+--go
 --ejecutar si ya se tiene la tabla fuerror de escribir email
 --EXECUTE sp_rename 'conact', 'emial', 'email';
 

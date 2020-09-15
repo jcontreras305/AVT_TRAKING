@@ -359,3 +359,49 @@ or ha.city like ''
 --	end  
 --end
 --go
+
+
+
+--#############################################################################################################################
+--############## POR FAVOR EJECUTA ESTE COMANDO ES PARA RESOLVER UN PROBLEMA CON ESTE PORCEDIMIENTO ###########################
+--##### RECUERDA QUE ES ctrl+k,ctrl+U PARA DESCOMENTAR Y ctrl+k,ctrl+c  PATA COMENTAR AL TERMINAR VUELVE A COMNETAR ###########
+--#############################################################################################################################
+--ALTER procedure [dbo].[sp_insert_Material]
+--@nombre varchar(50),
+--@numero int,
+--@idVendor varchar(36),
+--@status char(1),
+--@msg varchar(100) out
+--as
+--declare @idMaterial varchar(36)
+--declare @idDM varchar(36)
+--declare @error int
+--begin
+--	begin tran
+--		begin try	 
+--			set @idMaterial = NEWID()
+--			set @idDM = NEWID()
+--			if not @nombre = '' and not @idVendor = ''
+--			begin 
+--				insert into material values (@idMaterial,@numero,@nombre,@status)
+--				insert into detalleMaterial values (@idDM,'','','',0.0,'',0.0,@idMaterial,@idVendor)
+--				insert into existences values (@idDM , 0.0)
+--				set @msg= 'Successful'
+--			end
+--			else 
+--			begin 
+--				set @error = 1
+--				goto solveProblem
+--			end
+--		end try
+--		begin catch
+--			goto solveProblem
+--		end catch
+--	commit tran
+--	solveProblem:
+--	if @error <> 0 
+--	begin 
+--		rollback tran
+--		set @msg = concat('Is problably that the Material ',@nombre,' have been inserted, or try to changue the Vendor')
+--	end  
+--end
