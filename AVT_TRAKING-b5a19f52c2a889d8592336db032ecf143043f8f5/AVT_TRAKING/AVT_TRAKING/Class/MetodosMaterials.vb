@@ -229,7 +229,7 @@ from detalleMaterial as dm left join material as mt on dm.idMaterial = mt.idMate
         Try
             Dim cmd As New SqlCommand
             cmd.CommandText = "update detalleMaterial set resourceMaterial = '" + listDatosNuevos(1) + "', unitMeasurement = '" + listDatosNuevos(2) + "', description = '" + listDatosNuevos(6) + "' , type = '" + listDatosNuevos(4) + "' , price = " + listDatosNuevos(5) + " , size = " + listDatosNuevos(3) + "
-where id = '" + listDatosNuevos(0) + "'"
+where idMaterial = '" + listDatosNuevos(0) + "'"
             cmd.Connection = conn
             If cmd.ExecuteNonQuery() Then
                 MsgBox("Successful")
@@ -250,7 +250,7 @@ where id = '" + listDatosNuevos(0) + "'"
             cmd.Connection = conn
             Dim cmd1 As New SqlCommand
             cmd1.CommandText = "update existences set quantity = quantity + " + dataList(1) + " where idDM = '" + dataList(4) + "'"
-            cmd.Connection = conn
+            cmd1.Connection = conn
             tran = conn.BeginTransaction()
             cmd.Transaction = tran
             cmd1.Transaction = tran
@@ -298,14 +298,25 @@ OR mt.name like CONCAT ('%', '" + consulta + "','%')"
         End Try
     End Sub
 
-    Public Sub EliminarOrden(ByVal idOrder As String)
+    Public Sub EliminarOrden(ByVal idOrder As String, cantidad As String, idDM As String)
         Try
             conectar()
+            Dim cmd1 As New SqlCommand("update existences set quantity = quantity - " + cantidad + " where idDM = '" + idDM + "'", conn)
             Dim cmd As New SqlCommand("delete from materialOrder where idOrder = '" + idOrder + "'", conn)
-            If cmd.ExecuteNonQuery Then
-                MsgBox("Successful")
+            Dim tran As SqlTransaction
+            tran = conn.BeginTransaction()
+            cmd.Transaction = tran
+            cmd1.Transaction = tran
+            If cmd1.ExecuteNonQuery Then
+                If cmd.ExecuteNonQuery Then
+                    MsgBox("Successful")
+                Else
+                    MsgBox("Error. Is probably that the order have been added to one job, if is it the case remove this order of the Job. Check it and try again")
+                    tran.Rollback()
+                End If
             Else
                 MsgBox("Error. Is probably that the order have been added to one job, if is it the case remove this order of the Job. Check it and try again")
+                tran.Rollback()
             End If
             desconectar()
         Catch ex As Exception

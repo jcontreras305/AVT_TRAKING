@@ -117,7 +117,7 @@ Partial Class Materials
         Me.tblMaterial.RowTemplate.Height = 28
         Me.tblMaterial.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
         Me.tblMaterial.Size = New System.Drawing.Size(471, 291)
-        Me.tblMaterial.TabIndex = 1
+        Me.tblMaterial.TabIndex = 7
         '
         'btnMenu
         '
@@ -178,7 +178,7 @@ Partial Class Materials
         Me.btnCancelOrder.Location = New System.Drawing.Point(669, 297)
         Me.btnCancelOrder.Name = "btnCancelOrder"
         Me.btnCancelOrder.Size = New System.Drawing.Size(72, 41)
-        Me.btnCancelOrder.TabIndex = 41
+        Me.btnCancelOrder.TabIndex = 16
         Me.btnCancelOrder.Text = "Cancel"
         Me.btnCancelOrder.UseVisualStyleBackColor = True
         '
@@ -187,7 +187,7 @@ Partial Class Materials
         Me.btnUpdateOrder.Location = New System.Drawing.Point(669, 245)
         Me.btnUpdateOrder.Name = "btnUpdateOrder"
         Me.btnUpdateOrder.Size = New System.Drawing.Size(72, 41)
-        Me.btnUpdateOrder.TabIndex = 40
+        Me.btnUpdateOrder.TabIndex = 15
         Me.btnUpdateOrder.Text = "Update"
         Me.btnUpdateOrder.UseVisualStyleBackColor = True
         '
@@ -196,7 +196,7 @@ Partial Class Materials
         Me.btnDeleteOrder.Location = New System.Drawing.Point(669, 350)
         Me.btnDeleteOrder.Name = "btnDeleteOrder"
         Me.btnDeleteOrder.Size = New System.Drawing.Size(73, 40)
-        Me.btnDeleteOrder.TabIndex = 39
+        Me.btnDeleteOrder.TabIndex = 17
         Me.btnDeleteOrder.Text = "Delete"
         Me.btnDeleteOrder.UseVisualStyleBackColor = True
         '
@@ -208,7 +208,7 @@ Partial Class Materials
         Me.sprPrice.Maximum = New Decimal(New Integer() {10000, 0, 0, 0})
         Me.sprPrice.Name = "sprPrice"
         Me.sprPrice.Size = New System.Drawing.Size(120, 20)
-        Me.sprPrice.TabIndex = 38
+        Me.sprPrice.TabIndex = 6
         '
         'Label20
         '
@@ -244,7 +244,7 @@ Partial Class Materials
         Me.btnOrderSave.Location = New System.Drawing.Point(89, 186)
         Me.btnOrderSave.Name = "btnOrderSave"
         Me.btnOrderSave.Size = New System.Drawing.Size(75, 33)
-        Me.btnOrderSave.TabIndex = 37
+        Me.btnOrderSave.TabIndex = 13
         Me.btnOrderSave.Text = "Add"
         Me.btnOrderSave.UseVisualStyleBackColor = True
         '
@@ -254,7 +254,7 @@ Partial Class Materials
         Me.chbOrden.Location = New System.Drawing.Point(225, 33)
         Me.chbOrden.Name = "chbOrden"
         Me.chbOrden.Size = New System.Drawing.Size(48, 17)
-        Me.chbOrden.TabIndex = 36
+        Me.chbOrden.TabIndex = 9
         Me.chbOrden.Text = "New"
         Me.chbOrden.UseVisualStyleBackColor = True
         '
@@ -276,7 +276,7 @@ Partial Class Materials
         Me.dtpFechaOrden.Location = New System.Drawing.Point(78, 111)
         Me.dtpFechaOrden.Name = "dtpFechaOrden"
         Me.dtpFechaOrden.Size = New System.Drawing.Size(155, 20)
-        Me.dtpFechaOrden.TabIndex = 35
+        Me.dtpFechaOrden.TabIndex = 12
         '
         'Label6
         '
@@ -306,7 +306,7 @@ Partial Class Materials
         Me.sprCantidadOrden.Maximum = New Decimal(New Integer() {10000, 0, 0, 0})
         Me.sprCantidadOrden.Name = "sprCantidadOrden"
         Me.sprCantidadOrden.Size = New System.Drawing.Size(130, 20)
-        Me.sprCantidadOrden.TabIndex = 30
+        Me.sprCantidadOrden.TabIndex = 11
         '
         'sprPricioOrden
         '
@@ -317,7 +317,7 @@ Partial Class Materials
         Me.sprPricioOrden.Maximum = New Decimal(New Integer() {10000, 0, 0, 0})
         Me.sprPricioOrden.Name = "sprPricioOrden"
         Me.sprPricioOrden.Size = New System.Drawing.Size(130, 20)
-        Me.sprPricioOrden.TabIndex = 33
+        Me.sprPricioOrden.TabIndex = 10
         '
         'Label8
         '
@@ -348,7 +348,7 @@ Partial Class Materials
         Me.sprTamanio.Maximum = New Decimal(New Integer() {100000, 0, 0, 0})
         Me.sprTamanio.Name = "sprTamanio"
         Me.sprTamanio.Size = New System.Drawing.Size(120, 20)
-        Me.sprTamanio.TabIndex = 29
+        Me.sprTamanio.TabIndex = 4
         '
         'cmbUnidadDeMedida
         '
@@ -357,7 +357,7 @@ Partial Class Materials
         Me.cmbUnidadDeMedida.Location = New System.Drawing.Point(114, 117)
         Me.cmbUnidadDeMedida.Name = "cmbUnidadDeMedida"
         Me.cmbUnidadDeMedida.Size = New System.Drawing.Size(121, 21)
-        Me.cmbUnidadDeMedida.TabIndex = 28
+        Me.cmbUnidadDeMedida.TabIndex = 3
         '
         'txtDMaterial
         '
@@ -365,7 +365,7 @@ Partial Class Materials
         Me.txtDMaterial.Margin = New System.Windows.Forms.Padding(2)
         Me.txtDMaterial.Name = "txtDMaterial"
         Me.txtDMaterial.Size = New System.Drawing.Size(121, 20)
-        Me.txtDMaterial.TabIndex = 27
+        Me.txtDMaterial.TabIndex = 1
         '
         'txtRM
         '
@@ -373,7 +373,7 @@ Partial Class Materials
         Me.txtRM.Margin = New System.Windows.Forms.Padding(2)
         Me.txtRM.Name = "txtRM"
         Me.txtRM.Size = New System.Drawing.Size(123, 20)
-        Me.txtRM.TabIndex = 25
+        Me.txtRM.TabIndex = 2
         '
         'tblMaterialAndOrders
         '
@@ -390,7 +390,7 @@ Partial Class Materials
         Me.tblMaterialAndOrders.RowTemplate.Height = 28
         Me.tblMaterialAndOrders.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
         Me.tblMaterialAndOrders.Size = New System.Drawing.Size(653, 146)
-        Me.tblMaterialAndOrders.TabIndex = 23
+        Me.tblMaterialAndOrders.TabIndex = 20
         '
         'btnUpdateMareialData
         '
@@ -398,7 +398,7 @@ Partial Class Materials
         Me.btnUpdateMareialData.Margin = New System.Windows.Forms.Padding(2)
         Me.btnUpdateMareialData.Name = "btnUpdateMareialData"
         Me.btnUpdateMareialData.Size = New System.Drawing.Size(70, 42)
-        Me.btnUpdateMareialData.TabIndex = 22
+        Me.btnUpdateMareialData.TabIndex = 8
         Me.btnUpdateMareialData.Text = "Update"
         Me.btnUpdateMareialData.UseVisualStyleBackColor = True
         '
@@ -418,7 +418,7 @@ Partial Class Materials
         Me.txtSearch.Margin = New System.Windows.Forms.Padding(2)
         Me.txtSearch.Name = "txtSearch"
         Me.txtSearch.Size = New System.Drawing.Size(174, 20)
-        Me.txtSearch.TabIndex = 19
+        Me.txtSearch.TabIndex = 14
         '
         'txtDescripcion
         '
@@ -426,7 +426,7 @@ Partial Class Materials
         Me.txtDescripcion.Margin = New System.Windows.Forms.Padding(2)
         Me.txtDescripcion.Name = "txtDescripcion"
         Me.txtDescripcion.Size = New System.Drawing.Size(121, 20)
-        Me.txtDescripcion.TabIndex = 16
+        Me.txtDescripcion.TabIndex = 7
         '
         'txtTipo
         '
@@ -434,7 +434,7 @@ Partial Class Materials
         Me.txtTipo.Margin = New System.Windows.Forms.Padding(2)
         Me.txtTipo.Name = "txtTipo"
         Me.txtTipo.Size = New System.Drawing.Size(119, 20)
-        Me.txtTipo.TabIndex = 10
+        Me.txtTipo.TabIndex = 5
         '
         'Label5
         '
@@ -526,7 +526,7 @@ Partial Class Materials
         Me.btnCancelMaterial.Margin = New System.Windows.Forms.Padding(2)
         Me.btnCancelMaterial.Name = "btnCancelMaterial"
         Me.btnCancelMaterial.Size = New System.Drawing.Size(81, 35)
-        Me.btnCancelMaterial.TabIndex = 33
+        Me.btnCancelMaterial.TabIndex = 9
         Me.btnCancelMaterial.Text = "Cancel"
         Me.btnCancelMaterial.UseVisualStyleBackColor = True
         '
@@ -536,7 +536,7 @@ Partial Class Materials
         Me.chbEnableMaterial.Location = New System.Drawing.Point(177, 146)
         Me.chbEnableMaterial.Name = "chbEnableMaterial"
         Me.chbEnableMaterial.Size = New System.Drawing.Size(59, 17)
-        Me.chbEnableMaterial.TabIndex = 32
+        Me.chbEnableMaterial.TabIndex = 4
         Me.chbEnableMaterial.Text = "Enable"
         Me.chbEnableMaterial.UseVisualStyleBackColor = True
         '
@@ -546,7 +546,7 @@ Partial Class Materials
         Me.txtNumeroMaterial.Margin = New System.Windows.Forms.Padding(2)
         Me.txtNumeroMaterial.Name = "txtNumeroMaterial"
         Me.txtNumeroMaterial.Size = New System.Drawing.Size(137, 20)
-        Me.txtNumeroMaterial.TabIndex = 31
+        Me.txtNumeroMaterial.TabIndex = 1
         '
         'Label3
         '
@@ -563,7 +563,7 @@ Partial Class Materials
         Me.cmbVendedor.Location = New System.Drawing.Point(99, 109)
         Me.cmbVendedor.Name = "cmbVendedor"
         Me.cmbVendedor.Size = New System.Drawing.Size(137, 21)
-        Me.cmbVendedor.TabIndex = 29
+        Me.cmbVendedor.TabIndex = 3
         '
         'btnUpdateMaterial
         '
@@ -571,7 +571,7 @@ Partial Class Materials
         Me.btnUpdateMaterial.Margin = New System.Windows.Forms.Padding(2)
         Me.btnUpdateMaterial.Name = "btnUpdateMaterial"
         Me.btnUpdateMaterial.Size = New System.Drawing.Size(81, 35)
-        Me.btnUpdateMaterial.TabIndex = 28
+        Me.btnUpdateMaterial.TabIndex = 8
         Me.btnUpdateMaterial.Text = "Update"
         Me.btnUpdateMaterial.UseVisualStyleBackColor = True
         '
@@ -581,7 +581,7 @@ Partial Class Materials
         Me.txtFiltro.Margin = New System.Windows.Forms.Padding(2)
         Me.txtFiltro.Name = "txtFiltro"
         Me.txtFiltro.Size = New System.Drawing.Size(144, 20)
-        Me.txtFiltro.TabIndex = 27
+        Me.txtFiltro.TabIndex = 6
         '
         'txtNameMaterials
         '
@@ -589,7 +589,7 @@ Partial Class Materials
         Me.txtNameMaterials.Margin = New System.Windows.Forms.Padding(2)
         Me.txtNameMaterials.Name = "txtNameMaterials"
         Me.txtNameMaterials.Size = New System.Drawing.Size(137, 20)
-        Me.txtNameMaterials.TabIndex = 15
+        Me.txtNameMaterials.TabIndex = 2
         '
         'Label13
         '
@@ -607,7 +607,7 @@ Partial Class Materials
         Me.btnSaveMaterial.Margin = New System.Windows.Forms.Padding(2)
         Me.btnSaveMaterial.Name = "btnSaveMaterial"
         Me.btnSaveMaterial.Size = New System.Drawing.Size(79, 35)
-        Me.btnSaveMaterial.TabIndex = 24
+        Me.btnSaveMaterial.TabIndex = 5
         Me.btnSaveMaterial.Text = "Add"
         Me.btnSaveMaterial.UseVisualStyleBackColor = True
         '

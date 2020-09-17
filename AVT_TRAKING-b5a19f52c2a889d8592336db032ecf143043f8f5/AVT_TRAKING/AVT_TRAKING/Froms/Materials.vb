@@ -81,6 +81,11 @@ Public Class Materials
         Catch ex As Exception
             MsgBox("Something went wrong, check the data and try again")
         End Try
+        limpiarCamposMaterail()
+        mtdMaterial.selectMaterial(tblMaterial, If(txtFiltro.Text = "", "%", txtFiltro.Text))
+        btnSaveMaterial.Enabled = True
+        btnCancelMaterial.Enabled = False
+        btnUpdateMaterial.Enabled = False
     End Sub
 
     Private Sub btnUpdateMaterial_Click(sender As Object, e As EventArgs) Handles btnUpdateMaterial.Click
@@ -93,7 +98,7 @@ Public Class Materials
             dataMaterialnuevos(4) = idMaterial
             mtdMaterial.actualizarMaterial(dataMaterialnuevos, dataMaterial(1))
             mtdMaterial.selectMaterial(tblMaterial, txtFiltro.Text)
-            limparCaposVendor()
+            limpiarCamposMaterail()
             btnUpdateMaterial.Enabled = False
             btnSaveMaterial.Enabled = True
             btnCancelMaterial.Enabled = False
@@ -230,7 +235,7 @@ Public Class Materials
         Try
             If tblMaterialAndOrders.SelectedRows.Count = 1 Then
                 If MessageBox.Show("Are you sure to delete this order", "Advertence", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) = Windows.Forms.DialogResult.OK Then
-                    mtdMaterial.EliminarOrden(tblMaterialAndOrders.CurrentRow.Cells(2).Value)
+                    mtdMaterial.EliminarOrden(tblMaterialAndOrders.CurrentRow.Cells(2).Value, tblMaterialAndOrders.CurrentRow.Cells(7).Value, tblMaterialAndOrders.CurrentRow.Cells(1).Value)
                 End If
             End If
         Catch ex As Exception
