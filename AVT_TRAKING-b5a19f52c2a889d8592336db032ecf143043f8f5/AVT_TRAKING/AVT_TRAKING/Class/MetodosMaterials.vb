@@ -310,6 +310,7 @@ OR mt.name like CONCAT ('%', '" + consulta + "','%')"
             If cmd1.ExecuteNonQuery Then
                 If cmd.ExecuteNonQuery Then
                     MsgBox("Successful")
+                    tran.Commit()
                 Else
                     MsgBox("Error. Is probably that the order have been added to one job, if is it the case remove this order of the Job. Check it and try again")
                     tran.Rollback()

@@ -86,6 +86,13 @@ Partial Class Materials
         Me.txtNombreVendedor = New System.Windows.Forms.TextBox()
         Me.Label10 = New System.Windows.Forms.Label()
         Me.Label11 = New System.Windows.Forms.Label()
+        Me.TabPage4 = New System.Windows.Forms.TabPage()
+        Me.GroupBox3 = New System.Windows.Forms.GroupBox()
+        Me.btnMaterialUploadExcel = New System.Windows.Forms.Button()
+        Me.btnMaterialDownloadExcel = New System.Windows.Forms.Button()
+        Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.btnVendorUploadExcel = New System.Windows.Forms.Button()
+        Me.btnVendorDownloadExcel = New System.Windows.Forms.Button()
         CType(Me.tblMaterial, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.TabPage2.SuspendLayout()
         CType(Me.sprPrice, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -98,6 +105,9 @@ Partial Class Materials
         Me.TabControl1.SuspendLayout()
         Me.TabPage3.SuspendLayout()
         CType(Me.tblVendor, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.TabPage4.SuspendLayout()
+        Me.GroupBox3.SuspendLayout()
+        Me.GroupBox2.SuspendLayout()
         Me.SuspendLayout()
         '
         'tblMaterial
@@ -636,6 +646,7 @@ Partial Class Materials
         Me.TabControl1.Controls.Add(Me.TabPage3)
         Me.TabControl1.Controls.Add(Me.TabPage1)
         Me.TabControl1.Controls.Add(Me.TabPage2)
+        Me.TabControl1.Controls.Add(Me.TabPage4)
         Me.TabControl1.Location = New System.Drawing.Point(6, 33)
         Me.TabControl1.Margin = New System.Windows.Forms.Padding(2)
         Me.TabControl1.Name = "TabControl1"
@@ -791,6 +802,75 @@ Partial Class Materials
         Me.Label11.TabIndex = 10
         Me.Label11.Text = "Name"
         '
+        'TabPage4
+        '
+        Me.TabPage4.Controls.Add(Me.GroupBox3)
+        Me.TabPage4.Controls.Add(Me.GroupBox2)
+        Me.TabPage4.Location = New System.Drawing.Point(4, 22)
+        Me.TabPage4.Name = "TabPage4"
+        Me.TabPage4.Size = New System.Drawing.Size(761, 403)
+        Me.TabPage4.TabIndex = 3
+        Me.TabPage4.Text = "Others"
+        Me.TabPage4.UseVisualStyleBackColor = True
+        '
+        'GroupBox3
+        '
+        Me.GroupBox3.Controls.Add(Me.btnMaterialUploadExcel)
+        Me.GroupBox3.Controls.Add(Me.btnMaterialDownloadExcel)
+        Me.GroupBox3.Location = New System.Drawing.Point(38, 148)
+        Me.GroupBox3.Name = "GroupBox3"
+        Me.GroupBox3.Size = New System.Drawing.Size(483, 100)
+        Me.GroupBox3.TabIndex = 2
+        Me.GroupBox3.TabStop = False
+        Me.GroupBox3.Text = "Material"
+        '
+        'btnMaterialUploadExcel
+        '
+        Me.btnMaterialUploadExcel.Location = New System.Drawing.Point(239, 38)
+        Me.btnMaterialUploadExcel.Name = "btnMaterialUploadExcel"
+        Me.btnMaterialUploadExcel.Size = New System.Drawing.Size(155, 33)
+        Me.btnMaterialUploadExcel.TabIndex = 1
+        Me.btnMaterialUploadExcel.Text = "Upload Excel"
+        Me.btnMaterialUploadExcel.UseVisualStyleBackColor = True
+        '
+        'btnMaterialDownloadExcel
+        '
+        Me.btnMaterialDownloadExcel.Location = New System.Drawing.Point(35, 38)
+        Me.btnMaterialDownloadExcel.Name = "btnMaterialDownloadExcel"
+        Me.btnMaterialDownloadExcel.Size = New System.Drawing.Size(150, 33)
+        Me.btnMaterialDownloadExcel.TabIndex = 0
+        Me.btnMaterialDownloadExcel.Text = "Download Excel"
+        Me.btnMaterialDownloadExcel.UseVisualStyleBackColor = True
+        '
+        'GroupBox2
+        '
+        Me.GroupBox2.Controls.Add(Me.btnVendorUploadExcel)
+        Me.GroupBox2.Controls.Add(Me.btnVendorDownloadExcel)
+        Me.GroupBox2.Location = New System.Drawing.Point(38, 42)
+        Me.GroupBox2.Name = "GroupBox2"
+        Me.GroupBox2.Size = New System.Drawing.Size(483, 100)
+        Me.GroupBox2.TabIndex = 0
+        Me.GroupBox2.TabStop = False
+        Me.GroupBox2.Text = "Vendor"
+        '
+        'btnVendorUploadExcel
+        '
+        Me.btnVendorUploadExcel.Location = New System.Drawing.Point(239, 38)
+        Me.btnVendorUploadExcel.Name = "btnVendorUploadExcel"
+        Me.btnVendorUploadExcel.Size = New System.Drawing.Size(155, 33)
+        Me.btnVendorUploadExcel.TabIndex = 1
+        Me.btnVendorUploadExcel.Text = "Upload Excel"
+        Me.btnVendorUploadExcel.UseVisualStyleBackColor = True
+        '
+        'btnVendorDownloadExcel
+        '
+        Me.btnVendorDownloadExcel.Location = New System.Drawing.Point(35, 38)
+        Me.btnVendorDownloadExcel.Name = "btnVendorDownloadExcel"
+        Me.btnVendorDownloadExcel.Size = New System.Drawing.Size(150, 33)
+        Me.btnVendorDownloadExcel.TabIndex = 0
+        Me.btnVendorDownloadExcel.Text = "Download Excel"
+        Me.btnVendorDownloadExcel.UseVisualStyleBackColor = True
+        '
         'Materials
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -818,6 +898,9 @@ Partial Class Materials
         Me.TabPage3.ResumeLayout(False)
         Me.TabPage3.PerformLayout()
         CType(Me.tblVendor, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.TabPage4.ResumeLayout(False)
+        Me.GroupBox3.ResumeLayout(False)
+        Me.GroupBox2.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
@@ -885,4 +968,11 @@ Partial Class Materials
     Friend WithEvents btnCancelVendor As Button
     Friend WithEvents btnCancelMaterial As Button
     Friend WithEvents btnCancelOrder As Button
+    Friend WithEvents TabPage4 As TabPage
+    Friend WithEvents GroupBox3 As GroupBox
+    Friend WithEvents btnMaterialUploadExcel As Button
+    Friend WithEvents btnMaterialDownloadExcel As Button
+    Friend WithEvents GroupBox2 As GroupBox
+    Friend WithEvents btnVendorUploadExcel As Button
+    Friend WithEvents btnVendorDownloadExcel As Button
 End Class

@@ -1,5 +1,8 @@
 ﻿Imports System.Data
 Imports System.Data.SqlClient
+Imports Microsoft.Office.Core
+Imports Microsoft.Office.Interop.Excel
+
 Public Class Materials
 
     Public idVedor, idMaterial, idDM, idOrder As String
@@ -234,13 +237,14 @@ Public Class Materials
     Private Sub btnDeleteOrder_Click(sender As Object, e As EventArgs) Handles btnDeleteOrder.Click
         Try
             If tblMaterialAndOrders.SelectedRows.Count = 1 Then
-                If MessageBox.Show("Are you sure to delete this order", "Advertence", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) = Windows.Forms.DialogResult.OK Then
+                If MessageBox.Show("Are you sure to delete this order", "Advertence", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) = DialogResult.OK Then
                     mtdMaterial.EliminarOrden(tblMaterialAndOrders.CurrentRow.Cells(2).Value, tblMaterialAndOrders.CurrentRow.Cells(7).Value, tblMaterialAndOrders.CurrentRow.Cells(1).Value)
                 End If
             End If
         Catch ex As Exception
             MsgBox("Something went wrong, check the data and try again")
         End Try
+        mtdMaterial.selectOrdersMaterials(tblMaterialAndOrders, "%")
     End Sub
 
     Private Sub tblMaterialAndOrders_DoubleClick(sender As Object, e As EventArgs) Handles tblMaterialAndOrders.DoubleClick
@@ -286,6 +290,7 @@ Public Class Materials
         lblTotal.Text = "0.00"
     End Sub
 
+
     Private Sub btnUpdateOrder_Click(sender As Object, e As EventArgs) Handles btnUpdateOrder.Click
         If tblMaterialAndOrders.SelectedRows.Count = 1 Then
             btnCancelOrder.Enabled = True
@@ -300,6 +305,8 @@ Public Class Materials
             btnUpdateOrder.Enabled = False
         End If
     End Sub
+
+
 
     Private Sub btnOrderSave_Click(sender As Object, e As EventArgs) Handles btnOrderSave.Click
         Try
@@ -349,6 +356,7 @@ Public Class Materials
         btnCancelVendor.Enabled = True
     End Sub
 
+
     'Private Sub TabControl1_Selected(sender As Object, e As TabControlEventArgs) Handles TabControl1.Selected
     '    mtdMaterial.llenarVendorCombo(cmbVendedor, listIdVendors)
     '    mtdMaterial.selectMaterial(tblMaterial, "")
@@ -360,6 +368,41 @@ Public Class Materials
         mtdMaterial.selectMaterial(tblMaterial, "%")
         mtdMaterial.llenarVendorCombo(cmbVendedor, listIdVendors)
         mtdMaterial.selectOrdersMaterials(tblMaterialAndOrders, "%")
+    End Sub
+
+    Private Sub btnVendorDownloadExcel_Click(sender As Object, e As EventArgs) Handles btnVendorDownloadExcel.Click
+        Try
+            Dim ApExcel = New Microsoft.Office.Interop.Excel.Application
+            Dim libro = ApExcel.Workbooks.Add
+            Dim colums() As String = {"id", "name", "description"}
+            For i As Int16 = 0 To colums.Length
+                libro.Sheets(1).cells(1, i) = colums(0)
+            Next
+            Dim sd As New SaveFileDialog
+            sd.DefaultExt = "*.xlsx"
+            sd.FileName = "VendorList"
+            sd.Filter = "Archivos de Excel (*.xlsx)|*.xlsx"
+            sd.ShowDialog()
+            libro.SaveAs(sd.FileName)
+            ApExcel.Quit()
+            libro = Nothing
+            ApExcel = Nothing
+
+        Catch ex As Exception
+            MsgBox(ex.Message)
+        End Try
+    End Sub
+
+    Private Sub btnVendorUploadExcel_Click(sender As Object, e As EventArgs) Handles btnVendorUploadExcel.Click
+
+    End Sub
+
+    Private Sub btnMaterialDownloadExcel_Click(sender As Object, e As EventArgs) Handles btnMaterialDownloadExcel.Click
+
+    End Sub
+
+    Private Sub btnMaterialUploadExcel_Click(sender As Object, e As EventArgs) Handles btnMaterialUploadExcel.Click
+
     End Sub
 
 End Class
