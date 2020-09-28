@@ -370,13 +370,15 @@ Public Class Materials
         mtdMaterial.selectOrdersMaterials(tblMaterialAndOrders, "%")
     End Sub
 
+
+
     Private Sub btnVendorDownloadExcel_Click(sender As Object, e As EventArgs) Handles btnVendorDownloadExcel.Click
         Try
             Dim ApExcel = New Microsoft.Office.Interop.Excel.Application
             Dim libro = ApExcel.Workbooks.Add
             Dim colums() As String = {"id", "name", "description"}
-            For i As Int16 = 0 To colums.Length
-                libro.Sheets(1).cells(1, i) = colums(0)
+            For i As Int16 = 0 To colums.Length - 1
+                libro.Sheets(1).cells(1, i + 1) = colums(i)
             Next
             Dim sd As New SaveFileDialog
             sd.DefaultExt = "*.xlsx"
@@ -394,15 +396,125 @@ Public Class Materials
     End Sub
 
     Private Sub btnVendorUploadExcel_Click(sender As Object, e As EventArgs) Handles btnVendorUploadExcel.Click
-
+        Try
+            Dim openFile As New OpenFileDialog
+            openFile.DefaultExt = "*.xlsx"
+            openFile.Filter = "Archivos de Excel (*.xlsx)|*.xlsx"
+            openFile.ShowDialog()
+            Dim ApExcel = New Microsoft.Office.Interop.Excel.Application
+            Dim libro = ApExcel.Workbooks.Open(openFile.FileName)
+            txtMensajeProseso.Text = txtMensajeProseso.Text + vbCrLf + "Starting process to open the File " + openFile.FileName
+            Dim Hoja1 = libro.Worksheets("Hoja1")
+            txtMensajeProseso.Text = txtMensajeProseso.Text + vbCrLf + "The file has " + CStr(countFilas(Hoja1)) + " records"
+            Dim dato(4) As String
+            Dim validar As Boolean = True
+            Dim maxnum As Int64 = mtdMaterial.valueMaxVendor()
+            Dim cont As Int64 = 0
+            For i As Int64 = 2 To countFilas(Hoja1) + 1
+                dato(0) = Hoja1.Cells(i, 1).Text
+                dato(1) = Hoja1.Cells(i, 2).Text
+                dato(2) = Hoja1.Cells(i, 3).Text
+                dato(3) = "E"
+                If CInt(dato(0)) > maxnum Then
+                    mtdMaterial.insertarVendor(dato, False, validar)
+                    If validar = False Then
+                        txtMensajeProseso.Text = txtMensajeProseso.Text + vbCrLf + "Error in the line " + i + ""
+                    Else
+                        cont = cont + 1
+                    End If
+                Else
+                    txtMensajeProseso.Text = txtMensajeProseso.Text + vbCrLf + "Error at line " + CStr(i) + " the ID isn't mayor than the existing IDs "
+                End If
+            Next
+            txtMensajeProseso.Text = txtMensajeProseso.Text + vbCrLf + CStr(cont) + " vendors were inserted"
+            txtMensajeProseso.Text = txtMensajeProseso.Text + vbCrLf + "Finish"
+            Hoja1.Close()
+            ApExcel.Quit()
+            libro = Nothing
+            ApExcel = Nothing
+            txtMensajeProseso.Text = txtMensajeProseso.Text + vbCrLf + "The File is Closed"
+            txtNumeroVendedor.Text = mtdMaterial.valueMaxVendor
+            mtdMaterial.selectVedor(tblVendor, "%")
+        Catch ex As Exception
+            MsgBox(ex.Message())
+            txtMensajeProseso.Text = txtMensajeProseso.Text + vbCrLf + "Error"
+        End Try
     End Sub
 
     Private Sub btnMaterialDownloadExcel_Click(sender As Object, e As EventArgs) Handles btnMaterialDownloadExcel.Click
+        Try
+            Dim ApExcel = New Microsoft.Office.Interop.Excel.Application
+            Dim libro = ApExcel.Workbooks.Add
+            Dim colums() As String = {"id", "name", "resorseMaterial", "unitMeasurement", "description", "type", "price", "size", "idVendor"}
+            For i As Int64 = 0 To colums.Length - 1
+                libro.Sheets(1).cells(1, i + 1) = colums(i)
+            Next
+            Dim sd As New SaveFileDialog
+            sd.DefaultExt = "*.xlsx"
+            sd.FileName = "MaterialList"
+            sd.Filter = "Archivos de Excel (*.xlsx)|*.xlsx"
+            sd.ShowDialog()
+            libro.SaveAs(sd.FileName)
+            ApExcel.Quit()
+            libro = Nothing
+            ApExcel = Nothing
 
+        Catch ex As Exception
+            MsgBox(ex.Message)
+        End Try
     End Sub
 
     Private Sub btnMaterialUploadExcel_Click(sender As Object, e As EventArgs) Handles btnMaterialUploadExcel.Click
-
+        Try
+            Dim openFile As New OpenFileDialog
+            openFile.DefaultExt = "*.xlsx"
+            openFile.Filter = "Archivos de Excel (*.xlsx)|*.xlsx"
+            openFile.ShowDialog()
+            Dim ApExcel = New Microsoft.Office.Interop.Excel.Application
+            Dim libro = ApExcel.Workbooks.Open(openFile.FileName)
+            txtMensajeProseso.Text = txtMensajeProseso.Text + vbCrLf + "Starting process to open the File " + openFile.FileName
+            Dim Hoja1 = libro.Worksheets("Hoja1")
+            txtMensajeProseso.Text = txtMensajeProseso.Text + vbCrLf + "The file has " + (countFilas(Hoja1) - 1).ToString + " records"
+            Dim dato(3) As String
+            Dim listNewDatos As New List(Of String)
+            Dim validar As Boolean = True
+            Dim maxnum As Int64 = mtdMaterial.valueMaxMaterial()
+            Dim cont As Integer = 0
+            For i As Int64 = 2 To countFilas(Hoja1) + 1
+                listNewDatos.Clear()
+                dato(0) = Hoja1.Cells(i, 1).Text
+                dato(1) = Hoja1.Cells(i, 2).Text
+                dato(2) = "E"
+                listNewDatos.Add(Hoja1.Cells(i, 3).Text)
+                listNewDatos.Add(Hoja1.Cells(i, 4).Text)
+                listNewDatos.Add(Hoja1.Cells(i, 5).Text)
+                listNewDatos.Add(Hoja1.Cells(i, 6).Text)
+                listNewDatos.Add(Hoja1.Cells(i, 7).Text)
+                listNewDatos.Add(Hoja1.Cells(i, 8).Text)
+                listNewDatos.Add(Hoja1.Cells(i, 9).Text)
+                If CInt(dato(0)) > maxnum Then
+                    mtdMaterial.insertarMaterial(dato, listNewDatos, False, validar)
+                    If validar = False Then
+                        txtMensajeProseso.Text = txtMensajeProseso.Text + vbCrLf + "Error in the line " + CStr(i) + ".Check the information and try again."
+                    Else
+                        cont = cont + 1
+                    End If
+                Else
+                    txtMensajeProseso.Text = txtMensajeProseso.Text + vbCrLf + "Error at line " + CStr(i) + " the ID isn't mayor than the existing IDs "
+                End If
+            Next
+            txtMensajeProseso.Text = txtMensajeProseso.Text + vbCrLf + CStr(cont) + " Materials were inserted"
+            txtMensajeProseso.Text = txtMensajeProseso.Text + vbCrLf + "Finish"
+            ApExcel.Quit()
+            libro = Nothing
+            ApExcel = Nothing
+            txtMensajeProseso.Text = txtMensajeProseso.Text + vbCrLf + "The File is Closed"
+            txtNumeroMaterial.Text = mtdMaterial.valueMaxMaterial()
+            mtdMaterial.selectMaterial(tblMaterial, "%")
+        Catch ex As Exception
+            MsgBox(ex.Message())
+            txtMensajeProseso.Text = txtMensajeProseso.Text + vbCrLf + "Error"
+        End Try
     End Sub
 
 End Class

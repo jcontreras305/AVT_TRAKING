@@ -117,4 +117,15 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="TextBox1.Text" xml:space="preserve">
+    <value>1. To enter the data, help from the excel that you can download by clicking the DOWNLOAD EXCEL button.
+2.Fill in the fields according to the values ​​of each column.
+3. If you do not have information for each cell, you should leave it empty.
+4. Remember to check the existing IDs, since only those that are greater than the largest ID can be inserted.
+5.To enter them, just press the Load Excel button and select the correct file.
+6.In case of creating the file, the format must be .xlsx.
+7. Be careful with the information, that it is not repeated or that it is corrected otherwise it cannot be inserted.
+8.The bottom part shows the progress and errors.
+</value>
+  </data>
 </root>

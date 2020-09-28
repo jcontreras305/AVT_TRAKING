@@ -84,6 +84,7 @@
     <Compile Include="Class\MetodosClients.vb" />
     <Compile Include="Class\MetodosEmployees.vb" />
     <Compile Include="Class\MetodosHerramientas.vb" />
+    <Compile Include="Class\MetodosParaDocumentos.vb" />
     <Compile Include="Class\MetodosRenta.vb" />
     <Compile Include="Class\MetodosVendor.vb" />
     <Compile Include="Class\MetodosWorkCodes.vb" />

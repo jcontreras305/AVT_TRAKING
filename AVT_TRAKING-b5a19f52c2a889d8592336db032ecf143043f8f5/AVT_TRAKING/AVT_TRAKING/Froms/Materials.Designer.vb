@@ -22,6 +22,7 @@ Partial Class Materials
     'No lo modifique con el editor de código.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Materials))
         Me.tblMaterial = New System.Windows.Forms.DataGridView()
         Me.btnMenu = New System.Windows.Forms.Button()
         Me.Button5 = New System.Windows.Forms.Button()
@@ -87,6 +88,8 @@ Partial Class Materials
         Me.Label10 = New System.Windows.Forms.Label()
         Me.Label11 = New System.Windows.Forms.Label()
         Me.TabPage4 = New System.Windows.Forms.TabPage()
+        Me.TextBox1 = New System.Windows.Forms.TextBox()
+        Me.txtMensajeProseso = New System.Windows.Forms.TextBox()
         Me.GroupBox3 = New System.Windows.Forms.GroupBox()
         Me.btnMaterialUploadExcel = New System.Windows.Forms.Button()
         Me.btnMaterialDownloadExcel = New System.Windows.Forms.Button()
@@ -142,7 +145,7 @@ Partial Class Materials
         'Button5
         '
         Me.Button5.ForeColor = System.Drawing.Color.Red
-        Me.Button5.Location = New System.Drawing.Point(727, 8)
+        Me.Button5.Location = New System.Drawing.Point(727, 13)
         Me.Button5.Margin = New System.Windows.Forms.Padding(2)
         Me.Button5.Name = "Button5"
         Me.Button5.Size = New System.Drawing.Size(48, 21)
@@ -804,6 +807,8 @@ Partial Class Materials
         '
         'TabPage4
         '
+        Me.TabPage4.Controls.Add(Me.TextBox1)
+        Me.TabPage4.Controls.Add(Me.txtMensajeProseso)
         Me.TabPage4.Controls.Add(Me.GroupBox3)
         Me.TabPage4.Controls.Add(Me.GroupBox2)
         Me.TabPage4.Location = New System.Drawing.Point(4, 22)
@@ -813,13 +818,39 @@ Partial Class Materials
         Me.TabPage4.Text = "Others"
         Me.TabPage4.UseVisualStyleBackColor = True
         '
+        'TextBox1
+        '
+        Me.TextBox1.Font = New System.Drawing.Font("Rubik", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TextBox1.Location = New System.Drawing.Point(497, 22)
+        Me.TextBox1.MaxLength = 327670000
+        Me.TextBox1.Multiline = True
+        Me.TextBox1.Name = "TextBox1"
+        Me.TextBox1.ReadOnly = True
+        Me.TextBox1.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
+        Me.TextBox1.ShortcutsEnabled = False
+        Me.TextBox1.Size = New System.Drawing.Size(229, 226)
+        Me.TextBox1.TabIndex = 4
+        Me.TextBox1.Text = resources.GetString("TextBox1.Text")
+        '
+        'txtMensajeProseso
+        '
+        Me.txtMensajeProseso.Location = New System.Drawing.Point(38, 254)
+        Me.txtMensajeProseso.MaxLength = 327670000
+        Me.txtMensajeProseso.Multiline = True
+        Me.txtMensajeProseso.Name = "txtMensajeProseso"
+        Me.txtMensajeProseso.ReadOnly = True
+        Me.txtMensajeProseso.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
+        Me.txtMensajeProseso.ShortcutsEnabled = False
+        Me.txtMensajeProseso.Size = New System.Drawing.Size(686, 146)
+        Me.txtMensajeProseso.TabIndex = 3
+        '
         'GroupBox3
         '
         Me.GroupBox3.Controls.Add(Me.btnMaterialUploadExcel)
         Me.GroupBox3.Controls.Add(Me.btnMaterialDownloadExcel)
         Me.GroupBox3.Location = New System.Drawing.Point(38, 148)
         Me.GroupBox3.Name = "GroupBox3"
-        Me.GroupBox3.Size = New System.Drawing.Size(483, 100)
+        Me.GroupBox3.Size = New System.Drawing.Size(453, 100)
         Me.GroupBox3.TabIndex = 2
         Me.GroupBox3.TabStop = False
         Me.GroupBox3.Text = "Material"
@@ -846,9 +877,9 @@ Partial Class Materials
         '
         Me.GroupBox2.Controls.Add(Me.btnVendorUploadExcel)
         Me.GroupBox2.Controls.Add(Me.btnVendorDownloadExcel)
-        Me.GroupBox2.Location = New System.Drawing.Point(38, 42)
+        Me.GroupBox2.Location = New System.Drawing.Point(38, 22)
         Me.GroupBox2.Name = "GroupBox2"
-        Me.GroupBox2.Size = New System.Drawing.Size(483, 100)
+        Me.GroupBox2.Size = New System.Drawing.Size(453, 120)
         Me.GroupBox2.TabIndex = 0
         Me.GroupBox2.TabStop = False
         Me.GroupBox2.Text = "Vendor"
@@ -899,6 +930,7 @@ Partial Class Materials
         Me.TabPage3.PerformLayout()
         CType(Me.tblVendor, System.ComponentModel.ISupportInitialize).EndInit()
         Me.TabPage4.ResumeLayout(False)
+        Me.TabPage4.PerformLayout()
         Me.GroupBox3.ResumeLayout(False)
         Me.GroupBox2.ResumeLayout(False)
         Me.ResumeLayout(False)
@@ -975,4 +1007,6 @@ Partial Class Materials
     Friend WithEvents GroupBox2 As GroupBox
     Friend WithEvents btnVendorUploadExcel As Button
     Friend WithEvents btnVendorDownloadExcel As Button
+    Friend WithEvents txtMensajeProseso As TextBox
+    Friend WithEvents TextBox1 As TextBox
 End Class

@@ -405,3 +405,54 @@ or ha.city like ''
 --		set @msg = concat('Is problably that the Material ',@nombre,' have been inserted, or try to changue the Vendor')
 --	end  
 --end
+--go
+
+--#############################################################################################################################
+--############## POR FAVOR EJECUTA ESTE COMANDO ES PARA PODER INSERTAR LOS MATERIALES DE FORMA CONCECUTIVA  CON EL EXCEL ######
+--##### RECUERDA QUE ES ctrl+k,ctrl+U PARA DESCOMENTAR Y ctrl+k,ctrl+c  PATA COMENTAR AL TERMINAR VUELVE A COMNETAR ###########
+--#############################################################################################################################
+
+--create procedure [dbo].[sp_insert_Material_Excel]
+--@nombre varchar(50),
+--@numero int,
+--@idVendor int,
+--@status char(1),
+--@resourceMaterial varchar(50),
+--@unitMesurement varchar(20),
+--@type varchar(30),
+--@price float,
+--@description varchar(100),
+--@size float
+--as
+--declare @idMaterial varchar(36)
+--declare @idDM varchar(36)
+--declare @error int
+--begin
+--	begin tran
+--		begin try	 
+--			set @idMaterial = NEWID()
+--			set @idDM = NEWID()
+--			if not @nombre = '' and not @idVendor = '' and (select count(*) from material where number =@numero) =0
+--			begin 
+--				insert into material values (@idMaterial,@numero,@nombre,@status)
+--				insert into detalleMaterial values (@idDM,@resourceMaterial,@unitMesurement,@type,@price,@description,@size,@idMaterial, (select idVendor from vendor where numberVendor = @idVendor))
+--				insert into existences values (@idDM , 0.0)
+--			end
+--			else 
+--			begin 
+--				set @error = 1
+--				goto solveProblem
+--			end
+--		end try
+--		begin catch
+--			goto solveProblem
+--		end catch
+--	commit tran
+--	solveProblem:
+--	if @error <> 0 
+--	begin 
+--		rollback tran
+--	end  
+--end
+--go
+

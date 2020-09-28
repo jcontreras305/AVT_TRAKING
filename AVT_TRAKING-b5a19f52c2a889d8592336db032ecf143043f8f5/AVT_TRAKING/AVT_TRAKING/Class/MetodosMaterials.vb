@@ -57,6 +57,34 @@ Public Class MetodosMaterials
         desconectar()
     End Sub
 
+    Public Sub insertarVendor(ByVal datos() As String, mensage As Boolean, validar As Boolean)
+        conectar()
+        Dim cmd As New SqlCommand("sp_insert_Vendor", conn)
+        cmd.CommandType = CommandType.StoredProcedure
+        cmd.Parameters.Add("@nombre", SqlDbType.VarChar, 50).Value = datos(1)
+        cmd.Parameters.Add("@numero", SqlDbType.Int).Value = datos(0)
+        cmd.Parameters.Add("@description", SqlDbType.VarChar, 80).Value = datos(2)
+        cmd.Parameters.Add("@status", SqlDbType.Char, 1).Value = datos(3)
+        cmd.Parameters.Add("@msg", SqlDbType.VarChar, 100)
+        cmd.Parameters("@msg").Direction = ParameterDirection.Output
+        If cmd.ExecuteNonQuery() Then
+            If mensage = True Then
+                MsgBox(cmd.Parameters("@msg").Value.ToString)
+                validar = True
+            Else
+                validar = True
+            End If
+        Else
+            If mensage = True Then
+                MsgBox("Error")
+                validar = False
+            Else
+                validar = False
+            End If
+        End If
+        desconectar()
+    End Sub
+
     Public Sub insertarMaterial(ByVal datos() As String)
         conectar()
         Dim cmd As New SqlCommand("sp_insert_Material", conn)
@@ -71,6 +99,37 @@ Public Class MetodosMaterials
             MsgBox(cmd.Parameters("@msg").Value.ToString)
         Else
             MsgBox("Error")
+        End If
+        desconectar()
+    End Sub
+
+    Public Sub insertarMaterial(ByVal datos() As String, listdatosMaterial As List(Of String), message As Boolean, validar As Boolean)
+        conectar()
+        Dim cmd As New SqlCommand("sp_insert_Material_Excel", conn)
+        cmd.CommandType = CommandType.StoredProcedure
+        cmd.Parameters.Add("@nombre", SqlDbType.VarChar, 36).Value = datos(1)
+        cmd.Parameters.Add("@numero", SqlDbType.Int).Value = datos(0)
+        cmd.Parameters.Add("@idVendor", SqlDbType.VarChar, 50).Value = listdatosMaterial(6)
+        cmd.Parameters.Add("@status", SqlDbType.Char, 1).Value = "E"
+        cmd.Parameters.Add("@resourceMaterial", SqlDbType.VarChar, 50).Value = listdatosMaterial(0)
+        cmd.Parameters.Add("@unitMesurement", SqlDbType.VarChar, 20).Value = listdatosMaterial(1)
+        cmd.Parameters.Add("@type", SqlDbType.VarChar, 30).Value = listdatosMaterial(3)
+        cmd.Parameters.Add("@price", SqlDbType.Float).Value = If(listdatosMaterial(4) = "", 0.0, listdatosMaterial(4))
+        cmd.Parameters.Add("@description", SqlDbType.VarChar, 100).Value = listdatosMaterial(2)
+        cmd.Parameters.Add("@size", SqlDbType.Float).Value = If(listdatosMaterial(5) = "", 0.0, listdatosMaterial(5))
+        If cmd.ExecuteNonQuery Then
+            If message = True Then
+                MsgBox("Successful")
+            Else
+                validar = True
+            End If
+
+        Else
+            If message = True Then
+                MsgBox("Error")
+            Else
+                validar = False
+            End If
         End If
         desconectar()
     End Sub
