@@ -386,12 +386,23 @@ Public Class Materials
             sd.Filter = "Archivos de Excel (*.xlsx)|*.xlsx"
             sd.ShowDialog()
             libro.SaveAs(sd.FileName)
+            NAR(libro.Sheets(1))
+            libro.Close(False)
+            NAR(libro)
             ApExcel.Quit()
-            libro = Nothing
-            ApExcel = Nothing
-
+            NAR(ApExcel)
         Catch ex As Exception
             MsgBox(ex.Message)
+        End Try
+    End Sub
+
+    Private Sub NAR(ByVal o As Object)
+        Try
+            While (System.Runtime.InteropServices.Marshal.ReleaseComObject(o) > 0)
+            End While
+        Catch
+        Finally
+            o = Nothing
         End Try
     End Sub
 
@@ -404,7 +415,12 @@ Public Class Materials
             Dim ApExcel = New Microsoft.Office.Interop.Excel.Application
             Dim libro = ApExcel.Workbooks.Open(openFile.FileName)
             txtMensajeProseso.Text = txtMensajeProseso.Text + vbCrLf + "Starting process to open the File " + openFile.FileName
-            Dim Hoja1 = libro.Worksheets("Hoja1")
+            Dim Hoja1 As New Worksheet
+            Try
+                Hoja1 = libro.Worksheets("Hoja1")
+            Catch ex As Exception
+                Hoja1 = libro.Worksheets("Sheet1")
+            End Try
             txtMensajeProseso.Text = txtMensajeProseso.Text + vbCrLf + "The file has " + CStr(countFilas(Hoja1)) + " records"
             Dim dato(4) As String
             Dim validar As Boolean = True
@@ -415,7 +431,7 @@ Public Class Materials
                 dato(1) = Hoja1.Cells(i, 2).Text
                 dato(2) = Hoja1.Cells(i, 3).Text
                 dato(3) = "E"
-                If CInt(dato(0)) > maxnum Then
+                If CInt(dato(0)) >= maxnum Then
                     mtdMaterial.insertarVendor(dato, False, validar)
                     If validar = False Then
                         txtMensajeProseso.Text = txtMensajeProseso.Text + vbCrLf + "Error in the line " + i + ""
@@ -428,10 +444,11 @@ Public Class Materials
             Next
             txtMensajeProseso.Text = txtMensajeProseso.Text + vbCrLf + CStr(cont) + " vendors were inserted"
             txtMensajeProseso.Text = txtMensajeProseso.Text + vbCrLf + "Finish"
-            Hoja1.Close()
+            NAR(libro.Sheets(1))
+            libro.Close(False)
+            NAR(libro)
             ApExcel.Quit()
-            libro = Nothing
-            ApExcel = Nothing
+            NAR(ApExcel)
             txtMensajeProseso.Text = txtMensajeProseso.Text + vbCrLf + "The File is Closed"
             txtNumeroVendedor.Text = mtdMaterial.valueMaxVendor
             mtdMaterial.selectVedor(tblVendor, "%")
@@ -455,10 +472,11 @@ Public Class Materials
             sd.Filter = "Archivos de Excel (*.xlsx)|*.xlsx"
             sd.ShowDialog()
             libro.SaveAs(sd.FileName)
+            NAR(libro.Sheets(1))
+            libro.Close(False)
+            NAR(libro)
             ApExcel.Quit()
-            libro = Nothing
-            ApExcel = Nothing
-
+            NAR(ApExcel)
         Catch ex As Exception
             MsgBox(ex.Message)
         End Try
@@ -473,25 +491,30 @@ Public Class Materials
             Dim ApExcel = New Microsoft.Office.Interop.Excel.Application
             Dim libro = ApExcel.Workbooks.Open(openFile.FileName)
             txtMensajeProseso.Text = txtMensajeProseso.Text + vbCrLf + "Starting process to open the File " + openFile.FileName
-            Dim Hoja1 = libro.Worksheets("Hoja1")
-            txtMensajeProseso.Text = txtMensajeProseso.Text + vbCrLf + "The file has " + (countFilas(Hoja1) - 1).ToString + " records"
+            Dim Hoja As New Worksheet
+            Try
+                Hoja = libro.Worksheets("Hoja1")
+            Catch ex As Exception
+                Hoja = libro.Worksheets("Sheet1")
+            End Try
+            txtMensajeProseso.Text = txtMensajeProseso.Text + vbCrLf + "The file has " + (countFilas(Hoja) - 1).ToString + " records"
             Dim dato(3) As String
             Dim listNewDatos As New List(Of String)
             Dim validar As Boolean = True
             Dim maxnum As Int64 = mtdMaterial.valueMaxMaterial()
             Dim cont As Integer = 0
-            For i As Int64 = 2 To countFilas(Hoja1) + 1
+            For i As Int64 = 2 To countFilas(Hoja) + 1
                 listNewDatos.Clear()
-                dato(0) = Hoja1.Cells(i, 1).Text
-                dato(1) = Hoja1.Cells(i, 2).Text
+                dato(0) = Hoja.Cells(i, 1).Text
+                dato(1) = Hoja.Cells(i, 2).Text
                 dato(2) = "E"
-                listNewDatos.Add(Hoja1.Cells(i, 3).Text)
-                listNewDatos.Add(Hoja1.Cells(i, 4).Text)
-                listNewDatos.Add(Hoja1.Cells(i, 5).Text)
-                listNewDatos.Add(Hoja1.Cells(i, 6).Text)
-                listNewDatos.Add(Hoja1.Cells(i, 7).Text)
-                listNewDatos.Add(Hoja1.Cells(i, 8).Text)
-                listNewDatos.Add(Hoja1.Cells(i, 9).Text)
+                listNewDatos.Add(Hoja.Cells(i, 3).Text)
+                listNewDatos.Add(Hoja.Cells(i, 4).Text)
+                listNewDatos.Add(Hoja.Cells(i, 5).Text)
+                listNewDatos.Add(Hoja.Cells(i, 6).Text)
+                listNewDatos.Add(Hoja.Cells(i, 7).Text)
+                listNewDatos.Add(Hoja.Cells(i, 8).Text)
+                listNewDatos.Add(Hoja.Cells(i, 9).Text)
                 If CInt(dato(0)) > maxnum Then
                     mtdMaterial.insertarMaterial(dato, listNewDatos, False, validar)
                     If validar = False Then
@@ -505,9 +528,11 @@ Public Class Materials
             Next
             txtMensajeProseso.Text = txtMensajeProseso.Text + vbCrLf + CStr(cont) + " Materials were inserted"
             txtMensajeProseso.Text = txtMensajeProseso.Text + vbCrLf + "Finish"
+            NAR(libro.Sheets(1))
+            libro.Close(False)
+            NAR(libro)
             ApExcel.Quit()
-            libro = Nothing
-            ApExcel = Nothing
+            NAR(ApExcel)
             txtMensajeProseso.Text = txtMensajeProseso.Text + vbCrLf + "The File is Closed"
             txtNumeroMaterial.Text = mtdMaterial.valueMaxMaterial()
             mtdMaterial.selectMaterial(tblMaterial, "%")
