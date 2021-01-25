@@ -21,4 +21,23 @@
             Return Nothing
         End Try
     End Function
+
+    Public Function selecValorMaxColum(ByVal dtGV As DataGridView, ByVal column As Integer) As Integer
+        Try
+            If dtGV.Rows.Count > 0 Then
+                Dim valmax As Integer = 0
+                For Each ROW As DataGridViewRow In dtGV.Rows
+                    If CInt(ROW.Cells(column).Value) > valmax Then
+                        valmax = CInt(ROW.Cells(column).Value)
+                    End If
+                Next
+                Return valmax
+            Else
+                Return 100
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message)
+            Return Nothing
+        End Try
+    End Function
 End Module

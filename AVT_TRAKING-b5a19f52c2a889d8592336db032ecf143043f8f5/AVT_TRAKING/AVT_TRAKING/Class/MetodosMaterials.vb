@@ -231,18 +231,18 @@ or vd.name like concat('%','" + consulta + "','%')"
         cmd.Connection = conn
         Try
             If consulta.Length > 0 And Not nombreVendor = "All" Then
-                cmd.CommandText = "select  dm.idDM, mt.number as 'Material ID' , mt.name  as 'Material', vd.name as 'Vendor', dm.resourceMaterial as 'Resource Material' , dm.unitMeasurement  as 'Unit Measurement', dm.description as 'Description',dm.type as 'Type' , dm.price as 'Price', dm.size as 'Size', mt.idMaterial,  ex.quantity as 'Stocks'
+                cmd.CommandText = "select  dm.idDM, mt.number as 'Material ID' , mt.name  as 'Material', vd.name as 'Vendor', dm.resourceMaterial as 'Resource Material' , dm.unitMeasurement  as 'Unit Measurement', dm.description as 'Description',dm.type as 'Type' , dm.price as 'Price', dm.size as 'Size', mt.idMaterial,  ex.quantity as 'Stocks' , dm.partNum as 'Part#'
 from detalleMaterial as dm left join material as mt on dm.idMaterial = mt.idMaterial left join vendor as vd on dm.idVendor = vd.idVendor left join existences as ex on ex.idDM = dm.idDM
 where vd.name like CONCAT ('%', '" + consulta + "','%')
 OR mt.number like CONCAT ('%', '" + consulta + "','%')
 OR mt.name like CONCAT ('%', '" + nombreVendor + "','%')"
             ElseIf consulta.Length > 0 And nombreVendor = "All" Then
-                cmd.CommandText = "select  dm.idDM, mt.number as 'Material ID' , mt.name  as 'Material', vd.name as 'Vendor', dm.resourceMaterial as 'Resource Material' , dm.unitMeasurement  as 'Unit Measurement', dm.description as 'Description',dm.type as 'Type' , dm.price as 'Price', dm.size as 'Size', mt.idMaterial , ex.quantity as 'Stocks'
+                cmd.CommandText = "select  dm.idDM, mt.number as 'Material ID' , mt.name  as 'Material', vd.name as 'Vendor', dm.resourceMaterial as 'Resource Material' , dm.unitMeasurement  as 'Unit Measurement', dm.description as 'Description',dm.type as 'Type' , dm.price as 'Price', dm.size as 'Size', mt.idMaterial , ex.quantity as 'Stocks' , dm.partNum as 'Part#'
 from detalleMaterial as dm left join material as mt on dm.idMaterial = mt.idMaterial left join vendor as vd on dm.idVendor = vd.idVendor left join existences as ex on ex.idDM = dm.idDM
 where vd.name like CONCAT ('%', '" + consulta + "','%')
 OR mt.number like CONCAT ('%', '" + consulta + "','%')"
             Else
-                cmd.CommandText = "select  dm.idDM, mt.number as 'Material ID' , mt.name  as 'Material', vd.name as 'Vendor', dm.resourceMaterial as 'Resource Material' , dm.unitMeasurement  as 'Unit Measurement', dm.description as 'Description',dm.type as 'Type' , dm.price as 'Price', dm.size as 'Size', mt.idMaterial , ex.quantity as 'Stocks'
+                cmd.CommandText = "select  dm.idDM, mt.number as 'Material ID' , mt.name  as 'Material', vd.name as 'Vendor', dm.resourceMaterial as 'Resource Material' , dm.unitMeasurement  as 'Unit Measurement', dm.description as 'Description',dm.type as 'Type' , dm.price as 'Price', dm.size as 'Size', mt.idMaterial , ex.quantity as 'Stocks' , dm.partNum as 'Part#'
 from detalleMaterial as dm left join material as mt on dm.idMaterial = mt.idMaterial left join vendor as vd on dm.idVendor = vd.idVendor"
             End If
             If cmd.ExecuteNonQuery Then
@@ -259,6 +259,7 @@ from detalleMaterial as dm left join material as mt on dm.idMaterial = mt.idMate
                     tabla.Columns.Item(8).Visible = False
                     tabla.Columns.Item(9).Visible = False
                     tabla.Columns.Item(10).Visible = False
+                    tabla.Columns.Item(11).Visible = False
                 End If
             End If
         Catch ex As Exception
@@ -287,7 +288,7 @@ from detalleMaterial as dm left join material as mt on dm.idMaterial = mt.idMate
         conectar()
         Try
             Dim cmd As New SqlCommand
-            cmd.CommandText = "update detalleMaterial set resourceMaterial = '" + listDatosNuevos(1) + "', unitMeasurement = '" + listDatosNuevos(2) + "', description = '" + listDatosNuevos(6) + "' , type = '" + listDatosNuevos(4) + "' , price = " + listDatosNuevos(5) + " , size = " + listDatosNuevos(3) + "
+            cmd.CommandText = "update detalleMaterial set resourceMaterial = '" + listDatosNuevos(1) + "', unitMeasurement = '" + listDatosNuevos(2) + "', description = '" + listDatosNuevos(6) + "' , type = '" + listDatosNuevos(4) + "' , price = " + listDatosNuevos(5) + " , size = " + listDatosNuevos(3) + " , partNum = '" + listDatosNuevos(7) + "'
 where idMaterial = '" + listDatosNuevos(0) + "'"
             cmd.Connection = conn
             If cmd.ExecuteNonQuery() Then

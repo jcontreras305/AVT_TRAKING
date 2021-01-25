@@ -188,6 +188,7 @@ Public Class Materials
             listDatosNuevos.Add(txtTipo.Text)
             listDatosNuevos.Add(sprPrice.Value)
             listDatosNuevos.Add(txtDescripcion.Text)
+            listDatosNuevos.Add(txtPartNum.Text)
             mtdMaterial.actualizarDatosMaterial(listDatosNuevos)
         Catch ex As Exception
             MsgBox("Something went wrong, check the data and try again")
@@ -396,6 +397,7 @@ Public Class Materials
         End Try
     End Sub
 
+
     Private Sub NAR(ByVal o As Object)
         Try
             While (System.Runtime.InteropServices.Marshal.ReleaseComObject(o) > 0)
@@ -413,6 +415,7 @@ Public Class Materials
             openFile.Filter = "Archivos de Excel (*.xlsx)|*.xlsx"
             openFile.ShowDialog()
             Dim ApExcel = New Microsoft.Office.Interop.Excel.Application
+
             Dim libro = ApExcel.Workbooks.Open(openFile.FileName)
             txtMensajeProseso.Text = txtMensajeProseso.Text + vbCrLf + "Starting process to open the File " + openFile.FileName
             Dim Hoja1 As New Worksheet

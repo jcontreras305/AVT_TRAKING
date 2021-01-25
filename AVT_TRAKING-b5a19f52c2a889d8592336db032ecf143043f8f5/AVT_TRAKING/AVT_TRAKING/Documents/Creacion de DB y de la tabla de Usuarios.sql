@@ -33,6 +33,10 @@ use VRT_TRAKING
 --)
 --go
 
+--alter table employees 
+--add constraint fk_idContact_EM foreign key (idContact)
+--references contact (idContact)
+
 --alter table contact 
 --go
 --ejecutar si ya se tiene la tabla fuerror de escribir email
@@ -99,6 +103,18 @@ use VRT_TRAKING
 --idHomeAddress varchar(36),
 --estatus char(1)
 --)
+
+--alter table clients
+--add constraint fk_idContact_CL foreign key (idContact)
+--references contact(idContact)
+--go
+
+--alter table clients
+--add constraint fk_idHomeAddres_CL foreign key (idHomeAddress)
+--references HomeAddress(idHomeAdress)
+--go
+
+
 --insert into clients values (NEWID(), 1, 'Jorge','Isaac','Contreras Zamora',null,null)
 --select * from clients
 --Avenue varchar(30),
@@ -165,7 +181,8 @@ use VRT_TRAKING
 --	description varchar(100),
 --	size float,
 --	idMaterial varchar(36),
---	idVendor varchar(36) 
+--	idVendor varchar(36), 
+--  partNum  varchar(15)
 --)
 --go
 
@@ -177,7 +194,6 @@ use VRT_TRAKING
 --add constraint fk_idVendor_Dm foreign key (idVendor)
 --references vendor (idVendor)
 --go
-
 ----############################################################################
 ----############# Table existencias ############################################
 ----############################################################################
@@ -222,21 +238,111 @@ use VRT_TRAKING
 
 
 
-----############################################################################
-----############# Tables WorkCodes #############################################
-----############################################################################
+----###########################################################################################################################
+----######## TABLES FOR WORK CODES, JOBS AND EXPENCES CREATIO DATE 1/11/2020 ##################################################
+----######## REMEMBER TO SELECT EVERYTHING AND DISCOMMENT, USE (Ctrl+k,Ctrl+U) AND COMMNET AGAIN, USE (Ctrl+k,Ctrl+C) #########
+----###########################################################################################################################
 
---create table WorkCode(
---WorkCodeID int not null primary key, 
---JobNumber int, 
---SubJob int, 
---Craft varchar(10),
---WorkCode varchar(10),
---Classification varchar(10),
---BillingRateST varchar(15), 
---BillingRateOT varchar(15), 
---BillingRate3 varchar(15),
---ClassDescription varchar(25)
+--create table typeWorkCode(
+--	idTWorkCode varchar(36) primary key not null,
+--	clasification varchar(30),
+--	description varchar(50),
+--  number bigint
+--)
+--go
+ 
+--create table workCode (
+--	idWorkCode int primary key  not null,
+--	name varchar(50),
+--	billingRate1 float,
+--	billingRateOT float,
+--	billingRate3 float,
+--	EQExq1 varchar(50),
+--	EQExq2 varchar(50),
+--	idTWorkCode varchar(36)	 
+--)
+--go
+
+--alter table workCode 
+--add constraint fk_idTWorkCode_workCode
+--foreign key (idTWorkCode) references typeWorkCode (idTWorkCode)
+--go
+
+--create table hoursWorked (
+--	idHorsWorked varchar(36) primary key not null,
+--	hours1 float,
+--	hoursOT float,
+--	dateWorked date,
+--	idEmployee varchar(36),
+--	idWorkCode int
+--)
+--go
+
+--alter table hoursWorked
+--add constraint fk_idWorkCode_hoursWorked
+--foreign key (idWorkCode) references workCode(idWorkCode)
+--go
+
+--create table workOrder (
+--	idWorkOrder varchar(36) primary key not null,
+--	task char(6),
+--	contactNumer char(13),
+--	contactTitle varchar(40),
+--	contactNum bigint,
+--	idHomeAddress varchar(36),
+--	idClient varchar(36)
+--)
+--go
+----select * from HomeAddress
+--alter table workOrder
+--add constraint fk_idHomeAddress_WO
+--foreign key (idHomeAddress) references HomeAddress(idHomeAdress)
+--go
+----select * from clients
+--alter table workOrder
+--add constraint fk_idClient_WO
+--foreign key (idClient) references clients(idClient) 
+--go
+
+--create table job (
+--	idJob int primary key not null,
+--	idEquipament varchar(30),
+--	proyectManager varchar(50),
+--	description varchar(100),
+--	beginDate date,
+--	endDate date,
+--	totalBilling float,
+--	complete char(1),
+--	status float(1),
+--	idWorkOrder varchar(36)
+--)
+--go
+
+--alter table job 
+--add constraint fk_WorkOrder_Job
+--foreign key (idWorkOrder) references workOrder(idWorkOrder)
+--go
+
+--create table expenses (
+--	idExpences varchar(36) primary key not null,
+--	expenseCode varchar(20) not null,
+--	description varchar(100)
 --)
 
---insert into WorkCode values (1, 234, 456,'110sc','110sc','LMS','$30','$47.77','$65.00','Cementera')
+--create table expensesPeerJob (
+--	idEJ varchar(36) primary key not null,
+--	dateExpense date,
+--	amount float,
+--	idJob int,
+--	idExpense varchar(36)
+--)
+
+--alter table expensesPeerJob
+--add constraint fk_idJob_EJ
+--foreign key (idJob) references job(idJob)
+--go
+
+--alter table expensesPeerJob
+--add constraint fk_idExpense_EJ
+--foreign key (idExpense) references expenses(idExpences)
+--go

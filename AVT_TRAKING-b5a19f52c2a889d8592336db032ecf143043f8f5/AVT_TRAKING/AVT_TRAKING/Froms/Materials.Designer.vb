@@ -27,6 +27,8 @@ Partial Class Materials
         Me.btnMenu = New System.Windows.Forms.Button()
         Me.Button5 = New System.Windows.Forms.Button()
         Me.TabPage2 = New System.Windows.Forms.TabPage()
+        Me.txtPartNum = New System.Windows.Forms.TextBox()
+        Me.Label21 = New System.Windows.Forms.Label()
         Me.btnCancelOrder = New System.Windows.Forms.Button()
         Me.btnUpdateOrder = New System.Windows.Forms.Button()
         Me.btnDeleteOrder = New System.Windows.Forms.Button()
@@ -155,6 +157,8 @@ Partial Class Materials
         '
         'TabPage2
         '
+        Me.TabPage2.Controls.Add(Me.txtPartNum)
+        Me.TabPage2.Controls.Add(Me.Label21)
         Me.TabPage2.Controls.Add(Me.btnCancelOrder)
         Me.TabPage2.Controls.Add(Me.btnUpdateOrder)
         Me.TabPage2.Controls.Add(Me.btnDeleteOrder)
@@ -185,6 +189,24 @@ Partial Class Materials
         Me.TabPage2.TabIndex = 1
         Me.TabPage2.Text = "Materials bills"
         Me.TabPage2.UseVisualStyleBackColor = True
+        '
+        'txtPartNum
+        '
+        Me.txtPartNum.Location = New System.Drawing.Point(349, 154)
+        Me.txtPartNum.Margin = New System.Windows.Forms.Padding(2)
+        Me.txtPartNum.Name = "txtPartNum"
+        Me.txtPartNum.Size = New System.Drawing.Size(121, 20)
+        Me.txtPartNum.TabIndex = 38
+        '
+        'Label21
+        '
+        Me.Label21.AutoSize = True
+        Me.Label21.Location = New System.Drawing.Point(287, 158)
+        Me.Label21.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.Label21.Name = "Label21"
+        Me.Label21.Size = New System.Drawing.Size(33, 13)
+        Me.Label21.TabIndex = 39
+        Me.Label21.Text = "Part#"
         '
         'btnCancelOrder
         '
@@ -1009,4 +1031,6 @@ Partial Class Materials
     Friend WithEvents btnVendorDownloadExcel As Button
     Friend WithEvents txtMensajeProseso As TextBox
     Friend WithEvents TextBox1 As TextBox
+    Public WithEvents txtPartNum As TextBox
+    Friend WithEvents Label21 As Label
 End Class
