@@ -19,6 +19,11 @@ Public Class MetodosJobs
     '    desconectar()
     'End Sub
 
+    '########################################################################################################################
+    '############  METODOS PARA WORKCODE ####################################################################################
+    '########################################################################################################################
+
+
     Public Sub selectWC(ByVal tabla As DataGridView)
         conectar()
         Try
@@ -81,6 +86,75 @@ Public Class MetodosJobs
             End If
         Catch ex As Exception
             MsgBox(ex.Message)
+        End Try
+        desconectar()
+    End Sub
+
+    '########################################################################################################################
+    '############  METODOS PARA EXPENCES ####################################################################################
+    '########################################################################################################################
+
+    Public Sub buscarExpences(ByVal tabla As DataGridView)
+        Try
+            conectar()
+            Dim cmd As New SqlCommand("select * from expenses", conn)
+            If cmd.ExecuteNonQuery Then
+                Dim dt As New DataTable
+                Dim da As New SqlDataAdapter(cmd)
+                da.Fill(dt)
+                tabla.DataSource = dt
+                tabla.Columns(0).Visible = False
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message)
+        End Try
+        desconectar()
+    End Sub
+
+    Public Sub buscarExpences(ByVal tabla As DataGridView, ByVal dato As String)
+        Try
+            conectar()
+            Dim cmd As New SqlCommand("select * from expenses where expenseCode like '%" + dato + "%' or description like '%" + dato + "%'", conn)
+            If cmd.ExecuteNonQuery Then
+                Dim dt As New DataTable
+                Dim da As New SqlDataAdapter(cmd)
+                da.Fill(dt)
+                tabla.DataSource = dt
+                tabla.Columns(0).Visible = False
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message)
+        End Try
+        desconectar()
+    End Sub
+
+    Public Sub insertExpence(ByVal code As String, ByVal description As String)
+        Try
+            conectar()
+            Dim cmd As New SqlCommand("insert into expenses values (NEWID(), '" + code + "','" + description + "')")
+            cmd.Connection = conn
+            If cmd.ExecuteNonQuery Then
+                MsgBox("Succesfull")
+            Else
+                MsgBox("Error")
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message())
+        End Try
+        desconectar()
+    End Sub
+
+    Public Sub actualizarExpence(ByVal id As String, ByVal code As String, ByVal description As String)
+        Try
+            conectar()
+            Dim cmd As New SqlCommand("update expenses set expenseCode = '" + code + "' , description = '" + description + "' where idExpences = '" + id + "'", conn)
+            If cmd.ExecuteNonQuery Then
+                MsgBox("Succesfull")
+            Else
+                MsgBox("Error")
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message())
         End Try
         desconectar()
     End Sub

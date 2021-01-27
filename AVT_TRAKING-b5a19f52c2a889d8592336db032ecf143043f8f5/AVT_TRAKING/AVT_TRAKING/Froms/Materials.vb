@@ -134,9 +134,7 @@ Public Class Materials
     End Sub
 
     Private Sub Button5_Click(sender As Object, e As EventArgs) Handles Button5.Click
-        Dim a As New Login
-        a.Show()
-        Me.Finalize()
+        Me.Close()
     End Sub
 
     Private Sub txtFiltro_KeyUp(sender As Object, e As KeyEventArgs) Handles txtFiltro.KeyUp

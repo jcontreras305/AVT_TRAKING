@@ -198,16 +198,14 @@ Public Class Employees
         End If
     End Sub
 
-    Private Sub btnMenu_Click(sender As Object, e As EventArgs) Handles btnMenu.Click
+    Private Sub btnMenu_Click(sender As Object, e As EventArgs)
         Dim a As New MainFrom
         a.Show()
         Me.Finalize()
     End Sub
 
     Private Sub Button1_Click_1(sender As Object, e As EventArgs) Handles Button1.Click
-        Dim a As New Login
-        a.Show()
-        Me.Finalize()
+        Me.Close()
     End Sub
 
     Private Sub txtSearch_TextChanged(sender As Object, e As EventArgs) Handles txtSearch.TextChanged

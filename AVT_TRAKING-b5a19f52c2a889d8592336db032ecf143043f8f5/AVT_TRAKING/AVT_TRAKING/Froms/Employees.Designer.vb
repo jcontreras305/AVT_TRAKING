@@ -74,7 +74,6 @@ Partial Class Employees
         Me.Label8 = New System.Windows.Forms.Label()
         Me.txtStreat = New System.Windows.Forms.TextBox()
         Me.Label7 = New System.Windows.Forms.Label()
-        Me.btnMenu = New System.Windows.Forms.Button()
         Me.Button1 = New System.Windows.Forms.Button()
         Me.TabControl1.SuspendLayout()
         Me.tbpEmployees.SuspendLayout()
@@ -585,16 +584,6 @@ Partial Class Employees
         Me.Label7.TabIndex = 0
         Me.Label7.Text = "Streat"
         '
-        'btnMenu
-        '
-        Me.btnMenu.Location = New System.Drawing.Point(5, 4)
-        Me.btnMenu.Margin = New System.Windows.Forms.Padding(2)
-        Me.btnMenu.Name = "btnMenu"
-        Me.btnMenu.Size = New System.Drawing.Size(59, 20)
-        Me.btnMenu.TabIndex = 1
-        Me.btnMenu.Text = "Menu"
-        Me.btnMenu.UseVisualStyleBackColor = True
-        '
         'Button1
         '
         Me.Button1.ForeColor = System.Drawing.Color.Red
@@ -612,7 +601,6 @@ Partial Class Employees
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(731, 380)
         Me.Controls.Add(Me.Button1)
-        Me.Controls.Add(Me.btnMenu)
         Me.Controls.Add(Me.TabControl1)
         Me.Name = "Employees"
         Me.Text = "Employees"
@@ -687,6 +675,5 @@ Partial Class Employees
     Friend WithEvents Label18 As Label
     Friend WithEvents btnUpdate As Button
     Friend WithEvents btnCancel As Button
-    Friend WithEvents btnMenu As Button
     Friend WithEvents Button1 As Button
 End Class

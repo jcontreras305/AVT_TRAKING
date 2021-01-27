@@ -12,7 +12,7 @@
     End Sub
 
     Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
-        Dim a As New Precio
+        Dim a As New Expences
         a.Show()
         Me.Finalize()
     End Sub

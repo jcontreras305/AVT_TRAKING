@@ -179,4 +179,27 @@ pr.payRate1 , pr.payRate2,pr.payRate3" + consultaInner +
         desconectar()
     End Sub
 
+    '======================================================================================================
+    '=============== METODOS PARA EMEPLEADOS DE LA SECCIONDE DE HORAS TRABAJADAS ==========================
+    '======================================================================================================
+    '======================================================================================================
+
+
+    Public Sub bucarEmpleados(ByVal tblEmpleados As DataGridView, ByVal consulta As String)
+        Try
+            conectar()
+            Dim cmd As New SqlCommand("select idEmployee, numberEmploye , concat(firstName,' ',middleName,' ' ,lastName) as 'Employe Name' , photo  from employees where concat(firstName,' ',middleName,' ' ,lastName) like '%" + consulta + "%' or numberEmploye like '%" + consulta + "%' ", conn)
+            If cmd.ExecuteNonQuery Then
+                Dim da As New SqlDataAdapter(cmd)
+                Dim dt As New DataTable
+                da.Fill(dt)
+                tblEmpleados.DataSource = dt
+                tblEmpleados.Columns(0).Visible = False
+                tblEmpleados.Columns(3).Visible = False
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message())
+        End Try
+    End Sub
+
 End Class

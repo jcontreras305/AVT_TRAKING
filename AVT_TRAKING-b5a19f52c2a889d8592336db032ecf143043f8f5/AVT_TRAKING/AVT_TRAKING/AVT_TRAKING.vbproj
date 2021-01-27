@@ -94,10 +94,22 @@
     <Compile Include="Froms\All_Tables.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Froms\FindEmployee.Designer.vb">
+      <DependentUpon>FindEmployee.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Froms\FindEmployee.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Froms\Herramientas.Designer.vb">
       <DependentUpon>Herramientas.vb</DependentUpon>
     </Compile>
     <Compile Include="Froms\Herramientas.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Froms\HoursWeekPeerEmployees.Designer.vb">
+      <DependentUpon>HoursWeekPeerEmployees.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Froms\HoursWeekPeerEmployees.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Froms\metodosGlobales.vb" />
@@ -122,10 +134,16 @@
     <Compile Include="Froms\MainFrom.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Froms\Precio.Designer.vb">
-      <DependentUpon>Precio.vb</DependentUpon>
+    <Compile Include="Froms\Expences.Designer.vb">
+      <DependentUpon>Expences.vb</DependentUpon>
     </Compile>
-    <Compile Include="Froms\Precio.vb">
+    <Compile Include="Froms\Expences.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Froms\ProjectsCosts.Designer.vb">
+      <DependentUpon>ProjectsCosts.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Froms\ProjectsCosts.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Froms\Renta.Designer.vb">
@@ -146,10 +164,10 @@
     <Compile Include="Froms\Vendor.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Froms\Projects.Designer.vb">
-      <DependentUpon>Projects.vb</DependentUpon>
+    <Compile Include="Froms\ProjectsClients.Designer.vb">
+      <DependentUpon>ProjectsClients.vb</DependentUpon>
     </Compile>
-    <Compile Include="Froms\Projects.vb">
+    <Compile Include="Froms\ProjectsClients.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Froms\WorkCodes.Designer.vb">
@@ -197,14 +215,23 @@
     <EmbeddedResource Include="Froms\Employees.resx">
       <DependentUpon>Employees.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Froms\FindEmployee.resx">
+      <DependentUpon>FindEmployee.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Froms\Herramientas.resx">
       <DependentUpon>Herramientas.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Froms\HoursWeekPeerEmployees.resx">
+      <DependentUpon>HoursWeekPeerEmployees.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Froms\MainFrom.resx">
       <DependentUpon>MainFrom.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Froms\Precio.resx">
-      <DependentUpon>Precio.vb</DependentUpon>
+    <EmbeddedResource Include="Froms\Expences.resx">
+      <DependentUpon>Expences.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Froms\ProjectsCosts.resx">
+      <DependentUpon>ProjectsCosts.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Froms\Renta.resx">
       <DependentUpon>Renta.vb</DependentUpon>
@@ -215,8 +242,8 @@
     <EmbeddedResource Include="Froms\Vendor.resx">
       <DependentUpon>Vendor.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Froms\Projects.resx">
-      <DependentUpon>Projects.vb</DependentUpon>
+    <EmbeddedResource Include="Froms\ProjectsClients.resx">
+      <DependentUpon>ProjectsClients.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Froms\WorkCodes.resx">
       <DependentUpon>WorkCodes.vb</DependentUpon>

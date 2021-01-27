@@ -87,19 +87,8 @@ Public Class Clients
     End Function
 
 
-
-
-    Private Sub BtnMenu_Click(sender As Object, e As EventArgs) Handles btnMenu.Click
-        Dim a As New MainFrom
-        a.Show()
-        Me.Finalize()
-    End Sub
-
-
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
-        Dim a As New Login
-        a.Show()
-        Me.Finalize()
+        Me.Close()
     End Sub
     Private Function ActivarCamposContacto(flag As Boolean)
         If flag = False Then

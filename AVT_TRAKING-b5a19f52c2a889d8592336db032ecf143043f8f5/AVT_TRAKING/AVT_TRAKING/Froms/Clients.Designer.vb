@@ -28,7 +28,6 @@ Partial Class Clients
         Me.txtIdClient = New System.Windows.Forms.TextBox()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
-        Me.btnMenu = New System.Windows.Forms.Button()
         Me.tblClientes = New System.Windows.Forms.DataGridView()
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.TabPage1 = New System.Windows.Forms.TabPage()
@@ -74,12 +73,20 @@ Partial Class Clients
         Me.txtPhoneNumber = New System.Windows.Forms.TextBox()
         Me.lblPN1 = New System.Windows.Forms.Label()
         Me.Button1 = New System.Windows.Forms.Button()
+        Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.Panel3 = New System.Windows.Forms.Panel()
+        Me.Panel4 = New System.Windows.Forms.Panel()
         CType(Me.tblClientes, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
         Me.TabPage2.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
+        Me.Panel1.SuspendLayout()
+        Me.Panel2.SuspendLayout()
+        Me.Panel3.SuspendLayout()
+        Me.Panel4.SuspendLayout()
         Me.SuspendLayout()
         '
         'btnUpdate
@@ -138,40 +145,34 @@ Partial Class Clients
         Me.Label1.TabIndex = 0
         Me.Label1.Text = "Client #"
         '
-        'btnMenu
-        '
-        Me.btnMenu.Location = New System.Drawing.Point(8, 8)
-        Me.btnMenu.Margin = New System.Windows.Forms.Padding(2)
-        Me.btnMenu.Name = "btnMenu"
-        Me.btnMenu.Size = New System.Drawing.Size(75, 23)
-        Me.btnMenu.TabIndex = 1
-        Me.btnMenu.Text = "Menu"
-        Me.btnMenu.UseVisualStyleBackColor = True
-        '
         'tblClientes
         '
         Me.tblClientes.AllowUserToAddRows = False
         Me.tblClientes.AllowUserToDeleteRows = False
         Me.tblClientes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.tblClientes.Location = New System.Drawing.Point(11, 305)
+        Me.tblClientes.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.tblClientes.Location = New System.Drawing.Point(0, 0)
         Me.tblClientes.Margin = New System.Windows.Forms.Padding(2)
         Me.tblClientes.Name = "tblClientes"
         Me.tblClientes.ReadOnly = True
         Me.tblClientes.RowHeadersWidth = 62
         Me.tblClientes.RowTemplate.Height = 28
         Me.tblClientes.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.tblClientes.Size = New System.Drawing.Size(695, 176)
+        Me.tblClientes.Size = New System.Drawing.Size(724, 188)
         Me.tblClientes.TabIndex = 10
         '
         'TabControl1
         '
+        Me.TabControl1.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.TabControl1.Controls.Add(Me.TabPage1)
         Me.TabControl1.Controls.Add(Me.TabPage2)
-        Me.TabControl1.Location = New System.Drawing.Point(8, 35)
+        Me.TabControl1.Location = New System.Drawing.Point(2, 2)
         Me.TabControl1.Margin = New System.Windows.Forms.Padding(2)
         Me.TabControl1.Name = "TabControl1"
         Me.TabControl1.SelectedIndex = 0
-        Me.TabControl1.Size = New System.Drawing.Size(699, 269)
+        Me.TabControl1.Size = New System.Drawing.Size(717, 269)
         Me.TabControl1.TabIndex = 11
         '
         'TabPage1
@@ -199,7 +200,7 @@ Partial Class Clients
         Me.TabPage1.Margin = New System.Windows.Forms.Padding(2)
         Me.TabPage1.Name = "TabPage1"
         Me.TabPage1.Padding = New System.Windows.Forms.Padding(2)
-        Me.TabPage1.Size = New System.Drawing.Size(691, 243)
+        Me.TabPage1.Size = New System.Drawing.Size(709, 243)
         Me.TabPage1.TabIndex = 0
         Me.TabPage1.Text = "Clients"
         Me.TabPage1.UseVisualStyleBackColor = True
@@ -331,7 +332,7 @@ Partial Class Clients
         Me.TabPage2.Margin = New System.Windows.Forms.Padding(2)
         Me.TabPage2.Name = "TabPage2"
         Me.TabPage2.Padding = New System.Windows.Forms.Padding(2)
-        Me.TabPage2.Size = New System.Drawing.Size(691, 243)
+        Me.TabPage2.Size = New System.Drawing.Size(709, 243)
         Me.TabPage2.TabIndex = 1
         Me.TabPage2.Text = "Contact Information"
         Me.TabPage2.UseVisualStyleBackColor = True
@@ -614,8 +615,9 @@ Partial Class Clients
         '
         'Button1
         '
+        Me.Button1.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Button1.ForeColor = System.Drawing.Color.Red
-        Me.Button1.Location = New System.Drawing.Point(651, 11)
+        Me.Button1.Location = New System.Drawing.Point(672, 11)
         Me.Button1.Margin = New System.Windows.Forms.Padding(2)
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(50, 23)
@@ -623,15 +625,51 @@ Partial Class Clients
         Me.Button1.Text = "Exit"
         Me.Button1.UseVisualStyleBackColor = True
         '
+        'Panel1
+        '
+        Me.Panel1.AutoScroll = True
+        Me.Panel1.Controls.Add(Me.Panel4)
+        Me.Panel1.Controls.Add(Me.Panel3)
+        Me.Panel1.Controls.Add(Me.Panel2)
+        Me.Panel1.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Panel1.Location = New System.Drawing.Point(0, 0)
+        Me.Panel1.Name = "Panel1"
+        Me.Panel1.Size = New System.Drawing.Size(733, 516)
+        Me.Panel1.TabIndex = 23
+        '
+        'Panel2
+        '
+        Me.Panel2.Controls.Add(Me.Button1)
+        Me.Panel2.Dock = System.Windows.Forms.DockStyle.Top
+        Me.Panel2.Location = New System.Drawing.Point(0, 0)
+        Me.Panel2.Name = "Panel2"
+        Me.Panel2.Size = New System.Drawing.Size(733, 55)
+        Me.Panel2.TabIndex = 23
+        '
+        'Panel3
+        '
+        Me.Panel3.Anchor = System.Windows.Forms.AnchorStyles.Top
+        Me.Panel3.Controls.Add(Me.TabControl1)
+        Me.Panel3.Location = New System.Drawing.Point(3, 56)
+        Me.Panel3.Name = "Panel3"
+        Me.Panel3.Size = New System.Drawing.Size(727, 268)
+        Me.Panel3.TabIndex = 24
+        '
+        'Panel4
+        '
+        Me.Panel4.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom), System.Windows.Forms.AnchorStyles)
+        Me.Panel4.Controls.Add(Me.tblClientes)
+        Me.Panel4.Location = New System.Drawing.Point(6, 328)
+        Me.Panel4.Name = "Panel4"
+        Me.Panel4.Size = New System.Drawing.Size(724, 188)
+        Me.Panel4.TabIndex = 25
+        '
         'Clients
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(710, 492)
-        Me.Controls.Add(Me.Button1)
-        Me.Controls.Add(Me.TabControl1)
-        Me.Controls.Add(Me.tblClientes)
-        Me.Controls.Add(Me.btnMenu)
+        Me.ClientSize = New System.Drawing.Size(733, 516)
+        Me.Controls.Add(Me.Panel1)
         Me.Margin = New System.Windows.Forms.Padding(2)
         Me.Name = "Clients"
         Me.Text = "Clients"
@@ -645,6 +683,10 @@ Partial Class Clients
         Me.GroupBox2.PerformLayout()
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()
+        Me.Panel1.ResumeLayout(False)
+        Me.Panel2.ResumeLayout(False)
+        Me.Panel3.ResumeLayout(False)
+        Me.Panel4.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
@@ -654,7 +696,6 @@ Partial Class Clients
     Friend WithEvents txtCompanyName As TextBox
     Friend WithEvents btnUpdate As Button
     Friend WithEvents btnSaveClient As Button
-    Friend WithEvents btnMenu As Button
     Friend WithEvents tblClientes As DataGridView
     Friend WithEvents TabControl1 As TabControl
     Friend WithEvents TabPage1 As TabPage
@@ -700,4 +741,8 @@ Partial Class Clients
     Friend WithEvents Label18 As Label
     Friend WithEvents btnShowAll1 As Button
     Friend WithEvents btnSelectAll As Button
+    Friend WithEvents Panel1 As Panel
+    Friend WithEvents Panel4 As Panel
+    Friend WithEvents Panel3 As Panel
+    Friend WithEvents Panel2 As Panel
 End Class

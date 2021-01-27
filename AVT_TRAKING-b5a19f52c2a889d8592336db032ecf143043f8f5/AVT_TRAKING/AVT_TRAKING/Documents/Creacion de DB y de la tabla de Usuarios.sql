@@ -243,14 +243,6 @@ use VRT_TRAKING
 ----######## REMEMBER TO SELECT EVERYTHING AND DISCOMMENT, USE (Ctrl+k,Ctrl+U) AND COMMNET AGAIN, USE (Ctrl+k,Ctrl+C) #########
 ----###########################################################################################################################
 
---create table typeWorkCode(
---	idTWorkCode varchar(36) primary key not null,
---	clasification varchar(30),
---	description varchar(50),
---  number bigint
---)
---go
- 
 --create table workCode (
 --	idWorkCode int primary key  not null,
 --	name varchar(50),
@@ -258,14 +250,8 @@ use VRT_TRAKING
 --	billingRateOT float,
 --	billingRate3 float,
 --	EQExq1 varchar(50),
---	EQExq2 varchar(50),
---	idTWorkCode varchar(36)	 
+--	EQExq2 varchar(50),	 
 --)
---go
-
---alter table workCode 
---add constraint fk_idTWorkCode_workCode
---foreign key (idTWorkCode) references typeWorkCode (idTWorkCode)
 --go
 
 --create table hoursWorked (
@@ -346,3 +332,46 @@ use VRT_TRAKING
 --add constraint fk_idExpense_EJ
 --foreign key (idExpense) references expenses(idExpences)
 --go
+
+
+----#####################################################################################################################################
+----####################este codigo es para eliminar la tabla de typeWorKCode ####################################################################
+----#####################################################################################################################################
+
+----YA NO SIRVE LA TABLA DE TYPEWORK CODE CON ESTE CODIGO SE ELEMINA 
+--alter table workCode 
+--drop constraint fk_idTWorkCode_workCode
+
+--alter table workCode
+--drop column idTWorkCode
+
+--drop table typeWorkCode
+----SE TIENEN QUE AGREGAR EL DATO DE HORAS 3
+--alter table hoursWorked 
+--drop constraint fk_idEmployee_hoursWorked , fk_idWorkCode_hoursWorked
+--go
+
+--drop table hoursWorked
+--GO
+
+--create table hoursWorked (
+--	idHorsWorked varchar(36) primary key not null,
+--	hoursST float,
+--	hoursOT float,
+--	hours3 float,
+--	dateWorked date,
+--	idEmployee varchar(36),
+--	idWorkCode int
+--)
+--go
+
+--alter table hoursWorked 
+--add constraint fk_idEmployee_hoursWorked
+--foreign key (idEmployee) references  employees(idEmployee)
+--go
+
+--alter table hoursWorked
+--add constraint fk_idWorkCode_hoursWorked
+--foreign key (idWorkCode) references workCode(idWorkCode) 
+--go
+
