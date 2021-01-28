@@ -335,8 +335,18 @@ use VRT_TRAKING
 
 
 ----#####################################################################################################################################
-----####################este codigo es para eliminar la tabla de typeWorKCode ####################################################################
+----####################este codigo es para eliminar la tabla de typeWorKCode  ####################################################################
 ----#####################################################################################################################################
+
+
+----ESTE ES EL CODIGO PARA ELIMINAR LA CLASIFICACION DE LOS WORKCODES 
+--alter table workCode 
+--drop constraint fk_idTWorkCode_workCode
+
+--alter table workCode
+--drop column idTWorkCode
+
+--drop table typeWorkCode
 
 ----YA NO SIRVE LA TABLA DE TYPEWORK CODE CON ESTE CODIGO SE ELEMINA 
 --alter table workCode 
