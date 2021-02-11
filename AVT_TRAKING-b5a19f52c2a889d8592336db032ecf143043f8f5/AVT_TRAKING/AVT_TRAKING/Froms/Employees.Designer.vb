@@ -75,6 +75,8 @@ Partial Class Employees
         Me.txtStreat = New System.Windows.Forms.TextBox()
         Me.Label7 = New System.Windows.Forms.Label()
         Me.Button1 = New System.Windows.Forms.Button()
+        Me.Label19 = New System.Windows.Forms.Label()
+        Me.cmbTypeEmployee = New System.Windows.Forms.ComboBox()
         Me.TabControl1.SuspendLayout()
         Me.tbpEmployees.SuspendLayout()
         CType(Me.tblEmployees, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -100,6 +102,8 @@ Partial Class Employees
         '
         'tbpEmployees
         '
+        Me.tbpEmployees.Controls.Add(Me.cmbTypeEmployee)
+        Me.tbpEmployees.Controls.Add(Me.Label19)
         Me.tbpEmployees.Controls.Add(Me.btnCancel)
         Me.tbpEmployees.Controls.Add(Me.btnUpdate)
         Me.tbpEmployees.Controls.Add(Me.Label18)
@@ -166,7 +170,7 @@ Partial Class Employees
         'chbState
         '
         Me.chbState.AutoSize = True
-        Me.chbState.Location = New System.Drawing.Point(348, 78)
+        Me.chbState.Location = New System.Drawing.Point(275, 110)
         Me.chbState.Name = "chbState"
         Me.chbState.Size = New System.Drawing.Size(51, 17)
         Me.chbState.TabIndex = 17
@@ -595,6 +599,23 @@ Partial Class Employees
         Me.Button1.Text = "Exit"
         Me.Button1.UseVisualStyleBackColor = True
         '
+        'Label19
+        '
+        Me.Label19.AutoSize = True
+        Me.Label19.Location = New System.Drawing.Point(309, 85)
+        Me.Label19.Name = "Label19"
+        Me.Label19.Size = New System.Drawing.Size(31, 13)
+        Me.Label19.TabIndex = 22
+        Me.Label19.Text = "Type"
+        '
+        'cmbTypeEmployee
+        '
+        Me.cmbTypeEmployee.FormattingEnabled = True
+        Me.cmbTypeEmployee.Location = New System.Drawing.Point(348, 82)
+        Me.cmbTypeEmployee.Name = "cmbTypeEmployee"
+        Me.cmbTypeEmployee.Size = New System.Drawing.Size(121, 21)
+        Me.cmbTypeEmployee.TabIndex = 23
+        '
         'Employees
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -676,4 +697,6 @@ Partial Class Employees
     Friend WithEvents btnUpdate As Button
     Friend WithEvents btnCancel As Button
     Friend WithEvents Button1 As Button
+    Friend WithEvents cmbTypeEmployee As ComboBox
+    Friend WithEvents Label19 As Label
 End Class

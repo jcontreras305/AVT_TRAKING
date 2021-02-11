@@ -159,4 +159,139 @@ Public Class MetodosJobs
         desconectar()
     End Sub
 
+
+    '########################################################################################################################
+    '############  METODOS PARA PROYECTOS ###################################################################################
+
+    Public Sub insertarNuevoProyecto(ByVal idClient As String, ByVal datosPO As List(Of String))
+        Try
+            conectar()
+            Dim cmdJob As New SqlCommand("insert into job values (" + datosPO(0) + ",'" + datosPO(1) + "', '" + datosPO(2) + "'," + datosPO(3) + ", " + datosPO(4) + "," + datosPO(5) + ",'" + idClient + "')", conn)
+            Dim cmdProyect As New SqlCommand("insert into projectOrder values ((select MAX(idPO)+1 from projectOrder),'','','',0.0,GETDATE(),DATEADD(MM,1,GETDATE()),'',0,0,'0'," + datosPO(0) + ")", conn)
+            Dim tran As SqlTransaction
+            tran = conn.BeginTransaction()
+            cmdJob.Transaction = tran
+            cmdProyect.Transaction = tran
+            If cmdJob.ExecuteNonQuery Then
+                If cmdProyect.ExecuteNonQuery Then
+                    MsgBox("Succesfull")
+                    tran.Commit()
+                Else
+                    tran.Rollback()
+                    MsgBox("Error")
+                End If
+            Else
+                tran.Rollback()
+                MsgBox("Error")
+            End If
+            desconectar()
+        Catch ex As Exception
+            desconectar()
+
+            MsgBox(ex.Message())
+        End Try
+    End Sub
+
+    '########################################################################################################################
+
+
+    Public Sub buscarHorasPorProjecto(ByVal tblHoras As DataGridView, ByVal idWO As String)
+        Try
+            conectar()
+            Dim cmd As New SqlCommand("select
+CONCAT (em.firstName , ' ',em.middleName,' ',em.lastName) as Employee,
+wc.name as Work,
+wc.billingRate1 as 'Billing Rate', 
+hw.hoursST as 'Billable Rate',
+wc.billingRateOT as 'Billable OT',
+hw.hoursOT as 'Billing RateOT',
+hw.dateWorked as 'Date Worked',
+wc.description as 'Description'
+from 
+employees em inner join hoursWorked as hw on em.idEmployee = hw.idEmployee
+inner join workOrder as wo on wo.idWo = hw.idWO
+inner join workCode as wc on wc.idWorkCode = hw.idWorkCode
+where wo.idWo = '" + idWO + "'", conn)
+            If cmd.ExecuteNonQuery Then
+                Dim da As New SqlDataAdapter(cmd)
+                Dim dt As New DataTable
+                da.Fill(dt)
+                tblHoras.DataSource = dt
+                desconectar()
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message())
+            desconectar()
+        End Try
+    End Sub
+
+    Public Sub buscarExpencesPorProyecto(ByVal tblExpences As DataGridView, ByVal idWO As String)
+        Try
+            conectar()
+            Dim cmd As New SqlCommand("select
+expu.dateExpense as 'Date',
+concat(emp.firstName,' ',emp.middleName,' ',emp.lastName) 'Employee',
+ex.expenseCode as 'Expense Code',
+expu.amount as 'Amount',
+expu.description as 'Description'
+from
+workOrder as wo inner join expensesUsed as expu on wo.idWo = expu.idWorkOrder
+inner join expenses as ex on expu.idExpense = ex.idExpenses
+left join employees as emp on emp.idEmployee = expu.idEmployee
+where wo.idWo ='" + idWO + "'", conn)
+            If cmd.ExecuteNonQuery Then
+                Dim da As New SqlDataAdapter(cmd)
+                Dim dt As New DataTable
+                da.Fill(dt)
+                tblExpences.DataSource = dt
+                desconectar()
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message())
+            desconectar()
+        End Try
+    End Sub
+
+    Public Sub buscarMaterialesPorProyecto(ByVal tblMateriales As DataGridView, ByVal idWO As String)
+        Try
+            conectar()
+            Dim cmd As New SqlCommand("select 
+mu.dateMaterial,
+wo.idWo,
+mu.amount,
+mu.descripcion
+from 
+materialUsed as mu inner join workOrder as wo on wo.idWo = mu.idWO
+inner join material as mt on mu.idMaterial = mt.idMaterial
+where wo.idWo = '" + idWO + "'", conn)
+            If cmd.ExecuteNonQuery Then
+                Dim da As New SqlDataAdapter(cmd)
+                Dim dt As New DataTable
+                da.Fill(dt)
+                tblMateriales.DataSource = dt
+                desconectar()
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message())
+            desconectar()
+        End Try
+    End Sub
+
+    Public Sub llenarComboJob(ByVal cmbJob As ComboBox, ByVal idclient As String)
+        Try
+            conectar()
+            Dim cmd As New SqlCommand("select jb.jobNo from job as jb inner join clients as cl on jb.idClient = cl.idClient 
+where cl.idClient = '" + idclient + "'", conn)
+            Dim reader As SqlDataReader = cmd.ExecuteReader()
+            While reader.Read()
+                cmbJob.Items.Add(reader(0))
+            End While
+            desconectar()
+        Catch ex As Exception
+            MsgBox(ex.Message())
+        End Try
+    End Sub
+
+
+
 End Class

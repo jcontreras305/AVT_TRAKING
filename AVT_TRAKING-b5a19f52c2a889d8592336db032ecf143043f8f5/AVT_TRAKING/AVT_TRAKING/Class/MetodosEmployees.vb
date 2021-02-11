@@ -11,7 +11,19 @@ Public Class MetodosEmployees
 		on em.idPayRate = pr.idPayRate "
 
 
-
+    Public Sub llenarCmbType(ByVal cmb As ComboBox)
+        Try
+            conectar()
+            Dim cmd As New SqlCommand("select name from typeEmployee", conn)
+            Dim reader As SqlDataReader = cmd.ExecuteReader
+            While reader.Read()
+                cmb.Items.Add(reader(0))
+            End While
+            desconectar()
+        Catch ex As Exception
+            MsgBox(ex.Message)
+        End Try
+    End Sub
 
     Public Sub cargarEmpleados(ByVal tblEmpledos As DataGridView, ByVal text As String)
         Try
@@ -19,7 +31,7 @@ Public Class MetodosEmployees
             Dim cmd As New SqlCommand("select em.numberEmploye as Number, em.firstName  , em.lastName , em.middleName , 
 con.phoneNumber1, con.phoneNumber2 , con.email , 
 ads.city , ads.providence,
-pr.payRate1 , pr.payRate2,pr.payRate3" + consultaInner +
+pr.payRate1 , pr.payRate2,pr.payRate3,typeEmployee " + consultaInner +
 " where em.numberEmploye like CONCAT('%','" + text + "','%') or 
 	em.lastName like CONCAT('%','" + text + "','%') or 
 	em.firstName like CONCAT('%','" + text + "','%') or
@@ -65,6 +77,7 @@ pr.payRate1 , pr.payRate2,pr.payRate3" + consultaInner +
             cmd.Parameters.Add("@payRate1", SqlDbType.Float).Value = datosGeneralesEmpleado(15)
             cmd.Parameters.Add("@payRate2", SqlDbType.Float).Value = datosGeneralesEmpleado(16)
             cmd.Parameters.Add("@payRate3", SqlDbType.Float).Value = datosGeneralesEmpleado(17)
+            cmd.Parameters.Add("@type", SqlDbType.VarChar, 20).Value = datosGeneralesEmpleado(18)
             If cmd.ExecuteNonQuery Then
                 MsgBox("Successfull")
             Else
@@ -120,7 +133,7 @@ pr.payRate1 , pr.payRate2,pr.payRate3" + consultaInner +
                         list.Add(CStr(rd(cont)))
                     End If
                     cont += 1
-                Loop While cont < 26
+                Loop While cont < 27
             End While
             Return list
         Catch ex As Exception

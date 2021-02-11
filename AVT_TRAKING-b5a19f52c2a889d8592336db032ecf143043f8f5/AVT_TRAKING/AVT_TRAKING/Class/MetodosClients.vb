@@ -156,6 +156,132 @@ ha.idHomeAdress, ha.avenue ,ha.number, ha.city ,ha.providence,ha.postalCode from
         desconectar()
     End Sub
 
+    'Metodos para proyectos de clientes 
 
+    Public Sub buscarProyectosDeCliente(ByVal tabla As DataGridView, ByVal idCliente As String)
+        Try
+            conectar()
+            Dim cmd As New SqlCommand(consultaProyetosClientes + " cln.idClient = '" + idCliente + "'", conn)
+            If cmd.ExecuteNonQuery Then
+                Dim da As New SqlDataAdapter(cmd)
+                Dim dt As New DataTable
+                da.Fill(dt)
+                tabla.DataSource = dt
+                Dim clmChb As New DataGridViewCheckBoxColumn
+                tabla.Columns("idClient").Visible = False
+                clmChb.Name = "Complete"
+                tabla.Columns.Add(clmChb)
+                tabla.Columns("Complete").DisplayIndex = 3
+                tabla.Columns("Cmp").Visible = False
+                tabla.Columns("jobNo").Visible = False
+                tabla.Columns("workTMLumpSum").Visible = False
+                tabla.Columns("costDistribution").Visible = False
+                tabla.Columns("custumerNo").Visible = False
+                tabla.Columns("contractNo").Visible = False
+                tabla.Columns("costCode").Visible = False
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message())
+        End Try
+    End Sub
+
+    Dim consultaProyetosClientes As String = "select 
+	wo.idWO as 'Work Order' , po.description as 'Project Description', wo.totalSpend as 'Total Spend',po.status as 'Cmp',
+	(select SUM(hoursST) from hoursWorked as hw where hw.idWO = wo.idWO)as 'Total Hours ST',
+	(
+	select SUM(T2.Amount) as 'Total Amount ST' from 
+	(select SUM(T1.hoursST*T1.billingRate1) AS 'Amount'
+	from (select idHorsWorked,hoursST, hw.idWorkCode , billingRate1  from hoursWorked as hw inner join workCode as wc on wc.idWorkCode = hw.idWorkCode 
+	where idWO=wo.idWo)as T1 
+	group by T1.idWorkCode) as T2
+	) as 'Total Amount ST',
+
+	(select SUM(hoursOT) from hoursWorked as hw where hw.idWO = wo.idWO)as 'Total Hours OT',
+
+	(select SUM(T2.Amount) from 
+	(select SUM(T1.hoursOT*T1.billingRateOT) AS 'Amount'
+	from (select idHorsWorked,hoursOT, hw.idWorkCode , billingRateOT  from hoursWorked as hw inner join workCode as wc on wc.idWorkCode = hw.idWorkCode 
+	where idWO=wo.idWo)as T1 
+	group by T1.idWorkCode) as T2
+	) as 'Total Amount OT',
+
+	(select SUM( amount) from expensesUsed where idWorkOrder = wo.idWo) AS 'Total Expenses Spend', 
+
+	(select sum (amount) from materialUsed where idWO=wo.idWo) as 'Total Material Spend',
+    jb.jobNo,
+   	jb.workTMLumpSum,
+	jb.costDistribution,
+	jb.custumerNo,
+	jb.contractNo,
+	jb.costCode,
+    cln.idClient
+from
+clients as cln left join job as jb on jb.idClient = cln.idClient
+inner join projectOrder as po on po.jobNo = jb.jobNo
+left join workOrder as wo on wo.idPO = po.idPO
+where"
+
+    Public Sub buscarProyectosDeClientePorProyeto(ByVal tabla As DataGridView, ByVal consulta As String)
+        Try
+            conectar()
+            Dim cmd As New SqlCommand(consultaProyetosClientes + " 
+cln.idClient Like '" + consulta + "' 
+Or
+jb.jobNo Like '" + consulta + "'
+Or
+cln.firstName Like '" + consulta + "'
+Or
+cln.middleName Like '" + consulta + "'
+Or
+cln.lastName Like '" + consulta + "'", conn)
+            If cmd.ExecuteNonQuery Then
+                Dim da As New SqlDataAdapter(cmd)
+                Dim dt As New DataTable
+                da.Fill(dt)
+                tabla.DataSource = dt
+
+
+                Dim clmChb As New DataGridViewCheckBoxColumn
+                clmChb.Name = "Complete"
+                tabla.Columns.Add(clmChb)
+                tabla.Columns("Complete").DisplayIndex = 3
+                tabla.Columns("idClient").Visible = False
+                tabla.Columns("Cmp").Visible = False
+                tabla.Columns("jobNo").Visible = False
+                tabla.Columns("workTMLumpSum").Visible = False
+                tabla.Columns("costDistribution").Visible = False
+                tabla.Columns("custumerNo").Visible = False
+                tabla.Columns("contractNo").Visible = False
+                tabla.Columns("costCode").Visible = False
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message())
+        End Try
+    End Sub
+
+    Public Sub bucarClienteDatos(ByVal idClient As String, datos As List(Of String))
+        Try
+            conectar()
+            Dim cmd As New SqlCommand("
+select cl.idClient,cl.numberClient,cl.firstName,cl.middleName,cl.lastName,cl.companyName,cl.estatus,
+ct.idContact,ct.phoneNumber1, ct.phoneNumber2,ct.email,
+ha.idHomeAdress, ha.avenue ,ha.number, ha.city ,ha.providence,ha.postalCode from
+" + consultaInner + " where idClient = '" + idClient + "'", conn)
+            Dim reader As SqlDataReader = cmd.ExecuteReader()
+            While reader.Read()
+                datos.Add(reader(0))
+                datos.Add(reader(2))
+                datos.Add(reader(5))
+                datos.Add(reader(12))
+                datos.Add(reader(14))
+                datos.Add(reader(15))
+                datos.Add(reader(16))
+                datos.Add(reader(8))
+            End While
+            desconectar()
+        Catch ex As Exception
+            desconectar()
+        End Try
+    End Sub
 
 End Class

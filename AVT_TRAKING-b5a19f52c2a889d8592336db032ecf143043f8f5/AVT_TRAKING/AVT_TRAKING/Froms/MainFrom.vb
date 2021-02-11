@@ -7,8 +7,9 @@
 
     Private Sub BtnClients_Click(sender As Object, e As EventArgs) Handles btnClients.Click
         Dim a As New Clients
+        a.btnSelectClient.Visible = False
+        a.btnSelectClient.Enabled = False
         a.Show()
-
     End Sub
 
     Private Sub btnEmployees_Click(sender As Object, e As EventArgs) Handles btnEmployees.Click

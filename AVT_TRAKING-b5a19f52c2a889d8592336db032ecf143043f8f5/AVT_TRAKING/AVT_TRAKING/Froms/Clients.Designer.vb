@@ -74,9 +74,10 @@ Partial Class Clients
         Me.lblPN1 = New System.Windows.Forms.Label()
         Me.Button1 = New System.Windows.Forms.Button()
         Me.Panel1 = New System.Windows.Forms.Panel()
-        Me.Panel2 = New System.Windows.Forms.Panel()
-        Me.Panel3 = New System.Windows.Forms.Panel()
         Me.Panel4 = New System.Windows.Forms.Panel()
+        Me.Panel3 = New System.Windows.Forms.Panel()
+        Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.btnSelectClient = New System.Windows.Forms.Button()
         CType(Me.tblClientes, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
@@ -84,9 +85,9 @@ Partial Class Clients
         Me.GroupBox2.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
         Me.Panel1.SuspendLayout()
-        Me.Panel2.SuspendLayout()
-        Me.Panel3.SuspendLayout()
         Me.Panel4.SuspendLayout()
+        Me.Panel3.SuspendLayout()
+        Me.Panel2.SuspendLayout()
         Me.SuspendLayout()
         '
         'btnUpdate
@@ -177,6 +178,7 @@ Partial Class Clients
         '
         'TabPage1
         '
+        Me.TabPage1.Controls.Add(Me.btnSelectClient)
         Me.TabPage1.Controls.Add(Me.btnShowAll1)
         Me.TabPage1.Controls.Add(Me.Label6)
         Me.TabPage1.Controls.Add(Me.txtFiltro)
@@ -637,14 +639,14 @@ Partial Class Clients
         Me.Panel1.Size = New System.Drawing.Size(733, 516)
         Me.Panel1.TabIndex = 23
         '
-        'Panel2
+        'Panel4
         '
-        Me.Panel2.Controls.Add(Me.Button1)
-        Me.Panel2.Dock = System.Windows.Forms.DockStyle.Top
-        Me.Panel2.Location = New System.Drawing.Point(0, 0)
-        Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(733, 55)
-        Me.Panel2.TabIndex = 23
+        Me.Panel4.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom), System.Windows.Forms.AnchorStyles)
+        Me.Panel4.Controls.Add(Me.tblClientes)
+        Me.Panel4.Location = New System.Drawing.Point(6, 328)
+        Me.Panel4.Name = "Panel4"
+        Me.Panel4.Size = New System.Drawing.Size(724, 188)
+        Me.Panel4.TabIndex = 25
         '
         'Panel3
         '
@@ -655,14 +657,23 @@ Partial Class Clients
         Me.Panel3.Size = New System.Drawing.Size(727, 268)
         Me.Panel3.TabIndex = 24
         '
-        'Panel4
+        'Panel2
         '
-        Me.Panel4.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom), System.Windows.Forms.AnchorStyles)
-        Me.Panel4.Controls.Add(Me.tblClientes)
-        Me.Panel4.Location = New System.Drawing.Point(6, 328)
-        Me.Panel4.Name = "Panel4"
-        Me.Panel4.Size = New System.Drawing.Size(724, 188)
-        Me.Panel4.TabIndex = 25
+        Me.Panel2.Controls.Add(Me.Button1)
+        Me.Panel2.Dock = System.Windows.Forms.DockStyle.Top
+        Me.Panel2.Location = New System.Drawing.Point(0, 0)
+        Me.Panel2.Name = "Panel2"
+        Me.Panel2.Size = New System.Drawing.Size(733, 55)
+        Me.Panel2.TabIndex = 23
+        '
+        'btnSelectClient
+        '
+        Me.btnSelectClient.Location = New System.Drawing.Point(615, 16)
+        Me.btnSelectClient.Name = "btnSelectClient"
+        Me.btnSelectClient.Size = New System.Drawing.Size(75, 23)
+        Me.btnSelectClient.TabIndex = 50
+        Me.btnSelectClient.Text = "Select Client"
+        Me.btnSelectClient.UseVisualStyleBackColor = True
         '
         'Clients
         '
@@ -684,9 +695,9 @@ Partial Class Clients
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()
         Me.Panel1.ResumeLayout(False)
-        Me.Panel2.ResumeLayout(False)
-        Me.Panel3.ResumeLayout(False)
         Me.Panel4.ResumeLayout(False)
+        Me.Panel3.ResumeLayout(False)
+        Me.Panel2.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
@@ -745,4 +756,5 @@ Partial Class Clients
     Friend WithEvents Panel4 As Panel
     Friend WithEvents Panel3 As Panel
     Friend WithEvents Panel2 As Panel
+    Public WithEvents btnSelectClient As Button
 End Class

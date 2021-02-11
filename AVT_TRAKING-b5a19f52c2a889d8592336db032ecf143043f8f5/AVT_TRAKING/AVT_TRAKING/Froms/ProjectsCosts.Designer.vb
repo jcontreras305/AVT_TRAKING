@@ -23,6 +23,12 @@ Partial Class ProjectsCosts
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.Panel4 = New System.Windows.Forms.Panel()
+        Me.lblWorkOrder = New System.Windows.Forms.Label()
+        Me.Label24 = New System.Windows.Forms.Label()
+        Me.PictureBox1 = New System.Windows.Forms.PictureBox()
+        Me.chbComplete = New System.Windows.Forms.CheckBox()
+        Me.lblPorcentLeft = New System.Windows.Forms.Label()
         Me.txtAcountNo = New System.Windows.Forms.TextBox()
         Me.sprHoursEstimate = New System.Windows.Forms.NumericUpDown()
         Me.DateTimePicker2 = New System.Windows.Forms.DateTimePicker()
@@ -51,15 +57,6 @@ Partial Class ProjectsCosts
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Panel2 = New System.Windows.Forms.Panel()
-        Me.DataGridView1 = New System.Windows.Forms.DataGridView()
-        Me.lblPorcentLeft = New System.Windows.Forms.Label()
-        Me.TabControl1 = New System.Windows.Forms.TabControl()
-        Me.tbpHoursWorked = New System.Windows.Forms.TabPage()
-        Me.tbpExpences = New System.Windows.Forms.TabPage()
-        Me.tbpMaterials = New System.Windows.Forms.TabPage()
-        Me.DataGridView2 = New System.Windows.Forms.DataGridView()
-        Me.DataGridView3 = New System.Windows.Forms.DataGridView()
-        Me.TextBox7 = New System.Windows.Forms.TextBox()
         Me.Panel3 = New System.Windows.Forms.Panel()
         Me.TextBox15 = New System.Windows.Forms.TextBox()
         Me.TextBox14 = New System.Windows.Forms.TextBox()
@@ -77,27 +74,30 @@ Partial Class ProjectsCosts
         Me.Label18 = New System.Windows.Forms.Label()
         Me.Label17 = New System.Windows.Forms.Label()
         Me.Label16 = New System.Windows.Forms.Label()
-        Me.chbComplete = New System.Windows.Forms.CheckBox()
-        Me.Panel4 = New System.Windows.Forms.Panel()
-        Me.PictureBox1 = New System.Windows.Forms.PictureBox()
-        Me.Label24 = New System.Windows.Forms.Label()
-        Me.lblWorkOrder = New System.Windows.Forms.Label()
+        Me.TextBox7 = New System.Windows.Forms.TextBox()
+        Me.tblHoursWorkedProject = New System.Windows.Forms.DataGridView()
+        Me.TabControl1 = New System.Windows.Forms.TabControl()
+        Me.tbpHoursWorked = New System.Windows.Forms.TabPage()
+        Me.tbpExpences = New System.Windows.Forms.TabPage()
+        Me.tblExpencesProjects = New System.Windows.Forms.DataGridView()
+        Me.tbpMaterials = New System.Windows.Forms.TabPage()
+        Me.tblMaterialProjects = New System.Windows.Forms.DataGridView()
         Me.Button1 = New System.Windows.Forms.Button()
         Me.TextBox1 = New System.Windows.Forms.TextBox()
         Me.Panel1.SuspendLayout()
+        Me.Panel4.SuspendLayout()
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.sprHoursEstimate, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.sprTotalBilling, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel2.SuspendLayout()
-        CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.Panel3.SuspendLayout()
+        CType(Me.tblHoursWorkedProject, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.TabControl1.SuspendLayout()
         Me.tbpHoursWorked.SuspendLayout()
         Me.tbpExpences.SuspendLayout()
+        CType(Me.tblExpencesProjects, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.tbpMaterials.SuspendLayout()
-        CType(Me.DataGridView2, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.DataGridView3, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.Panel3.SuspendLayout()
-        Me.Panel4.SuspendLayout()
-        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.tblMaterialProjects, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'Panel1
@@ -138,6 +138,69 @@ Partial Class ProjectsCosts
         Me.Panel1.Name = "Panel1"
         Me.Panel1.Size = New System.Drawing.Size(978, 249)
         Me.Panel1.TabIndex = 0
+        '
+        'Panel4
+        '
+        Me.Panel4.BackColor = System.Drawing.Color.Firebrick
+        Me.Panel4.Controls.Add(Me.lblWorkOrder)
+        Me.Panel4.Controls.Add(Me.Label24)
+        Me.Panel4.Controls.Add(Me.PictureBox1)
+        Me.Panel4.Dock = System.Windows.Forms.DockStyle.Top
+        Me.Panel4.Location = New System.Drawing.Point(0, 0)
+        Me.Panel4.Name = "Panel4"
+        Me.Panel4.Size = New System.Drawing.Size(978, 59)
+        Me.Panel4.TabIndex = 29
+        '
+        'lblWorkOrder
+        '
+        Me.lblWorkOrder.AutoSize = True
+        Me.lblWorkOrder.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblWorkOrder.ForeColor = System.Drawing.Color.White
+        Me.lblWorkOrder.Location = New System.Drawing.Point(221, 18)
+        Me.lblWorkOrder.Name = "lblWorkOrder"
+        Me.lblWorkOrder.Size = New System.Drawing.Size(142, 25)
+        Me.lblWorkOrder.TabIndex = 2
+        Me.lblWorkOrder.Text = "0000000000"
+        '
+        'Label24
+        '
+        Me.Label24.AutoSize = True
+        Me.Label24.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label24.ForeColor = System.Drawing.Color.White
+        Me.Label24.Location = New System.Drawing.Point(161, 18)
+        Me.Label24.Name = "Label24"
+        Me.Label24.Size = New System.Drawing.Size(54, 25)
+        Me.Label24.TabIndex = 1
+        Me.Label24.Text = "WO:"
+        '
+        'PictureBox1
+        '
+        Me.PictureBox1.Location = New System.Drawing.Point(6, 4)
+        Me.PictureBox1.Name = "PictureBox1"
+        Me.PictureBox1.Size = New System.Drawing.Size(100, 50)
+        Me.PictureBox1.TabIndex = 0
+        Me.PictureBox1.TabStop = False
+        '
+        'chbComplete
+        '
+        Me.chbComplete.AutoSize = True
+        Me.chbComplete.Location = New System.Drawing.Point(781, 92)
+        Me.chbComplete.Name = "chbComplete"
+        Me.chbComplete.Size = New System.Drawing.Size(70, 17)
+        Me.chbComplete.TabIndex = 28
+        Me.chbComplete.Text = "Complete"
+        Me.chbComplete.UseVisualStyleBackColor = True
+        '
+        'lblPorcentLeft
+        '
+        Me.lblPorcentLeft.AutoSize = True
+        Me.lblPorcentLeft.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblPorcentLeft.ForeColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(30, Byte), Integer), CType(CType(30, Byte), Integer))
+        Me.lblPorcentLeft.Location = New System.Drawing.Point(636, 200)
+        Me.lblPorcentLeft.Name = "lblPorcentLeft"
+        Me.lblPorcentLeft.Size = New System.Drawing.Size(44, 20)
+        Me.lblPorcentLeft.TabIndex = 27
+        Me.lblPorcentLeft.Text = "0  %"
         '
         'txtAcountNo
         '
@@ -373,98 +436,6 @@ Partial Class ProjectsCosts
         Me.Panel2.Size = New System.Drawing.Size(978, 100)
         Me.Panel2.TabIndex = 1
         '
-        'DataGridView1
-        '
-        Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DataGridView1.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.DataGridView1.Location = New System.Drawing.Point(3, 3)
-        Me.DataGridView1.Name = "DataGridView1"
-        Me.DataGridView1.Size = New System.Drawing.Size(773, 237)
-        Me.DataGridView1.TabIndex = 2
-        '
-        'lblPorcentLeft
-        '
-        Me.lblPorcentLeft.AutoSize = True
-        Me.lblPorcentLeft.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblPorcentLeft.ForeColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(30, Byte), Integer), CType(CType(30, Byte), Integer))
-        Me.lblPorcentLeft.Location = New System.Drawing.Point(636, 200)
-        Me.lblPorcentLeft.Name = "lblPorcentLeft"
-        Me.lblPorcentLeft.Size = New System.Drawing.Size(44, 20)
-        Me.lblPorcentLeft.TabIndex = 27
-        Me.lblPorcentLeft.Text = "0  %"
-        '
-        'TabControl1
-        '
-        Me.TabControl1.Controls.Add(Me.tbpHoursWorked)
-        Me.TabControl1.Controls.Add(Me.tbpExpences)
-        Me.TabControl1.Controls.Add(Me.tbpMaterials)
-        Me.TabControl1.Location = New System.Drawing.Point(0, 249)
-        Me.TabControl1.Name = "TabControl1"
-        Me.TabControl1.SelectedIndex = 0
-        Me.TabControl1.Size = New System.Drawing.Size(787, 269)
-        Me.TabControl1.TabIndex = 3
-        '
-        'tbpHoursWorked
-        '
-        Me.tbpHoursWorked.Controls.Add(Me.DataGridView1)
-        Me.tbpHoursWorked.Location = New System.Drawing.Point(4, 22)
-        Me.tbpHoursWorked.Name = "tbpHoursWorked"
-        Me.tbpHoursWorked.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbpHoursWorked.RightToLeft = System.Windows.Forms.RightToLeft.Yes
-        Me.tbpHoursWorked.Size = New System.Drawing.Size(779, 243)
-        Me.tbpHoursWorked.TabIndex = 0
-        Me.tbpHoursWorked.Text = "Hours Worked"
-        Me.tbpHoursWorked.UseVisualStyleBackColor = True
-        '
-        'tbpExpences
-        '
-        Me.tbpExpences.Controls.Add(Me.DataGridView2)
-        Me.tbpExpences.Location = New System.Drawing.Point(4, 22)
-        Me.tbpExpences.Name = "tbpExpences"
-        Me.tbpExpences.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbpExpences.Size = New System.Drawing.Size(812, 263)
-        Me.tbpExpences.TabIndex = 1
-        Me.tbpExpences.Text = "Expences"
-        Me.tbpExpences.UseVisualStyleBackColor = True
-        '
-        'tbpMaterials
-        '
-        Me.tbpMaterials.Controls.Add(Me.DataGridView3)
-        Me.tbpMaterials.Location = New System.Drawing.Point(4, 22)
-        Me.tbpMaterials.Name = "tbpMaterials"
-        Me.tbpMaterials.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbpMaterials.Size = New System.Drawing.Size(779, 243)
-        Me.tbpMaterials.TabIndex = 2
-        Me.tbpMaterials.Text = "Matrials"
-        Me.tbpMaterials.UseVisualStyleBackColor = True
-        '
-        'DataGridView2
-        '
-        Me.DataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DataGridView2.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.DataGridView2.Location = New System.Drawing.Point(3, 3)
-        Me.DataGridView2.Name = "DataGridView2"
-        Me.DataGridView2.Size = New System.Drawing.Size(806, 257)
-        Me.DataGridView2.TabIndex = 0
-        '
-        'DataGridView3
-        '
-        Me.DataGridView3.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DataGridView3.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.DataGridView3.Location = New System.Drawing.Point(3, 3)
-        Me.DataGridView3.Name = "DataGridView3"
-        Me.DataGridView3.Size = New System.Drawing.Size(773, 237)
-        Me.DataGridView3.TabIndex = 0
-        '
-        'TextBox7
-        '
-        Me.TextBox7.Dock = System.Windows.Forms.DockStyle.Top
-        Me.TextBox7.Location = New System.Drawing.Point(0, 0)
-        Me.TextBox7.Name = "TextBox7"
-        Me.TextBox7.ReadOnly = True
-        Me.TextBox7.Size = New System.Drawing.Size(978, 20)
-        Me.TextBox7.TabIndex = 8
-        '
         'Panel3
         '
         Me.Panel3.BackColor = System.Drawing.Color.FromArgb(CType(CType(190, Byte), Integer), CType(CType(190, Byte), Integer), CType(CType(190, Byte), Integer))
@@ -626,57 +597,87 @@ Partial Class ProjectsCosts
         Me.Label16.TabIndex = 17
         Me.Label16.Text = "Total Hours ST"
         '
-        'chbComplete
+        'TextBox7
         '
-        Me.chbComplete.AutoSize = True
-        Me.chbComplete.Location = New System.Drawing.Point(781, 92)
-        Me.chbComplete.Name = "chbComplete"
-        Me.chbComplete.Size = New System.Drawing.Size(70, 17)
-        Me.chbComplete.TabIndex = 28
-        Me.chbComplete.Text = "Complete"
-        Me.chbComplete.UseVisualStyleBackColor = True
+        Me.TextBox7.Dock = System.Windows.Forms.DockStyle.Top
+        Me.TextBox7.Location = New System.Drawing.Point(0, 0)
+        Me.TextBox7.Name = "TextBox7"
+        Me.TextBox7.ReadOnly = True
+        Me.TextBox7.Size = New System.Drawing.Size(978, 20)
+        Me.TextBox7.TabIndex = 8
         '
-        'Panel4
+        'tblHoursWorkedProject
         '
-        Me.Panel4.BackColor = System.Drawing.Color.Firebrick
-        Me.Panel4.Controls.Add(Me.lblWorkOrder)
-        Me.Panel4.Controls.Add(Me.Label24)
-        Me.Panel4.Controls.Add(Me.PictureBox1)
-        Me.Panel4.Dock = System.Windows.Forms.DockStyle.Top
-        Me.Panel4.Location = New System.Drawing.Point(0, 0)
-        Me.Panel4.Name = "Panel4"
-        Me.Panel4.Size = New System.Drawing.Size(978, 59)
-        Me.Panel4.TabIndex = 29
+        Me.tblHoursWorkedProject.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.tblHoursWorkedProject.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.tblHoursWorkedProject.Location = New System.Drawing.Point(3, 3)
+        Me.tblHoursWorkedProject.Name = "tblHoursWorkedProject"
+        Me.tblHoursWorkedProject.RightToLeft = System.Windows.Forms.RightToLeft.No
+        Me.tblHoursWorkedProject.Size = New System.Drawing.Size(773, 237)
+        Me.tblHoursWorkedProject.TabIndex = 2
         '
-        'PictureBox1
+        'TabControl1
         '
-        Me.PictureBox1.Location = New System.Drawing.Point(6, 4)
-        Me.PictureBox1.Name = "PictureBox1"
-        Me.PictureBox1.Size = New System.Drawing.Size(100, 50)
-        Me.PictureBox1.TabIndex = 0
-        Me.PictureBox1.TabStop = False
+        Me.TabControl1.Controls.Add(Me.tbpHoursWorked)
+        Me.TabControl1.Controls.Add(Me.tbpExpences)
+        Me.TabControl1.Controls.Add(Me.tbpMaterials)
+        Me.TabControl1.Location = New System.Drawing.Point(0, 249)
+        Me.TabControl1.Name = "TabControl1"
+        Me.TabControl1.SelectedIndex = 0
+        Me.TabControl1.Size = New System.Drawing.Size(787, 269)
+        Me.TabControl1.TabIndex = 3
         '
-        'Label24
+        'tbpHoursWorked
         '
-        Me.Label24.AutoSize = True
-        Me.Label24.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label24.ForeColor = System.Drawing.Color.White
-        Me.Label24.Location = New System.Drawing.Point(161, 18)
-        Me.Label24.Name = "Label24"
-        Me.Label24.Size = New System.Drawing.Size(54, 25)
-        Me.Label24.TabIndex = 1
-        Me.Label24.Text = "WO:"
+        Me.tbpHoursWorked.Controls.Add(Me.tblHoursWorkedProject)
+        Me.tbpHoursWorked.Location = New System.Drawing.Point(4, 22)
+        Me.tbpHoursWorked.Name = "tbpHoursWorked"
+        Me.tbpHoursWorked.Padding = New System.Windows.Forms.Padding(3)
+        Me.tbpHoursWorked.RightToLeft = System.Windows.Forms.RightToLeft.Yes
+        Me.tbpHoursWorked.Size = New System.Drawing.Size(779, 243)
+        Me.tbpHoursWorked.TabIndex = 0
+        Me.tbpHoursWorked.Text = "Hours Worked"
+        Me.tbpHoursWorked.UseVisualStyleBackColor = True
         '
-        'lblWorkOrder
+        'tbpExpences
         '
-        Me.lblWorkOrder.AutoSize = True
-        Me.lblWorkOrder.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblWorkOrder.ForeColor = System.Drawing.Color.White
-        Me.lblWorkOrder.Location = New System.Drawing.Point(221, 18)
-        Me.lblWorkOrder.Name = "lblWorkOrder"
-        Me.lblWorkOrder.Size = New System.Drawing.Size(142, 25)
-        Me.lblWorkOrder.TabIndex = 2
-        Me.lblWorkOrder.Text = "0000000000"
+        Me.tbpExpences.Controls.Add(Me.tblExpencesProjects)
+        Me.tbpExpences.Location = New System.Drawing.Point(4, 22)
+        Me.tbpExpences.Name = "tbpExpences"
+        Me.tbpExpences.Padding = New System.Windows.Forms.Padding(3)
+        Me.tbpExpences.Size = New System.Drawing.Size(779, 243)
+        Me.tbpExpences.TabIndex = 1
+        Me.tbpExpences.Text = "Expences"
+        Me.tbpExpences.UseVisualStyleBackColor = True
+        '
+        'tblExpencesProjects
+        '
+        Me.tblExpencesProjects.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.tblExpencesProjects.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.tblExpencesProjects.Location = New System.Drawing.Point(3, 3)
+        Me.tblExpencesProjects.Name = "tblExpencesProjects"
+        Me.tblExpencesProjects.Size = New System.Drawing.Size(773, 237)
+        Me.tblExpencesProjects.TabIndex = 0
+        '
+        'tbpMaterials
+        '
+        Me.tbpMaterials.Controls.Add(Me.tblMaterialProjects)
+        Me.tbpMaterials.Location = New System.Drawing.Point(4, 22)
+        Me.tbpMaterials.Name = "tbpMaterials"
+        Me.tbpMaterials.Padding = New System.Windows.Forms.Padding(3)
+        Me.tbpMaterials.Size = New System.Drawing.Size(779, 243)
+        Me.tbpMaterials.TabIndex = 2
+        Me.tbpMaterials.Text = "Matrials"
+        Me.tbpMaterials.UseVisualStyleBackColor = True
+        '
+        'tblMaterialProjects
+        '
+        Me.tblMaterialProjects.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.tblMaterialProjects.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.tblMaterialProjects.Location = New System.Drawing.Point(3, 3)
+        Me.tblMaterialProjects.Name = "tblMaterialProjects"
+        Me.tblMaterialProjects.Size = New System.Drawing.Size(773, 237)
+        Me.tblMaterialProjects.TabIndex = 0
         '
         'Button1
         '
@@ -694,7 +695,7 @@ Partial Class ProjectsCosts
         Me.TextBox1.Size = New System.Drawing.Size(100, 20)
         Me.TextBox1.TabIndex = 32
         '
-        'ProyectsCosts
+        'ProjectsCosts
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
@@ -705,31 +706,30 @@ Partial Class ProjectsCosts
         Me.Controls.Add(Me.TabControl1)
         Me.Controls.Add(Me.Panel2)
         Me.Controls.Add(Me.Panel1)
-        Me.Name = "ProyectsCosts"
+        Me.Name = "ProjectsCosts"
         Me.Text = "ProyectsCosts"
         Me.Panel1.ResumeLayout(False)
         Me.Panel1.PerformLayout()
+        Me.Panel4.ResumeLayout(False)
+        Me.Panel4.PerformLayout()
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.sprHoursEstimate, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.sprTotalBilling, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel2.ResumeLayout(False)
         Me.Panel2.PerformLayout()
-        CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.Panel3.ResumeLayout(False)
+        Me.Panel3.PerformLayout()
+        CType(Me.tblHoursWorkedProject, System.ComponentModel.ISupportInitialize).EndInit()
         Me.TabControl1.ResumeLayout(False)
         Me.tbpHoursWorked.ResumeLayout(False)
         Me.tbpExpences.ResumeLayout(False)
+        CType(Me.tblExpencesProjects, System.ComponentModel.ISupportInitialize).EndInit()
         Me.tbpMaterials.ResumeLayout(False)
-        CType(Me.DataGridView2, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.DataGridView3, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.Panel3.ResumeLayout(False)
-        Me.Panel3.PerformLayout()
-        Me.Panel4.ResumeLayout(False)
-        Me.Panel4.PerformLayout()
-        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.tblMaterialProjects, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
     End Sub
-    Friend WithEvents DataGridView1 As DataGridView
     Friend WithEvents Label14 As Label
     Friend WithEvents Label13 As Label
     Friend WithEvents Label12 As Label
@@ -786,9 +786,10 @@ Partial Class ProjectsCosts
     Friend WithEvents TabControl1 As TabControl
     Friend WithEvents tbpHoursWorked As TabPage
     Friend WithEvents tbpExpences As TabPage
-    Friend WithEvents DataGridView2 As DataGridView
     Friend WithEvents tbpMaterials As TabPage
-    Friend WithEvents DataGridView3 As DataGridView
     Friend WithEvents Button1 As Button
     Friend WithEvents TextBox1 As TextBox
+    Public WithEvents tblHoursWorkedProject As DataGridView
+    Public WithEvents tblExpencesProjects As DataGridView
+    Public WithEvents tblMaterialProjects As DataGridView
 End Class

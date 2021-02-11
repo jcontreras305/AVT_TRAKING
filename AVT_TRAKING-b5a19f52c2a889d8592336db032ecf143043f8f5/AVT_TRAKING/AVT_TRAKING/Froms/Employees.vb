@@ -13,6 +13,8 @@ Public Class Employees
         sprPayRate3.DecimalPlaces = 2
         btnUpdate.Enabled = False
         btnSave.Enabled = True
+        mtd.llenarCmbType(cmbTypeEmployee)
+        cmbTypeEmployee.SelectedIndex = 1
     End Sub
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles btnChooseImage.Click
@@ -168,33 +170,35 @@ Public Class Employees
             Else
                 chbState.Checked = False
             End If
-            If arrayDatos(12) <> "" Or arrayDatos(13) <> "" Or arrayDatos(14) <> "" Then
+            If arrayDatos(13) <> "" Or arrayDatos(14) <> "" Or arrayDatos(15) <> "" Then
                 activarCamposAddress(True)
-                txtStreat.Text = arrayDatos(12)
-                txtNumber.Text = arrayDatos(13)
-                txtCity.Text = arrayDatos(14)
-                txtProvidence.Text = arrayDatos(15)
-                txtPostalCode.Text = arrayDatos(16)
+                txtStreat.Text = arrayDatos(13)
+                txtNumber.Text = arrayDatos(14)
+                txtCity.Text = arrayDatos(15)
+                txtProvidence.Text = arrayDatos(16)
+                txtPostalCode.Text = arrayDatos(17)
             Else
                 activarCamposAddress(False)
             End If
-            If arrayDatos(18) <> "" Then
+            If arrayDatos(19) <> "" Then
                 activarCamposContacto(True)
-                txtPhone1.Text = arrayDatos(18)
-                txtPhone2.Text = arrayDatos(19)
-                txtEmail.Text = arrayDatos(20)
+                txtPhone1.Text = arrayDatos(19)
+                txtPhone2.Text = arrayDatos(20)
+                txtEmail.Text = arrayDatos(21)
             Else
                 activarCamposContacto(False)
             End If
-            If arrayDatos(22) <> "" Or arrayDatos(22) <> "" Or arrayDatos(22) <> "" Then
+            If arrayDatos(23) <> "" Or arrayDatos(24) <> "" Or arrayDatos(25) <> "" Then
                 activarCamposPay(True)
-                sprPayRate1.Value = arrayDatos(22)
-                sprPayRate2.Value = arrayDatos(23)
-                sprPayRate3.Value = arrayDatos(24)
+                sprPayRate1.Value = arrayDatos(23)
+                sprPayRate2.Value = arrayDatos(24)
+                sprPayRate3.Value = arrayDatos(25)
             Else
                 activarCamposPay(False)
             End If
 
+
+            cmbTypeEmployee.SelectedIndex = 1 + cmbTypeEmployee.FindString(arrayDatos(11))
         End If
     End Sub
 
@@ -264,6 +268,8 @@ Public Class Employees
                 dataEmployes(17) = "0,00"
             End If
 
+            dataEmployes(18) = cmbTypeEmployee.Text
+
             Return dataEmployes
         Catch ex As Exception
             Return Nothing
@@ -290,6 +296,7 @@ Public Class Employees
         sprPayRate2.Value = 0
         sprPayRate3.Value = 0
         imgPhoto.ImageLocation = "C:\Users\ASUS\Source\Repos\AVT_TRAKING\AVT_TRAKING\AVT_TRAKING\Images\user.png"
+        'cmbTypeEmployee.SelectedItem = cmbTypeEmployee.FindString(cmbTypeEmployee.Items(0))
         activarCamposAddress(False)
         activarCamposContacto(False)
         activarCamposPay(False)

@@ -21,6 +21,7 @@ Public Class Clients
         MaxID = mtd.IdMasAlto()
         txtIdClient.Text = MaxID
         txtIdClient.Enabled = False
+
     End Sub
     Private Sub BtnSaveClient_Click(sender As Object, e As EventArgs) Handles btnSaveClient.Click
         If txtFirstName.TextLength > 0 Then
@@ -54,10 +55,18 @@ Public Class Clients
                 datosClientes(7) = IdContacto
                 datosClientes(8) = txtPhoneNumber.Text
                 datosClientes(9) = txtPhoneNumber2.Text
-                If validar_Correo(txtEmail.Text) <> True Then
-                    MsgBox("El correo no es valido")
+                If txtEmail.Text <> "" Then
+                    If validar_Correo(txtEmail.Text) <> True Then
+                        If MessageBox.Show("The Email isn't valid, Would you like to save?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = DialogResult.Yes Then
+                            datosClientes(10) = txtEmail.Text
+                        Else
+                            datosClientes(10) = ""
+                        End If
+                    Else
+                        datosClientes(10) = txtEmail.Text
+                    End If
                 Else
-                    datosClientes(10) = txtEmail.Text
+                    datosClientes(10) = ""
                 End If
             Else
                 datosClientes(7) = IdContacto
@@ -190,10 +199,11 @@ Public Class Clients
     Private Sub tblClientes_DoubleClick(sender As Object, e As EventArgs) Handles tblClientes.DoubleClick
         Dim result = MessageBox.Show("Would you like to load the data of this Employee?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
         If result = DialogResult.Yes Then
+            limpiarcampos()
             btnSaveClient.Enabled = False
             btnUpdate.Enabled = True
             obtenerDatosTabla()
-
+            ' datos principales
             txtIdClient.Text = dataClient(1)
             txtFirstName.Text = dataClient(2)
             txtMiddleName.Text = dataClient(3)
@@ -204,28 +214,33 @@ Public Class Clients
             Else
                 chbStatus.Checked = False
             End If
+            'datos de contactos
             If dataClient(9) <> "" Or dataClient(8) <> "" Or dataClient(10) <> "" Then
-                ActivarCamposContacto(True)
-
+                chbContact.Checked = True
+                'ActivarCamposContacto(True)
                 txtPhoneNumber.Text = dataClient(8)
                 txtPhoneNumber2.Text = dataClient(9)
                 txtEmail.Text = dataClient(10)
 
             Else
-                ActivarCamposContacto(False)
+                'ActivarCamposContacto(False)
+                chbContact.Checked = False
             End If
+            'datos de ciudad
             If dataClient(12) <> "" Or dataClient(14) <> "" Then
-                ActivarCamposDrieccion(True)
+                chbAddress.Checked = True
+                'ActivarCamposDrieccion(True)
+
                 txtStreat.Text = dataClient(12)
                 txtNumerStreat.Text = dataClient(13)
                 txtCity.Text = dataClient(14)
                 txtProvince.Text = dataClient(15)
                 txtPC.Text = dataClient(16)
+
             Else
-                ActivarCamposContacto(False)
+                'ActivarCamposContacto(False)
+                chbAddress.Checked = False
             End If
-
-
         End If
 
     End Sub
@@ -275,4 +290,24 @@ Public Class Clients
         Return Regex.IsMatch(mail, "^[a-zA-Z][\w\.-]*[a-zA-Z0-9]@[a-zA-Z0-9][\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]{2,4}$") '"^[_a-zA-B0-9]+(\._a-zA-B0-9+)*@[a-zA-B0-9-]+(\.[a-zA-B0-9-]+)*(\.[a-z]{2,4})$")
     End Function
 
+    Private Sub btnSelectClient_Click(sender As Object, e As EventArgs) Handles btnSelectClient.Click
+        If tblClientes.CurrentRow Is Nothing Then
+            MsgBox("Please select a row.")
+        Else
+            obtenerDatosTabla()
+            Dim pc As ProjectsClients = CType(Owner, ProjectsClients)
+            pc.datosClientesPO.Clear()
+            pc.datosClientesPO.Add(dataClient(0))
+            pc.datosClientesPO.Add(dataClient(2))
+            pc.datosClientesPO.Add(dataClient(5))
+            pc.datosClientesPO.Add(dataClient(12))
+            pc.datosClientesPO.Add(dataClient(14))
+            pc.datosClientesPO.Add(dataClient(15))
+            pc.datosClientesPO.Add(dataClient(16))
+            pc.datosClientesPO.Add(dataClient(8))
+            mtd.buscarProyectosDeCliente(pc.tblProjectClients, IdCliente)
+            pc.idCliente = IdCliente
+            Me.Close()
+        End If
+    End Sub
 End Class

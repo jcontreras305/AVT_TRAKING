@@ -80,6 +80,7 @@ Public Class Materials
             dataMaterial(1) = txtNumeroMaterial.Text
             dataMaterial(2) = listIdVendors(cmbVendedor.FindString(cmbVendedor.Text))
             dataMaterial(3) = If(chbEnableMaterial.Checked, "E", "D")
+
             mtdMaterial.insertarMaterial(dataMaterial)
         Catch ex As Exception
             MsgBox("Something went wrong, check the data and try again")
@@ -463,7 +464,7 @@ Public Class Materials
         Try
             Dim ApExcel = New Microsoft.Office.Interop.Excel.Application
             Dim libro = ApExcel.Workbooks.Add
-            Dim colums() As String = {"id", "name", "resorseMaterial", "unitMeasurement", "description", "type", "price", "size", "idVendor"}
+            Dim colums() As String = {"id", "name", "resorseMaterial", "unitMeasurement", "description", "type", "price", "size", "idVendor", "Part #"}
             For i As Int64 = 0 To colums.Length - 1
                 libro.Sheets(1).cells(1, i + 1) = colums(i)
             Next
@@ -516,6 +517,7 @@ Public Class Materials
                 listNewDatos.Add(Hoja.Cells(i, 7).Text)
                 listNewDatos.Add(Hoja.Cells(i, 8).Text)
                 listNewDatos.Add(Hoja.Cells(i, 9).Text)
+                listNewDatos.Add(Hoja.Cells(i, 10).Text)
                 If CInt(dato(0)) > maxnum Then
                     mtdMaterial.insertarMaterial(dato, listNewDatos, False, validar)
                     If validar = False Then
