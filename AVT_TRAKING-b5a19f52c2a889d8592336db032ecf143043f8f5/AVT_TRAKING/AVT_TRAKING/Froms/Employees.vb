@@ -198,7 +198,7 @@ Public Class Employees
             End If
 
 
-            cmbTypeEmployee.SelectedIndex = 1 + cmbTypeEmployee.FindString(arrayDatos(11))
+            cmbTypeEmployee.SelectedIndex = cmbTypeEmployee.FindString(arrayDatos(11))
         End If
     End Sub
 

@@ -24,12 +24,13 @@ Partial Class MainFrom
     Private Sub InitializeComponent()
         Me.Button2 = New System.Windows.Forms.Button()
         Me.Panel1 = New System.Windows.Forms.Panel()
-        Me.pnlImage = New System.Windows.Forms.Panel()
         Me.Panel2 = New System.Windows.Forms.Panel()
-        Me.btnWorkCodes = New System.Windows.Forms.Button()
-        Me.btnEmployees = New System.Windows.Forms.Button()
-        Me.btnClients = New System.Windows.Forms.Button()
+        Me.tbnoOthers = New System.Windows.Forms.Button()
         Me.btnMaterials = New System.Windows.Forms.Button()
+        Me.btnWorkCodes = New System.Windows.Forms.Button()
+        Me.btnClients = New System.Windows.Forms.Button()
+        Me.btnEmployees = New System.Windows.Forms.Button()
+        Me.pnlImage = New System.Windows.Forms.Panel()
         Me.Panel1.SuspendLayout()
         Me.Panel2.SuspendLayout()
         Me.SuspendLayout()
@@ -56,18 +57,10 @@ Partial Class MainFrom
         Me.Panel1.Size = New System.Drawing.Size(201, 479)
         Me.Panel1.TabIndex = 5
         '
-        'pnlImage
-        '
-        Me.pnlImage.BackColor = System.Drawing.Color.Firebrick
-        Me.pnlImage.Dock = System.Windows.Forms.DockStyle.Top
-        Me.pnlImage.Location = New System.Drawing.Point(0, 0)
-        Me.pnlImage.Name = "pnlImage"
-        Me.pnlImage.Size = New System.Drawing.Size(201, 93)
-        Me.pnlImage.TabIndex = 4
-        '
         'Panel2
         '
         Me.Panel2.BackColor = System.Drawing.Color.Firebrick
+        Me.Panel2.Controls.Add(Me.tbnoOthers)
         Me.Panel2.Controls.Add(Me.btnMaterials)
         Me.Panel2.Controls.Add(Me.btnWorkCodes)
         Me.Panel2.Controls.Add(Me.btnClients)
@@ -77,6 +70,32 @@ Partial Class MainFrom
         Me.Panel2.Name = "Panel2"
         Me.Panel2.Size = New System.Drawing.Size(201, 386)
         Me.Panel2.TabIndex = 6
+        '
+        'tbnoOthers
+        '
+        Me.tbnoOthers.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.tbnoOthers.Dock = System.Windows.Forms.DockStyle.Top
+        Me.tbnoOthers.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.tbnoOthers.Location = New System.Drawing.Point(0, 140)
+        Me.tbnoOthers.Margin = New System.Windows.Forms.Padding(2)
+        Me.tbnoOthers.Name = "tbnoOthers"
+        Me.tbnoOthers.Size = New System.Drawing.Size(201, 35)
+        Me.tbnoOthers.TabIndex = 4
+        Me.tbnoOthers.Text = "Others"
+        Me.tbnoOthers.UseVisualStyleBackColor = True
+        '
+        'btnMaterials
+        '
+        Me.btnMaterials.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.btnMaterials.Dock = System.Windows.Forms.DockStyle.Top
+        Me.btnMaterials.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnMaterials.Location = New System.Drawing.Point(0, 105)
+        Me.btnMaterials.Margin = New System.Windows.Forms.Padding(2)
+        Me.btnMaterials.Name = "btnMaterials"
+        Me.btnMaterials.Size = New System.Drawing.Size(201, 35)
+        Me.btnMaterials.TabIndex = 0
+        Me.btnMaterials.Text = "Materials"
+        Me.btnMaterials.UseVisualStyleBackColor = True
         '
         'btnWorkCodes
         '
@@ -91,19 +110,6 @@ Partial Class MainFrom
         Me.btnWorkCodes.Text = "Work Codes"
         Me.btnWorkCodes.UseVisualStyleBackColor = True
         '
-        'btnEmployees
-        '
-        Me.btnEmployees.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.btnEmployees.Dock = System.Windows.Forms.DockStyle.Top
-        Me.btnEmployees.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnEmployees.Location = New System.Drawing.Point(0, 0)
-        Me.btnEmployees.Margin = New System.Windows.Forms.Padding(2)
-        Me.btnEmployees.Name = "btnEmployees"
-        Me.btnEmployees.Size = New System.Drawing.Size(201, 35)
-        Me.btnEmployees.TabIndex = 2
-        Me.btnEmployees.Text = "Employees"
-        Me.btnEmployees.UseVisualStyleBackColor = True
-        '
         'btnClients
         '
         Me.btnClients.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
@@ -117,18 +123,27 @@ Partial Class MainFrom
         Me.btnClients.Text = "Clients"
         Me.btnClients.UseVisualStyleBackColor = True
         '
-        'btnMaterials
+        'btnEmployees
         '
-        Me.btnMaterials.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.btnMaterials.Dock = System.Windows.Forms.DockStyle.Top
-        Me.btnMaterials.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnMaterials.Location = New System.Drawing.Point(0, 105)
-        Me.btnMaterials.Margin = New System.Windows.Forms.Padding(2)
-        Me.btnMaterials.Name = "btnMaterials"
-        Me.btnMaterials.Size = New System.Drawing.Size(201, 35)
-        Me.btnMaterials.TabIndex = 0
-        Me.btnMaterials.Text = "Materials"
-        Me.btnMaterials.UseVisualStyleBackColor = True
+        Me.btnEmployees.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.btnEmployees.Dock = System.Windows.Forms.DockStyle.Top
+        Me.btnEmployees.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnEmployees.Location = New System.Drawing.Point(0, 0)
+        Me.btnEmployees.Margin = New System.Windows.Forms.Padding(2)
+        Me.btnEmployees.Name = "btnEmployees"
+        Me.btnEmployees.Size = New System.Drawing.Size(201, 35)
+        Me.btnEmployees.TabIndex = 2
+        Me.btnEmployees.Text = "Employees"
+        Me.btnEmployees.UseVisualStyleBackColor = True
+        '
+        'pnlImage
+        '
+        Me.pnlImage.BackColor = System.Drawing.Color.Firebrick
+        Me.pnlImage.Dock = System.Windows.Forms.DockStyle.Top
+        Me.pnlImage.Location = New System.Drawing.Point(0, 0)
+        Me.pnlImage.Name = "pnlImage"
+        Me.pnlImage.Size = New System.Drawing.Size(201, 93)
+        Me.pnlImage.TabIndex = 4
         '
         'MainFrom
         '
@@ -153,4 +168,5 @@ Partial Class MainFrom
     Friend WithEvents btnClients As Button
     Friend WithEvents btnEmployees As Button
     Friend WithEvents pnlImage As Panel
+    Friend WithEvents tbnoOthers As Button
 End Class

@@ -812,6 +812,79 @@ end
 
 GO
 
+--EJECUTAR ESTE POR ESO NO ACTUALIZA EMPLEADOS 
+CREATE proc sp_update_Employee
+	@idEmployee varchar(36),
+	@idAddress varchar(36),
+	@idContact varchar(36),
+	@idPay varchar(36),
+	--general
+	@numberEmploye int, 
+	@firstName varchar(30),
+	@lastName varchar(25),
+	@middleName varchar(25),
+	@socialNumber varchar(14),
+	@SAPNumber int,
+	@photo image,
+	@estatus char(1),
+	--contact
+	
+	@phoneNumber1 varchar(13),
+	@phoneNumber2 varchar(13),
+	@email varchar(50),
+	--address
+	@avenue varchar(80),
+	@number int,
+	@city varchar(20), 
+	@providence varchar(20),
+	@postalCode int,
+	--pay
+	@payRate1 float,
+	@payRate2 float, 
+	@payRate3 float,
+	--type 
+	@type varchar(20),
+	@msg varchar(50) output
+as 
+declare @error int  -- declaro variables para los ID que son nuevos y una variable de error
+begin
+	begin tran --inicio tran
+		begin try --inicio try
+			--if @avenue <> '' begin -- solo se necesita saber si la calle tiene algo 
+				set @msg = 'Error at moment to save Address data'
+				update HomeAddress set avenue = @avenue ,number =@number ,city =@city ,providence =@providence ,postalcode = @postalCode where idHomeAdress = @idAddress
+				if @@ERROR <> 0 begin set @error = @@ERROR goto solveproblem end 
+				
+				set @msg = 'Error at moment to save Contact data'
+				update contact set phoneNumber1 =@phoneNumber1 , phoneNumber2 =@phoneNumber2 , email = @email where idContact = @idContact
+				if @@ERROR <> 0 begin set @error = @@ERROR goto solveproblem end 
+
+
+			--end
+			--if @payRate1 <> '' begin
+				set @msg = 'Error at moment to save Pay Rate data'
+				update payRate set payRate1 = @payRate1,payRate2= @payRate2 , payRate3 = @payRate3 where idPayRate = @idPay
+				if @@ERROR <> 0 begin set @error = @@ERROR goto solveproblem end 
+			--end
+			--if @firstName <> '' or @numberEmploye > 0 begin
+				set @msg = 'Error at moment to save Employee data'	
+				update employees set  numberEmploye = @numberEmploye ,firstName = @firstName , lastName = @lastName ,middleName = @middleName,socialNumber = @socialNumber ,SAPNumber = @SAPNumber,photo = @photo , estatus = @estatus,typeEmployee = @type where idEmployee = @idEmployee
+				if @@ERROR <> 0 begin set @error = @@ERROR goto solveproblem end 
+			--end
+			set @msg = 'Succesfull'
+		end try	
+		begin catch
+			goto solveproblem -- en caso de error capturado en el catch no vamos a solveproblem y evitamos en commit
+		end catch
+	commit tran 
+	solveproblem:
+	if @error <> 0
+	begin 
+		rollback tran -- el rollback es para deshacer todos lo cambios hechos anteriormente
+		return @msg
+	end
+end
+GO
 
 
 

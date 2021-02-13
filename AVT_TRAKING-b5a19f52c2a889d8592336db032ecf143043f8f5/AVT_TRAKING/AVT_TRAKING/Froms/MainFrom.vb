@@ -31,4 +31,8 @@
 
     End Sub
 
+    Private Sub tbnoOthers_Click(sender As Object, e As EventArgs) Handles tbnoOthers.Click
+        Dim a As New Others
+        a.Show()
+    End Sub
 End Class

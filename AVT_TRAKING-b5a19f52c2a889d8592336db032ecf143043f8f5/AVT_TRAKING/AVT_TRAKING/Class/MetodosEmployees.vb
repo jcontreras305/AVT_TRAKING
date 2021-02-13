@@ -177,6 +177,7 @@ pr.payRate1 , pr.payRate2,pr.payRate3,typeEmployee " + consultaInner +
             cmd.Parameters.Add("@payRate1", SqlDbType.Float).Value = datosNuevos(15)
             cmd.Parameters.Add("@payRate2", SqlDbType.Float).Value = datosNuevos(16)
             cmd.Parameters.Add("@payRate3", SqlDbType.Float).Value = datosNuevos(17)
+            cmd.Parameters.Add("@type", SqlDbType.VarChar, 20).Value = datosNuevos(18)
             cmd.Parameters.Add("@msg", SqlDbType.VarChar, 50).Direction = ParameterDirection.Output
             If cmd.ExecuteNonQuery Then
                 Dim resultado As String = cmd.Parameters("@msg").Value

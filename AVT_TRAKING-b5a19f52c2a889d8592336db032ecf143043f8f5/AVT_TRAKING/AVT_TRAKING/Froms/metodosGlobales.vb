@@ -40,4 +40,16 @@
             Return Nothing
         End Try
     End Function
+
+    Public Function soloNumero(ByVal numerotext As String) As Boolean
+        Dim flag As Boolean = False
+        Dim array() As Char = numerotext.ToCharArray()
+        For Each letra As Char In array
+            If Char.IsDigit(letra) Then
+                flag = True
+            End If
+        Next
+        Return flag
+    End Function
+
 End Module
