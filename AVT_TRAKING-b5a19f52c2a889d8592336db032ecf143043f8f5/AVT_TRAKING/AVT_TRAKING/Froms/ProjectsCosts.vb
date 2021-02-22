@@ -20,7 +20,7 @@
         txtWokOrder.Text = WorkOrder
         mtdJobs.llenarComboJob(cmbJobNumber, idCliente)
         'aqui se consulta y se cargan los datos en la interfaz
-        tablasDeTareas = mtdJobs.consultaWO(JobNumber)
+        mtdJobs.consultaWO(JobNumber, tablasDeTareas)
         cargarDatosProjecto(JobNumber)
         txtClientName.Enabled = False
     End Sub
@@ -32,7 +32,7 @@
         mtdJobs.buscarMaterialesPorProyecto(tblMaterialProjects, WorkOrder, task)
         lblWorkOrder.Text = WorkOrder + " " + task
         If flag Then
-            tablasDeTareas = mtdJobs.consultaWO(jobNum)
+            mtdJobs.consultaWO(jobNum, tablasDeTareas)
         End If
         Return flag
     End Function
@@ -44,7 +44,7 @@
         mtdJobs.buscarMaterialesPorProyecto(tblMaterialProjects, WO, tk)
         lblWorkOrder.Text = WorkOrder + " " + task
         If flag Then
-            tablasDeTareas = mtdJobs.consultaWO(jobNum)
+            mtdJobs.consultaWO(jobNum, tablasDeTareas)
         End If
         Return flag
     End Function
@@ -54,8 +54,10 @@
             Dim contRow As Integer = tablasDeTareas.Rows.Count
             Dim index As Integer = 0
             For Each row As DataRow In tablasDeTareas.Rows
-                If row.ItemArray(3) = task Then
+                If row.ItemArray(3) <> task Then
                     index = index + 1
+                Else
+                    Exit For
                 End If
             Next
             If index = contRow Then
@@ -63,7 +65,7 @@
                 cargarDatosProjecto(tablasDeTareas.Rows(index).Item(0), tablasDeTareas.Rows(index).Item(2), tablasDeTareas.Rows(index).Item(3))
             Else
                 index += 1
-                cargarDatosProjecto(tablasDeTareas.Rows(index).Item(0), tablasDeTareas.Rows(index).Item(2), tablasDeTareas.Rows(index).Item(3))
+                cargarDatosProjecto(tablasDeTareas.Rows(index).ItemArray(0), tablasDeTareas.Rows(index).ItemArray(2), tablasDeTareas.Rows(index).ItemArray(3))
             End If
         End If
     End Sub

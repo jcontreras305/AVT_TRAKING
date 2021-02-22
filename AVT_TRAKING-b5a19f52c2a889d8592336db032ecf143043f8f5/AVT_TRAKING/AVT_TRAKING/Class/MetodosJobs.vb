@@ -323,11 +323,10 @@ where cl.idClient like '" + If(idclient = "", "%", idclient) + "'", conn)
         End Try
     End Sub
 
-    Public Function consultaWO(ByVal jobNumber As String) As DataTable
+    Public Sub consultaWO(ByVal jobNumber As String, ByVal tabla As DataTable)
         Try
-            Dim tabla As New DataTable
             conectar()
-            Dim cmd As New SqlCommand("select 
+            Dim cmd1 As New SqlCommand("select 
 jb.jobNo,
 po.idPO,
 tk.idWO, 
@@ -336,20 +335,18 @@ from job as jb
 inner join projectOrder as po on po.jobNo = jb.jobNo
 inner join workOrder as wo on wo.idPO = po.idPO 
 inner join task as tk on tk.idWO = wo.idWO
-where jb.jobNo = " + jobNumber, conn)
-            If cmd.ExecuteNonQuery() > 0 Then
-                Dim da As New SqlDataAdapter(cmd)
+where jb.jobNo = " + If(jobNumber = "", "0", jobNumber), conn)
+            If cmd1.ExecuteNonQuery Then
+                Dim da As New SqlDataAdapter(cmd1)
                 da.Fill(tabla)
                 desconectar()
-                Return tabla
             Else
                 desconectar()
-                Return Nothing
             End If
         Catch ex As Exception
-            Return Nothing
+            MsgBox(ex.Message())
         End Try
-    End Function
+    End Sub
 
     '================================================================================================================================================
     '===============================  METODOS PARA ACTUALIZAR INMEDITATAMENTE AL PERDER EL FOCO =====================================================
