@@ -1,4 +1,6 @@
 ﻿Imports System.Data.SqlClient
+Imports System.Collections.ArrayList
+
 
 Public Class MetodosEmployees
     Inherits ConnectioDB
@@ -216,4 +218,25 @@ pr.payRate1 , pr.payRate2,pr.payRate3,typeEmployee " + consultaInner +
         End Try
     End Sub
 
+
+    Public Function llenarCmbEmpleadosManager(ByVal cmbEmployeManager As ComboBox) As List(Of String)
+        Try
+            conectar()
+            Dim cmd As New SqlCommand("select idEmployee, CONCAT (firstName,' ',lastName )as name from employees where typeEmployee = 'Manager'", conn)
+            Dim reader As SqlDataReader = cmd.ExecuteReader()
+            Dim lst As New List(Of String)
+            While reader.Read()
+                cmbEmployeManager.Items.Add(reader("name"))
+                lst.Add(reader("idEmployee"))
+            End While
+            If cmbEmployeManager.Items.Count > 0 Then
+                Return lst
+            Else
+                Return Nothing
+            End If
+            desconectar()
+        Catch ex As Exception
+            Return Nothing
+        End Try
+    End Function
 End Class

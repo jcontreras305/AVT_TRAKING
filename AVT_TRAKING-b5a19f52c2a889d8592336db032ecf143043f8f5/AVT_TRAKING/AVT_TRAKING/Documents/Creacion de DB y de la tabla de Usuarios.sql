@@ -6,6 +6,7 @@ GO
 
 use VRT_TRAKING
 GO
+
 --##########################################################################################
 --##################  TABLA DE MATERIAL USERS ############################################
 --##########################################################################################
@@ -179,8 +180,7 @@ create  table expensesUsed(
 	amount float not null,
 	description varchar(100) null,
 	idExpense varchar(36),
-	idWorkOrder varchar(14),
-	idEmployee varchar(36)
+	idTask varchar(5) 
 )
 GO
 
@@ -210,7 +210,7 @@ create table hoursWorked (
 	dateWorked date,
 	idEmployee varchar(36),
 	idWorkCode int,
-	idWO varchar(14)
+	idTask varchar(5)
 )
 GO
 
@@ -264,7 +264,7 @@ create table materialUsed (
 	quantity float,
 	amount float,
 	description varchar(200),
-	idWO varchar(14),
+	idTask varchar(5),
 	idMaterial varchar(36)
 )
 GO
@@ -282,7 +282,7 @@ create table payRate(
 GO
 
 --##########################################################################################
---##################  TABLA DE MATERIAL PAYRATE ############################################
+--##################  TABLA DE PROYECT ORDER ###############################################
 --##########################################################################################
 
 create table projectOrder(
@@ -315,6 +315,18 @@ create table vendor (
 GO
 
 --##########################################################################################
+--##################  TABLA DE MATERIAL TASK ###############################################
+--##########################################################################################
+
+create table task (
+	idTask varchar(5) primary key not null,
+	idWO varchar(14),
+	totalSpend float
+)
+GO
+
+
+--##########################################################################################
 --##################  TABLA DE MATERIAL WORKCODE ##########################################
 --##########################################################################################
 
@@ -336,8 +348,7 @@ GO
 
 create table workOrder(
 	idWo varchar(14) primary key not null,
-	idPO bigint not null,
-	totalSpend float null
+	idPO bigint not null
 )
 GO
 
@@ -396,16 +407,12 @@ GO
 --##################  FOREIG KEYS EXPENSES USED ############################################
 --##########################################################################################
 
-ALTER TABLE    expensesUsed   WITH CHECK ADD  CONSTRAINT  fk_idEmployee_expensesUsed  FOREIGN KEY( idEmployee )
-REFERENCES    employees  ( idEmployee )
-GO
-
 ALTER TABLE    expensesUsed   WITH CHECK ADD  CONSTRAINT  fk_idExpence_EU  FOREIGN KEY( idExpense )
 REFERENCES    expenses  ( idExpenses )
 GO
 
-ALTER TABLE    expensesUsed   WITH CHECK ADD  CONSTRAINT  fk_idWorkOrder_EU  FOREIGN KEY( idWorkOrder )
-REFERENCES    workOrder  ( idWO )
+ALTER TABLE    expensesUsed   WITH CHECK ADD  CONSTRAINT  fk_idTask_EU  FOREIGN KEY( idTask )
+REFERENCES    task  ( idTask )
 GO
 
 --##########################################################################################
@@ -416,12 +423,12 @@ ALTER TABLE    hoursWorked   WITH CHECK ADD  CONSTRAINT  fk_idEmployee_hoursWork
 REFERENCES    employees  ( idEmployee )
 GO
 
-ALTER TABLE    hoursWorked   WITH CHECK ADD  CONSTRAINT  fk_idWO_hoursWorked  FOREIGN KEY( idWO )
-REFERENCES    workOrder  ( idWO )
+ALTER TABLE    hoursWorked   WITH CHECK ADD  CONSTRAINT  fk_idWC_WorkCode  FOREIGN KEY( idWorkCode )
+REFERENCES    workCode  ( idWorkCode )
 GO
 
-ALTER TABLE    hoursWorked   WITH CHECK ADD  CONSTRAINT  fk_idWorkCode_hoursWorked  FOREIGN KEY( idWorkCode )
-REFERENCES    workCode  ( idWorkCode )
+ALTER TABLE    hoursWorked   WITH CHECK ADD  CONSTRAINT  fk_idTask_hoursWork FOREIGN KEY ( idTask )
+REFERENCES    task  ( idTask )
 GO
 
 --##########################################################################################
@@ -448,8 +455,8 @@ ALTER TABLE    materialUsed   WITH CHECK ADD  CONSTRAINT  fk_idMaterial_material
 REFERENCES    material  ( idMaterial )
 GO
 
-ALTER TABLE    materialUsed   WITH CHECK ADD  CONSTRAINT  fk_idWO_materialUsed  FOREIGN KEY( idWO )
-REFERENCES    workOrder  ( idWO )
+ALTER TABLE    materialUsed   WITH CHECK ADD  CONSTRAINT  fk_idTask_materialUsed  FOREIGN KEY( idTask )
+REFERENCES    task  ( idTask )
 GO
 
 --##########################################################################################
@@ -459,6 +466,15 @@ GO
 ALTER TABLE    projectOrder   WITH CHECK ADD  CONSTRAINT  fk_jobNo_PO  FOREIGN KEY( jobNo )
 REFERENCES    job  ( jobNo )
 GO
+
+--##########################################################################################
+--##################  FOREIG KEYS TASK #####################################################
+--##########################################################################################
+
+ALTER TABLE    task   WITH CHECK ADD  CONSTRAINT  fk_idWO_task  FOREIGN KEY( idWO )
+REFERENCES    workOrder ( idWO )
+GO
+
 
 --##########################################################################################
 --##################  FOREIG KEYS WORKORDER ################################################
@@ -812,79 +828,89 @@ end
 
 GO
 
---EJECUTAR ESTE POR ESO NO ACTUALIZA EMPLEADOS 
-CREATE proc sp_update_Employee
-	@idEmployee varchar(36),
-	@idAddress varchar(36),
-	@idContact varchar(36),
-	@idPay varchar(36),
-	--general
-	@numberEmploye int, 
-	@firstName varchar(30),
-	@lastName varchar(25),
-	@middleName varchar(25),
-	@socialNumber varchar(14),
-	@SAPNumber int,
-	@photo image,
-	@estatus char(1),
-	--contact
-	
-	@phoneNumber1 varchar(13),
-	@phoneNumber2 varchar(13),
-	@email varchar(50),
-	--address
-	@avenue varchar(80),
-	@number int,
-	@city varchar(20), 
-	@providence varchar(20),
-	@postalCode int,
-	--pay
-	@payRate1 float,
-	@payRate2 float, 
-	@payRate3 float,
-	--type 
-	@type varchar(20),
-	@msg varchar(50) output
-as 
-declare @error int  -- declaro variables para los ID que son nuevos y una variable de error
+create proc sp_UpdateTotalSpendTask
+ @idTask varchar(5)
+as
+declare @total as float
+declare @horasST as float
+declare @horasOT as float
+declare @horasO3 as float
+declare @expenses as float
+declare @material as float
 begin
-	begin tran --inicio tran
-		begin try --inicio try
-			--if @avenue <> '' begin -- solo se necesita saber si la calle tiene algo 
-				set @msg = 'Error at moment to save Address data'
-				update HomeAddress set avenue = @avenue ,number =@number ,city =@city ,providence =@providence ,postalcode = @postalCode where idHomeAdress = @idAddress
-				if @@ERROR <> 0 begin set @error = @@ERROR goto solveproblem end 
-				
-				set @msg = 'Error at moment to save Contact data'
-				update contact set phoneNumber1 =@phoneNumber1 , phoneNumber2 =@phoneNumber2 , email = @email where idContact = @idContact
-				if @@ERROR <> 0 begin set @error = @@ERROR goto solveproblem end 
 
+	--Total de gastos de horas St
+	set @horasST = 		
+		(select top 1 
+		(select SUM(T2.Amount) as 'Total Amount ST' from 
+		(select SUM(T1.hoursST*T1.billingRate1) AS 'Amount'
+		from (select idHorsWorked,hoursST, hw.idWorkCode , billingRate1  from hoursWorked as hw inner join workCode as wc on wc.idWorkCode = hw.idWorkCode 
+		where idTask=tk.idTask)as T1    
+		group by T1.idWorkCode) as T2
+		) as 'ST'
+	from 
+	task as tk 
+	where tk.idTask = @idTask
+	)
+	--Total de gastos de horas OT
+	set @horasOT =		
+		(select top 1 
+		(select SUM(T2.Amount) as 'Total Amount OT' from 
+		(select SUM(T1.hoursOT*T1.billingRateOT) AS 'Amount'
+		from (select idHorsWorked,hoursOT, hw.idWorkCode , billingRateOT  from hoursWorked as hw inner join workCode as wc on wc.idWorkCode = hw.idWorkCode 
+		where idTask=tk.idTask)as T1    
+		group by T1.idWorkCode) as T2
+		) as 'OT'
+	from
+	task as tk
+	where tk.idTask = @idTask
+	)
+	--Total gastos horas 3
+	set @horasO3 =
+		(select top 1 
+		(select SUM(T2.Amount) as 'Total Amount OT' from 
+		(select SUM(T1.hours3*T1.billingRate3) AS 'Amount'
+		from (select idHorsWorked,hours3, hw.idWorkCode , billingRate3  from hoursWorked as hw inner join workCode as wc on wc.idWorkCode = hw.idWorkCode 
+		where idTask=tk.idTask)as T1    
+		group by T1.idWorkCode) as T2
+		) as 'OT3'
+	from 
+	task AS tk 
+	where tk.idTask = @idTask
+	)
 
-			--end
-			--if @payRate1 <> '' begin
-				set @msg = 'Error at moment to save Pay Rate data'
-				update payRate set payRate1 = @payRate1,payRate2= @payRate2 , payRate3 = @payRate3 where idPayRate = @idPay
-				if @@ERROR <> 0 begin set @error = @@ERROR goto solveproblem end 
-			--end
-			--if @firstName <> '' or @numberEmploye > 0 begin
-				set @msg = 'Error at moment to save Employee data'	
-				update employees set  numberEmploye = @numberEmploye ,firstName = @firstName , lastName = @lastName ,middleName = @middleName,socialNumber = @socialNumber ,SAPNumber = @SAPNumber,photo = @photo , estatus = @estatus,typeEmployee = @type where idEmployee = @idEmployee
-				if @@ERROR <> 0 begin set @error = @@ERROR goto solveproblem end 
-			--end
-			set @msg = 'Succesfull'
-		end try	
-		begin catch
-			goto solveproblem -- en caso de error capturado en el catch no vamos a solveproblem y evitamos en commit
-		end catch
-	commit tran 
-	solveproblem:
-	if @error <> 0
+	--'Total Expenses Spend'
+	set @expenses = (select top 1 (select SUM( amount) from expensesUsed where idTask = @idTask))
+
+	--Total Material Spend
+	set @material = (select top 1 (select sum (amount) from materialUsed where idTask = @idTask))
+	
+	if (@horasST IS Null) 
 	begin 
-		rollback tran -- el rollback es para deshacer todos lo cambios hechos anteriormente
-		return @msg
+		set @horasST =0.0
 	end
+	if (@horasOT IS NUll)
+	begin 
+		set @horasOT =0.0
+	end
+	if (@horasO3  IS NULL)
+	begin 
+		set @horasO3 =0.0
+	end
+	if (@expenses IS NULL)
+	begin 
+		set	@expenses=0.0 
+	end
+	if (@material IS NULL)
+	begin 
+		set	@material =0.0
+	end
+
+	set @total = @horasST + @horasOT + @horasO3 + @expenses + @material
+
+	update task set totalSpend = @total where idTask = @idTask
 end
-GO
+go
 
 
 
@@ -894,3 +920,5 @@ GO
 
 ----use master
 ----drop database VRT_TRAKING
+
+

@@ -23,6 +23,13 @@ Partial Class ProjectsCosts
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.Label10 = New System.Windows.Forms.Label()
+        Me.TextBox1 = New System.Windows.Forms.TextBox()
+        Me.btnNextTask = New System.Windows.Forms.Button()
+        Me.Button1 = New System.Windows.Forms.Button()
+        Me.btnAfterTask = New System.Windows.Forms.Button()
+        Me.btnAddRecord = New System.Windows.Forms.Button()
+        Me.txtTask = New System.Windows.Forms.TextBox()
         Me.Panel4 = New System.Windows.Forms.Panel()
         Me.lblWorkOrder = New System.Windows.Forms.Label()
         Me.Label24 = New System.Windows.Forms.Label()
@@ -31,7 +38,7 @@ Partial Class ProjectsCosts
         Me.lblPorcentLeft = New System.Windows.Forms.Label()
         Me.txtAcountNo = New System.Windows.Forms.TextBox()
         Me.sprHoursEstimate = New System.Windows.Forms.NumericUpDown()
-        Me.DateTimePicker2 = New System.Windows.Forms.DateTimePicker()
+        Me.dtpEndDate = New System.Windows.Forms.DateTimePicker()
         Me.dtpBeginDate = New System.Windows.Forms.DateTimePicker()
         Me.sprTotalBilling = New System.Windows.Forms.NumericUpDown()
         Me.txtProjectDescription = New System.Windows.Forms.TextBox()
@@ -46,7 +53,7 @@ Partial Class ProjectsCosts
         Me.Label13 = New System.Windows.Forms.Label()
         Me.Label12 = New System.Windows.Forms.Label()
         Me.Label11 = New System.Windows.Forms.Label()
-        Me.dtpEndDate = New System.Windows.Forms.Label()
+        Me.labelEndDate = New System.Windows.Forms.Label()
         Me.Label9 = New System.Windows.Forms.Label()
         Me.Label8 = New System.Windows.Forms.Label()
         Me.Label7 = New System.Windows.Forms.Label()
@@ -82,8 +89,6 @@ Partial Class ProjectsCosts
         Me.tblExpencesProjects = New System.Windows.Forms.DataGridView()
         Me.tbpMaterials = New System.Windows.Forms.TabPage()
         Me.tblMaterialProjects = New System.Windows.Forms.DataGridView()
-        Me.Button1 = New System.Windows.Forms.Button()
-        Me.TextBox1 = New System.Windows.Forms.TextBox()
         Me.Panel1.SuspendLayout()
         Me.Panel4.SuspendLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -103,12 +108,19 @@ Partial Class ProjectsCosts
         'Panel1
         '
         Me.Panel1.BackColor = System.Drawing.Color.FromArgb(CType(CType(190, Byte), Integer), CType(CType(190, Byte), Integer), CType(CType(190, Byte), Integer))
+        Me.Panel1.Controls.Add(Me.Label10)
+        Me.Panel1.Controls.Add(Me.TextBox1)
+        Me.Panel1.Controls.Add(Me.btnNextTask)
+        Me.Panel1.Controls.Add(Me.Button1)
+        Me.Panel1.Controls.Add(Me.btnAfterTask)
+        Me.Panel1.Controls.Add(Me.btnAddRecord)
+        Me.Panel1.Controls.Add(Me.txtTask)
         Me.Panel1.Controls.Add(Me.Panel4)
         Me.Panel1.Controls.Add(Me.chbComplete)
         Me.Panel1.Controls.Add(Me.lblPorcentLeft)
         Me.Panel1.Controls.Add(Me.txtAcountNo)
         Me.Panel1.Controls.Add(Me.sprHoursEstimate)
-        Me.Panel1.Controls.Add(Me.DateTimePicker2)
+        Me.Panel1.Controls.Add(Me.dtpEndDate)
         Me.Panel1.Controls.Add(Me.dtpBeginDate)
         Me.Panel1.Controls.Add(Me.sprTotalBilling)
         Me.Panel1.Controls.Add(Me.txtProjectDescription)
@@ -123,7 +135,7 @@ Partial Class ProjectsCosts
         Me.Panel1.Controls.Add(Me.Label13)
         Me.Panel1.Controls.Add(Me.Label12)
         Me.Panel1.Controls.Add(Me.Label11)
-        Me.Panel1.Controls.Add(Me.dtpEndDate)
+        Me.Panel1.Controls.Add(Me.labelEndDate)
         Me.Panel1.Controls.Add(Me.Label9)
         Me.Panel1.Controls.Add(Me.Label8)
         Me.Panel1.Controls.Add(Me.Label7)
@@ -136,8 +148,67 @@ Partial Class ProjectsCosts
         Me.Panel1.Dock = System.Windows.Forms.DockStyle.Top
         Me.Panel1.Location = New System.Drawing.Point(0, 0)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(978, 249)
+        Me.Panel1.Size = New System.Drawing.Size(1107, 249)
         Me.Panel1.TabIndex = 0
+        '
+        'Label10
+        '
+        Me.Label10.AutoSize = True
+        Me.Label10.Location = New System.Drawing.Point(185, 129)
+        Me.Label10.Name = "Label10"
+        Me.Label10.Size = New System.Drawing.Size(31, 13)
+        Me.Label10.TabIndex = 34
+        Me.Label10.Text = "Task"
+        '
+        'TextBox1
+        '
+        Me.TextBox1.Location = New System.Drawing.Point(918, 200)
+        Me.TextBox1.Name = "TextBox1"
+        Me.TextBox1.Size = New System.Drawing.Size(100, 20)
+        Me.TextBox1.TabIndex = 32
+        '
+        'btnNextTask
+        '
+        Me.btnNextTask.Location = New System.Drawing.Point(1004, 86)
+        Me.btnNextTask.Name = "btnNextTask"
+        Me.btnNextTask.Size = New System.Drawing.Size(75, 23)
+        Me.btnNextTask.TabIndex = 33
+        Me.btnNextTask.Text = "Next"
+        Me.btnNextTask.UseVisualStyleBackColor = True
+        '
+        'Button1
+        '
+        Me.Button1.Location = New System.Drawing.Point(1035, 197)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(35, 23)
+        Me.Button1.TabIndex = 31
+        Me.Button1.Text = "Find"
+        Me.Button1.UseVisualStyleBackColor = True
+        '
+        'btnAfterTask
+        '
+        Me.btnAfterTask.Location = New System.Drawing.Point(910, 86)
+        Me.btnAfterTask.Name = "btnAfterTask"
+        Me.btnAfterTask.Size = New System.Drawing.Size(75, 23)
+        Me.btnAfterTask.TabIndex = 32
+        Me.btnAfterTask.Text = "After"
+        Me.btnAfterTask.UseVisualStyleBackColor = True
+        '
+        'btnAddRecord
+        '
+        Me.btnAddRecord.Location = New System.Drawing.Point(781, 197)
+        Me.btnAddRecord.Name = "btnAddRecord"
+        Me.btnAddRecord.Size = New System.Drawing.Size(75, 23)
+        Me.btnAddRecord.TabIndex = 31
+        Me.btnAddRecord.Text = "Add Record"
+        Me.btnAddRecord.UseVisualStyleBackColor = True
+        '
+        'txtTask
+        '
+        Me.txtTask.Location = New System.Drawing.Point(218, 125)
+        Me.txtTask.Name = "txtTask"
+        Me.txtTask.Size = New System.Drawing.Size(43, 20)
+        Me.txtTask.TabIndex = 30
         '
         'Panel4
         '
@@ -148,7 +219,7 @@ Partial Class ProjectsCosts
         Me.Panel4.Dock = System.Windows.Forms.DockStyle.Top
         Me.Panel4.Location = New System.Drawing.Point(0, 0)
         Me.Panel4.Name = "Panel4"
-        Me.Panel4.Size = New System.Drawing.Size(978, 59)
+        Me.Panel4.Size = New System.Drawing.Size(1107, 59)
         Me.Panel4.TabIndex = 29
         '
         'lblWorkOrder
@@ -216,16 +287,18 @@ Partial Class ProjectsCosts
         Me.sprHoursEstimate.Size = New System.Drawing.Size(131, 20)
         Me.sprHoursEstimate.TabIndex = 25
         '
-        'DateTimePicker2
+        'dtpEndDate
         '
-        Me.DateTimePicker2.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
-        Me.DateTimePicker2.Location = New System.Drawing.Point(370, 178)
-        Me.DateTimePicker2.Name = "DateTimePicker2"
-        Me.DateTimePicker2.Size = New System.Drawing.Size(130, 20)
-        Me.DateTimePicker2.TabIndex = 24
+        Me.dtpEndDate.CustomFormat = "YYYY-MM-DD"
+        Me.dtpEndDate.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
+        Me.dtpEndDate.Location = New System.Drawing.Point(370, 178)
+        Me.dtpEndDate.Name = "dtpEndDate"
+        Me.dtpEndDate.Size = New System.Drawing.Size(130, 20)
+        Me.dtpEndDate.TabIndex = 24
         '
         'dtpBeginDate
         '
+        Me.dtpBeginDate.CustomFormat = "YYYY-MM-DD"
         Me.dtpBeginDate.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
         Me.dtpBeginDate.Location = New System.Drawing.Point(369, 151)
         Me.dtpBeginDate.Name = "dtpBeginDate"
@@ -251,28 +324,28 @@ Partial Class ProjectsCosts
         '
         Me.txtClientPO.Location = New System.Drawing.Point(100, 204)
         Me.txtClientPO.Name = "txtClientPO"
-        Me.txtClientPO.Size = New System.Drawing.Size(144, 20)
+        Me.txtClientPO.Size = New System.Drawing.Size(161, 20)
         Me.txtClientPO.TabIndex = 20
         '
         'txtEquipament
         '
         Me.txtEquipament.Location = New System.Drawing.Point(100, 151)
         Me.txtEquipament.Name = "txtEquipament"
-        Me.txtEquipament.Size = New System.Drawing.Size(144, 20)
+        Me.txtEquipament.Size = New System.Drawing.Size(161, 20)
         Me.txtEquipament.TabIndex = 19
         '
         'txtWokOrder
         '
         Me.txtWokOrder.Location = New System.Drawing.Point(100, 126)
         Me.txtWokOrder.Name = "txtWokOrder"
-        Me.txtWokOrder.Size = New System.Drawing.Size(144, 20)
+        Me.txtWokOrder.Size = New System.Drawing.Size(84, 20)
         Me.txtWokOrder.TabIndex = 18
         '
         'txtClientName
         '
         Me.txtClientName.Location = New System.Drawing.Point(100, 101)
         Me.txtClientName.Name = "txtClientName"
-        Me.txtClientName.Size = New System.Drawing.Size(144, 20)
+        Me.txtClientName.Size = New System.Drawing.Size(161, 20)
         Me.txtClientName.TabIndex = 17
         '
         'cmbExpCode
@@ -289,7 +362,7 @@ Partial Class ProjectsCosts
         Me.cmbProjectManager.FormattingEnabled = True
         Me.cmbProjectManager.Location = New System.Drawing.Point(100, 177)
         Me.cmbProjectManager.Name = "cmbProjectManager"
-        Me.cmbProjectManager.Size = New System.Drawing.Size(144, 21)
+        Me.cmbProjectManager.Size = New System.Drawing.Size(161, 21)
         Me.cmbProjectManager.TabIndex = 15
         '
         'cmbJobNumber
@@ -297,7 +370,7 @@ Partial Class ProjectsCosts
         Me.cmbJobNumber.FormattingEnabled = True
         Me.cmbJobNumber.Location = New System.Drawing.Point(100, 73)
         Me.cmbJobNumber.Name = "cmbJobNumber"
-        Me.cmbJobNumber.Size = New System.Drawing.Size(144, 21)
+        Me.cmbJobNumber.Size = New System.Drawing.Size(161, 21)
         Me.cmbJobNumber.TabIndex = 14
         '
         'Label14
@@ -336,14 +409,14 @@ Partial Class ProjectsCosts
         Me.Label11.TabIndex = 10
         Me.Label11.Text = "Hours Estimate "
         '
-        'dtpEndDate
+        'labelEndDate
         '
-        Me.dtpEndDate.AutoSize = True
-        Me.dtpEndDate.Location = New System.Drawing.Point(267, 180)
-        Me.dtpEndDate.Name = "dtpEndDate"
-        Me.dtpEndDate.Size = New System.Drawing.Size(88, 13)
-        Me.dtpEndDate.TabIndex = 9
-        Me.dtpEndDate.Text = "Project End Date"
+        Me.labelEndDate.AutoSize = True
+        Me.labelEndDate.Location = New System.Drawing.Point(267, 180)
+        Me.labelEndDate.Name = "labelEndDate"
+        Me.labelEndDate.Size = New System.Drawing.Size(88, 13)
+        Me.labelEndDate.TabIndex = 9
+        Me.labelEndDate.Text = "Project End Date"
         '
         'Label9
         '
@@ -433,7 +506,7 @@ Partial Class ProjectsCosts
         Me.Panel2.Dock = System.Windows.Forms.DockStyle.Bottom
         Me.Panel2.Location = New System.Drawing.Point(0, 518)
         Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(978, 100)
+        Me.Panel2.Size = New System.Drawing.Size(1107, 100)
         Me.Panel2.TabIndex = 1
         '
         'Panel3
@@ -458,7 +531,7 @@ Partial Class ProjectsCosts
         Me.Panel3.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel3.Location = New System.Drawing.Point(0, 20)
         Me.Panel3.Name = "Panel3"
-        Me.Panel3.Size = New System.Drawing.Size(978, 80)
+        Me.Panel3.Size = New System.Drawing.Size(1107, 80)
         Me.Panel3.TabIndex = 9
         '
         'TextBox15
@@ -603,7 +676,7 @@ Partial Class ProjectsCosts
         Me.TextBox7.Location = New System.Drawing.Point(0, 0)
         Me.TextBox7.Name = "TextBox7"
         Me.TextBox7.ReadOnly = True
-        Me.TextBox7.Size = New System.Drawing.Size(978, 20)
+        Me.TextBox7.Size = New System.Drawing.Size(1107, 20)
         Me.TextBox7.TabIndex = 8
         '
         'tblHoursWorkedProject
@@ -613,7 +686,7 @@ Partial Class ProjectsCosts
         Me.tblHoursWorkedProject.Location = New System.Drawing.Point(3, 3)
         Me.tblHoursWorkedProject.Name = "tblHoursWorkedProject"
         Me.tblHoursWorkedProject.RightToLeft = System.Windows.Forms.RightToLeft.No
-        Me.tblHoursWorkedProject.Size = New System.Drawing.Size(773, 237)
+        Me.tblHoursWorkedProject.Size = New System.Drawing.Size(935, 237)
         Me.tblHoursWorkedProject.TabIndex = 2
         '
         'TabControl1
@@ -624,7 +697,7 @@ Partial Class ProjectsCosts
         Me.TabControl1.Location = New System.Drawing.Point(0, 249)
         Me.TabControl1.Name = "TabControl1"
         Me.TabControl1.SelectedIndex = 0
-        Me.TabControl1.Size = New System.Drawing.Size(787, 269)
+        Me.TabControl1.Size = New System.Drawing.Size(949, 269)
         Me.TabControl1.TabIndex = 3
         '
         'tbpHoursWorked
@@ -634,7 +707,7 @@ Partial Class ProjectsCosts
         Me.tbpHoursWorked.Name = "tbpHoursWorked"
         Me.tbpHoursWorked.Padding = New System.Windows.Forms.Padding(3)
         Me.tbpHoursWorked.RightToLeft = System.Windows.Forms.RightToLeft.Yes
-        Me.tbpHoursWorked.Size = New System.Drawing.Size(779, 243)
+        Me.tbpHoursWorked.Size = New System.Drawing.Size(941, 243)
         Me.tbpHoursWorked.TabIndex = 0
         Me.tbpHoursWorked.Text = "Hours Worked"
         Me.tbpHoursWorked.UseVisualStyleBackColor = True
@@ -645,7 +718,7 @@ Partial Class ProjectsCosts
         Me.tbpExpences.Location = New System.Drawing.Point(4, 22)
         Me.tbpExpences.Name = "tbpExpences"
         Me.tbpExpences.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbpExpences.Size = New System.Drawing.Size(779, 243)
+        Me.tbpExpences.Size = New System.Drawing.Size(941, 243)
         Me.tbpExpences.TabIndex = 1
         Me.tbpExpences.Text = "Expences"
         Me.tbpExpences.UseVisualStyleBackColor = True
@@ -656,7 +729,7 @@ Partial Class ProjectsCosts
         Me.tblExpencesProjects.Dock = System.Windows.Forms.DockStyle.Fill
         Me.tblExpencesProjects.Location = New System.Drawing.Point(3, 3)
         Me.tblExpencesProjects.Name = "tblExpencesProjects"
-        Me.tblExpencesProjects.Size = New System.Drawing.Size(773, 237)
+        Me.tblExpencesProjects.Size = New System.Drawing.Size(935, 237)
         Me.tblExpencesProjects.TabIndex = 0
         '
         'tbpMaterials
@@ -665,7 +738,7 @@ Partial Class ProjectsCosts
         Me.tbpMaterials.Location = New System.Drawing.Point(4, 22)
         Me.tbpMaterials.Name = "tbpMaterials"
         Me.tbpMaterials.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbpMaterials.Size = New System.Drawing.Size(779, 243)
+        Me.tbpMaterials.Size = New System.Drawing.Size(941, 243)
         Me.tbpMaterials.TabIndex = 2
         Me.tbpMaterials.Text = "Matrials"
         Me.tbpMaterials.UseVisualStyleBackColor = True
@@ -676,33 +749,15 @@ Partial Class ProjectsCosts
         Me.tblMaterialProjects.Dock = System.Windows.Forms.DockStyle.Fill
         Me.tblMaterialProjects.Location = New System.Drawing.Point(3, 3)
         Me.tblMaterialProjects.Name = "tblMaterialProjects"
-        Me.tblMaterialProjects.Size = New System.Drawing.Size(773, 237)
+        Me.tblMaterialProjects.Size = New System.Drawing.Size(935, 237)
         Me.tblMaterialProjects.TabIndex = 0
-        '
-        'Button1
-        '
-        Me.Button1.Location = New System.Drawing.Point(931, 274)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(35, 23)
-        Me.Button1.TabIndex = 31
-        Me.Button1.Text = "Find"
-        Me.Button1.UseVisualStyleBackColor = True
-        '
-        'TextBox1
-        '
-        Me.TextBox1.Location = New System.Drawing.Point(814, 277)
-        Me.TextBox1.Name = "TextBox1"
-        Me.TextBox1.Size = New System.Drawing.Size(100, 20)
-        Me.TextBox1.TabIndex = 32
         '
         'ProjectsCosts
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
-        Me.ClientSize = New System.Drawing.Size(978, 618)
-        Me.Controls.Add(Me.TextBox1)
-        Me.Controls.Add(Me.Button1)
+        Me.ClientSize = New System.Drawing.Size(1107, 618)
         Me.Controls.Add(Me.TabControl1)
         Me.Controls.Add(Me.Panel2)
         Me.Controls.Add(Me.Panel1)
@@ -727,14 +782,13 @@ Partial Class ProjectsCosts
         Me.tbpMaterials.ResumeLayout(False)
         CType(Me.tblMaterialProjects, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
-        Me.PerformLayout()
 
     End Sub
     Friend WithEvents Label14 As Label
     Friend WithEvents Label13 As Label
     Friend WithEvents Label12 As Label
     Friend WithEvents Label11 As Label
-    Friend WithEvents dtpEndDate As Label
+    Friend WithEvents labelEndDate As Label
     Friend WithEvents Label9 As Label
     Friend WithEvents Label8 As Label
     Friend WithEvents Label7 As Label
@@ -744,25 +798,11 @@ Partial Class ProjectsCosts
     Friend WithEvents Label3 As Label
     Friend WithEvents Label2 As Label
     Friend WithEvents Label1 As Label
-    Friend WithEvents txtAcountNo As TextBox
-    Friend WithEvents sprHoursEstimate As NumericUpDown
-    Friend WithEvents DateTimePicker2 As DateTimePicker
-    Friend WithEvents dtpBeginDate As DateTimePicker
-    Friend WithEvents sprTotalBilling As NumericUpDown
-    Friend WithEvents txtProjectDescription As TextBox
-    Friend WithEvents txtClientPO As TextBox
-    Friend WithEvents txtEquipament As TextBox
-    Friend WithEvents txtWokOrder As TextBox
-    Friend WithEvents txtClientName As TextBox
-    Friend WithEvents cmbExpCode As ComboBox
-    Friend WithEvents cmbProjectManager As ComboBox
-    Friend WithEvents cmbJobNumber As ComboBox
     Friend WithEvents Panel1 As Panel
     Friend WithEvents Panel4 As Panel
     Friend WithEvents lblWorkOrder As Label
     Friend WithEvents Label24 As Label
     Friend WithEvents PictureBox1 As PictureBox
-    Friend WithEvents chbComplete As CheckBox
     Friend WithEvents lblPorcentLeft As Label
     Friend WithEvents Panel2 As Panel
     Friend WithEvents Panel3 As Panel
@@ -792,4 +832,23 @@ Partial Class ProjectsCosts
     Public WithEvents tblHoursWorkedProject As DataGridView
     Public WithEvents tblExpencesProjects As DataGridView
     Public WithEvents tblMaterialProjects As DataGridView
+    Public WithEvents txtAcountNo As TextBox
+    Public WithEvents sprHoursEstimate As NumericUpDown
+    Public WithEvents dtpEndDate As DateTimePicker
+    Public WithEvents dtpBeginDate As DateTimePicker
+    Public WithEvents sprTotalBilling As NumericUpDown
+    Public WithEvents txtProjectDescription As TextBox
+    Public WithEvents txtClientPO As TextBox
+    Public WithEvents txtEquipament As TextBox
+    Public WithEvents txtWokOrder As TextBox
+    Public WithEvents txtClientName As TextBox
+    Public WithEvents cmbExpCode As ComboBox
+    Public WithEvents cmbProjectManager As ComboBox
+    Public WithEvents cmbJobNumber As ComboBox
+    Public WithEvents chbComplete As CheckBox
+    Friend WithEvents Label10 As Label
+    Friend WithEvents btnNextTask As Button
+    Friend WithEvents btnAfterTask As Button
+    Friend WithEvents btnAddRecord As Button
+    Public WithEvents txtTask As TextBox
 End Class

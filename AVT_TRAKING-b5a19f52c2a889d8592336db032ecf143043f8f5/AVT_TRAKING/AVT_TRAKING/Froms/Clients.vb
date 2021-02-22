@@ -298,7 +298,7 @@ Public Class Clients
             Dim pc As ProjectsClients = CType(Owner, ProjectsClients)
             pc.datosClientesPO.Clear()
             pc.datosClientesPO.Add(dataClient(0))
-            pc.datosClientesPO.Add(dataClient(2))
+            pc.datosClientesPO.Add(dataClient(2) + " " + dataClient(3) + " " + dataClient(4))
             pc.datosClientesPO.Add(dataClient(5))
             pc.datosClientesPO.Add(dataClient(12))
             pc.datosClientesPO.Add(dataClient(14))

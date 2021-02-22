@@ -3,6 +3,24 @@
 Public Class MetodosOthers
     Inherits ConnectioDB
 
+    Public Function llenarCbmTypeEmployes(ByVal cmbTypeEmployes As ComboBox) As Boolean
+        Try
+            conectar()
+            Dim cmd As New SqlCommand("Select name from typeEmployee", conn)
+            Dim reader As SqlDataReader = cmd.ExecuteReader
+            Dim flag As Boolean = False
+            While reader.Read()
+                flag = True
+                cmbTypeEmployes.Items.Add(reader("name"))
+            End While
+            desconectar()
+            Return flag
+        Catch ex As Exception
+            MsgBox(ex.Message)
+            Return False
+        End Try
+    End Function
+
     Public Function llenarListTyposEmployees(ByVal list As ListBox) As List(Of String)
         Try
             conectar()
@@ -76,6 +94,28 @@ Public Class MetodosOthers
     '=================================================================================================================
     '=================================================================================================================
     '=================================================================================================================
+
+    Public Function llenarCmbExpCodes(ByVal cmbExpCodes As ComboBox) As Boolean
+        Try
+            cmbExpCodes.Items.Clear()
+            conectar()
+            Dim cmd As New SqlCommand("select idExpCode, name from expCode", conn)
+            Dim reader As SqlDataReader = cmd.ExecuteReader()
+            Dim dato As String = ""
+            While reader.Read()
+                dato = reader("idExpCode").ToString + " " + reader("name")
+                cmbExpCodes.Items.Add(dato)
+            End While
+            If cmbExpCodes.Items.Count > 0 Then
+                Return True
+            Else
+                Return False
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message)
+            Return False
+        End Try
+    End Function
 
     Public Function llenarListExpCodes(ByVal list As ListView) As List(Of String)
         Try
@@ -165,6 +205,26 @@ Public Class MetodosOthers
     '=================================================================================================================
     '=================================================================================================================
 
+    Public Function llenarCmbWokTMLump(ByVal cmbWorkTMLump As ComboBox) As Boolean
+        Try
+            cmbWorkTMLump.Items.Clear()
+            conectar()
+            Dim cmd As New SqlCommand("select name from workTMLumpSum", conn)
+            Dim reader As SqlDataReader = cmd.ExecuteReader
+            While reader.Read()
+                cmbWorkTMLump.Items.Add(reader("name"))
+            End While
+            If cmbWorkTMLump.Items.Count > 0 Then
+                Return True
+            Else
+                Return False
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message)
+            Return False
+        End Try
+    End Function
+
     Public Function llenarListWorkTMLump(ByVal list As ListView) As List(Of String)
         Try
             conectar()
@@ -249,6 +309,26 @@ Public Class MetodosOthers
     '=================================================================================================================
     '=================================================================================================================
     '=================================================================================================================
+
+    Public Function llenarCmbCostDistribution(ByVal cmbCostDistribution As ComboBox) As Boolean
+        Try
+            cmbCostDistribution.Items.Clear()
+            conectar()
+            Dim cmd As New SqlCommand("select idCostdistribution  from costDistribution", conn)
+            Dim reader As SqlDataReader = cmd.ExecuteReader
+            While reader.Read()
+                cmbCostDistribution.Items.Add(reader("idCostdistribution "))
+            End While
+            If cmbCostDistribution.Items.Count > 0 Then
+                Return True
+            Else
+                Return False
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message)
+            Return False
+        End Try
+    End Function
 
     Public Function llenarCostDistrinbution(ByVal list As ListView) As List(Of String)
         Try
@@ -336,6 +416,27 @@ Public Class MetodosOthers
     '=================================================================================================================
     '=================================================================================================================
     '=================================================================================================================
+
+    Public Function llenarCmbCostCode(ByVal cmbCostCodeas As ComboBox) As Boolean
+        Try
+            conectar()
+            Dim cmd As New SqlCommand("select idCostCode from costCode", conn)
+            Dim reader As SqlDataReader = cmd.ExecuteReader()
+            While reader.Read()
+                cmbCostCodeas.Items.Add(reader("idCostCode"))
+            End While
+            If cmbCostCodeas.Items.Count > 0 Then
+                Return True
+            Else
+                Return False
+            End If
+            desconectar()
+        Catch ex As Exception
+            MsgBox(ex.Message)
+            Return False
+        End Try
+    End Function
+
 
     Public Function llenarCostCode(ByVal list As ListView) As List(Of String)
         Try

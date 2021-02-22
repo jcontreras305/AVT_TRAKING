@@ -167,11 +167,13 @@ ha.idHomeAdress, ha.avenue ,ha.number, ha.city ,ha.providence,ha.postalCode from
                 Dim dt As New DataTable
                 da.Fill(dt)
                 tabla.DataSource = dt
-                Dim clmChb As New DataGridViewCheckBoxColumn
-                tabla.Columns("idClient").Visible = False
-                clmChb.Name = "Complete"
-                tabla.Columns.Add(clmChb)
-                tabla.Columns("Complete").DisplayIndex = 3
+                If tabla.Columns.Count <= 19 Then
+                    Dim clmChb As New DataGridViewCheckBoxColumn
+                    tabla.Columns("idClient").Visible = False
+                    clmChb.Name = "Complete"
+                    tabla.Columns.Add(clmChb)
+                    tabla.Columns("Complete").DisplayIndex = 3
+                End If
                 tabla.Columns("Cmp").Visible = False
                 tabla.Columns("jobNo").Visible = False
                 tabla.Columns("workTMLumpSum").Visible = False
@@ -179,46 +181,54 @@ ha.idHomeAdress, ha.avenue ,ha.number, ha.city ,ha.providence,ha.postalCode from
                 tabla.Columns("custumerNo").Visible = False
                 tabla.Columns("contractNo").Visible = False
                 tabla.Columns("costCode").Visible = False
+                tabla.Columns("idTask").Visible = False
             End If
         Catch ex As Exception
             MsgBox(ex.Message())
         End Try
     End Sub
 
-    Dim consultaProyetosClientes As String = "select 
-	wo.idWO as 'Work Order' , po.description as 'Project Description', wo.totalSpend as 'Total Spend',po.status as 'Cmp',
-	(select SUM(hoursST) from hoursWorked as hw where hw.idWO = wo.idWO)as 'Total Hours ST',
+    Dim consultaProyetosClientes As String = "
+select 
+	(select CONCAT(wo.idWO,' ',tk.idTask)) as 'Work Order' , 
+	po.description as 'Project Description', 
+	po.status as 'Cmp',
+	(select tk.totalSpend from task where idWO = wo.idWO and idTask = tk.idTask ) as 'Total Spend',
+	(select SUM(hoursST) from hoursWorked as hw where hw.idTask = tk.idTask)as 'Total Hours ST',
 	(
 	select SUM(T2.Amount) as 'Total Amount ST' from 
 	(select SUM(T1.hoursST*T1.billingRate1) AS 'Amount'
 	from (select idHorsWorked,hoursST, hw.idWorkCode , billingRate1  from hoursWorked as hw inner join workCode as wc on wc.idWorkCode = hw.idWorkCode 
-	where idWO=wo.idWo)as T1 
+	where idTask=tk.idTask)as T1    
 	group by T1.idWorkCode) as T2
 	) as 'Total Amount ST',
 
-	(select SUM(hoursOT) from hoursWorked as hw where hw.idWO = wo.idWO)as 'Total Hours OT',
+	(select SUM(hoursOT) from hoursWorked as hw where hw.idTask = tk.idTask)as 'Total Hours OT',
 
 	(select SUM(T2.Amount) from 
 	(select SUM(T1.hoursOT*T1.billingRateOT) AS 'Amount'
 	from (select idHorsWorked,hoursOT, hw.idWorkCode , billingRateOT  from hoursWorked as hw inner join workCode as wc on wc.idWorkCode = hw.idWorkCode 
-	where idWO=wo.idWo)as T1 
+	where idTask=tk.idTask)as T1 
 	group by T1.idWorkCode) as T2
 	) as 'Total Amount OT',
 
-	(select SUM( amount) from expensesUsed where idWorkOrder = wo.idWo) AS 'Total Expenses Spend', 
+	(select SUM( amount) from expensesUsed where idTask = tk.idTask) AS 'Total Expenses Spend', 
 
-	(select sum (amount) from materialUsed where idWO=wo.idWo) as 'Total Material Spend',
+	(select sum (amount) from materialUsed where idTask = tk.idTask) as 'Total Material Spend',
     jb.jobNo,
    	jb.workTMLumpSum,
 	jb.costDistribution,
 	jb.custumerNo,
 	jb.contractNo,
 	jb.costCode,
-    cln.idClient
+    cln.idClient,
+    po.idPO,
+    tk.idTask
 from
 clients as cln left join job as jb on jb.idClient = cln.idClient
 inner join projectOrder as po on po.jobNo = jb.jobNo
 left join workOrder as wo on wo.idPO = po.idPO
+left join task as tk on tk.idWO = wo.idWO
 where"
 
     Public Sub buscarProyectosDeClientePorProyeto(ByVal tabla As DataGridView, ByVal consulta As String)
@@ -239,12 +249,12 @@ cln.lastName Like '" + consulta + "'", conn)
                 Dim dt As New DataTable
                 da.Fill(dt)
                 tabla.DataSource = dt
-
-
-                Dim clmChb As New DataGridViewCheckBoxColumn
-                clmChb.Name = "Complete"
-                tabla.Columns.Add(clmChb)
-                tabla.Columns("Complete").DisplayIndex = 3
+                If tabla.Columns.Count <= 19 Then
+                    Dim clmChb As New DataGridViewCheckBoxColumn
+                    clmChb.Name = "Complete"
+                    tabla.Columns.Add(clmChb)
+                    tabla.Columns("Complete").DisplayIndex = 3
+                End If
                 tabla.Columns("idClient").Visible = False
                 tabla.Columns("Cmp").Visible = False
                 tabla.Columns("jobNo").Visible = False
@@ -253,6 +263,7 @@ cln.lastName Like '" + consulta + "'", conn)
                 tabla.Columns("custumerNo").Visible = False
                 tabla.Columns("contractNo").Visible = False
                 tabla.Columns("costCode").Visible = False
+                tabla.Columns("idPO").Visible = False
             End If
         Catch ex As Exception
             MsgBox(ex.Message())
@@ -284,4 +295,79 @@ ha.idHomeAdress, ha.avenue ,ha.number, ha.city ,ha.providence,ha.postalCode from
         End Try
     End Sub
 
+
+    Public Function actualizarAddres(ByVal Address As String, ByVal idClient As String) As Boolean
+        Try
+            conectar()
+            Dim cmd As New SqlCommand("update HomeAddress set avenue = '" + Address + "' where idHomeAdress =(select idHomeAddress from clients where idClient = '" + idClient + "')", conn)
+            If cmd.ExecuteNonQuery Then
+                Return True
+            Else
+                Return False
+            End If
+            desconectar()
+        Catch ex As Exception
+            Return False
+        End Try
+    End Function
+
+    Public Function actualizarCity(ByVal City As String, ByVal idClient As String) As Boolean
+        Try
+            conectar()
+            Dim cmd As New SqlCommand("update HomeAddress set city = '" + City + "' where idHomeAdress =(select idHomeAddress from clients where idClient = '" + idClient + "')", conn)
+            If cmd.ExecuteNonQuery Then
+                Return True
+            Else
+                Return False
+            End If
+            desconectar()
+        Catch ex As Exception
+            Return False
+        End Try
+    End Function
+
+    Public Function actualizarProvidence(ByVal Providence As String, ByVal idClient As String) As Boolean
+        Try
+            conectar()
+            Dim cmd As New SqlCommand("update HomeAddress set providence = '" + Providence + "' where idHomeAdress =(select idHomeAddress from clients where idClient = '" + idClient + "')", conn)
+            If cmd.ExecuteNonQuery Then
+                Return True
+            Else
+                Return False
+            End If
+            desconectar()
+        Catch ex As Exception
+            Return False
+        End Try
+    End Function
+
+    Public Function actualizarPostalCode(ByVal PostalCode As String, ByVal idClient As String) As Boolean
+        Try
+            conectar()
+            Dim cmd As New SqlCommand("update HomeAddress set postalCode = '" + PostalCode + "' where idHomeAdress =(select idHomeAddress from clients where idClient = '" + idClient + "')", conn)
+            If cmd.ExecuteNonQuery Then
+                Return True
+            Else
+                Return False
+            End If
+            desconectar()
+        Catch ex As Exception
+            Return False
+        End Try
+    End Function
+
+    Public Function actualizarPhoneNumber(ByVal PhoneNumber As String, ByVal idClient As String) As Boolean
+        Try
+            conectar()
+            Dim cmd As New SqlCommand("update contact set phoneNumber1 = '" + PhoneNumber + "' where idContact =(select idContact from clients where idClient = '" + idClient + "')", conn)
+            If cmd.ExecuteNonQuery Then
+                Return True
+            Else
+                Return False
+            End If
+            desconectar()
+        Catch ex As Exception
+            Return False
+        End Try
+    End Function
 End Class

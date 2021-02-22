@@ -37,7 +37,7 @@ Partial Class ProjectsClients
         Me.Panel2 = New System.Windows.Forms.Panel()
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.Panel3 = New System.Windows.Forms.Panel()
-        Me.btnSave = New System.Windows.Forms.Button()
+        Me.btnAdd = New System.Windows.Forms.Button()
         Me.btnFindClintProyects = New System.Windows.Forms.Button()
         Me.txtFindClientProyects = New System.Windows.Forms.TextBox()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
@@ -242,7 +242,7 @@ Partial Class ProjectsClients
         'Panel3
         '
         Me.Panel3.BackColor = System.Drawing.Color.Firebrick
-        Me.Panel3.Controls.Add(Me.btnSave)
+        Me.Panel3.Controls.Add(Me.btnAdd)
         Me.Panel3.Controls.Add(Me.btnFindClintProyects)
         Me.Panel3.Controls.Add(Me.txtFindClientProyects)
         Me.Panel3.Controls.Add(Me.GroupBox1)
@@ -259,14 +259,14 @@ Partial Class ProjectsClients
         Me.Panel3.Size = New System.Drawing.Size(1000, 174)
         Me.Panel3.TabIndex = 5
         '
-        'btnSave
+        'btnAdd
         '
-        Me.btnSave.Location = New System.Drawing.Point(17, 136)
-        Me.btnSave.Name = "btnSave"
-        Me.btnSave.Size = New System.Drawing.Size(75, 23)
-        Me.btnSave.TabIndex = 17
-        Me.btnSave.Text = "Save"
-        Me.btnSave.UseVisualStyleBackColor = True
+        Me.btnAdd.Location = New System.Drawing.Point(6, 135)
+        Me.btnAdd.Name = "btnAdd"
+        Me.btnAdd.Size = New System.Drawing.Size(75, 27)
+        Me.btnAdd.TabIndex = 17
+        Me.btnAdd.Text = "Add"
+        Me.btnAdd.UseVisualStyleBackColor = True
         '
         'btnFindClintProyects
         '
@@ -333,8 +333,7 @@ Partial Class ProjectsClients
         '
         'txtPhoneNumber
         '
-        Me.txtPhoneNumber.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.txtPhoneNumber.Location = New System.Drawing.Point(394, 43)
+        Me.txtPhoneNumber.Location = New System.Drawing.Point(105, 132)
         Me.txtPhoneNumber.Name = "txtPhoneNumber"
         Me.txtPhoneNumber.Size = New System.Drawing.Size(124, 20)
         Me.txtPhoneNumber.TabIndex = 20
@@ -368,11 +367,12 @@ Partial Class ProjectsClients
         '
         'cmbWorkTMLumoSum
         '
+        Me.cmbWorkTMLumoSum.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.cmbWorkTMLumoSum.FormattingEnabled = True
         Me.cmbWorkTMLumoSum.Items.AddRange(New Object() {"Lump-Sum", "T&M", "Unire Rate"})
-        Me.cmbWorkTMLumoSum.Location = New System.Drawing.Point(105, 131)
+        Me.cmbWorkTMLumoSum.Location = New System.Drawing.Point(392, 43)
         Me.cmbWorkTMLumoSum.Name = "cmbWorkTMLumoSum"
-        Me.cmbWorkTMLumoSum.Size = New System.Drawing.Size(121, 21)
+        Me.cmbWorkTMLumoSum.Size = New System.Drawing.Size(123, 21)
         Me.cmbWorkTMLumoSum.TabIndex = 16
         '
         'txtPC
@@ -440,9 +440,9 @@ Partial Class ProjectsClients
         '
         'Label13
         '
-        Me.Label13.Anchor = System.Windows.Forms.AnchorStyles.Top
+        Me.Label13.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.Label13.AutoSize = True
-        Me.Label13.Location = New System.Drawing.Point(297, 47)
+        Me.Label13.Location = New System.Drawing.Point(8, 136)
         Me.Label13.Name = "Label13"
         Me.Label13.Size = New System.Drawing.Size(78, 13)
         Me.Label13.TabIndex = 7
@@ -461,8 +461,9 @@ Partial Class ProjectsClients
         '
         'Label10
         '
+        Me.Label10.Anchor = System.Windows.Forms.AnchorStyles.Top
         Me.Label10.AutoSize = True
-        Me.Label10.Location = New System.Drawing.Point(2, 134)
+        Me.Label10.Location = New System.Drawing.Point(280, 46)
         Me.Label10.Name = "Label10"
         Me.Label10.Size = New System.Drawing.Size(105, 13)
         Me.Label10.TabIndex = 4
@@ -647,6 +648,6 @@ Partial Class ProjectsClients
     Public WithEvents txtStateProvidence As TextBox
     Public WithEvents txtCity As TextBox
     Public WithEvents cmbCostCode As ComboBox
-    Friend WithEvents btnSave As Button
+    Friend WithEvents btnAdd As Button
     Friend WithEvents Panel4 As Panel
 End Class

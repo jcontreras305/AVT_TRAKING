@@ -147,6 +147,7 @@
     <Compile Include="Froms\Others.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Froms\Project.vb" />
     <Compile Include="Froms\ProjectsCosts.Designer.vb">
       <DependentUpon>ProjectsCosts.vb</DependentUpon>
     </Compile>
