@@ -189,32 +189,33 @@ ha.idHomeAdress, ha.avenue ,ha.number, ha.city ,ha.providence,ha.postalCode from
     End Sub
 
     Dim consultaProyetosClientes As String = "
+
 select 
-	(select CONCAT(wo.idWO,' ',tk.idTask)) as 'Work Order' , 
+	(select CONCAT(wo.idWO,' ',tk.task)) as 'Work Order' , 
 	po.description as 'Project Description', 
 	po.status as 'Cmp',
-	(select tk.totalSpend from task where idWO = wo.idWO and idTask = tk.idTask ) as 'Total Spend',
-	(select SUM(hoursST) from hoursWorked as hw where hw.idTask = tk.idTask)as 'Total Hours ST',
+	(select tk.totalSpend from task where idWO = wo.idWO and idAux = tk.idAux ) as 'Total Spend',
+	(select SUM(hoursST) from hoursWorked as hw where hw.idAux = tk.idAux)as 'Total Hours ST',
 	(
 	select SUM(T2.Amount) as 'Total Amount ST' from 
 	(select SUM(T1.hoursST*T1.billingRate1) AS 'Amount'
 	from (select idHorsWorked,hoursST, hw.idWorkCode , billingRate1  from hoursWorked as hw inner join workCode as wc on wc.idWorkCode = hw.idWorkCode 
-	where idTask=tk.idTask)as T1    
+	where idAux=tk.idAux)as T1    
 	group by T1.idWorkCode) as T2
 	) as 'Total Amount ST',
 
-	(select SUM(hoursOT) from hoursWorked as hw where hw.idTask = tk.idTask)as 'Total Hours OT',
+	(select SUM(hoursOT) from hoursWorked as hw where hw.idAux = tk.idAux)as 'Total Hours OT',
 
 	(select SUM(T2.Amount) from 
 	(select SUM(T1.hoursOT*T1.billingRateOT) AS 'Amount'
 	from (select idHorsWorked,hoursOT, hw.idWorkCode , billingRateOT  from hoursWorked as hw inner join workCode as wc on wc.idWorkCode = hw.idWorkCode 
-	where idTask=tk.idTask)as T1 
+	where idAux=tk.idAux)as T1 
 	group by T1.idWorkCode) as T2
 	) as 'Total Amount OT',
 
-	(select SUM( amount) from expensesUsed where idTask = tk.idTask) AS 'Total Expenses Spend', 
+	(select SUM( amount) from expensesUsed where idAux = tk.idAux) AS 'Total Expenses Spend', 
 
-	(select sum (amount) from materialUsed where idTask = tk.idTask) as 'Total Material Spend',
+	(select sum (amount) from materialUsed where idAux = tk.idAux) as 'Total Material Spend',
     jb.jobNo,
    	jb.workTMLumpSum,
 	jb.costDistribution,
@@ -223,7 +224,7 @@ select
 	jb.costCode,
     cln.idClient,
     po.idPO,
-    tk.idTask
+    tk.task as idTask
 from
 clients as cln left join job as jb on jb.idClient = cln.idClient
 inner join projectOrder as po on po.jobNo = jb.jobNo

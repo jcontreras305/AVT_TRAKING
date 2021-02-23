@@ -32,18 +32,24 @@
         mtdJobs.buscarMaterialesPorProyecto(tblMaterialProjects, WorkOrder, task)
         lblWorkOrder.Text = WorkOrder + " " + task
         If flag Then
+            If tablasDeTareas.Rows.Count <> 0 Then
+                tablasDeTareas.Rows.Clear()
+            End If
             mtdJobs.consultaWO(jobNum, tablasDeTareas)
         End If
         Return flag
     End Function
 
     Private Function cargarDatosProjecto(ByVal jobNum As String, ByVal WO As String, ByVal tk As String) As Boolean
-        Dim flag As Boolean = llenarCampos(mtdJobs.cargarDatosProjectOrder(jobNum)) 'aqui puedo tomar los datos de idCliente , WO y PO
+        Dim flag As Boolean = llenarCampos(mtdJobs.cargarDatosProjectOrder(jobNum, tk)) 'aqui puedo tomar los datos de idCliente , WO y PO
         mtdJobs.buscarHorasPorProjecto(tblHoursWorkedProject, WO, tk)
         mtdJobs.buscarExpencesPorProyecto(tblExpencesProjects, WO, tk)
         mtdJobs.buscarMaterialesPorProyecto(tblMaterialProjects, WO, tk)
         lblWorkOrder.Text = WorkOrder + " " + task
         If flag Then
+            If tablasDeTareas.Rows.Count <> 0 Then
+                tablasDeTareas.Rows.Clear()
+            End If
             mtdJobs.consultaWO(jobNum, tablasDeTareas)
         End If
         Return flag
@@ -60,9 +66,9 @@
                     Exit For
                 End If
             Next
-            If index = contRow Then
+            If index = contRow - 1 Then
                 index = 0
-                cargarDatosProjecto(tablasDeTareas.Rows(index).Item(0), tablasDeTareas.Rows(index).Item(2), tablasDeTareas.Rows(index).Item(3))
+                cargarDatosProjecto(tablasDeTareas.Rows(index).ItemArray(0), tablasDeTareas.Rows(index).ItemArray(2), tablasDeTareas.Rows(index).ItemArray(3))
             Else
                 index += 1
                 cargarDatosProjecto(tablasDeTareas.Rows(index).ItemArray(0), tablasDeTareas.Rows(index).ItemArray(2), tablasDeTareas.Rows(index).ItemArray(3))
@@ -70,6 +76,51 @@
         End If
     End Sub
 
+    Private Sub btnAfterTask_Click(sender As Object, e As EventArgs) Handles btnAfterTask.Click
+        If tablasDeTareas.Rows.Count > 1 Then
+            Dim contRow As Integer = tablasDeTareas.Rows.Count
+            Dim index As Integer = 0
+            For Each row As DataRow In tablasDeTareas.Rows
+                If row.ItemArray(3) <> task Then
+                    index = index + 1
+                Else
+                    Exit For
+                End If
+            Next
+            If index = 0 Then
+                index = contRow - 1
+                cargarDatosProjecto(tablasDeTareas.Rows(index).ItemArray(0), tablasDeTareas.Rows(index).ItemArray(2), tablasDeTareas.Rows(index).ItemArray(3))
+            Else
+                index -= 1
+                cargarDatosProjecto(tablasDeTareas.Rows(index).ItemArray(0), tablasDeTareas.Rows(index).ItemArray(2), tablasDeTareas.Rows(index).ItemArray(3))
+            End If
+        End If
+    End Sub
+
+    Private Sub btnAddRecord_Click(sender As Object, e As EventArgs) Handles btnAddRecord.Click
+        If btnAddRecord.Text = "Add Reccord" Then
+            btnAddRecord.Text = "Save Reccord"
+            limpiarCampos()
+        Else
+            btnAddRecord.Text = "Add Reccord"
+
+        End If
+    End Sub
+
+    Private Function limpiarCampos() As Boolean
+        Me.txtWokOrder.Text = ""
+        Me.txtTask.Text = ""
+        Me.txtProjectDescription.Text = ""
+        Me.txtEquipament.Text = ""
+        Me.txtAcountNo.Text = ""
+        Me.txtClientPO.Text = ""
+        Me.cmbExpCode.SelectedIndex = 0
+        Me.cmbJobNumber.Text = ""
+        Me.cmbJobNumber.SelectedIndex = Nothing
+        Me.cmbProjectManager.Text = ""
+        Me.cmbProjectManager.SelectedIndex = Nothing
+        Return True
+    End Function
     Private Function llenarCampos(ByVal lstDatosPO As List(Of String)) As Boolean
         If lstDatosPO.Count > 0 Then
             txtClientName.Text = lstDatosPO(0)
@@ -125,19 +176,65 @@
     '====================== METODOS PARA ACUTALIZAR AL MOMENTO DE PERDER EL FOCO ==============================================================
     '==========================================================================================================================================
 
-    Private Sub txtClientPO_Leave(sender As Object, e As EventArgs) Handles txtClientPO.Leave
-        If txtClientPO.Text.Length >= 8 Then
-            mtdJobs.updatePO(txtClientPO.Text, pjt.idPO.ToString())
-        Else
-            MessageBox.Show("The PO needs like a minum 8 numbers.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-        End If
-
-    End Sub
-    Private Sub txtClientPO_GotFocus(sender As Object, e As EventArgs) Handles txtClientPO.GotFocus
+    '================ CLIENT PO ==============================================================================================
+    '=========================================================================================================================
+    Private Sub txtClientPO_GotFocus(sender As Object, e As EventArgs) Handles txtClientPO.GotFocus 'me aseguro de guardar el valor 
         pjt.idPO = CInt(txtClientPO.Text)
     End Sub
+    'si el valor no contiene las caracteristicas solo mando mesaje y regreso el valor que estaba de lo contrario lo cambio
+    Private Sub txtClientPO_Leave(sender As Object, e As EventArgs) Handles txtClientPO.Leave
+        If txtClientPO.Text <> pjt.idPO Then
+            validarClientPO()
+        End If
+    End Sub
+    Function validarClientPO() As Boolean
+        If txtClientPO.Text.Length >= 8 Then
+            If Not mtdJobs.updatePO(txtClientPO.Text, pjt.idPO.ToString(), pjt.jobNum) Then
+                MessageBox.Show("Is probably that the PO exist, try with other number.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                txtClientPO.Text = pjt.idPO.ToString
+                Return False
+            Else
+                Return True
+            End If
+        Else
+            MessageBox.Show("The PO needs like a minum 8 numbers.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            txtClientPO.Text = pjt.idPO.ToString
+            Return False
+        End If
+    End Function
+    Private Sub txtClientPO_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtClientPO.KeyPress
+        If Asc(e.KeyChar) = Keys.Enter Then
+            If validarClientPO() Then
+                txtProjectDescription.Focus()
+            End If
+        End If
+    End Sub
 
+    '================ EQUIPAMENT ========================================================================================
+    '=========================================================================================================================
+    Private Sub txtEquipament_KeyUp(sender As Object, e As KeyEventArgs) Handles txtEquipament.KeyUp
+        pjt.equipament = txtEquipament.Text
+    End Sub
 
+    Private Sub txtEquipament_Leave(sender As Object, e As EventArgs) Handles txtEquipament.Leave
+        If txtEquipament.Text <> pjt.equipament Then
 
+        End If
+    End Sub
 
+    Private Function validarEquipament() As Boolean
+        If txtClientPO.Text.Length > 0 And txtEquipament.Text.Length < 30 Then
+            If Not mtdJobs.updatePO(txtClientPO.Text, pjt.idPO.ToString(), pjt.jobNum) Then
+                MessageBox.Show("Is probably that the PO exist, try with other number.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                txtClientPO.Text = pjt.idPO.ToString
+                Return False
+            Else
+                Return True
+            End If
+        Else
+            MessageBox.Show("The PO needs like a minum 8 numbers.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            txtClientPO.Text = pjt.idPO.ToString
+            Return False
+        End If
+    End Function
 End Class

@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class ProjectsCosts
     Inherits System.Windows.Forms.Form
 
     'Form reemplaza a Dispose para limpiar la lista de componentes.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,7 +20,7 @@ Partial Class ProjectsCosts
     'NOTA: el Diseñador de Windows Forms necesita el siguiente procedimiento
     'Se puede modificar usando el Diseñador de Windows Forms.  
     'No lo modifique con el editor de código.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.Label10 = New System.Windows.Forms.Label()
@@ -82,13 +82,15 @@ Partial Class ProjectsCosts
         Me.Label17 = New System.Windows.Forms.Label()
         Me.Label16 = New System.Windows.Forms.Label()
         Me.TextBox7 = New System.Windows.Forms.TextBox()
-        Me.tblHoursWorkedProject = New System.Windows.Forms.DataGridView()
         Me.TabControl1 = New System.Windows.Forms.TabControl()
-        Me.tbpHoursWorked = New System.Windows.Forms.TabPage()
-        Me.tbpExpences = New System.Windows.Forms.TabPage()
-        Me.tblExpencesProjects = New System.Windows.Forms.DataGridView()
         Me.tbpMaterials = New System.Windows.Forms.TabPage()
         Me.tblMaterialProjects = New System.Windows.Forms.DataGridView()
+        Me.tbpExpences = New System.Windows.Forms.TabPage()
+        Me.tblExpencesProjects = New System.Windows.Forms.DataGridView()
+        Me.tbpHoursWorked = New System.Windows.Forms.TabPage()
+        Me.tblHoursWorkedProject = New System.Windows.Forms.DataGridView()
+        Me.pnlTablas = New System.Windows.Forms.Panel()
+        Me.Panel5 = New System.Windows.Forms.Panel()
         Me.Panel1.SuspendLayout()
         Me.Panel4.SuspendLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -96,13 +98,14 @@ Partial Class ProjectsCosts
         CType(Me.sprTotalBilling, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel2.SuspendLayout()
         Me.Panel3.SuspendLayout()
-        CType(Me.tblHoursWorkedProject, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.TabControl1.SuspendLayout()
-        Me.tbpHoursWorked.SuspendLayout()
-        Me.tbpExpences.SuspendLayout()
-        CType(Me.tblExpencesProjects, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.tbpMaterials.SuspendLayout()
         CType(Me.tblMaterialProjects, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.tbpExpences.SuspendLayout()
+        CType(Me.tblExpencesProjects, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.tbpHoursWorked.SuspendLayout()
+        CType(Me.tblHoursWorkedProject, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.pnlTablas.SuspendLayout()
         Me.SuspendLayout()
         '
         'Panel1
@@ -169,7 +172,7 @@ Partial Class ProjectsCosts
         '
         'btnNextTask
         '
-        Me.btnNextTask.Location = New System.Drawing.Point(1004, 86)
+        Me.btnNextTask.Location = New System.Drawing.Point(995, 116)
         Me.btnNextTask.Name = "btnNextTask"
         Me.btnNextTask.Size = New System.Drawing.Size(75, 23)
         Me.btnNextTask.TabIndex = 33
@@ -187,7 +190,7 @@ Partial Class ProjectsCosts
         '
         'btnAfterTask
         '
-        Me.btnAfterTask.Location = New System.Drawing.Point(910, 86)
+        Me.btnAfterTask.Location = New System.Drawing.Point(901, 116)
         Me.btnAfterTask.Name = "btnAfterTask"
         Me.btnAfterTask.Size = New System.Drawing.Size(75, 23)
         Me.btnAfterTask.TabIndex = 32
@@ -196,7 +199,7 @@ Partial Class ProjectsCosts
         '
         'btnAddRecord
         '
-        Me.btnAddRecord.Location = New System.Drawing.Point(781, 197)
+        Me.btnAddRecord.Location = New System.Drawing.Point(943, 74)
         Me.btnAddRecord.Name = "btnAddRecord"
         Me.btnAddRecord.Size = New System.Drawing.Size(75, 23)
         Me.btnAddRecord.TabIndex = 31
@@ -679,58 +682,19 @@ Partial Class ProjectsCosts
         Me.TextBox7.Size = New System.Drawing.Size(1107, 20)
         Me.TextBox7.TabIndex = 8
         '
-        'tblHoursWorkedProject
-        '
-        Me.tblHoursWorkedProject.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.tblHoursWorkedProject.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.tblHoursWorkedProject.Location = New System.Drawing.Point(3, 3)
-        Me.tblHoursWorkedProject.Name = "tblHoursWorkedProject"
-        Me.tblHoursWorkedProject.RightToLeft = System.Windows.Forms.RightToLeft.No
-        Me.tblHoursWorkedProject.Size = New System.Drawing.Size(935, 237)
-        Me.tblHoursWorkedProject.TabIndex = 2
-        '
         'TabControl1
         '
+        Me.TabControl1.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.TabControl1.Controls.Add(Me.tbpHoursWorked)
         Me.TabControl1.Controls.Add(Me.tbpExpences)
         Me.TabControl1.Controls.Add(Me.tbpMaterials)
-        Me.TabControl1.Location = New System.Drawing.Point(0, 249)
+        Me.TabControl1.Location = New System.Drawing.Point(3, 3)
         Me.TabControl1.Name = "TabControl1"
         Me.TabControl1.SelectedIndex = 0
-        Me.TabControl1.Size = New System.Drawing.Size(949, 269)
+        Me.TabControl1.Size = New System.Drawing.Size(901, 271)
         Me.TabControl1.TabIndex = 3
-        '
-        'tbpHoursWorked
-        '
-        Me.tbpHoursWorked.Controls.Add(Me.tblHoursWorkedProject)
-        Me.tbpHoursWorked.Location = New System.Drawing.Point(4, 22)
-        Me.tbpHoursWorked.Name = "tbpHoursWorked"
-        Me.tbpHoursWorked.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbpHoursWorked.RightToLeft = System.Windows.Forms.RightToLeft.Yes
-        Me.tbpHoursWorked.Size = New System.Drawing.Size(941, 243)
-        Me.tbpHoursWorked.TabIndex = 0
-        Me.tbpHoursWorked.Text = "Hours Worked"
-        Me.tbpHoursWorked.UseVisualStyleBackColor = True
-        '
-        'tbpExpences
-        '
-        Me.tbpExpences.Controls.Add(Me.tblExpencesProjects)
-        Me.tbpExpences.Location = New System.Drawing.Point(4, 22)
-        Me.tbpExpences.Name = "tbpExpences"
-        Me.tbpExpences.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbpExpences.Size = New System.Drawing.Size(941, 243)
-        Me.tbpExpences.TabIndex = 1
-        Me.tbpExpences.Text = "Expences"
-        Me.tbpExpences.UseVisualStyleBackColor = True
-        '
-        'tblExpencesProjects
-        '
-        Me.tblExpencesProjects.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.tblExpencesProjects.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.tblExpencesProjects.Location = New System.Drawing.Point(3, 3)
-        Me.tblExpencesProjects.Name = "tblExpencesProjects"
-        Me.tblExpencesProjects.Size = New System.Drawing.Size(935, 237)
-        Me.tblExpencesProjects.TabIndex = 0
         '
         'tbpMaterials
         '
@@ -738,7 +702,7 @@ Partial Class ProjectsCosts
         Me.tbpMaterials.Location = New System.Drawing.Point(4, 22)
         Me.tbpMaterials.Name = "tbpMaterials"
         Me.tbpMaterials.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbpMaterials.Size = New System.Drawing.Size(941, 243)
+        Me.tbpMaterials.Size = New System.Drawing.Size(893, 245)
         Me.tbpMaterials.TabIndex = 2
         Me.tbpMaterials.Text = "Matrials"
         Me.tbpMaterials.UseVisualStyleBackColor = True
@@ -749,8 +713,74 @@ Partial Class ProjectsCosts
         Me.tblMaterialProjects.Dock = System.Windows.Forms.DockStyle.Fill
         Me.tblMaterialProjects.Location = New System.Drawing.Point(3, 3)
         Me.tblMaterialProjects.Name = "tblMaterialProjects"
-        Me.tblMaterialProjects.Size = New System.Drawing.Size(935, 237)
+        Me.tblMaterialProjects.Size = New System.Drawing.Size(887, 239)
         Me.tblMaterialProjects.TabIndex = 0
+        '
+        'tbpExpences
+        '
+        Me.tbpExpences.Controls.Add(Me.tblExpencesProjects)
+        Me.tbpExpences.Location = New System.Drawing.Point(4, 22)
+        Me.tbpExpences.Name = "tbpExpences"
+        Me.tbpExpences.Padding = New System.Windows.Forms.Padding(3)
+        Me.tbpExpences.Size = New System.Drawing.Size(893, 245)
+        Me.tbpExpences.TabIndex = 1
+        Me.tbpExpences.Text = "Expences"
+        Me.tbpExpences.UseVisualStyleBackColor = True
+        '
+        'tblExpencesProjects
+        '
+        Me.tblExpencesProjects.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.tblExpencesProjects.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.tblExpencesProjects.Location = New System.Drawing.Point(3, 3)
+        Me.tblExpencesProjects.Name = "tblExpencesProjects"
+        Me.tblExpencesProjects.Size = New System.Drawing.Size(887, 239)
+        Me.tblExpencesProjects.TabIndex = 0
+        '
+        'tbpHoursWorked
+        '
+        Me.tbpHoursWorked.Controls.Add(Me.tblHoursWorkedProject)
+        Me.tbpHoursWorked.Location = New System.Drawing.Point(4, 22)
+        Me.tbpHoursWorked.Name = "tbpHoursWorked"
+        Me.tbpHoursWorked.Padding = New System.Windows.Forms.Padding(3)
+        Me.tbpHoursWorked.RightToLeft = System.Windows.Forms.RightToLeft.Yes
+        Me.tbpHoursWorked.Size = New System.Drawing.Size(893, 245)
+        Me.tbpHoursWorked.TabIndex = 0
+        Me.tbpHoursWorked.Text = "Hours Worked"
+        Me.tbpHoursWorked.UseVisualStyleBackColor = True
+        '
+        'tblHoursWorkedProject
+        '
+        Me.tblHoursWorkedProject.AllowUserToAddRows = False
+        Me.tblHoursWorkedProject.AllowUserToDeleteRows = False
+        Me.tblHoursWorkedProject.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.tblHoursWorkedProject.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.tblHoursWorkedProject.Location = New System.Drawing.Point(3, 3)
+        Me.tblHoursWorkedProject.MultiSelect = False
+        Me.tblHoursWorkedProject.Name = "tblHoursWorkedProject"
+        Me.tblHoursWorkedProject.RightToLeft = System.Windows.Forms.RightToLeft.No
+        Me.tblHoursWorkedProject.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
+        Me.tblHoursWorkedProject.Size = New System.Drawing.Size(887, 239)
+        Me.tblHoursWorkedProject.TabIndex = 2
+        '
+        'pnlTablas
+        '
+        Me.pnlTablas.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.pnlTablas.Controls.Add(Me.Panel5)
+        Me.pnlTablas.Controls.Add(Me.TabControl1)
+        Me.pnlTablas.Location = New System.Drawing.Point(0, 248)
+        Me.pnlTablas.Name = "pnlTablas"
+        Me.pnlTablas.Size = New System.Drawing.Size(1107, 274)
+        Me.pnlTablas.TabIndex = 4
+        '
+        'Panel5
+        '
+        Me.Panel5.Dock = System.Windows.Forms.DockStyle.Right
+        Me.Panel5.Location = New System.Drawing.Point(907, 0)
+        Me.Panel5.Name = "Panel5"
+        Me.Panel5.Size = New System.Drawing.Size(200, 274)
+        Me.Panel5.TabIndex = 4
         '
         'ProjectsCosts
         '
@@ -758,7 +788,7 @@ Partial Class ProjectsCosts
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.White
         Me.ClientSize = New System.Drawing.Size(1107, 618)
-        Me.Controls.Add(Me.TabControl1)
+        Me.Controls.Add(Me.pnlTablas)
         Me.Controls.Add(Me.Panel2)
         Me.Controls.Add(Me.Panel1)
         Me.Name = "ProjectsCosts"
@@ -774,13 +804,14 @@ Partial Class ProjectsCosts
         Me.Panel2.PerformLayout()
         Me.Panel3.ResumeLayout(False)
         Me.Panel3.PerformLayout()
-        CType(Me.tblHoursWorkedProject, System.ComponentModel.ISupportInitialize).EndInit()
         Me.TabControl1.ResumeLayout(False)
-        Me.tbpHoursWorked.ResumeLayout(False)
-        Me.tbpExpences.ResumeLayout(False)
-        CType(Me.tblExpencesProjects, System.ComponentModel.ISupportInitialize).EndInit()
         Me.tbpMaterials.ResumeLayout(False)
         CType(Me.tblMaterialProjects, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.tbpExpences.ResumeLayout(False)
+        CType(Me.tblExpencesProjects, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.tbpHoursWorked.ResumeLayout(False)
+        CType(Me.tblHoursWorkedProject, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.pnlTablas.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
@@ -823,15 +854,8 @@ Partial Class ProjectsCosts
     Friend WithEvents Label17 As Label
     Friend WithEvents Label16 As Label
     Friend WithEvents TextBox7 As TextBox
-    Friend WithEvents TabControl1 As TabControl
-    Friend WithEvents tbpHoursWorked As TabPage
-    Friend WithEvents tbpExpences As TabPage
-    Friend WithEvents tbpMaterials As TabPage
     Friend WithEvents Button1 As Button
     Friend WithEvents TextBox1 As TextBox
-    Public WithEvents tblHoursWorkedProject As DataGridView
-    Public WithEvents tblExpencesProjects As DataGridView
-    Public WithEvents tblMaterialProjects As DataGridView
     Public WithEvents txtAcountNo As TextBox
     Public WithEvents sprHoursEstimate As NumericUpDown
     Public WithEvents dtpEndDate As DateTimePicker
@@ -851,4 +875,13 @@ Partial Class ProjectsCosts
     Friend WithEvents btnAfterTask As Button
     Friend WithEvents btnAddRecord As Button
     Public WithEvents txtTask As TextBox
+    Friend WithEvents TabControl1 As TabControl
+    Friend WithEvents tbpHoursWorked As TabPage
+    Public WithEvents tblHoursWorkedProject As DataGridView
+    Friend WithEvents tbpExpences As TabPage
+    Public WithEvents tblExpencesProjects As DataGridView
+    Friend WithEvents tbpMaterials As TabPage
+    Public WithEvents tblMaterialProjects As DataGridView
+    Friend WithEvents pnlTablas As Panel
+    Friend WithEvents Panel5 As Panel
 End Class

@@ -6,7 +6,6 @@ GO
 
 use VRT_TRAKING
 GO
-
 --##########################################################################################
 --##################  TABLA DE MATERIAL USERS ############################################
 --##########################################################################################
@@ -180,7 +179,7 @@ create  table expensesUsed(
 	amount float not null,
 	description varchar(100) null,
 	idExpense varchar(36),
-	idTask varchar(5) 
+	idAux varchar(36) 
 )
 GO
 
@@ -210,7 +209,7 @@ create table hoursWorked (
 	dateWorked date,
 	idEmployee varchar(36),
 	idWorkCode int,
-	idTask varchar(5)
+	idAux varchar(36)
 )
 GO
 
@@ -264,7 +263,7 @@ create table materialUsed (
 	quantity float,
 	amount float,
 	description varchar(200),
-	idTask varchar(5),
+	idAux varchar(36),
 	idMaterial varchar(36)
 )
 GO
@@ -315,11 +314,12 @@ create table vendor (
 GO
 
 --##########################################################################################
---##################  TABLA DE MATERIAL TASK ###############################################
+--##################  TABLA DE TASK ########################################################
 --##########################################################################################
 
 create table task (
-	idTask varchar(5) primary key not null,
+	idAux varchar(36) primary key not null,
+	task varchar(5) ,
 	idWO varchar(14),
 	totalSpend float
 )
@@ -327,7 +327,7 @@ GO
 
 
 --##########################################################################################
---##################  TABLA DE MATERIAL WORKCODE ##########################################
+--##################  TABLA DE WORKCODE ####################################################
 --##########################################################################################
 
 create table workCode(
@@ -411,8 +411,8 @@ ALTER TABLE    expensesUsed   WITH CHECK ADD  CONSTRAINT  fk_idExpence_EU  FOREI
 REFERENCES    expenses  ( idExpenses )
 GO
 
-ALTER TABLE    expensesUsed   WITH CHECK ADD  CONSTRAINT  fk_idTask_EU  FOREIGN KEY( idTask )
-REFERENCES    task  ( idTask )
+ALTER TABLE    expensesUsed   WITH CHECK ADD  CONSTRAINT  fk_idTask_EU  FOREIGN KEY( idAux )
+REFERENCES    task  ( idAux )
 GO
 
 --##########################################################################################
@@ -427,8 +427,8 @@ ALTER TABLE    hoursWorked   WITH CHECK ADD  CONSTRAINT  fk_idWC_WorkCode  FOREI
 REFERENCES    workCode  ( idWorkCode )
 GO
 
-ALTER TABLE    hoursWorked   WITH CHECK ADD  CONSTRAINT  fk_idTask_hoursWork FOREIGN KEY ( idTask )
-REFERENCES    task  ( idTask )
+ALTER TABLE    hoursWorked   WITH CHECK ADD  CONSTRAINT  fk_idTask_hoursWork FOREIGN KEY ( idAux )
+REFERENCES    task  ( idAux )
 GO
 
 --##########################################################################################
@@ -455,8 +455,8 @@ ALTER TABLE    materialUsed   WITH CHECK ADD  CONSTRAINT  fk_idMaterial_material
 REFERENCES    material  ( idMaterial )
 GO
 
-ALTER TABLE    materialUsed   WITH CHECK ADD  CONSTRAINT  fk_idTask_materialUsed  FOREIGN KEY( idTask )
-REFERENCES    task  ( idTask )
+ALTER TABLE    materialUsed   WITH CHECK ADD  CONSTRAINT  fk_idTask_materialUsed  FOREIGN KEY( idAux )
+REFERENCES    task  ( idAux )
 GO
 
 --##########################################################################################
@@ -829,7 +829,7 @@ end
 GO
 
 create proc sp_UpdateTotalSpendTask
- @idTask varchar(5)
+ @idAux varchar(36)
 as
 declare @total as float
 declare @horasST as float
@@ -845,12 +845,12 @@ begin
 		(select SUM(T2.Amount) as 'Total Amount ST' from 
 		(select SUM(T1.hoursST*T1.billingRate1) AS 'Amount'
 		from (select idHorsWorked,hoursST, hw.idWorkCode , billingRate1  from hoursWorked as hw inner join workCode as wc on wc.idWorkCode = hw.idWorkCode 
-		where idTask=tk.idTask)as T1    
+		where idAux=tk.idAux)as T1    
 		group by T1.idWorkCode) as T2
 		) as 'ST'
 	from 
 	task as tk 
-	where tk.idTask = @idTask
+	where tk.idAux = @idAux
 	)
 	--Total de gastos de horas OT
 	set @horasOT =		
@@ -858,12 +858,12 @@ begin
 		(select SUM(T2.Amount) as 'Total Amount OT' from 
 		(select SUM(T1.hoursOT*T1.billingRateOT) AS 'Amount'
 		from (select idHorsWorked,hoursOT, hw.idWorkCode , billingRateOT  from hoursWorked as hw inner join workCode as wc on wc.idWorkCode = hw.idWorkCode 
-		where idTask=tk.idTask)as T1    
+		where idAux=tk.idAux)as T1    
 		group by T1.idWorkCode) as T2
 		) as 'OT'
 	from
 	task as tk
-	where tk.idTask = @idTask
+	where tk.idAux = @idAux
 	)
 	--Total gastos horas 3
 	set @horasO3 =
@@ -871,19 +871,19 @@ begin
 		(select SUM(T2.Amount) as 'Total Amount OT' from 
 		(select SUM(T1.hours3*T1.billingRate3) AS 'Amount'
 		from (select idHorsWorked,hours3, hw.idWorkCode , billingRate3  from hoursWorked as hw inner join workCode as wc on wc.idWorkCode = hw.idWorkCode 
-		where idTask=tk.idTask)as T1    
+		where idAux=tk.idAux)as T1    
 		group by T1.idWorkCode) as T2
 		) as 'OT3'
 	from 
 	task AS tk 
-	where tk.idTask = @idTask
+	where tk.idAux = @idAux
 	)
 
 	--'Total Expenses Spend'
-	set @expenses = (select top 1 (select SUM( amount) from expensesUsed where idTask = @idTask))
+	set @expenses = (select top 1 (select SUM( amount) from expensesUsed where idAux = @idAux))
 
 	--Total Material Spend
-	set @material = (select top 1 (select sum (amount) from materialUsed where idTask = @idTask))
+	set @material = (select top 1 (select sum (amount) from materialUsed where idAux = @idAux))
 	
 	if (@horasST IS Null) 
 	begin 
@@ -908,9 +908,10 @@ begin
 
 	set @total = @horasST + @horasOT + @horasO3 + @expenses + @material
 
-	update task set totalSpend = @total where idTask = @idTask
+	update task set totalSpend = @total where idAux = @idAux
 end
 go
+
 
 CREATE proc sp_update_Employee
 	@idEmployee varchar(36),
@@ -992,5 +993,9 @@ GO
 
 ----use master
 ----drop database VRT_TRAKING
+
+
+
+
 
 

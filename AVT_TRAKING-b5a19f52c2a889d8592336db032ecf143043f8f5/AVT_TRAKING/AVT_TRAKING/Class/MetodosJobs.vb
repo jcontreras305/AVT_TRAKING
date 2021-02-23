@@ -181,7 +181,7 @@ Public Class MetodosJobs
             Dim cmdJob As New SqlCommand("insert into job values (" + datosPO(0) + ",'" + datosPO(1) + "', '" + datosPO(2) + "'," + datosPO(3) + ", " + datosPO(4) + "," + datosPO(5) + ",'" + idClient + "')", conn)
             Dim cmdProyect As New SqlCommand("insert into projectOrder values (" + idPOMax + ",'','','',0.0,GETDATE(),DATEADD(MM,1,GETDATE()),'',0,0,'0'," + datosPO(0) + ")", conn)
             Dim cmdWO As New SqlCommand("insert into workOrder values (convert(varchar(14),(select MAX(cast(idWO as int))+ 1 from workOrder)),'" + idPOMax + "')", conn)
-            Dim cmdTask As New SqlCommand("insert into task values ('',(select MAX(cast(idWO as int)) from workOrder),0.0)", conn)
+            Dim cmdTask As New SqlCommand("insert into task values (NEWID(),'',(select MAX(cast(idWO as int)) from workOrder),0.0)", conn)
             Dim tran As SqlTransaction
             tran = conn.BeginTransaction()
             cmdJob.Transaction = tran
@@ -239,9 +239,9 @@ hw.dateWorked as 'Date Worked',
 wc.description as 'Description'
 from 
 employees em inner join hoursWorked as hw on em.idEmployee = hw.idEmployee
-inner join task  as tk on tk.idTask = hw.idTask
+inner join task  as tk on tk.idAux = hw.idAux
 inner join workCode as wc on wc.idWorkCode = hw.idWorkCode
-where  tk.idTask = '" + idTask + "' and tk.idWO = '" + idWO + "'", conn)
+where  tk.task = '" + idTask + "' and tk.idWO = '" + idWO + "'", conn)
             If cmd.ExecuteNonQuery Then
                 Dim da As New SqlDataAdapter(cmd)
                 Dim dt As New DataTable
@@ -258,17 +258,15 @@ where  tk.idTask = '" + idTask + "' and tk.idWO = '" + idWO + "'", conn)
         Try
             conectar()
             Dim cmd As New SqlCommand("
-select * from expenses
-select * from expensesUsed
 select
 expu.dateExpense as 'Date',
 ex.expenseCode as 'Expense Code',
 expu.amount as 'Amount',
 expu.description as 'Description'
 from
-task as tk inner join expensesUsed as expu on tk.idTask = expu.idTask
+task as tk inner join expensesUsed as expu on tk.idAux = expu.idAux
 inner join expenses as ex on expu.idExpense = ex.idExpenses
-where tk.idTask = '" + idTask + "' and tk.idWO = '" + idWO + "'", conn)
+where tk.task = '" + idTask + "' and tk.idWO = '" + idWO + "'", conn)
             If cmd.ExecuteNonQuery Then
                 Dim da As New SqlDataAdapter(cmd)
                 Dim dt As New DataTable
@@ -288,13 +286,13 @@ where tk.idTask = '" + idTask + "' and tk.idWO = '" + idWO + "'", conn)
             Dim cmd As New SqlCommand("
 select 
 mu.dateMaterial,
-concat(tk.idWO,' ',tk.idTask)as 'Work Order',
+concat(tk.idWO,' ',tk.task)as 'Work Order',
 mu.amount,
 mu.descripcion
 from 
-materialUsed as mu inner join task as tk on tk.idTask = mu.idTask
+materialUsed as mu inner join task as tk on tk.idAux = mu.idAux
 inner join material as mt on mu.idMaterial = mt.idMaterial
-where tk.idTask = '" + idTask + "' and tk.idWO = '" + idWO + "'", conn)
+where tk.task = '" + idTask + "' and tk.idWO = '" + idWO + "'", conn)
             If cmd.ExecuteNonQuery Then
                 Dim da As New SqlDataAdapter(cmd)
                 Dim dt As New DataTable
@@ -330,7 +328,8 @@ where cl.idClient like '" + If(idclient = "", "%", idclient) + "'", conn)
 jb.jobNo,
 po.idPO,
 tk.idWO, 
-tk.idTask
+tk.task,
+tk.idAux
 from job as jb 
 inner join projectOrder as po on po.jobNo = jb.jobNo
 inner join workOrder as wo on wo.idPO = po.idPO 
@@ -438,7 +437,7 @@ where jb.jobNo = " + If(jobNumber = "", "0", jobNumber), conn)
 select 
 CONCAT (cl.firstName,' ',cl.middleName,' ',cl.lastName) as 'Name',
 tk.idWO,
-tk.idTask,
+tk.task,
 po.equipament,
 po.manager,
 po.idPO,
@@ -462,7 +461,7 @@ where jb.jobNo = " + If(idJob = "", "0", idJob).ToString(), conn)
             While reader.Read()
                 lstDatosPO.Add(reader("Name"))
                 lstDatosPO.Add(reader("idWo"))
-                lstDatosPO.Add(reader("idTask"))
+                lstDatosPO.Add(reader("task"))
                 lstDatosPO.Add(reader("equipament"))
                 lstDatosPO.Add(reader("manager"))
                 lstDatosPO.Add(reader("idPO"))
@@ -484,17 +483,72 @@ where jb.jobNo = " + If(idJob = "", "0", idJob).ToString(), conn)
         End Try
     End Function
 
-    Public Function updatePO(ByVal idPON As String, ByVal idPOV As String) As Boolean
+    Public Function cargarDatosProjectOrder(ByVal idJob As String, ByVal task As String) As List(Of String)
         Try
             conectar()
-            Dim cmd1 As New SqlCommand("if (select COUNT(idPO) from projectOrder where idPO = " + idPOV + ") > 0 
-	                                   begin 
-		                                    update projectOrder set idPO = 	" + idPON + " where idPO-" + idPOV +
-                                       "end ", conn)
+            Dim cmd As New SqlCommand("
+select 
+CONCAT (cl.firstName,' ',cl.middleName,' ',cl.lastName) as 'Name',
+tk.idWO,
+tk.task,
+po.equipament,
+po.manager,
+po.idPO,
+po.description,
+po.estTotalBilling,
+po.beginDate,
+po.endDate,
+po.estimateHours,
+po.expCode,
+po.accountNum,
+po.status
+from 
+job as jb 
+inner join clients as cl on jb.idClient = cl.idClient
+inner join projectOrder as po on jb.jobNo = po.jobNo 
+left join workOrder as wo on po.idPO = wo.idPO
+left join task as tk on tk.idWO = wo.idWO
+where jb.jobNo = " + If(idJob = "", "0", idJob).ToString() + " and tk.task = '" + task + "'", conn)
+            Dim lstDatosPO As New List(Of String)
+            Dim reader As SqlDataReader = cmd.ExecuteReader()
+            While reader.Read()
+                lstDatosPO.Add(reader("Name"))
+                lstDatosPO.Add(reader("idWo"))
+                lstDatosPO.Add(reader("task"))
+                lstDatosPO.Add(reader("equipament"))
+                lstDatosPO.Add(reader("manager"))
+                lstDatosPO.Add(reader("idPO"))
+                lstDatosPO.Add(reader("description"))
+                lstDatosPO.Add(reader("estTotalBilling"))
+                lstDatosPO.Add(reader("beginDate"))
+                lstDatosPO.Add(reader("endDate"))
+                lstDatosPO.Add(reader("estimateHours"))
+                lstDatosPO.Add(reader("expCode"))
+                lstDatosPO.Add(reader("accountNum"))
+                lstDatosPO.Add(reader("status"))
+                Exit While
+            End While
+            desconectar()
+            Return lstDatosPO
+        Catch ex As Exception
+            MsgBox(ex.Message())
+            Return Nothing
+        End Try
+    End Function
+
+    Public Function updatePO(ByVal idPON As String, ByVal idPOV As String, ByVal idJobNum As String) As Boolean
+        Try
+            conectar()
+            Dim cmd1 As New SqlCommand("
+if (select COUNT(idPO) from projectOrder where idPO = " + idPOV + ") = 1 and (select COUNT(" + idPON + ") from projectOrder where idPO = 77777778) = 0   
+begin 
+    update projectOrder set idPO = 	" + idPON + " where idPO = " + idPOV + " and jobNo =  " + idJobNum + " 
+ end ", conn)
             Dim cmd2 As New SqlCommand("update workOrder set idPO = " + idPON + " where idPO = " + idPOV, conn)
             Dim tran As SqlTransaction
             tran = conn.BeginTransaction()
             cmd1.Transaction = tran
+            cmd2.Transaction = tran
             If cmd1.ExecuteNonQuery = 1 Then
                 If cmd2.ExecuteNonQuery > 0 Then
                     tran.Commit()
@@ -513,6 +567,22 @@ where jb.jobNo = " + If(idJob = "", "0", idJob).ToString(), conn)
         End Try
     End Function
 
+    Public Function updateEquipaMent()
+        Try
+            conectar()
+            Dim cmd As New SqlCommand("", conn)
+            If cmd.ExecuteNonQuery > 0 Then
+
+                desconectar()
+            Else
+
+                desconectar()
+            End If
+
+        Catch ex As Exception
+
+        End Try
+    End Function
 
 
 End Class
