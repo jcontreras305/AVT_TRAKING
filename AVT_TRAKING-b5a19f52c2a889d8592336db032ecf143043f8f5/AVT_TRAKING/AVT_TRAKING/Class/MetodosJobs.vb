@@ -228,14 +228,15 @@ Public Class MetodosJobs
     Public Sub buscarHorasPorProjecto(ByVal tblHoras As DataGridView, ByVal idWO As String, ByVal idTask As String)
         Try
             conectar()
-            Dim cmd As New SqlCommand("select
+            Dim cmd As New SqlCommand("
+select
 CONCAT (em.firstName , ' ',em.middleName,' ',em.lastName) as Employee,
 wc.name as Work,
 wc.billingRate1 as 'Billing Rate', 
 hw.hoursST as 'Billable Rate',
 wc.billingRateOT as 'Billable OT',
 hw.hoursOT as 'Billing RateOT',
-hw.dateWorked as 'Date Worked',
+convert (varchar,hw.dateWorked,1 )as 'Date Worked',
 wc.description as 'Description'
 from 
 employees em inner join hoursWorked as hw on em.idEmployee = hw.idEmployee
@@ -259,7 +260,7 @@ where  tk.task = '" + idTask + "' and tk.idWO = '" + idWO + "'", conn)
             conectar()
             Dim cmd As New SqlCommand("
 select
-expu.dateExpense as 'Date',
+CONVERT (varchar,expu.dateExpense,1) as 'Date',
 ex.expenseCode as 'Expense Code',
 expu.amount as 'Amount',
 expu.description as 'Description'
@@ -284,8 +285,9 @@ where tk.task = '" + idTask + "' and tk.idWO = '" + idWO + "'", conn)
         Try
             conectar()
             Dim cmd As New SqlCommand("
+
 select 
-mu.dateMaterial,
+convert (varchar,mu.dateMaterial, 1) as 'Date',
 concat(tk.idWO,' ',tk.task)as 'Work Order',
 mu.amount,
 mu.descripcion
@@ -536,28 +538,53 @@ where jb.jobNo = " + If(idJob = "", "0", idJob).ToString() + " and tk.task = '" 
         End Try
     End Function
 
+    Public Function existPO(ByVal idPO As String, ByVal jobNo As String) As Boolean
+        Try
+            Dim cmd As New SqlCommand("select COUNT(idPO) as 'idPO' from projectOrder where idPO = " + idPO + " and jobNo = " + jobNo, conn)
+            Dim reader As SqlDataReader = cmd.ExecuteReader()
+            Dim count As String = "0"
+            While reader.Read()
+                count = reader("idPO")
+                Exit While
+            End While
+            If CInt(count) >= 1 Then
+                Return True
+            Else
+                Return False
+            End If
+        Catch ex As Exception
+            Return False
+        End Try
+    End Function
+
     Public Function updatePO(ByVal idPON As String, ByVal idPOV As String, ByVal idJobNum As String) As Boolean
         Try
             conectar()
             Dim cmd1 As New SqlCommand("
-if (select COUNT(idPO) from projectOrder where idPO = " + idPOV + ") = 1 and (select COUNT(" + idPON + ") from projectOrder where idPO = 77777778) = 0   
+if (select COUNT(idPO) from projectOrder where idPO = " + idPOV + " and jobNo = " + idJobNum + ") = 1 
+		and (select COUNT(idPO) from projectOrder where idPO = " + idPON + " and jobNo = " + idJobNum + ") = 0   
 begin 
-    update projectOrder set idPO = 	" + idPON + " where idPO = " + idPOV + " and jobNo =  " + idJobNum + " 
- end ", conn)
-            Dim cmd2 As New SqlCommand("update workOrder set idPO = " + idPON + " where idPO = " + idPOV, conn)
+   	update po set  po.idPO = " + idPON + " from projectOrder as po 
+	inner join job as jb on po.jobNo = jb.jobNo 
+	inner join workOrder as wo on wo.idPO = po.idPO
+	where po.idPO = " + idPOV + " and po.jobNo =  " + idJobNum + " 
+end  ", conn)
+            ' Dim cmd2 As New SqlCommand("update wo set wo.idPO = " + idPON + " from workOrder as wo inner join projectOrder as po on wo.idPO = po.idPO where po.jobNo = " + idJobNum + " and po.idPO = " + idPON, conn)
             Dim tran As SqlTransaction
             tran = conn.BeginTransaction()
             cmd1.Transaction = tran
-            cmd2.Transaction = tran
+            'cmd2.Transaction = tran
             If cmd1.ExecuteNonQuery = 1 Then
-                If cmd2.ExecuteNonQuery > 0 Then
-                    tran.Commit()
-                    Return True
-                Else
-                    tran.Rollback()
-                    Return False
-                End If
+                'If cmd2.ExecuteNonQuery > 0 Then
+                tran.Commit()
+                desconectar()
+                Return True
+                'Else
+                '    tran.Rollback()
+                '    Return False
+                'End If
             Else
+                desconectar()
                 Return False
             End If
             desconectar()
@@ -567,22 +594,138 @@ begin
         End Try
     End Function
 
-    Public Function updateEquipaMent()
+    Public Function updateEquipaMent(ByVal equipamentN As String, ByVal idPO As String, ByVal jobNO As String) As Boolean
         Try
             conectar()
-            Dim cmd As New SqlCommand("", conn)
+            Dim cmd As New SqlCommand("update projectOrder set equipament = '" + equipamentN + "' where idPO= " + idPO + " and jobNo = " + jobNO, conn)
             If cmd.ExecuteNonQuery > 0 Then
-
                 desconectar()
+                Return True
             Else
-
                 desconectar()
+                Return False
             End If
-
         Catch ex As Exception
-
+            MsgBox(ex.Message)
+            Return False
         End Try
     End Function
 
+    Public Function updateManeger(ByVal managerN As String, ByVal idPO As String, ByVal jobNO As String) As Boolean
+        Try
+            conectar()
+            Dim cmd As New SqlCommand("update projectOrder set manager = '" + managerN + "' where idPO = " + idPO + " and jobNo = " + jobNO, conn)
+            If cmd.ExecuteNonQuery > 0 Then
+                desconectar()
+                Return True
+            Else
+                desconectar()
+                Return False
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message)
+            Return False
+        End Try
+    End Function
+
+    Public Function updateDescription(ByRef description As String, ByVal idPO As String, ByVal jobNo As String) As Boolean
+        Try
+            conectar()
+            Dim cmd As New SqlCommand("update projectOrder set description = '" + description + "' where idPO = " + idPO + " and jobNo = " + jobNo, conn)
+            If cmd.ExecuteNonQuery > 0 Then
+                desconectar()
+                Return True
+            Else
+                desconectar()
+                Return False
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message)
+            Return False
+        End Try
+    End Function
+
+    Public Function updateTotalBilling(ByVal totalBillingN As Double, ByVal idPO As String, ByVal jobNo As String) As Boolean
+        Try
+            conectar()
+            Dim cmd As New SqlCommand("update projectOrder set estTotalBilling = " + CStr(totalBillingN) + " where idPO = " + idPO + " and jobNo= " + jobNo, conn)
+            If cmd.ExecuteNonQuery > 0 Then
+                desconectar()
+                Return True
+            Else
+                desconectar()
+                Return False
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message)
+            Return False
+        End Try
+    End Function
+
+    Public Function updateHoursEstimate(ByVal HoursN As Double, ByVal idPO As String, ByVal jobNo As String) As Boolean
+        Try
+            conectar()
+            Dim cmd As New SqlCommand("update projectOrder set estimateHours = " + CStr(HoursN) + " where idPO = " + idPO + " and jobNo= " + jobNo, conn)
+            If cmd.ExecuteNonQuery > 0 Then
+                desconectar()
+                Return True
+            Else
+                desconectar()
+                Return False
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message)
+            Return False
+        End Try
+    End Function
+
+    Public Function updateBeginDate(ByVal beginDateN As Date, ByVal idPO As String, ByVal joNO As String) As Boolean
+        Try
+            conectar()
+            Dim cmd As New SqlCommand("update projectOrder set beginDate = '" + validaFechaParaSQl(beginDate) + "' where idPO = " + idPO + " and jobNo= " + joNO, conn)
+            If cmd.ExecuteNonQuery > 0 Then
+                Return True
+            Else
+                Return False
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message())
+            Return False
+        End Try
+
+    End Function
+
+    Public Function updateEndDate(ByVal EndDateN As Date, ByVal idPO As String, ByVal joNO As String) As Boolean
+        Try
+            conectar()
+            Dim cmd As New SqlCommand("update projectOrder set endDate = '" + validaFechaParaSQl(EndDateN) + "' where idPO = " + idPO + " and jobNo= " + joNO, conn)
+            If cmd.ExecuteNonQuery > 0 Then
+                Return True
+            Else
+                Return False
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message())
+            Return False
+        End Try
+
+    End Function
+
+    Public Function updateAccont(ByRef accountN As String, ByVal idPO As String, ByVal jobNo As String) As Boolean
+        Try
+            conectar()
+            Dim cmd As New SqlCommand("update projectOrder set accountNum = " + accountN + " where idPO = " + idPO + " and jobNo = " + jobNo, conn)
+            If cmd.ExecuteNonQuery > 0 Then
+                desconectar()
+                Return True
+            Else
+                desconectar()
+                Return False
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message)
+            Return False
+        End Try
+    End Function
 
 End Class

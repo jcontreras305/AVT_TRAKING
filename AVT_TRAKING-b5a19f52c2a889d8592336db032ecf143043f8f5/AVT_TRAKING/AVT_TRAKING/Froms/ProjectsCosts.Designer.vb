@@ -83,12 +83,12 @@ Partial Class ProjectsCosts
         Me.Label16 = New System.Windows.Forms.Label()
         Me.TextBox7 = New System.Windows.Forms.TextBox()
         Me.TabControl1 = New System.Windows.Forms.TabControl()
-        Me.tbpMaterials = New System.Windows.Forms.TabPage()
-        Me.tblMaterialProjects = New System.Windows.Forms.DataGridView()
-        Me.tbpExpences = New System.Windows.Forms.TabPage()
-        Me.tblExpencesProjects = New System.Windows.Forms.DataGridView()
         Me.tbpHoursWorked = New System.Windows.Forms.TabPage()
         Me.tblHoursWorkedProject = New System.Windows.Forms.DataGridView()
+        Me.tbpExpences = New System.Windows.Forms.TabPage()
+        Me.tblExpencesProjects = New System.Windows.Forms.DataGridView()
+        Me.tbpMaterials = New System.Windows.Forms.TabPage()
+        Me.tblMaterialProjects = New System.Windows.Forms.DataGridView()
         Me.pnlTablas = New System.Windows.Forms.Panel()
         Me.Panel5 = New System.Windows.Forms.Panel()
         Me.Panel1.SuspendLayout()
@@ -99,12 +99,12 @@ Partial Class ProjectsCosts
         Me.Panel2.SuspendLayout()
         Me.Panel3.SuspendLayout()
         Me.TabControl1.SuspendLayout()
-        Me.tbpMaterials.SuspendLayout()
-        CType(Me.tblMaterialProjects, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.tbpExpences.SuspendLayout()
-        CType(Me.tblExpencesProjects, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.tbpHoursWorked.SuspendLayout()
         CType(Me.tblHoursWorkedProject, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.tbpExpences.SuspendLayout()
+        CType(Me.tblExpencesProjects, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.tbpMaterials.SuspendLayout()
+        CType(Me.tblMaterialProjects, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.pnlTablas.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -285,7 +285,10 @@ Partial Class ProjectsCosts
         '
         'sprHoursEstimate
         '
+        Me.sprHoursEstimate.DecimalPlaces = 2
+        Me.sprHoursEstimate.Increment = New Decimal(New Integer() {10, 0, 0, 0})
         Me.sprHoursEstimate.Location = New System.Drawing.Point(369, 204)
+        Me.sprHoursEstimate.Maximum = New Decimal(New Integer() {1410065408, 2, 0, 0})
         Me.sprHoursEstimate.Name = "sprHoursEstimate"
         Me.sprHoursEstimate.Size = New System.Drawing.Size(131, 20)
         Me.sprHoursEstimate.TabIndex = 25
@@ -301,7 +304,7 @@ Partial Class ProjectsCosts
         '
         'dtpBeginDate
         '
-        Me.dtpBeginDate.CustomFormat = "YYYY-MM-DD"
+        Me.dtpBeginDate.CustomFormat = "MM/dd/yyyy"
         Me.dtpBeginDate.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
         Me.dtpBeginDate.Location = New System.Drawing.Point(369, 151)
         Me.dtpBeginDate.Name = "dtpBeginDate"
@@ -310,7 +313,10 @@ Partial Class ProjectsCosts
         '
         'sprTotalBilling
         '
+        Me.sprTotalBilling.DecimalPlaces = 2
+        Me.sprTotalBilling.Increment = New Decimal(New Integer() {10, 0, 0, 0})
         Me.sprTotalBilling.Location = New System.Drawing.Point(370, 124)
+        Me.sprTotalBilling.Maximum = New Decimal(New Integer() {1410065408, 2, 0, 0})
         Me.sprTotalBilling.Name = "sprTotalBilling"
         Me.sprTotalBilling.Size = New System.Drawing.Size(130, 20)
         Me.sprTotalBilling.TabIndex = 22
@@ -696,46 +702,6 @@ Partial Class ProjectsCosts
         Me.TabControl1.Size = New System.Drawing.Size(901, 271)
         Me.TabControl1.TabIndex = 3
         '
-        'tbpMaterials
-        '
-        Me.tbpMaterials.Controls.Add(Me.tblMaterialProjects)
-        Me.tbpMaterials.Location = New System.Drawing.Point(4, 22)
-        Me.tbpMaterials.Name = "tbpMaterials"
-        Me.tbpMaterials.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbpMaterials.Size = New System.Drawing.Size(893, 245)
-        Me.tbpMaterials.TabIndex = 2
-        Me.tbpMaterials.Text = "Matrials"
-        Me.tbpMaterials.UseVisualStyleBackColor = True
-        '
-        'tblMaterialProjects
-        '
-        Me.tblMaterialProjects.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.tblMaterialProjects.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.tblMaterialProjects.Location = New System.Drawing.Point(3, 3)
-        Me.tblMaterialProjects.Name = "tblMaterialProjects"
-        Me.tblMaterialProjects.Size = New System.Drawing.Size(887, 239)
-        Me.tblMaterialProjects.TabIndex = 0
-        '
-        'tbpExpences
-        '
-        Me.tbpExpences.Controls.Add(Me.tblExpencesProjects)
-        Me.tbpExpences.Location = New System.Drawing.Point(4, 22)
-        Me.tbpExpences.Name = "tbpExpences"
-        Me.tbpExpences.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbpExpences.Size = New System.Drawing.Size(893, 245)
-        Me.tbpExpences.TabIndex = 1
-        Me.tbpExpences.Text = "Expences"
-        Me.tbpExpences.UseVisualStyleBackColor = True
-        '
-        'tblExpencesProjects
-        '
-        Me.tblExpencesProjects.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.tblExpencesProjects.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.tblExpencesProjects.Location = New System.Drawing.Point(3, 3)
-        Me.tblExpencesProjects.Name = "tblExpencesProjects"
-        Me.tblExpencesProjects.Size = New System.Drawing.Size(887, 239)
-        Me.tblExpencesProjects.TabIndex = 0
-        '
         'tbpHoursWorked
         '
         Me.tbpHoursWorked.Controls.Add(Me.tblHoursWorkedProject)
@@ -761,6 +727,46 @@ Partial Class ProjectsCosts
         Me.tblHoursWorkedProject.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
         Me.tblHoursWorkedProject.Size = New System.Drawing.Size(887, 239)
         Me.tblHoursWorkedProject.TabIndex = 2
+        '
+        'tbpExpences
+        '
+        Me.tbpExpences.Controls.Add(Me.tblExpencesProjects)
+        Me.tbpExpences.Location = New System.Drawing.Point(4, 22)
+        Me.tbpExpences.Name = "tbpExpences"
+        Me.tbpExpences.Padding = New System.Windows.Forms.Padding(3)
+        Me.tbpExpences.Size = New System.Drawing.Size(893, 245)
+        Me.tbpExpences.TabIndex = 1
+        Me.tbpExpences.Text = "Expences"
+        Me.tbpExpences.UseVisualStyleBackColor = True
+        '
+        'tblExpencesProjects
+        '
+        Me.tblExpencesProjects.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.tblExpencesProjects.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.tblExpencesProjects.Location = New System.Drawing.Point(3, 3)
+        Me.tblExpencesProjects.Name = "tblExpencesProjects"
+        Me.tblExpencesProjects.Size = New System.Drawing.Size(887, 239)
+        Me.tblExpencesProjects.TabIndex = 0
+        '
+        'tbpMaterials
+        '
+        Me.tbpMaterials.Controls.Add(Me.tblMaterialProjects)
+        Me.tbpMaterials.Location = New System.Drawing.Point(4, 22)
+        Me.tbpMaterials.Name = "tbpMaterials"
+        Me.tbpMaterials.Padding = New System.Windows.Forms.Padding(3)
+        Me.tbpMaterials.Size = New System.Drawing.Size(893, 245)
+        Me.tbpMaterials.TabIndex = 2
+        Me.tbpMaterials.Text = "Matrials"
+        Me.tbpMaterials.UseVisualStyleBackColor = True
+        '
+        'tblMaterialProjects
+        '
+        Me.tblMaterialProjects.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.tblMaterialProjects.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.tblMaterialProjects.Location = New System.Drawing.Point(3, 3)
+        Me.tblMaterialProjects.Name = "tblMaterialProjects"
+        Me.tblMaterialProjects.Size = New System.Drawing.Size(887, 239)
+        Me.tblMaterialProjects.TabIndex = 0
         '
         'pnlTablas
         '
@@ -805,12 +811,12 @@ Partial Class ProjectsCosts
         Me.Panel3.ResumeLayout(False)
         Me.Panel3.PerformLayout()
         Me.TabControl1.ResumeLayout(False)
-        Me.tbpMaterials.ResumeLayout(False)
-        CType(Me.tblMaterialProjects, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.tbpExpences.ResumeLayout(False)
-        CType(Me.tblExpencesProjects, System.ComponentModel.ISupportInitialize).EndInit()
         Me.tbpHoursWorked.ResumeLayout(False)
         CType(Me.tblHoursWorkedProject, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.tbpExpences.ResumeLayout(False)
+        CType(Me.tblExpencesProjects, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.tbpMaterials.ResumeLayout(False)
+        CType(Me.tblMaterialProjects, System.ComponentModel.ISupportInitialize).EndInit()
         Me.pnlTablas.ResumeLayout(False)
         Me.ResumeLayout(False)
 

@@ -2,7 +2,7 @@
     Private _idPO, _accountNum, _jobNum As Integer
     Private _equipament, _manager, _description, _expCode As String
     Private _beginDate, _endDate As Date
-    Private _estimateHours As Double
+    Private _estimateHours, _totalBilling As Double
     Private _status As Char
 
     Public Property idPO As Integer
@@ -101,6 +101,15 @@
         End Get
         Set(value As Char)
             _status = value
+        End Set
+    End Property
+
+    Public Property totalBilling As Double
+        Get
+            Return _totalBilling
+        End Get
+        Set(value As Double)
+            _totalBilling = value
         End Set
     End Property
 End Class

@@ -52,4 +52,10 @@
         Return flag
     End Function
 
+    Public Function validaFechaParaSQl(ByVal fecha As Date) As String
+        Dim array() As String = CStr(fecha).Split("/")
+        Dim fecha1 As String = array(2) + "-" + array(1) + "-" + array(0)
+        Return fecha1
+    End Function
+
 End Module
