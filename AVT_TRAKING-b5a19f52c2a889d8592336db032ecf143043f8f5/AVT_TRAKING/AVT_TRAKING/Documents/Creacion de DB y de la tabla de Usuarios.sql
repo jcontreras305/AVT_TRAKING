@@ -220,6 +220,7 @@ GO
 create table job (
 	jobNo bigint primary key not null,
 	workTMLumpSum varchar(40),
+	costDistribution varchar(30),
 	custumerNo int,
 	contractNo int,
 	costCode bigInt,
