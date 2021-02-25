@@ -482,6 +482,8 @@ GO
 
 ALTER TABLE    workOrder   WITH CHECK ADD  CONSTRAINT  fk_idPO_workOrder  FOREIGN KEY( idPO )
 REFERENCES    projectOrder  ( idPO )
+on update cascade
+on delete cascade
 GO
 
 --========================================================================================================

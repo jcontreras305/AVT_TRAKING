@@ -22,7 +22,9 @@
         mtdJobs.llenarComboJob(cmbJobNumber, idCliente)
         'aqui se consulta y se cargan los datos en la interfaz
         mtdJobs.consultaWO(JobNumber, tablasDeTareas)
-        cargarDatosProjecto(JobNumber)
+        If Not cargarDatosProjecto(JobNumber) Then
+            activarCampos(False)
+        End If
         txtClientName.Enabled = False
         dtpBeginDate.CustomFormat = "MM/dd/yyyy"
         dtpEndDate.CustomFormat = "MM/dd/yyyy"
@@ -106,31 +108,37 @@
         If btnAddRecord.Text = "Add Record" Then
             btnAddRecord.Text = "Save Record"
             limpiarCampos()
-            activarCampos(True)
+            'activarCampos(True)
             chbComplete.Checked = False
             flagAddRecord = True
+            pjtNuevo.clear()
+            dtpBeginDate.Value = pjtNuevo.beginDate
+            dtpEndDate.Value = pjtNuevo.endDate
+            lblWorkOrder.Text = ""
+
         Else
             btnAddRecord.Text = "Add Record"
-
         End If
     End Sub
 
     Private Function limpiarCampos() As Boolean
-        Me.txtWokOrder.Text = ""
-        Me.txtTask.Text = ""
-        Me.txtProjectDescription.Text = ""
-        Me.txtEquipament.Text = ""
-        Me.txtAcountNo.Text = ""
-        Me.txtClientPO.Text = ""
-        Me.cmbExpCode.SelectedIndex = 0
-        Me.cmbJobNumber.Text = ""
-        Me.cmbJobNumber.SelectedIndex = Nothing
-        Me.cmbProjectManager.Text = ""
-        Me.cmbProjectManager.SelectedIndex = Nothing
+        txtWokOrder.Text = ""
+        txtTask.Text = ""
+        txtProjectDescription.Text = ""
+        txtEquipament.Text = ""
+        txtAcountNo.Text = ""
+        txtClientPO.Text = ""
+        cmbExpCode.SelectedIndex = 0
+        cmbJobNumber.Text = ""
+        cmbJobNumber.SelectedIndex = Nothing
+        cmbProjectManager.Text = ""
+        cmbProjectManager.SelectedIndex = Nothing
+        sprHoursEstimate.Value = 0
+        sprTotalBilling.Value = 0
         Return True
     End Function
     Private Function llenarCampos(ByVal lstDatosPO As List(Of String)) As Boolean
-        If lstDatosPO.Count > 0 Then
+        If lstDatosPO.Count > 0 And Not lstDatosPO Is Nothing Then
             txtClientName.Text = lstDatosPO(0)
             txtWokOrder.Text = If(txtWokOrder.Text = "", lstDatosPO(1), txtWokOrder.Text)
             txtTask.Text = lstDatosPO(2)
@@ -179,8 +187,14 @@
         End If
     End Function
     Private Sub cmbJobNumber_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbJobNumber.SelectedIndexChanged
-        JobNumber = cmbJobNumber.Text
-        cargarDatosProjecto(JobNumber)
+        If flagAddRecord Then
+            If cmbJobNumber.SelectedItem <> "" Then
+                pjt.jobNum = cmbJobNumber.Text
+            End If
+        Else
+            JobNumber = cmbJobNumber.SelectedItem
+            cargarDatosProjecto(JobNumber)
+        End If
     End Sub
 
 
@@ -248,12 +262,16 @@
                     pjtNuevo.idPO = CInt(txtClientPO.Text)
                     txtProjectDescription.Focus()
                 Else
-                    pjt.idPO = CInt(txtClientPO.Text)
-                    txtProjectDescription.Focus()
+                    If mtdJobs.updatePO(txtClientPO.Text, pjt.idPO, pjt.jobNum) Then
+                        pjt.idPO = CInt(txtClientPO.Text)
+                        txtProjectDescription.Focus()
+                    Else
+                        txtClientPO.Text = CStr(pjt.idPO)
+                    End If
                 End If
             Else
                 If flagAddRecord Then
-                    txtClientPO.Text = ""
+                    txtClientPO.Text = pjtNuevo.idPO
                 Else
                     txtClientPO.Text = pjt.idPO
                 End If
@@ -265,33 +283,51 @@
     '=========================================================================================================================
     Private Sub txtEquipament_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtEquipament.KeyPress
         If Asc(e.KeyChar) = Keys.Enter Then
-            If validarEquipament() Then
-                pjt.equipament = txtEquipament.Text
+            If flagAddRecord Then
+                If validarEquipament() Then
+                    pjtNuevo.equipament = txtEquipament.Text
+                Else
+                    txtEquipament.Text = pjtNuevo.equipament
+                End If
             Else
-                txtEquipament.Text = pjt.equipament
+                If validarEquipament() Then
+                    If mtdJobs.updateEquipaMent(txtEquipament.Text, pjt.idPO, JobNumber) Then
+                        pjt.equipament = txtEquipament.Text
+                    Else
+                        txtEquipament.Text = pjt.equipament
+                    End If
+                End If
             End If
         End If
     End Sub
 
     Private Sub txtEquipament_Leave(sender As Object, e As EventArgs) Handles txtEquipament.Leave
-        If txtEquipament.Text <> pjt.equipament Then
-            txtEquipament.Text = pjt.equipament
+        If flagAddRecord Then
+            If txtEquipament.Text <> pjtNuevo.equipament Then
+                txtEquipament.Text = pjt.equipament
+            End If
+        Else
+            If txtEquipament.Text <> pjt.equipament Then
+                txtEquipament.Text = pjt.equipament
+            End If
         End If
     End Sub
 
     Private Function validarEquipament() As Boolean
-        If txtEquipament.Text.Length <= 30 Then
-            If Not mtdJobs.updateEquipaMent(txtEquipament.Text, pjt.idPO.ToString(), pjt.jobNum) Then
-                MessageBox.Show("Is probably that the PO exist, try with other number.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-                txtClientPO.Text = pjt.idPO.ToString
-                Return False
-            Else
+        If flagAddRecord Then
+            If txtEquipament.Text.Length <= 30 Then
                 Return True
+            Else
+                MessageBox.Show("The parameter 'equipment' only permit a maximum of 30 characters.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                Return False
             End If
         Else
-            MessageBox.Show("The parameter 'equipment' only permit a maximum of 30 characters.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-            txtClientPO.Text = pjt.idPO.ToString
-            Return False
+            If txtEquipament.Text.Length <= 30 Then
+                Return True
+            Else
+                MessageBox.Show("The parameter 'equipment' only permit a maximum of 30 characters.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                Return False
+            End If
         End If
     End Function
 
@@ -300,55 +336,75 @@
 
     Private Sub cmbProjectManager_SelectionChangeCommitted(sender As Object, e As EventArgs) Handles cmbProjectManager.SelectionChangeCommitted
         If cmbProjectManager.SelectedItem <> pjt.manager Then
-            flagManger = "Selection"
-            If validarManager() Then
-                pjt.manager = cmbProjectManager.SelectedItem
+            If flagAddRecord Then
+                flagManger = "Selection"
+                If validarManager() Then
+                    pjtNuevo.manager = cmbProjectManager.SelectedItem
+                Else
+                    cmbProjectManager.SelectedIndex = cmbProjectManager.FindString(pjt.manager)
+                    cmbProjectManager.Text = pjt.manager
+                End If
             Else
-                cmbProjectManager.SelectedIndex = cmbProjectManager.FindString(pjt.manager)
-                cmbProjectManager.Text = pjt.manager
+                flagManger = "Selection"
+                If validarManager() Then
+                    If mtdJobs.updateManeger(cmbProjectManager.SelectedItem, pjt.idPO, pjt.jobNum) Then
+                        pjt.manager = cmbProjectManager.SelectedItem
+                    Else
+                        cmbProjectManager.SelectedIndex = cmbProjectManager.FindString(pjt.manager)
+                        cmbProjectManager.Text = pjt.manager
+                    End If
+                Else
+                    cmbProjectManager.SelectedIndex = cmbProjectManager.FindString(pjt.manager)
+                    cmbProjectManager.Text = pjt.manager
+                End If
             End If
-        Else
-            cmbProjectManager.SelectedIndex = cmbProjectManager.FindString(pjt.manager)
-            cmbProjectManager.Text = pjt.manager
         End If
     End Sub
 
     Private Function validarManager() As Boolean
         If flagManger = "Enter" And cmbProjectManager.Text = "" Then
             If DialogResult.Yes = MessageBox.Show("Are you sure to save None like a Manager?", "Important", MessageBoxButtons.YesNo, MessageBoxIcon.Question) Then
-                If mtdJobs.updateManeger(cmbProjectManager.Text, pjt.idPO, pjt.jobNum) Then
-                    Return True
-                Else
-                    Return False
-                End If
+                Return True
             Else
                 Return False
             End If
         Else
-            If mtdJobs.updateManeger(cmbProjectManager.SelectedItem, pjt.idPO, pjt.jobNum) Then
+            If cmbProjectManager.SelectedItem <> "" Then
                 Return True
             Else
                 Return False
             End If
         End If
-
-
     End Function
-    Dim flagManger As String
 
+    Dim flagManger As String 'esta se usa para validar si hizo enter para ingresar
     Private Sub cmbProjectManager_KeyPress(sender As Object, e As KeyPressEventArgs) Handles cmbProjectManager.KeyPress
         If Asc(e.KeyChar) = Keys.Enter Then
-            If cmbProjectManager.Text <> pjt.manager Then
-                flagManger = "Enter"
-                If validarManager() Then
-                    pjt.manager = If(cmbProjectManager.SelectedItem = Nothing, "", cmbProjectManager.SelectedItem)
-                Else
-                    cmbProjectManager.SelectedIndex = cmbProjectManager.FindString(pjt.manager)
-                    cmbProjectManager.Text = pjt.manager
+            If flagAddRecord Then
+                If cmbProjectManager.Text <> pjtNuevo.manager Then
+                    flagManger = "Enter"
+                    If validarManager() Then
+                        pjtNuevo.manager = If(cmbProjectManager.SelectedItem = Nothing, "", cmbProjectManager.SelectedItem)
+                    Else
+                        cmbProjectManager.SelectedIndex = cmbProjectManager.FindString(pjtNuevo.manager)
+                        cmbProjectManager.Text = pjtNuevo.manager
+                    End If
                 End If
             Else
-                cmbProjectManager.SelectedIndex = cmbProjectManager.FindString(pjt.manager)
-                cmbProjectManager.Text = pjt.manager
+                If cmbProjectManager.Text <> pjt.manager Then
+                    flagManger = "Enter"
+                    If validarManager() Then
+                        If mtdJobs.updateManeger(cmbProjectManager.SelectedItem, pjt.idPO, pjt.jobNum) Then
+                            pjt.manager = If(cmbProjectManager.SelectedItem = Nothing, "", cmbProjectManager.SelectedItem)
+                        Else
+                            cmbProjectManager.SelectedIndex = cmbProjectManager.FindString(pjt.manager)
+                            cmbProjectManager.Text = pjt.manager
+                        End If
+                    Else
+                        cmbProjectManager.SelectedIndex = cmbProjectManager.FindString(pjt.manager)
+                        cmbProjectManager.Text = pjt.manager
+                    End If
+                End If
             End If
         End If
     End Sub
@@ -593,20 +649,20 @@
     End Sub
 
     Private Sub activarCampos(ByVal activar As Boolean)
-
-        Me.txtWokOrder.Enabled = activar
-        Me.txtTask.Enabled = activar
-        Me.txtEquipament.Enabled = activar
-        Me.txtClientPO.Enabled = activar
-        Me.txtProjectDescription.Enabled = activar
-        Me.txtAcountNo.Enabled = activar
-        Me.cmbProjectManager.Enabled = activar
-        Me.sprTotalBilling.Enabled = activar
-        Me.sprHoursEstimate.Enabled = activar
-        Me.dtpBeginDate.Enabled = activar
-        Me.dtpEndDate.Enabled = activar
-        Me.tblExpencesProjects.Enabled = activar
-        Me.tblMaterialProjects.Enabled = activar
-        Me.tblHoursWorkedProject.Enabled = activar
+        txtWokOrder.Enabled = activar
+        txtTask.Enabled = activar
+        txtEquipament.Enabled = activar
+        txtClientPO.Enabled = activar
+        txtProjectDescription.Enabled = activar
+        txtAcountNo.Enabled = activar
+        cmbProjectManager.Enabled = activar
+        cmbExpCode.Enabled = activar
+        sprTotalBilling.Enabled = activar
+        sprHoursEstimate.Enabled = activar
+        dtpBeginDate.Enabled = activar
+        dtpEndDate.Enabled = activar
+        tblExpencesProjects.Enabled = activar
+        tblMaterialProjects.Enabled = activar
+        tblHoursWorkedProject.Enabled = activar
     End Sub
 End Class

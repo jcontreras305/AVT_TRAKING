@@ -166,22 +166,38 @@ Public Class MetodosJobs
     Public Function insertarNuevoProyecto(ByVal idClient As String, ByVal datosPO As List(Of String)) As String
         Try
             conectar()
-            Dim cmdIdPOMax As New SqlCommand("select MAX(idPO)+1 as idPOMax from projectOrder", conn)
+            Dim cmdIdPOMax As New SqlCommand("
+select 
+	Case
+	when  MAX(idPO)+1 is NULL then '60000000'
+	else  MAX(idPO)+1 
+	end
+as idPOMax from projectOrder", conn)
             Dim idPOMax As String = ""
             Dim reader As SqlDataReader = cmdIdPOMax.ExecuteReader()
             While reader.Read()
                 idPOMax = reader("idPOMax")
-                If idPOMax <> "" Or idPOMax <> "Null" Then
-                    Exit While
-                Else
-                    idPOMax = "60000000"
-                End If
             End While
             reader.Close()
+            Dim cmdidMaxWO As New SqlCommand("
+select
+case 
+when max(idWO)+1 is null then '50000000'
+else  max(idWO)+1 end
+as idWOMax
+from workOrder 
+", conn)
+            Dim idWOMax As String = ""
+            Dim reader2 As SqlDataReader = cmdidMaxWO.ExecuteReader()
+            While reader2.Read()
+                idWOMax = reader2("idWOMax")
+            End While
+            reader2.Close()
+
             Dim cmdJob As New SqlCommand("insert into job values (" + datosPO(0) + ",'" + datosPO(1) + "', '" + datosPO(2) + "'," + datosPO(3) + ", " + datosPO(4) + "," + datosPO(5) + ",'" + idClient + "')", conn)
             Dim cmdProyect As New SqlCommand("insert into projectOrder values (" + idPOMax + ",'','','',0.0,GETDATE(),DATEADD(MM,1,GETDATE()),'',0,0,'0'," + datosPO(0) + ")", conn)
-            Dim cmdWO As New SqlCommand("insert into workOrder values (convert(varchar(14),(select MAX(cast(idWO as int))+ 1 from workOrder)),'" + idPOMax + "')", conn)
-            Dim cmdTask As New SqlCommand("insert into task values (NEWID(),'',(select MAX(cast(idWO as int)) from workOrder),0.0)", conn)
+            Dim cmdWO As New SqlCommand("insert into workOrder values ('" + idWOMax + "','" + idPOMax + "')", conn)
+            Dim cmdTask As New SqlCommand("insert into task values (NEWID(),'','" + idWOMax + "',0.0)", conn)
             Dim tran As SqlTransaction
             tran = conn.BeginTransaction()
             cmdJob.Transaction = tran
@@ -682,7 +698,7 @@ end  ", conn)
     Public Function updateBeginDate(ByVal beginDateN As Date, ByVal idPO As String, ByVal joNO As String) As Boolean
         Try
             conectar()
-            Dim cmd As New SqlCommand("update projectOrder set beginDate = '" + validaFechaParaSQl(beginDate) + "' where idPO = " + idPO + " and jobNo= " + joNO, conn)
+            Dim cmd As New SqlCommand("update projectOrder set beginDate = '" + validaFechaParaSQl(beginDateN) + "' where idPO = " + idPO + " and jobNo= " + joNO, conn)
             If cmd.ExecuteNonQuery > 0 Then
                 Return True
             Else

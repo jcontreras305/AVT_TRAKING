@@ -112,4 +112,19 @@
             _totalBilling = value
         End Set
     End Property
+
+    Public Sub clear()
+        _accountNum = 0
+        _beginDate = System.DateTime.Today
+        _description = ""
+        _endDate = (System.DateTime.Today).AddMonths(2)
+        _equipament = ""
+        _estimateHours = 0
+        _expCode = ""
+        _idPO = 0
+        _jobNum = 0
+        _manager = ""
+        _status = "0"
+        _totalBilling = 0
+    End Sub
 End Class
