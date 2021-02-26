@@ -189,38 +189,68 @@ ha.idHomeAdress, ha.avenue ,ha.number, ha.city ,ha.providence,ha.postalCode from
     End Sub
 
     Dim consultaProyetosClientes As String = "
-
 select 
 	(select CONCAT(wo.idWO,' ',tk.task)) as 'Work Order' , 
 	po.description as 'Project Description', 
 	po.status as 'Cmp',
-	(select tk.totalSpend from task where idWO = wo.idWO and idAux = tk.idAux ) as 'Total Spend',
-	(select SUM(hoursST) from hoursWorked as hw where hw.idAux = tk.idAux)as 'Total Hours ST',
+	case when (select tk.totalSpend from task where idWO = wo.idWO and idAux = tk.idAux ) is null then 0
+	else  (select tk.totalSpend from task where idWO = wo.idWO and idAux = tk.idAux ) end
+	 as 'Total Spend',
+	
+	case when (select SUM(hoursST) from hoursWorked as hw where hw.idAux = tk.idAux) is null then 0 
+	else (select SUM(hoursST) from hoursWorked as hw where hw.idAux = tk.idAux)
+	end	as 'Total Hours ST',
+	
+	
+	case when 
 	(
 	select SUM(T2.Amount) as 'Total Amount ST' from 
 	(select SUM(T1.hoursST*T1.billingRate1) AS 'Amount'
 	from (select idHorsWorked,hoursST, hw.idWorkCode , billingRate1  from hoursWorked as hw inner join workCode as wc on wc.idWorkCode = hw.idWorkCode 
 	where idAux=tk.idAux)as T1    
 	group by T1.idWorkCode) as T2
-	) as 'Total Amount ST',
+	) is null then 0
+	else 
+	(
+	select SUM(T2.Amount) as 'Total Amount ST' from 
+	(select SUM(T1.hoursST*T1.billingRate1) AS 'Amount'
+	from (select idHorsWorked,hoursST, hw.idWorkCode , billingRate1  from hoursWorked as hw inner join workCode as wc on wc.idWorkCode = hw.idWorkCode 
+	where idAux=tk.idAux)as T1    
+	group by T1.idWorkCode) as T2
+	)end	as 'Total Amount ST',
 
-	(select SUM(hoursOT) from hoursWorked as hw where hw.idAux = tk.idAux)as 'Total Hours OT',
+	case when (select SUM(hoursOT) from hoursWorked as hw where hw.idAux = tk.idAux) is null then 0
+	else (select SUM(hoursOT) from hoursWorked as hw where hw.idAux = tk.idAux)
+	end	as 'Total Hours OT',
 
+	case when 
 	(select SUM(T2.Amount) from 
 	(select SUM(T1.hoursOT*T1.billingRateOT) AS 'Amount'
 	from (select idHorsWorked,hoursOT, hw.idWorkCode , billingRateOT  from hoursWorked as hw inner join workCode as wc on wc.idWorkCode = hw.idWorkCode 
 	where idAux=tk.idAux)as T1 
 	group by T1.idWorkCode) as T2
-	) as 'Total Amount OT',
-
-	(select SUM( amount) from expensesUsed where idAux = tk.idAux) AS 'Total Expenses Spend', 
-
-	(select sum (amount) from materialUsed where idAux = tk.idAux) as 'Total Material Spend',
+	) IS NULL  THEN 0
+	ELSE
+	(select SUM(T2.Amount) from 
+	(select SUM(T1.hoursOT*T1.billingRateOT) AS 'Amount'
+	from (select idHorsWorked,hoursOT, hw.idWorkCode , billingRateOT  from hoursWorked as hw inner join workCode as wc on wc.idWorkCode = hw.idWorkCode 
+	where idAux=tk.idAux)as T1 
+	group by T1.idWorkCode) as T2
+	)
+	END	as 'Total Amount OT',
+	CASE WHEN 
+	(select SUM( amount) from expensesUsed where idAux = tk.idAux) IS NULL THEN 0
+	ELSE (select SUM( amount) from expensesUsed where idAux = tk.idAux) END AS 'Total Expenses Spend', 
+	CASE WHEN 
+	(select sum (amount) from materialUsed where idAux = tk.idAux) IS NULL THEN 0
+	ELSE (select sum (amount) from materialUsed where idAux = tk.idAux) END AS 'Total Material Spend',
     jb.jobNo,
    	jb.workTMLumpSum,
 	jb.costDistribution,
-	jb.custumerNo,
-	jb.contractNo,
+	CASE WHEN jb.custumerNo IS NULL THEN ''
+	ELSE jb.custumerNo END AS 'custumerNo' ,
+	CASE  WHEN jb.contractNo IS NULL THEN ''
+	ELSE jb.contractNo END AS 'contractNo',
 	jb.costCode,
     cln.idClient,
     po.idPO,
@@ -230,7 +260,7 @@ clients as cln left join job as jb on jb.idClient = cln.idClient
 inner join projectOrder as po on po.jobNo = jb.jobNo
 left join workOrder as wo on wo.idPO = po.idPO
 left join task as tk on tk.idWO = wo.idWO
-where"
+where "
 
     Public Sub buscarProyectosDeClientePorProyeto(ByVal tabla As DataGridView, ByVal consulta As String)
         Try

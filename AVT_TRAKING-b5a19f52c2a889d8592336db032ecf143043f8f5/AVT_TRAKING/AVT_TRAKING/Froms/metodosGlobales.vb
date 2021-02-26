@@ -47,6 +47,9 @@
         For Each letra As Char In array
             If Char.IsDigit(letra) Then
                 flag = True
+            Else
+                flag = False
+                Exit For
             End If
         Next
         Return flag

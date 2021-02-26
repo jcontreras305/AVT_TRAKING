@@ -169,7 +169,7 @@ Public Class MetodosJobs
             Dim cmdIdPOMax As New SqlCommand("
 select 
 	Case
-	when  MAX(idPO)+1 is NULL then '60000000'
+	when  MAX(idPO)+1 is NULL then '6000'
 	else  MAX(idPO)+1 
 	end
 as idPOMax from projectOrder", conn)
@@ -182,7 +182,7 @@ as idPOMax from projectOrder", conn)
             Dim cmdidMaxWO As New SqlCommand("
 select
 case 
-when max(idWO)+1 is null then '50000000'
+when max(idWO)+1 is null then '5000'
 else  max(idWO)+1 end
 as idWOMax
 from workOrder 
@@ -194,7 +194,7 @@ from workOrder
             End While
             reader2.Close()
 
-            Dim cmdJob As New SqlCommand("insert into job values (" + datosPO(0) + ",'" + datosPO(1) + "', '" + datosPO(2) + "'," + datosPO(3) + ", " + datosPO(4) + "," + datosPO(5) + ",'" + idClient + "')", conn)
+            Dim cmdJob As New SqlCommand("insert into job values (" + datosPO(0) + ",'" + datosPO(1) + "', '" + datosPO(2) + "'," + If(datosPO(3) = "", "NULL", datosPO(3)) + ", " + If(datosPO(4) = "", "NULL", datosPO(4)) + "," + datosPO(5) + ",'" + idClient + "')", conn)
             Dim cmdProyect As New SqlCommand("insert into projectOrder values (" + idPOMax + ",'','','',0.0,GETDATE(),DATEADD(MM,1,GETDATE()),'',0,0,'0'," + datosPO(0) + ")", conn)
             Dim cmdWO As New SqlCommand("insert into workOrder values ('" + idWOMax + "','" + idPOMax + "')", conn)
             Dim cmdTask As New SqlCommand("insert into task values (NEWID(),'','" + idWOMax + "',0.0)", conn)

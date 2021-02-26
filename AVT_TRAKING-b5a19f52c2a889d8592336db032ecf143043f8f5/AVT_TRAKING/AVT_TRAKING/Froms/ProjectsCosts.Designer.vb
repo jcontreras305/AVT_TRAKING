@@ -718,6 +718,7 @@ Partial Class ProjectsCosts
         '
         Me.tblHoursWorkedProject.AllowUserToAddRows = False
         Me.tblHoursWorkedProject.AllowUserToDeleteRows = False
+        Me.tblHoursWorkedProject.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.tblHoursWorkedProject.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.tblHoursWorkedProject.Dock = System.Windows.Forms.DockStyle.Fill
         Me.tblHoursWorkedProject.Location = New System.Drawing.Point(3, 3)
@@ -741,6 +742,7 @@ Partial Class ProjectsCosts
         '
         'tblExpencesProjects
         '
+        Me.tblExpencesProjects.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.tblExpencesProjects.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.tblExpencesProjects.Dock = System.Windows.Forms.DockStyle.Fill
         Me.tblExpencesProjects.Location = New System.Drawing.Point(3, 3)
@@ -761,6 +763,7 @@ Partial Class ProjectsCosts
         '
         'tblMaterialProjects
         '
+        Me.tblMaterialProjects.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.tblMaterialProjects.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.tblMaterialProjects.Dock = System.Windows.Forms.DockStyle.Fill
         Me.tblMaterialProjects.Location = New System.Drawing.Point(3, 3)

@@ -488,10 +488,22 @@
     End Sub
 
     Private Function validarHours() As Boolean
-        If mtdJobs.updateHoursEstimate(sprHoursEstimate.Value, pjt.idPO, pjt.jobNum) Then
-            Return True
+        If sprHoursEstimate.Value > 0 Then
+            If flagAddRecord Then
+                Return True
+            Else
+                If mtdJobs.updateHoursEstimate(sprHoursEstimate.Value, pjt.idPO, pjt.jobNum) Then
+                    Return True
+                Else
+                    Return False
+                End If
+            End If
         Else
-            Return False
+            If DialogResult.Yes = MessageBox.Show("Do you like to assign 0.0 hours stimate?", "Important", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) Then
+                Return False
+            Else
+                Return False
+            End If
         End If
     End Function
 
@@ -510,7 +522,7 @@
 
     Private Function validarBeginDate() As Boolean
         Dim fechaActual As Date = System.DateTime.Today
-        If dtpBeginDate.Value > fechaActual Then
+        If dtpBeginDate.Value >= fechaActual Then
             Return True
         Else
             If DialogResult.Yes = MessageBox.Show("The selected date is before the current date, Are you sure to contienue?", "Important", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) Then
@@ -519,19 +531,25 @@
                 Return False
             End If
         End If
-
     End Function
 
     Private Sub dtpBeginDate_Leave(sender As Object, e As EventArgs) Handles dtpBeginDate.Leave
-        If validarBeginDate() Then
-            If mtdJobs.updateBeginDate(dtpBeginDate.Value, pjt.idPO, pjt.jobNum) Then
+        If flagAddRecord Then
+            If validarBeginDate() Then
                 pjt.beginDate = dtpBeginDate.Value
+            Else
+                dtpBeginDate.Value = pjtNuevo.beginDate
+            End If
+        Else
+            If validarBeginDate() Then
+                If mtdJobs.updateBeginDate(dtpBeginDate.Value, pjt.idPO, pjt.jobNum) Then
+                    pjt.beginDate = dtpBeginDate.Value
+                Else
+                    dtpBeginDate.Value = pjt.beginDate
+                End If
             Else
                 dtpBeginDate.Value = pjt.beginDate
             End If
-
-        Else
-            dtpBeginDate.Value = pjt.beginDate
         End If
     End Sub
 
@@ -555,32 +573,28 @@
 
     Private Function validarEndDate() As Boolean
         Dim fechaActual As Date = System.DateTime.Today
-        If dtpEndDate.Value > pjt.beginDate Then
+        If dtpEndDate.Value > If(flagAddRecord, pjtNuevo.beginDate, pjt.beginDate) Then
             Return True
         Else
-            MessageBox.Show("The selected date is before the begin date, Are you sure to contienue?", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-            Return False
+            If DialogResult.Yes = MessageBox.Show("The selected date is before the 'Begin Date', Are you sure to contienue?", "Error", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) Then
+                Return True
+            Else
+                Return False
+            End If
         End If
-
     End Function
 
     Private Sub dtpEndDate_Leave(sender As Object, e As EventArgs) Handles dtpEndDate.Leave
-        If validarEndDate() Then
-            If mtdJobs.updateEndDate(dtpEndDate.Value, pjt.idPO, pjt.jobNum) Then
-                pjt.beginDate = dtpEndDate.Value
+        If flagAddRecord Then
+            If validarEndDate() Then
+                pjtNuevo.beginDate = dtpEndDate.Value
             Else
-                dtpEndDate.Value = pjt.endDate
+                dtpEndDate.Value = pjtNuevo.endDate
             End If
         Else
-            dtpEndDate.Value = pjt.endDate
-        End If
-    End Sub
-
-    Private Sub dtpEndDate_KeyPress(sender As Object, e As KeyPressEventArgs) Handles dtpEndDate.KeyPress
-        If Asc(e.KeyChar) = Keys.Enter Then
             If validarEndDate() Then
                 If mtdJobs.updateEndDate(dtpEndDate.Value, pjt.idPO, pjt.jobNum) Then
-                    pjt.endDate = dtpEndDate.Value
+                    pjt.beginDate = dtpEndDate.Value
                 Else
                     dtpEndDate.Value = pjt.endDate
                 End If
@@ -590,45 +604,79 @@
         End If
     End Sub
 
+    Private Sub dtpEndDate_KeyPress(sender As Object, e As KeyPressEventArgs) Handles dtpEndDate.KeyPress
+        If Asc(e.KeyChar) = Keys.Enter Then
+            If flagAddRecord Then
+                If validarEndDate() Then
+                    pjtNuevo.endDate = dtpEndDate.Value
+                Else
+                    dtpEndDate.Value = pjtNuevo.endDate
+                End If
+            Else
+                If validarEndDate() Then
+                    If mtdJobs.updateEndDate(dtpEndDate.Value, pjt.idPO, pjt.jobNum) Then
+                        pjt.endDate = dtpEndDate.Value
+                    Else
+                        dtpEndDate.Value = pjt.endDate
+                    End If
+                Else
+                    dtpEndDate.Value = pjt.endDate
+                End If
+            End If
+        End If
+    End Sub
+
+    '================ ACCOUNT NUM ============================================================================================
+    '=========================================================================================================================
 
     Private Function validarAccountNO() As Boolean
         If soloNumero(txtProjectDescription.Text) Then
             If txtAcountNo.Text.Length = 0 Then
                 If DialogResult.Yes = MessageBox.Show("The parameter 'Account' don't detected enyone value, Do you want to save a 'Null' value?", "Important", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) Then
-                    txtAcountNo.Text = pjt.accountNum
                     Return True
                 Else
-                    txtAcountNo.Text = pjt.accountNum
                     Return False
                 End If
             Else
-                If mtdJobs.updateAccont(txtProjectDescription.Text, pjt.idPO, pjt.jobNum) Then
-                    Return True
-                Else
-                    Return False
-                End If
+                Return True
             End If
         Else
             If DialogResult.Yes = MessageBox.Show("The parameter 'Account' only permit numbers.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error) Then
-                txtAcountNo.Text = pjt.accountNum
+                Return False
             Else
                 Return False
             End If
         End If
     End Function
+
     Private Sub txtAcountNo_Leave(sender As Object, e As EventArgs) Handles txtAcountNo.Leave
         If txtAcountNo.Text <> pjt.accountNum Then
-            txtAcountNo.Text = pjt.accountNum
+            If flagAddRecord Then
+                txtAcountNo.Text = pjtNuevo.accountNum
+            Else
+                txtAcountNo.Text = pjt.accountNum
+            End If
+
         End If
     End Sub
 
     Private Sub txtAccount_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtAcountNo.KeyPress
         If Asc(e.KeyChar) = Keys.Enter Then
-            If txtAcountNo.Text <> pjt.accountNum Then
-                If validarAccountNO() Then
-                    pjt.accountNum = txtAcountNo.Text
-                Else
-                    txtAcountNo.Text = pjt.accountNum
+            If flagAddRecord Then
+                If txtAcountNo.Text <> pjt.accountNum Then
+                    If validarAccountNO() Then
+                        pjtNuevo.accountNum = txtAcountNo.Text
+                    Else
+                        txtAcountNo.Text = pjtNuevo.accountNum
+                    End If
+                End If
+            Else
+                If txtAcountNo.Text <> pjt.accountNum Then
+                    If validarAccountNO() Then
+                        pjt.accountNum = txtAcountNo.Text
+                    Else
+                        txtAcountNo.Text = pjt.accountNum
+                    End If
                 End If
             End If
         ElseIf Not IsNumeric(Asc(e.KeyChar)) Then
