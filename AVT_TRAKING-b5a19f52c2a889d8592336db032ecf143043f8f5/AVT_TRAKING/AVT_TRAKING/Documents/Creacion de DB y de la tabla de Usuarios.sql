@@ -287,16 +287,6 @@ GO
 
 create table projectOrder(
 	idPO bigint primary key not null ,
-	equipament varchar(30),
-	manager varchar(50),
-	description varchar(100),
-	estTotalBilling float,
-	beginDate date,
-	endDate date,
-	expCode varchar(20),
-	accountNum int ,
-	estimateHours float,
-	status char(1),
 	jobNo bigint 
 )
 GO
@@ -320,9 +310,18 @@ GO
 
 create table task (
 	idAux varchar(36) primary key not null,
-	task varchar(5) ,
+	task varchar(5),
 	idWO varchar(14),
-	totalSpend float
+	totalSpend float,
+	equipament varchar(30),
+	manager varchar(50),
+	description varchar(100),
+	estTotalBilling float,
+	beginDate date,
+	endDate date,
+	expCode varchar(20),
+	accountNum varchar(12) ,
+	estimateHours float
 )
 GO
 
@@ -1011,3 +1010,55 @@ GO
 --ON UPDATE CASCADE
 --ON DELETE CASCADE
 --GO
+
+--==============================================================================================================================
+--===== ESTE ES CODIGO SI NO SE QUIERE CREAR DESDE CERO LA BASE DE DATO ========================================================
+--==============================================================================================================================
+
+
+
+---- LE QUITAMOS LAS COLUMNAS CON EL DROP A LA TABLA PROJECTOREDER
+--ALTER TABLE projectOrder DROP COLUMN equipament
+--GO
+--ALTER TABLE projectOrder DROP COLUMN manager
+--GO
+--ALTER TABLE projectOrder DROP COLUMN description
+--GO
+--ALTER TABLE projectOrder DROP COLUMN estTotalBilling
+--GO
+--ALTER TABLE projectOrder DROP COLUMN beginDate
+--GO
+--ALTER TABLE projectOrder DROP COLUMN endDate
+--GO
+--ALTER TABLE projectOrder DROP COLUMN expCode
+--GO
+--ALTER TABLE projectOrder DROP COLUMN accountNum
+--GO
+--ALTER TABLE projectOrder DROP COLUMN estimateHours
+--GO
+--ALTER TABLE projectOrder DROP COLUMN status
+--GO
+----LE ASIGNAMOS LAS COLUMNAS A LA TABLA TASK VAN A PARECER COMO NULLS
+--ALTER TABLE task ADD equipament VARCHAR(30)
+--GO
+--ALTER TABLE task ADD manager VARCHAR(50)			
+--GO
+--ALTER TABLE task ADD description VARCHAR(100)				
+--GO
+--ALTER TABLE task ADD estTotalBilling FLOAT			
+--GO
+--ALTER TABLE task ADD beginDate DATE
+--GO
+--ALTER TABLE task ADD endDate DATE
+--GO
+--ALTER TABLE task ADD expCode VARCHAR(20)
+--GO
+--ALTER TABLE task ADD accountNum VARCHAR(12)
+--GO
+--ALTER TABLE task ADD estimateHours FLOAT		
+--GO
+--ALTER TABLE task ADD status CHAR(1)
+--GO
+
+--select * from task
+--select * from projectOrder 
