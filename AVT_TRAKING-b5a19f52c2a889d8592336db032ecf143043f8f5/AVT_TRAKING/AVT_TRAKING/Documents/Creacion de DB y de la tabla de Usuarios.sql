@@ -164,7 +164,7 @@ GO
 
 create table expenses (
 	idExpenses varchar(36) primary key not null,
-	expensesCode varchar(36) not null,
+	expenseCode varchar(36) not null,
 	description varchar(36)
 )
 GO
@@ -472,10 +472,11 @@ GO
 --##################  FOREIG KEYS TASK #####################################################
 --##########################################################################################
 
-ALTER TABLE    task   WITH CHECK ADD  CONSTRAINT  fk_idWO_task  FOREIGN KEY( idWO )
-REFERENCES    workOrder ( idWO )
+ALTER TABLE task WITH CHECK ADD CONSTRAINT fk_idWO_task FOREIGN KEY (idWO)
+REFERENCES workOrder (idWO)
+ON UPDATE CASCADE
+ON DELETE CASCADE
 GO
-
 
 --##########################################################################################
 --##################  FOREIG KEYS WORKORDER ################################################
@@ -998,7 +999,15 @@ GO
 ----drop database VRT_TRAKING
 
 
+----Si ya se tienen datos ejecutar esto dos datos para poder modificar workOrder en la 
+----ventana de ProjectCosts, si no borrar la base de datos y seleccionar todo a exepcion 
+----del codigo de abajo
 
+--ALTER TABLE task DROP CONSTRAINT fk_idWO_task 
+--GO
 
-
-
+--ALTER TABLE task WITH CHECK ADD CONSTRAINT fk_idWO_task FOREIGN KEY (idWO)
+--REFERENCES workOrder (idWO)
+--ON UPDATE CASCADE
+--ON DELETE CASCADE
+--GO

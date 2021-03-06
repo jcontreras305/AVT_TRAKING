@@ -191,8 +191,8 @@ ha.idHomeAdress, ha.avenue ,ha.number, ha.city ,ha.providence,ha.postalCode from
     Dim consultaProyetosClientes As String = "
 select 
 	(select CONCAT(wo.idWO,' ',tk.task)) as 'Work Order' , 
-	po.description as 'Project Description', 
-	po.status as 'Cmp',
+	tk.description as 'Project Description', 
+	tk.status as 'Cmp',
 	case when (select tk.totalSpend from task where idWO = wo.idWO and idAux = tk.idAux ) is null then 0
 	else  (select tk.totalSpend from task where idWO = wo.idWO and idAux = tk.idAux ) end
 	 as 'Total Spend',
@@ -200,8 +200,7 @@ select
 	case when (select SUM(hoursST) from hoursWorked as hw where hw.idAux = tk.idAux) is null then 0 
 	else (select SUM(hoursST) from hoursWorked as hw where hw.idAux = tk.idAux)
 	end	as 'Total Hours ST',
-	
-	
+		
 	case when 
 	(
 	select SUM(T2.Amount) as 'Total Amount ST' from 

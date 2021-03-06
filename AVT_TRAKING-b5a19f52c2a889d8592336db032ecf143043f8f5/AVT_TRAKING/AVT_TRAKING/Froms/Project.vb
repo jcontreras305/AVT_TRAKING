@@ -1,24 +1,33 @@
 ﻿Public Class Project
-    Private _idPO, _accountNum, _jobNum As Integer
-    Private _equipament, _manager, _description, _expCode As String
+    Private _jobNum, _idTask As Integer
+    Private _accountNum, _equipament, _manager, _description, _expCode, _idWO, _idPO, _idAux As String
     Private _beginDate, _endDate As Date
     Private _estimateHours, _totalBilling As Double
     Private _status As Char
 
-    Public Property idPO As Integer
+    Public Property idAux() As String
+        Get
+            Return _idAux
+        End Get
+        Set(ByVal value As String)
+            _idAux = value
+        End Set
+    End Property
+
+    Public Property idPO As String
         Get
             Return _idPO
         End Get
-        Set(value As Integer)
+        Set(value As String)
             _idPO = value
         End Set
     End Property
 
-    Public Property accountNum As Integer
+    Public Property accountNum As String
         Get
             Return _accountNum
         End Get
-        Set(value As Integer)
+        Set(value As String)
             _accountNum = value
         End Set
     End Property
@@ -113,6 +122,24 @@
         End Set
     End Property
 
+    Public Property idWorkOrder() As String
+        Get
+            Return _idWO
+        End Get
+        Set(ByVal value As String)
+            _idWO = value
+        End Set
+    End Property
+
+    Public Property idTask() As Integer
+        Get
+            Return _idTask
+        End Get
+        Set(ByVal value As Integer)
+            _idTask = value
+        End Set
+    End Property
+
     Public Sub clear()
         _accountNum = 0
         _beginDate = System.DateTime.Today
@@ -126,5 +153,8 @@
         _manager = ""
         _status = "0"
         _totalBilling = 0
+        _idWO = ""
+        _idTask = 0
     End Sub
+
 End Class
