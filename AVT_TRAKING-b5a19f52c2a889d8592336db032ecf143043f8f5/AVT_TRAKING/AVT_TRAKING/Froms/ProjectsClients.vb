@@ -47,15 +47,19 @@ Public Class ProjectsClients
             pjc.PO = idPO
             If workOrder = "" Or workOrder = Nothing Then
                 pjc.WorkOrder = ""
+                pjc.idAuxWO = ""
             Else
+                pjc.idAuxWO = tblProjectClients.CurrentRow().Cells("idAuxWO").Value
                 pjc.WorkOrder = workOrder
             End If
         Else
+            pjc.idAuxWO = ""
             pjc.WorkOrder = ""
             pjc.JobNumber = ""
             pjc.idCliente = ""
         End If
         pjc.ShowDialog()
+        mtdClient.buscarProyectosDeCliente(tblProjectClients, idCliente)
     End Sub
 
     Private Sub btnEmployees_Click(sender As Object, e As EventArgs) Handles btnEmployees.Click

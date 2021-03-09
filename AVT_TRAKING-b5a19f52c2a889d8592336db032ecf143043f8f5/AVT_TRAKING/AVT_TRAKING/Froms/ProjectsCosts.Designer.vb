@@ -23,6 +23,8 @@ Partial Class ProjectsCosts
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.Label25 = New System.Windows.Forms.Label()
+        Me.Label15 = New System.Windows.Forms.Label()
         Me.Label10 = New System.Windows.Forms.Label()
         Me.TextBox1 = New System.Windows.Forms.TextBox()
         Me.btnNextTask = New System.Windows.Forms.Button()
@@ -65,14 +67,14 @@ Partial Class ProjectsCosts
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Panel2 = New System.Windows.Forms.Panel()
         Me.Panel3 = New System.Windows.Forms.Panel()
-        Me.TextBox15 = New System.Windows.Forms.TextBox()
-        Me.TextBox14 = New System.Windows.Forms.TextBox()
-        Me.TextBox13 = New System.Windows.Forms.TextBox()
-        Me.TextBox12 = New System.Windows.Forms.TextBox()
-        Me.TextBox11 = New System.Windows.Forms.TextBox()
-        Me.TextBox10 = New System.Windows.Forms.TextBox()
-        Me.TextBox9 = New System.Windows.Forms.TextBox()
-        Me.TextBox8 = New System.Windows.Forms.TextBox()
+        Me.txtLeftSpend = New System.Windows.Forms.TextBox()
+        Me.txtProjectBilled = New System.Windows.Forms.TextBox()
+        Me.txtTotalMaterial = New System.Windows.Forms.TextBox()
+        Me.txtTotalExpenses = New System.Windows.Forms.TextBox()
+        Me.txtTotalHoursOTBilling = New System.Windows.Forms.TextBox()
+        Me.txtTotalHoursOT = New System.Windows.Forms.TextBox()
+        Me.txtTotalHoursBilling = New System.Windows.Forms.TextBox()
+        Me.txtTotalHours = New System.Windows.Forms.TextBox()
         Me.Label23 = New System.Windows.Forms.Label()
         Me.Label22 = New System.Windows.Forms.Label()
         Me.Label21 = New System.Windows.Forms.Label()
@@ -81,7 +83,7 @@ Partial Class ProjectsCosts
         Me.Label18 = New System.Windows.Forms.Label()
         Me.Label17 = New System.Windows.Forms.Label()
         Me.Label16 = New System.Windows.Forms.Label()
-        Me.TextBox7 = New System.Windows.Forms.TextBox()
+        Me.txtMensaje = New System.Windows.Forms.TextBox()
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.tbpHoursWorked = New System.Windows.Forms.TabPage()
         Me.tblHoursWorkedProject = New System.Windows.Forms.DataGridView()
@@ -111,6 +113,8 @@ Partial Class ProjectsCosts
         'Panel1
         '
         Me.Panel1.BackColor = System.Drawing.Color.FromArgb(CType(CType(190, Byte), Integer), CType(CType(190, Byte), Integer), CType(CType(190, Byte), Integer))
+        Me.Panel1.Controls.Add(Me.Label25)
+        Me.Panel1.Controls.Add(Me.Label15)
         Me.Panel1.Controls.Add(Me.Label10)
         Me.Panel1.Controls.Add(Me.TextBox1)
         Me.Panel1.Controls.Add(Me.btnNextTask)
@@ -154,6 +158,24 @@ Partial Class ProjectsCosts
         Me.Panel1.Size = New System.Drawing.Size(1107, 249)
         Me.Panel1.TabIndex = 0
         '
+        'Label25
+        '
+        Me.Label25.AutoSize = True
+        Me.Label25.Location = New System.Drawing.Point(507, 184)
+        Me.Label25.Name = "Label25"
+        Me.Label25.Size = New System.Drawing.Size(79, 13)
+        Me.Label25.TabIndex = 36
+        Me.Label25.Text = "DD/MM/YYYY"
+        '
+        'Label15
+        '
+        Me.Label15.AutoSize = True
+        Me.Label15.Location = New System.Drawing.Point(507, 157)
+        Me.Label15.Name = "Label15"
+        Me.Label15.Size = New System.Drawing.Size(79, 13)
+        Me.Label15.TabIndex = 35
+        Me.Label15.Text = "DD/MM/YYYY"
+        '
         'Label10
         '
         Me.Label10.AutoSize = True
@@ -165,9 +187,9 @@ Partial Class ProjectsCosts
         '
         'TextBox1
         '
-        Me.TextBox1.Location = New System.Drawing.Point(918, 200)
+        Me.TextBox1.Location = New System.Drawing.Point(839, 200)
         Me.TextBox1.Name = "TextBox1"
-        Me.TextBox1.Size = New System.Drawing.Size(100, 20)
+        Me.TextBox1.Size = New System.Drawing.Size(179, 20)
         Me.TextBox1.TabIndex = 32
         '
         'btnNextTask
@@ -175,7 +197,7 @@ Partial Class ProjectsCosts
         Me.btnNextTask.Location = New System.Drawing.Point(995, 116)
         Me.btnNextTask.Name = "btnNextTask"
         Me.btnNextTask.Size = New System.Drawing.Size(75, 23)
-        Me.btnNextTask.TabIndex = 33
+        Me.btnNextTask.TabIndex = 17
         Me.btnNextTask.Text = "Next"
         Me.btnNextTask.UseVisualStyleBackColor = True
         '
@@ -193,7 +215,7 @@ Partial Class ProjectsCosts
         Me.btnAfterTask.Location = New System.Drawing.Point(901, 116)
         Me.btnAfterTask.Name = "btnAfterTask"
         Me.btnAfterTask.Size = New System.Drawing.Size(75, 23)
-        Me.btnAfterTask.TabIndex = 32
+        Me.btnAfterTask.TabIndex = 16
         Me.btnAfterTask.Text = "After"
         Me.btnAfterTask.UseVisualStyleBackColor = True
         '
@@ -202,7 +224,7 @@ Partial Class ProjectsCosts
         Me.btnAddRecord.Location = New System.Drawing.Point(943, 74)
         Me.btnAddRecord.Name = "btnAddRecord"
         Me.btnAddRecord.Size = New System.Drawing.Size(75, 23)
-        Me.btnAddRecord.TabIndex = 31
+        Me.btnAddRecord.TabIndex = 18
         Me.btnAddRecord.Text = "Add Record"
         Me.btnAddRecord.UseVisualStyleBackColor = True
         '
@@ -211,7 +233,7 @@ Partial Class ProjectsCosts
         Me.txtTask.Location = New System.Drawing.Point(218, 125)
         Me.txtTask.Name = "txtTask"
         Me.txtTask.Size = New System.Drawing.Size(43, 20)
-        Me.txtTask.TabIndex = 30
+        Me.txtTask.TabIndex = 4
         '
         'Panel4
         '
@@ -261,7 +283,7 @@ Partial Class ProjectsCosts
         Me.chbComplete.Location = New System.Drawing.Point(781, 92)
         Me.chbComplete.Name = "chbComplete"
         Me.chbComplete.Size = New System.Drawing.Size(70, 17)
-        Me.chbComplete.TabIndex = 28
+        Me.chbComplete.TabIndex = 15
         Me.chbComplete.Text = "Complete"
         Me.chbComplete.UseVisualStyleBackColor = True
         '
@@ -281,7 +303,7 @@ Partial Class ProjectsCosts
         Me.txtAcountNo.Location = New System.Drawing.Point(633, 147)
         Me.txtAcountNo.Name = "txtAcountNo"
         Me.txtAcountNo.Size = New System.Drawing.Size(121, 20)
-        Me.txtAcountNo.TabIndex = 26
+        Me.txtAcountNo.TabIndex = 14
         '
         'sprHoursEstimate
         '
@@ -291,7 +313,7 @@ Partial Class ProjectsCosts
         Me.sprHoursEstimate.Maximum = New Decimal(New Integer() {1410065408, 2, 0, 0})
         Me.sprHoursEstimate.Name = "sprHoursEstimate"
         Me.sprHoursEstimate.Size = New System.Drawing.Size(131, 20)
-        Me.sprHoursEstimate.TabIndex = 25
+        Me.sprHoursEstimate.TabIndex = 12
         '
         'dtpEndDate
         '
@@ -300,7 +322,7 @@ Partial Class ProjectsCosts
         Me.dtpEndDate.Location = New System.Drawing.Point(370, 178)
         Me.dtpEndDate.Name = "dtpEndDate"
         Me.dtpEndDate.Size = New System.Drawing.Size(130, 20)
-        Me.dtpEndDate.TabIndex = 24
+        Me.dtpEndDate.TabIndex = 11
         '
         'dtpBeginDate
         '
@@ -309,7 +331,7 @@ Partial Class ProjectsCosts
         Me.dtpBeginDate.Location = New System.Drawing.Point(369, 151)
         Me.dtpBeginDate.Name = "dtpBeginDate"
         Me.dtpBeginDate.Size = New System.Drawing.Size(131, 20)
-        Me.dtpBeginDate.TabIndex = 23
+        Me.dtpBeginDate.TabIndex = 10
         '
         'sprTotalBilling
         '
@@ -319,7 +341,7 @@ Partial Class ProjectsCosts
         Me.sprTotalBilling.Maximum = New Decimal(New Integer() {1410065408, 2, 0, 0})
         Me.sprTotalBilling.Name = "sprTotalBilling"
         Me.sprTotalBilling.Size = New System.Drawing.Size(130, 20)
-        Me.sprTotalBilling.TabIndex = 22
+        Me.sprTotalBilling.TabIndex = 9
         '
         'txtProjectDescription
         '
@@ -327,35 +349,35 @@ Partial Class ProjectsCosts
         Me.txtProjectDescription.Multiline = True
         Me.txtProjectDescription.Name = "txtProjectDescription"
         Me.txtProjectDescription.Size = New System.Drawing.Size(228, 45)
-        Me.txtProjectDescription.TabIndex = 21
+        Me.txtProjectDescription.TabIndex = 8
         '
         'txtClientPO
         '
         Me.txtClientPO.Location = New System.Drawing.Point(100, 204)
         Me.txtClientPO.Name = "txtClientPO"
         Me.txtClientPO.Size = New System.Drawing.Size(161, 20)
-        Me.txtClientPO.TabIndex = 20
+        Me.txtClientPO.TabIndex = 7
         '
         'txtEquipament
         '
         Me.txtEquipament.Location = New System.Drawing.Point(100, 151)
         Me.txtEquipament.Name = "txtEquipament"
         Me.txtEquipament.Size = New System.Drawing.Size(161, 20)
-        Me.txtEquipament.TabIndex = 19
+        Me.txtEquipament.TabIndex = 5
         '
         'txtWokOrder
         '
         Me.txtWokOrder.Location = New System.Drawing.Point(100, 126)
         Me.txtWokOrder.Name = "txtWokOrder"
         Me.txtWokOrder.Size = New System.Drawing.Size(84, 20)
-        Me.txtWokOrder.TabIndex = 18
+        Me.txtWokOrder.TabIndex = 3
         '
         'txtClientName
         '
         Me.txtClientName.Location = New System.Drawing.Point(100, 101)
         Me.txtClientName.Name = "txtClientName"
         Me.txtClientName.Size = New System.Drawing.Size(161, 20)
-        Me.txtClientName.TabIndex = 17
+        Me.txtClientName.TabIndex = 2
         '
         'cmbExpCode
         '
@@ -364,7 +386,7 @@ Partial Class ProjectsCosts
         Me.cmbExpCode.Location = New System.Drawing.Point(633, 92)
         Me.cmbExpCode.Name = "cmbExpCode"
         Me.cmbExpCode.Size = New System.Drawing.Size(121, 21)
-        Me.cmbExpCode.TabIndex = 16
+        Me.cmbExpCode.TabIndex = 13
         '
         'cmbProjectManager
         '
@@ -372,7 +394,7 @@ Partial Class ProjectsCosts
         Me.cmbProjectManager.Location = New System.Drawing.Point(100, 177)
         Me.cmbProjectManager.Name = "cmbProjectManager"
         Me.cmbProjectManager.Size = New System.Drawing.Size(161, 21)
-        Me.cmbProjectManager.TabIndex = 15
+        Me.cmbProjectManager.TabIndex = 6
         '
         'cmbJobNumber
         '
@@ -380,7 +402,7 @@ Partial Class ProjectsCosts
         Me.cmbJobNumber.Location = New System.Drawing.Point(100, 73)
         Me.cmbJobNumber.Name = "cmbJobNumber"
         Me.cmbJobNumber.Size = New System.Drawing.Size(161, 21)
-        Me.cmbJobNumber.TabIndex = 14
+        Me.cmbJobNumber.TabIndex = 1
         '
         'Label14
         '
@@ -511,7 +533,7 @@ Partial Class ProjectsCosts
         'Panel2
         '
         Me.Panel2.Controls.Add(Me.Panel3)
-        Me.Panel2.Controls.Add(Me.TextBox7)
+        Me.Panel2.Controls.Add(Me.txtMensaje)
         Me.Panel2.Dock = System.Windows.Forms.DockStyle.Bottom
         Me.Panel2.Location = New System.Drawing.Point(0, 518)
         Me.Panel2.Name = "Panel2"
@@ -521,14 +543,14 @@ Partial Class ProjectsCosts
         'Panel3
         '
         Me.Panel3.BackColor = System.Drawing.Color.FromArgb(CType(CType(190, Byte), Integer), CType(CType(190, Byte), Integer), CType(CType(190, Byte), Integer))
-        Me.Panel3.Controls.Add(Me.TextBox15)
-        Me.Panel3.Controls.Add(Me.TextBox14)
-        Me.Panel3.Controls.Add(Me.TextBox13)
-        Me.Panel3.Controls.Add(Me.TextBox12)
-        Me.Panel3.Controls.Add(Me.TextBox11)
-        Me.Panel3.Controls.Add(Me.TextBox10)
-        Me.Panel3.Controls.Add(Me.TextBox9)
-        Me.Panel3.Controls.Add(Me.TextBox8)
+        Me.Panel3.Controls.Add(Me.txtLeftSpend)
+        Me.Panel3.Controls.Add(Me.txtProjectBilled)
+        Me.Panel3.Controls.Add(Me.txtTotalMaterial)
+        Me.Panel3.Controls.Add(Me.txtTotalExpenses)
+        Me.Panel3.Controls.Add(Me.txtTotalHoursOTBilling)
+        Me.Panel3.Controls.Add(Me.txtTotalHoursOT)
+        Me.Panel3.Controls.Add(Me.txtTotalHoursBilling)
+        Me.Panel3.Controls.Add(Me.txtTotalHours)
         Me.Panel3.Controls.Add(Me.Label23)
         Me.Panel3.Controls.Add(Me.Label22)
         Me.Panel3.Controls.Add(Me.Label21)
@@ -538,74 +560,75 @@ Partial Class ProjectsCosts
         Me.Panel3.Controls.Add(Me.Label17)
         Me.Panel3.Controls.Add(Me.Label16)
         Me.Panel3.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel3.Location = New System.Drawing.Point(0, 20)
+        Me.Panel3.Location = New System.Drawing.Point(0, 23)
         Me.Panel3.Name = "Panel3"
-        Me.Panel3.Size = New System.Drawing.Size(1107, 80)
+        Me.Panel3.Size = New System.Drawing.Size(1107, 77)
         Me.Panel3.TabIndex = 9
         '
-        'TextBox15
+        'txtLeftSpend
         '
-        Me.TextBox15.Location = New System.Drawing.Point(762, 40)
-        Me.TextBox15.Name = "TextBox15"
-        Me.TextBox15.ReadOnly = True
-        Me.TextBox15.Size = New System.Drawing.Size(120, 20)
-        Me.TextBox15.TabIndex = 32
+        Me.txtLeftSpend.Location = New System.Drawing.Point(762, 40)
+        Me.txtLeftSpend.Name = "txtLeftSpend"
+        Me.txtLeftSpend.RightToLeft = System.Windows.Forms.RightToLeft.No
+        Me.txtLeftSpend.Size = New System.Drawing.Size(120, 20)
+        Me.txtLeftSpend.TabIndex = 32
+        Me.txtLeftSpend.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
-        'TextBox14
+        'txtProjectBilled
         '
-        Me.TextBox14.Location = New System.Drawing.Point(762, 11)
-        Me.TextBox14.Name = "TextBox14"
-        Me.TextBox14.ReadOnly = True
-        Me.TextBox14.Size = New System.Drawing.Size(120, 20)
-        Me.TextBox14.TabIndex = 31
+        Me.txtProjectBilled.Location = New System.Drawing.Point(762, 11)
+        Me.txtProjectBilled.Name = "txtProjectBilled"
+        Me.txtProjectBilled.RightToLeft = System.Windows.Forms.RightToLeft.Yes
+        Me.txtProjectBilled.Size = New System.Drawing.Size(120, 20)
+        Me.txtProjectBilled.TabIndex = 31
         '
-        'TextBox13
+        'txtTotalMaterial
         '
-        Me.TextBox13.Location = New System.Drawing.Point(549, 37)
-        Me.TextBox13.Name = "TextBox13"
-        Me.TextBox13.ReadOnly = True
-        Me.TextBox13.Size = New System.Drawing.Size(120, 20)
-        Me.TextBox13.TabIndex = 30
+        Me.txtTotalMaterial.Location = New System.Drawing.Point(549, 37)
+        Me.txtTotalMaterial.Name = "txtTotalMaterial"
+        Me.txtTotalMaterial.RightToLeft = System.Windows.Forms.RightToLeft.Yes
+        Me.txtTotalMaterial.Size = New System.Drawing.Size(120, 20)
+        Me.txtTotalMaterial.TabIndex = 30
         '
-        'TextBox12
+        'txtTotalExpenses
         '
-        Me.TextBox12.Location = New System.Drawing.Point(549, 11)
-        Me.TextBox12.Name = "TextBox12"
-        Me.TextBox12.ReadOnly = True
-        Me.TextBox12.Size = New System.Drawing.Size(120, 20)
-        Me.TextBox12.TabIndex = 29
+        Me.txtTotalExpenses.Location = New System.Drawing.Point(549, 11)
+        Me.txtTotalExpenses.Name = "txtTotalExpenses"
+        Me.txtTotalExpenses.RightToLeft = System.Windows.Forms.RightToLeft.Yes
+        Me.txtTotalExpenses.Size = New System.Drawing.Size(120, 20)
+        Me.txtTotalExpenses.TabIndex = 29
         '
-        'TextBox11
+        'txtTotalHoursOTBilling
         '
-        Me.TextBox11.Location = New System.Drawing.Point(322, 41)
-        Me.TextBox11.Name = "TextBox11"
-        Me.TextBox11.ReadOnly = True
-        Me.TextBox11.Size = New System.Drawing.Size(120, 20)
-        Me.TextBox11.TabIndex = 28
+        Me.txtTotalHoursOTBilling.Location = New System.Drawing.Point(322, 41)
+        Me.txtTotalHoursOTBilling.Name = "txtTotalHoursOTBilling"
+        Me.txtTotalHoursOTBilling.RightToLeft = System.Windows.Forms.RightToLeft.Yes
+        Me.txtTotalHoursOTBilling.Size = New System.Drawing.Size(120, 20)
+        Me.txtTotalHoursOTBilling.TabIndex = 28
         '
-        'TextBox10
+        'txtTotalHoursOT
         '
-        Me.TextBox10.Location = New System.Drawing.Point(323, 11)
-        Me.TextBox10.Name = "TextBox10"
-        Me.TextBox10.ReadOnly = True
-        Me.TextBox10.Size = New System.Drawing.Size(120, 20)
-        Me.TextBox10.TabIndex = 27
+        Me.txtTotalHoursOT.Location = New System.Drawing.Point(323, 11)
+        Me.txtTotalHoursOT.Name = "txtTotalHoursOT"
+        Me.txtTotalHoursOT.RightToLeft = System.Windows.Forms.RightToLeft.Yes
+        Me.txtTotalHoursOT.Size = New System.Drawing.Size(120, 20)
+        Me.txtTotalHoursOT.TabIndex = 27
         '
-        'TextBox9
+        'txtTotalHoursBilling
         '
-        Me.TextBox9.Location = New System.Drawing.Point(95, 44)
-        Me.TextBox9.Name = "TextBox9"
-        Me.TextBox9.ReadOnly = True
-        Me.TextBox9.Size = New System.Drawing.Size(120, 20)
-        Me.TextBox9.TabIndex = 26
+        Me.txtTotalHoursBilling.Location = New System.Drawing.Point(95, 44)
+        Me.txtTotalHoursBilling.Name = "txtTotalHoursBilling"
+        Me.txtTotalHoursBilling.RightToLeft = System.Windows.Forms.RightToLeft.Yes
+        Me.txtTotalHoursBilling.Size = New System.Drawing.Size(120, 20)
+        Me.txtTotalHoursBilling.TabIndex = 26
         '
-        'TextBox8
+        'txtTotalHours
         '
-        Me.TextBox8.Location = New System.Drawing.Point(95, 11)
-        Me.TextBox8.Name = "TextBox8"
-        Me.TextBox8.ReadOnly = True
-        Me.TextBox8.Size = New System.Drawing.Size(120, 20)
-        Me.TextBox8.TabIndex = 25
+        Me.txtTotalHours.Location = New System.Drawing.Point(95, 11)
+        Me.txtTotalHours.Name = "txtTotalHours"
+        Me.txtTotalHours.RightToLeft = System.Windows.Forms.RightToLeft.Yes
+        Me.txtTotalHours.Size = New System.Drawing.Size(120, 20)
+        Me.txtTotalHours.TabIndex = 25
         '
         'Label23
         '
@@ -679,14 +702,17 @@ Partial Class ProjectsCosts
         Me.Label16.TabIndex = 17
         Me.Label16.Text = "Total Hours ST"
         '
-        'TextBox7
+        'txtMensaje
         '
-        Me.TextBox7.Dock = System.Windows.Forms.DockStyle.Top
-        Me.TextBox7.Location = New System.Drawing.Point(0, 0)
-        Me.TextBox7.Name = "TextBox7"
-        Me.TextBox7.ReadOnly = True
-        Me.TextBox7.Size = New System.Drawing.Size(1107, 20)
-        Me.TextBox7.TabIndex = 8
+        Me.txtMensaje.Dock = System.Windows.Forms.DockStyle.Top
+        Me.txtMensaje.Font = New System.Drawing.Font("Microsoft Tai Le", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtMensaje.ForeColor = System.Drawing.Color.Red
+        Me.txtMensaje.Location = New System.Drawing.Point(0, 0)
+        Me.txtMensaje.Name = "txtMensaje"
+        Me.txtMensaje.ReadOnly = True
+        Me.txtMensaje.Size = New System.Drawing.Size(1107, 23)
+        Me.txtMensaje.TabIndex = 8
+        Me.txtMensaje.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'TabControl1
         '
@@ -846,14 +872,14 @@ Partial Class ProjectsCosts
     Friend WithEvents lblPorcentLeft As Label
     Friend WithEvents Panel2 As Panel
     Friend WithEvents Panel3 As Panel
-    Friend WithEvents TextBox15 As TextBox
-    Friend WithEvents TextBox14 As TextBox
-    Friend WithEvents TextBox13 As TextBox
-    Friend WithEvents TextBox12 As TextBox
-    Friend WithEvents TextBox11 As TextBox
-    Friend WithEvents TextBox10 As TextBox
-    Friend WithEvents TextBox9 As TextBox
-    Friend WithEvents TextBox8 As TextBox
+    Friend WithEvents txtLeftSpend As TextBox
+    Friend WithEvents txtProjectBilled As TextBox
+    Friend WithEvents txtTotalMaterial As TextBox
+    Friend WithEvents txtTotalExpenses As TextBox
+    Friend WithEvents txtTotalHoursOTBilling As TextBox
+    Friend WithEvents txtTotalHoursOT As TextBox
+    Friend WithEvents txtTotalHoursBilling As TextBox
+    Friend WithEvents txtTotalHours As TextBox
     Friend WithEvents Label23 As Label
     Friend WithEvents Label22 As Label
     Friend WithEvents Label21 As Label
@@ -862,7 +888,7 @@ Partial Class ProjectsCosts
     Friend WithEvents Label18 As Label
     Friend WithEvents Label17 As Label
     Friend WithEvents Label16 As Label
-    Friend WithEvents TextBox7 As TextBox
+    Friend WithEvents txtMensaje As TextBox
     Friend WithEvents Button1 As Button
     Friend WithEvents TextBox1 As TextBox
     Public WithEvents txtAcountNo As TextBox
@@ -893,4 +919,6 @@ Partial Class ProjectsCosts
     Public WithEvents tblMaterialProjects As DataGridView
     Friend WithEvents pnlTablas As Panel
     Friend WithEvents Panel5 As Panel
+    Friend WithEvents Label25 As Label
+    Friend WithEvents Label15 As Label
 End Class

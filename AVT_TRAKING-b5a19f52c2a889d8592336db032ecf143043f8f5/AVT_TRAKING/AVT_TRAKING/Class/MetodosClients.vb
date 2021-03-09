@@ -167,7 +167,7 @@ ha.idHomeAdress, ha.avenue ,ha.number, ha.city ,ha.providence,ha.postalCode from
                 Dim dt As New DataTable
                 da.Fill(dt)
                 tabla.DataSource = dt
-                If tabla.Columns.Count <= 19 Then
+                If tabla.Columns.Count <= 20 Then
                     Dim clmChb As New DataGridViewCheckBoxColumn
                     tabla.Columns("idClient").Visible = False
                     clmChb.Name = "Complete"
@@ -182,6 +182,7 @@ ha.idHomeAdress, ha.avenue ,ha.number, ha.city ,ha.providence,ha.postalCode from
                 tabla.Columns("contractNo").Visible = False
                 tabla.Columns("costCode").Visible = False
                 tabla.Columns("idTask").Visible = False
+                tabla.Columns("idAuxWO").Visible = False
             End If
         Catch ex As Exception
             MsgBox(ex.Message())
@@ -191,8 +192,12 @@ ha.idHomeAdress, ha.avenue ,ha.number, ha.city ,ha.providence,ha.postalCode from
     Dim consultaProyetosClientes As String = "
 select 
 	(select CONCAT(wo.idWO,' ',tk.task)) as 'Work Order' , 
-	tk.description as 'Project Description', 
-	tk.status as 'Cmp',
+	
+	case when tk.description is null then ''
+	else tk.description end as 'Project Description', 
+	
+	case when tk.status is null then 0
+	else tk.status end as 'Cmp',
 	case when (select tk.totalSpend from task where idWO = wo.idWO and idAux = tk.idAux ) is null then 0
 	else  (select tk.totalSpend from task where idWO = wo.idWO and idAux = tk.idAux ) end
 	 as 'Total Spend',
@@ -253,12 +258,13 @@ select
 	jb.costCode,
     cln.idClient,
     po.idPO,
-    tk.task as idTask
+    tk.task as idTask,
+    wo.idAuxWO
 from
 clients as cln left join job as jb on jb.idClient = cln.idClient
 inner join projectOrder as po on po.jobNo = jb.jobNo
 left join workOrder as wo on wo.idPO = po.idPO
-left join task as tk on tk.idWO = wo.idWO
+left join task as tk on tk.idAuxWO = wo.idAuxWO
 where "
 
     Public Sub buscarProyectosDeClientePorProyeto(ByVal tabla As DataGridView, ByVal consulta As String)
@@ -279,7 +285,7 @@ cln.lastName Like '" + consulta + "'", conn)
                 Dim dt As New DataTable
                 da.Fill(dt)
                 tabla.DataSource = dt
-                If tabla.Columns.Count <= 19 Then
+                If tabla.Columns.Count <= 20 Then
                     Dim clmChb As New DataGridViewCheckBoxColumn
                     clmChb.Name = "Complete"
                     tabla.Columns.Add(clmChb)
@@ -294,6 +300,7 @@ cln.lastName Like '" + consulta + "'", conn)
                 tabla.Columns("contractNo").Visible = False
                 tabla.Columns("costCode").Visible = False
                 tabla.Columns("idPO").Visible = False
+                tabla.Columns("idAuxWO").Visible = False
             End If
         Catch ex As Exception
             MsgBox(ex.Message())

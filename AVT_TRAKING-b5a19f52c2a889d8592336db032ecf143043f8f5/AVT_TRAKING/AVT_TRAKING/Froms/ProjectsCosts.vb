@@ -2,7 +2,7 @@
     Dim mtdJobs As New MetodosJobs
     Dim mtdOthers As New MetodosOthers
     Dim mtdEmpleados As New MetodosEmployees
-    Public idCliente, WorkOrder, task, JobNumber, PO As String
+    Public idCliente, WorkOrder, idAuxWO, task, JobNumber, PO As String
     Dim idsEmployessManager As List(Of String)
     Dim lstProject As List(Of String)
     Private tablasDeTareas As New DataTable 'ESTA TABLA GUARDO TODOS LOS PO CON EL WO Y TASK PARA CORRER ENETRE POYECTOS
@@ -29,13 +29,14 @@
         dtpBeginDate.CustomFormat = "MM/dd/yyyy"
         dtpEndDate.CustomFormat = "MM/dd/yyyy"
         flagAddRecord = False
+
     End Sub
 
     Private Function cargarDatosProjecto(ByVal jobNum As String) As Boolean
         Dim flag As Boolean = llenarCampos(mtdJobs.cargarDatosProjectOrder(jobNum)) 'aqui puedo tomar los datos de idCliente , WO y PO
-        mtdJobs.buscarHorasPorProjecto(tblHoursWorkedProject, WorkOrder, task)
-        mtdJobs.buscarExpencesPorProyecto(tblExpencesProjects, WorkOrder, task)
-        mtdJobs.buscarMaterialesPorProyecto(tblMaterialProjects, WorkOrder, task)
+        mtdJobs.buscarHorasPorProjecto(tblHoursWorkedProject, idAuxWO, task)
+        mtdJobs.buscarExpencesPorProyecto(tblExpencesProjects, idAuxWO, task)
+        mtdJobs.buscarMaterialesPorProyecto(tblMaterialProjects, idAuxWO, task)
         cmbJobNumber.SelectedIndex = cmbJobNumber.FindString(jobNum)
         lblWorkOrder.Text = WorkOrder + " " + task
         If flag Then
@@ -44,6 +45,7 @@
             End If
             mtdJobs.consultaWO(jobNum, tablasDeTareas)
         End If
+        calcularValores()
         Return flag
     End Function
 
@@ -59,6 +61,7 @@
             End If
             mtdJobs.consultaWO(jobNum, tablasDeTareas)
         End If
+        calcularValores()
         Return flag
     End Function
 
@@ -147,6 +150,14 @@
         cmbProjectManager.SelectedIndex = Nothing
         sprHoursEstimate.Value = 0
         sprTotalBilling.Value = 0
+        txtTotalHours.Text = ""
+        txtTotalHoursBilling.Text = ""
+        txtTotalHoursOT.Text = ""
+        txtTotalHoursOTBilling.Text = ""
+        txtTotalExpenses.Text = ""
+        txtTotalMaterial.Text = ""
+        txtLeftSpend.Text = ""
+
         Return True
     End Function
     Private Function llenarCampos(ByVal lstDatosPO As List(Of String)) As Boolean
@@ -194,8 +205,9 @@
             pjt.estimateHour = CInt(sprHoursEstimate.Value)
             pjt.status = If(chbComplete.Checked, "1", "0")
             pjt.jobNum = JobNumber
-            pjt.idTask = If(task = "", 0, CInt(task))
+            pjt.idTask = task = ""
             pjt.idWorkOrder = WorkOrder
+            pjt.idAuxWO = idAuxWO
             pjt.idAux = lstDatosPO(14)
             Return True
         Else
@@ -215,7 +227,20 @@
         End If
     End Sub
 
-
+    Private Sub cmbJobNumber_KeyPress(sender As Object, e As KeyPressEventArgs) Handles cmbJobNumber.KeyPress
+        If Asc(e.KeyChar) = Keys.Enter Or Asc(e.KeyChar) = Keys.Tab Then
+            If flagAddRecord Then
+                If cmbJobNumber.SelectedItem.ToString() <> "" Then
+                    pjtNuevo.jobNum = cmbJobNumber.Text
+                    mtdJobs.consultaWO(pjtNuevo.jobNum, tablasDeTareas)
+                End If
+            Else
+                JobNumber = cmbJobNumber.SelectedItem
+                cargarDatosProjecto(JobNumber)
+                mtdJobs.consultaWO(JobNumber, tablasDeTareas)
+            End If
+        End If
+    End Sub
 
     '==========================================================================================================================================
     '====================== METODOS PARA ACUTALIZAR AL MOMENTO DE PERDER EL FOCO ==============================================================
@@ -226,8 +251,8 @@
     Private Sub txtTask_Leave(sender As Object, e As EventArgs) Handles txtTask.Leave
         If flagAddRecord Then
             If validarTask() Then
-                If pjtNuevo.idTask <> CInt(txtTask.Text) Then
-                    pjtNuevo.idTask = CInt(txtTask.Text)
+                If pjtNuevo.idTask <> txtTask.Text Then
+                    pjtNuevo.idTask = txtTask.Text
                 End If
             Else
                     txtTask.Text = ""
@@ -236,15 +261,16 @@
             If validarTask() Then
                 Dim cont As Int16 = 0
                 For Each row As DataRow In tablasDeTareas.Rows
-                    If task = row.ItemArray(3) And WorkOrder = row.ItemArray(2) Then
+                    If task = If(row.ItemArray(3) = "", "0", row.ItemArray(3)) And idAuxWO = row.ItemArray(5) Then
                         Exit For
                     Else
                         cont += 1
                     End If
                 Next
                 If mtdJobs.updateTask(txtTask.Text, pjt.idAux) Then
-                    task = CInt(txtTask.Text)
+                    task = If(txtTask.Text = "", Nothing, txtTask.Text)
                     lblWorkOrder.Text = WorkOrder + " " + task
+                    pjt.idTask = If(txtTask.Text = "", Nothing, txtTask.Text)
                     mtdJobs.consultaWO(JobNumber, tablasDeTareas)
                 Else
                     txtTask.Text = pjt.idTask
@@ -256,10 +282,12 @@
     End Sub
 
     Private Sub txtTask_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtTask.KeyPress
-        If Asc(e.KeyChar) = Keys.Enter Then
+        If Asc(e.KeyChar) = Keys.Enter Or Asc(e.KeyChar) = Keys.Tab Then
             If flagAddRecord Then
                 If validarTask() Then
-                    pjtNuevo.idTask = CInt(txtTask.Text)
+                    If pjtNuevo.idTask <> txtTask.Text Then
+                        pjtNuevo.idTask = txtTask.Text
+                    End If
                 Else
                     txtTask.Text = ""
                 End If
@@ -267,15 +295,16 @@
                 If validarTask() Then
                     Dim cont As Int16 = 0
                     For Each row As DataRow In tablasDeTareas.Rows
-                        If task = row.ItemArray(3) And WorkOrder = row.ItemArray(2) Then
+                        If task = If(row.ItemArray(3) = "", "0", row.ItemArray(3)) And idAuxWO = row.ItemArray(5) Then
                             Exit For
                         Else
                             cont += 1
                         End If
                     Next
                     If mtdJobs.updateTask(txtTask.Text, pjt.idAux) Then
-                        task = CInt(txtTask.Text)
+                        task = If(txtTask.Text = "", Nothing, txtTask.Text)
                         lblWorkOrder.Text = WorkOrder + " " + task
+                        pjt.idTask = If(txtTask.Text = "", Nothing, txtTask.Text)
                         mtdJobs.consultaWO(JobNumber, tablasDeTareas)
                     Else
                         txtTask.Text = pjt.idTask
@@ -321,23 +350,35 @@
     End Function
 
 
-    '================ COMPLETE WORKoRDER =====================================================================================
+    '================  WORKORDER =============================================================================================
     '=========================================================================================================================
 
     Private Sub txtWokOrder_Leave(sender As Object, e As EventArgs) Handles txtWokOrder.Leave
         If flagAddRecord Then
-            If txtWokOrder.Text <> pjtNuevo.idWorkOrder Then
+            If validarWO() Then
+                pjtNuevo.idWorkOrder = txtWokOrder.Text
+                lblWorkOrder.Text = txtWokOrder.Text + " " + txtTask.Text
+            Else
                 txtWokOrder.Text = pjtNuevo.idWorkOrder
+                lblWorkOrder.Text = txtWokOrder.Text + " " + txtTask.Text
             End If
         Else
-            If txtWokOrder.Text <> WorkOrder Then
-                txtWokOrder.Text = WorkOrder
+            If validarWO() Then
+                If mtdJobs.updateWorkOrder(txtWokOrder.Text, idAuxWO, pjt.idPO, pjt.jobNum) Then
+                    lblWorkOrder.Text = txtWokOrder.Text + " " + txtTask.Text
+                    WorkOrder = txtWokOrder.Text
+                    tablasDeTareas.Clear()
+                    mtdJobs.consultaWO(JobNumber, tablasDeTareas)
+                Else
+                    txtWokOrder.Text = WorkOrder
+                    lblWorkOrder.Text = txtWokOrder.Text + " " + txtTask.Text
+                End If
             End If
         End If
     End Sub
 
     Private Sub txtWokOrder_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtWokOrder.KeyPress
-        If Asc(e.KeyChar()) = Keys.Enter Then
+        If Asc(e.KeyChar()) = Keys.Enter Or Asc(e.KeyChar) = Keys.Tab Then
             If flagAddRecord Then
                 If validarWO() Then
                     pjtNuevo.idWorkOrder = txtWokOrder.Text
@@ -348,10 +389,11 @@
                 End If
             Else
                 If validarWO() Then
-                    If mtdJobs.updateWorkOrder(txtWokOrder.Text, WorkOrder, pjt.idPO, pjt.jobNum) Then
+                    If mtdJobs.updateWorkOrder(txtWokOrder.Text, idAuxWO, pjt.idPO, pjt.jobNum) Then
                         lblWorkOrder.Text = txtWokOrder.Text + " " + txtTask.Text
                         WorkOrder = txtWokOrder.Text
                         tablasDeTareas.Clear()
+                        pjt.idWorkOrder = WorkOrder
                         mtdJobs.consultaWO(JobNumber, tablasDeTareas)
                     Else
                         txtWokOrder.Text = WorkOrder
@@ -384,12 +426,26 @@
 
     Private Sub txtClientPO_Leave(sender As Object, e As EventArgs) Handles txtClientPO.Leave
         If flagAddRecord Then
-            If txtClientPO.Text <> pjtNuevo.idPO Then
+            If validarClientPO() Then
+                If pjtNuevo.idPO <> txtClientPO.Text Then
+                    pjtNuevo.idPO = txtClientPO.Text
+                End If
+            Else
                 txtClientPO.Text = pjtNuevo.idPO
             End If
         Else
-            If txtClientPO.Text <> pjt.idPO Then
-                txtClientPO.Text = pjt.idPO
+            If validarClientPO() Then
+                If pjt.idPO <> txtClientPO.Text Then
+                    If mtdJobs.updatePO(txtClientPO.Text, pjt.idPO, pjt.jobNum) Then
+                        pjt.idPO = txtClientPO.Text
+                    Else
+                        txtClientPO.Text = pjt.idPO
+                    End If
+                Else
+                    txtClientPO.Text = pjt.idPO
+                End If
+            Else
+                txtClientPO.Text = pjtNuevo.idPO
             End If
         End If
     End Sub
@@ -411,8 +467,14 @@
             End If
         Else
             If txtClientPO.Text.Length >= 5 And soloNumero(txtClientPO.Text) Then
-                If mtdJobs.existPO(txtClientPO.Text, pjt.jobNum) = True Then
-                    MessageBox.Show("Is probably that the PO exist, try with other number.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                If mtdJobs.existPO(txtClientPO.Text, pjt.idPO) = True Then
+                    If txtClientPO.Text <> pjt.idPO Then
+                        MessageBox.Show("Is probably that the PO exist, try with other number.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                        Return False
+                    Else
+                        Return True
+                    End If
+
                     Return False
                 Else
                     Return True
@@ -424,7 +486,7 @@
         End If
     End Function
     Private Sub txtClientPO_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtClientPO.KeyPress
-        If Asc(e.KeyChar) = Keys.Enter Then
+        If Asc(e.KeyChar) = Keys.Enter Or Asc(e.KeyChar) = Keys.Tab Then
             If validarClientPO() Then
                 If flagAddRecord Then
                     pjtNuevo.idPO = txtClientPO.Text
@@ -449,16 +511,16 @@
     '================ EQUIPAMENT =============================================================================================
     '=========================================================================================================================
     Private Sub txtEquipament_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtEquipament.KeyPress
-        If Asc(e.KeyChar) = Keys.Enter Then
+        If Asc(e.KeyChar) = Keys.Enter Or Asc(e.KeyChar) = Keys.Tab Then
             If flagAddRecord Then
-                If validarEquipament() Then
+                If validarEquipament() And pjtNuevo.equipament <> txtEquipament.Text Then
                     pjtNuevo.equipament = txtEquipament.Text
                 Else
                     txtEquipament.Text = pjtNuevo.equipament
                 End If
             Else
-                If validarEquipament() Then
-                    If mtdJobs.updateEquipaMent(txtEquipament.Text, pjt.idAux, pjt.idWorkOrder) Then
+                If validarEquipament() And pjt.equipament <> txtEquipament.Text Then
+                    If mtdJobs.updateEquipaMent(txtEquipament.Text, pjt.idAux, pjt.idAuxWO) Then
                         pjt.equipament = txtEquipament.Text
                     Else
                         txtEquipament.Text = pjt.equipament
@@ -470,12 +532,18 @@
 
     Private Sub txtEquipament_Leave(sender As Object, e As EventArgs) Handles txtEquipament.Leave
         If flagAddRecord Then
-            If txtEquipament.Text <> pjtNuevo.equipament Then
+            If validarEquipament() And pjtNuevo.equipament <> txtEquipament.Text Then
+                pjtNuevo.equipament = txtEquipament.Text
+            Else
                 txtEquipament.Text = pjtNuevo.equipament
             End If
         Else
-            If txtEquipament.Text <> pjt.equipament Then
-                txtEquipament.Text = pjt.equipament
+            If validarEquipament() And pjt.equipament <> txtEquipament.Text Then
+                If mtdJobs.updateEquipaMent(txtEquipament.Text, pjt.idAux, pjt.idAuxWO) Then
+                    pjt.equipament = txtEquipament.Text
+                Else
+                    txtEquipament.Text = pjt.equipament
+                End If
             End If
         End If
     End Sub
@@ -519,7 +587,7 @@
                 Else
                     flagManger = "Selection"
                     If validarManager() Then
-                        If mtdJobs.updateManeger(cmbProjectManager.SelectedItem, pjt.idAux, pjt.idWorkOrder) Then
+                        If mtdJobs.updateManeger(cmbProjectManager.SelectedItem, pjt.idAux, pjt.idAuxWO) Then
                             pjt.manager = cmbProjectManager.SelectedItem
                         Else
                             cmbProjectManager.SelectedIndex = cmbProjectManager.FindString(pjt.manager)
@@ -553,7 +621,7 @@
 
     Dim flagManger As String 'esta se usa para validar si hizo enter para ingresar
     Private Sub cmbProjectManager_KeyPress(sender As Object, e As KeyPressEventArgs) Handles cmbProjectManager.KeyPress
-        If Asc(e.KeyChar) = Keys.Enter Then
+        If Asc(e.KeyChar) = Keys.Enter Or Asc(e.KeyChar) = Keys.Tab Then
             If flagAddRecord Then
                 If cmbProjectManager.Text <> pjtNuevo.manager Then
                     flagManger = "Enter"
@@ -587,20 +655,16 @@
     '=========================================================================================================================
 
     Private Sub txtProjectDescription_Leave(sender As Object, e As EventArgs) Handles txtProjectDescription.Leave
-        If txtProjectDescription.Text <> pjt.description Then
-            If validarDescription() Then
-                If flagAddRecord Then
-                    pjtNuevo.description = txtProjectDescription.Text
-                Else
-                    If mtdJobs.updateDescription(txtProjectDescription.Text, pjt.idAux, pjt.idWorkOrder) Then
-                        pjt.description = txtProjectDescription.Text
-                    Else
-                        txtProjectDescription.Text = pjt.description
-                    End If
-                End If
+        If flagAddRecord Then
+            If validarDescription() And txtProjectDescription.Text <> pjtNuevo.description Then
+                pjtNuevo.description = txtProjectDescription.Text
             Else
-                If flagAddRecord Then
-                    txtProjectDescription.Text = pjtNuevo.description
+                txtProjectDescription.Text = pjtNuevo.description
+            End If
+        Else
+            If validarDescription() And txtProjectDescription.Text <> pjt.description Then
+                If mtdJobs.updateDescription(txtProjectDescription.Text, pjt.idAux, pjt.idAuxWO) Then
+                    pjt.description = txtProjectDescription.Text
                 Else
                     txtProjectDescription.Text = pjt.description
                 End If
@@ -609,17 +673,17 @@
     End Sub
 
     Private Sub txtProjectDescription_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtProjectDescription.KeyPress
-        If Asc(e.KeyChar) = Keys.Enter Then
-            If txtProjectDescription.Text <> pjt.description Then
-                If validarDescription() Then
-                    If flagAddRecord Then
-                        pjtNuevo.description = txtProjectDescription.Text
-                    Else
-                        pjt.description = txtProjectDescription.Text
-                    End If
+        If Asc(e.KeyChar) = Keys.Enter Or Asc(e.KeyChar) = Keys.Tab Then
+            If flagAddRecord Then
+                If validarDescription() And txtProjectDescription.Text <> pjtNuevo.description Then
+                    pjtNuevo.description = txtProjectDescription.Text
                 Else
-                    If flagAddRecord Then
-                        txtProjectDescription.Text = pjtNuevo.description
+                    txtProjectDescription.Text = pjtNuevo.description
+                End If
+            Else
+                If validarDescription() And txtProjectDescription.Text <> pjt.description Then
+                    If mtdJobs.updateDescription(txtProjectDescription.Text, pjt.idAux, pjt.idAuxWO) Then
+                        pjt.description = txtProjectDescription.Text
                     Else
                         txtProjectDescription.Text = pjt.description
                     End If
@@ -642,14 +706,23 @@
 
     Private Sub sprTotalBilling_Leave(sender As Object, e As EventArgs) Handles sprTotalBilling.Leave
         If flagAddRecord Then
-            If sprTotalBilling.Value <> pjtNuevo.totalBilling Then
+            If validarTotalBilling() And sprTotalBilling.Value <> pjtNuevo.totalBilling Then
+                pjtNuevo.totalBilling = sprTotalBilling.Value
+            Else
                 sprTotalBilling.Value = pjtNuevo.totalBilling
             End If
         Else
-            If sprTotalBilling.Value <> pjt.totalBilling Then
+            If validarTotalBilling() And pjt.totalBilling <> sprTotalBilling.Value Then
+                If mtdJobs.updateTotalBilling(sprTotalBilling.Value, pjt.idAux, pjt.idAuxWO) Then
+                    pjt.totalBilling = sprTotalBilling.Value
+                Else
+                    sprTotalBilling.Value = pjt.totalBilling
+                End If
+            Else
                 sprTotalBilling.Value = pjt.totalBilling
             End If
         End If
+        calcularValores()
     End Sub
 
     Private Function validarTotalBilling() As Boolean
@@ -665,7 +738,7 @@
     End Function
 
     Private Sub sprTotalBilling_KeyPress(sender As Object, e As KeyPressEventArgs) Handles sprTotalBilling.KeyPress
-        If Asc(e.KeyChar) = Keys.Enter Then
+        If Asc(e.KeyChar) = Keys.Enter Or Asc(e.KeyChar) = Keys.Tab Then
             If flagAddRecord Then
                 If validarTotalBilling() Then
                     pjtNuevo.totalBilling = sprTotalBilling.Value
@@ -674,7 +747,7 @@
                 End If
             Else
                 If validarTotalBilling() Then
-                    If mtdJobs.updateTotalBilling(sprTotalBilling.Value, pjt.idAux, pjt.idWorkOrder) Then
+                    If mtdJobs.updateTotalBilling(sprTotalBilling.Value, pjt.idAux, pjt.idAuxWO) Then
                         pjt.totalBilling = sprTotalBilling.Value
                     Else
                         sprTotalBilling.Value = pjt.totalBilling
@@ -684,39 +757,37 @@
                 End If
             End If
         End If
+        calcularValores()
     End Sub
 
     '================ HOURS ESTIMATE =========================================================================================
     '=========================================================================================================================
     Private Sub sprHoursEstimate_KeyPress(sender As Object, e As KeyPressEventArgs) Handles sprHoursEstimate.KeyPress
-        If Asc(e.KeyChar) = Keys.Enter Then
+        If Asc(e.KeyChar) = Keys.Enter Or Asc(e.KeyChar) = Keys.Tab Then
             If flagAddRecord Then
-                If validarHours() Then
+                If validarHours() And Not pjtNuevo.estimateHour = sprHoursEstimate.Value Then
                     pjtNuevo.estimateHour = sprHoursEstimate.Value
                 Else
                     sprHoursEstimate.Value = pjtNuevo.estimateHour
                 End If
             Else
-                If validarHours() Then
-                    pjt.estimateHour = sprHoursEstimate.Value
+                If validarHours() And Not pjt.estimateHour = sprHoursEstimate.Value Then
+                    If mtdJobs.updateHoursEstimate(sprHoursEstimate.Value, pjt.idAux, pjt.idAuxWO) Then
+                        pjt.estimateHour = sprHoursEstimate.Value
+                    Else
+                        sprHoursEstimate.Value = pjt.estimateHour
+                    End If
                 Else
                     sprHoursEstimate.Value = pjt.estimateHour
                 End If
             End If
         End If
+        calcularValores()
     End Sub
 
     Private Function validarHours() As Boolean
         If sprHoursEstimate.Value > 0 Then
-            If flagAddRecord Then
-                Return True
-            Else
-                If mtdJobs.updateHoursEstimate(sprHoursEstimate.Value, pjt.idAux, pjt.idWorkOrder) Then
-                    Return True
-                Else
-                    Return False
-                End If
-            End If
+            Return True
         Else
             If DialogResult.Yes = MessageBox.Show("Do you like to assign 0.0 hours stimate?", "Important", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) Then
                 Return False
@@ -728,14 +799,23 @@
 
     Private Sub sprHoursEstimate_Leave(sender As Object, e As EventArgs) Handles sprHoursEstimate.Leave
         If flagAddRecord Then
-            If sprHoursEstimate.Value <> pjtNuevo.estimateHour Then
+            If validarHours() And Not pjtNuevo.estimateHour = sprHoursEstimate.Value Then
+                pjtNuevo.estimateHour = sprHoursEstimate.Value
+            Else
                 sprHoursEstimate.Value = pjtNuevo.estimateHour
             End If
         Else
-            If sprHoursEstimate.Value <> pjt.estimateHour Then
+            If validarHours() And Not pjt.estimateHour = sprHoursEstimate.Value Then
+                If mtdJobs.updateHoursEstimate(sprHoursEstimate.Value, pjt.idAux, pjt.idAuxWO) Then
+                    pjt.estimateHour = sprHoursEstimate.Value
+                Else
+                    sprHoursEstimate.Value = pjt.estimateHour
+                End If
+            Else
                 sprHoursEstimate.Value = pjt.estimateHour
             End If
         End If
+        calcularValores()
     End Sub
 
     '================ BEGIN DATE =============================================================================================
@@ -765,7 +845,7 @@
             End If
         Else
             If validarBeginDate() Then
-                If mtdJobs.updateBeginDate(dtpBeginDate.Value, pjt.idAux, pjt.idWorkOrder) Then
+                If mtdJobs.updateBeginDate(dtpBeginDate.Value, pjt.idAux, pjt.idAuxWO) Then
                     pjt.beginDate = dtpBeginDate.Value
                 Else
                     dtpBeginDate.Value = pjt.beginDate
@@ -777,7 +857,7 @@
     End Sub
 
     Private Sub dtpBeginDate_KeyPress(sender As Object, e As KeyPressEventArgs) Handles dtpBeginDate.KeyPress
-        If Asc(e.KeyChar) = Keys.Enter Then
+        If Asc(e.KeyChar) = Keys.Enter Or Asc(e.KeyChar) = Keys.Tab Then
             If flagAddRecord Then
                 If validarBeginDate() Then
                     pjtNuevo.beginDate = dtpBeginDate.Value
@@ -786,7 +866,7 @@
                 End If
             Else
                 If validarBeginDate() Then
-                    If mtdJobs.updateBeginDate(dtpBeginDate.Value, pjt.idAux, pjt.idWorkOrder) Then
+                    If mtdJobs.updateBeginDate(dtpBeginDate.Value, pjt.idAux, pjt.idAuxWO) Then
                         pjt.beginDate = dtpBeginDate.Value
                     Else
                         dtpBeginDate.Value = pjt.beginDate
@@ -818,16 +898,14 @@
 
     Private Sub dtpEndDate_Leave(sender As Object, e As EventArgs) Handles dtpEndDate.Leave
         If flagAddRecord Then
-            If pjtNuevo.endDate <> dtpEndDate.Value Then
-                If validarEndDate() Then
-                    pjtNuevo.beginDate = dtpEndDate.Value
-                Else
-                    dtpEndDate.Value = pjtNuevo.endDate
-                End If
+            If pjtNuevo.endDate <> dtpEndDate.Value And validarEndDate() Then
+                pjtNuevo.beginDate = dtpEndDate.Value
+            Else
+                dtpEndDate.Value = pjtNuevo.endDate
             End If
         Else
-            If validarEndDate() Then
-                If mtdJobs.updateEndDate(dtpEndDate.Value, pjt.idAux, pjt.idWorkOrder) Then
+            If validarEndDate() And Not dtpEndDate.Value.Equals(pjt.endDate) Then
+                If mtdJobs.updateEndDate(dtpEndDate.Value, pjt.idAux, pjt.idAuxWO) Then
                     pjt.beginDate = dtpEndDate.Value
                 Else
                     dtpEndDate.Value = pjt.endDate
@@ -839,16 +917,16 @@
     End Sub
 
     Private Sub dtpEndDate_KeyPress(sender As Object, e As KeyPressEventArgs) Handles dtpEndDate.KeyPress
-        If Asc(e.KeyChar) = Keys.Enter Then
+        If Asc(e.KeyChar) = Keys.Enter Or Asc(e.KeyChar) = Keys.Tab Then
             If flagAddRecord Then
-                If validarEndDate() Then
-                    pjtNuevo.endDate = dtpEndDate.Value
+                If pjtNuevo.endDate <> dtpEndDate.Value And validarEndDate() Then
+                    pjtNuevo.beginDate = dtpEndDate.Value
                 Else
                     dtpEndDate.Value = pjtNuevo.endDate
                 End If
             Else
-                If validarEndDate() Then
-                    If mtdJobs.updateEndDate(dtpEndDate.Value, pjt.idAux, pjt.idWorkOrder) Then
+                If validarEndDate() And Not dtpEndDate.Value.Equals(pjt.endDate) Then
+                    If mtdJobs.updateEndDate(dtpEndDate.Value, pjt.idAux, pjt.idAuxWO) Then
                         pjt.endDate = dtpEndDate.Value
                     Else
                         dtpEndDate.Value = pjt.endDate
@@ -867,15 +945,14 @@
     Private Sub cmbExpCode_SelectionChangeCommitted(sender As Object, e As EventArgs) Handles cmbExpCode.SelectionChangeCommitted
         If flagAddRecord Then
             If ValidarExpCode() Then
-                pjtNuevo.expCode = cmbExpCode.SelectedItem
+                pjtNuevo.expCode = mtdJobs.soloCodigoExpCode(cmbExpCode.SelectedItem)
             Else
                 cmbExpCode.SelectedItem = If(pjtNuevo.expCode = "", cmbExpCode.Items(0), pjtNuevo.expCode)
             End If
         Else
             If ValidarExpCode() Then
-                If mtdJobs.updateExxpCode(cmbExpCode.SelectedItem, pjt.idAux, pjt.idWorkOrder) Then
-
-                    pjt.expCode = cmbExpCode.SelectedItem
+                If mtdJobs.updateExxpCode(mtdJobs.soloCodigoExpCode(cmbExpCode.SelectedItem), pjt.idAux, pjt.idAuxWO) Then
+                    pjt.expCode = mtdJobs.soloCodigoExpCode(cmbExpCode.SelectedItem)
                 Else
                     cmbExpCode.SelectedItem = pjt.expCode
                 End If
@@ -909,18 +986,31 @@
 
     Private Sub txtAcountNo_Leave(sender As Object, e As EventArgs) Handles txtAcountNo.Leave
         If flagAddRecord Then
-            If txtAcountNo.Text <> pjtNuevo.accountNum Then
-                txtAcountNo.Text = pjtNuevo.accountNum
+            If txtAcountNo.Text <> pjt.accountNum Then
+                If validarAccountNO() Then
+                    pjtNuevo.accountNum = txtAcountNo.Text
+                Else
+                    txtAcountNo.Text = pjtNuevo.accountNum
+                End If
             End If
         Else
             If txtAcountNo.Text <> pjt.accountNum Then
-                txtAcountNo.Text = pjt.accountNum
+                If validarAccountNO() Then
+                    If mtdJobs.updateAccont(txtAcountNo.Text, pjt.idAux, pjt.idAuxWO) Then
+                        pjt.accountNum = txtAcountNo.Text
+                    Else
+                        txtAcountNo.Text = pjt.accountNum
+                    End If
+                Else
+                    txtAcountNo.Text = pjt.accountNum
+                End If
             End If
         End If
     End Sub
 
+
     Private Sub txtAccount_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtAcountNo.KeyPress
-        If Asc(e.KeyChar) = Keys.Enter Then
+        If Asc(e.KeyChar) = Keys.Enter Or Asc(e.KeyChar) = Keys.Tab Then
             If flagAddRecord Then
                 If txtAcountNo.Text <> pjt.accountNum Then
                     If validarAccountNO() Then
@@ -932,7 +1022,7 @@
             Else
                 If txtAcountNo.Text <> pjt.accountNum Then
                     If validarAccountNO() Then
-                        If mtdJobs.updateAccont(txtAcountNo.Text, pjt.idAux, pjt.idWorkOrder) Then
+                        If mtdJobs.updateAccont(txtAcountNo.Text, pjt.idAux, pjt.idAuxWO) Then
                             pjt.accountNum = txtAcountNo.Text
                         Else
                             txtAcountNo.Text = pjt.accountNum
@@ -1001,8 +1091,76 @@
 
 
     Private Function calcularValores() As Boolean
+        Dim totalCostHoursST As Double = 0.0
+        Dim totalCostHoursOT As Double = 0.0
+        Dim totalHoursST As Double = 0.0
+        Dim totalHoursOT As Double = 0.0
+
+        Dim totalExpences As Double = 0.0
+        Dim totalMaterial As Double = 0.0
+
+        If tblHoursWorkedProject.Rows.Count > 0 Then
+
+            For Each row As DataGridViewRow In tblHoursWorkedProject.Rows
+                totalHoursST += CDbl(row.Cells("Billable Rate").Value)
+                totalHoursOT += CDbl(row.Cells("Billable OT").Value)
+                totalCostHoursST += CDbl(row.Cells("Billing Rate").Value) * CDbl(row.Cells("Billable Rate").Value)
+                totalCostHoursOT += CDbl(row.Cells("Billing RateOT").Value) * CDbl(row.Cells("Billable OT").Value)
+            Next
+
+        End If
+
+        If tblExpencesProjects.Rows.Count > 0 Then
+            For Each row1 As DataGridViewRow In tblExpencesProjects.Rows
+                totalExpences += CDbl(row1.Cells("Amount").Value)
+            Next
+        End If
+
+
+        If tblMaterialProjects.Rows.Count > 0 Then
+            For Each row2 As DataGridViewRow In tblMaterialProjects.Rows
+                totalMaterial += CDbl(row2.Cells("Amount").Value)
+            Next
+        End If
+
+
+        txtTotalHours.Text = totalHoursST.ToString("N")
+        txtTotalHoursBilling.Text = "$" + totalCostHoursST.ToString("N")
+        txtTotalHoursOT.Text = totalHoursOT.ToString("N")
+        txtTotalHoursOTBilling.Text = "$" + totalCostHoursOT.ToString("N")
+        txtTotalExpenses.Text = "$" + totalExpences.ToString("N")
+        txtTotalMaterial.Text = "$" + totalMaterial.ToString("N")
+        txtProjectBilled.Text = "$" + (totalCostHoursST + totalCostHoursOT + totalExpences + totalMaterial).ToString("N")
+        txtLeftSpend.Text = (sprTotalBilling.Value - (totalCostHoursST + totalCostHoursOT + totalExpences + totalMaterial)).ToString("N")
+        txtLeftSpend.Text = "$" + txtLeftSpend.Text
+        Dim mensaje As String = ""
+
+        If 0 > (sprTotalBilling.Value - (totalCostHoursST + totalCostHoursOT + totalExpences + totalMaterial)) Then
+            mensaje = "The total spent was over budget"
+        End If
+
+        If sprTotalBilling.Value > 0 Then
+            Dim porcentLeft = ((totalCostHoursST + totalCostHoursOT + totalExpences + totalMaterial) * 100) / sprTotalBilling.Value
+            lblPorcentLeft.Text = porcentLeft.ToString("N") + "%"
+        End If
+
+        If sprHoursEstimate.Value < (totalHoursST + totalHoursOT) Then
+            mensaje = If(mensaje.Equals(""), "Total estimated hours were exceeded.", ", Total estimated hours were exceeded.")
+        End If
+
+
+        If Not mensaje.Equals("") Then
+            txtMensaje.Text = mensaje
+        Else
+            txtMensaje.Text = ""
+        End If
+
+
+
 
         Return 0
+
     End Function
+
 
 End Class

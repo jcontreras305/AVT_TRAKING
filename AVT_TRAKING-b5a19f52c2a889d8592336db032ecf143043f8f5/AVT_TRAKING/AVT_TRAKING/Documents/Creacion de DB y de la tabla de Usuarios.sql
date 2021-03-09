@@ -311,7 +311,7 @@ GO
 create table task (
 	idAux varchar(36) primary key not null,
 	task varchar(5),
-	idWO varchar(14),
+	idAuxWO varchar(36),
 	totalSpend float,
 	equipament varchar(30),
 	manager varchar(50),
@@ -321,7 +321,8 @@ create table task (
 	endDate date,
 	expCode varchar(20),
 	accountNum varchar(12) ,
-	estimateHours float
+	estimateHours float,
+	status char(1)
 )
 GO
 
@@ -343,11 +344,12 @@ create table workCode(
 GO
 
 --##########################################################################################
---##################  TABLA DE MATERIAL WORKORDER ##########################################
+--##################  TABLA DE WORKORDER ###################################################
 --##########################################################################################
 
 create table workOrder(
-	idWo varchar(14) primary key not null,
+	idAuxWO varchar(36) primary key not null,
+	idWO varchar(14)  not null,
 	idPO bigint not null
 )
 GO
@@ -471,8 +473,8 @@ GO
 --##################  FOREIG KEYS TASK #####################################################
 --##########################################################################################
 
-ALTER TABLE task WITH CHECK ADD CONSTRAINT fk_idWO_task FOREIGN KEY (idWO)
-REFERENCES workOrder (idWO)
+ALTER TABLE task WITH CHECK ADD CONSTRAINT fk_idWorkOrder_task FOREIGN KEY (idAuxWO)
+REFERENCES workOrder (idAuxWO)
 ON UPDATE CASCADE
 ON DELETE CASCADE
 GO

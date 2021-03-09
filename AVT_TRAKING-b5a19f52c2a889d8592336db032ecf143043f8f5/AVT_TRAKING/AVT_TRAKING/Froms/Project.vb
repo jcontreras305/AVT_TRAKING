@@ -1,6 +1,6 @@
 ﻿Public Class Project
-    Private _jobNum, _idTask As Integer
-    Private _accountNum, _equipament, _manager, _description, _expCode, _idWO, _idPO, _idAux As String
+    Private _jobNum As Integer
+    Private _accountNum, _equipament, _manager, _description, _expCode, _idWO, _idAuxWO, _idPO, _idAux, _idTask As String
     Private _beginDate, _endDate As Date
     Private _estimateHours, _totalBilling As Double
     Private _status As Char
@@ -14,6 +14,14 @@
         End Set
     End Property
 
+    Public Property idAuxWO() As String
+        Get
+            Return _idAuxWO
+        End Get
+        Set(ByVal value As String)
+            _idAuxWO = value
+        End Set
+    End Property
     Public Property idPO As String
         Get
             Return _idPO
@@ -131,11 +139,11 @@
         End Set
     End Property
 
-    Public Property idTask() As Integer
+    Public Property idTask() As String
         Get
             Return _idTask
         End Get
-        Set(ByVal value As Integer)
+        Set(ByVal value As String)
             _idTask = value
         End Set
     End Property
@@ -154,7 +162,8 @@
         _status = "0"
         _totalBilling = 0
         _idWO = ""
-        _idTask = 0
+        _idTask = ""
+        _idAuxWO = ""
     End Sub
 
 End Class
