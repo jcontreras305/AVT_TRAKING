@@ -45,7 +45,7 @@
         Dim flag As Boolean = False
         Dim array() As Char = numerotext.ToCharArray()
         For Each letra As Char In array
-            If Char.IsDigit(letra) Then
+            If Char.IsDigit(letra) Or letra = "." Then
                 flag = True
             Else
                 flag = False
@@ -56,7 +56,9 @@
     End Function
 
     Public Function validaFechaParaSQl(ByVal fecha As Date) As String
-        Dim array() As String = CStr(fecha).Split("/")
+        Dim dataAux As String
+        dataAux = fecha.ToShortDateString()
+        Dim array() As String = CStr(dataAux).Split("/")
         Dim fecha1 As String = array(2) + "-" + array(1) + "-" + array(0)
         Return fecha1
     End Function

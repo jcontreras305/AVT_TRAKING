@@ -14,6 +14,11 @@
     '|caso 2: entra con un projecto en especifico
     '|caso 3: puedo cambiar adentro el jobNumber con el cmb 
     '|
+    Dim _dtpExpenses As New DateTimePicker
+    Dim _dtpMaterial As New DateTimePicker
+
+    Dim _rectangulo As New Rectangle
+
     Private Sub ProjectsCosts_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         mtdOthers.llenarCmbExpCodes(cmbExpCode) 'lleno el combo de expCOde
         idsEmployessManager = mtdEmpleados.llenarCmbEmpleadosManager(cmbProjectManager) 'lleno el como de empleado Manger y car
@@ -30,7 +35,82 @@
         dtpEndDate.CustomFormat = "MM/dd/yyyy"
         flagAddRecord = False
 
+
+        tblExpencesProjects.Controls.Add(_dtpExpenses)
+        _dtpExpenses.Visible = False
+        _dtpExpenses.Format = DateTimePickerFormat.Custom
+        _dtpExpenses.Visible = False
+        AddHandler _dtpExpenses.ValueChanged, AddressOf _dtpExpensesTextChangue
+
+        tblMaterialProjects.Controls.Add(_dtpMaterial)
+        _dtpMaterial.Visible = False
+        _dtpMaterial.Format = DateTimePickerFormat.Custom
+        AddHandler _dtpMaterial.ValueChanged, AddressOf _dtpMaterialTextChangue
     End Sub
+
+    Private Sub _dtpMaterialTextChangue(sender As Object, e As EventArgs)
+        tblMaterialProjects.CurrentCell.Value = _dtpMaterial.Value.ToString()
+    End Sub
+    Private Sub tblMaterialProject_ColumnWithChangue(sender As Object, e As DataGridViewColumnEventArgs) Handles tblMaterialProjects.ColumnWidthChanged
+        _dtpMaterial.Visible = False
+    End Sub
+
+    Private Sub tblMaterialProjects_Scroll(sender As Object, e As ScrollEventArgs) Handles tblMaterialProjects.Scroll
+        _dtpMaterial.Visible = False
+    End Sub
+
+    Private Sub tblMaterialProjects_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles tblMaterialProjects.CellClick
+        If e.ColumnIndex <> -1 Then
+            Select Case tblMaterialProjects.Columns(e.ColumnIndex).Name
+                Case "Date"
+                    _rectangulo = tblMaterialProjects.GetCellDisplayRectangle(e.ColumnIndex, e.RowIndex, True)
+                    _dtpMaterial.Size = New Size(_rectangulo.Width, _rectangulo.Height)
+                    _dtpMaterial.Location = New Point(_rectangulo.X, _rectangulo.Y)
+                    _dtpMaterial.Visible = True
+                Case "Material Code"
+                    Try
+                        Dim cmbMatrial As New DataGridViewComboBoxCell
+                        mtdJobs.llenarComboCellMaterial(cmbMatrial, listIdsMaterial)
+                        tblMaterialProjects.CurrentRow.Cells("Material Code") = cmbMatrial
+                    Catch ex As Exception
+
+                    End Try
+                Case "Work Order"
+                    tblMaterialProjects.CurrentRow.Cells("Work Order").Value = lblWorkOrder.Text
+            End Select
+        End If
+    End Sub
+
+    Private Sub tblExpencesProjects_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles tblExpencesProjects.CellClick
+        If e.ColumnIndex <> -1 Then
+            Select Case tblExpencesProjects.Columns(e.ColumnIndex).Name
+                Case "Date"
+                    _rectangulo = tblExpencesProjects.GetCellDisplayRectangle(e.ColumnIndex, e.RowIndex, True)
+                    _dtpExpenses.Size = New Size(_rectangulo.Width, _rectangulo.Height)
+                    _dtpExpenses.Location = New Point(_rectangulo.X, _rectangulo.Y)
+                    _dtpExpenses.Visible = True
+                Case "Expense Code"
+                    Dim cmbTiposExpenses As New DataGridViewComboBoxCell
+                    mtdJobs.llenarComboCellExpCode(cmbTiposExpenses, listIdsExpCodes)
+                    tblExpencesProjects.CurrentRow.Cells("Expense Code") = cmbTiposExpenses
+            End Select
+        End If
+    End Sub
+
+    Private Sub _dtpExpensesTextChangue(sender As Object, e As EventArgs)
+        tblExpencesProjects.CurrentCell.Value = _dtpExpenses.Value.ToString()
+    End Sub
+
+    Private Sub tblExpencesProject_ColumnWithChangue(sender As Object, e As DataGridViewColumnEventArgs) Handles tblExpencesProjects.ColumnWidthChanged
+        _dtpExpenses.Visible = False
+    End Sub
+
+    Private Sub tblExpencesProjects_Scroll(sender As Object, e As ScrollEventArgs) Handles tblExpencesProjects.Scroll
+        _dtpExpenses.Visible = False
+    End Sub
+
+    Dim listIdsExpCodes As New DataTable
+    Dim listIdsMaterial As New DataTable
 
     Private Function cargarDatosProjecto(ByVal jobNum As String) As Boolean
         Dim flag As Boolean = llenarCampos(mtdJobs.cargarDatosProjectOrder(jobNum)) 'aqui puedo tomar los datos de idCliente , WO y PO
@@ -1154,13 +1234,123 @@
         Else
             txtMensaje.Text = ""
         End If
-
-
-
-
         Return 0
-
     End Function
 
+    Private Sub tblMaterialProjects_CellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles tblMaterialProjects.CellEndEdit
+        If tblExpencesProjects.Rows.Count > 0 Then
+            Select Case tblMaterialProjects.Columns(e.ColumnIndex).Name
+                Case "Description"
+                    Dim mensaje As String = ""
+                    Dim datosMaterial As New List(Of String)
+                    If Not tblMaterialProjects.CurrentRow.Cells("idMaterialUsed").Value Is DBNull.Value Then
+                        datosMaterial.Add(tblMaterialProjects.CurrentRow.Cells("idMaterialUsed").Value)
+                    Else
+                        datosMaterial.Add("")
+                    End If
+                    If Not tblMaterialProjects.CurrentRow.Cells("Date").Value Is DBNull.Value Then
+                        datosMaterial.Add(validaFechaParaSQl(tblMaterialProjects.CurrentRow.Cells("Date").Value))
+                    Else
+                        mensaje = If(mensaje = "", "Please choose a Date.", vbCrLf + "Please choose a Date")
+                    End If
+                    datosMaterial.Add(pjt.idAux) 'idAuxTask
+                    If Not tblMaterialProjects.CurrentRow.Cells("Amount").Value Is DBNull.Value Then
+                        If soloNumero(tblMaterialProjects.CurrentRow.Cells("Amount").Value) Then
+                            datosMaterial.Add(tblMaterialProjects.CurrentRow.Cells("Amount").Value)
+                        Else
+                            mensaje = If(mensaje = "", "Check the 'Amount' Cell, it only permit numbers.", vbCrLf + "Check the 'Amount' Cell, it only permit numbers.")
+                        End If
+                    Else
+                        mensaje = If(mensaje = "", "Check the 'Amount' Cell.", vbCrLf + "Check the 'Amount' Cell.")
+                    End If
+                    If tblMaterialProjects.CurrentRow.Cells("Material Code").Value IsNot DBNull.Value Then
+                        For Each row As DataRow In listIdsMaterial.Rows
+                            If row.Item(1) = tblMaterialProjects.CurrentRow.Cells("Material Code").Value Then
+                                datosMaterial.Add(row.Item(0))
+                                Exit For
+                            End If
+                        Next
+                    Else
+                        mensaje = If(mensaje = "", "Check the 'Material Code' Cell.", vbCrLf + "Check the 'Material Code' Cell.")
+                    End If
+                    If tblMaterialProjects.CurrentRow.Cells("Description").Value IsNot DBNull.Value Then
+                        datosMaterial.Add(tblMaterialProjects.CurrentRow.Cells("Description").Value)
+                    Else
+                        datosMaterial.Add("")
+                    End If
+                    If mensaje <> "" Then
+                        MessageBox.Show(mensaje, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                    Else
+                        If datosMaterial(0) = "" Then 'insert
+                            mtdJobs.insertMaterialUsed(datosMaterial)
+                            mtdJobs.buscarMaterialesPorProyecto(tblMaterialProjects, idAuxWO, task)
+                            calcularValores()
+                        Else 'update
+                            mtdJobs.updateMaterialUsed(datosMaterial)
+                            mtdJobs.buscarMaterialesPorProyecto(tblMaterialProjects, idAuxWO, task)
+                            calcularValores()
+                        End If
+                    End If
+            End Select
+        End If
+    End Sub
 
+    Private Sub tblExpencesProjects_CellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles tblExpencesProjects.CellEndEdit
+        If tblExpencesProjects.Rows.Count > 0 Then
+            Select Case tblExpencesProjects.Columns(e.ColumnIndex).Name
+                Case "Description"
+                    Dim mensaje As String = ""
+                    Dim datosExpenses As New List(Of String)
+                    If Not tblExpencesProjects.CurrentRow.Cells("idExpenseUsed").Value Is DBNull.Value Then
+                        datosExpenses.Add(tblExpencesProjects.CurrentRow.Cells("idExpenseUsed").Value)
+                    Else
+                        datosExpenses.Add("")
+                    End If
+                    If tblExpencesProjects.CurrentRow.Cells("Date").Value IsNot DBNull.Value Then
+                        datosExpenses.Add(validaFechaParaSQl(tblExpencesProjects.CurrentRow.Cells("Date").Value))
+                    Else
+                        mensaje = If(mensaje = "", "Please choose a Date.", vbCrLf + "Please choose a Date")
+                    End If
+                    If tblExpencesProjects.CurrentRow.Cells("Expense Code").Value IsNot DBNull.Value Then
+                        For Each row As DataRow In listIdsExpCodes.Rows
+                            If row.Item(1) = tblExpencesProjects.CurrentRow.Cells("Expense Code").Value Then
+                                datosExpenses.Add(row.Item(0))
+                                Exit For
+                            End If
+                        Next
+                    Else
+                        mensaje = If(mensaje = "", "Check the 'Expense Code' Cell.", vbCrLf + "Check the 'Expense Code' Cell.")
+                    End If
+
+                    If Not tblExpencesProjects.CurrentRow.Cells("Amount").Value Is DBNull.Value Then
+                        If soloNumero(tblExpencesProjects.CurrentRow.Cells("Amount").Value) Then
+                            datosExpenses.Add(tblExpencesProjects.CurrentRow.Cells("Amount").Value)
+                        Else
+                            mensaje = If(mensaje = "", "Check the 'Amount' Cell, it only permit numbers.", vbCrLf + "Check the 'Amount' Cell, it only permit numbers.")
+                        End If
+                    Else
+                        mensaje = If(mensaje = "", "Check the 'Amount' Cell.", vbCrLf + "Check the 'Amount' Cell.")
+                    End If
+                    If tblExpencesProjects.CurrentRow.Cells("Description").Value IsNot DBNull.Value Then
+                        datosExpenses.Add(tblExpencesProjects.CurrentRow.Cells("Description").Value)
+                    Else
+                        datosExpenses.Add("")
+                    End If
+                    datosExpenses.Add(pjt.idAux)
+                    If mensaje = "" Then
+                        If datosExpenses(0) = "" Then 'Insert
+                            mtdJobs.insertExpensesUsed(datosExpenses)
+                            mtdJobs.buscarExpencesPorProyecto(tblExpencesProjects, idAuxWO, task)
+                            calcularValores()
+                        Else ' Update
+                            mtdJobs.updateExpensesUsed(datosExpenses)
+                            mtdJobs.buscarExpencesPorProyecto(tblExpencesProjects, idAuxWO, task)
+                            calcularValores()
+                        End If
+                    Else
+                        MessageBox.Show(mensaje, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                    End If
+            End Select
+        End If
+    End Sub
 End Class

@@ -1,22 +1,6 @@
 ﻿Imports System.Data.SqlClient
 Public Class MetodosJobs
     Inherits ConnectioDB
-    'metodos work code y type work code
-    'Public Sub selectWC(ByVal cmbTWC As ComboBox, ByVal listIDS As List(Of String))
-    '    conectar()
-    '    Try
-    '        Dim cmd As New SqlCommand("select clasification , idTWorkCode from typeWorkCode", conn)
-    '        Dim rd As SqlDataReader
-    '        rd = cmd.ExecuteReader()
-    '        While rd.Read()
-    '            cmbTWC.Items.Add(rd("clasification"))
-    '            listIDS.Add(rd("idTWorkCode"))
-    '        End While
-    '    Catch ex As Exception
-    '        MsgBox(ex.Message)
-    '    End Try
-    '    desconectar()
-    'End Sub
 
     '########################################################################################################################
     '############  METODOS PARA WORKCODE ####################################################################################
@@ -392,6 +376,7 @@ where  tk.task = '" + idTask + "' and tk.idAuxWO = '" + idWO + "'", conn)
             conectar()
             Dim cmd As New SqlCommand("
 select
+expu.idExpenseUsed,
 CONVERT (varchar,expu.dateExpense,1) as 'Date',
 ex.expenseCode as 'Expense Code',
 expu.amount as 'Amount',
@@ -405,6 +390,7 @@ where tk.task = '" + idTask + "' and tk.idAuxWO = '" + idWO + "'", conn)
                 Dim dt As New DataTable
                 da.Fill(dt)
                 tblExpences.DataSource = dt
+                tblExpences.Columns("idExpenseUsed").Visible = False
                 desconectar()
             End If
         Catch ex As Exception
@@ -413,15 +399,103 @@ where tk.task = '" + idTask + "' and tk.idAuxWO = '" + idWO + "'", conn)
         End Try
     End Sub
 
+    Public Function llenarComboCellExpCode(ByVal cmbExpCode As DataGridViewComboBoxCell, ByVal tabla As DataTable) As Boolean
+        Try
+            conectar()
+            Dim cmd As New SqlCommand("select idExpenses , expenseCode from expenses", conn)
+            Dim reader As SqlDataReader = cmd.ExecuteReader
+            tabla.Clear()
+            Dim cont = 0
+            Dim column As DataColumn
+            If tabla.Columns.Count = 0 Then
+                column = New DataColumn()
+                column.DataType = System.Type.GetType("System.String")
+                column.ColumnName = "id"
+                column.AutoIncrement = False
+                column.ReadOnly = False
+                column.Unique = False
+                tabla.Columns.Add(column)
+                column = New DataColumn()
+                column.DataType = System.Type.GetType("System.String")
+                column.ColumnName = "expenseCode"
+                column.AutoIncrement = False
+                column.ReadOnly = False
+                column.Unique = False
+                tabla.Columns.Add(column)
+            End If
+            While reader.Read()
+                Dim row As DataRow
+                row = tabla.NewRow()
+                row("id") = reader("idExpenses")
+                row("expenseCode") = reader("expenseCode")
+                tabla.Rows.Add(Row)
+                cmbExpCode.Items.Add(reader("expenseCode"))
+            End While
+            desconectar()
+            If tabla.Rows.Count > 0 Then
+                Return True
+            Else
+                Return False
+            End If
+        Catch ex As Exception
+            desconectar()
+            Return False
+        End Try
+    End Function
+    Public Function llenarComboCellMaterial(ByVal cmbMaterial As DataGridViewComboBoxCell, ByVal tabla As DataTable) As Boolean
+        Try
+            conectar()
+            Dim cmd As New SqlCommand("select idMaterial,CONCAT(number,' ' ,name) as name from material", conn)
+            Dim reader As SqlDataReader = cmd.ExecuteReader
+            tabla.Clear()
+            Dim cont = 0
+            Dim column As DataColumn
+            If tabla.Columns.Count = 0 Then
+                column = New DataColumn()
+                column.DataType = System.Type.GetType("System.String")
+                column.ColumnName = "id"
+                column.AutoIncrement = False
+                column.ReadOnly = False
+                column.Unique = False
+                tabla.Columns.Add(column)
+                column = New DataColumn()
+                column.DataType = System.Type.GetType("System.String")
+                column.ColumnName = "Material"
+                column.AutoIncrement = False
+                column.ReadOnly = False
+                column.Unique = False
+                tabla.Columns.Add(column)
+            End If
+            While reader.Read()
+                Dim row As DataRow
+                row = tabla.NewRow()
+                row("id") = reader("idMaterial")
+                row("Material") = reader("name")
+                tabla.Rows.Add(row)
+                cmbMaterial.Items.Add(reader("name"))
+            End While
+            desconectar()
+            If tabla.Rows.Count > 0 Then
+                Return True
+            Else
+                Return False
+            End If
+        Catch ex As Exception
+            desconectar()
+            Return False
+        End Try
+    End Function
     Public Sub buscarMaterialesPorProyecto(ByVal tblMateriales As DataGridView, ByVal idWO As String, ByVal idTask As String)
         Try
             conectar()
             Dim cmd As New SqlCommand("
 select 
+mu.idMaterialUsed,
 convert (varchar,mu.dateMaterial, 1) as 'Date',
 concat(wo.idWO,' ',tk.task)as 'Work Order',
 mu.amount as 'Amount',
-mu.description
+mt.name as 'Material Code',
+mu.description as 'Description'
 from 
 materialUsed as mu inner join task as tk on tk.idAux = mu.idAux
 inner join material as mt on mu.idMaterial = mt.idMaterial
@@ -432,6 +506,7 @@ where tk.task = '" + idTask + "' and tk.idAuxWO = '" + idWO + "'", conn)
                 Dim dt As New DataTable
                 da.Fill(dt)
                 tblMateriales.DataSource = dt
+                tblMateriales.Columns("idMaterialUsed").Visible = False
                 desconectar()
             End If
         Catch ex As Exception
@@ -996,4 +1071,124 @@ where tk.idAux = '" + idAux + "' and wo.idAuxWO = '" + WO + "'", conn)
         Return array(0)
     End Function
 
+    Public Function updateOrInsertNewMaterialUsed(ByVal datos As List(Of String), ByVal idMaterial As String) As Boolean
+        Try
+            If idMaterial = "" Then
+                conectar()
+                Dim cmd As New SqlCommand("insert into materialUsed values(NEWID(),'" + datos(0) + "',1," + datos(1) + ",'" + datos(4) + "','task','idMaterial')", conn)
+                If cmd.ExecuteNonQuery > 0 Then
+                    UpdateTotalSpendTask(datos(5))
+                    Return True
+                Else
+                    Return False
+                End If
+            Else
+                conectar()
+                Dim cmd As New SqlCommand("", conn)
+                If cmd.ExecuteNonQuery Then
+                    Return True
+                Else
+                    Return False
+                End If
+            End If
+        Catch ex As Exception
+            Return False
+        End Try
+    End Function
+
+    Public Function insertMaterialUsed(ByVal datos As List(Of String)) As Boolean
+        Try
+            conectar()
+            Dim cmd As New SqlCommand("
+                insert into materialUsed values(NEWID(),'" + datos(1) + "',1," + datos(3) + ",'" + datos(5) + "','" + datos(2) + "','" + datos(4) + "')", conn)
+            If cmd.ExecuteNonQuery = 1 Then
+                UpdateTotalSpendTask(datos(5))
+                desconectar()
+                Return True
+            Else
+                desconectar()
+                Return False
+            End If
+        Catch ex As Exception
+            desconectar()
+            MsgBox(ex.Message)
+            Return False
+        End Try
+    End Function
+
+    Public Function updateMaterialUsed(ByVal datos As List(Of String)) As Boolean
+        Try
+            conectar()
+            Dim cmd As New SqlCommand("
+                update materialUsed set dateMaterial = '" + datos(1) + "' , amount = " + datos(3) + " ,description = " + datos(5) + " , idAux = '" + datos(2) + "',idMaterial = '" + datos(4) + "' where idMaterialUsed = '" + datos(0) + "'", conn)
+            If cmd.ExecuteNonQuery = 1 Then
+                UpdateTotalSpendTask(datos(5))
+                desconectar()
+                Return True
+            Else
+                desconectar()
+                Return False
+            End If
+        Catch ex As Exception
+            desconectar()
+            MsgBox(ex.Message)
+            Return False
+        End Try
+    End Function
+
+    Public Function insertExpensesUsed(ByVal datos As List(Of String)) As Boolean
+        Try
+            conectar()
+            Dim cmd As New SqlCommand("insert into expensesUsed values (NEWID(),'" + datos(1) + "'," + datos(3) + ",'" + datos(4) + "','" + datos(2) + "','" + datos(5) + "')", conn)
+            If cmd.ExecuteNonQuery = 1 Then
+                UpdateTotalSpendTask(datos(5))
+                desconectar()
+                Return True
+            Else
+                desconectar()
+                Return False
+            End If
+        Catch ex As Exception
+            desconectar()
+            MsgBox(ex.Message)
+            Return False
+        End Try
+    End Function
+
+    Public Function updateExpensesUsed(ByVal datos As List(Of String)) As Boolean
+        Try
+            conectar()
+            Dim cmd As New SqlCommand("
+            update expensesUsed set dateExpense = '" + datos(1) + "' , amount= " + datos(3) + " , description = '" + datos(4) + "' , idExpense = '" + datos(2) + "' , idAux= '" + datos(5) + "' where idExpenseUsed = '" + datos(0) + "' ", conn)
+            If cmd.ExecuteNonQuery = 1 Then
+                UpdateTotalSpendTask(datos(5))
+                desconectar()
+                Return True
+            Else
+                desconectar()
+                Return False
+            End If
+        Catch ex As Exception
+            desconectar()
+            MsgBox(ex.Message)
+            Return False
+        End Try
+    End Function
+
+    Public Function UpdateTotalSpendTask(ByVal idTask As String) As Boolean
+        Try
+            conectar()
+            Dim cmd As New SqlCommand("exec sp_UpdateTotalSpendTask '" + idTask + "'", conn)
+            If cmd.ExecuteNonQuery Then
+                desconectar()
+                Return True
+            Else
+                desconectar()
+                Return False
+            End If
+        Catch ex As Exception
+            desconectar()
+            Return False
+        End Try
+    End Function
 End Class
