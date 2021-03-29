@@ -520,4 +520,10 @@ Public Class MetodosOthers
         End Try
     End Function
 
+    Public Function primerDiaDeLaSemana(ByVal fecha As Date) As Date
+        While fecha.DayOfWeek <> DayOfWeek.Monday
+            fecha.AddDays(-1)
+        End While
+        Return fecha
+    End Function
 End Class

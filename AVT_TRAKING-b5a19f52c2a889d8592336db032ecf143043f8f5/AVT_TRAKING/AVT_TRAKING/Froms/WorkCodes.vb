@@ -22,7 +22,7 @@
             btnCancelWC.Enabled = True
             btnAddWorkCode.Text = "Save"
         Else
-            If CInt(txtWorkCodeID.Text) <= metodosGlobales.selecValorMaxColum(tblWK, 0) Or TxtWorkCode.Text IsNot "" Or sprBillingRate1.Value > 0 Or sprBillingRateOT.Value > 0 Then
+            If CInt(txtWorkCodeID.Text) <= metodosGlobales.selecValorMaxColum(tblWK, 0) Or TxtWorkCode.Text Is "" Or sprBillingRate1.Value < 0 Or sprBillingRateOT.Value < 0 Then
                 MsgBox("Please choose a valid ID to continue or check the data.")
             Else
                 Dim datos(8) As String

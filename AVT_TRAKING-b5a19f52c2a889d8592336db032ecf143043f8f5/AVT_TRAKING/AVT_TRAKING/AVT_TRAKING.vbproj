@@ -84,11 +84,18 @@
     <Compile Include="Class\MetodosClients.vb" />
     <Compile Include="Class\MetodosEmployees.vb" />
     <Compile Include="Class\MetodosHerramientas.vb" />
+    <Compile Include="Class\MetodosHoursPeerWeek.vb" />
     <Compile Include="Class\MetodosOthers.vb" />
     <Compile Include="Class\MetodosParaDocumentos.vb" />
     <Compile Include="Class\MetodosRenta.vb" />
     <Compile Include="Class\MetodosVendor.vb" />
     <Compile Include="Class\MetodosJobs.vb" />
+    <Compile Include="Froms\AbsentsEmployee.Designer.vb">
+      <DependentUpon>AbsentsEmployee.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Froms\AbsentsEmployee.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Froms\All_Tables.Designer.vb">
       <DependentUpon>All_Tables.vb</DependentUpon>
     </Compile>
@@ -214,6 +221,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Froms\AbsentsEmployee.resx">
+      <DependentUpon>AbsentsEmployee.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Froms\All_Tables.resx">
       <DependentUpon>All_Tables.vb</DependentUpon>
     </EmbeddedResource>

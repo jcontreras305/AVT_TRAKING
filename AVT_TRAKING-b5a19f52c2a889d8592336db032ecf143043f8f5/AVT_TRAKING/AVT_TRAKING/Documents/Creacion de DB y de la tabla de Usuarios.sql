@@ -63,6 +63,8 @@ GO
 insert into workTMLumpSum values('Lump-Sum'),('T&M'),('Unire Rate')
 GO
 
+
+
 create table costDistribution(
 	idCostDistribution bigint primary key not null ,
 	name varchar(30)
@@ -80,6 +82,19 @@ GO
 
 insert into costCode values (240000000000000,'Fist'),(140000000000000,'Secund')
 GO
+--##########################################################################################
+--##################  TABLA DE ABSENTS ####################################################
+--##########################################################################################
+
+create table absents(
+	idAbsents varchar(36) primary key not null,
+	dateAbsents date,
+	hoursPaid float,
+	explanation varchar(250),
+	idEmployee varchar(36) 
+)
+GO
+
 --##########################################################################################
 --##################  TABLA DE CLIENTES ####################################################
 --##########################################################################################
@@ -179,7 +194,8 @@ create  table expensesUsed(
 	amount float not null,
 	description varchar(100) null,
 	idExpense varchar(36),
-	idAux varchar(36) 
+	idAux varchar(36),
+	idEmploye varchar(36)
 )
 GO
 
@@ -209,7 +225,8 @@ create table hoursWorked (
 	dateWorked date,
 	idEmployee varchar(36),
 	idWorkCode int,
-	idAux varchar(36)
+	idAux varchar(36),
+	schedule varchar(10)
 )
 GO
 
@@ -359,6 +376,14 @@ GO
 --####################################################################################################################################
 
 --##########################################################################################
+--##################  FOREIG KEYS ABSENTS ##################################################
+--##########################################################################################
+
+ALTER TABLE [dbo].[absents] WITH CHECK ADD CONSTRAINT [fk_idEmployee_Absent] FOREIGN KEY ([idEmployee]) 
+REFERENCES [dbo].[employees]([idEmployee]) 
+GO
+
+--##########################################################################################
 --##################  FOREIG KEYS CLIENTES #################################################
 --##########################################################################################
 
@@ -415,6 +440,10 @@ GO
 
 ALTER TABLE    expensesUsed   WITH CHECK ADD  CONSTRAINT  fk_idTask_EU  FOREIGN KEY( idAux )
 REFERENCES    task  ( idAux )
+GO
+
+ALTER TABLE    expensesUsed   WITH CHECK ADD  CONSTRAINT  fk_idEmployee_EU  FOREIGN KEY( idEmployee  )
+REFERENCES    employees ( idEmployee )
 GO
 
 --##########################################################################################
@@ -1000,67 +1029,29 @@ GO
 ----drop database VRT_TRAKING
 
 
-----Si ya se tienen datos ejecutar esto dos datos para poder modificar workOrder en la 
-----ventana de ProjectCosts, si no borrar la base de datos y seleccionar todo a exepcion 
-----del codigo de abajo
-
---ALTER TABLE task DROP CONSTRAINT fk_idWO_task 
---GO
-
---ALTER TABLE task WITH CHECK ADD CONSTRAINT fk_idWO_task FOREIGN KEY (idWO)
---REFERENCES workOrder (idWO)
---ON UPDATE CASCADE
---ON DELETE CASCADE
---GO
-
 --==============================================================================================================================
---===== ESTE ES CODIGO SI NO SE QUIERE CREAR DESDE CERO LA BASE DE DATO ========================================================
+--===== ESTE ES CODIGO SI NO SE QUIERE CREAR DESDE CERO LA BASE DE DATOS =======================================================
 --==============================================================================================================================
 
-
-
----- LE QUITAMOS LAS COLUMNAS CON EL DROP A LA TABLA PROJECTOREDER
---ALTER TABLE projectOrder DROP COLUMN equipament
---GO
---ALTER TABLE projectOrder DROP COLUMN manager
---GO
---ALTER TABLE projectOrder DROP COLUMN description
---GO
---ALTER TABLE projectOrder DROP COLUMN estTotalBilling
---GO
---ALTER TABLE projectOrder DROP COLUMN beginDate
---GO
---ALTER TABLE projectOrder DROP COLUMN endDate
---GO
---ALTER TABLE projectOrder DROP COLUMN expCode
---GO
---ALTER TABLE projectOrder DROP COLUMN accountNum
---GO
---ALTER TABLE projectOrder DROP COLUMN estimateHours
---GO
---ALTER TABLE projectOrder DROP COLUMN status
---GO
-----LE ASIGNAMOS LAS COLUMNAS A LA TABLA TASK VAN A PARECER COMO NULLS
---ALTER TABLE task ADD equipament VARCHAR(30)
---GO
---ALTER TABLE task ADD manager VARCHAR(50)			
---GO
---ALTER TABLE task ADD description VARCHAR(100)				
---GO
---ALTER TABLE task ADD estTotalBilling FLOAT			
---GO
---ALTER TABLE task ADD beginDate DATE
---GO
---ALTER TABLE task ADD endDate DATE
---GO
---ALTER TABLE task ADD expCode VARCHAR(20)
---GO
---ALTER TABLE task ADD accountNum VARCHAR(12)
---GO
---ALTER TABLE task ADD estimateHours FLOAT		
---GO
---ALTER TABLE task ADD status CHAR(1)
+--alter table expensesUsed 
+--add idEmployee varchar(36)
+--go
+--ALTER TABLE    expensesUsed   WITH CHECK ADD  CONSTRAINT  fk_idEmployee_EU  FOREIGN KEY( idEmployee  )
+--REFERENCES    employees ( idEmployee )
 --GO
 
---select * from task
---select * from projectOrder 
+--create table absents(
+--	idAbsents varchar(36) primary key not null,
+--	dateAbsents date,
+--	hoursPaid float,
+--	explanation varchar(250),
+--	idEmployee varchar(36) 
+--)
+--GO
+
+--alter table absents 
+--add constraint fk_idEmployee_Absent 
+--foreign key (idEmployee) 
+--references employees(idEmployee) 
+--GO
+

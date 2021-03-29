@@ -63,4 +63,32 @@
         Return fecha1
     End Function
 
+    Public Function validarFechaParaVB(ByVal fecha As String) As Date
+        'Dim dataAux As String = fecha.ToShortDateString()
+        If fecha IsNot Nothing Then
+            Dim array() As String = CStr(fecha).Split("/")
+            Dim fecha1 As String = array(1) + "/" + array(0) + "/" + array(2)
+            Return CDate(fecha1)
+        Else
+            Return Nothing
+        End If
+
+    End Function
+
+    Public Function primerDiaDeLaSemana(ByVal fecha As Date) As Date
+        Dim flag As Boolean = False
+        Dim fechaReturn As New Date
+        Dim cont As Integer = 0
+        While flag = False
+            Dim aux As Date = fecha.AddDays(-cont)
+            If aux.DayOfWeek = DayOfWeek.Monday Then
+                flag = True
+            Else
+                cont += 1
+            End If
+        End While
+        Return fecha.AddDays(-cont)
+    End Function
+
+
 End Module

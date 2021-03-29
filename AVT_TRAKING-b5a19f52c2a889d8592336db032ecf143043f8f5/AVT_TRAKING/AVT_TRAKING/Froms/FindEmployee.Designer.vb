@@ -24,8 +24,11 @@ Partial Class FindEmployee
     Private Sub InitializeComponent()
         Me.txtAsk = New System.Windows.Forms.TextBox()
         Me.btnFindEmployee = New System.Windows.Forms.Button()
-        Me.tblFindEmployee = New System.Windows.Forms.DataGridView()
-        CType(Me.tblFindEmployee, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.btnSelect = New System.Windows.Forms.Button()
+        Me.tblEmployees = New System.Windows.Forms.DataGridView()
+        Me.Panel1 = New System.Windows.Forms.Panel()
+        CType(Me.tblEmployees, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.Panel1.SuspendLayout()
         Me.SuspendLayout()
         '
         'txtAsk
@@ -37,37 +40,66 @@ Partial Class FindEmployee
         '
         'btnFindEmployee
         '
-        Me.btnFindEmployee.Location = New System.Drawing.Point(179, 25)
+        Me.btnFindEmployee.Location = New System.Drawing.Point(179, 23)
         Me.btnFindEmployee.Name = "btnFindEmployee"
         Me.btnFindEmployee.Size = New System.Drawing.Size(75, 23)
         Me.btnFindEmployee.TabIndex = 1
         Me.btnFindEmployee.Text = "Find"
         Me.btnFindEmployee.UseVisualStyleBackColor = True
         '
-        'tblFindEmployee
+        'btnSelect
         '
-        Me.tblFindEmployee.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.tblFindEmployee.Location = New System.Drawing.Point(12, 54)
-        Me.tblFindEmployee.Name = "tblFindEmployee"
-        Me.tblFindEmployee.Size = New System.Drawing.Size(442, 231)
-        Me.tblFindEmployee.TabIndex = 2
+        Me.btnSelect.Location = New System.Drawing.Point(275, 22)
+        Me.btnSelect.Name = "btnSelect"
+        Me.btnSelect.Size = New System.Drawing.Size(75, 23)
+        Me.btnSelect.TabIndex = 3
+        Me.btnSelect.Text = "Select"
+        Me.btnSelect.UseVisualStyleBackColor = True
+        '
+        'tblEmployees
+        '
+        Me.tblEmployees.AllowUserToAddRows = False
+        Me.tblEmployees.AllowUserToDeleteRows = False
+        Me.tblEmployees.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
+        Me.tblEmployees.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.tblEmployees.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.tblEmployees.Location = New System.Drawing.Point(0, 0)
+        Me.tblEmployees.Name = "tblEmployees"
+        Me.tblEmployees.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
+        Me.tblEmployees.Size = New System.Drawing.Size(338, 222)
+        Me.tblEmployees.TabIndex = 4
+        '
+        'Panel1
+        '
+        Me.Panel1.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Panel1.Controls.Add(Me.tblEmployees)
+        Me.Panel1.Location = New System.Drawing.Point(12, 63)
+        Me.Panel1.Name = "Panel1"
+        Me.Panel1.Size = New System.Drawing.Size(338, 222)
+        Me.Panel1.TabIndex = 5
         '
         'FindEmployee
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(463, 297)
-        Me.Controls.Add(Me.tblFindEmployee)
+        Me.ClientSize = New System.Drawing.Size(357, 297)
+        Me.Controls.Add(Me.Panel1)
+        Me.Controls.Add(Me.btnSelect)
         Me.Controls.Add(Me.btnFindEmployee)
         Me.Controls.Add(Me.txtAsk)
         Me.Name = "FindEmployee"
         Me.Text = "FindEmployee"
-        CType(Me.tblFindEmployee, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.tblEmployees, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.Panel1.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
     End Sub
     Friend WithEvents btnFindEmployee As Button
     Public WithEvents txtAsk As TextBox
-    Public WithEvents tblFindEmployee As DataGridView
+    Friend WithEvents btnSelect As Button
+    Friend WithEvents tblEmployees As DataGridView
+    Friend WithEvents Panel1 As Panel
 End Class

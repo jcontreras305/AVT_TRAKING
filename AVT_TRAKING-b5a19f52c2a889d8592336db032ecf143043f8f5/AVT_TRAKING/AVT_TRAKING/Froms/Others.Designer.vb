@@ -25,7 +25,18 @@ Partial Class Others
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.TabPage1 = New System.Windows.Forms.TabPage()
+        Me.GroupBox5 = New System.Windows.Forms.GroupBox()
+        Me.btnAddCostCode = New System.Windows.Forms.Button()
+        Me.txtCostCode = New System.Windows.Forms.TextBox()
+        Me.lstCostCode = New System.Windows.Forms.ListView()
+        Me.ColumnHeader3 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.btnDeleteCostCode = New System.Windows.Forms.Button()
+        Me.btnUpdateCostCode = New System.Windows.Forms.Button()
         Me.GroupBox4 = New System.Windows.Forms.GroupBox()
+        Me.btnAddCostDristribution = New System.Windows.Forms.Button()
+        Me.txtCostDistribution = New System.Windows.Forms.TextBox()
+        Me.lstCostDistribution = New System.Windows.Forms.ListView()
+        Me.ColumnHeader1 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.btnDeleteCostDistribution = New System.Windows.Forms.Button()
         Me.btnUpdateCostDristribution = New System.Windows.Forms.Button()
         Me.GroupBox3 = New System.Windows.Forms.GroupBox()
@@ -49,25 +60,15 @@ Partial Class Others
         Me.btnDeleteTypeEmployee = New System.Windows.Forms.Button()
         Me.btnUpdateTypeEmploye = New System.Windows.Forms.Button()
         Me.lstTypeEmployee = New System.Windows.Forms.ListBox()
-        Me.btnAddCostDristribution = New System.Windows.Forms.Button()
-        Me.txtCostDistribution = New System.Windows.Forms.TextBox()
-        Me.lstCostDistribution = New System.Windows.Forms.ListView()
-        Me.ColumnHeader1 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.GroupBox5 = New System.Windows.Forms.GroupBox()
-        Me.btnDeleteCostCode = New System.Windows.Forms.Button()
-        Me.btnUpdateCostCode = New System.Windows.Forms.Button()
-        Me.btnAddCostCode = New System.Windows.Forms.Button()
-        Me.txtCostCode = New System.Windows.Forms.TextBox()
-        Me.lstCostCode = New System.Windows.Forms.ListView()
-        Me.ColumnHeader3 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.TabPage2 = New System.Windows.Forms.TabPage()
         Me.Panel1.SuspendLayout()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
+        Me.GroupBox5.SuspendLayout()
         Me.GroupBox4.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
-        Me.GroupBox5.SuspendLayout()
         Me.SuspendLayout()
         '
         'Panel1
@@ -82,6 +83,7 @@ Partial Class Others
         'TabControl1
         '
         Me.TabControl1.Controls.Add(Me.TabPage1)
+        Me.TabControl1.Controls.Add(Me.TabPage2)
         Me.TabControl1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.TabControl1.Location = New System.Drawing.Point(0, 0)
         Me.TabControl1.Name = "TabControl1"
@@ -101,8 +103,81 @@ Partial Class Others
         Me.TabPage1.Padding = New System.Windows.Forms.Padding(3)
         Me.TabPage1.Size = New System.Drawing.Size(956, 446)
         Me.TabPage1.TabIndex = 0
-        Me.TabPage1.Text = "Others"
+        Me.TabPage1.Text = "Proyect Items"
         Me.TabPage1.UseVisualStyleBackColor = True
+        '
+        'GroupBox5
+        '
+        Me.GroupBox5.Controls.Add(Me.btnAddCostCode)
+        Me.GroupBox5.Controls.Add(Me.txtCostCode)
+        Me.GroupBox5.Controls.Add(Me.lstCostCode)
+        Me.GroupBox5.Controls.Add(Me.btnDeleteCostCode)
+        Me.GroupBox5.Controls.Add(Me.btnUpdateCostCode)
+        Me.GroupBox5.Location = New System.Drawing.Point(640, 28)
+        Me.GroupBox5.Name = "GroupBox5"
+        Me.GroupBox5.Size = New System.Drawing.Size(298, 181)
+        Me.GroupBox5.TabIndex = 6
+        Me.GroupBox5.TabStop = False
+        Me.GroupBox5.Text = "Cost Code"
+        '
+        'btnAddCostCode
+        '
+        Me.btnAddCostCode.Location = New System.Drawing.Point(194, 35)
+        Me.btnAddCostCode.Name = "btnAddCostCode"
+        Me.btnAddCostCode.Size = New System.Drawing.Size(75, 23)
+        Me.btnAddCostCode.TabIndex = 14
+        Me.btnAddCostCode.Text = "Add"
+        Me.btnAddCostCode.UseVisualStyleBackColor = True
+        '
+        'txtCostCode
+        '
+        Me.txtCostCode.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.txtCostCode.Location = New System.Drawing.Point(194, 8)
+        Me.txtCostCode.Name = "txtCostCode"
+        Me.txtCostCode.Size = New System.Drawing.Size(100, 20)
+        Me.txtCostCode.TabIndex = 13
+        '
+        'lstCostCode
+        '
+        Me.lstCostCode.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader3})
+        Me.lstCostCode.Dock = System.Windows.Forms.DockStyle.Left
+        Me.lstCostCode.FullRowSelect = True
+        Me.lstCostCode.HideSelection = False
+        Me.lstCostCode.Location = New System.Drawing.Point(3, 16)
+        Me.lstCostCode.MultiSelect = False
+        Me.lstCostCode.Name = "lstCostCode"
+        Me.lstCostCode.Size = New System.Drawing.Size(179, 162)
+        Me.lstCostCode.TabIndex = 12
+        Me.lstCostCode.UseCompatibleStateImageBehavior = False
+        Me.lstCostCode.View = System.Windows.Forms.View.Details
+        '
+        'ColumnHeader3
+        '
+        Me.ColumnHeader3.Text = "Numer"
+        Me.ColumnHeader3.Width = 175
+        '
+        'btnDeleteCostCode
+        '
+        Me.btnDeleteCostCode.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnDeleteCostCode.Location = New System.Drawing.Point(191, 152)
+        Me.btnDeleteCostCode.Name = "btnDeleteCostCode"
+        Me.btnDeleteCostCode.Size = New System.Drawing.Size(75, 23)
+        Me.btnDeleteCostCode.TabIndex = 2
+        Me.btnDeleteCostCode.Text = "Delete"
+        Me.btnDeleteCostCode.UseVisualStyleBackColor = True
+        '
+        'btnUpdateCostCode
+        '
+        Me.btnUpdateCostCode.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnUpdateCostCode.Location = New System.Drawing.Point(191, 123)
+        Me.btnUpdateCostCode.Name = "btnUpdateCostCode"
+        Me.btnUpdateCostCode.Size = New System.Drawing.Size(75, 23)
+        Me.btnUpdateCostCode.TabIndex = 1
+        Me.btnUpdateCostCode.Text = "Update"
+        Me.btnUpdateCostCode.UseVisualStyleBackColor = True
         '
         'GroupBox4
         '
@@ -117,6 +192,43 @@ Partial Class Others
         Me.GroupBox4.TabIndex = 4
         Me.GroupBox4.TabStop = False
         Me.GroupBox4.Text = "Cost Distribution"
+        '
+        'btnAddCostDristribution
+        '
+        Me.btnAddCostDristribution.Location = New System.Drawing.Point(192, 40)
+        Me.btnAddCostDristribution.Name = "btnAddCostDristribution"
+        Me.btnAddCostDristribution.Size = New System.Drawing.Size(75, 23)
+        Me.btnAddCostDristribution.TabIndex = 11
+        Me.btnAddCostDristribution.Text = "Add"
+        Me.btnAddCostDristribution.UseVisualStyleBackColor = True
+        '
+        'txtCostDistribution
+        '
+        Me.txtCostDistribution.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.txtCostDistribution.Location = New System.Drawing.Point(192, 13)
+        Me.txtCostDistribution.Name = "txtCostDistribution"
+        Me.txtCostDistribution.Size = New System.Drawing.Size(100, 20)
+        Me.txtCostDistribution.TabIndex = 10
+        '
+        'lstCostDistribution
+        '
+        Me.lstCostDistribution.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader1})
+        Me.lstCostDistribution.Dock = System.Windows.Forms.DockStyle.Left
+        Me.lstCostDistribution.FullRowSelect = True
+        Me.lstCostDistribution.HideSelection = False
+        Me.lstCostDistribution.Location = New System.Drawing.Point(3, 16)
+        Me.lstCostDistribution.MultiSelect = False
+        Me.lstCostDistribution.Name = "lstCostDistribution"
+        Me.lstCostDistribution.Size = New System.Drawing.Size(179, 187)
+        Me.lstCostDistribution.TabIndex = 9
+        Me.lstCostDistribution.UseCompatibleStateImageBehavior = False
+        Me.lstCostDistribution.View = System.Windows.Forms.View.Details
+        '
+        'ColumnHeader1
+        '
+        Me.ColumnHeader1.Text = "Numer"
+        Me.ColumnHeader1.Width = 175
         '
         'btnDeleteCostDistribution
         '
@@ -362,115 +474,14 @@ Partial Class Others
         Me.lstTypeEmployee.Size = New System.Drawing.Size(169, 163)
         Me.lstTypeEmployee.TabIndex = 0
         '
-        'btnAddCostDristribution
+        'TabPage2
         '
-        Me.btnAddCostDristribution.Location = New System.Drawing.Point(192, 40)
-        Me.btnAddCostDristribution.Name = "btnAddCostDristribution"
-        Me.btnAddCostDristribution.Size = New System.Drawing.Size(75, 23)
-        Me.btnAddCostDristribution.TabIndex = 11
-        Me.btnAddCostDristribution.Text = "Add"
-        Me.btnAddCostDristribution.UseVisualStyleBackColor = True
-        '
-        'txtCostDistribution
-        '
-        Me.txtCostDistribution.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.txtCostDistribution.Location = New System.Drawing.Point(192, 13)
-        Me.txtCostDistribution.Name = "txtCostDistribution"
-        Me.txtCostDistribution.Size = New System.Drawing.Size(100, 20)
-        Me.txtCostDistribution.TabIndex = 10
-        '
-        'lstCostDistribution
-        '
-        Me.lstCostDistribution.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader1})
-        Me.lstCostDistribution.Dock = System.Windows.Forms.DockStyle.Left
-        Me.lstCostDistribution.FullRowSelect = True
-        Me.lstCostDistribution.HideSelection = False
-        Me.lstCostDistribution.Location = New System.Drawing.Point(3, 16)
-        Me.lstCostDistribution.MultiSelect = False
-        Me.lstCostDistribution.Name = "lstCostDistribution"
-        Me.lstCostDistribution.Size = New System.Drawing.Size(179, 187)
-        Me.lstCostDistribution.TabIndex = 9
-        Me.lstCostDistribution.UseCompatibleStateImageBehavior = False
-        Me.lstCostDistribution.View = System.Windows.Forms.View.Details
-        '
-        'ColumnHeader1
-        '
-        Me.ColumnHeader1.Text = "Numer"
-        Me.ColumnHeader1.Width = 175
-        '
-        'GroupBox5
-        '
-        Me.GroupBox5.Controls.Add(Me.btnAddCostCode)
-        Me.GroupBox5.Controls.Add(Me.txtCostCode)
-        Me.GroupBox5.Controls.Add(Me.lstCostCode)
-        Me.GroupBox5.Controls.Add(Me.btnDeleteCostCode)
-        Me.GroupBox5.Controls.Add(Me.btnUpdateCostCode)
-        Me.GroupBox5.Location = New System.Drawing.Point(640, 28)
-        Me.GroupBox5.Name = "GroupBox5"
-        Me.GroupBox5.Size = New System.Drawing.Size(298, 181)
-        Me.GroupBox5.TabIndex = 6
-        Me.GroupBox5.TabStop = False
-        Me.GroupBox5.Text = "Cost Code"
-        '
-        'btnDeleteCostCode
-        '
-        Me.btnDeleteCostCode.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnDeleteCostCode.Location = New System.Drawing.Point(191, 152)
-        Me.btnDeleteCostCode.Name = "btnDeleteCostCode"
-        Me.btnDeleteCostCode.Size = New System.Drawing.Size(75, 23)
-        Me.btnDeleteCostCode.TabIndex = 2
-        Me.btnDeleteCostCode.Text = "Delete"
-        Me.btnDeleteCostCode.UseVisualStyleBackColor = True
-        '
-        'btnUpdateCostCode
-        '
-        Me.btnUpdateCostCode.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnUpdateCostCode.Location = New System.Drawing.Point(191, 123)
-        Me.btnUpdateCostCode.Name = "btnUpdateCostCode"
-        Me.btnUpdateCostCode.Size = New System.Drawing.Size(75, 23)
-        Me.btnUpdateCostCode.TabIndex = 1
-        Me.btnUpdateCostCode.Text = "Update"
-        Me.btnUpdateCostCode.UseVisualStyleBackColor = True
-        '
-        'btnAddCostCode
-        '
-        Me.btnAddCostCode.Location = New System.Drawing.Point(194, 35)
-        Me.btnAddCostCode.Name = "btnAddCostCode"
-        Me.btnAddCostCode.Size = New System.Drawing.Size(75, 23)
-        Me.btnAddCostCode.TabIndex = 14
-        Me.btnAddCostCode.Text = "Add"
-        Me.btnAddCostCode.UseVisualStyleBackColor = True
-        '
-        'txtCostCode
-        '
-        Me.txtCostCode.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.txtCostCode.Location = New System.Drawing.Point(194, 8)
-        Me.txtCostCode.Name = "txtCostCode"
-        Me.txtCostCode.Size = New System.Drawing.Size(100, 20)
-        Me.txtCostCode.TabIndex = 13
-        '
-        'lstCostCode
-        '
-        Me.lstCostCode.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader3})
-        Me.lstCostCode.Dock = System.Windows.Forms.DockStyle.Left
-        Me.lstCostCode.FullRowSelect = True
-        Me.lstCostCode.HideSelection = False
-        Me.lstCostCode.Location = New System.Drawing.Point(3, 16)
-        Me.lstCostCode.MultiSelect = False
-        Me.lstCostCode.Name = "lstCostCode"
-        Me.lstCostCode.Size = New System.Drawing.Size(179, 162)
-        Me.lstCostCode.TabIndex = 12
-        Me.lstCostCode.UseCompatibleStateImageBehavior = False
-        Me.lstCostCode.View = System.Windows.Forms.View.Details
-        '
-        'ColumnHeader3
-        '
-        Me.ColumnHeader3.Text = "Numer"
-        Me.ColumnHeader3.Width = 175
+        Me.TabPage2.Location = New System.Drawing.Point(4, 22)
+        Me.TabPage2.Name = "TabPage2"
+        Me.TabPage2.Size = New System.Drawing.Size(956, 446)
+        Me.TabPage2.TabIndex = 1
+        Me.TabPage2.Text = "Employe Items"
+        Me.TabPage2.UseVisualStyleBackColor = True
         '
         'Others
         '
@@ -483,6 +494,8 @@ Partial Class Others
         Me.Panel1.ResumeLayout(False)
         Me.TabControl1.ResumeLayout(False)
         Me.TabPage1.ResumeLayout(False)
+        Me.GroupBox5.ResumeLayout(False)
+        Me.GroupBox5.PerformLayout()
         Me.GroupBox4.ResumeLayout(False)
         Me.GroupBox4.PerformLayout()
         Me.GroupBox3.ResumeLayout(False)
@@ -491,8 +504,6 @@ Partial Class Others
         Me.GroupBox2.PerformLayout()
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()
-        Me.GroupBox5.ResumeLayout(False)
-        Me.GroupBox5.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -535,4 +546,5 @@ Partial Class Others
     Public WithEvents ColumnHeader3 As ColumnHeader
     Friend WithEvents btnDeleteCostCode As Button
     Friend WithEvents btnUpdateCostCode As Button
+    Friend WithEvents TabPage2 As TabPage
 End Class

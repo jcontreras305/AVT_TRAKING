@@ -199,24 +199,27 @@ pr.payRate1 , pr.payRate2,pr.payRate3,typeEmployee " + consultaInner +
     '=============== METODOS PARA EMEPLEADOS DE LA SECCIONDE DE HORAS TRABAJADAS ==========================
     '======================================================================================================
     '======================================================================================================
-
-
-    Public Sub bucarEmpleados(ByVal tblEmpleados As DataGridView, ByVal consulta As String)
+    Public Function bucarEmpleados(ByVal tblEmpleados As DataGridView, ByVal consulta As String) As Boolean
         Try
             conectar()
-            Dim cmd As New SqlCommand("select idEmployee, numberEmploye , concat(firstName,' ',middleName,' ' ,lastName) as 'Employe Name' , photo  from employees where concat(firstName,' ',middleName,' ' ,lastName) like '%" + consulta + "%' or numberEmploye like '%" + consulta + "%' ", conn)
+            Dim cmd As New SqlCommand("select idEmployee , numberEmploye as 'Employee Number' ,CONCAT(firstName,' ',middleName,' ',lastName) as 'Employee Name' , photo  from employees where estatus = 'E'
+and (CONCAT(firstName,' ',middleName,' ',lastName) like '%" + consulta + "%' or numberEmploye like '%" + consulta + "%')", conn)
             If cmd.ExecuteNonQuery Then
                 Dim da As New SqlDataAdapter(cmd)
                 Dim dt As New DataTable
                 da.Fill(dt)
                 tblEmpleados.DataSource = dt
-                tblEmpleados.Columns(0).Visible = False
-                tblEmpleados.Columns(3).Visible = False
+                desconectar()
+                Return True
+            Else
+                desconectar()
+                Return False
             End If
         Catch ex As Exception
-            MsgBox(ex.Message())
+            MsgBox(ex.Message)
+            Return False
         End Try
-    End Sub
+    End Function
 
 
     Public Function llenarCmbEmpleadosManager(ByVal cmbEmployeManager As ComboBox) As List(Of String)
@@ -239,4 +242,28 @@ pr.payRate1 , pr.payRate2,pr.payRate3,typeEmployee " + consultaInner +
             Return Nothing
         End Try
     End Function
+
+    '======================================================================================================
+    '=============== METODOS PARA EMEPLEADOS DE LA VENTANA DE ABSENTS PARA EMPLEADOS ======================
+    '======================================================================================================
+    '======================================================================================================
+
+    Public Function insertAbsents(ByVal datos As List(Of String)) As Boolean
+        Try
+            conectar()
+            Dim cmd As New SqlCommand("insert into absents values(NEWID(),'" + validaFechaParaSQl(datos(0)) + "'," + datos(1) + ",'" + datos(2) + "','" + datos(3) + "')", conn)
+            If cmd.ExecuteNonQuery > 0 Then
+                desconectar()
+                Return True
+            Else
+                desconectar()
+                Return False
+            End If
+            Return True
+        Catch ex As Exception
+            MsgBox(ex.Message())
+            Return False
+        End Try
+    End Function
+
 End Class

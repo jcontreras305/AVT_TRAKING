@@ -768,11 +768,14 @@ Partial Class ProjectsCosts
         '
         'tblExpencesProjects
         '
+        Me.tblExpencesProjects.AllowUserToAddRows = False
+        Me.tblExpencesProjects.AllowUserToDeleteRows = False
         Me.tblExpencesProjects.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.tblExpencesProjects.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.tblExpencesProjects.Dock = System.Windows.Forms.DockStyle.Fill
         Me.tblExpencesProjects.Location = New System.Drawing.Point(3, 3)
         Me.tblExpencesProjects.Name = "tblExpencesProjects"
+        Me.tblExpencesProjects.ReadOnly = True
         Me.tblExpencesProjects.Size = New System.Drawing.Size(887, 239)
         Me.tblExpencesProjects.TabIndex = 0
         '

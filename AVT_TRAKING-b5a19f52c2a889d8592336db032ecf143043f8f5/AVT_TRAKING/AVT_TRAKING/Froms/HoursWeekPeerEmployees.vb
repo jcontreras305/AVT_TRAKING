@@ -1,10 +1,571 @@
 ﻿Public Class HoursWeekPeerEmployees
-    Private Sub btnFindEmployee_Click(sender As Object, e As EventArgs) Handles btnFindEmployee.Click
-        Dim fndEmp As New FindEmployee
-        fndEmp.ShowDialog()
-    End Sub
+    Dim mtdOthers As New MetodosOthers
+    Dim mtdHPW As New MetodosHoursPeerWeek
+    Dim idsEmployees As New DataTable
+    Public idEmpleado, NombreEmpleado As String
+    Dim proyectTable As New DataTable
+    Dim workCodeTable As New DataTable
+    Dim expenseCodeTable As New DataTable
+    Public photo As Byte()
 
+    Dim _dtpHoras As New DateTimePicker
+    Dim _dtpExpenses As New DateTimePicker
+    Dim _rectangulo As New Rectangle
     Private Sub HoursWeekPeerEmployees_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        mtdHPW.llenarEmpleadosCombo(cmbEmpleados, idsEmployees)
+        cmbEmpleados.SelectedItem = cmbEmpleados.Items(0)
+        cargarDatos(cmbEmpleados.SelectedItem)
+        txtFindFecha.Text = System.DateTime.Today.ToShortDateString()
+        'dtpFecha.Value = System.DateTime.Today
+
+
+        mtdHPW.llenarTablaProyecto(proyectTable)
+        mtdHPW.llenarTablaWorkCode(workCodeTable)
+        mtdHPW.llenarTablaExpenses(expenseCodeTable)
+
+        tblRecordEmployee.Controls.Add(_dtpHoras)
+        _dtpHoras.Visible = False
+        _dtpHoras.Format = DateTimePickerFormat.Custom
+        AddHandler _dtpHoras.ValueChanged, AddressOf _dtpHoras_ValuesChangue
+
+        tblExpenses.Controls.Add(_dtpExpenses)
+        _dtpExpenses.Visible = False
+        _dtpExpenses.Format = DateTimePickerFormat.Custom
+        AddHandler _dtpExpenses.ValueChanged, AddressOf _dtpExpenses_ValuesChangue
+
+        flagPressCellDate = False
+        flagPressCellDateExpense = False
+    End Sub
+
+    Private Sub btnEmpleados_Click(sender As Object, e As EventArgs) Handles btnEmpleados.Click
+        Dim empleadoFrom As New Employees
+        empleadoFrom.ShowDialog()
+        mtdHPW.llenarEmpleadosCombo(cmbEmpleados, idsEmployees)
+        cmbEmpleados.SelectedItem = cmbEmpleados.Items(0)
+        cargarDatos(cmbEmpleados.SelectedItem)
+        mtdHPW.llenarTablaProyecto(proyectTable)
+        mtdHPW.llenarTablaWorkCode(workCodeTable)
+        mtdHPW.llenarTablaExpenses(expenseCodeTable)
+    End Sub
+
+    Private Sub _dtpHoras_ValuesChangue(sender As Object, e As EventArgs)
+        tblRecordEmployee.CurrentCell.Value = _dtpHoras.Value.ToString()
+    End Sub
+    Private Sub _dtpExpenses_ValuesChangue(sender As Object, e As EventArgs)
+        tblExpenses.CurrentCell.Value = _dtpExpenses.Value.ToString()
+    End Sub
+
+    Private Sub tblExpenses_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles tblExpenses.CellClick
+        If e.ColumnIndex <> -1 And e.RowIndex <> -1 Then
+            Select Case tblExpenses.Columns(e.ColumnIndex).Name
+                Case "Date"
+                    _rectangulo = tblExpenses.GetCellDisplayRectangle(e.ColumnIndex, e.RowIndex, True)
+                    _dtpExpenses.Size = New Size(_rectangulo.Width, _rectangulo.Height)
+                    _dtpExpenses.Location = New Point(_rectangulo.X, _rectangulo.Y)
+                    _dtpExpenses.Visible = True
+                    flagPressCellDateExpense = True
+                Case "Project"
+                    Try
+                        Dim cmbProyect As New DataGridViewComboBoxCell
+                        With cmbProyect
+                            mtdHPW.llenarComboCellProject(cmbProyect, proyectTable)
+                        End With
+                        tblExpenses.CurrentRow.Cells("Project") = cmbProyect
+                    Catch ex As Exception
+
+                    End Try
+                Case "Expense Code"
+                    Try
+                        Dim cmbExpenseCode As New DataGridViewComboBoxCell
+                        With cmbExpenseCode
+                            mtdHPW.llenarComboCellExpeseCode(cmbExpenseCode, expenseCodeTable)
+                        End With
+                        tblExpenses.CurrentRow.Cells("Expense Code") = cmbExpenseCode
+                    Catch ex As Exception
+
+                    End Try
+            End Select
+        End If
+    End Sub
+
+    Dim flagPressCellDate As Boolean
+    Dim flagPressCellDateExpense As Boolean
+    Private Sub tblRecordEmployee_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles tblRecordEmployee.CellClick
+        If e.ColumnIndex <> -1 And e.RowIndex <> -1 Then
+            Select Case tblRecordEmployee.Columns(e.ColumnIndex).Name
+                Case "Date"
+                    _rectangulo = tblRecordEmployee.GetCellDisplayRectangle(e.ColumnIndex, e.RowIndex, True)
+                    _dtpHoras.Size = New Size(_rectangulo.Width, _rectangulo.Height)
+                    _dtpHoras.Location = New Point(_rectangulo.X, _rectangulo.Y)
+                    _dtpHoras.Visible = True
+                    flagPressCellDate = True
+                Case "Project"
+                    Try
+                        Dim cmbProyect As New DataGridViewComboBoxCell
+                        With cmbProyect
+                            mtdHPW.llenarComboCellProject(cmbProyect, proyectTable)
+                        End With
+                        tblRecordEmployee.CurrentRow.Cells("Project") = cmbProyect
+                        flagFilaActual = "ProjectHours"
+                    Catch ex As Exception
+
+                    End Try
+                Case "Work Code"
+                    Try
+                        Dim cmbWorkCode As New DataGridViewComboBoxCell
+                        With cmbWorkCode
+                            mtdHPW.llenarComboCellWorkCode(cmbWorkCode, workCodeTable)
+                        End With
+                        tblRecordEmployee.CurrentRow.Cells("Work Code") = cmbWorkCode
+                        flagFilaActual = "WorkCode"
+                    Catch ex As Exception
+
+                    End Try
+                Case "Shift"
+                    Try
+                        Dim cmbShift As New DataGridViewComboBoxCell
+                        cmbShift.Items.Add("Day")
+                        cmbShift.Items.Add("Nigth")
+                        tblRecordEmployee.CurrentRow.Cells("Shift") = cmbShift
+                        flagFilaActual = "Shift"
+                    Catch ex As Exception
+
+                    End Try
+            End Select
+        End If
+    End Sub
+
+    Dim flagFilaActual As String
+
+
+    'evento para los combo declarados en cada celda
+    Public Sub cmb_SelectedIndexChangued(sender As Object, e As EventArgs)
+        Dim cmb As ComboBox = CType(sender, ComboBox)
+        If flagFilaActual = "ProjectHours" Then
+            For Each row As DataRow In proyectTable.Rows
+                If cmb.Text <> "" Then
+                    If cmb.Text = row.ItemArray(1) Then
+                        tblRecordEmployee.CurrentRow.Cells("Project Description").Value = row.ItemArray(2)
+                        Exit For
+                    End If
+                End If
+            Next
+        ElseIf flagFilaActual = "WorkCode" Then
+            For Each row As DataRow In workCodeTable.Rows
+                If cmb IsNot "" Then
+                    If cmb.Text = row.ItemArray(1) Then
+                        tblRecordEmployee.CurrentRow.Cells("Hours ST").Value = "0"
+                        tblRecordEmployee.CurrentRow.Cells("Hours OT").Value = "0"
+                        tblRecordEmployee.CurrentRow.Cells("Hours 3").Value = "0"
+                        tblRecordEmployee.CurrentRow.Cells("Clasification").Value = row.ItemArray(2)
+                        tblRecordEmployee.CurrentRow.Cells("Billing Rate").Value = row.ItemArray(3)
+                        tblRecordEmployee.CurrentRow.Cells("Billing Rate OT").Value = row.ItemArray(4)
+                        tblRecordEmployee.CurrentRow.Cells("Billing Rate 3").Value = row.ItemArray(5)
+                        Exit For
+                    End If
+                End If
+            Next
+        End If
+    End Sub
+
+    Private Sub tblExpenses_ColumnWithChangue(sender As Object, e As DataGridViewColumnEventArgs) Handles tblExpenses.ColumnWidthChanged
+        _dtpExpenses.Visible = False
+    End Sub
+
+    Private Sub tblExpenses_Scroll(sender As Object, e As ScrollEventArgs) Handles tblExpenses.Scroll
+        _dtpExpenses.Visible = False
+    End Sub
+
+
+    Private Sub tblRecordEmployee_ColumnWithChangue(sender As Object, e As DataGridViewColumnEventArgs) Handles tblRecordEmployee.ColumnWidthChanged
+        _dtpHoras.Visible = False
+    End Sub
+
+    Private Sub tblRecordEmployee_Scroll(sender As Object, e As ScrollEventArgs) Handles tblRecordEmployee.Scroll
+        _dtpHoras.Visible = False
+    End Sub
+
+    Private Sub cmbEmpleados_SelectionChangeCommitted(sender As Object, e As EventArgs) Handles cmbEmpleados.SelectionChangeCommitted, cmbEmpleados.SelectedValueChanged
+        cargarDatos(cmbEmpleados.SelectedItem)
+    End Sub
+
+    Private Sub btnFindEmployee_Click(sender As Object, e As EventArgs) Handles btnFindEmployee.Click
+        Dim idAux = idEmpleado
+        Dim fndEmp As New FindEmployee
+        AddOwnedForm(fndEmp)
+        fndEmp.ShowDialog()
+        If idAux <> idEmpleado Then
+            cmbEmpleados.SelectedItem = NombreEmpleado
+            cargarDatos(cmbEmpleados.SelectedItem)
+        End If
+    End Sub
+
+
+    Private Sub cargarDatos(ByVal Employee As String)
+        Dim index As Integer = 0
+        For Each row As DataRow In idsEmployees.Rows
+            If Employee = row.ItemArray(0) Or Employee = row.ItemArray(1) Then
+                idEmpleado = row.ItemArray(0)
+                Exit For
+            End If
+            index += 1
+        Next
+        mtdHPW.buscarHoras(tblRecordEmployee, idsEmployees.Rows(index).ItemArray(0))
+        mtdHPW.bucarExpensesEmpleado(tblExpenses, idsEmployees.Rows(index).ItemArray(0))
+        tblHourPeerDay.Rows.Clear()
+        tblHourPeerDay.Rows.Add(primerDiaDeLaSemana(CDate(txtFindFecha.Text)).ToShortDateString, idsEmployees.Rows(index).ItemArray(1), 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+        pcbPhoto.Image = BytetoImage(idsEmployees.Rows(index).ItemArray(2))
+        lblEmployeeNumber.Text = idsEmployees.Rows(index).ItemArray(4)
+        lblNombreEmployee.Text = idsEmployees.Rows(index).ItemArray(1)
+        NombreEmpleado = idsEmployees.Rows(index).ItemArray(1)
+        btnSAP.Text = idsEmployees.Rows(index).ItemArray(3)
+        Dim hoursST As Double = 0.0
+        Dim hoursOT As Double = 0.0
+        Dim hours3 As Double = 0.0
+        Dim hourTotal As Double = 0.0
+        Dim HoursSTWeek = 0.0
+        Dim HoursOTWeek = 0.0
+        Dim Hours3Week = 0.0
+        For Each row As DataGridViewRow In tblRecordEmployee.Rows
+            hoursST += row.Cells("Hours ST").Value
+            hoursOT += row.Cells("Hours OT").Value
+            hours3 += row.Cells("Hours 3").Value
+            hourTotal += (row.Cells("Hours ST").Value + row.Cells("Hours OT").Value + row.Cells("Hours 3").Value)
+            Dim diferencia = Date.Compare(validarFechaParaVB(row.Cells("Date").Value), primerDiaDeLaSemana(System.DateTime.Today))
+            If diferencia >= 0 Then
+                Select Case CDate(validarFechaParaVB(row.Cells("Date").Value)).DayOfWeek
+                    Case DayOfWeek.Monday
+                        tblHourPeerDay.Rows(0).Cells("clmMonST").Value = row.Cells("Hours ST").Value
+                        tblHourPeerDay.Rows(0).Cells("clmMonOT").Value = row.Cells("Hours OT").Value
+                        HoursOTWeek += row.Cells("Hours OT").Value
+                        HoursSTWeek += row.Cells("Hours ST").Value
+                        Hours3Week += row.Cells("Hours 3").Value
+                    Case DayOfWeek.Tuesday
+                        tblHourPeerDay.Rows(0).Cells("clmTueST").Value = row.Cells("Hours ST").Value
+                        tblHourPeerDay.Rows(0).Cells("clmTueOT").Value = row.Cells("Hours OT").Value
+                        HoursOTWeek += row.Cells("Hours OT").Value
+                        HoursSTWeek += row.Cells("Hours ST").Value
+                        Hours3Week += row.Cells("Hours 3").Value
+                    Case DayOfWeek.Wednesday
+                        tblHourPeerDay.Rows(0).Cells("clmWedST").Value = row.Cells("Hours ST").Value
+                        tblHourPeerDay.Rows(0).Cells("clmWedOT").Value = row.Cells("Hours OT").Value
+                        HoursOTWeek += row.Cells("Hours OT").Value
+                        HoursSTWeek += row.Cells("Hours ST").Value
+                        Hours3Week += row.Cells("Hours 3").Value
+                    Case DayOfWeek.Thursday
+                        tblHourPeerDay.Rows(0).Cells("clmThuST").Value = row.Cells("Hours ST").Value
+                        tblHourPeerDay.Rows(0).Cells("clmThuOT").Value = row.Cells("Hours OT").Value
+                        HoursOTWeek += row.Cells("Hours OT").Value
+                        HoursSTWeek += row.Cells("Hours ST").Value
+                        Hours3Week += row.Cells("Hours 3").Value
+                    Case DayOfWeek.Friday
+                        tblHourPeerDay.Rows(0).Cells("clmFriST").Value = row.Cells("Hours ST").Value
+                        tblHourPeerDay.Rows(0).Cells("clmFriOT").Value = row.Cells("Hours OT").Value
+                        HoursOTWeek += row.Cells("Hours OT").Value
+                        HoursSTWeek += row.Cells("Hours ST").Value
+                        Hours3Week += row.Cells("Hours 3").Value
+                    Case DayOfWeek.Saturday
+                        tblHourPeerDay.Rows(0).Cells("clmSatST").Value = row.Cells("Hours ST").Value
+                        tblHourPeerDay.Rows(0).Cells("clmSatOT").Value = row.Cells("Hours OT").Value
+                        HoursOTWeek += row.Cells("Hours OT").Value
+                        HoursSTWeek += row.Cells("Hours ST").Value
+                        Hours3Week += row.Cells("Hours 3").Value
+                    Case DayOfWeek.Sunday
+                        tblHourPeerDay.Rows(0).Cells("clmSunST").Value = row.Cells("Hours ST").Value
+                        tblHourPeerDay.Rows(0).Cells("clmSunOT").Value = row.Cells("Hours OT").Value
+                        HoursOTWeek += row.Cells("Hours OT").Value
+                        HoursSTWeek += row.Cells("Hours ST").Value
+                        Hours3Week += row.Cells("Hours 3").Value
+                End Select
+            End If
+        Next
+        txtTotalST.Text = hoursST
+        txtTotalOT.Text = hoursOT
+        txtHours3.Text = hours3
+        txtTotalHours.Text = hourTotal
+        tblHourPeerDay.Rows(0).Cells(2).Value = HoursSTWeek
+        tblHourPeerDay.Rows(0).Cells(3).Value = HoursOTWeek
+        tblHourPeerDay.Rows(0).Cells(4).Value = Hours3Week
+    End Sub
+    'evento de la tabla para agregar un evento aun ComboBoxCell
+    Private Sub tblRecordEmployee_EditingControlShowing(sender As Object, e As DataGridViewEditingControlShowingEventArgs) Handles tblRecordEmployee.EditingControlShowing
+        Dim Index = tblRecordEmployee.CurrentCell.ColumnIndex
+        If Index = 2 Or Index = 4 Or Index = 9 Then
+            Dim cb As ComboBox = CType(e.Control, ComboBox)
+            If e.Control IsNot Nothing Then
+                RemoveHandler cb.SelectedIndexChanged, AddressOf cmb_SelectedIndexChangued
+                AddHandler cb.SelectedIndexChanged, AddressOf cmb_SelectedIndexChangued
+            End If
+        End If
+    End Sub
+
+    Private Sub tblExpenses_EditingControlShowing(sender As Object, e As DataGridViewEditingControlShowingEventArgs) Handles tblExpenses.EditingControlShowing
+        If tblExpenses.CurrentCell.ColumnIndex = 1 Then
+            Dim cb As ComboBox = CType(e.Control, ComboBox)
+            If e.Control IsNot Nothing Then
+                RemoveHandler cb.SelectedIndexChanged, AddressOf cmb_SelectedIndexChangued
+                AddHandler cb.SelectedIndexChanged, AddressOf cmb_SelectedIndexChangued
+            End If
+        End If
+    End Sub
+
+    Private Sub btnSAP_Click(sender As Object, e As EventArgs) Handles btnSAP.Click
+        Dim AbsEmp As New Absentsemployee
+        AbsEmp.txtEmployeNumber.Text = btnSAP.Text
+        Dim array = NombreEmpleado.Split(" ")
+        AbsEmp.txtLastName.Text = array(2)
+        AbsEmp.txtFirstName.Text = array(0) + " " + array(1)
+        AbsEmp.idEmpleado = idEmpleado
+        AbsEmp.ShowDialog()
+    End Sub
+
+    Private Sub tblRecordEmployee_KeyPress(sender As Object, e As KeyPressEventArgs) Handles tblRecordEmployee.KeyPress
+        If Asc(e.KeyChar) = Keys.Enter Then
+            If recolectarDatosRecord() Then
+                cargarDatos(idEmpleado)
+                flagPressCellDate = False
+            End If
+        End If
+    End Sub
+
+    Private Sub tblExpenses_KeyPress(sender As Object, e As KeyPressEventArgs) Handles tblExpenses.KeyPress
+        If Asc(e.KeyChar) = Keys.Enter Then
+            If recolectarDatosExpenses() Then
+                cargarDatos(idEmpleado)
+                flagPressCellDateExpense = False
+            End If
+        End If
+    End Sub
+
+    Public Function recolectarDatosExpenses() As Boolean
+        Dim list As New List(Of String)
+        Dim mensaje As String = ""
+        Dim index = tblExpenses.CurrentRow.Index - 1
+        If tblExpenses.Rows(index).Cells("idExpenseUsed").Value IsNot DBNull.Value Then
+            list.Add(tblExpenses.Rows(index).Cells("idExpenseUsed").Value)
+        Else
+            list.Add("")
+        End If
+
+        If Not flagPressCellDateExpense Then
+            list.Add(tblExpenses.Rows(index).Cells("Date").Value)
+        Else
+            If tblExpenses.Rows(index).Cells("Date").Value IsNot DBNull.Value Then
+                list.Add(validaFechaParaSQl(tblExpenses.Rows(index).Cells("Date").Value))
+            Else
+                mensaje = If(mensaje = "", "Please choose a Date.", vbCrLf + " Please choose a Date")
+            End If
+        End If
+
+        If tblExpenses.Rows(index).Cells("Amount").Value IsNot DBNull.Value Then
+            list.Add(tblExpenses.Rows(index).Cells("Amount").Value)
+        Else
+            mensaje = If(mensaje = "", "The 'Amount' will be 0.", vbCrLf + " The 'Amount' will be 0.")
+            list.Add("0")
+        End If
+
+        If tblExpenses.Rows(index).Cells("Description").Value IsNot DBNull.Value Then
+            list.Add(tblExpenses.Rows(index).Cells("Description").Value)
+        Else
+            mensaje = If(mensaje = "", "The 'Description' will be Noting.", vbCrLf + " The 'Description' will be Noting.")
+            list.Add("")
+        End If
+
+        If tblExpenses.Rows(index).Cells("Expense Code").Value IsNot DBNull.Value Then
+            For Each row As DataRow In expenseCodeTable.Rows
+                If row.ItemArray(1) = tblExpenses.Rows(index).Cells("Expense Code").Value Then
+                    list.Add(row.ItemArray(0)) 'workCode
+                    Exit For
+                End If
+            Next
+        Else
+            mensaje = If(mensaje = "", "Please choose a Expense Code.", vbCrLf + " Please choose a Expense Code")
+        End If
+
+        If tblExpenses.Rows(index).Cells("Project").Value IsNot DBNull.Value Then
+            For Each row As DataRow In proyectTable.Rows
+                If row.ItemArray(1) = tblExpenses.Rows(index).Cells("Project").Value Then
+                    list.Add(row.ItemArray(0)) '
+                    Exit For
+                End If
+            Next
+        Else
+            mensaje = If(mensaje = "", "Please choose a Proyect.", vbCrLf + " Please choose a Proyect")
+        End If
+
+        list.Add(idEmpleado)
+
+        If mensaje = "" Then
+            If list(0) = "" Then
+                If DialogResult.OK = MessageBox.Show("If you accept the new expense will be inserted.", "Important", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) Then
+                    If mtdHPW.insertExpensesUsed(list) Then
+                        Return True
+                    Else
+                        Return False
+                    End If
+                Else
+                    Return False
+                End If
+            Else
+                If DialogResult.OK = MessageBox.Show("If you accept the expense will be updated.", "Important", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) Then
+                    If mtdHPW.updateExpensesUsed(list) Then
+                        Return True
+                    Else
+                        Return False
+                    End If
+                Else
+                    Return False
+                End If
+            End If
+        Else
+            MessageBox.Show(mensaje, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Return False
+        End If
+
+    End Function
+
+
+
+    Private Function recolectarDatosRecord() As Boolean
+        Dim list As New List(Of String)
+        Dim mensaje As String = ""
+        Dim index = tblRecordEmployee.CurrentRow.Index - 1
+        If tblRecordEmployee.Rows(index).Cells("idHorsWorked").Value IsNot DBNull.Value Then
+            list.Add(tblRecordEmployee.Rows(index).Cells("idHorsWorked").Value)
+        Else
+            list.Add("")
+        End If
+
+        If tblRecordEmployee.Rows(0).Cells("Hours ST").Value IsNot DBNull.Value Then
+            list.Add(tblRecordEmployee.Rows(index).Cells("Hours ST").Value)
+        Else
+            mensaje = If(mensaje = "", "Please assign some Hours.", vbCrLf + " Please assign some Hours")
+        End If
+
+        If tblRecordEmployee.Rows(index).Cells("Hours OT").Value IsNot DBNull.Value Then
+            list.Add(tblRecordEmployee.Rows(index).Cells("Hours OT").Value)
+        Else
+            list.Add("0")
+        End If
+
+        If tblRecordEmployee.Rows(index).Cells("Hours 3").Value IsNot DBNull.Value Then
+            list.Add(tblRecordEmployee.Rows(index).Cells("Hours 3").Value)
+        Else
+            list.Add("0")
+        End If
+
+        If Not flagPressCellDate Then
+            list.Add(tblRecordEmployee.Rows(index).Cells("Date").Value)
+        Else
+            If tblRecordEmployee.Rows(index).Cells("Date").Value IsNot DBNull.Value Then
+                list.Add(validaFechaParaSQl(tblRecordEmployee.Rows(index).Cells("Date").Value))
+            Else
+                mensaje = If(mensaje = "", "Please choose a Date.", vbCrLf + " Please choose a Date")
+            End If
+        End If
+
+
+        list.Add(idEmpleado)
+
+        If tblRecordEmployee.Rows(index).Cells("Work Code").Value IsNot DBNull.Value Then
+            For Each row As DataRow In workCodeTable.Rows
+                If row.ItemArray(1) = tblRecordEmployee.Rows(index).Cells("Work Code").Value Then
+                    list.Add(row.ItemArray(0)) 'workCode
+                    Exit For
+                End If
+            Next
+        Else
+            mensaje = If(mensaje = "", "Please choose a Work Code.", vbCrLf + " Please choose a Work Code")
+        End If
+
+        If tblRecordEmployee.Rows(index).Cells("Project").Value IsNot DBNull.Value Then
+            For Each row As DataRow In proyectTable.Rows
+                If row.ItemArray(1) = tblRecordEmployee.Rows(index).Cells("Project").Value Then
+                    list.Add(row.ItemArray(0)) '
+                    Exit For
+                End If
+            Next
+        Else
+            mensaje = If(mensaje = "", "Please choose a Proyect.", vbCrLf + " Please choose a Proyect")
+        End If
+
+
+        If tblRecordEmployee.Rows(index).Cells("Shift").Value IsNot DBNull.Value Then
+            list.Add(tblRecordEmployee.Rows(index).Cells("Shift").Value)
+        Else
+            mensaje = If(mensaje = "", "Please choose a Scheduel in the colum 'Shift'.", vbCrLf + " Please choose a Scheduel in the colum 'Shift'")
+        End If
+
+        If mensaje = "" Then
+            If list(0) = "" Then
+                If DialogResult.OK = MessageBox.Show("If you accept the new record will be inserted.", "Important", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) Then
+                    If mtdHPW.InsertarRecord(list) Then
+                        Return True
+                    Else
+                        Return False
+                    End If
+                Else
+                    Return False
+                End If
+            Else
+                If DialogResult.OK = MessageBox.Show("If you accept the record will be updated.", "Important", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) Then
+                    If mtdHPW.updateRecord(list) Then
+                        Return True
+                    Else
+                        Return False
+                    End If
+                Else
+                    Return False
+                End If
+            End If
+        Else
+            MessageBox.Show(mensaje, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Return False
+        End If
+    End Function
+
+    Private Sub btnLatsEmploye_Click(sender As Object, e As EventArgs) Handles btnLatsEmploye.Click
+        Dim cont As Integer = 0
+        For Each row As DataRow In idsEmployees.Rows
+            If cmbEmpleados.SelectedItem = row.ItemArray(1) Then
+                If cont = 0 Then
+                    cont = idsEmployees.Rows.Count()
+                End If
+                idEmpleado = idsEmployees.Rows(cont - 1).ItemArray(0)
+                Exit For
+            Else
+                cont = cont + 1
+            End If
+        Next
+        cmbEmpleados.SelectedItem = idsEmployees.Rows(cont - 1).ItemArray(1)
+    End Sub
+
+
+    Private Sub btnNextEmploye_Click(sender As Object, e As EventArgs) Handles btnNextEmploye.Click
+        Dim cont As Integer = 0
+        For Each row As DataRow In idsEmployees.Rows
+            If cmbEmpleados.SelectedItem = row.ItemArray(1) Then
+                If cont = (idsEmployees.Rows.Count() - 1) Then
+                    cont = -1
+                End If
+                idEmpleado = idsEmployees.Rows(cont + 1).ItemArray(0)
+                Exit For
+            Else
+                cont = cont + 1
+            End If
+        Next
+        cmbEmpleados.SelectedItem = idsEmployees.Rows(cont + 1).ItemArray(1)
 
     End Sub
+
+    Private Sub txtFindFecha_TextChanged(sender As Object, e As EventArgs) Handles txtFindFecha.TextChanged
+
+    End Sub
+
+    Private Sub btnExpenses_Click(sender As Object, e As EventArgs) Handles btnExpenses.Click
+        Dim exp As New Expences
+        exp.ShowDialog()
+        mtdHPW.llenarTablaExpenses(expenseCodeTable)
+    End Sub
+
 End Class
