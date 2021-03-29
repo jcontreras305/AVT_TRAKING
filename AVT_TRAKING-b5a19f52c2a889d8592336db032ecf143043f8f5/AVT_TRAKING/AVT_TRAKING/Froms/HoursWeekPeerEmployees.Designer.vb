@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class HoursWeekPeerEmployees
     Inherits System.Windows.Forms.Form
 
     'Form reemplaza a Dispose para limpiar la lista de componentes.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,8 +20,9 @@ Partial Class HoursWeekPeerEmployees
     'NOTA: el Diseñador de Windows Forms necesita el siguiente procedimiento
     'Se puede modificar usando el Diseñador de Windows Forms.  
     'No lo modifique con el editor de código.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.tblHourPeerDay = New System.Windows.Forms.DataGridView()
         Me.clmWeekending = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -52,7 +53,6 @@ Partial Class HoursWeekPeerEmployees
         Me.FlowLayoutPanel1 = New System.Windows.Forms.FlowLayoutPanel()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.txtFindFecha = New System.Windows.Forms.TextBox()
-        Me.clnFindFecha = New System.Windows.Forms.MonthCalendar()
         Me.btnSAP = New System.Windows.Forms.Button()
         Me.Button13 = New System.Windows.Forms.Button()
         Me.Button12 = New System.Windows.Forms.Button()
@@ -125,6 +125,14 @@ Partial Class HoursWeekPeerEmployees
         Me.tblHourPeerDay.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.tblHourPeerDay.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.tblHourPeerDay.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.clmWeekending, Me.clmEployeeName, Me.clmTotalST, Me.clmTotalOT, Me.clmTotalHours3, Me.clmMonST, Me.clmMonOT, Me.clmTueST, Me.clmTueOT, Me.clmWedST, Me.clmWedOT, Me.clmThuST, Me.clmThuOT, Me.clmFriST, Me.clmFriOT, Me.clmSatST, Me.clmSatOT, Me.clmSunST, Me.clmSunOT})
+        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle1.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.tblHourPeerDay.DefaultCellStyle = DataGridViewCellStyle1
         Me.tblHourPeerDay.Dock = System.Windows.Forms.DockStyle.Bottom
         Me.tblHourPeerDay.Location = New System.Drawing.Point(0, 132)
         Me.tblHourPeerDay.MultiSelect = False
@@ -325,7 +333,6 @@ Partial Class HoursWeekPeerEmployees
         'GroupBox1
         '
         Me.GroupBox1.Controls.Add(Me.txtFindFecha)
-        Me.GroupBox1.Controls.Add(Me.clnFindFecha)
         Me.GroupBox1.Controls.Add(Me.btnSAP)
         Me.GroupBox1.Controls.Add(Me.Button13)
         Me.GroupBox1.Controls.Add(Me.Button12)
@@ -354,16 +361,10 @@ Partial Class HoursWeekPeerEmployees
         '
         'txtFindFecha
         '
-        Me.txtFindFecha.Location = New System.Drawing.Point(95, 68)
+        Me.txtFindFecha.Location = New System.Drawing.Point(101, 68)
         Me.txtFindFecha.Name = "txtFindFecha"
         Me.txtFindFecha.Size = New System.Drawing.Size(171, 20)
         Me.txtFindFecha.TabIndex = 24
-        '
-        'clnFindFecha
-        '
-        Me.clnFindFecha.Location = New System.Drawing.Point(107, 78)
-        Me.clnFindFecha.Name = "clnFindFecha"
-        Me.clnFindFecha.TabIndex = 23
         '
         'btnSAP
         '
@@ -772,6 +773,5 @@ Partial Class HoursWeekPeerEmployees
     Friend WithEvents clmSatOT As DataGridViewTextBoxColumn
     Friend WithEvents clmSunST As DataGridViewTextBoxColumn
     Friend WithEvents clmSunOT As DataGridViewTextBoxColumn
-    Friend WithEvents txtFindFecha As TextBox
-    Friend WithEvents clnFindFecha As MonthCalendar
+    Public WithEvents txtFindFecha As TextBox
 End Class

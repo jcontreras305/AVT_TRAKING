@@ -167,6 +167,12 @@
     <Compile Include="Froms\Renta.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Froms\SelectDate.Designer.vb">
+      <DependentUpon>SelectDate.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Froms\SelectDate.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Froms\SelectMaterial.Designer.vb">
       <DependentUpon>SelectMaterial.vb</DependentUpon>
     </Compile>
@@ -256,6 +262,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Froms\Renta.resx">
       <DependentUpon>Renta.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Froms\SelectDate.resx">
+      <DependentUpon>SelectDate.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Froms\SelectMaterial.resx">
       <DependentUpon>SelectMaterial.vb</DependentUpon>

@@ -70,6 +70,29 @@ inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO "
         End Try
     End Function
 
+    Public Function buscarHoras(ByVal tblHoras As DataGridView, ByVal idEmpleado As String, ByVal fechaStart As String, ByVal fechaEnd As String) As Boolean
+        Try
+            conectar()
+            Dim cmd As New SqlCommand(consultaHoras + " where emp.idEmployee='" + idEmpleado + "' and hw.dateWorked between '" + fechaStart + "' and '" + fechaEnd + "' order by hw.dateWorked asc", conn)
+            If cmd.ExecuteNonQuery Then
+                Dim dt As New DataTable
+                Dim da As New SqlDataAdapter(cmd)
+                da.Fill(dt)
+                tblHoras.DataSource = dt
+                tblHoras.Columns("idHorsWorked").Visible = False
+                desconectar()
+                Return True
+            Else
+                desconectar()
+                Return False
+            End If
+        Catch ex As Exception
+            desconectar()
+            MsgBox(ex.Message)
+            Return False
+        End Try
+    End Function
+
     Public Function bucarExpensesEmpleado(ByVal tabla As DataGridView, ByVal idEmployee As String) As Boolean
         Try
             conectar()

@@ -16,8 +16,8 @@
         cmbEmpleados.SelectedItem = cmbEmpleados.Items(0)
         cargarDatos(cmbEmpleados.SelectedItem)
         txtFindFecha.Text = System.DateTime.Today.ToShortDateString()
-        'dtpFecha.Value = System.DateTime.Today
-
+        ''dtpFecha.Value = System.DateTime.Today
+        'clnFindFecha.Visible = False
 
         mtdHPW.llenarTablaProyecto(proyectTable)
         mtdHPW.llenarTablaWorkCode(workCodeTable)
@@ -101,32 +101,38 @@
                     flagPressCellDate = True
                 Case "Project"
                     Try
-                        Dim cmbProyect As New DataGridViewComboBoxCell
-                        With cmbProyect
-                            mtdHPW.llenarComboCellProject(cmbProyect, proyectTable)
-                        End With
-                        tblRecordEmployee.CurrentRow.Cells("Project") = cmbProyect
+                        If tblRecordEmployee.CurrentCell.GetType.Name = "DataGridViewTextBoxCell" Then
+                            Dim cmbProyect As New DataGridViewComboBoxCell
+                            With cmbProyect
+                                mtdHPW.llenarComboCellProject(cmbProyect, proyectTable)
+                            End With
+                            tblRecordEmployee.CurrentRow.Cells("Project") = cmbProyect
+                        End If
                         flagFilaActual = "ProjectHours"
                     Catch ex As Exception
 
                     End Try
                 Case "Work Code"
                     Try
-                        Dim cmbWorkCode As New DataGridViewComboBoxCell
-                        With cmbWorkCode
-                            mtdHPW.llenarComboCellWorkCode(cmbWorkCode, workCodeTable)
-                        End With
-                        tblRecordEmployee.CurrentRow.Cells("Work Code") = cmbWorkCode
+                        If tblRecordEmployee.CurrentCell.GetType.Name = "DataGridViewTextBoxCell" Then
+                            Dim cmbWorkCode As New DataGridViewComboBoxCell
+                            With cmbWorkCode
+                                mtdHPW.llenarComboCellWorkCode(cmbWorkCode, workCodeTable)
+                            End With
+                            tblRecordEmployee.CurrentRow.Cells("Work Code") = cmbWorkCode
+                        End If
                         flagFilaActual = "WorkCode"
                     Catch ex As Exception
 
                     End Try
                 Case "Shift"
                     Try
-                        Dim cmbShift As New DataGridViewComboBoxCell
-                        cmbShift.Items.Add("Day")
-                        cmbShift.Items.Add("Nigth")
-                        tblRecordEmployee.CurrentRow.Cells("Shift") = cmbShift
+                        If tblRecordEmployee.CurrentCell.GetType.Name = "DataGridViewTextBoxCell" Then
+                            Dim cmbShift As New DataGridViewComboBoxCell
+                            cmbShift.Items.Add("Day")
+                            cmbShift.Items.Add("Nigth")
+                            tblRecordEmployee.CurrentRow.Cells("Shift") = cmbShift
+                        End If
                         flagFilaActual = "Shift"
                     Catch ex As Exception
 
@@ -154,9 +160,11 @@
             For Each row As DataRow In workCodeTable.Rows
                 If cmb IsNot "" Then
                     If cmb.Text = row.ItemArray(1) Then
-                        tblRecordEmployee.CurrentRow.Cells("Hours ST").Value = "0"
-                        tblRecordEmployee.CurrentRow.Cells("Hours OT").Value = "0"
-                        tblRecordEmployee.CurrentRow.Cells("Hours 3").Value = "0"
+                        If tblRecordEmployee.CurrentRow.Cells(0).Value IsNot DBNull.Value Then
+                            tblRecordEmployee.CurrentRow.Cells("Hours ST").Value = "0"
+                            tblRecordEmployee.CurrentRow.Cells("Hours OT").Value = "0"
+                            tblRecordEmployee.CurrentRow.Cells("Hours 3").Value = "0"
+                        End If
                         tblRecordEmployee.CurrentRow.Cells("Clasification").Value = row.ItemArray(2)
                         tblRecordEmployee.CurrentRow.Cells("Billing Rate").Value = row.ItemArray(3)
                         tblRecordEmployee.CurrentRow.Cells("Billing Rate OT").Value = row.ItemArray(4)
@@ -213,7 +221,7 @@
         mtdHPW.buscarHoras(tblRecordEmployee, idsEmployees.Rows(index).ItemArray(0))
         mtdHPW.bucarExpensesEmpleado(tblExpenses, idsEmployees.Rows(index).ItemArray(0))
         tblHourPeerDay.Rows.Clear()
-        tblHourPeerDay.Rows.Add(primerDiaDeLaSemana(CDate(txtFindFecha.Text)).ToShortDateString, idsEmployees.Rows(index).ItemArray(1), 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+        tblHourPeerDay.Rows.Add(primerDiaDeLaSemana(System.DateTime.Today.ToShortDateString()).ToShortDateString(), idsEmployees.Rows(index).ItemArray(1), 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
         pcbPhoto.Image = BytetoImage(idsEmployees.Rows(index).ItemArray(2))
         lblEmployeeNumber.Text = idsEmployees.Rows(index).ItemArray(4)
         lblNombreEmployee.Text = idsEmployees.Rows(index).ItemArray(1)
@@ -558,9 +566,7 @@
 
     End Sub
 
-    Private Sub txtFindFecha_TextChanged(sender As Object, e As EventArgs) Handles txtFindFecha.TextChanged
 
-    End Sub
 
     Private Sub btnExpenses_Click(sender As Object, e As EventArgs) Handles btnExpenses.Click
         Dim exp As New Expences
@@ -568,4 +574,34 @@
         mtdHPW.llenarTablaExpenses(expenseCodeTable)
     End Sub
 
+    Public fechaStart, fechaEnd As Date
+    Private Sub txtFindFecha_DoubleClick(sender As Object, e As EventArgs) Handles txtFindFecha.DoubleClick
+        Dim auxF1 As Date = fechaStart
+        Dim auxF2 As Date = fechaEnd
+        Dim selectFecha As New SelectDate
+        AddOwnedForm(selectFecha)
+        selectFecha.ShowDialog()
+        If fechaStart <> auxF1 Or fechaEnd <> auxF2 Then
+            mtdHPW.buscarHoras(tblRecordEmployee, idEmpleado, validaFechaParaSQl(fechaStart), validaFechaParaSQl(fechaEnd))
+        End If
+    End Sub
+
+    Private Sub txtFindFecha_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtFindFecha.KeyPress
+        If Asc(e.KeyChar) = Keys.Enter Then
+            Try
+                Dim array = txtFindFecha.Text.Split(" ")
+                If array.Count = 1 Then
+                    Dim fecha1 As Date = array(0)
+                    Dim fecha2 As Date = array(0)
+                    mtdHPW.buscarHoras(tblRecordEmployee, idEmpleado, validaFechaParaSQl(fecha1), validaFechaParaSQl(fecha2))
+                ElseIf array.Count = 3 Then
+                    Dim fecha1 As Date = array(0)
+                    Dim fecha2 As Date = array(2)
+                    mtdHPW.buscarHoras(tblRecordEmployee, idEmpleado, validaFechaParaSQl(fecha1), validaFechaParaSQl(fecha2))
+                End If
+            Catch ex As Exception
+                MsgBox(ex.Message)
+            End Try
+        End If
+    End Sub
 End Class
