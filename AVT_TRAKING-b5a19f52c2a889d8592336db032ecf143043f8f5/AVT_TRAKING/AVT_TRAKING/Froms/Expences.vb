@@ -24,7 +24,7 @@ Public Class Expences
             activarCampos(True)
             limpiarCampos()
         Else
-            mtdJobs.insertExpence(txtExpenceCode.Text, txtExpenceCode.Text)
+            mtdJobs.insertExpence(txtExpenceCode.Text, txtDescription.Text)
             limpiarCampos()
             activarCampos(False)
             mtdJobs.buscarExpences(tblExpences)

@@ -11,7 +11,7 @@ Public Class MetodosJobs
         conectar()
         Try
             Dim cmd As New SqlCommand
-            cmd.CommandText = "select idWorkCode as ID , name Name , description as Description, billingRate1 as BillingRT1, billingRateOT as BillingOT, billingRate3 as BillingRT3 , EQExq1,EQExq2 from workCode  "
+            cmd.CommandText = "select idWorkCode as ID , name Name , description as Description, billingRate1 as BillingRT1, billingRateOT as BillingOT, billingRate3 as BillingRT3 , EQExp1,EQExp2 from workCode  "
             cmd.Connection = conn
 
             If cmd.ExecuteNonQuery Then
@@ -45,7 +45,7 @@ Public Class MetodosJobs
     Public Sub acualizarWC(datos() As String)
         Try
             conectar()
-            Dim cmd As New SqlCommand("update workCode set name='" + datos(1) + "',description ='" + datos(2) + "', billingRate1=" + datos(3) + ", billingRateOT=" + datos(4) + ",EQExq1='" + datos(6) + "',EQExq2='" + datos(7) + "' where idWorkCode =  " + datos(0), conn)
+            Dim cmd As New SqlCommand("update workCode set name='" + datos(1) + "',description ='" + datos(2) + "', billingRate1=" + datos(3) + ", billingRateOT=" + datos(4) + ", billingRate3= " + datos(5) + ",EQExp1='" + datos(6) + "',EQExp2='" + datos(7) + "' where idWorkCode =  " + datos(0), conn)
             If cmd.ExecuteNonQuery Then
                 MsgBox("Succesfull")
             Else
@@ -130,7 +130,7 @@ Public Class MetodosJobs
     Public Sub actualizarExpence(ByVal id As String, ByVal code As String, ByVal description As String)
         Try
             conectar()
-            Dim cmd As New SqlCommand("update expenses set expenseCode = '" + code + "' , description = '" + description + "' where idExpences = '" + id + "'", conn)
+            Dim cmd As New SqlCommand("update expenses set expenseCode = '" + code + "' , description = '" + description + "' where idExpenses = '" + id + "'", conn)
             If cmd.ExecuteNonQuery Then
                 MsgBox("Succesfull")
             Else

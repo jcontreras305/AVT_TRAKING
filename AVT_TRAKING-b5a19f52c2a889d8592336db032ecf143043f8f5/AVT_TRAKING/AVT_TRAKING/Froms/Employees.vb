@@ -124,13 +124,13 @@ Public Class Employees
         End Try
     End Sub
 
-    Private Sub chbState_CheckedChanged(sender As Object, e As EventArgs) Handles chbState.CheckedChanged
-        If chbState.Checked Then
-            chbState.Text = "Disable"
-        Else
-            chbState.Text = "Enable"
-        End If
-    End Sub
+    'Private Sub chbState_CheckedChanged(sender As Object, e As EventArgs) Handles chbState.CheckedChanged
+    '    If chbState.Checked Then
+    '        chbState.Text = "Disable"
+    '    Else
+    '        chbState.Text = "Enable"
+    '    End If
+    'End Sub
 
     Private Sub btnCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click
         Try

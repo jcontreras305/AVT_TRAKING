@@ -1,10 +1,10 @@
 use master
 Go
 
-create database VRT_TRAKING
+create database VRT_TRAKING_3
 GO
 
-use VRT_TRAKING
+use VRT_TRAKING_3
 GO
 --##########################################################################################
 --##################  TABLA DE MATERIAL USERS ############################################
@@ -195,7 +195,7 @@ create  table expensesUsed(
 	description varchar(100) null,
 	idExpense varchar(36),
 	idAux varchar(36),
-	idEmploye varchar(36)
+	idEmployee varchar(36)
 )
 GO
 
@@ -441,7 +441,7 @@ GO
 ALTER TABLE    expensesUsed   WITH CHECK ADD  CONSTRAINT  fk_idTask_EU  FOREIGN KEY( idAux )
 REFERENCES    task  ( idAux )
 GO
-
+select *from expensesUsed
 ALTER TABLE    expensesUsed   WITH CHECK ADD  CONSTRAINT  fk_idEmployee_EU  FOREIGN KEY( idEmployee  )
 REFERENCES    employees ( idEmployee )
 GO

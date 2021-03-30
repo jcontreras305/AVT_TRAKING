@@ -31,6 +31,7 @@ Partial Class Clients
         Me.tblClientes = New System.Windows.Forms.DataGridView()
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.TabPage1 = New System.Windows.Forms.TabPage()
+        Me.btnSelectClient = New System.Windows.Forms.Button()
         Me.btnShowAll1 = New System.Windows.Forms.Button()
         Me.Label6 = New System.Windows.Forms.Label()
         Me.txtFiltro = New System.Windows.Forms.TextBox()
@@ -77,7 +78,6 @@ Partial Class Clients
         Me.Panel4 = New System.Windows.Forms.Panel()
         Me.Panel3 = New System.Windows.Forms.Panel()
         Me.Panel2 = New System.Windows.Forms.Panel()
-        Me.btnSelectClient = New System.Windows.Forms.Button()
         CType(Me.tblClientes, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
@@ -206,6 +206,15 @@ Partial Class Clients
         Me.TabPage1.TabIndex = 0
         Me.TabPage1.Text = "Clients"
         Me.TabPage1.UseVisualStyleBackColor = True
+        '
+        'btnSelectClient
+        '
+        Me.btnSelectClient.Location = New System.Drawing.Point(615, 16)
+        Me.btnSelectClient.Name = "btnSelectClient"
+        Me.btnSelectClient.Size = New System.Drawing.Size(75, 23)
+        Me.btnSelectClient.TabIndex = 50
+        Me.btnSelectClient.Text = "Select Client"
+        Me.btnSelectClient.UseVisualStyleBackColor = True
         '
         'btnShowAll1
         '
@@ -665,15 +674,6 @@ Partial Class Clients
         Me.Panel2.Name = "Panel2"
         Me.Panel2.Size = New System.Drawing.Size(733, 55)
         Me.Panel2.TabIndex = 23
-        '
-        'btnSelectClient
-        '
-        Me.btnSelectClient.Location = New System.Drawing.Point(615, 16)
-        Me.btnSelectClient.Name = "btnSelectClient"
-        Me.btnSelectClient.Size = New System.Drawing.Size(75, 23)
-        Me.btnSelectClient.TabIndex = 50
-        Me.btnSelectClient.Text = "Select Client"
-        Me.btnSelectClient.UseVisualStyleBackColor = True
         '
         'Clients
         '

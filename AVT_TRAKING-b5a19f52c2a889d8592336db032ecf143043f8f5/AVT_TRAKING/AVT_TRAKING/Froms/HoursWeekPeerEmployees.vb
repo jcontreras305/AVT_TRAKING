@@ -13,8 +13,29 @@
     Dim _rectangulo As New Rectangle
     Private Sub HoursWeekPeerEmployees_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         mtdHPW.llenarEmpleadosCombo(cmbEmpleados, idsEmployees)
-        cmbEmpleados.SelectedItem = cmbEmpleados.Items(0)
-        cargarDatos(cmbEmpleados.SelectedItem)
+        If cmbEmpleados.Items.Count > 0 Then
+            cmbEmpleados.SelectedItem = cmbEmpleados.Items(0)
+            cargarDatos(cmbEmpleados.SelectedItem)
+        Else
+            Dim flagEmployees = False
+            While flagEmployees = False
+                If DialogResult.Yes = MessageBox.Show("Now you are not inserted any Employe or they are Disabled." + vbCrLf + "Would you like to open Employees Window?", "Importan", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) Then
+                    Dim empleadoFrom As New Employees
+                    empleadoFrom.ShowDialog()
+                    mtdHPW.llenarEmpleadosCombo(cmbEmpleados, idsEmployees)
+                    If cmbEmpleados.Items.Count > 0 Then
+                        cmbEmpleados.SelectedItem = cmbEmpleados.Items(0)
+                        cargarDatos(cmbEmpleados.SelectedItem)
+                        flagEmployees = True
+                    Else
+                        flagEmployees = False
+                    End If
+
+                Else
+                    flagEmployees = True
+                End If
+            End While
+        End If
         txtFindFecha.Text = System.DateTime.Today.ToShortDateString()
         ''dtpFecha.Value = System.DateTime.Today
         'clnFindFecha.Visible = False
@@ -41,8 +62,10 @@
         Dim empleadoFrom As New Employees
         empleadoFrom.ShowDialog()
         mtdHPW.llenarEmpleadosCombo(cmbEmpleados, idsEmployees)
-        cmbEmpleados.SelectedItem = cmbEmpleados.Items(0)
-        cargarDatos(cmbEmpleados.SelectedItem)
+        If cmbEmpleados.Items.Count > 0 Then
+            cmbEmpleados.SelectedItem = cmbEmpleados.Items(0)
+            cargarDatos(cmbEmpleados.SelectedItem)
+        End If
         mtdHPW.llenarTablaProyecto(proyectTable)
         mtdHPW.llenarTablaWorkCode(workCodeTable)
         mtdHPW.llenarTablaExpenses(expenseCodeTable)
@@ -194,17 +217,21 @@
     End Sub
 
     Private Sub cmbEmpleados_SelectionChangeCommitted(sender As Object, e As EventArgs) Handles cmbEmpleados.SelectionChangeCommitted, cmbEmpleados.SelectedValueChanged
-        cargarDatos(cmbEmpleados.SelectedItem)
+        If cmbEmpleados.Items.Count > 0 Then
+            cargarDatos(cmbEmpleados.SelectedItem)
+        End If
     End Sub
 
     Private Sub btnFindEmployee_Click(sender As Object, e As EventArgs) Handles btnFindEmployee.Click
-        Dim idAux = idEmpleado
-        Dim fndEmp As New FindEmployee
-        AddOwnedForm(fndEmp)
-        fndEmp.ShowDialog()
-        If idAux <> idEmpleado Then
-            cmbEmpleados.SelectedItem = NombreEmpleado
-            cargarDatos(cmbEmpleados.SelectedItem)
+        If cmbEmpleados.Items.Count > 0 Then
+            Dim idAux = idEmpleado
+            Dim fndEmp As New FindEmployee
+            AddOwnedForm(fndEmp)
+            fndEmp.ShowDialog()
+            If idAux <> idEmpleado Then
+                cmbEmpleados.SelectedItem = NombreEmpleado
+                cargarDatos(cmbEmpleados.SelectedItem)
+            End If
         End If
     End Sub
 
@@ -531,37 +558,40 @@
     End Function
 
     Private Sub btnLatsEmploye_Click(sender As Object, e As EventArgs) Handles btnLatsEmploye.Click
-        Dim cont As Integer = 0
-        For Each row As DataRow In idsEmployees.Rows
-            If cmbEmpleados.SelectedItem = row.ItemArray(1) Then
-                If cont = 0 Then
-                    cont = idsEmployees.Rows.Count()
+        If cmbEmpleados.Items.Count > 0 Then
+            Dim cont As Integer = 0
+            For Each row As DataRow In idsEmployees.Rows
+                If cmbEmpleados.SelectedItem = row.ItemArray(1) Then
+                    If cont = 0 Then
+                        cont = idsEmployees.Rows.Count()
+                    End If
+                    idEmpleado = idsEmployees.Rows(cont - 1).ItemArray(0)
+                    Exit For
+                Else
+                    cont = cont + 1
                 End If
-                idEmpleado = idsEmployees.Rows(cont - 1).ItemArray(0)
-                Exit For
-            Else
-                cont = cont + 1
-            End If
-        Next
-        cmbEmpleados.SelectedItem = idsEmployees.Rows(cont - 1).ItemArray(1)
+            Next
+            cmbEmpleados.SelectedItem = idsEmployees.Rows(cont - 1).ItemArray(1)
+        End If
     End Sub
 
 
     Private Sub btnNextEmploye_Click(sender As Object, e As EventArgs) Handles btnNextEmploye.Click
-        Dim cont As Integer = 0
-        For Each row As DataRow In idsEmployees.Rows
-            If cmbEmpleados.SelectedItem = row.ItemArray(1) Then
-                If cont = (idsEmployees.Rows.Count() - 1) Then
-                    cont = -1
+        If cmbEmpleados.Items.Count > 0 Then
+            Dim cont As Integer = 0
+            For Each row As DataRow In idsEmployees.Rows
+                If cmbEmpleados.SelectedItem = row.ItemArray(1) Then
+                    If cont = (idsEmployees.Rows.Count() - 1) Then
+                        cont = -1
+                    End If
+                    idEmpleado = idsEmployees.Rows(cont + 1).ItemArray(0)
+                    Exit For
+                Else
+                    cont = cont + 1
                 End If
-                idEmpleado = idsEmployees.Rows(cont + 1).ItemArray(0)
-                Exit For
-            Else
-                cont = cont + 1
-            End If
-        Next
-        cmbEmpleados.SelectedItem = idsEmployees.Rows(cont + 1).ItemArray(1)
-
+            Next
+            cmbEmpleados.SelectedItem = idsEmployees.Rows(cont + 1).ItemArray(1)
+        End If
     End Sub
 
     Private Sub btnExpenses_Click(sender As Object, e As EventArgs) Handles btnExpenses.Click
