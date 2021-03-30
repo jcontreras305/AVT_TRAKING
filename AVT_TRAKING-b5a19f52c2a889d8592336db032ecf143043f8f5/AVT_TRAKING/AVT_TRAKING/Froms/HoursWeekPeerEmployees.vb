@@ -432,8 +432,6 @@
 
     End Function
 
-
-
     Private Function recolectarDatosRecord() As Boolean
         Dim list As New List(Of String)
         Dim mensaje As String = ""
@@ -566,8 +564,6 @@
 
     End Sub
 
-
-
     Private Sub btnExpenses_Click(sender As Object, e As EventArgs) Handles btnExpenses.Click
         Dim exp As New Expences
         exp.ShowDialog()
@@ -604,4 +600,10 @@
             End Try
         End If
     End Sub
+
+    Private Sub btnProyect_Click(sender As Object, e As EventArgs) Handles btnProyect.Click
+        Dim proyectCost As New ProjectsCosts()
+        proyectCost.ShowDialog()
+    End Sub
+
 End Class

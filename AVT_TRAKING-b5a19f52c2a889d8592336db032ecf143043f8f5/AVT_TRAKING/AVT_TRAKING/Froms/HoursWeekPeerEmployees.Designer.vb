@@ -22,7 +22,7 @@ Partial Class HoursWeekPeerEmployees
     'No lo modifique con el editor de código.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.tblHourPeerDay = New System.Windows.Forms.DataGridView()
         Me.clmWeekending = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -54,7 +54,7 @@ Partial Class HoursWeekPeerEmployees
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.txtFindFecha = New System.Windows.Forms.TextBox()
         Me.btnSAP = New System.Windows.Forms.Button()
-        Me.Button13 = New System.Windows.Forms.Button()
+        Me.btnProyect = New System.Windows.Forms.Button()
         Me.Button12 = New System.Windows.Forms.Button()
         Me.btnNextEmploye = New System.Windows.Forms.Button()
         Me.btnLatsEmploye = New System.Windows.Forms.Button()
@@ -125,14 +125,14 @@ Partial Class HoursWeekPeerEmployees
         Me.tblHourPeerDay.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.tblHourPeerDay.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.tblHourPeerDay.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.clmWeekending, Me.clmEployeeName, Me.clmTotalST, Me.clmTotalOT, Me.clmTotalHours3, Me.clmMonST, Me.clmMonOT, Me.clmTueST, Me.clmTueOT, Me.clmWedST, Me.clmWedOT, Me.clmThuST, Me.clmThuOT, Me.clmFriST, Me.clmFriOT, Me.clmSatST, Me.clmSatOT, Me.clmSunST, Me.clmSunOT})
-        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle1.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.tblHourPeerDay.DefaultCellStyle = DataGridViewCellStyle1
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle2.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.tblHourPeerDay.DefaultCellStyle = DataGridViewCellStyle2
         Me.tblHourPeerDay.Dock = System.Windows.Forms.DockStyle.Bottom
         Me.tblHourPeerDay.Location = New System.Drawing.Point(0, 132)
         Me.tblHourPeerDay.MultiSelect = False
@@ -334,7 +334,7 @@ Partial Class HoursWeekPeerEmployees
         '
         Me.GroupBox1.Controls.Add(Me.txtFindFecha)
         Me.GroupBox1.Controls.Add(Me.btnSAP)
-        Me.GroupBox1.Controls.Add(Me.Button13)
+        Me.GroupBox1.Controls.Add(Me.btnProyect)
         Me.GroupBox1.Controls.Add(Me.Button12)
         Me.GroupBox1.Controls.Add(Me.btnNextEmploye)
         Me.GroupBox1.Controls.Add(Me.btnLatsEmploye)
@@ -375,14 +375,14 @@ Partial Class HoursWeekPeerEmployees
         Me.btnSAP.Text = "0"
         Me.btnSAP.UseVisualStyleBackColor = True
         '
-        'Button13
+        'btnProyect
         '
-        Me.Button13.Location = New System.Drawing.Point(944, 60)
-        Me.Button13.Name = "Button13"
-        Me.Button13.Size = New System.Drawing.Size(78, 32)
-        Me.Button13.TabIndex = 20
-        Me.Button13.Text = "Open Project"
-        Me.Button13.UseVisualStyleBackColor = True
+        Me.btnProyect.Location = New System.Drawing.Point(944, 60)
+        Me.btnProyect.Name = "btnProyect"
+        Me.btnProyect.Size = New System.Drawing.Size(78, 32)
+        Me.btnProyect.TabIndex = 20
+        Me.btnProyect.Text = "Open Project"
+        Me.btnProyect.UseVisualStyleBackColor = True
         '
         'Button12
         '
@@ -725,7 +725,7 @@ Partial Class HoursWeekPeerEmployees
     Friend WithEvents Label2 As Label
     Friend WithEvents Label1 As Label
     Friend WithEvents Panel4 As Panel
-    Friend WithEvents Button13 As Button
+    Friend WithEvents btnProyect As Button
     Friend WithEvents Button12 As Button
     Friend WithEvents btnNextEmploye As Button
     Friend WithEvents btnLatsEmploye As Button
