@@ -1,4 +1,5 @@
-﻿Module metodosGlobales
+﻿
+Module metodosGlobales
 
     Public Function imageToByte(ByVal img As Image) As Byte()
         Try
@@ -56,23 +57,39 @@
     End Function
 
     Public Function validaFechaParaSQl(ByVal fecha As Date) As String
-        Dim dataAux As String
-        dataAux = fecha.ToShortDateString()
-        Dim array() As String = CStr(dataAux).Split("/")
-        Dim fecha1 As String = array(2) + "-" + array(1) + "-" + array(0)
-        Return fecha1
+        Dim zona As TimeZone = TimeZone.CurrentTimeZone
+        If zona.DaylightName = "Hora de verano central (México)" Then
+            Dim dataAux As String
+            dataAux = fecha.ToShortDateString()
+            Dim array() As String = CStr(dataAux).Split("/")
+            Dim fecha1 As String = array(2) + "-" + array(1) + "-" + array(0)
+            Return fecha1
+        Else
+            Dim dataAux As String
+            dataAux = fecha.ToShortDateString()
+            Dim array() As String = CStr(dataAux).Split("/")
+            Dim fecha1 As String = array(1) + "-" + array(0) + "-" + array(2)
+            Return fecha1
+        End If
     End Function
 
     Public Function validarFechaParaVB(ByVal fecha As String) As Date
-        'Dim dataAux As String = fecha.ToShortDateString()
-        If fecha IsNot Nothing Then
-            Dim array() As String = CStr(fecha).Split("/")
-            Dim fecha1 As String = array(1) + "/" + array(0) + "/" + array(2)
-            Return CDate(fecha1)
+        Dim zona As TimeZone = TimeZone.CurrentTimeZone
+        If zona.DaylightName = "Hora de verano central (México)" Then
+            If fecha IsNot Nothing Then
+                Dim array() As String = CStr(fecha).Split("/")
+                Dim fecha1 As String = array(1) + "/" + array(0) + "/" + array(2)
+                Return CDate(fecha1)
+            End If
         Else
-            Return Nothing
+            If fecha IsNot Nothing Then
+                Dim array() As String = CStr(fecha).Split("/")
+                Dim fecha1 As String = array(1) + "/" + array(0) + "/" + array(2)
+                Return CDate(fecha1)
+            End If
         End If
 
+        Return Nothing
     End Function
 
     Public Function primerDiaDeLaSemana(ByVal fecha As Date) As Date
