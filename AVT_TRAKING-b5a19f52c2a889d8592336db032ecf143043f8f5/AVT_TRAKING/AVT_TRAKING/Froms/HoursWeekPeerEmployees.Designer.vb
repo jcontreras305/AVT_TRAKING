@@ -22,7 +22,7 @@ Partial Class HoursWeekPeerEmployees
     'No lo modifique con el editor de código.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.tblHourPeerDay = New System.Windows.Forms.DataGridView()
         Me.clmWeekending = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -52,6 +52,7 @@ Partial Class HoursWeekPeerEmployees
         Me.lblName = New System.Windows.Forms.Label()
         Me.FlowLayoutPanel1 = New System.Windows.Forms.FlowLayoutPanel()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.btnDelete = New System.Windows.Forms.Button()
         Me.txtFindFecha = New System.Windows.Forms.TextBox()
         Me.btnSAP = New System.Windows.Forms.Button()
         Me.btnProyect = New System.Windows.Forms.Button()
@@ -125,14 +126,14 @@ Partial Class HoursWeekPeerEmployees
         Me.tblHourPeerDay.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.tblHourPeerDay.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.tblHourPeerDay.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.clmWeekending, Me.clmEployeeName, Me.clmTotalST, Me.clmTotalOT, Me.clmTotalHours3, Me.clmMonST, Me.clmMonOT, Me.clmTueST, Me.clmTueOT, Me.clmWedST, Me.clmWedOT, Me.clmThuST, Me.clmThuOT, Me.clmFriST, Me.clmFriOT, Me.clmSatST, Me.clmSatOT, Me.clmSunST, Me.clmSunOT})
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle2.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.tblHourPeerDay.DefaultCellStyle = DataGridViewCellStyle2
+        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle1.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.tblHourPeerDay.DefaultCellStyle = DataGridViewCellStyle1
         Me.tblHourPeerDay.Dock = System.Windows.Forms.DockStyle.Bottom
         Me.tblHourPeerDay.Location = New System.Drawing.Point(0, 132)
         Me.tblHourPeerDay.MultiSelect = False
@@ -327,11 +328,12 @@ Partial Class HoursWeekPeerEmployees
         Me.FlowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.FlowLayoutPanel1.Location = New System.Drawing.Point(0, 190)
         Me.FlowLayoutPanel1.Name = "FlowLayoutPanel1"
-        Me.FlowLayoutPanel1.Size = New System.Drawing.Size(1174, 482)
+        Me.FlowLayoutPanel1.Size = New System.Drawing.Size(1174, 559)
         Me.FlowLayoutPanel1.TabIndex = 1
         '
         'GroupBox1
         '
+        Me.GroupBox1.Controls.Add(Me.btnDelete)
         Me.GroupBox1.Controls.Add(Me.txtFindFecha)
         Me.GroupBox1.Controls.Add(Me.btnSAP)
         Me.GroupBox1.Controls.Add(Me.btnProyect)
@@ -351,13 +353,22 @@ Partial Class HoursWeekPeerEmployees
         Me.GroupBox1.Controls.Add(Me.cmbEmpleados)
         Me.GroupBox1.Controls.Add(Me.Label2)
         Me.GroupBox1.Controls.Add(Me.Label1)
-        Me.GroupBox1.Dock = System.Windows.Forms.DockStyle.Bottom
+        Me.GroupBox1.Dock = System.Windows.Forms.DockStyle.Top
         Me.GroupBox1.Location = New System.Drawing.Point(3, 3)
         Me.GroupBox1.Name = "GroupBox1"
         Me.GroupBox1.Size = New System.Drawing.Size(1164, 125)
         Me.GroupBox1.TabIndex = 0
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Control"
+        '
+        'btnDelete
+        '
+        Me.btnDelete.Location = New System.Drawing.Point(972, 17)
+        Me.btnDelete.Name = "btnDelete"
+        Me.btnDelete.Size = New System.Drawing.Size(75, 33)
+        Me.btnDelete.TabIndex = 25
+        Me.btnDelete.Text = "Delete"
+        Me.btnDelete.UseVisualStyleBackColor = True
         '
         'txtFindFecha
         '
@@ -532,7 +543,7 @@ Partial Class HoursWeekPeerEmployees
         Me.Panel4.Controls.Add(Me.Panel5)
         Me.Panel4.Controls.Add(Me.Panel2)
         Me.Panel4.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.Panel4.Location = New System.Drawing.Point(0, 324)
+        Me.Panel4.Location = New System.Drawing.Point(0, 401)
         Me.Panel4.Name = "Panel4"
         Me.Panel4.Size = New System.Drawing.Size(1174, 348)
         Me.Panel4.TabIndex = 2
@@ -619,8 +630,10 @@ Partial Class HoursWeekPeerEmployees
         '
         'Panel2
         '
+        Me.Panel2.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Panel2.Controls.Add(Me.TabControl1)
-        Me.Panel2.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel2.Location = New System.Drawing.Point(0, 0)
         Me.Panel2.Name = "Panel2"
         Me.Panel2.Size = New System.Drawing.Size(1174, 348)
@@ -650,6 +663,7 @@ Partial Class HoursWeekPeerEmployees
         '
         'tblRecordEmployee
         '
+        Me.tblRecordEmployee.AllowDrop = True
         Me.tblRecordEmployee.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.tblRecordEmployee.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.tblRecordEmployee.Dock = System.Windows.Forms.DockStyle.Fill
@@ -683,7 +697,7 @@ Partial Class HoursWeekPeerEmployees
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1174, 672)
+        Me.ClientSize = New System.Drawing.Size(1174, 749)
         Me.Controls.Add(Me.Panel4)
         Me.Controls.Add(Me.FlowLayoutPanel1)
         Me.Controls.Add(Me.Panel1)
@@ -774,4 +788,5 @@ Partial Class HoursWeekPeerEmployees
     Friend WithEvents clmSunST As DataGridViewTextBoxColumn
     Friend WithEvents clmSunOT As DataGridViewTextBoxColumn
     Public WithEvents txtFindFecha As TextBox
+    Friend WithEvents btnDelete As Button
 End Class

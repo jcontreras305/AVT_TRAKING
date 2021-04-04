@@ -290,4 +290,10 @@ Public Class ProjectsClients
             Return False
         End If
     End Function
+
+    Private Sub btnCompanyInformation_Click(sender As Object, e As EventArgs) Handles btnCompanyInformation.Click
+        Dim company As New myCompany
+        company.ShowDialog()
+    End Sub
+
 End Class

@@ -82,6 +82,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Class\MetodosClients.vb" />
+    <Compile Include="Class\metodosCompany.vb" />
     <Compile Include="Class\MetodosEmployees.vb" />
     <Compile Include="Class\MetodosHerramientas.vb" />
     <Compile Include="Class\MetodosHoursPeerWeek.vb" />
@@ -146,6 +147,12 @@
       <DependentUpon>Expences.vb</DependentUpon>
     </Compile>
     <Compile Include="Froms\Expences.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Froms\myCompany.Designer.vb">
+      <DependentUpon>myCompany.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Froms\myCompany.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Froms\Others.Designer.vb">
@@ -253,6 +260,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Froms\Expences.resx">
       <DependentUpon>Expences.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Froms\myCompany.resx">
+      <DependentUpon>myCompany.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Froms\Others.resx">
       <DependentUpon>Others.vb</DependentUpon>

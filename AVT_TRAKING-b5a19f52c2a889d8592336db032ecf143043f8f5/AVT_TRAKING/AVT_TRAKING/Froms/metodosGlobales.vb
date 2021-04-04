@@ -1,4 +1,6 @@
 ﻿
+Imports System.Text.RegularExpressions
+
 Module metodosGlobales
 
     Public Function imageToByte(ByVal img As Image) As Byte()
@@ -68,7 +70,7 @@ Module metodosGlobales
             Dim dataAux As String
             dataAux = fecha.ToShortDateString()
             Dim array() As String = CStr(dataAux).Split("/")
-            Dim fecha1 As String = array(1) + "-" + array(0) + "-" + array(2)
+            Dim fecha1 As String = array(0) + "-" + array(1) + "-" + array(2)
             Return fecha1
         End If
     End Function
@@ -107,5 +109,7 @@ Module metodosGlobales
         Return fecha.AddDays(-cont)
     End Function
 
-
+    Public Function validar_Correo(ByVal mail As String) As Boolean
+        Return Regex.IsMatch(mail, "^[_a-zA-B0-9]+(\._a-zA-B0-9+)*@[a-zA-B0-9-]+(\.[a-zA-B0-9-]+)*(\.[a-z]{2,4})$") '"^[_a-zA-B0-9]+(\._a-zA-B0-9+)*@[a-zA-B0-9-]+(\.[a-zA-B0-9-]+)*(\.[a-z]{2,4})$")     "^[a-zA-Z][\w\.-]*[a-zA-Z0-9]@[a-zA-Z0-9][\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]{2,4}$"
+    End Function
 End Module

@@ -72,10 +72,10 @@
     End Sub
 
     Private Sub _dtpHoras_ValuesChangue(sender As Object, e As EventArgs)
-        tblRecordEmployee.CurrentCell.Value = _dtpHoras.Value.ToString()
+        tblRecordEmployee.CurrentRow.Cells("Date").Value = _dtpHoras.Value.ToString()
     End Sub
     Private Sub _dtpExpenses_ValuesChangue(sender As Object, e As EventArgs)
-        tblExpenses.CurrentCell.Value = _dtpExpenses.Value.ToString()
+        tblExpenses.CurrentRow.Cells("Date").Value = _dtpExpenses.Value.ToString()
     End Sub
 
     Private Sub tblExpenses_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles tblExpenses.CellClick
@@ -89,21 +89,26 @@
                     flagPressCellDateExpense = True
                 Case "Project"
                     Try
-                        Dim cmbProyect As New DataGridViewComboBoxCell
-                        With cmbProyect
-                            mtdHPW.llenarComboCellProject(cmbProyect, proyectTable)
-                        End With
-                        tblExpenses.CurrentRow.Cells("Project") = cmbProyect
+                        If tblExpenses.CurrentCell.GetType.Name = "DataGridViewTextBoxCell" Then
+                            Dim cmbProyect As New DataGridViewComboBoxCell
+                            With cmbProyect
+                                mtdHPW.llenarComboCellProject(cmbProyect, proyectTable)
+                            End With
+
+                            tblExpenses.CurrentRow.Cells("Project") = cmbProyect
+                        End If
                     Catch ex As Exception
 
                     End Try
                 Case "Expense Code"
                     Try
-                        Dim cmbExpenseCode As New DataGridViewComboBoxCell
-                        With cmbExpenseCode
-                            mtdHPW.llenarComboCellExpeseCode(cmbExpenseCode, expenseCodeTable)
-                        End With
-                        tblExpenses.CurrentRow.Cells("Expense Code") = cmbExpenseCode
+                        If tblExpenses.CurrentCell.GetType.Name = "DataGridViewTextBoxCell" Then
+                            Dim cmbExpenseCode As New DataGridViewComboBoxCell
+                            With cmbExpenseCode
+                                mtdHPW.llenarComboCellExpeseCode(cmbExpenseCode, expenseCodeTable)
+                            End With
+                            tblExpenses.CurrentRow.Cells("Expense Code") = cmbExpenseCode
+                        End If
                     Catch ex As Exception
 
                     End Try
@@ -170,7 +175,7 @@
     'evento para los combo declarados en cada celda
     Public Sub cmb_SelectedIndexChangued(sender As Object, e As EventArgs)
         Dim cmb As ComboBox = CType(sender, ComboBox)
-        If flagFilaActual = "ProjectHours" Then
+        If tblRecordEmployee.CurrentCell.ColumnIndex = tblRecordEmployee.Columns("Project").Index Then
             For Each row As DataRow In proyectTable.Rows
                 If cmb.Text <> "" Then
                     If cmb.Text = row.ItemArray(1) Then
@@ -179,11 +184,11 @@
                     End If
                 End If
             Next
-        ElseIf flagFilaActual = "WorkCode" Then
+        ElseIf tblRecordEmployee.CurrentCell.ColumnIndex = tblRecordEmployee.Columns("Work Code").Index Then
             For Each row As DataRow In workCodeTable.Rows
                 If cmb IsNot "" Then
                     If cmb.Text = row.ItemArray(1) Then
-                        If tblRecordEmployee.CurrentRow.Cells(0).Value IsNot DBNull.Value Then
+                        If tblRecordEmployee.CurrentRow.Cells(0).Value Is DBNull.Value Then
                             tblRecordEmployee.CurrentRow.Cells("Hours ST").Value = "0"
                             tblRecordEmployee.CurrentRow.Cells("Hours OT").Value = "0"
                             tblRecordEmployee.CurrentRow.Cells("Hours 3").Value = "0"
@@ -575,7 +580,6 @@
         End If
     End Sub
 
-
     Private Sub btnNextEmploye_Click(sender As Object, e As EventArgs) Handles btnNextEmploye.Click
         If cmbEmpleados.Items.Count > 0 Then
             Dim cont As Integer = 0
@@ -636,4 +640,37 @@
         proyectCost.ShowDialog()
     End Sub
 
+    Private Sub btnDelete_Click(sender As Object, e As EventArgs) Handles btnDelete.Click
+        If TabControl1.SelectedTab.Text = "Time Worked" Then
+            If tblRecordEmployee.SelectedRows.Count > 0 Then
+                For Each row As DataGridViewRow In tblRecordEmployee.SelectedRows
+                    Dim idTask As String = ""
+                    For Each fila As DataRow In proyectTable.Rows
+                        If fila.ItemArray(1) = tblRecordEmployee.Rows(row.Index).Cells("Project").Value Then
+                            idTask = fila.ItemArray(0)
+                            Exit For
+                        End If
+                    Next
+                    mtdHPW.deleteRecordEmployee(row.Cells("idHorsWorked").Value, idTask)
+                Next
+            End If
+            mtdHPW.buscarHoras(tblRecordEmployee, idEmpleado)
+            cargarDatos(idEmpleado)
+        ElseIf TabControl1.SelectedTab.Text = "Expenses" Then
+            If tblExpenses.SelectedRows.Count > 0 Then
+                For Each row As DataGridViewRow In tblExpenses.SelectedRows
+                    Dim idTask As String = ""
+                    For Each fila As DataRow In proyectTable.Rows
+                        If fila.ItemArray(1) = tblExpenses.Rows(row.Index).Cells("Project").Value Then
+                            idTask = fila.ItemArray(0)
+                            Exit For
+                        End If
+                    Next
+                    mtdHPW.deleteExpense(row.Cells("idExpenseUsed").Value, idTask)
+                Next
+            End If
+            mtdHPW.bucarExpensesEmpleado(tblExpenses, idEmpleado)
+            cargarDatos(idEmpleado)
+        End If
+    End Sub
 End Class

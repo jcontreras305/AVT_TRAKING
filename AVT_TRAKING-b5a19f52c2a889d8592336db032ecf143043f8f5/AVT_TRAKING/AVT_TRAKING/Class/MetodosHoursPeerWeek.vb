@@ -336,4 +336,42 @@ inner join task as tk on wo.idAuxWO = tk.idAuxWO", conn)
             Return False
         End Try
     End Function
+
+    Public Function deleteRecordEmployee(ByVal idRecord As String, ByVal idTask As String) As Boolean
+        Try
+            conectar()
+            Dim cmd As New SqlCommand("delete from hoursWorked where idHorsWorked = '" + idRecord + "'", conn)
+            If cmd.ExecuteNonQuery Then
+                mtdJobs.UpdateTotalSpendTask(idTask)
+                desconectar()
+                Return True
+            Else
+                desconectar()
+                Return False
+            End If
+        Catch ex As Exception
+            desconectar()
+            MsgBox(ex.Message)
+            Return False
+        End Try
+    End Function
+
+    Public Function deleteExpense(ByVal idExpense As String, ByVal idTask As String) As Boolean
+        Try
+            conectar()
+            Dim cmd As New SqlCommand("delete from expensesUsed where idExpenseUsed = '" + idExpense + "'", conn)
+            If cmd.ExecuteNonQuery Then
+                mtdJobs.UpdateTotalSpendTask(idTask)
+                desconectar()
+                Return True
+            Else
+                desconectar()
+                Return False
+            End If
+        Catch ex As Exception
+            desconectar()
+            MsgBox(ex.Message)
+            Return False
+        End Try
+    End Function
 End Class

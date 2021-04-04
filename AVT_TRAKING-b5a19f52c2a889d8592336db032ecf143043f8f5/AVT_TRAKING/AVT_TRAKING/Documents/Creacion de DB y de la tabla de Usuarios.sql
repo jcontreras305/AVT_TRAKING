@@ -82,6 +82,8 @@ GO
 
 insert into costCode values (240000000000000,'Fist'),(140000000000000,'Secund')
 GO
+
+
 --##########################################################################################
 --##################  TABLA DE ABSENTS ####################################################
 --##########################################################################################
@@ -109,6 +111,21 @@ companyName varchar (50),
 idContact varchar(36),
 idHomeAddress varchar(36),
 estatus char(1)
+)
+GO
+
+--##########################################################################################
+--##################  TABLA DE COMPANY #####################################################
+--##########################################################################################
+
+create table company(
+	idCompany varchar(36) primary key not null ,
+	name varchar(30),
+	country varchar(58),
+	payTerms varchar(30),
+	invoiceDescr text,
+	idHomeAddress varchar(36),
+	idContact varchar(36)  
 )
 GO
 
@@ -381,6 +398,18 @@ GO
 
 ALTER TABLE [dbo].[absents] WITH CHECK ADD CONSTRAINT [fk_idEmployee_Absent] FOREIGN KEY ([idEmployee]) 
 REFERENCES [dbo].[employees]([idEmployee]) 
+GO
+
+--##########################################################################################
+--##################  FOREIG KEYS COMPANY ##################################################
+--##########################################################################################
+
+ALTER TABLE [dbo].[company] WITH CHECK ADD CONSTRAINT [fk_idHomeAddress] FOREIGN KEY ([idHomeAddress])
+REFERENCES [dbo].[homeAddress] ([idHomeAdress])
+GO
+
+ALTER  TABLE [dbo].[company] WITH CHECK ADD CONSTRAINT [fk_idContact] FOREIGN KEY  ([idContact])
+REFERENCES [dbo].[contact]([idContact])
 GO
 
 --##########################################################################################
@@ -1032,26 +1061,27 @@ GO
 --==============================================================================================================================
 --===== ESTE ES CODIGO SI NO SE QUIERE CREAR DESDE CERO LA BASE DE DATOS =======================================================
 --==============================================================================================================================
+---- (CTRL+K) + (CTRL+C) Comentar 
+---- (CTRL+K) + (CTRL+U) Descomentar 
 
---alter table expensesUsed 
---add idEmployee varchar(36)
---go
---ALTER TABLE    expensesUsed   WITH CHECK ADD  CONSTRAINT  fk_idEmployee_EU  FOREIGN KEY( idEmployee  )
---REFERENCES    employees ( idEmployee )
---GO
-
---create table absents(
---	idAbsents varchar(36) primary key not null,
---	dateAbsents date,
---	hoursPaid float,
---	explanation varchar(250),
---	idEmployee varchar(36) 
+--create table company(
+--	idCompany varchar(36) primary key not null ,
+--	name varchar(30),
+--	country varchar(58),
+--	payTerms varchar(30),
+--	invoiceDescr text,
+--	idHomeAddress varchar(36),
+--	idContact varchar(36)  
 --)
---GO
+--go
 
---alter table absents 
---add constraint fk_idEmployee_Absent 
---foreign key (idEmployee) 
---references employees(idEmployee) 
---GO
-
+--alter table company
+--add constraint fk_idHomeAddress 
+--foreign key (idHomeAddress)
+--references homeAddress (idHomeAdress)
+--go
+--alter  table company 
+--add constraint fk_idContact
+--foreign key  (idContact)
+--references contact(idContact)
+--go
