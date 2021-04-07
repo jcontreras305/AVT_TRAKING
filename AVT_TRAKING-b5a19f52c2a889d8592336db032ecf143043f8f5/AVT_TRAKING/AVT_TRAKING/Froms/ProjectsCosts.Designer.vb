@@ -23,6 +23,8 @@ Partial Class ProjectsCosts
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.btnDelete = New System.Windows.Forms.Button()
+        Me.btnUpdate = New System.Windows.Forms.Button()
         Me.Label25 = New System.Windows.Forms.Label()
         Me.Label15 = New System.Windows.Forms.Label()
         Me.Label10 = New System.Windows.Forms.Label()
@@ -67,6 +69,10 @@ Partial Class ProjectsCosts
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Panel2 = New System.Windows.Forms.Panel()
         Me.Panel3 = New System.Windows.Forms.Panel()
+        Me.Label27 = New System.Windows.Forms.Label()
+        Me.Label26 = New System.Windows.Forms.Label()
+        Me.txtTotalHours3Billing = New System.Windows.Forms.TextBox()
+        Me.txtTotalHours3 = New System.Windows.Forms.TextBox()
         Me.txtLeftSpend = New System.Windows.Forms.TextBox()
         Me.txtProjectBilled = New System.Windows.Forms.TextBox()
         Me.txtTotalMaterial = New System.Windows.Forms.TextBox()
@@ -92,7 +98,6 @@ Partial Class ProjectsCosts
         Me.tbpMaterials = New System.Windows.Forms.TabPage()
         Me.tblMaterialProjects = New System.Windows.Forms.DataGridView()
         Me.pnlTablas = New System.Windows.Forms.Panel()
-        Me.Panel5 = New System.Windows.Forms.Panel()
         Me.Panel1.SuspendLayout()
         Me.Panel4.SuspendLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -113,6 +118,8 @@ Partial Class ProjectsCosts
         'Panel1
         '
         Me.Panel1.BackColor = System.Drawing.Color.FromArgb(CType(CType(190, Byte), Integer), CType(CType(190, Byte), Integer), CType(CType(190, Byte), Integer))
+        Me.Panel1.Controls.Add(Me.btnDelete)
+        Me.Panel1.Controls.Add(Me.btnUpdate)
         Me.Panel1.Controls.Add(Me.Label25)
         Me.Panel1.Controls.Add(Me.Label15)
         Me.Panel1.Controls.Add(Me.Label10)
@@ -158,6 +165,24 @@ Partial Class ProjectsCosts
         Me.Panel1.Size = New System.Drawing.Size(1107, 249)
         Me.Panel1.TabIndex = 0
         '
+        'btnDelete
+        '
+        Me.btnDelete.Location = New System.Drawing.Point(901, 183)
+        Me.btnDelete.Name = "btnDelete"
+        Me.btnDelete.Size = New System.Drawing.Size(128, 23)
+        Me.btnDelete.TabIndex = 38
+        Me.btnDelete.Text = "Drop Material"
+        Me.btnDelete.UseVisualStyleBackColor = True
+        '
+        'btnUpdate
+        '
+        Me.btnUpdate.Location = New System.Drawing.Point(901, 154)
+        Me.btnUpdate.Name = "btnUpdate"
+        Me.btnUpdate.Size = New System.Drawing.Size(128, 23)
+        Me.btnUpdate.TabIndex = 37
+        Me.btnUpdate.Text = "Update Material"
+        Me.btnUpdate.UseVisualStyleBackColor = True
+        '
         'Label25
         '
         Me.Label25.AutoSize = True
@@ -187,10 +212,10 @@ Partial Class ProjectsCosts
         '
         'TextBox1
         '
-        Me.TextBox1.Location = New System.Drawing.Point(839, 200)
+        Me.TextBox1.Location = New System.Drawing.Point(839, 222)
         Me.TextBox1.Name = "TextBox1"
         Me.TextBox1.Size = New System.Drawing.Size(179, 20)
-        Me.TextBox1.TabIndex = 32
+        Me.TextBox1.TabIndex = 35
         '
         'btnNextTask
         '
@@ -203,10 +228,10 @@ Partial Class ProjectsCosts
         '
         'Button1
         '
-        Me.Button1.Location = New System.Drawing.Point(1035, 197)
+        Me.Button1.Location = New System.Drawing.Point(1035, 219)
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(35, 23)
-        Me.Button1.TabIndex = 31
+        Me.Button1.TabIndex = 36
         Me.Button1.Text = "Find"
         Me.Button1.UseVisualStyleBackColor = True
         '
@@ -543,6 +568,10 @@ Partial Class ProjectsCosts
         'Panel3
         '
         Me.Panel3.BackColor = System.Drawing.Color.FromArgb(CType(CType(190, Byte), Integer), CType(CType(190, Byte), Integer), CType(CType(190, Byte), Integer))
+        Me.Panel3.Controls.Add(Me.Label27)
+        Me.Panel3.Controls.Add(Me.Label26)
+        Me.Panel3.Controls.Add(Me.txtTotalHours3Billing)
+        Me.Panel3.Controls.Add(Me.txtTotalHours3)
         Me.Panel3.Controls.Add(Me.txtLeftSpend)
         Me.Panel3.Controls.Add(Me.txtProjectBilled)
         Me.Panel3.Controls.Add(Me.txtTotalMaterial)
@@ -565,42 +594,90 @@ Partial Class ProjectsCosts
         Me.Panel3.Size = New System.Drawing.Size(1107, 77)
         Me.Panel3.TabIndex = 9
         '
+        'Label27
+        '
+        Me.Label27.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Label27.AutoSize = True
+        Me.Label27.Location = New System.Drawing.Point(479, 44)
+        Me.Label27.Name = "Label27"
+        Me.Label27.Size = New System.Drawing.Size(39, 13)
+        Me.Label27.TabIndex = 36
+        Me.Label27.Text = "Biled 3"
+        '
+        'Label26
+        '
+        Me.Label26.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Label26.AutoSize = True
+        Me.Label26.Location = New System.Drawing.Point(447, 14)
+        Me.Label26.Name = "Label26"
+        Me.Label26.Size = New System.Drawing.Size(71, 13)
+        Me.Label26.TabIndex = 35
+        Me.Label26.Text = "Total Hours 3"
+        '
+        'txtTotalHours3Billing
+        '
+        Me.txtTotalHours3Billing.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.txtTotalHours3Billing.Location = New System.Drawing.Point(524, 41)
+        Me.txtTotalHours3Billing.Name = "txtTotalHours3Billing"
+        Me.txtTotalHours3Billing.Size = New System.Drawing.Size(120, 20)
+        Me.txtTotalHours3Billing.TabIndex = 30
+        '
+        'txtTotalHours3
+        '
+        Me.txtTotalHours3.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.txtTotalHours3.Location = New System.Drawing.Point(524, 11)
+        Me.txtTotalHours3.Name = "txtTotalHours3"
+        Me.txtTotalHours3.Size = New System.Drawing.Size(120, 20)
+        Me.txtTotalHours3.TabIndex = 29
+        '
         'txtLeftSpend
         '
-        Me.txtLeftSpend.Location = New System.Drawing.Point(762, 40)
+        Me.txtLeftSpend.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.txtLeftSpend.Location = New System.Drawing.Point(950, 37)
         Me.txtLeftSpend.Name = "txtLeftSpend"
         Me.txtLeftSpend.RightToLeft = System.Windows.Forms.RightToLeft.No
         Me.txtLeftSpend.Size = New System.Drawing.Size(120, 20)
-        Me.txtLeftSpend.TabIndex = 32
+        Me.txtLeftSpend.TabIndex = 34
         Me.txtLeftSpend.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'txtProjectBilled
         '
-        Me.txtProjectBilled.Location = New System.Drawing.Point(762, 11)
+        Me.txtProjectBilled.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.txtProjectBilled.Location = New System.Drawing.Point(950, 11)
         Me.txtProjectBilled.Name = "txtProjectBilled"
         Me.txtProjectBilled.RightToLeft = System.Windows.Forms.RightToLeft.Yes
         Me.txtProjectBilled.Size = New System.Drawing.Size(120, 20)
-        Me.txtProjectBilled.TabIndex = 31
+        Me.txtProjectBilled.TabIndex = 33
         '
         'txtTotalMaterial
         '
-        Me.txtTotalMaterial.Location = New System.Drawing.Point(549, 37)
+        Me.txtTotalMaterial.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.txtTotalMaterial.Location = New System.Drawing.Point(738, 41)
         Me.txtTotalMaterial.Name = "txtTotalMaterial"
         Me.txtTotalMaterial.RightToLeft = System.Windows.Forms.RightToLeft.Yes
         Me.txtTotalMaterial.Size = New System.Drawing.Size(120, 20)
-        Me.txtTotalMaterial.TabIndex = 30
+        Me.txtTotalMaterial.TabIndex = 32
         '
         'txtTotalExpenses
         '
-        Me.txtTotalExpenses.Location = New System.Drawing.Point(549, 11)
+        Me.txtTotalExpenses.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.txtTotalExpenses.Location = New System.Drawing.Point(738, 11)
         Me.txtTotalExpenses.Name = "txtTotalExpenses"
         Me.txtTotalExpenses.RightToLeft = System.Windows.Forms.RightToLeft.Yes
         Me.txtTotalExpenses.Size = New System.Drawing.Size(120, 20)
-        Me.txtTotalExpenses.TabIndex = 29
+        Me.txtTotalExpenses.TabIndex = 31
         '
         'txtTotalHoursOTBilling
         '
-        Me.txtTotalHoursOTBilling.Location = New System.Drawing.Point(322, 41)
+        Me.txtTotalHoursOTBilling.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.txtTotalHoursOTBilling.Location = New System.Drawing.Point(305, 41)
         Me.txtTotalHoursOTBilling.Name = "txtTotalHoursOTBilling"
         Me.txtTotalHoursOTBilling.RightToLeft = System.Windows.Forms.RightToLeft.Yes
         Me.txtTotalHoursOTBilling.Size = New System.Drawing.Size(120, 20)
@@ -608,7 +685,9 @@ Partial Class ProjectsCosts
         '
         'txtTotalHoursOT
         '
-        Me.txtTotalHoursOT.Location = New System.Drawing.Point(323, 11)
+        Me.txtTotalHoursOT.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.txtTotalHoursOT.Location = New System.Drawing.Point(306, 11)
         Me.txtTotalHoursOT.Name = "txtTotalHoursOT"
         Me.txtTotalHoursOT.RightToLeft = System.Windows.Forms.RightToLeft.Yes
         Me.txtTotalHoursOT.Size = New System.Drawing.Size(120, 20)
@@ -616,6 +695,8 @@ Partial Class ProjectsCosts
         '
         'txtTotalHoursBilling
         '
+        Me.txtTotalHoursBilling.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.txtTotalHoursBilling.Location = New System.Drawing.Point(95, 44)
         Me.txtTotalHoursBilling.Name = "txtTotalHoursBilling"
         Me.txtTotalHoursBilling.RightToLeft = System.Windows.Forms.RightToLeft.Yes
@@ -624,6 +705,8 @@ Partial Class ProjectsCosts
         '
         'txtTotalHours
         '
+        Me.txtTotalHours.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.txtTotalHours.Location = New System.Drawing.Point(95, 11)
         Me.txtTotalHours.Name = "txtTotalHours"
         Me.txtTotalHours.RightToLeft = System.Windows.Forms.RightToLeft.Yes
@@ -632,8 +715,9 @@ Partial Class ProjectsCosts
         '
         'Label23
         '
+        Me.Label23.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Label23.AutoSize = True
-        Me.Label23.Location = New System.Drawing.Point(678, 14)
+        Me.Label23.Location = New System.Drawing.Point(881, 14)
         Me.Label23.Name = "Label23"
         Me.Label23.Size = New System.Drawing.Size(60, 13)
         Me.Label23.TabIndex = 24
@@ -641,8 +725,9 @@ Partial Class ProjectsCosts
         '
         'Label22
         '
+        Me.Label22.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Label22.AutoSize = True
-        Me.Label22.Location = New System.Drawing.Point(678, 44)
+        Me.Label22.Location = New System.Drawing.Point(870, 44)
         Me.Label22.Name = "Label22"
         Me.Label22.Size = New System.Drawing.Size(78, 13)
         Me.Label22.TabIndex = 23
@@ -650,8 +735,9 @@ Partial Class ProjectsCosts
         '
         'Label21
         '
+        Me.Label21.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Label21.AutoSize = True
-        Me.Label21.Location = New System.Drawing.Point(467, 14)
+        Me.Label21.Location = New System.Drawing.Point(656, 14)
         Me.Label21.Name = "Label21"
         Me.Label21.Size = New System.Drawing.Size(80, 13)
         Me.Label21.TabIndex = 22
@@ -659,8 +745,9 @@ Partial Class ProjectsCosts
         '
         'Label20
         '
+        Me.Label20.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Label20.AutoSize = True
-        Me.Label20.Location = New System.Drawing.Point(467, 44)
+        Me.Label20.Location = New System.Drawing.Point(662, 44)
         Me.Label20.Name = "Label20"
         Me.Label20.Size = New System.Drawing.Size(71, 13)
         Me.Label20.TabIndex = 21
@@ -668,8 +755,9 @@ Partial Class ProjectsCosts
         '
         'Label19
         '
+        Me.Label19.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Label19.AutoSize = True
-        Me.Label19.Location = New System.Drawing.Point(266, 47)
+        Me.Label19.Location = New System.Drawing.Point(249, 47)
         Me.Label19.Name = "Label19"
         Me.Label19.Size = New System.Drawing.Size(50, 13)
         Me.Label19.TabIndex = 20
@@ -677,8 +765,9 @@ Partial Class ProjectsCosts
         '
         'Label18
         '
+        Me.Label18.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Label18.AutoSize = True
-        Me.Label18.Location = New System.Drawing.Point(237, 14)
+        Me.Label18.Location = New System.Drawing.Point(220, 14)
         Me.Label18.Name = "Label18"
         Me.Label18.Size = New System.Drawing.Size(80, 13)
         Me.Label18.TabIndex = 19
@@ -686,8 +775,9 @@ Partial Class ProjectsCosts
         '
         'Label17
         '
+        Me.Label17.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Label17.AutoSize = True
-        Me.Label17.Location = New System.Drawing.Point(43, 48)
+        Me.Label17.Location = New System.Drawing.Point(40, 48)
         Me.Label17.Name = "Label17"
         Me.Label17.Size = New System.Drawing.Size(51, 13)
         Me.Label17.TabIndex = 18
@@ -695,6 +785,7 @@ Partial Class ProjectsCosts
         '
         'Label16
         '
+        Me.Label16.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Label16.AutoSize = True
         Me.Label16.Location = New System.Drawing.Point(9, 14)
         Me.Label16.Name = "Label16"
@@ -725,7 +816,7 @@ Partial Class ProjectsCosts
         Me.TabControl1.Location = New System.Drawing.Point(3, 3)
         Me.TabControl1.Name = "TabControl1"
         Me.TabControl1.SelectedIndex = 0
-        Me.TabControl1.Size = New System.Drawing.Size(901, 271)
+        Me.TabControl1.Size = New System.Drawing.Size(1101, 271)
         Me.TabControl1.TabIndex = 3
         '
         'tbpHoursWorked
@@ -735,7 +826,7 @@ Partial Class ProjectsCosts
         Me.tbpHoursWorked.Name = "tbpHoursWorked"
         Me.tbpHoursWorked.Padding = New System.Windows.Forms.Padding(3)
         Me.tbpHoursWorked.RightToLeft = System.Windows.Forms.RightToLeft.Yes
-        Me.tbpHoursWorked.Size = New System.Drawing.Size(893, 245)
+        Me.tbpHoursWorked.Size = New System.Drawing.Size(1093, 245)
         Me.tbpHoursWorked.TabIndex = 0
         Me.tbpHoursWorked.Text = "Hours Worked"
         Me.tbpHoursWorked.UseVisualStyleBackColor = True
@@ -752,7 +843,7 @@ Partial Class ProjectsCosts
         Me.tblHoursWorkedProject.Name = "tblHoursWorkedProject"
         Me.tblHoursWorkedProject.RightToLeft = System.Windows.Forms.RightToLeft.No
         Me.tblHoursWorkedProject.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.tblHoursWorkedProject.Size = New System.Drawing.Size(887, 239)
+        Me.tblHoursWorkedProject.Size = New System.Drawing.Size(1087, 239)
         Me.tblHoursWorkedProject.TabIndex = 2
         '
         'tbpExpences
@@ -761,7 +852,7 @@ Partial Class ProjectsCosts
         Me.tbpExpences.Location = New System.Drawing.Point(4, 22)
         Me.tbpExpences.Name = "tbpExpences"
         Me.tbpExpences.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbpExpences.Size = New System.Drawing.Size(893, 245)
+        Me.tbpExpences.Size = New System.Drawing.Size(1093, 245)
         Me.tbpExpences.TabIndex = 1
         Me.tbpExpences.Text = "Expences"
         Me.tbpExpences.UseVisualStyleBackColor = True
@@ -776,7 +867,7 @@ Partial Class ProjectsCosts
         Me.tblExpencesProjects.Location = New System.Drawing.Point(3, 3)
         Me.tblExpencesProjects.Name = "tblExpencesProjects"
         Me.tblExpencesProjects.ReadOnly = True
-        Me.tblExpencesProjects.Size = New System.Drawing.Size(887, 239)
+        Me.tblExpencesProjects.Size = New System.Drawing.Size(1087, 239)
         Me.tblExpencesProjects.TabIndex = 0
         '
         'tbpMaterials
@@ -785,7 +876,7 @@ Partial Class ProjectsCosts
         Me.tbpMaterials.Location = New System.Drawing.Point(4, 22)
         Me.tbpMaterials.Name = "tbpMaterials"
         Me.tbpMaterials.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbpMaterials.Size = New System.Drawing.Size(893, 245)
+        Me.tbpMaterials.Size = New System.Drawing.Size(1093, 245)
         Me.tbpMaterials.TabIndex = 2
         Me.tbpMaterials.Text = "Matrials"
         Me.tbpMaterials.UseVisualStyleBackColor = True
@@ -797,7 +888,7 @@ Partial Class ProjectsCosts
         Me.tblMaterialProjects.Dock = System.Windows.Forms.DockStyle.Fill
         Me.tblMaterialProjects.Location = New System.Drawing.Point(3, 3)
         Me.tblMaterialProjects.Name = "tblMaterialProjects"
-        Me.tblMaterialProjects.Size = New System.Drawing.Size(887, 239)
+        Me.tblMaterialProjects.Size = New System.Drawing.Size(1087, 239)
         Me.tblMaterialProjects.TabIndex = 0
         '
         'pnlTablas
@@ -805,20 +896,11 @@ Partial Class ProjectsCosts
         Me.pnlTablas.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.pnlTablas.Controls.Add(Me.Panel5)
         Me.pnlTablas.Controls.Add(Me.TabControl1)
         Me.pnlTablas.Location = New System.Drawing.Point(0, 248)
         Me.pnlTablas.Name = "pnlTablas"
         Me.pnlTablas.Size = New System.Drawing.Size(1107, 274)
         Me.pnlTablas.TabIndex = 4
-        '
-        'Panel5
-        '
-        Me.Panel5.Dock = System.Windows.Forms.DockStyle.Right
-        Me.Panel5.Location = New System.Drawing.Point(907, 0)
-        Me.Panel5.Name = "Panel5"
-        Me.Panel5.Size = New System.Drawing.Size(200, 274)
-        Me.Panel5.TabIndex = 4
         '
         'ProjectsCosts
         '
@@ -830,7 +912,7 @@ Partial Class ProjectsCosts
         Me.Controls.Add(Me.Panel2)
         Me.Controls.Add(Me.Panel1)
         Me.Name = "ProjectsCosts"
-        Me.Text = "ProyectsCosts"
+        Me.Text = "Proyects Costs"
         Me.Panel1.ResumeLayout(False)
         Me.Panel1.PerformLayout()
         Me.Panel4.ResumeLayout(False)
@@ -921,7 +1003,12 @@ Partial Class ProjectsCosts
     Friend WithEvents tbpMaterials As TabPage
     Public WithEvents tblMaterialProjects As DataGridView
     Friend WithEvents pnlTablas As Panel
-    Friend WithEvents Panel5 As Panel
     Friend WithEvents Label25 As Label
     Friend WithEvents Label15 As Label
+    Friend WithEvents Label27 As Label
+    Friend WithEvents Label26 As Label
+    Friend WithEvents txtTotalHours3Billing As TextBox
+    Friend WithEvents txtTotalHours3 As TextBox
+    Friend WithEvents btnDelete As Button
+    Friend WithEvents btnUpdate As Button
 End Class

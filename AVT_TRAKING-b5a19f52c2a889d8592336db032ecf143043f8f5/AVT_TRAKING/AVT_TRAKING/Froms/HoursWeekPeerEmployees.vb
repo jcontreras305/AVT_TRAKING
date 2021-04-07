@@ -94,8 +94,9 @@
                             With cmbProyect
                                 mtdHPW.llenarComboCellProject(cmbProyect, proyectTable)
                             End With
-
                             tblExpenses.CurrentRow.Cells("Project") = cmbProyect
+                        Else
+                            tblExpenses.CurrentRow.Cells("Project") = tblExpenses.CurrentCell
                         End If
                     Catch ex As Exception
 
@@ -108,6 +109,8 @@
                                 mtdHPW.llenarComboCellExpeseCode(cmbExpenseCode, expenseCodeTable)
                             End With
                             tblExpenses.CurrentRow.Cells("Expense Code") = cmbExpenseCode
+                        Else
+                            tblExpenses.CurrentRow.Cells("Expense Code") = tblExpenses.CurrentCell
                         End If
                     Catch ex As Exception
 
@@ -135,6 +138,8 @@
                                 mtdHPW.llenarComboCellProject(cmbProyect, proyectTable)
                             End With
                             tblRecordEmployee.CurrentRow.Cells("Project") = cmbProyect
+                        Else
+                            tblRecordEmployee.CurrentRow.Cells("Project") = tblRecordEmployee.CurrentCell
                         End If
                         flagFilaActual = "ProjectHours"
                     Catch ex As Exception
@@ -148,6 +153,8 @@
                                 mtdHPW.llenarComboCellWorkCode(cmbWorkCode, workCodeTable)
                             End With
                             tblRecordEmployee.CurrentRow.Cells("Work Code") = cmbWorkCode
+                        Else
+                            tblRecordEmployee.CurrentRow.Cells("Work Code") = tblRecordEmployee.CurrentCell
                         End If
                         flagFilaActual = "WorkCode"
                     Catch ex As Exception
@@ -160,6 +167,8 @@
                             cmbShift.Items.Add("Day")
                             cmbShift.Items.Add("Nigth")
                             tblRecordEmployee.CurrentRow.Cells("Shift") = cmbShift
+                        Else
+                            tblRecordEmployee.CurrentRow.Cells("Shift") = tblRecordEmployee.CurrentCell
                         End If
                         flagFilaActual = "Shift"
                     Catch ex As Exception

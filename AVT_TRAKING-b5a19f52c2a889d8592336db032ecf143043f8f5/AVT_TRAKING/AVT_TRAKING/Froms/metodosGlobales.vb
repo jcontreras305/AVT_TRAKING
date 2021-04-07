@@ -86,7 +86,7 @@ Module metodosGlobales
         Else
             If fecha IsNot Nothing Then
                 Dim array() As String = CStr(fecha).Split("/")
-                Dim fecha1 As String = array(1) + "/" + array(0) + "/" + array(2)
+                Dim fecha1 As String = array(0) + "/" + array(1) + "/" + array(2)
                 Return CDate(fecha1)
             End If
         End If

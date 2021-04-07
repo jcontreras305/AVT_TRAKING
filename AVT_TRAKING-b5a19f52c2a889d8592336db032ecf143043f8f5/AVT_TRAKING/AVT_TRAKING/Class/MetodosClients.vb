@@ -242,6 +242,27 @@ select
 	group by T1.idWorkCode) as T2
 	)
 	END	as 'Total Amount OT',
+
+    case when (select SUM(hours3) from hoursWorked as hw where hw.idAux = tk.idAux) is null then 0 
+	else (select SUM(hours3) from hoursWorked as hw where hw.idAux = tk.idAux)
+	end	as 'Total Hours 3',
+	case when 
+	
+	(select SUM(T2.Amount) from 
+	(select SUM(T1.hours3*T1.billingRate3) AS 'Amount'
+	from (select idHorsWorked,hours3, hw.idWorkCode , billingRate3  from hoursWorked as hw inner join workCode as wc on wc.idWorkCode = hw.idWorkCode 
+	where idAux=tk.idAux)as T1 
+	group by T1.idWorkCode) as T2
+	) IS NULL  THEN 0
+	ELSE
+	(select SUM(T2.Amount) from 
+	(select SUM(T1.hours3*T1.billingRate3) AS 'Amount'
+	from (select idHorsWorked,hours3, hw.idWorkCode , billingRate3  from hoursWorked as hw inner join workCode as wc on wc.idWorkCode = hw.idWorkCode 
+	where idAux=tk.idAux)as T1 
+	group by T1.idWorkCode) as T2
+	)
+	END	as 'Total Amount 3',
+
 	CASE WHEN 
 	(select SUM( amount) from expensesUsed where idAux = tk.idAux) IS NULL THEN 0
 	ELSE (select SUM( amount) from expensesUsed where idAux = tk.idAux) END AS 'Total Expenses Spend', 
@@ -285,7 +306,7 @@ cln.lastName Like '" + consulta + "'", conn)
                 Dim dt As New DataTable
                 da.Fill(dt)
                 tabla.DataSource = dt
-                If tabla.Columns.Count <= 20 Then
+                If tabla.Columns.Count <= 22 Then
                     Dim clmChb As New DataGridViewCheckBoxColumn
                     clmChb.Name = "Complete"
                     tabla.Columns.Add(clmChb)

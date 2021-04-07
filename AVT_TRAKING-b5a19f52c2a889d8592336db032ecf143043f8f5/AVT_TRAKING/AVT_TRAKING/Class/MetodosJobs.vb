@@ -352,6 +352,8 @@ wc.billingRate1 as 'Billing Rate',
 hw.hoursST as 'Billable Rate',
 wc.billingRateOT as 'Billing RateOT',
 hw.hoursOT as 'Billable OT',
+wc.billingRate3 as 'Billing Rate 3',
+hw.hours3 as 'Billable 3',
 convert (varchar,hw.dateWorked,1 )as 'Date Worked',
 wc.description as 'Description'
 from 
@@ -494,7 +496,7 @@ mu.idMaterialUsed,
 convert (varchar,mu.dateMaterial, 1) as 'Date',
 concat(wo.idWO,' ',tk.task)as 'Work Order',
 mu.amount as 'Amount',
-mt.name as 'Material Code',
+concat(mt.number,' ', mt.name) as 'Material Code',
 mu.description as 'Description'
 from 
 materialUsed as mu inner join task as tk on tk.idAux = mu.idAux
@@ -557,6 +559,25 @@ where jb.jobNo = " + If(jobNumber = "", "0", jobNumber), conn)
             MsgBox(ex.Message())
         End Try
     End Sub
+
+    Public Function deleteMaterial(ByVal idMaterialUsed As String, ByVal itask As String) As Boolean
+        Try
+            conectar()
+            Dim cmd As New SqlCommand("delete from materialUsed where idMaterialUsed = '" + idMaterialUsed + "'", conn)
+            If cmd.ExecuteNonQuery > 1 Then
+                UpdateTotalSpendTask(itask)
+                desconectar()
+                Return True
+            Else
+                desconectar()
+                Return True
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message)
+            desconectar()
+            Return False
+        End Try
+    End Function
 
     '================================================================================================================================================
     '===============================  METODOS PARA ACTUALIZAR INMEDITATAMENTE AL PERDER EL FOCO =====================================================
@@ -660,7 +681,8 @@ tk.estimateHours,
 tk.expCode,
 tk.accountNum,
 tk.status,
-tk.idAux
+tk.idAux,
+tk.idAuxWO
 from 
 job as jb 
 inner join clients as cl on jb.idClient = cl.idClient
@@ -686,6 +708,7 @@ where jb.jobNo = " + If(idJob = "", "0", idJob).ToString(), conn)
                 lstDatosPO.Add(reader("accountNum"))
                 lstDatosPO.Add(reader("status"))
                 lstDatosPO.Add(reader("idAux"))
+                lstDatosPO.Add(reader("idAuxWO"))
                 Exit While
             End While
             desconectar()
@@ -1120,7 +1143,7 @@ where tk.idAux = '" + idAux + "' and wo.idAuxWO = '" + WO + "'", conn)
         Try
             conectar()
             Dim cmd As New SqlCommand("
-                update materialUsed set dateMaterial = '" + datos(1) + "' , amount = " + datos(3) + " ,description = " + datos(5) + " , idAux = '" + datos(2) + "',idMaterial = '" + datos(4) + "' where idMaterialUsed = '" + datos(0) + "'", conn)
+                update materialUsed set dateMaterial = '" + datos(1) + "' , amount = " + datos(3) + " ,description = '" + datos(5) + "' , idAux = '" + datos(2) + "',idMaterial = '" + datos(4) + "' where idMaterialUsed = '" + datos(0) + "'", conn)
             If cmd.ExecuteNonQuery = 1 Then
                 UpdateTotalSpendTask(datos(5))
                 desconectar()

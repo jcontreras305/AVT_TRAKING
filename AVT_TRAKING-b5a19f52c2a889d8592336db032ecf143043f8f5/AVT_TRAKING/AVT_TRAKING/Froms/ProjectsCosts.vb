@@ -27,6 +27,9 @@
         mtdJobs.llenarComboJob(cmbJobNumber, idCliente)
         'aqui se consulta y se cargan los datos en la interfaz
         mtdJobs.consultaWO(JobNumber, tablasDeTareas)
+        If tablasDeTareas.Rows.Count > 0 Then
+            idAuxWO = tablasDeTareas.Rows(0).ItemArray(5)
+        End If
         If Not cargarDatosProjecto(JobNumber) Then
             activarCampos(False)
         End If
@@ -69,15 +72,32 @@
                     _dtpMaterial.Visible = True
                 Case "Material Code"
                     Try
-                        Dim cmbMatrial As New DataGridViewComboBoxCell
-                        mtdJobs.llenarComboCellMaterial(cmbMatrial, listIdsMaterial)
-                        tblMaterialProjects.CurrentRow.Cells("Material Code") = cmbMatrial
+                        If tblMaterialProjects.CurrentCell.GetType.Name = "DataGridViewTextBoxCell" Then
+                            Dim cmbMatrial As New DataGridViewComboBoxCell
+                            With cmbMatrial
+                                mtdJobs.llenarComboCellMaterial(cmbMatrial, listIdsMaterial)
+                            End With
+                            tblMaterialProjects.CurrentRow.Cells("Material Code") = cmbMatrial
+                        Else
+                            tblMaterialProjects.CurrentRow.Cells("Material Code") = tblMaterialProjects.CurrentCell
+                        End If
                     Catch ex As Exception
 
                     End Try
                 Case "Work Order"
                     tblMaterialProjects.CurrentRow.Cells("Work Order").Value = lblWorkOrder.Text
             End Select
+        End If
+    End Sub
+
+    Private Sub DataGridView1_DataError(ByVal sender As Object, ByVal e As DataGridViewDataErrorEventArgs) Handles tblMaterialProjects.DataError
+
+        ' Excepción
+        Dim ex As Exception = e.Exception
+        If e.Exception.Message <> "El valor de DataGridViewComboBoxCell no es válido." Then
+            MessageBox.Show(ex.Message)
+        Else
+            e.Cancel = True
         End If
     End Sub
 
@@ -287,8 +307,9 @@
             pjt.jobNum = JobNumber
             pjt.idTask = task = ""
             pjt.idWorkOrder = WorkOrder
-            pjt.idAuxWO = idAuxWO
             pjt.idAux = lstDatosPO(14)
+            idAuxWO = lstDatosPO(15)
+            pjt.idAuxWO = idAuxWO
             Return True
         Else
             Return False
@@ -302,7 +323,7 @@
             End If
         Else
             JobNumber = cmbJobNumber.SelectedItem
-            cargarDatosProjecto(JobNumber)
+            activarCampos(cargarDatosProjecto(JobNumber))
             mtdJobs.consultaWO(JobNumber, tablasDeTareas)
         End If
     End Sub
@@ -691,8 +712,18 @@
                 Return False
             End If
         Else
-            If cmbProjectManager.SelectedItem <> "" Then
-                Return True
+            If cmbProjectManager.SelectedItem <> "" Or cmbProjectManager.Text <> "" Then
+                If cmbProjectManager.SelectedItem = Nothing Then
+
+                    cmbProjectManager.SelectedItem = cmbProjectManager.Items(If(cmbProjectManager.FindString(cmbProjectManager.Text) = -1, Nothing, cmbProjectManager.FindString(cmbProjectManager.Text)))
+                    If cmbProjectManager.SelectedItem = Nothing Then
+                        Return False
+                    Else
+                        Return True
+                    End If
+                Else
+                    Return True
+                End If
             Else
                 Return False
             End If
@@ -1088,6 +1119,31 @@
         End If
     End Sub
 
+    Private Sub btnDelete_Click(sender As Object, e As EventArgs) Handles btnDelete.Click
+        If tblMaterialProjects.SelectedRows.Count > 0 Then
+            If DialogResult.Yes = MessageBox.Show("Are you sure to delete " + tblMaterialProjects.SelectedRows.Count.ToString() + " materials?" + vbCrLf + "If you accept you can't recober this records.", "Important", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) Then
+                For Each row As DataGridViewRow In tblMaterialProjects.SelectedRows
+                    mtdJobs.deleteMaterial(row.Cells("idMaterialUsed").Value, idAuxWO)
+                    mtdJobs.buscarMaterialesPorProyecto(tblMaterialProjects, idAuxWO, task)
+                    calcularValores()
+                Next
+            End If
+        Else
+            MessageBox.Show("Plese select a row to continue.", "Important", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+        End If
+    End Sub
+
+    Private Sub btnUpdate_Click(sender As Object, e As EventArgs) Handles btnUpdate.Click
+        If tblMaterialProjects.SelectedRows.Count > 0 Then
+            If DialogResult.Yes = MessageBox.Show("Are you sure to Update " + tblMaterialProjects.SelectedRows.Count.ToString() + " materials?" + vbCrLf + "If you accept you can't recober the last data.", "Important", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) Then
+                For Each row As DataGridViewRow In tblMaterialProjects.SelectedRows
+                    actualizarMateriales(row.Index)
+                Next
+            End If
+        Else
+            MessageBox.Show("Plese select a row to continue.", "Important", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+        End If
+    End Sub
 
     Private Sub txtAccount_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtAcountNo.KeyPress
         If Asc(e.KeyChar) = Keys.Enter Or Asc(e.KeyChar) = Keys.Tab Then
@@ -1173,8 +1229,10 @@
     Private Function calcularValores() As Boolean
         Dim totalCostHoursST As Double = 0.0
         Dim totalCostHoursOT As Double = 0.0
+        Dim totalCostHours3 As Double = 0.0
         Dim totalHoursST As Double = 0.0
         Dim totalHoursOT As Double = 0.0
+        Dim totalHours3 As Double = 0.0
 
         Dim totalExpences As Double = 0.0
         Dim totalMaterial As Double = 0.0
@@ -1184,8 +1242,10 @@
             For Each row As DataGridViewRow In tblHoursWorkedProject.Rows
                 totalHoursST += CDbl(row.Cells("Billable Rate").Value)
                 totalHoursOT += CDbl(row.Cells("Billable OT").Value)
+                totalHours3 += CDbl(row.Cells("Billable 3").Value)
                 totalCostHoursST += CDbl(row.Cells("Billing Rate").Value) * CDbl(row.Cells("Billable Rate").Value)
                 totalCostHoursOT += CDbl(row.Cells("Billing RateOT").Value) * CDbl(row.Cells("Billable OT").Value)
+                totalCostHours3 += CDbl(row.Cells("Billing Rate 3").Value) * CDbl(row.Cells("Billable 3").Value)
             Next
 
         End If
@@ -1208,24 +1268,26 @@
         txtTotalHoursBilling.Text = "$" + totalCostHoursST.ToString("N")
         txtTotalHoursOT.Text = totalHoursOT.ToString("N")
         txtTotalHoursOTBilling.Text = "$" + totalCostHoursOT.ToString("N")
+        txtTotalHours3.Text = totalHours3.ToString("N")
+        txtTotalHours3Billing.Text = "$" + totalCostHours3.ToString("N")
         txtTotalExpenses.Text = "$" + totalExpences.ToString("N")
         txtTotalMaterial.Text = "$" + totalMaterial.ToString("N")
-        txtProjectBilled.Text = "$" + (totalCostHoursST + totalCostHoursOT + totalExpences + totalMaterial).ToString("N")
-        txtLeftSpend.Text = (sprTotalBilling.Value - (totalCostHoursST + totalCostHoursOT + totalExpences + totalMaterial)).ToString("N")
+        txtProjectBilled.Text = "$" + (totalCostHoursST + totalCostHoursOT + totalCostHours3 + totalExpences + totalMaterial).ToString("N")
+        txtLeftSpend.Text = (sprTotalBilling.Value - (totalCostHoursST + totalCostHoursOT + totalCostHours3 + totalExpences + totalMaterial)).ToString("N")
         txtLeftSpend.Text = "$" + txtLeftSpend.Text
         Dim mensaje As String = ""
 
-        If 0 > (sprTotalBilling.Value - (totalCostHoursST + totalCostHoursOT + totalExpences + totalMaterial)) Then
+        If 0 > (sprTotalBilling.Value - (totalCostHoursST + totalCostHoursOT + totalCostHours3 + totalExpences + totalMaterial)) Then
             mensaje = "The total spent was over budget"
         End If
 
         If sprTotalBilling.Value > 0 Then
-            Dim porcentLeft = ((totalCostHoursST + totalCostHoursOT + totalExpences + totalMaterial) * 100) / sprTotalBilling.Value
+            Dim porcentLeft = ((totalCostHoursST + totalCostHoursOT + totalCostHours3 + totalExpences + totalMaterial) * 100) / sprTotalBilling.Value
             lblPorcentLeft.Text = porcentLeft.ToString("N") + "%"
         End If
 
-        If sprHoursEstimate.Value < (totalHoursST + totalHoursOT) Then
-            mensaje = If(mensaje.Equals(""), "Total estimated hours were exceeded.", ", Total estimated hours were exceeded.")
+        If sprHoursEstimate.Value < (totalHoursST + totalHoursOT + totalHours3) Then
+            mensaje = If(mensaje.Equals(""), "Total estimated hours were exceded.", ", Total estimated hours were exceded.")
         End If
 
 
@@ -1292,6 +1354,63 @@
                         End If
                     End If
             End Select
+        End If
+    End Sub
+
+    Private Sub actualizarMateriales(ByVal fila As Integer)
+        Dim mensaje As String = ""
+        Dim datosMaterial As New List(Of String)
+        If Not tblMaterialProjects.Rows(fila).Cells("idMaterialUsed").Value Is DBNull.Value Then
+            datosMaterial.Add(tblMaterialProjects.Rows(fila).Cells("idMaterialUsed").Value)
+        Else
+            datosMaterial.Add("")
+        End If
+        If Not tblMaterialProjects.Rows(fila).Cells("Date").Value Is DBNull.Value Then
+            datosMaterial.Add(validaFechaParaSQl(tblMaterialProjects.Rows(fila).Cells("Date").Value))
+        Else
+            mensaje = If(mensaje = "", "Please choose a Date.", vbCrLf + "Please choose a Date")
+        End If
+        datosMaterial.Add(pjt.idAux) 'idAuxTask
+        If Not tblMaterialProjects.Rows(fila).Cells("Amount").Value Is DBNull.Value Then
+            If soloNumero(tblMaterialProjects.Rows(fila).Cells("Amount").Value) Then
+                datosMaterial.Add(tblMaterialProjects.Rows(fila).Cells("Amount").Value)
+            Else
+                mensaje = If(mensaje = "", "Check the 'Amount' Cell, it only permit numbers.", vbCrLf + "Check the 'Amount' Cell, it only permit numbers.")
+            End If
+        Else
+            mensaje = If(mensaje = "", "Check the 'Amount' Cell.", vbCrLf + "Check the 'Amount' Cell.")
+        End If
+
+
+        If tblMaterialProjects.Rows(fila).Cells("Material Code").Value IsNot DBNull.Value Then
+            For Each row As DataRow In listIdsMaterial.Rows
+                If row.Item(1) = tblMaterialProjects.Rows(fila).Cells("Material Code").Value Then
+                    datosMaterial.Add(row.Item(0))
+                    Exit For
+                End If
+            Next
+        Else
+            mensaje = If(mensaje = "", "Check the 'Material Code' Cell.", vbCrLf + "Check the 'Material Code' Cell.")
+        End If
+
+
+        If tblMaterialProjects.Rows(fila).Cells("Description").Value IsNot DBNull.Value Then
+            datosMaterial.Add(tblMaterialProjects.Rows(fila).Cells("Description").Value)
+        Else
+            datosMaterial.Add("")
+        End If
+        If mensaje <> "" Then
+            MessageBox.Show(mensaje, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        Else
+            If datosMaterial(0) = "" Then 'insert
+                mtdJobs.insertMaterialUsed(datosMaterial)
+                mtdJobs.buscarMaterialesPorProyecto(tblMaterialProjects, idAuxWO, task)
+                calcularValores()
+            Else 'update
+                mtdJobs.updateMaterialUsed(datosMaterial)
+                mtdJobs.buscarMaterialesPorProyecto(tblMaterialProjects, idAuxWO, task)
+                calcularValores()
+            End If
         End If
     End Sub
 
