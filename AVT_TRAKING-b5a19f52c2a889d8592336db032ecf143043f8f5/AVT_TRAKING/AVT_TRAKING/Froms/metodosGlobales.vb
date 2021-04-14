@@ -58,6 +58,29 @@ Module metodosGlobales
         Return flag
     End Function
 
+    ''' <summary>
+    ''' Este metodo da formato de acuerdo a las dos zonas previstas para isertar en SQLServer 
+    ''' </summary>
+    ''' <param name="fecha">Necesita un valor de tipo Date</param>
+    ''' <returns>Devuelbe un String con el formato necesario</returns>
+    Public Function validaFechaParaSQl(ByVal fecha As String) As String
+        Dim zona As TimeZone = TimeZone.CurrentTimeZone
+        If zona.DaylightName = "Hora de verano central (México)" Then
+            Dim array() = fecha.Split("/")
+            Dim fecha1 As String = array(2) + "-" + array(0) + "-" + array(1)
+            Return fecha1
+        Else
+            Dim array() As String = CStr(fecha).Split("/")
+            Dim fecha1 As String = array(0) + "-" + array(1) + "-" + array(2)
+            Return fecha1
+        End If
+    End Function
+
+    ''' <summary>
+    ''' Este metodo da formato de acuerdo a las dos zonas previstas para isertar en SQLServer 
+    ''' </summary>
+    ''' <param name="fecha">Necesita un valor de tipo Date</param>
+    ''' <returns>Devuelbe un String con el formato necesario</returns>
     Public Function validaFechaParaSQl(ByVal fecha As Date) As String
         Dim zona As TimeZone = TimeZone.CurrentTimeZone
         If zona.DaylightName = "Hora de verano central (México)" Then
@@ -75,19 +98,60 @@ Module metodosGlobales
         End If
     End Function
 
+    ''' <summary>
+    ''' Esta funcion hace un Cast de un string con formato MM/dd/yyyy a date
+    ''' </summary>
+    ''' <param name="fecha"></param>
+    ''' <returns></returns>
     Public Function validarFechaParaVB(ByVal fecha As String) As Date
         Dim zona As TimeZone = TimeZone.CurrentTimeZone
         If zona.DaylightName = "Hora de verano central (México)" Then
             If fecha IsNot Nothing Then
                 Dim array() As String = CStr(fecha).Split("/")
-                Dim fecha1 As String = array(1) + "/" + array(0) + "/" + array(2)
-                Return CDate(fecha1)
+                If array(2).Length > 4 Then
+                    Dim aux() As String = array(2).Split(" ")
+                    array(2) = aux(0)
+                    Dim fecha1 As String = array(1) + "/" + array(0) + "/" + array(2)
+                    Try
+                        Return CDate(fecha1)
+                    Catch ex As Exception
+                        fecha1 = array(0) + "/" + array(1) + "/" + array(2)
+                        Return fecha1
+                    End Try
+                Else
+                    Dim fecha1 As String = array(1) + "/" + array(0) + "/" + array(2)
+                    Try
+                        Return CDate(fecha1)
+                    Catch ex As Exception
+                        fecha1 = array(0) + "/" + array(1) + "/" + array(2)
+                        Return CDate(fecha1)
+                    End Try
+                End If
             End If
         Else
             If fecha IsNot Nothing Then
                 Dim array() As String = CStr(fecha).Split("/")
-                Dim fecha1 As String = array(0) + "/" + array(1) + "/" + array(2)
-                Return CDate(fecha1)
+                If array(2).Length > 4 Then
+                    Dim aux() As String = array(2).Split(" ")
+                    array(2) = aux(0)
+                    Dim fecha1 As String = array(0) + "/" + array(1) + "/" + array(2)
+                    Return CDate(fecha1)
+                Else
+                    Dim fecha1 As String = array(0) + "/" + array(1) + "/" + array(2)
+                    Return CDate(fecha1)
+                End If
+            Else
+                fecha = System.DateTime.Today.ToShortDateString()
+                Dim array() As String = CStr(fecha).Split("/")
+                If array(2).Length > 4 Then
+                    Dim aux() As String = array(2).Split(" ")
+                    array(2) = aux(0)
+                    Dim fecha1 As String = array(0) + "/" + array(1) + "/" + array(2)
+                    Return CDate(fecha1)
+                Else
+                    Dim fecha1 As String = array(0) + "/" + array(1) + "/" + array(2)
+                    Return CDate(fecha1)
+                End If
             End If
         End If
 
@@ -107,6 +171,21 @@ Module metodosGlobales
             End If
         End While
         Return fecha.AddDays(-cont)
+    End Function
+
+    Public Function ultimoDiaDeLaSemana(ByVal fecha As Date) As Date
+        Dim flag As Boolean = False
+        Dim fechaReturn As New Date
+        Dim cont As Integer = 0
+        While flag = False
+            Dim aux As Date = fecha.AddDays(cont)
+            If aux.DayOfWeek = DayOfWeek.Sunday Then
+                flag = True
+            Else
+                cont += 1
+            End If
+        End While
+        Return fecha.AddDays(cont)
     End Function
 
     Public Function validar_Correo(ByVal mail As String) As Boolean

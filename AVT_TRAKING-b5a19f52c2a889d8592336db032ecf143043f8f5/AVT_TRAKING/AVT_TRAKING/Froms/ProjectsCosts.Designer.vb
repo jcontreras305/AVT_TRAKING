@@ -25,8 +25,6 @@ Partial Class ProjectsCosts
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.btnDelete = New System.Windows.Forms.Button()
         Me.btnUpdate = New System.Windows.Forms.Button()
-        Me.Label25 = New System.Windows.Forms.Label()
-        Me.Label15 = New System.Windows.Forms.Label()
         Me.Label10 = New System.Windows.Forms.Label()
         Me.TextBox1 = New System.Windows.Forms.TextBox()
         Me.btnNextTask = New System.Windows.Forms.Button()
@@ -120,8 +118,6 @@ Partial Class ProjectsCosts
         Me.Panel1.BackColor = System.Drawing.Color.FromArgb(CType(CType(190, Byte), Integer), CType(CType(190, Byte), Integer), CType(CType(190, Byte), Integer))
         Me.Panel1.Controls.Add(Me.btnDelete)
         Me.Panel1.Controls.Add(Me.btnUpdate)
-        Me.Panel1.Controls.Add(Me.Label25)
-        Me.Panel1.Controls.Add(Me.Label15)
         Me.Panel1.Controls.Add(Me.Label10)
         Me.Panel1.Controls.Add(Me.TextBox1)
         Me.Panel1.Controls.Add(Me.btnNextTask)
@@ -182,24 +178,6 @@ Partial Class ProjectsCosts
         Me.btnUpdate.TabIndex = 37
         Me.btnUpdate.Text = "Update Material"
         Me.btnUpdate.UseVisualStyleBackColor = True
-        '
-        'Label25
-        '
-        Me.Label25.AutoSize = True
-        Me.Label25.Location = New System.Drawing.Point(507, 184)
-        Me.Label25.Name = "Label25"
-        Me.Label25.Size = New System.Drawing.Size(79, 13)
-        Me.Label25.TabIndex = 36
-        Me.Label25.Text = "DD/MM/YYYY"
-        '
-        'Label15
-        '
-        Me.Label15.AutoSize = True
-        Me.Label15.Location = New System.Drawing.Point(507, 157)
-        Me.Label15.Name = "Label15"
-        Me.Label15.Size = New System.Drawing.Size(79, 13)
-        Me.Label15.TabIndex = 35
-        Me.Label15.Text = "DD/MM/YYYY"
         '
         'Label10
         '
@@ -342,7 +320,7 @@ Partial Class ProjectsCosts
         '
         'dtpEndDate
         '
-        Me.dtpEndDate.CustomFormat = "YYYY-MM-DD"
+        Me.dtpEndDate.CustomFormat = "MM/dd/yyyy"
         Me.dtpEndDate.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
         Me.dtpEndDate.Location = New System.Drawing.Point(370, 178)
         Me.dtpEndDate.Name = "dtpEndDate"
@@ -841,6 +819,7 @@ Partial Class ProjectsCosts
         Me.tblHoursWorkedProject.Location = New System.Drawing.Point(3, 3)
         Me.tblHoursWorkedProject.MultiSelect = False
         Me.tblHoursWorkedProject.Name = "tblHoursWorkedProject"
+        Me.tblHoursWorkedProject.ReadOnly = True
         Me.tblHoursWorkedProject.RightToLeft = System.Windows.Forms.RightToLeft.No
         Me.tblHoursWorkedProject.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
         Me.tblHoursWorkedProject.Size = New System.Drawing.Size(1087, 239)
@@ -1003,8 +982,6 @@ Partial Class ProjectsCosts
     Friend WithEvents tbpMaterials As TabPage
     Public WithEvents tblMaterialProjects As DataGridView
     Friend WithEvents pnlTablas As Panel
-    Friend WithEvents Label25 As Label
-    Friend WithEvents Label15 As Label
     Friend WithEvents Label27 As Label
     Friend WithEvents Label26 As Label
     Friend WithEvents txtTotalHours3Billing As TextBox

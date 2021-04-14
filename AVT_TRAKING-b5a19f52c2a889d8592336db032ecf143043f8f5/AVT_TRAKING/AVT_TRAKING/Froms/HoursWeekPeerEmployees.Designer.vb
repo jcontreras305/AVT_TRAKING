@@ -22,7 +22,8 @@ Partial Class HoursWeekPeerEmployees
     'No lo modifique con el editor de código.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.tblHourPeerDay = New System.Windows.Forms.DataGridView()
         Me.clmWeekending = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -60,7 +61,7 @@ Partial Class HoursWeekPeerEmployees
         Me.btnNextEmploye = New System.Windows.Forms.Button()
         Me.btnLatsEmploye = New System.Windows.Forms.Button()
         Me.Button9 = New System.Windows.Forms.Button()
-        Me.Button8 = New System.Windows.Forms.Button()
+        Me.btnTime = New System.Windows.Forms.Button()
         Me.btnExpenses = New System.Windows.Forms.Button()
         Me.Button6 = New System.Windows.Forms.Button()
         Me.Button5 = New System.Windows.Forms.Button()
@@ -124,16 +125,24 @@ Partial Class HoursWeekPeerEmployees
         Me.tblHourPeerDay.AllowUserToDeleteRows = False
         Me.tblHourPeerDay.AllowUserToResizeRows = False
         Me.tblHourPeerDay.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
+        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle3.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.25!)
+        DataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.tblHourPeerDay.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle3
         Me.tblHourPeerDay.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.tblHourPeerDay.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.clmWeekending, Me.clmEployeeName, Me.clmTotalST, Me.clmTotalOT, Me.clmTotalHours3, Me.clmMonST, Me.clmMonOT, Me.clmTueST, Me.clmTueOT, Me.clmWedST, Me.clmWedOT, Me.clmThuST, Me.clmThuOT, Me.clmFriST, Me.clmFriOT, Me.clmSatST, Me.clmSatOT, Me.clmSunST, Me.clmSunOT})
-        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle1.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.tblHourPeerDay.DefaultCellStyle = DataGridViewCellStyle1
+        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle4.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.tblHourPeerDay.DefaultCellStyle = DataGridViewCellStyle4
         Me.tblHourPeerDay.Dock = System.Windows.Forms.DockStyle.Bottom
         Me.tblHourPeerDay.Location = New System.Drawing.Point(0, 132)
         Me.tblHourPeerDay.MultiSelect = False
@@ -341,7 +350,7 @@ Partial Class HoursWeekPeerEmployees
         Me.GroupBox1.Controls.Add(Me.btnNextEmploye)
         Me.GroupBox1.Controls.Add(Me.btnLatsEmploye)
         Me.GroupBox1.Controls.Add(Me.Button9)
-        Me.GroupBox1.Controls.Add(Me.Button8)
+        Me.GroupBox1.Controls.Add(Me.btnTime)
         Me.GroupBox1.Controls.Add(Me.btnExpenses)
         Me.GroupBox1.Controls.Add(Me.Button6)
         Me.GroupBox1.Controls.Add(Me.Button5)
@@ -431,14 +440,14 @@ Partial Class HoursWeekPeerEmployees
         Me.Button9.Text = "<---"
         Me.Button9.UseVisualStyleBackColor = True
         '
-        'Button8
+        'btnTime
         '
-        Me.Button8.Location = New System.Drawing.Point(794, 18)
-        Me.Button8.Name = "Button8"
-        Me.Button8.Size = New System.Drawing.Size(71, 32)
-        Me.Button8.TabIndex = 15
-        Me.Button8.Text = "Time"
-        Me.Button8.UseVisualStyleBackColor = True
+        Me.btnTime.Location = New System.Drawing.Point(794, 18)
+        Me.btnTime.Name = "btnTime"
+        Me.btnTime.Size = New System.Drawing.Size(71, 32)
+        Me.btnTime.TabIndex = 15
+        Me.btnTime.Text = "Time"
+        Me.btnTime.UseVisualStyleBackColor = True
         '
         'btnExpenses
         '
@@ -744,7 +753,7 @@ Partial Class HoursWeekPeerEmployees
     Friend WithEvents btnNextEmploye As Button
     Friend WithEvents btnLatsEmploye As Button
     Friend WithEvents Button9 As Button
-    Friend WithEvents Button8 As Button
+    Friend WithEvents btnTime As Button
     Friend WithEvents btnExpenses As Button
     Friend WithEvents Button6 As Button
     Friend WithEvents Button5 As Button

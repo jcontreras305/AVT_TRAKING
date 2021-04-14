@@ -98,7 +98,7 @@ inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO "
             conectar()
             Dim cmd As New SqlCommand("select 
 exu.idExpenseUsed,
-CONVERT(varchar,exu.dateExpense,1) as 'Date',
+CONVERT(varchar,exu.dateExpense,101) as 'Date',
 CONCAT(wo.idWO,' ',tk.task) as 'Project',
 ex.expenseCode as 'Expense Code',
 exu.amount as 'Amount',

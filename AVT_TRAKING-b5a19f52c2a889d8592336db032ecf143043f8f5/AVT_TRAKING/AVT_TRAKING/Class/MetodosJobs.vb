@@ -354,7 +354,7 @@ wc.billingRateOT as 'Billing RateOT',
 hw.hoursOT as 'Billable OT',
 wc.billingRate3 as 'Billing Rate 3',
 hw.hours3 as 'Billable 3',
-convert (varchar,hw.dateWorked,1 )as 'Date Worked',
+convert (varchar,hw.dateWorked,101 )as 'Date Worked',
 wc.description as 'Description'
 from 
 employees em inner join hoursWorked as hw on em.idEmployee = hw.idEmployee
@@ -379,7 +379,7 @@ where  tk.task = '" + idTask + "' and tk.idAuxWO = '" + idWO + "'", conn)
             Dim cmd As New SqlCommand("
 select
 expu.idExpenseUsed,
-CONVERT (varchar,expu.dateExpense,1) as 'Date',
+CONVERT (varchar,expu.dateExpense,101) as 'Date',
 ex.expenseCode as 'Expense Code',
 expu.amount as 'Amount',
 expu.description as 'Description'
@@ -493,7 +493,7 @@ where tk.task = '" + idTask + "' and tk.idAuxWO = '" + idWO + "'", conn)
             Dim cmd As New SqlCommand("
 select 
 mu.idMaterialUsed,
-convert (varchar,mu.dateMaterial, 1) as 'Date',
+convert (varchar,mu.dateMaterial, 101) as 'Date',
 concat(wo.idWO,' ',tk.task)as 'Work Order',
 mu.amount as 'Amount',
 concat(mt.number,' ', mt.name) as 'Material Code',
@@ -1143,7 +1143,7 @@ where tk.idAux = '" + idAux + "' and wo.idAuxWO = '" + WO + "'", conn)
         Try
             conectar()
             Dim cmd As New SqlCommand("
-                update materialUsed set dateMaterial = '" + datos(1) + "' , amount = " + datos(3) + " ,description = '" + datos(5) + "' , idAux = '" + datos(2) + "',idMaterial = '" + datos(4) + "' where idMaterialUsed = '" + datos(0) + "'", conn)
+                update materialUsed set dateMaterial = '" + datos(1) + "' , amount = " + datos(3) + " ,description = '" + datos(5) + "' , idAux = '" + datos(2) + If(datos(4).Length = 36, "',idMaterial = '" + datos(4), "") + "' where idMaterialUsed = '" + datos(0) + "'", conn)
             If cmd.ExecuteNonQuery = 1 Then
                 UpdateTotalSpendTask(datos(5))
                 desconectar()

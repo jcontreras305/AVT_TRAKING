@@ -34,25 +34,22 @@
             activarCampos(False)
         End If
         txtClientName.Enabled = False
+        dtpBeginDate.Format = DateTimePickerFormat.Custom
+        dtpEndDate.Format = DateTimePickerFormat.Custom
         dtpBeginDate.CustomFormat = "MM/dd/yyyy"
         dtpEndDate.CustomFormat = "MM/dd/yyyy"
         flagAddRecord = False
 
-
-        'tblExpencesProjects.Controls.Add(_dtpExpenses)
-        '_dtpExpenses.Visible = False
-        '_dtpExpenses.Format = DateTimePickerFormat.Custom
-        '_dtpExpenses.Visible = False
-        'AddHandler _dtpExpenses.ValueChanged, AddressOf _dtpExpensesTextChangue
-
         tblMaterialProjects.Controls.Add(_dtpMaterial)
         _dtpMaterial.Visible = False
         _dtpMaterial.Format = DateTimePickerFormat.Custom
-        AddHandler _dtpMaterial.ValueChanged, AddressOf _dtpMaterialTextChangue
+        _dtpMaterial.CustomFormat = "MM/dd/yyyy"
+        AddHandler _dtpMaterial.ValueChanged, AddressOf _dtpMaterialValueChangue
     End Sub
 
-    Private Sub _dtpMaterialTextChangue(sender As Object, e As EventArgs)
-        tblMaterialProjects.CurrentCell.Value = _dtpMaterial.Value.ToString()
+    Private Sub _dtpMaterialValueChangue(sender As Object, e As EventArgs)
+        Dim fecha = If(_dtpMaterial.Value.Month < 10, "0" + _dtpMaterial.Value.Month.ToString(), _dtpMaterial.Value.Month.ToString()) + "/" + If(_dtpMaterial.Value.Day < 10, "0" + _dtpMaterial.Value.Day.ToString(), _dtpMaterial.Value.Day.ToString()) + "/" + _dtpMaterial.Value.Year.ToString()
+        tblMaterialProjects.CurrentCell.Value = fecha
     End Sub
     Private Sub tblMaterialProject_ColumnWithChangue(sender As Object, e As DataGridViewColumnEventArgs) Handles tblMaterialProjects.ColumnWidthChanged
         _dtpMaterial.Visible = False
@@ -63,13 +60,19 @@
     End Sub
 
     Private Sub tblMaterialProjects_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles tblMaterialProjects.CellClick
-        If e.ColumnIndex <> -1 Then
+        If e.ColumnIndex <> -1 And e.RowIndex <> -1 Then
             Select Case tblMaterialProjects.Columns(e.ColumnIndex).Name
                 Case "Date"
+                    Dim fechaAnterior As Date = System.DateTime.Today
+                    If tblMaterialProjects.CurrentCell.Value IsNot DBNull.Value Then
+                        fechaAnterior = validarFechaParaVB(tblMaterialProjects.CurrentCell.Value)
+                    End If
                     _rectangulo = tblMaterialProjects.GetCellDisplayRectangle(e.ColumnIndex, e.RowIndex, True)
                     _dtpMaterial.Size = New Size(_rectangulo.Width, _rectangulo.Height)
                     _dtpMaterial.Location = New Point(_rectangulo.X, _rectangulo.Y)
                     _dtpMaterial.Visible = True
+                    _dtpMaterial.Value = fechaAnterior
+                    _dtpMaterial.CustomFormat = "MM/dd/yyyy"
                 Case "Material Code"
                     Try
                         If tblMaterialProjects.CurrentCell.GetType.Name = "DataGridViewTextBoxCell" Then
@@ -91,7 +94,6 @@
     End Sub
 
     Private Sub DataGridView1_DataError(ByVal sender As Object, ByVal e As DataGridViewDataErrorEventArgs) Handles tblMaterialProjects.DataError
-
         ' Excepción
         Dim ex As Exception = e.Exception
         If e.Exception.Message <> "El valor de DataGridViewComboBoxCell no es válido." Then
@@ -298,7 +300,7 @@
             pjt.manager = cmbProjectManager.Text
             pjt.estimateHour = sprHoursEstimate.Value
             pjt.beginDate = dtpBeginDate.Value
-            pjt.endDate = dtpBeginDate.Value
+            pjt.endDate = dtpEndDate.Value
             Dim datos() As String = cmbExpCode.Text.Split(" ")
             pjt.expCode = datos(0)
             pjt.accountNum = txtAcountNo.Text
@@ -991,6 +993,7 @@
     End Sub
 
 
+
     '================ END DATE ===============================================================================================
     '=========================================================================================================================
 
@@ -1365,7 +1368,7 @@
         Else
             datosMaterial.Add("")
         End If
-        If Not tblMaterialProjects.Rows(fila).Cells("Date").Value Is DBNull.Value Then
+        If tblMaterialProjects.Rows(fila).Cells("Date").Value IsNot DBNull.Value Then
             datosMaterial.Add(validaFechaParaSQl(tblMaterialProjects.Rows(fila).Cells("Date").Value))
         Else
             mensaje = If(mensaje = "", "Please choose a Date.", vbCrLf + "Please choose a Date")
@@ -1381,6 +1384,20 @@
             mensaje = If(mensaje = "", "Check the 'Amount' Cell.", vbCrLf + "Check the 'Amount' Cell.")
         End If
 
+        If tblMaterialProjects.Rows(fila).Cells("Material Code").GetType.Name = "DataGridViewComboBox" Then
+            If tblMaterialProjects.Rows(fila).Cells("Material Code").Value IsNot DBNull.Value Then
+                For Each row As DataRow In listIdsMaterial.Rows
+                    If row.Item(1) = tblMaterialProjects.Rows(fila).Cells("Material Code").Value Then
+                        datosMaterial.Add(row.Item(0))
+                        Exit For
+                    End If
+                Next
+            Else
+                mensaje = If(mensaje = "", "Check the 'Material Code' Cell.", vbCrLf + "Check the 'Material Code' Cell.")
+            End If
+        Else
+            datosMaterial.Add("")
+        End If
 
         If tblMaterialProjects.Rows(fila).Cells("Material Code").Value IsNot DBNull.Value Then
             For Each row As DataRow In listIdsMaterial.Rows

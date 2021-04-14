@@ -10,6 +10,7 @@
 
     Dim _dtpHoras As New DateTimePicker
     Dim _dtpExpenses As New DateTimePicker
+    Dim _dtpSemanal As New DateTimePicker
     Dim _rectangulo As New Rectangle
     Private Sub HoursWeekPeerEmployees_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         mtdHPW.llenarEmpleadosCombo(cmbEmpleados, idsEmployees)
@@ -47,16 +48,27 @@
         tblRecordEmployee.Controls.Add(_dtpHoras)
         _dtpHoras.Visible = False
         _dtpHoras.Format = DateTimePickerFormat.Custom
+        _dtpHoras.CustomFormat = "MM/dd/yyyy"
         AddHandler _dtpHoras.ValueChanged, AddressOf _dtpHoras_ValuesChangue
 
         tblExpenses.Controls.Add(_dtpExpenses)
         _dtpExpenses.Visible = False
         _dtpExpenses.Format = DateTimePickerFormat.Custom
+        _dtpExpenses.CustomFormat = "MM/dd/yyyy"
         AddHandler _dtpExpenses.ValueChanged, AddressOf _dtpExpenses_ValuesChangue
+
+        tblHourPeerDay.Controls.Add(_dtpSemanal)
+        _dtpSemanal.Visible = False
+        _dtpSemanal.Format = DateTimePickerFormat.Custom
+        _dtpSemanal.CustomFormat = "MM/dd/yyyy"
+        AddHandler _dtpSemanal.ValueChanged, AddressOf _dtpSemanal_ValuesChangue
 
         flagPressCellDate = False
         flagPressCellDateExpense = False
+        flagPreesCellDateSemanal = False
     End Sub
+
+
 
     Private Sub btnEmpleados_Click(sender As Object, e As EventArgs) Handles btnEmpleados.Click
         Dim empleadoFrom As New Employees
@@ -72,21 +84,68 @@
     End Sub
 
     Private Sub _dtpHoras_ValuesChangue(sender As Object, e As EventArgs)
-        tblRecordEmployee.CurrentRow.Cells("Date").Value = _dtpHoras.Value.ToString()
+        Dim fecha = If(_dtpHoras.Value.Month < 10, "0" + _dtpHoras.Value.Month.ToString(), _dtpHoras.Value.Month.ToString()) + "/" + If(_dtpHoras.Value.Day < 10, "0" + _dtpHoras.Value.Day.ToString(), _dtpHoras.Value.Day.ToString()) + "/" + _dtpHoras.Value.Year.ToString()
+        tblRecordEmployee.CurrentRow.Cells("Date").Value = fecha
     End Sub
     Private Sub _dtpExpenses_ValuesChangue(sender As Object, e As EventArgs)
-        tblExpenses.CurrentRow.Cells("Date").Value = _dtpExpenses.Value.ToString()
+        Dim fecha = If(_dtpExpenses.Value.Month < 10, "0" + _dtpExpenses.Value.Month.ToString(), _dtpExpenses.Value.Month.ToString()) + "/" + If(_dtpExpenses.Value.Day < 10, "0" + _dtpExpenses.Value.Day.ToString(), _dtpExpenses.Value.Day.ToString()) + "/" + _dtpExpenses.Value.Year.ToString()
+        tblExpenses.CurrentRow.Cells("Date").Value = fecha
+    End Sub
+
+    Private Sub _dtpSemanal_ValuesChangue(sender As Object, e As EventArgs)
+        tblHourPeerDay.CurrentRow.Cells("clmWeekending").Value = _dtpSemanal.Value.ToString()
+        Dim hoursST As Double
+        Dim hoursOT As Double
+        Dim hours3 As Double
+        Dim hourTotal As Double
+        For Each row As DataGridViewRow In tblRecordEmployee.Rows
+
+            Dim diferencia = Date.Compare(validarFechaParaVB(row.Cells("Date").Value), primerDiaDeLaSemana(_dtpSemanal.Value))
+            If diferencia >= 0 Then
+                hoursST += row.Cells("Hours ST").Value
+                hoursOT += row.Cells("Hours OT").Value
+                hours3 += row.Cells("Hours 3").Value
+                hourTotal += (row.Cells("Hours ST").Value + row.Cells("Hours OT").Value + row.Cells("Hours 3").Value)
+
+                Select Case CDate(validarFechaParaVB(row.Cells("Date").Value)).DayOfWeek
+                    Case DayOfWeek.Monday
+                        tblHourPeerDay.Rows(0).Cells("clmMonST").Value = row.Cells("Hours ST").Value
+                        tblHourPeerDay.Rows(0).Cells("clmMonOT").Value = row.Cells("Hours OT").Value
+                    Case DayOfWeek.Tuesday
+                        tblHourPeerDay.Rows(0).Cells("clmTueST").Value = row.Cells("Hours ST").Value
+                        tblHourPeerDay.Rows(0).Cells("clmTueOT").Value = row.Cells("Hours OT").Value
+                    Case DayOfWeek.Wednesday
+                        tblHourPeerDay.Rows(0).Cells("clmWedST").Value = row.Cells("Hours ST").Value
+                        tblHourPeerDay.Rows(0).Cells("clmWedOT").Value = row.Cells("Hours OT").Value
+                    Case DayOfWeek.Thursday
+                        tblHourPeerDay.Rows(0).Cells("clmThuST").Value = row.Cells("Hours ST").Value
+                        tblHourPeerDay.Rows(0).Cells("clmThuOT").Value = row.Cells("Hours OT").Value
+                    Case DayOfWeek.Friday
+                        tblHourPeerDay.Rows(0).Cells("clmFriST").Value = row.Cells("Hours ST").Value
+                        tblHourPeerDay.Rows(0).Cells("clmFriOT").Value = row.Cells("Hours OT").Value
+                    Case DayOfWeek.Saturday
+                        tblHourPeerDay.Rows(0).Cells("clmSatST").Value = row.Cells("Hours ST").Value
+                        tblHourPeerDay.Rows(0).Cells("clmSatOT").Value = row.Cells("Hours OT").Value
+                    Case DayOfWeek.Sunday
+                        tblHourPeerDay.Rows(0).Cells("clmSunST").Value = row.Cells("Hours ST").Value
+                        tblHourPeerDay.Rows(0).Cells("clmSunOT").Value = row.Cells("Hours OT").Value
+                End Select
+            End If
+        Next
     End Sub
 
     Private Sub tblExpenses_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles tblExpenses.CellClick
         If e.ColumnIndex <> -1 And e.RowIndex <> -1 Then
             Select Case tblExpenses.Columns(e.ColumnIndex).Name
                 Case "Date"
+                    Dim fecha = If(System.DateTime.Today.Month < 10, "0" + System.DateTime.Today.Month.ToString(), System.DateTime.Today.Month.ToString()) + "/" + If(System.DateTime.Today.Day < 10, "0" + System.DateTime.Today.Day.ToString(), System.DateTime.Today.Day.ToString()) + "/" + System.DateTime.Today.Year.ToString()
                     _rectangulo = tblExpenses.GetCellDisplayRectangle(e.ColumnIndex, e.RowIndex, True)
                     _dtpExpenses.Size = New Size(_rectangulo.Width, _rectangulo.Height)
                     _dtpExpenses.Location = New Point(_rectangulo.X, _rectangulo.Y)
+                    _dtpExpenses.Value = validarFechaParaVB(If(tblExpenses.CurrentCell.Value Is DBNull.Value, fecha, tblExpenses.CurrentCell.Value))
                     _dtpExpenses.Visible = True
                     flagPressCellDateExpense = True
+                    _dtpExpenses.CustomFormat = "MM/dd/yyyy"
                 Case "Project"
                     Try
                         If tblExpenses.CurrentCell.GetType.Name = "DataGridViewTextBoxCell" Then
@@ -121,15 +180,36 @@
 
     Dim flagPressCellDate As Boolean
     Dim flagPressCellDateExpense As Boolean
+    Dim flagPreesCellDateSemanal As Boolean
+
+    Private Sub tblHourPeerDay_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles tblHourPeerDay.CellClick
+        If e.ColumnIndex <> -1 And e.RowIndex <> -1 Then
+            Select Case tblHourPeerDay.Columns(e.ColumnIndex).Name
+                Case "clmWeekending"
+                    _dtpSemanal.CustomFormat = "MM/dd/yyyy"
+                    _rectangulo = tblHourPeerDay.GetCellDisplayRectangle(e.ColumnIndex, e.RowIndex, True)
+                    _dtpSemanal.Size = New Size(_rectangulo.Width, _rectangulo.Height)
+                    _dtpSemanal.Location = New Point(_rectangulo.X, _rectangulo.Y)
+                    _dtpSemanal.Value = If(tblHourPeerDay.CurrentCell.Value IsNot DBNull.Value, CDate(tblHourPeerDay.CurrentCell.Value), System.DateTime.Today.ToShortDateString())
+                    _dtpSemanal.Visible = True
+                    flagPressCellDate = True
+            End Select
+        End If
+    End Sub
+    Dim flagCellClickRecords As Boolean
     Private Sub tblRecordEmployee_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles tblRecordEmployee.CellClick
         If e.ColumnIndex <> -1 And e.RowIndex <> -1 Then
             Select Case tblRecordEmployee.Columns(e.ColumnIndex).Name
                 Case "Date"
+                    Dim fecha = If(System.DateTime.Today.Month < 10, "0" + System.DateTime.Today.Month.ToString(), System.DateTime.Today.Month.ToString()) + "/" + If(System.DateTime.Today.Day < 10, "0" + System.DateTime.Today.Day.ToString(), System.DateTime.Today.Day.ToString()) + "/" + System.DateTime.Today.Year.ToString()
                     _rectangulo = tblRecordEmployee.GetCellDisplayRectangle(e.ColumnIndex, e.RowIndex, True)
                     _dtpHoras.Size = New Size(_rectangulo.Width, _rectangulo.Height)
                     _dtpHoras.Location = New Point(_rectangulo.X, _rectangulo.Y)
                     _dtpHoras.Visible = True
+                    _dtpHoras.Value = validarFechaParaVB(If(tblRecordEmployee.CurrentCell.Value Is DBNull.Value, fecha, tblRecordEmployee.CurrentCell.Value))
                     flagPressCellDate = True
+                    flagCellClickRecords = True
+                    _dtpHoras.CustomFormat = "MM/dd/yyyy"
                 Case "Project"
                     Try
                         If tblRecordEmployee.CurrentCell.GetType.Name = "DataGridViewTextBoxCell" Then
@@ -138,10 +218,9 @@
                                 mtdHPW.llenarComboCellProject(cmbProyect, proyectTable)
                             End With
                             tblRecordEmployee.CurrentRow.Cells("Project") = cmbProyect
-                        Else
-                            tblRecordEmployee.CurrentRow.Cells("Project") = tblRecordEmployee.CurrentCell
                         End If
                         flagFilaActual = "ProjectHours"
+                        flagCellClickRecords = True
                     Catch ex As Exception
 
                     End Try
@@ -153,10 +232,9 @@
                                 mtdHPW.llenarComboCellWorkCode(cmbWorkCode, workCodeTable)
                             End With
                             tblRecordEmployee.CurrentRow.Cells("Work Code") = cmbWorkCode
-                        Else
-                            tblRecordEmployee.CurrentRow.Cells("Work Code") = tblRecordEmployee.CurrentCell
                         End If
                         flagFilaActual = "WorkCode"
+                        flagCellClickRecords = True
                     Catch ex As Exception
 
                     End Try
@@ -167,10 +245,9 @@
                             cmbShift.Items.Add("Day")
                             cmbShift.Items.Add("Nigth")
                             tblRecordEmployee.CurrentRow.Cells("Shift") = cmbShift
-                        Else
-                            tblRecordEmployee.CurrentRow.Cells("Shift") = tblRecordEmployee.CurrentCell
                         End If
                         flagFilaActual = "Shift"
+                        flagCellClickRecords = True
                     Catch ex As Exception
 
                     End Try
@@ -184,33 +261,36 @@
     'evento para los combo declarados en cada celda
     Public Sub cmb_SelectedIndexChangued(sender As Object, e As EventArgs)
         Dim cmb As ComboBox = CType(sender, ComboBox)
-        If tblRecordEmployee.CurrentCell.ColumnIndex = tblRecordEmployee.Columns("Project").Index Then
-            For Each row As DataRow In proyectTable.Rows
-                If cmb.Text <> "" Then
-                    If cmb.Text = row.ItemArray(1) Then
-                        tblRecordEmployee.CurrentRow.Cells("Project Description").Value = row.ItemArray(2)
-                        Exit For
-                    End If
-                End If
-            Next
-        ElseIf tblRecordEmployee.CurrentCell.ColumnIndex = tblRecordEmployee.Columns("Work Code").Index Then
-            For Each row As DataRow In workCodeTable.Rows
-                If cmb IsNot "" Then
-                    If cmb.Text = row.ItemArray(1) Then
-                        If tblRecordEmployee.CurrentRow.Cells(0).Value Is DBNull.Value Then
-                            tblRecordEmployee.CurrentRow.Cells("Hours ST").Value = "0"
-                            tblRecordEmployee.CurrentRow.Cells("Hours OT").Value = "0"
-                            tblRecordEmployee.CurrentRow.Cells("Hours 3").Value = "0"
+        If flagCellClickRecords = True Then
+            If tblRecordEmployee.CurrentCell.ColumnIndex = tblRecordEmployee.Columns("Project").Index Then
+                For Each row As DataRow In proyectTable.Rows
+                    If cmb.Text <> "" Then
+                        If cmb.Text = row.ItemArray(1) Then
+                            tblRecordEmployee.CurrentRow.Cells("Project Description").Value = row.ItemArray(2)
+                            Exit For
                         End If
-                        tblRecordEmployee.CurrentRow.Cells("Clasification").Value = row.ItemArray(2)
-                        tblRecordEmployee.CurrentRow.Cells("Billing Rate").Value = row.ItemArray(3)
-                        tblRecordEmployee.CurrentRow.Cells("Billing Rate OT").Value = row.ItemArray(4)
-                        tblRecordEmployee.CurrentRow.Cells("Billing Rate 3").Value = row.ItemArray(5)
-                        Exit For
                     End If
-                End If
-            Next
+                Next
+            ElseIf tblRecordEmployee.CurrentCell.ColumnIndex = tblRecordEmployee.Columns("Work Code").Index Then
+                For Each row As DataRow In workCodeTable.Rows
+                    If cmb.Text IsNot "" Then
+                        If cmb.Text = row.ItemArray(1) Then
+                            If tblRecordEmployee.CurrentRow.Cells(0).Value Is DBNull.Value Then
+                                tblRecordEmployee.CurrentRow.Cells("Hours ST").Value = "0"
+                                tblRecordEmployee.CurrentRow.Cells("Hours OT").Value = "0"
+                                tblRecordEmployee.CurrentRow.Cells("Hours 3").Value = "0"
+                            End If
+                            tblRecordEmployee.CurrentRow.Cells("Clasification").Value = row.ItemArray(2)
+                            tblRecordEmployee.CurrentRow.Cells("Billing Rate").Value = row.ItemArray(3)
+                            tblRecordEmployee.CurrentRow.Cells("Billing Rate OT").Value = row.ItemArray(4)
+                            tblRecordEmployee.CurrentRow.Cells("Billing Rate 3").Value = row.ItemArray(5)
+                            Exit For
+                        End If
+                    End If
+                Next
+            End If
         End If
+        flagCellClickRecords = False
     End Sub
 
     Private Sub tblExpenses_ColumnWithChangue(sender As Object, e As DataGridViewColumnEventArgs) Handles tblExpenses.ColumnWidthChanged
@@ -228,6 +308,7 @@
 
     Private Sub tblRecordEmployee_Scroll(sender As Object, e As ScrollEventArgs) Handles tblRecordEmployee.Scroll
         _dtpHoras.Visible = False
+
     End Sub
 
     Private Sub cmbEmpleados_SelectionChangeCommitted(sender As Object, e As EventArgs) Handles cmbEmpleados.SelectionChangeCommitted, cmbEmpleados.SelectedValueChanged
@@ -262,7 +343,7 @@
         mtdHPW.buscarHoras(tblRecordEmployee, idsEmployees.Rows(index).ItemArray(0))
         mtdHPW.bucarExpensesEmpleado(tblExpenses, idsEmployees.Rows(index).ItemArray(0))
         tblHourPeerDay.Rows.Clear()
-        tblHourPeerDay.Rows.Add(primerDiaDeLaSemana(System.DateTime.Today.ToShortDateString()).ToShortDateString(), idsEmployees.Rows(index).ItemArray(1), 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+        tblHourPeerDay.Rows.Add(ultimoDiaDeLaSemana(System.DateTime.Today.ToShortDateString()).ToShortDateString(), idsEmployees.Rows(index).ItemArray(1), 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
         pcbPhoto.Image = BytetoImage(idsEmployees.Rows(index).ItemArray(2))
         lblEmployeeNumber.Text = idsEmployees.Rows(index).ItemArray(4)
         lblNombreEmployee.Text = idsEmployees.Rows(index).ItemArray(1)
@@ -349,7 +430,7 @@
     End Sub
 
     Private Sub tblExpenses_EditingControlShowing(sender As Object, e As DataGridViewEditingControlShowingEventArgs) Handles tblExpenses.EditingControlShowing
-        If tblExpenses.CurrentCell.ColumnIndex = 1 Then
+        If tblExpenses.CurrentCell.ColumnIndex = 2 Then
             Dim cb As ComboBox = CType(e.Control, ComboBox)
             If e.Control IsNot Nothing Then
                 RemoveHandler cb.SelectedIndexChanged, AddressOf cmb_SelectedIndexChangued
@@ -505,7 +586,7 @@
             list.Add(tblRecordEmployee.Rows(index).Cells("Date").Value)
         Else
             If tblRecordEmployee.Rows(index).Cells("Date").Value IsNot DBNull.Value Then
-                list.Add(validaFechaParaSQl(tblRecordEmployee.Rows(index).Cells("Date").Value))
+                list.Add(validaFechaParaSQl(tblRecordEmployee.Rows(index).Cells("Date").Value.ToString()))
             Else
                 mensaje = If(mensaje = "", "Please choose a Date.", vbCrLf + " Please choose a Date")
             End If
@@ -681,5 +762,17 @@
             mtdHPW.bucarExpensesEmpleado(tblExpenses, idEmpleado)
             cargarDatos(idEmpleado)
         End If
+    End Sub
+
+    Private Sub btnTime_Click(sender As Object, e As EventArgs) Handles btnTime.Click
+        Try
+            Dim openFile As New OpenFileDialog
+            openFile.DefaultExt = "*.xlsx"
+            openFile.Filter = "Archivos de Excel (*.xlsx)|*.xlsx"
+            openFile.ShowDialog()
+            Dim ApExcel = New Microsoft.Office.Interop.Excel.Application
+        Catch ex As Exception
+
+        End Try
     End Sub
 End Class
