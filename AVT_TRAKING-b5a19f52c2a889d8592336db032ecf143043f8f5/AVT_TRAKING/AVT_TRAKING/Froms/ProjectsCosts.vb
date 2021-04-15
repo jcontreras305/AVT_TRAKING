@@ -180,10 +180,10 @@
             Next
             If index = contRow - 1 Then
                 index = 0
-                cargarDatosProjecto(tablasDeTareas.Rows(index).ItemArray(0), tablasDeTareas.Rows(index).ItemArray(2), tablasDeTareas.Rows(index).ItemArray(3))
+                cargarDatosProjecto(tablasDeTareas.Rows(index).ItemArray(0), tablasDeTareas.Rows(index).ItemArray(5), tablasDeTareas.Rows(index).ItemArray(3))
             Else
                 index += 1
-                cargarDatosProjecto(tablasDeTareas.Rows(index).ItemArray(0), tablasDeTareas.Rows(index).ItemArray(2), tablasDeTareas.Rows(index).ItemArray(3))
+                cargarDatosProjecto(tablasDeTareas.Rows(index).ItemArray(0), tablasDeTareas.Rows(index).ItemArray(5), tablasDeTareas.Rows(index).ItemArray(3))
             End If
         End If
     End Sub
@@ -201,11 +201,11 @@
             Next
             If index = 0 Then
                 index = contRow - 1
-                cargarDatosProjecto(tablasDeTareas.Rows(index).ItemArray(0), tablasDeTareas.Rows(index).ItemArray(2), tablasDeTareas.Rows(index).ItemArray(3))
+                cargarDatosProjecto(tablasDeTareas.Rows(index).ItemArray(0), tablasDeTareas.Rows(index).ItemArray(5), tablasDeTareas.Rows(index).ItemArray(3))
 
             Else
                 index -= 1
-                cargarDatosProjecto(tablasDeTareas.Rows(index).ItemArray(0), tablasDeTareas.Rows(index).ItemArray(2), tablasDeTareas.Rows(index).ItemArray(3))
+                cargarDatosProjecto(tablasDeTareas.Rows(index).ItemArray(0), tablasDeTareas.Rows(index).ItemArray(5), tablasDeTareas.Rows(index).ItemArray(3))
             End If
         End If
     End Sub
@@ -223,6 +223,8 @@
             dtpBeginDate.Value = pjtNuevo.beginDate
             dtpEndDate.Value = pjtNuevo.endDate
             lblWorkOrder.Text = ""
+            pjtNuevo.manager = If(cmbProjectManager.SelectedItem <> Nothing, cmbProjectManager.SelectedItem, "")
+            pjtNuevo.expCode = If(cmbExpCode.SelectedItem <> Nothing, cmbExpCode.SelectedItem, "")
         Else
             If mtdJobs.insertarNuevaTarea(pjtNuevo) Then
                 MsgBox("Successful")

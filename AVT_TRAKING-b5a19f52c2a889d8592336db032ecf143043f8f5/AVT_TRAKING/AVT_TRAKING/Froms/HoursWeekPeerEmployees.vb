@@ -711,12 +711,12 @@
             Try
                 Dim array = txtFindFecha.Text.Split(" ")
                 If array.Count = 1 Then
-                    Dim fecha1 As Date = array(0)
-                    Dim fecha2 As Date = array(0)
+                    Dim fecha1 As Date = validarFechaParaVB(array(0))
+                    Dim fecha2 As Date = validarFechaParaVB(array(0))
                     mtdHPW.buscarHoras(tblRecordEmployee, idEmpleado, validaFechaParaSQl(fecha1), validaFechaParaSQl(fecha2))
                 ElseIf array.Count = 3 Then
-                    Dim fecha1 As Date = array(0)
-                    Dim fecha2 As Date = array(2)
+                    Dim fecha1 As Date = validarFechaParaVB(array(0))
+                    Dim fecha2 As Date = validarFechaParaVB(array(2))
                     mtdHPW.buscarHoras(tblRecordEmployee, idEmpleado, validaFechaParaSQl(fecha1), validaFechaParaSQl(fecha2))
                 End If
             Catch ex As Exception

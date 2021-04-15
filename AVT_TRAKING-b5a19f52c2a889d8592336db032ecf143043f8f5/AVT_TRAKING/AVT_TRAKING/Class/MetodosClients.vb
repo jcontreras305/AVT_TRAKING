@@ -167,7 +167,7 @@ ha.idHomeAdress, ha.avenue ,ha.number, ha.city ,ha.providence,ha.postalCode from
                 Dim dt As New DataTable
                 da.Fill(dt)
                 tabla.DataSource = dt
-                If tabla.Columns.Count <= 20 Then
+                If tabla.Columns.Count <= 22 Then
                     Dim clmChb As New DataGridViewCheckBoxColumn
                     tabla.Columns("idClient").Visible = False
                     clmChb.Name = "Complete"

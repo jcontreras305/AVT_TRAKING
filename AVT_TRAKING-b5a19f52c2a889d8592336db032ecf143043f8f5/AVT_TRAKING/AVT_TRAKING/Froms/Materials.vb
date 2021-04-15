@@ -26,7 +26,8 @@ Public Class Materials
         btnCancelOrder.Enabled = False
         ActivarCamposMaterialData(False)
         llenarTablas()
-
+        dtpFechaOrden.CustomFormat = "MM/dd/yyyy"
+        dtpFechaOrden.Format = DateTimePickerFormat.Custom
     End Sub
 
     Private Sub btnSaveVendor_Click(sender As Object, e As EventArgs) Handles btnSaveVendor.Click

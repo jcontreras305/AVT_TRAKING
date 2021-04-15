@@ -304,9 +304,10 @@ from workOrder
                 End If
             Else ' en este caso se debe insertar un nuevo PO un WO y el nuevo TASk
                 Dim cmdInsertNewPO As New SqlCommand("insert into projectOrder values (" + projectN.idPO + "," + CStr(projectN.jobNum) + ")", conn)
-                Dim cmdInsertNewWO As New SqlCommand("insert into workOrder values('" + projectN.idWorkOrder + "'," + CStr(projectN.jobNum) + ")", conn)
+                Dim newWO = System.Guid.NewGuid.ToString()
+                Dim cmdInsertNewWO As New SqlCommand("insert into workOrder values('" + newWO + "','" + projectN.idWorkOrder + "'," + CStr(projectN.idPO) + ")", conn)
                 Dim cmdInsertTask2 As New SqlCommand("insert into task 
-                        values (NEWID(),'" + CStr(projectN.idTask) + "','" + projectN.idWorkOrder + "',0.0,'" + projectN.equipament + "','" + projectN.manager + "'
+                        values (NEWID(),'" + CStr(projectN.idTask) + "','" + newWO + "',0.0,'" + projectN.equipament + "','" + projectN.manager + "'
                         ,'" + projectN.description + "'," + CStr(projectN.totalBilling) + ",'" + validaFechaParaSQl(projectN.beginDate) + "','" + validaFechaParaSQl(projectN.endDate) + "'
                         ,'" + projectN.expCode + "','" + projectN.accountNum + "'," + CStr(projectN.estimateHour) + ",'" + CStr(projectN.status) + "')", conn)
                 Dim tranPO As SqlTransaction
@@ -314,11 +315,16 @@ from workOrder
                 cmdInsertNewPO.Transaction = tranPO
                 cmdInsertNewWO.Transaction = tranPO
                 cmdInsertTask2.Transaction = tranPO
-                If cmdInsertNewPO.ExecuteNonQuery > 0 Then
-                    If cmdInsertNewWO.ExecuteNonQuery > 0 Then
-                        If cmdInsertTask2.ExecuteNonQuery > 0 Then
-                            tranPO.Commit()
-                            Return True
+                Try
+                    If cmdInsertNewPO.ExecuteNonQuery > 0 Then
+                        If cmdInsertNewWO.ExecuteNonQuery > 0 Then
+                            If cmdInsertTask2.ExecuteNonQuery > 0 Then
+                                tranPO.Commit()
+                                Return True
+                            Else
+                                tranPO.Rollback()
+                                Return False
+                            End If
                         Else
                             tranPO.Rollback()
                             Return False
@@ -327,10 +333,12 @@ from workOrder
                         tranPO.Rollback()
                         Return False
                     End If
-                Else
+                Catch ex As Exception
+                    MsgBox(ex.Message())
                     tranPO.Rollback()
+                    desconectar()
                     Return False
-                End If
+                End Try
             End If
         Catch ex As Exception
             MsgBox(ex.Message())
@@ -738,13 +746,14 @@ tk.estimateHours,
 tk.expCode,
 tk.accountNum,
 tk.status,
-tk.idAux
+tk.idAux,
+tk.idAuxWO
 from 
 job as jb 
 inner join clients as cl on jb.idClient = cl.idClient
 inner join projectOrder as po on jb.jobNo = po.jobNo 
 left join workOrder as wo on po.idPO = wo.idPO
-left join task as tk on tk.idWO = wo.idWO
+left join task as tk on tk.idAuxWO = wo.idAuxWO 
 where jb.jobNo = " + If(idJob = "", "0", idJob).ToString() + " and tk.task = '" + task + "'", conn)
             Dim lstDatosPO As New List(Of String)
             Dim reader As SqlDataReader = cmd.ExecuteReader()
@@ -764,6 +773,7 @@ where jb.jobNo = " + If(idJob = "", "0", idJob).ToString() + " and tk.task = '" 
                 lstDatosPO.Add(reader("accountNum"))
                 lstDatosPO.Add(reader("status"))
                 lstDatosPO.Add(reader("idAux"))
+                lstDatosPO.Add(reader("idAuxWO"))
                 Exit While
             End While
             desconectar()

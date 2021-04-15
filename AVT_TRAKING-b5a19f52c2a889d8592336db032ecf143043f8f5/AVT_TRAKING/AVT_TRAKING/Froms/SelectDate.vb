@@ -19,7 +19,11 @@
 
     Private Sub btnAcept_Click(sender As Object, e As EventArgs) Handles btnAcept.Click
         Dim hwpe As HoursWeekPeerEmployees = CType(Owner, HoursWeekPeerEmployees)
-        hwpe.txtFindFecha.Text = fechaStart.ToShortDateString() + " to " + fechaEnd.ToShortDateString()
+        If fechaStart <> fechaEnd Then
+            hwpe.txtFindFecha.Text = txtFechaStart.Text + " to " + txtFechaEnd.Text()
+        Else
+            hwpe.txtFindFecha.Text = txtFechaStart.Text
+        End If
         hwpe.fechaStart = fechaStart
         hwpe.fechaEnd = fechaEnd
         Me.Close()
@@ -28,7 +32,7 @@
     Private Sub mtcCalendar_DateChanged(sender As Object, e As DateRangeEventArgs) Handles mtcCalendar.DateChanged
         fechaStart = mtcCalendar.SelectionStart.ToShortDateString()
         fechaEnd = mtcCalendar.SelectionEnd.ToShortDateString()
-        txtFechaStart.Text = mtcCalendar.SelectionStart.ToShortDateString()
-        txtFechaEnd.Text = mtcCalendar.SelectionEnd.ToShortDateString()
+        txtFechaStart.Text = If(mtcCalendar.SelectionStart.Month < 10, "0" + mtcCalendar.SelectionStart.Month.ToString(), mtcCalendar.SelectionStart.Month.ToString()) + "/" + If(mtcCalendar.SelectionStart.Day < 10, "0" + mtcCalendar.SelectionStart.Day.ToString(), mtcCalendar.SelectionStart.Day.ToString()) + "/" + mtcCalendar.SelectionStart.Year.ToString()
+        txtFechaEnd.Text = If(mtcCalendar.SelectionEnd.Month < 10, "0" + mtcCalendar.SelectionEnd.Month.ToString(), mtcCalendar.SelectionEnd.Month.ToString()) + "/" + If(mtcCalendar.SelectionEnd.Day < 10, "0" + mtcCalendar.SelectionEnd.Day.ToString(), mtcCalendar.SelectionEnd.Day.ToString()) + "/" + mtcCalendar.SelectionEnd.Year.ToString()
     End Sub
 End Class

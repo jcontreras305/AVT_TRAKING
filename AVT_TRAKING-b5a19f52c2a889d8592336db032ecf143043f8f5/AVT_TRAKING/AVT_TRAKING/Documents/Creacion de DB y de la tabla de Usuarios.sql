@@ -51,7 +51,7 @@ create table typeEmployee(
 )
 GO
 
-insert into typeEmployee values ('Manger'),('Normal')
+insert into typeEmployee values ('Manager'),('Normal')
 GO
 
 create table workTMLumpSum (
