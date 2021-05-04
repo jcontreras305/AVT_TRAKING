@@ -341,6 +341,9 @@
             index += 1
         Next
         mtdHPW.buscarHoras(tblRecordEmployee, idsEmployees.Rows(index).ItemArray(0))
+        tblRecordEmployee.Columns("Billing Rate").ReadOnly = True
+        tblRecordEmployee.Columns("Billing Rate OT").ReadOnly = True
+        tblRecordEmployee.Columns("Billing Rate 3").ReadOnly = True
         mtdHPW.bucarExpensesEmpleado(tblExpenses, idsEmployees.Rows(index).ItemArray(0))
         tblHourPeerDay.Rows.Clear()
         tblHourPeerDay.Rows.Add(ultimoDiaDeLaSemana(System.DateTime.Today.ToShortDateString()).ToShortDateString(), idsEmployees.Rows(index).ItemArray(1), 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
@@ -448,13 +451,23 @@
         AbsEmp.idEmpleado = idEmpleado
         AbsEmp.ShowDialog()
     End Sub
-
+    Dim listRowCopy As New List(Of Object)
+    Dim listRowCopyrecords As New List(Of String())
+    Dim listRowCopyExp As New List(Of String())
     Private Sub tblRecordEmployee_KeyPress(sender As Object, e As KeyPressEventArgs) Handles tblRecordEmployee.KeyPress
         If Asc(e.KeyChar) = Keys.Enter Then
             If recolectarDatosRecord() Then
                 cargarDatos(idEmpleado)
                 flagPressCellDate = False
             End If
+        ElseIf Asc(e.KeyChar) = 3 Then
+            listRowCopyrecords.Clear()
+            For Each row As DataGridViewRow In tblRecordEmployee.SelectedRows
+                Dim dataCells() As String = {row.Cells("Date").Value.ToString(), row.Cells("Project").Value.ToString(), row.Cells("Project Description").Value.ToString(), row.Cells("Work Code").Value.ToString(), row.Cells("Clasification").Value.ToString(), row.Cells("Hours ST").Value.ToString(), row.Cells("Hours OT").Value.ToString(), row.Cells("Hours 3").Value.ToString(), row.Cells("Shift").Value.ToString(), row.Cells("Billing Rate").Value.ToString(), row.Cells("Billing Rate OT").Value.ToString(), row.Cells("Billing Rate 3").Value.ToString()}
+                listRowCopyrecords.Add(dataCells)
+            Next
+        ElseIf Asc(e.KeyChar) = 22 Then
+            pegarFilas(listRowCopyrecords, tblRecordEmployee)
         End If
     End Sub
 
@@ -464,6 +477,14 @@
                 cargarDatos(idEmpleado)
                 flagPressCellDateExpense = False
             End If
+        ElseIf Asc(e.KeyChar) = 3 Then
+            listRowCopy.Clear()
+            For Each row As DataGridViewRow In tblExpenses.SelectedRows
+                Dim dataCell() As String = {row.Cells("Date").Value.ToString(), row.Cells("Project").Value.ToString(), row.Cells("Expense Code").Value.ToString(), row.Cells("Amount").Value.ToString(), row.Cells("Description").Value.ToString()}
+                listRowCopyExp.Add(dataCell)
+            Next
+        ElseIf Asc(e.KeyChar) = 22 Then
+            pegarFilas(listRowCopyExp, tblExpenses)
         End If
     End Sub
 
@@ -553,7 +574,90 @@
         End If
 
     End Function
+    Public Function recolectarDatosExpenses(ByVal index As Integer) As Boolean
+        Dim list As New List(Of String)
+        Dim mensaje As String = ""
+        If tblExpenses.Rows(index).Cells("idExpenseUsed").Value IsNot DBNull.Value Then
+            list.Add(tblExpenses.Rows(index).Cells("idExpenseUsed").Value)
+        Else
+            list.Add("")
+        End If
 
+        If Not flagPressCellDateExpense Then
+            list.Add(tblExpenses.Rows(index).Cells("Date").Value)
+        Else
+            If tblExpenses.Rows(index).Cells("Date").Value IsNot DBNull.Value Then
+                list.Add(validaFechaParaSQl(tblExpenses.Rows(index).Cells("Date").Value))
+            Else
+                mensaje = If(mensaje = "", "Please choose a Date.", vbCrLf + " Please choose a Date")
+            End If
+        End If
+
+        If tblExpenses.Rows(index).Cells("Amount").Value IsNot DBNull.Value Then
+            list.Add(tblExpenses.Rows(index).Cells("Amount").Value)
+        Else
+            mensaje = If(mensaje = "", "The 'Amount' will be 0.", vbCrLf + " The 'Amount' will be 0.")
+            list.Add("0")
+        End If
+
+        If tblExpenses.Rows(index).Cells("Description").Value IsNot DBNull.Value Then
+            list.Add(tblExpenses.Rows(index).Cells("Description").Value)
+        Else
+            mensaje = If(mensaje = "", "The 'Description' will be Noting.", vbCrLf + " The 'Description' will be Noting.")
+            list.Add("")
+        End If
+
+        If tblExpenses.Rows(index).Cells("Expense Code").Value IsNot DBNull.Value Then
+            For Each row As DataRow In expenseCodeTable.Rows
+                If row.ItemArray(1) = tblExpenses.Rows(index).Cells("Expense Code").Value Then
+                    list.Add(row.ItemArray(0)) 'workCode
+                    Exit For
+                End If
+            Next
+        Else
+            mensaje = If(mensaje = "", "Please choose a Expense Code.", vbCrLf + " Please choose a Expense Code")
+        End If
+
+        If tblExpenses.Rows(index).Cells("Project").Value IsNot DBNull.Value Then
+            For Each row As DataRow In proyectTable.Rows
+                If row.ItemArray(1) = tblExpenses.Rows(index).Cells("Project").Value Then
+                    list.Add(row.ItemArray(0)) '
+                    Exit For
+                End If
+            Next
+        Else
+            mensaje = If(mensaje = "", "Please choose a Proyect.", vbCrLf + " Please choose a Proyect")
+        End If
+
+        list.Add(idEmpleado)
+
+        If mensaje = "" Then
+            If list(0) = "" Then
+                If DialogResult.OK = MessageBox.Show("If you accept the new expense will be inserted.", "Important", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) Then
+                    If mtdHPW.insertExpensesUsed(list) Then
+                        Return True
+                    Else
+                        Return False
+                    End If
+                Else
+                    Return False
+                End If
+            Else
+                If DialogResult.OK = MessageBox.Show("If you accept the expense will be updated.", "Important", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) Then
+                    If mtdHPW.updateExpensesUsed(list) Then
+                        Return True
+                    Else
+                        Return False
+                    End If
+                Else
+                    Return False
+                End If
+            End If
+        Else
+            MessageBox.Show(mensaje, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Return False
+        End If
+    End Function
     Private Function recolectarDatosRecord() As Boolean
         Dim list As New List(Of String)
         Dim mensaje As String = ""
@@ -592,6 +696,101 @@
             End If
         End If
 
+
+        list.Add(idEmpleado)
+
+        If tblRecordEmployee.Rows(index).Cells("Work Code").Value IsNot DBNull.Value Then
+            For Each row As DataRow In workCodeTable.Rows
+                If row.ItemArray(1) = tblRecordEmployee.Rows(index).Cells("Work Code").Value Then
+                    list.Add(row.ItemArray(0)) 'workCode
+                    Exit For
+                End If
+            Next
+        Else
+            mensaje = If(mensaje = "", "Please choose a Work Code.", vbCrLf + " Please choose a Work Code")
+        End If
+
+        If tblRecordEmployee.Rows(index).Cells("Project").Value IsNot DBNull.Value Then
+            For Each row As DataRow In proyectTable.Rows
+                If row.ItemArray(1) = tblRecordEmployee.Rows(index).Cells("Project").Value Then
+                    list.Add(row.ItemArray(0)) '
+                    Exit For
+                End If
+            Next
+        Else
+            mensaje = If(mensaje = "", "Please choose a Proyect.", vbCrLf + " Please choose a Proyect")
+        End If
+
+
+        If tblRecordEmployee.Rows(index).Cells("Shift").Value IsNot DBNull.Value Then
+            list.Add(tblRecordEmployee.Rows(index).Cells("Shift").Value)
+        Else
+            mensaje = If(mensaje = "", "Please choose a Scheduel in the colum 'Shift'.", vbCrLf + " Please choose a Scheduel in the colum 'Shift'")
+        End If
+
+        If mensaje = "" Then
+            If list(0) = "" Then
+                If DialogResult.OK = MessageBox.Show("If you accept the new record will be inserted.", "Important", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) Then
+                    If mtdHPW.InsertarRecord(list) Then
+                        Return True
+                    Else
+                        Return False
+                    End If
+                Else
+                    Return False
+                End If
+            Else
+                If DialogResult.OK = MessageBox.Show("If you accept the record will be updated.", "Important", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) Then
+                    If mtdHPW.updateRecord(list) Then
+                        Return True
+                    Else
+                        Return False
+                    End If
+                Else
+                    Return False
+                End If
+            End If
+        Else
+            MessageBox.Show(mensaje, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Return False
+        End If
+    End Function
+    Private Function recolectarDatosRecord(ByVal index As Integer) As Boolean
+        Dim list As New List(Of String)
+        Dim mensaje As String = ""
+        If tblRecordEmployee.Rows(index).Cells("idHorsWorked").Value IsNot DBNull.Value Then
+            list.Add(tblRecordEmployee.Rows(index).Cells("idHorsWorked").Value)
+        Else
+            list.Add("")
+        End If
+
+        If tblRecordEmployee.Rows(0).Cells("Hours ST").Value IsNot DBNull.Value Then
+            list.Add(tblRecordEmployee.Rows(index).Cells("Hours ST").Value)
+        Else
+            mensaje = If(mensaje = "", "Please assign some Hours.", vbCrLf + " Please assign some Hours")
+        End If
+
+        If tblRecordEmployee.Rows(index).Cells("Hours OT").Value IsNot DBNull.Value Then
+            list.Add(tblRecordEmployee.Rows(index).Cells("Hours OT").Value)
+        Else
+            list.Add("0")
+        End If
+
+        If tblRecordEmployee.Rows(index).Cells("Hours 3").Value IsNot DBNull.Value Then
+            list.Add(tblRecordEmployee.Rows(index).Cells("Hours 3").Value)
+        Else
+            list.Add("0")
+        End If
+
+        If Not flagPressCellDate Then
+            list.Add(tblRecordEmployee.Rows(index).Cells("Date").Value)
+        Else
+            If tblRecordEmployee.Rows(index).Cells("Date").Value IsNot DBNull.Value Then
+                list.Add(validaFechaParaSQl(tblRecordEmployee.Rows(index).Cells("Date").Value.ToString()))
+            Else
+                mensaje = If(mensaje = "", "Please choose a Date.", vbCrLf + " Please choose a Date")
+            End If
+        End If
 
         list.Add(idEmpleado)
 
@@ -764,15 +963,72 @@
         End If
     End Sub
 
-    Private Sub btnTime_Click(sender As Object, e As EventArgs) Handles btnTime.Click
-        Try
-            Dim openFile As New OpenFileDialog
-            openFile.DefaultExt = "*.xlsx"
-            openFile.Filter = "Archivos de Excel (*.xlsx)|*.xlsx"
-            openFile.ShowDialog()
-            Dim ApExcel = New Microsoft.Office.Interop.Excel.Application
-        Catch ex As Exception
+    'Private Sub tblRecordEmployee_RowsRemoved(sender As Object, e As DataGridViewRowsRemovedEventArgs) Handles tblRecordEmployee.RowsRemoved
+    '    If tblRecordEmployee.SelectedRows.Count > 0 Then
+    '        For Each row As DataGridViewRow In tblRecordEmployee.SelectedRows
+    '            Dim idTask As String = ""
+    '            For Each fila As DataRow In proyectTable.Rows
+    '                If fila.ItemArray(1) = tblRecordEmployee.Rows(row.Index).Cells("Project").Value Then
+    '                    idTask = fila.ItemArray(0)
+    '                    Exit For
+    '                End If
+    '            Next
+    '            mtdHPW.deleteRecordEmployee(row.Cells("idHorsWorked").Value, idTask)
+    '        Next
+    '    End If
+    '    mtdHPW.buscarHoras(tblRecordEmployee, idEmpleado)
+    '    cargarDatos(idEmpleado)
+    'End Sub
 
-        End Try
+    Private Sub btnInsert_Click(sender As Object, e As EventArgs) Handles btnInsert.Click
+        If TabControl1.SelectedTab.Name = "tbpTimeWorked" Then
+            Dim listError As New List(Of String)
+            For Each row As DataGridViewRow In tblRecordEmployee.SelectedRows
+                If Not recolectarDatosRecord(row.Index) Then
+                    listError.Add(row.Cells(0).Value.ToString())
+                End If
+            Next
+            If tblRecordEmployee.SelectedRows.Count() > 0 Then
+                cargarDatos(idEmpleado)
+            Else
+                MessageBox.Show("Please chose a ROW.", "Important", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+            End If
+            If listError.Count > 0 Then
+                For Each row As DataGridViewRow In tblRecordEmployee.Rows
+                    If listError.Exists(row.Cells(0).Value) Then
+                        tblRecordEmployee.Rows(row.Index).DefaultCellStyle.BackColor = Color.Orange
+                    End If
+                Next
+            End If
+            flagPressCellDate = False
+        ElseIf TabControl1.SelectedTab.Name = "tbpExpenses" Then
+            Dim listError As New List(Of String)
+            For Each row As DataGridViewRow In tblExpenses.SelectedRows
+                If Not recolectarDatosExpenses(row.Index) Then
+                    listError.Add(row.Cells(0).Value.ToString())
+                End If
+            Next
+            If tblExpenses.SelectedRows.Count() > 0 Then
+                cargarDatos(idEmpleado)
+            Else
+                MessageBox.Show("Please chose a ROW.", "Important", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+            End If
+            If listError.Count > 0 Then
+                For Each row As DataGridViewRow In tblExpenses.Rows
+                    If listError.Exists(row.Cells(0).Value) Then
+                        tblExpenses.Rows(row.Index).DefaultCellStyle.BackColor = Color.Orange
+                    End If
+                Next
+            End If
+            flagPressCellDateExpense = False
+        End If
+    End Sub
+
+    Private Sub btnTime_Click(sender As Object, e As EventArgs) Handles btnTime.Click
+        Dim timeSheet As New TimeSheet
+        timeSheet.tablaEmpleadosId = idsEmployees
+        timeSheet.tablaProject = proyectTable
+        timeSheet.tablaWorkCodes = workCodeTable
+        timeSheet.ShowDialog()
     End Sub
 End Class

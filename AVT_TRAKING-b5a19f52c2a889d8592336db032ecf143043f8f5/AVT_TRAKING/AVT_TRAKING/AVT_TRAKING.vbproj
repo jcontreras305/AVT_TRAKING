@@ -186,6 +186,12 @@
     <Compile Include="Froms\SelectMaterial.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Froms\TimeSheet.Designer.vb">
+      <DependentUpon>TimeSheet.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Froms\TimeSheet.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Froms\Vendor.Designer.vb">
       <DependentUpon>Vendor.vb</DependentUpon>
     </Compile>
@@ -279,6 +285,9 @@
     <EmbeddedResource Include="Froms\SelectMaterial.resx">
       <DependentUpon>SelectMaterial.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Froms\TimeSheet.resx">
+      <DependentUpon>TimeSheet.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Froms\Vendor.resx">
       <DependentUpon>Vendor.vb</DependentUpon>
     </EmbeddedResource>
@@ -302,6 +311,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Documents\Time Sheet Prueba.xlsx" />
     <None Include="My Project\Application.myapp">
       <Generator>MyApplicationCodeGenerator</Generator>
       <LastGenOutput>Application.Designer.vb</LastGenOutput>
@@ -317,8 +327,6 @@
   <ItemGroup />
   <ItemGroup>
     <Content Include="Documents\Creacion de DB y de la tabla de Usuarios.sql" />
-    <Content Include="Documents\NuevasTablas.sql" />
-    <Content Include="Documents\MaterialsSP.sql" />
     <Content Include="Documents\IsaacSP.sql" />
     <Content Include="Images\user.png" />
   </ItemGroup>

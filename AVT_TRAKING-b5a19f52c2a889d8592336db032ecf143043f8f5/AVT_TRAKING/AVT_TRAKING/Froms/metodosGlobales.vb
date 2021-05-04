@@ -191,4 +191,71 @@ Module metodosGlobales
     Public Function validar_Correo(ByVal mail As String) As Boolean
         Return Regex.IsMatch(mail, "^[_a-zA-B0-9]+(\._a-zA-B0-9+)*@[a-zA-B0-9-]+(\.[a-zA-B0-9-]+)*(\.[a-z]{2,4})$") '"^[_a-zA-B0-9]+(\._a-zA-B0-9+)*@[a-zA-B0-9-]+(\.[a-zA-B0-9-]+)*(\.[a-z]{2,4})$")     "^[a-zA-Z][\w\.-]*[a-zA-Z0-9]@[a-zA-Z0-9][\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]{2,4}$"
     End Function
+
+    Public Sub pegarFilas(ByVal filas As List(Of Object), ByVal tabla As DataGridView)
+        Try
+            Dim startRowCopy As Integer = If(tabla.SelectedRows(0).Cells(1).Value.ToString() = "", tabla.RowCount() - 1, tabla.SelectedRows(0).Index)
+            For Each obj As Object In filas
+                If tabla.Rows.Count() <= startRowCopy + 1 Then
+                    Dim dataTableAux = DirectCast(tabla.DataSource(), DataTable)
+                    Dim row As DataRow = dataTableAux.NewRow()
+                    dataTableAux.Rows.Add(row)
+                    tabla.DataSource = dataTableAux
+                End If
+                Dim dgvr = (DirectCast(obj, DataGridViewRow))
+                Dim cont As Integer = 0
+                For Each cell As DataGridViewCell In tabla.Rows(startRowCopy).Cells()
+                    If cont > 0 Then
+                        cell.Value = dgvr.Cells(cont).Value
+                        cont += 1
+                    Else
+                        cont += 1
+                    End If
+                Next
+                startRowCopy += 1
+            Next
+        Catch ex As Exception
+            MsgBox(ex.Message())
+        End Try
+    End Sub
+
+    Public Sub pegarFilas(ByVal filas As List(Of String()), ByVal tabla As DataGridView)
+        Try
+            Dim startRowCopy As Integer = If(tabla.SelectedRows(0).Cells(1).Value.ToString() = "", tabla.RowCount() - 1, tabla.SelectedRows(0).Index)
+            For Each obj As String() In filas
+                If tabla.Rows.Count() <= startRowCopy + 1 Then
+                    Dim dataTableAux = DirectCast(tabla.DataSource(), DataTable)
+                    Dim row As DataRow = dataTableAux.NewRow()
+                    dataTableAux.Rows.Add(row)
+                    tabla.DataSource = dataTableAux
+                End If
+                Dim cont As Integer = 0
+                For Each cell As DataGridViewCell In tabla.Rows(startRowCopy).Cells()
+                    If cell.ColumnIndex <> 0 Then
+                        cell.Value = obj(cont)
+                        cont += 1
+                    End If
+                Next
+                startRowCopy += 1
+            Next
+        Catch ex As Exception
+            MsgBox(ex.Message())
+        End Try
+    End Sub
+
+    Public Sub NAR(ByVal o As Object)
+        Try
+            While (System.Runtime.InteropServices.Marshal.ReleaseComObject(o) > 0)
+            End While
+        Catch
+        Finally
+            o = Nothing
+        End Try
+    End Sub
+
+    Public Sub LimparExcelNombres()
+
+    End Sub
+
+
 End Module

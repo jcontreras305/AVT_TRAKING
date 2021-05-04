@@ -6,7 +6,7 @@ Public Class MetodosHoursPeerWeek
     Public Function llenarEmpleadosCombo(ByVal combo As ComboBox, ByVal tabla As DataTable) As Boolean
         Try
             conectar()
-            Dim cmd As New SqlCommand("select idEmployee, CONCAT(firstName,' ',middleName,' ',lastName) as Name , photo as 'Photo', SAPNumber, numberEmploye from employees where estatus = 'E' ", conn)
+            Dim cmd As New SqlCommand("select idEmployee, CONCAT(firstName,' ',middleName,' ',lastName) , photo as 'Photo', SAPNumber, numberEmploye from employees where estatus = 'E' ", conn)
             If cmd.ExecuteNonQuery Then
                 Dim da As New SqlDataAdapter(cmd)
                 da.Fill(tabla)
@@ -129,8 +129,10 @@ where exu.idEmployee = '" + idEmployee + "'", conn)
     Public Function llenarTablaProyecto(ByVal proyectTable As DataTable) As Boolean
         Try
             conectar()
-            Dim cmd As New SqlCommand("select tk.idAux as 'task', CONCAT(wo.idWO,' ',tk.task) as 'project' , tk.description from workOrder as wo 
-inner join task as tk on wo.idAuxWO = tk.idAuxWO", conn)
+            Dim cmd As New SqlCommand("select tk.idAux as 'task', CONCAT(wo.idWO,'-',tk.task) as 'project' , tk.description, po.idPO, jb.jobNo, wo.idAuxWO from workOrder as wo 
+inner join task as tk on wo.idAuxWO = tk.idAuxWO
+inner join projectOrder as po on po.idPO = wo.idPO
+inner join job as jb on jb.jobNo = po.jobNo", conn)
             If cmd.ExecuteNonQuery Then
                 Dim da As New SqlDataAdapter(cmd)
                 da.Fill(proyectTable)
@@ -176,7 +178,9 @@ inner join task as tk on wo.idAuxWO = tk.idAuxWO", conn)
     Public Function llenarTablaWorkCode(ByVal workCodeTable As DataTable) As Boolean
         Try
             conectar()
-            workCodeTable.Clear()
+            If workCodeTable IsNot Nothing Then
+                workCodeTable.Clear()
+            End If
             Dim cmd As New SqlCommand("select idWorkCode ,name , description , billingRate1 , billingRateOT , billingRate3 from workCode ", conn)
             If cmd.ExecuteNonQuery Then
                 Dim da As New SqlDataAdapter(cmd)
@@ -374,4 +378,42 @@ inner join task as tk on wo.idAuxWO = tk.idAuxWO", conn)
             Return False
         End Try
     End Function
+
+    '============================================================================================================
+    '=================== METODOS PARA WORKORDERS DENTRO DE TIMESHEET ============================================
+    '============================================================================================================
+
+    Public Function selectWOTimeSheet() As DataTable
+        Try
+            conectar()
+            Dim cmd As New SqlCommand("select 
+tk.equipament as 'Equipament',
+concat(wo.idWO,'-',tk.task) as 'WorkOrder',
+tk.description as 'Description',
+tk.accountNum as 'Aco.N',
+tk.expCode as 'ExpCode',
+tk.estimateHours as 'Hours',
+po.idPO,
+po.jobNo
+from task as tk 
+inner join workOrder as wo on tk.idAuxWO = wo.idAuxWO
+inner join projectOrder as po on po.idPO = wo.idPO
+where tk.status = 0 ", conn)
+            If cmd.ExecuteNonQuery Then
+                Dim da As New SqlDataAdapter(cmd)
+                Dim dt As New DataTable
+                da.Fill(dt)
+                desconectar()
+                Return dt
+            Else
+                desconectar()
+                Return Nothing
+            End If
+        Catch ex As Exception
+            MsgBox(ex)
+            desconectar()
+            Return Nothing
+        End Try
+    End Function
+
 End Class

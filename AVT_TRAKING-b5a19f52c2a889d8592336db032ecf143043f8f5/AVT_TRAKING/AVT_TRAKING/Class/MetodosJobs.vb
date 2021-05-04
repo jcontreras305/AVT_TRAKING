@@ -251,7 +251,7 @@ from workOrder
                 Exit While
             End While
             reader1.Close()
-            Dim cmdCosultaTask As New SqlCommand("select count(task) as 'cantidadTask' from task where idAuxWO= '" + projectN.idWorkOrder + "' and task = '" + CStr(projectN.idTask) + "'", conn)
+            Dim cmdCosultaTask As New SqlCommand("select count(task) as 'cantidadTask' from task where idAuxWO= '" + projectN.idAuxWO + "' and task = '" + CStr(projectN.idTask) + "'", conn)
             Dim reader2 As SqlDataReader = cmdCosultaTask.ExecuteReader()
             Dim flagTask As String = ""
             While reader2.Read()
@@ -268,7 +268,7 @@ from workOrder
                         Return False
                     Else
                         Dim cmdInsertTask1 As New SqlCommand("insert into task 
-                        values (NEWID(),'" + CStr(projectN.idTask) + "','" + projectN.idWorkOrder + "',0.0,'" + projectN.equipament + "','" + projectN.manager + "'
+                        values (NEWID(),'" + CStr(projectN.idTask) + "','" + projectN.idAuxWO + "',0.0,'" + projectN.equipament + "','" + projectN.manager + "'
                         ,'" + projectN.description + "'," + CStr(projectN.totalBilling) + ",'" + validaFechaParaSQl(projectN.beginDate) + "','" + validaFechaParaSQl(projectN.endDate) + "'
                         ,'" + projectN.expCode + "','" + projectN.accountNum + "'," + CStr(projectN.estimateHour) + ",'" + CStr(projectN.status) + "')", conn)
                         If cmdInsertTask1.ExecuteNonQuery = 1 Then
@@ -282,7 +282,7 @@ from workOrder
                 Else
                     Dim cmdInsertNewWO As New SqlCommand("insert into workOrder values('" + projectN.idWorkOrder + "'," + CStr(projectN.jobNum) + ")", conn)
                     Dim cmdInsertTask2 As New SqlCommand("insert into task 
-                        values (NEWID(),'" + CStr(projectN.idTask) + "','" + projectN.idWorkOrder + "',0.0,'" + projectN.equipament + "','" + projectN.manager + "'
+                        values (NEWID(),'" + CStr(projectN.idTask) + "','" + projectN.idAuxWO + "',0.0,'" + projectN.equipament + "','" + projectN.manager + "'
                         ,'" + projectN.description + "'," + CStr(projectN.totalBilling) + ",'" + validaFechaParaSQl(projectN.beginDate) + "','" + validaFechaParaSQl(projectN.endDate) + "'
                         ,'" + projectN.expCode + "','" + projectN.accountNum + "'," + CStr(projectN.estimateHour) + ",'" + CStr(projectN.status) + "')", conn)
                     Dim tranWO As SqlTransaction
@@ -440,6 +440,48 @@ where tk.task = '" + idTask + "' and tk.idAuxWO = '" + idWO + "'", conn)
                 row("expenseCode") = reader("expenseCode")
                 tabla.Rows.Add(Row)
                 cmbExpCode.Items.Add(reader("expenseCode"))
+            End While
+            desconectar()
+            If tabla.Rows.Count > 0 Then
+                Return True
+            Else
+                Return False
+            End If
+        Catch ex As Exception
+            desconectar()
+            Return False
+        End Try
+    End Function
+
+    Public Function llenarTablaMaterialsIds(ByVal tabla As DataTable) As Boolean
+        Try
+            conectar()
+            Dim cmd As New SqlCommand("select idMaterial,CONCAT(number,' ' ,name) as name from material", conn)
+            Dim reader As SqlDataReader = cmd.ExecuteReader
+            tabla.Clear()
+            Dim column As DataColumn
+            If tabla.Columns.Count = 0 Then
+                column = New DataColumn()
+                column.DataType = System.Type.GetType("System.String")
+                column.ColumnName = "id"
+                column.AutoIncrement = False
+                column.ReadOnly = False
+                column.Unique = False
+                tabla.Columns.Add(column)
+                column = New DataColumn()
+                column.DataType = System.Type.GetType("System.String")
+                column.ColumnName = "Material"
+                column.AutoIncrement = False
+                column.ReadOnly = False
+                column.Unique = False
+                tabla.Columns.Add(column)
+            End If
+            While reader.Read()
+                Dim row As DataRow
+                row = tabla.NewRow()
+                row("id") = reader("idMaterial")
+                row("Material") = reader("name")
+                tabla.Rows.Add(row)
             End While
             desconectar()
             If tabla.Rows.Count > 0 Then
@@ -1221,6 +1263,33 @@ where tk.idAux = '" + idAux + "' and wo.idAuxWO = '" + WO + "'", conn)
             End If
         Catch ex As Exception
             desconectar()
+            Return False
+        End Try
+    End Function
+
+    '============================================================================================
+    '================ METODOS PARA INSERTAR WO Y PO DESDE EXCEL =================================
+    '============================================================================================
+
+    Public Function verificarWOYPO(ByVal idWO As String, ByVal PO As String, ByVal task As String) As Boolean
+        Try
+            conectar()
+            Dim cmd As New SqlCommand("select count(*) from projectOrder as po 
+inner join workOrder as wo on po.idPO = wo.idPO
+inner join task as tk on tk.idAuxWO = wo.idAuxWO
+where wo.idWO = " + idWO + " and po.idPO = " + PO + " and tk.task=" + task, conn)
+            Dim dr As SqlDataReader = cmd.ExecuteReader
+            Dim count As Integer = 0
+            While dr.Read()
+                count = dr("idPO")
+                Exit While
+            End While
+            If count >= 1 Then
+                Return True
+            Else
+                Return False
+            End If
+        Catch ex As Exception
             Return False
         End Try
     End Function

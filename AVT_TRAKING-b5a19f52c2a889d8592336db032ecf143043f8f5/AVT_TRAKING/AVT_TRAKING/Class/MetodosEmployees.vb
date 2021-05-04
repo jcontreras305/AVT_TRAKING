@@ -266,4 +266,30 @@ and (CONCAT(firstName,' ',middleName,' ',lastName) like '%" + consulta + "%' or 
         End Try
     End Function
 
+    '======================================================================================================
+    '=============== METODOS PARA EMEPLEADOS AL MOMENTO DE INSERTAR NEVOS RECORDS =========================
+    '======================================================================================================
+    '======================================================================================================
+
+    Public Function selectEmployeeToTimeSheet() As DataTable
+        Try
+            conectar()
+            Dim cmd As New SqlCommand("select numberEmploye as 'CardTimeID', CONCAT(lastName,' ',firstName,', ',middleName) as 'Employee Name' from employees where estatus = 'E'", conn)
+            If cmd.ExecuteNonQuery Then
+                Dim da As New SqlDataAdapter(cmd)
+                Dim table As New DataTable
+                da.Fill(table)
+                desconectar()
+                Return table
+            Else
+                desconectar()
+                Return Nothing
+            End If
+        Catch ex As Exception
+            desconectar()
+            MsgBox(ex.Message())
+            Return Nothing
+        End Try
+    End Function
+
 End Class

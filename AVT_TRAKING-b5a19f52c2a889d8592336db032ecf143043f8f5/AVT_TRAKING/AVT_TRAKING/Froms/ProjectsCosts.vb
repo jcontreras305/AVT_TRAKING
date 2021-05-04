@@ -31,6 +31,12 @@
             idAuxWO = tablasDeTareas.Rows(0).ItemArray(5)
         End If
         If Not cargarDatosProjecto(JobNumber) Then
+            If chbComplete.Checked = True Then
+                activarCampos(True)
+            Else
+                activarCampos(False)
+            End If
+        Else
             activarCampos(False)
         End If
         txtClientName.Enabled = False
@@ -180,10 +186,27 @@
             Next
             If index = contRow - 1 Then
                 index = 0
-                cargarDatosProjecto(tablasDeTareas.Rows(index).ItemArray(0), tablasDeTareas.Rows(index).ItemArray(5), tablasDeTareas.Rows(index).ItemArray(3))
+                If cargarDatosProjecto(tablasDeTareas.Rows(index).ItemArray(0), tablasDeTareas.Rows(index).ItemArray(5), tablasDeTareas.Rows(index).ItemArray(3)) Then
+                    If chbComplete.Checked() = True Then
+                        activarCampos(True)
+                    Else
+                        activarCampos(False)
+                    End If
+                Else
+                    activarCampos(False)
+                End If
+
             Else
                 index += 1
-                cargarDatosProjecto(tablasDeTareas.Rows(index).ItemArray(0), tablasDeTareas.Rows(index).ItemArray(5), tablasDeTareas.Rows(index).ItemArray(3))
+                If cargarDatosProjecto(tablasDeTareas.Rows(index).ItemArray(0), tablasDeTareas.Rows(index).ItemArray(5), tablasDeTareas.Rows(index).ItemArray(3)) Then
+                    If chbComplete.Checked() = True Then
+                        activarCampos(True)
+                    Else
+                        activarCampos(False)
+                    End If
+                Else
+                    activarCampos(False)
+                End If
             End If
         End If
     End Sub
@@ -201,11 +224,26 @@
             Next
             If index = 0 Then
                 index = contRow - 1
-                cargarDatosProjecto(tablasDeTareas.Rows(index).ItemArray(0), tablasDeTareas.Rows(index).ItemArray(5), tablasDeTareas.Rows(index).ItemArray(3))
-
+                If cargarDatosProjecto(tablasDeTareas.Rows(index).ItemArray(0), tablasDeTareas.Rows(index).ItemArray(5), tablasDeTareas.Rows(index).ItemArray(3)) Then
+                    If chbComplete.Checked() = True Then
+                        activarCampos(True)
+                    Else
+                        activarCampos(False)
+                    End If
+                Else
+                    activarCampos(False)
+                End If
             Else
                 index -= 1
-                cargarDatosProjecto(tablasDeTareas.Rows(index).ItemArray(0), tablasDeTareas.Rows(index).ItemArray(5), tablasDeTareas.Rows(index).ItemArray(3))
+                If cargarDatosProjecto(tablasDeTareas.Rows(index).ItemArray(0), tablasDeTareas.Rows(index).ItemArray(5), tablasDeTareas.Rows(index).ItemArray(3)) Then
+                    If chbComplete.Checked() = True Then
+                        activarCampos(True)
+                    Else
+                        activarCampos(False)
+                    End If
+                Else
+                    activarCampos(False)
+                End If
             End If
         End If
     End Sub
@@ -233,6 +271,12 @@
                 mtdJobs.consultaWO(JobNumber, tablasDeTareas)
                 If Not cargarDatosProjecto(JobNumber) Then
                     activarCampos(False)
+                Else
+                    If chbComplete.Checked = True Then
+                        activarCampos(True)
+                    Else
+                        activarCampos(False)
+                    End If
                 End If
             Else
                 MsgBox("Error, chek the Data or try again")
@@ -327,9 +371,17 @@
             End If
         Else
             JobNumber = cmbJobNumber.SelectedItem
-            activarCampos(cargarDatosProjecto(JobNumber))
+            If cargarDatosProjecto(JobNumber) Then
+                If chbComplete.Checked() = True Then
+                    activarCampos(True)
+                Else
+                    activarCampos(False)
+                End If
+            Else
+                activarCampos(False)
+            End If
             mtdJobs.consultaWO(JobNumber, tablasDeTareas)
-        End If
+            End If
     End Sub
 
     Private Sub cmbJobNumber_KeyPress(sender As Object, e As KeyPressEventArgs) Handles cmbJobNumber.KeyPress
@@ -341,7 +393,15 @@
                 End If
             Else
                 JobNumber = cmbJobNumber.SelectedItem
-                cargarDatosProjecto(JobNumber)
+                If cargarDatosProjecto(JobNumber) Then
+                    If chbComplete.Checked() = True Then
+                        activarCampos(True)
+                    Else
+                        activarCampos(False)
+                    End If
+                Else
+                    activarCampos(False)
+                End If
                 mtdJobs.consultaWO(JobNumber, tablasDeTareas)
             End If
         End If
@@ -1140,7 +1200,7 @@
 
     Private Sub btnUpdate_Click(sender As Object, e As EventArgs) Handles btnUpdate.Click
         If tblMaterialProjects.SelectedRows.Count > 0 Then
-            If DialogResult.Yes = MessageBox.Show("Are you sure to Update " + tblMaterialProjects.SelectedRows.Count.ToString() + " materials?" + vbCrLf + "If you accept you can't recober the last data.", "Important", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) Then
+            If DialogResult.Yes = MessageBox.Show("Are you sure to changue " + tblMaterialProjects.SelectedRows.Count.ToString() + " materials in the registers?" + vbCrLf + "If you accept you can't recober the last data.", "Important", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) Then
                 For Each row As DataGridViewRow In tblMaterialProjects.SelectedRows
                     actualizarMateriales(row.Index)
                 Next
@@ -1397,11 +1457,7 @@
             Else
                 mensaje = If(mensaje = "", "Check the 'Material Code' Cell.", vbCrLf + "Check the 'Material Code' Cell.")
             End If
-        Else
-            datosMaterial.Add("")
-        End If
-
-        If tblMaterialProjects.Rows(fila).Cells("Material Code").Value IsNot DBNull.Value Then
+        ElseIf tblMaterialProjects.Rows(fila).Cells("Material Code").Value.ToString() IsNot "" Then
             For Each row As DataRow In listIdsMaterial.Rows
                 If row.Item(1) = tblMaterialProjects.Rows(fila).Cells("Material Code").Value Then
                     datosMaterial.Add(row.Item(0))
@@ -1410,7 +1466,19 @@
             Next
         Else
             mensaje = If(mensaje = "", "Check the 'Material Code' Cell.", vbCrLf + "Check the 'Material Code' Cell.")
+            datosMaterial.Add("")
         End If
+
+        'If tblMaterialProjects.Rows(fila).Cells("Material Code").Value IsNot DBNull.Value Then
+        '    For Each row As DataRow In listIdsMaterial.Rows
+        '        If row.Item(1) = tblMaterialProjects.Rows(fila).Cells("Material Code").Value Then
+        '            datosMaterial.Add(row.Item(0))
+        '            Exit For
+        '        End If
+        '    Next
+        'Else
+        '    mensaje = If(mensaje = "", "Check the 'Material Code' Cell.", vbCrLf + "Check the 'Material Code' Cell.")
+        'End If
 
 
         If tblMaterialProjects.Rows(fila).Cells("Description").Value IsNot DBNull.Value Then
@@ -1429,6 +1497,21 @@
                 mtdJobs.updateMaterialUsed(datosMaterial)
                 mtdJobs.buscarMaterialesPorProyecto(tblMaterialProjects, idAuxWO, task)
                 calcularValores()
+            End If
+        End If
+    End Sub
+    Dim listRowMaterialCopy As New List(Of String())
+    Private Sub tblMaterialProjects_KeyPress(sender As Object, e As KeyPressEventArgs) Handles tblMaterialProjects.KeyPress
+        If Asc(e.KeyChar) = 3 Then
+            listRowMaterialCopy.Clear()
+            For Each row As DataGridViewRow In tblMaterialProjects.SelectedRows
+                Dim dataCells() As String = {row.Cells("Date").Value.ToString(), row.Cells("Work Order").Value.ToString(), row.Cells("Amount").Value.ToString(), row.Cells("Material Code").Value.ToString(), row.Cells("Description").Value.ToString()}
+                listRowMaterialCopy.Add(dataCells)
+            Next
+        ElseIf Asc(e.KeyChar) = 22 Then
+            If listRowMaterialCopy.Count > 0 Then
+                pegarFilas(listRowMaterialCopy, tblMaterialProjects)
+                mtdJobs.llenarTablaMaterialsIds(listIdsMaterial)
             End If
         End If
     End Sub

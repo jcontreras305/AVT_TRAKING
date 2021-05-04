@@ -58,7 +58,9 @@ Public Class ProjectsClients
             pjc.JobNumber = ""
             pjc.idCliente = ""
         End If
+        Me.Visible = False
         pjc.ShowDialog()
+        Me.Visible = True
         mtdClient.buscarProyectosDeCliente(tblProjectClients, idCliente)
     End Sub
 
