@@ -88,6 +88,7 @@ Partial Class HoursWeekPeerEmployees
         Me.Label9 = New System.Windows.Forms.Label()
         Me.Label8 = New System.Windows.Forms.Label()
         Me.Panel4 = New System.Windows.Forms.Panel()
+        Me.btnRefresh = New System.Windows.Forms.Button()
         Me.Panel1.SuspendLayout()
         CType(Me.tblHourPeerDay, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel3.SuspendLayout()
@@ -593,7 +594,7 @@ Partial Class HoursWeekPeerEmployees
         '
         'btnDelete
         '
-        Me.btnDelete.Location = New System.Drawing.Point(929, 7)
+        Me.btnDelete.Location = New System.Drawing.Point(911, 10)
         Me.btnDelete.Name = "btnDelete"
         Me.btnDelete.Size = New System.Drawing.Size(75, 33)
         Me.btnDelete.TabIndex = 25
@@ -677,6 +678,7 @@ Partial Class HoursWeekPeerEmployees
         '
         Me.Panel4.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Panel4.Controls.Add(Me.btnRefresh)
         Me.Panel4.Controls.Add(Me.btnDelete)
         Me.Panel4.Controls.Add(Me.btnInsert)
         Me.Panel4.Controls.Add(Me.txtHours3)
@@ -691,6 +693,15 @@ Partial Class HoursWeekPeerEmployees
         Me.Panel4.Name = "Panel4"
         Me.Panel4.Size = New System.Drawing.Size(1188, 55)
         Me.Panel4.TabIndex = 2
+        '
+        'btnRefresh
+        '
+        Me.btnRefresh.Location = New System.Drawing.Point(992, 10)
+        Me.btnRefresh.Name = "btnRefresh"
+        Me.btnRefresh.Size = New System.Drawing.Size(75, 33)
+        Me.btnRefresh.TabIndex = 26
+        Me.btnRefresh.Text = "Refresh"
+        Me.btnRefresh.UseVisualStyleBackColor = True
         '
         'HoursWeekPeerEmployees
         '
@@ -785,4 +796,5 @@ Partial Class HoursWeekPeerEmployees
     Friend WithEvents Label9 As Label
     Friend WithEvents Label8 As Label
     Friend WithEvents Panel4 As Panel
+    Friend WithEvents btnRefresh As Button
 End Class

@@ -368,44 +368,44 @@
             If diferencia >= 0 Then
                 Select Case CDate(validarFechaParaVB(row.Cells("Date").Value)).DayOfWeek
                     Case DayOfWeek.Monday
-                        tblHourPeerDay.Rows(0).Cells("clmMonST").Value = row.Cells("Hours ST").Value
-                        tblHourPeerDay.Rows(0).Cells("clmMonOT").Value = row.Cells("Hours OT").Value
+                        tblHourPeerDay.Rows(0).Cells("clmMonST").Value = CStr(CDbl(tblHourPeerDay.Rows(0).Cells("clmMonST").Value) + CDbl(row.Cells("Hours ST").Value))
+                        tblHourPeerDay.Rows(0).Cells("clmMonOT").Value = CStr(CDbl(tblHourPeerDay.Rows(0).Cells("clmMonOT").Value) + CDbl(row.Cells("Hours OT").Value))
                         HoursOTWeek += row.Cells("Hours OT").Value
                         HoursSTWeek += row.Cells("Hours ST").Value
                         Hours3Week += row.Cells("Hours 3").Value
                     Case DayOfWeek.Tuesday
-                        tblHourPeerDay.Rows(0).Cells("clmTueST").Value = row.Cells("Hours ST").Value
-                        tblHourPeerDay.Rows(0).Cells("clmTueOT").Value = row.Cells("Hours OT").Value
+                        tblHourPeerDay.Rows(0).Cells("clmTueST").Value = CStr(CDbl(tblHourPeerDay.Rows(0).Cells("clmTueST").Value) + CDbl(row.Cells("Hours ST").Value))
+                        tblHourPeerDay.Rows(0).Cells("clmTueOT").Value = CStr(CDbl(tblHourPeerDay.Rows(0).Cells("clmTueOT").Value) + CDbl(row.Cells("Hours OT").Value))
                         HoursOTWeek += row.Cells("Hours OT").Value
                         HoursSTWeek += row.Cells("Hours ST").Value
                         Hours3Week += row.Cells("Hours 3").Value
                     Case DayOfWeek.Wednesday
-                        tblHourPeerDay.Rows(0).Cells("clmWedST").Value = row.Cells("Hours ST").Value
-                        tblHourPeerDay.Rows(0).Cells("clmWedOT").Value = row.Cells("Hours OT").Value
+                        tblHourPeerDay.Rows(0).Cells("clmWedST").Value = CStr(CDbl(tblHourPeerDay.Rows(0).Cells("clmWedST").Value) + CDbl(row.Cells("Hours ST").Value))
+                        tblHourPeerDay.Rows(0).Cells("clmWedOT").Value = CStr(CDbl(tblHourPeerDay.Rows(0).Cells("clmWedOT").Value) + CDbl(row.Cells("Hours OT").Value))
                         HoursOTWeek += row.Cells("Hours OT").Value
                         HoursSTWeek += row.Cells("Hours ST").Value
                         Hours3Week += row.Cells("Hours 3").Value
                     Case DayOfWeek.Thursday
-                        tblHourPeerDay.Rows(0).Cells("clmThuST").Value = row.Cells("Hours ST").Value
-                        tblHourPeerDay.Rows(0).Cells("clmThuOT").Value = row.Cells("Hours OT").Value
+                        tblHourPeerDay.Rows(0).Cells("clmThuST").Value = CStr(CDbl(tblHourPeerDay.Rows(0).Cells("clmThuST").Value) + CDbl(row.Cells("Hours ST").Value))
+                        tblHourPeerDay.Rows(0).Cells("clmThuOT").Value = CStr(CDbl(tblHourPeerDay.Rows(0).Cells("clmThuOT").Value) + CDbl(row.Cells("Hours OT").Value))
                         HoursOTWeek += row.Cells("Hours OT").Value
                         HoursSTWeek += row.Cells("Hours ST").Value
                         Hours3Week += row.Cells("Hours 3").Value
                     Case DayOfWeek.Friday
-                        tblHourPeerDay.Rows(0).Cells("clmFriST").Value = row.Cells("Hours ST").Value
-                        tblHourPeerDay.Rows(0).Cells("clmFriOT").Value = row.Cells("Hours OT").Value
+                        tblHourPeerDay.Rows(0).Cells("clmFriST").Value = CStr(CDbl(tblHourPeerDay.Rows(0).Cells("clmFriST").Value) + CDbl(row.Cells("Hours ST").Value))
+                        tblHourPeerDay.Rows(0).Cells("clmFriOT").Value = CStr(CDbl(tblHourPeerDay.Rows(0).Cells("clmFriOT").Value) + CDbl(row.Cells("Hours OT").Value))
                         HoursOTWeek += row.Cells("Hours OT").Value
                         HoursSTWeek += row.Cells("Hours ST").Value
                         Hours3Week += row.Cells("Hours 3").Value
                     Case DayOfWeek.Saturday
-                        tblHourPeerDay.Rows(0).Cells("clmSatST").Value = row.Cells("Hours ST").Value
-                        tblHourPeerDay.Rows(0).Cells("clmSatOT").Value = row.Cells("Hours OT").Value
+                        tblHourPeerDay.Rows(0).Cells("clmSatST").Value = CStr(CDbl(tblHourPeerDay.Rows(0).Cells("clmSatST").Value) + CDbl(row.Cells("Hours ST").Value))
+                        tblHourPeerDay.Rows(0).Cells("clmSatOT").Value = CStr(CDbl(tblHourPeerDay.Rows(0).Cells("clmSatOT").Value) + CDbl(row.Cells("Hours OT").Value))
                         HoursOTWeek += row.Cells("Hours OT").Value
                         HoursSTWeek += row.Cells("Hours ST").Value
                         Hours3Week += row.Cells("Hours 3").Value
                     Case DayOfWeek.Sunday
-                        tblHourPeerDay.Rows(0).Cells("clmSunST").Value = row.Cells("Hours ST").Value
-                        tblHourPeerDay.Rows(0).Cells("clmSunOT").Value = row.Cells("Hours OT").Value
+                        tblHourPeerDay.Rows(0).Cells("clmSunST").Value = CStr(CDbl(tblHourPeerDay.Rows(0).Cells("clmSunST").Value) + CDbl(row.Cells("Hours ST").Value))
+                        tblHourPeerDay.Rows(0).Cells("clmSunOT").Value = CStr(CDbl(tblHourPeerDay.Rows(0).Cells("clmSunOT").Value) + CDbl(row.Cells("Hours OT").Value))
                         HoursOTWeek += row.Cells("Hours OT").Value
                         HoursSTWeek += row.Cells("Hours ST").Value
                         Hours3Week += row.Cells("Hours 3").Value
@@ -962,24 +962,6 @@
             cargarDatos(idEmpleado)
         End If
     End Sub
-
-    'Private Sub tblRecordEmployee_RowsRemoved(sender As Object, e As DataGridViewRowsRemovedEventArgs) Handles tblRecordEmployee.RowsRemoved
-    '    If tblRecordEmployee.SelectedRows.Count > 0 Then
-    '        For Each row As DataGridViewRow In tblRecordEmployee.SelectedRows
-    '            Dim idTask As String = ""
-    '            For Each fila As DataRow In proyectTable.Rows
-    '                If fila.ItemArray(1) = tblRecordEmployee.Rows(row.Index).Cells("Project").Value Then
-    '                    idTask = fila.ItemArray(0)
-    '                    Exit For
-    '                End If
-    '            Next
-    '            mtdHPW.deleteRecordEmployee(row.Cells("idHorsWorked").Value, idTask)
-    '        Next
-    '    End If
-    '    mtdHPW.buscarHoras(tblRecordEmployee, idEmpleado)
-    '    cargarDatos(idEmpleado)
-    'End Sub
-
     Private Sub btnInsert_Click(sender As Object, e As EventArgs) Handles btnInsert.Click
         If TabControl1.SelectedTab.Name = "tbpTimeWorked" Then
             Dim listError As New List(Of String)
@@ -1030,5 +1012,11 @@
         timeSheet.tablaProject = proyectTable
         timeSheet.tablaWorkCodes = workCodeTable
         timeSheet.ShowDialog()
+        cargarDatos(cmbEmpleados.SelectedItem)
     End Sub
+
+    Private Sub btnRefresh_Click(sender As Object, e As EventArgs) Handles btnRefresh.Click
+        cargarDatos(cmbEmpleados.SelectedItem)
+    End Sub
+
 End Class

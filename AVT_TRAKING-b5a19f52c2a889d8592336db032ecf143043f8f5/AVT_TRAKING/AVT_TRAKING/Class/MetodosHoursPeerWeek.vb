@@ -134,6 +134,7 @@ inner join task as tk on wo.idAuxWO = tk.idAuxWO
 inner join projectOrder as po on po.idPO = wo.idPO
 inner join job as jb on jb.jobNo = po.jobNo", conn)
             If cmd.ExecuteNonQuery Then
+                proyectTable.Clear()
                 Dim da As New SqlDataAdapter(cmd)
                 da.Fill(proyectTable)
                 desconectar()

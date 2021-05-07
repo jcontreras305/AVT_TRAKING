@@ -23,7 +23,6 @@ Public Class TimeSheet
             Dim ApExcel = New Microsoft.Office.Interop.Excel.Application
             Dim libro = ApExcel.Workbooks.Open(openFile.FileName)
             Dim sheetWorkCodes As New Worksheet
-
             Try
                 sheetWorkCodes = libro.Worksheets("WorkOrder")
                 txtSalida.Text = txtSalida.Text + vbCrLf + "Open sheet 'WorkOrder.'"
@@ -32,6 +31,7 @@ Public Class TimeSheet
                 txtSalida.Text = txtSalida.Text + vbCrLf + "Open sheet 'Work Order.'"
             End Try
             Dim tablaWorkCodes = mtdHPW.selectWOTimeSheet()
+            limpiarSheet(sheetWorkCodes, 2)
             If tablaWorkCodes IsNot Nothing And tablaWorkCodes.Rows.Count > 0 Then
                 Dim cont As Integer = 2
                 txtSalida.Text = txtSalida.Text + vbCrLf + tablaWorkCodes.Rows().Count.ToString() + " rows."
@@ -51,10 +51,14 @@ Public Class TimeSheet
             txtSalida.Text = txtSalida.Text + vbCrLf + "Saving file."
             libro.Save()
             NAR(sheetWorkCodes)
-            libro.Close(False)
+            libro.Close(True)
             NAR(libro)
+            NAR(ApExcel.Workbooks)
             ApExcel.Quit()
             NAR(ApExcel)
+            txtSalida.Text = txtSalida.Text + vbCrLf + "Sleeping..."
+            System.Threading.Thread.Sleep(5000)
+            txtSalida.Text = txtSalida.Text + vbCrLf + "End Excel"
         Catch ex As Exception
             MsgBox(ex.Message())
             txtSalida.Text = txtSalida.Text + vbCrLf + "Error. " + ex.Message()
@@ -108,7 +112,7 @@ Public Class TimeSheet
                 flagExistWO = False
                 For Each row1 As DataRow In tablaProject.Rows()
                     Dim workOrder() As String = row1.ItemArray(1).ToString().Split("-")
-                    If row.ItemArray(1).ToString.Equals(workOrder(0)) And row.ItemArray(2).ToString.Equals(workOrder(1)) And row.ItemArray(8).ToString.Equals(row1.ItemArray(3).ToString()) And row.ItemArray(9).ToString.Equals(row1.ItemArray(4).ToString()) Then
+                    If row.ItemArray(3).ToString().Equals(row1.ItemArray(1).ToString()) And row.ItemArray(8).ToString.Equals(row1.ItemArray(3).ToString()) And row.ItemArray(9).ToString.Equals(row1.ItemArray(4).ToString()) Then
                         flagExistWO = True
                         Exit For
                     Else
@@ -121,31 +125,33 @@ Public Class TimeSheet
             Next
             If listNewWorlOrders.Count > 0 Then
                 txtSalida.Text = txtSalida.Text + vbCrLf + listNewWorlOrders.Count.ToString() + " New 'Work Codes', trying to insert the new 'Work Orders'."
-                For Each item As DataRow In listNewWorlOrders
-                    Dim newPO As New Project
-                    newPO.clear()
-                    newPO.idWorkOrder = item.ItemArray(1)
-                    newPO.idTask = item.ItemArray(2)
-                    newPO.description = item.ItemArray(4)
-                    newPO.accountNum = item.ItemArray(5)
-                    newPO.expCode = item.ItemArray(6)
-                    newPO.estimateHour = item.ItemArray(7)
-                    newPO.idPO = item.ItemArray(8)
-                    newPO.jobNum = item.ItemArray(9)
-                    For Each row As DataRow In tablaProject.Rows
-                        Dim wo() As String = row(1).ToString().Split("-")
-                        If newPO.idWorkOrder = wo(0) Then
-                            newPO.idAuxWO = row("idAuxWO")
-                            Exit For
-                        Else
-                            newPO.idAuxWO = ""
+                If DialogResult.Yes = MessageBox.Show("New 'Work Orders' found. Would you like to insert the new 'Work Orders'?", "Message", MessageBoxButtons.YesNo, MessageBoxIcon.Information) Then
+                    For Each item As DataRow In listNewWorlOrders
+                        Dim newPO As New Project
+                        newPO.clear()
+                        newPO.idWorkOrder = item.ItemArray(1)
+                        newPO.idTask = item.ItemArray(2)
+                        newPO.description = item.ItemArray(4)
+                        newPO.accountNum = item.ItemArray(5)
+                        newPO.expCode = item.ItemArray(6)
+                        newPO.estimateHour = item.ItemArray(7)
+                        newPO.idPO = item.ItemArray(8)
+                        newPO.jobNum = item.ItemArray(9)
+                        For Each row As DataRow In tablaProject.Rows
+                            Dim wo() As String = row(1).ToString().Split("-")
+                            If newPO.idWorkOrder = wo(0) Then
+                                newPO.idAuxWO = row("idAuxWO")
+                                Exit For
+                            Else
+                                newPO.idAuxWO = ""
+                            End If
+                        Next
+                        If mtdJobs.insertarNuevaTarea(newPO) = False Then
+                            mensaje = mensaje + " " + item.ItemArray(0)
                         End If
                     Next
-                    If mtdJobs.insertarNuevaTarea(newPO) = False Then
-                        mensaje = mensaje + " " + item.ItemArray(0)
-                    End If
-                Next
-                txtSalida.Text = txtSalida.Text + vbCrLf + "The 'Work Order' insertion process is over."
+                    txtSalida.Text = txtSalida.Text + vbCrLf + "The 'Work Order' insertion process is over."
+                End If
             Else
                 txtSalida.Text = txtSalida.Text + vbCrLf + listNewWorlOrders.Count.ToString() + " Work Codes News."
             End If
@@ -157,69 +163,94 @@ Public Class TimeSheet
                     insertar = False
                 End If
             End If
+            NAR(workOrders)
+            libro.Close(False)
+            NAR(libro)
             mtdHPW.llenarTablaProyecto(tablaProject)
             '======================================== INSERTAR RECORDS ==================================================
+            If DialogResult.Yes = MessageBox.Show("Would you like to start the insertion Records Proccess?", "Message", MessageBoxButtons.YesNo, MessageBoxIcon.Question) Then
+                Dim ApExcel1 = New Microsoft.Office.Interop.Excel.Application
+                Dim libro1 = ApExcel1.Workbooks.Open(openFile.FileName)
+                If insertar Then
+                    Dim timesheet As New Worksheet
+                    Try
+                        timesheet = libro1.Worksheets("Time Sheet")
+                        txtSalida.Text = txtSalida.Text + vbCrLf + "Open sheet Time Sheet"
+                    Catch ex As Exception
+                        timesheet = libro1.Worksheets("TimeSheet")
+                        txtSalida.Text = txtSalida.Text + vbCrLf + "Open sheet TimeSheet"
+                    End Try
+                    Dim list As New List(Of String)
+                    Dim cont As Integer = 2
+                    Dim filasError1 As String = ""
+                    Dim text = txtSalida.Text
+                    While timesheet.Cells(cont, 1).Text <> ""
+                        list.Clear()
+                        txtSalida.Text = text + "Insert line " + cont.ToString()
+                        list.Add("") 'idHoursWorked
+                        list.Add(timesheet.Cells(cont, 7).Text) 'hours ST
+                        list.Add(timesheet.Cells(cont, 8).Text) 'hours OT
+                        list.Add(0) 'hours 3
+                        list.Add(validarFechaParaSQlDeExcel(timesheet.Cells(cont, 3).Text)) 'date
+                        For Each row As DataRow In tablaEmpleadosId.Rows
+                            If row.ItemArray(4) = timesheet.Cells(cont, 2).Text Then 'idEmpleado
+                                list.Add(row.ItemArray(0))
+                                Exit For
+                            End If
+                        Next
+                        If list.Count = 6 Then ' validando que se encotro el idEmpleado
+                            For Each row As DataRow In tablaWorkCodes.Rows
+                                If row.ItemArray(1) = timesheet.Cells(cont, 6).Text Then 'WorkCode
+                                    list.Add(row.ItemArray(0))
+                                    Exit For
+                                End If
+                            Next
+                            If list.Count = 7 Then ' validando que se encotro el workCode
+                                For Each row As DataRow In tablaProject.Rows
+                                    If row.ItemArray(1) = timesheet.Cells(cont, 4).Text And timesheet.Cells(cont, 5).Text = row.ItemArray(3) Then 'idtask
+                                        list.Add(row.ItemArray(0)) '
+                                        Exit For
 
-            Dim ApExcel1 = New Microsoft.Office.Interop.Excel.Application
-            Dim libro1 = ApExcel1.Workbooks.Open(openFile.FileName)
-            If insertar Then
-                Dim timesheet As New Worksheet
-                Try
-                    timesheet = libro1.Worksheets("Time Sheet")
-                    txtSalida.Text = txtSalida.Text + vbCrLf + "Open sheet Time Sheet"
-                Catch ex As Exception
-                    timesheet = libro1.Worksheets("TimeSheet")
-                    txtSalida.Text = txtSalida.Text + vbCrLf + "Open sheet TimeSheet"
-                End Try
-                Dim list As New List(Of String)
-                Dim cont As Integer = 2
-                Dim filasError1 As String = ""
-                Dim text = txtSalida.Text
-                While timesheet.Cells(cont, 1).Text <> ""
-                    txtSalida.Text = text + "Insert line " + cont.ToString()
-                    list.Add("") 'idHoursWorked
-                    list.Add(timesheet.Cells(cont, 7).Text) 'hours ST
-                    list.Add(timesheet.Cells(cont, 8).Text) 'hours OT
-                    list.Add(0) 'hours 3
-                    list.Add(validaFechaParaSQl(timesheet.Cells(cont, 3).Text)) 'date
-                    For Each row As DataRow In tablaEmpleadosId.Rows
-                        If row.ItemArray(4) = timesheet.Cells(cont, 2).Text Then 'idEmpleado
-                            list.Add(row.ItemArray(0))
-                            Exit For
+                                    End If
+                                Next
+                                If list.Count = 8 Then ' validando que se encotro el task
+                                    list.Add(timesheet.Cells(cont, 9).Text) 'Shift
+                                    If mtdHPW.InsertarRecord(list) Then
+                                        cont += 1
+                                    Else
+                                        filasError1 = filasError1 + " " + cont
+                                        cont += 1
+                                    End If
+                                Else
+                                    txtSalida.Text = txtSalida.Text + vbCrLf + "Error at line(" + cont.ToString() + "), Could not insert the Record."
+                                    filasError1 = filasError1 + " " + cont
+                                    cont += 1
+                                End If
+                            Else
+                                txtSalida.Text = txtSalida.Text + vbCrLf + "Error at line(" + cont.ToString() + "), Could not find the ''."
+                                filasError1 = filasError1 + " " + cont
+                                cont += 1
+                            End If
+                        Else
+                            txtSalida.Text = txtSalida.Text + vbCrLf + "Error at line(" + cont.ToString() + "), Could not find the 'Employee ID'."
+                            filasError1 = filasError1 + " " + cont
+                            cont += 1
                         End If
-                    Next
-                    For Each row As DataRow In tablaWorkCodes.Rows
-                        If row.ItemArray(1) = timesheet.Cells(cont, 6).Text Then 'WorkCode
-                            list.Add(row.ItemArray(0))
-                            Exit For
-                        End If
-                    Next
-                    For Each row As DataRow In tablaProject.Rows
-                        If row.ItemArray(1) = timesheet.Cells(cont, 4).Text Then 'idtask
-                            list.Add(row.ItemArray(0)) '
-                            Exit For
-                        End If
-                    Next
-                    list.Add(timesheet.Cells(cont, 9).Text) 'Shift
-                    If mtdHPW.InsertarRecord(list) Then
-                        cont += 1
-                    Else
-                        filasError1 = filasError1 + " " + cont
+                    End While
+                    If filasError1 <> "" Then
+                        txtSalida.Text = txtSalida.Text + vbCrLf + "Error at line(" + filasError + ")"
                     End If
-                End While
-                If filasError1 <> "" Then
-                    txtSalida.Text = txtSalida.Text + vbCrLf + "Error at line(" + filasError + ")"
+                    txtSalida.Text = txtSalida.Text + vbCrLf + "The 'Records Employee Time' insertion process is over."
                 End If
-                txtSalida.Text = txtSalida.Text + vbCrLf + "The 'Records Employee Time' insertion process is over."
+                txtSalida.Text = txtSalida.Text + vbCrLf + "Closing Excel..."
+                libro1.Close(False)
+                NAR(libro1)
             End If
-
-            NAR(libro)
-            NAR(libro1)
-
-            libro.Close(False)
-            libro1.Close(False)
             ApExcel.Quit()
             NAR(ApExcel)
+            txtSalida.Text = txtSalida.Text + vbCrLf + "Sleeping..."
+            System.Threading.Thread.Sleep(5000)
+            txtSalida.Text = txtSalida.Text + vbCrLf + "End Excel"
         Catch ex As Exception
             MsgBox(ex.Message())
         End Try

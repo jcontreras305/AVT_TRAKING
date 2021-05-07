@@ -58,6 +58,20 @@ Module metodosGlobales
         Return flag
     End Function
 
+    Public Function validarFechaParaSQlDeExcel(ByVal fecha As String) As String
+        Dim zona As TimeZone = TimeZone.CurrentTimeZone
+        If zona.DaylightName = "Hora de verano central (México)" Then
+            Dim array() = fecha.Split("/")
+            Dim fecha1 As String = array(2) + "-" + array(1) + "-" + array(0)
+            Return fecha1
+        Else
+            Dim array() As String = CStr(fecha).Split("/")
+            Dim fecha1 As String = array(0) + "-" + array(1) + "-" + array(2)
+            Return fecha1
+        End If
+    End Function
+
+
     ''' <summary>
     ''' Este metodo da formato de acuerdo a las dos zonas previstas para isertar en SQLServer 
     ''' </summary>
@@ -252,10 +266,69 @@ Module metodosGlobales
             o = Nothing
         End Try
     End Sub
+    ''' <summary>
+    ''' Meotod que regresa la primer fila encontrada en Blanco sobre la Columna indicada.
+    ''' </summary>
+    ''' <param name="sheet"></param>
+    ''' <param name="rowStar"></param>
+    ''' <param name="nColum"></param>
+    ''' <returns></returns>
+    Public Function nreg(ByVal sheet As Microsoft.Office.Interop.Excel.Worksheet, ByVal rowStart As Long, ByVal nColum As Long) As Long
+        Do Until sheet.Cells(rowStart, nColum).Value = ""
+            rowStart += 1
+        Loop
+        Return rowStart
+    End Function
 
-    Public Sub LimparExcelNombres()
-
+    ''' <summary>
+    ''' Metodo que limpia las filas de un Worsheet desde la fila indicada, utiliza el nColum para verirficar si en esa celda hay un valor, y el limCell como 
+    ''' limite de celldas a borrar.
+    ''' </summary>
+    ''' <param name="sheet"></param>
+    ''' <param name="rowStart"></param>
+    ''' <param name="nColum"></param>
+    ''' <param name="limCell"></param>
+    Public Sub limpiarSheet(ByVal sheet As Microsoft.Office.Interop.Excel.Worksheet, ByVal rowStart As Long, ByVal nColum As Long, ByVal limCell As Integer)
+        Do Until sheet.Cells(rowStart, nColum).Value <> ""
+            For index = 1 To limCell
+                sheet.Cells(rowStart, index).value = ""
+            Next
+            rowStart += 1
+        Loop
     End Sub
 
+    ''' <summary>
+    ''' Metodo que limpia las filas de un Worsheet desde la fila indicada, utiliza el nColum1 y nColum2 para verirficar si en esas celdas hay un valor, y el limCell como 
+    ''' limite de celldas a borrar
+    ''' </summary>
+    ''' <param name="sheet"></param>
+    ''' <param name="rowStart"></param>
+    ''' <param name="nColum1"></param>
+    ''' <param name="nColum2"></param>
+    ''' <param name="limCell"></param>
+    Public Sub limpiarSheet(ByVal sheet As Microsoft.Office.Interop.Excel.Worksheet, ByVal rowStart As Long, ByVal nColum1 As Long, ByVal nColum2 As Long, ByVal limCell As Integer)
+        Do Until sheet.Cells(rowStart, nColum1).Value <> "" Or sheet.Cells(rowStart, nColum2).Value <> ""
+            For index = 1 To limCell
+                sheet.Cells(rowStart, index).value = ""
+            Next
+            rowStart += 1
+        Loop
+    End Sub
+
+    ''' <summary>
+    ''' Metodo para limpiar las Filas de un Worksheet 
+    ''' </summary>
+    ''' <param name="Hoja"></param>
+    ''' <param name="rowStart"></param>
+    Public Sub limpiarSheet(Hoja As Microsoft.Office.Interop.Excel.Worksheet, rowStart As Integer)
+        Try
+            Do While Hoja.Cells(rowStart, 1).Text <> "" Or Hoja.Cells(rowStart, 2).Text <> ""
+                Hoja.Rows(rowStart).Clear()
+                rowStart += 1
+            Loop
+        Catch ex As Exception
+            MsgBox(ex.Message)
+        End Try
+    End Sub
 
 End Module

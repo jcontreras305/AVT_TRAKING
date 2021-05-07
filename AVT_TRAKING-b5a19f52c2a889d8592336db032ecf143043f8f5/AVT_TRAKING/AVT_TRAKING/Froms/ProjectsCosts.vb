@@ -29,6 +29,9 @@
         mtdJobs.consultaWO(JobNumber, tablasDeTareas)
         If tablasDeTareas.Rows.Count > 0 Then
             idAuxWO = tablasDeTareas.Rows(0).ItemArray(5)
+            JobNumber = tablasDeTareas.Rows(0).ItemArray(0)
+            PO = tablasDeTareas.Rows(0).ItemArray(1)
+
         End If
         If Not cargarDatosProjecto(JobNumber) Then
             If chbComplete.Checked = True Then
@@ -158,7 +161,7 @@
     End Function
 
     Private Function cargarDatosProjecto(ByVal jobNum As String, ByVal WO As String, ByVal tk As String) As Boolean
-        Dim flag As Boolean = llenarCampos(mtdJobs.cargarDatosProjectOrder(jobNum, tk)) 'aqui puedo tomar los datos de idCliente , WO y PO
+        Dim flag As Boolean = llenarCampos(mtdJobs.cargarDatosProjectOrder(jobNum, tk, WO)) 'aqui puedo tomar los datos de idCliente , WO y PO
         mtdJobs.buscarHorasPorProjecto(tblHoursWorkedProject, WO, tk)
         mtdJobs.buscarExpencesPorProyecto(tblExpencesProjects, WO, tk)
         mtdJobs.buscarMaterialesPorProyecto(tblMaterialProjects, WO, tk)
@@ -178,16 +181,16 @@
             Dim contRow As Integer = tablasDeTareas.Rows.Count
             Dim index As Integer = 0
             For Each row As DataRow In tablasDeTareas.Rows
-                If row.ItemArray(3) <> task Then
-                    index = index + 1
-                Else
+                If row.ItemArray(3) = task And row.ItemArray(2) = WorkOrder Then
                     Exit For
+                Else
+                    index = index + 1
                 End If
             Next
             If index = contRow - 1 Then
                 index = 0
                 If cargarDatosProjecto(tablasDeTareas.Rows(index).ItemArray(0), tablasDeTareas.Rows(index).ItemArray(5), tablasDeTareas.Rows(index).ItemArray(3)) Then
-                    If chbComplete.Checked() = True Then
+                    If chbComplete.Checked() = False Then
                         activarCampos(True)
                     Else
                         activarCampos(False)
@@ -199,7 +202,7 @@
             Else
                 index += 1
                 If cargarDatosProjecto(tablasDeTareas.Rows(index).ItemArray(0), tablasDeTareas.Rows(index).ItemArray(5), tablasDeTareas.Rows(index).ItemArray(3)) Then
-                    If chbComplete.Checked() = True Then
+                    If chbComplete.Checked() = False Then
                         activarCampos(True)
                     Else
                         activarCampos(False)
@@ -216,16 +219,16 @@
             Dim contRow As Integer = tablasDeTareas.Rows.Count
             Dim index As Integer = 0
             For Each row As DataRow In tablasDeTareas.Rows
-                If row.ItemArray(3) <> task Then
-                    index = index + 1
-                Else
+                If row.ItemArray(3) = task And row.ItemArray(2) = WorkOrder Then
                     Exit For
+                Else
+                    index = index + 1
                 End If
             Next
             If index = 0 Then
                 index = contRow - 1
                 If cargarDatosProjecto(tablasDeTareas.Rows(index).ItemArray(0), tablasDeTareas.Rows(index).ItemArray(5), tablasDeTareas.Rows(index).ItemArray(3)) Then
-                    If chbComplete.Checked() = True Then
+                    If chbComplete.Checked() = False Then
                         activarCampos(True)
                     Else
                         activarCampos(False)
@@ -236,7 +239,7 @@
             Else
                 index -= 1
                 If cargarDatosProjecto(tablasDeTareas.Rows(index).ItemArray(0), tablasDeTareas.Rows(index).ItemArray(5), tablasDeTareas.Rows(index).ItemArray(3)) Then
-                    If chbComplete.Checked() = True Then
+                    If chbComplete.Checked() = False Then
                         activarCampos(True)
                     Else
                         activarCampos(False)
@@ -272,7 +275,7 @@
                 If Not cargarDatosProjecto(JobNumber) Then
                     activarCampos(False)
                 Else
-                    If chbComplete.Checked = True Then
+                    If chbComplete.Checked = False Then
                         activarCampos(True)
                     Else
                         activarCampos(False)
@@ -311,7 +314,7 @@
     Private Function llenarCampos(ByVal lstDatosPO As List(Of String)) As Boolean
         If lstDatosPO.Count > 0 And Not lstDatosPO Is Nothing Then
             txtClientName.Text = lstDatosPO(0)
-            txtWokOrder.Text = If(txtWokOrder.Text = "", lstDatosPO(1), txtWokOrder.Text)
+            txtWokOrder.Text = lstDatosPO(1)
             txtTask.Text = lstDatosPO(2)
             WorkOrder = lstDatosPO(1)
             task = lstDatosPO(2)
@@ -372,7 +375,7 @@
         Else
             JobNumber = cmbJobNumber.SelectedItem
             If cargarDatosProjecto(JobNumber) Then
-                If chbComplete.Checked() = True Then
+                If chbComplete.Checked() = False Then
                     activarCampos(True)
                 Else
                     activarCampos(False)
@@ -394,7 +397,7 @@
             Else
                 JobNumber = cmbJobNumber.SelectedItem
                 If cargarDatosProjecto(JobNumber) Then
-                    If chbComplete.Checked() = True Then
+                    If chbComplete.Checked() = False Then
                         activarCampos(True)
                     Else
                         activarCampos(False)
