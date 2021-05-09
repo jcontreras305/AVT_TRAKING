@@ -976,10 +976,13 @@
                 MessageBox.Show("Please chose a ROW.", "Important", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
             End If
             If listError.Count > 0 Then
+                Dim cont As Integer = 0
                 For Each row As DataGridViewRow In tblRecordEmployee.Rows
-                    If listError.Exists(row.Cells(0).Value) Then
-                        tblRecordEmployee.Rows(row.Index).DefaultCellStyle.BackColor = Color.Orange
-                    End If
+                    For Each dato As String In listError
+                        If dato.Equals(row.Cells(0).Value) Then
+                            tblRecordEmployee.Rows(row.Index).DefaultCellStyle.BackColor = Color.Orange
+                        End If
+                    Next
                 Next
             End If
             flagPressCellDate = False
@@ -997,9 +1000,11 @@
             End If
             If listError.Count > 0 Then
                 For Each row As DataGridViewRow In tblExpenses.Rows
-                    If listError.Exists(row.Cells(0).Value) Then
-                        tblExpenses.Rows(row.Index).DefaultCellStyle.BackColor = Color.Orange
-                    End If
+                    For Each dato As String In listError
+                        If dato.Equals(row.Cells(0).Value) Then
+                            tblExpenses.Rows(row.Index).DefaultCellStyle.BackColor = Color.Orange
+                        End If
+                    Next
                 Next
             End If
             flagPressCellDateExpense = False

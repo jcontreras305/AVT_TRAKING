@@ -225,7 +225,7 @@ and (CONCAT(firstName,' ',middleName,' ',lastName) like '%" + consulta + "%' or 
     Public Function llenarCmbEmpleadosManager(ByVal cmbEmployeManager As ComboBox) As List(Of String)
         Try
             conectar()
-            Dim cmd As New SqlCommand("select idEmployee, CONCAT (firstName,' ',lastName )as name from employees where typeEmployee = 'Manager'", conn)
+            Dim cmd As New SqlCommand("select idEmployee, CONCAT(lastName,', ',middleName,' ',firstName) as name from employees where typeEmployee = 'Manager'", conn)
             Dim reader As SqlDataReader = cmd.ExecuteReader()
             Dim lst As New List(Of String)
             While reader.Read()

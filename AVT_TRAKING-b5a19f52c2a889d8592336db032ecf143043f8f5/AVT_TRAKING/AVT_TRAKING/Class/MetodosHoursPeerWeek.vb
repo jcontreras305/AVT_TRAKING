@@ -31,7 +31,7 @@ Public Class MetodosHoursPeerWeek
     Dim consultaHoras As String = "select 
 hw.idHorsWorked,
 CONVERT(varchar,hw.dateWorked,101) as 'Date',
-CONCAT(wo.idWO ,' ', tk.task) as 'Project',
+CONCAT(wo.idWO ,'-', tk.task) as 'Project',
 tk.description as 'Project Description',
 wc.name as 'Work Code',
 wc.description as 'Clasification',
@@ -99,7 +99,7 @@ inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO "
             Dim cmd As New SqlCommand("select 
 exu.idExpenseUsed,
 CONVERT(varchar,exu.dateExpense,101) as 'Date',
-CONCAT(wo.idWO,' ',tk.task) as 'Project',
+CONCAT(wo.idWO,'-',tk.task) as 'Project',
 ex.expenseCode as 'Expense Code',
 exu.amount as 'Amount',
 exu.description as 'Description'

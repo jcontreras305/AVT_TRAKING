@@ -31,7 +31,6 @@
             idAuxWO = tablasDeTareas.Rows(0).ItemArray(5)
             JobNumber = tablasDeTareas.Rows(0).ItemArray(0)
             PO = tablasDeTareas.Rows(0).ItemArray(1)
-
         End If
         If Not cargarDatosProjecto(JobNumber) Then
             If chbComplete.Checked = True Then
