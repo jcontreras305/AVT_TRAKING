@@ -189,12 +189,12 @@ Partial Class ProjectsClients
         'btnUploadSchedule
         '
         Me.btnUploadSchedule.Dock = System.Windows.Forms.DockStyle.Top
-        Me.btnUploadSchedule.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnUploadSchedule.Font = New System.Drawing.Font("Microsoft Sans Serif", 13.5!)
         Me.btnUploadSchedule.Location = New System.Drawing.Point(0, 167)
         Me.btnUploadSchedule.Name = "btnUploadSchedule"
         Me.btnUploadSchedule.Size = New System.Drawing.Size(205, 35)
         Me.btnUploadSchedule.TabIndex = 3
-        Me.btnUploadSchedule.Text = "Upload Schedule"
+        Me.btnUploadSchedule.Text = "SCAFFOLD TRAKING"
         Me.btnUploadSchedule.TextAlign = System.Drawing.ContentAlignment.BottomLeft
         Me.btnUploadSchedule.UseVisualStyleBackColor = True
         '

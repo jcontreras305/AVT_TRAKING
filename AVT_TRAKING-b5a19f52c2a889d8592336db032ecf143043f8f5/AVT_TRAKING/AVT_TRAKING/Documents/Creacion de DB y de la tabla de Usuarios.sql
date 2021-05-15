@@ -83,9 +83,8 @@ GO
 insert into costCode values (240000000000000,'Fist'),(140000000000000,'Secund')
 GO
 
-
 --##########################################################################################
---##################  TABLA DE ABSENTS ####################################################
+--##################  TABLA DE ABSENTS #####################################################
 --##########################################################################################
 
 create table absents(
@@ -96,6 +95,25 @@ create table absents(
 	idEmployee varchar(36) 
 )
 GO
+
+--##########################################################################################
+--##################  TABLA DE AREAS #####################################################
+--##########################################################################################
+
+create table areas(
+	idArea int primary key not null,
+	name varchar(30),
+	cordinator varchar(50)
+)
+
+--##########################################################################################
+--##################  TABLA DE CLASSIFICATION ##############################################
+--##########################################################################################
+
+create table classification(
+	class varchar(10) primary key not null,
+	name varchar(50)
+)
 
 --##########################################################################################
 --##################  TABLA DE CLIENTES ####################################################
@@ -316,14 +334,12 @@ create table payRate(
 GO
 
 --##########################################################################################
---##################  TABLA DE PROYECT ORDER ###############################################
+--##################  TABLA DE MATERIAL MATERIAL STATUS ####################################
 --##########################################################################################
 
-create table projectOrder(
-	idPO bigint primary key not null ,
-	jobNo bigint 
+create table materialStatus(
+	idMaterialStatus varchar(20) primary key not null
 )
-GO
 
 --##########################################################################################
 --##################  TABLA DE MATERIAL VENDOR #############################################
@@ -337,6 +353,60 @@ create table vendor (
 	estatus char(1)
 )
 GO
+
+--##########################################################################################
+--##################  TABLA DE PRODUCT #####################################################
+--##########################################################################################
+
+create table product(
+	idProduct int primary key not null,
+	name varchar(60),
+	existences float,
+	weight float,
+	weightMesure float,
+	price float,
+	dailyRentalRate float,
+	weeklyRentalRate float,
+	monthlyRentalRate float,
+	QID varchar(20),
+	um varchar(10),
+	class varchar(10),
+	status varchar(20)
+)
+GO
+
+--##########################################################################################
+--##################  TABLA DE PROYECT ORDER ###############################################
+--##########################################################################################
+
+create table projectOrder(
+	idPO bigint primary key not null ,
+	jobNo bigint 
+)
+GO
+
+--##########################################################################################
+--##################  TABLA DE RENTAL #####################################################
+--##########################################################################################
+
+create table rental(
+	type varchar(15)primary key not null,
+	leg float,
+	plk float,
+	deck float,
+	ladder float,
+	truckLoad float,
+	truck float
+)
+
+--##########################################################################################
+--##################  TABLA DE SUBJOBS #####################################################
+--##########################################################################################
+
+create table subJobs(
+	idSubJob int primary key not null,
+	description varchar(30)
+)
 
 --##########################################################################################
 --##################  TABLA DE TASK ########################################################
@@ -360,6 +430,14 @@ create table task (
 )
 GO
 
+--##########################################################################################
+--##################  TABLA DE UNITMEASSUREMENTS ###############################################
+--##########################################################################################
+
+create table unitMeassurements(
+	um varchar(10) primary key not null,
+	name varchar(40) 
+)
 
 --##########################################################################################
 --##################  TABLA DE WORKCODE ####################################################
@@ -507,6 +585,8 @@ ALTER TABLE    materialOrder   WITH CHECK ADD  CONSTRAINT  fk_idMaterial_Materia
 REFERENCES    material  ( idMaterial )
 GO
 
+
+
 --##########################################################################################
 --##################  FOREIG KEYS MATERIAL USED ############################################
 --##########################################################################################
@@ -520,7 +600,23 @@ REFERENCES    task  ( idAux )
 GO
 
 --##########################################################################################
---##################  FOREIG KEYS PORJECT OREDER ###########################################
+--##################  FOREIG KEYS PROJECT OREDER ###########################################
+--##########################################################################################
+
+ALTER TABLE [product] WITH CHECK ADD CONSTRAINT [fk_unitMeassurement_product]
+FOREIGN KEY ([um]) REFERENCES unitMeassurements([um])  
+GO
+
+ALTER TABLE [product] WITH CHECK ADD CONSTRAINT [fk_class_product]
+FOREIGN KEY ([class]) REFERENCES dbo.classification([class])  
+GO
+
+ALTER TABLE [product] WITH CHECK ADD CONSTRAINT [fk_status_product]
+FOREIGN KEY ([status]) REFERENCES dbo.materialStatus([idMaterialStatus]) 
+GO
+
+--##########################################################################################
+--##################  FOREIG KEYS PROJECT OREDER ###########################################
 --##########################################################################################
 
 ALTER TABLE    projectOrder   WITH CHECK ADD  CONSTRAINT  fk_jobNo_PO  FOREIGN KEY( jobNo )
@@ -1064,24 +1160,65 @@ GO
 ---- (CTRL+K) + (CTRL+C) Comentar 
 ---- (CTRL+K) + (CTRL+U) Descomentar 
 
---create table company(
---	idCompany varchar(36) primary key not null ,
---	name varchar(30),
---	country varchar(58),
---	payTerms varchar(30),
---	invoiceDescr text,
---	idHomeAddress varchar(36),
---	idContact varchar(36)  
+--create table classification(
+--	class varchar(10) primary key not null,
+--	name varchar(50)
 --)
---go
 
---alter table company
---add constraint fk_idHomeAddress 
---foreign key (idHomeAddress)
---references homeAddress (idHomeAdress)
---go
---alter  table company 
---add constraint fk_idContact
---foreign key  (idContact)
---references contact(idContact)
---go
+--create table unitMeassurements(
+--	um varchar(10) primary key not null,
+--	name varchar(40) 
+--)
+
+--create table materialStatus(
+--	idMaterialStatus varchar(20) primary key not null
+--)
+
+--create table rental(
+--	type varchar(15)primary key not null,
+--	leg float,
+--	plk float,
+--	deck float,
+--	ladder float,
+--	truckLoad float,
+--	truck float
+--)
+
+--create table subJobs(
+--	idSubJob int primary key not null,
+--	description varchar(30)
+--)
+
+--create table areas(
+--	idArea int primary key not null,
+--	name varchar(30),
+--	cordinator varchar(50)
+----)
+
+--create table product(
+--	idProduct int primary key not null,
+--	name varchar(60),
+--	existences float,
+--	weight float,
+--	weightMesure float,
+--	price float,
+--	dailyRentalRate float,
+--	weeklyRentalRate float,
+--	monthlyRentalRate float,
+--	QID varchar(20),
+--	um varchar(10),
+--	class varchar(10),
+--	status varchar(20)
+--)
+
+--ALTER TABLE [product] 
+--WITH CHECK ADD CONSTRAINT [fk_unitMeassurement_product]
+--FOREIGN KEY ([um]) REFERENCES unitMeassurements([um])  
+
+--ALTER TABLE [product] 
+--WITH CHECK ADD CONSTRAINT [fk_class_product]
+--FOREIGN KEY ([class]) REFERENCES dbo.classification([class])  
+
+--ALTER TABLE [product] 
+--WITH CHECK ADD CONSTRAINT [fk_status_product]
+--FOREIGN KEY ([status]) REFERENCES dbo.materialStatus([idMaterialStatus])  

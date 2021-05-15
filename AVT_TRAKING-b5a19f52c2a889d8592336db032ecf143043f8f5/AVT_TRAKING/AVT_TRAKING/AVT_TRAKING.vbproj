@@ -89,6 +89,7 @@
     <Compile Include="Class\MetodosOthers.vb" />
     <Compile Include="Class\MetodosParaDocumentos.vb" />
     <Compile Include="Class\MetodosRenta.vb" />
+    <Compile Include="Class\MetodosScaffold.vb" />
     <Compile Include="Class\MetodosVendor.vb" />
     <Compile Include="Class\MetodosJobs.vb" />
     <Compile Include="Froms\AbsentsEmployee.Designer.vb">
@@ -174,6 +175,12 @@
     <Compile Include="Froms\Renta.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Froms\scafoldTarking.Designer.vb">
+      <DependentUpon>scafoldTarking.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Froms\scafoldTarking.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Froms\SelectDate.Designer.vb">
       <DependentUpon>SelectDate.vb</DependentUpon>
     </Compile>
@@ -238,6 +245,11 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="VRT_TRAKINGDataSet.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>VRT_TRAKINGDataSet.xsd</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Froms\AbsentsEmployee.resx">
@@ -278,6 +290,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Froms\Renta.resx">
       <DependentUpon>Renta.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Froms\scafoldTarking.resx">
+      <DependentUpon>scafoldTarking.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Froms\SelectDate.resx">
       <DependentUpon>SelectDate.vb</DependentUpon>
@@ -323,6 +338,17 @@
     </None>
     <None Include="App.config" />
     <None Include="packages.config" />
+    <None Include="VRT_TRAKINGDataSet.xsc">
+      <DependentUpon>VRT_TRAKINGDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="VRT_TRAKINGDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>VRT_TRAKINGDataSet.Designer.vb</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="VRT_TRAKINGDataSet.xss">
+      <DependentUpon>VRT_TRAKINGDataSet.xsd</DependentUpon>
+    </None>
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

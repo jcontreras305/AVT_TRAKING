@@ -266,6 +266,12 @@ Public Class ProjectsClients
         End If
     End Sub
 
+    Private Sub btnUploadSchedule_Click(sender As Object, e As EventArgs) Handles btnUploadSchedule.Click
+        Dim st As New scafoldTarking
+        Me.Visible = False
+        st.ShowDialog()
+        Me.Visible = True
+    End Sub
 
     Private Sub cmbCostCode_Leave(sender As Object, e As EventArgs) Handles cmbCostCode.Leave
         If btnAdd.Text = "Add" Then  'Se supone que no esta agregando si no que esta actualizando o visualizado unicamente
