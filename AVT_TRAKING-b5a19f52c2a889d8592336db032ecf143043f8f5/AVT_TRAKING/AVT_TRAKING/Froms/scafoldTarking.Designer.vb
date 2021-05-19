@@ -104,6 +104,8 @@ Partial Class scafoldTarking
         Me.Panel11 = New System.Windows.Forms.Panel()
         Me.tblProduct = New System.Windows.Forms.DataGridView()
         Me.Panel10 = New System.Windows.Forms.Panel()
+        Me.btnDownloadExcel = New System.Windows.Forms.Button()
+        Me.btnUploadProducts = New System.Windows.Forms.Button()
         Me.btnNextProduct = New System.Windows.Forms.Button()
         Me.btnBackProduct = New System.Windows.Forms.Button()
         Me.btnNewProduct = New System.Windows.Forms.Button()
@@ -202,13 +204,12 @@ Partial Class scafoldTarking
         Me.clmBase = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Panel46 = New System.Windows.Forms.Panel()
         Me.GroupBox3 = New System.Windows.Forms.GroupBox()
-        Me.Panel50 = New System.Windows.Forms.Panel()
-        Me.Label53 = New System.Windows.Forms.Label()
-        Me.Panel49 = New System.Windows.Forms.Panel()
         Me.DataGridView2 = New System.Windows.Forms.DataGridView()
         Me.clmQYT = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.clmHeigthExtra = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Panel48 = New System.Windows.Forms.Panel()
+        Me.Panel50 = New System.Windows.Forms.Panel()
+        Me.Label53 = New System.Windows.Forms.Label()
         Me.Label52 = New System.Windows.Forms.Label()
         Me.sprDecks = New System.Windows.Forms.NumericUpDown()
         Me.Panel45 = New System.Windows.Forms.Panel()
@@ -323,10 +324,9 @@ Partial Class scafoldTarking
         CType(Me.tblScaffoldInformation, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel46.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
-        Me.Panel50.SuspendLayout()
-        Me.Panel49.SuspendLayout()
         CType(Me.DataGridView2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel48.SuspendLayout()
+        Me.Panel50.SuspendLayout()
         CType(Me.sprDecks, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel45.SuspendLayout()
         Me.Panel42.SuspendLayout()
@@ -1100,6 +1100,8 @@ Partial Class scafoldTarking
         '
         'Panel10
         '
+        Me.Panel10.Controls.Add(Me.btnDownloadExcel)
+        Me.Panel10.Controls.Add(Me.btnUploadProducts)
         Me.Panel10.Controls.Add(Me.btnNextProduct)
         Me.Panel10.Controls.Add(Me.btnBackProduct)
         Me.Panel10.Controls.Add(Me.btnNewProduct)
@@ -1112,6 +1114,24 @@ Partial Class scafoldTarking
         Me.Panel10.Name = "Panel10"
         Me.Panel10.Size = New System.Drawing.Size(200, 461)
         Me.Panel10.TabIndex = 0
+        '
+        'btnDownloadExcel
+        '
+        Me.btnDownloadExcel.Location = New System.Drawing.Point(8, 352)
+        Me.btnDownloadExcel.Name = "btnDownloadExcel"
+        Me.btnDownloadExcel.Size = New System.Drawing.Size(179, 32)
+        Me.btnDownloadExcel.TabIndex = 8
+        Me.btnDownloadExcel.Text = "Download Excel"
+        Me.btnDownloadExcel.UseVisualStyleBackColor = True
+        '
+        'btnUploadProducts
+        '
+        Me.btnUploadProducts.Location = New System.Drawing.Point(11, 314)
+        Me.btnUploadProducts.Name = "btnUploadProducts"
+        Me.btnUploadProducts.Size = New System.Drawing.Size(176, 32)
+        Me.btnUploadProducts.TabIndex = 7
+        Me.btnUploadProducts.Text = "Upload Products"
+        Me.btnUploadProducts.UseVisualStyleBackColor = True
         '
         'btnNextProduct
         '
@@ -1576,7 +1596,7 @@ Partial Class scafoldTarking
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Label29.AutoSize = True
-        Me.Label29.Location = New System.Drawing.Point(100, 10)
+        Me.Label29.Location = New System.Drawing.Point(87, 10)
         Me.Label29.Name = "Label29"
         Me.Label29.Size = New System.Drawing.Size(98, 13)
         Me.Label29.TabIndex = 0
@@ -1697,6 +1717,7 @@ Partial Class scafoldTarking
         '
         'cmbErectorScaffold
         '
+        Me.cmbErectorScaffold.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.cmbErectorScaffold.FormattingEnabled = True
         Me.cmbErectorScaffold.Location = New System.Drawing.Point(411, 88)
         Me.cmbErectorScaffold.Name = "cmbErectorScaffold"
@@ -1705,6 +1726,7 @@ Partial Class scafoldTarking
         '
         'cmbForemanScaffold
         '
+        Me.cmbForemanScaffold.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.cmbForemanScaffold.FormattingEnabled = True
         Me.cmbForemanScaffold.Location = New System.Drawing.Point(411, 62)
         Me.cmbForemanScaffold.Name = "cmbForemanScaffold"
@@ -1713,6 +1735,7 @@ Partial Class scafoldTarking
         '
         'cmbContactScaffold
         '
+        Me.cmbContactScaffold.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.cmbContactScaffold.FormattingEnabled = True
         Me.cmbContactScaffold.Location = New System.Drawing.Point(411, 36)
         Me.cmbContactScaffold.Name = "cmbContactScaffold"
@@ -1721,6 +1744,7 @@ Partial Class scafoldTarking
         '
         'dtpReqCompScaffold
         '
+        Me.dtpReqCompScaffold.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.dtpReqCompScaffold.CustomFormat = "MM/dd/yyyy"
         Me.dtpReqCompScaffold.Location = New System.Drawing.Point(411, 11)
         Me.dtpReqCompScaffold.Name = "dtpReqCompScaffold"
@@ -1729,6 +1753,7 @@ Partial Class scafoldTarking
         '
         'Label51
         '
+        Me.Label51.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Label51.AutoSize = True
         Me.Label51.Location = New System.Drawing.Point(360, 89)
         Me.Label51.Name = "Label51"
@@ -1738,6 +1763,7 @@ Partial Class scafoldTarking
         '
         'Label50
         '
+        Me.Label50.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Label50.AutoSize = True
         Me.Label50.Location = New System.Drawing.Point(360, 65)
         Me.Label50.Name = "Label50"
@@ -1747,6 +1773,7 @@ Partial Class scafoldTarking
         '
         'Label49
         '
+        Me.Label49.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Label49.AutoSize = True
         Me.Label49.Location = New System.Drawing.Point(360, 41)
         Me.Label49.Name = "Label49"
@@ -1756,6 +1783,7 @@ Partial Class scafoldTarking
         '
         'Label48
         '
+        Me.Label48.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Label48.AutoSize = True
         Me.Label48.Location = New System.Drawing.Point(356, 17)
         Me.Label48.Name = "Label48"
@@ -1928,7 +1956,11 @@ Partial Class scafoldTarking
         '
         Me.tblActivityHours.AllowUserToAddRows = False
         Me.tblActivityHours.AllowUserToDeleteRows = False
+        Me.tblActivityHours.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.tblActivityHours.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
+        Me.tblActivityHours.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCellsExceptHeaders
+        Me.tblActivityHours.BackgroundColor = System.Drawing.Color.White
         DataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
         DataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Control
         DataGridViewCellStyle7.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.0!)
@@ -1947,7 +1979,7 @@ Partial Class scafoldTarking
         DataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText
         DataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
         Me.tblActivityHours.DefaultCellStyle = DataGridViewCellStyle8
-        Me.tblActivityHours.Location = New System.Drawing.Point(8, 60)
+        Me.tblActivityHours.Location = New System.Drawing.Point(8, 66)
         Me.tblActivityHours.Name = "tblActivityHours"
         DataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
         DataGridViewCellStyle9.BackColor = System.Drawing.SystemColors.Control
@@ -1957,7 +1989,7 @@ Partial Class scafoldTarking
         DataGridViewCellStyle9.SelectionForeColor = System.Drawing.SystemColors.HighlightText
         DataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
         Me.tblActivityHours.RowHeadersDefaultCellStyle = DataGridViewCellStyle9
-        Me.tblActivityHours.Size = New System.Drawing.Size(346, 50)
+        Me.tblActivityHours.Size = New System.Drawing.Size(346, 46)
         Me.tblActivityHours.TabIndex = 1
         '
         'clmBuild
@@ -2009,7 +2041,11 @@ Partial Class scafoldTarking
         '
         Me.tblScaffoldInformation.AllowUserToAddRows = False
         Me.tblScaffoldInformation.AllowUserToDeleteRows = False
+        Me.tblScaffoldInformation.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.tblScaffoldInformation.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
+        Me.tblScaffoldInformation.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCellsExceptHeaders
+        Me.tblScaffoldInformation.BackgroundColor = System.Drawing.Color.White
         DataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
         DataGridViewCellStyle10.BackColor = System.Drawing.SystemColors.Control
         DataGridViewCellStyle10.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.0!)
@@ -2038,7 +2074,7 @@ Partial Class scafoldTarking
         DataGridViewCellStyle12.SelectionForeColor = System.Drawing.SystemColors.HighlightText
         DataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
         Me.tblScaffoldInformation.RowHeadersDefaultCellStyle = DataGridViewCellStyle12
-        Me.tblScaffoldInformation.Size = New System.Drawing.Size(346, 39)
+        Me.tblScaffoldInformation.Size = New System.Drawing.Size(346, 44)
         Me.tblScaffoldInformation.TabIndex = 0
         '
         'clmType
@@ -2087,8 +2123,7 @@ Partial Class scafoldTarking
         '
         'GroupBox3
         '
-        Me.GroupBox3.Controls.Add(Me.Panel50)
-        Me.GroupBox3.Controls.Add(Me.Panel49)
+        Me.GroupBox3.Controls.Add(Me.DataGridView2)
         Me.GroupBox3.Controls.Add(Me.Panel48)
         Me.GroupBox3.Dock = System.Windows.Forms.DockStyle.Fill
         Me.GroupBox3.Location = New System.Drawing.Point(0, 0)
@@ -2098,43 +2133,13 @@ Partial Class scafoldTarking
         Me.GroupBox3.TabStop = False
         Me.GroupBox3.Text = "Extra Decks"
         '
-        'Panel50
-        '
-        Me.Panel50.Controls.Add(Me.Label53)
-        Me.Panel50.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel50.Location = New System.Drawing.Point(3, 41)
-        Me.Panel50.Name = "Panel50"
-        Me.Panel50.Size = New System.Drawing.Size(137, 24)
-        Me.Panel50.TabIndex = 4
-        '
-        'Label53
-        '
-        Me.Label53.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Label53.AutoSize = True
-        Me.Label53.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label53.Location = New System.Drawing.Point(45, 5)
-        Me.Label53.Name = "Label53"
-        Me.Label53.Size = New System.Drawing.Size(65, 13)
-        Me.Label53.TabIndex = 0
-        Me.Label53.Text = "Leg Count"
-        '
-        'Panel49
-        '
-        Me.Panel49.Controls.Add(Me.DataGridView2)
-        Me.Panel49.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.Panel49.Location = New System.Drawing.Point(3, 65)
-        Me.Panel49.Name = "Panel49"
-        Me.Panel49.Size = New System.Drawing.Size(137, 190)
-        Me.Panel49.TabIndex = 3
-        '
         'DataGridView2
         '
         Me.DataGridView2.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.DataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DataGridView2.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.clmQYT, Me.clmHeigthExtra})
         Me.DataGridView2.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.DataGridView2.Location = New System.Drawing.Point(0, 0)
+        Me.DataGridView2.Location = New System.Drawing.Point(3, 65)
         Me.DataGridView2.Name = "DataGridView2"
         Me.DataGridView2.Size = New System.Drawing.Size(137, 190)
         Me.DataGridView2.TabIndex = 0
@@ -2151,13 +2156,35 @@ Partial Class scafoldTarking
         '
         'Panel48
         '
+        Me.Panel48.Controls.Add(Me.Panel50)
         Me.Panel48.Controls.Add(Me.Label52)
         Me.Panel48.Controls.Add(Me.sprDecks)
         Me.Panel48.Dock = System.Windows.Forms.DockStyle.Top
         Me.Panel48.Location = New System.Drawing.Point(3, 16)
         Me.Panel48.Name = "Panel48"
-        Me.Panel48.Size = New System.Drawing.Size(137, 25)
+        Me.Panel48.Size = New System.Drawing.Size(137, 49)
         Me.Panel48.TabIndex = 2
+        '
+        'Panel50
+        '
+        Me.Panel50.Controls.Add(Me.Label53)
+        Me.Panel50.Dock = System.Windows.Forms.DockStyle.Bottom
+        Me.Panel50.Location = New System.Drawing.Point(0, 25)
+        Me.Panel50.Name = "Panel50"
+        Me.Panel50.Size = New System.Drawing.Size(137, 24)
+        Me.Panel50.TabIndex = 5
+        '
+        'Label53
+        '
+        Me.Label53.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Label53.AutoSize = True
+        Me.Label53.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label53.Location = New System.Drawing.Point(45, 5)
+        Me.Label53.Name = "Label53"
+        Me.Label53.Size = New System.Drawing.Size(65, 13)
+        Me.Label53.TabIndex = 0
+        Me.Label53.Text = "Leg Count"
         '
         'Label52
         '
@@ -2177,6 +2204,8 @@ Partial Class scafoldTarking
         '
         'Panel45
         '
+        Me.Panel45.AutoScroll = True
+        Me.Panel45.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.Panel45.Controls.Add(Me.dtpBlsDAte)
         Me.Panel45.Controls.Add(Me.txtAreaID)
         Me.Panel45.Controls.Add(Me.Label34)
@@ -2213,6 +2242,7 @@ Partial Class scafoldTarking
         '
         'dtpBlsDAte
         '
+        Me.dtpBlsDAte.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.dtpBlsDAte.CustomFormat = "MM/dd/yyyy"
         Me.dtpBlsDAte.Location = New System.Drawing.Point(556, 54)
         Me.dtpBlsDAte.Name = "dtpBlsDAte"
@@ -2221,6 +2251,7 @@ Partial Class scafoldTarking
         '
         'txtAreaID
         '
+        Me.txtAreaID.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.txtAreaID.Location = New System.Drawing.Point(395, 33)
         Me.txtAreaID.Name = "txtAreaID"
         Me.txtAreaID.ReadOnly = True
@@ -2238,10 +2269,12 @@ Partial Class scafoldTarking
         '
         'txtNotesAndComments
         '
+        Me.txtNotesAndComments.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.txtNotesAndComments.Location = New System.Drawing.Point(118, 108)
         Me.txtNotesAndComments.Multiline = True
         Me.txtNotesAndComments.Name = "txtNotesAndComments"
-        Me.txtNotesAndComments.Size = New System.Drawing.Size(516, 40)
+        Me.txtNotesAndComments.Size = New System.Drawing.Size(553, 40)
         Me.txtNotesAndComments.TabIndex = 27
         '
         'Label35
@@ -2255,6 +2288,7 @@ Partial Class scafoldTarking
         '
         'txtPropuse
         '
+        Me.txtPropuse.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.txtPropuse.Location = New System.Drawing.Point(395, 80)
         Me.txtPropuse.Name = "txtPropuse"
         Me.txtPropuse.Size = New System.Drawing.Size(276, 20)
@@ -2280,6 +2314,7 @@ Partial Class scafoldTarking
         '
         'cmbSubJob
         '
+        Me.cmbSubJob.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.cmbSubJob.FormattingEnabled = True
         Me.cmbSubJob.Location = New System.Drawing.Point(395, 57)
         Me.cmbSubJob.Name = "cmbSubJob"
@@ -2288,6 +2323,8 @@ Partial Class scafoldTarking
         '
         'Label38
         '
+        Me.Label38.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Label38.AutoSize = True
         Me.Label38.Location = New System.Drawing.Point(183, 11)
         Me.Label38.Name = "Label38"
@@ -2297,6 +2334,7 @@ Partial Class scafoldTarking
         '
         'txtAreaName
         '
+        Me.txtAreaName.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.txtAreaName.Location = New System.Drawing.Point(556, 31)
         Me.txtAreaName.Name = "txtAreaName"
         Me.txtAreaName.ReadOnly = True
@@ -2305,6 +2343,8 @@ Partial Class scafoldTarking
         '
         'Label39
         '
+        Me.Label39.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Label39.AutoSize = True
         Me.Label39.Location = New System.Drawing.Point(183, 34)
         Me.Label39.Name = "Label39"
@@ -2314,6 +2354,8 @@ Partial Class scafoldTarking
         '
         'Label40
         '
+        Me.Label40.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Label40.AutoSize = True
         Me.Label40.Location = New System.Drawing.Point(183, 57)
         Me.Label40.Name = "Label40"
@@ -2323,6 +2365,7 @@ Partial Class scafoldTarking
         '
         'txtWOInfo
         '
+        Me.txtWOInfo.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.txtWOInfo.Location = New System.Drawing.Point(395, 8)
         Me.txtWOInfo.Name = "txtWOInfo"
         Me.txtWOInfo.ReadOnly = True
@@ -2331,6 +2374,7 @@ Partial Class scafoldTarking
         '
         'Label41
         '
+        Me.Label41.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Label41.AutoSize = True
         Me.Label41.Location = New System.Drawing.Point(345, 11)
         Me.Label41.Name = "Label41"
@@ -2340,6 +2384,8 @@ Partial Class scafoldTarking
         '
         'txtLocation
         '
+        Me.txtLocation.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.txtLocation.Location = New System.Drawing.Point(54, 80)
         Me.txtLocation.Name = "txtLocation"
         Me.txtLocation.Size = New System.Drawing.Size(285, 20)
@@ -2347,6 +2393,7 @@ Partial Class scafoldTarking
         '
         'Label42
         '
+        Me.Label42.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Label42.AutoSize = True
         Me.Label42.Location = New System.Drawing.Point(345, 34)
         Me.Label42.Name = "Label42"
@@ -2356,6 +2403,8 @@ Partial Class scafoldTarking
         '
         'txtUnit
         '
+        Me.txtUnit.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.txtUnit.Location = New System.Drawing.Point(225, 54)
         Me.txtUnit.Name = "txtUnit"
         Me.txtUnit.ReadOnly = True
@@ -2364,15 +2413,19 @@ Partial Class scafoldTarking
         '
         'Label43
         '
+        Me.Label43.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Label43.AutoSize = True
         Me.Label43.Location = New System.Drawing.Point(512, 34)
         Me.Label43.Name = "Label43"
         Me.Label43.Size = New System.Drawing.Size(29, 13)
         Me.Label43.TabIndex = 9
         Me.Label43.Text = "Area"
+        Me.Label43.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'txtCAT
         '
+        Me.txtCAT.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.txtCAT.Location = New System.Drawing.Point(225, 31)
         Me.txtCAT.Name = "txtCAT"
         Me.txtCAT.ReadOnly = True
@@ -2381,6 +2434,7 @@ Partial Class scafoldTarking
         '
         'Label44
         '
+        Me.Label44.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Label44.AutoSize = True
         Me.Label44.Location = New System.Drawing.Point(345, 57)
         Me.Label44.Name = "Label44"
@@ -2390,6 +2444,8 @@ Partial Class scafoldTarking
         '
         'cmbWONum
         '
+        Me.cmbWONum.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.cmbWONum.FormattingEnabled = True
         Me.cmbWONum.Location = New System.Drawing.Point(225, 7)
         Me.cmbWONum.Name = "cmbWONum"
@@ -2398,12 +2454,14 @@ Partial Class scafoldTarking
         '
         'Label45
         '
+        Me.Label45.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Label45.AutoSize = True
         Me.Label45.Location = New System.Drawing.Point(512, 57)
         Me.Label45.Name = "Label45"
         Me.Label45.Size = New System.Drawing.Size(48, 13)
         Me.Label45.TabIndex = 11
         Me.Label45.Text = "Bld Date"
+        Me.Label45.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'cmbUnitID
         '
@@ -2415,6 +2473,7 @@ Partial Class scafoldTarking
         '
         'Label46
         '
+        Me.Label46.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Label46.AutoSize = True
         Me.Label46.Location = New System.Drawing.Point(345, 80)
         Me.Label46.Name = "Label46"
@@ -2656,12 +2715,11 @@ Partial Class scafoldTarking
         CType(Me.tblScaffoldInformation, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel46.ResumeLayout(False)
         Me.GroupBox3.ResumeLayout(False)
-        Me.Panel50.ResumeLayout(False)
-        Me.Panel50.PerformLayout()
-        Me.Panel49.ResumeLayout(False)
         CType(Me.DataGridView2, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel48.ResumeLayout(False)
         Me.Panel48.PerformLayout()
+        Me.Panel50.ResumeLayout(False)
+        Me.Panel50.PerformLayout()
         CType(Me.sprDecks, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel45.ResumeLayout(False)
         Me.Panel45.PerformLayout()
@@ -2881,9 +2939,6 @@ Partial Class scafoldTarking
     Friend WithEvents chbRolling As CheckBox
     Friend WithEvents chbCSAP As CheckBox
     Friend WithEvents GroupBox3 As GroupBox
-    Friend WithEvents Panel50 As Panel
-    Friend WithEvents Label53 As Label
-    Friend WithEvents Panel49 As Panel
     Friend WithEvents DataGridView2 As DataGridView
     Friend WithEvents clmQYT As DataGridViewTextBoxColumn
     Friend WithEvents clmHeigthExtra As DataGridViewTextBoxColumn
@@ -2901,4 +2956,8 @@ Partial Class scafoldTarking
     Friend WithEvents dtpBlsDAte As DateTimePicker
     Friend WithEvents btnSave As Button
     Friend WithEvents btnDeleteRows As Button
+    Friend WithEvents Panel50 As Panel
+    Friend WithEvents Label53 As Label
+    Friend WithEvents btnDownloadExcel As Button
+    Friend WithEvents btnUploadProducts As Button
 End Class

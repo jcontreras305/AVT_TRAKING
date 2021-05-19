@@ -391,12 +391,12 @@ GO
 
 create table rental(
 	type varchar(15)primary key not null,
-	leg float,
+	leg money,
 	plk float,
-	deck float,
-	ladder float,
+	deck money,
+	ladder money,
 	truckLoad float,
-	truck float
+	truck money
 )
 
 --##########################################################################################
@@ -1176,12 +1176,12 @@ GO
 
 --create table rental(
 --	type varchar(15)primary key not null,
---	leg float,
+--	leg money,
 --	plk float,
---	deck float,
---	ladder float,
+--	deck money,
+--	ladder money,
 --	truckLoad float,
---	truck float
+--	truck money
 --)
 
 --create table subJobs(
