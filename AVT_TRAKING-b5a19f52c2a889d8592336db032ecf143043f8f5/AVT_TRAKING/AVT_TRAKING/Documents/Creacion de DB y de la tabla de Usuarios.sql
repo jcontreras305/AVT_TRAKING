@@ -209,6 +209,18 @@ create table existences(
 GO
 
 --##########################################################################################
+--##################  TABLA DE EXISTENCES PRODUCT #########################################
+--##########################################################################################
+
+create table existencesProduct(
+	idExitenciaProduct varchar(36) primary key not null, 
+	idProduct int,
+	idMaterialStatus varchar(20),
+	quantity float
+)
+GO
+
+--##########################################################################################
 --##################  TABLA DE EXPENSES ####################################################
 --##########################################################################################
 
@@ -361,7 +373,6 @@ GO
 create table product(
 	idProduct int primary key not null,
 	name varchar(60),
-	existences float,
 	weight float,
 	weightMesure float,
 	price float,
@@ -370,8 +381,7 @@ create table product(
 	monthlyRentalRate float,
 	QID varchar(20),
 	um varchar(10),
-	class varchar(10),
-	status varchar(20)
+	class varchar(10)
 )
 GO
 
@@ -530,11 +540,23 @@ REFERENCES [dbo].[payRate] ([idPayRate])
 GO
 
 --##########################################################################################
---##################  FOREIG KEYS EXISTENCES #################################################
+--##################  FOREIG KEYS EXISTENCES ###############################################
 --##########################################################################################
 
 ALTER TABLE [dbo].[existences]  WITH CHECK ADD  CONSTRAINT [fk_idDM_existenece] FOREIGN KEY([idDM])
 REFERENCES [dbo].[detalleMaterial] ([idDM])
+GO
+
+--##########################################################################################
+--##################  FOREIG KEYS EXISTENCES PRODUCTO ######################################
+--##########################################################################################
+
+ALTER TABLE [existencesProducto] WITH CHECK ADD CONSTRAINT [fk_idProducto_existencesProducto]
+FOREIGN KEY ([idProduct]) REFERENCES [product]([idProduct]) 
+GO
+
+ALTER TABLE [existencesProducto] ADD CONSTRAINT [fk_idMaterialStatus_existencesProducto]
+FOREIGN KEY ([idMaterialStatus]) REFERENCES [materialStatus]([idMaterialStatus]) 
 GO
 
 --##########################################################################################
@@ -600,7 +622,7 @@ REFERENCES    task  ( idAux )
 GO
 
 --##########################################################################################
---##################  FOREIG KEYS PROJECT OREDER ###########################################
+--##################  FOREIG KEYS PRODUCT ##################################################
 --##########################################################################################
 
 ALTER TABLE [product] WITH CHECK ADD CONSTRAINT [fk_unitMeassurement_product]
@@ -609,10 +631,6 @@ GO
 
 ALTER TABLE [product] WITH CHECK ADD CONSTRAINT [fk_class_product]
 FOREIGN KEY ([class]) REFERENCES dbo.classification([class])  
-GO
-
-ALTER TABLE [product] WITH CHECK ADD CONSTRAINT [fk_status_product]
-FOREIGN KEY ([status]) REFERENCES dbo.materialStatus([idMaterialStatus]) 
 GO
 
 --##########################################################################################
@@ -1160,65 +1178,57 @@ GO
 ---- (CTRL+K) + (CTRL+C) Comentar 
 ---- (CTRL+K) + (CTRL+U) Descomentar 
 
---create table classification(
---	class varchar(10) primary key not null,
---	name varchar(50)
---)
+--ALTER TABLE [product] 
+--DROP CONSTRAINT [fk_unitMeassurement_product]
 
---create table unitMeassurements(
---	um varchar(10) primary key not null,
---	name varchar(40) 
---)
+--ALTER TABLE [product] 
+--DROP CONSTRAINT [fk_class_product]
 
---create table materialStatus(
---	idMaterialStatus varchar(20) primary key not null
---)
+--ALTER TABLE [product] 
+--DROP CONSTRAINT [fk_status_product]
 
---create table rental(
---	type varchar(15)primary key not null,
---	leg money,
---	plk float,
---	deck money,
---	ladder money,
---	truckLoad float,
---	truck money
---)
+--DROP TABLE product
 
---create table subJobs(
---	idSubJob int primary key not null,
---	description varchar(30)
---)
-
---create table areas(
---	idArea int primary key not null,
---	name varchar(30),
---	cordinator varchar(50)
-----)
-
---create table product(
+--create  table product(
 --	idProduct int primary key not null,
 --	name varchar(60),
---	existences float,
 --	weight float,
---	weightMesure float,
+--	weightMeasure float,
 --	price float,
 --	dailyRentalRate float,
 --	weeklyRentalRate float,
 --	monthlyRentalRate float,
 --	QID varchar(20),
 --	um varchar(10),
---	class varchar(10),
---	status varchar(20)
+--	class varchar(10)
 --)
+--go
 
---ALTER TABLE [product] 
---WITH CHECK ADD CONSTRAINT [fk_unitMeassurement_product]
---FOREIGN KEY ([um]) REFERENCES unitMeassurements([um])  
+--alter table product 
+--add constraint fk_um_product
+--foreign key (um) references unitMeassurements(um)
+--go
 
---ALTER TABLE [product] 
---WITH CHECK ADD CONSTRAINT [fk_class_product]
---FOREIGN KEY ([class]) REFERENCES dbo.classification([class])  
+--alter table product 
+--add constraint fk_class_product
+--foreign key (class) references classification(class)
+--go
 
---ALTER TABLE [product] 
---WITH CHECK ADD CONSTRAINT [fk_status_product]
---FOREIGN KEY ([status]) REFERENCES dbo.materialStatus([idMaterialStatus])  
+
+--create table existencesProduct(
+--	idExitenciaProduct varchar(36) primary key not null, 
+--	idProduct int,
+--	idMaterialStatus varchar(20),
+--	quantity float
+--)
+--go
+
+--alter table existencesProduct
+--add constraint fk_idProduct_existencesProducto
+--foreign key (idProduct) references product(idProduct) 
+--go
+
+--alter table existencesProduct 
+--add constraint fk_idMaterialStatus_existencesProduct
+--foreign key (idMaterialStatus) references materialStatus(idMaterialStatus) 
+--go

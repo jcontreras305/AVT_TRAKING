@@ -283,10 +283,24 @@ end ", conn)
 
     '========================================================= Classificaation ===========================================================
 
+    Public Sub llenarCellComboClass(ByVal combo As DataGridViewComboBoxCell)
+        Try
+            conectar()
+            Dim cmd As New SqlCommand("select class as class from classification", conn)
+            Dim dr As SqlDataReader = cmd.ExecuteReader()
+            While dr.Read()
+                combo.Items.Add(dr("class"))
+            End While
+        Catch ex As Exception
+        Finally
+            desconectar()
+        End Try
+    End Sub
+
     Public Function llenarClassification(ByVal tabla As DataGridView) As Boolean
         Try
             conectar()
-            Dim cmd As New SqlCommand("select * from classification", conn)
+            Dim cmd As New SqlCommand("select class as 'Class', name as 'Name' from classification", conn)
             If cmd.ExecuteNonQuery Then
                 Dim da As New SqlDataAdapter(cmd)
                 Dim dt As New DataTable
@@ -347,6 +361,49 @@ end", conn)
         End Try
     End Function
 
+    Public Function SaveClassification(ByVal tabla As DataTable) As Integer
+        Dim cont As Integer = 0
+        Try
+            conectar()
+            Dim tran As SqlTransaction
+            tran = conn.BeginTransaction()
+            Dim flag As Boolean = True
+            For Each row As DataRow In tabla.Rows()
+                If row.ItemArray(0).ToString() IsNot Nothing Then
+                    Dim cmd As New SqlCommand("
+if (select count(*) from classification where class = '" + row.ItemArray(0).ToString() + "') = 0
+begin 
+	insert into classification values('" + row.ItemArray(0).ToString() + "','" + row.ItemArray(1).ToString() + "')
+end
+else if (select count(*) from classification where class = '" + row.ItemArray(0).ToString() + "') = 1
+begin
+	update classification set name ='" + row.ItemArray(1).ToString() + "' where class = '" + row.ItemArray(0).ToString() + "'
+end", conn)
+                    cmd.Transaction = tran
+                    If cmd.ExecuteNonQuery = 1 Then
+                        cont += 1
+                    Else
+                        flag = False
+                        Exit For
+                    End If
+                End If
+            Next
+            If flag Then
+                tran.Commit()
+                Return 0
+            Else
+                tran.Rollback()
+                MsgBox("Error at line " + (cont))
+                Return cont + 1
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message())
+            Return cont + 1
+        Finally
+            desconectar()
+        End Try
+    End Function
+
     Public Function DeleteRowsClassification(ByVal tabla As DataGridView) As Boolean
         Try
             conectar()
@@ -387,15 +444,48 @@ end", conn)
     End Function
 
     '========================================================= Unit Meassurement =========================================================
+    Public Sub llenarCellComboUM(ByVal combo As DataGridViewComboBoxCell)
+        Try
+            conectar()
+            Dim cmd As New SqlCommand("select um as um from unitMeassurements", conn)
+            Dim dr As SqlDataReader = cmd.ExecuteReader()
+            While dr.Read()
+                combo.Items.Add(dr("um"))
+            End While
+        Catch ex As Exception
+        Finally
+            desconectar()
+        End Try
+    End Sub
+
     Public Function llenarUnitMeassurements(ByVal tabla As DataGridView) As Boolean
         Try
             conectar()
-            Dim cmd As New SqlCommand("select * from unitMeassurements", conn)
+            Dim cmd As New SqlCommand("select um as 'Unit', name as 'Name' from unitMeassurements", conn)
             If cmd.ExecuteNonQuery Then
                 Dim da As New SqlDataAdapter(cmd)
                 Dim dt As New DataTable
                 da.Fill(dt)
                 tabla.DataSource = dt
+                Return True
+            Else
+                Return False
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message())
+            Return False
+        Finally
+            desconectar()
+        End Try
+    End Function
+
+    Public Function llenarUnitMeassurements(ByVal tabla As DataTable) As Boolean
+        Try
+            conectar()
+            Dim cmd As New SqlCommand("select um as 'Unit', name as 'Name' from unitMeassurements", conn)
+            If cmd.ExecuteNonQuery Then
+                Dim da As New SqlDataAdapter(cmd)
+                da.Fill(tabla)
                 Return True
             Else
                 Return False
@@ -451,6 +541,47 @@ end", conn)
         End Try
     End Function
 
+    Public Function SaveUnitMeassurement(ByVal tabla As DataTable) As Boolean
+        Dim cont As Integer = 0
+        Try
+            conectar()
+            Dim tran As SqlTransaction
+            tran = conn.BeginTransaction()
+            Dim flag As Boolean = True
+            For Each row As DataRow In tabla.Rows()
+                If row.ItemArray(0) IsNot Nothing Then
+                    Dim cmd As New SqlCommand("
+if (select count(*) from unitMeassurements where um = '" + row.ItemArray(0).ToString() + "')=0
+begin 
+	insert into unitMeassurements values('" + row.ItemArray(0).ToString() + "','" + row.ItemArray(1).ToString() + "')
+end
+else if (select count(*) from unitMeassurements where um = '" + row.ItemArray(0).ToString() + "')=1
+begin 
+	update unitMeassurements set name = '" + row.ItemArray(1).ToString() + "' where um= '" + row.ItemArray(0).ToString() + "'
+end", conn)
+                    cmd.Transaction = tran
+                    If cmd.ExecuteNonQuery = 1 Then
+                        cont += 1
+                    Else
+                        flag = False
+                        Exit For
+                    End If
+                End If
+            Next
+            If flag Then
+                tran.Commit()
+                Return 0
+            Else
+                tran.Rollback()
+                Return cont + 1
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message())
+            Return cont + 1
+        Finally
+            desconectar()
+        End Try
+    End Function
     Public Function DeleteRowsUnitMeassurements(ByVal tabla As DataGridView) As Boolean
         Try
             conectar()
@@ -491,6 +622,51 @@ end", conn)
     End Function
 
     '========================================================= Material Status =========================================================
+    Public Function BuscarExistenciasPorStatus(ByVal idproducto As String, ByVal status As String) As List(Of String)
+        Try
+            conectar()
+            Dim cmd As New SqlCommand("select top(1)* from existencesProduct where idProduct = " + idproducto + " and idMaterialStatus = '" + status + "'", conn)
+            Dim list As New List(Of String)
+            Dim dr As SqlDataReader = cmd.ExecuteReader()
+            Dim flag As Boolean = False
+            While dr.Read()
+                list.Add(dr("idExitenciaProduct"))
+                list.Add(dr("idMaterialStatus"))
+                list.Add(dr("quantity"))
+                flag = True
+            End While
+            If flag = False Then
+                list.Add("")
+                list.Add(status)
+                list.Add("0")
+            End If
+            Return list
+        Catch ex As Exception
+            Dim listN As New List(Of String)
+            listN.Add("")
+            listN.Add(status)
+            listN.Add("0")
+            Return listN
+        Finally
+            desconectar()
+        End Try
+    End Function
+
+
+    Public Sub llenarCellComboStatus(ByVal combo As DataGridViewComboBoxCell, ByVal idproducto As String)
+        Try
+            conectar()
+            Dim cmd As New SqlCommand(If(idproducto = "", "select * from materialStatus", "select idMaterialStatus from existencesProduct where idProduct = " + idproducto + ""), conn)
+            Dim dr As SqlDataReader = cmd.ExecuteReader()
+            While dr.Read()
+                combo.Items.Add(dr("idMaterialStatus"))
+            End While
+        Catch ex As Exception
+        Finally
+            desconectar()
+        End Try
+    End Sub
+
     Public Function llenarMaterialStatus(ByVal tabla As DataGridView) As Boolean
         Try
             conectar()
@@ -546,6 +722,43 @@ end", conn)
         Catch ex As Exception
             MsgBox(ex.Message())
             Return False
+        Finally
+            desconectar()
+        End Try
+    End Function
+
+    Public Function SaveMaterialStatus(ByVal MaterialStatus As List(Of String)) As Integer
+        Dim cont As Integer = 1
+        Try
+            conectar()
+            Dim tran As SqlTransaction
+            tran = conn.BeginTransaction()
+            Dim flag As Integer = 0
+            For Each dato As String In MaterialStatus
+                If MaterialStatus IsNot Nothing Then
+                    Dim cmd As New SqlCommand("
+if (select count(*) from materialStatus where idMaterialStatus = '" + dato + "' )=0
+begin 
+	insert into materialStatus values('" + dato + "')
+end", conn)
+                    cmd.Transaction = tran
+                    If cmd.ExecuteNonQuery Then
+                        flag = 0
+                    Else
+                        flag = cont
+                    End If
+                End If
+            Next
+            If flag = 0 Then
+                tran.Commit()
+                Return flag
+            Else
+                tran.Rollback()
+                Return flag
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message())
+            Return cont
         Finally
             desconectar()
         End Try
@@ -775,16 +988,22 @@ where typeEmployee = 'Manager'", conn)
     Public Function llenarProduct(ByVal tabla As DataGridView) As Boolean
         Try
             conectar()
-            Dim cmd As New SqlCommand("select pd.idProduct  as 'ID', pd.name as 'Product Name', pd.um as 'UM',pd.class as 'Class', pd.weight as 'Weigth', pd.weightMeasure as 'Weigth Measure',pd.price as '$UM',pd.dailyRentalRate as 'Daily Rental Rate' ,pd.weeklyRentalRate as 'Weekly Rental Rate', pd.monthlyRentalRate as 'Monthly Rental Rate' ,pd.existences as 'Order' , pd.QID
+            Dim cmd As New SqlCommand("select pd.idProduct  as 'ID', pd.name as 'Product Name', pd.um as 'UM',pd.class as 'Class', pd.price as 'Cost', pd.weight as 'Weight', pd.weightMeasure as 'Weight Measure',pd.price as '$UM',pd.dailyRentalRate as 'Daily Rental Rate' ,pd.weeklyRentalRate as 'Weekly Rental Rate', pd.monthlyRentalRate as 'Monthly Rental Rate' ,
+(select top(1) quantity from existencesProduct as ex where ex.idProduct= pd.idProduct) as 'QTY' ,--ex.quantity as 'QTY' , 
+pd.QID,
+(select top(1) idMaterialStatus from existencesProduct as ex where ex.idProduct= pd.idProduct) as 'Status' ,--pd.QID,ex.idMaterialStatus as 'Status',
+(select top(1) idExitenciaProduct from existencesProduct as ex where ex.idProduct= pd.idProduct) as  'idExitenciaProduct' --ex.idExitenciaProduct
 from product as pd 
 inner join unitMeassurements as um on pd.um = um.um
 inner join classification as cl on cl.class = pd.class
-inner join materialStatus as ms on ms.idMaterialStatus = pd.status", conn)
+order by pd.idProduct", conn)
             If cmd.ExecuteNonQuery Then
                 Dim da As New SqlDataAdapter(cmd)
                 Dim dt As New DataTable
                 da.Fill(dt)
                 tabla.DataSource = dt
+                tabla.Columns("idExitenciaProduct").ReadOnly = True
+                tabla.Columns("idExitenciaProduct").Visible = False
                 Return True
             Else
                 Return False
@@ -797,9 +1016,183 @@ inner join materialStatus as ms on ms.idMaterialStatus = pd.status", conn)
         End Try
     End Function
 
+    Public Function llenarProduct(ByVal tabla As DataTable) As Boolean
+        Try
+            conectar()
+            Dim cmd As New SqlCommand("select pd.idProduct  as 'ID', pd.name as 'Product Name', pd.um as 'UM',pd.class as 'Class', pd.price as 'Cost', pd.weight as 'Weight', pd.weightMeasure as 'Weight Measure',pd.price as '$UM',pd.dailyRentalRate as 'Daily Rental Rate' ,pd.weeklyRentalRate as 'Weekly Rental Rate', pd.monthlyRentalRate as 'Monthly Rental Rate' ,
+(select top(1) quantity from existencesProduct as ex where ex.idProduct= pd.idProduct) as 'QTY' ,--ex.quantity as 'QTY',
+pd.QID, 
+(select top(1) idMaterialStatus from existencesProduct as ex where ex.idProduct= pd.idProduct) as 'Status' ,--pd.QID,ex.idMaterialStatus as 'Status',
+(select top(1) idExitenciaProduct from existencesProduct as ex where ex.idProduct= pd.idProduct) as  'idExitenciaProduct' --ex.idExitenciaProduct
+from product as pd 
+inner join unitMeassurements as um on pd.um = um.um
+inner join classification as cl on cl.class = pd.class
+order by pd.idProduct", conn)
+            If cmd.ExecuteNonQuery Then
+                Dim da As New SqlDataAdapter(cmd)
+                da.Fill(tabla)
+                tabla.Columns("QID").ReadOnly = True
+                Return True
+            Else
+                Return False
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message())
+            Return False
+        Finally
+            desconectar()
+        End Try
+    End Function
 
+    Public Function saveProduct(ByVal tabla As DataTable) As List(Of Integer)
+        Dim cont = 0
+        conectar()
+        Dim tran As SqlTransaction
+        tran = conn.BeginTransaction()
+        Dim flag As Boolean = True
+        Dim listFilasError As New List(Of Integer)
+        Try
+            For Each row As DataRow In tabla.Rows()
+                Dim nameProduct = row.ItemArray(1).ToString.Replace("'", "''")
+                Dim consultaProduct As New SqlCommand("if (select count(*)from product as p inner join existencesProduct as e on p.idProduct = e.idProduct where (p.name= '" + nameProduct + "' and p.idProduct = " + row.ItemArray(0).ToString() + " ) and e.idMaterialStatus = '" + row.ItemArray(12).ToString() + "' ) = 0
+begin 
+    if (select count(*)from product as p inner join existencesProduct as e on p.idProduct = e.idProduct where (p.name= '" + nameProduct + "' and p.idProduct = " + row.ItemArray(0).ToString() + "))=0
+	begin
+        insert into product values(" + row.ItemArray(0).ToString() + ",'" + nameProduct + "'," + If(row.ItemArray(5).ToString() = "", "0", row.ItemArray(5).ToString()) + "," + If(row.ItemArray(6).ToString() = "", "0", row.ItemArray(6).ToString()) + ",0.0," + If(row.ItemArray(7).ToString() = "", "0", row.ItemArray(7).ToString()) + "," + If(row.ItemArray(8).ToString() = "", "0", row.ItemArray(8).ToString()) + "," + If(row.ItemArray(9).ToString() = "", "0", row.ItemArray(9).ToString()) + ",'" + row.ItemArray(11).ToString() + "' ,'" + row.ItemArray(2).ToString() + "','" + row.ItemArray(3).ToString() + "')
+    end
+	insert into existencesProduct values(NEWID()," + row.ItemArray(0).ToString() + ",'" + row.ItemArray(12).ToString() + "'," + If(row.ItemArray(10).ToString() = "", "0", row.ItemArray(10).ToString()) + ")
+end", conn)
+                consultaProduct.Transaction = tran
+                If consultaProduct.ExecuteNonQuery > 0 Then
+                    cont += 1
+                    flag = True
+                Else
+                    listFilasError.Add(cont)
+                    flag = False
+                End If
+            Next
+            If listFilasError.Count() > 0 Then
+                If DialogResult.OK = MessageBox.Show("We found a errors in " + listFilasError.Count.ToString() + " rows Would you like to insert the other Records?", "Important", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) Then
+                    tran.Commit()
+                Else
+                    tran.Rollback()
+                End If
+            Else
+                tran.Commit()
+            End If
+            Return listFilasError
+        Catch ex As Exception
+            MsgBox(ex.Message())
+            tran.Rollback()
+            listFilasError.Add(cont)
+            Return listFilasError
+        Finally
+            desconectar()
+        End Try
+    End Function
 
+    Public Function saveProducto(ByVal tabla As DataGridView, ByVal flagAllRows As Boolean) As List(Of Integer)
+        conectar()
+        Dim tran As SqlTransaction
+        tran = conn.BeginTransaction()
+        Dim listError As New List(Of Integer)
+        Try
+            Dim flag As Integer = 0
+            For Each row As DataGridViewRow In If(flagAllRows, tabla.Rows(), tabla.SelectedRows())
+                If row.Cells(0).Value IsNot Nothing Then 'No es la ultima fila 
+                    If row.Cells("idExitenciaProduct").Value.ToString() = "" Then 'insertar
+                        Dim cmd As New SqlCommand(
+"if (select count(*) from product where idProduct = " + row.Cells(0).Value.ToString() + " or name = '" + row.Cells(1).Value.ToString() + "' or QID = '" + row.Cells(12).Value.ToString() + "')=0
+begin
+	if (select count(*)from product as p inner join existencesProduct as e on p.idProduct = e.idProduct where ( p.idProduct = " + row.Cells(0).Value.ToString() + " and p.name= '" + row.Cells(1).Value.ToString() + "'))=0
+	begin
+        insert into product values(" + row.Cells(0).Value.ToString() + ",'" + row.Cells(1).Value.ToString() + "'," + row.Cells(5).Value.ToString() + "," + row.Cells(6).Value.ToString() + "," + row.Cells(4).Value.ToString() + "," + row.Cells(8).Value.ToString() + "," + row.Cells(9).Value.ToString() + "," + row.Cells(10).Value.ToString() + ",'" + row.Cells(12).Value.ToString() + "' ,'" + row.Cells(2).Value.ToString() + "','" + row.Cells(3).Value.ToString() + "')
+    end
+	insert into existencesProduct values(NEWID()," + row.Cells(0).Value.ToString() + ",'" + row.Cells(13).Value.ToString() + "',0)
+end
+else if (select count(*) from product where idProduct = " + row.Cells(0).Value.ToString() + " or name = '" + row.Cells(1).Value.ToString() + "' or QID = '" + row.Cells(12).Value.ToString() + "')=1
+begin
+	update product set weight = " + row.Cells(5).Value.ToString() + " , weightMeasure = " + row.Cells(6).Value.ToString() + ", price=" + row.Cells(4).Value.ToString() + ", dailyRentalRate = " + row.Cells(8).Value.ToString() + " , weeklyRentalRate = " + row.Cells(9).Value.ToString() + ", monthlyRentalRate = " + row.Cells(10).Value.ToString() + ", um = '" + row.Cells(2).Value.ToString() + "', class = '" + row.Cells(3).Value.ToString() + "' where idProduct = " + row.Cells(0).Value.ToString() + "
+	if (select count(*) from existencesProduct where idProduct = " + row.Cells(0).Value.ToString() + " and idMaterialStatus = '" + row.Cells(13).Value.ToString() + "')=0
+	begin 
+		insert into existencesProduct values(NEWID()," + row.Cells(0).Value.ToString() + ",'" + row.Cells(13).Value.ToString() + "'," + row.Cells(11).Value.ToString() + ")
+	end
+end", conn)
+                        cmd.Transaction = tran
+                        If cmd.ExecuteNonQuery > 0 Then
+                            flag = +1
+                        Else
+                            listError.Add(flag)
+                        End If
+                    Else 'update
+                        Dim cmd As New SqlCommand("
+if (select idMaterialStatus from existencesProduct where idProduct = " + row.Cells(0).Value.ToString() + " and idExitenciaProduct = '" + row.Cells(14).Value.ToString() + "')='" + row.Cells(13).Value.ToString() + "'
+begin 
+	update product set weight = " + row.Cells(5).Value.ToString() + " , weightMeasure = " + row.Cells(6).Value.ToString() + ", price=" + row.Cells(4).Value.ToString() + ", dailyRentalRate = " + row.Cells(8).Value.ToString() + " , weeklyRentalRate = " + row.Cells(9).Value.ToString() + ", monthlyRentalRate = " + row.Cells(10).Value.ToString() + ", um = '" + row.Cells(2).Value.ToString() + "', class = '" + row.Cells(3).Value.ToString() + "' where idProduct = " + row.Cells(0).Value.ToString() + "
+end
+else 
+begin 
+	update product set weight = " + row.Cells(5).Value.ToString() + " , weightMeasure = " + row.Cells(6).Value.ToString() + ", price=" + row.Cells(4).Value.ToString() + ", dailyRentalRate = " + row.Cells(8).Value.ToString() + " , weeklyRentalRate = " + row.Cells(9).Value.ToString() + ", monthlyRentalRate = " + row.Cells(10).Value.ToString() + ", um = '" + row.Cells(2).Value.ToString() + "', class = '" + row.Cells(3).Value.ToString() + "' where idProduct = " + row.Cells(0).Value.ToString() + "
+	if (select count(*) from existencesProduct where idProduct = " + row.Cells(0).Value.ToString() + " and idMaterialStatus = '" + row.Cells(13).Value.ToString() + "')=1
+	begin 
+		update existencesProduct set quantity = quantity + (select quantity from existencesProduct where idProduct = " + row.Cells(0).Value.ToString() + " and idMaterialStatus = '" + row.Cells(13).Value.ToString() + "') where idProduct = " + row.Cells(0).Value.ToString() + " and idMaterialStatus = '" + row.Cells(13).Value.ToString() + "'
+		delete from existencesProduct where idProduct = " + row.Cells(0).Value.ToString() + " and idMaterialStatus = '" + row.Cells(13).Value.ToString() + "'
+	end
+	else
+	begin 
+		insert into existencesProduct values(NEWID()," + row.Cells(0).Value.ToString() + ",'" + row.Cells(13).Value.ToString() + "',0)
+	end	
+end", conn)
+                        cmd.Transaction = tran
+                        If cmd.ExecuteNonQuery > 0 Then
+                            flag = +1
+                        Else
+                            listError.Add(flag)
+                        End If
+                    End If
+                End If
+            Next
+            If listError.Count = 0 Then
+                tran.Commit()
+            Else
+                tran.Rollback()
+            End If
+            Return listError
+        Catch ex As Exception
+            tran.Rollback()
+            Return Nothing
+        Finally
+            desconectar()
+        End Try
+    End Function
 
+    Public Function llenarProduct(ByVal tabla As DataGridView, ByVal text As String, ByVal flagIdProduct As Boolean) As Boolean
+        Try
+            conectar()
+            Dim cmd As New SqlCommand("select pd.idProduct  as 'ID', pd.name as 'Product Name', pd.um as 'UM',pd.class as 'Class', pd.price as 'Cost', pd.weight as 'Weigth', pd.weightMeasure as 'Weigth Measure',pd.price as '$UM',pd.dailyRentalRate as 'Daily Rental Rate' ,pd.weeklyRentalRate as 'Weekly Rental Rate', pd.monthlyRentalRate as 'Monthly Rental Rate' ,
+(select top(1) quantity from existencesProduct as ex where ex.idProduct= pd.idProduct) as 'QTY' ,--ex.quantity as 'QTY' ,
+pd.QID, 
+(select top(1) idMaterialStatus from existencesProduct as ex where ex.idProduct= pd.idProduct) as 'Status' ,--pd.QID,ex.idMaterialStatus as 'Status',
+(select top(1) idExitenciaProduct from existencesProduct as ex where ex.idProduct= pd.idProduct) as  'idExitenciaProduct' --ex.idExitenciaProduct
+from product as pd 
+inner join unitMeassurements as um on pd.um = um.um
+inner join classification as cl on cl.class = pd.class " +
+If(flagIdProduct, "where pd.idProduct = " + text + " or pd.QID = '" + text + "'", "where pd.class Like '%" + text + "%' or cl.name like '%" + text + "%'") + " order by pd.idProduct", conn)
+            If cmd.ExecuteNonQuery Then
+                Dim da As New SqlDataAdapter(cmd)
+                Dim tablaAux As New DataTable
+                da.Fill(tablaAux)
+                tabla.DataSource = tablaAux
+                Return True
+            Else
+                Return False
+            End If
+        Catch ex As Exception
+            Return False
+        Finally
+            desconectar()
+        End Try
+    End Function
 
 
 
