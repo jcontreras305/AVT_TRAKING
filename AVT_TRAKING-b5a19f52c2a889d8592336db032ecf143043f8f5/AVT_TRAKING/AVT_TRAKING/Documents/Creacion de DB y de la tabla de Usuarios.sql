@@ -209,18 +209,6 @@ create table existences(
 GO
 
 --##########################################################################################
---##################  TABLA DE EXISTENCES PRODUCT #########################################
---##########################################################################################
-
-create table existencesProduct(
-	idExitenciaProduct varchar(36) primary key not null, 
-	idProduct int,
-	idMaterialStatus varchar(20),
-	quantity float
-)
-GO
-
---##########################################################################################
 --##################  TABLA DE EXPENSES ####################################################
 --##########################################################################################
 
@@ -370,18 +358,19 @@ GO
 --##################  TABLA DE PRODUCT #####################################################
 --##########################################################################################
 
-create table product(
+create  table product(
 	idProduct int primary key not null,
 	name varchar(60),
 	weight float,
-	weightMesure float,
+	weightMeasure float,
 	price float,
 	dailyRentalRate float,
 	weeklyRentalRate float,
 	monthlyRentalRate float,
 	QID varchar(20),
 	um varchar(10),
-	class varchar(10)
+	class varchar(10),
+	quantity float
 )
 GO
 
@@ -545,18 +534,6 @@ GO
 
 ALTER TABLE [dbo].[existences]  WITH CHECK ADD  CONSTRAINT [fk_idDM_existenece] FOREIGN KEY([idDM])
 REFERENCES [dbo].[detalleMaterial] ([idDM])
-GO
-
---##########################################################################################
---##################  FOREIG KEYS EXISTENCES PRODUCTO ######################################
---##########################################################################################
-
-ALTER TABLE [existencesProducto] WITH CHECK ADD CONSTRAINT [fk_idProducto_existencesProducto]
-FOREIGN KEY ([idProduct]) REFERENCES [product]([idProduct]) 
-GO
-
-ALTER TABLE [existencesProducto] ADD CONSTRAINT [fk_idMaterialStatus_existencesProducto]
-FOREIGN KEY ([idMaterialStatus]) REFERENCES [materialStatus]([idMaterialStatus]) 
 GO
 
 --##########################################################################################
@@ -1200,7 +1177,8 @@ GO
 --	monthlyRentalRate float,
 --	QID varchar(20),
 --	um varchar(10),
---	class varchar(10)
+--	class varchar(10),
+--	quantity float
 --)
 --go
 
@@ -1214,21 +1192,3 @@ GO
 --foreign key (class) references classification(class)
 --go
 
-
---create table existencesProduct(
---	idExitenciaProduct varchar(36) primary key not null, 
---	idProduct int,
---	idMaterialStatus varchar(20),
---	quantity float
---)
---go
-
---alter table existencesProduct
---add constraint fk_idProduct_existencesProducto
---foreign key (idProduct) references product(idProduct) 
---go
-
---alter table existencesProduct 
---add constraint fk_idMaterialStatus_existencesProduct
---foreign key (idMaterialStatus) references materialStatus(idMaterialStatus) 
---go

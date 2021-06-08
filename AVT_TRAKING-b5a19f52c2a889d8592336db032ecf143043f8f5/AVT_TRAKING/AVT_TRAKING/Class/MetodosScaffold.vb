@@ -261,9 +261,13 @@ end ", conn)
         Try
             conectar()
             Dim cmd As New SqlCommand("select idEmployee, CONCAT(firstName,' ',middleName,' ',lastName) , photo as 'Photo', SAPNumber, numberEmploye from employees where estatus = 'E' ", conn)
+            tabla.Clear()
             If cmd.ExecuteNonQuery Then
                 Dim da As New SqlDataAdapter(cmd)
                 da.Fill(tabla)
+            End If
+            If combo.Items.Count > 0 Then
+                combo.Items.Clear()
             End If
             For Each row As DataRow In tabla.Rows
                 combo.Items.Add(row.ItemArray(1))
@@ -988,11 +992,9 @@ where typeEmployee = 'Manager'", conn)
     Public Function llenarProduct(ByVal tabla As DataGridView) As Boolean
         Try
             conectar()
-            Dim cmd As New SqlCommand("select pd.idProduct  as 'ID', pd.name as 'Product Name', pd.um as 'UM',pd.class as 'Class', pd.price as 'Cost', pd.weight as 'Weight', pd.weightMeasure as 'Weight Measure',pd.price as '$UM',pd.dailyRentalRate as 'Daily Rental Rate' ,pd.weeklyRentalRate as 'Weekly Rental Rate', pd.monthlyRentalRate as 'Monthly Rental Rate' ,
-(select top(1) quantity from existencesProduct as ex where ex.idProduct= pd.idProduct) as 'QTY' ,--ex.quantity as 'QTY' , 
-pd.QID,
-(select top(1) idMaterialStatus from existencesProduct as ex where ex.idProduct= pd.idProduct) as 'Status' ,--pd.QID,ex.idMaterialStatus as 'Status',
-(select top(1) idExitenciaProduct from existencesProduct as ex where ex.idProduct= pd.idProduct) as  'idExitenciaProduct' --ex.idExitenciaProduct
+            Dim cmd As New SqlCommand("select pd.idProduct  as 'ID', pd.name as 'Product Name', pd.um as 'UM',pd.class as 'Class', pd.weight as 'Weigth', pd.weightMeasure as 'Weigth Measure',pd.price as '$UM',pd.dailyRentalRate as 'Daily Rental Rate' ,pd.weeklyRentalRate as 'Weekly Rental Rate', pd.monthlyRentalRate as 'Monthly Rental Rate' ,
+quantity as 'QTY',
+pd.QID
 from product as pd 
 inner join unitMeassurements as um on pd.um = um.um
 inner join classification as cl on cl.class = pd.class
@@ -1002,8 +1004,8 @@ order by pd.idProduct", conn)
                 Dim dt As New DataTable
                 da.Fill(dt)
                 tabla.DataSource = dt
-                tabla.Columns("idExitenciaProduct").ReadOnly = True
-                tabla.Columns("idExitenciaProduct").Visible = False
+
+
                 Return True
             Else
                 Return False
@@ -1019,11 +1021,9 @@ order by pd.idProduct", conn)
     Public Function llenarProduct(ByVal tabla As DataTable) As Boolean
         Try
             conectar()
-            Dim cmd As New SqlCommand("select pd.idProduct  as 'ID', pd.name as 'Product Name', pd.um as 'UM',pd.class as 'Class', pd.price as 'Cost', pd.weight as 'Weight', pd.weightMeasure as 'Weight Measure',pd.price as '$UM',pd.dailyRentalRate as 'Daily Rental Rate' ,pd.weeklyRentalRate as 'Weekly Rental Rate', pd.monthlyRentalRate as 'Monthly Rental Rate' ,
-(select top(1) quantity from existencesProduct as ex where ex.idProduct= pd.idProduct) as 'QTY' ,--ex.quantity as 'QTY',
-pd.QID, 
-(select top(1) idMaterialStatus from existencesProduct as ex where ex.idProduct= pd.idProduct) as 'Status' ,--pd.QID,ex.idMaterialStatus as 'Status',
-(select top(1) idExitenciaProduct from existencesProduct as ex where ex.idProduct= pd.idProduct) as  'idExitenciaProduct' --ex.idExitenciaProduct
+            Dim cmd As New SqlCommand("select pd.idProduct  as 'ID', pd.name as 'Product Name', pd.um as 'UM',pd.class as 'Class', pd.weight as 'Weigth', pd.weightMeasure as 'Weigth Measure',pd.price as '$UM',pd.dailyRentalRate as 'Daily Rental Rate' ,pd.weeklyRentalRate as 'Weekly Rental Rate', pd.monthlyRentalRate as 'Monthly Rental Rate' ,
+quantity as 'QTY' ,--ex.quantity as 'QTY' ,
+pd.QID
 from product as pd 
 inner join unitMeassurements as um on pd.um = um.um
 inner join classification as cl on cl.class = pd.class
@@ -1031,7 +1031,6 @@ order by pd.idProduct", conn)
             If cmd.ExecuteNonQuery Then
                 Dim da As New SqlDataAdapter(cmd)
                 da.Fill(tabla)
-                tabla.Columns("QID").ReadOnly = True
                 Return True
             Else
                 Return False
@@ -1054,13 +1053,10 @@ order by pd.idProduct", conn)
         Try
             For Each row As DataRow In tabla.Rows()
                 Dim nameProduct = row.ItemArray(1).ToString.Replace("'", "''")
-                Dim consultaProduct As New SqlCommand("if (select count(*)from product as p inner join existencesProduct as e on p.idProduct = e.idProduct where (p.name= '" + nameProduct + "' and p.idProduct = " + row.ItemArray(0).ToString() + " ) and e.idMaterialStatus = '" + row.ItemArray(12).ToString() + "' ) = 0
+                Dim consultaProduct As New SqlCommand("
+if (select count(*) from product as p where p.name= '" + nameProduct + "' or p.idProduct = " + row.ItemArray(0).ToString() + " or p.QID = '" + row.ItemArray(11).ToString() + "' ) = 0
 begin 
-    if (select count(*)from product as p inner join existencesProduct as e on p.idProduct = e.idProduct where (p.name= '" + nameProduct + "' and p.idProduct = " + row.ItemArray(0).ToString() + "))=0
-	begin
-        insert into product values(" + row.ItemArray(0).ToString() + ",'" + nameProduct + "'," + If(row.ItemArray(5).ToString() = "", "0", row.ItemArray(5).ToString()) + "," + If(row.ItemArray(6).ToString() = "", "0", row.ItemArray(6).ToString()) + ",0.0," + If(row.ItemArray(7).ToString() = "", "0", row.ItemArray(7).ToString()) + "," + If(row.ItemArray(8).ToString() = "", "0", row.ItemArray(8).ToString()) + "," + If(row.ItemArray(9).ToString() = "", "0", row.ItemArray(9).ToString()) + ",'" + row.ItemArray(11).ToString() + "' ,'" + row.ItemArray(2).ToString() + "','" + row.ItemArray(3).ToString() + "')
-    end
-	insert into existencesProduct values(NEWID()," + row.ItemArray(0).ToString() + ",'" + row.ItemArray(12).ToString() + "'," + If(row.ItemArray(10).ToString() = "", "0", row.ItemArray(10).ToString()) + ")
+    insert into product values(" + row.ItemArray(0).ToString() + ",'" + nameProduct + "'," + If(row.ItemArray(5).ToString() = "", "0", row.ItemArray(5).ToString()) + "," + If(row.ItemArray(6).ToString() = "", "0", row.ItemArray(6).ToString()) + "," + If(row.ItemArray(4).ToString() = "", "0.0", row.ItemArray(4).ToString()) + "," + If(row.ItemArray(7).ToString() = "", "0", row.ItemArray(7).ToString()) + "," + If(row.ItemArray(8).ToString() = "", "0", row.ItemArray(8).ToString()) + "," + If(row.ItemArray(9).ToString() = "", "0", row.ItemArray(9).ToString()) + ",'" + row.ItemArray(11).ToString() + "' ,'" + row.ItemArray(2).ToString() + "','" + row.ItemArray(3).ToString() + "', " + If(row.ItemArray(10).ToString() = "", "0", row.ItemArray(10).ToString()) + ")
 end", conn)
                 consultaProduct.Transaction = tran
                 If consultaProduct.ExecuteNonQuery > 0 Then
@@ -1100,56 +1096,23 @@ end", conn)
             Dim flag As Integer = 0
             For Each row As DataGridViewRow In If(flagAllRows, tabla.Rows(), tabla.SelectedRows())
                 If row.Cells(0).Value IsNot Nothing Then 'No es la ultima fila 
-                    If row.Cells("idExitenciaProduct").Value.ToString() = "" Then 'insertar
-                        Dim cmd As New SqlCommand(
-"if (select count(*) from product where idProduct = " + row.Cells(0).Value.ToString() + " or name = '" + row.Cells(1).Value.ToString() + "' or QID = '" + row.Cells(12).Value.ToString() + "')=0
-begin
-	if (select count(*)from product as p inner join existencesProduct as e on p.idProduct = e.idProduct where ( p.idProduct = " + row.Cells(0).Value.ToString() + " and p.name= '" + row.Cells(1).Value.ToString() + "'))=0
-	begin
-        insert into product values(" + row.Cells(0).Value.ToString() + ",'" + row.Cells(1).Value.ToString() + "'," + row.Cells(5).Value.ToString() + "," + row.Cells(6).Value.ToString() + "," + row.Cells(4).Value.ToString() + "," + row.Cells(8).Value.ToString() + "," + row.Cells(9).Value.ToString() + "," + row.Cells(10).Value.ToString() + ",'" + row.Cells(12).Value.ToString() + "' ,'" + row.Cells(2).Value.ToString() + "','" + row.Cells(3).Value.ToString() + "')
-    end
-	insert into existencesProduct values(NEWID()," + row.Cells(0).Value.ToString() + ",'" + row.Cells(13).Value.ToString() + "',0)
+                    Dim nameProduct = row.Cells(1).Value.ToString.Replace("'", "''")
+                    Dim cmd As New SqlCommand(
+"if (select count(*) from product as p where p.name= '" + nameProduct + "' or p.idProduct = " + row.Cells(0).Value.ToString() + " or p.QID = '" + row.Cells(11).Value.ToString + "' ) = 0
+begin 
+    insert into product values(" + row.Cells(0).Value.ToString() + ",'" + nameProduct + "'," + If(row.Cells(4).Value.ToString() = "", 0.0, row.Cells(4).Value.ToString()) + "," + If(row.Cells(5).Value.ToString() = "", 0.0, row.Cells(5).Value.ToString()) + "," + If(row.Cells(6).Value.ToString() = "", 0.0, row.Cells(6).Value.ToString()) + "," + If(row.Cells(7).Value.ToString() = "", 0.0, row.Cells(7).Value.ToString()) + "," + If(row.Cells(8).Value.ToString() = "", 0.0, row.Cells(8).Value.ToString()) + "," + If(row.Cells(9).Value.ToString() = "", 0.0, row.Cells(9).Value.ToString()) + ",'" + row.Cells(11).Value.ToString() + "' ,'" + row.Cells(2).Value.ToString() + "','" + row.Cells(3).Value.ToString() + "', " + row.Cells(10).Value.ToString() + ")
 end
-else if (select count(*) from product where idProduct = " + row.Cells(0).Value.ToString() + " or name = '" + row.Cells(1).Value.ToString() + "' or QID = '" + row.Cells(12).Value.ToString() + "')=1
+else if(select count(*) from product as p where p.name= '" + nameProduct + "' or p.idProduct = " + row.Cells(0).Value.ToString() + "  or p.QID = '" + row.Cells(11).Value.ToString() + "' )=1
 begin
-	update product set weight = " + row.Cells(5).Value.ToString() + " , weightMeasure = " + row.Cells(6).Value.ToString() + ", price=" + row.Cells(4).Value.ToString() + ", dailyRentalRate = " + row.Cells(8).Value.ToString() + " , weeklyRentalRate = " + row.Cells(9).Value.ToString() + ", monthlyRentalRate = " + row.Cells(10).Value.ToString() + ", um = '" + row.Cells(2).Value.ToString() + "', class = '" + row.Cells(3).Value.ToString() + "' where idProduct = " + row.Cells(0).Value.ToString() + "
-	if (select count(*) from existencesProduct where idProduct = " + row.Cells(0).Value.ToString() + " and idMaterialStatus = '" + row.Cells(13).Value.ToString() + "')=0
-	begin 
-		insert into existencesProduct values(NEWID()," + row.Cells(0).Value.ToString() + ",'" + row.Cells(13).Value.ToString() + "'," + row.Cells(11).Value.ToString() + ")
-	end
+	update product set name = '" + nameProduct + "' ,weight= " + If(row.Cells(4).Value.ToString() = "", 0.0, row.Cells(4).Value.ToString()) + ", weightMeasure = " + If(row.Cells(5).Value.ToString() = "", 0.0, row.Cells(5).Value.ToString()) + ",price = " + If(row.Cells(6).Value.ToString() = "", 0.0, row.Cells(6).Value.ToString()) + ", dailyRentalRate= " + If(row.Cells(7).Value.ToString() = "", 0.0, row.Cells(7).Value.ToString()) + " ,weeklyRentalRate = " + If(row.Cells(8).Value.ToString() = "", 0.0, row.Cells(8).Value.ToString()) + ",monthlyRentalRate = " + If(row.Cells(9).Value.ToString() = "", 0.0, row.Cells(9).Value.ToString()) + ",um='" + row.Cells(2).Value.ToString() + "',class='" + row.Cells(3).Value.ToString() + "',quantity = " + If(row.Cells(10).Value.ToString() = "", 0.0, row.Cells(10).Value.ToString()) + " where idProduct = " + row.Cells(0).Value.ToString() + "
 end", conn)
-                        cmd.Transaction = tran
+                    cmd.Transaction = tran
                         If cmd.ExecuteNonQuery > 0 Then
                             flag = +1
                         Else
                             listError.Add(flag)
                         End If
-                    Else 'update
-                        Dim cmd As New SqlCommand("
-if (select idMaterialStatus from existencesProduct where idProduct = " + row.Cells(0).Value.ToString() + " and idExitenciaProduct = '" + row.Cells(14).Value.ToString() + "')='" + row.Cells(13).Value.ToString() + "'
-begin 
-	update product set weight = " + row.Cells(5).Value.ToString() + " , weightMeasure = " + row.Cells(6).Value.ToString() + ", price=" + row.Cells(4).Value.ToString() + ", dailyRentalRate = " + row.Cells(8).Value.ToString() + " , weeklyRentalRate = " + row.Cells(9).Value.ToString() + ", monthlyRentalRate = " + row.Cells(10).Value.ToString() + ", um = '" + row.Cells(2).Value.ToString() + "', class = '" + row.Cells(3).Value.ToString() + "' where idProduct = " + row.Cells(0).Value.ToString() + "
-end
-else 
-begin 
-	update product set weight = " + row.Cells(5).Value.ToString() + " , weightMeasure = " + row.Cells(6).Value.ToString() + ", price=" + row.Cells(4).Value.ToString() + ", dailyRentalRate = " + row.Cells(8).Value.ToString() + " , weeklyRentalRate = " + row.Cells(9).Value.ToString() + ", monthlyRentalRate = " + row.Cells(10).Value.ToString() + ", um = '" + row.Cells(2).Value.ToString() + "', class = '" + row.Cells(3).Value.ToString() + "' where idProduct = " + row.Cells(0).Value.ToString() + "
-	if (select count(*) from existencesProduct where idProduct = " + row.Cells(0).Value.ToString() + " and idMaterialStatus = '" + row.Cells(13).Value.ToString() + "')=1
-	begin 
-		update existencesProduct set quantity = quantity + (select quantity from existencesProduct where idProduct = " + row.Cells(0).Value.ToString() + " and idMaterialStatus = '" + row.Cells(13).Value.ToString() + "') where idProduct = " + row.Cells(0).Value.ToString() + " and idMaterialStatus = '" + row.Cells(13).Value.ToString() + "'
-		delete from existencesProduct where idProduct = " + row.Cells(0).Value.ToString() + " and idMaterialStatus = '" + row.Cells(13).Value.ToString() + "'
-	end
-	else
-	begin 
-		insert into existencesProduct values(NEWID()," + row.Cells(0).Value.ToString() + ",'" + row.Cells(13).Value.ToString() + "',0)
-	end	
-end", conn)
-                        cmd.Transaction = tran
-                        If cmd.ExecuteNonQuery > 0 Then
-                            flag = +1
-                        Else
-                            listError.Add(flag)
-                        End If
-                    End If
+
                 End If
             Next
             If listError.Count = 0 Then
@@ -1160,7 +1123,7 @@ end", conn)
             Return listError
         Catch ex As Exception
             tran.Rollback()
-            Return Nothing
+            Return listError
         Finally
             desconectar()
         End Try
@@ -1170,10 +1133,8 @@ end", conn)
         Try
             conectar()
             Dim cmd As New SqlCommand("select pd.idProduct  as 'ID', pd.name as 'Product Name', pd.um as 'UM',pd.class as 'Class', pd.price as 'Cost', pd.weight as 'Weigth', pd.weightMeasure as 'Weigth Measure',pd.price as '$UM',pd.dailyRentalRate as 'Daily Rental Rate' ,pd.weeklyRentalRate as 'Weekly Rental Rate', pd.monthlyRentalRate as 'Monthly Rental Rate' ,
-(select top(1) quantity from existencesProduct as ex where ex.idProduct= pd.idProduct) as 'QTY' ,--ex.quantity as 'QTY' ,
-pd.QID, 
-(select top(1) idMaterialStatus from existencesProduct as ex where ex.idProduct= pd.idProduct) as 'Status' ,--pd.QID,ex.idMaterialStatus as 'Status',
-(select top(1) idExitenciaProduct from existencesProduct as ex where ex.idProduct= pd.idProduct) as  'idExitenciaProduct' --ex.idExitenciaProduct
+quantity as 'QTY' ,--ex.quantity as 'QTY' ,
+pd.QID
 from product as pd 
 inner join unitMeassurements as um on pd.um = um.um
 inner join classification as cl on cl.class = pd.class " +
@@ -1194,6 +1155,492 @@ If(flagIdProduct, "where pd.idProduct = " + text + " or pd.QID = '" + text + "'"
         End Try
     End Function
 
+    Public Function DeleteRowsProducto(ByVal tabla As DataGridView, ByVal flagAllStatus As Boolean) As Boolean
+        Try
+            conectar()
+            For Each row As DataGridViewRow In tabla.SelectedRows()
+                Dim cmd As New SqlCommand("delete From product Where idProduct = " + row.Cells("ID").Value.ToString(), conn)
+                cmd.ExecuteNonQuery()
+            Next
+            Return True
+        Catch ex As Exception
+            Return False
+        Finally
+            desconectar()
+        End Try
+    End Function
 
+    '========================================================= In Comming ===========================================================
+    Public Function llenarTicketsIncoming(ByVal tblTicketsIncoming As DataTable) As List(Of String)
+        Dim list As New List(Of String)
+        Try
+            conectar()
+            Dim cmdInComing As New SqlCommand("select * from incoming", conn)
+            If cmdInComing.ExecuteNonQuery Then
+                Dim da As New SqlDataAdapter(cmdInComing)
+                tblTicketsIncoming.Clear()
+                da.Fill(tblTicketsIncoming)
+                If tblTicketsIncoming.Rows.Count > 0 Then
+                    list.Add(tblTicketsIncoming.Rows(0).ItemArray(0))
+                    list.Add(tblTicketsIncoming.Rows(0).ItemArray(1))
+                    list.Add(tblTicketsIncoming.Rows(0).ItemArray(2))
+                    list.Add(tblTicketsIncoming.Rows(0).ItemArray(3))
+                    list.Add(tblTicketsIncoming.Rows(0).ItemArray(4))
+                End If
+            End If
+            Return list
+        Catch ex As Exception
+            MsgBox(ex.Message())
+            Return list
+        Finally
+            desconectar()
+        End Try
+    End Function
 
+    Public Function llenarPoductosIncoming(ByVal tblProductosIncoming As DataGridView, ByVal idTicket As String) As Boolean
+        Try
+            conectar()
+            Dim cmdPrductosInComing As New SqlCommand
+            cmdPrductosInComing.CommandText = "select pic.quantity as 'QTY',pic.idProduct as 'ID',pd.price as '$UM',pd.um as 'UM',pd.name as 'Product Description' ,idProductInComing from productComing as pic inner join product as pd on pd.idProduct = pic.idProduct 
+where ticketNum = '" + idTicket + "'"
+            cmdPrductosInComing.Connection = conn
+            If cmdPrductosInComing.ExecuteNonQuery Then
+                Dim dt As New DataTable
+                Dim da As New SqlDataAdapter(cmdPrductosInComing)
+                da.Fill(dt)
+                tblProductosIncoming.Rows.Clear()
+                For Each row As DataRow In dt.Rows()
+                    tblProductosIncoming.Rows.Add(row.ItemArray())
+                Next
+                Return True
+            Else
+                Return False
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message())
+            Return False
+        Finally
+            desconectar()
+        End Try
+    End Function
+
+    Public Function llenarInComming(ByVal tblProductos As DataGridView, ByVal tblTickets As DataTable) As List(Of String)
+        Dim list As New List(Of String)
+        Try
+            conectar()
+            Dim cmdInComing As New SqlCommand("select * from incoming", conn)
+            If cmdInComing.ExecuteNonQuery Then
+                Dim da As New SqlDataAdapter(cmdInComing)
+                tblTickets.Clear()
+                da.Fill(tblTickets)
+                If tblTickets.Rows.Count > 0 Then
+                    list.Add(tblTickets.Rows(0).ItemArray(0))
+                    list.Add(tblTickets.Rows(0).ItemArray(1))
+                    list.Add(tblTickets.Rows(0).ItemArray(2))
+                    list.Add(tblTickets.Rows(0).ItemArray(3))
+                    list.Add(tblTickets.Rows(0).ItemArray(4))
+                End If
+            End If
+            Dim cmdPrductosInComing As New SqlCommand
+            If list.Count > 0 Then
+                cmdPrductosInComing.CommandText = "select pic.quantity as 'QTY',pic.idProduct as 'ID',pd.price as '$UM',pd.um as 'UM',pd.name as 'Product Description' ,idProductInComing from productComing as pic inner join product as pd on pd.idProduct = pic.idProduct 
+where ticketNum = '" + list(0) + "'"
+                cmdPrductosInComing.Connection = conn
+            Else
+                cmdPrductosInComing.CommandText = "select pic.quantity as 'QTY',pic.idProduct as 'ID',pd.price as '$UM',pd.um as 'UM',pd.name as 'Product Description' ,idProductInComingfrom productComing as pic inner join product as pd on pd.idProduct = pic.idProduct"
+                cmdPrductosInComing.Connection = conn
+            End If
+            If cmdPrductosInComing.ExecuteNonQuery Then
+                Dim dt As New DataTable
+                Dim da As New SqlDataAdapter(cmdPrductosInComing)
+                da.Fill(dt)
+                For Each row As DataRow In dt.Rows()
+                    tblProductos.Rows.Add(row.ItemArray())
+                Next
+            End If
+            Return list
+        Catch ex As Exception
+            MsgBox(ex.Message)
+            Return list
+        Finally
+            desconectar()
+        End Try
+    End Function
+
+    Public Function llenarCellComboIDProduct(ByVal cmb As DataGridViewComboBoxCell, ByVal tablaPoductoIncoming As DataTable) As Boolean
+        Try
+            conectar()
+            Dim cmd As New SqlCommand("select concat(idProduct,'    ',name)as product , idProduct, price, um,name from product", conn)
+            Dim dr As SqlDataReader = cmd.ExecuteReader()
+            While dr.Read()
+                cmb.Items.Add(dr("product"))
+            End While
+            dr.Close()
+            If cmd.ExecuteNonQuery() Then
+                Dim da As New SqlDataAdapter(cmd)
+                da.Fill(tablaPoductoIncoming)
+                Return True
+            Else
+                Return False
+            End If
+        Catch ex As Exception
+            Return False
+        Finally
+            desconectar()
+        End Try
+    End Function
+
+    Public Function llenarCellComboIDProductExistences(ByVal cmb As DataGridViewComboBoxCell, ByVal tablaPoductoIncoming As DataTable) As Boolean
+        Try
+            conectar()
+            Dim cmd As New SqlCommand("select concat(idProduct,'    ',name)as product , idProduct, price, um,name,quantity from product where quantity > 0", conn)
+            Dim dr As SqlDataReader = cmd.ExecuteReader()
+            While dr.Read()
+                cmb.Items.Add(dr("product"))
+            End While
+            dr.Close()
+            If cmd.ExecuteNonQuery() Then
+                Dim da As New SqlDataAdapter(cmd)
+                da.Fill(tablaPoductoIncoming)
+                Return True
+            Else
+                Return False
+            End If
+        Catch ex As Exception
+            Return False
+        Finally
+            desconectar()
+        End Try
+    End Function
+
+    Public Function saveInComing(ByVal tblProductos As DataGridView, ByVal datosTicket As List(Of String), ByVal allRows As Boolean) As Boolean
+        conectar()
+        Dim tran As SqlTransaction
+        tran = conn.BeginTransaction()
+        Dim cont = 0
+        Try
+            Dim cmd As New SqlCommand("
+if (select count(*) from incoming where ticketNum = '" + datosTicket(0) + "')= 0
+begin 
+	insert into incoming values ('" + datosTicket(0) + "','" + datosTicket(1) + "', '" + datosTicket(2) + "' ,'" + datosTicket(3) + "'," + datosTicket(4) + ")
+end 
+else if(select count(*) from incoming where ticketNum = '" + datosTicket(0) + "')=1
+begin 
+	update incoming set dateRecived='" + datosTicket(1) + "',recivedBy='" + datosTicket(2) + "',comment='" + datosTicket(3) + "',jobNo = " + datosTicket(4) + " where ticketNum = '" + datosTicket(0) + "'
+end", conn)
+            cmd.Transaction = tran
+            Dim flag = True
+            If cmd.ExecuteNonQuery Then
+                For Each row As DataGridViewRow In If(allRows, tblProductos.Rows(), tblProductos.SelectedRows())
+                    If row.Cells(0).Value IsNot Nothing Then
+                        Dim Product = row.Cells(1).Value.ToString.Split(" ")
+                        Dim cmdproduct As New SqlCommand("
+if (select count(*) from productComing where idProduct = " + Product(0) + " and ticketNum = '" + datosTicket(0) + "' )=0
+begin 
+	insert into productComing values(NEWID(),'" + datosTicket(0) + "'," + Product(0) + "," + row.Cells(0).Value.ToString() + ")
+	update product set quantity = quantity + " + row.Cells(0).Value.ToString() + " where idProduct = " + Product(0) + "
+end
+else if(select count(*) from productComing where idProduct =  " + Product(0) + " and ticketNum = '" + datosTicket(0) + "')=1
+begin 
+	update product set quantity = quantity - (select quantity from productComing where idProduct = " + Product(0) + " and ticketNum = '" + datosTicket(0) + "') where idProduct = " + Product(0) + "
+	update productComing set quantity = " + row.Cells(0).Value.ToString() + " where idProduct = " + Product(0) + " and ticketNum = '" + datosTicket(0) + "'
+	update product set quantity = quantity + " + row.Cells(0).Value.ToString() + " where idProduct = " + Product(0) + "
+end", conn)
+                        cmdproduct.Transaction = tran
+                        If cmdproduct.ExecuteNonQuery > 0 Then
+                            flag = True
+                            cont += 1
+                        Else
+                            flag = False
+                            Exit For
+                        End If
+                    End If
+                Next
+                If flag Then
+                    tran.Commit()
+                    Return True
+                Else
+                    tran.Rollback()
+                    MsgBox("Error in the row " + CStr(cont + 1))
+                    Return False
+                End If
+            Else
+                tran.Rollback()
+                Return False
+            End If
+            Return True
+        Catch ex As Exception
+            tran.Rollback()
+            Return False
+        Finally
+            desconectar()
+        End Try
+    End Function
+
+    Public Function DeleteInComing(ByVal tbl As DataGridView) As Boolean
+        conectar()
+        Dim tran As SqlTransaction
+        tran = conn.BeginTransaction()
+        Try
+            Dim flag As Boolean = True
+            Dim cont As Integer = 0
+            If tbl.SelectedRows.Count() > 0 Then
+                For Each row As DataGridViewRow In tbl.SelectedRows()
+                    If row.Cells("idProductInComing").Value <> "" Then
+                        Dim idProduct() = row.Cells("ID").Value.ToString().Split("  ")
+                        Dim cmdUpdateProduct As New SqlCommand("update product set quantity = quantity - (select quantity from productComing where idProductInComing = '" + row.Cells("idProductInComing").Value.ToString() + "') where idProduct = " + idProduct(0) + "", conn)
+                        cmdUpdateProduct.Transaction = tran
+                        If cmdUpdateProduct.ExecuteNonQuery > 0 Then
+                            Dim cmdDeleteInComing As New SqlCommand("delete from productComing where idProductInComing = '" + row.Cells("idProductInComing").Value.ToString() + "'", conn)
+                            cmdDeleteInComing.Transaction = tran
+                            If cmdDeleteInComing.ExecuteNonQuery > 0 Then
+                                flag = True
+                                cont += 1
+                            Else
+                                flag = False
+                                Exit For
+                            End If
+                        End If
+                    End If
+                Next
+            End If
+            If flag Then
+                tran.Commit()
+                Return True
+            Else
+                tran.Rollback()
+                MessageBox.Show("Error at line " + CStr(cont) + ". We probably could not find it.")
+                Return False
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message())
+            tran.Rollback()
+            Return False
+        Finally
+            desconectar()
+        End Try
+    End Function
+
+    '========================================================= In Comming ===========================================================
+
+    Public Function llenarProductosOutGoing(ByVal tblProductosOutGoing As DataGridView, ByVal ticketOutGoing As String) As Boolean
+        Try
+            conectar()
+            Dim cmd As New SqlCommand("select po.quantity,po.idProduct, pd.um , pd.price , pd.name ,po.idProductOutGoing from productOutGoing as po inner join product as pd on po.idProduct = pd.idProduct 
+where po.ticketNum = '" + ticketOutGoing + "'", conn)
+            If cmd.ExecuteNonQuery Then
+                Dim dt As New DataTable
+                Dim da As New SqlDataAdapter(cmd)
+                da.Fill(dt)
+                tblProductosOutGoing.Rows.Clear()
+                For Each row As DataRow In dt.Rows()
+                    tblProductosOutGoing.Rows.Add(row.ItemArray())
+                Next
+                Return True
+            Else
+                Return False
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message())
+            Return False
+        Finally
+            desconectar()
+        End Try
+    End Function
+
+    Public Function llenarTicketsOutGoing(ByVal tblTicketsOut As DataTable) As List(Of String)
+        Dim list As New List(Of String)
+        Try
+            conectar()
+            Dim cmdInComing As New SqlCommand("select * from outgoing", conn)
+            If cmdInComing.ExecuteNonQuery Then
+                Dim da As New SqlDataAdapter(cmdInComing)
+                tblTicketsOut.Clear()
+                da.Fill(tblTicketsOut)
+                If tblTicketsOut.Rows.Count > 0 Then
+                    list.Add(tblTicketsOut.Rows(0).ItemArray(0))
+                    list.Add(tblTicketsOut.Rows(0).ItemArray(1))
+                    list.Add(tblTicketsOut.Rows(0).ItemArray(2))
+                    list.Add(tblTicketsOut.Rows(0).ItemArray(3))
+                    list.Add(tblTicketsOut.Rows(0).ItemArray(4))
+                    list.Add(tblTicketsOut.Rows(0).ItemArray(5))
+                End If
+            End If
+            Return list
+        Catch ex As Exception
+            MsgBox(ex.Message())
+            Return list
+        Finally
+            desconectar()
+        End Try
+    End Function
+
+    Public Function llenarOutGoing(ByVal tblProductosOutGoing As DataGridView, ByVal tblTicketsOut As DataTable) As List(Of String)
+        Dim list As New List(Of String)
+        Try
+            conectar()
+            Dim cmdInComing As New SqlCommand("select * from outgoing", conn)
+            If cmdInComing.ExecuteNonQuery Then
+                Dim da As New SqlDataAdapter(cmdInComing)
+                tblTicketsOut.Clear()
+                da.Fill(tblTicketsOut)
+                If tblTicketsOut.Rows.Count > 0 Then
+                    list.Add(tblTicketsOut.Rows(0).ItemArray(0))
+                    list.Add(tblTicketsOut.Rows(0).ItemArray(1))
+                    list.Add(tblTicketsOut.Rows(0).ItemArray(2))
+                    list.Add(tblTicketsOut.Rows(0).ItemArray(3))
+                    list.Add(tblTicketsOut.Rows(0).ItemArray(4))
+                    list.Add(tblTicketsOut.Rows(0).ItemArray(5))
+                End If
+            End If
+            Dim cmdPrductosInComing As New SqlCommand("select po.quantity,po.idProduct, pd.um , pd.price , pd.name ,po.idProductOutGoing from productOutGoing as po inner join product as pd on po.idProduct = pd.idProduct " + If(list.Count > 0, "where po.ticketNum = '" + list(0) + "'", ""), conn)
+            If cmdPrductosInComing.ExecuteNonQuery Then
+                Dim dt As New DataTable
+                Dim da As New SqlDataAdapter(cmdPrductosInComing)
+                da.Fill(dt)
+                For Each row As DataRow In dt.Rows()
+                    tblProductosOutGoing.Rows.Add(row.ItemArray())
+                Next
+            End If
+            Return list
+        Catch ex As Exception
+            MsgBox(ex.Message)
+            Return list
+        Finally
+            desconectar()
+        End Try
+    End Function
+
+    Public Function custumerJobNum(ByVal jobNum As String) As List(Of String)
+        Dim list As New List(Of String)
+        Try
+            conectar()
+            Dim cmd As New SqlCommand("select CONCAT(cl.firstName,' ',cl.lastName,'',cl.middleName) as 'Costumer', CONCAT(ha.number , ' th, ',ha.avenue,' ',ha.providence,', ',ha.city,' ',ha.postalCode) as HomeAddress from 
+job as jb 
+inner join clients as cl on jb.idClient = cl.idClient 
+inner join HomeAddress as ha on cl.idHomeAddress = ha.idHomeAdress
+where jb.jobNo = " + If(jobNum = "", 0, jobNum), conn)
+            Dim rd As SqlDataReader = cmd.ExecuteReader()
+            While rd.Read()
+                list.Add(rd("Costumer"))
+                list.Add(rd("HomeAddress"))
+            End While
+            Return list
+        Catch ex As Exception
+            MsgBox(ex.Message())
+            Return list
+        Finally
+            desconectar()
+        End Try
+    End Function
+
+    Public Function saveOutGoing(ByVal tblProductos As DataGridView, ByVal datosTicket As List(Of String), ByVal allRows As Boolean) As Boolean
+        conectar()
+        Dim tran As SqlTransaction
+        tran = conn.BeginTransaction()
+        Dim cont = 0
+        Try
+            Dim cmd As New SqlCommand("
+if (select COUNT(*) from outgoing where ticketNum = '" + datosTicket(0) + "' ) =0
+begin 
+	insert into outgoing values('" + datosTicket(0) + "','" + datosTicket(1) + "','" + datosTicket(2) + "','" + datosTicket(3) + "','" + datosTicket(4) + "'," + datosTicket(5) + ")
+end
+else if(select COUNT(*) from outgoing where ticketNum = '" + datosTicket(0) + "')=1
+begin 
+	update outgoing set dateShipped = '" + datosTicket(1) + "',comment= '" + datosTicket(2) + "' , shippedby='" + datosTicket(3) + "',superintendent = '" + datosTicket(4) + "',jobNo = " + datosTicket(5) + " where ticketNum = '" + datosTicket(0) + "'
+end", conn)
+            cmd.Transaction = tran
+            Dim flag = True
+            If cmd.ExecuteNonQuery Then
+                For Each row As DataGridViewRow In If(allRows, tblProductos.Rows(), tblProductos.SelectedRows())
+                    If row.Cells(0).Value IsNot Nothing Then
+                        Dim Product() = row.Cells(1).Value.ToString.Split(" ")
+                        Dim cmdproduct As New SqlCommand("
+if (select COUNT(*) from productOutGoing where idProduct = " + Product(0) + " and ticketNum = '" + datosTicket(0) + "')=0 
+begin
+	insert into productOutGoing values (NEWID(),'" + datosTicket(0) + "'," + Product(0) + "," + CStr(row.Cells(0).Value) + ")
+	update product set quantity = quantity - " + CStr(row.Cells(0).Value) + " where idProduct = " + Product(0) + "
+end
+else if(select COUNT(*) from productOutGoing where idProduct = " + Product(0) + " and ticketNum = '" + datosTicket(0) + "' )= 1
+begin
+	update product set quantity = quantity + (select quantity from productOutGoing where idProduct = " + Product(0) + " and ticketNum = '" + datosTicket(0) + "') where idProduct = " + Product(0) + "
+	update productOutGoing set quantity = " + CStr(row.Cells(0).Value) + " where idProduct = " + Product(0) + " and ticketNum = '" + datosTicket(0) + "'
+	update product set quantity = quantity - " + CStr(row.Cells(0).Value) + " where idProduct = " + Product(0) + "
+end", conn)
+                        cmdproduct.Transaction = tran
+                        If cmdproduct.ExecuteNonQuery > 0 Then
+                            flag = True
+                            cont += 1
+                        Else
+                            flag = False
+                            Exit For
+                        End If
+                    End If
+                Next
+                If flag Then
+                    tran.Commit()
+                    Return True
+                Else
+                    tran.Rollback()
+                    MsgBox("Error in the row " + CStr(cont + 1))
+                    Return False
+                End If
+            Else
+                tran.Rollback()
+                Return False
+            End If
+            Return True
+        Catch ex As Exception
+            tran.Rollback()
+            Return False
+        Finally
+            desconectar()
+        End Try
+    End Function
+
+    Public Function DeleteOutGoing(ByVal tbl As DataGridView) As Boolean
+        conectar()
+        Dim tran As SqlTransaction
+        tran = conn.BeginTransaction()
+        Try
+            Dim flag As Boolean = True
+            Dim cont As Integer = 0
+            If tbl.SelectedRows.Count() > 0 Then
+                For Each row As DataGridViewRow In tbl.SelectedRows()
+                    If CStr(row.Cells(1).Value) <> "" Then
+                        Dim idProduct() = row.Cells(1).Value.ToString().Split("  ")
+                        Dim cmdUpdateProduct As New SqlCommand("update product set quantity = quantity + (select quantity from productOutGoing where idProductOutGoing = '" + row.Cells(5).Value.ToString() + "') where idProduct = " + idProduct(0) + "", conn)
+                        cmdUpdateProduct.Transaction = tran
+                        If cmdUpdateProduct.ExecuteNonQuery > 0 Then
+                            Dim cmdDeleteInComing As New SqlCommand("delete from productOutGoing where idProductOutGoing = '" + row.Cells(5).Value.ToString() + "'", conn)
+                            cmdDeleteInComing.Transaction = tran
+                            If cmdDeleteInComing.ExecuteNonQuery > 0 Then
+                                flag = True
+                                cont += 1
+                            Else
+                                flag = False
+                                Exit For
+                            End If
+                        End If
+                    End If
+                Next
+            End If
+            If flag Then
+                tran.Commit()
+                Return True
+            Else
+                tran.Rollback()
+                MessageBox.Show("Error at line " + CStr(cont) + ". We probably could not find it.")
+                Return False
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message())
+            tran.Rollback()
+            Return False
+        Finally
+            desconectar()
+        End Try
+    End Function
 End Class
+
+
