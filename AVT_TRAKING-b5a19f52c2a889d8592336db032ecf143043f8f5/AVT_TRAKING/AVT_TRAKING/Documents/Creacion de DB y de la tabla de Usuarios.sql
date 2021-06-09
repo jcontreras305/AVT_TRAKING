@@ -266,6 +266,19 @@ create table hoursWorked (
 GO
 
 --##########################################################################################
+--##################  TABLA DE INCOMING #########################################################
+--##########################################################################################
+
+create table incoming(
+	ticketNum varchar(15) primary key not null,
+	dateRecived date,
+	recivedBy varchar(80),
+	comment text,
+	jobNo bigint
+)
+GO
+
+--##########################################################################################
 --##################  TABLA DE JOB #########################################################
 --##########################################################################################
 
@@ -355,6 +368,20 @@ create table vendor (
 GO
 
 --##########################################################################################
+--##################  TABLA DE OUTGOING ####################################################
+--##########################################################################################
+
+create table outgoing(
+	ticketNum varchar(15) primary key not null,
+	dateShipped date,
+	comment text,
+	shippedby varchar(80),
+	superintendent varchar(80),
+	jobNo bigint
+)
+GO
+
+--##########################################################################################
 --##################  TABLA DE PRODUCT #####################################################
 --##########################################################################################
 
@@ -370,6 +397,30 @@ create  table product(
 	QID varchar(20),
 	um varchar(10),
 	class varchar(10),
+	quantity float
+)
+GO
+
+--##########################################################################################
+--##################  TABLA DE PRODUCT COMING ##############################################
+--##########################################################################################
+
+create table productComing(
+	idProductInComing varchar(36) primary key not null,
+	ticketNum varchar(15),
+	idProduct int,
+	quantity float
+)
+GO
+
+--##########################################################################################
+--##################  TABLA DE PRODUCT OUTGOING ############################################
+--##########################################################################################
+
+create table productOutGoing(
+	idProductOutGoing varchar(36) primary key not null,
+	ticketNum varchar(15),
+	idProduct int,
 	quantity float
 )
 GO
@@ -569,6 +620,14 @@ REFERENCES    task  ( idAux )
 GO
 
 --##########################################################################################
+--##################  FOREIG KEYS HOURS WORKED #############################################
+--##########################################################################################
+
+ALTER TABLE incoming WITH CHECK ADD CONSTRAINT fk_jobNum_inComing FOREIGN KEY (jobNo) 
+REFERENCES job (jobNo)
+GO
+
+--##########################################################################################
 --##################  FOREIG KEYS JOB ######################################################
 --##########################################################################################
 
@@ -599,6 +658,14 @@ REFERENCES    task  ( idAux )
 GO
 
 --##########################################################################################
+--##################  FOREIG KEYS OUTGOING #################################################
+--##########################################################################################
+
+ALTER TABLE outgoing ADD CONSTRAINT fk_jobNum_outgoing
+FOREIGN KEY (jobNo) REFERENCES job (jobNo)
+
+
+--##########################################################################################
 --##################  FOREIG KEYS PRODUCT ##################################################
 --##########################################################################################
 
@@ -609,6 +676,31 @@ GO
 ALTER TABLE [product] WITH CHECK ADD CONSTRAINT [fk_class_product]
 FOREIGN KEY ([class]) REFERENCES dbo.classification([class])  
 GO
+
+--##########################################################################################
+--##################  FOREIG KEYS PRODUCT COMING ###########################################
+--##########################################################################################
+
+ALTER TABLE productComing WITH CHECK ADD CONSTRAINT fk_ticketNum_inComing
+FOREIGN KEY (ticketNum) REFERENCES incoming(ticketNum)
+GO
+
+ALTER TABLE productComing WITH CHECK ADD CONSTRAINT fk_idProduct_inComing
+FOREIGN KEY (idProduct) REFERENCES product(idProduct)
+GO
+
+--##########################################################################################
+--##################  FOREIG KEYS PRODUCT OUTGOING #########################################
+--##########################################################################################
+
+ALTER TABLE productOutGoing ADD CONSTRAINT fk_ticketNum_productOutGoing
+FOREIGN KEY (ticketNum) REFERENCES outgoing(ticketNum)
+GO
+
+ALTER TABLE productOutGoing ADD CONSTRAINT fk_idProduct_productOutGoing
+FOREIGN KEY (idProduct) REFERENCES product(idProduct)
+GO
+
 
 --##########################################################################################
 --##################  FOREIG KEYS PROJECT OREDER ###########################################
@@ -1192,3 +1284,60 @@ GO
 --foreign key (class) references classification(class)
 --go
 
+
+create table incoming(
+	ticketNum varchar(15) primary key not null,
+	dateRecived date,
+	recivedBy varchar(80),
+	comment text,
+	jobNo bigint
+)
+go
+
+ALTER TABLE incoming ADD CONSTRAINT fk_jobNum_inComing
+FOREIGN KEY (jobNo) REFERENCES job (jobNo)
+
+create table productComing(
+	idProductInComing varchar(36) primary key not null,
+	ticketNum varchar(15),
+	idProduct int,
+	quantity float
+)
+go
+
+ALTER TABLE productComing WITH CHECK ADD CONSTRAINT fk_ticketNum_inComing
+FOREIGN KEY (ticketNum) REFERENCES incoming(ticketNum)
+GO
+
+ALTER TABLE productComing WITH CHECK ADD CONSTRAINT fk_idProduct_inComing
+FOREIGN KEY (idProduct) REFERENCES product(idProduct)
+GO
+
+create table outgoing(
+	ticketNum varchar(15) primary key not null,
+	dateShipped date,
+	comment text,
+	shippedby varchar(80),
+	superintendent varchar(80),
+	jobNo bigint
+)
+go
+
+ALTER TABLE outgoing ADD CONSTRAINT fk_jobNum_outgoing
+FOREIGN KEY (jobNo) REFERENCES job (jobNo)
+
+create table productOutGoing(
+	idProductOutGoing varchar(36) primary key not null,
+	ticketNum varchar(15),
+	idProduct int,
+	quantity float
+)
+go
+
+ALTER TABLE productOutGoing ADD CONSTRAINT fk_ticketNum_productOutGoing
+FOREIGN KEY (ticketNum) REFERENCES outgoing(ticketNum)
+GO
+
+ALTER TABLE productOutGoing ADD CONSTRAINT fk_idProduct_productOutGoing
+FOREIGN KEY (idProduct) REFERENCES product(idProduct)
+GO
