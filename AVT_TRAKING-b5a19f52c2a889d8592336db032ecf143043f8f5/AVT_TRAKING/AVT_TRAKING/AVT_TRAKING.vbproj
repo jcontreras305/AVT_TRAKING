@@ -175,6 +175,7 @@
     <Compile Include="Froms\Renta.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Froms\scaffold.vb" />
     <Compile Include="Froms\scafoldTarking.Designer.vb">
       <DependentUpon>scafoldTarking.vb</DependentUpon>
     </Compile>

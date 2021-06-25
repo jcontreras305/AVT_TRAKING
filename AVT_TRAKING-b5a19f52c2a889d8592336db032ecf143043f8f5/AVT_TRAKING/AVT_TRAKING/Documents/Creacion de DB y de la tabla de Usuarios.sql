@@ -1,13 +1,13 @@
 use master
 Go
 
-create database VRT_TRAKING_3
+create database VRT_TRAKING
 GO
 
-use VRT_TRAKING_3
+use VRT_TRAKING
 GO
 --##########################################################################################
---##################  TABLA DE MATERIAL USERS ############################################
+--##################  TABLA DE USERS #######################################################
 --##########################################################################################
 
 create table users(
@@ -97,6 +97,24 @@ create table absents(
 GO
 
 --##########################################################################################
+--##################  TABLA DE ACTIVITY HOURS ##############################################
+--##########################################################################################
+
+create table activityHours(
+	idActivityHours varchar(36) primary key not null,
+	build float,
+	material float,
+	travel float,
+	weather float,
+	alarm float,
+	safety float,
+	stdBy float,
+	other float,
+	tag varchar(20)
+)
+GO
+
+--##########################################################################################
 --##################  TABLA DE AREAS #####################################################
 --##########################################################################################
 
@@ -105,6 +123,7 @@ create table areas(
 	name varchar(30),
 	cordinator varchar(50)
 )
+GO
 
 --##########################################################################################
 --##################  TABLA DE CLASSIFICATION ##############################################
@@ -294,15 +313,53 @@ create table job (
 GO
 
 --##########################################################################################
---##################  TABLA DE MATERIAL ####################################################
+--##################  TABLA DE JOB CAT #####################################################
 --##########################################################################################
 
+create table jobCat(
+	idJobCat varchar(25) primary key not null,
+	cat varchar(35)
+)
+go
+
+--##########################################################################################
+--##################  TABLA DE LEG #########################################################
+--##########################################################################################
+
+create table leg(
+	legID varchar(36)primary key not null,
+	qty float,
+	heigth float,
+	tag varchar(20)
+)
+GO
+
+--##########################################################################################
+--##################  TABLA DE MATERIAL ####################################################
+--##########################################################################################
 
 create table material(
 	idMaterial varchar(36) primary key not null,
 	number int not null,
 	name varchar(50), 
 	estatus char (1) 
+)
+GO
+
+--##########################################################################################
+--##################  TABLA DE MATERIAL HANDELING ##########################################
+--##########################################################################################
+
+create table materialHandeling(
+	idMaterialHandeling varchar(36) primary key  not null,
+	truck char(1),
+	forklift char(1),
+	trailer char(1),
+	crane char(1),
+	rope char(1),
+	passed char(1),
+	elevator char(1),
+	tag varchar(20)
 )
 GO
 
@@ -436,6 +493,18 @@ create table projectOrder(
 GO
 
 --##########################################################################################
+--##################  TABLA DE PROYECT PRODUCT SCAFFOLD ####################################
+--##########################################################################################
+
+create table productScaffold(
+	idProductScafold varchar(36) primary key not null,
+	tag varchar(20),
+	idProduct int,
+	quantity float
+)
+GO
+
+--##########################################################################################
 --##################  TABLA DE RENTAL #####################################################
 --##########################################################################################
 
@@ -448,6 +517,60 @@ create table rental(
 	truckLoad float,
 	truck money
 )
+GO
+
+--##########################################################################################
+--##################  TABLA DE SCAFFOLD INFORMATION ########################################
+--##########################################################################################
+
+create table scaffoldInformation(
+	idScaffoldInformation varchar(36) primary key not null,
+	type varchar(15),
+	width float,
+	length float,
+	heigth float,
+	descks float,
+	ko float,
+	base float,
+	extraDeck float,
+	tag varchar(20)
+)
+GO
+
+--##########################################################################################
+--##################  TABLA DE SCAFFOLD TRAKING ############################################
+--##########################################################################################
+
+create table scaffoldTraking(
+	tag varchar(20) primary key not null,
+	buildDate date,
+	location text,
+	purpose text,
+	comments text,
+	reqComp date,
+	contact varchar(30),
+	foreman varchar(30),
+	erector varchar(30),
+	idAux varchar(36),
+	idJobCat varchar(25),
+	idArea int,
+	idSubJob int	
+)
+GO
+
+--##########################################################################################
+--##################  TABLA DE SCFiNFO #####################################################
+--##########################################################################################
+
+create table scfInfo(
+	idScfInfo varchar(36) primary key not null,
+	csap char(1),
+	rolling char(1),
+	internal char(1),
+	hanging char(1),
+	tag varchar(20)
+)
+GO
 
 --##########################################################################################
 --##################  TABLA DE SUBJOBS #####################################################
@@ -457,6 +580,7 @@ create table subJobs(
 	idSubJob int primary key not null,
 	description varchar(30)
 )
+GO
 
 --##########################################################################################
 --##################  TABLA DE TASK ########################################################
@@ -481,7 +605,7 @@ create table task (
 GO
 
 --##########################################################################################
---##################  TABLA DE UNITMEASSUREMENTS ###############################################
+--##################  TABLA DE UNITMEASSUREMENTS ###########################################
 --##########################################################################################
 
 create table unitMeassurements(
@@ -526,6 +650,14 @@ GO
 
 ALTER TABLE [dbo].[absents] WITH CHECK ADD CONSTRAINT [fk_idEmployee_Absent] FOREIGN KEY ([idEmployee]) 
 REFERENCES [dbo].[employees]([idEmployee]) 
+GO
+
+--##########################################################################################
+--##################  FOREIG KEYS ACTIVITY HOURS ###########################################
+--##########################################################################################
+
+ALTER TABLE activityHours WITH CHECK ADD CONSTRAINT fk_tag_activityHours
+FOREIGN KEY (tag) REFERENCES scaffoldTraking(tag)
 GO
 
 --##########################################################################################
@@ -636,14 +768,28 @@ REFERENCES    clients  ( idClient )
 GO
 
 --##########################################################################################
+--##################  FOREIG KEYS LEG ######################################################
+--##########################################################################################
+
+ALTER TABLE leg WITH CHECK ADD CONSTRAINT fk_tag_leg
+FOREIGN KEY (tag) REFERENCES scaffoldTraking(tag)
+GO
+
+--##########################################################################################
+--##################  FOREIG KEYS MATERIAL HANDELING #######################################
+--##########################################################################################
+
+ALTER TABLE materialHandeling WITH CHECK ADD CONSTRAINT fk_tag_materialHandeling
+FOREIGN KEY (tag) REFERENCES scaffoldTraking(tag)
+GO
+
+--##########################################################################################
 --##################  FOREIG KEYS MATERIAL OREDER ##########################################
 --##########################################################################################
 
-ALTER TABLE    materialOrder   WITH CHECK ADD  CONSTRAINT  fk_idMaterial_MaterialOrder  FOREIGN KEY( idMaterial )
-REFERENCES    material  ( idMaterial )
+ALTER TABLE    materialOrder   WITH CHECK ADD  CONSTRAINT  fk_idMaterial_MaterialOrder  
+FOREIGN KEY( idMaterial ) REFERENCES    material  ( idMaterial )
 GO
-
-
 
 --##########################################################################################
 --##################  FOREIG KEYS MATERIAL USED ############################################
@@ -701,6 +847,17 @@ ALTER TABLE productOutGoing ADD CONSTRAINT fk_idProduct_productOutGoing
 FOREIGN KEY (idProduct) REFERENCES product(idProduct)
 GO
 
+--##########################################################################################
+--##################  FOREIG KEYS PRODUCT SCAFFOLD #########################################
+--##########################################################################################
+
+ALTER TABLE productScaffold WITH CHECK ADD CONSTRAINT fk_tag_productScaffold
+FOREIGN KEY (tag) REFERENCES scaffoldTraking(tag)
+GO
+
+ALTER TABLE productScaffold WITH CHECK ADD CONSTRAINT fk_idSubJob_productScaffold
+FOREIGN KEY (idProduct) REFERENCES product(idProduct)
+GO
 
 --##########################################################################################
 --##################  FOREIG KEYS PROJECT OREDER ###########################################
@@ -708,6 +865,43 @@ GO
 
 ALTER TABLE    projectOrder   WITH CHECK ADD  CONSTRAINT  fk_jobNo_PO  FOREIGN KEY( jobNo )
 REFERENCES    job  ( jobNo )
+GO
+
+--##########################################################################################
+--##################  FOREIG KEYS SCAFFOLD INFORMATION #####################################
+--##########################################################################################
+
+ALTER TABLE scaffoldInformation WITH CHECK ADD CONSTRAINT fk_type_scaffoldInformation
+FOREIGN KEY (type) REFERENCES rental(type)
+GO
+
+ALTER TABLE scaffoldInformation WITH CHECK ADD CONSTRAINT fk_tag_scaffoldInformation
+FOREIGN KEY (tag) REFERENCES scaffoldTraking(tag)
+GO
+
+--##########################################################################################
+--##################  FOREIG KEYS SCAFFOLD TRAKING #########################################
+--##########################################################################################
+
+ALTER TABLE scaffoldTraking WITH CHECK ADD CONSTRAINT fk_idAux_scaffoldTraking
+FOREIGN KEY (idAux) REFERENCES task(idAux)
+GO
+ALTER TABLE scaffoldTraking WITH CHECK ADD CONSTRAINT fk_idJobCat_scaffoldTraking
+FOREIGN KEY (idJobCat) REFERENCES jobCat(idJobCat)
+GO
+ALTER TABLE scaffoldTraking WITH CHECK ADD CONSTRAINT fk_idArea_scaffoldTraking
+FOREIGN KEY (idArea) REFERENCES areas(idArea)
+GO
+ALTER TABLE scaffoldTraking WITH CHECK ADD CONSTRAINT fk_idSubJob_scaffoldTraking
+FOREIGN KEY (idSubJob) REFERENCES subJobs(idSubJob)
+GO
+
+--##########################################################################################
+--##################  FOREIG KEYS SCFINFO ##################################################
+--##########################################################################################
+
+ALTER TABLE materialHandeling WITH CHECK ADD CONSTRAINT fk_tag_materialHandeling
+FOREIGN KEY (tag) REFERENCES scaffoldTraking(tag)
 GO
 
 --##########################################################################################
@@ -1247,97 +1441,137 @@ GO
 ---- (CTRL+K) + (CTRL+C) Comentar 
 ---- (CTRL+K) + (CTRL+U) Descomentar 
 
---ALTER TABLE [product] 
---DROP CONSTRAINT [fk_unitMeassurement_product]
-
---ALTER TABLE [product] 
---DROP CONSTRAINT [fk_class_product]
-
---ALTER TABLE [product] 
---DROP CONSTRAINT [fk_status_product]
-
---DROP TABLE product
-
---create  table product(
---	idProduct int primary key not null,
---	name varchar(60),
---	weight float,
---	weightMeasure float,
---	price float,
---	dailyRentalRate float,
---	weeklyRentalRate float,
---	monthlyRentalRate float,
---	QID varchar(20),
---	um varchar(10),
---	class varchar(10),
---	quantity float
+--create table jobCat(
+--	idJobCat varchar(25) primary key not null,
+--	cat varchar(35)
 --)
 --go
 
---alter table product 
---add constraint fk_um_product
---foreign key (um) references unitMeassurements(um)
+--create table scaffoldTraking(
+--	tag varchar(20) primary key not null,
+--	buildDate date,
+--	location text,
+--	purpose text,
+--	comments text,
+--	reqComp date,
+--	contact varchar(30),
+--	foreman varchar(30),
+--	erector varchar(30),
+--	idAux varchar(36),
+--	idJobCat varchar(25),
+--	idArea int,
+--	idSubJob int	
+--)
 --go
 
---alter table product 
---add constraint fk_class_product
---foreign key (class) references classification(class)
---go
+--ALTER TABLE scaffoldTraking WITH CHECK ADD CONSTRAINT fk_idAux_scaffoldTraking
+--FOREIGN KEY (idAux) REFERENCES task(idAux)
+--GO
+--ALTER TABLE scaffoldTraking WITH CHECK ADD CONSTRAINT fk_idJobCat_scaffoldTraking
+--FOREIGN KEY (idJobCat) REFERENCES jobCat(idJobCat)
+--GO
+--ALTER TABLE scaffoldTraking WITH CHECK ADD CONSTRAINT fk_idArea_scaffoldTraking
+--FOREIGN KEY (idArea) REFERENCES areas(idArea)
+--GO
+--ALTER TABLE scaffoldTraking WITH CHECK ADD CONSTRAINT fk_idSubJob_scaffoldTraking
+--FOREIGN KEY (idSubJob) REFERENCES subJobs(idSubJob)
+--GO
 
+--create table productScaffold(
+--	idProductScafold varchar(36) primary key not null,
+--	tag varchar(20),
+--	idProduct int,
+--	quantity float
+--)
+--GO
 
-create table incoming(
-	ticketNum varchar(15) primary key not null,
-	dateRecived date,
-	recivedBy varchar(80),
-	comment text,
-	jobNo bigint
-)
-go
+--ALTER TABLE productScaffold WITH CHECK ADD CONSTRAINT fk_tag_productScaffold
+--FOREIGN KEY (tag) REFERENCES scaffoldTraking(tag)
+--GO
 
-ALTER TABLE incoming ADD CONSTRAINT fk_jobNum_inComing
-FOREIGN KEY (jobNo) REFERENCES job (jobNo)
+--ALTER TABLE productScaffold WITH CHECK ADD CONSTRAINT fk_idSubJob_productScaffold
+--FOREIGN KEY (idProduct) REFERENCES product(idProduct)
+--GO
 
-create table productComing(
-	idProductInComing varchar(36) primary key not null,
-	ticketNum varchar(15),
-	idProduct int,
-	quantity float
-)
-go
+--create table scaffoldInformation(
+--	idScaffoldInformation varchar(36) primary key not null,
+--	type varchar(15),
+--	width float,
+--	length float,
+--	heigth float,
+--	descks float,
+--	ko float,
+--	base float,
+--	extraDeck float,
+--	tag varchar(20)
+--)
+--GO
 
-ALTER TABLE productComing WITH CHECK ADD CONSTRAINT fk_ticketNum_inComing
-FOREIGN KEY (ticketNum) REFERENCES incoming(ticketNum)
-GO
+--ALTER TABLE scaffoldInformation WITH CHECK ADD CONSTRAINT fk_type_scaffoldInformation
+--FOREIGN KEY (type) REFERENCES rental(type)
+--GO
 
-ALTER TABLE productComing WITH CHECK ADD CONSTRAINT fk_idProduct_inComing
-FOREIGN KEY (idProduct) REFERENCES product(idProduct)
-GO
+--ALTER TABLE scaffoldInformation WITH CHECK ADD CONSTRAINT fk_tag_scaffoldInformation
+--FOREIGN KEY (tag) REFERENCES scaffoldTraking(tag)
+--GO
 
-create table outgoing(
-	ticketNum varchar(15) primary key not null,
-	dateShipped date,
-	comment text,
-	shippedby varchar(80),
-	superintendent varchar(80),
-	jobNo bigint
-)
-go
+--create table activityHours(
+--	idActivityHours varchar(36) primary key not null,
+--	build float,
+--	material float,
+--	travel float,
+--	weather float,
+--	alarm float,
+--	safety float,
+--	stdBy float,
+--	other float,
+--	tag varchar(20)
+--)
+--GO
 
-ALTER TABLE outgoing ADD CONSTRAINT fk_jobNum_outgoing
-FOREIGN KEY (jobNo) REFERENCES job (jobNo)
+--ALTER TABLE activityHours WITH CHECK ADD CONSTRAINT fk_tag_activityHours
+--FOREIGN KEY (tag) REFERENCES scaffoldTraking(tag)
+--GO
 
-create table productOutGoing(
-	idProductOutGoing varchar(36) primary key not null,
-	ticketNum varchar(15),
-	idProduct int,
-	quantity float
-)
-go
+--create table scfInfo(
+--	idScfInfo varchar(36) primary key not null,
+--	csap char(1),
+--	rolling char(1),
+--	internal char(1),
+--	hanging char(1),
+--	tag varchar(20)
+--)
+--GO
 
-ALTER TABLE productOutGoing ADD CONSTRAINT fk_ticketNum_productOutGoing
-FOREIGN KEY (ticketNum) REFERENCES outgoing(ticketNum)
-GO
+--ALTER TABLE scfInfo WITH CHECK ADD CONSTRAINT fk_tag_scfInfo
+--FOREIGN KEY (tag) REFERENCES scaffoldTraking(tag)
+--GO
 
-ALTER TABLE productOutGoing ADD CONSTRAINT fk_idProduct_productOutGoing
-FOREIGN KEY (idProduct) REFERENCES product(idProduct)
-GO
+--create table materialHandeling(
+--	idMaterialHandeling varchar(36) primary key  not null,
+--	truck char(1),
+--	forklift char(1),
+--	trailer char(1),
+--	crane char(1),
+--	rope char(1),
+--	passed char(1),
+--	elevator char(1),
+--	tag varchar(20)
+--)
+--GO
+
+--ALTER TABLE materialHandeling WITH CHECK ADD CONSTRAINT fk_tag_materialHandeling
+--FOREIGN KEY (tag) REFERENCES scaffoldTraking(tag)
+--GO
+
+--create table leg(
+--	legID varchar(36)primary key not null,
+--	qty float,
+--	heigth float,
+--	tag varchar(20)
+--)
+--GO
+
+--ALTER TABLE leg WITH CHECK ADD CONSTRAINT fk_tag_leg
+--FOREIGN KEY (tag) REFERENCES scaffoldTraking(tag)
+--GO

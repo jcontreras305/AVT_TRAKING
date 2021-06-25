@@ -2,7 +2,157 @@
 Public Class MetodosScaffold
     Inherits ConnectioDB
 
+    '========================================================= Job CAT ======================================================================= 
+    Public Function llenarComboJobCat(ByVal combo As ComboBox) As DataTable
+        Dim tabla As New DataTable
+        tabla.Columns.Add("cmb")
+        tabla.Columns.Add("id")
+        tabla.Columns.Add("cat")
+        Try
+            conectar()
+            Dim cmd As New SqlCommand("select idJobCat as 'ID' , cat as 'Description' from jobCat", conn)
+            Dim dr As SqlDataReader = cmd.ExecuteReader()
+            combo.Items.Clear()
+            While dr.Read()
+                combo.Items.Add(CStr(dr("ID")) + " " + dr("Description"))
+                tabla.Rows.Add(CStr(dr("ID")) + " " + dr("Description"), CStr(dr("ID")), CStr(dr("Description")))
+            End While
+            Return tabla
+        Catch ex As Exception
+            MsgBox(ex.Message())
+            Return tabla
+        Finally
+            desconectar()
+        End Try
+    End Function
+
+    Public Function llenarJobCat(ByVal tabla As DataGridView) As Boolean
+        Try
+            conectar()
+            Dim cmd As New SqlCommand("select idJobCat as 'ID' , cat as 'Description' from jobCat", conn)
+            If cmd.ExecuteNonQuery Then
+                Dim da As New SqlDataAdapter(cmd)
+                Dim dt As New DataTable
+                da.Fill(dt)
+                tabla.DataSource = dt
+                Return True
+            Else
+                Return False
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message())
+            Return False
+        Finally
+            desconectar()
+        End Try
+    End Function
+
+    Public Function SaveJobCat(ByVal tabla As DataGridView) As Boolean
+        Try
+            conectar()
+            Dim tran As SqlTransaction
+            tran = conn.BeginTransaction()
+            Dim flag As Boolean = True
+            Dim cont As Integer = 0
+            For Each row As DataGridViewRow In tabla.Rows
+                If row.Cells(0).Value() IsNot Nothing Then
+                    Dim cmd As New SqlCommand("
+if (select COUNT(*) from jobCat where idJobCat = '" + row.Cells(0).Value().ToString() + "' ) = 0
+begin 
+	insert into jobCat values('" + row.Cells(0).Value().ToString() + "', '" + row.Cells(1).Value().ToString() + "')
+end
+else if(select COUNT(*) from jobCat where idJobCat = '" + row.Cells(0).Value().ToString() + "' ) = 1
+begin
+	update jobCat set cat = '" + row.Cells(1).Value().ToString() + "' where idJobCat = '" + row.Cells(0).Value().ToString() + "' 
+end", conn)
+                    cmd.Transaction = tran
+                    If cmd.ExecuteNonQuery = 1 Then
+                        cont += 1
+                    Else
+                        tran.Rollback()
+                        flag = False
+                        Exit For
+                    End If
+                End If
+            Next
+            If flag Then
+                tran.Commit()
+                Return True
+            Else
+                MsgBox("Error at line " + (cont + 1))
+                Return False
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message())
+            Return False
+        Finally
+            desconectar()
+        End Try
+    End Function
+
+    Public Function DeleteRowsJobCat(ByVal tabla As DataGridView) As Boolean
+        Try
+            conectar()
+            Dim tran As SqlTransaction
+            tran = conn.BeginTransaction()
+            Dim flag As Boolean = True
+            Dim cont As Integer = 0
+            For Each row As DataGridViewRow In tabla.SelectedRows()
+                If row.Cells(0).Value() IsNot Nothing Then
+                    Dim cmd As New SqlCommand("
+if (select COUNT(*) from jobCat where idJobCat = '" + row.Cells(0).Value.ToString() + "' ) = 1
+begin 
+	delete from jobCat where idJobCat = '" + row.Cells(0).Value.ToString() + "'
+end", conn)
+                    cmd.Transaction = tran
+                    If cmd.ExecuteNonQuery = 1 Then
+                        cont += 1
+                    Else
+                        tran.Rollback()
+                        flag = False
+                        Exit For
+                    End If
+                End If
+            Next
+            If flag Then
+                tran.Commit()
+                Return True
+            Else
+                MsgBox("Error at line " + (cont + 1))
+                Return False
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message())
+            Return False
+        Finally
+            desconectar()
+        End Try
+    End Function
+
     '========================================================= Areas ======================================================================= 
+    Public Function llenarComboArea(ByVal combo As ComboBox) As DataTable
+        Dim tabla As New DataTable
+        tabla.Columns.Add("cmb")
+        tabla.Columns.Add("id")
+        tabla.Columns.Add("name")
+        Try
+            conectar()
+            Dim cmd As New SqlCommand("select idArea as 'ID', name as 'Name' from areas", conn)
+            Dim dr As SqlDataReader = cmd.ExecuteReader()
+            combo.Items.Clear()
+            While dr.Read()
+                combo.Items.Add(CStr(dr("ID")) + "    " + dr("Name"))
+                tabla.Rows.Add(CStr(dr("ID")) + "    " + dr("Name"), CStr(dr("ID")), CStr(dr("Name")))
+            End While
+            Return tabla
+        Catch ex As Exception
+            MsgBox(ex.Message())
+            Return tabla
+        Finally
+            desconectar()
+        End Try
+    End Function
+
     Public Function llenarAreas(ByVal tabla As DataGridView) As Boolean
         Try
             conectar()
@@ -107,6 +257,35 @@ end", conn)
     End Function
 
     '========================================================= WO ==========================================================================
+    Public Function llenarComboWO(ByVal combo As ComboBox) As DataTable
+        Dim tabla As New DataTable
+        tabla.Columns.Add("wono")
+        tabla.Columns.Add("wo")
+        tabla.Columns.Add("task")
+        tabla.Columns.Add("job")
+        tabla.Columns.Add("description")
+        tabla.Columns.Add("cmb")
+        Try
+            conectar()
+            Dim cmd As New SqlCommand("select CONCAT(wo.idWO,'-',tk.task) as 'WO No',wo.idWO, tk.idAux, jb.jobNo as 'Job No' ,tk.description as 'Description'
+from job as jb 
+inner join projectOrder as po on po.jobNo = jb.jobNo
+inner join workOrder as wo on wo.idPO = po.idPO
+inner join task as tk on tk.idAuxWO = wo.idAuxWO", conn)
+            Dim dr As SqlDataReader = cmd.ExecuteReader()
+            combo.Items.Clear()
+            While dr.Read()
+                combo.Items.Add(CStr(dr("WO No")) + "    " + CStr(dr("Job No")) + "    " + dr("Description"))
+                tabla.Rows.Add(CStr(dr("WO No")), CStr(dr("idWO")), CStr(dr("idAux")), CStr(dr("Job No")), CStr(dr("Description")), (CStr(dr("WO No")) + "    " + CStr(dr("Job No")) + "    " + dr("Description")))
+            End While
+            Return tabla
+        Catch ex As Exception
+            MsgBox(ex.Message())
+            Return tabla
+        Finally
+            desconectar()
+        End Try
+    End Function
 
     Public Function llenarWO(ByVal tabla As DataGridView) As Boolean
         Try
@@ -134,6 +313,29 @@ inner join task as tk on tk.idAuxWO = wo.idAuxWO", conn)
     End Function
 
     '========================================================= Sub Jobs ====================================================================
+    Public Function llenarComboSubJob(ByVal combo As ComboBox) As DataTable
+        Dim tabla As New DataTable
+        tabla.Columns.Add("cmb")
+        tabla.Columns.Add("subJob")
+        tabla.Columns.Add("description")
+        Try
+            conectar()
+            Dim cmd As New SqlCommand("select idSubJob as 'Sub Job', description as 'Description' from subJobs", conn)
+            Dim dr As SqlDataReader = cmd.ExecuteReader()
+            combo.Items.Clear()
+            While dr.Read()
+                combo.Items.Add(CStr(dr("Sub Job")) + "    " + dr("Description"))
+                tabla.Rows.Add(CStr(dr("Sub Job")) + "    " + dr("Description"), CStr(dr("Sub Job")), CStr(dr("Description")))
+            End While
+            Return tabla
+        Catch ex As Exception
+            MsgBox(ex.Message())
+            Return tabla
+        Finally
+            desconectar()
+        End Try
+    End Function
+
     Public Function llenarSubJobs(ByVal tabla As DataGridView) As Boolean
         Try
             conectar()
@@ -304,7 +506,7 @@ end ", conn)
     Public Function llenarClassification(ByVal tabla As DataGridView) As Boolean
         Try
             conectar()
-            Dim cmd As New SqlCommand("select class as 'Class', name as 'Name' from classification", conn)
+            Dim cmd As New SqlCommand("select class as 'Material', name as 'Name' from classification", conn)
             If cmd.ExecuteNonQuery Then
                 Dim da As New SqlDataAdapter(cmd)
                 Dim dt As New DataTable
@@ -1247,7 +1449,7 @@ where ticketNum = '" + idTicket + "'"
 where ticketNum = '" + list(0) + "'"
                 cmdPrductosInComing.Connection = conn
             Else
-                cmdPrductosInComing.CommandText = "select pic.quantity as 'QTY',pic.idProduct as 'ID',pd.price as '$UM',pd.um as 'UM',pd.name as 'Product Description' ,idProductInComingfrom productComing as pic inner join product as pd on pd.idProduct = pic.idProduct"
+                cmdPrductosInComing.CommandText = "select pic.quantity as 'QTY',pic.idProduct as 'ID',pd.price as '$UM',pd.um as 'UM',pd.name as 'Product Description' ,idProductInComing from productComing as pic inner join product as pd on pd.idProduct = pic.idProduct"
                 cmdPrductosInComing.Connection = conn
             End If
             If cmdPrductosInComing.ExecuteNonQuery Then
@@ -1270,7 +1472,7 @@ where ticketNum = '" + list(0) + "'"
     Public Function llenarCellComboIDProduct(ByVal cmb As DataGridViewComboBoxCell, ByVal tablaPoductoIncoming As DataTable) As Boolean
         Try
             conectar()
-            Dim cmd As New SqlCommand("select concat(idProduct,'    ',name)as product , idProduct, price, um,name from product", conn)
+            Dim cmd As New SqlCommand("select concat(idProduct,'    ',name)as product , idProduct, price, um,name,quantity from product", conn)
             Dim dr As SqlDataReader = cmd.ExecuteReader()
             While dr.Read()
                 cmb.Items.Add(dr("product"))
@@ -1641,6 +1843,375 @@ end", conn)
             desconectar()
         End Try
     End Function
+
+    '========================================= SCAFFOLD TRAKING ==============================================================
+
+    Public Function llenarComboContact(ByVal cmb As ComboBox) As Boolean
+        Try
+            conectar()
+            Dim cmd As New SqlCommand("select contact from scaffoldTraking", conn)
+            Dim dr As SqlDataReader = cmd.ExecuteReader()
+            cmb.Items.Clear()
+            While dr.Read()
+                If cmb.FindStringExact(dr("contact")) = -1 Or cmb.FindStringExact(dr("contact")) = 0 Then
+                    cmb.Items.Add(dr("contact"))
+                End If
+            End While
+            Return True
+        Catch ex As Exception
+            Return False
+        Finally
+            desconectar()
+        End Try
+    End Function
+
+    Public Function llenarScaffold(ByVal tabla As DataTable) As Boolean
+        Try
+            conectar()
+            Dim cmd As New SqlCommand("select tag, idAux,idJobCat,idArea,idSubJob from scaffoldTraking", conn)
+            If cmd.ExecuteNonQuery Then
+                Dim da As New SqlDataAdapter(cmd)
+                da.Fill(tabla)
+                Return True
+            Else
+                Return False
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message())
+            Return False
+        Finally
+            desconectar()
+        End Try
+    End Function
+
+    Public Function llenarScaffold(ByVal tag As String) As scaffold
+        Dim sc As New scaffold
+        Try
+            conectar()
+            Dim cmdDatosScaffold As New SqlCommand("select top 1 * from scaffoldTraking where tag ='" + tag + "'", conn)
+            Dim dr As SqlDataReader = cmdDatosScaffold.ExecuteReader()
+            While dr.Read()
+                sc.tag = dr("tag")
+                sc.dateBild = validarFechaParaVB(dr("buildDate"))
+                sc.location = dr("location")
+                sc.purpose = dr("location")
+                sc.comments = dr("comments")
+                sc.dateRecComp = validarFechaParaVB(dr("reqComp"))
+                sc.contact = dr("contact")
+                sc.foreman = dr("foreman")
+                sc.erector = dr("erector")
+                sc.task = dr("idAux")
+                sc.jobcat = dr("idJobCat")
+                sc.areaID = CStr(dr("idArea"))
+                sc.idsubJob = CStr(dr("idSubJob"))
+                Exit While
+            End While
+            dr.Close()
+            If sc.task <> Nothing Then
+                Dim cmdTaskWorkOrder As New SqlCommand("select top 1 CONCAT(wo.idWO,'-',tk.task)as 'Wo' ,tk.description from workOrder as wo
+inner join task as tk on wo.idAuxWO = tk.idAuxWO where tk.idAux = '" + sc.task + "'", conn)
+                Dim dr1 As SqlDataReader = cmdTaskWorkOrder.ExecuteReader()
+                While dr1.Read()
+                    sc.wo = dr1("Wo")
+                    sc.descriptionWO = dr1("description")
+                    Exit While
+                End While
+                dr1.Close()
+            End If
+            If sc.jobcat <> Nothing Then
+                Dim cmdJobCat As New SqlCommand("select top 1 cat from jobCat where idjobCAt = '" + sc.jobcat + "'", conn)
+                Dim dr2 As SqlDataReader = cmdJobCat.ExecuteReader()
+                While dr2.Read()
+                    sc.category = dr2("cat")
+                    Exit While
+                End While
+                dr2.Close()
+            End If
+            If sc.areaID <> Nothing Then
+                Dim cmdAreaId As New SqlCommand("select top 1 name from areas where idArea = " + sc.areaID, conn)
+                Dim dr3 As SqlDataReader = cmdAreaId.ExecuteReader(0)
+                While dr3.Read()
+                    sc.area = dr3("name")
+                    Exit While
+                End While
+                dr3.Close()
+            End If
+            If sc.idsubJob <> Nothing Then
+                Dim cmdSubJobs As New SqlCommand("select top 1 description from subJobs where idSubJob = " + sc.idsubJob, conn)
+                Dim dr4 As SqlDataReader = cmdSubJobs.ExecuteReader()
+                While dr4.Read()
+                    sc.subjob = dr4("description")
+                    Exit While
+                End While
+                dr4.Close()
+            End If
+            '================================ activuty hours ===============================================
+            Dim cmdActivityHours As New SqlCommand("select top 1 * from activityHours where tag = '" + sc.tag + "'", conn)
+            Dim dr5 As SqlDataReader = cmdActivityHours.ExecuteReader()
+            While dr5.Read()
+                sc.ahrIdActivityHours = dr5("idActivityHours")
+                sc.ahrBuild = dr5("build")
+                sc.ahrMaterial = dr5("material")
+                sc.ahrTravel = dr5("travel")
+                sc.ahrWeather = dr5("weather")
+                sc.ahrAlarm = dr5("alarm")
+                sc.ahrSafety = dr5("safety")
+                sc.ahrOther = dr5("other")
+                sc.ahrTotal = sc.ahrBuild + sc.ahrMaterial + sc.ahrTravel + sc.ahrWeather + sc.ahrAlarm + sc.ahrSafety + sc.ahrOther
+                Exit While
+            End While
+            dr5.Close()
+            '================================ scaffold information =========================================
+            Dim cmdScaffoldInformation As New SqlCommand("select top 1 * from scaffoldInformation where tag = '" + tag + "'", conn)
+            Dim dr6 As SqlDataReader = cmdScaffoldInformation.ExecuteReader()
+            While dr6.Read()
+                sc.idScaffoldinformation = dr6("idscaffoldInformation")
+                sc.sciType = If(dr6("type") Is DBNull.Value, "", dr6("type"))
+                sc.sciWidth = dr6("width")
+                sc.sciLength = dr6("length")
+                sc.sciHeigth = dr6("heigth")
+                sc.sciDecks = dr6("descks")
+                sc.sciKo = dr6("ko")
+                sc.sciBase = dr6("base")
+                sc.sciExtraDeck = dr6("extraDeck")
+                Exit While
+            End While
+            dr6.Close()
+            sc.products = sc.llenarTablaProductTag(sc.tag)
+            sc.scfInfo = sc.llenarScfInfo(sc.tag)
+            sc.materialHandeling = sc.llenarmaterialHandeling(sc.tag)
+            sc.leg = sc.llenarLeg(sc.tag)
+            Return sc
+        Catch ex As Exception
+            Return sc
+        Finally
+            desconectar()
+        End Try
+    End Function
+
+    Public Function saveScaffoldTraking(ByVal sc As scaffold) As Boolean
+        conectar()
+        Dim tran As SqlTransaction
+        tran = conn.BeginTransaction
+        Dim flagComplete As Boolean = True
+        Try
+            Dim falgTag As Boolean = True
+            Dim cmdTraking As New SqlCommand("
+if (select count(*) from scaffoldTraking where tag = '" + sc.tag + "') = 0
+begin 
+	insert into scaffoldTraking values('" + sc.tag + "','" + validaFechaParaSQl(sc.dateBild) + "','" + sc.location + "','" + sc.purpose + "','" + sc.comments + "','" + validaFechaParaSQl(sc.dateRecComp) + "','" + sc.contact + "','" + sc.foreman + "','" + sc.erector + "','" + sc.task + "','" + sc.jobcat + "'," + sc.areaID + "," + sc.idsubJob + ")
+end
+else if (select count(*) from scaffoldTraking where tag = '" + sc.tag + "') = 1
+begin 
+	update scaffoldTraking set buildDate = '" + validaFechaParaSQl(sc.dateBild) + "',location = '" + sc.location + "',purpose ='" + sc.purpose + "',comments='" + sc.comments + "',reqComp='" + validaFechaParaSQl(sc.dateRecComp) + "',contact='" + sc.contact + "',foreman='" + sc.foreman + "',erector='" + sc.erector + "',idAux='" + sc.task + "',idJobCat='" + sc.jobcat + "',idArea=" + sc.areaID + ",idSubJob=" + sc.idsubJob + " where tag= '" + sc.tag + "'
+end", conn)
+            cmdTraking.Transaction = tran
+            If cmdTraking.ExecuteNonQuery > 0 Then 'si entra se tubo que insertar o actualizar si no hubo un error 
+                Dim cmdScaffoflInfo As New SqlCommand("
+if (select count(*) from scaffoldInformation where tag ='" + sc.tag + "')=0
+begin 
+	insert into scaffoldInformation values(NEWID()," + If(sc.sciType = "", "Null", "'" + sc.sciType + "'") + "," + CStr(sc.sciWidth) + "," + CStr(sc.sciLength) + "," + CStr(sc.sciHeigth) + "," + CStr(sc.sciDecks) + "," + CStr(sc.sciKo) + "," + CStr(sc.sciBase) + "," + CStr(sc.sciExtraDeck) + ",'" + sc.tag + "')
+end
+else if(select count(*) from scaffoldInformation where tag ='" + sc.tag + "')=1 
+begin 
+	update scaffoldInformation set type=" + If(sc.sciType = "", "Null", "'" + sc.sciType + "'") + ",width=" + CStr(sc.sciWidth) + ",length=" + CStr(sc.sciLength) + ",heigth=" + CStr(sc.sciHeigth) + ",descks=" + CStr(sc.sciDecks) + ",ko=" + CStr(sc.sciKo) + ",base=" + CStr(sc.sciBase) + ",extraDeck=" + CStr(sc.sciExtraDeck) + " where tag = '" + sc.tag + "'
+end", conn)
+                cmdScaffoflInfo.Transaction = tran
+                If cmdScaffoflInfo.ExecuteNonQuery Then 'si entra se tubo que insertar o actulzar la tabla de ScaffoldInformation
+                    Dim cmdHours As New SqlCommand("
+if (select count(*) from activityHours where tag ='" + sc.tag + "')=0
+begin 
+	insert into activityHours values(NEWID()," + CStr(sc.ahrBuild) + "," + CStr(sc.ahrMaterial) + "," + CStr(sc.ahrTravel) + "," + CStr(sc.ahrWeather) + "," + CStr(sc.ahrAlarm) + "," + CStr(sc.ahrSafety) + "," + CStr(sc.ahrStdBy) + "," + CStr(sc.ahrOther) + ",'" + sc.tag + "')
+end
+else if(select count(*) from activityHours where tag ='" + sc.tag + "')=1
+begin 
+	update activityHours set build=" + CStr(sc.ahrBuild) + ",material=" + CStr(sc.ahrMaterial) + ",travel=" + CStr(sc.ahrTravel) + ",weather=" + CStr(sc.ahrWeather) + ",alarm=" + CStr(sc.ahrAlarm) + ",safety=" + CStr(sc.ahrSafety) + ",stdBy=" + CStr(sc.ahrStdBy) + ",other=" + CStr(sc.ahrOther) + " where tag = '" + sc.tag + "'
+end ", conn)
+                    cmdHours.Transaction = tran
+                    If cmdHours.ExecuteNonQuery > 0 Then 'si entra se tubo que insertar o actulzar la tabla de Activity Hours
+                        Dim cmdScfInfo As New SqlCommand("
+if(select count(*) from scfInfo where tag ='" + sc.tag + "')=0
+begin
+	insert into scfInfo values(NEWID(),'" + If(sc.scfInfo(0), "t", "f") + "','" + If(sc.scfInfo(1), "t", "f") + "','" + If(sc.scfInfo(2), "t", "f") + "','" + If(sc.scfInfo(3), "t", "f") + "','" + sc.tag + "')
+end
+else if(select count(*) from scfInfo where tag ='" + sc.tag + "')=1
+begin 
+	update scfInfo set csap='" + If(sc.scfInfo(0), "t", "f") + "',rolling='" + If(sc.scfInfo(1), "t", "f") + "',internal='" + If(sc.scfInfo(2), "t", "f") + "',hanging='" + If(sc.scfInfo(3), "t", "f") + "' where tag='" + sc.tag + "'
+end", conn)
+                        cmdScfInfo.Transaction = tran
+                        If cmdScfInfo.ExecuteNonQuery > 0 Then 'si entra se tubo que isertar o actualizarr la tabla de scfInfo 
+                            Dim cmdMaterialHandeling As New SqlCommand("
+if (select count(*) from materialHandeling where tag='" + sc.tag + "')=0
+begin 
+	insert into materialHandeling values(NEWID(),'" + If(sc.materialHandeling(0), "t", "f") + "','" + If(sc.materialHandeling(1), "t", "f") + "','" + If(sc.materialHandeling(2), "t", "f") + "','" + If(sc.materialHandeling(3), "t", "f") + "','" + If(sc.materialHandeling(4), "t", "f") + "','" + If(sc.materialHandeling(5), "t", "f") + "','" + If(sc.materialHandeling(6), "t", "f") + "','" + sc.tag + "')
+end
+else if (select count(*) from materialHandeling where tag='" + sc.tag + "')=1
+begin
+	update materialHandeling set truck='" + If(sc.materialHandeling(0), "t", "f") + "',forklift='" + If(sc.materialHandeling(1), "t", "f") + "',trailer='" + If(sc.materialHandeling(2), "t", "f") + "',crane='" + If(sc.materialHandeling(3), "t", "f") + "',rope='" + If(sc.materialHandeling(4), "t", "f") + "',passed='" + If(sc.materialHandeling(5), "t", "f") + "',elevator='" + If(sc.materialHandeling(6), "t", "f") + "' where tag ='" + sc.tag + "' 
+end", conn)
+                            cmdMaterialHandeling.Transaction = tran
+                            If cmdMaterialHandeling.ExecuteNonQuery > 0 Then 'Si entro se tubo que insertar o actualzar la tabla de Material handeling
+                                Dim contLeg As Integer = 1
+                                For Each row As DataRow In sc.leg.Rows() 'Aqui se ejecuta las fila de la tabla Leg 
+                                    Dim cmdLeg As New SqlCommand("
+if (select count(*) from leg where legID = '" + If(row.ItemArray(0) Is DBNull.Value, "", row.ItemArray(0)) + "')=0
+begin 
+	insert into leg values(NEWID()," + row.ItemArray(1) + "," + row.ItemArray(2) + ",'" + sc.tag + "')
+end
+else if (select count(*) from leg where legID = '" + If(row.ItemArray(0) Is DBNull.Value, "", row.ItemArray(0)) + "')=1
+begin
+	update leg set qty=" + row.ItemArray(1) + ",heigth=" + row.ItemArray(2) + " where legID ='" + row.ItemArray(0) + "'
+end", conn)
+                                    cmdLeg.Transaction = tran
+                                    If cmdLeg.ExecuteNonQuery > 0 Then
+                                        contLeg += 1
+                                    Else
+                                        tran.Rollback()
+                                        MessageBox.Show("Error, check the data and try again." + vbCrLf + "The error is likely in the Leg 'table' at row " + CStr(contLeg) + ".", "Important", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                                        flagComplete = False
+                                    End If
+                                Next
+
+                                Dim contProduct As Integer = 1
+                                For Each row As DataRow In sc.products.Rows() 'Aqui se ejecuta las fila de la tabla de productosScaffold
+                                    Dim array = CStr(row.ItemArray(1)).Split(" ")
+                                    Dim idProduct = array(0)
+                                    Dim cmdProduct As New SqlCommand("
+if(select count(*) from productScaffold where idProductScafold='" + If(row.ItemArray(0) Is DBNull.Value, "", CStr(row.ItemArray(0))) + "')=0
+begin 
+	insert into productScaffold values(NEWID(),'" + sc.tag + "'," + idProduct + "," + CStr(row.ItemArray(2)) + ")
+	update product set quantity = quantity - (select quantity from product where idProduct = " + CStr(idProduct) + ") where idProduct = " + CStr(idProduct) + "
+end
+else if(select count(*) from productScaffold where idProductScafold='" + If(row.ItemArray(0) Is DBNull.Value, "", CStr(row.ItemArray(0))) + "')=1
+begin 
+	if(select count(idProduct) from productScaffold where idProductScafold ='" + If(row.ItemArray(0) Is DBNull.Value, "", CStr(row.ItemArray(0))) + "' and idProduct = " + idProduct + ")=1
+	begin 
+		update product set quantity = quantity + (select quantity from productScaffold where idProductScafold = '" + If(row.ItemArray(0) Is DBNull.Value, "", CStr(row.ItemArray(0))) + "') where idProduct = " + idProduct + "
+		update productScaffold set quantity = " + CStr(row.ItemArray(2)) + " where idProductScafold ='" + If(row.ItemArray(0) Is DBNull.Value, "", CStr(row.ItemArray(0))) + "'
+		update product set quantity = quantity - " + CStr(row.ItemArray(2)) + " where idProduct = " + idProduct + " 
+	end
+	else 
+	begin 
+		update product set quantity = quantity + (select quantity from productScaffold where idProductScafold = '" + If(row.ItemArray(0) Is DBNull.Value, "", CStr(row.ItemArray(0))) + "') where idProduct = (select idProduct from productScaffold where idProductScafold = '" + If(row.ItemArray(0) Is DBNull.Value, "", CStr(row.ItemArray(0))) + "')
+		update productScaffold set idProduct = " + idProduct + " , quantity = " + CStr(row.ItemArray(2)) + " where idProductScafold ='" + If(row.ItemArray(0) Is DBNull.Value, "", CStr(row.ItemArray(0))) + "'
+		update product set quantity = quantity - " + CStr(row.ItemArray(2)) + " where idProduct = " + idProduct + " 
+	end
+end", conn)
+                                    cmdProduct.Transaction = tran
+                                    If cmdProduct.ExecuteNonQuery > 0 Then
+                                        contProduct += 1
+                                    Else
+                                        tran.Rollback()
+                                        MessageBox.Show("Error, check the data and try again." + vbCrLf + "The error is likely in the Products 'table' at row " + CStr(contProduct) + ".", "Important", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                                        flagComplete = False
+                                    End If
+                                Next
+                            Else
+                                tran.Rollback()
+                                MessageBox.Show("Error, check the data and try again." + vbCrLf + "The error is likely in the Activity Hours 'table'.", "Important", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                                flagComplete = False
+                            End If
+                        Else
+                            tran.Rollback()
+                            MessageBox.Show("Error, check the data and try again." + vbCrLf + "The error is likely in the Activity Hours 'table'.", "Important", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                            flagComplete = False
+                        End If
+                    Else
+                        tran.Rollback()
+                        MessageBox.Show("Error, check the data and try again." + vbCrLf + "The error is likely in the Activity Hours 'table'.", "Important", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                        flagComplete = False
+                    End If
+                Else
+                    tran.Rollback()
+                    MessageBox.Show("Error, check the data and try again." + vbCrLf + "The error is likely in the Scaffold Information 'table'.", "Important", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                    flagComplete = False
+                End If
+            Else
+                tran.Rollback()
+                MessageBox.Show("Error, check the data and try again." + vbCrLf + "The error is likely in the Scaffold Information.", "Important", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                flagComplete = False
+            End If
+            If flagComplete Then
+                tran.Commit()
+                Return True
+            Else
+                Return False
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message())
+            tran.Rollback()
+            Return False
+        Finally
+            desconectar()
+        End Try
+    End Function
+
+    Public Function deleteRowsLeg(ByVal tbl As DataGridView) As Boolean
+        conectar()
+        Dim tran As SqlTransaction
+        tran = conn.BeginTransaction
+        Try
+            Dim flag As Boolean = True
+            For Each row As DataGridViewRow In tbl.SelectedRows()
+                If row.Cells("clmLegID").Value <> "" Then
+                    Dim cmdDeleteLeg As New SqlCommand("delete from leg where legID = '" + row.Cells("legID").Value + "'", conn)
+                    cmdDeleteLeg.Transaction = tran
+                    If cmdDeleteLeg.ExecuteNonQuery() = 0 Then
+                        flag = False
+                        Exit For
+                    End If
+                End If
+            Next
+            If flag Then
+                tran.Commit()
+                Return True
+            Else
+                tran.Rollback()
+                Return False
+            End If
+        Catch ex As Exception
+            Return False
+        Finally
+            desconectar()
+        End Try
+    End Function
+
+    Public Function deleteRowsProductScaffold(ByVal tbl As DataGridView) As Boolean
+        conectar()
+        Dim tran As SqlTransaction
+        tran = conn.BeginTransaction
+        Try
+            Dim flag As Boolean = True
+            For Each row As DataGridViewRow In tbl.SelectedRows()
+                If row.Cells("clmIdProductScaffold").Value IsNot Nothing Then
+                    Dim cmdDeletePS As New SqlCommand("if (select COUNT(*) from productScaffold where idProductScafold = '" + row.Cells("clmIdProductScaffold").Value + "') = 1
+begin 
+	update product set quantity = quantity + (select quantity from productScaffold where idProductScafold = '" + row.Cells("clmIdProductScaffold").Value + "') where idProduct = (select idProduct from productScaffold where idProductScafold = '" + row.Cells("clmIdProductScaffold").Value + "')
+	delete productScaffold where idProductScafold = '" + row.Cells("clmIdProductScaffold").Value + "'
+end", conn)
+                    cmdDeletePS.Transaction = tran
+                    If cmdDeletePS.ExecuteNonQuery() = 0 Then
+                        flag = False
+                        Exit For
+                    End If
+                End If
+            Next
+            If flag Then
+                tran.Commit()
+                Return True
+            Else
+                tran.Rollback()
+                Return False
+            End If
+        Catch ex As Exception
+            Return False
+        Finally
+            desconectar()
+        End Try
+    End Function
+
+
+
 End Class
 
 

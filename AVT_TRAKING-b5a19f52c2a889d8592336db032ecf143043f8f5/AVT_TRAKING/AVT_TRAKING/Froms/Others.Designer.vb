@@ -61,6 +61,14 @@ Partial Class Others
         Me.btnUpdateTypeEmploye = New System.Windows.Forms.Button()
         Me.lstTypeEmployee = New System.Windows.Forms.ListBox()
         Me.TabPage2 = New System.Windows.Forms.TabPage()
+        Me.GroupBox6 = New System.Windows.Forms.GroupBox()
+        Me.btnAddJobCat = New System.Windows.Forms.Button()
+        Me.TextBox1 = New System.Windows.Forms.TextBox()
+        Me.lstJobCAT = New System.Windows.Forms.ListView()
+        Me.ColumnHeader4 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ColumnHeader5 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.btnDeleteJobCat = New System.Windows.Forms.Button()
+        Me.btnUpdateSaveJobCat = New System.Windows.Forms.Button()
         Me.Panel1.SuspendLayout()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
@@ -69,6 +77,8 @@ Partial Class Others
         Me.GroupBox3.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
+        Me.TabPage2.SuspendLayout()
+        Me.GroupBox6.SuspendLayout()
         Me.SuspendLayout()
         '
         'Panel1
@@ -476,12 +486,93 @@ Partial Class Others
         '
         'TabPage2
         '
+        Me.TabPage2.Controls.Add(Me.GroupBox6)
         Me.TabPage2.Location = New System.Drawing.Point(4, 22)
         Me.TabPage2.Name = "TabPage2"
         Me.TabPage2.Size = New System.Drawing.Size(956, 446)
         Me.TabPage2.TabIndex = 1
-        Me.TabPage2.Text = "Employe Items"
+        Me.TabPage2.Text = "Scaffold Traking Items"
         Me.TabPage2.UseVisualStyleBackColor = True
+        '
+        'GroupBox6
+        '
+        Me.GroupBox6.Controls.Add(Me.btnAddJobCat)
+        Me.GroupBox6.Controls.Add(Me.TextBox1)
+        Me.GroupBox6.Controls.Add(Me.lstJobCAT)
+        Me.GroupBox6.Controls.Add(Me.btnDeleteJobCat)
+        Me.GroupBox6.Controls.Add(Me.btnUpdateSaveJobCat)
+        Me.GroupBox6.Location = New System.Drawing.Point(8, 15)
+        Me.GroupBox6.Name = "GroupBox6"
+        Me.GroupBox6.Size = New System.Drawing.Size(298, 182)
+        Me.GroupBox6.TabIndex = 4
+        Me.GroupBox6.TabStop = False
+        Me.GroupBox6.Text = "Job CAT"
+        '
+        'btnAddJobCat
+        '
+        Me.btnAddJobCat.Location = New System.Drawing.Point(192, 43)
+        Me.btnAddJobCat.Name = "btnAddJobCat"
+        Me.btnAddJobCat.Size = New System.Drawing.Size(75, 23)
+        Me.btnAddJobCat.TabIndex = 6
+        Me.btnAddJobCat.Text = "Add"
+        Me.btnAddJobCat.UseVisualStyleBackColor = True
+        '
+        'TextBox1
+        '
+        Me.TextBox1.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.TextBox1.Location = New System.Drawing.Point(192, 16)
+        Me.TextBox1.Name = "TextBox1"
+        Me.TextBox1.Size = New System.Drawing.Size(100, 20)
+        Me.TextBox1.TabIndex = 5
+        '
+        'lstJobCAT
+        '
+        Me.lstJobCAT.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.lstJobCAT.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader4, Me.ColumnHeader5})
+        Me.lstJobCAT.FullRowSelect = True
+        Me.lstJobCAT.HideSelection = False
+        Me.lstJobCAT.Location = New System.Drawing.Point(6, 16)
+        Me.lstJobCAT.MultiSelect = False
+        Me.lstJobCAT.Name = "lstJobCAT"
+        Me.lstJobCAT.Size = New System.Drawing.Size(179, 160)
+        Me.lstJobCAT.TabIndex = 3
+        Me.lstJobCAT.UseCompatibleStateImageBehavior = False
+        Me.lstJobCAT.View = System.Windows.Forms.View.Details
+        '
+        'ColumnHeader4
+        '
+        Me.ColumnHeader4.Text = "Numer"
+        Me.ColumnHeader4.Width = 80
+        '
+        'ColumnHeader5
+        '
+        Me.ColumnHeader5.Text = "Name"
+        Me.ColumnHeader5.Width = 100
+        '
+        'btnDeleteJobCat
+        '
+        Me.btnDeleteJobCat.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnDeleteJobCat.Location = New System.Drawing.Point(191, 153)
+        Me.btnDeleteJobCat.Name = "btnDeleteJobCat"
+        Me.btnDeleteJobCat.Size = New System.Drawing.Size(75, 23)
+        Me.btnDeleteJobCat.TabIndex = 2
+        Me.btnDeleteJobCat.Text = "Delete"
+        Me.btnDeleteJobCat.UseVisualStyleBackColor = True
+        '
+        'btnUpdateSaveJobCat
+        '
+        Me.btnUpdateSaveJobCat.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnUpdateSaveJobCat.Location = New System.Drawing.Point(191, 124)
+        Me.btnUpdateSaveJobCat.Name = "btnUpdateSaveJobCat"
+        Me.btnUpdateSaveJobCat.Size = New System.Drawing.Size(75, 23)
+        Me.btnUpdateSaveJobCat.TabIndex = 1
+        Me.btnUpdateSaveJobCat.Text = "Update"
+        Me.btnUpdateSaveJobCat.UseVisualStyleBackColor = True
         '
         'Others
         '
@@ -504,6 +595,9 @@ Partial Class Others
         Me.GroupBox2.PerformLayout()
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()
+        Me.TabPage2.ResumeLayout(False)
+        Me.GroupBox6.ResumeLayout(False)
+        Me.GroupBox6.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -547,4 +641,12 @@ Partial Class Others
     Friend WithEvents btnDeleteCostCode As Button
     Friend WithEvents btnUpdateCostCode As Button
     Friend WithEvents TabPage2 As TabPage
+    Friend WithEvents GroupBox6 As GroupBox
+    Friend WithEvents btnAddJobCat As Button
+    Friend WithEvents TextBox1 As TextBox
+    Friend WithEvents lstJobCAT As ListView
+    Public WithEvents ColumnHeader4 As ColumnHeader
+    Public WithEvents ColumnHeader5 As ColumnHeader
+    Friend WithEvents btnDeleteJobCat As Button
+    Friend WithEvents btnUpdateSaveJobCat As Button
 End Class

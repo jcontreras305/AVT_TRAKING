@@ -6,10 +6,18 @@ Public Class scafoldTarking
     Dim tblTicketInComing As New Data.DataTable
     Dim tblProductOutGoing As New Data.DataTable
     Dim tblTicketOutGoing As New Data.DataTable
+    Dim tblArea As New Data.DataTable 'se utiliza para buscar despues de ser seleccionado el combo y encontrar al insertar o actualizar
+    Dim tblCat As New Data.DataTable 'se utiliza para buscar despues de ser seleccionado el combo y encontrar al insertar o actualizar
+    Dim tblWOTASK As New Data.DataTable 'se utiliza para buscar despues de ser seleccionado el combo y encontrar al insertar o actualizar
+    Dim tblSubJob As New Data.DataTable 'se utiliza para buscar despues de ser seleccionado el combo y encontrar al insertar o actualizar
+    Dim tblProductScaffoldAux As New Data.DataTable 'se utiliza para buscar despues de ser seleccionado el combo y encontrar al insertar o actualizar
     Dim mtdScaffold As New MetodosScaffold
     Dim selectedTable As String
     Dim tblMaterialStatusAux As New List(Of String)
     Dim tblProductosAux As New Data.DataTable
+    Dim tblScaffoldTags As New Data.DataTable
+    Dim sc As New scaffold
+    Dim loadingData As Boolean
     Private Sub scafoldTarking_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         'In Coming
         dtpDateInComing.Format = DateTimePickerFormat.Custom
@@ -44,10 +52,11 @@ Public Class scafoldTarking
             cmbJobNumOutGoing.Text = datosOutGoing(5)
             txtTicketNumOutGoing.Enabled = False
         End If
-        'Area/WO/Sub-Job
+        'Area/WO/Sub-Job/JobCat
         mtdScaffold.llenarSubJobs(tblSubJobs)
         mtdScaffold.llenarAreas(tblAreas)
         mtdScaffold.llenarWO(tblWO)
+        mtdScaffold.llenarJobCat(tblJobCat)
         'UM/Class/Status
         mtdScaffold.llenarClassification(tblClassification)
         mtdScaffold.llenarMaterialStatus(tblMaterialStatus)
@@ -61,6 +70,16 @@ Public Class scafoldTarking
         'Supervisor
         mtdScaffold.llenarSupervisor(tblSupervisor)
         'ScaffoldTraking
+        dtpReqCompScaffold.Format = DateTimePickerFormat.Custom
+        dtpReqCompScaffold.CustomFormat = "MM/dd/yyyy"
+        dtpBldDate.Format = DateTimePickerFormat.Custom
+        dtpBldDate.CustomFormat = "MM/dd/yyyy"
+        tblArea = mtdScaffold.llenarComboArea(cmbAreaID)
+        tblCat = mtdScaffold.llenarComboJobCat(cmbJobCAT)
+        tblWOTASK = mtdScaffold.llenarComboWO(cmbWONum)
+        tblSubJob = mtdScaffold.llenarComboSubJob(cmbSubJob)
+        mtdScaffold.llenarEmpleadosCombo(cmbForemanScaffold, tablaEmpleados)
+        mtdScaffold.llenarEmpleadosCombo(cmbErectorScaffold, tablaEmpleados)
         tblScaffoldInformation.Rows.Add("", "", "", "", "", "", "", "")
         Dim cmbProyect As New DataGridViewComboBoxCell
         With cmbProyect
@@ -68,7 +87,14 @@ Public Class scafoldTarking
         End With
         tblScaffoldInformation.Rows(0).Cells(0) = cmbProyect
         tblActivityHours.Rows.Add("", "", "", "", "", "", "", "", "")
-
+        tblActivityHours.Rows(0).Cells("clmTotal").ReadOnly = True
+        tblActivityHours.Rows(0).Cells("clmTotal").Style.BackColor = Color.Green
+        If mtdScaffold.llenarScaffold(tblScaffoldTags) Then
+            If tblScaffoldTags.Rows.Count > 0 Then
+                cargarDatosScaffold(tblScaffoldTags.Rows(0).ItemArray(0).ToString())
+            End If
+        End If
+        btnDeleteRowScaffoldLeg.Enabled = False
     End Sub
 
     Private Sub tabControl1_SelectedIndexChanged(sender As Object, e As EventArgs) Handles tabControl1.SelectedIndexChanged
@@ -83,6 +109,7 @@ Public Class scafoldTarking
             Case "UM/Class/Status"
             Case "Supervisor"
             Case "ScaffoldTraking"
+                selectedTable = "tag"
             Case "Modification"
             Case "Estimating"
         End Select
@@ -106,6 +133,10 @@ Public Class scafoldTarking
                             tblMaterialStatusAux.Add(row.Cells(0).Value.ToString())
                         End If
                     Next
+                End If
+            Case tblJobCat.Name
+                If mtdScaffold.SaveJobCat(tblJobCat) Then
+                    MsgBox("Sucessfull")
                 End If
             Case tblClassification.Name
                 If mtdScaffold.SaveClassification(tblClassification) Then
@@ -169,6 +200,18 @@ Public Class scafoldTarking
                         mtdScaffold.llenarTicketsOutGoing(tblTicketOutGoing)
                     End If
                 End If
+            Case "tag"
+                If mtdScaffold.saveScaffoldTraking(sc) Then
+                    MsgBox("Successfull")
+                End If
+            Case tblProductosScaffold.Name
+                If mtdScaffold.saveScaffoldTraking(sc) Then
+                    MsgBox("Successfull")
+                End If
+            Case tblLeg.Name
+                If mtdScaffold.saveScaffoldTraking(sc) Then
+                    MsgBox("Successfull")
+                End If
         End Select
     End Sub
 
@@ -227,6 +270,7 @@ Public Class scafoldTarking
             Case "Area/WO/Sub-Job"
                 mtdScaffold.SaveAreas(tblAreas)
                 mtdScaffold.SaveSubJobs(tblSubJobs)
+                mtdScaffold.SaveJobCat(tblJobCat)
             Case "UM/Class/Status"
                 If mtdScaffold.SaveMaterialStatus(tblMaterialStatus) Then
                     tblMaterialStatusAux.Clear()
@@ -243,6 +287,15 @@ Public Class scafoldTarking
                 mtdScaffold.SaveRentalTable(tblRentTable)
             Case "Supervisor"
             Case "ScaffoldTraking"
+                If mtdScaffold.saveScaffoldTraking(sc) Then
+                    If mtdScaffold.llenarScaffold(tblProductScaffoldAux) Then
+                        For Each row As DataRow In tblProductosAux.Rows()
+                            If row.ItemArray(0) = sc.tag Then
+                                sc = mtdScaffold.llenarScaffold(tblProductosAux.Rows(0).ItemArray(0))
+                            End If
+                        Next
+                    End If
+                End If
             Case "Modification"
             Case "Estimating"
         End Select
@@ -257,6 +310,11 @@ Public Class scafoldTarking
     Private Sub tblWO_Click(sender As Object, e As EventArgs) Handles tblWO.Click
         selectedTable = tblWO.Name
     End Sub
+
+    Private Sub tblJobCat_Click(sender As Object, e As EventArgs) Handles tblJobCat.Click
+        selectedTable = tblJobCat.Name
+    End Sub
+
     Private Sub tblMaterialStatus_Click(sender As Object, e As EventArgs) Handles tblMaterialStatus.Click
         selectedTable = tblMaterialStatus.Name
     End Sub
@@ -285,6 +343,46 @@ Public Class scafoldTarking
         selectedTable = tblOutGoing.Name
     End Sub
 
+    Private Sub tblLeg_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles tblLeg.CellClick
+        selectedTable = tblLeg.Name
+        btnDeleteRowScaffoldLeg.Enabled = True
+    End Sub
+    Private Sub tblLeg_Leave(sender As Object, e As EventArgs) Handles tblLeg.Leave
+        If Not btnDeleteRowScaffoldLeg.Focused Then
+            btnDeleteRowScaffoldLeg.Enabled = False
+        End If
+
+    End Sub
+    Private Sub tblProductosScaffold_Leave(sender As Object, e As EventArgs) Handles tblProductosScaffold.Leave
+        If Not btnDeleteRowScaffoldLeg.Focused Then
+            btnDeleteRowScaffoldLeg.Enabled = False
+        End If
+    End Sub
+    Private Sub tblProductosScaffold_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles tblProductosScaffold.CellClick
+        selectedTable = tblProductosScaffold.Name
+        btnDeleteRowScaffoldLeg.Enabled = True
+        If e.ColumnIndex = 1 Then
+            Try
+                If tblProductosScaffold.CurrentCell.GetType.Name = "DataGridViewTextBoxCell" Then
+                    Dim cmbPd As New DataGridViewComboBoxCell
+                    With cmbPd
+                        mtdScaffold.llenarCellComboIDProduct(cmbPd, tblProductScaffoldAux)
+                    End With
+                    If tblProductosScaffold.CurrentRow.Cells(1).Value IsNot Nothing Then
+                        For Each row As Data.DataRow In tblProductScaffoldAux.Rows()
+                            If row.ItemArray(1) = tblProductosScaffold.CurrentRow.Cells(1).Value Then
+                                cmbPd.Value = row.ItemArray(0)
+                            End If
+                        Next
+                    End If
+                    tblProductosScaffold.CurrentRow.Cells(1) = cmbPd
+                End If
+            Catch ex As Exception
+
+            End Try
+        End If
+    End Sub
+
     Private Sub btnDeleteRows_Click(sender As Object, e As EventArgs) Handles btnDeleteRows.Click
         Select Case selectedTable
             Case tblAreas.Name
@@ -297,6 +395,12 @@ Public Class scafoldTarking
                 If mtdScaffold.DeleteRowsSubJobs(tblSubJobs) Then
                     For Each row As DataGridViewRow In tblSubJobs.SelectedRows()
                         tblSubJobs.Rows.Remove(row)
+                    Next
+                End If
+            Case tblJobCat.Name
+                If mtdScaffold.DeleteRowsJobCat(tblJobCat) Then
+                    For Each row As DataGridViewRow In tblJobCat.SelectedRows()
+                        tblJobCat.Rows.Remove(row)
                     Next
                 End If
             Case tblMaterialStatus.Name
@@ -352,6 +456,8 @@ Public Class scafoldTarking
                         Next
                     End If
                 End If
+            Case tblProductosScaffold.Name
+            Case tblLeg.Name
         End Select
     End Sub
 
@@ -567,8 +673,8 @@ Public Class scafoldTarking
         While sheet.Cells(contClass, 1).Text <> ""
             Dim flag As Boolean = True
             For Each row As DataGridViewRow In GridClass.Rows()
-                If row.Cells("Class").Value IsNot Nothing Then
-                    If sheet.Cells(contClass, 1).Text = row.Cells("Class").Value.ToString() Or sheet.Cells(contClass, 2).Text = row.Cells("Name").Value.ToString() Then
+                If row.Cells("Material").Value IsNot Nothing Then
+                    If sheet.Cells(contClass, 1).Text = row.Cells("Material").Value.ToString() Or sheet.Cells(contClass, 2).Text = row.Cells("Name").Value.ToString() Then
                         flag = False
                         Exit For
                     Else
@@ -756,8 +862,6 @@ Public Class scafoldTarking
         End If
     End Sub
 
-
-
     Public Sub cmb_SelectedIndexChanguedInComming(sender As Object, e As EventArgs)
         Dim cmb As ComboBox = CType(sender, ComboBox)
         Dim flag As Boolean = True
@@ -851,6 +955,62 @@ Public Class scafoldTarking
                 tblProduct.CurrentRow.Cells("idExitenciaProduct").Value = list(0)
             End If
 
+        End If
+    End Sub
+
+    Public Sub cmb_selectedIndexChangueScaffoldInformation(sender As Object, e As EventArgs)
+        Dim cmb As ComboBox = CType(sender, ComboBox)
+        If tblScaffoldInformation.CurrentCell.ColumnIndex = tblScaffoldInformation.Columns("clmType").Index Then
+            tblScaffoldInformation.CurrentCell.Value = If(cmb.SelectedItem IsNot Nothing, cmb.SelectedItem, "")
+            sc.sciType = If(cmb.SelectedItem IsNot Nothing, cmb.SelectedItem, "")
+        End If
+    End Sub
+
+    Public Sub cmb_SelectedIndexChanguedProducScaffold(sender As Object, e As EventArgs)
+        Try
+            Dim cmb As ComboBox = CType(sender, ComboBox)
+            If tblProductosScaffold.CurrentCell.ColumnIndex = tblProductosScaffold.Columns("clmID").Index Then
+                If tblProductosScaffold.CurrentCell.Value <> cmb.SelectedItem Then
+                    Dim flagExist = True
+                    For Each row As DataGridViewRow In tblProductosScaffold.Rows()
+                        If row.Cells("clmID").Value = cmb.SelectedItem And tblProductosScaffold.CurrentCell.RowIndex <> row.Index Then
+                            flagExist = False
+                            Exit For
+                        End If
+                    Next
+                    If flagExist Then
+                        For Each row As Data.DataRow In tblProductScaffoldAux.Rows()
+                            If cmb.SelectedItem = row.ItemArray(0) Then
+                                tblProductosScaffold.CurrentRow.Cells("clmProductDescription").Value = CStr(row.ItemArray(4))
+                                tblProductosScaffold.CurrentRow.Cells("clmID").Value = CStr(row.ItemArray(1))
+                                tblProductosScaffold.CurrentRow.Cells("clmStock").Value = CStr(row.ItemArray(5))
+                                cmb.Text = CStr(row.ItemArray(1))
+                                If tblProductosScaffold.CurrentRow.Cells("clmQTY").Value > tblProductosScaffold.CurrentRow.Cells("clmStock").Value Then
+                                    tblProductosScaffold.CurrentRow.Cells("clmQTY").Value = "0"
+                                End If
+                                Exit For
+                            End If
+                        Next
+                    Else
+                        MessageBox.Show("The selected product is in the Table.", "Important", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                    End If
+                End If
+            End If
+        Catch ex As Exception
+
+        End Try
+    End Sub
+
+    Private Sub tblScaffoldInformation_EditingControlShowing(sender As Object, e As DataGridViewEditingControlShowingEventArgs) Handles tblScaffoldInformation.EditingControlShowing
+        Dim Index = tblScaffoldInformation.CurrentCell.ColumnIndex
+        If Index = 0 Then
+            If tblScaffoldInformation.CurrentCell.GetType.Name = "DataGridViewComboBoxCell" Then
+                Dim cb As ComboBox = CType(e.Control, ComboBox)
+                If e.Control IsNot Nothing Then
+                    RemoveHandler cb.SelectedIndexChanged, AddressOf cmb_selectedIndexChangueScaffoldInformation
+                    AddHandler cb.SelectedIndexChanged, AddressOf cmb_selectedIndexChangueScaffoldInformation
+                End If
+            End If
         End If
     End Sub
 
@@ -1289,5 +1449,607 @@ Public Class scafoldTarking
             Next
         End If
         mtdScaffold.llenarProductosOutGoing(tblOutGoing, txtTicketNumOutGoing.Text)
+    End Sub
+
+    Private Sub cmbJobCAT_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbJobCAT.SelectedIndexChanged
+        Try
+            For Each row As DataRow In tblCat.Rows()
+                If cmbJobCAT.SelectedItem = row.ItemArray(0) Then
+                    sc.jobcat = row.ItemArray(1)
+                    sc.category = row.ItemArray(2)
+                    txtCAT.Text = row.ItemArray(2)
+                    Exit For
+                End If
+            Next
+        Catch ex As Exception
+        End Try
+    End Sub
+
+    Private Sub cmbJobCAT_Leave(sender As Object, e As EventArgs) Handles cmbJobCAT.Leave
+        Try
+            For Each row As DataRow In tblCat.Rows()
+                If cmbJobCAT.SelectedItem = row.ItemArray(0) Then
+                    sc.jobcat = row.ItemArray(1)
+                    sc.category = row.ItemArray(2)
+                    txtCAT.Text = row.ItemArray(2)
+                    Exit For
+                End If
+            Next
+        Catch ex As Exception
+
+        End Try
+    End Sub
+
+    Private Sub cmbAreaID_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbAreaID.SelectedIndexChanged
+        Try
+            For Each row As DataRow In tblArea.Rows()
+                If cmbAreaID.SelectedItem = row.ItemArray(0) Then
+                    sc.areaID = row.ItemArray(1)
+                    sc.area = row.ItemArray(2)
+                    txtArea.Text = row.ItemArray(2)
+                    Exit For
+                End If
+            Next
+        Catch ex As Exception
+
+        End Try
+    End Sub
+
+    Private Sub cmbAreaID_Leave(sender As Object, e As EventArgs) Handles cmbAreaID.Leave
+        Try
+            For Each row As DataRow In tblArea.Rows()
+                If cmbAreaID.SelectedItem = row.ItemArray(0) Then
+                    sc.areaID = row.ItemArray(1)
+                    sc.area = row.ItemArray(2)
+                    cmbAreaID.Text = row.ItemArray(2)
+                    Exit For
+                End If
+            Next
+        Catch ex As Exception
+
+        End Try
+    End Sub
+
+    Private Sub cmbWONum_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbWONum.SelectedIndexChanged
+        Try
+            If cmbWONum.SelectedItem IsNot Nothing Then
+                For Each row As DataRow In tblWOTASK.Rows()
+                    Dim datos() = cmbWONum.SelectedItem.ToString().Split(" ")
+                    If datos(0) = row.ItemArray(0) Then
+                        sc.wo = row.ItemArray(1)
+                        sc.task = row.ItemArray(2)
+                        sc.job = row.ItemArray(3)
+                        sc.descriptionWO = row.ItemArray(4)
+                        txtWOInfo.Text = row.ItemArray(4)
+                        Exit For
+                    End If
+                Next
+            End If
+        Catch ex As Exception
+
+        End Try
+    End Sub
+
+    Private Sub cmbWONum_Leave(sender As Object, e As EventArgs) Handles cmbWONum.Leave
+        Try
+            For Each row As DataRow In tblWOTASK.Rows()
+                Dim datos() = cmbWONum.SelectedItem.ToString().Split(" ")
+                If datos(0) = row.ItemArray(0) Then
+                    cmbWONum.Text = row.ItemArray(0)
+                    Exit For
+                End If
+            Next
+        Catch ex As Exception
+
+        End Try
+    End Sub
+
+    Private Sub cmbSubJob_Leave(sender As Object, e As EventArgs) Handles cmbSubJob.Leave
+        Try
+            For Each row As DataRow In tblSubJob.Rows()
+                If row.ItemArray(0) = cmbSubJob.SelectedItem Then
+                    sc.subjob = row.ItemArray(2)
+                    sc.idsubJob = row.ItemArray(1)
+                    cmbSubJob.Text = row.ItemArray(0)
+                    Exit For
+                End If
+            Next
+        Catch ex As Exception
+
+        End Try
+    End Sub
+
+    Private Sub dtpBldDate_Leave(sender As Object, e As EventArgs) Handles dtpBldDate.Leave
+        dtpReqCompScaffold.Value = dtpBldDate.Value
+    End Sub
+
+    Private Sub tblScaffoldInformation_CellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles tblScaffoldInformation.CellEndEdit
+        Try
+            If e.ColumnIndex > 0 Then
+                If tblScaffoldInformation.Rows(0).Cells(e.ColumnIndex).Value <> "" And soloNumero(tblScaffoldInformation.Rows(0).Cells(e.ColumnIndex).Value.ToString()) Then
+                    sc.sciType = If(tblScaffoldInformation.Rows(0).Cells("clmType").Value <> "", CStr(tblScaffoldInformation.Rows(0).Cells("clmType").Value), "")
+                    sc.sciWidth = If(tblScaffoldInformation.Rows(0).Cells("clmWidth").Value <> "", CDbl(tblScaffoldInformation.Rows(0).Cells("clmWidth").Value), 0)
+                    sc.sciLength = If(tblScaffoldInformation.Rows(0).Cells("clmLength").Value <> "", CDbl(tblScaffoldInformation.Rows(0).Cells("clmLength").Value), 0)
+                    sc.sciHeigth = If(tblScaffoldInformation.Rows(0).Cells("clmHeigth").Value <> "", CDbl(tblScaffoldInformation.Rows(0).Cells("clmHeigth").Value), 0)
+                    sc.sciDecks = If(tblScaffoldInformation.Rows(0).Cells("clmDecks").Value <> "", CDbl(tblScaffoldInformation.Rows(0).Cells("clmDecks").Value), 0)
+                    sc.sciKo = If(tblScaffoldInformation.Rows(0).Cells("clmKOs").Value <> "", CDbl(tblScaffoldInformation.Rows(0).Cells("clmKOs").Value), 0)
+                    sc.sciBase = If(tblScaffoldInformation.Rows(0).Cells("clmBase").Value <> "", CDbl(tblScaffoldInformation.Rows(0).Cells("clmBase").Value), 0)
+                Else
+                    tblScaffoldInformation.Rows(0).Cells(e.ColumnIndex).Value = "0"
+                End If
+            End If
+        Catch ex As Exception
+
+        End Try
+    End Sub
+
+    Private Sub tblActivityHours_CellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles tblActivityHours.CellEndEdit
+        Try
+            If e.ColumnIndex <> tblActivityHours.Columns("clmTotal").Index Then
+                If tblActivityHours.Rows(0).Cells(e.ColumnIndex).Value <> "" And soloNumero(tblActivityHours.Rows(0).Cells(e.ColumnIndex).Value.ToString()) Then
+                    sc.ahrBuild = If(tblActivityHours.Rows(0).Cells("clmBuild").Value <> "", CDbl(tblActivityHours.Rows(0).Cells("clmBuild").Value), 0)
+                    sc.ahrMaterial = If(tblActivityHours.Rows(0).Cells("clmMabl").Value <> "", CDbl(tblActivityHours.Rows(0).Cells("clmMabl").Value), 0)
+                    sc.ahrTravel = If(tblActivityHours.Rows(0).Cells("clmTravl").Value <> "", CDbl(tblActivityHours.Rows(0).Cells("clmTravl").Value), 0)
+                    sc.ahrWeather = If(tblActivityHours.Rows(0).Cells("clmWhtr").Value <> "", CDbl(tblActivityHours.Rows(0).Cells("clmWhtr").Value), 0)
+                    sc.ahrAlarm = If(tblActivityHours.Rows(0).Cells("clmAlarm").Value <> "", CDbl(tblActivityHours.Rows(0).Cells("clmAlarm").Value), 0)
+                    sc.ahrSafety = If(tblActivityHours.Rows(0).Cells("clmSafty").Value <> "", CDbl(tblActivityHours.Rows(0).Cells("clmSafty").Value), 0)
+                    sc.ahrStdBy = If(tblActivityHours.Rows(0).Cells("clmStdBy").Value <> "", CDbl(tblActivityHours.Rows(0).Cells("clmStdBy").Value), 0)
+                    sc.ahrOther = If(tblActivityHours.Rows(0).Cells("clmOthh").Value <> "", CDbl(tblActivityHours.Rows(0).Cells("clmOthh").Value), 0)
+
+                Else
+                    tblActivityHours.Rows(0).Cells(e.ColumnIndex).Value = "0"
+                End If
+                Dim totalHours As Double = 0
+                For Each cell As DataGridViewCell In tblActivityHours.Rows(0).Cells()
+                    If cell.Value.ToString() <> "" And cell.ColumnIndex <> 8 Then
+                        totalHours = totalHours + CDbl(cell.Value.ToString())
+                    End If
+                Next
+                tblActivityHours.Rows(0).Cells("clmTotal").Value = CStr(totalHours)
+            End If
+        Catch ex As Exception
+
+        End Try
+    End Sub
+    Private Sub tblProductosScaffold_EditingControlShowing(sender As Object, e As DataGridViewEditingControlShowingEventArgs) Handles tblProductosScaffold.EditingControlShowing
+        Dim Index = tblProductosScaffold.CurrentCell.ColumnIndex
+        If Index = 1 Then
+            If tblProductosScaffold.CurrentCell.GetType.Name = "DataGridViewComboBoxCell" Then
+                Dim cb As ComboBox = CType(e.Control, ComboBox)
+                If e.Control IsNot Nothing Then
+                    RemoveHandler cb.SelectedIndexChanged, AddressOf cmb_SelectedIndexChanguedProducScaffold
+                    AddHandler cb.SelectedIndexChanged, AddressOf cmb_SelectedIndexChanguedProducScaffold
+                End If
+            End If
+        End If
+    End Sub
+
+    Private Sub tblProductosScaffold_CellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles tblProductosScaffold.CellEndEdit
+        Try
+            If e.ColumnIndex = tblProductosScaffold.Columns("clmQTY").Index Then
+                Dim valor = If(tblProductosScaffold.CurrentRow.Cells(e.ColumnIndex).Value = Nothing, "", tblProductosScaffold.CurrentRow.Cells(e.ColumnIndex).Value.ToString())
+                If Not valor <> "" Or Not soloNumero(CStr(valor)) Then
+                    tblProductosScaffold.Rows(e.RowIndex).Cells(e.ColumnIndex).Value = "0"
+                ElseIf CDbl(valor) > CDbl(tblProductosScaffold.CurrentRow.Cells("clmStock").Value) Then
+                    tblProductosScaffold.Rows(e.RowIndex).Cells(e.ColumnIndex).Value = "0"
+                    MessageBox.Show("The 'product quantity' has been exceeded, the current stock is " + CStr(tblProductosScaffold.CurrentRow.Cells("clmStock").Value) + ".", "Important", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                End If
+            End If
+            'Insertar celda por celda en la tabla de productosScaffoldAux
+            Dim pd = sc.products
+            sc.products.Clear()
+            For Each row As DataGridViewRow In tblProductosScaffold.Rows()
+                If row.Cells(1).Value <> Nothing Then
+                    sc.products.Rows.Add(row.Cells(0).Value, row.Cells(1).Value, If(row.Cells(2).Value = Nothing, "0", row.Cells(2).Value), row.Cells(3).Value, row.Cells(4).Value)
+                End If
+            Next
+        Catch ex As Exception
+
+        End Try
+    End Sub
+
+    Private Sub tblLeg_CellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles tblLeg.CellEndEdit
+        Try
+            Dim valor = If(tblLeg.Rows(e.RowIndex).Cells(e.ColumnIndex).Value = Nothing, "", tblLeg.Rows(e.RowIndex).Cells(e.ColumnIndex).Value.ToString())
+            If Not valor <> "" Or Not soloNumero(valor) Then
+                tblLeg.CurrentRow.Cells(e.ColumnIndex).Value = "0"
+            End If
+            Dim leg = sc.leg
+            sc.leg.Clear()
+            For Each row As DataGridViewRow In tblLeg.Rows()
+                If row.Cells(1).Value <> Nothing Then
+                    sc.leg.Rows.Add(row.Cells(0).Value, row.Cells(1).Value, row.Cells(2).Value)
+                End If
+            Next
+        Catch ex As Exception
+
+        End Try
+    End Sub
+
+    Private Sub txtTag_Leave(sender As Object, e As EventArgs) Handles txtTag.Leave
+        sc.tag = txtTag.Text
+    End Sub
+
+    Private Sub cmbSubJob_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbSubJob.SelectedIndexChanged
+        Try
+            For Each row As DataRow In tblSubJob.Rows()
+                If cmbSubJob.SelectedItem = row.ItemArray(0) Then
+                    sc.subjob = row.ItemArray(2)
+                    sc.idsubJob = row.ItemArray(1)
+                    cmbSubJob.Text = row.ItemArray(0)
+                    Exit For
+                End If
+            Next
+        Catch ex As Exception
+
+        End Try
+    End Sub
+
+    Private Sub dtpBldDate_ValueChanged(sender As Object, e As EventArgs) Handles dtpBldDate.ValueChanged
+        Try
+            sc.dateBild = dtpBldDate.Value
+        Catch ex As Exception
+
+        End Try
+    End Sub
+
+    Private Sub dtpReqCompScaffold_ValueChanged(sender As Object, e As EventArgs) Handles dtpReqCompScaffold.ValueChanged
+        Try
+            sc.dateRecComp = dtpReqCompScaffold.Value
+        Catch ex As Exception
+
+        End Try
+    End Sub
+
+    Private Sub txtLocation_TextChanged(sender As Object, e As EventArgs) Handles txtLocation.TextChanged
+        Try
+            sc.location = txtLocation.Text
+        Catch ex As Exception
+
+        End Try
+    End Sub
+
+    Private Sub txtPurpose_TextChanged(sender As Object, e As EventArgs) Handles txtPurpose.TextChanged
+        Try
+            sc.purpose = txtPurpose.Text
+        Catch ex As Exception
+
+        End Try
+    End Sub
+
+    Private Sub txtNotesAndComments_TextChanged(sender As Object, e As EventArgs) Handles txtNotesAndComments.TextChanged
+        Try
+            sc.comments = txtNotesAndComments.Text
+        Catch ex As Exception
+
+        End Try
+    End Sub
+
+    Private Sub sprDecks_ValueChanged(sender As Object, e As EventArgs) Handles sprDecks.ValueChanged
+        Try
+            sc.sciExtraDeck = sprDecks.Value
+        Catch ex As Exception
+
+        End Try
+    End Sub
+
+    Private Sub cmbContactScaffold_TextChanged(sender As Object, e As EventArgs) Handles cmbContactScaffold.TextChanged
+        Try
+            sc.contact = cmbContactScaffold.Text
+        Catch ex As Exception
+
+        End Try
+    End Sub
+
+    Private Sub cmbForemanScaffold_TextChanged(sender As Object, e As EventArgs) Handles cmbForemanScaffold.TextChanged
+        Try
+            sc.foreman = cmbForemanScaffold.Text
+        Catch ex As Exception
+
+        End Try
+    End Sub
+
+    Private Sub cmbErectorScaffold_TextChanged(sender As Object, e As EventArgs) Handles cmbErectorScaffold.TextChanged
+        Try
+            sc.erector = cmbErectorScaffold.Text
+        Catch ex As Exception
+
+        End Try
+    End Sub
+
+    Private Sub chbTrailer_CheckedChanged(sender As Object, e As EventArgs) Handles chbTruck.CheckedChanged, chbTrailer.CheckedChanged, chbRope.CheckedChanged, chbPassed.CheckedChanged, chbForklift.CheckedChanged, chbElevator.CheckedChanged, chbCrane.CheckedChanged
+        Try
+            If loadingData = False Then
+                If chbTruck.Checked Then
+                    sc.materialHandeling(0) = True
+                Else
+                    sc.materialHandeling(0) = False
+                End If
+                If chbForklift.Checked Then
+                    sc.materialHandeling(1) = True
+                Else
+                    sc.materialHandeling(1) = False
+                End If
+                If chbTrailer.Checked Then
+                    sc.materialHandeling(2) = True
+                Else
+                    sc.materialHandeling(2) = False
+                End If
+                If chbCrane.Checked Then
+                    sc.materialHandeling(3) = True
+                Else
+                    sc.materialHandeling(3) = False
+                End If
+                If chbRope.Checked Then
+                    sc.materialHandeling(4) = True
+                Else
+                    sc.materialHandeling(4) = False
+                End If
+                If chbPassed.Checked Then
+                    sc.materialHandeling(5) = True
+                Else
+                    sc.materialHandeling(5) = False
+                End If
+                If chbElevator.Checked Then
+                    sc.materialHandeling(6) = True
+                Else
+                    sc.materialHandeling(6) = False
+                End If
+            End If
+
+        Catch ex As Exception
+
+        End Try
+    End Sub
+
+    Private Sub chbCSAP_CheckedChanged(sender As Object, e As EventArgs) Handles chbRolling.CheckedChanged, chbInternal.CheckedChanged, chbHanging.CheckedChanged, chbCSAP.CheckedChanged
+        Try
+            If loadingData = False Then
+                If chbCSAP.Checked Then
+                    sc.scfInfo(0) = True
+                Else
+                    sc.scfInfo(0) = False
+                End If
+                If chbRolling.Checked Then
+                    sc.scfInfo(1) = True
+                Else
+                    sc.scfInfo(1) = False
+                End If
+                If chbInternal.Checked Then
+                    sc.scfInfo(2) = True
+                Else
+                    sc.scfInfo(2) = False
+                End If
+                If chbHanging.Checked Then
+                    sc.scfInfo(3) = True
+                Else
+                    sc.scfInfo(3) = False
+                End If
+            End If
+        Catch ex As Exception
+
+        End Try
+    End Sub
+
+    Private Function cargarDatosScaffold(ByVal tag As String) As Boolean
+        Try
+            loadingData = True
+            If tag <> "" Then
+                sc = mtdScaffold.llenarScaffold(tag)
+            End If
+            sc.tag = tag
+            txtTag.Text = sc.tag
+            cmbJobCAT.SelectedItem = Nothing
+            cmbJobCAT.Text = ""
+            txtCAT.Text = ""
+            For Each row As Data.DataRow In tblCat.Rows()
+                If row("id") = sc.jobcat Then
+                    cmbJobCAT.SelectedItem = row("cmb")
+                    cmbJobCAT.Text = sc.jobcat
+                    txtCAT.Text = sc.category
+                    Exit For
+                End If
+            Next
+            cmbAreaID.SelectedItem = Nothing
+            cmbAreaID.Text = ""
+            txtArea.Text = ""
+            For Each row As Data.DataRow In tblArea.Rows()
+                If row("id") = sc.areaID Then
+                    cmbAreaID.SelectedItem = row("cmb")
+                    cmbAreaID.Text = sc.areaID
+                    txtArea.Text = sc.area
+                    Exit For
+                End If
+            Next
+            cmbWONum.SelectedItem = Nothing
+            txtWOInfo.Text = ""
+            For Each row As Data.DataRow In tblWOTASK.Rows()
+                If row("task") = sc.task Then
+                    cmbWONum.SelectedItem = row("cmb")
+                    txtWOInfo.Text = sc.descriptionWO
+                    Exit For
+                End If
+            Next
+            cmbSubJob.SelectedItem = Nothing
+            For Each row As Data.DataRow In tblSubJob.Rows
+                If row("subJob") = sc.idsubJob Then
+                    cmbSubJob.SelectedItem = row("cmb")
+                    Exit For
+                End If
+            Next
+            dtpBldDate.Value = sc.dateBild
+            txtLocation.Text = sc.location
+            txtPurpose.Text = sc.purpose
+            txtNotesAndComments.Text = sc.comments
+            cmbContactScaffold.SelectedItem = sc.contact
+            cmbContactScaffold.Text = sc.contact
+            cmbErectorScaffold.SelectedItem = sc.erector
+            cmbErectorScaffold.Text = sc.erector
+            cmbForemanScaffold.SelectedItem = sc.foreman
+            cmbForemanScaffold.Text = sc.foreman
+            dtpReqCompScaffold.Value = sc.dateRecComp
+            sprDecks.Value = sc.sciExtraDeck
+            If sc.idScaffoldinformation <> "" Then
+                tblScaffoldInformation.Rows(0).Cells("clmType").Value = sc.sciType
+                tblScaffoldInformation.Rows(0).Cells("clmWidth").Value = CStr(sc.sciWidth)
+                tblScaffoldInformation.Rows(0).Cells("clmLength").Value = CStr(sc.sciLength)
+                tblScaffoldInformation.Rows(0).Cells("clmHeigth").Value = CStr(sc.sciHeigth)
+                tblScaffoldInformation.Rows(0).Cells("clmDecks").Value = CStr(sc.sciDecks)
+                tblScaffoldInformation.Rows(0).Cells("clmKOs").Value = CStr(sc.sciKo)
+                tblScaffoldInformation.Rows(0).Cells("clmBase").Value = CStr(sc.sciBase)
+            Else
+                'tblScaffoldInformation.Rows(0).Cells("clmType").Value = sc.sciType
+                tblScaffoldInformation.Rows(0).Cells("clmWidth").Value = "0"
+                tblScaffoldInformation.Rows(0).Cells("clmLength").Value = "0"
+                tblScaffoldInformation.Rows(0).Cells("clmHeigth").Value = "0"
+                tblScaffoldInformation.Rows(0).Cells("clmDecks").Value = "0"
+                tblScaffoldInformation.Rows(0).Cells("clmKOs").Value = "0"
+                tblScaffoldInformation.Rows(0).Cells("clmBase").Value = "0"
+            End If
+            If sc.ahrIdActivityHours <> "" Then
+                tblActivityHours.Rows(0).Cells("clmBuild").Value = CStr(sc.ahrBuild)
+                tblActivityHours.Rows(0).Cells("clmMabl").Value = CStr(sc.ahrMaterial)
+                tblActivityHours.Rows(0).Cells("clmTravl").Value = CStr(sc.ahrTravel)
+                tblActivityHours.Rows(0).Cells("clmWhtr").Value = CStr(sc.ahrWeather)
+                tblActivityHours.Rows(0).Cells("clmAlarm").Value = CStr(sc.ahrAlarm)
+                tblActivityHours.Rows(0).Cells("clmSafty").Value = CStr(sc.ahrSafety)
+                tblActivityHours.Rows(0).Cells("clmStdBy").Value = CStr(sc.ahrStdBy)
+                tblActivityHours.Rows(0).Cells("clmOthh").Value = CStr(sc.ahrOther)
+                tblActivityHours.Rows(0).Cells("clmTotal").Value = CStr(sc.ahrTotal)
+            Else
+                tblActivityHours.Rows(0).Cells("clmBuild").Value = "0"
+                tblActivityHours.Rows(0).Cells("clmMabl").Value = "0"
+                tblActivityHours.Rows(0).Cells("clmTravl").Value = "0"
+                tblActivityHours.Rows(0).Cells("clmWhtr").Value = "0"
+                tblActivityHours.Rows(0).Cells("clmAlarm").Value = "0"
+                tblActivityHours.Rows(0).Cells("clmSafty").Value = "0"
+                tblActivityHours.Rows(0).Cells("clmStdBy").Value = "0"
+                tblActivityHours.Rows(0).Cells("clmOthh").Value = "0"
+                tblActivityHours.Rows(0).Cells("clmTotal").Value = "0"
+            End If
+            If sc.scfInfo.Length > 0 Then
+                chbCSAP.Checked = sc.scfInfo(0)
+                chbRolling.Checked = sc.scfInfo(1)
+                chbInternal.Checked = sc.scfInfo(2)
+                chbHanging.Checked = sc.scfInfo(3)
+            End If
+            If sc.materialHandeling.Length > 0 Then
+                chbTruck.Checked = sc.materialHandeling(0)
+                chbForklift.Checked = sc.materialHandeling(1)
+                chbTrailer.Checked = sc.materialHandeling(2)
+                chbCrane.Checked = sc.materialHandeling(3)
+                chbRope.Checked = sc.materialHandeling(4)
+                chbPassed.Checked = sc.materialHandeling(5)
+                chbElevator.Checked = sc.materialHandeling(6)
+            End If
+            If sc.products.Rows.Count > 0 Then
+                tblProductosScaffold.Rows.Clear()
+                For Each row As Data.DataRow In sc.products.Rows()
+                    tblProductosScaffold.Rows.Add(row("idProductScaffold"), row("idProduct"), row("QTY"), row("description"), row("stock"))
+                Next
+            Else
+                tblProductosScaffold.Rows.Clear()
+            End If
+            If sc.leg.Rows.Count > 0 Then
+                tblLeg.Rows.Clear()
+                For Each row As Data.DataRow In sc.leg.Rows()
+                    tblLeg.Rows.Add(row("legID"), row("qty"), row("heigth"))
+                Next
+            Else
+                tblLeg.Rows.Clear()
+            End If
+            loadingData = False
+            Return True
+        Catch ex As Exception
+            MsgBox(ex.Message())
+            Return False
+        End Try
+    End Function
+
+    Private Sub btnBackTag_Click(sender As Object, e As EventArgs) Handles btnBackTag.Click
+        Try
+            If tblProductScaffoldAux.Rows IsNot Nothing Then
+                If DialogResult.Yes = MessageBox.Show("If you made any changes it will not be saved, are you sure to continue?", "Important", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) Then
+                    Dim count = 1
+                    For Each row As Data.DataRow In tblScaffoldTags.Rows()
+                        If sc.tag = row("tag") Then
+                            Exit For
+                        Else
+                            count += 1
+                        End If
+                    Next
+                    If count = 1 Then
+                        count = tblScaffoldTags.Rows.Count() - 1
+                        cargarDatosScaffold(tblScaffoldTags.Rows(count).ItemArray(0))
+                    Else
+                        If sc.tag = "" Then
+                            count -= 1
+                        End If
+                        cargarDatosScaffold(tblScaffoldTags.Rows(count - 1).ItemArray(0))
+                    End If
+                End If
+            End If
+        Catch ex As Exception
+
+        End Try
+    End Sub
+
+    Private Sub btnNextTag_Click(sender As Object, e As EventArgs) Handles btnNextTag.Click
+        Try
+            If tblProductScaffoldAux.Rows IsNot Nothing Then
+                If DialogResult.Yes = MessageBox.Show("If you made any changes it will not be saved, are you sure to continue?", "Important", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) Then
+                    Dim count = 1
+                    For Each row As Data.DataRow In tblScaffoldTags.Rows()
+                        If sc.tag = row("tag") Then
+                            Exit For
+                        Else
+                            count += 1
+                        End If
+                    Next
+                    If count = tblScaffoldTags.Rows.Count() Then
+                        count = 0
+                        cargarDatosScaffold(tblScaffoldTags.Rows(count).ItemArray(0))
+                    Else
+                        If sc.tag = "" Then
+                            count -= 1
+                        End If
+                        cargarDatosScaffold(tblScaffoldTags.Rows(count - 1).ItemArray(0))
+                    End If
+                End If
+            End If
+        Catch ex As Exception
+
+        End Try
+    End Sub
+
+    Private Sub btnDeleteRowScaffoldLeg_Click(sender As Object, e As EventArgs) Handles btnDeleteRowScaffoldLeg.Click
+        If selectedTable = tblLeg.Name Then
+            If DialogResult.Yes = MessageBox.Show("The selected rows will be removed from the 'LEG TABLE'. Are you sure to do it?", "Important", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) Then
+                If mtdScaffold.deleteRowsLeg(tblLeg) Then
+                    For Each row As DataGridViewRow In tblLeg.SelectedRows()
+                        tblLeg.Rows.Remove(row)
+                    Next
+                    sc.leg = sc.llenarLeg(sc.tag)
+                End If
+            End If
+        ElseIf selectedTable = tblProductosScaffold.Name Then
+            If DialogResult.Yes = MessageBox.Show("The selected rows will be removed from the 'PRODUCTS TABLE'. Are you sure to do it?", "Important", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) Then
+                If mtdScaffold.deleteRowsProductScaffold(tblProductosScaffold) Then
+                    For Each row As DataGridViewRow In tblProductosScaffold.SelectedRows()
+                        tblProductosScaffold.Rows.Remove(row)
+                    Next
+                    sc.products = sc.llenarTablaProductTag(sc.tag)
+                End If
+            End If
+        End If
+    End Sub
+
+    Private Sub btnNewTag_Click(sender As Object, e As EventArgs) Handles btnNewTag.Click
+        If sc.tag <> "" Then
+            If DialogResult.Yes = MessageBox.Show("If you made any changes it will not be saved, are you sure to continue?", "Important", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) Then
+                sc.Clear()
+                cargarDatosScaffold("")
+            End If
+        End If
     End Sub
 End Class

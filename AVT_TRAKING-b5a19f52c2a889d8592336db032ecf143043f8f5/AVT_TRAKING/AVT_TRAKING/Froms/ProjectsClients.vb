@@ -281,11 +281,13 @@ Public Class ProjectsClients
 
 
     Private Sub tblProjectClients_SelectionChanged(sender As Object, e As EventArgs) Handles tblProjectClients.SelectionChanged
-        idPO = tblProjectClients.CurrentRow.Cells("idPO").Value
-        jobNum = tblProjectClients.CurrentRow.Cells("jobNo").Value
-        idCliente = tblProjectClients.CurrentRow.Cells("idClient").Value
-        separaridWODeidTask(tblProjectClients.CurrentRow.Cells("Work Order").Value)
-        llenarCampos(tblProjectClients.CurrentRow)
+        If tblProjectClients.CurrentRow IsNot Nothing Then
+            idPO = tblProjectClients.CurrentRow.Cells("idPO").Value
+            jobNum = tblProjectClients.CurrentRow.Cells("jobNo").Value
+            idCliente = tblProjectClients.CurrentRow.Cells("idClient").Value
+            separaridWODeidTask(tblProjectClients.CurrentRow.Cells("Work Order").Value)
+            llenarCampos(tblProjectClients.CurrentRow)
+        End If
     End Sub
 
     Function separaridWODeidTask(ByVal workOrderCompuesta As String) As Boolean

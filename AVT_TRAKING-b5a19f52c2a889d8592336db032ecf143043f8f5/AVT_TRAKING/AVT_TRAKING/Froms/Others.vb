@@ -71,10 +71,7 @@
             name = array(1)
             Dim itemNev As ListViewItem = mtdOthers.addExpCode(num, name)
             lstExpCode.Items.Add(itemNev)
-
         End If
-
-
     End Sub
 
     Private Sub btnUpdateExpCode_Click(sender As Object, e As EventArgs) Handles btnUpdateExpCode.Click
