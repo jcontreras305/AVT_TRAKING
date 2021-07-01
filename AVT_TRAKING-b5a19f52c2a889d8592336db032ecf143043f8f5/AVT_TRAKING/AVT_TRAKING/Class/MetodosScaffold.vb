@@ -1195,8 +1195,7 @@ where typeEmployee = 'Manager'", conn)
         Try
             conectar()
             Dim cmd As New SqlCommand("select pd.idProduct  as 'ID', pd.name as 'Product Name', pd.um as 'UM',pd.class as 'Class', pd.weight as 'Weigth', pd.weightMeasure as 'Weigth Measure',pd.price as '$UM',pd.dailyRentalRate as 'Daily Rental Rate' ,pd.weeklyRentalRate as 'Weekly Rental Rate', pd.monthlyRentalRate as 'Monthly Rental Rate' ,
-quantity as 'QTY',
-pd.QID
+quantity as 'QTY', pd.QID,PLF, PSQF
 from product as pd 
 inner join unitMeassurements as um on pd.um = um.um
 inner join classification as cl on cl.class = pd.class
@@ -1224,8 +1223,7 @@ order by pd.idProduct", conn)
         Try
             conectar()
             Dim cmd As New SqlCommand("select pd.idProduct  as 'ID', pd.name as 'Product Name', pd.um as 'UM',pd.class as 'Class', pd.weight as 'Weigth', pd.weightMeasure as 'Weigth Measure',pd.price as '$UM',pd.dailyRentalRate as 'Daily Rental Rate' ,pd.weeklyRentalRate as 'Weekly Rental Rate', pd.monthlyRentalRate as 'Monthly Rental Rate' ,
-quantity as 'QTY' ,--ex.quantity as 'QTY' ,
-pd.QID
+quantity as 'QTY' , pd.QID, PLF, PSQF
 from product as pd 
 inner join unitMeassurements as um on pd.um = um.um
 inner join classification as cl on cl.class = pd.class
@@ -1258,7 +1256,7 @@ order by pd.idProduct", conn)
                 Dim consultaProduct As New SqlCommand("
 if (select count(*) from product as p where p.name= '" + nameProduct + "' or p.idProduct = " + row.ItemArray(0).ToString() + " or p.QID = '" + row.ItemArray(11).ToString() + "' ) = 0
 begin 
-    insert into product values(" + row.ItemArray(0).ToString() + ",'" + nameProduct + "'," + If(row.ItemArray(5).ToString() = "", "0", row.ItemArray(5).ToString()) + "," + If(row.ItemArray(6).ToString() = "", "0", row.ItemArray(6).ToString()) + "," + If(row.ItemArray(4).ToString() = "", "0.0", row.ItemArray(4).ToString()) + "," + If(row.ItemArray(7).ToString() = "", "0", row.ItemArray(7).ToString()) + "," + If(row.ItemArray(8).ToString() = "", "0", row.ItemArray(8).ToString()) + "," + If(row.ItemArray(9).ToString() = "", "0", row.ItemArray(9).ToString()) + ",'" + row.ItemArray(11).ToString() + "' ,'" + row.ItemArray(2).ToString() + "','" + row.ItemArray(3).ToString() + "', " + If(row.ItemArray(10).ToString() = "", "0", row.ItemArray(10).ToString()) + ")
+    insert into product values(" + row.ItemArray(0).ToString() + ",'" + nameProduct + "'," + If(row.ItemArray(5).ToString() = "", "0", row.ItemArray(5).ToString()) + "," + If(row.ItemArray(6).ToString() = "", "0", row.ItemArray(6).ToString()) + "," + If(row.ItemArray(4).ToString() = "", "0.0", row.ItemArray(4).ToString()) + "," + If(row.ItemArray(7).ToString() = "", "0", row.ItemArray(7).ToString()) + "," + If(row.ItemArray(8).ToString() = "", "0", row.ItemArray(8).ToString()) + "," + If(row.ItemArray(9).ToString() = "", "0", row.ItemArray(9).ToString()) + ",'" + row.ItemArray(11).ToString() + "' ,'" + row.ItemArray(2).ToString() + "','" + row.ItemArray(3).ToString() + "', " + If(row.ItemArray(10).ToString() = "", "0", row.ItemArray(10).ToString()) + " , " + If(row.ItemArray(12).ToString() = "", "0", row.ItemArray(12).ToString()) + " , " + If(row.ItemArray(13).ToString() = "", "0", row.ItemArray(13).ToString()) + ")
 end", conn)
                 consultaProduct.Transaction = tran
                 If consultaProduct.ExecuteNonQuery > 0 Then
@@ -1302,11 +1300,11 @@ end", conn)
                     Dim cmd As New SqlCommand(
 "if (select count(*) from product as p where p.name= '" + nameProduct + "' or p.idProduct = " + row.Cells(0).Value.ToString() + " or p.QID = '" + row.Cells(11).Value.ToString + "' ) = 0
 begin 
-    insert into product values(" + row.Cells(0).Value.ToString() + ",'" + nameProduct + "'," + If(row.Cells(4).Value.ToString() = "", 0.0, row.Cells(4).Value.ToString()) + "," + If(row.Cells(5).Value.ToString() = "", 0.0, row.Cells(5).Value.ToString()) + "," + If(row.Cells(6).Value.ToString() = "", 0.0, row.Cells(6).Value.ToString()) + "," + If(row.Cells(7).Value.ToString() = "", 0.0, row.Cells(7).Value.ToString()) + "," + If(row.Cells(8).Value.ToString() = "", 0.0, row.Cells(8).Value.ToString()) + "," + If(row.Cells(9).Value.ToString() = "", 0.0, row.Cells(9).Value.ToString()) + ",'" + row.Cells(11).Value.ToString() + "' ,'" + row.Cells(2).Value.ToString() + "','" + row.Cells(3).Value.ToString() + "', " + row.Cells(10).Value.ToString() + ")
+    insert into product values(" + row.Cells(0).Value.ToString() + ",'" + nameProduct + "'," + If(row.Cells(4).Value.ToString() = "", 0.0, row.Cells(4).Value.ToString()) + "," + If(row.Cells(5).Value.ToString() = "", 0.0, row.Cells(5).Value.ToString()) + "," + If(row.Cells(6).Value.ToString() = "", 0.0, row.Cells(6).Value.ToString()) + "," + If(row.Cells(7).Value.ToString() = "", 0.0, row.Cells(7).Value.ToString()) + "," + If(row.Cells(8).Value.ToString() = "", 0.0, row.Cells(8).Value.ToString()) + "," + If(row.Cells(9).Value.ToString() = "", 0.0, row.Cells(9).Value.ToString()) + ",'" + row.Cells(11).Value.ToString() + "' ,'" + row.Cells(2).Value.ToString() + "','" + row.Cells(3).Value.ToString() + "', " + row.Cells(10).Value.ToString() + "," + row.Cells(12).Value.ToString() + "," + row.Cells(13).Value.ToString() + ")
 end
 else if(select count(*) from product as p where p.name= '" + nameProduct + "' or p.idProduct = " + row.Cells(0).Value.ToString() + "  or p.QID = '" + row.Cells(11).Value.ToString() + "' )=1
 begin
-	update product set name = '" + nameProduct + "' ,weight= " + If(row.Cells(4).Value.ToString() = "", 0.0, row.Cells(4).Value.ToString()) + ", weightMeasure = " + If(row.Cells(5).Value.ToString() = "", 0.0, row.Cells(5).Value.ToString()) + ",price = " + If(row.Cells(6).Value.ToString() = "", 0.0, row.Cells(6).Value.ToString()) + ", dailyRentalRate= " + If(row.Cells(7).Value.ToString() = "", 0.0, row.Cells(7).Value.ToString()) + " ,weeklyRentalRate = " + If(row.Cells(8).Value.ToString() = "", 0.0, row.Cells(8).Value.ToString()) + ",monthlyRentalRate = " + If(row.Cells(9).Value.ToString() = "", 0.0, row.Cells(9).Value.ToString()) + ",um='" + row.Cells(2).Value.ToString() + "',class='" + row.Cells(3).Value.ToString() + "',quantity = " + If(row.Cells(10).Value.ToString() = "", 0.0, row.Cells(10).Value.ToString()) + " where idProduct = " + row.Cells(0).Value.ToString() + "
+	update product set name = '" + nameProduct + "' ,weight= " + If(row.Cells(4).Value.ToString() = "", 0.0, row.Cells(4).Value.ToString()) + ", weightMeasure = " + If(row.Cells(5).Value.ToString() = "", 0.0, row.Cells(5).Value.ToString()) + ",price = " + If(row.Cells(6).Value.ToString() = "", 0.0, row.Cells(6).Value.ToString()) + ", dailyRentalRate= " + If(row.Cells(7).Value.ToString() = "", 0.0, row.Cells(7).Value.ToString()) + " ,weeklyRentalRate = " + If(row.Cells(8).Value.ToString() = "", 0.0, row.Cells(8).Value.ToString()) + ",monthlyRentalRate = " + If(row.Cells(9).Value.ToString() = "", 0.0, row.Cells(9).Value.ToString()) + ",um='" + row.Cells(2).Value.ToString() + "',class='" + row.Cells(3).Value.ToString() + "',quantity = " + If(row.Cells(10).Value.ToString() = "", "0.0", row.Cells(10).Value.ToString()) + " , PLF = " + If(row.Cells(12).Value.ToString() = "", "0.0", row.Cells(12).Value.ToString()) + ",PSQF = " + If(row.Cells(13).Value.ToString() = "", "0.0", row.Cells(13).Value.ToString()) + " where idProduct = " + row.Cells(0).Value.ToString() + "
 end", conn)
                     cmd.Transaction = tran
                         If cmd.ExecuteNonQuery > 0 Then
@@ -1472,7 +1470,7 @@ where ticketNum = '" + list(0) + "'"
     Public Function llenarCellComboIDProduct(ByVal cmb As DataGridViewComboBoxCell, ByVal tablaPoductoIncoming As DataTable) As Boolean
         Try
             conectar()
-            Dim cmd As New SqlCommand("select concat(idProduct,'    ',name)as product , idProduct, price, um,name,quantity from product", conn)
+            Dim cmd As New SqlCommand("select concat(idProduct,'    ',name)as product , idProduct, price, um,name,quantity,PLF,PSQF from product", conn)
             Dim dr As SqlDataReader = cmd.ExecuteReader()
             While dr.Read()
                 cmb.Items.Add(dr("product"))
@@ -1495,7 +1493,7 @@ where ticketNum = '" + list(0) + "'"
     Public Function llenarCellComboIDProductExistences(ByVal cmb As DataGridViewComboBoxCell, ByVal tablaPoductoIncoming As DataTable) As Boolean
         Try
             conectar()
-            Dim cmd As New SqlCommand("select concat(idProduct,'    ',name)as product , idProduct, price, um,name,quantity from product where quantity > 0", conn)
+            Dim cmd As New SqlCommand("select concat(idProduct,'    ',name)as product , idProduct, price, um,name,quantity,PLF, PSQF from product where quantity > 0", conn)
             Dim dr As SqlDataReader = cmd.ExecuteReader()
             While dr.Read()
                 cmb.Items.Add(dr("product"))
@@ -2056,11 +2054,11 @@ end", conn)
                                     Dim cmdLeg As New SqlCommand("
 if (select count(*) from leg where legID = '" + If(row.ItemArray(0) Is DBNull.Value, "", row.ItemArray(0)) + "')=0
 begin 
-	insert into leg values(NEWID()," + row.ItemArray(1) + "," + row.ItemArray(2) + ",'" + sc.tag + "')
+	insert into leg values(NEWID()," + row.ItemArray(1) + "," + row.ItemArray(2) + ",'" + sc.tag + "'," + row.ItemArray(3) + " )
 end
 else if (select count(*) from leg where legID = '" + If(row.ItemArray(0) Is DBNull.Value, "", row.ItemArray(0)) + "')=1
 begin
-	update leg set qty=" + row.ItemArray(1) + ",heigth=" + row.ItemArray(2) + " where legID ='" + row.ItemArray(0) + "'
+	update leg set qty=" + row.ItemArray(1) + ",heigth=" + row.ItemArray(2) + ", idProduct = " + row.ItemArray(3) + "  where legID ='" + row.ItemArray(0) + "'
 end", conn)
                                     cmdLeg.Transaction = tran
                                     If cmdLeg.ExecuteNonQuery > 0 Then
@@ -2186,6 +2184,13 @@ end", conn)
                 If row.Cells("clmIdProductScaffold").Value IsNot Nothing Then
                     Dim cmdDeletePS As New SqlCommand("if (select COUNT(*) from productScaffold where idProductScafold = '" + row.Cells("clmIdProductScaffold").Value + "') = 1
 begin 
+    if(select count(*) from leg where 
+		tag = (select tag from productScaffold where idProductScafold='" + row.Cells("clmIdProductScaffold").Value + "') and
+		idProduct = (select idProduct from productScaffold where idProductScafold='" + row.Cells("clmIdProductScaffold").Value + "'))>0
+	begin
+		delete from leg where tag = (select tag from productScaffold where idProductScafold='" + row.Cells("clmIdProductScaffold").Value + "') and
+			idProduct = (select idProduct from productScaffold where idProductScafold='" + row.Cells("clmIdProductScaffold").Value + "')
+	end
 	update product set quantity = quantity + (select quantity from productScaffold where idProductScafold = '" + row.Cells("clmIdProductScaffold").Value + "') where idProduct = (select idProduct from productScaffold where idProductScafold = '" + row.Cells("clmIdProductScaffold").Value + "')
 	delete productScaffold where idProductScafold = '" + row.Cells("clmIdProductScaffold").Value + "'
 end", conn)

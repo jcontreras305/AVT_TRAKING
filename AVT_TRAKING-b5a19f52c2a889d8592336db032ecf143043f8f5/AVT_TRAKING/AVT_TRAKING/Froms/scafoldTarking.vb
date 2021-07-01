@@ -202,14 +202,17 @@ Public Class scafoldTarking
                 End If
             Case "tag"
                 If mtdScaffold.saveScaffoldTraking(sc) Then
+                    cargarDatosScaffold(sc.tag)
                     MsgBox("Successfull")
                 End If
             Case tblProductosScaffold.Name
                 If mtdScaffold.saveScaffoldTraking(sc) Then
+                    cargarDatosScaffold(sc.tag)
                     MsgBox("Successfull")
                 End If
             Case tblLeg.Name
                 If mtdScaffold.saveScaffoldTraking(sc) Then
+                    cargarDatosScaffold(sc.tag)
                     MsgBox("Successfull")
                 End If
         End Select
@@ -538,7 +541,7 @@ Public Class scafoldTarking
 
             Dim hoja = libro.Sheets.Add()
             hoja.Name = "Product"
-            Dim colums() As String = {"ID", "Product Name", "UM", "Class", "Cost", "Weight", "Weight Maessure", "Daily Rental Rate", "Weekly Rental Rate", "Monthly Rental Rate", "QTY", "QID"}
+            Dim colums() As String = {"ID", "Product Name", "UM", "Class", "Cost", "Weight", "Weight Maessure", "Daily Rental Rate", "Weekly Rental Rate", "Monthly Rental Rate", "QTY", "QID", "PLF", "PSQF"}
             For i As Int16 = 0 To colums.Length - 1
                 hoja.cells(1, i + 1) = colums(i)
                 hoja.cells(1, i + 1).Interior.Color = RGB(255, 255, 0)
@@ -766,6 +769,8 @@ Public Class scafoldTarking
         listAuxPruduct.Columns.Add("Mountly Rental Rate")
         listAuxPruduct.Columns.Add("QTY")
         listAuxPruduct.Columns.Add("QID")
+        listAuxPruduct.Columns.Add("PLF")
+        listAuxPruduct.Columns.Add("PSQF")
         Dim GridProduct = tblProduct
         mtdScaffold.llenarProduct(GridProduct)
         txtSalida.Text = txtSalida.Text + vbCrLf + "Reading Data."
@@ -782,7 +787,7 @@ Public Class scafoldTarking
                 End If
             Next
             If flag Then
-                listAuxPruduct.Rows.Add(sheet.Cells(contProduct, 1).Text, sheet.Cells(contProduct, 2).Text, sheet.Cells(contProduct, 3).Text, sheet.Cells(contProduct, 4).Text, sheet.Cells(contProduct, 5).Text, sheet.Cells(contProduct, 6).Text, sheet.Cells(contProduct, 7).Text, sheet.Cells(contProduct, 8).Text, sheet.Cells(contProduct, 9).Text, sheet.Cells(contProduct, 10).Text, sheet.Cells(contProduct, 11).Text, sheet.Cells(contProduct, 12).Text, sheet.Cells(contProduct, 13).Text)
+                listAuxPruduct.Rows.Add(sheet.Cells(contProduct, 1).Text, sheet.Cells(contProduct, 2).Text, sheet.Cells(contProduct, 3).Text, sheet.Cells(contProduct, 4).Text, sheet.Cells(contProduct, 5).Text, sheet.Cells(contProduct, 6).Text, sheet.Cells(contProduct, 7).Text, sheet.Cells(contProduct, 8).Text, sheet.Cells(contProduct, 9).Text, sheet.Cells(contProduct, 10).Text, sheet.Cells(contProduct, 11).Text, sheet.Cells(contProduct, 12).Text, sheet.Cells(contProduct, 13).Text, sheet.Cells(contProduct, 14).Text, sheet.Cells(contProduct, 15).Text)
             End If
             contProduct += 1
         End While
@@ -973,7 +978,11 @@ Public Class scafoldTarking
                 If tblProductosScaffold.CurrentCell.Value <> cmb.SelectedItem Then
                     Dim flagExist = True
                     For Each row As DataGridViewRow In tblProductosScaffold.Rows()
-                        If row.Cells("clmID").Value = cmb.SelectedItem And tblProductosScaffold.CurrentCell.RowIndex <> row.Index Then
+                        Dim array = cmb.SelectedItem.ToString.Split(" ")
+                        Dim idProductoCmbSelected = array(0)
+                        array = If(row.Cells("clmID").Value = Nothing, {""}, row.Cells("clmID").Value.ToString.Split(" "))
+                        Dim idProductoTbl = array(0)
+                        If idProductoCmbSelected = idProductoTbl And tblProductosScaffold.CurrentCell.RowIndex <> row.Index Then
                             flagExist = False
                             Exit For
                         End If
@@ -988,6 +997,10 @@ Public Class scafoldTarking
                                 If tblProductosScaffold.CurrentRow.Cells("clmQTY").Value > tblProductosScaffold.CurrentRow.Cells("clmStock").Value Then
                                     tblProductosScaffold.CurrentRow.Cells("clmQTY").Value = "0"
                                 End If
+                                If row.ItemArray(6) <> 0 Or row.ItemArray(7) <> 0 Then
+                                    Dim heigth = If(row.ItemArray(6) = 0, row.ItemArray(7), row.ItemArray(6))
+                                    agregarRowLeg(row.ItemArray(1).ToString(), If(tblProductosScaffold.CurrentRow.Cells("clmQTY").Value = Nothing, "0", tblProductosScaffold.CurrentRow.Cells("clmQTY").Value.ToString()), heigth.ToString())
+                                End If
                                 Exit For
                             End If
                         Next
@@ -999,6 +1012,26 @@ Public Class scafoldTarking
         Catch ex As Exception
 
         End Try
+    End Sub
+
+    Private Sub agregarRowLeg(ByVal idProduct As String, ByVal qty As String, ByVal heigth As String)
+        Dim flag = True
+        For Each row As DataGridViewRow In tblLeg.Rows()
+            If If(row.Cells("clmIdProductLeg").Value = Nothing, "", row.Cells("clmIdProductLeg").Value) = idProduct Then
+                flag = False
+                row.Cells("clmQYT").Value = qty
+                Exit For
+            End If
+        Next
+        If flag Then
+            tblLeg.Rows.Add("", qty, heigth, idProduct)
+        End If
+        sc.leg.Rows.Clear()
+        For Each row As DataGridViewRow In tblLeg.Rows()
+            If row.Cells("clmQYT").Value <> Nothing Or row.Cells("clmHeigthExtra").Value <> Nothing Then
+                sc.leg.Rows.Add(row.Cells("clmLegID").Value, row.Cells("clmQYT").Value, row.Cells("clmHeigthExtra").Value, row.Cells("clmIdProductLeg").Value)
+            End If
+        Next
     End Sub
 
     Private Sub tblScaffoldInformation_EditingControlShowing(sender As Object, e As DataGridViewEditingControlShowingEventArgs) Handles tblScaffoldInformation.EditingControlShowing
@@ -1643,6 +1676,20 @@ Public Class scafoldTarking
                     sc.products.Rows.Add(row.Cells(0).Value, row.Cells(1).Value, If(row.Cells(2).Value = Nothing, "0", row.Cells(2).Value), row.Cells(3).Value, row.Cells(4).Value)
                 End If
             Next
+            If tblProductosScaffold.Rows(e.RowIndex).Cells("clmID").Value <> Nothing Then
+                Dim array = tblProductosScaffold.Rows(e.RowIndex).Cells("clmID").Value.ToString().Split(" ")
+                Dim idPd = array(0)
+                Dim valor = If(tblProductosScaffold.CurrentRow.Cells("clmQTY").Value = Nothing, "0", tblProductosScaffold.CurrentRow.Cells("clmQTY").Value.ToString())
+                For Each row As DataRow In tblProductosAux.Rows()
+                    If idPd = row.ItemArray(0).ToString() Then
+                        Dim heigth = If(row.ItemArray(12) <> 0, row.ItemArray(12).ToString(), row.ItemArray(13).ToString())
+                        If heigth <> "0" Then
+                            agregarRowLeg(idPd, valor, heigth)
+                        End If
+                        Exit For
+                    End If
+                Next
+            End If
         Catch ex As Exception
 
         End Try
@@ -1942,6 +1989,7 @@ Public Class scafoldTarking
                 chbPassed.Checked = sc.materialHandeling(5)
                 chbElevator.Checked = sc.materialHandeling(6)
             End If
+            sc.llenarTablaProductTag(sc.tag)
             If sc.products.Rows.Count > 0 Then
                 tblProductosScaffold.Rows.Clear()
                 For Each row As Data.DataRow In sc.products.Rows()
@@ -1950,10 +1998,11 @@ Public Class scafoldTarking
             Else
                 tblProductosScaffold.Rows.Clear()
             End If
+            sc.llenarLeg(sc.tag)
             If sc.leg.Rows.Count > 0 Then
                 tblLeg.Rows.Clear()
                 For Each row As Data.DataRow In sc.leg.Rows()
-                    tblLeg.Rows.Add(row("legID"), row("qty"), row("heigth"))
+                    tblLeg.Rows.Add(row("legID"), row("qty"), row("heigth"), row("idProduct"))
                 Next
             Else
                 tblLeg.Rows.Clear()
@@ -2036,9 +2085,18 @@ Public Class scafoldTarking
             If DialogResult.Yes = MessageBox.Show("The selected rows will be removed from the 'PRODUCTS TABLE'. Are you sure to do it?", "Important", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) Then
                 If mtdScaffold.deleteRowsProductScaffold(tblProductosScaffold) Then
                     For Each row As DataGridViewRow In tblProductosScaffold.SelectedRows()
+                        Dim array = row.Cells("clmID").Value.ToString().Split(" ")
+                        Dim idpd = array(0)
                         tblProductosScaffold.Rows.Remove(row)
+                        For Each row1 As DataGridViewRow In tblLeg.Rows()
+                            If row1.Cells(3).Value = idpd Then
+                                tblLeg.Rows.Remove(row1)
+                                Exit For
+                            End If
+                        Next
+                        Exit For
                     Next
-                    sc.products = sc.llenarTablaProductTag(sc.tag)
+                    sc.products = sc.llenarTablaProduct(tblProductosScaffold)
                 End If
             End If
         End If
@@ -2052,4 +2110,5 @@ Public Class scafoldTarking
             End If
         End If
     End Sub
+
 End Class

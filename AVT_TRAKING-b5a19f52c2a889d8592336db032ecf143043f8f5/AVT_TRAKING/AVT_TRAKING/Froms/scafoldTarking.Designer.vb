@@ -230,9 +230,6 @@ Partial Class scafoldTarking
         Me.Panel46 = New System.Windows.Forms.Panel()
         Me.GroupBox3 = New System.Windows.Forms.GroupBox()
         Me.tblLeg = New System.Windows.Forms.DataGridView()
-        Me.clmLegID = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.clmQYT = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.clmHeigthExtra = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Panel48 = New System.Windows.Forms.Panel()
         Me.Panel50 = New System.Windows.Forms.Panel()
         Me.Label53 = New System.Windows.Forms.Label()
@@ -279,12 +276,97 @@ Partial Class scafoldTarking
         Me.Panel51 = New System.Windows.Forms.Panel()
         Me.Label54 = New System.Windows.Forms.Label()
         Me.tbpModification = New System.Windows.Forms.TabPage()
+        Me.Panel55 = New System.Windows.Forms.Panel()
+        Me.DataGridView2 = New System.Windows.Forms.DataGridView()
+        Me.Type = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Width = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Length = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Heigth = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Decks = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.KOs = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Panel56 = New System.Windows.Forms.Panel()
+        Me.panel58TablesInfoModification = New System.Windows.Forms.Panel()
+        Me.Panel59 = New System.Windows.Forms.Panel()
+        Me.Panel57 = New System.Windows.Forms.Panel()
+        Me.Label43 = New System.Windows.Forms.Label()
+        Me.DateTimePicker3 = New System.Windows.Forms.DateTimePicker()
+        Me.Label55 = New System.Windows.Forms.Label()
+        Me.DateTimePicker2 = New System.Windows.Forms.DateTimePicker()
+        Me.Label56 = New System.Windows.Forms.Label()
+        Me.Label64 = New System.Windows.Forms.Label()
+        Me.Label57 = New System.Windows.Forms.Label()
+        Me.Label63 = New System.Windows.Forms.Label()
+        Me.Label58 = New System.Windows.Forms.Label()
+        Me.TextBox2 = New System.Windows.Forms.TextBox()
+        Me.Label59 = New System.Windows.Forms.Label()
+        Me.ComboBox5 = New System.Windows.Forms.ComboBox()
+        Me.Label60 = New System.Windows.Forms.Label()
+        Me.ComboBox4 = New System.Windows.Forms.ComboBox()
+        Me.Label61 = New System.Windows.Forms.Label()
+        Me.DateTimePicker1 = New System.Windows.Forms.DateTimePicker()
+        Me.Label62 = New System.Windows.Forms.Label()
+        Me.ComboBox3 = New System.Windows.Forms.ComboBox()
+        Me.TextBox1 = New System.Windows.Forms.TextBox()
+        Me.ComboBox2 = New System.Windows.Forms.ComboBox()
+        Me.TextBox3 = New System.Windows.Forms.TextBox()
+        Me.ComboBox1 = New System.Windows.Forms.ComboBox()
+        Me.tbpDismantle = New System.Windows.Forms.TabPage()
         Me.tbpEstimating = New System.Windows.Forms.TabPage()
-        Me.TabPage1 = New System.Windows.Forms.TabPage()
         Me.Panel2 = New System.Windows.Forms.Panel()
         Me.btnSaveTable = New System.Windows.Forms.Button()
         Me.btnDeleteRows = New System.Windows.Forms.Button()
         Me.btnSaveAll = New System.Windows.Forms.Button()
+        Me.Panel60 = New System.Windows.Forms.Panel()
+        Me.DataGridView3 = New System.Windows.Forms.DataGridView()
+        Me.Build = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Martl = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Travl = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Wthr = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Alarm = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Safty = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.StdBy = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ToHrs = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
+        Me.TableLayoutPanel2 = New System.Windows.Forms.TableLayoutPanel()
+        Me.Panel58 = New System.Windows.Forms.Panel()
+        Me.Panel61 = New System.Windows.Forms.Panel()
+        Me.Panel62 = New System.Windows.Forms.Panel()
+        Me.Panel63 = New System.Windows.Forms.Panel()
+        Me.TableLayoutPanel3 = New System.Windows.Forms.TableLayoutPanel()
+        Me.Panel64 = New System.Windows.Forms.Panel()
+        Me.Panel65 = New System.Windows.Forms.Panel()
+        Me.Panel66 = New System.Windows.Forms.Panel()
+        Me.TableLayoutPanel4 = New System.Windows.Forms.TableLayoutPanel()
+        Me.DataGridView4 = New System.Windows.Forms.DataGridView()
+        Me.DataGridView5 = New System.Windows.Forms.DataGridView()
+        Me.GroupBox4 = New System.Windows.Forms.GroupBox()
+        Me.chbTruckMS = New System.Windows.Forms.CheckBox()
+        Me.chbForkliftM = New System.Windows.Forms.CheckBox()
+        Me.chbTrailerM = New System.Windows.Forms.CheckBox()
+        Me.chbCraneM = New System.Windows.Forms.CheckBox()
+        Me.chbRopeM = New System.Windows.Forms.CheckBox()
+        Me.chbPassedM = New System.Windows.Forms.CheckBox()
+        Me.chbElevtrM = New System.Windows.Forms.CheckBox()
+        Me.GroupBox5 = New System.Windows.Forms.GroupBox()
+        Me.DataGridView6 = New System.Windows.Forms.DataGridView()
+        Me.clmIDLCModification = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.clmQTYLCModification = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.clmHeigthLCModification = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.TableLayoutPanel5 = New System.Windows.Forms.TableLayoutPanel()
+        Me.TableLayoutPanel6 = New System.Windows.Forms.TableLayoutPanel()
+        Me.Label65 = New System.Windows.Forms.Label()
+        Me.Label66 = New System.Windows.Forms.Label()
+        Me.idProductModification = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.clmIDProductM = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.clmQTYM = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.clmDescriptionM = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.clmStockProductM = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.clmIDProductSM = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.clmQTYSM = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.clmLegID = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.clmQYT = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.clmHeigthExtra = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.clmIdProductLeg = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Panel1.SuspendLayout()
         Me.Panel3.SuspendLayout()
         Me.tabControl1.SuspendLayout()
@@ -368,7 +450,34 @@ Partial Class scafoldTarking
         Me.Panel52.SuspendLayout()
         CType(Me.tblProductosScaffold, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel51.SuspendLayout()
+        Me.tbpModification.SuspendLayout()
+        Me.Panel55.SuspendLayout()
+        CType(Me.DataGridView2, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.Panel56.SuspendLayout()
+        Me.panel58TablesInfoModification.SuspendLayout()
+        Me.Panel59.SuspendLayout()
+        Me.Panel57.SuspendLayout()
         Me.Panel2.SuspendLayout()
+        Me.Panel60.SuspendLayout()
+        CType(Me.DataGridView3, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.TableLayoutPanel1.SuspendLayout()
+        Me.TableLayoutPanel2.SuspendLayout()
+        Me.Panel58.SuspendLayout()
+        Me.Panel61.SuspendLayout()
+        Me.Panel62.SuspendLayout()
+        Me.Panel63.SuspendLayout()
+        Me.TableLayoutPanel3.SuspendLayout()
+        Me.Panel64.SuspendLayout()
+        Me.Panel65.SuspendLayout()
+        Me.Panel66.SuspendLayout()
+        Me.TableLayoutPanel4.SuspendLayout()
+        CType(Me.DataGridView4, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.DataGridView5, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.GroupBox4.SuspendLayout()
+        Me.GroupBox5.SuspendLayout()
+        CType(Me.DataGridView6, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.TableLayoutPanel5.SuspendLayout()
+        Me.TableLayoutPanel6.SuspendLayout()
         Me.SuspendLayout()
         '
         'Panel1
@@ -401,8 +510,8 @@ Partial Class scafoldTarking
         Me.tabControl1.Controls.Add(Me.tbpSupervisor)
         Me.tabControl1.Controls.Add(Me.tbpScaffoldTraking)
         Me.tabControl1.Controls.Add(Me.tbpModification)
+        Me.tabControl1.Controls.Add(Me.tbpDismantle)
         Me.tabControl1.Controls.Add(Me.tbpEstimating)
-        Me.tabControl1.Controls.Add(Me.TabPage1)
         Me.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.tabControl1.Location = New System.Drawing.Point(0, 0)
         Me.tabControl1.Name = "tabControl1"
@@ -2365,28 +2474,12 @@ Partial Class scafoldTarking
         DataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
         Me.tblLeg.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle9
         Me.tblLeg.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.tblLeg.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.clmLegID, Me.clmQYT, Me.clmHeigthExtra})
+        Me.tblLeg.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.clmLegID, Me.clmQYT, Me.clmHeigthExtra, Me.clmIdProductLeg})
         Me.tblLeg.Dock = System.Windows.Forms.DockStyle.Fill
         Me.tblLeg.Location = New System.Drawing.Point(3, 65)
         Me.tblLeg.Name = "tblLeg"
         Me.tblLeg.Size = New System.Drawing.Size(177, 190)
         Me.tblLeg.TabIndex = 0
-        '
-        'clmLegID
-        '
-        Me.clmLegID.HeaderText = "legID"
-        Me.clmLegID.Name = "clmLegID"
-        Me.clmLegID.Visible = False
-        '
-        'clmQYT
-        '
-        Me.clmQYT.HeaderText = "QYT"
-        Me.clmQYT.Name = "clmQYT"
-        '
-        'clmHeigthExtra
-        '
-        Me.clmHeigthExtra.HeaderText = "Heigth"
-        Me.clmHeigthExtra.Name = "clmHeigthExtra"
         '
         'Panel48
         '
@@ -2827,12 +2920,322 @@ Partial Class scafoldTarking
         '
         'tbpModification
         '
+        Me.tbpModification.Controls.Add(Me.Panel55)
         Me.tbpModification.Location = New System.Drawing.Point(4, 22)
         Me.tbpModification.Name = "tbpModification"
         Me.tbpModification.Size = New System.Drawing.Size(941, 461)
         Me.tbpModification.TabIndex = 8
         Me.tbpModification.Text = "Modification"
         Me.tbpModification.UseVisualStyleBackColor = True
+        '
+        'Panel55
+        '
+        Me.Panel55.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Panel55.Controls.Add(Me.TableLayoutPanel3)
+        Me.Panel55.Controls.Add(Me.Panel56)
+        Me.Panel55.Location = New System.Drawing.Point(0, 0)
+        Me.Panel55.Name = "Panel55"
+        Me.Panel55.Size = New System.Drawing.Size(941, 461)
+        Me.Panel55.TabIndex = 0
+        '
+        'DataGridView2
+        '
+        Me.DataGridView2.AllowUserToAddRows = False
+        Me.DataGridView2.AllowUserToDeleteRows = False
+        Me.DataGridView2.AllowUserToResizeColumns = False
+        Me.DataGridView2.AllowUserToResizeRows = False
+        Me.DataGridView2.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
+        Me.DataGridView2.BackgroundColor = System.Drawing.Color.White
+        Me.DataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.DataGridView2.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Type, Me.Width, Me.Length, Me.Heigth, Me.Decks, Me.KOs})
+        Me.DataGridView2.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.DataGridView2.Location = New System.Drawing.Point(0, 0)
+        Me.DataGridView2.Name = "DataGridView2"
+        Me.DataGridView2.Size = New System.Drawing.Size(464, 56)
+        Me.DataGridView2.TabIndex = 0
+        '
+        'Type
+        '
+        Me.Type.HeaderText = "Type"
+        Me.Type.Name = "Type"
+        '
+        'Width
+        '
+        Me.Width.HeaderText = "Width"
+        Me.Width.Name = "Width"
+        '
+        'Length
+        '
+        Me.Length.HeaderText = "Length"
+        Me.Length.Name = "Length"
+        '
+        'Heigth
+        '
+        Me.Heigth.HeaderText = "Heigth"
+        Me.Heigth.Name = "Heigth"
+        '
+        'Decks
+        '
+        Me.Decks.HeaderText = "Decks"
+        Me.Decks.Name = "Decks"
+        '
+        'KOs
+        '
+        Me.KOs.HeaderText = "KOs"
+        Me.KOs.Name = "KOs"
+        '
+        'Panel56
+        '
+        Me.Panel56.Controls.Add(Me.panel58TablesInfoModification)
+        Me.Panel56.Controls.Add(Me.Panel57)
+        Me.Panel56.Dock = System.Windows.Forms.DockStyle.Top
+        Me.Panel56.Location = New System.Drawing.Point(0, 0)
+        Me.Panel56.Name = "Panel56"
+        Me.Panel56.Size = New System.Drawing.Size(941, 146)
+        Me.Panel56.TabIndex = 0
+        '
+        'panel58TablesInfoModification
+        '
+        Me.panel58TablesInfoModification.BackColor = System.Drawing.Color.Transparent
+        Me.panel58TablesInfoModification.Controls.Add(Me.TableLayoutPanel1)
+        Me.panel58TablesInfoModification.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.panel58TablesInfoModification.Location = New System.Drawing.Point(0, 84)
+        Me.panel58TablesInfoModification.Name = "panel58TablesInfoModification"
+        Me.panel58TablesInfoModification.Size = New System.Drawing.Size(941, 62)
+        Me.panel58TablesInfoModification.TabIndex = 23
+        '
+        'Panel59
+        '
+        Me.Panel59.BackColor = System.Drawing.Color.Transparent
+        Me.Panel59.Controls.Add(Me.DataGridView2)
+        Me.Panel59.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Panel59.Location = New System.Drawing.Point(3, 3)
+        Me.Panel59.Name = "Panel59"
+        Me.Panel59.Size = New System.Drawing.Size(464, 56)
+        Me.Panel59.TabIndex = 0
+        '
+        'Panel57
+        '
+        Me.Panel57.Controls.Add(Me.TableLayoutPanel2)
+        Me.Panel57.Dock = System.Windows.Forms.DockStyle.Top
+        Me.Panel57.Location = New System.Drawing.Point(0, 0)
+        Me.Panel57.Name = "Panel57"
+        Me.Panel57.Size = New System.Drawing.Size(941, 84)
+        Me.Panel57.TabIndex = 22
+        '
+        'Label43
+        '
+        Me.Label43.AutoSize = True
+        Me.Label43.Location = New System.Drawing.Point(5, 9)
+        Me.Label43.Name = "Label43"
+        Me.Label43.Size = New System.Drawing.Size(42, 13)
+        Me.Label43.TabIndex = 0
+        Me.Label43.Text = "Mod ID"
+        '
+        'DateTimePicker3
+        '
+        Me.DateTimePicker3.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.DateTimePicker3.Location = New System.Drawing.Point(57, 28)
+        Me.DateTimePicker3.Name = "DateTimePicker3"
+        Me.DateTimePicker3.Size = New System.Drawing.Size(166, 20)
+        Me.DateTimePicker3.TabIndex = 21
+        '
+        'Label55
+        '
+        Me.Label55.AutoSize = True
+        Me.Label55.Location = New System.Drawing.Point(5, 32)
+        Me.Label55.Name = "Label55"
+        Me.Label55.Size = New System.Drawing.Size(36, 13)
+        Me.Label55.TabIndex = 1
+        Me.Label55.Text = "Tag #"
+        '
+        'DateTimePicker2
+        '
+        Me.DateTimePicker2.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.DateTimePicker2.Location = New System.Drawing.Point(57, 3)
+        Me.DateTimePicker2.Name = "DateTimePicker2"
+        Me.DateTimePicker2.Size = New System.Drawing.Size(166, 20)
+        Me.DateTimePicker2.TabIndex = 20
+        '
+        'Label56
+        '
+        Me.Label56.AutoSize = True
+        Me.Label56.Location = New System.Drawing.Point(5, 56)
+        Me.Label56.Name = "Label56"
+        Me.Label56.Size = New System.Drawing.Size(36, 13)
+        Me.Label56.TabIndex = 2
+        Me.Label56.Text = "WO #"
+        '
+        'Label64
+        '
+        Me.Label64.AutoSize = True
+        Me.Label64.Location = New System.Drawing.Point(3, 29)
+        Me.Label64.Name = "Label64"
+        Me.Label64.Size = New System.Drawing.Size(41, 13)
+        Me.Label64.TabIndex = 19
+        Me.Label64.Text = "D Date"
+        '
+        'Label57
+        '
+        Me.Label57.AutoSize = True
+        Me.Label57.Location = New System.Drawing.Point(3, 5)
+        Me.Label57.Name = "Label57"
+        Me.Label57.Size = New System.Drawing.Size(77, 13)
+        Me.Label57.TabIndex = 3
+        Me.Label57.Text = "Req. Company"
+        '
+        'Label63
+        '
+        Me.Label63.AutoSize = True
+        Me.Label63.Location = New System.Drawing.Point(3, 5)
+        Me.Label63.Name = "Label63"
+        Me.Label63.Size = New System.Drawing.Size(48, 13)
+        Me.Label63.TabIndex = 18
+        Me.Label63.Text = "RS Date"
+        '
+        'Label58
+        '
+        Me.Label58.AutoSize = True
+        Me.Label58.Location = New System.Drawing.Point(3, 28)
+        Me.Label58.Name = "Label58"
+        Me.Label58.Size = New System.Drawing.Size(74, 13)
+        Me.Label58.TabIndex = 4
+        Me.Label58.Text = "Requested By"
+        '
+        'TextBox2
+        '
+        Me.TextBox2.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.TextBox2.Location = New System.Drawing.Point(63, 50)
+        Me.TextBox2.Name = "TextBox2"
+        Me.TextBox2.Size = New System.Drawing.Size(159, 20)
+        Me.TextBox2.TabIndex = 17
+        '
+        'Label59
+        '
+        Me.Label59.AutoSize = True
+        Me.Label59.Location = New System.Drawing.Point(3, 52)
+        Me.Label59.Name = "Label59"
+        Me.Label59.Size = New System.Drawing.Size(82, 13)
+        Me.Label59.TabIndex = 5
+        Me.Label59.Text = "Mofication Date"
+        '
+        'ComboBox5
+        '
+        Me.ComboBox5.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.ComboBox5.FormattingEnabled = True
+        Me.ComboBox5.Location = New System.Drawing.Point(63, 26)
+        Me.ComboBox5.Name = "ComboBox5"
+        Me.ComboBox5.Size = New System.Drawing.Size(159, 21)
+        Me.ComboBox5.TabIndex = 16
+        '
+        'Label60
+        '
+        Me.Label60.AutoSize = True
+        Me.Label60.Location = New System.Drawing.Point(3, 5)
+        Me.Label60.Name = "Label60"
+        Me.Label60.Size = New System.Drawing.Size(48, 13)
+        Me.Label60.TabIndex = 6
+        Me.Label60.Text = "Foreman"
+        '
+        'ComboBox4
+        '
+        Me.ComboBox4.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.ComboBox4.FormattingEnabled = True
+        Me.ComboBox4.Location = New System.Drawing.Point(63, 2)
+        Me.ComboBox4.Name = "ComboBox4"
+        Me.ComboBox4.Size = New System.Drawing.Size(159, 21)
+        Me.ComboBox4.TabIndex = 15
+        '
+        'Label61
+        '
+        Me.Label61.AutoSize = True
+        Me.Label61.Location = New System.Drawing.Point(3, 29)
+        Me.Label61.Name = "Label61"
+        Me.Label61.Size = New System.Drawing.Size(41, 13)
+        Me.Label61.TabIndex = 7
+        Me.Label61.Text = "Erector"
+        '
+        'DateTimePicker1
+        '
+        Me.DateTimePicker1.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.DateTimePicker1.Location = New System.Drawing.Point(87, 49)
+        Me.DateTimePicker1.Name = "DateTimePicker1"
+        Me.DateTimePicker1.Size = New System.Drawing.Size(138, 20)
+        Me.DateTimePicker1.TabIndex = 14
+        '
+        'Label62
+        '
+        Me.Label62.AutoSize = True
+        Me.Label62.Location = New System.Drawing.Point(3, 53)
+        Me.Label62.Name = "Label62"
+        Me.Label62.Size = New System.Drawing.Size(56, 13)
+        Me.Label62.TabIndex = 8
+        Me.Label62.Text = "Comments"
+        '
+        'ComboBox3
+        '
+        Me.ComboBox3.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.ComboBox3.FormattingEnabled = True
+        Me.ComboBox3.Location = New System.Drawing.Point(87, 25)
+        Me.ComboBox3.Name = "ComboBox3"
+        Me.ComboBox3.Size = New System.Drawing.Size(138, 21)
+        Me.ComboBox3.TabIndex = 13
+        '
+        'TextBox1
+        '
+        Me.TextBox1.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.TextBox1.Location = New System.Drawing.Point(65, 5)
+        Me.TextBox1.Name = "TextBox1"
+        Me.TextBox1.Size = New System.Drawing.Size(155, 20)
+        Me.TextBox1.TabIndex = 9
+        '
+        'ComboBox2
+        '
+        Me.ComboBox2.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.ComboBox2.FormattingEnabled = True
+        Me.ComboBox2.Location = New System.Drawing.Point(88, 0)
+        Me.ComboBox2.Name = "ComboBox2"
+        Me.ComboBox2.Size = New System.Drawing.Size(138, 21)
+        Me.ComboBox2.TabIndex = 12
+        '
+        'TextBox3
+        '
+        Me.TextBox3.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.TextBox3.Location = New System.Drawing.Point(65, 53)
+        Me.TextBox3.Name = "TextBox3"
+        Me.TextBox3.Size = New System.Drawing.Size(155, 20)
+        Me.TextBox3.TabIndex = 11
+        '
+        'ComboBox1
+        '
+        Me.ComboBox1.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.ComboBox1.FormattingEnabled = True
+        Me.ComboBox1.Location = New System.Drawing.Point(65, 29)
+        Me.ComboBox1.Name = "ComboBox1"
+        Me.ComboBox1.Size = New System.Drawing.Size(155, 21)
+        Me.ComboBox1.TabIndex = 10
+        '
+        'tbpDismantle
+        '
+        Me.tbpDismantle.Location = New System.Drawing.Point(4, 22)
+        Me.tbpDismantle.Name = "tbpDismantle"
+        Me.tbpDismantle.Padding = New System.Windows.Forms.Padding(3)
+        Me.tbpDismantle.Size = New System.Drawing.Size(941, 461)
+        Me.tbpDismantle.TabIndex = 10
+        Me.tbpDismantle.Text = "Dismantle"
+        Me.tbpDismantle.UseVisualStyleBackColor = True
         '
         'tbpEstimating
         '
@@ -2842,16 +3245,6 @@ Partial Class scafoldTarking
         Me.tbpEstimating.TabIndex = 9
         Me.tbpEstimating.Text = "Estimating"
         Me.tbpEstimating.UseVisualStyleBackColor = True
-        '
-        'TabPage1
-        '
-        Me.TabPage1.Location = New System.Drawing.Point(4, 22)
-        Me.TabPage1.Name = "TabPage1"
-        Me.TabPage1.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage1.Size = New System.Drawing.Size(941, 461)
-        Me.TabPage1.TabIndex = 10
-        Me.TabPage1.Text = "TabPage1"
-        Me.TabPage1.UseVisualStyleBackColor = True
         '
         'Panel2
         '
@@ -2890,6 +3283,510 @@ Partial Class scafoldTarking
         Me.btnSaveAll.TabIndex = 0
         Me.btnSaveAll.Text = "Save All"
         Me.btnSaveAll.UseVisualStyleBackColor = True
+        '
+        'Panel60
+        '
+        Me.Panel60.BackColor = System.Drawing.Color.Transparent
+        Me.Panel60.Controls.Add(Me.DataGridView3)
+        Me.Panel60.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Panel60.Location = New System.Drawing.Point(473, 3)
+        Me.Panel60.Name = "Panel60"
+        Me.Panel60.Size = New System.Drawing.Size(465, 56)
+        Me.Panel60.TabIndex = 1
+        '
+        'DataGridView3
+        '
+        Me.DataGridView3.AllowUserToAddRows = False
+        Me.DataGridView3.AllowUserToDeleteRows = False
+        Me.DataGridView3.AllowUserToResizeColumns = False
+        Me.DataGridView3.AllowUserToResizeRows = False
+        Me.DataGridView3.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
+        Me.DataGridView3.BackgroundColor = System.Drawing.Color.White
+        Me.DataGridView3.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.DataGridView3.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Build, Me.Martl, Me.Travl, Me.Wthr, Me.Alarm, Me.Safty, Me.StdBy, Me.ToHrs})
+        Me.DataGridView3.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.DataGridView3.Location = New System.Drawing.Point(0, 0)
+        Me.DataGridView3.Name = "DataGridView3"
+        Me.DataGridView3.Size = New System.Drawing.Size(465, 56)
+        Me.DataGridView3.TabIndex = 0
+        '
+        'Build
+        '
+        Me.Build.HeaderText = "Build"
+        Me.Build.Name = "Build"
+        '
+        'Martl
+        '
+        Me.Martl.HeaderText = "Martl"
+        Me.Martl.Name = "Martl"
+        '
+        'Travl
+        '
+        Me.Travl.HeaderText = "Travl"
+        Me.Travl.Name = "Travl"
+        '
+        'Wthr
+        '
+        Me.Wthr.HeaderText = "Wthr"
+        Me.Wthr.Name = "Wthr"
+        '
+        'Alarm
+        '
+        Me.Alarm.HeaderText = "Alarm"
+        Me.Alarm.Name = "Alarm"
+        '
+        'Safty
+        '
+        Me.Safty.HeaderText = "Safty"
+        Me.Safty.Name = "Safty"
+        '
+        'StdBy
+        '
+        Me.StdBy.HeaderText = "StdBy"
+        Me.StdBy.Name = "StdBy"
+        '
+        'ToHrs
+        '
+        Me.ToHrs.HeaderText = "ToHrs"
+        Me.ToHrs.Name = "ToHrs"
+        '
+        'TableLayoutPanel1
+        '
+        Me.TableLayoutPanel1.BackColor = System.Drawing.Color.Transparent
+        Me.TableLayoutPanel1.ColumnCount = 2
+        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
+        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
+        Me.TableLayoutPanel1.Controls.Add(Me.Panel59, 0, 0)
+        Me.TableLayoutPanel1.Controls.Add(Me.Panel60, 1, 0)
+        Me.TableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.TableLayoutPanel1.Location = New System.Drawing.Point(0, 0)
+        Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
+        Me.TableLayoutPanel1.RowCount = 1
+        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
+        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
+        Me.TableLayoutPanel1.Size = New System.Drawing.Size(941, 62)
+        Me.TableLayoutPanel1.TabIndex = 0
+        '
+        'TableLayoutPanel2
+        '
+        Me.TableLayoutPanel2.ColumnCount = 4
+        Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25.0!))
+        Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25.0!))
+        Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25.0!))
+        Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25.0!))
+        Me.TableLayoutPanel2.Controls.Add(Me.Panel58, 0, 0)
+        Me.TableLayoutPanel2.Controls.Add(Me.Panel61, 1, 0)
+        Me.TableLayoutPanel2.Controls.Add(Me.Panel62, 2, 0)
+        Me.TableLayoutPanel2.Controls.Add(Me.Panel63, 3, 0)
+        Me.TableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.TableLayoutPanel2.Location = New System.Drawing.Point(0, 0)
+        Me.TableLayoutPanel2.Name = "TableLayoutPanel2"
+        Me.TableLayoutPanel2.RowCount = 1
+        Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
+        Me.TableLayoutPanel2.Size = New System.Drawing.Size(941, 84)
+        Me.TableLayoutPanel2.TabIndex = 0
+        '
+        'Panel58
+        '
+        Me.Panel58.Controls.Add(Me.Label43)
+        Me.Panel58.Controls.Add(Me.TextBox1)
+        Me.Panel58.Controls.Add(Me.Label56)
+        Me.Panel58.Controls.Add(Me.Label55)
+        Me.Panel58.Controls.Add(Me.TextBox3)
+        Me.Panel58.Controls.Add(Me.ComboBox1)
+        Me.Panel58.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Panel58.Location = New System.Drawing.Point(3, 3)
+        Me.Panel58.Name = "Panel58"
+        Me.Panel58.Size = New System.Drawing.Size(229, 78)
+        Me.Panel58.TabIndex = 0
+        '
+        'Panel61
+        '
+        Me.Panel61.Controls.Add(Me.Label57)
+        Me.Panel61.Controls.Add(Me.Label59)
+        Me.Panel61.Controls.Add(Me.DateTimePicker1)
+        Me.Panel61.Controls.Add(Me.ComboBox2)
+        Me.Panel61.Controls.Add(Me.Label58)
+        Me.Panel61.Controls.Add(Me.ComboBox3)
+        Me.Panel61.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Panel61.Location = New System.Drawing.Point(238, 3)
+        Me.Panel61.Name = "Panel61"
+        Me.Panel61.Size = New System.Drawing.Size(229, 78)
+        Me.Panel61.TabIndex = 1
+        '
+        'Panel62
+        '
+        Me.Panel62.Controls.Add(Me.Label60)
+        Me.Panel62.Controls.Add(Me.ComboBox5)
+        Me.Panel62.Controls.Add(Me.ComboBox4)
+        Me.Panel62.Controls.Add(Me.Label61)
+        Me.Panel62.Controls.Add(Me.TextBox2)
+        Me.Panel62.Controls.Add(Me.Label62)
+        Me.Panel62.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Panel62.Location = New System.Drawing.Point(473, 3)
+        Me.Panel62.Name = "Panel62"
+        Me.Panel62.Size = New System.Drawing.Size(229, 78)
+        Me.Panel62.TabIndex = 2
+        '
+        'Panel63
+        '
+        Me.Panel63.Controls.Add(Me.DateTimePicker3)
+        Me.Panel63.Controls.Add(Me.Label63)
+        Me.Panel63.Controls.Add(Me.Label64)
+        Me.Panel63.Controls.Add(Me.DateTimePicker2)
+        Me.Panel63.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Panel63.Location = New System.Drawing.Point(708, 3)
+        Me.Panel63.Name = "Panel63"
+        Me.Panel63.Size = New System.Drawing.Size(230, 78)
+        Me.Panel63.TabIndex = 3
+        '
+        'TableLayoutPanel3
+        '
+        Me.TableLayoutPanel3.ColumnCount = 3
+        Me.TableLayoutPanel3.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 22.22222!))
+        Me.TableLayoutPanel3.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
+        Me.TableLayoutPanel3.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 27.77778!))
+        Me.TableLayoutPanel3.Controls.Add(Me.Panel64, 1, 0)
+        Me.TableLayoutPanel3.Controls.Add(Me.Panel65, 2, 0)
+        Me.TableLayoutPanel3.Controls.Add(Me.Panel66, 0, 0)
+        Me.TableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.TableLayoutPanel3.Location = New System.Drawing.Point(0, 146)
+        Me.TableLayoutPanel3.Name = "TableLayoutPanel3"
+        Me.TableLayoutPanel3.RowCount = 2
+        Me.TableLayoutPanel3.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 80.0!))
+        Me.TableLayoutPanel3.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20.0!))
+        Me.TableLayoutPanel3.Size = New System.Drawing.Size(941, 315)
+        Me.TableLayoutPanel3.TabIndex = 1
+        '
+        'Panel64
+        '
+        Me.Panel64.Controls.Add(Me.TableLayoutPanel5)
+        Me.Panel64.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Panel64.Location = New System.Drawing.Point(212, 3)
+        Me.Panel64.Name = "Panel64"
+        Me.Panel64.Size = New System.Drawing.Size(464, 246)
+        Me.Panel64.TabIndex = 0
+        '
+        'Panel65
+        '
+        Me.Panel65.Controls.Add(Me.TableLayoutPanel6)
+        Me.Panel65.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Panel65.Location = New System.Drawing.Point(682, 3)
+        Me.Panel65.Name = "Panel65"
+        Me.Panel65.Size = New System.Drawing.Size(256, 246)
+        Me.Panel65.TabIndex = 1
+        '
+        'Panel66
+        '
+        Me.Panel66.Controls.Add(Me.TableLayoutPanel4)
+        Me.Panel66.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Panel66.Location = New System.Drawing.Point(3, 3)
+        Me.Panel66.Name = "Panel66"
+        Me.Panel66.Size = New System.Drawing.Size(203, 246)
+        Me.Panel66.TabIndex = 2
+        '
+        'TableLayoutPanel4
+        '
+        Me.TableLayoutPanel4.ColumnCount = 1
+        Me.TableLayoutPanel4.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
+        Me.TableLayoutPanel4.Controls.Add(Me.GroupBox4, 0, 0)
+        Me.TableLayoutPanel4.Controls.Add(Me.GroupBox5, 0, 1)
+        Me.TableLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.TableLayoutPanel4.Location = New System.Drawing.Point(0, 0)
+        Me.TableLayoutPanel4.Name = "TableLayoutPanel4"
+        Me.TableLayoutPanel4.RowCount = 2
+        Me.TableLayoutPanel4.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 38.27161!))
+        Me.TableLayoutPanel4.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 61.72839!))
+        Me.TableLayoutPanel4.Size = New System.Drawing.Size(203, 246)
+        Me.TableLayoutPanel4.TabIndex = 0
+        '
+        'DataGridView4
+        '
+        Me.DataGridView4.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
+        Me.DataGridView4.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.DataGridView4.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.idProductModification, Me.clmIDProductM, Me.clmQTYM, Me.clmDescriptionM, Me.clmStockProductM})
+        Me.DataGridView4.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.DataGridView4.Location = New System.Drawing.Point(3, 20)
+        Me.DataGridView4.Name = "DataGridView4"
+        Me.DataGridView4.Size = New System.Drawing.Size(458, 223)
+        Me.DataGridView4.TabIndex = 0
+        '
+        'DataGridView5
+        '
+        Me.DataGridView5.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
+        Me.DataGridView5.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.DataGridView5.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.clmIDProductSM, Me.clmQTYSM})
+        Me.DataGridView5.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.DataGridView5.Location = New System.Drawing.Point(3, 20)
+        Me.DataGridView5.Name = "DataGridView5"
+        Me.DataGridView5.Size = New System.Drawing.Size(250, 223)
+        Me.DataGridView5.TabIndex = 0
+        '
+        'GroupBox4
+        '
+        Me.GroupBox4.Controls.Add(Me.chbElevtrM)
+        Me.GroupBox4.Controls.Add(Me.chbPassedM)
+        Me.GroupBox4.Controls.Add(Me.chbRopeM)
+        Me.GroupBox4.Controls.Add(Me.chbCraneM)
+        Me.GroupBox4.Controls.Add(Me.chbTrailerM)
+        Me.GroupBox4.Controls.Add(Me.chbForkliftM)
+        Me.GroupBox4.Controls.Add(Me.chbTruckMS)
+        Me.GroupBox4.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.GroupBox4.Location = New System.Drawing.Point(3, 3)
+        Me.GroupBox4.Name = "GroupBox4"
+        Me.GroupBox4.Size = New System.Drawing.Size(197, 88)
+        Me.GroupBox4.TabIndex = 0
+        Me.GroupBox4.TabStop = False
+        Me.GroupBox4.Text = "Material Handeling"
+        '
+        'chbTruckMS
+        '
+        Me.chbTruckMS.AutoSize = True
+        Me.chbTruckMS.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
+        Me.chbTruckMS.CheckAlign = System.Drawing.ContentAlignment.BottomCenter
+        Me.chbTruckMS.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.chbTruckMS.Location = New System.Drawing.Point(3, 15)
+        Me.chbTruckMS.Name = "chbTruckMS"
+        Me.chbTruckMS.Size = New System.Drawing.Size(32, 30)
+        Me.chbTruckMS.TabIndex = 0
+        Me.chbTruckMS.Text = "Truck"
+        Me.chbTruckMS.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.chbTruckMS.UseVisualStyleBackColor = True
+        '
+        'chbForkliftM
+        '
+        Me.chbForkliftM.AutoSize = True
+        Me.chbForkliftM.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
+        Me.chbForkliftM.CheckAlign = System.Drawing.ContentAlignment.BottomCenter
+        Me.chbForkliftM.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.chbForkliftM.Location = New System.Drawing.Point(49, 15)
+        Me.chbForkliftM.Name = "chbForkliftM"
+        Me.chbForkliftM.Size = New System.Drawing.Size(38, 30)
+        Me.chbForkliftM.TabIndex = 1
+        Me.chbForkliftM.Text = "Forklift"
+        Me.chbForkliftM.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.chbForkliftM.UseVisualStyleBackColor = True
+        '
+        'chbTrailerM
+        '
+        Me.chbTrailerM.AutoSize = True
+        Me.chbTrailerM.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
+        Me.chbTrailerM.CheckAlign = System.Drawing.ContentAlignment.BottomCenter
+        Me.chbTrailerM.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.chbTrailerM.Location = New System.Drawing.Point(103, 15)
+        Me.chbTrailerM.Name = "chbTrailerM"
+        Me.chbTrailerM.Size = New System.Drawing.Size(34, 30)
+        Me.chbTrailerM.TabIndex = 2
+        Me.chbTrailerM.Text = "Trailer"
+        Me.chbTrailerM.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.chbTrailerM.UseVisualStyleBackColor = True
+        '
+        'chbCraneM
+        '
+        Me.chbCraneM.AutoSize = True
+        Me.chbCraneM.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
+        Me.chbCraneM.CheckAlign = System.Drawing.ContentAlignment.BottomCenter
+        Me.chbCraneM.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.chbCraneM.Location = New System.Drawing.Point(3, 48)
+        Me.chbCraneM.Name = "chbCraneM"
+        Me.chbCraneM.Size = New System.Drawing.Size(34, 30)
+        Me.chbCraneM.TabIndex = 3
+        Me.chbCraneM.Text = "Crane"
+        Me.chbCraneM.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.chbCraneM.UseVisualStyleBackColor = True
+        '
+        'chbRopeM
+        '
+        Me.chbRopeM.AutoSize = True
+        Me.chbRopeM.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
+        Me.chbRopeM.CheckAlign = System.Drawing.ContentAlignment.BottomCenter
+        Me.chbRopeM.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.chbRopeM.Location = New System.Drawing.Point(53, 48)
+        Me.chbRopeM.Name = "chbRopeM"
+        Me.chbRopeM.Size = New System.Drawing.Size(31, 30)
+        Me.chbRopeM.TabIndex = 4
+        Me.chbRopeM.Text = "Rope"
+        Me.chbRopeM.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.chbRopeM.UseVisualStyleBackColor = True
+        '
+        'chbPassedM
+        '
+        Me.chbPassedM.AutoSize = True
+        Me.chbPassedM.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
+        Me.chbPassedM.CheckAlign = System.Drawing.ContentAlignment.BottomCenter
+        Me.chbPassedM.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.chbPassedM.Location = New System.Drawing.Point(99, 48)
+        Me.chbPassedM.Name = "chbPassedM"
+        Me.chbPassedM.Size = New System.Drawing.Size(40, 30)
+        Me.chbPassedM.TabIndex = 5
+        Me.chbPassedM.Text = "Passed"
+        Me.chbPassedM.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.chbPassedM.UseVisualStyleBackColor = True
+        '
+        'chbElevtrM
+        '
+        Me.chbElevtrM.AutoSize = True
+        Me.chbElevtrM.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
+        Me.chbElevtrM.CheckAlign = System.Drawing.ContentAlignment.BottomCenter
+        Me.chbElevtrM.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.chbElevtrM.Location = New System.Drawing.Point(156, 15)
+        Me.chbElevtrM.Name = "chbElevtrM"
+        Me.chbElevtrM.Size = New System.Drawing.Size(34, 30)
+        Me.chbElevtrM.TabIndex = 6
+        Me.chbElevtrM.Text = "Elevtr"
+        Me.chbElevtrM.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.chbElevtrM.UseVisualStyleBackColor = True
+        '
+        'GroupBox5
+        '
+        Me.GroupBox5.Controls.Add(Me.DataGridView6)
+        Me.GroupBox5.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.GroupBox5.Location = New System.Drawing.Point(3, 97)
+        Me.GroupBox5.Name = "GroupBox5"
+        Me.GroupBox5.Size = New System.Drawing.Size(197, 146)
+        Me.GroupBox5.TabIndex = 1
+        Me.GroupBox5.TabStop = False
+        Me.GroupBox5.Text = "Leg  Count"
+        '
+        'DataGridView6
+        '
+        Me.DataGridView6.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
+        Me.DataGridView6.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.DataGridView6.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.clmIDLCModification, Me.clmQTYLCModification, Me.clmHeigthLCModification})
+        Me.DataGridView6.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.DataGridView6.Location = New System.Drawing.Point(3, 16)
+        Me.DataGridView6.Name = "DataGridView6"
+        Me.DataGridView6.Size = New System.Drawing.Size(191, 127)
+        Me.DataGridView6.TabIndex = 0
+        '
+        'clmIDLCModification
+        '
+        Me.clmIDLCModification.HeaderText = "IDLCModification"
+        Me.clmIDLCModification.Name = "clmIDLCModification"
+        Me.clmIDLCModification.Visible = False
+        '
+        'clmQTYLCModification
+        '
+        Me.clmQTYLCModification.HeaderText = "QTY"
+        Me.clmQTYLCModification.Name = "clmQTYLCModification"
+        '
+        'clmHeigthLCModification
+        '
+        Me.clmHeigthLCModification.HeaderText = "Heigth"
+        Me.clmHeigthLCModification.Name = "clmHeigthLCModification"
+        '
+        'TableLayoutPanel5
+        '
+        Me.TableLayoutPanel5.ColumnCount = 1
+        Me.TableLayoutPanel5.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
+        Me.TableLayoutPanel5.Controls.Add(Me.DataGridView4, 0, 1)
+        Me.TableLayoutPanel5.Controls.Add(Me.Label65, 0, 0)
+        Me.TableLayoutPanel5.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.TableLayoutPanel5.Location = New System.Drawing.Point(0, 0)
+        Me.TableLayoutPanel5.Name = "TableLayoutPanel5"
+        Me.TableLayoutPanel5.RowCount = 2
+        Me.TableLayoutPanel5.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 7.0!))
+        Me.TableLayoutPanel5.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 93.0!))
+        Me.TableLayoutPanel5.Size = New System.Drawing.Size(464, 246)
+        Me.TableLayoutPanel5.TabIndex = 1
+        '
+        'TableLayoutPanel6
+        '
+        Me.TableLayoutPanel6.ColumnCount = 1
+        Me.TableLayoutPanel6.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
+        Me.TableLayoutPanel6.Controls.Add(Me.Label66, 0, 0)
+        Me.TableLayoutPanel6.Controls.Add(Me.DataGridView5, 0, 1)
+        Me.TableLayoutPanel6.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.TableLayoutPanel6.Location = New System.Drawing.Point(0, 0)
+        Me.TableLayoutPanel6.Name = "TableLayoutPanel6"
+        Me.TableLayoutPanel6.RowCount = 2
+        Me.TableLayoutPanel6.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 7.0!))
+        Me.TableLayoutPanel6.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 93.0!))
+        Me.TableLayoutPanel6.Size = New System.Drawing.Size(256, 246)
+        Me.TableLayoutPanel6.TabIndex = 1
+        '
+        'Label65
+        '
+        Me.Label65.AutoSize = True
+        Me.Label65.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Label65.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label65.Location = New System.Drawing.Point(3, 0)
+        Me.Label65.Name = "Label65"
+        Me.Label65.Size = New System.Drawing.Size(458, 17)
+        Me.Label65.TabIndex = 1
+        Me.Label65.Text = "Modification Material  List Count"
+        Me.Label65.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'Label66
+        '
+        Me.Label66.AutoSize = True
+        Me.Label66.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Label66.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label66.Location = New System.Drawing.Point(3, 0)
+        Me.Label66.Name = "Label66"
+        Me.Label66.Size = New System.Drawing.Size(250, 17)
+        Me.Label66.TabIndex = 2
+        Me.Label66.Text = "Scaffold Total Material  List Count"
+        Me.Label66.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'idProductModification
+        '
+        Me.idProductModification.HeaderText = "idProductModification"
+        Me.idProductModification.Name = "idProductModification"
+        Me.idProductModification.Visible = False
+        '
+        'clmIDProductM
+        '
+        Me.clmIDProductM.HeaderText = "IDProduct"
+        Me.clmIDProductM.Name = "clmIDProductM"
+        '
+        'clmQTYM
+        '
+        Me.clmQTYM.HeaderText = "QTY"
+        Me.clmQTYM.Name = "clmQTYM"
+        '
+        'clmDescriptionM
+        '
+        Me.clmDescriptionM.HeaderText = "Description"
+        Me.clmDescriptionM.Name = "clmDescriptionM"
+        '
+        'clmStockProductM
+        '
+        Me.clmStockProductM.HeaderText = "clmStockProductM"
+        Me.clmStockProductM.Name = "clmStockProductM"
+        Me.clmStockProductM.Visible = False
+        '
+        'clmIDProductSM
+        '
+        Me.clmIDProductSM.HeaderText = "Product ID"
+        Me.clmIDProductSM.Name = "clmIDProductSM"
+        '
+        'clmQTYSM
+        '
+        Me.clmQTYSM.HeaderText = "QTY"
+        Me.clmQTYSM.Name = "clmQTYSM"
+        '
+        'clmLegID
+        '
+        Me.clmLegID.HeaderText = "legID"
+        Me.clmLegID.Name = "clmLegID"
+        Me.clmLegID.Visible = False
+        '
+        'clmQYT
+        '
+        Me.clmQYT.HeaderText = "QYT"
+        Me.clmQYT.Name = "clmQYT"
+        '
+        'clmHeigthExtra
+        '
+        Me.clmHeigthExtra.HeaderText = "Heigth"
+        Me.clmHeigthExtra.Name = "clmHeigthExtra"
+        '
+        'clmIdProductLeg
+        '
+        Me.clmIdProductLeg.HeaderText = "IdProduct"
+        Me.clmIdProductLeg.Name = "clmIdProductLeg"
+        Me.clmIdProductLeg.Visible = False
         '
         'scafoldTarking
         '
@@ -3002,7 +3899,41 @@ Partial Class scafoldTarking
         CType(Me.tblProductosScaffold, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel51.ResumeLayout(False)
         Me.Panel51.PerformLayout()
+        Me.tbpModification.ResumeLayout(False)
+        Me.Panel55.ResumeLayout(False)
+        CType(Me.DataGridView2, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.Panel56.ResumeLayout(False)
+        Me.panel58TablesInfoModification.ResumeLayout(False)
+        Me.Panel59.ResumeLayout(False)
+        Me.Panel57.ResumeLayout(False)
         Me.Panel2.ResumeLayout(False)
+        Me.Panel60.ResumeLayout(False)
+        CType(Me.DataGridView3, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.TableLayoutPanel1.ResumeLayout(False)
+        Me.TableLayoutPanel2.ResumeLayout(False)
+        Me.Panel58.ResumeLayout(False)
+        Me.Panel58.PerformLayout()
+        Me.Panel61.ResumeLayout(False)
+        Me.Panel61.PerformLayout()
+        Me.Panel62.ResumeLayout(False)
+        Me.Panel62.PerformLayout()
+        Me.Panel63.ResumeLayout(False)
+        Me.Panel63.PerformLayout()
+        Me.TableLayoutPanel3.ResumeLayout(False)
+        Me.Panel64.ResumeLayout(False)
+        Me.Panel65.ResumeLayout(False)
+        Me.Panel66.ResumeLayout(False)
+        Me.TableLayoutPanel4.ResumeLayout(False)
+        CType(Me.DataGridView4, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.DataGridView5, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.GroupBox4.ResumeLayout(False)
+        Me.GroupBox4.PerformLayout()
+        Me.GroupBox5.ResumeLayout(False)
+        CType(Me.DataGridView6, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.TableLayoutPanel5.ResumeLayout(False)
+        Me.TableLayoutPanel5.PerformLayout()
+        Me.TableLayoutPanel6.ResumeLayout(False)
+        Me.TableLayoutPanel6.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -3232,7 +4163,7 @@ Partial Class scafoldTarking
     Friend WithEvents DescriptioOut As DataGridViewTextBoxColumn
     Friend WithEvents idProductOut As DataGridViewTextBoxColumn
     Friend WithEvents QTYMax As DataGridViewTextBoxColumn
-    Friend WithEvents TabPage1 As TabPage
+    Friend WithEvents tbpDismantle As TabPage
     Friend WithEvents btnNextTicketOutGoing As Button
     Friend WithEvents btnBackTicketOutGoing As Button
     Friend WithEvents Panel49 As Panel
@@ -3254,11 +4185,93 @@ Partial Class scafoldTarking
     Friend WithEvents clmQTY As DataGridViewTextBoxColumn
     Friend WithEvents clmProductDescription As DataGridViewTextBoxColumn
     Friend WithEvents clmStock As DataGridViewTextBoxColumn
-    Friend WithEvents clmLegID As DataGridViewTextBoxColumn
-    Friend WithEvents clmQYT As DataGridViewTextBoxColumn
-    Friend WithEvents clmHeigthExtra As DataGridViewTextBoxColumn
     Friend WithEvents btnDeleteRowScaffoldLeg As Button
     Friend WithEvents btnNextTag As Button
     Friend WithEvents btnBackTag As Button
     Friend WithEvents btnNewTag As Button
+    Friend WithEvents Panel55 As Panel
+    Friend WithEvents Panel56 As Panel
+    Friend WithEvents DateTimePicker1 As DateTimePicker
+    Friend WithEvents ComboBox3 As ComboBox
+    Friend WithEvents ComboBox2 As ComboBox
+    Friend WithEvents ComboBox1 As ComboBox
+    Friend WithEvents TextBox3 As TextBox
+    Friend WithEvents TextBox1 As TextBox
+    Friend WithEvents Label62 As Label
+    Friend WithEvents Label61 As Label
+    Friend WithEvents Label60 As Label
+    Friend WithEvents Label59 As Label
+    Friend WithEvents Label58 As Label
+    Friend WithEvents Label57 As Label
+    Friend WithEvents Label56 As Label
+    Friend WithEvents Label55 As Label
+    Friend WithEvents Label43 As Label
+    Friend WithEvents panel58TablesInfoModification As Panel
+    Friend WithEvents Panel59 As Panel
+    Friend WithEvents Panel57 As Panel
+    Friend WithEvents DateTimePicker3 As DateTimePicker
+    Friend WithEvents DateTimePicker2 As DateTimePicker
+    Friend WithEvents Label64 As Label
+    Friend WithEvents Label63 As Label
+    Friend WithEvents TextBox2 As TextBox
+    Friend WithEvents ComboBox5 As ComboBox
+    Friend WithEvents ComboBox4 As ComboBox
+    Friend WithEvents DataGridView2 As DataGridView
+    Friend WithEvents Type As DataGridViewTextBoxColumn
+    Friend WithEvents Width As DataGridViewTextBoxColumn
+    Friend WithEvents Length As DataGridViewTextBoxColumn
+    Friend WithEvents Heigth As DataGridViewTextBoxColumn
+    Friend WithEvents Decks As DataGridViewTextBoxColumn
+    Friend WithEvents KOs As DataGridViewTextBoxColumn
+    Friend WithEvents Panel60 As Panel
+    Friend WithEvents DataGridView3 As DataGridView
+    Friend WithEvents Build As DataGridViewTextBoxColumn
+    Friend WithEvents Martl As DataGridViewTextBoxColumn
+    Friend WithEvents Travl As DataGridViewTextBoxColumn
+    Friend WithEvents Wthr As DataGridViewTextBoxColumn
+    Friend WithEvents Alarm As DataGridViewTextBoxColumn
+    Friend WithEvents Safty As DataGridViewTextBoxColumn
+    Friend WithEvents StdBy As DataGridViewTextBoxColumn
+    Friend WithEvents ToHrs As DataGridViewTextBoxColumn
+    Friend WithEvents TableLayoutPanel1 As TableLayoutPanel
+    Friend WithEvents TableLayoutPanel2 As TableLayoutPanel
+    Friend WithEvents Panel58 As Panel
+    Friend WithEvents Panel61 As Panel
+    Friend WithEvents Panel62 As Panel
+    Friend WithEvents Panel63 As Panel
+    Friend WithEvents TableLayoutPanel3 As TableLayoutPanel
+    Friend WithEvents Panel64 As Panel
+    Friend WithEvents TableLayoutPanel5 As TableLayoutPanel
+    Friend WithEvents DataGridView4 As DataGridView
+    Friend WithEvents idProductModification As DataGridViewTextBoxColumn
+    Friend WithEvents clmIDProductM As DataGridViewTextBoxColumn
+    Friend WithEvents clmQTYM As DataGridViewTextBoxColumn
+    Friend WithEvents clmDescriptionM As DataGridViewTextBoxColumn
+    Friend WithEvents clmStockProductM As DataGridViewTextBoxColumn
+    Friend WithEvents Label65 As Label
+    Friend WithEvents Panel65 As Panel
+    Friend WithEvents TableLayoutPanel6 As TableLayoutPanel
+    Friend WithEvents Label66 As Label
+    Friend WithEvents DataGridView5 As DataGridView
+    Friend WithEvents clmIDProductSM As DataGridViewTextBoxColumn
+    Friend WithEvents clmQTYSM As DataGridViewTextBoxColumn
+    Friend WithEvents Panel66 As Panel
+    Friend WithEvents TableLayoutPanel4 As TableLayoutPanel
+    Friend WithEvents GroupBox4 As GroupBox
+    Friend WithEvents chbElevtrM As CheckBox
+    Friend WithEvents chbPassedM As CheckBox
+    Friend WithEvents chbRopeM As CheckBox
+    Friend WithEvents chbCraneM As CheckBox
+    Friend WithEvents chbTrailerM As CheckBox
+    Friend WithEvents chbForkliftM As CheckBox
+    Friend WithEvents chbTruckMS As CheckBox
+    Friend WithEvents GroupBox5 As GroupBox
+    Friend WithEvents DataGridView6 As DataGridView
+    Friend WithEvents clmIDLCModification As DataGridViewTextBoxColumn
+    Friend WithEvents clmQTYLCModification As DataGridViewTextBoxColumn
+    Friend WithEvents clmHeigthLCModification As DataGridViewTextBoxColumn
+    Friend WithEvents clmLegID As DataGridViewTextBoxColumn
+    Friend WithEvents clmQYT As DataGridViewTextBoxColumn
+    Friend WithEvents clmHeigthExtra As DataGridViewTextBoxColumn
+    Friend WithEvents clmIdProductLeg As DataGridViewTextBoxColumn
 End Class

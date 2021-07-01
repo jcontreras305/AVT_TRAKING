@@ -442,7 +442,7 @@ GO
 --##################  TABLA DE PRODUCT #####################################################
 --##########################################################################################
 
-create  table product(
+create table product(
 	idProduct int primary key not null,
 	name varchar(60),
 	weight float,
@@ -454,7 +454,9 @@ create  table product(
 	QID varchar(20),
 	um varchar(10),
 	class varchar(10),
-	quantity float
+	quantity float,
+	PLF float,
+	PSQF float
 )
 GO
 
@@ -1440,6 +1442,20 @@ GO
 --==============================================================================================================================
 ---- (CTRL+K) + (CTRL+C) Comentar 
 ---- (CTRL+K) + (CTRL+U) Descomentar 
+
+
+--alter table product
+--add PLF float
+--go
+
+--alter table product
+--add PSQF float
+--go
+
+--update product set PLF=0.0, PSQF=0.0
+--go
+
+
 
 --create table jobCat(
 --	idJobCat varchar(25) primary key not null,

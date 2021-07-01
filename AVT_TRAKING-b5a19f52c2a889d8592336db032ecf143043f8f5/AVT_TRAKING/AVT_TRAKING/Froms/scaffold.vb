@@ -540,6 +540,27 @@ where ps.tag = '" + tag + "'", conn)
         End Try
     End Function
 
+    Public Function llenarTablaProduct(ByVal tabla As DataGridView) As DataTable
+        Dim tablaProductos As New DataTable
+        With tablaProductos
+            tablaProductos.Columns.Add("idProductScaffold")
+            tablaProductos.Columns.Add("idProduct")
+            tablaProductos.Columns.Add("QTY")
+            tablaProductos.Columns.Add("description")
+            tablaProductos.Columns.Add("stock")
+        End With
+        Try
+            For Each row As DataGridViewRow In tabla.Rows
+                If row.Cells(1).Value IsNot Nothing Then
+                    tablaProductos.Rows.Add(row.Cells(0).Value(), row.Cells(1).Value, row.Cells(2).Value, row.Cells(3).Value, row.Cells(4).Value)
+                End If
+            Next
+            Return tablaProductos
+        Catch ex As Exception
+            Return tablaProductos
+        End Try
+    End Function
+
     Public Property materialHandeling() As Boolean()
         Get
             If Not _materialHandeling.Length > 0 Then
@@ -585,6 +606,7 @@ where mh.tag = '" + tag + "'", conn)
                 _leg.Columns.Add("legID")
                 _leg.Columns.Add("qty")
                 _leg.Columns.Add("heigth")
+                _leg.Columns.Add("idProduct")
             End If
             Return _leg
         End Get
@@ -598,12 +620,13 @@ where mh.tag = '" + tag + "'", conn)
         tabla.Columns.Add("legID")
         tabla.Columns.Add("qty")
         tabla.Columns.Add("heigth")
+        tabla.Columns.Add("idProduct")
         Try
             conectar()
-            Dim cmd As New SqlCommand("select legID , qty, heigth from leg where tag = '" + tag + "'", conn)
+            Dim cmd As New SqlCommand("select legID , qty, heigth, idProduct from leg where tag = '" + tag + "'", conn)
             Dim dr As SqlDataReader = cmd.ExecuteReader()
             While dr.Read()
-                tabla.Rows.Add(dr("legID"), dr("qty"), dr("heigth"))
+                tabla.Rows.Add(dr("legID"), dr("qty"), dr("heigth"), dr("idProduct"))
             End While
             Return tabla
         Catch ex As Exception
