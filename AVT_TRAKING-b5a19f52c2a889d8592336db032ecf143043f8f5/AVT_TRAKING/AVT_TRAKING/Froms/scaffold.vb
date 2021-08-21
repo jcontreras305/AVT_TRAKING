@@ -5,6 +5,8 @@ Public Class scaffold
     'scaffoldTraking
     Private _tag, _location, _purpose, _comments, _contact, _foreman, _erector, _task, _wo, _job, _descriptionWO, _jobcat, _category, _areaID, _area, _idsubJob, _subjob As String
     Private _dateBild, _dateRecComp As Date
+    Private _status As Boolean
+    Private _days As Integer
     'scaffoldInformation
     Private _sciType, _idScaffoldinformation As String
     Private _sciWidth, _sciLength, _sciHeigth, _sciDecks, _sciKo, _sciBase, _sciExtraDeck As Double
@@ -13,13 +15,15 @@ Public Class scaffold
     Private _ahrBuild, _ahrMaterial, _ahrTravel, _ahrWeather, _ahrAlarm, _ahrSafety, _ahrStdBy, _ahrOther, _ahrTotal As Double
     'productScaffold
     Private _products As DataTable
+    'ProductTotalScaffold
+    Private _productTotal As DataTable
     'materialHandeling
+    Private _idMaterialHandeling As String
     Private _materialHandeling(6) As Boolean
     'leg 
     Private _leg As DataTable
     'scfInfo
     Private _scfInfo(3) As Boolean
-
     Public Function Clear() As Boolean
         Try
             'scaffoldTraking
@@ -42,6 +46,8 @@ Public Class scaffold
             _subjob = ""
             _dateBild = System.DateTime.Today()
             _dateRecComp = System.DateTime.Today()
+            _status = False
+            _days = 0
             'scaffoldInformation
             _sciType = ""
             _idScaffoldinformation = ""
@@ -68,11 +74,12 @@ Public Class scaffold
                 _products.Rows.Clear()
             End If
             'material handeling
+            _idMaterialHandeling = ""
             _materialHandeling = {False, False, False, False, False, False, False}
             'leg
-            If _leg.Rows IsNot Nothing Then
-                _leg.Rows.Clear()
-            End If
+            'If _leg.Rows IsNot Nothing Then
+            '    _leg.Rows.Clear()
+            'End If
             'scfInfo
             _scfInfo = {False, False, False, False}
             Return True
@@ -133,6 +140,28 @@ Public Class scaffold
         End Get
         Set(ByVal dateRecComp As Date)
             _dateRecComp = dateRecComp
+        End Set
+    End Property
+    Public Property status() As Boolean
+        Get
+            If _status = Nothing Then
+                _status = False
+            End If
+            Return _status
+        End Get
+        Set(ByVal status As Boolean)
+            _status = status
+        End Set
+    End Property
+    Public Property days() As Integer
+        Get
+            If _days = Nothing Then
+                _days = 0
+            End If
+            Return _days
+        End Get
+        Set(ByVal days As Integer)
+            _days = days
         End Set
     End Property
     Public Property dateBild() As Date
@@ -555,11 +584,66 @@ where ps.tag = '" + tag + "'", conn)
                     tablaProductos.Rows.Add(row.Cells(0).Value(), row.Cells(1).Value, row.Cells(2).Value, row.Cells(3).Value, row.Cells(4).Value)
                 End If
             Next
+            _products = tablaProductos
             Return tablaProductos
         Catch ex As Exception
             Return tablaProductos
         End Try
     End Function
+
+    Public Property productTotal() As DataTable
+        Get
+            If _productTotal Is Nothing Then
+                _productTotal = New DataTable
+                _productTotal.Columns.Add("idPTS")
+                _productTotal.Columns.Add("QTY")
+                _productTotal.Columns.Add("idProduct")
+                _productTotal.Columns.Add("tag")
+                _productTotal.Columns.Add("status")
+            End If
+            Return _productTotal
+        End Get
+        Set(ByVal productTotal As DataTable)
+            _productTotal = _productTotal
+        End Set
+    End Property
+
+    Public Function llenarProductTotalScaffold(ByVal tag As String) As DataTable
+        Try
+            conectar()
+            If _productTotal Is Nothing Then
+                _productTotal = New DataTable
+                _productTotal.Columns.Add("idPTS")
+                _productTotal.Columns.Add("QTY")
+                _productTotal.Columns.Add("idProduct")
+                _productTotal.Columns.Add("tag")
+                _productTotal.Columns.Add("status")
+            End If
+            _productTotal.Rows.Clear()
+            Dim cmd As New SqlCommand("select * from productTotalScaffold where tag = '" + tag + "'", conn)
+            Dim dr As SqlDataReader = cmd.ExecuteReader()
+            While dr.Read()
+                _productTotal.Rows.Add(dr("idPTS"), dr("quantity"), dr("idProduct"), dr("tag"), dr("status"))
+            End While
+            Return _productTotal
+        Catch ex As Exception
+            Return _productTotal
+        Finally
+            desconectar()
+        End Try
+    End Function
+
+    Public Property idMaterialHandeling() As String
+        Get
+            If _idMaterialHandeling = Nothing Then
+                _idMaterialHandeling = ""
+            End If
+            Return _idMaterialHandeling
+        End Get
+        Set(ByVal idMaterialHandeling As String)
+            _idMaterialHandeling = idMaterialHandeling
+        End Set
+    End Property
 
     Public Property materialHandeling() As Boolean()
         Get
@@ -577,9 +661,9 @@ where ps.tag = '" + tag + "'", conn)
         Dim materialHandeling = {False, False, False, False, False, False, False}
         Try
             conectar()
-            Dim cmd As New SqlCommand("select mh.truck,mh.forklift,mh.trailer,mh.crane,mh.rope,mh.passed,mh.elevator
+            Dim cmd As New SqlCommand("select mh.truck,mh.forklift,mh.trailer,mh.crane,mh.rope,mh.passed,mh.elevator,idMaterialHandeling
 from materialHandeling as mh
-where mh.tag = '" + tag + "'", conn)
+where mh.tag = '" + tag + "' and idModification is Null", conn)
             Dim dr As SqlDataReader = cmd.ExecuteReader()
             While dr.Read()
                 materialHandeling(0) = If(dr("truck") = "t", True, False)
@@ -589,8 +673,10 @@ where mh.tag = '" + tag + "'", conn)
                 materialHandeling(4) = If(dr("rope") = "t", True, False)
                 materialHandeling(5) = If(dr("passed") = "t", True, False)
                 materialHandeling(6) = If(dr("elevator") = "t", True, False)
+                _idMaterialHandeling = dr("idMaterialHandeling")
                 Exit While
             End While
+            _materialHandeling = materialHandeling
             Return materialHandeling
         Catch ex As Exception
             Return materialHandeling
@@ -607,6 +693,8 @@ where mh.tag = '" + tag + "'", conn)
                 _leg.Columns.Add("qty")
                 _leg.Columns.Add("heigth")
                 _leg.Columns.Add("idProduct")
+                _leg.Columns.Add("plf")
+                _leg.Columns.Add("psqf")
             End If
             Return _leg
         End Get
@@ -621,12 +709,15 @@ where mh.tag = '" + tag + "'", conn)
         tabla.Columns.Add("qty")
         tabla.Columns.Add("heigth")
         tabla.Columns.Add("idProduct")
+        tabla.Columns.Add("plf")
+        tabla.Columns.Add("psqf")
         Try
             conectar()
-            Dim cmd As New SqlCommand("select legID , qty, heigth, idProduct from leg where tag = '" + tag + "'", conn)
+            Dim cmd As New SqlCommand("select legID , qty, heigth, leg.idProduct , pd.PLF,pd.PSQF from leg 
+left join product as pd on pd.idProduct = leg.idProduct where tag = '" + tag + "'", conn)
             Dim dr As SqlDataReader = cmd.ExecuteReader()
             While dr.Read()
-                tabla.Rows.Add(dr("legID"), dr("qty"), dr("heigth"), dr("idProduct"))
+                tabla.Rows.Add(dr("legID"), dr("qty"), dr("heigth"), dr("idProduct"), dr("PLF"), dr("PSQF"))
             End While
             Return tabla
         Catch ex As Exception

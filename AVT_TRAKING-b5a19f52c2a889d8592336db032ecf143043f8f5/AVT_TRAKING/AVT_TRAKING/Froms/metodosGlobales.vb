@@ -48,7 +48,7 @@ Module metodosGlobales
         Dim flag As Boolean = False
         Dim array() As Char = numerotext.ToCharArray()
         For Each letra As Char In array
-            If Char.IsDigit(letra) Or letra = "." Then
+            If Char.IsDigit(letra) Or letra = "." Or letra = "-" Then
                 flag = True
             Else
                 flag = False

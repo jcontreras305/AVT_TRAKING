@@ -110,7 +110,8 @@ create table activityHours(
 	safety float,
 	stdBy float,
 	other float,
-	tag varchar(20)
+	tag varchar(20),
+	idModification varchar(20)
 )
 GO
 
@@ -285,7 +286,7 @@ create table hoursWorked (
 GO
 
 --##########################################################################################
---##################  TABLA DE INCOMING #########################################################
+--##################  TABLA DE INCOMING ####################################################
 --##########################################################################################
 
 create table incoming(
@@ -359,7 +360,8 @@ create table materialHandeling(
 	rope char(1),
 	passed char(1),
 	elevator char(1),
-	tag varchar(20)
+	tag varchar(20),
+	idModification varchar(20)
 )
 GO
 
@@ -425,6 +427,23 @@ create table vendor (
 GO
 
 --##########################################################################################
+--##################  TABLA DE MODIFICATION SCAFFOLD #######################################
+--##########################################################################################
+
+create table modification(
+	idModification varchar(20) primary key not null,
+	reqCompany varchar(50),
+	requestBy varchar(50),
+	modificationDate date,
+	foreman varchar(30),
+	erector varchar(30),
+	comments text,
+	tag varchar(20),
+	status char(1)
+)
+GO
+
+--##########################################################################################
 --##################  TABLA DE OUTGOING ####################################################
 --##########################################################################################
 
@@ -473,6 +492,19 @@ create table productComing(
 GO
 
 --##########################################################################################
+--##################  TABLA DE PRODUCT MODIFICATION ########################################
+--##########################################################################################
+
+create table productModification(
+	idProductModification varchar(36) primary key not null,
+	idModification varchar(20),
+	idProduct int,
+	quantity float,
+	tag varchar(20)
+)
+GO
+
+--##########################################################################################
 --##################  TABLA DE PRODUCT OUTGOING ############################################
 --##########################################################################################
 
@@ -481,6 +513,19 @@ create table productOutGoing(
 	ticketNum varchar(15),
 	idProduct int,
 	quantity float
+)
+GO
+
+--##########################################################################################
+--##################  TABLA DE PRODUCT TOTAL SCAFFOLD ######################################
+--##########################################################################################
+
+create table productTotalScaffold(
+	idPTS varchar(36) primary key not null,
+	quantity float,
+	idProduct int,
+	tag varchar(20),
+	status char(1)
 )
 GO
 
@@ -535,7 +580,8 @@ create table scaffoldInformation(
 	ko float,
 	base float,
 	extraDeck float,
-	tag varchar(20)
+	tag varchar(20),
+	idModification varchar(20)
 )
 GO
 
@@ -556,7 +602,9 @@ create table scaffoldTraking(
 	idAux varchar(36),
 	idJobCat varchar(25),
 	idArea int,
-	idSubJob int	
+	idSubJob int,
+	status char(1),
+	days int
 )
 GO
 
@@ -660,6 +708,10 @@ GO
 
 ALTER TABLE activityHours WITH CHECK ADD CONSTRAINT fk_tag_activityHours
 FOREIGN KEY (tag) REFERENCES scaffoldTraking(tag)
+GO
+
+ALTER TABLE activityHours WITH CHECK ADD CONSTRAINT fk_idModification_activityHours
+FOREIGN KEY (idModification) REFERENCES modification(idModification)
 GO
 
 --##########################################################################################
@@ -785,6 +837,10 @@ ALTER TABLE materialHandeling WITH CHECK ADD CONSTRAINT fk_tag_materialHandeling
 FOREIGN KEY (tag) REFERENCES scaffoldTraking(tag)
 GO
 
+ALTER TABLE materialHandeling WITH CHECK ADD CONSTRAINT fk_modification_materialHandeling
+FOREIGN KEY (idModification) REFERENCES modification(idModification)
+GO
+
 --##########################################################################################
 --##################  FOREIG KEYS MATERIAL OREDER ##########################################
 --##########################################################################################
@@ -803,6 +859,14 @@ GO
 
 ALTER TABLE    materialUsed   WITH CHECK ADD  CONSTRAINT  fk_idTask_materialUsed  FOREIGN KEY( idAux )
 REFERENCES    task  ( idAux )
+GO
+
+--##########################################################################################
+--##################  FOREIG KEYS MODIFICATION SCAFFOLD ####################################
+--##########################################################################################
+
+ALTER TABLE modification WITH CHECK ADD CONSTRAINT fk_tag_modification
+FOREIGN KEY (tag) REFERENCES scaffoldTraking (tag)
 GO
 
 --##########################################################################################
@@ -838,6 +902,22 @@ FOREIGN KEY (idProduct) REFERENCES product(idProduct)
 GO
 
 --##########################################################################################
+--##################  FOREIG KEYS PRODUCT MODIFICATION #####################################
+--##########################################################################################
+
+ALTER TABLE productModification WITH CHECK ADD CONSTRAINT fk_idModification_productModification
+FOREIGN KEY (idModification) REFERENCES modification(idModification)
+GO
+
+ALTER TABLE productModification WITH CHECK ADD CONSTRAINT fk_idProduct_productModification
+FOREIGN KEY (idProduct) REFERENCES product(idProduct)
+GO
+
+ALTER TABLE productModification WITH CHECK ADD CONSTRAINT fk_tag_scaffoldTraking
+FOREIGN KEY (tag) REFERENCES scaffoldTraking(tag)
+GO
+
+--##########################################################################################
 --##################  FOREIG KEYS PRODUCT OUTGOING #########################################
 --##########################################################################################
 
@@ -862,6 +942,18 @@ FOREIGN KEY (idProduct) REFERENCES product(idProduct)
 GO
 
 --##########################################################################################
+--##################  FOREIG KEYS PRODUCT TOTAL SCAFFOLD ###################################
+--##########################################################################################
+
+ALTER TABLE productTotalScaffold WITH CHECK ADD CONSTRAINT fk_idProduct_productTotalScaffold
+FOREIGN KEY (idProduct) REFERENCES product(idProduct)
+GO
+
+ALTER TABLE productTotalScaffold WITH CHECK ADD CONSTRAINT fk_tag_productTotalScaffold
+FOREIGN KEY (tag) REFERENCES scaffoldTraking(tag)
+GO
+
+--##########################################################################################
 --##################  FOREIG KEYS PROJECT OREDER ###########################################
 --##########################################################################################
 
@@ -879,6 +971,10 @@ GO
 
 ALTER TABLE scaffoldInformation WITH CHECK ADD CONSTRAINT fk_tag_scaffoldInformation
 FOREIGN KEY (tag) REFERENCES scaffoldTraking(tag)
+GO
+
+ALTER TABLE scaffoldInformation WITH CHECK ADD CONSTRAINT fk_idModification_scaffoldInformation
+FOREIGN KEY (idModification) REFERENCES modification(idModification)
 GO
 
 --##########################################################################################
@@ -902,9 +998,23 @@ GO
 --##################  FOREIG KEYS SCFINFO ##################################################
 --##########################################################################################
 
+ALTER TABLE scfInfo WITH CHECK ADD CONSTRAINT fk_tag_scfInfo
+FOREIGN KEY (tag) REFERENCES scaffoldTraking(tag)
+GO
+
+--##########################################################################################
+--##################  FOREIG KEYS SCAFOLD INFORMATION ######################################
+--##########################################################################################
+
 ALTER TABLE materialHandeling WITH CHECK ADD CONSTRAINT fk_tag_materialHandeling
 FOREIGN KEY (tag) REFERENCES scaffoldTraking(tag)
 GO
+
+ALTER TABLE scfInfo WITH CHECK ADD CONSTRAINT fk_idModification_scfInfo
+FOREIGN KEY (idModification) REFERENCES modification(idModification)
+GO
+
+
 
 --##########################################################################################
 --##################  FOREIG KEYS TASK #####################################################
@@ -1443,6 +1553,94 @@ GO
 ---- (CTRL+K) + (CTRL+C) Comentar 
 ---- (CTRL+K) + (CTRL+U) Descomentar 
 
+--==============================================================================================================================
+--===== CODIGO PARA MODIFICACCION DE SCAFFOLD ==================================================================================
+--==============================================================================================================================
+
+--create table modification(
+--	idModification varchar(20) primary key not null,
+--	reqCompany varchar(50),
+--	requestBy varchar(50),
+--	modificationDate date,
+--	foreman varchar(30),
+--	erector varchar(30),
+--	comments text,
+--	tag varchar(20)
+--)
+--GO
+
+--ALTER TABLE modification WITH CHECK ADD CONSTRAINT fk_tag_modification
+--FOREIGN KEY (tag) REFERENCES scaffoldTraking (tag)
+--GO
+
+--create table productModification(
+--	idProductModification varchar(36) primary key not null,
+--	idModification varchar(20),
+--	idProduct int,
+--	quantity float,
+--	tag varhcar(20)
+--)
+--GO
+
+--ALTER TABLE productModification WITH CHECK ADD CONSTRAINT fk_idModification_productModification
+--FOREIGN KEY (idModification) REFERENCES modification(idModification)
+--GO
+
+--ALTER TABLE productModification WITH CHECK ADD CONSTRAINT fk_idProduct_productModification
+--FOREIGN KEY (idProduct) REFERENCES product(idProduct)
+--GO
+
+--ALTER TABLE productModification WITH CHECK ADD CONSTRAINT fk_tag_scaffoldTraking
+--FOREIGN KEY (tag) REFERENCES scaffoldTraking(tag)
+--GO
+
+--create table productTotalScaffold(
+--	idPTS varchar(36) primary key not null,
+--	quantity float,
+--	idProduct int,
+--	tag varchar(20),
+--	status char(1)
+--)
+--GO
+
+--ALTER TABLE productTotalScaffold ADD CONSTRAINT fk_idProduct_productTotalScaffold
+--FOREIGN KEY (idProduct) REFERENCES product(idProduct)
+--GO
+
+--ALTER TABLE productTotalScaffold ADD CONSTRAINT fk_tag_productTotalScaffold
+--FOREIGN KEY (tag) REFERENCES scaffoldTraking(tag)
+--GO
+
+----==============================================================================================================================
+----===== CODIGO PARA CORREGIR LAS REALCIONES DE LAS TABLAS DE HORAS, INFO Y MATERIALHANDELING ===================================
+----==============================================================================================================================
+
+--ALTER TABLE activityHours ADD idModification varchar(20)
+
+--ALTER TABLE activityHours WITH CHECK ADD CONSTRAINT fk_idModification_activityHours
+--FOREIGN KEY (idModification) REFERENCES modification(idModification)
+--GO
+
+--ALTER TABLE scaffoldInformation add idModification varchar(20)
+
+--ALTER TABLE scaffoldInformation WITH CHECK ADD CONSTRAINT fk_idModification_scaffoldInformation
+--FOREIGN KEY (idModification) REFERENCES modification(idModification)
+--GO
+
+--ALTER TABLE materialHandeling ADD idModification varchar(20)
+
+--ALTER TABLE materialHandeling WITH CHECK ADD CONSTRAINT fk_modification_materialHandeling
+--FOREIGN KEY (idModification) REFERENCES modification(idModification)
+--GO
+
+--ALTER TABLE scaffoldTraking ADD status char(1)
+
+--ALTER TABLE modification ADD status char(1)
+
+
+----==============================================================================================================================
+----===== CODIGO PARA AGREGAR LOS DOS CAMPOS FALTANTES EN LA TABLA DE PRODUCTOS ==================================================
+----==============================================================================================================================
 
 --alter table product
 --add PLF float
@@ -1455,7 +1653,9 @@ GO
 --update product set PLF=0.0, PSQF=0.0
 --go
 
-
+--==============================================================================================================================
+--===== CODIGO PARA LAS TABLAS DE SCAFFOLD TRAKING =============================================================================
+--==============================================================================================================================
 
 --create table jobCat(
 --	idJobCat varchar(25) primary key not null,
@@ -1476,7 +1676,9 @@ GO
 --	idAux varchar(36),
 --	idJobCat varchar(25),
 --	idArea int,
---	idSubJob int	
+--	idSubJob int,
+--	status char(1),
+--	days int
 --)
 --go
 

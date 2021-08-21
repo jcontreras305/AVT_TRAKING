@@ -150,6 +150,7 @@
     <Compile Include="Froms\Expences.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Froms\modificationSC.vb" />
     <Compile Include="Froms\myCompany.Designer.vb">
       <DependentUpon>myCompany.vb</DependentUpon>
     </Compile>
