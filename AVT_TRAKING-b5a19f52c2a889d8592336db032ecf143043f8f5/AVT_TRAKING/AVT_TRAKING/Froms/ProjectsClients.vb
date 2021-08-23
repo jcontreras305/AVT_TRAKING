@@ -65,8 +65,10 @@ Public Class ProjectsClients
     End Sub
 
     Private Sub btnEmployees_Click(sender As Object, e As EventArgs) Handles btnEmployees.Click
-        Dim hpe As New HoursWeekPeerEmployees
-        hpe.ShowDialog()
+        'Dim hpe As New HoursWeekPeerEmployees
+        'hpe.ShowDialog()
+        Dim a As New Employees
+        a.Show()
     End Sub
 
     Private Sub btnAddClient_Click(sender As Object, e As EventArgs) Handles btnAddClient.Click
@@ -271,6 +273,11 @@ Public Class ProjectsClients
         Me.Visible = False
         st.ShowDialog()
         Me.Visible = True
+    End Sub
+
+    Private Sub btnTimeEnterSheets_Click(sender As Object, e As EventArgs) Handles btnTimeEnterSheets.Click
+        Dim hpe As New HoursWeekPeerEmployees
+        hpe.ShowDialog()
     End Sub
 
     Private Sub cmbCostCode_Leave(sender As Object, e As EventArgs) Handles cmbCostCode.Leave

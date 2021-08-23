@@ -11,12 +11,12 @@ Public Class MetodosScaffold
         tabla.Columns.Add("hours")
         Try
             conectar()
-            Dim cmd As New SqlCommand("select idJobCat as 'ID' , cat as 'Description', hours as 'Hours' from jobCat", conn)
+            Dim cmd As New SqlCommand("select idJobCat as 'ID' , cat as 'Description', days as 'Days' from jobCat", conn)
             Dim dr As SqlDataReader = cmd.ExecuteReader()
             combo.Items.Clear()
             While dr.Read()
                 combo.Items.Add(CStr(dr("ID")) + " " + dr("Description"))
-                tabla.Rows.Add(CStr(dr("ID")) + " " + dr("Description"), CStr(dr("ID")), CStr(dr("Description")), CStr(dr("Hours")))
+                tabla.Rows.Add(CStr(dr("ID")) + " " + dr("Description"), CStr(dr("ID")), CStr(dr("Description")), CStr(dr("Days")))
             End While
             Return tabla
         Catch ex As Exception
@@ -30,7 +30,7 @@ Public Class MetodosScaffold
     Public Function llenarJobCat(ByVal tabla As DataGridView) As Boolean
         Try
             conectar()
-            Dim cmd As New SqlCommand("select idJobCat as 'ID' , cat as 'Description' , hours as 'Hours' from jobCat", conn)
+            Dim cmd As New SqlCommand("select idJobCat as 'ID' , cat as 'Description' , days as 'Days' from jobCat", conn)
             If cmd.ExecuteNonQuery Then
                 Dim da As New SqlDataAdapter(cmd)
                 Dim dt As New DataTable
@@ -64,7 +64,7 @@ begin
 end
 else if(select COUNT(*) from jobCat where idJobCat = '" + row.Cells(0).Value().ToString() + "' ) = 1
 begin
-	update jobCat set cat = '" + row.Cells(1).Value().ToString() + "', hours = " + If(row.Cells(2).Value().ToString() = "", "0", row.Cells(2).Value().ToString()) + " where idJobCat = '" + row.Cells(0).Value().ToString() + "' 
+	update jobCat set cat = '" + row.Cells(1).Value().ToString() + "', days = " + If(row.Cells(2).Value().ToString() = "", "0", row.Cells(2).Value().ToString()) + " where idJobCat = '" + row.Cells(0).Value().ToString() + "' 
 end", conn)
                     cmd.Transaction = tran
                     If cmd.ExecuteNonQuery = 1 Then
@@ -2271,13 +2271,11 @@ end", conn)
         End Try
     End Function
 
-    Public Function deleteScaffold(sc) As Boolean
+    Public Function deleteScaffold(ByVal sc As scaffold) As Boolean
         conectar()
         Dim tran As SqlTransaction
         tran = conn.BeginTransaction
         Try
-
-
 
         Catch ex As Exception
         Finally
