@@ -2364,7 +2364,6 @@ inner join materialHandeling as mh on md.idModification = mh.idModification", co
             md.llenarMaterialHandeling(md.ModID, md.tag)
             md.llenarSacffoldInformation(md.ModID, md.tag)
             md.llenarTablaProductMod(md.ModID, md.tag)
-            md.llenarTablaProductMod(md.ModID, md.tag)
             md.llenarTablaProductTag(md.tag)
             Return md
         Catch ex As Exception
@@ -2390,7 +2389,7 @@ inner join materialHandeling as mh on md.idModification = mh.idModification", co
                 end", conn)
             cmdMod.Transaction = tran
             If cmdMod.ExecuteNonQuery = 1 Then 'Actualizar o Insertar la Modificacion 
-                Dim cmdActivityHour As New SqlCommand("if (select COUNT(*) from activityHours where idActivityHours='" + md.ahrIdActivityHours + "')=0
+                Dim cmdActivityHour As New SqlCommand("if (select COUNT(*) from activityHours where idActivityHours = '" + md.ahrIdActivityHours + "')=0
                     begin 
 	                    insert into activityHours values (NEWID()," + CStr(md.ahrBuild) + "," + CStr(md.ahrMaterial) + "," + CStr(md.ahrTravel) + "," + CStr(md.ahrWeather) + "," + CStr(md.ahrAlarm) + "," + CStr(md.ahrSafety) + "," + CStr(md.ahrStdBy) + "," + CStr(md.ahrOther) + ",'" + md.tag + "','" + md.ModID + "')
                     end
@@ -2404,19 +2403,19 @@ inner join materialHandeling as mh on md.idModification = mh.idModification", co
                         begin 
 	                        insert into scaffoldInformation values(NEWID(),'" + md.sciType + "'," + CStr(md.sciWidth) + "," + CStr(md.sciLength) + "," + CStr(md.sciHeigth) + "," + CStr(md.sciDecks) + "," + CStr(md.sciKo) + "," + CStr(md.sciBase) + "," + CStr(md.sciExtraDeck) + ",'" + md.tag + "','" + md.ModID + "')
                         end
-                        else if (select count(*) from scaffoldInformation where idScaffoldInformation = '" + md.idScaffoldinformation + "')=1
+                        else if (select count(*) from scaffoldInformation where idModification='" + md.ModID + "' and tag = '" + md.tag + "')=1
                         begin 
 	                        update scaffoldInformation set type='" + md.sciType + "',width=" + CStr(md.sciWidth) + ",length=" + CStr(md.sciLength) + ",heigth=" + CStr(md.sciHeigth) + ",descks=" + CStr(md.sciDecks) + ",ko=" + CStr(md.sciKo) + ",base=" + CStr(md.sciBase) + ",extraDeck=" + CStr(md.sciExtraDeck) + ",tag='" + md.tag + "' where idScaffoldInformation='" + md.idScaffoldinformation + "'
                         end", conn)
                     cmdScfInfo.Transaction = tran
                     If cmdScfInfo.ExecuteNonQuery = 1 Then 'Actualizar o Insertar la informacion del Andamio
-                        Dim cmdMatHand As New SqlCommand("if(select COUNT(*) from materialHandeling where idMaterialHandeling='')=0
+                        Dim cmdMatHand As New SqlCommand("if(select COUNT(*) from materialHandeling where idMaterialHandeling ='" + md.idScaffoldinformation + "')=0
                             begin
 	                            insert into materialHandeling values(NEWID(),'" + If(md.materialHandeling(0), "t", "f") + "','" + If(md.materialHandeling(1), "t", "f") + "','" + If(md.materialHandeling(2), "t", "f") + "','" + If(md.materialHandeling(3), "t", "f") + "','" + If(md.materialHandeling(4), "t", "f") + "','" + If(md.materialHandeling(5), "t", "f") + "','" + If(md.materialHandeling(6), "t", "f") + "','" + md.tag + "','" + md.ModID + "')
                             end
-                            else if(select COUNT(*) from materialHandeling where idMaterialHandeling='')=1
+                            else if(select COUNT(*) from materialHandeling where idMaterialHandeling='" + md.idScaffoldinformation + "')=1
                             begin
-	                            update materialHandeling set truck='" + If(md.materialHandeling(0), "t", "f") + "',forklift='" + If(md.materialHandeling(1), "t", "f") + "',trailer='" + If(md.materialHandeling(2), "t", "f") + "',crane='" + If(md.materialHandeling(3), "t", "f") + "',rope='" + If(md.materialHandeling(4), "t", "f") + "',passed='" + If(md.materialHandeling(5), "t", "f") + "',elevator='" + If(md.materialHandeling(6), "t", "f") + "' ,tag='" + md.tag + "' where idMaterialHandeling =''
+	                            update materialHandeling set truck='" + If(md.materialHandeling(0), "t", "f") + "',forklift='" + If(md.materialHandeling(1), "t", "f") + "',trailer='" + If(md.materialHandeling(2), "t", "f") + "',crane='" + If(md.materialHandeling(3), "t", "f") + "',rope='" + If(md.materialHandeling(4), "t", "f") + "',passed='" + If(md.materialHandeling(5), "t", "f") + "',elevator='" + If(md.materialHandeling(6), "t", "f") + "' ,tag='" + md.tag + "' where idMaterialHandeling ='" + md.idMaterialHandeling + "'
                             end", conn)
                         cmdMatHand.Transaction = tran
                         If cmdMatHand.ExecuteNonQuery = 1 Then 'Actualizar o Insertar la Manipulacion de materiales
@@ -2566,6 +2565,29 @@ end", conn)
             Return False
         Finally
             desconectar()
+        End Try
+    End Function
+
+    Public Function deleteModificaion(ByVal tag As String, ByVal modID As String) As Boolean
+        Try
+            conectar()
+            Dim cmd As New SqlCommand("sp_EliminarModificacion")
+            cmd.Connection = conn
+            cmd.CommandType = CommandType.StoredProcedure
+            cmd.Parameters.Add("@tag", SqlDbType.VarChar, 20).Value = tag
+            cmd.Parameters.Add("@modID", SqlDbType.VarChar, 20).Value = modID
+            cmd.Parameters.Add("@msg", SqlDbType.VarChar, 100).Direction = ParameterDirection.Output
+            cmd.ExecuteNonQuery()
+            Dim resultado As String = cmd.Parameters("@msg").Value
+            MsgBox(resultado)
+            If resultado <> "Successful" Then
+                Return False
+            Else
+                Return True
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message())
+            Return False
         End Try
     End Function
 

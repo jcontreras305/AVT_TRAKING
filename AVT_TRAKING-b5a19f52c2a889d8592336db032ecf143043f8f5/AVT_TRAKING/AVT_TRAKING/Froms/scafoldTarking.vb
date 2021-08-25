@@ -256,21 +256,13 @@ Public Class scafoldTarking
                 End If
             Case "Mod"
                 If mtdScaffold.saveModification(md) Then
-                    cargarDatosModification(md.ModID)
-                    mtdScaffold.llenarProduct(tblProductosAux)
-                End If
-            Case tblScaffoldInformationSM.Name
-                If mtdScaffold.saveModification(md) Then
-                    cargarDatosModification(md.ModID)
-                    mtdScaffold.llenarProduct(tblProductosAux)
-                End If
-            Case tblActivityHoursSM.Name
-                If mtdScaffold.saveModification(md) Then
+                    md = mtdScaffold.llenarModificationData(md.ModID, md.tag)
                     cargarDatosModification(md.ModID)
                     mtdScaffold.llenarProduct(tblProductosAux)
                 End If
             Case tblModificationProductMS.Name
                 If mtdScaffold.saveModification(md) Then
+                    md = mtdScaffold.llenarModificationData(md.ModID, md.tag)
                     cargarDatosModification(md.ModID)
                     mtdScaffold.llenarProduct(tblProductosAux)
                 End If
@@ -445,10 +437,10 @@ Public Class scafoldTarking
         End If
     End Sub
     Private Sub tblScaffoldInformationSM_CellValueChanged(sender As Object, e As DataGridViewCellEventArgs) Handles tblScaffoldInformationSM.CellClick
-        selectedTable = tblScaffoldInformationSM.Name
+        selectedTable = "Mod"
     End Sub
     Private Sub tblActivityHoursSM_CellValueChanged(sender As Object, e As DataGridViewCellEventArgs) Handles tblActivityHoursSM.CellClick
-        selectedTable = tblActivityHoursSM.Name
+        selectedTable = "Mod"
     End Sub
     Private Sub btnDeleteRows_Click(sender As Object, e As EventArgs) Handles btnDeleteRows.Click
         Select Case selectedTable
@@ -524,9 +516,41 @@ Public Class scafoldTarking
                     End If
                 End If
             Case "tag"
-
             Case tblProductosScaffold.Name
+            Case "Mod"
+                If DialogResult.Yes = MessageBox.Show("The 'Modification Records' will be deleted. Would you like to continue?", "Important ", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) Then
+                    If (mtdScaffold.deleteModificaion(md.tag, md.ModID)) Then
+                        If mtdScaffold.llenarModification(tblModification) Then
+                            If tblModification.Rows.Count > 0 Then
+                                md = mtdScaffold.llenarModificationData(tblModification.Rows(0).ItemArray(0), tblModification.Rows(0).ItemArray(4))
+                                If md.ModID <> "" Then
+                                    cargarDatosModification(md.ModID)
+                                End If
+                            Else
+                                md.Clear()
+                                cargarDatosModification("")
+                            End If
+                        End If
+                    End If
+                End If
+            Case tblModificationProductMS.Name
+                If DialogResult.Yes = MessageBox.Show("The 'Modification Records' will be deleted. Would you like to continue?", "Important ", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) Then
+                    If (mtdScaffold.deleteModificaion(md.tag, md.ModID)) Then
+                        If mtdScaffold.llenarModification(tblModification) Then
+                            If tblModification.Rows.Count > 0 Then
+                                md.Clear()
+                                md = mtdScaffold.llenarModificationData(tblModification.Rows(0).ItemArray(0), tblModification.Rows(0).ItemArray(4))
+                                If md.ModID <> "" Then
+                                    cargarDatosModification(md.ModID)
+                                End If
+                            Else
+                                md.Clear()
+                                cargarDatosModification("")
+                            End If
+                        End If
+                    End If
 
+                End If
         End Select
     End Sub
 
@@ -2273,6 +2297,7 @@ Public Class scafoldTarking
             cmbErectorModification.Text = md.erector
             txtCommentsModification.Text = md.comments
             dtpModificationDate.Value = md.ModDate
+
             If md.idScaffoldinformation <> "" Then
                 tblScaffoldInformationSM.Rows(0).Cells("Type").Value = md.sciType
                 tblScaffoldInformationSM.Rows(0).Cells("Width").Value = CStr(md.sciWidth)

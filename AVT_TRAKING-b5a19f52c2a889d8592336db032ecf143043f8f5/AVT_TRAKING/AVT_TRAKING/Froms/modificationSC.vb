@@ -316,6 +316,7 @@ Public Class ModificationSC
                 _ahrStdBy = If(rd("stdBy") Is DBNull.Value, "", rd("stdBy"))
                 _ahrOther = If(rd("other") Is DBNull.Value, "", rd("other"))
                 _ahrTotal = (_ahrBuild + _ahrMaterial + _ahrTravel + _ahrWeather + _ahrAlarm + _ahrSafety + _ahrStdBy + _ahrOther)
+                Exit While
             End While
             Return True
         Catch ex As Exception
