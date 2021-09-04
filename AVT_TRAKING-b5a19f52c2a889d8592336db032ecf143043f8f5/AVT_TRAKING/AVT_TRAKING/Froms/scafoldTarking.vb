@@ -17,10 +17,13 @@ Public Class scafoldTarking
     Dim tblProductosAux As New Data.DataTable
     Dim tblScaffoldTags As New Data.DataTable
     Dim tblModification As New Data.DataTable
+    Dim tblDismantle As New Data.DataTable
     Dim sc As New scaffold
     Dim md As New ModificationSC
+    Dim ds As New dismantle
     Dim loadingData As Boolean 'Estas variables las utilizo para que los datos no activen los events de los elementos en la interfaz
     Dim loadingDataModification As Boolean
+    Dim loadingDataDismentle As Boolean
     Private Sub scafoldTarking_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         'In Coming
         dtpDateInComing.Format = DateTimePickerFormat.Custom
@@ -129,7 +132,17 @@ Public Class scafoldTarking
                 md.Clear()
             End If
         End If
-
+        'Dismantle
+        dtpRentStop.Format = DateTimePickerFormat.Custom
+        dtpModificationDate.CustomFormat = "MM/dd/yyyy"
+        dtpDismantleDate.Format = DateTimePickerFormat.Custom
+        dtpDismantleDate.CustomFormat = "MM/dd/yyyy"
+        tblActivityHoursDismantle.Rows.Add("", "", "", "", "", "", "", "", "")
+        tblActivityHoursDismantle.Rows(0).Cells("clmTotalHD").ReadOnly = True
+        tblActivityHoursDismantle.Rows(0).Cells("clmTotalHD").Style.BackColor = Color.Green
+        If tblScaffoldTags.Rows.Count() > 0 Then
+            cargarDatosDismantle(tblScaffoldTags.Rows(0).ItemArray(0))
+        End If
     End Sub
 
     Private Sub tabControl1_SelectedIndexChanged(sender As Object, e As EventArgs) Handles tabControl1.SelectedIndexChanged
@@ -147,6 +160,8 @@ Public Class scafoldTarking
                 selectedTable = "tag"
             Case "Modification"
                 selectedTable = "Mod"
+            Case "Dismantle"
+                selectedTable = "Dis"
             Case "Estimating"
         End Select
     End Sub
@@ -239,31 +254,78 @@ Public Class scafoldTarking
             Case "tag"
                 If mtdScaffold.saveScaffoldTraking(sc) Then
                     cargarDatosScaffold(sc.tag)
+                    mtdScaffold.llenarProduct(tblProduct)
                     mtdScaffold.llenarProduct(tblProductosAux)
+                    If cmbTagScaffold.Text <> "" And tblScaffoldTags.Rows.Count() > 0 Then
+                        Dim tagSelected = cmbTagScaffold.Text
+                        cmbTagScaffold.Items.Clear()
+                        For Each row As Data.DataRow In tblScaffoldTags.Rows()
+                            cmbTagScaffold.Items.Add(row.ItemArray(0))
+                        Next
+                        cmbTagScaffold.SelectedItem = cmbTagScaffold.Items(cmbTagScaffold.FindString(tagSelected))
+                        cmbTagScaffold.Text = tagSelected
+                    End If
                     MsgBox("Successfull")
                 End If
             Case tblProductosScaffold.Name
                 If mtdScaffold.saveScaffoldTraking(sc) Then
                     cargarDatosScaffold(sc.tag)
+                    mtdScaffold.llenarProduct(tblProduct)
                     mtdScaffold.llenarProduct(tblProductosAux)
+                    If cmbTagScaffold.Text <> "" And tblScaffoldTags.Rows.Count() > 0 Then
+                        Dim tagSelected = cmbTagScaffold.Text
+                        cmbTagScaffold.Items.Clear()
+                        For Each row As Data.DataRow In tblScaffoldTags.Rows()
+                            cmbTagScaffold.Items.Add(row.ItemArray(0))
+                        Next
+                        cmbTagScaffold.SelectedItem = cmbTagScaffold.Items(cmbTagScaffold.FindString(tagSelected))
+                        cmbTagScaffold.Text = tagSelected
+                    End If
                     MsgBox("Successfull")
                 End If
             Case tblLeg.Name
                 If mtdScaffold.saveScaffoldTraking(sc) Then
                     cargarDatosScaffold(sc.tag)
+                    mtdScaffold.llenarProduct(tblProduct)
                     mtdScaffold.llenarProduct(tblProductosAux)
+                    If cmbTagScaffold.Text <> "" And tblScaffoldTags.Rows.Count() > 0 Then
+                        Dim tagSelected = cmbTagScaffold.Text
+                        cmbTagScaffold.Items.Clear()
+                        For Each row As Data.DataRow In tblScaffoldTags.Rows()
+                            cmbTagScaffold.Items.Add(row.ItemArray(0))
+                        Next
+                        cmbTagScaffold.SelectedItem = cmbTagScaffold.Items(cmbTagScaffold.FindString(tagSelected))
+                        cmbTagScaffold.Text = tagSelected
+                    End If
                     MsgBox("Successfull")
                 End If
             Case "Mod"
                 If mtdScaffold.saveModification(md) Then
                     md = mtdScaffold.llenarModificationData(md.ModID, md.tag)
                     cargarDatosModification(md.ModID)
+                    mtdScaffold.llenarProduct(tblProduct)
                     mtdScaffold.llenarProduct(tblProductosAux)
                 End If
             Case tblModificationProductMS.Name
                 If mtdScaffold.saveModification(md) Then
                     md = mtdScaffold.llenarModificationData(md.ModID, md.tag)
                     cargarDatosModification(md.ModID)
+                    mtdScaffold.llenarProduct(tblProduct)
+                    mtdScaffold.llenarProduct(tblProductosAux)
+                End If
+            Case "Dis"
+                If mtdScaffold.saveDismantle(ds) Then
+                    cargarDatosDismantle(ds.tag)
+                    mtdScaffold.llenarProduct(tblProductosAux)
+                    If ds.tag = sc.tag Then
+                        mtdScaffold.llenarScaffold(sc.tag)
+                        cargarDatosScaffold(sc.tag)
+                    End If
+                    If ds.tag = md.tag Then
+                        md = mtdScaffold.llenarModificationData(md.ModID, md.tag)
+                        cargarDatosModification(md.ModID)
+                    End If
+                    mtdScaffold.llenarProduct(tblProduct)
                     mtdScaffold.llenarProduct(tblProductosAux)
                 End If
         End Select
@@ -359,6 +421,12 @@ Public Class scafoldTarking
                                 cargarDatosModification(md.ModID)
                             End If
                         Next
+                    End If
+                End If
+            Case "Dis"
+                If mtdScaffold.saveDismantle(ds) Then
+                    If cargarDatosDismantle(ds.tag) Then
+                        mtdScaffold.llenarProduct(tblProductosAux)
                     End If
                 End If
             Case "Estimating"
@@ -516,7 +584,59 @@ Public Class scafoldTarking
                     End If
                 End If
             Case "tag"
+                If DialogResult.Yes = MessageBox.Show("The Scaffold will be Deleted with all of records added (Modifications, Products, Dismantle,etc). Would you like to continue?", "Message", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) Then
+                    If mtdScaffold.deleteScaffold(sc) Then
+                        MessageBox.Show("Successful", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                        mtdScaffold.llenarScaffold(tblScaffoldTags)
+                        If tblScaffoldTags.Rows.Count > 0 Then
+                            mtdScaffold.llenarProduct(tblProduct)
+                            mtdScaffold.llenarProduct(tblProductosAux)
+                            mtdScaffold.llenarScaffold(tblScaffoldTags)
+                            If cmbTagScaffold.Text <> "" And tblScaffoldTags.Rows.Count() > 0 Then
+                                Dim tagSelected = cmbTagScaffold.Text
+                                cmbTagScaffold.Items.Clear()
+                                For Each row As Data.DataRow In tblScaffoldTags.Rows()
+                                    cmbTagScaffold.Items.Add(row.ItemArray(0))
+                                Next
+                                cmbTagScaffold.SelectedItem = cmbTagScaffold.Items(cmbTagScaffold.FindString(tagSelected))
+                                cmbTagScaffold.Text = tagSelected
+                            End If
+                            sc = mtdScaffold.llenarScaffold(tblScaffoldTags.Rows(0).ItemArray(0).ToString())
+                            cargarDatosScaffold(sc.tag)
+                        End If
+                    Else
+                        MessageBox.Show("Error, try to close the window.", "Message", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                        sc = mtdScaffold.llenarScaffold(tblScaffoldTags.Rows(0).ItemArray(0).ToString())
+                        cargarDatosScaffold(sc.tag)
+                    End If
+                End If
             Case tblProductosScaffold.Name
+                If DialogResult.Yes = MessageBox.Show("The Scaffold will be Deleted with all of records added (Modifications, Products, Dismantle,etc). Would you like to continue?", "Message", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) Then
+                    If mtdScaffold.deleteScaffold(sc) Then
+                        MessageBox.Show("Successful", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                        mtdScaffold.llenarProduct(tblProduct)
+                        mtdScaffold.llenarProduct(tblProductosAux)
+                        mtdScaffold.llenarScaffold(tblScaffoldTags)
+                        If cmbTagScaffold.Text <> "" And tblScaffoldTags.Rows.Count() > 0 Then
+                            Dim tagSelected = cmbTagScaffold.Text
+                            cmbTagScaffold.Items.Clear()
+                            For Each row As Data.DataRow In tblScaffoldTags.Rows()
+                                cmbTagScaffold.Items.Add(row.ItemArray(0))
+                            Next
+                            cmbTagScaffold.SelectedItem = cmbTagScaffold.Items(cmbTagScaffold.FindString(tagSelected))
+                            cmbTagScaffold.Text = tagSelected
+                        End If
+                        mtdScaffold.llenarScaffold(tblScaffoldTags)
+                        If tblScaffoldTags.Rows.Count > 0 Then
+                            sc = mtdScaffold.llenarScaffold(tblScaffoldTags.Rows(0).ItemArray(0).ToString())
+                            cargarDatosScaffold(sc.tag)
+                        End If
+                    Else
+                        MessageBox.Show("Error, try to close the window.", "Message", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                        sc = mtdScaffold.llenarScaffold(tblScaffoldTags.Rows(0).ItemArray(0).ToString())
+                        cargarDatosScaffold(sc.tag)
+                    End If
+                End If
             Case "Mod"
                 If DialogResult.Yes = MessageBox.Show("The 'Modification Records' will be deleted. Would you like to continue?", "Important ", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) Then
                     If (mtdScaffold.deleteModificaion(md.tag, md.ModID)) Then
@@ -531,6 +651,8 @@ Public Class scafoldTarking
                                 cargarDatosModification("")
                             End If
                         End If
+                        mtdScaffold.llenarProduct(tblProduct)
+                        mtdScaffold.llenarProduct(tblProductosAux)
                     End If
                 End If
             Case tblModificationProductMS.Name
@@ -548,8 +670,9 @@ Public Class scafoldTarking
                                 cargarDatosModification("")
                             End If
                         End If
+                        mtdScaffold.llenarProduct(tblProduct)
+                        mtdScaffold.llenarProduct(tblProductosAux)
                     End If
-
                 End If
         End Select
     End Sub
@@ -1225,7 +1348,6 @@ Public Class scafoldTarking
                         tblProduct.CurrentRow.Cells("Product Name").Value = row.Cells("Product Name").Value
                         tblProduct.CurrentRow.Cells("UM").Value = row.Cells("UM").Value
                         tblProduct.CurrentRow.Cells("Class").Value = row.Cells("Class").Value
-                        tblProduct.CurrentRow.Cells("Cost").Value = row.Cells("Cost").Value
                         tblProduct.CurrentRow.Cells("Weigth").Value = row.Cells("Weigth").Value
                         tblProduct.CurrentRow.Cells("Weigth Measure").Value = row.Cells("Weigth Measure").Value
                         tblProduct.CurrentRow.Cells("$UM").Value = row.Cells("$UM").Value
@@ -1234,6 +1356,8 @@ Public Class scafoldTarking
                         tblProduct.CurrentRow.Cells("Monthly Rental Rate").Value = row.Cells("Monthly Rental Rate").Value
                         tblProduct.CurrentRow.Cells("QTY").Value = row.Cells("QTY").Value
                         tblProduct.CurrentRow.Cells("QID").Value = row.Cells("QID").Value
+                        tblProduct.CurrentRow.Cells("PLF").Value = row.Cells("PLF").Value
+                        tblProduct.CurrentRow.Cells("PSQF").Value = row.Cells("PSQF").Value
                         Exit For
                     End If
                 Next
@@ -2044,6 +2168,60 @@ Public Class scafoldTarking
         End Try
     End Sub
 
+    Private Function ActivarCamposSC(ByVal status As Boolean) As Boolean
+        Try
+            txtTag.ReadOnly = status
+            cmbJobCAT.Enabled = If(status, False, True)
+            txtCAT.ReadOnly = status
+
+            sprDays.ReadOnly = status
+
+            cmbAreaID.Enabled = If(status, False, True)
+            txtArea.ReadOnly = status
+            cmbAreaID.Enabled = If(status, False, True)
+            txtArea.ReadOnly = status
+
+            cmbWONum.Enabled = If(status, False, True)
+            txtWOInfo.ReadOnly = status
+
+            cmbSubJob.Enabled = If(status, False, True)
+
+            dtpBldDate.Enabled = If(status, False, True)
+            txtLocation.ReadOnly = status
+            txtPurpose.ReadOnly = status
+            txtNotesAndComments.ReadOnly = status
+            cmbContactScaffold.Enabled = If(status, False, True)
+
+            cmbErectorScaffold.Enabled = If(status, False, True)
+
+            cmbForemanScaffold.Enabled = If(status, False, True)
+
+            dtpReqCompScaffold.Enabled = If(status, False, True)
+            sprDecks.ReadOnly = status
+
+            tblScaffoldInformation.ReadOnly = status
+
+            tblActivityHours.ReadOnly = status
+
+            chbCSAP.Enabled = If(status, False, True)
+            chbRolling.Enabled = If(status, False, True)
+            chbInternal.Enabled = If(status, False, True)
+            chbHanging.Enabled = If(status, False, True)
+
+
+            chbTruck.Enabled = If(status, False, True)
+            chbForklift.Enabled = If(status, False, True)
+            chbTrailer.Enabled = If(status, False, True)
+            chbCrane.Enabled = If(status, False, True)
+            chbRope.Enabled = If(status, False, True)
+            chbPassed.Enabled = If(status, False, True)
+            chbElevator.Enabled = If(status, False, True)
+            tblProductosScaffold.ReadOnly = status
+            Return True
+        Catch ex As Exception
+            Return False
+        End Try
+    End Function
     Private Function cargarDatosScaffold(ByVal tag As String) As Boolean
         Try
             loadingData = True
@@ -2170,6 +2348,7 @@ Public Class scafoldTarking
             Dim plf = ValidarFilasLeg(tblLeg, tblProductosScaffold, True)
             lblPLF.Text = plf(0)
             lblPSQF.Text = plf(1)
+            ActivarCamposSC(sc.status)
             loadingData = False
             Return True
         Catch ex As Exception
@@ -2274,6 +2453,38 @@ Public Class scafoldTarking
         End If
     End Sub
 
+    Private Function activarCamposModificacion(ByVal status As Boolean) As Boolean
+        Try
+            txtModificationID.ReadOnly = status
+            cmbTagScaffold.Enabled = status
+
+            cmbReqCompany.Enabled = status
+            cmbRequestBY.Enabled = status
+            cmbForemanModification.Enabled = status
+            cmbErectorModification.Enabled = status
+            txtCommentsModification.ReadOnly = status
+            dtpModificationDate.Enabled = status
+
+            tblScaffoldInformationSM.ReadOnly = status
+
+            tblActivityHoursSM.ReadOnly = status
+
+            chbTruckMS.Enabled = status
+            chbForkliftM.Enabled = status
+            chbTrailerM.Enabled = status
+            chbCraneM.Enabled = status
+            chbRopeM.Enabled = status
+            chbPassedM.Enabled = status
+            chbElevtrM.Enabled = status
+
+            tblScaffoldTotalProductMS.ReadOnly = status
+
+            tblModificationProductMS.ReadOnly = status
+            Return True
+        Catch ex As Exception
+            Return False
+        End Try
+    End Function
     Private Function cargarDatosModification(ByVal modID As String) As Boolean
         Try
             If md.ModID <> modID Then
@@ -2286,6 +2497,9 @@ Public Class scafoldTarking
             cmbTagScaffold.Text = md.tag
             If md.tag = "" Then
                 txtWOModification.Text = ""
+                cmbTagScaffold.Enabled = True
+            Else
+                cmbTagScaffold.Enabled = False
             End If
             cmbReqCompany.SelectedItem = md.reqCompany
             cmbReqCompany.Text = md.reqCompany
@@ -2367,7 +2581,7 @@ Public Class scafoldTarking
             For Each row As DataRow In md.productsAdds.Rows()
                 tblModificationProductMS.Rows.Add(row.ItemArray(0), row.ItemArray(1), row.ItemArray(2), row.ItemArray(3), row.ItemArray(4))
             Next
-
+            activarCamposModificacion(md.status)
             loadingDataModification = False
             Return True
         Catch ex As Exception
@@ -2376,13 +2590,20 @@ Public Class scafoldTarking
     End Function
 
     Private Sub cmbTagScaffold_SelectedValueChanged(sender As Object, e As EventArgs) Handles cmbTagScaffold.SelectedValueChanged
-        For Each row As DataRow In tblScaffoldTags.Rows()
-            If cmbTagScaffold.SelectedItem = row.ItemArray(0) Then
-                txtWOModification.Text = row.ItemArray(5)
-                md.tag = cmbTagScaffold.SelectedItem
-            End If
-        Next
-        selectedTable = "Mod"
+        If loadingDataModification = False Then
+            For Each row As DataRow In tblScaffoldTags.Rows()
+                If cmbTagScaffold.SelectedItem = row.ItemArray(0) Then
+                    txtWOModification.Text = row.ItemArray(5)
+                    md.tag = cmbTagScaffold.SelectedItem
+                    md.llenarTablaProductTag(md.tag)
+                    tblScaffoldTotalProductMS.Rows.Clear()
+                    For Each row1 As DataRow In md.productsSC.Rows()
+                        tblScaffoldTotalProductMS.Rows.Add(row1.ItemArray(2), row1.ItemArray(1))
+                    Next
+                End If
+            Next
+            selectedTable = "Mod"
+        End If
     End Sub
 
     Private Sub txtModificationID_TextChanged(sender As Object, e As EventArgs) Handles txtModificationID.TextChanged
@@ -2570,6 +2791,7 @@ Public Class scafoldTarking
         If e.ColumnIndex = 2 Then
             Dim qty = If(tblModificationProductMS.Rows(e.RowIndex).Cells("clmQTYM").Value IsNot Nothing, tblModificationProductMS.Rows(e.RowIndex).Cells("clmQTYM").Value, 0.0)
             Dim stock = If(tblModificationProductMS.Rows(e.RowIndex).Cells("clmStockProductM").Value IsNot Nothing, tblModificationProductMS.Rows(e.RowIndex).Cells("clmStockProductM").Value, "")
+            Dim newMP = If(tblModificationProductMS.Rows(e.RowIndex).Cells("idProductM").Value IsNot Nothing Or tblModificationProductMS.Rows(e.RowIndex).Cells("idProductM").Value <> "", False, True)
             If stock <> "" Then
                 Dim lastQty = ""
                 Dim array() = tblModificationProductMS.Rows(e.RowIndex).Cells(1).Value.ToString.Split(" ")
@@ -2597,13 +2819,25 @@ Public Class scafoldTarking
                                 Exit For
                             End If
                         Next
-                        If isInserted Then 'tiene que se menor al valor ya insertado
-                            If MaxValueDelete <= (CDbl(qty) * -1) Then
-                                MessageBox.Show("It probably exceeds the quantity on the Scaffold Product List.", "Important", MessageBoxButtons.OK, MessageBoxIcon.Information)
-                                tblModificationProductMS.Rows(e.RowIndex).Cells("clmQTYM").Value = lastQty
+                        If isInserted Then 'tiene que se menor al valor total del product total scaffold
+
+                            If newMP Then
+                                If MaxValueDelete < (CDbl(qty) * -1) Then
+                                    MessageBox.Show("It probably exceeds the quantity on the Scaffold Product List.", "Important", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                                    tblModificationProductMS.Rows(e.RowIndex).Cells("clmQTYM").Value = lastQty
+                                End If
+                            Else
+                                If (MaxValueDelete + If(CDbl(lastQty) < 0, CDbl(lastQty) * -1, CDbl(lastQty))) < (CDbl(qty) * -1) Then
+                                    MessageBox.Show("It probably exceeds the quantity on the Scaffold Product List.", "Important", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                                    tblModificationProductMS.Rows(e.RowIndex).Cells("clmQTYM").Value = lastQty
+                                End If
                             End If
+                            'If (MaxValueDelete + If(CDbl(lastQty) < 0, CDbl(lastQty) * -1, CDbl(lastQty))) <= (CDbl(qty) * -1) Then
+                            '    MessageBox.Show("It probably exceeds the quantity on the Scaffold Product List.", "Important", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                            '    tblModificationProductMS.Rows(e.RowIndex).Cells("clmQTYM").Value = lastQty
+                            'End If
                         Else 'No puede ser negativo
-                            MessageBox.Show("The product is not on the Scaffold Product List.", "Important", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                            MessageBox.Show("The quantity it can be negatitive.", "Important", MessageBoxButtons.OK, MessageBoxIcon.Information)
                             tblModificationProductMS.Rows(e.RowIndex).Cells("clmQTYM").Value = lastQty
                         End If
                     End If
@@ -2725,4 +2959,253 @@ Public Class scafoldTarking
         End If
     End Sub
 
+    Private Function cargarDatosDismantle(ByVal tag As String) As Boolean
+        loadingDataDismentle = True
+        If tag = "" Then
+            clearDismantle()
+            loadingDataDismentle = False
+            Return True
+        Else
+            ds = mtdScaffold.llenarDismantleData(tag)
+            Dim scAux = mtdScaffold.llenarScaffold(tag)
+            ds.scStartDate = scAux.dateBild
+
+            txtTagDismantle.Text = ds.tag
+            If ds.wo = "" Then
+                For Each rowTag As DataRow In tblScaffoldTags.Rows
+                    If ds.tag = rowTag.ItemArray(0) Then
+                        ds.wo = rowTag.ItemArray(5)
+                        txtWODismantle.Text = rowTag.ItemArray(5)
+                    End If
+                Next
+            Else
+                txtWODismantle.Text = ds.wo
+            End If
+            txtCommentDismantle.Text = ds.comments
+            mtdScaffold.llenarComboRequestBy(cmbRequestByDismantle)
+            If cmbRequestByDismantle.FindString(ds.requestBy) > -1 Then
+                cmbRequestByDismantle.Text = ds.requestBy
+                cmbRequestByDismantle.SelectedItem = cmbRequestByDismantle.Items(cmbRequestByDismantle.FindString(ds.requestBy))
+            Else
+                cmbRequestByDismantle.Text = ds.requestBy
+            End If
+
+            mtdScaffold.llenarComboReqCompany(cmbReqCompanyDismantle)
+            If cmbReqCompanyDismantle.FindString(ds.reqCompany) > -1 Then
+                cmbReqCompanyDismantle.Text = ds.reqCompany
+                cmbReqCompanyDismantle.SelectedItem = cmbReqCompanyDismantle.Items(cmbReqCompanyDismantle.FindString(ds.reqCompany))
+            Else
+                cmbReqCompanyDismantle.Text = ds.reqCompany
+            End If
+
+            mtdScaffold.llenarEmpleadosCombo(cmbForemanDismantle, tablaEmpleados)
+            If cmbForemanDismantle.FindString(ds.foreman) > -1 Then
+                cmbForemanDismantle.Text = ds.foreman
+                cmbForemanDismantle.SelectedItem = cmbForemanDismantle.Items(cmbForemanDismantle.FindString(ds.foreman))
+                If ds.foreman = "" Then
+                    cmbForemanDismantle.SelectedItem = Nothing
+                End If
+            Else
+                cmbForemanDismantle.Text = ds.foreman
+                If ds.foreman = "" Then
+                    cmbForemanDismantle.SelectedValue = Nothing
+                End If
+            End If
+
+            dtpRentStop.Value = ds.stopDismantle
+            dtpDismantleDate.Value = ds.dismantleDate
+            If ds.stopDismantle <> Nothing Then
+                Dim diferencia As Long = DateAndTime.DateDiff(DateInterval.Day, ds.scStartDate, ds.stopDismantle)
+                txtDaysActive.Text = CStr(diferencia)
+            End If
+
+            chbTruckDS.Checked = ds.materialHandeling(0)
+            chbForkliftDS.Checked = ds.materialHandeling(1)
+            chbTrailerDS.Checked = ds.materialHandeling(2)
+            chbCraneDS.Checked = ds.materialHandeling(3)
+            chbRopeDS.Checked = ds.materialHandeling(4)
+            chbPassedDS.Checked = ds.materialHandeling(5)
+            chbElevatorDS.Checked = ds.materialHandeling(6)
+
+            tblActivityHoursDismantle.Rows(0).SetValues(ds.ahrIdActivityHours, ds.ahrDismantle, ds.ahrMaterial, ds.ahrTravel, ds.ahrWeather, ds.ahrAlarm, ds.ahrSafety, ds.ahrStdBy, ds.ahrOther, ds.ahrTotal)
+            tblTotalScaffoldProductDS.Rows.Clear()
+            For Each row As DataRow In ds.prodcutsSC.Rows
+                tblTotalScaffoldProductDS.Rows.Add(row("idProduct"), row("QTY"))
+            Next
+            tblDismantleProduct.Rows.Clear()
+            For Each row As DataRow In ds.productsDS.Rows()
+                tblDismantleProduct.Rows.Add(row("idProduct"), row("QTY"), row("Name"))
+            Next
+            loadingDataDismentle = False
+        End If
+        Return True
+    End Function
+
+    Private Sub clearDismantle()
+        txtTag.Text = ""
+        txtWODismantle.Text = ""
+        txtCommentDismantle.Text = ""
+        cmbRequestByDismantle.Text = ""
+        cmbReqCompanyDismantle.SelectedValue = Nothing
+        cmbReqCompanyDismantle.Text = ""
+        cmbReqCompanyDismantle.SelectedValue = Nothing
+        cmbForemanDismantle.Text = ""
+        cmbForemanDismantle.SelectedValue = Nothing
+        dtpRentStop.Value = System.DateTime.Today
+        dtpDismantleDate.Value = System.DateTime.Today
+        chbCraneDS.Checked = False
+        chbElevatorDS.Checked = False
+        chbForkliftDS.Checked = False
+        chbPassedDS.Checked = False
+        chbRopeDS.Checked = False
+        chbTrailerDS.Checked = False
+        chbTruckDS.Checked = False
+        tblActivityHoursDismantle.Rows(0).SetValues("", "", "", "", "", "", "", "", "")
+        tblTotalScaffoldProductDS.Rows.Clear()
+        tblDismantleProduct.Rows.Clear()
+    End Sub
+
+    Private Sub tblActivityHoursDismantle_CellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles tblActivityHoursDismantle.CellEndEdit
+        tblScaffoldTags.Rows.Clear()
+        Try
+            If e.ColumnIndex <> tblActivityHoursDismantle.Columns("clmTotalHD").Index Then
+                If Not (tblActivityHoursDismantle.Rows(0).Cells(e.ColumnIndex).Value <> "" And soloNumero(tblActivityHoursDismantle.Rows(0).Cells(e.ColumnIndex).Value.ToString())) Then
+                    tblActivityHoursDismantle.Rows(0).Cells(e.ColumnIndex).Value = "0"
+                End If
+                Dim totalHours As Double = 0
+                For Each cell As DataGridViewCell In tblActivityHoursDismantle.Rows(0).Cells()
+                    If cell.Value.ToString() <> "" And cell.ColumnIndex < 8 And cell.ColumnIndex > 0 Then
+                        totalHours = totalHours + CDbl(cell.Value.ToString())
+                    End If
+                Next
+                tblActivityHoursDismantle.Rows(0).Cells("clmTotalHD").Value = CStr(totalHours)
+                ds.ahrDismantle = tblActivityHoursDismantle.Rows(0).Cells("clmDismentleD").Value()
+                ds.ahrMaterial = tblActivityHoursDismantle.Rows(0).Cells("clmMablD").Value()
+                ds.ahrTravel = tblActivityHoursDismantle.Rows(0).Cells("clmTravlD").Value()
+                ds.ahrWeather = tblActivityHoursDismantle.Rows(0).Cells("clmWthrD").Value()
+                ds.ahrAlarm = tblActivityHoursDismantle.Rows(0).Cells("clmAlarmD").Value()
+                ds.ahrSafety = tblActivityHoursDismantle.Rows(0).Cells("clmSaftyD").Value()
+                ds.ahrStdBy = tblActivityHoursDismantle.Rows(0).Cells("clmStdByD").Value()
+                ds.ahrOther = tblActivityHoursDismantle.Rows(0).Cells("clmOthHD").Value()
+                ds.ahrTotal = tblActivityHoursDismantle.Rows(0).Cells("clmTotalHD").Value()
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message)
+        End Try
+    End Sub
+
+    Private Sub btnNextDismantle_Click(sender As Object, e As EventArgs) Handles btnNextDismantle.Click
+        tblScaffoldTags.Rows.Clear()
+        If mtdScaffold.llenarScaffold(tblScaffoldTags) Then
+            If ds.tag = "" Then
+                cargarDatosDismantle(tblScaffoldTags.Rows(0).ItemArray(0))
+            Else
+                Dim cont As Integer = 1
+                For Each rowTag As DataRow In tblScaffoldTags.Rows
+                    If ds.tag = rowTag.ItemArray(0) Then
+                        If cont = tblScaffoldTags.Rows.Count() Then 'es la ultima fila 
+                            cargarDatosDismantle(tblScaffoldTags.Rows(0).ItemArray(0))
+                            Exit For
+                        Else 'no es la ultima fila
+                            cargarDatosDismantle(tblScaffoldTags.Rows(cont).ItemArray(0))
+                            Exit For
+                        End If
+                    End If
+                    cont += 1
+                Next
+            End If
+        End If
+    End Sub
+
+    Private Sub btnBackDS_Click(sender As Object, e As EventArgs) Handles btnBackDS.Click
+        tblScaffoldTags.Rows.Clear()
+        If mtdScaffold.llenarScaffold(tblScaffoldTags) Then
+            If ds.tag = "" Then
+                cargarDatosDismantle(tblScaffoldTags.Rows(0).ItemArray(0))
+            Else
+                Dim cont As Integer = 1
+                For Each rowTag As DataRow In tblScaffoldTags.Rows
+                    If ds.tag = rowTag.ItemArray(0) Then
+                        If cont = 1 Then 'es la primerfila
+                            Dim ultimafila = (tblScaffoldTags.Rows.Count - 1)
+                            cargarDatosDismantle(tblScaffoldTags.Rows(ultimafila).ItemArray(0))
+                            Exit For
+                        Else 'no es la ultima fila
+                            cargarDatosDismantle(tblScaffoldTags.Rows(cont - 2).ItemArray(0))
+                            Exit For
+                        End If
+                    End If
+                    cont += 1
+                Next
+            End If
+        End If
+    End Sub
+
+    Private Sub txtCommentDismantle_TextChanged(sender As Object, e As EventArgs) Handles txtCommentDismantle.TextChanged
+        If Not loadingDataDismentle Then
+            ds.comments = txtCommentDismantle.Text
+        End If
+    End Sub
+
+    Private Sub cmbReqCompanyDismantle_TextChanged(sender As Object, e As EventArgs) Handles cmbReqCompanyDismantle.TextChanged
+        If Not loadingDataDismentle Then
+            ds.reqCompany = cmbReqCompanyDismantle.Text
+        End If
+    End Sub
+
+    Private Sub cmbForemanDismantle_TextChanged(sender As Object, e As EventArgs) Handles cmbForemanDismantle.TextChanged, cmbForemanDismantle.SelectedValueChanged
+        If Not loadingDataDismentle Then
+            ds.foreman = cmbForemanDismantle.Text
+        Else
+            cmbForemanDismantle.Text = ""
+        End If
+    End Sub
+
+    Private Sub cmbRequestByDismantle_TextChanged(sender As Object, e As EventArgs) Handles cmbRequestByDismantle.TextChanged
+        If Not loadingDataDismentle Then
+            ds.requestBy = cmbRequestByDismantle.Text
+        End If
+    End Sub
+
+    Private Sub dtpRentStop_ValueChanged(sender As Object, e As EventArgs) Handles dtpRentStop.ValueChanged
+        If loadingDataDismentle = False Then
+            If ds.scStartDate <> Nothing Then
+                If ds.scStartDate <= dtpRentStop.Value Then
+                    Dim diferencia As Long = DateAndTime.DateDiff(DateInterval.Day, ds.scStartDate, dtpRentStop.Value)
+                    txtDaysActive.Text = CStr(If(diferencia = 0, 1, diferencia))
+                    ds.stopDismantle = dtpRentStop.Value
+                    If ds.stopDismantle > ds.dismantleDate Then
+                        dtpDismantleDate.Value = ds.stopDismantle
+                        ds.dismantleDate = ds.stopDismantle
+                    End If
+                Else
+                    MessageBox.Show("The selected Date is before than the Scaffold Start Date.  " + vbCrLf + "Start Date: " + validaFechaParaSQl(ds.scStartDate) + ".", "Important", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                    dtpRentStop.Value = ds.stopDismantle
+                End If
+            End If
+        End If
+    End Sub
+
+    Private Sub dtpDismantleDate_ValueChanged(sender As Object, e As EventArgs) Handles dtpDismantleDate.ValueChanged
+        If loadingDataDismentle = False Then
+            If ds.stopDismantle <= dtpDismantleDate.Value Then
+                ds.dismantleDate = dtpDismantleDate.Value
+            Else
+                MessageBox.Show("You cannot exceed the Dismantling date.", "Important", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                dtpDismantleDate.Value = ds.dismantleDate
+            End If
+        End If
+    End Sub
+
+    Private Sub chbTruckDS_CheckedChanged(sender As Object, e As EventArgs) Handles chbTruckDS.CheckedChanged, chbTrailerDS.CheckedChanged, chbRopeDS.CheckedChanged, chbPassedDS.CheckedChanged, chbForkliftDS.CheckedChanged, chbElevatorDS.CheckedChanged, chbCraneDS.CheckedChanged
+        If loadingDataDismentle = False Then
+            ds.materialHandeling(0) = chbTruckDS.Checked()
+            ds.materialHandeling(1) = chbForkliftDS.Checked()
+            ds.materialHandeling(2) = chbTrailerDS.Checked()
+            ds.materialHandeling(3) = chbCraneDS.Checked()
+            ds.materialHandeling(4) = chbRopeDS.Checked()
+            ds.materialHandeling(5) = chbPassedDS.Checked()
+            ds.materialHandeling(6) = chbElevatorDS.Checked()
+        End If
+    End Sub
 End Class

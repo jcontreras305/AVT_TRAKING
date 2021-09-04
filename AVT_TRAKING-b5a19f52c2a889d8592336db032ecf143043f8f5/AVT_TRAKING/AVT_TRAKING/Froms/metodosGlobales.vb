@@ -133,7 +133,7 @@ Module metodosGlobales
                         Return fecha1
                     End Try
                 Else
-                    Dim fecha1 As String = array(1) + "/" + array(0) + "/" + array(2)
+                    Dim fecha1 As String = array(0) + "/" + array(1) + "/" + array(2)
                     Try
                         Return CDate(fecha1)
                     Catch ex As Exception

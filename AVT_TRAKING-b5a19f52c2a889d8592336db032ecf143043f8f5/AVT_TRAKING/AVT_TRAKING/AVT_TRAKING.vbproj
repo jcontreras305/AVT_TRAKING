@@ -104,6 +104,7 @@
     <Compile Include="Froms\All_Tables.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Froms\dismantle.vb" />
     <Compile Include="Froms\FindEmployee.Designer.vb">
       <DependentUpon>FindEmployee.vb</DependentUpon>
     </Compile>

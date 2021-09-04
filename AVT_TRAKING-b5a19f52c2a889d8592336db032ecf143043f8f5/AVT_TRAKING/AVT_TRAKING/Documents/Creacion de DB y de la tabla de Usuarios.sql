@@ -111,7 +111,8 @@ create table activityHours(
 	stdBy float,
 	other float,
 	tag varchar(20),
-	idModification varchar(20)
+	idModification varchar(20),
+	idDismantle as varchar(36)
 )
 GO
 
@@ -194,6 +195,22 @@ create table detalleMaterial(
 	idMaterial varchar(36),
 	idVendor varchar(36),
 	partNum varchar(15)
+)
+GO
+
+--##########################################################################################
+--##################  TABLA DE DISMANTLE ###################################################
+--##########################################################################################
+
+create table dismantle(
+	idDismantle varchar(36) primary key not null,
+	tag varchar(20) not null,
+	comments text ,
+	reqCompany varchar(30),
+	requestBy varchar(50),
+	rentStopDate date,
+	dismantleDate date,
+	foreman varchar(30)
 )
 GO
 
@@ -362,7 +379,8 @@ create table materialHandeling(
 	passed char(1),
 	elevator char(1),
 	tag varchar(20),
-	idModification varchar(20)
+	idModification varchar(20),
+
 )
 GO
 
@@ -489,6 +507,19 @@ create table productComing(
 	ticketNum varchar(15),
 	idProduct int,
 	quantity float
+)
+GO
+
+--##########################################################################################
+--##################  TABLA DE PRODUCT DIMANTLE ############################################
+--##########################################################################################
+
+create table productDismantle(
+	idPDS varchar(36) primary key,
+	quantity float,
+	idProduct int,
+	tag varchar(20),
+	idDismantle varchar(36)
 )
 GO
 
@@ -715,6 +746,10 @@ ALTER TABLE activityHours WITH CHECK ADD CONSTRAINT fk_idModification_activityHo
 FOREIGN KEY (idModification) REFERENCES modification(idModification)
 GO
 
+ALTER TABLE activityHours WITH CHECK ADD CONSTRAINT fk_idDismantle_ActivityHours 
+FOREIGN KEY(idDismantle) REFERENCES dismantle(idDismantle)
+GO
+
 --##########################################################################################
 --##################  FOREIG KEYS COMPANY ##################################################
 --##########################################################################################
@@ -749,6 +784,14 @@ GO
 
 ALTER TABLE [dbo].[detalleMaterial]  WITH CHECK ADD  CONSTRAINT [fk_idVendor_Dm] FOREIGN KEY([idVendor])
 REFERENCES [dbo].[vendor] ([idVendor])
+GO
+
+--##########################################################################################
+--##################  FOREIG KEYS DISMANTLE ################################################
+--##########################################################################################
+
+ALTER TABLE dismantle WITH CHECK ADD CONSTRAINT fk_tag_dismantle
+FOREIGN KEY (tag) REFERENCES scaffoldTraking (tag)	
 GO
 
 --##########################################################################################
@@ -842,6 +885,10 @@ ALTER TABLE materialHandeling WITH CHECK ADD CONSTRAINT fk_modification_material
 FOREIGN KEY (idModification) REFERENCES modification(idModification)
 GO
 
+ALTER TABLE materialHandeling WITH CHECK ADD CONSTRAINT fk_idDismantle_materialHandeling 
+FOREIGN KEY (idDismantle) REFERENCES dismantle(idDismantle)
+GO
+
 --##########################################################################################
 --##################  FOREIG KEYS MATERIAL OREDER ##########################################
 --##########################################################################################
@@ -900,6 +947,22 @@ GO
 
 ALTER TABLE productComing WITH CHECK ADD CONSTRAINT fk_idProduct_inComing
 FOREIGN KEY (idProduct) REFERENCES product(idProduct)
+GO
+
+--##########################################################################################
+--##################  FOREIG KEYS PRODUCT COMING ###########################################
+--##########################################################################################
+
+ALTER TABLE productDismantle WITH CHECK ADD CONSTRAINT fk_idDismantle_productDismantle 
+FOREIGN KEY(idDismantle) REFERENCES dismantle(idDismantle)
+GO
+
+ALTER TABLE productDismantle WITH CHECK ADD CONSTRAINT fk_idPorduct_productDismantle 
+FOREIGN KEY(idProduct)REFERENCES product(idProduct)
+GO
+
+ALTER TABLE productDismantle WITH CHECK ADD CONSTRAINT fk_tag_productDismantle 
+FOREIGN KEY(tag) REFERENCES scaffoldTraking(tag)
 GO
 
 --##########################################################################################
@@ -1540,12 +1603,119 @@ end
 GO
 
 
-
-----En caso de que salga algun error al ejecutarlo, descomentar el codigo sigiente 
-----y revisar que no este creada la base de dato o algun elemento
+create proc sp_DeleteModification
+@tag varchar(20),
+@modID varchar(20),
+@msg varchar(120) output 
+as
+declare @error as int = 0
+declare @flag as int
+declare @idProduct as int
+declare @qty as float
+begin 
+	if (select COUNT(*) from modification where idModification=@modID and tag = @tag) >0 
+	begin 
+		begin tran	
+			begin try
+				set	@msg = CONCAT('Error trying to delete Activity Hours from Modification ',@modID)
+				delete from activityHours where tag = @tag and idModification = @modID
+				set	@msg = CONCAT('Error trying to delete Material Handeling from Modification ',@modID)
+				delete from materialHandeling where tag = @tag and idModification = @modID
+				set	@msg = CONCAT('Error trying to delete Scaffold Information from Modification ',@modID)
+				delete from scaffoldInformation where tag = @tag and idModification=@modID
+				set @flag = (select COUNT(*) from productModification where tag = @tag and idModification = @modID)
+				while (@flag > 0)
+				begin
+					select  @qty = quantity ,@idProduct = idProduct from (select top 1  quantity,idProduct from productModification where tag = '9999' and idModification = @modID) as t1
+					set	@msg = CONCAT('Error trying to delete Product Modification Record from Modification: ', @modID,', with the idProduct: ',CONVERT(varchar(12), @idProduct))
+					update product set quantity = quantity + @qty where idProduct = @idProduct
+					update productTotalScaffold set quantity = quantity + IIF(@qty>0,@qty*-1,@qty*-1) where idProduct = @idProduct and tag = @tag
+					delete from productModification where idProduct = @idProduct and tag = @tag and idModification = @modID
+					delete from productTotalScaffold where quantity = 0 and tag = @tag
+					select @flag = COUNT(*) from productModification where tag = @tag and idModification = @modID
+				end
+				delete from modification where idModification = @modID and tag = @tag	
+				set @msg = 'Successful'	 
+			end try
+			begin catch
+				set @error = 1
+				goto solveProblem
+			end catch
+		commit tran 
+		return @msg	
+		solveProblem:
+		if @error <> 0
+		begin 
+			rollback tran 
+			return @msg
+		end
+	end
+end
+go
 
 ----use master
 ----drop database VRT_TRAKING
+
+--==============================================================================================================================
+--===== ESTE CODIGO ES PARA LA VENTANA DE DISMANTLE ============================================================================
+--==============================================================================================================================
+---- (CTRL+K) + (CTRL+C) Comentar 
+---- (CTRL+K) + (CTRL+U) Descomentar 
+
+
+--create table dismantle(
+--	idDismantle varchar(36) primary key not null,
+--	tag varchar(20) not null,
+--	comments text ,
+--	reqCompany varchar(30),
+--	requestBy varchar(50),
+--	rentStopDate date,
+--	dismantleDate date,
+--	foreman varchar(30)
+--)
+--go
+
+--ALTER TABLE dismantle WITH CHECK ADD CONSTRAINT fk_tag_dismantle
+--FOREIGN KEY (tag) REFERENCES scaffoldTraking (tag)	
+--GO
+
+--alter table activityHours 
+--add idDismantle  varchar(36)
+--go
+
+--alter table activityHours with check add constraint fk_idDismantle_ActivityHours foreign key(idDismantle)
+--references dismantle(idDismantle)
+--go
+
+--alter table materialHandeling
+--add idDismantle varchar(36)
+--go
+
+--alter table materialHandeling with check add constraint fk_idDismantle_materialHandeling foreign key(idDismantle)
+--references dismantle(idDismantle)
+--go
+
+--create table productDismantle(
+--	idPDS varchar(36) primary key,
+--	quantity float,
+--	idProduct int,
+--	tag varchar(20),
+--	idDismantle varchar(36)
+--)
+--go
+
+--alter table productDismantle with check add constraint fk_idDismantle_productDismantle foreign key(idDismantle)
+--references dismantle(idDismantle)
+--go
+
+--alter table productDismantle with check add constraint fk_idPorduct_productDismantle foreign key(idProduct)
+--references product(idProduct)
+--go
+
+--alter table productDismantle with check add constraint fk_tag_productDismantle foreign key(tag)
+--references scaffoldTraking(tag)
+--go
+
 
 
 --==============================================================================================================================
@@ -1555,10 +1725,57 @@ GO
 ---- (CTRL+K) + (CTRL+U) Descomentar 
 
 --==============================================================================================================================
---===== CODIGO PARA CORREGIR LA TABLA DE JOBCAT ================================================================================
+--===== CODIGO PARA PROCEDIMIENTO ALMACENADO PARA EL DELETE DE MODIFICACIONES ==================================================
 --==============================================================================================================================
 
-----ESTE COMANDO CAMBIA EL NOMBRE DE hours A days EN LA TABLA DE jobCat
---EXECUTE sp_rename 'jobCat.hours' , 'days', 'COLUMN';
+--create proc sp_DeleteModification
+--@tag varchar(20),
+--@modID varchar(20),
+--@msg varchar(120) output 
+--as
+--declare @error as int = 0
+--declare @flag as int
+--declare @idProduct as int
+--declare @qty as float
+--begin 
+--	if (select COUNT(*) from modification where idModification=@modID and tag = @tag) >0 
+--	begin 
+--		begin tran	
+--			begin try
+--				set	@msg = CONCAT('Error trying to delete Activity Hours from Modification ',@modID)
+--				delete from activityHours where tag = @tag and idModification = @modID
+--				set	@msg = CONCAT('Error trying to delete Material Handeling from Modification ',@modID)
+--				delete from materialHandeling where tag = @tag and idModification = @modID
+--				set	@msg = CONCAT('Error trying to delete Scaffold Information from Modification ',@modID)
+--				delete from scaffoldInformation where tag = @tag and idModification=@modID
+--				set @flag = (select COUNT(*) from productModification where tag = @tag and idModification = @modID)
+--				while (@flag > 0)
+--				begin
+--					select  @qty = quantity ,@idProduct = idProduct from (select top 1  quantity,idProduct from productModification where tag = '9999' and idModification = @modID) as t1
+--					set	@msg = CONCAT('Error trying to delete Product Modification Record from Modification: ', @modID,', with the idProduct: ',CONVERT(varchar(12), @idProduct))
+--					update product set quantity = quantity + @qty where idProduct = @idProduct
+--					update productTotalScaffold set quantity = quantity + IIF(@qty>0,@qty*-1,@qty*-1) where idProduct = @idProduct and tag = @tag
+--					delete from productModification where idProduct = @idProduct and tag = @tag and idModification = @modID
+--					delete from productTotalScaffold where quantity = 0 and tag = @tag
+--					select @flag = COUNT(*) from productModification where tag = @tag and idModification = @modID
+--				end
+--				delete from modification where idModification = @modID and tag = @tag	
+--				set @msg = 'Successful'	 
+--			end try
+--			begin catch
+--				set @error = 1
+--				goto solveProblem
+--			end catch
+--		commit tran 
+--		return @msg	
+--		solveProblem:
+--		if @error <> 0
+--		begin 
+--			rollback tran 
+--			return @msg
+--		end
+--	end
+--end
+--go
 
 
