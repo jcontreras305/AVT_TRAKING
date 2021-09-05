@@ -414,6 +414,29 @@ Public Class scaffold
             _sciType = sciType
         End Set
     End Property
+    Public Function llenarScaffildInfotion(ByVal tag As String) As Boolean
+        Try
+            conectar()
+            Dim cmd As New SqlCommand("select top 1 idScaffoldInformation,type,width,length,heigth,descks,ko,extraDeck from scaffoldInformation where idModification = 'Null' and tag = '" + tag + "'", conn)
+            Dim dr As SqlDataReader = cmd.ExecuteReader()
+            While dr.Read()
+                _idScaffoldinformation = dr("idScaffoldInformation")
+                _sciType = dr("type")
+                _sciWidth = dr("width")
+                _sciLength = dr("length")
+                _sciHeigth = dr("heigth")
+                _sciDecks = dr("descks")
+                _sciKo = dr("ko")
+                _sciExtraDeck = dr("extraDeck")
+                Exit While
+            End While
+            Return True
+        Catch ex As Exception
+            Return False
+        Finally
+            desconectar()
+        End Try
+    End Function
     Public Property ahrTotal() As Double
         Get
             If _ahrTotal = Nothing Then

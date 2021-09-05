@@ -112,7 +112,7 @@ create table activityHours(
 	other float,
 	tag varchar(20),
 	idModification varchar(20),
-	idDismantle as varchar(36)
+	idDismantle varchar(36)
 )
 GO
 
@@ -380,7 +380,7 @@ create table materialHandeling(
 	elevator char(1),
 	tag varchar(20),
 	idModification varchar(20),
-
+	idDismantle varchar(36)
 )
 GO
 

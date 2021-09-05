@@ -1340,30 +1340,36 @@ Public Class scafoldTarking
     End Sub
 
     Private Sub tblProduct_CellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles tblProduct.CellEndEdit
-        If e.ColumnIndex = 0 Then
-            Dim id = tblProduct.CurrentCell.Value.ToString()
-            If id <> "" Then
-                For Each row As DataGridViewRow In tblProduct.Rows()
-                    If id = If(row.Cells("ID").Value = Nothing, "", row.Cells("ID").Value.ToString()) And row.Index <> tblProduct.CurrentRow.Index Then
-                        tblProduct.CurrentRow.Cells("Product Name").Value = row.Cells("Product Name").Value
-                        tblProduct.CurrentRow.Cells("UM").Value = row.Cells("UM").Value
-                        tblProduct.CurrentRow.Cells("Class").Value = row.Cells("Class").Value
-                        tblProduct.CurrentRow.Cells("Weigth").Value = row.Cells("Weigth").Value
-                        tblProduct.CurrentRow.Cells("Weigth Measure").Value = row.Cells("Weigth Measure").Value
-                        tblProduct.CurrentRow.Cells("$UM").Value = row.Cells("$UM").Value
-                        tblProduct.CurrentRow.Cells("Daily Rental Rate").Value = row.Cells("Daily Rental Rate").Value
-                        tblProduct.CurrentRow.Cells("Weekly Rental Rate").Value = row.Cells("Weekly Rental Rate").Value
-                        tblProduct.CurrentRow.Cells("Monthly Rental Rate").Value = row.Cells("Monthly Rental Rate").Value
-                        tblProduct.CurrentRow.Cells("QTY").Value = row.Cells("QTY").Value
-                        tblProduct.CurrentRow.Cells("QID").Value = row.Cells("QID").Value
-                        tblProduct.CurrentRow.Cells("PLF").Value = row.Cells("PLF").Value
-                        tblProduct.CurrentRow.Cells("PSQF").Value = row.Cells("PSQF").Value
-                        Exit For
-                    End If
-                Next
+        If e.ColumnIndex <> 1 And e.ColumnIndex <> 2 And e.ColumnIndex <> 3 Then
+            If Not soloNumero(tblProduct.Rows(e.RowIndex).Cells(e.ColumnIndex).Value.ToString()) Then
+                MsgBox("Please use only Numbers.")
+                tblProduct.Rows(e.RowIndex).Cells(e.ColumnIndex).Value = ""
             End If
-
+            If e.ColumnIndex = 0 Then
+                Dim id = tblProduct.CurrentCell.Value.ToString()
+                If id <> "" Then
+                    For Each row As DataGridViewRow In tblProduct.Rows()
+                        If id = If(row.Cells("ID").Value = Nothing, "", row.Cells("ID").Value.ToString()) And row.Index <> tblProduct.CurrentRow.Index Then
+                            tblProduct.CurrentRow.Cells("Product Name").Value = row.Cells("Product Name").Value
+                            tblProduct.CurrentRow.Cells("UM").Value = row.Cells("UM").Value
+                            tblProduct.CurrentRow.Cells("Class").Value = row.Cells("Class").Value
+                            tblProduct.CurrentRow.Cells("Weigth").Value = row.Cells("Weigth").Value
+                            tblProduct.CurrentRow.Cells("Weigth Measure").Value = row.Cells("Weigth Measure").Value
+                            tblProduct.CurrentRow.Cells("$UM").Value = row.Cells("$UM").Value
+                            tblProduct.CurrentRow.Cells("Daily Rental Rate").Value = row.Cells("Daily Rental Rate").Value
+                            tblProduct.CurrentRow.Cells("Weekly Rental Rate").Value = row.Cells("Weekly Rental Rate").Value
+                            tblProduct.CurrentRow.Cells("Monthly Rental Rate").Value = row.Cells("Monthly Rental Rate").Value
+                            tblProduct.CurrentRow.Cells("QTY").Value = row.Cells("QTY").Value
+                            tblProduct.CurrentRow.Cells("QID").Value = row.Cells("QID").Value
+                            tblProduct.CurrentRow.Cells("PLF").Value = row.Cells("PLF").Value
+                            tblProduct.CurrentRow.Cells("PSQF").Value = row.Cells("PSQF").Value
+                            Exit For
+                        End If
+                    Next
+                End If
+            End If
         End If
+
     End Sub
 
     Private Sub txtCategory_TextChanged(sender As Object, e As EventArgs) Handles txtCategory.TextChanged
@@ -2456,26 +2462,26 @@ Public Class scafoldTarking
     Private Function activarCamposModificacion(ByVal status As Boolean) As Boolean
         Try
             txtModificationID.ReadOnly = status
-            cmbTagScaffold.Enabled = status
+            cmbTagScaffold.Enabled = If(status, False, True)
 
-            cmbReqCompany.Enabled = status
-            cmbRequestBY.Enabled = status
-            cmbForemanModification.Enabled = status
-            cmbErectorModification.Enabled = status
+            cmbReqCompany.Enabled = If(status, False, True)
+            cmbRequestBY.Enabled = If(status, False, True)
+            cmbForemanModification.Enabled = If(status, False, True)
+            cmbErectorModification.Enabled = If(status, False, True)
             txtCommentsModification.ReadOnly = status
-            dtpModificationDate.Enabled = status
+            dtpModificationDate.Enabled = If(status, False, True)
 
             tblScaffoldInformationSM.ReadOnly = status
 
             tblActivityHoursSM.ReadOnly = status
 
-            chbTruckMS.Enabled = status
-            chbForkliftM.Enabled = status
-            chbTrailerM.Enabled = status
-            chbCraneM.Enabled = status
-            chbRopeM.Enabled = status
-            chbPassedM.Enabled = status
-            chbElevtrM.Enabled = status
+            chbTruckMS.Enabled = If(status, False, True)
+            chbForkliftM.Enabled = If(status, False, True)
+            chbTrailerM.Enabled = If(status, False, True)
+            chbCraneM.Enabled = If(status, False, True)
+            chbRopeM.Enabled = If(status, False, True)
+            chbPassedM.Enabled = If(status, False, True)
+            chbElevtrM.Enabled = If(status, False, True)
 
             tblScaffoldTotalProductMS.ReadOnly = status
 
@@ -2500,6 +2506,12 @@ Public Class scafoldTarking
                 cmbTagScaffold.Enabled = True
             Else
                 cmbTagScaffold.Enabled = False
+                mtdScaffold.llenarScaffold(tblScaffoldTags)
+                For Each row As DataRow In tblScaffoldTags.Rows()
+                    If cmbTagScaffold.SelectedItem = row.ItemArray(0) Then
+                        txtWOModification.Text = row.ItemArray(5)
+                    End If
+                Next
             End If
             cmbReqCompany.SelectedItem = md.reqCompany
             cmbReqCompany.Text = md.reqCompany
@@ -2600,6 +2612,12 @@ Public Class scafoldTarking
                     For Each row1 As DataRow In md.productsSC.Rows()
                         tblScaffoldTotalProductMS.Rows.Add(row1.ItemArray(2), row1.ItemArray(1))
                     Next
+                    Dim scAux As New scaffold
+                    scAux = mtdScaffold.llenarScaffold(md.tag)
+                    tblScaffoldInformationSM.ReadOnly = False
+                    tblScaffoldInformationSM.Rows.Clear()
+                    tblScaffoldInformationSM.Rows().Add(scAux.sciType, sc.sciWidth, sc.sciLength, sc.sciHeigth, sc.sciDecks, sc.sciKo, sc.sciBase, sc.sciExtraDeck)
+                    tblScaffoldInformationSM.ReadOnly = True
                 End If
             Next
             selectedTable = "Mod"
@@ -3269,4 +3287,66 @@ Public Class scafoldTarking
             NAR(ApExcel)
         End Try
     End Sub
+
+    Private Sub btnAfterModification_Click(sender As Object, e As EventArgs) Handles btnAfterModification.Click
+        Try
+            If mtdScaffold.llenarModification(tblModification) Then
+                If tblModification.Rows.Count > 0 Then
+                    Dim cont As Integer = 0
+                    For Each rowMod As DataRow In tblModification.Rows
+                        If md.ModID = rowMod.ItemArray(0) Then
+                            If cont = 0 Then 'es la primer fila 
+                                Dim ultimafila = tblModification.Rows().Count()
+                                md = mtdScaffold.llenarModificationData(tblModification.Rows(ultimafila - 1).ItemArray(0), tblModification.Rows(ultimafila - 1).ItemArray(4))
+                                If md.ModID <> "" Then
+                                    cargarDatosModification(md.ModID)
+                                End If
+                                Exit For
+                            Else 'no es la ultima fila
+                                md = mtdScaffold.llenarModificationData(tblModification.Rows(cont - 1).ItemArray(0), tblModification.Rows(cont - 1).ItemArray(4))
+                                cargarDatosModification(md.ModID)
+                                Exit For
+                            End If
+                        End If
+                        cont += 1
+                    Next
+                End If
+            End If
+        Catch ex As Exception
+
+        End Try
+    End Sub
+
+    Private Sub btnNextModification_Click(sender As Object, e As EventArgs) Handles btnNextModification.Click
+        Try
+            If mtdScaffold.llenarModification(tblModification) Then
+                If tblModification.Rows.Count > 0 Then
+                    Dim cont As Integer = 1
+                    For Each rowMod As DataRow In tblModification.Rows
+                        If md.ModID = rowMod.ItemArray(0) Then
+                            If cont = tblModification.Rows.Count() Then 'es la ultima fila 
+                                md = mtdScaffold.llenarModificationData(tblModification.Rows(0).ItemArray(0), tblModification.Rows(0).ItemArray(4))
+                                If md.ModID <> "" Then
+                                    cargarDatosModification(md.ModID)
+                                End If
+                                Exit For
+                            Else 'no es la ultima fila
+                                md = mtdScaffold.llenarModificationData(tblModification.Rows(cont).ItemArray(0), tblModification.Rows(cont).ItemArray(4))
+                                cargarDatosModification(md.ModID)
+                                Exit For
+                            End If
+                        ElseIf md.ModID = "" Then
+                            md = mtdScaffold.llenarModificationData(tblModification.Rows(0).ItemArray(0), tblModification.Rows(0).ItemArray(4))
+                            cargarDatosModification(md.ModID)
+                        End If
+                        cont += 1
+                    Next
+                End If
+            End If
+        Catch ex As Exception
+
+        End Try
+    End Sub
+
+
 End Class

@@ -1299,11 +1299,11 @@ end", conn)
                     Dim cmd As New SqlCommand(
 "if (select count(*) from product as p where p.name= '" + nameProduct + "' or p.idProduct = " + row.Cells(0).Value.ToString() + " or p.QID = '" + row.Cells(11).Value.ToString + "' ) = 0
 begin 
-    insert into product values(" + row.Cells(0).Value.ToString() + ",'" + nameProduct + "'," + If(row.Cells(4).Value.ToString() = "", 0.0, row.Cells(4).Value.ToString()) + "," + If(row.Cells(5).Value.ToString() = "", 0.0, row.Cells(5).Value.ToString()) + "," + If(row.Cells(6).Value.ToString() = "", 0.0, row.Cells(6).Value.ToString()) + "," + If(row.Cells(7).Value.ToString() = "", 0.0, row.Cells(7).Value.ToString()) + "," + If(row.Cells(8).Value.ToString() = "", 0.0, row.Cells(8).Value.ToString()) + "," + If(row.Cells(9).Value.ToString() = "", 0.0, row.Cells(9).Value.ToString()) + ",'" + row.Cells(11).Value.ToString() + "' ,'" + row.Cells(2).Value.ToString() + "','" + row.Cells(3).Value.ToString() + "', " + row.Cells(10).Value.ToString() + "," + row.Cells(12).Value.ToString() + "," + row.Cells(13).Value.ToString() + ")
+    insert into product values(" + row.Cells(0).Value.ToString() + ",'" + nameProduct + "'," + If(row.Cells(4).Value.ToString() = "", "0.0", row.Cells(4).Value.ToString()) + "," + If(row.Cells(5).Value.ToString() = "", "0.0", row.Cells(5).Value.ToString()) + "," + If(row.Cells(6).Value.ToString() = "", "0.0", row.Cells(6).Value.ToString()) + "," + If(row.Cells(7).Value.ToString() = "", "0.0", row.Cells(7).Value.ToString()) + "," + If(row.Cells(8).Value.ToString() = "", "0.0", row.Cells(8).Value.ToString()) + "," + If(row.Cells(9).Value.ToString() = "", "0.0", row.Cells(9).Value.ToString()) + ",'" + row.Cells(11).Value.ToString() + "' ,'" + row.Cells(2).Value.ToString() + "','" + row.Cells(3).Value.ToString() + "', " + row.Cells(10).Value.ToString() + "," + row.Cells(12).Value.ToString() + "," + row.Cells(13).Value.ToString() + ")
 end
 else if(select count(*) from product as p where p.name= '" + nameProduct + "' or p.idProduct = " + row.Cells(0).Value.ToString() + "  or p.QID = '" + row.Cells(12).Value.ToString() + "' )=1
 begin
-	update product set name = '" + nameProduct + "' ,weight= " + If(row.Cells(4).Value.ToString() = "", 0.0, row.Cells(4).Value.ToString()) + ", weightMeasure = " + If(row.Cells(5).Value.ToString() = "", 0.0, row.Cells(5).Value.ToString()) + ",price = " + If(row.Cells(6).Value.ToString() = "", 0.0, row.Cells(6).Value.ToString()) + ", dailyRentalRate= " + If(row.Cells(7).Value.ToString() = "", 0.0, row.Cells(7).Value.ToString()) + " ,weeklyRentalRate = " + If(row.Cells(8).Value.ToString() = "", 0.0, row.Cells(8).Value.ToString()) + ",monthlyRentalRate = " + If(row.Cells(9).Value.ToString() = "", 0.0, row.Cells(9).Value.ToString()) + ",um='" + row.Cells(2).Value.ToString() + "',class='" + row.Cells(3).Value.ToString() + "',quantity = " + If(row.Cells(10).Value.ToString() = "", "0.0", row.Cells(10).Value.ToString()) + " , PLF = " + If(row.Cells(12).Value.ToString() = "", "0.0", row.Cells(12).Value.ToString()) + ",PSQF = " + If(row.Cells(13).Value.ToString() = "", "0.0", row.Cells(13).Value.ToString()) + " where idProduct = " + row.Cells(0).Value.ToString() + "
+	update product set name = '" + nameProduct + "' ,weight= " + If(row.Cells(4).Value.ToString() = "", "0.0", row.Cells(4).Value.ToString()) + ", weightMeasure = " + If(row.Cells(5).Value.ToString() = "", "0.0", row.Cells(5).Value.ToString()) + ",price = " + If(row.Cells(6).Value.ToString() = "", "0.0", row.Cells(6).Value.ToString()) + ", dailyRentalRate= " + If(row.Cells(7).Value.ToString() = "", "0.0", row.Cells(7).Value.ToString()) + " ,weeklyRentalRate = " + If(row.Cells(8).Value.ToString() = "", "0.0", row.Cells(8).Value.ToString()) + ",monthlyRentalRate = " + If(row.Cells(9).Value.ToString() = "", "0.0", row.Cells(9).Value.ToString()) + ",um='" + row.Cells(2).Value.ToString() + "',class='" + row.Cells(3).Value.ToString() + "',quantity = " + If(row.Cells(10).Value.ToString() = "", "0.0", row.Cells(10).Value.ToString()) + " , PLF = " + If(row.Cells(12).Value.ToString() = "", "0.0", row.Cells(12).Value.ToString()) + ",PSQF = " + If(row.Cells(13).Value.ToString() = "", "0.0", row.Cells(13).Value.ToString()) + " where idProduct = " + row.Cells(0).Value.ToString() + "
 end", conn)
                     cmd.Transaction = tran
                         If cmd.ExecuteNonQuery > 0 Then
@@ -1867,6 +1867,7 @@ end", conn)
             Dim cmd As New SqlCommand("select tag, st.idAux,idJobCat,idArea,idSubJob, CONCAT(wo.idWO,'-',tk.task)as 'WO',st.status from scaffoldTraking as st
 inner join task as tk on tk.idAux = st.idAux
 inner join workOrder as wo on tk.idAuxWO = wo.idAuxWO", conn)
+            tabla.Rows.Clear()
             If cmd.ExecuteNonQuery Then
                 Dim da As New SqlDataAdapter(cmd)
                 da.Fill(tabla)
@@ -2307,6 +2308,8 @@ begin
 	delete from modification where tag= @tag
 	select * from productScaffold where tag = @tag
 	delete from productScaffold where tag =@tag
+    select * from productTotalScaffold where tag = @tag
+	delete from productTotalScaffold where tag = @tag
 	select * from scaffoldTraking where tag = @tag
 	delete from scaffoldTraking where tag = @tag
 end", conn)
@@ -2374,6 +2377,7 @@ select distinct requestBy from modification) as t1", conn)
 inner join activityHours as ah on md.idModification = ah.idModification 
 inner join scaffoldInformation as si on md.idModification = si.idModification
 inner join materialHandeling as mh on md.idModification = mh.idModification", conn)
+            tabla.Clear()
             If cmd.ExecuteNonQuery Then
                 Dim da As New SqlDataAdapter(cmd)
                 da.Fill(tabla)
@@ -2428,7 +2432,7 @@ inner join materialHandeling as mh on md.idModification = mh.idModification", co
         Try
             Dim cmdMod As New SqlCommand("if (select count (idModification) from modification where idModification='" + md.ModID + "')=0
                 begin
-	                insert into modification values (" + md.ModID + ",'" + md.reqCompany + "','" + md.requestBy + "','" + validaFechaParaSQl(md.ModDate) + "','" + md.foreman + "','" + md.erector + "','" + md.comments + "','" + md.tag + "','" + If(md.status = True, "t", "f") + "')
+	                insert into modification values ('" + md.ModID + "','" + md.reqCompany + "','" + md.requestBy + "','" + validaFechaParaSQl(md.ModDate) + "','" + md.foreman + "','" + md.erector + "','" + md.comments + "','" + md.tag + "','" + If(md.status = True, "t", "f") + "')
                 end
                 else if (select count (idModification) from modification where idModification='" + md.ModID + "')=1
                 begin
@@ -2436,19 +2440,19 @@ inner join materialHandeling as mh on md.idModification = mh.idModification", co
                 end", conn)
             cmdMod.Transaction = tran
             If cmdMod.ExecuteNonQuery = 1 Then 'Actualizar o Insertar la Modificacion 
-                Dim cmdActivityHour As New SqlCommand("if (select COUNT(*) from activityHours where idActivityHours = '" + md.ahrIdActivityHours + "')=0
+                Dim cmdActivityHour As New SqlCommand("if (select COUNT(*) from activityHours where idModification = '" + md.ModID + "' and tag = '" + md.tag + "')=0
                     begin 
 	                    insert into activityHours values (NEWID()," + CStr(md.ahrBuild) + "," + CStr(md.ahrMaterial) + "," + CStr(md.ahrTravel) + "," + CStr(md.ahrWeather) + "," + CStr(md.ahrAlarm) + "," + CStr(md.ahrSafety) + "," + CStr(md.ahrStdBy) + "," + CStr(md.ahrOther) + ",'" + md.tag + "','" + md.ModID + "',NULL)
                     end
-                    else if(select COUNT(*) from activityHours where idActivityHours='" + md.ahrIdActivityHours + "')=1
+                    else if(select COUNT(*) from activityHours where idModification = '" + md.ModID + "' and tag = '" + md.tag + "')=1
                     begin 
 	                    update activityHours set build=" + CStr(md.ahrBuild) + ",material=" + CStr(md.ahrMaterial) + ",travel=" + CStr(md.ahrTravel) + ",weather=" + CStr(md.ahrWeather) + ",alarm=" + CStr(md.ahrAlarm) + ",safety=" + CStr(md.ahrSafety) + ",stdBy=" + CStr(md.ahrStdBy) + ",other=" + CStr(md.ahrOther) + " ,tag='" + md.tag + "' where idActivityHours = '" + md.ahrIdActivityHours + "'
                     end", conn)
                 cmdActivityHour.Transaction = tran
                 If cmdActivityHour.ExecuteNonQuery = 1 Then 'Actualizar o Insertar las Horas de Actividades
-                    Dim cmdScfInfo As New SqlCommand("if (select count(*) from scaffoldInformation where idScaffoldInformation = '" + md.idScaffoldinformation + "')=0
+                    Dim cmdScfInfo As New SqlCommand("if (select count(*) from scaffoldInformation where idModification='" + md.ModID + "' and tag = '" + md.tag + "')=0
                         begin 
-	                        insert into scaffoldInformation values(NEWID(),'" + md.sciType + "'," + CStr(md.sciWidth) + "," + CStr(md.sciLength) + "," + CStr(md.sciHeigth) + "," + CStr(md.sciDecks) + "," + CStr(md.sciKo) + "," + CStr(md.sciBase) + "," + CStr(md.sciExtraDeck) + ",'" + md.tag + "','" + md.ModID + "',NULL)
+	                        insert into scaffoldInformation values(NEWID(),'" + md.sciType + "'," + CStr(md.sciWidth) + "," + CStr(md.sciLength) + "," + CStr(md.sciHeigth) + "," + CStr(md.sciDecks) + "," + CStr(md.sciKo) + "," + CStr(md.sciBase) + "," + CStr(md.sciExtraDeck) + ",'" + md.tag + "','" + md.ModID + "')
                         end
                         else if (select count(*) from scaffoldInformation where idModification='" + md.ModID + "' and tag = '" + md.tag + "')=1
                         begin 
@@ -2456,11 +2460,11 @@ inner join materialHandeling as mh on md.idModification = mh.idModification", co
                         end", conn)
                     cmdScfInfo.Transaction = tran
                     If cmdScfInfo.ExecuteNonQuery = 1 Then 'Actualizar o Insertar la informacion del Andamio
-                        Dim cmdMatHand As New SqlCommand("if(select COUNT(*) from materialHandeling where idMaterialHandeling ='" + md.idMaterialHandeling + "')=0
+                        Dim cmdMatHand As New SqlCommand("if(select COUNT(*) from materialHandeling where tag = '" + md.tag + "' and idModification = '" + md.ModID + "')=0
                             begin
-	                            insert into materialHandeling values(NEWID(),'" + If(md.materialHandeling(0), "t", "f") + "','" + If(md.materialHandeling(1), "t", "f") + "','" + If(md.materialHandeling(2), "t", "f") + "','" + If(md.materialHandeling(3), "t", "f") + "','" + If(md.materialHandeling(4), "t", "f") + "','" + If(md.materialHandeling(5), "t", "f") + "','" + If(md.materialHandeling(6), "t", "f") + "','" + md.tag + "','" + md.ModID + "')
+	                            insert into materialHandeling values(NEWID(),'" + If(md.materialHandeling(0), "t", "f") + "','" + If(md.materialHandeling(1), "t", "f") + "','" + If(md.materialHandeling(2), "t", "f") + "','" + If(md.materialHandeling(3), "t", "f") + "','" + If(md.materialHandeling(4), "t", "f") + "','" + If(md.materialHandeling(5), "t", "f") + "','" + If(md.materialHandeling(6), "t", "f") + "','" + md.tag + "','" + md.ModID + "', Null)
                             end
-                            else if(select COUNT(*) from materialHandeling where idMaterialHandeling='" + md.idMaterialHandeling + "')=1
+                            else if(select COUNT(*) from materialHandeling where tag = '" + md.tag + "' and idModification = '" + md.ModID + "')=1
                             begin
 	                            update materialHandeling set truck='" + If(md.materialHandeling(0), "t", "f") + "',forklift='" + If(md.materialHandeling(1), "t", "f") + "',trailer='" + If(md.materialHandeling(2), "t", "f") + "',crane='" + If(md.materialHandeling(3), "t", "f") + "',rope='" + If(md.materialHandeling(4), "t", "f") + "',passed='" + If(md.materialHandeling(5), "t", "f") + "',elevator='" + If(md.materialHandeling(6), "t", "f") + "' ,tag='" + md.tag + "' where idMaterialHandeling ='" + md.idMaterialHandeling + "'
                             end", conn)
@@ -2713,8 +2717,8 @@ where ds.tag = '" + tag + "'", conn)
             insert into productDismantle values (NEWID(),@qty,@idProduct,@tag,@idDismantle)
 	    	set @countProduct = @countProduct-1
 	    end
-	    update scaffoldTraking set status = 'f' where tag = @tag
-        update modification set status = 'f' where tag = @tag
+	    update scaffoldTraking set status = 't' where tag = @tag
+        update modification set status = 't' where tag = @tag
     end", conn)
             cmd.Transaction = tran
             If cmd.ExecuteNonQuery Then
