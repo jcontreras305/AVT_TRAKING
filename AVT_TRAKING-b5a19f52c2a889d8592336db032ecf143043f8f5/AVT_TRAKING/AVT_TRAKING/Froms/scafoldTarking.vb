@@ -1161,11 +1161,11 @@ Public Class scafoldTarking
     Public Sub cmb_SelectedIndexChangued(sender As Object, e As EventArgs)
         Dim cmb As ComboBox = CType(sender, ComboBox)
         If tblProduct.CurrentCell.ColumnIndex = tblProduct.Columns("UM").Index Then
-            If tblProduct.CurrentCell.Value <> cmb.SelectedItem Then
+            If If(tblProduct.CurrentCell.Value Is DBNull.Value, "", tblProduct.CurrentCell.Value) <> cmb.SelectedItem Then
                 tblProduct.CurrentCell.Value = If(cmb.SelectedItem IsNot Nothing, cmb.SelectedItem, "")
             End If
         ElseIf tblProduct.CurrentCell.ColumnIndex = tblProduct.Columns("Class").Index Then
-            If tblProduct.CurrentCell.Value <> cmb.SelectedItem Then
+            If If(tblProduct.CurrentCell.Value Is DBNull.Value, "", tblProduct.CurrentCell.Value) <> cmb.SelectedItem Then
                 tblProduct.CurrentCell.Value = If(cmb.SelectedItem IsNot Nothing, cmb.SelectedItem, "")
             End If
         ElseIf tblProduct.CurrentCell.ColumnIndex = tblProduct.Columns("Status").Index Then
@@ -3207,5 +3207,66 @@ Public Class scafoldTarking
             ds.materialHandeling(5) = chbPassedDS.Checked()
             ds.materialHandeling(6) = chbElevatorDS.Checked()
         End If
+    End Sub
+
+    Private Sub btnExcelScaffold_Click(sender As Object, e As EventArgs) Handles btnExcelScaffold.Click
+        Dim ApExcel = New Microsoft.Office.Interop.Excel.Application
+        Try
+            Dim openFile As New OpenFileDialog
+            openFile.DefaultExt = "*.xlsm"
+            openFile.FileName = "tScaffolds"
+            openFile.ShowDialog()
+
+            Dim libro = ApExcel.Workbooks.Open(openFile.FileName)
+            Dim productos As New Worksheet
+            Dim unidades As New Worksheet
+            Dim classification As New Worksheet
+            Dim flagStatus As Boolean = True
+            If DialogResult.Yes = MessageBox.Show("Would you like to check if there is any new 'Material Classification'?", "Important", MessageBoxButtons.YesNo, MessageBoxIcon.Information) Then
+                Try
+                    classification = libro.Worksheets("Class")
+                    txtSalida.Text = txtSalida.Text + vbCrLf + "Open sheet 'Class'."
+                Catch ex As Exception
+                    classification = libro.Worksheets("class")
+                    txtSalida.Text = txtSalida.Text + vbCrLf + "Open sheet 'class'."
+                End Try
+                Dim flagClass = validarSheetClassification(classification)
+                If flagClass Then
+                    mtdScaffold.llenarClassification(tblClassification)
+                End If
+            End If
+            If DialogResult.Yes = MessageBox.Show("Would you like to check if there is any new 'Units Meassurement'?", "Important", MessageBoxButtons.YesNo, MessageBoxIcon.Information) Then
+                Try
+                    unidades = libro.Worksheets("Units Meassurement")
+                    txtSalida.Text = txtSalida.Text + vbCrLf + "Open sheet 'Units Meassurement'."
+                Catch ex As Exception
+                    unidades = libro.Worksheets("Units")
+                    txtSalida.Text = txtSalida.Text + vbCrLf + "Open sheet 'Units'."
+                End Try
+                Dim flagUnit = validarSheetUnits(unidades)
+                If flagUnit Then
+                    mtdScaffold.llenarUnitMeassurements(tblUnitMeassurement)
+                End If
+            End If
+            If DialogResult.OK = MessageBox.Show("The insert the products it will being, Are you sure to continue?", "Important", MessageBoxButtons.OKCancel, MessageBoxIcon.Information) Then
+                Try
+                    productos = libro.Worksheets("Product")
+                    txtSalida.Text = txtSalida.Text + vbCrLf + "Open Sheet 'Product'"
+                Catch ex As Exception
+                    productos = libro.Worksheets("product")
+                    txtSalida.Text = txtSalida.Text + vbCrLf + "Open Sheet 'product'"
+                End Try
+                Dim flagProduct = validarSheetProducts(productos)
+                If flagProduct Then
+                    mtdScaffold.llenarProduct(tblProduct)
+                    mtdScaffold.llenarProduct(tblProductosAux)
+                End If
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message())
+        Finally
+            ApExcel.Quit()
+            NAR(ApExcel)
+        End Try
     End Sub
 End Class

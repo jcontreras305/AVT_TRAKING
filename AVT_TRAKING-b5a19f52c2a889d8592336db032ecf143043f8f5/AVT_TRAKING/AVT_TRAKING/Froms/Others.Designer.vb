@@ -61,14 +61,35 @@ Partial Class Others
         Me.btnUpdateTypeEmploye = New System.Windows.Forms.Button()
         Me.lstTypeEmployee = New System.Windows.Forms.ListBox()
         Me.TabPage2 = New System.Windows.Forms.TabPage()
+        Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
+        Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.txtEmail = New System.Windows.Forms.TextBox()
         Me.GroupBox6 = New System.Windows.Forms.GroupBox()
-        Me.btnAddJobCat = New System.Windows.Forms.Button()
-        Me.TextBox1 = New System.Windows.Forms.TextBox()
-        Me.lstJobCAT = New System.Windows.Forms.ListView()
-        Me.ColumnHeader4 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.ColumnHeader5 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
-        Me.btnDeleteJobCat = New System.Windows.Forms.Button()
-        Me.btnUpdateSaveJobCat = New System.Windows.Forms.Button()
+        Me.TableLayoutPanel2 = New System.Windows.Forms.TableLayoutPanel()
+        Me.txtPassword = New System.Windows.Forms.TextBox()
+        Me.Panel4 = New System.Windows.Forms.Panel()
+        Me.Panel5 = New System.Windows.Forms.Panel()
+        Me.Panel6 = New System.Windows.Forms.Panel()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.label2 = New System.Windows.Forms.Label()
+        Me.btnVerPass = New System.Windows.Forms.Button()
+        Me.btnSaveEmail = New System.Windows.Forms.Button()
+        Me.btnDeleteEmail = New System.Windows.Forms.Button()
+        Me.DataGridView1 = New System.Windows.Forms.DataGridView()
+        Me.clmEmail = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.clmName = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.clmStatus = New System.Windows.Forms.DataGridViewCheckBoxColumn()
+        Me.TableLayoutPanel3 = New System.Windows.Forms.TableLayoutPanel()
+        Me.Panel7 = New System.Windows.Forms.Panel()
+        Me.TableLayoutPanel4 = New System.Windows.Forms.TableLayoutPanel()
+        Me.Panel3 = New System.Windows.Forms.Panel()
+        Me.Panel8 = New System.Windows.Forms.Panel()
+        Me.Label3 = New System.Windows.Forms.Label()
+        Me.txtEmailOther = New System.Windows.Forms.TextBox()
+        Me.Label4 = New System.Windows.Forms.Label()
+        Me.txtNameOther = New System.Windows.Forms.TextBox()
+        Me.btnDeleteEmailOther = New System.Windows.Forms.Button()
+        Me.btnSaveEmailOthher = New System.Windows.Forms.Button()
         Me.Panel1.SuspendLayout()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
@@ -78,7 +99,19 @@ Partial Class Others
         Me.GroupBox2.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
         Me.TabPage2.SuspendLayout()
+        Me.TableLayoutPanel1.SuspendLayout()
+        Me.Panel2.SuspendLayout()
         Me.GroupBox6.SuspendLayout()
+        Me.TableLayoutPanel2.SuspendLayout()
+        Me.Panel4.SuspendLayout()
+        Me.Panel5.SuspendLayout()
+        Me.Panel6.SuspendLayout()
+        CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.TableLayoutPanel3.SuspendLayout()
+        Me.Panel7.SuspendLayout()
+        Me.TableLayoutPanel4.SuspendLayout()
+        Me.Panel3.SuspendLayout()
+        Me.Panel8.SuspendLayout()
         Me.SuspendLayout()
         '
         'Panel1
@@ -486,93 +519,306 @@ Partial Class Others
         '
         'TabPage2
         '
-        Me.TabPage2.Controls.Add(Me.GroupBox6)
+        Me.TabPage2.Controls.Add(Me.TableLayoutPanel1)
         Me.TabPage2.Location = New System.Drawing.Point(4, 22)
         Me.TabPage2.Name = "TabPage2"
         Me.TabPage2.Size = New System.Drawing.Size(956, 446)
         Me.TabPage2.TabIndex = 1
-        Me.TabPage2.Text = "Scaffold Traking Items"
+        Me.TabPage2.Text = "Email Configuration"
         Me.TabPage2.UseVisualStyleBackColor = True
+        '
+        'TableLayoutPanel1
+        '
+        Me.TableLayoutPanel1.ColumnCount = 1
+        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
+        Me.TableLayoutPanel1.Controls.Add(Me.Panel2, 0, 0)
+        Me.TableLayoutPanel1.Controls.Add(Me.TableLayoutPanel3, 0, 1)
+        Me.TableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.TableLayoutPanel1.Location = New System.Drawing.Point(0, 0)
+        Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
+        Me.TableLayoutPanel1.RowCount = 2
+        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20.0!))
+        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 80.0!))
+        Me.TableLayoutPanel1.Size = New System.Drawing.Size(956, 446)
+        Me.TableLayoutPanel1.TabIndex = 0
+        '
+        'Panel2
+        '
+        Me.Panel2.Controls.Add(Me.GroupBox6)
+        Me.Panel2.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Panel2.Location = New System.Drawing.Point(3, 3)
+        Me.Panel2.Name = "Panel2"
+        Me.Panel2.Size = New System.Drawing.Size(950, 83)
+        Me.Panel2.TabIndex = 0
+        '
+        'txtEmail
+        '
+        Me.txtEmail.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.txtEmail.Location = New System.Drawing.Point(73, 18)
+        Me.txtEmail.Name = "txtEmail"
+        Me.txtEmail.Size = New System.Drawing.Size(275, 20)
+        Me.txtEmail.TabIndex = 0
         '
         'GroupBox6
         '
-        Me.GroupBox6.Controls.Add(Me.btnAddJobCat)
-        Me.GroupBox6.Controls.Add(Me.TextBox1)
-        Me.GroupBox6.Controls.Add(Me.lstJobCAT)
-        Me.GroupBox6.Controls.Add(Me.btnDeleteJobCat)
-        Me.GroupBox6.Controls.Add(Me.btnUpdateSaveJobCat)
-        Me.GroupBox6.Location = New System.Drawing.Point(8, 15)
+        Me.GroupBox6.Controls.Add(Me.TableLayoutPanel2)
+        Me.GroupBox6.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.GroupBox6.Location = New System.Drawing.Point(0, 0)
         Me.GroupBox6.Name = "GroupBox6"
-        Me.GroupBox6.Size = New System.Drawing.Size(298, 182)
-        Me.GroupBox6.TabIndex = 4
+        Me.GroupBox6.Size = New System.Drawing.Size(950, 83)
+        Me.GroupBox6.TabIndex = 1
         Me.GroupBox6.TabStop = False
-        Me.GroupBox6.Text = "Job CAT"
+        Me.GroupBox6.Text = "Own Email"
         '
-        'btnAddJobCat
+        'TableLayoutPanel2
         '
-        Me.btnAddJobCat.Location = New System.Drawing.Point(192, 43)
-        Me.btnAddJobCat.Name = "btnAddJobCat"
-        Me.btnAddJobCat.Size = New System.Drawing.Size(75, 23)
-        Me.btnAddJobCat.TabIndex = 6
-        Me.btnAddJobCat.Text = "Add"
-        Me.btnAddJobCat.UseVisualStyleBackColor = True
+        Me.TableLayoutPanel2.ColumnCount = 3
+        Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 40.0!))
+        Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 40.0!))
+        Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20.0!))
+        Me.TableLayoutPanel2.Controls.Add(Me.Panel4, 0, 0)
+        Me.TableLayoutPanel2.Controls.Add(Me.Panel5, 1, 0)
+        Me.TableLayoutPanel2.Controls.Add(Me.Panel6, 2, 0)
+        Me.TableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.TableLayoutPanel2.Location = New System.Drawing.Point(3, 16)
+        Me.TableLayoutPanel2.Name = "TableLayoutPanel2"
+        Me.TableLayoutPanel2.RowCount = 1
+        Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
+        Me.TableLayoutPanel2.Size = New System.Drawing.Size(944, 64)
+        Me.TableLayoutPanel2.TabIndex = 0
         '
-        'TextBox1
+        'txtPassword
         '
-        Me.TextBox1.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+        Me.txtPassword.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.TextBox1.Location = New System.Drawing.Point(192, 16)
-        Me.TextBox1.Name = "TextBox1"
-        Me.TextBox1.Size = New System.Drawing.Size(100, 20)
-        Me.TextBox1.TabIndex = 5
+        Me.txtPassword.Location = New System.Drawing.Point(68, 17)
+        Me.txtPassword.Name = "txtPassword"
+        Me.txtPassword.Size = New System.Drawing.Size(260, 20)
+        Me.txtPassword.TabIndex = 1
+        Me.txtPassword.UseSystemPasswordChar = True
         '
-        'lstJobCAT
+        'Panel4
         '
-        Me.lstJobCAT.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
+        Me.Panel4.Controls.Add(Me.Label1)
+        Me.Panel4.Controls.Add(Me.txtEmail)
+        Me.Panel4.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Panel4.Location = New System.Drawing.Point(3, 3)
+        Me.Panel4.Name = "Panel4"
+        Me.Panel4.Size = New System.Drawing.Size(371, 58)
+        Me.Panel4.TabIndex = 0
+        '
+        'Panel5
+        '
+        Me.Panel5.Controls.Add(Me.btnVerPass)
+        Me.Panel5.Controls.Add(Me.label2)
+        Me.Panel5.Controls.Add(Me.txtPassword)
+        Me.Panel5.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Panel5.Location = New System.Drawing.Point(380, 3)
+        Me.Panel5.Name = "Panel5"
+        Me.Panel5.Size = New System.Drawing.Size(371, 58)
+        Me.Panel5.TabIndex = 1
+        '
+        'Panel6
+        '
+        Me.Panel6.Controls.Add(Me.btnDeleteEmail)
+        Me.Panel6.Controls.Add(Me.btnSaveEmail)
+        Me.Panel6.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Panel6.Location = New System.Drawing.Point(757, 3)
+        Me.Panel6.Name = "Panel6"
+        Me.Panel6.Size = New System.Drawing.Size(184, 58)
+        Me.Panel6.TabIndex = 2
+        '
+        'Label1
+        '
+        Me.Label1.AutoSize = True
+        Me.Label1.Location = New System.Drawing.Point(7, 21)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(32, 13)
+        Me.Label1.TabIndex = 1
+        Me.Label1.Text = "Email"
+        '
+        'label2
+        '
+        Me.label2.AutoSize = True
+        Me.label2.Location = New System.Drawing.Point(13, 20)
+        Me.label2.Name = "label2"
+        Me.label2.Size = New System.Drawing.Size(53, 13)
+        Me.label2.TabIndex = 2
+        Me.label2.Text = "Password"
+        '
+        'btnVerPass
+        '
+        Me.btnVerPass.Anchor = System.Windows.Forms.AnchorStyles.Right
+        Me.btnVerPass.Location = New System.Drawing.Point(328, 17)
+        Me.btnVerPass.Name = "btnVerPass"
+        Me.btnVerPass.Size = New System.Drawing.Size(43, 20)
+        Me.btnVerPass.TabIndex = 3
+        Me.btnVerPass.Text = "Ver"
+        Me.btnVerPass.UseVisualStyleBackColor = True
+        '
+        'btnSaveEmail
+        '
+        Me.btnSaveEmail.Location = New System.Drawing.Point(13, 17)
+        Me.btnSaveEmail.Name = "btnSaveEmail"
+        Me.btnSaveEmail.Size = New System.Drawing.Size(75, 23)
+        Me.btnSaveEmail.TabIndex = 0
+        Me.btnSaveEmail.Text = "Save"
+        Me.btnSaveEmail.UseVisualStyleBackColor = True
+        '
+        'btnDeleteEmail
+        '
+        Me.btnDeleteEmail.Location = New System.Drawing.Point(101, 17)
+        Me.btnDeleteEmail.Name = "btnDeleteEmail"
+        Me.btnDeleteEmail.Size = New System.Drawing.Size(75, 23)
+        Me.btnDeleteEmail.TabIndex = 1
+        Me.btnDeleteEmail.Text = "Delete"
+        Me.btnDeleteEmail.UseVisualStyleBackColor = True
+        '
+        'DataGridView1
+        '
+        Me.DataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
+        Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.DataGridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.clmEmail, Me.clmName, Me.clmStatus})
+        Me.DataGridView1.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.DataGridView1.Location = New System.Drawing.Point(3, 61)
+        Me.DataGridView1.Name = "DataGridView1"
+        Me.DataGridView1.RowHeadersVisible = False
+        Me.DataGridView1.Size = New System.Drawing.Size(754, 287)
+        Me.DataGridView1.TabIndex = 0
+        '
+        'clmEmail
+        '
+        Me.clmEmail.HeaderText = "Email"
+        Me.clmEmail.Name = "clmEmail"
+        Me.clmEmail.ReadOnly = True
+        '
+        'clmName
+        '
+        Me.clmName.HeaderText = "Name"
+        Me.clmName.Name = "clmName"
+        Me.clmName.ReadOnly = True
+        '
+        'clmStatus
+        '
+        Me.clmStatus.HeaderText = "Status"
+        Me.clmStatus.Name = "clmStatus"
+        Me.clmStatus.ReadOnly = True
+        '
+        'TableLayoutPanel3
+        '
+        Me.TableLayoutPanel3.ColumnCount = 2
+        Me.TableLayoutPanel3.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 80.0!))
+        Me.TableLayoutPanel3.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20.0!))
+        Me.TableLayoutPanel3.Controls.Add(Me.DataGridView1, 0, 1)
+        Me.TableLayoutPanel3.Controls.Add(Me.Panel7, 1, 0)
+        Me.TableLayoutPanel3.Controls.Add(Me.TableLayoutPanel4, 0, 0)
+        Me.TableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.TableLayoutPanel3.Location = New System.Drawing.Point(3, 92)
+        Me.TableLayoutPanel3.Name = "TableLayoutPanel3"
+        Me.TableLayoutPanel3.RowCount = 2
+        Me.TableLayoutPanel3.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.80912!))
+        Me.TableLayoutPanel3.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 83.19088!))
+        Me.TableLayoutPanel3.Size = New System.Drawing.Size(950, 351)
+        Me.TableLayoutPanel3.TabIndex = 1
+        '
+        'Panel7
+        '
+        Me.Panel7.Controls.Add(Me.btnDeleteEmailOther)
+        Me.Panel7.Controls.Add(Me.btnSaveEmailOthher)
+        Me.Panel7.Location = New System.Drawing.Point(763, 3)
+        Me.Panel7.Name = "Panel7"
+        Me.Panel7.Size = New System.Drawing.Size(184, 52)
+        Me.Panel7.TabIndex = 2
+        '
+        'TableLayoutPanel4
+        '
+        Me.TableLayoutPanel4.ColumnCount = 2
+        Me.TableLayoutPanel4.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
+        Me.TableLayoutPanel4.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
+        Me.TableLayoutPanel4.Controls.Add(Me.Panel3, 0, 0)
+        Me.TableLayoutPanel4.Controls.Add(Me.Panel8, 1, 0)
+        Me.TableLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.TableLayoutPanel4.Location = New System.Drawing.Point(3, 3)
+        Me.TableLayoutPanel4.Name = "TableLayoutPanel4"
+        Me.TableLayoutPanel4.RowCount = 1
+        Me.TableLayoutPanel4.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
+        Me.TableLayoutPanel4.Size = New System.Drawing.Size(754, 52)
+        Me.TableLayoutPanel4.TabIndex = 3
+        '
+        'Panel3
+        '
+        Me.Panel3.Controls.Add(Me.Label3)
+        Me.Panel3.Controls.Add(Me.txtEmailOther)
+        Me.Panel3.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Panel3.Location = New System.Drawing.Point(3, 3)
+        Me.Panel3.Name = "Panel3"
+        Me.Panel3.Size = New System.Drawing.Size(371, 46)
+        Me.Panel3.TabIndex = 0
+        '
+        'Panel8
+        '
+        Me.Panel8.Controls.Add(Me.Label4)
+        Me.Panel8.Controls.Add(Me.txtNameOther)
+        Me.Panel8.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Panel8.Location = New System.Drawing.Point(380, 3)
+        Me.Panel8.Name = "Panel8"
+        Me.Panel8.Size = New System.Drawing.Size(371, 46)
+        Me.Panel8.TabIndex = 1
+        '
+        'Label3
+        '
+        Me.Label3.AutoSize = True
+        Me.Label3.Location = New System.Drawing.Point(7, 14)
+        Me.Label3.Name = "Label3"
+        Me.Label3.Size = New System.Drawing.Size(32, 13)
+        Me.Label3.TabIndex = 3
+        Me.Label3.Text = "Email"
+        '
+        'txtEmailOther
+        '
+        Me.txtEmailOther.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.lstJobCAT.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader4, Me.ColumnHeader5})
-        Me.lstJobCAT.FullRowSelect = True
-        Me.lstJobCAT.HideSelection = False
-        Me.lstJobCAT.Location = New System.Drawing.Point(6, 16)
-        Me.lstJobCAT.MultiSelect = False
-        Me.lstJobCAT.Name = "lstJobCAT"
-        Me.lstJobCAT.Size = New System.Drawing.Size(179, 160)
-        Me.lstJobCAT.TabIndex = 3
-        Me.lstJobCAT.UseCompatibleStateImageBehavior = False
-        Me.lstJobCAT.View = System.Windows.Forms.View.Details
+        Me.txtEmailOther.Location = New System.Drawing.Point(73, 11)
+        Me.txtEmailOther.Name = "txtEmailOther"
+        Me.txtEmailOther.Size = New System.Drawing.Size(275, 20)
+        Me.txtEmailOther.TabIndex = 2
         '
-        'ColumnHeader4
+        'Label4
         '
-        Me.ColumnHeader4.Text = "Numer"
-        Me.ColumnHeader4.Width = 80
+        Me.Label4.AutoSize = True
+        Me.Label4.Location = New System.Drawing.Point(13, 16)
+        Me.Label4.Name = "Label4"
+        Me.Label4.Size = New System.Drawing.Size(35, 13)
+        Me.Label4.TabIndex = 4
+        Me.Label4.Text = "Name"
         '
-        'ColumnHeader5
+        'txtNameOther
         '
-        Me.ColumnHeader5.Text = "Name"
-        Me.ColumnHeader5.Width = 100
-        '
-        'btnDeleteJobCat
-        '
-        Me.btnDeleteJobCat.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
+        Me.txtNameOther.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnDeleteJobCat.Location = New System.Drawing.Point(191, 153)
-        Me.btnDeleteJobCat.Name = "btnDeleteJobCat"
-        Me.btnDeleteJobCat.Size = New System.Drawing.Size(75, 23)
-        Me.btnDeleteJobCat.TabIndex = 2
-        Me.btnDeleteJobCat.Text = "Delete"
-        Me.btnDeleteJobCat.UseVisualStyleBackColor = True
+        Me.txtNameOther.Location = New System.Drawing.Point(68, 13)
+        Me.txtNameOther.Name = "txtNameOther"
+        Me.txtNameOther.Size = New System.Drawing.Size(260, 20)
+        Me.txtNameOther.TabIndex = 3
         '
-        'btnUpdateSaveJobCat
+        'btnDeleteEmailOther
         '
-        Me.btnUpdateSaveJobCat.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnUpdateSaveJobCat.Location = New System.Drawing.Point(191, 124)
-        Me.btnUpdateSaveJobCat.Name = "btnUpdateSaveJobCat"
-        Me.btnUpdateSaveJobCat.Size = New System.Drawing.Size(75, 23)
-        Me.btnUpdateSaveJobCat.TabIndex = 1
-        Me.btnUpdateSaveJobCat.Text = "Update"
-        Me.btnUpdateSaveJobCat.UseVisualStyleBackColor = True
+        Me.btnDeleteEmailOther.Location = New System.Drawing.Point(99, 15)
+        Me.btnDeleteEmailOther.Name = "btnDeleteEmailOther"
+        Me.btnDeleteEmailOther.Size = New System.Drawing.Size(75, 23)
+        Me.btnDeleteEmailOther.TabIndex = 3
+        Me.btnDeleteEmailOther.Text = "Delete"
+        Me.btnDeleteEmailOther.UseVisualStyleBackColor = True
+        '
+        'btnSaveEmailOthher
+        '
+        Me.btnSaveEmailOthher.Location = New System.Drawing.Point(11, 15)
+        Me.btnSaveEmailOthher.Name = "btnSaveEmailOthher"
+        Me.btnSaveEmailOthher.Size = New System.Drawing.Size(75, 23)
+        Me.btnSaveEmailOthher.TabIndex = 2
+        Me.btnSaveEmailOthher.Text = "Save"
+        Me.btnSaveEmailOthher.UseVisualStyleBackColor = True
         '
         'Others
         '
@@ -596,8 +842,23 @@ Partial Class Others
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()
         Me.TabPage2.ResumeLayout(False)
+        Me.TableLayoutPanel1.ResumeLayout(False)
+        Me.Panel2.ResumeLayout(False)
         Me.GroupBox6.ResumeLayout(False)
-        Me.GroupBox6.PerformLayout()
+        Me.TableLayoutPanel2.ResumeLayout(False)
+        Me.Panel4.ResumeLayout(False)
+        Me.Panel4.PerformLayout()
+        Me.Panel5.ResumeLayout(False)
+        Me.Panel5.PerformLayout()
+        Me.Panel6.ResumeLayout(False)
+        CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.TableLayoutPanel3.ResumeLayout(False)
+        Me.Panel7.ResumeLayout(False)
+        Me.TableLayoutPanel4.ResumeLayout(False)
+        Me.Panel3.ResumeLayout(False)
+        Me.Panel3.PerformLayout()
+        Me.Panel8.ResumeLayout(False)
+        Me.Panel8.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -641,12 +902,33 @@ Partial Class Others
     Friend WithEvents btnDeleteCostCode As Button
     Friend WithEvents btnUpdateCostCode As Button
     Friend WithEvents TabPage2 As TabPage
+    Friend WithEvents TableLayoutPanel1 As TableLayoutPanel
+    Friend WithEvents Panel2 As Panel
     Friend WithEvents GroupBox6 As GroupBox
-    Friend WithEvents btnAddJobCat As Button
-    Friend WithEvents TextBox1 As TextBox
-    Friend WithEvents lstJobCAT As ListView
-    Public WithEvents ColumnHeader4 As ColumnHeader
-    Public WithEvents ColumnHeader5 As ColumnHeader
-    Friend WithEvents btnDeleteJobCat As Button
-    Friend WithEvents btnUpdateSaveJobCat As Button
+    Friend WithEvents TableLayoutPanel2 As TableLayoutPanel
+    Friend WithEvents Panel4 As Panel
+    Friend WithEvents Label1 As Label
+    Friend WithEvents txtEmail As TextBox
+    Friend WithEvents Panel5 As Panel
+    Friend WithEvents btnVerPass As Button
+    Friend WithEvents label2 As Label
+    Friend WithEvents txtPassword As TextBox
+    Friend WithEvents Panel6 As Panel
+    Friend WithEvents btnSaveEmail As Button
+    Friend WithEvents btnDeleteEmail As Button
+    Friend WithEvents TableLayoutPanel3 As TableLayoutPanel
+    Friend WithEvents DataGridView1 As DataGridView
+    Friend WithEvents clmEmail As DataGridViewTextBoxColumn
+    Friend WithEvents clmName As DataGridViewTextBoxColumn
+    Friend WithEvents clmStatus As DataGridViewCheckBoxColumn
+    Friend WithEvents Panel7 As Panel
+    Friend WithEvents btnDeleteEmailOther As Button
+    Friend WithEvents btnSaveEmailOthher As Button
+    Friend WithEvents TableLayoutPanel4 As TableLayoutPanel
+    Friend WithEvents Panel3 As Panel
+    Friend WithEvents Label3 As Label
+    Friend WithEvents txtEmailOther As TextBox
+    Friend WithEvents Panel8 As Panel
+    Friend WithEvents Label4 As Label
+    Friend WithEvents txtNameOther As TextBox
 End Class
