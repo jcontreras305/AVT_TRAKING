@@ -137,7 +137,7 @@ Module metodosGlobales
                     Try
                         Return CDate(fecha1)
                     Catch ex As Exception
-                        fecha1 = array(0) + "/" + array(1) + "/" + array(2)
+                        fecha1 = array(1) + "/" + array(0) + "/" + array(2)
                         Return CDate(fecha1)
                     End Try
                 End If

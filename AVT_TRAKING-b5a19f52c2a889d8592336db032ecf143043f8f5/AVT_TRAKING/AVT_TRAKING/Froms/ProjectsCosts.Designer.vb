@@ -23,6 +23,8 @@ Partial Class ProjectsCosts
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.lblPorcentLeft = New System.Windows.Forms.Label()
+        Me.Label25 = New System.Windows.Forms.Label()
         Me.btnDelete = New System.Windows.Forms.Button()
         Me.btnUpdate = New System.Windows.Forms.Button()
         Me.Label10 = New System.Windows.Forms.Label()
@@ -37,7 +39,7 @@ Partial Class ProjectsCosts
         Me.Label24 = New System.Windows.Forms.Label()
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.chbComplete = New System.Windows.Forms.CheckBox()
-        Me.lblPorcentLeft = New System.Windows.Forms.Label()
+        Me.lblPorcentBilled = New System.Windows.Forms.Label()
         Me.txtAcountNo = New System.Windows.Forms.TextBox()
         Me.sprHoursEstimate = New System.Windows.Forms.NumericUpDown()
         Me.dtpEndDate = New System.Windows.Forms.DateTimePicker()
@@ -116,6 +118,8 @@ Partial Class ProjectsCosts
         'Panel1
         '
         Me.Panel1.BackColor = System.Drawing.Color.FromArgb(CType(CType(190, Byte), Integer), CType(CType(190, Byte), Integer), CType(CType(190, Byte), Integer))
+        Me.Panel1.Controls.Add(Me.lblPorcentLeft)
+        Me.Panel1.Controls.Add(Me.Label25)
         Me.Panel1.Controls.Add(Me.btnDelete)
         Me.Panel1.Controls.Add(Me.btnUpdate)
         Me.Panel1.Controls.Add(Me.Label10)
@@ -127,7 +131,7 @@ Partial Class ProjectsCosts
         Me.Panel1.Controls.Add(Me.txtTask)
         Me.Panel1.Controls.Add(Me.Panel4)
         Me.Panel1.Controls.Add(Me.chbComplete)
-        Me.Panel1.Controls.Add(Me.lblPorcentLeft)
+        Me.Panel1.Controls.Add(Me.lblPorcentBilled)
         Me.Panel1.Controls.Add(Me.txtAcountNo)
         Me.Panel1.Controls.Add(Me.sprHoursEstimate)
         Me.Panel1.Controls.Add(Me.dtpEndDate)
@@ -160,6 +164,26 @@ Partial Class ProjectsCosts
         Me.Panel1.Name = "Panel1"
         Me.Panel1.Size = New System.Drawing.Size(1107, 249)
         Me.Panel1.TabIndex = 0
+        '
+        'lblPorcentLeft
+        '
+        Me.lblPorcentLeft.AutoSize = True
+        Me.lblPorcentLeft.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblPorcentLeft.ForeColor = System.Drawing.Color.FromArgb(CType(CType(90, Byte), Integer), CType(CType(90, Byte), Integer), CType(CType(250, Byte), Integer))
+        Me.lblPorcentLeft.Location = New System.Drawing.Point(669, 201)
+        Me.lblPorcentLeft.Name = "lblPorcentLeft"
+        Me.lblPorcentLeft.Size = New System.Drawing.Size(44, 20)
+        Me.lblPorcentLeft.TabIndex = 40
+        Me.lblPorcentLeft.Text = "0  %"
+        '
+        'Label25
+        '
+        Me.Label25.AutoSize = True
+        Me.Label25.Location = New System.Drawing.Point(663, 177)
+        Me.Label25.Name = "Label25"
+        Me.Label25.Size = New System.Drawing.Size(79, 13)
+        Me.Label25.TabIndex = 39
+        Me.Label25.Text = "Porcentaje Left"
         '
         'btnDelete
         '
@@ -290,16 +314,16 @@ Partial Class ProjectsCosts
         Me.chbComplete.Text = "Complete"
         Me.chbComplete.UseVisualStyleBackColor = True
         '
-        'lblPorcentLeft
+        'lblPorcentBilled
         '
-        Me.lblPorcentLeft.AutoSize = True
-        Me.lblPorcentLeft.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblPorcentLeft.ForeColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(30, Byte), Integer), CType(CType(30, Byte), Integer))
-        Me.lblPorcentLeft.Location = New System.Drawing.Point(636, 200)
-        Me.lblPorcentLeft.Name = "lblPorcentLeft"
-        Me.lblPorcentLeft.Size = New System.Drawing.Size(44, 20)
-        Me.lblPorcentLeft.TabIndex = 27
-        Me.lblPorcentLeft.Text = "0  %"
+        Me.lblPorcentBilled.AutoSize = True
+        Me.lblPorcentBilled.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblPorcentBilled.ForeColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(30, Byte), Integer), CType(CType(30, Byte), Integer))
+        Me.lblPorcentBilled.Location = New System.Drawing.Point(554, 200)
+        Me.lblPorcentBilled.Name = "lblPorcentBilled"
+        Me.lblPorcentBilled.Size = New System.Drawing.Size(44, 20)
+        Me.lblPorcentBilled.TabIndex = 27
+        Me.lblPorcentBilled.Text = "0  %"
         '
         'txtAcountNo
         '
@@ -310,8 +334,6 @@ Partial Class ProjectsCosts
         '
         'sprHoursEstimate
         '
-        Me.sprHoursEstimate.DecimalPlaces = 2
-        Me.sprHoursEstimate.Increment = New Decimal(New Integer() {10, 0, 0, 0})
         Me.sprHoursEstimate.Location = New System.Drawing.Point(369, 204)
         Me.sprHoursEstimate.Maximum = New Decimal(New Integer() {1410065408, 2, 0, 0})
         Me.sprHoursEstimate.Name = "sprHoursEstimate"
@@ -338,8 +360,6 @@ Partial Class ProjectsCosts
         '
         'sprTotalBilling
         '
-        Me.sprTotalBilling.DecimalPlaces = 2
-        Me.sprTotalBilling.Increment = New Decimal(New Integer() {10, 0, 0, 0})
         Me.sprTotalBilling.Location = New System.Drawing.Point(370, 124)
         Me.sprTotalBilling.Maximum = New Decimal(New Integer() {1410065408, 2, 0, 0})
         Me.sprTotalBilling.Name = "sprTotalBilling"
@@ -410,11 +430,11 @@ Partial Class ProjectsCosts
         'Label14
         '
         Me.Label14.AutoSize = True
-        Me.Label14.Location = New System.Drawing.Point(630, 177)
+        Me.Label14.Location = New System.Drawing.Point(548, 177)
         Me.Label14.Name = "Label14"
-        Me.Label14.Size = New System.Drawing.Size(79, 13)
+        Me.Label14.Size = New System.Drawing.Size(86, 13)
         Me.Label14.TabIndex = 13
-        Me.Label14.Text = "Porcentaje Left"
+        Me.Label14.Text = "Porcentaje Billed"
         '
         'Label13
         '
@@ -596,8 +616,10 @@ Partial Class ProjectsCosts
         '
         Me.txtTotalHours3Billing.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.txtTotalHours3Billing.BackColor = System.Drawing.SystemColors.ButtonHighlight
         Me.txtTotalHours3Billing.Location = New System.Drawing.Point(524, 41)
         Me.txtTotalHours3Billing.Name = "txtTotalHours3Billing"
+        Me.txtTotalHours3Billing.ReadOnly = True
         Me.txtTotalHours3Billing.Size = New System.Drawing.Size(120, 20)
         Me.txtTotalHours3Billing.TabIndex = 30
         '
@@ -605,8 +627,10 @@ Partial Class ProjectsCosts
         '
         Me.txtTotalHours3.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.txtTotalHours3.BackColor = System.Drawing.SystemColors.ButtonHighlight
         Me.txtTotalHours3.Location = New System.Drawing.Point(524, 11)
         Me.txtTotalHours3.Name = "txtTotalHours3"
+        Me.txtTotalHours3.ReadOnly = True
         Me.txtTotalHours3.Size = New System.Drawing.Size(120, 20)
         Me.txtTotalHours3.TabIndex = 29
         '
@@ -614,8 +638,10 @@ Partial Class ProjectsCosts
         '
         Me.txtLeftSpend.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.txtLeftSpend.BackColor = System.Drawing.SystemColors.ButtonHighlight
         Me.txtLeftSpend.Location = New System.Drawing.Point(950, 37)
         Me.txtLeftSpend.Name = "txtLeftSpend"
+        Me.txtLeftSpend.ReadOnly = True
         Me.txtLeftSpend.RightToLeft = System.Windows.Forms.RightToLeft.No
         Me.txtLeftSpend.Size = New System.Drawing.Size(120, 20)
         Me.txtLeftSpend.TabIndex = 34
@@ -625,8 +651,10 @@ Partial Class ProjectsCosts
         '
         Me.txtProjectBilled.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.txtProjectBilled.BackColor = System.Drawing.SystemColors.ButtonHighlight
         Me.txtProjectBilled.Location = New System.Drawing.Point(950, 11)
         Me.txtProjectBilled.Name = "txtProjectBilled"
+        Me.txtProjectBilled.ReadOnly = True
         Me.txtProjectBilled.RightToLeft = System.Windows.Forms.RightToLeft.Yes
         Me.txtProjectBilled.Size = New System.Drawing.Size(120, 20)
         Me.txtProjectBilled.TabIndex = 33
@@ -635,8 +663,10 @@ Partial Class ProjectsCosts
         '
         Me.txtTotalMaterial.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.txtTotalMaterial.BackColor = System.Drawing.SystemColors.ButtonHighlight
         Me.txtTotalMaterial.Location = New System.Drawing.Point(738, 41)
         Me.txtTotalMaterial.Name = "txtTotalMaterial"
+        Me.txtTotalMaterial.ReadOnly = True
         Me.txtTotalMaterial.RightToLeft = System.Windows.Forms.RightToLeft.Yes
         Me.txtTotalMaterial.Size = New System.Drawing.Size(120, 20)
         Me.txtTotalMaterial.TabIndex = 32
@@ -645,8 +675,10 @@ Partial Class ProjectsCosts
         '
         Me.txtTotalExpenses.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.txtTotalExpenses.BackColor = System.Drawing.SystemColors.ButtonHighlight
         Me.txtTotalExpenses.Location = New System.Drawing.Point(738, 11)
         Me.txtTotalExpenses.Name = "txtTotalExpenses"
+        Me.txtTotalExpenses.ReadOnly = True
         Me.txtTotalExpenses.RightToLeft = System.Windows.Forms.RightToLeft.Yes
         Me.txtTotalExpenses.Size = New System.Drawing.Size(120, 20)
         Me.txtTotalExpenses.TabIndex = 31
@@ -655,8 +687,10 @@ Partial Class ProjectsCosts
         '
         Me.txtTotalHoursOTBilling.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.txtTotalHoursOTBilling.BackColor = System.Drawing.SystemColors.ButtonHighlight
         Me.txtTotalHoursOTBilling.Location = New System.Drawing.Point(305, 41)
         Me.txtTotalHoursOTBilling.Name = "txtTotalHoursOTBilling"
+        Me.txtTotalHoursOTBilling.ReadOnly = True
         Me.txtTotalHoursOTBilling.RightToLeft = System.Windows.Forms.RightToLeft.Yes
         Me.txtTotalHoursOTBilling.Size = New System.Drawing.Size(120, 20)
         Me.txtTotalHoursOTBilling.TabIndex = 28
@@ -665,8 +699,10 @@ Partial Class ProjectsCosts
         '
         Me.txtTotalHoursOT.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.txtTotalHoursOT.BackColor = System.Drawing.SystemColors.ButtonHighlight
         Me.txtTotalHoursOT.Location = New System.Drawing.Point(306, 11)
         Me.txtTotalHoursOT.Name = "txtTotalHoursOT"
+        Me.txtTotalHoursOT.ReadOnly = True
         Me.txtTotalHoursOT.RightToLeft = System.Windows.Forms.RightToLeft.Yes
         Me.txtTotalHoursOT.Size = New System.Drawing.Size(120, 20)
         Me.txtTotalHoursOT.TabIndex = 27
@@ -675,8 +711,10 @@ Partial Class ProjectsCosts
         '
         Me.txtTotalHoursBilling.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.txtTotalHoursBilling.BackColor = System.Drawing.SystemColors.ButtonHighlight
         Me.txtTotalHoursBilling.Location = New System.Drawing.Point(95, 44)
         Me.txtTotalHoursBilling.Name = "txtTotalHoursBilling"
+        Me.txtTotalHoursBilling.ReadOnly = True
         Me.txtTotalHoursBilling.RightToLeft = System.Windows.Forms.RightToLeft.Yes
         Me.txtTotalHoursBilling.Size = New System.Drawing.Size(120, 20)
         Me.txtTotalHoursBilling.TabIndex = 26
@@ -685,8 +723,10 @@ Partial Class ProjectsCosts
         '
         Me.txtTotalHours.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.txtTotalHours.BackColor = System.Drawing.SystemColors.ButtonHighlight
         Me.txtTotalHours.Location = New System.Drawing.Point(95, 11)
         Me.txtTotalHours.Name = "txtTotalHours"
+        Me.txtTotalHours.ReadOnly = True
         Me.txtTotalHours.RightToLeft = System.Windows.Forms.RightToLeft.Yes
         Me.txtTotalHours.Size = New System.Drawing.Size(120, 20)
         Me.txtTotalHours.TabIndex = 25
@@ -933,7 +973,7 @@ Partial Class ProjectsCosts
     Friend WithEvents lblWorkOrder As Label
     Friend WithEvents Label24 As Label
     Friend WithEvents PictureBox1 As PictureBox
-    Friend WithEvents lblPorcentLeft As Label
+    Friend WithEvents lblPorcentBilled As Label
     Friend WithEvents Panel2 As Panel
     Friend WithEvents Panel3 As Panel
     Friend WithEvents txtLeftSpend As TextBox
@@ -988,4 +1028,6 @@ Partial Class ProjectsCosts
     Friend WithEvents txtTotalHours3 As TextBox
     Friend WithEvents btnDelete As Button
     Friend WithEvents btnUpdate As Button
+    Friend WithEvents lblPorcentLeft As Label
+    Friend WithEvents Label25 As Label
 End Class

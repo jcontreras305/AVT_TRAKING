@@ -504,6 +504,28 @@ end ", conn)
         End Try
     End Sub
 
+    Public Function llenarClassification(ByVal tabla As Data.DataTable) As Boolean
+        Try
+            conectar()
+            Dim cmd As New SqlCommand("select class as 'Material', name as 'Name' from classification", conn)
+            If cmd.ExecuteNonQuery Then
+                Dim da As New SqlDataAdapter(cmd)
+                Dim dt As New DataTable
+                da.Fill(dt)
+                tabla.Rows.Clear()
+                tabla.Columns.Clear()
+                tabla = dt
+                Return True
+            Else
+                Return False
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message())
+            Return False
+        Finally
+            desconectar()
+        End Try
+    End Function
     Public Function llenarClassification(ByVal tabla As DataGridView) As Boolean
         Try
             conectar()
@@ -1303,7 +1325,7 @@ begin
 end
 else if(select count(*) from product as p where p.name= '" + nameProduct + "' or p.idProduct = " + row.Cells(0).Value.ToString() + "  or p.QID = '" + row.Cells(12).Value.ToString() + "' )=1
 begin
-	update product set name = '" + nameProduct + "' ,weight= " + If(row.Cells(4).Value.ToString() = "", "0.0", row.Cells(4).Value.ToString()) + ", weightMeasure = " + If(row.Cells(5).Value.ToString() = "", "0.0", row.Cells(5).Value.ToString()) + ",price = " + If(row.Cells(6).Value.ToString() = "", "0.0", row.Cells(6).Value.ToString()) + ", dailyRentalRate= " + If(row.Cells(7).Value.ToString() = "", "0.0", row.Cells(7).Value.ToString()) + " ,weeklyRentalRate = " + If(row.Cells(8).Value.ToString() = "", "0.0", row.Cells(8).Value.ToString()) + ",monthlyRentalRate = " + If(row.Cells(9).Value.ToString() = "", "0.0", row.Cells(9).Value.ToString()) + ",um='" + row.Cells(2).Value.ToString() + "',class='" + row.Cells(3).Value.ToString() + "',quantity = " + If(row.Cells(10).Value.ToString() = "", "0.0", row.Cells(10).Value.ToString()) + " , PLF = " + If(row.Cells(12).Value.ToString() = "", "0.0", row.Cells(12).Value.ToString()) + ",PSQF = " + If(row.Cells(13).Value.ToString() = "", "0.0", row.Cells(13).Value.ToString()) + " where idProduct = " + row.Cells(0).Value.ToString() + "
+	update product set name = '" + nameProduct + "' ,weight= " + If(row.Cells(4).Value.ToString() = "", "0.0", row.Cells(4).Value.ToString()) + ", weightMeasure = " + If(row.Cells(5).Value.ToString() = "", "0.0", row.Cells(5).Value.ToString()) + ",price = " + If(row.Cells(6).Value.ToString() = "", "0.0", row.Cells(6).Value.ToString()) + ", dailyRentalRate= " + If(row.Cells(7).Value.ToString() = "", "0.0", row.Cells(7).Value.ToString()) + " ,weeklyRentalRate = " + If(row.Cells(8).Value.ToString() = "", "0.0", row.Cells(8).Value.ToString()) + ",monthlyRentalRate = " + If(row.Cells(9).Value.ToString() = "", "0.0", row.Cells(9).Value.ToString()) + ", QID = '" + row.Cells(11).Value.ToString() + "', um='" + row.Cells(2).Value.ToString() + "',class='" + row.Cells(3).Value.ToString() + "',quantity = " + If(row.Cells(10).Value.ToString() = "", "0.0", row.Cells(10).Value.ToString()) + " , PLF = " + If(row.Cells(12).Value.ToString() = "", "0.0", row.Cells(12).Value.ToString()) + ",PSQF = " + If(row.Cells(13).Value.ToString() = "", "0.0", row.Cells(13).Value.ToString()) + " where idProduct = " + row.Cells(0).Value.ToString() + "
 end", conn)
                     cmd.Transaction = tran
                         If cmd.ExecuteNonQuery > 0 Then

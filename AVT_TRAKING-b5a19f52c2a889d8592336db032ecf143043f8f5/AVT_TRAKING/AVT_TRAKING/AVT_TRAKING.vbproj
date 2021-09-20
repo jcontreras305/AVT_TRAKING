@@ -196,6 +196,12 @@
     <Compile Include="Froms\SelectMaterial.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Froms\TagsValidationTable.Designer.vb">
+      <DependentUpon>TagsValidationTable.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Froms\TagsValidationTable.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Froms\TimeSheet.Designer.vb">
       <DependentUpon>TimeSheet.vb</DependentUpon>
     </Compile>
@@ -302,6 +308,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Froms\SelectMaterial.resx">
       <DependentUpon>SelectMaterial.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Froms\TagsValidationTable.resx">
+      <DependentUpon>TagsValidationTable.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Froms\TimeSheet.resx">
       <DependentUpon>TimeSheet.vb</DependentUpon>

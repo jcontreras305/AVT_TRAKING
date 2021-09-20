@@ -899,7 +899,7 @@
                 sprTotalBilling.Value = pjt.totalBilling
             End If
         End If
-        calcularValores()
+        'calcularValores()
     End Sub
 
     Private Function validarTotalBilling() As Boolean
@@ -934,6 +934,10 @@
                 End If
             End If
         End If
+        calcularValores()
+    End Sub
+
+    Private Sub sprTotalBilling_ValueChanged(sender As Object, e As EventArgs) Handles sprTotalBilling.ValueChanged
         calcularValores()
     End Sub
 
@@ -1319,14 +1323,14 @@
 
         If tblExpencesProjects.Rows.Count > 0 Then
             For Each row1 As DataGridViewRow In tblExpencesProjects.Rows
-                totalExpences += CDbl(row1.Cells("Amount").Value)
+                totalExpences += CDbl(If(row1.Cells("Amount").Value Is Nothing, "0", row1.Cells("Amount").Value))
             Next
         End If
 
 
         If tblMaterialProjects.Rows.Count > 0 Then
-            For Each row2 As DataGridViewRow In tblMaterialProjects.Rows
-                totalMaterial += CDbl(row2.Cells("Amount").Value)
+            For Each row2 As DataGridViewRow In tblMaterialProjects.Rows()
+                totalMaterial += CDbl(If(row2.Cells("Amount").Value Is Nothing, "0", row2.Cells("Amount").Value))
             Next
         End If
 
@@ -1350,7 +1354,8 @@
 
         If sprTotalBilling.Value > 0 Then
             Dim porcentLeft = ((totalCostHoursST + totalCostHoursOT + totalCostHours3 + totalExpences + totalMaterial) * 100) / sprTotalBilling.Value
-            lblPorcentLeft.Text = porcentLeft.ToString("N") + "%"
+            lblPorcentBilled.Text = porcentLeft.ToString("N") + "%"
+            lblPorcentLeft.Text = (100 - porcentLeft).ToString("N") + "%"
         End If
 
         If sprHoursEstimate.Value < (totalHoursST + totalHoursOT + totalHours3) Then

@@ -1,5 +1,4 @@
 ﻿Imports Microsoft.Office.Interop.Excel
-
 Public Class scafoldTarking
     Dim tablaEmpleados As New Data.DataTable
     Dim tblProductInComing As New Data.DataTable
@@ -1340,7 +1339,7 @@ Public Class scafoldTarking
     End Sub
 
     Private Sub tblProduct_CellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles tblProduct.CellEndEdit
-        If e.ColumnIndex <> 1 And e.ColumnIndex <> 2 And e.ColumnIndex <> 3 Then
+        If e.ColumnIndex <> 1 And e.ColumnIndex <> 2 And e.ColumnIndex <> 3 And e.ColumnIndex <> 11 Then
             If Not soloNumero(tblProduct.Rows(e.RowIndex).Cells(e.ColumnIndex).Value.ToString()) Then
                 MsgBox("Please use only Numbers.")
                 tblProduct.Rows(e.RowIndex).Cells(e.ColumnIndex).Value = ""
@@ -2617,6 +2616,14 @@ Public Class scafoldTarking
                     tblScaffoldInformationSM.ReadOnly = False
                     tblScaffoldInformationSM.Rows.Clear()
                     tblScaffoldInformationSM.Rows().Add(scAux.sciType, sc.sciWidth, sc.sciLength, sc.sciHeigth, sc.sciDecks, sc.sciKo, sc.sciBase, sc.sciExtraDeck)
+                    md.idScaffoldinformation = scAux.idScaffoldinformation
+                    md.sciType = scAux.sciType
+                    md.sciWidth = scAux.sciWidth
+                    md.sciLength = scAux.sciHeigth
+                    md.sciDecks = scAux.sciDecks
+                    md.sciKo = scAux.sciKo
+                    md.sciBase = scAux.sciBase
+                    md.sciExtraDeck = scAux.sciExtraDeck
                     tblScaffoldInformationSM.ReadOnly = True
                 End If
             Next
@@ -3032,9 +3039,10 @@ Public Class scafoldTarking
 
             dtpRentStop.Value = ds.stopDismantle
             dtpDismantleDate.Value = ds.dismantleDate
+
             If ds.stopDismantle <> Nothing Then
                 Dim diferencia As Long = DateAndTime.DateDiff(DateInterval.Day, ds.scStartDate, ds.stopDismantle)
-                txtDaysActive.Text = CStr(diferencia)
+                txtDaysActive.Text = CStr(If(diferencia = 0, 1, diferencia))
             End If
 
             chbTruckDS.Checked = ds.materialHandeling(0)
@@ -3226,68 +3234,6 @@ Public Class scafoldTarking
             ds.materialHandeling(6) = chbElevatorDS.Checked()
         End If
     End Sub
-
-    Private Sub btnExcelScaffold_Click(sender As Object, e As EventArgs) Handles btnExcelScaffold.Click
-        Dim ApExcel = New Microsoft.Office.Interop.Excel.Application
-        Try
-            Dim openFile As New OpenFileDialog
-            openFile.DefaultExt = "*.xlsm"
-            openFile.FileName = "tScaffolds"
-            openFile.ShowDialog()
-
-            Dim libro = ApExcel.Workbooks.Open(openFile.FileName)
-            Dim productos As New Worksheet
-            Dim unidades As New Worksheet
-            Dim classification As New Worksheet
-            Dim flagStatus As Boolean = True
-            If DialogResult.Yes = MessageBox.Show("Would you like to check if there is any new 'Material Classification'?", "Important", MessageBoxButtons.YesNo, MessageBoxIcon.Information) Then
-                Try
-                    classification = libro.Worksheets("Class")
-                    txtSalida.Text = txtSalida.Text + vbCrLf + "Open sheet 'Class'."
-                Catch ex As Exception
-                    classification = libro.Worksheets("class")
-                    txtSalida.Text = txtSalida.Text + vbCrLf + "Open sheet 'class'."
-                End Try
-                Dim flagClass = validarSheetClassification(classification)
-                If flagClass Then
-                    mtdScaffold.llenarClassification(tblClassification)
-                End If
-            End If
-            If DialogResult.Yes = MessageBox.Show("Would you like to check if there is any new 'Units Meassurement'?", "Important", MessageBoxButtons.YesNo, MessageBoxIcon.Information) Then
-                Try
-                    unidades = libro.Worksheets("Units Meassurement")
-                    txtSalida.Text = txtSalida.Text + vbCrLf + "Open sheet 'Units Meassurement'."
-                Catch ex As Exception
-                    unidades = libro.Worksheets("Units")
-                    txtSalida.Text = txtSalida.Text + vbCrLf + "Open sheet 'Units'."
-                End Try
-                Dim flagUnit = validarSheetUnits(unidades)
-                If flagUnit Then
-                    mtdScaffold.llenarUnitMeassurements(tblUnitMeassurement)
-                End If
-            End If
-            If DialogResult.OK = MessageBox.Show("The insert the products it will being, Are you sure to continue?", "Important", MessageBoxButtons.OKCancel, MessageBoxIcon.Information) Then
-                Try
-                    productos = libro.Worksheets("Product")
-                    txtSalida.Text = txtSalida.Text + vbCrLf + "Open Sheet 'Product'"
-                Catch ex As Exception
-                    productos = libro.Worksheets("product")
-                    txtSalida.Text = txtSalida.Text + vbCrLf + "Open Sheet 'product'"
-                End Try
-                Dim flagProduct = validarSheetProducts(productos)
-                If flagProduct Then
-                    mtdScaffold.llenarProduct(tblProduct)
-                    mtdScaffold.llenarProduct(tblProductosAux)
-                End If
-            End If
-        Catch ex As Exception
-            MsgBox(ex.Message())
-        Finally
-            ApExcel.Quit()
-            NAR(ApExcel)
-        End Try
-    End Sub
-
     Private Sub btnAfterModification_Click(sender As Object, e As EventArgs) Handles btnAfterModification.Click
         Try
             If mtdScaffold.llenarModification(tblModification) Then
@@ -3348,5 +3294,9 @@ Public Class scafoldTarking
         End Try
     End Sub
 
+    Private Sub btnExcelScaffold_Click(sender As Object, e As EventArgs) Handles btnExcelScaffold.Click
+        Dim tvt As New TagsValidationTable
+        tvt.ShowDialog()
+    End Sub
 
 End Class
