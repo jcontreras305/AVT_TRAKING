@@ -3,7 +3,7 @@
     Dim mtdLogin As New MetodosLogin
     Dim flag As Boolean = True
 
-    Private Sub btnVer_Click(sender As Object, e As EventArgs) Handles btnVer.Click 'Este subproseso es para ver o cultar el contenido del campor de password
+    Private Sub btnVer_Click(sender As Object, e As EventArgs)  'Este subproseso es para ver o cultar el contenido del campor de password
         Try
             If flag = True Then ' si flag esta en verdadero entra y desactiva la proteccion 
                 txtPassword.UseSystemPasswordChar = False
@@ -40,4 +40,16 @@
         End If
     End Sub
 
+    Private Sub PictureBox1_Click(sender As Object, e As EventArgs) Handles PictureBox1.Click
+        Try
+            If flag = True Then ' si flag esta en verdadero entra y desactiva la proteccion 
+                txtPassword.UseSystemPasswordChar = False
+                flag = False
+            Else
+                txtPassword.UseSystemPasswordChar = True
+                flag = True
+            End If
+        Catch ex As Exception
+        End Try
+    End Sub
 End Class
