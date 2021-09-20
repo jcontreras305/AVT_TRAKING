@@ -54,9 +54,9 @@ Partial Class Login
         Me.Label1.Font = New System.Drawing.Font("Arial", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label1.Location = New System.Drawing.Point(17, 66)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(58, 17)
+        Me.Label1.Size = New System.Drawing.Size(39, 17)
         Me.Label1.TabIndex = 2
-        Me.Label1.Text = "Usuario"
+        Me.Label1.Text = "User"
         '
         'Label2
         '
@@ -64,9 +64,9 @@ Partial Class Login
         Me.Label2.Font = New System.Drawing.Font("Arial", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label2.Location = New System.Drawing.Point(17, 118)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(84, 17)
+        Me.Label2.Size = New System.Drawing.Size(74, 17)
         Me.Label2.TabIndex = 3
-        Me.Label2.Text = "Contraseña"
+        Me.Label2.Text = "Password"
         '
         'btnVer
         '
@@ -74,7 +74,7 @@ Partial Class Login
         Me.btnVer.Name = "btnVer"
         Me.btnVer.Size = New System.Drawing.Size(41, 23)
         Me.btnVer.TabIndex = 4
-        Me.btnVer.Text = "Ver"
+        Me.btnVer.Text = "Look"
         Me.btnVer.UseVisualStyleBackColor = True
         '
         'btnIniciar
@@ -83,7 +83,7 @@ Partial Class Login
         Me.btnIniciar.Name = "btnIniciar"
         Me.btnIniciar.Size = New System.Drawing.Size(75, 23)
         Me.btnIniciar.TabIndex = 5
-        Me.btnIniciar.Text = "Iniciar"
+        Me.btnIniciar.Text = "Start"
         Me.btnIniciar.UseVisualStyleBackColor = True
         '
         'btnExit
@@ -92,7 +92,7 @@ Partial Class Login
         Me.btnExit.Name = "btnExit"
         Me.btnExit.Size = New System.Drawing.Size(75, 23)
         Me.btnExit.TabIndex = 6
-        Me.btnExit.Text = "Salir"
+        Me.btnExit.Text = "Exit"
         Me.btnExit.UseVisualStyleBackColor = True
         '
         'Login
