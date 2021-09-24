@@ -113,4 +113,8 @@ Public Class TagsValidationTable
             Return False
         End Try
     End Function
+
+    Private Sub TagsValidationTable_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
+    End Sub
 End Class

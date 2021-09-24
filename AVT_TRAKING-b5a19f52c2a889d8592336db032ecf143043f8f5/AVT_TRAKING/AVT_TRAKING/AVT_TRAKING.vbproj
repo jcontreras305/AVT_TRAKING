@@ -366,7 +366,12 @@
   <ItemGroup>
     <Content Include="Documents\Creacion de DB y de la tabla de Usuarios.sql" />
     <Content Include="Documents\IsaacSP.sql" />
+    <None Include="Images\userlogin.png" />
+    <None Include="Images\close.png" />
     <Content Include="Images\eye.png" />
+    <None Include="Images\minimize.png" />
+    <None Include="Images\show.png" />
+    <None Include="Images\maximize.png" />
     <Content Include="Images\user.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />

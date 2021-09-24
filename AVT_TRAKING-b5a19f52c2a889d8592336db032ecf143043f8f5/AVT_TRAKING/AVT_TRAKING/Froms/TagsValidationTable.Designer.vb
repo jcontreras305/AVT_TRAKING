@@ -25,11 +25,10 @@ Partial Class TagsValidationTable
         Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
-        Me.tblTagsScaffold = New System.Windows.Forms.DataGridView()
         Me.Panel2 = New System.Windows.Forms.Panel()
-        Me.btnSubirExcel = New System.Windows.Forms.Button()
         Me.btnSave = New System.Windows.Forms.Button()
-        Me.lblMessage = New System.Windows.Forms.Label()
+        Me.btnSubirExcel = New System.Windows.Forms.Button()
+        Me.tblTagsScaffold = New System.Windows.Forms.DataGridView()
         Me.rowError = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.TagNum = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.jobCat = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -71,10 +70,11 @@ Partial Class TagsValidationTable
         Me.Other = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.TotalHours = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Comment = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.lblMessage = New System.Windows.Forms.Label()
         Me.Panel1.SuspendLayout()
         Me.TableLayoutPanel1.SuspendLayout()
-        CType(Me.tblTagsScaffold, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel2.SuspendLayout()
+        CType(Me.tblTagsScaffold, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'Panel1
@@ -103,6 +103,34 @@ Partial Class TagsValidationTable
         Me.TableLayoutPanel1.Size = New System.Drawing.Size(800, 450)
         Me.TableLayoutPanel1.TabIndex = 0
         '
+        'Panel2
+        '
+        Me.Panel2.Controls.Add(Me.btnSave)
+        Me.Panel2.Controls.Add(Me.btnSubirExcel)
+        Me.Panel2.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Panel2.Location = New System.Drawing.Point(3, 3)
+        Me.Panel2.Name = "Panel2"
+        Me.Panel2.Size = New System.Drawing.Size(794, 80)
+        Me.Panel2.TabIndex = 1
+        '
+        'btnSave
+        '
+        Me.btnSave.Location = New System.Drawing.Point(682, 25)
+        Me.btnSave.Name = "btnSave"
+        Me.btnSave.Size = New System.Drawing.Size(103, 31)
+        Me.btnSave.TabIndex = 2
+        Me.btnSave.Text = "Save"
+        Me.btnSave.UseVisualStyleBackColor = True
+        '
+        'btnSubirExcel
+        '
+        Me.btnSubirExcel.Location = New System.Drawing.Point(561, 25)
+        Me.btnSubirExcel.Name = "btnSubirExcel"
+        Me.btnSubirExcel.Size = New System.Drawing.Size(103, 31)
+        Me.btnSubirExcel.TabIndex = 1
+        Me.btnSubirExcel.Text = "Update Excel"
+        Me.btnSubirExcel.UseVisualStyleBackColor = True
+        '
         'tblTagsScaffold
         '
         Me.tblTagsScaffold.AllowUserToAddRows = False
@@ -122,44 +150,6 @@ Partial Class TagsValidationTable
         Me.tblTagsScaffold.RowHeadersDefaultCellStyle = DataGridViewCellStyle1
         Me.tblTagsScaffold.Size = New System.Drawing.Size(794, 338)
         Me.tblTagsScaffold.TabIndex = 3
-        '
-        'Panel2
-        '
-        Me.Panel2.Controls.Add(Me.btnSave)
-        Me.Panel2.Controls.Add(Me.btnSubirExcel)
-        Me.Panel2.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel2.Location = New System.Drawing.Point(3, 3)
-        Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(794, 80)
-        Me.Panel2.TabIndex = 1
-        '
-        'btnSubirExcel
-        '
-        Me.btnSubirExcel.Location = New System.Drawing.Point(561, 25)
-        Me.btnSubirExcel.Name = "btnSubirExcel"
-        Me.btnSubirExcel.Size = New System.Drawing.Size(103, 31)
-        Me.btnSubirExcel.TabIndex = 1
-        Me.btnSubirExcel.Text = "Update Excel"
-        Me.btnSubirExcel.UseVisualStyleBackColor = True
-        '
-        'btnSave
-        '
-        Me.btnSave.Location = New System.Drawing.Point(682, 25)
-        Me.btnSave.Name = "btnSave"
-        Me.btnSave.Size = New System.Drawing.Size(103, 31)
-        Me.btnSave.TabIndex = 2
-        Me.btnSave.Text = "Save"
-        Me.btnSave.UseVisualStyleBackColor = True
-        '
-        'lblMessage
-        '
-        Me.lblMessage.AutoSize = True
-        Me.lblMessage.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.lblMessage.Location = New System.Drawing.Point(3, 430)
-        Me.lblMessage.Name = "lblMessage"
-        Me.lblMessage.Size = New System.Drawing.Size(794, 20)
-        Me.lblMessage.TabIndex = 2
-        Me.lblMessage.Text = "Message:"
         '
         'rowError
         '
@@ -422,6 +412,16 @@ Partial Class TagsValidationTable
         Me.Comment.Name = "Comment"
         Me.Comment.Width = 76
         '
+        'lblMessage
+        '
+        Me.lblMessage.AutoSize = True
+        Me.lblMessage.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.lblMessage.Location = New System.Drawing.Point(3, 430)
+        Me.lblMessage.Name = "lblMessage"
+        Me.lblMessage.Size = New System.Drawing.Size(794, 20)
+        Me.lblMessage.TabIndex = 2
+        Me.lblMessage.Text = "Message:"
+        '
         'TagsValidationTable
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -433,8 +433,8 @@ Partial Class TagsValidationTable
         Me.Panel1.ResumeLayout(False)
         Me.TableLayoutPanel1.ResumeLayout(False)
         Me.TableLayoutPanel1.PerformLayout()
-        CType(Me.tblTagsScaffold, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel2.ResumeLayout(False)
+        CType(Me.tblTagsScaffold, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
