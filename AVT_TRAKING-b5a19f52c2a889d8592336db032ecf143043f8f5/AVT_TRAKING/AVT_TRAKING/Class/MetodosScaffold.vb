@@ -47,7 +47,24 @@ Public Class MetodosScaffold
             desconectar()
         End Try
     End Function
-
+    Public Function llenarJobCat(ByVal tabla As Data.DataTable) As Boolean
+        Try
+            conectar()
+            Dim cmd As New SqlCommand("select idJobCat as 'ID' , cat as 'Description' , days as 'Days' from jobCat", conn)
+            If cmd.ExecuteNonQuery Then
+                Dim da As New SqlDataAdapter(cmd)
+                da.Fill(tabla)
+                Return True
+            Else
+                Return False
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message())
+            Return False
+        Finally
+            desconectar()
+        End Try
+    End Function
     Public Function SaveJobCat(ByVal tabla As DataGridView) As Boolean
         Try
             conectar()
@@ -174,7 +191,24 @@ end", conn)
             desconectar()
         End Try
     End Function
-
+    Public Function llenarAreas(ByVal tabla As Data.DataTable) As Boolean
+        Try
+            conectar()
+            Dim cmd As New SqlCommand("select ar.idArea as 'Area ID', ar.name as 'Area Name', cordinator AS 'Cordinator' from areas as ar", conn)
+            If cmd.ExecuteNonQuery Then
+                Dim da As New SqlDataAdapter(cmd)
+                da.Fill(tabla)
+                Return True
+            Else
+                Return False
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message())
+            Return False
+        Finally
+            desconectar()
+        End Try
+    End Function
     Public Function SaveAreas(ByVal tabla As DataGridView) As Boolean
         Try
             conectar()
@@ -313,6 +347,33 @@ inner join task as tk on tk.idAuxWO = wo.idAuxWO", conn)
         End Try
     End Function
 
+    Public Function existWO(ByVal Workorder As String) As Boolean
+        Try
+            conectar()
+            Workorder = Workorder.Replace("-", " ")
+            Workorder = Workorder.Replace("/", " ")
+            Dim array1 = Workorder.Split(" ")
+            Dim wo As String = array1(0)
+            Dim task As String = array1(1)
+            Dim cmd As New SqlCommand("select COUNT(*) as 'num' from (select CONCAT(wo.idWO,'-',tk.task) as 'WONo',wo.idWO ,tk.task
+from job as jb 
+inner join projectOrder as po on po.jobNo = jb.jobNo
+inner join workOrder as wo on wo.idPO = po.idPO
+inner join task as tk on tk.idAuxWO = wo.idAuxWO) as T1
+where  T1.WONo = '" + wo + "-" + task + "' or (T1.idWO='" + wo + "' and T1.task='" + task + "')", conn)
+            Dim dr As SqlDataReader = cmd.ExecuteReader()
+            Dim exist As Boolean = False
+            While dr.Read
+                exist = If(CInt(dr("num")) > 0, True, False)
+            End While
+            Return exist
+        Catch ex As Exception
+            Return False
+        Finally
+            desconectar()
+        End Try
+    End Function
+
     '========================================================= Sub Jobs ====================================================================
     Public Function llenarComboSubJob(ByVal combo As ComboBox) As DataTable
         Dim tabla As New DataTable
@@ -346,6 +407,25 @@ inner join task as tk on tk.idAuxWO = wo.idAuxWO", conn)
                 Dim dt As New DataTable
                 da.Fill(dt)
                 tabla.DataSource = dt
+                Return True
+            Else
+                Return False
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message())
+            Return False
+        Finally
+            desconectar()
+        End Try
+    End Function
+    Public Function llenarSubJobs(ByVal tabla As Data.DataTable) As Boolean
+        Try
+            conectar()
+            tabla.Clear()
+            Dim cmd As New SqlCommand("select idSubJob as 'Sub Job', description as 'Description' from subJobs", conn)
+            If cmd.ExecuteNonQuery Then
+                Dim da As New SqlDataAdapter(cmd)
+                da.Fill(tabla)
                 Return True
             Else
                 Return False
@@ -1093,6 +1173,26 @@ end ", conn)
                 Dim dt As New DataTable
                 da.Fill(dt)
                 tabla.DataSource = dt
+                Return True
+            Else
+                Return False
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message())
+            Return False
+        Finally
+            desconectar()
+        End Try
+    End Function
+
+    Public Function llenarRental(ByVal tabla As Data.DataTable) As Boolean
+        Try
+            conectar()
+            tabla.Clear()
+            Dim cmd As New SqlCommand("select type as 'TYPE' from rental", conn)
+            If cmd.ExecuteNonQuery Then
+                Dim da As New SqlDataAdapter(cmd)
+                da.Fill(tabla)
                 Return True
             Else
                 Return False

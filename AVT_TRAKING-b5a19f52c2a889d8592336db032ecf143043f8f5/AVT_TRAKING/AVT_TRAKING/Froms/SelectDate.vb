@@ -1,6 +1,7 @@
 ﻿Public Class SelectDate
     Dim flagExtenion As Boolean
     Dim fechaStart, fechaEnd As Date
+    Public HWPE As Boolean
     Private Sub SelectDate_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         flagExtenion = False
     End Sub
@@ -18,15 +19,22 @@
     End Sub
 
     Private Sub btnAcept_Click(sender As Object, e As EventArgs) Handles btnAcept.Click
-        Dim hwpe As HoursWeekPeerEmployees = CType(Owner, HoursWeekPeerEmployees)
-        If fechaStart <> fechaEnd Then
-            hwpe.txtFindFecha.Text = txtFechaStart.Text + " to " + txtFechaEnd.Text()
+        If hwpe Then
+            Dim hwpe As HoursWeekPeerEmployees = CType(Owner, HoursWeekPeerEmployees)
+            If fechaStart <> fechaEnd Then
+                hwpe.txtFindFecha.Text = txtFechaStart.Text + " to " + txtFechaEnd.Text()
+            Else
+                hwpe.txtFindFecha.Text = txtFechaStart.Text
+            End If
+            hwpe.fechaStart = fechaStart
+            hwpe.fechaEnd = fechaEnd
+            Me.Close()
         Else
-            hwpe.txtFindFecha.Text = txtFechaStart.Text
+            Dim tvt As TagsValidationTable = CType(Owner, TagsValidationTable)
+            tvt.fechaStart = fechaStart
+            tvt.txtFecha.Text = fechaStart.ToShortDateString()
+            Me.Close()
         End If
-        hwpe.fechaStart = fechaStart
-        hwpe.fechaEnd = fechaEnd
-        Me.Close()
     End Sub
 
     Private Sub mtcCalendar_DateChanged(sender As Object, e As DateRangeEventArgs) Handles mtcCalendar.DateChanged

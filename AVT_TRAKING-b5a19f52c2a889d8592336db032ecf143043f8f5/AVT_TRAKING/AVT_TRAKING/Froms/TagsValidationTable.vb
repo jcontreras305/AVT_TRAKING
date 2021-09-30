@@ -3,8 +3,32 @@ Public Class TagsValidationTable
     Dim mtdScaffold As New MetodosScaffold
     Dim tblClassification As New Data.DataTable
     Dim tblTags As New Data.DataTable
-
-
+    Dim tblAreas As New Data.DataTable
+    Dim tblJobCat As New Data.DataTable
+    Dim tblSubJob As New Data.DataTable
+    Dim tblType As New Data.DataTable
+    Dim tblProducts As New Data.DataTable
+    Dim listTagExcel As New List(Of String)
+    Dim listProduct As New List(Of String)
+    Dim selectTable As String
+    Public fechaStart As Date
+    Private flagClick As Boolean
+    Private Sub TagsValidationTable_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        flagClick = False
+        cmbDatos.Enabled = False
+        txtFecha.Enabled = False
+        btnSave.Enabled = False
+        mtdScaffold.llenarAreas(tblAreas)
+        mtdScaffold.llenarJobCat(tblJobCat)
+        mtdScaffold.llenarScaffold(tblTags)
+        mtdScaffold.llenarSubJobs(tblSubJob)
+        mtdScaffold.llenarRental(tblType)
+        mtdScaffold.llenarProduct(tblProducts)
+        selectTable = TabControl1.SelectedTab.Text()
+        For Each row As Data.DataRow In tblProducts.Rows
+            listProduct.Add(row("ID").ToString())
+        Next
+    End Sub
     Private Sub btnSubirExcel_Click(sender As Object, e As EventArgs) Handles btnSubirExcel.Click
         Dim ApExcel = New Microsoft.Office.Interop.Excel.Application
         Try
@@ -14,18 +38,38 @@ Public Class TagsValidationTable
             openFile.ShowDialog()
 
             Dim libro = ApExcel.Workbooks.Open(openFile.FileName)
-            Dim scaffoldSheet As New Worksheet
+            Dim scaffoldSheet As Worksheet = New Worksheet
+            Dim productSheet As Worksheet = New Worksheet
             Dim flagStatus As Boolean = True
-            If DialogResult.OK = MessageBox.Show("The process to read the Excel will be start." + vbCr + "Please vierifi that the name of the scaffold sheet is 'tScaffold'.", "Important", MessageBoxButtons.OK, MessageBoxIcon.Information) Then
+            If DialogResult.OK = MessageBox.Show("The process to read the Excel will be start." + vbCr + "Please vierifi that the name of the scaffold sheet is 'tScaffolds'.", "Important", MessageBoxButtons.OK, MessageBoxIcon.Information) Then
                 Try
-                    scaffoldSheet = libro.Worksheets(1)
-                    lblMessage.Text = "Message: Open sheet 'Scaffold'."
-                Catch ex As Exception
-                    scaffoldSheet = libro.Worksheets("tScaffold")
-                    lblMessage.Text = "Message: Open sheet 'tScaffold'."
-                End Try
-                Dim flagSC = validarSheetScaffold(scaffoldSheet)
 
+                    scaffoldSheet = libro.Worksheets("tScaffolds")
+                    lblMessage.Text = "Message: Open sheet 'Scaffolds'."
+                    pgbComplete.Value = 10
+                Catch ex As Exception
+                    scaffoldSheet = libro.Worksheets(1)
+                    lblMessage.Text = "Message: Open sheet 'tScaffolds'."
+                    pgbComplete.Value = 10
+                End Try
+                validarSheetScaffold(scaffoldSheet)
+                Try
+                    productSheet = libro.Worksheets("tMatBuilds")
+                    lblMessage.Text = "Message: Open sheet 'tMatBuilds'."
+                    pgbComplete.Value = pgbComplete.Value + 10
+                Catch ex As Exception
+                    productSheet = libro.Worksheets(2)
+                    lblMessage.Text = "Message: Open sheet 'tMatBuilds'."
+                    pgbComplete.Value = pgbComplete.Value + 10
+                End Try
+
+                validarProductTags(productSheet)
+                If Not ExistError(tblTagsScaffold) Then
+                    If Not ExistError(tblProductSheet) Then
+                        btnSave.Enabled = True
+                    End If
+                End If
+                pgbComplete.Value = 100
             End If
         Catch ex As Exception
             MsgBox(ex.Message())
@@ -35,9 +79,51 @@ Public Class TagsValidationTable
         End Try
     End Sub
 
+    Private Function validarProductTags(ByVal sheet As Worksheet) As Boolean
+        Try
+            lblMessage.Text = "Message: Reading Material Build Sheet"
+            tblProductSheet.Rows.Clear()
+            Dim contPs As Integer = 2
+            tblProductSheet.Columns("clmErrorP").Visible = False
+            While sheet.Cells(contPs, 1).Text <> "" Or sheet.Cells(contPs + 1, 1).Text <> ""
+                If sheet.Cells(contPs, 1).Text <> "" Then
+                    tblProductSheet.Rows.Add("", sheet.Cells(contPs, 1).Text, sheet.Cells(contPs, 2).Text, sheet.Cells(contPs, 3).Text)
+                    tblProductSheet.Rows(tblProductSheet.Rows.Count() - 1).HeaderCell.Value = contPs.ToString()
+                End If
+                If sheet.Cells(contPs + 1, 1).Text <> "" Then
+                    tblProductSheet.Rows.Add("", sheet.Cells(contPs + 1, 1).Text, sheet.Cells(contPs + 1, 2).Text, sheet.Cells(contPs + 1, 3).Text)
+                    tblProductSheet.Rows(tblProductSheet.Rows.Count() - 1).HeaderCell.Value = (contPs + 1).ToString()
+                End If
+                contPs += 2
+            End While
+            lblMessage.Text = "Message: Validating the values."
+            pgbComplete.Value = pgbComplete.Value + 10
+            For Each row As DataGridViewRow In tblProductSheet.Rows()
+                validarFilaProduct(row)
+            Next
+            pgbComplete.Value = pgbComplete.Value + 20
+            Return If(tblProductSheet.Columns("clmErrorP").Visible = True, False, True)
+        Catch ex As Exception
+            MsgBox(ex.Message())
+            Return False
+        End Try
+    End Function
+    Private Function existQuantity(ByVal QTY As String) As Boolean
+        Dim exist As Boolean = False
+        For Each row As Data.DataRow In tblProducts.Rows()
+            If CStr(row("QTY")) <> "" Then
+                If row("QTY") >= CDec(QTY) Then
+                    exist = True
+                    Exit For
+                End If
+            End If
+        Next
+        Return exist
+    End Function
     Private Function validarSheetScaffold(ByVal sheet As Worksheet) As Boolean
         Try
             lblMessage.Text = "Message: Reading Scaffold Sheet."
+            tblTagsScaffold.Rows.Clear()
             Dim contSC As Integer = 2
             While sheet.Cells(contSC, 1).Text <> "" Or sheet.Cells(contSC + 1, 1).Text <> ""
                 If sheet.Cells(contSC, 1).Text <> "" Then
@@ -50,67 +136,482 @@ Public Class TagsValidationTable
                 End If
                 contSC += 2
             End While
-
-            For Each row As DataGridViewRow In tblTags.Rows()
-
+            pgbComplete.Value = pgbComplete.Value + 20
+            lblMessage.Text = "Message: Validating the values."
+            For Each row1 As DataGridViewRow In tblTagsScaffold.Rows()
+                validarFilaTags(row1)
             Next
-
-            'se tiene que verificar que no existan repetidos o ya insertados
-
-            'mtdScaffold.llenarScaffold(tblTags)
-            'Dim listaTag As New List(Of scaffold)
-            'Dim listRepetidos As New List(Of Integer)
-
-            'Dim contSC As Integer = 2
-            'Dim listTagV As New List(Of String)
-            'While sheet.Cells(contSC, 1).Text <> ""
-            '    listTagV.Add(sheet.Cells(contSC, 1).Text)
-            '    contSC += 1
-            'End While
-            'Dim cont As Integer
-            'Dim fila As Integer = 1
-            'For Each rowVD1 As String In listTagV
-            '    cont = 0
-            '    fila += 1
-            '    For Each rowVD2 As String In listTagV
-            '        If rowVD1 = rowVD2 Then
-            '            cont += 1
-            '            If cont > 1 Then
-            '                Exit For
-            '            End If
-            '        End If
-            '    Next
-            '    If cont > 1 Then
-            '        sheet.Cells(fila, 1).style.Interior.Color = Color.Red
-            '    End If
-            'Next
-
-            ''While sheet.Cells(contSC, 1).Text <> "" And sheet.Cells(contSC + 1, 1).Text <> ""
-            '    Dim flag As Boolean = True
-            '    For Each row As DataRow In tblScaffoldTags.Rows()
-            '        If row.ItemArray(0) IsNot Nothing Then
-            '            If sheet.Cells(contSC, 1).Text = row.ItemArray(0) Or sheet.Cells(contSC, 2).Text = row.ItemArray(1) Then
-            '                flag = False
-            '                Exit For
-            '            Else
-            '                flag = True
-            '            End If
-            '        End If
-            '    Next
-            '    If flag Then
-            '        Dim newSC As New scaffold
-            '        newSC.tag = sheet.Cells(contSC, 1).Text
-            '        newSC.wo = sheet.Cells(contSC, 2).text
-            '        listaTag.Add(newSC)
-            '    Else
-            '        listRepetidos.Add(contSC)
-            '    End If
-            '    contSC += 1
-            'End While
-            Return True
+            pgbComplete.Value = pgbComplete.Value + 20
+            Return If(tblTagsScaffold.Columns("clmError").Visible = True, False, True)
         Catch ex As Exception
             MsgBox(ex.Message())
             Return False
         End Try
     End Function
+
+    Private Sub tblTagsScaffold_CellMouseClick(sender As Object, e As DataGridViewCellMouseEventArgs) Handles tblTagsScaffold.CellMouseClick
+        Try
+            flagClick = False
+            Select Case e.ColumnIndex
+                Case tblTagsScaffold.Columns("jobCat").Index
+                    llenarCombo(cmbDatos, tblJobCat, 0, False)
+                    cmbDatos.Enabled = True
+                    txtFecha.Enabled = False
+                Case tblTagsScaffold.Columns("AreaID").Index
+                    llenarCombo(cmbDatos, tblAreas, 0, False)
+                    cmbDatos.Enabled = True
+                    txtFecha.Enabled = False
+                Case tblTagsScaffold.Columns("WorkNum").Index
+                    mtdScaffold.llenarComboWO(cmbDatos)
+                    cmbDatos.Enabled = True
+                    txtFecha.Enabled = False
+                Case tblTagsScaffold.Columns("SubJob").Index
+                    llenarCombo(cmbDatos, tblSubJob, 0, False)
+                    cmbDatos.Enabled = True
+                    txtFecha.Enabled = False
+                Case tblTagsScaffold.Columns("Type").Index
+                    llenarCombo(cmbDatos, tblType, 0, False)
+                    cmbDatos.Enabled = True
+                    txtFecha.Enabled = False
+                Case tblTagsScaffold.Columns("DateBuild").Index
+                    Dim auxF1 As Date = fechaStart
+                    Dim selectFecha As New SelectDate
+                    AddOwnedForm(selectFecha)
+                    selectFecha.ShowDialog()
+                    txtFecha.Enabled = True
+                    txtFecha.Text = fechaStart.ToShortDateString()
+                    cmbDatos.Enabled = False
+                Case tblTagsScaffold.Columns("ReqComp").Index
+                    Dim auxF1 As Date = fechaStart
+                    Dim selectFecha As New SelectDate
+                    AddOwnedForm(selectFecha)
+                    selectFecha.ShowDialog()
+                    txtFecha.Enabled = True
+                    txtFecha.Text = fechaStart.ToShortDateString()
+                    cmbDatos.Enabled = False
+                Case Else
+                    txtFecha.Enabled = False
+                    cmbDatos.Enabled = False
+            End Select
+            flagClick = True
+        Catch ex As Exception
+
+        End Try
+    End Sub
+    Private Sub tblProductSheet_CellMouseClick(sender As Object, e As DataGridViewCellMouseEventArgs) Handles tblProductSheet.CellMouseClick
+        Try
+            flagClick = False
+            Select Case e.ColumnIndex
+                Case tblProductSheet.Columns("clmTagID").Index
+                    llenarCombo(cmbDatos, tblTags, 0, True)
+                    cmbDatos.Enabled = True
+                    txtFecha.Enabled = False
+                Case tblProductSheet.Columns("clmProductID").Index
+                    llenarCombo(cmbDatos, tblProducts, 0, False)
+                    cmbDatos.Enabled = True
+                    txtFecha.Enabled = False
+                Case Else
+                    txtFecha.Enabled = False
+                    cmbDatos.Enabled = False
+            End Select
+            flagClick = True
+        Catch ex As Exception
+
+        End Try
+    End Sub
+    Public Function llenarCombo(ByVal cmb As ComboBox, ByVal tbl As Data.DataTable, ByVal clmIndex As Integer, ByVal isTag As Boolean) As Boolean
+        Try
+            cmb.Items.Clear()
+            cmb.Items.Add("")
+            For Each row As Data.DataRow In tbl.Rows()
+                cmb.Items.Add(row.ItemArray(clmIndex))
+            Next
+            If isTag Then
+                For Each row As DataGridViewRow In tblTagsScaffold.Rows
+                    If cmbDatos.FindString(row.Cells("TagNum").Value) = -1 Then
+                        cmbDatos.Items.Add(row.Cells("TagNum").Value)
+                    End If
+                Next
+            End If
+            cmb.Text = ""
+            Return True
+        Catch ex As Exception
+            Return False
+        End Try
+    End Function
+    Private Function existProduct(ByVal idProduct As String) As Boolean
+        Dim exist As Boolean = False
+        Dim index = listProduct.IndexOf(idProduct)
+        If index > -1 Then
+            exist = True
+        Else
+            exist = False
+        End If
+        Return exist
+    End Function
+    Private Function existTagExcel(ByVal tag As String) As Boolean
+        Dim exist As Boolean = False
+        Dim index = listTagExcel.IndexOf(tag)
+        If index > -1 Then
+            exist = True
+        Else
+            exist = False
+        End If
+        Return exist
+    End Function
+    Private Function existTag(ByVal tag As String) As Boolean
+        Dim exist As Boolean = False
+        For Each row As Data.DataRow In tblTags.Rows
+            If tag = row.ItemArray(0) Then
+                exist = True
+                Exit For
+            End If
+        Next
+        Return exist
+    End Function
+    Private Function existArea(ByVal area As String) As Boolean
+        Dim exist As Boolean = False
+        For Each row As Data.DataRow In tblAreas.Rows
+            If area = row.ItemArray(0) Or area = row.ItemArray(0) Then
+                exist = True
+                Exit For
+            End If
+        Next
+        Return exist
+    End Function
+    Private Function existJobCat(ByVal jobCat) As Boolean
+        Dim exist As Boolean = False
+        For Each row As Data.DataRow In tblJobCat.Rows
+            If jobCat = row.ItemArray(0) Or jobCat = row.ItemArray(0) Then
+                exist = True
+                Exit For
+            End If
+        Next
+        Return exist
+    End Function
+    Private Function existSubJob(ByVal subJob As String) As Boolean
+        Dim exist As Boolean = False
+        For Each row As Data.DataRow In tblSubJob.Rows
+            If subJob = row.ItemArray(0) Or subJob = row.ItemArray(1) Then
+                exist = True
+                Exit For
+            End If
+        Next
+        Return exist
+    End Function
+    Private Function existType(ByVal type As String) As Boolean
+        Dim exist As Boolean = False
+        For Each row As Data.DataRow In tblType.Rows
+            If type = row.ItemArray(0) Then
+                exist = True
+                Exit For
+            End If
+        Next
+        Return exist
+    End Function
+
+    Private Sub cmbDatos_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbDatos.SelectedIndexChanged
+        If flagClick Then
+            If selectTable = TabControl1.TabPages(0).Text Then
+                If tblTagsScaffold.CurrentCell.ColumnIndex = tblTagsScaffold.Columns("WorkNum").Index Then
+                    Dim wn As String() = cmbDatos.SelectedItem.ToString().Split(" ")
+                    tblTagsScaffold.CurrentCell.Value = wn(0)
+                Else
+                    tblTagsScaffold.CurrentCell.Value = cmbDatos.SelectedItem.ToString()
+                End If
+                validarFilaTags(tblTagsScaffold.CurrentRow())
+            ElseIf selectTable = TabControl1.TabPages(1).Text Then
+                tblProductSheet.CurrentCell.Value = cmbDatos.SelectedItem.ToString()
+                validarFilaProduct(tblProductSheet.CurrentRow())
+            End If
+            If Not ExistError(tblTagsScaffold) Then
+                tblTagsScaffold.Columns("clmError").Visible = False
+                If Not ExistError(tblProductSheet) Then
+                    tblProductSheet.Columns("clmErrorP").Visible = False
+                    btnSave.Enabled = True
+                End If
+            End If
+
+        End If
+    End Sub
+
+    Private Sub TabControl1_SelectedIndexChanged(sender As Object, e As EventArgs) Handles TabControl1.SelectedIndexChanged
+        selectTable = TabControl1.SelectedTab.Text()
+        cmbDatos.Items.Clear()
+        cmbDatos.Enabled = False
+        txtFecha.Text = ""
+        txtFecha.Enabled = False
+    End Sub
+
+    Private Sub txtFecha_TextChanged(sender As Object, e As EventArgs) Handles txtFecha.TextChanged
+        If selectTable = TabControl1.TabPages(0).Text Then
+            tblTagsScaffold.CurrentCell.Value = txtFecha.Text
+        End If
+        If Not ExistError(tblTagsScaffold) Then
+            tblTagsScaffold.Columns("clmError").Visible = False
+        End If
+        If Not ExistError(tblProductSheet) Then
+            tblProductSheet.Columns("clmErrorP").Visible = False
+        End If
+    End Sub
+    Public Function validarFilaTags(ByVal row1 As DataGridViewRow) As Boolean
+        Try
+            'Validamos que no existan tags repetidos
+            row1.DefaultCellStyle.BackColor = Color.White
+            row1.Cells("TagNum").Style.BackColor = row1.DefaultCellStyle.BackColor
+            row1.Cells("jobCat").Style.BackColor = row1.DefaultCellStyle.BackColor
+            row1.Cells("AreaID").Style.BackColor = row1.DefaultCellStyle.BackColor
+            row1.Cells("WorkNum").Style.BackColor = row1.DefaultCellStyle.BackColor
+            row1.Cells("SubJob").Style.BackColor = row1.DefaultCellStyle.BackColor
+            row1.Cells("Type").Style.BackColor = row1.DefaultCellStyle.BackColor
+            row1.Cells("clmError").Value = ""
+            Dim tag1 As String = row1.Cells("TagNum").Value
+            Dim flagRepeat As Integer = 0
+            If Not existTag(tag1) Then
+                For Each row2 As DataGridViewRow In tblTagsScaffold.Rows()
+                    If tag1 = row2.Cells("TagNum").Value Then
+                        flagRepeat += 1
+                        If flagRepeat > 1 Then
+                            row2.DefaultCellStyle.BackColor = Color.Yellow
+                            row2.Cells("TagNum").Style.BackColor = Color.Red
+                            row2.Cells("clmError").Value = "Repeat tag"
+                            tblTagsScaffold.Columns("clmError").Visible = True
+                        Else
+                            listTagExcel.Add(tag1)
+                        End If
+                    End If
+                Next
+
+            Else
+                row1.Cells("clmError").Value = "The tag is inserted"
+                tblTagsScaffold.Columns("clmError").Visible = True
+            End If
+            'validamos los jobCat
+            If Not existJobCat(row1.Cells("jobCat").Value) Then
+                row1.Cells("jobCat").Style.BackColor = Color.Red
+                row1.Cells("clmError").Value = If(row1.Cells("clmError").Value = "", "The JobCat doesn't exist", row1.Cells("clmError").Value & ",The JobCat doesn't exist")
+            End If
+            'validamos las areas
+            If Not existArea(row1.Cells("AreaID").Value) Then
+                row1.Cells("AreaID").Style.BackColor = Color.Red
+                row1.Cells("clmError").Value = If(row1.Cells("clmError").Value = "", "The Area doesn't exist", row1.Cells("clmError").Value & ",The Area doesn't exist")
+            End If
+            'validamos que exista el task o idAux
+            If Not mtdScaffold.existWO(row1.Cells("WorkNum").Value) Then
+                row1.Cells("WorkNum").Style.BackColor = Color.Red
+                row1.Cells("clmError").Value = If(row1.Cells("clmError").Value = "", "WorkNum doesn't exist", row1.Cells("clmError").Value & ",WorkNum doesn't exist")
+            End If
+            'validamos que exista el sub job
+            If Not existSubJob(row1.Cells("SubJob").Value) Then
+                row1.Cells("SubJob").Style.BackColor = Color.Red
+                row1.Cells("clmError").Value = If(row1.Cells("clmError").Value = "", "SubJob doesn't exist", row1.Cells("clmError").Value & ",SubJob doesn't exist")
+            End If
+            'validamos que exista el type
+            If Not existType(row1.Cells("Type").Value) Then
+                row1.Cells("Type").Style.BackColor = Color.Red
+                row1.Cells("clmError").Value = If(row1.Cells("clmError").Value = "", "Type doesn't exist", row1.Cells("clmError").Value & ",Type doesn't exist")
+            End If
+            'Pintamos las filas con error
+            If row1.Cells("clmError").Value <> "" Then
+                row1.DefaultCellStyle.BackColor = Color.Yellow
+                tblTagsScaffold.Columns("clmError").Visible = True
+                If Not row1.Cells("TagNum").Style.BackColor = Color.Red Then
+                    row1.Cells("TagNum").Style.BackColor = Color.Yellow
+                End If
+                If Not row1.Cells("jobCat").Style.BackColor = Color.Red Then
+                    row1.Cells("jobCat").Style.BackColor = Color.Yellow
+                End If
+                If Not row1.Cells("AreaID").Style.BackColor = Color.Red Then
+                    row1.Cells("AreaID").Style.BackColor = Color.Yellow
+                End If
+                If Not row1.Cells("WorkNum").Style.BackColor = Color.Red Then
+                    row1.Cells("WorkNum").Style.BackColor = Color.Yellow
+                End If
+                If Not row1.Cells("SubJob").Style.BackColor = Color.Red Then
+                    row1.Cells("SubJob").Style.BackColor = Color.Yellow
+                End If
+                If Not row1.Cells("Type").Style.BackColor = Color.Red Then
+                    row1.Cells("Type").Style.BackColor = Color.Yellow
+                End If
+            End If
+            Return True
+        Catch ex As Exception
+            Return False
+        End Try
+    End Function
+    Private Function validarFilaProduct(ByVal row As DataGridViewRow) As Boolean
+        Try
+            'validar los tag
+            row.DefaultCellStyle.BackColor = Color.White
+            row.Cells("clmTagID").Style.BackColor = row.DefaultCellStyle.BackColor
+            row.Cells("clmProductID").Style.BackColor = row.DefaultCellStyle.BackColor
+            row.Cells("clmQuantity").Style.BackColor = row.DefaultCellStyle.BackColor
+
+            row.Cells("clmErrorP").Value = ""
+
+            'validamos que no exista productos repetidos 
+            Dim contRepeat As Integer = 0
+            For Each rowp2 As DataGridViewRow In tblProductSheet.Rows()
+                If row.Cells("clmTagID").Value = rowp2.Cells("clmTagID").Value And row.Cells("clmProductID").Value = rowp2.Cells("clmProductID").Value Then
+                    contRepeat += 1
+                    If contRepeat > 1 Then
+                        row.Cells("clmProductID").Style.BackColor = Color.Red
+                        row.Cells("clmTagID").Style.BackColor = Color.Red
+                        row.Cells("clmErrorP").Value = If(row.Cells("clmErrorP").Value <> "", row.Cells("clmErrorP").Value & ", The product is repeat.", "The product is repeat.")
+                    End If
+                End If
+            Next
+            Dim tagAfter() As String = {"", ""}
+            If row.Cells("clmTagID").Value.ToString.Equals(tagAfter(0)) And Not tagAfter(0) <> "" Then
+                row.Cells("clmTagID").Style.BackColor = Color.Red
+                row.Cells("clmErrorP").Value = "The tag does not exist."
+                tblProductSheet.Columns("clmErrorP").Visible = True
+            Else
+                If Not existTagExcel(row.Cells("clmTagID").Value) Then 'valdamos que este en la lista a insetar
+                    If Not existTag(row.Cells("clmTagID").Value) Then ' o que este ya insertado
+                        row.Cells("clmTagID").Style.BackColor = Color.Red
+                        tagAfter(0) = row.Cells("clmTagID").Value
+                        row.Cells("clmErrorP").Value = "The tag does not exist"
+                        tagAfter(1) = row.Cells("clmErrorP").Value
+                        tblProductSheet.Columns("clmErrorP").Visible = True
+                    End If
+                End If
+            End If
+            'validar exista el product clmQuantity
+            If Not existProduct(row.Cells("clmProductID").Value) Then
+                row.Cells("clmProductID").Style.BackColor = Color.Red
+                row.Cells("clmErrorP").Value = If(row.Cells("clmErrorP").Value <> "", row.Cells("clmErrorP").Value & ", The Product does not exist", "The Product does not exist.")
+                tblProductSheet.Columns("clmErrorP").Visible = True
+            End If
+            'validar las existencias 
+            If Not existQuantity(row.Cells("clmQuantity").Value) Then
+                row.Cells("clmQuantity").Style.BackColor = Color.Red
+                row.Cells("clmErrorP").Value = If(row.Cells("clmErrorP").Value <> "", row.Cells("clmErrorP").Value & ", The Quantity is not enougth", "The Quantity is not enougth.")
+                tblProductSheet.Columns("clmErrorP").Visible = True
+            End If
+
+            If row.Cells("clmErrorP").Value <> "" Then
+                row.DefaultCellStyle.BackColor = Color.Yellow
+                If Not row.Cells("clmTagID").Style.BackColor = Color.Red Then
+                    row.Cells("clmTagID").Style.BackColor = Color.Yellow
+                End If
+                If Not row.Cells("clmProductID").Style.BackColor = Color.Red Then
+                    row.Cells("clmProductID").Style.BackColor = Color.Yellow
+                End If
+                If Not row.Cells("clmQuantity").Style.BackColor = Color.Red Then
+                    row.Cells("clmQuantity").Style.BackColor = Color.Yellow
+                End If
+            End If
+                Return True
+        Catch ex As Exception
+            Return False
+        End Try
+    End Function
+
+    Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
+        If ExistError(tblTagsScaffold) = False And ExistError(tblProductSheet) = False Then
+            Dim listTags As New List(Of scaffold)
+            For Each row As DataGridViewRow In tblTagsScaffold.Rows()
+                Dim sc As New scaffold
+                sc.tag = row.Cells("TagNum").Value
+                sc.jobcat = row.Cells("jobCat").Value
+                sc.areaID = row.Cells("AreaID").Value
+                For Each rowtask As DataRow In tblTags.Rows()
+                    Dim datos() = row.Cells("WorkNum").Value.ToString().Split(" ")
+                    Dim task = row.Cells("WorkNum").Value.ToString().Replace(" ", "-")
+                    If task = rowtask.ItemArray(5) Then
+                        sc.wo = rowtask.ItemArray(5)
+                        sc.task = rowtask.ItemArray(1)
+                        Exit For
+                    End If
+                Next
+                sc.idsubJob = row.Cells("SubJob").Value
+                sc.dateBild = validarFechaParaVB(row.Cells("DateBuild").Value)
+                sc.location = row.Cells("Location").Value
+                sc.purpose = row.Cells("Porpuse").Value
+                sc.sciType = row.Cells("Type").Value
+                sc.sciWidth = row.Cells("Width").Value
+                sc.sciLength = row.Cells("Length").Value
+                sc.sciHeigth = row.Cells("Heigth").Value
+                sc.sciDecks = row.Cells("Decks").Value
+                sc.sciKo = row.Cells("KO").Value
+                sc.sciBase = row.Cells("Base").Value
+                sc.scfInfo(0) = CBool(row.Cells("CSAP").Value)
+                sc.scfInfo(1) = CBool(row.Cells("Rolling").Value)
+                sc.scfInfo(2) = CBool(row.Cells("Internal").Value)
+                sc.scfInfo(3) = CBool(row.Cells("Hanging").Value)
+                sc.materialHandeling(0) = CBool(row.Cells("Truck").Value)
+                sc.materialHandeling(2) = CBool(row.Cells("Forklift").Value)
+                sc.materialHandeling(2) = CBool(row.Cells("Trailer").Value)
+                sc.materialHandeling(3) = CBool(row.Cells("Crane").Value)
+                sc.materialHandeling(4) = CBool(row.Cells("Rope").Value)
+                sc.materialHandeling(5) = CBool(row.Cells("Passed").Value)
+                sc.materialHandeling(6) = CBool(row.Cells("Elevator").Value)
+                sc.dateRecComp = validarFechaParaVB(row.Cells("ReqComp").Value)
+                sc.contact = row.Cells("RequestBy").Value
+                sc.foreman = row.Cells("Foreman").Value
+                sc.erector = row.Cells("Erector").Value
+                sc.ahrBuild = CDbl(row.Cells("Build").Value)
+                sc.ahrBuild = CDbl(row.Cells("Material").Value)
+                sc.ahrTravel = CDbl(row.Cells("Travel").Value)
+                sc.ahrWeather = CDbl(row.Cells("Weather").Value)
+                sc.ahrAlarm = CDbl(row.Cells("Alarm").Value)
+                sc.ahrSafety = CDbl(row.Cells("Safety").Value)
+                sc.ahrStdBy = CDbl(row.Cells("stdBy").Value)
+                sc.ahrOther = CDbl(row.Cells("Other").Value)
+                sc.ahrTotal = CDbl(sc.ahrBuild + sc.ahrBuild + sc.ahrTravel + sc.ahrWeather + sc.ahrAlarm + sc.ahrSafety + sc.ahrStdBy + sc.ahrOther)
+                sc.comments = row.Cells("Comment").Value
+                For Each rowp As DataGridViewRow In tblProductSheet.Rows()
+                    If rowp.Cells("clmTagID").Value = sc.tag Then
+                        sc.products.Rows.Add("", rowp.Cells("clmProductID").Value, rowp.Cells("clmQuantity").Value, "", "")
+                    End If
+                Next
+                mtdScaffold.saveScaffoldTraking(sc)
+            Next
+        End If
+    End Sub
+    Private Function ExistError(ByVal tbl As DataGridView) As Boolean
+        Try
+            Dim exist As Boolean = False
+            For Each row As DataGridViewRow In tbl.Rows()
+                If row.Cells(0).Value <> "" Then
+                    exist = True
+                    Exit For
+                End If
+            Next
+            Return exist
+        Catch ex As Exception
+            Return True
+        End Try
+    End Function
+
+    Private Sub tblTagsScaffold_CellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles tblTagsScaffold.CellEndEdit
+        validarFilaTags(tblTagsScaffold.Rows(tblTagsScaffold.CurrentCell.RowIndex()))
+        If Not ExistError(tblTagsScaffold) Then
+            tblTagsScaffold.Columns("clmError").Visible = False
+            If Not ExistError(tblProductSheet) Then
+                tblProductSheet.Columns("clmErrorP").Visible = False
+                btnSave.Enabled = True
+            Else
+                btnSave.Enabled = False
+            End If
+        Else
+            btnSave.Enabled = False
+        End If
+    End Sub
+
+    Private Sub tblProductSheet_CellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles tblProductSheet.CellEndEdit
+        validarFilaProduct(tblProductSheet.Rows(tblProductSheet.CurrentCell.RowIndex()))
+        If Not ExistError(tblProductSheet) Then
+            tblTagsScaffold.Columns("clmError").Visible = False
+            If Not ExistError(tblTagsScaffold) Then
+                tblTagsScaffold.Columns("clmErrorP").Visible = False
+                btnSave.Enabled = True
+            Else
+                btnSave.Enabled = False
+            End If
+        Else
+            btnSave.Enabled = False
+        End If
+    End Sub
 End Class

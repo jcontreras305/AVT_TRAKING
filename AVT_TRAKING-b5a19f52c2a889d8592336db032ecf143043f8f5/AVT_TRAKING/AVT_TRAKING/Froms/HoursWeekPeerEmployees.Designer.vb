@@ -436,18 +436,18 @@ Partial Class HoursWeekPeerEmployees
         '
         Me.btnTime.Location = New System.Drawing.Point(794, 18)
         Me.btnTime.Name = "btnTime"
-        Me.btnTime.Size = New System.Drawing.Size(71, 32)
+        Me.btnTime.Size = New System.Drawing.Size(93, 32)
         Me.btnTime.TabIndex = 15
-        Me.btnTime.Text = "Time"
+        Me.btnTime.Text = "Upload Time"
         Me.btnTime.UseVisualStyleBackColor = True
         '
         'btnExpenses
         '
-        Me.btnExpenses.Location = New System.Drawing.Point(871, 17)
+        Me.btnExpenses.Location = New System.Drawing.Point(893, 17)
         Me.btnExpenses.Name = "btnExpenses"
         Me.btnExpenses.Size = New System.Drawing.Size(95, 32)
         Me.btnExpenses.TabIndex = 14
-        Me.btnExpenses.Text = "Expenses"
+        Me.btnExpenses.Text = "Upload Exp"
         Me.btnExpenses.UseVisualStyleBackColor = True
         '
         'Button6
