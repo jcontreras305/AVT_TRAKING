@@ -1115,7 +1115,6 @@ Public Class scafoldTarking
             cmb.Text = ""
         End If
     End Sub
-
     Public Sub cmb_SelectedIndexChanguedOutGoing(sender As Object, e As EventArgs)
         Dim cmb As ComboBox = CType(sender, ComboBox)
         Dim flag As Boolean = True
@@ -1428,6 +1427,10 @@ Public Class scafoldTarking
                     End Try
             End Select
         End If
+    End Sub
+
+    Private Sub tblInComing_DataError(sender As Object, e As DataGridViewDataErrorEventArgs) Handles tblInComing.DataError
+        e.Cancel = True
     End Sub
 
     Private Sub tblInComing_EditingControlShowing(sender As Object, e As DataGridViewEditingControlShowingEventArgs) Handles tblInComing.EditingControlShowing
@@ -2381,7 +2384,7 @@ Public Class scafoldTarking
                         If sc.tag = "" Then
                             count -= 1
                         End If
-                        cargarDatosScaffold(tblScaffoldTags.Rows(count - 1).ItemArray(0))
+                        cargarDatosScaffold(tblScaffoldTags.Rows(count - 2).ItemArray(0))
                     End If
                 End If
             End If
@@ -2409,7 +2412,7 @@ Public Class scafoldTarking
                         If sc.tag = "" Then
                             count -= 1
                         End If
-                        cargarDatosScaffold(tblScaffoldTags.Rows(count - 1).ItemArray(0))
+                        cargarDatosScaffold(tblScaffoldTags.Rows(count).ItemArray(0))
                     End If
                 End If
             End If
@@ -3299,4 +3302,7 @@ Public Class scafoldTarking
         tvt.ShowDialog()
     End Sub
 
+    Private Sub tblScaffoldInformation_DataError(sender As Object, e As DataGridViewDataErrorEventArgs) Handles tblScaffoldInformation.DataError, tblProductosScaffold.DataError, tblScaffoldInformationSM.DataError, tblModificationProductMS.DataError, tblOutGoing.DataError
+        e.Cancel = True
+    End Sub
 End Class

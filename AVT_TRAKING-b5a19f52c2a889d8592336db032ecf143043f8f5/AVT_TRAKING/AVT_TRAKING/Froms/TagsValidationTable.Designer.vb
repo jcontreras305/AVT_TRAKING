@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class TagsValidationTable
     Inherits System.Windows.Forms.Form
 
     'Form reemplaza a Dispose para limpiar la lista de componentes.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,16 +20,24 @@ Partial Class TagsValidationTable
     'NOTA: el Diseñador de Windows Forms necesita el siguiente procedimiento
     'Se puede modificar usando el Diseñador de Windows Forms.  
     'No lo modifique con el editor de código.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
+        Me.Panel3 = New System.Windows.Forms.Panel()
+        Me.pgbComplete = New System.Windows.Forms.ProgressBar()
+        Me.lblMessage = New System.Windows.Forms.Label()
         Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.txtFecha = New System.Windows.Forms.TextBox()
+        Me.cmbDatos = New System.Windows.Forms.ComboBox()
         Me.btnSave = New System.Windows.Forms.Button()
         Me.btnSubirExcel = New System.Windows.Forms.Button()
+        Me.TabControl1 = New System.Windows.Forms.TabControl()
+        Me.tbpTags = New System.Windows.Forms.TabPage()
         Me.tblTagsScaffold = New System.Windows.Forms.DataGridView()
-        Me.rowError = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.clmError = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.TagNum = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.jobCat = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.AreaID = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -70,11 +78,21 @@ Partial Class TagsValidationTable
         Me.Other = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.TotalHours = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Comment = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.lblMessage = New System.Windows.Forms.Label()
+        Me.tbpProducts = New System.Windows.Forms.TabPage()
+        Me.tblProductSheet = New System.Windows.Forms.DataGridView()
+        Me.clmErrorP = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.clmTagID = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.clmProductID = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.clmQuantity = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Panel1.SuspendLayout()
         Me.TableLayoutPanel1.SuspendLayout()
+        Me.Panel3.SuspendLayout()
         Me.Panel2.SuspendLayout()
+        Me.TabControl1.SuspendLayout()
+        Me.tbpTags.SuspendLayout()
         CType(Me.tblTagsScaffold, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.tbpProducts.SuspendLayout()
+        CType(Me.tblProductSheet, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'Panel1
@@ -90,32 +108,78 @@ Partial Class TagsValidationTable
         '
         Me.TableLayoutPanel1.ColumnCount = 1
         Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
+        Me.TableLayoutPanel1.Controls.Add(Me.Panel3, 0, 2)
         Me.TableLayoutPanel1.Controls.Add(Me.Panel2, 0, 0)
-        Me.TableLayoutPanel1.Controls.Add(Me.tblTagsScaffold, 0, 1)
-        Me.TableLayoutPanel1.Controls.Add(Me.lblMessage, 0, 2)
+        Me.TableLayoutPanel1.Controls.Add(Me.TabControl1, 0, 1)
         Me.TableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.TableLayoutPanel1.Location = New System.Drawing.Point(0, 0)
         Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
         Me.TableLayoutPanel1.RowCount = 3
-        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20.0!))
-        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 80.0!))
-        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
+        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50.0!))
+        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
+        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25.0!))
         Me.TableLayoutPanel1.Size = New System.Drawing.Size(800, 450)
         Me.TableLayoutPanel1.TabIndex = 0
         '
+        'Panel3
+        '
+        Me.Panel3.Controls.Add(Me.pgbComplete)
+        Me.Panel3.Controls.Add(Me.lblMessage)
+        Me.Panel3.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Panel3.Location = New System.Drawing.Point(3, 428)
+        Me.Panel3.Name = "Panel3"
+        Me.Panel3.Size = New System.Drawing.Size(794, 19)
+        Me.Panel3.TabIndex = 3
+        '
+        'pgbComplete
+        '
+        Me.pgbComplete.Dock = System.Windows.Forms.DockStyle.Right
+        Me.pgbComplete.Location = New System.Drawing.Point(508, 0)
+        Me.pgbComplete.Name = "pgbComplete"
+        Me.pgbComplete.Size = New System.Drawing.Size(286, 19)
+        Me.pgbComplete.TabIndex = 3
+        '
+        'lblMessage
+        '
+        Me.lblMessage.AutoSize = True
+        Me.lblMessage.Dock = System.Windows.Forms.DockStyle.Left
+        Me.lblMessage.Location = New System.Drawing.Point(0, 0)
+        Me.lblMessage.Name = "lblMessage"
+        Me.lblMessage.Size = New System.Drawing.Size(53, 13)
+        Me.lblMessage.TabIndex = 2
+        Me.lblMessage.Text = "Message:"
+        '
         'Panel2
         '
+        Me.Panel2.Controls.Add(Me.txtFecha)
+        Me.Panel2.Controls.Add(Me.cmbDatos)
         Me.Panel2.Controls.Add(Me.btnSave)
         Me.Panel2.Controls.Add(Me.btnSubirExcel)
         Me.Panel2.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel2.Location = New System.Drawing.Point(3, 3)
         Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(794, 80)
+        Me.Panel2.Size = New System.Drawing.Size(794, 44)
         Me.Panel2.TabIndex = 1
+        '
+        'txtFecha
+        '
+        Me.txtFecha.Location = New System.Drawing.Point(184, 9)
+        Me.txtFecha.Name = "txtFecha"
+        Me.txtFecha.Size = New System.Drawing.Size(167, 20)
+        Me.txtFecha.TabIndex = 4
+        '
+        'cmbDatos
+        '
+        Me.cmbDatos.FormattingEnabled = True
+        Me.cmbDatos.Location = New System.Drawing.Point(6, 9)
+        Me.cmbDatos.Name = "cmbDatos"
+        Me.cmbDatos.Size = New System.Drawing.Size(167, 21)
+        Me.cmbDatos.TabIndex = 3
         '
         'btnSave
         '
-        Me.btnSave.Location = New System.Drawing.Point(682, 25)
+        Me.btnSave.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnSave.Location = New System.Drawing.Point(688, 9)
         Me.btnSave.Name = "btnSave"
         Me.btnSave.Size = New System.Drawing.Size(103, 31)
         Me.btnSave.TabIndex = 2
@@ -124,21 +188,44 @@ Partial Class TagsValidationTable
         '
         'btnSubirExcel
         '
-        Me.btnSubirExcel.Location = New System.Drawing.Point(561, 25)
+        Me.btnSubirExcel.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnSubirExcel.Location = New System.Drawing.Point(573, 9)
         Me.btnSubirExcel.Name = "btnSubirExcel"
         Me.btnSubirExcel.Size = New System.Drawing.Size(103, 31)
         Me.btnSubirExcel.TabIndex = 1
         Me.btnSubirExcel.Text = "Update Excel"
         Me.btnSubirExcel.UseVisualStyleBackColor = True
         '
+        'TabControl1
+        '
+        Me.TabControl1.Controls.Add(Me.tbpTags)
+        Me.TabControl1.Controls.Add(Me.tbpProducts)
+        Me.TabControl1.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.TabControl1.Location = New System.Drawing.Point(3, 53)
+        Me.TabControl1.Name = "TabControl1"
+        Me.TabControl1.SelectedIndex = 0
+        Me.TabControl1.Size = New System.Drawing.Size(794, 369)
+        Me.TabControl1.TabIndex = 3
+        '
+        'tbpTags
+        '
+        Me.tbpTags.Controls.Add(Me.tblTagsScaffold)
+        Me.tbpTags.Location = New System.Drawing.Point(4, 22)
+        Me.tbpTags.Name = "tbpTags"
+        Me.tbpTags.Padding = New System.Windows.Forms.Padding(3)
+        Me.tbpTags.Size = New System.Drawing.Size(786, 343)
+        Me.tbpTags.TabIndex = 0
+        Me.tbpTags.Text = "Tags"
+        Me.tbpTags.UseVisualStyleBackColor = True
+        '
         'tblTagsScaffold
         '
         Me.tblTagsScaffold.AllowUserToAddRows = False
         Me.tblTagsScaffold.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells
         Me.tblTagsScaffold.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.tblTagsScaffold.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.rowError, Me.TagNum, Me.jobCat, Me.AreaID, Me.WorkNum, Me.SubJob, Me.DateBuild, Me.Location, Me.Porpuse, Me.Type, Me.Width, Me.Length, Me.Heigth, Me.Decks, Me.KO, Me.Base, Me.CSAP, Me.Rolling, Me.Internal, Me.Hanging, Me.Truck, Me.Forklift, Me.Trailer, Me.Crane, Me.Rope, Me.Passed, Me.Elevator, Me.ReqComp, Me.RequestBy, Me.Foreman, Me.Erector, Me.Build, Me.Material, Me.Travel, Me.Weather, Me.Alarm, Me.Safety, Me.stdBy, Me.Other, Me.TotalHours, Me.Comment})
+        Me.tblTagsScaffold.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.clmError, Me.TagNum, Me.jobCat, Me.AreaID, Me.WorkNum, Me.SubJob, Me.DateBuild, Me.Location, Me.Porpuse, Me.Type, Me.Width, Me.Length, Me.Heigth, Me.Decks, Me.KO, Me.Base, Me.CSAP, Me.Rolling, Me.Internal, Me.Hanging, Me.Truck, Me.Forklift, Me.Trailer, Me.Crane, Me.Rope, Me.Passed, Me.Elevator, Me.ReqComp, Me.RequestBy, Me.Foreman, Me.Erector, Me.Build, Me.Material, Me.Travel, Me.Weather, Me.Alarm, Me.Safety, Me.stdBy, Me.Other, Me.TotalHours, Me.Comment})
         Me.tblTagsScaffold.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.tblTagsScaffold.Location = New System.Drawing.Point(3, 89)
+        Me.tblTagsScaffold.Location = New System.Drawing.Point(3, 3)
         Me.tblTagsScaffold.Name = "tblTagsScaffold"
         DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
         DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.ActiveBorder
@@ -148,18 +235,21 @@ Partial Class TagsValidationTable
         DataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText
         DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
         Me.tblTagsScaffold.RowHeadersDefaultCellStyle = DataGridViewCellStyle1
-        Me.tblTagsScaffold.Size = New System.Drawing.Size(794, 338)
+        Me.tblTagsScaffold.Size = New System.Drawing.Size(780, 337)
         Me.tblTagsScaffold.TabIndex = 3
         '
-        'rowError
+        'clmError
         '
-        Me.rowError.HeaderText = "rowError"
-        Me.rowError.Name = "rowError"
-        Me.rowError.Visible = False
-        Me.rowError.Width = 71
+        Me.clmError.Frozen = True
+        Me.clmError.HeaderText = "Error"
+        Me.clmError.Name = "clmError"
+        Me.clmError.ReadOnly = True
+        Me.clmError.Visible = False
+        Me.clmError.Width = 54
         '
         'TagNum
         '
+        Me.TagNum.Frozen = True
         Me.TagNum.HeaderText = "TagNum"
         Me.TagNum.Name = "TagNum"
         Me.TagNum.Width = 73
@@ -412,15 +502,62 @@ Partial Class TagsValidationTable
         Me.Comment.Name = "Comment"
         Me.Comment.Width = 76
         '
-        'lblMessage
+        'tbpProducts
         '
-        Me.lblMessage.AutoSize = True
-        Me.lblMessage.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.lblMessage.Location = New System.Drawing.Point(3, 430)
-        Me.lblMessage.Name = "lblMessage"
-        Me.lblMessage.Size = New System.Drawing.Size(794, 20)
-        Me.lblMessage.TabIndex = 2
-        Me.lblMessage.Text = "Message:"
+        Me.tbpProducts.Controls.Add(Me.tblProductSheet)
+        Me.tbpProducts.Location = New System.Drawing.Point(4, 22)
+        Me.tbpProducts.Name = "tbpProducts"
+        Me.tbpProducts.Padding = New System.Windows.Forms.Padding(3)
+        Me.tbpProducts.Size = New System.Drawing.Size(786, 343)
+        Me.tbpProducts.TabIndex = 1
+        Me.tbpProducts.Text = "List Product"
+        Me.tbpProducts.UseVisualStyleBackColor = True
+        '
+        'tblProductSheet
+        '
+        Me.tblProductSheet.AllowUserToAddRows = False
+        Me.tblProductSheet.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.tblProductSheet.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.clmErrorP, Me.clmTagID, Me.clmProductID, Me.clmQuantity})
+        Me.tblProductSheet.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.tblProductSheet.Location = New System.Drawing.Point(3, 3)
+        Me.tblProductSheet.Name = "tblProductSheet"
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle2.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.25!)
+        DataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.tblProductSheet.RowHeadersDefaultCellStyle = DataGridViewCellStyle2
+        Me.tblProductSheet.Size = New System.Drawing.Size(780, 337)
+        Me.tblProductSheet.TabIndex = 0
+        '
+        'clmErrorP
+        '
+        Me.clmErrorP.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
+        Me.clmErrorP.Frozen = True
+        Me.clmErrorP.HeaderText = "Error"
+        Me.clmErrorP.Name = "clmErrorP"
+        Me.clmErrorP.ReadOnly = True
+        Me.clmErrorP.Visible = False
+        '
+        'clmTagID
+        '
+        Me.clmTagID.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
+        Me.clmTagID.HeaderText = "TagID"
+        Me.clmTagID.Name = "clmTagID"
+        '
+        'clmProductID
+        '
+        Me.clmProductID.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
+        Me.clmProductID.HeaderText = "ProductID"
+        Me.clmProductID.Name = "clmProductID"
+        '
+        'clmQuantity
+        '
+        Me.clmQuantity.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
+        Me.clmQuantity.HeaderText = "Quantity"
+        Me.clmQuantity.Name = "clmQuantity"
         '
         'TagsValidationTable
         '
@@ -432,9 +569,15 @@ Partial Class TagsValidationTable
         Me.Text = "TagsValidationTable"
         Me.Panel1.ResumeLayout(False)
         Me.TableLayoutPanel1.ResumeLayout(False)
-        Me.TableLayoutPanel1.PerformLayout()
+        Me.Panel3.ResumeLayout(False)
+        Me.Panel3.PerformLayout()
         Me.Panel2.ResumeLayout(False)
+        Me.Panel2.PerformLayout()
+        Me.TabControl1.ResumeLayout(False)
+        Me.tbpTags.ResumeLayout(False)
         CType(Me.tblTagsScaffold, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.tbpProducts.ResumeLayout(False)
+        CType(Me.tblProductSheet, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -446,7 +589,7 @@ Partial Class TagsValidationTable
     Friend WithEvents btnSave As Button
     Friend WithEvents btnSubirExcel As Button
     Friend WithEvents lblMessage As Label
-    Friend WithEvents rowError As DataGridViewTextBoxColumn
+    Friend WithEvents clmError As DataGridViewTextBoxColumn
     Friend WithEvents TagNum As DataGridViewTextBoxColumn
     Friend WithEvents jobCat As DataGridViewTextBoxColumn
     Friend WithEvents AreaID As DataGridViewTextBoxColumn
@@ -487,4 +630,16 @@ Partial Class TagsValidationTable
     Friend WithEvents Other As DataGridViewTextBoxColumn
     Friend WithEvents TotalHours As DataGridViewTextBoxColumn
     Friend WithEvents Comment As DataGridViewTextBoxColumn
+    Friend WithEvents TabControl1 As TabControl
+    Friend WithEvents tbpTags As TabPage
+    Friend WithEvents tbpProducts As TabPage
+    Friend WithEvents tblProductSheet As DataGridView
+    Friend WithEvents clmErrorP As DataGridViewTextBoxColumn
+    Friend WithEvents clmTagID As DataGridViewTextBoxColumn
+    Friend WithEvents clmProductID As DataGridViewTextBoxColumn
+    Friend WithEvents clmQuantity As DataGridViewTextBoxColumn
+    Friend WithEvents Panel3 As Panel
+    Friend WithEvents pgbComplete As ProgressBar
+    Friend WithEvents cmbDatos As ComboBox
+    Public WithEvents txtFecha As TextBox
 End Class
