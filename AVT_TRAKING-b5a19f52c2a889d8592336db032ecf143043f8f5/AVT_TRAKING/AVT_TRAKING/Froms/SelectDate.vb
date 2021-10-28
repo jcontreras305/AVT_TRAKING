@@ -20,7 +20,7 @@
 
     Private Sub btnAcept_Click(sender As Object, e As EventArgs) Handles btnAcept.Click
         If hwpe Then
-            Dim hwpe As HoursWeekPeerEmployees = CType(Owner, HoursWeekPeerEmployees)
+            Dim hwpe As HoursWeekPerEmployees = CType(Owner, HoursWeekPerEmployees)
             If fechaStart <> fechaEnd Then
                 hwpe.txtFindFecha.Text = txtFechaStart.Text + " to " + txtFechaEnd.Text()
             Else

@@ -117,10 +117,10 @@
     <Compile Include="Froms\Herramientas.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Froms\HoursWeekPeerEmployees.Designer.vb">
-      <DependentUpon>HoursWeekPeerEmployees.vb</DependentUpon>
+    <Compile Include="Froms\HoursWeekPerEmployees.Designer.vb">
+      <DependentUpon>HoursWeekPerEmployees.vb</DependentUpon>
     </Compile>
-    <Compile Include="Froms\HoursWeekPeerEmployees.vb">
+    <Compile Include="Froms\HoursWeekPerEmployees.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Froms\metodosGlobales.vb" />
@@ -152,6 +152,12 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Froms\modificationSC.vb" />
+    <Compile Include="Froms\ModificationValidationTable.Designer.vb">
+      <DependentUpon>ModificationValidationTable.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Froms\ModificationValidationTable.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Froms\myCompany.Designer.vb">
       <DependentUpon>myCompany.vb</DependentUpon>
     </Compile>
@@ -279,14 +285,17 @@
     <EmbeddedResource Include="Froms\Herramientas.resx">
       <DependentUpon>Herramientas.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Froms\HoursWeekPeerEmployees.resx">
-      <DependentUpon>HoursWeekPeerEmployees.vb</DependentUpon>
+    <EmbeddedResource Include="Froms\HoursWeekPerEmployees.resx">
+      <DependentUpon>HoursWeekPerEmployees.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Froms\MainFrom.resx">
       <DependentUpon>MainFrom.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Froms\Expences.resx">
       <DependentUpon>Expences.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Froms\ModificationValidationTable.resx">
+      <DependentUpon>ModificationValidationTable.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Froms\myCompany.resx">
       <DependentUpon>myCompany.vb</DependentUpon>

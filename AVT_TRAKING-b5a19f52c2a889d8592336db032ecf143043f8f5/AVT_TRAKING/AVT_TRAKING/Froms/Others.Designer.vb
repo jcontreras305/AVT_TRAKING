@@ -63,33 +63,54 @@ Partial Class Others
         Me.TabPage2 = New System.Windows.Forms.TabPage()
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
         Me.Panel2 = New System.Windows.Forms.Panel()
-        Me.txtEmail = New System.Windows.Forms.TextBox()
         Me.GroupBox6 = New System.Windows.Forms.GroupBox()
         Me.TableLayoutPanel2 = New System.Windows.Forms.TableLayoutPanel()
-        Me.txtPassword = New System.Windows.Forms.TextBox()
         Me.Panel4 = New System.Windows.Forms.Panel()
-        Me.Panel5 = New System.Windows.Forms.Panel()
-        Me.Panel6 = New System.Windows.Forms.Panel()
         Me.Label1 = New System.Windows.Forms.Label()
-        Me.label2 = New System.Windows.Forms.Label()
+        Me.txtEmail = New System.Windows.Forms.TextBox()
+        Me.Panel5 = New System.Windows.Forms.Panel()
         Me.btnVerPass = New System.Windows.Forms.Button()
-        Me.btnSaveEmail = New System.Windows.Forms.Button()
+        Me.label2 = New System.Windows.Forms.Label()
+        Me.txtPassword = New System.Windows.Forms.TextBox()
+        Me.Panel6 = New System.Windows.Forms.Panel()
         Me.btnDeleteEmail = New System.Windows.Forms.Button()
+        Me.btnSaveEmail = New System.Windows.Forms.Button()
+        Me.TableLayoutPanel3 = New System.Windows.Forms.TableLayoutPanel()
         Me.DataGridView1 = New System.Windows.Forms.DataGridView()
         Me.clmEmail = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.clmName = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.clmStatus = New System.Windows.Forms.DataGridViewCheckBoxColumn()
-        Me.TableLayoutPanel3 = New System.Windows.Forms.TableLayoutPanel()
         Me.Panel7 = New System.Windows.Forms.Panel()
-        Me.TableLayoutPanel4 = New System.Windows.Forms.TableLayoutPanel()
-        Me.Panel3 = New System.Windows.Forms.Panel()
-        Me.Panel8 = New System.Windows.Forms.Panel()
-        Me.Label3 = New System.Windows.Forms.Label()
-        Me.txtEmailOther = New System.Windows.Forms.TextBox()
-        Me.Label4 = New System.Windows.Forms.Label()
-        Me.txtNameOther = New System.Windows.Forms.TextBox()
         Me.btnDeleteEmailOther = New System.Windows.Forms.Button()
         Me.btnSaveEmailOthher = New System.Windows.Forms.Button()
+        Me.TableLayoutPanel4 = New System.Windows.Forms.TableLayoutPanel()
+        Me.Panel3 = New System.Windows.Forms.Panel()
+        Me.Label3 = New System.Windows.Forms.Label()
+        Me.txtEmailOther = New System.Windows.Forms.TextBox()
+        Me.Panel8 = New System.Windows.Forms.Panel()
+        Me.Label4 = New System.Windows.Forms.Label()
+        Me.txtNameOther = New System.Windows.Forms.TextBox()
+        Me.TabPage3 = New System.Windows.Forms.TabPage()
+        Me.Panel9 = New System.Windows.Forms.Panel()
+        Me.TableLayoutPanel5 = New System.Windows.Forms.TableLayoutPanel()
+        Me.TableLayoutPanel6 = New System.Windows.Forms.TableLayoutPanel()
+        Me.TableLayoutPanel8 = New System.Windows.Forms.TableLayoutPanel()
+        Me.btnDeleteImg = New System.Windows.Forms.Button()
+        Me.btnUpdateImg = New System.Windows.Forms.Button()
+        Me.imgPhoto = New System.Windows.Forms.PictureBox()
+        Me.btnAddImg = New System.Windows.Forms.Button()
+        Me.tblImage = New System.Windows.Forms.DataGridView()
+        Me.clmNameImage = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.clmImage = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.clmDefault = New System.Windows.Forms.DataGridViewCheckBoxColumn()
+        Me.TableLayoutPanel7 = New System.Windows.Forms.TableLayoutPanel()
+        Me.Panel10 = New System.Windows.Forms.Panel()
+        Me.Label5 = New System.Windows.Forms.Label()
+        Me.txtNameImage = New System.Windows.Forms.TextBox()
+        Me.Panel11 = New System.Windows.Forms.Panel()
+        Me.btnFindImage = New System.Windows.Forms.Button()
+        Me.Label6 = New System.Windows.Forms.Label()
+        Me.txtPathFile = New System.Windows.Forms.TextBox()
         Me.Panel1.SuspendLayout()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
@@ -106,12 +127,22 @@ Partial Class Others
         Me.Panel4.SuspendLayout()
         Me.Panel5.SuspendLayout()
         Me.Panel6.SuspendLayout()
-        CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.TableLayoutPanel3.SuspendLayout()
+        CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel7.SuspendLayout()
         Me.TableLayoutPanel4.SuspendLayout()
         Me.Panel3.SuspendLayout()
         Me.Panel8.SuspendLayout()
+        Me.TabPage3.SuspendLayout()
+        Me.Panel9.SuspendLayout()
+        Me.TableLayoutPanel5.SuspendLayout()
+        Me.TableLayoutPanel6.SuspendLayout()
+        Me.TableLayoutPanel8.SuspendLayout()
+        CType(Me.imgPhoto, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.tblImage, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.TableLayoutPanel7.SuspendLayout()
+        Me.Panel10.SuspendLayout()
+        Me.Panel11.SuspendLayout()
         Me.SuspendLayout()
         '
         'Panel1
@@ -127,6 +158,7 @@ Partial Class Others
         '
         Me.TabControl1.Controls.Add(Me.TabPage1)
         Me.TabControl1.Controls.Add(Me.TabPage2)
+        Me.TabControl1.Controls.Add(Me.TabPage3)
         Me.TabControl1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.TabControl1.Location = New System.Drawing.Point(0, 0)
         Me.TabControl1.Name = "TabControl1"
@@ -551,15 +583,6 @@ Partial Class Others
         Me.Panel2.Size = New System.Drawing.Size(950, 83)
         Me.Panel2.TabIndex = 0
         '
-        'txtEmail
-        '
-        Me.txtEmail.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.txtEmail.Location = New System.Drawing.Point(73, 18)
-        Me.txtEmail.Name = "txtEmail"
-        Me.txtEmail.Size = New System.Drawing.Size(275, 20)
-        Me.txtEmail.TabIndex = 0
-        '
         'GroupBox6
         '
         Me.GroupBox6.Controls.Add(Me.TableLayoutPanel2)
@@ -588,16 +611,6 @@ Partial Class Others
         Me.TableLayoutPanel2.Size = New System.Drawing.Size(944, 64)
         Me.TableLayoutPanel2.TabIndex = 0
         '
-        'txtPassword
-        '
-        Me.txtPassword.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.txtPassword.Location = New System.Drawing.Point(68, 17)
-        Me.txtPassword.Name = "txtPassword"
-        Me.txtPassword.Size = New System.Drawing.Size(260, 20)
-        Me.txtPassword.TabIndex = 1
-        Me.txtPassword.UseSystemPasswordChar = True
-        '
         'Panel4
         '
         Me.Panel4.Controls.Add(Me.Label1)
@@ -607,6 +620,24 @@ Partial Class Others
         Me.Panel4.Name = "Panel4"
         Me.Panel4.Size = New System.Drawing.Size(371, 58)
         Me.Panel4.TabIndex = 0
+        '
+        'Label1
+        '
+        Me.Label1.AutoSize = True
+        Me.Label1.Location = New System.Drawing.Point(7, 21)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(32, 13)
+        Me.Label1.TabIndex = 1
+        Me.Label1.Text = "Email"
+        '
+        'txtEmail
+        '
+        Me.txtEmail.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.txtEmail.Location = New System.Drawing.Point(73, 18)
+        Me.txtEmail.Name = "txtEmail"
+        Me.txtEmail.Size = New System.Drawing.Size(275, 20)
+        Me.txtEmail.TabIndex = 0
         '
         'Panel5
         '
@@ -619,34 +650,6 @@ Partial Class Others
         Me.Panel5.Size = New System.Drawing.Size(371, 58)
         Me.Panel5.TabIndex = 1
         '
-        'Panel6
-        '
-        Me.Panel6.Controls.Add(Me.btnDeleteEmail)
-        Me.Panel6.Controls.Add(Me.btnSaveEmail)
-        Me.Panel6.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel6.Location = New System.Drawing.Point(757, 3)
-        Me.Panel6.Name = "Panel6"
-        Me.Panel6.Size = New System.Drawing.Size(184, 58)
-        Me.Panel6.TabIndex = 2
-        '
-        'Label1
-        '
-        Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(7, 21)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(32, 13)
-        Me.Label1.TabIndex = 1
-        Me.Label1.Text = "Email"
-        '
-        'label2
-        '
-        Me.label2.AutoSize = True
-        Me.label2.Location = New System.Drawing.Point(13, 20)
-        Me.label2.Name = "label2"
-        Me.label2.Size = New System.Drawing.Size(53, 13)
-        Me.label2.TabIndex = 2
-        Me.label2.Text = "Password"
-        '
         'btnVerPass
         '
         Me.btnVerPass.Anchor = System.Windows.Forms.AnchorStyles.Right
@@ -657,14 +660,34 @@ Partial Class Others
         Me.btnVerPass.Text = "Ver"
         Me.btnVerPass.UseVisualStyleBackColor = True
         '
-        'btnSaveEmail
+        'label2
         '
-        Me.btnSaveEmail.Location = New System.Drawing.Point(13, 17)
-        Me.btnSaveEmail.Name = "btnSaveEmail"
-        Me.btnSaveEmail.Size = New System.Drawing.Size(75, 23)
-        Me.btnSaveEmail.TabIndex = 0
-        Me.btnSaveEmail.Text = "Save"
-        Me.btnSaveEmail.UseVisualStyleBackColor = True
+        Me.label2.AutoSize = True
+        Me.label2.Location = New System.Drawing.Point(13, 20)
+        Me.label2.Name = "label2"
+        Me.label2.Size = New System.Drawing.Size(53, 13)
+        Me.label2.TabIndex = 2
+        Me.label2.Text = "Password"
+        '
+        'txtPassword
+        '
+        Me.txtPassword.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.txtPassword.Location = New System.Drawing.Point(68, 17)
+        Me.txtPassword.Name = "txtPassword"
+        Me.txtPassword.Size = New System.Drawing.Size(260, 20)
+        Me.txtPassword.TabIndex = 1
+        Me.txtPassword.UseSystemPasswordChar = True
+        '
+        'Panel6
+        '
+        Me.Panel6.Controls.Add(Me.btnDeleteEmail)
+        Me.Panel6.Controls.Add(Me.btnSaveEmail)
+        Me.Panel6.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Panel6.Location = New System.Drawing.Point(757, 3)
+        Me.Panel6.Name = "Panel6"
+        Me.Panel6.Size = New System.Drawing.Size(184, 58)
+        Me.Panel6.TabIndex = 2
         '
         'btnDeleteEmail
         '
@@ -675,16 +698,42 @@ Partial Class Others
         Me.btnDeleteEmail.Text = "Delete"
         Me.btnDeleteEmail.UseVisualStyleBackColor = True
         '
+        'btnSaveEmail
+        '
+        Me.btnSaveEmail.Location = New System.Drawing.Point(13, 17)
+        Me.btnSaveEmail.Name = "btnSaveEmail"
+        Me.btnSaveEmail.Size = New System.Drawing.Size(75, 23)
+        Me.btnSaveEmail.TabIndex = 0
+        Me.btnSaveEmail.Text = "Save"
+        Me.btnSaveEmail.UseVisualStyleBackColor = True
+        '
+        'TableLayoutPanel3
+        '
+        Me.TableLayoutPanel3.ColumnCount = 2
+        Me.TableLayoutPanel3.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 80.0!))
+        Me.TableLayoutPanel3.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20.0!))
+        Me.TableLayoutPanel3.Controls.Add(Me.DataGridView1, 0, 1)
+        Me.TableLayoutPanel3.Controls.Add(Me.Panel7, 1, 0)
+        Me.TableLayoutPanel3.Controls.Add(Me.TableLayoutPanel4, 0, 0)
+        Me.TableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.TableLayoutPanel3.Location = New System.Drawing.Point(3, 92)
+        Me.TableLayoutPanel3.Name = "TableLayoutPanel3"
+        Me.TableLayoutPanel3.RowCount = 2
+        Me.TableLayoutPanel3.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.80912!))
+        Me.TableLayoutPanel3.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 83.19088!))
+        Me.TableLayoutPanel3.Size = New System.Drawing.Size(950, 351)
+        Me.TableLayoutPanel3.TabIndex = 1
+        '
         'DataGridView1
         '
         Me.DataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DataGridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.clmEmail, Me.clmName, Me.clmStatus})
         Me.DataGridView1.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.DataGridView1.Location = New System.Drawing.Point(3, 61)
+        Me.DataGridView1.Location = New System.Drawing.Point(3, 62)
         Me.DataGridView1.Name = "DataGridView1"
         Me.DataGridView1.RowHeadersVisible = False
-        Me.DataGridView1.Size = New System.Drawing.Size(754, 287)
+        Me.DataGridView1.Size = New System.Drawing.Size(754, 286)
         Me.DataGridView1.TabIndex = 0
         '
         'clmEmail
@@ -705,23 +754,6 @@ Partial Class Others
         Me.clmStatus.Name = "clmStatus"
         Me.clmStatus.ReadOnly = True
         '
-        'TableLayoutPanel3
-        '
-        Me.TableLayoutPanel3.ColumnCount = 2
-        Me.TableLayoutPanel3.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 80.0!))
-        Me.TableLayoutPanel3.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20.0!))
-        Me.TableLayoutPanel3.Controls.Add(Me.DataGridView1, 0, 1)
-        Me.TableLayoutPanel3.Controls.Add(Me.Panel7, 1, 0)
-        Me.TableLayoutPanel3.Controls.Add(Me.TableLayoutPanel4, 0, 0)
-        Me.TableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.TableLayoutPanel3.Location = New System.Drawing.Point(3, 92)
-        Me.TableLayoutPanel3.Name = "TableLayoutPanel3"
-        Me.TableLayoutPanel3.RowCount = 2
-        Me.TableLayoutPanel3.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.80912!))
-        Me.TableLayoutPanel3.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 83.19088!))
-        Me.TableLayoutPanel3.Size = New System.Drawing.Size(950, 351)
-        Me.TableLayoutPanel3.TabIndex = 1
-        '
         'Panel7
         '
         Me.Panel7.Controls.Add(Me.btnDeleteEmailOther)
@@ -730,6 +762,24 @@ Partial Class Others
         Me.Panel7.Name = "Panel7"
         Me.Panel7.Size = New System.Drawing.Size(184, 52)
         Me.Panel7.TabIndex = 2
+        '
+        'btnDeleteEmailOther
+        '
+        Me.btnDeleteEmailOther.Location = New System.Drawing.Point(99, 15)
+        Me.btnDeleteEmailOther.Name = "btnDeleteEmailOther"
+        Me.btnDeleteEmailOther.Size = New System.Drawing.Size(75, 23)
+        Me.btnDeleteEmailOther.TabIndex = 3
+        Me.btnDeleteEmailOther.Text = "Delete"
+        Me.btnDeleteEmailOther.UseVisualStyleBackColor = True
+        '
+        'btnSaveEmailOthher
+        '
+        Me.btnSaveEmailOthher.Location = New System.Drawing.Point(11, 15)
+        Me.btnSaveEmailOthher.Name = "btnSaveEmailOthher"
+        Me.btnSaveEmailOthher.Size = New System.Drawing.Size(75, 23)
+        Me.btnSaveEmailOthher.TabIndex = 2
+        Me.btnSaveEmailOthher.Text = "Save"
+        Me.btnSaveEmailOthher.UseVisualStyleBackColor = True
         '
         'TableLayoutPanel4
         '
@@ -743,7 +793,7 @@ Partial Class Others
         Me.TableLayoutPanel4.Name = "TableLayoutPanel4"
         Me.TableLayoutPanel4.RowCount = 1
         Me.TableLayoutPanel4.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
-        Me.TableLayoutPanel4.Size = New System.Drawing.Size(754, 52)
+        Me.TableLayoutPanel4.Size = New System.Drawing.Size(754, 53)
         Me.TableLayoutPanel4.TabIndex = 3
         '
         'Panel3
@@ -753,18 +803,8 @@ Partial Class Others
         Me.Panel3.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel3.Location = New System.Drawing.Point(3, 3)
         Me.Panel3.Name = "Panel3"
-        Me.Panel3.Size = New System.Drawing.Size(371, 46)
+        Me.Panel3.Size = New System.Drawing.Size(371, 47)
         Me.Panel3.TabIndex = 0
-        '
-        'Panel8
-        '
-        Me.Panel8.Controls.Add(Me.Label4)
-        Me.Panel8.Controls.Add(Me.txtNameOther)
-        Me.Panel8.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel8.Location = New System.Drawing.Point(380, 3)
-        Me.Panel8.Name = "Panel8"
-        Me.Panel8.Size = New System.Drawing.Size(371, 46)
-        Me.Panel8.TabIndex = 1
         '
         'Label3
         '
@@ -784,6 +824,16 @@ Partial Class Others
         Me.txtEmailOther.Size = New System.Drawing.Size(275, 20)
         Me.txtEmailOther.TabIndex = 2
         '
+        'Panel8
+        '
+        Me.Panel8.Controls.Add(Me.Label4)
+        Me.Panel8.Controls.Add(Me.txtNameOther)
+        Me.Panel8.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Panel8.Location = New System.Drawing.Point(380, 3)
+        Me.Panel8.Name = "Panel8"
+        Me.Panel8.Size = New System.Drawing.Size(371, 47)
+        Me.Panel8.TabIndex = 1
+        '
         'Label4
         '
         Me.Label4.AutoSize = True
@@ -802,23 +852,227 @@ Partial Class Others
         Me.txtNameOther.Size = New System.Drawing.Size(260, 20)
         Me.txtNameOther.TabIndex = 3
         '
-        'btnDeleteEmailOther
+        'TabPage3
         '
-        Me.btnDeleteEmailOther.Location = New System.Drawing.Point(99, 15)
-        Me.btnDeleteEmailOther.Name = "btnDeleteEmailOther"
-        Me.btnDeleteEmailOther.Size = New System.Drawing.Size(75, 23)
-        Me.btnDeleteEmailOther.TabIndex = 3
-        Me.btnDeleteEmailOther.Text = "Delete"
-        Me.btnDeleteEmailOther.UseVisualStyleBackColor = True
+        Me.TabPage3.Controls.Add(Me.Panel9)
+        Me.TabPage3.Location = New System.Drawing.Point(4, 22)
+        Me.TabPage3.Name = "TabPage3"
+        Me.TabPage3.Size = New System.Drawing.Size(956, 446)
+        Me.TabPage3.TabIndex = 2
+        Me.TabPage3.Text = "Images"
+        Me.TabPage3.UseVisualStyleBackColor = True
         '
-        'btnSaveEmailOthher
+        'Panel9
         '
-        Me.btnSaveEmailOthher.Location = New System.Drawing.Point(11, 15)
-        Me.btnSaveEmailOthher.Name = "btnSaveEmailOthher"
-        Me.btnSaveEmailOthher.Size = New System.Drawing.Size(75, 23)
-        Me.btnSaveEmailOthher.TabIndex = 2
-        Me.btnSaveEmailOthher.Text = "Save"
-        Me.btnSaveEmailOthher.UseVisualStyleBackColor = True
+        Me.Panel9.Controls.Add(Me.TableLayoutPanel5)
+        Me.Panel9.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Panel9.Location = New System.Drawing.Point(0, 0)
+        Me.Panel9.Name = "Panel9"
+        Me.Panel9.Size = New System.Drawing.Size(956, 446)
+        Me.Panel9.TabIndex = 0
+        '
+        'TableLayoutPanel5
+        '
+        Me.TableLayoutPanel5.ColumnCount = 1
+        Me.TableLayoutPanel5.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
+        Me.TableLayoutPanel5.Controls.Add(Me.TableLayoutPanel6, 0, 1)
+        Me.TableLayoutPanel5.Controls.Add(Me.TableLayoutPanel7, 0, 0)
+        Me.TableLayoutPanel5.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.TableLayoutPanel5.Location = New System.Drawing.Point(0, 0)
+        Me.TableLayoutPanel5.Name = "TableLayoutPanel5"
+        Me.TableLayoutPanel5.RowCount = 2
+        Me.TableLayoutPanel5.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 60.0!))
+        Me.TableLayoutPanel5.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
+        Me.TableLayoutPanel5.Size = New System.Drawing.Size(956, 446)
+        Me.TableLayoutPanel5.TabIndex = 0
+        '
+        'TableLayoutPanel6
+        '
+        Me.TableLayoutPanel6.ColumnCount = 2
+        Me.TableLayoutPanel6.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 80.0!))
+        Me.TableLayoutPanel6.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20.0!))
+        Me.TableLayoutPanel6.Controls.Add(Me.TableLayoutPanel8, 1, 0)
+        Me.TableLayoutPanel6.Controls.Add(Me.tblImage, 0, 0)
+        Me.TableLayoutPanel6.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.TableLayoutPanel6.Location = New System.Drawing.Point(3, 63)
+        Me.TableLayoutPanel6.Name = "TableLayoutPanel6"
+        Me.TableLayoutPanel6.RowCount = 1
+        Me.TableLayoutPanel6.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
+        Me.TableLayoutPanel6.Size = New System.Drawing.Size(950, 380)
+        Me.TableLayoutPanel6.TabIndex = 0
+        '
+        'TableLayoutPanel8
+        '
+        Me.TableLayoutPanel8.ColumnCount = 1
+        Me.TableLayoutPanel8.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
+        Me.TableLayoutPanel8.Controls.Add(Me.btnDeleteImg, 0, 2)
+        Me.TableLayoutPanel8.Controls.Add(Me.btnUpdateImg, 0, 1)
+        Me.TableLayoutPanel8.Controls.Add(Me.imgPhoto, 0, 2)
+        Me.TableLayoutPanel8.Controls.Add(Me.btnAddImg, 0, 0)
+        Me.TableLayoutPanel8.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.TableLayoutPanel8.Location = New System.Drawing.Point(763, 3)
+        Me.TableLayoutPanel8.Name = "TableLayoutPanel8"
+        Me.TableLayoutPanel8.RowCount = 3
+        Me.TableLayoutPanel8.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 45.0!))
+        Me.TableLayoutPanel8.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 45.0!))
+        Me.TableLayoutPanel8.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 45.0!))
+        Me.TableLayoutPanel8.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
+        Me.TableLayoutPanel8.Size = New System.Drawing.Size(184, 374)
+        Me.TableLayoutPanel8.TabIndex = 1
+        '
+        'btnDeleteImg
+        '
+        Me.btnDeleteImg.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.btnDeleteImg.Location = New System.Drawing.Point(3, 93)
+        Me.btnDeleteImg.Name = "btnDeleteImg"
+        Me.btnDeleteImg.Size = New System.Drawing.Size(178, 39)
+        Me.btnDeleteImg.TabIndex = 4
+        Me.btnDeleteImg.Text = "Delete"
+        Me.btnDeleteImg.UseVisualStyleBackColor = True
+        '
+        'btnUpdateImg
+        '
+        Me.btnUpdateImg.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.btnUpdateImg.Location = New System.Drawing.Point(3, 48)
+        Me.btnUpdateImg.Name = "btnUpdateImg"
+        Me.btnUpdateImg.Size = New System.Drawing.Size(178, 39)
+        Me.btnUpdateImg.TabIndex = 3
+        Me.btnUpdateImg.Text = "Update"
+        Me.btnUpdateImg.UseVisualStyleBackColor = True
+        '
+        'imgPhoto
+        '
+        Me.imgPhoto.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.imgPhoto.Image = Global.AVT_TRAKING.My.Resources.Resources.user
+        Me.imgPhoto.Location = New System.Drawing.Point(3, 138)
+        Me.imgPhoto.Name = "imgPhoto"
+        Me.imgPhoto.Size = New System.Drawing.Size(178, 233)
+        Me.imgPhoto.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
+        Me.imgPhoto.TabIndex = 1
+        Me.imgPhoto.TabStop = False
+        '
+        'btnAddImg
+        '
+        Me.btnAddImg.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.btnAddImg.Location = New System.Drawing.Point(3, 3)
+        Me.btnAddImg.Name = "btnAddImg"
+        Me.btnAddImg.Size = New System.Drawing.Size(178, 39)
+        Me.btnAddImg.TabIndex = 2
+        Me.btnAddImg.Text = "Add"
+        Me.btnAddImg.UseVisualStyleBackColor = True
+        '
+        'tblImage
+        '
+        Me.tblImage.AllowUserToAddRows = False
+        Me.tblImage.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
+        Me.tblImage.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.tblImage.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.clmNameImage, Me.clmImage, Me.clmDefault})
+        Me.tblImage.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.tblImage.Location = New System.Drawing.Point(3, 3)
+        Me.tblImage.Name = "tblImage"
+        Me.tblImage.Size = New System.Drawing.Size(754, 374)
+        Me.tblImage.TabIndex = 2
+        '
+        'clmNameImage
+        '
+        Me.clmNameImage.HeaderText = "Name"
+        Me.clmNameImage.Name = "clmNameImage"
+        Me.clmNameImage.ReadOnly = True
+        '
+        'clmImage
+        '
+        Me.clmImage.HeaderText = "Image"
+        Me.clmImage.Name = "clmImage"
+        Me.clmImage.Visible = False
+        '
+        'clmDefault
+        '
+        Me.clmDefault.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
+        Me.clmDefault.HeaderText = "Default"
+        Me.clmDefault.Name = "clmDefault"
+        Me.clmDefault.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.clmDefault.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
+        Me.clmDefault.Width = 66
+        '
+        'TableLayoutPanel7
+        '
+        Me.TableLayoutPanel7.ColumnCount = 3
+        Me.TableLayoutPanel7.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 35.26316!))
+        Me.TableLayoutPanel7.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 64.73684!))
+        Me.TableLayoutPanel7.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 189.0!))
+        Me.TableLayoutPanel7.Controls.Add(Me.Panel10, 0, 0)
+        Me.TableLayoutPanel7.Controls.Add(Me.Panel11, 1, 0)
+        Me.TableLayoutPanel7.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.TableLayoutPanel7.Location = New System.Drawing.Point(3, 3)
+        Me.TableLayoutPanel7.Name = "TableLayoutPanel7"
+        Me.TableLayoutPanel7.RowCount = 1
+        Me.TableLayoutPanel7.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
+        Me.TableLayoutPanel7.Size = New System.Drawing.Size(950, 54)
+        Me.TableLayoutPanel7.TabIndex = 1
+        '
+        'Panel10
+        '
+        Me.Panel10.Controls.Add(Me.Label5)
+        Me.Panel10.Controls.Add(Me.txtNameImage)
+        Me.Panel10.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Panel10.Location = New System.Drawing.Point(3, 3)
+        Me.Panel10.Name = "Panel10"
+        Me.Panel10.Size = New System.Drawing.Size(262, 48)
+        Me.Panel10.TabIndex = 0
+        '
+        'Label5
+        '
+        Me.Label5.AutoSize = True
+        Me.Label5.Location = New System.Drawing.Point(3, 17)
+        Me.Label5.Name = "Label5"
+        Me.Label5.Size = New System.Drawing.Size(35, 13)
+        Me.Label5.TabIndex = 1
+        Me.Label5.Text = "Name"
+        '
+        'txtNameImage
+        '
+        Me.txtNameImage.Location = New System.Drawing.Point(48, 12)
+        Me.txtNameImage.MaxLength = 30
+        Me.txtNameImage.Name = "txtNameImage"
+        Me.txtNameImage.Size = New System.Drawing.Size(173, 20)
+        Me.txtNameImage.TabIndex = 0
+        '
+        'Panel11
+        '
+        Me.Panel11.Controls.Add(Me.btnFindImage)
+        Me.Panel11.Controls.Add(Me.Label6)
+        Me.Panel11.Controls.Add(Me.txtPathFile)
+        Me.Panel11.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Panel11.Location = New System.Drawing.Point(271, 3)
+        Me.Panel11.Name = "Panel11"
+        Me.Panel11.Size = New System.Drawing.Size(486, 48)
+        Me.Panel11.TabIndex = 1
+        '
+        'btnFindImage
+        '
+        Me.btnFindImage.Location = New System.Drawing.Point(329, 12)
+        Me.btnFindImage.Name = "btnFindImage"
+        Me.btnFindImage.Size = New System.Drawing.Size(75, 23)
+        Me.btnFindImage.TabIndex = 3
+        Me.btnFindImage.Text = "..."
+        Me.btnFindImage.UseVisualStyleBackColor = True
+        '
+        'Label6
+        '
+        Me.Label6.AutoSize = True
+        Me.Label6.Location = New System.Drawing.Point(4, 17)
+        Me.Label6.Name = "Label6"
+        Me.Label6.Size = New System.Drawing.Size(29, 13)
+        Me.Label6.TabIndex = 2
+        Me.Label6.Text = "Path"
+        '
+        'txtPathFile
+        '
+        Me.txtPathFile.Location = New System.Drawing.Point(48, 14)
+        Me.txtPathFile.Name = "txtPathFile"
+        Me.txtPathFile.ReadOnly = True
+        Me.txtPathFile.Size = New System.Drawing.Size(245, 20)
+        Me.txtPathFile.TabIndex = 1
         '
         'Others
         '
@@ -851,14 +1105,26 @@ Partial Class Others
         Me.Panel5.ResumeLayout(False)
         Me.Panel5.PerformLayout()
         Me.Panel6.ResumeLayout(False)
-        CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.TableLayoutPanel3.ResumeLayout(False)
+        CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel7.ResumeLayout(False)
         Me.TableLayoutPanel4.ResumeLayout(False)
         Me.Panel3.ResumeLayout(False)
         Me.Panel3.PerformLayout()
         Me.Panel8.ResumeLayout(False)
         Me.Panel8.PerformLayout()
+        Me.TabPage3.ResumeLayout(False)
+        Me.Panel9.ResumeLayout(False)
+        Me.TableLayoutPanel5.ResumeLayout(False)
+        Me.TableLayoutPanel6.ResumeLayout(False)
+        Me.TableLayoutPanel8.ResumeLayout(False)
+        CType(Me.imgPhoto, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.tblImage, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.TableLayoutPanel7.ResumeLayout(False)
+        Me.Panel10.ResumeLayout(False)
+        Me.Panel10.PerformLayout()
+        Me.Panel11.ResumeLayout(False)
+        Me.Panel11.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -931,4 +1197,25 @@ Partial Class Others
     Friend WithEvents Panel8 As Panel
     Friend WithEvents Label4 As Label
     Friend WithEvents txtNameOther As TextBox
+    Friend WithEvents TabPage3 As TabPage
+    Friend WithEvents Panel9 As Panel
+    Friend WithEvents TableLayoutPanel5 As TableLayoutPanel
+    Friend WithEvents TableLayoutPanel6 As TableLayoutPanel
+    Friend WithEvents TableLayoutPanel7 As TableLayoutPanel
+    Friend WithEvents Panel10 As Panel
+    Friend WithEvents Label5 As Label
+    Friend WithEvents txtNameImage As TextBox
+    Friend WithEvents Panel11 As Panel
+    Friend WithEvents Label6 As Label
+    Friend WithEvents txtPathFile As TextBox
+    Friend WithEvents btnFindImage As Button
+    Friend WithEvents TableLayoutPanel8 As TableLayoutPanel
+    Friend WithEvents btnUpdateImg As Button
+    Friend WithEvents imgPhoto As PictureBox
+    Friend WithEvents btnAddImg As Button
+    Friend WithEvents btnDeleteImg As Button
+    Friend WithEvents tblImage As DataGridView
+    Friend WithEvents clmNameImage As DataGridViewTextBoxColumn
+    Friend WithEvents clmImage As DataGridViewTextBoxColumn
+    Friend WithEvents clmDefault As DataGridViewCheckBoxColumn
 End Class

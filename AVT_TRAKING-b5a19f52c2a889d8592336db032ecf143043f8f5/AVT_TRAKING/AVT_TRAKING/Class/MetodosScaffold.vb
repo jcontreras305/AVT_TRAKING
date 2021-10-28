@@ -292,6 +292,28 @@ end", conn)
     End Function
 
     '========================================================= WO ==========================================================================
+
+    Public Function llenarTableWO(ByVal tabla As DataTable) As Boolean
+        Try
+            conectar()
+            Dim cmd As New SqlCommand("select CONCAT(wo.idWO,'-',tk.task) as 'WO No',wo.idWO, tk.idAux, tk.idAuxWO,jb.jobNo as 'Job No' ,tk.description as 'Description'
+from job as jb 
+    inner join projectOrder as po on po.jobNo = jb.jobNo
+    inner join workOrder as wo on wo.idPO = po.idPO
+    inner join task as tk on tk.idAuxWO = wo.idAuxWO", conn)
+            If cmd.ExecuteNonQuery() Then
+                Dim da As New SqlDataAdapter(cmd)
+                da.Fill(tabla)
+                Return True
+            Else
+                Return False
+            End If
+        Catch ex As Exception
+            Return False
+        Finally
+            desconectar()
+        End Try
+    End Function
     Public Function llenarComboWO(ByVal combo As ComboBox) As DataTable
         Dim tabla As New DataTable
         tabla.Columns.Add("wono")
@@ -2451,11 +2473,50 @@ end", conn)
         End Try
     End Function
 
+    Public Function llenarTags(ByVal tabla As DataTable) As Boolean
+        Try
+            conectar()
+            Dim cmd As New SqlCommand("select  sc.tag, CONCAT(wo.idWO,'-',tk.task) as wo , wo.idPO from scaffoldTraking as sc 
+left join task as tk on tk.idAux = sc.idAux
+left join workOrder as wo on wo.idAuxWO = tk.idAuxWO
+left join projectOrder as po on po.idPO = wo.idPO
+left join job as jb on jb.jobNo = po.jobNo", conn)
+            If cmd.ExecuteNonQuery Then
+                Dim da As New SqlDataAdapter(cmd)
+                da.Fill(tabla)
+                Return True
+            Else
+                Return False
+            End If
+        Catch ex As Exception
+            Return False
+        Finally
+            desconectar()
+        End Try
+    End Function
 
     '####################################################################################################################################################################################
     '############################### METODOS PARA LA MODIFICAION DEL SCAFFOLD ###########################################################################################################
     '####################################################################################################################################################################################
 
+    Public Function selectMaxModId(ByVal tag As String) As String
+        Try
+            conectar()
+            Dim maxModID As String = "1000"
+            Dim cmd As New SqlCommand("select MAX(CONVERT(int, idModification))+1 as Maxvalue from modification " + If(tag <> "", " where tag = '" + tag + "'", ""), conn)
+            Dim rd As SqlDataReader = cmd.ExecuteReader()
+            While rd.Read()
+                maxModID = If(rd("Maxvalue") Is DBNull.Value, maxModID, rd("Maxvalue"))
+                Exit While
+            End While
+            Return maxModID
+        Catch ex As Exception
+            MsgBox(ex.Message())
+            Return "1000"
+        Finally
+            desconectar()
+        End Try
+    End Function
     Public Function llenarComboReqCompany(ByVal combo As ComboBox) As Boolean
         Try
             conectar()
@@ -2495,10 +2556,10 @@ select distinct requestBy from modification) as t1", conn)
     Public Function llenarModification(ByVal tabla As DataTable) As Boolean
         Try
             conectar()
-            Dim cmd As New SqlCommand("select md.idModification, ah.idActivityHours , si.idScaffoldInformation , mh.idMaterialHandeling ,md.tag from modification as md 
-inner join activityHours as ah on md.idModification = ah.idModification 
-inner join scaffoldInformation as si on md.idModification = si.idModification
-inner join materialHandeling as mh on md.idModification = mh.idModification", conn)
+            Dim cmd As New SqlCommand("select md.idModAux,md.idModification, ah.idActivityHours , si.idScaffoldInformation , mh.idMaterialHandeling ,md.tag from modification as md 
+inner join activityHours as ah on md.idModAux = ah.idModAux 
+left join scaffoldInformation as si on md.idModAux = si.idModAux
+inner join materialHandeling as mh on md.idModAux = mh.idModAux", conn)
             tabla.Clear()
             If cmd.ExecuteNonQuery Then
                 Dim da As New SqlDataAdapter(cmd)
@@ -2518,9 +2579,10 @@ inner join materialHandeling as mh on md.idModification = mh.idModification", co
         Dim md As New ModificationSC
         Try
             conectar()
-            Dim cmdMod As New SqlCommand("select * from modification where idModification ='" + idMod + "' and tag='" + tag + "'", conn)
+            Dim cmdMod As New SqlCommand("select * from modification where idModAux ='" + idMod + "' and tag='" + tag + "'", conn)
             Dim dr1 As SqlDataReader = cmdMod.ExecuteReader()
             While dr1.Read()
+                md.ModAux = dr1("idModAux")
                 md.ModID = dr1("idModification")
                 md.reqCompany = dr1("reqCompany")
                 md.requestBy = dr1("requestBy")
@@ -2533,10 +2595,10 @@ inner join materialHandeling as mh on md.idModification = mh.idModification", co
                 Exit While
             End While
             dr1.Close()
-            md.llenarActivityHours(md.ModID, md.tag)
-            md.llenarMaterialHandeling(md.ModID, md.tag)
-            md.llenarSacffoldInformation(md.ModID, md.tag)
-            md.llenarTablaProductMod(md.ModID, md.tag)
+            md.llenarActivityHours(md.ModAux, md.tag)
+            md.llenarMaterialHandeling(md.ModAux, md.tag)
+            md.llenarSacffoldInformation(md.ModAux, md.tag)
+            md.productsAdds = md.llenarTablaProductMod(md.ModAux, md.tag)
             md.llenarTablaProductTag(md.tag)
             Return md
         Catch ex As Exception
@@ -2552,65 +2614,69 @@ inner join materialHandeling as mh on md.idModification = mh.idModification", co
         tran = conn.BeginTransaction
         Dim flagComplete As Boolean = True
         Try
-            Dim cmdMod As New SqlCommand("if (select count (idModification) from modification where idModification='" + md.ModID + "')=0
+            If md.ModAux = "" Then
+                Dim g As Guid
+                g = Guid.NewGuid()
+                md.ModAux = g.ToString()
+            End If
+            Dim cmdMod As New SqlCommand("if (select count (idModAux) from modification where idModAux='" + md.ModAux + "')=0
                 begin
-	                insert into modification values ('" + md.ModID + "','" + md.reqCompany + "','" + md.requestBy + "','" + validaFechaParaSQl(md.ModDate) + "','" + md.foreman + "','" + md.erector + "','" + md.comments + "','" + md.tag + "','" + If(md.status = True, "t", "f") + "')
+	                insert into modification values ('" + md.ModAux + "','" + md.ModID + "','" + md.reqCompany + "','" + md.requestBy + "','" + validaFechaParaSQl(md.ModDate) + "','" + md.foreman + "','" + md.erector + "','" + md.comments + "','" + md.tag + "','" + If(md.status = True, "t", "f") + "')
                 end
-                else if (select count (idModification) from modification where idModification='" + md.ModID + "')=1
+                else if (select count (idModAux) from modification where idModAux='" + md.ModAux + "')=1
                 begin
-	                update modification set reqCompany='" + md.reqCompany + "',requestBy='" + md.requestBy + "',modificationDate='" + validaFechaParaSQl(md.ModDate) + "' ,foreman='" + md.foreman + "',erector='" + md.erector + "',comments='" + md.comments + "',tag='" + md.tag + "',status='" + If(md.status = True, "t", "f") + "' where idModification = '" + md.ModID + "'
+	                update modification set reqCompany='" + md.reqCompany + "',requestBy='" + md.requestBy + "',modificationDate='" + validaFechaParaSQl(md.ModDate) + "' ,foreman='" + md.foreman + "',erector='" + md.erector + "',comments='" + md.comments + "',tag='" + md.tag + "',status='" + If(md.status = True, "t", "f") + "' where idModAux = '" + md.ModAux + "'
                 end", conn)
             cmdMod.Transaction = tran
             If cmdMod.ExecuteNonQuery = 1 Then 'Actualizar o Insertar la Modificacion 
-                Dim cmdActivityHour As New SqlCommand("if (select COUNT(*) from activityHours where idModification = '" + md.ModID + "' and tag = '" + md.tag + "')=0
+                Dim cmdActivityHour As New SqlCommand("if (select COUNT(*) from activityHours where idModAux = '" + md.ModAux + "' and tag = '" + md.tag + "')=0
                     begin 
-	                    insert into activityHours values (NEWID()," + CStr(md.ahrBuild) + "," + CStr(md.ahrMaterial) + "," + CStr(md.ahrTravel) + "," + CStr(md.ahrWeather) + "," + CStr(md.ahrAlarm) + "," + CStr(md.ahrSafety) + "," + CStr(md.ahrStdBy) + "," + CStr(md.ahrOther) + ",'" + md.tag + "','" + md.ModID + "',NULL)
+	                    insert into activityHours values (NEWID()," + CStr(md.ahrBuild) + "," + CStr(md.ahrMaterial) + "," + CStr(md.ahrTravel) + "," + CStr(md.ahrWeather) + "," + CStr(md.ahrAlarm) + "," + CStr(md.ahrSafety) + "," + CStr(md.ahrStdBy) + "," + CStr(md.ahrOther) + ",'" + md.tag + "','" + md.ModAux + "',NULL)
                     end
-                    else if(select COUNT(*) from activityHours where idModification = '" + md.ModID + "' and tag = '" + md.tag + "')=1
+                    else if(select COUNT(*) from activityHours where idModAux = '" + md.ModAux + "' and tag = '" + md.tag + "')=1
                     begin 
 	                    update activityHours set build=" + CStr(md.ahrBuild) + ",material=" + CStr(md.ahrMaterial) + ",travel=" + CStr(md.ahrTravel) + ",weather=" + CStr(md.ahrWeather) + ",alarm=" + CStr(md.ahrAlarm) + ",safety=" + CStr(md.ahrSafety) + ",stdBy=" + CStr(md.ahrStdBy) + ",other=" + CStr(md.ahrOther) + " ,tag='" + md.tag + "' where idActivityHours = '" + md.ahrIdActivityHours + "'
                     end", conn)
                 cmdActivityHour.Transaction = tran
-                If cmdActivityHour.ExecuteNonQuery = 1 Then 'Actualizar o Insertar las Horas de Actividades
-                    Dim cmdScfInfo As New SqlCommand("if (select count(*) from scaffoldInformation where idModification='" + md.ModID + "' and tag = '" + md.tag + "')=0
-                        begin 
-	                        insert into scaffoldInformation values(NEWID(),'" + md.sciType + "'," + CStr(md.sciWidth) + "," + CStr(md.sciLength) + "," + CStr(md.sciHeigth) + "," + CStr(md.sciDecks) + "," + CStr(md.sciKo) + "," + CStr(md.sciBase) + "," + CStr(md.sciExtraDeck) + ",'" + md.tag + "','" + md.ModID + "')
-                        end
-                        else if (select count(*) from scaffoldInformation where idModification='" + md.ModID + "' and tag = '" + md.tag + "')=1
-                        begin 
-	                        update scaffoldInformation set type='" + md.sciType + "',width=" + CStr(md.sciWidth) + ",length=" + CStr(md.sciLength) + ",heigth=" + CStr(md.sciHeigth) + ",descks=" + CStr(md.sciDecks) + ",ko=" + CStr(md.sciKo) + ",base=" + CStr(md.sciBase) + ",extraDeck=" + CStr(md.sciExtraDeck) + ",tag='" + md.tag + "' where idScaffoldInformation='" + md.idScaffoldinformation + "'
-                        end", conn)
-                    cmdScfInfo.Transaction = tran
-                    If cmdScfInfo.ExecuteNonQuery = 1 Then 'Actualizar o Insertar la informacion del Andamio
-                        Dim cmdMatHand As New SqlCommand("if(select COUNT(*) from materialHandeling where tag = '" + md.tag + "' and idModification = '" + md.ModID + "')=0
+                'If cmdActivityHour.ExecuteNonQuery = 1 Then 'Actualizar o Insertar las Horas de Actividades
+                '    Dim cmdScfInfo As New SqlCommand("if (select count(*) from scaffoldInformation where idModAux='" + md.ModAux + "' and tag = '" + md.tag + "')=0
+                '        begin 
+                '         insert into scaffoldInformation values(NEWID(),'" + md.sciType + "'," + CStr(md.sciWidth) + "," + CStr(md.sciLength) + "," + CStr(md.sciHeigth) + "," + CStr(md.sciDecks) + "," + CStr(md.sciKo) + "," + CStr(md.sciBase) + "," + CStr(md.sciExtraDeck) + ",'" + md.tag + "','" + md.ModAux + "')
+                '        end
+                '        else if (select count(*) from scaffoldInformation where idModAux='" + md.ModAux + "' and tag = '" + md.tag + "')=1
+                '        begin 
+                '         update scaffoldInformation set type='" + md.sciType + "',width=" + CStr(md.sciWidth) + ",length=" + CStr(md.sciLength) + ",heigth=" + CStr(md.sciHeigth) + ",descks=" + CStr(md.sciDecks) + ",ko=" + CStr(md.sciKo) + ",base=" + CStr(md.sciBase) + ",extraDeck=" + CStr(md.sciExtraDeck) + ",tag='" + md.tag + "' where idScaffoldInformation='" + md.idScaffoldinformation + "'
+                '        end", conn)
+                '    cmdScfInfo.Transaction = tran
+                If cmdActivityHour.ExecuteNonQuery = 1 Then 'Actualizar o Insertar la informacion del Andamio
+                    Dim cmdMatHand As New SqlCommand("if(select COUNT(*) from materialHandeling where tag = '" + md.tag + "' and idModAux = '" + md.ModAux + "')=0
                             begin
-	                            insert into materialHandeling values(NEWID(),'" + If(md.materialHandeling(0), "t", "f") + "','" + If(md.materialHandeling(1), "t", "f") + "','" + If(md.materialHandeling(2), "t", "f") + "','" + If(md.materialHandeling(3), "t", "f") + "','" + If(md.materialHandeling(4), "t", "f") + "','" + If(md.materialHandeling(5), "t", "f") + "','" + If(md.materialHandeling(6), "t", "f") + "','" + md.tag + "','" + md.ModID + "', Null)
+	                            insert into materialHandeling values(NEWID(),'" + If(md.materialHandeling(0), "t", "f") + "','" + If(md.materialHandeling(1), "t", "f") + "','" + If(md.materialHandeling(2), "t", "f") + "','" + If(md.materialHandeling(3), "t", "f") + "','" + If(md.materialHandeling(4), "t", "f") + "','" + If(md.materialHandeling(5), "t", "f") + "','" + If(md.materialHandeling(6), "t", "f") + "','" + md.tag + "','" + md.ModAux + "', Null)
                             end
-                            else if(select COUNT(*) from materialHandeling where tag = '" + md.tag + "' and idModification = '" + md.ModID + "')=1
+                            else if(select COUNT(*) from materialHandeling where tag = '" + md.tag + "' and idModAux = '" + md.ModAux + "')=1
                             begin
 	                            update materialHandeling set truck='" + If(md.materialHandeling(0), "t", "f") + "',forklift='" + If(md.materialHandeling(1), "t", "f") + "',trailer='" + If(md.materialHandeling(2), "t", "f") + "',crane='" + If(md.materialHandeling(3), "t", "f") + "',rope='" + If(md.materialHandeling(4), "t", "f") + "',passed='" + If(md.materialHandeling(5), "t", "f") + "',elevator='" + If(md.materialHandeling(6), "t", "f") + "' ,tag='" + md.tag + "' where idMaterialHandeling ='" + md.idMaterialHandeling + "'
                             end", conn)
-                        cmdMatHand.Transaction = tran
-                        If cmdMatHand.ExecuteNonQuery = 1 Then 'Actualizar o Insertar la Manipulacion de materiales
-                            Dim contProduct As Integer = 1
-                            For Each row As DataRow In md.productsAdds.Rows()
-                                Dim array() = row.ItemArray(1).ToString.Split(" ")
-                                Dim idProduct = array(0).ToString
-                                Dim idProductModification = row.ItemArray(0).ToString()
-                                Dim cmdProductInsertUpdate As New SqlCommand("
-declare @modID as varchar(20)
+                    cmdMatHand.Transaction = tran
+                    If cmdMatHand.ExecuteNonQuery = 1 Then 'Actualizar o Insertar la Manipulacion de materiales
+                        Dim contProduct As Integer = 1
+                        For Each row As DataRow In md.productsAdds.Rows()
+                            Dim array() = row.ItemArray(1).ToString.Split(" ")
+                            Dim idProduct = array(0).ToString
+                            Dim idProductModification = row.ItemArray(0).ToString()
+                            Dim cmdProductInsertUpdate As New SqlCommand("
+declare @modID as varchar(36)
 declare @cantidad as float
 declare @idProduct as int
 declare @tag as varchar(36)
 declare @lqty as float
  
-set @modID = '" + md.ModID + "'
+set @modID = '" + md.ModAux + "'
 set @cantidad = " + row.ItemArray(2) + "
 set @idProduct = " + idProduct + "
 set @tag = '" + md.tag + "'
 
-
-if(select COUNT(*) from productModification where idProduct = @idProduct and idModification = @modID)=0
+if(select COUNT(*) from productModification where idProduct = @idProduct and idModAux = @modID)=0
 begin --NO EXISTE PRODUCTO
 	if(select COUNT(*) from productTotalScaffold where idProduct = @idProduct and tag=@tag)=0
 	begin--PRODUCTO NUEVO EN SCAFFOLD Y MODIFICACION
@@ -2628,30 +2694,30 @@ begin --NO EXISTE PRODUCTO
 	end
 end
 else 
-if(select COUNT(*) from productModification where idProduct = @idProduct and idModification = @modID)>0
+if(select COUNT(*) from productModification where idProduct = @idProduct and idModAux = @modID)>0
 begin --EXISTE PRODUCTO EN MODIFICACION 
-	set @lqty = (select top 1 quantity from productModification where idModification=@modID and idProduct=@idProduct)
+	set @lqty = (select top 1 quantity from productModification where idModAux=@modID and idProduct=@idProduct)
 	update product set quantity = quantity + (IIF(@lqty>0,@lqty,@lqty*-1)) where idProduct = @idProduct
 	update productTotalScaffold set quantity = quantity - @lqty where tag = @tag and idProduct = @idProduct
 	update product set quantity = quantity -  iif(@cantidad>0,@cantidad,@cantidad) where idProduct = @idProduct
 	update productTotalScaffold set quantity = quantity + @cantidad where idProduct= @idProduct and tag= @tag
-	update productModification set quantity = @cantidad where  idModification=@modID and idProduct=@idProduct 	
+	update productModification set quantity = @cantidad where  idModAux=@modID and idProduct=@idProduct 	
 	delete from productTotalScaffold where quantity <= 0 and tag = @tag
 end", conn)
-                                cmdProductInsertUpdate.Transaction = tran
-                                If cmdProductInsertUpdate.ExecuteNonQuery > 0 Then
-                                    contProduct += 1
-                                Else
-                                    tran.Rollback()
-                                    MessageBox.Show("Error, check the data and try again." + vbCrLf + "The error is likely in the Products 'table' at row " + CStr(contProduct) + ".", "Important", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-                                    flagComplete = False
-                                End If
-                            Next
-                            flagComplete = True
-                        Else
-                            flagComplete = False
-                            MessageBox.Show("Error, check the data and try again." + vbCrLf + "The error is likely in the Data of 'Material Handeling'.", "Important", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-                        End If
+                            cmdProductInsertUpdate.Transaction = tran
+                            If cmdProductInsertUpdate.ExecuteNonQuery > 0 Then
+                                contProduct += 1
+                            Else
+                                tran.Rollback()
+                                MessageBox.Show("Error, check the data and try again." + vbCrLf + "The error is likely in the Products 'table' at row " + CStr(contProduct) + ".", "Important", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                                flagComplete = False
+                            End If
+                        Next
+                        flagComplete = True
+                        'Else
+                        '    flagComplete = False
+                        '    MessageBox.Show("Error, check the data and try again." + vbCrLf + "The error is likely in the Data of 'Material Handeling'.", "Important", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                        'End If
                     Else
                         flagComplete = False
                         MessageBox.Show("Error, check the data and try again." + vbCrLf + "The error is likely in the Table 'Scaffold Information'.", "Important", MessageBoxButtons.OK, MessageBoxIcon.Warning)
@@ -2680,7 +2746,70 @@ end", conn)
             desconectar()
         End Try
     End Function
+    Public Function insertProductModification(ByVal idProduct As String, ByVal quantity As String, ByVal idModification As String, ByVal tag As String) As String
+        Try
+            conectar()
+            Dim cmdModAUX As New SqlCommand("select idModAux from modification where idModification = '" + idModification + "' and tag ='" + tag + "'", conn)
+            Dim dr As SqlDataReader = cmdModAUX.ExecuteReader
+            Dim modAUX As String = ""
+            While dr.Read
+                modAUX = dr("idModAux")
+                Exit While
+            End While
+            If modAUX <> "" Then
+                Dim cmdProductInsertUpdate As New SqlCommand("
+declare @modID as varchar(36)
+declare @cantidad as float
+declare @idProduct as int
+declare @tag as varchar(36)
+declare @lqty as float
+ 
+set @modID = '" + modAUX + "'
+set @cantidad = " + quantity + "
+set @idProduct = " + idProduct + "
+set @tag = '" + tag + "'
 
+if(select COUNT(*) from productModification where idProduct = @idProduct and idModAux = @modID)=0
+begin --NO EXISTE PRODUCTO
+	if(select COUNT(*) from productTotalScaffold where idProduct = @idProduct and tag=@tag)=0
+	begin--PRODUCTO NUEVO EN SCAFFOLD Y MODIFICACION
+		insert into productTotalScaffold values(NEWID(),@cantidad,@idProduct,@tag,'t')
+		insert into productModification values(NEWID(),@modID,@idProduct,@cantidad,@tag)
+		update product set quantity = quantity - IIF(@cantidad > 0,@cantidad,@cantidad*-1) where idProduct = @idProduct
+		delete from productTotalScaffold where quantity = 0 and tag = @tag
+	end
+	else if(select COUNT(*) from productTotalScaffold where idProduct = @idProduct and tag=@tag)>0
+	begin--PRODUCTO EXISTE EN SCAFFOLDTOTAL PERO NO EN MODIFICACION
+		insert into productModification values(NEWID(),@modID,@idProduct,@cantidad,@tag)
+		update productTotalScaffold set quantity = quantity + @cantidad where tag= @tag and idProduct = @idProduct
+		update product set quantity = quantity - IIF(@cantidad > 0 ,@cantidad,@cantidad*-1) where idProduct = @idProduct
+		delete from productTotalScaffold where quantity <= 0 and tag = @tag
+	end
+end
+else 
+if(select COUNT(*) from productModification where idProduct = @idProduct and idModAux = @modID)>0
+begin --EXISTE PRODUCTO EN MODIFICACION 
+	set @lqty = (select top 1 quantity from productModification where idModAux=@modID and idProduct=@idProduct)
+	update product set quantity = quantity + (IIF(@lqty>0,@lqty,@lqty*-1)) where idProduct = @idProduct
+	update productTotalScaffold set quantity = quantity - @lqty where tag = @tag and idProduct = @idProduct
+	update product set quantity = quantity -  iif(@cantidad>0,@cantidad,@cantidad) where idProduct = @idProduct
+	update productTotalScaffold set quantity = quantity + @cantidad where idProduct= @idProduct and tag= @tag
+	update productModification set quantity = @cantidad where  idModAux=@modID and idProduct=@idProduct 	
+	delete from productTotalScaffold where quantity <= 0 and tag = @tag
+end", conn)
+
+                If cmdProductInsertUpdate.ExecuteNonQuery > 0 Then
+                    Return "Complete"
+                Else
+                    Return "Error Check the data of this product."
+                End If
+            Else
+                Return "The Modification ID or TagID does not exist"
+            End If
+        Catch ex As Exception
+            Return ex.Message
+        End Try
+    End Function
     Public Function deleteRowsProductModification(ByVal tbl As DataGridView, ByVal tag As String, ByVal modID As String) As Boolean
         conectar()
         Dim tran As SqlTransaction
@@ -2741,14 +2870,14 @@ end", conn)
         End Try
     End Function
 
-    Public Function deleteModificaion(ByVal tag As String, ByVal modID As String) As Boolean
+    Public Function deleteModificaion(ByVal tag As String, ByVal modIDAux As String) As Boolean
         Try
             conectar()
             Dim cmd As New SqlCommand("sp_DeleteModification")
             cmd.Connection = conn
             cmd.CommandType = CommandType.StoredProcedure
             cmd.Parameters.Add("@tag", SqlDbType.VarChar, 20).Value = tag
-            cmd.Parameters.Add("@modID", SqlDbType.VarChar, 20).Value = modID
+            cmd.Parameters.Add("@modID", SqlDbType.VarChar, 36).Value = modIDAux
             cmd.Parameters.Add("@msg", SqlDbType.VarChar, 120).Direction = ParameterDirection.Output
             cmd.ExecuteNonQuery()
             Dim resultado As String = cmd.Parameters("@msg").Value

@@ -9,6 +9,8 @@
         mtdOthers.llenarListWorkTMLump(lstWTMLS)
         mtdOthers.llenarCostDistrinbution(lstCostDistribution)
         mtdOthers.llenarCostCode(lstCostCode)
+        mtdOthers.llenarImageClientTable(tblImage)
+        btnAddImg.Enabled = False
     End Sub
 
     Private Sub btnAdd_Click(sender As Object, e As EventArgs) Handles btnAdd.Click
@@ -226,6 +228,104 @@
             If mtdOthers.deleteCostCode(lstCostCode.SelectedItems(0).Text) Then
                 lstCostCode.SelectedItems(0).Remove()
             End If
+        End If
+    End Sub
+
+    Private Sub btnFindImage_Click(sender As Object, e As EventArgs) Handles btnFindImage.Click
+        Try
+            Dim file As New OpenFileDialog
+            file.Filter = "Imagenes JPG|*.jpg|Images PNG|*.png"
+            If file.ShowDialog = Windows.Forms.DialogResult.OK Then
+                imgPhoto.Image = Image.FromFile(file.FileName)
+                txtPathFile.Text = file.FileName
+                Dim infoDirectory As New IO.DirectoryInfo(file.FileName)
+                txtNameImage.Text = infoDirectory.Name
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message)
+        End Try
+    End Sub
+
+    Private Sub btnAddImg_Click(sender As Object, e As EventArgs) Handles btnAddImg.Click
+        Try
+            If txtNameImage.Text <> "" And imgPhoto.Image IsNot Nothing Then
+                Dim flag As Boolean = False
+                For Each row As DataGridViewRow In tblImage.Rows()
+                    If row.Cells("clmNameImage").Value = txtNameImage.Text Then
+                        flag = True
+                        Exit For
+                    End If
+                Next
+                If flag Then
+                    MessageBox.Show("All ready exist a image whit the same name.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                Else
+                    If True Then
+                        mtdOthers.saveImageClient(txtNameImage.Text, imageToByte(imgPhoto.Image), False)
+                        btnAdd.Enabled = False
+                        txtPathFile.Text = ""
+                    End If
+
+                    mtdOthers.llenarImageClientTable(tblImage)
+                End If
+            Else
+                MessageBox.Show("Write a name and choose a picture before to save.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            End If
+
+        Catch ex As Exception
+            MsgBox(ex.Message())
+        End Try
+    End Sub
+
+    Private Sub tblImage_SelectionChanged(sender As Object, e As EventArgs) Handles tblImage.SelectionChanged
+        Try
+            Dim datos As Byte() = tblImage.CurrentRow.Cells("clmImage").Value
+            Dim img = BytetoImage(datos)
+            imgPhoto.Image = img
+            btnAddImg.Enabled = False
+        Catch ex As Exception
+
+        End Try
+    End Sub
+
+    Private Sub btnDeleteImg_Click(sender As Object, e As EventArgs) Handles btnDeleteImg.Click
+        Try
+            If tblImage.SelectedRows.Count > 0 Then
+                For Each row As DataGridViewRow In tblImage.SelectedRows()
+                    If Not mtdOthers.deleteImage(row.Cells("clmNameImage").Value) Then
+                        MessageBox.Show("Error in the row " + CStr(row.Index) + ". The Image " + row.Cells("clmNameImage").Value + " It could not deleted", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                    End If
+                Next
+                mtdOthers.llenarImageClientTable(tblImage)
+            Else
+                MessageBox.Show("Please select a row")
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message())
+        End Try
+    End Sub
+
+    Private Sub btnUpdateImg_Click(sender As Object, e As EventArgs) Handles btnUpdateImg.Click
+        Try
+            If btnUpdateImg.Text = "Update" Then
+                btnUpdateImg.Text = "Save"
+                txtNameImage.Text = tblImage.CurrentRow.Cells("clmNameImage").Value
+                btnAddImg.Enabled = False
+            ElseIf btnUpdateImg.Text = "Save" Then
+                btnUpdateImg.Text = "Update"
+                mtdOthers.updateImge(tblImage.CurrentRow.Cells("clmNameImage").Value, txtNameImage.Text, imageToByte(imgPhoto.Image), tblImage.CurrentRow.Cells("clmDefault").Value)
+                mtdOthers.llenarImageClientTable(tblImage)
+                btnAdd.Enabled = True
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message())
+        End Try
+    End Sub
+
+    Private Sub txtNameImage_TextChanged(sender As Object, e As EventArgs) Handles txtPathFile.TextChanged, txtNameImage.TextChanged
+        If txtPathFile.Text <> "" And txtNameImage.Text <> "" Then
+            btnAddImg.Enabled = True
+        Else
+            btnAddImg.Enabled = False
         End If
     End Sub
 End Class

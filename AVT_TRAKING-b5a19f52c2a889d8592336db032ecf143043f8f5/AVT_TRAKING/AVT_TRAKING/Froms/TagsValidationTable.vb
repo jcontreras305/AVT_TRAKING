@@ -8,6 +8,7 @@ Public Class TagsValidationTable
     Dim tblSubJob As New Data.DataTable
     Dim tblType As New Data.DataTable
     Dim tblProducts As New Data.DataTable
+    Dim tblWO As New Data.DataTable
     Dim listTagExcel As New List(Of String)
     Dim listProduct As New List(Of String)
     Dim selectTable As String
@@ -21,6 +22,7 @@ Public Class TagsValidationTable
         mtdScaffold.llenarAreas(tblAreas)
         mtdScaffold.llenarJobCat(tblJobCat)
         mtdScaffold.llenarScaffold(tblTags)
+        mtdScaffold.llenarTableWO(tblWO)
         mtdScaffold.llenarSubJobs(tblSubJob)
         mtdScaffold.llenarRental(tblType)
         mtdScaffold.llenarProduct(tblProducts)
@@ -502,7 +504,7 @@ Public Class TagsValidationTable
                     row.Cells("clmQuantity").Style.BackColor = Color.Yellow
                 End If
             End If
-                Return True
+            Return True
         Catch ex As Exception
             Return False
         End Try
@@ -516,12 +518,12 @@ Public Class TagsValidationTable
                 sc.tag = row.Cells("TagNum").Value
                 sc.jobcat = row.Cells("jobCat").Value
                 sc.areaID = row.Cells("AreaID").Value
-                For Each rowtask As DataRow In tblTags.Rows()
+                For Each rowtask As DataRow In tblWO.Rows()
                     Dim datos() = row.Cells("WorkNum").Value.ToString().Split(" ")
                     Dim task = row.Cells("WorkNum").Value.ToString().Replace(" ", "-")
-                    If task = rowtask.ItemArray(5) Then
-                        sc.wo = rowtask.ItemArray(5)
-                        sc.task = rowtask.ItemArray(1)
+                    If task = rowtask.ItemArray(0) Then
+                        sc.wo = rowtask.ItemArray(3)
+                        sc.task = rowtask.ItemArray(2)
                         Exit For
                     End If
                 Next
@@ -566,8 +568,13 @@ Public Class TagsValidationTable
                         sc.products.Rows.Add("", rowp.Cells("clmProductID").Value, rowp.Cells("clmQuantity").Value, "", "")
                     End If
                 Next
-                mtdScaffold.saveScaffoldTraking(sc)
+                If Not mtdScaffold.saveScaffoldTraking(sc) Then
+                    row.Cells("clmError").Value = "Error"
+                    tblTagsScaffold.Columns("clmError").Visible = True
+                End If
             Next
+        Else
+            MessageBox.Show("Exist error, tray reload the document or changue the data.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
         End If
     End Sub
     Private Function ExistError(ByVal tbl As DataGridView) As Boolean
@@ -614,4 +621,5 @@ Public Class TagsValidationTable
             btnSave.Enabled = False
         End If
     End Sub
+
 End Class

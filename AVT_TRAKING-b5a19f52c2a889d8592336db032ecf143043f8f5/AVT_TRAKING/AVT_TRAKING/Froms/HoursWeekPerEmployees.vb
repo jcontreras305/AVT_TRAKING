@@ -1,4 +1,4 @@
-﻿Public Class HoursWeekPeerEmployees
+﻿Public Class HoursWeekPerEmployees
     Dim mtdOthers As New MetodosOthers
     Dim mtdHPW As New MetodosHoursPeerWeek
     Dim idsEmployees As New DataTable
