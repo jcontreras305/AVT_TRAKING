@@ -377,10 +377,17 @@
     <Content Include="Documents\IsaacSP.sql" />
     <None Include="Images\userlogin.png" />
     <None Include="Images\close.png" />
+    <None Include="Images\employee.png" />
+    <None Include="Images\crm.png" />
+    <None Include="Images\code.png" />
+    <None Include="Images\exit.png" />
     <Content Include="Images\eye.png" />
     <None Include="Images\minimize.png" />
     <None Include="Images\show.png" />
     <None Include="Images\maximize.png" />
+    <None Include="Images\restore.png" />
+    <None Include="Images\materials.png" />
+    <None Include="Images\options.png" />
     <Content Include="Images\user.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />

@@ -24,6 +24,8 @@ Partial Class Employees
     Private Sub InitializeComponent()
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.tbpEmployees = New System.Windows.Forms.TabPage()
+        Me.cmbTypeEmployee = New System.Windows.Forms.ComboBox()
+        Me.Label19 = New System.Windows.Forms.Label()
         Me.btnCancel = New System.Windows.Forms.Button()
         Me.btnUpdate = New System.Windows.Forms.Button()
         Me.Label18 = New System.Windows.Forms.Label()
@@ -75,8 +77,11 @@ Partial Class Employees
         Me.txtStreat = New System.Windows.Forms.TextBox()
         Me.Label7 = New System.Windows.Forms.Label()
         Me.Button1 = New System.Windows.Forms.Button()
-        Me.Label19 = New System.Windows.Forms.Label()
-        Me.cmbTypeEmployee = New System.Windows.Forms.ComboBox()
+        Me.TitleBar = New System.Windows.Forms.Panel()
+        Me.btnMaximize = New System.Windows.Forms.PictureBox()
+        Me.btnClose = New System.Windows.Forms.PictureBox()
+        Me.btnRestore = New System.Windows.Forms.PictureBox()
+        Me.btnMinimized = New System.Windows.Forms.PictureBox()
         Me.TabControl1.SuspendLayout()
         Me.tbpEmployees.SuspendLayout()
         CType(Me.tblEmployees, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -88,16 +93,24 @@ Partial Class Employees
         CType(Me.sprPayRate1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox2.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
+        Me.TitleBar.SuspendLayout()
+        CType(Me.btnMaximize, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.btnClose, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.btnRestore, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.btnMinimized, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'TabControl1
         '
+        Me.TabControl1.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.TabControl1.Controls.Add(Me.tbpEmployees)
         Me.TabControl1.Controls.Add(Me.tbpOtherData)
-        Me.TabControl1.Location = New System.Drawing.Point(3, 24)
+        Me.TabControl1.Location = New System.Drawing.Point(3, 69)
         Me.TabControl1.Name = "TabControl1"
         Me.TabControl1.SelectedIndex = 0
-        Me.TabControl1.Size = New System.Drawing.Size(723, 355)
+        Me.TabControl1.Size = New System.Drawing.Size(723, 356)
         Me.TabControl1.TabIndex = 0
         '
         'tbpEmployees
@@ -128,10 +141,27 @@ Partial Class Employees
         Me.tbpEmployees.Location = New System.Drawing.Point(4, 22)
         Me.tbpEmployees.Name = "tbpEmployees"
         Me.tbpEmployees.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbpEmployees.Size = New System.Drawing.Size(715, 329)
+        Me.tbpEmployees.Size = New System.Drawing.Size(715, 330)
         Me.tbpEmployees.TabIndex = 0
         Me.tbpEmployees.Text = "Employee"
         Me.tbpEmployees.UseVisualStyleBackColor = True
+        '
+        'cmbTypeEmployee
+        '
+        Me.cmbTypeEmployee.FormattingEnabled = True
+        Me.cmbTypeEmployee.Location = New System.Drawing.Point(348, 82)
+        Me.cmbTypeEmployee.Name = "cmbTypeEmployee"
+        Me.cmbTypeEmployee.Size = New System.Drawing.Size(121, 21)
+        Me.cmbTypeEmployee.TabIndex = 23
+        '
+        'Label19
+        '
+        Me.Label19.AutoSize = True
+        Me.Label19.Location = New System.Drawing.Point(309, 85)
+        Me.Label19.Name = "Label19"
+        Me.Label19.Size = New System.Drawing.Size(31, 13)
+        Me.Label19.TabIndex = 22
+        Me.Label19.Text = "Type"
         '
         'btnCancel
         '
@@ -179,12 +209,16 @@ Partial Class Employees
         '
         'tblEmployees
         '
+        Me.tblEmployees.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.tblEmployees.BackgroundColor = System.Drawing.SystemColors.GradientInactiveCaption
         Me.tblEmployees.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.tblEmployees.Location = New System.Drawing.Point(6, 184)
         Me.tblEmployees.Name = "tblEmployees"
         Me.tblEmployees.RowHeadersWidth = 62
         Me.tblEmployees.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.tblEmployees.Size = New System.Drawing.Size(669, 150)
+        Me.tblEmployees.Size = New System.Drawing.Size(703, 138)
         Me.tblEmployees.TabIndex = 16
         '
         'btnSave
@@ -198,7 +232,7 @@ Partial Class Employees
         '
         'btnChooseImage
         '
-        Me.btnChooseImage.Location = New System.Drawing.Point(550, 144)
+        Me.btnChooseImage.Location = New System.Drawing.Point(573, 147)
         Me.btnChooseImage.Name = "btnChooseImage"
         Me.btnChooseImage.Size = New System.Drawing.Size(88, 23)
         Me.btnChooseImage.TabIndex = 13
@@ -210,7 +244,7 @@ Partial Class Employees
         Me.imgPhoto.BackColor = System.Drawing.Color.White
         Me.imgPhoto.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.imgPhoto.Image = Global.AVT_TRAKING.My.Resources.Resources.user
-        Me.imgPhoto.Location = New System.Drawing.Point(530, 6)
+        Me.imgPhoto.Location = New System.Drawing.Point(550, 6)
         Me.imgPhoto.Name = "imgPhoto"
         Me.imgPhoto.Size = New System.Drawing.Size(120, 132)
         Me.imgPhoto.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
@@ -322,7 +356,7 @@ Partial Class Employees
         Me.tbpOtherData.Location = New System.Drawing.Point(4, 22)
         Me.tbpOtherData.Name = "tbpOtherData"
         Me.tbpOtherData.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbpOtherData.Size = New System.Drawing.Size(715, 329)
+        Me.tbpOtherData.Size = New System.Drawing.Size(715, 330)
         Me.tbpOtherData.TabIndex = 1
         Me.tbpOtherData.Text = "Other Data"
         Me.tbpOtherData.UseVisualStyleBackColor = True
@@ -590,40 +624,82 @@ Partial Class Employees
         '
         'Button1
         '
+        Me.Button1.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Button1.ForeColor = System.Drawing.Color.Red
-        Me.Button1.Location = New System.Drawing.Point(679, 4)
+        Me.Button1.Image = Global.AVT_TRAKING.My.Resources.Resources._exit
+        Me.Button1.Location = New System.Drawing.Point(659, 36)
         Me.Button1.Margin = New System.Windows.Forms.Padding(2)
         Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(47, 20)
+        Me.Button1.Size = New System.Drawing.Size(61, 42)
         Me.Button1.TabIndex = 22
-        Me.Button1.Text = "Exit"
         Me.Button1.UseVisualStyleBackColor = True
         '
-        'Label19
+        'TitleBar
         '
-        Me.Label19.AutoSize = True
-        Me.Label19.Location = New System.Drawing.Point(309, 85)
-        Me.Label19.Name = "Label19"
-        Me.Label19.Size = New System.Drawing.Size(31, 13)
-        Me.Label19.TabIndex = 22
-        Me.Label19.Text = "Type"
+        Me.TitleBar.BackColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
+        Me.TitleBar.Controls.Add(Me.btnMaximize)
+        Me.TitleBar.Controls.Add(Me.btnClose)
+        Me.TitleBar.Controls.Add(Me.btnRestore)
+        Me.TitleBar.Controls.Add(Me.btnMinimized)
+        Me.TitleBar.Dock = System.Windows.Forms.DockStyle.Top
+        Me.TitleBar.Location = New System.Drawing.Point(0, 0)
+        Me.TitleBar.Name = "TitleBar"
+        Me.TitleBar.Size = New System.Drawing.Size(731, 30)
+        Me.TitleBar.TabIndex = 23
         '
-        'cmbTypeEmployee
+        'btnMaximize
         '
-        Me.cmbTypeEmployee.FormattingEnabled = True
-        Me.cmbTypeEmployee.Location = New System.Drawing.Point(348, 82)
-        Me.cmbTypeEmployee.Name = "cmbTypeEmployee"
-        Me.cmbTypeEmployee.Size = New System.Drawing.Size(121, 21)
-        Me.cmbTypeEmployee.TabIndex = 23
+        Me.btnMaximize.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnMaximize.Image = Global.AVT_TRAKING.My.Resources.Resources.maximize
+        Me.btnMaximize.Location = New System.Drawing.Point(659, 0)
+        Me.btnMaximize.Name = "btnMaximize"
+        Me.btnMaximize.Size = New System.Drawing.Size(31, 31)
+        Me.btnMaximize.TabIndex = 5
+        Me.btnMaximize.TabStop = False
+        '
+        'btnClose
+        '
+        Me.btnClose.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnClose.Image = Global.AVT_TRAKING.My.Resources.Resources.close
+        Me.btnClose.Location = New System.Drawing.Point(696, 0)
+        Me.btnClose.Name = "btnClose"
+        Me.btnClose.Size = New System.Drawing.Size(30, 31)
+        Me.btnClose.TabIndex = 4
+        Me.btnClose.TabStop = False
+        '
+        'btnRestore
+        '
+        Me.btnRestore.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnRestore.Image = Global.AVT_TRAKING.My.Resources.Resources.restore
+        Me.btnRestore.Location = New System.Drawing.Point(659, 0)
+        Me.btnRestore.Name = "btnRestore"
+        Me.btnRestore.Size = New System.Drawing.Size(31, 31)
+        Me.btnRestore.TabIndex = 6
+        Me.btnRestore.TabStop = False
+        Me.btnRestore.Visible = False
+        '
+        'btnMinimized
+        '
+        Me.btnMinimized.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnMinimized.Image = Global.AVT_TRAKING.My.Resources.Resources.minimize
+        Me.btnMinimized.Location = New System.Drawing.Point(621, 3)
+        Me.btnMinimized.Name = "btnMinimized"
+        Me.btnMinimized.Size = New System.Drawing.Size(32, 27)
+        Me.btnMinimized.TabIndex = 2
+        Me.btnMinimized.TabStop = False
         '
         'Employees
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(731, 380)
+        Me.BackColor = System.Drawing.SystemColors.Control
+        Me.ClientSize = New System.Drawing.Size(731, 437)
+        Me.Controls.Add(Me.TitleBar)
         Me.Controls.Add(Me.Button1)
         Me.Controls.Add(Me.TabControl1)
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
         Me.Name = "Employees"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Employees"
         Me.TabControl1.ResumeLayout(False)
         Me.tbpEmployees.ResumeLayout(False)
@@ -640,6 +716,11 @@ Partial Class Employees
         Me.GroupBox2.PerformLayout()
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()
+        Me.TitleBar.ResumeLayout(False)
+        CType(Me.btnMaximize, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.btnClose, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.btnRestore, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.btnMinimized, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -699,4 +780,9 @@ Partial Class Employees
     Friend WithEvents Button1 As Button
     Friend WithEvents cmbTypeEmployee As ComboBox
     Friend WithEvents Label19 As Label
+    Friend WithEvents TitleBar As Panel
+    Friend WithEvents btnMinimized As PictureBox
+    Friend WithEvents btnMaximize As PictureBox
+    Friend WithEvents btnClose As PictureBox
+    Friend WithEvents btnRestore As PictureBox
 End Class

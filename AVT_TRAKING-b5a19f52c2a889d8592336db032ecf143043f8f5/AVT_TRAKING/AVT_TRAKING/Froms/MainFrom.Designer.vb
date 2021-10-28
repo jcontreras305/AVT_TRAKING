@@ -22,100 +22,171 @@ Partial Class MainFrom
     'No lo modifique con el editor de código.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Me.TitleBar = New System.Windows.Forms.Panel()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.btnRestore = New System.Windows.Forms.PictureBox()
+        Me.btnMaximize = New System.Windows.Forms.PictureBox()
+        Me.PictureBox1 = New System.Windows.Forms.PictureBox()
+        Me.btnClose = New System.Windows.Forms.PictureBox()
         Me.Button2 = New System.Windows.Forms.Button()
-        Me.Panel1 = New System.Windows.Forms.Panel()
-        Me.Panel2 = New System.Windows.Forms.Panel()
-        Me.tbnoOthers = New System.Windows.Forms.Button()
-        Me.btnMaterials = New System.Windows.Forms.Button()
-        Me.btnWorkCodes = New System.Windows.Forms.Button()
-        Me.btnClients = New System.Windows.Forms.Button()
-        Me.btnEmployees = New System.Windows.Forms.Button()
         Me.pnlImage = New System.Windows.Forms.Panel()
-        Me.Panel1.SuspendLayout()
+        Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.btnEmployees = New System.Windows.Forms.Button()
+        Me.btnClients = New System.Windows.Forms.Button()
+        Me.btnWorkCodes = New System.Windows.Forms.Button()
+        Me.btnMaterials = New System.Windows.Forms.Button()
+        Me.tbnoOthers = New System.Windows.Forms.Button()
+        Me.Panel4 = New System.Windows.Forms.Panel()
+        Me.Panel5 = New System.Windows.Forms.Panel()
+        Me.Panel6 = New System.Windows.Forms.Panel()
+        Me.Panel7 = New System.Windows.Forms.Panel()
+        Me.Panel8 = New System.Windows.Forms.Panel()
+        Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.PanelChildForm = New System.Windows.Forms.Panel()
+        Me.TitleBar.SuspendLayout()
+        CType(Me.btnRestore, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.btnMaximize, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.btnClose, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel2.SuspendLayout()
+        Me.Panel1.SuspendLayout()
+        Me.PanelChildForm.SuspendLayout()
         Me.SuspendLayout()
+        '
+        'TitleBar
+        '
+        Me.TitleBar.BackColor = System.Drawing.Color.FromArgb(CType(CType(30, Byte), Integer), CType(CType(38, Byte), Integer), CType(CType(70, Byte), Integer))
+        Me.TitleBar.Controls.Add(Me.Label1)
+        Me.TitleBar.Controls.Add(Me.btnRestore)
+        Me.TitleBar.Controls.Add(Me.btnMaximize)
+        Me.TitleBar.Controls.Add(Me.PictureBox1)
+        Me.TitleBar.Controls.Add(Me.btnClose)
+        Me.TitleBar.Dock = System.Windows.Forms.DockStyle.Top
+        Me.TitleBar.Location = New System.Drawing.Point(0, 0)
+        Me.TitleBar.Name = "TitleBar"
+        Me.TitleBar.Size = New System.Drawing.Size(802, 35)
+        Me.TitleBar.TabIndex = 6
+        '
+        'Label1
+        '
+        Me.Label1.AutoSize = True
+        Me.Label1.Font = New System.Drawing.Font("Mongolian Baiti", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label1.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.Label1.Location = New System.Drawing.Point(3, 9)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(83, 16)
+        Me.Label1.TabIndex = 4
+        Me.Label1.Text = "MainFrom"
+        '
+        'btnRestore
+        '
+        Me.btnRestore.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnRestore.Image = Global.AVT_TRAKING.My.Resources.Resources.restore
+        Me.btnRestore.Location = New System.Drawing.Point(732, 4)
+        Me.btnRestore.Name = "btnRestore"
+        Me.btnRestore.Size = New System.Drawing.Size(31, 31)
+        Me.btnRestore.TabIndex = 3
+        Me.btnRestore.TabStop = False
+        Me.btnRestore.Visible = False
+        '
+        'btnMaximize
+        '
+        Me.btnMaximize.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnMaximize.Image = Global.AVT_TRAKING.My.Resources.Resources.maximize
+        Me.btnMaximize.Location = New System.Drawing.Point(732, 4)
+        Me.btnMaximize.Name = "btnMaximize"
+        Me.btnMaximize.Size = New System.Drawing.Size(31, 31)
+        Me.btnMaximize.TabIndex = 2
+        Me.btnMaximize.TabStop = False
+        '
+        'PictureBox1
+        '
+        Me.PictureBox1.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.PictureBox1.Image = Global.AVT_TRAKING.My.Resources.Resources.minimize
+        Me.PictureBox1.Location = New System.Drawing.Point(695, 4)
+        Me.PictureBox1.Name = "PictureBox1"
+        Me.PictureBox1.Size = New System.Drawing.Size(31, 31)
+        Me.PictureBox1.TabIndex = 1
+        Me.PictureBox1.TabStop = False
+        '
+        'btnClose
+        '
+        Me.btnClose.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnClose.Image = Global.AVT_TRAKING.My.Resources.Resources.close
+        Me.btnClose.Location = New System.Drawing.Point(769, 4)
+        Me.btnClose.Name = "btnClose"
+        Me.btnClose.Size = New System.Drawing.Size(30, 31)
+        Me.btnClose.TabIndex = 0
+        Me.btnClose.TabStop = False
         '
         'Button2
         '
         Me.Button2.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Button2.ForeColor = System.Drawing.Color.Red
-        Me.Button2.Location = New System.Drawing.Point(748, 8)
+        Me.Button2.Image = Global.AVT_TRAKING.My.Resources.Resources._exit
+        Me.Button2.Location = New System.Drawing.Point(543, 9)
         Me.Button2.Margin = New System.Windows.Forms.Padding(2)
         Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(45, 19)
+        Me.Button2.Size = New System.Drawing.Size(59, 35)
         Me.Button2.TabIndex = 4
-        Me.Button2.Text = "Exit"
         Me.Button2.UseVisualStyleBackColor = True
         '
-        'Panel1
+        'pnlImage
         '
-        Me.Panel1.Controls.Add(Me.Panel2)
-        Me.Panel1.Controls.Add(Me.pnlImage)
-        Me.Panel1.Dock = System.Windows.Forms.DockStyle.Left
-        Me.Panel1.Location = New System.Drawing.Point(0, 0)
-        Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(201, 479)
-        Me.Panel1.TabIndex = 5
+        Me.pnlImage.BackColor = System.Drawing.Color.FromArgb(CType(CType(30, Byte), Integer), CType(CType(38, Byte), Integer), CType(CType(70, Byte), Integer))
+        Me.pnlImage.Location = New System.Drawing.Point(0, 41)
+        Me.pnlImage.Name = "pnlImage"
+        Me.pnlImage.Size = New System.Drawing.Size(201, 82)
+        Me.pnlImage.TabIndex = 4
         '
         'Panel2
         '
-        Me.Panel2.BackColor = System.Drawing.Color.Firebrick
+        Me.Panel2.BackColor = System.Drawing.Color.FromArgb(CType(CType(49, Byte), Integer), CType(CType(62, Byte), Integer), CType(CType(86, Byte), Integer))
+        Me.Panel2.Controls.Add(Me.Panel8)
+        Me.Panel2.Controls.Add(Me.Panel7)
+        Me.Panel2.Controls.Add(Me.Panel6)
+        Me.Panel2.Controls.Add(Me.Panel5)
+        Me.Panel2.Controls.Add(Me.Panel4)
         Me.Panel2.Controls.Add(Me.tbnoOthers)
         Me.Panel2.Controls.Add(Me.btnMaterials)
         Me.Panel2.Controls.Add(Me.btnWorkCodes)
         Me.Panel2.Controls.Add(Me.btnClients)
         Me.Panel2.Controls.Add(Me.btnEmployees)
         Me.Panel2.Dock = System.Windows.Forms.DockStyle.Left
-        Me.Panel2.Location = New System.Drawing.Point(0, 93)
+        Me.Panel2.Location = New System.Drawing.Point(0, 0)
         Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(201, 386)
+        Me.Panel2.Size = New System.Drawing.Size(197, 451)
         Me.Panel2.TabIndex = 6
         '
-        'tbnoOthers
+        'btnEmployees
         '
-        Me.tbnoOthers.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.tbnoOthers.Dock = System.Windows.Forms.DockStyle.Top
-        Me.tbnoOthers.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.tbnoOthers.Location = New System.Drawing.Point(0, 140)
-        Me.tbnoOthers.Margin = New System.Windows.Forms.Padding(2)
-        Me.tbnoOthers.Name = "tbnoOthers"
-        Me.tbnoOthers.Size = New System.Drawing.Size(201, 35)
-        Me.tbnoOthers.TabIndex = 4
-        Me.tbnoOthers.Text = "Others"
-        Me.tbnoOthers.UseVisualStyleBackColor = True
-        '
-        'btnMaterials
-        '
-        Me.btnMaterials.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.btnMaterials.Dock = System.Windows.Forms.DockStyle.Top
-        Me.btnMaterials.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnMaterials.Location = New System.Drawing.Point(0, 105)
-        Me.btnMaterials.Margin = New System.Windows.Forms.Padding(2)
-        Me.btnMaterials.Name = "btnMaterials"
-        Me.btnMaterials.Size = New System.Drawing.Size(201, 35)
-        Me.btnMaterials.TabIndex = 0
-        Me.btnMaterials.Text = "Materials"
-        Me.btnMaterials.UseVisualStyleBackColor = True
-        '
-        'btnWorkCodes
-        '
-        Me.btnWorkCodes.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.btnWorkCodes.Dock = System.Windows.Forms.DockStyle.Top
-        Me.btnWorkCodes.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnWorkCodes.Location = New System.Drawing.Point(0, 70)
-        Me.btnWorkCodes.Margin = New System.Windows.Forms.Padding(2)
-        Me.btnWorkCodes.Name = "btnWorkCodes"
-        Me.btnWorkCodes.Size = New System.Drawing.Size(201, 35)
-        Me.btnWorkCodes.TabIndex = 3
-        Me.btnWorkCodes.Text = "Work Codes"
-        Me.btnWorkCodes.UseVisualStyleBackColor = True
+        Me.btnEmployees.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.btnEmployees.FlatAppearance.BorderSize = 0
+        Me.btnEmployees.FlatAppearance.MouseOverBackColor = System.Drawing.Color.RoyalBlue
+        Me.btnEmployees.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnEmployees.Font = New System.Drawing.Font("Nirmala UI", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnEmployees.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.btnEmployees.Image = Global.AVT_TRAKING.My.Resources.Resources.employee
+        Me.btnEmployees.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnEmployees.Location = New System.Drawing.Point(-1, 120)
+        Me.btnEmployees.Margin = New System.Windows.Forms.Padding(2)
+        Me.btnEmployees.Name = "btnEmployees"
+        Me.btnEmployees.Size = New System.Drawing.Size(199, 35)
+        Me.btnEmployees.TabIndex = 2
+        Me.btnEmployees.Text = "Employees"
+        Me.btnEmployees.UseVisualStyleBackColor = True
         '
         'btnClients
         '
         Me.btnClients.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.btnClients.Dock = System.Windows.Forms.DockStyle.Top
-        Me.btnClients.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnClients.Location = New System.Drawing.Point(0, 35)
+        Me.btnClients.FlatAppearance.BorderSize = 0
+        Me.btnClients.FlatAppearance.MouseOverBackColor = System.Drawing.Color.RoyalBlue
+        Me.btnClients.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnClients.Font = New System.Drawing.Font("Nirmala UI", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnClients.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.btnClients.Image = Global.AVT_TRAKING.My.Resources.Resources.crm
+        Me.btnClients.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnClients.Location = New System.Drawing.Point(-2, 178)
         Me.btnClients.Margin = New System.Windows.Forms.Padding(2)
         Me.btnClients.Name = "btnClients"
         Me.btnClients.Size = New System.Drawing.Size(201, 35)
@@ -123,50 +194,168 @@ Partial Class MainFrom
         Me.btnClients.Text = "Clients"
         Me.btnClients.UseVisualStyleBackColor = True
         '
-        'btnEmployees
+        'btnWorkCodes
         '
-        Me.btnEmployees.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.btnEmployees.Dock = System.Windows.Forms.DockStyle.Top
-        Me.btnEmployees.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnEmployees.Location = New System.Drawing.Point(0, 0)
-        Me.btnEmployees.Margin = New System.Windows.Forms.Padding(2)
-        Me.btnEmployees.Name = "btnEmployees"
-        Me.btnEmployees.Size = New System.Drawing.Size(201, 35)
-        Me.btnEmployees.TabIndex = 2
-        Me.btnEmployees.Text = "Employees"
-        Me.btnEmployees.UseVisualStyleBackColor = True
+        Me.btnWorkCodes.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.btnWorkCodes.FlatAppearance.BorderSize = 0
+        Me.btnWorkCodes.FlatAppearance.MouseOverBackColor = System.Drawing.Color.RoyalBlue
+        Me.btnWorkCodes.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnWorkCodes.Font = New System.Drawing.Font("Nirmala UI", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnWorkCodes.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.btnWorkCodes.Image = Global.AVT_TRAKING.My.Resources.Resources.code
+        Me.btnWorkCodes.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnWorkCodes.Location = New System.Drawing.Point(2, 238)
+        Me.btnWorkCodes.Margin = New System.Windows.Forms.Padding(2)
+        Me.btnWorkCodes.Name = "btnWorkCodes"
+        Me.btnWorkCodes.Size = New System.Drawing.Size(201, 35)
+        Me.btnWorkCodes.TabIndex = 3
+        Me.btnWorkCodes.Text = "Work Codes"
+        Me.btnWorkCodes.UseVisualStyleBackColor = True
         '
-        'pnlImage
+        'btnMaterials
         '
-        Me.pnlImage.BackColor = System.Drawing.Color.Firebrick
-        Me.pnlImage.Dock = System.Windows.Forms.DockStyle.Top
-        Me.pnlImage.Location = New System.Drawing.Point(0, 0)
-        Me.pnlImage.Name = "pnlImage"
-        Me.pnlImage.Size = New System.Drawing.Size(201, 93)
-        Me.pnlImage.TabIndex = 4
+        Me.btnMaterials.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.btnMaterials.FlatAppearance.BorderSize = 0
+        Me.btnMaterials.FlatAppearance.MouseOverBackColor = System.Drawing.Color.RoyalBlue
+        Me.btnMaterials.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnMaterials.Font = New System.Drawing.Font("Nirmala UI", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnMaterials.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.btnMaterials.Image = Global.AVT_TRAKING.My.Resources.Resources.materials
+        Me.btnMaterials.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnMaterials.Location = New System.Drawing.Point(-2, 295)
+        Me.btnMaterials.Margin = New System.Windows.Forms.Padding(2)
+        Me.btnMaterials.Name = "btnMaterials"
+        Me.btnMaterials.Size = New System.Drawing.Size(201, 35)
+        Me.btnMaterials.TabIndex = 0
+        Me.btnMaterials.Text = "Materials"
+        Me.btnMaterials.UseVisualStyleBackColor = True
+        '
+        'tbnoOthers
+        '
+        Me.tbnoOthers.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.tbnoOthers.FlatAppearance.BorderSize = 0
+        Me.tbnoOthers.FlatAppearance.MouseOverBackColor = System.Drawing.Color.RoyalBlue
+        Me.tbnoOthers.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.tbnoOthers.Font = New System.Drawing.Font("Nirmala UI", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.tbnoOthers.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.tbnoOthers.Image = Global.AVT_TRAKING.My.Resources.Resources.options
+        Me.tbnoOthers.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.tbnoOthers.Location = New System.Drawing.Point(-6, 354)
+        Me.tbnoOthers.Margin = New System.Windows.Forms.Padding(2)
+        Me.tbnoOthers.Name = "tbnoOthers"
+        Me.tbnoOthers.Size = New System.Drawing.Size(201, 35)
+        Me.tbnoOthers.TabIndex = 4
+        Me.tbnoOthers.Text = "Others"
+        Me.tbnoOthers.UseVisualStyleBackColor = True
+        '
+        'Panel4
+        '
+        Me.Panel4.BackColor = System.Drawing.Color.RoyalBlue
+        Me.Panel4.Location = New System.Drawing.Point(0, 118)
+        Me.Panel4.Name = "Panel4"
+        Me.Panel4.Size = New System.Drawing.Size(198, 5)
+        Me.Panel4.TabIndex = 5
+        '
+        'Panel5
+        '
+        Me.Panel5.BackColor = System.Drawing.Color.RoyalBlue
+        Me.Panel5.Location = New System.Drawing.Point(1, 178)
+        Me.Panel5.Name = "Panel5"
+        Me.Panel5.Size = New System.Drawing.Size(198, 5)
+        Me.Panel5.TabIndex = 6
+        '
+        'Panel6
+        '
+        Me.Panel6.BackColor = System.Drawing.Color.RoyalBlue
+        Me.Panel6.Location = New System.Drawing.Point(3, 238)
+        Me.Panel6.Name = "Panel6"
+        Me.Panel6.Size = New System.Drawing.Size(198, 5)
+        Me.Panel6.TabIndex = 7
+        '
+        'Panel7
+        '
+        Me.Panel7.BackColor = System.Drawing.Color.RoyalBlue
+        Me.Panel7.Location = New System.Drawing.Point(2, 293)
+        Me.Panel7.Name = "Panel7"
+        Me.Panel7.Size = New System.Drawing.Size(198, 5)
+        Me.Panel7.TabIndex = 8
+        '
+        'Panel8
+        '
+        Me.Panel8.BackColor = System.Drawing.Color.RoyalBlue
+        Me.Panel8.Location = New System.Drawing.Point(3, 352)
+        Me.Panel8.Name = "Panel8"
+        Me.Panel8.Size = New System.Drawing.Size(198, 5)
+        Me.Panel8.TabIndex = 9
+        '
+        'Panel1
+        '
+        Me.Panel1.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.Panel1.Controls.Add(Me.Panel2)
+        Me.Panel1.Controls.Add(Me.pnlImage)
+        Me.Panel1.Location = New System.Drawing.Point(0, 28)
+        Me.Panel1.Name = "Panel1"
+        Me.Panel1.Size = New System.Drawing.Size(197, 451)
+        Me.Panel1.TabIndex = 5
+        '
+        'PanelChildForm
+        '
+        Me.PanelChildForm.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.PanelChildForm.Controls.Add(Me.Button2)
+        Me.PanelChildForm.Location = New System.Drawing.Point(192, 31)
+        Me.PanelChildForm.Name = "PanelChildForm"
+        Me.PanelChildForm.Size = New System.Drawing.Size(610, 448)
+        Me.PanelChildForm.TabIndex = 7
         '
         'MainFrom
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
         Me.ClientSize = New System.Drawing.Size(802, 479)
+        Me.Controls.Add(Me.PanelChildForm)
+        Me.Controls.Add(Me.TitleBar)
         Me.Controls.Add(Me.Panel1)
-        Me.Controls.Add(Me.Button2)
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
         Me.Margin = New System.Windows.Forms.Padding(2)
         Me.Name = "MainFrom"
+        Me.Opacity = 0.96R
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "MainFrom"
-        Me.Panel1.ResumeLayout(False)
+        Me.TitleBar.ResumeLayout(False)
+        Me.TitleBar.PerformLayout()
+        CType(Me.btnRestore, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.btnMaximize, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.btnClose, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel2.ResumeLayout(False)
+        Me.Panel1.ResumeLayout(False)
+        Me.PanelChildForm.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
     Friend WithEvents Button2 As Button
-    Friend WithEvents Panel1 As Panel
+    Friend WithEvents TitleBar As Panel
+    Friend WithEvents btnClose As PictureBox
+    Friend WithEvents PictureBox1 As PictureBox
+    Friend WithEvents btnRestore As PictureBox
+    Friend WithEvents btnMaximize As PictureBox
+    Friend WithEvents Label1 As Label
+    Friend WithEvents pnlImage As Panel
     Friend WithEvents Panel2 As Panel
+    Friend WithEvents Panel8 As Panel
+    Friend WithEvents Panel7 As Panel
+    Friend WithEvents Panel6 As Panel
+    Friend WithEvents Panel5 As Panel
+    Friend WithEvents Panel4 As Panel
+    Friend WithEvents tbnoOthers As Button
     Friend WithEvents btnMaterials As Button
     Friend WithEvents btnWorkCodes As Button
     Friend WithEvents btnClients As Button
     Friend WithEvents btnEmployees As Button
-    Friend WithEvents pnlImage As Panel
-    Friend WithEvents tbnoOthers As Button
+    Friend WithEvents Panel1 As Panel
+    Friend WithEvents PanelChildForm As Panel
 End Class
