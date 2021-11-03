@@ -3,7 +3,7 @@ Public Class ModificationSC
     Inherits ConnectioDB
 
     'Modification
-    Private _ModID, _tag, _reqCompany, _requestBy, _foreman, _erector, _comments As String
+    Private _ModAux, _ModID, _tag, _reqCompany, _requestBy, _foreman, _erector, _comments As String
     Private _ModDate As Date
     Private _status As Boolean
     'scaffoldInformation
@@ -25,6 +25,7 @@ Public Class ModificationSC
     Public Function Clear() As Boolean
         Try
             'Modification
+            _ModAux = ""
             _ModID = ""
             _tag = ""
             _reqCompany = ""
@@ -75,7 +76,17 @@ Public Class ModificationSC
             Return False
         End Try
     End Function
-
+    Public Property ModAux() As String
+        Get
+            If _ModAux Is Nothing Then
+                _ModAux = ""
+            End If
+            Return _ModAux
+        End Get
+        Set(ByVal ModAux As String)
+            _ModAux = ModAux
+        End Set
+    End Property
     Public Property ModID() As String
         Get
             If _ModID Is Nothing Then
@@ -175,11 +186,11 @@ Public Class ModificationSC
             _status = status
         End Set
     End Property
-    Public Function llenarSacffoldInformation(ByVal ModiId As String, ByVal tag As String) As Boolean
+    Public Function llenarSacffoldInformation(ByVal ModiAux As String, ByVal tag As String) As Boolean
         Try
             conectar()
             Dim cmd As New SqlCommand("select idScaffoldInformation,type,width,length,heigth,descks,ko,base,extraDeck from scaffoldInformation
-                where tag = '" + tag + "' and idModification='" + ModiId + "'", conn)
+                where tag = '" + tag + "' and idModAux='" + ModAux + "'", conn)
             Dim rd As SqlDataReader = cmd.ExecuteReader()
             While rd.Read()
                 _idScaffoldinformation = If(rd("idScaffoldInformation") Is DBNull.Value, "", rd("idScaffoldInformation"))
@@ -299,11 +310,11 @@ Public Class ModificationSC
             _sciType = sciType
         End Set
     End Property
-    Public Function llenarActivityHours(ByVal ModiId As String, ByVal tag As String) As Boolean
+    Public Function llenarActivityHours(ByVal ModAux As String, ByVal tag As String) As Boolean
         Try
             conectar()
             Dim cmd As New SqlCommand("select idActivityHours,build,material,travel,weather,alarm,safety,stdBy,other from activityHours
-                where idModification = '" + ModiId + "' and tag= '" + tag + "'", conn)
+                where idModAux = '" + ModAux + "' and tag= '" + tag + "'", conn)
             Dim rd As SqlDataReader = cmd.ExecuteReader()
             While rd.Read()
                 _ahrIdActivityHours = If(rd("idActivityHours") Is DBNull.Value, "", rd("idActivityHours"))
@@ -454,13 +465,13 @@ Public Class ModificationSC
             _materialHandeling = materialHandeling
         End Set
     End Property
-    Public Function llenarMaterialHandeling(ByVal ModiId As String, ByVal tag As String) As Boolean()
+    Public Function llenarMaterialHandeling(ByVal ModAux As String, ByVal tag As String) As Boolean()
         Dim materialHandeling = {False, False, False, False, False, False, False}
         Try
             conectar()
             Dim cmd As New SqlCommand("select mh.idMaterialHandeling ,mh.truck,mh.forklift,mh.trailer,mh.crane,mh.rope,mh.passed,mh.elevator
 from materialHandeling as mh
-where mh.IdModification='" + ModiId + "' and mh.tag = '" + tag + "'", conn)
+where mh.IdModAux='" + ModAux + "' and mh.tag = '" + tag + "'", conn)
             Dim dr As SqlDataReader = cmd.ExecuteReader()
             While dr.Read()
                 _idMaterialHandelig = If(dr("idMaterialHandeling") Is DBNull.Value, "", dr("idMaterialHandeling"))
@@ -536,7 +547,7 @@ left join product as pd on pd.idProduct = leg.idProduct where tag = '" + tag + "
             _ProductsAdds = products
         End Set
     End Property
-    Public Function llenarTablaProductMod(ByVal ModID As String, ByVal tag As String) As DataTable
+    Public Function llenarTablaProductMod(ByVal ModAux As String, ByVal tag As String) As DataTable
         Dim tablaProductos As New DataTable
         With tablaProductos
             tablaProductos.Columns.Add("idModification")
@@ -547,13 +558,13 @@ left join product as pd on pd.idProduct = leg.idProduct where tag = '" + tag + "
         End With
         Try
             conectar()
-            Dim cmd As New SqlCommand("select pm.idModification, pd.idProduct,pm.quantity,pd.name,pd.quantity as stock 
+            Dim cmd As New SqlCommand("select pm.idModAux, pd.idProduct,pm.quantity,pd.name,pd.quantity as stock 
 from productModification as pm 
 inner join product as pd on pm.idProduct = pd.idProduct
-where pm.idModification = '" + ModID + "' and tag='" + tag + "'", conn)
+where pm.idModAux = '" + ModAux + "' and tag='" + tag + "'", conn)
             Dim dr As SqlDataReader = cmd.ExecuteReader()
             While dr.Read()
-                tablaProductos.Rows.Add(dr("idModification"), dr("idProduct"), dr("quantity"), dr("name"), dr("stock"))
+                tablaProductos.Rows.Add(dr("idModAux"), dr("idProduct"), dr("quantity"), dr("name"), dr("stock"))
             End While
             _ProductsAdds = tablaProductos
             Return tablaProductos

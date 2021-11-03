@@ -123,9 +123,9 @@ Public Class scafoldTarking
         mtdScaffold.llenarComboRequestBy(cmbRequestBY)
         If mtdScaffold.llenarModification(tblModification) Then
             If tblModification.Rows.Count > 0 Then
-                md = mtdScaffold.llenarModificationData(tblModification.Rows(0).ItemArray(0), tblModification.Rows(0).ItemArray(4))
-                If md.ModID <> "" Then
-                    cargarDatosModification(md.ModID)
+                md = mtdScaffold.llenarModificationData(tblModification.Rows(0).ItemArray(0), tblModification.Rows(0).ItemArray(5))
+                If md.ModAux <> "" Then
+                    cargarDatosModification(md.ModAux)
                 End If
             Else
                 md.Clear()
@@ -300,15 +300,15 @@ Public Class scafoldTarking
                 End If
             Case "Mod"
                 If mtdScaffold.saveModification(md) Then
-                    md = mtdScaffold.llenarModificationData(md.ModID, md.tag)
+                    md = mtdScaffold.llenarModificationData(md.ModAux, md.tag)
                     cargarDatosModification(md.ModID)
                     mtdScaffold.llenarProduct(tblProduct)
                     mtdScaffold.llenarProduct(tblProductosAux)
                 End If
             Case tblModificationProductMS.Name
                 If mtdScaffold.saveModification(md) Then
-                    md = mtdScaffold.llenarModificationData(md.ModID, md.tag)
-                    cargarDatosModification(md.ModID)
+                    md = mtdScaffold.llenarModificationData(md.ModAux, md.tag)
+                    cargarDatosModification(md.ModAux)
                     mtdScaffold.llenarProduct(tblProduct)
                     mtdScaffold.llenarProduct(tblProductosAux)
                 End If
@@ -321,8 +321,8 @@ Public Class scafoldTarking
                         cargarDatosScaffold(sc.tag)
                     End If
                     If ds.tag = md.tag Then
-                        md = mtdScaffold.llenarModificationData(md.ModID, md.tag)
-                        cargarDatosModification(md.ModID)
+                        md = mtdScaffold.llenarModificationData(md.ModAux, md.tag)
+                        cargarDatosModification(md.ModAux)
                     End If
                     mtdScaffold.llenarProduct(tblProduct)
                     mtdScaffold.llenarProduct(tblProductosAux)
@@ -416,7 +416,7 @@ Public Class scafoldTarking
                     If mtdScaffold.llenarModification(tblModification) Then
                         For Each row As DataRow In tblModification.Rows
                             If row.ItemArray(0) = md.ModID Then
-                                md = mtdScaffold.llenarModificationData(row.ItemArray(0), row.ItemArray(4))
+                                md = mtdScaffold.llenarModificationData(row.ItemArray(0), row.ItemArray(5))
                                 cargarDatosModification(md.ModID)
                             End If
                         Next
@@ -638,10 +638,10 @@ Public Class scafoldTarking
                 End If
             Case "Mod"
                 If DialogResult.Yes = MessageBox.Show("The 'Modification Records' will be deleted. Would you like to continue?", "Important ", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) Then
-                    If (mtdScaffold.deleteModificaion(md.tag, md.ModID)) Then
+                    If (mtdScaffold.deleteModificaion(md.tag, md.ModAux)) Then
                         If mtdScaffold.llenarModification(tblModification) Then
                             If tblModification.Rows.Count > 0 Then
-                                md = mtdScaffold.llenarModificationData(tblModification.Rows(0).ItemArray(0), tblModification.Rows(0).ItemArray(4))
+                                md = mtdScaffold.llenarModificationData(tblModification.Rows(0).ItemArray(0), tblModification.Rows(0).ItemArray(5))
                                 If md.ModID <> "" Then
                                     cargarDatosModification(md.ModID)
                                 End If
@@ -656,11 +656,11 @@ Public Class scafoldTarking
                 End If
             Case tblModificationProductMS.Name
                 If DialogResult.Yes = MessageBox.Show("The 'Modification Records' will be deleted. Would you like to continue?", "Important ", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) Then
-                    If (mtdScaffold.deleteModificaion(md.tag, md.ModID)) Then
+                    If (mtdScaffold.deleteModificaion(md.tag, md.ModAux)) Then
                         If mtdScaffold.llenarModification(tblModification) Then
                             If tblModification.Rows.Count > 0 Then
                                 md.Clear()
-                                md = mtdScaffold.llenarModificationData(tblModification.Rows(0).ItemArray(0), tblModification.Rows(0).ItemArray(4))
+                                md = mtdScaffold.llenarModificationData(tblModification.Rows(0).ItemArray(0), tblModification.Rows(0).ItemArray(5))
                                 If md.ModID <> "" Then
                                     cargarDatosModification(md.ModID)
                                 End If
@@ -2493,10 +2493,10 @@ Public Class scafoldTarking
             Return False
         End Try
     End Function
-    Private Function cargarDatosModification(ByVal modID As String) As Boolean
+    Private Function cargarDatosModification(ByVal modAux As String) As Boolean
         Try
-            If md.ModID <> modID Then
-                md.ModID = modID
+            If md.ModAux <> modAux Then
+                md.ModAux = modAux
             End If
             loadingDataModification = True
             txtModificationID.Text = md.ModID
@@ -2591,7 +2591,7 @@ Public Class scafoldTarking
             lblPLFM.Text = plf(0)
             lblPSQFM.Text = plf(1)
             tblModificationProductMS.Rows.Clear()
-            md.llenarTablaProductMod(md.ModID, md.tag)
+            md.llenarTablaProductMod(md.ModAux, md.tag)
             For Each row As DataRow In md.productsAdds.Rows()
                 tblModificationProductMS.Rows.Add(row.ItemArray(0), row.ItemArray(1), row.ItemArray(2), row.ItemArray(3), row.ItemArray(4))
             Next
@@ -2607,6 +2607,17 @@ Public Class scafoldTarking
         If loadingDataModification = False Then
             For Each row As DataRow In tblScaffoldTags.Rows()
                 If cmbTagScaffold.SelectedItem = row.ItemArray(0) Then
+                    If txtModificationID.Text <> "" Then
+                        For Each row1 As Data.DataRow In tblModification.Rows
+                            If txtModificationID.Text = row1.ItemArray(1) And cmbTagScaffold.SelectedItem = row1.ItemArray(5) Then
+                                If DialogResult.Yes = MessageBox.Show("Now this Mod ID is inserted. Would you like to generate a new one?", "Error", MessageBoxButtons.YesNo, MessageBoxIcon.Error) Then
+                                    txtModificationID.Text = mtdScaffold.selectMaxModId(cmbTagScaffold.SelectedItem)
+                                Else
+                                    txtModificationID.Text = ""
+                                End If
+                            End If
+                        Next
+                    End If
                     txtWOModification.Text = row.ItemArray(5)
                     md.tag = cmbTagScaffold.SelectedItem
                     md.llenarTablaProductTag(md.tag)
@@ -2635,6 +2646,19 @@ Public Class scafoldTarking
     End Sub
 
     Private Sub txtModificationID_TextChanged(sender As Object, e As EventArgs) Handles txtModificationID.TextChanged
+        If loadingDataModification = False Then
+            If cmbTagScaffold.Text <> "" Then
+                For Each row As Data.DataRow In tblModification.Rows
+                    If txtModificationID.Text = row.ItemArray(1) And cmbTagScaffold.SelectedItem = row.ItemArray(5) Then
+                        If DialogResult.Yes = MessageBox.Show("Now this Mod ID is inserted. Would you like to generate a new one?", "Error", MessageBoxButtons.YesNo, MessageBoxIcon.Error) Then
+                            txtModificationID.Text = mtdScaffold.selectMaxModId(cmbTagScaffold.SelectedItem)
+                        Else
+                            txtModificationID.Text = ""
+                        End If
+                    End If
+                Next
+            End If
+        End If
         md.ModID = txtModificationID.Text
         selectedTable = "Mod"
     End Sub
@@ -2972,11 +2996,11 @@ Public Class scafoldTarking
         mtdScaffold.llenarComboRequestBy(cmbRequestBY)
         If mtdScaffold.llenarModification(tblModification) Then
             If tblModification.Rows.Count > 0 Then
-                md = mtdScaffold.llenarModificationData(md.ModID, md.tag)
+                md = mtdScaffold.llenarModificationData(md.ModAux, md.tag)
                 If md.ModID <> "" Then
                     cargarDatosModification(md.ModID)
                 Else
-                    md = mtdScaffold.llenarModificationData(tblModification.Rows(0).ItemArray(0), tblModification.Rows(0).ItemArray(4))
+                    md = mtdScaffold.llenarModificationData(tblModification.Rows(0).ItemArray(0), tblModification.Rows(0).ItemArray(5))
                     If md.ModID <> "" Then
                         cargarDatosModification(md.ModID)
                     End If
@@ -3243,17 +3267,17 @@ Public Class scafoldTarking
                 If tblModification.Rows.Count > 0 Then
                     Dim cont As Integer = 0
                     For Each rowMod As DataRow In tblModification.Rows
-                        If md.ModID = rowMod.ItemArray(0) Then
+                        If md.ModID = rowMod.ItemArray(1) Then
                             If cont = 0 Then 'es la primer fila 
                                 Dim ultimafila = tblModification.Rows().Count()
-                                md = mtdScaffold.llenarModificationData(tblModification.Rows(ultimafila - 1).ItemArray(0), tblModification.Rows(ultimafila - 1).ItemArray(4))
+                                md = mtdScaffold.llenarModificationData(tblModification.Rows(ultimafila - 1).ItemArray(0), tblModification.Rows(ultimafila - 1).ItemArray(5))
                                 If md.ModID <> "" Then
-                                    cargarDatosModification(md.ModID)
+                                    cargarDatosModification(md.ModAux)
                                 End If
                                 Exit For
                             Else 'no es la ultima fila
-                                md = mtdScaffold.llenarModificationData(tblModification.Rows(cont - 1).ItemArray(0), tblModification.Rows(cont - 1).ItemArray(4))
-                                cargarDatosModification(md.ModID)
+                                md = mtdScaffold.llenarModificationData(tblModification.Rows(cont - 1).ItemArray(0), tblModification.Rows(cont - 1).ItemArray(5))
+                                cargarDatosModification(md.ModAux)
                                 Exit For
                             End If
                         End If
@@ -3272,21 +3296,21 @@ Public Class scafoldTarking
                 If tblModification.Rows.Count > 0 Then
                     Dim cont As Integer = 1
                     For Each rowMod As DataRow In tblModification.Rows
-                        If md.ModID = rowMod.ItemArray(0) Then
+                        If md.ModID = rowMod.ItemArray(1) Then
                             If cont = tblModification.Rows.Count() Then 'es la ultima fila 
-                                md = mtdScaffold.llenarModificationData(tblModification.Rows(0).ItemArray(0), tblModification.Rows(0).ItemArray(4))
+                                md = mtdScaffold.llenarModificationData(tblModification.Rows(0).ItemArray(0), tblModification.Rows(0).ItemArray(5))
                                 If md.ModID <> "" Then
-                                    cargarDatosModification(md.ModID)
+                                    cargarDatosModification(md.ModAux)
                                 End If
                                 Exit For
                             Else 'no es la ultima fila
-                                md = mtdScaffold.llenarModificationData(tblModification.Rows(cont).ItemArray(0), tblModification.Rows(cont).ItemArray(4))
-                                cargarDatosModification(md.ModID)
+                                md = mtdScaffold.llenarModificationData(tblModification.Rows(cont).ItemArray(0), tblModification.Rows(cont).ItemArray(5))
+                                cargarDatosModification(md.ModAux)
                                 Exit For
                             End If
                         ElseIf md.ModID = "" Then
-                            md = mtdScaffold.llenarModificationData(tblModification.Rows(0).ItemArray(0), tblModification.Rows(0).ItemArray(4))
-                            cargarDatosModification(md.ModID)
+                            md = mtdScaffold.llenarModificationData(tblModification.Rows(0).ItemArray(0), tblModification.Rows(0).ItemArray(5))
+                            cargarDatosModification(md.ModAux)
                         End If
                         cont += 1
                     Next
@@ -3300,9 +3324,16 @@ Public Class scafoldTarking
     Private Sub btnExcelScaffold_Click(sender As Object, e As EventArgs) Handles btnExcelScaffold.Click
         Dim tvt As New TagsValidationTable
         tvt.ShowDialog()
+        mtdScaffold.llenarScaffold(tblScaffoldTags)
     End Sub
 
     Private Sub tblScaffoldInformation_DataError(sender As Object, e As DataGridViewDataErrorEventArgs) Handles tblScaffoldInformation.DataError, tblProductosScaffold.DataError, tblScaffoldInformationSM.DataError, tblModificationProductMS.DataError, tblOutGoing.DataError
         e.Cancel = True
+    End Sub
+
+    Private Sub btnUploadExcelModification_Click(sender As Object, e As EventArgs) Handles btnUploadExcelModification.Click
+        Dim mvt As New ModificationValidationTable
+        mvt.ShowDialog()
+        mtdScaffold.llenarModification(tblModification)
     End Sub
 End Class

@@ -7,7 +7,8 @@ Module metodosGlobales
         Try
             Dim aux As New IO.MemoryStream()
             img.Save(aux, img.RawFormat)
-            imageToByte = aux.GetBuffer()
+            'imageToByte = aux.GetBuffer()
+            Return aux.GetBuffer()
         Catch ex As Exception
             MsgBox(ex.Message)
             Return Nothing

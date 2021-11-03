@@ -301,6 +301,16 @@ create table hoursWorked (
 	schedule varchar(10)
 )
 GO
+--##########################################################################################
+--##################  TABLA DE IMAGE CLIENT ################################################
+--##########################################################################################
+
+create table imageClient(
+	name varchar(30) primary key not null,
+	img image,
+	imgDefault char(1)
+)
+go
 
 --##########################################################################################
 --##################  TABLA DE INCOMING ####################################################
@@ -450,7 +460,8 @@ GO
 --##########################################################################################
 
 create table modification(
-	idModification varchar(20) primary key not null,
+	idModAux varchar(36) primary key not null,
+	idModification varchar(20),
 	reqCompany varchar(50),
 	requestBy varchar(50),
 	modificationDate date,
@@ -511,7 +522,7 @@ create table productComing(
 GO
 
 --##########################################################################################
---##################  TABLA DE PRODUCT DIMANTLE ############################################
+--##################  TABLA DE PRODUCT DISMANTLE ###########################################
 --##########################################################################################
 
 create table productDismantle(
@@ -742,8 +753,8 @@ ALTER TABLE activityHours WITH CHECK ADD CONSTRAINT fk_tag_activityHours
 FOREIGN KEY (tag) REFERENCES scaffoldTraking(tag)
 GO
 
-ALTER TABLE activityHours WITH CHECK ADD CONSTRAINT fk_idModification_activityHours
-FOREIGN KEY (idModification) REFERENCES modification(idModification)
+ALTER TABLE activityHours WITH CHECK ADD CONSTRAINT fk_idModAux_activityHours
+FOREIGN KEY (idModAux) REFERENCES modification(idModAux)
 GO
 
 ALTER TABLE activityHours WITH CHECK ADD CONSTRAINT fk_idDismantle_ActivityHours 
@@ -824,11 +835,9 @@ GO
 ALTER TABLE    expensesUsed   WITH CHECK ADD  CONSTRAINT  fk_idExpence_EU  FOREIGN KEY( idExpense )
 REFERENCES    expenses  ( idExpenses )
 GO
-
-ALTER TABLE    expensesUsed   WITH CHECK ADD  CONSTRAINT  fk_idTask_EU  FOREIGN KEY( idAux )
-REFERENCES    task  ( idAux )
+ALTER TABLE	  expensesUsed  WITH CHECK ADD  CONSTRAINT fk_idAux_EU FOREIGN KEY(idAux)
+REFERENCES task (idAux)
 GO
-select *from expensesUsed
 ALTER TABLE    expensesUsed   WITH CHECK ADD  CONSTRAINT  fk_idEmployee_EU  FOREIGN KEY( idEmployee  )
 REFERENCES    employees ( idEmployee )
 GO
@@ -840,11 +849,9 @@ GO
 ALTER TABLE    hoursWorked   WITH CHECK ADD  CONSTRAINT  fk_idEmployee_hoursWorked  FOREIGN KEY( idEmployee )
 REFERENCES    employees  ( idEmployee )
 GO
-
-ALTER TABLE    hoursWorked   WITH CHECK ADD  CONSTRAINT  fk_idWC_WorkCode  FOREIGN KEY( idWorkCode )
-REFERENCES    workCode  ( idWorkCode )
+ALTER TABLE hoursWorked  WITH CHECK ADD  CONSTRAINT fk_idWorkCode_hoursWorked FOREIGN KEY(idWorkCode)
+REFERENCES workCode (idWorkCode)
 GO
-
 ALTER TABLE    hoursWorked   WITH CHECK ADD  CONSTRAINT  fk_idTask_hoursWork FOREIGN KEY ( idAux )
 REFERENCES    task  ( idAux )
 GO
@@ -929,8 +936,8 @@ FOREIGN KEY (jobNo) REFERENCES job (jobNo)
 --##################  FOREIG KEYS PRODUCT ##################################################
 --##########################################################################################
 
-ALTER TABLE [product] WITH CHECK ADD CONSTRAINT [fk_unitMeassurement_product]
-FOREIGN KEY ([um]) REFERENCES unitMeassurements([um])  
+ALTER TABLE [dbo].[product]  WITH CHECK ADD  CONSTRAINT [fk_um_product] FOREIGN KEY([um])
+REFERENCES [dbo].[unitMeassurements] ([um])
 GO
 
 ALTER TABLE [product] WITH CHECK ADD CONSTRAINT [fk_class_product]
@@ -950,7 +957,7 @@ FOREIGN KEY (idProduct) REFERENCES product(idProduct)
 GO
 
 --##########################################################################################
---##################  FOREIG KEYS PRODUCT COMING ###########################################
+--##################  FOREIG KEYS PRODUCT DISMANTLE ########################################
 --##########################################################################################
 
 ALTER TABLE productDismantle WITH CHECK ADD CONSTRAINT fk_idDismantle_productDismantle 
@@ -969,8 +976,8 @@ GO
 --##################  FOREIG KEYS PRODUCT MODIFICATION #####################################
 --##########################################################################################
 
-ALTER TABLE productModification WITH CHECK ADD CONSTRAINT fk_idModification_productModification
-FOREIGN KEY (idModification) REFERENCES modification(idModification)
+ALTER TABLE productModification  WITH CHECK ADD  CONSTRAINT fk_idModification_productModification
+FOREIGN KEY(idModAux) REFERENCES modification (idModAux)
 GO
 
 ALTER TABLE productModification WITH CHECK ADD CONSTRAINT fk_idProduct_productModification
@@ -1037,8 +1044,8 @@ ALTER TABLE scaffoldInformation WITH CHECK ADD CONSTRAINT fk_tag_scaffoldInforma
 FOREIGN KEY (tag) REFERENCES scaffoldTraking(tag)
 GO
 
-ALTER TABLE scaffoldInformation WITH CHECK ADD CONSTRAINT fk_idModification_scaffoldInformation
-FOREIGN KEY (idModification) REFERENCES modification(idModification)
+ALTER TABLE scaffoldInformation  WITH CHECK ADD  CONSTRAINT fk_idModification_scaffoldInformation
+FOREIGN KEY(idModAux) REFERENCES modification (idModAux)
 GO
 
 --##########################################################################################
@@ -1070,15 +1077,17 @@ GO
 --##################  FOREIG KEYS SCAFOLD INFORMATION ######################################
 --##########################################################################################
 
-ALTER TABLE materialHandeling WITH CHECK ADD CONSTRAINT fk_tag_materialHandeling
-FOREIGN KEY (tag) REFERENCES scaffoldTraking(tag)
+ALTER TABLE scaffoldInformation  WITH CHECK ADD  CONSTRAINT fk_tag_scaffoldInformation
+FOREIGN KEY(tag) REFERENCES scaffoldTraking (tag)
 GO
 
-ALTER TABLE scfInfo WITH CHECK ADD CONSTRAINT fk_idModification_scfInfo
-FOREIGN KEY (idModification) REFERENCES modification(idModification)
+ALTER TABLE scaffoldInformation  WITH CHECK ADD  CONSTRAINT fk_idModification_scaffoldInformation
+FOREIGN KEY(idModAux) REFERENCES modification (idModAux)
 GO
 
-
+ALTER TABLE scaffoldInformation  WITH CHECK ADD  CONSTRAINT fk_type_scaffoldInformation
+FOREIGN KEY(type) REFERENCES rental (type)
+GO
 
 --##########################################################################################
 --##################  FOREIG KEYS TASK #####################################################
@@ -1103,6 +1112,210 @@ GO
 --========================================================================================================
 --===================  PROCEDIMIENTOS ALMACENDADOS =======================================================
 --========================================================================================================
+create proc sp_actualizaMaterial
+@idMaterial varchar(36),
+@nombreN varchar(50),
+@numeroN int,
+@idVendorN varchar(36),
+@statusN char(1),
+--datos viejos
+@idVendorV varchar(36),
+@msg varchar(100) out
+as 
+declare @vendor1 varchar(36)
+declare @vendor2 varchar(36)
+declare @error int
+begin
+	begin tran 
+		begin try 
+			set @error = 0
+			if @idVendorN = @idVendorV
+			begin --solo cambian los datos de material 
+				update material set name = @nombreN , estatus = @statusN where idMaterial = @idMaterial 
+				set @msg = 'Successful.'
+			end
+			else --Cambio de Vendedor
+			begin
+				set @Vendor2 = (select  top 1 dm.idVendor from material as ma right join detalleMaterial as dm  on ma.idMaterial = dm.idMaterial where ma.name = @nombreN) 
+				if @vendor2 = @idVendorN begin
+					set @msg = 'Rigth now exists a material whit the same Vendor.'
+					set @error = 1
+				end
+				else begin
+				update detalleMaterial set idVendor = @idVendorN where idMaterial = @idMaterial and idVendor = @idVendorV
+				update material set name = @nombreN , estatus = @statusN where idMaterial = @idMaterial 
+				set @msg = 'Successful.'
+				end
+			end
+		end try
+		begin catch
+			goto solveproblem
+		end catch
+	commit tran 
+	solveproblem:
+	if @error <> 0 
+	begin 
+		rollback tran
+	end 
+end
+GO
+
+create proc sp_DeleteModAux
+@tag varchar(20),
+@modID varchar(20),
+@msg varchar(120) 
+as
+declare @error as int = 0
+declare @flag as int
+declare @idProduct as int
+declare @qty as float
+begin 
+	if (select COUNT(*) from modification where idModification=@modID and tag = @tag) >0 
+	begin 
+		begin tran	
+			begin try
+				set	@msg = CONCAT('Error trying to delete Activity Hours from Modification ',@modID)
+				delete from activityHours where tag = @tag and idModification = @modID
+				set	@msg = CONCAT('Error trying to delete Material Handeling from Modification ',@modID)
+				delete from materialHandeling where tag = @tag and idModification = @modID
+				set	@msg = CONCAT('Error trying to delete Scaffold Information from Modification ',@modID)
+				delete from scaffoldInformation where tag = @tag and idModification=@modID
+				set @flag = (select COUNT(*) from productModification where tag = @tag and idModification = @modID)
+				while (@flag > 0)
+				begin
+					select  @qty = quantity ,@idProduct = idProduct from (select top 1  quantity,idProduct from productModification where tag = '9999' and idModification = @modID) as t1
+					set	@msg = CONCAT('Error trying to delete Product Modification Record from Modification: ', @modID,', with the idProduct: ',CONVERT(varchar(12), @idProduct))
+					select quantity from product where idProduct = @idProduct
+					update product set quantity = quantity + @qty where idProduct = @idProduct
+					select quantity from productTotalScaffold where idProduct = @idProduct and tag = @tag
+					update productTotalScaffold set quantity = quantity + IIF(@qty>0,@qty*-1,@qty*-1) where idProduct = @idProduct and tag = @tag
+					delete from productModification where idProduct = @idProduct and tag = @tag and idModification = @modID
+					delete from productTotalScaffold where quantity = 0 and tag = @tag
+					select @flag = COUNT(*) from productModification where tag = @tag and idModification = @modID
+				end
+				delete from modification where idModification = @modID and tag = @tag	
+				set @msg = 'Successful'	 
+			end try
+			begin catch
+				set @error = 1
+				goto solveProblem
+			end catch
+		commit tran 
+		print @msg	
+		solveProblem:
+		if @error <> 0
+		begin 
+			rollback tran 
+			print @msg
+		end
+	end
+end
+go
+
+create proc sp_Insert_Cient 
+	@ClientID int,
+	@FirstName varchar (30),
+	@MiddleName varchar (30),
+	@LastName varchar (30),
+	@CompanyName varchar (50),
+	@Status char(1),
+	--Contact
+	@phoneNumer1 varchar(13),
+	@phoneNumer2 varchar(13),
+	@email varchar(50),
+	--Addres
+	@avenue varchar(80),
+	@number int,
+	@city varchar (20),
+	@providence varchar (20),
+	@postalcode int
+as
+declare @error int  -- declaro variables para los ID que son nuevos y una variable de error
+declare @idClient varchar(36) 
+declare @idContact varchar(36)
+declare @idHomeAdress varchar(36)
+begin 
+	begin tran 
+		begin try
+			--se inserta un contacto
+			
+				set @idContact = NEWID() 
+				insert into contact values(@idContact,@phoneNumer1,@phoneNumer2,@email)
+				if @@ERROR <> 0 begin set @error = @@ERROR goto solveproblem end
+			
+				set @idHomeAdress = NEWID()
+				insert into HomeAddress values (@idHomeAdress , @avenue , @number , @city , @providence , @postalCode)
+				if @@ERROR <> 0 begin set @error = @@ERROR goto solveproblem end 
+			
+				set @idClient = NEWID()
+				insert into clients values (@idClient , @ClientID, @FirstName, @MiddleName, @LastName , @CompanyName, @idContact , @idHomeAdress ,@Status)
+				if @@ERROR <> 0 begin set @error = @@ERROR goto solveproblem end 
+			
+		end try
+		begin catch
+			goto solveproblem
+		end catch
+	commit tran
+	solveproblem:
+	if @error <> 0
+	begin 
+		rollback tran 
+	end
+end
+GO
+
+create proc sp_DeleteModAux
+@tag varchar(20),
+@modID varchar(36),
+@msg varchar(120) 
+as
+declare @error as int = 0
+declare @flag as int
+declare @idProduct as int
+declare @qty as float
+begin 
+	if (select COUNT(*) from modification where idModification=@modID and tag = @tag) >0 
+	begin 
+		begin tran	
+			begin try
+				set	@msg = CONCAT('Error trying to delete Activity Hours from Modification ',@modID)
+				delete from activityHours where tag = @tag and idModAux = @modID
+				set	@msg = CONCAT('Error trying to delete Material Handeling from Modification ',@modID)
+				delete from materialHandeling where tag = @tag and idModAux = @modID
+				set	@msg = CONCAT('Error trying to delete Scaffold Information from Modification ',@modID)
+				delete from scaffoldInformation where tag = @tag and idModAux=@modID
+				set @flag = (select COUNT(*) from productModification where tag = @tag and idModAux = @modID)
+				while (@flag > 0)
+				begin
+					select  @qty = quantity ,@idProduct = idProduct from (select top 1  quantity,idProduct from productModification where tag = '9999' and idModAux = @modID) as t1
+					set	@msg = CONCAT('Error trying to delete Product Modification Record from Modification: ', @modID,', with the idProduct: ',CONVERT(varchar(12), @idProduct))
+					select quantity from product where idProduct = @idProduct
+					update product set quantity = quantity + @qty where idProduct = @idProduct
+					select quantity from productTotalScaffold where idProduct = @idProduct and tag = @tag
+					update productTotalScaffold set quantity = quantity + IIF(@qty>0,@qty*-1,@qty*-1) where idProduct = @idProduct and tag = @tag
+					delete from productModification where idProduct = @idProduct and tag = @tag and idModAux = @modID
+					delete from productTotalScaffold where quantity = 0 and tag = @tag
+					select @flag = COUNT(*) from productModification where tag = @tag and idModAux = @modID
+				end
+				delete from modification where idModification = @modID and tag = @tag	
+				set @msg = 'Successful'	 
+			end try
+			begin catch
+				set @error = 1
+				goto solveProblem
+			end catch
+		commit tran 
+		print @msg	
+		solveProblem:
+		if @error <> 0
+		begin 
+			rollback tran 
+			print @msg
+		end
+	end
+end
+go
+
 create proc sp_insert_Employee
 	--general
 	@numberEmploye int, 
@@ -1172,55 +1385,7 @@ begin
 end
 GO
 
-create proc sp_actualizaMaterial
-@idMaterial varchar(36),
-@nombreN varchar(50),
-@numeroN int,
-@idVendorN varchar(36),
-@statusN char(1),
---datos viejos
-@idVendorV varchar(36),
-@msg varchar(100) out
-as 
-declare @vendor1 varchar(36)
-declare @vendor2 varchar(36)
-declare @error int
-begin
-	begin tran 
-		begin try 
-			set @error = 0
-			if @idVendorN = @idVendorV
-			begin --solo cambian los datos de material 
-				update material set name = @nombreN , estatus = @statusN where idMaterial = @idMaterial 
-				set @msg = 'Successful.'
-			end
-			else --Cambio de Vendedor
-			begin
-				set @Vendor2 = (select  top 1 dm.idVendor from material as ma right join detalleMaterial as dm  on ma.idMaterial = dm.idMaterial where ma.name = @nombreN) 
-				if @vendor2 = @idVendorN begin
-					set @msg = 'Rigth now exists a material whit the same Vendor.'
-					set @error = 1
-				end
-				else begin
-				update detalleMaterial set idVendor = @idVendorN where idMaterial = @idMaterial and idVendor = @idVendorV
-				update material set name = @nombreN , estatus = @statusN where idMaterial = @idMaterial 
-				set @msg = 'Successful.'
-				end
-			end
-		end try
-		begin catch
-			goto solveproblem
-		end catch
-	commit tran 
-	solveproblem:
-	if @error <> 0 
-	begin 
-		rollback tran
-	end 
-end
-GO
-
-create proc sp_Insert_Cient 
+create proc sp_Insert_Cient
 	@ClientID int,
 	@FirstName varchar (30),
 	@MiddleName varchar (30),
@@ -1270,8 +1435,7 @@ begin
 		rollback tran 
 	end
 end
-GO
-
+go
 
 CREATE procedure sp_insert_Material
 @nombre varchar(50),
@@ -1313,6 +1477,47 @@ begin
 	end  
 end
 GO
+
+create procedure sp_insert_Material
+@nombre varchar(50),
+@numero int,
+@idVendor varchar(36),
+@status char(1),
+@msg varchar(100) out
+as
+declare @idMaterial varchar(36)
+declare @idDM varchar(36)
+declare @error int
+begin
+	begin tran
+		begin try	 
+			set @idMaterial = NEWID()
+			set @idDM = NEWID()
+			if not @nombre = '' and not @idVendor = ''
+			begin 
+				insert into material values (@idMaterial,@numero,@nombre,@status)
+				insert into detalleMaterial values (@idDM,'','','',0.0,'',0.0,@idMaterial,@idVendor)
+				insert into existences values (@idDM , 0.0)
+				set @msg= 'Successful'
+			end
+			else 
+			begin 
+				set @error = 1
+				goto solveProblem
+			end
+		end try
+		begin catch
+			goto solveProblem
+		end catch
+	commit tran
+	solveProblem:
+	if @error <> 0 
+	begin 
+		rollback tran
+		set @msg = concat('Is problably that the Material ',@nombre,' have been inserted, or try to changue the Vendor')
+	end  
+end
+go 
 
 CREATE procedure sp_insert_Material_Excel
 @nombre varchar(50),
@@ -1441,7 +1646,6 @@ begin
 		rollback tran 
 	end
 end
-
 GO
 
 create proc sp_UpdateTotalSpendTask
@@ -1603,55 +1807,7 @@ end
 GO
 
 
-create proc sp_DeleteModification
-@tag varchar(20),
-@modID varchar(20),
-@msg varchar(120) output 
-as
-declare @error as int = 0
-declare @flag as int
-declare @idProduct as int
-declare @qty as float
-begin 
-	if (select COUNT(*) from modification where idModification=@modID and tag = @tag) >0 
-	begin 
-		begin tran	
-			begin try
-				set	@msg = CONCAT('Error trying to delete Activity Hours from Modification ',@modID)
-				delete from activityHours where tag = @tag and idModification = @modID
-				set	@msg = CONCAT('Error trying to delete Material Handeling from Modification ',@modID)
-				delete from materialHandeling where tag = @tag and idModification = @modID
-				set	@msg = CONCAT('Error trying to delete Scaffold Information from Modification ',@modID)
-				delete from scaffoldInformation where tag = @tag and idModification=@modID
-				set @flag = (select COUNT(*) from productModification where tag = @tag and idModification = @modID)
-				while (@flag > 0)
-				begin
-					select  @qty = quantity ,@idProduct = idProduct from (select top 1  quantity,idProduct from productModification where tag = '9999' and idModification = @modID) as t1
-					set	@msg = CONCAT('Error trying to delete Product Modification Record from Modification: ', @modID,', with the idProduct: ',CONVERT(varchar(12), @idProduct))
-					update product set quantity = quantity + @qty where idProduct = @idProduct
-					update productTotalScaffold set quantity = quantity + IIF(@qty>0,@qty*-1,@qty*-1) where idProduct = @idProduct and tag = @tag
-					delete from productModification where idProduct = @idProduct and tag = @tag and idModification = @modID
-					delete from productTotalScaffold where quantity = 0 and tag = @tag
-					select @flag = COUNT(*) from productModification where tag = @tag and idModification = @modID
-				end
-				delete from modification where idModification = @modID and tag = @tag	
-				set @msg = 'Successful'	 
-			end try
-			begin catch
-				set @error = 1
-				goto solveProblem
-			end catch
-		commit tran 
-		return @msg	
-		solveProblem:
-		if @error <> 0
-		begin 
-			rollback tran 
-			return @msg
-		end
-	end
-end
-go
+
 
 ----use master
 ----drop database VRT_TRAKING
@@ -1727,55 +1883,3 @@ go
 --==============================================================================================================================
 --===== CODIGO PARA PROCEDIMIENTO ALMACENADO PARA EL DELETE DE MODIFICACIONES ==================================================
 --==============================================================================================================================
-
---create proc sp_DeleteModification
---@tag varchar(20),
---@modID varchar(20),
---@msg varchar(120) output 
---as
---declare @error as int = 0
---declare @flag as int
---declare @idProduct as int
---declare @qty as float
---begin 
---	if (select COUNT(*) from modification where idModification=@modID and tag = @tag) >0 
---	begin 
---		begin tran	
---			begin try
---				set	@msg = CONCAT('Error trying to delete Activity Hours from Modification ',@modID)
---				delete from activityHours where tag = @tag and idModification = @modID
---				set	@msg = CONCAT('Error trying to delete Material Handeling from Modification ',@modID)
---				delete from materialHandeling where tag = @tag and idModification = @modID
---				set	@msg = CONCAT('Error trying to delete Scaffold Information from Modification ',@modID)
---				delete from scaffoldInformation where tag = @tag and idModification=@modID
---				set @flag = (select COUNT(*) from productModification where tag = @tag and idModification = @modID)
---				while (@flag > 0)
---				begin
---					select  @qty = quantity ,@idProduct = idProduct from (select top 1  quantity,idProduct from productModification where tag = '9999' and idModification = @modID) as t1
---					set	@msg = CONCAT('Error trying to delete Product Modification Record from Modification: ', @modID,', with the idProduct: ',CONVERT(varchar(12), @idProduct))
---					update product set quantity = quantity + @qty where idProduct = @idProduct
---					update productTotalScaffold set quantity = quantity + IIF(@qty>0,@qty*-1,@qty*-1) where idProduct = @idProduct and tag = @tag
---					delete from productModification where idProduct = @idProduct and tag = @tag and idModification = @modID
---					delete from productTotalScaffold where quantity = 0 and tag = @tag
---					select @flag = COUNT(*) from productModification where tag = @tag and idModification = @modID
---				end
---				delete from modification where idModification = @modID and tag = @tag	
---				set @msg = 'Successful'	 
---			end try
---			begin catch
---				set @error = 1
---				goto solveProblem
---			end catch
---		commit tran 
---		return @msg	
---		solveProblem:
---		if @error <> 0
---		begin 
---			rollback tran 
---			return @msg
---		end
---	end
---end
---go
-
-

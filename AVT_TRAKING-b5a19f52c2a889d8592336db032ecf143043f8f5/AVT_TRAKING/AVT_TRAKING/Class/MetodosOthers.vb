@@ -526,4 +526,82 @@ Public Class MetodosOthers
         End While
         Return fecha
     End Function
+
+    Public Function llenarImageClientTable(ByVal tabla As DataGridView) As Boolean
+        Try
+            Dim flag As Boolean = False
+            conectar()
+            Dim cmd As New SqlCommand("select name, img, imgDefault from imageClient", conn)
+            Dim dr As SqlDataReader = cmd.ExecuteReader
+            tabla.Rows.Clear()
+            While dr.Read()
+                tabla.Rows.Add(dr("name"), dr("img"), If(dr("imgDefault") = 0, False, True))
+                flag = True
+            End While
+            Return False
+        Catch ex As Exception
+            Return False
+        Finally
+            desconectar()
+        End Try
+    End Function
+
+    Public Function saveImageClient(ByVal name As String, ByVal byteImage() As Byte, ByVal defaultImg As Boolean) As Boolean
+        Try
+            conectar()
+            Dim cmd As New SqlCommand("
+insert into imageClient(name,img,imgDefault)  values(@name,@img,@imgDefault)
+", conn)
+            cmd.Parameters.Add("@name", SqlDbType.VarChar, 30).Value = name
+            cmd.Parameters.Add("@img", SqlDbType.Image).Value = byteImage.ToArray()
+            cmd.Parameters.Add("@imgDefault", SqlDbType.Char, 1).Value = If(defaultImg = True, "1", "0")
+            If cmd.ExecuteNonQuery > 0 Then
+                MsgBox("Succesfull")
+                Return True
+            Else
+                MsgBox("Error")
+                Return False
+            End If
+        Catch ex As Exception
+            MsgBox("Error")
+            Return False
+        Finally
+            desconectar()
+        End Try
+    End Function
+    Public Function updateImge(ByVal lastName As String, ByVal newName As String, ByVal img() As Byte, ByVal defaultImg As Boolean) As Boolean
+        Try
+            conectar()
+            Dim cmd As New SqlCommand("update imageClient set name = @name1 ,img = @img1 ,imgDefault = @imgDefault1 where name = '" + lastName + "'", conn)
+            cmd.Parameters.Add("@name1", SqlDbType.VarChar, 30).Value = newName
+            cmd.Parameters.Add("@img1", SqlDbType.Image).Value = img.ToArray()
+            cmd.Parameters.Add("@imgDefault1", SqlDbType.Char, 1).Value = If(defaultImg = True, "1", "0")
+            If cmd.ExecuteNonQuery > 0 Then
+                MsgBox("Succesfull")
+                Return True
+            Else
+                MsgBox("Error")
+                Return False
+            End If
+        Catch ex As Exception
+            Return False
+        Finally
+            desconectar()
+        End Try
+    End Function
+    Public Function deleteImage(ByVal name As String) As Boolean
+        Try
+            conectar()
+            Dim cmd As New SqlCommand("delete from imageClient where name = '" + name + "'", conn)
+            If cmd.ExecuteNonQuery > 0 Then
+                Return True
+            Else
+                Return False
+            End If
+        Catch ex As Exception
+            Return False
+        Finally
+            desconectar()
+        End Try
+    End Function
 End Class

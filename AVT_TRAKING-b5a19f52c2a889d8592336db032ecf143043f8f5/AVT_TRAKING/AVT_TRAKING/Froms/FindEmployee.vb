@@ -28,7 +28,7 @@
     End Sub
 
     Private Sub btnSelect_Click(sender As Object, e As EventArgs) Handles btnSelect.Click
-        Dim hpw As HoursWeekPeerEmployees = CType(Owner, HoursWeekPeerEmployees)
+        Dim hpw As HoursWeekPerEmployees = CType(Owner, HoursWeekPerEmployees)
         hpw.idEmpleado = idEmployee
         hpw.NombreEmpleado = nombre
         hpw.photo = imagen

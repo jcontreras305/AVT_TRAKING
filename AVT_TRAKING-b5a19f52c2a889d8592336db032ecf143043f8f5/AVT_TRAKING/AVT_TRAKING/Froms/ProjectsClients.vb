@@ -276,7 +276,7 @@ Public Class ProjectsClients
     End Sub
 
     Private Sub btnTimeEnterSheets_Click(sender As Object, e As EventArgs) Handles btnTimeEnterSheets.Click
-        Dim hpe As New HoursWeekPeerEmployees
+        Dim hpe As New HoursWeekPerEmployees
         hpe.ShowDialog()
     End Sub
 
