@@ -212,7 +212,7 @@ Public Class Employees
         Me.Close()
     End Sub
 
-    Private Sub btnClose_Click(sender As Object, e As EventArgs) Handles btnClose.Click
+    Private Sub btnClose_Click(sender As Object, e As EventArgs)
         Application.Exit()
     End Sub
 
@@ -322,6 +322,12 @@ Public Class Employees
         activarCamposPay(False)
         Return True
     End Function
+
+    Private Sub GroupBox1_Enter(sender As Object, e As EventArgs) Handles GroupBox1.Enter
+
+    End Sub
+
+
 
     <DllImport("user32.DLL", EntryPoint:="ReleaseCapture")>
     Private Shared Sub ReleaseCapture()

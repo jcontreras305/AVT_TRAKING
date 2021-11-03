@@ -22,8 +22,6 @@ Partial Class Clients
     'No lo modifique con el editor de código.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Me.btnUpdate = New System.Windows.Forms.Button()
-        Me.btnSaveClient = New System.Windows.Forms.Button()
         Me.txtCompanyName = New System.Windows.Forms.TextBox()
         Me.txtIdClient = New System.Windows.Forms.TextBox()
         Me.Label2 = New System.Windows.Forms.Label()
@@ -31,8 +29,6 @@ Partial Class Clients
         Me.tblClientes = New System.Windows.Forms.DataGridView()
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.TabPage1 = New System.Windows.Forms.TabPage()
-        Me.btnSelectClient = New System.Windows.Forms.Button()
-        Me.btnShowAll1 = New System.Windows.Forms.Button()
         Me.Label6 = New System.Windows.Forms.Label()
         Me.txtFiltro = New System.Windows.Forms.TextBox()
         Me.lblN6 = New System.Windows.Forms.Label()
@@ -73,11 +69,20 @@ Partial Class Clients
         Me.txtEmail = New System.Windows.Forms.TextBox()
         Me.txtPhoneNumber = New System.Windows.Forms.TextBox()
         Me.lblPN1 = New System.Windows.Forms.Label()
-        Me.Button1 = New System.Windows.Forms.Button()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.Panel4 = New System.Windows.Forms.Panel()
         Me.Panel3 = New System.Windows.Forms.Panel()
         Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.btnSelectClient = New System.Windows.Forms.Button()
+        Me.btnShowAll1 = New System.Windows.Forms.Button()
+        Me.btnUpdate = New System.Windows.Forms.Button()
+        Me.btnSaveClient = New System.Windows.Forms.Button()
+        Me.Button1 = New System.Windows.Forms.Button()
+        Me.TitleBar = New System.Windows.Forms.Panel()
+        Me.Label10 = New System.Windows.Forms.Label()
+        Me.btnMaximize = New System.Windows.Forms.PictureBox()
+        Me.btnRestore = New System.Windows.Forms.PictureBox()
+        Me.btnMinimized = New System.Windows.Forms.PictureBox()
         CType(Me.tblClientes, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
@@ -88,42 +93,26 @@ Partial Class Clients
         Me.Panel4.SuspendLayout()
         Me.Panel3.SuspendLayout()
         Me.Panel2.SuspendLayout()
+        Me.TitleBar.SuspendLayout()
+        CType(Me.btnMaximize, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.btnRestore, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.btnMinimized, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
-        '
-        'btnUpdate
-        '
-        Me.btnUpdate.Location = New System.Drawing.Point(349, 88)
-        Me.btnUpdate.Margin = New System.Windows.Forms.Padding(2)
-        Me.btnUpdate.Name = "btnUpdate"
-        Me.btnUpdate.Size = New System.Drawing.Size(68, 21)
-        Me.btnUpdate.TabIndex = 9
-        Me.btnUpdate.Text = "Update"
-        Me.btnUpdate.UseVisualStyleBackColor = True
-        '
-        'btnSaveClient
-        '
-        Me.btnSaveClient.Location = New System.Drawing.Point(236, 88)
-        Me.btnSaveClient.Margin = New System.Windows.Forms.Padding(2)
-        Me.btnSaveClient.Name = "btnSaveClient"
-        Me.btnSaveClient.Size = New System.Drawing.Size(68, 21)
-        Me.btnSaveClient.TabIndex = 8
-        Me.btnSaveClient.Text = "Save"
-        Me.btnSaveClient.UseVisualStyleBackColor = True
         '
         'txtCompanyName
         '
-        Me.txtCompanyName.Location = New System.Drawing.Point(330, 13)
+        Me.txtCompanyName.Location = New System.Drawing.Point(360, 21)
         Me.txtCompanyName.Margin = New System.Windows.Forms.Padding(2)
         Me.txtCompanyName.Name = "txtCompanyName"
-        Me.txtCompanyName.Size = New System.Drawing.Size(111, 20)
+        Me.txtCompanyName.Size = New System.Drawing.Size(111, 23)
         Me.txtCompanyName.TabIndex = 6
         '
         'txtIdClient
         '
-        Me.txtIdClient.Location = New System.Drawing.Point(97, 14)
+        Me.txtIdClient.Location = New System.Drawing.Point(98, 14)
         Me.txtIdClient.Margin = New System.Windows.Forms.Padding(2)
         Me.txtIdClient.Name = "txtIdClient"
-        Me.txtIdClient.Size = New System.Drawing.Size(111, 20)
+        Me.txtIdClient.Size = New System.Drawing.Size(111, 23)
         Me.txtIdClient.TabIndex = 2
         '
         'Label2
@@ -132,17 +121,17 @@ Partial Class Clients
         Me.Label2.Location = New System.Drawing.Point(233, 21)
         Me.Label2.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(82, 13)
+        Me.Label2.Size = New System.Drawing.Size(123, 16)
         Me.Label2.TabIndex = 1
         Me.Label2.Text = "Company Name"
         '
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(19, 18)
+        Me.Label1.Location = New System.Drawing.Point(29, 18)
         Me.Label1.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(43, 13)
+        Me.Label1.Size = New System.Drawing.Size(65, 16)
         Me.Label1.TabIndex = 0
         Me.Label1.Text = "Client #"
         '
@@ -169,15 +158,17 @@ Partial Class Clients
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.TabControl1.Controls.Add(Me.TabPage1)
         Me.TabControl1.Controls.Add(Me.TabPage2)
-        Me.TabControl1.Location = New System.Drawing.Point(2, 2)
+        Me.TabControl1.Font = New System.Drawing.Font("Verdana", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TabControl1.Location = New System.Drawing.Point(8, 2)
         Me.TabControl1.Margin = New System.Windows.Forms.Padding(2)
         Me.TabControl1.Name = "TabControl1"
         Me.TabControl1.SelectedIndex = 0
-        Me.TabControl1.Size = New System.Drawing.Size(717, 269)
+        Me.TabControl1.Size = New System.Drawing.Size(717, 253)
         Me.TabControl1.TabIndex = 11
         '
         'TabPage1
         '
+        Me.TabPage1.BackColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(59, Byte), Integer), CType(CType(104, Byte), Integer))
         Me.TabPage1.Controls.Add(Me.btnSelectClient)
         Me.TabPage1.Controls.Add(Me.btnShowAll1)
         Me.TabPage1.Controls.Add(Me.Label6)
@@ -198,48 +189,31 @@ Partial Class Clients
         Me.TabPage1.Controls.Add(Me.txtIdClient)
         Me.TabPage1.Controls.Add(Me.Label2)
         Me.TabPage1.Controls.Add(Me.txtCompanyName)
-        Me.TabPage1.Location = New System.Drawing.Point(4, 22)
+        Me.TabPage1.Font = New System.Drawing.Font("Verdana", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TabPage1.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.TabPage1.Location = New System.Drawing.Point(4, 27)
         Me.TabPage1.Margin = New System.Windows.Forms.Padding(2)
         Me.TabPage1.Name = "TabPage1"
         Me.TabPage1.Padding = New System.Windows.Forms.Padding(2)
-        Me.TabPage1.Size = New System.Drawing.Size(709, 243)
+        Me.TabPage1.Size = New System.Drawing.Size(709, 238)
         Me.TabPage1.TabIndex = 0
         Me.TabPage1.Text = "Clients"
-        Me.TabPage1.UseVisualStyleBackColor = True
-        '
-        'btnSelectClient
-        '
-        Me.btnSelectClient.Location = New System.Drawing.Point(615, 16)
-        Me.btnSelectClient.Name = "btnSelectClient"
-        Me.btnSelectClient.Size = New System.Drawing.Size(75, 23)
-        Me.btnSelectClient.TabIndex = 50
-        Me.btnSelectClient.Text = "Select Client"
-        Me.btnSelectClient.UseVisualStyleBackColor = True
-        '
-        'btnShowAll1
-        '
-        Me.btnShowAll1.Location = New System.Drawing.Point(255, 193)
-        Me.btnShowAll1.Name = "btnShowAll1"
-        Me.btnShowAll1.Size = New System.Drawing.Size(75, 23)
-        Me.btnShowAll1.TabIndex = 11
-        Me.btnShowAll1.Text = "Show All"
-        Me.btnShowAll1.UseVisualStyleBackColor = True
         '
         'Label6
         '
         Me.Label6.AutoSize = True
-        Me.Label6.Location = New System.Drawing.Point(36, 199)
+        Me.Label6.Location = New System.Drawing.Point(14, 200)
         Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(41, 13)
+        Me.Label6.Size = New System.Drawing.Size(58, 16)
         Me.Label6.TabIndex = 49
         Me.Label6.Text = "Search"
         '
         'txtFiltro
         '
-        Me.txtFiltro.Location = New System.Drawing.Point(82, 196)
+        Me.txtFiltro.Location = New System.Drawing.Point(77, 197)
         Me.txtFiltro.Margin = New System.Windows.Forms.Padding(2)
         Me.txtFiltro.Name = "txtFiltro"
-        Me.txtFiltro.Size = New System.Drawing.Size(148, 20)
+        Me.txtFiltro.Size = New System.Drawing.Size(148, 23)
         Me.txtFiltro.TabIndex = 10
         '
         'lblN6
@@ -270,7 +244,7 @@ Partial Class Clients
         Me.chbStatus.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
         Me.chbStatus.Location = New System.Drawing.Point(330, 56)
         Me.chbStatus.Name = "chbStatus"
-        Me.chbStatus.Size = New System.Drawing.Size(59, 17)
+        Me.chbStatus.Size = New System.Drawing.Size(76, 20)
         Me.chbStatus.TabIndex = 7
         Me.chbStatus.Text = "Enable"
         Me.chbStatus.UseVisualStyleBackColor = True
@@ -280,22 +254,22 @@ Partial Class Clients
         Me.Label11.AutoSize = True
         Me.Label11.Location = New System.Drawing.Point(272, 58)
         Me.Label11.Name = "Label11"
-        Me.Label11.Size = New System.Drawing.Size(37, 13)
+        Me.Label11.Size = New System.Drawing.Size(55, 16)
         Me.Label11.TabIndex = 40
         Me.Label11.Text = "Status"
         '
         'txtLastName
         '
-        Me.txtLastName.Location = New System.Drawing.Point(97, 127)
+        Me.txtLastName.Location = New System.Drawing.Point(98, 127)
         Me.txtLastName.Name = "txtLastName"
-        Me.txtLastName.Size = New System.Drawing.Size(100, 20)
+        Me.txtLastName.Size = New System.Drawing.Size(100, 23)
         Me.txtLastName.TabIndex = 5
         '
         'txtMiddleName
         '
-        Me.txtMiddleName.Location = New System.Drawing.Point(97, 92)
+        Me.txtMiddleName.Location = New System.Drawing.Point(98, 92)
         Me.txtMiddleName.Name = "txtMiddleName"
-        Me.txtMiddleName.Size = New System.Drawing.Size(100, 20)
+        Me.txtMiddleName.Size = New System.Drawing.Size(100, 23)
         Me.txtMiddleName.TabIndex = 4
         '
         'Label12
@@ -303,66 +277,74 @@ Partial Class Clients
         Me.Label12.AutoSize = True
         Me.Label12.Location = New System.Drawing.Point(14, 127)
         Me.Label12.Name = "Label12"
-        Me.Label12.Size = New System.Drawing.Size(58, 13)
+        Me.Label12.Size = New System.Drawing.Size(85, 16)
         Me.Label12.TabIndex = 37
         Me.Label12.Text = "Last Name"
         '
         'Label8
         '
         Me.Label8.AutoSize = True
-        Me.Label8.Location = New System.Drawing.Point(5, 96)
+        Me.Label8.Location = New System.Drawing.Point(0, 96)
         Me.Label8.Name = "Label8"
-        Me.Label8.Size = New System.Drawing.Size(69, 13)
+        Me.Label8.Size = New System.Drawing.Size(101, 16)
         Me.Label8.TabIndex = 35
         Me.Label8.Text = "Middle Name"
         '
         'txtFirstName
         '
-        Me.txtFirstName.Location = New System.Drawing.Point(97, 53)
+        Me.txtFirstName.Location = New System.Drawing.Point(98, 53)
         Me.txtFirstName.Name = "txtFirstName"
-        Me.txtFirstName.Size = New System.Drawing.Size(100, 20)
+        Me.txtFirstName.Size = New System.Drawing.Size(100, 23)
         Me.txtFirstName.TabIndex = 3
         '
         'Label7
         '
         Me.Label7.AutoSize = True
-        Me.Label7.Location = New System.Drawing.Point(14, 56)
+        Me.Label7.Location = New System.Drawing.Point(11, 56)
         Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(57, 13)
+        Me.Label7.Size = New System.Drawing.Size(87, 16)
         Me.Label7.TabIndex = 33
         Me.Label7.Text = "First Name"
         '
         'TabPage2
         '
+        Me.TabPage2.BackColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(59, Byte), Integer), CType(CType(104, Byte), Integer))
         Me.TabPage2.Controls.Add(Me.btnSelectAll)
         Me.TabPage2.Controls.Add(Me.Label18)
         Me.TabPage2.Controls.Add(Me.txtFiltro2)
         Me.TabPage2.Controls.Add(Me.GroupBox2)
         Me.TabPage2.Controls.Add(Me.GroupBox1)
-        Me.TabPage2.Location = New System.Drawing.Point(4, 22)
+        Me.TabPage2.Font = New System.Drawing.Font("Verdana", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TabPage2.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.TabPage2.Location = New System.Drawing.Point(4, 27)
         Me.TabPage2.Margin = New System.Windows.Forms.Padding(2)
         Me.TabPage2.Name = "TabPage2"
         Me.TabPage2.Padding = New System.Windows.Forms.Padding(2)
-        Me.TabPage2.Size = New System.Drawing.Size(709, 243)
+        Me.TabPage2.Size = New System.Drawing.Size(709, 222)
         Me.TabPage2.TabIndex = 1
         Me.TabPage2.Text = "Contact Information"
-        Me.TabPage2.UseVisualStyleBackColor = True
         '
         'btnSelectAll
         '
+        Me.btnSelectAll.FlatAppearance.BorderSize = 0
+        Me.btnSelectAll.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(41, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(185, Byte), Integer))
+        Me.btnSelectAll.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnSelectAll.Image = Global.AVT_TRAKING.My.Resources.Resources.loupe
+        Me.btnSelectAll.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.btnSelectAll.Location = New System.Drawing.Point(266, 196)
         Me.btnSelectAll.Name = "btnSelectAll"
         Me.btnSelectAll.Size = New System.Drawing.Size(75, 23)
         Me.btnSelectAll.TabIndex = 22
         Me.btnSelectAll.Text = "Show All"
+        Me.btnSelectAll.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         Me.btnSelectAll.UseVisualStyleBackColor = True
         '
         'Label18
         '
         Me.Label18.AutoSize = True
-        Me.Label18.Location = New System.Drawing.Point(41, 199)
+        Me.Label18.Location = New System.Drawing.Point(24, 199)
         Me.Label18.Name = "Label18"
-        Me.Label18.Size = New System.Drawing.Size(41, 13)
+        Me.Label18.Size = New System.Drawing.Size(58, 16)
         Me.Label18.TabIndex = 39
         Me.Label18.Text = "Search"
         '
@@ -371,11 +353,12 @@ Partial Class Clients
         Me.txtFiltro2.Location = New System.Drawing.Point(87, 196)
         Me.txtFiltro2.Margin = New System.Windows.Forms.Padding(2)
         Me.txtFiltro2.Name = "txtFiltro2"
-        Me.txtFiltro2.Size = New System.Drawing.Size(148, 20)
+        Me.txtFiltro2.Size = New System.Drawing.Size(148, 23)
         Me.txtFiltro2.TabIndex = 21
         '
         'GroupBox2
         '
+        Me.GroupBox2.BackColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(59, Byte), Integer), CType(CType(115, Byte), Integer))
         Me.GroupBox2.Controls.Add(Me.lblN4)
         Me.GroupBox2.Controls.Add(Me.lblN3)
         Me.GroupBox2.Controls.Add(Me.chbAddress)
@@ -389,9 +372,9 @@ Partial Class Clients
         Me.GroupBox2.Controls.Add(Me.txtStreat)
         Me.GroupBox2.Controls.Add(Me.Label5)
         Me.GroupBox2.Controls.Add(Me.txtProvince)
-        Me.GroupBox2.Location = New System.Drawing.Point(390, 25)
+        Me.GroupBox2.Location = New System.Drawing.Point(384, 25)
         Me.GroupBox2.Name = "GroupBox2"
-        Me.GroupBox2.Size = New System.Drawing.Size(295, 196)
+        Me.GroupBox2.Size = New System.Drawing.Size(320, 196)
         Me.GroupBox2.TabIndex = 37
         Me.GroupBox2.TabStop = False
         Me.GroupBox2.Text = "Address"
@@ -401,7 +384,7 @@ Partial Class Clients
         Me.lblN4.AutoSize = True
         Me.lblN4.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblN4.ForeColor = System.Drawing.Color.Red
-        Me.lblN4.Location = New System.Drawing.Point(204, 71)
+        Me.lblN4.Location = New System.Drawing.Point(216, 74)
         Me.lblN4.Name = "lblN4"
         Me.lblN4.Size = New System.Drawing.Size(14, 18)
         Me.lblN4.TabIndex = 47
@@ -412,7 +395,7 @@ Partial Class Clients
         Me.lblN3.AutoSize = True
         Me.lblN3.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblN3.ForeColor = System.Drawing.Color.Red
-        Me.lblN3.Location = New System.Drawing.Point(204, 21)
+        Me.lblN3.Location = New System.Drawing.Point(216, 19)
         Me.lblN3.Name = "lblN3"
         Me.lblN3.Size = New System.Drawing.Size(14, 18)
         Me.lblN3.TabIndex = 46
@@ -421,9 +404,9 @@ Partial Class Clients
         'chbAddress
         '
         Me.chbAddress.AutoSize = True
-        Me.chbAddress.Location = New System.Drawing.Point(227, 16)
+        Me.chbAddress.Location = New System.Drawing.Point(236, 16)
         Me.chbAddress.Name = "chbAddress"
-        Me.chbAddress.Size = New System.Drawing.Size(59, 17)
+        Me.chbAddress.Size = New System.Drawing.Size(76, 20)
         Me.chbAddress.TabIndex = 15
         Me.chbAddress.Text = "Enable"
         Me.chbAddress.UseVisualStyleBackColor = True
@@ -431,95 +414,96 @@ Partial Class Clients
         'Label14
         '
         Me.Label14.AutoSize = True
-        Me.Label14.Location = New System.Drawing.Point(8, 125)
+        Me.Label14.Location = New System.Drawing.Point(-3, 125)
         Me.Label14.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label14.Name = "Label14"
-        Me.Label14.Size = New System.Drawing.Size(64, 13)
+        Me.Label14.Size = New System.Drawing.Size(94, 16)
         Me.Label14.TabIndex = 42
         Me.Label14.Text = "Postal Code"
         '
         'txtPC
         '
-        Me.txtPC.Location = New System.Drawing.Point(82, 123)
+        Me.txtPC.Location = New System.Drawing.Point(93, 123)
         Me.txtPC.Margin = New System.Windows.Forms.Padding(2)
         Me.txtPC.Name = "txtPC"
-        Me.txtPC.Size = New System.Drawing.Size(118, 20)
+        Me.txtPC.Size = New System.Drawing.Size(118, 23)
         Me.txtPC.TabIndex = 20
         '
         'Label9
         '
         Me.Label9.AutoSize = True
-        Me.Label9.Location = New System.Drawing.Point(15, 47)
+        Me.Label9.Location = New System.Drawing.Point(28, 47)
         Me.Label9.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label9.Name = "Label9"
-        Me.Label9.Size = New System.Drawing.Size(44, 13)
+        Me.Label9.Size = New System.Drawing.Size(65, 16)
         Me.Label9.TabIndex = 40
         Me.Label9.Text = "Number"
         '
         'txtNumerStreat
         '
-        Me.txtNumerStreat.Location = New System.Drawing.Point(81, 44)
+        Me.txtNumerStreat.Location = New System.Drawing.Point(93, 44)
         Me.txtNumerStreat.Margin = New System.Windows.Forms.Padding(2)
         Me.txtNumerStreat.Name = "txtNumerStreat"
-        Me.txtNumerStreat.Size = New System.Drawing.Size(118, 20)
+        Me.txtNumerStreat.Size = New System.Drawing.Size(118, 23)
         Me.txtNumerStreat.TabIndex = 17
         '
         'Label4
         '
         Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(15, 76)
+        Me.Label4.Location = New System.Drawing.Point(56, 76)
         Me.Label4.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(24, 13)
+        Me.Label4.Size = New System.Drawing.Size(37, 16)
         Me.Label4.TabIndex = 38
         Me.Label4.Text = "City"
         '
         'txtCity
         '
-        Me.txtCity.Location = New System.Drawing.Point(81, 71)
+        Me.txtCity.Location = New System.Drawing.Point(93, 71)
         Me.txtCity.Margin = New System.Windows.Forms.Padding(2)
         Me.txtCity.Name = "txtCity"
-        Me.txtCity.Size = New System.Drawing.Size(118, 20)
+        Me.txtCity.Size = New System.Drawing.Size(118, 23)
         Me.txtCity.TabIndex = 18
         '
         'Label3
         '
         Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(15, 21)
+        Me.Label3.Location = New System.Drawing.Point(40, 21)
         Me.Label3.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(35, 13)
+        Me.Label3.Size = New System.Drawing.Size(53, 16)
         Me.Label3.TabIndex = 36
         Me.Label3.Text = "Streat"
         '
         'txtStreat
         '
-        Me.txtStreat.Location = New System.Drawing.Point(81, 18)
+        Me.txtStreat.Location = New System.Drawing.Point(93, 18)
         Me.txtStreat.Margin = New System.Windows.Forms.Padding(2)
         Me.txtStreat.Name = "txtStreat"
-        Me.txtStreat.Size = New System.Drawing.Size(118, 20)
+        Me.txtStreat.Size = New System.Drawing.Size(118, 23)
         Me.txtStreat.TabIndex = 16
         '
         'Label5
         '
         Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(9, 99)
+        Me.Label5.Location = New System.Drawing.Point(20, 99)
         Me.Label5.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(49, 13)
+        Me.Label5.Size = New System.Drawing.Size(71, 16)
         Me.Label5.TabIndex = 34
         Me.Label5.Text = "Province"
         '
         'txtProvince
         '
-        Me.txtProvince.Location = New System.Drawing.Point(81, 97)
+        Me.txtProvince.Location = New System.Drawing.Point(93, 97)
         Me.txtProvince.Margin = New System.Windows.Forms.Padding(2)
         Me.txtProvince.Name = "txtProvince"
-        Me.txtProvince.Size = New System.Drawing.Size(118, 20)
+        Me.txtProvince.Size = New System.Drawing.Size(118, 23)
         Me.txtProvince.TabIndex = 19
         '
         'GroupBox1
         '
+        Me.GroupBox1.BackColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(59, Byte), Integer), CType(CType(115, Byte), Integer))
         Me.GroupBox1.Controls.Add(Me.lblN2)
         Me.GroupBox1.Controls.Add(Me.lblN1)
         Me.GroupBox1.Controls.Add(Me.chbContact)
@@ -529,7 +513,7 @@ Partial Class Clients
         Me.GroupBox1.Controls.Add(Me.txtEmail)
         Me.GroupBox1.Controls.Add(Me.txtPhoneNumber)
         Me.GroupBox1.Controls.Add(Me.lblPN1)
-        Me.GroupBox1.Location = New System.Drawing.Point(14, 25)
+        Me.GroupBox1.Location = New System.Drawing.Point(18, 28)
         Me.GroupBox1.Name = "GroupBox1"
         Me.GroupBox1.Size = New System.Drawing.Size(337, 143)
         Me.GroupBox1.TabIndex = 36
@@ -541,7 +525,7 @@ Partial Class Clients
         Me.lblN2.AutoSize = True
         Me.lblN2.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblN2.ForeColor = System.Drawing.Color.Red
-        Me.lblN2.Location = New System.Drawing.Point(308, 86)
+        Me.lblN2.Location = New System.Drawing.Point(317, 93)
         Me.lblN2.Name = "lblN2"
         Me.lblN2.Size = New System.Drawing.Size(14, 18)
         Me.lblN2.TabIndex = 46
@@ -552,7 +536,7 @@ Partial Class Clients
         Me.lblN1.AutoSize = True
         Me.lblN1.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblN1.ForeColor = System.Drawing.Color.Red
-        Me.lblN1.Location = New System.Drawing.Point(234, 25)
+        Me.lblN1.Location = New System.Drawing.Point(239, 25)
         Me.lblN1.Name = "lblN1"
         Me.lblN1.Size = New System.Drawing.Size(14, 18)
         Me.lblN1.TabIndex = 45
@@ -561,80 +545,68 @@ Partial Class Clients
         'chbContact
         '
         Me.chbContact.AutoSize = True
-        Me.chbContact.Location = New System.Drawing.Point(271, 16)
+        Me.chbContact.Location = New System.Drawing.Point(259, 16)
         Me.chbContact.Name = "chbContact"
-        Me.chbContact.Size = New System.Drawing.Size(59, 17)
+        Me.chbContact.Size = New System.Drawing.Size(76, 20)
         Me.chbContact.TabIndex = 12
         Me.chbContact.Text = "Enable"
         Me.chbContact.UseVisualStyleBackColor = True
         '
         'txtPhoneNumber2
         '
-        Me.txtPhoneNumber2.Location = New System.Drawing.Point(106, 54)
+        Me.txtPhoneNumber2.Location = New System.Drawing.Point(115, 55)
         Me.txtPhoneNumber2.Margin = New System.Windows.Forms.Padding(2)
         Me.txtPhoneNumber2.MaxLength = 10
         Me.txtPhoneNumber2.Name = "txtPhoneNumber2"
-        Me.txtPhoneNumber2.Size = New System.Drawing.Size(124, 20)
+        Me.txtPhoneNumber2.Size = New System.Drawing.Size(124, 23)
         Me.txtPhoneNumber2.TabIndex = 13
         '
         'lblPN2
         '
         Me.lblPN2.AutoSize = True
-        Me.lblPN2.Location = New System.Drawing.Point(17, 58)
+        Me.lblPN2.Location = New System.Drawing.Point(1, 58)
         Me.lblPN2.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.lblPN2.Name = "lblPN2"
-        Me.lblPN2.Size = New System.Drawing.Size(87, 13)
+        Me.lblPN2.Size = New System.Drawing.Size(127, 16)
         Me.lblPN2.TabIndex = 42
         Me.lblPN2.Text = "Phone Number 2"
         '
         'lblEmail
         '
         Me.lblEmail.AutoSize = True
-        Me.lblEmail.Location = New System.Drawing.Point(17, 91)
+        Me.lblEmail.Location = New System.Drawing.Point(64, 91)
         Me.lblEmail.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.lblEmail.Name = "lblEmail"
-        Me.lblEmail.Size = New System.Drawing.Size(32, 13)
+        Me.lblEmail.Size = New System.Drawing.Size(48, 16)
         Me.lblEmail.TabIndex = 39
         Me.lblEmail.Text = "Email"
         '
         'txtEmail
         '
-        Me.txtEmail.Location = New System.Drawing.Point(105, 84)
+        Me.txtEmail.Location = New System.Drawing.Point(115, 88)
         Me.txtEmail.Margin = New System.Windows.Forms.Padding(2)
         Me.txtEmail.Name = "txtEmail"
-        Me.txtEmail.Size = New System.Drawing.Size(198, 20)
+        Me.txtEmail.Size = New System.Drawing.Size(198, 23)
         Me.txtEmail.TabIndex = 14
         '
         'txtPhoneNumber
         '
-        Me.txtPhoneNumber.Location = New System.Drawing.Point(105, 21)
+        Me.txtPhoneNumber.Location = New System.Drawing.Point(115, 21)
         Me.txtPhoneNumber.Margin = New System.Windows.Forms.Padding(2)
         Me.txtPhoneNumber.MaxLength = 10
         Me.txtPhoneNumber.Name = "txtPhoneNumber"
-        Me.txtPhoneNumber.Size = New System.Drawing.Size(124, 20)
+        Me.txtPhoneNumber.Size = New System.Drawing.Size(124, 23)
         Me.txtPhoneNumber.TabIndex = 12
         '
         'lblPN1
         '
         Me.lblPN1.AutoSize = True
-        Me.lblPN1.Location = New System.Drawing.Point(16, 25)
+        Me.lblPN1.Location = New System.Drawing.Point(1, 25)
         Me.lblPN1.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.lblPN1.Name = "lblPN1"
-        Me.lblPN1.Size = New System.Drawing.Size(81, 13)
+        Me.lblPN1.Size = New System.Drawing.Size(118, 16)
         Me.lblPN1.TabIndex = 36
         Me.lblPN1.Text = "Phone Number "
-        '
-        'Button1
-        '
-        Me.Button1.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Button1.ForeColor = System.Drawing.Color.Red
-        Me.Button1.Location = New System.Drawing.Point(672, 11)
-        Me.Button1.Margin = New System.Windows.Forms.Padding(2)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(50, 23)
-        Me.Button1.TabIndex = 22
-        Me.Button1.Text = "Exit"
-        Me.Button1.UseVisualStyleBackColor = True
         '
         'Panel1
         '
@@ -660,20 +632,154 @@ Partial Class Clients
         'Panel3
         '
         Me.Panel3.Anchor = System.Windows.Forms.AnchorStyles.Top
+        Me.Panel3.BackColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(59, Byte), Integer), CType(CType(104, Byte), Integer))
         Me.Panel3.Controls.Add(Me.TabControl1)
-        Me.Panel3.Location = New System.Drawing.Point(3, 56)
+        Me.Panel3.Location = New System.Drawing.Point(3, 69)
         Me.Panel3.Name = "Panel3"
-        Me.Panel3.Size = New System.Drawing.Size(727, 268)
+        Me.Panel3.Size = New System.Drawing.Size(727, 254)
         Me.Panel3.TabIndex = 24
         '
         'Panel2
         '
+        Me.Panel2.Controls.Add(Me.TitleBar)
         Me.Panel2.Controls.Add(Me.Button1)
         Me.Panel2.Dock = System.Windows.Forms.DockStyle.Top
         Me.Panel2.Location = New System.Drawing.Point(0, 0)
         Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(733, 55)
+        Me.Panel2.Size = New System.Drawing.Size(733, 75)
         Me.Panel2.TabIndex = 23
+        '
+        'btnSelectClient
+        '
+        Me.btnSelectClient.FlatAppearance.BorderSize = 0
+        Me.btnSelectClient.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(41, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(185, Byte), Integer))
+        Me.btnSelectClient.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnSelectClient.Image = Global.AVT_TRAKING.My.Resources.Resources.click
+        Me.btnSelectClient.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnSelectClient.Location = New System.Drawing.Point(573, 5)
+        Me.btnSelectClient.Name = "btnSelectClient"
+        Me.btnSelectClient.Size = New System.Drawing.Size(131, 29)
+        Me.btnSelectClient.TabIndex = 50
+        Me.btnSelectClient.Text = "Select Client"
+        Me.btnSelectClient.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.btnSelectClient.UseVisualStyleBackColor = True
+        '
+        'btnShowAll1
+        '
+        Me.btnShowAll1.FlatAppearance.BorderSize = 0
+        Me.btnShowAll1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(41, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(185, Byte), Integer))
+        Me.btnShowAll1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnShowAll1.ForeColor = System.Drawing.SystemColors.Control
+        Me.btnShowAll1.Image = Global.AVT_TRAKING.My.Resources.Resources.loupe
+        Me.btnShowAll1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnShowAll1.Location = New System.Drawing.Point(236, 197)
+        Me.btnShowAll1.Name = "btnShowAll1"
+        Me.btnShowAll1.Size = New System.Drawing.Size(101, 23)
+        Me.btnShowAll1.TabIndex = 11
+        Me.btnShowAll1.Text = "Show All"
+        Me.btnShowAll1.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.btnShowAll1.UseVisualStyleBackColor = True
+        '
+        'btnUpdate
+        '
+        Me.btnUpdate.FlatAppearance.BorderSize = 0
+        Me.btnUpdate.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(41, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(185, Byte), Integer))
+        Me.btnUpdate.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnUpdate.Image = Global.AVT_TRAKING.My.Resources.Resources.update
+        Me.btnUpdate.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnUpdate.Location = New System.Drawing.Point(315, 88)
+        Me.btnUpdate.Margin = New System.Windows.Forms.Padding(2)
+        Me.btnUpdate.Name = "btnUpdate"
+        Me.btnUpdate.Size = New System.Drawing.Size(91, 29)
+        Me.btnUpdate.TabIndex = 9
+        Me.btnUpdate.Text = "Update"
+        Me.btnUpdate.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.btnUpdate.UseVisualStyleBackColor = True
+        '
+        'btnSaveClient
+        '
+        Me.btnSaveClient.FlatAppearance.BorderSize = 0
+        Me.btnSaveClient.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(41, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(185, Byte), Integer))
+        Me.btnSaveClient.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnSaveClient.Image = Global.AVT_TRAKING.My.Resources.Resources.save
+        Me.btnSaveClient.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnSaveClient.Location = New System.Drawing.Point(236, 88)
+        Me.btnSaveClient.Margin = New System.Windows.Forms.Padding(2)
+        Me.btnSaveClient.Name = "btnSaveClient"
+        Me.btnSaveClient.Size = New System.Drawing.Size(78, 27)
+        Me.btnSaveClient.TabIndex = 8
+        Me.btnSaveClient.Text = "Save"
+        Me.btnSaveClient.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.btnSaveClient.UseVisualStyleBackColor = True
+        '
+        'Button1
+        '
+        Me.Button1.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Button1.FlatAppearance.BorderSize = 0
+        Me.Button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.Button1.ForeColor = System.Drawing.Color.Red
+        Me.Button1.Image = Global.AVT_TRAKING.My.Resources.Resources._exit
+        Me.Button1.Location = New System.Drawing.Point(678, 33)
+        Me.Button1.Margin = New System.Windows.Forms.Padding(2)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(50, 31)
+        Me.Button1.TabIndex = 22
+        Me.Button1.UseVisualStyleBackColor = True
+        '
+        'TitleBar
+        '
+        Me.TitleBar.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.TitleBar.BackColor = System.Drawing.Color.FromArgb(CType(CType(30, Byte), Integer), CType(CType(38, Byte), Integer), CType(CType(70, Byte), Integer))
+        Me.TitleBar.Controls.Add(Me.btnMinimized)
+        Me.TitleBar.Controls.Add(Me.btnRestore)
+        Me.TitleBar.Controls.Add(Me.btnMaximize)
+        Me.TitleBar.Controls.Add(Me.Label10)
+        Me.TitleBar.Location = New System.Drawing.Point(0, 0)
+        Me.TitleBar.Name = "TitleBar"
+        Me.TitleBar.Size = New System.Drawing.Size(733, 28)
+        Me.TitleBar.TabIndex = 23
+        '
+        'Label10
+        '
+        Me.Label10.AutoSize = True
+        Me.Label10.Font = New System.Drawing.Font("Verdana", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label10.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.Label10.Location = New System.Drawing.Point(3, 0)
+        Me.Label10.Name = "Label10"
+        Me.Label10.Size = New System.Drawing.Size(66, 18)
+        Me.Label10.TabIndex = 0
+        Me.Label10.Text = "Clients"
+        '
+        'btnMaximize
+        '
+        Me.btnMaximize.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnMaximize.Image = Global.AVT_TRAKING.My.Resources.Resources.maximize2
+        Me.btnMaximize.Location = New System.Drawing.Point(695, 3)
+        Me.btnMaximize.Name = "btnMaximize"
+        Me.btnMaximize.Size = New System.Drawing.Size(29, 28)
+        Me.btnMaximize.TabIndex = 1
+        Me.btnMaximize.TabStop = False
+        '
+        'btnRestore
+        '
+        Me.btnRestore.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnRestore.Image = Global.AVT_TRAKING.My.Resources.Resources.restore2
+        Me.btnRestore.Location = New System.Drawing.Point(693, 1)
+        Me.btnRestore.Name = "btnRestore"
+        Me.btnRestore.Size = New System.Drawing.Size(31, 24)
+        Me.btnRestore.TabIndex = 2
+        Me.btnRestore.TabStop = False
+        '
+        'btnMinimized
+        '
+        Me.btnMinimized.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnMinimized.Image = Global.AVT_TRAKING.My.Resources.Resources.minimize2
+        Me.btnMinimized.Location = New System.Drawing.Point(664, 1)
+        Me.btnMinimized.Name = "btnMinimized"
+        Me.btnMinimized.Size = New System.Drawing.Size(25, 24)
+        Me.btnMinimized.TabIndex = 3
+        Me.btnMinimized.TabStop = False
         '
         'Clients
         '
@@ -681,6 +787,7 @@ Partial Class Clients
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(733, 516)
         Me.Controls.Add(Me.Panel1)
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
         Me.Margin = New System.Windows.Forms.Padding(2)
         Me.Name = "Clients"
         Me.Text = "Clients"
@@ -698,6 +805,11 @@ Partial Class Clients
         Me.Panel4.ResumeLayout(False)
         Me.Panel3.ResumeLayout(False)
         Me.Panel2.ResumeLayout(False)
+        Me.TitleBar.ResumeLayout(False)
+        Me.TitleBar.PerformLayout()
+        CType(Me.btnMaximize, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.btnRestore, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.btnMinimized, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -757,4 +869,9 @@ Partial Class Clients
     Friend WithEvents Panel3 As Panel
     Friend WithEvents Panel2 As Panel
     Public WithEvents btnSelectClient As Button
+    Friend WithEvents TitleBar As Panel
+    Friend WithEvents Label10 As Label
+    Friend WithEvents btnMaximize As PictureBox
+    Friend WithEvents btnRestore As PictureBox
+    Friend WithEvents btnMinimized As PictureBox
 End Class
