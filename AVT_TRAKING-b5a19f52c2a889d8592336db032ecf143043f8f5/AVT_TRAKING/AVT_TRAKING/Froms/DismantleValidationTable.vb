@@ -218,9 +218,12 @@ Public Class DismantleValidationTable
                 dis.ahrTotal = CDec(row.Cells("Dismantle").Value) + CDec(row.Cells("Material").Value) + CDec(row.Cells("Travel").Value) + CDec(row.Cells("Weather").Value) + CDec(row.Cells("Alarm").Value) + CDec(row.Cells("Safety").Value) + CDec(row.Cells("stdBY").Value)
                 dis.comments = row.Cells("Comments").Value
                 If mtdScaffold.saveDismantle(dis, False) Then
-                    pgbComplete.Value += porcent
+                    pgbComplete.Value += If(pgbComplete.Value + porcent > 100, porcent, 99)
                 Else
                     row.Cells("clmErrorD").Value = "Error, check the data."
+                    If ExistError() Then
+                        tblDismantleSC.Columns("clmErrorD").Visible = True
+                    End If
                 End If
             Next
             lblMessage.Text = "Message: Complete."

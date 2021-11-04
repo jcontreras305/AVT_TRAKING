@@ -3348,9 +3348,10 @@ Public Class scafoldTarking
         mvt.ShowDialog()
         mtdScaffold.llenarModification(tblModification)
     End Sub
-
     Private Sub btnUploadExcelDismantle_Click(sender As Object, e As EventArgs) Handles btnUploadExcelDismantle.Click
         Dim dvt As New DismantleValidationTable
         dvt.ShowDialog()
+        mtdScaffold.llenarScaffold(tblScaffoldTags)
+        cargarDatosDismantle(ds.tag)
     End Sub
 End Class
