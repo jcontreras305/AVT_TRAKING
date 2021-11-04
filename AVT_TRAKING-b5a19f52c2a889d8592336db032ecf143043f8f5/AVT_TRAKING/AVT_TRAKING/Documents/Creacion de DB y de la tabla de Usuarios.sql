@@ -210,7 +210,8 @@ create table dismantle(
 	requestBy varchar(50),
 	rentStopDate date,
 	dismantleDate date,
-	foreman varchar(30)
+	foreman varchar(30),
+	erector varchar(30)
 )
 GO
 
@@ -1872,8 +1873,6 @@ GO
 --references scaffoldTraking(tag)
 --go
 
-
-
 --==============================================================================================================================
 --===== ESTE ES CODIGO SI NO SE QUIERE CREAR DESDE CERO LA BASE DE DATOS =======================================================
 --==============================================================================================================================
@@ -1881,5 +1880,13 @@ GO
 ---- (CTRL+K) + (CTRL+U) Descomentar 
 
 --==============================================================================================================================
---===== CODIGO PARA PROCEDIMIENTO ALMACENADO PARA EL DELETE DE MODIFICACIONES ==================================================
+--===== CODIGO PARA AGREGAR EL VALOR DE ERECTOR EN LA TABLA DE DISMANTLE =======================================================
 --==============================================================================================================================
+
+--use vrt_traking
+--go
+--select * from dismantle
+--go
+--alter table dismantle 
+--add erector varchar(30)
+--go

@@ -313,7 +313,7 @@ Public Class scafoldTarking
                     mtdScaffold.llenarProduct(tblProductosAux)
                 End If
             Case "Dis"
-                If mtdScaffold.saveDismantle(ds) Then
+                If mtdScaffold.saveDismantle(ds, False) Then
                     cargarDatosDismantle(ds.tag)
                     mtdScaffold.llenarProduct(tblProductosAux)
                     If ds.tag = sc.tag Then
@@ -423,7 +423,7 @@ Public Class scafoldTarking
                     End If
                 End If
             Case "Dis"
-                If mtdScaffold.saveDismantle(ds) Then
+                If mtdScaffold.saveDismantle(ds, False) Then
                     If cargarDatosDismantle(ds.tag) Then
                         mtdScaffold.llenarProduct(tblProductosAux)
                     End If
@@ -3028,6 +3028,7 @@ Public Class scafoldTarking
                     If ds.tag = rowTag.ItemArray(0) Then
                         ds.wo = rowTag.ItemArray(5)
                         txtWODismantle.Text = rowTag.ItemArray(5)
+                        Exit For
                     End If
                 Next
             Else
@@ -3049,7 +3050,6 @@ Public Class scafoldTarking
             Else
                 cmbReqCompanyDismantle.Text = ds.reqCompany
             End If
-
             mtdScaffold.llenarEmpleadosCombo(cmbForemanDismantle, tablaEmpleados)
             If cmbForemanDismantle.FindString(ds.foreman) > -1 Then
                 cmbForemanDismantle.Text = ds.foreman
@@ -3063,7 +3063,19 @@ Public Class scafoldTarking
                     cmbForemanDismantle.SelectedValue = Nothing
                 End If
             End If
-
+            mtdScaffold.llenarEmpleadosCombo(cmbErectorDismantle, tablaEmpleados)
+            If cmbErectorDismantle.FindString(ds.erector) > -1 Then
+                cmbErectorDismantle.Text = ds.erector
+                cmbErectorDismantle.SelectedItem = cmbErectorDismantle.Items(cmbErectorDismantle.FindString(ds.erector))
+                If ds.erector = "" Then
+                    cmbErectorDismantle.SelectedItem = Nothing
+                End If
+            Else
+                cmbErectorDismantle.Text = ds.erector
+                If ds.erector = "" Then
+                    cmbErectorDismantle.SelectedValue = Nothing
+                End If
+            End If
             dtpRentStop.Value = ds.stopDismantle
             dtpDismantleDate.Value = ds.dismantleDate
 
@@ -3080,7 +3092,7 @@ Public Class scafoldTarking
             chbPassedDS.Checked = ds.materialHandeling(5)
             chbElevatorDS.Checked = ds.materialHandeling(6)
 
-            tblActivityHoursDismantle.Rows(0).SetValues(ds.ahrIdActivityHours, ds.ahrDismantle, ds.ahrMaterial, ds.ahrTravel, ds.ahrWeather, ds.ahrAlarm, ds.ahrSafety, ds.ahrStdBy, ds.ahrOther, ds.ahrTotal)
+            tblActivityHoursDismantle.Rows(0).SetValues(If(scAux.ahrIdActivityHours IsNot Nothing, scAux.ahrIdActivityHours, "0"), If(scAux.ahrBuild <> Nothing, scAux.ahrBuild, "0"), If(scAux.ahrMaterial <> Nothing, scAux.ahrMaterial, "0"), If(scAux.ahrTravel <> Nothing, scAux.ahrTravel, "0"), If(scAux.ahrWeather <> Nothing, scAux.ahrWeather, "0"), If(scAux.ahrAlarm <> Nothing, scAux.ahrAlarm, "0"), If(scAux.ahrSafety <> Nothing, scAux.ahrSafety, "0"), If(scAux.ahrStdBy <> Nothing, scAux.ahrStdBy, "0"), If(scAux.ahrOther <> Nothing, scAux.ahrOther, "0"), If(scAux.ahrTotal <> Nothing, scAux.ahrTotal, "0"))
             tblTotalScaffoldProductDS.Rows.Clear()
             For Each row As DataRow In ds.prodcutsSC.Rows
                 tblTotalScaffoldProductDS.Rows.Add(row("idProduct"), row("QTY"))
@@ -3261,13 +3273,13 @@ Public Class scafoldTarking
             ds.materialHandeling(6) = chbElevatorDS.Checked()
         End If
     End Sub
-    Private Sub btnAfterModification_Click(sender As Object, e As EventArgs) Handles btnAfterModification.Click
+    Private Sub btnBackModification_Click(sender As Object, e As EventArgs) Handles btnBackModification.Click
         Try
             If mtdScaffold.llenarModification(tblModification) Then
                 If tblModification.Rows.Count > 0 Then
                     Dim cont As Integer = 0
                     For Each rowMod As DataRow In tblModification.Rows
-                        If md.ModID = rowMod.ItemArray(1) Then
+                        If md.ModID = rowMod.ItemArray(1) And md.tag And rowMod.ItemArray(5) Then
                             If cont = 0 Then 'es la primer fila 
                                 Dim ultimafila = tblModification.Rows().Count()
                                 md = mtdScaffold.llenarModificationData(tblModification.Rows(ultimafila - 1).ItemArray(0), tblModification.Rows(ultimafila - 1).ItemArray(5))
@@ -3296,7 +3308,7 @@ Public Class scafoldTarking
                 If tblModification.Rows.Count > 0 Then
                     Dim cont As Integer = 1
                     For Each rowMod As DataRow In tblModification.Rows
-                        If md.ModID = rowMod.ItemArray(1) Then
+                        If md.ModID = rowMod.ItemArray(1) And md.tag = rowMod.ItemArray(5) Then
                             If cont = tblModification.Rows.Count() Then 'es la ultima fila 
                                 md = mtdScaffold.llenarModificationData(tblModification.Rows(0).ItemArray(0), tblModification.Rows(0).ItemArray(5))
                                 If md.ModID <> "" Then
@@ -3335,5 +3347,10 @@ Public Class scafoldTarking
         Dim mvt As New ModificationValidationTable
         mvt.ShowDialog()
         mtdScaffold.llenarModification(tblModification)
+    End Sub
+
+    Private Sub btnUploadExcelDismantle_Click(sender As Object, e As EventArgs) Handles btnUploadExcelDismantle.Click
+        Dim dvt As New DismantleValidationTable
+        dvt.ShowDialog()
     End Sub
 End Class

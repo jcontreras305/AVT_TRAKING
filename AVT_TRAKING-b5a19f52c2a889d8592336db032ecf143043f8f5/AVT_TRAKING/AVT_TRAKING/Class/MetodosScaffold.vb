@@ -2931,8 +2931,7 @@ where ds.tag = '" + tag + "'", conn)
             desconectar()
         End Try
     End Function
-
-    Public Function saveDismantle(ByVal ds As dismantle) As Boolean
+    Public Function saveDismantle(ByVal ds As dismantle, ByVal showMessage As Boolean) As Boolean
         conectar()
         Dim tran As SqlTransaction
         tran = conn.BeginTransaction
@@ -2946,13 +2945,13 @@ where ds.tag = '" + tag + "'", conn)
 
     if (select COUNT(*) from dismantle where tag = @tag or idDismantle = @idDismantle)=0
 	begin 
-		insert into dismantle values (@idDismantle,@tag,'" + ds.comments + "','" + ds.reqCompany + "','" + ds.requestBy + "','" + validaFechaParaSQl(ds.stopDismantle) + "','" + validaFechaParaSQl(ds.dismantleDate) + "','" + ds.foreman + "')	
+		insert into dismantle values (@idDismantle,@tag,'" + ds.comments + "','" + ds.reqCompany + "','" + ds.requestBy + "','" + validaFechaParaSQl(ds.stopDismantle) + "','" + validaFechaParaSQl(ds.dismantleDate) + "','" + ds.foreman + "','" + ds.erector + "')	
         insert into materialHandeling values (NEWID(),'" + If(ds.materialHandeling(0), "t", "f") + "','" + If(ds.materialHandeling(1), "t", "f") + "','" + If(ds.materialHandeling(2), "t", "f") + "','" + If(ds.materialHandeling(3), "t", "f") + "','" + If(ds.materialHandeling(4), "t", "f") + "','" + If(ds.materialHandeling(5), "t", "f") + "','" + If(ds.materialHandeling(6), "t", "f") + "',@tag,NULL,@idDismantle)--True = t, False = f
 	    insert into activityHours values (NEWID()," + ds.ahrDismantle.ToString() + "," + ds.ahrMaterial.ToString() + "," + ds.ahrTravel.ToString() + "," + ds.ahrWeather.ToString() + "," + ds.ahrAlarm.ToString() + "," + ds.ahrSafety.ToString() + "," + ds.ahrStdBy.ToString() + "," + ds.ahrOther.ToString() + ",@tag,Null,@idDismantle)--b,m,t,w,a,s,st,o
 	end
 	else
 	begin 
-		update dismantle set comments='" + ds.comments + "',reqCompany='" + ds.reqCompany + "',requestBy='" + ds.requestBy + "',rentStopDate='" + validaFechaParaSQl(ds.stopDismantle) + "',dismantleDate='" + validaFechaParaSQl(ds.dismantleDate) + "',foreman='" + ds.foreman + "' where idDismantle = @idDismantle or tag = @tag
+		update dismantle set comments='" + ds.comments + "',reqCompany='" + ds.reqCompany + "',requestBy='" + ds.requestBy + "',rentStopDate='" + validaFechaParaSQl(ds.stopDismantle) + "',dismantleDate='" + validaFechaParaSQl(ds.dismantleDate) + "',foreman='" + ds.foreman + "',erector = '" + ds.erector + "' where idDismantle = @idDismantle or tag = @tag
 		update materialHandeling set truck='" + If(ds.materialHandeling(0), "t", "f") + "',forklift='" + If(ds.materialHandeling(1), "t", "f") + "',trailer='" + If(ds.materialHandeling(2), "t", "f") + "',crane='" + If(ds.materialHandeling(3), "t", "f") + "',rope='" + If(ds.materialHandeling(4), "t", "f") + "',passed='" + If(ds.materialHandeling(5), "t", "f") + "',elevator='" + If(ds.materialHandeling(6), "t", "f") + "' where idDismantle = @idDismantle and tag = @tag
 		update activityHours set build=" + ds.ahrDismantle.ToString() + ",material=" + ds.ahrMaterial.ToString() + ",travel=" + ds.ahrTravel.ToString() + ",weather=" + ds.ahrWeather.ToString() + ",alarm=" + ds.ahrAlarm.ToString() + ",safety=" + ds.ahrSafety.ToString() + ",stdBy=" + ds.ahrStdBy.ToString() + ",other=" + ds.ahrOther.ToString() + " where idDismantle = @idDismantle and tag = @tag
 	end
@@ -2974,7 +2973,9 @@ where ds.tag = '" + tag + "'", conn)
             cmd.Transaction = tran
             If cmd.ExecuteNonQuery Then
                 tran.Commit()
-                MessageBox.Show("Succesfull", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                If showMessage Then
+                    MessageBox.Show("Succesfull", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                End If
                 Return True
             Else
                 tran.Rollback()
@@ -2989,5 +2990,21 @@ where ds.tag = '" + tag + "'", conn)
             desconectar()
         End Try
     End Function
-
+    Public Function llenarTagSinDismantle(ByVal tbl As Data.DataTable) As Boolean
+        Try
+            conectar()
+            Dim cmd As New SqlCommand("select tag,status, buildDate from scaffoldTraking where status = 'f'", conn)
+            If cmd.ExecuteNonQuery Then
+                Dim da As New SqlDataAdapter(cmd)
+                da.Fill(tbl)
+                Return True
+            Else
+                Return False
+            End If
+        Catch ex As Exception
+            Return False
+        Finally
+            desconectar()
+        End Try
+    End Function
 End Class

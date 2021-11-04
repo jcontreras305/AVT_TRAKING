@@ -2,7 +2,7 @@
 Public Class dismantle
     Inherits ConnectioDB
     'Dismantle 
-    Dim _idDismantle, _tag, _wo, _comments, _reqCompany, _requestBy, _foreman As String
+    Dim _idDismantle, _tag, _wo, _comments, _reqCompany, _requestBy, _foreman, _erector As String
     Dim _stopDismantle, _dismantleDate, _scStartDate As Date
     'Activity Hours
     Private _ahrIdActivityHours As String
@@ -123,6 +123,17 @@ Public Class dismantle
         End Get
         Set(ByVal foreman As String)
             _foreman = foreman
+        End Set
+    End Property
+    Public Property erector() As String
+        Get
+            If _erector = Nothing Then
+                _erector = ""
+            End If
+            Return _erector
+        End Get
+        Set(ByVal erector As String)
+            _erector = erector
         End Set
     End Property
     Public Property stopDismantle() As Date

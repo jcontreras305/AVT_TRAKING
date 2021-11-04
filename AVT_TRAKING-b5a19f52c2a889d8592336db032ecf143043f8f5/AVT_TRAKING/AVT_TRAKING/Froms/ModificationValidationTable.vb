@@ -36,7 +36,7 @@ Public Class ModificationValidationTable
             Dim modSheet As Worksheet = New Worksheet
             Dim productSheet As Worksheet = New Worksheet
             Dim flagStatus As Boolean = True
-            If DialogResult.OK = MessageBox.Show("The process to read the Excel will be start." + vbCr + "Please vierifi that the name of the Modification sheet is 'MODI'.", "Important", MessageBoxButtons.OK, MessageBoxIcon.Information) Then
+            If DialogResult.OK = MessageBox.Show("The process to read the Excel will be start." + vbCr + "Please verify that the name of the Modification sheet is 'MODI'.", "Important", MessageBoxButtons.OK, MessageBoxIcon.Information) Then
                 Try
                     modSheet = libro.Worksheets("MODI")
                     lblMessage.Text = "Message: Open sheet 'MODI'."
@@ -58,11 +58,11 @@ Public Class ModificationValidationTable
                 End Try
 
                 validarProductMod(productSheet)
-                'If Not ExistError(tblMosdificationScaffold) Then
-                '    If Not ExistError(tblProductSheet) Then
-                '        btnSave.Enabled = True
-                '    End If
-                'End If
+                If Not ExistError(tblModificationScaffold) And Not ExistError(tblProductSheet) Then
+                    btnSave.Enabled = True
+                Else
+                    btnSave.Enabled = False
+                End If
                 pgbComplete.Value = 100
             End If
         Catch ex As Exception
