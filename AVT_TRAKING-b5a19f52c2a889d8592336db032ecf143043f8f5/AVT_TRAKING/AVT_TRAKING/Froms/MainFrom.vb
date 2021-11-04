@@ -42,7 +42,7 @@ Public Class MainFrom
         'a.Show()
     End Sub
 
-    Private Sub pnlImage_Paint(sender As Object, e As PaintEventArgs) Handles pnlImage.Paint
+    Private Sub pnlImage_Paint(sender As Object, e As PaintEventArgs)
 
     End Sub
 

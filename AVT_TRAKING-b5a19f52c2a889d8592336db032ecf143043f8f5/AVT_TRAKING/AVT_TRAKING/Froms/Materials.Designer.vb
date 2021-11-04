@@ -25,17 +25,12 @@ Partial Class Materials
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Materials))
         Me.tblMaterial = New System.Windows.Forms.DataGridView()
         Me.btnMenu = New System.Windows.Forms.Button()
-        Me.Button5 = New System.Windows.Forms.Button()
         Me.TabPage2 = New System.Windows.Forms.TabPage()
         Me.txtPartNum = New System.Windows.Forms.TextBox()
         Me.Label21 = New System.Windows.Forms.Label()
-        Me.btnCancelOrder = New System.Windows.Forms.Button()
-        Me.btnUpdateOrder = New System.Windows.Forms.Button()
-        Me.btnDeleteOrder = New System.Windows.Forms.Button()
         Me.sprPrice = New System.Windows.Forms.NumericUpDown()
         Me.Label20 = New System.Windows.Forms.Label()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
-        Me.btnOrderSave = New System.Windows.Forms.Button()
         Me.chbOrden = New System.Windows.Forms.CheckBox()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.dtpFechaOrden = New System.Windows.Forms.DateTimePicker()
@@ -50,7 +45,6 @@ Partial Class Materials
         Me.txtDMaterial = New System.Windows.Forms.TextBox()
         Me.txtRM = New System.Windows.Forms.TextBox()
         Me.tblMaterialAndOrders = New System.Windows.Forms.DataGridView()
-        Me.btnUpdateMareialData = New System.Windows.Forms.Button()
         Me.Label7 = New System.Windows.Forms.Label()
         Me.txtSearch = New System.Windows.Forms.TextBox()
         Me.txtDescripcion = New System.Windows.Forms.TextBox()
@@ -62,29 +56,23 @@ Partial Class Materials
         Me.Label15 = New System.Windows.Forms.Label()
         Me.Label14 = New System.Windows.Forms.Label()
         Me.TabPage1 = New System.Windows.Forms.TabPage()
-        Me.btnCancelMaterial = New System.Windows.Forms.Button()
         Me.chbEnableMaterial = New System.Windows.Forms.CheckBox()
         Me.txtNumeroMaterial = New System.Windows.Forms.TextBox()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.cmbVendedor = New System.Windows.Forms.ComboBox()
-        Me.btnUpdateMaterial = New System.Windows.Forms.Button()
         Me.txtFiltro = New System.Windows.Forms.TextBox()
         Me.txtNameMaterials = New System.Windows.Forms.TextBox()
         Me.Label13 = New System.Windows.Forms.Label()
-        Me.btnSaveMaterial = New System.Windows.Forms.Button()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.TabPage3 = New System.Windows.Forms.TabPage()
-        Me.btnCancelVendor = New System.Windows.Forms.Button()
         Me.Label12 = New System.Windows.Forms.Label()
         Me.txtSearchVendedor = New System.Windows.Forms.TextBox()
         Me.txtNumeroVendedor = New System.Windows.Forms.TextBox()
         Me.Label19 = New System.Windows.Forms.Label()
-        Me.btnUpdateVendor = New System.Windows.Forms.Button()
         Me.chbEnableVendor = New System.Windows.Forms.CheckBox()
         Me.tblVendor = New System.Windows.Forms.DataGridView()
-        Me.btnSaveVendor = New System.Windows.Forms.Button()
         Me.txtDescripcionVendedor = New System.Windows.Forms.TextBox()
         Me.txtNombreVendedor = New System.Windows.Forms.TextBox()
         Me.Label10 = New System.Windows.Forms.Label()
@@ -93,9 +81,28 @@ Partial Class Materials
         Me.TextBox1 = New System.Windows.Forms.TextBox()
         Me.txtMensajeProseso = New System.Windows.Forms.TextBox()
         Me.GroupBox3 = New System.Windows.Forms.GroupBox()
+        Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.TitleBar = New System.Windows.Forms.Panel()
+        Me.Label22 = New System.Windows.Forms.Label()
+        Me.PictureBox4 = New System.Windows.Forms.PictureBox()
+        Me.PictureBox3 = New System.Windows.Forms.PictureBox()
+        Me.Button5 = New System.Windows.Forms.Button()
+        Me.PictureBox1 = New System.Windows.Forms.PictureBox()
+        Me.btnCancelVendor = New System.Windows.Forms.Button()
+        Me.btnUpdateVendor = New System.Windows.Forms.Button()
+        Me.btnSaveVendor = New System.Windows.Forms.Button()
+        Me.PictureBox2 = New System.Windows.Forms.PictureBox()
+        Me.btnCancelMaterial = New System.Windows.Forms.Button()
+        Me.btnUpdateMaterial = New System.Windows.Forms.Button()
+        Me.btnSaveMaterial = New System.Windows.Forms.Button()
+        Me.PictureBox5 = New System.Windows.Forms.PictureBox()
+        Me.btnOrderSave = New System.Windows.Forms.Button()
+        Me.btnCancelOrder = New System.Windows.Forms.Button()
+        Me.btnUpdateOrder = New System.Windows.Forms.Button()
+        Me.btnDeleteOrder = New System.Windows.Forms.Button()
+        Me.btnUpdateMareialData = New System.Windows.Forms.Button()
         Me.btnMaterialUploadExcel = New System.Windows.Forms.Button()
         Me.btnMaterialDownloadExcel = New System.Windows.Forms.Button()
-        Me.GroupBox2 = New System.Windows.Forms.GroupBox()
         Me.btnVendorUploadExcel = New System.Windows.Forms.Button()
         Me.btnVendorDownloadExcel = New System.Windows.Forms.Button()
         CType(Me.tblMaterial, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -113,6 +120,12 @@ Partial Class Materials
         Me.TabPage4.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
+        Me.TitleBar.SuspendLayout()
+        CType(Me.PictureBox4, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.PictureBox3, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.PictureBox5, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'tblMaterial
@@ -131,12 +144,12 @@ Partial Class Materials
         Me.tblMaterial.RowHeadersWidth = 62
         Me.tblMaterial.RowTemplate.Height = 28
         Me.tblMaterial.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.tblMaterial.Size = New System.Drawing.Size(471, 291)
+        Me.tblMaterial.Size = New System.Drawing.Size(471, 288)
         Me.tblMaterial.TabIndex = 7
         '
         'btnMenu
         '
-        Me.btnMenu.Location = New System.Drawing.Point(15, 8)
+        Me.btnMenu.Location = New System.Drawing.Point(11, 35)
         Me.btnMenu.Margin = New System.Windows.Forms.Padding(2)
         Me.btnMenu.Name = "btnMenu"
         Me.btnMenu.Size = New System.Drawing.Size(67, 21)
@@ -144,24 +157,12 @@ Partial Class Materials
         Me.btnMenu.Text = "Menu"
         Me.btnMenu.UseVisualStyleBackColor = True
         '
-        'Button5
-        '
-        Me.Button5.ForeColor = System.Drawing.Color.Red
-        Me.Button5.Location = New System.Drawing.Point(727, 13)
-        Me.Button5.Margin = New System.Windows.Forms.Padding(2)
-        Me.Button5.Name = "Button5"
-        Me.Button5.Size = New System.Drawing.Size(48, 21)
-        Me.Button5.TabIndex = 4
-        Me.Button5.Text = "Exit"
-        Me.Button5.UseVisualStyleBackColor = True
-        '
         'TabPage2
         '
+        Me.TabPage2.BackColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(59, Byte), Integer), CType(CType(104, Byte), Integer))
+        Me.TabPage2.Controls.Add(Me.PictureBox5)
         Me.TabPage2.Controls.Add(Me.txtPartNum)
         Me.TabPage2.Controls.Add(Me.Label21)
-        Me.TabPage2.Controls.Add(Me.btnCancelOrder)
-        Me.TabPage2.Controls.Add(Me.btnUpdateOrder)
-        Me.TabPage2.Controls.Add(Me.btnDeleteOrder)
         Me.TabPage2.Controls.Add(Me.sprPrice)
         Me.TabPage2.Controls.Add(Me.Label20)
         Me.TabPage2.Controls.Add(Me.GroupBox1)
@@ -170,7 +171,6 @@ Partial Class Materials
         Me.TabPage2.Controls.Add(Me.txtDMaterial)
         Me.TabPage2.Controls.Add(Me.txtRM)
         Me.TabPage2.Controls.Add(Me.tblMaterialAndOrders)
-        Me.TabPage2.Controls.Add(Me.btnUpdateMareialData)
         Me.TabPage2.Controls.Add(Me.Label7)
         Me.TabPage2.Controls.Add(Me.txtSearch)
         Me.TabPage2.Controls.Add(Me.txtDescripcion)
@@ -181,59 +181,38 @@ Partial Class Materials
         Me.TabPage2.Controls.Add(Me.Label16)
         Me.TabPage2.Controls.Add(Me.Label15)
         Me.TabPage2.Controls.Add(Me.Label14)
-        Me.TabPage2.Location = New System.Drawing.Point(4, 22)
+        Me.TabPage2.Controls.Add(Me.btnCancelOrder)
+        Me.TabPage2.Controls.Add(Me.btnUpdateOrder)
+        Me.TabPage2.Controls.Add(Me.btnDeleteOrder)
+        Me.TabPage2.Controls.Add(Me.btnUpdateMareialData)
+        Me.TabPage2.Font = New System.Drawing.Font("Verdana", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TabPage2.ForeColor = System.Drawing.SystemColors.ControlText
+        Me.TabPage2.Location = New System.Drawing.Point(4, 25)
         Me.TabPage2.Margin = New System.Windows.Forms.Padding(2)
         Me.TabPage2.Name = "TabPage2"
         Me.TabPage2.Padding = New System.Windows.Forms.Padding(2)
-        Me.TabPage2.Size = New System.Drawing.Size(761, 403)
+        Me.TabPage2.Size = New System.Drawing.Size(761, 410)
         Me.TabPage2.TabIndex = 1
         Me.TabPage2.Text = "Materials bills"
-        Me.TabPage2.UseVisualStyleBackColor = True
         '
         'txtPartNum
         '
         Me.txtPartNum.Location = New System.Drawing.Point(349, 154)
         Me.txtPartNum.Margin = New System.Windows.Forms.Padding(2)
         Me.txtPartNum.Name = "txtPartNum"
-        Me.txtPartNum.Size = New System.Drawing.Size(121, 20)
+        Me.txtPartNum.Size = New System.Drawing.Size(121, 22)
         Me.txtPartNum.TabIndex = 38
         '
         'Label21
         '
         Me.Label21.AutoSize = True
-        Me.Label21.Location = New System.Drawing.Point(287, 158)
+        Me.Label21.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.Label21.Location = New System.Drawing.Point(301, 158)
         Me.Label21.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label21.Name = "Label21"
-        Me.Label21.Size = New System.Drawing.Size(33, 13)
+        Me.Label21.Size = New System.Drawing.Size(45, 14)
         Me.Label21.TabIndex = 39
         Me.Label21.Text = "Part#"
-        '
-        'btnCancelOrder
-        '
-        Me.btnCancelOrder.Location = New System.Drawing.Point(669, 297)
-        Me.btnCancelOrder.Name = "btnCancelOrder"
-        Me.btnCancelOrder.Size = New System.Drawing.Size(72, 41)
-        Me.btnCancelOrder.TabIndex = 16
-        Me.btnCancelOrder.Text = "Cancel"
-        Me.btnCancelOrder.UseVisualStyleBackColor = True
-        '
-        'btnUpdateOrder
-        '
-        Me.btnUpdateOrder.Location = New System.Drawing.Point(669, 245)
-        Me.btnUpdateOrder.Name = "btnUpdateOrder"
-        Me.btnUpdateOrder.Size = New System.Drawing.Size(72, 41)
-        Me.btnUpdateOrder.TabIndex = 15
-        Me.btnUpdateOrder.Text = "Update"
-        Me.btnUpdateOrder.UseVisualStyleBackColor = True
-        '
-        'btnDeleteOrder
-        '
-        Me.btnDeleteOrder.Location = New System.Drawing.Point(669, 350)
-        Me.btnDeleteOrder.Name = "btnDeleteOrder"
-        Me.btnDeleteOrder.Size = New System.Drawing.Size(73, 40)
-        Me.btnDeleteOrder.TabIndex = 17
-        Me.btnDeleteOrder.Text = "Delete"
-        Me.btnDeleteOrder.UseVisualStyleBackColor = True
         '
         'sprPrice
         '
@@ -242,15 +221,16 @@ Partial Class Materials
         Me.sprPrice.Location = New System.Drawing.Point(351, 86)
         Me.sprPrice.Maximum = New Decimal(New Integer() {10000, 0, 0, 0})
         Me.sprPrice.Name = "sprPrice"
-        Me.sprPrice.Size = New System.Drawing.Size(120, 20)
+        Me.sprPrice.Size = New System.Drawing.Size(120, 22)
         Me.sprPrice.TabIndex = 6
         '
         'Label20
         '
         Me.Label20.AutoSize = True
-        Me.Label20.Location = New System.Drawing.Point(284, 89)
+        Me.Label20.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.Label20.Location = New System.Drawing.Point(307, 89)
         Me.Label20.Name = "Label20"
-        Me.Label20.Size = New System.Drawing.Size(31, 13)
+        Me.Label20.Size = New System.Drawing.Size(41, 14)
         Me.Label20.TabIndex = 37
         Me.Label20.Text = "Price"
         '
@@ -266,6 +246,7 @@ Partial Class Materials
         Me.GroupBox1.Controls.Add(Me.sprPricioOrden)
         Me.GroupBox1.Controls.Add(Me.Label8)
         Me.GroupBox1.Controls.Add(Me.lblTotal)
+        Me.GroupBox1.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.GroupBox1.Location = New System.Drawing.Point(477, 5)
         Me.GroupBox1.Name = "GroupBox1"
         Me.GroupBox1.Size = New System.Drawing.Size(279, 234)
@@ -273,22 +254,12 @@ Partial Class Materials
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "New Order"
         '
-        'btnOrderSave
-        '
-        Me.btnOrderSave.Enabled = False
-        Me.btnOrderSave.Location = New System.Drawing.Point(89, 186)
-        Me.btnOrderSave.Name = "btnOrderSave"
-        Me.btnOrderSave.Size = New System.Drawing.Size(75, 33)
-        Me.btnOrderSave.TabIndex = 13
-        Me.btnOrderSave.Text = "Add"
-        Me.btnOrderSave.UseVisualStyleBackColor = True
-        '
         'chbOrden
         '
         Me.chbOrden.AutoSize = True
         Me.chbOrden.Location = New System.Drawing.Point(225, 33)
         Me.chbOrden.Name = "chbOrden"
-        Me.chbOrden.Size = New System.Drawing.Size(48, 17)
+        Me.chbOrden.Size = New System.Drawing.Size(56, 18)
         Me.chbOrden.TabIndex = 9
         Me.chbOrden.Text = "New"
         Me.chbOrden.UseVisualStyleBackColor = True
@@ -296,10 +267,10 @@ Partial Class Materials
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(5, 37)
+        Me.Label1.Location = New System.Drawing.Point(34, 37)
         Me.Label1.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(31, 13)
+        Me.Label1.Size = New System.Drawing.Size(41, 14)
         Me.Label1.TabIndex = 13
         Me.Label1.Text = "Price"
         '
@@ -310,25 +281,25 @@ Partial Class Materials
         Me.dtpFechaOrden.Format = System.Windows.Forms.DateTimePickerFormat.Custom
         Me.dtpFechaOrden.Location = New System.Drawing.Point(78, 111)
         Me.dtpFechaOrden.Name = "dtpFechaOrden"
-        Me.dtpFechaOrden.Size = New System.Drawing.Size(155, 20)
+        Me.dtpFechaOrden.Size = New System.Drawing.Size(155, 22)
         Me.dtpFechaOrden.TabIndex = 12
         '
         'Label6
         '
         Me.Label6.AutoSize = True
-        Me.Label6.Location = New System.Drawing.Point(5, 77)
+        Me.Label6.Location = New System.Drawing.Point(11, 77)
         Me.Label6.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(46, 13)
+        Me.Label6.Size = New System.Drawing.Size(64, 14)
         Me.Label6.TabIndex = 15
         Me.Label6.Text = "Quantity"
         '
         'Label9
         '
         Me.Label9.AutoSize = True
-        Me.Label9.Location = New System.Drawing.Point(11, 116)
+        Me.Label9.Location = New System.Drawing.Point(37, 116)
         Me.Label9.Name = "Label9"
-        Me.Label9.Size = New System.Drawing.Size(30, 13)
+        Me.Label9.Size = New System.Drawing.Size(38, 14)
         Me.Label9.TabIndex = 34
         Me.Label9.Text = "Date"
         '
@@ -340,7 +311,7 @@ Partial Class Materials
         Me.sprCantidadOrden.Location = New System.Drawing.Point(78, 73)
         Me.sprCantidadOrden.Maximum = New Decimal(New Integer() {10000, 0, 0, 0})
         Me.sprCantidadOrden.Name = "sprCantidadOrden"
-        Me.sprCantidadOrden.Size = New System.Drawing.Size(130, 20)
+        Me.sprCantidadOrden.Size = New System.Drawing.Size(130, 22)
         Me.sprCantidadOrden.TabIndex = 11
         '
         'sprPricioOrden
@@ -351,15 +322,15 @@ Partial Class Materials
         Me.sprPricioOrden.Location = New System.Drawing.Point(78, 34)
         Me.sprPricioOrden.Maximum = New Decimal(New Integer() {10000, 0, 0, 0})
         Me.sprPricioOrden.Name = "sprPricioOrden"
-        Me.sprPricioOrden.Size = New System.Drawing.Size(130, 20)
+        Me.sprPricioOrden.Size = New System.Drawing.Size(130, 22)
         Me.sprPricioOrden.TabIndex = 10
         '
         'Label8
         '
         Me.Label8.AutoSize = True
-        Me.Label8.Location = New System.Drawing.Point(6, 163)
+        Me.Label8.Location = New System.Drawing.Point(34, 153)
         Me.Label8.Name = "Label8"
-        Me.Label8.Size = New System.Drawing.Size(31, 13)
+        Me.Label8.Size = New System.Drawing.Size(40, 14)
         Me.Label8.TabIndex = 31
         Me.Label8.Text = "Total"
         '
@@ -382,32 +353,32 @@ Partial Class Materials
         Me.sprTamanio.Location = New System.Drawing.Point(350, 19)
         Me.sprTamanio.Maximum = New Decimal(New Integer() {100000, 0, 0, 0})
         Me.sprTamanio.Name = "sprTamanio"
-        Me.sprTamanio.Size = New System.Drawing.Size(120, 20)
+        Me.sprTamanio.Size = New System.Drawing.Size(120, 22)
         Me.sprTamanio.TabIndex = 4
         '
         'cmbUnidadDeMedida
         '
         Me.cmbUnidadDeMedida.FormattingEnabled = True
         Me.cmbUnidadDeMedida.Items.AddRange(New Object() {"Each", "Foot", "Yard", "Galon", "Ounce", "LB", "Square foot"})
-        Me.cmbUnidadDeMedida.Location = New System.Drawing.Point(114, 117)
+        Me.cmbUnidadDeMedida.Location = New System.Drawing.Point(145, 117)
         Me.cmbUnidadDeMedida.Name = "cmbUnidadDeMedida"
-        Me.cmbUnidadDeMedida.Size = New System.Drawing.Size(121, 21)
+        Me.cmbUnidadDeMedida.Size = New System.Drawing.Size(121, 22)
         Me.cmbUnidadDeMedida.TabIndex = 3
         '
         'txtDMaterial
         '
-        Me.txtDMaterial.Location = New System.Drawing.Point(114, 20)
+        Me.txtDMaterial.Location = New System.Drawing.Point(145, 20)
         Me.txtDMaterial.Margin = New System.Windows.Forms.Padding(2)
         Me.txtDMaterial.Name = "txtDMaterial"
-        Me.txtDMaterial.Size = New System.Drawing.Size(121, 20)
+        Me.txtDMaterial.Size = New System.Drawing.Size(121, 22)
         Me.txtDMaterial.TabIndex = 1
         '
         'txtRM
         '
-        Me.txtRM.Location = New System.Drawing.Point(112, 67)
+        Me.txtRM.Location = New System.Drawing.Point(143, 67)
         Me.txtRM.Margin = New System.Windows.Forms.Padding(2)
         Me.txtRM.Name = "txtRM"
-        Me.txtRM.Size = New System.Drawing.Size(123, 20)
+        Me.txtRM.Size = New System.Drawing.Size(123, 22)
         Me.txtRM.TabIndex = 2
         '
         'tblMaterialAndOrders
@@ -424,26 +395,17 @@ Partial Class Materials
         Me.tblMaterialAndOrders.RowHeadersWidth = 62
         Me.tblMaterialAndOrders.RowTemplate.Height = 28
         Me.tblMaterialAndOrders.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.tblMaterialAndOrders.Size = New System.Drawing.Size(653, 146)
+        Me.tblMaterialAndOrders.Size = New System.Drawing.Size(630, 146)
         Me.tblMaterialAndOrders.TabIndex = 20
-        '
-        'btnUpdateMareialData
-        '
-        Me.btnUpdateMareialData.Location = New System.Drawing.Point(14, 153)
-        Me.btnUpdateMareialData.Margin = New System.Windows.Forms.Padding(2)
-        Me.btnUpdateMareialData.Name = "btnUpdateMareialData"
-        Me.btnUpdateMareialData.Size = New System.Drawing.Size(70, 42)
-        Me.btnUpdateMareialData.TabIndex = 8
-        Me.btnUpdateMareialData.Text = "Update"
-        Me.btnUpdateMareialData.UseVisualStyleBackColor = True
         '
         'Label7
         '
         Me.Label7.AutoSize = True
-        Me.Label7.Location = New System.Drawing.Point(255, 206)
+        Me.Label7.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.Label7.Location = New System.Drawing.Point(213, 207)
         Me.Label7.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(41, 13)
+        Me.Label7.Size = New System.Drawing.Size(53, 14)
         Me.Label7.TabIndex = 20
         Me.Label7.Text = "Search"
         '
@@ -452,7 +414,7 @@ Partial Class Materials
         Me.txtSearch.Location = New System.Drawing.Point(297, 204)
         Me.txtSearch.Margin = New System.Windows.Forms.Padding(2)
         Me.txtSearch.Name = "txtSearch"
-        Me.txtSearch.Size = New System.Drawing.Size(174, 20)
+        Me.txtSearch.Size = New System.Drawing.Size(174, 22)
         Me.txtSearch.TabIndex = 14
         '
         'txtDescripcion
@@ -460,7 +422,7 @@ Partial Class Materials
         Me.txtDescripcion.Location = New System.Drawing.Point(350, 118)
         Me.txtDescripcion.Margin = New System.Windows.Forms.Padding(2)
         Me.txtDescripcion.Name = "txtDescripcion"
-        Me.txtDescripcion.Size = New System.Drawing.Size(121, 20)
+        Me.txtDescripcion.Size = New System.Drawing.Size(121, 22)
         Me.txtDescripcion.TabIndex = 7
         '
         'txtTipo
@@ -468,109 +430,107 @@ Partial Class Materials
         Me.txtTipo.Location = New System.Drawing.Point(351, 50)
         Me.txtTipo.Margin = New System.Windows.Forms.Padding(2)
         Me.txtTipo.Name = "txtTipo"
-        Me.txtTipo.Size = New System.Drawing.Size(119, 20)
+        Me.txtTipo.Size = New System.Drawing.Size(119, 22)
         Me.txtTipo.TabIndex = 5
         '
         'Label5
         '
         Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(284, 122)
+        Me.Label5.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.Label5.Location = New System.Drawing.Point(269, 122)
         Me.Label5.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(63, 13)
+        Me.Label5.Size = New System.Drawing.Size(84, 14)
         Me.Label5.TabIndex = 14
         Me.Label5.Text = "Descripcion"
         '
         'Label18
         '
         Me.Label18.AutoSize = True
-        Me.Label18.Location = New System.Drawing.Point(286, 52)
+        Me.Label18.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.Label18.Location = New System.Drawing.Point(309, 52)
         Me.Label18.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label18.Name = "Label18"
-        Me.Label18.Size = New System.Drawing.Size(31, 13)
+        Me.Label18.Size = New System.Drawing.Size(39, 14)
         Me.Label18.TabIndex = 7
         Me.Label18.Text = "Type"
         '
         'Label17
         '
         Me.Label17.AutoSize = True
-        Me.Label17.Location = New System.Drawing.Point(288, 22)
+        Me.Label17.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.Label17.Location = New System.Drawing.Point(311, 22)
         Me.Label17.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label17.Name = "Label17"
-        Me.Label17.Size = New System.Drawing.Size(27, 13)
+        Me.Label17.Size = New System.Drawing.Size(35, 14)
         Me.Label17.TabIndex = 6
         Me.Label17.Text = "Size"
         '
         'Label16
         '
         Me.Label16.AutoSize = True
-        Me.Label16.Location = New System.Drawing.Point(8, 121)
+        Me.Label16.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.Label16.Location = New System.Drawing.Point(0, 121)
         Me.Label16.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label16.Name = "Label16"
-        Me.Label16.Size = New System.Drawing.Size(104, 13)
+        Me.Label16.Size = New System.Drawing.Size(145, 14)
         Me.Label16.TabIndex = 4
         Me.Label16.Text = "Unit of measurement"
         '
         'Label15
         '
         Me.Label15.AutoSize = True
-        Me.Label15.Location = New System.Drawing.Point(11, 71)
+        Me.Label15.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.Label15.Location = New System.Drawing.Point(14, 71)
         Me.Label15.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label15.Name = "Label15"
-        Me.Label15.Size = New System.Drawing.Size(93, 13)
+        Me.Label15.Size = New System.Drawing.Size(126, 14)
         Me.Label15.TabIndex = 2
         Me.Label15.Text = "Resource Material"
         '
         'Label14
         '
         Me.Label14.AutoSize = True
-        Me.Label14.Location = New System.Drawing.Point(29, 24)
+        Me.Label14.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.Label14.Location = New System.Drawing.Point(82, 24)
         Me.Label14.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label14.Name = "Label14"
-        Me.Label14.Size = New System.Drawing.Size(44, 13)
+        Me.Label14.Size = New System.Drawing.Size(61, 14)
         Me.Label14.TabIndex = 0
         Me.Label14.Text = "Material"
         '
         'TabPage1
         '
+        Me.TabPage1.BackColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(59, Byte), Integer), CType(CType(104, Byte), Integer))
+        Me.TabPage1.Controls.Add(Me.PictureBox2)
         Me.TabPage1.Controls.Add(Me.btnCancelMaterial)
         Me.TabPage1.Controls.Add(Me.chbEnableMaterial)
         Me.TabPage1.Controls.Add(Me.txtNumeroMaterial)
         Me.TabPage1.Controls.Add(Me.Label3)
         Me.TabPage1.Controls.Add(Me.cmbVendedor)
-        Me.TabPage1.Controls.Add(Me.btnUpdateMaterial)
         Me.TabPage1.Controls.Add(Me.txtFiltro)
         Me.TabPage1.Controls.Add(Me.tblMaterial)
         Me.TabPage1.Controls.Add(Me.txtNameMaterials)
         Me.TabPage1.Controls.Add(Me.Label13)
-        Me.TabPage1.Controls.Add(Me.btnSaveMaterial)
         Me.TabPage1.Controls.Add(Me.Label2)
         Me.TabPage1.Controls.Add(Me.Label4)
-        Me.TabPage1.Location = New System.Drawing.Point(4, 22)
+        Me.TabPage1.Controls.Add(Me.btnUpdateMaterial)
+        Me.TabPage1.Controls.Add(Me.btnSaveMaterial)
+        Me.TabPage1.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.TabPage1.Location = New System.Drawing.Point(4, 25)
         Me.TabPage1.Margin = New System.Windows.Forms.Padding(2)
         Me.TabPage1.Name = "TabPage1"
         Me.TabPage1.Padding = New System.Windows.Forms.Padding(2)
-        Me.TabPage1.Size = New System.Drawing.Size(761, 403)
+        Me.TabPage1.Size = New System.Drawing.Size(761, 410)
         Me.TabPage1.TabIndex = 0
         Me.TabPage1.Text = "Materials"
-        Me.TabPage1.UseVisualStyleBackColor = True
-        '
-        'btnCancelMaterial
-        '
-        Me.btnCancelMaterial.Location = New System.Drawing.Point(155, 255)
-        Me.btnCancelMaterial.Margin = New System.Windows.Forms.Padding(2)
-        Me.btnCancelMaterial.Name = "btnCancelMaterial"
-        Me.btnCancelMaterial.Size = New System.Drawing.Size(81, 35)
-        Me.btnCancelMaterial.TabIndex = 9
-        Me.btnCancelMaterial.Text = "Cancel"
-        Me.btnCancelMaterial.UseVisualStyleBackColor = True
         '
         'chbEnableMaterial
         '
         Me.chbEnableMaterial.AutoSize = True
         Me.chbEnableMaterial.Location = New System.Drawing.Point(177, 146)
         Me.chbEnableMaterial.Name = "chbEnableMaterial"
-        Me.chbEnableMaterial.Size = New System.Drawing.Size(59, 17)
+        Me.chbEnableMaterial.Size = New System.Drawing.Size(76, 20)
         Me.chbEnableMaterial.TabIndex = 4
         Me.chbEnableMaterial.Text = "Enable"
         Me.chbEnableMaterial.UseVisualStyleBackColor = True
@@ -580,7 +540,7 @@ Partial Class Materials
         Me.txtNumeroMaterial.Location = New System.Drawing.Point(99, 20)
         Me.txtNumeroMaterial.Margin = New System.Windows.Forms.Padding(2)
         Me.txtNumeroMaterial.Name = "txtNumeroMaterial"
-        Me.txtNumeroMaterial.Size = New System.Drawing.Size(137, 20)
+        Me.txtNumeroMaterial.Size = New System.Drawing.Size(137, 23)
         Me.txtNumeroMaterial.TabIndex = 1
         '
         'Label3
@@ -589,7 +549,7 @@ Partial Class Materials
         Me.Label3.Location = New System.Drawing.Point(33, 23)
         Me.Label3.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(44, 13)
+        Me.Label3.Size = New System.Drawing.Size(65, 16)
         Me.Label3.TabIndex = 30
         Me.Label3.Text = "Number"
         '
@@ -597,25 +557,15 @@ Partial Class Materials
         '
         Me.cmbVendedor.Location = New System.Drawing.Point(99, 109)
         Me.cmbVendedor.Name = "cmbVendedor"
-        Me.cmbVendedor.Size = New System.Drawing.Size(137, 21)
+        Me.cmbVendedor.Size = New System.Drawing.Size(137, 24)
         Me.cmbVendedor.TabIndex = 3
-        '
-        'btnUpdateMaterial
-        '
-        Me.btnUpdateMaterial.Location = New System.Drawing.Point(155, 186)
-        Me.btnUpdateMaterial.Margin = New System.Windows.Forms.Padding(2)
-        Me.btnUpdateMaterial.Name = "btnUpdateMaterial"
-        Me.btnUpdateMaterial.Size = New System.Drawing.Size(81, 35)
-        Me.btnUpdateMaterial.TabIndex = 8
-        Me.btnUpdateMaterial.Text = "Update"
-        Me.btnUpdateMaterial.UseVisualStyleBackColor = True
         '
         'txtFiltro
         '
-        Me.txtFiltro.Location = New System.Drawing.Point(369, 48)
+        Me.txtFiltro.Location = New System.Drawing.Point(420, 48)
         Me.txtFiltro.Margin = New System.Windows.Forms.Padding(2)
         Me.txtFiltro.Name = "txtFiltro"
-        Me.txtFiltro.Size = New System.Drawing.Size(144, 20)
+        Me.txtFiltro.Size = New System.Drawing.Size(162, 23)
         Me.txtFiltro.TabIndex = 6
         '
         'txtNameMaterials
@@ -623,28 +573,18 @@ Partial Class Materials
         Me.txtNameMaterials.Location = New System.Drawing.Point(99, 62)
         Me.txtNameMaterials.Margin = New System.Windows.Forms.Padding(2)
         Me.txtNameMaterials.Name = "txtNameMaterials"
-        Me.txtNameMaterials.Size = New System.Drawing.Size(137, 20)
+        Me.txtNameMaterials.Size = New System.Drawing.Size(137, 23)
         Me.txtNameMaterials.TabIndex = 2
         '
         'Label13
         '
         Me.Label13.AutoSize = True
-        Me.Label13.Location = New System.Drawing.Point(310, 51)
+        Me.Label13.Location = New System.Drawing.Point(330, 51)
         Me.Label13.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label13.Name = "Label13"
-        Me.Label13.Size = New System.Drawing.Size(41, 13)
+        Me.Label13.Size = New System.Drawing.Size(58, 16)
         Me.Label13.TabIndex = 26
         Me.Label13.Text = "Search"
-        '
-        'btnSaveMaterial
-        '
-        Me.btnSaveMaterial.Location = New System.Drawing.Point(36, 186)
-        Me.btnSaveMaterial.Margin = New System.Windows.Forms.Padding(2)
-        Me.btnSaveMaterial.Name = "btnSaveMaterial"
-        Me.btnSaveMaterial.Size = New System.Drawing.Size(79, 35)
-        Me.btnSaveMaterial.TabIndex = 5
-        Me.btnSaveMaterial.Text = "Add"
-        Me.btnSaveMaterial.UseVisualStyleBackColor = True
         '
         'Label2
         '
@@ -652,7 +592,7 @@ Partial Class Materials
         Me.Label2.Location = New System.Drawing.Point(33, 112)
         Me.Label2.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(41, 13)
+        Me.Label2.Size = New System.Drawing.Size(60, 16)
         Me.Label2.TabIndex = 1
         Me.Label2.Text = "Vendor"
         '
@@ -662,7 +602,7 @@ Partial Class Materials
         Me.Label4.Location = New System.Drawing.Point(33, 65)
         Me.Label4.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(35, 13)
+        Me.Label4.Size = New System.Drawing.Size(50, 16)
         Me.Label4.TabIndex = 3
         Me.Label4.Text = "Name"
         '
@@ -672,15 +612,18 @@ Partial Class Materials
         Me.TabControl1.Controls.Add(Me.TabPage1)
         Me.TabControl1.Controls.Add(Me.TabPage2)
         Me.TabControl1.Controls.Add(Me.TabPage4)
-        Me.TabControl1.Location = New System.Drawing.Point(6, 33)
+        Me.TabControl1.Font = New System.Drawing.Font("Verdana", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TabControl1.Location = New System.Drawing.Point(11, 74)
         Me.TabControl1.Margin = New System.Windows.Forms.Padding(2)
         Me.TabControl1.Name = "TabControl1"
         Me.TabControl1.SelectedIndex = 0
-        Me.TabControl1.Size = New System.Drawing.Size(769, 429)
+        Me.TabControl1.Size = New System.Drawing.Size(769, 439)
         Me.TabControl1.TabIndex = 3
         '
         'TabPage3
         '
+        Me.TabPage3.BackColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(59, Byte), Integer), CType(CType(104, Byte), Integer))
+        Me.TabPage3.Controls.Add(Me.PictureBox1)
         Me.TabPage3.Controls.Add(Me.btnCancelVendor)
         Me.TabPage3.Controls.Add(Me.Label12)
         Me.TabPage3.Controls.Add(Me.txtSearchVendedor)
@@ -694,72 +637,56 @@ Partial Class Materials
         Me.TabPage3.Controls.Add(Me.txtNombreVendedor)
         Me.TabPage3.Controls.Add(Me.Label10)
         Me.TabPage3.Controls.Add(Me.Label11)
-        Me.TabPage3.Location = New System.Drawing.Point(4, 22)
+        Me.TabPage3.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.TabPage3.Location = New System.Drawing.Point(4, 25)
         Me.TabPage3.Name = "TabPage3"
-        Me.TabPage3.Size = New System.Drawing.Size(761, 403)
+        Me.TabPage3.Size = New System.Drawing.Size(761, 410)
         Me.TabPage3.TabIndex = 2
         Me.TabPage3.Text = "Vendor"
-        Me.TabPage3.UseVisualStyleBackColor = True
-        '
-        'btnCancelVendor
-        '
-        Me.btnCancelVendor.Location = New System.Drawing.Point(118, 245)
-        Me.btnCancelVendor.Name = "btnCancelVendor"
-        Me.btnCancelVendor.Size = New System.Drawing.Size(76, 36)
-        Me.btnCancelVendor.TabIndex = 26
-        Me.btnCancelVendor.Text = "Cancel"
-        Me.btnCancelVendor.UseVisualStyleBackColor = True
         '
         'Label12
         '
         Me.Label12.AutoSize = True
-        Me.Label12.Location = New System.Drawing.Point(282, 26)
+        Me.Label12.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.Label12.Location = New System.Drawing.Point(258, 25)
         Me.Label12.Name = "Label12"
-        Me.Label12.Size = New System.Drawing.Size(41, 13)
+        Me.Label12.Size = New System.Drawing.Size(58, 16)
         Me.Label12.TabIndex = 25
         Me.Label12.Text = "Search"
+        Me.Label12.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
         'txtSearchVendedor
         '
         Me.txtSearchVendedor.Location = New System.Drawing.Point(346, 22)
         Me.txtSearchVendedor.Margin = New System.Windows.Forms.Padding(2)
         Me.txtSearchVendedor.Name = "txtSearchVendedor"
-        Me.txtSearchVendedor.Size = New System.Drawing.Size(135, 20)
+        Me.txtSearchVendedor.Size = New System.Drawing.Size(167, 23)
         Me.txtSearchVendedor.TabIndex = 24
         '
         'txtNumeroVendedor
         '
-        Me.txtNumeroVendedor.Location = New System.Drawing.Point(85, 22)
+        Me.txtNumeroVendedor.Location = New System.Drawing.Point(95, 22)
         Me.txtNumeroVendedor.Margin = New System.Windows.Forms.Padding(2)
         Me.txtNumeroVendedor.Name = "txtNumeroVendedor"
-        Me.txtNumeroVendedor.Size = New System.Drawing.Size(108, 20)
+        Me.txtNumeroVendedor.Size = New System.Drawing.Size(108, 23)
         Me.txtNumeroVendedor.TabIndex = 23
         '
         'Label19
         '
         Me.Label19.AutoSize = True
-        Me.Label19.Location = New System.Drawing.Point(21, 26)
+        Me.Label19.Location = New System.Drawing.Point(29, 26)
         Me.Label19.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label19.Name = "Label19"
-        Me.Label19.Size = New System.Drawing.Size(44, 13)
+        Me.Label19.Size = New System.Drawing.Size(65, 16)
         Me.Label19.TabIndex = 22
         Me.Label19.Text = "Number"
-        '
-        'btnUpdateVendor
-        '
-        Me.btnUpdateVendor.Location = New System.Drawing.Point(118, 187)
-        Me.btnUpdateVendor.Name = "btnUpdateVendor"
-        Me.btnUpdateVendor.Size = New System.Drawing.Size(75, 32)
-        Me.btnUpdateVendor.TabIndex = 19
-        Me.btnUpdateVendor.Text = "Update"
-        Me.btnUpdateVendor.UseVisualStyleBackColor = True
         '
         'chbEnableVendor
         '
         Me.chbEnableVendor.AutoSize = True
         Me.chbEnableVendor.Location = New System.Drawing.Point(85, 139)
         Me.chbEnableVendor.Name = "chbEnableVendor"
-        Me.chbEnableVendor.Size = New System.Drawing.Size(59, 17)
+        Me.chbEnableVendor.Size = New System.Drawing.Size(76, 20)
         Me.chbEnableVendor.TabIndex = 18
         Me.chbEnableVendor.Text = "Enable"
         Me.chbEnableVendor.UseVisualStyleBackColor = True
@@ -781,68 +708,58 @@ Partial Class Materials
         Me.tblVendor.Size = New System.Drawing.Size(512, 340)
         Me.tblVendor.TabIndex = 17
         '
-        'btnSaveVendor
-        '
-        Me.btnSaveVendor.Location = New System.Drawing.Point(24, 187)
-        Me.btnSaveVendor.Margin = New System.Windows.Forms.Padding(2)
-        Me.btnSaveVendor.Name = "btnSaveVendor"
-        Me.btnSaveVendor.Size = New System.Drawing.Size(68, 32)
-        Me.btnSaveVendor.TabIndex = 15
-        Me.btnSaveVendor.Text = "Add"
-        Me.btnSaveVendor.UseVisualStyleBackColor = True
-        '
         'txtDescripcionVendedor
         '
-        Me.txtDescripcionVendedor.Location = New System.Drawing.Point(85, 98)
+        Me.txtDescripcionVendedor.Location = New System.Drawing.Point(95, 98)
         Me.txtDescripcionVendedor.Margin = New System.Windows.Forms.Padding(2)
         Me.txtDescripcionVendedor.Name = "txtDescripcionVendedor"
-        Me.txtDescripcionVendedor.Size = New System.Drawing.Size(109, 20)
+        Me.txtDescripcionVendedor.Size = New System.Drawing.Size(109, 23)
         Me.txtDescripcionVendedor.TabIndex = 14
         '
         'txtNombreVendedor
         '
-        Me.txtNombreVendedor.Location = New System.Drawing.Point(85, 56)
+        Me.txtNombreVendedor.Location = New System.Drawing.Point(95, 56)
         Me.txtNombreVendedor.Margin = New System.Windows.Forms.Padding(2)
         Me.txtNombreVendedor.Name = "txtNombreVendedor"
-        Me.txtNombreVendedor.Size = New System.Drawing.Size(108, 20)
+        Me.txtNombreVendedor.Size = New System.Drawing.Size(108, 23)
         Me.txtNombreVendedor.TabIndex = 13
         '
         'Label10
         '
         Me.Label10.AutoSize = True
-        Me.Label10.Location = New System.Drawing.Point(6, 103)
+        Me.Label10.Location = New System.Drawing.Point(3, 103)
         Me.Label10.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label10.Name = "Label10"
-        Me.Label10.Size = New System.Drawing.Size(63, 13)
+        Me.Label10.Size = New System.Drawing.Size(92, 16)
         Me.Label10.TabIndex = 11
         Me.Label10.Text = "Descripcion"
         '
         'Label11
         '
         Me.Label11.AutoSize = True
-        Me.Label11.Location = New System.Drawing.Point(30, 61)
+        Me.Label11.Location = New System.Drawing.Point(43, 61)
         Me.Label11.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label11.Name = "Label11"
-        Me.Label11.Size = New System.Drawing.Size(35, 13)
+        Me.Label11.Size = New System.Drawing.Size(50, 16)
         Me.Label11.TabIndex = 10
         Me.Label11.Text = "Name"
         '
         'TabPage4
         '
+        Me.TabPage4.BackColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(59, Byte), Integer), CType(CType(104, Byte), Integer))
         Me.TabPage4.Controls.Add(Me.TextBox1)
         Me.TabPage4.Controls.Add(Me.txtMensajeProseso)
         Me.TabPage4.Controls.Add(Me.GroupBox3)
         Me.TabPage4.Controls.Add(Me.GroupBox2)
-        Me.TabPage4.Location = New System.Drawing.Point(4, 22)
+        Me.TabPage4.Location = New System.Drawing.Point(4, 25)
         Me.TabPage4.Name = "TabPage4"
-        Me.TabPage4.Size = New System.Drawing.Size(761, 403)
+        Me.TabPage4.Size = New System.Drawing.Size(761, 410)
         Me.TabPage4.TabIndex = 3
         Me.TabPage4.Text = "Others"
-        Me.TabPage4.UseVisualStyleBackColor = True
         '
         'TextBox1
         '
-        Me.TextBox1.Font = New System.Drawing.Font("Rubik", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TextBox1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TextBox1.Location = New System.Drawing.Point(497, 22)
         Me.TextBox1.MaxLength = 327670000
         Me.TextBox1.Multiline = True
@@ -870,6 +787,7 @@ Partial Class Materials
         '
         Me.GroupBox3.Controls.Add(Me.btnMaterialUploadExcel)
         Me.GroupBox3.Controls.Add(Me.btnMaterialDownloadExcel)
+        Me.GroupBox3.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.GroupBox3.Location = New System.Drawing.Point(38, 148)
         Me.GroupBox3.Name = "GroupBox3"
         Me.GroupBox3.Size = New System.Drawing.Size(453, 100)
@@ -877,28 +795,11 @@ Partial Class Materials
         Me.GroupBox3.TabStop = False
         Me.GroupBox3.Text = "Material"
         '
-        'btnMaterialUploadExcel
-        '
-        Me.btnMaterialUploadExcel.Location = New System.Drawing.Point(239, 38)
-        Me.btnMaterialUploadExcel.Name = "btnMaterialUploadExcel"
-        Me.btnMaterialUploadExcel.Size = New System.Drawing.Size(155, 33)
-        Me.btnMaterialUploadExcel.TabIndex = 1
-        Me.btnMaterialUploadExcel.Text = "Upload Excel"
-        Me.btnMaterialUploadExcel.UseVisualStyleBackColor = True
-        '
-        'btnMaterialDownloadExcel
-        '
-        Me.btnMaterialDownloadExcel.Location = New System.Drawing.Point(35, 38)
-        Me.btnMaterialDownloadExcel.Name = "btnMaterialDownloadExcel"
-        Me.btnMaterialDownloadExcel.Size = New System.Drawing.Size(150, 33)
-        Me.btnMaterialDownloadExcel.TabIndex = 0
-        Me.btnMaterialDownloadExcel.Text = "Download Excel"
-        Me.btnMaterialDownloadExcel.UseVisualStyleBackColor = True
-        '
         'GroupBox2
         '
         Me.GroupBox2.Controls.Add(Me.btnVendorUploadExcel)
         Me.GroupBox2.Controls.Add(Me.btnVendorDownloadExcel)
+        Me.GroupBox2.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.GroupBox2.Location = New System.Drawing.Point(38, 22)
         Me.GroupBox2.Name = "GroupBox2"
         Me.GroupBox2.Size = New System.Drawing.Size(453, 120)
@@ -906,32 +807,337 @@ Partial Class Materials
         Me.GroupBox2.TabStop = False
         Me.GroupBox2.Text = "Vendor"
         '
+        'TitleBar
+        '
+        Me.TitleBar.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.TitleBar.BackColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(59, Byte), Integer), CType(CType(104, Byte), Integer))
+        Me.TitleBar.Controls.Add(Me.PictureBox4)
+        Me.TitleBar.Controls.Add(Me.PictureBox3)
+        Me.TitleBar.Controls.Add(Me.Label22)
+        Me.TitleBar.Location = New System.Drawing.Point(3, 3)
+        Me.TitleBar.Name = "TitleBar"
+        Me.TitleBar.Size = New System.Drawing.Size(781, 27)
+        Me.TitleBar.TabIndex = 5
+        '
+        'Label22
+        '
+        Me.Label22.AutoSize = True
+        Me.Label22.Font = New System.Drawing.Font("Verdana", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label22.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.Label22.Location = New System.Drawing.Point(3, 6)
+        Me.Label22.Name = "Label22"
+        Me.Label22.Size = New System.Drawing.Size(88, 18)
+        Me.Label22.TabIndex = 0
+        Me.Label22.Text = "Materials"
+        '
+        'PictureBox4
+        '
+        Me.PictureBox4.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.PictureBox4.Image = Global.AVT_TRAKING.My.Resources.Resources.minimize2
+        Me.PictureBox4.Location = New System.Drawing.Point(717, 3)
+        Me.PictureBox4.Name = "PictureBox4"
+        Me.PictureBox4.Size = New System.Drawing.Size(28, 23)
+        Me.PictureBox4.TabIndex = 2
+        Me.PictureBox4.TabStop = False
+        '
+        'PictureBox3
+        '
+        Me.PictureBox3.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.PictureBox3.Image = Global.AVT_TRAKING.My.Resources.Resources.maximize2
+        Me.PictureBox3.Location = New System.Drawing.Point(751, 4)
+        Me.PictureBox3.Name = "PictureBox3"
+        Me.PictureBox3.Size = New System.Drawing.Size(26, 23)
+        Me.PictureBox3.TabIndex = 1
+        Me.PictureBox3.TabStop = False
+        '
+        'Button5
+        '
+        Me.Button5.FlatAppearance.BorderSize = 0
+        Me.Button5.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.Button5.Image = Global.AVT_TRAKING.My.Resources.Resources._exit
+        Me.Button5.Location = New System.Drawing.Point(736, 35)
+        Me.Button5.Margin = New System.Windows.Forms.Padding(2)
+        Me.Button5.Name = "Button5"
+        Me.Button5.Size = New System.Drawing.Size(48, 35)
+        Me.Button5.TabIndex = 4
+        Me.Button5.UseVisualStyleBackColor = True
+        '
+        'PictureBox1
+        '
+        Me.PictureBox1.Image = Global.AVT_TRAKING.My.Resources.Resources.loupe
+        Me.PictureBox1.Location = New System.Drawing.Point(313, 22)
+        Me.PictureBox1.Name = "PictureBox1"
+        Me.PictureBox1.Size = New System.Drawing.Size(28, 23)
+        Me.PictureBox1.TabIndex = 27
+        Me.PictureBox1.TabStop = False
+        '
+        'btnCancelVendor
+        '
+        Me.btnCancelVendor.FlatAppearance.BorderSize = 0
+        Me.btnCancelVendor.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(41, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(185, Byte), Integer))
+        Me.btnCancelVendor.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnCancelVendor.Image = Global.AVT_TRAKING.My.Resources.Resources.cancel
+        Me.btnCancelVendor.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnCancelVendor.Location = New System.Drawing.Point(100, 245)
+        Me.btnCancelVendor.Name = "btnCancelVendor"
+        Me.btnCancelVendor.Size = New System.Drawing.Size(103, 36)
+        Me.btnCancelVendor.TabIndex = 26
+        Me.btnCancelVendor.Text = "Cancel"
+        Me.btnCancelVendor.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.btnCancelVendor.UseVisualStyleBackColor = True
+        '
+        'btnUpdateVendor
+        '
+        Me.btnUpdateVendor.FlatAppearance.BorderSize = 0
+        Me.btnUpdateVendor.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(41, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(185, Byte), Integer))
+        Me.btnUpdateVendor.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnUpdateVendor.Image = Global.AVT_TRAKING.My.Resources.Resources.update
+        Me.btnUpdateVendor.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnUpdateVendor.Location = New System.Drawing.Point(100, 187)
+        Me.btnUpdateVendor.Name = "btnUpdateVendor"
+        Me.btnUpdateVendor.Size = New System.Drawing.Size(103, 32)
+        Me.btnUpdateVendor.TabIndex = 19
+        Me.btnUpdateVendor.Text = "Update"
+        Me.btnUpdateVendor.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.btnUpdateVendor.UseVisualStyleBackColor = True
+        '
+        'btnSaveVendor
+        '
+        Me.btnSaveVendor.FlatAppearance.BorderSize = 0
+        Me.btnSaveVendor.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(41, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(185, Byte), Integer))
+        Me.btnSaveVendor.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnSaveVendor.Image = Global.AVT_TRAKING.My.Resources.Resources.add
+        Me.btnSaveVendor.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnSaveVendor.Location = New System.Drawing.Point(24, 187)
+        Me.btnSaveVendor.Margin = New System.Windows.Forms.Padding(2)
+        Me.btnSaveVendor.Name = "btnSaveVendor"
+        Me.btnSaveVendor.Size = New System.Drawing.Size(71, 32)
+        Me.btnSaveVendor.TabIndex = 15
+        Me.btnSaveVendor.Text = "Add"
+        Me.btnSaveVendor.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.btnSaveVendor.UseVisualStyleBackColor = True
+        '
+        'PictureBox2
+        '
+        Me.PictureBox2.Image = Global.AVT_TRAKING.My.Resources.Resources.loupe
+        Me.PictureBox2.Location = New System.Drawing.Point(388, 48)
+        Me.PictureBox2.Name = "PictureBox2"
+        Me.PictureBox2.Size = New System.Drawing.Size(27, 33)
+        Me.PictureBox2.TabIndex = 31
+        Me.PictureBox2.TabStop = False
+        '
+        'btnCancelMaterial
+        '
+        Me.btnCancelMaterial.FlatAppearance.BorderSize = 0
+        Me.btnCancelMaterial.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(41, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(185, Byte), Integer))
+        Me.btnCancelMaterial.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnCancelMaterial.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.btnCancelMaterial.Image = Global.AVT_TRAKING.My.Resources.Resources.cancel
+        Me.btnCancelMaterial.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnCancelMaterial.Location = New System.Drawing.Point(143, 255)
+        Me.btnCancelMaterial.Margin = New System.Windows.Forms.Padding(2)
+        Me.btnCancelMaterial.Name = "btnCancelMaterial"
+        Me.btnCancelMaterial.Size = New System.Drawing.Size(93, 35)
+        Me.btnCancelMaterial.TabIndex = 9
+        Me.btnCancelMaterial.Text = "Cancel"
+        Me.btnCancelMaterial.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.btnCancelMaterial.UseVisualStyleBackColor = True
+        '
+        'btnUpdateMaterial
+        '
+        Me.btnUpdateMaterial.FlatAppearance.BorderSize = 0
+        Me.btnUpdateMaterial.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(41, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(185, Byte), Integer))
+        Me.btnUpdateMaterial.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnUpdateMaterial.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.btnUpdateMaterial.Image = Global.AVT_TRAKING.My.Resources.Resources.update
+        Me.btnUpdateMaterial.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnUpdateMaterial.Location = New System.Drawing.Point(143, 186)
+        Me.btnUpdateMaterial.Margin = New System.Windows.Forms.Padding(2)
+        Me.btnUpdateMaterial.Name = "btnUpdateMaterial"
+        Me.btnUpdateMaterial.Size = New System.Drawing.Size(93, 35)
+        Me.btnUpdateMaterial.TabIndex = 8
+        Me.btnUpdateMaterial.Text = "Update"
+        Me.btnUpdateMaterial.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.btnUpdateMaterial.UseVisualStyleBackColor = True
+        '
+        'btnSaveMaterial
+        '
+        Me.btnSaveMaterial.FlatAppearance.BorderSize = 0
+        Me.btnSaveMaterial.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(41, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(185, Byte), Integer))
+        Me.btnSaveMaterial.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnSaveMaterial.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.btnSaveMaterial.Image = Global.AVT_TRAKING.My.Resources.Resources.add
+        Me.btnSaveMaterial.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnSaveMaterial.Location = New System.Drawing.Point(36, 186)
+        Me.btnSaveMaterial.Margin = New System.Windows.Forms.Padding(2)
+        Me.btnSaveMaterial.Name = "btnSaveMaterial"
+        Me.btnSaveMaterial.Size = New System.Drawing.Size(85, 35)
+        Me.btnSaveMaterial.TabIndex = 5
+        Me.btnSaveMaterial.Text = "Add"
+        Me.btnSaveMaterial.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.btnSaveMaterial.UseVisualStyleBackColor = True
+        '
+        'PictureBox5
+        '
+        Me.PictureBox5.Image = Global.AVT_TRAKING.My.Resources.Resources.loupe
+        Me.PictureBox5.Location = New System.Drawing.Point(267, 204)
+        Me.PictureBox5.Name = "PictureBox5"
+        Me.PictureBox5.Size = New System.Drawing.Size(25, 29)
+        Me.PictureBox5.TabIndex = 40
+        Me.PictureBox5.TabStop = False
+        '
+        'btnOrderSave
+        '
+        Me.btnOrderSave.Enabled = False
+        Me.btnOrderSave.FlatAppearance.BorderSize = 0
+        Me.btnOrderSave.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(41, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(185, Byte), Integer))
+        Me.btnOrderSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnOrderSave.Image = Global.AVT_TRAKING.My.Resources.Resources.add
+        Me.btnOrderSave.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnOrderSave.Location = New System.Drawing.Point(89, 186)
+        Me.btnOrderSave.Name = "btnOrderSave"
+        Me.btnOrderSave.Size = New System.Drawing.Size(75, 33)
+        Me.btnOrderSave.TabIndex = 13
+        Me.btnOrderSave.Text = "Add"
+        Me.btnOrderSave.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.btnOrderSave.UseVisualStyleBackColor = True
+        '
+        'btnCancelOrder
+        '
+        Me.btnCancelOrder.FlatAppearance.BorderSize = 0
+        Me.btnCancelOrder.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(41, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(185, Byte), Integer))
+        Me.btnCancelOrder.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnCancelOrder.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.btnCancelOrder.Image = Global.AVT_TRAKING.My.Resources.Resources.cancel
+        Me.btnCancelOrder.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnCancelOrder.Location = New System.Drawing.Point(657, 297)
+        Me.btnCancelOrder.Name = "btnCancelOrder"
+        Me.btnCancelOrder.Size = New System.Drawing.Size(84, 41)
+        Me.btnCancelOrder.TabIndex = 16
+        Me.btnCancelOrder.Text = "Cancel"
+        Me.btnCancelOrder.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.btnCancelOrder.UseVisualStyleBackColor = True
+        '
+        'btnUpdateOrder
+        '
+        Me.btnUpdateOrder.FlatAppearance.BorderSize = 0
+        Me.btnUpdateOrder.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(41, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(185, Byte), Integer))
+        Me.btnUpdateOrder.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnUpdateOrder.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.btnUpdateOrder.Image = Global.AVT_TRAKING.My.Resources.Resources.update
+        Me.btnUpdateOrder.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnUpdateOrder.Location = New System.Drawing.Point(657, 245)
+        Me.btnUpdateOrder.Name = "btnUpdateOrder"
+        Me.btnUpdateOrder.Size = New System.Drawing.Size(84, 41)
+        Me.btnUpdateOrder.TabIndex = 15
+        Me.btnUpdateOrder.Text = "Update"
+        Me.btnUpdateOrder.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.btnUpdateOrder.UseVisualStyleBackColor = True
+        '
+        'btnDeleteOrder
+        '
+        Me.btnDeleteOrder.FlatAppearance.BorderSize = 0
+        Me.btnDeleteOrder.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(41, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(185, Byte), Integer))
+        Me.btnDeleteOrder.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnDeleteOrder.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.btnDeleteOrder.Image = Global.AVT_TRAKING.My.Resources.Resources.delete
+        Me.btnDeleteOrder.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnDeleteOrder.Location = New System.Drawing.Point(657, 350)
+        Me.btnDeleteOrder.Name = "btnDeleteOrder"
+        Me.btnDeleteOrder.Size = New System.Drawing.Size(85, 40)
+        Me.btnDeleteOrder.TabIndex = 17
+        Me.btnDeleteOrder.Text = "Delete"
+        Me.btnDeleteOrder.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.btnDeleteOrder.UseVisualStyleBackColor = True
+        '
+        'btnUpdateMareialData
+        '
+        Me.btnUpdateMareialData.FlatAppearance.BorderSize = 0
+        Me.btnUpdateMareialData.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(41, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(185, Byte), Integer))
+        Me.btnUpdateMareialData.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnUpdateMareialData.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.btnUpdateMareialData.Image = Global.AVT_TRAKING.My.Resources.Resources.update
+        Me.btnUpdateMareialData.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnUpdateMareialData.Location = New System.Drawing.Point(14, 153)
+        Me.btnUpdateMareialData.Margin = New System.Windows.Forms.Padding(2)
+        Me.btnUpdateMareialData.Name = "btnUpdateMareialData"
+        Me.btnUpdateMareialData.Size = New System.Drawing.Size(89, 42)
+        Me.btnUpdateMareialData.TabIndex = 8
+        Me.btnUpdateMareialData.Text = "Update"
+        Me.btnUpdateMareialData.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.btnUpdateMareialData.UseVisualStyleBackColor = True
+        '
+        'btnMaterialUploadExcel
+        '
+        Me.btnMaterialUploadExcel.FlatAppearance.BorderSize = 0
+        Me.btnMaterialUploadExcel.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(41, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(185, Byte), Integer))
+        Me.btnMaterialUploadExcel.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnMaterialUploadExcel.Image = CType(resources.GetObject("btnMaterialUploadExcel.Image"), System.Drawing.Image)
+        Me.btnMaterialUploadExcel.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnMaterialUploadExcel.Location = New System.Drawing.Point(239, 38)
+        Me.btnMaterialUploadExcel.Name = "btnMaterialUploadExcel"
+        Me.btnMaterialUploadExcel.Size = New System.Drawing.Size(155, 33)
+        Me.btnMaterialUploadExcel.TabIndex = 1
+        Me.btnMaterialUploadExcel.Text = "Upload Excel"
+        Me.btnMaterialUploadExcel.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.btnMaterialUploadExcel.UseVisualStyleBackColor = True
+        '
+        'btnMaterialDownloadExcel
+        '
+        Me.btnMaterialDownloadExcel.FlatAppearance.BorderSize = 0
+        Me.btnMaterialDownloadExcel.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(41, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(185, Byte), Integer))
+        Me.btnMaterialDownloadExcel.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnMaterialDownloadExcel.Image = CType(resources.GetObject("btnMaterialDownloadExcel.Image"), System.Drawing.Image)
+        Me.btnMaterialDownloadExcel.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnMaterialDownloadExcel.Location = New System.Drawing.Point(25, 38)
+        Me.btnMaterialDownloadExcel.Name = "btnMaterialDownloadExcel"
+        Me.btnMaterialDownloadExcel.Size = New System.Drawing.Size(160, 33)
+        Me.btnMaterialDownloadExcel.TabIndex = 0
+        Me.btnMaterialDownloadExcel.Text = "Download Excel"
+        Me.btnMaterialDownloadExcel.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.btnMaterialDownloadExcel.UseVisualStyleBackColor = True
+        '
         'btnVendorUploadExcel
         '
+        Me.btnVendorUploadExcel.FlatAppearance.BorderSize = 0
+        Me.btnVendorUploadExcel.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(41, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(185, Byte), Integer))
+        Me.btnVendorUploadExcel.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnVendorUploadExcel.Image = CType(resources.GetObject("btnVendorUploadExcel.Image"), System.Drawing.Image)
+        Me.btnVendorUploadExcel.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.btnVendorUploadExcel.Location = New System.Drawing.Point(239, 38)
         Me.btnVendorUploadExcel.Name = "btnVendorUploadExcel"
         Me.btnVendorUploadExcel.Size = New System.Drawing.Size(155, 33)
         Me.btnVendorUploadExcel.TabIndex = 1
         Me.btnVendorUploadExcel.Text = "Upload Excel"
+        Me.btnVendorUploadExcel.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         Me.btnVendorUploadExcel.UseVisualStyleBackColor = True
         '
         'btnVendorDownloadExcel
         '
-        Me.btnVendorDownloadExcel.Location = New System.Drawing.Point(35, 38)
+        Me.btnVendorDownloadExcel.FlatAppearance.BorderSize = 0
+        Me.btnVendorDownloadExcel.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(41, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(185, Byte), Integer))
+        Me.btnVendorDownloadExcel.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnVendorDownloadExcel.Image = CType(resources.GetObject("btnVendorDownloadExcel.Image"), System.Drawing.Image)
+        Me.btnVendorDownloadExcel.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnVendorDownloadExcel.Location = New System.Drawing.Point(25, 38)
         Me.btnVendorDownloadExcel.Name = "btnVendorDownloadExcel"
-        Me.btnVendorDownloadExcel.Size = New System.Drawing.Size(150, 33)
+        Me.btnVendorDownloadExcel.Size = New System.Drawing.Size(160, 33)
         Me.btnVendorDownloadExcel.TabIndex = 0
         Me.btnVendorDownloadExcel.Text = "Download Excel"
+        Me.btnVendorDownloadExcel.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         Me.btnVendorDownloadExcel.UseVisualStyleBackColor = True
         '
         'Materials
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(783, 468)
+        Me.ClientSize = New System.Drawing.Size(783, 508)
+        Me.Controls.Add(Me.TitleBar)
         Me.Controls.Add(Me.Button5)
         Me.Controls.Add(Me.TabControl1)
         Me.Controls.Add(Me.btnMenu)
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
         Me.Margin = New System.Windows.Forms.Padding(2)
         Me.Name = "Materials"
         Me.Text = "Materials"
@@ -955,6 +1161,13 @@ Partial Class Materials
         Me.TabPage4.PerformLayout()
         Me.GroupBox3.ResumeLayout(False)
         Me.GroupBox2.ResumeLayout(False)
+        Me.TitleBar.ResumeLayout(False)
+        Me.TitleBar.PerformLayout()
+        CType(Me.PictureBox4, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.PictureBox3, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.PictureBox5, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -1033,4 +1246,11 @@ Partial Class Materials
     Friend WithEvents TextBox1 As TextBox
     Public WithEvents txtPartNum As TextBox
     Friend WithEvents Label21 As Label
+    Friend WithEvents PictureBox1 As PictureBox
+    Friend WithEvents PictureBox2 As PictureBox
+    Friend WithEvents TitleBar As Panel
+    Friend WithEvents PictureBox4 As PictureBox
+    Friend WithEvents PictureBox3 As PictureBox
+    Friend WithEvents Label22 As Label
+    Friend WithEvents PictureBox5 As PictureBox
 End Class

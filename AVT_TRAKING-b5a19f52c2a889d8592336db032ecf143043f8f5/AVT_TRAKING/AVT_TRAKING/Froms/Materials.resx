@@ -128,4 +128,57 @@
 8.The bottom part shows the progress and errors.
 </value>
   </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="btnMaterialUploadExcel.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAAIGNIUk0AAHolAACAgwAA+f8AAIDpAAB1
+        MAAA6mAAADqYAAAXb5JfxUYAAAAJcEhZcwAADwoAAA8KAUwF6pwAAAFySURBVEhL7dZNK0RhGMbxkSVJ
+        SpKvYO8DKCXFd5C1rZ1PYGPnM7C1IWxIFNlYYGPlpWTjpRQ5/tdjnjpzu2fO45wZNnPVr+5zzTPdzHst
+        y7J/4ZaJDnBiumRumWAbMYfwzrTklgV2YHOEHnjnXW7Zwi6ULVzgGpsqiP7z5OVu2UR8eLVU1+e4r8/r
+        UJKXu6UxhD0o+4j9swoSr+MfdowRxN7llsYsFD2P+f4RH6aLy+eR739wS6MfWt6b68RbLHPQo2T7Bm6Z
+        qNniJG6ZqLv4V9wyUeXFC5jJl4nKLh7HlAblBfZAkbKLLxEGRZ+59kCRsov1GR8G5Qr2QJGyi88QBqW7
+        OIX9dkpVeXGMd1srDYv1SrMHikxi2nQpThEGRe8te6BT9Ms0DMob7IFOeUIY1jSQZdhD7bYIZUMXg3gP
+        l9/LB2DvUFUflhAzGm+YwKuaeu5w0ya3iPmEXpQNX4vDWIF+srY7D1jFGMK+/OI/lNW+ALBdIhPbaiIj
+        AAAAAElFTkSuQmCC
+</value>
+  </data>
+  <data name="btnMaterialDownloadExcel.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAAIGNIUk0AAHolAACAgwAA+f8AAIDpAAB1
+        MAAA6mAAADqYAAAXb5JfxUYAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAGhSURBVEhL7dO/LixhHMZxComI
+        CCGCRDSS04nCHei4AYW4A39KxTnJ6U7kdCdRaFDR0UgUrgEVkdCgOgnhAsT4PjJv8r47z45ZYTSe5JPd
+        93ln57czu9OWZdmXsGUdbFkHW9bBlhX9wp+GrjJbVtCOkG64Y0rZsgINfobSC3dMKVtWoMFPUHrgjill
+        ywq+B7tjStmygloG63FZxGjUNRvcj2X0RZ1lywbzUB4wBHXx4PA46QvcqiAaHp+jwJYNBnAC5Q7hCkP0
+        vgPXr6ssu8AI4nMU2LKJUyg3GM5fHzGIMyhX0Jdwn0/Ysgnd3jD8Hv+h26+7oFyiC+6zBa6cxjp+RF2g
+        4eG2xzmHGzoGnWsm6l4li9wBlDW4/fjKFV1pJ9yxq1AOkewli9wWlN9w+6Lhx9BvW3Z7V6BsI9lLFrlN
+        KD/h9luh51/RxSR7ySK3C+XNZ7GCBSg7SPaSRe4flCO4/VbsQdlAspcscuMI0R9Nv9NSi3S39hEyiWRO
+        sojM4qMyh8KMQhGZgB4p/THe4y+m4M5dOvhT2bIOtqyDLT9f1vYCjpH8soNgGp0AAAAASUVORK5CYII=
+</value>
+  </data>
+  <data name="btnVendorUploadExcel.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAAIGNIUk0AAHolAACAgwAA+f8AAIDpAAB1
+        MAAA6mAAADqYAAAXb5JfxUYAAAAJcEhZcwAADwoAAA8KAUwF6pwAAAFySURBVEhL7dZNK0RhGMbxkSVJ
+        SpKvYO8DKCXFd5C1rZ1PYGPnM7C1IWxIFNlYYGPlpWTjpRQ5/tdjnjpzu2fO45wZNnPVr+5zzTPdzHst
+        y7J/4ZaJDnBiumRumWAbMYfwzrTklgV2YHOEHnjnXW7Zwi6ULVzgGpsqiP7z5OVu2UR8eLVU1+e4r8/r
+        UJKXu6UxhD0o+4j9swoSr+MfdowRxN7llsYsFD2P+f4RH6aLy+eR739wS6MfWt6b68RbLHPQo2T7Bm6Z
+        qNniJG6ZqLv4V9wyUeXFC5jJl4nKLh7HlAblBfZAkbKLLxEGRZ+59kCRsov1GR8G5Qr2QJGyi88QBqW7
+        OIX9dkpVeXGMd1srDYv1SrMHikxi2nQpThEGRe8te6BT9Ms0DMob7IFOeUIY1jSQZdhD7bYIZUMXg3gP
+        l9/LB2DvUFUflhAzGm+YwKuaeu5w0ya3iPmEXpQNX4vDWIF+srY7D1jFGMK+/OI/lNW+ALBdIhPbaiIj
+        AAAAAElFTkSuQmCC
+</value>
+  </data>
+  <data name="btnVendorDownloadExcel.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAAIGNIUk0AAHolAACAgwAA+f8AAIDpAAB1
+        MAAA6mAAADqYAAAXb5JfxUYAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAGhSURBVEhL7dO/LixhHMZxComI
+        CCGCRDSS04nCHei4AYW4A39KxTnJ6U7kdCdRaFDR0UgUrgEVkdCgOgnhAsT4PjJv8r47z45ZYTSe5JPd
+        93ln57czu9OWZdmXsGUdbFkHW9bBlhX9wp+GrjJbVtCOkG64Y0rZsgINfobSC3dMKVtWoMFPUHrgjill
+        ywq+B7tjStmygloG63FZxGjUNRvcj2X0RZ1lywbzUB4wBHXx4PA46QvcqiAaHp+jwJYNBnAC5Q7hCkP0
+        vgPXr6ssu8AI4nMU2LKJUyg3GM5fHzGIMyhX0Jdwn0/Ysgnd3jD8Hv+h26+7oFyiC+6zBa6cxjp+RF2g
+        4eG2xzmHGzoGnWsm6l4li9wBlDW4/fjKFV1pJ9yxq1AOkewli9wWlN9w+6Lhx9BvW3Z7V6BsI9lLFrlN
+        KD/h9luh51/RxSR7ySK3C+XNZ7GCBSg7SPaSRe4flCO4/VbsQdlAspcscuMI0R9Nv9NSi3S39hEyiWRO
+        sojM4qMyh8KMQhGZgB4p/THe4y+m4M5dOvhT2bIOtqyDLT9f1vYCjpH8soNgGp0AAAAASUVORK5CYII=
+</value>
+  </data>
 </root>

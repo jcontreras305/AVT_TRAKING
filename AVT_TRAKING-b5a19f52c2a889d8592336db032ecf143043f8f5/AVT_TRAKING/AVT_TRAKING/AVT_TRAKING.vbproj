@@ -384,12 +384,19 @@
   <ItemGroup>
     <Content Include="Documents\Creacion de DB y de la tabla de Usuarios.sql" />
     <Content Include="Documents\IsaacSP.sql" />
+    <None Include="Images\users.png" />
     <None Include="Images\userlogin.png" />
     <None Include="Images\close.png" />
     <None Include="Images\employee.png" />
     <None Include="Images\crm.png" />
     <None Include="Images\code.png" />
     <None Include="Images\exit.png" />
+    <None Include="Images\close2.png" />
+    <None Include="Images\cancel.png" />
+    <None Include="Images\click.png" />
+    <None Include="Images\add.png" />
+    <None Include="Images\delete.png" />
+    <None Include="Images\download.png" />
     <Content Include="Images\eye.png" />
     <None Include="Images\minimize.png" />
     <None Include="Images\show.png" />
@@ -397,6 +404,19 @@
     <None Include="Images\restore.png" />
     <None Include="Images\materials.png" />
     <None Include="Images\options.png" />
+    <None Include="Images\minimize2.png" />
+    <None Include="Images\restore2.png" />
+    <None Include="Images\maximize2.png" />
+    <None Include="Images\update.png" />
+    <None Include="Images\fondo.png" />
+    <None Include="Images\tracking.png" />
+    <None Include="Images\lock.png" />
+    <None Include="Images\loupe.png" />
+    <None Include="Images\upload.png" />
+    <None Include="Images\ok.png" />
+    <None Include="Images\project.png" />
+    <None Include="Images\time.png" />
+    <None Include="Images\setup.png" />
     <Content Include="Images\user.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
