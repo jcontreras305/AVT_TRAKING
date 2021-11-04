@@ -22,7 +22,13 @@ Partial Class Others
     'No lo modifique con el editor de código.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim btnDeleteTypeEmployee As System.Windows.Forms.Button
         Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.Button1 = New System.Windows.Forms.Button()
+        Me.TitleBar = New System.Windows.Forms.Panel()
+        Me.PictureBox2 = New System.Windows.Forms.PictureBox()
+        Me.PictureBox1 = New System.Windows.Forms.PictureBox()
+        Me.Label7 = New System.Windows.Forms.Label()
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.TabPage1 = New System.Windows.Forms.TabPage()
         Me.GroupBox5 = New System.Windows.Forms.GroupBox()
@@ -57,7 +63,6 @@ Partial Class Others
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.btnAdd = New System.Windows.Forms.Button()
         Me.txtTypeEmployee = New System.Windows.Forms.TextBox()
-        Me.btnDeleteTypeEmployee = New System.Windows.Forms.Button()
         Me.btnUpdateTypeEmploye = New System.Windows.Forms.Button()
         Me.lstTypeEmployee = New System.Windows.Forms.ListBox()
         Me.TabPage2 = New System.Windows.Forms.TabPage()
@@ -111,7 +116,11 @@ Partial Class Others
         Me.btnFindImage = New System.Windows.Forms.Button()
         Me.Label6 = New System.Windows.Forms.Label()
         Me.txtPathFile = New System.Windows.Forms.TextBox()
+        btnDeleteTypeEmployee = New System.Windows.Forms.Button()
         Me.Panel1.SuspendLayout()
+        Me.TitleBar.SuspendLayout()
+        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
         Me.GroupBox5.SuspendLayout()
@@ -145,49 +154,127 @@ Partial Class Others
         Me.Panel11.SuspendLayout()
         Me.SuspendLayout()
         '
+        'btnDeleteTypeEmployee
+        '
+        btnDeleteTypeEmployee.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        btnDeleteTypeEmployee.FlatAppearance.BorderSize = 0
+        btnDeleteTypeEmployee.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(41, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(185, Byte), Integer))
+        btnDeleteTypeEmployee.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        btnDeleteTypeEmployee.Image = Global.AVT_TRAKING.My.Resources.Resources.delete
+        btnDeleteTypeEmployee.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        btnDeleteTypeEmployee.Location = New System.Drawing.Point(191, 143)
+        btnDeleteTypeEmployee.Name = "btnDeleteTypeEmployee"
+        btnDeleteTypeEmployee.Size = New System.Drawing.Size(97, 33)
+        btnDeleteTypeEmployee.TabIndex = 2
+        btnDeleteTypeEmployee.Text = "Delete"
+        btnDeleteTypeEmployee.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        btnDeleteTypeEmployee.UseVisualStyleBackColor = True
+        AddHandler btnDeleteTypeEmployee.Click, AddressOf Me.btnDeleteTypeEmployee_Click
+        '
         'Panel1
         '
+        Me.Panel1.Controls.Add(Me.Button1)
+        Me.Panel1.Controls.Add(Me.TitleBar)
         Me.Panel1.Controls.Add(Me.TabControl1)
         Me.Panel1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel1.Location = New System.Drawing.Point(0, 0)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(964, 472)
+        Me.Panel1.Size = New System.Drawing.Size(964, 519)
         Me.Panel1.TabIndex = 0
+        '
+        'Button1
+        '
+        Me.Button1.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.Button1.Image = Global.AVT_TRAKING.My.Resources.Resources._exit
+        Me.Button1.Location = New System.Drawing.Point(924, 33)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(37, 45)
+        Me.Button1.TabIndex = 2
+        Me.Button1.UseVisualStyleBackColor = True
+        '
+        'TitleBar
+        '
+        Me.TitleBar.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.TitleBar.BackColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(59, Byte), Integer), CType(CType(104, Byte), Integer))
+        Me.TitleBar.Controls.Add(Me.PictureBox2)
+        Me.TitleBar.Controls.Add(Me.PictureBox1)
+        Me.TitleBar.Controls.Add(Me.Label7)
+        Me.TitleBar.Location = New System.Drawing.Point(0, 0)
+        Me.TitleBar.Name = "TitleBar"
+        Me.TitleBar.Size = New System.Drawing.Size(964, 31)
+        Me.TitleBar.TabIndex = 1
+        '
+        'PictureBox2
+        '
+        Me.PictureBox2.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.PictureBox2.Image = Global.AVT_TRAKING.My.Resources.Resources.minimize2
+        Me.PictureBox2.Location = New System.Drawing.Point(907, 4)
+        Me.PictureBox2.Name = "PictureBox2"
+        Me.PictureBox2.Size = New System.Drawing.Size(23, 27)
+        Me.PictureBox2.TabIndex = 2
+        Me.PictureBox2.TabStop = False
+        '
+        'PictureBox1
+        '
+        Me.PictureBox1.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.PictureBox1.Image = Global.AVT_TRAKING.My.Resources.Resources.maximize2
+        Me.PictureBox1.Location = New System.Drawing.Point(936, 4)
+        Me.PictureBox1.Name = "PictureBox1"
+        Me.PictureBox1.Size = New System.Drawing.Size(28, 27)
+        Me.PictureBox1.TabIndex = 1
+        Me.PictureBox1.TabStop = False
+        '
+        'Label7
+        '
+        Me.Label7.AutoSize = True
+        Me.Label7.Font = New System.Drawing.Font("Verdana", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label7.Location = New System.Drawing.Point(4, 4)
+        Me.Label7.Name = "Label7"
+        Me.Label7.Size = New System.Drawing.Size(68, 18)
+        Me.Label7.TabIndex = 0
+        Me.Label7.Text = "Others"
         '
         'TabControl1
         '
         Me.TabControl1.Controls.Add(Me.TabPage1)
         Me.TabControl1.Controls.Add(Me.TabPage2)
         Me.TabControl1.Controls.Add(Me.TabPage3)
-        Me.TabControl1.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.TabControl1.Location = New System.Drawing.Point(0, 0)
+        Me.TabControl1.Font = New System.Drawing.Font("Verdana", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TabControl1.Location = New System.Drawing.Point(0, 62)
         Me.TabControl1.Name = "TabControl1"
         Me.TabControl1.SelectedIndex = 0
-        Me.TabControl1.Size = New System.Drawing.Size(964, 472)
+        Me.TabControl1.Size = New System.Drawing.Size(964, 457)
         Me.TabControl1.TabIndex = 0
         '
         'TabPage1
         '
+        Me.TabPage1.BackColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(59, Byte), Integer), CType(CType(104, Byte), Integer))
         Me.TabPage1.Controls.Add(Me.GroupBox5)
         Me.TabPage1.Controls.Add(Me.GroupBox4)
         Me.TabPage1.Controls.Add(Me.GroupBox3)
         Me.TabPage1.Controls.Add(Me.GroupBox2)
         Me.TabPage1.Controls.Add(Me.GroupBox1)
-        Me.TabPage1.Location = New System.Drawing.Point(4, 22)
+        Me.TabPage1.Font = New System.Drawing.Font("Verdana", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TabPage1.ForeColor = System.Drawing.SystemColors.ControlText
+        Me.TabPage1.Location = New System.Drawing.Point(4, 27)
         Me.TabPage1.Name = "TabPage1"
         Me.TabPage1.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage1.Size = New System.Drawing.Size(956, 446)
+        Me.TabPage1.Size = New System.Drawing.Size(956, 426)
         Me.TabPage1.TabIndex = 0
         Me.TabPage1.Text = "Proyect Items"
-        Me.TabPage1.UseVisualStyleBackColor = True
         '
         'GroupBox5
         '
+        Me.GroupBox5.BackColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(59, Byte), Integer), CType(CType(115, Byte), Integer))
         Me.GroupBox5.Controls.Add(Me.btnAddCostCode)
         Me.GroupBox5.Controls.Add(Me.txtCostCode)
         Me.GroupBox5.Controls.Add(Me.lstCostCode)
         Me.GroupBox5.Controls.Add(Me.btnDeleteCostCode)
         Me.GroupBox5.Controls.Add(Me.btnUpdateCostCode)
+        Me.GroupBox5.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.GroupBox5.Location = New System.Drawing.Point(640, 28)
         Me.GroupBox5.Name = "GroupBox5"
         Me.GroupBox5.Size = New System.Drawing.Size(298, 181)
@@ -197,20 +284,26 @@ Partial Class Others
         '
         'btnAddCostCode
         '
-        Me.btnAddCostCode.Location = New System.Drawing.Point(194, 35)
+        Me.btnAddCostCode.FlatAppearance.BorderSize = 0
+        Me.btnAddCostCode.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(41, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(185, Byte), Integer))
+        Me.btnAddCostCode.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnAddCostCode.Image = Global.AVT_TRAKING.My.Resources.Resources.add
+        Me.btnAddCostCode.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnAddCostCode.Location = New System.Drawing.Point(194, 42)
         Me.btnAddCostCode.Name = "btnAddCostCode"
-        Me.btnAddCostCode.Size = New System.Drawing.Size(75, 23)
+        Me.btnAddCostCode.Size = New System.Drawing.Size(75, 34)
         Me.btnAddCostCode.TabIndex = 14
         Me.btnAddCostCode.Text = "Add"
+        Me.btnAddCostCode.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         Me.btnAddCostCode.UseVisualStyleBackColor = True
         '
         'txtCostCode
         '
         Me.txtCostCode.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.txtCostCode.Location = New System.Drawing.Point(194, 8)
+        Me.txtCostCode.Location = New System.Drawing.Point(192, 18)
         Me.txtCostCode.Name = "txtCostCode"
-        Me.txtCostCode.Size = New System.Drawing.Size(100, 20)
+        Me.txtCostCode.Size = New System.Drawing.Size(100, 23)
         Me.txtCostCode.TabIndex = 13
         '
         'lstCostCode
@@ -219,10 +312,10 @@ Partial Class Others
         Me.lstCostCode.Dock = System.Windows.Forms.DockStyle.Left
         Me.lstCostCode.FullRowSelect = True
         Me.lstCostCode.HideSelection = False
-        Me.lstCostCode.Location = New System.Drawing.Point(3, 16)
+        Me.lstCostCode.Location = New System.Drawing.Point(3, 19)
         Me.lstCostCode.MultiSelect = False
         Me.lstCostCode.Name = "lstCostCode"
-        Me.lstCostCode.Size = New System.Drawing.Size(179, 162)
+        Me.lstCostCode.Size = New System.Drawing.Size(179, 159)
         Me.lstCostCode.TabIndex = 12
         Me.lstCostCode.UseCompatibleStateImageBehavior = False
         Me.lstCostCode.View = System.Windows.Forms.View.Details
@@ -236,31 +329,45 @@ Partial Class Others
         '
         Me.btnDeleteCostCode.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnDeleteCostCode.Location = New System.Drawing.Point(191, 152)
+        Me.btnDeleteCostCode.FlatAppearance.BorderSize = 0
+        Me.btnDeleteCostCode.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(41, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(185, Byte), Integer))
+        Me.btnDeleteCostCode.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnDeleteCostCode.Image = Global.AVT_TRAKING.My.Resources.Resources.delete
+        Me.btnDeleteCostCode.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnDeleteCostCode.Location = New System.Drawing.Point(191, 142)
         Me.btnDeleteCostCode.Name = "btnDeleteCostCode"
-        Me.btnDeleteCostCode.Size = New System.Drawing.Size(75, 23)
+        Me.btnDeleteCostCode.Size = New System.Drawing.Size(101, 33)
         Me.btnDeleteCostCode.TabIndex = 2
         Me.btnDeleteCostCode.Text = "Delete"
+        Me.btnDeleteCostCode.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         Me.btnDeleteCostCode.UseVisualStyleBackColor = True
         '
         'btnUpdateCostCode
         '
         Me.btnUpdateCostCode.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnUpdateCostCode.Location = New System.Drawing.Point(191, 123)
+        Me.btnUpdateCostCode.FlatAppearance.BorderSize = 0
+        Me.btnUpdateCostCode.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(41, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(185, Byte), Integer))
+        Me.btnUpdateCostCode.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnUpdateCostCode.Image = Global.AVT_TRAKING.My.Resources.Resources.update
+        Me.btnUpdateCostCode.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnUpdateCostCode.Location = New System.Drawing.Point(191, 104)
         Me.btnUpdateCostCode.Name = "btnUpdateCostCode"
-        Me.btnUpdateCostCode.Size = New System.Drawing.Size(75, 23)
+        Me.btnUpdateCostCode.Size = New System.Drawing.Size(101, 32)
         Me.btnUpdateCostCode.TabIndex = 1
         Me.btnUpdateCostCode.Text = "Update"
+        Me.btnUpdateCostCode.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         Me.btnUpdateCostCode.UseVisualStyleBackColor = True
         '
         'GroupBox4
         '
+        Me.GroupBox4.BackColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(59, Byte), Integer), CType(CType(115, Byte), Integer))
         Me.GroupBox4.Controls.Add(Me.btnAddCostDristribution)
         Me.GroupBox4.Controls.Add(Me.txtCostDistribution)
         Me.GroupBox4.Controls.Add(Me.lstCostDistribution)
         Me.GroupBox4.Controls.Add(Me.btnDeleteCostDistribution)
         Me.GroupBox4.Controls.Add(Me.btnUpdateCostDristribution)
+        Me.GroupBox4.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.GroupBox4.Location = New System.Drawing.Point(331, 225)
         Me.GroupBox4.Name = "GroupBox4"
         Me.GroupBox4.Size = New System.Drawing.Size(298, 206)
@@ -270,20 +377,26 @@ Partial Class Others
         '
         'btnAddCostDristribution
         '
-        Me.btnAddCostDristribution.Location = New System.Drawing.Point(192, 40)
+        Me.btnAddCostDristribution.FlatAppearance.BorderSize = 0
+        Me.btnAddCostDristribution.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(41, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(185, Byte), Integer))
+        Me.btnAddCostDristribution.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnAddCostDristribution.Image = Global.AVT_TRAKING.My.Resources.Resources.add
+        Me.btnAddCostDristribution.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnAddCostDristribution.Location = New System.Drawing.Point(192, 46)
         Me.btnAddCostDristribution.Name = "btnAddCostDristribution"
-        Me.btnAddCostDristribution.Size = New System.Drawing.Size(75, 23)
+        Me.btnAddCostDristribution.Size = New System.Drawing.Size(75, 31)
         Me.btnAddCostDristribution.TabIndex = 11
         Me.btnAddCostDristribution.Text = "Add"
+        Me.btnAddCostDristribution.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         Me.btnAddCostDristribution.UseVisualStyleBackColor = True
         '
         'txtCostDistribution
         '
         Me.txtCostDistribution.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.txtCostDistribution.Location = New System.Drawing.Point(192, 13)
+        Me.txtCostDistribution.Location = New System.Drawing.Point(191, 19)
         Me.txtCostDistribution.Name = "txtCostDistribution"
-        Me.txtCostDistribution.Size = New System.Drawing.Size(100, 20)
+        Me.txtCostDistribution.Size = New System.Drawing.Size(100, 23)
         Me.txtCostDistribution.TabIndex = 10
         '
         'lstCostDistribution
@@ -292,10 +405,10 @@ Partial Class Others
         Me.lstCostDistribution.Dock = System.Windows.Forms.DockStyle.Left
         Me.lstCostDistribution.FullRowSelect = True
         Me.lstCostDistribution.HideSelection = False
-        Me.lstCostDistribution.Location = New System.Drawing.Point(3, 16)
+        Me.lstCostDistribution.Location = New System.Drawing.Point(3, 19)
         Me.lstCostDistribution.MultiSelect = False
         Me.lstCostDistribution.Name = "lstCostDistribution"
-        Me.lstCostDistribution.Size = New System.Drawing.Size(179, 187)
+        Me.lstCostDistribution.Size = New System.Drawing.Size(179, 184)
         Me.lstCostDistribution.TabIndex = 9
         Me.lstCostDistribution.UseCompatibleStateImageBehavior = False
         Me.lstCostDistribution.View = System.Windows.Forms.View.Details
@@ -309,31 +422,45 @@ Partial Class Others
         '
         Me.btnDeleteCostDistribution.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnDeleteCostDistribution.Location = New System.Drawing.Point(191, 177)
+        Me.btnDeleteCostDistribution.FlatAppearance.BorderSize = 0
+        Me.btnDeleteCostDistribution.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(41, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(185, Byte), Integer))
+        Me.btnDeleteCostDistribution.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnDeleteCostDistribution.Image = Global.AVT_TRAKING.My.Resources.Resources.delete
+        Me.btnDeleteCostDistribution.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnDeleteCostDistribution.Location = New System.Drawing.Point(191, 166)
         Me.btnDeleteCostDistribution.Name = "btnDeleteCostDistribution"
-        Me.btnDeleteCostDistribution.Size = New System.Drawing.Size(75, 23)
+        Me.btnDeleteCostDistribution.Size = New System.Drawing.Size(100, 34)
         Me.btnDeleteCostDistribution.TabIndex = 2
         Me.btnDeleteCostDistribution.Text = "Delete"
+        Me.btnDeleteCostDistribution.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         Me.btnDeleteCostDistribution.UseVisualStyleBackColor = True
         '
         'btnUpdateCostDristribution
         '
         Me.btnUpdateCostDristribution.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnUpdateCostDristribution.Location = New System.Drawing.Point(191, 148)
+        Me.btnUpdateCostDristribution.FlatAppearance.BorderSize = 0
+        Me.btnUpdateCostDristribution.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(41, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(185, Byte), Integer))
+        Me.btnUpdateCostDristribution.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnUpdateCostDristribution.Image = Global.AVT_TRAKING.My.Resources.Resources.update
+        Me.btnUpdateCostDristribution.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnUpdateCostDristribution.Location = New System.Drawing.Point(191, 127)
         Me.btnUpdateCostDristribution.Name = "btnUpdateCostDristribution"
-        Me.btnUpdateCostDristribution.Size = New System.Drawing.Size(75, 23)
+        Me.btnUpdateCostDristribution.Size = New System.Drawing.Size(100, 33)
         Me.btnUpdateCostDristribution.TabIndex = 1
         Me.btnUpdateCostDristribution.Text = "Update"
+        Me.btnUpdateCostDristribution.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         Me.btnUpdateCostDristribution.UseVisualStyleBackColor = True
         '
         'GroupBox3
         '
+        Me.GroupBox3.BackColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(59, Byte), Integer), CType(CType(115, Byte), Integer))
         Me.GroupBox3.Controls.Add(Me.btnAddWTMLS)
         Me.GroupBox3.Controls.Add(Me.txtWTMLS)
         Me.GroupBox3.Controls.Add(Me.lstWTMLS)
         Me.GroupBox3.Controls.Add(Me.btnDeleteWTMLS)
         Me.GroupBox3.Controls.Add(Me.btnUpdateWTMLS)
+        Me.GroupBox3.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.GroupBox3.Location = New System.Drawing.Point(25, 225)
         Me.GroupBox3.Name = "GroupBox3"
         Me.GroupBox3.Size = New System.Drawing.Size(298, 206)
@@ -343,11 +470,17 @@ Partial Class Others
         '
         'btnAddWTMLS
         '
+        Me.btnAddWTMLS.FlatAppearance.BorderSize = 0
+        Me.btnAddWTMLS.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(41, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(185, Byte), Integer))
+        Me.btnAddWTMLS.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnAddWTMLS.Image = Global.AVT_TRAKING.My.Resources.Resources.add
+        Me.btnAddWTMLS.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.btnAddWTMLS.Location = New System.Drawing.Point(188, 46)
         Me.btnAddWTMLS.Name = "btnAddWTMLS"
-        Me.btnAddWTMLS.Size = New System.Drawing.Size(75, 23)
+        Me.btnAddWTMLS.Size = New System.Drawing.Size(75, 31)
         Me.btnAddWTMLS.TabIndex = 8
         Me.btnAddWTMLS.Text = "Add"
+        Me.btnAddWTMLS.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         Me.btnAddWTMLS.UseVisualStyleBackColor = True
         '
         'txtWTMLS
@@ -356,7 +489,7 @@ Partial Class Others
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.txtWTMLS.Location = New System.Drawing.Point(188, 19)
         Me.txtWTMLS.Name = "txtWTMLS"
-        Me.txtWTMLS.Size = New System.Drawing.Size(100, 20)
+        Me.txtWTMLS.Size = New System.Drawing.Size(100, 23)
         Me.txtWTMLS.TabIndex = 7
         '
         'lstWTMLS
@@ -365,10 +498,10 @@ Partial Class Others
         Me.lstWTMLS.Dock = System.Windows.Forms.DockStyle.Left
         Me.lstWTMLS.FullRowSelect = True
         Me.lstWTMLS.HideSelection = False
-        Me.lstWTMLS.Location = New System.Drawing.Point(3, 16)
+        Me.lstWTMLS.Location = New System.Drawing.Point(3, 19)
         Me.lstWTMLS.MultiSelect = False
         Me.lstWTMLS.Name = "lstWTMLS"
-        Me.lstWTMLS.Size = New System.Drawing.Size(179, 187)
+        Me.lstWTMLS.Size = New System.Drawing.Size(179, 184)
         Me.lstWTMLS.TabIndex = 4
         Me.lstWTMLS.UseCompatibleStateImageBehavior = False
         Me.lstWTMLS.View = System.Windows.Forms.View.Details
@@ -382,31 +515,45 @@ Partial Class Others
         '
         Me.btnDeleteWTMLS.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnDeleteWTMLS.Location = New System.Drawing.Point(191, 177)
+        Me.btnDeleteWTMLS.FlatAppearance.BorderSize = 0
+        Me.btnDeleteWTMLS.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(41, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(185, Byte), Integer))
+        Me.btnDeleteWTMLS.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnDeleteWTMLS.Image = Global.AVT_TRAKING.My.Resources.Resources.delete
+        Me.btnDeleteWTMLS.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnDeleteWTMLS.Location = New System.Drawing.Point(191, 166)
         Me.btnDeleteWTMLS.Name = "btnDeleteWTMLS"
-        Me.btnDeleteWTMLS.Size = New System.Drawing.Size(75, 23)
+        Me.btnDeleteWTMLS.Size = New System.Drawing.Size(97, 34)
         Me.btnDeleteWTMLS.TabIndex = 2
         Me.btnDeleteWTMLS.Text = "Delete"
+        Me.btnDeleteWTMLS.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         Me.btnDeleteWTMLS.UseVisualStyleBackColor = True
         '
         'btnUpdateWTMLS
         '
         Me.btnUpdateWTMLS.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnUpdateWTMLS.Location = New System.Drawing.Point(191, 148)
+        Me.btnUpdateWTMLS.FlatAppearance.BorderSize = 0
+        Me.btnUpdateWTMLS.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(41, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(185, Byte), Integer))
+        Me.btnUpdateWTMLS.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnUpdateWTMLS.Image = Global.AVT_TRAKING.My.Resources.Resources.update
+        Me.btnUpdateWTMLS.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnUpdateWTMLS.Location = New System.Drawing.Point(191, 127)
         Me.btnUpdateWTMLS.Name = "btnUpdateWTMLS"
-        Me.btnUpdateWTMLS.Size = New System.Drawing.Size(75, 23)
+        Me.btnUpdateWTMLS.Size = New System.Drawing.Size(97, 33)
         Me.btnUpdateWTMLS.TabIndex = 1
         Me.btnUpdateWTMLS.Text = "Update"
+        Me.btnUpdateWTMLS.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         Me.btnUpdateWTMLS.UseVisualStyleBackColor = True
         '
         'GroupBox2
         '
+        Me.GroupBox2.BackColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(59, Byte), Integer), CType(CType(115, Byte), Integer))
         Me.GroupBox2.Controls.Add(Me.btnAddExpCode)
         Me.GroupBox2.Controls.Add(Me.txtExpCode)
         Me.GroupBox2.Controls.Add(Me.lstExpCode)
         Me.GroupBox2.Controls.Add(Me.btnDeleteExpCode)
         Me.GroupBox2.Controls.Add(Me.btnUpdateExpCode)
+        Me.GroupBox2.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.GroupBox2.Location = New System.Drawing.Point(330, 27)
         Me.GroupBox2.Name = "GroupBox2"
         Me.GroupBox2.Size = New System.Drawing.Size(298, 182)
@@ -416,11 +563,17 @@ Partial Class Others
         '
         'btnAddExpCode
         '
+        Me.btnAddExpCode.FlatAppearance.BorderSize = 0
+        Me.btnAddExpCode.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(41, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(185, Byte), Integer))
+        Me.btnAddExpCode.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnAddExpCode.Image = Global.AVT_TRAKING.My.Resources.Resources.add
+        Me.btnAddExpCode.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.btnAddExpCode.Location = New System.Drawing.Point(192, 43)
         Me.btnAddExpCode.Name = "btnAddExpCode"
-        Me.btnAddExpCode.Size = New System.Drawing.Size(75, 23)
+        Me.btnAddExpCode.Size = New System.Drawing.Size(75, 34)
         Me.btnAddExpCode.TabIndex = 6
         Me.btnAddExpCode.Text = "Add"
+        Me.btnAddExpCode.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         Me.btnAddExpCode.UseVisualStyleBackColor = True
         '
         'txtExpCode
@@ -429,7 +582,7 @@ Partial Class Others
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.txtExpCode.Location = New System.Drawing.Point(192, 16)
         Me.txtExpCode.Name = "txtExpCode"
-        Me.txtExpCode.Size = New System.Drawing.Size(100, 20)
+        Me.txtExpCode.Size = New System.Drawing.Size(100, 23)
         Me.txtExpCode.TabIndex = 5
         '
         'lstExpCode
@@ -462,32 +615,46 @@ Partial Class Others
         '
         Me.btnDeleteExpCode.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnDeleteExpCode.Location = New System.Drawing.Point(191, 153)
+        Me.btnDeleteExpCode.FlatAppearance.BorderSize = 0
+        Me.btnDeleteExpCode.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(41, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(185, Byte), Integer))
+        Me.btnDeleteExpCode.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnDeleteExpCode.Image = Global.AVT_TRAKING.My.Resources.Resources.delete
+        Me.btnDeleteExpCode.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnDeleteExpCode.Location = New System.Drawing.Point(191, 143)
         Me.btnDeleteExpCode.Name = "btnDeleteExpCode"
-        Me.btnDeleteExpCode.Size = New System.Drawing.Size(75, 23)
+        Me.btnDeleteExpCode.Size = New System.Drawing.Size(101, 33)
         Me.btnDeleteExpCode.TabIndex = 2
         Me.btnDeleteExpCode.Text = "Delete"
+        Me.btnDeleteExpCode.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         Me.btnDeleteExpCode.UseVisualStyleBackColor = True
         '
         'btnUpdateExpCode
         '
         Me.btnUpdateExpCode.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnUpdateExpCode.Location = New System.Drawing.Point(191, 124)
+        Me.btnUpdateExpCode.FlatAppearance.BorderSize = 0
+        Me.btnUpdateExpCode.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(41, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(185, Byte), Integer))
+        Me.btnUpdateExpCode.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnUpdateExpCode.Image = Global.AVT_TRAKING.My.Resources.Resources.update
+        Me.btnUpdateExpCode.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnUpdateExpCode.Location = New System.Drawing.Point(191, 105)
         Me.btnUpdateExpCode.Name = "btnUpdateExpCode"
-        Me.btnUpdateExpCode.Size = New System.Drawing.Size(75, 23)
+        Me.btnUpdateExpCode.Size = New System.Drawing.Size(101, 32)
         Me.btnUpdateExpCode.TabIndex = 1
         Me.btnUpdateExpCode.Text = "Update"
+        Me.btnUpdateExpCode.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         Me.btnUpdateExpCode.UseVisualStyleBackColor = True
         '
         'GroupBox1
         '
+        Me.GroupBox1.BackColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(59, Byte), Integer), CType(CType(115, Byte), Integer))
         Me.GroupBox1.Controls.Add(Me.btnAdd)
         Me.GroupBox1.Controls.Add(Me.txtTypeEmployee)
-        Me.GroupBox1.Controls.Add(Me.btnDeleteTypeEmployee)
+        Me.GroupBox1.Controls.Add(btnDeleteTypeEmployee)
         Me.GroupBox1.Controls.Add(Me.btnUpdateTypeEmploye)
         Me.GroupBox1.Controls.Add(Me.lstTypeEmployee)
-        Me.GroupBox1.Location = New System.Drawing.Point(22, 27)
+        Me.GroupBox1.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.GroupBox1.Location = New System.Drawing.Point(25, 27)
         Me.GroupBox1.Name = "GroupBox1"
         Me.GroupBox1.Size = New System.Drawing.Size(298, 182)
         Me.GroupBox1.TabIndex = 0
@@ -499,11 +666,17 @@ Partial Class Others
         Me.btnAdd.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnAdd.FlatAppearance.BorderSize = 0
+        Me.btnAdd.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(41, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(185, Byte), Integer))
+        Me.btnAdd.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnAdd.Image = Global.AVT_TRAKING.My.Resources.Resources.add
+        Me.btnAdd.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.btnAdd.Location = New System.Drawing.Point(191, 43)
         Me.btnAdd.Name = "btnAdd"
-        Me.btnAdd.Size = New System.Drawing.Size(75, 23)
+        Me.btnAdd.Size = New System.Drawing.Size(75, 34)
         Me.btnAdd.TabIndex = 4
         Me.btnAdd.Text = "Add"
+        Me.btnAdd.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         Me.btnAdd.UseVisualStyleBackColor = True
         '
         'txtTypeEmployee
@@ -512,29 +685,24 @@ Partial Class Others
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.txtTypeEmployee.Location = New System.Drawing.Point(191, 16)
         Me.txtTypeEmployee.Name = "txtTypeEmployee"
-        Me.txtTypeEmployee.Size = New System.Drawing.Size(100, 20)
+        Me.txtTypeEmployee.Size = New System.Drawing.Size(100, 23)
         Me.txtTypeEmployee.TabIndex = 3
-        '
-        'btnDeleteTypeEmployee
-        '
-        Me.btnDeleteTypeEmployee.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnDeleteTypeEmployee.Location = New System.Drawing.Point(191, 153)
-        Me.btnDeleteTypeEmployee.Name = "btnDeleteTypeEmployee"
-        Me.btnDeleteTypeEmployee.Size = New System.Drawing.Size(75, 23)
-        Me.btnDeleteTypeEmployee.TabIndex = 2
-        Me.btnDeleteTypeEmployee.Text = "Delete"
-        Me.btnDeleteTypeEmployee.UseVisualStyleBackColor = True
         '
         'btnUpdateTypeEmploye
         '
         Me.btnUpdateTypeEmploye.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnUpdateTypeEmploye.Location = New System.Drawing.Point(191, 124)
+        Me.btnUpdateTypeEmploye.FlatAppearance.BorderSize = 0
+        Me.btnUpdateTypeEmploye.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(41, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(185, Byte), Integer))
+        Me.btnUpdateTypeEmploye.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnUpdateTypeEmploye.Image = Global.AVT_TRAKING.My.Resources.Resources.update
+        Me.btnUpdateTypeEmploye.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnUpdateTypeEmploye.Location = New System.Drawing.Point(191, 105)
         Me.btnUpdateTypeEmploye.Name = "btnUpdateTypeEmploye"
-        Me.btnUpdateTypeEmploye.Size = New System.Drawing.Size(75, 23)
+        Me.btnUpdateTypeEmploye.Size = New System.Drawing.Size(97, 32)
         Me.btnUpdateTypeEmploye.TabIndex = 1
         Me.btnUpdateTypeEmploye.Text = "Update"
+        Me.btnUpdateTypeEmploye.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         Me.btnUpdateTypeEmploye.UseVisualStyleBackColor = True
         '
         'lstTypeEmployee
@@ -544,34 +712,37 @@ Partial Class Others
         Me.lstTypeEmployee.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lstTypeEmployee.FormattingEnabled = True
         Me.lstTypeEmployee.ItemHeight = 16
-        Me.lstTypeEmployee.Location = New System.Drawing.Point(3, 16)
+        Me.lstTypeEmployee.Location = New System.Drawing.Point(3, 19)
         Me.lstTypeEmployee.Name = "lstTypeEmployee"
-        Me.lstTypeEmployee.Size = New System.Drawing.Size(169, 163)
+        Me.lstTypeEmployee.Size = New System.Drawing.Size(169, 160)
         Me.lstTypeEmployee.TabIndex = 0
         '
         'TabPage2
         '
         Me.TabPage2.Controls.Add(Me.TableLayoutPanel1)
-        Me.TabPage2.Location = New System.Drawing.Point(4, 22)
+        Me.TabPage2.Location = New System.Drawing.Point(4, 27)
         Me.TabPage2.Name = "TabPage2"
-        Me.TabPage2.Size = New System.Drawing.Size(956, 446)
+        Me.TabPage2.Size = New System.Drawing.Size(956, 426)
         Me.TabPage2.TabIndex = 1
         Me.TabPage2.Text = "Email Configuration"
         Me.TabPage2.UseVisualStyleBackColor = True
         '
         'TableLayoutPanel1
         '
+        Me.TableLayoutPanel1.BackColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(59, Byte), Integer), CType(CType(115, Byte), Integer))
         Me.TableLayoutPanel1.ColumnCount = 1
         Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
         Me.TableLayoutPanel1.Controls.Add(Me.Panel2, 0, 0)
         Me.TableLayoutPanel1.Controls.Add(Me.TableLayoutPanel3, 0, 1)
         Me.TableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.TableLayoutPanel1.Font = New System.Drawing.Font("Verdana", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TableLayoutPanel1.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.TableLayoutPanel1.Location = New System.Drawing.Point(0, 0)
         Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
         Me.TableLayoutPanel1.RowCount = 2
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20.0!))
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 80.0!))
-        Me.TableLayoutPanel1.Size = New System.Drawing.Size(956, 446)
+        Me.TableLayoutPanel1.Size = New System.Drawing.Size(956, 426)
         Me.TableLayoutPanel1.TabIndex = 0
         '
         'Panel2
@@ -580,16 +751,18 @@ Partial Class Others
         Me.Panel2.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel2.Location = New System.Drawing.Point(3, 3)
         Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(950, 83)
+        Me.Panel2.Size = New System.Drawing.Size(950, 79)
         Me.Panel2.TabIndex = 0
         '
         'GroupBox6
         '
         Me.GroupBox6.Controls.Add(Me.TableLayoutPanel2)
         Me.GroupBox6.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.GroupBox6.Font = New System.Drawing.Font("Verdana", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.GroupBox6.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.GroupBox6.Location = New System.Drawing.Point(0, 0)
         Me.GroupBox6.Name = "GroupBox6"
-        Me.GroupBox6.Size = New System.Drawing.Size(950, 83)
+        Me.GroupBox6.Size = New System.Drawing.Size(950, 79)
         Me.GroupBox6.TabIndex = 1
         Me.GroupBox6.TabStop = False
         Me.GroupBox6.Text = "Own Email"
@@ -604,11 +777,11 @@ Partial Class Others
         Me.TableLayoutPanel2.Controls.Add(Me.Panel5, 1, 0)
         Me.TableLayoutPanel2.Controls.Add(Me.Panel6, 2, 0)
         Me.TableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.TableLayoutPanel2.Location = New System.Drawing.Point(3, 16)
+        Me.TableLayoutPanel2.Location = New System.Drawing.Point(3, 18)
         Me.TableLayoutPanel2.Name = "TableLayoutPanel2"
         Me.TableLayoutPanel2.RowCount = 1
         Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-        Me.TableLayoutPanel2.Size = New System.Drawing.Size(944, 64)
+        Me.TableLayoutPanel2.Size = New System.Drawing.Size(944, 58)
         Me.TableLayoutPanel2.TabIndex = 0
         '
         'Panel4
@@ -616,9 +789,10 @@ Partial Class Others
         Me.Panel4.Controls.Add(Me.Label1)
         Me.Panel4.Controls.Add(Me.txtEmail)
         Me.Panel4.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Panel4.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.Panel4.Location = New System.Drawing.Point(3, 3)
         Me.Panel4.Name = "Panel4"
-        Me.Panel4.Size = New System.Drawing.Size(371, 58)
+        Me.Panel4.Size = New System.Drawing.Size(371, 52)
         Me.Panel4.TabIndex = 0
         '
         'Label1
@@ -626,7 +800,7 @@ Partial Class Others
         Me.Label1.AutoSize = True
         Me.Label1.Location = New System.Drawing.Point(7, 21)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(32, 13)
+        Me.Label1.Size = New System.Drawing.Size(43, 14)
         Me.Label1.TabIndex = 1
         Me.Label1.Text = "Email"
         '
@@ -636,7 +810,7 @@ Partial Class Others
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.txtEmail.Location = New System.Drawing.Point(73, 18)
         Me.txtEmail.Name = "txtEmail"
-        Me.txtEmail.Size = New System.Drawing.Size(275, 20)
+        Me.txtEmail.Size = New System.Drawing.Size(275, 22)
         Me.txtEmail.TabIndex = 0
         '
         'Panel5
@@ -647,25 +821,29 @@ Partial Class Others
         Me.Panel5.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel5.Location = New System.Drawing.Point(380, 3)
         Me.Panel5.Name = "Panel5"
-        Me.Panel5.Size = New System.Drawing.Size(371, 58)
+        Me.Panel5.Size = New System.Drawing.Size(371, 52)
         Me.Panel5.TabIndex = 1
         '
         'btnVerPass
         '
         Me.btnVerPass.Anchor = System.Windows.Forms.AnchorStyles.Right
-        Me.btnVerPass.Location = New System.Drawing.Point(328, 17)
+        Me.btnVerPass.FlatAppearance.BorderSize = 0
+        Me.btnVerPass.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(41, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(185, Byte), Integer))
+        Me.btnVerPass.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnVerPass.Image = Global.AVT_TRAKING.My.Resources.Resources.show
+        Me.btnVerPass.Location = New System.Drawing.Point(307, 15)
         Me.btnVerPass.Name = "btnVerPass"
-        Me.btnVerPass.Size = New System.Drawing.Size(43, 20)
+        Me.btnVerPass.Size = New System.Drawing.Size(47, 24)
         Me.btnVerPass.TabIndex = 3
-        Me.btnVerPass.Text = "Ver"
         Me.btnVerPass.UseVisualStyleBackColor = True
         '
         'label2
         '
         Me.label2.AutoSize = True
-        Me.label2.Location = New System.Drawing.Point(13, 20)
+        Me.label2.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.label2.Location = New System.Drawing.Point(1, 20)
         Me.label2.Name = "label2"
-        Me.label2.Size = New System.Drawing.Size(53, 13)
+        Me.label2.Size = New System.Drawing.Size(72, 14)
         Me.label2.TabIndex = 2
         Me.label2.Text = "Password"
         '
@@ -673,9 +851,9 @@ Partial Class Others
         '
         Me.txtPassword.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.txtPassword.Location = New System.Drawing.Point(68, 17)
+        Me.txtPassword.Location = New System.Drawing.Point(76, 16)
         Me.txtPassword.Name = "txtPassword"
-        Me.txtPassword.Size = New System.Drawing.Size(260, 20)
+        Me.txtPassword.Size = New System.Drawing.Size(225, 22)
         Me.txtPassword.TabIndex = 1
         Me.txtPassword.UseSystemPasswordChar = True
         '
@@ -686,25 +864,41 @@ Partial Class Others
         Me.Panel6.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel6.Location = New System.Drawing.Point(757, 3)
         Me.Panel6.Name = "Panel6"
-        Me.Panel6.Size = New System.Drawing.Size(184, 58)
+        Me.Panel6.Size = New System.Drawing.Size(184, 52)
         Me.Panel6.TabIndex = 2
         '
         'btnDeleteEmail
         '
-        Me.btnDeleteEmail.Location = New System.Drawing.Point(101, 17)
+        Me.btnDeleteEmail.FlatAppearance.BorderSize = 0
+        Me.btnDeleteEmail.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(41, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(185, Byte), Integer))
+        Me.btnDeleteEmail.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnDeleteEmail.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnDeleteEmail.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.btnDeleteEmail.Image = Global.AVT_TRAKING.My.Resources.Resources.delete
+        Me.btnDeleteEmail.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnDeleteEmail.Location = New System.Drawing.Point(94, 17)
         Me.btnDeleteEmail.Name = "btnDeleteEmail"
-        Me.btnDeleteEmail.Size = New System.Drawing.Size(75, 23)
+        Me.btnDeleteEmail.Size = New System.Drawing.Size(82, 23)
         Me.btnDeleteEmail.TabIndex = 1
         Me.btnDeleteEmail.Text = "Delete"
+        Me.btnDeleteEmail.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         Me.btnDeleteEmail.UseVisualStyleBackColor = True
         '
         'btnSaveEmail
         '
+        Me.btnSaveEmail.FlatAppearance.BorderSize = 0
+        Me.btnSaveEmail.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(41, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(185, Byte), Integer))
+        Me.btnSaveEmail.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnSaveEmail.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnSaveEmail.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.btnSaveEmail.Image = Global.AVT_TRAKING.My.Resources.Resources.save
+        Me.btnSaveEmail.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.btnSaveEmail.Location = New System.Drawing.Point(13, 17)
         Me.btnSaveEmail.Name = "btnSaveEmail"
         Me.btnSaveEmail.Size = New System.Drawing.Size(75, 23)
         Me.btnSaveEmail.TabIndex = 0
         Me.btnSaveEmail.Text = "Save"
+        Me.btnSaveEmail.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         Me.btnSaveEmail.UseVisualStyleBackColor = True
         '
         'TableLayoutPanel3
@@ -716,12 +910,12 @@ Partial Class Others
         Me.TableLayoutPanel3.Controls.Add(Me.Panel7, 1, 0)
         Me.TableLayoutPanel3.Controls.Add(Me.TableLayoutPanel4, 0, 0)
         Me.TableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.TableLayoutPanel3.Location = New System.Drawing.Point(3, 92)
+        Me.TableLayoutPanel3.Location = New System.Drawing.Point(3, 88)
         Me.TableLayoutPanel3.Name = "TableLayoutPanel3"
         Me.TableLayoutPanel3.RowCount = 2
         Me.TableLayoutPanel3.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.80912!))
         Me.TableLayoutPanel3.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 83.19088!))
-        Me.TableLayoutPanel3.Size = New System.Drawing.Size(950, 351)
+        Me.TableLayoutPanel3.Size = New System.Drawing.Size(950, 335)
         Me.TableLayoutPanel3.TabIndex = 1
         '
         'DataGridView1
@@ -730,10 +924,10 @@ Partial Class Others
         Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DataGridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.clmEmail, Me.clmName, Me.clmStatus})
         Me.DataGridView1.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.DataGridView1.Location = New System.Drawing.Point(3, 62)
+        Me.DataGridView1.Location = New System.Drawing.Point(3, 59)
         Me.DataGridView1.Name = "DataGridView1"
         Me.DataGridView1.RowHeadersVisible = False
-        Me.DataGridView1.Size = New System.Drawing.Size(754, 286)
+        Me.DataGridView1.Size = New System.Drawing.Size(754, 273)
         Me.DataGridView1.TabIndex = 0
         '
         'clmEmail
@@ -760,25 +954,39 @@ Partial Class Others
         Me.Panel7.Controls.Add(Me.btnSaveEmailOthher)
         Me.Panel7.Location = New System.Drawing.Point(763, 3)
         Me.Panel7.Name = "Panel7"
-        Me.Panel7.Size = New System.Drawing.Size(184, 52)
+        Me.Panel7.Size = New System.Drawing.Size(184, 50)
         Me.Panel7.TabIndex = 2
         '
         'btnDeleteEmailOther
         '
-        Me.btnDeleteEmailOther.Location = New System.Drawing.Point(99, 15)
+        Me.btnDeleteEmailOther.FlatAppearance.BorderSize = 0
+        Me.btnDeleteEmailOther.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(41, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(185, Byte), Integer))
+        Me.btnDeleteEmailOther.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnDeleteEmailOther.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnDeleteEmailOther.Image = Global.AVT_TRAKING.My.Resources.Resources.delete
+        Me.btnDeleteEmailOther.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnDeleteEmailOther.Location = New System.Drawing.Point(91, 15)
         Me.btnDeleteEmailOther.Name = "btnDeleteEmailOther"
-        Me.btnDeleteEmailOther.Size = New System.Drawing.Size(75, 23)
+        Me.btnDeleteEmailOther.Size = New System.Drawing.Size(83, 23)
         Me.btnDeleteEmailOther.TabIndex = 3
         Me.btnDeleteEmailOther.Text = "Delete"
+        Me.btnDeleteEmailOther.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         Me.btnDeleteEmailOther.UseVisualStyleBackColor = True
         '
         'btnSaveEmailOthher
         '
+        Me.btnSaveEmailOthher.FlatAppearance.BorderSize = 0
+        Me.btnSaveEmailOthher.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(41, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(185, Byte), Integer))
+        Me.btnSaveEmailOthher.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnSaveEmailOthher.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnSaveEmailOthher.Image = Global.AVT_TRAKING.My.Resources.Resources.save1
+        Me.btnSaveEmailOthher.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.btnSaveEmailOthher.Location = New System.Drawing.Point(11, 15)
         Me.btnSaveEmailOthher.Name = "btnSaveEmailOthher"
         Me.btnSaveEmailOthher.Size = New System.Drawing.Size(75, 23)
         Me.btnSaveEmailOthher.TabIndex = 2
         Me.btnSaveEmailOthher.Text = "Save"
+        Me.btnSaveEmailOthher.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         Me.btnSaveEmailOthher.UseVisualStyleBackColor = True
         '
         'TableLayoutPanel4
@@ -793,7 +1001,7 @@ Partial Class Others
         Me.TableLayoutPanel4.Name = "TableLayoutPanel4"
         Me.TableLayoutPanel4.RowCount = 1
         Me.TableLayoutPanel4.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
-        Me.TableLayoutPanel4.Size = New System.Drawing.Size(754, 53)
+        Me.TableLayoutPanel4.Size = New System.Drawing.Size(754, 50)
         Me.TableLayoutPanel4.TabIndex = 3
         '
         'Panel3
@@ -803,7 +1011,7 @@ Partial Class Others
         Me.Panel3.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel3.Location = New System.Drawing.Point(3, 3)
         Me.Panel3.Name = "Panel3"
-        Me.Panel3.Size = New System.Drawing.Size(371, 47)
+        Me.Panel3.Size = New System.Drawing.Size(371, 44)
         Me.Panel3.TabIndex = 0
         '
         'Label3
@@ -811,7 +1019,7 @@ Partial Class Others
         Me.Label3.AutoSize = True
         Me.Label3.Location = New System.Drawing.Point(7, 14)
         Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(32, 13)
+        Me.Label3.Size = New System.Drawing.Size(43, 14)
         Me.Label3.TabIndex = 3
         Me.Label3.Text = "Email"
         '
@@ -821,7 +1029,7 @@ Partial Class Others
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.txtEmailOther.Location = New System.Drawing.Point(73, 11)
         Me.txtEmailOther.Name = "txtEmailOther"
-        Me.txtEmailOther.Size = New System.Drawing.Size(275, 20)
+        Me.txtEmailOther.Size = New System.Drawing.Size(275, 22)
         Me.txtEmailOther.TabIndex = 2
         '
         'Panel8
@@ -831,7 +1039,7 @@ Partial Class Others
         Me.Panel8.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel8.Location = New System.Drawing.Point(380, 3)
         Me.Panel8.Name = "Panel8"
-        Me.Panel8.Size = New System.Drawing.Size(371, 47)
+        Me.Panel8.Size = New System.Drawing.Size(371, 44)
         Me.Panel8.TabIndex = 1
         '
         'Label4
@@ -839,7 +1047,7 @@ Partial Class Others
         Me.Label4.AutoSize = True
         Me.Label4.Location = New System.Drawing.Point(13, 16)
         Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(35, 13)
+        Me.Label4.Size = New System.Drawing.Size(45, 14)
         Me.Label4.TabIndex = 4
         Me.Label4.Text = "Name"
         '
@@ -849,15 +1057,15 @@ Partial Class Others
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.txtNameOther.Location = New System.Drawing.Point(68, 13)
         Me.txtNameOther.Name = "txtNameOther"
-        Me.txtNameOther.Size = New System.Drawing.Size(260, 20)
+        Me.txtNameOther.Size = New System.Drawing.Size(260, 22)
         Me.txtNameOther.TabIndex = 3
         '
         'TabPage3
         '
         Me.TabPage3.Controls.Add(Me.Panel9)
-        Me.TabPage3.Location = New System.Drawing.Point(4, 22)
+        Me.TabPage3.Location = New System.Drawing.Point(4, 27)
         Me.TabPage3.Name = "TabPage3"
-        Me.TabPage3.Size = New System.Drawing.Size(956, 446)
+        Me.TabPage3.Size = New System.Drawing.Size(956, 426)
         Me.TabPage3.TabIndex = 2
         Me.TabPage3.Text = "Images"
         Me.TabPage3.UseVisualStyleBackColor = True
@@ -868,11 +1076,12 @@ Partial Class Others
         Me.Panel9.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel9.Location = New System.Drawing.Point(0, 0)
         Me.Panel9.Name = "Panel9"
-        Me.Panel9.Size = New System.Drawing.Size(956, 446)
+        Me.Panel9.Size = New System.Drawing.Size(956, 426)
         Me.Panel9.TabIndex = 0
         '
         'TableLayoutPanel5
         '
+        Me.TableLayoutPanel5.BackColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(59, Byte), Integer), CType(CType(104, Byte), Integer))
         Me.TableLayoutPanel5.ColumnCount = 1
         Me.TableLayoutPanel5.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
         Me.TableLayoutPanel5.Controls.Add(Me.TableLayoutPanel6, 0, 1)
@@ -883,7 +1092,7 @@ Partial Class Others
         Me.TableLayoutPanel5.RowCount = 2
         Me.TableLayoutPanel5.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 60.0!))
         Me.TableLayoutPanel5.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-        Me.TableLayoutPanel5.Size = New System.Drawing.Size(956, 446)
+        Me.TableLayoutPanel5.Size = New System.Drawing.Size(956, 426)
         Me.TableLayoutPanel5.TabIndex = 0
         '
         'TableLayoutPanel6
@@ -898,7 +1107,7 @@ Partial Class Others
         Me.TableLayoutPanel6.Name = "TableLayoutPanel6"
         Me.TableLayoutPanel6.RowCount = 1
         Me.TableLayoutPanel6.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-        Me.TableLayoutPanel6.Size = New System.Drawing.Size(950, 380)
+        Me.TableLayoutPanel6.Size = New System.Drawing.Size(950, 360)
         Me.TableLayoutPanel6.TabIndex = 0
         '
         'TableLayoutPanel8
@@ -917,12 +1126,17 @@ Partial Class Others
         Me.TableLayoutPanel8.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 45.0!))
         Me.TableLayoutPanel8.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 45.0!))
         Me.TableLayoutPanel8.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-        Me.TableLayoutPanel8.Size = New System.Drawing.Size(184, 374)
+        Me.TableLayoutPanel8.Size = New System.Drawing.Size(184, 354)
         Me.TableLayoutPanel8.TabIndex = 1
         '
         'btnDeleteImg
         '
         Me.btnDeleteImg.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.btnDeleteImg.FlatAppearance.BorderSize = 0
+        Me.btnDeleteImg.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(41, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(185, Byte), Integer))
+        Me.btnDeleteImg.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnDeleteImg.Image = Global.AVT_TRAKING.My.Resources.Resources.delete
+        Me.btnDeleteImg.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.btnDeleteImg.Location = New System.Drawing.Point(3, 93)
         Me.btnDeleteImg.Name = "btnDeleteImg"
         Me.btnDeleteImg.Size = New System.Drawing.Size(178, 39)
@@ -933,6 +1147,11 @@ Partial Class Others
         'btnUpdateImg
         '
         Me.btnUpdateImg.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.btnUpdateImg.FlatAppearance.BorderSize = 0
+        Me.btnUpdateImg.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(41, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(185, Byte), Integer))
+        Me.btnUpdateImg.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnUpdateImg.Image = Global.AVT_TRAKING.My.Resources.Resources.update
+        Me.btnUpdateImg.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.btnUpdateImg.Location = New System.Drawing.Point(3, 48)
         Me.btnUpdateImg.Name = "btnUpdateImg"
         Me.btnUpdateImg.Size = New System.Drawing.Size(178, 39)
@@ -946,7 +1165,7 @@ Partial Class Others
         Me.imgPhoto.Image = Global.AVT_TRAKING.My.Resources.Resources.user
         Me.imgPhoto.Location = New System.Drawing.Point(3, 138)
         Me.imgPhoto.Name = "imgPhoto"
-        Me.imgPhoto.Size = New System.Drawing.Size(178, 233)
+        Me.imgPhoto.Size = New System.Drawing.Size(178, 213)
         Me.imgPhoto.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
         Me.imgPhoto.TabIndex = 1
         Me.imgPhoto.TabStop = False
@@ -954,6 +1173,11 @@ Partial Class Others
         'btnAddImg
         '
         Me.btnAddImg.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.btnAddImg.FlatAppearance.BorderSize = 0
+        Me.btnAddImg.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(41, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(185, Byte), Integer))
+        Me.btnAddImg.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnAddImg.Image = Global.AVT_TRAKING.My.Resources.Resources.add
+        Me.btnAddImg.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.btnAddImg.Location = New System.Drawing.Point(3, 3)
         Me.btnAddImg.Name = "btnAddImg"
         Me.btnAddImg.Size = New System.Drawing.Size(178, 39)
@@ -970,7 +1194,7 @@ Partial Class Others
         Me.tblImage.Dock = System.Windows.Forms.DockStyle.Fill
         Me.tblImage.Location = New System.Drawing.Point(3, 3)
         Me.tblImage.Name = "tblImage"
-        Me.tblImage.Size = New System.Drawing.Size(754, 374)
+        Me.tblImage.Size = New System.Drawing.Size(754, 354)
         Me.tblImage.TabIndex = 2
         '
         'clmNameImage
@@ -992,14 +1216,14 @@ Partial Class Others
         Me.clmDefault.Name = "clmDefault"
         Me.clmDefault.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
         Me.clmDefault.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
-        Me.clmDefault.Width = 66
+        Me.clmDefault.Width = 92
         '
         'TableLayoutPanel7
         '
         Me.TableLayoutPanel7.ColumnCount = 3
         Me.TableLayoutPanel7.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 35.26316!))
         Me.TableLayoutPanel7.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 64.73684!))
-        Me.TableLayoutPanel7.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 189.0!))
+        Me.TableLayoutPanel7.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 195.0!))
         Me.TableLayoutPanel7.Controls.Add(Me.Panel10, 0, 0)
         Me.TableLayoutPanel7.Controls.Add(Me.Panel11, 1, 0)
         Me.TableLayoutPanel7.Dock = System.Windows.Forms.DockStyle.Fill
@@ -1017,24 +1241,24 @@ Partial Class Others
         Me.Panel10.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel10.Location = New System.Drawing.Point(3, 3)
         Me.Panel10.Name = "Panel10"
-        Me.Panel10.Size = New System.Drawing.Size(262, 48)
+        Me.Panel10.Size = New System.Drawing.Size(260, 48)
         Me.Panel10.TabIndex = 0
         '
         'Label5
         '
         Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(3, 17)
+        Me.Label5.Location = New System.Drawing.Point(8, 17)
         Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(35, 13)
+        Me.Label5.Size = New System.Drawing.Size(56, 18)
         Me.Label5.TabIndex = 1
         Me.Label5.Text = "Name"
         '
         'txtNameImage
         '
-        Me.txtNameImage.Location = New System.Drawing.Point(48, 12)
+        Me.txtNameImage.Location = New System.Drawing.Point(65, 14)
         Me.txtNameImage.MaxLength = 30
         Me.txtNameImage.Name = "txtNameImage"
-        Me.txtNameImage.Size = New System.Drawing.Size(173, 20)
+        Me.txtNameImage.Size = New System.Drawing.Size(173, 26)
         Me.txtNameImage.TabIndex = 0
         '
         'Panel11
@@ -1043,16 +1267,20 @@ Partial Class Others
         Me.Panel11.Controls.Add(Me.Label6)
         Me.Panel11.Controls.Add(Me.txtPathFile)
         Me.Panel11.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel11.Location = New System.Drawing.Point(271, 3)
+        Me.Panel11.Location = New System.Drawing.Point(269, 3)
         Me.Panel11.Name = "Panel11"
-        Me.Panel11.Size = New System.Drawing.Size(486, 48)
+        Me.Panel11.Size = New System.Drawing.Size(482, 48)
         Me.Panel11.TabIndex = 1
         '
         'btnFindImage
         '
-        Me.btnFindImage.Location = New System.Drawing.Point(329, 12)
+        Me.btnFindImage.FlatAppearance.BorderSize = 0
+        Me.btnFindImage.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(41, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(185, Byte), Integer))
+        Me.btnFindImage.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnFindImage.Font = New System.Drawing.Font("Verdana", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnFindImage.Location = New System.Drawing.Point(313, 17)
         Me.btnFindImage.Name = "btnFindImage"
-        Me.btnFindImage.Size = New System.Drawing.Size(75, 23)
+        Me.btnFindImage.Size = New System.Drawing.Size(41, 25)
         Me.btnFindImage.TabIndex = 3
         Me.btnFindImage.Text = "..."
         Me.btnFindImage.UseVisualStyleBackColor = True
@@ -1062,27 +1290,33 @@ Partial Class Others
         Me.Label6.AutoSize = True
         Me.Label6.Location = New System.Drawing.Point(4, 17)
         Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(29, 13)
+        Me.Label6.Size = New System.Drawing.Size(46, 18)
         Me.Label6.TabIndex = 2
         Me.Label6.Text = "Path"
         '
         'txtPathFile
         '
-        Me.txtPathFile.Location = New System.Drawing.Point(48, 14)
+        Me.txtPathFile.Location = New System.Drawing.Point(51, 14)
         Me.txtPathFile.Name = "txtPathFile"
         Me.txtPathFile.ReadOnly = True
-        Me.txtPathFile.Size = New System.Drawing.Size(245, 20)
+        Me.txtPathFile.Size = New System.Drawing.Size(245, 26)
         Me.txtPathFile.TabIndex = 1
         '
         'Others
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(964, 472)
+        Me.ClientSize = New System.Drawing.Size(964, 519)
         Me.Controls.Add(Me.Panel1)
+        Me.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
         Me.Name = "Others"
         Me.Text = "Others"
         Me.Panel1.ResumeLayout(False)
+        Me.TitleBar.ResumeLayout(False)
+        Me.TitleBar.PerformLayout()
+        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.TabControl1.ResumeLayout(False)
         Me.TabPage1.ResumeLayout(False)
         Me.GroupBox5.ResumeLayout(False)
@@ -1142,7 +1376,6 @@ Partial Class Others
     Friend WithEvents btnDeleteExpCode As Button
     Friend WithEvents btnUpdateExpCode As Button
     Friend WithEvents GroupBox1 As GroupBox
-    Friend WithEvents btnDeleteTypeEmployee As Button
     Friend WithEvents btnUpdateTypeEmploye As Button
     Friend WithEvents lstTypeEmployee As ListBox
     Friend WithEvents btnAdd As Button
@@ -1218,4 +1451,9 @@ Partial Class Others
     Friend WithEvents clmNameImage As DataGridViewTextBoxColumn
     Friend WithEvents clmImage As DataGridViewTextBoxColumn
     Friend WithEvents clmDefault As DataGridViewCheckBoxColumn
+    Friend WithEvents TitleBar As Panel
+    Friend WithEvents Label7 As Label
+    Friend WithEvents PictureBox1 As PictureBox
+    Friend WithEvents PictureBox2 As PictureBox
+    Friend WithEvents Button1 As Button
 End Class

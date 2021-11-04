@@ -174,7 +174,7 @@ Partial Class MainFrom
         Me.PanelChildForm.Controls.Add(Me.Button2)
         Me.PanelChildForm.Location = New System.Drawing.Point(197, 28)
         Me.PanelChildForm.Name = "PanelChildForm"
-        Me.PanelChildForm.Size = New System.Drawing.Size(605, 439)
+        Me.PanelChildForm.Size = New System.Drawing.Size(605, 430)
         Me.PanelChildForm.TabIndex = 7
         '
         'Button2

@@ -221,16 +221,11 @@ Public Class Employees
     End Sub
 
     Private Sub btnMaximize_Click(sender As Object, e As EventArgs) Handles btnMaximize.Click
-        WindowState = FormWindowState.Maximized
-        btnMaximize.Visible = False
-        btnRestore.Visible = True
+        Me.WindowState = FormWindowState.Maximized
+
     End Sub
 
-    Private Sub btnRestore_Click(sender As Object, e As EventArgs) Handles btnRestore.Click
-        WindowState = FormWindowState.Normal
-        btnRestore.Visible = False
-        btnMaximize.Visible = True
-    End Sub
+
 
     Private Sub txtSearch_TextChanged(sender As Object, e As EventArgs) Handles txtSearch.TextChanged
         Try

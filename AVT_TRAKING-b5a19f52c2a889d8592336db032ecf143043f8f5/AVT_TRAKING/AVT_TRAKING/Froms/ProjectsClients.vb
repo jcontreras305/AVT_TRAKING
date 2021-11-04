@@ -280,6 +280,8 @@ Public Class ProjectsClients
         hpe.ShowDialog()
     End Sub
 
+
+
     Private Sub cmbCostCode_Leave(sender As Object, e As EventArgs) Handles cmbCostCode.Leave
         If btnAdd.Text = "Add" Then  'Se supone que no esta agregando si no que esta actualizando o visualizado unicamente
             mtdJobs.actualizarCostCode(cmbCostCode.Text, txtJobNumber.Text)

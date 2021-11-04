@@ -29,6 +29,8 @@ Partial Class Clients
         Me.tblClientes = New System.Windows.Forms.DataGridView()
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.TabPage1 = New System.Windows.Forms.TabPage()
+        Me.btnSelectClient = New System.Windows.Forms.Button()
+        Me.btnShowAll1 = New System.Windows.Forms.Button()
         Me.Label6 = New System.Windows.Forms.Label()
         Me.txtFiltro = New System.Windows.Forms.TextBox()
         Me.lblN6 = New System.Windows.Forms.Label()
@@ -41,6 +43,8 @@ Partial Class Clients
         Me.Label8 = New System.Windows.Forms.Label()
         Me.txtFirstName = New System.Windows.Forms.TextBox()
         Me.Label7 = New System.Windows.Forms.Label()
+        Me.btnUpdate = New System.Windows.Forms.Button()
+        Me.btnSaveClient = New System.Windows.Forms.Button()
         Me.TabPage2 = New System.Windows.Forms.TabPage()
         Me.btnSelectAll = New System.Windows.Forms.Button()
         Me.Label18 = New System.Windows.Forms.Label()
@@ -73,16 +77,11 @@ Partial Class Clients
         Me.Panel4 = New System.Windows.Forms.Panel()
         Me.Panel3 = New System.Windows.Forms.Panel()
         Me.Panel2 = New System.Windows.Forms.Panel()
-        Me.btnSelectClient = New System.Windows.Forms.Button()
-        Me.btnShowAll1 = New System.Windows.Forms.Button()
-        Me.btnUpdate = New System.Windows.Forms.Button()
-        Me.btnSaveClient = New System.Windows.Forms.Button()
-        Me.Button1 = New System.Windows.Forms.Button()
         Me.TitleBar = New System.Windows.Forms.Panel()
-        Me.Label10 = New System.Windows.Forms.Label()
-        Me.btnMaximize = New System.Windows.Forms.PictureBox()
-        Me.btnRestore = New System.Windows.Forms.PictureBox()
         Me.btnMinimized = New System.Windows.Forms.PictureBox()
+        Me.btnMaximize = New System.Windows.Forms.PictureBox()
+        Me.Label10 = New System.Windows.Forms.Label()
+        Me.Button1 = New System.Windows.Forms.Button()
         CType(Me.tblClientes, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
@@ -94,9 +93,8 @@ Partial Class Clients
         Me.Panel3.SuspendLayout()
         Me.Panel2.SuspendLayout()
         Me.TitleBar.SuspendLayout()
-        CType(Me.btnMaximize, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.btnRestore, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.btnMinimized, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.btnMaximize, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'txtCompanyName
@@ -195,9 +193,40 @@ Partial Class Clients
         Me.TabPage1.Margin = New System.Windows.Forms.Padding(2)
         Me.TabPage1.Name = "TabPage1"
         Me.TabPage1.Padding = New System.Windows.Forms.Padding(2)
-        Me.TabPage1.Size = New System.Drawing.Size(709, 238)
+        Me.TabPage1.Size = New System.Drawing.Size(709, 222)
         Me.TabPage1.TabIndex = 0
         Me.TabPage1.Text = "Clients"
+        '
+        'btnSelectClient
+        '
+        Me.btnSelectClient.FlatAppearance.BorderSize = 0
+        Me.btnSelectClient.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(41, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(185, Byte), Integer))
+        Me.btnSelectClient.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnSelectClient.Image = Global.AVT_TRAKING.My.Resources.Resources.click
+        Me.btnSelectClient.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnSelectClient.Location = New System.Drawing.Point(573, 5)
+        Me.btnSelectClient.Name = "btnSelectClient"
+        Me.btnSelectClient.Size = New System.Drawing.Size(131, 29)
+        Me.btnSelectClient.TabIndex = 50
+        Me.btnSelectClient.Text = "Select Client"
+        Me.btnSelectClient.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.btnSelectClient.UseVisualStyleBackColor = True
+        '
+        'btnShowAll1
+        '
+        Me.btnShowAll1.FlatAppearance.BorderSize = 0
+        Me.btnShowAll1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(41, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(185, Byte), Integer))
+        Me.btnShowAll1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnShowAll1.ForeColor = System.Drawing.SystemColors.Control
+        Me.btnShowAll1.Image = Global.AVT_TRAKING.My.Resources.Resources.loupe
+        Me.btnShowAll1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnShowAll1.Location = New System.Drawing.Point(236, 197)
+        Me.btnShowAll1.Name = "btnShowAll1"
+        Me.btnShowAll1.Size = New System.Drawing.Size(101, 23)
+        Me.btnShowAll1.TabIndex = 11
+        Me.btnShowAll1.Text = "Show All"
+        Me.btnShowAll1.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.btnShowAll1.UseVisualStyleBackColor = True
         '
         'Label6
         '
@@ -306,6 +335,38 @@ Partial Class Clients
         Me.Label7.TabIndex = 33
         Me.Label7.Text = "First Name"
         '
+        'btnUpdate
+        '
+        Me.btnUpdate.FlatAppearance.BorderSize = 0
+        Me.btnUpdate.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(41, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(185, Byte), Integer))
+        Me.btnUpdate.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnUpdate.Image = Global.AVT_TRAKING.My.Resources.Resources.update
+        Me.btnUpdate.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnUpdate.Location = New System.Drawing.Point(315, 88)
+        Me.btnUpdate.Margin = New System.Windows.Forms.Padding(2)
+        Me.btnUpdate.Name = "btnUpdate"
+        Me.btnUpdate.Size = New System.Drawing.Size(91, 29)
+        Me.btnUpdate.TabIndex = 9
+        Me.btnUpdate.Text = "Update"
+        Me.btnUpdate.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.btnUpdate.UseVisualStyleBackColor = True
+        '
+        'btnSaveClient
+        '
+        Me.btnSaveClient.FlatAppearance.BorderSize = 0
+        Me.btnSaveClient.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(41, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(185, Byte), Integer))
+        Me.btnSaveClient.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnSaveClient.Image = Global.AVT_TRAKING.My.Resources.Resources.save
+        Me.btnSaveClient.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnSaveClient.Location = New System.Drawing.Point(236, 88)
+        Me.btnSaveClient.Margin = New System.Windows.Forms.Padding(2)
+        Me.btnSaveClient.Name = "btnSaveClient"
+        Me.btnSaveClient.Size = New System.Drawing.Size(78, 27)
+        Me.btnSaveClient.TabIndex = 8
+        Me.btnSaveClient.Text = "Save"
+        Me.btnSaveClient.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.btnSaveClient.UseVisualStyleBackColor = True
+        '
         'TabPage2
         '
         Me.TabPage2.BackColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(59, Byte), Integer), CType(CType(104, Byte), Integer))
@@ -315,7 +376,7 @@ Partial Class Clients
         Me.TabPage2.Controls.Add(Me.GroupBox2)
         Me.TabPage2.Controls.Add(Me.GroupBox1)
         Me.TabPage2.Font = New System.Drawing.Font("Verdana", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TabPage2.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.TabPage2.ForeColor = System.Drawing.SystemColors.ControlText
         Me.TabPage2.Location = New System.Drawing.Point(4, 27)
         Me.TabPage2.Margin = New System.Windows.Forms.Padding(2)
         Me.TabPage2.Name = "TabPage2"
@@ -329,6 +390,7 @@ Partial Class Clients
         Me.btnSelectAll.FlatAppearance.BorderSize = 0
         Me.btnSelectAll.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(41, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(185, Byte), Integer))
         Me.btnSelectAll.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnSelectAll.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.btnSelectAll.Image = Global.AVT_TRAKING.My.Resources.Resources.loupe
         Me.btnSelectAll.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.btnSelectAll.Location = New System.Drawing.Point(266, 196)
@@ -342,6 +404,7 @@ Partial Class Clients
         'Label18
         '
         Me.Label18.AutoSize = True
+        Me.Label18.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.Label18.Location = New System.Drawing.Point(24, 199)
         Me.Label18.Name = "Label18"
         Me.Label18.Size = New System.Drawing.Size(58, 16)
@@ -372,6 +435,7 @@ Partial Class Clients
         Me.GroupBox2.Controls.Add(Me.txtStreat)
         Me.GroupBox2.Controls.Add(Me.Label5)
         Me.GroupBox2.Controls.Add(Me.txtProvince)
+        Me.GroupBox2.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.GroupBox2.Location = New System.Drawing.Point(384, 25)
         Me.GroupBox2.Name = "GroupBox2"
         Me.GroupBox2.Size = New System.Drawing.Size(320, 196)
@@ -513,6 +577,7 @@ Partial Class Clients
         Me.GroupBox1.Controls.Add(Me.txtEmail)
         Me.GroupBox1.Controls.Add(Me.txtPhoneNumber)
         Me.GroupBox1.Controls.Add(Me.lblPN1)
+        Me.GroupBox1.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.GroupBox1.Location = New System.Drawing.Point(18, 28)
         Me.GroupBox1.Name = "GroupBox1"
         Me.GroupBox1.Size = New System.Drawing.Size(337, 143)
@@ -649,68 +714,49 @@ Partial Class Clients
         Me.Panel2.Size = New System.Drawing.Size(733, 75)
         Me.Panel2.TabIndex = 23
         '
-        'btnSelectClient
+        'TitleBar
         '
-        Me.btnSelectClient.FlatAppearance.BorderSize = 0
-        Me.btnSelectClient.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(41, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(185, Byte), Integer))
-        Me.btnSelectClient.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnSelectClient.Image = Global.AVT_TRAKING.My.Resources.Resources.click
-        Me.btnSelectClient.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnSelectClient.Location = New System.Drawing.Point(573, 5)
-        Me.btnSelectClient.Name = "btnSelectClient"
-        Me.btnSelectClient.Size = New System.Drawing.Size(131, 29)
-        Me.btnSelectClient.TabIndex = 50
-        Me.btnSelectClient.Text = "Select Client"
-        Me.btnSelectClient.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.btnSelectClient.UseVisualStyleBackColor = True
+        Me.TitleBar.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.TitleBar.BackColor = System.Drawing.Color.FromArgb(CType(CType(30, Byte), Integer), CType(CType(38, Byte), Integer), CType(CType(70, Byte), Integer))
+        Me.TitleBar.Controls.Add(Me.btnMinimized)
+        Me.TitleBar.Controls.Add(Me.btnMaximize)
+        Me.TitleBar.Controls.Add(Me.Label10)
+        Me.TitleBar.Location = New System.Drawing.Point(0, 0)
+        Me.TitleBar.Name = "TitleBar"
+        Me.TitleBar.Size = New System.Drawing.Size(733, 28)
+        Me.TitleBar.TabIndex = 23
         '
-        'btnShowAll1
+        'btnMinimized
         '
-        Me.btnShowAll1.FlatAppearance.BorderSize = 0
-        Me.btnShowAll1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(41, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(185, Byte), Integer))
-        Me.btnShowAll1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnShowAll1.ForeColor = System.Drawing.SystemColors.Control
-        Me.btnShowAll1.Image = Global.AVT_TRAKING.My.Resources.Resources.loupe
-        Me.btnShowAll1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnShowAll1.Location = New System.Drawing.Point(236, 197)
-        Me.btnShowAll1.Name = "btnShowAll1"
-        Me.btnShowAll1.Size = New System.Drawing.Size(101, 23)
-        Me.btnShowAll1.TabIndex = 11
-        Me.btnShowAll1.Text = "Show All"
-        Me.btnShowAll1.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.btnShowAll1.UseVisualStyleBackColor = True
+        Me.btnMinimized.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnMinimized.Image = Global.AVT_TRAKING.My.Resources.Resources.minimize2
+        Me.btnMinimized.Location = New System.Drawing.Point(664, 1)
+        Me.btnMinimized.Name = "btnMinimized"
+        Me.btnMinimized.Size = New System.Drawing.Size(25, 24)
+        Me.btnMinimized.TabIndex = 3
+        Me.btnMinimized.TabStop = False
         '
-        'btnUpdate
+        'btnMaximize
         '
-        Me.btnUpdate.FlatAppearance.BorderSize = 0
-        Me.btnUpdate.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(41, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(185, Byte), Integer))
-        Me.btnUpdate.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnUpdate.Image = Global.AVT_TRAKING.My.Resources.Resources.update
-        Me.btnUpdate.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnUpdate.Location = New System.Drawing.Point(315, 88)
-        Me.btnUpdate.Margin = New System.Windows.Forms.Padding(2)
-        Me.btnUpdate.Name = "btnUpdate"
-        Me.btnUpdate.Size = New System.Drawing.Size(91, 29)
-        Me.btnUpdate.TabIndex = 9
-        Me.btnUpdate.Text = "Update"
-        Me.btnUpdate.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.btnUpdate.UseVisualStyleBackColor = True
+        Me.btnMaximize.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnMaximize.Image = Global.AVT_TRAKING.My.Resources.Resources.maximize2
+        Me.btnMaximize.Location = New System.Drawing.Point(695, 3)
+        Me.btnMaximize.Name = "btnMaximize"
+        Me.btnMaximize.Size = New System.Drawing.Size(29, 28)
+        Me.btnMaximize.TabIndex = 1
+        Me.btnMaximize.TabStop = False
         '
-        'btnSaveClient
+        'Label10
         '
-        Me.btnSaveClient.FlatAppearance.BorderSize = 0
-        Me.btnSaveClient.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(41, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(185, Byte), Integer))
-        Me.btnSaveClient.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnSaveClient.Image = Global.AVT_TRAKING.My.Resources.Resources.save
-        Me.btnSaveClient.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnSaveClient.Location = New System.Drawing.Point(236, 88)
-        Me.btnSaveClient.Margin = New System.Windows.Forms.Padding(2)
-        Me.btnSaveClient.Name = "btnSaveClient"
-        Me.btnSaveClient.Size = New System.Drawing.Size(78, 27)
-        Me.btnSaveClient.TabIndex = 8
-        Me.btnSaveClient.Text = "Save"
-        Me.btnSaveClient.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.btnSaveClient.UseVisualStyleBackColor = True
+        Me.Label10.AutoSize = True
+        Me.Label10.Font = New System.Drawing.Font("Verdana", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label10.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.Label10.Location = New System.Drawing.Point(3, 0)
+        Me.Label10.Name = "Label10"
+        Me.Label10.Size = New System.Drawing.Size(66, 18)
+        Me.Label10.TabIndex = 0
+        Me.Label10.Text = "Clients"
         '
         'Button1
         '
@@ -725,61 +771,6 @@ Partial Class Clients
         Me.Button1.Size = New System.Drawing.Size(50, 31)
         Me.Button1.TabIndex = 22
         Me.Button1.UseVisualStyleBackColor = True
-        '
-        'TitleBar
-        '
-        Me.TitleBar.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.TitleBar.BackColor = System.Drawing.Color.FromArgb(CType(CType(30, Byte), Integer), CType(CType(38, Byte), Integer), CType(CType(70, Byte), Integer))
-        Me.TitleBar.Controls.Add(Me.btnMinimized)
-        Me.TitleBar.Controls.Add(Me.btnRestore)
-        Me.TitleBar.Controls.Add(Me.btnMaximize)
-        Me.TitleBar.Controls.Add(Me.Label10)
-        Me.TitleBar.Location = New System.Drawing.Point(0, 0)
-        Me.TitleBar.Name = "TitleBar"
-        Me.TitleBar.Size = New System.Drawing.Size(733, 28)
-        Me.TitleBar.TabIndex = 23
-        '
-        'Label10
-        '
-        Me.Label10.AutoSize = True
-        Me.Label10.Font = New System.Drawing.Font("Verdana", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label10.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.Label10.Location = New System.Drawing.Point(3, 0)
-        Me.Label10.Name = "Label10"
-        Me.Label10.Size = New System.Drawing.Size(66, 18)
-        Me.Label10.TabIndex = 0
-        Me.Label10.Text = "Clients"
-        '
-        'btnMaximize
-        '
-        Me.btnMaximize.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnMaximize.Image = Global.AVT_TRAKING.My.Resources.Resources.maximize2
-        Me.btnMaximize.Location = New System.Drawing.Point(695, 3)
-        Me.btnMaximize.Name = "btnMaximize"
-        Me.btnMaximize.Size = New System.Drawing.Size(29, 28)
-        Me.btnMaximize.TabIndex = 1
-        Me.btnMaximize.TabStop = False
-        '
-        'btnRestore
-        '
-        Me.btnRestore.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnRestore.Image = Global.AVT_TRAKING.My.Resources.Resources.restore2
-        Me.btnRestore.Location = New System.Drawing.Point(693, 1)
-        Me.btnRestore.Name = "btnRestore"
-        Me.btnRestore.Size = New System.Drawing.Size(31, 24)
-        Me.btnRestore.TabIndex = 2
-        Me.btnRestore.TabStop = False
-        '
-        'btnMinimized
-        '
-        Me.btnMinimized.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnMinimized.Image = Global.AVT_TRAKING.My.Resources.Resources.minimize2
-        Me.btnMinimized.Location = New System.Drawing.Point(664, 1)
-        Me.btnMinimized.Name = "btnMinimized"
-        Me.btnMinimized.Size = New System.Drawing.Size(25, 24)
-        Me.btnMinimized.TabIndex = 3
-        Me.btnMinimized.TabStop = False
         '
         'Clients
         '
@@ -807,9 +798,8 @@ Partial Class Clients
         Me.Panel2.ResumeLayout(False)
         Me.TitleBar.ResumeLayout(False)
         Me.TitleBar.PerformLayout()
-        CType(Me.btnMaximize, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.btnRestore, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.btnMinimized, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.btnMaximize, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -872,6 +862,5 @@ Partial Class Clients
     Friend WithEvents TitleBar As Panel
     Friend WithEvents Label10 As Label
     Friend WithEvents btnMaximize As PictureBox
-    Friend WithEvents btnRestore As PictureBox
     Friend WithEvents btnMinimized As PictureBox
 End Class

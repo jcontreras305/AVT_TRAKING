@@ -24,18 +24,13 @@ Partial Class Employees
     Private Sub InitializeComponent()
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.tbpEmployees = New System.Windows.Forms.TabPage()
-        Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.cmbTypeEmployee = New System.Windows.Forms.ComboBox()
         Me.Label19 = New System.Windows.Forms.Label()
-        Me.btnCancel = New System.Windows.Forms.Button()
-        Me.btnUpdate = New System.Windows.Forms.Button()
         Me.Label18 = New System.Windows.Forms.Label()
         Me.txtSearch = New System.Windows.Forms.TextBox()
         Me.chbState = New System.Windows.Forms.CheckBox()
         Me.tblEmployees = New System.Windows.Forms.DataGridView()
-        Me.btnSave = New System.Windows.Forms.Button()
         Me.btnChooseImage = New System.Windows.Forms.Button()
-        Me.imgPhoto = New System.Windows.Forms.PictureBox()
         Me.txtSapNumber = New System.Windows.Forms.TextBox()
         Me.txtSocialNumber = New System.Windows.Forms.TextBox()
         Me.txtMiddleName = New System.Windows.Forms.TextBox()
@@ -80,14 +75,16 @@ Partial Class Employees
         Me.TitleBar = New System.Windows.Forms.Panel()
         Me.Label20 = New System.Windows.Forms.Label()
         Me.btnMaximize = New System.Windows.Forms.PictureBox()
-        Me.btnRestore = New System.Windows.Forms.PictureBox()
         Me.btnMinimized = New System.Windows.Forms.PictureBox()
         Me.Button1 = New System.Windows.Forms.Button()
+        Me.PictureBox1 = New System.Windows.Forms.PictureBox()
+        Me.btnCancel = New System.Windows.Forms.Button()
+        Me.btnUpdate = New System.Windows.Forms.Button()
+        Me.btnSave = New System.Windows.Forms.Button()
+        Me.imgPhoto = New System.Windows.Forms.PictureBox()
         Me.TabControl1.SuspendLayout()
         Me.tbpEmployees.SuspendLayout()
-        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.tblEmployees, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.imgPhoto, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.tbpOtherData.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
         CType(Me.sprPayRate3, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -97,8 +94,9 @@ Partial Class Employees
         Me.GroupBox1.SuspendLayout()
         Me.TitleBar.SuspendLayout()
         CType(Me.btnMaximize, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.btnRestore, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.btnMinimized, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.imgPhoto, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'TabControl1
@@ -152,15 +150,6 @@ Partial Class Employees
         Me.tbpEmployees.TabIndex = 0
         Me.tbpEmployees.Text = "Employee"
         '
-        'PictureBox1
-        '
-        Me.PictureBox1.Image = Global.AVT_TRAKING.My.Resources.Resources.loupe
-        Me.PictureBox1.Location = New System.Drawing.Point(79, 147)
-        Me.PictureBox1.Name = "PictureBox1"
-        Me.PictureBox1.Size = New System.Drawing.Size(25, 24)
-        Me.PictureBox1.TabIndex = 24
-        Me.PictureBox1.TabStop = False
-        '
         'cmbTypeEmployee
         '
         Me.cmbTypeEmployee.FormattingEnabled = True
@@ -177,38 +166,6 @@ Partial Class Employees
         Me.Label19.Size = New System.Drawing.Size(43, 16)
         Me.Label19.TabIndex = 22
         Me.Label19.Text = "Type"
-        '
-        'btnCancel
-        '
-        Me.btnCancel.FlatAppearance.BorderSize = 0
-        Me.btnCancel.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(41, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(185, Byte), Integer))
-        Me.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnCancel.Font = New System.Drawing.Font("Verdana", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnCancel.Image = Global.AVT_TRAKING.My.Resources.Resources.cancel
-        Me.btnCancel.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnCancel.Location = New System.Drawing.Point(455, 144)
-        Me.btnCancel.Name = "btnCancel"
-        Me.btnCancel.Size = New System.Drawing.Size(89, 34)
-        Me.btnCancel.TabIndex = 21
-        Me.btnCancel.Text = "Cancel"
-        Me.btnCancel.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.btnCancel.UseVisualStyleBackColor = True
-        '
-        'btnUpdate
-        '
-        Me.btnUpdate.FlatAppearance.BorderSize = 0
-        Me.btnUpdate.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(41, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(185, Byte), Integer))
-        Me.btnUpdate.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnUpdate.Font = New System.Drawing.Font("Verdana", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnUpdate.Image = Global.AVT_TRAKING.My.Resources.Resources.update
-        Me.btnUpdate.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnUpdate.Location = New System.Drawing.Point(445, 115)
-        Me.btnUpdate.Name = "btnUpdate"
-        Me.btnUpdate.Size = New System.Drawing.Size(99, 23)
-        Me.btnUpdate.TabIndex = 20
-        Me.btnUpdate.Text = "Update"
-        Me.btnUpdate.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.btnUpdate.UseVisualStyleBackColor = True
         '
         'Label18
         '
@@ -250,23 +207,6 @@ Partial Class Employees
         Me.tblEmployees.Size = New System.Drawing.Size(699, 129)
         Me.tblEmployees.TabIndex = 16
         '
-        'btnSave
-        '
-        Me.btnSave.FlatAppearance.BorderSize = 0
-        Me.btnSave.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(41, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(185, Byte), Integer))
-        Me.btnSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnSave.Font = New System.Drawing.Font("Verdana", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnSave.ForeColor = System.Drawing.Color.White
-        Me.btnSave.Image = Global.AVT_TRAKING.My.Resources.Resources.save
-        Me.btnSave.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnSave.Location = New System.Drawing.Point(364, 110)
-        Me.btnSave.Name = "btnSave"
-        Me.btnSave.Size = New System.Drawing.Size(75, 28)
-        Me.btnSave.TabIndex = 14
-        Me.btnSave.Text = "Save"
-        Me.btnSave.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.btnSave.UseVisualStyleBackColor = True
-        '
         'btnChooseImage
         '
         Me.btnChooseImage.BackColor = System.Drawing.Color.RoyalBlue
@@ -279,17 +219,6 @@ Partial Class Employees
         Me.btnChooseImage.TabIndex = 13
         Me.btnChooseImage.Text = "Chose Image"
         Me.btnChooseImage.UseVisualStyleBackColor = False
-        '
-        'imgPhoto
-        '
-        Me.imgPhoto.BackColor = System.Drawing.Color.White
-        Me.imgPhoto.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.imgPhoto.Location = New System.Drawing.Point(550, 6)
-        Me.imgPhoto.Name = "imgPhoto"
-        Me.imgPhoto.Size = New System.Drawing.Size(120, 132)
-        Me.imgPhoto.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
-        Me.imgPhoto.TabIndex = 12
-        Me.imgPhoto.TabStop = False
         '
         'txtSapNumber
         '
@@ -676,7 +605,6 @@ Partial Class Employees
         Me.TitleBar.BackColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(59, Byte), Integer), CType(CType(104, Byte), Integer))
         Me.TitleBar.Controls.Add(Me.Label20)
         Me.TitleBar.Controls.Add(Me.btnMaximize)
-        Me.TitleBar.Controls.Add(Me.btnRestore)
         Me.TitleBar.Controls.Add(Me.btnMinimized)
         Me.TitleBar.Dock = System.Windows.Forms.DockStyle.Top
         Me.TitleBar.Location = New System.Drawing.Point(0, 0)
@@ -699,22 +627,11 @@ Partial Class Employees
         '
         Me.btnMaximize.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnMaximize.Image = Global.AVT_TRAKING.My.Resources.Resources.maximize2
-        Me.btnMaximize.Location = New System.Drawing.Point(697, 1)
+        Me.btnMaximize.Location = New System.Drawing.Point(696, 4)
         Me.btnMaximize.Name = "btnMaximize"
         Me.btnMaximize.Size = New System.Drawing.Size(26, 26)
         Me.btnMaximize.TabIndex = 5
         Me.btnMaximize.TabStop = False
-        '
-        'btnRestore
-        '
-        Me.btnRestore.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnRestore.Image = Global.AVT_TRAKING.My.Resources.Resources.restore2
-        Me.btnRestore.Location = New System.Drawing.Point(697, 1)
-        Me.btnRestore.Name = "btnRestore"
-        Me.btnRestore.Size = New System.Drawing.Size(31, 31)
-        Me.btnRestore.TabIndex = 6
-        Me.btnRestore.TabStop = False
-        Me.btnRestore.Visible = False
         '
         'btnMinimized
         '
@@ -729,6 +646,8 @@ Partial Class Employees
         'Button1
         '
         Me.Button1.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Button1.FlatAppearance.BorderSize = 0
+        Me.Button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.Button1.ForeColor = System.Drawing.Color.Red
         Me.Button1.Image = Global.AVT_TRAKING.My.Resources.Resources._exit
         Me.Button1.Location = New System.Drawing.Point(685, 35)
@@ -737,6 +656,75 @@ Partial Class Employees
         Me.Button1.Size = New System.Drawing.Size(37, 42)
         Me.Button1.TabIndex = 22
         Me.Button1.UseVisualStyleBackColor = True
+        '
+        'PictureBox1
+        '
+        Me.PictureBox1.Image = Global.AVT_TRAKING.My.Resources.Resources.loupe
+        Me.PictureBox1.Location = New System.Drawing.Point(79, 147)
+        Me.PictureBox1.Name = "PictureBox1"
+        Me.PictureBox1.Size = New System.Drawing.Size(25, 24)
+        Me.PictureBox1.TabIndex = 24
+        Me.PictureBox1.TabStop = False
+        '
+        'btnCancel
+        '
+        Me.btnCancel.FlatAppearance.BorderSize = 0
+        Me.btnCancel.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(41, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(185, Byte), Integer))
+        Me.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnCancel.Font = New System.Drawing.Font("Verdana", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnCancel.Image = Global.AVT_TRAKING.My.Resources.Resources.cancel
+        Me.btnCancel.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnCancel.Location = New System.Drawing.Point(455, 144)
+        Me.btnCancel.Name = "btnCancel"
+        Me.btnCancel.Size = New System.Drawing.Size(89, 34)
+        Me.btnCancel.TabIndex = 21
+        Me.btnCancel.Text = "Cancel"
+        Me.btnCancel.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.btnCancel.UseVisualStyleBackColor = True
+        '
+        'btnUpdate
+        '
+        Me.btnUpdate.FlatAppearance.BorderSize = 0
+        Me.btnUpdate.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(41, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(185, Byte), Integer))
+        Me.btnUpdate.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnUpdate.Font = New System.Drawing.Font("Verdana", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnUpdate.Image = Global.AVT_TRAKING.My.Resources.Resources.update
+        Me.btnUpdate.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnUpdate.Location = New System.Drawing.Point(445, 115)
+        Me.btnUpdate.Name = "btnUpdate"
+        Me.btnUpdate.Size = New System.Drawing.Size(99, 23)
+        Me.btnUpdate.TabIndex = 20
+        Me.btnUpdate.Text = "Update"
+        Me.btnUpdate.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.btnUpdate.UseVisualStyleBackColor = True
+        '
+        'btnSave
+        '
+        Me.btnSave.FlatAppearance.BorderSize = 0
+        Me.btnSave.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(41, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(185, Byte), Integer))
+        Me.btnSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnSave.Font = New System.Drawing.Font("Verdana", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnSave.ForeColor = System.Drawing.Color.White
+        Me.btnSave.Image = Global.AVT_TRAKING.My.Resources.Resources.save
+        Me.btnSave.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnSave.Location = New System.Drawing.Point(364, 110)
+        Me.btnSave.Name = "btnSave"
+        Me.btnSave.Size = New System.Drawing.Size(75, 28)
+        Me.btnSave.TabIndex = 14
+        Me.btnSave.Text = "Save"
+        Me.btnSave.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.btnSave.UseVisualStyleBackColor = True
+        '
+        'imgPhoto
+        '
+        Me.imgPhoto.BackColor = System.Drawing.Color.White
+        Me.imgPhoto.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.imgPhoto.Location = New System.Drawing.Point(550, 6)
+        Me.imgPhoto.Name = "imgPhoto"
+        Me.imgPhoto.Size = New System.Drawing.Size(120, 132)
+        Me.imgPhoto.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
+        Me.imgPhoto.TabIndex = 12
+        Me.imgPhoto.TabStop = False
         '
         'Employees
         '
@@ -754,9 +742,7 @@ Partial Class Employees
         Me.TabControl1.ResumeLayout(False)
         Me.tbpEmployees.ResumeLayout(False)
         Me.tbpEmployees.PerformLayout()
-        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.tblEmployees, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.imgPhoto, System.ComponentModel.ISupportInitialize).EndInit()
         Me.tbpOtherData.ResumeLayout(False)
         Me.GroupBox3.ResumeLayout(False)
         Me.GroupBox3.PerformLayout()
@@ -770,8 +756,9 @@ Partial Class Employees
         Me.TitleBar.ResumeLayout(False)
         Me.TitleBar.PerformLayout()
         CType(Me.btnMaximize, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.btnRestore, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.btnMinimized, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.imgPhoto, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -834,7 +821,6 @@ Partial Class Employees
     Friend WithEvents TitleBar As Panel
     Friend WithEvents btnMinimized As PictureBox
     Friend WithEvents btnMaximize As PictureBox
-    Friend WithEvents btnRestore As PictureBox
     Friend WithEvents PictureBox1 As PictureBox
     Friend WithEvents Label20 As Label
 End Class

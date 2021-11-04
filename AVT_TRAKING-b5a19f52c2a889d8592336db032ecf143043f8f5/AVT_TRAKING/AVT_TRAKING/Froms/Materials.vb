@@ -2,6 +2,7 @@
 Imports System.Data.SqlClient
 Imports Microsoft.Office.Core
 Imports Microsoft.Office.Interop.Excel
+Imports System.Runtime.InteropServices
 
 Public Class Materials
 
@@ -397,6 +398,13 @@ Public Class Materials
         End Try
     End Sub
 
+    Private Sub PictureBox3_Click(sender As Object, e As EventArgs) Handles PictureBox3.Click
+        WindowState = FormWindowState.Maximized
+    End Sub
+
+    Private Sub PictureBox4_Click(sender As Object, e As EventArgs) Handles PictureBox4.Click
+        Me.WindowState = FormWindowState.Minimized
+    End Sub
 
     Private Sub NAR(ByVal o As Object)
         Try
@@ -485,6 +493,8 @@ Public Class Materials
         End Try
     End Sub
 
+
+
     Private Sub btnMaterialUploadExcel_Click(sender As Object, e As EventArgs) Handles btnMaterialUploadExcel.Click
         Try
             Dim openFile As New OpenFileDialog
@@ -544,6 +554,19 @@ Public Class Materials
             MsgBox(ex.Message())
             txtMensajeProseso.Text = txtMensajeProseso.Text + vbCrLf + "Error"
         End Try
+    End Sub
+
+    <DllImport("user32.DLL", EntryPoint:="ReleaseCapture")>
+    Private Shared Sub ReleaseCapture()
+    End Sub
+    <DllImport("user32.DLL", EntryPoint:="SendMessage")>
+    Private Shared Sub SendMessage(hWnd As IntPtr, wMsg As Integer, wParam As Integer, lParam As Integer)
+    End Sub
+
+
+    Private Sub TitleBar_MouseMove(sender As Object, e As MouseEventArgs) Handles TitleBar.MouseMove
+        ReleaseCapture()
+        SendMessage(Me.Handle, &H112&, &HF012&, 0)
     End Sub
 
 End Class

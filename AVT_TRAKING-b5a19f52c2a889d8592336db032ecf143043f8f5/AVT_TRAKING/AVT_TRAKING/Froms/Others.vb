@@ -1,4 +1,5 @@
-﻿Public Class Others
+﻿Imports System.Runtime.InteropServices
+Public Class Others
     Dim mtdOthers As New MetodosOthers
 
     Dim auxEmploye As String
@@ -18,7 +19,7 @@
         mtdOthers.agregarTypeEmployee(txtTypeEmployee.Text)
     End Sub
 
-    Private Sub btnDeleteTypeEmployee_Click(sender As Object, e As EventArgs) Handles btnDeleteTypeEmployee.Click
+    Private Sub btnDeleteTypeEmployee_Click(sender As Object, e As EventArgs)
         Dim item1 As String = lstTypeEmployee.SelectedItem
         lstTypeEmployee.Items.Remove(lstTypeEmployee.SelectedItem)
         mtdOthers.deleteTypeEmployee(item1)
@@ -328,4 +329,29 @@
             btnAddImg.Enabled = False
         End If
     End Sub
+
+    Private Sub PictureBox1_Click(sender As Object, e As EventArgs) Handles PictureBox1.Click
+        WindowState = FormWindowState.Maximized
+    End Sub
+
+    Private Sub PictureBox2_Click(sender As Object, e As EventArgs) Handles PictureBox2.Click
+        Me.WindowState = FormWindowState.Minimized
+    End Sub
+
+    <DllImport("user32.DLL", EntryPoint:="ReleaseCapture")>
+    Private Shared Sub ReleaseCapture()
+    End Sub
+    <DllImport("user32.DLL", EntryPoint:="SendMessage")>
+    Private Shared Sub SendMessage(hWnd As IntPtr, wMsg As Integer, wParam As Integer, lParam As Integer)
+    End Sub
+    Private Sub TitleBar_MouseMove(sender As Object, e As MouseEventArgs) Handles TitleBar.MouseMove
+        ReleaseCapture()
+        SendMessage(Me.Handle, &H112&, &HF012&, 0)
+    End Sub
+
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+        Me.Close()
+    End Sub
+
+
 End Class
