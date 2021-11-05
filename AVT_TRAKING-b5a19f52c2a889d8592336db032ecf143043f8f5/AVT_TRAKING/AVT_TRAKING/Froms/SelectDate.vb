@@ -2,6 +2,7 @@
     Dim flagExtenion As Boolean
     Dim fechaStart, fechaEnd As Date
     Public HWPE As Boolean
+    Public DVT As Boolean
     Private Sub SelectDate_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         flagExtenion = False
     End Sub
@@ -28,6 +29,11 @@
             End If
             hwpe.fechaStart = fechaStart
             hwpe.fechaEnd = fechaEnd
+            Me.Close()
+        ElseIf DVT Then
+            Dim dvtf As DismantleValidationTable = CType(Owner, DismantleValidationTable)
+            dvtf.fechaStart = fechaStart
+            dvtf.txtFecha.Text = fechaStart.ToShortDateString()
             Me.Close()
         Else
             Dim tvt As TagsValidationTable = CType(Owner, TagsValidationTable)

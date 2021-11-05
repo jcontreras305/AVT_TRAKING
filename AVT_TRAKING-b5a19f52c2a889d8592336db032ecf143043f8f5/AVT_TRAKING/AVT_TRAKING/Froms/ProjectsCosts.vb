@@ -1,6 +1,4 @@
-﻿Imports System.Runtime.InteropServices
-
-Public Class ProjectsCosts
+﻿Public Class ProjectsCosts
     Dim mtdJobs As New MetodosJobs
     Dim mtdOthers As New MetodosOthers
     Dim mtdEmpleados As New MetodosEmployees
@@ -385,7 +383,7 @@ Public Class ProjectsCosts
                 activarCampos(False)
             End If
             mtdJobs.consultaWO(JobNumber, tablasDeTareas)
-        End If
+            End If
     End Sub
 
     Private Sub cmbJobNumber_KeyPress(sender As Object, e As KeyPressEventArgs) Handles cmbJobNumber.KeyPress
@@ -424,7 +422,7 @@ Public Class ProjectsCosts
                     pjtNuevo.idTask = txtTask.Text
                 End If
             Else
-                txtTask.Text = ""
+                    txtTask.Text = ""
             End If
         Else
             If validarTask() Then
@@ -1298,35 +1296,8 @@ Public Class ProjectsCosts
         tblHoursWorkedProject.Enabled = activar
     End Sub
 
-    <DllImport("user32.DLL", EntryPoint:="ReleaseCapture")>
-    Private Shared Sub ReleaseCapture()
-    End Sub
-    <DllImport("user32.DLL", EntryPoint:="SendMessage")>
-    Private Shared Sub SendMessage(hWnd As IntPtr, wMsg As Integer, wParam As Integer, lParam As Integer)
-    End Sub
-    Private Sub Panel4_MouseMove(sender As Object, e As MouseEventArgs) Handles Panel4.MouseMove
-        ReleaseCapture()
-        SendMessage(Me.Handle, &H112&, &HF012&, 0)
-    End Sub
-
-    Private Sub btnMaximize_Click(sender As Object, e As EventArgs) Handles btnMaximize.Click
-        WindowState = FormWindowState.Maximized
-        btnMaximize.Visible = False
-        btnRestore.Visible = True
-    End Sub
-
-    Private Sub btnRestore_Click(sender As Object, e As EventArgs) Handles btnRestore.Click
-        WindowState = FormWindowState.Normal
-        btnRestore.Visible = False
-        btnMaximize.Visible = True
-    End Sub
-
-    Private Sub PictureBox2_Click(sender As Object, e As EventArgs) Handles PictureBox2.Click
-        Me.WindowState = FormWindowState.Minimized
-    End Sub
-
-    Private Sub PictureBox3_Click(sender As Object, e As EventArgs) Handles PictureBox3.Click
-        Me.Close()
+    Private Sub sprPorcentComplete_ValueChanged(sender As Object, e As EventArgs) Handles sprPorcentComplete.ValueChanged
+        calcularValores()
     End Sub
 
     Private Function calcularValores() As Boolean
@@ -1394,6 +1365,13 @@ Public Class ProjectsCosts
             mensaje = If(mensaje.Equals(""), "Total estimated hours were exceded.", ", Total estimated hours were exceded.")
         End If
 
+        lblTotalHours.Text = CStr(totalHoursST + totalHoursOT + totalHours3)
+        If sprPorcentComplete.Value > 0 Then
+            lblEarned.Text = (sprHoursEstimate.Value * sprPorcentComplete.Value) / 100
+            If (totalHoursST + totalHoursOT + totalHours3) > 0 Then
+                lblPF.Text = Format(Val(CDec(If(lblEarned.Text = "", "0", lblEarned.Text)) / CDec(If(lblTotalHours.Text = "", "0", lblTotalHours.Text))), "0#.##")
+            End If
+        End If
 
         If Not mensaje.Equals("") Then
             txtMensaje.Text = mensaje

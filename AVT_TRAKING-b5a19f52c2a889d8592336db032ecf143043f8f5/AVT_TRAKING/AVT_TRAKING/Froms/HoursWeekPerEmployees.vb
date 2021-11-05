@@ -342,18 +342,22 @@ Public Class HoursWeekPerEmployees
             End If
             index += 1
         Next
-        mtdHPW.buscarHoras(tblRecordEmployee, idsEmployees.Rows(index).ItemArray(0))
-        tblRecordEmployee.Columns("Billing Rate").ReadOnly = True
-        tblRecordEmployee.Columns("Billing Rate OT").ReadOnly = True
-        tblRecordEmployee.Columns("Billing Rate 3").ReadOnly = True
-        mtdHPW.bucarExpensesEmpleado(tblExpenses, idsEmployees.Rows(index).ItemArray(0))
-        tblHourPeerDay.Rows.Clear()
-        tblHourPeerDay.Rows.Add(ultimoDiaDeLaSemana(System.DateTime.Today.ToShortDateString()).ToShortDateString(), idsEmployees.Rows(index).ItemArray(1), 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
-        pcbPhoto.Image = BytetoImage(idsEmployees.Rows(index).ItemArray(2))
-        lblEmployeeNumber.Text = idsEmployees.Rows(index).ItemArray(4)
-        lblNombreEmployee.Text = idsEmployees.Rows(index).ItemArray(1)
-        NombreEmpleado = idsEmployees.Rows(index).ItemArray(1)
-        btnSAP.Text = idsEmployees.Rows(index).ItemArray(3)
+        If idsEmployees.Rows.Count > 0 Then
+
+
+            mtdHPW.buscarHoras(tblRecordEmployee, idsEmployees.Rows(index).ItemArray(0))
+            tblRecordEmployee.Columns("Billing Rate").ReadOnly = True
+            tblRecordEmployee.Columns("Billing Rate OT").ReadOnly = True
+            tblRecordEmployee.Columns("Billing Rate 3").ReadOnly = True
+            mtdHPW.bucarExpensesEmpleado(tblExpenses, idsEmployees.Rows(index).ItemArray(0))
+            tblHourPeerDay.Rows.Clear()
+            tblHourPeerDay.Rows.Add(ultimoDiaDeLaSemana(System.DateTime.Today.ToShortDateString()).ToShortDateString(), idsEmployees.Rows(index).ItemArray(1), 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+            pcbPhoto.Image = BytetoImage(idsEmployees.Rows(index).ItemArray(2))
+            lblEmployeeNumber.Text = idsEmployees.Rows(index).ItemArray(4)
+            lblNombreEmployee.Text = idsEmployees.Rows(index).ItemArray(1)
+            NombreEmpleado = idsEmployees.Rows(index).ItemArray(1)
+            btnSAP.Text = idsEmployees.Rows(index).ItemArray(3)
+        End If
         Dim hoursST As Double = 0.0
         Dim hoursOT As Double = 0.0
         Dim hours3 As Double = 0.0
@@ -418,9 +422,11 @@ Public Class HoursWeekPerEmployees
         txtTotalOT.Text = hoursOT
         txtHours3.Text = hours3
         txtTotalHours.Text = hourTotal
-        tblHourPeerDay.Rows(0).Cells(2).Value = HoursSTWeek
-        tblHourPeerDay.Rows(0).Cells(3).Value = HoursOTWeek
-        tblHourPeerDay.Rows(0).Cells(4).Value = Hours3Week
+        If tblHourPeerDay.Rows.Count > 0 Then
+            tblHourPeerDay.Rows(0).Cells(2).Value = HoursSTWeek
+            tblHourPeerDay.Rows(0).Cells(3).Value = HoursOTWeek
+            tblHourPeerDay.Rows(0).Cells(4).Value = Hours3Week
+        End If
     End Sub
     'evento de la tabla para agregar un evento aun ComboBoxCell
     Private Sub tblRecordEmployee_EditingControlShowing(sender As Object, e As DataGridViewEditingControlShowingEventArgs) Handles tblRecordEmployee.EditingControlShowing
