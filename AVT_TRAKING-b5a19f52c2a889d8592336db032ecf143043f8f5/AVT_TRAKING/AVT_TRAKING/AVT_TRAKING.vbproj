@@ -398,6 +398,7 @@
     <None Include="Images\delete.png" />
     <None Include="Images\download.png" />
     <None Include="Images\after.png" />
+    <None Include="Images\exit2.png" />
     <Content Include="Images\eye.png" />
     <None Include="Images\minimize.png" />
     <None Include="Images\show.png" />
@@ -426,6 +427,7 @@
     <None Include="Images\peerdiem.png" />
     <None Include="Images\saveall.png" />
     <None Include="Images\new.png" />
+    <None Include="Images\refresh.png" />
     <Content Include="Images\user.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
