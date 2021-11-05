@@ -1,4 +1,6 @@
-﻿Public Class ProjectsCosts
+﻿Imports System.Runtime.InteropServices
+
+Public Class ProjectsCosts
     Dim mtdJobs As New MetodosJobs
     Dim mtdOthers As New MetodosOthers
     Dim mtdEmpleados As New MetodosEmployees
@@ -383,7 +385,7 @@
                 activarCampos(False)
             End If
             mtdJobs.consultaWO(JobNumber, tablasDeTareas)
-            End If
+        End If
     End Sub
 
     Private Sub cmbJobNumber_KeyPress(sender As Object, e As KeyPressEventArgs) Handles cmbJobNumber.KeyPress
@@ -422,7 +424,7 @@
                     pjtNuevo.idTask = txtTask.Text
                 End If
             Else
-                    txtTask.Text = ""
+                txtTask.Text = ""
             End If
         Else
             If validarTask() Then
@@ -1296,6 +1298,36 @@
         tblHoursWorkedProject.Enabled = activar
     End Sub
 
+    <DllImport("user32.DLL", EntryPoint:="ReleaseCapture")>
+    Private Shared Sub ReleaseCapture()
+    End Sub
+    <DllImport("user32.DLL", EntryPoint:="SendMessage")>
+    Private Shared Sub SendMessage(hWnd As IntPtr, wMsg As Integer, wParam As Integer, lParam As Integer)
+    End Sub
+    Private Sub Panel4_MouseMove(sender As Object, e As MouseEventArgs) Handles Panel4.MouseMove
+        ReleaseCapture()
+        SendMessage(Me.Handle, &H112&, &HF012&, 0)
+    End Sub
+
+    Private Sub btnMaximize_Click(sender As Object, e As EventArgs) Handles btnMaximize.Click
+        WindowState = FormWindowState.Maximized
+        btnMaximize.Visible = False
+        btnRestore.Visible = True
+    End Sub
+
+    Private Sub btnRestore_Click(sender As Object, e As EventArgs) Handles btnRestore.Click
+        WindowState = FormWindowState.Normal
+        btnRestore.Visible = False
+        btnMaximize.Visible = True
+    End Sub
+
+    Private Sub PictureBox2_Click(sender As Object, e As EventArgs) Handles PictureBox2.Click
+        Me.WindowState = FormWindowState.Minimized
+    End Sub
+
+    Private Sub PictureBox3_Click(sender As Object, e As EventArgs) Handles PictureBox3.Click
+        Me.Close()
+    End Sub
 
     Private Function calcularValores() As Boolean
         Dim totalCostHoursST As Double = 0.0

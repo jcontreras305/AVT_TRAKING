@@ -388,6 +388,7 @@
     <None Include="Images\add.png" />
     <None Include="Images\delete.png" />
     <None Include="Images\download.png" />
+    <None Include="Images\after.png" />
     <Content Include="Images\eye.png" />
     <None Include="Images\minimize.png" />
     <None Include="Images\show.png" />
@@ -408,6 +409,14 @@
     <None Include="Images\project.png" />
     <None Include="Images\time.png" />
     <None Include="Images\setup.png" />
+    <None Include="Images\next.png" />
+    <None Include="Images\holiday.png" />
+    <None Include="Images\material.png" />
+    <None Include="Images\payroll.png" />
+    <None Include="Images\upload2.png" />
+    <None Include="Images\peerdiem.png" />
+    <None Include="Images\saveall.png" />
+    <None Include="Images\new.png" />
     <Content Include="Images\user.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
