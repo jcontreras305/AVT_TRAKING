@@ -1296,6 +1296,9 @@
         tblHoursWorkedProject.Enabled = activar
     End Sub
 
+    Private Sub sprPorcentComplete_ValueChanged(sender As Object, e As EventArgs) Handles sprPorcentComplete.ValueChanged
+        calcularValores()
+    End Sub
 
     Private Function calcularValores() As Boolean
         Dim totalCostHoursST As Double = 0.0
@@ -1362,6 +1365,13 @@
             mensaje = If(mensaje.Equals(""), "Total estimated hours were exceded.", ", Total estimated hours were exceded.")
         End If
 
+        lblTotalHours.Text = CStr(totalHoursST + totalHoursOT + totalHours3)
+        If sprPorcentComplete.Value > 0 Then
+            lblEarned.Text = (sprHoursEstimate.Value * sprPorcentComplete.Value) / 100
+            If (totalHoursST + totalHoursOT + totalHours3) > 0 Then
+                lblPF.Text = Format(Val(CDec(If(lblEarned.Text = "", "0", lblEarned.Text)) / CDec(If(lblTotalHours.Text = "", "0", lblTotalHours.Text))), "0#.##")
+            End If
+        End If
 
         If Not mensaje.Equals("") Then
             txtMensaje.Text = mensaje
