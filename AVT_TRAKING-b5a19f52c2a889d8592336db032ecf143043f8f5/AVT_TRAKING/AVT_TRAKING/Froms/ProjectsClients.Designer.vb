@@ -256,7 +256,7 @@ Partial Class ProjectsClients
         Me.btnProyeccts.Name = "btnProyeccts"
         Me.btnProyeccts.Size = New System.Drawing.Size(216, 55)
         Me.btnProyeccts.TabIndex = 1
-        Me.btnProyeccts.Text = "Proyects"
+        Me.btnProyeccts.Text = "Projects"
         Me.btnProyeccts.UseVisualStyleBackColor = True
         '
         'Panel2

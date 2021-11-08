@@ -28,11 +28,11 @@ Partial Class SelectMaterial
         Me.Label2 = New System.Windows.Forms.Label()
         Me.cmbNombreVendorSM = New System.Windows.Forms.ComboBox()
         Me.TitleBar = New System.Windows.Forms.Panel()
+        Me.Label3 = New System.Windows.Forms.Label()
         Me.PictureBox2 = New System.Windows.Forms.PictureBox()
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.btnOK = New System.Windows.Forms.Button()
         Me.btnCancel = New System.Windows.Forms.Button()
-        Me.Label3 = New System.Windows.Forms.Label()
         CType(Me.tblMaterialSM, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.TitleBar.SuspendLayout()
         CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -94,7 +94,7 @@ Partial Class SelectMaterial
         '
         Me.TitleBar.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.TitleBar.BackColor = System.Drawing.Color.FromArgb(CType(CType(23, Byte), Integer), CType(CType(45, Byte), Integer), CType(CType(67, Byte), Integer))
+        Me.TitleBar.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(58, Byte), Integer), CType(CType(115, Byte), Integer))
         Me.TitleBar.Controls.Add(Me.Label3)
         Me.TitleBar.Controls.Add(Me.PictureBox2)
         Me.TitleBar.Controls.Add(Me.PictureBox1)
@@ -102,6 +102,16 @@ Partial Class SelectMaterial
         Me.TitleBar.Name = "TitleBar"
         Me.TitleBar.Size = New System.Drawing.Size(384, 31)
         Me.TitleBar.TabIndex = 7
+        '
+        'Label3
+        '
+        Me.Label3.AutoSize = True
+        Me.Label3.Font = New System.Drawing.Font("Verdana", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label3.Location = New System.Drawing.Point(3, 3)
+        Me.Label3.Name = "Label3"
+        Me.Label3.Size = New System.Drawing.Size(137, 18)
+        Me.Label3.TabIndex = 2
+        Me.Label3.Text = "Select Material"
         '
         'PictureBox2
         '
@@ -154,21 +164,11 @@ Partial Class SelectMaterial
         Me.btnCancel.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         Me.btnCancel.UseVisualStyleBackColor = True
         '
-        'Label3
-        '
-        Me.Label3.AutoSize = True
-        Me.Label3.Font = New System.Drawing.Font("Verdana", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label3.Location = New System.Drawing.Point(3, 3)
-        Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(137, 18)
-        Me.Label3.TabIndex = 2
-        Me.Label3.Text = "Select Material"
-        '
         'SelectMaterial
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(58, Byte), Integer), CType(CType(115, Byte), Integer))
+        Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(83, Byte), Integer), CType(CType(93, Byte), Integer), CType(CType(102, Byte), Integer))
         Me.ClientSize = New System.Drawing.Size(382, 415)
         Me.Controls.Add(Me.TitleBar)
         Me.Controls.Add(Me.cmbNombreVendorSM)

@@ -1,4 +1,4 @@
-﻿Imports System.Runtime.InteropServices
+﻿
 Public Class MainFrom
     Private Sub BtnMaterials_Click(sender As Object, e As EventArgs) Handles btnMaterials.Click
         OpenFormPanel(Of Materials)()
@@ -46,42 +46,16 @@ Public Class MainFrom
 
     End Sub
 
-    Private Sub btnClose_Click(sender As Object, e As EventArgs) Handles btnClose.Click
+    Private Sub btnClose_Click(sender As Object, e As EventArgs)
         Application.Exit()
     End Sub
 
-    Private Sub PictureBox1_Click(sender As Object, e As EventArgs) Handles PictureBox1.Click
-        Me.WindowState = FormWindowState.Minimized
-    End Sub
 
-    Private Sub btnMaximize_Click(sender As Object, e As EventArgs) Handles btnMaximize.Click
-        WindowState = FormWindowState.Maximized
-        btnMaximize.Visible = False
-        btnRestore.Visible = True
-    End Sub
-
-    Private Sub btnRestore_Click(sender As Object, e As EventArgs) Handles btnRestore.Click
-        WindowState = FormWindowState.Normal
-        btnRestore.Visible = False
-        btnMaximize.Visible = True
-
-    End Sub
 
     Private Sub MainFrom_Load(sender As Object, e As EventArgs) Handles MyBase.Load
 
     End Sub
 
-    <DllImport("user32.DLL", EntryPoint:="ReleaseCapture")>
-    Private Shared Sub ReleaseCapture()
-    End Sub
-    <DllImport("user32.DLL", EntryPoint:="SendMessage")>
-    Private Shared Sub SendMessage(hWnd As IntPtr, wMsg As Integer, wParam As Integer, lParam As Integer)
-    End Sub
-
-    Private Sub TitleBar_MouseMove(sender As Object, e As MouseEventArgs) Handles TitleBar.MouseMove
-        ReleaseCapture()
-        SendMessage(Me.Handle, &H112&, &HF012&, 0)
-    End Sub
 
     Private Sub Panel2_Paint(sender As Object, e As PaintEventArgs) Handles Panel2.Paint
 
@@ -106,4 +80,6 @@ Public Class MainFrom
             FormPanel.BringToFront()
         End If
     End Sub
+
+
 End Class
