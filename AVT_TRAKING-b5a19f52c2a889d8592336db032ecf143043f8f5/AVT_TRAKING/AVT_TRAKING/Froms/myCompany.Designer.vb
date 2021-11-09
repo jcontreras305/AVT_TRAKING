@@ -54,19 +54,18 @@ Partial Class myCompany
         Me.btnRestore = New System.Windows.Forms.PictureBox()
         Me.btnMaximize = New System.Windows.Forms.PictureBox()
         Me.Label12 = New System.Windows.Forms.Label()
+        Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
         Me.Panel1.SuspendLayout()
         CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.TitleBar.SuspendLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.btnRestore, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.btnMaximize, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.TableLayoutPanel1.SuspendLayout()
         Me.SuspendLayout()
         '
         'Panel1
         '
-        Me.Panel1.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Panel1.BackColor = System.Drawing.Color.FromArgb(CType(CType(83, Byte), Integer), CType(CType(93, Byte), Integer), CType(CType(102, Byte), Integer))
         Me.Panel1.Controls.Add(Me.PictureBox2)
         Me.Panel1.Controls.Add(Me.lblEmail)
@@ -94,18 +93,19 @@ Partial Class myCompany
         Me.Panel1.Controls.Add(Me.Label3)
         Me.Panel1.Controls.Add(Me.Label2)
         Me.Panel1.Controls.Add(Me.Label1)
+        Me.Panel1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel1.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Panel1.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.Panel1.Location = New System.Drawing.Point(0, 32)
+        Me.Panel1.Location = New System.Drawing.Point(3, 43)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(490, 352)
+        Me.Panel1.Size = New System.Drawing.Size(482, 335)
         Me.Panel1.TabIndex = 0
         '
         'PictureBox2
         '
         Me.PictureBox2.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.PictureBox2.Image = Global.AVT_TRAKING.My.Resources.Resources._exit
-        Me.PictureBox2.Location = New System.Drawing.Point(447, 9)
+        Me.PictureBox2.Location = New System.Drawing.Point(439, 9)
         Me.PictureBox2.Name = "PictureBox2"
         Me.PictureBox2.Size = New System.Drawing.Size(40, 30)
         Me.PictureBox2.TabIndex = 4
@@ -326,17 +326,17 @@ Partial Class myCompany
         Me.TitleBar.Controls.Add(Me.btnRestore)
         Me.TitleBar.Controls.Add(Me.btnMaximize)
         Me.TitleBar.Controls.Add(Me.Label12)
-        Me.TitleBar.Dock = System.Windows.Forms.DockStyle.Top
-        Me.TitleBar.Location = New System.Drawing.Point(0, 0)
+        Me.TitleBar.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.TitleBar.Location = New System.Drawing.Point(3, 3)
         Me.TitleBar.Name = "TitleBar"
-        Me.TitleBar.Size = New System.Drawing.Size(490, 33)
+        Me.TitleBar.Size = New System.Drawing.Size(482, 34)
         Me.TitleBar.TabIndex = 1
         '
         'PictureBox1
         '
         Me.PictureBox1.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.PictureBox1.Image = Global.AVT_TRAKING.My.Resources.Resources.minimize2
-        Me.PictureBox1.Location = New System.Drawing.Point(430, 3)
+        Me.PictureBox1.Location = New System.Drawing.Point(422, 3)
         Me.PictureBox1.Name = "PictureBox1"
         Me.PictureBox1.Size = New System.Drawing.Size(26, 30)
         Me.PictureBox1.TabIndex = 3
@@ -346,7 +346,7 @@ Partial Class myCompany
         '
         Me.btnRestore.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnRestore.Image = Global.AVT_TRAKING.My.Resources.Resources.restore2
-        Me.btnRestore.Location = New System.Drawing.Point(462, 3)
+        Me.btnRestore.Location = New System.Drawing.Point(454, 3)
         Me.btnRestore.Name = "btnRestore"
         Me.btnRestore.Size = New System.Drawing.Size(26, 30)
         Me.btnRestore.TabIndex = 2
@@ -356,7 +356,7 @@ Partial Class myCompany
         '
         Me.btnMaximize.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnMaximize.Image = Global.AVT_TRAKING.My.Resources.Resources.maximize2
-        Me.btnMaximize.Location = New System.Drawing.Point(462, 3)
+        Me.btnMaximize.Location = New System.Drawing.Point(454, 3)
         Me.btnMaximize.Name = "btnMaximize"
         Me.btnMaximize.Size = New System.Drawing.Size(25, 30)
         Me.btnMaximize.TabIndex = 1
@@ -373,13 +373,26 @@ Partial Class myCompany
         Me.Label12.TabIndex = 0
         Me.Label12.Text = "My Company"
         '
+        'TableLayoutPanel1
+        '
+        Me.TableLayoutPanel1.ColumnCount = 1
+        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
+        Me.TableLayoutPanel1.Controls.Add(Me.TitleBar, 0, 0)
+        Me.TableLayoutPanel1.Controls.Add(Me.Panel1, 0, 1)
+        Me.TableLayoutPanel1.Location = New System.Drawing.Point(3, 1)
+        Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
+        Me.TableLayoutPanel1.RowCount = 2
+        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40.0!))
+        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
+        Me.TableLayoutPanel1.Size = New System.Drawing.Size(488, 381)
+        Me.TableLayoutPanel1.TabIndex = 2
+        '
         'myCompany
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(490, 384)
-        Me.Controls.Add(Me.TitleBar)
-        Me.Controls.Add(Me.Panel1)
+        Me.Controls.Add(Me.TableLayoutPanel1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
         Me.Name = "myCompany"
         Me.Text = "My Company"
@@ -391,6 +404,7 @@ Partial Class myCompany
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.btnRestore, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.btnMaximize, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.TableLayoutPanel1.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
@@ -427,4 +441,5 @@ Partial Class myCompany
     Friend WithEvents PictureBox1 As PictureBox
     Friend WithEvents btnRestore As PictureBox
     Friend WithEvents btnMaximize As PictureBox
+    Friend WithEvents TableLayoutPanel1 As TableLayoutPanel
 End Class

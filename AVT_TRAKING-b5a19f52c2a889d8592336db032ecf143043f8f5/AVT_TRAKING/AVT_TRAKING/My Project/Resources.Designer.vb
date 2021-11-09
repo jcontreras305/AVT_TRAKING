@@ -113,6 +113,16 @@ Namespace My.Resources
         '''<summary>
         '''  Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         '''</summary>
+        Friend ReadOnly Property allTables() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("allTables", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        '''</summary>
         Friend ReadOnly Property cancel() As System.Drawing.Bitmap
             Get
                 Dim obj As Object = ResourceManager.GetObject("cancel", resourceCulture)
@@ -206,6 +216,16 @@ Namespace My.Resources
         Friend ReadOnly Property exit2() As System.Drawing.Bitmap
             Get
                 Dim obj As Object = ResourceManager.GetObject("exit2", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        '''</summary>
+        Friend ReadOnly Property extend() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("extend", resourceCulture)
                 Return CType(obj,System.Drawing.Bitmap)
             End Get
         End Property
@@ -366,6 +386,16 @@ Namespace My.Resources
         Friend ReadOnly Property project() As System.Drawing.Bitmap
             Get
                 Dim obj As Object = ResourceManager.GetObject("project", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        '''</summary>
+        Friend ReadOnly Property query() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("query", resourceCulture)
                 Return CType(obj,System.Drawing.Bitmap)
             End Get
         End Property

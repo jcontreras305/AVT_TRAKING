@@ -1,4 +1,5 @@
-﻿Public Class Herramientas
+﻿Imports System.Runtime.InteropServices
+Public Class Herramientas
     Private Sub TabPage1_Click(sender As Object, e As EventArgs) Handles TabPage1.Click
 
     End Sub
@@ -76,5 +77,38 @@
         txtRentaH.Text = dgv.Cells(2).Value.ToString()
         txtNombreH.Text = dgv.Cells(3).Value.ToString()
 
+    End Sub
+
+    Private Sub PictureBox5_Click(sender As Object, e As EventArgs) Handles PictureBox5.Click
+        Me.WindowState = FormWindowState.Minimized
+    End Sub
+
+    <DllImport("user32.DLL", EntryPoint:="ReleaseCapture")>
+    Private Shared Sub ReleaseCapture()
+    End Sub
+    <DllImport("user32.DLL", EntryPoint:="SendMessage")>
+    Private Shared Sub SendMessage(hWnd As IntPtr, wMsg As Integer, wParam As Integer, lParam As Integer)
+    End Sub
+
+
+    Private Sub TitleBar_MouseMove(sender As Object, e As MouseEventArgs) Handles TitleBar.MouseMove
+        ReleaseCapture()
+        SendMessage(Me.Handle, &H112&, &HF012&, 0)
+    End Sub
+
+    Private Sub btnMaximize_Click(sender As Object, e As EventArgs) Handles btnMaximize.Click
+        WindowState = FormWindowState.Maximized
+        btnMaximize.Visible = False
+        btnRestore.Visible = True
+    End Sub
+
+    Private Sub btnRestore_Click(sender As Object, e As EventArgs) Handles btnRestore.Click
+        WindowState = FormWindowState.Normal
+        btnRestore.Visible = False
+        btnMaximize.Visible = True
+    End Sub
+
+    Private Sub PictureBox4_Click(sender As Object, e As EventArgs) Handles PictureBox4.Click
+        Me.Close()
     End Sub
 End Class

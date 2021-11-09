@@ -399,6 +399,8 @@
     <None Include="Images\download.png" />
     <None Include="Images\after.png" />
     <None Include="Images\exit2.png" />
+    <None Include="Images\allTables.png" />
+    <None Include="Images\extend.png" />
     <Content Include="Images\eye.png" />
     <None Include="Images\minimize.png" />
     <None Include="Images\show.png" />
@@ -428,6 +430,7 @@
     <None Include="Images\saveall.png" />
     <None Include="Images\new.png" />
     <None Include="Images\refresh.png" />
+    <None Include="Images\query.png" />
     <Content Include="Images\user.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />

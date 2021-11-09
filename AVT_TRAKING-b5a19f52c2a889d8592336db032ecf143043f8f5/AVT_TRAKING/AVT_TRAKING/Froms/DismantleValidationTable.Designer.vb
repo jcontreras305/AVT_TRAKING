@@ -24,6 +24,11 @@ Partial Class DismantleValidationTable
     Private Sub InitializeComponent()
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
         Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.Label2 = New System.Windows.Forms.Label()
+        Me.PictureBox4 = New System.Windows.Forms.PictureBox()
+        Me.btnRestore = New System.Windows.Forms.PictureBox()
+        Me.PictureBox2 = New System.Windows.Forms.PictureBox()
+        Me.btnMaximize = New System.Windows.Forms.PictureBox()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.sprFirstRow = New System.Windows.Forms.NumericUpDown()
         Me.btnSave = New System.Windows.Forms.Button()
@@ -65,6 +70,10 @@ Partial Class DismantleValidationTable
         Me.lblMessage = New System.Windows.Forms.Label()
         Me.TableLayoutPanel1.SuspendLayout()
         Me.Panel1.SuspendLayout()
+        CType(Me.PictureBox4, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.btnRestore, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.btnMaximize, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.sprFirstRow, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel2.SuspendLayout()
         Me.TabControl1.SuspendLayout()
@@ -84,7 +93,7 @@ Partial Class DismantleValidationTable
         Me.TableLayoutPanel1.Location = New System.Drawing.Point(0, 0)
         Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
         Me.TableLayoutPanel1.RowCount = 3
-        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50.0!))
+        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 80.0!))
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30.0!))
         Me.TableLayoutPanel1.Size = New System.Drawing.Size(800, 450)
@@ -92,6 +101,12 @@ Partial Class DismantleValidationTable
         '
         'Panel1
         '
+        Me.Panel1.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(58, Byte), Integer), CType(CType(115, Byte), Integer))
+        Me.Panel1.Controls.Add(Me.Label2)
+        Me.Panel1.Controls.Add(Me.PictureBox4)
+        Me.Panel1.Controls.Add(Me.btnRestore)
+        Me.Panel1.Controls.Add(Me.PictureBox2)
+        Me.Panel1.Controls.Add(Me.btnMaximize)
         Me.Panel1.Controls.Add(Me.Label1)
         Me.Panel1.Controls.Add(Me.sprFirstRow)
         Me.Panel1.Controls.Add(Me.btnSave)
@@ -99,27 +114,79 @@ Partial Class DismantleValidationTable
         Me.Panel1.Controls.Add(Me.txtFecha)
         Me.Panel1.Controls.Add(Me.cmbDatos)
         Me.Panel1.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Panel1.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Panel1.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.Panel1.Location = New System.Drawing.Point(3, 3)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(794, 44)
+        Me.Panel1.Size = New System.Drawing.Size(794, 74)
         Me.Panel1.TabIndex = 0
+        '
+        'Label2
+        '
+        Me.Label2.AutoSize = True
+        Me.Label2.Font = New System.Drawing.Font("Verdana", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label2.Location = New System.Drawing.Point(2, 4)
+        Me.Label2.Name = "Label2"
+        Me.Label2.Size = New System.Drawing.Size(229, 18)
+        Me.Label2.TabIndex = 16
+        Me.Label2.Text = "DismantleValidationTable"
+        '
+        'PictureBox4
+        '
+        Me.PictureBox4.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.PictureBox4.Image = Global.AVT_TRAKING.My.Resources.Resources.minimize2
+        Me.PictureBox4.Location = New System.Drawing.Point(700, 3)
+        Me.PictureBox4.Name = "PictureBox4"
+        Me.PictureBox4.Size = New System.Drawing.Size(28, 31)
+        Me.PictureBox4.TabIndex = 15
+        Me.PictureBox4.TabStop = False
+        '
+        'btnRestore
+        '
+        Me.btnRestore.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnRestore.Image = Global.AVT_TRAKING.My.Resources.Resources.restore2
+        Me.btnRestore.Location = New System.Drawing.Point(734, 3)
+        Me.btnRestore.Name = "btnRestore"
+        Me.btnRestore.Size = New System.Drawing.Size(25, 24)
+        Me.btnRestore.TabIndex = 14
+        Me.btnRestore.TabStop = False
+        '
+        'PictureBox2
+        '
+        Me.PictureBox2.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.PictureBox2.Image = Global.AVT_TRAKING.My.Resources.Resources._exit
+        Me.PictureBox2.Location = New System.Drawing.Point(751, 36)
+        Me.PictureBox2.Name = "PictureBox2"
+        Me.PictureBox2.Size = New System.Drawing.Size(40, 31)
+        Me.PictureBox2.TabIndex = 13
+        Me.PictureBox2.TabStop = False
+        '
+        'btnMaximize
+        '
+        Me.btnMaximize.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnMaximize.Image = Global.AVT_TRAKING.My.Resources.Resources.maximize2
+        Me.btnMaximize.Location = New System.Drawing.Point(765, 3)
+        Me.btnMaximize.Name = "btnMaximize"
+        Me.btnMaximize.Size = New System.Drawing.Size(26, 31)
+        Me.btnMaximize.TabIndex = 1
+        Me.btnMaximize.TabStop = False
         '
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(283, 14)
+        Me.Label1.Location = New System.Drawing.Point(283, 48)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(96, 13)
+        Me.Label1.Size = New System.Drawing.Size(109, 13)
         Me.Label1.TabIndex = 12
         Me.Label1.Text = "First Row To Read"
         '
         'sprFirstRow
         '
-        Me.sprFirstRow.Location = New System.Drawing.Point(385, 12)
+        Me.sprFirstRow.Location = New System.Drawing.Point(393, 46)
         Me.sprFirstRow.Maximum = New Decimal(New Integer() {1000, 0, 0, 0})
         Me.sprFirstRow.Minimum = New Decimal(New Integer() {2, 0, 0, 0})
         Me.sprFirstRow.Name = "sprFirstRow"
-        Me.sprFirstRow.Size = New System.Drawing.Size(63, 20)
+        Me.sprFirstRow.Size = New System.Drawing.Size(63, 21)
         Me.sprFirstRow.TabIndex = 2
         Me.sprFirstRow.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         Me.sprFirstRow.Value = New Decimal(New Integer() {2, 0, 0, 0})
@@ -127,34 +194,46 @@ Partial Class DismantleValidationTable
         'btnSave
         '
         Me.btnSave.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnSave.Location = New System.Drawing.Point(682, 6)
+        Me.btnSave.FlatAppearance.BorderSize = 0
+        Me.btnSave.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(58, Byte), Integer), CType(CType(115, Byte), Integer))
+        Me.btnSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnSave.Image = Global.AVT_TRAKING.My.Resources.Resources.save1
+        Me.btnSave.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnSave.Location = New System.Drawing.Point(594, 40)
         Me.btnSave.Name = "btnSave"
-        Me.btnSave.Size = New System.Drawing.Size(103, 31)
+        Me.btnSave.Size = New System.Drawing.Size(74, 31)
         Me.btnSave.TabIndex = 10
         Me.btnSave.Text = "Save"
+        Me.btnSave.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         Me.btnSave.UseVisualStyleBackColor = True
         '
         'btnUpdateExcel
         '
         Me.btnUpdateExcel.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnUpdateExcel.Location = New System.Drawing.Point(567, 6)
+        Me.btnUpdateExcel.FlatAppearance.BorderSize = 0
+        Me.btnUpdateExcel.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(58, Byte), Integer), CType(CType(115, Byte), Integer))
+        Me.btnUpdateExcel.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnUpdateExcel.Image = Global.AVT_TRAKING.My.Resources.Resources.upload2
+        Me.btnUpdateExcel.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnUpdateExcel.Location = New System.Drawing.Point(473, 39)
         Me.btnUpdateExcel.Name = "btnUpdateExcel"
-        Me.btnUpdateExcel.Size = New System.Drawing.Size(103, 31)
+        Me.btnUpdateExcel.Size = New System.Drawing.Size(119, 31)
         Me.btnUpdateExcel.TabIndex = 3
         Me.btnUpdateExcel.Text = "Update Excel"
+        Me.btnUpdateExcel.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         Me.btnUpdateExcel.UseVisualStyleBackColor = True
         '
         'txtFecha
         '
-        Me.txtFecha.Location = New System.Drawing.Point(146, 11)
+        Me.txtFecha.Location = New System.Drawing.Point(146, 45)
         Me.txtFecha.Name = "txtFecha"
-        Me.txtFecha.Size = New System.Drawing.Size(131, 20)
+        Me.txtFecha.Size = New System.Drawing.Size(131, 21)
         Me.txtFecha.TabIndex = 1
         '
         'cmbDatos
         '
         Me.cmbDatos.FormattingEnabled = True
-        Me.cmbDatos.Location = New System.Drawing.Point(9, 11)
+        Me.cmbDatos.Location = New System.Drawing.Point(9, 45)
         Me.cmbDatos.Name = "cmbDatos"
         Me.cmbDatos.Size = New System.Drawing.Size(131, 21)
         Me.cmbDatos.TabIndex = 0
@@ -163,9 +242,9 @@ Partial Class DismantleValidationTable
         '
         Me.Panel2.Controls.Add(Me.TabControl1)
         Me.Panel2.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel2.Location = New System.Drawing.Point(3, 53)
+        Me.Panel2.Location = New System.Drawing.Point(3, 83)
         Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(794, 364)
+        Me.Panel2.Size = New System.Drawing.Size(794, 334)
         Me.Panel2.TabIndex = 1
         '
         'TabControl1
@@ -175,7 +254,7 @@ Partial Class DismantleValidationTable
         Me.TabControl1.Location = New System.Drawing.Point(0, 0)
         Me.TabControl1.Name = "TabControl1"
         Me.TabControl1.SelectedIndex = 0
-        Me.TabControl1.Size = New System.Drawing.Size(794, 364)
+        Me.TabControl1.Size = New System.Drawing.Size(794, 334)
         Me.TabControl1.TabIndex = 1
         '
         'TabPage1
@@ -184,7 +263,7 @@ Partial Class DismantleValidationTable
         Me.TabPage1.Location = New System.Drawing.Point(4, 22)
         Me.TabPage1.Name = "TabPage1"
         Me.TabPage1.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage1.Size = New System.Drawing.Size(786, 338)
+        Me.TabPage1.Size = New System.Drawing.Size(786, 308)
         Me.TabPage1.TabIndex = 2
         Me.TabPage1.Text = "Dismantle"
         Me.TabPage1.UseVisualStyleBackColor = True
@@ -198,7 +277,7 @@ Partial Class DismantleValidationTable
         Me.tblDismantleSC.Dock = System.Windows.Forms.DockStyle.Fill
         Me.tblDismantleSC.Location = New System.Drawing.Point(3, 3)
         Me.tblDismantleSC.Name = "tblDismantleSC"
-        Me.tblDismantleSC.Size = New System.Drawing.Size(780, 332)
+        Me.tblDismantleSC.Size = New System.Drawing.Size(780, 302)
         Me.tblDismantleSC.TabIndex = 0
         '
         'clmErrorD
@@ -365,9 +444,12 @@ Partial Class DismantleValidationTable
         '
         'Panel3
         '
+        Me.Panel3.BackColor = System.Drawing.Color.FromArgb(CType(CType(83, Byte), Integer), CType(CType(93, Byte), Integer), CType(CType(102, Byte), Integer))
         Me.Panel3.Controls.Add(Me.pgbComplete)
         Me.Panel3.Controls.Add(Me.lblMessage)
         Me.Panel3.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Panel3.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Panel3.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.Panel3.Location = New System.Drawing.Point(3, 423)
         Me.Panel3.Name = "Panel3"
         Me.Panel3.Size = New System.Drawing.Size(794, 24)
@@ -387,7 +469,7 @@ Partial Class DismantleValidationTable
         Me.lblMessage.Dock = System.Windows.Forms.DockStyle.Left
         Me.lblMessage.Location = New System.Drawing.Point(0, 0)
         Me.lblMessage.Name = "lblMessage"
-        Me.lblMessage.Size = New System.Drawing.Size(53, 13)
+        Me.lblMessage.Size = New System.Drawing.Size(61, 13)
         Me.lblMessage.TabIndex = 0
         Me.lblMessage.Text = "Message:"
         '
@@ -397,11 +479,16 @@ Partial Class DismantleValidationTable
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(800, 450)
         Me.Controls.Add(Me.TableLayoutPanel1)
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
         Me.Name = "DismantleValidationTable"
         Me.Text = "DimantleValidationTable"
         Me.TableLayoutPanel1.ResumeLayout(False)
         Me.Panel1.ResumeLayout(False)
         Me.Panel1.PerformLayout()
+        CType(Me.PictureBox4, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.btnRestore, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.btnMaximize, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.sprFirstRow, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel2.ResumeLayout(False)
         Me.TabControl1.ResumeLayout(False)
@@ -454,4 +541,9 @@ Partial Class DismantleValidationTable
     Friend WithEvents TotalHours As DataGridViewTextBoxColumn
     Friend WithEvents Comments As DataGridViewTextBoxColumn
     Public WithEvents txtFecha As TextBox
+    Friend WithEvents PictureBox2 As PictureBox
+    Friend WithEvents btnMaximize As PictureBox
+    Friend WithEvents PictureBox4 As PictureBox
+    Friend WithEvents btnRestore As PictureBox
+    Friend WithEvents Label2 As Label
 End Class
