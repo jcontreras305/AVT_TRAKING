@@ -2,6 +2,7 @@
 Imports System.Runtime.InteropServices
 Public Class myCompany
     Dim mtdCompany As New metodosCompany
+
     Private Sub myCompany_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         mtdCompany.cargarDatos()
         txtAddress.Text = mtdCompany.address

@@ -23,7 +23,7 @@ Partial Class DismantleValidationTable
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
-        Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.TitleBar = New System.Windows.Forms.Panel()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.PictureBox4 = New System.Windows.Forms.PictureBox()
         Me.btnRestore = New System.Windows.Forms.PictureBox()
@@ -69,7 +69,7 @@ Partial Class DismantleValidationTable
         Me.pgbComplete = New System.Windows.Forms.ProgressBar()
         Me.lblMessage = New System.Windows.Forms.Label()
         Me.TableLayoutPanel1.SuspendLayout()
-        Me.Panel1.SuspendLayout()
+        Me.TitleBar.SuspendLayout()
         CType(Me.PictureBox4, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.btnRestore, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -86,7 +86,7 @@ Partial Class DismantleValidationTable
         '
         Me.TableLayoutPanel1.ColumnCount = 1
         Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-        Me.TableLayoutPanel1.Controls.Add(Me.Panel1, 0, 0)
+        Me.TableLayoutPanel1.Controls.Add(Me.TitleBar, 0, 0)
         Me.TableLayoutPanel1.Controls.Add(Me.Panel2, 0, 1)
         Me.TableLayoutPanel1.Controls.Add(Me.Panel3, 0, 2)
         Me.TableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill
@@ -99,27 +99,27 @@ Partial Class DismantleValidationTable
         Me.TableLayoutPanel1.Size = New System.Drawing.Size(800, 450)
         Me.TableLayoutPanel1.TabIndex = 0
         '
-        'Panel1
+        'TitleBar
         '
-        Me.Panel1.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(58, Byte), Integer), CType(CType(115, Byte), Integer))
-        Me.Panel1.Controls.Add(Me.Label2)
-        Me.Panel1.Controls.Add(Me.PictureBox4)
-        Me.Panel1.Controls.Add(Me.btnRestore)
-        Me.Panel1.Controls.Add(Me.PictureBox2)
-        Me.Panel1.Controls.Add(Me.btnMaximize)
-        Me.Panel1.Controls.Add(Me.Label1)
-        Me.Panel1.Controls.Add(Me.sprFirstRow)
-        Me.Panel1.Controls.Add(Me.btnSave)
-        Me.Panel1.Controls.Add(Me.btnUpdateExcel)
-        Me.Panel1.Controls.Add(Me.txtFecha)
-        Me.Panel1.Controls.Add(Me.cmbDatos)
-        Me.Panel1.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel1.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Panel1.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.Panel1.Location = New System.Drawing.Point(3, 3)
-        Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(794, 74)
-        Me.Panel1.TabIndex = 0
+        Me.TitleBar.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(58, Byte), Integer), CType(CType(115, Byte), Integer))
+        Me.TitleBar.Controls.Add(Me.Label2)
+        Me.TitleBar.Controls.Add(Me.PictureBox4)
+        Me.TitleBar.Controls.Add(Me.btnRestore)
+        Me.TitleBar.Controls.Add(Me.PictureBox2)
+        Me.TitleBar.Controls.Add(Me.btnMaximize)
+        Me.TitleBar.Controls.Add(Me.Label1)
+        Me.TitleBar.Controls.Add(Me.sprFirstRow)
+        Me.TitleBar.Controls.Add(Me.btnSave)
+        Me.TitleBar.Controls.Add(Me.btnUpdateExcel)
+        Me.TitleBar.Controls.Add(Me.txtFecha)
+        Me.TitleBar.Controls.Add(Me.cmbDatos)
+        Me.TitleBar.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.TitleBar.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TitleBar.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.TitleBar.Location = New System.Drawing.Point(3, 3)
+        Me.TitleBar.Name = "TitleBar"
+        Me.TitleBar.Size = New System.Drawing.Size(794, 74)
+        Me.TitleBar.TabIndex = 0
         '
         'Label2
         '
@@ -483,8 +483,8 @@ Partial Class DismantleValidationTable
         Me.Name = "DismantleValidationTable"
         Me.Text = "DimantleValidationTable"
         Me.TableLayoutPanel1.ResumeLayout(False)
-        Me.Panel1.ResumeLayout(False)
-        Me.Panel1.PerformLayout()
+        Me.TitleBar.ResumeLayout(False)
+        Me.TitleBar.PerformLayout()
         CType(Me.PictureBox4, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.btnRestore, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).EndInit()
@@ -501,7 +501,7 @@ Partial Class DismantleValidationTable
     End Sub
 
     Friend WithEvents TableLayoutPanel1 As TableLayoutPanel
-    Friend WithEvents Panel1 As Panel
+    Friend WithEvents TitleBar As Panel
     Friend WithEvents cmbDatos As ComboBox
     Friend WithEvents Panel2 As Panel
     Friend WithEvents Panel3 As Panel

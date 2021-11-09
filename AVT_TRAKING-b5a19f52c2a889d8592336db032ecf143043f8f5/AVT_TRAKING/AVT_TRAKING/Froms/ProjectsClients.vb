@@ -9,6 +9,8 @@ Public Class ProjectsClients
     Public idCliente, idPO, jobNum, workOrder, task As String
     Public clnfromclnFrom As Boolean = True
 
+
+
     Private Sub ocultarPaneles()
         PnllSetup.Visible = False
     End Sub
