@@ -247,7 +247,7 @@ Public Class DismantleValidationTable
     End Sub
 
     Private Sub PictureBox4_Click(sender As Object, e As EventArgs) Handles PictureBox4.Click
-        Me.WindowState = FormWindowState.Minimized
+        WindowState = FormWindowState.Minimized
     End Sub
 
     <DllImport("user32.DLL", EntryPoint:="ReleaseCapture")>
