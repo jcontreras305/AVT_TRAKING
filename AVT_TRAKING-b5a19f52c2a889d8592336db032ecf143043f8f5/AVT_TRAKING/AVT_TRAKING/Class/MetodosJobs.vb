@@ -745,7 +745,8 @@ tk.expCode,
 tk.accountNum,
 tk.status,
 tk.idAux,
-tk.idAuxWO
+tk.idAuxWO,
+tk.percentComplete
 from 
 job as jb 
 inner join clients as cl on jb.idClient = cl.idClient
@@ -772,6 +773,7 @@ where jb.jobNo = " + If(idJob = "", "0", idJob).ToString(), conn)
                 lstDatosPO.Add(reader("status"))
                 lstDatosPO.Add(reader("idAux"))
                 lstDatosPO.Add(reader("idAuxWO"))
+                lstDatosPO.Add(reader("percentComplete"))
                 Exit While
             End While
             desconectar()
@@ -802,13 +804,14 @@ tk.expCode,
 tk.accountNum,
 tk.status,
 tk.idAux,
-tk.idAuxWO
+tk.idAuxWO,
+tk.percentComplete
 from 
 job as jb 
 inner join clients as cl on jb.idClient = cl.idClient
 inner join projectOrder as po on jb.jobNo = po.jobNo 
-left join workOrder as wo on po.idPO = wo.idPO
-left join task as tk on tk.idAuxWO = wo.idAuxWO 
+inner join workOrder as wo on po.idPO = wo.idPO
+left join task as tk on tk.idAuxWO = wo.idAuxWO
 where jb.jobNo = " + If(idJob = "", "0", idJob).ToString() + " and tk.task = '" + task + "' and wo.idAuxWO ='" + idAuxWO + "'", conn)
             Dim lstDatosPO As New List(Of String)
             Dim reader As SqlDataReader = cmd.ExecuteReader()
@@ -829,6 +832,7 @@ where jb.jobNo = " + If(idJob = "", "0", idJob).ToString() + " and tk.task = '" 
                 lstDatosPO.Add(reader("status"))
                 lstDatosPO.Add(reader("idAux"))
                 lstDatosPO.Add(reader("idAuxWO"))
+                lstDatosPO.Add(reader("percentComplete"))
                 Exit While
             End While
             desconectar()
@@ -1085,6 +1089,27 @@ inner join workOrder as wo on wo.idWO = tk.idWO
 inner join projectOrder as po on po.idPO = wo.idPO
 inner join job as jb on jb.jobNo = po.jobNo 
 where tk.idAux = '" + idAux + "' and wo.idWO = " + WO, conn)
+            If cmd.ExecuteNonQuery > 0 Then
+                desconectar()
+                Return True
+            Else
+                Return False
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message)
+            Return False
+        End Try
+    End Function
+
+    Public Function updateCompleteProgress(ByVal percent As Double, ByVal idAux As String, ByVal WO As String)
+        Try
+            conectar()
+            Dim cmd As New SqlCommand("update task set percentComplete  = " + percent.ToString() + "
+from task as tk 
+inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO
+inner join projectOrder as po on po.idPO = wo.idPO
+inner join job as jb on jb.jobNo = po.jobNo 
+where tk.idAux = '" + idAux + "' and wo.idAuxWO = '" + WO + "'", conn)
             If cmd.ExecuteNonQuery > 0 Then
                 desconectar()
                 Return True

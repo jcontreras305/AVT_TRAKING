@@ -3222,8 +3222,12 @@ Public Class scafoldTarking
     Private Sub cmbForemanDismantle_TextChanged(sender As Object, e As EventArgs) Handles cmbForemanDismantle.TextChanged, cmbForemanDismantle.SelectedValueChanged
         If Not loadingDataDismentle Then
             ds.foreman = cmbForemanDismantle.Text
-        Else
-            cmbForemanDismantle.Text = ""
+        End If
+    End Sub
+
+    Private Sub cmbErectorDismantle_SelectedValueChanged(sender As Object, e As EventArgs) Handles cmbErectorDismantle.SelectedValueChanged, cmbErectorDismantle.TextChanged
+        If Not loadingDataDismentle Then
+            ds.erector = cmbErectorDismantle.Text
         End If
     End Sub
 

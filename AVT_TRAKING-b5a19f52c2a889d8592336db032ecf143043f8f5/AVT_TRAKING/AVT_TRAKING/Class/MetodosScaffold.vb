@@ -2520,6 +2520,7 @@ left join job as jb on jb.jobNo = po.jobNo", conn)
     Public Function llenarComboReqCompany(ByVal combo As ComboBox) As Boolean
         Try
             conectar()
+            combo.Items.Clear()
             Dim cmd As New SqlCommand("select distinct reqCompany from (select distinct reqCompany from dismantle
 union 
 select distinct reqCompany from modification) as t1", conn)
@@ -2538,6 +2539,7 @@ select distinct reqCompany from modification) as t1", conn)
     Public Function llenarComboRequestBy(ByVal combo As ComboBox) As Boolean
         Try
             conectar()
+            combo.Items.Clear()
             Dim cmd As New SqlCommand("select distinct requestBy from (select distinct requestBy from dismantle
 union 
 select distinct requestBy from modification) as t1", conn)
@@ -2897,7 +2899,7 @@ end", conn)
         Dim ds As New dismantle
         Try
             conectar()
-            Dim cmdDS As New SqlCommand("select  top 1 ds.idDismantle, ds.tag,ds.comments,ds.reqCompany,ds.requestBy,ds.rentStopDate,ds.dismantleDate,ds.foreman, 
+            Dim cmdDS As New SqlCommand("select  top 1 ds.idDismantle, ds.tag,ds.comments,ds.reqCompany,ds.requestBy,ds.rentStopDate,ds.dismantleDate,ds.foreman,ds.erector, 
 (select CONCAT(wk.idWO,'-',tk.task) from scaffoldTraking as sc 
 left join task as tk on sc.idAux = tk.idAux
 left join workOrder as wk on wk.idAuxWO = tk.idAuxWO where sc.tag = ds.tag ) as WO 
@@ -2914,6 +2916,7 @@ where ds.tag = '" + tag + "'", conn)
                 ds.stopDismantle = If(rd1("rentStopDate") IsNot DBNull.Value, validarFechaParaVB(rd1("rentStopDate")), System.DateTime.Today)
                 ds.dismantleDate = If(rd1("dismantleDate") IsNot DBNull.Value, validarFechaParaVB(rd1("dismantleDate")), System.DateTime.Today)
                 ds.foreman = If(rd1("foreman") IsNot DBNull.Value, rd1("foreman"), "")
+                ds.erector = If(rd1("erector") IsNot DBNull.Value, rd1("erector"), "")
                 ds.wo = If(rd1("WO") IsNot DBNull.Value, rd1("WO"), "")
                 Exit While
             End While
@@ -2938,7 +2941,7 @@ where ds.tag = '" + tag + "'", conn)
         Try
             Dim cmd As New SqlCommand("
     declare @tag as varchar(20) = '" + ds.tag + "'
-	declare @idDismantle as varchar(36) = " + If(ds.idDismantle = "", "NEWID()", ds.idDismantle) + "
+	declare @idDismantle as varchar(36) = '" + If(ds.idDismantle = "", "NEWID()", ds.idDismantle) + "'
 	declare @countProduct as int = (select COUNT (*) from productTotalScaffold where tag = @tag and status = 't')
 	declare @qty as float
 	declare @idProduct as int 

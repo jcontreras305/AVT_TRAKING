@@ -189,8 +189,7 @@ ha.idHomeAdress, ha.avenue ,ha.number, ha.city ,ha.providence,ha.postalCode from
         End Try
     End Sub
 
-    Dim consultaProyetosClientes As String = "
-select 
+    Dim consultaProyetosClientes As String = "select 
 	(select CONCAT(wo.idWO,' ',tk.task)) as 'Work Order' , 
 	
 	case when tk.description is null then ''
@@ -198,8 +197,8 @@ select
 	
 	case when tk.status is null then 0
 	else tk.status end as 'Cmp',
-	case when (select tk.totalSpend from task where idWO = wo.idWO and idAux = tk.idAux ) is null then 0
-	else  (select tk.totalSpend from task where idWO = wo.idWO and idAux = tk.idAux ) end
+	case when (select tk.totalSpend from task where idWO = wo.idWO and idAux = tk.idAux ) is null then CONCAT('$' ,0)
+	else concat( '$',(select tk.totalSpend from task where idWO = wo.idWO and idAux = tk.idAux ) )end
 	 as 'Total Spend',
 	
 	case when (select SUM(hoursST) from hoursWorked as hw where hw.idAux = tk.idAux) is null then 0 
@@ -208,15 +207,15 @@ select
 		
 	case when 
 	(
-	select SUM(T2.Amount) as 'Total Amount ST' from 
+	select CONCAT('$' ,SUM(T2.Amount)) as 'Total Amount ST' from 
 	(select SUM(T1.hoursST*T1.billingRate1) AS 'Amount'
 	from (select idHorsWorked,hoursST, hw.idWorkCode , billingRate1  from hoursWorked as hw inner join workCode as wc on wc.idWorkCode = hw.idWorkCode 
 	where idAux=tk.idAux)as T1    
 	group by T1.idWorkCode) as T2
-	) is null then 0
+	) is null then '$0' 
 	else 
 	(
-	select SUM(T2.Amount) as 'Total Amount ST' from 
+	select CONCAT('$' ,IIF(SUM(T2.Amount)is null ,'0',SUM(T2.Amount))) as 'Total Amount ST' from 
 	(select SUM(T1.hoursST*T1.billingRate1) AS 'Amount'
 	from (select idHorsWorked,hoursST, hw.idWorkCode , billingRate1  from hoursWorked as hw inner join workCode as wc on wc.idWorkCode = hw.idWorkCode 
 	where idAux=tk.idAux)as T1    
@@ -228,14 +227,14 @@ select
 	end	as 'Total Hours OT',
 
 	case when 
-	(select SUM(T2.Amount) from 
+	(select CONCAT('$' , SUM(T2.Amount)) from 
 	(select SUM(T1.hoursOT*T1.billingRateOT) AS 'Amount'
 	from (select idHorsWorked,hoursOT, hw.idWorkCode , billingRateOT  from hoursWorked as hw inner join workCode as wc on wc.idWorkCode = hw.idWorkCode 
 	where idAux=tk.idAux)as T1 
 	group by T1.idWorkCode) as T2
-	) IS NULL  THEN 0
+	) IS NULL  THEN CONCAT('$' , 0)
 	ELSE
-	(select SUM(T2.Amount) from 
+	(select CONCAT('$' ,IIF( SUM(T2.Amount)is null,'0',SUM(T2.Amount))) from 
 	(select SUM(T1.hoursOT*T1.billingRateOT) AS 'Amount'
 	from (select idHorsWorked,hoursOT, hw.idWorkCode , billingRateOT  from hoursWorked as hw inner join workCode as wc on wc.idWorkCode = hw.idWorkCode 
 	where idAux=tk.idAux)as T1 
@@ -248,14 +247,14 @@ select
 	end	as 'Total Hours 3',
 	case when 
 	
-	(select SUM(T2.Amount) from 
+	(select CONCAT('$' ,SUM(T2.Amount)) from 
 	(select SUM(T1.hours3*T1.billingRate3) AS 'Amount'
 	from (select idHorsWorked,hours3, hw.idWorkCode , billingRate3  from hoursWorked as hw inner join workCode as wc on wc.idWorkCode = hw.idWorkCode 
 	where idAux=tk.idAux)as T1 
 	group by T1.idWorkCode) as T2
-	) IS NULL  THEN 0
+	) IS NULL  THEN CONCAT('$' , 0)
 	ELSE
-	(select SUM(T2.Amount) from 
+	(select CONCAT('$' ,IIF(SUM(T2.Amount)is null,'0',SUM(T2.Amount))) from 
 	(select SUM(T1.hours3*T1.billingRate3) AS 'Amount'
 	from (select idHorsWorked,hours3, hw.idWorkCode , billingRate3  from hoursWorked as hw inner join workCode as wc on wc.idWorkCode = hw.idWorkCode 
 	where idAux=tk.idAux)as T1 
@@ -264,11 +263,11 @@ select
 	END	as 'Total Amount 3',
 
 	CASE WHEN 
-	(select SUM( amount) from expensesUsed where idAux = tk.idAux) IS NULL THEN 0
-	ELSE (select SUM( amount) from expensesUsed where idAux = tk.idAux) END AS 'Total Expenses Spend', 
+	(select  SUM( amount) from expensesUsed where idAux = tk.idAux) IS NULL THEN CONCAT('$' ,0)
+	ELSE CONCAT('$' ,(select SUM( amount) from expensesUsed where idAux = tk.idAux)) END AS 'Total Expenses Spend', 
 	CASE WHEN 
-	(select sum (amount) from materialUsed where idAux = tk.idAux) IS NULL THEN 0
-	ELSE (select sum (amount) from materialUsed where idAux = tk.idAux) END AS 'Total Material Spend',
+	(select sum (amount) from materialUsed where idAux = tk.idAux) IS NULL THEN CONCAT('$' , 0)
+	ELSE CONCAT('$' ,(select sum (amount) from materialUsed where idAux = tk.idAux)) END AS 'Total Material Spend',
     jb.jobNo,
    	jb.workTMLumpSum,
 	jb.costDistribution,
@@ -279,8 +278,10 @@ select
 	jb.costCode,
     cln.idClient,
     po.idPO,
-    tk.task as idTask,
-    wo.idAuxWO
+	CASE WHEN tk.task IS NULL THEN ''
+	ELSE tk.task END AS 'idTask', 
+    CASE WHEN wo.idAuxWO IS NULL THEN ''
+	ELSE wo.idAuxWO END AS 'idAuxWO'
 from
 clients as cln left join job as jb on jb.idClient = cln.idClient
 inner join projectOrder as po on po.jobNo = jb.jobNo

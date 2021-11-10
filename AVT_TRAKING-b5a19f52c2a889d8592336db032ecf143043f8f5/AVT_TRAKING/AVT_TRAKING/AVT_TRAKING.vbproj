@@ -336,6 +336,9 @@
     <EmbeddedResource Include="Froms\TagsValidationTable.resx">
       <DependentUpon>TagsValidationTable.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Froms\Taxes.resx">
+      <DependentUpon>Taxes.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Froms\TimeSheet.resx">
       <DependentUpon>TimeSheet.vb</DependentUpon>
     </EmbeddedResource>

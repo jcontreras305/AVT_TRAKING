@@ -6,10 +6,8 @@ Public Class ProjectsClients
     Dim mtdClient As New MetodosClients
     Dim mtdOthers As New MetodosOthers
     Public datosClientesPO As New List(Of String)
-    Public idCliente, idPO, jobNum, workOrder, task As String
+    Public idCliente, idPO, jobNum, workOrder, task, taskTaxes, idWOAuxTaxes As String
     Public clnfromclnFrom As Boolean = True
-
-
 
     Private Sub ocultarPaneles()
         PnllSetup.Visible = False
@@ -308,11 +306,13 @@ Public Class ProjectsClients
         btnMaximize.Visible = True
     End Sub
 
+    Private Sub TableLayoutPanel1_Paint(sender As Object, e As PaintEventArgs) Handles TableLayoutPanel1.Paint
+
+    End Sub
+
     Private Sub PictureBox2_Click(sender As Object, e As EventArgs) Handles PictureBox2.Click
         Me.WindowState = FormWindowState.Minimized
     End Sub
-
-
 
     Private Sub cmbCostCode_Leave(sender As Object, e As EventArgs) Handles cmbCostCode.Leave
         If btnAdd.Text = "Add" Then  'Se supone que no esta agregando si no que esta actualizando o visualizado unicamente
@@ -326,7 +326,9 @@ Public Class ProjectsClients
             idPO = tblProjectClients.CurrentRow.Cells("idPO").Value
             jobNum = tblProjectClients.CurrentRow.Cells("jobNo").Value
             idCliente = tblProjectClients.CurrentRow.Cells("idClient").Value
+            idWOAuxTaxes = tblProjectClients.CurrentRow.Cells("idAuxWO").Value
             separaridWODeidTask(tblProjectClients.CurrentRow.Cells("Work Order").Value)
+            taskTaxes = tblProjectClients.CurrentRow.Cells("idTask").Value
             llenarCampos(tblProjectClients.CurrentRow)
         End If
     End Sub
@@ -345,6 +347,16 @@ Public Class ProjectsClients
     Private Sub btnCompanyInformation_Click(sender As Object, e As EventArgs) Handles btnCompanyInformation.Click
         Dim company As New myCompany
         company.ShowDialog()
+    End Sub
+
+    Private Sub btnTaxes_Click(sender As Object, e As EventArgs) Handles btnTaxes.Click
+        Dim taxes As New Taxes
+        AddOwnedForm(taxes)
+        taxes.task = task
+        taxes.wo = workOrder
+        taxes.idTask = taskTaxes
+        taxes.idWO = idWOAuxTaxes
+        taxes.ShowDialog()
     End Sub
 
 End Class

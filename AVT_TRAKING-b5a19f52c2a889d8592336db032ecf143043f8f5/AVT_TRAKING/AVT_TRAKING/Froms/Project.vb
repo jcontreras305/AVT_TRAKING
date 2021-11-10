@@ -2,7 +2,7 @@
     Private _jobNum As Integer
     Private _accountNum, _equipament, _manager, _description, _expCode, _idWO, _idAuxWO, _idPO, _idAux, _idTask As String
     Private _beginDate, _endDate As Date
-    Private _estimateHours, _totalBilling As Double
+    Private _estimateHours, _totalBilling, _PercentComplete As Double
     Private _status As Char
 
     Public Property idAux() As String
@@ -127,6 +127,19 @@
         End Get
         Set(value As Double)
             _totalBilling = value
+        End Set
+    End Property
+
+    Public Property PercentComplete() As Double
+        Get
+            If _PercentComplete <> Nothing Then
+                Return _PercentComplete
+            Else
+                Return 0
+            End If
+        End Get
+        Set(ByVal PercentComplete As Double)
+            _PercentComplete = PercentComplete
         End Set
     End Property
 

@@ -22,14 +22,14 @@ Partial Class scafoldTarking
     'No lo modifique con el editor de código.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle17 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle18 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle19 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle20 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle21 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle22 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle23 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle24 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle9 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle10 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle11 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle12 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle13 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle14 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle15 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle16 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.Panel3 = New System.Windows.Forms.Panel()
         Me.tabControl1 = New System.Windows.Forms.TabControl()
@@ -44,8 +44,11 @@ Partial Class scafoldTarking
         Me.ProductDescription = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.idProductInComing = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Panel5 = New System.Windows.Forms.Panel()
+        Me.btnDeleteRowInComing = New System.Windows.Forms.Button()
+        Me.btnSaveRowInComing = New System.Windows.Forms.Button()
         Me.btnNextInComing = New System.Windows.Forms.Button()
         Me.btnBackInComing = New System.Windows.Forms.Button()
+        Me.btnNewInComing = New System.Windows.Forms.Button()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.txtCommentsInComing = New System.Windows.Forms.TextBox()
@@ -70,6 +73,9 @@ Partial Class scafoldTarking
         Me.Panel8 = New System.Windows.Forms.Panel()
         Me.btnNextTicketOutGoing = New System.Windows.Forms.Button()
         Me.btnBackTicketOutGoing = New System.Windows.Forms.Button()
+        Me.btnDeleteRowOutGoing = New System.Windows.Forms.Button()
+        Me.btnSaveRowOutGoing = New System.Windows.Forms.Button()
+        Me.btnNewOutGoing = New System.Windows.Forms.Button()
         Me.txtCommentOut = New System.Windows.Forms.TextBox()
         Me.cmbSuperintendent = New System.Windows.Forms.ComboBox()
         Me.cmbShippedBY = New System.Windows.Forms.ComboBox()
@@ -203,13 +209,17 @@ Partial Class scafoldTarking
         Me.dtpReqCompScaffold = New System.Windows.Forms.DateTimePicker()
         Me.Panel43 = New System.Windows.Forms.Panel()
         Me.lblInfoSC = New System.Windows.Forms.Label()
+        Me.btnExcelScaffold = New System.Windows.Forms.Button()
         Me.lblPSQF = New System.Windows.Forms.Label()
         Me.lblPLF = New System.Windows.Forms.Label()
         Me.Label67 = New System.Windows.Forms.Label()
         Me.Label64 = New System.Windows.Forms.Label()
+        Me.btnNewTag = New System.Windows.Forms.Button()
         Me.btnNextTag = New System.Windows.Forms.Button()
         Me.btnBackTag = New System.Windows.Forms.Button()
         Me.Panel80 = New System.Windows.Forms.Panel()
+        Me.btnRefreshProduct = New System.Windows.Forms.Button()
+        Me.btnDeleteRowScaffoldLeg = New System.Windows.Forms.Button()
         Me.tbpModification = New System.Windows.Forms.TabPage()
         Me.Panel55 = New System.Windows.Forms.Panel()
         Me.TableLayoutPanel3 = New System.Windows.Forms.TableLayoutPanel()
@@ -249,6 +259,9 @@ Partial Class scafoldTarking
         Me.plf = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.psqf = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Panel63 = New System.Windows.Forms.Panel()
+        Me.btnUploadExcelModification = New System.Windows.Forms.Button()
+        Me.btnNewModification = New System.Windows.Forms.Button()
+        Me.btnDeleteRowM = New System.Windows.Forms.Button()
         Me.btnNextModification = New System.Windows.Forms.Button()
         Me.btnBackModification = New System.Windows.Forms.Button()
         Me.Panel68 = New System.Windows.Forms.Panel()
@@ -259,6 +272,7 @@ Partial Class scafoldTarking
         Me.Panel67 = New System.Windows.Forms.Panel()
         Me.lblTotalQTYProductMS = New System.Windows.Forms.Label()
         Me.Label71 = New System.Windows.Forms.Label()
+        Me.btnRefreshTPSM = New System.Windows.Forms.Button()
         Me.Panel56 = New System.Windows.Forms.Panel()
         Me.panel58TablesInfoModification = New System.Windows.Forms.Panel()
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
@@ -371,13 +385,19 @@ Partial Class scafoldTarking
         Me.Panel87 = New System.Windows.Forms.Panel()
         Me.Label70 = New System.Windows.Forms.Label()
         Me.Panel88 = New System.Windows.Forms.Panel()
+        Me.btnUploadExcelDismantle = New System.Windows.Forms.Button()
         Me.btnNextDismantle = New System.Windows.Forms.Button()
         Me.btnBackDS = New System.Windows.Forms.Button()
         Me.tbpProducts = New System.Windows.Forms.TabPage()
         Me.Panel11 = New System.Windows.Forms.Panel()
         Me.tblProduct = New System.Windows.Forms.DataGridView()
         Me.Panel10 = New System.Windows.Forms.Panel()
+        Me.btnRefreshTblProduct = New System.Windows.Forms.Button()
         Me.txtSalida = New System.Windows.Forms.TextBox()
+        Me.btnDownloadExcel = New System.Windows.Forms.Button()
+        Me.btnUploadProducts = New System.Windows.Forms.Button()
+        Me.btnDeleteProduct = New System.Windows.Forms.Button()
+        Me.btnSaveRowProduct = New System.Windows.Forms.Button()
         Me.txtIDProduct = New System.Windows.Forms.TextBox()
         Me.txtCategory = New System.Windows.Forms.TextBox()
         Me.Label15 = New System.Windows.Forms.Label()
@@ -437,6 +457,7 @@ Partial Class scafoldTarking
         Me.Panel12 = New System.Windows.Forms.Panel()
         Me.btnNextCostumer = New System.Windows.Forms.Button()
         Me.btnBackCostumer = New System.Windows.Forms.Button()
+        Me.btnNewCostumer = New System.Windows.Forms.Button()
         Me.TextBox16 = New System.Windows.Forms.TextBox()
         Me.TextBox15 = New System.Windows.Forms.TextBox()
         Me.TextBox14 = New System.Windows.Forms.TextBox()
@@ -459,33 +480,12 @@ Partial Class scafoldTarking
         Me.Label16 = New System.Windows.Forms.Label()
         Me.tbpEstimating = New System.Windows.Forms.TabPage()
         Me.Panel2 = New System.Windows.Forms.Panel()
-        Me.TitleBar = New System.Windows.Forms.Panel()
-        Me.label83 = New System.Windows.Forms.Label()
-        Me.btnDeleteRowInComing = New System.Windows.Forms.Button()
-        Me.btnSaveRowInComing = New System.Windows.Forms.Button()
-        Me.btnNewInComing = New System.Windows.Forms.Button()
-        Me.btnDeleteRowOutGoing = New System.Windows.Forms.Button()
-        Me.btnSaveRowOutGoing = New System.Windows.Forms.Button()
-        Me.btnNewOutGoing = New System.Windows.Forms.Button()
-        Me.btnExcelScaffold = New System.Windows.Forms.Button()
-        Me.btnNewTag = New System.Windows.Forms.Button()
-        Me.btnRefreshProduct = New System.Windows.Forms.Button()
-        Me.btnDeleteRowScaffoldLeg = New System.Windows.Forms.Button()
-        Me.btnUploadExcelModification = New System.Windows.Forms.Button()
-        Me.btnNewModification = New System.Windows.Forms.Button()
-        Me.btnDeleteRowM = New System.Windows.Forms.Button()
-        Me.btnRefreshTPSM = New System.Windows.Forms.Button()
-        Me.btnUploadExcelDismantle = New System.Windows.Forms.Button()
-        Me.btnRefreshTblProduct = New System.Windows.Forms.Button()
-        Me.btnDownloadExcel = New System.Windows.Forms.Button()
-        Me.btnUploadProducts = New System.Windows.Forms.Button()
-        Me.btnDeleteProduct = New System.Windows.Forms.Button()
-        Me.btnSaveRowProduct = New System.Windows.Forms.Button()
-        Me.btnNewCostumer = New System.Windows.Forms.Button()
         Me.PictureBox2 = New System.Windows.Forms.PictureBox()
+        Me.TitleBar = New System.Windows.Forms.Panel()
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.btnRestore = New System.Windows.Forms.PictureBox()
         Me.btnMaximize = New System.Windows.Forms.PictureBox()
+        Me.label83 = New System.Windows.Forms.Label()
         Me.btnSaveTable = New System.Windows.Forms.Button()
         Me.btnDeleteRows = New System.Windows.Forms.Button()
         Me.btnSaveAll = New System.Windows.Forms.Button()
@@ -646,8 +646,8 @@ Partial Class scafoldTarking
         CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel12.SuspendLayout()
         Me.Panel2.SuspendLayout()
-        Me.TitleBar.SuspendLayout()
         CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.TitleBar.SuspendLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.btnRestore, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.btnMaximize, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -793,6 +793,38 @@ Partial Class scafoldTarking
         Me.Panel5.Size = New System.Drawing.Size(251, 466)
         Me.Panel5.TabIndex = 11
         '
+        'btnDeleteRowInComing
+        '
+        Me.btnDeleteRowInComing.FlatAppearance.BorderSize = 0
+        Me.btnDeleteRowInComing.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(58, Byte), Integer), CType(CType(115, Byte), Integer))
+        Me.btnDeleteRowInComing.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnDeleteRowInComing.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnDeleteRowInComing.Image = Global.AVT_TRAKING.My.Resources.Resources.delete
+        Me.btnDeleteRowInComing.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnDeleteRowInComing.Location = New System.Drawing.Point(127, 217)
+        Me.btnDeleteRowInComing.Name = "btnDeleteRowInComing"
+        Me.btnDeleteRowInComing.Size = New System.Drawing.Size(110, 36)
+        Me.btnDeleteRowInComing.TabIndex = 12
+        Me.btnDeleteRowInComing.Text = "Delete Row"
+        Me.btnDeleteRowInComing.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.btnDeleteRowInComing.UseVisualStyleBackColor = True
+        '
+        'btnSaveRowInComing
+        '
+        Me.btnSaveRowInComing.FlatAppearance.BorderSize = 0
+        Me.btnSaveRowInComing.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(58, Byte), Integer), CType(CType(115, Byte), Integer))
+        Me.btnSaveRowInComing.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnSaveRowInComing.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnSaveRowInComing.Image = Global.AVT_TRAKING.My.Resources.Resources.save1
+        Me.btnSaveRowInComing.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnSaveRowInComing.Location = New System.Drawing.Point(6, 217)
+        Me.btnSaveRowInComing.Name = "btnSaveRowInComing"
+        Me.btnSaveRowInComing.Size = New System.Drawing.Size(110, 36)
+        Me.btnSaveRowInComing.TabIndex = 11
+        Me.btnSaveRowInComing.Text = "Save row"
+        Me.btnSaveRowInComing.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.btnSaveRowInComing.UseVisualStyleBackColor = True
+        '
         'btnNextInComing
         '
         Me.btnNextInComing.FlatAppearance.BorderSize = 0
@@ -818,6 +850,21 @@ Partial Class scafoldTarking
         Me.btnBackInComing.TabIndex = 13
         Me.btnBackInComing.Text = "<--"
         Me.btnBackInComing.UseVisualStyleBackColor = True
+        '
+        'btnNewInComing
+        '
+        Me.btnNewInComing.FlatAppearance.BorderSize = 0
+        Me.btnNewInComing.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(58, Byte), Integer), CType(CType(115, Byte), Integer))
+        Me.btnNewInComing.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnNewInComing.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnNewInComing.Image = Global.AVT_TRAKING.My.Resources.Resources._new
+        Me.btnNewInComing.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnNewInComing.Location = New System.Drawing.Point(6, 174)
+        Me.btnNewInComing.Name = "btnNewInComing"
+        Me.btnNewInComing.Size = New System.Drawing.Size(110, 36)
+        Me.btnNewInComing.TabIndex = 10
+        Me.btnNewInComing.Text = "New"
+        Me.btnNewInComing.UseVisualStyleBackColor = True
         '
         'Label1
         '
@@ -1053,6 +1100,59 @@ Partial Class scafoldTarking
         Me.btnBackTicketOutGoing.TabIndex = 20
         Me.btnBackTicketOutGoing.Text = "<--"
         Me.btnBackTicketOutGoing.UseVisualStyleBackColor = True
+        '
+        'btnDeleteRowOutGoing
+        '
+        Me.btnDeleteRowOutGoing.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnDeleteRowOutGoing.FlatAppearance.BorderSize = 0
+        Me.btnDeleteRowOutGoing.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(58, Byte), Integer), CType(CType(115, Byte), Integer))
+        Me.btnDeleteRowOutGoing.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnDeleteRowOutGoing.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnDeleteRowOutGoing.Image = Global.AVT_TRAKING.My.Resources.Resources.delete
+        Me.btnDeleteRowOutGoing.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnDeleteRowOutGoing.Location = New System.Drawing.Point(137, 291)
+        Me.btnDeleteRowOutGoing.Name = "btnDeleteRowOutGoing"
+        Me.btnDeleteRowOutGoing.Size = New System.Drawing.Size(126, 36)
+        Me.btnDeleteRowOutGoing.TabIndex = 19
+        Me.btnDeleteRowOutGoing.Text = "Delete Row"
+        Me.btnDeleteRowOutGoing.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.btnDeleteRowOutGoing.UseVisualStyleBackColor = True
+        '
+        'btnSaveRowOutGoing
+        '
+        Me.btnSaveRowOutGoing.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnSaveRowOutGoing.FlatAppearance.BorderSize = 0
+        Me.btnSaveRowOutGoing.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(58, Byte), Integer), CType(CType(115, Byte), Integer))
+        Me.btnSaveRowOutGoing.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnSaveRowOutGoing.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnSaveRowOutGoing.Image = Global.AVT_TRAKING.My.Resources.Resources.save1
+        Me.btnSaveRowOutGoing.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnSaveRowOutGoing.Location = New System.Drawing.Point(5, 291)
+        Me.btnSaveRowOutGoing.Name = "btnSaveRowOutGoing"
+        Me.btnSaveRowOutGoing.Size = New System.Drawing.Size(126, 36)
+        Me.btnSaveRowOutGoing.TabIndex = 18
+        Me.btnSaveRowOutGoing.Text = "Save Row"
+        Me.btnSaveRowOutGoing.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.btnSaveRowOutGoing.UseVisualStyleBackColor = True
+        '
+        'btnNewOutGoing
+        '
+        Me.btnNewOutGoing.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnNewOutGoing.FlatAppearance.BorderSize = 0
+        Me.btnNewOutGoing.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(58, Byte), Integer), CType(CType(115, Byte), Integer))
+        Me.btnNewOutGoing.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnNewOutGoing.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnNewOutGoing.Image = Global.AVT_TRAKING.My.Resources.Resources._new
+        Me.btnNewOutGoing.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnNewOutGoing.Location = New System.Drawing.Point(5, 249)
+        Me.btnNewOutGoing.Name = "btnNewOutGoing"
+        Me.btnNewOutGoing.Size = New System.Drawing.Size(126, 37)
+        Me.btnNewOutGoing.TabIndex = 17
+        Me.btnNewOutGoing.Text = "New"
+        Me.btnNewOutGoing.UseVisualStyleBackColor = True
         '
         'txtCommentOut
         '
@@ -1757,14 +1857,14 @@ Partial Class scafoldTarking
         Me.tblLeg.AllowUserToAddRows = False
         Me.tblLeg.AllowUserToDeleteRows = False
         Me.tblLeg.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
-        DataGridViewCellStyle17.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle17.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle17.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle17.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle17.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle17.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle17.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.tblLeg.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle17
+        DataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle9.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle9.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle9.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle9.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle9.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.tblLeg.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle9
         Me.tblLeg.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.tblLeg.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.clmLegID, Me.clmQYT, Me.clmHeigthExtra, Me.clmIdProductLeg, Me.clmPlf, Me.clmPsqf})
         Me.tblLeg.Dock = System.Windows.Forms.DockStyle.Fill
@@ -1913,14 +2013,14 @@ Partial Class scafoldTarking
         Me.tblScaffoldInformation.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.tblScaffoldInformation.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCellsExceptHeaders
         Me.tblScaffoldInformation.BackgroundColor = System.Drawing.Color.White
-        DataGridViewCellStyle18.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle18.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle18.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle18.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle18.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle18.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle18.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.tblScaffoldInformation.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle18
+        DataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle10.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle10.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle10.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle10.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle10.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.tblScaffoldInformation.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle10
         Me.tblScaffoldInformation.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.tblScaffoldInformation.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.clmType, Me.clmWidth, Me.clmLength, Me.clmHeigth, Me.clmDecks, Me.clmKOs, Me.clmBase})
         Me.tblScaffoldInformation.Dock = System.Windows.Forms.DockStyle.Fill
@@ -1928,8 +2028,8 @@ Partial Class scafoldTarking
         Me.tblScaffoldInformation.MultiSelect = False
         Me.tblScaffoldInformation.Name = "tblScaffoldInformation"
         Me.tblScaffoldInformation.RowHeadersVisible = False
-        DataGridViewCellStyle19.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.tblScaffoldInformation.RowsDefaultCellStyle = DataGridViewCellStyle19
+        DataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.tblScaffoldInformation.RowsDefaultCellStyle = DataGridViewCellStyle11
         Me.tblScaffoldInformation.Size = New System.Drawing.Size(468, 50)
         Me.tblScaffoldInformation.TabIndex = 0
         '
@@ -1985,14 +2085,14 @@ Partial Class scafoldTarking
         Me.tblActivityHours.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.tblActivityHours.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCellsExceptHeaders
         Me.tblActivityHours.BackgroundColor = System.Drawing.Color.White
-        DataGridViewCellStyle20.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle20.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle20.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle20.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle20.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle20.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle20.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.tblActivityHours.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle20
+        DataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle12.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle12.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle12.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle12.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle12.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.tblActivityHours.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle12
         Me.tblActivityHours.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.tblActivityHours.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.clmBuild, Me.clmMabl, Me.clmTravl, Me.clmWhtr, Me.clmAlarm, Me.clmSafty, Me.clmStdBy, Me.clmOthh, Me.clmTotal})
         Me.tblActivityHours.Dock = System.Windows.Forms.DockStyle.Fill
@@ -2000,8 +2100,8 @@ Partial Class scafoldTarking
         Me.tblActivityHours.MultiSelect = False
         Me.tblActivityHours.Name = "tblActivityHours"
         Me.tblActivityHours.RowHeadersVisible = False
-        DataGridViewCellStyle21.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.tblActivityHours.RowsDefaultCellStyle = DataGridViewCellStyle21
+        DataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.tblActivityHours.RowsDefaultCellStyle = DataGridViewCellStyle13
         Me.tblActivityHours.Size = New System.Drawing.Size(468, 51)
         Me.tblActivityHours.TabIndex = 1
         '
@@ -2437,6 +2537,22 @@ Partial Class scafoldTarking
         Me.lblInfoSC.TabIndex = 10
         Me.lblInfoSC.Text = "Info:"
         '
+        'btnExcelScaffold
+        '
+        Me.btnExcelScaffold.FlatAppearance.BorderSize = 0
+        Me.btnExcelScaffold.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(58, Byte), Integer), CType(CType(115, Byte), Integer))
+        Me.btnExcelScaffold.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnExcelScaffold.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnExcelScaffold.Image = Global.AVT_TRAKING.My.Resources.Resources.upload2
+        Me.btnExcelScaffold.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnExcelScaffold.Location = New System.Drawing.Point(317, 11)
+        Me.btnExcelScaffold.Name = "btnExcelScaffold"
+        Me.btnExcelScaffold.Size = New System.Drawing.Size(132, 23)
+        Me.btnExcelScaffold.TabIndex = 9
+        Me.btnExcelScaffold.Text = "Upload Excel"
+        Me.btnExcelScaffold.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.btnExcelScaffold.UseVisualStyleBackColor = True
+        '
         'lblPSQF
         '
         Me.lblPSQF.AutoSize = True
@@ -2476,6 +2592,23 @@ Partial Class scafoldTarking
         Me.Label64.Size = New System.Drawing.Size(26, 13)
         Me.Label64.TabIndex = 5
         Me.Label64.Text = "PLF"
+        '
+        'btnNewTag
+        '
+        Me.btnNewTag.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnNewTag.FlatAppearance.BorderSize = 0
+        Me.btnNewTag.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(58, Byte), Integer), CType(CType(115, Byte), Integer))
+        Me.btnNewTag.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnNewTag.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnNewTag.Image = Global.AVT_TRAKING.My.Resources.Resources._new
+        Me.btnNewTag.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnNewTag.Location = New System.Drawing.Point(618, 11)
+        Me.btnNewTag.Name = "btnNewTag"
+        Me.btnNewTag.Size = New System.Drawing.Size(75, 23)
+        Me.btnNewTag.TabIndex = 3
+        Me.btnNewTag.Text = "New"
+        Me.btnNewTag.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.btnNewTag.UseVisualStyleBackColor = True
         '
         'btnNextTag
         '
@@ -2517,6 +2650,40 @@ Partial Class scafoldTarking
         Me.Panel80.Name = "Panel80"
         Me.Panel80.Size = New System.Drawing.Size(230, 42)
         Me.Panel80.TabIndex = 3
+        '
+        'btnRefreshProduct
+        '
+        Me.btnRefreshProduct.FlatAppearance.BorderSize = 0
+        Me.btnRefreshProduct.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(58, Byte), Integer), CType(CType(115, Byte), Integer))
+        Me.btnRefreshProduct.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnRefreshProduct.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnRefreshProduct.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.btnRefreshProduct.Image = Global.AVT_TRAKING.My.Resources.Resources.refresh
+        Me.btnRefreshProduct.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnRefreshProduct.Location = New System.Drawing.Point(137, 11)
+        Me.btnRefreshProduct.Name = "btnRefreshProduct"
+        Me.btnRefreshProduct.Size = New System.Drawing.Size(88, 23)
+        Me.btnRefreshProduct.TabIndex = 4
+        Me.btnRefreshProduct.Text = "Refresh"
+        Me.btnRefreshProduct.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.btnRefreshProduct.UseVisualStyleBackColor = True
+        '
+        'btnDeleteRowScaffoldLeg
+        '
+        Me.btnDeleteRowScaffoldLeg.FlatAppearance.BorderSize = 0
+        Me.btnDeleteRowScaffoldLeg.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(58, Byte), Integer), CType(CType(115, Byte), Integer))
+        Me.btnDeleteRowScaffoldLeg.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnDeleteRowScaffoldLeg.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnDeleteRowScaffoldLeg.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.btnDeleteRowScaffoldLeg.Image = Global.AVT_TRAKING.My.Resources.Resources.delete
+        Me.btnDeleteRowScaffoldLeg.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnDeleteRowScaffoldLeg.Location = New System.Drawing.Point(22, 11)
+        Me.btnDeleteRowScaffoldLeg.Name = "btnDeleteRowScaffoldLeg"
+        Me.btnDeleteRowScaffoldLeg.Size = New System.Drawing.Size(109, 23)
+        Me.btnDeleteRowScaffoldLeg.TabIndex = 2
+        Me.btnDeleteRowScaffoldLeg.Text = "Delete Row"
+        Me.btnDeleteRowScaffoldLeg.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.btnDeleteRowScaffoldLeg.UseVisualStyleBackColor = True
         '
         'tbpModification
         '
@@ -2683,14 +2850,14 @@ Partial Class scafoldTarking
         Me.tblScaffoldTotalProductMS.BackgroundColor = System.Drawing.Color.White
         Me.tblScaffoldTotalProductMS.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.tblScaffoldTotalProductMS.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.clmIDProductSM, Me.clmQTYSM, Me.psqfM, Me.plfM})
-        DataGridViewCellStyle22.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle22.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle22.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle22.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle22.SelectionBackColor = System.Drawing.Color.DarkGray
-        DataGridViewCellStyle22.SelectionForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle22.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.tblScaffoldTotalProductMS.DefaultCellStyle = DataGridViewCellStyle22
+        DataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle14.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle14.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle14.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle14.SelectionBackColor = System.Drawing.Color.DarkGray
+        DataGridViewCellStyle14.SelectionForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle14.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.tblScaffoldTotalProductMS.DefaultCellStyle = DataGridViewCellStyle14
         Me.tblScaffoldTotalProductMS.Dock = System.Windows.Forms.DockStyle.Fill
         Me.tblScaffoldTotalProductMS.Location = New System.Drawing.Point(3, 21)
         Me.tblScaffoldTotalProductMS.Name = "tblScaffoldTotalProductMS"
@@ -2958,6 +3125,53 @@ Partial Class scafoldTarking
         Me.Panel63.Size = New System.Drawing.Size(464, 50)
         Me.Panel63.TabIndex = 3
         '
+        'btnUploadExcelModification
+        '
+        Me.btnUploadExcelModification.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnUploadExcelModification.FlatAppearance.BorderSize = 0
+        Me.btnUploadExcelModification.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(58, Byte), Integer), CType(CType(115, Byte), Integer))
+        Me.btnUploadExcelModification.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnUploadExcelModification.Image = Global.AVT_TRAKING.My.Resources.Resources.upload2
+        Me.btnUploadExcelModification.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnUploadExcelModification.Location = New System.Drawing.Point(102, 12)
+        Me.btnUploadExcelModification.Name = "btnUploadExcelModification"
+        Me.btnUploadExcelModification.Size = New System.Drawing.Size(109, 23)
+        Me.btnUploadExcelModification.TabIndex = 32
+        Me.btnUploadExcelModification.Text = "Upload Excel"
+        Me.btnUploadExcelModification.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.btnUploadExcelModification.UseVisualStyleBackColor = True
+        '
+        'btnNewModification
+        '
+        Me.btnNewModification.FlatAppearance.BorderSize = 0
+        Me.btnNewModification.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(58, Byte), Integer), CType(CType(115, Byte), Integer))
+        Me.btnNewModification.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnNewModification.Image = Global.AVT_TRAKING.My.Resources.Resources._new
+        Me.btnNewModification.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnNewModification.Location = New System.Drawing.Point(6, 12)
+        Me.btnNewModification.Name = "btnNewModification"
+        Me.btnNewModification.Size = New System.Drawing.Size(75, 23)
+        Me.btnNewModification.TabIndex = 28
+        Me.btnNewModification.Text = "New"
+        Me.btnNewModification.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.btnNewModification.UseVisualStyleBackColor = True
+        '
+        'btnDeleteRowM
+        '
+        Me.btnDeleteRowM.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnDeleteRowM.FlatAppearance.BorderSize = 0
+        Me.btnDeleteRowM.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(58, Byte), Integer), CType(CType(115, Byte), Integer))
+        Me.btnDeleteRowM.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnDeleteRowM.Image = Global.AVT_TRAKING.My.Resources.Resources.delete
+        Me.btnDeleteRowM.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnDeleteRowM.Location = New System.Drawing.Point(343, 12)
+        Me.btnDeleteRowM.Name = "btnDeleteRowM"
+        Me.btnDeleteRowM.Size = New System.Drawing.Size(109, 23)
+        Me.btnDeleteRowM.TabIndex = 31
+        Me.btnDeleteRowM.Text = "Delete Row"
+        Me.btnDeleteRowM.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.btnDeleteRowM.UseVisualStyleBackColor = True
+        '
         'btnNextModification
         '
         Me.btnNextModification.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
@@ -3078,6 +3292,21 @@ Partial Class scafoldTarking
         Me.Label71.Size = New System.Drawing.Size(61, 13)
         Me.Label71.TabIndex = 3
         Me.Label71.Text = "Total QTY"
+        '
+        'btnRefreshTPSM
+        '
+        Me.btnRefreshTPSM.FlatAppearance.BorderSize = 0
+        Me.btnRefreshTPSM.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(58, Byte), Integer), CType(CType(115, Byte), Integer))
+        Me.btnRefreshTPSM.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnRefreshTPSM.Image = Global.AVT_TRAKING.My.Resources.Resources.refresh
+        Me.btnRefreshTPSM.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnRefreshTPSM.Location = New System.Drawing.Point(6, 12)
+        Me.btnRefreshTPSM.Name = "btnRefreshTPSM"
+        Me.btnRefreshTPSM.Size = New System.Drawing.Size(93, 23)
+        Me.btnRefreshTPSM.TabIndex = 32
+        Me.btnRefreshTPSM.Text = "Refresh"
+        Me.btnRefreshTPSM.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.btnRefreshTPSM.UseVisualStyleBackColor = True
         '
         'Panel56
         '
@@ -3563,14 +3792,14 @@ Partial Class scafoldTarking
         Me.tblActivityHoursDismantle.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.tblActivityHoursDismantle.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCellsExceptHeaders
         Me.tblActivityHoursDismantle.BackgroundColor = System.Drawing.Color.White
-        DataGridViewCellStyle23.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle23.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle23.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle23.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle23.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle23.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle23.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.tblActivityHoursDismantle.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle23
+        DataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle15.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle15.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle15.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle15.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle15.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle15.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.tblActivityHoursDismantle.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle15
         Me.tblActivityHoursDismantle.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.tblActivityHoursDismantle.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.clmIdActvHrsDS, Me.clmDismentleD, Me.clmMablD, Me.clmTravlD, Me.clmWthrD, Me.clmAlarmD, Me.clmSaftyD, Me.clmStdByD, Me.clmOthHD, Me.clmTotalHD})
         Me.tblActivityHoursDismantle.Dock = System.Windows.Forms.DockStyle.Fill
@@ -3578,8 +3807,8 @@ Partial Class scafoldTarking
         Me.tblActivityHoursDismantle.MultiSelect = False
         Me.tblActivityHoursDismantle.Name = "tblActivityHoursDismantle"
         Me.tblActivityHoursDismantle.RowHeadersVisible = False
-        DataGridViewCellStyle24.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.tblActivityHoursDismantle.RowsDefaultCellStyle = DataGridViewCellStyle24
+        DataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.tblActivityHoursDismantle.RowsDefaultCellStyle = DataGridViewCellStyle16
         Me.tblActivityHoursDismantle.Size = New System.Drawing.Size(644, 66)
         Me.tblActivityHoursDismantle.TabIndex = 10
         '
@@ -4233,6 +4462,23 @@ Partial Class scafoldTarking
         Me.Panel88.Size = New System.Drawing.Size(597, 48)
         Me.Panel88.TabIndex = 5
         '
+        'btnUploadExcelDismantle
+        '
+        Me.btnUploadExcelDismantle.FlatAppearance.BorderSize = 0
+        Me.btnUploadExcelDismantle.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(58, Byte), Integer), CType(CType(115, Byte), Integer))
+        Me.btnUploadExcelDismantle.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnUploadExcelDismantle.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnUploadExcelDismantle.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.btnUploadExcelDismantle.Image = Global.AVT_TRAKING.My.Resources.Resources.upload2
+        Me.btnUploadExcelDismantle.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnUploadExcelDismantle.Location = New System.Drawing.Point(298, 13)
+        Me.btnUploadExcelDismantle.Name = "btnUploadExcelDismantle"
+        Me.btnUploadExcelDismantle.Size = New System.Drawing.Size(123, 23)
+        Me.btnUploadExcelDismantle.TabIndex = 2
+        Me.btnUploadExcelDismantle.Text = "Upload Excel"
+        Me.btnUploadExcelDismantle.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.btnUploadExcelDismantle.UseVisualStyleBackColor = True
+        '
         'btnNextDismantle
         '
         Me.btnNextDismantle.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
@@ -4312,6 +4558,22 @@ Partial Class scafoldTarking
         Me.Panel10.Size = New System.Drawing.Size(200, 472)
         Me.Panel10.TabIndex = 0
         '
+        'btnRefreshTblProduct
+        '
+        Me.btnRefreshTblProduct.FlatAppearance.BorderSize = 0
+        Me.btnRefreshTblProduct.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(58, Byte), Integer), CType(CType(115, Byte), Integer))
+        Me.btnRefreshTblProduct.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnRefreshTblProduct.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnRefreshTblProduct.Image = Global.AVT_TRAKING.My.Resources.Resources.refresh
+        Me.btnRefreshTblProduct.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnRefreshTblProduct.Location = New System.Drawing.Point(87, 305)
+        Me.btnRefreshTblProduct.Name = "btnRefreshTblProduct"
+        Me.btnRefreshTblProduct.Size = New System.Drawing.Size(100, 32)
+        Me.btnRefreshTblProduct.TabIndex = 10
+        Me.btnRefreshTblProduct.Text = "Refresh"
+        Me.btnRefreshTblProduct.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.btnRefreshTblProduct.UseVisualStyleBackColor = True
+        '
         'txtSalida
         '
         Me.txtSalida.Location = New System.Drawing.Point(13, 342)
@@ -4320,6 +4582,70 @@ Partial Class scafoldTarking
         Me.txtSalida.ReadOnly = True
         Me.txtSalida.Size = New System.Drawing.Size(174, 111)
         Me.txtSalida.TabIndex = 9
+        '
+        'btnDownloadExcel
+        '
+        Me.btnDownloadExcel.FlatAppearance.BorderSize = 0
+        Me.btnDownloadExcel.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(58, Byte), Integer), CType(CType(115, Byte), Integer))
+        Me.btnDownloadExcel.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnDownloadExcel.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnDownloadExcel.Image = Global.AVT_TRAKING.My.Resources.Resources.download
+        Me.btnDownloadExcel.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnDownloadExcel.Location = New System.Drawing.Point(39, 270)
+        Me.btnDownloadExcel.Name = "btnDownloadExcel"
+        Me.btnDownloadExcel.Size = New System.Drawing.Size(148, 32)
+        Me.btnDownloadExcel.TabIndex = 8
+        Me.btnDownloadExcel.Text = "Download Excel"
+        Me.btnDownloadExcel.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.btnDownloadExcel.UseVisualStyleBackColor = True
+        '
+        'btnUploadProducts
+        '
+        Me.btnUploadProducts.FlatAppearance.BorderSize = 0
+        Me.btnUploadProducts.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(58, Byte), Integer), CType(CType(115, Byte), Integer))
+        Me.btnUploadProducts.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnUploadProducts.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnUploadProducts.Image = Global.AVT_TRAKING.My.Resources.Resources.upload2
+        Me.btnUploadProducts.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnUploadProducts.Location = New System.Drawing.Point(39, 232)
+        Me.btnUploadProducts.Name = "btnUploadProducts"
+        Me.btnUploadProducts.Size = New System.Drawing.Size(148, 32)
+        Me.btnUploadProducts.TabIndex = 7
+        Me.btnUploadProducts.Text = "Upload Products"
+        Me.btnUploadProducts.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.btnUploadProducts.UseVisualStyleBackColor = True
+        '
+        'btnDeleteProduct
+        '
+        Me.btnDeleteProduct.FlatAppearance.BorderSize = 0
+        Me.btnDeleteProduct.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(58, Byte), Integer), CType(CType(115, Byte), Integer))
+        Me.btnDeleteProduct.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnDeleteProduct.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnDeleteProduct.Image = Global.AVT_TRAKING.My.Resources.Resources.delete
+        Me.btnDeleteProduct.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnDeleteProduct.Location = New System.Drawing.Point(79, 194)
+        Me.btnDeleteProduct.Name = "btnDeleteProduct"
+        Me.btnDeleteProduct.Size = New System.Drawing.Size(108, 32)
+        Me.btnDeleteProduct.TabIndex = 5
+        Me.btnDeleteProduct.Text = "Delete Row"
+        Me.btnDeleteProduct.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.btnDeleteProduct.UseVisualStyleBackColor = True
+        '
+        'btnSaveRowProduct
+        '
+        Me.btnSaveRowProduct.FlatAppearance.BorderSize = 0
+        Me.btnSaveRowProduct.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(58, Byte), Integer), CType(CType(115, Byte), Integer))
+        Me.btnSaveRowProduct.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnSaveRowProduct.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnSaveRowProduct.Image = Global.AVT_TRAKING.My.Resources.Resources.save1
+        Me.btnSaveRowProduct.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnSaveRowProduct.Location = New System.Drawing.Point(79, 156)
+        Me.btnSaveRowProduct.Name = "btnSaveRowProduct"
+        Me.btnSaveRowProduct.Size = New System.Drawing.Size(108, 32)
+        Me.btnSaveRowProduct.TabIndex = 4
+        Me.btnSaveRowProduct.Text = "Save Row"
+        Me.btnSaveRowProduct.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.btnSaveRowProduct.UseVisualStyleBackColor = True
         '
         'txtIDProduct
         '
@@ -5007,6 +5333,21 @@ Partial Class scafoldTarking
         Me.btnBackCostumer.Text = "<--"
         Me.btnBackCostumer.UseVisualStyleBackColor = True
         '
+        'btnNewCostumer
+        '
+        Me.btnNewCostumer.FlatAppearance.BorderSize = 0
+        Me.btnNewCostumer.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(58, Byte), Integer), CType(CType(115, Byte), Integer))
+        Me.btnNewCostumer.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnNewCostumer.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnNewCostumer.Image = Global.AVT_TRAKING.My.Resources.Resources._new
+        Me.btnNewCostumer.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnNewCostumer.Location = New System.Drawing.Point(8, 296)
+        Me.btnNewCostumer.Name = "btnNewCostumer"
+        Me.btnNewCostumer.Size = New System.Drawing.Size(99, 33)
+        Me.btnNewCostumer.TabIndex = 20
+        Me.btnNewCostumer.Text = "New"
+        Me.btnNewCostumer.UseVisualStyleBackColor = True
+        '
         'TextBox16
         '
         Me.TextBox16.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
@@ -5210,6 +5551,16 @@ Partial Class scafoldTarking
         Me.Panel2.Size = New System.Drawing.Size(949, 92)
         Me.Panel2.TabIndex = 1
         '
+        'PictureBox2
+        '
+        Me.PictureBox2.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.PictureBox2.Image = Global.AVT_TRAKING.My.Resources.Resources.exit2
+        Me.PictureBox2.Location = New System.Drawing.Point(899, 43)
+        Me.PictureBox2.Name = "PictureBox2"
+        Me.PictureBox2.Size = New System.Drawing.Size(38, 28)
+        Me.PictureBox2.TabIndex = 4
+        Me.PictureBox2.TabStop = False
+        '
         'TitleBar
         '
         Me.TitleBar.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(58, Byte), Integer), CType(CType(115, Byte), Integer))
@@ -5222,368 +5573,6 @@ Partial Class scafoldTarking
         Me.TitleBar.Name = "TitleBar"
         Me.TitleBar.Size = New System.Drawing.Size(949, 37)
         Me.TitleBar.TabIndex = 3
-        '
-        'label83
-        '
-        Me.label83.AutoSize = True
-        Me.label83.Font = New System.Drawing.Font("Verdana", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.label83.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.label83.Location = New System.Drawing.Point(1, 0)
-        Me.label83.Name = "label83"
-        Me.label83.Size = New System.Drawing.Size(151, 18)
-        Me.label83.TabIndex = 0
-        Me.label83.Text = "Scaffold Traking"
-        '
-        'btnDeleteRowInComing
-        '
-        Me.btnDeleteRowInComing.FlatAppearance.BorderSize = 0
-        Me.btnDeleteRowInComing.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(58, Byte), Integer), CType(CType(115, Byte), Integer))
-        Me.btnDeleteRowInComing.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnDeleteRowInComing.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnDeleteRowInComing.Image = Global.AVT_TRAKING.My.Resources.Resources.delete
-        Me.btnDeleteRowInComing.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnDeleteRowInComing.Location = New System.Drawing.Point(127, 217)
-        Me.btnDeleteRowInComing.Name = "btnDeleteRowInComing"
-        Me.btnDeleteRowInComing.Size = New System.Drawing.Size(110, 36)
-        Me.btnDeleteRowInComing.TabIndex = 12
-        Me.btnDeleteRowInComing.Text = "Delete Row"
-        Me.btnDeleteRowInComing.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.btnDeleteRowInComing.UseVisualStyleBackColor = True
-        '
-        'btnSaveRowInComing
-        '
-        Me.btnSaveRowInComing.FlatAppearance.BorderSize = 0
-        Me.btnSaveRowInComing.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(58, Byte), Integer), CType(CType(115, Byte), Integer))
-        Me.btnSaveRowInComing.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnSaveRowInComing.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnSaveRowInComing.Image = Global.AVT_TRAKING.My.Resources.Resources.save1
-        Me.btnSaveRowInComing.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnSaveRowInComing.Location = New System.Drawing.Point(6, 217)
-        Me.btnSaveRowInComing.Name = "btnSaveRowInComing"
-        Me.btnSaveRowInComing.Size = New System.Drawing.Size(110, 36)
-        Me.btnSaveRowInComing.TabIndex = 11
-        Me.btnSaveRowInComing.Text = "Save row"
-        Me.btnSaveRowInComing.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.btnSaveRowInComing.UseVisualStyleBackColor = True
-        '
-        'btnNewInComing
-        '
-        Me.btnNewInComing.FlatAppearance.BorderSize = 0
-        Me.btnNewInComing.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(58, Byte), Integer), CType(CType(115, Byte), Integer))
-        Me.btnNewInComing.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnNewInComing.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnNewInComing.Image = Global.AVT_TRAKING.My.Resources.Resources._new
-        Me.btnNewInComing.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnNewInComing.Location = New System.Drawing.Point(6, 174)
-        Me.btnNewInComing.Name = "btnNewInComing"
-        Me.btnNewInComing.Size = New System.Drawing.Size(110, 36)
-        Me.btnNewInComing.TabIndex = 10
-        Me.btnNewInComing.Text = "New"
-        Me.btnNewInComing.UseVisualStyleBackColor = True
-        '
-        'btnDeleteRowOutGoing
-        '
-        Me.btnDeleteRowOutGoing.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnDeleteRowOutGoing.FlatAppearance.BorderSize = 0
-        Me.btnDeleteRowOutGoing.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(58, Byte), Integer), CType(CType(115, Byte), Integer))
-        Me.btnDeleteRowOutGoing.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnDeleteRowOutGoing.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnDeleteRowOutGoing.Image = Global.AVT_TRAKING.My.Resources.Resources.delete
-        Me.btnDeleteRowOutGoing.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnDeleteRowOutGoing.Location = New System.Drawing.Point(137, 291)
-        Me.btnDeleteRowOutGoing.Name = "btnDeleteRowOutGoing"
-        Me.btnDeleteRowOutGoing.Size = New System.Drawing.Size(126, 36)
-        Me.btnDeleteRowOutGoing.TabIndex = 19
-        Me.btnDeleteRowOutGoing.Text = "Delete Row"
-        Me.btnDeleteRowOutGoing.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.btnDeleteRowOutGoing.UseVisualStyleBackColor = True
-        '
-        'btnSaveRowOutGoing
-        '
-        Me.btnSaveRowOutGoing.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnSaveRowOutGoing.FlatAppearance.BorderSize = 0
-        Me.btnSaveRowOutGoing.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(58, Byte), Integer), CType(CType(115, Byte), Integer))
-        Me.btnSaveRowOutGoing.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnSaveRowOutGoing.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnSaveRowOutGoing.Image = Global.AVT_TRAKING.My.Resources.Resources.save1
-        Me.btnSaveRowOutGoing.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnSaveRowOutGoing.Location = New System.Drawing.Point(5, 291)
-        Me.btnSaveRowOutGoing.Name = "btnSaveRowOutGoing"
-        Me.btnSaveRowOutGoing.Size = New System.Drawing.Size(126, 36)
-        Me.btnSaveRowOutGoing.TabIndex = 18
-        Me.btnSaveRowOutGoing.Text = "Save Row"
-        Me.btnSaveRowOutGoing.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.btnSaveRowOutGoing.UseVisualStyleBackColor = True
-        '
-        'btnNewOutGoing
-        '
-        Me.btnNewOutGoing.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnNewOutGoing.FlatAppearance.BorderSize = 0
-        Me.btnNewOutGoing.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(58, Byte), Integer), CType(CType(115, Byte), Integer))
-        Me.btnNewOutGoing.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnNewOutGoing.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnNewOutGoing.Image = Global.AVT_TRAKING.My.Resources.Resources._new
-        Me.btnNewOutGoing.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnNewOutGoing.Location = New System.Drawing.Point(5, 249)
-        Me.btnNewOutGoing.Name = "btnNewOutGoing"
-        Me.btnNewOutGoing.Size = New System.Drawing.Size(126, 37)
-        Me.btnNewOutGoing.TabIndex = 17
-        Me.btnNewOutGoing.Text = "New"
-        Me.btnNewOutGoing.UseVisualStyleBackColor = True
-        '
-        'btnExcelScaffold
-        '
-        Me.btnExcelScaffold.FlatAppearance.BorderSize = 0
-        Me.btnExcelScaffold.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(58, Byte), Integer), CType(CType(115, Byte), Integer))
-        Me.btnExcelScaffold.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnExcelScaffold.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnExcelScaffold.Image = Global.AVT_TRAKING.My.Resources.Resources.upload2
-        Me.btnExcelScaffold.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnExcelScaffold.Location = New System.Drawing.Point(317, 11)
-        Me.btnExcelScaffold.Name = "btnExcelScaffold"
-        Me.btnExcelScaffold.Size = New System.Drawing.Size(132, 23)
-        Me.btnExcelScaffold.TabIndex = 9
-        Me.btnExcelScaffold.Text = "Upload Excel"
-        Me.btnExcelScaffold.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.btnExcelScaffold.UseVisualStyleBackColor = True
-        '
-        'btnNewTag
-        '
-        Me.btnNewTag.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnNewTag.FlatAppearance.BorderSize = 0
-        Me.btnNewTag.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(58, Byte), Integer), CType(CType(115, Byte), Integer))
-        Me.btnNewTag.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnNewTag.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnNewTag.Image = Global.AVT_TRAKING.My.Resources.Resources._new
-        Me.btnNewTag.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnNewTag.Location = New System.Drawing.Point(618, 11)
-        Me.btnNewTag.Name = "btnNewTag"
-        Me.btnNewTag.Size = New System.Drawing.Size(75, 23)
-        Me.btnNewTag.TabIndex = 3
-        Me.btnNewTag.Text = "New"
-        Me.btnNewTag.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.btnNewTag.UseVisualStyleBackColor = True
-        '
-        'btnRefreshProduct
-        '
-        Me.btnRefreshProduct.FlatAppearance.BorderSize = 0
-        Me.btnRefreshProduct.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(58, Byte), Integer), CType(CType(115, Byte), Integer))
-        Me.btnRefreshProduct.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnRefreshProduct.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnRefreshProduct.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.btnRefreshProduct.Image = Global.AVT_TRAKING.My.Resources.Resources.refresh
-        Me.btnRefreshProduct.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnRefreshProduct.Location = New System.Drawing.Point(137, 11)
-        Me.btnRefreshProduct.Name = "btnRefreshProduct"
-        Me.btnRefreshProduct.Size = New System.Drawing.Size(88, 23)
-        Me.btnRefreshProduct.TabIndex = 4
-        Me.btnRefreshProduct.Text = "Refresh"
-        Me.btnRefreshProduct.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.btnRefreshProduct.UseVisualStyleBackColor = True
-        '
-        'btnDeleteRowScaffoldLeg
-        '
-        Me.btnDeleteRowScaffoldLeg.FlatAppearance.BorderSize = 0
-        Me.btnDeleteRowScaffoldLeg.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(58, Byte), Integer), CType(CType(115, Byte), Integer))
-        Me.btnDeleteRowScaffoldLeg.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnDeleteRowScaffoldLeg.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnDeleteRowScaffoldLeg.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.btnDeleteRowScaffoldLeg.Image = Global.AVT_TRAKING.My.Resources.Resources.delete
-        Me.btnDeleteRowScaffoldLeg.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnDeleteRowScaffoldLeg.Location = New System.Drawing.Point(22, 11)
-        Me.btnDeleteRowScaffoldLeg.Name = "btnDeleteRowScaffoldLeg"
-        Me.btnDeleteRowScaffoldLeg.Size = New System.Drawing.Size(109, 23)
-        Me.btnDeleteRowScaffoldLeg.TabIndex = 2
-        Me.btnDeleteRowScaffoldLeg.Text = "Delete Row"
-        Me.btnDeleteRowScaffoldLeg.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.btnDeleteRowScaffoldLeg.UseVisualStyleBackColor = True
-        '
-        'btnUploadExcelModification
-        '
-        Me.btnUploadExcelModification.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnUploadExcelModification.FlatAppearance.BorderSize = 0
-        Me.btnUploadExcelModification.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(58, Byte), Integer), CType(CType(115, Byte), Integer))
-        Me.btnUploadExcelModification.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnUploadExcelModification.Image = Global.AVT_TRAKING.My.Resources.Resources.upload2
-        Me.btnUploadExcelModification.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnUploadExcelModification.Location = New System.Drawing.Point(102, 12)
-        Me.btnUploadExcelModification.Name = "btnUploadExcelModification"
-        Me.btnUploadExcelModification.Size = New System.Drawing.Size(109, 23)
-        Me.btnUploadExcelModification.TabIndex = 32
-        Me.btnUploadExcelModification.Text = "Upload Excel"
-        Me.btnUploadExcelModification.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.btnUploadExcelModification.UseVisualStyleBackColor = True
-        '
-        'btnNewModification
-        '
-        Me.btnNewModification.FlatAppearance.BorderSize = 0
-        Me.btnNewModification.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(58, Byte), Integer), CType(CType(115, Byte), Integer))
-        Me.btnNewModification.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnNewModification.Image = Global.AVT_TRAKING.My.Resources.Resources._new
-        Me.btnNewModification.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnNewModification.Location = New System.Drawing.Point(6, 12)
-        Me.btnNewModification.Name = "btnNewModification"
-        Me.btnNewModification.Size = New System.Drawing.Size(75, 23)
-        Me.btnNewModification.TabIndex = 28
-        Me.btnNewModification.Text = "New"
-        Me.btnNewModification.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.btnNewModification.UseVisualStyleBackColor = True
-        '
-        'btnDeleteRowM
-        '
-        Me.btnDeleteRowM.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnDeleteRowM.FlatAppearance.BorderSize = 0
-        Me.btnDeleteRowM.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(58, Byte), Integer), CType(CType(115, Byte), Integer))
-        Me.btnDeleteRowM.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnDeleteRowM.Image = Global.AVT_TRAKING.My.Resources.Resources.delete
-        Me.btnDeleteRowM.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnDeleteRowM.Location = New System.Drawing.Point(343, 12)
-        Me.btnDeleteRowM.Name = "btnDeleteRowM"
-        Me.btnDeleteRowM.Size = New System.Drawing.Size(109, 23)
-        Me.btnDeleteRowM.TabIndex = 31
-        Me.btnDeleteRowM.Text = "Delete Row"
-        Me.btnDeleteRowM.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.btnDeleteRowM.UseVisualStyleBackColor = True
-        '
-        'btnRefreshTPSM
-        '
-        Me.btnRefreshTPSM.FlatAppearance.BorderSize = 0
-        Me.btnRefreshTPSM.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(58, Byte), Integer), CType(CType(115, Byte), Integer))
-        Me.btnRefreshTPSM.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnRefreshTPSM.Image = Global.AVT_TRAKING.My.Resources.Resources.refresh
-        Me.btnRefreshTPSM.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnRefreshTPSM.Location = New System.Drawing.Point(6, 12)
-        Me.btnRefreshTPSM.Name = "btnRefreshTPSM"
-        Me.btnRefreshTPSM.Size = New System.Drawing.Size(93, 23)
-        Me.btnRefreshTPSM.TabIndex = 32
-        Me.btnRefreshTPSM.Text = "Refresh"
-        Me.btnRefreshTPSM.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.btnRefreshTPSM.UseVisualStyleBackColor = True
-        '
-        'btnUploadExcelDismantle
-        '
-        Me.btnUploadExcelDismantle.FlatAppearance.BorderSize = 0
-        Me.btnUploadExcelDismantle.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(58, Byte), Integer), CType(CType(115, Byte), Integer))
-        Me.btnUploadExcelDismantle.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnUploadExcelDismantle.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnUploadExcelDismantle.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.btnUploadExcelDismantle.Image = Global.AVT_TRAKING.My.Resources.Resources.upload2
-        Me.btnUploadExcelDismantle.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnUploadExcelDismantle.Location = New System.Drawing.Point(298, 13)
-        Me.btnUploadExcelDismantle.Name = "btnUploadExcelDismantle"
-        Me.btnUploadExcelDismantle.Size = New System.Drawing.Size(123, 23)
-        Me.btnUploadExcelDismantle.TabIndex = 2
-        Me.btnUploadExcelDismantle.Text = "Upload Excel"
-        Me.btnUploadExcelDismantle.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.btnUploadExcelDismantle.UseVisualStyleBackColor = True
-        '
-        'btnRefreshTblProduct
-        '
-        Me.btnRefreshTblProduct.FlatAppearance.BorderSize = 0
-        Me.btnRefreshTblProduct.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(58, Byte), Integer), CType(CType(115, Byte), Integer))
-        Me.btnRefreshTblProduct.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnRefreshTblProduct.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnRefreshTblProduct.Image = Global.AVT_TRAKING.My.Resources.Resources.refresh
-        Me.btnRefreshTblProduct.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnRefreshTblProduct.Location = New System.Drawing.Point(87, 305)
-        Me.btnRefreshTblProduct.Name = "btnRefreshTblProduct"
-        Me.btnRefreshTblProduct.Size = New System.Drawing.Size(100, 32)
-        Me.btnRefreshTblProduct.TabIndex = 10
-        Me.btnRefreshTblProduct.Text = "Refresh"
-        Me.btnRefreshTblProduct.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.btnRefreshTblProduct.UseVisualStyleBackColor = True
-        '
-        'btnDownloadExcel
-        '
-        Me.btnDownloadExcel.FlatAppearance.BorderSize = 0
-        Me.btnDownloadExcel.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(58, Byte), Integer), CType(CType(115, Byte), Integer))
-        Me.btnDownloadExcel.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnDownloadExcel.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnDownloadExcel.Image = Global.AVT_TRAKING.My.Resources.Resources.download
-        Me.btnDownloadExcel.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnDownloadExcel.Location = New System.Drawing.Point(39, 270)
-        Me.btnDownloadExcel.Name = "btnDownloadExcel"
-        Me.btnDownloadExcel.Size = New System.Drawing.Size(148, 32)
-        Me.btnDownloadExcel.TabIndex = 8
-        Me.btnDownloadExcel.Text = "Download Excel"
-        Me.btnDownloadExcel.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.btnDownloadExcel.UseVisualStyleBackColor = True
-        '
-        'btnUploadProducts
-        '
-        Me.btnUploadProducts.FlatAppearance.BorderSize = 0
-        Me.btnUploadProducts.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(58, Byte), Integer), CType(CType(115, Byte), Integer))
-        Me.btnUploadProducts.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnUploadProducts.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnUploadProducts.Image = Global.AVT_TRAKING.My.Resources.Resources.upload2
-        Me.btnUploadProducts.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnUploadProducts.Location = New System.Drawing.Point(39, 232)
-        Me.btnUploadProducts.Name = "btnUploadProducts"
-        Me.btnUploadProducts.Size = New System.Drawing.Size(148, 32)
-        Me.btnUploadProducts.TabIndex = 7
-        Me.btnUploadProducts.Text = "Upload Products"
-        Me.btnUploadProducts.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.btnUploadProducts.UseVisualStyleBackColor = True
-        '
-        'btnDeleteProduct
-        '
-        Me.btnDeleteProduct.FlatAppearance.BorderSize = 0
-        Me.btnDeleteProduct.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(58, Byte), Integer), CType(CType(115, Byte), Integer))
-        Me.btnDeleteProduct.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnDeleteProduct.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnDeleteProduct.Image = Global.AVT_TRAKING.My.Resources.Resources.delete
-        Me.btnDeleteProduct.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnDeleteProduct.Location = New System.Drawing.Point(79, 194)
-        Me.btnDeleteProduct.Name = "btnDeleteProduct"
-        Me.btnDeleteProduct.Size = New System.Drawing.Size(108, 32)
-        Me.btnDeleteProduct.TabIndex = 5
-        Me.btnDeleteProduct.Text = "Delete Row"
-        Me.btnDeleteProduct.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.btnDeleteProduct.UseVisualStyleBackColor = True
-        '
-        'btnSaveRowProduct
-        '
-        Me.btnSaveRowProduct.FlatAppearance.BorderSize = 0
-        Me.btnSaveRowProduct.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(58, Byte), Integer), CType(CType(115, Byte), Integer))
-        Me.btnSaveRowProduct.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnSaveRowProduct.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnSaveRowProduct.Image = Global.AVT_TRAKING.My.Resources.Resources.save1
-        Me.btnSaveRowProduct.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnSaveRowProduct.Location = New System.Drawing.Point(79, 156)
-        Me.btnSaveRowProduct.Name = "btnSaveRowProduct"
-        Me.btnSaveRowProduct.Size = New System.Drawing.Size(108, 32)
-        Me.btnSaveRowProduct.TabIndex = 4
-        Me.btnSaveRowProduct.Text = "Save Row"
-        Me.btnSaveRowProduct.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.btnSaveRowProduct.UseVisualStyleBackColor = True
-        '
-        'btnNewCostumer
-        '
-        Me.btnNewCostumer.FlatAppearance.BorderSize = 0
-        Me.btnNewCostumer.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(58, Byte), Integer), CType(CType(115, Byte), Integer))
-        Me.btnNewCostumer.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnNewCostumer.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnNewCostumer.Image = Global.AVT_TRAKING.My.Resources.Resources._new
-        Me.btnNewCostumer.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnNewCostumer.Location = New System.Drawing.Point(8, 296)
-        Me.btnNewCostumer.Name = "btnNewCostumer"
-        Me.btnNewCostumer.Size = New System.Drawing.Size(99, 33)
-        Me.btnNewCostumer.TabIndex = 20
-        Me.btnNewCostumer.Text = "New"
-        Me.btnNewCostumer.UseVisualStyleBackColor = True
-        '
-        'PictureBox2
-        '
-        Me.PictureBox2.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.PictureBox2.Image = Global.AVT_TRAKING.My.Resources.Resources.exit2
-        Me.PictureBox2.Location = New System.Drawing.Point(899, 43)
-        Me.PictureBox2.Name = "PictureBox2"
-        Me.PictureBox2.Size = New System.Drawing.Size(38, 28)
-        Me.PictureBox2.TabIndex = 4
-        Me.PictureBox2.TabStop = False
         '
         'PictureBox1
         '
@@ -5614,6 +5603,17 @@ Partial Class scafoldTarking
         Me.btnMaximize.Size = New System.Drawing.Size(26, 27)
         Me.btnMaximize.TabIndex = 1
         Me.btnMaximize.TabStop = False
+        '
+        'label83
+        '
+        Me.label83.AutoSize = True
+        Me.label83.Font = New System.Drawing.Font("Verdana", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.label83.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.label83.Location = New System.Drawing.Point(1, 0)
+        Me.label83.Name = "label83"
+        Me.label83.Size = New System.Drawing.Size(151, 18)
+        Me.label83.TabIndex = 0
+        Me.label83.Text = "Scaffold Traking"
         '
         'btnSaveTable
         '
@@ -5871,9 +5871,9 @@ Partial Class scafoldTarking
         Me.Panel12.ResumeLayout(False)
         Me.Panel12.PerformLayout()
         Me.Panel2.ResumeLayout(False)
+        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).EndInit()
         Me.TitleBar.ResumeLayout(False)
         Me.TitleBar.PerformLayout()
-        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.btnRestore, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.btnMaximize, System.ComponentModel.ISupportInitialize).EndInit()

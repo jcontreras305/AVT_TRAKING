@@ -361,6 +361,8 @@ Public Class ProjectsCosts
             pjt.idAux = lstDatosPO(14)
             idAuxWO = lstDatosPO(15)
             pjt.idAuxWO = idAuxWO
+            pjt.PercentComplete = CInt(lstDatosPO(16))
+            sprPercentComplete.Value = pjt.PercentComplete
             Return True
         Else
             Return False
@@ -1245,6 +1247,19 @@ Public Class ProjectsCosts
         End If
     End Sub
 
+    '================ COMPLETE PORCENT =======================================================================================
+    '=========================================================================================================================
+    Private Sub sprPorcentComplete_ValueChanged(sender As Object, e As EventArgs) Handles sprPercentComplete.ValueChanged
+        If flagAddRecord Then
+            pjtNuevo.PercentComplete = If(sprPercentComplete.Value <> Nothing, sprPercentComplete.Value, 0)
+        Else
+            pjt.PercentComplete = If(sprPercentComplete.Value <> Nothing, sprPercentComplete.Value, 0)
+            mtdJobs.updateCompleteProgress(pjt.PercentComplete, pjt.idAux, pjt.idAuxWO)
+            calcularValores()
+        End If
+
+    End Sub
+
     '================ COMPLETE CHECK =========================================================================================
     '=========================================================================================================================
 
@@ -1295,10 +1310,6 @@ Public Class ProjectsCosts
         tblExpencesProjects.Enabled = activar
         tblMaterialProjects.Enabled = activar
         tblHoursWorkedProject.Enabled = activar
-    End Sub
-
-    Private Sub sprPorcentComplete_ValueChanged(sender As Object, e As EventArgs) Handles sprPorcentComplete.ValueChanged
-        calcularValores()
     End Sub
 
     Private Sub btnMaximize_Click(sender As Object, e As EventArgs) Handles btnMaximize.Click
@@ -1399,8 +1410,8 @@ Public Class ProjectsCosts
         End If
 
         lblTotalHours.Text = CStr(totalHoursST + totalHoursOT + totalHours3)
-        If sprPorcentComplete.Value > 0 Then
-            lblEarned.Text = (sprHoursEstimate.Value * sprPorcentComplete.Value) / 100
+        If sprPercentComplete.Value > 0 Then
+            lblEarned.Text = (sprHoursEstimate.Value * sprPercentComplete.Value) / 100
             If (totalHoursST + totalHoursOT + totalHours3) > 0 Then
                 lblPF.Text = Format(Val(CDec(If(lblEarned.Text = "", "0", lblEarned.Text)) / CDec(If(lblTotalHours.Text = "", "0", lblTotalHours.Text))), "0#.##")
             End If

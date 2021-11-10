@@ -63,7 +63,7 @@ Partial Class ProjectsCosts
         Me.lblEarned = New System.Windows.Forms.Label()
         Me.Panel11 = New System.Windows.Forms.Panel()
         Me.Label31 = New System.Windows.Forms.Label()
-        Me.sprPorcentComplete = New System.Windows.Forms.NumericUpDown()
+        Me.sprPercentComplete = New System.Windows.Forms.NumericUpDown()
         Me.Panel10 = New System.Windows.Forms.Panel()
         Me.Label25 = New System.Windows.Forms.Label()
         Me.lblPorcentLeft = New System.Windows.Forms.Label()
@@ -76,16 +76,11 @@ Partial Class ProjectsCosts
         Me.cmbExpCode = New System.Windows.Forms.ComboBox()
         Me.Label13 = New System.Windows.Forms.Label()
         Me.Panel4 = New System.Windows.Forms.Panel()
+        Me.Label28 = New System.Windows.Forms.Label()
         Me.lblWorkOrder = New System.Windows.Forms.Label()
         Me.Label24 = New System.Windows.Forms.Label()
-        Me.PictureBox1 = New System.Windows.Forms.PictureBox()
-        Me.btnNextTask = New System.Windows.Forms.Button()
-        Me.btnAfterTask = New System.Windows.Forms.Button()
         Me.TextBox1 = New System.Windows.Forms.TextBox()
-        Me.btnAddRecord = New System.Windows.Forms.Button()
-        Me.Button1 = New System.Windows.Forms.Button()
         Me.btnDelete = New System.Windows.Forms.Button()
-        Me.btnUpdate = New System.Windows.Forms.Button()
         Me.Panel2 = New System.Windows.Forms.Panel()
         Me.Panel3 = New System.Windows.Forms.Panel()
         Me.TableLayoutPanel5 = New System.Windows.Forms.TableLayoutPanel()
@@ -130,11 +125,16 @@ Partial Class ProjectsCosts
         Me.tblMaterialProjects = New System.Windows.Forms.DataGridView()
         Me.Panel8 = New System.Windows.Forms.Panel()
         Me.pnlTablas = New System.Windows.Forms.Panel()
-        Me.btnMaximize = New System.Windows.Forms.PictureBox()
-        Me.btnRestore = New System.Windows.Forms.PictureBox()
-        Me.PictureBox2 = New System.Windows.Forms.PictureBox()
+        Me.btnUpdate = New System.Windows.Forms.Button()
         Me.PictureBox3 = New System.Windows.Forms.PictureBox()
-        Me.Label28 = New System.Windows.Forms.Label()
+        Me.PictureBox2 = New System.Windows.Forms.PictureBox()
+        Me.btnRestore = New System.Windows.Forms.PictureBox()
+        Me.btnMaximize = New System.Windows.Forms.PictureBox()
+        Me.PictureBox1 = New System.Windows.Forms.PictureBox()
+        Me.btnNextTask = New System.Windows.Forms.Button()
+        Me.btnAfterTask = New System.Windows.Forms.Button()
+        Me.btnAddRecord = New System.Windows.Forms.Button()
+        Me.Button1 = New System.Windows.Forms.Button()
         Me.Panel1.SuspendLayout()
         Me.TableLayoutPanel2.SuspendLayout()
         Me.Panel5.SuspendLayout()
@@ -147,11 +147,10 @@ Partial Class ProjectsCosts
         Me.Panel13.SuspendLayout()
         Me.Panel12.SuspendLayout()
         Me.Panel11.SuspendLayout()
-        CType(Me.sprPorcentComplete, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.sprPercentComplete, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel10.SuspendLayout()
         Me.Panel9.SuspendLayout()
         Me.Panel4.SuspendLayout()
-        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel2.SuspendLayout()
         Me.Panel3.SuspendLayout()
         Me.TableLayoutPanel5.SuspendLayout()
@@ -175,10 +174,11 @@ Partial Class ProjectsCosts
         CType(Me.tblMaterialProjects, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel8.SuspendLayout()
         Me.pnlTablas.SuspendLayout()
-        CType(Me.btnMaximize, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.btnRestore, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox3, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.btnRestore, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.btnMaximize, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'Panel1
@@ -266,9 +266,9 @@ Partial Class ProjectsCosts
         Me.Label4.AutoSize = True
         Me.Label4.Location = New System.Drawing.Point(21, 84)
         Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(74, 13)
+        Me.Label4.Size = New System.Drawing.Size(67, 13)
         Me.Label4.TabIndex = 3
-        Me.Label4.Text = "Equipament"
+        Me.Label4.Text = "Equipment"
         '
         'Label5
         '
@@ -622,7 +622,7 @@ Partial Class ProjectsCosts
         '
         Me.Panel11.BackColor = System.Drawing.Color.FromArgb(CType(CType(83, Byte), Integer), CType(CType(93, Byte), Integer), CType(CType(102, Byte), Integer))
         Me.Panel11.Controls.Add(Me.Label31)
-        Me.Panel11.Controls.Add(Me.sprPorcentComplete)
+        Me.Panel11.Controls.Add(Me.sprPercentComplete)
         Me.Panel11.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel11.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Panel11.ForeColor = System.Drawing.SystemColors.ControlLightLight
@@ -640,15 +640,15 @@ Partial Class ProjectsCosts
         Me.Label31.TabIndex = 45
         Me.Label31.Text = "% Compl."
         '
-        'sprPorcentComplete
+        'sprPercentComplete
         '
-        Me.sprPorcentComplete.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+        Me.sprPercentComplete.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.sprPorcentComplete.Location = New System.Drawing.Point(76, 12)
-        Me.sprPorcentComplete.Name = "sprPorcentComplete"
-        Me.sprPorcentComplete.Size = New System.Drawing.Size(98, 21)
-        Me.sprPorcentComplete.TabIndex = 15
-        Me.sprPorcentComplete.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        Me.sprPercentComplete.Location = New System.Drawing.Point(76, 12)
+        Me.sprPercentComplete.Name = "sprPercentComplete"
+        Me.sprPercentComplete.Size = New System.Drawing.Size(98, 21)
+        Me.sprPercentComplete.TabIndex = 15
+        Me.sprPercentComplete.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'Panel10
         '
@@ -789,6 +789,17 @@ Partial Class ProjectsCosts
         Me.Panel4.Size = New System.Drawing.Size(1107, 62)
         Me.Panel4.TabIndex = 29
         '
+        'Label28
+        '
+        Me.Label28.AutoSize = True
+        Me.Label28.Font = New System.Drawing.Font("Verdana", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label28.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.Label28.Location = New System.Drawing.Point(112, 0)
+        Me.Label28.Name = "Label28"
+        Me.Label28.Size = New System.Drawing.Size(134, 18)
+        Me.Label28.TabIndex = 41
+        Me.Label28.Text = "Projects Costs"
+        '
         'lblWorkOrder
         '
         Me.lblWorkOrder.AutoSize = True
@@ -811,48 +822,6 @@ Partial Class ProjectsCosts
         Me.Label24.TabIndex = 1
         Me.Label24.Text = "WO:"
         '
-        'PictureBox1
-        '
-        Me.PictureBox1.Location = New System.Drawing.Point(6, 4)
-        Me.PictureBox1.Name = "PictureBox1"
-        Me.PictureBox1.Size = New System.Drawing.Size(100, 50)
-        Me.PictureBox1.TabIndex = 0
-        Me.PictureBox1.TabStop = False
-        '
-        'btnNextTask
-        '
-        Me.btnNextTask.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnNextTask.FlatAppearance.BorderSize = 0
-        Me.btnNextTask.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(83, Byte), Integer), CType(CType(93, Byte), Integer), CType(CType(102, Byte), Integer))
-        Me.btnNextTask.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnNextTask.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.btnNextTask.Image = Global.AVT_TRAKING.My.Resources.Resources._next
-        Me.btnNextTask.ImageAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.btnNextTask.Location = New System.Drawing.Point(873, 27)
-        Me.btnNextTask.Name = "btnNextTask"
-        Me.btnNextTask.Size = New System.Drawing.Size(71, 23)
-        Me.btnNextTask.TabIndex = 17
-        Me.btnNextTask.Text = "Next"
-        Me.btnNextTask.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnNextTask.UseVisualStyleBackColor = True
-        '
-        'btnAfterTask
-        '
-        Me.btnAfterTask.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnAfterTask.FlatAppearance.BorderSize = 0
-        Me.btnAfterTask.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(83, Byte), Integer), CType(CType(93, Byte), Integer), CType(CType(102, Byte), Integer))
-        Me.btnAfterTask.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnAfterTask.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.btnAfterTask.Image = Global.AVT_TRAKING.My.Resources.Resources.after
-        Me.btnAfterTask.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnAfterTask.Location = New System.Drawing.Point(790, 27)
-        Me.btnAfterTask.Name = "btnAfterTask"
-        Me.btnAfterTask.Size = New System.Drawing.Size(75, 23)
-        Me.btnAfterTask.TabIndex = 16
-        Me.btnAfterTask.Text = "After"
-        Me.btnAfterTask.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.btnAfterTask.UseVisualStyleBackColor = True
-        '
         'TextBox1
         '
         Me.TextBox1.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
@@ -860,40 +829,6 @@ Partial Class ProjectsCosts
         Me.TextBox1.Name = "TextBox1"
         Me.TextBox1.Size = New System.Drawing.Size(179, 21)
         Me.TextBox1.TabIndex = 35
-        '
-        'btnAddRecord
-        '
-        Me.btnAddRecord.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnAddRecord.FlatAppearance.BorderSize = 0
-        Me.btnAddRecord.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(83, Byte), Integer), CType(CType(93, Byte), Integer), CType(CType(102, Byte), Integer))
-        Me.btnAddRecord.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnAddRecord.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.btnAddRecord.Image = Global.AVT_TRAKING.My.Resources.Resources.add
-        Me.btnAddRecord.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnAddRecord.Location = New System.Drawing.Point(433, 21)
-        Me.btnAddRecord.Name = "btnAddRecord"
-        Me.btnAddRecord.Size = New System.Drawing.Size(108, 36)
-        Me.btnAddRecord.TabIndex = 18
-        Me.btnAddRecord.Text = "Add Record"
-        Me.btnAddRecord.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.btnAddRecord.UseVisualStyleBackColor = True
-        '
-        'Button1
-        '
-        Me.Button1.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Button1.FlatAppearance.BorderSize = 0
-        Me.Button1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(83, Byte), Integer), CType(CType(93, Byte), Integer), CType(CType(102, Byte), Integer))
-        Me.Button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.Button1.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.Button1.Image = Global.AVT_TRAKING.My.Resources.Resources.loupe
-        Me.Button1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.Button1.Location = New System.Drawing.Point(725, 27)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(57, 23)
-        Me.Button1.TabIndex = 36
-        Me.Button1.Text = "Find"
-        Me.Button1.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.Button1.UseVisualStyleBackColor = True
         '
         'btnDelete
         '
@@ -909,22 +844,6 @@ Partial Class ProjectsCosts
         Me.btnDelete.Text = "Drop Material"
         Me.btnDelete.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         Me.btnDelete.UseVisualStyleBackColor = True
-        '
-        'btnUpdate
-        '
-        Me.btnUpdate.FlatAppearance.BorderSize = 0
-        Me.btnUpdate.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(58, Byte), Integer), CType(CType(115, Byte), Integer))
-        Me.btnUpdate.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnUpdate.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.btnUpdate.Image = Global.AVT_TRAKING.My.Resources.Resources.update
-        Me.btnUpdate.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnUpdate.Location = New System.Drawing.Point(3, 3)
-        Me.btnUpdate.Name = "btnUpdate"
-        Me.btnUpdate.Size = New System.Drawing.Size(128, 35)
-        Me.btnUpdate.TabIndex = 37
-        Me.btnUpdate.Text = "Update Material"
-        Me.btnUpdate.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.btnUpdate.UseVisualStyleBackColor = True
         '
         'Panel2
         '
@@ -1394,7 +1313,7 @@ Partial Class ProjectsCosts
         Me.tbpExpences.Location = New System.Drawing.Point(4, 22)
         Me.tbpExpences.Name = "tbpExpences"
         Me.tbpExpences.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbpExpences.Size = New System.Drawing.Size(1093, 245)
+        Me.tbpExpences.Size = New System.Drawing.Size(1093, 205)
         Me.tbpExpences.TabIndex = 1
         Me.tbpExpences.Text = "Expences"
         Me.tbpExpences.UseVisualStyleBackColor = True
@@ -1409,7 +1328,7 @@ Partial Class ProjectsCosts
         Me.tblExpencesProjects.Location = New System.Drawing.Point(3, 3)
         Me.tblExpencesProjects.Name = "tblExpencesProjects"
         Me.tblExpencesProjects.ReadOnly = True
-        Me.tblExpencesProjects.Size = New System.Drawing.Size(1087, 239)
+        Me.tblExpencesProjects.Size = New System.Drawing.Size(1087, 199)
         Me.tblExpencesProjects.TabIndex = 0
         '
         'tbpMaterials
@@ -1435,7 +1354,7 @@ Partial Class ProjectsCosts
         Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
         Me.TableLayoutPanel1.RowCount = 1
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
-        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 239.0!))
+        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 199.0!))
         Me.TableLayoutPanel1.Size = New System.Drawing.Size(1087, 199)
         Me.TableLayoutPanel1.TabIndex = 1
         '
@@ -1471,35 +1390,21 @@ Partial Class ProjectsCosts
         Me.pnlTablas.Size = New System.Drawing.Size(1107, 234)
         Me.pnlTablas.TabIndex = 4
         '
-        'btnMaximize
+        'btnUpdate
         '
-        Me.btnMaximize.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnMaximize.Image = Global.AVT_TRAKING.My.Resources.Resources.maximize2
-        Me.btnMaximize.Location = New System.Drawing.Point(1075, 4)
-        Me.btnMaximize.Name = "btnMaximize"
-        Me.btnMaximize.Size = New System.Drawing.Size(23, 25)
-        Me.btnMaximize.TabIndex = 37
-        Me.btnMaximize.TabStop = False
-        '
-        'btnRestore
-        '
-        Me.btnRestore.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnRestore.Image = Global.AVT_TRAKING.My.Resources.Resources.restore2
-        Me.btnRestore.Location = New System.Drawing.Point(1075, 4)
-        Me.btnRestore.Name = "btnRestore"
-        Me.btnRestore.Size = New System.Drawing.Size(23, 27)
-        Me.btnRestore.TabIndex = 38
-        Me.btnRestore.TabStop = False
-        '
-        'PictureBox2
-        '
-        Me.PictureBox2.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.PictureBox2.Image = Global.AVT_TRAKING.My.Resources.Resources.minimize2
-        Me.PictureBox2.Location = New System.Drawing.Point(1043, 4)
-        Me.PictureBox2.Name = "PictureBox2"
-        Me.PictureBox2.Size = New System.Drawing.Size(26, 27)
-        Me.PictureBox2.TabIndex = 39
-        Me.PictureBox2.TabStop = False
+        Me.btnUpdate.FlatAppearance.BorderSize = 0
+        Me.btnUpdate.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(58, Byte), Integer), CType(CType(115, Byte), Integer))
+        Me.btnUpdate.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnUpdate.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.btnUpdate.Image = Global.AVT_TRAKING.My.Resources.Resources.update
+        Me.btnUpdate.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnUpdate.Location = New System.Drawing.Point(3, 3)
+        Me.btnUpdate.Name = "btnUpdate"
+        Me.btnUpdate.Size = New System.Drawing.Size(128, 35)
+        Me.btnUpdate.TabIndex = 37
+        Me.btnUpdate.Text = "Update Material"
+        Me.btnUpdate.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.btnUpdate.UseVisualStyleBackColor = True
         '
         'PictureBox3
         '
@@ -1511,16 +1416,111 @@ Partial Class ProjectsCosts
         Me.PictureBox3.TabIndex = 40
         Me.PictureBox3.TabStop = False
         '
-        'Label28
+        'PictureBox2
         '
-        Me.Label28.AutoSize = True
-        Me.Label28.Font = New System.Drawing.Font("Verdana", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label28.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.Label28.Location = New System.Drawing.Point(112, 0)
-        Me.Label28.Name = "Label28"
-        Me.Label28.Size = New System.Drawing.Size(134, 18)
-        Me.Label28.TabIndex = 41
-        Me.Label28.Text = "Projects Costs"
+        Me.PictureBox2.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.PictureBox2.Image = Global.AVT_TRAKING.My.Resources.Resources.minimize2
+        Me.PictureBox2.Location = New System.Drawing.Point(1043, 4)
+        Me.PictureBox2.Name = "PictureBox2"
+        Me.PictureBox2.Size = New System.Drawing.Size(26, 27)
+        Me.PictureBox2.TabIndex = 39
+        Me.PictureBox2.TabStop = False
+        '
+        'btnRestore
+        '
+        Me.btnRestore.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnRestore.Image = Global.AVT_TRAKING.My.Resources.Resources.restore2
+        Me.btnRestore.Location = New System.Drawing.Point(1075, 4)
+        Me.btnRestore.Name = "btnRestore"
+        Me.btnRestore.Size = New System.Drawing.Size(23, 27)
+        Me.btnRestore.TabIndex = 38
+        Me.btnRestore.TabStop = False
+        '
+        'btnMaximize
+        '
+        Me.btnMaximize.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnMaximize.Image = Global.AVT_TRAKING.My.Resources.Resources.maximize2
+        Me.btnMaximize.Location = New System.Drawing.Point(1075, 4)
+        Me.btnMaximize.Name = "btnMaximize"
+        Me.btnMaximize.Size = New System.Drawing.Size(23, 25)
+        Me.btnMaximize.TabIndex = 37
+        Me.btnMaximize.TabStop = False
+        '
+        'PictureBox1
+        '
+        Me.PictureBox1.Location = New System.Drawing.Point(6, 4)
+        Me.PictureBox1.Name = "PictureBox1"
+        Me.PictureBox1.Size = New System.Drawing.Size(100, 50)
+        Me.PictureBox1.TabIndex = 0
+        Me.PictureBox1.TabStop = False
+        '
+        'btnNextTask
+        '
+        Me.btnNextTask.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnNextTask.FlatAppearance.BorderSize = 0
+        Me.btnNextTask.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(83, Byte), Integer), CType(CType(93, Byte), Integer), CType(CType(102, Byte), Integer))
+        Me.btnNextTask.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnNextTask.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.btnNextTask.Image = Global.AVT_TRAKING.My.Resources.Resources._next
+        Me.btnNextTask.ImageAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.btnNextTask.Location = New System.Drawing.Point(873, 27)
+        Me.btnNextTask.Name = "btnNextTask"
+        Me.btnNextTask.Size = New System.Drawing.Size(71, 23)
+        Me.btnNextTask.TabIndex = 17
+        Me.btnNextTask.Text = "Next"
+        Me.btnNextTask.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnNextTask.UseVisualStyleBackColor = True
+        '
+        'btnAfterTask
+        '
+        Me.btnAfterTask.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnAfterTask.FlatAppearance.BorderSize = 0
+        Me.btnAfterTask.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(83, Byte), Integer), CType(CType(93, Byte), Integer), CType(CType(102, Byte), Integer))
+        Me.btnAfterTask.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnAfterTask.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.btnAfterTask.Image = Global.AVT_TRAKING.My.Resources.Resources.after
+        Me.btnAfterTask.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnAfterTask.Location = New System.Drawing.Point(790, 27)
+        Me.btnAfterTask.Name = "btnAfterTask"
+        Me.btnAfterTask.Size = New System.Drawing.Size(75, 23)
+        Me.btnAfterTask.TabIndex = 16
+        Me.btnAfterTask.Text = "After"
+        Me.btnAfterTask.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.btnAfterTask.UseVisualStyleBackColor = True
+        '
+        'btnAddRecord
+        '
+        Me.btnAddRecord.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnAddRecord.FlatAppearance.BorderSize = 0
+        Me.btnAddRecord.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(83, Byte), Integer), CType(CType(93, Byte), Integer), CType(CType(102, Byte), Integer))
+        Me.btnAddRecord.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnAddRecord.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.btnAddRecord.Image = Global.AVT_TRAKING.My.Resources.Resources.add
+        Me.btnAddRecord.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnAddRecord.Location = New System.Drawing.Point(433, 21)
+        Me.btnAddRecord.Name = "btnAddRecord"
+        Me.btnAddRecord.Size = New System.Drawing.Size(108, 36)
+        Me.btnAddRecord.TabIndex = 18
+        Me.btnAddRecord.Text = "Add Record"
+        Me.btnAddRecord.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.btnAddRecord.UseVisualStyleBackColor = True
+        '
+        'Button1
+        '
+        Me.Button1.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Button1.FlatAppearance.BorderSize = 0
+        Me.Button1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(83, Byte), Integer), CType(CType(93, Byte), Integer), CType(CType(102, Byte), Integer))
+        Me.Button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.Button1.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.Button1.Image = Global.AVT_TRAKING.My.Resources.Resources.loupe
+        Me.Button1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.Button1.Location = New System.Drawing.Point(725, 27)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(57, 23)
+        Me.Button1.TabIndex = 36
+        Me.Button1.Text = "Find"
+        Me.Button1.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.Button1.UseVisualStyleBackColor = True
         '
         'ProjectsCosts
         '
@@ -1551,14 +1551,13 @@ Partial Class ProjectsCosts
         Me.Panel12.PerformLayout()
         Me.Panel11.ResumeLayout(False)
         Me.Panel11.PerformLayout()
-        CType(Me.sprPorcentComplete, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.sprPercentComplete, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel10.ResumeLayout(False)
         Me.Panel10.PerformLayout()
         Me.Panel9.ResumeLayout(False)
         Me.Panel9.PerformLayout()
         Me.Panel4.ResumeLayout(False)
         Me.Panel4.PerformLayout()
-        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel2.ResumeLayout(False)
         Me.Panel2.PerformLayout()
         Me.Panel3.ResumeLayout(False)
@@ -1593,10 +1592,11 @@ Partial Class ProjectsCosts
         CType(Me.tblMaterialProjects, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel8.ResumeLayout(False)
         Me.pnlTablas.ResumeLayout(False)
-        CType(Me.btnMaximize, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.btnRestore, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PictureBox3, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.btnRestore, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.btnMaximize, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -1682,7 +1682,7 @@ Partial Class ProjectsCosts
     Friend WithEvents TableLayoutPanel1 As TableLayoutPanel
     Friend WithEvents Panel8 As Panel
     Friend WithEvents TableLayoutPanel2 As TableLayoutPanel
-    Friend WithEvents sprPorcentComplete As NumericUpDown
+    Friend WithEvents sprPercentComplete As NumericUpDown
     Friend WithEvents Label31 As Label
     Friend WithEvents label50 As Label
     Friend WithEvents lblEarned As Label
