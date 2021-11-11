@@ -65,9 +65,13 @@ Public Class ProjectsClients
         mtdClient.buscarProyectosDeCliente(tblProjectClients, idCliente)
     End Sub
 
+
     Private Sub btnEmployees_Click(sender As Object, e As EventArgs) Handles btnEmployees.Click
         'Dim hpe As New HoursWeekPeerEmployees
         'hpe.ShowDialog()
+
+
+
         Dim a As New Employees
         a.Show()
     End Sub
@@ -270,6 +274,7 @@ Public Class ProjectsClients
     End Sub
 
     Private Sub btnUploadSchedule_Click(sender As Object, e As EventArgs) Handles btnUploadSchedule.Click
+        'OpenFormPanel(Of scafoldTarking)()
         Dim st As New scafoldTarking
         Me.Visible = False
         st.ShowDialog()
@@ -277,6 +282,7 @@ Public Class ProjectsClients
     End Sub
 
     Private Sub btnTimeEnterSheets_Click(sender As Object, e As EventArgs) Handles btnTimeEnterSheets.Click
+
         Dim hpe As New HoursWeekPerEmployees
         hpe.ShowDialog()
     End Sub
@@ -358,5 +364,26 @@ Public Class ProjectsClients
         taxes.idWO = idWOAuxTaxes
         taxes.ShowDialog()
     End Sub
+
+    Private Sub OpenFormPanel(Of Miform As {Form, New})()
+        Dim FormPanel As Form
+        FormPanel = PanelChildForm.Controls.OfType(Of Miform)().FirstOrDefault()
+
+        If FormPanel Is Nothing Then
+            FormPanel = New Miform()
+            FormPanel.TopLevel = False
+
+            FormPanel.Dock = DockStyle.Fill
+
+            PanelChildForm.Controls.Add(FormPanel)
+            PanelChildForm.Tag = FormPanel
+            FormPanel.Show()
+            FormPanel.BringToFront()
+        Else
+            FormPanel.BringToFront()
+        End If
+    End Sub
+
+
 
 End Class
