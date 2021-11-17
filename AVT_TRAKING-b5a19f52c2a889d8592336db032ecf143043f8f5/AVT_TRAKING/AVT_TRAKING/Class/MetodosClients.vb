@@ -281,7 +281,9 @@ ha.idHomeAdress, ha.avenue ,ha.number, ha.city ,ha.providence,ha.postalCode from
 	CASE WHEN tk.task IS NULL THEN ''
 	ELSE tk.task END AS 'idTask', 
     CASE WHEN wo.idAuxWO IS NULL THEN ''
-	ELSE wo.idAuxWO END AS 'idAuxWO'
+	ELSE wo.idAuxWO END AS 'idAuxWO',
+    CASE WHEN tk.idAux IS NULL THEN ''
+	ELSE tk.idAux END AS 'idAux'
 from
 clients as cln left join job as jb on jb.idClient = cln.idClient
 inner join projectOrder as po on po.jobNo = jb.jobNo
@@ -307,7 +309,7 @@ cln.lastName Like '" + consulta + "'", conn)
                 Dim dt As New DataTable
                 da.Fill(dt)
                 tabla.DataSource = dt
-                If tabla.Columns.Count <= 22 Then
+                If tabla.Columns.Count <= 23 Then
                     Dim clmChb As New DataGridViewCheckBoxColumn
                     clmChb.Name = "Complete"
                     tabla.Columns.Add(clmChb)
@@ -323,6 +325,7 @@ cln.lastName Like '" + consulta + "'", conn)
                 tabla.Columns("costCode").Visible = False
                 tabla.Columns("idPO").Visible = False
                 tabla.Columns("idAuxWO").Visible = False
+                tabla.Columns("idAux").Visible = False
             End If
         Catch ex As Exception
             MsgBox(ex.Message())

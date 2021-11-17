@@ -67,11 +67,6 @@ Public Class ProjectsClients
 
 
     Private Sub btnEmployees_Click(sender As Object, e As EventArgs) Handles btnEmployees.Click
-        'Dim hpe As New HoursWeekPeerEmployees
-        'hpe.ShowDialog()
-
-
-
         Dim a As New Employees
         a.Show()
     End Sub
@@ -334,7 +329,7 @@ Public Class ProjectsClients
             idCliente = tblProjectClients.CurrentRow.Cells("idClient").Value
             idWOAuxTaxes = tblProjectClients.CurrentRow.Cells("idAuxWO").Value
             separaridWODeidTask(tblProjectClients.CurrentRow.Cells("Work Order").Value)
-            taskTaxes = tblProjectClients.CurrentRow.Cells("idTask").Value
+            taskTaxes = tblProjectClients.CurrentRow.Cells("idAux").Value
             llenarCampos(tblProjectClients.CurrentRow)
         End If
     End Sub

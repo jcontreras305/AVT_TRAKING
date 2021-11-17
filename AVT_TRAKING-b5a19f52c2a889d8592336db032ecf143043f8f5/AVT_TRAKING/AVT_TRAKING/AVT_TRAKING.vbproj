@@ -90,6 +90,7 @@
     <Compile Include="Class\MetodosParaDocumentos.vb" />
     <Compile Include="Class\MetodosRenta.vb" />
     <Compile Include="Class\MetodosScaffold.vb" />
+    <Compile Include="Class\MetodosTaxes.vb" />
     <Compile Include="Class\MetodosVendor.vb" />
     <Compile Include="Class\MetodosJobs.vb" />
     <Compile Include="Froms\AbsentsEmployee.Designer.vb">
@@ -220,6 +221,7 @@
     <Compile Include="Froms\Taxes.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Froms\TaxesClass.vb" />
     <Compile Include="Froms\TimeSheet.Designer.vb">
       <DependentUpon>TimeSheet.vb</DependentUpon>
     </Compile>

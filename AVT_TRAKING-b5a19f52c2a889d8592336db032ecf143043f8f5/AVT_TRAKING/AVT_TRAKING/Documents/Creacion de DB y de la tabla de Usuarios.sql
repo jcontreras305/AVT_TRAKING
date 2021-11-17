@@ -699,6 +699,69 @@ create table task (
 GO
 
 --##########################################################################################
+--##################  TABLA DE TAXESPT #####################################################
+--##########################################################################################
+
+create table taxesPT(
+	idTaxesPT varchar(36)primary key not null,
+	idAux varchar(36),
+	totalHours float,
+	FICA float,
+	FUI float,  
+	SUI float,
+	BWForeman money,
+	BWJourneyman money,
+	BWCraftsman money,
+	BWApprentice money,
+	BWHelper money,
+	QtyForeman int,
+	QtyJourneyman int,
+	QtyCraftsman int,
+	QtyApprentice int,
+	QtyHelper int
+)
+GO
+
+--##########################################################################################
+--##################  TABLA DE TAXESST #####################################################
+--##########################################################################################
+
+create table taxesST(
+	idTaxesST varchar(36)primary key not null,
+	idAux varchar(36),
+	totalHours float,
+	FICA float,
+	FUI float,  
+	SUI float,
+	WC float,
+	GenLiab float,
+	Umbr float,
+	Pollution float,
+	Healt float,
+	Fringe float,
+	Small float,
+	PPE float,
+	Consumable float,
+	Scaffold float,
+	YoYo float,
+	Mesh float,
+	Miselaneos float,
+	Overhead float,
+	Profit float,
+	BWForeman money,
+	BWJourneyman money,
+	BWCraftsman money,
+	BWApprentice money,
+	BWHelper money,
+	QtyForeman int,
+	QtyJourneyman int,
+	QtyCraftsman int,
+	QtyApprentice int,
+	QtyHelper int
+)
+GO
+
+--##########################################################################################
 --##################  TABLA DE UNITMEASSUREMENTS ###########################################
 --##########################################################################################
 
@@ -1098,6 +1161,22 @@ ALTER TABLE task WITH CHECK ADD CONSTRAINT fk_idWorkOrder_task FOREIGN KEY (idAu
 REFERENCES workOrder (idAuxWO)
 ON UPDATE CASCADE
 ON DELETE CASCADE
+GO
+
+--##########################################################################################
+--##################  FOREIG KEYS TAXESPT ##################################################
+--##########################################################################################
+
+ALTER TABLE taxesPT WITH CHECK ADD CONSTRAINT fk_idAux_TaxesPT
+FOREIGN KEY (idAux) REFERENCES task(idAux)
+GO
+
+--##########################################################################################
+--##################  FOREIG KEYS TAXESST ##################################################
+--##########################################################################################
+
+ALTER TABLE taxesST WITH CHECK ADD CONSTRAINT fk_idAux_TaxesST
+FOREIGN KEY (idAux) REFERENCES task(idAux)
 GO
 
 --##########################################################################################
@@ -1907,3 +1986,73 @@ GO
 --select * from projectOrder
 --select * from job
 --go
+
+--==============================================================================================================================
+--===== CODIGO PARA AGREGAR LAS TABLAS DE TAXES ST Y PT ========================================================================
+--==============================================================================================================================
+
+---- (CTRL+K) + (CTRL+C) Comentar 
+---- (CTRL+K) + (CTRL+U) Descomentar 
+
+--create table taxesST(
+--	idTaxesST varchar(36)primary key not null,
+--	idAux varchar(36),
+--	totalHours float,
+--	FICA float,
+--	FUI float,  
+--	SUI float,
+--	WC float,
+--	GenLiab float,
+--	Umbr float,
+--	Pollution float,
+--	Healt float,
+--	Fringe float,
+--	Small float,
+--	PPE float,
+--	Consumable float,
+--	Scaffold float,
+--	YoYo float,
+--	Mesh float,
+--	Miselaneos float,
+--	Overhead float,
+--	Profit float,
+--	BWForeman money,
+--	BWJourneyman money,
+--	BWCraftsman money,
+--	BWApprentice money,
+--	BWHelper money,
+--	QtyForeman int,
+--	QtyJourneyman int,
+--	QtyCraftsman int,
+--	QtyApprentice int,
+--	QtyHelper int
+--)
+--GO
+
+--ALTER TABLE taxesST WITH CHECK ADD CONSTRAINT fk_idAux_TaxesST
+--FOREIGN KEY (idAux) REFERENCES task(idAux)
+--GO
+
+--create table taxesPT(
+--	idTaxesPT varchar(36)primary key not null,
+--	idAux varchar(36),
+--	totalHours float,
+--	FICA float,
+--	FUI float,  
+--	SUI float,
+--	BWForeman money,
+--	BWJourneyman money,
+--	BWCraftsman money,
+--	BWApprentice money,
+--	BWHelper money,
+--	QtyForeman int,
+--	QtyJourneyman int,
+--	QtyCraftsman int,
+--	QtyApprentice int,
+--	QtyHelper int
+--)
+--go
+
+--ALTER TABLE taxesPT WITH CHECK ADD CONSTRAINT fk_idAux_TaxesPT
+--FOREIGN KEY (idAux) REFERENCES task(idAux)
+--GO
