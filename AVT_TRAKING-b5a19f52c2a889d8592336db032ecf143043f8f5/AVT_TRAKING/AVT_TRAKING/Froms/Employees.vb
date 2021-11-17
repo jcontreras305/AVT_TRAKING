@@ -322,7 +322,9 @@ Public Class Employees
 
     End Sub
 
+    Private Sub Panel20_Paint(sender As Object, e As PaintEventArgs) Handles Panel20.Paint
 
+    End Sub
 
     <DllImport("user32.DLL", EntryPoint:="ReleaseCapture")>
     Private Shared Sub ReleaseCapture()

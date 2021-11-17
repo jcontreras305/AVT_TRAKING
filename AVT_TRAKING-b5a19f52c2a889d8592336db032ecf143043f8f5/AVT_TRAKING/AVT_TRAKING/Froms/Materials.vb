@@ -113,7 +113,7 @@ Public Class Materials
         End Try
     End Sub
 
-    Private Sub BtnMenu_Click(sender As Object, e As EventArgs) Handles btnMenu.Click
+    Private Sub BtnMenu_Click(sender As Object, e As EventArgs)
         Dim a As New MainFrom
         a.Show()
         Me.Finalize()
