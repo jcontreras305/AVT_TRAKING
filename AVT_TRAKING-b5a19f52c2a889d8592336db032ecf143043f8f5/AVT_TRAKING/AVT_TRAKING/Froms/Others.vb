@@ -353,5 +353,7 @@ Public Class Others
         Me.Close()
     End Sub
 
+    Private Sub TitleBar_Paint(sender As Object, e As PaintEventArgs) Handles TitleBar.Paint
 
+    End Sub
 End Class

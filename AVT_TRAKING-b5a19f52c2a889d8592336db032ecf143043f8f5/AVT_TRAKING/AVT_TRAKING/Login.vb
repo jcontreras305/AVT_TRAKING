@@ -3,8 +3,16 @@
 Public Class Login
 
     Dim mtdLogin As New MetodosLogin
+    Dim mtdOther As New MetodosOthers
     Dim flag As Boolean = True
-
+    Dim listImg As List(Of Byte())
+    Private Sub Login_Load(sender As Object, e As EventArgs) Handles Me.Load
+        listImg = mtdOther.llenarComboImage(cmbImagenes)
+        If listImg.Count > 0 Then
+            cmbImagenes.SelectedIndex = 0
+            cmbImagenes.SelectedItem = cmbImagenes.Items(0)
+        End If
+    End Sub
 
     Private Sub btnVer_Click(sender As Object, e As EventArgs)  'Este subproseso es para ver o cultar el contenido del campor de password
         Try
@@ -25,6 +33,10 @@ Public Class Login
             If (txtUser.Text <> String.Empty And txtUser.Text.Length > 0) And (txtPassword.Text <> String.Empty And txtPassword.Text.Length > 0) Then
                 If mtdLogin.StartLogin(txtUser.Text, txtPassword.Text) Then
                     Dim a As New MainFrom
+                    If listImg IsNot Nothing Then
+                        Dim arrayByte As Byte() = listImg(cmbImagenes.SelectedIndex)
+                        a.pcbLogoMain.Image = BytetoImage(arrayByte)
+                    End If
                     a.Show()
                     Me.Visible = False
                 Else
@@ -91,9 +103,5 @@ Public Class Login
     End Sub
     Private Sub btnMaximize_Click(sender As Object, e As EventArgs)
         Me.WindowState = FormWindowState.Maximized
-    End Sub
-
-    Private Sub Login_Load(sender As Object, e As EventArgs) Handles Me.Load
-
     End Sub
 End Class

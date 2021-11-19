@@ -604,4 +604,23 @@ insert into imageClient(name,img,imgDefault)  values(@name,@img,@imgDefault)
             desconectar()
         End Try
     End Function
+
+    Public Function llenarComboImage(ByVal cmb As ComboBox) As List(Of Byte())
+        Try
+            conectar()
+            Dim list As New List(Of Byte())
+            Dim cmd As New SqlCommand("select name, img from imageClient order by imgDefault desc ", conn)
+            Dim dr As SqlDataReader = cmd.ExecuteReader()
+            While dr.Read()
+                list.Add(dr("img"))
+                cmb.Items.Add(dr("name"))
+            End While
+            dr.Close()
+            Return list
+        Catch ex As Exception
+            Return Nothing
+        Finally
+            desconectar()
+        End Try
+    End Function
 End Class

@@ -41,10 +41,12 @@ Partial Class Login
         Me.PictureBox3 = New System.Windows.Forms.PictureBox()
         Me.Panel6 = New System.Windows.Forms.Panel()
         Me.Panel7 = New System.Windows.Forms.Panel()
+        Me.cmbImagenes = New System.Windows.Forms.ComboBox()
         Me.TitleBar.SuspendLayout()
         Me.TableLayoutPanel1.SuspendLayout()
         CType(Me.btnMinimize, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.btnClose, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.Panel1.SuspendLayout()
         Me.TableLayoutPanel2.SuspendLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel2.SuspendLayout()
@@ -65,7 +67,7 @@ Partial Class Login
         Me.txtUser.Location = New System.Drawing.Point(0, 0)
         Me.txtUser.Name = "txtUser"
         Me.txtUser.Size = New System.Drawing.Size(174, 26)
-        Me.txtUser.TabIndex = 1
+        Me.txtUser.TabIndex = 0
         '
         'txtPassword
         '
@@ -74,7 +76,7 @@ Partial Class Login
         Me.txtPassword.Location = New System.Drawing.Point(0, 0)
         Me.txtPassword.Name = "txtPassword"
         Me.txtPassword.Size = New System.Drawing.Size(174, 26)
-        Me.txtPassword.TabIndex = 2
+        Me.txtPassword.TabIndex = 1
         Me.txtPassword.UseSystemPasswordChar = True
         '
         'btnIniciar
@@ -88,7 +90,7 @@ Partial Class Login
         Me.btnIniciar.Location = New System.Drawing.Point(8, 1)
         Me.btnIniciar.Name = "btnIniciar"
         Me.btnIniciar.Size = New System.Drawing.Size(159, 43)
-        Me.btnIniciar.TabIndex = 3
+        Me.btnIniciar.TabIndex = 2
         Me.btnIniciar.Text = "Login"
         Me.btnIniciar.UseVisualStyleBackColor = False
         '
@@ -143,6 +145,7 @@ Partial Class Login
         'Panel1
         '
         Me.Panel1.BackColor = System.Drawing.Color.FromArgb(CType(CType(30, Byte), Integer), CType(CType(38, Byte), Integer), CType(CType(70, Byte), Integer))
+        Me.Panel1.Controls.Add(Me.cmbImagenes)
         Me.Panel1.Dock = System.Windows.Forms.DockStyle.Bottom
         Me.Panel1.Location = New System.Drawing.Point(0, 421)
         Me.Panel1.Name = "Panel1"
@@ -268,6 +271,17 @@ Partial Class Login
         Me.Panel7.Size = New System.Drawing.Size(174, 32)
         Me.Panel7.TabIndex = 16
         '
+        'cmbImagenes
+        '
+        Me.cmbImagenes.BackColor = System.Drawing.Color.FromArgb(CType(CType(30, Byte), Integer), CType(CType(38, Byte), Integer), CType(CType(70, Byte), Integer))
+        Me.cmbImagenes.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cmbImagenes.ForeColor = System.Drawing.SystemColors.Window
+        Me.cmbImagenes.FormattingEnabled = True
+        Me.cmbImagenes.Location = New System.Drawing.Point(183, -2)
+        Me.cmbImagenes.Name = "cmbImagenes"
+        Me.cmbImagenes.Size = New System.Drawing.Size(183, 21)
+        Me.cmbImagenes.TabIndex = 3
+        '
         'Login
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -287,6 +301,7 @@ Partial Class Login
         Me.TableLayoutPanel1.PerformLayout()
         CType(Me.btnMinimize, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.btnClose, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.Panel1.ResumeLayout(False)
         Me.TableLayoutPanel2.ResumeLayout(False)
         Me.TableLayoutPanel2.PerformLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
@@ -324,4 +339,5 @@ Partial Class Login
     Friend WithEvents Panel7 As Panel
     Friend WithEvents PictureBox3 As PictureBox
     Friend WithEvents PictureBox4 As PictureBox
+    Friend WithEvents cmbImagenes As ComboBox
 End Class

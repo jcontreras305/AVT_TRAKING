@@ -1,4 +1,6 @@
 ﻿
+Imports System.ComponentModel
+
 Public Class MainFrom
     Private Sub BtnMaterials_Click(sender As Object, e As EventArgs) Handles btnMaterials.Click
         OpenFormPanel(Of Materials)()
@@ -8,11 +10,7 @@ Public Class MainFrom
     End Sub
 
     Private Sub BtnClients_Click(sender As Object, e As EventArgs) Handles btnClients.Click
-        OpenFormPanel(Of Clients)()
-        Dim a As New Clients
-        a.btnSelectClient.Visible = False
-        a.btnSelectClient.Enabled = False
-        'a.Show()
+        OpenFormPanel1(Of Clients)()
     End Sub
 
     Private Sub btnEmployees_Click(sender As Object, e As EventArgs) Handles btnEmployees.Click
@@ -23,8 +21,7 @@ Public Class MainFrom
     End Sub
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles btnWorkCodes.Click
-        OpenFormPanel(Of ProjectsClients)()
-        Dim a As New ProjectsClients
+        OpenFormPanel2(Of ProjectsClients)()
         'a.Show()
 
     End Sub
@@ -33,7 +30,6 @@ Public Class MainFrom
         Dim a As New Login
         a.Show()
         Me.Close()
-
     End Sub
 
     Private Sub tbnoOthers_Click(sender As Object, e As EventArgs) Handles tbnoOthers.Click
@@ -81,5 +77,48 @@ Public Class MainFrom
         End If
     End Sub
 
+    Private Sub OpenFormPanel1(Of miForm As {Clients, New})()
+        Dim FormPanel As Form
+        FormPanel = PanelChildForm.Controls.OfType(Of miForm)().FirstOrDefault()
+        If FormPanel Is Nothing Then
+            Dim newFrom = New miForm()
+            newFrom.btnSelectClient.Visible = False
+            FormPanel = newFrom
+            FormPanel.TopLevel = False
 
+            FormPanel.Dock = DockStyle.Fill
+
+            PanelChildForm.Controls.Add(FormPanel)
+            PanelChildForm.Tag = FormPanel
+            FormPanel.Show()
+            FormPanel.BringToFront()
+        Else
+            FormPanel.BringToFront()
+        End If
+    End Sub
+
+    Private Sub OpenFormPanel2(Of Miform As {ProjectsClients, New})()
+        Dim FormPanel As Form
+        FormPanel = PanelChildForm.Controls.OfType(Of Miform)().FirstOrDefault()
+
+        If FormPanel Is Nothing Then
+            Dim newPC = New Miform()
+            newPC.pcbLogoPC.Image = pcbLogoMain.Image
+            FormPanel = newPC
+            FormPanel.TopLevel = False
+            FormPanel.Dock = DockStyle.Fill
+
+            PanelChildForm.Controls.Add(FormPanel)
+            PanelChildForm.Tag = FormPanel
+            FormPanel.Show()
+            FormPanel.BringToFront()
+        Else
+            FormPanel.BringToFront()
+        End If
+    End Sub
+
+    Private Sub MainFrom_Closing(sender As Object, e As CancelEventArgs) Handles Me.Closing
+        Dim a As New Login
+        a.Show()
+    End Sub
 End Class

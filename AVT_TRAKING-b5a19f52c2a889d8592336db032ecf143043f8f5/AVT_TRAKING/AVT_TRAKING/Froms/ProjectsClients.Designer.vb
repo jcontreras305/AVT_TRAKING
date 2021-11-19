@@ -34,7 +34,7 @@ Partial Class ProjectsClients
         Me.btnTimeEnterSheets = New System.Windows.Forms.Button()
         Me.btnProyeccts = New System.Windows.Forms.Button()
         Me.Panel2 = New System.Windows.Forms.Panel()
-        Me.PictureBox1 = New System.Windows.Forms.PictureBox()
+        Me.pcbLogoPC = New System.Windows.Forms.PictureBox()
         Me.btnAdd = New System.Windows.Forms.Button()
         Me.btnFindClintProyects = New System.Windows.Forms.Button()
         Me.txtFindClientProyects = New System.Windows.Forms.TextBox()
@@ -87,7 +87,7 @@ Partial Class ProjectsClients
         Me.Panel1.SuspendLayout()
         Me.PnllSetup.SuspendLayout()
         Me.Panel2.SuspendLayout()
-        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.pcbLogoPC, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox1.SuspendLayout()
         Me.TableLayoutPanel3.SuspendLayout()
         CType(Me.tblProjectClients, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -278,20 +278,22 @@ Partial Class ProjectsClients
         '
         'Panel2
         '
-        Me.Panel2.Controls.Add(Me.PictureBox1)
+        Me.Panel2.Controls.Add(Me.pcbLogoPC)
         Me.Panel2.Dock = System.Windows.Forms.DockStyle.Top
         Me.Panel2.Location = New System.Drawing.Point(0, 0)
         Me.Panel2.Name = "Panel2"
         Me.Panel2.Size = New System.Drawing.Size(216, 97)
         Me.Panel2.TabIndex = 0
         '
-        'PictureBox1
+        'pcbLogoPC
         '
-        Me.PictureBox1.Location = New System.Drawing.Point(3, 8)
-        Me.PictureBox1.Name = "PictureBox1"
-        Me.PictureBox1.Size = New System.Drawing.Size(196, 78)
-        Me.PictureBox1.TabIndex = 0
-        Me.PictureBox1.TabStop = False
+        Me.pcbLogoPC.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.pcbLogoPC.Location = New System.Drawing.Point(0, 0)
+        Me.pcbLogoPC.Name = "pcbLogoPC"
+        Me.pcbLogoPC.Size = New System.Drawing.Size(216, 97)
+        Me.pcbLogoPC.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
+        Me.pcbLogoPC.TabIndex = 0
+        Me.pcbLogoPC.TabStop = False
         '
         'btnAdd
         '
@@ -885,7 +887,7 @@ Partial Class ProjectsClients
         Me.Panel1.ResumeLayout(False)
         Me.PnllSetup.ResumeLayout(False)
         Me.Panel2.ResumeLayout(False)
-        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.pcbLogoPC, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupBox1.ResumeLayout(False)
         Me.TableLayoutPanel3.ResumeLayout(False)
         Me.TableLayoutPanel3.PerformLayout()
@@ -917,7 +919,6 @@ Partial Class ProjectsClients
     Friend WithEvents btnTimeEnterSheets As Button
     Friend WithEvents btnProyeccts As Button
     Friend WithEvents Panel2 As Panel
-    Friend WithEvents PictureBox1 As PictureBox
     Friend WithEvents Label5 As Label
     Friend WithEvents Label4 As Label
     Friend WithEvents Label3 As Label
@@ -973,4 +974,5 @@ Partial Class ProjectsClients
     Friend WithEvents Panel6 As Panel
     Friend WithEvents Panel5 As Panel
     Friend WithEvents PanelChildForm As Panel
+    Public WithEvents pcbLogoPC As PictureBox
 End Class
