@@ -33,7 +33,7 @@ Public Class Login
             If (txtUser.Text <> String.Empty And txtUser.Text.Length > 0) And (txtPassword.Text <> String.Empty And txtPassword.Text.Length > 0) Then
                 If mtdLogin.StartLogin(txtUser.Text, txtPassword.Text) Then
                     Dim a As New MainFrom
-                    If listImg IsNot Nothing Then
+                    If listImg.Count > 0 Then
                         Dim arrayByte As Byte() = listImg(cmbImagenes.SelectedIndex)
                         a.pcbLogoMain.Image = BytetoImage(arrayByte)
                     End If
