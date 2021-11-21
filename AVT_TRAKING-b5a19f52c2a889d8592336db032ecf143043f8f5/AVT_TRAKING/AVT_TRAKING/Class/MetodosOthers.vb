@@ -616,11 +616,8 @@ insert into imageClient(name,img,imgDefault)  values(@name,@img,@imgDefault)
                 cmb.Items.Add(dr("name"))
             End While
             dr.Close()
-            If list.Count > 0 Then
-                Return list
-            Else
-                Return Nothing
-            End If
+
+            Return list
 
         Catch ex As Exception
             Return Nothing
