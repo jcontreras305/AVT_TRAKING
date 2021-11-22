@@ -111,7 +111,7 @@ create table activityHours(
 	stdBy float,
 	other float,
 	tag varchar(20),
-	idModification varchar(20),
+	idModAux varchar(36),
 	idDismantle varchar(36)
 )
 GO
@@ -390,7 +390,7 @@ create table materialHandeling(
 	passed char(1),
 	elevator char(1),
 	tag varchar(20),
-	idModification varchar(20),
+	idModAux varchar(36),
 	idDismantle varchar(36)
 )
 GO
@@ -541,7 +541,7 @@ GO
 
 create table productModification(
 	idProductModification varchar(36) primary key not null,
-	idModification varchar(20),
+	idModAux varchar(20),
 	idProduct int,
 	quantity float,
 	tag varchar(20)
@@ -625,7 +625,7 @@ create table scaffoldInformation(
 	base float,
 	extraDeck float,
 	tag varchar(20),
-	idModification varchar(20)
+	idModAux varchar(36)
 )
 GO
 
@@ -694,7 +694,8 @@ create table task (
 	expCode varchar(20),
 	accountNum varchar(12) ,
 	estimateHours float,
-	status char(1)
+	status char(1),
+	percentComplete int
 )
 GO
 
@@ -953,7 +954,7 @@ FOREIGN KEY (tag) REFERENCES scaffoldTraking(tag)
 GO
 
 ALTER TABLE materialHandeling WITH CHECK ADD CONSTRAINT fk_modification_materialHandeling
-FOREIGN KEY (idModification) REFERENCES modification(idModification)
+FOREIGN KEY (idModAux) REFERENCES modification(idModAux)
 GO
 
 ALTER TABLE materialHandeling WITH CHECK ADD CONSTRAINT fk_idDismantle_materialHandeling 

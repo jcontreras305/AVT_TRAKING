@@ -48,6 +48,10 @@
     <OptionInfer>On</OptionInfer>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="CrystalDecisions.CrystalReports.Engine, Version=13.0.4000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.ReportSource, Version=13.0.4000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.Shared, Version=13.0.4000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.Windows.Forms, Version=13.0.4000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
     <Reference Include="Microsoft.Office.Interop.Excel, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Office.Interop.Excel.15.0.4795.1000\lib\net20\Microsoft.Office.Interop.Excel.dll</HintPath>
       <EmbedInteropTypes>True</EmbedInteropTypes>
@@ -60,6 +64,7 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Deployment" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Web.Services" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
@@ -93,6 +98,11 @@
     <Compile Include="Class\MetodosTaxes.vb" />
     <Compile Include="Class\MetodosVendor.vb" />
     <Compile Include="Class\MetodosJobs.vb" />
+    <Compile Include="Employees.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Employees.rpt</DependentUpon>
+    </Compile>
     <Compile Include="Froms\AbsentsEmployee.Designer.vb">
       <DependentUpon>AbsentsEmployee.vb</DependentUpon>
     </Compile>
@@ -274,6 +284,12 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="Reports\ReporteEmployees.Designer.vb">
+      <DependentUpon>ReporteEmployees.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\ReporteEmployees.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="VRT_TRAKINGDataSet.Designer.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -281,6 +297,10 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Employees.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>Employees.vb</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Froms\AbsentsEmployee.resx">
       <DependentUpon>AbsentsEmployee.vb</DependentUpon>
     </EmbeddedResource>
@@ -365,6 +385,9 @@
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reports\ReporteEmployees.resx">
+      <DependentUpon>ReporteEmployees.vb</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <None Include="Documents\Time Sheet Prueba.xlsx" />
@@ -391,7 +414,9 @@
       <DependentUpon>VRT_TRAKINGDataSet.xsd</DependentUpon>
     </None>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
+  </ItemGroup>
   <ItemGroup>
     <Content Include="Documents\Creacion de DB y de la tabla de Usuarios.sql" />
     <Content Include="Documents\IsaacSP.sql" />

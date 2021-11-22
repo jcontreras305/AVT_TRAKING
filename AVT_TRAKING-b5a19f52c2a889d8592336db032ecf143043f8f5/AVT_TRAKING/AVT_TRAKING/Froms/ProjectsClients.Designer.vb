@@ -669,7 +669,7 @@ Partial Class ProjectsClients
         Me.tblProjectClients.Location = New System.Drawing.Point(6, 203)
         Me.tblProjectClients.Name = "tblProjectClients"
         Me.tblProjectClients.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.tblProjectClients.Size = New System.Drawing.Size(801, 396)
+        Me.tblProjectClients.Size = New System.Drawing.Size(775, 396)
         Me.tblProjectClients.TabIndex = 6
         '
         'Panel4
@@ -679,9 +679,9 @@ Partial Class ProjectsClients
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Panel4.Controls.Add(Me.btnTaxes)
         Me.Panel4.Controls.Add(Me.btnAddClient)
-        Me.Panel4.Location = New System.Drawing.Point(803, 203)
+        Me.Panel4.Location = New System.Drawing.Point(787, 203)
         Me.Panel4.Name = "Panel4"
-        Me.Panel4.Size = New System.Drawing.Size(147, 408)
+        Me.Panel4.Size = New System.Drawing.Size(163, 408)
         Me.Panel4.TabIndex = 8
         '
         'btnTaxes
@@ -696,7 +696,7 @@ Partial Class ProjectsClients
         Me.btnTaxes.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.btnTaxes.Location = New System.Drawing.Point(0, 41)
         Me.btnTaxes.Name = "btnTaxes"
-        Me.btnTaxes.Size = New System.Drawing.Size(147, 41)
+        Me.btnTaxes.Size = New System.Drawing.Size(163, 41)
         Me.btnTaxes.TabIndex = 8
         Me.btnTaxes.Text = "Taxes"
         Me.btnTaxes.UseVisualStyleBackColor = True
@@ -713,7 +713,7 @@ Partial Class ProjectsClients
         Me.btnAddClient.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.btnAddClient.Location = New System.Drawing.Point(0, 0)
         Me.btnAddClient.Name = "btnAddClient"
-        Me.btnAddClient.Size = New System.Drawing.Size(147, 41)
+        Me.btnAddClient.Size = New System.Drawing.Size(163, 41)
         Me.btnAddClient.TabIndex = 7
         Me.btnAddClient.Text = "Add client"
         Me.btnAddClient.UseVisualStyleBackColor = True

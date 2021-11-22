@@ -30,6 +30,7 @@ Partial Class Login
         Me.btnMinimize = New System.Windows.Forms.PictureBox()
         Me.btnClose = New System.Windows.Forms.PictureBox()
         Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.cmbImagenes = New System.Windows.Forms.ComboBox()
         Me.TableLayoutPanel2 = New System.Windows.Forms.TableLayoutPanel()
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.Panel2 = New System.Windows.Forms.Panel()
@@ -41,7 +42,6 @@ Partial Class Login
         Me.PictureBox3 = New System.Windows.Forms.PictureBox()
         Me.Panel6 = New System.Windows.Forms.Panel()
         Me.Panel7 = New System.Windows.Forms.Panel()
-        Me.cmbImagenes = New System.Windows.Forms.ComboBox()
         Me.TitleBar.SuspendLayout()
         Me.TableLayoutPanel1.SuspendLayout()
         CType(Me.btnMinimize, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -151,6 +151,17 @@ Partial Class Login
         Me.Panel1.Name = "Panel1"
         Me.Panel1.Size = New System.Drawing.Size(379, 20)
         Me.Panel1.TabIndex = 9
+        '
+        'cmbImagenes
+        '
+        Me.cmbImagenes.BackColor = System.Drawing.Color.FromArgb(CType(CType(30, Byte), Integer), CType(CType(38, Byte), Integer), CType(CType(70, Byte), Integer))
+        Me.cmbImagenes.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cmbImagenes.ForeColor = System.Drawing.SystemColors.Window
+        Me.cmbImagenes.FormattingEnabled = True
+        Me.cmbImagenes.Location = New System.Drawing.Point(183, -2)
+        Me.cmbImagenes.Name = "cmbImagenes"
+        Me.cmbImagenes.Size = New System.Drawing.Size(183, 21)
+        Me.cmbImagenes.TabIndex = 3
         '
         'TableLayoutPanel2
         '
@@ -270,17 +281,6 @@ Partial Class Login
         Me.Panel7.Name = "Panel7"
         Me.Panel7.Size = New System.Drawing.Size(174, 32)
         Me.Panel7.TabIndex = 16
-        '
-        'cmbImagenes
-        '
-        Me.cmbImagenes.BackColor = System.Drawing.Color.FromArgb(CType(CType(30, Byte), Integer), CType(CType(38, Byte), Integer), CType(CType(70, Byte), Integer))
-        Me.cmbImagenes.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cmbImagenes.ForeColor = System.Drawing.SystemColors.Window
-        Me.cmbImagenes.FormattingEnabled = True
-        Me.cmbImagenes.Location = New System.Drawing.Point(183, -2)
-        Me.cmbImagenes.Name = "cmbImagenes"
-        Me.cmbImagenes.Size = New System.Drawing.Size(183, 21)
-        Me.cmbImagenes.TabIndex = 3
         '
         'Login
         '
