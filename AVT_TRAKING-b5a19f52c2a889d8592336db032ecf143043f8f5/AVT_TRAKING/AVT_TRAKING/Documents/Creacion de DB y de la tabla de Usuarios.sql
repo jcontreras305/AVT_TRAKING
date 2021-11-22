@@ -541,7 +541,7 @@ GO
 
 create table productModification(
 	idProductModification varchar(36) primary key not null,
-	idModAux varchar(20),
+	idModAux varchar(36),
 	idProduct int,
 	quantity float,
 	tag varchar(20)
@@ -1142,15 +1142,15 @@ GO
 --##################  FOREIG KEYS SCAFOLD INFORMATION ######################################
 --##########################################################################################
 
-ALTER TABLE scaffoldInformation  WITH CHECK ADD  CONSTRAINT fk_tag_scaffoldInformation
+ALTER TABLE scaffoldInformation  WITH CHECK ADD  CONSTRAINT fk_tag_SCFInformation
 FOREIGN KEY(tag) REFERENCES scaffoldTraking (tag)
 GO
 
-ALTER TABLE scaffoldInformation  WITH CHECK ADD  CONSTRAINT fk_idModification_scaffoldInformation
+ALTER TABLE scaffoldInformation  WITH CHECK ADD  CONSTRAINT fk_idModification_SCFInformation
 FOREIGN KEY(idModAux) REFERENCES modification (idModAux)
 GO
 
-ALTER TABLE scaffoldInformation  WITH CHECK ADD  CONSTRAINT fk_type_scaffoldInformation
+ALTER TABLE scaffoldInformation  WITH CHECK ADD  CONSTRAINT fk_type_SCFInformation
 FOREIGN KEY(type) REFERENCES rental (type)
 GO
 
@@ -1241,57 +1241,6 @@ begin
 end
 GO
 
-create proc sp_DeleteModAux
-@tag varchar(20),
-@modID varchar(20),
-@msg varchar(120) 
-as
-declare @error as int = 0
-declare @flag as int
-declare @idProduct as int
-declare @qty as float
-begin 
-	if (select COUNT(*) from modification where idModification=@modID and tag = @tag) >0 
-	begin 
-		begin tran	
-			begin try
-				set	@msg = CONCAT('Error trying to delete Activity Hours from Modification ',@modID)
-				delete from activityHours where tag = @tag and idModification = @modID
-				set	@msg = CONCAT('Error trying to delete Material Handeling from Modification ',@modID)
-				delete from materialHandeling where tag = @tag and idModification = @modID
-				set	@msg = CONCAT('Error trying to delete Scaffold Information from Modification ',@modID)
-				delete from scaffoldInformation where tag = @tag and idModification=@modID
-				set @flag = (select COUNT(*) from productModification where tag = @tag and idModification = @modID)
-				while (@flag > 0)
-				begin
-					select  @qty = quantity ,@idProduct = idProduct from (select top 1  quantity,idProduct from productModification where tag = '9999' and idModification = @modID) as t1
-					set	@msg = CONCAT('Error trying to delete Product Modification Record from Modification: ', @modID,', with the idProduct: ',CONVERT(varchar(12), @idProduct))
-					select quantity from product where idProduct = @idProduct
-					update product set quantity = quantity + @qty where idProduct = @idProduct
-					select quantity from productTotalScaffold where idProduct = @idProduct and tag = @tag
-					update productTotalScaffold set quantity = quantity + IIF(@qty>0,@qty*-1,@qty*-1) where idProduct = @idProduct and tag = @tag
-					delete from productModification where idProduct = @idProduct and tag = @tag and idModification = @modID
-					delete from productTotalScaffold where quantity = 0 and tag = @tag
-					select @flag = COUNT(*) from productModification where tag = @tag and idModification = @modID
-				end
-				delete from modification where idModification = @modID and tag = @tag	
-				set @msg = 'Successful'	 
-			end try
-			begin catch
-				set @error = 1
-				goto solveProblem
-			end catch
-		commit tran 
-		print @msg	
-		solveProblem:
-		if @error <> 0
-		begin 
-			rollback tran 
-			print @msg
-		end
-	end
-end
-go
 
 create proc sp_Insert_Cient 
 	@ClientID int,
@@ -1466,57 +1415,57 @@ begin
 end
 GO
 
-create proc sp_Insert_Cient
-	@ClientID int,
-	@FirstName varchar (30),
-	@MiddleName varchar (30),
-	@LastName varchar (30),
-	@CompanyName varchar (50),
-	@Status char(1),
-	--Contact
-	@phoneNumer1 varchar(13),
-	@phoneNumer2 varchar(13),
-	@email varchar(50),
-	--Addres
-	@avenue varchar(80),
-	@number int,
-	@city varchar (20),
-	@providence varchar (20),
-	@postalcode int
-as
-declare @error int  -- declaro variables para los ID que son nuevos y una variable de error
-declare @idClient varchar(36) 
-declare @idContact varchar(36)
-declare @idHomeAdress varchar(36)
-begin 
-	begin tran 
-		begin try
-			--se inserta un contacto
+--create proc sp_Insert_Cient
+--	@ClientID int,
+--	@FirstName varchar (30),
+--	@MiddleName varchar (30),
+--	@LastName varchar (30),
+--	@CompanyName varchar (50),
+--	@Status char(1),
+--	--Contact
+--	@phoneNumer1 varchar(13),
+--	@phoneNumer2 varchar(13),
+--	@email varchar(50),
+--	--Addres
+--	@avenue varchar(80),
+--	@number int,
+--	@city varchar (20),
+--	@providence varchar (20),
+--	@postalcode int
+--as
+--declare @error int  -- declaro variables para los ID que son nuevos y una variable de error
+--declare @idClient varchar(36) 
+--declare @idContact varchar(36)
+--declare @idHomeAdress varchar(36)
+--begin 
+--	begin tran 
+--		begin try
+--			--se inserta un contacto
 			
-				set @idContact = NEWID() 
-				insert into contact values(@idContact,@phoneNumer1,@phoneNumer2,@email)
-				if @@ERROR <> 0 begin set @error = @@ERROR goto solveproblem end
+--				set @idContact = NEWID() 
+--				insert into contact values(@idContact,@phoneNumer1,@phoneNumer2,@email)
+--				if @@ERROR <> 0 begin set @error = @@ERROR goto solveproblem end
 			
-				set @idHomeAdress = NEWID()
-				insert into HomeAddress values (@idHomeAdress , @avenue , @number , @city , @providence , @postalCode)
-				if @@ERROR <> 0 begin set @error = @@ERROR goto solveproblem end 
+--				set @idHomeAdress = NEWID()
+--				insert into HomeAddress values (@idHomeAdress , @avenue , @number , @city , @providence , @postalCode)
+--				if @@ERROR <> 0 begin set @error = @@ERROR goto solveproblem end 
 			
-				set @idClient = NEWID()
-				insert into clients values (@idClient , @ClientID, @FirstName, @MiddleName, @LastName , @CompanyName, @idContact , @idHomeAdress ,@Status)
-				if @@ERROR <> 0 begin set @error = @@ERROR goto solveproblem end 
+--				set @idClient = NEWID()
+--				insert into clients values (@idClient , @ClientID, @FirstName, @MiddleName, @LastName , @CompanyName, @idContact , @idHomeAdress ,@Status)
+--				if @@ERROR <> 0 begin set @error = @@ERROR goto solveproblem end 
 			
-		end try
-		begin catch
-			goto solveproblem
-		end catch
-	commit tran
-	solveproblem:
-	if @error <> 0
-	begin 
-		rollback tran 
-	end
-end
-go
+--		end try
+--		begin catch
+--			goto solveproblem
+--		end catch
+--	commit tran
+--	solveproblem:
+--	if @error <> 0
+--	begin 
+--		rollback tran 
+--	end
+--end
+--go
 
 CREATE procedure sp_insert_Material
 @nombre varchar(50),
@@ -1559,46 +1508,47 @@ begin
 end
 GO
 
-create procedure sp_insert_Material
-@nombre varchar(50),
-@numero int,
-@idVendor varchar(36),
-@status char(1),
-@msg varchar(100) out
-as
-declare @idMaterial varchar(36)
-declare @idDM varchar(36)
-declare @error int
-begin
-	begin tran
-		begin try	 
-			set @idMaterial = NEWID()
-			set @idDM = NEWID()
-			if not @nombre = '' and not @idVendor = ''
-			begin 
-				insert into material values (@idMaterial,@numero,@nombre,@status)
-				insert into detalleMaterial values (@idDM,'','','',0.0,'',0.0,@idMaterial,@idVendor)
-				insert into existences values (@idDM , 0.0)
-				set @msg= 'Successful'
-			end
-			else 
-			begin 
-				set @error = 1
-				goto solveProblem
-			end
-		end try
-		begin catch
-			goto solveProblem
-		end catch
-	commit tran
-	solveProblem:
-	if @error <> 0 
-	begin 
-		rollback tran
-		set @msg = concat('Is problably that the Material ',@nombre,' have been inserted, or try to changue the Vendor')
-	end  
-end
-go 
+--create procedure sp_insert_Material
+--@nombre varchar(50),
+--@numero int,
+--@idVendor varchar(36),
+--@status char(1),
+--@msg varchar(100) out
+--as
+--declare @idMaterial varchar(36)
+--declare @idDM varchar(36)
+--declare @error int
+--begin
+--	begin tran
+--		begin try	 
+--			set @idMaterial = NEWID()
+--			set @idDM = NEWID()
+--			if not @nombre = '' and not @idVendor = ''
+--			begin 
+--				insert into material values (@idMaterial,@numero,@nombre,@status)
+--				select * from detalleMaterial
+--				insert into detalleMaterial values (@idDM,'','','',0.0,'',0.0,@idMaterial,@idVendor,'')
+--				insert into existences values (@idDM , 0.0)
+--				set @msg= 'Successful'
+--			end
+--			else 
+--			begin 
+--				set @error = 1
+--				goto solveProblem
+--			end
+--		end try
+--		begin catch
+--			goto solveProblem
+--		end catch
+--	commit tran
+--	solveProblem:
+--	if @error <> 0 
+--	begin 
+--		rollback tran
+--		set @msg = concat('Is problably that the Material ',@nombre,' have been inserted, or try to changue the Vendor')
+--	end  
+--end
+--go 
 
 CREATE procedure sp_insert_Material_Excel
 @nombre varchar(50),
@@ -1886,6 +1836,8 @@ begin
 	end
 end
 GO
+
+
 
 
 
