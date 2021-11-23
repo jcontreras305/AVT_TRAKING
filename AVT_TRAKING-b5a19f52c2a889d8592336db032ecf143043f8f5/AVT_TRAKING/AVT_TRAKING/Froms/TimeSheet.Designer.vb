@@ -80,12 +80,13 @@ Partial Class TimeSheet
         '
         'txtSalida
         '
-        Me.txtSalida.Location = New System.Drawing.Point(10, 16)
+        Me.txtSalida.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.txtSalida.Location = New System.Drawing.Point(0, 0)
         Me.txtSalida.Multiline = True
         Me.txtSalida.Name = "txtSalida"
         Me.txtSalida.ReadOnly = True
         Me.txtSalida.ScrollBars = System.Windows.Forms.ScrollBars.Both
-        Me.txtSalida.Size = New System.Drawing.Size(315, 140)
+        Me.txtSalida.Size = New System.Drawing.Size(328, 166)
         Me.txtSalida.TabIndex = 2
         '
         'TableLayoutPanel1
@@ -95,13 +96,14 @@ Partial Class TimeSheet
         Me.TableLayoutPanel1.Controls.Add(Me.Panel1, 0, 1)
         Me.TableLayoutPanel1.Controls.Add(Me.Panel2, 0, 2)
         Me.TableLayoutPanel1.Controls.Add(Me.TitleBar, 0, 0)
-        Me.TableLayoutPanel1.Location = New System.Drawing.Point(-2, 2)
+        Me.TableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.TableLayoutPanel1.Location = New System.Drawing.Point(0, 0)
         Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
         Me.TableLayoutPanel1.RowCount = 3
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 45.0!))
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 30.0!))
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 70.0!))
-        Me.TableLayoutPanel1.Size = New System.Drawing.Size(336, 288)
+        Me.TableLayoutPanel1.Size = New System.Drawing.Size(334, 290)
         Me.TableLayoutPanel1.TabIndex = 3
         '
         'Panel1
@@ -113,14 +115,14 @@ Partial Class TimeSheet
         Me.Panel1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel1.Location = New System.Drawing.Point(3, 48)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(330, 66)
+        Me.Panel1.Size = New System.Drawing.Size(328, 67)
         Me.Panel1.TabIndex = 0
         '
         'PictureBox3
         '
         Me.PictureBox3.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.PictureBox3.Image = Global.AVT_TRAKING.My.Resources.Resources._exit
-        Me.PictureBox3.Location = New System.Drawing.Point(296, 3)
+        Me.PictureBox3.Location = New System.Drawing.Point(294, 3)
         Me.PictureBox3.Name = "PictureBox3"
         Me.PictureBox3.Size = New System.Drawing.Size(29, 32)
         Me.PictureBox3.TabIndex = 4
@@ -131,9 +133,9 @@ Partial Class TimeSheet
         Me.Panel2.BackColor = System.Drawing.Color.FromArgb(CType(CType(83, Byte), Integer), CType(CType(93, Byte), Integer), CType(CType(102, Byte), Integer))
         Me.Panel2.Controls.Add(Me.txtSalida)
         Me.Panel2.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel2.Location = New System.Drawing.Point(3, 120)
+        Me.Panel2.Location = New System.Drawing.Point(3, 121)
         Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(330, 165)
+        Me.Panel2.Size = New System.Drawing.Size(328, 166)
         Me.Panel2.TabIndex = 1
         '
         'TitleBar
@@ -146,14 +148,14 @@ Partial Class TimeSheet
         Me.TitleBar.Dock = System.Windows.Forms.DockStyle.Fill
         Me.TitleBar.Location = New System.Drawing.Point(3, 3)
         Me.TitleBar.Name = "TitleBar"
-        Me.TitleBar.Size = New System.Drawing.Size(330, 39)
+        Me.TitleBar.Size = New System.Drawing.Size(328, 39)
         Me.TitleBar.TabIndex = 2
         '
         'PictureBox2
         '
         Me.PictureBox2.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.PictureBox2.Image = Global.AVT_TRAKING.My.Resources.Resources.minimize2
-        Me.PictureBox2.Location = New System.Drawing.Point(257, 4)
+        Me.PictureBox2.Location = New System.Drawing.Point(255, 4)
         Me.PictureBox2.Name = "PictureBox2"
         Me.PictureBox2.Size = New System.Drawing.Size(29, 32)
         Me.PictureBox2.TabIndex = 3
@@ -163,7 +165,7 @@ Partial Class TimeSheet
         '
         Me.btnRestore.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnRestore.Image = Global.AVT_TRAKING.My.Resources.Resources.restore2
-        Me.btnRestore.Location = New System.Drawing.Point(292, 3)
+        Me.btnRestore.Location = New System.Drawing.Point(290, 3)
         Me.btnRestore.Name = "btnRestore"
         Me.btnRestore.Size = New System.Drawing.Size(29, 32)
         Me.btnRestore.TabIndex = 2
@@ -173,7 +175,7 @@ Partial Class TimeSheet
         '
         Me.btnMaximize.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnMaximize.Image = Global.AVT_TRAKING.My.Resources.Resources.maximize2
-        Me.btnMaximize.Location = New System.Drawing.Point(292, 4)
+        Me.btnMaximize.Location = New System.Drawing.Point(290, 4)
         Me.btnMaximize.Name = "btnMaximize"
         Me.btnMaximize.Size = New System.Drawing.Size(29, 32)
         Me.btnMaximize.TabIndex = 1

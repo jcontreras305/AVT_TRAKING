@@ -84,11 +84,12 @@ Partial Class Renta
         'TabControl1
         '
         Me.TabControl1.Controls.Add(Me.TabPage1)
-        Me.TabControl1.Location = New System.Drawing.Point(12, 2)
+        Me.TabControl1.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.TabControl1.Location = New System.Drawing.Point(0, 0)
         Me.TabControl1.Margin = New System.Windows.Forms.Padding(2)
         Me.TabControl1.Name = "TabControl1"
         Me.TabControl1.SelectedIndex = 0
-        Me.TabControl1.Size = New System.Drawing.Size(551, 225)
+        Me.TabControl1.Size = New System.Drawing.Size(580, 230)
         Me.TabControl1.TabIndex = 0
         '
         'TabPage1
@@ -99,7 +100,7 @@ Partial Class Renta
         Me.TabPage1.Margin = New System.Windows.Forms.Padding(2)
         Me.TabPage1.Name = "TabPage1"
         Me.TabPage1.Padding = New System.Windows.Forms.Padding(2)
-        Me.TabPage1.Size = New System.Drawing.Size(543, 199)
+        Me.TabPage1.Size = New System.Drawing.Size(572, 204)
         Me.TabPage1.TabIndex = 0
         Me.TabPage1.Text = "Renta"
         '
@@ -116,14 +117,15 @@ Partial Class Renta
         Me.TableLayoutPanel2.Controls.Add(Me.Panel9, 1, 1)
         Me.TableLayoutPanel2.Controls.Add(Me.Panel10, 1, 2)
         Me.TableLayoutPanel2.Controls.Add(Me.Panel11, 1, 3)
-        Me.TableLayoutPanel2.Location = New System.Drawing.Point(5, 5)
+        Me.TableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.TableLayoutPanel2.Location = New System.Drawing.Point(2, 2)
         Me.TableLayoutPanel2.Name = "TableLayoutPanel2"
         Me.TableLayoutPanel2.RowCount = 4
         Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle())
         Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle())
         Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle())
         Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.TableLayoutPanel2.Size = New System.Drawing.Size(533, 189)
+        Me.TableLayoutPanel2.Size = New System.Drawing.Size(568, 200)
         Me.TableLayoutPanel2.TabIndex = 14
         '
         'Panel4
@@ -133,11 +135,13 @@ Partial Class Renta
         Me.Panel4.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel4.Location = New System.Drawing.Point(3, 3)
         Me.Panel4.Name = "Panel4"
-        Me.Panel4.Size = New System.Drawing.Size(240, 51)
+        Me.Panel4.Size = New System.Drawing.Size(256, 51)
         Me.Panel4.TabIndex = 0
         '
         'txtPrecio
         '
+        Me.txtPrecio.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.txtPrecio.Location = New System.Drawing.Point(78, 5)
         Me.txtPrecio.Margin = New System.Windows.Forms.Padding(2)
         Me.txtPrecio.Name = "txtPrecio"
@@ -159,13 +163,15 @@ Partial Class Renta
         Me.Panel5.Controls.Add(Me.txtHorasRenta)
         Me.Panel5.Controls.Add(Me.Label4)
         Me.Panel5.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel5.Location = New System.Drawing.Point(249, 3)
+        Me.Panel5.Location = New System.Drawing.Point(265, 3)
         Me.Panel5.Name = "Panel5"
-        Me.Panel5.Size = New System.Drawing.Size(281, 51)
+        Me.Panel5.Size = New System.Drawing.Size(300, 51)
         Me.Panel5.TabIndex = 1
         '
         'txtHorasRenta
         '
+        Me.txtHorasRenta.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.txtHorasRenta.Location = New System.Drawing.Point(110, 17)
         Me.txtHorasRenta.Margin = New System.Windows.Forms.Padding(2)
         Me.txtHorasRenta.Name = "txtHorasRenta"
@@ -189,11 +195,13 @@ Partial Class Renta
         Me.Panel6.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel6.Location = New System.Drawing.Point(3, 60)
         Me.Panel6.Name = "Panel6"
-        Me.Panel6.Size = New System.Drawing.Size(240, 53)
+        Me.Panel6.Size = New System.Drawing.Size(256, 53)
         Me.Panel6.TabIndex = 2
         '
         'txtHerramienta
         '
+        Me.txtHerramienta.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.txtHerramienta.Location = New System.Drawing.Point(78, 4)
         Me.txtHerramienta.Margin = New System.Windows.Forms.Padding(2)
         Me.txtHerramienta.Name = "txtHerramienta"
@@ -217,11 +225,13 @@ Partial Class Renta
         Me.Panel7.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel7.Location = New System.Drawing.Point(3, 119)
         Me.Panel7.Name = "Panel7"
-        Me.Panel7.Size = New System.Drawing.Size(240, 36)
+        Me.Panel7.Size = New System.Drawing.Size(256, 36)
         Me.Panel7.TabIndex = 3
         '
         'txtMaterial
         '
+        Me.txtMaterial.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.txtMaterial.Location = New System.Drawing.Point(78, 2)
         Me.txtMaterial.Margin = New System.Windows.Forms.Padding(2)
         Me.txtMaterial.Name = "txtMaterial"
@@ -245,7 +255,7 @@ Partial Class Renta
         Me.Panel8.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel8.Location = New System.Drawing.Point(3, 161)
         Me.Panel8.Name = "Panel8"
-        Me.Panel8.Size = New System.Drawing.Size(240, 28)
+        Me.Panel8.Size = New System.Drawing.Size(256, 36)
         Me.Panel8.TabIndex = 4
         '
         'Button2
@@ -287,13 +297,15 @@ Partial Class Renta
         Me.Panel9.Controls.Add(Me.txtCanHorasH)
         Me.Panel9.Controls.Add(Me.Label5)
         Me.Panel9.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel9.Location = New System.Drawing.Point(249, 60)
+        Me.Panel9.Location = New System.Drawing.Point(265, 60)
         Me.Panel9.Name = "Panel9"
-        Me.Panel9.Size = New System.Drawing.Size(281, 53)
+        Me.Panel9.Size = New System.Drawing.Size(300, 53)
         Me.Panel9.TabIndex = 5
         '
         'txtCanHorasH
         '
+        Me.txtCanHorasH.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.txtCanHorasH.Location = New System.Drawing.Point(110, 8)
         Me.txtCanHorasH.Margin = New System.Windows.Forms.Padding(2)
         Me.txtCanHorasH.Name = "txtCanHorasH"
@@ -315,13 +327,15 @@ Partial Class Renta
         Me.Panel10.Controls.Add(Me.txtCanHorasM)
         Me.Panel10.Controls.Add(Me.Label6)
         Me.Panel10.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel10.Location = New System.Drawing.Point(249, 119)
+        Me.Panel10.Location = New System.Drawing.Point(265, 119)
         Me.Panel10.Name = "Panel10"
-        Me.Panel10.Size = New System.Drawing.Size(281, 36)
+        Me.Panel10.Size = New System.Drawing.Size(300, 36)
         Me.Panel10.TabIndex = 6
         '
         'txtCanHorasM
         '
+        Me.txtCanHorasM.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.txtCanHorasM.Location = New System.Drawing.Point(110, 6)
         Me.txtCanHorasM.Margin = New System.Windows.Forms.Padding(2)
         Me.txtCanHorasM.Name = "txtCanHorasM"
@@ -341,20 +355,21 @@ Partial Class Renta
         'Panel11
         '
         Me.Panel11.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel11.Location = New System.Drawing.Point(249, 161)
+        Me.Panel11.Location = New System.Drawing.Point(265, 161)
         Me.Panel11.Name = "Panel11"
-        Me.Panel11.Size = New System.Drawing.Size(281, 28)
+        Me.Panel11.Size = New System.Drawing.Size(300, 36)
         Me.Panel11.TabIndex = 7
         '
         'DataGridView1
         '
         Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DataGridView1.Location = New System.Drawing.Point(6, 2)
+        Me.DataGridView1.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.DataGridView1.Location = New System.Drawing.Point(0, 0)
         Me.DataGridView1.Margin = New System.Windows.Forms.Padding(2)
         Me.DataGridView1.Name = "DataGridView1"
         Me.DataGridView1.RowHeadersWidth = 62
         Me.DataGridView1.RowTemplate.Height = 28
-        Me.DataGridView1.Size = New System.Drawing.Size(567, 93)
+        Me.DataGridView1.Size = New System.Drawing.Size(580, 111)
         Me.DataGridView1.TabIndex = 1
         '
         'Button1
@@ -383,14 +398,15 @@ Partial Class Renta
         Me.TableLayoutPanel1.Controls.Add(Me.Panel2, 0, 2)
         Me.TableLayoutPanel1.Controls.Add(Me.Panel3, 0, 3)
         Me.TableLayoutPanel1.Controls.Add(Me.TitleBar, 0, 0)
-        Me.TableLayoutPanel1.Location = New System.Drawing.Point(-1, 1)
+        Me.TableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.TableLayoutPanel1.Location = New System.Drawing.Point(0, 0)
         Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
         Me.TableLayoutPanel1.RowCount = 4
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35.0!))
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50.0!))
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle())
-        Me.TableLayoutPanel1.Size = New System.Drawing.Size(587, 434)
+        Me.TableLayoutPanel1.Size = New System.Drawing.Size(586, 438)
         Me.TableLayoutPanel1.TabIndex = 3
         '
         'Panel1
@@ -401,14 +417,14 @@ Partial Class Renta
         Me.Panel1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel1.Location = New System.Drawing.Point(3, 38)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(581, 44)
+        Me.Panel1.Size = New System.Drawing.Size(580, 44)
         Me.Panel1.TabIndex = 0
         '
         'PictureBox2
         '
         Me.PictureBox2.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.PictureBox2.Image = Global.AVT_TRAKING.My.Resources.Resources._exit
-        Me.PictureBox2.Location = New System.Drawing.Point(540, 3)
+        Me.PictureBox2.Location = New System.Drawing.Point(539, 3)
         Me.PictureBox2.Name = "PictureBox2"
         Me.PictureBox2.Size = New System.Drawing.Size(37, 38)
         Me.PictureBox2.TabIndex = 2
@@ -423,7 +439,7 @@ Partial Class Renta
         Me.Panel2.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.Panel2.Location = New System.Drawing.Point(3, 88)
         Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(581, 230)
+        Me.Panel2.Size = New System.Drawing.Size(580, 230)
         Me.Panel2.TabIndex = 1
         '
         'Panel3
@@ -433,7 +449,7 @@ Partial Class Renta
         Me.Panel3.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel3.Location = New System.Drawing.Point(3, 324)
         Me.Panel3.Name = "Panel3"
-        Me.Panel3.Size = New System.Drawing.Size(581, 107)
+        Me.Panel3.Size = New System.Drawing.Size(580, 111)
         Me.Panel3.TabIndex = 2
         '
         'TitleBar
@@ -446,14 +462,14 @@ Partial Class Renta
         Me.TitleBar.Dock = System.Windows.Forms.DockStyle.Fill
         Me.TitleBar.Location = New System.Drawing.Point(3, 3)
         Me.TitleBar.Name = "TitleBar"
-        Me.TitleBar.Size = New System.Drawing.Size(581, 29)
+        Me.TitleBar.Size = New System.Drawing.Size(580, 29)
         Me.TitleBar.TabIndex = 3
         '
         'PictureBox4
         '
         Me.PictureBox4.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.PictureBox4.Image = Global.AVT_TRAKING.My.Resources.Resources.minimize2
-        Me.PictureBox4.Location = New System.Drawing.Point(513, 0)
+        Me.PictureBox4.Location = New System.Drawing.Point(512, 0)
         Me.PictureBox4.Name = "PictureBox4"
         Me.PictureBox4.Size = New System.Drawing.Size(29, 29)
         Me.PictureBox4.TabIndex = 3
@@ -463,7 +479,7 @@ Partial Class Renta
         '
         Me.btnRestore.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnRestore.Image = Global.AVT_TRAKING.My.Resources.Resources.restore2
-        Me.btnRestore.Location = New System.Drawing.Point(548, 0)
+        Me.btnRestore.Location = New System.Drawing.Point(547, 0)
         Me.btnRestore.Name = "btnRestore"
         Me.btnRestore.Size = New System.Drawing.Size(29, 29)
         Me.btnRestore.TabIndex = 2
@@ -473,7 +489,7 @@ Partial Class Renta
         '
         Me.btnMaximize.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnMaximize.Image = Global.AVT_TRAKING.My.Resources.Resources.maximize2
-        Me.btnMaximize.Location = New System.Drawing.Point(548, 0)
+        Me.btnMaximize.Location = New System.Drawing.Point(547, 0)
         Me.btnMaximize.Name = "btnMaximize"
         Me.btnMaximize.Size = New System.Drawing.Size(29, 29)
         Me.btnMaximize.TabIndex = 1

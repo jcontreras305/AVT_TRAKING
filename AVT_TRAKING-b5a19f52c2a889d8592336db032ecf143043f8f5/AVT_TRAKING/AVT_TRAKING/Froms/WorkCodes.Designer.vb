@@ -51,6 +51,15 @@ Partial Class WorkCodes
         Me.btnRestore = New System.Windows.Forms.PictureBox()
         Me.btnMaximize = New System.Windows.Forms.PictureBox()
         Me.PictureBox4 = New System.Windows.Forms.PictureBox()
+        Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
+        Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.TableLayoutPanel2 = New System.Windows.Forms.TableLayoutPanel()
+        Me.Panel3 = New System.Windows.Forms.Panel()
+        Me.Panel4 = New System.Windows.Forms.Panel()
+        Me.TableLayoutPanel3 = New System.Windows.Forms.TableLayoutPanel()
+        Me.Panel5 = New System.Windows.Forms.Panel()
+        Me.Panel6 = New System.Windows.Forms.Panel()
         Me.GroupBox1.SuspendLayout()
         CType(Me.sprBillingRate3, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.sprBillingRateOT, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -61,6 +70,15 @@ Partial Class WorkCodes
         CType(Me.btnRestore, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.btnMaximize, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox4, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.TableLayoutPanel1.SuspendLayout()
+        Me.Panel1.SuspendLayout()
+        Me.Panel2.SuspendLayout()
+        Me.TableLayoutPanel2.SuspendLayout()
+        Me.Panel3.SuspendLayout()
+        Me.Panel4.SuspendLayout()
+        Me.TableLayoutPanel3.SuspendLayout()
+        Me.Panel5.SuspendLayout()
+        Me.Panel6.SuspendLayout()
         Me.SuspendLayout()
         '
         'Label1
@@ -119,30 +137,38 @@ Partial Class WorkCodes
         '
         'txtWorkCodeID
         '
+        Me.txtWorkCodeID.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.txtWorkCodeID.Location = New System.Drawing.Point(98, 21)
         Me.txtWorkCodeID.Name = "txtWorkCodeID"
-        Me.txtWorkCodeID.Size = New System.Drawing.Size(120, 21)
+        Me.txtWorkCodeID.Size = New System.Drawing.Size(130, 21)
         Me.txtWorkCodeID.TabIndex = 2
         '
         'TxtWorkCode
         '
+        Me.TxtWorkCode.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.TxtWorkCode.Location = New System.Drawing.Point(98, 55)
         Me.TxtWorkCode.Name = "TxtWorkCode"
-        Me.TxtWorkCode.Size = New System.Drawing.Size(120, 21)
+        Me.TxtWorkCode.Size = New System.Drawing.Size(130, 21)
         Me.TxtWorkCode.TabIndex = 3
         '
         'txtEQExq1
         '
+        Me.txtEQExq1.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.txtEQExq1.Location = New System.Drawing.Point(98, 230)
         Me.txtEQExq1.Name = "txtEQExq1"
-        Me.txtEQExq1.Size = New System.Drawing.Size(120, 21)
+        Me.txtEQExq1.Size = New System.Drawing.Size(130, 21)
         Me.txtEQExq1.TabIndex = 7
         '
         'txtEQExq2
         '
+        Me.txtEQExq2.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.txtEQExq2.Location = New System.Drawing.Point(98, 265)
         Me.txtEQExq2.Name = "txtEQExq2"
-        Me.txtEQExq2.Size = New System.Drawing.Size(120, 21)
+        Me.txtEQExq2.Size = New System.Drawing.Size(130, 21)
         Me.txtEQExq2.TabIndex = 8
         '
         'GroupBox1
@@ -166,23 +192,26 @@ Partial Class WorkCodes
         Me.GroupBox1.Controls.Add(Me.TxtWorkCode)
         Me.GroupBox1.Controls.Add(Me.Label6)
         Me.GroupBox1.Controls.Add(Me.Label7)
+        Me.GroupBox1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.GroupBox1.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.GroupBox1.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.GroupBox1.Location = New System.Drawing.Point(12, 67)
+        Me.GroupBox1.Location = New System.Drawing.Point(0, 0)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(254, 329)
+        Me.GroupBox1.Size = New System.Drawing.Size(264, 359)
         Me.GroupBox1.TabIndex = 16
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "WorkCode"
         '
         'sprBillingRate3
         '
+        Me.sprBillingRate3.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.sprBillingRate3.DecimalPlaces = 2
         Me.sprBillingRate3.Increment = New Decimal(New Integer() {1, 0, 0, 65536})
         Me.sprBillingRate3.Location = New System.Drawing.Point(97, 196)
         Me.sprBillingRate3.Maximum = New Decimal(New Integer() {1000000000, 0, 0, 0})
         Me.sprBillingRate3.Name = "sprBillingRate3"
-        Me.sprBillingRate3.Size = New System.Drawing.Size(120, 21)
+        Me.sprBillingRate3.Size = New System.Drawing.Size(130, 21)
         Me.sprBillingRate3.TabIndex = 13
         Me.sprBillingRate3.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
@@ -213,31 +242,37 @@ Partial Class WorkCodes
         '
         'sprBillingRateOT
         '
+        Me.sprBillingRateOT.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.sprBillingRateOT.DecimalPlaces = 2
         Me.sprBillingRateOT.Increment = New Decimal(New Integer() {1, 0, 0, 65536})
         Me.sprBillingRateOT.Location = New System.Drawing.Point(96, 164)
         Me.sprBillingRateOT.Maximum = New Decimal(New Integer() {1000000000, 0, 0, 0})
         Me.sprBillingRateOT.Name = "sprBillingRateOT"
-        Me.sprBillingRateOT.Size = New System.Drawing.Size(120, 21)
+        Me.sprBillingRateOT.Size = New System.Drawing.Size(130, 21)
         Me.sprBillingRateOT.TabIndex = 6
         Me.sprBillingRateOT.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'sprBillingRate1
         '
+        Me.sprBillingRate1.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.sprBillingRate1.DecimalPlaces = 2
         Me.sprBillingRate1.Increment = New Decimal(New Integer() {1, 0, 0, 65536})
         Me.sprBillingRate1.Location = New System.Drawing.Point(98, 128)
         Me.sprBillingRate1.Maximum = New Decimal(New Integer() {100000000, 0, 0, 0})
         Me.sprBillingRate1.Name = "sprBillingRate1"
-        Me.sprBillingRate1.Size = New System.Drawing.Size(120, 21)
+        Me.sprBillingRate1.Size = New System.Drawing.Size(130, 21)
         Me.sprBillingRate1.TabIndex = 5
         Me.sprBillingRate1.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'txtDescription
         '
+        Me.txtDescription.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.txtDescription.Location = New System.Drawing.Point(98, 93)
         Me.txtDescription.Name = "txtDescription"
-        Me.txtDescription.Size = New System.Drawing.Size(121, 21)
+        Me.txtDescription.Size = New System.Drawing.Size(131, 21)
         Me.txtDescription.TabIndex = 4
         '
         'btnUpdateWorkCode
@@ -286,18 +321,19 @@ Partial Class WorkCodes
         Me.tblWK.AllowUserToAddRows = False
         Me.tblWK.AllowUserToDeleteRows = False
         Me.tblWK.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.tblWK.Location = New System.Drawing.Point(272, 109)
+        Me.tblWK.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.tblWK.Location = New System.Drawing.Point(0, 0)
         Me.tblWK.Name = "tblWK"
         Me.tblWK.ReadOnly = True
         Me.tblWK.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.tblWK.Size = New System.Drawing.Size(428, 288)
+        Me.tblWK.Size = New System.Drawing.Size(460, 307)
         Me.tblWK.TabIndex = 17
         '
         'txtBucar
         '
-        Me.txtBucar.Location = New System.Drawing.Point(419, 84)
+        Me.txtBucar.Location = New System.Drawing.Point(3, 9)
         Me.txtBucar.Name = "txtBucar"
-        Me.txtBucar.Size = New System.Drawing.Size(164, 20)
+        Me.txtBucar.Size = New System.Drawing.Size(189, 20)
         Me.txtBucar.TabIndex = 18
         '
         'btnFindWK
@@ -309,7 +345,7 @@ Partial Class WorkCodes
         Me.btnFindWK.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.btnFindWK.Image = Global.AVT_TRAKING.My.Resources.Resources.loupe
         Me.btnFindWK.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnFindWK.Location = New System.Drawing.Point(599, 82)
+        Me.btnFindWK.Location = New System.Drawing.Point(209, 9)
         Me.btnFindWK.Name = "btnFindWK"
         Me.btnFindWK.Size = New System.Drawing.Size(70, 23)
         Me.btnFindWK.TabIndex = 19
@@ -324,10 +360,10 @@ Partial Class WorkCodes
         Me.TitleBar.Controls.Add(Me.PictureBox3)
         Me.TitleBar.Controls.Add(Me.btnRestore)
         Me.TitleBar.Controls.Add(Me.btnMaximize)
-        Me.TitleBar.Dock = System.Windows.Forms.DockStyle.Top
-        Me.TitleBar.Location = New System.Drawing.Point(0, 0)
+        Me.TitleBar.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.TitleBar.Location = New System.Drawing.Point(3, 3)
         Me.TitleBar.Name = "TitleBar"
-        Me.TitleBar.Size = New System.Drawing.Size(711, 32)
+        Me.TitleBar.Size = New System.Drawing.Size(742, 29)
         Me.TitleBar.TabIndex = 20
         '
         'Label8
@@ -345,7 +381,7 @@ Partial Class WorkCodes
         '
         Me.PictureBox3.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.PictureBox3.Image = Global.AVT_TRAKING.My.Resources.Resources.minimize2
-        Me.PictureBox3.Location = New System.Drawing.Point(643, 3)
+        Me.PictureBox3.Location = New System.Drawing.Point(674, 3)
         Me.PictureBox3.Name = "PictureBox3"
         Me.PictureBox3.Size = New System.Drawing.Size(26, 29)
         Me.PictureBox3.TabIndex = 2
@@ -355,7 +391,7 @@ Partial Class WorkCodes
         '
         Me.btnRestore.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnRestore.Image = Global.AVT_TRAKING.My.Resources.Resources.restore2
-        Me.btnRestore.Location = New System.Drawing.Point(672, 3)
+        Me.btnRestore.Location = New System.Drawing.Point(703, 3)
         Me.btnRestore.Name = "btnRestore"
         Me.btnRestore.Size = New System.Drawing.Size(25, 29)
         Me.btnRestore.TabIndex = 1
@@ -365,7 +401,7 @@ Partial Class WorkCodes
         '
         Me.btnMaximize.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnMaximize.Image = Global.AVT_TRAKING.My.Resources.Resources.maximize2
-        Me.btnMaximize.Location = New System.Drawing.Point(672, 3)
+        Me.btnMaximize.Location = New System.Drawing.Point(703, 3)
         Me.btnMaximize.Name = "btnMaximize"
         Me.btnMaximize.Size = New System.Drawing.Size(28, 29)
         Me.btnMaximize.TabIndex = 0
@@ -375,24 +411,121 @@ Partial Class WorkCodes
         '
         Me.PictureBox4.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.PictureBox4.Image = Global.AVT_TRAKING.My.Resources.Resources._exit
-        Me.PictureBox4.Location = New System.Drawing.Point(669, 38)
+        Me.PictureBox4.Location = New System.Drawing.Point(703, 3)
         Me.PictureBox4.Name = "PictureBox4"
         Me.PictureBox4.Size = New System.Drawing.Size(28, 29)
         Me.PictureBox4.TabIndex = 3
         Me.PictureBox4.TabStop = False
+        '
+        'TableLayoutPanel1
+        '
+        Me.TableLayoutPanel1.ColumnCount = 1
+        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
+        Me.TableLayoutPanel1.Controls.Add(Me.TitleBar, 0, 0)
+        Me.TableLayoutPanel1.Controls.Add(Me.Panel1, 0, 1)
+        Me.TableLayoutPanel1.Controls.Add(Me.Panel2, 0, 2)
+        Me.TableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.TableLayoutPanel1.Location = New System.Drawing.Point(0, 0)
+        Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
+        Me.TableLayoutPanel1.RowCount = 3
+        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35.0!))
+        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10.0!))
+        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 90.0!))
+        Me.TableLayoutPanel1.Size = New System.Drawing.Size(748, 447)
+        Me.TableLayoutPanel1.TabIndex = 21
+        '
+        'Panel1
+        '
+        Me.Panel1.Controls.Add(Me.PictureBox4)
+        Me.Panel1.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Panel1.Location = New System.Drawing.Point(3, 38)
+        Me.Panel1.Name = "Panel1"
+        Me.Panel1.Size = New System.Drawing.Size(742, 35)
+        Me.Panel1.TabIndex = 21
+        '
+        'Panel2
+        '
+        Me.Panel2.Controls.Add(Me.TableLayoutPanel2)
+        Me.Panel2.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Panel2.Location = New System.Drawing.Point(3, 79)
+        Me.Panel2.Name = "Panel2"
+        Me.Panel2.Size = New System.Drawing.Size(742, 365)
+        Me.Panel2.TabIndex = 22
+        '
+        'TableLayoutPanel2
+        '
+        Me.TableLayoutPanel2.ColumnCount = 2
+        Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 36.38814!))
+        Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 63.61186!))
+        Me.TableLayoutPanel2.Controls.Add(Me.Panel3, 0, 0)
+        Me.TableLayoutPanel2.Controls.Add(Me.Panel4, 1, 0)
+        Me.TableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.TableLayoutPanel2.Location = New System.Drawing.Point(0, 0)
+        Me.TableLayoutPanel2.Name = "TableLayoutPanel2"
+        Me.TableLayoutPanel2.RowCount = 1
+        Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
+        Me.TableLayoutPanel2.Size = New System.Drawing.Size(742, 365)
+        Me.TableLayoutPanel2.TabIndex = 0
+        '
+        'Panel3
+        '
+        Me.Panel3.Controls.Add(Me.GroupBox1)
+        Me.Panel3.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Panel3.Location = New System.Drawing.Point(3, 3)
+        Me.Panel3.Name = "Panel3"
+        Me.Panel3.Size = New System.Drawing.Size(264, 359)
+        Me.Panel3.TabIndex = 0
+        '
+        'Panel4
+        '
+        Me.Panel4.Controls.Add(Me.TableLayoutPanel3)
+        Me.Panel4.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Panel4.Location = New System.Drawing.Point(273, 3)
+        Me.Panel4.Name = "Panel4"
+        Me.Panel4.Size = New System.Drawing.Size(466, 359)
+        Me.Panel4.TabIndex = 1
+        '
+        'TableLayoutPanel3
+        '
+        Me.TableLayoutPanel3.ColumnCount = 1
+        Me.TableLayoutPanel3.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
+        Me.TableLayoutPanel3.Controls.Add(Me.Panel5, 0, 0)
+        Me.TableLayoutPanel3.Controls.Add(Me.Panel6, 0, 1)
+        Me.TableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.TableLayoutPanel3.Location = New System.Drawing.Point(0, 0)
+        Me.TableLayoutPanel3.Name = "TableLayoutPanel3"
+        Me.TableLayoutPanel3.RowCount = 2
+        Me.TableLayoutPanel3.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 13.09192!))
+        Me.TableLayoutPanel3.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 86.90808!))
+        Me.TableLayoutPanel3.Size = New System.Drawing.Size(466, 359)
+        Me.TableLayoutPanel3.TabIndex = 0
+        '
+        'Panel5
+        '
+        Me.Panel5.Controls.Add(Me.txtBucar)
+        Me.Panel5.Controls.Add(Me.btnFindWK)
+        Me.Panel5.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Panel5.Location = New System.Drawing.Point(3, 3)
+        Me.Panel5.Name = "Panel5"
+        Me.Panel5.Size = New System.Drawing.Size(460, 40)
+        Me.Panel5.TabIndex = 0
+        '
+        'Panel6
+        '
+        Me.Panel6.Controls.Add(Me.tblWK)
+        Me.Panel6.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Panel6.Location = New System.Drawing.Point(3, 49)
+        Me.Panel6.Name = "Panel6"
+        Me.Panel6.Size = New System.Drawing.Size(460, 307)
+        Me.Panel6.TabIndex = 1
         '
         'WorkCodes
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(83, Byte), Integer), CType(CType(93, Byte), Integer), CType(CType(102, Byte), Integer))
-        Me.ClientSize = New System.Drawing.Size(711, 409)
-        Me.Controls.Add(Me.PictureBox4)
-        Me.Controls.Add(Me.TitleBar)
-        Me.Controls.Add(Me.btnFindWK)
-        Me.Controls.Add(Me.txtBucar)
-        Me.Controls.Add(Me.tblWK)
-        Me.Controls.Add(Me.GroupBox1)
+        Me.ClientSize = New System.Drawing.Size(748, 447)
+        Me.Controls.Add(Me.TableLayoutPanel1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
         Me.Name = "WorkCodes"
         Me.Text = "WorkCodes"
@@ -408,8 +541,17 @@ Partial Class WorkCodes
         CType(Me.btnRestore, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.btnMaximize, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PictureBox4, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.TableLayoutPanel1.ResumeLayout(False)
+        Me.Panel1.ResumeLayout(False)
+        Me.Panel2.ResumeLayout(False)
+        Me.TableLayoutPanel2.ResumeLayout(False)
+        Me.Panel3.ResumeLayout(False)
+        Me.Panel4.ResumeLayout(False)
+        Me.TableLayoutPanel3.ResumeLayout(False)
+        Me.Panel5.ResumeLayout(False)
+        Me.Panel5.PerformLayout()
+        Me.Panel6.ResumeLayout(False)
         Me.ResumeLayout(False)
-        Me.PerformLayout()
 
     End Sub
 
@@ -442,4 +584,13 @@ Partial Class WorkCodes
     Friend WithEvents btnMaximize As PictureBox
     Friend WithEvents PictureBox4 As PictureBox
     Friend WithEvents Label8 As Label
+    Friend WithEvents TableLayoutPanel1 As TableLayoutPanel
+    Friend WithEvents Panel1 As Panel
+    Friend WithEvents Panel2 As Panel
+    Friend WithEvents TableLayoutPanel2 As TableLayoutPanel
+    Friend WithEvents Panel3 As Panel
+    Friend WithEvents Panel4 As Panel
+    Friend WithEvents TableLayoutPanel3 As TableLayoutPanel
+    Friend WithEvents Panel5 As Panel
+    Friend WithEvents Panel6 As Panel
 End Class

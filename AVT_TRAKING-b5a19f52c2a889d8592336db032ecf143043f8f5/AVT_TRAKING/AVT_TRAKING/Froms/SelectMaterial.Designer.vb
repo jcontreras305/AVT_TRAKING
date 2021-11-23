@@ -33,16 +33,24 @@ Partial Class SelectMaterial
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.btnOK = New System.Windows.Forms.Button()
         Me.btnCancel = New System.Windows.Forms.Button()
+        Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
+        Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.Panel3 = New System.Windows.Forms.Panel()
+        Me.Panel4 = New System.Windows.Forms.Panel()
         CType(Me.tblMaterialSM, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.TitleBar.SuspendLayout()
         CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.TableLayoutPanel1.SuspendLayout()
+        Me.Panel1.SuspendLayout()
+        Me.Panel3.SuspendLayout()
+        Me.Panel4.SuspendLayout()
         Me.SuspendLayout()
         '
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(16, 57)
+        Me.Label1.Location = New System.Drawing.Point(27, 11)
         Me.Label1.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(60, 13)
@@ -51,7 +59,9 @@ Partial Class SelectMaterial
         '
         'txtNameMaterialSM
         '
-        Me.txtNameMaterialSM.Location = New System.Drawing.Point(78, 54)
+        Me.txtNameMaterialSM.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.txtNameMaterialSM.Location = New System.Drawing.Point(102, 3)
         Me.txtNameMaterialSM.Margin = New System.Windows.Forms.Padding(4)
         Me.txtNameMaterialSM.Name = "txtNameMaterialSM"
         Me.txtNameMaterialSM.Size = New System.Drawing.Size(225, 21)
@@ -62,19 +72,20 @@ Partial Class SelectMaterial
         Me.tblMaterialSM.AllowUserToAddRows = False
         Me.tblMaterialSM.AllowUserToDeleteRows = False
         Me.tblMaterialSM.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.tblMaterialSM.Location = New System.Drawing.Point(13, 113)
+        Me.tblMaterialSM.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.tblMaterialSM.Location = New System.Drawing.Point(0, 0)
         Me.tblMaterialSM.Margin = New System.Windows.Forms.Padding(4)
         Me.tblMaterialSM.MultiSelect = False
         Me.tblMaterialSM.Name = "tblMaterialSM"
         Me.tblMaterialSM.ReadOnly = True
         Me.tblMaterialSM.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.tblMaterialSM.Size = New System.Drawing.Size(356, 252)
+        Me.tblMaterialSM.Size = New System.Drawing.Size(376, 276)
         Me.tblMaterialSM.TabIndex = 2
         '
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(16, 88)
+        Me.Label2.Location = New System.Drawing.Point(34, 33)
         Me.Label2.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(53, 13)
@@ -83,8 +94,10 @@ Partial Class SelectMaterial
         '
         'cmbNombreVendorSM
         '
+        Me.cmbNombreVendorSM.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.cmbNombreVendorSM.FormattingEnabled = True
-        Me.cmbNombreVendorSM.Location = New System.Drawing.Point(78, 84)
+        Me.cmbNombreVendorSM.Location = New System.Drawing.Point(102, 33)
         Me.cmbNombreVendorSM.Margin = New System.Windows.Forms.Padding(4)
         Me.cmbNombreVendorSM.Name = "cmbNombreVendorSM"
         Me.cmbNombreVendorSM.Size = New System.Drawing.Size(225, 21)
@@ -92,15 +105,14 @@ Partial Class SelectMaterial
         '
         'TitleBar
         '
-        Me.TitleBar.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.TitleBar.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(58, Byte), Integer), CType(CType(115, Byte), Integer))
         Me.TitleBar.Controls.Add(Me.Label3)
         Me.TitleBar.Controls.Add(Me.PictureBox2)
         Me.TitleBar.Controls.Add(Me.PictureBox1)
-        Me.TitleBar.Location = New System.Drawing.Point(0, 0)
+        Me.TitleBar.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.TitleBar.Location = New System.Drawing.Point(3, 3)
         Me.TitleBar.Name = "TitleBar"
-        Me.TitleBar.Size = New System.Drawing.Size(384, 31)
+        Me.TitleBar.Size = New System.Drawing.Size(376, 29)
         Me.TitleBar.TabIndex = 7
         '
         'Label3
@@ -115,8 +127,9 @@ Partial Class SelectMaterial
         '
         'PictureBox2
         '
+        Me.PictureBox2.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.PictureBox2.Image = Global.AVT_TRAKING.My.Resources.Resources.minimize2
-        Me.PictureBox2.Location = New System.Drawing.Point(321, 3)
+        Me.PictureBox2.Location = New System.Drawing.Point(313, 3)
         Me.PictureBox2.Name = "PictureBox2"
         Me.PictureBox2.Size = New System.Drawing.Size(27, 28)
         Me.PictureBox2.TabIndex = 1
@@ -126,7 +139,7 @@ Partial Class SelectMaterial
         '
         Me.PictureBox1.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.PictureBox1.Image = Global.AVT_TRAKING.My.Resources.Resources.close2
-        Me.PictureBox1.Location = New System.Drawing.Point(354, 3)
+        Me.PictureBox1.Location = New System.Drawing.Point(346, 3)
         Me.PictureBox1.Name = "PictureBox1"
         Me.PictureBox1.Size = New System.Drawing.Size(27, 24)
         Me.PictureBox1.TabIndex = 0
@@ -134,12 +147,13 @@ Partial Class SelectMaterial
         '
         'btnOK
         '
+        Me.btnOK.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnOK.FlatAppearance.BorderSize = 0
         Me.btnOK.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(41, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(185, Byte), Integer))
         Me.btnOK.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnOK.Image = Global.AVT_TRAKING.My.Resources.Resources.ok
         Me.btnOK.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnOK.Location = New System.Drawing.Point(294, 373)
+        Me.btnOK.Location = New System.Drawing.Point(287, 4)
         Me.btnOK.Margin = New System.Windows.Forms.Padding(4)
         Me.btnOK.Name = "btnOK"
         Me.btnOK.Size = New System.Drawing.Size(75, 32)
@@ -150,12 +164,13 @@ Partial Class SelectMaterial
         '
         'btnCancel
         '
+        Me.btnCancel.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnCancel.FlatAppearance.BorderSize = 0
         Me.btnCancel.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(41, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(185, Byte), Integer))
         Me.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnCancel.Image = Global.AVT_TRAKING.My.Resources.Resources.cancel
         Me.btnCancel.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnCancel.Location = New System.Drawing.Point(203, 373)
+        Me.btnCancel.Location = New System.Drawing.Point(196, 6)
         Me.btnCancel.Margin = New System.Windows.Forms.Padding(4)
         Me.btnCancel.Name = "btnCancel"
         Me.btnCancel.Size = New System.Drawing.Size(83, 32)
@@ -164,20 +179,63 @@ Partial Class SelectMaterial
         Me.btnCancel.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         Me.btnCancel.UseVisualStyleBackColor = True
         '
+        'TableLayoutPanel1
+        '
+        Me.TableLayoutPanel1.ColumnCount = 1
+        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
+        Me.TableLayoutPanel1.Controls.Add(Me.Panel4, 0, 3)
+        Me.TableLayoutPanel1.Controls.Add(Me.TitleBar, 0, 0)
+        Me.TableLayoutPanel1.Controls.Add(Me.Panel3, 0, 2)
+        Me.TableLayoutPanel1.Controls.Add(Me.Panel1, 0, 1)
+        Me.TableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.TableLayoutPanel1.Location = New System.Drawing.Point(0, 0)
+        Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
+        Me.TableLayoutPanel1.RowCount = 4
+        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35.0!))
+        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20.0!))
+        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 70.0!))
+        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10.0!))
+        Me.TableLayoutPanel1.Size = New System.Drawing.Size(382, 438)
+        Me.TableLayoutPanel1.TabIndex = 8
+        '
+        'Panel1
+        '
+        Me.Panel1.Controls.Add(Me.txtNameMaterialSM)
+        Me.Panel1.Controls.Add(Me.cmbNombreVendorSM)
+        Me.Panel1.Controls.Add(Me.Label1)
+        Me.Panel1.Controls.Add(Me.Label2)
+        Me.Panel1.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Panel1.Location = New System.Drawing.Point(3, 38)
+        Me.Panel1.Name = "Panel1"
+        Me.Panel1.Size = New System.Drawing.Size(376, 74)
+        Me.Panel1.TabIndex = 0
+        '
+        'Panel3
+        '
+        Me.Panel3.Controls.Add(Me.tblMaterialSM)
+        Me.Panel3.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Panel3.Location = New System.Drawing.Point(3, 118)
+        Me.Panel3.Name = "Panel3"
+        Me.Panel3.Size = New System.Drawing.Size(376, 276)
+        Me.Panel3.TabIndex = 2
+        '
+        'Panel4
+        '
+        Me.Panel4.Controls.Add(Me.btnOK)
+        Me.Panel4.Controls.Add(Me.btnCancel)
+        Me.Panel4.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Panel4.Location = New System.Drawing.Point(3, 400)
+        Me.Panel4.Name = "Panel4"
+        Me.Panel4.Size = New System.Drawing.Size(376, 35)
+        Me.Panel4.TabIndex = 3
+        '
         'SelectMaterial
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(83, Byte), Integer), CType(CType(93, Byte), Integer), CType(CType(102, Byte), Integer))
-        Me.ClientSize = New System.Drawing.Size(382, 415)
-        Me.Controls.Add(Me.TitleBar)
-        Me.Controls.Add(Me.cmbNombreVendorSM)
-        Me.Controls.Add(Me.Label2)
-        Me.Controls.Add(Me.btnOK)
-        Me.Controls.Add(Me.btnCancel)
-        Me.Controls.Add(Me.tblMaterialSM)
-        Me.Controls.Add(Me.txtNameMaterialSM)
-        Me.Controls.Add(Me.Label1)
+        Me.ClientSize = New System.Drawing.Size(382, 438)
+        Me.Controls.Add(Me.TableLayoutPanel1)
         Me.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
@@ -190,8 +248,12 @@ Partial Class SelectMaterial
         Me.TitleBar.PerformLayout()
         CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.TableLayoutPanel1.ResumeLayout(False)
+        Me.Panel1.ResumeLayout(False)
+        Me.Panel1.PerformLayout()
+        Me.Panel3.ResumeLayout(False)
+        Me.Panel4.ResumeLayout(False)
         Me.ResumeLayout(False)
-        Me.PerformLayout()
 
     End Sub
 
@@ -206,4 +268,8 @@ Partial Class SelectMaterial
     Friend WithEvents PictureBox2 As PictureBox
     Friend WithEvents PictureBox1 As PictureBox
     Friend WithEvents Label3 As Label
+    Friend WithEvents TableLayoutPanel1 As TableLayoutPanel
+    Friend WithEvents Panel4 As Panel
+    Friend WithEvents Panel3 As Panel
+    Friend WithEvents Panel1 As Panel
 End Class

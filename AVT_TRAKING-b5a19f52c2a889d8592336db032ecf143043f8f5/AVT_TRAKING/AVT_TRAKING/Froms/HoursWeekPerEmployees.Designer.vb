@@ -466,7 +466,7 @@ Partial Class HoursWeekPerEmployees
         Me.Button12.Name = "Button12"
         Me.Button12.Size = New System.Drawing.Size(140, 29)
         Me.Button12.TabIndex = 19
-        Me.Button12.Text = "Dialv Peer Diem"
+        Me.Button12.Text = "Dialv Per Diem"
         Me.Button12.UseVisualStyleBackColor = True
         '
         'btnNextEmploye
@@ -573,7 +573,7 @@ Partial Class HoursWeekPerEmployees
         Me.Button4.Name = "Button4"
         Me.Button4.Size = New System.Drawing.Size(112, 32)
         Me.Button4.TabIndex = 11
-        Me.Button4.Text = "Peer-Diem"
+        Me.Button4.Text = "Per-Diem"
         Me.Button4.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         Me.Button4.UseVisualStyleBackColor = True
         '
@@ -586,7 +586,7 @@ Partial Class HoursWeekPerEmployees
         Me.Button3.Name = "Button3"
         Me.Button3.Size = New System.Drawing.Size(110, 32)
         Me.Button3.TabIndex = 10
-        Me.Button3.Text = "Wo-Peer-Diem"
+        Me.Button3.Text = "Wo-Per-Diem"
         Me.Button3.UseVisualStyleBackColor = True
         '
         'btnEmpleados
