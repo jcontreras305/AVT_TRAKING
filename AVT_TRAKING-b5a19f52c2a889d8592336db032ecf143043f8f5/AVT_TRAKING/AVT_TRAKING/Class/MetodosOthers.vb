@@ -609,11 +609,11 @@ insert into imageClient(name,img,imgDefault)  values(@name,@img,@imgDefault)
         Try
             conectar()
             Dim list As New List(Of Byte())
-            Dim cmd As New SqlCommand("select name, img from imageClient order by imgDefault desc ", conn)
+            Dim cmd As New SqlCommand("select photo, companyName from clients ", conn)
             Dim dr As SqlDataReader = cmd.ExecuteReader()
             While dr.Read()
-                list.Add(dr("img"))
-                cmb.Items.Add(dr("name"))
+                list.Add(dr("photo"))
+                cmb.Items.Add(dr("companyName"))
             End While
             dr.Close()
 

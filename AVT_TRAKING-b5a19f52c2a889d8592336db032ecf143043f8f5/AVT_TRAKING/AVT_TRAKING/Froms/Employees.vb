@@ -89,15 +89,17 @@ Public Class Employees
 
     Private Function activarCamposPay(flag As Boolean) As Boolean
         If flag = True Then
-            chbPay.Checked = True
-            sprPayRate1.Enabled = True
-            sprPayRate2.Enabled = True
-            sprPayRate3.Enabled = True
+            chbPay.Checked = flag
+            sprPayRate1.Enabled = flag
+            sprPayRate2.Enabled = flag
+            sprPayRate3.Enabled = flag
+            btnNewPay.Enabled = flag
         Else
-            chbPay.Checked = False
-            sprPayRate1.Enabled = False
-            sprPayRate2.Enabled = False
-            sprPayRate3.Enabled = False
+            chbPay.Checked = flag
+            sprPayRate1.Enabled = flag
+            sprPayRate2.Enabled = flag
+            sprPayRate3.Enabled = flag
+            btnNewPay.Enabled = flag
         End If
         Return True
     End Function
@@ -116,7 +118,7 @@ Public Class Employees
             Dim result = MessageBox.Show("Are you sure that you want to change the user's data?", "Adventence", MessageBoxButtons.OKCancel, MessageBoxIcon.Question)
             If result = DialogResult.OK Then
                 Dim listNewData = recolectar()
-                mtd.actualizar_Employee(listNewData, idEmployee, idAddress, idContacto, idPay, imageToByte(imgPhoto.Image))
+                mtd.actualizar_Employee(listNewData, idEmployee, idAddress, idContacto, imageToByte(imgPhoto.Image))
                 mtd.cargarEmpleados(tblEmployees, "%")
             End If
         Catch ex As Exception
@@ -164,41 +166,40 @@ Public Class Employees
             txtSapNumber.Text = arrayDatos(6)
             idAddress = arrayDatos(7)
             idContacto = arrayDatos(8)
-            idPay = arrayDatos(9)
-            If arrayDatos(10) = "E" Then
+            idPay = arrayDatos(21)
+            If arrayDatos(9) = "E" Then
                 chbState.Checked = True
             Else
                 chbState.Checked = False
             End If
-            If arrayDatos(13) <> "" Or arrayDatos(14) <> "" Or arrayDatos(15) <> "" Then
+            cmbTypeEmployee.SelectedIndex = cmbTypeEmployee.FindString(arrayDatos(10))
+            If arrayDatos(12) <> "" Or arrayDatos(13) <> "" Or arrayDatos(14) <> "" Then
                 activarCamposAddress(True)
-                txtStreat.Text = arrayDatos(13)
-                txtNumber.Text = arrayDatos(14)
-                txtCity.Text = arrayDatos(15)
-                txtProvidence.Text = arrayDatos(16)
-                txtPostalCode.Text = arrayDatos(17)
+                txtStreat.Text = arrayDatos(12)
+                txtNumber.Text = arrayDatos(13)
+                txtCity.Text = arrayDatos(14)
+                txtProvidence.Text = arrayDatos(15)
+                txtPostalCode.Text = arrayDatos(16)
             Else
                 activarCamposAddress(False)
             End If
-            If arrayDatos(19) <> "" Then
+            If arrayDatos(18) <> "" Then
                 activarCamposContacto(True)
-                txtPhone1.Text = arrayDatos(19)
-                txtPhone2.Text = arrayDatos(20)
-                txtEmail.Text = arrayDatos(21)
+                txtPhone1.Text = arrayDatos(18)
+                txtPhone2.Text = arrayDatos(19)
+                txtEmail.Text = arrayDatos(20)
             Else
                 activarCamposContacto(False)
             End If
-            If arrayDatos(23) <> "" Or arrayDatos(24) <> "" Or arrayDatos(25) <> "" Then
+            If arrayDatos(22) <> "" Or arrayDatos(23) <> "" Or arrayDatos(24) <> "" Then
                 activarCamposPay(True)
-                sprPayRate1.Value = arrayDatos(23)
-                sprPayRate2.Value = arrayDatos(24)
-                sprPayRate3.Value = arrayDatos(25)
+                sprPayRate1.Value = arrayDatos(22)
+                sprPayRate2.Value = arrayDatos(23)
+                sprPayRate3.Value = arrayDatos(24)
             Else
                 activarCamposPay(False)
             End If
 
-
-            cmbTypeEmployee.SelectedIndex = cmbTypeEmployee.FindString(arrayDatos(11))
         End If
     End Sub
 
@@ -324,6 +325,21 @@ Public Class Employees
 
     Private Sub Panel20_Paint(sender As Object, e As PaintEventArgs) Handles Panel20.Paint
 
+    End Sub
+
+    Private Sub btnNewPay_Click(sender As Object, e As EventArgs) Handles btnNewPay.Click
+        If btnNewPay.Text = "New Pay" Then
+            btnNewPay.Text = "Save Pay"
+            sprPayRate1.Value = 0.0
+            sprPayRate2.Value = 0.0
+            sprPayRate3.Value = 0.0
+        Else
+            If (mtd.insertNewPayRateEmployee(idEmployee, sprPayRate1.Value, sprPayRate2.Value, sprPayRate3.Value)) Then
+                MsgBox("The new pay Rate was update.")
+                btnNewPay.Text = "New Pay"
+                mtd.cargarEmpleados(tblEmployees, "%")
+            End If
+        End If
     End Sub
 
     <DllImport("user32.DLL", EntryPoint:="ReleaseCapture")>

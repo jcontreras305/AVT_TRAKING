@@ -27,7 +27,7 @@ Public Class Clients
     Private Sub BtnSaveClient_Click(sender As Object, e As EventArgs) Handles btnSaveClient.Click
         If txtFirstName.TextLength > 0 Then
             Dim data = recolectar()
-            mtd.InsertarClients(data)
+            mtd.InsertarClients(data, imageToByte(imgPhoto.Image))
             MaxID = mtd.IdMasAlto
             txtIdClient.Text = MaxID
             limpiarcampos()
@@ -40,7 +40,7 @@ Public Class Clients
 
     Private Function recolectar()
         Try
-            Dim datosClientes(16) As String
+            Dim datosClientes(17) As String
             datosClientes(0) = IdCliente
             datosClientes(1) = txtIdClient.Text
             datosClientes(2) = txtFirstName.Text
@@ -192,7 +192,7 @@ Public Class Clients
             For Each a As String In datos
                 aux.Add(a)
             Next
-            mtd.actualizaCliente(aux)
+            mtd.actualizaCliente(aux, imageToByte(imgPhoto.Image))
             mtd.buscarClienteTodos(tblClientes)
         End If
     End Sub
@@ -253,7 +253,11 @@ Public Class Clients
         End If
 
         For Each cell As DataGridViewCell In tblClientes.CurrentRow.Cells
-            dataClient.Add(cell.Value)
+            If Not cell.ColumnIndex = 17 Then
+                dataClient.Add(cell.Value)
+            Else
+                imgPhoto.Image = If(cell.Value IsNot DBNull.Value, BytetoImage(cell.Value), Nothing)
+            End If
         Next
         IdCliente = dataClient(0)
         IdContacto = dataClient(7)
@@ -313,6 +317,18 @@ Public Class Clients
 
     Private Sub btnMinimized_Click(sender As Object, e As EventArgs) Handles btnMinimized.Click
         Me.WindowState = FormWindowState.Minimized
+    End Sub
+
+    Private Sub btnChooseImage_Click(sender As Object, e As EventArgs) Handles btnChooseImage.Click
+        Try
+            Dim file As New OpenFileDialog
+            file.Filter = "Imagenes JPG|*.jpg|Images PNG|*.png"
+            If file.ShowDialog = Windows.Forms.DialogResult.OK Then
+                imgPhoto.Image = Image.FromFile(file.FileName)
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message)
+        End Try
     End Sub
 
     Private Function validar_Correo(ByVal mail As String) As Boolean

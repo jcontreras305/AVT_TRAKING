@@ -9,8 +9,8 @@ Public Class MetodosEmployees
 		on em.idHomeAdress = ads.idHomeAdress 
 	left join contact as con 
 		on em.idContact = con.idContact 
-	left join payRate as pr
-		on em.idPayRate = pr.idPayRate "
+	left join(select pr.idPayRate,pr.payRate1,pr.payRate2,pr.payRate3,pr.idEmployee from payRate as pr inner join employees as em on em.idEmployee =  pr.idEmployee where datePayRate = (select MAX(datePayRate) from payRate where idEmployee = em.idEmployee)) as T1
+		on em.idEmployee = T1.idEmployee "
 
 
     Public Sub llenarCmbType(ByVal cmb As ComboBox)
@@ -30,14 +30,18 @@ Public Class MetodosEmployees
     Public Sub cargarEmpleados(ByVal tblEmpledos As DataGridView, ByVal text As String)
         Try
             conectar()
-            Dim cmd As New SqlCommand("select em.numberEmploye as Number, em.firstName  , em.lastName , em.middleName , 
+            Dim cmd As New SqlCommand("select  em1.numberEmploye as Number, em1.firstName  , em1.lastName , em1.middleName , 
 con.phoneNumber1, con.phoneNumber2 , con.email , 
-ads.city , ads.providence,
-pr.payRate1 , pr.payRate2,pr.payRate3,typeEmployee " + consultaInner +
-" where em.numberEmploye like CONCAT('%','" + text + "','%') or 
-	em.lastName like CONCAT('%','" + text + "','%') or 
-	em.firstName like CONCAT('%','" + text + "','%') or
-	em.middleName like CONCAT('%','" + text + "','%') or
+ads.city , ads.providence, T1.payRate1,T1.payRate2,T1.payRate3,typeEmployee from employees as em1 left join 
+(select pr.payRate1,pr.payRate2,pr.payRate3,pr.idEmployee from payRate as pr inner join employees as em on em.idEmployee =  pr.idEmployee where datePayRate = (select MAX(datePayRate) from payRate where idEmployee = em.idEmployee)) 
+as T1
+on T1.idEmployee = em1.idEmployee 
+inner join HomeAddress as ads on em1.idHomeAdress = ads.idHomeAdress 
+left join contact as con on em1.idContact = con.idContact 
+where em1.numberEmploye like CONCAT('%','" + text + "','%') or 
+	em1.lastName like CONCAT('%','" + text + "','%') or 
+	em1.firstName like CONCAT('%','" + text + "','%') or
+	em1.middleName like CONCAT('%','" + text + "','%') or
 	ads.city like CONCAT('%','" + text + "','%')  ", conn)
             If cmd.ExecuteNonQuery Then
                 Dim da As New SqlDataAdapter(cmd)
@@ -90,6 +94,23 @@ pr.payRate1 , pr.payRate2,pr.payRate3,typeEmployee " + consultaInner +
         End Try
         desconectar()
     End Sub
+
+    Public Function insertNewPayRateEmployee(ByVal idEmployee As String, ByVal pay1 As Decimal, ByVal pay2 As Decimal, ByVal pay3 As Decimal) As Boolean
+        Try
+            conectar()
+            Dim cmd As New SqlCommand("insert into payRate values (NEWID()," + CStr(pay1) + "," + CStr(pay2) + "," + CStr(pay3) + ",'" + idEmployee + "',GETDATE())", conn)
+            If cmd.ExecuteNonQuery > 0 Then
+                Return True
+            Else
+                Return False
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message)
+            Return False
+        Finally
+            desconectar()
+        End Try
+    End Function
 
     Public Sub buscar_Employee(ByVal busqueda As String)
         Try
@@ -145,7 +166,7 @@ pr.payRate1 , pr.payRate2,pr.payRate3,typeEmployee " + consultaInner +
         desconectar()
     End Function
 
-    Public Sub actualizar_Employee(ByVal datosNuevos() As String, ByVal idEmpleado As String, ByVal idAddress As String, ByVal idContancto As String, ByVal idPay As String, ByVal arraybyte As Byte())
+    Public Sub actualizar_Employee(ByVal datosNuevos() As String, ByVal idEmpleado As String, ByVal idAddress As String, ByVal idContancto As String, ByVal arraybyte As Byte())
         Try
             conectar()
             Dim cmd As New SqlCommand("sp_update_Employee")
@@ -155,7 +176,6 @@ pr.payRate1 , pr.payRate2,pr.payRate3,typeEmployee " + consultaInner +
             cmd.Parameters.Add("@idEmployee", SqlDbType.VarChar, 36).Value = idEmpleado
             cmd.Parameters.Add("@idAddress", SqlDbType.VarChar, 36).Value = idAddress
             cmd.Parameters.Add("@idContact", SqlDbType.VarChar, 36).Value = idContancto
-            cmd.Parameters.Add("@idPay", SqlDbType.VarChar, 36).Value = idPay
             'generales 8
             cmd.Parameters.Add("@numberEmploye", SqlDbType.VarChar, 25).Value = datosNuevos(0)
             cmd.Parameters.Add("@firstName", SqlDbType.VarChar, 30).Value = datosNuevos(1)
@@ -176,9 +196,9 @@ pr.payRate1 , pr.payRate2,pr.payRate3,typeEmployee " + consultaInner +
             cmd.Parameters.Add("@providence", SqlDbType.VarChar, 20).Value = datosNuevos(13)
             cmd.Parameters.Add("@postalCode", SqlDbType.Int).Value = datosNuevos(14)
             'pay 4
-            cmd.Parameters.Add("@payRate1", SqlDbType.Float).Value = datosNuevos(15)
-            cmd.Parameters.Add("@payRate2", SqlDbType.Float).Value = datosNuevos(16)
-            cmd.Parameters.Add("@payRate3", SqlDbType.Float).Value = datosNuevos(17)
+            'cmd.Parameters.Add("@payRate1", SqlDbType.Float).Value = datosNuevos(15)
+            'cmd.Parameters.Add("@payRate2", SqlDbType.Float).Value = datosNuevos(16)
+            'cmd.Parameters.Add("@payRate3", SqlDbType.Float).Value = datosNuevos(17)
             cmd.Parameters.Add("@type", SqlDbType.VarChar, 20).Value = datosNuevos(18)
             cmd.Parameters.Add("@msg", SqlDbType.VarChar, 50).Direction = ParameterDirection.Output
             If cmd.ExecuteNonQuery Then

@@ -182,9 +182,9 @@ Public Class ProjectsClients
         txtPhoneNumber.Text = datosClientesPO(7)
 
         For Each row As DataGridViewRow In tblProjectClients.Rows
-            If row.Cells("Cmp").Value = 0 Then
+            If row.Cells("cmp").Value = 0 Then
                 row.Cells("Complete").Value = False
-            ElseIf row.Cells("Cmp").Value = 1 Then
+            ElseIf row.Cells("cmp").Value = 1 Then
                 row.Cells("Complete").Value = True
             End If
         Next
@@ -197,6 +197,7 @@ Public Class ProjectsClients
             txtContractNo.Text = tblProjectClients.Rows(0).Cells("contractNo").Value
             cmbCostCode.SelectedIndex = cmbCostCode.FindString(tblProjectClients.Rows(0).Cells("costCode").Value)
             txtJobNumber.Text = tblProjectClients.Rows(0).Cells("JobNo").Value
+            pcbLogoPC.Image = BytetoImage(tblProjectClients.Rows(0).Cells("photo").Value)
         End If
     End Sub
 
@@ -331,6 +332,7 @@ Public Class ProjectsClients
             separaridWODeidTask(tblProjectClients.CurrentRow.Cells("Work Order").Value)
             taskTaxes = tblProjectClients.CurrentRow.Cells("idAux").Value
             llenarCampos(tblProjectClients.CurrentRow)
+            pcbLogoPC.Image = BytetoImage(tblProjectClients.CurrentRow.Cells("photo").Value)
         End If
     End Sub
 

@@ -1846,166 +1846,36 @@ GO
 ----drop database VRT_TRAKING
 
 --==============================================================================================================================
---===== ESTE CODIGO ES PARA LA VENTANA DE DISMANTLE ============================================================================
+--===== ESTE CODIGO ES PARA PODER GUARDAR VARIAS VARSIONES DE PAYRATE DE UN EMPLEADO ===========================================
 --==============================================================================================================================
 ---- (CTRL+K) + (CTRL+C) Comentar 
 ---- (CTRL+K) + (CTRL+U) Descomentar 
 
-
---create table dismantle(
---	idDismantle varchar(36) primary key not null,
---	tag varchar(20) not null,
---	comments text ,
---	reqCompany varchar(30),
---	requestBy varchar(50),
---	rentStopDate date,
---	dismantleDate date,
---	foreman varchar(30)
---)
+--use VRT_TRAKING
 --go
 
---ALTER TABLE dismantle WITH CHECK ADD CONSTRAINT fk_tag_dismantle
---FOREIGN KEY (tag) REFERENCES scaffoldTraking (tag)	
---GO
-
---alter table activityHours 
---add idDismantle  varchar(36)
+--alter table employees
+--drop constraint fk_idPayRate_employees
 --go
 
---alter table activityHours with check add constraint fk_idDismantle_ActivityHours foreign key(idDismantle)
---references dismantle(idDismantle)
+--alter table employees
+--drop column idPayRate 
 --go
 
---alter table materialHandeling
---add idDismantle varchar(36)
+--alter table payRate 
+--add idEmployee varchar(36)
 --go
 
---alter table materialHandeling with check add constraint fk_idDismantle_materialHandeling foreign key(idDismantle)
---references dismantle(idDismantle)
+--alter table payRate with check 
+--add constraint fk_idEmployee_payRate foreign key(idEmployee)
+--references employees (idEmployee)
 --go
 
---create table productDismantle(
---	idPDS varchar(36) primary key,
---	quantity float,
---	idProduct int,
---	tag varchar(20),
---	idDismantle varchar(36)
---)
+--alter table payRate 
+--add datePayRate date
 --go
 
---alter table productDismantle with check add constraint fk_idDismantle_productDismantle foreign key(idDismantle)
---references dismantle(idDismantle)
+--delete from payRate
 --go
 
---alter table productDismantle with check add constraint fk_idPorduct_productDismantle foreign key(idProduct)
---references product(idProduct)
---go
 
---alter table productDismantle with check add constraint fk_tag_productDismantle foreign key(tag)
---references scaffoldTraking(tag)
---go
-
---==============================================================================================================================
---===== CODIGO PARA AGREGAR EL VALOR DE ERECTOR EN LA TABLA DE DISMANTLE =======================================================
---==============================================================================================================================
-
----- (CTRL+K) + (CTRL+C) Comentar 
----- (CTRL+K) + (CTRL+U) Descomentar 
-
---use vrt_traking
---go
---select * from dismantle
---go
---alter table dismantle 
---add erector varchar(30)
---go
-
---==============================================================================================================================
---===== CODIGO PARA AGREGAR EL VALOR DE PERCENTCOMPLEATE EN LA TABLA DE TASK ===================================================
---==============================================================================================================================
-
----- (CTRL+K) + (CTRL+C) Comentar 
----- (CTRL+K) + (CTRL+U) Descomentar 
-
---alter table task
---add percentComplete integer
---go
-
---update task set percentComplete = 0 
---go
-
---select * from task
---select * from workOrder
---select * from projectOrder
---select * from job
---go
-
---==============================================================================================================================
---===== CODIGO PARA AGREGAR LAS TABLAS DE TAXES ST Y PT ========================================================================
---==============================================================================================================================
-
----- (CTRL+K) + (CTRL+C) Comentar 
----- (CTRL+K) + (CTRL+U) Descomentar 
-
---create table taxesST(
---	idTaxesST varchar(36)primary key not null,
---	idAux varchar(36),
---	totalHours float,
---	FICA float,
---	FUI float,  
---	SUI float,
---	WC float,
---	GenLiab float,
---	Umbr float,
---	Pollution float,
---	Healt float,
---	Fringe float,
---	Small float,
---	PPE float,
---	Consumable float,
---	Scaffold float,
---	YoYo float,
---	Mesh float,
---	Miselaneos float,
---	Overhead float,
---	Profit float,
---	BWForeman money,
---	BWJourneyman money,
---	BWCraftsman money,
---	BWApprentice money,
---	BWHelper money,
---	QtyForeman int,
---	QtyJourneyman int,
---	QtyCraftsman int,
---	QtyApprentice int,
---	QtyHelper int
---)
---GO
-
---ALTER TABLE taxesST WITH CHECK ADD CONSTRAINT fk_idAux_TaxesST
---FOREIGN KEY (idAux) REFERENCES task(idAux)
---GO
-
---create table taxesPT(
---	idTaxesPT varchar(36)primary key not null,
---	idAux varchar(36),
---	totalHours float,
---	FICA float,
---	FUI float,  
---	SUI float,
---	BWForeman money,
---	BWJourneyman money,
---	BWCraftsman money,
---	BWApprentice money,
---	BWHelper money,
---	QtyForeman int,
---	QtyJourneyman int,
---	QtyCraftsman int,
---	QtyApprentice int,
---	QtyHelper int
---)
---go
-
---ALTER TABLE taxesPT WITH CHECK ADD CONSTRAINT fk_idAux_TaxesPT
---FOREIGN KEY (idAux) REFERENCES task(idAux)
---GO

@@ -98,11 +98,6 @@
     <Compile Include="Class\MetodosTaxes.vb" />
     <Compile Include="Class\MetodosVendor.vb" />
     <Compile Include="Class\MetodosJobs.vb" />
-    <Compile Include="Employees.vb">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Employees.rpt</DependentUpon>
-    </Compile>
     <Compile Include="Froms\AbsentsEmployee.Designer.vb">
       <DependentUpon>AbsentsEmployee.vb</DependentUpon>
     </Compile>
@@ -297,10 +292,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Employees.rpt">
-      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
-      <LastGenOutput>Employees.vb</LastGenOutput>
-    </EmbeddedResource>
     <EmbeddedResource Include="Froms\AbsentsEmployee.resx">
       <DependentUpon>AbsentsEmployee.vb</DependentUpon>
     </EmbeddedResource>

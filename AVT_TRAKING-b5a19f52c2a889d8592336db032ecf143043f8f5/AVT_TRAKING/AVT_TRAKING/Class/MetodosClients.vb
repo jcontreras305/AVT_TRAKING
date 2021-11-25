@@ -33,7 +33,7 @@ Public Class MetodosClients
             Return 0
         End Try
     End Function
-    Sub InsertarClients(ByVal datos() As String)
+    Sub InsertarClients(ByVal datos() As String, ByVal img As Byte())
         Try
             conectar()
             Dim cmd As New SqlCommand("sp_Insert_Cient", conn)
@@ -55,6 +55,8 @@ Public Class MetodosClients
             cmd.Parameters.AddWithValue("@city", datos(14))
             cmd.Parameters.AddWithValue("@providence", datos(15))
             cmd.Parameters.AddWithValue("@postalcode", datos(16))
+            'image
+            cmd.Parameters.Add("@img", SqlDbType.Image).Value = img
             If cmd.ExecuteNonQuery Then
                 MsgBox("Successfull")
             Else
@@ -102,7 +104,7 @@ or ha.city like concat('%','" + text + "','%')", conn)
             Dim cmd As New SqlCommand("
 select cl.idClient,cl.numberClient,cl.firstName,cl.middleName,cl.lastName,cl.companyName,cl.estatus,
 ct.idContact,ct.phoneNumber1, ct.phoneNumber2,ct.email,
-ha.idHomeAdress, ha.avenue ,ha.number, ha.city ,ha.providence,ha.postalCode from
+ha.idHomeAdress, ha.avenue ,ha.number, ha.city ,ha.providence,ha.postalCode,photo from
 " + consultaInner, conn)
 
             If cmd.ExecuteNonQuery Then
@@ -112,7 +114,7 @@ ha.idHomeAdress, ha.avenue ,ha.number, ha.city ,ha.providence,ha.postalCode from
                 tblClientes.DataSource = dt
             End If
             For Each colum As DataGridViewColumn In tblClientes.Columns
-                If colum.Index = 0 Or colum.Index = 7 Or colum.Index = 11 Then
+                If colum.Index = 0 Or colum.Index = 7 Or colum.Index = 11 Or colum.Index = 17 Then
                     colum.Visible = False
                 End If
             Next
@@ -121,7 +123,7 @@ ha.idHomeAdress, ha.avenue ,ha.number, ha.city ,ha.providence,ha.postalCode from
         End Try
     End Sub
 
-    Sub actualizaCliente(ByVal dataList As List(Of String))
+    Sub actualizaCliente(ByVal dataList As List(Of String), ByVal img As Byte())
         Try
             conectar()
             Dim cmd As New SqlCommand("sp_Update_Client", conn)
@@ -145,6 +147,7 @@ ha.idHomeAdress, ha.avenue ,ha.number, ha.city ,ha.providence,ha.postalCode from
             cmd.Parameters.AddWithValue("@city", dataList(14))
             cmd.Parameters.AddWithValue("@providence", dataList(15))
             cmd.Parameters.AddWithValue("@postalcode", dataList(16))
+            cmd.Parameters.Add("@img", SqlDbType.Image).Value = img
             If cmd.ExecuteNonQuery Then
                 MsgBox("Successfull")
             Else
@@ -283,7 +286,8 @@ ha.idHomeAdress, ha.avenue ,ha.number, ha.city ,ha.providence,ha.postalCode from
     CASE WHEN wo.idAuxWO IS NULL THEN ''
 	ELSE wo.idAuxWO END AS 'idAuxWO',
     CASE WHEN tk.idAux IS NULL THEN ''
-	ELSE tk.idAux END AS 'idAux'
+	ELSE tk.idAux END AS 'idAux',
+	cln.photo
 from
 clients as cln left join job as jb on jb.idClient = cln.idClient
 inner join projectOrder as po on po.jobNo = jb.jobNo
@@ -308,8 +312,9 @@ cln.lastName Like '" + consulta + "'", conn)
                 Dim da As New SqlDataAdapter(cmd)
                 Dim dt As New DataTable
                 da.Fill(dt)
+
                 tabla.DataSource = dt
-                If tabla.Columns.Count <= 23 Then
+                If tabla.Columns.Count <= 24 Then
                     Dim clmChb As New DataGridViewCheckBoxColumn
                     clmChb.Name = "Complete"
                     tabla.Columns.Add(clmChb)
@@ -326,6 +331,7 @@ cln.lastName Like '" + consulta + "'", conn)
                 tabla.Columns("idPO").Visible = False
                 tabla.Columns("idAuxWO").Visible = False
                 tabla.Columns("idAux").Visible = False
+                tabla.Columns("photo").Visible = False
             End If
         Catch ex As Exception
             MsgBox(ex.Message())
