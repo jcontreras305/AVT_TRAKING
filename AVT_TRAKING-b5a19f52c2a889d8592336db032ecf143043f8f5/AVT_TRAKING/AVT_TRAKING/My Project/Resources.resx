@@ -118,9 +118,6 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="restore2" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Images\restore2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="maximize" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Images\maximize.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -184,6 +181,9 @@
   <data name="ok" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Images\ok.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="extend" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Images\extend.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="payroll" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Images\payroll.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -235,6 +235,9 @@
   <data name="employee" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Images\employee.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="allTables" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Images\allTables.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="eye" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Images\eye.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -259,13 +262,13 @@
   <data name="save" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Images\save.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="allTables" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Images\allTables.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="restore2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Images\restore2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="click" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Images\click.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="extend" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Images\extend.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="report" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Images\report.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

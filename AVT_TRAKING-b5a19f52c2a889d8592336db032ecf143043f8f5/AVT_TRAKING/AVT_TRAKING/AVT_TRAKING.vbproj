@@ -279,6 +279,12 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="Reports\ReportE.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ReportE.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Reports\ReporteEmployees.Designer.vb">
       <DependentUpon>ReporteEmployees.vb</DependentUpon>
     </Compile>
@@ -376,6 +382,10 @@
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reports\ReportE.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ReportE.vb</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reports\ReporteEmployees.resx">
       <DependentUpon>ReporteEmployees.vb</DependentUpon>
     </EmbeddedResource>
@@ -458,6 +468,7 @@
     <None Include="Images\new.png" />
     <None Include="Images\refresh.png" />
     <None Include="Images\query.png" />
+    <None Include="Images\report.png" />
     <Content Include="Images\user.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
