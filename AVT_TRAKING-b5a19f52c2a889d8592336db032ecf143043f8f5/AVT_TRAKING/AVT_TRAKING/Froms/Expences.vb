@@ -12,7 +12,7 @@ Public Class Expences
         btnUbdate.Enabled = False
         btnCancel.Enabled = False
     End Sub
-    Private Sub btnMainMenu_Click(sender As Object, e As EventArgs) Handles btnMainMenu.Click
+    Private Sub btnMainMenu_Click(sender As Object, e As EventArgs)
         Me.Close()
         ' Me.Finalize()
     End Sub

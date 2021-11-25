@@ -84,6 +84,8 @@ Partial Class ProjectsClients
         Me.Panel6 = New System.Windows.Forms.Panel()
         Me.Panel5 = New System.Windows.Forms.Panel()
         Me.PanelChildForm = New System.Windows.Forms.Panel()
+        Me.TableLayoutPanel4 = New System.Windows.Forms.TableLayoutPanel()
+        Me.Panel3 = New System.Windows.Forms.Panel()
         Me.Panel1.SuspendLayout()
         Me.PnllSetup.SuspendLayout()
         Me.Panel2.SuspendLayout()
@@ -104,6 +106,8 @@ Partial Class ProjectsClients
         Me.Panel6.SuspendLayout()
         Me.Panel5.SuspendLayout()
         Me.PanelChildForm.SuspendLayout()
+        Me.TableLayoutPanel4.SuspendLayout()
+        Me.Panel3.SuspendLayout()
         Me.SuspendLayout()
         '
         'Panel1
@@ -662,26 +666,23 @@ Partial Class ProjectsClients
         '
         Me.tblProjectClients.AllowUserToAddRows = False
         Me.tblProjectClients.AllowUserToDeleteRows = False
-        Me.tblProjectClients.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.tblProjectClients.BackgroundColor = System.Drawing.SystemColors.ControlLight
         Me.tblProjectClients.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.tblProjectClients.Location = New System.Drawing.Point(6, 203)
+        Me.tblProjectClients.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.tblProjectClients.Location = New System.Drawing.Point(0, 0)
         Me.tblProjectClients.Name = "tblProjectClients"
         Me.tblProjectClients.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.tblProjectClients.Size = New System.Drawing.Size(775, 396)
+        Me.tblProjectClients.Size = New System.Drawing.Size(812, 408)
         Me.tblProjectClients.TabIndex = 6
         '
         'Panel4
         '
-        Me.Panel4.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Panel4.Controls.Add(Me.btnTaxes)
         Me.Panel4.Controls.Add(Me.btnAddClient)
-        Me.Panel4.Location = New System.Drawing.Point(787, 203)
+        Me.Panel4.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Panel4.Location = New System.Drawing.Point(821, 3)
         Me.Panel4.Name = "Panel4"
-        Me.Panel4.Size = New System.Drawing.Size(163, 408)
+        Me.Panel4.Size = New System.Drawing.Size(126, 408)
         Me.Panel4.TabIndex = 8
         '
         'btnTaxes
@@ -696,7 +697,7 @@ Partial Class ProjectsClients
         Me.btnTaxes.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.btnTaxes.Location = New System.Drawing.Point(0, 41)
         Me.btnTaxes.Name = "btnTaxes"
-        Me.btnTaxes.Size = New System.Drawing.Size(163, 41)
+        Me.btnTaxes.Size = New System.Drawing.Size(126, 41)
         Me.btnTaxes.TabIndex = 8
         Me.btnTaxes.Text = "Taxes"
         Me.btnTaxes.UseVisualStyleBackColor = True
@@ -713,7 +714,7 @@ Partial Class ProjectsClients
         Me.btnAddClient.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.btnAddClient.Location = New System.Drawing.Point(0, 0)
         Me.btnAddClient.Name = "btnAddClient"
-        Me.btnAddClient.Size = New System.Drawing.Size(163, 41)
+        Me.btnAddClient.Size = New System.Drawing.Size(126, 41)
         Me.btnAddClient.TabIndex = 7
         Me.btnAddClient.Text = "Add client"
         Me.btnAddClient.UseVisualStyleBackColor = True
@@ -863,13 +864,36 @@ Partial Class ProjectsClients
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.PanelChildForm.BackColor = System.Drawing.Color.FromArgb(CType(CType(81, Byte), Integer), CType(CType(93, Byte), Integer), CType(CType(102, Byte), Integer))
-        Me.PanelChildForm.Controls.Add(Me.tblProjectClients)
+        Me.PanelChildForm.Controls.Add(Me.TableLayoutPanel4)
         Me.PanelChildForm.Controls.Add(Me.TableLayoutPanel1)
-        Me.PanelChildForm.Controls.Add(Me.Panel4)
         Me.PanelChildForm.Location = New System.Drawing.Point(216, 33)
         Me.PanelChildForm.Name = "PanelChildForm"
         Me.PanelChildForm.Size = New System.Drawing.Size(950, 611)
         Me.PanelChildForm.TabIndex = 11
+        '
+        'TableLayoutPanel4
+        '
+        Me.TableLayoutPanel4.ColumnCount = 2
+        Me.TableLayoutPanel4.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 86.21053!))
+        Me.TableLayoutPanel4.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 13.78947!))
+        Me.TableLayoutPanel4.Controls.Add(Me.Panel3, 0, 0)
+        Me.TableLayoutPanel4.Controls.Add(Me.Panel4, 1, 0)
+        Me.TableLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.TableLayoutPanel4.Location = New System.Drawing.Point(0, 197)
+        Me.TableLayoutPanel4.Name = "TableLayoutPanel4"
+        Me.TableLayoutPanel4.RowCount = 1
+        Me.TableLayoutPanel4.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
+        Me.TableLayoutPanel4.Size = New System.Drawing.Size(950, 414)
+        Me.TableLayoutPanel4.TabIndex = 11
+        '
+        'Panel3
+        '
+        Me.Panel3.Controls.Add(Me.tblProjectClients)
+        Me.Panel3.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Panel3.Location = New System.Drawing.Point(3, 3)
+        Me.Panel3.Name = "Panel3"
+        Me.Panel3.Size = New System.Drawing.Size(812, 408)
+        Me.Panel3.TabIndex = 0
         '
         'ProjectsClients
         '
@@ -910,6 +934,8 @@ Partial Class ProjectsClients
         Me.Panel5.ResumeLayout(False)
         Me.Panel5.PerformLayout()
         Me.PanelChildForm.ResumeLayout(False)
+        Me.TableLayoutPanel4.ResumeLayout(False)
+        Me.Panel3.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
@@ -975,4 +1001,6 @@ Partial Class ProjectsClients
     Friend WithEvents Panel5 As Panel
     Friend WithEvents PanelChildForm As Panel
     Public WithEvents pcbLogoPC As PictureBox
+    Friend WithEvents TableLayoutPanel4 As TableLayoutPanel
+    Friend WithEvents Panel3 As Panel
 End Class

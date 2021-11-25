@@ -39,6 +39,12 @@ Partial Class SelectDate
         Me.btnRestore = New System.Windows.Forms.PictureBox()
         Me.btnMaximize = New System.Windows.Forms.PictureBox()
         Me.Label3 = New System.Windows.Forms.Label()
+        Me.TableLayoutPanel2 = New System.Windows.Forms.TableLayoutPanel()
+        Me.Panel4 = New System.Windows.Forms.Panel()
+        Me.Panel5 = New System.Windows.Forms.Panel()
+        Me.TableLayoutPanel3 = New System.Windows.Forms.TableLayoutPanel()
+        Me.Panel6 = New System.Windows.Forms.Panel()
+        Me.Panel7 = New System.Windows.Forms.Panel()
         Me.Panel1.SuspendLayout()
         Me.TableLayoutPanel1.SuspendLayout()
         Me.Panel2.SuspendLayout()
@@ -48,6 +54,12 @@ Partial Class SelectDate
         CType(Me.PictureBox3, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.btnRestore, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.btnMaximize, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.TableLayoutPanel2.SuspendLayout()
+        Me.Panel4.SuspendLayout()
+        Me.Panel5.SuspendLayout()
+        Me.TableLayoutPanel3.SuspendLayout()
+        Me.Panel6.SuspendLayout()
+        Me.Panel7.SuspendLayout()
         Me.SuspendLayout()
         '
         'Panel1
@@ -66,24 +78,24 @@ Partial Class SelectDate
         Me.TableLayoutPanel1.Controls.Add(Me.Panel2, 0, 1)
         Me.TableLayoutPanel1.Controls.Add(Me.Panel3, 0, 2)
         Me.TableLayoutPanel1.Controls.Add(Me.TitleBar, 0, 0)
+        Me.TableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.TableLayoutPanel1.Location = New System.Drawing.Point(0, 0)
         Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
         Me.TableLayoutPanel1.RowCount = 3
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40.0!))
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 60.0!))
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 40.0!))
-        Me.TableLayoutPanel1.Size = New System.Drawing.Size(318, 415)
+        Me.TableLayoutPanel1.Size = New System.Drawing.Size(321, 415)
         Me.TableLayoutPanel1.TabIndex = 2
         '
         'Panel2
         '
         Me.Panel2.BackColor = System.Drawing.Color.FromArgb(CType(CType(83, Byte), Integer), CType(CType(93, Byte), Integer), CType(CType(102, Byte), Integer))
-        Me.Panel2.Controls.Add(Me.PictureBox4)
-        Me.Panel2.Controls.Add(Me.mtcCalendar)
+        Me.Panel2.Controls.Add(Me.TableLayoutPanel2)
         Me.Panel2.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel2.Location = New System.Drawing.Point(3, 43)
         Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(312, 219)
+        Me.Panel2.Size = New System.Drawing.Size(315, 219)
         Me.Panel2.TabIndex = 0
         '
         'PictureBox4
@@ -98,7 +110,10 @@ Partial Class SelectDate
         '
         'mtcCalendar
         '
-        Me.mtcCalendar.Location = New System.Drawing.Point(30, 48)
+        Me.mtcCalendar.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.mtcCalendar.Location = New System.Drawing.Point(31, 9)
         Me.mtcCalendar.MaxSelectionCount = 365
         Me.mtcCalendar.Name = "mtcCalendar"
         Me.mtcCalendar.TabIndex = 0
@@ -106,33 +121,26 @@ Partial Class SelectDate
         'Panel3
         '
         Me.Panel3.BackColor = System.Drawing.Color.FromArgb(CType(CType(83, Byte), Integer), CType(CType(93, Byte), Integer), CType(CType(102, Byte), Integer))
-        Me.Panel3.Controls.Add(Me.btnAcept)
-        Me.Panel3.Controls.Add(Me.btnAmpliar)
-        Me.Panel3.Controls.Add(Me.txtFechaEnd)
-        Me.Panel3.Controls.Add(Me.txtFechaStart)
-        Me.Panel3.Controls.Add(Me.Label2)
-        Me.Panel3.Controls.Add(Me.Label1)
+        Me.Panel3.Controls.Add(Me.TableLayoutPanel3)
         Me.Panel3.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel3.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Panel3.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.Panel3.Location = New System.Drawing.Point(3, 268)
         Me.Panel3.Name = "Panel3"
-        Me.Panel3.Size = New System.Drawing.Size(312, 144)
+        Me.Panel3.Size = New System.Drawing.Size(315, 144)
         Me.Panel3.TabIndex = 1
         '
         'btnAcept
         '
-        Me.btnAcept.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.btnAcept.FlatAppearance.BorderSize = 0
         Me.btnAcept.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(58, Byte), Integer), CType(CType(115, Byte), Integer))
         Me.btnAcept.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnAcept.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnAcept.Image = Global.AVT_TRAKING.My.Resources.Resources.ok
         Me.btnAcept.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnAcept.Location = New System.Drawing.Point(188, 47)
+        Me.btnAcept.Location = New System.Drawing.Point(12, 75)
         Me.btnAcept.Name = "btnAcept"
-        Me.btnAcept.Size = New System.Drawing.Size(90, 27)
+        Me.btnAcept.Size = New System.Drawing.Size(90, 38)
         Me.btnAcept.TabIndex = 7
         Me.btnAcept.Text = "Acept"
         Me.btnAcept.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -140,17 +148,15 @@ Partial Class SelectDate
         '
         'btnAmpliar
         '
-        Me.btnAmpliar.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.btnAmpliar.FlatAppearance.BorderSize = 0
         Me.btnAmpliar.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(58, Byte), Integer), CType(CType(115, Byte), Integer))
         Me.btnAmpliar.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnAmpliar.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnAmpliar.Image = Global.AVT_TRAKING.My.Resources.Resources.extend
         Me.btnAmpliar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnAmpliar.Location = New System.Drawing.Point(188, 10)
+        Me.btnAmpliar.Location = New System.Drawing.Point(12, 14)
         Me.btnAmpliar.Name = "btnAmpliar"
-        Me.btnAmpliar.Size = New System.Drawing.Size(90, 31)
+        Me.btnAmpliar.Size = New System.Drawing.Size(90, 45)
         Me.btnAmpliar.TabIndex = 6
         Me.btnAmpliar.Text = "Extend"
         Me.btnAmpliar.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -158,18 +164,18 @@ Partial Class SelectDate
         '
         'txtFechaEnd
         '
-        Me.txtFechaEnd.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.txtFechaEnd.Location = New System.Drawing.Point(57, 42)
+        Me.txtFechaEnd.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.txtFechaEnd.Location = New System.Drawing.Point(44, 47)
         Me.txtFechaEnd.Name = "txtFechaEnd"
         Me.txtFechaEnd.Size = New System.Drawing.Size(104, 21)
         Me.txtFechaEnd.TabIndex = 4
         '
         'txtFechaStart
         '
-        Me.txtFechaStart.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.txtFechaStart.Location = New System.Drawing.Point(57, 12)
+        Me.txtFechaStart.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.txtFechaStart.Location = New System.Drawing.Point(44, 9)
         Me.txtFechaStart.Name = "txtFechaStart"
         Me.txtFechaStart.Size = New System.Drawing.Size(104, 21)
         Me.txtFechaStart.TabIndex = 3
@@ -179,7 +185,7 @@ Partial Class SelectDate
         Me.Label2.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(12, 45)
+        Me.Label2.Location = New System.Drawing.Point(13, 50)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(28, 13)
         Me.Label2.TabIndex = 1
@@ -190,7 +196,7 @@ Partial Class SelectDate
         Me.Label1.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(12, 15)
+        Me.Label1.Location = New System.Drawing.Point(6, 17)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(35, 13)
         Me.Label1.TabIndex = 0
@@ -206,14 +212,14 @@ Partial Class SelectDate
         Me.TitleBar.Dock = System.Windows.Forms.DockStyle.Fill
         Me.TitleBar.Location = New System.Drawing.Point(3, 3)
         Me.TitleBar.Name = "TitleBar"
-        Me.TitleBar.Size = New System.Drawing.Size(312, 34)
+        Me.TitleBar.Size = New System.Drawing.Size(315, 34)
         Me.TitleBar.TabIndex = 2
         '
         'PictureBox3
         '
         Me.PictureBox3.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.PictureBox3.Image = Global.AVT_TRAKING.My.Resources.Resources.minimize2
-        Me.PictureBox3.Location = New System.Drawing.Point(249, 6)
+        Me.PictureBox3.Location = New System.Drawing.Point(252, 6)
         Me.PictureBox3.Name = "PictureBox3"
         Me.PictureBox3.Size = New System.Drawing.Size(29, 31)
         Me.PictureBox3.TabIndex = 3
@@ -223,7 +229,7 @@ Partial Class SelectDate
         '
         Me.btnRestore.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnRestore.Image = Global.AVT_TRAKING.My.Resources.Resources.restore2
-        Me.btnRestore.Location = New System.Drawing.Point(277, 3)
+        Me.btnRestore.Location = New System.Drawing.Point(280, 3)
         Me.btnRestore.Name = "btnRestore"
         Me.btnRestore.Size = New System.Drawing.Size(29, 31)
         Me.btnRestore.TabIndex = 2
@@ -233,7 +239,7 @@ Partial Class SelectDate
         '
         Me.btnMaximize.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnMaximize.Image = Global.AVT_TRAKING.My.Resources.Resources.maximize2
-        Me.btnMaximize.Location = New System.Drawing.Point(277, 3)
+        Me.btnMaximize.Location = New System.Drawing.Point(280, 3)
         Me.btnMaximize.Name = "btnMaximize"
         Me.btnMaximize.Size = New System.Drawing.Size(29, 31)
         Me.btnMaximize.TabIndex = 1
@@ -250,6 +256,76 @@ Partial Class SelectDate
         Me.Label3.TabIndex = 0
         Me.Label3.Text = "SelectDate"
         '
+        'TableLayoutPanel2
+        '
+        Me.TableLayoutPanel2.ColumnCount = 1
+        Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
+        Me.TableLayoutPanel2.Controls.Add(Me.Panel4, 0, 0)
+        Me.TableLayoutPanel2.Controls.Add(Me.Panel5, 0, 1)
+        Me.TableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.TableLayoutPanel2.Location = New System.Drawing.Point(0, 0)
+        Me.TableLayoutPanel2.Name = "TableLayoutPanel2"
+        Me.TableLayoutPanel2.RowCount = 2
+        Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 19.6347!))
+        Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 80.3653!))
+        Me.TableLayoutPanel2.Size = New System.Drawing.Size(315, 219)
+        Me.TableLayoutPanel2.TabIndex = 5
+        '
+        'Panel4
+        '
+        Me.Panel4.Controls.Add(Me.PictureBox4)
+        Me.Panel4.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Panel4.Location = New System.Drawing.Point(3, 3)
+        Me.Panel4.Name = "Panel4"
+        Me.Panel4.Size = New System.Drawing.Size(309, 36)
+        Me.Panel4.TabIndex = 0
+        '
+        'Panel5
+        '
+        Me.Panel5.Controls.Add(Me.mtcCalendar)
+        Me.Panel5.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Panel5.Location = New System.Drawing.Point(3, 45)
+        Me.Panel5.Name = "Panel5"
+        Me.Panel5.Size = New System.Drawing.Size(309, 171)
+        Me.Panel5.TabIndex = 1
+        '
+        'TableLayoutPanel3
+        '
+        Me.TableLayoutPanel3.ColumnCount = 2
+        Me.TableLayoutPanel3.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
+        Me.TableLayoutPanel3.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
+        Me.TableLayoutPanel3.Controls.Add(Me.Panel6, 0, 0)
+        Me.TableLayoutPanel3.Controls.Add(Me.Panel7, 1, 0)
+        Me.TableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.TableLayoutPanel3.Location = New System.Drawing.Point(0, 0)
+        Me.TableLayoutPanel3.Name = "TableLayoutPanel3"
+        Me.TableLayoutPanel3.RowCount = 1
+        Me.TableLayoutPanel3.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
+        Me.TableLayoutPanel3.Size = New System.Drawing.Size(315, 144)
+        Me.TableLayoutPanel3.TabIndex = 8
+        '
+        'Panel6
+        '
+        Me.Panel6.Controls.Add(Me.txtFechaStart)
+        Me.Panel6.Controls.Add(Me.Label1)
+        Me.Panel6.Controls.Add(Me.Label2)
+        Me.Panel6.Controls.Add(Me.txtFechaEnd)
+        Me.Panel6.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Panel6.Location = New System.Drawing.Point(3, 3)
+        Me.Panel6.Name = "Panel6"
+        Me.Panel6.Size = New System.Drawing.Size(151, 138)
+        Me.Panel6.TabIndex = 0
+        '
+        'Panel7
+        '
+        Me.Panel7.Controls.Add(Me.btnAmpliar)
+        Me.Panel7.Controls.Add(Me.btnAcept)
+        Me.Panel7.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Panel7.Location = New System.Drawing.Point(160, 3)
+        Me.Panel7.Name = "Panel7"
+        Me.Panel7.Size = New System.Drawing.Size(152, 138)
+        Me.Panel7.TabIndex = 1
+        '
         'SelectDate
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -264,12 +340,18 @@ Partial Class SelectDate
         Me.Panel2.ResumeLayout(False)
         CType(Me.PictureBox4, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel3.ResumeLayout(False)
-        Me.Panel3.PerformLayout()
         Me.TitleBar.ResumeLayout(False)
         Me.TitleBar.PerformLayout()
         CType(Me.PictureBox3, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.btnRestore, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.btnMaximize, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.TableLayoutPanel2.ResumeLayout(False)
+        Me.Panel4.ResumeLayout(False)
+        Me.Panel5.ResumeLayout(False)
+        Me.TableLayoutPanel3.ResumeLayout(False)
+        Me.Panel6.ResumeLayout(False)
+        Me.Panel6.PerformLayout()
+        Me.Panel7.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
@@ -291,4 +373,10 @@ Partial Class SelectDate
     Friend WithEvents PictureBox3 As PictureBox
     Friend WithEvents btnRestore As PictureBox
     Friend WithEvents btnMaximize As PictureBox
+    Friend WithEvents TableLayoutPanel2 As TableLayoutPanel
+    Friend WithEvents Panel4 As Panel
+    Friend WithEvents Panel5 As Panel
+    Friend WithEvents TableLayoutPanel3 As TableLayoutPanel
+    Friend WithEvents Panel6 As Panel
+    Friend WithEvents Panel7 As Panel
 End Class

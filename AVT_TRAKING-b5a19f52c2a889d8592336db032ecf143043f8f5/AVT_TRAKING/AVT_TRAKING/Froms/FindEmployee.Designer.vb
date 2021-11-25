@@ -55,6 +55,7 @@ Partial Class FindEmployee
         '
         'btnFindEmployee
         '
+        Me.btnFindEmployee.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.btnFindEmployee.FlatAppearance.BorderSize = 0
         Me.btnFindEmployee.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(58, Byte), Integer), CType(CType(115, Byte), Integer))
         Me.btnFindEmployee.FlatStyle = System.Windows.Forms.FlatStyle.Flat
@@ -72,6 +73,7 @@ Partial Class FindEmployee
         '
         'btnSelect
         '
+        Me.btnSelect.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.btnSelect.FlatAppearance.BorderSize = 0
         Me.btnSelect.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(58, Byte), Integer), CType(CType(115, Byte), Integer))
         Me.btnSelect.FlatStyle = System.Windows.Forms.FlatStyle.Flat
@@ -97,7 +99,7 @@ Partial Class FindEmployee
         Me.tblEmployees.Location = New System.Drawing.Point(0, 0)
         Me.tblEmployees.Name = "tblEmployees"
         Me.tblEmployees.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.tblEmployees.Size = New System.Drawing.Size(350, 303)
+        Me.tblEmployees.Size = New System.Drawing.Size(351, 304)
         Me.tblEmployees.TabIndex = 4
         '
         'Panel1
@@ -108,7 +110,7 @@ Partial Class FindEmployee
         Me.Panel1.Controls.Add(Me.tblEmployees)
         Me.Panel1.Location = New System.Drawing.Point(3, 108)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(350, 303)
+        Me.Panel1.Size = New System.Drawing.Size(351, 304)
         Me.Panel1.TabIndex = 5
         '
         'TitleBar
@@ -121,7 +123,7 @@ Partial Class FindEmployee
         Me.TitleBar.Dock = System.Windows.Forms.DockStyle.Fill
         Me.TitleBar.Location = New System.Drawing.Point(3, 3)
         Me.TitleBar.Name = "TitleBar"
-        Me.TitleBar.Size = New System.Drawing.Size(350, 29)
+        Me.TitleBar.Size = New System.Drawing.Size(351, 29)
         Me.TitleBar.TabIndex = 6
         '
         'Label1
@@ -139,7 +141,7 @@ Partial Class FindEmployee
         '
         Me.PictureBox3.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.PictureBox3.Image = Global.AVT_TRAKING.My.Resources.Resources.minimize2
-        Me.PictureBox3.Location = New System.Drawing.Point(260, 0)
+        Me.PictureBox3.Location = New System.Drawing.Point(292, 3)
         Me.PictureBox3.Name = "PictureBox3"
         Me.PictureBox3.Size = New System.Drawing.Size(27, 26)
         Me.PictureBox3.TabIndex = 2
@@ -149,7 +151,7 @@ Partial Class FindEmployee
         '
         Me.btnRestore.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnRestore.Image = Global.AVT_TRAKING.My.Resources.Resources.restore2
-        Me.btnRestore.Location = New System.Drawing.Point(293, 2)
+        Me.btnRestore.Location = New System.Drawing.Point(322, 3)
         Me.btnRestore.Name = "btnRestore"
         Me.btnRestore.Size = New System.Drawing.Size(24, 26)
         Me.btnRestore.TabIndex = 1
@@ -159,7 +161,7 @@ Partial Class FindEmployee
         '
         Me.btnMaximize.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnMaximize.Image = Global.AVT_TRAKING.My.Resources.Resources.maximize2
-        Me.btnMaximize.Location = New System.Drawing.Point(321, 2)
+        Me.btnMaximize.Location = New System.Drawing.Point(322, 2)
         Me.btnMaximize.Name = "btnMaximize"
         Me.btnMaximize.Size = New System.Drawing.Size(26, 26)
         Me.btnMaximize.TabIndex = 0
@@ -172,13 +174,14 @@ Partial Class FindEmployee
         Me.TableLayoutPanel1.Controls.Add(Me.TitleBar, 0, 0)
         Me.TableLayoutPanel1.Controls.Add(Me.Panel1, 0, 2)
         Me.TableLayoutPanel1.Controls.Add(Me.Panel3, 0, 1)
-        Me.TableLayoutPanel1.Location = New System.Drawing.Point(1, 0)
+        Me.TableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.TableLayoutPanel1.Location = New System.Drawing.Point(0, 0)
         Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
         Me.TableLayoutPanel1.RowCount = 3
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35.0!))
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 70.0!))
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50.0!))
-        Me.TableLayoutPanel1.Size = New System.Drawing.Size(356, 414)
+        Me.TableLayoutPanel1.Size = New System.Drawing.Size(357, 415)
         Me.TableLayoutPanel1.TabIndex = 7
         '
         'Panel3
@@ -191,14 +194,14 @@ Partial Class FindEmployee
         Me.Panel3.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel3.Location = New System.Drawing.Point(3, 38)
         Me.Panel3.Name = "Panel3"
-        Me.Panel3.Size = New System.Drawing.Size(350, 64)
+        Me.Panel3.Size = New System.Drawing.Size(351, 64)
         Me.Panel3.TabIndex = 7
         '
         'PictureBox4
         '
         Me.PictureBox4.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.PictureBox4.Image = Global.AVT_TRAKING.My.Resources.Resources._exit
-        Me.PictureBox4.Location = New System.Drawing.Point(305, -1)
+        Me.PictureBox4.Location = New System.Drawing.Point(306, -1)
         Me.PictureBox4.Name = "PictureBox4"
         Me.PictureBox4.Size = New System.Drawing.Size(36, 38)
         Me.PictureBox4.TabIndex = 3
