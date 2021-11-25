@@ -1872,7 +1872,7 @@ GO
 --go
 
 --alter table payRate 
---add datePayRate date
+--add datePayRate dateTime
 --go
 
 --delete from payRate
