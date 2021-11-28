@@ -230,7 +230,6 @@ create table employees(
 	photo image,
 	idHomeAdress varchar(36),
 	idContact varchar(36),
-	idPayRate varchar(36),
 	estatus char(1),
 	typeEmployee varchar(20)
 )
@@ -881,10 +880,6 @@ ALTER TABLE [dbo].[employees]  WITH CHECK ADD  CONSTRAINT [fk_idHomeAdress_emplo
 REFERENCES [dbo].[HomeAddress] ([idHomeAdress])
 GO
 
-ALTER TABLE [dbo].[employees]  WITH CHECK ADD  CONSTRAINT [fk_idPayRate_employees] FOREIGN KEY([idPayRate])
-REFERENCES [dbo].[payRate] ([idPayRate])
-GO
-
 --##########################################################################################
 --##################  FOREIG KEYS EXISTENCES ###############################################
 --##########################################################################################
@@ -1346,7 +1341,7 @@ begin
 end
 go
 
-create proc sp_insert_Employee
+create proc [dbo].[sp_insert_Employee]
 	--general
 	@numberEmploye int, 
 	@firstName varchar(30),
@@ -1392,14 +1387,14 @@ begin
 				if @@ERROR <> 0 begin set @error = @@ERROR goto solveproblem end 
 				
 			--end
-			--if @payRate1 <> '' begin
-				set @idPayRate = NEWID()
-				insert into payRate values (@idPayRate,@payRate1,@payRate2 ,@payRate3)
-				if @@ERROR <> 0 begin set @error = @@ERROR goto solveproblem end 
-			--end
 			--if @firstName <> '' or @numberEmploye > 0 begin	
 				set @idEmployee = NEWID()
-				insert into employees values (@idEmployee , @numberEmploye , @firstName , @lastName , @middleName, @socialNumber , @SAPNumber, @photo , @idHomeAdress , @idContact , @idPayRate ,@estatus,@type)
+				insert into employees values (@idEmployee , @numberEmploye , @firstName , @lastName , @middleName, @socialNumber , @SAPNumber, @photo , @idHomeAdress , @idContact ,@estatus,@type)
+				if @@ERROR <> 0 begin set @error = @@ERROR goto solveproblem end 
+			--end
+			--if @payRate1 <> '' begin
+				set @idPayRate = NEWID()
+				insert into payRate values (@idPayRate,@payRate1,@payRate2 ,@payRate3,@idEmployee,GETDATE())
 				if @@ERROR <> 0 begin set @error = @@ERROR goto solveproblem end 
 			--end
 		end try	
@@ -1413,7 +1408,7 @@ begin
 		rollback tran -- el rollback es para deshacer todos lo cambios hechos anteriormente
 	end
 end
-GO
+go
 
 --create proc sp_Insert_Cient
 --	@ClientID int,
@@ -1467,7 +1462,7 @@ GO
 --end
 --go
 
-CREATE procedure sp_insert_Material
+CREATE proc  [dbo].[sp_insert_Material]
 @nombre varchar(50),
 @numero int,
 @idVendor varchar(36),
@@ -1550,7 +1545,7 @@ GO
 --end
 --go 
 
-CREATE procedure sp_insert_Material_Excel
+CREATE procedure [dbo].[sp_insert_Material_Excel]
 @nombre varchar(50),
 @numero int,
 @idVendor int,
@@ -1764,11 +1759,10 @@ end
 go
 
 
-CREATE proc sp_update_Employee
+CREATE proc [dbo].[sp_update_Employee]
 	@idEmployee varchar(36),
 	@idAddress varchar(36),
 	@idContact varchar(36),
-	@idPay varchar(36),
 	--general
 	@numberEmploye int, 
 	@firstName varchar(30),
@@ -1779,7 +1773,6 @@ CREATE proc sp_update_Employee
 	@photo image,
 	@estatus char(1),
 	--contact
-	
 	@phoneNumber1 varchar(13),
 	@phoneNumber2 varchar(13),
 	@email varchar(50),
@@ -1789,10 +1782,10 @@ CREATE proc sp_update_Employee
 	@city varchar(20), 
 	@providence varchar(20),
 	@postalCode int,
-	--pay
-	@payRate1 float,
-	@payRate2 float, 
-	@payRate3 float,
+	----pay
+	--@payRate1 float,
+	--@payRate2 float, 
+	--@payRate3 float,
 	--type 
 	@type varchar(20),
 	@msg varchar(50) output
@@ -1809,14 +1802,12 @@ begin
 				set @msg = 'Error at moment to save Contact data'
 				update contact set phoneNumber1 =@phoneNumber1 , phoneNumber2 =@phoneNumber2 , email = @email where idContact = @idContact
 				if @@ERROR <> 0 begin set @error = @@ERROR goto solveproblem end 
-
-
 			--end
-			--if @payRate1 <> '' begin
-				set @msg = 'Error at moment to save Pay Rate data'
-				update payRate set payRate1 = @payRate1,payRate2= @payRate2 , payRate3 = @payRate3 where idPayRate = @idPay
-				if @@ERROR <> 0 begin set @error = @@ERROR goto solveproblem end 
-			--end
+			----if @payRate1 <> '' begin
+			--	set @msg = 'Error at moment to save Pay Rate data'
+			--	update payRate set payRate1 = @payRate1,payRate2= @payRate2 , payRate3 = @payRate3 where idPayRate = @idPay and idEmployee = @idEmployee
+			--	if @@ERROR <> 0 begin set @error = @@ERROR goto solveproblem end 
+			----end
 			--if @firstName <> '' or @numberEmploye > 0 begin
 				set @msg = 'Error at moment to save Employee data'	
 				update employees set  numberEmploye = @numberEmploye ,firstName = @firstName , lastName = @lastName ,middleName = @middleName,socialNumber = @socialNumber ,SAPNumber = @SAPNumber,photo = @photo , estatus = @estatus,typeEmployee = @type where idEmployee = @idEmployee
@@ -1835,47 +1826,145 @@ begin
 		return @msg
 	end
 end
-GO
-
-
-
-
-
+go
 
 ----use master
 ----drop database VRT_TRAKING
 
 --==============================================================================================================================
---===== ESTE CODIGO ES PARA PODER GUARDAR VARIAS VARSIONES DE PAYRATE DE UN EMPLEADO ===========================================
+--===== ESTE CODIGO ES PARA ACTUALIZAR LOS PROCEDIMINETOS DE LOS EMPLEADOS  POR LOS CAMBIOS DE LA TABLA PAYRATE ================
 --==============================================================================================================================
 ---- (CTRL+K) + (CTRL+C) Comentar 
 ---- (CTRL+K) + (CTRL+U) Descomentar 
 
---use VRT_TRAKING
+--ALTER proc sp_update_Employee
+--	@idEmployee varchar(36),
+--	@idAddress varchar(36),
+--	@idContact varchar(36),
+--	--general
+--	@numberEmploye int, 
+--	@firstName varchar(30),
+--	@lastName varchar(25),
+--	@middleName varchar(25),
+--	@socialNumber varchar(14),
+--	@SAPNumber int,
+--	@photo image,
+--	@estatus char(1),
+--	--contact
+--	@phoneNumber1 varchar(13),
+--	@phoneNumber2 varchar(13),
+--	@email varchar(50),
+--	--address
+--	@avenue varchar(80),
+--	@number int,
+--	@city varchar(20), 
+--	@providence varchar(20),
+--	@postalCode int,
+--	----pay
+--	--@payRate1 float,
+--	--@payRate2 float, 
+--	--@payRate3 float,
+--	--type 
+--	@type varchar(20),
+--	@msg varchar(50) output
+--as 
+--declare @error int  -- declaro variables para los ID que son nuevos y una variable de error
+--begin
+--	begin tran --inicio tran
+--		begin try --inicio try
+--			--if @avenue <> '' begin -- solo se necesita saber si la calle tiene algo 
+--				set @msg = 'Error at moment to save Address data'
+--				update HomeAddress set avenue = @avenue ,number =@number ,city =@city ,providence =@providence ,postalcode = @postalCode where idHomeAdress = @idAddress
+--				if @@ERROR <> 0 begin set @error = @@ERROR goto solveproblem end 
+				
+--				set @msg = 'Error at moment to save Contact data'
+--				update contact set phoneNumber1 =@phoneNumber1 , phoneNumber2 =@phoneNumber2 , email = @email where idContact = @idContact
+--				if @@ERROR <> 0 begin set @error = @@ERROR goto solveproblem end 
+--			--if @firstName <> '' or @numberEmploye > 0 begin
+--				set @msg = 'Error at moment to save Employee data'	
+--				update employees set  numberEmploye = @numberEmploye ,firstName = @firstName , lastName = @lastName ,middleName = @middleName,socialNumber = @socialNumber ,SAPNumber = @SAPNumber,photo = @photo , estatus = @estatus,typeEmployee = @type where idEmployee = @idEmployee
+--				if @@ERROR <> 0 begin set @error = @@ERROR goto solveproblem end 
+--			--end
+--			set @msg = 'Succesfull'
+--		end try	
+--		begin catch
+--			goto solveproblem -- en caso de error capturado en el catch no vamos a solveproblem y evitamos en commit
+--		end catch
+--	commit tran 
+--	solveproblem:
+--	if @error <> 0
+--	begin 
+--		rollback tran -- el rollback es para deshacer todos lo cambios hechos anteriormente
+--		return @msg
+--	end
+--end
 --go
 
---alter table employees
---drop constraint fk_idPayRate_employees
+--ALTER proc [dbo].[sp_insert_Employee]
+--	--general
+--	@numberEmploye int, 
+--	@firstName varchar(30),
+--	@lastName varchar(25),
+--	@middleName varchar(25),
+--	@socialNumber varchar(14),
+--	@SAPNumber int,
+--	@photo image,
+--	@estatus char(1),
+--	--contact
+--	@phoneNumber1 varchar(13),
+--	@phoneNumber2 varchar(13),
+--	@email varchar(50),
+--	--address
+--	@avenue varchar(80),
+--	@number int,
+--	@city varchar(20), 
+--	@providence varchar(20),
+--	@postalCode int,
+--	--pay
+--	@payRate1 float,
+--	@payRate2 float, 
+--	@payRate3 float,
+--	--type 
+--	@type varchar(20)
+--as 
+--declare @error int  -- declaro variables para los ID que son nuevos y una variable de error
+--declare @idEmployee varchar(36) 
+--declare @idContact varchar(36)
+--declare @idHomeAdress varchar(36)
+--declare @idPayRate varchar(36)
+--begin
+--	begin tran --inicio tran
+--		begin try --inicio try
+--			--if @phoneNumber1 <> '' or @email<> '' begin -- si existe un telefono o un correo entra 
+--				set @idContact = NEWID() 
+--				insert into contact values(@idContact,@phoneNumber1,@phoneNumber2,@email)
+--				if @@ERROR <> 0 begin set @error = @@ERROR goto solveproblem end  -- si existe un error en al insertar solo vamos a solveproblem y nos evitamos lo demas
+--			--end
+--			--if @avenue <> '' begin -- solo se necesita saber si la calle tiene algo 
+--				set @idHomeAdress = NEWID()
+--				insert into HomeAddress values (@idHomeAdress , @avenue , @number , @city , @providence , @postalCode)
+--				if @@ERROR <> 0 begin set @error = @@ERROR goto solveproblem end 
+				
+--			--end
+--			--if @firstName <> '' or @numberEmploye > 0 begin	
+--				set @idEmployee = NEWID()
+--				insert into employees values (@idEmployee , @numberEmploye , @firstName , @lastName , @middleName, @socialNumber , @SAPNumber, @photo , @idHomeAdress , @idContact ,@estatus,@type)
+--				if @@ERROR <> 0 begin set @error = @@ERROR goto solveproblem end 
+--			--end
+--			--if @payRate1 <> '' begin
+--				set @idPayRate = NEWID()
+--				insert into payRate values (@idPayRate,@payRate1,@payRate2 ,@payRate3,@idEmployee,GETDATE())
+--				if @@ERROR <> 0 begin set @error = @@ERROR goto solveproblem end 
+--			--end
+--		end try	
+--		begin catch
+--			goto solveproblem -- en caso de error capturado en el catch no vamos a solveproblem y evitamos en commit
+--		end catch
+--	commit tran 
+--	solveproblem:
+--	if @error <> 0
+--	begin 
+--		rollback tran -- el rollback es para deshacer todos lo cambios hechos anteriormente
+--	end
+--end
 --go
-
---alter table employees
---drop column idPayRate 
---go
-
---alter table payRate 
---add idEmployee varchar(36)
---go
-
---alter table payRate with check 
---add constraint fk_idEmployee_payRate foreign key(idEmployee)
---references employees (idEmployee)
---go
-
---alter table payRate 
---add datePayRate dateTime
---go
-
---delete from payRate
---go
-
-
