@@ -511,4 +511,6 @@ Public Class Taxes
             tx = mtdTX.selectTaxes(tx.idAux)
         End If
     End Sub
+
+
 End Class

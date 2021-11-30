@@ -22,8 +22,6 @@ Partial Class Taxes
     'No lo modifique con el editor de código.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
         Me.TitleBar = New System.Windows.Forms.Panel()
         Me.btnRestore = New System.Windows.Forms.PictureBox()
@@ -194,6 +192,11 @@ Partial Class Taxes
         Me.PTTOTAL = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Panel9 = New System.Windows.Forms.Panel()
         Me.tblAverageP = New System.Windows.Forms.DataGridView()
+        Me.EmployeeBWP = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.FICAAVP = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.FUIAVP = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.SUIAVP = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.PTTOTALAV = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.TableLayoutPanel7 = New System.Windows.Forms.TableLayoutPanel()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.TableLayoutPanel15 = New System.Windows.Forms.TableLayoutPanel()
@@ -204,11 +207,6 @@ Partial Class Taxes
         Me.sprFicaP = New System.Windows.Forms.NumericUpDown()
         Me.Label33 = New System.Windows.Forms.Label()
         Me.Panel10 = New System.Windows.Forms.Panel()
-        Me.EmployeeBWP = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.FICAAVP = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.FUIAVP = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.SUIAVP = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.PTTOTALAV = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.TableLayoutPanel1.SuspendLayout()
         Me.TitleBar.SuspendLayout()
         CType(Me.btnRestore, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -1098,14 +1096,6 @@ Partial Class Taxes
         Me.tblTaxesST.BackgroundColor = System.Drawing.SystemColors.Window
         Me.tblTaxesST.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.tblTaxesST.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.clmEmployee, Me.FICA, Me.FUI, Me.SUI, Me.WC, Me.GenLiab, Me.Umbr, Me.Pollution, Me.Healt, Me.Fringe, Me.Small, Me.PPE, Me.Consumable, Me.Scaffold, Me.YoYos, Me.Mesh, Me.Miselaneos, Me.Overhead, Me.Profit, Me.STTOTAL})
-        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle1.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.tblTaxesST.DefaultCellStyle = DataGridViewCellStyle1
         Me.tblTaxesST.Dock = System.Windows.Forms.DockStyle.Fill
         Me.tblTaxesST.Location = New System.Drawing.Point(3, 3)
         Me.tblTaxesST.Name = "tblTaxesST"
@@ -1242,14 +1232,6 @@ Partial Class Taxes
         Me.tblAverage.BackgroundColor = System.Drawing.SystemColors.Window
         Me.tblAverage.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.tblAverage.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.EmployeeBW, Me.FICAAV, Me.FUIAV, Me.SUIAV, Me.WCAV, Me.GenLiabAV, Me.UmbrAV, Me.PullutionAV, Me.HealtAV, Me.FringeAV, Me.SmallAV, Me.PPEAV, Me.ConsumableAV, Me.ScaffoldAV, Me.YoyosAV, Me.MeshAV, Me.MiselaneosAV, Me.OverheadAV, Me.ProfitAV, Me.STTOTALAV})
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle2.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.tblAverage.DefaultCellStyle = DataGridViewCellStyle2
         Me.tblAverage.Dock = System.Windows.Forms.DockStyle.Fill
         Me.tblAverage.Location = New System.Drawing.Point(3, 201)
         Me.tblAverage.Name = "tblAverage"
@@ -2034,6 +2016,39 @@ Partial Class Taxes
         Me.tblAverageP.Size = New System.Drawing.Size(721, 64)
         Me.tblAverageP.TabIndex = 0
         '
+        'EmployeeBWP
+        '
+        Me.EmployeeBWP.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+        Me.EmployeeBWP.Frozen = True
+        Me.EmployeeBWP.HeaderText = "EmployeeBW"
+        Me.EmployeeBWP.Name = "EmployeeBWP"
+        Me.EmployeeBWP.ReadOnly = True
+        Me.EmployeeBWP.Width = 170
+        '
+        'FICAAVP
+        '
+        Me.FICAAVP.HeaderText = "FICA AV"
+        Me.FICAAVP.Name = "FICAAVP"
+        Me.FICAAVP.ReadOnly = True
+        '
+        'FUIAVP
+        '
+        Me.FUIAVP.HeaderText = "FUI AV"
+        Me.FUIAVP.Name = "FUIAVP"
+        Me.FUIAVP.ReadOnly = True
+        '
+        'SUIAVP
+        '
+        Me.SUIAVP.HeaderText = "SUI AV"
+        Me.SUIAVP.Name = "SUIAVP"
+        Me.SUIAVP.ReadOnly = True
+        '
+        'PTTOTALAV
+        '
+        Me.PTTOTALAV.HeaderText = "PT TOTAL AV"
+        Me.PTTOTALAV.Name = "PTTOTALAV"
+        Me.PTTOTALAV.ReadOnly = True
+        '
         'TableLayoutPanel7
         '
         Me.TableLayoutPanel7.ColumnCount = 2
@@ -2156,39 +2171,6 @@ Partial Class Taxes
         Me.Panel10.Name = "Panel10"
         Me.Panel10.Size = New System.Drawing.Size(723, 77)
         Me.Panel10.TabIndex = 2
-        '
-        'EmployeeBWP
-        '
-        Me.EmployeeBWP.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
-        Me.EmployeeBWP.Frozen = True
-        Me.EmployeeBWP.HeaderText = "EmployeeBW"
-        Me.EmployeeBWP.Name = "EmployeeBWP"
-        Me.EmployeeBWP.ReadOnly = True
-        Me.EmployeeBWP.Width = 170
-        '
-        'FICAAVP
-        '
-        Me.FICAAVP.HeaderText = "FICA AV"
-        Me.FICAAVP.Name = "FICAAVP"
-        Me.FICAAVP.ReadOnly = True
-        '
-        'FUIAVP
-        '
-        Me.FUIAVP.HeaderText = "FUI AV"
-        Me.FUIAVP.Name = "FUIAVP"
-        Me.FUIAVP.ReadOnly = True
-        '
-        'SUIAVP
-        '
-        Me.SUIAVP.HeaderText = "SUI AV"
-        Me.SUIAVP.Name = "SUIAVP"
-        Me.SUIAVP.ReadOnly = True
-        '
-        'PTTOTALAV
-        '
-        Me.PTTOTALAV.HeaderText = "PT TOTAL AV"
-        Me.PTTOTALAV.Name = "PTTOTALAV"
-        Me.PTTOTALAV.ReadOnly = True
         '
         'Taxes
         '

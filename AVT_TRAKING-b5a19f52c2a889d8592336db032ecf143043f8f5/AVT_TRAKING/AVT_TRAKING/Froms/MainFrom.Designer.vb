@@ -26,6 +26,9 @@ Partial Class MainFrom
         Me.TitleBar = New System.Windows.Forms.Panel()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.Panel10 = New System.Windows.Forms.Panel()
+        Me.btnReports = New System.Windows.Forms.Button()
+        Me.pcbLogoMain = New System.Windows.Forms.PictureBox()
         Me.Panel9 = New System.Windows.Forms.Panel()
         Me.Panel3 = New System.Windows.Forms.Panel()
         Me.Panel8 = New System.Windows.Forms.Panel()
@@ -33,22 +36,19 @@ Partial Class MainFrom
         Me.Panel6 = New System.Windows.Forms.Panel()
         Me.Panel5 = New System.Windows.Forms.Panel()
         Me.Panel4 = New System.Windows.Forms.Panel()
-        Me.Panel1 = New System.Windows.Forms.Panel()
-        Me.PanelChildForm = New System.Windows.Forms.Panel()
-        Me.Panel10 = New System.Windows.Forms.Panel()
-        Me.Button2 = New System.Windows.Forms.Button()
-        Me.btnReports = New System.Windows.Forms.Button()
-        Me.pcbLogoMain = New System.Windows.Forms.PictureBox()
         Me.tbnoOthers = New System.Windows.Forms.Button()
         Me.btnMaterials = New System.Windows.Forms.Button()
         Me.btnWorkCodes = New System.Windows.Forms.Button()
         Me.btnClients = New System.Windows.Forms.Button()
         Me.btnEmployees = New System.Windows.Forms.Button()
+        Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.PanelChildForm = New System.Windows.Forms.Panel()
+        Me.Button2 = New System.Windows.Forms.Button()
         Me.TitleBar.SuspendLayout()
         Me.Panel2.SuspendLayout()
+        CType(Me.pcbLogoMain, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel1.SuspendLayout()
         Me.PanelChildForm.SuspendLayout()
-        CType(Me.pcbLogoMain, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'TitleBar
@@ -95,6 +95,41 @@ Partial Class MainFrom
         Me.Panel2.Name = "Panel2"
         Me.Panel2.Size = New System.Drawing.Size(194, 472)
         Me.Panel2.TabIndex = 6
+        '
+        'Panel10
+        '
+        Me.Panel10.BackColor = System.Drawing.Color.RoyalBlue
+        Me.Panel10.Location = New System.Drawing.Point(0, 397)
+        Me.Panel10.Name = "Panel10"
+        Me.Panel10.Size = New System.Drawing.Size(198, 5)
+        Me.Panel10.TabIndex = 10
+        '
+        'btnReports
+        '
+        Me.btnReports.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.btnReports.FlatAppearance.BorderSize = 0
+        Me.btnReports.FlatAppearance.MouseOverBackColor = System.Drawing.Color.RoyalBlue
+        Me.btnReports.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnReports.Font = New System.Drawing.Font("Nirmala UI", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnReports.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.btnReports.Image = Global.AVT_TRAKING.My.Resources.Resources.reportMenu
+        Me.btnReports.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnReports.Location = New System.Drawing.Point(1, 405)
+        Me.btnReports.Margin = New System.Windows.Forms.Padding(2)
+        Me.btnReports.Name = "btnReports"
+        Me.btnReports.Size = New System.Drawing.Size(192, 45)
+        Me.btnReports.TabIndex = 11
+        Me.btnReports.Text = "Reports"
+        Me.btnReports.UseVisualStyleBackColor = True
+        '
+        'pcbLogoMain
+        '
+        Me.pcbLogoMain.Location = New System.Drawing.Point(3, 3)
+        Me.pcbLogoMain.Name = "pcbLogoMain"
+        Me.pcbLogoMain.Size = New System.Drawing.Size(188, 98)
+        Me.pcbLogoMain.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
+        Me.pcbLogoMain.TabIndex = 10
+        Me.pcbLogoMain.TabStop = False
         '
         'Panel9
         '
@@ -151,74 +186,6 @@ Partial Class MainFrom
         Me.Panel4.Name = "Panel4"
         Me.Panel4.Size = New System.Drawing.Size(104, 5)
         Me.Panel4.TabIndex = 5
-        '
-        'Panel1
-        '
-        Me.Panel1.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.Panel1.Controls.Add(Me.Panel2)
-        Me.Panel1.Location = New System.Drawing.Point(0, 28)
-        Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(197, 472)
-        Me.Panel1.TabIndex = 5
-        '
-        'PanelChildForm
-        '
-        Me.PanelChildForm.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.PanelChildForm.Controls.Add(Me.Button2)
-        Me.PanelChildForm.Location = New System.Drawing.Point(197, 28)
-        Me.PanelChildForm.Name = "PanelChildForm"
-        Me.PanelChildForm.Size = New System.Drawing.Size(605, 469)
-        Me.PanelChildForm.TabIndex = 7
-        '
-        'Panel10
-        '
-        Me.Panel10.BackColor = System.Drawing.Color.RoyalBlue
-        Me.Panel10.Location = New System.Drawing.Point(0, 397)
-        Me.Panel10.Name = "Panel10"
-        Me.Panel10.Size = New System.Drawing.Size(198, 5)
-        Me.Panel10.TabIndex = 10
-        '
-        'Button2
-        '
-        Me.Button2.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Button2.ForeColor = System.Drawing.Color.Red
-        Me.Button2.Image = Global.AVT_TRAKING.My.Resources.Resources._exit
-        Me.Button2.Location = New System.Drawing.Point(563, 2)
-        Me.Button2.Margin = New System.Windows.Forms.Padding(2)
-        Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(39, 46)
-        Me.Button2.TabIndex = 4
-        Me.Button2.UseVisualStyleBackColor = True
-        '
-        'btnReports
-        '
-        Me.btnReports.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.btnReports.FlatAppearance.BorderSize = 0
-        Me.btnReports.FlatAppearance.MouseOverBackColor = System.Drawing.Color.RoyalBlue
-        Me.btnReports.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnReports.Font = New System.Drawing.Font("Nirmala UI", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnReports.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.btnReports.Image = Global.AVT_TRAKING.My.Resources.Resources.options
-        Me.btnReports.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnReports.Location = New System.Drawing.Point(1, 405)
-        Me.btnReports.Margin = New System.Windows.Forms.Padding(2)
-        Me.btnReports.Name = "btnReports"
-        Me.btnReports.Size = New System.Drawing.Size(192, 45)
-        Me.btnReports.TabIndex = 11
-        Me.btnReports.Text = "Reports"
-        Me.btnReports.UseVisualStyleBackColor = True
-        '
-        'pcbLogoMain
-        '
-        Me.pcbLogoMain.Location = New System.Drawing.Point(3, 3)
-        Me.pcbLogoMain.Name = "pcbLogoMain"
-        Me.pcbLogoMain.Size = New System.Drawing.Size(188, 98)
-        Me.pcbLogoMain.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
-        Me.pcbLogoMain.TabIndex = 10
-        Me.pcbLogoMain.TabStop = False
         '
         'tbnoOthers
         '
@@ -310,6 +277,39 @@ Partial Class MainFrom
         Me.btnEmployees.Text = "Employees"
         Me.btnEmployees.UseVisualStyleBackColor = True
         '
+        'Panel1
+        '
+        Me.Panel1.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.Panel1.Controls.Add(Me.Panel2)
+        Me.Panel1.Location = New System.Drawing.Point(0, 28)
+        Me.Panel1.Name = "Panel1"
+        Me.Panel1.Size = New System.Drawing.Size(197, 472)
+        Me.Panel1.TabIndex = 5
+        '
+        'PanelChildForm
+        '
+        Me.PanelChildForm.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.PanelChildForm.Controls.Add(Me.Button2)
+        Me.PanelChildForm.Location = New System.Drawing.Point(197, 28)
+        Me.PanelChildForm.Name = "PanelChildForm"
+        Me.PanelChildForm.Size = New System.Drawing.Size(605, 469)
+        Me.PanelChildForm.TabIndex = 7
+        '
+        'Button2
+        '
+        Me.Button2.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Button2.ForeColor = System.Drawing.Color.Red
+        Me.Button2.Image = Global.AVT_TRAKING.My.Resources.Resources._exit
+        Me.Button2.Location = New System.Drawing.Point(563, 2)
+        Me.Button2.Margin = New System.Windows.Forms.Padding(2)
+        Me.Button2.Name = "Button2"
+        Me.Button2.Size = New System.Drawing.Size(39, 46)
+        Me.Button2.TabIndex = 4
+        Me.Button2.UseVisualStyleBackColor = True
+        '
         'MainFrom
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -326,9 +326,9 @@ Partial Class MainFrom
         Me.TitleBar.ResumeLayout(False)
         Me.TitleBar.PerformLayout()
         Me.Panel2.ResumeLayout(False)
+        CType(Me.pcbLogoMain, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel1.ResumeLayout(False)
         Me.PanelChildForm.ResumeLayout(False)
-        CType(Me.pcbLogoMain, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
