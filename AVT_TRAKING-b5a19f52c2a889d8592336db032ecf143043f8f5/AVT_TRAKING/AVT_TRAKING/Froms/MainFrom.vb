@@ -121,4 +121,9 @@ Public Class MainFrom
         Dim a As New Login
         a.Show()
     End Sub
+
+    Private Sub btnReports_Click(sender As Object, e As EventArgs) Handles btnReports.Click
+        Dim rpm As New ReportsMenu
+        rpm.ShowDialog()
+    End Sub
 End Class

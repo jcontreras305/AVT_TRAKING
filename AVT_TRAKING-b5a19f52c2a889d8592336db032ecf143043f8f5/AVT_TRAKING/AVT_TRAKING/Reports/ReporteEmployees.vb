@@ -32,4 +32,11 @@ Public Class ReporteEmployees
     Private Sub PictureBox3_Click(sender As Object, e As EventArgs) Handles PictureBox3.Click
         Me.WindowState = FormWindowState.Minimized
     End Sub
+
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+        Dim reportTS As New ReportE
+        reportTS.SetParameterValue("@IntialDate", validaFechaParaSQl(dtpInitialDate.Value.Date))
+        reportTS.SetParameterValue("@FinalDate", validaFechaParaSQl(dtpFinalDate.Value.Date))
+        crvTimeSheetEmployee.ReportSource = reportTS
+    End Sub
 End Class

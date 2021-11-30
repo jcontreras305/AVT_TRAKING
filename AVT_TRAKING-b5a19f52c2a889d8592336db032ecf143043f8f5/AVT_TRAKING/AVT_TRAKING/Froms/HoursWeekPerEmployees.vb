@@ -948,7 +948,9 @@ Public Class HoursWeekPerEmployees
                             Exit For
                         End If
                     Next
-                    mtdHPW.deleteRecordEmployee(row.Cells("idHorsWorked").Value, idTask)
+                    If row.Cells("idHorsWorked").Value IsNot DBNull.Value Then
+                        mtdHPW.deleteRecordEmployee(row.Cells("idHorsWorked").Value, idTask)
+                    End If
                 Next
             End If
             mtdHPW.buscarHoras(tblRecordEmployee, idEmpleado)

@@ -195,6 +195,12 @@
     <Compile Include="Froms\Renta.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Froms\ReportsMenu.Designer.vb">
+      <DependentUpon>ReportsMenu.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Froms\ReportsMenu.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Froms\scaffold.vb" />
     <Compile Include="Froms\scafoldTarking.Designer.vb">
       <DependentUpon>scafoldTarking.vb</DependentUpon>
@@ -342,6 +348,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Froms\Renta.resx">
       <DependentUpon>Renta.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Froms\ReportsMenu.resx">
+      <DependentUpon>ReportsMenu.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Froms\scafoldTarking.resx">
       <DependentUpon>scafoldTarking.vb</DependentUpon>

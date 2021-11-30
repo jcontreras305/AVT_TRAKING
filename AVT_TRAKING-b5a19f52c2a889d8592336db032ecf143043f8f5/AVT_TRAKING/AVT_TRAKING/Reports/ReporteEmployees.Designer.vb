@@ -25,25 +25,26 @@ Partial Class ReporteEmployees
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
         Me.Panel4 = New System.Windows.Forms.Panel()
-        Me.CrystalReportViewer1 = New CrystalDecisions.Windows.Forms.CrystalReportViewer()
+        Me.crvTimeSheetEmployee = New CrystalDecisions.Windows.Forms.CrystalReportViewer()
         Me.Panel3 = New System.Windows.Forms.Panel()
+        Me.Button1 = New System.Windows.Forms.Button()
+        Me.PictureBox4 = New System.Windows.Forms.PictureBox()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.dtpFinalDate = New System.Windows.Forms.DateTimePicker()
         Me.dtpInitialDate = New System.Windows.Forms.DateTimePicker()
         Me.TitleBar = New System.Windows.Forms.Panel()
-        Me.PictureBox4 = New System.Windows.Forms.PictureBox()
+        Me.Label3 = New System.Windows.Forms.Label()
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.PictureBox3 = New System.Windows.Forms.PictureBox()
         Me.btnRestore = New System.Windows.Forms.PictureBox()
         Me.btnMaximize = New System.Windows.Forms.PictureBox()
-        Me.Label3 = New System.Windows.Forms.Label()
         Me.Panel1.SuspendLayout()
         Me.TableLayoutPanel1.SuspendLayout()
         Me.Panel4.SuspendLayout()
         Me.Panel3.SuspendLayout()
-        Me.TitleBar.SuspendLayout()
         CType(Me.PictureBox4, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.TitleBar.SuspendLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox3, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.btnRestore, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -72,33 +73,34 @@ Partial Class ReporteEmployees
         Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
         Me.TableLayoutPanel1.RowCount = 3
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40.0!))
+        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 79.0!))
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 376.0!))
         Me.TableLayoutPanel1.Size = New System.Drawing.Size(750, 499)
         Me.TableLayoutPanel1.TabIndex = 0
         '
         'Panel4
         '
-        Me.Panel4.Controls.Add(Me.CrystalReportViewer1)
+        Me.Panel4.Controls.Add(Me.crvTimeSheetEmployee)
         Me.Panel4.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel4.Location = New System.Drawing.Point(3, 126)
+        Me.Panel4.Location = New System.Drawing.Point(3, 122)
         Me.Panel4.Name = "Panel4"
-        Me.Panel4.Size = New System.Drawing.Size(744, 370)
+        Me.Panel4.Size = New System.Drawing.Size(744, 374)
         Me.Panel4.TabIndex = 2
         '
-        'CrystalReportViewer1
+        'crvTimeSheetEmployee
         '
-        Me.CrystalReportViewer1.ActiveViewIndex = -1
-        Me.CrystalReportViewer1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.CrystalReportViewer1.Cursor = System.Windows.Forms.Cursors.Default
-        Me.CrystalReportViewer1.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.CrystalReportViewer1.Location = New System.Drawing.Point(0, 0)
-        Me.CrystalReportViewer1.Name = "CrystalReportViewer1"
-        Me.CrystalReportViewer1.Size = New System.Drawing.Size(744, 370)
-        Me.CrystalReportViewer1.TabIndex = 0
+        Me.crvTimeSheetEmployee.ActiveViewIndex = -1
+        Me.crvTimeSheetEmployee.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.crvTimeSheetEmployee.Cursor = System.Windows.Forms.Cursors.Default
+        Me.crvTimeSheetEmployee.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.crvTimeSheetEmployee.Location = New System.Drawing.Point(0, 0)
+        Me.crvTimeSheetEmployee.Name = "crvTimeSheetEmployee"
+        Me.crvTimeSheetEmployee.Size = New System.Drawing.Size(744, 374)
+        Me.crvTimeSheetEmployee.TabIndex = 0
         '
         'Panel3
         '
+        Me.Panel3.Controls.Add(Me.Button1)
         Me.Panel3.Controls.Add(Me.PictureBox4)
         Me.Panel3.Controls.Add(Me.Label2)
         Me.Panel3.Controls.Add(Me.Label1)
@@ -107,8 +109,27 @@ Partial Class ReporteEmployees
         Me.Panel3.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel3.Location = New System.Drawing.Point(3, 43)
         Me.Panel3.Name = "Panel3"
-        Me.Panel3.Size = New System.Drawing.Size(744, 77)
+        Me.Panel3.Size = New System.Drawing.Size(744, 73)
         Me.Panel3.TabIndex = 1
+        '
+        'Button1
+        '
+        Me.Button1.Location = New System.Drawing.Point(310, 43)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(75, 23)
+        Me.Button1.TabIndex = 8
+        Me.Button1.Text = "Report"
+        Me.Button1.UseVisualStyleBackColor = True
+        '
+        'PictureBox4
+        '
+        Me.PictureBox4.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.PictureBox4.Image = Global.AVT_TRAKING.My.Resources.Resources._exit
+        Me.PictureBox4.Location = New System.Drawing.Point(704, 3)
+        Me.PictureBox4.Name = "PictureBox4"
+        Me.PictureBox4.Size = New System.Drawing.Size(37, 29)
+        Me.PictureBox4.TabIndex = 7
+        Me.PictureBox4.TabStop = False
         '
         'Label2
         '
@@ -134,6 +155,7 @@ Partial Class ReporteEmployees
         '
         'dtpFinalDate
         '
+        Me.dtpFinalDate.CustomFormat = "yyyy/MM/dd"
         Me.dtpFinalDate.Location = New System.Drawing.Point(104, 43)
         Me.dtpFinalDate.Name = "dtpFinalDate"
         Me.dtpFinalDate.Size = New System.Drawing.Size(200, 20)
@@ -141,6 +163,7 @@ Partial Class ReporteEmployees
         '
         'dtpInitialDate
         '
+        Me.dtpInitialDate.CustomFormat = "yyyy/MM/dd"
         Me.dtpInitialDate.Location = New System.Drawing.Point(104, 12)
         Me.dtpInitialDate.Name = "dtpInitialDate"
         Me.dtpInitialDate.Size = New System.Drawing.Size(200, 20)
@@ -160,15 +183,16 @@ Partial Class ReporteEmployees
         Me.TitleBar.Size = New System.Drawing.Size(744, 34)
         Me.TitleBar.TabIndex = 0
         '
-        'PictureBox4
+        'Label3
         '
-        Me.PictureBox4.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.PictureBox4.Image = Global.AVT_TRAKING.My.Resources.Resources._exit
-        Me.PictureBox4.Location = New System.Drawing.Point(704, 3)
-        Me.PictureBox4.Name = "PictureBox4"
-        Me.PictureBox4.Size = New System.Drawing.Size(37, 29)
-        Me.PictureBox4.TabIndex = 7
-        Me.PictureBox4.TabStop = False
+        Me.Label3.AutoSize = True
+        Me.Label3.Font = New System.Drawing.Font("Verdana", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label3.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.Label3.Location = New System.Drawing.Point(44, 6)
+        Me.Label3.Name = "Label3"
+        Me.Label3.Size = New System.Drawing.Size(159, 18)
+        Me.Label3.TabIndex = 8
+        Me.Label3.Text = "Report Employee"
         '
         'PictureBox1
         '
@@ -209,17 +233,6 @@ Partial Class ReporteEmployees
         Me.btnMaximize.TabIndex = 4
         Me.btnMaximize.TabStop = False
         '
-        'Label3
-        '
-        Me.Label3.AutoSize = True
-        Me.Label3.Font = New System.Drawing.Font("Verdana", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label3.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.Label3.Location = New System.Drawing.Point(44, 6)
-        Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(159, 18)
-        Me.Label3.TabIndex = 8
-        Me.Label3.Text = "Report Employee"
-        '
         'ReporteEmployees
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -233,9 +246,9 @@ Partial Class ReporteEmployees
         Me.Panel4.ResumeLayout(False)
         Me.Panel3.ResumeLayout(False)
         Me.Panel3.PerformLayout()
+        CType(Me.PictureBox4, System.ComponentModel.ISupportInitialize).EndInit()
         Me.TitleBar.ResumeLayout(False)
         Me.TitleBar.PerformLayout()
-        CType(Me.PictureBox4, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PictureBox3, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.btnRestore, System.ComponentModel.ISupportInitialize).EndInit()
@@ -249,7 +262,7 @@ Partial Class ReporteEmployees
     Friend WithEvents Panel4 As Panel
     Friend WithEvents Panel3 As Panel
     Friend WithEvents TitleBar As Panel
-    Friend WithEvents CrystalReportViewer1 As CrystalDecisions.Windows.Forms.CrystalReportViewer
+    Friend WithEvents crvTimeSheetEmployee As CrystalDecisions.Windows.Forms.CrystalReportViewer
     Friend WithEvents Label2 As Label
     Friend WithEvents Label1 As Label
     Friend WithEvents dtpFinalDate As DateTimePicker
@@ -260,4 +273,5 @@ Partial Class ReporteEmployees
     Friend WithEvents btnMaximize As PictureBox
     Friend WithEvents PictureBox1 As PictureBox
     Friend WithEvents Label3 As Label
+    Friend WithEvents Button1 As Button
 End Class
