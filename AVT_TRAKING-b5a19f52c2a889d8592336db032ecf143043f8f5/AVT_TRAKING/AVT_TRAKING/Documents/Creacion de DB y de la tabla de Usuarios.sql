@@ -430,7 +430,9 @@ create table payRate(
 	idPayRate varchar(36) primary key not null ,
 	payRate1 float,
 	payRate2 float, 
-	payRate3 float
+	payRate3 float,
+	idEmployee varchar(36),
+	datePayRate dateTime
 )
 GO
 
@@ -990,7 +992,15 @@ GO
 
 ALTER TABLE outgoing ADD CONSTRAINT fk_jobNum_outgoing
 FOREIGN KEY (jobNo) REFERENCES job (jobNo)
+GO
 
+--##########################################################################################
+--##################  FOREIG KEYS PAYRATE #################################################
+--##########################################################################################
+
+ALTER TABLE payRate WITH CHECK ADD CONSTRAINT fk_idEmployee_payRate 
+FOREIGN KEY(idEmployee) REFERENCES employees (idEmployee)
+GO
 
 --##########################################################################################
 --##################  FOREIG KEYS PRODUCT ##################################################
@@ -1828,8 +1838,86 @@ begin
 end
 go
 
+create proc select_TimeSheet_Report
+	@IntialDate date,
+	@FinalDate date
+as 
+begin
+	if @IntialDate is not null and @FinalDate is not null
+	begin 
+		select cast( GETDATE() AS DATE) as 'Date',DATEADD(DAY, 8 - DATEPART(WEEKDAY, GETDATE()), CAST(GETDATE() AS DATE)) as 'Weekending' , jb.jobNo ,po.idPO ,wo.idAuxWO ,wo.idWO ,tk.idAux,tk.task , tk.equipament,tk.description,
+			hw.hoursST,hw.hoursOT,hw.hours3,hw.dateWorked, wc.name as 'Code', hw.schedule as 'Shift',  tk.expCode as 'ExpCode', concat(tk.percentComplete,'%')  as 'Complete',
+			CONCAT(em.lastName,' ',em.firstName,' ',em.middleName) as 'Employee', em.numberEmploye as 'Emp: Number' , em.typeEmployee as 'Class'
+			from job as jb 
+			inner join projectOrder as po on po.jobNo = jb.jobNo
+			inner join workOrder as wo on wo.idPO = po.idPO 
+			inner join task as tk on tk.idAuxWO = wo.idAuxWO
+			inner join hoursWorked as hw on hw.idAux = tk.idAux
+			inner join workCode as wc on wc.idWorkCode = hw.idWorkCode
+			inner join employees as em on em.idEmployee = hw.idEmployee
+			where hw.dateWorked between @IntialDate and @FinalDate order by hw.schedule 
+	end
+	else
+	begin 
+		select cast( GETDATE() AS DATE) as 'Date',DATEADD(DAY, 8 - DATEPART(WEEKDAY, GETDATE()), CAST(GETDATE() AS DATE)) as 'Weekending' , jb.jobNo ,po.idPO ,wo.idAuxWO ,wo.idWO ,tk.idAux,tk.task , tk.equipament,tk.description,
+			hw.hoursST,hw.hoursOT,hw.hours3,hw.dateWorked, wc.name as 'Code', hw.schedule as 'Shift', tk.expCode as 'ExpCode', concat( tk.percentComplete,'%') as 'Complete',
+			CONCAT(em.lastName,' ',em.firstName,' ',em.middleName) as 'Employee', em.numberEmploye as 'Emp: Number' , em.typeEmployee as 'Class'
+			from job as jb 
+			inner join projectOrder as po on po.jobNo = jb.jobNo
+			inner join workOrder as wo on wo.idPO = po.idPO 
+			inner join task as tk on tk.idAuxWO = wo.idAuxWO
+			inner join hoursWorked as hw on hw.idAux = tk.idAux
+			inner join workCode as wc on wc.idWorkCode = hw.idWorkCode
+			inner join employees as em on em.idEmployee = hw.idEmployee
+			where hw.dateWorked between DATEADD(DAY, 2 - DATEPART(WEEKDAY, GETDATE()), CAST(GETDATE() AS DATE)) and DATEADD(DAY, 8 - DATEPART(WEEKDAY, GETDATE()), CAST(GETDATE() AS DATE)) order by hw.schedule 
+	end
+end
+go
+
+create proc sp_Active_Employee_Average
+as
+begin
+	select em.lastName as 'Last Name' , CONCAT(em.firstName,',',em.middleName) as 'First Name',CONCAT( '$',pr.payRate1)as 'Pay Rate' , 
+		em.socialNumber as 'SS Number',em.numberEmploye as 'Brock Emp.',
+		case when em.estatus = 'E' then 'Yes'
+		else 'No' end as 'Active',
+		em.SAPNumber as 'Citigo Emp.'
+		from employees as em left join payRate as pr on pr.idEmployee = em.idEmployee  
+		where estatus = 'E'	
+end
+go
+
+
 ----use master
 ----drop database VRT_TRAKING
+
+--==============================================================================================================================
+--===== ESTE CODIGO ES PARA LOS CAMBIOS DE LA TABLA PAYRATE Y EMPLOYEES Y GUARDAR EL HISTORIAL DE PAYRATE ======================
+--==============================================================================================================================
+---- (CTRL+K) + (CTRL+C) Comentar 
+---- (CTRL+K) + (CTRL+U) Descomentar 
+
+--alter table employees
+--drop constraint fk_idPayRate_employees
+--go
+
+--alter table employees
+--drop column idPayRate 
+--go
+
+--use VRT_TRAKING
+--alter table payRate 
+--add idEmployee varchar(36)
+--go
+
+--alter table payRate with check 
+--add constraint fk_idEmployee_payRate foreign key(idEmployee)
+--references employees (idEmployee)
+--go
+
+--alter table payRate 
+--add datePayRate dateTime
+--go
 
 --==============================================================================================================================
 --===== ESTE CODIGO ES PARA ACTUALIZAR LOS PROCEDIMINETOS DE LOS EMPLEADOS  POR LOS CAMBIOS DE LA TABLA PAYRATE ================
@@ -1966,5 +2054,60 @@ go
 --	begin 
 --		rollback tran -- el rollback es para deshacer todos lo cambios hechos anteriormente
 --	end
+--end
+--go
+
+--==============================================================================================================================
+--===== ESTE CODIGO ES PARA ACTUALIZAR LOS PROCEDIMINETOS DE LAS CONSULTAS PARA REPORTES =======================================
+--==============================================================================================================================
+---- (CTRL+K) + (CTRL+C) Comentar 
+---- (CTRL+K) + (CTRL+U) Descomentar 
+
+--create proc select_TimeSheet_Report
+--	@IntialDate date,
+--	@FinalDate date
+--as 
+--begin
+--	if @IntialDate is not null and @FinalDate is not null
+--	begin 
+--		select cast( GETDATE() AS DATE) as 'Date',DATEADD(DAY, 8 - DATEPART(WEEKDAY, GETDATE()), CAST(GETDATE() AS DATE)) as 'Weekending' , jb.jobNo ,po.idPO ,wo.idAuxWO ,wo.idWO ,tk.idAux,tk.task , tk.equipament,tk.description,
+--			hw.hoursST,hw.hoursOT,hw.hours3,hw.dateWorked, wc.name as 'Code', hw.schedule as 'Shift',  tk.expCode as 'ExpCode', concat(tk.percentComplete,'%')  as 'Complete',
+--			CONCAT(em.lastName,' ',em.firstName,' ',em.middleName) as 'Employee', em.numberEmploye as 'Emp: Number' , em.typeEmployee as 'Class'
+--			from job as jb 
+--			inner join projectOrder as po on po.jobNo = jb.jobNo
+--			inner join workOrder as wo on wo.idPO = po.idPO 
+--			inner join task as tk on tk.idAuxWO = wo.idAuxWO
+--			inner join hoursWorked as hw on hw.idAux = tk.idAux
+--			inner join workCode as wc on wc.idWorkCode = hw.idWorkCode
+--			inner join employees as em on em.idEmployee = hw.idEmployee
+--			where hw.dateWorked between @IntialDate and @FinalDate order by hw.schedule 
+--	end
+--	else
+--	begin 
+--		select cast( GETDATE() AS DATE) as 'Date',DATEADD(DAY, 8 - DATEPART(WEEKDAY, GETDATE()), CAST(GETDATE() AS DATE)) as 'Weekending' , jb.jobNo ,po.idPO ,wo.idAuxWO ,wo.idWO ,tk.idAux,tk.task , tk.equipament,tk.description,
+--			hw.hoursST,hw.hoursOT,hw.hours3,hw.dateWorked, wc.name as 'Code', hw.schedule as 'Shift', tk.expCode as 'ExpCode', concat( tk.percentComplete,'%') as 'Complete',
+--			CONCAT(em.lastName,' ',em.firstName,' ',em.middleName) as 'Employee', em.numberEmploye as 'Emp: Number' , em.typeEmployee as 'Class'
+--			from job as jb 
+--			inner join projectOrder as po on po.jobNo = jb.jobNo
+--			inner join workOrder as wo on wo.idPO = po.idPO 
+--			inner join task as tk on tk.idAuxWO = wo.idAuxWO
+--			inner join hoursWorked as hw on hw.idAux = tk.idAux
+--			inner join workCode as wc on wc.idWorkCode = hw.idWorkCode
+--			inner join employees as em on em.idEmployee = hw.idEmployee
+--			where hw.dateWorked between DATEADD(DAY, 2 - DATEPART(WEEKDAY, GETDATE()), CAST(GETDATE() AS DATE)) and DATEADD(DAY, 8 - DATEPART(WEEKDAY, GETDATE()), CAST(GETDATE() AS DATE)) order by hw.schedule 
+--	end
+--end
+--go
+
+--create proc sp_Active_Employee_Average
+--as
+--begin
+--	select em.lastName as 'Last Name' , CONCAT(em.firstName,',',em.middleName) as 'First Name',CONCAT( '$',pr.payRate1)as 'Pay Rate' , 
+--		em.socialNumber as 'SS Number',em.numberEmploye as 'Brock Emp.',
+--		case when em.estatus = 'E' then 'Yes'
+--		else 'No' end as 'Active',
+--		em.SAPNumber as 'Citigo Emp.'
+--		from employees as em left join payRate as pr on pr.idEmployee = em.idEmployee  
+--		where estatus = 'E'	
 --end
 --go
