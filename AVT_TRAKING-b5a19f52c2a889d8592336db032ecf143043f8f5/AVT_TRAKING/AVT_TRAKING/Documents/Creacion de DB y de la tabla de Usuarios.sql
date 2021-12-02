@@ -149,7 +149,8 @@ lastName varchar(30),
 companyName varchar (50),
 idContact varchar(36),
 idHomeAddress varchar(36),
-estatus char(1)
+estatus char(1),
+photo image
 )
 GO
 
@@ -1247,7 +1248,7 @@ end
 GO
 
 
-create proc sp_Insert_Cient 
+create proc [dbo].[sp_Insert_Cient] 
 	@ClientID int,
 	@FirstName varchar (30),
 	@MiddleName varchar (30),
@@ -1263,7 +1264,9 @@ create proc sp_Insert_Cient
 	@number int,
 	@city varchar (20),
 	@providence varchar (20),
-	@postalcode int
+	@postalcode int,
+	--Photo
+	@img image
 as
 declare @error int  -- declaro variables para los ID que son nuevos y una variable de error
 declare @idClient varchar(36) 
@@ -1283,7 +1286,7 @@ begin
 				if @@ERROR <> 0 begin set @error = @@ERROR goto solveproblem end 
 			
 				set @idClient = NEWID()
-				insert into clients values (@idClient , @ClientID, @FirstName, @MiddleName, @LastName , @CompanyName, @idContact , @idHomeAdress ,@Status)
+				insert into clients values (@idClient , @ClientID, @FirstName, @MiddleName, @LastName , @CompanyName, @idContact , @idHomeAdress ,@Status,@img)
 				if @@ERROR <> 0 begin set @error = @@ERROR goto solveproblem end 
 			
 		end try
@@ -1638,7 +1641,7 @@ end
 
 GO
 
-create proc sp_Update_Client
+create proc [dbo].[sp_Update_Client]
 	@idCL varchar(36),
 	@ClientID int,
 	@FirstName varchar (30),
@@ -1657,7 +1660,8 @@ create proc sp_Update_Client
 	@number int,
 	@city varchar (20),
 	@providence varchar (20),
-	@postalcode int
+	@postalcode int,
+	@img image
 as
 declare @error int  -- declaro variables para los ID que son nuevos y una variable de error
 begin 
@@ -1669,7 +1673,7 @@ begin
 				if @@ERROR <> 0 begin set @error = @@ERROR goto solveproblem end
 				update HomeAddress set avenue= @avenue, number = number , city=@city , providence =@providence, postalCode = @postalcode where idHomeAdress = @idAddres
 				if @@ERROR <> 0 begin set @error = @@ERROR goto solveproblem end
-				update  clients set firstName= @FirstName,middleName= @MiddleName,lastName= @LastName ,companyName=@CompanyName,estatus = @Status where idClient = @idCL
+				update  clients set firstName= @FirstName,middleName= @MiddleName,lastName= @LastName ,companyName=@CompanyName,estatus = @Status, photo = @img  where idClient = @idCL
 				if @@ERROR <> 0 begin set @error = @@ERROR goto solveproblem end 
 		end try
 		begin catch
@@ -1682,6 +1686,7 @@ begin
 		rollback tran 
 	end
 end
+GO
 GO
 
 create proc sp_UpdateTotalSpendTask
@@ -1877,7 +1882,7 @@ go
 create proc sp_Active_Employee_Average
 as
 begin
-	select em.lastName as 'Last Name' , CONCAT(em.firstName,',',em.middleName) as 'First Name',CONCAT( '$',pr.payRate1)as 'Pay Rate' , 
+	select em.lastName as 'Last Name' , CONCAT(em.firstName,' ', SUBSTRING(em.middleName),1,1) as 'First Name',CONCAT( '$',pr.payRate1)as 'Pay Rate' , 
 		em.socialNumber as 'SS Number',em.numberEmploye as 'Brock Emp.',
 		case when em.estatus = 'E' then 'Yes'
 		else 'No' end as 'Active',
@@ -2111,3 +2116,109 @@ go
 --		where estatus = 'E'	
 --end
 --go
+
+--==============================================================================================================================
+--===== ESTE CODIGO ES PARA LOS ERRORES DE CLIENTES ============================================================================
+--==============================================================================================================================
+---- (CTRL+K) + (CTRL+C) Comentar 
+---- (CTRL+K) + (CTRL+U) Descomentar 
+--create proc [dbo].[sp_Update_Client]
+--	@idCL varchar(36),
+--	@ClientID int,
+--	@FirstName varchar (30),
+--	@MiddleName varchar (30),
+--	@LastName varchar (30),
+--	@CompanyName varchar (50),
+--	@Status char(1),
+--	--Contact
+--	@idContact varchar(36),
+--	@phoneNumer1 varchar(13),
+--	@phoneNumer2 varchar(13),
+--	@email varchar(50),
+--	--Addres
+--	@idAddres varchar(36),
+--	@avenue varchar(80),
+--	@number int,
+--	@city varchar (20),
+--	@providence varchar (20),
+--	@postalcode int,
+--	@img image
+--as
+--declare @error int  -- declaro variables para los ID que son nuevos y una variable de error
+--begin 
+--	begin tran 
+--		begin try
+--			--se inserta un contacto
+
+--				update contact set phoneNumber1= @phoneNumer1 , phoneNumber2=@phoneNumer2 ,email = @email where idContact = @idContact
+--				if @@ERROR <> 0 begin set @error = @@ERROR goto solveproblem end
+--				update HomeAddress set avenue= @avenue, number = number , city=@city , providence =@providence, postalCode = @postalcode where idHomeAdress = @idAddres
+--				if @@ERROR <> 0 begin set @error = @@ERROR goto solveproblem end
+--				update  clients set firstName= @FirstName,middleName= @MiddleName,lastName= @LastName ,companyName=@CompanyName,estatus = @Status, photo = @img  where idClient = @idCL
+--				if @@ERROR <> 0 begin set @error = @@ERROR goto solveproblem end 
+--		end try
+--		begin catch
+--			goto solveproblem
+--		end catch
+--	commit tran
+--	solveproblem:
+--	if @error <> 0
+--	begin 
+--		rollback tran 
+--	end
+--end
+--GO
+
+--create proc [dbo].[sp_Insert_Cient] 
+--	@ClientID int,
+--	@FirstName varchar (30),
+--	@MiddleName varchar (30),
+--	@LastName varchar (30),
+--	@CompanyName varchar (50),
+--	@Status char(1),
+--	--Contact
+--	@phoneNumer1 varchar(13),
+--	@phoneNumer2 varchar(13),
+--	@email varchar(50),
+--	--Addres
+--	@avenue varchar(80),
+--	@number int,
+--	@city varchar (20),
+--	@providence varchar (20),
+--	@postalcode int,
+--	--Photo
+--	@img image
+--as
+--declare @error int  -- declaro variables para los ID que son nuevos y una variable de error
+--declare @idClient varchar(36) 
+--declare @idContact varchar(36)
+--declare @idHomeAdress varchar(36)
+--begin 
+--	begin tran 
+--		begin try
+--			--se inserta un contacto
+			
+--				set @idContact = NEWID() 
+--				insert into contact values(@idContact,@phoneNumer1,@phoneNumer2,@email)
+--				if @@ERROR <> 0 begin set @error = @@ERROR goto solveproblem end
+			
+--				set @idHomeAdress = NEWID()
+--				insert into HomeAddress values (@idHomeAdress , @avenue , @number , @city , @providence , @postalCode)
+--				if @@ERROR <> 0 begin set @error = @@ERROR goto solveproblem end 
+			
+--				set @idClient = NEWID()
+--				insert into clients values (@idClient , @ClientID, @FirstName, @MiddleName, @LastName , @CompanyName, @idContact , @idHomeAdress ,@Status,@img)
+--				if @@ERROR <> 0 begin set @error = @@ERROR goto solveproblem end 
+			
+--		end try
+--		begin catch
+--			goto solveproblem
+--		end catch
+--	commit tran
+--	solveproblem:
+--	if @error <> 0
+--	begin 
+--		rollback tran 
+--	end
+--end
+--GO
