@@ -23,23 +23,24 @@ Partial Class ReportsMenu
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.TitleBar = New System.Windows.Forms.Panel()
-        Me.Label1 = New System.Windows.Forms.Label()
-        Me.Panel2 = New System.Windows.Forms.Panel()
-        Me.Panel3 = New System.Windows.Forms.Panel()
-        Me.PictureBox4 = New System.Windows.Forms.PictureBox()
-        Me.btnTimeSheet = New System.Windows.Forms.Button()
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
+        Me.Label1 = New System.Windows.Forms.Label()
         Me.btnRestore = New System.Windows.Forms.PictureBox()
         Me.PictureBox2 = New System.Windows.Forms.PictureBox()
         Me.btnMaximize = New System.Windows.Forms.PictureBox()
+        Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.btnActAverage = New System.Windows.Forms.Button()
+        Me.btnTimeSheet = New System.Windows.Forms.Button()
+        Me.Panel3 = New System.Windows.Forms.Panel()
+        Me.PictureBox4 = New System.Windows.Forms.PictureBox()
         Me.TitleBar.SuspendLayout()
-        Me.Panel2.SuspendLayout()
-        Me.Panel3.SuspendLayout()
-        CType(Me.PictureBox4, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.btnRestore, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.btnMaximize, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.Panel2.SuspendLayout()
+        Me.Panel3.SuspendLayout()
+        CType(Me.PictureBox4, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'TitleBar
@@ -56,6 +57,15 @@ Partial Class ReportsMenu
         Me.TitleBar.Size = New System.Drawing.Size(800, 57)
         Me.TitleBar.TabIndex = 1
         '
+        'PictureBox1
+        '
+        Me.PictureBox1.Image = Global.AVT_TRAKING.My.Resources.Resources.repormen
+        Me.PictureBox1.Location = New System.Drawing.Point(240, 4)
+        Me.PictureBox1.Name = "PictureBox1"
+        Me.PictureBox1.Size = New System.Drawing.Size(49, 44)
+        Me.PictureBox1.TabIndex = 4
+        Me.PictureBox1.TabStop = False
+        '
         'Label1
         '
         Me.Label1.AutoSize = True
@@ -66,60 +76,6 @@ Partial Class ReportsMenu
         Me.Label1.Size = New System.Drawing.Size(93, 23)
         Me.Label1.TabIndex = 3
         Me.Label1.Text = "Reports"
-        '
-        'Panel2
-        '
-        Me.Panel2.BackColor = System.Drawing.Color.FromArgb(CType(CType(30, Byte), Integer), CType(CType(38, Byte), Integer), CType(CType(70, Byte), Integer))
-        Me.Panel2.Controls.Add(Me.btnTimeSheet)
-        Me.Panel2.Dock = System.Windows.Forms.DockStyle.Left
-        Me.Panel2.Location = New System.Drawing.Point(0, 57)
-        Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(166, 393)
-        Me.Panel2.TabIndex = 2
-        '
-        'Panel3
-        '
-        Me.Panel3.Controls.Add(Me.PictureBox4)
-        Me.Panel3.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel3.Location = New System.Drawing.Point(166, 57)
-        Me.Panel3.Name = "Panel3"
-        Me.Panel3.Size = New System.Drawing.Size(634, 393)
-        Me.Panel3.TabIndex = 3
-        '
-        'PictureBox4
-        '
-        Me.PictureBox4.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.PictureBox4.Image = Global.AVT_TRAKING.My.Resources.Resources._exit
-        Me.PictureBox4.Location = New System.Drawing.Point(594, 6)
-        Me.PictureBox4.Name = "PictureBox4"
-        Me.PictureBox4.Size = New System.Drawing.Size(37, 34)
-        Me.PictureBox4.TabIndex = 3
-        Me.PictureBox4.TabStop = False
-        '
-        'btnTimeSheet
-        '
-        Me.btnTimeSheet.FlatAppearance.BorderSize = 0
-        Me.btnTimeSheet.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(81, Byte), Integer), CType(CType(93, Byte), Integer), CType(CType(102, Byte), Integer))
-        Me.btnTimeSheet.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnTimeSheet.Font = New System.Drawing.Font("Verdana", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnTimeSheet.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.btnTimeSheet.Image = Global.AVT_TRAKING.My.Resources.Resources.timesheetreport
-        Me.btnTimeSheet.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnTimeSheet.Location = New System.Drawing.Point(3, 6)
-        Me.btnTimeSheet.Name = "btnTimeSheet"
-        Me.btnTimeSheet.Size = New System.Drawing.Size(160, 42)
-        Me.btnTimeSheet.TabIndex = 0
-        Me.btnTimeSheet.Text = "Time Sheet"
-        Me.btnTimeSheet.UseVisualStyleBackColor = True
-        '
-        'PictureBox1
-        '
-        Me.PictureBox1.Image = Global.AVT_TRAKING.My.Resources.Resources.repormen
-        Me.PictureBox1.Location = New System.Drawing.Point(240, 4)
-        Me.PictureBox1.Name = "PictureBox1"
-        Me.PictureBox1.Size = New System.Drawing.Size(49, 44)
-        Me.PictureBox1.TabIndex = 4
-        Me.PictureBox1.TabStop = False
         '
         'btnRestore
         '
@@ -151,6 +107,69 @@ Partial Class ReportsMenu
         Me.btnMaximize.TabIndex = 0
         Me.btnMaximize.TabStop = False
         '
+        'Panel2
+        '
+        Me.Panel2.BackColor = System.Drawing.Color.FromArgb(CType(CType(30, Byte), Integer), CType(CType(38, Byte), Integer), CType(CType(70, Byte), Integer))
+        Me.Panel2.Controls.Add(Me.btnActAverage)
+        Me.Panel2.Controls.Add(Me.btnTimeSheet)
+        Me.Panel2.Dock = System.Windows.Forms.DockStyle.Left
+        Me.Panel2.Location = New System.Drawing.Point(0, 57)
+        Me.Panel2.Name = "Panel2"
+        Me.Panel2.Size = New System.Drawing.Size(166, 393)
+        Me.Panel2.TabIndex = 2
+        '
+        'btnActAverage
+        '
+        Me.btnActAverage.FlatAppearance.BorderSize = 0
+        Me.btnActAverage.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(81, Byte), Integer), CType(CType(93, Byte), Integer), CType(CType(102, Byte), Integer))
+        Me.btnActAverage.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnActAverage.Font = New System.Drawing.Font("Verdana", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnActAverage.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.btnActAverage.Image = Global.AVT_TRAKING.My.Resources.Resources.average
+        Me.btnActAverage.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnActAverage.Location = New System.Drawing.Point(0, 65)
+        Me.btnActAverage.Name = "btnActAverage"
+        Me.btnActAverage.Size = New System.Drawing.Size(166, 42)
+        Me.btnActAverage.TabIndex = 1
+        Me.btnActAverage.Text = "Active Average"
+        Me.btnActAverage.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.btnActAverage.UseVisualStyleBackColor = True
+        '
+        'btnTimeSheet
+        '
+        Me.btnTimeSheet.FlatAppearance.BorderSize = 0
+        Me.btnTimeSheet.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(81, Byte), Integer), CType(CType(93, Byte), Integer), CType(CType(102, Byte), Integer))
+        Me.btnTimeSheet.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnTimeSheet.Font = New System.Drawing.Font("Verdana", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnTimeSheet.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.btnTimeSheet.Image = Global.AVT_TRAKING.My.Resources.Resources.timesheetreport
+        Me.btnTimeSheet.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnTimeSheet.Location = New System.Drawing.Point(3, 6)
+        Me.btnTimeSheet.Name = "btnTimeSheet"
+        Me.btnTimeSheet.Size = New System.Drawing.Size(160, 42)
+        Me.btnTimeSheet.TabIndex = 0
+        Me.btnTimeSheet.Text = "Time Sheet"
+        Me.btnTimeSheet.UseVisualStyleBackColor = True
+        '
+        'Panel3
+        '
+        Me.Panel3.Controls.Add(Me.PictureBox4)
+        Me.Panel3.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Panel3.Location = New System.Drawing.Point(166, 57)
+        Me.Panel3.Name = "Panel3"
+        Me.Panel3.Size = New System.Drawing.Size(634, 393)
+        Me.Panel3.TabIndex = 3
+        '
+        'PictureBox4
+        '
+        Me.PictureBox4.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.PictureBox4.Image = Global.AVT_TRAKING.My.Resources.Resources._exit
+        Me.PictureBox4.Location = New System.Drawing.Point(594, 6)
+        Me.PictureBox4.Name = "PictureBox4"
+        Me.PictureBox4.Size = New System.Drawing.Size(37, 34)
+        Me.PictureBox4.TabIndex = 3
+        Me.PictureBox4.TabStop = False
+        '
         'ReportsMenu
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -164,13 +183,13 @@ Partial Class ReportsMenu
         Me.Text = "ReportsMenu"
         Me.TitleBar.ResumeLayout(False)
         Me.TitleBar.PerformLayout()
-        Me.Panel2.ResumeLayout(False)
-        Me.Panel3.ResumeLayout(False)
-        CType(Me.PictureBox4, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.btnRestore, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.btnMaximize, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.Panel2.ResumeLayout(False)
+        Me.Panel3.ResumeLayout(False)
+        CType(Me.PictureBox4, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -185,4 +204,5 @@ Partial Class ReportsMenu
     Friend WithEvents PictureBox4 As PictureBox
     Friend WithEvents Label1 As Label
     Friend WithEvents PictureBox1 As PictureBox
+    Friend WithEvents btnActAverage As Button
 End Class

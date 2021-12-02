@@ -33,4 +33,9 @@ Public Class ReportsMenu
     Private Sub PictureBox4_Click(sender As Object, e As EventArgs) Handles PictureBox4.Click
         Me.Close()
     End Sub
+
+    Private Sub btnActAverage_Click(sender As Object, e As EventArgs) Handles btnActAverage.Click
+        Dim tse As New ReportActiveAverageE
+        tse.ShowDialog()
+    End Sub
 End Class

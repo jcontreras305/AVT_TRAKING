@@ -2102,7 +2102,7 @@ go
 --create proc sp_Active_Employee_Average
 --as
 --begin
---	select em.lastName as 'Last Name' , CONCAT(em.firstName,',',em.middleName) as 'First Name',CONCAT( '$',pr.payRate1)as 'Pay Rate' , 
+--	select em.lastName as 'Last Name' , CONCAT(em.firstName,' ', substring( em.middleName,1,1)) as 'First Name',CONCAT( '$',pr.payRate1)as 'Pay Rate' , 
 --		em.socialNumber as 'SS Number',em.numberEmploye as 'Brock Emp.',
 --		case when em.estatus = 'E' then 'Yes'
 --		else 'No' end as 'Active',
