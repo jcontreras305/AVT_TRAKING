@@ -497,6 +497,7 @@
     <None Include="Images\allTables.png" />
     <None Include="Images\extend.png" />
     <None Include="Images\average.png" />
+    <None Include="Images\estimation.png" />
     <Content Include="Images\eye.png" />
     <None Include="Images\minimize.png" />
     <None Include="Images\show.png" />
