@@ -616,9 +616,7 @@ insert into imageClient(name,img,imgDefault)  values(@name,@img,@imgDefault)
                 cmb.Items.Add(dr("companyName"))
             End While
             dr.Close()
-
             Return list
-
         Catch ex As Exception
             Return Nothing
         Finally

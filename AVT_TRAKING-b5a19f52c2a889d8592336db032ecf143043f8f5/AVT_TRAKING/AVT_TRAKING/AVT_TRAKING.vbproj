@@ -90,6 +90,7 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Class\EstimationSC.vb" />
     <Compile Include="Class\MetodosClients.vb" />
     <Compile Include="Class\metodosCompany.vb" />
     <Compile Include="Class\MetodosEmployees.vb" />
@@ -121,6 +122,12 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Froms\dismantle.vb" />
+    <Compile Include="Froms\EstimationCost.Designer.vb">
+      <DependentUpon>EstimationCost.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Froms\EstimationCost.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Froms\FindEmployee.Designer.vb">
       <DependentUpon>FindEmployee.vb</DependentUpon>
     </Compile>
@@ -318,6 +325,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>VRT_TRAKINGDataSet.xsd</DependentUpon>
     </Compile>
+    <Compile Include="VRT_TRAKINGDataSet1.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>VRT_TRAKINGDataSet1.xsd</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Froms\AbsentsEmployee.resx">
@@ -334,6 +346,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Froms\Employees.resx">
       <DependentUpon>Employees.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Froms\EstimationCost.resx">
+      <DependentUpon>EstimationCost.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Froms\FindEmployee.resx">
       <DependentUpon>FindEmployee.vb</DependentUpon>
@@ -446,6 +461,17 @@
     <None Include="VRT_TRAKINGDataSet.xss">
       <DependentUpon>VRT_TRAKINGDataSet.xsd</DependentUpon>
     </None>
+    <None Include="VRT_TRAKINGDataSet1.xsc">
+      <DependentUpon>VRT_TRAKINGDataSet1.xsd</DependentUpon>
+    </None>
+    <None Include="VRT_TRAKINGDataSet1.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>VRT_TRAKINGDataSet1.Designer.vb</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="VRT_TRAKINGDataSet1.xss">
+      <DependentUpon>VRT_TRAKINGDataSet1.xsd</DependentUpon>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
@@ -507,6 +533,7 @@
     <None Include="Images\menus.png" />
     <None Include="Images\timesheetreport.png" />
     <None Include="Images\repormen.png" />
+    <None Include="Images\ScaffoldImageEST2.png" />
     <Content Include="Images\user.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />

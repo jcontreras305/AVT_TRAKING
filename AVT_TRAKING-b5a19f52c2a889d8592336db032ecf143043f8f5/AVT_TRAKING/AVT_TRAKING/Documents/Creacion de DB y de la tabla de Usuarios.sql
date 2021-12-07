@@ -669,6 +669,109 @@ create table scfInfo(
 GO
 
 --##########################################################################################
+--##################  TABLA DE SACFESTCOST #################################################
+--##########################################################################################
+
+create table ScafEstCost(
+	idEstCost int primary key not null,
+	DECKS int,	
+	ACHT int,
+	SCTP varchar(15),
+	BDRATE float,
+	M3	float,
+	M2	float,
+	MA3	float,
+	MA2	float,
+	BILLINGDAYS	int,
+	EDDAYS	int,
+	M3EDCHARGES	money,
+	M2EDCHARGES	money,
+	MA3EDCHARGES money,
+	MA2EDCHARGES money, 	
+	M3LABORBP money,	
+	M3MATBP money,	
+	M3EQBP money,	
+	M3LABORDP money,	
+	M3MATDP money,	
+	M3EQDP money,	
+	M2LABORBP money,	
+	M2MATBP money,	
+	M2EQBP money,	
+	M2LABORDP money,	
+	M2MATDP money,	
+	M2EQDP money,	
+	MA3LABORBP money,	
+	MA3MATBP money,	
+	MA3EQBP money,	
+	MA3LABORDP money,	
+	MA3MATDP money,	
+	MA3EQDP money,	
+	MA2LABORBP money,	
+	MA2MATBP money,	
+	MA2EQBP money,
+	MA2LABORDP money,	
+	MA2MATDP money,	
+	MA2EQDP money,	
+	M3LBI money,	
+	M3MBI money,	
+	M3EBI money,	
+	M3LDI money,	
+	M3MDI money,	
+	M3EDI money,	
+	M2LBI money,	
+	M2MBI money,	
+	M2EBI money,	
+	M2LDI money,	
+	M2MDI money,	
+	M2EDI money,	
+	MA3LBI money,	
+	MA3MBI money,	
+	MA3EBI money,	
+	MA3LDI money,	
+	MA3MDI money,	
+	MA3EDI money,	
+	MA2LBI money,	
+	MA2MBI money,	
+	MA2EBI money,	
+	MA2LDI money,	
+	MA2MDI money,	
+	MA2EDI money
+)
+go
+
+--##########################################################################################
+--##################  TABLA DE SCFESTIMATION ###############################################
+--##########################################################################################
+
+create table scfEstimation(
+	EstNumber varchar(30) primary key not null,
+	type int null,
+	idAux varchar(36) null,
+	daysActive float,
+	unit varchar(30) ,
+	location text,
+	width float,
+	heigth float,
+	length float,
+	descks int,
+	groundHeigth int,
+	elevator int
+)
+go
+
+--##########################################################################################
+--##################  TABLA DE SCFFACTOR ###################################################
+--##########################################################################################
+
+create table scfFactor(
+	tpid int not null,
+	heigth float not null,
+	hFactor float not null,
+	constraint id primary key (tpid,heigth)
+)
+go
+
+--##########################################################################################
 --##################  TABLA DE SUBJOBS #####################################################
 --##########################################################################################
 
@@ -1142,6 +1245,25 @@ GO
 
 ALTER TABLE scfInfo WITH CHECK ADD CONSTRAINT fk_tag_scfInfo
 FOREIGN KEY (tag) REFERENCES scaffoldTraking(tag)
+GO
+
+--##########################################################################################
+--##################  FOREIG KEYS SCFFACTOR ##################################################
+--##########################################################################################
+
+ALTER TABLE scfFactor WITH CHECK ADD CONSTRAINT tpid PRIMARY KEY (tpid,heigth) 
+GO
+
+--##########################################################################################
+--##################  FOREIG KEYS SCFFACTOR ##################################################
+--##########################################################################################
+
+ALTER TABLE scfEstimation WITH CHECK ADD CONSTRAINT fk_idAux_scfEstimation
+FOREIGN KEY (idAux) REFERENCES task(idAux)
+GO
+
+ALTER TABLE scfEstimation WITH CHECK ADD CONSTRAINT fk_type_scfEstimacion
+FOREIGN KEY (type) REFERENCES ScafEstCost(idEstCost)
 GO
 
 --##########################################################################################
@@ -1882,7 +2004,7 @@ go
 create proc sp_Active_Employee_Average
 as
 begin
-	select em.lastName as 'Last Name' , CONCAT(em.firstName,' ', SUBSTRING(em.middleName),1,1) as 'First Name',CONCAT( '$',pr.payRate1)as 'Pay Rate' , 
+	select em.lastName as 'Last Name' , CONCAT(em.firstName,' ', SUBSTRING(em.middleName,1,1)) as 'First Name',CONCAT( '$',pr.payRate1)as 'Pay Rate' , 
 		em.socialNumber as 'SS Number',em.numberEmploye as 'Brock Emp.',
 		case when em.estatus = 'E' then 'Yes'
 		else 'No' end as 'Active',
@@ -1897,328 +2019,112 @@ go
 ----drop database VRT_TRAKING
 
 --==============================================================================================================================
---===== ESTE CODIGO ES PARA LOS CAMBIOS DE LA TABLA PAYRATE Y EMPLOYEES Y GUARDAR EL HISTORIAL DE PAYRATE ======================
+--===== ESTE CODIGO ES PARA LA VENTA DE ESTIMACION EN SCAFFOLD TRAKING =========================================================
 --==============================================================================================================================
 ---- (CTRL+K) + (CTRL+C) Comentar 
 ---- (CTRL+K) + (CTRL+U) Descomentar 
 
---alter table employees
---drop constraint fk_idPayRate_employees
+--create table scfFactor(
+--	tpid int not null,
+--	heigth float not null,
+--	hFactor float not null,
+--	constraint id primary key (tpid,heigth)
+--)
 --go
 
---alter table employees
---drop column idPayRate 
---go
-
---use VRT_TRAKING
---alter table payRate 
---add idEmployee varchar(36)
---go
-
---alter table payRate with check 
---add constraint fk_idEmployee_payRate foreign key(idEmployee)
---references employees (idEmployee)
---go
-
---alter table payRate 
---add datePayRate dateTime
---go
-
---==============================================================================================================================
---===== ESTE CODIGO ES PARA ACTUALIZAR LOS PROCEDIMINETOS DE LOS EMPLEADOS  POR LOS CAMBIOS DE LA TABLA PAYRATE ================
---==============================================================================================================================
----- (CTRL+K) + (CTRL+C) Comentar 
----- (CTRL+K) + (CTRL+U) Descomentar 
-
---ALTER proc sp_update_Employee
---	@idEmployee varchar(36),
---	@idAddress varchar(36),
---	@idContact varchar(36),
---	--general
---	@numberEmploye int, 
---	@firstName varchar(30),
---	@lastName varchar(25),
---	@middleName varchar(25),
---	@socialNumber varchar(14),
---	@SAPNumber int,
---	@photo image,
---	@estatus char(1),
---	--contact
---	@phoneNumber1 varchar(13),
---	@phoneNumber2 varchar(13),
---	@email varchar(50),
---	--address
---	@avenue varchar(80),
---	@number int,
---	@city varchar(20), 
---	@providence varchar(20),
---	@postalCode int,
---	----pay
---	--@payRate1 float,
---	--@payRate2 float, 
---	--@payRate3 float,
---	--type 
---	@type varchar(20),
---	@msg varchar(50) output
---as 
---declare @error int  -- declaro variables para los ID que son nuevos y una variable de error
---begin
---	begin tran --inicio tran
---		begin try --inicio try
---			--if @avenue <> '' begin -- solo se necesita saber si la calle tiene algo 
---				set @msg = 'Error at moment to save Address data'
---				update HomeAddress set avenue = @avenue ,number =@number ,city =@city ,providence =@providence ,postalcode = @postalCode where idHomeAdress = @idAddress
---				if @@ERROR <> 0 begin set @error = @@ERROR goto solveproblem end 
-				
---				set @msg = 'Error at moment to save Contact data'
---				update contact set phoneNumber1 =@phoneNumber1 , phoneNumber2 =@phoneNumber2 , email = @email where idContact = @idContact
---				if @@ERROR <> 0 begin set @error = @@ERROR goto solveproblem end 
---			--if @firstName <> '' or @numberEmploye > 0 begin
---				set @msg = 'Error at moment to save Employee data'	
---				update employees set  numberEmploye = @numberEmploye ,firstName = @firstName , lastName = @lastName ,middleName = @middleName,socialNumber = @socialNumber ,SAPNumber = @SAPNumber,photo = @photo , estatus = @estatus,typeEmployee = @type where idEmployee = @idEmployee
---				if @@ERROR <> 0 begin set @error = @@ERROR goto solveproblem end 
---			--end
---			set @msg = 'Succesfull'
---		end try	
---		begin catch
---			goto solveproblem -- en caso de error capturado en el catch no vamos a solveproblem y evitamos en commit
---		end catch
---	commit tran 
---	solveproblem:
---	if @error <> 0
---	begin 
---		rollback tran -- el rollback es para deshacer todos lo cambios hechos anteriormente
---		return @msg
---	end
---end
---go
-
---ALTER proc [dbo].[sp_insert_Employee]
---	--general
---	@numberEmploye int, 
---	@firstName varchar(30),
---	@lastName varchar(25),
---	@middleName varchar(25),
---	@socialNumber varchar(14),
---	@SAPNumber int,
---	@photo image,
---	@estatus char(1),
---	--contact
---	@phoneNumber1 varchar(13),
---	@phoneNumber2 varchar(13),
---	@email varchar(50),
---	--address
---	@avenue varchar(80),
---	@number int,
---	@city varchar(20), 
---	@providence varchar(20),
---	@postalCode int,
---	--pay
---	@payRate1 float,
---	@payRate2 float, 
---	@payRate3 float,
---	--type 
---	@type varchar(20)
---as 
---declare @error int  -- declaro variables para los ID que son nuevos y una variable de error
---declare @idEmployee varchar(36) 
---declare @idContact varchar(36)
---declare @idHomeAdress varchar(36)
---declare @idPayRate varchar(36)
---begin
---	begin tran --inicio tran
---		begin try --inicio try
---			--if @phoneNumber1 <> '' or @email<> '' begin -- si existe un telefono o un correo entra 
---				set @idContact = NEWID() 
---				insert into contact values(@idContact,@phoneNumber1,@phoneNumber2,@email)
---				if @@ERROR <> 0 begin set @error = @@ERROR goto solveproblem end  -- si existe un error en al insertar solo vamos a solveproblem y nos evitamos lo demas
---			--end
---			--if @avenue <> '' begin -- solo se necesita saber si la calle tiene algo 
---				set @idHomeAdress = NEWID()
---				insert into HomeAddress values (@idHomeAdress , @avenue , @number , @city , @providence , @postalCode)
---				if @@ERROR <> 0 begin set @error = @@ERROR goto solveproblem end 
-				
---			--end
---			--if @firstName <> '' or @numberEmploye > 0 begin	
---				set @idEmployee = NEWID()
---				insert into employees values (@idEmployee , @numberEmploye , @firstName , @lastName , @middleName, @socialNumber , @SAPNumber, @photo , @idHomeAdress , @idContact ,@estatus,@type)
---				if @@ERROR <> 0 begin set @error = @@ERROR goto solveproblem end 
---			--end
---			--if @payRate1 <> '' begin
---				set @idPayRate = NEWID()
---				insert into payRate values (@idPayRate,@payRate1,@payRate2 ,@payRate3,@idEmployee,GETDATE())
---				if @@ERROR <> 0 begin set @error = @@ERROR goto solveproblem end 
---			--end
---		end try	
---		begin catch
---			goto solveproblem -- en caso de error capturado en el catch no vamos a solveproblem y evitamos en commit
---		end catch
---	commit tran 
---	solveproblem:
---	if @error <> 0
---	begin 
---		rollback tran -- el rollback es para deshacer todos lo cambios hechos anteriormente
---	end
---end
---go
-
---==============================================================================================================================
---===== ESTE CODIGO ES PARA ACTUALIZAR LOS PROCEDIMINETOS DE LAS CONSULTAS PARA REPORTES =======================================
---==============================================================================================================================
----- (CTRL+K) + (CTRL+C) Comentar 
----- (CTRL+K) + (CTRL+U) Descomentar 
-
---create proc select_TimeSheet_Report
---	@IntialDate date,
---	@FinalDate date
---as 
---begin
---	if @IntialDate is not null and @FinalDate is not null
---	begin 
---		select cast( GETDATE() AS DATE) as 'Date',DATEADD(DAY, 8 - DATEPART(WEEKDAY, GETDATE()), CAST(GETDATE() AS DATE)) as 'Weekending' , jb.jobNo ,po.idPO ,wo.idAuxWO ,wo.idWO ,tk.idAux,tk.task , tk.equipament,tk.description,
---			hw.hoursST,hw.hoursOT,hw.hours3,hw.dateWorked, wc.name as 'Code', hw.schedule as 'Shift',  tk.expCode as 'ExpCode', concat(tk.percentComplete,'%')  as 'Complete',
---			CONCAT(em.lastName,' ',em.firstName,' ',em.middleName) as 'Employee', em.numberEmploye as 'Emp: Number' , em.typeEmployee as 'Class'
---			from job as jb 
---			inner join projectOrder as po on po.jobNo = jb.jobNo
---			inner join workOrder as wo on wo.idPO = po.idPO 
---			inner join task as tk on tk.idAuxWO = wo.idAuxWO
---			inner join hoursWorked as hw on hw.idAux = tk.idAux
---			inner join workCode as wc on wc.idWorkCode = hw.idWorkCode
---			inner join employees as em on em.idEmployee = hw.idEmployee
---			where hw.dateWorked between @IntialDate and @FinalDate order by hw.schedule 
---	end
---	else
---	begin 
---		select cast( GETDATE() AS DATE) as 'Date',DATEADD(DAY, 8 - DATEPART(WEEKDAY, GETDATE()), CAST(GETDATE() AS DATE)) as 'Weekending' , jb.jobNo ,po.idPO ,wo.idAuxWO ,wo.idWO ,tk.idAux,tk.task , tk.equipament,tk.description,
---			hw.hoursST,hw.hoursOT,hw.hours3,hw.dateWorked, wc.name as 'Code', hw.schedule as 'Shift', tk.expCode as 'ExpCode', concat( tk.percentComplete,'%') as 'Complete',
---			CONCAT(em.lastName,' ',em.firstName,' ',em.middleName) as 'Employee', em.numberEmploye as 'Emp: Number' , em.typeEmployee as 'Class'
---			from job as jb 
---			inner join projectOrder as po on po.jobNo = jb.jobNo
---			inner join workOrder as wo on wo.idPO = po.idPO 
---			inner join task as tk on tk.idAuxWO = wo.idAuxWO
---			inner join hoursWorked as hw on hw.idAux = tk.idAux
---			inner join workCode as wc on wc.idWorkCode = hw.idWorkCode
---			inner join employees as em on em.idEmployee = hw.idEmployee
---			where hw.dateWorked between DATEADD(DAY, 2 - DATEPART(WEEKDAY, GETDATE()), CAST(GETDATE() AS DATE)) and DATEADD(DAY, 8 - DATEPART(WEEKDAY, GETDATE()), CAST(GETDATE() AS DATE)) order by hw.schedule 
---	end
---end
---go
-
---create proc sp_Active_Employee_Average
---as
---begin
---	select em.lastName as 'Last Name' , CONCAT(em.firstName,' ', substring( em.middleName,1,1)) as 'First Name',CONCAT( '$',pr.payRate1)as 'Pay Rate' , 
---		em.socialNumber as 'SS Number',em.numberEmploye as 'Brock Emp.',
---		case when em.estatus = 'E' then 'Yes'
---		else 'No' end as 'Active',
---		em.SAPNumber as 'Citigo Emp.'
---		from employees as em left join payRate as pr on pr.idEmployee = em.idEmployee  
---		where estatus = 'E'	
---end
---go
-
---==============================================================================================================================
---===== ESTE CODIGO ES PARA LOS ERRORES DE CLIENTES ============================================================================
---==============================================================================================================================
----- (CTRL+K) + (CTRL+C) Comentar 
----- (CTRL+K) + (CTRL+U) Descomentar 
---create proc [dbo].[sp_Update_Client]
---	@idCL varchar(36),
---	@ClientID int,
---	@FirstName varchar (30),
---	@MiddleName varchar (30),
---	@LastName varchar (30),
---	@CompanyName varchar (50),
---	@Status char(1),
---	--Contact
---	@idContact varchar(36),
---	@phoneNumer1 varchar(13),
---	@phoneNumer2 varchar(13),
---	@email varchar(50),
---	--Addres
---	@idAddres varchar(36),
---	@avenue varchar(80),
---	@number int,
---	@city varchar (20),
---	@providence varchar (20),
---	@postalcode int,
---	@img image
---as
---declare @error int  -- declaro variables para los ID que son nuevos y una variable de error
---begin 
---	begin tran 
---		begin try
---			--se inserta un contacto
-
---				update contact set phoneNumber1= @phoneNumer1 , phoneNumber2=@phoneNumer2 ,email = @email where idContact = @idContact
---				if @@ERROR <> 0 begin set @error = @@ERROR goto solveproblem end
---				update HomeAddress set avenue= @avenue, number = number , city=@city , providence =@providence, postalCode = @postalcode where idHomeAdress = @idAddres
---				if @@ERROR <> 0 begin set @error = @@ERROR goto solveproblem end
---				update  clients set firstName= @FirstName,middleName= @MiddleName,lastName= @LastName ,companyName=@CompanyName,estatus = @Status, photo = @img  where idClient = @idCL
---				if @@ERROR <> 0 begin set @error = @@ERROR goto solveproblem end 
---		end try
---		begin catch
---			goto solveproblem
---		end catch
---	commit tran
---	solveproblem:
---	if @error <> 0
---	begin 
---		rollback tran 
---	end
---end
+--ALTER TABLE scfFactor WITH CHECK ADD CONSTRAINT tpid PRIMARY KEY (tpid,heigth) 
 --GO
 
---create proc [dbo].[sp_Insert_Cient] 
---	@ClientID int,
---	@FirstName varchar (30),
---	@MiddleName varchar (30),
---	@LastName varchar (30),
---	@CompanyName varchar (50),
---	@Status char(1),
---	--Contact
---	@phoneNumer1 varchar(13),
---	@phoneNumer2 varchar(13),
---	@email varchar(50),
---	--Addres
---	@avenue varchar(80),
---	@number int,
---	@city varchar (20),
---	@providence varchar (20),
---	@postalcode int,
---	--Photo
---	@img image
---as
---declare @error int  -- declaro variables para los ID que son nuevos y una variable de error
---declare @idClient varchar(36) 
---declare @idContact varchar(36)
---declare @idHomeAdress varchar(36)
---begin 
---	begin tran 
---		begin try
---			--se inserta un contacto
-			
---				set @idContact = NEWID() 
---				insert into contact values(@idContact,@phoneNumer1,@phoneNumer2,@email)
---				if @@ERROR <> 0 begin set @error = @@ERROR goto solveproblem end
-			
---				set @idHomeAdress = NEWID()
---				insert into HomeAddress values (@idHomeAdress , @avenue , @number , @city , @providence , @postalCode)
---				if @@ERROR <> 0 begin set @error = @@ERROR goto solveproblem end 
-			
---				set @idClient = NEWID()
---				insert into clients values (@idClient , @ClientID, @FirstName, @MiddleName, @LastName , @CompanyName, @idContact , @idHomeAdress ,@Status,@img)
---				if @@ERROR <> 0 begin set @error = @@ERROR goto solveproblem end 
-			
---		end try
---		begin catch
---			goto solveproblem
---		end catch
---	commit tran
---	solveproblem:
---	if @error <> 0
---	begin 
---		rollback tran 
---	end
---end
---GO
+--create table ScafEstCost(
+--	idEstCost int primary key not null,
+--	DECKS int,	
+--	ACHT int,
+--	SCTP varchar(15),
+--	BDRATE float,
+--	M3	float,
+--	M2	float,
+--	MA3	float,
+--	MA2	float,
+--	BILLINGDAYS	int,
+--	EDDAYS	int,
+--	M3EDCHARGES	money,
+--	M2EDCHARGES	money,
+--	MA3EDCHARGES money,
+--	MA2EDCHARGES money, 	
+--	M3LABORBP money,	
+--	M3MATBP money,	
+--	M3EQBP money,	
+--	M3LABORDP money,	
+--	M3MATDP money,	
+--	M3EQDP money,	
+--	M2LABORBP money,	
+--	M2MATBP money,	
+--	M2EQBP money,	
+--	M2LABORDP money,	
+--	M2MATDP money,	
+--	M2EQDP money,	
+--	MA3LABORBP money,	
+--	MA3MATBP money,	
+--	MA3EQBP money,	
+--	MA3LABORDP money,	
+--	MA3MATDP money,	
+--	MA3EQDP money,	
+--	MA2LABORBP money,	
+--	MA2MATBP money,	
+--	MA2EQBP money,
+--	MA2LABORDP money,	
+--	MA2MATDP money,	
+--	MA2EQDP money,	
+--	M3LBI money,	
+--	M3MBI money,	
+--	M3EBI money,	
+--	M3LDI money,	
+--	M3MDI money,	
+--	M3EDI money,	
+--	M2LBI money,	
+--	M2MBI money,	
+--	M2EBI money,	
+--	M2LDI money,	
+--	M2MDI money,	
+--	M2EDI money,	
+--	MA3LBI money,	
+--	MA3MBI money,	
+--	MA3EBI money,	
+--	MA3LDI money,	
+--	MA3MDI money,	
+--	MA3EDI money,	
+--	MA2LBI money,	
+--	MA2MBI money,	
+--	MA2EBI money,	
+--	MA2LDI money,	
+--	MA2MDI money,	
+--	MA2EDI money
+--)
+--go
+
+--create table scfEstimation(
+--	EstNumber varchar(30) primary key not null,
+--	type int null,
+--	idAux varchar(36) null,
+--	daysActive float,
+--	unit varchar(30) ,  
+--	location text,
+--	width float,
+--	heigth float,
+--	length float,
+--	descks int,
+--	groundHeigth int,
+--	elevator int
+--)
+--go
+
+--alter table scfEstimation with check add constraint fk_idAux_scfEstimation
+--foreign key (idAux) references task(idAux)
+--go
+
+--alter table scfEstimation with check add constraint fk_type_scfEstimacion
+--foreign key (type) references ScafEstCost(idEstCost)
+--go
+
+
+

@@ -331,6 +331,7 @@ inner join workOrder as wo on wo.idPO = po.idPO
 inner join task as tk on tk.idAuxWO = wo.idAuxWO", conn)
             Dim dr As SqlDataReader = cmd.ExecuteReader()
             combo.Items.Clear()
+            combo.Items.Add("")
             While dr.Read()
                 combo.Items.Add(CStr(dr("WO No")) + "    " + CStr(dr("Job No")) + "    " + dr("Description"))
                 tabla.Rows.Add(CStr(dr("WO No")), CStr(dr("idWO")), CStr(dr("idAux")), CStr(dr("Job No")), CStr(dr("Description")), (CStr(dr("WO No")) + "    " + CStr(dr("Job No")) + "    " + dr("Description")))

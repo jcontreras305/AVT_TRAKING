@@ -12,12 +12,14 @@ Public Class scafoldTarking
     Dim tblSubJob As New Data.DataTable 'se utiliza para buscar despues de ser seleccionado el combo y encontrar al insertar o actualizar
     Dim tblProductScaffoldAux As New Data.DataTable 'se utiliza para buscar despues de ser seleccionado el combo y encontrar al insertar o actualizar
     Dim mtdScaffold As New MetodosScaffold
+    Dim mtdEstimation As New EstimationSC
     Dim selectedTable As String
     Dim tblMaterialStatusAux As New List(Of String)
     Dim tblProductosAux As New Data.DataTable
     Dim tblScaffoldTags As New Data.DataTable
     Dim tblModification As New Data.DataTable
     Dim tblDismantle As New Data.DataTable
+    Dim tblEstimation As New Data.DataTable
     Dim sc As New scaffold
     Dim md As New ModificationSC
     Dim ds As New dismantle
@@ -143,6 +145,16 @@ Public Class scafoldTarking
         If tblScaffoldTags.Rows.Count() > 0 Then
             cargarDatosDismantle(tblScaffoldTags.Rows(0).ItemArray(0))
         End If
+        'Estimation
+        mtdScaffold.llenarComboWO(cmbProjectNameEst)
+        mtdEstimation.llenarComboTypeScfCost(cmbScaffolType)
+        If mtdEstimation.llenartablaEstimacion(tblEstimation) Then
+            If tblEstimation.Rows.Count > 0 Then
+                If mtdEstimation.cargarDatosEstimation(tblEstimation.Rows(0).ItemArray(0)) Then
+                    cargarDatosEstimation(tblEstimation.Rows(0).ItemArray(0))
+                End If
+            End If
+        End If
     End Sub
 
     Private Sub tabControl1_SelectedIndexChanged(sender As Object, e As EventArgs) Handles tabControl1.SelectedIndexChanged
@@ -163,6 +175,7 @@ Public Class scafoldTarking
             Case "Dismantle"
                 selectedTable = "Dis"
             Case "Estimating"
+                selectedTable = "Est"
         End Select
     End Sub
 
@@ -328,6 +341,12 @@ Public Class scafoldTarking
                     mtdScaffold.llenarProduct(tblProduct)
                     mtdScaffold.llenarProduct(tblProductosAux)
                 End If
+            Case "Est"
+                If mtdEstimation.saveEstimation() Then
+                    btnNewEst.Text = "New"
+                    txtControlNumber.Enabled = False
+                    mtdEstimation.llenartablaEstimacion(tblEstimation)
+                End If
         End Select
     End Sub
 
@@ -429,7 +448,12 @@ Public Class scafoldTarking
                         mtdScaffold.llenarProduct(tblProductosAux)
                     End If
                 End If
-            Case "Estimating"
+            Case "Est"
+                If mtdEstimation.saveEstimation() Then
+                    btnNewEst.Text = "New"
+                    txtControlNumber.Enabled = False
+                    mtdEstimation.llenartablaEstimacion(tblEstimation)
+                End If
         End Select
     End Sub
 
@@ -672,6 +696,20 @@ Public Class scafoldTarking
                         End If
                         mtdScaffold.llenarProduct(tblProduct)
                         mtdScaffold.llenarProduct(tblProductosAux)
+                    End If
+                End If
+            Case "Est"
+                If mtdEstimation.controlNum <> "" And DialogResult.OK = MessageBox.Show("The Estimation will be delete, Are you sure to continue?", "Important", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) Then
+                    If mtdEstimation.deleteEstimation(mtdEstimation.controlNum) Then
+                        mtdEstimation.llenartablaEstimacion(tblEstimation)
+                        If tblEstimation.Rows.Count > 0 Then
+                            mtdEstimation.cargarDatosEstimation(tblEstimation.Rows(0).ItemArray(0))
+                            cargarDatosEstimation(tblEstimation.Rows(0).ItemArray(0))
+                            txtControlNumber.Enabled = False
+                        Else
+                            txtControlNumber.Enabled = True
+                            limpiarCamposEstimation()
+                        End If
                     End If
                 End If
         End Select
@@ -3393,7 +3431,203 @@ Public Class scafoldTarking
         SendMessage(Me.Handle, &H112&, &HF012&, 0)
     End Sub
 
-    'redimensionar interfaz
+    Private Sub btnEstimationCostSC_Click(sender As Object, e As EventArgs) Handles btnEstimationCostSC.Click
+        Try
+            Dim EstCostSC As New EstimationCost
+            EstCostSC.ShowDialog()
+        Catch ex As Exception
 
+        End Try
+    End Sub
+    'redimensionar interfaz
+    Dim loadingEst = False
+    Private Sub txtControlNumber_TextChanged(sender As Object, e As EventArgs) Handles txtControlNumber.TextChanged
+        mtdEstimation.controlNum = txtControlNumber.Text
+    End Sub
+
+    Private Sub cmbScaffolType_SelectedValueChanged(sender As Object, e As EventArgs) Handles cmbScaffolType.SelectedValueChanged
+        If loadingEst = False Then
+            If cmbScaffolType.Text IsNot "" Then
+                Dim array() = cmbScaffolType.Text.ToString.Split("  ")
+                mtdEstimation.type = array(0)
+            End If
+        End If
+    End Sub
+
+    Private Sub txtUnitEst_TextChanged(sender As Object, e As EventArgs) Handles txtUnitEst.TextChanged
+        If loadingEst = False Then
+            mtdEstimation.unit = txtUnitEst.Text
+        End If
+    End Sub
+
+    Private Sub cmbProjectNameEst_TextChanged(sender As Object, e As EventArgs) Handles cmbProjectNameEst.TextChanged
+        If loadingEst = False Then
+            Try
+                If cmbProjectNameEst.SelectedItem IsNot Nothing Then
+                    For Each row As DataRow In tblWOTASK.Rows()
+                        Dim datos() = cmbProjectNameEst.SelectedItem.ToString().Split(" ")
+                        If datos(0) = row.ItemArray(0) Then
+                            mtdEstimation.idAux = row.ItemArray(2)
+                            Exit For
+                        End If
+                    Next
+                ElseIf cmbProjectNameEst.Text IsNot "" Then
+                    mtdEstimation.idAux = cmbProjectNameEst.Text
+                End If
+            Catch ex As Exception
+
+            End Try
+        End If
+    End Sub
+
+    Private Sub txtLocationEst_TextChanged(sender As Object, e As EventArgs) Handles txtLocationEst.TextChanged
+        If loadingEst = False Then
+            mtdEstimation.location = txtLocationEst.Text
+        End If
+    End Sub
+
+    Private Sub sprOperationalDays_ValueChanged(sender As Object, e As EventArgs) Handles sprOperationalDays.ValueChanged
+        If loadingEst = False Then
+            mtdEstimation.daysActive = sprOperationalDays.Value
+        End If
+    End Sub
+
+    Private Sub sprHeigthEst_ValueChanged(sender As Object, e As EventArgs) Handles sprWidthEst.ValueChanged, sprLengthEst.ValueChanged, sprHeigthEst.ValueChanged, sprElevatorEst.ValueChanged, sprDescksEst.ValueChanged, sprGroudHeigthEst.ValueChanged
+        If loadingEst = False Then
+            mtdEstimation.heigth = CDbl(sprHeigthEst.Value)
+            mtdEstimation.length = CDbl(sprLengthEst.Value)
+            mtdEstimation.width = CDbl(sprWidthEst.Value)
+            mtdEstimation.descks = CInt(sprDescksEst.Value)
+            mtdEstimation.groundheigth = CInt(sprGroudHeigthEst.Value)
+            mtdEstimation.elevator = CInt(sprElevatorEst.Value)
+        End If
+    End Sub
+    Public Function cargarDatosEstimation(ByVal ControlNumEst As String) As Boolean
+        Try
+            loadingEst = True
+            If mtdEstimation.controlNum = "" Then
+                txtControlNumber.Enabled = True
+                clearDismantle()
+                loadingDataDismentle = False
+                Return True
+            Else
+                txtControlNumber.Text = mtdEstimation.controlNum
+                txtControlNumber.Enabled = False
+                If mtdEstimation.type > -1 Then
+                    For Each item As String In cmbScaffolType.Items
+                        Dim array() As String = item.Split("    ")
+                        If array(0) = CStr(mtdEstimation.type) Then
+                            cmbScaffolType.SelectedItem = cmbScaffolType.Items(cmbScaffolType.FindString(item))
+                            Exit For
+                        End If
+                    Next
+                Else
+                    cmbScaffolType.SelectedItem = cmbScaffolType.Items(0)
+                End If
+                If mtdEstimation.idAux <> "" Then
+                    For Each row As Data.DataRow In tblWOTASK.Rows
+                        If row.ItemArray(2) = mtdEstimation.idAux Then
+                            cmbProjectNameEst.SelectedItem = cmbProjectNameEst.Items(cmbProjectNameEst.FindString(row.ItemArray(0)))
+                            Exit For
+                        End If
+                    Next
+                End If
+                txtUnitEst.Text = mtdEstimation.unit
+                txtLocationEst.Text = mtdEstimation.location
+                sprOperationalDays.Value = mtdEstimation.daysActive
+                sprHeigthEst.Value = mtdEstimation.heigth
+                sprLengthEst.Value = mtdEstimation.length
+                sprWidthEst.Value = mtdEstimation.width
+                sprDescksEst.Value = mtdEstimation.descks
+                sprGroudHeigthEst.Value = mtdEstimation.groundheigth
+                sprElevatorEst.Value = mtdEstimation.elevator
+                loadingEst = False
+            End If
+            Return True
+        Catch ex As Exception
+            Return False
+        End Try
+    End Function
+
+    Public Sub limpiarCamposEstimation()
+        loadingEst = True
+        txtControlNumber.Text = ""
+        cmbScaffolType.SelectedItem = cmbScaffolType.Items(0)
+        txtUnitEst.Text = ""
+        cmbProjectNameEst.SelectedItem = cmbProjectNameEst.Items(0)
+        txtLocationEst.Text = ""
+        sprOperationalDays.Value = 0
+        sprHeigthEst.Value = 0
+        sprLengthEst.Value = 0
+        sprWidthEst.Value = 0
+        sprDecks.Value = 0
+        sprGroudHeigthEst.Value = 0
+        sprElevatorEst.Value = 0
+        mtdEstimation.Clear()
+        loadingEst = False
+    End Sub
+
+    Private Sub btnNewEst_Click(sender As Object, e As EventArgs) Handles btnNewEst.Click
+        If btnNewEst.Text = "New" Then
+            btnNewEst.Text = "Cancel"
+            txtControlNumber.Enabled = True
+            limpiarCamposEstimation()
+        Else
+            If mtdEstimation.saveEstimation() Then
+                btnNewEst.Text = "New"
+            End If
+        End If
+    End Sub
+
+    Private Sub btnBackEst_Click(sender As Object, e As EventArgs) Handles btnBackEst.Click
+        Try
+            If tblEstimation.Rows.Count > 0 Then
+                Dim count As Integer = 0
+                For Each row As Data.DataRow In tblEstimation.Rows
+                    If row.ItemArray(0) = mtdEstimation.controlNum Then
+                        If count = 0 Then 'si es el primero ve al ultimo
+                            Dim rowMax = tblEstimation.Rows.Count() - 1
+                            mtdEstimation.cargarDatosEstimation(tblEstimation.Rows(rowMax).ItemArray(0))
+                            cargarDatosEstimation(mtdEstimation.controlNum)
+                            Exit For
+                        Else 'de lo contrario solo ve uno atras
+                            mtdEstimation.cargarDatosEstimation(tblEstimation.Rows(count - 1).ItemArray(0))
+                            cargarDatosEstimation(mtdEstimation.controlNum)
+                            Exit For
+                        End If
+                    Else
+                        count += 1
+                    End If
+                Next
+            End If
+        Catch ex As Exception
+
+        End Try
+    End Sub
+
+    Private Sub btnNextEst_Click(sender As Object, e As EventArgs) Handles btnNextEst.Click
+        Try
+            If tblEstimation.Rows.Count > 0 Then
+                Dim count As Integer = 0
+                For Each row As Data.DataRow In tblEstimation.Rows
+                    If row.ItemArray(0) = mtdEstimation.controlNum Then
+                        If count = tblEstimation.Rows.Count - 1 Then 'si es el ultimo? ve al primero
+                            mtdEstimation.cargarDatosEstimation(tblEstimation.Rows(0).ItemArray(0))
+                            cargarDatosEstimation(mtdEstimation.controlNum)
+                            Exit For
+                        Else 'de lo contrario solo ve uno adelate
+                            mtdEstimation.cargarDatosEstimation(tblEstimation.Rows(count + 1).ItemArray(0))
+                            cargarDatosEstimation(mtdEstimation.controlNum)
+                            Exit For
+                        End If
+                    Else
+                        count += 1
+                    End If
+                Next
+            End If
+        Catch ex As Exception
+
+        End Try
+    End Sub
 
 End Class

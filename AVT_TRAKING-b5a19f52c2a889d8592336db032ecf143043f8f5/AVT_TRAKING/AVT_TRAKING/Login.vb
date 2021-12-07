@@ -7,11 +7,15 @@ Public Class Login
     Dim flag As Boolean = True
     Dim listImg As List(Of Byte())
     Private Sub Login_Load(sender As Object, e As EventArgs) Handles Me.Load
-        listImg = mtdOther.llenarComboImage(cmbImagenes)
-        If listImg IsNot Nothing Then
-            cmbImagenes.SelectedIndex = 0
-            cmbImagenes.SelectedItem = cmbImagenes.Items(0)
-        End If
+        Try
+            listImg = mtdOther.llenarComboImage(cmbImagenes)
+            If listImg IsNot Nothing And listImg.Count > 0 Then
+                cmbImagenes.SelectedIndex = 0
+                cmbImagenes.SelectedItem = cmbImagenes.Items(0)
+            End If
+        Catch ex As Exception
+
+        End Try
     End Sub
 
     Private Sub btnVer_Click(sender As Object, e As EventArgs)  'Este subproseso es para ver o cultar el contenido del campor de password
@@ -33,10 +37,13 @@ Public Class Login
             If (txtUser.Text <> String.Empty And txtUser.Text.Length > 0) And (txtPassword.Text <> String.Empty And txtPassword.Text.Length > 0) Then
                 If mtdLogin.StartLogin(txtUser.Text, txtPassword.Text) Then
                     Dim a As New MainFrom
-                    If listImg IsNot Nothing Then
-                        Dim arrayByte As Byte() = listImg(cmbImagenes.SelectedIndex)
-                        a.pcbLogoMain.Image = BytetoImage(arrayByte)
-                    End If
+                    Try
+                        If listImg IsNot Nothing And listImg.Count > 0 Then
+                            Dim arrayByte As Byte() = listImg(cmbImagenes.SelectedIndex)
+                            a.pcbLogoMain.Image = BytetoImage(arrayByte)
+                        End If
+                    Catch ex As Exception
+                    End Try
                     a.Show()
                     Me.Visible = False
                 Else
