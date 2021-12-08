@@ -38,4 +38,9 @@ Public Class ReportsMenu
         Dim tse As New ReportActiveAverageE
         tse.ShowDialog()
     End Sub
+
+    Private Sub btnClientBilling_Click(sender As Object, e As EventArgs) Handles btnClientBilling.Click
+        Dim tse As New ReportClientBillingProject
+        tse.ShowDialog()
+    End Sub
 End Class

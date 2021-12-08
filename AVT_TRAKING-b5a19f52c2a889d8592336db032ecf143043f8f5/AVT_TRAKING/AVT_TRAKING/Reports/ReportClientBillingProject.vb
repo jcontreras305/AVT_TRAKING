@@ -1,8 +1,7 @@
 ﻿Imports System.Runtime.InteropServices
-
-Public Class ReporteEmployees
-    Private Sub PictureBox4_Click(sender As Object, e As EventArgs) Handles PictureBox4.Click
-        Me.Close()
+Public Class ReportClientBillingProject
+    Private Sub PictureBox3_Click(sender As Object, e As EventArgs) Handles PictureBox3.Click
+        Me.WindowState = FormWindowState.Minimized
     End Sub
 
     Private Sub btnMaximize_Click(sender As Object, e As EventArgs) Handles btnMaximize.Click
@@ -29,16 +28,15 @@ Public Class ReporteEmployees
         SendMessage(Me.Handle, &H112&, &HF012&, 0)
     End Sub
 
-    Private Sub PictureBox3_Click(sender As Object, e As EventArgs) Handles PictureBox3.Click
-        Me.WindowState = FormWindowState.Minimized
+    Private Sub PictureBox4_Click(sender As Object, e As EventArgs) Handles PictureBox4.Click
+        Me.Close()
     End Sub
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
-        Dim reportTS As New ReportE
-        reportTS.SetParameterValue("@IntialDate", validaFechaParaSQl(dtpInitialDate.Value.Date))
-        reportTS.SetParameterValue("@FinalDate", validaFechaParaSQl(dtpFinalDate.Value.Date))
-        crvTimeSheetEmployee.ReportSource = reportTS
+        Dim reportTS As New ClientBillingProject
+        reportTS.SetParameterValue("@startdate", validaFechaParaSQl(dtpInitialDate.Value.Date))
+        reportTS.SetParameterValue("@finaldate", validaFechaParaSQl(dtpFinalDate.Value.Date))
+        reportTS.SetParameterValue("@clientnum", txtnumClient.Text)
+        crvClientBillingsProject.ReportSource = reportTS
     End Sub
-
-
 End Class

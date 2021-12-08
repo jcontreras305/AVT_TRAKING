@@ -23,26 +23,35 @@ Partial Class EstimationCost
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
+        Me.TitleBar = New System.Windows.Forms.Panel()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.TableLayoutPanel2 = New System.Windows.Forms.TableLayoutPanel()
         Me.tblEstimationCostSC = New System.Windows.Forms.DataGridView()
-        Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.tblFactorSC = New System.Windows.Forms.DataGridView()
+        Me.PictureBox1 = New System.Windows.Forms.PictureBox()
+        Me.PictureBox3 = New System.Windows.Forms.PictureBox()
+        Me.btnRestore = New System.Windows.Forms.PictureBox()
+        Me.btnMaximize = New System.Windows.Forms.PictureBox()
+        Me.btnExit = New System.Windows.Forms.PictureBox()
         Me.btnDeleteEstCost = New System.Windows.Forms.Button()
         Me.btnSaveEstCost = New System.Windows.Forms.Button()
-        Me.btnExit = New System.Windows.Forms.PictureBox()
-        Me.TableLayoutPanel2 = New System.Windows.Forms.TableLayoutPanel()
-        Me.tblFactorSC = New System.Windows.Forms.DataGridView()
         Me.TableLayoutPanel1.SuspendLayout()
-        CType(Me.tblEstimationCostSC, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.Panel1.SuspendLayout()
-        CType(Me.btnExit, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.TitleBar.SuspendLayout()
         Me.TableLayoutPanel2.SuspendLayout()
+        CType(Me.tblEstimationCostSC, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.tblFactorSC, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.PictureBox3, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.btnRestore, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.btnMaximize, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.btnExit, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'TableLayoutPanel1
         '
         Me.TableLayoutPanel1.ColumnCount = 1
         Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-        Me.TableLayoutPanel1.Controls.Add(Me.Panel1, 0, 0)
+        Me.TableLayoutPanel1.Controls.Add(Me.TitleBar, 0, 0)
         Me.TableLayoutPanel1.Controls.Add(Me.TableLayoutPanel2, 0, 1)
         Me.TableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.TableLayoutPanel1.Location = New System.Drawing.Point(0, 0)
@@ -53,54 +62,33 @@ Partial Class EstimationCost
         Me.TableLayoutPanel1.Size = New System.Drawing.Size(861, 352)
         Me.TableLayoutPanel1.TabIndex = 0
         '
-        'tblEstimationCostSC
+        'TitleBar
         '
-        Me.tblEstimationCostSC.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.tblEstimationCostSC.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.tblEstimationCostSC.Location = New System.Drawing.Point(200, 3)
-        Me.tblEstimationCostSC.Name = "tblEstimationCostSC"
-        Me.tblEstimationCostSC.Size = New System.Drawing.Size(652, 260)
-        Me.tblEstimationCostSC.TabIndex = 0
+        Me.TitleBar.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(58, Byte), Integer), CType(CType(115, Byte), Integer))
+        Me.TitleBar.Controls.Add(Me.PictureBox1)
+        Me.TitleBar.Controls.Add(Me.PictureBox3)
+        Me.TitleBar.Controls.Add(Me.btnRestore)
+        Me.TitleBar.Controls.Add(Me.btnMaximize)
+        Me.TitleBar.Controls.Add(Me.Label1)
+        Me.TitleBar.Controls.Add(Me.btnExit)
+        Me.TitleBar.Controls.Add(Me.btnDeleteEstCost)
+        Me.TitleBar.Controls.Add(Me.btnSaveEstCost)
+        Me.TitleBar.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.TitleBar.Location = New System.Drawing.Point(3, 3)
+        Me.TitleBar.Name = "TitleBar"
+        Me.TitleBar.Size = New System.Drawing.Size(855, 74)
+        Me.TitleBar.TabIndex = 1
         '
-        'Panel1
+        'Label1
         '
-        Me.Panel1.BackColor = System.Drawing.Color.FromArgb(CType(CType(83, Byte), Integer), CType(CType(93, Byte), Integer), CType(CType(102, Byte), Integer))
-        Me.Panel1.Controls.Add(Me.btnExit)
-        Me.Panel1.Controls.Add(Me.btnDeleteEstCost)
-        Me.Panel1.Controls.Add(Me.btnSaveEstCost)
-        Me.Panel1.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel1.Location = New System.Drawing.Point(3, 3)
-        Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(855, 74)
-        Me.Panel1.TabIndex = 1
-        '
-        'btnDeleteEstCost
-        '
-        Me.btnDeleteEstCost.Location = New System.Drawing.Point(120, 20)
-        Me.btnDeleteEstCost.Name = "btnDeleteEstCost"
-        Me.btnDeleteEstCost.Size = New System.Drawing.Size(75, 34)
-        Me.btnDeleteEstCost.TabIndex = 1
-        Me.btnDeleteEstCost.Text = "Delete"
-        Me.btnDeleteEstCost.UseVisualStyleBackColor = True
-        '
-        'btnSaveEstCost
-        '
-        Me.btnSaveEstCost.Location = New System.Drawing.Point(18, 20)
-        Me.btnSaveEstCost.Name = "btnSaveEstCost"
-        Me.btnSaveEstCost.Size = New System.Drawing.Size(75, 34)
-        Me.btnSaveEstCost.TabIndex = 0
-        Me.btnSaveEstCost.Text = "Save"
-        Me.btnSaveEstCost.UseVisualStyleBackColor = True
-        '
-        'btnExit
-        '
-        Me.btnExit.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnExit.Image = Global.AVT_TRAKING.My.Resources.Resources.exit2
-        Me.btnExit.Location = New System.Drawing.Point(796, 20)
-        Me.btnExit.Name = "btnExit"
-        Me.btnExit.Size = New System.Drawing.Size(34, 34)
-        Me.btnExit.TabIndex = 5
-        Me.btnExit.TabStop = False
+        Me.Label1.AutoSize = True
+        Me.Label1.Font = New System.Drawing.Font("Verdana", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label1.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.Label1.Location = New System.Drawing.Point(352, 10)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(143, 18)
+        Me.Label1.TabIndex = 6
+        Me.Label1.Text = "Estimation Cost"
         '
         'TableLayoutPanel2
         '
@@ -117,6 +105,15 @@ Partial Class EstimationCost
         Me.TableLayoutPanel2.Size = New System.Drawing.Size(855, 266)
         Me.TableLayoutPanel2.TabIndex = 2
         '
+        'tblEstimationCostSC
+        '
+        Me.tblEstimationCostSC.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.tblEstimationCostSC.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.tblEstimationCostSC.Location = New System.Drawing.Point(200, 3)
+        Me.tblEstimationCostSC.Name = "tblEstimationCostSC"
+        Me.tblEstimationCostSC.Size = New System.Drawing.Size(652, 260)
+        Me.tblEstimationCostSC.TabIndex = 0
+        '
         'tblFactorSC
         '
         Me.tblFactorSC.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
@@ -127,30 +124,125 @@ Partial Class EstimationCost
         Me.tblFactorSC.Size = New System.Drawing.Size(191, 260)
         Me.tblFactorSC.TabIndex = 1
         '
+        'PictureBox1
+        '
+        Me.PictureBox1.Image = Global.AVT_TRAKING.My.Resources.Resources.estimation
+        Me.PictureBox1.Location = New System.Drawing.Point(323, 6)
+        Me.PictureBox1.Name = "PictureBox1"
+        Me.PictureBox1.Size = New System.Drawing.Size(23, 26)
+        Me.PictureBox1.TabIndex = 10
+        Me.PictureBox1.TabStop = False
+        '
+        'PictureBox3
+        '
+        Me.PictureBox3.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.PictureBox3.Image = Global.AVT_TRAKING.My.Resources.Resources.minimize2
+        Me.PictureBox3.Location = New System.Drawing.Point(795, 3)
+        Me.PictureBox3.Name = "PictureBox3"
+        Me.PictureBox3.Size = New System.Drawing.Size(26, 29)
+        Me.PictureBox3.TabIndex = 9
+        Me.PictureBox3.TabStop = False
+        '
+        'btnRestore
+        '
+        Me.btnRestore.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnRestore.Image = Global.AVT_TRAKING.My.Resources.Resources.restore2
+        Me.btnRestore.Location = New System.Drawing.Point(824, 3)
+        Me.btnRestore.Name = "btnRestore"
+        Me.btnRestore.Size = New System.Drawing.Size(25, 29)
+        Me.btnRestore.TabIndex = 8
+        Me.btnRestore.TabStop = False
+        '
+        'btnMaximize
+        '
+        Me.btnMaximize.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnMaximize.Image = Global.AVT_TRAKING.My.Resources.Resources.maximize2
+        Me.btnMaximize.Location = New System.Drawing.Point(824, 3)
+        Me.btnMaximize.Name = "btnMaximize"
+        Me.btnMaximize.Size = New System.Drawing.Size(28, 29)
+        Me.btnMaximize.TabIndex = 7
+        Me.btnMaximize.TabStop = False
+        '
+        'btnExit
+        '
+        Me.btnExit.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnExit.Image = Global.AVT_TRAKING.My.Resources.Resources._exit
+        Me.btnExit.Location = New System.Drawing.Point(812, 37)
+        Me.btnExit.Name = "btnExit"
+        Me.btnExit.Size = New System.Drawing.Size(34, 34)
+        Me.btnExit.TabIndex = 5
+        Me.btnExit.TabStop = False
+        '
+        'btnDeleteEstCost
+        '
+        Me.btnDeleteEstCost.FlatAppearance.BorderSize = 0
+        Me.btnDeleteEstCost.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(83, Byte), Integer), CType(CType(93, Byte), Integer), CType(CType(102, Byte), Integer))
+        Me.btnDeleteEstCost.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnDeleteEstCost.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnDeleteEstCost.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.btnDeleteEstCost.Image = Global.AVT_TRAKING.My.Resources.Resources.delete
+        Me.btnDeleteEstCost.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnDeleteEstCost.Location = New System.Drawing.Point(120, 32)
+        Me.btnDeleteEstCost.Name = "btnDeleteEstCost"
+        Me.btnDeleteEstCost.Size = New System.Drawing.Size(85, 34)
+        Me.btnDeleteEstCost.TabIndex = 1
+        Me.btnDeleteEstCost.Text = "Delete"
+        Me.btnDeleteEstCost.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.btnDeleteEstCost.UseVisualStyleBackColor = True
+        '
+        'btnSaveEstCost
+        '
+        Me.btnSaveEstCost.FlatAppearance.BorderSize = 0
+        Me.btnSaveEstCost.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(83, Byte), Integer), CType(CType(93, Byte), Integer), CType(CType(102, Byte), Integer))
+        Me.btnSaveEstCost.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnSaveEstCost.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnSaveEstCost.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.btnSaveEstCost.Image = Global.AVT_TRAKING.My.Resources.Resources.save
+        Me.btnSaveEstCost.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnSaveEstCost.Location = New System.Drawing.Point(18, 32)
+        Me.btnSaveEstCost.Name = "btnSaveEstCost"
+        Me.btnSaveEstCost.Size = New System.Drawing.Size(75, 34)
+        Me.btnSaveEstCost.TabIndex = 0
+        Me.btnSaveEstCost.Text = "Save"
+        Me.btnSaveEstCost.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.btnSaveEstCost.UseVisualStyleBackColor = True
+        '
         'EstimationCost
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(861, 352)
         Me.Controls.Add(Me.TableLayoutPanel1)
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
         Me.Name = "EstimationCost"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "EstimationCost"
         Me.TableLayoutPanel1.ResumeLayout(False)
-        CType(Me.tblEstimationCostSC, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.Panel1.ResumeLayout(False)
-        CType(Me.btnExit, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.TitleBar.ResumeLayout(False)
+        Me.TitleBar.PerformLayout()
         Me.TableLayoutPanel2.ResumeLayout(False)
+        CType(Me.tblEstimationCostSC, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.tblFactorSC, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.PictureBox3, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.btnRestore, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.btnMaximize, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.btnExit, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
 
     Friend WithEvents TableLayoutPanel1 As TableLayoutPanel
     Friend WithEvents tblEstimationCostSC As DataGridView
-    Friend WithEvents Panel1 As Panel
+    Friend WithEvents TitleBar As Panel
     Friend WithEvents btnDeleteEstCost As Button
     Friend WithEvents btnSaveEstCost As Button
     Friend WithEvents btnExit As PictureBox
     Friend WithEvents TableLayoutPanel2 As TableLayoutPanel
     Friend WithEvents tblFactorSC As DataGridView
+    Friend WithEvents Label1 As Label
+    Friend WithEvents PictureBox3 As PictureBox
+    Friend WithEvents btnRestore As PictureBox
+    Friend WithEvents btnMaximize As PictureBox
+    Friend WithEvents PictureBox1 As PictureBox
 End Class
