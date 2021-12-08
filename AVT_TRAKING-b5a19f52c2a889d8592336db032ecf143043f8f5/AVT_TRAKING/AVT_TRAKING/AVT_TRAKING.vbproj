@@ -302,10 +302,22 @@
       <DependentUpon>ActiveAverageEmployee.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Reports\ClientBillingProject.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ClientBillingProject.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Reports\ReportActiveAverageE.Designer.vb">
       <DependentUpon>ReportActiveAverageE.vb</DependentUpon>
     </Compile>
     <Compile Include="Reports\ReportActiveAverageE.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Reports\ReportClientBillingProject.Designer.vb">
+      <DependentUpon>ReportClientBillingProject.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\ReportClientBillingProject.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Reports\ReportE.vb">
@@ -426,8 +438,15 @@
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>ActiveAverageEmployee.vb</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reports\ClientBillingProject.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ClientBillingProject.vb</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reports\ReportActiveAverageE.resx">
       <DependentUpon>ReportActiveAverageE.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\ReportClientBillingProject.resx">
+      <DependentUpon>ReportClientBillingProject.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\ReportE.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
@@ -498,6 +517,7 @@
     <None Include="Images\extend.png" />
     <None Include="Images\average.png" />
     <None Include="Images\estimation.png" />
+    <None Include="Images\billing.png" />
     <Content Include="Images\eye.png" />
     <None Include="Images\minimize.png" />
     <None Include="Images\show.png" />

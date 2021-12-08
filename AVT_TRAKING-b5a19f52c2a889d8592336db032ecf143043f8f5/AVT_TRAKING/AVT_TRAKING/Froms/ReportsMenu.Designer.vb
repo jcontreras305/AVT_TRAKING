@@ -29,6 +29,7 @@ Partial Class ReportsMenu
         Me.PictureBox2 = New System.Windows.Forms.PictureBox()
         Me.btnMaximize = New System.Windows.Forms.PictureBox()
         Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.btnClientBilling = New System.Windows.Forms.Button()
         Me.btnActAverage = New System.Windows.Forms.Button()
         Me.btnTimeSheet = New System.Windows.Forms.Button()
         Me.Panel3 = New System.Windows.Forms.Panel()
@@ -110,6 +111,7 @@ Partial Class ReportsMenu
         'Panel2
         '
         Me.Panel2.BackColor = System.Drawing.Color.FromArgb(CType(CType(30, Byte), Integer), CType(CType(38, Byte), Integer), CType(CType(70, Byte), Integer))
+        Me.Panel2.Controls.Add(Me.btnClientBilling)
         Me.Panel2.Controls.Add(Me.btnActAverage)
         Me.Panel2.Controls.Add(Me.btnTimeSheet)
         Me.Panel2.Dock = System.Windows.Forms.DockStyle.Left
@@ -117,6 +119,23 @@ Partial Class ReportsMenu
         Me.Panel2.Name = "Panel2"
         Me.Panel2.Size = New System.Drawing.Size(166, 393)
         Me.Panel2.TabIndex = 2
+        '
+        'btnClientBilling
+        '
+        Me.btnClientBilling.FlatAppearance.BorderSize = 0
+        Me.btnClientBilling.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(81, Byte), Integer), CType(CType(93, Byte), Integer), CType(CType(102, Byte), Integer))
+        Me.btnClientBilling.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnClientBilling.Font = New System.Drawing.Font("Verdana", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnClientBilling.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.btnClientBilling.Image = Global.AVT_TRAKING.My.Resources.Resources.billing
+        Me.btnClientBilling.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnClientBilling.Location = New System.Drawing.Point(3, 124)
+        Me.btnClientBilling.Name = "btnClientBilling"
+        Me.btnClientBilling.Size = New System.Drawing.Size(166, 42)
+        Me.btnClientBilling.TabIndex = 2
+        Me.btnClientBilling.Text = "Client Billings"
+        Me.btnClientBilling.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.btnClientBilling.UseVisualStyleBackColor = True
         '
         'btnActAverage
         '
@@ -205,4 +224,5 @@ Partial Class ReportsMenu
     Friend WithEvents Label1 As Label
     Friend WithEvents PictureBox1 As PictureBox
     Friend WithEvents btnActAverage As Button
+    Friend WithEvents btnClientBilling As Button
 End Class
