@@ -43,4 +43,9 @@ Public Class ReportsMenu
         Dim tse As New ReportClientBillingProject
         tse.ShowDialog()
     End Sub
+
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+        Dim tse As New ReportCatsEmployeePorject
+        tse.ShowDialog()
+    End Sub
 End Class

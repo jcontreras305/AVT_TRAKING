@@ -34,6 +34,7 @@ Partial Class ReportsMenu
         Me.btnTimeSheet = New System.Windows.Forms.Button()
         Me.Panel3 = New System.Windows.Forms.Panel()
         Me.PictureBox4 = New System.Windows.Forms.PictureBox()
+        Me.Button1 = New System.Windows.Forms.Button()
         Me.TitleBar.SuspendLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.btnRestore, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -111,6 +112,7 @@ Partial Class ReportsMenu
         'Panel2
         '
         Me.Panel2.BackColor = System.Drawing.Color.FromArgb(CType(CType(30, Byte), Integer), CType(CType(38, Byte), Integer), CType(CType(70, Byte), Integer))
+        Me.Panel2.Controls.Add(Me.Button1)
         Me.Panel2.Controls.Add(Me.btnClientBilling)
         Me.Panel2.Controls.Add(Me.btnActAverage)
         Me.Panel2.Controls.Add(Me.btnTimeSheet)
@@ -189,6 +191,23 @@ Partial Class ReportsMenu
         Me.PictureBox4.TabIndex = 3
         Me.PictureBox4.TabStop = False
         '
+        'Button1
+        '
+        Me.Button1.FlatAppearance.BorderSize = 0
+        Me.Button1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(81, Byte), Integer), CType(CType(93, Byte), Integer), CType(CType(102, Byte), Integer))
+        Me.Button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.Button1.Font = New System.Drawing.Font("Verdana", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Button1.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.Button1.Image = Global.AVT_TRAKING.My.Resources.Resources.catsemployee
+        Me.Button1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.Button1.Location = New System.Drawing.Point(0, 183)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(166, 42)
+        Me.Button1.TabIndex = 3
+        Me.Button1.Text = "Cats Employee"
+        Me.Button1.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.Button1.UseVisualStyleBackColor = True
+        '
         'ReportsMenu
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -225,4 +244,5 @@ Partial Class ReportsMenu
     Friend WithEvents PictureBox1 As PictureBox
     Friend WithEvents btnActAverage As Button
     Friend WithEvents btnClientBilling As Button
+    Friend WithEvents Button1 As Button
 End Class
