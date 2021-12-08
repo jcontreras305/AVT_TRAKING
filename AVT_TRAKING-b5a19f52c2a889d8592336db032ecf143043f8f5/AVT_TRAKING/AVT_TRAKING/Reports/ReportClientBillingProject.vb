@@ -1,5 +1,21 @@
 ﻿Imports System.Runtime.InteropServices
+Imports System.Data.SqlClient
 Public Class ReportClientBillingProject
+    Dim conection As New ConnectioDB
+    Private Sub ReportClientBillingProject_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        Try
+            conection.conectar()
+            Dim cmd As New SqlCommand("select numberClient , CONCAT(lastName,', ',firstName,' ',middleName) as 'Name' from clients ", conection.conn)
+            Dim dr As SqlDataReader = cmd.ExecuteReader()
+            While dr.Read()
+                cmbClients.Items.Add(CStr(dr("numberClient")) + "   " + dr("Name"))
+            End While
+        Catch ex As Exception
+            MsgBox(ex.Message())
+        Finally
+            conection.desconectar()
+        End Try
+    End Sub
     Private Sub PictureBox3_Click(sender As Object, e As EventArgs) Handles PictureBox3.Click
         Me.WindowState = FormWindowState.Minimized
     End Sub
@@ -33,10 +49,19 @@ Public Class ReportClientBillingProject
     End Sub
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
-        Dim reportTS As New ClientBillingProject
-        reportTS.SetParameterValue("@startdate", validaFechaParaSQl(dtpInitialDate.Value.Date))
-        reportTS.SetParameterValue("@finaldate", validaFechaParaSQl(dtpFinalDate.Value.Date))
-        reportTS.SetParameterValue("@clientnum", txtnumClient.Text)
-        crvClientBillingsProject.ReportSource = reportTS
+        Dim array() = cmbClients.SelectedItem.ToString().Split("    ")
+        Dim idClient As String = array(0)
+        If idClient <> "" Or idClient IsNot Nothing Then
+            Dim reportTS As New ClientBillingProject
+            reportTS.SetParameterValue("@startdate", validaFechaParaSQl(dtpInitialDate.Value.Date))
+            reportTS.SetParameterValue("@finaldate", validaFechaParaSQl(dtpFinalDate.Value.Date))
+            reportTS.SetParameterValue("@clientnum", idClient)
+            crvClientBillingsProject.ReportSource = reportTS
+        Else
+            MsgBox("Please select a Client.")
+        End If
+
     End Sub
+
+
 End Class

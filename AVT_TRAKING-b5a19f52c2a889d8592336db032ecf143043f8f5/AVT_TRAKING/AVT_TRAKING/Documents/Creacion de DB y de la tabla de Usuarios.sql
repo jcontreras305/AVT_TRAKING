@@ -2014,6 +2014,158 @@ begin
 end
 go
 
+create proc sp_Client_billings_Project
+@startdate as date, 
+@finaldate as date,
+@clientnum as int
+as
+begin
+if @startDate is not null and @FinalDate is not null
+	begin
+select cl.companyName, jb.jobNo, po.idPO,concat(wo.idWO,' ',ts.task) as 'Work Order',
+	ts.description as 'Project Desription',
+	
+	(case when (select T1.ST from  (select sum(hoursST) as 'ST' from hoursWorked where idAux = ts.idAux and dateWorked between @startdate and @finaldate) as T1) is null then 0.0
+	else (select T1.ST from  (select sum(hoursST) as 'ST' from hoursWorked where idAux = ts.idAux and dateWorked between @startdate and @finaldate) as T1)end +
+	case when (select T1.OT from  (select sum(hoursOT) as 'OT' from hoursWorked where idAux = ts.idAux and dateWorked between @startdate and @finaldate) as T1) is null then 0.0
+	else (select T1.OT from  (select sum(hoursOT) as 'OT' from hoursWorked where idAux = ts.idAux and dateWorked between @startdate and @finaldate) as T1) end) as 'Total Hours',
+
+	case when (select T1.ST from  (select sum(hoursST) as 'ST' from hoursWorked where idAux = ts.idAux and dateWorked between @startdate and @finaldate) as T1) is null then 0.0
+	else (select T1.ST from  (select sum(hoursST) as 'ST' from hoursWorked where idAux = ts.idAux and dateWorked between @startdate and @finaldate) as T1)end as 'Hours ST',
+	
+	(select CONCAT('$' , case when  SUM(T2.Amount) is null then '0'
+	else SUM(T2.Amount) end
+	) as 'Billings ST' from 
+	(select SUM(T1.hoursST*T1.billingRate1) AS 'Amount'
+	from (select hoursST, hw.idWorkCode , billingRate1  from hoursWorked as hw inner join workCode as wc on wc.idWorkCode = hw.idWorkCode 
+	where idAux=ts.idAux and dateWorked between @startdate and @finaldate)as T1    
+	group by T1.idWorkCode) as T2) as 'Billings ST',
+
+	case when (select T1.OT from  (select sum(hoursOT) as 'OT' from hoursWorked where idAux = ts.idAux and dateWorked between @startdate and @finaldate) as T1) is null then 0.0
+	else (select T1.OT from  (select sum(hoursOT) as 'OT' from hoursWorked where idAux = ts.idAux and dateWorked between @startdate and @finaldate) as T1) end as 'Hours OT',
+	
+	(select CONCAT('$' , case when SUM(T2.Amount) is null then '0'
+	else SUM(T2.Amount) end ) as 'Billings OT' from 
+	(select SUM(T1.hoursOT*T1.billingRateOT) AS 'Amount'
+	from (select hoursOT, hw.idWorkCode , billingRateOT  from hoursWorked as hw inner join workCode as wc on wc.idWorkCode = hw.idWorkCode 
+	where idAux=ts.idAux and dateWorked between @startdate and @finaldate)as T1    
+	group by T1.idWorkCode) as T2) as 'Billings OT',
+	concat('$', case when (select sum(amount) from expensesUsed where idAux=ts.idAux and dateExpense between @startdate and @finaldate) is null then 0.0
+	else (select sum(amount) from expensesUsed where idAux=ts.idAux and dateExpense between @startdate and @finaldate) end) as 'Total Expenses',
+	CONCAT('$', case when (select sum(amount) from materialUsed where idAux=ts.idAux and dateMaterial between @startdate and @finaldate) is null then 0.0
+	else (select sum(amount) from materialUsed where idAux=ts.idAux and dateMaterial between @startdate and @finaldate) end) as 'Total Material',
+	
+	concat('$', (case when  (select SUM(T2.Amount)from 
+	(select SUM(T1.hoursST*T1.billingRate1) AS 'Amount'
+	from (select hoursST, hw.idWorkCode , billingRate1  from hoursWorked as hw inner join workCode as wc on wc.idWorkCode = hw.idWorkCode 
+	where idAux=ts.idAux and dateWorked between @startdate and @finaldate)as T1    
+	group by T1.idWorkCode) as T2) is null then 0 else (select SUM(T2.Amount)from 
+	(select SUM(T1.hoursST*T1.billingRate1) AS 'Amount'
+	from (select hoursST, hw.idWorkCode , billingRate1  from hoursWorked as hw inner join workCode as wc on wc.idWorkCode = hw.idWorkCode 
+	where idAux=ts.idAux and dateWorked between @startdate and @finaldate)as T1    
+	group by T1.idWorkCode) as T2) end  +
+
+	case when (select SUM(T2.Amount) from 
+	(select SUM(T1.hoursOT*T1.billingRateOT) AS 'Amount'
+	from (select hoursOT, hw.idWorkCode , billingRateOT  from hoursWorked as hw inner join workCode as wc on wc.idWorkCode = hw.idWorkCode 
+	where idAux=ts.idAux and dateWorked between @startdate and @finaldate)as T1    
+	group by T1.idWorkCode) as T2) is null then 0 else (select SUM(T2.Amount) from 
+	(select SUM(T1.hoursOT*T1.billingRateOT) AS 'Amount'
+	from (select hoursOT, hw.idWorkCode , billingRateOT  from hoursWorked as hw inner join workCode as wc on wc.idWorkCode = hw.idWorkCode 
+	where idAux=ts.idAux and dateWorked between @startdate and @finaldate)as T1    
+	group by T1.idWorkCode) as T2) end +
+
+	case when (select sum(amount) from expensesUsed where idAux=ts.idAux and dateExpense between @startdate and @finaldate) is null then 0.0
+	else (select sum(amount) from expensesUsed where idAux=ts.idAux and dateExpense between @startdate and @finaldate) end +
+	
+	case when (select sum(amount) from materialUsed where idAux=ts.idAux and dateMaterial between @startdate and @finaldate) is null then 0.0
+	else (select sum(amount) from materialUsed where idAux=ts.idAux and dateMaterial between @startdate and @finaldate) end
+	)) as 'Total Spend'
+
+	from Clients as cl
+	inner join job as jb on jb.idClient= cl.idClient
+	inner join projectOrder as po on po.jobNo= jb.jobNo
+	inner join workOrder as wo on wo.idPO=po.idPO
+	inner join task as ts on ts.idAuxWO=wo.idAuxWO
+	 
+	where cl.numberClient=@clientnum
+	order by jb.jobNo asc
+	end
+
+	else
+	begin 
+	select cl.companyName, jb.jobNo, po.idPO,concat(wo.idWO,' ',ts.task) as 'Work Order',
+	ts.description as 'Project Desription',
+	
+	(case when (select T1.ST from  (select sum(hoursST) as 'ST' from hoursWorked where idAux = ts.idAux and dateWorked between @startdate and @finaldate) as T1) is null then 0.0
+	else (select T1.ST from  (select sum(hoursST) as 'ST' from hoursWorked where idAux = ts.idAux and dateWorked between @startdate and @finaldate) as T1)end +
+	case when (select T1.OT from  (select sum(hoursOT) as 'OT' from hoursWorked where idAux = ts.idAux and dateWorked between @startdate and @finaldate) as T1) is null then 0.0
+	else (select T1.OT from  (select sum(hoursOT) as 'OT' from hoursWorked where idAux = ts.idAux and dateWorked between @startdate and @finaldate) as T1) end) as 'Total Hours',
+
+	case when (select T1.ST from  (select sum(hoursST) as 'ST' from hoursWorked where idAux = ts.idAux and dateWorked between @startdate and @finaldate) as T1) is null then 0.0
+	else (select T1.ST from  (select sum(hoursST) as 'ST' from hoursWorked where idAux = ts.idAux and dateWorked between @startdate and @finaldate) as T1)end as 'Hours ST',
+	
+	(select CONCAT('$' , case when  SUM(T2.Amount) is null then '0'
+	else SUM(T2.Amount) end
+	) as 'Billings ST' from 
+	(select SUM(T1.hoursST*T1.billingRate1) AS 'Amount'
+	from (select hoursST, hw.idWorkCode , billingRate1  from hoursWorked as hw inner join workCode as wc on wc.idWorkCode = hw.idWorkCode 
+	where idAux=ts.idAux and dateWorked between @startdate and @finaldate)as T1    
+	group by T1.idWorkCode) as T2) as 'Billings ST',
+
+	case when (select T1.OT from  (select sum(hoursOT) as 'OT' from hoursWorked where idAux = ts.idAux and dateWorked between @startdate and @finaldate) as T1) is null then 0.0
+	else (select T1.OT from  (select sum(hoursOT) as 'OT' from hoursWorked where idAux = ts.idAux and dateWorked between @startdate and @finaldate) as T1) end as 'Hours OT',
+	
+	(select CONCAT('$' , case when SUM(T2.Amount) is null then '0'
+	else SUM(T2.Amount) end ) as 'Billings OT' from 
+	(select SUM(T1.hoursOT*T1.billingRateOT) AS 'Amount'
+	from (select hoursOT, hw.idWorkCode , billingRateOT  from hoursWorked as hw inner join workCode as wc on wc.idWorkCode = hw.idWorkCode 
+	where idAux=ts.idAux and dateWorked between @startdate and @finaldate)as T1    
+	group by T1.idWorkCode) as T2) as 'Billings OT',
+	concat('$', case when (select sum(amount) from expensesUsed where idAux=ts.idAux and dateExpense between @startdate and @finaldate) is null then 0.0
+	else (select sum(amount) from expensesUsed where idAux=ts.idAux and dateExpense between @startdate and @finaldate) end) as 'Total Expenses',
+	CONCAT('$', case when (select sum(amount) from materialUsed where idAux=ts.idAux and dateMaterial between @startdate and @finaldate) is null then 0.0
+	else (select sum(amount) from materialUsed where idAux=ts.idAux and dateMaterial between @startdate and @finaldate) end) as 'Total Material',
+	
+	concat('$', (case when  (select SUM(T2.Amount)from 
+	(select SUM(T1.hoursST*T1.billingRate1) AS 'Amount'
+	from (select hoursST, hw.idWorkCode , billingRate1  from hoursWorked as hw inner join workCode as wc on wc.idWorkCode = hw.idWorkCode 
+	where idAux=ts.idAux and dateWorked between @startdate and @finaldate)as T1    
+	group by T1.idWorkCode) as T2) is null then 0 else (select SUM(T2.Amount)from 
+	(select SUM(T1.hoursST*T1.billingRate1) AS 'Amount'
+	from (select hoursST, hw.idWorkCode , billingRate1  from hoursWorked as hw inner join workCode as wc on wc.idWorkCode = hw.idWorkCode 
+	where idAux=ts.idAux and dateWorked between @startdate and @finaldate)as T1    
+	group by T1.idWorkCode) as T2) end  +
+
+	case when (select SUM(T2.Amount) from 
+	(select SUM(T1.hoursOT*T1.billingRateOT) AS 'Amount'
+	from (select hoursOT, hw.idWorkCode , billingRateOT  from hoursWorked as hw inner join workCode as wc on wc.idWorkCode = hw.idWorkCode 
+	where idAux=ts.idAux and dateWorked between @startdate and @finaldate)as T1    
+	group by T1.idWorkCode) as T2) is null then 0 else (select SUM(T2.Amount) from 
+	(select SUM(T1.hoursOT*T1.billingRateOT) AS 'Amount'
+	from (select hoursOT, hw.idWorkCode , billingRateOT  from hoursWorked as hw inner join workCode as wc on wc.idWorkCode = hw.idWorkCode 
+	where idAux=ts.idAux and dateWorked between @startdate and @finaldate)as T1    
+	group by T1.idWorkCode) as T2) end +
+
+	case when (select sum(amount) from expensesUsed where idAux=ts.idAux and dateExpense between @startdate and @finaldate) is null then 0.0
+	else (select sum(amount) from expensesUsed where idAux=ts.idAux and dateExpense between @startdate and @finaldate) end +
+	
+	case when (select sum(amount) from materialUsed where idAux=ts.idAux and dateMaterial between @startdate and @finaldate) is null then 0.0
+	else (select sum(amount) from materialUsed where idAux=ts.idAux and dateMaterial between @startdate and @finaldate) end
+	)) as 'Total Spend'
+
+	from Clients as cl
+	inner join job as jb on jb.idClient= cl.idClient
+	inner join projectOrder as po on po.jobNo= jb.jobNo
+	inner join workOrder as wo on wo.idPO=po.idPO
+	inner join task as ts on ts.idAuxWO=wo.idAuxWO
+	 
+	where cl.numberClient=@clientnum
+	order by jb.jobNo asc
+	end
+	end
+go
+
 
 ----use master
 ----drop database VRT_TRAKING
@@ -2126,5 +2278,161 @@ go
 --foreign key (type) references ScafEstCost(idEstCost)
 --go
 
+--==============================================================================================================================
+--===== ESTE CODIGO ES PARA EL REPORTE DE CLIENTS_BILLING_BY_PROJECT ===========================================================
+--==============================================================================================================================
+---- (CTRL+K) + (CTRL+C) Comentar 
+---- (CTRL+K) + (CTRL+U) Descomentar 
 
+--create proc sp_Client_billings_Project
+--@startdate as date, 
+--@finaldate as date,
+--@clientnum as int
+--as
+--begin
+--if @startDate is not null and @FinalDate is not null
+--	begin
+--select cl.companyName, jb.jobNo, po.idPO,concat(wo.idWO,' ',ts.task) as 'Work Order',
+--	ts.description as 'Project Desription',
+	
+--	(case when (select T1.ST from  (select sum(hoursST) as 'ST' from hoursWorked where idAux = ts.idAux and dateWorked between @startdate and @finaldate) as T1) is null then 0.0
+--	else (select T1.ST from  (select sum(hoursST) as 'ST' from hoursWorked where idAux = ts.idAux and dateWorked between @startdate and @finaldate) as T1)end +
+--	case when (select T1.OT from  (select sum(hoursOT) as 'OT' from hoursWorked where idAux = ts.idAux and dateWorked between @startdate and @finaldate) as T1) is null then 0.0
+--	else (select T1.OT from  (select sum(hoursOT) as 'OT' from hoursWorked where idAux = ts.idAux and dateWorked between @startdate and @finaldate) as T1) end) as 'Total Hours',
+
+--	case when (select T1.ST from  (select sum(hoursST) as 'ST' from hoursWorked where idAux = ts.idAux and dateWorked between @startdate and @finaldate) as T1) is null then 0.0
+--	else (select T1.ST from  (select sum(hoursST) as 'ST' from hoursWorked where idAux = ts.idAux and dateWorked between @startdate and @finaldate) as T1)end as 'Hours ST',
+	
+--	(select CONCAT('$' , case when  SUM(T2.Amount) is null then '0'
+--	else SUM(T2.Amount) end
+--	) as 'Billings ST' from 
+--	(select SUM(T1.hoursST*T1.billingRate1) AS 'Amount'
+--	from (select hoursST, hw.idWorkCode , billingRate1  from hoursWorked as hw inner join workCode as wc on wc.idWorkCode = hw.idWorkCode 
+--	where idAux=ts.idAux and dateWorked between @startdate and @finaldate)as T1    
+--	group by T1.idWorkCode) as T2) as 'Billings ST',
+
+--	case when (select T1.OT from  (select sum(hoursOT) as 'OT' from hoursWorked where idAux = ts.idAux and dateWorked between @startdate and @finaldate) as T1) is null then 0.0
+--	else (select T1.OT from  (select sum(hoursOT) as 'OT' from hoursWorked where idAux = ts.idAux and dateWorked between @startdate and @finaldate) as T1) end as 'Hours OT',
+	
+--	(select CONCAT('$' , case when SUM(T2.Amount) is null then '0'
+--	else SUM(T2.Amount) end ) as 'Billings OT' from 
+--	(select SUM(T1.hoursOT*T1.billingRateOT) AS 'Amount'
+--	from (select hoursOT, hw.idWorkCode , billingRateOT  from hoursWorked as hw inner join workCode as wc on wc.idWorkCode = hw.idWorkCode 
+--	where idAux=ts.idAux and dateWorked between @startdate and @finaldate)as T1    
+--	group by T1.idWorkCode) as T2) as 'Billings OT',
+--	concat('$', case when (select sum(amount) from expensesUsed where idAux=ts.idAux and dateExpense between @startdate and @finaldate) is null then 0.0
+--	else (select sum(amount) from expensesUsed where idAux=ts.idAux and dateExpense between @startdate and @finaldate) end) as 'Total Expenses',
+--	CONCAT('$', case when (select sum(amount) from materialUsed where idAux=ts.idAux and dateMaterial between @startdate and @finaldate) is null then 0.0
+--	else (select sum(amount) from materialUsed where idAux=ts.idAux and dateMaterial between @startdate and @finaldate) end) as 'Total Material',
+	
+--	concat('$', (case when  (select SUM(T2.Amount)from 
+--	(select SUM(T1.hoursST*T1.billingRate1) AS 'Amount'
+--	from (select hoursST, hw.idWorkCode , billingRate1  from hoursWorked as hw inner join workCode as wc on wc.idWorkCode = hw.idWorkCode 
+--	where idAux=ts.idAux and dateWorked between @startdate and @finaldate)as T1    
+--	group by T1.idWorkCode) as T2) is null then 0 else (select SUM(T2.Amount)from 
+--	(select SUM(T1.hoursST*T1.billingRate1) AS 'Amount'
+--	from (select hoursST, hw.idWorkCode , billingRate1  from hoursWorked as hw inner join workCode as wc on wc.idWorkCode = hw.idWorkCode 
+--	where idAux=ts.idAux and dateWorked between @startdate and @finaldate)as T1    
+--	group by T1.idWorkCode) as T2) end  +
+
+--	case when (select SUM(T2.Amount) from 
+--	(select SUM(T1.hoursOT*T1.billingRateOT) AS 'Amount'
+--	from (select hoursOT, hw.idWorkCode , billingRateOT  from hoursWorked as hw inner join workCode as wc on wc.idWorkCode = hw.idWorkCode 
+--	where idAux=ts.idAux and dateWorked between @startdate and @finaldate)as T1    
+--	group by T1.idWorkCode) as T2) is null then 0 else (select SUM(T2.Amount) from 
+--	(select SUM(T1.hoursOT*T1.billingRateOT) AS 'Amount'
+--	from (select hoursOT, hw.idWorkCode , billingRateOT  from hoursWorked as hw inner join workCode as wc on wc.idWorkCode = hw.idWorkCode 
+--	where idAux=ts.idAux and dateWorked between @startdate and @finaldate)as T1    
+--	group by T1.idWorkCode) as T2) end +
+
+--	case when (select sum(amount) from expensesUsed where idAux=ts.idAux and dateExpense between @startdate and @finaldate) is null then 0.0
+--	else (select sum(amount) from expensesUsed where idAux=ts.idAux and dateExpense between @startdate and @finaldate) end +
+	
+--	case when (select sum(amount) from materialUsed where idAux=ts.idAux and dateMaterial between @startdate and @finaldate) is null then 0.0
+--	else (select sum(amount) from materialUsed where idAux=ts.idAux and dateMaterial between @startdate and @finaldate) end
+--	)) as 'Total Spend'
+
+--	from Clients as cl
+--	inner join job as jb on jb.idClient= cl.idClient
+--	inner join projectOrder as po on po.jobNo= jb.jobNo
+--	inner join workOrder as wo on wo.idPO=po.idPO
+--	inner join task as ts on ts.idAuxWO=wo.idAuxWO
+	 
+--	where cl.numberClient=@clientnum
+--	order by jb.jobNo asc
+--	end
+
+--	else
+--	begin 
+--	select cl.companyName, jb.jobNo, po.idPO,concat(wo.idWO,' ',ts.task) as 'Work Order',
+--	ts.description as 'Project Desription',
+	
+--	(case when (select T1.ST from  (select sum(hoursST) as 'ST' from hoursWorked where idAux = ts.idAux and dateWorked between @startdate and @finaldate) as T1) is null then 0.0
+--	else (select T1.ST from  (select sum(hoursST) as 'ST' from hoursWorked where idAux = ts.idAux and dateWorked between @startdate and @finaldate) as T1)end +
+--	case when (select T1.OT from  (select sum(hoursOT) as 'OT' from hoursWorked where idAux = ts.idAux and dateWorked between @startdate and @finaldate) as T1) is null then 0.0
+--	else (select T1.OT from  (select sum(hoursOT) as 'OT' from hoursWorked where idAux = ts.idAux and dateWorked between @startdate and @finaldate) as T1) end) as 'Total Hours',
+
+--	case when (select T1.ST from  (select sum(hoursST) as 'ST' from hoursWorked where idAux = ts.idAux and dateWorked between @startdate and @finaldate) as T1) is null then 0.0
+--	else (select T1.ST from  (select sum(hoursST) as 'ST' from hoursWorked where idAux = ts.idAux and dateWorked between @startdate and @finaldate) as T1)end as 'Hours ST',
+	
+--	(select CONCAT('$' , case when  SUM(T2.Amount) is null then '0'
+--	else SUM(T2.Amount) end
+--	) as 'Billings ST' from 
+--	(select SUM(T1.hoursST*T1.billingRate1) AS 'Amount'
+--	from (select hoursST, hw.idWorkCode , billingRate1  from hoursWorked as hw inner join workCode as wc on wc.idWorkCode = hw.idWorkCode 
+--	where idAux=ts.idAux and dateWorked between @startdate and @finaldate)as T1    
+--	group by T1.idWorkCode) as T2) as 'Billings ST',
+
+--	case when (select T1.OT from  (select sum(hoursOT) as 'OT' from hoursWorked where idAux = ts.idAux and dateWorked between @startdate and @finaldate) as T1) is null then 0.0
+--	else (select T1.OT from  (select sum(hoursOT) as 'OT' from hoursWorked where idAux = ts.idAux and dateWorked between @startdate and @finaldate) as T1) end as 'Hours OT',
+	
+--	(select CONCAT('$' , case when SUM(T2.Amount) is null then '0'
+--	else SUM(T2.Amount) end ) as 'Billings OT' from 
+--	(select SUM(T1.hoursOT*T1.billingRateOT) AS 'Amount'
+--	from (select hoursOT, hw.idWorkCode , billingRateOT  from hoursWorked as hw inner join workCode as wc on wc.idWorkCode = hw.idWorkCode 
+--	where idAux=ts.idAux and dateWorked between @startdate and @finaldate)as T1    
+--	group by T1.idWorkCode) as T2) as 'Billings OT',
+--	concat('$', case when (select sum(amount) from expensesUsed where idAux=ts.idAux and dateExpense between @startdate and @finaldate) is null then 0.0
+--	else (select sum(amount) from expensesUsed where idAux=ts.idAux and dateExpense between @startdate and @finaldate) end) as 'Total Expenses',
+--	CONCAT('$', case when (select sum(amount) from materialUsed where idAux=ts.idAux and dateMaterial between @startdate and @finaldate) is null then 0.0
+--	else (select sum(amount) from materialUsed where idAux=ts.idAux and dateMaterial between @startdate and @finaldate) end) as 'Total Material',
+	
+--	concat('$', (case when  (select SUM(T2.Amount)from 
+--	(select SUM(T1.hoursST*T1.billingRate1) AS 'Amount'
+--	from (select hoursST, hw.idWorkCode , billingRate1  from hoursWorked as hw inner join workCode as wc on wc.idWorkCode = hw.idWorkCode 
+--	where idAux=ts.idAux and dateWorked between @startdate and @finaldate)as T1    
+--	group by T1.idWorkCode) as T2) is null then 0 else (select SUM(T2.Amount)from 
+--	(select SUM(T1.hoursST*T1.billingRate1) AS 'Amount'
+--	from (select hoursST, hw.idWorkCode , billingRate1  from hoursWorked as hw inner join workCode as wc on wc.idWorkCode = hw.idWorkCode 
+--	where idAux=ts.idAux and dateWorked between @startdate and @finaldate)as T1    
+--	group by T1.idWorkCode) as T2) end  +
+
+--	case when (select SUM(T2.Amount) from 
+--	(select SUM(T1.hoursOT*T1.billingRateOT) AS 'Amount'
+--	from (select hoursOT, hw.idWorkCode , billingRateOT  from hoursWorked as hw inner join workCode as wc on wc.idWorkCode = hw.idWorkCode 
+--	where idAux=ts.idAux and dateWorked between @startdate and @finaldate)as T1    
+--	group by T1.idWorkCode) as T2) is null then 0 else (select SUM(T2.Amount) from 
+--	(select SUM(T1.hoursOT*T1.billingRateOT) AS 'Amount'
+--	from (select hoursOT, hw.idWorkCode , billingRateOT  from hoursWorked as hw inner join workCode as wc on wc.idWorkCode = hw.idWorkCode 
+--	where idAux=ts.idAux and dateWorked between @startdate and @finaldate)as T1    
+--	group by T1.idWorkCode) as T2) end +
+
+--	case when (select sum(amount) from expensesUsed where idAux=ts.idAux and dateExpense between @startdate and @finaldate) is null then 0.0
+--	else (select sum(amount) from expensesUsed where idAux=ts.idAux and dateExpense between @startdate and @finaldate) end +
+	
+--	case when (select sum(amount) from materialUsed where idAux=ts.idAux and dateMaterial between @startdate and @finaldate) is null then 0.0
+--	else (select sum(amount) from materialUsed where idAux=ts.idAux and dateMaterial between @startdate and @finaldate) end
+--	)) as 'Total Spend'
+
+--	from Clients as cl
+--	inner join job as jb on jb.idClient= cl.idClient
+--	inner join projectOrder as po on po.jobNo= jb.jobNo
+--	inner join workOrder as wo on wo.idPO=po.idPO
+--	inner join task as ts on ts.idAuxWO=wo.idAuxWO
+	 
+--	where cl.numberClient=@clientnum
+--	order by jb.jobNo asc
+--	end
+--	end
+--go
 
