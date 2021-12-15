@@ -303,6 +303,12 @@
       <DependentUpon>ActiveAverageEmployee.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Reports\CatsEmployeebyProject.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CatsEmployeebyProject.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Reports\ClientBillingProject.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -313,6 +319,12 @@
       <DependentUpon>ReportActiveAverageE.vb</DependentUpon>
     </Compile>
     <Compile Include="Reports\ReportActiveAverageE.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Reports\ReportCatsEmployeePorject.Designer.vb">
+      <DependentUpon>ReportCatsEmployeePorject.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\ReportCatsEmployeePorject.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Reports\ReportClientBillingProject.Designer.vb">
@@ -439,12 +451,19 @@
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>ActiveAverageEmployee.vb</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reports\CatsEmployeebyProject.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>CatsEmployeebyProject.vb</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reports\ClientBillingProject.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>ClientBillingProject.vb</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\ReportActiveAverageE.resx">
       <DependentUpon>ReportActiveAverageE.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\ReportCatsEmployeePorject.resx">
+      <DependentUpon>ReportCatsEmployeePorject.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\ReportClientBillingProject.resx">
       <DependentUpon>ReportClientBillingProject.vb</DependentUpon>
@@ -519,6 +538,7 @@
     <None Include="Images\average.png" />
     <None Include="Images\estimation.png" />
     <None Include="Images\billing.png" />
+    <None Include="Images\catsemployee.png" />
     <Content Include="Images\eye.png" />
     <None Include="Images\minimize.png" />
     <None Include="Images\show.png" />
