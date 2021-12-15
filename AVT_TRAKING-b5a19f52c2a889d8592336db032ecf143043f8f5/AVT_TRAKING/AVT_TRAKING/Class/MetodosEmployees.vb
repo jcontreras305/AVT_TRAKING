@@ -56,7 +56,7 @@ where em1.numberEmploye like CONCAT('%','" + text + "','%') or
         End Try
     End Sub
 
-    Public Sub guardarEmpleado(ByVal datosGeneralesEmpleado() As String, ByVal arraybyte() As Byte)
+    Public Function guardarEmpleado(ByVal datosGeneralesEmpleado() As String, ByVal arraybyte() As Byte) As Boolean
         Try
             conectar()
             Dim cmd As New SqlCommand("sp_insert_Employee", conn)
@@ -85,15 +85,16 @@ where em1.numberEmploye like CONCAT('%','" + text + "','%') or
             cmd.Parameters.Add("@payRate3", SqlDbType.Float).Value = datosGeneralesEmpleado(17)
             cmd.Parameters.Add("@type", SqlDbType.VarChar, 20).Value = datosGeneralesEmpleado(18)
             If cmd.ExecuteNonQuery Then
-                MsgBox("Successfull")
+                Return True
             Else
-                MsgBox("Error")
+                Return False
             End If
         Catch ex As Exception
             MsgBox(ex.Message)
+            Return False
         End Try
         desconectar()
-    End Sub
+    End Function
 
     Public Function insertNewPayRateEmployee(ByVal idEmployee As String, ByVal pay1 As Decimal, ByVal pay2 As Decimal, ByVal pay3 As Decimal) As Boolean
         Try
@@ -215,6 +216,25 @@ where em1.numberEmploye like CONCAT('%','" + text + "','%') or
         desconectar()
     End Sub
 
+    Public Function selectEmployeeIDd() As DataTable
+        Try
+            conectar()
+            Dim cmd As New SqlCommand("SELECT numberEmploye FROM employees", conn)
+            If cmd.ExecuteNonQuery Then
+                Dim dt As New DataTable
+                Dim da As New SqlDataAdapter(cmd)
+                da.Fill(dt)
+                Return dt
+            Else
+                Return Nothing
+            End If
+        Catch ex As Exception
+            Return Nothing
+        Finally
+            desconectar()
+        End Try
+    End Function
+
     '======================================================================================================
     '=============== METODOS PARA EMEPLEADOS DE LA SECCIONDE DE HORAS TRABAJADAS ==========================
     '======================================================================================================
@@ -311,5 +331,7 @@ and (CONCAT(firstName,' ',middleName,' ',lastName) like '%" + consulta + "%' or 
             Return Nothing
         End Try
     End Function
+
+
 
 End Class

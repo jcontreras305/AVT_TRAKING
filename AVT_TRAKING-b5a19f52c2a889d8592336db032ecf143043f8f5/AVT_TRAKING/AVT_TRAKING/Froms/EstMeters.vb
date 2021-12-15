@@ -1,0 +1,669 @@
+﻿Imports System.Data.SqlClient
+Public Class EstMeters
+    Inherits ConnectioDB
+    Dim estSC As New EstimationSC
+    Dim tblScfCost As DataGridView
+
+    Dim _FACTOR, _DECKSNUM As Integer
+    Dim _idEstMeters, _EstNumber, _idEstCost As String
+    Dim _PMANHRS, _TLABOR, _LDECKBP, _LABORBP, _LDECKDP, _LABORDP, _DECKMAD, _MADPRIC, _MA2DP, _MA3DP, _DECKDP, _DPRICE, _M2DP, _M2EDP, _M2MDP, _M2LDP As Decimal
+    Dim _M3DP, _M3EDP, _M3MDP, _M3LDP, _EDMA2C, _EDMA3C, _EDMA2, _EDMA3, _EDM2C, _EDM3C, _EDM2, _EDM3, _TIMESED, _DA, _DECKBP, _BPRICE, _M2BP, _M2EBP As Decimal
+    Dim _M2MBP, _M2LBP, _M3BP, _M3EBP, _M3MBP, _M3LBP As Decimal
+
+    Private Sub refreshValues()
+        If _idEstCost = "" Then
+            tblScfCost = estSC.SelectEstCostSC(_idEstCost)
+            If tblScfCost IsNot Nothing And tblScfCost.Rows.Count > 0 Then
+                _M3LBP = (tblScfCost.Rows(0).Cells("M3LABORBP").Value + tblScfCost.Rows(0).Cells("M3LBI").Value) * (1 + _FACTOR)
+                _M3MBP = 0
+                _M3EBP = 0
+                _M3BP = 0
+
+                _M2LBP = 0
+                _M2MBP = 0
+                _M2EBP = 0
+                _M2BP = 0
+
+                _BPRICE = 0
+                _DECKBP = 0
+                _DA = 0
+
+                _TIMESED = 0
+                _EDM3 = 0
+                _EDM2 = 0
+                _EDM3C = 0
+                _EDM2C = 0
+                _EDMA3 = 0
+                _EDMA2 = 0
+                _EDMA3C = 0
+                _EDMA2C = 0
+
+                _M3LDP = 0
+                _M3MDP = 0
+                _M3EDP = 0
+                _M3DP = 0
+
+                _M2LDP = 0
+                _M2MDP = 0
+                _M2EDP = 0
+                _M2DP = 0
+
+                _DPRICE = 0
+                _DECKDP = 0
+                _MA3DP = 0
+                _MA2DP = 0
+                _MADPRIC = 0
+                _DECKMAD = 0
+                _LABORDP = 0
+                _LDECKDP = 0
+                _LABORBP = 0
+                _LDECKBP = 0
+                _TLABOR = 0
+                _PMANHRS = 0
+            End If
+        End If
+    End Sub
+
+    Public Function Clear() As Boolean
+        Try
+            _idEstMeters = ""
+            _EstNumber = ""
+            _DECKSNUM = 0
+            _FACTOR = 0
+            _PMANHRS = 0
+            _TLABOR = 0
+            _LDECKBP = 0
+            _LABORBP = 0
+            _LDECKDP = 0
+            _LABORDP = 0
+            _DECKMAD = 0
+            _MADPRIC = 0
+            _MA2DP = 0
+            _MA3DP = 0
+            _DECKDP = 0
+            _DPRICE = 0
+            _M2DP = 0
+            _M2EDP = 0
+            _M2MDP = 0
+            _M2LDP = 0
+            _M3DP = 0
+            _M3EDP = 0
+            _M3MDP = 0
+            _M3LDP = 0
+            _EDMA2C = 0
+            _EDMA3C = 0
+            _EDMA2 = 0
+            _EDMA3 = 0
+            _EDM2C = 0
+            _EDM3C = 0
+            _EDM2 = 0
+            _EDM3 = 0
+            _TIMESED = 0
+            _DA = 0
+            _DECKBP = 0
+            _BPRICE = 0
+            _M2BP = 0
+            _M2EBP = 0
+            _M2MBP = 0
+            _M2LBP = 0
+            _M3BP = 0
+            _M3EBP = 0
+            _M3MBP = 0
+            _M3LBP = 0
+            Return True
+        Catch ex As Exception
+            Return False
+        End Try
+    End Function
+    Public Property DECKSNUM() As Integer
+        Get
+            If _DECKSNUM = Nothing Then
+                Return 0
+            Else
+                Return _DECKSNUM
+            End If
+        End Get
+        Set(ByVal DECKSNUM As Integer)
+            _DECKSNUM = DECKSNUM
+        End Set
+    End Property
+    Public Property FACTOR() As Integer
+        Get
+            If _FACTOR = Nothing Then
+                Return 0
+            Else
+                Return _FACTOR
+            End If
+        End Get
+        Set(ByVal FACTOR As Integer)
+            _FACTOR = FACTOR
+        End Set
+    End Property
+    Public Property idEstMeters() As String
+        Get
+            If _idEstMeters = Nothing Then
+                Return ""
+            Else
+                Return _idEstMeters
+            End If
+        End Get
+        Set(ByVal idEstMeters As String)
+            _idEstMeters = idEstMeters
+        End Set
+    End Property
+    Public Property EstNumber() As String
+        Get
+            If _EstNumber = Nothing Then
+                Return ""
+            Else
+                Return _EstNumber
+            End If
+        End Get
+        Set(ByVal EstNumber As String)
+            _EstNumber = EstNumber
+        End Set
+    End Property
+    Public Property idEstCost() As String
+        Get
+            If _idEstCost = Nothing Then
+                Return ""
+            Else
+                Return _idEstCost
+            End If
+        End Get
+        Set(ByVal idEstCost As String)
+            _idEstCost = idEstCost
+        End Set
+    End Property
+    Public Property PMANHRS() As Decimal
+        Get
+            If _PMANHRS = Nothing Then
+                Return 0
+            Else
+                Return _PMANHRS
+            End If
+        End Get
+        Set(ByVal PMANHRS As Decimal)
+            _PMANHRS = PMANHRS
+        End Set
+    End Property
+    Public Property TLABOR() As Decimal
+        Get
+            If _TLABOR = Nothing Then
+                Return 0
+            Else
+                Return _TLABOR
+            End If
+        End Get
+        Set(ByVal TLABOR As Decimal)
+            _TLABOR = TLABOR
+        End Set
+    End Property
+    Public Property LDECKBP() As Decimal
+        Get
+            If _LDECKBP = Nothing Then
+                Return 0
+            Else
+                Return _LDECKBP
+            End If
+        End Get
+        Set(ByVal LDECKBP As Decimal)
+            _LDECKBP = LDECKBP
+        End Set
+    End Property
+    Public Property LABORBP() As Decimal
+        Get
+            If _LABORBP = Nothing Then
+                Return 0
+            Else
+                Return _LABORBP
+            End If
+        End Get
+        Set(ByVal LABORBP As Decimal)
+            _LABORBP = LABORBP
+        End Set
+    End Property
+    Public Property LDECKDP() As Decimal
+        Get
+            If _LDECKDP = Nothing Then
+                Return 0
+            Else
+                Return _LDECKDP
+            End If
+        End Get
+        Set(ByVal LDECKDP As Decimal)
+            _LDECKDP = LDECKDP
+        End Set
+    End Property
+    Public Property LABORDP() As Decimal
+        Get
+            If _LABORDP = Nothing Then
+                Return 0
+            Else
+                Return _LABORDP
+            End If
+        End Get
+        Set(ByVal LABORDP As Decimal)
+            _LABORDP = LABORDP
+        End Set
+    End Property
+    Public Property DECKMAD() As Decimal
+        Get
+            If _DECKMAD = Nothing Then
+                Return 0
+            Else
+                Return _DECKMAD
+            End If
+        End Get
+        Set(ByVal DECKMAD As Decimal)
+            _DECKMAD = DECKMAD
+        End Set
+    End Property
+    Public Property MADPRIC() As Decimal
+        Get
+            If _MADPRIC = Nothing Then
+                Return 0
+            Else
+                Return _MADPRIC
+            End If
+        End Get
+        Set(ByVal MADPRIC As Decimal)
+            _MADPRIC = MADPRIC
+        End Set
+    End Property
+    Public Property MA2DP() As Decimal
+        Get
+            If _MA2DP = Nothing Then
+                Return 0
+            Else
+                Return _MA2DP
+            End If
+        End Get
+        Set(ByVal MA2DP As Decimal)
+            _MA2DP = MA3DP
+        End Set
+    End Property
+    Public Property MA3DP() As Decimal
+        Get
+            If _MA3DP = Nothing Then
+                Return 0
+            Else
+                Return _MA3DP
+            End If
+        End Get
+        Set(ByVal MA3DP As Decimal)
+            _MA3DP = MA3DP
+        End Set
+    End Property
+    Public Property DECKDP() As Decimal
+        Get
+            If _DECKDP = Nothing Then
+                Return 0
+            Else
+                Return _DECKDP
+            End If
+        End Get
+        Set(ByVal DECKDP As Decimal)
+            _DECKDP = DECKDP
+        End Set
+    End Property
+    Public Property DPRICE() As Decimal
+        Get
+            If _DPRICE = Nothing Then
+                Return 0
+            Else
+                Return _DPRICE
+            End If
+        End Get
+        Set(ByVal DPRICE As Decimal)
+            _DPRICE = DPRICE
+        End Set
+    End Property
+    Public Property M2DP() As Decimal
+        Get
+            If _M2DP = Nothing Then
+                Return 0
+            Else
+                Return _M2DP
+            End If
+        End Get
+        Set(ByVal M2DP As Decimal)
+            _M2DP = M2DP
+        End Set
+    End Property
+    Public Property M2EDP() As Decimal
+        Get
+            If _M2EDP = Nothing Then
+                Return 0
+            Else
+                Return _M2EDP
+            End If
+        End Get
+        Set(ByVal M2EDP As Decimal)
+            _M2EDP = M2EDP
+        End Set
+    End Property
+    Public Property M2MDP() As Decimal
+        Get
+            If _M2MDP = Nothing Then
+                Return 0
+            Else
+                Return _M2MDP
+            End If
+        End Get
+        Set(ByVal M2MDP As Decimal)
+            _M2MDP = M2MDP
+        End Set
+    End Property
+    Public Property M2LDP() As Decimal
+        Get
+            If _M2LDP = Nothing Then
+                Return 0
+            Else
+                Return _M2LDP
+            End If
+        End Get
+        Set(ByVal M2LDP As Decimal)
+            _M2LDP = M2LDP
+        End Set
+    End Property
+    Public Property M3DP() As Decimal
+        Get
+            If _M3DP = Nothing Then
+                Return 0
+            Else
+                Return _M3DP
+            End If
+        End Get
+        Set(ByVal M3DP As Decimal)
+            _M3DP = M3DP
+        End Set
+    End Property
+    Public Property M3EDP() As Decimal
+        Get
+            If _M3EDP = Nothing Then
+                Return 0
+            Else
+                Return _M3EDP
+            End If
+        End Get
+        Set(ByVal M3EDP As Decimal)
+            _M3EDP = M3EDP
+        End Set
+    End Property
+    Public Property M3MDP() As Decimal
+        Get
+            If _M3MDP = Nothing Then
+                Return 0
+            Else
+                Return _M3MDP
+            End If
+        End Get
+        Set(ByVal M3MDP As Decimal)
+            _M3MDP = M3MDP
+        End Set
+    End Property
+    Public Property M3LDP() As Decimal
+        Get
+            If _M3LDP = Nothing Then
+                Return 0
+            Else
+                Return _M3LDP
+            End If
+        End Get
+        Set(ByVal M3LDP As Decimal)
+            _M3LDP = M3LDP
+        End Set
+    End Property
+    Public Property EDMA2C() As Decimal
+        Get
+            If _EDMA2C = Nothing Then
+                Return 0
+            Else
+                Return _EDMA2C
+            End If
+        End Get
+        Set(ByVal EDMA2C As Decimal)
+            _EDMA2C = EDMA2C
+        End Set
+    End Property
+    Public Property EDMA3C() As Decimal
+        Get
+            If _EDMA3C = Nothing Then
+                Return 0
+            Else
+                Return _EDMA3C
+            End If
+        End Get
+        Set(ByVal EDMA3C As Decimal)
+            _EDMA3C = EDMA3C
+        End Set
+    End Property
+    Public Property EDMA2() As Decimal
+        Get
+            If _EDMA2 = Nothing Then
+                Return 0
+            Else
+                Return _EDMA2
+            End If
+        End Get
+        Set(ByVal EDMA2 As Decimal)
+            _EDMA2 = EDMA2
+        End Set
+    End Property
+    Public Property EDMA3() As Decimal
+        Get
+            If _EDMA3 = Nothing Then
+                Return 0
+            Else
+                Return _EDMA3
+            End If
+        End Get
+        Set(ByVal EDMA3 As Decimal)
+            _EDMA3 = EDMA3
+        End Set
+    End Property
+    Public Property EDM2C() As Decimal
+        Get
+            If _EDM2C = Nothing Then
+                Return 0
+            Else
+                Return _EDM2C
+            End If
+        End Get
+        Set(ByVal EDM2C As Decimal)
+            _EDM2C = EDM2C
+        End Set
+    End Property
+    Public Property EDM3C() As Decimal
+        Get
+            If _EDM3C = Nothing Then
+                Return 0
+            Else
+                Return _EDM3C
+            End If
+        End Get
+        Set(ByVal EDM3C As Decimal)
+            _EDM3C = EDM3C
+        End Set
+    End Property
+    Public Property EDM2() As Decimal
+        Get
+            If _EDM2 = Nothing Then
+                Return 0
+            Else
+                Return _EDM2
+            End If
+        End Get
+        Set(ByVal EDM2 As Decimal)
+            _EDM2 = EDM2
+        End Set
+    End Property
+    Public Property EDM3() As Decimal
+        Get
+            If _EDM3 = Nothing Then
+                Return 0
+            Else
+                Return _EDM3
+            End If
+        End Get
+        Set(ByVal EDM3 As Decimal)
+            _EDM3 = EDM3
+        End Set
+    End Property
+    Public Property TIMESED() As Decimal
+        Get
+            If _TIMESED = Nothing Then
+                Return 0
+            Else
+                Return _TIMESED
+            End If
+        End Get
+        Set(ByVal TIMESED As Decimal)
+            _TIMESED = TIMESED
+        End Set
+    End Property
+    Public Property DA() As Decimal
+        Get
+            If _DA = Nothing Then
+                Return 0
+            Else
+                Return _DA
+            End If
+        End Get
+        Set(ByVal DA As Decimal)
+            _DA = DA
+        End Set
+    End Property
+    Public Property DECKBP() As Decimal
+        Get
+            If _DECKBP = Nothing Then
+                Return 0
+            Else
+                Return _DECKBP
+            End If
+        End Get
+        Set(ByVal DECKBP As Decimal)
+            _DECKBP = DECKBP
+        End Set
+    End Property
+    Public Property BPRICE() As Decimal
+        Get
+            If _BPRICE = Nothing Then
+                Return 0
+            Else
+                Return _BPRICE
+            End If
+        End Get
+        Set(ByVal BPRICE As Decimal)
+            _BPRICE = BPRICE
+        End Set
+    End Property
+    Public Property M2BP() As Decimal
+        Get
+            If _M2BP = Nothing Then
+                Return 0
+            Else
+                Return _M2BP
+            End If
+        End Get
+        Set(ByVal M2BP As Decimal)
+            _M2BP = M2BP
+        End Set
+    End Property
+    Public Property M2EBP() As Decimal
+        Get
+            If _M2EBP = Nothing Then
+                Return 0
+            Else
+                Return _M2EBP
+            End If
+        End Get
+        Set(ByVal M2EBP As Decimal)
+            _M2EBP = M2EBP
+        End Set
+    End Property
+    Public Property M2MBP() As Decimal
+        Get
+            If _M2MBP = Nothing Then
+                Return 0
+            Else
+                Return _M2MBP
+            End If
+        End Get
+        Set(ByVal M2MBP As Decimal)
+            _M2MBP = M2MBP
+        End Set
+    End Property
+    Public Property M2LBP() As Decimal
+        Get
+            If _M2LBP = Nothing Then
+                Return 0
+            Else
+                Return _M2LBP
+            End If
+        End Get
+        Set(ByVal M2LBP As Decimal)
+            _M2LBP = M2LBP
+        End Set
+    End Property
+    Public Property M3BP() As Decimal
+        Get
+            If _M3BP = Nothing Then
+                Return 0
+            Else
+                Return _M3BP
+            End If
+        End Get
+        Set(ByVal M3BP As Decimal)
+            _M3BP = M3BP
+        End Set
+    End Property
+
+    Public Property M3EBP() As Decimal
+        Get
+            If _M3EBP = Nothing Then
+                Return 0
+            Else
+                Return _M3EBP
+            End If
+        End Get
+        Set(ByVal M3EBP As Decimal)
+            _M3EBP = M3EBP
+        End Set
+    End Property
+    Public Property M3MBP() As Decimal
+        Get
+            If _M3MBP = Nothing Then
+                Return 0
+            Else
+                Return _M3MBP
+            End If
+        End Get
+        Set(ByVal M3MBP As Decimal)
+            _M3MBP = M3MBP
+        End Set
+    End Property
+    Public Property M3LBP() As Decimal
+        Get
+            If _M3LBP = Nothing Then
+                Return 0
+            Else
+                Return _M3LBP
+            End If
+        End Get
+        Set(ByVal M3LBP As Decimal)
+            _M3LBP = M3LBP
+        End Set
+    End Property
+
+
+
+
+
+
+
+
+
+
+End Class
