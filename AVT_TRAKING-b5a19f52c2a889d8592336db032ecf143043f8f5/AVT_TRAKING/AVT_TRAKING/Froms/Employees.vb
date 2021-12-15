@@ -364,6 +364,29 @@ Public Class Employees
                 opf.ShowDialog()
                 tblEmployeesExcel.Rows(e.RowIndex).Cells(e.ColumnIndex).Value = opf.FileName
             End If
+        ElseIf e.ColumnIndex = tblEmployeesExcel.Columns("TypeEmployee").Index Then
+            Try
+                If tblEmployeesExcel.CurrentCell.GetType.Name = "DataGridViewTextBoxCell" Then
+                    Dim cmbTypeEmployee As New DataGridViewComboBoxCell
+                    With cmbTypeEmployee
+                        mtd.llenarCmbTypeEmployee(cmbTypeEmployee)
+                    End With
+                    tblEmployeesExcel.CurrentRow.Cells("TypeEmployee") = cmbTypeEmployee
+                Else
+                    tblEmployeesExcel.CurrentRow.Cells("TypeEmployee") = tblEmployeesExcel.CurrentCell
+                End If
+            Catch ex As Exception
+
+            End Try
+        End If
+    End Sub
+    Private Sub tblEmployeesExcel_DataError(ByVal sender As Object, ByVal e As DataGridViewDataErrorEventArgs) Handles tblEmployeesExcel.DataError
+        ' Excepción
+        Dim ex As Exception = e.Exception
+        If e.Exception.Message <> "El valor de DataGridViewComboBoxCell no es válido." Then
+            MessageBox.Show(ex.Message)
+        Else
+            e.Cancel = True
         End If
     End Sub
     Private Sub btnDownloadExcel_Click(sender As Object, e As EventArgs) Handles btnDownloadExcel.Click

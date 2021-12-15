@@ -261,7 +261,25 @@ and (CONCAT(firstName,' ',middleName,' ',lastName) like '%" + consulta + "%' or 
         End Try
     End Function
 
-
+    Public Function llenarCmbTypeEmployee(ByVal cmbEmployeManager As DataGridViewComboBoxCell) As Boolean
+        Try
+            conectar()
+            Dim cmd As New SqlCommand("select name from typeEmployee", conn)
+            Dim reader As SqlDataReader = cmd.ExecuteReader()
+            Dim lst As New List(Of String)
+            While reader.Read()
+                cmbEmployeManager.Items.Add(reader("name"))
+            End While
+            If cmbEmployeManager.Items.Count > 0 Then
+                Return True
+            Else
+                Return False
+            End If
+            desconectar()
+        Catch ex As Exception
+            Return False
+        End Try
+    End Function
     Public Function llenarCmbEmpleadosManager(ByVal cmbEmployeManager As ComboBox) As List(Of String)
         Try
             conectar()
