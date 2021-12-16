@@ -315,6 +315,12 @@
       <DependentUpon>ClientBillingProject.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Reports\ScaffoldEstimate.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ScaffoldEstimate.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Reports\ReportActiveAverageE.Designer.vb">
       <DependentUpon>ReportActiveAverageE.vb</DependentUpon>
     </Compile>
@@ -343,6 +349,12 @@
       <DependentUpon>ReporteEmployees.vb</DependentUpon>
     </Compile>
     <Compile Include="Reports\ReporteEmployees.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Reports\ReportScaffoldEstimate.Designer.vb">
+      <DependentUpon>ReportScaffoldEstimate.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\ReportScaffoldEstimate.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="VRT_TRAKINGDataSet.Designer.vb">
@@ -459,6 +471,10 @@
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>ClientBillingProject.vb</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reports\ScaffoldEstimate.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ScaffoldEstimate.vb</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reports\ReportActiveAverageE.resx">
       <DependentUpon>ReportActiveAverageE.vb</DependentUpon>
     </EmbeddedResource>
@@ -474,6 +490,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\ReporteEmployees.resx">
       <DependentUpon>ReporteEmployees.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\ReportScaffoldEstimate.resx">
+      <DependentUpon>ReportScaffoldEstimate.vb</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
@@ -576,6 +595,7 @@
     <None Include="Images\timesheetreport.png" />
     <None Include="Images\repormen.png" />
     <None Include="Images\ScaffoldImageEST2.png" />
+    <None Include="Images\scaffoldestimate.png" />
     <Content Include="Images\user.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
