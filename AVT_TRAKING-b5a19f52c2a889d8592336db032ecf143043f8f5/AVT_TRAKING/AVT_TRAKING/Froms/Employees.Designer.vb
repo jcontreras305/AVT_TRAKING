@@ -94,6 +94,7 @@ Partial Class Employees
         Me.GroupBox3 = New System.Windows.Forms.GroupBox()
         Me.TableLayoutPanel8 = New System.Windows.Forms.TableLayoutPanel()
         Me.Panel15 = New System.Windows.Forms.Panel()
+        Me.btnNewPay = New System.Windows.Forms.Button()
         Me.chbPay = New System.Windows.Forms.CheckBox()
         Me.Panel16 = New System.Windows.Forms.Panel()
         Me.sprPayRate1 = New System.Windows.Forms.NumericUpDown()
@@ -102,6 +103,14 @@ Partial Class Employees
         Me.sprPayRate2 = New System.Windows.Forms.NumericUpDown()
         Me.Label16 = New System.Windows.Forms.Label()
         Me.Label15 = New System.Windows.Forms.Label()
+        Me.TabPage1 = New System.Windows.Forms.TabPage()
+        Me.TableLayoutPanel9 = New System.Windows.Forms.TableLayoutPanel()
+        Me.TableLayoutPanel10 = New System.Windows.Forms.TableLayoutPanel()
+        Me.btnUploadExcel = New System.Windows.Forms.Button()
+        Me.btnDownloadExcel = New System.Windows.Forms.Button()
+        Me.txtMensajeProseso = New System.Windows.Forms.TextBox()
+        Me.btnSaveEmployeeExcel = New System.Windows.Forms.Button()
+        Me.tblEmployeesExcel = New System.Windows.Forms.DataGridView()
         Me.TitleBar = New System.Windows.Forms.Panel()
         Me.Label20 = New System.Windows.Forms.Label()
         Me.btnMaximize = New System.Windows.Forms.PictureBox()
@@ -109,7 +118,16 @@ Partial Class Employees
         Me.Button1 = New System.Windows.Forms.Button()
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
         Me.Panel1 = New System.Windows.Forms.Panel()
-        Me.btnNewPay = New System.Windows.Forms.Button()
+        Me.NEWID = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Number = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.FirstName = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.LastName = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.MiddleName = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.SocialNumber = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.SAPNumber = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Photo = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Status = New System.Windows.Forms.DataGridViewCheckBoxColumn()
+        Me.TypeEmployee = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.TabControl1.SuspendLayout()
         Me.tbpEmployees.SuspendLayout()
         Me.TableLayoutPanel2.SuspendLayout()
@@ -146,6 +164,10 @@ Partial Class Employees
         CType(Me.sprPayRate1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.sprPayRate3, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.sprPayRate2, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.TabPage1.SuspendLayout()
+        Me.TableLayoutPanel9.SuspendLayout()
+        Me.TableLayoutPanel10.SuspendLayout()
+        CType(Me.tblEmployeesExcel, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.TitleBar.SuspendLayout()
         CType(Me.btnMaximize, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.btnMinimized, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -160,6 +182,7 @@ Partial Class Employees
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.TabControl1.Controls.Add(Me.tbpEmployees)
         Me.TabControl1.Controls.Add(Me.tbpOtherData)
+        Me.TabControl1.Controls.Add(Me.TabPage1)
         Me.TabControl1.Font = New System.Drawing.Font("Verdana", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TabControl1.Location = New System.Drawing.Point(3, 53)
         Me.TabControl1.Name = "TabControl1"
@@ -201,12 +224,13 @@ Partial Class Employees
         Me.tblEmployees.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.tblEmployees.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.tblEmployees.BackgroundColor = System.Drawing.SystemColors.ControlLight
         Me.tblEmployees.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
         DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window
         DataGridViewCellStyle1.Font = New System.Drawing.Font("Verdana", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText
         DataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight
         DataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText
         DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
@@ -223,7 +247,7 @@ Partial Class Employees
         Me.TableLayoutPanel3.ColumnCount = 3
         Me.TableLayoutPanel3.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.60423!))
         Me.TableLayoutPanel3.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 49.39577!))
-        Me.TableLayoutPanel3.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 132.0!))
+        Me.TableLayoutPanel3.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 136.0!))
         Me.TableLayoutPanel3.Controls.Add(Me.Panel7, 2, 1)
         Me.TableLayoutPanel3.Controls.Add(Me.Panel6, 1, 1)
         Me.TableLayoutPanel3.Controls.Add(Me.Panel5, 0, 1)
@@ -243,9 +267,9 @@ Partial Class Employees
         '
         Me.Panel7.Controls.Add(Me.btnChooseImage)
         Me.Panel7.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel7.Location = New System.Drawing.Point(664, 133)
+        Me.Panel7.Location = New System.Drawing.Point(660, 133)
         Me.Panel7.Name = "Panel7"
-        Me.Panel7.Size = New System.Drawing.Size(127, 49)
+        Me.Panel7.Size = New System.Drawing.Size(131, 49)
         Me.Panel7.TabIndex = 5
         '
         'btnChooseImage
@@ -257,7 +281,7 @@ Partial Class Employees
         Me.btnChooseImage.Font = New System.Drawing.Font("Broadway", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnChooseImage.Location = New System.Drawing.Point(0, 0)
         Me.btnChooseImage.Name = "btnChooseImage"
-        Me.btnChooseImage.Size = New System.Drawing.Size(127, 49)
+        Me.btnChooseImage.Size = New System.Drawing.Size(131, 49)
         Me.btnChooseImage.TabIndex = 13
         Me.btnChooseImage.Text = "Choose Image"
         Me.btnChooseImage.TextAlign = System.Drawing.ContentAlignment.TopCenter
@@ -269,9 +293,9 @@ Partial Class Employees
         Me.Panel6.Controls.Add(Me.btnUpdate)
         Me.Panel6.Controls.Add(Me.btnCancel)
         Me.Panel6.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel6.Location = New System.Drawing.Point(337, 133)
+        Me.Panel6.Location = New System.Drawing.Point(335, 133)
         Me.Panel6.Name = "Panel6"
-        Me.Panel6.Size = New System.Drawing.Size(321, 49)
+        Me.Panel6.Size = New System.Drawing.Size(319, 49)
         Me.Panel6.TabIndex = 4
         '
         'btnSave
@@ -300,7 +324,7 @@ Partial Class Employees
         Me.btnUpdate.Font = New System.Drawing.Font("Verdana", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnUpdate.Image = Global.AVT_TRAKING.My.Resources.Resources.update
         Me.btnUpdate.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnUpdate.Location = New System.Drawing.Point(105, 6)
+        Me.btnUpdate.Location = New System.Drawing.Point(104, 6)
         Me.btnUpdate.Name = "btnUpdate"
         Me.btnUpdate.Size = New System.Drawing.Size(99, 23)
         Me.btnUpdate.TabIndex = 20
@@ -317,7 +341,7 @@ Partial Class Employees
         Me.btnCancel.Font = New System.Drawing.Font("Verdana", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnCancel.Image = Global.AVT_TRAKING.My.Resources.Resources.cancel
         Me.btnCancel.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnCancel.Location = New System.Drawing.Point(221, 0)
+        Me.btnCancel.Location = New System.Drawing.Point(219, 0)
         Me.btnCancel.Name = "btnCancel"
         Me.btnCancel.Size = New System.Drawing.Size(89, 34)
         Me.btnCancel.TabIndex = 21
@@ -333,7 +357,7 @@ Partial Class Employees
         Me.Panel5.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel5.Location = New System.Drawing.Point(3, 133)
         Me.Panel5.Name = "Panel5"
-        Me.Panel5.Size = New System.Drawing.Size(328, 49)
+        Me.Panel5.Size = New System.Drawing.Size(326, 49)
         Me.Panel5.TabIndex = 3
         '
         'Label18
@@ -360,16 +384,16 @@ Partial Class Employees
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.txtSearch.Location = New System.Drawing.Point(111, 4)
         Me.txtSearch.Name = "txtSearch"
-        Me.txtSearch.Size = New System.Drawing.Size(215, 23)
+        Me.txtSearch.Size = New System.Drawing.Size(213, 23)
         Me.txtSearch.TabIndex = 18
         '
         'Panel4
         '
         Me.Panel4.Controls.Add(Me.imgPhoto)
         Me.Panel4.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel4.Location = New System.Drawing.Point(664, 3)
+        Me.Panel4.Location = New System.Drawing.Point(660, 3)
         Me.Panel4.Name = "Panel4"
-        Me.Panel4.Size = New System.Drawing.Size(127, 124)
+        Me.Panel4.Size = New System.Drawing.Size(131, 124)
         Me.Panel4.TabIndex = 2
         '
         'imgPhoto
@@ -379,7 +403,7 @@ Partial Class Employees
         Me.imgPhoto.Dock = System.Windows.Forms.DockStyle.Fill
         Me.imgPhoto.Location = New System.Drawing.Point(0, 0)
         Me.imgPhoto.Name = "imgPhoto"
-        Me.imgPhoto.Size = New System.Drawing.Size(127, 124)
+        Me.imgPhoto.Size = New System.Drawing.Size(131, 124)
         Me.imgPhoto.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
         Me.imgPhoto.TabIndex = 12
         Me.imgPhoto.TabStop = False
@@ -394,9 +418,9 @@ Partial Class Employees
         Me.Panel3.Controls.Add(Me.txtSapNumber)
         Me.Panel3.Controls.Add(Me.chbState)
         Me.Panel3.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel3.Location = New System.Drawing.Point(337, 3)
+        Me.Panel3.Location = New System.Drawing.Point(335, 3)
         Me.Panel3.Name = "Panel3"
-        Me.Panel3.Size = New System.Drawing.Size(321, 124)
+        Me.Panel3.Size = New System.Drawing.Size(319, 124)
         Me.Panel3.TabIndex = 1
         '
         'Label5
@@ -424,7 +448,7 @@ Partial Class Employees
         Me.cmbTypeEmployee.FormattingEnabled = True
         Me.cmbTypeEmployee.Location = New System.Drawing.Point(121, 64)
         Me.cmbTypeEmployee.Name = "cmbTypeEmployee"
-        Me.cmbTypeEmployee.Size = New System.Drawing.Size(197, 24)
+        Me.cmbTypeEmployee.Size = New System.Drawing.Size(195, 24)
         Me.cmbTypeEmployee.TabIndex = 23
         '
         'txtSocialNumber
@@ -434,7 +458,7 @@ Partial Class Employees
         Me.txtSocialNumber.Location = New System.Drawing.Point(121, 5)
         Me.txtSocialNumber.MaxLength = 14
         Me.txtSocialNumber.Name = "txtSocialNumber"
-        Me.txtSocialNumber.Size = New System.Drawing.Size(199, 23)
+        Me.txtSocialNumber.Size = New System.Drawing.Size(197, 23)
         Me.txtSocialNumber.TabIndex = 10
         '
         'Label19
@@ -452,7 +476,7 @@ Partial Class Employees
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.txtSapNumber.Location = New System.Drawing.Point(121, 33)
         Me.txtSapNumber.Name = "txtSapNumber"
-        Me.txtSapNumber.Size = New System.Drawing.Size(199, 23)
+        Me.txtSapNumber.Size = New System.Drawing.Size(197, 23)
         Me.txtSapNumber.TabIndex = 11
         '
         'chbState
@@ -478,7 +502,7 @@ Partial Class Employees
         Me.Panel2.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel2.Location = New System.Drawing.Point(3, 3)
         Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(328, 124)
+        Me.Panel2.Size = New System.Drawing.Size(326, 124)
         Me.Panel2.TabIndex = 0
         '
         'Label1
@@ -523,7 +547,7 @@ Partial Class Employees
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.txtEmployeeNumber.Location = New System.Drawing.Point(164, -1)
         Me.txtEmployeeNumber.Name = "txtEmployeeNumber"
-        Me.txtEmployeeNumber.Size = New System.Drawing.Size(161, 23)
+        Me.txtEmployeeNumber.Size = New System.Drawing.Size(159, 23)
         Me.txtEmployeeNumber.TabIndex = 6
         '
         'txtFirsName
@@ -532,7 +556,7 @@ Partial Class Employees
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.txtFirsName.Location = New System.Drawing.Point(164, 28)
         Me.txtFirsName.Name = "txtFirsName"
-        Me.txtFirsName.Size = New System.Drawing.Size(161, 23)
+        Me.txtFirsName.Size = New System.Drawing.Size(159, 23)
         Me.txtFirsName.TabIndex = 7
         '
         'txtLastName
@@ -541,7 +565,7 @@ Partial Class Employees
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.txtLastName.Location = New System.Drawing.Point(164, 58)
         Me.txtLastName.Name = "txtLastName"
-        Me.txtLastName.Size = New System.Drawing.Size(161, 23)
+        Me.txtLastName.Size = New System.Drawing.Size(159, 23)
         Me.txtLastName.TabIndex = 8
         '
         'txtMiddleName
@@ -550,7 +574,7 @@ Partial Class Employees
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.txtMiddleName.Location = New System.Drawing.Point(164, 88)
         Me.txtMiddleName.Name = "txtMiddleName"
-        Me.txtMiddleName.Size = New System.Drawing.Size(161, 23)
+        Me.txtMiddleName.Size = New System.Drawing.Size(159, 23)
         Me.txtMiddleName.TabIndex = 9
         '
         'tbpOtherData
@@ -607,7 +631,7 @@ Partial Class Employees
         Me.TableLayoutPanel5.ColumnCount = 3
         Me.TableLayoutPanel5.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 48.47458!))
         Me.TableLayoutPanel5.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 51.52542!))
-        Me.TableLayoutPanel5.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 190.0!))
+        Me.TableLayoutPanel5.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 194.0!))
         Me.TableLayoutPanel5.Controls.Add(Me.Panel11, 1, 0)
         Me.TableLayoutPanel5.Controls.Add(Me.Panel10, 0, 0)
         Me.TableLayoutPanel5.Controls.Add(Me.Panel12, 2, 0)
@@ -626,9 +650,9 @@ Partial Class Employees
         Me.Panel11.Controls.Add(Me.txtPostalCode)
         Me.Panel11.Controls.Add(Me.Label11)
         Me.Panel11.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel11.Location = New System.Drawing.Point(294, 3)
+        Me.Panel11.Location = New System.Drawing.Point(292, 3)
         Me.Panel11.Name = "Panel11"
-        Me.Panel11.Size = New System.Drawing.Size(304, 136)
+        Me.Panel11.Size = New System.Drawing.Size(302, 136)
         Me.Panel11.TabIndex = 4
         '
         'Label10
@@ -646,7 +670,7 @@ Partial Class Employees
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.txtProvidence.Location = New System.Drawing.Point(135, 3)
         Me.txtProvidence.Name = "txtProvidence"
-        Me.txtProvidence.Size = New System.Drawing.Size(169, 26)
+        Me.txtProvidence.Size = New System.Drawing.Size(167, 26)
         Me.txtProvidence.TabIndex = 7
         '
         'txtPostalCode
@@ -655,7 +679,7 @@ Partial Class Employees
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.txtPostalCode.Location = New System.Drawing.Point(135, 44)
         Me.txtPostalCode.Name = "txtPostalCode"
-        Me.txtPostalCode.Size = New System.Drawing.Size(169, 26)
+        Me.txtPostalCode.Size = New System.Drawing.Size(167, 26)
         Me.txtPostalCode.TabIndex = 9
         '
         'Label11
@@ -678,7 +702,7 @@ Partial Class Employees
         Me.Panel10.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel10.Location = New System.Drawing.Point(3, 3)
         Me.Panel10.Name = "Panel10"
-        Me.Panel10.Size = New System.Drawing.Size(285, 136)
+        Me.Panel10.Size = New System.Drawing.Size(283, 136)
         Me.Panel10.TabIndex = 3
         '
         'txtCity
@@ -687,7 +711,7 @@ Partial Class Employees
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.txtCity.Location = New System.Drawing.Point(118, 78)
         Me.txtCity.Name = "txtCity"
-        Me.txtCity.Size = New System.Drawing.Size(168, 26)
+        Me.txtCity.Size = New System.Drawing.Size(166, 26)
         Me.txtCity.TabIndex = 5
         '
         'Label9
@@ -705,7 +729,7 @@ Partial Class Employees
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.txtStreat.Location = New System.Drawing.Point(117, 6)
         Me.txtStreat.Name = "txtStreat"
-        Me.txtStreat.Size = New System.Drawing.Size(168, 26)
+        Me.txtStreat.Size = New System.Drawing.Size(166, 26)
         Me.txtStreat.TabIndex = 1
         '
         'Label7
@@ -723,7 +747,7 @@ Partial Class Employees
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.txtNumber.Location = New System.Drawing.Point(118, 44)
         Me.txtNumber.Name = "txtNumber"
-        Me.txtNumber.Size = New System.Drawing.Size(168, 26)
+        Me.txtNumber.Size = New System.Drawing.Size(166, 26)
         Me.txtNumber.TabIndex = 3
         '
         'Label8
@@ -739,9 +763,9 @@ Partial Class Employees
         '
         Me.Panel12.Controls.Add(Me.chbAddress)
         Me.Panel12.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel12.Location = New System.Drawing.Point(604, 3)
+        Me.Panel12.Location = New System.Drawing.Point(600, 3)
         Me.Panel12.Name = "Panel12"
-        Me.Panel12.Size = New System.Drawing.Size(185, 136)
+        Me.Panel12.Size = New System.Drawing.Size(189, 136)
         Me.Panel12.TabIndex = 2
         '
         'chbAddress
@@ -957,6 +981,23 @@ Partial Class Employees
         Me.Panel15.Size = New System.Drawing.Size(165, 133)
         Me.Panel15.TabIndex = 0
         '
+        'btnNewPay
+        '
+        Me.btnNewPay.FlatAppearance.BorderSize = 0
+        Me.btnNewPay.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(41, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(185, Byte), Integer))
+        Me.btnNewPay.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnNewPay.Font = New System.Drawing.Font("Verdana", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnNewPay.ForeColor = System.Drawing.Color.White
+        Me.btnNewPay.Image = Global.AVT_TRAKING.My.Resources.Resources.save
+        Me.btnNewPay.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnNewPay.Location = New System.Drawing.Point(32, 88)
+        Me.btnNewPay.Name = "btnNewPay"
+        Me.btnNewPay.Size = New System.Drawing.Size(115, 28)
+        Me.btnNewPay.TabIndex = 15
+        Me.btnNewPay.Text = "New Pay"
+        Me.btnNewPay.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.btnNewPay.UseVisualStyleBackColor = True
+        '
         'chbPay
         '
         Me.chbPay.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
@@ -1040,6 +1081,99 @@ Partial Class Employees
         Me.Label15.TabIndex = 20
         Me.Label15.Text = "Pay Rate 3"
         '
+        'TabPage1
+        '
+        Me.TabPage1.Controls.Add(Me.TableLayoutPanel9)
+        Me.TabPage1.Location = New System.Drawing.Point(4, 27)
+        Me.TabPage1.Name = "TabPage1"
+        Me.TabPage1.Size = New System.Drawing.Size(810, 352)
+        Me.TabPage1.TabIndex = 2
+        Me.TabPage1.Text = "Insert By Excel"
+        Me.TabPage1.UseVisualStyleBackColor = True
+        '
+        'TableLayoutPanel9
+        '
+        Me.TableLayoutPanel9.ColumnCount = 2
+        Me.TableLayoutPanel9.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 77.16049!))
+        Me.TableLayoutPanel9.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 22.83951!))
+        Me.TableLayoutPanel9.Controls.Add(Me.TableLayoutPanel10, 1, 0)
+        Me.TableLayoutPanel9.Controls.Add(Me.tblEmployeesExcel, 0, 0)
+        Me.TableLayoutPanel9.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.TableLayoutPanel9.Location = New System.Drawing.Point(0, 0)
+        Me.TableLayoutPanel9.Name = "TableLayoutPanel9"
+        Me.TableLayoutPanel9.RowCount = 1
+        Me.TableLayoutPanel9.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 67.32954!))
+        Me.TableLayoutPanel9.Size = New System.Drawing.Size(810, 352)
+        Me.TableLayoutPanel9.TabIndex = 0
+        '
+        'TableLayoutPanel10
+        '
+        Me.TableLayoutPanel10.ColumnCount = 1
+        Me.TableLayoutPanel10.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
+        Me.TableLayoutPanel10.Controls.Add(Me.btnUploadExcel, 0, 1)
+        Me.TableLayoutPanel10.Controls.Add(Me.btnDownloadExcel, 0, 0)
+        Me.TableLayoutPanel10.Controls.Add(Me.txtMensajeProseso, 0, 3)
+        Me.TableLayoutPanel10.Controls.Add(Me.btnSaveEmployeeExcel, 0, 2)
+        Me.TableLayoutPanel10.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.TableLayoutPanel10.Location = New System.Drawing.Point(627, 3)
+        Me.TableLayoutPanel10.Name = "TableLayoutPanel10"
+        Me.TableLayoutPanel10.RowCount = 4
+        Me.TableLayoutPanel10.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 45.0!))
+        Me.TableLayoutPanel10.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 45.0!))
+        Me.TableLayoutPanel10.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 45.0!))
+        Me.TableLayoutPanel10.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
+        Me.TableLayoutPanel10.Size = New System.Drawing.Size(180, 346)
+        Me.TableLayoutPanel10.TabIndex = 0
+        '
+        'btnUploadExcel
+        '
+        Me.btnUploadExcel.Location = New System.Drawing.Point(3, 48)
+        Me.btnUploadExcel.Name = "btnUploadExcel"
+        Me.btnUploadExcel.Size = New System.Drawing.Size(174, 39)
+        Me.btnUploadExcel.TabIndex = 2
+        Me.btnUploadExcel.Text = "Upload Excel"
+        Me.btnUploadExcel.UseVisualStyleBackColor = True
+        '
+        'btnDownloadExcel
+        '
+        Me.btnDownloadExcel.Location = New System.Drawing.Point(3, 3)
+        Me.btnDownloadExcel.Name = "btnDownloadExcel"
+        Me.btnDownloadExcel.Size = New System.Drawing.Size(174, 39)
+        Me.btnDownloadExcel.TabIndex = 1
+        Me.btnDownloadExcel.Text = "Download Excel"
+        Me.btnDownloadExcel.UseVisualStyleBackColor = True
+        '
+        'txtMensajeProseso
+        '
+        Me.txtMensajeProseso.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.txtMensajeProseso.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtMensajeProseso.Location = New System.Drawing.Point(3, 138)
+        Me.txtMensajeProseso.Multiline = True
+        Me.txtMensajeProseso.Name = "txtMensajeProseso"
+        Me.txtMensajeProseso.ReadOnly = True
+        Me.txtMensajeProseso.Size = New System.Drawing.Size(174, 205)
+        Me.txtMensajeProseso.TabIndex = 0
+        '
+        'btnSaveEmployeeExcel
+        '
+        Me.btnSaveEmployeeExcel.Location = New System.Drawing.Point(3, 93)
+        Me.btnSaveEmployeeExcel.Name = "btnSaveEmployeeExcel"
+        Me.btnSaveEmployeeExcel.Size = New System.Drawing.Size(97, 39)
+        Me.btnSaveEmployeeExcel.TabIndex = 3
+        Me.btnSaveEmployeeExcel.Text = "Save"
+        Me.btnSaveEmployeeExcel.UseVisualStyleBackColor = True
+        '
+        'tblEmployeesExcel
+        '
+        Me.tblEmployeesExcel.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
+        Me.tblEmployeesExcel.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.tblEmployeesExcel.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.NEWID, Me.Number, Me.FirstName, Me.LastName, Me.MiddleName, Me.SocialNumber, Me.SAPNumber, Me.Photo, Me.Status, Me.TypeEmployee})
+        Me.tblEmployeesExcel.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.tblEmployeesExcel.Location = New System.Drawing.Point(3, 3)
+        Me.tblEmployeesExcel.Name = "tblEmployeesExcel"
+        Me.tblEmployeesExcel.Size = New System.Drawing.Size(618, 346)
+        Me.tblEmployeesExcel.TabIndex = 1
+        '
         'TitleBar
         '
         Me.TitleBar.BackColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(59, Byte), Integer), CType(CType(104, Byte), Integer))
@@ -1120,22 +1254,64 @@ Partial Class Employees
         Me.Panel1.Size = New System.Drawing.Size(818, 44)
         Me.Panel1.TabIndex = 0
         '
-        'btnNewPay
+        'NEWID
         '
-        Me.btnNewPay.FlatAppearance.BorderSize = 0
-        Me.btnNewPay.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(41, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(185, Byte), Integer))
-        Me.btnNewPay.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnNewPay.Font = New System.Drawing.Font("Verdana", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnNewPay.ForeColor = System.Drawing.Color.White
-        Me.btnNewPay.Image = Global.AVT_TRAKING.My.Resources.Resources.save
-        Me.btnNewPay.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnNewPay.Location = New System.Drawing.Point(32, 88)
-        Me.btnNewPay.Name = "btnNewPay"
-        Me.btnNewPay.Size = New System.Drawing.Size(115, 28)
-        Me.btnNewPay.TabIndex = 15
-        Me.btnNewPay.Text = "New Pay"
-        Me.btnNewPay.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.btnNewPay.UseVisualStyleBackColor = True
+        Me.NEWID.Frozen = True
+        Me.NEWID.HeaderText = "NEWID"
+        Me.NEWID.Name = "NEWID"
+        Me.NEWID.Visible = False
+        '
+        'Number
+        '
+        Me.Number.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+        Me.Number.Frozen = True
+        Me.Number.HeaderText = "Number"
+        Me.Number.Name = "Number"
+        Me.Number.Width = 64
+        '
+        'FirstName
+        '
+        Me.FirstName.HeaderText = "First Name"
+        Me.FirstName.Name = "FirstName"
+        '
+        'LastName
+        '
+        Me.LastName.HeaderText = "LastName"
+        Me.LastName.Name = "LastName"
+        '
+        'MiddleName
+        '
+        Me.MiddleName.HeaderText = "MiddleName"
+        Me.MiddleName.Name = "MiddleName"
+        '
+        'SocialNumber
+        '
+        Me.SocialNumber.HeaderText = "Social Number"
+        Me.SocialNumber.Name = "SocialNumber"
+        '
+        'SAPNumber
+        '
+        Me.SAPNumber.HeaderText = "SAP Number"
+        Me.SAPNumber.Name = "SAPNumber"
+        '
+        'Photo
+        '
+        Me.Photo.HeaderText = "Photo"
+        Me.Photo.Name = "Photo"
+        '
+        'Status
+        '
+        Me.Status.HeaderText = "Status"
+        Me.Status.Name = "Status"
+        Me.Status.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.Status.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
+        '
+        'TypeEmployee
+        '
+        Me.TypeEmployee.HeaderText = "TypeEmployee"
+        Me.TypeEmployee.Name = "TypeEmployee"
+        Me.TypeEmployee.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.TypeEmployee.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable
         '
         'Employees
         '
@@ -1195,6 +1371,11 @@ Partial Class Employees
         CType(Me.sprPayRate1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.sprPayRate3, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.sprPayRate2, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.TabPage1.ResumeLayout(False)
+        Me.TableLayoutPanel9.ResumeLayout(False)
+        Me.TableLayoutPanel10.ResumeLayout(False)
+        Me.TableLayoutPanel10.PerformLayout()
+        CType(Me.tblEmployeesExcel, System.ComponentModel.ISupportInitialize).EndInit()
         Me.TitleBar.ResumeLayout(False)
         Me.TitleBar.PerformLayout()
         CType(Me.btnMaximize, System.ComponentModel.ISupportInitialize).EndInit()
@@ -1292,4 +1473,22 @@ Partial Class Employees
     Friend WithEvents Panel15 As Panel
     Friend WithEvents Panel16 As Panel
     Friend WithEvents btnNewPay As Button
+    Friend WithEvents TabPage1 As TabPage
+    Friend WithEvents TableLayoutPanel9 As TableLayoutPanel
+    Friend WithEvents TableLayoutPanel10 As TableLayoutPanel
+    Friend WithEvents txtMensajeProseso As TextBox
+    Friend WithEvents btnUploadExcel As Button
+    Friend WithEvents btnDownloadExcel As Button
+    Friend WithEvents tblEmployeesExcel As DataGridView
+    Friend WithEvents btnSaveEmployeeExcel As Button
+    Friend WithEvents NEWID As DataGridViewTextBoxColumn
+    Friend WithEvents Number As DataGridViewTextBoxColumn
+    Friend WithEvents FirstName As DataGridViewTextBoxColumn
+    Friend WithEvents LastName As DataGridViewTextBoxColumn
+    Friend WithEvents MiddleName As DataGridViewTextBoxColumn
+    Friend WithEvents SocialNumber As DataGridViewTextBoxColumn
+    Friend WithEvents SAPNumber As DataGridViewTextBoxColumn
+    Friend WithEvents Photo As DataGridViewTextBoxColumn
+    Friend WithEvents Status As DataGridViewCheckBoxColumn
+    Friend WithEvents TypeEmployee As DataGridViewTextBoxColumn
 End Class
