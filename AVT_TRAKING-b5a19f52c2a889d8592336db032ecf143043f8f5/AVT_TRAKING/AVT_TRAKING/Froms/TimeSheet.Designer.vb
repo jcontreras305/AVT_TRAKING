@@ -51,13 +51,13 @@ Partial Class TimeSheet
         Me.btnDownloadExcel.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnDownloadExcel.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnDownloadExcel.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.btnDownloadExcel.Image = Global.AVT_TRAKING.My.Resources.Resources.upload2
+        Me.btnDownloadExcel.Image = Global.AVT_TRAKING.My.Resources.Resources.update
         Me.btnDownloadExcel.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.btnDownloadExcel.Location = New System.Drawing.Point(3, 28)
         Me.btnDownloadExcel.Name = "btnDownloadExcel"
         Me.btnDownloadExcel.Size = New System.Drawing.Size(127, 23)
         Me.btnDownloadExcel.TabIndex = 0
-        Me.btnDownloadExcel.Text = "Update Excel"
+        Me.btnDownloadExcel.Text = "Refresh WO"
         Me.btnDownloadExcel.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         Me.btnDownloadExcel.UseVisualStyleBackColor = True
         '
@@ -74,7 +74,7 @@ Partial Class TimeSheet
         Me.btnUploadRecords.Name = "btnUploadRecords"
         Me.btnUploadRecords.Size = New System.Drawing.Size(138, 23)
         Me.btnUploadRecords.TabIndex = 1
-        Me.btnUploadRecords.Text = "Upload Records"
+        Me.btnUploadRecords.Text = "Upload Time"
         Me.btnUploadRecords.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         Me.btnUploadRecords.UseVisualStyleBackColor = True
         '

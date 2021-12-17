@@ -23,6 +23,7 @@ Public Class scafoldTarking
     Dim sc As New scaffold
     Dim md As New ModificationSC
     Dim ds As New dismantle
+    Dim estMeter As New EstMeters
     Dim loadingData As Boolean 'Estas variables las utilizo para que los datos no activen los events de los elementos en la interfaz
     Dim loadingDataModification As Boolean
     Dim loadingDataDismentle As Boolean
@@ -1330,7 +1331,7 @@ Public Class scafoldTarking
         End If
         For Each row As DataGridViewRow In tblPd.Rows()
             If row.Cells(clmIdPD).Value IsNot Nothing Then
-                For Each row1 As Data.DataRow In tblProductosAux.Rows()'tabla que guarda todos los productos
+                For Each row1 As Data.DataRow In tblProductosAux.Rows() 'tabla que guarda todos los productos
                     Dim array = row.Cells(clmIdPD).Value.ToString.Split(" ")
                     Dim idPD = array(0)
                     If row1.ItemArray(0).ToString() = idPD Then
@@ -3629,5 +3630,24 @@ Public Class scafoldTarking
 
         End Try
     End Sub
+    Private Sub cmbScaffolType_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbScaffolType.SelectedIndexChanged
+        If Not loadingEst = True And cmbScaffolType.SelectedIndex > 0 Then
+            Dim array() As String = cmbScaffolType.SelectedItem.ToString().Split("   ")
+            estMeter.idEstCost = array(0)
+            estMeter.FACTOR = sprHeigthEst.Value
+            'estMeter.refreshValues()
+        End If
+    End Sub
 
+    Private Sub sprHeigthEst_Leave(sender As Object, e As EventArgs) Handles sprHeigthEst.Leave
+        If Not loadingEst = True Then
+            If cmbScaffolType.SelectedIndex > 0 Then
+                Dim array() As String = cmbScaffolType.SelectedItem.ToString().Split("   ")
+                estMeter.idEstCost = array(0)
+            End If
+            estMeter.FACTOR = sprHeigthEst.Value
+            'estMeter.est
+            'estMeter.refreshValues()
+        End If
+    End Sub
 End Class

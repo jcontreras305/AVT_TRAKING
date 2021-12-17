@@ -2166,7 +2166,23 @@ select cl.companyName, jb.jobNo, po.idPO,concat(wo.idWO,' ',ts.task) as 'Work Or
 	end
 go
 
-
+create proc sp_Cats_Employee_by_Porject
+@startdate as date,
+@finaldate as date,
+@employeenumber int
+as
+begin
+select concat(wo.idWO, ' ',ts.task) as 'W/PO Number',em.numberEmploye as 'Emp: Number', concat(em.lastName,', ', em.firstName,' ' ,em.middleName) as 'Employee Name', 
+	wc.description,hw.hoursST as 'ST Hours', hw.hoursOT as 'OT Hours', hw.dateWorked as 'Date Worked'
+	from hoursWorked as hw
+	inner join employees as em on em.idEmployee= hw.idEmployee
+	inner join workCode as wc on wc.idWorkCode= hw.idWorkCode
+	inner join task as ts on ts.idAux= hw.idAux
+	inner join workOrder wo on wo.idAuxWO=ts.idAuxWO
+	where em.numberEmploye=@employeenumber and hw.dateWorked between @startdate and @finaldate 
+	order by hw.dateWorked
+end
+go
 ----use master
 ----drop database VRT_TRAKING
 
@@ -2436,3 +2452,25 @@ go
 --	end
 --go
 
+--==============================================================================================================================
+--===== ESTE CODIGO ES PARA EL REPORTE DE EMPLOYEE BY PROYECTS =================================================================
+--==============================================================================================================================
+---- (CTRL+K) + (CTRL+C) Comentar 
+---- (CTRL+K) + (CTRL+U) Descomentar 
+--create proc sp_Cats_Employee_by_Porject
+--@startdate as date,
+--@finaldate as date,
+--@employeenumber int
+--as
+--begin
+--select concat(wo.idWO, ' ',ts.task) as 'W/PO Number',em.numberEmploye as 'Emp: Number', concat(em.lastName,', ', em.firstName,' ' ,em.middleName) as 'Employee Name', 
+--	wc.description,hw.hoursST as 'ST Hours', hw.hoursOT as 'OT Hours', hw.dateWorked as 'Date Worked'
+--	from hoursWorked as hw
+--	inner join employees as em on em.idEmployee= hw.idEmployee
+--	inner join workCode as wc on wc.idWorkCode= hw.idWorkCode
+--	inner join task as ts on ts.idAux= hw.idAux
+--	inner join workOrder wo on wo.idAuxWO=ts.idAuxWO
+--	where em.numberEmploye=@employeenumber and hw.dateWorked between @startdate and @finaldate 
+--	order by hw.dateWorked
+--end
+--go

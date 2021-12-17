@@ -211,8 +211,8 @@ Public Class TimeSheet
                             Next
                             If list.Count = 7 Then ' validando que se encotro el workCode
                                 For Each row As DataRow In tablaProject.Rows
-                                    If row.ItemArray(1) = timesheet.Cells(cont, 4).Text And timesheet.Cells(cont, 5).Text = row.ItemArray(3) Then 'idtask
-                                        list.Add(row.ItemArray(0)) '
+                                    If CStr(row.ItemArray(1)) = timesheet.Cells(cont, 4).Text And timesheet.Cells(cont, 5).Text = CStr(row.ItemArray(3)) Then 'idtask
+                                        list.Add(CStr(row.ItemArray(0))) '
                                         Exit For
 
                                     End If
@@ -222,22 +222,22 @@ Public Class TimeSheet
                                     If mtdHPW.InsertarRecord(list) Then
                                         cont += 1
                                     Else
-                                        filasError1 = filasError1 + " " + cont
+                                        filasError1 = filasError1 + " " + cont.ToString
                                         cont += 1
                                     End If
                                 Else
                                     txtSalida.Text = txtSalida.Text + vbCrLf + "Error at line(" + cont.ToString() + "), Could not insert the Record."
-                                    filasError1 = filasError1 + " " + cont
+                                    filasError1 = filasError1 + " " + cont.ToString()
                                     cont += 1
                                 End If
                             Else
                                 txtSalida.Text = txtSalida.Text + vbCrLf + "Error at line(" + cont.ToString() + "), Could not find the ''."
-                                filasError1 = filasError1 + " " + cont
+                                filasError1 = filasError1 + " " + cont.ToString()
                                 cont += 1
                             End If
                         Else
                             txtSalida.Text = txtSalida.Text + vbCrLf + "Error at line(" + cont.ToString() + "), Could not find the 'Employee ID'."
-                            filasError1 = filasError1 + " " + cont
+                            filasError1 = filasError1 + " " + cont.ToString()
                             cont += 1
                         End If
                     End While

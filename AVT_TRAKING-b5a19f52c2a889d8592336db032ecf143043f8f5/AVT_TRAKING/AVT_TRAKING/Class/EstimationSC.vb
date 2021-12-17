@@ -180,19 +180,16 @@ Public Class EstimationSC
             _length = length
         End Set
     End Property
-    Public Function SelectEstCostSC(ByVal idEstCost As String) As DataGridView
+    Public Function SelectEstCostSC(ByVal idEstCost As String, ByVal tbl As DataTable) As Boolean
         Try
             conectar()
             Dim cmd As New SqlCommand("select top 1 * from ScafEstCost where idEstCost = " + idEstCost, conn)
             If cmd.ExecuteNonQuery() Then
                 Dim da As New SqlDataAdapter(cmd)
-                Dim dt As New DataTable
-                da.Fill(dt)
-                Dim tblDGV As New DataGridView
-                tblDGV.DataSource = dt
-                Return tblDGV
+                da.Fill(tbl)
+                Return True
             Else
-                Return Nothing
+                Return False
             End If
         Catch ex As Exception
             Return Nothing

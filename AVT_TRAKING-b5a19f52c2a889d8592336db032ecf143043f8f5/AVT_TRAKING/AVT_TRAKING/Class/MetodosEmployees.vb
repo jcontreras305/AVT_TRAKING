@@ -49,7 +49,7 @@ where em1.numberEmploye like CONCAT('%','" + text + "','%') or
                 da.Fill(dt)
                 tblEmpledos.DataSource = dt
             Else
-                MsgBox("Error in the connection to Data Base check your sever")
+                MsgBox("Error in the connection to Data Base check your sever.")
             End If
         Catch ex As Exception
             MsgBox(ex.Message)

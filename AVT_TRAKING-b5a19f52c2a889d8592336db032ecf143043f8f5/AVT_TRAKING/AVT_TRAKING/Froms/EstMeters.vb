@@ -1,42 +1,44 @@
 ﻿Imports System.Data.SqlClient
 Public Class EstMeters
     Inherits ConnectioDB
-    Dim estSC As New EstimationSC
-    Dim tblScfCost As DataGridView
+
+    Dim tblScfCost As New DataTable
 
     Dim _FACTOR, _DECKSNUM As Integer
     Dim _idEstMeters, _EstNumber, _idEstCost As String
     Dim _PMANHRS, _TLABOR, _LDECKBP, _LABORBP, _LDECKDP, _LABORDP, _DECKMAD, _MADPRIC, _MA2DP, _MA3DP, _DECKDP, _DPRICE, _M2DP, _M2EDP, _M2MDP, _M2LDP As Decimal
     Dim _M3DP, _M3EDP, _M3MDP, _M3LDP, _EDMA2C, _EDMA3C, _EDMA2, _EDMA3, _EDM2C, _EDM3C, _EDM2, _EDM3, _TIMESED, _DA, _DECKBP, _BPRICE, _M2BP, _M2EBP As Decimal
     Dim _M2MBP, _M2LBP, _M3BP, _M3EBP, _M3MBP, _M3LBP As Decimal
-
-    Private Sub refreshValues()
-        If _idEstCost = "" Then
-            tblScfCost = estSC.SelectEstCostSC(_idEstCost)
+    Public Sub refreshValues(ByVal estSC As EstimationSC)
+        If _idEstCost <> "" Then
+            estSC.SelectEstCostSC(_idEstCost, tblScfCost)
             If tblScfCost IsNot Nothing And tblScfCost.Rows.Count > 0 Then
-                _M3LBP = (tblScfCost.Rows(0).Cells("M3LABORBP").Value + tblScfCost.Rows(0).Cells("M3LBI").Value) * (1 + _FACTOR)
-                _M3MBP = 0
-                _M3EBP = 0
-                _M3BP = 0
+                _M3LBP = (tblScfCost.Rows(0).ItemArray(tblScfCost.Columns.IndexOf("M3LABORBP")) + tblScfCost.Rows(0).ItemArray(tblScfCost.Columns.IndexOf("M3LBI"))) * (1 + _FACTOR) 'M3LBP = (M3LABORBP + M3LBI) * (1 + [HFactor])
+                _M3MBP = (tblScfCost.Rows(0).ItemArray(tblScfCost.Columns.IndexOf("M3MATBP"))) + (tblScfCost.Rows(0).ItemArray(tblScfCost.Columns.IndexOf("M3MBI")).Value) ' M3MBP = (M3MATBP) + (M3MBI)
+                _M3EBP = (tblScfCost.Rows(0).ItemArray(tblScfCost.Columns.IndexOf("M3EQBP"))) + (tblScfCost.Rows(0).ItemArray(tblScfCost.Columns.IndexOf("M3EBI")).Value) 'M3EBP = (M3EQBP) + (M3EBI)
+                _M3BP = (tblScfCost.Rows(0).ItemArray(tblScfCost.Columns.IndexOf("M3LABORBP"))) + (tblScfCost.Rows(0).ItemArray(tblScfCost.Columns.IndexOf("M3MATBP")).Value) + _M3EBP 'M3BP = M3LABORBP + M3MATBP + M3EBP
 
-                _M2LBP = 0
-                _M2MBP = 0
-                _M2EBP = 0
-                _M2BP = 0
+                _M2LBP = (tblScfCost.Rows(0).ItemArray(tblScfCost.Columns.IndexOf("M2LABORBP")) + tblScfCost.Rows(0).ItemArray(tblScfCost.Columns.IndexOf("M2LBI"))) * (1 + _FACTOR) 'M2LBP = (M2LABORBP + M2LBI) * (1+ [HFACTOR]) 
+                _M2MBP = (tblScfCost.Rows(0).ItemArray(tblScfCost.Columns.IndexOf("MA2MATBP"))) + (tblScfCost.Rows(0).ItemArray(tblScfCost.Columns.IndexOf("M2MBI")).Value) 'M2MBP = MA2MATBP + M2MBI
+                _M2EBP = (tblScfCost.Rows(0).ItemArray(tblScfCost.Columns.IndexOf("M2EQBP"))) + (tblScfCost.Rows(0).ItemArray(tblScfCost.Columns.IndexOf("M2EBI")).Value) 'M2EBP =  M2EQBP + M2EBI
+                _M2BP = (tblScfCost.Rows(0).ItemArray(tblScfCost.Columns.IndexOf("M2LABORBP"))) + (tblScfCost.Rows(0).ItemArray(tblScfCost.Columns.IndexOf("M2MATBP")).Value) + _M2MBP 'M2BP = M2LABORBP + M2MATBP + M2MBP ---- M2MBP ESTA ABAJO
 
-                _BPRICE = 0
-                _DECKBP = 0
-                _DA = 0
+                _BPRICE = (tblScfCost.Rows(0).ItemArray(tblScfCost.Columns.IndexOf("M3"))) + (_M3BP) 'BPRICE = M3 + M3BP ---- M3BP ESTA ABAJO
+                _DECKBP = (tblScfCost.Rows(0).ItemArray(tblScfCost.Columns.IndexOf("M2"))) * (tblScfCost.Rows(0).ItemArray(tblScfCost.Columns.IndexOf("DECKS"))) * _M2BP 'DECKBP = M2 * DECKS * M2BP ---- M2BP ESTA ABAJO 
+                _DA = estSC.daysActive 'DA = DAYSACTIVE ---- DE LA TABLA scfEstimation
+                Dim EDDAYS = (tblScfCost.Rows(0).ItemArray(tblScfCost.Columns.IndexOf("EDDAYS")))
+                Dim BILLINGDAYS = (tblScfCost.Rows(0).ItemArray(tblScfCost.Columns.IndexOf("BILLINGDAYS")))
+                _TIMESED = ((_DA / EDDAYS) + 1) * ((EDDAYS - BILLINGDAYS) / EDDAYS) - (If(((_DA + EDDAYS) / EDDAYS) = ((_DA + EDDAYS) + 1) And (_DA <= BILLINGDAYS), 1, 0)) 'TIMESED = ((DA / EDDAYS)+1)*EDDAYS-BILLINGDAYS/EDDAYS- IF{[((DA + EDDAYS) / EDDAYS)= (DA/EDDAYS)+1] AND [DA <= BILLINGDAYS], 1,0} ---- DA ESTA ABAJO
 
-                _TIMESED = 0
-                _EDM3 = 0
-                _EDM2 = 0
-                _EDM3C = 0
-                _EDM2C = 0
-                _EDMA3 = 0
-                _EDMA2 = 0
-                _EDMA3C = 0
-                _EDMA2C = 0
+                _EDM3 = _TIMESED * (tblScfCost.Rows(0).ItemArray(tblScfCost.Columns.IndexOf("M3EDCHARGES")))  'EDM3 = TIMESED * M3EDCHARGES ----TIMESED ESTA ABAJO
+                _EDM2 = _TIMESED * (tblScfCost.Rows(0).ItemArray(tblScfCost.Columns.IndexOf("M2EDCHARGES"))) 'EDM2 = TIMESED * M2EDCHARGES ----TIMESED ESTA ABAJO
+                _EDM3C = (tblScfCost.Rows(0).ItemArray(tblScfCost.Columns.IndexOf("M3"))) * _EDM3 'EDM3C = EDM3 * M3 ---- EDM3 ESTA ABAJO 
+                _EDM2C = (tblScfCost.Rows(0).ItemArray(tblScfCost.Columns.IndexOf("M2"))) * _EDM2  'EDM2C = EDM2 * M2 ---- EDM2 ESTA ABAJO
+                _EDMA3 = _TIMESED * (tblScfCost.Rows(0).ItemArray(tblScfCost.Columns.IndexOf("M3EDCHARGES"))) 'EDMA3 = TIMESED * M3EDCHARGES ---- TIMESED ESTA ABAJO
+                _EDMA2 = _TIMESED * (tblScfCost.Rows(0).ItemArray(tblScfCost.Columns.IndexOf("M2EDCHARGES"))) 'EDMA2 = TIMESED * M2EDCHARGES ---- TIMESED ESTA ABAJO
+                _EDMA3C = _EDMA3 * (tblScfCost.Rows(0).ItemArray(tblScfCost.Columns.IndexOf("M3"))) 'EDMA3C = EDMA3 * M3 ---- EDMA3 ESTA ABAJO
+                _EDMA2C = 0 'EDMA2C = EDMA2 * M2 ---- EDMA2 ESTA ABAJO
+
 
                 _M3LDP = 0
                 _M3MDP = 0
@@ -61,6 +63,8 @@ Public Class EstMeters
                 _TLABOR = 0
                 _PMANHRS = 0
             End If
+        Else
+            MsgBox("Select a type Estimation Cost please.")
         End If
     End Sub
 
