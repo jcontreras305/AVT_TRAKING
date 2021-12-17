@@ -29,12 +29,13 @@ Partial Class ReportsMenu
         Me.PictureBox2 = New System.Windows.Forms.PictureBox()
         Me.btnMaximize = New System.Windows.Forms.PictureBox()
         Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.Button1 = New System.Windows.Forms.Button()
         Me.btnClientBilling = New System.Windows.Forms.Button()
         Me.btnActAverage = New System.Windows.Forms.Button()
         Me.btnTimeSheet = New System.Windows.Forms.Button()
         Me.Panel3 = New System.Windows.Forms.Panel()
         Me.PictureBox4 = New System.Windows.Forms.PictureBox()
-        Me.Button1 = New System.Windows.Forms.Button()
+        Me.Button2 = New System.Windows.Forms.Button()
         Me.TitleBar.SuspendLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.btnRestore, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -112,6 +113,7 @@ Partial Class ReportsMenu
         'Panel2
         '
         Me.Panel2.BackColor = System.Drawing.Color.FromArgb(CType(CType(30, Byte), Integer), CType(CType(38, Byte), Integer), CType(CType(70, Byte), Integer))
+        Me.Panel2.Controls.Add(Me.Button2)
         Me.Panel2.Controls.Add(Me.Button1)
         Me.Panel2.Controls.Add(Me.btnClientBilling)
         Me.Panel2.Controls.Add(Me.btnActAverage)
@@ -119,8 +121,25 @@ Partial Class ReportsMenu
         Me.Panel2.Dock = System.Windows.Forms.DockStyle.Left
         Me.Panel2.Location = New System.Drawing.Point(0, 57)
         Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(166, 393)
+        Me.Panel2.Size = New System.Drawing.Size(206, 393)
         Me.Panel2.TabIndex = 2
+        '
+        'Button1
+        '
+        Me.Button1.FlatAppearance.BorderSize = 0
+        Me.Button1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(81, Byte), Integer), CType(CType(93, Byte), Integer), CType(CType(102, Byte), Integer))
+        Me.Button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.Button1.Font = New System.Drawing.Font("Verdana", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Button1.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.Button1.Image = Global.AVT_TRAKING.My.Resources.Resources.catsemployee
+        Me.Button1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.Button1.Location = New System.Drawing.Point(0, 183)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(200, 42)
+        Me.Button1.TabIndex = 3
+        Me.Button1.Text = "Cats Employee"
+        Me.Button1.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.Button1.UseVisualStyleBackColor = True
         '
         'btnClientBilling
         '
@@ -133,7 +152,7 @@ Partial Class ReportsMenu
         Me.btnClientBilling.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.btnClientBilling.Location = New System.Drawing.Point(3, 124)
         Me.btnClientBilling.Name = "btnClientBilling"
-        Me.btnClientBilling.Size = New System.Drawing.Size(166, 42)
+        Me.btnClientBilling.Size = New System.Drawing.Size(200, 42)
         Me.btnClientBilling.TabIndex = 2
         Me.btnClientBilling.Text = "Client Billings"
         Me.btnClientBilling.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -150,7 +169,7 @@ Partial Class ReportsMenu
         Me.btnActAverage.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.btnActAverage.Location = New System.Drawing.Point(0, 65)
         Me.btnActAverage.Name = "btnActAverage"
-        Me.btnActAverage.Size = New System.Drawing.Size(166, 42)
+        Me.btnActAverage.Size = New System.Drawing.Size(200, 42)
         Me.btnActAverage.TabIndex = 1
         Me.btnActAverage.Text = "Active Average"
         Me.btnActAverage.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -167,46 +186,47 @@ Partial Class ReportsMenu
         Me.btnTimeSheet.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.btnTimeSheet.Location = New System.Drawing.Point(3, 6)
         Me.btnTimeSheet.Name = "btnTimeSheet"
-        Me.btnTimeSheet.Size = New System.Drawing.Size(160, 42)
+        Me.btnTimeSheet.Size = New System.Drawing.Size(200, 42)
         Me.btnTimeSheet.TabIndex = 0
         Me.btnTimeSheet.Text = "Time Sheet"
+        Me.btnTimeSheet.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         Me.btnTimeSheet.UseVisualStyleBackColor = True
         '
         'Panel3
         '
         Me.Panel3.Controls.Add(Me.PictureBox4)
         Me.Panel3.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel3.Location = New System.Drawing.Point(166, 57)
+        Me.Panel3.Location = New System.Drawing.Point(206, 57)
         Me.Panel3.Name = "Panel3"
-        Me.Panel3.Size = New System.Drawing.Size(634, 393)
+        Me.Panel3.Size = New System.Drawing.Size(594, 393)
         Me.Panel3.TabIndex = 3
         '
         'PictureBox4
         '
         Me.PictureBox4.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.PictureBox4.Image = Global.AVT_TRAKING.My.Resources.Resources._exit
-        Me.PictureBox4.Location = New System.Drawing.Point(594, 6)
+        Me.PictureBox4.Location = New System.Drawing.Point(554, 6)
         Me.PictureBox4.Name = "PictureBox4"
         Me.PictureBox4.Size = New System.Drawing.Size(37, 34)
         Me.PictureBox4.TabIndex = 3
         Me.PictureBox4.TabStop = False
         '
-        'Button1
+        'Button2
         '
-        Me.Button1.FlatAppearance.BorderSize = 0
-        Me.Button1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(81, Byte), Integer), CType(CType(93, Byte), Integer), CType(CType(102, Byte), Integer))
-        Me.Button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.Button1.Font = New System.Drawing.Font("Verdana", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button1.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.Button1.Image = Global.AVT_TRAKING.My.Resources.Resources.catsemployee
-        Me.Button1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.Button1.Location = New System.Drawing.Point(0, 183)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(166, 42)
-        Me.Button1.TabIndex = 3
-        Me.Button1.Text = "Cats Employee"
-        Me.Button1.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.Button1.UseVisualStyleBackColor = True
+        Me.Button2.FlatAppearance.BorderSize = 0
+        Me.Button2.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(81, Byte), Integer), CType(CType(93, Byte), Integer), CType(CType(102, Byte), Integer))
+        Me.Button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.Button2.Font = New System.Drawing.Font("Verdana", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Button2.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.Button2.Image = Global.AVT_TRAKING.My.Resources.Resources.scaffoldestimate
+        Me.Button2.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.Button2.Location = New System.Drawing.Point(0, 240)
+        Me.Button2.Name = "Button2"
+        Me.Button2.Size = New System.Drawing.Size(200, 42)
+        Me.Button2.TabIndex = 4
+        Me.Button2.Text = "Scaffold Estimate"
+        Me.Button2.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.Button2.UseVisualStyleBackColor = True
         '
         'ReportsMenu
         '
@@ -245,4 +265,5 @@ Partial Class ReportsMenu
     Friend WithEvents btnActAverage As Button
     Friend WithEvents btnClientBilling As Button
     Friend WithEvents Button1 As Button
+    Friend WithEvents Button2 As Button
 End Class
