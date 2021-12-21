@@ -22,6 +22,8 @@ Partial Class Taxes
     'No lo modifique con el editor de código.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
         Me.TitleBar = New System.Windows.Forms.Panel()
         Me.btnRestore = New System.Windows.Forms.PictureBox()
@@ -1096,6 +1098,14 @@ Partial Class Taxes
         Me.tblTaxesST.BackgroundColor = System.Drawing.SystemColors.Window
         Me.tblTaxesST.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.tblTaxesST.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.clmEmployee, Me.FICA, Me.FUI, Me.SUI, Me.WC, Me.GenLiab, Me.Umbr, Me.Pollution, Me.Healt, Me.Fringe, Me.Small, Me.PPE, Me.Consumable, Me.Scaffold, Me.YoYos, Me.Mesh, Me.Miselaneos, Me.Overhead, Me.Profit, Me.STTOTAL})
+        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle1.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.tblTaxesST.DefaultCellStyle = DataGridViewCellStyle1
         Me.tblTaxesST.Dock = System.Windows.Forms.DockStyle.Fill
         Me.tblTaxesST.Location = New System.Drawing.Point(3, 3)
         Me.tblTaxesST.Name = "tblTaxesST"
@@ -1232,6 +1242,14 @@ Partial Class Taxes
         Me.tblAverage.BackgroundColor = System.Drawing.SystemColors.Window
         Me.tblAverage.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.tblAverage.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.EmployeeBW, Me.FICAAV, Me.FUIAV, Me.SUIAV, Me.WCAV, Me.GenLiabAV, Me.UmbrAV, Me.PullutionAV, Me.HealtAV, Me.FringeAV, Me.SmallAV, Me.PPEAV, Me.ConsumableAV, Me.ScaffoldAV, Me.YoyosAV, Me.MeshAV, Me.MiselaneosAV, Me.OverheadAV, Me.ProfitAV, Me.STTOTALAV})
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle2.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.tblAverage.DefaultCellStyle = DataGridViewCellStyle2
         Me.tblAverage.Dock = System.Windows.Forms.DockStyle.Fill
         Me.tblAverage.Location = New System.Drawing.Point(3, 201)
         Me.tblAverage.Name = "tblAverage"

@@ -291,7 +291,7 @@ ha.idHomeAdress, ha.avenue ,ha.number, ha.city ,ha.providence,ha.postalCode,phot
 from
 clients as cln left join job as jb on jb.idClient = cln.idClient
 inner join projectOrder as po on po.jobNo = jb.jobNo
-left join workOrder as wo on wo.idPO = po.idPO
+left join workOrder as wo on wo.idPO = po.idPO and wo.jobNo = jb.jobNo
 left join task as tk on tk.idAuxWO = wo.idAuxWO
 where "
 

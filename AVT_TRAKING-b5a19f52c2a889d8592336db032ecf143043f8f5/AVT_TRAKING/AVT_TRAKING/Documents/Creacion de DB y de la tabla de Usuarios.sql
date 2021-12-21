@@ -1,7 +1,7 @@
 use master
 Go
 
-create database VRT_TRAKING
+create  database VRT_TRAKING
 GO
 
 use VRT_TRAKING
@@ -580,11 +580,13 @@ GO
 --##########################################################################################
 
 create table projectOrder(
-	idPO bigint primary key not null ,
-	jobNo bigint 
+	idPO bigint not null ,
+	jobNo bigint not null 
 )
 GO
-
+ALTER TABLE projectOrder
+ADD CONSTRAINT pk_idPOjobNum PRIMARY KEY (idPO,jobNo)
+GO
 --##########################################################################################
 --##################  TABLA DE PROYECT PRODUCT SCAFFOLD ####################################
 --##########################################################################################
@@ -766,8 +768,7 @@ go
 create table scfFactor(
 	tpid int not null,
 	heigth float not null,
-	hFactor float not null,
-	constraint id primary key (tpid,heigth)
+	hFactor float not null
 )
 go
 
@@ -787,7 +788,7 @@ GO
 
 create table task (
 	idAux varchar(36) primary key not null,
-	task varchar(5),
+	task varchar(7),
 	idAuxWO varchar(36),
 	totalSpend float,
 	equipament varchar(30),
@@ -899,7 +900,8 @@ GO
 create table workOrder(
 	idAuxWO varchar(36) primary key not null,
 	idWO varchar(14)  not null,
-	idPO bigint not null
+	idPO bigint not null,
+	jobNum bigint not null
 )
 GO
 
@@ -1204,6 +1206,8 @@ GO
 
 ALTER TABLE    projectOrder   WITH CHECK ADD  CONSTRAINT  fk_jobNo_PO  FOREIGN KEY( jobNo )
 REFERENCES    job  ( jobNo )
+on update cascade
+on delete cascade
 GO
 
 --##########################################################################################
@@ -1312,8 +1316,8 @@ GO
 --##################  FOREIG KEYS WORKORDER ################################################
 --##########################################################################################
 
-ALTER TABLE    workOrder   WITH CHECK ADD  CONSTRAINT  fk_idPO_workOrder  FOREIGN KEY( idPO )
-REFERENCES    projectOrder  ( idPO )
+ALTER TABLE    workOrder   WITH CHECK ADD  CONSTRAINT  fk_idPO_workOrder  FOREIGN KEY( idPO , jobNum )
+REFERENCES    projectOrder  ( idPO , jobNo)
 on update cascade
 on delete cascade
 GO
@@ -1368,7 +1372,6 @@ begin
 	end 
 end
 GO
-
 
 create proc [dbo].[sp_Insert_Cient] 
 	@ClientID int,
@@ -1545,57 +1548,6 @@ begin
 end
 go
 
---create proc sp_Insert_Cient
---	@ClientID int,
---	@FirstName varchar (30),
---	@MiddleName varchar (30),
---	@LastName varchar (30),
---	@CompanyName varchar (50),
---	@Status char(1),
---	--Contact
---	@phoneNumer1 varchar(13),
---	@phoneNumer2 varchar(13),
---	@email varchar(50),
---	--Addres
---	@avenue varchar(80),
---	@number int,
---	@city varchar (20),
---	@providence varchar (20),
---	@postalcode int
---as
---declare @error int  -- declaro variables para los ID que son nuevos y una variable de error
---declare @idClient varchar(36) 
---declare @idContact varchar(36)
---declare @idHomeAdress varchar(36)
---begin 
---	begin tran 
---		begin try
---			--se inserta un contacto
-			
---				set @idContact = NEWID() 
---				insert into contact values(@idContact,@phoneNumer1,@phoneNumer2,@email)
---				if @@ERROR <> 0 begin set @error = @@ERROR goto solveproblem end
-			
---				set @idHomeAdress = NEWID()
---				insert into HomeAddress values (@idHomeAdress , @avenue , @number , @city , @providence , @postalCode)
---				if @@ERROR <> 0 begin set @error = @@ERROR goto solveproblem end 
-			
---				set @idClient = NEWID()
---				insert into clients values (@idClient , @ClientID, @FirstName, @MiddleName, @LastName , @CompanyName, @idContact , @idHomeAdress ,@Status)
---				if @@ERROR <> 0 begin set @error = @@ERROR goto solveproblem end 
-			
---		end try
---		begin catch
---			goto solveproblem
---		end catch
---	commit tran
---	solveproblem:
---	if @error <> 0
---	begin 
---		rollback tran 
---	end
---end
---go
 
 CREATE proc  [dbo].[sp_insert_Material]
 @nombre varchar(50),
@@ -1636,49 +1588,7 @@ begin
 		set @msg = concat('Is problably that the Material ',@nombre,' have been inserted, or try to changue the Vendor')
 	end  
 end
-GO
-
---create procedure sp_insert_Material
---@nombre varchar(50),
---@numero int,
---@idVendor varchar(36),
---@status char(1),
---@msg varchar(100) out
---as
---declare @idMaterial varchar(36)
---declare @idDM varchar(36)
---declare @error int
---begin
---	begin tran
---		begin try	 
---			set @idMaterial = NEWID()
---			set @idDM = NEWID()
---			if not @nombre = '' and not @idVendor = ''
---			begin 
---				insert into material values (@idMaterial,@numero,@nombre,@status)
---				select * from detalleMaterial
---				insert into detalleMaterial values (@idDM,'','','',0.0,'',0.0,@idMaterial,@idVendor,'')
---				insert into existences values (@idDM , 0.0)
---				set @msg= 'Successful'
---			end
---			else 
---			begin 
---				set @error = 1
---				goto solveProblem
---			end
---		end try
---		begin catch
---			goto solveProblem
---		end catch
---	commit tran
---	solveProblem:
---	if @error <> 0 
---	begin 
---		rollback tran
---		set @msg = concat('Is problably that the Material ',@nombre,' have been inserted, or try to changue the Vendor')
---	end  
---end
---go 
+GO 
 
 CREATE procedure [dbo].[sp_insert_Material_Excel]
 @nombre varchar(50),
@@ -1973,11 +1883,11 @@ begin
 	if @IntialDate is not null and @FinalDate is not null
 	begin 
 		select cast( GETDATE() AS DATE) as 'Date',DATEADD(DAY, 8 - DATEPART(WEEKDAY, GETDATE()), CAST(GETDATE() AS DATE)) as 'Weekending' , jb.jobNo ,po.idPO ,wo.idAuxWO ,wo.idWO ,tk.idAux,tk.task , tk.equipament,tk.description,
-			hw.hoursST,hw.hoursOT,hw.hours3,hw.dateWorked, wc.name as 'Code', hw.schedule as 'Shift',  tk.expCode as 'ExpCode', concat(tk.percentComplete,'%')  as 'Complete',
+			hw.hoursST,hw.hoursOT,hw.hours3,hw.dateWorked, wc.name as 'Code', hw.schedule as 'Shift',  tk.expCode as 'ExpCode', concat(tk.percentComplete,'%')  as 'Complete',tk.estimateHours as 'HrEst',
 			CONCAT(em.lastName,' ',em.firstName,' ',em.middleName) as 'Employee', em.numberEmploye as 'Emp: Number' , em.typeEmployee as 'Class'
 			from job as jb 
 			inner join projectOrder as po on po.jobNo = jb.jobNo
-			inner join workOrder as wo on wo.idPO = po.idPO 
+			inner join workOrder as wo on wo.idPO = po.idPO and wo.jobNo = po.jobNo
 			inner join task as tk on tk.idAuxWO = wo.idAuxWO
 			inner join hoursWorked as hw on hw.idAux = tk.idAux
 			inner join workCode as wc on wc.idWorkCode = hw.idWorkCode
@@ -1987,11 +1897,11 @@ begin
 	else
 	begin 
 		select cast( GETDATE() AS DATE) as 'Date',DATEADD(DAY, 8 - DATEPART(WEEKDAY, GETDATE()), CAST(GETDATE() AS DATE)) as 'Weekending' , jb.jobNo ,po.idPO ,wo.idAuxWO ,wo.idWO ,tk.idAux,tk.task , tk.equipament,tk.description,
-			hw.hoursST,hw.hoursOT,hw.hours3,hw.dateWorked, wc.name as 'Code', hw.schedule as 'Shift', tk.expCode as 'ExpCode', concat( tk.percentComplete,'%') as 'Complete',
+			hw.hoursST,hw.hoursOT,hw.hours3,hw.dateWorked, wc.name as 'Code', hw.schedule as 'Shift', tk.expCode as 'ExpCode', concat( tk.percentComplete,'%') as 'Complete',tk.estimateHours as 'HrEst',
 			CONCAT(em.lastName,' ',em.firstName,' ',em.middleName) as 'Employee', em.numberEmploye as 'Emp: Number' , em.typeEmployee as 'Class'
 			from job as jb 
 			inner join projectOrder as po on po.jobNo = jb.jobNo
-			inner join workOrder as wo on wo.idPO = po.idPO 
+			inner join workOrder as wo on wo.idPO = po.idPO and wo.jobNo = po.jobNo
 			inner join task as tk on tk.idAuxWO = wo.idAuxWO
 			inner join hoursWorked as hw on hw.idAux = tk.idAux
 			inner join workCode as wc on wc.idWorkCode = hw.idWorkCode
@@ -2021,7 +1931,7 @@ create proc sp_Client_billings_Project
 as
 begin
 if @startDate is not null and @FinalDate is not null
-	begin
+begin
 select cl.companyName, jb.jobNo, po.idPO,concat(wo.idWO,' ',ts.task) as 'Work Order',
 	ts.description as 'Project Desription',
 	
@@ -2085,15 +1995,15 @@ select cl.companyName, jb.jobNo, po.idPO,concat(wo.idWO,' ',ts.task) as 'Work Or
 	from Clients as cl
 	inner join job as jb on jb.idClient= cl.idClient
 	inner join projectOrder as po on po.jobNo= jb.jobNo
-	inner join workOrder as wo on wo.idPO=po.idPO
+	inner join workOrder as wo on wo.idPO=po.idPO and wo.jobNo = po.jobNo
 	inner join task as ts on ts.idAuxWO=wo.idAuxWO
 	 
 	where cl.numberClient=@clientnum
 	order by jb.jobNo asc
 	end
 
-	else
-	begin 
+ELSE
+begin 
 	select cl.companyName, jb.jobNo, po.idPO,concat(wo.idWO,' ',ts.task) as 'Work Order',
 	ts.description as 'Project Desription',
 	
@@ -2157,13 +2067,13 @@ select cl.companyName, jb.jobNo, po.idPO,concat(wo.idWO,' ',ts.task) as 'Work Or
 	from Clients as cl
 	inner join job as jb on jb.idClient= cl.idClient
 	inner join projectOrder as po on po.jobNo= jb.jobNo
-	inner join workOrder as wo on wo.idPO=po.idPO
+	inner join workOrder as wo on wo.idPO=po.idPO and wo.jobNo = po.jobNo
 	inner join task as ts on ts.idAuxWO=wo.idAuxWO
 	 
 	where cl.numberClient=@clientnum
 	order by jb.jobNo asc
-	end
-	end
+end
+end
 go
 
 create proc sp_Cats_Employee_by_Porject

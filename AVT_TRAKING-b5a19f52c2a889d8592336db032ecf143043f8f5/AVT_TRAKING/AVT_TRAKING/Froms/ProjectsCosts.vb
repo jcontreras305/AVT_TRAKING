@@ -489,29 +489,20 @@ Public Class ProjectsCosts
     End Sub
 
     Public Function validarTask() As Boolean
-        If txtTask.Text.Length >= 4 And txtTask.Text.Length <= 6 Then
-            If soloNumero(txtTask.Text) Then
-                Dim flagTask As Boolean = True
-                For Each row As DataRow In tablasDeTareas.Rows
-                    If txtTask.Text = row.ItemArray(3).ToString Then
-                        flagTask = False
-                    End If
-                Next
-                Return flagTask
-            Else
-                Return False
-            End If
-        ElseIf txtTask.Text = "" Then
-            Return True
+        If txtTask.Text.Length >= 3 And txtTask.Text.Length <= 6 Then
+            Dim flagTask As Boolean = True
+            For Each row As DataRow In tablasDeTareas.Rows
+                If txtTask.Text = row.ItemArray(3).ToString Then
+                    flagTask = False
+                End If
+            Next
+            Return flagTask
         Else
-            If txtTask.Text.Length < 4 Then
-                MessageBox.Show("The parameter 'Task' only admit numbers that have 4 to 6 digits.", "Error", MessageBoxButtons.YesNo, MessageBoxIcon.Error)
+            If txtTask.Text.Length < 3 Then
+                MessageBox.Show("The 'Task' parameter admits a code whose length is between 3 and 7 characters..", "Error", MessageBoxButtons.YesNo, MessageBoxIcon.Error)
                 Return False
             ElseIf txtTask.Text.Length > 6 Then
-                MessageBox.Show("The parameter 'Task' only admit numbers that have 4 to 6 digits.", "Error", MessageBoxButtons.YesNo, MessageBoxIcon.Error)
-                Return False
-            ElseIf Not soloNumero(txtTask.Text) Then
-                MessageBox.Show("The parameter 'Task' only admit digits.", "Error", MessageBoxButtons.YesNo, MessageBoxIcon.Error)
+                MessageBox.Show("The 'Task' parameter admits a code whose length is between 3 and 7 characters.", "Error", MessageBoxButtons.YesNo, MessageBoxIcon.Error)
                 Return False
             Else
                 Return False

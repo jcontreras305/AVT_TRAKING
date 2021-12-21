@@ -37,22 +37,21 @@ Public Class EstMeters
                 _EDMA3 = _TIMESED * (tblScfCost.Rows(0).ItemArray(tblScfCost.Columns.IndexOf("M3EDCHARGES"))) 'EDMA3 = TIMESED * M3EDCHARGES ---- TIMESED ESTA ABAJO
                 _EDMA2 = _TIMESED * (tblScfCost.Rows(0).ItemArray(tblScfCost.Columns.IndexOf("M2EDCHARGES"))) 'EDMA2 = TIMESED * M2EDCHARGES ---- TIMESED ESTA ABAJO
                 _EDMA3C = _EDMA3 * (tblScfCost.Rows(0).ItemArray(tblScfCost.Columns.IndexOf("M3"))) 'EDMA3C = EDMA3 * M3 ---- EDMA3 ESTA ABAJO
-                _EDMA2C = 0 'EDMA2C = EDMA2 * M2 ---- EDMA2 ESTA ABAJO
+                _EDMA2C = _EDMA2 * (tblScfCost.Rows(0).ItemArray(tblScfCost.Columns.IndexOf("M2"))) 'EDMA2C = EDMA2 * M2 ---- EDMA2 ESTA ABAJO
 
+                _M3LDP = ((tblScfCost.Rows(0).ItemArray(tblScfCost.Columns.IndexOf("M3LABORDP"))) + (tblScfCost.Rows(0).ItemArray(tblScfCost.Columns.IndexOf("M3LDI")))) * (1 + _FACTOR) 'M3LDP = (M3LABORDP + M3LDI) * (1 + [HFACTOR])
+                _M3MDP = (tblScfCost.Rows(0).ItemArray(tblScfCost.Columns.IndexOf("M3MDI"))) + (tblScfCost.Rows(0).ItemArray(tblScfCost.Columns.IndexOf("M3MATDP"))) 'M3MDP = M3MDI + M3MATDP
+                _M3EDP = (tblScfCost.Rows(0).ItemArray(tblScfCost.Columns.IndexOf("M3EQDP"))) + (tblScfCost.Rows(0).ItemArray(tblScfCost.Columns.IndexOf("M3EDI"))) 'M3EDP = M3EQDP + M3EDI
+                _M3DP = _M3LDP + _M3MDP + _M3EDP 'M3DP = M3LDP + M3MDP + M3EDP ---- M3LDP, M3MDP, M3EDP ESTAN ABAJO
 
-                _M3LDP = 0
-                _M3MDP = 0
-                _M3EDP = 0
-                _M3DP = 0
+                _M2LDP = ((tblScfCost.Rows(0).ItemArray(tblScfCost.Columns.IndexOf("M2LABORDP"))) + (tblScfCost.Rows(0).ItemArray(tblScfCost.Columns.IndexOf("M2LDI")))) * (1 + _FACTOR) 'M2LDP = (M2LABORDP + M2LDI)*(1 + [HFACTOR])
+                _M2MDP = (tblScfCost.Rows(0).ItemArray(tblScfCost.Columns.IndexOf("M2MATDP"))) + (tblScfCost.Rows(0).ItemArray(tblScfCost.Columns.IndexOf("M2MDI"))) 'M2MDP = M2MATDP + M2MDI
+                _M2EDP = (tblScfCost.Rows(0).ItemArray(tblScfCost.Columns.IndexOf("M2EQDP"))) + (tblScfCost.Rows(0).ItemArray(tblScfCost.Columns.IndexOf("M2EDI"))) 'M2EDP = M2EQDP + M2EDI
+                _M2DP = _M2LDP + _M2MDP + _M2EDP 'M2DP = M2LDP + M2MDP + M2EDP ---- M2LDP, M2MDP, M2EDP ESTAN ABAJO
 
-                _M2LDP = 0
-                _M2MDP = 0
-                _M2EDP = 0
-                _M2DP = 0
-
-                _DPRICE = 0
-                _DECKDP = 0
-                _MA3DP = 0
+                _DPRICE = (tblScfCost.Rows(0).ItemArray(tblScfCost.Columns.IndexOf("M3"))) * _M3DP 'DPRICE = M3 * M3DP ---- M3DP ESTA ABAJO
+                _DECKDP = (tblScfCost.Rows(0).ItemArray(tblScfCost.Columns.IndexOf("M2"))) * estSC.descks * _M2DP 'DECKDP = M2 * DECKS * M2DP ---- M2DP ESTA ABAJO
+                _MA3DP = (tblScfCost.Rows(0).ItemArray(tblScfCost.Columns.IndexOf("M2LABORDP"))) + (tblScfCost.Rows(0).ItemArray(tblScfCost.Columns.IndexOf("MA3MATDP"))) + (tblScfCost.Rows(0).ItemArray(tblScfCost.Columns.IndexOf("MA3EQDP")))  'MA3DP = MA3LABORDP + MA3MATDP + MA3EQDP
                 _MA2DP = 0
                 _MADPRIC = 0
                 _DECKMAD = 0

@@ -189,7 +189,7 @@ from workOrder
 
             Dim cmdJob As New SqlCommand("insert into job values (" + datosPO(0) + ",'" + datosPO(1) + "', '" + datosPO(2) + "'," + If(datosPO(3) = "", "NULL", datosPO(3)) + ", " + If(datosPO(4) = "", "NULL", datosPO(4)) + "," + datosPO(5) + ",'" + idClient + "')", conn)
             Dim cmdProyect As New SqlCommand("insert into projectOrder values (" + idPOMax + "," + datosPO(0) + ")", conn)
-            Dim cmdWO As New SqlCommand("insert into workOrder values ('" + idAuxWO + "','" + idWOMax + "'," + idPOMax + ")", conn)
+            Dim cmdWO As New SqlCommand("insert into workOrder values ('" + idAuxWO + "','" + idWOMax + "'," + idPOMax + ", " + datosPO(0) + " )", conn)
             Dim cmdTask As New SqlCommand("insert into task values (NEWID(),'','" + idAuxWO + "',0.0,'','','',0.0,GETDATE(),DATEADD(MM,1,GETDATE()),'','',0.0,'0',0)", conn)
             Dim tran As SqlTransaction
             tran = conn.BeginTransaction()
@@ -243,7 +243,7 @@ from workOrder
                 Exit While
             End While
             reader0.Close()
-            If flagJob > 0 Then ' validando que exista el jobb no de lo contrario no se podra  insertar lo demas 
+            If flagJob > 0 Then ' validando que exista el jobNo de lo contrario no se podra  insertar lo demas 
                 Dim cmdCosultaPO As New SqlCommand("select count(idPO) as 'cantidadPO' from projectOrder where jobNo = " + CStr(projectN.jobNum) + " and idPO = '" + projectN.idPO + "'", conn)
                 Dim reader As SqlDataReader = cmdCosultaPO.ExecuteReader()
                 Dim flagPO As String = ""
@@ -252,7 +252,7 @@ from workOrder
                     Exit While
                 End While
                 reader.Close()
-                Dim cmdCosultaWO As New SqlCommand("select count(idWO) as 'cantidadWO' from workOrder where idWO = '" + projectN.idWorkOrder + "' and idPO = '" + projectN.idPO + "'", conn)
+                Dim cmdCosultaWO As New SqlCommand("select count(idWO) as 'cantidadWO' from workOrder where idWO = '" + projectN.idWorkOrder + "' and idPO = '" + projectN.idPO + "' and jobNo = " + CStr(projectN.jobNum), conn)
                 Dim reader1 As SqlDataReader = cmdCosultaWO.ExecuteReader()
                 Dim flagWO As String = ""
                 While reader1.Read()
@@ -277,7 +277,7 @@ from workOrder
                             Return False
                         Else
                             Dim cmdInsertTask1 As New SqlCommand("insert into task 
-                        values (NEWID(),'" + CStr(projectN.idTask) + "'," + If(projectN.idAuxWO = "", "(select top 1 workOrder.idAuxWO  from workOrder where idWO = '" + CStr(projectN.idWorkOrder) + "' and idPO = '" + CStr(projectN.idPO) + "')", "Null") + ",0.0,'" + projectN.equipament + "','" + projectN.manager + "'
+                        values (NEWID(),'" + CStr(projectN.idTask) + "'," + If(projectN.idAuxWO = "", "(select top 1 workOrder.idAuxWO  from workOrder where idWO = '" + CStr(projectN.idWorkOrder) + "' and idPO = '" + CStr(projectN.idPO) + "' and jobNo = " + CStr(projectN.jobNum) + ")", "Null") + ",0.0,'" + projectN.equipament + "','" + projectN.manager + "'
                         ,'" + projectN.description + "'," + CStr(projectN.totalBilling) + ",'" + validaFechaParaSQl(projectN.beginDate) + "','" + validaFechaParaSQl(projectN.endDate) + "'
                         ,'" + projectN.expCode + "','" + projectN.accountNum + "'," + CStr(projectN.estimateHour) + ",'" + CStr(projectN.status) + "'," + CStr(projectN.PercentComplete) + ")", conn)
                             If cmdInsertTask1.ExecuteNonQuery = 1 Then
@@ -289,7 +289,8 @@ from workOrder
                             End If
                         End If
                     Else
-                        Dim cmdInsertNewWO As New SqlCommand("insert into workOrder values('" + projectN.idWorkOrder + "'," + CStr(projectN.jobNum) + ")", conn)
+                        Dim newWO = System.Guid.NewGuid.ToString()
+                        Dim cmdInsertNewWO As New SqlCommand("insert into workOrder values('" + newWO + "', '" + projectN.idWorkOrder + "'," + CStr(projectN.idPO) + ", " + CStr(projectN.jobNum) + ")", conn)
                         Dim cmdInsertTask2 As New SqlCommand("insert into task 
                         values (NEWID(),'" + CStr(projectN.idTask) + "','" + projectN.idAuxWO + "',0.0,'" + projectN.equipament + "','" + projectN.manager + "'
                         ,'" + projectN.description + "'," + CStr(projectN.totalBilling) + ",'" + validaFechaParaSQl(projectN.beginDate) + "','" + validaFechaParaSQl(projectN.endDate) + "'
@@ -314,7 +315,7 @@ from workOrder
                 Else ' en este caso se debe insertar un nuevo PO un WO y el nuevo TASk
                     Dim cmdInsertNewPO As New SqlCommand("insert into projectOrder values (" + projectN.idPO + "," + CStr(projectN.jobNum) + ")", conn)
                     Dim newWO = System.Guid.NewGuid.ToString()
-                    Dim cmdInsertNewWO As New SqlCommand("insert into workOrder values('" + newWO + "','" + projectN.idWorkOrder + "'," + CStr(projectN.idPO) + ")", conn)
+                    Dim cmdInsertNewWO As New SqlCommand("insert into workOrder values('" + newWO + "','" + projectN.idWorkOrder + "'," + CStr(projectN.idPO) + ", " + CStr(projectN.jobNum) + ")", conn)
                     Dim cmdInsertTask2 As New SqlCommand("insert into task 
                         values (NEWID(),'" + CStr(projectN.idTask) + "','" + newWO + "',0.0,'" + projectN.equipament + "','" + projectN.manager + "'
                         ,'" + projectN.description + "'," + CStr(projectN.totalBilling) + ",'" + validaFechaParaSQl(projectN.beginDate) + "','" + validaFechaParaSQl(projectN.endDate) + "'
@@ -607,7 +608,7 @@ tk.idAux,
 wo.idAuxWO
 from job as jb 
 inner join projectOrder as po on po.jobNo = jb.jobNo
-inner join workOrder as wo on wo.idPO = po.idPO 
+inner join workOrder as wo on wo.idPO = po.idPO and wo.jobNo = po.jobNo
 inner join task as tk on tk.idAuxWO = wo.idAuxWO
 where jb.jobNo " + If(jobNumber = "", "> 0", "=" + jobNumber), conn)
             If cmd1.ExecuteNonQuery Then
@@ -751,7 +752,7 @@ from
 job as jb 
 inner join clients as cl on jb.idClient = cl.idClient
 inner join projectOrder as po on jb.jobNo = po.jobNo 
-inner join workOrder as wo on po.idPO = wo.idPO
+inner join workOrder as wo on po.idPO = wo.idPO and wo.jobNo = po.jobNo
 left join task as tk on tk.idAuxWO = wo.idAuxWO 
 where jb.jobNo = " + If(idJob = "", "0", idJob).ToString(), conn)
             Dim lstDatosPO As New List(Of String)
@@ -810,7 +811,7 @@ from
 job as jb 
 inner join clients as cl on jb.idClient = cl.idClient
 inner join projectOrder as po on jb.jobNo = po.jobNo 
-inner join workOrder as wo on po.idPO = wo.idPO
+inner join workOrder as wo on po.idPO = wo.idPO and wo.jobNo = po.jobNo
 left join task as tk on tk.idAuxWO = wo.idAuxWO
 where jb.jobNo = " + If(idJob = "", "0", idJob).ToString() + " and tk.task = '" + task + "' and wo.idAuxWO ='" + idAuxWO + "'", conn)
             Dim lstDatosPO As New List(Of String)
@@ -865,6 +866,7 @@ where jb.jobNo = " + If(idJob = "", "0", idJob).ToString() + " and tk.task = '" 
     End Function
 
     Public Function updatePO(ByVal idPON As String, ByVal idPOV As String, ByVal idJobNum As String) As Boolean
+        Dim tran As SqlTransaction
         Try
             conectar()
             Dim cmd1 As New SqlCommand("
@@ -873,11 +875,11 @@ if (select COUNT(idPO) from projectOrder where idPO = " + idPOV + " and jobNo = 
 begin 
    	update po set  po.idPO = " + idPON + " from projectOrder as po 
 	inner join job as jb on po.jobNo = jb.jobNo 
-	inner join workOrder as wo on wo.idPO = po.idPO
+	inner join workOrder as wo on wo.idPO = po.idPO and wo.jobNo = jb.jobNo
 	where po.idPO = " + idPOV + " and po.jobNo =  " + idJobNum + " 
 end  ", conn)
             ' Dim cmd2 As New SqlCommand("update wo set wo.idPO = " + idPON + " from workOrder as wo inner join projectOrder as po on wo.idPO = po.idPO where po.jobNo = " + idJobNum + " and po.idPO = " + idPON, conn)
-            Dim tran As SqlTransaction
+
             tran = conn.BeginTransaction()
             cmd1.Transaction = tran
             'cmd2.Transaction = tran
@@ -898,6 +900,8 @@ end  ", conn)
             desconectar()
         Catch ex As Exception
             MsgBox(ex.Message())
+            tran.Rollback()
+            tran.Dispose()
             Return False
         End Try
     End Function
