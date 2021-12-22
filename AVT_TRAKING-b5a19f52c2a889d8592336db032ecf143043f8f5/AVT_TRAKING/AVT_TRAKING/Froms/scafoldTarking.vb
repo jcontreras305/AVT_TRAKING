@@ -3635,7 +3635,7 @@ Public Class scafoldTarking
             Dim array() As String = cmbScaffolType.SelectedItem.ToString().Split("   ")
             estMeter.idEstCost = array(0)
             estMeter.FACTOR = sprHeigthEst.Value
-            'estMeter.refreshValues()
+            estMeter.refreshValues(mtdEstimation)
         End If
     End Sub
 
@@ -3646,8 +3646,7 @@ Public Class scafoldTarking
                 estMeter.idEstCost = array(0)
             End If
             estMeter.FACTOR = sprHeigthEst.Value
-            'estMeter.est
-            'estMeter.refreshValues()
+            estMeter.refreshValues(mtdEstimation)
         End If
     End Sub
 End Class

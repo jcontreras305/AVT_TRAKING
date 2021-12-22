@@ -298,7 +298,7 @@ Public Class ProjectsCosts
         txtClientPO.Text = ""
         cmbExpCode.SelectedIndex = 0
         cmbProjectManager.Text = ""
-        cmbProjectManager.SelectedIndex = Nothing
+        cmbProjectManager.SelectedIndex = If(cmbProjectManager.SelectedIndex = -1, -1, Nothing)
         sprHoursEstimate.Value = 0
         sprTotalBilling.Value = 0
         txtTotalHours.Text = ""

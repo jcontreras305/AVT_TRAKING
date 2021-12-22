@@ -13,59 +13,69 @@ Public Class EstMeters
         If _idEstCost <> "" Then
             estSC.SelectEstCostSC(_idEstCost, tblScfCost)
             If tblScfCost IsNot Nothing And tblScfCost.Rows.Count > 0 Then
-                _M3LBP = (tblScfCost.Rows(0).ItemArray(tblScfCost.Columns.IndexOf("M3LABORBP")) + tblScfCost.Rows(0).ItemArray(tblScfCost.Columns.IndexOf("M3LBI"))) * (1 + _FACTOR) 'M3LBP = (M3LABORBP + M3LBI) * (1 + [HFactor])
-                _M3MBP = (tblScfCost.Rows(0).ItemArray(tblScfCost.Columns.IndexOf("M3MATBP"))) + (tblScfCost.Rows(0).ItemArray(tblScfCost.Columns.IndexOf("M3MBI")).Value) ' M3MBP = (M3MATBP) + (M3MBI)
-                _M3EBP = (tblScfCost.Rows(0).ItemArray(tblScfCost.Columns.IndexOf("M3EQBP"))) + (tblScfCost.Rows(0).ItemArray(tblScfCost.Columns.IndexOf("M3EBI")).Value) 'M3EBP = (M3EQBP) + (M3EBI)
-                _M3BP = (tblScfCost.Rows(0).ItemArray(tblScfCost.Columns.IndexOf("M3LABORBP"))) + (tblScfCost.Rows(0).ItemArray(tblScfCost.Columns.IndexOf("M3MATBP")).Value) + _M3EBP 'M3BP = M3LABORBP + M3MATBP + M3EBP
+                M3LBP = (findVal("M3LABORBP")) + findVal("M3LBI") * (1 + FACTOR) 'M3LBP = (M3LABORBP + M3LBI) * (1 + [HFactor])
+                M3MBP = (findVal("M3MATBP")) + (findVal("M3MBI")) ' M3MBP = (M3MATBP) + (M3MBI)
+                M3EBP = (findVal("M3EQBP")) + (findVal("M3EBI")) 'M3EBP = (M3EQBP) + (M3EBI)
+                M3BP = (findVal("M3LABORBP")) + (findVal("M3MATBP")) + M3EBP 'M3BP = M3LABORBP + M3MATBP + M3EBP
 
-                _M2LBP = (tblScfCost.Rows(0).ItemArray(tblScfCost.Columns.IndexOf("M2LABORBP")) + tblScfCost.Rows(0).ItemArray(tblScfCost.Columns.IndexOf("M2LBI"))) * (1 + _FACTOR) 'M2LBP = (M2LABORBP + M2LBI) * (1+ [HFACTOR]) 
-                _M2MBP = (tblScfCost.Rows(0).ItemArray(tblScfCost.Columns.IndexOf("MA2MATBP"))) + (tblScfCost.Rows(0).ItemArray(tblScfCost.Columns.IndexOf("M2MBI")).Value) 'M2MBP = MA2MATBP + M2MBI
-                _M2EBP = (tblScfCost.Rows(0).ItemArray(tblScfCost.Columns.IndexOf("M2EQBP"))) + (tblScfCost.Rows(0).ItemArray(tblScfCost.Columns.IndexOf("M2EBI")).Value) 'M2EBP =  M2EQBP + M2EBI
-                _M2BP = (tblScfCost.Rows(0).ItemArray(tblScfCost.Columns.IndexOf("M2LABORBP"))) + (tblScfCost.Rows(0).ItemArray(tblScfCost.Columns.IndexOf("M2MATBP")).Value) + _M2MBP 'M2BP = M2LABORBP + M2MATBP + M2MBP ---- M2MBP ESTA ABAJO
+                M2LBP = (findVal("M2LABORBP")) + findVal("M2LBI") * (1 + FACTOR) 'M2LBP = (M2LABORBP + M2LBI) * (1+ [HFACTOR]) 
+                M2MBP = (findVal("MA2MATBP")) + (findVal("M2MBI")) 'M2MBP = MA2MATBP + M2MBI
+                M2EBP = (findVal("M2EQBP")) + (findVal("M2EBI")) 'M2EBP =  M2EQBP + M2EBI
+                M2BP = (findVal("M2LABORBP")) + (findVal("M2MATBP")) + M2MBP 'M2BP = M2LABORBP + M2MATBP + M2MBP ---- M2MBP ESTA ABAJO
 
-                _BPRICE = (tblScfCost.Rows(0).ItemArray(tblScfCost.Columns.IndexOf("M3"))) + (_M3BP) 'BPRICE = M3 + M3BP ---- M3BP ESTA ABAJO
-                _DECKBP = (tblScfCost.Rows(0).ItemArray(tblScfCost.Columns.IndexOf("M2"))) * (tblScfCost.Rows(0).ItemArray(tblScfCost.Columns.IndexOf("DECKS"))) * _M2BP 'DECKBP = M2 * DECKS * M2BP ---- M2BP ESTA ABAJO 
-                _DA = estSC.daysActive 'DA = DAYSACTIVE ---- DE LA TABLA scfEstimation
-                Dim EDDAYS = (tblScfCost.Rows(0).ItemArray(tblScfCost.Columns.IndexOf("EDDAYS")))
-                Dim BILLINGDAYS = (tblScfCost.Rows(0).ItemArray(tblScfCost.Columns.IndexOf("BILLINGDAYS")))
-                _TIMESED = ((_DA / EDDAYS) + 1) * ((EDDAYS - BILLINGDAYS) / EDDAYS) - (If(((_DA + EDDAYS) / EDDAYS) = ((_DA + EDDAYS) + 1) And (_DA <= BILLINGDAYS), 1, 0)) 'TIMESED = ((DA / EDDAYS)+1)*EDDAYS-BILLINGDAYS/EDDAYS- IF{[((DA + EDDAYS) / EDDAYS)= (DA/EDDAYS)+1] AND [DA <= BILLINGDAYS], 1,0} ---- DA ESTA ABAJO
+                BPRICE = (findVal("M3")) + (M3BP) 'BPRICE = M3 + M3BP ---- M3BP ESTA ABAJO
+                DECKBP = (findVal("M2")) * (findVal("DECKS")) * M2BP 'DECKBP = M2 * DECKS * M2BP ---- M2BP ESTA ABAJO 
+                DA = estSC.daysActive 'DA = DAYSACTIVE ---- DE LA TABLA scfEstimation
+                Dim EDDAYS = (findVal("EDDAYS"))
+                Dim BILLINGDAYS = (findVal("BILLINGDAYS"))
+                TIMESED = ((DA / EDDAYS) + 1) * ((EDDAYS - BILLINGDAYS) / EDDAYS) - (If(((DA + EDDAYS) / EDDAYS) = ((DA + EDDAYS) + 1) And (DA <= BILLINGDAYS), 1, 0)) 'TIMESED = ((DA / EDDAYS)+1)*EDDAYS-BILLINGDAYS/EDDAYS- IF{[((DA + EDDAYS) / EDDAYS)= (DA/EDDAYS)+1] AND [DA <= BILLINGDAYS], 1,0} ---- DA ESTA ABAJO
 
-                _EDM3 = _TIMESED * (tblScfCost.Rows(0).ItemArray(tblScfCost.Columns.IndexOf("M3EDCHARGES")))  'EDM3 = TIMESED * M3EDCHARGES ----TIMESED ESTA ABAJO
-                _EDM2 = _TIMESED * (tblScfCost.Rows(0).ItemArray(tblScfCost.Columns.IndexOf("M2EDCHARGES"))) 'EDM2 = TIMESED * M2EDCHARGES ----TIMESED ESTA ABAJO
-                _EDM3C = (tblScfCost.Rows(0).ItemArray(tblScfCost.Columns.IndexOf("M3"))) * _EDM3 'EDM3C = EDM3 * M3 ---- EDM3 ESTA ABAJO 
-                _EDM2C = (tblScfCost.Rows(0).ItemArray(tblScfCost.Columns.IndexOf("M2"))) * _EDM2  'EDM2C = EDM2 * M2 ---- EDM2 ESTA ABAJO
-                _EDMA3 = _TIMESED * (tblScfCost.Rows(0).ItemArray(tblScfCost.Columns.IndexOf("M3EDCHARGES"))) 'EDMA3 = TIMESED * M3EDCHARGES ---- TIMESED ESTA ABAJO
-                _EDMA2 = _TIMESED * (tblScfCost.Rows(0).ItemArray(tblScfCost.Columns.IndexOf("M2EDCHARGES"))) 'EDMA2 = TIMESED * M2EDCHARGES ---- TIMESED ESTA ABAJO
-                _EDMA3C = _EDMA3 * (tblScfCost.Rows(0).ItemArray(tblScfCost.Columns.IndexOf("M3"))) 'EDMA3C = EDMA3 * M3 ---- EDMA3 ESTA ABAJO
-                _EDMA2C = _EDMA2 * (tblScfCost.Rows(0).ItemArray(tblScfCost.Columns.IndexOf("M2"))) 'EDMA2C = EDMA2 * M2 ---- EDMA2 ESTA ABAJO
+                EDM3 = TIMESED * (findVal("M3EDCHARGES"))  'EDM3 = TIMESED * M3EDCHARGES ----TIMESED ESTA ABAJO
+                EDM2 = TIMESED * (findVal("M2EDCHARGES")) 'EDM2 = TIMESED * M2EDCHARGES ----TIMESED ESTA ABAJO
+                EDM3C = (findVal("M3")) * EDM3 'EDM3C = EDM3 * M3 ---- EDM3 ESTA ABAJO 
+                EDM2C = (findVal("M2")) * EDM2  'EDM2C = EDM2 * M2 ---- EDM2 ESTA ABAJO
+                EDMA3 = TIMESED * (findVal("M3EDCHARGES")) 'EDMA3 = TIMESED * M3EDCHARGES ---- TIMESED ESTA ABAJO
+                EDMA2 = TIMESED * (findVal("M2EDCHARGES")) 'EDMA2 = TIMESED * M2EDCHARGES ---- TIMESED ESTA ABAJO
+                EDMA3C = EDMA3 * (findVal("M3")) 'EDMA3C = EDMA3 * M3 ---- EDMA3 ESTA ABAJO
+                EDMA2C = EDMA2 * (findVal("M2")) 'EDMA2C = EDMA2 * M2 ---- EDMA2 ESTA ABAJO
 
-                _M3LDP = ((tblScfCost.Rows(0).ItemArray(tblScfCost.Columns.IndexOf("M3LABORDP"))) + (tblScfCost.Rows(0).ItemArray(tblScfCost.Columns.IndexOf("M3LDI")))) * (1 + _FACTOR) 'M3LDP = (M3LABORDP + M3LDI) * (1 + [HFACTOR])
-                _M3MDP = (tblScfCost.Rows(0).ItemArray(tblScfCost.Columns.IndexOf("M3MDI"))) + (tblScfCost.Rows(0).ItemArray(tblScfCost.Columns.IndexOf("M3MATDP"))) 'M3MDP = M3MDI + M3MATDP
-                _M3EDP = (tblScfCost.Rows(0).ItemArray(tblScfCost.Columns.IndexOf("M3EQDP"))) + (tblScfCost.Rows(0).ItemArray(tblScfCost.Columns.IndexOf("M3EDI"))) 'M3EDP = M3EQDP + M3EDI
-                _M3DP = _M3LDP + _M3MDP + _M3EDP 'M3DP = M3LDP + M3MDP + M3EDP ---- M3LDP, M3MDP, M3EDP ESTAN ABAJO
+                M3LDP = ((findVal("M3LABORDP"))) + (findVal("M3LDI")) * (1 + FACTOR) 'M3LDP = (M3LABORDP + M3LDI) * (1 + [HFACTOR])
+                M3MDP = (findVal("M3MDI")) + (findVal("M3MATDP")) 'M3MDP = M3MDI + M3MATDP
+                M3EDP = (findVal("M3EQDP")) + (findVal("M3EDI")) 'M3EDP = M3EQDP + M3EDI
+                M3DP = M3LDP + M3MDP + M3EDP 'M3DP = M3LDP + M3MDP + M3EDP ---- M3LDP, M3MDP, M3EDP ESTAN ABAJO
 
-                _M2LDP = ((tblScfCost.Rows(0).ItemArray(tblScfCost.Columns.IndexOf("M2LABORDP"))) + (tblScfCost.Rows(0).ItemArray(tblScfCost.Columns.IndexOf("M2LDI")))) * (1 + _FACTOR) 'M2LDP = (M2LABORDP + M2LDI)*(1 + [HFACTOR])
-                _M2MDP = (tblScfCost.Rows(0).ItemArray(tblScfCost.Columns.IndexOf("M2MATDP"))) + (tblScfCost.Rows(0).ItemArray(tblScfCost.Columns.IndexOf("M2MDI"))) 'M2MDP = M2MATDP + M2MDI
-                _M2EDP = (tblScfCost.Rows(0).ItemArray(tblScfCost.Columns.IndexOf("M2EQDP"))) + (tblScfCost.Rows(0).ItemArray(tblScfCost.Columns.IndexOf("M2EDI"))) 'M2EDP = M2EQDP + M2EDI
-                _M2DP = _M2LDP + _M2MDP + _M2EDP 'M2DP = M2LDP + M2MDP + M2EDP ---- M2LDP, M2MDP, M2EDP ESTAN ABAJO
-
-                _DPRICE = (tblScfCost.Rows(0).ItemArray(tblScfCost.Columns.IndexOf("M3"))) * _M3DP 'DPRICE = M3 * M3DP ---- M3DP ESTA ABAJO
-                _DECKDP = (tblScfCost.Rows(0).ItemArray(tblScfCost.Columns.IndexOf("M2"))) * estSC.descks * _M2DP 'DECKDP = M2 * DECKS * M2DP ---- M2DP ESTA ABAJO
-                _MA3DP = (tblScfCost.Rows(0).ItemArray(tblScfCost.Columns.IndexOf("M2LABORDP"))) + (tblScfCost.Rows(0).ItemArray(tblScfCost.Columns.IndexOf("MA3MATDP"))) + (tblScfCost.Rows(0).ItemArray(tblScfCost.Columns.IndexOf("MA3EQDP")))  'MA3DP = MA3LABORDP + MA3MATDP + MA3EQDP
-                _MA2DP = 0
-                _MADPRIC = 0
-                _DECKMAD = 0
-                _LABORDP = 0
-                _LDECKDP = 0
-                _LABORBP = 0
-                _LDECKBP = 0
-                _TLABOR = 0
-                _PMANHRS = 0
+                M2LDP = (findVal("M2LABORDP")) + (findVal("M2LDI")) * (1 + FACTOR) 'M2LDP = (M2LABORDP + M2LDI)*(1 + [HFACTOR])
+                M2MDP = (findVal("M2MATDP")) + (findVal("M2MDI")) 'M2MDP = M2MATDP + M2MDI
+                M2EDP = (findVal("M2EQDP")) + (findVal("M2EDI")) 'M2EDP = M2EQDP + M2EDI
+                M2DP = M2LDP + M2MDP + M2EDP 'M2DP = M2LDP + M2MDP + M2EDP ---- M2LDP, M2MDP, M2EDP ESTAN ABAJO
+                Dim M3 = (findVal("M3"))
+                Dim M2 = (findVal("M2"))
+                DPRICE = M3 * M3DP 'DPRICE = M3 * M3DP ---- M3DP ESTA ABAJO
+                DECKDP = M2 * estSC.descks * M2DP 'DECKDP = M2 * DECKS * M2DP ---- M2DP ESTA ABAJO
+                MA3DP = (findVal("M2LABORDP")) + (findVal("MA3MATDP")) + (findVal("MA3EQDP"))  'MA3DP = MA3LABORDP + MA3MATDP + MA3EQDP
+                MA2DP = (findVal("MA2LABORDP")) + (findVal("MA2MATDP")) + (findVal("MA2EQDP")) 'MA2DP = MA2LABORDP + MA2MATDP + MA2EQDP
+                MADPRIC = M3 * MA3DP 'MADPRICE = MA3 * MA3DP ---- MA3DP ESTA ABAJO
+                DECKMAD = M3 * estSC.descks * MA2DP 'DECKMADP = MA2 * DECKS * MA2DP ---- MA2DP ESTA ABAJO
+                LABORDP = M3 * M3LDP 'LABORDP = M3 * M3LDP ---- M3LDP ESTA ABAJO
+                LDECKDP = M2 * estSC.descks * M2LDP  'LDECKDP = M2 * DECKS * M2LDP ---- M2LDP ESTA ABAJO  
+                LABORBP = M3 * M3LBP 'LABORBP = M3 * M3LBP ----M3LBP ESTA ABAJO 
+                LDECKBP = M2 * estSC.descks * M2LBP 'LDECKBP = M2 * DECKS * M2LBP ---- M2LBP ESTA ABAJO
+                TLABOR = (M3LBP + (M3LDP * M3)) + (M2LBP + M2LDP) * M2 * (DECKSNUM - 1) 'TLABOR = (M3LBP + M3LDP * M3) + (M2LBP + M2LDP) * M2 * (DESCKNUM - 1) ---- M3LBP, M3LDP, M2LBP, M2LDP ESTAN ABAJO 
+                PMANHRS = TLABOR / 20 'PMANHRS = TLABOR / 20 
             End If
         Else
             MsgBox("Select a type Estimation Cost please.")
         End If
     End Sub
+
+    Function findVal(ByVal columnName As String) As Decimal
+        Dim val = (tblScfCost.Rows(0).ItemArray(tblScfCost.Columns.IndexOf(columnName)))
+        If val IsNot Nothing Then
+            Return val
+        Else
+            Return 0
+        End If
+    End Function
 
     Public Function Clear() As Boolean
         Try

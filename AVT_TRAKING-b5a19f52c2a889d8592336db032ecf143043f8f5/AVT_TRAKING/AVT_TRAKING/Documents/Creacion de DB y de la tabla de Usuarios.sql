@@ -901,7 +901,7 @@ create table workOrder(
 	idAuxWO varchar(36) primary key not null,
 	idWO varchar(14)  not null,
 	idPO bigint not null,
-	jobNum bigint not null
+	jobNo bigint not null
 )
 GO
 

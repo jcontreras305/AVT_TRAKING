@@ -180,7 +180,7 @@ Public Class ProjectsClients
         txtStateProvidence.Text = datosClientesPO(5)
         txtPC.Text = datosClientesPO(6)
         txtPhoneNumber.Text = datosClientesPO(7)
-
+        mtdClient.buscarProyectosDeClientePorProyeto(tblProjectClients, idCliente)
         For Each row As DataGridViewRow In tblProjectClients.Rows
             If row.Cells("cmp").Value = 0 Then
                 row.Cells("Complete").Value = False

@@ -295,6 +295,7 @@ left join workOrder as wo on wo.idPO = po.idPO and wo.jobNo = jb.jobNo
 left join task as tk on tk.idAuxWO = wo.idAuxWO
 where "
 
+
     Public Sub buscarProyectosDeClientePorProyeto(ByVal tabla As DataGridView, ByVal consulta As String)
         Try
             conectar()
