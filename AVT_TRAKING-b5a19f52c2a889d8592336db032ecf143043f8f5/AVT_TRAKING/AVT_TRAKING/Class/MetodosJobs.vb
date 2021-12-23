@@ -277,7 +277,7 @@ from workOrder
                             Return False
                         Else
                             Dim cmdInsertTask1 As New SqlCommand("insert into task 
-                        values (NEWID(),'" + CStr(projectN.idTask) + "'," + If(projectN.idAuxWO = "", "(select top 1 workOrder.idAuxWO  from workOrder where idWO = '" + CStr(projectN.idWorkOrder) + "' and idPO = '" + CStr(projectN.idPO) + "' and jobNo = " + CStr(projectN.jobNum) + ")", "Null") + ",0.0,'" + projectN.equipament + "','" + projectN.manager + "'
+                        values (NEWID(),'" + CStr(projectN.idTask) + "','" + projectN.idAuxWO + "',0.0,'" + projectN.equipament + "','" + projectN.manager + "'
                         ,'" + projectN.description + "'," + CStr(projectN.totalBilling) + ",'" + validaFechaParaSQl(projectN.beginDate) + "','" + validaFechaParaSQl(projectN.endDate) + "'
                         ,'" + projectN.expCode + "','" + projectN.accountNum + "'," + CStr(projectN.estimateHour) + ",'" + CStr(projectN.status) + "'," + CStr(projectN.PercentComplete) + ")", conn)
                             If cmdInsertTask1.ExecuteNonQuery = 1 Then
@@ -292,7 +292,7 @@ from workOrder
                         Dim newWO = System.Guid.NewGuid.ToString()
                         Dim cmdInsertNewWO As New SqlCommand("insert into workOrder values('" + newWO + "', '" + projectN.idWorkOrder + "'," + CStr(projectN.idPO) + ", " + CStr(projectN.jobNum) + ")", conn)
                         Dim cmdInsertTask2 As New SqlCommand("insert into task 
-                        values (NEWID(),'" + CStr(projectN.idTask) + "','" + projectN.idAuxWO + "',0.0,'" + projectN.equipament + "','" + projectN.manager + "'
+                        values (NEWID(),'" + CStr(projectN.idTask) + "','" + newWO + "',0.0,'" + projectN.equipament + "','" + projectN.manager + "'
                         ,'" + projectN.description + "'," + CStr(projectN.totalBilling) + ",'" + validaFechaParaSQl(projectN.beginDate) + "','" + validaFechaParaSQl(projectN.endDate) + "'
                         ,'" + projectN.expCode + "','" + projectN.accountNum + "'," + CStr(projectN.estimateHour) + ",'" + CStr(projectN.status) + "'," + CStr(projectN.PercentComplete) + ")", conn)
                         Dim tranWO As SqlTransaction
@@ -1087,12 +1087,8 @@ where tk.idAux = '" + idAux + "' and wo.idAuxWO = '" + WO + "'", conn)
     Public Function updateComplete(ByVal status As Boolean, ByVal idAux As String, ByVal WO As String)
         Try
             conectar()
-            Dim cmd As New SqlCommand("update task set status = '" + status + "'
-select * from task as tk 
-inner join workOrder as wo on wo.idWO = tk.idWO
-inner join projectOrder as po on po.idPO = wo.idPO
-inner join job as jb on jb.jobNo = po.jobNo 
-where tk.idAux = '" + idAux + "' and wo.idWO = " + WO, conn)
+            Dim cmd As New SqlCommand("update task set status = '" + If(status = True, "1", "0") + "'
+where idAux = '" + idAux + "' and idAuxWO = '" + WO + "'", conn)
             If cmd.ExecuteNonQuery > 0 Then
                 desconectar()
                 Return True

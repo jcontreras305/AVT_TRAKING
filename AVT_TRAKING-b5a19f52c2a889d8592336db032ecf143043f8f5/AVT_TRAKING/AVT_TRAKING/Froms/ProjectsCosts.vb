@@ -1260,7 +1260,7 @@ Public Class ProjectsCosts
             If flagAddRecord Then
                 pjtNuevo.status = "1"
             Else
-                If mtdJobs.updateComplete(If(chbComplete.Checked, True, False), pjt.idAux, pjt.idWorkOrder) Then
+                If mtdJobs.updateComplete(If(chbComplete.Checked, True, False), pjt.idAux, pjt.idAuxWO) Then
                     activarCampos(True)
                     pjt.status = "1"
                 Else
@@ -1273,7 +1273,7 @@ Public Class ProjectsCosts
             If flagAddRecord Then
                 pjtNuevo.status = "0"
             Else
-                If mtdJobs.updateComplete(If(chbComplete.Checked, True, False), pjt.idAux, pjt.idWorkOrder) Then
+                If mtdJobs.updateComplete(If(chbComplete.Checked, True, False), pjt.idAux, pjt.idAuxWO) Then
                     activarCampos(False)
                     pjt.status = "0"
                 Else
@@ -1333,6 +1333,10 @@ Public Class ProjectsCosts
     Private Sub Panel4_MouseMove(sender As Object, e As MouseEventArgs) Handles Panel4.MouseMove
         ReleaseCapture()
         SendMessage(Me.Handle, &H112&, &HF012&, 0)
+    End Sub
+
+    Private Sub Panel4_Paint(sender As Object, e As PaintEventArgs) Handles Panel4.Paint
+
     End Sub
 
     Private Function calcularValores() As Boolean

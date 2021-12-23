@@ -503,10 +503,12 @@ end", conn)
         End Try
     End Function
 
-    Public Function saveEstimation() As Boolean
+    Public Function saveEstimation(ByVal estM As EstMeters) As Boolean
         If If(type = -1, If(DialogResult.OK = MessageBox.Show("You can't selected any Saffold Type, Would you like to continue?", "Important", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning), True, False), True) Then
+            Dim tran As SqlTransaction
             Try
                 conectar()
+                tran = conn.BeginTransaction
                 Dim cmd As New SqlCommand("
 if (select COUNT(*) from scfEstimation  where EstNumber = '" + controlNum + "')=0
 begin
@@ -516,11 +518,50 @@ else if (select COUNT(*) from scfEstimation  where EstNumber = '" + controlNum +
 begin 
 	update scfEstimation set type = " + CStr(type) + " ,idAux = '" + idAux + "',daysActive = " + CStr(daysActive) + ",unit='" + CStr(unit) + "',location='" + location + "',width=" + CStr(width) + ",heigth=" + CStr(heigth) + ",length=" + CStr(length) + ",descks=" + CStr(descks) + ",groundHeigth=" + CStr(groundheigth) + ",elevator=" + CStr(elevator) + " where EstNumber = '" + controlNum + "' 
 end", conn)
+                cmd.Transaction = tran
+                Dim cmd1 As New SqlCommand("if (select count( *) from EstMeters where EstNumber = '" + controlNum + "')=0
+begin
+	insert into EstMeters values(NEWID(),'" + controlNum + "'," + CStr(estM.PMANHRS) + "," + CStr(estM.TLABOR) + "," + CStr(estM.LDECKBP) + "," + CStr(estM.LABORBP) + "," + CStr(estM.LDECKDP) + "," + CStr(estM.LABORDP) + ",
+    " + CStr(estM.DECKMAD) + "," + CStr(estM.MADPRIC) + ",
+    " + CStr(estM.MA2DP) + "," + CStr(estM.MA3DP) + "," + CStr(estM.DECKDP) + "," + CStr(estM.DPRICE) + ",
+    " + CStr(estM.M2DP) + "," + CStr(estM.M2EDP) + "," + CStr(estM.M2MDP) + "," + CStr(estM.M2LDP) + ",
+    " + CStr(estM.M3DP) + "," + CStr(estM.M3EDP) + "," + CStr(estM.M3MDP) + "," + CStr(estM.M3LDP) + ",
+    " + CStr(estM.EDMA2C) + "," + CStr(estM.EDMA3C) + "," + CStr(estM.EDMA2) + "," + CStr(estM.EDMA3) + ",
+    " + CStr(estM.EDM2C) + "," + CStr(estM.EDM3C) + "," + CStr(estM.EDM2) + "," + CStr(estM.EDM3) + ",
+    " + CStr(estM.TIMESED) + "," + CStr(estM.DA) + "," + CStr(estM.DECKBP) + "," + CStr(estM.BPRICE) + ",
+    " + CStr(estM.M2BP) + "," + CStr(estM.M2EBP) + "," + CStr(estM.M2MBP) + "," + CStr(estM.M2LBP) + ",
+    " + CStr(estM.M3BP) + "," + CStr(estM.M3BP) + "," + CStr(estM.M3MBP) + "," + CStr(estM.M3LBP) + ")
+end
+else if (select count( *) from EstMeters)>0
+begin 
+	update EstMeters set 
+		PMANHRS = " + CStr(estM.PMANHRS) + ", TLABOR= " + CStr(estM.TLABOR) + ",LDECKBP= " + CStr(estM.LDECKBP) + ",
+		LABORBP = " + CStr(estM.LABORBP) + ", LDECKDP= " + CStr(estM.LDECKDP) + ", LABORDP= " + CStr(estM.LABORDP) + ",
+		DECKMAD= " + CStr(estM.DECKMAD) + ",MADPRIC= " + CStr(estM.MADPRIC) + ",
+		MA2DP= " + CStr(estM.MA2DP) + ",MA3DP= " + CStr(estM.MA3DP) + ",DECKDP= " + CStr(estM.DECKDP) + ",DPRICE= " + CStr(estM.DPRICE) + ",
+		M2DP= " + CStr(estM.M2DP) + ",M2EDP= " + CStr(estM.M2EDP) + ",M2MDP= " + CStr(estM.M2MDP) + ",M2LDP= " + CStr(estM.M2LDP) + ",
+		M3DP= " + CStr(estM.M3DP) + ",M3EDP= " + CStr(estM.M3EDP) + ",M3MDP= " + CStr(estM.M3MDP) + ",M3LDP= " + CStr(estM.M3LDP) + ",
+		EDMA2C= " + CStr(estM.EDMA2C) + ",EDMA3C= " + CStr(estM.EDMA3C) + ",EDMA2= " + CStr(estM.EDMA2) + ",EDMA3= " + CStr(estM.EDMA3) + ",
+		EDM2C= " + CStr(estM.EDM2C) + ",EDM3C= " + CStr(estM.EDMA3C) + ",EDM2= " + CStr(estM.EDM2) + ",EDM3= " + CStr(estM.EDM3) + ",
+		TIMESED= " + CStr(estM.TIMESED) + ",DA= " + CStr(estM.DA) + ",DECKBP= " + CStr(estM.DECKBP) + ",BPRICE= " + CStr(estM.BPRICE) + ",
+		M2BP= " + CStr(estM.M2BP) + ",M2EBP= " + CStr(estM.M2EBP) + ",M2MBP= " + CStr(estM.M2MBP) + ",M2LBP= " + CStr(estM.M2MBP) + ",
+		M3BP= " + CStr(estM.M3BP) + ",M3EBP= " + CStr(estM.M3EBP) + ",M3MBP= " + CStr(estM.M3MBP) + ",M3LBP= " + CStr(estM.M3LBP) + "
+	where EstNumber = '1' 
+end", conn)
+                cmd1.Transaction = tran
                 If cmd.ExecuteNonQuery > 0 Then
-                    MsgBox("Successful")
-                    Return True
+                    If cmd1.ExecuteNonQuery > 0 Then
+                        MsgBox("Successful")
+                        tran.Commit()
+                        Return True
+                    Else
+                        MsgBox("Error Check the data.")
+                        tran.Rollback()
+                        Return False
+                    End If
                 Else
                     MsgBox("Error Check the data.")
+                    tran.Rollback()
                     Return False
                 End If
             Catch ex As Exception

@@ -269,7 +269,10 @@ inner join task as tk on wo.idAuxWO = tk.idAuxWO", conn)
     Public Function InsertarRecord(ByVal listDatos As List(Of String)) As Boolean
         Try
             conectar()
-            Dim cmd As New SqlCommand("insert into hoursWorked values(NEWID()," + listDatos(1) + "," + listDatos(2) + "," + listDatos(3) + ",'" + listDatos(4) + "','" + listDatos(5) + "'," + listDatos(6) + ",'" + listDatos(7) + "','" + listDatos(8) + "')", conn)
+            Dim cmd As New SqlCommand("if (select COUNT(*) from hoursWorked where idAux = '" + listDatos(7) + "' and idEmployee = '" + listDatos(5) + "' and dateWorked = '" + listDatos(4) + "' and idWorkCode = " + listDatos(6) + " )=0
+begin
+insert into hoursWorked values(NEWID()," + listDatos(1) + "," + listDatos(2) + "," + listDatos(3) + ",'" + listDatos(4) + "','" + listDatos(5) + "'," + listDatos(6) + ",'" + listDatos(7) + "','" + listDatos(8) + "')
+end", conn)
             If cmd.ExecuteNonQuery > 0 Then
                 desconectar()
                 mtdJobs.UpdateTotalSpendTask(listDatos(7))

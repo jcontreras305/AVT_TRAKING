@@ -343,7 +343,7 @@ Public Class scafoldTarking
                     mtdScaffold.llenarProduct(tblProductosAux)
                 End If
             Case "Est"
-                If mtdEstimation.saveEstimation() Then
+                If mtdEstimation.saveEstimation(estMeter) Then
                     btnNewEst.Text = "New"
                     txtControlNumber.Enabled = False
                     mtdEstimation.llenartablaEstimacion(tblEstimation)
@@ -450,7 +450,7 @@ Public Class scafoldTarking
                     End If
                 End If
             Case "Est"
-                If mtdEstimation.saveEstimation() Then
+                If mtdEstimation.saveEstimation(estMeter) Then
                     btnNewEst.Text = "New"
                     txtControlNumber.Enabled = False
                     mtdEstimation.llenartablaEstimacion(tblEstimation)
@@ -3574,7 +3574,7 @@ Public Class scafoldTarking
             txtControlNumber.Enabled = True
             limpiarCamposEstimation()
         Else
-            If mtdEstimation.saveEstimation() Then
+            If mtdEstimation.saveEstimation(estMeter) Then
                 btnNewEst.Text = "New"
             End If
         End If

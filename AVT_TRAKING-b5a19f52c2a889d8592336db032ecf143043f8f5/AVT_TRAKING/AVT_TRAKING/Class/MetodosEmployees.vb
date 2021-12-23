@@ -30,9 +30,9 @@ Public Class MetodosEmployees
     Public Sub cargarEmpleados(ByVal tblEmpledos As DataGridView, ByVal text As String)
         Try
             conectar()
-            Dim cmd As New SqlCommand("select  em1.numberEmploye as Number, em1.firstName  , em1.lastName , em1.middleName , 
-con.phoneNumber1, con.phoneNumber2 , con.email , 
-ads.city , ads.providence, T1.payRate1,T1.payRate2,T1.payRate3,typeEmployee from employees as em1 left join 
+            Dim cmd As New SqlCommand("select  em1.numberEmploye as Number, em1.firstName as 'FirstName' , em1.lastName as 'LastName' , em1.middleName as 'MiddleName' , 
+con.phoneNumber1 as 'PhoneNumber1', con.phoneNumber2 as 'PhoneNumber2' , con.email as 'Email' , 
+ads.city as 'City', ads.providence as 'State', T1.payRate1 as 'PayRate',T1.payRate2 as 'PayRateOT',T1.payRate3 as 'PayRate3',typeEmployee as 'Class'  from employees as em1 left join 
 (select pr.payRate1,pr.payRate2,pr.payRate3,pr.idEmployee from payRate as pr inner join employees as em on em.idEmployee =  pr.idEmployee where datePayRate = (select MAX(datePayRate) from payRate where idEmployee = em.idEmployee)) 
 as T1
 on T1.idEmployee = em1.idEmployee 
