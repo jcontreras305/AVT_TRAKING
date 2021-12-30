@@ -49,16 +49,33 @@ Public Class ReportCatsEmployeePorject
     End Sub
 
     Private Sub btnReportE_Click(sender As Object, e As EventArgs) Handles btnReportE.Click
-        Dim array() = cmbEmployees.SelectedItem.ToString().Split("    ")
-        Dim idEmploye As String = array(0)
-        If idEmploye <> "" Or idEmploye IsNot Nothing Then
+        If chkAllEmployees.Checked Then
             Dim reportTS As New CatsEmployeebyProject
             reportTS.SetParameterValue("@startdate", validaFechaParaSQl(dtpInitialDate.Value.Date))
             reportTS.SetParameterValue("@finaldate", validaFechaParaSQl(dtpFinalDate.Value.Date))
-            reportTS.SetParameterValue("@employeenumber", idEmploye)
+            reportTS.SetParameterValue("@employeenumber", DBNull.Value)
+            reportTS.SetParameterValue("@all", 1)
             crvCatsEmployeebyProject.ReportSource = reportTS
+        ElseIf cmbEmployees.SelectedItem IsNot Nothing Then
+            Dim array() = cmbEmployees.SelectedItem.ToString().Split("    ")
+            Dim idEmploye As String = array(0)
+            If idEmploye <> "" Or idEmploye IsNot Nothing Then
+                Dim reportTS As New CatsEmployeebyProject
+                reportTS.SetParameterValue("@startdate", validaFechaParaSQl(dtpInitialDate.Value.Date))
+                reportTS.SetParameterValue("@finaldate", validaFechaParaSQl(dtpFinalDate.Value.Date))
+                reportTS.SetParameterValue("@employeenumber", idEmploye)
+                reportTS.SetParameterValue("@all", 0)
+                crvCatsEmployeebyProject.ReportSource = reportTS
+            Else
+                MsgBox("Please choose a Employee.")
+            End If
         Else
-            MsgBox("Please select a Employee.")
+            MsgBox("Please choose a Employee.")
         End If
+
+    End Sub
+
+    Private Sub chkAllEmployees_CheckedChanged(sender As Object, e As EventArgs) Handles chkAllEmployees.CheckedChanged
+
     End Sub
 End Class

@@ -18,7 +18,7 @@ Imports System
 Imports System.ComponentModel
 
 
-Public Class CatsEmployeebyProject
+Public Class EmployeePeerDiemSheets
     Inherits ReportClass
     
     Public Sub New()
@@ -27,7 +27,7 @@ Public Class CatsEmployeebyProject
     
     Public Overrides Property ResourceName() As String
         Get
-            Return "CatsEmployeebyProject.rpt"
+            Return "EmployeePeerDiemSheets.rpt"
         End Get
         Set
             'Do nothing
@@ -45,7 +45,7 @@ Public Class CatsEmployeebyProject
     
     Public Overrides Property FullResourceName() As String
         Get
-            Return "AVT_TRAKING.CatsEmployeebyProject.rpt"
+            Return "AVT_TRAKING.EmployeePeerDiemSheets.rpt"
         End Get
         Set
             'Do nothing
@@ -91,42 +91,10 @@ Public Class CatsEmployeebyProject
             Return Me.ReportDefinition.Sections(4)
         End Get
     End Property
-    
-    <Browsable(false),  _
-     DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)>  _
-    Public ReadOnly Property Parameter_startdate() As CrystalDecisions.[Shared].IParameterField
-        Get
-            Return Me.DataDefinition.ParameterFields(0)
-        End Get
-    End Property
-    
-    <Browsable(false),  _
-     DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)>  _
-    Public ReadOnly Property Parameter_finaldate() As CrystalDecisions.[Shared].IParameterField
-        Get
-            Return Me.DataDefinition.ParameterFields(1)
-        End Get
-    End Property
-    
-    <Browsable(false),  _
-     DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)>  _
-    Public ReadOnly Property Parameter_employeenumber() As CrystalDecisions.[Shared].IParameterField
-        Get
-            Return Me.DataDefinition.ParameterFields(2)
-        End Get
-    End Property
-    
-    <Browsable(false),  _
-     DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)>  _
-    Public ReadOnly Property Parameter_all() As CrystalDecisions.[Shared].IParameterField
-        Get
-            Return Me.DataDefinition.ParameterFields(3)
-        End Get
-    End Property
 End Class
 
 <System.Drawing.ToolboxBitmapAttribute(GetType(CrystalDecisions.[Shared].ExportOptions), "report.bmp")>  _
-Public Class CachedCatsEmployeebyProject
+Public Class CachedEmployeePeerDiemSheets
     Inherits Component
     Implements ICachedReport
     
@@ -168,7 +136,7 @@ Public Class CachedCatsEmployeebyProject
     End Property
     
     Public Overridable Function CreateReport() As CrystalDecisions.CrystalReports.Engine.ReportDocument Implements CrystalDecisions.ReportSource.ICachedReport.CreateReport
-        Dim rpt As CatsEmployeebyProject = New CatsEmployeebyProject()
+        Dim rpt As EmployeePeerDiemSheets = New EmployeePeerDiemSheets()
         rpt.Site = Me.Site
         Return rpt
     End Function

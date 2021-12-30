@@ -672,7 +672,7 @@ Partial Class ProjectsClients
         Me.tblProjectClients.Location = New System.Drawing.Point(0, 0)
         Me.tblProjectClients.Name = "tblProjectClients"
         Me.tblProjectClients.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.tblProjectClients.Size = New System.Drawing.Size(812, 408)
+        Me.tblProjectClients.Size = New System.Drawing.Size(813, 408)
         Me.tblProjectClients.TabIndex = 6
         '
         'Panel4
@@ -680,9 +680,9 @@ Partial Class ProjectsClients
         Me.Panel4.Controls.Add(Me.btnTaxes)
         Me.Panel4.Controls.Add(Me.btnAddClient)
         Me.Panel4.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel4.Location = New System.Drawing.Point(821, 3)
+        Me.Panel4.Location = New System.Drawing.Point(822, 3)
         Me.Panel4.Name = "Panel4"
-        Me.Panel4.Size = New System.Drawing.Size(126, 408)
+        Me.Panel4.Size = New System.Drawing.Size(125, 408)
         Me.Panel4.TabIndex = 8
         '
         'btnTaxes
@@ -697,7 +697,7 @@ Partial Class ProjectsClients
         Me.btnTaxes.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.btnTaxes.Location = New System.Drawing.Point(0, 41)
         Me.btnTaxes.Name = "btnTaxes"
-        Me.btnTaxes.Size = New System.Drawing.Size(126, 41)
+        Me.btnTaxes.Size = New System.Drawing.Size(125, 41)
         Me.btnTaxes.TabIndex = 8
         Me.btnTaxes.Text = "Taxes"
         Me.btnTaxes.UseVisualStyleBackColor = True
@@ -714,7 +714,7 @@ Partial Class ProjectsClients
         Me.btnAddClient.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.btnAddClient.Location = New System.Drawing.Point(0, 0)
         Me.btnAddClient.Name = "btnAddClient"
-        Me.btnAddClient.Size = New System.Drawing.Size(126, 41)
+        Me.btnAddClient.Size = New System.Drawing.Size(125, 41)
         Me.btnAddClient.TabIndex = 7
         Me.btnAddClient.Text = "Add client"
         Me.btnAddClient.UseVisualStyleBackColor = True
@@ -745,8 +745,9 @@ Partial Class ProjectsClients
         '
         'PictureBox2
         '
+        Me.PictureBox2.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.PictureBox2.Image = Global.AVT_TRAKING.My.Resources.Resources.minimize2
-        Me.PictureBox2.Location = New System.Drawing.Point(894, 3)
+        Me.PictureBox2.Location = New System.Drawing.Point(924, 3)
         Me.PictureBox2.Name = "PictureBox2"
         Me.PictureBox2.Size = New System.Drawing.Size(24, 25)
         Me.PictureBox2.TabIndex = 2
@@ -756,7 +757,7 @@ Partial Class ProjectsClients
         '
         Me.btnRestore.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnRestore.Image = Global.AVT_TRAKING.My.Resources.Resources.restore2
-        Me.btnRestore.Location = New System.Drawing.Point(925, 3)
+        Me.btnRestore.Location = New System.Drawing.Point(890, 6)
         Me.btnRestore.Name = "btnRestore"
         Me.btnRestore.Size = New System.Drawing.Size(28, 24)
         Me.btnRestore.TabIndex = 1
@@ -764,6 +765,7 @@ Partial Class ProjectsClients
         '
         'btnMaximize
         '
+        Me.btnMaximize.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnMaximize.Image = Global.AVT_TRAKING.My.Resources.Resources.maximize2
         Me.btnMaximize.Location = New System.Drawing.Point(927, 3)
         Me.btnMaximize.Name = "btnMaximize"
@@ -892,7 +894,7 @@ Partial Class ProjectsClients
         Me.Panel3.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel3.Location = New System.Drawing.Point(3, 3)
         Me.Panel3.Name = "Panel3"
-        Me.Panel3.Size = New System.Drawing.Size(812, 408)
+        Me.Panel3.Size = New System.Drawing.Size(813, 408)
         Me.Panel3.TabIndex = 0
         '
         'ProjectsClients
