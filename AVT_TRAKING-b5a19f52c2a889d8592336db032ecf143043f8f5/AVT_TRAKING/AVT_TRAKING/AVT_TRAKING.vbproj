@@ -315,6 +315,36 @@
       <DependentUpon>ClientBillingProject.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Reports\ClientBillingsReCapBYProject.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ClientBillingsReCapBYProject.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\CompleteByDateRange.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CompleteByDateRange.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\EmployeePeerDiemSheets.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EmployeePeerDiemSheets.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\ReportClientBillingsReCapBYProject.Designer.vb">
+      <DependentUpon>ReportClientBillingsReCapBYProject.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\ReportClientBillingsReCapBYProject.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Reports\ReportCompleteByDateRange.Designer.vb">
+      <DependentUpon>ReportCompleteByDateRange.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\ReportCompleteByDateRange.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Reports\ScaffoldEstimate.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -471,6 +501,24 @@
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>ClientBillingProject.vb</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reports\ClientBillingsReCapBYProject.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ClientBillingsReCapBYProject.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\CompleteByDateRange.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>CompleteByDateRange.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\EmployeePeerDiemSheets.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>EmployeePeerDiemSheets.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\ReportClientBillingsReCapBYProject.resx">
+      <DependentUpon>ReportClientBillingsReCapBYProject.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\ReportCompleteByDateRange.resx">
+      <DependentUpon>ReportCompleteByDateRange.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reports\ScaffoldEstimate.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>ScaffoldEstimate.vb</LastGenOutput>
@@ -558,6 +606,7 @@
     <None Include="Images\estimation.png" />
     <None Include="Images\billing.png" />
     <None Include="Images\catsemployee.png" />
+    <None Include="Images\ComplteByRange.png" />
     <Content Include="Images\eye.png" />
     <None Include="Images\minimize.png" />
     <None Include="Images\show.png" />
@@ -596,6 +645,7 @@
     <None Include="Images\repormen.png" />
     <None Include="Images\ScaffoldImageEST2.png" />
     <None Include="Images\scaffoldestimate.png" />
+    <None Include="Images\ReCap.png" />
     <Content Include="Images\user.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />

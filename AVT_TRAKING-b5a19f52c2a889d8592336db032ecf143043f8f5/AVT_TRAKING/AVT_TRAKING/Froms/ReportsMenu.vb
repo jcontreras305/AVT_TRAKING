@@ -48,4 +48,14 @@ Public Class ReportsMenu
         Dim tse As New ReportCatsEmployeePorject
         tse.ShowDialog()
     End Sub
+
+    Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
+        Dim tse As New ReportClientBillingsReCapBYProject
+        tse.ShowDialog()
+    End Sub
+
+    Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
+        Dim tse As New ReportCompleteByDateRange
+        tse.ShowDialog()
+    End Sub
 End Class
