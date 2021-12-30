@@ -30,8 +30,10 @@ Partial Class ReportScaffoldEstimate
         Me.btnRestore = New System.Windows.Forms.PictureBox()
         Me.btnMaximize = New System.Windows.Forms.PictureBox()
         Me.Panel1 = New System.Windows.Forms.Panel()
-        Me.CrystalReportViewer1 = New CrystalDecisions.Windows.Forms.CrystalReportViewer()
+        Me.btnReport = New System.Windows.Forms.Button()
+        Me.cmbEstimations = New System.Windows.Forms.ComboBox()
         Me.PictureBox4 = New System.Windows.Forms.PictureBox()
+        Me.crvReportScaffoldEstimate = New CrystalDecisions.Windows.Forms.CrystalReportViewer()
         Me.TableLayoutPanel1.SuspendLayout()
         Me.TitleBar.SuspendLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -48,7 +50,7 @@ Partial Class ReportScaffoldEstimate
         Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
         Me.TableLayoutPanel1.Controls.Add(Me.TitleBar, 0, 0)
         Me.TableLayoutPanel1.Controls.Add(Me.Panel1, 0, 1)
-        Me.TableLayoutPanel1.Controls.Add(Me.CrystalReportViewer1, 0, 2)
+        Me.TableLayoutPanel1.Controls.Add(Me.crvReportScaffoldEstimate, 0, 2)
         Me.TableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.TableLayoutPanel1.Location = New System.Drawing.Point(0, 0)
         Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
@@ -126,6 +128,8 @@ Partial Class ReportScaffoldEstimate
         'Panel1
         '
         Me.Panel1.BackColor = System.Drawing.Color.FromArgb(CType(CType(83, Byte), Integer), CType(CType(93, Byte), Integer), CType(CType(102, Byte), Integer))
+        Me.Panel1.Controls.Add(Me.btnReport)
+        Me.Panel1.Controls.Add(Me.cmbEstimations)
         Me.Panel1.Controls.Add(Me.PictureBox4)
         Me.Panel1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel1.Location = New System.Drawing.Point(3, 43)
@@ -133,16 +137,30 @@ Partial Class ReportScaffoldEstimate
         Me.Panel1.Size = New System.Drawing.Size(680, 64)
         Me.Panel1.TabIndex = 4
         '
-        'CrystalReportViewer1
+        'btnReport
         '
-        Me.CrystalReportViewer1.ActiveViewIndex = -1
-        Me.CrystalReportViewer1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.CrystalReportViewer1.Cursor = System.Windows.Forms.Cursors.Default
-        Me.CrystalReportViewer1.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.CrystalReportViewer1.Location = New System.Drawing.Point(3, 113)
-        Me.CrystalReportViewer1.Name = "CrystalReportViewer1"
-        Me.CrystalReportViewer1.Size = New System.Drawing.Size(680, 374)
-        Me.CrystalReportViewer1.TabIndex = 5
+        Me.btnReport.FlatAppearance.BorderSize = 0
+        Me.btnReport.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(58, Byte), Integer), CType(CType(115, Byte), Integer))
+        Me.btnReport.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnReport.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnReport.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.btnReport.Image = Global.AVT_TRAKING.My.Resources.Resources.reportshow
+        Me.btnReport.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnReport.Location = New System.Drawing.Point(299, 16)
+        Me.btnReport.Name = "btnReport"
+        Me.btnReport.Size = New System.Drawing.Size(83, 33)
+        Me.btnReport.TabIndex = 12
+        Me.btnReport.Text = "Report"
+        Me.btnReport.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.btnReport.UseVisualStyleBackColor = True
+        '
+        'cmbEstimations
+        '
+        Me.cmbEstimations.FormattingEnabled = True
+        Me.cmbEstimations.Location = New System.Drawing.Point(26, 10)
+        Me.cmbEstimations.Name = "cmbEstimations"
+        Me.cmbEstimations.Size = New System.Drawing.Size(121, 21)
+        Me.cmbEstimations.TabIndex = 11
         '
         'PictureBox4
         '
@@ -153,6 +171,17 @@ Partial Class ReportScaffoldEstimate
         Me.PictureBox4.Size = New System.Drawing.Size(37, 29)
         Me.PictureBox4.TabIndex = 10
         Me.PictureBox4.TabStop = False
+        '
+        'crvReportScaffoldEstimate
+        '
+        Me.crvReportScaffoldEstimate.ActiveViewIndex = -1
+        Me.crvReportScaffoldEstimate.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.crvReportScaffoldEstimate.Cursor = System.Windows.Forms.Cursors.Default
+        Me.crvReportScaffoldEstimate.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.crvReportScaffoldEstimate.Location = New System.Drawing.Point(3, 113)
+        Me.crvReportScaffoldEstimate.Name = "crvReportScaffoldEstimate"
+        Me.crvReportScaffoldEstimate.Size = New System.Drawing.Size(680, 374)
+        Me.crvReportScaffoldEstimate.TabIndex = 5
         '
         'ReportScaffoldEstimate
         '
@@ -184,6 +213,8 @@ Partial Class ReportScaffoldEstimate
     Friend WithEvents btnRestore As PictureBox
     Friend WithEvents btnMaximize As PictureBox
     Friend WithEvents Panel1 As Panel
-    Friend WithEvents CrystalReportViewer1 As CrystalDecisions.Windows.Forms.CrystalReportViewer
+    Friend WithEvents crvReportScaffoldEstimate As CrystalDecisions.Windows.Forms.CrystalReportViewer
     Friend WithEvents PictureBox4 As PictureBox
+    Friend WithEvents cmbEstimations As ComboBox
+    Friend WithEvents btnReport As Button
 End Class

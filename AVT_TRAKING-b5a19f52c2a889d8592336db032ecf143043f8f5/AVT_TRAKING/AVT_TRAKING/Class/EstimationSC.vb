@@ -502,7 +502,64 @@ end", conn)
             desconectar()
         End Try
     End Function
-
+    Public Function selectEstMeters(ByVal controlNum As String) As EstMeters
+        Try
+            Dim cmd As New SqlCommand("select top 1 * from EstMeters where EstNumber = '" + controlNum + "'", conn)
+            Dim dr As SqlDataReader = cmd.ExecuteReader()
+            Dim estMts As New EstMeters
+            While dr.Read()
+                estMts.idEstMeters = dr("idEstMeters").ToString()
+                estMts.idEstCost = dr("EstNumber").ToString()
+                estMts.PMANHRS = CDec(dr("PMANHRS"))
+                estMts.TLABOR = CDec(dr("TLABOR"))
+                estMts.LDECKBP = CDec(dr("LDECKBP"))
+                estMts.LABORBP = CDec(dr("LABORBP"))
+                estMts.LDECKDP = CDec(dr("LDECKDP"))
+                estMts.LABORDP = CDec(dr("LABORDP"))
+                estMts.DECKMAD = CDec(dr("DECKMAD"))
+                estMts.MADPRICE = CDec(dr("MADPRIC"))
+                estMts.MA2DP = CDec(dr("MA2DP"))
+                estMts.MA3DP = CDec(dr("MA3DP"))
+                estMts.DECKDP = CDec(dr("DECKDP"))
+                estMts.DPRICE = CDec(dr("DPRICe"))
+                estMts.M2DP = CDec(dr("M2DP"))
+                estMts.M2EDP = CDec(dr("M2EDP"))
+                estMts.M2MDP = CDec(dr("M2MDP"))
+                estMts.M2LDP = CDec(dr("M2LDP"))
+                estMts.M3DP = CDec(dr("M3DP"))
+                estMts.M3EDP = CDec(dr("M3EDP"))
+                estMts.M3MDP = CDec(dr("M3MDP"))
+                estMts.M3LDP = CDec(dr("M3LDP"))
+                estMts.EDMA2C = CDec(dr("EDMA2C"))
+                estMts.EDMA3C = CDec(dr("EDMA3C"))
+                estMts.EDMA2 = CDec(dr("EDMA2"))
+                estMts.EDMA3 = CDec(dr("EDMA3"))
+                estMts.EDM2C = CDec(dr("EDM2C"))
+                estMts.EDM3C = CDec(dr("EDM3C"))
+                estMts.EDM2 = CDec(dr("EDM2"))
+                estMts.EDM3 = CDec(dr("EDM3"))
+                estMts.TIMESED = CDec(dr("TIMESED"))
+                estMts.DA = CDec(dr("DA"))
+                estMts.DECKBP = CDec(dr("DECKBP"))
+                estMts.BPRICE = CDec(dr("BPRICE"))
+                estMts.M2BP = CDec(dr("M2BP"))
+                estMts.M2EBP = CDec(dr("M2EBP"))
+                estMts.M2MBP = CDec(dr("M2MBP"))
+                estMts.M2LBP = CDec(dr("M2LBP"))
+                estMts.M3BP = CDec(dr("M3BP"))
+                estMts.M3EBP = CDec(dr("M3EBP"))
+                estMts.M3MBP = CDec(dr("M3MBP"))
+                estMts.M3LBP = CDec(dr("M3LBP"))
+            End While
+            dr.Close()
+            Return estMts
+        Catch ex As Exception
+            Dim estMts1 As New EstMeters
+            Return estMts1
+        Finally
+            desconectar()
+        End Try
+    End Function
     Public Function saveEstimation(ByVal estM As EstMeters) As Boolean
         If If(type = -1, If(DialogResult.OK = MessageBox.Show("You can't selected any Saffold Type, Would you like to continue?", "Important", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning), True, False), True) Then
             Dim tran As SqlTransaction
@@ -522,7 +579,7 @@ end", conn)
                 Dim cmd1 As New SqlCommand("if (select count( *) from EstMeters where EstNumber = '" + controlNum + "')=0
 begin
 	insert into EstMeters values(NEWID(),'" + controlNum + "'," + CStr(estM.PMANHRS) + "," + CStr(estM.TLABOR) + "," + CStr(estM.LDECKBP) + "," + CStr(estM.LABORBP) + "," + CStr(estM.LDECKDP) + "," + CStr(estM.LABORDP) + ",
-    " + CStr(estM.DECKMAD) + "," + CStr(estM.MADPRIC) + ",
+    " + CStr(estM.DECKMAD) + "," + CStr(estM.MADPRICE) + ",
     " + CStr(estM.MA2DP) + "," + CStr(estM.MA3DP) + "," + CStr(estM.DECKDP) + "," + CStr(estM.DPRICE) + ",
     " + CStr(estM.M2DP) + "," + CStr(estM.M2EDP) + "," + CStr(estM.M2MDP) + "," + CStr(estM.M2LDP) + ",
     " + CStr(estM.M3DP) + "," + CStr(estM.M3EDP) + "," + CStr(estM.M3MDP) + "," + CStr(estM.M3LDP) + ",
@@ -537,7 +594,7 @@ begin
 	update EstMeters set 
 		PMANHRS = " + CStr(estM.PMANHRS) + ", TLABOR= " + CStr(estM.TLABOR) + ",LDECKBP= " + CStr(estM.LDECKBP) + ",
 		LABORBP = " + CStr(estM.LABORBP) + ", LDECKDP= " + CStr(estM.LDECKDP) + ", LABORDP= " + CStr(estM.LABORDP) + ",
-		DECKMAD= " + CStr(estM.DECKMAD) + ",MADPRIC= " + CStr(estM.MADPRIC) + ",
+		DECKMAD= " + CStr(estM.DECKMAD) + ",MADPRIC= " + CStr(estM.MADPRICE) + ",
 		MA2DP= " + CStr(estM.MA2DP) + ",MA3DP= " + CStr(estM.MA3DP) + ",DECKDP= " + CStr(estM.DECKDP) + ",DPRICE= " + CStr(estM.DPRICE) + ",
 		M2DP= " + CStr(estM.M2DP) + ",M2EDP= " + CStr(estM.M2EDP) + ",M2MDP= " + CStr(estM.M2MDP) + ",M2LDP= " + CStr(estM.M2LDP) + ",
 		M3DP= " + CStr(estM.M3DP) + ",M3EDP= " + CStr(estM.M3EDP) + ",M3MDP= " + CStr(estM.M3MDP) + ",M3LDP= " + CStr(estM.M3LDP) + ",

@@ -3512,6 +3512,8 @@ Public Class scafoldTarking
                 loadingDataDismentle = False
                 Return True
             Else
+                mtdEstimation.cargarDatosEstimation(ControlNumEst)
+                estMeter = mtdEstimation.selectEstMeters(ControlNumEst)
                 txtControlNumber.Text = mtdEstimation.controlNum
                 txtControlNumber.Enabled = False
                 If mtdEstimation.type > -1 Then
@@ -3634,7 +3636,7 @@ Public Class scafoldTarking
         If Not loadingEst = True And cmbScaffolType.SelectedIndex > 0 Then
             Dim array() As String = cmbScaffolType.SelectedItem.ToString().Split("   ")
             estMeter.idEstCost = array(0)
-            estMeter.FACTOR = sprHeigthEst.Value
+            estMeter.FACTOR = estMeter.selectFactor(sprHeigthEst.Value)
             estMeter.refreshValues(mtdEstimation)
         End If
     End Sub
@@ -3645,8 +3647,14 @@ Public Class scafoldTarking
                 Dim array() As String = cmbScaffolType.SelectedItem.ToString().Split("   ")
                 estMeter.idEstCost = array(0)
             End If
-            estMeter.FACTOR = sprHeigthEst.Value
+            estMeter.FACTOR = estMeter.selectFactor(sprHeigthEst.Value)
             estMeter.refreshValues(mtdEstimation)
         End If
+    End Sub
+
+    Private Sub btnReportEstimationSC_Click(sender As Object, e As EventArgs) Handles btnReportEstimationSC.Click
+        Dim rse As New ReportScaffoldEstimate
+        rse.mtdEstimation = estMeter
+        rse.ShowDialog()
     End Sub
 End Class

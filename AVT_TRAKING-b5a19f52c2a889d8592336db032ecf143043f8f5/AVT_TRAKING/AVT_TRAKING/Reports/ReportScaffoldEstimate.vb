@@ -1,6 +1,17 @@
 ﻿Imports System.Runtime.InteropServices
 
 Public Class ReportScaffoldEstimate
+    Public mtdEstimation As EstMeters
+    Private Sub ReportScaffoldEstimate_Load(sender As Object, e As EventArgs) Handles Me.Load
+        mtdEstimation.selectEstimation(cmbEstimations)
+        If mtdEstimation.EstNumber IsNot "" Then
+            For Each item As Object In cmbEstimations.Items
+                If item.ToString() = mtdEstimation.EstNumber Then
+                    cmbEstimations.SelectedItem = item
+                End If
+            Next
+        End If
+    End Sub
     Private Sub PictureBox3_Click(sender As Object, e As EventArgs) Handles PictureBox3.Click
         Me.WindowState = FormWindowState.Minimized
     End Sub
@@ -30,5 +41,21 @@ Public Class ReportScaffoldEstimate
 
     Private Sub PictureBox4_Click(sender As Object, e As EventArgs) Handles PictureBox4.Click
         Me.Close()
+    End Sub
+
+    Private Sub btnReport_Click(sender As Object, e As EventArgs) Handles btnReport.Click
+        Dim estimacion As String
+        If cmbEstimations.SelectedItem Is Nothing Then
+            estimacion = "%"
+        Else
+            estimacion = cmbEstimations.SelectedItem.ToString()
+        End If
+        If estimacion IsNot Nothing Then
+            Dim reportSE As New ScaffoldEstimate
+            reportSE.SetParameterValue("@EstNumber", estimacion)
+            crvReportScaffoldEstimate.ReportSource = reportSE
+        Else
+            MsgBox("Please select a Estimation.")
+        End If
     End Sub
 End Class

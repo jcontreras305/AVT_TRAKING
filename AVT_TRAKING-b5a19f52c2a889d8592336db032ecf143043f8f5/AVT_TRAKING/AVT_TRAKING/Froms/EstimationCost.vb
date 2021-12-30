@@ -42,14 +42,16 @@ Class EstimationCost
                 End If
             ElseIf e.ColumnIndex = tblEstimationCostSC.Columns("idEstCost").Index Then
                 For Each cell As DataGridViewCell In tblEstimationCostSC.Rows(e.RowIndex).Cells
-                    If cell.ColumnIndex = tblEstimationCostSC.Columns("DECKS").Index Or cell.ColumnIndex = tblEstimationCostSC.Columns("ACHT").Index Or cell.ColumnIndex = tblEstimationCostSC.Columns("BILLINGDAYS").Index Or cell.ColumnIndex = tblEstimationCostSC.Columns("EDDAYS").Index Then
-                        cell.Value = "0"
-                    ElseIf cell.ColumnIndex = tblEstimationCostSC.Columns("BDRATE").Index Or cell.ColumnIndex = tblEstimationCostSC.Columns("M3").Index Or cell.ColumnIndex = tblEstimationCostSC.Columns("M2").Index Or cell.ColumnIndex = tblEstimationCostSC.Columns("MA3").Index Or cell.ColumnIndex = tblEstimationCostSC.Columns("MA2").Index Then
-                        cell.Value = "0.0"
-                    ElseIf cell.ColumnIndex = tblEstimationCostSC.Columns("SCTP").Index Then
-                        cell.Value = ""
-                    ElseIf cell.ColumnIndex >= tblEstimationCostSC.Columns("M3EDCHARGES").Index Then
-                        cell.Value = "0.00"
+                    If cell.Value Is DBNull.Value Then
+                        If cell.ColumnIndex = tblEstimationCostSC.Columns("DECKS").Index Or cell.ColumnIndex = tblEstimationCostSC.Columns("ACHT").Index Or cell.ColumnIndex = tblEstimationCostSC.Columns("BILLINGDAYS").Index Or cell.ColumnIndex = tblEstimationCostSC.Columns("EDDAYS").Index Then
+                            cell.Value = "0"
+                        ElseIf cell.ColumnIndex = tblEstimationCostSC.Columns("BDRATE").Index Or cell.ColumnIndex = tblEstimationCostSC.Columns("M3").Index Or cell.ColumnIndex = tblEstimationCostSC.Columns("M2").Index Or cell.ColumnIndex = tblEstimationCostSC.Columns("MA3").Index Or cell.ColumnIndex = tblEstimationCostSC.Columns("MA2").Index Then
+                            cell.Value = "0.0"
+                        ElseIf cell.ColumnIndex = tblEstimationCostSC.Columns("SCTP").Index Then
+                            cell.Value = ""
+                        ElseIf cell.ColumnIndex >= tblEstimationCostSC.Columns("M3EDCHARGES").Index Then
+                            cell.Value = "0.00"
+                        End If
                     End If
                 Next
             ElseIf e.ColumnIndex < tblEstimationCostSC.Columns("M3EDCHARGES").Index And e.ColumnIndex <> tblEstimationCostSC.Columns("SCTP").Index Then
