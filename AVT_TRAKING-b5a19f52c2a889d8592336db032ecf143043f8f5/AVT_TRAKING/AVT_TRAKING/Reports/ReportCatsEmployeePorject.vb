@@ -78,4 +78,8 @@ Public Class ReportCatsEmployeePorject
     Private Sub chkAllEmployees_CheckedChanged(sender As Object, e As EventArgs) Handles chkAllEmployees.CheckedChanged
 
     End Sub
+
+    Private Sub TitleBar_Paint(sender As Object, e As PaintEventArgs) Handles TitleBar.Paint
+
+    End Sub
 End Class

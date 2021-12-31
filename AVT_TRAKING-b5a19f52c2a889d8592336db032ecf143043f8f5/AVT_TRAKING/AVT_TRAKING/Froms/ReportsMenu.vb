@@ -58,4 +58,14 @@ Public Class ReportsMenu
         Dim tse As New ReportCompleteByDateRange
         tse.ShowDialog()
     End Sub
+
+    Private Sub Button5_Click(sender As Object, e As EventArgs) Handles Button5.Click
+        Dim tse As New ReportEmployeePerDiem
+        tse.ShowDialog()
+    End Sub
+
+    Private Sub Button6_Click(sender As Object, e As EventArgs) Handles Button6.Click
+        Dim tse As New ReportEmployeesTime
+        tse.ShowDialog()
+    End Sub
 End Class

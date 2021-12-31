@@ -22,14 +22,14 @@ Partial Class scafoldTarking
     'No lo modifique con el editor de código.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle17 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle18 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle19 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle20 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle21 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle22 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle23 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle24 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.Panel3 = New System.Windows.Forms.Panel()
         Me.tabControl1 = New System.Windows.Forms.TabControl()
@@ -531,6 +531,7 @@ Partial Class scafoldTarking
         Me.btnSaveTable = New System.Windows.Forms.Button()
         Me.btnDeleteRows = New System.Windows.Forms.Button()
         Me.btnSaveAll = New System.Windows.Forms.Button()
+        Me.Panel86 = New System.Windows.Forms.Panel()
         Me.Panel1.SuspendLayout()
         Me.Panel3.SuspendLayout()
         Me.tabControl1.SuspendLayout()
@@ -714,6 +715,7 @@ Partial Class scafoldTarking
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.btnRestore, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.btnMaximize, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.Panel86.SuspendLayout()
         Me.SuspendLayout()
         '
         'Panel1
@@ -782,6 +784,7 @@ Partial Class scafoldTarking
         '
         Me.Panel6.Controls.Add(Me.tblInComing)
         Me.Panel6.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Panel6.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
         Me.Panel6.Location = New System.Drawing.Point(251, 0)
         Me.Panel6.Name = "Panel6"
         Me.Panel6.Size = New System.Drawing.Size(684, 466)
@@ -1920,14 +1923,14 @@ Partial Class scafoldTarking
         Me.tblLeg.AllowUserToAddRows = False
         Me.tblLeg.AllowUserToDeleteRows = False
         Me.tblLeg.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
-        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle1.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.tblLeg.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle1
+        DataGridViewCellStyle17.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle17.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle17.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle17.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle17.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle17.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle17.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.tblLeg.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle17
         Me.tblLeg.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.tblLeg.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.clmLegID, Me.clmQYT, Me.clmHeigthExtra, Me.clmIdProductLeg, Me.clmPlf, Me.clmPsqf})
         Me.tblLeg.Dock = System.Windows.Forms.DockStyle.Fill
@@ -2076,14 +2079,14 @@ Partial Class scafoldTarking
         Me.tblScaffoldInformation.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.tblScaffoldInformation.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCellsExceptHeaders
         Me.tblScaffoldInformation.BackgroundColor = System.Drawing.Color.White
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle2.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.tblScaffoldInformation.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle2
+        DataGridViewCellStyle18.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle18.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle18.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle18.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle18.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle18.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle18.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.tblScaffoldInformation.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle18
         Me.tblScaffoldInformation.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.tblScaffoldInformation.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.clmType, Me.clmWidth, Me.clmLength, Me.clmHeigth, Me.clmDecks, Me.clmKOs, Me.clmBase})
         Me.tblScaffoldInformation.Dock = System.Windows.Forms.DockStyle.Fill
@@ -2091,8 +2094,8 @@ Partial Class scafoldTarking
         Me.tblScaffoldInformation.MultiSelect = False
         Me.tblScaffoldInformation.Name = "tblScaffoldInformation"
         Me.tblScaffoldInformation.RowHeadersVisible = False
-        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.tblScaffoldInformation.RowsDefaultCellStyle = DataGridViewCellStyle3
+        DataGridViewCellStyle19.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.tblScaffoldInformation.RowsDefaultCellStyle = DataGridViewCellStyle19
         Me.tblScaffoldInformation.Size = New System.Drawing.Size(468, 50)
         Me.tblScaffoldInformation.TabIndex = 0
         '
@@ -2148,14 +2151,14 @@ Partial Class scafoldTarking
         Me.tblActivityHours.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.tblActivityHours.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCellsExceptHeaders
         Me.tblActivityHours.BackgroundColor = System.Drawing.Color.White
-        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle4.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.tblActivityHours.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle4
+        DataGridViewCellStyle20.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle20.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle20.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle20.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle20.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle20.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle20.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.tblActivityHours.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle20
         Me.tblActivityHours.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.tblActivityHours.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.clmBuild, Me.clmMabl, Me.clmTravl, Me.clmWhtr, Me.clmAlarm, Me.clmSafty, Me.clmStdBy, Me.clmOthh, Me.clmTotal})
         Me.tblActivityHours.Dock = System.Windows.Forms.DockStyle.Fill
@@ -2163,8 +2166,8 @@ Partial Class scafoldTarking
         Me.tblActivityHours.MultiSelect = False
         Me.tblActivityHours.Name = "tblActivityHours"
         Me.tblActivityHours.RowHeadersVisible = False
-        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.tblActivityHours.RowsDefaultCellStyle = DataGridViewCellStyle5
+        DataGridViewCellStyle21.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.tblActivityHours.RowsDefaultCellStyle = DataGridViewCellStyle21
         Me.tblActivityHours.Size = New System.Drawing.Size(468, 51)
         Me.tblActivityHours.TabIndex = 1
         '
@@ -2913,14 +2916,14 @@ Partial Class scafoldTarking
         Me.tblScaffoldTotalProductMS.BackgroundColor = System.Drawing.Color.White
         Me.tblScaffoldTotalProductMS.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.tblScaffoldTotalProductMS.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.clmIDProductSM, Me.clmQTYSM, Me.psqfM, Me.plfM})
-        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle6.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle6.SelectionBackColor = System.Drawing.Color.DarkGray
-        DataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.tblScaffoldTotalProductMS.DefaultCellStyle = DataGridViewCellStyle6
+        DataGridViewCellStyle22.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle22.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle22.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle22.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle22.SelectionBackColor = System.Drawing.Color.DarkGray
+        DataGridViewCellStyle22.SelectionForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle22.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.tblScaffoldTotalProductMS.DefaultCellStyle = DataGridViewCellStyle22
         Me.tblScaffoldTotalProductMS.Dock = System.Windows.Forms.DockStyle.Fill
         Me.tblScaffoldTotalProductMS.Location = New System.Drawing.Point(3, 21)
         Me.tblScaffoldTotalProductMS.Name = "tblScaffoldTotalProductMS"
@@ -3119,7 +3122,7 @@ Partial Class scafoldTarking
         'GroupBox5
         '
         Me.GroupBox5.BackColor = System.Drawing.Color.FromArgb(CType(CType(83, Byte), Integer), CType(CType(93, Byte), Integer), CType(CType(102, Byte), Integer))
-        Me.GroupBox5.Controls.Add(Me.tblLegMS)
+        Me.GroupBox5.Controls.Add(Me.Panel86)
         Me.GroupBox5.Dock = System.Windows.Forms.DockStyle.Fill
         Me.GroupBox5.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.GroupBox5.ForeColor = System.Drawing.SystemColors.ControlLightLight
@@ -3138,7 +3141,7 @@ Partial Class scafoldTarking
         Me.tblLegMS.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.tblLegMS.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.clmIDLCModification, Me.clmQTYLCModification, Me.clmHeigthLCModification, Me.plf, Me.psqf})
         Me.tblLegMS.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.tblLegMS.Location = New System.Drawing.Point(3, 17)
+        Me.tblLegMS.Location = New System.Drawing.Point(0, 0)
         Me.tblLegMS.Name = "tblLegMS"
         Me.tblLegMS.RowHeadersVisible = False
         Me.tblLegMS.Size = New System.Drawing.Size(191, 137)
@@ -3855,14 +3858,14 @@ Partial Class scafoldTarking
         Me.tblActivityHoursDismantle.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.tblActivityHoursDismantle.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCellsExceptHeaders
         Me.tblActivityHoursDismantle.BackgroundColor = System.Drawing.Color.White
-        DataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle7.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.tblActivityHoursDismantle.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle7
+        DataGridViewCellStyle23.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle23.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle23.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle23.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle23.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle23.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle23.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.tblActivityHoursDismantle.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle23
         Me.tblActivityHoursDismantle.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.tblActivityHoursDismantle.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.clmIdActvHrsDS, Me.clmDismentleD, Me.clmMablD, Me.clmTravlD, Me.clmWthrD, Me.clmAlarmD, Me.clmSaftyD, Me.clmStdByD, Me.clmOthHD, Me.clmTotalHD})
         Me.tblActivityHoursDismantle.Dock = System.Windows.Forms.DockStyle.Fill
@@ -3870,8 +3873,8 @@ Partial Class scafoldTarking
         Me.tblActivityHoursDismantle.MultiSelect = False
         Me.tblActivityHoursDismantle.Name = "tblActivityHoursDismantle"
         Me.tblActivityHoursDismantle.RowHeadersVisible = False
-        DataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.tblActivityHoursDismantle.RowsDefaultCellStyle = DataGridViewCellStyle8
+        DataGridViewCellStyle24.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.tblActivityHoursDismantle.RowsDefaultCellStyle = DataGridViewCellStyle24
         Me.tblActivityHoursDismantle.Size = New System.Drawing.Size(644, 66)
         Me.tblActivityHoursDismantle.TabIndex = 10
         '
@@ -6243,6 +6246,16 @@ Partial Class scafoldTarking
         Me.btnSaveAll.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         Me.btnSaveAll.UseVisualStyleBackColor = True
         '
+        'Panel86
+        '
+        Me.Panel86.Controls.Add(Me.tblLegMS)
+        Me.Panel86.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Panel86.ForeColor = System.Drawing.SystemColors.ActiveCaptionText
+        Me.Panel86.Location = New System.Drawing.Point(3, 17)
+        Me.Panel86.Name = "Panel86"
+        Me.Panel86.Size = New System.Drawing.Size(191, 137)
+        Me.Panel86.TabIndex = 1
+        '
         'scafoldTarking
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -6482,6 +6495,7 @@ Partial Class scafoldTarking
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.btnRestore, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.btnMaximize, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.Panel86.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
@@ -6987,4 +7001,5 @@ Partial Class scafoldTarking
     Friend WithEvents btnReportEstimationSC As Button
     Friend WithEvents btnNewEst As Button
     Friend WithEvents btnEstimationCostSC As Button
+    Friend WithEvents Panel86 As Panel
 End Class
