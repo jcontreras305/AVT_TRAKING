@@ -24,27 +24,37 @@ Partial Class EstimationCost
     Private Sub InitializeComponent()
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
         Me.TitleBar = New System.Windows.Forms.Panel()
-        Me.Label1 = New System.Windows.Forms.Label()
-        Me.TableLayoutPanel2 = New System.Windows.Forms.TableLayoutPanel()
-        Me.tblEstimationCostSC = New System.Windows.Forms.DataGridView()
-        Me.tblFactorSC = New System.Windows.Forms.DataGridView()
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.PictureBox3 = New System.Windows.Forms.PictureBox()
         Me.btnRestore = New System.Windows.Forms.PictureBox()
         Me.btnMaximize = New System.Windows.Forms.PictureBox()
+        Me.Label1 = New System.Windows.Forms.Label()
         Me.btnExit = New System.Windows.Forms.PictureBox()
         Me.btnDeleteEstCost = New System.Windows.Forms.Button()
         Me.btnSaveEstCost = New System.Windows.Forms.Button()
+        Me.TableLayoutPanel2 = New System.Windows.Forms.TableLayoutPanel()
+        Me.TableLayoutPanel3 = New System.Windows.Forms.TableLayoutPanel()
+        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.tblTypeCostSC = New System.Windows.Forms.DataGridView()
+        Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.tblScafEstCost = New System.Windows.Forms.DataGridView()
+        Me.GroupBox3 = New System.Windows.Forms.GroupBox()
+        Me.tblFactorSC = New System.Windows.Forms.DataGridView()
         Me.TableLayoutPanel1.SuspendLayout()
         Me.TitleBar.SuspendLayout()
-        Me.TableLayoutPanel2.SuspendLayout()
-        CType(Me.tblEstimationCostSC, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.tblFactorSC, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox3, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.btnRestore, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.btnMaximize, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.btnExit, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.TableLayoutPanel2.SuspendLayout()
+        Me.TableLayoutPanel3.SuspendLayout()
+        Me.GroupBox1.SuspendLayout()
+        CType(Me.tblTypeCostSC, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.GroupBox2.SuspendLayout()
+        CType(Me.tblScafEstCost, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.GroupBox3.SuspendLayout()
+        CType(Me.tblFactorSC, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'TableLayoutPanel1
@@ -59,7 +69,7 @@ Partial Class EstimationCost
         Me.TableLayoutPanel1.RowCount = 2
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 80.0!))
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-        Me.TableLayoutPanel1.Size = New System.Drawing.Size(861, 352)
+        Me.TableLayoutPanel1.Size = New System.Drawing.Size(861, 488)
         Me.TableLayoutPanel1.TabIndex = 0
         '
         'TitleBar
@@ -78,51 +88,6 @@ Partial Class EstimationCost
         Me.TitleBar.Name = "TitleBar"
         Me.TitleBar.Size = New System.Drawing.Size(855, 74)
         Me.TitleBar.TabIndex = 1
-        '
-        'Label1
-        '
-        Me.Label1.AutoSize = True
-        Me.Label1.Font = New System.Drawing.Font("Verdana", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label1.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.Label1.Location = New System.Drawing.Point(352, 10)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(143, 18)
-        Me.Label1.TabIndex = 6
-        Me.Label1.Text = "Estimation Cost"
-        '
-        'TableLayoutPanel2
-        '
-        Me.TableLayoutPanel2.ColumnCount = 2
-        Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 23.04786!))
-        Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 76.95214!))
-        Me.TableLayoutPanel2.Controls.Add(Me.tblEstimationCostSC, 1, 0)
-        Me.TableLayoutPanel2.Controls.Add(Me.tblFactorSC, 0, 0)
-        Me.TableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.TableLayoutPanel2.Location = New System.Drawing.Point(3, 83)
-        Me.TableLayoutPanel2.Name = "TableLayoutPanel2"
-        Me.TableLayoutPanel2.RowCount = 1
-        Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
-        Me.TableLayoutPanel2.Size = New System.Drawing.Size(855, 266)
-        Me.TableLayoutPanel2.TabIndex = 2
-        '
-        'tblEstimationCostSC
-        '
-        Me.tblEstimationCostSC.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.tblEstimationCostSC.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.tblEstimationCostSC.Location = New System.Drawing.Point(200, 3)
-        Me.tblEstimationCostSC.Name = "tblEstimationCostSC"
-        Me.tblEstimationCostSC.Size = New System.Drawing.Size(652, 260)
-        Me.tblEstimationCostSC.TabIndex = 0
-        '
-        'tblFactorSC
-        '
-        Me.tblFactorSC.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
-        Me.tblFactorSC.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.tblFactorSC.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.tblFactorSC.Location = New System.Drawing.Point(3, 3)
-        Me.tblFactorSC.Name = "tblFactorSC"
-        Me.tblFactorSC.Size = New System.Drawing.Size(191, 260)
-        Me.tblFactorSC.TabIndex = 1
         '
         'PictureBox1
         '
@@ -162,6 +127,17 @@ Partial Class EstimationCost
         Me.btnMaximize.Size = New System.Drawing.Size(28, 29)
         Me.btnMaximize.TabIndex = 7
         Me.btnMaximize.TabStop = False
+        '
+        'Label1
+        '
+        Me.Label1.AutoSize = True
+        Me.Label1.Font = New System.Drawing.Font("Verdana", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label1.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.Label1.Location = New System.Drawing.Point(352, 10)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(143, 18)
+        Me.Label1.TabIndex = 6
+        Me.Label1.Text = "Estimation Cost"
         '
         'btnExit
         '
@@ -207,11 +183,102 @@ Partial Class EstimationCost
         Me.btnSaveEstCost.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         Me.btnSaveEstCost.UseVisualStyleBackColor = True
         '
+        'TableLayoutPanel2
+        '
+        Me.TableLayoutPanel2.ColumnCount = 2
+        Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 23.04786!))
+        Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 76.95214!))
+        Me.TableLayoutPanel2.Controls.Add(Me.TableLayoutPanel3, 1, 0)
+        Me.TableLayoutPanel2.Controls.Add(Me.GroupBox3, 0, 0)
+        Me.TableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.TableLayoutPanel2.Location = New System.Drawing.Point(3, 83)
+        Me.TableLayoutPanel2.Name = "TableLayoutPanel2"
+        Me.TableLayoutPanel2.RowCount = 1
+        Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
+        Me.TableLayoutPanel2.Size = New System.Drawing.Size(855, 402)
+        Me.TableLayoutPanel2.TabIndex = 2
+        '
+        'TableLayoutPanel3
+        '
+        Me.TableLayoutPanel3.ColumnCount = 1
+        Me.TableLayoutPanel3.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
+        Me.TableLayoutPanel3.Controls.Add(Me.GroupBox1, 0, 0)
+        Me.TableLayoutPanel3.Controls.Add(Me.GroupBox2, 0, 1)
+        Me.TableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.TableLayoutPanel3.Location = New System.Drawing.Point(200, 3)
+        Me.TableLayoutPanel3.Name = "TableLayoutPanel3"
+        Me.TableLayoutPanel3.RowCount = 2
+        Me.TableLayoutPanel3.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
+        Me.TableLayoutPanel3.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
+        Me.TableLayoutPanel3.Size = New System.Drawing.Size(652, 396)
+        Me.TableLayoutPanel3.TabIndex = 2
+        '
+        'GroupBox1
+        '
+        Me.GroupBox1.Controls.Add(Me.tblTypeCostSC)
+        Me.GroupBox1.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.GroupBox1.Location = New System.Drawing.Point(3, 3)
+        Me.GroupBox1.Name = "GroupBox1"
+        Me.GroupBox1.Size = New System.Drawing.Size(646, 192)
+        Me.GroupBox1.TabIndex = 0
+        Me.GroupBox1.TabStop = False
+        Me.GroupBox1.Text = "Scaffol Type Cost"
+        '
+        'tblTypeCostSC
+        '
+        Me.tblTypeCostSC.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.tblTypeCostSC.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.tblTypeCostSC.Location = New System.Drawing.Point(3, 16)
+        Me.tblTypeCostSC.Name = "tblTypeCostSC"
+        Me.tblTypeCostSC.Size = New System.Drawing.Size(640, 173)
+        Me.tblTypeCostSC.TabIndex = 0
+        '
+        'GroupBox2
+        '
+        Me.GroupBox2.Controls.Add(Me.tblScafEstCost)
+        Me.GroupBox2.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.GroupBox2.Location = New System.Drawing.Point(3, 201)
+        Me.GroupBox2.Name = "GroupBox2"
+        Me.GroupBox2.Size = New System.Drawing.Size(646, 192)
+        Me.GroupBox2.TabIndex = 1
+        Me.GroupBox2.TabStop = False
+        Me.GroupBox2.Text = "Scaffold Estimation Cost"
+        '
+        'tblScafEstCost
+        '
+        Me.tblScafEstCost.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.tblScafEstCost.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.tblScafEstCost.Location = New System.Drawing.Point(3, 16)
+        Me.tblScafEstCost.Name = "tblScafEstCost"
+        Me.tblScafEstCost.Size = New System.Drawing.Size(640, 173)
+        Me.tblScafEstCost.TabIndex = 0
+        '
+        'GroupBox3
+        '
+        Me.GroupBox3.Controls.Add(Me.tblFactorSC)
+        Me.GroupBox3.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.GroupBox3.Location = New System.Drawing.Point(3, 3)
+        Me.GroupBox3.Name = "GroupBox3"
+        Me.GroupBox3.Size = New System.Drawing.Size(191, 396)
+        Me.GroupBox3.TabIndex = 3
+        Me.GroupBox3.TabStop = False
+        Me.GroupBox3.Text = "Factor"
+        '
+        'tblFactorSC
+        '
+        Me.tblFactorSC.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
+        Me.tblFactorSC.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.tblFactorSC.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.tblFactorSC.Location = New System.Drawing.Point(3, 16)
+        Me.tblFactorSC.Name = "tblFactorSC"
+        Me.tblFactorSC.Size = New System.Drawing.Size(185, 377)
+        Me.tblFactorSC.TabIndex = 1
+        '
         'EstimationCost
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(861, 352)
+        Me.ClientSize = New System.Drawing.Size(861, 488)
         Me.Controls.Add(Me.TableLayoutPanel1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
         Me.Name = "EstimationCost"
@@ -220,20 +287,25 @@ Partial Class EstimationCost
         Me.TableLayoutPanel1.ResumeLayout(False)
         Me.TitleBar.ResumeLayout(False)
         Me.TitleBar.PerformLayout()
-        Me.TableLayoutPanel2.ResumeLayout(False)
-        CType(Me.tblEstimationCostSC, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.tblFactorSC, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PictureBox3, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.btnRestore, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.btnMaximize, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.btnExit, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.TableLayoutPanel2.ResumeLayout(False)
+        Me.TableLayoutPanel3.ResumeLayout(False)
+        Me.GroupBox1.ResumeLayout(False)
+        CType(Me.tblTypeCostSC, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.GroupBox2.ResumeLayout(False)
+        CType(Me.tblScafEstCost, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.GroupBox3.ResumeLayout(False)
+        CType(Me.tblFactorSC, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
 
     Friend WithEvents TableLayoutPanel1 As TableLayoutPanel
-    Friend WithEvents tblEstimationCostSC As DataGridView
+    Friend WithEvents tblTypeCostSC As DataGridView
     Friend WithEvents TitleBar As Panel
     Friend WithEvents btnDeleteEstCost As Button
     Friend WithEvents btnSaveEstCost As Button
@@ -245,4 +317,9 @@ Partial Class EstimationCost
     Friend WithEvents btnRestore As PictureBox
     Friend WithEvents btnMaximize As PictureBox
     Friend WithEvents PictureBox1 As PictureBox
+    Friend WithEvents TableLayoutPanel3 As TableLayoutPanel
+    Friend WithEvents GroupBox1 As GroupBox
+    Friend WithEvents GroupBox2 As GroupBox
+    Friend WithEvents tblScafEstCost As DataGridView
+    Friend WithEvents GroupBox3 As GroupBox
 End Class

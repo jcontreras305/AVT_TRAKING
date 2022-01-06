@@ -4,7 +4,8 @@ Class EstimationCost
     Dim selectTable As String = ""
     Private Sub EstimationCost_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Try
-            mtdEstiation.SelectEstCostSC(tblEstimationCostSC)
+            mtdEstiation.SelectTypeCost(tblTypeCostSC)
+            mtdEstiation.SelectScafEstCost(tblScafEstCost)
             mtdEstiation.selectFactorSC(tblFactorSC)
             selectTable = tblFactorSC.Name
         Catch ex As Exception
@@ -12,9 +13,17 @@ Class EstimationCost
     End Sub
 
     Private Sub btnSaveEstCost_Click(sender As Object, e As EventArgs) Handles btnSaveEstCost.Click
-        If selectTable = tblEstimationCostSC.Name Then
-            If tblEstimationCostSC.SelectedRows.Count > 0 Then
-                mtdEstiation.SaveEstCostSC(tblEstimationCostSC)
+        If selectTable = tblTypeCostSC.Name Then
+            If tblTypeCostSC.SelectedRows.Count > 0 Then
+                mtdEstiation.SaveTypeScafCost(tblTypeCostSC)
+                mtdEstiation.SelectTypeCost(tblTypeCostSC)
+            Else
+                MsgBox("Please select a row.")
+            End If
+        ElseIf selectTable = tblScafEstCost.Name Then
+            If tblScafEstCost.SelectedRows.Count > 0 Then
+                mtdEstiation.SaveScafEstCost(tblScafEstCost)
+                mtdEstiation.SelectScafEstCost(tblScafEstCost)
             Else
                 MsgBox("Please select a row.")
             End If
@@ -28,37 +37,68 @@ Class EstimationCost
 
     End Sub
 
-    Private Sub tblEstimationCostSC_CellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles tblEstimationCostSC.CellEndEdit
+    Private Sub tblEstimationCostSC_CellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles tblTypeCostSC.CellEndEdit
         Try
-            If e.ColumnIndex >= tblEstimationCostSC.Columns("M3EDCHARGES").Index Then
-                If tblEstimationCostSC.Rows(tblEstimationCostSC.CurrentRow.Index).Cells(e.ColumnIndex).Value IsNot Nothing Then
-                    Dim value As String = tblEstimationCostSC.Rows(tblEstimationCostSC.CurrentRow.Index).Cells(e.ColumnIndex).Value
-                    If Not value.Equals("") Then
-                        Dim NewValue = Format(CDec(value), "##,##0.00")
-                        tblEstimationCostSC.Rows(tblEstimationCostSC.CurrentRow.Index).Cells(e.ColumnIndex).Value = NewValue
-                    End If
-                Else
-                    tblEstimationCostSC.Rows(tblEstimationCostSC.CurrentRow.Index).Cells(e.ColumnIndex).Value = "0.00"
-                End If
-            ElseIf e.ColumnIndex = tblEstimationCostSC.Columns("idEstCost").Index Then
-                For Each cell As DataGridViewCell In tblEstimationCostSC.Rows(e.RowIndex).Cells
+            If e.ColumnIndex = tblTypeCostSC.Columns("SCTP").Index Then
+                For Each cell As DataGridViewCell In tblTypeCostSC.Rows(e.RowIndex).Cells
                     If cell.Value Is DBNull.Value Then
-                        If cell.ColumnIndex = tblEstimationCostSC.Columns("DECKS").Index Or cell.ColumnIndex = tblEstimationCostSC.Columns("ACHT").Index Or cell.ColumnIndex = tblEstimationCostSC.Columns("BILLINGDAYS").Index Or cell.ColumnIndex = tblEstimationCostSC.Columns("EDDAYS").Index Then
+                        If (cell.ColumnIndex > 1) Then
+                            cell.Value = "0.00"
+                        ElseIf cell.ColumnIndex = tblTypeCostSC.Columns("SCSN").Index Or cell.ColumnIndex = tblTypeCostSC.Columns("BDRATE").Index Then
                             cell.Value = "0"
-                        ElseIf cell.ColumnIndex = tblEstimationCostSC.Columns("BDRATE").Index Or cell.ColumnIndex = tblEstimationCostSC.Columns("M3").Index Or cell.ColumnIndex = tblEstimationCostSC.Columns("M2").Index Or cell.ColumnIndex = tblEstimationCostSC.Columns("MA3").Index Or cell.ColumnIndex = tblEstimationCostSC.Columns("MA2").Index Then
-                            cell.Value = "0.0"
-                        ElseIf cell.ColumnIndex = tblEstimationCostSC.Columns("SCTP").Index Then
-                            cell.Value = ""
-                        ElseIf cell.ColumnIndex >= tblEstimationCostSC.Columns("M3EDCHARGES").Index Then
+                        End If
+                    End If
+                Next
+            ElseIf Not (e.ColumnIndex = tblTypeCostSC.Columns("SCSN").Index Or e.ColumnIndex = tblTypeCostSC.Columns("BDRATE").Index) Then
+                Dim NewValue = Format(CDec((tblTypeCostSC.Rows(e.RowIndex).Cells(e.ColumnIndex).Value)), "##,##0.00")
+                tblTypeCostSC.Rows(e.RowIndex).Cells(e.ColumnIndex).Value = NewValue
+                'tblEstimationCostSC.Rows(e.RowIndex).Cells(e.ColumnIndex).Value = CDec(tblEstimationCostSC.Rows(e.RowIndex).Cells(e.ColumnIndex).Value)
+                'If tblEstimationCostSC.Rows(tblEstimationCostSC.CurrentRow.Index).Cells(e.ColumnIndex).Value IsNot Nothing Then
+                '    Dim value As String = tblEstimationCostSC.Rows(tblEstimationCostSC.CurrentRow.Index).Cells(e.ColumnIndex).Value
+                '    If Not value.Equals("") Then
+                '        Dim NewValue = Format(CDec(value), "##,##0.00")
+                '        tblEstimationCostSC.Rows(tblEstimationCostSC.CurrentRow.Index).Cells(e.ColumnIndex).Value = NewValue
+                '    End If
+                'Else
+                '    tblEstimationCostSC.Rows(tblEstimationCostSC.CurrentRow.Index).Cells(e.ColumnIndex).Value = "0.00"
+                'End If
+                'ElseIf e.ColumnIndex = tblEstimationCostSC.Columns("idEstCost").Index Then
+                '    For Each cell As DataGridViewCell In tblEstimationCostSC.Rows(e.RowIndex).Cells
+                '        If cell.Value Is DBNull.Value Then
+                '            If cell.ColumnIndex = tblEstimationCostSC.Columns("DECKS").Index Or cell.ColumnIndex = tblEstimationCostSC.Columns("ACHT").Index Or cell.ColumnIndex = tblEstimationCostSC.Columns("BILLINGDAYS").Index Or cell.ColumnIndex = tblEstimationCostSC.Columns("EDDAYS").Index Then
+                '                cell.Value = "0"
+                '            ElseIf cell.ColumnIndex = tblEstimationCostSC.Columns("BDRATE").Index Or cell.ColumnIndex = tblEstimationCostSC.Columns("M3").Index Or cell.ColumnIndex = tblEstimationCostSC.Columns("M2").Index Or cell.ColumnIndex = tblEstimationCostSC.Columns("MA3").Index Or cell.ColumnIndex = tblEstimationCostSC.Columns("MA2").Index Then
+                '                cell.Value = "0.0"
+                '            ElseIf cell.ColumnIndex = tblEstimationCostSC.Columns("SCTP").Index Then
+                '                cell.Value = ""
+                '            ElseIf cell.ColumnIndex >= tblEstimationCostSC.Columns("M3EDCHARGES").Index Then
+                '                cell.Value = "0.00"
+                '            End If
+                '        End If
+                '    Next
+                'ElseIf e.ColumnIndex < tblEstimationCostSC.Columns("M3EDCHARGES").Index And e.ColumnIndex <> tblEstimationCostSC.Columns("SCTP").Index Then
+                '    Dim value As String = tblEstimationCostSC.Rows(tblEstimationCostSC.CurrentRow.Index).Cells(e.ColumnIndex).Value
+                '    If value = "" Then
+                '        tblEstimationCostSC.Rows(tblEstimationCostSC.CurrentRow.Index).Cells(e.ColumnIndex).Value = "0"
+                '    End If
+            End If
+        Catch ex As Exception
+
+        End Try
+    End Sub
+    Private Sub tblScafEstCost_CellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles tblScafEstCost.CellEndEdit
+        Try
+            If e.ColumnIndex = tblScafEstCost.Columns("SCEC").Index Then
+                For Each cell As DataGridViewCell In tblScafEstCost.Rows(e.RowIndex).Cells
+                    If cell.Value Is DBNull.Value Then
+                        If (cell.ColumnIndex > 1) Then
                             cell.Value = "0.00"
                         End If
                     End If
                 Next
-            ElseIf e.ColumnIndex < tblEstimationCostSC.Columns("M3EDCHARGES").Index And e.ColumnIndex <> tblEstimationCostSC.Columns("SCTP").Index Then
-                Dim value As String = tblEstimationCostSC.Rows(tblEstimationCostSC.CurrentRow.Index).Cells(e.ColumnIndex).Value
-                If value = "" Then
-                    tblEstimationCostSC.Rows(tblEstimationCostSC.CurrentRow.Index).Cells(e.ColumnIndex).Value = "0"
-                End If
+            ElseIf Not (e.ColumnIndex = tblScafEstCost.Columns("SCEC").Index) Then
+                Dim NewValue = Format(CDec((tblScafEstCost.Rows(e.RowIndex).Cells(e.ColumnIndex).Value)), "##,##0.00")
+                tblScafEstCost.Rows(e.RowIndex).Cells(e.ColumnIndex).Value = NewValue
             End If
         Catch ex As Exception
 
@@ -70,10 +110,10 @@ Class EstimationCost
     End Sub
 
     Private Sub btnDeleteEstCost_Click(sender As Object, e As EventArgs) Handles btnDeleteEstCost.Click
-        If selectTable = tblEstimationCostSC.Name Then
-            If tblEstimationCostSC.SelectedRows.Count > 0 Then
-                mtdEstiation.deleteScafEstCost(tblEstimationCostSC)
-                mtdEstiation.SelectEstCostSC(tblEstimationCostSC)
+        If selectTable = tblTypeCostSC.Name Then
+            If tblTypeCostSC.SelectedRows.Count > 0 Then
+                mtdEstiation.deleteTypeScafCost(tblTypeCostSC)
+                mtdEstiation.SelectTypeCost(tblTypeCostSC)
             Else
                 MsgBox("Please select a row.")
             End If
@@ -90,9 +130,11 @@ Class EstimationCost
     Private Sub tblFactorSC_Click(sender As Object, e As EventArgs) Handles tblFactorSC.Click
         selectTable = tblFactorSC.Name
     End Sub
-
-    Private Sub tblEstimationCostSC_Click(sender As Object, e As EventArgs) Handles tblEstimationCostSC.Click
-        selectTable = tblEstimationCostSC.Name
+    Private Sub tblScafEstCost_Click(sender As Object, e As EventArgs) Handles tblScafEstCost.Click
+        selectTable = tblScafEstCost.Name
+    End Sub
+    Private Sub tblEstimationCostSC_Click(sender As Object, e As EventArgs) Handles tblTypeCostSC.Click
+        selectTable = tblTypeCostSC.Name
     End Sub
 
     Private Sub tblFactorSC_CellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles tblFactorSC.CellEndEdit
@@ -133,4 +175,6 @@ Class EstimationCost
     Private Sub PictureBox3_Click(sender As Object, e As EventArgs) Handles PictureBox3.Click
         Me.WindowState = FormWindowState.Minimized
     End Sub
+
+
 End Class
