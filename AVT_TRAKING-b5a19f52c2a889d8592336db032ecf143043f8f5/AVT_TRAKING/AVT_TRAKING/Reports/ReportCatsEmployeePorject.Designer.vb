@@ -24,6 +24,7 @@ Partial Class ReportCatsEmployeePorject
     Private Sub InitializeComponent()
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
         Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.chkAllEmployees = New System.Windows.Forms.CheckBox()
         Me.cmbEmployees = New System.Windows.Forms.ComboBox()
         Me.btnReportE = New System.Windows.Forms.Button()
         Me.Label2 = New System.Windows.Forms.Label()
@@ -38,7 +39,6 @@ Partial Class ReportCatsEmployeePorject
         Me.btnRestore = New System.Windows.Forms.PictureBox()
         Me.btnMaximize = New System.Windows.Forms.PictureBox()
         Me.crvCatsEmployeebyProject = New CrystalDecisions.Windows.Forms.CrystalReportViewer()
-        Me.chkAllEmployees = New System.Windows.Forms.CheckBox()
         Me.TableLayoutPanel1.SuspendLayout()
         Me.Panel2.SuspendLayout()
         CType(Me.PictureBox4, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -82,6 +82,18 @@ Partial Class ReportCatsEmployeePorject
         Me.Panel2.Name = "Panel2"
         Me.Panel2.Size = New System.Drawing.Size(696, 64)
         Me.Panel2.TabIndex = 3
+        '
+        'chkAllEmployees
+        '
+        Me.chkAllEmployees.AutoSize = True
+        Me.chkAllEmployees.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.chkAllEmployees.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.chkAllEmployees.Location = New System.Drawing.Point(400, 4)
+        Me.chkAllEmployees.Name = "chkAllEmployees"
+        Me.chkAllEmployees.Size = New System.Drawing.Size(106, 17)
+        Me.chkAllEmployees.TabIndex = 17
+        Me.chkAllEmployees.Text = "All Employees"
+        Me.chkAllEmployees.UseVisualStyleBackColor = True
         '
         'cmbEmployees
         '
@@ -234,18 +246,6 @@ Partial Class ReportCatsEmployeePorject
         Me.crvCatsEmployeebyProject.Name = "crvCatsEmployeebyProject"
         Me.crvCatsEmployeebyProject.Size = New System.Drawing.Size(696, 413)
         Me.crvCatsEmployeebyProject.TabIndex = 4
-        '
-        'chkAllEmployees
-        '
-        Me.chkAllEmployees.AutoSize = True
-        Me.chkAllEmployees.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.chkAllEmployees.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.chkAllEmployees.Location = New System.Drawing.Point(400, 4)
-        Me.chkAllEmployees.Name = "chkAllEmployees"
-        Me.chkAllEmployees.Size = New System.Drawing.Size(106, 17)
-        Me.chkAllEmployees.TabIndex = 17
-        Me.chkAllEmployees.Text = "All Employees"
-        Me.chkAllEmployees.UseVisualStyleBackColor = True
         '
         'ReportCatsEmployeePorject
         '
