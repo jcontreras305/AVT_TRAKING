@@ -3548,16 +3548,27 @@ Public Class scafoldTarking
                 estMeter = mtdEstimation.selectEstMeters(ControlNumEst)
                 txtControlNumber.Text = mtdEstimation.controlNum
                 txtControlNumber.Enabled = False
-                If mtdEstimation.type > -1 Then
+                If mtdEstimation.scfTypeId > -1 Then
                     For Each item As String In cmbScaffolType.Items
                         Dim array() As String = item.Split("    ")
-                        If array(0) = CStr(mtdEstimation.type) Then
+                        If array(0) = CStr(mtdEstimation.scfTypeId) Then
                             cmbScaffolType.SelectedItem = cmbScaffolType.Items(cmbScaffolType.FindString(item))
                             Exit For
                         End If
                     Next
                 Else
                     cmbScaffolType.SelectedItem = cmbScaffolType.Items(0)
+                End If
+                If mtdEstimation.IdEstCost > -1 Then
+                    For Each item As String In CmbScaffoldCost.Items
+                        Dim array() As String = item.Split("    ")
+                        If array(0) = CStr(mtdEstimation.IdEstCost) Then
+                            CmbScaffoldCost.SelectedItem = CmbScaffoldCost.Items(CmbScaffoldCost.FindString(item))
+                            Exit For
+                        End If
+                    Next
+                Else
+                    CmbScaffoldCost.SelectedItem = cmbScaffolType.Items(0)
                 End If
                 If mtdEstimation.idAux <> "" Then
                     For Each row As Data.DataRow In tblWOTASK.Rows
