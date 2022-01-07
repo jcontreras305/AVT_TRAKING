@@ -5,8 +5,128 @@ Public Class EstimationSC
     Dim _list As New List(Of String)
 
     Dim _controlNum, _idAux, _unit, _location As String
-    Dim _type, _descks, _groundheigth, _elevator As Integer
+    Dim _type, _cost, _descks, _groundheigth, _elevation, _IdEstCost, _scfTypeId As Integer
     Dim _daysActive, _width, _heigth, _length As Double
+    Dim _M3, _M2, _MA3, _MA2, _ACHT, _DECKS, _TOTALHEIGTH As Double
+    Dim _factor As Decimal
+
+    Public Property M3() As Double
+        Get
+            If _M3 = Nothing Then
+                _M3 = Format(((width * length * (heigth + elevation)) / 35.1467), "##,##0.00")
+                _M3 = If(factor > 0, _M3 + (_M3 * (factor / 100)), _M3)
+                Return _M3
+            Else
+                _M3 = Format(((width * length * (heigth + elevation)) / 35.1467), "##,##0.00")
+                _M3 = If(factor > 0, _M3 + (_M3 * (factor / 100)), _M3)
+                Return _M3
+            End If
+        End Get
+        Set(ByVal M3 As Double)
+            _M3 = M3
+        End Set
+    End Property
+    Public Property M2() As Double
+        Get
+            If _M2 = Nothing Then
+                _M2 = Format(((width * length) / 10.76391), "##,##0.00")
+                _M2 = If(factor > 0, _M2 + (_M2 * (factor / 100)), _M2)
+                Return _M2
+            Else
+                _M2 = Format(((width * length) / 10.76391), "##,##0.00")
+                _M2 = If(factor > 0, _M2 + (_M2 * (factor / 100)), _M2)
+                Return _M2
+            End If
+        End Get
+        Set(ByVal M2 As Double)
+            _M2 = M2
+        End Set
+    End Property
+    Public Property MA3() As Double
+        Get
+            If _MA3 = Nothing Then
+                _MA3 = Format(((width * length * (heigth - elevation)) / 35.31467), "##,##0.00")
+                _MA3 = If(factor > 0, _MA3 + (_MA3 * (factor / 100)), _MA3)
+                Return _MA3
+            Else
+                _MA3 = Format(((width * length * (heigth - elevation)) / 35.31467), "##,##0.00")
+                _MA3 = If(factor > 0, _MA3 + (_MA3 * (factor / 100)), _MA3)
+                Return _MA3
+            End If
+        End Get
+        Set(ByVal MA3 As Double)
+            _MA3 = MA3
+        End Set
+    End Property
+    Public Property MA2() As Double
+        Get
+            If _MA2 = Nothing Then
+                _MA2 = Format(((width * length) / 10.76391), "##,##0.00")
+                _MA2 = If(factor > 0, _MA2 + (_MA2 * (factor / 100)), _MA2)
+                Return _MA2
+            Else
+                Return _MA2
+            End If
+        End Get
+        Set(ByVal MA2 As Double)
+            _MA2 = MA2
+        End Set
+    End Property
+    Public Property ACHT() As Double
+        Get
+            If _ACHT = Nothing Then
+                _ACHT = heigth + groundheigth
+                Return _ACHT
+            Else
+                _ACHT = heigth + groundheigth
+                Return _ACHT
+            End If
+        End Get
+        Set(ByVal ACHT As Double)
+            _ACHT = ACHT
+        End Set
+    End Property
+    Public Property DECKS() As Double
+        Get
+            If _DECKS = Nothing Then
+                _DECKS = If(descks > 0, descks - 1, 0)
+                Return _DECKS
+            Else
+                _DECKS = If(descks > 0, descks - 1, 0)
+                Return _DECKS
+            End If
+        End Get
+        Set(ByVal Decks As Double)
+            _DECKS = Decks
+        End Set
+    End Property
+    Public Property TOTALHEIGTH() As Double
+        Get
+            If _TOTALHEIGTH = Nothing Then
+                _TOTALHEIGTH = heigth + groundheigth
+                Return _TOTALHEIGTH
+            Else
+                _TOTALHEIGTH = heigth + groundheigth
+                Return _TOTALHEIGTH
+            End If
+        End Get
+        Set(ByVal TotalHeigth As Double)
+            _TOTALHEIGTH = TotalHeigth
+        End Set
+    End Property
+    Public Property factor() As Double
+        Get
+            If _factor = Nothing Then
+                _factor = 0
+                Return _factor
+            Else
+                Return _factor
+            End If
+        End Get
+        Set(ByVal factor As Double)
+            _factor = factor
+        End Set
+    End Property
 
     Public Sub Clear()
         _list.Clear()
@@ -15,9 +135,10 @@ Public Class EstimationSC
         _unit = ""
         _location = ""
         _type = -1
+        _cost = -1
         _descks = 0
         _groundheigth = 0
-        _elevator = 0
+        _elevation = 0
         _daysActive = 0.0
         _width = 0.0
         _heigth = 0.0
@@ -96,6 +217,18 @@ Public Class EstimationSC
             _type = type
         End Set
     End Property
+    Public Property cost() As Integer
+        Get
+            If _cost = Nothing Then
+                Return -1
+            Else
+                Return _cost
+            End If
+        End Get
+        Set(ByVal cost As Integer)
+            _cost = cost
+        End Set
+    End Property
     Public Property descks() As Integer
         Get
             If _descks = Nothing Then
@@ -120,16 +253,40 @@ Public Class EstimationSC
             _groundheigth = groundheigth
         End Set
     End Property
-    Public Property elevator() As Integer
+    Public Property elevation() As Integer
         Get
-            If _elevator = Nothing Then
+            If _elevation = Nothing Then
                 Return 0
             Else
-                Return _elevator
+                Return _elevation
             End If
         End Get
-        Set(ByVal elevator As Integer)
-            _elevator = elevator
+        Set(ByVal elevation As Integer)
+            _elevation = elevation
+        End Set
+    End Property
+    Public Property IdEstCost() As Integer
+        Get
+            If _IdEstCost = Nothing Then
+                Return 0
+            Else
+                Return _IdEstCost
+            End If
+        End Get
+        Set(ByVal IdEstCost As Integer)
+            _IdEstCost = IdEstCost
+        End Set
+    End Property
+    Public Property scfTypeId() As Integer
+        Get
+            If _scfTypeId = Nothing Then
+                Return 0
+            Else
+                Return _scfTypeId
+            End If
+        End Get
+        Set(ByVal scfTypeId As Integer)
+            _scfTypeId = scfTypeId
         End Set
     End Property
     Public Property daysActive() As Double
@@ -180,11 +337,12 @@ Public Class EstimationSC
             _length = length
         End Set
     End Property
-    Public Function SelectEstCostSC(ByVal idEstCost As String, ByVal tbl As DataTable) As Boolean
+    Public Function SelectScafEstCost(ByVal idEstCost As String, ByVal tbl As DataTable) As Boolean
         Try
             conectar()
             Dim cmd As New SqlCommand("select top 1 * from ScafEstCost where idEstCost = " + idEstCost, conn)
             If cmd.ExecuteNonQuery() Then
+                tbl.Rows.Clear()
                 Dim da As New SqlDataAdapter(cmd)
                 da.Fill(tbl)
                 Return True
@@ -197,15 +355,34 @@ Public Class EstimationSC
             desconectar()
         End Try
     End Function
-    Public Function SelectEstCostSC(ByVal tbl As DataGridView) As Boolean
+    Public Function SelectScfTypeCost(ByVal idTypeCost As String, ByVal tbl As DataTable) As Boolean
         Try
             conectar()
-            Dim cmd As New SqlCommand("select * from ScafEstCost", conn)
+            Dim cmd As New SqlCommand("select top 1 * from scfTypeCost where scfTypeId = " + idTypeCost, conn)
+            If cmd.ExecuteNonQuery() Then
+                tbl.Clear()
+                Dim da As New SqlDataAdapter(cmd)
+                da.Fill(tbl)
+                Return True
+            Else
+                Return False
+            End If
+        Catch ex As Exception
+            Return Nothing
+        Finally
+            desconectar()
+        End Try
+    End Function
+    Public Function SelectTypeCost(ByVal tbl As DataGridView) As Boolean
+        Try
+            conectar()
+            Dim cmd As New SqlCommand("select * from scfTypeCost", conn)
             If cmd.ExecuteNonQuery() Then
                 Dim da As New SqlDataAdapter(cmd)
                 Dim dt As New DataTable
                 da.Fill(dt)
                 tbl.DataSource = dt
+                tbl.Columns(0).Visible = False
                 Return True
             Else
                 Return False
@@ -217,7 +394,7 @@ Public Class EstimationSC
         End Try
     End Function
 
-    Public Function SaveEstCostSC(ByVal tbl As DataGridView) As Boolean
+    Public Function SaveTypeScafCost(ByVal tbl As DataGridView) As Boolean
         Try
             conectar()
             Dim tran As SqlTransaction
@@ -225,37 +402,146 @@ Public Class EstimationSC
             tran = conn.BeginTransaction
             Dim flag As Boolean = True
             For Each Row As DataGridViewRow In tbl.SelectedRows()
-                If Row.Cells(0).Value IsNot "" Then
-
-
-                    rowi = CStr(Row.Cells(0).Value)
+                If Row.Cells(1).Value IsNot "" Then
+                    rowi = Row.Index
                     Dim cmd As New SqlCommand("
-if (select COUNT(*) from scafEstCost where idEstCost = " + CStr(Row.Cells(0).Value) + ")=0
+if (select COUNT(*) from scfTypeCost where scfTypeId = " + If(Row.Cells(0).Value Is DBNull.Value, "0", CStr(Row.Cells(0).Value)) + " )= 0 
 begin
-    insert into scafEstCost values(" + CStr(Row.Cells(0).Value) + "," + CStr(Row.Cells(1).Value) + "," + CStr(Row.Cells(2).Value) + ",'" + CStr(Row.Cells(3).Value) + "'," + CStr(Row.Cells(4).Value) + "," + CStr(Row.Cells(5).Value) + "," + CStr(Row.Cells(6).Value) + "," + CStr(Row.Cells(7).Value) + "," + CStr(Row.Cells(8).Value) + "," + CStr(Row.Cells(9).Value) + "," + CStr(Row.Cells(10).Value) + "," + CStr(Row.Cells(11).Value) + ",
-    " + CStr(Row.Cells(12).Value) + "," + CStr(Row.Cells(13).Value) + "," + CStr(Row.Cells(14).Value) + "," + CStr(Row.Cells(15).Value) + "," + CStr(Row.Cells(16).Value) + "," + CStr(Row.Cells(17).Value) + "," + CStr(Row.Cells(18).Value) + "," + CStr(Row.Cells(19).Value) + "," + CStr(Row.Cells(20).Value) + ",
-    " + CStr(Row.Cells(21).Value) + "," + CStr(Row.Cells(22).Value) + "," + CStr(Row.Cells(23).Value) + "," + CStr(Row.Cells(24).Value) + "," + CStr(Row.Cells(25).Value) + "," + CStr(Row.Cells(26).Value) + "," + CStr(Row.Cells(27).Value) + "," + CStr(Row.Cells(28).Value) + "," + CStr(Row.Cells(29).Value) + "," + CStr(Row.Cells(30).Value) + ",
-    " + CStr(Row.Cells(31).Value) + "," + CStr(Row.Cells(32).Value) + "," + CStr(Row.Cells(33).Value) + "," + CStr(Row.Cells(34).Value) + "," + CStr(Row.Cells(35).Value) + "," + CStr(Row.Cells(36).Value) + "," + CStr(Row.Cells(37).Value) + "," + CStr(Row.Cells(38).Value) + "," + CStr(Row.Cells(39).Value) + "," + CStr(Row.Cells(40).Value) + ",
-    " + CStr(Row.Cells(41).Value) + "," + CStr(Row.Cells(42).Value) + "," + CStr(Row.Cells(43).Value) + "," + CStr(Row.Cells(44).Value) + "," + CStr(Row.Cells(45).Value) + "," + CStr(Row.Cells(46).Value) + "," + CStr(Row.Cells(47).Value) + "," + CStr(Row.Cells(48).Value) + "," + CStr(Row.Cells(49).Value) + "," + CStr(Row.Cells(50).Value) + ",
-    " + CStr(Row.Cells(51).Value) + "," + CStr(Row.Cells(52).Value) + "," + CStr(Row.Cells(53).Value) + "," + CStr(Row.Cells(54).Value) + "," + CStr(Row.Cells(55).Value) + "," + CStr(Row.Cells(56).Value) + "," + CStr(Row.Cells(57).Value) + "," + CStr(Row.Cells(58).Value) + "," + CStr(Row.Cells(59).Value) + "," + CStr(Row.Cells(60).Value) + ",
-    " + CStr(Row.Cells(61).Value) + "," + CStr(Row.Cells(62).Value) + ") 
+	insert into scfTypeCost values('" + CStr(Row.Cells(1).Value) + "'," + CStr(Row.Cells(2).Value) + "," + CStr(Row.Cells(3).Value) + "," + CStr(Row.Cells(4).Value) + "," + CStr(Row.Cells(5).Value) + "," + CStr(Row.Cells(6).Value) + "," + CStr(Row.Cells(7).Value) + "," + CStr(Row.Cells(8).Value) + "," + CStr(Row.Cells(9).Value) + "," + CStr(Row.Cells(10).Value) + "," + CStr(Row.Cells(11).Value) + "," + CStr(Row.Cells(12).Value) + "," + CStr(Row.Cells(13).Value) + "," + CStr(Row.Cells(14).Value) + "," + CStr(Row.Cells(15).Value) + "," + CStr(Row.Cells(16).Value) + "," + CStr(Row.Cells(17).Value) + "," + CStr(Row.Cells(18).Value) + "," + CStr(Row.Cells(19).Value) + "," + CStr(Row.Cells(20).Value) + "," + CStr(Row.Cells(20).Value) + "," + CStr(Row.Cells(21).Value) + "," + CStr(Row.Cells(22).Value) + "," + CStr(Row.Cells(23).Value) + "," + CStr(Row.Cells(23).Value) + "," + CStr(Row.Cells(24).Value) + "," + CStr(Row.Cells(25).Value) + ")
 end
-else if (select COUNT(*) from scafEstCost where idEstCost = " + CStr(Row.Cells(0).Value) + ")>0
-begin
-	update ScafEstCost 
-	set DECKS = " + CStr(Row.Cells(1).Value) + ",ACHT = " + CStr(Row.Cells(2).Value) + ",SCTP = '" + CStr(Row.Cells(3).Value) + "',BDRATE=" + CStr(Row.Cells(4).Value) + ",
-	M3=" + CStr(Row.Cells(5).Value) + ",M2=" + CStr(Row.Cells(6).Value) + ",MA3=" + CStr(Row.Cells(7).Value) + ",MA2=" + CStr(Row.Cells(8).Value) + ",BILLINGDAYS=0,EDDAYS=" + CStr(Row.Cells(9).Value) + ",
-	M3EDCHARGES=" + CStr(Row.Cells(10).Value) + ",M2EDCHARGES=" + CStr(Row.Cells(11).Value) + ",MA3EDCHARGES=" + CStr(Row.Cells(12).Value) + ",MA2EDCHARGES=" + CStr(Row.Cells(13).Value) + ",
-	M3LABORBP=" + CStr(Row.Cells(14).Value) + ",M3MATBP=" + CStr(Row.Cells(15).Value) + ",M3EQBP=" + CStr(Row.Cells(16).Value) + ",M3LABORDP=" + CStr(Row.Cells(17).Value) + ",M3MATDP=" + CStr(Row.Cells(18).Value) + ",M3EQDP=" + CStr(Row.Cells(19).Value) + ",
-	M2LABORBP=" + CStr(Row.Cells(20).Value) + ",M2MATBP=" + CStr(Row.Cells(21).Value) + ",M2EQBP=" + CStr(Row.Cells(22).Value) + ",M2LABORDP=" + CStr(Row.Cells(23).Value) + ",M2MATDP=" + CStr(Row.Cells(24).Value) + ",M2EQDP=" + CStr(Row.Cells(25).Value) + ",
-	MA3LABORBP=" + CStr(Row.Cells(26).Value) + ",MA3MATBP=" + CStr(Row.Cells(27).Value) + ",MA3EQBP=" + CStr(Row.Cells(28).Value) + ",MA3LABORDP=" + CStr(Row.Cells(29).Value) + ",MA3MATDP=" + CStr(Row.Cells(30).Value) + ",MA3EQDP=" + CStr(Row.Cells(31).Value) + ",
-	MA2LABORBP=" + CStr(Row.Cells(32).Value) + ",MA2MATBP=" + CStr(Row.Cells(33).Value) + ",MA2EQBP=" + CStr(Row.Cells(34).Value) + ",MA2LABORDP=" + CStr(Row.Cells(35).Value) + ",MA2MATDP=" + CStr(Row.Cells(36).Value) + ",MA2EQDP=" + CStr(Row.Cells(37).Value) + ",
-	M3LBI=" + CStr(Row.Cells(38).Value) + ",M3MBI=" + CStr(Row.Cells(39).Value) + ",M3EBI=" + CStr(Row.Cells(40).Value) + ",M3LDI=" + CStr(Row.Cells(41).Value) + ",M3MDI=" + CStr(Row.Cells(42).Value) + ",M3EDI=" + CStr(Row.Cells(43).Value) + ",
-	M2LBI=" + CStr(Row.Cells(44).Value) + ",M2MBI=" + CStr(Row.Cells(45).Value) + ",M2EBI=" + CStr(Row.Cells(46).Value) + ",M2LDI=" + CStr(Row.Cells(47).Value) + ",M2MDI=" + CStr(Row.Cells(48).Value) + ",M2EDI=" + CStr(Row.Cells(49).Value) + ",
-	MA3LBI=" + CStr(Row.Cells(50).Value) + ",MA3MBI=" + CStr(Row.Cells(51).Value) + ",MA3EBI=" + CStr(Row.Cells(52).Value) + ",MA3LDI=" + CStr(Row.Cells(53).Value) + ",MA3MDI=" + CStr(Row.Cells(54).Value) + ",MA3EDI=" + CStr(Row.Cells(56).Value) + ",
-	MA2LBI=" + CStr(Row.Cells(57).Value) + ",MA2MBI=" + CStr(Row.Cells(58).Value) + ",MA2EBI=" + CStr(Row.Cells(59).Value) + ",MA2LDI=" + CStr(Row.Cells(60).Value) + ",MA2MDI=" + CStr(Row.Cells(61).Value) + ",MA2EDI=" + CStr(Row.Cells(62).Value) + "
-	WHERE idEstCost = " + CStr(Row.Cells(0).Value) + "
-end 
+else if (select COUNT(*) from scfTypeCost where scfTypeId = " + If(Row.Cells(0).Value Is DBNull.Value, "0", CStr(Row.Cells(0).Value)) + " )> 0
+begin 
+	update scfTypeCost set SCTP = '" + CStr(Row.Cells(1).Value) + "',
+	M3LBI =" + CStr(Row.Cells(2).Value) + ",M3MBI =" + CStr(Row.Cells(3).Value) + ",M3EBI =" + CStr(Row.Cells(4).Value) + ",M3LDI =" + CStr(Row.Cells(5).Value) + ",M3MDI =" + CStr(Row.Cells(6).Value) + ",M3EDI =" + CStr(Row.Cells(7).Value) + ",
+	M2LBI =" + CStr(Row.Cells(8).Value) + ",M2MBI =" + CStr(Row.Cells(9).Value) + ",M2EBI =" + CStr(Row.Cells(10).Value) + ",M2LDI =" + CStr(Row.Cells(11).Value) + ",M2MDI =" + CStr(Row.Cells(12).Value) + ",M2EDI =" + CStr(Row.Cells(13).Value) + ",
+	MA3LBI =" + CStr(Row.Cells(14).Value) + ",MA3MBI=" + CStr(Row.Cells(15).Value) + ",MA3EBI=" + CStr(Row.Cells(16).Value) + ",MA3LDI=" + CStr(Row.Cells(17).Value) + ",MA3MDI=" + CStr(Row.Cells(18).Value) + ",MA3EDI=" + CStr(Row.Cells(19).Value) + ",
+	MA2LBI=" + CStr(Row.Cells(20).Value) + ",MA2MBI=" + CStr(Row.Cells(21).Value) + ",MA2EBI=" + CStr(Row.Cells(22).Value) + ",MA2LDI=" + CStr(Row.Cells(23).Value) + ",MA2MDI=" + CStr(Row.Cells(24).Value) + ",MA2EDI=" + CStr(Row.Cells(25).Value) + ",
+	SCSN =" + CStr(Row.Cells(26).Value) + ",BDRATE=" + CStr(Row.Cells(27).Value) + " where scfTypeId = " + If(Row.Cells(0).Value Is DBNull.Value, "0", CStr(Row.Cells(0).Value)) + "
+end  
+", conn)
+                    cmd.Transaction = tran
+                    If cmd.ExecuteNonQuery > 0 Then
+                        flag = True
+                    Else
+                        flag = False
+                        Exit For
+                    End If
+                End If
+            Next
+            If flag Then
+                tran.Commit()
+                MsgBox("Successful")
+                Return True
+            Else
+                tran.Rollback()
+                MsgBox("Error in the row " + rowi + ". Check the Information.")
+                Return False
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message())
+            Return False
+        Finally
+            desconectar()
+        End Try
+    End Function
+
+    Public Function deleteTypeScafCost(ByRef tbl As DataGridView) As Boolean
+        Try
+            conectar()
+            Dim tran As SqlTransaction
+            tran = conn.BeginTransaction
+            Dim flag As Boolean = True
+            Dim idEstCost As String = ""
+            For Each row As DataGridViewRow In tbl.SelectedRows()
+                If row.Cells(0).Value IsNot "" Then
+                    idEstCost = row.Cells(0).Value
+                    Dim cmd As New SqlCommand("delete from scfTypeCost where scfTypeId = " + idEstCost, conn)
+                    cmd.Transaction = tran
+                    If cmd.ExecuteNonQuery > 0 Then
+                        flag = True
+                    Else
+                        flag = False
+                        Exit For
+                    End If
+                End If
+            Next
+            If flag Then
+                tran.Commit()
+                MsgBox("Successful")
+                Return True
+            Else
+                tran.Rollback()
+                MsgBox("Error in the row whit the ID " + idEstCost + ".Check the inforamtion.")
+                Return False
+            End If
+        Catch ex As Exception
+            Return False
+        Finally
+            desconectar()
+        End Try
+    End Function
+    Public Function SelectScafEstCost(ByVal tbl As DataGridView) As Boolean
+        Try
+            conectar()
+            Dim cmd As New SqlCommand("select * from ScafEstCost", conn)
+            If cmd.ExecuteNonQuery() Then
+                Dim da As New SqlDataAdapter(cmd)
+                Dim dt As New DataTable
+                da.Fill(dt)
+                tbl.DataSource = dt
+                tbl.Columns(0).Visible = False
+                Return True
+            Else
+                Return False
+            End If
+        Catch ex As Exception
+            Return False
+        Finally
+            desconectar()
+        End Try
+    End Function
+
+    Public Function SaveScafEstCost(ByVal tbl As DataGridView) As Boolean
+        Try
+            conectar()
+            Dim tran As SqlTransaction
+            Dim rowi As String = ""
+            tran = conn.BeginTransaction
+            Dim flag As Boolean = True
+            For Each Row As DataGridViewRow In tbl.SelectedRows()
+                If Row.Cells(1).Value IsNot "" Then
+                    rowi = Row.Index
+                    Dim cmd As New SqlCommand("
+if (select COUNT(*) from ScafEstCost where idEstCost = " + If(Row.Cells(0).Value Is DBNull.Value, "0", CStr(Row.Cells(0).Value)) + ")= 0 
+begin 
+	insert into ScafEstCost values ('" + CStr(Row.Cells(1).Value) + "',
+        " + CStr(Row.Cells(2).Value) + "," + CStr(Row.Cells(3).Value) + "," + CStr(Row.Cells(4).Value) + "," + CStr(Row.Cells(5).Value) + ",
+        " + CStr(Row.Cells(6).Value) + "," + CStr(Row.Cells(7).Value) + "," + CStr(Row.Cells(8).Value) + ",
+        " + CStr(Row.Cells(9).Value) + "," + CStr(Row.Cells(10).Value) + "," + CStr(Row.Cells(11).Value) + ",
+        " + CStr(Row.Cells(12).Value) + "," + CStr(Row.Cells(13).Value) + "," + CStr(Row.Cells(14).Value) + ",
+        " + CStr(Row.Cells(15).Value) + "," + CStr(Row.Cells(16).Value) + "," + CStr(Row.Cells(17).Value) + ",
+        " + CStr(Row.Cells(18).Value) + "," + CStr(Row.Cells(19).Value) + "," + CStr(Row.Cells(20).Value) + ",
+        " + CStr(Row.Cells(21).Value) + "," + CStr(Row.Cells(22).Value) + "," + CStr(Row.Cells(23).Value) + ",
+        " + CStr(Row.Cells(24).Value) + "," + CStr(Row.Cells(25).Value) + "," + CStr(Row.Cells(26).Value) + ",
+        " + CStr(Row.Cells(27).Value) + "," + CStr(Row.Cells(28).Value) + "," + CStr(Row.Cells(29).Value) + ",
+        " + CStr(Row.Cells(30).Value) + "," + CStr(Row.Cells(31).Value) + ")
+end
+else if(select COUNT(*) from ScafEstCost where idEstCost = " + If(Row.Cells(0).Value Is DBNull.Value, "0", CStr(Row.Cells(0).Value)) + ")> 0
+begin 
+	update ScafEstCost set 
+	SCEC ='" + CStr(Row.Cells(1).Value) + "',
+	M3EDCHARGES =" + CStr(Row.Cells(2).Value) + ",M2EDCHARGES =" + CStr(Row.Cells(3).Value) + ",MA3EDCHARGES=" + CStr(Row.Cells(4).Value) + ",MA2EDCHARGES=" + CStr(Row.Cells(5).Value) + ",
+	M3LABORBP =" + CStr(Row.Cells(6).Value) + ",M3MATBP =" + CStr(Row.Cells(7).Value) + ",M3EQBP =" + CStr(Row.Cells(8).Value) + ",
+	M3LABORDP=" + CStr(Row.Cells(9).Value) + ",M3MATDP=" + CStr(Row.Cells(10).Value) + ",M3EQDP=" + CStr(Row.Cells(11).Value) + ",
+	M2LABORBP=" + CStr(Row.Cells(12).Value) + ",M2MATBP=" + CStr(Row.Cells(13).Value) + ",M2EQBP=" + CStr(Row.Cells(14).Value) + ",
+	M2LABORDP=" + CStr(Row.Cells(15).Value) + ",M2MATDP =" + CStr(Row.Cells(16).Value) + ",M2EQDP=" + CStr(Row.Cells(17).Value) + ",
+	MA3LABORBP=" + CStr(Row.Cells(18).Value) + ",MA3MATBP =" + CStr(Row.Cells(19).Value) + ",MA3EQBP =" + CStr(Row.Cells(20).Value) + ",
+	MA3LABORDP =" + CStr(Row.Cells(21).Value) + ",MA3MATDP =" + CStr(Row.Cells(22).Value) + ",MA3EQDP =" + CStr(Row.Cells(23).Value) + ",
+	MA2LABORBP=" + CStr(Row.Cells(24).Value) + ",MA2MATBP=" + CStr(Row.Cells(25).Value) + ",MA2EQBP=" + CStr(Row.Cells(26).Value) + ",
+	MA2LABORDP=" + CStr(Row.Cells(27).Value) + ",MA2MATDP =" + CStr(Row.Cells(28).Value) + ",MA2EQDP =" + CStr(Row.Cells(29).Value) + ",
+    BILLINGDAYS = " + CStr(Row.Cells(30).Value) + ",EDDAYS=" + CStr(Row.Cells(31).Value) + "
+	where idEstCost  = " + If(Row.Cells(0).Value Is DBNull.Value, "0", CStr(Row.Cells(0).Value)) + "
+end
 ", conn)
                     cmd.Transaction = tran
                     If cmd.ExecuteNonQuery > 0 Then
@@ -318,7 +604,6 @@ end
             desconectar()
         End Try
     End Function
-
     Public Function selectFactorSC(ByVal tbl As DataGridView) As Boolean
         Try
             conectar()
@@ -423,12 +708,29 @@ end", conn)
     Public Function llenarComboTypeScfCost(ByVal cmb As ComboBox) As Boolean
         Try
             conectar()
-            Dim cmd As New SqlCommand("select idEstCost , SCTP from ScafEstCost", conn)
+            Dim cmd As New SqlCommand("select scfTypeId , SCTP from scfTypeCost", conn)
             Dim rd As SqlDataReader = cmd.ExecuteReader
             cmb.Items.Clear()
             cmb.Items.Add("")
             While rd.Read()
-                cmb.Items.Add(CStr(rd("idEstCost")) + " " + CStr(rd("SCTP")))
+                cmb.Items.Add(CStr(rd("scfTypeId")) + " " + CStr(rd("SCTP")))
+            End While
+            Return True
+        Catch ex As Exception
+            Return False
+        Finally
+            desconectar()
+        End Try
+    End Function
+    Public Function llenarComboScfEstCost(ByVal cmb As ComboBox) As Boolean
+        Try
+            conectar()
+            Dim cmd As New SqlCommand("select idEstCost , SCEC from ScafEstCost", conn)
+            Dim rd As SqlDataReader = cmd.ExecuteReader
+            cmb.Items.Clear()
+            cmb.Items.Add("")
+            While rd.Read()
+                cmb.Items.Add(CStr(rd("idEstCost")) + " " + CStr(rd("SCEC")))
             End While
             Return True
         Catch ex As Exception
@@ -478,12 +780,12 @@ end", conn)
     Public Function cargarDatosEstimation(ByVal controlNum As String) As Boolean
         Try
             conectar()
-            Dim cmd As New SqlCommand("select top 1 type,idAux,daysActive,unit,location,width,heigth,length,descks,groundHeigth,elevator from scfEstimation where EstNumber = '" + controlNum + "'", conn)
+            Dim cmd As New SqlCommand("select top 1 idAux,daysActive,unit,location,width,heigth,length,descks,groundHeigth,elevation,
+                M3,M2,MA3,MA2,ACHT,IdEstCost,scfTypeId from scfEstimation  where EstNumber = '" + controlNum + "'", conn)
             Dim rd As SqlDataReader = cmd.ExecuteReader()
             While rd.Read()
                 _controlNum = controlNum
-                _type = If(rd("type") Is DBNull.Value, -1, rd("type"))
-                _idAux = rd("idAux")
+                _idAux = If(rd("idAux") Is DBNull.Value, "", rd("idAux"))
                 _daysActive = rd("daysActive")
                 _unit = rd("unit")
                 _location = rd("location")
@@ -492,7 +794,14 @@ end", conn)
                 _length = rd("length")
                 _descks = rd("descks")
                 _groundheigth = rd("groundHeigth")
-                _elevator = rd("elevator")
+                _elevation = rd("elevation")
+                _M3 = rd("M3")
+                _M2 = rd("M2")
+                _MA3 = rd("MA3")
+                _MA2 = rd("MA2")
+                _ACHT = rd("ACHT")
+                _IdEstCost = rd("IdEstCost")
+                _scfTypeId = rd("scfTypeId")
                 Exit While
             End While
             Return True
@@ -561,7 +870,7 @@ end", conn)
         End Try
     End Function
     Public Function saveEstimation(ByVal estM As EstMeters) As Boolean
-        If If(type = -1, If(DialogResult.OK = MessageBox.Show("You can't selected any Saffold Type, Would you like to continue?", "Important", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning), True, False), True) Then
+        If Not (estM.idTypeScf = "-1" And estM.idEstCost = "-1") Then
             Dim tran As SqlTransaction
             Try
                 conectar()
@@ -569,11 +878,11 @@ end", conn)
                 Dim cmd As New SqlCommand("
 if (select COUNT(*) from scfEstimation  where EstNumber = '" + controlNum + "')=0
 begin
-	insert into scfEstimation values ('" + controlNum + "'," + If(type > -1, "Null", CStr(type)) + ",'" + idAux + "'," + CStr(daysActive) + ",'" + unit + "','" + location + "'," + CStr(width) + "," + CStr(heigth) + "," + CStr(length) + "," + CStr(descks) + "," + CStr(groundheigth) + "," + CStr(elevator) + ") 
+	insert into scfEstimation values ('" + controlNum + "'," + If(idAux = "", "NULL", "'" + idAux + "'") + "," + CStr(daysActive) + ",'" + unit + "','" + location + "'," + CStr(width) + "," + CStr(heigth) + "," + CStr(length) + "," + CStr(descks) + "," + CStr(groundheigth) + "," + CStr(elevation) + "," + CStr(M3) + "," + CStr(M2) + "," + CStr(MA3) + "," + CStr(MA2) + "," + CStr(ACHT) + "," + If(CStr(IdEstCost) = "-1", "NULL", CStr(IdEstCost)) + "," + If(CStr(scfTypeId) = "-1", "NULL", CStr(scfTypeId)) + ") 
 end
 else if (select COUNT(*) from scfEstimation  where EstNumber = '" + controlNum + "')>0
 begin 
-	update scfEstimation set type = " + CStr(type) + " ,idAux = '" + idAux + "',daysActive = " + CStr(daysActive) + ",unit='" + CStr(unit) + "',location='" + location + "',width=" + CStr(width) + ",heigth=" + CStr(heigth) + ",length=" + CStr(length) + ",descks=" + CStr(descks) + ",groundHeigth=" + CStr(groundheigth) + ",elevator=" + CStr(elevator) + " where EstNumber = '" + controlNum + "' 
+	update scfEstimation set idAux = " + If(idAux = "", "NULL", "'" + idAux + "'") + ",daysActive = " + CStr(daysActive) + ",unit='" + CStr(unit) + "',location='" + location + "',width=" + CStr(width) + ",heigth=" + CStr(heigth) + ",length=" + CStr(length) + ",descks=" + CStr(descks) + ",groundHeigth=" + CStr(groundheigth) + ",elevation=" + CStr(elevation) + ", M3 = " + CStr(M3) + " , M2=" + CStr(M2) + ", MA3 = " + CStr(MA3) + " , MA2 = " + CStr(MA2) + ",ACHT=" + CStr(ACHT) + ",IdEstCost=" + If(CStr(IdEstCost) = "-1", "NULL", CStr(IdEstCost)) + ",scfTypeId= " + If(CStr(scfTypeId) = "-1", "NULL", CStr(scfTypeId)) + "  where EstNumber = '" + controlNum + "' 
 end", conn)
                 cmd.Transaction = tran
                 Dim cmd1 As New SqlCommand("if (select count( *) from EstMeters where EstNumber = '" + controlNum + "')=0
@@ -628,6 +937,7 @@ end", conn)
                 desconectar()
             End Try
         Else
+            MessageBox.Show("Plaese select a " + If(estM.idTypeScf = "-1", " Type Scaffold", If(estM.idEstCost = "-1", " Cost By Costumer", "Cost By Costumer")), "Important", MessageBoxButtons.OK)
             Return False
         End If
     End Function

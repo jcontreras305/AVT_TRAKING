@@ -493,7 +493,9 @@ Public Class Materials
         End Try
     End Sub
 
+    Private Sub tblVendor_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles tblVendor.CellContentClick
 
+    End Sub
 
     Private Sub btnMaterialUploadExcel_Click(sender As Object, e As EventArgs) Handles btnMaterialUploadExcel.Click
         Try

@@ -149,6 +149,7 @@ Public Class scafoldTarking
         'Estimation
         mtdScaffold.llenarComboWO(cmbProjectNameEst)
         mtdEstimation.llenarComboTypeScfCost(cmbScaffolType)
+        mtdEstimation.llenarComboScfEstCost(CmbScaffoldCost)
         If mtdEstimation.llenartablaEstimacion(tblEstimation) Then
             If tblEstimation.Rows.Count > 0 Then
                 If mtdEstimation.cargarDatosEstimation(tblEstimation.Rows(0).ItemArray(0)) Then
@@ -3436,6 +3437,16 @@ Public Class scafoldTarking
         Try
             Dim EstCostSC As New EstimationCost
             EstCostSC.ShowDialog()
+            Dim TypeScf = cmbScaffolType.Text
+            Dim ScfCost = CmbScaffoldCost.Text
+            mtdEstimation.llenarComboTypeScfCost(cmbScaffolType)
+            mtdEstimation.llenarComboScfEstCost(CmbScaffoldCost)
+            If TypeScf <> "" Then
+                cmbScaffolType.SelectedItem = cmbScaffolType.Items(cmbScaffolType.FindString(TypeScf))
+            End If
+            If ScfCost <> "" Then
+                CmbScaffoldCost.SelectedItem = CmbScaffoldCost.Items(CmbScaffoldCost.FindString(ScfCost))
+            End If
         Catch ex As Exception
 
         End Try
@@ -3450,11 +3461,26 @@ Public Class scafoldTarking
         If loadingEst = False Then
             If cmbScaffolType.Text IsNot "" Then
                 Dim array() = cmbScaffolType.Text.ToString.Split("  ")
-                mtdEstimation.type = array(0)
+                mtdEstimation.scfTypeId = array(0)
+                estMeter.idTypeScf = array(0)
+                mtdEstimation.factor = estMeter.selectFactor(mtdEstimation.TOTALHEIGTH)
+                estMeter.FACTOR = estMeter.selectFactor(mtdEstimation.TOTALHEIGTH)
+                estMeter.refreshValues(mtdEstimation)
             End If
         End If
     End Sub
-
+    Private Sub CmbScaffoldCost_SelectedValueChanged(sender As Object, e As EventArgs) Handles CmbScaffoldCost.SelectedValueChanged
+        If loadingEst = False Then
+            If CmbScaffoldCost.Text IsNot "" Then
+                Dim array() = CmbScaffoldCost.Text.ToString.Split("  ")
+                mtdEstimation.IdEstCost = array(0)
+                estMeter.idEstCost = array(0)
+                mtdEstimation.factor = estMeter.selectFactor(mtdEstimation.TOTALHEIGTH)
+                estMeter.FACTOR = estMeter.selectFactor(mtdEstimation.TOTALHEIGTH)
+                estMeter.refreshValues(mtdEstimation)
+            End If
+        End If
+    End Sub
     Private Sub txtUnitEst_TextChanged(sender As Object, e As EventArgs) Handles txtUnitEst.TextChanged
         If loadingEst = False Then
             mtdEstimation.unit = txtUnitEst.Text
@@ -3490,6 +3516,9 @@ Public Class scafoldTarking
     Private Sub sprOperationalDays_ValueChanged(sender As Object, e As EventArgs) Handles sprOperationalDays.ValueChanged
         If loadingEst = False Then
             mtdEstimation.daysActive = sprOperationalDays.Value
+            mtdEstimation.factor = estMeter.selectFactor(mtdEstimation.TOTALHEIGTH)
+            estMeter.FACTOR = estMeter.selectFactor(mtdEstimation.TOTALHEIGTH)
+            estMeter.refreshValues(mtdEstimation)
         End If
     End Sub
 
@@ -3500,7 +3529,10 @@ Public Class scafoldTarking
             mtdEstimation.width = CDbl(sprWidthEst.Value)
             mtdEstimation.descks = CInt(sprDescksEst.Value)
             mtdEstimation.groundheigth = CInt(sprGroudHeigthEst.Value)
-            mtdEstimation.elevator = CInt(sprElevatorEst.Value)
+            mtdEstimation.elevation = CInt(sprElevatorEst.Value)
+            mtdEstimation.factor = estMeter.selectFactor(mtdEstimation.TOTALHEIGTH)
+            estMeter.FACTOR = estMeter.selectFactor(mtdEstimation.TOTALHEIGTH)
+            estMeter.refreshValues(mtdEstimation)
         End If
     End Sub
     Public Function cargarDatosEstimation(ByVal ControlNumEst As String) As Boolean
@@ -3516,16 +3548,27 @@ Public Class scafoldTarking
                 estMeter = mtdEstimation.selectEstMeters(ControlNumEst)
                 txtControlNumber.Text = mtdEstimation.controlNum
                 txtControlNumber.Enabled = False
-                If mtdEstimation.type > -1 Then
+                If mtdEstimation.scfTypeId > -1 Then
                     For Each item As String In cmbScaffolType.Items
                         Dim array() As String = item.Split("    ")
-                        If array(0) = CStr(mtdEstimation.type) Then
+                        If array(0) = CStr(mtdEstimation.scfTypeId) Then
                             cmbScaffolType.SelectedItem = cmbScaffolType.Items(cmbScaffolType.FindString(item))
                             Exit For
                         End If
                     Next
                 Else
                     cmbScaffolType.SelectedItem = cmbScaffolType.Items(0)
+                End If
+                If mtdEstimation.IdEstCost > -1 Then
+                    For Each item As String In CmbScaffoldCost.Items
+                        Dim array() As String = item.Split("    ")
+                        If array(0) = CStr(mtdEstimation.IdEstCost) Then
+                            CmbScaffoldCost.SelectedItem = CmbScaffoldCost.Items(CmbScaffoldCost.FindString(item))
+                            Exit For
+                        End If
+                    Next
+                Else
+                    CmbScaffoldCost.SelectedItem = cmbScaffolType.Items(0)
                 End If
                 If mtdEstimation.idAux <> "" Then
                     For Each row As Data.DataRow In tblWOTASK.Rows
@@ -3543,7 +3586,7 @@ Public Class scafoldTarking
                 sprWidthEst.Value = mtdEstimation.width
                 sprDescksEst.Value = mtdEstimation.descks
                 sprGroudHeigthEst.Value = mtdEstimation.groundheigth
-                sprElevatorEst.Value = mtdEstimation.elevator
+                sprElevatorEst.Value = mtdEstimation.elevation
                 loadingEst = False
             End If
             Return True
@@ -3635,19 +3678,31 @@ Public Class scafoldTarking
     Private Sub cmbScaffolType_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbScaffolType.SelectedIndexChanged
         If Not loadingEst = True And cmbScaffolType.SelectedIndex > 0 Then
             Dim array() As String = cmbScaffolType.SelectedItem.ToString().Split("   ")
-            estMeter.idEstCost = array(0)
-            estMeter.FACTOR = estMeter.selectFactor(sprHeigthEst.Value)
+            estMeter.idTypeScf = array(0)
+            mtdEstimation.factor = estMeter.selectFactor(mtdEstimation.TOTALHEIGTH)
+            estMeter.FACTOR = estMeter.selectFactor(mtdEstimation.TOTALHEIGTH)
             estMeter.refreshValues(mtdEstimation)
         End If
     End Sub
-
+    Private Sub CmbScaffoldCost_SelectedIndexChanged(sender As Object, e As EventArgs) Handles CmbScaffoldCost.SelectedIndexChanged
+        If Not loadingEst = True And CmbScaffoldCost.SelectedIndex > 0 Then
+            Dim array() As String = CmbScaffoldCost.SelectedItem.ToString().Split("   ")
+            estMeter.idEstCost = array(0)
+            mtdEstimation.factor = estMeter.selectFactor(mtdEstimation.TOTALHEIGTH)
+            estMeter.FACTOR = estMeter.selectFactor(mtdEstimation.TOTALHEIGTH)
+            estMeter.refreshValues(mtdEstimation)
+        End If
+    End Sub
     Private Sub sprHeigthEst_Leave(sender As Object, e As EventArgs) Handles sprHeigthEst.Leave
         If Not loadingEst = True Then
             If cmbScaffolType.SelectedIndex > 0 Then
                 Dim array() As String = cmbScaffolType.SelectedItem.ToString().Split("   ")
-                estMeter.idEstCost = array(0)
+                estMeter.idTypeScf = array(0)
+                Dim array1() As String = CmbScaffoldCost.SelectedItem.ToString().Split("   ")
+                estMeter.idEstCost = array1(0)
             End If
-            estMeter.FACTOR = estMeter.selectFactor(sprHeigthEst.Value)
+            mtdEstimation.factor = estMeter.selectFactor(mtdEstimation.TOTALHEIGTH)
+            estMeter.FACTOR = estMeter.selectFactor(mtdEstimation.TOTALHEIGTH)
             estMeter.refreshValues(mtdEstimation)
         End If
     End Sub
