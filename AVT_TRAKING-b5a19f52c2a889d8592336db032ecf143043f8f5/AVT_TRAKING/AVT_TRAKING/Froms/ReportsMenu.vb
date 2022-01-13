@@ -68,4 +68,9 @@ Public Class ReportsMenu
         Dim tse As New ReportEmployeesTime
         tse.ShowDialog()
     End Sub
+
+    Private Sub Button7_Click(sender As Object, e As EventArgs) Handles Button7.Click
+        Dim tse As New ReportByJobNumber
+        tse.ShowDialog()
+    End Sub
 End Class

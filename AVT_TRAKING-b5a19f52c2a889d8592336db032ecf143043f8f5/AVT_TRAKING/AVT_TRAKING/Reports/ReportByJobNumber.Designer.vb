@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
-Partial Class ReportEmployeesTime
+Partial Class ReportByJobNumber
     Inherits System.Windows.Forms.Form
 
     'Form reemplaza a Dispose para limpiar la lista de componentes.
@@ -23,26 +23,28 @@ Partial Class ReportEmployeesTime
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
+        Me.Panel3 = New System.Windows.Forms.Panel()
+        Me.crvByJobNumber = New CrystalDecisions.Windows.Forms.CrystalReportViewer()
         Me.Panel2 = New System.Windows.Forms.Panel()
-        Me.cmbJobs = New System.Windows.Forms.ComboBox()
-        Me.btnReportE = New System.Windows.Forms.Button()
+        Me.cmbClients = New System.Windows.Forms.ComboBox()
+        Me.Button1 = New System.Windows.Forms.Button()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.dtpFinalDate = New System.Windows.Forms.DateTimePicker()
         Me.dtpInitialDate = New System.Windows.Forms.DateTimePicker()
         Me.PictureBox4 = New System.Windows.Forms.PictureBox()
+        Me.Panel1 = New System.Windows.Forms.Panel()
         Me.TitleBar = New System.Windows.Forms.Panel()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.PictureBox3 = New System.Windows.Forms.PictureBox()
         Me.btnRestore = New System.Windows.Forms.PictureBox()
         Me.btnMaximize = New System.Windows.Forms.PictureBox()
-        Me.crvEmployeesTime = New CrystalDecisions.Windows.Forms.CrystalReportViewer()
-        Me.cmbClient = New System.Windows.Forms.ComboBox()
-        Me.chbAllJobs = New System.Windows.Forms.CheckBox()
         Me.TableLayoutPanel1.SuspendLayout()
+        Me.Panel3.SuspendLayout()
         Me.Panel2.SuspendLayout()
         CType(Me.PictureBox4, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.Panel1.SuspendLayout()
         Me.TitleBar.SuspendLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox3, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -54,9 +56,9 @@ Partial Class ReportEmployeesTime
         '
         Me.TableLayoutPanel1.ColumnCount = 1
         Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
+        Me.TableLayoutPanel1.Controls.Add(Me.Panel3, 0, 2)
         Me.TableLayoutPanel1.Controls.Add(Me.Panel2, 0, 1)
-        Me.TableLayoutPanel1.Controls.Add(Me.TitleBar, 0, 0)
-        Me.TableLayoutPanel1.Controls.Add(Me.crvEmployeesTime, 0, 2)
+        Me.TableLayoutPanel1.Controls.Add(Me.Panel1, 0, 0)
         Me.TableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.TableLayoutPanel1.Location = New System.Drawing.Point(0, 0)
         Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
@@ -64,16 +66,34 @@ Partial Class ReportEmployeesTime
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40.0!))
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 70.0!))
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-        Me.TableLayoutPanel1.Size = New System.Drawing.Size(686, 490)
+        Me.TableLayoutPanel1.Size = New System.Drawing.Size(702, 490)
         Me.TableLayoutPanel1.TabIndex = 1
+        '
+        'Panel3
+        '
+        Me.Panel3.Controls.Add(Me.crvByJobNumber)
+        Me.Panel3.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Panel3.Location = New System.Drawing.Point(3, 113)
+        Me.Panel3.Name = "Panel3"
+        Me.Panel3.Size = New System.Drawing.Size(696, 374)
+        Me.Panel3.TabIndex = 2
+        '
+        'crvByJobNumber
+        '
+        Me.crvByJobNumber.ActiveViewIndex = -1
+        Me.crvByJobNumber.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.crvByJobNumber.Cursor = System.Windows.Forms.Cursors.Default
+        Me.crvByJobNumber.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.crvByJobNumber.Location = New System.Drawing.Point(0, 0)
+        Me.crvByJobNumber.Name = "crvByJobNumber"
+        Me.crvByJobNumber.Size = New System.Drawing.Size(696, 374)
+        Me.crvByJobNumber.TabIndex = 0
         '
         'Panel2
         '
         Me.Panel2.BackColor = System.Drawing.Color.FromArgb(CType(CType(83, Byte), Integer), CType(CType(93, Byte), Integer), CType(CType(102, Byte), Integer))
-        Me.Panel2.Controls.Add(Me.chbAllJobs)
-        Me.Panel2.Controls.Add(Me.cmbClient)
-        Me.Panel2.Controls.Add(Me.cmbJobs)
-        Me.Panel2.Controls.Add(Me.btnReportE)
+        Me.Panel2.Controls.Add(Me.cmbClients)
+        Me.Panel2.Controls.Add(Me.Button1)
         Me.Panel2.Controls.Add(Me.Label2)
         Me.Panel2.Controls.Add(Me.Label1)
         Me.Panel2.Controls.Add(Me.dtpFinalDate)
@@ -82,33 +102,33 @@ Partial Class ReportEmployeesTime
         Me.Panel2.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel2.Location = New System.Drawing.Point(3, 43)
         Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(680, 64)
-        Me.Panel2.TabIndex = 3
+        Me.Panel2.Size = New System.Drawing.Size(696, 64)
+        Me.Panel2.TabIndex = 1
         '
-        'cmbJobs
+        'cmbClients
         '
-        Me.cmbJobs.FormattingEnabled = True
-        Me.cmbJobs.Location = New System.Drawing.Point(469, 6)
-        Me.cmbJobs.Name = "cmbJobs"
-        Me.cmbJobs.Size = New System.Drawing.Size(121, 21)
-        Me.cmbJobs.TabIndex = 16
+        Me.cmbClients.FormattingEnabled = True
+        Me.cmbClients.Location = New System.Drawing.Point(196, 2)
+        Me.cmbClients.Name = "cmbClients"
+        Me.cmbClients.Size = New System.Drawing.Size(228, 21)
+        Me.cmbClients.TabIndex = 16
         '
-        'btnReportE
+        'Button1
         '
-        Me.btnReportE.FlatAppearance.BorderSize = 0
-        Me.btnReportE.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(58, Byte), Integer), CType(CType(115, Byte), Integer))
-        Me.btnReportE.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnReportE.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnReportE.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.btnReportE.Image = Global.AVT_TRAKING.My.Resources.Resources.reportshow
-        Me.btnReportE.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnReportE.Location = New System.Drawing.Point(374, 31)
-        Me.btnReportE.Name = "btnReportE"
-        Me.btnReportE.Size = New System.Drawing.Size(83, 33)
-        Me.btnReportE.TabIndex = 14
-        Me.btnReportE.Text = "Report"
-        Me.btnReportE.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.btnReportE.UseVisualStyleBackColor = True
+        Me.Button1.FlatAppearance.BorderSize = 0
+        Me.Button1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(58, Byte), Integer), CType(CType(115, Byte), Integer))
+        Me.Button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.Button1.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Button1.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.Button1.Image = Global.AVT_TRAKING.My.Resources.Resources.reportshow
+        Me.Button1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.Button1.Location = New System.Drawing.Point(341, 28)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(83, 33)
+        Me.Button1.TabIndex = 14
+        Me.Button1.Text = "Report"
+        Me.Button1.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.Button1.UseVisualStyleBackColor = True
         '
         'Label2
         '
@@ -156,11 +176,21 @@ Partial Class ReportEmployeesTime
         '
         Me.PictureBox4.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.PictureBox4.Image = Global.AVT_TRAKING.My.Resources.Resources._exit
-        Me.PictureBox4.Location = New System.Drawing.Point(640, 3)
+        Me.PictureBox4.Location = New System.Drawing.Point(656, 3)
         Me.PictureBox4.Name = "PictureBox4"
         Me.PictureBox4.Size = New System.Drawing.Size(37, 29)
         Me.PictureBox4.TabIndex = 9
         Me.PictureBox4.TabStop = False
+        '
+        'Panel1
+        '
+        Me.Panel1.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(58, Byte), Integer), CType(CType(115, Byte), Integer))
+        Me.Panel1.Controls.Add(Me.TitleBar)
+        Me.Panel1.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Panel1.Location = New System.Drawing.Point(3, 3)
+        Me.Panel1.Name = "Panel1"
+        Me.Panel1.Size = New System.Drawing.Size(696, 34)
+        Me.Panel1.TabIndex = 0
         '
         'TitleBar
         '
@@ -171,10 +201,10 @@ Partial Class ReportEmployeesTime
         Me.TitleBar.Controls.Add(Me.btnRestore)
         Me.TitleBar.Controls.Add(Me.btnMaximize)
         Me.TitleBar.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.TitleBar.Location = New System.Drawing.Point(3, 3)
+        Me.TitleBar.Location = New System.Drawing.Point(0, 0)
         Me.TitleBar.Name = "TitleBar"
-        Me.TitleBar.Size = New System.Drawing.Size(680, 34)
-        Me.TitleBar.TabIndex = 2
+        Me.TitleBar.Size = New System.Drawing.Size(696, 34)
+        Me.TitleBar.TabIndex = 1
         '
         'Label3
         '
@@ -183,9 +213,9 @@ Partial Class ReportEmployeesTime
         Me.Label3.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.Label3.Location = New System.Drawing.Point(40, 6)
         Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(216, 18)
+        Me.Label3.Size = New System.Drawing.Size(207, 18)
         Me.Label3.TabIndex = 11
-        Me.Label3.Text = "Report Employees Time"
+        Me.Label3.Text = "Report By Job Number"
         '
         'PictureBox1
         '
@@ -200,7 +230,7 @@ Partial Class ReportEmployeesTime
         '
         Me.PictureBox3.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.PictureBox3.Image = Global.AVT_TRAKING.My.Resources.Resources.minimize2
-        Me.PictureBox3.Location = New System.Drawing.Point(613, 5)
+        Me.PictureBox3.Location = New System.Drawing.Point(629, 5)
         Me.PictureBox3.Name = "PictureBox3"
         Me.PictureBox3.Size = New System.Drawing.Size(27, 29)
         Me.PictureBox3.TabIndex = 9
@@ -210,7 +240,7 @@ Partial Class ReportEmployeesTime
         '
         Me.btnRestore.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnRestore.Image = Global.AVT_TRAKING.My.Resources.Resources.restore2
-        Me.btnRestore.Location = New System.Drawing.Point(645, 0)
+        Me.btnRestore.Location = New System.Drawing.Point(661, 0)
         Me.btnRestore.Name = "btnRestore"
         Me.btnRestore.Size = New System.Drawing.Size(26, 29)
         Me.btnRestore.TabIndex = 8
@@ -220,55 +250,27 @@ Partial Class ReportEmployeesTime
         '
         Me.btnMaximize.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnMaximize.Image = Global.AVT_TRAKING.My.Resources.Resources.maximize2
-        Me.btnMaximize.Location = New System.Drawing.Point(646, 2)
+        Me.btnMaximize.Location = New System.Drawing.Point(662, 2)
         Me.btnMaximize.Name = "btnMaximize"
         Me.btnMaximize.Size = New System.Drawing.Size(31, 29)
         Me.btnMaximize.TabIndex = 7
         Me.btnMaximize.TabStop = False
         '
-        'crvEmployeesTime
-        '
-        Me.crvEmployeesTime.ActiveViewIndex = -1
-        Me.crvEmployeesTime.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.crvEmployeesTime.Cursor = System.Windows.Forms.Cursors.Default
-        Me.crvEmployeesTime.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.crvEmployeesTime.Location = New System.Drawing.Point(3, 113)
-        Me.crvEmployeesTime.Name = "crvEmployeesTime"
-        Me.crvEmployeesTime.Size = New System.Drawing.Size(680, 374)
-        Me.crvEmployeesTime.TabIndex = 4
-        '
-        'cmbClient
-        '
-        Me.cmbClient.FormattingEnabled = True
-        Me.cmbClient.Location = New System.Drawing.Point(246, 3)
-        Me.cmbClient.Name = "cmbClient"
-        Me.cmbClient.Size = New System.Drawing.Size(121, 21)
-        Me.cmbClient.TabIndex = 17
-        '
-        'chbAllJobs
-        '
-        Me.chbAllJobs.AutoSize = True
-        Me.chbAllJobs.ForeColor = System.Drawing.SystemColors.Window
-        Me.chbAllJobs.Location = New System.Drawing.Point(374, 6)
-        Me.chbAllJobs.Name = "chbAllJobs"
-        Me.chbAllJobs.Size = New System.Drawing.Size(62, 17)
-        Me.chbAllJobs.TabIndex = 18
-        Me.chbAllJobs.Text = "All Jobs"
-        Me.chbAllJobs.UseVisualStyleBackColor = True
-        '
-        'ReportEmployeesTime
+        'ReportByJobNumber
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(686, 490)
+        Me.ClientSize = New System.Drawing.Size(702, 490)
         Me.Controls.Add(Me.TableLayoutPanel1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
-        Me.Name = "ReportEmployeesTime"
-        Me.Text = "ReportEmployeesTime"
+        Me.Name = "ReportByJobNumber"
+        Me.Text = "ReportByJobNumber"
         Me.TableLayoutPanel1.ResumeLayout(False)
+        Me.Panel3.ResumeLayout(False)
         Me.Panel2.ResumeLayout(False)
         Me.Panel2.PerformLayout()
         CType(Me.PictureBox4, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.Panel1.ResumeLayout(False)
         Me.TitleBar.ResumeLayout(False)
         Me.TitleBar.PerformLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
@@ -280,21 +282,21 @@ Partial Class ReportEmployeesTime
     End Sub
 
     Friend WithEvents TableLayoutPanel1 As TableLayoutPanel
+    Friend WithEvents Panel3 As Panel
+    Friend WithEvents crvByJobNumber As CrystalDecisions.Windows.Forms.CrystalReportViewer
     Friend WithEvents Panel2 As Panel
-    Friend WithEvents cmbJobs As ComboBox
-    Friend WithEvents btnReportE As Button
+    Friend WithEvents cmbClients As ComboBox
+    Friend WithEvents Button1 As Button
     Friend WithEvents Label2 As Label
     Friend WithEvents Label1 As Label
     Friend WithEvents dtpFinalDate As DateTimePicker
     Friend WithEvents dtpInitialDate As DateTimePicker
     Friend WithEvents PictureBox4 As PictureBox
+    Friend WithEvents Panel1 As Panel
     Friend WithEvents TitleBar As Panel
     Friend WithEvents Label3 As Label
     Friend WithEvents PictureBox1 As PictureBox
     Friend WithEvents PictureBox3 As PictureBox
     Friend WithEvents btnRestore As PictureBox
     Friend WithEvents btnMaximize As PictureBox
-    Friend WithEvents crvEmployeesTime As CrystalDecisions.Windows.Forms.CrystalReportViewer
-    Friend WithEvents chbAllJobs As CheckBox
-    Friend WithEvents cmbClient As ComboBox
 End Class

@@ -303,6 +303,12 @@
       <DependentUpon>ActiveAverageEmployee.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Reports\ByJobNumber.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ByJobNumber.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Reports\CatsEmployeebyProject.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -338,6 +344,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>EmployeesTime.rpt</DependentUpon>
       <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\ReportByJobNumber.Designer.vb">
+      <DependentUpon>ReportByJobNumber.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\ReportByJobNumber.vb">
+      <SubType>Form</SubType>
     </Compile>
     <Compile Include="Reports\ReportClientBillingsReCapBYProject.Designer.vb">
       <DependentUpon>ReportClientBillingsReCapBYProject.vb</DependentUpon>
@@ -511,6 +523,10 @@
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>ActiveAverageEmployee.vb</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reports\ByJobNumber.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ByJobNumber.vb</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reports\CatsEmployeebyProject.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>CatsEmployeebyProject.vb</LastGenOutput>
@@ -534,6 +550,9 @@
     <EmbeddedResource Include="Reports\EmployeesTime.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>EmployeesTime.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\ReportByJobNumber.resx">
+      <DependentUpon>ReportByJobNumber.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\ReportClientBillingsReCapBYProject.resx">
       <DependentUpon>ReportClientBillingsReCapBYProject.vb</DependentUpon>
@@ -635,6 +654,7 @@
     <None Include="Images\billing.png" />
     <None Include="Images\catsemployee.png" />
     <None Include="Images\ComplteByRange.png" />
+    <None Include="Images\byjobnumt.png" />
     <Content Include="Images\eye.png" />
     <None Include="Images\minimize.png" />
     <None Include="Images\show.png" />
