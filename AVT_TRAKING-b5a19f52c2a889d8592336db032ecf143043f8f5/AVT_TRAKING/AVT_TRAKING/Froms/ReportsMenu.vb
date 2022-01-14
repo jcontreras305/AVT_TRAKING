@@ -73,4 +73,9 @@ Public Class ReportsMenu
         Dim tse As New ReportByJobNumber
         tse.ShowDialog()
     End Sub
+
+    Private Sub Button8_Click(sender As Object, e As EventArgs) Handles Button8.Click
+        Dim tse As New ReportAllJobs
+        tse.ShowDialog()
+    End Sub
 End Class

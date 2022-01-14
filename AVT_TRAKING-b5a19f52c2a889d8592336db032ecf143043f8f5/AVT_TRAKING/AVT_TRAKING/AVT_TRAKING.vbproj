@@ -303,6 +303,12 @@
       <DependentUpon>ActiveAverageEmployee.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Reports\AllJobs.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AllJobs.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Reports\ByJobNumber.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -344,6 +350,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>EmployeesTime.rpt</DependentUpon>
       <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\ReportAllJobs.Designer.vb">
+      <DependentUpon>ReportAllJobs.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\ReportAllJobs.vb">
+      <SubType>Form</SubType>
     </Compile>
     <Compile Include="Reports\ReportByJobNumber.Designer.vb">
       <DependentUpon>ReportByJobNumber.vb</DependentUpon>
@@ -523,6 +535,10 @@
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>ActiveAverageEmployee.vb</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reports\AllJobs.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>AllJobs.vb</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reports\ByJobNumber.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>ByJobNumber.vb</LastGenOutput>
@@ -550,6 +566,9 @@
     <EmbeddedResource Include="Reports\EmployeesTime.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>EmployeesTime.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\ReportAllJobs.resx">
+      <DependentUpon>ReportAllJobs.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\ReportByJobNumber.resx">
       <DependentUpon>ReportByJobNumber.vb</DependentUpon>
