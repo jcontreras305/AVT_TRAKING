@@ -276,7 +276,7 @@ Public Class PayRoll
                     End If
                     limpiarSheet(sheetNon, sprRowStartNBL.Value)
                     Dim cont As Integer = 2
-                    For Each row As DataGridViewRow In tblTime.Rows()
+                    For Each row As DataGridViewRow In tblNonBillable.Rows()
                         sheetNon.Cells(cont, 1) = row.Cells(0).Value
                         sheetNon.Cells(cont, 2) = row.Cells(1).Value
                         sheetNon.Cells(cont, 3) = row.Cells(2).Value
