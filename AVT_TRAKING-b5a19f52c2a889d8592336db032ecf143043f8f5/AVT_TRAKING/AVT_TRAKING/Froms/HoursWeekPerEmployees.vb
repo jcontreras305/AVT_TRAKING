@@ -274,6 +274,7 @@ Public Class HoursWeekPerEmployees
                     End If
                 Next
             ElseIf tblRecordEmployee.CurrentCell.ColumnIndex = tblRecordEmployee.Columns("Work Code").Index Then
+                tblRecordEmployee.CurrentRow.Cells("Work Code").Value = ""
                 For Each row As DataRow In workCodeTable.Rows
                     If cmb.Text IsNot "" And tblRecordEmployee.CurrentRow.Cells("Work Code").Value <> row.ItemArray(1) Then
                         If cmb.Text = row.ItemArray(1) Then

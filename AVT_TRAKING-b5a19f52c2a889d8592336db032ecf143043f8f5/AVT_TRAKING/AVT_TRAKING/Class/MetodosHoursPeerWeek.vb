@@ -508,24 +508,25 @@ end", conn)
     Public Function selectPayroll(ByVal tbl As DataGridView, ByVal startDate As Date) As Boolean
         Try
             conectar()
-            Dim cmd As New SqlCommand("select 
-	em.numberEmploye,
+            Dim cmd As New SqlCommand("select distinct 
+	em.numberEmploye, 
 	case when (select top 1 weekN from weeks where dateWeek <= hw.dateWorked order by dateWeek desc) is null then 0 
 		else (select top 1 weekN from weeks where dateWeek <= hw.dateWorked order by dateWeek desc) end as 'WeekNumber',
 	SUBSTRING(CONVERT(nvarchar , po.jobNo),0,LEN( CONVERT(nvarchar , po.jobNo))-2) as 'Job Number',
 	SUBSTRING(CONVERT(nvarchar , po.jobNo),LEN( CONVERT(nvarchar , po.jobNo))-2,LEN( CONVERT(nvarchar , po.jobNo))+1) as 'Sub Job Number',
 	jb.costDistribution,
-	DATEPART(dw,hw.dateWorked) as 'DayOfWeek',
-	hw.hoursST as 'RegularHours',
-	hw.hoursOT as 'OvertimeHours',
-	hw.hoursST as 'OtherHours'
-from hoursWorked as hw 
-inner join employees as em on em.idEmployee = hw.idEmployee
+	iif((convert (int ,DATEPART(dw,hw.dateWorked))-1)=0,7,(convert (int ,DATEPART(dw,hw.dateWorked))-1)) as 'DayOfWeek',
+	(select iif(SUM(hw1.hoursST)is null,0,SUM(hw1.hoursST)) from hoursWorked as hw1 inner join workCode as wc1 on wc1.idWorkCode = hw.idWorkCode where hw1.dateWorked = hw.dateWorked and em.idEmployee = hw1.idEmployee and not wc1.name like '%6.4%' ) as 'RegularHours',
+	(select iif(SUM(hw1.hoursOT)is null,0,SUM(hw1.hoursOT)) from hoursWorked as hw1 inner join workCode as wc1 on wc1.idWorkCode = hw.idWorkCode where hw1.dateWorked = hw.dateWorked and em.idEmployee = hw1.idEmployee and not wc1.name like '%6.4%' ) as 'OvertimeHours',
+	(select iif(SUM(hw1.hours3) is null,0,SUM(hw1.hours3))  from hoursWorked as hw1 inner join workCode as wc1 on wc1.idWorkCode = hw.idWorkCode where hw1.dateWorked = hw.dateWorked and em.idEmployee = hw1.idEmployee and not wc1.name like '%6.4%' ) as 'OtherHours'
+ from hoursWorked as hw
+inner join employees as em  on hw.idEmployee = em.idEmployee
+inner join workCode as wc on wc.idWorkCode = hw.idWorkCode
 inner join task as tk on tk.idAux = hw.idAux
 inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO
 inner join projectOrder as po on po.idPO = wo.idPO and wo.jobNo = po.jobNo
 inner join job as jb on jb.jobNo = po.jobNo
-where hw.dateWorked between '" + validaFechaParaSQl(startDate) + "' and DATEADD(day,7,'" + validaFechaParaSQl(startDate) + "') 
+where hw.dateWorked between '" + validaFechaParaSQl(startDate) + "' and DATEADD(day,7,'" + validaFechaParaSQl(startDate) + "' and not wc.name like '%6.4%') 
 order by em.numberEmploye", conn)
             If tbl.Rows IsNot Nothing Then
                 tbl.Rows.Clear()
@@ -565,8 +566,7 @@ inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO
 inner join projectOrder as po on po.idPO = wo.idPO and wo.jobNo = po.jobNo
 inner join job as jb on jb.jobNo = po.jobNo
 where (hw.dateWorked between '" + validaFechaParaSQl(startDate) + "' and DATEADD(day,6,'" + validaFechaParaSQl(startDate) + "')) and wc.name like '%6.4%'
-order by em.numberEmploye 
-", conn)
+order by em.numberEmploye", conn)
             If tbl.Rows IsNot Nothing Then
                 tbl.Rows.Clear()
             End If
