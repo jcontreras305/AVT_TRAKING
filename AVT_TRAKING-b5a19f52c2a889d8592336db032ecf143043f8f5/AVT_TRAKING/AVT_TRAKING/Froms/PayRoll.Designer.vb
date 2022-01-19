@@ -30,34 +30,16 @@ Partial Class PayRoll
         Me.TabPage1 = New System.Windows.Forms.TabPage()
         Me.TableLayoutPanel2 = New System.Windows.Forms.TableLayoutPanel()
         Me.Panel3 = New System.Windows.Forms.Panel()
+        Me.Label2 = New System.Windows.Forms.Label()
+        Me.Label1 = New System.Windows.Forms.Label()
         Me.btnFindMasterPayroll = New System.Windows.Forms.Button()
-        Me.NumericUpDown2 = New System.Windows.Forms.NumericUpDown()
-        Me.NumericUpDown1 = New System.Windows.Forms.NumericUpDown()
+        Me.sprRowStartNBL = New System.Windows.Forms.NumericUpDown()
+        Me.sprRowStartTSD = New System.Windows.Forms.NumericUpDown()
         Me.btnReFresh = New System.Windows.Forms.Button()
         Me.dtpStartTime = New System.Windows.Forms.DateTimePicker()
-        Me.TabPage2 = New System.Windows.Forms.TabPage()
-        Me.TableLayoutPanel3 = New System.Windows.Forms.TableLayoutPanel()
-        Me.tblWeeks = New System.Windows.Forms.DataGridView()
-        Me.TableLayoutPanel4 = New System.Windows.Forms.TableLayoutPanel()
-        Me.Panel4 = New System.Windows.Forms.Panel()
-        Me.sprNumWeek = New System.Windows.Forms.NumericUpDown()
-        Me.dtpWeek = New System.Windows.Forms.DateTimePicker()
-        Me.Panel5 = New System.Windows.Forms.Panel()
-        Me.btnFindExcelWeeks = New System.Windows.Forms.Button()
-        Me.btnDeleteWeek = New System.Windows.Forms.Button()
-        Me.btnUpdateWeek = New System.Windows.Forms.Button()
-        Me.btnAddWeek = New System.Windows.Forms.Button()
         Me.TabControl2 = New System.Windows.Forms.TabControl()
         Me.TabPage3 = New System.Windows.Forms.TabPage()
-        Me.TabPage4 = New System.Windows.Forms.TabPage()
         Me.tblTime = New System.Windows.Forms.DataGridView()
-        Me.tblNonBillable = New System.Windows.Forms.DataGridView()
-        Me.Label1 = New System.Windows.Forms.Label()
-        Me.Label2 = New System.Windows.Forms.Label()
-        Me.Label3 = New System.Windows.Forms.Label()
-        Me.Label4 = New System.Windows.Forms.Label()
-        Me.WeekEnding = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.WeekNum = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.StatusCode = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Company = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.EmployeeNumber = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -72,6 +54,8 @@ Partial Class PayRoll
         Me.OtherHours = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.BatchNumber = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.CheckType = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.TabPage4 = New System.Windows.Forms.TabPage()
+        Me.tblNonBillable = New System.Windows.Forms.DataGridView()
         Me.NameEmployee = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.EmpNum = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Job = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -81,6 +65,24 @@ Partial Class PayRoll
         Me.OTHRS = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.STRATE = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Description = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.TabPage2 = New System.Windows.Forms.TabPage()
+        Me.TableLayoutPanel3 = New System.Windows.Forms.TableLayoutPanel()
+        Me.tblWeeks = New System.Windows.Forms.DataGridView()
+        Me.TableLayoutPanel4 = New System.Windows.Forms.TableLayoutPanel()
+        Me.Panel4 = New System.Windows.Forms.Panel()
+        Me.Label4 = New System.Windows.Forms.Label()
+        Me.Label3 = New System.Windows.Forms.Label()
+        Me.sprNumWeek = New System.Windows.Forms.NumericUpDown()
+        Me.dtpWeek = New System.Windows.Forms.DateTimePicker()
+        Me.Panel5 = New System.Windows.Forms.Panel()
+        Me.btnFindExcelWeeks = New System.Windows.Forms.Button()
+        Me.btnDeleteWeek = New System.Windows.Forms.Button()
+        Me.btnUpdateWeek = New System.Windows.Forms.Button()
+        Me.btnAddWeek = New System.Windows.Forms.Button()
+        Me.Weekend = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.WeekNum = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.txtMsgWk = New System.Windows.Forms.Label()
+        Me.txtSalida = New System.Windows.Forms.Label()
         Me.TableLayoutPanel1.SuspendLayout()
         Me.Panel1.SuspendLayout()
         CType(Me.PictureBox4, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -89,8 +91,13 @@ Partial Class PayRoll
         Me.TabPage1.SuspendLayout()
         Me.TableLayoutPanel2.SuspendLayout()
         Me.Panel3.SuspendLayout()
-        CType(Me.NumericUpDown2, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.NumericUpDown1, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.sprRowStartNBL, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.sprRowStartTSD, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.TabControl2.SuspendLayout()
+        Me.TabPage3.SuspendLayout()
+        CType(Me.tblTime, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.TabPage4.SuspendLayout()
+        CType(Me.tblNonBillable, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.TabPage2.SuspendLayout()
         Me.TableLayoutPanel3.SuspendLayout()
         CType(Me.tblWeeks, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -98,11 +105,6 @@ Partial Class PayRoll
         Me.Panel4.SuspendLayout()
         CType(Me.sprNumWeek, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel5.SuspendLayout()
-        Me.TabControl2.SuspendLayout()
-        Me.TabPage3.SuspendLayout()
-        Me.TabPage4.SuspendLayout()
-        CType(Me.tblTime, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.tblNonBillable, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'TableLayoutPanel1
@@ -187,11 +189,12 @@ Partial Class PayRoll
         '
         'Panel3
         '
+        Me.Panel3.Controls.Add(Me.txtSalida)
         Me.Panel3.Controls.Add(Me.Label2)
         Me.Panel3.Controls.Add(Me.Label1)
         Me.Panel3.Controls.Add(Me.btnFindMasterPayroll)
-        Me.Panel3.Controls.Add(Me.NumericUpDown2)
-        Me.Panel3.Controls.Add(Me.NumericUpDown1)
+        Me.Panel3.Controls.Add(Me.sprRowStartNBL)
+        Me.Panel3.Controls.Add(Me.sprRowStartTSD)
         Me.Panel3.Controls.Add(Me.btnReFresh)
         Me.Panel3.Controls.Add(Me.dtpStartTime)
         Me.Panel3.Dock = System.Windows.Forms.DockStyle.Fill
@@ -199,6 +202,24 @@ Partial Class PayRoll
         Me.Panel3.Name = "Panel3"
         Me.Panel3.Size = New System.Drawing.Size(774, 60)
         Me.Panel3.TabIndex = 0
+        '
+        'Label2
+        '
+        Me.Label2.AutoSize = True
+        Me.Label2.Location = New System.Drawing.Point(324, 13)
+        Me.Label2.Name = "Label2"
+        Me.Label2.Size = New System.Drawing.Size(83, 13)
+        Me.Label2.TabIndex = 6
+        Me.Label2.Text = "Strat Row Excel"
+        '
+        'Label1
+        '
+        Me.Label1.AutoSize = True
+        Me.Label1.Location = New System.Drawing.Point(7, 17)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(55, 13)
+        Me.Label1.TabIndex = 5
+        Me.Label1.Text = "Start Date"
         '
         'btnFindMasterPayroll
         '
@@ -210,19 +231,25 @@ Partial Class PayRoll
         Me.btnFindMasterPayroll.Text = "..."
         Me.btnFindMasterPayroll.UseVisualStyleBackColor = True
         '
-        'NumericUpDown2
+        'sprRowStartNBL
         '
-        Me.NumericUpDown2.Location = New System.Drawing.Point(503, 11)
-        Me.NumericUpDown2.Name = "NumericUpDown2"
-        Me.NumericUpDown2.Size = New System.Drawing.Size(49, 20)
-        Me.NumericUpDown2.TabIndex = 3
+        Me.sprRowStartNBL.Location = New System.Drawing.Point(503, 11)
+        Me.sprRowStartNBL.Maximum = New Decimal(New Integer() {10000, 0, 0, 0})
+        Me.sprRowStartNBL.Minimum = New Decimal(New Integer() {2, 0, 0, 0})
+        Me.sprRowStartNBL.Name = "sprRowStartNBL"
+        Me.sprRowStartNBL.Size = New System.Drawing.Size(49, 20)
+        Me.sprRowStartNBL.TabIndex = 3
+        Me.sprRowStartNBL.Value = New Decimal(New Integer() {6, 0, 0, 0})
         '
-        'NumericUpDown1
+        'sprRowStartTSD
         '
-        Me.NumericUpDown1.Location = New System.Drawing.Point(413, 11)
-        Me.NumericUpDown1.Name = "NumericUpDown1"
-        Me.NumericUpDown1.Size = New System.Drawing.Size(49, 20)
-        Me.NumericUpDown1.TabIndex = 2
+        Me.sprRowStartTSD.Location = New System.Drawing.Point(413, 11)
+        Me.sprRowStartTSD.Maximum = New Decimal(New Integer() {10000, 0, 0, 0})
+        Me.sprRowStartTSD.Minimum = New Decimal(New Integer() {2, 0, 0, 0})
+        Me.sprRowStartTSD.Name = "sprRowStartTSD"
+        Me.sprRowStartTSD.Size = New System.Drawing.Size(49, 20)
+        Me.sprRowStartTSD.TabIndex = 2
+        Me.sprRowStartTSD.Value = New Decimal(New Integer() {2, 0, 0, 0})
         '
         'btnReFresh
         '
@@ -241,141 +268,6 @@ Partial Class PayRoll
         Me.dtpStartTime.Name = "dtpStartTime"
         Me.dtpStartTime.Size = New System.Drawing.Size(139, 20)
         Me.dtpStartTime.TabIndex = 0
-        '
-        'TabPage2
-        '
-        Me.TabPage2.Controls.Add(Me.TableLayoutPanel3)
-        Me.TabPage2.Location = New System.Drawing.Point(4, 22)
-        Me.TabPage2.Name = "TabPage2"
-        Me.TabPage2.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage2.Size = New System.Drawing.Size(786, 363)
-        Me.TabPage2.TabIndex = 1
-        Me.TabPage2.Text = "Weeks"
-        Me.TabPage2.UseVisualStyleBackColor = True
-        '
-        'TableLayoutPanel3
-        '
-        Me.TableLayoutPanel3.ColumnCount = 2
-        Me.TableLayoutPanel3.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 41.66667!))
-        Me.TableLayoutPanel3.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 58.33333!))
-        Me.TableLayoutPanel3.Controls.Add(Me.tblWeeks, 0, 0)
-        Me.TableLayoutPanel3.Controls.Add(Me.TableLayoutPanel4, 1, 0)
-        Me.TableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.TableLayoutPanel3.Location = New System.Drawing.Point(3, 3)
-        Me.TableLayoutPanel3.Name = "TableLayoutPanel3"
-        Me.TableLayoutPanel3.RowCount = 1
-        Me.TableLayoutPanel3.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
-        Me.TableLayoutPanel3.Size = New System.Drawing.Size(780, 357)
-        Me.TableLayoutPanel3.TabIndex = 0
-        '
-        'tblWeeks
-        '
-        Me.tblWeeks.AllowUserToAddRows = False
-        Me.tblWeeks.AllowUserToDeleteRows = False
-        Me.tblWeeks.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
-        Me.tblWeeks.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.tblWeeks.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.WeekEnding, Me.WeekNum})
-        Me.tblWeeks.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.tblWeeks.Location = New System.Drawing.Point(3, 3)
-        Me.tblWeeks.Name = "tblWeeks"
-        Me.tblWeeks.Size = New System.Drawing.Size(319, 351)
-        Me.tblWeeks.TabIndex = 0
-        '
-        'TableLayoutPanel4
-        '
-        Me.TableLayoutPanel4.ColumnCount = 1
-        Me.TableLayoutPanel4.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
-        Me.TableLayoutPanel4.Controls.Add(Me.Panel4, 0, 0)
-        Me.TableLayoutPanel4.Controls.Add(Me.Panel5, 0, 1)
-        Me.TableLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.TableLayoutPanel4.Location = New System.Drawing.Point(328, 3)
-        Me.TableLayoutPanel4.Name = "TableLayoutPanel4"
-        Me.TableLayoutPanel4.RowCount = 2
-        Me.TableLayoutPanel4.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 78.57143!))
-        Me.TableLayoutPanel4.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 21.42857!))
-        Me.TableLayoutPanel4.Size = New System.Drawing.Size(449, 351)
-        Me.TableLayoutPanel4.TabIndex = 1
-        '
-        'Panel4
-        '
-        Me.Panel4.Controls.Add(Me.Label4)
-        Me.Panel4.Controls.Add(Me.Label3)
-        Me.Panel4.Controls.Add(Me.sprNumWeek)
-        Me.Panel4.Controls.Add(Me.dtpWeek)
-        Me.Panel4.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel4.Location = New System.Drawing.Point(3, 3)
-        Me.Panel4.Name = "Panel4"
-        Me.Panel4.Size = New System.Drawing.Size(443, 269)
-        Me.Panel4.TabIndex = 0
-        '
-        'sprNumWeek
-        '
-        Me.sprNumWeek.Location = New System.Drawing.Point(103, 68)
-        Me.sprNumWeek.Maximum = New Decimal(New Integer() {5, 0, 0, 0})
-        Me.sprNumWeek.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
-        Me.sprNumWeek.Name = "sprNumWeek"
-        Me.sprNumWeek.Size = New System.Drawing.Size(66, 20)
-        Me.sprNumWeek.TabIndex = 1
-        Me.sprNumWeek.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        Me.sprNumWeek.Value = New Decimal(New Integer() {1, 0, 0, 0})
-        '
-        'dtpWeek
-        '
-        Me.dtpWeek.CustomFormat = "MM/dd/yyyy"
-        Me.dtpWeek.Format = System.Windows.Forms.DateTimePickerFormat.Custom
-        Me.dtpWeek.Location = New System.Drawing.Point(103, 28)
-        Me.dtpWeek.Name = "dtpWeek"
-        Me.dtpWeek.Size = New System.Drawing.Size(200, 20)
-        Me.dtpWeek.TabIndex = 0
-        '
-        'Panel5
-        '
-        Me.Panel5.Controls.Add(Me.btnFindExcelWeeks)
-        Me.Panel5.Controls.Add(Me.btnDeleteWeek)
-        Me.Panel5.Controls.Add(Me.btnUpdateWeek)
-        Me.Panel5.Controls.Add(Me.btnAddWeek)
-        Me.Panel5.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel5.Location = New System.Drawing.Point(3, 278)
-        Me.Panel5.Name = "Panel5"
-        Me.Panel5.Size = New System.Drawing.Size(443, 70)
-        Me.Panel5.TabIndex = 1
-        '
-        'btnFindExcelWeeks
-        '
-        Me.btnFindExcelWeeks.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnFindExcelWeeks.Location = New System.Drawing.Point(351, 33)
-        Me.btnFindExcelWeeks.Name = "btnFindExcelWeeks"
-        Me.btnFindExcelWeeks.Size = New System.Drawing.Size(75, 23)
-        Me.btnFindExcelWeeks.TabIndex = 3
-        Me.btnFindExcelWeeks.Text = "..."
-        Me.btnFindExcelWeeks.UseVisualStyleBackColor = True
-        '
-        'btnDeleteWeek
-        '
-        Me.btnDeleteWeek.Location = New System.Drawing.Point(215, 33)
-        Me.btnDeleteWeek.Name = "btnDeleteWeek"
-        Me.btnDeleteWeek.Size = New System.Drawing.Size(75, 23)
-        Me.btnDeleteWeek.TabIndex = 2
-        Me.btnDeleteWeek.Text = "Delete"
-        Me.btnDeleteWeek.UseVisualStyleBackColor = True
-        '
-        'btnUpdateWeek
-        '
-        Me.btnUpdateWeek.Location = New System.Drawing.Point(121, 33)
-        Me.btnUpdateWeek.Name = "btnUpdateWeek"
-        Me.btnUpdateWeek.Size = New System.Drawing.Size(75, 23)
-        Me.btnUpdateWeek.TabIndex = 1
-        Me.btnUpdateWeek.Text = "Update"
-        Me.btnUpdateWeek.UseVisualStyleBackColor = True
-        '
-        'btnAddWeek
-        '
-        Me.btnAddWeek.Location = New System.Drawing.Point(24, 33)
-        Me.btnAddWeek.Name = "btnAddWeek"
-        Me.btnAddWeek.Size = New System.Drawing.Size(75, 23)
-        Me.btnAddWeek.TabIndex = 0
-        Me.btnAddWeek.Text = "Add"
-        Me.btnAddWeek.UseVisualStyleBackColor = True
         '
         'TabControl2
         '
@@ -399,17 +291,6 @@ Partial Class PayRoll
         Me.TabPage3.Text = "Time Sheet Data"
         Me.TabPage3.UseVisualStyleBackColor = True
         '
-        'TabPage4
-        '
-        Me.TabPage4.Controls.Add(Me.tblNonBillable)
-        Me.TabPage4.Location = New System.Drawing.Point(4, 22)
-        Me.TabPage4.Name = "TabPage4"
-        Me.TabPage4.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage4.Size = New System.Drawing.Size(766, 259)
-        Me.TabPage4.TabIndex = 1
-        Me.TabPage4.Text = "NON-BILLABLE"
-        Me.TabPage4.UseVisualStyleBackColor = True
-        '
         'tblTime
         '
         Me.tblTime.AllowUserToAddRows = False
@@ -422,65 +303,6 @@ Partial Class PayRoll
         Me.tblTime.Name = "tblTime"
         Me.tblTime.Size = New System.Drawing.Size(760, 253)
         Me.tblTime.TabIndex = 1
-        '
-        'tblNonBillable
-        '
-        Me.tblNonBillable.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
-        Me.tblNonBillable.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.tblNonBillable.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.NameEmployee, Me.EmpNum, Me.Job, Me.SubJob, Me.Date1, Me.STHRS, Me.OTHRS, Me.STRATE, Me.Description})
-        Me.tblNonBillable.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.tblNonBillable.Location = New System.Drawing.Point(3, 3)
-        Me.tblNonBillable.Name = "tblNonBillable"
-        Me.tblNonBillable.Size = New System.Drawing.Size(760, 253)
-        Me.tblNonBillable.TabIndex = 0
-        '
-        'Label1
-        '
-        Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(7, 17)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(55, 13)
-        Me.Label1.TabIndex = 5
-        Me.Label1.Text = "Start Date"
-        '
-        'Label2
-        '
-        Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(324, 13)
-        Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(83, 13)
-        Me.Label2.TabIndex = 6
-        Me.Label2.Text = "Strat Row Excel"
-        '
-        'Label3
-        '
-        Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(12, 34)
-        Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(72, 13)
-        Me.Label3.TabIndex = 2
-        Me.Label3.Text = "Week Ending"
-        '
-        'Label4
-        '
-        Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(12, 70)
-        Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(73, 13)
-        Me.Label4.TabIndex = 3
-        Me.Label4.Text = "NumberWeek"
-        '
-        'WeekEnding
-        '
-        Me.WeekEnding.HeaderText = "Week Ending"
-        Me.WeekEnding.Name = "WeekEnding"
-        Me.WeekEnding.ReadOnly = True
-        '
-        'WeekNum
-        '
-        Me.WeekNum.HeaderText = "Week Num"
-        Me.WeekNum.Name = "WeekNum"
-        Me.WeekNum.ReadOnly = True
         '
         'StatusCode
         '
@@ -566,6 +388,30 @@ Partial Class PayRoll
         Me.CheckType.Name = "CheckType"
         Me.CheckType.ReadOnly = True
         '
+        'TabPage4
+        '
+        Me.TabPage4.Controls.Add(Me.tblNonBillable)
+        Me.TabPage4.Location = New System.Drawing.Point(4, 22)
+        Me.TabPage4.Name = "TabPage4"
+        Me.TabPage4.Padding = New System.Windows.Forms.Padding(3)
+        Me.TabPage4.Size = New System.Drawing.Size(766, 259)
+        Me.TabPage4.TabIndex = 1
+        Me.TabPage4.Text = "NON-BILLABLE"
+        Me.TabPage4.UseVisualStyleBackColor = True
+        '
+        'tblNonBillable
+        '
+        Me.tblNonBillable.AllowUserToAddRows = False
+        Me.tblNonBillable.AllowUserToDeleteRows = False
+        Me.tblNonBillable.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
+        Me.tblNonBillable.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.tblNonBillable.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.NameEmployee, Me.EmpNum, Me.Job, Me.SubJob, Me.Date1, Me.STHRS, Me.OTHRS, Me.STRATE, Me.Description})
+        Me.tblNonBillable.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.tblNonBillable.Location = New System.Drawing.Point(3, 3)
+        Me.tblNonBillable.Name = "tblNonBillable"
+        Me.tblNonBillable.Size = New System.Drawing.Size(760, 253)
+        Me.tblNonBillable.TabIndex = 0
+        '
         'NameEmployee
         '
         Me.NameEmployee.HeaderText = "Name Employee"
@@ -620,6 +466,190 @@ Partial Class PayRoll
         Me.Description.Name = "Description"
         Me.Description.ReadOnly = True
         '
+        'TabPage2
+        '
+        Me.TabPage2.Controls.Add(Me.TableLayoutPanel3)
+        Me.TabPage2.Location = New System.Drawing.Point(4, 22)
+        Me.TabPage2.Name = "TabPage2"
+        Me.TabPage2.Padding = New System.Windows.Forms.Padding(3)
+        Me.TabPage2.Size = New System.Drawing.Size(786, 363)
+        Me.TabPage2.TabIndex = 1
+        Me.TabPage2.Text = "Weeks"
+        Me.TabPage2.UseVisualStyleBackColor = True
+        '
+        'TableLayoutPanel3
+        '
+        Me.TableLayoutPanel3.ColumnCount = 2
+        Me.TableLayoutPanel3.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 41.66667!))
+        Me.TableLayoutPanel3.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 58.33333!))
+        Me.TableLayoutPanel3.Controls.Add(Me.tblWeeks, 0, 0)
+        Me.TableLayoutPanel3.Controls.Add(Me.TableLayoutPanel4, 1, 0)
+        Me.TableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.TableLayoutPanel3.Location = New System.Drawing.Point(3, 3)
+        Me.TableLayoutPanel3.Name = "TableLayoutPanel3"
+        Me.TableLayoutPanel3.RowCount = 1
+        Me.TableLayoutPanel3.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
+        Me.TableLayoutPanel3.Size = New System.Drawing.Size(780, 357)
+        Me.TableLayoutPanel3.TabIndex = 0
+        '
+        'tblWeeks
+        '
+        Me.tblWeeks.AllowUserToAddRows = False
+        Me.tblWeeks.AllowUserToDeleteRows = False
+        Me.tblWeeks.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
+        Me.tblWeeks.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.tblWeeks.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Weekend, Me.WeekNum})
+        Me.tblWeeks.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.tblWeeks.Location = New System.Drawing.Point(3, 3)
+        Me.tblWeeks.Name = "tblWeeks"
+        Me.tblWeeks.Size = New System.Drawing.Size(319, 351)
+        Me.tblWeeks.TabIndex = 0
+        '
+        'TableLayoutPanel4
+        '
+        Me.TableLayoutPanel4.ColumnCount = 1
+        Me.TableLayoutPanel4.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
+        Me.TableLayoutPanel4.Controls.Add(Me.Panel4, 0, 0)
+        Me.TableLayoutPanel4.Controls.Add(Me.Panel5, 0, 1)
+        Me.TableLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.TableLayoutPanel4.Location = New System.Drawing.Point(328, 3)
+        Me.TableLayoutPanel4.Name = "TableLayoutPanel4"
+        Me.TableLayoutPanel4.RowCount = 2
+        Me.TableLayoutPanel4.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 78.57143!))
+        Me.TableLayoutPanel4.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 21.42857!))
+        Me.TableLayoutPanel4.Size = New System.Drawing.Size(449, 351)
+        Me.TableLayoutPanel4.TabIndex = 1
+        '
+        'Panel4
+        '
+        Me.Panel4.Controls.Add(Me.Label4)
+        Me.Panel4.Controls.Add(Me.Label3)
+        Me.Panel4.Controls.Add(Me.sprNumWeek)
+        Me.Panel4.Controls.Add(Me.dtpWeek)
+        Me.Panel4.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Panel4.Location = New System.Drawing.Point(3, 3)
+        Me.Panel4.Name = "Panel4"
+        Me.Panel4.Size = New System.Drawing.Size(443, 269)
+        Me.Panel4.TabIndex = 0
+        '
+        'Label4
+        '
+        Me.Label4.AutoSize = True
+        Me.Label4.Location = New System.Drawing.Point(12, 70)
+        Me.Label4.Name = "Label4"
+        Me.Label4.Size = New System.Drawing.Size(73, 13)
+        Me.Label4.TabIndex = 3
+        Me.Label4.Text = "NumberWeek"
+        '
+        'Label3
+        '
+        Me.Label3.AutoSize = True
+        Me.Label3.Location = New System.Drawing.Point(12, 34)
+        Me.Label3.Name = "Label3"
+        Me.Label3.Size = New System.Drawing.Size(72, 13)
+        Me.Label3.TabIndex = 2
+        Me.Label3.Text = "Week Ending"
+        '
+        'sprNumWeek
+        '
+        Me.sprNumWeek.Location = New System.Drawing.Point(103, 68)
+        Me.sprNumWeek.Maximum = New Decimal(New Integer() {5, 0, 0, 0})
+        Me.sprNumWeek.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
+        Me.sprNumWeek.Name = "sprNumWeek"
+        Me.sprNumWeek.Size = New System.Drawing.Size(66, 20)
+        Me.sprNumWeek.TabIndex = 1
+        Me.sprNumWeek.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        Me.sprNumWeek.Value = New Decimal(New Integer() {1, 0, 0, 0})
+        '
+        'dtpWeek
+        '
+        Me.dtpWeek.CustomFormat = "MM/dd/yyyy"
+        Me.dtpWeek.Format = System.Windows.Forms.DateTimePickerFormat.Custom
+        Me.dtpWeek.Location = New System.Drawing.Point(103, 28)
+        Me.dtpWeek.Name = "dtpWeek"
+        Me.dtpWeek.Size = New System.Drawing.Size(200, 20)
+        Me.dtpWeek.TabIndex = 0
+        '
+        'Panel5
+        '
+        Me.Panel5.Controls.Add(Me.txtMsgWk)
+        Me.Panel5.Controls.Add(Me.btnFindExcelWeeks)
+        Me.Panel5.Controls.Add(Me.btnDeleteWeek)
+        Me.Panel5.Controls.Add(Me.btnUpdateWeek)
+        Me.Panel5.Controls.Add(Me.btnAddWeek)
+        Me.Panel5.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Panel5.Location = New System.Drawing.Point(3, 278)
+        Me.Panel5.Name = "Panel5"
+        Me.Panel5.Size = New System.Drawing.Size(443, 70)
+        Me.Panel5.TabIndex = 1
+        '
+        'btnFindExcelWeeks
+        '
+        Me.btnFindExcelWeeks.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnFindExcelWeeks.Location = New System.Drawing.Point(351, 17)
+        Me.btnFindExcelWeeks.Name = "btnFindExcelWeeks"
+        Me.btnFindExcelWeeks.Size = New System.Drawing.Size(75, 23)
+        Me.btnFindExcelWeeks.TabIndex = 3
+        Me.btnFindExcelWeeks.Text = "..."
+        Me.btnFindExcelWeeks.UseVisualStyleBackColor = True
+        '
+        'btnDeleteWeek
+        '
+        Me.btnDeleteWeek.Location = New System.Drawing.Point(215, 17)
+        Me.btnDeleteWeek.Name = "btnDeleteWeek"
+        Me.btnDeleteWeek.Size = New System.Drawing.Size(75, 23)
+        Me.btnDeleteWeek.TabIndex = 2
+        Me.btnDeleteWeek.Text = "Delete"
+        Me.btnDeleteWeek.UseVisualStyleBackColor = True
+        '
+        'btnUpdateWeek
+        '
+        Me.btnUpdateWeek.Location = New System.Drawing.Point(121, 17)
+        Me.btnUpdateWeek.Name = "btnUpdateWeek"
+        Me.btnUpdateWeek.Size = New System.Drawing.Size(75, 23)
+        Me.btnUpdateWeek.TabIndex = 1
+        Me.btnUpdateWeek.Text = "Update"
+        Me.btnUpdateWeek.UseVisualStyleBackColor = True
+        '
+        'btnAddWeek
+        '
+        Me.btnAddWeek.Location = New System.Drawing.Point(24, 17)
+        Me.btnAddWeek.Name = "btnAddWeek"
+        Me.btnAddWeek.Size = New System.Drawing.Size(75, 23)
+        Me.btnAddWeek.TabIndex = 0
+        Me.btnAddWeek.Text = "Add"
+        Me.btnAddWeek.UseVisualStyleBackColor = True
+        '
+        'Weekend
+        '
+        Me.Weekend.HeaderText = "Weekending"
+        Me.Weekend.Name = "Weekend"
+        Me.Weekend.ReadOnly = True
+        '
+        'WeekNum
+        '
+        Me.WeekNum.HeaderText = "Week Num"
+        Me.WeekNum.Name = "WeekNum"
+        Me.WeekNum.ReadOnly = True
+        '
+        'txtMsgWk
+        '
+        Me.txtMsgWk.AutoSize = True
+        Me.txtMsgWk.Location = New System.Drawing.Point(15, 47)
+        Me.txtMsgWk.Name = "txtMsgWk"
+        Me.txtMsgWk.Size = New System.Drawing.Size(50, 13)
+        Me.txtMsgWk.TabIndex = 4
+        Me.txtMsgWk.Text = "Message"
+        '
+        'txtSalida
+        '
+        Me.txtSalida.AutoSize = True
+        Me.txtSalida.Location = New System.Drawing.Point(7, 40)
+        Me.txtSalida.Name = "txtSalida"
+        Me.txtSalida.Size = New System.Drawing.Size(53, 13)
+        Me.txtSalida.TabIndex = 7
+        Me.txtSalida.Text = "Message:"
+        '
         'PayRoll
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -637,8 +667,13 @@ Partial Class PayRoll
         Me.TableLayoutPanel2.ResumeLayout(False)
         Me.Panel3.ResumeLayout(False)
         Me.Panel3.PerformLayout()
-        CType(Me.NumericUpDown2, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.NumericUpDown1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.sprRowStartNBL, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.sprRowStartTSD, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.TabControl2.ResumeLayout(False)
+        Me.TabPage3.ResumeLayout(False)
+        CType(Me.tblTime, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.TabPage4.ResumeLayout(False)
+        CType(Me.tblNonBillable, System.ComponentModel.ISupportInitialize).EndInit()
         Me.TabPage2.ResumeLayout(False)
         Me.TableLayoutPanel3.ResumeLayout(False)
         CType(Me.tblWeeks, System.ComponentModel.ISupportInitialize).EndInit()
@@ -647,11 +682,7 @@ Partial Class PayRoll
         Me.Panel4.PerformLayout()
         CType(Me.sprNumWeek, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel5.ResumeLayout(False)
-        Me.TabControl2.ResumeLayout(False)
-        Me.TabPage3.ResumeLayout(False)
-        Me.TabPage4.ResumeLayout(False)
-        CType(Me.tblTime, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.tblNonBillable, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.Panel5.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -666,8 +697,8 @@ Partial Class PayRoll
     Friend WithEvents TableLayoutPanel2 As TableLayoutPanel
     Friend WithEvents Panel3 As Panel
     Friend WithEvents btnFindMasterPayroll As Button
-    Friend WithEvents NumericUpDown2 As NumericUpDown
-    Friend WithEvents NumericUpDown1 As NumericUpDown
+    Friend WithEvents sprRowStartNBL As NumericUpDown
+    Friend WithEvents sprRowStartTSD As NumericUpDown
     Friend WithEvents btnReFresh As Button
     Friend WithEvents dtpStartTime As DateTimePicker
     Friend WithEvents TableLayoutPanel3 As TableLayoutPanel
@@ -713,6 +744,8 @@ Partial Class PayRoll
     Friend WithEvents OTHRS As DataGridViewTextBoxColumn
     Friend WithEvents STRATE As DataGridViewTextBoxColumn
     Friend WithEvents Description As DataGridViewTextBoxColumn
-    Friend WithEvents WeekEnding As DataGridViewTextBoxColumn
+    Friend WithEvents Weekend As DataGridViewTextBoxColumn
     Friend WithEvents WeekNum As DataGridViewTextBoxColumn
+    Friend WithEvents txtMsgWk As Label
+    Friend WithEvents txtSalida As Label
 End Class

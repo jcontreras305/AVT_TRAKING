@@ -593,7 +593,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Documents\Creacion de DB y de la tabla de Usuarios.sql" />
-    <Content Include="Documents\IsaacSP.sql" />
     <None Include="Images\users.png" />
     <None Include="Images\userlogin.png" />
     <None Include="Images\close.png" />
@@ -616,6 +615,7 @@
     <None Include="Images\billing.png" />
     <None Include="Images\catsemployee.png" />
     <None Include="Images\ComplteByRange.png" />
+    <Content Include="Documents\SPReports.sql" />
     <Content Include="Images\eye.png" />
     <None Include="Images\minimize.png" />
     <None Include="Images\show.png" />

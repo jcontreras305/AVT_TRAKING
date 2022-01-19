@@ -350,6 +350,34 @@ and (CONCAT(firstName,' ',middleName,' ',lastName) like '%" + consulta + "%' or 
         End Try
     End Function
 
+    '======================================================================================================
+    '=============== METODOS PARA PAYROLL SELECT EMPLEADOS ACTIVOS ========================================
+    '======================================================================================================
+    '======================================================================================================
 
+    Public Function selectActiveEmployees() As DataTable
+        Try
+            conectar()
+            Dim cmd As New SqlCommand("select numberEmploye as 'BSL#' , lastName as 'Last Name', CONCAT(firstName,' ',middleName)as 'First Name' from employees where estatus like 'E' order by numberEmploye", conn)
+            If cmd.ExecuteNonQuery Then
+                Dim dt As New Data.DataTable
+                Dim da As New SqlDataAdapter(cmd)
+                da.Fill(dt)
+                Return dt
+            Else
+                Dim dt As New Data.DataTable
+                dt.Columns.Add("BSL#")
+                dt.Columns.Add("Last Name")
+                dt.Columns.Add("First Name")
+                Return dt
+            End If
+        Catch ex As Exception
+            Dim dt As New Data.DataTable
+            dt.Columns.Add("BSL#")
+            dt.Columns.Add("Last Name")
+            dt.Columns.Add("First Name")
+            Return dt
+        End Try
+    End Function
 
 End Class
