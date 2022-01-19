@@ -1052,9 +1052,7 @@ Public Class HoursWeekPerEmployees
         btnMaximize.Visible = True
     End Sub
 
-    Private Sub Panel1_Paint(sender As Object, e As PaintEventArgs) Handles Panel1.Paint
 
-    End Sub
 
     Private Sub btnTime_Click(sender As Object, e As EventArgs) Handles btnTime.Click
         Dim timeSheet As New TimeSheet

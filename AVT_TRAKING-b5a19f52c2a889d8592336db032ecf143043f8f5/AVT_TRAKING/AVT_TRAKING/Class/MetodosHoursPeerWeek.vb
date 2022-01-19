@@ -419,5 +419,54 @@ where tk.status = 0 ", conn)
             Return Nothing
         End Try
     End Function
+    '================================================================================================
+    '==================== METODOS PARA PEYROLL ======================================================
+    '================================================================================================
+
+    Public Function insertWeek(ByVal week As Date, ByVal weekNum As Integer) As Boolean
+        Try
+            conectar()
+            Dim cmd As New SqlCommand("if (select count(*) from weeks where dateWeek= '" + validaFechaParaSQl(week) + "')=0
+begin
+	insert into weeks values('" + validaFechaParaSQl(week) + "'," + CStr(weekNum) + ")
+end
+else if (select count(*) from weeks where dateWeek= '" + validaFechaParaSQl(week) + "')>0
+begin
+	update weeks set weekN = " + CStr(weekNum) + " where dateWeek='" + validaFechaParaSQl(week) + "'
+end", conn)
+            If cmd.ExecuteNonQuery() Then
+                MsgBox("Succesfull")
+                Return True
+            Else
+                Return False
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message())
+            Return False
+        Finally
+            desconectar()
+        End Try
+    End Function
+
+    Public Function selectWeeks(ByVal tbl As DataGridView) As Boolean
+        Try
+            conectar()
+            Dim cmd As New SqlCommand("select * from weeks", conn)
+            Dim dr As SqlDataReader = cmd.ExecuteReader()
+            If tbl.Rows IsNot Nothing Then
+                tbl.Rows.Clear()
+            End If
+            While dr.Read()
+                tbl.Rows.Add(validarFechaParaVB(dr("dateWeek")), CStr(dr("weekN")))
+            End While
+            dr.Close()
+            Return True
+        Catch ex As Exception
+            MsgBox(ex.Message())
+            Return False
+        Finally
+            desconectar()
+        End Try
+    End Function
 
 End Class

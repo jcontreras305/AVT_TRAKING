@@ -136,7 +136,8 @@ Module metodosGlobales
                 Else
                     Dim fecha1 As String = array(0) + "/" + array(1) + "/" + array(2)
                     Try
-                        Return CDate(fecha1)
+                        Dim newfecha As Date = New Date(CInt(array(0)), CInt(array(1)), CInt(array(2)))
+                        Return newfecha
                     Catch ex As Exception
                         fecha1 = array(1) + "/" + array(0) + "/" + array(2)
                         Return CDate(fecha1)
