@@ -22,7 +22,7 @@ Partial Class HoursWeekPerEmployees
     'No lo modifique con el editor de código.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(HoursWeekPerEmployees))
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.PictureBox2 = New System.Windows.Forms.PictureBox()
@@ -30,6 +30,12 @@ Partial Class HoursWeekPerEmployees
         Me.btnMaximize = New System.Windows.Forms.PictureBox()
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.Label5 = New System.Windows.Forms.Label()
+        Me.Panel3 = New System.Windows.Forms.Panel()
+        Me.pcbPhoto = New System.Windows.Forms.PictureBox()
+        Me.lblEmployeeNumber = New System.Windows.Forms.Label()
+        Me.Label3 = New System.Windows.Forms.Label()
+        Me.lblNombreEmployee = New System.Windows.Forms.Label()
+        Me.lblName = New System.Windows.Forms.Label()
         Me.tblHourPeerDay = New System.Windows.Forms.DataGridView()
         Me.clmWeekending = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.clmEployeeName = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -50,12 +56,6 @@ Partial Class HoursWeekPerEmployees
         Me.clmSatOT = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.clmSunST = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.clmSunOT = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Panel3 = New System.Windows.Forms.Panel()
-        Me.pcbPhoto = New System.Windows.Forms.PictureBox()
-        Me.lblEmployeeNumber = New System.Windows.Forms.Label()
-        Me.Label3 = New System.Windows.Forms.Label()
-        Me.lblNombreEmployee = New System.Windows.Forms.Label()
-        Me.lblName = New System.Windows.Forms.Label()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.txtFindFecha = New System.Windows.Forms.TextBox()
         Me.btnSAP = New System.Windows.Forms.Button()
@@ -99,9 +99,9 @@ Partial Class HoursWeekPerEmployees
         CType(Me.btnRestore, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.btnMaximize, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.tblHourPeerDay, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel3.SuspendLayout()
         CType(Me.pcbPhoto, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.tblHourPeerDay, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox1.SuspendLayout()
         Me.TabControl1.SuspendLayout()
         Me.tbpTimeWorked.SuspendLayout()
@@ -129,7 +129,7 @@ Partial Class HoursWeekPerEmployees
         Me.Panel1.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Panel1.Location = New System.Drawing.Point(3, 3)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(1182, 148)
+        Me.Panel1.Size = New System.Drawing.Size(1182, 120)
         Me.Panel1.TabIndex = 0
         '
         'PictureBox2
@@ -183,6 +183,73 @@ Partial Class HoursWeekPerEmployees
         Me.Label5.TabIndex = 6
         Me.Label5.Text = "HoursWeekPerEmployees"
         '
+        'Panel3
+        '
+        Me.Panel3.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Panel3.Controls.Add(Me.pcbPhoto)
+        Me.Panel3.Location = New System.Drawing.Point(865, 3)
+        Me.Panel3.Name = "Panel3"
+        Me.Panel3.Size = New System.Drawing.Size(115, 112)
+        Me.Panel3.TabIndex = 5
+        '
+        'pcbPhoto
+        '
+        Me.pcbPhoto.BackColor = System.Drawing.Color.White
+        Me.pcbPhoto.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.pcbPhoto.Image = Global.AVT_TRAKING.My.Resources.Resources.user
+        Me.pcbPhoto.InitialImage = Global.AVT_TRAKING.My.Resources.Resources.user
+        Me.pcbPhoto.Location = New System.Drawing.Point(0, 0)
+        Me.pcbPhoto.Name = "pcbPhoto"
+        Me.pcbPhoto.Size = New System.Drawing.Size(115, 112)
+        Me.pcbPhoto.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
+        Me.pcbPhoto.TabIndex = 0
+        Me.pcbPhoto.TabStop = False
+        '
+        'lblEmployeeNumber
+        '
+        Me.lblEmployeeNumber.AutoSize = True
+        Me.lblEmployeeNumber.Font = New System.Drawing.Font("Verdana", 9.75!, CType((System.Drawing.FontStyle.Bold Or System.Drawing.FontStyle.Underline), System.Drawing.FontStyle), System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblEmployeeNumber.ForeColor = System.Drawing.Color.FromArgb(CType(CType(128, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.lblEmployeeNumber.Location = New System.Drawing.Point(470, 80)
+        Me.lblEmployeeNumber.Name = "lblEmployeeNumber"
+        Me.lblEmployeeNumber.Size = New System.Drawing.Size(65, 16)
+        Me.lblEmployeeNumber.TabIndex = 4
+        Me.lblEmployeeNumber.Text = "Number"
+        '
+        'Label3
+        '
+        Me.Label3.AutoSize = True
+        Me.Label3.Font = New System.Drawing.Font("Verdana", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label3.ForeColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.Label3.Location = New System.Drawing.Point(471, 49)
+        Me.Label3.Name = "Label3"
+        Me.Label3.Size = New System.Drawing.Size(141, 16)
+        Me.Label3.TabIndex = 3
+        Me.Label3.Text = "Employee Number"
+        '
+        'lblNombreEmployee
+        '
+        Me.lblNombreEmployee.AutoSize = True
+        Me.lblNombreEmployee.Font = New System.Drawing.Font("Verdana", 9.75!, CType((System.Drawing.FontStyle.Bold Or System.Drawing.FontStyle.Underline), System.Drawing.FontStyle), System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblNombreEmployee.ForeColor = System.Drawing.Color.FromArgb(CType(CType(128, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.lblNombreEmployee.Location = New System.Drawing.Point(222, 80)
+        Me.lblNombreEmployee.Name = "lblNombreEmployee"
+        Me.lblNombreEmployee.Size = New System.Drawing.Size(65, 16)
+        Me.lblNombreEmployee.TabIndex = 2
+        Me.lblNombreEmployee.Text = "Nombre"
+        Me.lblNombreEmployee.TextAlign = System.Drawing.ContentAlignment.TopCenter
+        '
+        'lblName
+        '
+        Me.lblName.AutoSize = True
+        Me.lblName.Font = New System.Drawing.Font("Verdana", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblName.ForeColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.lblName.Location = New System.Drawing.Point(223, 49)
+        Me.lblName.Name = "lblName"
+        Me.lblName.Size = New System.Drawing.Size(130, 16)
+        Me.lblName.TabIndex = 1
+        Me.lblName.Text = "Employee Name "
+        '
         'tblHourPeerDay
         '
         Me.tblHourPeerDay.AllowUserToAddRows = False
@@ -191,20 +258,21 @@ Partial Class HoursWeekPerEmployees
         Me.tblHourPeerDay.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.tblHourPeerDay.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.tblHourPeerDay.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.clmWeekending, Me.clmEployeeName, Me.clmTotalST, Me.clmTotalOT, Me.clmTotalHours3, Me.clmMonST, Me.clmMonOT, Me.clmTueST, Me.clmTueOT, Me.clmWedST, Me.clmWedOT, Me.clmThuST, Me.clmThuOT, Me.clmFriST, Me.clmFriOT, Me.clmSatST, Me.clmSatOT, Me.clmSunST, Me.clmSunOT})
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.ControlDark
-        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.tblHourPeerDay.DefaultCellStyle = DataGridViewCellStyle2
-        Me.tblHourPeerDay.Location = New System.Drawing.Point(3, 157)
+        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.ControlDark
+        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.tblHourPeerDay.DefaultCellStyle = DataGridViewCellStyle1
+        Me.tblHourPeerDay.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.tblHourPeerDay.Location = New System.Drawing.Point(3, 129)
         Me.tblHourPeerDay.MultiSelect = False
         Me.tblHourPeerDay.Name = "tblHourPeerDay"
         Me.tblHourPeerDay.ReadOnly = True
         Me.tblHourPeerDay.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.tblHourPeerDay.Size = New System.Drawing.Size(1182, 58)
+        Me.tblHourPeerDay.Size = New System.Drawing.Size(1182, 55)
         Me.tblHourPeerDay.TabIndex = 0
         '
         'clmWeekending
@@ -321,73 +389,6 @@ Partial Class HoursWeekPerEmployees
         Me.clmSunOT.Name = "clmSunOT"
         Me.clmSunOT.ReadOnly = True
         '
-        'Panel3
-        '
-        Me.Panel3.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Panel3.Controls.Add(Me.pcbPhoto)
-        Me.Panel3.Location = New System.Drawing.Point(865, 3)
-        Me.Panel3.Name = "Panel3"
-        Me.Panel3.Size = New System.Drawing.Size(115, 112)
-        Me.Panel3.TabIndex = 5
-        '
-        'pcbPhoto
-        '
-        Me.pcbPhoto.BackColor = System.Drawing.Color.White
-        Me.pcbPhoto.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.pcbPhoto.Image = Global.AVT_TRAKING.My.Resources.Resources.user
-        Me.pcbPhoto.InitialImage = Global.AVT_TRAKING.My.Resources.Resources.user
-        Me.pcbPhoto.Location = New System.Drawing.Point(0, 0)
-        Me.pcbPhoto.Name = "pcbPhoto"
-        Me.pcbPhoto.Size = New System.Drawing.Size(115, 112)
-        Me.pcbPhoto.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
-        Me.pcbPhoto.TabIndex = 0
-        Me.pcbPhoto.TabStop = False
-        '
-        'lblEmployeeNumber
-        '
-        Me.lblEmployeeNumber.AutoSize = True
-        Me.lblEmployeeNumber.Font = New System.Drawing.Font("Verdana", 9.75!, CType((System.Drawing.FontStyle.Bold Or System.Drawing.FontStyle.Underline), System.Drawing.FontStyle), System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblEmployeeNumber.ForeColor = System.Drawing.Color.FromArgb(CType(CType(128, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.lblEmployeeNumber.Location = New System.Drawing.Point(470, 80)
-        Me.lblEmployeeNumber.Name = "lblEmployeeNumber"
-        Me.lblEmployeeNumber.Size = New System.Drawing.Size(65, 16)
-        Me.lblEmployeeNumber.TabIndex = 4
-        Me.lblEmployeeNumber.Text = "Number"
-        '
-        'Label3
-        '
-        Me.Label3.AutoSize = True
-        Me.Label3.Font = New System.Drawing.Font("Verdana", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label3.ForeColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.Label3.Location = New System.Drawing.Point(471, 49)
-        Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(141, 16)
-        Me.Label3.TabIndex = 3
-        Me.Label3.Text = "Employee Number"
-        '
-        'lblNombreEmployee
-        '
-        Me.lblNombreEmployee.AutoSize = True
-        Me.lblNombreEmployee.Font = New System.Drawing.Font("Verdana", 9.75!, CType((System.Drawing.FontStyle.Bold Or System.Drawing.FontStyle.Underline), System.Drawing.FontStyle), System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblNombreEmployee.ForeColor = System.Drawing.Color.FromArgb(CType(CType(128, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.lblNombreEmployee.Location = New System.Drawing.Point(222, 80)
-        Me.lblNombreEmployee.Name = "lblNombreEmployee"
-        Me.lblNombreEmployee.Size = New System.Drawing.Size(65, 16)
-        Me.lblNombreEmployee.TabIndex = 2
-        Me.lblNombreEmployee.Text = "Nombre"
-        Me.lblNombreEmployee.TextAlign = System.Drawing.ContentAlignment.TopCenter
-        '
-        'lblName
-        '
-        Me.lblName.AutoSize = True
-        Me.lblName.Font = New System.Drawing.Font("Verdana", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblName.ForeColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.lblName.Location = New System.Drawing.Point(223, 49)
-        Me.lblName.Name = "lblName"
-        Me.lblName.Size = New System.Drawing.Size(130, 16)
-        Me.lblName.TabIndex = 1
-        Me.lblName.Text = "Employee Name "
-        '
         'GroupBox1
         '
         Me.GroupBox1.BackColor = System.Drawing.Color.FromArgb(CType(CType(83, Byte), Integer), CType(CType(93, Byte), Integer), CType(CType(102, Byte), Integer))
@@ -413,9 +414,9 @@ Partial Class HoursWeekPerEmployees
         Me.GroupBox1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.GroupBox1.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.GroupBox1.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.GroupBox1.Location = New System.Drawing.Point(3, 221)
+        Me.GroupBox1.Location = New System.Drawing.Point(3, 190)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(1182, 105)
+        Me.GroupBox1.Size = New System.Drawing.Size(1182, 99)
         Me.GroupBox1.TabIndex = 0
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Control"
@@ -659,10 +660,10 @@ Partial Class HoursWeekPerEmployees
         Me.TabControl1.Controls.Add(Me.tbpTimeWorked)
         Me.TabControl1.Controls.Add(Me.tbpExpenses)
         Me.TabControl1.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.TabControl1.Location = New System.Drawing.Point(3, 332)
+        Me.TabControl1.Location = New System.Drawing.Point(3, 295)
         Me.TabControl1.Name = "TabControl1"
         Me.TabControl1.SelectedIndex = 0
-        Me.TabControl1.Size = New System.Drawing.Size(1182, 357)
+        Me.TabControl1.Size = New System.Drawing.Size(1182, 184)
         Me.TabControl1.TabIndex = 0
         '
         'tbpTimeWorked
@@ -671,7 +672,7 @@ Partial Class HoursWeekPerEmployees
         Me.tbpTimeWorked.Location = New System.Drawing.Point(4, 22)
         Me.tbpTimeWorked.Name = "tbpTimeWorked"
         Me.tbpTimeWorked.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbpTimeWorked.Size = New System.Drawing.Size(1174, 331)
+        Me.tbpTimeWorked.Size = New System.Drawing.Size(1174, 158)
         Me.tbpTimeWorked.TabIndex = 0
         Me.tbpTimeWorked.Text = "Time Worked"
         Me.tbpTimeWorked.UseVisualStyleBackColor = True
@@ -684,7 +685,7 @@ Partial Class HoursWeekPerEmployees
         Me.tblRecordEmployee.Dock = System.Windows.Forms.DockStyle.Fill
         Me.tblRecordEmployee.Location = New System.Drawing.Point(3, 3)
         Me.tblRecordEmployee.Name = "tblRecordEmployee"
-        Me.tblRecordEmployee.Size = New System.Drawing.Size(1168, 325)
+        Me.tblRecordEmployee.Size = New System.Drawing.Size(1168, 152)
         Me.tblRecordEmployee.TabIndex = 0
         '
         'tbpExpenses
@@ -821,9 +822,9 @@ Partial Class HoursWeekPerEmployees
         Me.Panel4.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel4.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Panel4.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.Panel4.Location = New System.Drawing.Point(3, 695)
+        Me.Panel4.Location = New System.Drawing.Point(3, 485)
         Me.Panel4.Name = "Panel4"
-        Me.Panel4.Size = New System.Drawing.Size(1182, 51)
+        Me.Panel4.Size = New System.Drawing.Size(1182, 50)
         Me.Panel4.TabIndex = 2
         '
         'btnRefresh
@@ -845,7 +846,7 @@ Partial Class HoursWeekPerEmployees
         'TableLayoutPanel1
         '
         Me.TableLayoutPanel1.ColumnCount = 1
-        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
+        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
         Me.TableLayoutPanel1.Controls.Add(Me.TabControl1, 0, 3)
         Me.TableLayoutPanel1.Controls.Add(Me.GroupBox1, 0, 2)
         Me.TableLayoutPanel1.Controls.Add(Me.tblHourPeerDay, 0, 1)
@@ -855,19 +856,19 @@ Partial Class HoursWeekPerEmployees
         Me.TableLayoutPanel1.Location = New System.Drawing.Point(0, 0)
         Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
         Me.TableLayoutPanel1.RowCount = 5
-        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 70.68965!))
-        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 29.31034!))
-        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 111.0!))
-        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 363.0!))
+        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 126.0!))
+        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 61.0!))
+        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 105.0!))
+        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 56.0!))
-        Me.TableLayoutPanel1.Size = New System.Drawing.Size(1188, 749)
+        Me.TableLayoutPanel1.Size = New System.Drawing.Size(1188, 538)
         Me.TableLayoutPanel1.TabIndex = 3
         '
         'HoursWeekPerEmployees
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1188, 749)
+        Me.ClientSize = New System.Drawing.Size(1188, 538)
         Me.Controls.Add(Me.TableLayoutPanel1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
         Me.Name = "HoursWeekPerEmployees"
@@ -878,9 +879,9 @@ Partial Class HoursWeekPerEmployees
         CType(Me.btnRestore, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.btnMaximize, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.tblHourPeerDay, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel3.ResumeLayout(False)
         CType(Me.pcbPhoto, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.tblHourPeerDay, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()
         Me.TabControl1.ResumeLayout(False)
