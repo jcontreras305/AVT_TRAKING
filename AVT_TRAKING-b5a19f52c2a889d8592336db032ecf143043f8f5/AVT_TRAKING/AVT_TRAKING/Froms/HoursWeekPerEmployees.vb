@@ -274,8 +274,9 @@ Public Class HoursWeekPerEmployees
                     End If
                 Next
             ElseIf tblRecordEmployee.CurrentCell.ColumnIndex = tblRecordEmployee.Columns("Work Code").Index Then
+                tblRecordEmployee.CurrentRow.Cells("Work Code").Value = ""
                 For Each row As DataRow In workCodeTable.Rows
-                    If cmb.Text IsNot "" Then
+                    If cmb.Text IsNot "" And tblRecordEmployee.CurrentRow.Cells("Work Code").Value <> row.ItemArray(1) Then
                         If cmb.Text = row.ItemArray(1) Then
                             If tblRecordEmployee.CurrentRow.Cells(0).Value Is DBNull.Value Then
                                 tblRecordEmployee.CurrentRow.Cells("Hours ST").Value = "0"
@@ -286,6 +287,7 @@ Public Class HoursWeekPerEmployees
                             tblRecordEmployee.CurrentRow.Cells("Billing Rate").Value = row.ItemArray(3)
                             tblRecordEmployee.CurrentRow.Cells("Billing Rate OT").Value = row.ItemArray(4)
                             tblRecordEmployee.CurrentRow.Cells("Billing Rate 3").Value = row.ItemArray(5)
+                            tblRecordEmployee.CurrentRow.Cells("Work Code").Value = row.ItemArray(1)
                             Exit For
                         End If
                     End If
@@ -1052,7 +1054,12 @@ Public Class HoursWeekPerEmployees
         btnMaximize.Visible = True
     End Sub
 
-    Private Sub Panel1_Paint(sender As Object, e As PaintEventArgs) Handles Panel1.Paint
+    Private Sub Button6_Click(sender As Object, e As EventArgs) Handles Button6.Click
+        Dim pr As New PayRoll
+        pr.ShowDialog()
+    End Sub
+
+    Private Sub Button12_Click(sender As Object, e As EventArgs) Handles Button12.Click
 
     End Sub
 

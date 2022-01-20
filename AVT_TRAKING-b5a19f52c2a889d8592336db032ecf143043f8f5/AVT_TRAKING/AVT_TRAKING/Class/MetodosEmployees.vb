@@ -32,7 +32,7 @@ Public Class MetodosEmployees
             conectar()
             Dim cmd As New SqlCommand("select  em1.numberEmploye as Number, em1.firstName as 'FirstName' , em1.lastName as 'LastName' , em1.middleName as 'MiddleName' , 
 con.phoneNumber1 as 'PhoneNumber1', con.phoneNumber2 as 'PhoneNumber2' , con.email as 'Email' , 
-ads.city as 'City', ads.providence as 'State', T1.payRate1 as 'PayRate',T1.payRate2 as 'PayRateOT',T1.payRate3 as 'PayRate3',typeEmployee as 'Class'  from employees as em1 left join 
+ads.city as 'City', ads.providence as 'State', T1.payRate1 as 'PayRate',T1.payRate2 as 'PayRateOT',T1.payRate3 as 'PayRate3',typeEmployee as 'Class', perdiem  from employees as em1 left join 
 (select pr.payRate1,pr.payRate2,pr.payRate3,pr.idEmployee from payRate as pr inner join employees as em on em.idEmployee =  pr.idEmployee where datePayRate = (select MAX(datePayRate) from payRate where idEmployee = em.idEmployee)) 
 as T1
 on T1.idEmployee = em1.idEmployee 
@@ -84,6 +84,7 @@ where em1.numberEmploye like CONCAT('%','" + text + "','%') or
             cmd.Parameters.Add("@payRate2", SqlDbType.Float).Value = datosGeneralesEmpleado(16)
             cmd.Parameters.Add("@payRate3", SqlDbType.Float).Value = datosGeneralesEmpleado(17)
             cmd.Parameters.Add("@type", SqlDbType.VarChar, 20).Value = datosGeneralesEmpleado(18)
+            cmd.Parameters.Add("@perdiem", SqlDbType.Bit).Value = If(datosGeneralesEmpleado(19) = "1", True, False)
             If cmd.ExecuteNonQuery Then
                 Return True
             Else
@@ -153,7 +154,7 @@ where em1.numberEmploye like CONCAT('%','" + text + "','%') or
             While rd.Read()
                 Dim cont As Int16 = 0
                 Do
-                    If cont <> 7 Then
+                    If cont <> 7 Then 'NO se agrega la imagen del empleado
                         list.Add(CStr(rd(cont)))
                     End If
                     cont += 1
@@ -201,6 +202,7 @@ where em1.numberEmploye like CONCAT('%','" + text + "','%') or
             'cmd.Parameters.Add("@payRate2", SqlDbType.Float).Value = datosNuevos(16)
             'cmd.Parameters.Add("@payRate3", SqlDbType.Float).Value = datosNuevos(17)
             cmd.Parameters.Add("@type", SqlDbType.VarChar, 20).Value = datosNuevos(18)
+            cmd.Parameters.Add("@perdiem", SqlDbType.Bit).Value = If(datosNuevos(19) = "1", True, False)
             cmd.Parameters.Add("@msg", SqlDbType.VarChar, 50).Direction = ParameterDirection.Output
             If cmd.ExecuteNonQuery Then
                 Dim resultado As String = cmd.Parameters("@msg").Value
@@ -350,6 +352,34 @@ and (CONCAT(firstName,' ',middleName,' ',lastName) like '%" + consulta + "%' or 
         End Try
     End Function
 
+    '======================================================================================================
+    '=============== METODOS PARA PAYROLL SELECT EMPLEADOS ACTIVOS ========================================
+    '======================================================================================================
+    '======================================================================================================
 
+    Public Function selectActiveEmployees() As DataTable
+        Try
+            conectar()
+            Dim cmd As New SqlCommand("select numberEmploye as 'BSL#' , lastName as 'Last Name', CONCAT(firstName,' ',middleName)as 'First Name' from employees where estatus like 'E' order by numberEmploye", conn)
+            If cmd.ExecuteNonQuery Then
+                Dim dt As New Data.DataTable
+                Dim da As New SqlDataAdapter(cmd)
+                da.Fill(dt)
+                Return dt
+            Else
+                Dim dt As New Data.DataTable
+                dt.Columns.Add("BSL#")
+                dt.Columns.Add("Last Name")
+                dt.Columns.Add("First Name")
+                Return dt
+            End If
+        Catch ex As Exception
+            Dim dt As New Data.DataTable
+            dt.Columns.Add("BSL#")
+            dt.Columns.Add("Last Name")
+            dt.Columns.Add("First Name")
+            Return dt
+        End Try
+    End Function
 
 End Class

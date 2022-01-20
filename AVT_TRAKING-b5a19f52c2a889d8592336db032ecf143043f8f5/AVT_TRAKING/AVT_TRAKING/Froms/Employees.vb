@@ -172,36 +172,39 @@ Public Class Employees
             txtSapNumber.Text = arrayDatos(6)
             idAddress = arrayDatos(7)
             idContacto = arrayDatos(8)
-            idPay = arrayDatos(21)
+
             If arrayDatos(9) = "E" Then
                 chbState.Checked = True
             Else
                 chbState.Checked = False
             End If
             cmbTypeEmployee.SelectedIndex = cmbTypeEmployee.FindString(arrayDatos(10))
-            If arrayDatos(12) <> "" Or arrayDatos(13) <> "" Or arrayDatos(14) <> "" Then
+            chbPerdiem.Checked = If(arrayDatos(11) = "True", True, False)
+            If arrayDatos(13) <> "" Or arrayDatos(14) <> "0" Or arrayDatos(15) <> "" Then
                 activarCamposAddress(True)
-                txtStreat.Text = arrayDatos(12)
-                txtNumber.Text = arrayDatos(13)
-                txtCity.Text = arrayDatos(14)
-                txtProvidence.Text = arrayDatos(15)
-                txtPostalCode.Text = arrayDatos(16)
+                txtStreat.Text = arrayDatos(13)
+                txtNumber.Text = arrayDatos(14)
+                txtCity.Text = arrayDatos(15)
+                txtProvidence.Text = arrayDatos(16)
+                txtPostalCode.Text = arrayDatos(17)
             Else
                 activarCamposAddress(False)
             End If
-            If arrayDatos(18) <> "" Then
+            If arrayDatos(19) <> "" Then
                 activarCamposContacto(True)
-                txtPhone1.Text = arrayDatos(18)
-                txtPhone2.Text = arrayDatos(19)
-                txtEmail.Text = arrayDatos(20)
+                txtPhone1.Text = arrayDatos(19)
+                txtPhone2.Text = arrayDatos(20)
+                txtEmail.Text = arrayDatos(21)
             Else
                 activarCamposContacto(False)
             End If
-            If arrayDatos(22) <> "" Or arrayDatos(23) <> "" Or arrayDatos(24) <> "" Then
+
+            idPay = arrayDatos(22)
+            If arrayDatos(23) <> "" Or arrayDatos(24) <> "" Or arrayDatos(25) <> "" Then
                 activarCamposPay(True)
-                sprPayRate1.Value = arrayDatos(22)
-                sprPayRate2.Value = arrayDatos(23)
-                sprPayRate3.Value = arrayDatos(24)
+                sprPayRate1.Value = arrayDatos(23)
+                sprPayRate2.Value = arrayDatos(24)
+                sprPayRate3.Value = arrayDatos(25)
             Else
                 activarCamposPay(False)
             End If
@@ -243,7 +246,7 @@ Public Class Employees
     End Sub
     Private Function recolectar() As String()
         Try
-            Dim dataEmployes(18) As String
+            Dim dataEmployes(19) As String
             dataEmployes(0) = txtEmployeeNumber.Text
             dataEmployes(1) = txtFirsName.Text
             dataEmployes(2) = txtLastName.Text
@@ -288,7 +291,7 @@ Public Class Employees
             End If
 
             dataEmployes(18) = cmbTypeEmployee.Text
-
+            dataEmployes(19) = If(chbPerdiem.Checked, "1", "0")
             Return dataEmployes
         Catch ex As Exception
             Return Nothing
@@ -314,6 +317,7 @@ Public Class Employees
         sprPayRate1.Value = 0
         sprPayRate2.Value = 0
         sprPayRate3.Value = 0
+        chbPerdiem.Checked = False
         imgPhoto.ImageLocation = "C:\Users\ASUS\Source\Repos\AVT_TRAKING\AVT_TRAKING\AVT_TRAKING\Images\user.png"
         'cmbTypeEmployee.SelectedItem = cmbTypeEmployee.FindString(cmbTypeEmployee.Items(0))
         activarCamposAddress(False)

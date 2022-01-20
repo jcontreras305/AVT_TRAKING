@@ -22,6 +22,7 @@ Partial Class HoursWeekPerEmployees
     'No lo modifique con el editor de código.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(HoursWeekPerEmployees))
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.PictureBox2 = New System.Windows.Forms.PictureBox()
@@ -55,7 +56,6 @@ Partial Class HoursWeekPerEmployees
         Me.Label3 = New System.Windows.Forms.Label()
         Me.lblNombreEmployee = New System.Windows.Forms.Label()
         Me.lblName = New System.Windows.Forms.Label()
-        Me.FlowLayoutPanel1 = New System.Windows.Forms.FlowLayoutPanel()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.txtFindFecha = New System.Windows.Forms.TextBox()
         Me.btnSAP = New System.Windows.Forms.Button()
@@ -93,6 +93,7 @@ Partial Class HoursWeekPerEmployees
         Me.Label8 = New System.Windows.Forms.Label()
         Me.Panel4 = New System.Windows.Forms.Panel()
         Me.btnRefresh = New System.Windows.Forms.Button()
+        Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
         Me.Panel1.SuspendLayout()
         CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.btnRestore, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -101,7 +102,6 @@ Partial Class HoursWeekPerEmployees
         CType(Me.tblHourPeerDay, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel3.SuspendLayout()
         CType(Me.pcbPhoto, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.FlowLayoutPanel1.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
         Me.TabControl1.SuspendLayout()
         Me.tbpTimeWorked.SuspendLayout()
@@ -109,6 +109,7 @@ Partial Class HoursWeekPerEmployees
         Me.tbpExpenses.SuspendLayout()
         CType(Me.tblExpenses, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel4.SuspendLayout()
+        Me.TableLayoutPanel1.SuspendLayout()
         Me.SuspendLayout()
         '
         'Panel1
@@ -119,24 +120,23 @@ Partial Class HoursWeekPerEmployees
         Me.Panel1.Controls.Add(Me.btnMaximize)
         Me.Panel1.Controls.Add(Me.PictureBox1)
         Me.Panel1.Controls.Add(Me.Label5)
-        Me.Panel1.Controls.Add(Me.tblHourPeerDay)
         Me.Panel1.Controls.Add(Me.Panel3)
         Me.Panel1.Controls.Add(Me.lblEmployeeNumber)
         Me.Panel1.Controls.Add(Me.Label3)
         Me.Panel1.Controls.Add(Me.lblNombreEmployee)
         Me.Panel1.Controls.Add(Me.lblName)
-        Me.Panel1.Dock = System.Windows.Forms.DockStyle.Top
+        Me.Panel1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel1.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Panel1.Location = New System.Drawing.Point(0, 0)
+        Me.Panel1.Location = New System.Drawing.Point(3, 3)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(1188, 190)
+        Me.Panel1.Size = New System.Drawing.Size(1182, 148)
         Me.Panel1.TabIndex = 0
         '
         'PictureBox2
         '
         Me.PictureBox2.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.PictureBox2.Image = Global.AVT_TRAKING.My.Resources.Resources.minimize2
-        Me.PictureBox2.Location = New System.Drawing.Point(1081, 13)
+        Me.PictureBox2.Location = New System.Drawing.Point(1075, 13)
         Me.PictureBox2.Name = "PictureBox2"
         Me.PictureBox2.Size = New System.Drawing.Size(28, 28)
         Me.PictureBox2.TabIndex = 10
@@ -146,7 +146,7 @@ Partial Class HoursWeekPerEmployees
         '
         Me.btnRestore.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnRestore.Image = Global.AVT_TRAKING.My.Resources.Resources.restore2
-        Me.btnRestore.Location = New System.Drawing.Point(1115, 12)
+        Me.btnRestore.Location = New System.Drawing.Point(1109, 12)
         Me.btnRestore.Name = "btnRestore"
         Me.btnRestore.Size = New System.Drawing.Size(26, 28)
         Me.btnRestore.TabIndex = 9
@@ -156,7 +156,7 @@ Partial Class HoursWeekPerEmployees
         '
         Me.btnMaximize.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnMaximize.Image = Global.AVT_TRAKING.My.Resources.Resources.maximize2
-        Me.btnMaximize.Location = New System.Drawing.Point(1115, 12)
+        Me.btnMaximize.Location = New System.Drawing.Point(1109, 12)
         Me.btnMaximize.Name = "btnMaximize"
         Me.btnMaximize.Size = New System.Drawing.Size(26, 29)
         Me.btnMaximize.TabIndex = 8
@@ -166,7 +166,7 @@ Partial Class HoursWeekPerEmployees
         '
         Me.PictureBox1.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.PictureBox1.Image = Global.AVT_TRAKING.My.Resources.Resources.close2
-        Me.PictureBox1.Location = New System.Drawing.Point(1147, 12)
+        Me.PictureBox1.Location = New System.Drawing.Point(1141, 12)
         Me.PictureBox1.Name = "PictureBox1"
         Me.PictureBox1.Size = New System.Drawing.Size(26, 29)
         Me.PictureBox1.TabIndex = 7
@@ -191,13 +191,20 @@ Partial Class HoursWeekPerEmployees
         Me.tblHourPeerDay.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.tblHourPeerDay.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.tblHourPeerDay.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.clmWeekending, Me.clmEployeeName, Me.clmTotalST, Me.clmTotalOT, Me.clmTotalHours3, Me.clmMonST, Me.clmMonOT, Me.clmTueST, Me.clmTueOT, Me.clmWedST, Me.clmWedOT, Me.clmThuST, Me.clmThuOT, Me.clmFriST, Me.clmFriOT, Me.clmSatST, Me.clmSatOT, Me.clmSunST, Me.clmSunOT})
-        Me.tblHourPeerDay.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.tblHourPeerDay.Location = New System.Drawing.Point(0, 132)
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.ControlDark
+        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.tblHourPeerDay.DefaultCellStyle = DataGridViewCellStyle2
+        Me.tblHourPeerDay.Location = New System.Drawing.Point(3, 157)
         Me.tblHourPeerDay.MultiSelect = False
         Me.tblHourPeerDay.Name = "tblHourPeerDay"
         Me.tblHourPeerDay.ReadOnly = True
         Me.tblHourPeerDay.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.tblHourPeerDay.Size = New System.Drawing.Size(1188, 58)
+        Me.tblHourPeerDay.Size = New System.Drawing.Size(1182, 58)
         Me.tblHourPeerDay.TabIndex = 0
         '
         'clmWeekending
@@ -318,7 +325,7 @@ Partial Class HoursWeekPerEmployees
         '
         Me.Panel3.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Panel3.Controls.Add(Me.pcbPhoto)
-        Me.Panel3.Location = New System.Drawing.Point(871, 3)
+        Me.Panel3.Location = New System.Drawing.Point(865, 3)
         Me.Panel3.Name = "Panel3"
         Me.Panel3.Size = New System.Drawing.Size(115, 112)
         Me.Panel3.TabIndex = 5
@@ -381,22 +388,8 @@ Partial Class HoursWeekPerEmployees
         Me.lblName.TabIndex = 1
         Me.lblName.Text = "Employee Name "
         '
-        'FlowLayoutPanel1
-        '
-        Me.FlowLayoutPanel1.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.FlowLayoutPanel1.Controls.Add(Me.GroupBox1)
-        Me.FlowLayoutPanel1.Controls.Add(Me.TabControl1)
-        Me.FlowLayoutPanel1.Location = New System.Drawing.Point(0, 190)
-        Me.FlowLayoutPanel1.Name = "FlowLayoutPanel1"
-        Me.FlowLayoutPanel1.Size = New System.Drawing.Size(1188, 559)
-        Me.FlowLayoutPanel1.TabIndex = 1
-        '
         'GroupBox1
         '
-        Me.GroupBox1.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.GroupBox1.BackColor = System.Drawing.Color.FromArgb(CType(CType(83, Byte), Integer), CType(CType(93, Byte), Integer), CType(CType(102, Byte), Integer))
         Me.GroupBox1.Controls.Add(Me.txtFindFecha)
         Me.GroupBox1.Controls.Add(Me.btnSAP)
@@ -417,11 +410,12 @@ Partial Class HoursWeekPerEmployees
         Me.GroupBox1.Controls.Add(Me.cmbEmpleados)
         Me.GroupBox1.Controls.Add(Me.Label2)
         Me.GroupBox1.Controls.Add(Me.Label1)
+        Me.GroupBox1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.GroupBox1.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.GroupBox1.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.GroupBox1.Location = New System.Drawing.Point(3, 3)
+        Me.GroupBox1.Location = New System.Drawing.Point(3, 221)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(1185, 125)
+        Me.GroupBox1.Size = New System.Drawing.Size(1182, 105)
         Me.GroupBox1.TabIndex = 0
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Control"
@@ -662,14 +656,13 @@ Partial Class HoursWeekPerEmployees
         '
         'TabControl1
         '
-        Me.TabControl1.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.TabControl1.Controls.Add(Me.tbpTimeWorked)
         Me.TabControl1.Controls.Add(Me.tbpExpenses)
-        Me.TabControl1.Location = New System.Drawing.Point(3, 134)
+        Me.TabControl1.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.TabControl1.Location = New System.Drawing.Point(3, 332)
         Me.TabControl1.Name = "TabControl1"
         Me.TabControl1.SelectedIndex = 0
-        Me.TabControl1.Size = New System.Drawing.Size(1174, 364)
+        Me.TabControl1.Size = New System.Drawing.Size(1182, 357)
         Me.TabControl1.TabIndex = 0
         '
         'tbpTimeWorked
@@ -678,7 +671,7 @@ Partial Class HoursWeekPerEmployees
         Me.tbpTimeWorked.Location = New System.Drawing.Point(4, 22)
         Me.tbpTimeWorked.Name = "tbpTimeWorked"
         Me.tbpTimeWorked.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbpTimeWorked.Size = New System.Drawing.Size(1166, 338)
+        Me.tbpTimeWorked.Size = New System.Drawing.Size(1174, 331)
         Me.tbpTimeWorked.TabIndex = 0
         Me.tbpTimeWorked.Text = "Time Worked"
         Me.tbpTimeWorked.UseVisualStyleBackColor = True
@@ -691,7 +684,7 @@ Partial Class HoursWeekPerEmployees
         Me.tblRecordEmployee.Dock = System.Windows.Forms.DockStyle.Fill
         Me.tblRecordEmployee.Location = New System.Drawing.Point(3, 3)
         Me.tblRecordEmployee.Name = "tblRecordEmployee"
-        Me.tblRecordEmployee.Size = New System.Drawing.Size(1160, 332)
+        Me.tblRecordEmployee.Size = New System.Drawing.Size(1168, 325)
         Me.tblRecordEmployee.TabIndex = 0
         '
         'tbpExpenses
@@ -700,7 +693,7 @@ Partial Class HoursWeekPerEmployees
         Me.tbpExpenses.Location = New System.Drawing.Point(4, 22)
         Me.tbpExpenses.Name = "tbpExpenses"
         Me.tbpExpenses.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbpExpenses.Size = New System.Drawing.Size(1166, 338)
+        Me.tbpExpenses.Size = New System.Drawing.Size(1174, 331)
         Me.tbpExpenses.TabIndex = 1
         Me.tbpExpenses.Text = "Expenses"
         Me.tbpExpenses.UseVisualStyleBackColor = True
@@ -712,7 +705,7 @@ Partial Class HoursWeekPerEmployees
         Me.tblExpenses.Dock = System.Windows.Forms.DockStyle.Fill
         Me.tblExpenses.Location = New System.Drawing.Point(3, 3)
         Me.tblExpenses.Name = "tblExpenses"
-        Me.tblExpenses.Size = New System.Drawing.Size(1160, 332)
+        Me.tblExpenses.Size = New System.Drawing.Size(1168, 325)
         Me.tblExpenses.TabIndex = 0
         '
         'btnDelete
@@ -813,8 +806,6 @@ Partial Class HoursWeekPerEmployees
         '
         'Panel4
         '
-        Me.Panel4.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Panel4.BackColor = System.Drawing.Color.FromArgb(CType(CType(83, Byte), Integer), CType(CType(93, Byte), Integer), CType(CType(102, Byte), Integer))
         Me.Panel4.Controls.Add(Me.btnRefresh)
         Me.Panel4.Controls.Add(Me.btnDelete)
@@ -827,11 +818,12 @@ Partial Class HoursWeekPerEmployees
         Me.Panel4.Controls.Add(Me.Label10)
         Me.Panel4.Controls.Add(Me.Label9)
         Me.Panel4.Controls.Add(Me.txtTotalOT)
+        Me.Panel4.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel4.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Panel4.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.Panel4.Location = New System.Drawing.Point(0, 694)
+        Me.Panel4.Location = New System.Drawing.Point(3, 695)
         Me.Panel4.Name = "Panel4"
-        Me.Panel4.Size = New System.Drawing.Size(1188, 55)
+        Me.Panel4.Size = New System.Drawing.Size(1182, 51)
         Me.Panel4.TabIndex = 2
         '
         'btnRefresh
@@ -850,14 +842,33 @@ Partial Class HoursWeekPerEmployees
         Me.btnRefresh.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         Me.btnRefresh.UseVisualStyleBackColor = True
         '
+        'TableLayoutPanel1
+        '
+        Me.TableLayoutPanel1.ColumnCount = 1
+        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
+        Me.TableLayoutPanel1.Controls.Add(Me.TabControl1, 0, 3)
+        Me.TableLayoutPanel1.Controls.Add(Me.GroupBox1, 0, 2)
+        Me.TableLayoutPanel1.Controls.Add(Me.tblHourPeerDay, 0, 1)
+        Me.TableLayoutPanel1.Controls.Add(Me.Panel1, 0, 0)
+        Me.TableLayoutPanel1.Controls.Add(Me.Panel4, 0, 4)
+        Me.TableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.TableLayoutPanel1.Location = New System.Drawing.Point(0, 0)
+        Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
+        Me.TableLayoutPanel1.RowCount = 5
+        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 70.68965!))
+        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 29.31034!))
+        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 111.0!))
+        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 363.0!))
+        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 56.0!))
+        Me.TableLayoutPanel1.Size = New System.Drawing.Size(1188, 749)
+        Me.TableLayoutPanel1.TabIndex = 3
+        '
         'HoursWeekPerEmployees
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1188, 749)
-        Me.Controls.Add(Me.Panel4)
-        Me.Controls.Add(Me.FlowLayoutPanel1)
-        Me.Controls.Add(Me.Panel1)
+        Me.Controls.Add(Me.TableLayoutPanel1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
         Me.Name = "HoursWeekPerEmployees"
         Me.Text = "HoursWeekPeerEmployees"
@@ -870,7 +881,6 @@ Partial Class HoursWeekPerEmployees
         CType(Me.tblHourPeerDay, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel3.ResumeLayout(False)
         CType(Me.pcbPhoto, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.FlowLayoutPanel1.ResumeLayout(False)
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()
         Me.TabControl1.ResumeLayout(False)
@@ -880,12 +890,12 @@ Partial Class HoursWeekPerEmployees
         CType(Me.tblExpenses, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel4.ResumeLayout(False)
         Me.Panel4.PerformLayout()
+        Me.TableLayoutPanel1.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
 
     Friend WithEvents Panel1 As Panel
-    Friend WithEvents FlowLayoutPanel1 As FlowLayoutPanel
     Friend WithEvents lblEmployeeNumber As Label
     Friend WithEvents Label3 As Label
     Friend WithEvents lblNombreEmployee As Label
@@ -954,4 +964,5 @@ Partial Class HoursWeekPerEmployees
     Friend WithEvents PictureBox2 As PictureBox
     Friend WithEvents btnRestore As PictureBox
     Friend WithEvents btnMaximize As PictureBox
+    Friend WithEvents TableLayoutPanel1 As TableLayoutPanel
 End Class
