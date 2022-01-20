@@ -112,7 +112,7 @@ Partial Class ReportAllJobs
         Me.Button1.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.Button1.Image = Global.AVT_TRAKING.My.Resources.Resources.reportshow
         Me.Button1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.Button1.Location = New System.Drawing.Point(207, 20)
+        Me.Button1.Location = New System.Drawing.Point(227, 3)
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(83, 33)
         Me.Button1.TabIndex = 14
@@ -149,7 +149,7 @@ Partial Class ReportAllJobs
         Me.dtpFinalDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom
         Me.dtpFinalDate.Location = New System.Drawing.Point(91, 34)
         Me.dtpFinalDate.Name = "dtpFinalDate"
-        Me.dtpFinalDate.Size = New System.Drawing.Size(99, 21)
+        Me.dtpFinalDate.Size = New System.Drawing.Size(118, 21)
         Me.dtpFinalDate.TabIndex = 11
         '
         'dtpInitialDate
@@ -159,7 +159,7 @@ Partial Class ReportAllJobs
         Me.dtpInitialDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom
         Me.dtpInitialDate.Location = New System.Drawing.Point(91, 3)
         Me.dtpInitialDate.Name = "dtpInitialDate"
-        Me.dtpInitialDate.Size = New System.Drawing.Size(99, 21)
+        Me.dtpInitialDate.Size = New System.Drawing.Size(118, 21)
         Me.dtpInitialDate.TabIndex = 10
         '
         'PictureBox4

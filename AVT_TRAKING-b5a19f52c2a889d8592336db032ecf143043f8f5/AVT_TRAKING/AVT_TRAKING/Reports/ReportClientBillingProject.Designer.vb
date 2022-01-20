@@ -108,7 +108,7 @@ Partial Class ReportClientBillingProject
         'cmbClients
         '
         Me.cmbClients.FormattingEnabled = True
-        Me.cmbClients.Location = New System.Drawing.Point(196, 2)
+        Me.cmbClients.Location = New System.Drawing.Point(224, 3)
         Me.cmbClients.Name = "cmbClients"
         Me.cmbClients.Size = New System.Drawing.Size(228, 21)
         Me.cmbClients.TabIndex = 16
@@ -122,7 +122,7 @@ Partial Class ReportClientBillingProject
         Me.Button1.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.Button1.Image = Global.AVT_TRAKING.My.Resources.Resources.reportshow
         Me.Button1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.Button1.Location = New System.Drawing.Point(341, 28)
+        Me.Button1.Location = New System.Drawing.Point(369, 30)
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(83, 33)
         Me.Button1.TabIndex = 14

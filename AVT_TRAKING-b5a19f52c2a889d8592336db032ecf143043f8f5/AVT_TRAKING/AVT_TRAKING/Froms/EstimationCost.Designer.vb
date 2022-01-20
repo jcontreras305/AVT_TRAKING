@@ -158,7 +158,7 @@ Partial Class EstimationCost
         Me.btnDeleteEstCost.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.btnDeleteEstCost.Image = Global.AVT_TRAKING.My.Resources.Resources.delete
         Me.btnDeleteEstCost.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnDeleteEstCost.Location = New System.Drawing.Point(120, 32)
+        Me.btnDeleteEstCost.Location = New System.Drawing.Point(141, 32)
         Me.btnDeleteEstCost.Name = "btnDeleteEstCost"
         Me.btnDeleteEstCost.Size = New System.Drawing.Size(85, 34)
         Me.btnDeleteEstCost.TabIndex = 1

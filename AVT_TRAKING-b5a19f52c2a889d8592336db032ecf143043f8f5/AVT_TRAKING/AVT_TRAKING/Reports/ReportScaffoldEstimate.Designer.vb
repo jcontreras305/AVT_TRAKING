@@ -146,7 +146,7 @@ Partial Class ReportScaffoldEstimate
         Me.btnReport.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.btnReport.Image = Global.AVT_TRAKING.My.Resources.Resources.reportshow
         Me.btnReport.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnReport.Location = New System.Drawing.Point(299, 16)
+        Me.btnReport.Location = New System.Drawing.Point(194, 10)
         Me.btnReport.Name = "btnReport"
         Me.btnReport.Size = New System.Drawing.Size(83, 33)
         Me.btnReport.TabIndex = 12
@@ -159,7 +159,7 @@ Partial Class ReportScaffoldEstimate
         Me.cmbEstimations.FormattingEnabled = True
         Me.cmbEstimations.Location = New System.Drawing.Point(26, 10)
         Me.cmbEstimations.Name = "cmbEstimations"
-        Me.cmbEstimations.Size = New System.Drawing.Size(121, 21)
+        Me.cmbEstimations.Size = New System.Drawing.Size(132, 21)
         Me.cmbEstimations.TabIndex = 11
         '
         'PictureBox4

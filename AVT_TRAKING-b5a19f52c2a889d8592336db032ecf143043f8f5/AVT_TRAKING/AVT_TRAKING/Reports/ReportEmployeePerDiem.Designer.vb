@@ -106,7 +106,7 @@ Partial Class ReportEmployeePerDiem
         'cmbClients
         '
         Me.cmbClients.FormattingEnabled = True
-        Me.cmbClients.Location = New System.Drawing.Point(227, 5)
+        Me.cmbClients.Location = New System.Drawing.Point(227, 10)
         Me.cmbClients.Name = "cmbClients"
         Me.cmbClients.Size = New System.Drawing.Size(228, 21)
         Me.cmbClients.TabIndex = 17
@@ -120,7 +120,7 @@ Partial Class ReportEmployeePerDiem
         Me.Button1.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.Button1.Image = Global.AVT_TRAKING.My.Resources.Resources.reportshow
         Me.Button1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.Button1.Location = New System.Drawing.Point(372, 29)
+        Me.Button1.Location = New System.Drawing.Point(372, 37)
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(83, 33)
         Me.Button1.TabIndex = 8
@@ -250,6 +250,7 @@ Partial Class ReportEmployeePerDiem
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(734, 509)
         Me.Controls.Add(Me.TableLayoutPanel1)
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
         Me.Name = "ReportEmployeePerDiem"
         Me.Text = "ReportEmployeePerDiem"
         Me.TableLayoutPanel1.ResumeLayout(False)

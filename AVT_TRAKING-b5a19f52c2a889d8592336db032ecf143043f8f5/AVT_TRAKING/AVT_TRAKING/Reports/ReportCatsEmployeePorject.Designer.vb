@@ -88,7 +88,7 @@ Partial Class ReportCatsEmployeePorject
         Me.chkAllEmployees.AutoSize = True
         Me.chkAllEmployees.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.chkAllEmployees.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.chkAllEmployees.Location = New System.Drawing.Point(400, 4)
+        Me.chkAllEmployees.Location = New System.Drawing.Point(413, 3)
         Me.chkAllEmployees.Name = "chkAllEmployees"
         Me.chkAllEmployees.Size = New System.Drawing.Size(106, 17)
         Me.chkAllEmployees.TabIndex = 17
@@ -112,7 +112,7 @@ Partial Class ReportCatsEmployeePorject
         Me.btnReportE.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.btnReportE.Image = Global.AVT_TRAKING.My.Resources.Resources.reportshow
         Me.btnReportE.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnReportE.Location = New System.Drawing.Point(311, 29)
+        Me.btnReportE.Location = New System.Drawing.Point(311, 28)
         Me.btnReportE.Name = "btnReportE"
         Me.btnReportE.Size = New System.Drawing.Size(83, 33)
         Me.btnReportE.TabIndex = 14

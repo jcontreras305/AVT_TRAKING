@@ -24,6 +24,8 @@ Partial Class ReportEmployeesTime
     Private Sub InitializeComponent()
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
         Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.chbAllJobs = New System.Windows.Forms.CheckBox()
+        Me.cmbClient = New System.Windows.Forms.ComboBox()
         Me.cmbJobs = New System.Windows.Forms.ComboBox()
         Me.btnReportE = New System.Windows.Forms.Button()
         Me.Label2 = New System.Windows.Forms.Label()
@@ -38,8 +40,6 @@ Partial Class ReportEmployeesTime
         Me.btnRestore = New System.Windows.Forms.PictureBox()
         Me.btnMaximize = New System.Windows.Forms.PictureBox()
         Me.crvEmployeesTime = New CrystalDecisions.Windows.Forms.CrystalReportViewer()
-        Me.cmbClient = New System.Windows.Forms.ComboBox()
-        Me.chbAllJobs = New System.Windows.Forms.CheckBox()
         Me.TableLayoutPanel1.SuspendLayout()
         Me.Panel2.SuspendLayout()
         CType(Me.PictureBox4, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -85,12 +85,31 @@ Partial Class ReportEmployeesTime
         Me.Panel2.Size = New System.Drawing.Size(680, 64)
         Me.Panel2.TabIndex = 3
         '
+        'chbAllJobs
+        '
+        Me.chbAllJobs.AutoSize = True
+        Me.chbAllJobs.ForeColor = System.Drawing.SystemColors.Window
+        Me.chbAllJobs.Location = New System.Drawing.Point(374, 6)
+        Me.chbAllJobs.Name = "chbAllJobs"
+        Me.chbAllJobs.Size = New System.Drawing.Size(62, 17)
+        Me.chbAllJobs.TabIndex = 18
+        Me.chbAllJobs.Text = "All Jobs"
+        Me.chbAllJobs.UseVisualStyleBackColor = True
+        '
+        'cmbClient
+        '
+        Me.cmbClient.FormattingEnabled = True
+        Me.cmbClient.Location = New System.Drawing.Point(224, 4)
+        Me.cmbClient.Name = "cmbClient"
+        Me.cmbClient.Size = New System.Drawing.Size(135, 21)
+        Me.cmbClient.TabIndex = 17
+        '
         'cmbJobs
         '
         Me.cmbJobs.FormattingEnabled = True
-        Me.cmbJobs.Location = New System.Drawing.Point(469, 6)
+        Me.cmbJobs.Location = New System.Drawing.Point(442, 4)
         Me.cmbJobs.Name = "cmbJobs"
-        Me.cmbJobs.Size = New System.Drawing.Size(121, 21)
+        Me.cmbJobs.Size = New System.Drawing.Size(138, 21)
         Me.cmbJobs.TabIndex = 16
         '
         'btnReportE
@@ -102,7 +121,7 @@ Partial Class ReportEmployeesTime
         Me.btnReportE.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.btnReportE.Image = Global.AVT_TRAKING.My.Resources.Resources.reportshow
         Me.btnReportE.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnReportE.Location = New System.Drawing.Point(374, 31)
+        Me.btnReportE.Location = New System.Drawing.Point(363, 31)
         Me.btnReportE.Name = "btnReportE"
         Me.btnReportE.Size = New System.Drawing.Size(83, 33)
         Me.btnReportE.TabIndex = 14
@@ -236,25 +255,6 @@ Partial Class ReportEmployeesTime
         Me.crvEmployeesTime.Name = "crvEmployeesTime"
         Me.crvEmployeesTime.Size = New System.Drawing.Size(680, 374)
         Me.crvEmployeesTime.TabIndex = 4
-        '
-        'cmbClient
-        '
-        Me.cmbClient.FormattingEnabled = True
-        Me.cmbClient.Location = New System.Drawing.Point(246, 3)
-        Me.cmbClient.Name = "cmbClient"
-        Me.cmbClient.Size = New System.Drawing.Size(121, 21)
-        Me.cmbClient.TabIndex = 17
-        '
-        'chbAllJobs
-        '
-        Me.chbAllJobs.AutoSize = True
-        Me.chbAllJobs.ForeColor = System.Drawing.SystemColors.Window
-        Me.chbAllJobs.Location = New System.Drawing.Point(374, 6)
-        Me.chbAllJobs.Name = "chbAllJobs"
-        Me.chbAllJobs.Size = New System.Drawing.Size(62, 17)
-        Me.chbAllJobs.TabIndex = 18
-        Me.chbAllJobs.Text = "All Jobs"
-        Me.chbAllJobs.UseVisualStyleBackColor = True
         '
         'ReportEmployeesTime
         '
