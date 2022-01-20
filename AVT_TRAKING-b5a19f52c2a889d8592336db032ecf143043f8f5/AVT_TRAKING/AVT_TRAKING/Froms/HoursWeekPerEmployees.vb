@@ -1059,6 +1059,10 @@ Public Class HoursWeekPerEmployees
         pr.ShowDialog()
     End Sub
 
+    Private Sub Button12_Click(sender As Object, e As EventArgs) Handles Button12.Click
+
+    End Sub
+
     Private Sub btnTime_Click(sender As Object, e As EventArgs) Handles btnTime.Click
         Dim timeSheet As New TimeSheet
         timeSheet.tablaEmpleadosId = idsEmployees

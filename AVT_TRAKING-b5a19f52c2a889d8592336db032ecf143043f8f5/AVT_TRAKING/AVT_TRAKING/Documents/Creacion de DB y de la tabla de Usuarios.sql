@@ -232,7 +232,8 @@ create table employees(
 	idHomeAdress varchar(36),
 	idContact varchar(36),
 	estatus char(1),
-	typeEmployee varchar(20)
+	typeEmployee varchar(20),
+	perdiem bit
 )
 GO
 
@@ -1676,7 +1677,7 @@ begin
 end
 go
 
-create proc [dbo].[sp_insert_Employee]
+create [dbo].[sp_insert_Employee]
 	--general
 	@numberEmploye int, 
 	@firstName varchar(30),
@@ -1701,7 +1702,9 @@ create proc [dbo].[sp_insert_Employee]
 	@payRate2 float, 
 	@payRate3 float,
 	--type 
-	@type varchar(20)
+	@type varchar(20),
+	--perdiem
+	@perdiem bit
 as 
 declare @error int  -- declaro variables para los ID que son nuevos y una variable de error
 declare @idEmployee varchar(36) 
@@ -1724,7 +1727,7 @@ begin
 			--end
 			--if @firstName <> '' or @numberEmploye > 0 begin	
 				set @idEmployee = NEWID()
-				insert into employees values (@idEmployee , @numberEmploye , @firstName , @lastName , @middleName, @socialNumber , @SAPNumber, @photo , @idHomeAdress , @idContact ,@estatus,@type)
+				insert into employees values (@idEmployee , @numberEmploye , @firstName , @lastName , @middleName, @socialNumber , @SAPNumber, @photo , @idHomeAdress , @idContact ,@estatus,@type,@perdiem)
 				if @@ERROR <> 0 begin set @error = @@ERROR goto solveproblem end 
 			--end
 			--if @payRate1 <> '' begin
@@ -2032,6 +2035,7 @@ CREATE proc [dbo].[sp_update_Employee]
 	--@payRate3 float,
 	--type 
 	@type varchar(20),
+	@perdiem bit,
 	@msg varchar(50) output
 as 
 declare @error int  -- declaro variables para los ID que son nuevos y una variable de error
@@ -2054,7 +2058,7 @@ begin
 			----end
 			--if @firstName <> '' or @numberEmploye > 0 begin
 				set @msg = 'Error at moment to save Employee data'	
-				update employees set  numberEmploye = @numberEmploye ,firstName = @firstName , lastName = @lastName ,middleName = @middleName,socialNumber = @socialNumber ,SAPNumber = @SAPNumber,photo = @photo , estatus = @estatus,typeEmployee = @type where idEmployee = @idEmployee
+				update employees set  numberEmploye = @numberEmploye ,firstName = @firstName , lastName = @lastName ,middleName = @middleName,socialNumber = @socialNumber ,SAPNumber = @SAPNumber,photo = @photo , estatus = @estatus,typeEmployee = @type, perdiem = @perdiem where idEmployee = @idEmployee
 				if @@ERROR <> 0 begin set @error = @@ERROR goto solveproblem end 
 			--end
 			set @msg = 'Succesfull'
@@ -2851,13 +2855,155 @@ go
 ----drop database VRT_TRAKING
 
 --==============================================================================================================================
---===== ESTE CODIGO ES PARA CREAR LA TABLA DE WEEKS PARA LA VENTANA DE PAYROLL =================================================
+--===== ESTE CODIGO ES PARA AGREGAR EL CAMPO DE PERDIEM EN LA VENTA DE EMPLOYEES ===============================================
 --==============================================================================================================================
 
 ---- PARA DESCOMENTAR USAR LAS TECLAS (CTRL+K)(CTRL+U) Y PARA COMENTAR (CTRL+K)(CTRL+C)
 
---create table weeks(
---	dateWeek date primary key not null,
---	weekN int
---)
+--alter table employees 
+--add perdiem bit
+--go
+
+--update employees set perdiem = 0 
+--go
+
+--ALTER proc [dbo].[sp_insert_Employee]
+--	--general
+--	@numberEmploye int, 
+--	@firstName varchar(30),
+--	@lastName varchar(25),
+--	@middleName varchar(25),
+--	@socialNumber varchar(14),
+--	@SAPNumber int,
+--	@photo image,
+--	@estatus char(1),
+--	--contact
+--	@phoneNumber1 varchar(13),
+--	@phoneNumber2 varchar(13),
+--	@email varchar(50),
+--	--address
+--	@avenue varchar(80),
+--	@number int,
+--	@city varchar(20), 
+--	@providence varchar(20),
+--	@postalCode int,
+--	--pay
+--	@payRate1 float,
+--	@payRate2 float, 
+--	@payRate3 float,
+--	--type 
+--	@type varchar(20),
+--	--perdiem
+--	@perdiem bit
+--as 
+--declare @error int  -- declaro variables para los ID que son nuevos y una variable de error
+--declare @idEmployee varchar(36) 
+--declare @idContact varchar(36)
+--declare @idHomeAdress varchar(36)
+--declare @idPayRate varchar(36)
+--begin
+--	begin tran --inicio tran
+--		begin try --inicio try
+--			--if @phoneNumber1 <> '' or @email<> '' begin -- si existe un telefono o un correo entra 
+--				set @idContact = NEWID() 
+--				insert into contact values(@idContact,@phoneNumber1,@phoneNumber2,@email)
+--				if @@ERROR <> 0 begin set @error = @@ERROR goto solveproblem end  -- si existe un error en al insertar solo vamos a solveproblem y nos evitamos lo demas
+--			--end
+--			--if @avenue <> '' begin -- solo se necesita saber si la calle tiene algo 
+--				set @idHomeAdress = NEWID()
+--				insert into HomeAddress values (@idHomeAdress , @avenue , @number , @city , @providence , @postalCode)
+--				if @@ERROR <> 0 begin set @error = @@ERROR goto solveproblem end 
+				
+--			--end
+--			--if @firstName <> '' or @numberEmploye > 0 begin	
+--				set @idEmployee = NEWID()
+--				insert into employees values (@idEmployee , @numberEmploye , @firstName , @lastName , @middleName, @socialNumber , @SAPNumber, @photo , @idHomeAdress , @idContact ,@estatus,@type,@perdiem)
+--				if @@ERROR <> 0 begin set @error = @@ERROR goto solveproblem end 
+--			--end
+--			--if @payRate1 <> '' begin
+--				set @idPayRate = NEWID()
+--				insert into payRate values (@idPayRate,@payRate1,@payRate2 ,@payRate3,@idEmployee,GETDATE())
+--				if @@ERROR <> 0 begin set @error = @@ERROR goto solveproblem end 
+--			--end
+--		end try	
+--		begin catch
+--			goto solveproblem -- en caso de error capturado en el catch no vamos a solveproblem y evitamos en commit
+--		end catch
+--	commit tran 
+--	solveproblem:
+--	if @error <> 0
+--	begin 
+--		rollback tran -- el rollback es para deshacer todos lo cambios hechos anteriormente
+--	end
+--end
+--go
+
+--ALTER proc [dbo].[sp_update_Employee]
+--	@idEmployee varchar(36),
+--	@idAddress varchar(36),
+--	@idContact varchar(36),
+--	--general
+--	@numberEmploye int, 
+--	@firstName varchar(30),
+--	@lastName varchar(25),
+--	@middleName varchar(25),
+--	@socialNumber varchar(14),
+--	@SAPNumber int,
+--	@photo image,
+--	@estatus char(1),
+--	--contact
+--	@phoneNumber1 varchar(13),
+--	@phoneNumber2 varchar(13),
+--	@email varchar(50),
+--	--address
+--	@avenue varchar(80),
+--	@number int,
+--	@city varchar(20), 
+--	@providence varchar(20),
+--	@postalCode int,
+--	----pay
+--	--@payRate1 float,
+--	--@payRate2 float, 
+--	--@payRate3 float,
+--	--type 
+--	@type varchar(20),
+--	@perdiem bit,
+--	@msg varchar(50) output
+--as 
+--declare @error int  -- declaro variables para los ID que son nuevos y una variable de error
+--begin
+--	begin tran --inicio tran
+--		begin try --inicio try
+--			--if @avenue <> '' begin -- solo se necesita saber si la calle tiene algo 
+--				set @msg = 'Error at moment to save Address data'
+--				update HomeAddress set avenue = @avenue ,number =@number ,city =@city ,providence =@providence ,postalcode = @postalCode where idHomeAdress = @idAddress
+--				if @@ERROR <> 0 begin set @error = @@ERROR goto solveproblem end 
+				
+--				set @msg = 'Error at moment to save Contact data'
+--				update contact set phoneNumber1 =@phoneNumber1 , phoneNumber2 =@phoneNumber2 , email = @email where idContact = @idContact
+--				if @@ERROR <> 0 begin set @error = @@ERROR goto solveproblem end 
+--			--end
+--			----if @payRate1 <> '' begin
+--			--	set @msg = 'Error at moment to save Pay Rate data'
+--			--	update payRate set payRate1 = @payRate1,payRate2= @payRate2 , payRate3 = @payRate3 where idPayRate = @idPay and idEmployee = @idEmployee
+--			--	if @@ERROR <> 0 begin set @error = @@ERROR goto solveproblem end 
+--			----end
+--			--if @firstName <> '' or @numberEmploye > 0 begin
+--				set @msg = 'Error at moment to save Employee data'	
+--				update employees set  numberEmploye = @numberEmploye ,firstName = @firstName , lastName = @lastName ,middleName = @middleName,socialNumber = @socialNumber ,SAPNumber = @SAPNumber,photo = @photo , estatus = @estatus,typeEmployee = @type, perdiem = @perdiem where idEmployee = @idEmployee
+--				if @@ERROR <> 0 begin set @error = @@ERROR goto solveproblem end 
+--			--end
+--			set @msg = 'Succesfull'
+--		end try	
+--		begin catch
+--			goto solveproblem -- en caso de error capturado en el catch no vamos a solveproblem y evitamos en commit
+--		end catch
+--	commit tran 
+--	solveproblem:
+--	if @error <> 0
+--	begin 
+--		rollback tran -- el rollback es para deshacer todos lo cambios hechos anteriormente
+--		return @msg
+--	end
+--end
 --go
