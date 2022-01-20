@@ -309,6 +309,18 @@
       <DependentUpon>ActiveAverageEmployee.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Reports\AllJobs.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AllJobs.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\ByJobNumber.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ByJobNumber.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Reports\CatsEmployeebyProject.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -339,6 +351,20 @@
       <DependentUpon>EmployeePeerDiemSheets.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Reports\EmployeesTime.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EmployeesTime.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\ReportAllJobs.Designer.vb" />
+    <Compile Include="Reports\ReportAllJobs.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Reports\ReportByJobNumber.Designer.vb" />
+    <Compile Include="Reports\ReportByJobNumber.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Reports\ReportClientBillingsReCapBYProject.Designer.vb">
       <DependentUpon>ReportClientBillingsReCapBYProject.vb</DependentUpon>
     </Compile>
@@ -349,6 +375,18 @@
       <DependentUpon>ReportCompleteByDateRange.vb</DependentUpon>
     </Compile>
     <Compile Include="Reports\ReportCompleteByDateRange.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Reports\ReportEmployeePerDiem.Designer.vb">
+      <DependentUpon>ReportEmployeePerDiem.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\ReportEmployeePerDiem.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Reports\ReportEmployeesTime.Designer.vb">
+      <DependentUpon>ReportEmployeesTime.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\ReportEmployeesTime.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Reports\ScaffoldEstimate.vb">
@@ -502,6 +540,14 @@
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>ActiveAverageEmployee.vb</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reports\AllJobs.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>AllJobs.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\ByJobNumber.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ByJobNumber.vb</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reports\CatsEmployeebyProject.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>CatsEmployeebyProject.vb</LastGenOutput>
@@ -522,11 +568,24 @@
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>EmployeePeerDiemSheets.vb</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reports\EmployeesTime.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>EmployeesTime.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\ReportByJobNumber.resx">
+      <DependentUpon>ReportByJobNumber.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reports\ReportClientBillingsReCapBYProject.resx">
       <DependentUpon>ReportClientBillingsReCapBYProject.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\ReportCompleteByDateRange.resx">
       <DependentUpon>ReportCompleteByDateRange.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\ReportEmployeePerDiem.resx">
+      <DependentUpon>ReportEmployeePerDiem.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\ReportEmployeesTime.resx">
+      <DependentUpon>ReportEmployeesTime.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\ScaffoldEstimate.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
@@ -616,6 +675,7 @@
     <None Include="Images\catsemployee.png" />
     <None Include="Images\ComplteByRange.png" />
     <Content Include="Documents\SPReports.sql" />
+    <Content Include="Images\byjobnumt.png" />
     <Content Include="Images\eye.png" />
     <None Include="Images\minimize.png" />
     <None Include="Images\show.png" />

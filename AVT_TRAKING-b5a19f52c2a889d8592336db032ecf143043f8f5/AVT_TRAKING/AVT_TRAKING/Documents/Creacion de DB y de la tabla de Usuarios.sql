@@ -1677,7 +1677,7 @@ begin
 end
 go
 
-create [dbo].[sp_insert_Employee]
+create proc [dbo].[sp_insert_Employee]
 	--general
 	@numberEmploye int, 
 	@firstName varchar(30),
