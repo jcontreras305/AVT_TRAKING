@@ -37,7 +37,7 @@ Public Class ReportActiveAverageE
 
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
-        Dim reportAE As New ActiveAverageEmployee
+        Dim reportAE As New ActiveAv
         crvActiveAverageE.ReportSource = reportAE
     End Sub
 
