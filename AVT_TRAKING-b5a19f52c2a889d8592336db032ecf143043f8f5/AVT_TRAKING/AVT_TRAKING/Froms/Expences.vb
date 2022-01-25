@@ -29,7 +29,7 @@ Public Class Expences
             limpiarCampos()
             activarCampos(False)
             mtdJobs.buscarExpences(tblExpences)
-            btnSave.Text = "Save"
+            btnSave.Text = "Add"
             btnUbdate.Enabled = False
             btnCancel.Enabled = False
         End If

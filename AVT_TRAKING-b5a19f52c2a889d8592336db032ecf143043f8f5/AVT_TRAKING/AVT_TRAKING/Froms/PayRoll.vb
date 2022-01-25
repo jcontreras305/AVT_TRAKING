@@ -294,11 +294,11 @@ Public Class PayRoll
                 End If
 
                 For i = 1 To libro.Worksheets.Count
-                    If libro.Worksheets(i).Name = "NON-BILLABLE" Then
+                    If libro.Worksheets(i).Name = "EMP MASTER DATA" Then
                         flag = True
                         case1 = 1
                         Exit For
-                    ElseIf libro.Worksheets(i).Name = "NON BILLABLE" Then
+                    ElseIf libro.Worksheets(i).Name = "EMP-MASTER-DATA" Then
                         flag = True
                         case1 = 2
                         Exit For
@@ -313,7 +313,7 @@ Public Class PayRoll
                         sheetEmp = libro.Worksheets("EMP-MASTER-DATA")
                         txtSalida.Text = "Message:" + "Open sheet 'EMP-MASTER-DATA'."
                     End If
-                    limpiarSheet(sheetEmp, sprRowStartNBL.Value)
+                    limpiarSheet(sheetEmp, 2)
                     Dim mtdEmployees As New MetodosEmployees
                     Dim tblEmp = mtdEmployees.selectActiveEmployees()
                     Dim cont As Integer = 2

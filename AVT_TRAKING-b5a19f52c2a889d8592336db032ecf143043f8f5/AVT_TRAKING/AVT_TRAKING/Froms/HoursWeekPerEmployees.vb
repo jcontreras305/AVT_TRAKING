@@ -9,6 +9,7 @@ Public Class HoursWeekPerEmployees
     Dim workCodeTable As New DataTable
     Dim expenseCodeTable As New DataTable
     Public photo As Byte()
+    Dim loadingData As Boolean
 
     Dim _dtpHoras As New DateTimePicker
     Dim _dtpExpenses As New DateTimePicker
@@ -333,8 +334,6 @@ Public Class HoursWeekPerEmployees
             End If
         End If
     End Sub
-
-
     Private Sub cargarDatos(ByVal Employee As String)
         Dim index As Integer = 0
         For Each row As DataRow In idsEmployees.Rows
@@ -345,8 +344,7 @@ Public Class HoursWeekPerEmployees
             index += 1
         Next
         If idsEmployees.Rows.Count > 0 Then
-
-
+            loadingData = True
             mtdHPW.buscarHoras(tblRecordEmployee, idsEmployees.Rows(index).ItemArray(0))
             tblRecordEmployee.Columns("Billing Rate").ReadOnly = True
             tblRecordEmployee.Columns("Billing Rate OT").ReadOnly = True
@@ -359,6 +357,14 @@ Public Class HoursWeekPerEmployees
             lblNombreEmployee.Text = idsEmployees.Rows(index).ItemArray(1)
             NombreEmpleado = idsEmployees.Rows(index).ItemArray(1)
             btnSAP.Text = idsEmployees.Rows(index).ItemArray(3)
+            chbPerDiem.Checked = If(idsEmployees.Rows(index).ItemArray(5) = True, True, False)
+            If chbPerDiem.Checked Then
+                'TabControl1.TabPages(1).Enabled = True
+                tblExpenses.Enabled = True
+            Else
+                'TabControl1.TabPages(1).Enabled = False
+                tblExpenses.Enabled = False
+            End If
         End If
         Dim hoursST As Double = 0.0
         Dim hoursOT As Double = 0.0
@@ -429,6 +435,7 @@ Public Class HoursWeekPerEmployees
             tblHourPeerDay.Rows(0).Cells(3).Value = HoursOTWeek
             tblHourPeerDay.Rows(0).Cells(4).Value = Hours3Week
         End If
+        loadingData = False
     End Sub
     'evento de la tabla para agregar un evento aun ComboBoxCell
     Private Sub tblRecordEmployee_EditingControlShowing(sender As Object, e As DataGridViewEditingControlShowingEventArgs) Handles tblRecordEmployee.EditingControlShowing
@@ -909,6 +916,7 @@ Public Class HoursWeekPerEmployees
         Dim auxF2 As Date = fechaEnd
         Dim selectFecha As New SelectDate
         AddOwnedForm(selectFecha)
+        selectFecha.HWPE = True
         selectFecha.ShowDialog()
         If fechaStart <> auxF1 Or fechaEnd <> auxF2 Then
             mtdHPW.buscarHoras(tblRecordEmployee, idEmpleado, validaFechaParaSQl(fechaStart), validaFechaParaSQl(fechaEnd))
@@ -1044,7 +1052,7 @@ Public Class HoursWeekPerEmployees
 
     Private Sub btnMaximize_Click(sender As Object, e As EventArgs) Handles btnMaximize.Click
         MaximizedBounds = Screen.FromHandle(Me.Handle).WorkingArea
-        WindowState = FormWindowState.Maximized
+        Me.WindowState = FormWindowState.Maximized
         btnMaximize.Visible = False
         btnRestore.Visible = True
     End Sub
@@ -1061,9 +1069,51 @@ Public Class HoursWeekPerEmployees
     End Sub
 
     Private Sub Button12_Click(sender As Object, e As EventArgs) Handles Button12.Click
-
+        Try
+            Dim pd As New Perdiem
+            Perdiem.ShowDialog()
+        Catch ex As Exception
+            MsgBox(ex.Message())
+        End Try
     End Sub
 
+    Private Sub chbPerDiem_CheckedChanged(sender As Object, e As EventArgs) Handles chbPerDiem.CheckedChanged
+        If Not loadingData Then
+            If chbPerDiem.Checked Then
+                If DialogResult.OK = MessageBox.Show("Are you sure to changue the Per-Diem status for this Employe?", "Importan", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) Then
+                    Dim mtdEm As New MetodosEmployees
+                    If mtdEm.updatePerDiem(lblEmployeeNumber.Text, chbPerDiem.Checked) Then
+                        tblExpenses.Enabled = True
+                    Else
+                        MsgBox("Error,Plese Try Again And Check That You Chose An Employee.")
+                        tblExpenses.Enabled = False
+                        chbPerDiem.Checked = False
+                    End If
+                Else
+                    tblExpenses.Enabled = False
+                    chbPerDiem.Checked = False
+                End If
+            Else
+                If DialogResult.OK = MessageBox.Show("Are you sure to changue the Per-Diem status for this Employe?", "Importan", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) Then
+                    Dim mtdEm As New MetodosEmployees
+                    If mtdEm.updatePerDiem(lblEmployeeNumber.Text, chbPerDiem.Checked) Then
+                        tblExpenses.Enabled = False
+                    Else
+                        MsgBox("Error,Plese Try Again And Check That You Chose An Employee.")
+                        tblExpenses.Enabled = True
+                        chbPerDiem.Checked = True
+                    End If
+                Else
+                    tblExpenses.Enabled = True
+                    chbPerDiem.Checked = True
+                End If
+            End If
+        End If
+    End Sub
+
+    Private Sub Panel1_Paint(sender As Object, e As PaintEventArgs) Handles Panel1.Paint
+
+    End Sub
     Private Sub btnTime_Click(sender As Object, e As EventArgs) Handles btnTime.Click
         Dim timeSheet As New TimeSheet
         timeSheet.tablaEmpleadosId = idsEmployees

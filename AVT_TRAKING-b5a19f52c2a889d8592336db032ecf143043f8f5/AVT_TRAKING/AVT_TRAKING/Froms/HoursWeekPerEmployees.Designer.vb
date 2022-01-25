@@ -25,6 +25,7 @@ Partial Class HoursWeekPerEmployees
         Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(HoursWeekPerEmployees))
         Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.chbPerDiem = New System.Windows.Forms.CheckBox()
         Me.PictureBox2 = New System.Windows.Forms.PictureBox()
         Me.btnRestore = New System.Windows.Forms.PictureBox()
         Me.btnMaximize = New System.Windows.Forms.PictureBox()
@@ -81,8 +82,6 @@ Partial Class HoursWeekPerEmployees
         Me.tblRecordEmployee = New System.Windows.Forms.DataGridView()
         Me.tbpExpenses = New System.Windows.Forms.TabPage()
         Me.tblExpenses = New System.Windows.Forms.DataGridView()
-        Me.btnDelete = New System.Windows.Forms.Button()
-        Me.btnInsert = New System.Windows.Forms.Button()
         Me.txtHours3 = New System.Windows.Forms.TextBox()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.txtTotalOT = New System.Windows.Forms.TextBox()
@@ -93,6 +92,8 @@ Partial Class HoursWeekPerEmployees
         Me.Label8 = New System.Windows.Forms.Label()
         Me.Panel4 = New System.Windows.Forms.Panel()
         Me.btnRefresh = New System.Windows.Forms.Button()
+        Me.btnDelete = New System.Windows.Forms.Button()
+        Me.btnInsert = New System.Windows.Forms.Button()
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
         Me.Panel1.SuspendLayout()
         CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -115,6 +116,7 @@ Partial Class HoursWeekPerEmployees
         'Panel1
         '
         Me.Panel1.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(58, Byte), Integer), CType(CType(115, Byte), Integer))
+        Me.Panel1.Controls.Add(Me.chbPerDiem)
         Me.Panel1.Controls.Add(Me.PictureBox2)
         Me.Panel1.Controls.Add(Me.btnRestore)
         Me.Panel1.Controls.Add(Me.btnMaximize)
@@ -129,14 +131,28 @@ Partial Class HoursWeekPerEmployees
         Me.Panel1.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Panel1.Location = New System.Drawing.Point(3, 3)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(1182, 120)
+        Me.Panel1.Size = New System.Drawing.Size(1194, 120)
         Me.Panel1.TabIndex = 0
+        '
+        'chbPerDiem
+        '
+        Me.chbPerDiem.AutoSize = True
+        Me.chbPerDiem.CheckAlign = System.Drawing.ContentAlignment.BottomCenter
+        Me.chbPerDiem.Font = New System.Drawing.Font("Verdana", 9.75!, System.Drawing.FontStyle.Bold)
+        Me.chbPerDiem.ForeColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer))
+        Me.chbPerDiem.Location = New System.Drawing.Point(670, 50)
+        Me.chbPerDiem.Name = "chbPerDiem"
+        Me.chbPerDiem.Size = New System.Drawing.Size(80, 34)
+        Me.chbPerDiem.TabIndex = 12
+        Me.chbPerDiem.Text = "Per-Diem"
+        Me.chbPerDiem.TextAlign = System.Drawing.ContentAlignment.TopCenter
+        Me.chbPerDiem.UseVisualStyleBackColor = True
         '
         'PictureBox2
         '
         Me.PictureBox2.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.PictureBox2.Image = Global.AVT_TRAKING.My.Resources.Resources.minimize2
-        Me.PictureBox2.Location = New System.Drawing.Point(1075, 13)
+        Me.PictureBox2.Location = New System.Drawing.Point(1087, 13)
         Me.PictureBox2.Name = "PictureBox2"
         Me.PictureBox2.Size = New System.Drawing.Size(28, 28)
         Me.PictureBox2.TabIndex = 10
@@ -146,7 +162,7 @@ Partial Class HoursWeekPerEmployees
         '
         Me.btnRestore.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnRestore.Image = Global.AVT_TRAKING.My.Resources.Resources.restore2
-        Me.btnRestore.Location = New System.Drawing.Point(1109, 12)
+        Me.btnRestore.Location = New System.Drawing.Point(1121, 12)
         Me.btnRestore.Name = "btnRestore"
         Me.btnRestore.Size = New System.Drawing.Size(26, 28)
         Me.btnRestore.TabIndex = 9
@@ -156,7 +172,7 @@ Partial Class HoursWeekPerEmployees
         '
         Me.btnMaximize.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnMaximize.Image = Global.AVT_TRAKING.My.Resources.Resources.maximize2
-        Me.btnMaximize.Location = New System.Drawing.Point(1109, 12)
+        Me.btnMaximize.Location = New System.Drawing.Point(1121, 12)
         Me.btnMaximize.Name = "btnMaximize"
         Me.btnMaximize.Size = New System.Drawing.Size(26, 29)
         Me.btnMaximize.TabIndex = 8
@@ -166,7 +182,7 @@ Partial Class HoursWeekPerEmployees
         '
         Me.PictureBox1.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.PictureBox1.Image = Global.AVT_TRAKING.My.Resources.Resources.close2
-        Me.PictureBox1.Location = New System.Drawing.Point(1141, 12)
+        Me.PictureBox1.Location = New System.Drawing.Point(1153, 12)
         Me.PictureBox1.Name = "PictureBox1"
         Me.PictureBox1.Size = New System.Drawing.Size(26, 29)
         Me.PictureBox1.TabIndex = 7
@@ -187,7 +203,7 @@ Partial Class HoursWeekPerEmployees
         '
         Me.Panel3.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Panel3.Controls.Add(Me.pcbPhoto)
-        Me.Panel3.Location = New System.Drawing.Point(865, 3)
+        Me.Panel3.Location = New System.Drawing.Point(877, 3)
         Me.Panel3.Name = "Panel3"
         Me.Panel3.Size = New System.Drawing.Size(115, 112)
         Me.Panel3.TabIndex = 5
@@ -272,7 +288,7 @@ Partial Class HoursWeekPerEmployees
         Me.tblHourPeerDay.Name = "tblHourPeerDay"
         Me.tblHourPeerDay.ReadOnly = True
         Me.tblHourPeerDay.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.tblHourPeerDay.Size = New System.Drawing.Size(1182, 55)
+        Me.tblHourPeerDay.Size = New System.Drawing.Size(1194, 55)
         Me.tblHourPeerDay.TabIndex = 0
         '
         'clmWeekending
@@ -416,7 +432,7 @@ Partial Class HoursWeekPerEmployees
         Me.GroupBox1.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.GroupBox1.Location = New System.Drawing.Point(3, 190)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(1182, 99)
+        Me.GroupBox1.Size = New System.Drawing.Size(1194, 99)
         Me.GroupBox1.TabIndex = 0
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Control"
@@ -459,7 +475,7 @@ Partial Class HoursWeekPerEmployees
         Me.Button12.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.Button12.Location = New System.Drawing.Point(915, 65)
         Me.Button12.Name = "Button12"
-        Me.Button12.Size = New System.Drawing.Size(140, 29)
+        Me.Button12.Size = New System.Drawing.Size(111, 29)
         Me.Button12.TabIndex = 19
         Me.Button12.Text = "Dialv Per Diem"
         Me.Button12.UseVisualStyleBackColor = True
@@ -663,7 +679,7 @@ Partial Class HoursWeekPerEmployees
         Me.TabControl1.Location = New System.Drawing.Point(3, 295)
         Me.TabControl1.Name = "TabControl1"
         Me.TabControl1.SelectedIndex = 0
-        Me.TabControl1.Size = New System.Drawing.Size(1182, 184)
+        Me.TabControl1.Size = New System.Drawing.Size(1194, 246)
         Me.TabControl1.TabIndex = 0
         '
         'tbpTimeWorked
@@ -672,7 +688,7 @@ Partial Class HoursWeekPerEmployees
         Me.tbpTimeWorked.Location = New System.Drawing.Point(4, 22)
         Me.tbpTimeWorked.Name = "tbpTimeWorked"
         Me.tbpTimeWorked.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbpTimeWorked.Size = New System.Drawing.Size(1174, 158)
+        Me.tbpTimeWorked.Size = New System.Drawing.Size(1186, 220)
         Me.tbpTimeWorked.TabIndex = 0
         Me.tbpTimeWorked.Text = "Time Worked"
         Me.tbpTimeWorked.UseVisualStyleBackColor = True
@@ -685,7 +701,7 @@ Partial Class HoursWeekPerEmployees
         Me.tblRecordEmployee.Dock = System.Windows.Forms.DockStyle.Fill
         Me.tblRecordEmployee.Location = New System.Drawing.Point(3, 3)
         Me.tblRecordEmployee.Name = "tblRecordEmployee"
-        Me.tblRecordEmployee.Size = New System.Drawing.Size(1168, 152)
+        Me.tblRecordEmployee.Size = New System.Drawing.Size(1180, 214)
         Me.tblRecordEmployee.TabIndex = 0
         '
         'tbpExpenses
@@ -694,7 +710,7 @@ Partial Class HoursWeekPerEmployees
         Me.tbpExpenses.Location = New System.Drawing.Point(4, 22)
         Me.tbpExpenses.Name = "tbpExpenses"
         Me.tbpExpenses.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbpExpenses.Size = New System.Drawing.Size(1174, 331)
+        Me.tbpExpenses.Size = New System.Drawing.Size(1174, 158)
         Me.tbpExpenses.TabIndex = 1
         Me.tbpExpenses.Text = "Expenses"
         Me.tbpExpenses.UseVisualStyleBackColor = True
@@ -706,40 +722,8 @@ Partial Class HoursWeekPerEmployees
         Me.tblExpenses.Dock = System.Windows.Forms.DockStyle.Fill
         Me.tblExpenses.Location = New System.Drawing.Point(3, 3)
         Me.tblExpenses.Name = "tblExpenses"
-        Me.tblExpenses.Size = New System.Drawing.Size(1168, 325)
+        Me.tblExpenses.Size = New System.Drawing.Size(1168, 152)
         Me.tblExpenses.TabIndex = 0
-        '
-        'btnDelete
-        '
-        Me.btnDelete.FlatAppearance.BorderSize = 0
-        Me.btnDelete.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(58, Byte), Integer), CType(CType(115, Byte), Integer))
-        Me.btnDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnDelete.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnDelete.Image = Global.AVT_TRAKING.My.Resources.Resources.delete
-        Me.btnDelete.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnDelete.Location = New System.Drawing.Point(911, 10)
-        Me.btnDelete.Name = "btnDelete"
-        Me.btnDelete.Size = New System.Drawing.Size(85, 33)
-        Me.btnDelete.TabIndex = 25
-        Me.btnDelete.Text = "Delete"
-        Me.btnDelete.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.btnDelete.UseVisualStyleBackColor = True
-        '
-        'btnInsert
-        '
-        Me.btnInsert.FlatAppearance.BorderSize = 0
-        Me.btnInsert.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(58, Byte), Integer), CType(CType(115, Byte), Integer))
-        Me.btnInsert.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnInsert.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnInsert.Image = CType(resources.GetObject("btnInsert.Image"), System.Drawing.Image)
-        Me.btnInsert.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnInsert.Location = New System.Drawing.Point(812, 10)
-        Me.btnInsert.Name = "btnInsert"
-        Me.btnInsert.Size = New System.Drawing.Size(88, 33)
-        Me.btnInsert.TabIndex = 8
-        Me.btnInsert.Text = "Insert"
-        Me.btnInsert.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.btnInsert.UseVisualStyleBackColor = True
         '
         'txtHours3
         '
@@ -766,14 +750,14 @@ Partial Class HoursWeekPerEmployees
         '
         'txtTotalHours
         '
-        Me.txtTotalHours.Location = New System.Drawing.Point(297, 14)
+        Me.txtTotalHours.Location = New System.Drawing.Point(135, 14)
         Me.txtTotalHours.Name = "txtTotalHours"
         Me.txtTotalHours.Size = New System.Drawing.Size(100, 21)
         Me.txtTotalHours.TabIndex = 4
         '
         'txtTotalST
         '
-        Me.txtTotalST.Location = New System.Drawing.Point(133, 14)
+        Me.txtTotalST.Location = New System.Drawing.Point(303, 13)
         Me.txtTotalST.Name = "txtTotalST"
         Me.txtTotalST.Size = New System.Drawing.Size(100, 21)
         Me.txtTotalST.TabIndex = 3
@@ -822,9 +806,9 @@ Partial Class HoursWeekPerEmployees
         Me.Panel4.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel4.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Panel4.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.Panel4.Location = New System.Drawing.Point(3, 485)
+        Me.Panel4.Location = New System.Drawing.Point(3, 547)
         Me.Panel4.Name = "Panel4"
-        Me.Panel4.Size = New System.Drawing.Size(1182, 50)
+        Me.Panel4.Size = New System.Drawing.Size(1194, 50)
         Me.Panel4.TabIndex = 2
         '
         'btnRefresh
@@ -842,6 +826,38 @@ Partial Class HoursWeekPerEmployees
         Me.btnRefresh.Text = "Refresh"
         Me.btnRefresh.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         Me.btnRefresh.UseVisualStyleBackColor = True
+        '
+        'btnDelete
+        '
+        Me.btnDelete.FlatAppearance.BorderSize = 0
+        Me.btnDelete.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(58, Byte), Integer), CType(CType(115, Byte), Integer))
+        Me.btnDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnDelete.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnDelete.Image = Global.AVT_TRAKING.My.Resources.Resources.delete
+        Me.btnDelete.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnDelete.Location = New System.Drawing.Point(911, 10)
+        Me.btnDelete.Name = "btnDelete"
+        Me.btnDelete.Size = New System.Drawing.Size(85, 33)
+        Me.btnDelete.TabIndex = 25
+        Me.btnDelete.Text = "Delete"
+        Me.btnDelete.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.btnDelete.UseVisualStyleBackColor = True
+        '
+        'btnInsert
+        '
+        Me.btnInsert.FlatAppearance.BorderSize = 0
+        Me.btnInsert.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(58, Byte), Integer), CType(CType(115, Byte), Integer))
+        Me.btnInsert.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnInsert.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnInsert.Image = CType(resources.GetObject("btnInsert.Image"), System.Drawing.Image)
+        Me.btnInsert.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnInsert.Location = New System.Drawing.Point(812, 10)
+        Me.btnInsert.Name = "btnInsert"
+        Me.btnInsert.Size = New System.Drawing.Size(88, 33)
+        Me.btnInsert.TabIndex = 8
+        Me.btnInsert.Text = "Insert"
+        Me.btnInsert.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.btnInsert.UseVisualStyleBackColor = True
         '
         'TableLayoutPanel1
         '
@@ -861,14 +877,14 @@ Partial Class HoursWeekPerEmployees
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 105.0!))
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 56.0!))
-        Me.TableLayoutPanel1.Size = New System.Drawing.Size(1188, 538)
+        Me.TableLayoutPanel1.Size = New System.Drawing.Size(1200, 600)
         Me.TableLayoutPanel1.TabIndex = 3
         '
         'HoursWeekPerEmployees
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1188, 538)
+        Me.ClientSize = New System.Drawing.Size(1200, 600)
         Me.Controls.Add(Me.TableLayoutPanel1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
         Me.Name = "HoursWeekPerEmployees"
@@ -966,4 +982,5 @@ Partial Class HoursWeekPerEmployees
     Friend WithEvents btnRestore As PictureBox
     Friend WithEvents btnMaximize As PictureBox
     Friend WithEvents TableLayoutPanel1 As TableLayoutPanel
+    Friend WithEvents chbPerDiem As CheckBox
 End Class

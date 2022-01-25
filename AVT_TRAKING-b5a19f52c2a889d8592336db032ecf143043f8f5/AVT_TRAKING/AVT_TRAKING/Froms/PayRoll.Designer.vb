@@ -30,6 +30,7 @@ Partial Class PayRoll
         Me.TabPage1 = New System.Windows.Forms.TabPage()
         Me.TableLayoutPanel2 = New System.Windows.Forms.TableLayoutPanel()
         Me.Panel3 = New System.Windows.Forms.Panel()
+        Me.txtSalida = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.btnFindMasterPayroll = New System.Windows.Forms.Button()
@@ -68,6 +69,8 @@ Partial Class PayRoll
         Me.TabPage2 = New System.Windows.Forms.TabPage()
         Me.TableLayoutPanel3 = New System.Windows.Forms.TableLayoutPanel()
         Me.tblWeeks = New System.Windows.Forms.DataGridView()
+        Me.Weekend = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.WeekNum = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.TableLayoutPanel4 = New System.Windows.Forms.TableLayoutPanel()
         Me.Panel4 = New System.Windows.Forms.Panel()
         Me.Label4 = New System.Windows.Forms.Label()
@@ -75,14 +78,11 @@ Partial Class PayRoll
         Me.sprNumWeek = New System.Windows.Forms.NumericUpDown()
         Me.dtpWeek = New System.Windows.Forms.DateTimePicker()
         Me.Panel5 = New System.Windows.Forms.Panel()
+        Me.txtMsgWk = New System.Windows.Forms.Label()
         Me.btnFindExcelWeeks = New System.Windows.Forms.Button()
         Me.btnDeleteWeek = New System.Windows.Forms.Button()
         Me.btnUpdateWeek = New System.Windows.Forms.Button()
         Me.btnAddWeek = New System.Windows.Forms.Button()
-        Me.Weekend = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.WeekNum = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.txtMsgWk = New System.Windows.Forms.Label()
-        Me.txtSalida = New System.Windows.Forms.Label()
         Me.TableLayoutPanel1.SuspendLayout()
         Me.Panel1.SuspendLayout()
         CType(Me.PictureBox4, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -203,6 +203,15 @@ Partial Class PayRoll
         Me.Panel3.Size = New System.Drawing.Size(774, 60)
         Me.Panel3.TabIndex = 0
         '
+        'txtSalida
+        '
+        Me.txtSalida.AutoSize = True
+        Me.txtSalida.Location = New System.Drawing.Point(7, 40)
+        Me.txtSalida.Name = "txtSalida"
+        Me.txtSalida.Size = New System.Drawing.Size(53, 13)
+        Me.txtSalida.TabIndex = 7
+        Me.txtSalida.Text = "Message:"
+        '
         'Label2
         '
         Me.Label2.AutoSize = True
@@ -239,7 +248,7 @@ Partial Class PayRoll
         Me.sprRowStartNBL.Name = "sprRowStartNBL"
         Me.sprRowStartNBL.Size = New System.Drawing.Size(49, 20)
         Me.sprRowStartNBL.TabIndex = 3
-        Me.sprRowStartNBL.Value = New Decimal(New Integer() {6, 0, 0, 0})
+        Me.sprRowStartNBL.Value = New Decimal(New Integer() {2, 0, 0, 0})
         '
         'sprRowStartTSD
         '
@@ -505,6 +514,18 @@ Partial Class PayRoll
         Me.tblWeeks.Size = New System.Drawing.Size(319, 351)
         Me.tblWeeks.TabIndex = 0
         '
+        'Weekend
+        '
+        Me.Weekend.HeaderText = "Weekending"
+        Me.Weekend.Name = "Weekend"
+        Me.Weekend.ReadOnly = True
+        '
+        'WeekNum
+        '
+        Me.WeekNum.HeaderText = "Week Num"
+        Me.WeekNum.Name = "WeekNum"
+        Me.WeekNum.ReadOnly = True
+        '
         'TableLayoutPanel4
         '
         Me.TableLayoutPanel4.ColumnCount = 1
@@ -583,6 +604,15 @@ Partial Class PayRoll
         Me.Panel5.Size = New System.Drawing.Size(443, 70)
         Me.Panel5.TabIndex = 1
         '
+        'txtMsgWk
+        '
+        Me.txtMsgWk.AutoSize = True
+        Me.txtMsgWk.Location = New System.Drawing.Point(15, 47)
+        Me.txtMsgWk.Name = "txtMsgWk"
+        Me.txtMsgWk.Size = New System.Drawing.Size(50, 13)
+        Me.txtMsgWk.TabIndex = 4
+        Me.txtMsgWk.Text = "Message"
+        '
         'btnFindExcelWeeks
         '
         Me.btnFindExcelWeeks.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -619,36 +649,6 @@ Partial Class PayRoll
         Me.btnAddWeek.TabIndex = 0
         Me.btnAddWeek.Text = "Add"
         Me.btnAddWeek.UseVisualStyleBackColor = True
-        '
-        'Weekend
-        '
-        Me.Weekend.HeaderText = "Weekending"
-        Me.Weekend.Name = "Weekend"
-        Me.Weekend.ReadOnly = True
-        '
-        'WeekNum
-        '
-        Me.WeekNum.HeaderText = "Week Num"
-        Me.WeekNum.Name = "WeekNum"
-        Me.WeekNum.ReadOnly = True
-        '
-        'txtMsgWk
-        '
-        Me.txtMsgWk.AutoSize = True
-        Me.txtMsgWk.Location = New System.Drawing.Point(15, 47)
-        Me.txtMsgWk.Name = "txtMsgWk"
-        Me.txtMsgWk.Size = New System.Drawing.Size(50, 13)
-        Me.txtMsgWk.TabIndex = 4
-        Me.txtMsgWk.Text = "Message"
-        '
-        'txtSalida
-        '
-        Me.txtSalida.AutoSize = True
-        Me.txtSalida.Location = New System.Drawing.Point(7, 40)
-        Me.txtSalida.Name = "txtSalida"
-        Me.txtSalida.Size = New System.Drawing.Size(53, 13)
-        Me.txtSalida.TabIndex = 7
-        Me.txtSalida.Text = "Message:"
         '
         'PayRoll
         '

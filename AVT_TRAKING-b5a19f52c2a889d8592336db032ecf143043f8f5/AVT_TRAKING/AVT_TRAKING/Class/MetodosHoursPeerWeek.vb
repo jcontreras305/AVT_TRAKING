@@ -6,7 +6,7 @@ Public Class MetodosHoursPeerWeek
     Public Function llenarEmpleadosCombo(ByVal combo As ComboBox, ByVal tabla As DataTable) As Boolean
         Try
             conectar()
-            Dim cmd As New SqlCommand("select idEmployee, CONCAT(firstName,' ',middleName,' ',lastName) , photo as 'Photo', SAPNumber, numberEmploye from employees where estatus = 'E' ", conn)
+            Dim cmd As New SqlCommand("select idEmployee, CONCAT(firstName,' ',middleName,' ',lastName) , photo as 'Photo', SAPNumber, numberEmploye , perdiem from employees where estatus = 'E' ", conn)
             If cmd.ExecuteNonQuery Then
                 Dim da As New SqlDataAdapter(cmd)
                 da.Fill(tabla)
@@ -50,7 +50,7 @@ inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO "
     Public Function buscarHoras(ByRef tblHoras As DataGridView, ByVal idEmpleado As String) As Boolean
         Try
             conectar()
-            Dim cmd As New SqlCommand(consultaHoras + " where emp.idEmployee='" + idEmpleado + "'", conn)
+            Dim cmd As New SqlCommand(consultaHoras + " where emp.idEmployee='" + idEmpleado + "' order by hw.dateWorked desc", conn)
             If cmd.ExecuteNonQuery Then
                 Dim dt As New DataTable
                 Dim da As New SqlDataAdapter(cmd)
@@ -579,6 +579,46 @@ order by em.numberEmploye", conn)
         Catch ex As Exception
             MsgBox(ex.Message())
             Return False
+        Finally
+            desconectar()
+        End Try
+    End Function
+    '================================================================================================
+    '==================== METODOS PARA PERDIEM ======================================================
+    '================================================================================================
+    Public Function selectPerdiem(ByVal tbl As DataGridView, ByVal startDate As Date) As Boolean
+        Try
+            conectar()
+            Dim cmd As New SqlCommand("select 
+distinct
+em.numberEmploye,
+case when (select top 1 weekN from weeks where dateWeek >=	exu.dateExpense order by dateWeek asc) is null then 0 
+	else (select top 1 weekN from weeks where dateWeek >= exu.dateExpense order by dateWeek asc) end as 'WeekNumber',
+	SUBSTRING(CONVERT(nvarchar , po.jobNo),0,LEN( CONVERT(nvarchar , po.jobNo))-2) as 'Job Number',
+    SUBSTRING(CONVERT(nvarchar , po.jobNo),LEN( CONVERT(nvarchar , po.jobNo))-2,LEN( CONVERT(nvarchar , po.jobNo))+1) as 'Sub Job Number',
+	jb.costDistribution,
+	iif(DATEPART(dw,exu.dateExpense)='1',7,(convert (int ,DATEPART(dw,exu.dateExpense))-1)) as 'DayOfWeek',
+	(select iif(SUM(exu1.amount)is null,0,SUM(exu1.amount)) from expensesUsed as exu1 inner join expenses as ex1 on ex1.idExpenses = exu.idExpense inner join task as tk1 on tk1.idAux = exu1.idAux inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO inner join projectOrder as po1 on po1.idPO = wo1.idPO and wo1.jobNo = po1.jobNo inner join job as jb1 on jb1.jobNo = po1.jobNo where exu1.dateExpense = exu.dateExpense and em.idEmployee = exu1.idEmployee and jb.jobNo = jb1.jobNo ) as 'Adjustment Amount'
+from expensesUsed as exu
+inner join employees as em on em.idEmployee = exu.idEmployee
+inner join task as tk on tk.idAux = exu.idAux
+inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO 
+inner join projectOrder as po on po.idPO = wo.idPO and wo.jobNo = po.jobNo
+inner join job as jb on jb.jobNo = po.jobNo
+where exu.dateExpense between '" + validaFechaParaSQl(startDate) + "' and DATEADD(day,6,'" + validaFechaParaSQl(startDate) + "') 
+order by em.numberEmploye", conn)
+            If tbl.Rows IsNot Nothing Then
+                tbl.Rows.Clear()
+            End If
+            Dim dr As SqlDataReader = cmd.ExecuteReader()
+            While dr.Read()
+                tbl.Rows.Add("A", "5", dr("numberEmploye"), dr("WeekNumber"), dr("Job Number"), dr("Sub Job Number"), dr("costDistribution"), "Y", dr("DayOfWeek"), "0", "0", "0", "0", "NT", dr("Adjustment Amount"), "050", "7400", "SB")
+            End While
+            dr.Close()
+            Return True
+        Catch ex As Exception
+            Return False
+            MsgBox(ex.Message)
         Finally
             desconectar()
         End Try

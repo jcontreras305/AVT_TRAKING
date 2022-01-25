@@ -382,4 +382,24 @@ and (CONCAT(firstName,' ',middleName,' ',lastName) like '%" + consulta + "%' or 
         End Try
     End Function
 
+    '======================================================================================================
+    '=============== METODOS PARA PER-DIEM ================================================================
+    '======================================================================================================
+    '======================================================================================================
+    Public Function updatePerDiem(ByVal numEmployee As String, ByVal perdiemStatus As Boolean) As Boolean
+        Try
+            conectar()
+            Dim cmd As New SqlCommand("update employees set perdiem = '" + If(perdiemStatus, "1", "0") + "' where numberEmploye = " + CStr(numEmployee) + "", conn)
+            If cmd.ExecuteNonQuery > 0 Then
+                Return True
+            Else
+                Return False
+            End If
+        Catch ex As Exception
+            Return False
+        Finally
+            desconectar()
+        End Try
+    End Function
+
 End Class

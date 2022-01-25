@@ -506,7 +506,7 @@ Public Class Employees
 
     Private Function recolectarInsertExcel(ByVal rowIndex As Integer) As String()
         Try
-            Dim dataEmployes(18) As String
+            Dim dataEmployes(19) As String
             dataEmployes(0) = tblEmployeesExcel.Rows(rowIndex).Cells("Number").Value
             dataEmployes(1) = tblEmployeesExcel.Rows(rowIndex).Cells("FirstName").Value
             dataEmployes(2) = tblEmployeesExcel.Rows(rowIndex).Cells("LastName").Value
@@ -534,6 +534,8 @@ Public Class Employees
             dataEmployes(17) = "0,00"
 
             dataEmployes(18) = tblEmployeesExcel.Rows(rowIndex).Cells("TypeEmployee").Value
+
+            dataEmployes(19) = "0"
 
             Return dataEmployes
         Catch ex As Exception

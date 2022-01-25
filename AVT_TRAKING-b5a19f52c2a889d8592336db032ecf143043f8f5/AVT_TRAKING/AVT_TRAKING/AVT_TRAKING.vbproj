@@ -200,6 +200,12 @@
     <Compile Include="Froms\PayRoll.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Froms\Perdiem.Designer.vb">
+      <DependentUpon>Perdiem.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Froms\Perdiem.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Froms\Project.vb" />
     <Compile Include="Froms\ProjectsCosts.Designer.vb">
       <DependentUpon>ProjectsCosts.vb</DependentUpon>
@@ -487,6 +493,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Froms\PayRoll.resx">
       <DependentUpon>PayRoll.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Froms\Perdiem.resx">
+      <DependentUpon>Perdiem.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Froms\ProjectsCosts.resx">
       <DependentUpon>ProjectsCosts.vb</DependentUpon>
