@@ -303,10 +303,10 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="Reports\ActiveAverageEmployee.vb">
+    <Compile Include="Reports\ActiveAv.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>ActiveAverageEmployee.rpt</DependentUpon>
+      <DependentUpon>ActiveAv.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Reports\AllJobs.vb">
@@ -536,9 +536,9 @@
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Reports\ActiveAverageEmployee.rpt">
+    <EmbeddedResource Include="Reports\ActiveAv.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
-      <LastGenOutput>ActiveAverageEmployee.vb</LastGenOutput>
+      <LastGenOutput>ActiveAv.vb</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\AllJobs.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>

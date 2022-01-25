@@ -18,7 +18,7 @@ Imports System
 Imports System.ComponentModel
 
 
-Public Class ActiveAverageEmployee
+Public Class ActiveAv
     Inherits ReportClass
     
     Public Sub New()
@@ -27,7 +27,7 @@ Public Class ActiveAverageEmployee
     
     Public Overrides Property ResourceName() As String
         Get
-            Return "ActiveAverageEmployee.rpt"
+            Return "ActiveAv.rpt"
         End Get
         Set
             'Do nothing
@@ -45,7 +45,7 @@ Public Class ActiveAverageEmployee
     
     Public Overrides Property FullResourceName() As String
         Get
-            Return "AVT_TRAKING.ActiveAverageEmployee.rpt"
+            Return "AVT_TRAKING.ActiveAv.rpt"
         End Get
         Set
             'Do nothing
@@ -94,7 +94,7 @@ Public Class ActiveAverageEmployee
 End Class
 
 <System.Drawing.ToolboxBitmapAttribute(GetType(CrystalDecisions.[Shared].ExportOptions), "report.bmp")>  _
-Public Class CachedActiveAverageEmployee
+Public Class CachedActiveAv
     Inherits Component
     Implements ICachedReport
     
@@ -136,7 +136,7 @@ Public Class CachedActiveAverageEmployee
     End Property
     
     Public Overridable Function CreateReport() As CrystalDecisions.CrystalReports.Engine.ReportDocument Implements CrystalDecisions.ReportSource.ICachedReport.CreateReport
-        Dim rpt As ActiveAverageEmployee = New ActiveAverageEmployee()
+        Dim rpt As ActiveAv = New ActiveAv()
         rpt.Site = Me.Site
         Return rpt
     End Function
