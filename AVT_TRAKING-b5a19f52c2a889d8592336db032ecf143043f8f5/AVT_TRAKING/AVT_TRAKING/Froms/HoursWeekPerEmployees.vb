@@ -1043,6 +1043,7 @@ Public Class HoursWeekPerEmployees
     End Sub
 
     Private Sub btnMaximize_Click(sender As Object, e As EventArgs) Handles btnMaximize.Click
+        MaximizedBounds = Screen.FromHandle(Me.Handle).WorkingArea
         WindowState = FormWindowState.Maximized
         btnMaximize.Visible = False
         btnRestore.Visible = True
