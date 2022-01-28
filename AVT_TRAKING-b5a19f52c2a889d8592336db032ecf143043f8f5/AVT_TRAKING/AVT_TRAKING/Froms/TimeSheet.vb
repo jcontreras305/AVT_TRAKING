@@ -9,12 +9,11 @@ Public Class TimeSheet
     Public tablaWorkCodes As New Data.DataTable
     Public tablaProject As New Data.DataTable
     Public tablaEmpleadosId As New Data.DataTable
-
-
-
+    Public tablaExpeseCode As New Data.DataTable
     Private Sub TimeSheet_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         mtdHPW.llenarTablaWorkCode(tablaWorkCodes)
         mtdHPW.llenarTablaProyecto(tablaProject)
+        mtdHPW.llenarTablaExpenses(tablaExpeseCode)
     End Sub
 
     Private Sub btnDownloadExcel_Click(sender As Object, e As EventArgs) Handles btnDownloadExcel.Click
@@ -38,9 +37,10 @@ Public Class TimeSheet
             limpiarSheet(sheetWorkCodes, 2)
             If tablaWorkCodes IsNot Nothing And tablaWorkCodes.Rows.Count > 0 Then
                 Dim cont As Integer = 2
-                txtSalida.Text = txtSalida.Text + vbCrLf + tablaWorkCodes.Rows().Count.ToString() + " rows."
+                txtSalida.Text = txtSalida.Text + vbCrLf + tablaWorkCodes.Rows().Count.ToString() + " rows." + vbCrLf + "Iserting row "
+                Dim msgSalida = txtSalida.Text
                 For Each row As DataRow In tablaWorkCodes.Rows()
-                    txtSalida.Text = txtSalida.Text + vbCrLf + "Reading row " + cont.ToString()
+                    txtSalida.Text = msgSalida + cont.ToString()
                     sheetWorkCodes.Cells(cont, 1) = row.Item("Equipament")
                     sheetWorkCodes.Cells(cont, 2) = row.Item("WorkOrder")
                     sheetWorkCodes.Cells(cont, 3) = row.Item("Description")
@@ -68,7 +68,163 @@ Public Class TimeSheet
             txtSalida.Text = txtSalida.Text + vbCrLf + "Error. " + ex.Message()
         End Try
     End Sub
+    Private Sub btnUpdatePerdiem_Click(sender As Object, e As EventArgs) Handles btnUpdatePerdiem.Click
+        Try
+            '======================================= INSERTAR PERDIEM =====================================================
+            Dim openFile As New OpenFileDialog
+            openFile.DefaultExt = "*.xlsm"
+            openFile.FileName = "Daily Perdiem Sheet"
+            openFile.ShowDialog()
+            txtSalidaPerdiem.Text = txtSalidaPerdiem.Text + vbCrLf + "Open file " + openFile.FileName
+            Dim ApExcel = New Microsoft.Office.Interop.Excel.Application
+            Dim libro = ApExcel.Workbooks.Open(openFile.FileName)
+            Dim flag As Boolean = False
+            Dim case1 As Integer = 0
+            For i = 1 To libro.Worksheets.Count
+                If libro.Worksheets(i).Name = "Perdiem" Then
+                    flag = True
+                    case1 = 1
+                    Exit For
+                ElseIf libro.Worksheets(i).Name = "PerDiem" Then
+                    flag = True
+                    case1 = 2
+                    Exit For
+                End If
+            Next
+            Dim perdiemSheet As New Worksheet
+            If flag = True Then
+                If case1 = 1 Then
+                    perdiemSheet = libro.Worksheets("Perdiem")
+                    txtSalidaPerdiem.Text = txtSalidaPerdiem.Text + vbCrLf + "Open sheet 'Perdiem'."
+                Else
+                    perdiemSheet = libro.Worksheets("PerDiem")
+                    txtSalidaPerdiem.Text = txtSalidaPerdiem.Text + vbCrLf + "Open sheet 'PerDiem'."
+                End If
+                Dim cont As Integer = 2
+                Dim tblPerdiem As New Data.DataTable
+                tblPerdiem.Columns.Add("IdExpenseUsed")
+                tblPerdiem.Columns.Add("DateEU")
+                tblPerdiem.Columns.Add("Amount")
+                tblPerdiem.Columns.Add("Description")
+                tblPerdiem.Columns.Add("ExpenseCode")
+                tblPerdiem.Columns.Add("Project")
+                tblPerdiem.Columns.Add("Employee")
+                txtSalidaPerdiem.Text = txtSalidaPerdiem.Text + vbCrLf + "Reding Data..." + vbCrLf + "reading row "
+                Dim msgSalida = txtSalidaPerdiem.Text
+                Dim listError As New List(Of String)
+                While perdiemSheet.Cells(cont, 2).Text <> ""
+                    Dim idAux As String = ""
+                    Dim idExpense As String = ""
+                    Dim idEmployee As String = ""
+                    Dim flag2 As Boolean = False
 
+                    For Each row As DataRow In tablaExpeseCode.Rows
+                        If row.ItemArray(1) = perdiemSheet.Cells(cont, 6).Text Then
+                            idExpense = row.ItemArray(0) 'ExpenseCode
+                            flag2 = True
+                            Exit For
+                        Else
+                            flag2 = False
+                        End If
+                    Next
+                    Dim flag3 As Boolean = False
+                    For Each row As DataRow In tablaProject.Rows
+                        If row.ItemArray(1) = perdiemSheet.Cells(cont, 4).Text And row.ItemArray(3) = perdiemSheet.Cells(cont, 5).Text Then
+                            idAux = row.ItemArray(0).ToString() 'idAux
+                            flag3 = True
+                            Exit For
+                        Else
+                            flag3 = True
+                        End If
+                    Next
+                    Dim flag4 As Boolean = False
+                    For Each row As DataRow In tablaEmpleadosId.Rows
+                        If row.ItemArray(4) = perdiemSheet.Cells(cont, 2).Text Then 'idEmpleado
+                            idEmployee = row.ItemArray(0)
+                            flag4 = True
+                            Exit For
+                        Else
+                            flag4 = False
+                        End If
+                    Next
+
+                    If flag2 = False Then 'Expense code
+                        If flag3 = False Then 'Project
+                            If flag4 = False Then 'IdEmployee
+                                listError.Add("Row " + cont.ToString + ": the ExpenseCode, Employee Number and Project were not select.")
+                            End If
+                        Else
+                            listError.Add("Row " + cont.ToString + ": the ExpenseCode and Project were not select.")
+                        End If
+                        listError.Add("Row " + cont.ToString + ": the ExpenseCode was not select.")
+                    ElseIf flag3 = False Then 'Project
+                        If flag4 = False Then 'idEmployee
+                            listError.Add("Row " + cont.ToString + ": the ExpenseCode and Employee Number were not select.")
+                        Else
+                            listError.Add("Row " + cont.ToString + ": the Project was not select.")
+                        End If
+                    ElseIf flag4 = False Then 'idEmplloyee
+                        listError.Add("Row " + cont.ToString + ": the Employee Number was not select.")
+                    ElseIf flag2 And flag3 And flag4 Then
+                        tblPerdiem.Rows.Add("", perdiemSheet.Cells(cont, 3).Text, perdiemSheet.Cells(cont, 7).Text, perdiemSheet.Cells(cont, 8).Text, idExpense, idAux, idEmployee)
+                    End If
+                    txtSalidaPerdiem.Text = msgSalida + CStr(cont)
+                    cont += 1
+                End While
+                Dim flagContinue As Boolean = True
+                If listError.Count > 0 Then
+                    For Each obj As String In listError
+                        txtSalidaPerdiem.Text = txtSalidaPerdiem.Text + vbCrLf + obj
+                    Next
+                    If DialogResult.OK = MessageBox.Show("Exist Error in the excel, Would you like to continue?", "", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) Then
+                        flagContinue = True
+                    Else
+                        flagContinue = False
+                    End If
+                End If
+                listError.Clear()
+                If flagContinue Then
+                    txtSalidaPerdiem.Text = txtSalidaPerdiem.Text + "Stating process to insert..."
+                    Dim contRowsError As Integer = 2
+                    For Each row As Data.DataRow In tblPerdiem.Rows()
+                        Dim listEU As New List(Of String)
+                        listEU.Add(row.ItemArray(0).ToString)
+                        listEU.Add(row.ItemArray(1).ToString)
+                        listEU.Add(row.ItemArray(2).ToString)
+                        listEU.Add(row.ItemArray(3).ToString)
+                        listEU.Add(row.ItemArray(4).ToString)
+                        listEU.Add(row.ItemArray(5).ToString)
+                        listEU.Add(row.ItemArray(6).ToString)
+                        If Not mtdHPW.insertExpensesUsed(listEU) Then
+                            listError.Add("Excel Row " + contRowsError.ToString() + ".")
+                        End If
+                        contRowsError += 1
+                    Next
+                End If
+                If listError.Count > 0 Then
+                    txtSalidaPerdiem.Text = txtSalidaPerdiem.Text + vbCrLf + "Error in the next rows:"
+                    For Each obj As String In listError
+                        txtSalidaPerdiem.Text = txtSalidaPerdiem.Text + vbCrLf + obj
+                    Next
+                Else
+                    MsgBox("Successful")
+                End If
+                txtSalidaPerdiem.Text = txtSalidaPerdiem.Text + vbCrLf + "Closing Excel."
+                txtSalidaPerdiem.Text = txtSalidaPerdiem.Text + vbCrLf + "Sleeping..."
+                NAR(perdiemSheet)
+                libro.Close(True)
+                NAR(libro)
+                NAR(ApExcel.Workbooks)
+                ApExcel.Quit()
+                NAR(ApExcel)
+                txtSalidaPerdiem.Text = txtSalidaPerdiem.Text + vbCrLf + "End Excel."
+            Else
+                MessageBox.Show("The sheet 'Perdiem' is not found.", "Important", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message)
+        End Try
+    End Sub
     Private Sub btnUploadRecords_Click(sender As Object, e As EventArgs) Handles btnUploadRecords.Click
         Try
             '======================================== INSERTAR WORKCODES ==================================================
@@ -277,13 +433,14 @@ Public Class TimeSheet
         ReleaseCapture()
         SendMessage(Me.Handle, &H112&, &HF012&, 0)
     End Sub
-
+    Private Sub PictureBox4_Click(sender As Object, e As EventArgs) Handles PictureBox4.Click
+        Me.Close()
+    End Sub
     Private Sub btnMaximize_Click(sender As Object, e As EventArgs) Handles btnMaximize.Click
         WindowState = FormWindowState.Maximized
         btnMaximize.Visible = False
         btnRestore.Visible = True
     End Sub
-
     Private Sub btnRestore_Click(sender As Object, e As EventArgs) Handles btnRestore.Click
         WindowState = FormWindowState.Normal
         btnRestore.Visible = False
@@ -293,4 +450,6 @@ Public Class TimeSheet
     Private Sub PictureBox2_Click(sender As Object, e As EventArgs) Handles PictureBox2.Click
         Me.WindowState = FormWindowState.Minimized
     End Sub
+
+
 End Class

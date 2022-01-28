@@ -1084,6 +1084,7 @@ Public Class HoursWeekPerEmployees
                     Dim mtdEm As New MetodosEmployees
                     If mtdEm.updatePerDiem(lblEmployeeNumber.Text, chbPerDiem.Checked) Then
                         tblExpenses.Enabled = True
+                        mtdHPW.llenarEmpleadosCombo(cmbEmpleados, idsEmployees)
                     Else
                         MsgBox("Error,Plese Try Again And Check That You Chose An Employee.")
                         tblExpenses.Enabled = False
@@ -1098,6 +1099,7 @@ Public Class HoursWeekPerEmployees
                     Dim mtdEm As New MetodosEmployees
                     If mtdEm.updatePerDiem(lblEmployeeNumber.Text, chbPerDiem.Checked) Then
                         tblExpenses.Enabled = False
+                        mtdHPW.llenarEmpleadosCombo(cmbEmpleados, idsEmployees)
                     Else
                         MsgBox("Error,Plese Try Again And Check That You Chose An Employee.")
                         tblExpenses.Enabled = True
