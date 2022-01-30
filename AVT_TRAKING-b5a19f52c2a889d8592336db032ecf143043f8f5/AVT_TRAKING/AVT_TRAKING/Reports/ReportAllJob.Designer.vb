@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
-Partial Class ReportByJobNumber
+Partial Class ReportAllJob
     Inherits System.Windows.Forms.Form
 
     'Form reemplaza a Dispose para limpiar la lista de componentes.
@@ -22,11 +22,11 @@ Partial Class ReportByJobNumber
     'No lo modifique con el editor de código.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(ReportAllJob))
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
         Me.Panel3 = New System.Windows.Forms.Panel()
-        Me.crvByJobNumber = New CrystalDecisions.Windows.Forms.CrystalReportViewer()
+        Me.crvAllJobs = New CrystalDecisions.Windows.Forms.CrystalReportViewer()
         Me.Panel2 = New System.Windows.Forms.Panel()
-        Me.cmbClients = New System.Windows.Forms.ComboBox()
         Me.Button1 = New System.Windows.Forms.Button()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
@@ -71,28 +71,27 @@ Partial Class ReportByJobNumber
         '
         'Panel3
         '
-        Me.Panel3.Controls.Add(Me.crvByJobNumber)
+        Me.Panel3.Controls.Add(Me.crvAllJobs)
         Me.Panel3.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel3.Location = New System.Drawing.Point(3, 113)
         Me.Panel3.Name = "Panel3"
         Me.Panel3.Size = New System.Drawing.Size(696, 374)
         Me.Panel3.TabIndex = 2
         '
-        'crvByJobNumber
+        'crvAllJobs
         '
-        Me.crvByJobNumber.ActiveViewIndex = -1
-        Me.crvByJobNumber.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.crvByJobNumber.Cursor = System.Windows.Forms.Cursors.Default
-        Me.crvByJobNumber.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.crvByJobNumber.Location = New System.Drawing.Point(0, 0)
-        Me.crvByJobNumber.Name = "crvByJobNumber"
-        Me.crvByJobNumber.Size = New System.Drawing.Size(696, 374)
-        Me.crvByJobNumber.TabIndex = 0
+        Me.crvAllJobs.ActiveViewIndex = -1
+        Me.crvAllJobs.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.crvAllJobs.Cursor = System.Windows.Forms.Cursors.Default
+        Me.crvAllJobs.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.crvAllJobs.Location = New System.Drawing.Point(0, 0)
+        Me.crvAllJobs.Name = "crvAllJobs"
+        Me.crvAllJobs.Size = New System.Drawing.Size(696, 374)
+        Me.crvAllJobs.TabIndex = 0
         '
         'Panel2
         '
         Me.Panel2.BackColor = System.Drawing.Color.FromArgb(CType(CType(83, Byte), Integer), CType(CType(93, Byte), Integer), CType(CType(102, Byte), Integer))
-        Me.Panel2.Controls.Add(Me.cmbClients)
         Me.Panel2.Controls.Add(Me.Button1)
         Me.Panel2.Controls.Add(Me.Label2)
         Me.Panel2.Controls.Add(Me.Label1)
@@ -105,14 +104,6 @@ Partial Class ReportByJobNumber
         Me.Panel2.Size = New System.Drawing.Size(696, 64)
         Me.Panel2.TabIndex = 1
         '
-        'cmbClients
-        '
-        Me.cmbClients.FormattingEnabled = True
-        Me.cmbClients.Location = New System.Drawing.Point(223, 3)
-        Me.cmbClients.Name = "cmbClients"
-        Me.cmbClients.Size = New System.Drawing.Size(228, 21)
-        Me.cmbClients.TabIndex = 16
-        '
         'Button1
         '
         Me.Button1.FlatAppearance.BorderSize = 0
@@ -122,7 +113,7 @@ Partial Class ReportByJobNumber
         Me.Button1.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.Button1.Image = Global.AVT_TRAKING.My.Resources.Resources.reportshow
         Me.Button1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.Button1.Location = New System.Drawing.Point(368, 30)
+        Me.Button1.Location = New System.Drawing.Point(213, 20)
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(83, 33)
         Me.Button1.TabIndex = 14
@@ -213,9 +204,9 @@ Partial Class ReportByJobNumber
         Me.Label3.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.Label3.Location = New System.Drawing.Point(40, 6)
         Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(207, 18)
+        Me.Label3.Size = New System.Drawing.Size(139, 18)
         Me.Label3.TabIndex = 11
-        Me.Label3.Text = "Report By Job Number"
+        Me.Label3.Text = "Report All Jobs"
         '
         'PictureBox1
         '
@@ -256,15 +247,16 @@ Partial Class ReportByJobNumber
         Me.btnMaximize.TabIndex = 7
         Me.btnMaximize.TabStop = False
         '
-        'ReportByJobNumber
+        'ReportAllJob
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(702, 490)
         Me.Controls.Add(Me.TableLayoutPanel1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
-        Me.Name = "ReportByJobNumber"
-        Me.Text = "ReportByJobNumber"
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
+        Me.Name = "ReportAllJob"
+        Me.Text = "ReportAllJob"
         Me.TableLayoutPanel1.ResumeLayout(False)
         Me.Panel3.ResumeLayout(False)
         Me.Panel2.ResumeLayout(False)
@@ -283,9 +275,8 @@ Partial Class ReportByJobNumber
 
     Friend WithEvents TableLayoutPanel1 As TableLayoutPanel
     Friend WithEvents Panel3 As Panel
-    Friend WithEvents crvByJobNumber As CrystalDecisions.Windows.Forms.CrystalReportViewer
+    Friend WithEvents crvAllJobs As CrystalDecisions.Windows.Forms.CrystalReportViewer
     Friend WithEvents Panel2 As Panel
-    Friend WithEvents cmbClients As ComboBox
     Friend WithEvents Button1 As Button
     Friend WithEvents Label2 As Label
     Friend WithEvents Label1 As Label

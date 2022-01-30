@@ -1,10 +1,15 @@
-﻿
-Imports System.Runtime.InteropServices
+﻿Imports System.Runtime.InteropServices
 Imports System.Data.SqlClient
 
-Public Class ReportEmployeePerDiem
+Public Class ReportJNumber
     Dim conection As New ConnectioDB
+    Private Sub PictureBox4_Click(sender As Object, e As EventArgs) Handles PictureBox4.Click
+        Me.Close()
+    End Sub
 
+    Private Sub PictureBox3_Click(sender As Object, e As EventArgs) Handles PictureBox3.Click
+        Me.WindowState = FormWindowState.Minimized
+    End Sub
 
     Private Sub btnMaximize_Click(sender As Object, e As EventArgs) Handles btnMaximize.Click
         MaximizedBounds = Screen.FromHandle(Me.Handle).WorkingArea
@@ -25,19 +30,27 @@ Public Class ReportEmployeePerDiem
     Private Shared Sub SendMessage(hWnd As IntPtr, wMsg As Integer, wParam As Integer, lParam As Integer)
     End Sub
 
+
     Private Sub TitleBar_MouseMove(sender As Object, e As MouseEventArgs) Handles TitleBar.MouseMove
         ReleaseCapture()
         SendMessage(Me.Handle, &H112&, &HF012&, 0)
     End Sub
-    Private Sub PictureBox4_Click(sender As Object, e As EventArgs) Handles PictureBox4.Click
-        Me.Close()
+
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+        Dim array() = cmbClients.SelectedItem.ToString().Split("    ")
+        Dim idClient As String = array(0)
+        If idClient <> "" Or idClient IsNot Nothing Then
+            Dim reportTS As New ByJobNumber
+            reportTS.SetParameterValue("@startdate", validaFechaParaSQl(dtpInitialDate.Value.Date))
+            reportTS.SetParameterValue("@finaldate", validaFechaParaSQl(dtpFinalDate.Value.Date))
+            reportTS.SetParameterValue("@clientnum", idClient)
+            crvByJobNumber.ReportSource = reportTS
+        Else
+            MsgBox("Please select a Client.")
+        End If
     End Sub
 
-    Private Sub PictureBox3_Click(sender As Object, e As EventArgs) Handles PictureBox3.Click
-        Me.WindowState = FormWindowState.Minimized
-    End Sub
-
-    Private Sub ReportEmployeePerDiem_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+    Private Sub ReportJNumber_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Try
             conection.conectar()
             Dim cmd As New SqlCommand("select numberClient , CONCAT(lastName,', ',firstName,' ',middleName) as 'Name' from clients ", conection.conn)
@@ -52,17 +65,5 @@ Public Class ReportEmployeePerDiem
         End Try
     End Sub
 
-    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
-        Dim array() = cmbClients.SelectedItem.ToString().Split("    ")
-        Dim idClient As String = array(0)
-        If idClient <> "" Or idClient IsNot Nothing Then
-            Dim reportTS As New EmployeePeerDiemSheets
-            reportTS.SetParameterValue("@startdate", validaFechaParaSQl(dtpInitialDate.Value.Date))
-            reportTS.SetParameterValue("@finaldate", validaFechaParaSQl(dtpFinalDate.Value.Date))
-            reportTS.SetParameterValue("@clientnum", idClient)
-            crvEmployeePerDiem.ReportSource = reportTS
-        Else
-            MsgBox("Please select a Client.")
-        End If
-    End Sub
+
 End Class

@@ -18,7 +18,7 @@ Imports System
 Imports System.ComponentModel
 
 
-Public Class CompleteByDateRange
+Public Class WONotComplete
     Inherits ReportClass
     
     Public Sub New()
@@ -27,7 +27,7 @@ Public Class CompleteByDateRange
     
     Public Overrides Property ResourceName() As String
         Get
-            Return "CompleteByDateRange.rpt"
+            Return "WONotComplete.rpt"
         End Get
         Set
             'Do nothing
@@ -45,7 +45,7 @@ Public Class CompleteByDateRange
     
     Public Overrides Property FullResourceName() As String
         Get
-            Return "AVT_TRAKING.CompleteByDateRange.rpt"
+            Return "AVT_TRAKING.WONotComplete.rpt"
         End Get
         Set
             'Do nothing
@@ -134,7 +134,7 @@ Public Class CompleteByDateRange
 End Class
 
 <System.Drawing.ToolboxBitmapAttribute(GetType(CrystalDecisions.[Shared].ExportOptions), "report.bmp")>  _
-Public Class CachedCompleteByDateRange
+Public Class CachedWONotComplete
     Inherits Component
     Implements ICachedReport
     
@@ -176,7 +176,7 @@ Public Class CachedCompleteByDateRange
     End Property
     
     Public Overridable Function CreateReport() As CrystalDecisions.CrystalReports.Engine.ReportDocument Implements CrystalDecisions.ReportSource.ICachedReport.CreateReport
-        Dim rpt As CompleteByDateRange = New CompleteByDateRange()
+        Dim rpt As WONotComplete = New WONotComplete()
         rpt.Site = Me.Site
         Return rpt
     End Function

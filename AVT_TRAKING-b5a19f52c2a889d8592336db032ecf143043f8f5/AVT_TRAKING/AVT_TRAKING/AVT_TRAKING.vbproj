@@ -363,12 +363,16 @@
       <DependentUpon>EmployeesTime.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Reports\ReportAllJobs.Designer.vb" />
-    <Compile Include="Reports\ReportAllJobs.vb">
-      <SubType>Form</SubType>
+    <Compile Include="Reports\HoursPerWeek.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>HoursPerWeek.rpt</DependentUpon>
+      <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Reports\ReportByJobNumber.Designer.vb" />
-    <Compile Include="Reports\ReportByJobNumber.vb">
+    <Compile Include="Reports\ReportAllJob.Designer.vb">
+      <DependentUpon>ReportAllJob.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\ReportAllJob.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Reports\ReportClientBillingsReCapBYProject.Designer.vb">
@@ -393,6 +397,24 @@
       <DependentUpon>ReportEmployeesTime.vb</DependentUpon>
     </Compile>
     <Compile Include="Reports\ReportEmployeesTime.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Reports\ReportHoursPerWeek.Designer.vb">
+      <DependentUpon>ReportHoursPerWeek.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\ReportHoursPerWeek.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Reports\ReportJNumber.Designer.vb">
+      <DependentUpon>ReportJNumber.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\ReportJNumber.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Reports\ReportWONotComplete.Designer.vb">
+      <DependentUpon>ReportWONotComplete.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\ReportWONotComplete.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Reports\ScaffoldEstimate.vb">
@@ -436,6 +458,24 @@
     </Compile>
     <Compile Include="Reports\ReportScaffoldEstimate.vb">
       <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Reports\ReportYearFinalHours.Designer.vb">
+      <DependentUpon>ReportYearFinalHours.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\ReportYearFinalHours.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Reports\WONotComplete.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>WONotComplete.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\YearFinalHours.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>YearFinalHours.rpt</DependentUpon>
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="VRT_TRAKINGDataSet.Designer.vb">
       <AutoGen>True</AutoGen>
@@ -581,8 +621,12 @@
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>EmployeesTime.vb</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Reports\ReportByJobNumber.resx">
-      <DependentUpon>ReportByJobNumber.vb</DependentUpon>
+    <EmbeddedResource Include="Reports\HoursPerWeek.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>HoursPerWeek.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\ReportAllJob.resx">
+      <DependentUpon>ReportAllJob.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\ReportClientBillingsReCapBYProject.resx">
       <DependentUpon>ReportClientBillingsReCapBYProject.vb</DependentUpon>
@@ -595,6 +639,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\ReportEmployeesTime.resx">
       <DependentUpon>ReportEmployeesTime.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\ReportHoursPerWeek.resx">
+      <DependentUpon>ReportHoursPerWeek.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\ReportJNumber.resx">
+      <DependentUpon>ReportJNumber.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\ReportWONotComplete.resx">
+      <DependentUpon>ReportWONotComplete.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\ReportYearFinalHours.resx">
+      <DependentUpon>ReportYearFinalHours.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\ScaffoldEstimate.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
@@ -618,6 +674,14 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\ReportScaffoldEstimate.resx">
       <DependentUpon>ReportScaffoldEstimate.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\WONotComplete.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>WONotComplete.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\YearFinalHours.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>YearFinalHours.vb</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

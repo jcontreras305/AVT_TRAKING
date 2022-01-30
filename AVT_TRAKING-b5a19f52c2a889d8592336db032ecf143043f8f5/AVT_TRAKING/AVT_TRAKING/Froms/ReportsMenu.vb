@@ -70,12 +70,27 @@ Public Class ReportsMenu
     End Sub
 
     Private Sub Button7_Click(sender As Object, e As EventArgs) Handles Button7.Click
-        Dim tse As New ReportByJobNumber
+        Dim tse As New ReportJNumber
         tse.ShowDialog()
     End Sub
 
     Private Sub Button8_Click(sender As Object, e As EventArgs) Handles Button8.Click
-        Dim tse As New ReportAllJobs
+        Dim tse As New ReportAllJob
+        tse.ShowDialog()
+    End Sub
+
+    Private Sub Button9_Click(sender As Object, e As EventArgs) Handles Button9.Click
+        Dim tse As New ReportHoursPerWeek
+        tse.ShowDialog()
+    End Sub
+
+    Private Sub Button10_Click(sender As Object, e As EventArgs) Handles Button10.Click
+        Dim tse As New ReportYearFinalHours
+        tse.ShowDialog()
+    End Sub
+
+    Private Sub Button11_Click(sender As Object, e As EventArgs) Handles Button11.Click
+        Dim tse As New ReportWONotComplete
         tse.ShowDialog()
     End Sub
 End Class

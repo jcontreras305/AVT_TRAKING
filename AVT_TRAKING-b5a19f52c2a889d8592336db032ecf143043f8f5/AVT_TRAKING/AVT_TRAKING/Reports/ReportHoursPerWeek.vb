@@ -1,6 +1,9 @@
 ﻿Imports System.Runtime.InteropServices
+Public Class ReportHoursPerWeek
+    Private Sub PictureBox3_Click(sender As Object, e As EventArgs) Handles PictureBox3.Click
+        Me.WindowState = FormWindowState.Minimized
+    End Sub
 
-Public Class ReporteEmployees
     Private Sub PictureBox4_Click(sender As Object, e As EventArgs) Handles PictureBox4.Click
         Me.Close()
     End Sub
@@ -30,15 +33,10 @@ Public Class ReporteEmployees
         SendMessage(Me.Handle, &H112&, &HF012&, 0)
     End Sub
 
-    Private Sub PictureBox3_Click(sender As Object, e As EventArgs) Handles PictureBox3.Click
-        Me.WindowState = FormWindowState.Minimized
-    End Sub
-
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
-        Dim reportTS As New ReportE
-        reportTS.SetParameterValue("@IntialDate", validaFechaParaSQl(dtpInitialDate.Value.Date))
-        reportTS.SetParameterValue("@FinalDate", validaFechaParaSQl(dtpFinalDate.Value.Date))
-        crvTimeSheetEmployee.ReportSource = reportTS
+        Dim reportTS As New HoursPerWeek
+        reportTS.SetParameterValue("@date", validaFechaParaSQl(dtpDate.Value.Date))
+        crvHoursPerWeek.ReportSource = reportTS
     End Sub
 
 

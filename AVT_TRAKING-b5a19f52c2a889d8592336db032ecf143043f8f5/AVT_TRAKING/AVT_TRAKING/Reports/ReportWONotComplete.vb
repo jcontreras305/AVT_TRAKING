@@ -1,11 +1,14 @@
 ﻿Imports System.Runtime.InteropServices
 Imports System.Data.SqlClient
 
-
-Public Class ReportCompleteByDateRange
+Public Class ReportWONotComplete
     Dim conection As New ConnectioDB
     Private Sub PictureBox4_Click(sender As Object, e As EventArgs) Handles PictureBox4.Click
         Me.Close()
+    End Sub
+
+    Private Sub PictureBox3_Click(sender As Object, e As EventArgs) Handles PictureBox3.Click
+        Me.WindowState = FormWindowState.Minimized
     End Sub
 
     Private Sub btnMaximize_Click(sender As Object, e As EventArgs) Handles btnMaximize.Click
@@ -32,7 +35,7 @@ Public Class ReportCompleteByDateRange
         SendMessage(Me.Handle, &H112&, &HF012&, 0)
     End Sub
 
-    Private Sub ReportCompleteByDateRange_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+    Private Sub ReportWONotComplete_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Try
             conection.conectar()
             Dim cmd As New SqlCommand("select numberClient , companyName as 'Name' from clients ", conection.conn)
@@ -66,11 +69,11 @@ Public Class ReportCompleteByDateRange
             Dim array() = cmbClients.SelectedItem.ToString().Split("    ")
             Dim idClient As String = array(0)
             If idClient <> "" Or idClient IsNot Nothing Then
-                Dim reportTS As New CompleteByDateRange
+                Dim reportTS As New WONotComplete
                 reportTS.SetParameterValue("@clientnum", idClient)
                 reportTS.SetParameterValue("@jobNum", If(chbAllJobs.Checked, 0, cmbJobs.SelectedItem))
                 reportTS.SetParameterValue("@all", If(chbAllJobs.Checked, True, False))
-                crvCompleteByDateRange.ReportSource = reportTS
+                crvWONotComplete.ReportSource = reportTS
             Else
                 MsgBox("Please select a Client.")
             End If
@@ -79,7 +82,6 @@ Public Class ReportCompleteByDateRange
         End Try
 
     End Sub
-
     Private Sub chbAllJobs_CheckedChanged(sender As Object, e As EventArgs) Handles chbAllJobs.CheckedChanged
         If chbAllJobs.Checked Then
             cmbJobs.Enabled = False
@@ -107,9 +109,5 @@ Public Class ReportCompleteByDateRange
         Finally
             conection.desconectar()
         End Try
-    End Sub
-
-    Private Sub PictureBox3_Click(sender As Object, e As EventArgs) Handles PictureBox3.Click
-        Me.WindowState = FormWindowState.Minimized
     End Sub
 End Class
