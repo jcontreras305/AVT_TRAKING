@@ -29,7 +29,6 @@ Partial Class ReportYearFinalHours
         Me.Panel2 = New System.Windows.Forms.Panel()
         Me.Button1 = New System.Windows.Forms.Button()
         Me.Label1 = New System.Windows.Forms.Label()
-        Me.dtpDate = New System.Windows.Forms.DateTimePicker()
         Me.PictureBox4 = New System.Windows.Forms.PictureBox()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.TitleBar = New System.Windows.Forms.Panel()
@@ -38,6 +37,7 @@ Partial Class ReportYearFinalHours
         Me.PictureBox3 = New System.Windows.Forms.PictureBox()
         Me.btnRestore = New System.Windows.Forms.PictureBox()
         Me.btnMaximize = New System.Windows.Forms.PictureBox()
+        Me.cmbYear = New System.Windows.Forms.ComboBox()
         Me.TableLayoutPanel1.SuspendLayout()
         Me.Panel3.SuspendLayout()
         Me.Panel2.SuspendLayout()
@@ -90,9 +90,9 @@ Partial Class ReportYearFinalHours
         'Panel2
         '
         Me.Panel2.BackColor = System.Drawing.Color.FromArgb(CType(CType(83, Byte), Integer), CType(CType(93, Byte), Integer), CType(CType(102, Byte), Integer))
+        Me.Panel2.Controls.Add(Me.cmbYear)
         Me.Panel2.Controls.Add(Me.Button1)
         Me.Panel2.Controls.Add(Me.Label1)
-        Me.Panel2.Controls.Add(Me.dtpDate)
         Me.Panel2.Controls.Add(Me.PictureBox4)
         Me.Panel2.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel2.Location = New System.Drawing.Point(3, 43)
@@ -127,16 +127,6 @@ Partial Class ReportYearFinalHours
         Me.Label1.Size = New System.Drawing.Size(42, 14)
         Me.Label1.TabIndex = 12
         Me.Label1.Text = "Date:"
-        '
-        'dtpDate
-        '
-        Me.dtpDate.CustomFormat = "yyyy"
-        Me.dtpDate.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.dtpDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom
-        Me.dtpDate.Location = New System.Drawing.Point(57, 3)
-        Me.dtpDate.Name = "dtpDate"
-        Me.dtpDate.Size = New System.Drawing.Size(51, 21)
-        Me.dtpDate.TabIndex = 10
         '
         'PictureBox4
         '
@@ -222,6 +212,14 @@ Partial Class ReportYearFinalHours
         Me.btnMaximize.TabIndex = 7
         Me.btnMaximize.TabStop = False
         '
+        'cmbYear
+        '
+        Me.cmbYear.FormattingEnabled = True
+        Me.cmbYear.Location = New System.Drawing.Point(43, 1)
+        Me.cmbYear.Name = "cmbYear"
+        Me.cmbYear.Size = New System.Drawing.Size(87, 21)
+        Me.cmbYear.TabIndex = 15
+        '
         'ReportYearFinalHours
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -254,7 +252,6 @@ Partial Class ReportYearFinalHours
     Friend WithEvents Panel2 As Panel
     Friend WithEvents Button1 As Button
     Friend WithEvents Label1 As Label
-    Friend WithEvents dtpDate As DateTimePicker
     Friend WithEvents PictureBox4 As PictureBox
     Friend WithEvents Panel1 As Panel
     Friend WithEvents TitleBar As Panel
@@ -263,4 +260,5 @@ Partial Class ReportYearFinalHours
     Friend WithEvents PictureBox3 As PictureBox
     Friend WithEvents btnRestore As PictureBox
     Friend WithEvents btnMaximize As PictureBox
+    Friend WithEvents cmbYear As ComboBox
 End Class
