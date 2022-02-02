@@ -411,6 +411,12 @@
     <Compile Include="Reports\ReportJNumber.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Reports\ReportTimeSheetsPO.Designer.vb">
+      <DependentUpon>ReportTimeSheetsPO.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\ReportTimeSheetsPO.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Reports\ReportWONotComplete.Designer.vb">
       <DependentUpon>ReportWONotComplete.vb</DependentUpon>
     </Compile>
@@ -464,6 +470,12 @@
     </Compile>
     <Compile Include="Reports\ReportYearFinalHours.vb">
       <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Reports\TimeSheetPO.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TimeSheetPO.rpt</DependentUpon>
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="Reports\WONotComplete.vb">
       <AutoGen>True</AutoGen>
@@ -646,6 +658,9 @@
     <EmbeddedResource Include="Reports\ReportJNumber.resx">
       <DependentUpon>ReportJNumber.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reports\ReportTimeSheetsPO.resx">
+      <DependentUpon>ReportTimeSheetsPO.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reports\ReportWONotComplete.resx">
       <DependentUpon>ReportWONotComplete.vb</DependentUpon>
     </EmbeddedResource>
@@ -674,6 +689,10 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\ReportScaffoldEstimate.resx">
       <DependentUpon>ReportScaffoldEstimate.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\TimeSheetPO.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>TimeSheetPO.vb</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\WONotComplete.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>

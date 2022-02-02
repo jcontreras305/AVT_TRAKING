@@ -93,4 +93,9 @@ Public Class ReportsMenu
         Dim tse As New ReportWONotComplete
         tse.ShowDialog()
     End Sub
+
+    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
+        Dim tse As New ReportTimeSheetsPO
+        tse.ShowDialog()
+    End Sub
 End Class

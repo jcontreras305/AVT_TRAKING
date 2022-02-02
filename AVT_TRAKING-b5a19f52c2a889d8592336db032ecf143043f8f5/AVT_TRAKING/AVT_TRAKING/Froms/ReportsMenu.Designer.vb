@@ -184,7 +184,7 @@ Partial Class ReportsMenu
         Me.Button2.Name = "Button2"
         Me.Button2.Size = New System.Drawing.Size(200, 42)
         Me.Button2.TabIndex = 4
-        Me.Button2.Text = "Scaffold Estimate"
+        Me.Button2.Text = "Time Sheets PO"
         Me.Button2.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         Me.Button2.UseVisualStyleBackColor = True
         '
@@ -252,7 +252,7 @@ Partial Class ReportsMenu
         Me.btnTimeSheet.Name = "btnTimeSheet"
         Me.btnTimeSheet.Size = New System.Drawing.Size(200, 42)
         Me.btnTimeSheet.TabIndex = 0
-        Me.btnTimeSheet.Text = "Time Sheet"
+        Me.btnTimeSheet.Text = "Time Sheets"
         Me.btnTimeSheet.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         Me.btnTimeSheet.UseVisualStyleBackColor = True
         '

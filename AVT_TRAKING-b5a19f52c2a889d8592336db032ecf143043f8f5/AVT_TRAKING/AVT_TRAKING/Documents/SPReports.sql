@@ -153,6 +153,56 @@ end
 go
 
 --##############################################################################################
+--################## SP REPORT TIME SHEETS PO ##################################################
+--##############################################################################################
+--CREATE proc [dbo].[select_Time_Sheet_PO]
+
+ALTER proc [dbo].[select_Time_Sheet_PO]
+	@IntialDate date,
+	@FinalDate date
+as 
+begin
+	select  
+		
+		t1.idPO,
+		t1.jobNo,
+		t1.idWO,
+		SUM(t1.hoursST) AS 'hoursST',
+		SUM(t1.hoursOT)AS 'hoursOT',
+		t1.Code,t1.Shift,
+		t1.Employee,t1.[Emp: Number],t1.class
+		from (
+			select distinct
+			
+			po.idPO,
+			jb.jobNo,
+			wo.idWO,
+			hw.schedule as 'Shift',
+			SUBSTRING( wc.name,1,iif(CHARINDEX('-',wc.name)=0, len(wc.name) ,(CHARINDEX('-',wc.name)-1))) as 'Code',
+			(select iif(SUM(hw1.hoursST)is null,0,SUM(hw1.hoursST)) from hoursWorked as hw1 inner join workCode as wc1 on wc1.idWorkCode = hw.idWorkCode inner join task as tk1 on tk1.idAux = hw1.idAux inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO inner join projectOrder as po1 on po1.idPO = wo1.idPO and wo1.jobNo = po1.jobNo inner join job as jb1 on jb1.jobNo = po1.jobNo where hw1.dateWorked = hw.dateWorked and em.idEmployee = hw1.idEmployee and jb.jobNo = jb1.jobNo and po1.idPO = po.idPO and not wc1.name like '%6.4%') as 'hoursST',
+			(select iif(SUM(hw1.hoursOT)is null,0,SUM(hw1.hoursOT)) from hoursWorked as hw1 inner join workCode as wc1 on wc1.idWorkCode = hw.idWorkCode inner join task as tk1 on tk1.idAux = hw1.idAux inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO inner join projectOrder as po1 on po1.idPO = wo1.idPO and wo1.jobNo = po1.jobNo inner join job as jb1 on jb1.jobNo = po1.jobNo where hw1.dateWorked = hw.dateWorked and em.idEmployee = hw1.idEmployee and jb.jobNo = jb1.jobNo and po1.idPO = po.idPO and not wc1.name like '%6.4%') as 'hoursOT',
+			CONCAT(em.lastName,' ',em.firstName,' ',em.middleName) as 'Employee', 
+			em.numberEmploye as 'Emp: Number' ,
+			em.typeEmployee as 'class'
+			from hoursWorked as hw 
+			inner join employees as em on hw.idEmployee = em.idEmployee
+			inner join workCode as wc on wc.idWorkCode = hw.idWorkCode
+			inner join task as tk on tk.idAux = hw.idAux 
+			inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO 
+			inner join projectOrder as po on po.idPO = wo.idPO and wo.jobNo = po.jobNo 
+			inner join job as jb on jb.jobNo = po.jobNo
+			where hw.dateWorked between @IntialDate   and @FinalDate and (hw.hoursST > 0 or hw.hoursOT>0 or hw.hours3>0) and not wc.name like '%vacation%' --and em.numberEmploye = 16874
+		
+		) as T1
+		group by t1.idPO,t1.jobNo,t1.idWO,t1.hoursST,t1.hoursOT,t1.Code,t1.Shift,
+		t1.Employee,t1.[Emp: Number],t1.class
+		order by T1.[Emp: Number]
+
+END
+
+go
+
+--##############################################################################################
 --################## SP REPORT REPORTE BY JOB NUMBER ###########################################
 --##############################################################################################
 --CREATE proc [dbo].[select_TimeSheet_Report]
