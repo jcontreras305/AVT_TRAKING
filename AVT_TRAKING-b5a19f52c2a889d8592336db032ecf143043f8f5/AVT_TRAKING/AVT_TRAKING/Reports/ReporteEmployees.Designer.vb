@@ -40,6 +40,7 @@ Partial Class ReporteEmployees
         Me.PictureBox3 = New System.Windows.Forms.PictureBox()
         Me.btnRestore = New System.Windows.Forms.PictureBox()
         Me.btnMaximize = New System.Windows.Forms.PictureBox()
+        Me.cmbClient = New System.Windows.Forms.ComboBox()
         Me.Panel1.SuspendLayout()
         Me.TableLayoutPanel1.SuspendLayout()
         Me.Panel4.SuspendLayout()
@@ -101,6 +102,7 @@ Partial Class ReporteEmployees
         '
         'Panel3
         '
+        Me.Panel3.Controls.Add(Me.cmbClient)
         Me.Panel3.Controls.Add(Me.Button1)
         Me.Panel3.Controls.Add(Me.PictureBox4)
         Me.Panel3.Controls.Add(Me.Label2)
@@ -122,7 +124,7 @@ Partial Class ReporteEmployees
         Me.Button1.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.Button1.Image = Global.AVT_TRAKING.My.Resources.Resources.reportshow
         Me.Button1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.Button1.Location = New System.Drawing.Point(232, 12)
+        Me.Button1.Location = New System.Drawing.Point(377, 3)
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(83, 33)
         Me.Button1.TabIndex = 8
@@ -145,7 +147,7 @@ Partial Class ReporteEmployees
         Me.Label2.AutoSize = True
         Me.Label2.Font = New System.Drawing.Font("Verdana", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label2.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.Label2.Location = New System.Drawing.Point(22, 48)
+        Me.Label2.Location = New System.Drawing.Point(9, 39)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(70, 14)
         Me.Label2.TabIndex = 3
@@ -156,7 +158,7 @@ Partial Class ReporteEmployees
         Me.Label1.AutoSize = True
         Me.Label1.Font = New System.Drawing.Font("Verdana", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label1.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.Label1.Location = New System.Drawing.Point(22, 12)
+        Me.Label1.Location = New System.Drawing.Point(9, 3)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(76, 14)
         Me.Label1.TabIndex = 2
@@ -167,7 +169,7 @@ Partial Class ReporteEmployees
         Me.dtpFinalDate.CustomFormat = "yyyy/MM/dd"
         Me.dtpFinalDate.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.dtpFinalDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom
-        Me.dtpFinalDate.Location = New System.Drawing.Point(104, 43)
+        Me.dtpFinalDate.Location = New System.Drawing.Point(91, 34)
         Me.dtpFinalDate.Name = "dtpFinalDate"
         Me.dtpFinalDate.Size = New System.Drawing.Size(99, 21)
         Me.dtpFinalDate.TabIndex = 1
@@ -177,7 +179,7 @@ Partial Class ReporteEmployees
         Me.dtpInitialDate.CustomFormat = "yyyy/MM/dd"
         Me.dtpInitialDate.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.dtpInitialDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom
-        Me.dtpInitialDate.Location = New System.Drawing.Point(104, 12)
+        Me.dtpInitialDate.Location = New System.Drawing.Point(91, 3)
         Me.dtpInitialDate.Name = "dtpInitialDate"
         Me.dtpInitialDate.Size = New System.Drawing.Size(99, 21)
         Me.dtpInitialDate.TabIndex = 0
@@ -246,6 +248,14 @@ Partial Class ReporteEmployees
         Me.btnMaximize.TabIndex = 4
         Me.btnMaximize.TabStop = False
         '
+        'cmbClient
+        '
+        Me.cmbClient.FormattingEnabled = True
+        Me.cmbClient.Location = New System.Drawing.Point(211, 2)
+        Me.cmbClient.Name = "cmbClient"
+        Me.cmbClient.Size = New System.Drawing.Size(121, 21)
+        Me.cmbClient.TabIndex = 9
+        '
         'ReporteEmployees
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -290,4 +300,5 @@ Partial Class ReporteEmployees
     Friend WithEvents PictureBox1 As PictureBox
     Friend WithEvents Label3 As Label
     Friend WithEvents Button1 As Button
+    Friend WithEvents cmbClient As ComboBox
 End Class
