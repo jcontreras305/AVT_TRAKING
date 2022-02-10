@@ -203,12 +203,13 @@ END
 go
 
 --##############################################################################################
---################## SP REPORT REPORTE BY JOB NUMBER ###########################################
+--################## SP REPORT REPORTE TIME SHEET ###########################################
 --##############################################################################################
 --CREATE proc [dbo].[select_TimeSheet_Report]
 ALTER proc [dbo].[select_TimeSheet_Report]
 	@IntialDate date,
-	@FinalDate date
+	@FinalDate date,
+	@numclient int
 as 
 begin
 	if @IntialDate is not null and @FinalDate is not null
@@ -242,13 +243,15 @@ begin
 			inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO 
 			inner join projectOrder as po on po.idPO = wo.idPO and wo.jobNo = po.jobNo 
 			inner join job as jb on jb.jobNo = po.jobNo
-			where hw.dateWorked between @IntialDate and @FinalDate and (hw.hoursST > 0 or hw.hoursOT>0 or hw.hours3>0) --and em.numberEmploye = 16874
+			inner join clients as cl on cl.idClient=jb.idClient
+			where hw.dateWorked between @IntialDate and @FinalDate and (hw.hoursST > 0 or hw.hoursOT>0 or hw.hours3>0) and cl.numberClient=@numclient--and em.numberEmploye = 16874
 		) as T1
 		group by T1.jobNo,t1.idPO,t1.Task,t1.equipament,t1.description,t1.hoursST,t1.hoursOT,t1.hours3,t1.Code,t1.Shift,t1.expCode,t1.Complete,
 		t1.hrEst,t1.Employee,t1.[Emp: Number],t1.class
 		order by t1.Task,t1.[Emp: Number]
 end
 end
+
 go
 
 --##############################################################################################
@@ -323,7 +326,7 @@ end
 go
 
 --##############################################################################################
---################## SP REPORT ###################################################
+--################## SP REPORT BY JOB NUMBER ###################################################
 --##############################################################################################
 --CREATE proc [dbo].[Sp_By_JobNumber]
 ALTER proc [dbo].[Sp_By_JobNumber]
