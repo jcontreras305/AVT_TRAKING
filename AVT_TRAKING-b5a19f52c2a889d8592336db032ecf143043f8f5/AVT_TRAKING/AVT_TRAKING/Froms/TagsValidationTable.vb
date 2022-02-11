@@ -1,6 +1,7 @@
 ﻿Imports Microsoft.Office.Interop.Excel
 Imports System.Runtime.InteropServices
 Public Class TagsValidationTable
+    Public IdCliente As String
     Dim mtdScaffold As New MetodosScaffold
     Dim tblClassification As New Data.DataTable
     Dim tblTags As New Data.DataTable
@@ -22,7 +23,7 @@ Public Class TagsValidationTable
         btnSave.Enabled = False
         mtdScaffold.llenarAreas(tblAreas)
         mtdScaffold.llenarJobCat(tblJobCat)
-        mtdScaffold.llenarScaffold(tblTags)
+        mtdScaffold.llenarScaffold(tblTags, IdCliente)
         mtdScaffold.llenarTableWO(tblWO)
         mtdScaffold.llenarSubJobs(tblSubJob)
         mtdScaffold.llenarRental(tblType)
@@ -165,7 +166,7 @@ Public Class TagsValidationTable
                     cmbDatos.Enabled = True
                     txtFecha.Enabled = False
                 Case tblTagsScaffold.Columns("WorkNum").Index
-                    mtdScaffold.llenarComboWO(cmbDatos)
+                    mtdScaffold.llenarComboWO(cmbDatos, IdCliente)
                     cmbDatos.Enabled = True
                     txtFecha.Enabled = False
                 Case tblTagsScaffold.Columns("SubJob").Index

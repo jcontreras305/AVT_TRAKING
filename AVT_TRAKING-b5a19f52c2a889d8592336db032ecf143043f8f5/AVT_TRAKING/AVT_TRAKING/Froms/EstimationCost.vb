@@ -91,14 +91,18 @@ Class EstimationCost
             If e.ColumnIndex = tblScafEstCost.Columns("SCEC").Index Then
                 For Each cell As DataGridViewCell In tblScafEstCost.Rows(e.RowIndex).Cells
                     If cell.Value Is DBNull.Value Then
-                        If (cell.ColumnIndex > 1) Then
+                        If (cell.ColumnIndex > 1) And cell.ColumnIndex <> 30 Then
                             cell.Value = "0.00"
+                        ElseIf (cell.ColumnIndex = 30) Then
+                            cell.Value = 0
                         End If
                     End If
                 Next
             ElseIf Not (e.ColumnIndex = tblScafEstCost.Columns("SCEC").Index) Then
-                Dim NewValue = Format(CDec((tblScafEstCost.Rows(e.RowIndex).Cells(e.ColumnIndex).Value)), "##,##0.00")
-                tblScafEstCost.Rows(e.RowIndex).Cells(e.ColumnIndex).Value = NewValue
+                If Not e.ColumnIndex = 30 Then
+                    Dim NewValue = Format(CDec((tblScafEstCost.Rows(e.RowIndex).Cells(e.ColumnIndex).Value)), "##,##0.00")
+                    tblScafEstCost.Rows(e.RowIndex).Cells(e.ColumnIndex).Value = NewValue
+                End If
             End If
         Catch ex As Exception
 

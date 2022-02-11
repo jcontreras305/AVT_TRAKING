@@ -30,8 +30,10 @@ Partial Class ReportScaffoldEstimate
         Me.btnRestore = New System.Windows.Forms.PictureBox()
         Me.btnMaximize = New System.Windows.Forms.PictureBox()
         Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.chbAllUnit = New System.Windows.Forms.CheckBox()
+        Me.Label1 = New System.Windows.Forms.Label()
         Me.btnReport = New System.Windows.Forms.Button()
-        Me.cmbEstimations = New System.Windows.Forms.ComboBox()
+        Me.cmbUnit = New System.Windows.Forms.ComboBox()
         Me.PictureBox4 = New System.Windows.Forms.PictureBox()
         Me.crvReportScaffoldEstimate = New CrystalDecisions.Windows.Forms.CrystalReportViewer()
         Me.TableLayoutPanel1.SuspendLayout()
@@ -56,7 +58,7 @@ Partial Class ReportScaffoldEstimate
         Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
         Me.TableLayoutPanel1.RowCount = 3
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40.0!))
-        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 70.0!))
+        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 62.0!))
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
         Me.TableLayoutPanel1.Size = New System.Drawing.Size(686, 490)
         Me.TableLayoutPanel1.TabIndex = 0
@@ -128,14 +130,37 @@ Partial Class ReportScaffoldEstimate
         'Panel1
         '
         Me.Panel1.BackColor = System.Drawing.Color.FromArgb(CType(CType(83, Byte), Integer), CType(CType(93, Byte), Integer), CType(CType(102, Byte), Integer))
+        Me.Panel1.Controls.Add(Me.chbAllUnit)
+        Me.Panel1.Controls.Add(Me.Label1)
         Me.Panel1.Controls.Add(Me.btnReport)
-        Me.Panel1.Controls.Add(Me.cmbEstimations)
+        Me.Panel1.Controls.Add(Me.cmbUnit)
         Me.Panel1.Controls.Add(Me.PictureBox4)
         Me.Panel1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel1.Location = New System.Drawing.Point(3, 43)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(680, 64)
+        Me.Panel1.Size = New System.Drawing.Size(680, 56)
         Me.Panel1.TabIndex = 4
+        '
+        'chbAllUnit
+        '
+        Me.chbAllUnit.AutoSize = True
+        Me.chbAllUnit.ForeColor = System.Drawing.SystemColors.HighlightText
+        Me.chbAllUnit.Location = New System.Drawing.Point(185, 15)
+        Me.chbAllUnit.Name = "chbAllUnit"
+        Me.chbAllUnit.Size = New System.Drawing.Size(40, 17)
+        Me.chbAllUnit.TabIndex = 14
+        Me.chbAllUnit.Text = "All "
+        Me.chbAllUnit.UseVisualStyleBackColor = True
+        '
+        'Label1
+        '
+        Me.Label1.AutoSize = True
+        Me.Label1.ForeColor = System.Drawing.SystemColors.HighlightText
+        Me.Label1.Location = New System.Drawing.Point(9, 14)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(26, 13)
+        Me.Label1.TabIndex = 13
+        Me.Label1.Text = "Unit"
         '
         'btnReport
         '
@@ -146,7 +171,7 @@ Partial Class ReportScaffoldEstimate
         Me.btnReport.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.btnReport.Image = Global.AVT_TRAKING.My.Resources.Resources.reportshow
         Me.btnReport.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnReport.Location = New System.Drawing.Point(194, 10)
+        Me.btnReport.Location = New System.Drawing.Point(262, 6)
         Me.btnReport.Name = "btnReport"
         Me.btnReport.Size = New System.Drawing.Size(83, 33)
         Me.btnReport.TabIndex = 12
@@ -154,13 +179,13 @@ Partial Class ReportScaffoldEstimate
         Me.btnReport.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         Me.btnReport.UseVisualStyleBackColor = True
         '
-        'cmbEstimations
+        'cmbUnit
         '
-        Me.cmbEstimations.FormattingEnabled = True
-        Me.cmbEstimations.Location = New System.Drawing.Point(26, 10)
-        Me.cmbEstimations.Name = "cmbEstimations"
-        Me.cmbEstimations.Size = New System.Drawing.Size(132, 21)
-        Me.cmbEstimations.TabIndex = 11
+        Me.cmbUnit.FormattingEnabled = True
+        Me.cmbUnit.Location = New System.Drawing.Point(46, 11)
+        Me.cmbUnit.Name = "cmbUnit"
+        Me.cmbUnit.Size = New System.Drawing.Size(132, 21)
+        Me.cmbUnit.TabIndex = 11
         '
         'PictureBox4
         '
@@ -178,9 +203,9 @@ Partial Class ReportScaffoldEstimate
         Me.crvReportScaffoldEstimate.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.crvReportScaffoldEstimate.Cursor = System.Windows.Forms.Cursors.Default
         Me.crvReportScaffoldEstimate.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.crvReportScaffoldEstimate.Location = New System.Drawing.Point(3, 113)
+        Me.crvReportScaffoldEstimate.Location = New System.Drawing.Point(3, 105)
         Me.crvReportScaffoldEstimate.Name = "crvReportScaffoldEstimate"
-        Me.crvReportScaffoldEstimate.Size = New System.Drawing.Size(680, 374)
+        Me.crvReportScaffoldEstimate.Size = New System.Drawing.Size(680, 382)
         Me.crvReportScaffoldEstimate.TabIndex = 5
         '
         'ReportScaffoldEstimate
@@ -200,6 +225,7 @@ Partial Class ReportScaffoldEstimate
         CType(Me.btnRestore, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.btnMaximize, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel1.ResumeLayout(False)
+        Me.Panel1.PerformLayout()
         CType(Me.PictureBox4, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
@@ -215,6 +241,8 @@ Partial Class ReportScaffoldEstimate
     Friend WithEvents Panel1 As Panel
     Friend WithEvents crvReportScaffoldEstimate As CrystalDecisions.Windows.Forms.CrystalReportViewer
     Friend WithEvents PictureBox4 As PictureBox
-    Friend WithEvents cmbEstimations As ComboBox
+    Friend WithEvents cmbUnit As ComboBox
     Friend WithEvents btnReport As Button
+    Friend WithEvents chbAllUnit As CheckBox
+    Friend WithEvents Label1 As Label
 End Class

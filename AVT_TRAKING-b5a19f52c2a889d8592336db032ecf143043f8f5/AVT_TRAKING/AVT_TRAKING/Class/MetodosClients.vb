@@ -8,14 +8,26 @@ Public Class MetodosClients
     Public da As SqlDataAdapter
     Public comando As SqlCommand
 
-    Public Sub ConsultaClients(ByVal sql As String)
-        conectar()
-        ds.Tables.Clear()
-        da = New SqlDataAdapter(sql, conn)
-        cmb = New SqlCommandBuilder(da)
-        da.Fill(ds, "clients")
-    End Sub
-
+    Public Function ConsultaClients() As Data.DataTable
+        Try
+            conectar()
+            Dim tbl As New Data.DataTable
+            tbl.Columns.Add("IdClient")
+            tbl.Columns.Add("numberClient")
+            tbl.Columns.Add("ClientName")
+            Dim cmd As New SqlCommand("select idClient,numberClient,companyName from clients", conn)
+            Dim dr As SqlDataReader = cmd.ExecuteReader()
+            While dr.Read()
+                tbl.Rows.Add(dr("idClient"), dr("numberClient"), dr("companyName"))
+            End While
+            dr.Close()
+            Return tbl
+        Catch ex As Exception
+            Return Nothing
+        Finally
+            desconectar()
+        End Try
+    End Function
     Public Function IdMasAlto()
         Try
             Dim idMaxIdCL As Integer = 0

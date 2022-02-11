@@ -1,6 +1,7 @@
 ﻿Imports Microsoft.Office.Interop.Excel
 Imports System.Runtime.InteropServices
 Public Class ModificationValidationTable
+    Public IdCliente As String
     Dim mtdScaffold As New MetodosScaffold
     Dim tblMod As New Data.DataTable
     Dim tblTags As New Data.DataTable
@@ -14,7 +15,7 @@ Public Class ModificationValidationTable
     Public fechaStart As Date
     Private flagClick As Boolean
     Private Sub ModificationValidationTable_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        mtdScaffold.llenarModification(tblMod)
+        mtdScaffold.llenarModification(tblMod, IdCliente)
         mtdScaffold.llenarTags(tblTags)
         mtdScaffold.llenarRental(tblType)
         mtdScaffold.llenarProduct(tblProducts)
@@ -251,7 +252,7 @@ Public Class ModificationValidationTable
                         tblModificationScaffold.Rows.Add("", sheet.Cells(contMD, 1).Text, sheet.Cells(contMD, 2).Text, sheet.Cells(contMD, 3).Text, sheet.Cells(contMD, 4).Text, sheet.Cells(contMD, 5).Text, sheet.Cells(contMD, 6).Text, sheet.Cells(contMD, 7).Text, sheet.Cells(contMD, 13).Text, If(sheet.Cells(contMD, 14).Text = "yes", True, False), If(sheet.Cells(contMD, 15).Text = "yes", True, False), If(sheet.Cells(contMD, 16).Text = "yes", True, False), If(sheet.Cells(contMD, 17).Text = "yes", True, False), If(sheet.Cells(contMD, 18).Text = "yes", True, False), If(sheet.Cells(contMD, 19).Text = "yes", True, False), If(sheet.Cells(contMD, 20).Text = "yes", True, False), sheet.Cells(contMD, 21).Text, sheet.Cells(contMD, 22).Text, sheet.Cells(contMD, 23).Text, sheet.Cells(contMD, 24).Text, sheet.Cells(contMD, 25).Text, sheet.Cells(contMD, 26).Text, sheet.Cells(contMD, 27).Text, sheet.Cells(contMD, 28).Text, sheet.Cells(contMD, 29).Text, sheet.Cells(contMD, 30).Text, sheet.Cells(contMD, 32).Text)
                         tblModificationScaffold.Rows(tblModificationScaffold.Rows.Count() - 1).HeaderCell.Value = contMD.ToString()
                     End If
-                    End If
+                End If
                 If contMD + 1 >= sprFirstRow.Value Then
                     If sheet.Cells(contMD + 1, 1).Text <> "" Then
                         tblModificationScaffold.Rows.Add("", sheet.Cells(contMD + 1, 1).Text, sheet.Cells(contMD + 1, 2).Text, sheet.Cells(contMD + 1, 3).Text, sheet.Cells(contMD + 1, 4).Text, sheet.Cells(contMD + 1, 5).Text, sheet.Cells(contMD + 1, 6).Text, sheet.Cells(contMD + 1, 7).Text, sheet.Cells(contMD + 1, 13).Text, If(sheet.Cells(contMD + 1, 14).Text = "yes", True, False), If(sheet.Cells(contMD + 1, 15).Text = "yes", True, False), If(sheet.Cells(contMD + 1, 16).Text = "yes", True, False), If(sheet.Cells(contMD + 1, 17).Text = "yes", True, False), If(sheet.Cells(contMD + 1, 18).Text = "yes", True, False), If(sheet.Cells(contMD + 1, 19).Text = "yes", True, False), If(sheet.Cells(contMD + 1, 20).Text = "yes", True, False), sheet.Cells(contMD + 1, 21).Text, sheet.Cells(contMD + 1, 22).Text, sheet.Cells(contMD + 1, 23).Text, sheet.Cells(contMD + 1, 24).Text, sheet.Cells(contMD + 1, 25).Text, sheet.Cells(contMD + 1, 26).Text, sheet.Cells(contMD + 1, 27).Text, sheet.Cells(contMD + 1, 28).Text, sheet.Cells(contMD + 1, 29).Text, sheet.Cells(contMD + 1, 30).Text, sheet.Cells(contMD + 1, 32).Text)

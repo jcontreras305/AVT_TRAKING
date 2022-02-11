@@ -2,14 +2,23 @@
 
 Public Class ReportScaffoldEstimate
     Public mtdEstimation As EstMeters
+    Public Unit As String
+    Public EstMeters, EstNumber, idClient As String
+    Public UnicReport As Boolean
     Private Sub ReportScaffoldEstimate_Load(sender As Object, e As EventArgs) Handles Me.Load
-        mtdEstimation.selectEstimation(cmbEstimations)
-        If mtdEstimation.EstNumber IsNot "" Then
-            For Each item As Object In cmbEstimations.Items
-                If item.ToString() = mtdEstimation.EstNumber Then
-                    cmbEstimations.SelectedItem = item
-                End If
-            Next
+        If UnicReport Then 'Es para mostrar solo un reporte de la ventana de ScfScaffold de lo contrario se mostraran los filtros 
+            Label1.Visible = False
+            cmbUnit.Visible = False
+            chbAllUnit.Visible = False
+        Else
+            mtdEstimation.selectEstimationProyect(cmbUnit)
+            If Unit IsNot "" Then
+                For Each item As Object In cmbUnit.Items
+                    If item.ToString() = Unit Then
+                        cmbUnit.SelectedItem = item
+                    End If
+                Next
+            End If
         End If
     End Sub
     Private Sub PictureBox3_Click(sender As Object, e As EventArgs) Handles PictureBox3.Click
@@ -44,18 +53,49 @@ Public Class ReportScaffoldEstimate
     End Sub
 
     Private Sub btnReport_Click(sender As Object, e As EventArgs) Handles btnReport.Click
-        Dim estimacion As String
-        If cmbEstimations.SelectedItem Is Nothing Then
-            estimacion = "%"
+        Try
+            Dim proyect As String
+            If UnicReport Then
+                Dim array() As String = Unit.ToString.Split(" ")
+                proyect = array(0)
+                Dim reportSE As New ScaffoldEstimate
+                reportSE.SetParameterValue("@ccnum", proyect)
+                reportSE.SetParameterValue("@EstNumber", EstNumber)
+                reportSE.SetParameterValue("@IdClient", idClient)
+                reportSE.SetParameterValue("@all", False)
+                crvReportScaffoldEstimate.ReportSource = reportSE
+            Else
+                If cmbUnit.SelectedItem IsNot Nothing Then
+                    Dim array() As String = cmbUnit.SelectedItem.ToString.Split(" ")
+                    proyect = array(0)
+                Else
+                    proyect = ""
+                End If
+                If chbAllUnit.Checked Or proyect <> "" Then
+                    Dim reportSE As New ScaffoldEstimate
+                    reportSE.SetParameterValue("@ccnum", proyect)
+                    reportSE.SetParameterValue("@EstNumber", EstNumber)
+                    reportSE.SetParameterValue("@IdClient", idClient)
+                    reportSE.SetParameterValue("@all", If(chbAllUnit.Checked, True, False))
+                    crvReportScaffoldEstimate.ReportSource = reportSE
+                Else
+                    MsgBox("Please select a Estimation.")
+                End If
+            End If
+
+
+        Catch ex As Exception
+
+        End Try
+    End Sub
+
+    Private Sub chbAllUnit_CheckedChanged(sender As Object, e As EventArgs) Handles chbAllUnit.CheckedChanged
+        If chbAllUnit.Checked Then
+            cmbUnit.Enabled = False
         Else
-            estimacion = cmbEstimations.SelectedItem.ToString()
-        End If
-        If estimacion IsNot Nothing Then
-            Dim reportSE As New ScaffoldEstimate
-            reportSE.SetParameterValue("@EstNumber", estimacion)
-            crvReportScaffoldEstimate.ReportSource = reportSE
-        Else
-            MsgBox("Please select a Estimation.")
+            cmbUnit.Enabled = True
         End If
     End Sub
+
+
 End Class

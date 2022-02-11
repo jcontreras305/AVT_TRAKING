@@ -671,6 +671,7 @@ Partial Class ProjectsClients
         Me.tblProjectClients.Dock = System.Windows.Forms.DockStyle.Fill
         Me.tblProjectClients.Location = New System.Drawing.Point(0, 0)
         Me.tblProjectClients.Name = "tblProjectClients"
+        Me.tblProjectClients.ReadOnly = True
         Me.tblProjectClients.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
         Me.tblProjectClients.Size = New System.Drawing.Size(813, 408)
         Me.tblProjectClients.TabIndex = 6

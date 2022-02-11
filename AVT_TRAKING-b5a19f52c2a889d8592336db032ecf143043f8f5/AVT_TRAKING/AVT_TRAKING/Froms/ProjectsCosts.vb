@@ -356,7 +356,7 @@ Public Class ProjectsCosts
             pjt.estimateHour = CInt(sprHoursEstimate.Value)
             pjt.status = If(chbComplete.Checked, "1", "0")
             pjt.jobNum = JobNumber
-            pjt.idTask = task = ""
+            pjt.idTask = task
             pjt.idWorkOrder = WorkOrder
             pjt.idAux = lstDatosPO(14)
             idAuxWO = lstDatosPO(15)
@@ -489,11 +489,12 @@ Public Class ProjectsCosts
     End Sub
 
     Public Function validarTask() As Boolean
-        If txtTask.Text.Length >= 3 And txtTask.Text.Length <= 6 Then
+        If txtTask.Text.Length >= 2 And txtTask.Text.Length <= 6 Then
             Dim flagTask As Boolean = True
             For Each row As DataRow In tablasDeTareas.Rows
-                If txtTask.Text = row.ItemArray(3).ToString Then
+                If txtTask.Text = row.ItemArray(3).ToString And txtWokOrder.Text = row.ItemArray(2) And cmbJobNumber.Text = row.ItemArray(0) And txtClientPO.Text = row.ItemArray(1) Then
                     flagTask = False
+                    Exit For
                 End If
             Next
             Return flagTask

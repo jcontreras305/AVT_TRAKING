@@ -4,8 +4,8 @@ Public Class EstimationSC
 
     Dim _list As New List(Of String)
 
-    Dim _controlNum, _idAux, _unit, _location As String
-    Dim _type, _cost, _descks, _groundheigth, _elevation, _IdEstCost, _scfTypeId As Integer
+    Dim _idClient, _ccNum, _idAux, _unit, _location, _idEstnumber, _idEstMeters As String
+    Dim _descks, _groundheigth, _elevation, _IdEstCost, _scfTypeId As Integer
     Dim _daysActive, _width, _heigth, _length As Double
     Dim _M3, _M2, _MA3, _MA2, _ACHT, _DECKS, _TOTALHEIGTH As Double
     Dim _factor As Decimal
@@ -13,12 +13,10 @@ Public Class EstimationSC
     Public Property M3() As Double
         Get
             If _M3 = Nothing Then
-                _M3 = Format(((width * length * (heigth + elevation)) / 35.1467), "##,##0.00")
-                _M3 = If(factor > 0, _M3 + (_M3 * (factor / 100)), _M3)
+                _M3 = Format(((width * length * (heigth + elevation)) / 35.31467), "##,##0.00")
                 Return _M3
             Else
-                _M3 = Format(((width * length * (heigth + elevation)) / 35.1467), "##,##0.00")
-                _M3 = If(factor > 0, _M3 + (_M3 * (factor / 100)), _M3)
+                _M3 = Format(((width * length * (heigth + elevation)) / 35.31467), "##,##0.00")
                 Return _M3
             End If
         End Get
@@ -30,11 +28,9 @@ Public Class EstimationSC
         Get
             If _M2 = Nothing Then
                 _M2 = Format(((width * length) / 10.76391), "##,##0.00")
-                _M2 = If(factor > 0, _M2 + (_M2 * (factor / 100)), _M2)
                 Return _M2
             Else
                 _M2 = Format(((width * length) / 10.76391), "##,##0.00")
-                _M2 = If(factor > 0, _M2 + (_M2 * (factor / 100)), _M2)
                 Return _M2
             End If
         End Get
@@ -46,11 +42,9 @@ Public Class EstimationSC
         Get
             If _MA3 = Nothing Then
                 _MA3 = Format(((width * length * (heigth - elevation)) / 35.31467), "##,##0.00")
-                _MA3 = If(factor > 0, _MA3 + (_MA3 * (factor / 100)), _MA3)
                 Return _MA3
             Else
                 _MA3 = Format(((width * length * (heigth - elevation)) / 35.31467), "##,##0.00")
-                _MA3 = If(factor > 0, _MA3 + (_MA3 * (factor / 100)), _MA3)
                 Return _MA3
             End If
         End Get
@@ -62,9 +56,9 @@ Public Class EstimationSC
         Get
             If _MA2 = Nothing Then
                 _MA2 = Format(((width * length) / 10.76391), "##,##0.00")
-                _MA2 = If(factor > 0, _MA2 + (_MA2 * (factor / 100)), _MA2)
                 Return _MA2
             Else
+                _MA2 = Format(((width * length) / 10.76391), "##,##0.00")
                 Return _MA2
             End If
         End Get
@@ -130,19 +124,29 @@ Public Class EstimationSC
 
     Public Sub Clear()
         _list.Clear()
-        _controlNum = ""
+        _idClient = ""
+        _ccNum = ""
         _idAux = ""
         _unit = ""
         _location = ""
-        _type = -1
-        _cost = -1
+        _idEstnumber = Nothing
+        _idEstMeters = Nothing
         _descks = 0
         _groundheigth = 0
         _elevation = 0
         _daysActive = 0.0
+        _IdEstCost = -1
+        _scfTypeId = -1
         _width = 0.0
         _heigth = 0.0
         _length = 0.0
+        _M3 = 0.0
+        _M2 = 0.0
+        _MA3 = 0.0
+        _MA2 = 0.0
+        _DECKS = 0.0
+        _TOTALHEIGTH = 0.0
+        _factor = 0
     End Sub
     Public Property list() As List(Of String)
         Get
@@ -157,16 +161,28 @@ Public Class EstimationSC
             _list = list
         End Set
     End Property
-    Public Property controlNum() As String
+    Public Property idClient() As String
         Get
-            If _controlNum = Nothing Then
+            If _idClient = Nothing Then
                 Return ""
             Else
-                Return _controlNum
+                Return _idClient
             End If
         End Get
-        Set(ByVal controlNum As String)
-            _controlNum = controlNum
+        Set(ByVal idClient As String)
+            _idClient = idClient
+        End Set
+    End Property
+    Public Property ccnum() As String
+        Get
+            If _ccNum = Nothing Then
+                Return ""
+            Else
+                Return _ccNum
+            End If
+        End Get
+        Set(ByVal ccNum As String)
+            _ccNum = ccNum
         End Set
     End Property
     Public Property idAux() As String
@@ -205,28 +221,33 @@ Public Class EstimationSC
             _location = location
         End Set
     End Property
-    Public Property type() As Integer
+    Public Property idEstnumber() As String
         Get
-            If _type = Nothing Then
-                Return -1
+            If _idEstnumber Is Nothing Then
+                Dim id As Guid = Guid.NewGuid()
+                _idEstnumber = id.ToString()
+                Return _idEstnumber
             Else
-                Return _type
+                Return _idEstnumber
             End If
+
         End Get
-        Set(ByVal type As Integer)
-            _type = type
+        Set(ByVal idEstnumber As String)
+            _idEstnumber = idEstnumber
         End Set
     End Property
-    Public Property cost() As Integer
+    Public Property idEstMeters() As String
         Get
-            If _cost = Nothing Then
-                Return -1
+            If _idEstMeters Is Nothing Then
+                Dim id As Guid = Guid.NewGuid()
+                _idEstMeters = id.ToString()
+                Return _idEstMeters
             Else
-                Return _cost
+                Return _idEstMeters
             End If
         End Get
-        Set(ByVal cost As Integer)
-            _cost = cost
+        Set(ByVal idEstMeters As String)
+            _idEstMeters = idEstMeters
         End Set
     End Property
     Public Property descks() As Integer
@@ -739,6 +760,23 @@ end", conn)
             desconectar()
         End Try
     End Function
+    Public Function llenarComboControlNumber(ByVal cmb As ComboBox) As Boolean
+        Try
+            conectar()
+            Dim cmd As New SqlCommand("select ccnum , unit from scfEstProyect", conn)
+            Dim rd As SqlDataReader = cmd.ExecuteReader
+            cmb.Items.Clear()
+            cmb.Items.Add("")
+            While rd.Read()
+                cmb.Items.Add(CStr(rd("ccnum")) + " " + CStr(rd("unit")))
+            End While
+            Return True
+        Catch ex As Exception
+            Return False
+        Finally
+            desconectar()
+        End Try
+    End Function
     Public Function llenarListTypeScfCost() As List(Of String)
         Try
             conectar()
@@ -758,10 +796,12 @@ end", conn)
             desconectar()
         End Try
     End Function
-    Public Function llenartablaEstimacion(ByVal tabla As DataTable) As Boolean
+    Public Function llenartablaEstimacion(ByVal tabla As DataTable, ByVal idCliente As String) As Boolean
         Try
             conectar()
-            Dim cmd As New SqlCommand("select * from scfEstimation", conn)
+            Dim cmd As New SqlCommand("select scfE.EstNumber,scfE.ccnum,scfE.scfTypeId,scfE.idEstCost,scfE.idAux,scfE.idClient from scfEstimation as scfE 
+inner join EstMeters as estM on scfE.EstNumber = estM.EstNumber" +
+If(idCliente = "", "", " where scfE.idClient = '" + idCliente + "'"), conn)
             tabla.Rows.Clear()
             If cmd.ExecuteNonQuery Then
                 Dim da As New SqlDataAdapter(cmd)
@@ -780,12 +820,21 @@ end", conn)
     Public Function cargarDatosEstimation(ByVal controlNum As String) As Boolean
         Try
             conectar()
-            Dim cmd As New SqlCommand("select top 1 idAux,daysActive,unit,location,width,heigth,length,descks,groundHeigth,elevation,
-                M3,M2,MA3,MA2,ACHT,IdEstCost,scfTypeId from scfEstimation  where EstNumber = '" + controlNum + "'", conn)
+            Dim cmd As New SqlCommand("select ISNULL( idAux,'') as 'idAux',daysActive, 
+	ISNULL((select unit from scfEstProyect where ccnum = sem.ccnum ),'') as 'unit',
+	location,width,heigth,length,descks,groundHeigth,elevation,
+	M3,M2,MA3,MA2,ACHT,IdEstCost,scfTypeId, 
+	ISNULL(sem.ccnum,'')as 'ccnum', 
+	emt.idEstMeters ,
+	sem.EstNumber,
+    ISNULL(sem.idClient,'') as 'idClient'
+	from scfEstimation as sem 
+	left join EstMeters as emt on emt.EstNumber = sem.EstNumber
+	where sem.EstNumber = '" + controlNum + "'", conn)
             Dim rd As SqlDataReader = cmd.ExecuteReader()
             While rd.Read()
-                _controlNum = controlNum
-                _type = If(rd("type") Is DBNull.Value, -1, rd("type"))
+                _idEstnumber = controlNum
+                _scfTypeId = If(rd("scfTypeId") Is DBNull.Value, -1, rd("scfTypeId"))
                 _idAux = rd("idAux")
                 _daysActive = rd("daysActive")
                 _unit = rd("unit")
@@ -802,7 +851,9 @@ end", conn)
                 _MA2 = rd("MA2")
                 _ACHT = rd("ACHT")
                 _IdEstCost = rd("IdEstCost")
-                _scfTypeId = rd("scfTypeId")
+                _ccNum = rd("ccnum")
+                _idEstMeters = rd("idEstMeters")
+                _idClient = rd("idClient")
                 Exit While
             End While
             Return True
@@ -812,9 +863,10 @@ end", conn)
             desconectar()
         End Try
     End Function
-    Public Function selectEstMeters(ByVal controlNum As String) As EstMeters
+    Public Function selectEstMeters(ByVal controlNum As String, ByVal idEstMeters As String) As EstMeters
         Try
-            Dim cmd As New SqlCommand("select top 1 * from EstMeters where EstNumber = '" + controlNum + "'", conn)
+            conectar()
+            Dim cmd As New SqlCommand("select top 1 * from EstMeters where EstNumber = '" + controlNum + "' and idEstMeters = '" + idEstMeters + "' ", conn)
             Dim dr As SqlDataReader = cmd.ExecuteReader()
             Dim estMts As New EstMeters
             While dr.Read()
@@ -860,6 +912,7 @@ end", conn)
                 estMts.M3EBP = CDec(dr("M3EBP"))
                 estMts.M3MBP = CDec(dr("M3MBP"))
                 estMts.M3LBP = CDec(dr("M3LBP"))
+                Exit While
             End While
             dr.Close()
             Return estMts
@@ -876,19 +929,28 @@ end", conn)
             Try
                 conectar()
                 tran = conn.BeginTransaction
-                Dim cmd As New SqlCommand("
-if (select COUNT(*) from scfEstimation  where EstNumber = '" + controlNum + "')=0
+                Dim cmdEstP As New SqlCommand("if (select COUNT(*) from scfEstProyect where ccnum = '" + estM.EstimationSC.ccnum + "')=0
 begin
-	insert into scfEstimation values ('" + controlNum + "'," + If(idAux = "", "NULL", "'" + idAux + "'") + "," + CStr(daysActive) + ",'" + unit + "','" + location + "'," + CStr(width) + "," + CStr(heigth) + "," + CStr(length) + "," + CStr(descks) + "," + CStr(groundheigth) + "," + CStr(elevation) + "," + CStr(M3) + "," + CStr(M2) + "," + CStr(MA3) + "," + CStr(MA2) + "," + CStr(ACHT) + "," + If(CStr(IdEstCost) = "-1", "NULL", CStr(IdEstCost)) + "," + If(CStr(scfTypeId) = "-1", "NULL", CStr(scfTypeId)) + ") 
+	insert into scfEstProyect values ('" + estM.EstimationSC.ccnum + "','" + estM.EstimationSC.unit + "')
 end
-else if (select COUNT(*) from scfEstimation  where EstNumber = '" + controlNum + "')>0
+else if (select COUNT(*) from scfEstProyect where ccnum = '" + estM.EstimationSC.ccnum + "')=1
+begin
+	update scfEstProyect set unit = '" + estM.EstimationSC.unit + "' where ccnum = '" + estM.EstimationSC.ccnum + "'
+end", conn)
+                cmdEstP.Transaction = tran
+                Dim cmd As New SqlCommand("
+if (select COUNT(*) from scfEstimation  where EstNumber = '" + idEstnumber + "')=0
+begin
+	insert into scfEstimation values ('" + idEstnumber + "'," + If(idAux = "", "NULL", "'" + idAux + "'") + "," + CStr(daysActive) + ",'" + location + "'," + CStr(width) + "," + CStr(heigth) + "," + CStr(length) + "," + CStr(descks) + "," + CStr(groundheigth) + "," + CStr(elevation) + "," + CStr(M3) + "," + CStr(M2) + "," + CStr(MA3) + "," + CStr(MA2) + "," + CStr(ACHT) + "," + If(CStr(IdEstCost) = "-1", "NULL", CStr(IdEstCost)) + "," + If(CStr(scfTypeId) = "-1", "NULL", CStr(scfTypeId)) + "," + If(CStr(ccnum) = "", "NULL", CStr(ccnum)) + "," + If(CStr(idClient) = "", "NULL", "'" + CStr(idClient) + "'") + ") 
+end
+else if (select COUNT(*) from scfEstimation  where EstNumber = '" + idEstnumber + "')>0
 begin 
-	update scfEstimation set idAux = " + If(idAux = "", "NULL", "'" + idAux + "'") + ",daysActive = " + CStr(daysActive) + ",unit='" + CStr(unit) + "',location='" + location + "',width=" + CStr(width) + ",heigth=" + CStr(heigth) + ",length=" + CStr(length) + ",descks=" + CStr(descks) + ",groundHeigth=" + CStr(groundheigth) + ",elevation=" + CStr(elevation) + ", M3 = " + CStr(M3) + " , M2=" + CStr(M2) + ", MA3 = " + CStr(MA3) + " , MA2 = " + CStr(MA2) + ",ACHT=" + CStr(ACHT) + ",IdEstCost=" + If(CStr(IdEstCost) = "-1", "NULL", CStr(IdEstCost)) + ",scfTypeId= " + If(CStr(scfTypeId) = "-1", "NULL", CStr(scfTypeId)) + "  where EstNumber = '" + controlNum + "' 
+	update scfEstimation set idAux = " + If(idAux = "", "NULL", "'" + idAux + "'") + ",daysActive = " + CStr(daysActive) + ",location='" + location + "',width=" + CStr(width) + ",heigth=" + CStr(heigth) + ",length=" + CStr(length) + ",descks=" + CStr(descks) + ",groundHeigth=" + CStr(groundheigth) + ",elevation=" + CStr(elevation) + ", M3 = " + CStr(M3) + " , M2=" + CStr(M2) + ", MA3 = " + CStr(MA3) + " , MA2 = " + CStr(MA2) + ",ACHT=" + CStr(ACHT) + ",IdEstCost=" + If(CStr(IdEstCost) = "-1", "NULL", CStr(IdEstCost)) + ",scfTypeId= " + If(CStr(scfTypeId) = "-1", "NULL", CStr(scfTypeId)) + " , ccnum = " + If(CStr(ccnum) = "", "NULL", CStr(ccnum)) + " where EstNumber = '" + idEstnumber + "' 
 end", conn)
                 cmd.Transaction = tran
-                Dim cmd1 As New SqlCommand("if (select count( *) from EstMeters where EstNumber = '" + controlNum + "')=0
+                Dim cmd1 As New SqlCommand("if (select count( *) from EstMeters where EstNumber = '" + idEstnumber + "' and idEstMeters = '" + estM.idEstMeters + "')=0
 begin
-	insert into EstMeters values(NEWID(),'" + controlNum + "'," + CStr(estM.PMANHRS) + "," + CStr(estM.TLABOR) + "," + CStr(estM.LDECKBP) + "," + CStr(estM.LABORBP) + "," + CStr(estM.LDECKDP) + "," + CStr(estM.LABORDP) + ",
+	insert into EstMeters values('" + idEstMeters + "','" + idEstnumber + "'," + CStr(estM.PMANHRS) + "," + CStr(estM.TLABOR) + "," + CStr(estM.LDECKBP) + "," + CStr(estM.LABORBP) + "," + CStr(estM.LDECKDP) + "," + CStr(estM.LABORDP) + ",
     " + CStr(estM.DECKMAD) + "," + CStr(estM.MADPRICE) + ",
     " + CStr(estM.MA2DP) + "," + CStr(estM.MA3DP) + "," + CStr(estM.DECKDP) + "," + CStr(estM.DPRICE) + ",
     " + CStr(estM.M2DP) + "," + CStr(estM.M2EDP) + "," + CStr(estM.M2MDP) + "," + CStr(estM.M2LDP) + ",
@@ -899,7 +961,7 @@ begin
     " + CStr(estM.M2BP) + "," + CStr(estM.M2EBP) + "," + CStr(estM.M2MBP) + "," + CStr(estM.M2LBP) + ",
     " + CStr(estM.M3BP) + "," + CStr(estM.M3BP) + "," + CStr(estM.M3MBP) + "," + CStr(estM.M3LBP) + ")
 end
-else if (select count( *) from EstMeters)>0
+else if (select count( *) from EstMeters where EstNumber = '" + idEstnumber + "' and idEstMeters = '" + estM.idEstMeters + "')>0
 begin 
 	update EstMeters set 
 		PMANHRS = " + CStr(estM.PMANHRS) + ", TLABOR= " + CStr(estM.TLABOR) + ",LDECKBP= " + CStr(estM.LDECKBP) + ",
@@ -913,18 +975,20 @@ begin
 		TIMESED= " + CStr(estM.TIMESED) + ",DA= " + CStr(estM.DA) + ",DECKBP= " + CStr(estM.DECKBP) + ",BPRICE= " + CStr(estM.BPRICE) + ",
 		M2BP= " + CStr(estM.M2BP) + ",M2EBP= " + CStr(estM.M2EBP) + ",M2MBP= " + CStr(estM.M2MBP) + ",M2LBP= " + CStr(estM.M2MBP) + ",
 		M3BP= " + CStr(estM.M3BP) + ",M3EBP= " + CStr(estM.M3EBP) + ",M3MBP= " + CStr(estM.M3MBP) + ",M3LBP= " + CStr(estM.M3LBP) + "
-	where EstNumber = '1' 
+	where EstNumber = '" + idEstnumber + "' and idEstMeters = '" + estM.idEstMeters + "'  
 end", conn)
                 cmd1.Transaction = tran
-                If cmd.ExecuteNonQuery > 0 Then
-                    If cmd1.ExecuteNonQuery > 0 Then
-                        MsgBox("Successful")
-                        tran.Commit()
-                        Return True
-                    Else
-                        MsgBox("Error Check the data.")
-                        tran.Rollback()
-                        Return False
+                If cmdEstP.ExecuteNonQuery > 0 Then
+                    If cmd.ExecuteNonQuery > 0 Then
+                        If cmd1.ExecuteNonQuery > 0 Then
+                            MsgBox("Successful")
+                            tran.Commit()
+                            Return True
+                        Else
+                            MsgBox("Error Check the data.")
+                            tran.Rollback()
+                            Return False
+                        End If
                     End If
                 Else
                     MsgBox("Error Check the data.")

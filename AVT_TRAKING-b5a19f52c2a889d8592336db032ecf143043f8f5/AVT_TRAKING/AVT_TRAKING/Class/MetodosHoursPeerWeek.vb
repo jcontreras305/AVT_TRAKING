@@ -156,7 +156,7 @@ inner join job as jb on jb.jobNo = po.jobNo", conn)
             conectar()
             cmbProyect.Items.Clear()
             proyectTable.Clear()
-            Dim cmd As New SqlCommand("select tk.idAux as 'task', CONCAT(wo.idWO,' ',tk.task) as 'project' , tk.description from workOrder as wo 
+            Dim cmd As New SqlCommand("select tk.idAux as 'task', CONCAT(wo.idWO,'-',tk.task) as 'project' , tk.description from workOrder as wo 
 inner join task as tk on wo.idAuxWO = tk.idAuxWO", conn)
             If cmd.ExecuteNonQuery Then
                 Dim da As New SqlDataAdapter(cmd)

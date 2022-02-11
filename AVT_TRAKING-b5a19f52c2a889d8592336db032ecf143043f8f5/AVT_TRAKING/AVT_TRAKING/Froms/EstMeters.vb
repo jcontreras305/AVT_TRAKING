@@ -15,88 +15,77 @@ Public Class EstMeters
     Dim _M2MBP, _M2LBP, _M3BP, _M3EBP, _M3MBP, _M3LBP As Decimal
 
     Public Sub refreshValues(ByVal estSC As EstimationSC)
+        EstimationSC = estSC
         If idEstCost <> "" And idTypeScf <> "" Then
             estSC.SelectScafEstCost(_idEstCost, tblScfCost)
             estSC.SelectScfTypeCost(_idTypeScf, tblTypeScf)
             If (tblScfCost IsNot Nothing And tblScfCost.Rows.Count > 0) And (tblTypeScf IsNot Nothing And tblTypeScf.Rows.Count > 0) Then
 
-                M3LBP = Math.Round((findValEst("M3LABORBP")) + findValType("M3LBI"), 2, MidpointRounding.AwayFromZero)  'M3LBP = (M3LABORBP + M3LBI) * (1 + [HFactor]) * 1
-                M3LBP = addFactor(M3LBP)
+                M3LBP = Math.Round(addFactor(findValEst("M3LABORBP") + findValType("M3LBI")), 2, MidpointRounding.AwayFromZero)  'M3LBP = (M3LABORBP + M3LBI) * (1 + [HFactor])
                 M3MBP = (findValEst("M3MATBP")) + (findValType("M3MBI")) ' M3MBP = (M3MATBP) + (M3MBI)
                 M3EBP = (findValEst("M3EQBP")) + (findValType("M3EBI")) 'M3EBP = (M3EQBP) + (M3EBI)
-                M3BP = (findValEst("M3LABORBP")) + (findValEst("M3MATBP")) + M3EBP 'M3BP = M3LABORBP + M3MATBP + M3EBP
+                M3BP = (findValEst("M3LABORBP")) + (findValEst("M3MATBP")) + M3EBP 'M3BP = M3LABORBP + M3MATBP + M3EBP ---- M3EBP ESTA ABAJO
 
-                M2LBP = Math.Round((findValEst("M2LABORBP")) + findValType("M2LBI"), 2, MidpointRounding.AwayFromZero) 'M2LBP = (M2LABORBP + M2LBI) * (1+ [HFACTOR]) * 1
-                M2LBP = addFactor(M2LBP)
-                M2MBP = (findValEst("MA2MATBP")) + (findValType("M2MBI")) 'M2MBP = MA2MATBP + M2MBI
+                M2LBP = Math.Round(addFactor((findValEst("M2LABORBP")) + findValType("M2LBI")), 2, MidpointRounding.AwayFromZero) 'M2LBP = (M2LABORBP + M2LBI) * (1+ [HFACTOR])  
+                M2MBP = (findValEst("M2MATBP")) + (findValType("M2MBI")) 'M2MBP = M2MATBP + M2MBI
                 M2EBP = (findValEst("M2EQBP")) + (findValType("M2EBI")) 'M2EBP =  M2EQBP + M2EBI
-                M2BP = (findValEst("M2LABORBP")) + (findValEst("M2MATBP")) + M2MBP 'M2BP = M2LABORBP + M2MATBP + M2MBP ---- M2MBP ESTA ABAJO
+                M2BP = (findValEst("M2LABORBP")) + (findValEst("M2MATBP")) + M3EBP 'M2BP = M2LABORBP + M2MATBP + M3EBP ---- M2MBP ESTA ABAJO
                 Dim M3 = estSC.M3
                 Dim M2 = estSC.M2
                 Dim MA3 = estSC.MA3
                 Dim MA2 = estSC.MA2
                 Dim DECKS = If(estSC.descks > 0, estSC.descks - 1, 0)
-                BPRICE = Math.Round((M3) + (M3BP), 2, MidpointRounding.AwayFromZero) 'BPRICE = M3 + M3BP * 1  ---- M3BP ESTA ABAJO 
-                BPRICE = addFactor(BPRICE)
-                DECKBP = Math.Round((M2) * (DECKS) * M2BP, 2, MidpointRounding.AwayFromZero) 'DECKBP = M2 * DECKS * M2BP * 1---- M2BP ESTA ABAJO 
-                DECKBP = addFactor(DECKBP)
-                DA = estSC.daysActive 'DA = DAYSACTIVE ---- DE LA TABLA scfEstimation
                 Dim EDDAYS = (findValEst("EDDAYS"))
                 Dim BILLINGDAYS = (findValEst("BILLINGDAYS"))
+
+                BPRICE = Math.Round((M3) + (M3BP), 2, MidpointRounding.AwayFromZero) 'BPRICE = M3 + M3BP    ---- M3BP ESTA ABAJO 
+                DECKBP = Math.Round((M2) * (DECKS) * M2BP, 2, MidpointRounding.AwayFromZero) 'DECKBP = M2 * DECKS * M2BP  ---- M2BP ESTA ABAJO 
+                DA = estSC.daysActive 'DA = DAYSACTIVE ---- DE LA TABLA scfEstimation
+
                 If EDDAYS > 0 Then
                     TIMESED = BILLINGDAYS * (DA * EDDAYS) 'timesed = BILLINGDAYS * ( DA *  EDDAYS )  ---- DA ESTA ABAJO
                 Else
                     TIMESED = 0
                 End If
-                EDM3 = Math.Round(TIMESED * (findValEst("M3EDCHARGES")), 2, MidpointRounding.AwayFromZero) 'EDM3 = TIMESED * M3EDCHARGES * 1 ----TIMESED ESTA ABAJO
-                EDM3 = addFactor(EDM3)
-                EDM2 = Math.Round(TIMESED * (findValEst("M2EDCHARGES")), 2, MidpointRounding.AwayFromZero) 'EDM2 = TIMESED * M2EDCHARGES * 1 ----TIMESED ESTA ABAJO
-                EDM2 = addFactor(EDM2)
-                EDM3C = Math.Round((M3) * EDM3, 2, MidpointRounding.AwayFromZero) 'EDM3C = EDM3 * M3 * 1 ---- EDM3 ESTA ABAJO 
-                EDM3C = addFactor(EDM3C)
-                EDM2C = Math.Round((M2) * EDM2, 2, MidpointRounding.AwayFromZero)  'EDM2C = EDM2 * M2 * 1 ---- EDM2 ESTA ABAJO
-                EDM2C = addFactor(EDM2C)
-                EDMA3 = Math.Round(TIMESED * (findValEst("M3EDCHARGES")), 2, MidpointRounding.AwayFromZero) 'EDMA3 = TIMESED * M3EDCHARGES * 1 ---- TIMESED ESTA ABAJO
-                EDMA3 = addFactor(EDMA3)
-                EDMA2 = Math.Round(TIMESED * (findValEst("M2EDCHARGES")), 2, MidpointRounding.AwayFromZero) 'EDMA2 = TIMESED * M2EDCHARGES * 1 ---- TIMESED ESTA ABAJO
-                EDMA2 = addFactor(EDMA2)
-                EDMA3C = Math.Round(EDMA3 * (MA3), 2, MidpointRounding.AwayFromZero) 'EDMA3C = EDMA3 * M3 * 1 ---- EDMA3 ESTA ABAJO
-                EDMA3C = addFactor(EDMA3C)
-                EDMA2C = Math.Round(EDMA2 * (MA2), 2, MidpointRounding.AwayFromZero) 'EDMA2C = EDMA2 * M2 * 1---- EDMA2 ESTA ABAJO
-                EDMA2C = addFactor(EDMA2C)
+                EDM3 = Math.Round(TIMESED * (findValEst("M3EDCHARGES")), 2, MidpointRounding.AwayFromZero) 'EDM3 = TIMESED * M3EDCHARGES   ----TIMESED ESTA ABAJO
 
-                M3LDP = Math.Round((findValEst("M3LABORDP")) + (findValType("M3LDI")), 2, MidpointRounding.AwayFromZero) 'M3LDP = (M3LABORDP + M3LDI) * (1 + [HFACTOR]) * 1
-                M3LDP = addFactor(M3LDP)
-                M3MDP = (findValType("M3MDI")) + (findValEst("M3MATDP")) 'M3MDP = M3MDI + M3MATDP
-                M3EDP = (findValEst("M3EQDP")) + (findValType("M3EDI")) 'M3EDP = M3EQDP + M3EDI
+                EDM2 = Math.Round(TIMESED * (findValEst("M2EDCHARGES")), 2, MidpointRounding.AwayFromZero) 'EDM2 = TIMESED * M2EDCHARGES   ----TIMESED ESTA ABAJO
+
+                EDM3C = Math.Round((M3) * EDM3, 2, MidpointRounding.AwayFromZero) 'EDM3C = EDM3 * M3   ---- EDM3 ESTA ABAJO 
+
+                EDM2C = Math.Round((M2) * EDM2, 2, MidpointRounding.AwayFromZero)  'EDM2C = EDM2 * M2   ---- EDM2 ESTA ABAJO
+
+                EDMA3 = Math.Round(TIMESED * (findValEst("M3EDCHARGES")), 2, MidpointRounding.AwayFromZero) 'EDMA3 = TIMESED * M3EDCHARGES   ---- TIMESED ESTA ABAJO
+
+                EDMA2 = Math.Round(TIMESED * (findValEst("M2EDCHARGES")), 2, MidpointRounding.AwayFromZero) 'EDMA2 = TIMESED * M2EDCHARGES   ---- TIMESED ESTA ABAJO
+
+                EDMA3C = Math.Round(EDMA3 * (MA3), 2, MidpointRounding.AwayFromZero) 'EDMA3C = EDMA3 * M3   ---- EDMA3 ESTA ABAJO
+
+                EDMA2C = Math.Round(EDMA2 * (MA2), 2, MidpointRounding.AwayFromZero) 'EDMA2C = EDMA2 * M2  ---- EDMA2 ESTA ABAJO
+
+                M3LDP = Math.Round(addFactor((findValEst("M3LABORDP")) + (findValType("M3LDI"))), 2, MidpointRounding.AwayFromZero) 'M3LDP = (M3LABORDP + M3LDI) * (1 + [HFACTOR])  
+
+                M3MDP = Math.Round((findValType("M3MDI")) + (findValEst("M3MATDP")), 2, MidpointRounding.AwayFromZero) 'M3MDP = M3MDI + M3MATDP
+                M3EDP = Math.Round((findValEst("M3EQDP")) + (findValType("M3EDI")), 2, MidpointRounding.AwayFromZero) 'M3EDP = M3EQDP + M3EDI
                 M3DP = M3LDP + M3MDP + M3EDP 'M3DP = M3LDP + M3MDP + M3EDP ---- M3LDP, M3MDP, M3EDP ESTAN ABAJO
 
-                M2LDP = Math.Round((findValEst("M2LABORDP")) + (findValType("M2LDI")), 2, MidpointRounding.AwayFromZero) 'M2LDP = (M2LABORDP + M2LDI)*(1 + [HFACTOR]) * 1 
-                M2LDP = addFactor(M2LDP)
-                M2MDP = (findValEst("M2MATDP")) + (findValType("M2MDI")) 'M2MDP = M2MATDP + M2MDI
-                M2EDP = (findValEst("M2EQDP")) + (findValType("M2EDI")) 'M2EDP = M2EQDP + M2EDI
+                M2LDP = Math.Round(addFactor((findValEst("M2LABORDP")) + (findValType("M2LDI"))), 2, MidpointRounding.AwayFromZero) 'M2LDP = (M2LABORDP + M2LDI)*(1 + [HFACTOR])   
+
+                M2MDP = Math.Round((findValEst("M2MATDP")) + (findValType("M2MDI")), 2, MidpointRounding.AwayFromZero) 'M2MDP = M2MATDP + M2MDI
+                M2EDP = Math.Round((findValEst("M2EQDP")) + (findValType("M2EDI")), 2, MidpointRounding.AwayFromZero) 'M2EDP = M2EQDP + M2EDI
                 M2DP = M2LDP + M2MDP + M2EDP 'M2DP = M2LDP + M2MDP + M2EDP ---- M2LDP, M2MDP, M2EDP ESTAN ABAJO
 
-                DPRICE = Math.Round((M3 * M3DP), 2, MidpointRounding.AwayFromZero) 'DPRICE = M3 * M3DP * 1 ---- M3DP ESTA ABAJO
-                DPRICE = addFactor(DPRICE)
-                DECKDP = Math.Round(M2 * DECKS * M2DP, 2, MidpointRounding.AwayFromZero) 'DECKDP = M2 * DECKS * M2DP * 1 ---- M2DP ESTA ABAJO
-                DECKDP = addFactor(DECKDP)
-                MA3DP = (findValEst("M2LABORDP")) + (findValEst("MA3MATDP")) + (findValEst("MA3EQDP"))  'MA3DP = MA3LABORDP + MA3MATDP + MA3EQDP
-                MA2DP = (findValEst("MA2LABORDP")) + (findValEst("MA2MATDP")) + (findValEst("MA2EQDP")) 'MA2DP = MA2LABORDP + MA2MATDP + MA2EQDP
-                MADPRICE = Math.Round(M3 * MA3DP, 2, MidpointRounding.AwayFromZero) 'MADPRICE = MA3 * MA3DP * 1 ---- MA3DP ESTA ABAJO
-                MADPRICE = addFactor(MADPRICE)
-                DECKMAD = Math.Round(M3 * DECKS * MA2DP, 2, MidpointRounding.AwayFromZero)  'DECKMADP = MA2 * DECKS * MA2DP * 1 ---- MA2DP ESTA ABAJO
-                DECKMAD = addFactor(DECKMAD)
-                LABORDP = Math.Round(M3 * M3LDP, 2, MidpointRounding.AwayFromZero) 'LABORDP = M3 * M3LDP * 1 ---- M3LDP ESTA ABAJO
-                LABORDP = addFactor(LABORDP)
-                LDECKDP = Math.Round(M2 * DECKS * M2LDP, 2, MidpointRounding.AwayFromZero) 'LDECKDP = M2 * DECKS * M2LDP * 1  ---- M2LDP ESTA ABAJO  
-                LDECKDP = addFactor(LDECKDP)
-                LABORBP = Math.Round(M3 * M3LBP, 2, MidpointRounding.AwayFromZero) * FACTOR 'LABORBP = M3 * M3LBP * 1 ----M3LBP ESTA ABAJO 
-                LABORBP = addFactor(LABORBP)
-                LDECKBP = Math.Round(M2 * DECKS * M2LBP, 2, MidpointRounding.AwayFromZero) 'LDECKBP = M2 * DECKS * M2LBP * 1---- M2LBP ESTA ABAJO
-                LDECKBP = addFactor(LDECKBP)
-                TLABOR = Math.Round((M3LBP + (M3LDP * M3)) + (M2LBP + M2LDP) * M2 * (DECKS), 2, MidpointRounding.AwayFromZero) 'TLABOR = (M3LBP + M3LDP * M3) + (M2LBP + M2LDP) * M2 * (DESCKNUM - 1) * 1---- M3LBP, M3LDP, M2LBP, M2LDP ESTAN ABAJO 
-                TLABOR = addFactor(TLABOR)
+                DPRICE = Math.Round((M3 * M3DP), 2, MidpointRounding.AwayFromZero) 'DPRICE = M3 * M3DP   ---- M3DP ESTA ABAJO
+                DECKDP = Math.Round(M2 * DECKS * M2DP, 2, MidpointRounding.AwayFromZero) 'DECKDP = M2 * DECKS * M2DP   ---- M2DP ESTA ABAJO
+                MA3DP = Math.Round((findValEst("M2LABORDP")) + (findValEst("MA3MATDP")) + (findValEst("MA3EQDP")), 2, MidpointRounding.AwayFromZero)  'MA3DP = MA3LABORDP + MA3MATDP + MA3EQDP
+                MA2DP = Math.Round((findValEst("MA2LABORDP")) + (findValEst("MA2MATDP")) + (findValEst("MA2EQDP")), 2, MidpointRounding.AwayFromZero) 'MA2DP = MA2LABORDP + MA2MATDP + MA2EQDP
+                MADPRICE = Math.Round(M3 * MA3DP, 2, MidpointRounding.AwayFromZero) 'MADPRICE = MA3 * MA3DP   ---- MA3DP ESTA ABAJO
+                DECKMAD = Math.Round(M3 * DECKS * MA2DP, 2, MidpointRounding.AwayFromZero)  'DECKMADP = MA2 * DECKS * MA2DP   ---- MA2DP ESTA ABAJO
+                LABORDP = Math.Round(M3 * M3LDP, 2, MidpointRounding.AwayFromZero) 'LABORDP = M3 * M3LDP   ---- M3LDP ESTA ABAJO
+                LDECKDP = Math.Round(M2 * DECKS * M2LDP, 2, MidpointRounding.AwayFromZero) 'LDECKDP = M2 * DECKS * M2LDP    ---- M2LDP ESTA ABAJO  
+                LABORBP = Math.Round(M3 * M3LBP, 2, MidpointRounding.AwayFromZero) * FACTOR 'LABORBP = M3 * M3LBP   ----M3LBP ESTA ABAJO 
+                LDECKBP = Math.Round(M2 * DECKS * M2LBP, 2, MidpointRounding.AwayFromZero) 'LDECKBP = M2 * DECKS * M2LBP  ---- M2LBP ESTA ABAJO
+                TLABOR = Math.Round(((M3LBP + M3LDP) * M3) + ((M2LBP + M2LDP) * M2 * DECKS), 2, MidpointRounding.AwayFromZero) 'TLABOR = ((M3LBP + M3LDP) * M3) + (M2LBP + M2LDP) * M2 * (DESCKNUM - 1)  ---- M3LBP, M3LDP, M2LBP, M2LDP ESTAN ABAJO 
                 PMANHRS = TLABOR / 20 'PMANHRS = TLABOR / 20 
             End If
         Else
@@ -124,24 +113,89 @@ Public Class EstMeters
             Return 0
         End If
     End Function
+    ''' <summary>
+    ''' Agrega el Factor al valor recivido (valor * (1+(factor)))
+    ''' (donde de el fator es porcentaje de 0.01 a 1 dependiente de la altura total)
+    ''' </summary>
+    ''' <param name="valor"></param>
+    ''' <returns></returns>
     Function addFactor(ByVal valor As Double) As Double
         Try
             If FACTOR > 0 Then
-                valor = Math.Round(valor + (valor * (FACTOR / 100)), 2, MidpointRounding.AwayFromZero)
+                valor = Math.Round(valor * (1 + (FACTOR / 100)), 2, MidpointRounding.AwayFromZero)
             End If
             Return valor
         Catch ex As Exception
             Return valor
         End Try
     End Function
-    Public Function selectEstimation(ByVal cmb As ComboBox) As Boolean
+    Public Function cargarDatosEstMeters(ByVal idEstMeters As String, ByVal EstNumber As String) As Boolean
         Try
             conectar()
-            Dim cmd As New SqlCommand("select EstNumber from estMeters", conn)
+            Dim cmd As New SqlCommand("select idEstMeters,EstNumber,PMANHRS,TLABOR,LDECKBP,LABORBP,LDECKDP,LABORDP,
+	DECKMAD,MADPRIC,MA2DP,MA3DP,DECKDP,DPRICE,M2DP,M2EDP,M2MDP,M2LDP,M3DP,
+	M3EDP,M3MDP,M3LDP,EDMA2C,EDMA3C,EDMA2,EDMA3,EDM2C,EDM3C,EDM2,EDM3,
+	TIMESED,DA,DECKBP,BPRICE,M2BP,M2EBP,M2MBP,M2LBP,M3BP,M3EBP,M3MBP,M3LDP from EstMeters where idEstMeters = '" + idEstMeters + "' or EstNumber= '" + EstNumber + "'", conn)
+            Dim rd As SqlDataReader = cmd.ExecuteReader()
+            While rd.Read()
+                _M3LDP = rd("M3LDP")
+                _M3MBP = rd("M3MBP")
+                _M3EBP = rd("M3EBP")
+                _M3EBP = rd("M3EBP")
+                _M3BP = rd("M3BP")
+                _M2LBP = rd("M2LBP")
+                _M2MBP = rd("M2MBP")
+                _M2EBP = rd("M2EBP")
+                _M2BP = rd("M2BP")
+                _BPRICE = rd("BPRICE")
+                _DECKBP = rd("DECKBP")
+                _DA = rd("DA")
+                _TIMESED = rd("TIMESED")
+                _EDM3 = rd("EDM3")
+                _EDM2 = rd("EDM2")
+                _EDM3C = rd("EDM3C")
+                _EDM2C = rd("EDM2C")
+                _EDMA3 = rd("EDMA3")
+                _EDMA2 = rd("EDMA2")
+                _EDMA3C = rd("EDMA3C")
+                _EDMA2C = rd("EDMA2C")
+                _M3LDP = rd("M3LDP")
+                _M3MDP = rd("M3MDP")
+                _M3EDP = rd("M3EDP")
+                _M3DP = rd("M3DP")
+                _M2LDP = rd("M2LDP")
+                _M2MDP = rd("M2MDP")
+                _M2EDP = rd("M2EDP")
+                _M2DP = rd("M2DP")
+                _DPRICE = rd("DPRICE")
+                _DECKDP = rd("DECKDP")
+                _MA3DP = rd("MA3DP")
+                _MA2DP = rd("MA2DP")
+                _MADPRICE = rd("MADPRICE")
+                _DECKMAD = rd("DECKMAD")
+                _LABORDP = rd("LABORDP")
+                _LDECKDP = rd("LDECKDP")
+                _LDECKBP = rd("LDECKBP")
+                _TLABOR = rd("TLABOR")
+                _PMANHRS = rd("PMANHRS")
+                _EstNumber = rd("EstNumber")
+                _idEstMeters = rd("idEstMeters")
+                Exit While
+            End While
+            Return True
+        Catch ex As Exception
+        Finally
+            desconectar()
+        End Try
+    End Function
+    Public Function selectEstimationProyect(ByVal cmb As ComboBox) As Boolean
+        Try
+            conectar()
+            Dim cmd As New SqlCommand("select ccnum, unit from scfEstProyect", conn)
             Dim dr As SqlDataReader = cmd.ExecuteReader()
             cmb.Items.Clear()
             While dr.Read()
-                cmb.Items.Add(dr("EstNumber"))
+                cmb.Items.Add(CStr(dr("ccnum")) + " " + CStr(dr("unit")))
             End While
             Return True
         Catch ex As Exception
@@ -167,6 +221,8 @@ Public Class EstMeters
     End Function
     Public Function Clear() As Boolean
         Try
+            _idEstCost = ""
+            _idTypeScf = ""
             _idEstMeters = ""
             _EstNumber = ""
             _DECKSNUM = 0
@@ -243,7 +299,9 @@ Public Class EstMeters
     Public Property idEstMeters() As String
         Get
             If _idEstMeters = Nothing Then
-                Return ""
+                Dim id As Guid = Guid.NewGuid()
+                _idEstMeters = id.ToString()
+                Return _idEstMeters
             Else
                 Return _idEstMeters
             End If

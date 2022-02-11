@@ -1,11 +1,10 @@
 use master
 Go
-DROP database VRT_TRAKING_2
-GO
-create database VRT_TRAKING_2
+
+create database VRT_TRAKING
 GO
 
-use VRT_TRAKING_2
+use VRT_TRAKING
 GO
 --##########################################################################################
 --##################  TABLA DE USERS #######################################################
@@ -19,6 +18,10 @@ create table users(
 GO
 insert into users values (NEWID(), 'admin' , 'admin')
 GO
+
+--##########################################################################################
+--##################  TABLA DE EXPCODE #####################################################
+--##########################################################################################
 
 create table expCode(
 	idExpCode int primary key not null,
@@ -46,6 +49,10 @@ insert into expCode values
 (5, 'Maintenance(M)')
 GO
 
+--##########################################################################################
+--##################  TABLA DE TYPEEMPLOYEE ################################################
+--##########################################################################################
+
 create table typeEmployee(
 	idTypeEmploye int identity (20000,1) primary key not null,
 	name varchar(20)
@@ -54,6 +61,10 @@ GO
 
 insert into typeEmployee values ('Manager'),('Normal')
 GO
+
+--##########################################################################################
+--##################  TABLA DE workTMLumpSum ###############################################
+--##########################################################################################
 
 create table workTMLumpSum (
 	idWorkTmLumoSum int identity (30000,1) primary key not null,
@@ -64,7 +75,9 @@ GO
 insert into workTMLumpSum values('Lump-Sum'),('T&M'),('Unire Rate')
 GO
 
-
+--##########################################################################################
+--##################  TABLA DE COSTDISTRIBUTION ############################################
+--##########################################################################################
 
 create table costDistribution(
 	idCostDistribution bigint primary key not null ,
@@ -74,6 +87,10 @@ GO
 
 insert into costDistribution values (190100000000000,'First'),(290100000000000,'Secund')
 GO
+
+--##########################################################################################
+--##################  TABLA DE COSTCODE ####################################################
+--##########################################################################################
 
 create table costCode(
 	idCostCode bigInt primary key not null ,
@@ -136,6 +153,7 @@ create table classification(
 	class varchar(10) primary key not null,
 	name varchar(50)
 )
+GO
 
 --##########################################################################################
 --##################  TABLA DE CLIENTES ####################################################
@@ -496,6 +514,7 @@ GO
 create table materialStatus(
 	idMaterialStatus varchar(20) primary key not null
 )
+GO
 
 --##########################################################################################
 --##################  TABLA DE MATERIAL VENDOR #############################################
@@ -639,6 +658,7 @@ GO
 ALTER TABLE projectOrder
 ADD CONSTRAINT pk_idPOjobNum PRIMARY KEY (idPO,jobNo)
 GO
+
 --##########################################################################################
 --##################  TABLA DE PROYECT PRODUCT SCAFFOLD ####################################
 --##########################################################################################
@@ -665,9 +685,11 @@ create table rental(
 	truck money
 )
 GO
+
 --##########################################################################################
 --##################  TABLA DE SCAFESTCOST #################################################
 --##########################################################################################
+
 CREATE TABLE ScafEstCost(
 	idEstCost int IDENTITY(1,1) NOT NULL primary key,
 	SCEC varchar(15) NULL,
@@ -703,6 +725,7 @@ CREATE TABLE ScafEstCost(
 	EDDAYS money NULL
 )
 go
+
 --##########################################################################################
 --##################  TABLA DE SCAFFOLD INFORMATION ########################################
 --##########################################################################################
@@ -775,26 +798,27 @@ GO
 --##################  TABLA DE SCFESTIMATION ###############################################
 --##########################################################################################
 
-CREATE TABLE [dbo].[scfEstimation](
-	[EstNumber] [varchar](36) NOT NULL primary key,
-	[idAux] [varchar](36) NULL,
-	[daysActive] [float] NULL,
-	[unit] [varchar](30) NULL,
-	[location] [text] NULL,
-	[width] [float] NULL,
-	[heigth] [float] NULL,
-	[length] [float] NULL,
-	[descks] [int] NULL,
-	[groundHeigth] [int] NULL,
-	[elevation] [int] NULL,
-	[M3] [float] NULL,
-	[M2] [float] NULL,
-	[MA3] [float] NULL,
-	[MA2] [float] NULL,
-	[ACHT] [float] NULL,
-	[idEstCost] [int] NULL,
-	[scfTypeId] [int] NULL,
-	[ccnum] [varchar](30) NULL
+CREATE TABLE scfEstimation(
+	EstNumber varchar(36) NOT NULL primary key,
+	idAux varchar(36) NULL,
+	daysActive float NULL,
+	unit varchar(30) NULL,
+	location text NULL,
+	width float NULL,
+	heigth float NULL,
+	length float NULL,
+	descks int NULL,
+	groundHeigth int NULL,
+	elevation int NULL,
+	M3 float NULL,
+	M2 float NULL,
+	MA3 float NULL,
+	MA2 float NULL,
+	ACHT float NULL,
+	idEstCost int NULL,
+	scfTypeId int NULL,
+	ccnum varchar(30) NULL,
+	idClient varchar(36) NULL
 )
 go
 
@@ -803,8 +827,9 @@ go
 --##########################################################################################
 
 
-CREATE TABLE [dbo].[scfEstProyect](
-	[ccnum] [varchar](30) NOT NULL primary key
+CREATE TABLE scfEstProyect(
+	ccnum varchar(30) NOT NULL primary key,
+	unit varchar(30) NOT NULL
 )
 go
 
@@ -1017,18 +1042,6 @@ FOREIGN KEY(idDismantle) REFERENCES dismantle(idDismantle)
 GO
 
 --##########################################################################################
---##################  FOREIG KEYS COMPANY ##################################################
---##########################################################################################
-
-ALTER TABLE [dbo].[company] WITH CHECK ADD CONSTRAINT [fk_idHomeAddress] FOREIGN KEY ([idHomeAddress])
-REFERENCES [dbo].[homeAddress] ([idHomeAdress])
-GO
-
-ALTER  TABLE [dbo].[company] WITH CHECK ADD CONSTRAINT [fk_idContact] FOREIGN KEY  ([idContact])
-REFERENCES [dbo].[contact]([idContact])
-GO
-
---##########################################################################################
 --##################  FOREIG KEYS CLIENTES #################################################
 --##########################################################################################
 
@@ -1038,6 +1051,18 @@ GO
 
 ALTER TABLE [dbo].[clients]  WITH CHECK ADD  CONSTRAINT [fk_idHomeAddres_CL] FOREIGN KEY([idHomeAddress])
 REFERENCES [dbo].[HomeAddress] ([idHomeAdress])
+GO
+
+--##########################################################################################
+--##################  FOREIG KEYS COMPANY ##################################################
+--##########################################################################################
+
+ALTER TABLE [dbo].[company] WITH CHECK ADD CONSTRAINT [fk_idHomeAddress] FOREIGN KEY ([idHomeAddress])
+REFERENCES [dbo].[homeAddress] ([idHomeAdress])
+GO
+
+ALTER  TABLE [dbo].[company] WITH CHECK ADD CONSTRAINT [fk_idContact] FOREIGN KEY  ([idContact])
+REFERENCES [dbo].[contact]([idContact])
 GO
 
 --##########################################################################################
@@ -1078,6 +1103,8 @@ GO
 
 ALTER TABLE EstMeters  WITH CHECK ADD  CONSTRAINT fk_EstNumber_EstMeters FOREIGN KEY(EstNumber)
 REFERENCES scfEstimation (EstNumber)
+ON UPDATE CASCADE
+ON DELETE CASCADE
 GO
 
 --##########################################################################################
@@ -1117,7 +1144,7 @@ REFERENCES    task  ( idAux )
 GO
 
 --##########################################################################################
---##################  FOREIG KEYS HOURS WORKED #############################################
+--##################  FOREIG KEYS INCOMING #################################################
 --##########################################################################################
 
 ALTER TABLE incoming WITH CHECK ADD CONSTRAINT fk_jobNum_inComing FOREIGN KEY (jobNo) 
@@ -1336,20 +1363,8 @@ FOREIGN KEY (idSubJob) REFERENCES subJobs(idSubJob)
 GO
 
 --##########################################################################################
---##################  FOREIG KEYS SCFINFO ##################################################
---##########################################################################################
-
-ALTER TABLE scfInfo WITH CHECK ADD CONSTRAINT fk_tag_scfInfo
-FOREIGN KEY (tag) REFERENCES scaffoldTraking(tag)
-GO
-
---##########################################################################################
 --##################  FOREIG KEYS SCFESTIMATION ############################################
 --##########################################################################################
-
-ALTER TABLE [dbo].[scfEstimation]  WITH CHECK ADD  CONSTRAINT [fk_ccnum_scfEstimation] FOREIGN KEY([ccnum])
-REFERENCES [dbo].[scfEstProyect] ([ccnum])
-GO
 
 ALTER TABLE [dbo].[scfEstimation]  WITH CHECK ADD  CONSTRAINT [fk_idAux_scfEstimation] FOREIGN KEY([idAux])
 REFERENCES [dbo].[task] ([idAux])
@@ -1363,20 +1378,19 @@ ALTER TABLE [dbo].[scfEstimation]  WITH CHECK ADD  CONSTRAINT [fk_scfTypeId_scfE
 REFERENCES [dbo].[scfTypeCost] ([scfTypeId])
 GO
 
---##########################################################################################
---##################  FOREIG KEYS SCAFOLD INFORMATION ######################################
---##########################################################################################
-
-ALTER TABLE scaffoldInformation  WITH CHECK ADD  CONSTRAINT fk_tag_SCFInformation
-FOREIGN KEY(tag) REFERENCES scaffoldTraking (tag)
+ALTER TABLE [dbo].[scfEstimation]  WITH CHECK ADD  CONSTRAINT [fk_ccnum_scfEstimation] FOREIGN KEY([ccnum])
+REFERENCES [dbo].[scfEstProyect] ([ccnum])
 GO
 
-ALTER TABLE scaffoldInformation  WITH CHECK ADD  CONSTRAINT fk_idModification_SCFInformation
-FOREIGN KEY(idModAux) REFERENCES modification (idModAux)
-GO
+ALTER TABLE [dbo].[scfEstimation] WITH CHECK ADD CONSTRAINT [fk_idClient_scfEstimation] FOREIGN KEY ([idClient]) 
+REFERENCES [dbo].[clients]([idClient])
+go
+--##########################################################################################
+--##################  FOREIG KEYS SCFINFO ##################################################
+--##########################################################################################
 
-ALTER TABLE scaffoldInformation  WITH CHECK ADD  CONSTRAINT fk_type_SCFInformation
-FOREIGN KEY(type) REFERENCES rental (type)
+ALTER TABLE scfInfo WITH CHECK ADD CONSTRAINT fk_tag_scfInfo
+FOREIGN KEY (tag) REFERENCES scaffoldTraking(tag)
 GO
 
 --##########################################################################################
@@ -1403,6 +1417,14 @@ GO
 
 ALTER TABLE taxesST WITH CHECK ADD CONSTRAINT fk_idAux_TaxesST
 FOREIGN KEY (idAux) REFERENCES task(idAux)
+GO
+
+--##########################################################################################
+--##################  FOREIG KEYS TAXESST ##################################################
+--##########################################################################################
+
+ALTER TABLE taxesPT WITH CHECK ADD  CONSTRAINT fk_idAux_TaxesPT FOREIGN KEY(idAux)
+REFERENCES task (idAux)
 GO
 
 --##########################################################################################
@@ -1973,14 +1995,18 @@ go
 --##############################################################################################
 --################## SP REPORT Client Billings Re Cap By Project ###############################
 --##############################################################################################
-CREATE proc [dbo].[Client_Billings_Re_Cap_By_Project]
+
+CREATE proc Client_Billings_Re_Cap_By_Project
 @startdate as date, 
 @finaldate as date,
 @clientnum as int
 as 
 begin
-if @startDate is not null and @FinalDate is not null and @clientnum is not null
-	begin
+
+set @startdate = ISNULL(@startDate,GETDATE())
+set @finaldate = ISNULL(@finaldate,GETDATE())
+set @clientnum = ISNULL(@clientnum,(select top 1 numberClient from clients)) 
+
 select T2.companyName,T2.[Work Order],T2.jobNo,T2.PO,T2.[Project Desription],
 T2.[Hours Ext],T2.[Total Hours],T2.[Hours ST],T2.[Billings ST],T2.[Hours OT],T2.[Billings OT],
 T2.Complete,T2.[Es-Hrs],T2.[Total Expenses],T2.[Total Material],T2.[Total Spend],T2.Estimate from
@@ -2019,10 +2045,31 @@ T2.Complete,T2.[Es-Hrs],T2.[Total Expenses],T2.[Total Material],T2.[Total Spend]
 
 	ts.estimateHours as 'Es-Hrs',
 
-	concat('$', case when (select sum(amount) from expensesUsed where idAux=ts.idAux and dateExpense between @startdate and @finaldate) is null then 0.0
-	else (select sum(amount) from expensesUsed where idAux=ts.idAux and dateExpense between @startdate and @finaldate) end) as 'Total Expenses',
-	CONCAT('$', case when (select sum(amount) from materialUsed where idAux=ts.idAux and dateMaterial between @startdate and @finaldate) is null then 0.0
-	else (select sum(amount) from materialUsed where idAux=ts.idAux and dateMaterial between @startdate and @finaldate) end) as 'Total Material',
+	concat('$', case when (select sum(amount) from expensesUsed as exu
+inner join task as tk on exu.idAux=tk.idAux
+inner join workOrder as wo1 on wo1.idAuxWO=tk.idAuxWO
+inner join projectOrder as po1 on po1.idPO=wo1.idPO and po1.jobNo=wo1.jobNo
+inner join job as jb1 on jb1.jobNo=po1.jobNo
+ where  tk.idAux=ts.idAux and wo1.idAuxWO=wo.idAuxWo and po1.idPO=po.idPo and jb1.jobNo=jb.jobNo and po1.idPO = po.idPO and dateExpense between @startdate and @finaldate) is null then 0.0
+	else (select sum(amount) from expensesUsed as exu
+inner join task as tk on exu.idAux=tk.idAux
+inner join workOrder as wo1 on wo1.idAuxWO=tk.idAuxWO
+inner join projectOrder as po1 on po1.idPO=wo1.idPO and po1.jobNo=wo1.jobNo
+inner join job as jb1 on jb1.jobNo=po1.jobNo
+ where  tk.idAux=ts.idAux and wo1.idAuxWO=wo.idAuxWo and po1.idPO=po.idPo and jb1.jobNo=jb.jobNo and po1.idPO = po.idPO and dateExpense between @startdate and @finaldate) end) as 'Total Expenses',
+	
+	CONCAT('$', case when (select sum(amount) from materialUsed as mau
+inner join task as tk on mau.idAux=tk.idAux
+inner join workOrder as wo1 on wo1.idAuxWO=tk.idAuxWO
+inner join projectOrder as po1 on po1.idPO=wo1.idPO and po1.jobNo=wo1.jobNo
+inner join job as jb1 on jb1.jobNo=po1.jobNo
+where  tk.idAux=ts.idAux and wo1.idAuxWO=wo.idAuxWo and po1.idPO=po.idPo and jb1.jobNo=jb.jobNo and po1.idPO = po.idPO and dateMaterial between @startdate and @finaldate) is null then 0.0
+	else (select sum(amount) from materialUsed as mau
+inner join task as tk on mau.idAux=tk.idAux
+inner join workOrder as wo1 on wo1.idAuxWO=tk.idAuxWO
+inner join projectOrder as po1 on po1.idPO=wo1.idPO and po1.jobNo=wo1.jobNo
+inner join job as jb1 on jb1.jobNo=po1.jobNo
+where  tk.idAux=ts.idAux and wo1.idAuxWO=wo.idAuxWo and po1.idPO=po.idPo and jb1.jobNo=jb.jobNo and po1.idPO = po.idPO and dateMaterial between @startdate and @finaldate) end) as 'Total Material',
 	
 	concat('$', (case when  (select SUM(T2.Amount)from 
 	(select SUM(T1.hoursST*T1.billingRate1) AS 'Amount'
@@ -2044,11 +2091,31 @@ T2.Complete,T2.[Es-Hrs],T2.[Total Expenses],T2.[Total Material],T2.[Total Spend]
 	where idAux=ts.idAux and dateWorked between @startdate and @finaldate)as T1    
 	group by T1.idWorkCode) as T2) end +
 
-	case when (select sum(amount) from expensesUsed where idAux=ts.idAux and dateExpense between @startdate and @finaldate) is null then 0.0
-	else (select sum(amount) from expensesUsed where idAux=ts.idAux and dateExpense between @startdate and @finaldate) end +
+	case when (select sum(amount) from expensesUsed as exu
+	inner join task as tk on exu.idAux=tk.idAux
+	inner join workOrder as wo1 on wo1.idAuxWO=tk.idAuxWO
+	inner join projectOrder as po1 on po1.idPO=wo1.idPO and po1.jobNo=wo1.jobNo
+	inner join job as jb1 on jb1.jobNo=po1.jobNo
+	where  tk.idAux=ts.idAux and wo1.idAuxWO=wo.idAuxWo and po1.idPO=po.idPo and jb1.jobNo=jb.jobNo and po1.idPO = po.idPO and dateExpense between @startdate and @finaldate) is null then 0.0
+	else (select sum(amount) from expensesUsed as exu
+	inner join task as tk on exu.idAux=tk.idAux
+	inner join workOrder as wo1 on wo1.idAuxWO=tk.idAuxWO
+	inner join projectOrder as po1 on po1.idPO=wo1.idPO and po1.jobNo=wo1.jobNo
+	inner join job as jb1 on jb1.jobNo=po1.jobNo
+	where  tk.idAux=ts.idAux and wo1.idAuxWO=wo.idAuxWo and po1.idPO=po.idPo and jb1.jobNo=jb.jobNo and po1.idPO = po.idPO and dateExpense between @startdate and @finaldate) end +
 	
-	case when (select sum(amount) from materialUsed where idAux=ts.idAux and dateMaterial between @startdate and @finaldate) is null then 0.0
-	else (select sum(amount) from materialUsed where idAux=ts.idAux and dateMaterial between @startdate and @finaldate) end
+	case when (select sum(amount) from materialUsed as mau
+	inner join task as tk on mau.idAux=tk.idAux
+	inner join workOrder as wo1 on wo1.idAuxWO=tk.idAuxWO
+	inner join projectOrder as po1 on po1.idPO=wo1.idPO and po1.jobNo=wo1.jobNo
+	inner join job as jb1 on jb1.jobNo=po1.jobNo
+	where  tk.idAux=ts.idAux and wo1.idAuxWO=wo.idAuxWo and po1.idPO=po.idPo and jb1.jobNo=jb.jobNo and po1.idPO = po.idPO and dateMaterial between @startdate and @finaldate) is null then 0.0
+	else (select sum(amount) from materialUsed as mau
+	inner join task as tk on mau.idAux=tk.idAux
+	inner join workOrder as wo1 on wo1.idAuxWO=tk.idAuxWO
+	inner join projectOrder as po1 on po1.idPO=wo1.idPO and po1.jobNo=wo1.jobNo
+	inner join job as jb1 on jb1.jobNo=po1.jobNo
+	where  tk.idAux=ts.idAux and wo1.idAuxWO=wo.idAuxWo and po1.idPO=po.idPo and jb1.jobNo=jb.jobNo and po1.idPO = po.idPO and dateMaterial between @startdate and @finaldate) end
 	)) as 'Total Spend',
 
 	ts.estTotalBilling as 'Estimate'
@@ -2069,107 +2136,59 @@ T2.Complete,T2.[Es-Hrs],T2.[Total Expenses],T2.[Total Material],T2.[Total Spend]
 		)as T2
 		where T2.[Billings ST]<>'$0' OR T2.[Billings OT]<>'$0' OR T2.[Total Expenses]<>'$0' OR T2.[Total Material]<>'$0'
 		order by t2.jobNo asc
-end
-else
-begin 
-set @startdate = GETDATE()
-set @finaldate = GETDATE()
-set @clientnum = (select top 1 numberClient from clients)
-select T2.companyName,T2.[Work Order],T2.jobNo,T2.PO,T2.[Project Desription],
-T2.[Hours Ext],T2.[Total Hours],T2.[Hours ST],T2.[Billings ST],T2.[Hours OT],T2.[Billings OT],
-T2.Complete,T2.[Es-Hrs],T2.[Total Expenses],T2.[Total Material],T2.[Total Spend],T2.Estimate from
-(
-	select cl.companyName,concat(wo.idWO,' ',ts.task) as 'Work Order', jb.jobNo,po.idPO as 'PO',ts.description as 'Project Desription',
-    	case when (select T1.EX from  (select sum(hours3) as 'EX' from hoursWorked where idAux = ts.idAux and dateWorked between @startdate and @finaldate) as T1) is null then 0.0
-	else (select T1.EX from  (select sum(hours3) as 'EX' from hoursWorked where idAux = ts.idAux and dateWorked between @startdate and @finaldate) as T1)end as 'Hours Ext',
-
-	(case when (select T1.ST from  (select sum(hoursST) as 'ST' from hoursWorked where idAux = ts.idAux and dateWorked between @startdate and @finaldate) as T1) is null then 0.0
-	else (select T1.ST from  (select sum(hoursST) as 'ST' from hoursWorked where idAux = ts.idAux and dateWorked between @startdate and @finaldate) as T1)end +
-	case when (select T1.OT from  (select sum(hoursOT) as 'OT' from hoursWorked where idAux = ts.idAux and dateWorked between @startdate and @finaldate) as T1) is null then 0.0
-	else (select T1.OT from  (select sum(hoursOT) as 'OT' from hoursWorked where idAux = ts.idAux and dateWorked between @startdate and @finaldate) as T1) end) as 'Total Hours',
-
-	case when (select T1.ST from  (select sum(hoursST) as 'ST' from hoursWorked where idAux = ts.idAux and dateWorked between @startdate and @finaldate) as T1) is null then 0.0
-	else (select T1.ST from  (select sum(hoursST) as 'ST' from hoursWorked where idAux = ts.idAux and dateWorked between @startdate and @finaldate) as T1)end as 'Hours ST',
-	
-	(select CONCAT('$' , case when  SUM(T2.Amount) is null then '0'
-	else SUM(T2.Amount) end
-	) as 'Billings ST' from 
-	(select SUM(T1.hoursST*T1.billingRate1) AS 'Amount'
-	from (select hoursST, hw.idWorkCode , billingRate1  from hoursWorked as hw inner join workCode as wc on wc.idWorkCode = hw.idWorkCode 
-	where idAux=ts.idAux and dateWorked between @startdate and @finaldate)as T1    
-	group by T1.idWorkCode) as T2) as 'Billings ST',
-
-	case when (select T1.OT from  (select sum(hoursOT) as 'OT' from hoursWorked where idAux = ts.idAux and dateWorked between @startdate and @finaldate) as T1) is null then 0.0
-	else (select T1.OT from  (select sum(hoursOT) as 'OT' from hoursWorked where idAux = ts.idAux and dateWorked between @startdate and @finaldate) as T1) end as 'Hours OT',
-	
-	(select CONCAT('$' , case when SUM(T2.Amount) is null then '0'
-	else SUM(T2.Amount) end ) as 'Billings OT' from 
-	(select SUM(T1.hoursOT*T1.billingRateOT) AS 'Amount'
-	from (select hoursOT, hw.idWorkCode , billingRateOT  from hoursWorked as hw inner join workCode as wc on wc.idWorkCode = hw.idWorkCode 
-	where idAux=ts.idAux and dateWorked between @startdate and @finaldate)as T1    
-	group by T1.idWorkCode) as T2) as 'Billings OT',
-
-	concat(ts.percentComplete,'%') as 'Complete',
-
-	ts.estimateHours as 'Es-Hrs',
-
-	concat('$', case when (select sum(amount) from expensesUsed where idAux=ts.idAux and dateExpense between @startdate and @finaldate) is null then 0.0
-	else (select sum(amount) from expensesUsed where idAux=ts.idAux and dateExpense between @startdate and @finaldate) end) as 'Total Expenses',
-	CONCAT('$', case when (select sum(amount) from materialUsed where idAux=ts.idAux and dateMaterial between @startdate and @finaldate) is null then 0.0
-	else (select sum(amount) from materialUsed where idAux=ts.idAux and dateMaterial between @startdate and @finaldate) end) as 'Total Material',
-	
-	concat('$', (case when  (select SUM(T2.Amount)from 
-	(select SUM(T1.hoursST*T1.billingRate1) AS 'Amount'
-	from (select hoursST, hw.idWorkCode , billingRate1  from hoursWorked as hw inner join workCode as wc on wc.idWorkCode = hw.idWorkCode 
-	where idAux=ts.idAux and dateWorked between @startdate and @finaldate)as T1    
-	group by T1.idWorkCode) as T2) is null then 0 else (select SUM(T2.Amount)from 
-	(select SUM(T1.hoursST*T1.billingRate1) AS 'Amount'
-	from (select hoursST, hw.idWorkCode , billingRate1  from hoursWorked as hw inner join workCode as wc on wc.idWorkCode = hw.idWorkCode 
-	where idAux=ts.idAux and dateWorked between @startdate and @finaldate)as T1    
-	group by T1.idWorkCode) as T2) end  +
-
-	case when (select SUM(T2.Amount) from 
-	(select SUM(T1.hoursOT*T1.billingRateOT) AS 'Amount'
-	from (select hoursOT, hw.idWorkCode , billingRateOT  from hoursWorked as hw inner join workCode as wc on wc.idWorkCode = hw.idWorkCode 
-	where idAux=ts.idAux and dateWorked between @startdate and @finaldate)as T1    
-	group by T1.idWorkCode) as T2) is null then 0 else (select SUM(T2.Amount) from 
-	(select SUM(T1.hoursOT*T1.billingRateOT) AS 'Amount'
-	from (select hoursOT, hw.idWorkCode , billingRateOT  from hoursWorked as hw inner join workCode as wc on wc.idWorkCode = hw.idWorkCode 
-	where idAux=ts.idAux and dateWorked between @startdate and @finaldate)as T1    
-	group by T1.idWorkCode) as T2) end +
-
-	case when (select sum(amount) from expensesUsed where idAux=ts.idAux and dateExpense between @startdate and @finaldate) is null then 0.0
-	else (select sum(amount) from expensesUsed where idAux=ts.idAux and dateExpense between @startdate and @finaldate) end +
-	
-	case when (select sum(amount) from materialUsed where idAux=ts.idAux and dateMaterial between @startdate and @finaldate) is null then 0.0
-	else (select sum(amount) from materialUsed where idAux=ts.idAux and dateMaterial between @startdate and @finaldate) end
-	)) as 'Total Spend',
-
-	ts.estTotalBilling as 'Estimate'
-	from task as ts
-	inner join workOrder as wo on wo.idAuxWO=ts.idAuxWO
-	inner join projectOrder as po on po.idPO=wo.idPO
-	inner join job as jb on jb.jobNo=po.jobNo
-	inner join clients cl on cl.idClient=jb.idClient
-	where cl.numberClient=@clientnum and
-		((select sum(hoursST)
-		 from hoursWorked where idAux = ts.idAux)> 0 or
-		 (select sum(hoursOT)
-		 from hoursWorked where idAux = ts.idAux)> 0 or
-		 (select sum(hours3)
-		 from hoursWorked where idAux = ts.idAux)> 0 or
-		 (select sum(amount) from expensesUsed where idAux=ts.idAux)> 0 or
-		(select sum(amount) from materialUsed where idAux=ts.idAux)>0)
-		)as T2
-		where T2.[Billings ST]<>'$0' OR T2.[Billings OT]<>'$0' OR T2.[Total Expenses]<>'$0' OR T2.[Total Material]<>'$0'
-		order by t2.jobNo asc
-	end
 end
 go
 
 --##############################################################################################
+--################## SP REPORT TIME SHEETS PO ##################################################
+--##############################################################################################
+
+CREATE proc select_Time_Sheet_PO
+	@IntialDate date,
+	@FinalDate date
+as 
+begin
+	select  
+		
+		t1.idPO,
+		t1.jobNo,
+		t1.idWO,
+		SUM(t1.hoursST) AS 'hoursST',
+		SUM(t1.hoursOT)AS 'hoursOT',
+		t1.Code,t1.Shift,
+		t1.Employee,t1.[Emp: Number],t1.class
+		from (
+			select distinct
+			
+			po.idPO,
+			jb.jobNo,
+			wo.idWO,
+			hw.schedule as 'Shift',
+			SUBSTRING( wc.name,1,iif(CHARINDEX('-',wc.name)=0, len(wc.name) ,(CHARINDEX('-',wc.name)-1))) as 'Code',
+			(select iif(SUM(hw1.hoursST)is null,0,SUM(hw1.hoursST)) from hoursWorked as hw1 inner join workCode as wc1 on wc1.idWorkCode = hw.idWorkCode inner join task as tk1 on tk1.idAux = hw1.idAux inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO inner join projectOrder as po1 on po1.idPO = wo1.idPO and wo1.jobNo = po1.jobNo inner join job as jb1 on jb1.jobNo = po1.jobNo where hw1.dateWorked = hw.dateWorked and em.idEmployee = hw1.idEmployee and jb.jobNo = jb1.jobNo and po1.idPO = po.idPO and not wc1.name like '%6.4%') as 'hoursST',
+			(select iif(SUM(hw1.hoursOT)is null,0,SUM(hw1.hoursOT)) from hoursWorked as hw1 inner join workCode as wc1 on wc1.idWorkCode = hw.idWorkCode inner join task as tk1 on tk1.idAux = hw1.idAux inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO inner join projectOrder as po1 on po1.idPO = wo1.idPO and wo1.jobNo = po1.jobNo inner join job as jb1 on jb1.jobNo = po1.jobNo where hw1.dateWorked = hw.dateWorked and em.idEmployee = hw1.idEmployee and jb.jobNo = jb1.jobNo and po1.idPO = po.idPO and not wc1.name like '%6.4%') as 'hoursOT',
+			CONCAT(em.lastName,' ',em.firstName,' ',em.middleName) as 'Employee', 
+			em.numberEmploye as 'Emp: Number' ,
+			em.typeEmployee as 'class'
+			from hoursWorked as hw 
+			inner join employees as em on hw.idEmployee = em.idEmployee
+			inner join workCode as wc on wc.idWorkCode = hw.idWorkCode
+			inner join task as tk on tk.idAux = hw.idAux 
+			inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO 
+			inner join projectOrder as po on po.idPO = wo.idPO and wo.jobNo = po.jobNo 
+			inner join job as jb on jb.jobNo = po.jobNo
+			where hw.dateWorked between @IntialDate   and @FinalDate and (hw.hoursST > 0 or hw.hoursOT>0 or hw.hours3>0) and not wc.name like '%vacation%' --and em.numberEmploye = 16874
+		
+		) as T1
+		group by t1.idPO,t1.jobNo,t1.idWO,t1.hoursST,t1.hoursOT,t1.Code,t1.Shift,
+		t1.Employee,t1.[Emp: Number],t1.class
+		order by T1.[Emp: Number]
+end
+go
+--##############################################################################################
 --################## SP REPORT REPORTE BY JOB NUMBER ###########################################
 --##############################################################################################
+
 CREATE proc [dbo].[select_TimeSheet_Report]
 	@IntialDate date,
 	@FinalDate date
@@ -2218,7 +2237,7 @@ go
 --##############################################################################################
 --################## SP REPORT ACTIVE EMPLOYEE AVERAGE #########################################
 --##############################################################################################
-CREATE proc [dbo].[sp_Active_Employee_Average]
+ALTER proc [dbo].[sp_Active_Employee_Average]
 as
 begin
 	select em.lastName as 'Last Name' , CONCAT(em.firstName,' ',substring( em.middleName,1,1)) as 'First Name',CONCAT( '$',pr.payRate1)as 'Pay Rate' , 
@@ -2556,10 +2575,12 @@ go
 --################## SP REPORT COMPLETE BY DATE RANGE ##########################################
 --##############################################################################################
 CREATE proc [dbo].[Sp_Complete_By_Date_Range]
-@startdate as date, 
-@finaldate as date,
-@clientnum as int
+@clientnum as int,
+@jobNum as bigint,
+@all as bit
 as
+begin
+if @all=1
 begin
 	select  cl.companyName, concat(wo.idWO,' ',ts.task) as 'Work Order',ts.description as 'Desription',
 		ts.equipament, ts.expCode as 'Expense Code',ts.accountNum as 'Account No', ts.status as 'Complete'
@@ -2568,7 +2589,19 @@ begin
 		inner join projectOrder as po on po.idPO=wo.idPO and wo.jobNo = po.jobNo
 		inner join job as jb on jb.jobNo = po.jobNo
 		inner join clients as cl on cl.idClient = jb.idClient
-		where ts.status = '1' and (endDate between @startdate and @finaldate) and cl.numberClient = @clientnum
+		where ts.status = '1' and cl.numberClient = @clientnum
+		end
+else 
+begin
+	select  cl.companyName, concat(wo.idWO,' ',ts.task) as 'Work Order',ts.description as 'Desription',
+		ts.equipament, ts.expCode as 'Expense Code',ts.accountNum as 'Account No', ts.status as 'Complete'
+		from task as ts 
+		inner join workOrder as wo on wo.idAuxWO = ts.idAuxWO 
+		inner join projectOrder as po on po.idPO=wo.idPO and wo.jobNo = po.jobNo
+		inner join job as jb on jb.jobNo = po.jobNo
+		inner join clients as cl on cl.idClient = jb.idClient
+		where ts.status = '1' and cl.numberClient = @clientnum and jb.jobNo=@jobNum
+		end
 end
 go
 
@@ -2587,7 +2620,7 @@ begin
 		po.jobNo as 'Job Num',
 		CONCAT(wo.idWO,' ', tk.task) as 'Project Name',
 		ex.expenseCode as 'Project Description' ,
-		CONCAT(cl.lastName,' ',cl.firstName,' ',cl.middleName) as 'Client Name', 
+		cl.companyName as 'Company Name', 
 		CONCAT(em.lastName,',',em.firstName,' ',em.middleName) as 'Employee Name',
 		em.numberEmploye as 'Emp: Number',
 		em.typeEmployee as 'Class', 
@@ -2601,7 +2634,7 @@ begin
 		inner join job as jb on jb.jobNo = wo.jobNo 
 		inner join clients as cl on cl.idClient = jb.idClient
 		where xp.dateExpense  between @startdate and @finaldate and cl.numberClient = @clientnum 
-		group by po.jobNo, wo.idWO, tk.task,CONCAT(cl.lastName,' ',cl.firstName,' ',cl.middleName), ex.expenseCode,
+		group by po.jobNo, wo.idWO, tk.task,cl.companyName, ex.expenseCode,
 		CONCAT(em.lastName,',',em.firstName,' ',em.middleName),em.numberEmploye,em.typeEmployee
 end
 else 
@@ -2610,7 +2643,7 @@ begin
 		po.jobNo as 'Job Num',
 		CONCAT(wo.idWO,' ', tk.task) as 'Project Name',
 		ex.expenseCode as 'Project Description' ,
-		CONCAT(cl.lastName,' ',cl.firstName,' ',cl.middleName) as 'Client Name', 
+		cl.companyName as 'Company Name',  
 		CONCAT(em.lastName,',',em.firstName,' ',em.middleName) as 'Employee Name',
 		em.numberEmploye as 'Emp: Number',
 		em.typeEmployee as 'Class', 
@@ -2624,7 +2657,7 @@ begin
 		inner join job as jb on jb.jobNo = wo.jobNo 
 		inner join clients as cl on cl.idClient = jb.idClient
 		where xp.dateExpense  between @startdate and @finaldate and cl.numberClient = @clientnum
-		group by po.jobNo, wo.idWO, tk.task,CONCAT(cl.lastName,' ',cl.firstName,' ',cl.middleName), ex.expenseCode,
+		group by po.jobNo, wo.idWO, tk.task,cl.companyName, ex.expenseCode,
 		CONCAT(em.lastName,',',em.firstName,' ',em.middleName),em.numberEmploye,em.typeEmployee
 end 
 end
@@ -2693,46 +2726,157 @@ end
 go
 
 --##############################################################################################
+--################## SP HOURS PER WEEK #########################################################
+--##############################################################################################
+CREATE proc [dbo].[sp_Hours_Per_Week]
+@date as date
+as
+declare @initialDate as date
+declare @finalDate as date
+begin 
+	set @date = ISNULL(@date, GETDATE())
+	set @initialDate = DATEADD (DAY, iif(DATEPART(DW,@date) = 1,-6,iif(DATEPART(DW,@date)=2,0,-(DATEPART(DW,@date)-2)) ),@date)
+	set @finalDate = DATEADD(day, 6 , @initialDate)
+	select @finalDate as 'Weekending' ,concat(em.lastName,',',em.firstName,' ',em.middleName) as 'EmpName',
+	 case when (select sum(hw.hoursST) from hoursWorked as hw inner join task as tk on tk.idAux = hw.idAux inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO inner join projectOrder as po on po.idPO = wo.idPO and po.jobNo = wo.jobNo inner join job as jb on jb.jobNo =po.jobNo inner join clients as cl on cl.idClient = jb.idClient where hw.idEmployee= em.idEmployee and (hw.dateWorked between @initialDate and @finalDate) and DATENAME(dw,hw.dateWorked)='Monday')		is null then 0 else (select sum(hw.hoursST) from hoursWorked as hw inner join task as tk on tk.idAux = hw.idAux inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO inner join projectOrder as po on po.idPO = wo.idPO and po.jobNo = wo.jobNo inner join job as jb on jb.jobNo =po.jobNo inner join clients as cl on cl.idClient = jb.idClient where hw.idEmployee= em.idEmployee and (hw.dateWorked between @initialDate and @finalDate) and DATENAME(dw,hw.dateWorked)='Monday')		 end as 'MondayST',
+	 case when (select sum(hw.hoursOT) from hoursWorked as hw inner join task as tk on tk.idAux = hw.idAux inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO inner join projectOrder as po on po.idPO = wo.idPO and po.jobNo = wo.jobNo inner join job as jb on jb.jobNo =po.jobNo inner join clients as cl on cl.idClient = jb.idClient where hw.idEmployee= em.idEmployee and (hw.dateWorked between @initialDate and @finalDate) and DATENAME(dw,hw.dateWorked)='Monday')		is null then 0 else (select sum(hw.hoursOT) from hoursWorked as hw inner join task as tk on tk.idAux = hw.idAux inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO inner join projectOrder as po on po.idPO = wo.idPO and po.jobNo = wo.jobNo inner join job as jb on jb.jobNo =po.jobNo inner join clients as cl on cl.idClient = jb.idClient where hw.idEmployee= em.idEmployee and (hw.dateWorked between @initialDate and @finalDate) and DATENAME(dw,hw.dateWorked)='Monday')		 end as 'MondayOT',
+	 case when (select sum(hw.hoursST) from hoursWorked as hw inner join task as tk on tk.idAux = hw.idAux inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO inner join projectOrder as po on po.idPO = wo.idPO and po.jobNo = wo.jobNo inner join job as jb on jb.jobNo =po.jobNo inner join clients as cl on cl.idClient = jb.idClient where hw.idEmployee= em.idEmployee and (hw.dateWorked between @initialDate and @finalDate) and DATENAME(dw,hw.dateWorked)='Tuesday')		is null then 0 else (select sum(hw.hoursST) from hoursWorked as hw inner join task as tk on tk.idAux = hw.idAux inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO inner join projectOrder as po on po.idPO = wo.idPO and po.jobNo = wo.jobNo inner join job as jb on jb.jobNo =po.jobNo inner join clients as cl on cl.idClient = jb.idClient where hw.idEmployee= em.idEmployee and (hw.dateWorked between @initialDate and @finalDate) and DATENAME(dw,hw.dateWorked)='Tuesday')		 end as 'TuesdayST',
+	 case when (select sum(hw.hoursOT) from hoursWorked as hw inner join task as tk on tk.idAux = hw.idAux inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO inner join projectOrder as po on po.idPO = wo.idPO and po.jobNo = wo.jobNo inner join job as jb on jb.jobNo =po.jobNo inner join clients as cl on cl.idClient = jb.idClient where hw.idEmployee= em.idEmployee and (hw.dateWorked between @initialDate and @finalDate) and DATENAME(dw,hw.dateWorked)='Tuesday')		is null then 0 else (select sum(hw.hoursOT) from hoursWorked as hw inner join task as tk on tk.idAux = hw.idAux inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO inner join projectOrder as po on po.idPO = wo.idPO and po.jobNo = wo.jobNo inner join job as jb on jb.jobNo =po.jobNo inner join clients as cl on cl.idClient = jb.idClient where hw.idEmployee= em.idEmployee and (hw.dateWorked between @initialDate and @finalDate) and DATENAME(dw,hw.dateWorked)='Tuesday')		 end as 'TuesdayOT',
+	 case when (select sum(hw.hoursST) from hoursWorked as hw inner join task as tk on tk.idAux = hw.idAux inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO inner join projectOrder as po on po.idPO = wo.idPO and po.jobNo = wo.jobNo inner join job as jb on jb.jobNo =po.jobNo inner join clients as cl on cl.idClient = jb.idClient where hw.idEmployee= em.idEmployee and (hw.dateWorked between @initialDate and @finalDate) and DATENAME(dw,hw.dateWorked)='Wednesday')	    is null then 0 else (select sum(hw.hoursST) from hoursWorked as hw inner join task as tk on tk.idAux = hw.idAux inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO inner join projectOrder as po on po.idPO = wo.idPO and po.jobNo = wo.jobNo inner join job as jb on jb.jobNo =po.jobNo inner join clients as cl on cl.idClient = jb.idClient where hw.idEmployee= em.idEmployee and (hw.dateWorked between @initialDate and @finalDate) and DATENAME(dw,hw.dateWorked)='Wednesday')	 end as 'WednesdayST',
+	 case when (select sum(hw.hoursOT) from hoursWorked as hw inner join task as tk on tk.idAux = hw.idAux inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO inner join projectOrder as po on po.idPO = wo.idPO and po.jobNo = wo.jobNo inner join job as jb on jb.jobNo =po.jobNo inner join clients as cl on cl.idClient = jb.idClient where hw.idEmployee= em.idEmployee and (hw.dateWorked between @initialDate and @finalDate) and DATENAME(dw,hw.dateWorked)='Wednesday')	    is null then 0 else (select sum(hw.hoursOT) from hoursWorked as hw inner join task as tk on tk.idAux = hw.idAux inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO inner join projectOrder as po on po.idPO = wo.idPO and po.jobNo = wo.jobNo inner join job as jb on jb.jobNo =po.jobNo inner join clients as cl on cl.idClient = jb.idClient where hw.idEmployee= em.idEmployee and (hw.dateWorked between @initialDate and @finalDate) and DATENAME(dw,hw.dateWorked)='Wednesday')	 end as 'WednesdayOT',
+	 case when (select sum(hw.hoursST) from hoursWorked as hw inner join task as tk on tk.idAux = hw.idAux inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO inner join projectOrder as po on po.idPO = wo.idPO and po.jobNo = wo.jobNo inner join job as jb on jb.jobNo =po.jobNo inner join clients as cl on cl.idClient = jb.idClient where hw.idEmployee= em.idEmployee and (hw.dateWorked between @initialDate and @finalDate) and DATENAME(dw,hw.dateWorked)='Thursday')		is null then 0 else (select sum(hw.hoursST) from hoursWorked as hw inner join task as tk on tk.idAux = hw.idAux inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO inner join projectOrder as po on po.idPO = wo.idPO and po.jobNo = wo.jobNo inner join job as jb on jb.jobNo =po.jobNo inner join clients as cl on cl.idClient = jb.idClient where hw.idEmployee= em.idEmployee and (hw.dateWorked between @initialDate and @finalDate) and DATENAME(dw,hw.dateWorked)='Thursday')	 end as 'ThursdayST',
+	 case when (select sum(hw.hoursOT) from hoursWorked as hw inner join task as tk on tk.idAux = hw.idAux inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO inner join projectOrder as po on po.idPO = wo.idPO and po.jobNo = wo.jobNo inner join job as jb on jb.jobNo =po.jobNo inner join clients as cl on cl.idClient = jb.idClient where hw.idEmployee= em.idEmployee and (hw.dateWorked between @initialDate and @finalDate) and DATENAME(dw,hw.dateWorked)='Thursday')		is null then 0 else (select sum(hw.hoursOT) from hoursWorked as hw inner join task as tk on tk.idAux = hw.idAux inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO inner join projectOrder as po on po.idPO = wo.idPO and po.jobNo = wo.jobNo inner join job as jb on jb.jobNo =po.jobNo inner join clients as cl on cl.idClient = jb.idClient where hw.idEmployee= em.idEmployee and (hw.dateWorked between @initialDate and @finalDate) and DATENAME(dw,hw.dateWorked)='Thursday')	 end as 'ThursdayOT',
+	 case when (select sum(hw.hoursST) from hoursWorked as hw inner join task as tk on tk.idAux = hw.idAux inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO inner join projectOrder as po on po.idPO = wo.idPO and po.jobNo = wo.jobNo inner join job as jb on jb.jobNo =po.jobNo inner join clients as cl on cl.idClient = jb.idClient where hw.idEmployee= em.idEmployee and (hw.dateWorked between @initialDate and @finalDate) and DATENAME(dw,hw.dateWorked)='Friday')		is null then 0 else (select sum(hw.hoursST) from hoursWorked as hw inner join task as tk on tk.idAux = hw.idAux inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO inner join projectOrder as po on po.idPO = wo.idPO and po.jobNo = wo.jobNo inner join job as jb on jb.jobNo =po.jobNo inner join clients as cl on cl.idClient = jb.idClient where hw.idEmployee= em.idEmployee and (hw.dateWorked between @initialDate and @finalDate) and DATENAME(dw,hw.dateWorked)='Friday')		 end as 'FridayST',
+	 case when (select sum(hw.hoursOT) from hoursWorked as hw inner join task as tk on tk.idAux = hw.idAux inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO inner join projectOrder as po on po.idPO = wo.idPO and po.jobNo = wo.jobNo inner join job as jb on jb.jobNo =po.jobNo inner join clients as cl on cl.idClient = jb.idClient where hw.idEmployee= em.idEmployee and (hw.dateWorked between @initialDate and @finalDate) and DATENAME(dw,hw.dateWorked)='Friday')		is null then 0 else (select sum(hw.hoursOT) from hoursWorked as hw inner join task as tk on tk.idAux = hw.idAux inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO inner join projectOrder as po on po.idPO = wo.idPO and po.jobNo = wo.jobNo inner join job as jb on jb.jobNo =po.jobNo inner join clients as cl on cl.idClient = jb.idClient where hw.idEmployee= em.idEmployee and (hw.dateWorked between @initialDate and @finalDate) and DATENAME(dw,hw.dateWorked)='Friday')		 end as 'FridayOT',
+	 case when (select sum(hw.hoursST) from hoursWorked as hw inner join task as tk on tk.idAux = hw.idAux inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO inner join projectOrder as po on po.idPO = wo.idPO and po.jobNo = wo.jobNo inner join job as jb on jb.jobNo =po.jobNo inner join clients as cl on cl.idClient = jb.idClient where hw.idEmployee= em.idEmployee and (hw.dateWorked between @initialDate and @finalDate) and DATENAME(dw,hw.dateWorked)='Saturday')		is null then 0 else (select sum(hw.hoursST) from hoursWorked as hw inner join task as tk on tk.idAux = hw.idAux inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO inner join projectOrder as po on po.idPO = wo.idPO and po.jobNo = wo.jobNo inner join job as jb on jb.jobNo =po.jobNo inner join clients as cl on cl.idClient = jb.idClient where hw.idEmployee= em.idEmployee and (hw.dateWorked between @initialDate and @finalDate) and DATENAME(dw,hw.dateWorked)='Saturday')	 end as 'SaturdayST',
+	 case when (select sum(hw.hoursOT) from hoursWorked as hw inner join task as tk on tk.idAux = hw.idAux inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO inner join projectOrder as po on po.idPO = wo.idPO and po.jobNo = wo.jobNo inner join job as jb on jb.jobNo =po.jobNo inner join clients as cl on cl.idClient = jb.idClient where hw.idEmployee= em.idEmployee and (hw.dateWorked between @initialDate and @finalDate) and DATENAME(dw,hw.dateWorked)='Saturday')		is null then 0 else (select sum(hw.hoursOT) from hoursWorked as hw inner join task as tk on tk.idAux = hw.idAux inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO inner join projectOrder as po on po.idPO = wo.idPO and po.jobNo = wo.jobNo inner join job as jb on jb.jobNo =po.jobNo inner join clients as cl on cl.idClient = jb.idClient where hw.idEmployee= em.idEmployee and (hw.dateWorked between @initialDate and @finalDate) and DATENAME(dw,hw.dateWorked)='Saturday')	 end as 'SaturdayOT',
+	 case when (select sum(hw.hoursST) from hoursWorked as hw inner join task as tk on tk.idAux = hw.idAux inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO inner join projectOrder as po on po.idPO = wo.idPO and po.jobNo = wo.jobNo inner join job as jb on jb.jobNo =po.jobNo inner join clients as cl on cl.idClient = jb.idClient where hw.idEmployee= em.idEmployee and (hw.dateWorked between @initialDate and @finalDate) and DATENAME(dw,hw.dateWorked)='Sunday')		is null then 0 else (select sum(hw.hoursST) from hoursWorked as hw inner join task as tk on tk.idAux = hw.idAux inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO inner join projectOrder as po on po.idPO = wo.idPO and po.jobNo = wo.jobNo inner join job as jb on jb.jobNo =po.jobNo inner join clients as cl on cl.idClient = jb.idClient where hw.idEmployee= em.idEmployee and (hw.dateWorked between @initialDate and @finalDate) and DATENAME(dw,hw.dateWorked)='Sunday')		 end as 'SundayST',
+	 case when (select sum(hw.hoursOT) from hoursWorked as hw inner join task as tk on tk.idAux = hw.idAux inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO inner join projectOrder as po on po.idPO = wo.idPO and po.jobNo = wo.jobNo inner join job as jb on jb.jobNo =po.jobNo inner join clients as cl on cl.idClient = jb.idClient where hw.idEmployee= em.idEmployee and (hw.dateWorked between @initialDate and @finalDate) and DATENAME(dw,hw.dateWorked)='Sunday')		is null then 0 else (select sum(hw.hoursOT) from hoursWorked as hw inner join task as tk on tk.idAux = hw.idAux inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO inner join projectOrder as po on po.idPO = wo.idPO and po.jobNo = wo.jobNo inner join job as jb on jb.jobNo =po.jobNo inner join clients as cl on cl.idClient = jb.idClient where hw.idEmployee= em.idEmployee and (hw.dateWorked between @initialDate and @finalDate) and DATENAME(dw,hw.dateWorked)='Sunday')		 end as 'SundayOT'
+	from employees as em
+	 where em.estatus = 'E'
+end
+go
+
+--##############################################################################################
+--################## SP REPORT NOT COMPLETE ####################################################
+--##############################################################################################
+CREATE proc [dbo].[Sp_Not_Complete]
+@clientnum as int,
+@jobNum as bigint,
+@all as bit
+as
+begin
+if @all=1
+begin
+	select  cl.companyName, concat(wo.idWO,' ',ts.task) as 'Work Order',ts.description as 'Desription',
+		ts.equipament,ts.estimateHours as 'Est:', ts.expCode as 'Expense Code',ts.accountNum as 'Account No', ts.status as 'Not Complete'
+		from task as ts 
+		inner join workOrder as wo on wo.idAuxWO = ts.idAuxWO 
+		inner join projectOrder as po on po.idPO=wo.idPO and wo.jobNo = po.jobNo
+		inner join job as jb on jb.jobNo = po.jobNo
+		inner join clients as cl on cl.idClient = jb.idClient
+		where ts.status = '0' and cl.numberClient = @clientnum
+end
+else
+	select  cl.companyName, concat(wo.idWO,' ',ts.task) as 'Work Order',ts.description as 'Desription',
+		ts.equipament,ts.estimateHours as 'Est:', ts.expCode as 'Expense Code',ts.accountNum as 'Account No', ts.status as 'Not Complete'
+		from task as ts 
+		inner join workOrder as wo on wo.idAuxWO = ts.idAuxWO 
+		inner join projectOrder as po on po.idPO=wo.idPO and wo.jobNo = po.jobNo
+		inner join job as jb on jb.jobNo = po.jobNo
+		inner join clients as cl on cl.idClient = jb.idClient
+		where ts.status = '0' and cl.numberClient = @clientnum and jb.jobNo=@jobNum
+end
+go
+--##############################################################################################
 --################## SP REPORT SCAFFOLD ESTIMATE ###################################################
 --##############################################################################################
 CREATE proc [dbo].[sp_scfEstimation]
-@EstNumber as varchar(30)
+@ccnum as varchar(30),
+@all as bit 
 as 
 begin
-  if @Estnumber <> '%'
-  begin
-    select scfe.EstNumber, scfe.unit , scfe.location , scfe.width ,scfe.length ,scfe.heigth,scfe.descks,scfe.daysActive,emt.DA,
-		scfe.M3 , scfe.M2, typ.SCTP , (select hFactor from scfFactor where heigth = scfe.heigth+scfe.groundHeigth) as 'Factor' , typ.BDRATE , emt.PMANHRS,
-		emt.BPRICE,emt.DECKBP,emt.DPRICE,emt.DECKDP,
-		emt.EDM3C,emt.EDM2C,emt.EDM3C,emt.EDM2C,
-		emt.M3LBP,emt.M3LDP,emt.M2LBP,emt.M2LDP,
-		emt.M3MBP,emt.M3MDP,emt.M2MBP,emt.M2MDP,
-		emt.M3EBP,emt.M3EDP,emt.M2EBP,emt.M2EDP
-		from scfEstimation as scfe 
-		inner join EstMeters as emt on scfe.EstNumber = emt.EstNumber
-		inner join scfTypeCost as typ on typ.scfTypeId = scfe.scfTypeId 
-		inner join ScafEstCost as cost on cost.idEstCost = scfe.idEstCost
-		where scfe.EstNumber like @EstNumber
-end
-else 
-begin
-    select scfe.EstNumber, scfe.unit , scfe.location , scfe.width ,scfe.length ,scfe.heigth,scfe.descks,scfe.daysActive,emt.DA,
-		scfe.M3 , scfe.M2, typ.SCTP , (select hFactor from scfFactor where heigth = scfe.heigth+scfe.groundHeigth) as 'Factor' , typ.BDRATE , emt.PMANHRS,
-		emt.BPRICE,emt.DECKBP,emt.DPRICE,emt.DECKDP,
-		emt.EDM3C,emt.EDM2C,emt.EDM3C,emt.EDM2C,
-		emt.M3LBP,emt.M3LDP,emt.M2LBP,emt.M2LDP,
-		emt.M3MBP,emt.M3MDP,emt.M2MBP,emt.M2MDP,
-		emt.M3EBP,emt.M3EDP,emt.M2EBP,emt.M2EDP
-		from scfEstimation as scfe 
-		inner join EstMeters as emt on scfe.EstNumber = emt.EstNumber
-		inner join scfTypeCost as typ on typ.scfTypeId = scfe.scfTypeId 
-		inner join ScafEstCost as cost on cost.idEstCost = scfe.idEstCost
-		where scfe.EstNumber like '%'
-  end
+	if @all = 0 
+	begin
+		select 
+			scfE.EstNumber,scfp.unit,scfE.location,scfE.width,scfE.length,scfE.heigth,scfE.descks,scfE.daysActive,estM.DA,
+			scfE.M3,scfE.M2,scfT.SCTP,(select hFactor from scfFactor where heigth = scfE.heigth) as 'Factor', scfT.BDRATE , scfT.BDRATE, estm.PMANHRS,
+			estM.BPRICE,estM.DECKBP,estM.DPRICE,estM.DECKDP,
+			estM.EDM3C,estM.EDM2C,estM.EDM3,estM.EDM2,
+			estM.M3LBP,estM.M3LDP,estM.M2LBP,estM.M2LDP,
+			estM.M3MBP,estM.M3MDP,estM.M2MBP,estM.M2MDP,
+			estM.M3EBP,estM.M3EDP,estM.M2EBP,estM.M2EDP
+		from scfEstProyect as scfP
+			inner join scfEstimation as scfE on scfP.ccnum = scfE.ccnum
+			inner join EstMeters as estM on estM.EstNumber = scfE.EstNumber
+			inner join ScafEstCost as scfC on scfC.idEstCost = scfE.idEstCost
+			inner join scfTypeCost as scfT on scfT.scfTypeId = scfE.scfTypeId 
+		where scfP.ccnum like @ccnum
+		order by scfP.ccnum
+	end
+	else 
+	begin
+		select 
+			scfE.EstNumber,scfp.unit,scfE.location,scfE.width,scfE.length,scfE.heigth,scfE.descks,scfE.daysActive,estM.DA,
+			scfE.M3,scfE.M2,scfT.SCTP,(select hFactor from scfFactor where heigth = scfE.heigth) as 'Factor', scfT.BDRATE , scfT.BDRATE, estm.PMANHRS,
+			estM.BPRICE,estM.DECKBP,estM.DPRICE,estM.DECKDP,
+			estM.EDM3C,estM.EDM2C,estM.EDM3,estM.EDM2,
+			estM.M3LBP,estM.M3LDP,estM.M2LBP,estM.M2LDP,
+			estM.M3MBP,estM.M3MDP,estM.M2MBP,estM.M2MDP,
+			estM.M3EBP,estM.M3EDP,estM.M2EBP,estM.M2EDP
+		from scfEstProyect as scfP
+			inner join scfEstimation as scfE on scfP.ccnum = scfE.ccnum
+			inner join EstMeters as estM on estM.EstNumber = scfE.EstNumber
+			inner join ScafEstCost as scfC on scfC.idEstCost = scfE.idEstCost
+			inner join scfTypeCost as scfT on scfT.scfTypeId = scfE.scfTypeId 
+			where scfP.ccnum like '%'
+			order by scfP.ccnum
+	end
 end
 go
-----use master
-----drop database VRT_TRAKING
+
+
+--##############################################################################################
+--################## SP YEAR FINAL HOURS #######################################################
+--##############################################################################################
+CREATE proc [dbo].[sp_Year_Final_Hours]
+@year nVarchar(4)
+as
+begin
+    set @year = isnull(@year, DATENAME(YEAR,GETDATE()))
+	
+	select *, T1.January+T1.February+T1.March+T1.April+T1.May+T1.June+T1.July+T1.August+T1.September+T1.October+T1.Nomvember+T1.Dicember as 'Total' 
+	from (
+	select 
+		wc.name,
+		case when (select SUM(hw.hoursST)+SUM(hw.hoursOT)+SUM(hw.hours3) from hoursWorked as hw where hw.idWorkCode = wc.idWorkCode and DATEPART(YEAR ,hw.dateWorked) = @year and DATENAME(MONTH, hw.dateWorked) = 'January') is null then 0
+			 else (select SUM(hw.hoursST)+SUM(hw.hoursOT)+SUM(hw.hours3) from hoursWorked as hw where hw.idWorkCode = wc.idWorkCode and DATEPART(YEAR ,hw.dateWorked) = @year and DATENAME(MONTH, hw.dateWorked) = 'January') end as 'January',
+		case when (select SUM(hw.hoursST)+SUM(hw.hoursOT)+SUM(hw.hours3) from hoursWorked as hw where hw.idWorkCode = wc.idWorkCode and DATEPART(YEAR ,hw.dateWorked) = @year and DATENAME(MONTH, hw.dateWorked) = 'February') is null then 0
+			 else (select SUM(hw.hoursST)+SUM(hw.hoursOT)+SUM(hw.hours3) from hoursWorked as hw where hw.idWorkCode = wc.idWorkCode and DATEPART(YEAR ,hw.dateWorked) = @year and DATENAME(MONTH, hw.dateWorked) = 'February') end as 'February',
+		case when (select SUM(hw.hoursST)+SUM(hw.hoursOT)+SUM(hw.hours3) from hoursWorked as hw where hw.idWorkCode = wc.idWorkCode and DATEPART(YEAR ,hw.dateWorked) = @year and DATENAME(MONTH, hw.dateWorked) = 'March') is null then 0
+			 else (select SUM(hw.hoursST)+SUM(hw.hoursOT)+SUM(hw.hours3) from hoursWorked as hw where hw.idWorkCode = wc.idWorkCode and DATEPART(YEAR ,hw.dateWorked) = @year and DATENAME(MONTH, hw.dateWorked) = 'March') end as 'March',
+		case when (select SUM(hw.hoursST)+SUM(hw.hoursOT)+SUM(hw.hours3) from hoursWorked as hw where hw.idWorkCode = wc.idWorkCode and DATEPART(YEAR ,hw.dateWorked) = @year and DATENAME(MONTH, hw.dateWorked) = 'April') is null then 0
+			 else (select SUM(hw.hoursST)+SUM(hw.hoursOT)+SUM(hw.hours3) from hoursWorked as hw where hw.idWorkCode = wc.idWorkCode and DATEPART(YEAR ,hw.dateWorked) = @year and DATENAME(MONTH, hw.dateWorked) = 'April') end as 'April',
+		case when (select SUM(hw.hoursST)+SUM(hw.hoursOT)+SUM(hw.hours3) from hoursWorked as hw where hw.idWorkCode = wc.idWorkCode and DATEPART(YEAR ,hw.dateWorked) = @year and DATENAME(MONTH, hw.dateWorked) = 'May') is null then 0
+			 else (select SUM(hw.hoursST)+SUM(hw.hoursOT)+SUM(hw.hours3) from hoursWorked as hw where hw.idWorkCode = wc.idWorkCode and DATEPART(YEAR ,hw.dateWorked) = @year and DATENAME(MONTH, hw.dateWorked) = 'May') end as 'May',
+		case when (select SUM(hw.hoursST)+SUM(hw.hoursOT)+SUM(hw.hours3) from hoursWorked as hw where hw.idWorkCode = wc.idWorkCode and DATEPART(YEAR ,hw.dateWorked) = @year and DATENAME(MONTH, hw.dateWorked) = 'June') is null then 0
+			 else (select SUM(hw.hoursST)+SUM(hw.hoursOT)+SUM(hw.hours3) from hoursWorked as hw where hw.idWorkCode = wc.idWorkCode and DATEPART(YEAR ,hw.dateWorked) = @year and DATENAME(MONTH, hw.dateWorked) = 'June') end as 'June',
+		case when (select SUM(hw.hoursST)+SUM(hw.hoursOT)+SUM(hw.hours3) from hoursWorked as hw where hw.idWorkCode = wc.idWorkCode and DATEPART(YEAR ,hw.dateWorked) = @year and DATENAME(MONTH, hw.dateWorked) = 'July') is null then 0
+			 else (select SUM(hw.hoursST)+SUM(hw.hoursOT)+SUM(hw.hours3) from hoursWorked as hw where hw.idWorkCode = wc.idWorkCode and DATEPART(YEAR ,hw.dateWorked) = @year and DATENAME(MONTH, hw.dateWorked) = 'July') end as 'July',
+		case when (select SUM(hw.hoursST)+SUM(hw.hoursOT)+SUM(hw.hours3) from hoursWorked as hw where hw.idWorkCode = wc.idWorkCode and DATEPART(YEAR ,hw.dateWorked) = @year and DATENAME(MONTH, hw.dateWorked) = 'August') is null then 0
+			 else (select SUM(hw.hoursST)+SUM(hw.hoursOT)+SUM(hw.hours3) from hoursWorked as hw where hw.idWorkCode = wc.idWorkCode and DATEPART(YEAR ,hw.dateWorked) = @year and DATENAME(MONTH, hw.dateWorked) = 'August') end as 'August',
+		case when (select SUM(hw.hoursST)+SUM(hw.hoursOT)+SUM(hw.hours3) from hoursWorked as hw where hw.idWorkCode = wc.idWorkCode and DATEPART(YEAR ,hw.dateWorked) = @year and DATENAME(MONTH, hw.dateWorked) = 'September') is null then 0
+			 else (select SUM(hw.hoursST)+SUM(hw.hoursOT)+SUM(hw.hours3) from hoursWorked as hw where hw.idWorkCode = wc.idWorkCode and DATEPART(YEAR ,hw.dateWorked) = @year and DATENAME(MONTH, hw.dateWorked) = 'September') end as 'September',
+		case when (select SUM(hw.hoursST)+SUM(hw.hoursOT)+SUM(hw.hours3) from hoursWorked as hw where hw.idWorkCode = wc.idWorkCode and DATEPART(YEAR ,hw.dateWorked) = @year and DATENAME(MONTH, hw.dateWorked) = 'October') is null then 0
+			 else (select SUM(hw.hoursST)+SUM(hw.hoursOT)+SUM(hw.hours3) from hoursWorked as hw where hw.idWorkCode = wc.idWorkCode and DATEPART(YEAR ,hw.dateWorked) = @year and DATENAME(MONTH, hw.dateWorked) = 'October') end as 'October',
+		case when (select SUM(hw.hoursST)+SUM(hw.hoursOT)+SUM(hw.hours3) from hoursWorked as hw where hw.idWorkCode = wc.idWorkCode and DATEPART(YEAR ,hw.dateWorked) = @year and DATENAME(MONTH, hw.dateWorked) = 'November') is null then 0
+			 else (select SUM(hw.hoursST)+SUM(hw.hoursOT)+SUM(hw.hours3) from hoursWorked as hw where hw.idWorkCode = wc.idWorkCode and DATEPART(YEAR ,hw.dateWorked) = @year and DATENAME(MONTH, hw.dateWorked) = 'November') end as 'Nomvember',
+		case when (select SUM(hw.hoursST)+SUM(hw.hoursOT)+SUM(hw.hours3) from hoursWorked as hw where hw.idWorkCode = wc.idWorkCode and DATEPART(YEAR ,hw.dateWorked) = @year and DATENAME(MONTH, hw.dateWorked) = 'Dicember') is null then 0
+			 else (select SUM(hw.hoursST)+SUM(hw.hoursOT)+SUM(hw.hours3) from hoursWorked as hw where hw.idWorkCode = wc.idWorkCode and DATEPART(YEAR ,hw.dateWorked) = @year and DATENAME(MONTH, hw.dateWorked) = 'Dicember') end as 'Dicember'
+	from workCode as wc ) as T1
+	where (T1.January+T1.February+T1.March+T1.April+T1.May+T1.June+T1.July+T1.August+T1.September+T1.October+T1.Nomvember+T1.Dicember) > 0
+end
+go
 
 --==============================================================================================================================
 --===== ESTE CODIGO ES PARA AGREGAR EL CAMPO DE PERDIEM EN LA VENTA DE EMPLOYEES ===============================================
@@ -2740,150 +2884,128 @@ go
 
 ---- PARA DESCOMENTAR USAR LAS TECLAS (CTRL+K)(CTRL+U) Y PARA COMENTAR (CTRL+K)(CTRL+C)
 
---alter table employees 
---add perdiem bit
+----CREAMOS UN CASCADE PARA PODER ELIMNAR LOS SCFESTIMATION Y LOS ESTMETERS 
+
+--ALTER TABLE EstMeters  DROP  CONSTRAINT fk_EstNumber_EstMeters 
+--GO
+
+--ALTER TABLE EstMeters  WITH CHECK ADD  CONSTRAINT fk_EstNumber_EstMeters FOREIGN KEY(EstNumber)
+--REFERENCES scfEstimation (EstNumber)
+--ON UPDATE CASCADE
+--ON DELETE CASCADE
+--GO
+---- AGREGAMOS EL CAMPO DE UNIT EN SCFESTPROYECT 
+---- VERIFICAR QUE EXISTA LA TABLA CON SOLO UN CAMPO
+--SELECT * FROM scfEstProyect -- DEBE SALIR SOLO UN CAMPO CCNUM 
+----SI PARECE EL CAMPO UNIT "NO" EJECUTE EL SIGUIENTE 
+--ALTER TABLE scfEstProyect 
+--ADD unit VARCHAR(30) NOT NULL
+--GO
+---- SI NO EXISTE LA TABLA CREARLA
+--CREATE TABLE scfEstProyect(
+--	ccnum varchar(30) NOT NULL primary key,
+--	unit varchar(30) NOT NULL
+--)
+--go
+----VERIFICAMOS QUE EXISTA EL CAMPO CCNUM EN LA TABLE DE SCFESTIMATION
+--SELECT ccnum FROM scfEstimation
+----SI NO EXISTE EJECUTAR LOS SIGUIENTE
+--ALTER TABLE scfEstimation
+--ADD ccnum VARCHAR(30)
+--GO
+---- CREAMOS LA UNION DE SCFESTIMATION CON LA TABLA DE SCFESTPROYECT
+--ALTER TABLE scfEstimation  WITH CHECK ADD  CONSTRAINT fk_ccnum_scfEstimation FOREIGN KEY(ccnum)
+--REFERENCES scfEstProyect (ccnum)
+--GO
+
+----TAMBIEN AGREGAMOS EL IDCLIENT EN LA TABLA DE ESTIMACION PARA SEPARAR LAS ESTIMACIONES 
+
+--ALTER TABLE scfEstimation 
+--ADD idClient VARCHAR(36) null
+--GO
+
+--ALTER TABLE scfEstimation WITH CHECK ADD CONSTRAINT fk_idClient_scfEstimation
+--FOREIGN KEY (idClient) REFERENCES clients(idClient)
 --go
 
---update employees set perdiem = 0 
---go
+----CORRECCION DE LA TABLA SCDINFO TIENE DUPLICADOS LAS UNIONES 
 
---ALTER proc [dbo].[sp_insert_Employee]
---	--general
---	@numberEmploye int, 
---	@firstName varchar(30),
---	@lastName varchar(25),
---	@middleName varchar(25),
---	@socialNumber varchar(14),
---	@SAPNumber int,
---	@photo image,
---	@estatus char(1),
---	--contact
---	@phoneNumber1 varchar(13),
---	@phoneNumber2 varchar(13),
---	@email varchar(50),
---	--address
---	@avenue varchar(80),
---	@number int,
---	@city varchar(20), 
---	@providence varchar(20),
---	@postalCode int,
---	--pay
---	@payRate1 float,
---	@payRate2 float, 
---	@payRate3 float,
---	--type 
---	@type varchar(20),
---	--perdiem
---	@perdiem bit
+--ALTER TABLE scaffoldInformation DROP CONSTRAINT fk_type_SCFInformation
+--GO
+
+--ALTER TABLE scaffoldInformation DROP CONSTRAINT fk_tag_SCFInformation
+--GO
+
+--ALTER TABLE scaffoldInformation DROP CONSTRAINT fk_idModification_SCFInformation
+--GO
+
+----FALTABA UNION DE EN EL SCRIPT
+
+--ALTER TABLE taxesPT  WITH CHECK ADD  CONSTRAINT fk_idAux_TaxesPT FOREIGN KEY(idAux)
+--REFERENCES task (idAux)
+--GO
+
+----CORRECCION DEL PROCEDIMIENTO SP_SCFESTIMATION
+
+--ALTER proc [dbo].[sp_scfEstimation]
+--@ccnum as varchar(30),
+--@EstNumber as varchar(36),
+--@IdClient as varchar(36),
+--@all as bit
 --as 
---declare @error int  -- declaro variables para los ID que son nuevos y una variable de error
---declare @idEmployee varchar(36) 
---declare @idContact varchar(36)
---declare @idHomeAdress varchar(36)
---declare @idPayRate varchar(36)
---begin
---	begin tran --inicio tran
---		begin try --inicio try
---			--if @phoneNumber1 <> '' or @email<> '' begin -- si existe un telefono o un correo entra 
---				set @idContact = NEWID() 
---				insert into contact values(@idContact,@phoneNumber1,@phoneNumber2,@email)
---				if @@ERROR <> 0 begin set @error = @@ERROR goto solveproblem end  -- si existe un error en al insertar solo vamos a solveproblem y nos evitamos lo demas
---			--end
---			--if @avenue <> '' begin -- solo se necesita saber si la calle tiene algo 
---				set @idHomeAdress = NEWID()
---				insert into HomeAddress values (@idHomeAdress , @avenue , @number , @city , @providence , @postalCode)
---				if @@ERROR <> 0 begin set @error = @@ERROR goto solveproblem end 
-				
---			--end
---			--if @firstName <> '' or @numberEmploye > 0 begin	
---				set @idEmployee = NEWID()
---				insert into employees values (@idEmployee , @numberEmploye , @firstName , @lastName , @middleName, @socialNumber , @SAPNumber, @photo , @idHomeAdress , @idContact ,@estatus,@type,@perdiem)
---				if @@ERROR <> 0 begin set @error = @@ERROR goto solveproblem end 
---			--end
---			--if @payRate1 <> '' begin
---				set @idPayRate = NEWID()
---				insert into payRate values (@idPayRate,@payRate1,@payRate2 ,@payRate3,@idEmployee,GETDATE())
---				if @@ERROR <> 0 begin set @error = @@ERROR goto solveproblem end 
---			--end
---		end try	
---		begin catch
---			goto solveproblem -- en caso de error capturado en el catch no vamos a solveproblem y evitamos en commit
---		end catch
---	commit tran 
---	solveproblem:
---	if @error <> 0
---	begin 
---		rollback tran -- el rollback es para deshacer todos lo cambios hechos anteriormente
+--begin 
+--	if @all = 1
+--	begin
+--		select 
+--				scfE.EstNumber,ISNULL(scfp.unit,'')as 'unit',ISNULL(scfP.ccnum,'') as 'ccnum',scfE.location,scfE.width,scfE.length,scfE.heigth,scfE.descks,scfE.daysActive,estM.DA,
+--				scfE.M3,scfE.M2,scfT.SCTP, ISNULL((select hFactor from scfFactor where heigth = scfe.heigth+scfe.groundHeigth),(select hFactor from scfFactor where heigth = (select MAX(heigth)from scfFactor) )) as 'Factor', scfT.BDRATE, estm.PMANHRS,
+--				estM.BPRICE,estM.DECKBP,estM.DPRICE,estM.DECKDP,
+--				estM.EDM3C,estM.EDM2C,estM.EDM3,estM.EDM2,
+--				estM.M3LBP,estM.M3LDP,estM.M2LBP,estM.M2LDP,
+--				estM.M3MBP,estM.M3MDP,estM.M2MBP,estM.M2MDP,
+--				estM.M3EBP,estM.M3EDP,estM.M2EBP,estM.M2EDP
+--			from scfEstimation as scfE
+--				inner join EstMeters as estM on estM.EstNumber = scfE.EstNumber
+--				inner join ScafEstCost as scfC on scfC.idEstCost = scfE.idEstCost
+--				inner join scfTypeCost as scfT on scfT.scfTypeId = scfE.scfTypeId 
+--				left join  scfEstProyect as scfP on scfP.ccnum = scfE.ccnum
+--			where idClient= @IdClient 
+--			order by scfP.ccnum
 --	end
---end
---go
-
---ALTER proc [dbo].[sp_update_Employee]
---	@idEmployee varchar(36),
---	@idAddress varchar(36),
---	@idContact varchar(36),
---	--general
---	@numberEmploye int, 
---	@firstName varchar(30),
---	@lastName varchar(25),
---	@middleName varchar(25),
---	@socialNumber varchar(14),
---	@SAPNumber int,
---	@photo image,
---	@estatus char(1),
---	--contact
---	@phoneNumber1 varchar(13),
---	@phoneNumber2 varchar(13),
---	@email varchar(50),
---	--address
---	@avenue varchar(80),
---	@number int,
---	@city varchar(20), 
---	@providence varchar(20),
---	@postalCode int,
---	----pay
---	--@payRate1 float,
---	--@payRate2 float, 
---	--@payRate3 float,
---	--type 
---	@type varchar(20),
---	@perdiem bit,
---	@msg varchar(50) output
---as 
---declare @error int  -- declaro variables para los ID que son nuevos y una variable de error
---begin
---	begin tran --inicio tran
---		begin try --inicio try
---			--if @avenue <> '' begin -- solo se necesita saber si la calle tiene algo 
---				set @msg = 'Error at moment to save Address data'
---				update HomeAddress set avenue = @avenue ,number =@number ,city =@city ,providence =@providence ,postalcode = @postalCode where idHomeAdress = @idAddress
---				if @@ERROR <> 0 begin set @error = @@ERROR goto solveproblem end 
-				
---				set @msg = 'Error at moment to save Contact data'
---				update contact set phoneNumber1 =@phoneNumber1 , phoneNumber2 =@phoneNumber2 , email = @email where idContact = @idContact
---				if @@ERROR <> 0 begin set @error = @@ERROR goto solveproblem end 
---			--end
---			----if @payRate1 <> '' begin
---			--	set @msg = 'Error at moment to save Pay Rate data'
---			--	update payRate set payRate1 = @payRate1,payRate2= @payRate2 , payRate3 = @payRate3 where idPayRate = @idPay and idEmployee = @idEmployee
---			--	if @@ERROR <> 0 begin set @error = @@ERROR goto solveproblem end 
---			----end
---			--if @firstName <> '' or @numberEmploye > 0 begin
---				set @msg = 'Error at moment to save Employee data'	
---				update employees set  numberEmploye = @numberEmploye ,firstName = @firstName , lastName = @lastName ,middleName = @middleName,socialNumber = @socialNumber ,SAPNumber = @SAPNumber,photo = @photo , estatus = @estatus,typeEmployee = @type, perdiem = @perdiem where idEmployee = @idEmployee
---				if @@ERROR <> 0 begin set @error = @@ERROR goto solveproblem end 
---			--end
---			set @msg = 'Succesfull'
---		end try	
---		begin catch
---			goto solveproblem -- en caso de error capturado en el catch no vamos a solveproblem y evitamos en commit
---		end catch
---	commit tran 
---	solveproblem:
---	if @error <> 0
---	begin 
---		rollback tran -- el rollback es para deshacer todos lo cambios hechos anteriormente
---		return @msg
+--	else if @ccnum<> '' and @all = 0
+--	begin
+--		select 
+--				scfE.EstNumber,ISNULL(scfp.unit,'')as 'unit',ISNULL(scfP.ccnum,'') as 'ccnum',scfE.location,scfE.width,scfE.length,scfE.heigth,scfE.descks,scfE.daysActive,estM.DA,
+--				scfE.M3,scfE.M2,scfT.SCTP, ISNULL((select hFactor from scfFactor where heigth = scfe.heigth+scfe.groundHeigth),(select hFactor from scfFactor where heigth = (select MAX(heigth)from scfFactor) )) as 'Factor', scfT.BDRATE, estm.PMANHRS,
+--				estM.BPRICE,estM.DECKBP,estM.DPRICE,estM.DECKDP,
+--				estM.EDM3C,estM.EDM2C,estM.EDM3,estM.EDM2,
+--				estM.M3LBP,estM.M3LDP,estM.M2LBP,estM.M2LDP,
+--				estM.M3MBP,estM.M3MDP,estM.M2MBP,estM.M2MDP,
+--				estM.M3EBP,estM.M3EDP,estM.M2EBP,estM.M2EDP
+--			from scfEstimation as scfE
+--				inner join EstMeters as estM on estM.EstNumber = scfE.EstNumber
+--				inner join ScafEstCost as scfC on scfC.idEstCost = scfE.idEstCost
+--				inner join scfTypeCost as scfT on scfT.scfTypeId = scfE.scfTypeId 
+--				left join  scfEstProyect as scfP on scfP.ccnum = scfE.ccnum
+--				where scfP.ccnum = @ccnum and scfE.idClient = @IdClient
+--			order by scfP.ccnum
+--	end
+--	else if @ccnum ='' and @all = 0
+--	begin
+--		select 
+--				scfE.EstNumber,ISNULL(scfp.unit,'')as 'unit',ISNULL(scfP.ccnum,'') as 'ccnum',scfE.location,scfE.width,scfE.length,scfE.heigth,scfE.descks,scfE.daysActive,estM.DA,
+--				scfE.M3,scfE.M2,scfT.SCTP, ISNULL((select hFactor from scfFactor where heigth = scfe.heigth+scfe.groundHeigth),(select hFactor from scfFactor where heigth = (select MAX(heigth)from scfFactor) )) as 'Factor', scfT.BDRATE, estm.PMANHRS,
+--				estM.BPRICE,estM.DECKBP,estM.DPRICE,estM.DECKDP,
+--				estM.EDM3C,estM.EDM2C,estM.EDM3,estM.EDM2,
+--				estM.M3LBP,estM.M3LDP,estM.M2LBP,estM.M2LDP,
+--				estM.M3MBP,estM.M3MDP,estM.M2MBP,estM.M2MDP,
+--				estM.M3EBP,estM.M3EDP,estM.M2EBP,estM.M2EDP
+--			from scfEstimation as scfE
+--				inner join EstMeters as estM on estM.EstNumber = scfE.EstNumber
+--				inner join ScafEstCost as scfC on scfC.idEstCost = scfE.idEstCost
+--				inner join scfTypeCost as scfT on scfT.scfTypeId = scfE.scfTypeId 
+--				left join  scfEstProyect as scfP on scfP.ccnum = scfE.ccnum
+--			where scfE.EstNumber =@EstNumber and idClient= @IdClient 
 --	end
 --end
 --go

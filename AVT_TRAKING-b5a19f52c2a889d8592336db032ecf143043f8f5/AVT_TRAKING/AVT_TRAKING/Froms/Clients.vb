@@ -254,7 +254,7 @@ Public Class Clients
 
         For Each cell As DataGridViewCell In tblClientes.CurrentRow.Cells
             If Not cell.ColumnIndex = 17 Then
-                dataClient.Add(cell.Value)
+                dataClient.Add(If(cell.Value Is DBNull.Value, "", cell.Value))
             Else
                 imgPhoto.Image = If(cell.Value IsNot DBNull.Value, BytetoImage(cell.Value), Nothing)
             End If

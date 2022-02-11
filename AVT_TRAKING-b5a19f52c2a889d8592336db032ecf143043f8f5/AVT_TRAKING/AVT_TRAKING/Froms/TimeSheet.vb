@@ -346,7 +346,7 @@ Public Class TimeSheet
                     Dim text = txtSalida.Text
                     While timesheet.Cells(cont, 1).Text <> ""
                         list.Clear()
-                        txtSalida.Text = text + "Insert line " + cont.ToString()
+                        txtSalida.Text = text + vbCrLf + "Insert line " + cont.ToString()
                         list.Add("") 'idHoursWorked
                         list.Add(timesheet.Cells(cont, 7).Text) 'hours ST
                         list.Add(timesheet.Cells(cont, 8).Text) 'hours OT

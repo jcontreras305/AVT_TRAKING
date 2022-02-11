@@ -272,6 +272,12 @@ Public Class ProjectsClients
     Private Sub btnUploadSchedule_Click(sender As Object, e As EventArgs) Handles btnUploadSchedule.Click
         'OpenFormPanel(Of scafoldTarking)()
         Dim st As New scafoldTarking
+        If idCliente <> "" Then
+            st.IdCliente = idCliente
+            If txtCompanyName.Text <> "" Then
+                st.Company = txtCompanyName.Text
+            End If
+        End If
         Me.Visible = False
         st.ShowDialog()
         Me.Visible = True

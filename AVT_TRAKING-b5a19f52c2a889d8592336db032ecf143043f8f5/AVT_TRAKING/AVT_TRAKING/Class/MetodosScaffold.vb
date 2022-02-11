@@ -314,7 +314,7 @@ from job as jb
             desconectar()
         End Try
     End Function
-    Public Function llenarComboWO(ByVal combo As ComboBox) As DataTable
+    Public Function llenarComboWO(ByVal combo As ComboBox, ByVal IdCliente As String) As DataTable
         Dim tabla As New DataTable
         tabla.Columns.Add("wono")
         tabla.Columns.Add("wo")
@@ -328,7 +328,7 @@ from job as jb
 from job as jb 
 inner join projectOrder as po on po.jobNo = jb.jobNo
 inner join workOrder as wo on wo.idPO = po.idPO
-inner join task as tk on tk.idAuxWO = wo.idAuxWO", conn)
+inner join task as tk on tk.idAuxWO = wo.idAuxWO " + If(IdCliente = "", "", "where jb.idClient = '" + IdCliente + "'"), conn)
             Dim dr As SqlDataReader = cmd.ExecuteReader()
             combo.Items.Clear()
             combo.Items.Add("")
@@ -345,14 +345,14 @@ inner join task as tk on tk.idAuxWO = wo.idAuxWO", conn)
         End Try
     End Function
 
-    Public Function llenarWO(ByVal tabla As DataGridView) As Boolean
+    Public Function llenarWO(ByVal tabla As DataGridView, ByVal IdCliente As String) As Boolean
         Try
             conectar()
             Dim cmd As New SqlCommand("select jb.jobNo as 'Job No', CONCAT(wo.idWO,'-',tk.task) as 'WO No', tk.description as 'Description'
 from job as jb 
 inner join projectOrder as po on po.jobNo = jb.jobNo
 inner join workOrder as wo on wo.idPO = po.idPO
-inner join task as tk on tk.idAuxWO = wo.idAuxWO", conn)
+inner join task as tk on tk.idAuxWO = wo.idAuxWO " + If(IdCliente = "", "", "where jb.idClient = '" + IdCliente + "'"), conn)
             If cmd.ExecuteNonQuery Then
                 Dim da As New SqlDataAdapter(cmd)
                 Dim dt As New DataTable
@@ -560,7 +560,22 @@ end ", conn)
         End Try
     End Function
 
-
+    Public Function llenarJobCombo(ByVal combo As ComboBox, ByVal idclient As String) As Boolean
+        Try
+            conectar()
+            Dim cmd As New SqlCommand("select jb.jobNo from job as jb where jb.idClient = '" + idclient + "'", conn)
+            Dim reader As SqlDataReader = cmd.ExecuteReader()
+            While reader.Read()
+                combo.Items.Add(reader("jobNo"))
+            End While
+            Return True
+        Catch ex As Exception
+            MsgBox(ex.Message())
+            Return False
+        Finally
+            desconectar()
+        End Try
+    End Function
 
     '========================================================= Empleados =================================================================
     Public Function llenarEmpleadosCombo(ByVal combo As ComboBox, ByVal tabla As DataTable) As Boolean
@@ -1567,11 +1582,11 @@ where ticketNum = '" + idTicket + "'"
         End Try
     End Function
 
-    Public Function llenarInComming(ByVal tblProductos As DataGridView, ByVal tblTickets As DataTable) As List(Of String)
+    Public Function llenarInComming(ByVal tblProductos As DataGridView, ByVal tblTickets As DataTable, ByVal idClient As String) As List(Of String)
         Dim list As New List(Of String)
         Try
             conectar()
-            Dim cmdInComing As New SqlCommand("select * from incoming", conn)
+            Dim cmdInComing As New SqlCommand("select * from incoming as inc " + If(idClient = "", "", "inner join job as jb on inc.jobNo = jb.jobNo where jb.idClient = '" + idClient + "'"), conn)
             If cmdInComing.ExecuteNonQuery Then
                 Dim da As New SqlDataAdapter(cmdInComing)
                 tblTickets.Clear()
@@ -1818,11 +1833,11 @@ where po.ticketNum = '" + ticketOutGoing + "'", conn)
         End Try
     End Function
 
-    Public Function llenarOutGoing(ByVal tblProductosOutGoing As DataGridView, ByVal tblTicketsOut As DataTable) As List(Of String)
+    Public Function llenarOutGoing(ByVal tblProductosOutGoing As DataGridView, ByVal tblTicketsOut As DataTable, ByVal idClient As String) As List(Of String)
         Dim list As New List(Of String)
         Try
             conectar()
-            Dim cmdInComing As New SqlCommand("select * from outgoing", conn)
+            Dim cmdInComing As New SqlCommand("select * from outgoing as otg " + If(idClient = "", "", " inner join job as jb on otg.jobNo = jb.jobNo where jb.idClient = '" + idClient + "'"), conn)
             If cmdInComing.ExecuteNonQuery Then
                 Dim da As New SqlDataAdapter(cmdInComing)
                 tblTicketsOut.Clear()
@@ -2005,13 +2020,13 @@ end", conn)
             desconectar()
         End Try
     End Function
-
-    Public Function llenarScaffold(ByVal tabla As DataTable) As Boolean
+    Public Function llenarScaffold(ByVal tabla As DataTable, ByVal idCliente As String) As Boolean
         Try
             conectar()
             Dim cmd As New SqlCommand("select tag, st.idAux,idJobCat,idArea,idSubJob, CONCAT(wo.idWO,'-',tk.task)as 'WO',st.status from scaffoldTraking as st
 inner join task as tk on tk.idAux = st.idAux
-inner join workOrder as wo on tk.idAuxWO = wo.idAuxWO", conn)
+inner join workOrder as wo on tk.idAuxWO = wo.idAuxWO inner join projectOrder as po on po.idPO = wo.idPO and wo.jobNo = po.jobNo inner join job as jb on jb.jobNo = po.jobNo" +
+If(idCliente = "", "", " where jb.idClient='" + idCliente + "'"), conn)
             tabla.Rows.Clear()
             If cmd.ExecuteNonQuery Then
                 Dim da As New SqlDataAdapter(cmd)
@@ -2556,13 +2571,19 @@ select distinct requestBy from modification) as t1", conn)
         End Try
     End Function
 
-    Public Function llenarModification(ByVal tabla As DataTable) As Boolean
+    Public Function llenarModification(ByVal tabla As DataTable, ByVal idCliente As String) As Boolean
         Try
             conectar()
             Dim cmd As New SqlCommand("select md.idModAux,md.idModification, ah.idActivityHours , si.idScaffoldInformation , mh.idMaterialHandeling ,md.tag from modification as md 
 inner join activityHours as ah on md.idModAux = ah.idModAux 
 left join scaffoldInformation as si on md.idModAux = si.idModAux
-inner join materialHandeling as mh on md.idModAux = mh.idModAux", conn)
+inner join materialHandeling as mh on md.idModAux = mh.idModAux
+inner join scaffoldTraking as scf on scf.tag = md.tag
+inner join task as tk on tk.idAux = scf.idAux
+inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO
+inner join projectOrder as po on po.idPO = wo.idWO and po.jobNo = wo.jobNo 
+inner join job as jb on jb.jobNo = po.jobNo" +
+If(idCliente = "", "", " where idClient ='" + idCliente + "'"), conn)
             tabla.Clear()
             If cmd.ExecuteNonQuery Then
                 Dim da As New SqlDataAdapter(cmd)
