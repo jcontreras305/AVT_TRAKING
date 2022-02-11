@@ -938,6 +938,74 @@ begin
 end
 go
 
+--##############################################################################################
+--################## SP VACATION EMPLOYEE #######################################################
+--##############################################################################################
+CREATE proc [dbo].[Sp_Vacation_Employee]
 
+--ALTER proc [dbo].[Sp_Vacation_Employee]
+@NoEmployee int,
+@year nVarchar(4),
+@all bit
+as
+begin
+    set @year = isnull(@year, DATENAME(YEAR,GETDATE()))
+		
+		if @all = 0 begin
+		select t1.[Employee],t1.[Emp: Number],t1.[Day],t1.[Project Name],t1.[Work Description],t1.[Rate ST],
+	    t1.[hoursST],T1.[Rate OT] ,t1.[hoursOT] 
+		from(
+		select distinct
+			CONCAT(em.lastName,' ',em.firstName,' ',em.middleName) as 'Employee', 
+			em.numberEmploye as 'Emp: Number' ,
+			hw.dateWorked as 'Day',
+			concat(wo.idWO,'-',tk.task) as 'Project Name',
+			SUBSTRING( wc.name,1,iif(CHARINDEX('-',wc.name)=0, len(wc.name) ,(CHARINDEX('-',wc.name)-1))) as 'Work Description',
+			wc.billingRate1 as 'Rate ST',
+			(select iif(SUM(hw1.hoursST)  is null,0,SUM(hw1.hoursST)) from hoursWorked as hw1 inner join workCode as wc1 on wc1.idWorkCode = hw.idWorkCode inner join task as tk1 on tk1.idAux = hw1.idAux inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO inner join projectOrder as po1 on po1.idPO = wo1.idPO and wo1.jobNo = po1.jobNo inner join job as jb1 on jb1.jobNo = po1.jobNo where hw1.dateWorked = hw.dateWorked and em.idEmployee = hw1.idEmployee and jb.jobNo = jb1.jobNo and po1.idPO = po.idPO and  wc1.name like '%6.4%') as 'hoursST',
+			wc.billingRateOT as 'Rate OT',
+			(select iif(SUM(hw1.hoursOT)is null,0,SUM(hw1.hoursOT)) from hoursWorked as hw1 inner join workCode as wc1 on wc1.idWorkCode = hw.idWorkCode inner join task as tk1 on tk1.idAux = hw1.idAux inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO inner join projectOrder as po1 on po1.idPO = wo1.idPO and wo1.jobNo = po1.jobNo inner join job as jb1 on jb1.jobNo = po1.jobNo where hw1.dateWorked = hw.dateWorked and em.idEmployee = hw1.idEmployee and jb.jobNo = jb1.jobNo and po1.idPO = po.idPO and  wc1.name like '%6.4%') as 'hoursOT'
+			from hoursWorked as hw 
+			inner join employees as em on hw.idEmployee = em.idEmployee
+			inner join workCode as wc on wc.idWorkCode = hw.idWorkCode
+			inner join task as tk on tk.idAux = hw.idAux 
+			inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO 
+			inner join projectOrder as po on po.idPO = wo.idPO and wo.jobNo = po.jobNo 
+			inner join job as jb on jb.jobNo = po.jobNo
+			where   DATEPART(YEAR ,hw.dateWorked) =@year and numberEmploye=@NoEmployee and (hw.hoursST > 0 or hw.hoursOT>0 or hw.hours3>0) and  wc.name like '%6.4%' --and em.numberEmploye = 16874
+		)as t1
+		group by t1.[Employee],t1.[Emp: Number],t1.[Day],t1.[Project Name],t1.[Work Description],t1.[Rate ST],
+	t1.[hoursST],T1.[Rate OT] ,t1.[hoursOT] 
 
+end
+else
+begin
+select t1.[Employee],t1.[Emp: Number],t1.[Day],t1.[Project Name],t1.[Work Description],t1.[Rate ST],
+	t1.[hoursST],T1.[Rate OT] ,t1.[hoursOT] 
+		from(
+		select distinct
+			CONCAT(em.lastName,' ',em.firstName,' ',em.middleName) as 'Employee', 
+			em.numberEmploye as 'Emp: Number' ,
+			hw.dateWorked as 'Day',
+			concat(wo.idWO,'-',tk.task) as 'Project Name',
+			SUBSTRING( wc.name,1,iif(CHARINDEX('-',wc.name)=0, len(wc.name) ,(CHARINDEX('-',wc.name)-1))) as 'Work Description',
+			wc.billingRate1 as 'Rate ST',
+			(select iif(SUM(hw1.hoursST)  is null,0,SUM(hw1.hoursST)) from hoursWorked as hw1 inner join workCode as wc1 on wc1.idWorkCode = hw.idWorkCode inner join task as tk1 on tk1.idAux = hw1.idAux inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO inner join projectOrder as po1 on po1.idPO = wo1.idPO and wo1.jobNo = po1.jobNo inner join job as jb1 on jb1.jobNo = po1.jobNo where hw1.dateWorked = hw.dateWorked and em.idEmployee = hw1.idEmployee and jb.jobNo = jb1.jobNo and po1.idPO = po.idPO and  wc1.name like '%6.4%') as 'hoursST',
+			wc.billingRateOT as 'Rate OT',
+			(select iif(SUM(hw1.hoursOT)is null,0,SUM(hw1.hoursOT)) from hoursWorked as hw1 inner join workCode as wc1 on wc1.idWorkCode = hw.idWorkCode inner join task as tk1 on tk1.idAux = hw1.idAux inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO inner join projectOrder as po1 on po1.idPO = wo1.idPO and wo1.jobNo = po1.jobNo inner join job as jb1 on jb1.jobNo = po1.jobNo where hw1.dateWorked = hw.dateWorked and em.idEmployee = hw1.idEmployee and jb.jobNo = jb1.jobNo and po1.idPO = po.idPO and  wc1.name like '%6.4%') as 'hoursOT'
+			
+
+			from hoursWorked as hw 
+			inner join employees as em on hw.idEmployee = em.idEmployee
+			inner join workCode as wc on wc.idWorkCode = hw.idWorkCode
+			inner join task as tk on tk.idAux = hw.idAux 
+			inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO 
+			inner join projectOrder as po on po.idPO = wo.idPO and wo.jobNo = po.jobNo 
+			inner join job as jb on jb.jobNo = po.jobNo
+			where   DATEPART(YEAR ,hw.dateWorked) =@year  and (hw.hoursST > 0 or hw.hoursOT>0 or hw.hours3>0) and  wc.name like '%6.4%' --and em.numberEmploye = 16874
+		)as t1
+		group by t1.[Employee],t1.[Emp: Number],t1.[Day],t1.[Project Name],t1.[Work Description],t1.[Rate ST],
+	t1.[hoursST],T1.[Rate OT] ,t1.[hoursOT] 
+	end
+	end
 
