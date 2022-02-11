@@ -833,39 +833,65 @@ go
 --##############################################################################################
 --CREATE proc [dbo].[sp_scfEstimation]
 ALTER proc [dbo].[sp_scfEstimation]
-@EstNumber as varchar(30)
+@ccnum as varchar(30),
+@EstNumber as varchar(36),
+@IdClient as varchar(36),
+@all as bit
 as 
-begin
-  if @Estnumber <> '%'
-  begin
-    select scfe.EstNumber, scfe.unit , scfe.location , scfe.width ,scfe.length ,scfe.heigth,scfe.descks,scfe.daysActive,emt.DA,
-		scfe.M3 , scfe.M2, typ.SCTP , (select hFactor from scfFactor where heigth = scfe.heigth+scfe.groundHeigth) as 'Factor' , typ.BDRATE , emt.PMANHRS,
-		emt.BPRICE,emt.DECKBP,emt.DPRICE,emt.DECKDP,
-		emt.EDM3C,emt.EDM2C,emt.EDM3C,emt.EDM2C,
-		emt.M3LBP,emt.M3LDP,emt.M2LBP,emt.M2LDP,
-		emt.M3MBP,emt.M3MDP,emt.M2MBP,emt.M2MDP,
-		emt.M3EBP,emt.M3EDP,emt.M2EBP,emt.M2EDP
-		from scfEstimation as scfe 
-		inner join EstMeters as emt on scfe.EstNumber = emt.EstNumber
-		inner join scfTypeCost as typ on typ.scfTypeId = scfe.scfTypeId 
-		inner join ScafEstCost as cost on cost.idEstCost = scfe.idEstCost
-		where scfe.EstNumber like @EstNumber
-end
-else 
-begin
-    select scfe.EstNumber, scfe.unit , scfe.location , scfe.width ,scfe.length ,scfe.heigth,scfe.descks,scfe.daysActive,emt.DA,
-		scfe.M3 , scfe.M2, typ.SCTP , (select hFactor from scfFactor where heigth = scfe.heigth+scfe.groundHeigth) as 'Factor' , typ.BDRATE , emt.PMANHRS,
-		emt.BPRICE,emt.DECKBP,emt.DPRICE,emt.DECKDP,
-		emt.EDM3C,emt.EDM2C,emt.EDM3C,emt.EDM2C,
-		emt.M3LBP,emt.M3LDP,emt.M2LBP,emt.M2LDP,
-		emt.M3MBP,emt.M3MDP,emt.M2MBP,emt.M2MDP,
-		emt.M3EBP,emt.M3EDP,emt.M2EBP,emt.M2EDP
-		from scfEstimation as scfe 
-		inner join EstMeters as emt on scfe.EstNumber = emt.EstNumber
-		inner join scfTypeCost as typ on typ.scfTypeId = scfe.scfTypeId 
-		inner join ScafEstCost as cost on cost.idEstCost = scfe.idEstCost
-		where scfe.EstNumber like '%'
-  end
+begin 
+	if @all = 1
+	begin
+		select 
+				scfE.EstNumber,ISNULL(scfp.unit,'')as 'unit',ISNULL(scfP.ccnum,'') as 'ccnum',scfE.location,scfE.width,scfE.length,scfE.heigth,scfE.descks,scfE.daysActive,estM.DA,
+				scfE.M3,scfE.M2,scfT.SCTP, ISNULL((select hFactor from scfFactor where heigth = scfe.heigth+scfe.groundHeigth),(select hFactor from scfFactor where heigth = (select MAX(heigth)from scfFactor) )) as 'Factor', scfT.BDRATE, estm.PMANHRS,
+				estM.BPRICE,estM.DECKBP,estM.DPRICE,estM.DECKDP,
+				estM.EDM3C,estM.EDM2C,estM.EDM3,estM.EDM2,
+				estM.M3LBP,estM.M3LDP,estM.M2LBP,estM.M2LDP,
+				estM.M3MBP,estM.M3MDP,estM.M2MBP,estM.M2MDP,
+				estM.M3EBP,estM.M3EDP,estM.M2EBP,estM.M2EDP
+			from scfEstimation as scfE
+				inner join EstMeters as estM on estM.EstNumber = scfE.EstNumber
+				inner join ScafEstCost as scfC on scfC.idEstCost = scfE.idEstCost
+				inner join scfTypeCost as scfT on scfT.scfTypeId = scfE.scfTypeId 
+				left join  scfEstProyect as scfP on scfP.ccnum = scfE.ccnum
+			where idClient= @IdClient 
+			order by scfP.ccnum
+	end
+	else if @ccnum<> '' and @all = 0
+	begin
+		select 
+				scfE.EstNumber,ISNULL(scfp.unit,'')as 'unit',ISNULL(scfP.ccnum,'') as 'ccnum',scfE.location,scfE.width,scfE.length,scfE.heigth,scfE.descks,scfE.daysActive,estM.DA,
+				scfE.M3,scfE.M2,scfT.SCTP, ISNULL((select hFactor from scfFactor where heigth = scfe.heigth+scfe.groundHeigth),(select hFactor from scfFactor where heigth = (select MAX(heigth)from scfFactor) )) as 'Factor', scfT.BDRATE, estm.PMANHRS,
+				estM.BPRICE,estM.DECKBP,estM.DPRICE,estM.DECKDP,
+				estM.EDM3C,estM.EDM2C,estM.EDM3,estM.EDM2,
+				estM.M3LBP,estM.M3LDP,estM.M2LBP,estM.M2LDP,
+				estM.M3MBP,estM.M3MDP,estM.M2MBP,estM.M2MDP,
+				estM.M3EBP,estM.M3EDP,estM.M2EBP,estM.M2EDP
+			from scfEstimation as scfE
+				inner join EstMeters as estM on estM.EstNumber = scfE.EstNumber
+				inner join ScafEstCost as scfC on scfC.idEstCost = scfE.idEstCost
+				inner join scfTypeCost as scfT on scfT.scfTypeId = scfE.scfTypeId 
+				left join  scfEstProyect as scfP on scfP.ccnum = scfE.ccnum
+				where scfP.ccnum = @ccnum and scfE.idClient = @IdClient
+			order by scfP.ccnum
+	end
+	else if @ccnum ='' and @all = 0
+	begin
+		select 
+				scfE.EstNumber,ISNULL(scfp.unit,'')as 'unit',ISNULL(scfP.ccnum,'') as 'ccnum',scfE.location,scfE.width,scfE.length,scfE.heigth,scfE.descks,scfE.daysActive,estM.DA,
+				scfE.M3,scfE.M2,scfT.SCTP, ISNULL((select hFactor from scfFactor where heigth = scfe.heigth+scfe.groundHeigth),(select hFactor from scfFactor where heigth = (select MAX(heigth)from scfFactor) )) as 'Factor', scfT.BDRATE, estm.PMANHRS,
+				estM.BPRICE,estM.DECKBP,estM.DPRICE,estM.DECKDP,
+				estM.EDM3C,estM.EDM2C,estM.EDM3,estM.EDM2,
+				estM.M3LBP,estM.M3LDP,estM.M2LBP,estM.M2LDP,
+				estM.M3MBP,estM.M3MDP,estM.M2MBP,estM.M2MDP,
+				estM.M3EBP,estM.M3EDP,estM.M2EBP,estM.M2EDP
+			from scfEstimation as scfE
+				inner join EstMeters as estM on estM.EstNumber = scfE.EstNumber
+				inner join ScafEstCost as scfC on scfC.idEstCost = scfE.idEstCost
+				inner join scfTypeCost as scfT on scfT.scfTypeId = scfE.scfTypeId 
+				left join  scfEstProyect as scfP on scfP.ccnum = scfE.ccnum
+			where scfE.EstNumber =@EstNumber and idClient= @IdClient 
+	end
 end
 go
 
@@ -911,3 +937,7 @@ begin
 	where (T1.January+T1.February+T1.March+T1.April+T1.May+T1.June+T1.July+T1.August+T1.September+T1.October+T1.Nomvember+T1.Dicember) > 0
 end
 go
+
+
+
+
