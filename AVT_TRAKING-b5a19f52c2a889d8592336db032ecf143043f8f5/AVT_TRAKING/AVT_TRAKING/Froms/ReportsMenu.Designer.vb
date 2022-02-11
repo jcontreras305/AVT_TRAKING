@@ -46,6 +46,7 @@ Partial Class ReportsMenu
         Me.Button6 = New System.Windows.Forms.Button()
         Me.Button5 = New System.Windows.Forms.Button()
         Me.PictureBox4 = New System.Windows.Forms.PictureBox()
+        Me.btnVacationE = New System.Windows.Forms.Button()
         Me.TitleBar.SuspendLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.btnRestore, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -134,7 +135,7 @@ Partial Class ReportsMenu
         Me.Panel2.Dock = System.Windows.Forms.DockStyle.Left
         Me.Panel2.Location = New System.Drawing.Point(0, 67)
         Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(206, 383)
+        Me.Panel2.Size = New System.Drawing.Size(206, 501)
         Me.Panel2.TabIndex = 2
         '
         'Button4
@@ -263,12 +264,13 @@ Partial Class ReportsMenu
         Me.Panel3.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel3.Location = New System.Drawing.Point(206, 67)
         Me.Panel3.Name = "Panel3"
-        Me.Panel3.Size = New System.Drawing.Size(594, 383)
+        Me.Panel3.Size = New System.Drawing.Size(594, 501)
         Me.Panel3.TabIndex = 3
         '
         'Panel1
         '
         Me.Panel1.BackColor = System.Drawing.Color.FromArgb(CType(CType(30, Byte), Integer), CType(CType(38, Byte), Integer), CType(CType(60, Byte), Integer))
+        Me.Panel1.Controls.Add(Me.btnVacationE)
         Me.Panel1.Controls.Add(Me.Button11)
         Me.Panel1.Controls.Add(Me.Button10)
         Me.Panel1.Controls.Add(Me.Button9)
@@ -279,7 +281,7 @@ Partial Class ReportsMenu
         Me.Panel1.Dock = System.Windows.Forms.DockStyle.Left
         Me.Panel1.Location = New System.Drawing.Point(0, 0)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(206, 383)
+        Me.Panel1.Size = New System.Drawing.Size(206, 501)
         Me.Panel1.TabIndex = 4
         '
         'Button11
@@ -411,11 +413,28 @@ Partial Class ReportsMenu
         Me.PictureBox4.TabIndex = 3
         Me.PictureBox4.TabStop = False
         '
+        'btnVacationE
+        '
+        Me.btnVacationE.FlatAppearance.BorderSize = 0
+        Me.btnVacationE.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(81, Byte), Integer), CType(CType(93, Byte), Integer), CType(CType(102, Byte), Integer))
+        Me.btnVacationE.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnVacationE.Font = New System.Drawing.Font("Verdana", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnVacationE.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.btnVacationE.Image = Global.AVT_TRAKING.My.Resources.Resources.billing
+        Me.btnVacationE.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnVacationE.Location = New System.Drawing.Point(6, 367)
+        Me.btnVacationE.Name = "btnVacationE"
+        Me.btnVacationE.Size = New System.Drawing.Size(200, 42)
+        Me.btnVacationE.TabIndex = 14
+        Me.btnVacationE.Text = "Vacation Employee"
+        Me.btnVacationE.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.btnVacationE.UseVisualStyleBackColor = True
+        '
         'ReportsMenu
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(800, 450)
+        Me.ClientSize = New System.Drawing.Size(800, 568)
         Me.Controls.Add(Me.Panel3)
         Me.Controls.Add(Me.Panel2)
         Me.Controls.Add(Me.TitleBar)
@@ -460,4 +479,5 @@ Partial Class ReportsMenu
     Friend WithEvents Button9 As Button
     Friend WithEvents Button10 As Button
     Friend WithEvents Button11 As Button
+    Friend WithEvents btnVacationE As Button
 End Class

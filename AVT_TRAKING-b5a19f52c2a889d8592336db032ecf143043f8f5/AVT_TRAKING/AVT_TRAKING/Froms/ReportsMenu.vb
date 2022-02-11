@@ -98,4 +98,9 @@ Public Class ReportsMenu
         Dim tse As New ReportTimeSheetsPO
         tse.ShowDialog()
     End Sub
+
+    Private Sub btnVacationE_Click(sender As Object, e As EventArgs) Handles btnVacationE.Click
+        Dim tse As New ReportVacationEmployee
+        tse.ShowDialog()
+    End Sub
 End Class
