@@ -22,6 +22,7 @@ Partial Class ReportClientBillingsReCapBYProject
     'No lo modifique con el editor de código.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(ReportClientBillingsReCapBYProject))
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
         Me.Panel3 = New System.Windows.Forms.Panel()
         Me.crvClientBillingsReCapBYProject = New CrystalDecisions.Windows.Forms.CrystalReportViewer()
@@ -263,6 +264,7 @@ Partial Class ReportClientBillingsReCapBYProject
         Me.ClientSize = New System.Drawing.Size(702, 490)
         Me.Controls.Add(Me.TableLayoutPanel1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Name = "ReportClientBillingsReCapBYProject"
         Me.Text = "ReportClientBillingsReCapBYProject"
         Me.TableLayoutPanel1.ResumeLayout(False)

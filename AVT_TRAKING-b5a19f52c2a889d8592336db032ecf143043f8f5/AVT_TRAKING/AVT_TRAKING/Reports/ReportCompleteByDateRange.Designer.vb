@@ -22,16 +22,17 @@ Partial Class ReportCompleteByDateRange
     'No lo modifique con el editor de código.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(ReportCompleteByDateRange))
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
         Me.Panel3 = New System.Windows.Forms.Panel()
         Me.crvCompleteByDateRange = New CrystalDecisions.Windows.Forms.CrystalReportViewer()
         Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.cmbJobs = New System.Windows.Forms.ComboBox()
+        Me.chbAllJobs = New System.Windows.Forms.CheckBox()
         Me.cmbClients = New System.Windows.Forms.ComboBox()
         Me.Button1 = New System.Windows.Forms.Button()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
-        Me.dtpFinalDate = New System.Windows.Forms.DateTimePicker()
-        Me.dtpInitialDate = New System.Windows.Forms.DateTimePicker()
         Me.PictureBox4 = New System.Windows.Forms.PictureBox()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.TitleBar = New System.Windows.Forms.Panel()
@@ -92,12 +93,12 @@ Partial Class ReportCompleteByDateRange
         'Panel2
         '
         Me.Panel2.BackColor = System.Drawing.Color.FromArgb(CType(CType(83, Byte), Integer), CType(CType(93, Byte), Integer), CType(CType(102, Byte), Integer))
+        Me.Panel2.Controls.Add(Me.cmbJobs)
+        Me.Panel2.Controls.Add(Me.chbAllJobs)
         Me.Panel2.Controls.Add(Me.cmbClients)
         Me.Panel2.Controls.Add(Me.Button1)
         Me.Panel2.Controls.Add(Me.Label2)
         Me.Panel2.Controls.Add(Me.Label1)
-        Me.Panel2.Controls.Add(Me.dtpFinalDate)
-        Me.Panel2.Controls.Add(Me.dtpInitialDate)
         Me.Panel2.Controls.Add(Me.PictureBox4)
         Me.Panel2.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel2.Location = New System.Drawing.Point(3, 43)
@@ -105,10 +106,29 @@ Partial Class ReportCompleteByDateRange
         Me.Panel2.Size = New System.Drawing.Size(680, 64)
         Me.Panel2.TabIndex = 1
         '
+        'cmbJobs
+        '
+        Me.cmbJobs.FormattingEnabled = True
+        Me.cmbJobs.Location = New System.Drawing.Point(63, 32)
+        Me.cmbJobs.Name = "cmbJobs"
+        Me.cmbJobs.Size = New System.Drawing.Size(228, 21)
+        Me.cmbJobs.TabIndex = 18
+        '
+        'chbAllJobs
+        '
+        Me.chbAllJobs.AutoSize = True
+        Me.chbAllJobs.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.chbAllJobs.Location = New System.Drawing.Point(298, 6)
+        Me.chbAllJobs.Name = "chbAllJobs"
+        Me.chbAllJobs.Size = New System.Drawing.Size(62, 17)
+        Me.chbAllJobs.TabIndex = 17
+        Me.chbAllJobs.Text = "All Jobs"
+        Me.chbAllJobs.UseVisualStyleBackColor = True
+        '
         'cmbClients
         '
         Me.cmbClients.FormattingEnabled = True
-        Me.cmbClients.Location = New System.Drawing.Point(210, 3)
+        Me.cmbClients.Location = New System.Drawing.Point(63, 3)
         Me.cmbClients.Name = "cmbClients"
         Me.cmbClients.Size = New System.Drawing.Size(228, 21)
         Me.cmbClients.TabIndex = 16
@@ -135,11 +155,11 @@ Partial Class ReportCompleteByDateRange
         Me.Label2.AutoSize = True
         Me.Label2.Font = New System.Drawing.Font("Verdana", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label2.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.Label2.Location = New System.Drawing.Point(9, 39)
+        Me.Label2.Location = New System.Drawing.Point(24, 34)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(70, 14)
+        Me.Label2.Size = New System.Drawing.Size(33, 14)
         Me.Label2.TabIndex = 13
-        Me.Label2.Text = "Final Date"
+        Me.Label2.Text = "Job:"
         '
         'Label1
         '
@@ -148,29 +168,9 @@ Partial Class ReportCompleteByDateRange
         Me.Label1.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.Label1.Location = New System.Drawing.Point(9, 3)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(76, 14)
+        Me.Label1.Size = New System.Drawing.Size(48, 14)
         Me.Label1.TabIndex = 12
-        Me.Label1.Text = "Initial Date"
-        '
-        'dtpFinalDate
-        '
-        Me.dtpFinalDate.CustomFormat = "yyyy/MM/dd"
-        Me.dtpFinalDate.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.dtpFinalDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom
-        Me.dtpFinalDate.Location = New System.Drawing.Point(91, 34)
-        Me.dtpFinalDate.Name = "dtpFinalDate"
-        Me.dtpFinalDate.Size = New System.Drawing.Size(99, 21)
-        Me.dtpFinalDate.TabIndex = 11
-        '
-        'dtpInitialDate
-        '
-        Me.dtpInitialDate.CustomFormat = "yyyy/MM/dd"
-        Me.dtpInitialDate.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.dtpInitialDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom
-        Me.dtpInitialDate.Location = New System.Drawing.Point(91, 3)
-        Me.dtpInitialDate.Name = "dtpInitialDate"
-        Me.dtpInitialDate.Size = New System.Drawing.Size(99, 21)
-        Me.dtpInitialDate.TabIndex = 10
+        Me.Label1.Text = "Client:"
         '
         'PictureBox4
         '
@@ -263,6 +263,7 @@ Partial Class ReportCompleteByDateRange
         Me.ClientSize = New System.Drawing.Size(686, 451)
         Me.Controls.Add(Me.TableLayoutPanel1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Name = "ReportCompleteByDateRange"
         Me.Text = "ReportCompleteByDateRange"
         Me.TableLayoutPanel1.ResumeLayout(False)
@@ -289,8 +290,6 @@ Partial Class ReportCompleteByDateRange
     Friend WithEvents Button1 As Button
     Friend WithEvents Label2 As Label
     Friend WithEvents Label1 As Label
-    Friend WithEvents dtpFinalDate As DateTimePicker
-    Friend WithEvents dtpInitialDate As DateTimePicker
     Friend WithEvents PictureBox4 As PictureBox
     Friend WithEvents Panel1 As Panel
     Friend WithEvents TitleBar As Panel
@@ -299,4 +298,6 @@ Partial Class ReportCompleteByDateRange
     Friend WithEvents PictureBox3 As PictureBox
     Friend WithEvents btnRestore As PictureBox
     Friend WithEvents btnMaximize As PictureBox
+    Friend WithEvents cmbJobs As ComboBox
+    Friend WithEvents chbAllJobs As CheckBox
 End Class

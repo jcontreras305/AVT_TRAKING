@@ -24,6 +24,7 @@ Partial Class Perdiem
     Private Sub InitializeComponent()
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
         Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.txtSalida = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.btnFindExcel = New System.Windows.Forms.Button()
@@ -34,9 +35,6 @@ Partial Class Perdiem
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.TabPage1 = New System.Windows.Forms.TabPage()
         Me.tblPerDiem = New System.Windows.Forms.DataGridView()
-        Me.Panel3 = New System.Windows.Forms.Panel()
-        Me.PictureBox4 = New System.Windows.Forms.PictureBox()
-        Me.txtSalida = New System.Windows.Forms.Label()
         Me.StatusCode = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Company = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.EmployeeNumber = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -55,6 +53,14 @@ Partial Class Perdiem
         Me.DeductionNumber = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.BatchNumber = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.CheckType = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Panel3 = New System.Windows.Forms.Panel()
+        Me.TitleBar = New System.Windows.Forms.Panel()
+        Me.PictureBox2 = New System.Windows.Forms.PictureBox()
+        Me.btnRestore = New System.Windows.Forms.PictureBox()
+        Me.btnMaximize = New System.Windows.Forms.PictureBox()
+        Me.PictureBox1 = New System.Windows.Forms.PictureBox()
+        Me.Label7 = New System.Windows.Forms.Label()
+        Me.PictureBox4 = New System.Windows.Forms.PictureBox()
         Me.TableLayoutPanel1.SuspendLayout()
         Me.Panel1.SuspendLayout()
         CType(Me.sprExcelRow, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -63,6 +69,11 @@ Partial Class Perdiem
         Me.TabPage1.SuspendLayout()
         CType(Me.tblPerDiem, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel3.SuspendLayout()
+        Me.TitleBar.SuspendLayout()
+        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.btnRestore, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.btnMaximize, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox4, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -77,14 +88,15 @@ Partial Class Perdiem
         Me.TableLayoutPanel1.Location = New System.Drawing.Point(0, 0)
         Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
         Me.TableLayoutPanel1.RowCount = 3
-        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 45.0!))
-        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 62.0!))
+        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 89.0!))
+        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 87.0!))
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-        Me.TableLayoutPanel1.Size = New System.Drawing.Size(737, 389)
+        Me.TableLayoutPanel1.Size = New System.Drawing.Size(737, 440)
         Me.TableLayoutPanel1.TabIndex = 0
         '
         'Panel1
         '
+        Me.Panel1.BackColor = System.Drawing.Color.FromArgb(CType(CType(83, Byte), Integer), CType(CType(93, Byte), Integer), CType(CType(102, Byte), Integer))
         Me.Panel1.Controls.Add(Me.txtSalida)
         Me.Panel1.Controls.Add(Me.Label2)
         Me.Panel1.Controls.Add(Me.Label1)
@@ -93,14 +105,25 @@ Partial Class Perdiem
         Me.Panel1.Controls.Add(Me.btnRefreshPerdiem)
         Me.Panel1.Controls.Add(Me.dtpStartDate)
         Me.Panel1.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel1.Location = New System.Drawing.Point(3, 48)
+        Me.Panel1.Location = New System.Drawing.Point(3, 92)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(731, 56)
+        Me.Panel1.Size = New System.Drawing.Size(731, 81)
         Me.Panel1.TabIndex = 0
+        '
+        'txtSalida
+        '
+        Me.txtSalida.AutoSize = True
+        Me.txtSalida.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.txtSalida.Location = New System.Drawing.Point(9, 36)
+        Me.txtSalida.Name = "txtSalida"
+        Me.txtSalida.Size = New System.Drawing.Size(53, 13)
+        Me.txtSalida.TabIndex = 6
+        Me.txtSalida.Text = "Message:"
         '
         'Label2
         '
         Me.Label2.AutoSize = True
+        Me.Label2.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.Label2.Location = New System.Drawing.Point(347, 16)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(83, 13)
@@ -110,7 +133,8 @@ Partial Class Perdiem
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(9, 15)
+        Me.Label1.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.Label1.Location = New System.Drawing.Point(9, 11)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(55, 13)
         Me.Label1.TabIndex = 4
@@ -118,8 +142,12 @@ Partial Class Perdiem
         '
         'btnFindExcel
         '
-        Me.btnFindExcel.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnFindExcel.Location = New System.Drawing.Point(584, 11)
+        Me.btnFindExcel.FlatAppearance.BorderSize = 0
+        Me.btnFindExcel.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(58, Byte), Integer), CType(CType(115, Byte), Integer))
+        Me.btnFindExcel.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnFindExcel.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnFindExcel.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.btnFindExcel.Location = New System.Drawing.Point(535, 13)
         Me.btnFindExcel.Name = "btnFindExcel"
         Me.btnFindExcel.Size = New System.Drawing.Size(75, 23)
         Me.btnFindExcel.TabIndex = 3
@@ -138,11 +166,19 @@ Partial Class Perdiem
         '
         'btnRefreshPerdiem
         '
-        Me.btnRefreshPerdiem.Location = New System.Drawing.Point(266, 10)
+        Me.btnRefreshPerdiem.FlatAppearance.BorderSize = 0
+        Me.btnRefreshPerdiem.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(58, Byte), Integer), CType(CType(115, Byte), Integer))
+        Me.btnRefreshPerdiem.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnRefreshPerdiem.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnRefreshPerdiem.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.btnRefreshPerdiem.Image = Global.AVT_TRAKING.My.Resources.Resources.refresh
+        Me.btnRefreshPerdiem.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnRefreshPerdiem.Location = New System.Drawing.Point(255, 10)
         Me.btnRefreshPerdiem.Name = "btnRefreshPerdiem"
-        Me.btnRefreshPerdiem.Size = New System.Drawing.Size(75, 23)
+        Me.btnRefreshPerdiem.Size = New System.Drawing.Size(86, 23)
         Me.btnRefreshPerdiem.TabIndex = 1
         Me.btnRefreshPerdiem.Text = "Refresh"
+        Me.btnRefreshPerdiem.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         Me.btnRefreshPerdiem.UseVisualStyleBackColor = True
         '
         'dtpStartDate
@@ -158,9 +194,9 @@ Partial Class Perdiem
         '
         Me.Panel2.Controls.Add(Me.TabControl1)
         Me.Panel2.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel2.Location = New System.Drawing.Point(3, 110)
+        Me.Panel2.Location = New System.Drawing.Point(3, 179)
         Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(731, 276)
+        Me.Panel2.Size = New System.Drawing.Size(731, 258)
         Me.Panel2.TabIndex = 1
         '
         'TabControl1
@@ -170,7 +206,7 @@ Partial Class Perdiem
         Me.TabControl1.Location = New System.Drawing.Point(0, 0)
         Me.TabControl1.Name = "TabControl1"
         Me.TabControl1.SelectedIndex = 0
-        Me.TabControl1.Size = New System.Drawing.Size(731, 276)
+        Me.TabControl1.Size = New System.Drawing.Size(731, 258)
         Me.TabControl1.TabIndex = 0
         '
         'TabPage1
@@ -179,7 +215,7 @@ Partial Class Perdiem
         Me.TabPage1.Location = New System.Drawing.Point(4, 22)
         Me.TabPage1.Name = "TabPage1"
         Me.TabPage1.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage1.Size = New System.Drawing.Size(723, 250)
+        Me.TabPage1.Size = New System.Drawing.Size(723, 232)
         Me.TabPage1.TabIndex = 0
         Me.TabPage1.Text = "Per-Diem"
         Me.TabPage1.UseVisualStyleBackColor = True
@@ -195,36 +231,8 @@ Partial Class Perdiem
         Me.tblPerDiem.Location = New System.Drawing.Point(3, 3)
         Me.tblPerDiem.Name = "tblPerDiem"
         Me.tblPerDiem.ReadOnly = True
-        Me.tblPerDiem.Size = New System.Drawing.Size(717, 244)
+        Me.tblPerDiem.Size = New System.Drawing.Size(717, 226)
         Me.tblPerDiem.TabIndex = 0
-        '
-        'Panel3
-        '
-        Me.Panel3.Controls.Add(Me.PictureBox4)
-        Me.Panel3.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel3.Location = New System.Drawing.Point(3, 3)
-        Me.Panel3.Name = "Panel3"
-        Me.Panel3.Size = New System.Drawing.Size(731, 39)
-        Me.Panel3.TabIndex = 2
-        '
-        'PictureBox4
-        '
-        Me.PictureBox4.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.PictureBox4.Image = Global.AVT_TRAKING.My.Resources.Resources._exit
-        Me.PictureBox4.Location = New System.Drawing.Point(694, 3)
-        Me.PictureBox4.Name = "PictureBox4"
-        Me.PictureBox4.Size = New System.Drawing.Size(34, 33)
-        Me.PictureBox4.TabIndex = 15
-        Me.PictureBox4.TabStop = False
-        '
-        'txtSalida
-        '
-        Me.txtSalida.AutoSize = True
-        Me.txtSalida.Location = New System.Drawing.Point(9, 36)
-        Me.txtSalida.Name = "txtSalida"
-        Me.txtSalida.Size = New System.Drawing.Size(53, 13)
-        Me.txtSalida.TabIndex = 6
-        Me.txtSalida.Text = "Message:"
         '
         'StatusCode
         '
@@ -334,12 +342,98 @@ Partial Class Perdiem
         Me.CheckType.Name = "CheckType"
         Me.CheckType.ReadOnly = True
         '
+        'Panel3
+        '
+        Me.Panel3.Controls.Add(Me.TitleBar)
+        Me.Panel3.Controls.Add(Me.PictureBox4)
+        Me.Panel3.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Panel3.Location = New System.Drawing.Point(3, 3)
+        Me.Panel3.Name = "Panel3"
+        Me.Panel3.Size = New System.Drawing.Size(731, 83)
+        Me.Panel3.TabIndex = 2
+        '
+        'TitleBar
+        '
+        Me.TitleBar.BackColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(59, Byte), Integer), CType(CType(104, Byte), Integer))
+        Me.TitleBar.Controls.Add(Me.PictureBox2)
+        Me.TitleBar.Controls.Add(Me.btnRestore)
+        Me.TitleBar.Controls.Add(Me.btnMaximize)
+        Me.TitleBar.Controls.Add(Me.PictureBox1)
+        Me.TitleBar.Controls.Add(Me.Label7)
+        Me.TitleBar.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.TitleBar.Location = New System.Drawing.Point(0, 0)
+        Me.TitleBar.Name = "TitleBar"
+        Me.TitleBar.Size = New System.Drawing.Size(731, 83)
+        Me.TitleBar.TabIndex = 16
+        '
+        'PictureBox2
+        '
+        Me.PictureBox2.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.PictureBox2.Image = Global.AVT_TRAKING.My.Resources.Resources.minimize2
+        Me.PictureBox2.Location = New System.Drawing.Point(670, 3)
+        Me.PictureBox2.Name = "PictureBox2"
+        Me.PictureBox2.Size = New System.Drawing.Size(26, 27)
+        Me.PictureBox2.TabIndex = 42
+        Me.PictureBox2.TabStop = False
+        '
+        'btnRestore
+        '
+        Me.btnRestore.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnRestore.Image = Global.AVT_TRAKING.My.Resources.Resources.restore2
+        Me.btnRestore.Location = New System.Drawing.Point(702, 3)
+        Me.btnRestore.Name = "btnRestore"
+        Me.btnRestore.Size = New System.Drawing.Size(23, 27)
+        Me.btnRestore.TabIndex = 41
+        Me.btnRestore.TabStop = False
+        '
+        'btnMaximize
+        '
+        Me.btnMaximize.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnMaximize.Image = Global.AVT_TRAKING.My.Resources.Resources.maximize2
+        Me.btnMaximize.Location = New System.Drawing.Point(702, 3)
+        Me.btnMaximize.Name = "btnMaximize"
+        Me.btnMaximize.Size = New System.Drawing.Size(23, 25)
+        Me.btnMaximize.TabIndex = 40
+        Me.btnMaximize.TabStop = False
+        '
+        'PictureBox1
+        '
+        Me.PictureBox1.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.PictureBox1.Image = Global.AVT_TRAKING.My.Resources.Resources._exit
+        Me.PictureBox1.Location = New System.Drawing.Point(693, 42)
+        Me.PictureBox1.Name = "PictureBox1"
+        Me.PictureBox1.Size = New System.Drawing.Size(34, 33)
+        Me.PictureBox1.TabIndex = 14
+        Me.PictureBox1.TabStop = False
+        '
+        'Label7
+        '
+        Me.Label7.AutoSize = True
+        Me.Label7.Font = New System.Drawing.Font("Verdana", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label7.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.Label7.Location = New System.Drawing.Point(4, 4)
+        Me.Label7.Name = "Label7"
+        Me.Label7.Size = New System.Drawing.Size(88, 18)
+        Me.Label7.TabIndex = 0
+        Me.Label7.Text = "Per Diem"
+        '
+        'PictureBox4
+        '
+        Me.PictureBox4.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.PictureBox4.Image = Global.AVT_TRAKING.My.Resources.Resources._exit
+        Me.PictureBox4.Location = New System.Drawing.Point(694, 47)
+        Me.PictureBox4.Name = "PictureBox4"
+        Me.PictureBox4.Size = New System.Drawing.Size(34, 33)
+        Me.PictureBox4.TabIndex = 15
+        Me.PictureBox4.TabStop = False
+        '
         'Perdiem
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(737, 389)
+        Me.ClientSize = New System.Drawing.Size(737, 440)
         Me.Controls.Add(Me.TableLayoutPanel1)
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
         Me.Name = "Perdiem"
         Me.Text = "Perdiem"
         Me.TableLayoutPanel1.ResumeLayout(False)
@@ -351,6 +445,12 @@ Partial Class Perdiem
         Me.TabPage1.ResumeLayout(False)
         CType(Me.tblPerDiem, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel3.ResumeLayout(False)
+        Me.TitleBar.ResumeLayout(False)
+        Me.TitleBar.PerformLayout()
+        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.btnRestore, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.btnMaximize, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PictureBox4, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
@@ -389,4 +489,10 @@ Partial Class Perdiem
     Friend WithEvents DeductionNumber As DataGridViewTextBoxColumn
     Friend WithEvents BatchNumber As DataGridViewTextBoxColumn
     Friend WithEvents CheckType As DataGridViewTextBoxColumn
+    Friend WithEvents TitleBar As Panel
+    Friend WithEvents PictureBox2 As PictureBox
+    Friend WithEvents btnRestore As PictureBox
+    Friend WithEvents btnMaximize As PictureBox
+    Friend WithEvents PictureBox1 As PictureBox
+    Friend WithEvents Label7 As Label
 End Class

@@ -748,7 +748,7 @@ Partial Class ProjectsClients
         '
         Me.PictureBox2.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.PictureBox2.Image = Global.AVT_TRAKING.My.Resources.Resources.minimize2
-        Me.PictureBox2.Location = New System.Drawing.Point(924, 3)
+        Me.PictureBox2.Location = New System.Drawing.Point(892, 3)
         Me.PictureBox2.Name = "PictureBox2"
         Me.PictureBox2.Size = New System.Drawing.Size(24, 25)
         Me.PictureBox2.TabIndex = 2
@@ -758,7 +758,7 @@ Partial Class ProjectsClients
         '
         Me.btnRestore.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnRestore.Image = Global.AVT_TRAKING.My.Resources.Resources.restore2
-        Me.btnRestore.Location = New System.Drawing.Point(890, 6)
+        Me.btnRestore.Location = New System.Drawing.Point(922, 7)
         Me.btnRestore.Name = "btnRestore"
         Me.btnRestore.Size = New System.Drawing.Size(28, 24)
         Me.btnRestore.TabIndex = 1
@@ -768,7 +768,7 @@ Partial Class ProjectsClients
         '
         Me.btnMaximize.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnMaximize.Image = Global.AVT_TRAKING.My.Resources.Resources.maximize2
-        Me.btnMaximize.Location = New System.Drawing.Point(927, 3)
+        Me.btnMaximize.Location = New System.Drawing.Point(925, 4)
         Me.btnMaximize.Name = "btnMaximize"
         Me.btnMaximize.Size = New System.Drawing.Size(23, 25)
         Me.btnMaximize.TabIndex = 0

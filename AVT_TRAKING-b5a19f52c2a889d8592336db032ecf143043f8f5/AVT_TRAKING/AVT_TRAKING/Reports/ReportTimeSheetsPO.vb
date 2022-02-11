@@ -1,12 +1,10 @@
 ﻿Imports System.Runtime.InteropServices
-Imports System.Data.SqlClient
-
-Public Class ReportByJobNumber
-    Dim conection As New ConnectioDB
+Public Class ReportTimeSheetsPO
     Private Sub PictureBox3_Click(sender As Object, e As EventArgs) Handles PictureBox3.Click
         Me.WindowState = FormWindowState.Minimized
     End Sub
     Private Sub btnMaximize_Click(sender As Object, e As EventArgs) Handles btnMaximize.Click
+        MaximizedBounds = Screen.FromHandle(Me.Handle).WorkingArea
         WindowState = FormWindowState.Maximized
         btnMaximize.Visible = False
         btnRestore.Visible = True
@@ -34,32 +32,10 @@ Public Class ReportByJobNumber
         Me.Close()
     End Sub
 
-    Private Sub ReportByJobNumber_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        Try
-            conection.conectar()
-            Dim cmd As New SqlCommand("select numberClient , CONCAT(lastName,', ',firstName,' ',middleName) as 'Name' from clients ", conection.conn)
-            Dim dr As SqlDataReader = cmd.ExecuteReader()
-            While dr.Read()
-                cmbClients.Items.Add(CStr(dr("numberClient")) + "   " + dr("Name"))
-            End While
-        Catch ex As Exception
-            MsgBox(ex.Message())
-        Finally
-            conection.desconectar()
-        End Try
-    End Sub
-
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
-        Dim array() = cmbClients.SelectedItem.ToString().Split("    ")
-        Dim idClient As String = array(0)
-        If idClient <> "" Or idClient IsNot Nothing Then
-            Dim reportTS As New ByJobNumber
-            reportTS.SetParameterValue("@startdate", validaFechaParaSQl(dtpInitialDate.Value.Date))
-            reportTS.SetParameterValue("@finaldate", validaFechaParaSQl(dtpFinalDate.Value.Date))
-            reportTS.SetParameterValue("@clientnum", idClient)
-            crvByJobNumber.ReportSource = reportTS
-        Else
-            MsgBox("Please select a Client.")
-        End If
+        Dim reportTS As New TimeSheetPO
+        reportTS.SetParameterValue("@IntialDate", validaFechaParaSQl(dtpInitialDate.Value.Date))
+        reportTS.SetParameterValue("@FinalDate", validaFechaParaSQl(dtpFinalDate.Value.Date))
+        crvTimeSheetPO.ReportSource = reportTS
     End Sub
 End Class

@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
-Partial Class ReportByJobNumber
+Partial Class ReportJNumber
     Inherits System.Windows.Forms.Form
 
     'Form reemplaza a Dispose para limpiar la lista de componentes.
@@ -22,6 +22,7 @@ Partial Class ReportByJobNumber
     'No lo modifique con el editor de código.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(ReportJNumber))
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
         Me.Panel3 = New System.Windows.Forms.Panel()
         Me.crvByJobNumber = New CrystalDecisions.Windows.Forms.CrystalReportViewer()
@@ -108,7 +109,7 @@ Partial Class ReportByJobNumber
         'cmbClients
         '
         Me.cmbClients.FormattingEnabled = True
-        Me.cmbClients.Location = New System.Drawing.Point(223, 3)
+        Me.cmbClients.Location = New System.Drawing.Point(224, 3)
         Me.cmbClients.Name = "cmbClients"
         Me.cmbClients.Size = New System.Drawing.Size(228, 21)
         Me.cmbClients.TabIndex = 16
@@ -122,7 +123,7 @@ Partial Class ReportByJobNumber
         Me.Button1.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.Button1.Image = Global.AVT_TRAKING.My.Resources.Resources.reportshow
         Me.Button1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.Button1.Location = New System.Drawing.Point(368, 30)
+        Me.Button1.Location = New System.Drawing.Point(369, 30)
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(83, 33)
         Me.Button1.TabIndex = 14
@@ -256,15 +257,16 @@ Partial Class ReportByJobNumber
         Me.btnMaximize.TabIndex = 7
         Me.btnMaximize.TabStop = False
         '
-        'ReportByJobNumber
+        'ReportJNumber
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(702, 490)
         Me.Controls.Add(Me.TableLayoutPanel1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
-        Me.Name = "ReportByJobNumber"
-        Me.Text = "ReportByJobNumber"
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
+        Me.Name = "ReportJNumber"
+        Me.Text = "ReportJNumber"
         Me.TableLayoutPanel1.ResumeLayout(False)
         Me.Panel3.ResumeLayout(False)
         Me.Panel2.ResumeLayout(False)

@@ -1,8 +1,40 @@
-﻿
+﻿Imports System.Data.SqlClient
 Imports System.Text.RegularExpressions
 
 Module metodosGlobales
-
+    Dim con As New ConnectioDB
+    Public Function llenarComboEmployeeReports(ByVal combo As ComboBox)
+        Try
+            con.conectar()
+            Dim cmd As New SqlCommand("select numberEmploye, CONCAT(em.lastName,' ',em.firstName,' ',em.middleName) as 'name' from employees as em", con.conn) '
+            Dim dr As SqlDataReader = cmd.ExecuteReader()
+            combo.Items.Clear()
+            While dr.Read()
+                combo.Items.Add(CStr(dr("numberEmploye")) + " " + dr("name"))
+            End While
+            dr.Close()
+        Catch ex As Exception
+            MsgBox(ex.Message)
+        Finally
+            con.desconectar()
+        End Try
+    End Function
+    Public Function llenarComboClientsReports(ByVal combo As ComboBox)
+        Try
+            con.conectar()
+            Dim cmd As New SqlCommand("select numberClient , companyName from clients", con.conn) '
+            Dim dr As SqlDataReader = cmd.ExecuteReader()
+            combo.Items.Clear()
+            While dr.Read()
+                combo.Items.Add(CStr(dr("numberClient")) + " " + dr("companyName"))
+            End While
+            dr.Close()
+        Catch ex As Exception
+            MsgBox(ex.Message)
+        Finally
+            con.desconectar()
+        End Try
+    End Function
     Public Function imageToByte(ByVal img As Image) As Byte()
         Try
             Dim aux As New IO.MemoryStream()

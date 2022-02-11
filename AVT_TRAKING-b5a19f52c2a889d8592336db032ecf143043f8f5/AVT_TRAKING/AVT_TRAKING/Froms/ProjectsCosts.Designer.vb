@@ -824,7 +824,7 @@ Partial Class ProjectsCosts
         '
         Me.btnRestore.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnRestore.Image = Global.AVT_TRAKING.My.Resources.Resources.restore2
-        Me.btnRestore.Location = New System.Drawing.Point(1075, 4)
+        Me.btnRestore.Location = New System.Drawing.Point(1075, 3)
         Me.btnRestore.Name = "btnRestore"
         Me.btnRestore.Size = New System.Drawing.Size(23, 27)
         Me.btnRestore.TabIndex = 38

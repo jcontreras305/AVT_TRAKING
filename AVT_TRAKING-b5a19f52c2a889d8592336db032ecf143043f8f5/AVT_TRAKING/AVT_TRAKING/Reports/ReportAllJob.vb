@@ -1,12 +1,10 @@
 ﻿Imports System.Runtime.InteropServices
-
-
-Public Class ReportAllJobs
-
+Public Class ReportAllJob
     Private Sub PictureBox3_Click(sender As Object, e As EventArgs) Handles PictureBox3.Click
         Me.WindowState = FormWindowState.Minimized
     End Sub
     Private Sub btnMaximize_Click(sender As Object, e As EventArgs) Handles btnMaximize.Click
+        MaximizedBounds = Screen.FromHandle(Me.Handle).WorkingArea
         WindowState = FormWindowState.Maximized
         btnMaximize.Visible = False
         btnRestore.Visible = True
@@ -33,8 +31,6 @@ Public Class ReportAllJobs
     Private Sub PictureBox4_Click(sender As Object, e As EventArgs) Handles PictureBox4.Click
         Me.Close()
     End Sub
-
-
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         Dim reportTS As New AllJobs
