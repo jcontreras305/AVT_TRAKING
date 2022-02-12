@@ -245,8 +245,8 @@ Public Class HoursWeekPerEmployees
                     Try
                         If tblRecordEmployee.CurrentCell.GetType.Name = "DataGridViewTextBoxCell" Then
                             Dim cmbShift As New DataGridViewComboBoxCell
-                            cmbShift.Items.Add("Day")
-                            cmbShift.Items.Add("Nigth")
+                            cmbShift.Items.Add("DAYS")
+                            cmbShift.Items.Add("NIGHTS")
                             tblRecordEmployee.CurrentRow.Cells("Shift") = cmbShift
                         End If
                         flagFilaActual = "Shift"

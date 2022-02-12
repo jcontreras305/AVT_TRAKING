@@ -266,7 +266,7 @@ Public Class TimeSheet
                 tablaWO.Rows.Add(contwo - 1.ToString(), workOrder(0), workOrder(1), workOrders.Cells(contwo, 2).Text, workOrders.Cells(contwo, 3).Text, workOrders.Cells(contwo, 5).Text, workOrders.Cells(contwo, 6).Text, workOrders.Cells(contwo, 7).Text, workOrders.Cells(contwo, 8).Text, workOrders.Cells(contwo, 9).Text)
                 contwo += 1
             End While
-            Dim listNewWorlOrders As New List(Of Data.DataRow)
+            Dim listNewWorkOrders As New List(Of Data.DataRow)
             Dim flagExistWO As Boolean = False
             For Each row As DataRow In tablaWO.Rows()
                 flagExistWO = False
@@ -280,13 +280,13 @@ Public Class TimeSheet
                     End If
                 Next
                 If Not flagExistWO Then
-                    listNewWorlOrders.Add(row)
+                    listNewWorkOrders.Add(row)
                 End If
             Next
-            If listNewWorlOrders.Count > 0 Then
-                txtSalida.Text = txtSalida.Text + vbCrLf + listNewWorlOrders.Count.ToString() + " New 'Work Codes', trying to insert the new 'Work Orders'."
+            If listNewWorkOrders.Count > 0 Then
+                txtSalida.Text = txtSalida.Text + vbCrLf + listNewWorkOrders.Count.ToString() + " New 'Work Codes', trying to insert the new 'Work Orders'."
                 If DialogResult.Yes = MessageBox.Show("New 'Work Orders' found. Would you like to insert the new 'Work Orders'?", "Message", MessageBoxButtons.YesNo, MessageBoxIcon.Information) Then
-                    For Each item As DataRow In listNewWorlOrders
+                    For Each item As DataRow In listNewWorkOrders
                         Dim newPO As New Project
                         newPO.clear()
                         newPO.idWorkOrder = item.ItemArray(1)
@@ -313,7 +313,7 @@ Public Class TimeSheet
                     txtSalida.Text = txtSalida.Text + vbCrLf + "The 'Work Order' insertion process is over."
                 End If
             Else
-                txtSalida.Text = txtSalida.Text + vbCrLf + listNewWorlOrders.Count.ToString() + " Work Codes News."
+                txtSalida.Text = txtSalida.Text + vbCrLf + listNewWorkOrders.Count.ToString() + " Work Codes News."
             End If
             Dim insertar As Boolean = True
             If mensaje <> "" Then

@@ -273,8 +273,8 @@ from detalleMaterial as dm left join material as mt on dm.idMaterial = mt.idMate
         conectar()
         Try
             Dim cmd As New SqlCommand("select idVendor , name from vendor where estatus = 'E'", conn)
-            Dim rd As SqlDataReader
-            rd = cmd.ExecuteReader()
+            Dim rd As SqlDataReader = cmd.ExecuteReader()
+            combo.Items.Clear()
             While rd.Read()
                 combo.Items.Add(rd("name"))
                 listId.Add(rd("idVendor"))

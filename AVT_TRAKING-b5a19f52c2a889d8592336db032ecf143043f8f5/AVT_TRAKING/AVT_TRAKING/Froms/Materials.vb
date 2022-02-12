@@ -40,6 +40,7 @@ Public Class Materials
             dataVendor(3) = If(chbEnableVendor.Checked, "E", "D")
             mtdMaterial.insertarVendor(dataVendor)
             mtdMaterial.selectVedor(tblVendor, "")
+            llenarTablas()
             limparCaposVendor()
         Catch ex As Exception
             MsgBox("Something went wrong, check the data and try again")
@@ -56,6 +57,7 @@ Public Class Materials
             mtdMaterial.actializarVendor(dataVendor)
             mtdMaterial.selectVedor(tblVendor, "")
             limparCaposVendor()
+            llenarTablas()
             btnUpdateVendor.Enabled = False
             btnCancelVendor.Enabled = False
             btnSaveVendor.Enabled = True
@@ -68,6 +70,8 @@ Public Class Materials
         txtNumeroVendedor.Text = mtdMaterial.valueMaxVendor
         txtNombreVendedor.Text = ""
         txtDescripcionVendedor.Text = ""
+        cmbVendedor.SelectedItem = Nothing
+        cmbVendedor.Text = ""
         chbEnableVendor.Checked = False
     End Sub
 

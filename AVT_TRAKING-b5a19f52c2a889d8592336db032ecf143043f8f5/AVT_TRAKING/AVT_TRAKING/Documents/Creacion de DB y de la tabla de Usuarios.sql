@@ -780,6 +780,14 @@ create table scfFactor(
 )
 GO
 
+declare @i int
+set @i = 0
+while @i<301
+begin 
+	insert into scfFactor values(@i,@i,iif(@i>30,20,0.0))
+	set @i = @i+1
+end
+
 --##########################################################################################
 --##################  TABLA DE SCFiNFO #####################################################
 --##########################################################################################
@@ -2913,6 +2921,10 @@ go
 --ALTER TABLE scfEstimation
 --ADD ccnum VARCHAR(30)
 --GO
+----ELIMINAMOS LA COMLUMNA DE UNIT EN SCFESTIMATION
+--ALTER TABLE scfEstimation 
+--DROP COLUMN unit
+--go
 ---- CREAMOS LA UNION DE SCFESTIMATION CON LA TABLA DE SCFESTPROYECT
 --ALTER TABLE scfEstimation  WITH CHECK ADD  CONSTRAINT fk_ccnum_scfEstimation FOREIGN KEY(ccnum)
 --REFERENCES scfEstProyect (ccnum)
