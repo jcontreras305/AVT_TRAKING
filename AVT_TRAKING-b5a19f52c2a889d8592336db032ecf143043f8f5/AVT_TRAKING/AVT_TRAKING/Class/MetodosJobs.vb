@@ -581,12 +581,28 @@ where tk.task = '" + idTask + "' and tk.idAuxWO = '" + idWO + "'", conn)
         End Try
     End Sub
 
+    Public Sub llenarComboClientPO(ByVal combo As ComboBox, ByVal idclient As String)
+        Try
+            conectar()
+            Dim cmd As New SqlCommand("select po.idPO , jb.jobNo from projectOrder as po inner join job as jb on po.jobNo = jb.jobNo 
+                where jb.idClient like '" + If(idclient = "", "%", idclient) + "'", conn)
+            Dim reader As SqlDataReader = cmd.ExecuteReader()
+            combo.Items.Clear()
+            While reader.Read()
+                combo.Items.Add(reader(0))
+            End While
+            desconectar()
+        Catch ex As Exception
+
+        End Try
+    End Sub
     Public Sub llenarComboJob(ByVal cmbJob As ComboBox, ByVal idclient As String)
         Try
             conectar()
             Dim cmd As New SqlCommand("select jb.jobNo from job as jb inner join clients as cl on jb.idClient = cl.idClient 
 where cl.idClient like '" + If(idclient = "", "%", idclient) + "'", conn)
             Dim reader As SqlDataReader = cmd.ExecuteReader()
+            cmbJob.Items.Clear()
             While reader.Read()
                 cmbJob.Items.Add(reader(0))
             End While

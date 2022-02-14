@@ -63,6 +63,7 @@
       <HintPath>..\packages\MicrosoftOfficeCore.15.0.0\lib\net35\Office.dll</HintPath>
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </Reference>
+    <Reference Include="PresentationFramework" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Deployment" />
@@ -133,6 +134,12 @@
       <DependentUpon>FindEmployee.vb</DependentUpon>
     </Compile>
     <Compile Include="Froms\FindEmployee.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Froms\FindTask.Designer.vb">
+      <DependentUpon>FindTask.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Froms\FindTask.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Froms\Herramientas.Designer.vb">
@@ -533,6 +540,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Froms\FindEmployee.resx">
       <DependentUpon>FindEmployee.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Froms\FindTask.resx">
+      <DependentUpon>FindTask.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Froms\Herramientas.resx">
       <DependentUpon>Herramientas.vb</DependentUpon>

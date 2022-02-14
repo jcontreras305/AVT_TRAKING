@@ -288,6 +288,7 @@ and (CONCAT(firstName,' ',middleName,' ',lastName) like '%" + consulta + "%' or 
             Dim cmd As New SqlCommand("select idEmployee, CONCAT(lastName,', ',middleName,' ',firstName) as name from employees where typeEmployee = 'Manager'", conn)
             Dim reader As SqlDataReader = cmd.ExecuteReader()
             Dim lst As New List(Of String)
+            cmbEmployeManager.Items.Clear()
             While reader.Read()
                 cmbEmployeManager.Items.Add(reader("name"))
                 lst.Add(reader("idEmployee"))

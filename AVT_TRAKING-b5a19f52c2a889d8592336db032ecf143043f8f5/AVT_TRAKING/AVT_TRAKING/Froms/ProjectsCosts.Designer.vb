@@ -88,7 +88,7 @@ Partial Class ProjectsCosts
         Me.btnAfterTask = New System.Windows.Forms.Button()
         Me.TextBox1 = New System.Windows.Forms.TextBox()
         Me.btnAddRecord = New System.Windows.Forms.Button()
-        Me.Button1 = New System.Windows.Forms.Button()
+        Me.btnFindProject = New System.Windows.Forms.Button()
         Me.btnDelete = New System.Windows.Forms.Button()
         Me.Panel2 = New System.Windows.Forms.Panel()
         Me.Panel3 = New System.Windows.Forms.Panel()
@@ -781,7 +781,7 @@ Partial Class ProjectsCosts
         Me.Panel4.Controls.Add(Me.btnAfterTask)
         Me.Panel4.Controls.Add(Me.TextBox1)
         Me.Panel4.Controls.Add(Me.btnAddRecord)
-        Me.Panel4.Controls.Add(Me.Button1)
+        Me.Panel4.Controls.Add(Me.btnFindProject)
         Me.Panel4.Dock = System.Windows.Forms.DockStyle.Top
         Me.Panel4.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Panel4.Location = New System.Drawing.Point(0, 0)
@@ -929,22 +929,22 @@ Partial Class ProjectsCosts
         Me.btnAddRecord.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         Me.btnAddRecord.UseVisualStyleBackColor = True
         '
-        'Button1
+        'btnFindProject
         '
-        Me.Button1.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Button1.FlatAppearance.BorderSize = 0
-        Me.Button1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(83, Byte), Integer), CType(CType(93, Byte), Integer), CType(CType(102, Byte), Integer))
-        Me.Button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.Button1.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.Button1.Image = Global.AVT_TRAKING.My.Resources.Resources.loupe
-        Me.Button1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.Button1.Location = New System.Drawing.Point(725, 27)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(57, 23)
-        Me.Button1.TabIndex = 36
-        Me.Button1.Text = "Find"
-        Me.Button1.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.Button1.UseVisualStyleBackColor = True
+        Me.btnFindProject.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnFindProject.FlatAppearance.BorderSize = 0
+        Me.btnFindProject.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(83, Byte), Integer), CType(CType(93, Byte), Integer), CType(CType(102, Byte), Integer))
+        Me.btnFindProject.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnFindProject.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.btnFindProject.Image = Global.AVT_TRAKING.My.Resources.Resources.loupe
+        Me.btnFindProject.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnFindProject.Location = New System.Drawing.Point(734, 27)
+        Me.btnFindProject.Name = "btnFindProject"
+        Me.btnFindProject.Size = New System.Drawing.Size(57, 23)
+        Me.btnFindProject.TabIndex = 36
+        Me.btnFindProject.Text = "Find"
+        Me.btnFindProject.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.btnFindProject.UseVisualStyleBackColor = True
         '
         'btnDelete
         '
@@ -1639,7 +1639,7 @@ Partial Class ProjectsCosts
     Friend WithEvents Label17 As Label
     Friend WithEvents Label16 As Label
     Friend WithEvents txtMensaje As TextBox
-    Friend WithEvents Button1 As Button
+    Friend WithEvents btnFindProject As Button
     Friend WithEvents TextBox1 As TextBox
     Public WithEvents txtAcountNo As TextBox
     Public WithEvents sprHoursEstimate As NumericUpDown

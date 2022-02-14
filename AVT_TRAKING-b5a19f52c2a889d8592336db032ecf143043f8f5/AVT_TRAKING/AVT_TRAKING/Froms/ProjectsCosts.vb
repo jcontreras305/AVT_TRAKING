@@ -7,7 +7,7 @@ Public Class ProjectsCosts
     Dim idsEmployessManager As List(Of String)
     Dim lstProject As List(Of String)
     Private tablasDeTareas As New DataTable 'ESTA TABLA GUARDO TODOS LOS PO CON EL WO Y TASK PARA CORRER ENETRE POYECTOS
-
+    Dim FindElement, Element As String
     Dim pjt As New Project
     Dim pjtNuevo As New Project
     '|requerimientos: cargar datos de cmbs, idCliente obligatorio, cargar desde cero las tablas 
@@ -1323,7 +1323,6 @@ Public Class ProjectsCosts
 
     Private Sub PictureBox3_Click(sender As Object, e As EventArgs) Handles PictureBox3.Click
         Me.Close()
-
     End Sub
 
     <DllImport("user32.DLL", EntryPoint:="ReleaseCapture")>
@@ -1339,6 +1338,66 @@ Public Class ProjectsCosts
 
     Private Sub Panel4_Paint(sender As Object, e As PaintEventArgs) Handles Panel4.Paint
 
+    End Sub
+
+    Private Sub cmbJobNumber_Enter(sender As Object, e As EventArgs) Handles cmbJobNumber.Enter, txtClientName.Enter, txtWokOrder.Enter, txtTask.Enter, txtEquipament.Enter, cmbProjectManager.Enter, txtClientPO.Enter, txtProjectDescription.Enter, sprTotalBilling.Enter, dtpBeginDate.Enter, dtpEndDate.Enter, sprHoursEstimate.Enter, cmbExpCode.Enter, txtAcountNo.Enter, sprPercentComplete.Enter, chbComplete.Enter
+        If cmbJobNumber.Focused Then
+            FindElement = "Job No"
+            Element = cmbJobNumber.Text
+        ElseIf txtClientName.Focused Then
+            FindElement = "Client Name"
+            Element = txtClientName.Text
+        ElseIf txtWokOrder.focused Then
+            FindElement = "Work Order"
+            Element = txtWokOrder.Text
+        ElseIf txtTask.focused Then
+            FindElement = "Task"
+            Element = txtTask.Text
+        ElseIf txtEquipament.focused Then
+            FindElement = "Equipament"
+            Element = txtEquipament.Text
+        ElseIf cmbProjectManager.Focused Then
+            FindElement = "Project Manager"
+            Element = cmbProjectManager.Text
+        ElseIf txtClientPO.focused Then
+            FindElement = "Client PO"
+            Element = txtClientPO.Text
+        ElseIf txtProjectDescription.Focused Then
+            FindElement = "Project Description"
+            Element = txtProjectDescription.Text
+        ElseIf sprTotalBilling.Focused Then
+            FindElement = "Est. Total Billing"
+            Element = sprTotalBilling.Value.ToString()
+        ElseIf dtpBeginDate.focused Then
+            FindElement = "Begin Date"
+            Element = dtpBeginDate.Value.ToString()
+        ElseIf dtpEndDate.focused Then
+            FindElement = "End Date"
+            Element = dtpEndDate.Value.ToString()
+        ElseIf sprHoursEstimate.Focused Then
+            FindElement = "Hrs Estamate"
+            Element = sprHoursEstimate.Value.ToString()
+        ElseIf cmbExpCode.Focused Then
+            FindElement = "Exp Code"
+            Element = cmbExpCode.Text
+        ElseIf txtAcountNo.Focused Then
+            FindElement = "Account No."
+            Element = txtAcountNo.Text
+        ElseIf sprPercentComplete.Focused Then
+            FindElement = "%Complete"
+            Element = sprPercentComplete.Value.ToString()
+        ElseIf chbComplete.Focused Then
+            FindElement = "Complete"
+            Element = If(chbComplete.Checked, "True", "False")
+        End If
+    End Sub
+
+    Private Sub btnFindProject_Click(sender As Object, e As EventArgs) Handles btnFindProject.Click
+        Dim FT As New FindTask
+        FT.FindElement = FindElement
+        FT.Element = Element
+        FT.IdClient = idCliente
+        FT.ShowDialog()
     End Sub
 
     Private Function calcularValores() As Boolean
