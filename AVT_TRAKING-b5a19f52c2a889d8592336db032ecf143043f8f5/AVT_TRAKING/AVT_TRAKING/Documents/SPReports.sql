@@ -232,6 +232,7 @@ go
 --##############################################################################################
 --CREATE proc [dbo].[Sp_All_Jobs]
 ALTER proc [dbo].[Sp_All_Jobs]
+--ALTER proc [dbo].[Sp_All_Jobs]
 @startdate as date, 
 @finaldate as date
 as
@@ -260,10 +261,8 @@ select distinct
 	 else (select exu.amount from expensesUsed as exu inner join expenses as ex on ex.idExpenses = exu.idExpense
 	 where exu.dateExpense = hw.dateWorked and exu.idEmployee= em.idEmployee and ex.expenseCode like 'PerDiem') end as 'PerDiem' ,
 
-	case when (select exu.amount from expensesUsed as exu inner join expenses as ex on ex.idExpenses = exu.idExpense
-	 where exu.dateExpense = hw.dateWorked and exu.idEmployee= em.idEmployee and ex.expenseCode like 'Travel') is NULL then ''
-	 else concat('',(select exu.amount from expensesUsed as exu inner join expenses as ex on ex.idExpenses = exu.idExpense
-	 where exu.dateExpense = hw.dateWorked and exu.idEmployee= em.idEmployee and ex.expenseCode like 'Travel')) end as 'Travel' 
+	isnull((select exu.amount from expensesUsed as exu inner join expenses as ex on ex.idExpenses = exu.idExpense
+	 where exu.dateExpense = hw.dateWorked and exu.idEmployee= em.idEmployee and ex.expenseCode like 'Travel'),0) as 'Travel' 
 	from employees as em 
 		inner join hoursWorked as hw on hw.idEmployee = em.idEmployee
 		inner join workCode as wc on wc.idWorkCode = hw.idWorkCode
@@ -277,7 +276,6 @@ select distinct
 	concat(em.lastName,', ', em.firstName,' ' ,em.middleName),
 	hw.dateWorked
 end
-
 go
 
 --##############################################################################################

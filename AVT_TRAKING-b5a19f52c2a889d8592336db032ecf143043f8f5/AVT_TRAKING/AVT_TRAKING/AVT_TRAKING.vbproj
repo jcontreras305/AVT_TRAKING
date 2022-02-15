@@ -796,6 +796,7 @@
     <None Include="Images\catsemployee.png" />
     <None Include="Images\ComplteByRange.png" />
     <Content Include="Documents\SPReports.sql" />
+    <None Include="Images\after1.png" />
     <Content Include="Images\byjobnumt.png" />
     <Content Include="Images\eye.png" />
     <None Include="Images\minimize.png" />

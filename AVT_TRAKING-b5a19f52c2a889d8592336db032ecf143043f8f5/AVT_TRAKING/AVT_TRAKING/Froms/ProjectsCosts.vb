@@ -6,10 +6,12 @@ Public Class ProjectsCosts
     Public idCliente, WorkOrder, idAuxWO, task, JobNumber, PO As String
     Dim idsEmployessManager As List(Of String)
     Dim lstProject As List(Of String)
-    Private tablasDeTareas As New DataTable 'ESTA TABLA GUARDO TODOS LOS PO CON EL WO Y TASK PARA CORRER ENETRE POYECTOS
+    Public tablasDeTareas As New DataTable 'ESTA TABLA GUARDO TODOS LOS PO CON EL WO Y TASK PARA CORRER ENETRE POYECTOS
     Dim FindElement, Element As String
     Dim pjt As New Project
     Dim pjtNuevo As New Project
+    Public flagFindElement As Boolean
+    Dim flagBtnNextBackFind As Boolean
     '|requerimientos: cargar datos de cmbs, idCliente obligatorio, cargar desde cero las tablas 
     '|caso 1: entra crear uno nuevo pero ocupo el idCliente para cargar todo
     '|caso 2: entra con un projecto en especifico
@@ -28,6 +30,9 @@ Public Class ProjectsCosts
         mtdJobs.llenarComboJob(cmbJobNumber, idCliente)
         'aqui se consulta y se cargan los datos en la interfaz
         mtdJobs.consultaWO(JobNumber, tablasDeTareas)
+        If tablasDeTareas.Rows IsNot Nothing Then
+            txtElementsRadar.Text = "1 of " + tablasDeTareas.Rows.Count.ToString()
+        End If
         If tablasDeTareas.Rows.Count > 0 Then
             idAuxWO = tablasDeTareas.Rows(0).ItemArray(5)
             JobNumber = tablasDeTareas.Rows(0).ItemArray(0)
@@ -155,6 +160,9 @@ Public Class ProjectsCosts
                 tablasDeTareas.Rows.Clear()
             End If
             mtdJobs.consultaWO(jobNum, tablasDeTareas)
+            If tablasDeTareas.Rows IsNot Nothing Then
+                txtElementsRadar.Text = "1 of " + tablasDeTareas.Rows.Count.ToString()
+            End If
         End If
         calcularValores()
         Return flag
@@ -167,10 +175,18 @@ Public Class ProjectsCosts
         mtdJobs.buscarMaterialesPorProyecto(tblMaterialProjects, WO, tk)
         lblWorkOrder.Text = WorkOrder + " " + task
         If flag Then
-            If tablasDeTareas.Rows.Count <> 0 Then
-                tablasDeTareas.Rows.Clear()
+            If flagBtnNextBackFind = True Then
+                cmbJobNumber.SelectedItem = cmbJobNumber.Items(cmbJobNumber.FindString(jobNum))
+                JobNumber = jobNum
+            Else
+                If tablasDeTareas.Rows.Count <> 0 Then
+                    tablasDeTareas.Rows.Clear()
+                End If
+                mtdJobs.consultaWO(jobNum, tablasDeTareas)
+                If tablasDeTareas.Rows IsNot Nothing Then
+                    txtElementsRadar.Text = "1 of " + tablasDeTareas.Rows.Count.ToString
+                End If
             End If
-            mtdJobs.consultaWO(jobNum, tablasDeTareas)
         End If
         calcularValores()
         Return flag
@@ -181,7 +197,7 @@ Public Class ProjectsCosts
             Dim contRow As Integer = tablasDeTareas.Rows.Count
             Dim index As Integer = 0
             For Each row As DataRow In tablasDeTareas.Rows
-                If row.ItemArray(3) = task And row.ItemArray(2) = WorkOrder Then
+                If row.ItemArray(3) = task And row.ItemArray(2) = WorkOrder And row.ItemArray(0) = JobNumber Then
                     Exit For
                 Else
                     index = index + 1
@@ -189,6 +205,7 @@ Public Class ProjectsCosts
             Next
             If index = contRow - 1 Then
                 index = 0
+                flagBtnNextBackFind = True
                 If cargarDatosProjecto(tablasDeTareas.Rows(index).ItemArray(0), tablasDeTareas.Rows(index).ItemArray(5), tablasDeTareas.Rows(index).ItemArray(3)) Then
                     If chbComplete.Checked() = False Then
                         activarCampos(True)
@@ -198,9 +215,13 @@ Public Class ProjectsCosts
                 Else
                     activarCampos(False)
                 End If
-
+                If tablasDeTareas.Rows IsNot Nothing Then
+                    txtElementsRadar.Text = CStr(index + 1) + " of " + tablasDeTareas.Rows.Count.ToString()
+                End If
+                flagBtnNextBackFind = False
             Else
                 index += 1
+                flagBtnNextBackFind = True
                 If cargarDatosProjecto(tablasDeTareas.Rows(index).ItemArray(0), tablasDeTareas.Rows(index).ItemArray(5), tablasDeTareas.Rows(index).ItemArray(3)) Then
                     If chbComplete.Checked() = False Then
                         activarCampos(True)
@@ -210,6 +231,10 @@ Public Class ProjectsCosts
                 Else
                     activarCampos(False)
                 End If
+                If tablasDeTareas.Rows IsNot Nothing Then
+                    txtElementsRadar.Text = CStr(index + 1) + " of " + tablasDeTareas.Rows.Count.ToString()
+                End If
+                flagBtnNextBackFind = False
             End If
         End If
     End Sub
@@ -219,7 +244,7 @@ Public Class ProjectsCosts
             Dim contRow As Integer = tablasDeTareas.Rows.Count
             Dim index As Integer = 0
             For Each row As DataRow In tablasDeTareas.Rows
-                If row.ItemArray(3) = task And row.ItemArray(2) = WorkOrder Then
+                If row.ItemArray(3) = task And row.ItemArray(2) = WorkOrder And row.ItemArray(0) = JobNumber Then
                     Exit For
                 Else
                     index = index + 1
@@ -227,17 +252,24 @@ Public Class ProjectsCosts
             Next
             If index = 0 Then
                 index = contRow - 1
+                flagBtnNextBackFind = True
                 If cargarDatosProjecto(tablasDeTareas.Rows(index).ItemArray(0), tablasDeTareas.Rows(index).ItemArray(5), tablasDeTareas.Rows(index).ItemArray(3)) Then
                     If chbComplete.Checked() = False Then
                         activarCampos(True)
                     Else
                         activarCampos(False)
                     End If
+                    If tablasDeTareas.Rows IsNot Nothing Then
+                        txtElementsRadar.Text = CStr(index + 1) + " of " + tablasDeTareas.Rows.Count.ToString()
+                    End If
+                    flagBtnNextBackFind = False
                 Else
                     activarCampos(False)
                 End If
+                flagBtnNextBackFind = False
             Else
                 index -= 1
+                flagBtnNextBackFind = True
                 If cargarDatosProjecto(tablasDeTareas.Rows(index).ItemArray(0), tablasDeTareas.Rows(index).ItemArray(5), tablasDeTareas.Rows(index).ItemArray(3)) Then
                     If chbComplete.Checked() = False Then
                         activarCampos(True)
@@ -247,6 +279,10 @@ Public Class ProjectsCosts
                 Else
                     activarCampos(False)
                 End If
+                If tablasDeTareas.Rows IsNot Nothing Then
+                    txtElementsRadar.Text = CStr(index + 1) + " of " + tablasDeTareas.Rows.Count.ToString()
+                End If
+                flagBtnNextBackFind = False
             End If
         End If
     End Sub
@@ -272,6 +308,9 @@ Public Class ProjectsCosts
                 btnAddRecord.Text = "Add Record"
                 flagAddRecord = False
                 mtdJobs.consultaWO(JobNumber, tablasDeTareas)
+                If tablasDeTareas.Rows IsNot Nothing Then
+                    txtElementsRadar.Text = "1 of " + tablasDeTareas.Rows.Count.ToString()
+                End If
                 If Not cargarDatosProjecto(JobNumber) Then
                     activarCampos(False)
                 Else
@@ -373,7 +412,12 @@ Public Class ProjectsCosts
             If cmbJobNumber.SelectedItem.ToString() <> "" Then
                 pjtNuevo.jobNum = cmbJobNumber.Text
                 mtdJobs.consultaWO(pjtNuevo.jobNum, tablasDeTareas)
+                If tablasDeTareas.Rows IsNot Nothing Then
+                    txtElementsRadar.Text = "1 of " + tablasDeTareas.Rows.Count.ToString()
+                End If
             End If
+        ElseIf flagBtnNextBackFind = True Then
+            JobNumber = cmbJobNumber.SelectedItem
         Else
             JobNumber = cmbJobNumber.SelectedItem
             If cargarDatosProjecto(JobNumber) Then
@@ -386,6 +430,9 @@ Public Class ProjectsCosts
                 activarCampos(False)
             End If
             mtdJobs.consultaWO(JobNumber, tablasDeTareas)
+            If tablasDeTareas.Rows IsNot Nothing Then
+                txtElementsRadar.Text = "1 of " + tablasDeTareas.Rows.Count.ToString()
+            End If
         End If
     End Sub
 
@@ -1397,7 +1444,22 @@ Public Class ProjectsCosts
         FT.FindElement = FindElement
         FT.Element = Element
         FT.IdClient = idCliente
+        flagFindElement = False
+        AddOwnedForm(FT)
         FT.ShowDialog()
+        If flagFindElement Then
+            Dim index As Integer = 0
+            flagBtnNextBackFind = True
+            If cargarDatosProjecto(tablasDeTareas.Rows(index).ItemArray(0), tablasDeTareas.Rows(index).ItemArray(5), tablasDeTareas.Rows(index).ItemArray(3)) Then
+                If chbComplete.Checked() = False Then
+                    activarCampos(True)
+                Else
+                    activarCampos(False)
+                End If
+            Else
+                activarCampos(False)
+            End If
+        End If
     End Sub
 
     Private Function calcularValores() As Boolean

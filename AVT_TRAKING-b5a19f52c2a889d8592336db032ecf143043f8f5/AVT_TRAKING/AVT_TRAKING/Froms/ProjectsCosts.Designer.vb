@@ -86,7 +86,7 @@ Partial Class ProjectsCosts
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.btnNextTask = New System.Windows.Forms.Button()
         Me.btnAfterTask = New System.Windows.Forms.Button()
-        Me.TextBox1 = New System.Windows.Forms.TextBox()
+        Me.txtElementsRadar = New System.Windows.Forms.TextBox()
         Me.btnAddRecord = New System.Windows.Forms.Button()
         Me.btnFindProject = New System.Windows.Forms.Button()
         Me.btnDelete = New System.Windows.Forms.Button()
@@ -779,7 +779,7 @@ Partial Class ProjectsCosts
         Me.Panel4.Controls.Add(Me.PictureBox1)
         Me.Panel4.Controls.Add(Me.btnNextTask)
         Me.Panel4.Controls.Add(Me.btnAfterTask)
-        Me.Panel4.Controls.Add(Me.TextBox1)
+        Me.Panel4.Controls.Add(Me.txtElementsRadar)
         Me.Panel4.Controls.Add(Me.btnAddRecord)
         Me.Panel4.Controls.Add(Me.btnFindProject)
         Me.Panel4.Dock = System.Windows.Forms.DockStyle.Top
@@ -894,9 +894,9 @@ Partial Class ProjectsCosts
         Me.btnAfterTask.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(83, Byte), Integer), CType(CType(93, Byte), Integer), CType(CType(102, Byte), Integer))
         Me.btnAfterTask.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnAfterTask.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.btnAfterTask.Image = Global.AVT_TRAKING.My.Resources.Resources.after
+        Me.btnAfterTask.Image = Global.AVT_TRAKING.My.Resources.Resources.after1
         Me.btnAfterTask.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnAfterTask.Location = New System.Drawing.Point(790, 27)
+        Me.btnAfterTask.Location = New System.Drawing.Point(685, 28)
         Me.btnAfterTask.Name = "btnAfterTask"
         Me.btnAfterTask.Size = New System.Drawing.Size(75, 23)
         Me.btnAfterTask.TabIndex = 16
@@ -904,13 +904,14 @@ Partial Class ProjectsCosts
         Me.btnAfterTask.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         Me.btnAfterTask.UseVisualStyleBackColor = True
         '
-        'TextBox1
+        'txtElementsRadar
         '
-        Me.TextBox1.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.TextBox1.Location = New System.Drawing.Point(542, 29)
-        Me.TextBox1.Name = "TextBox1"
-        Me.TextBox1.Size = New System.Drawing.Size(179, 21)
-        Me.TextBox1.TabIndex = 35
+        Me.txtElementsRadar.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.txtElementsRadar.Location = New System.Drawing.Point(766, 30)
+        Me.txtElementsRadar.Name = "txtElementsRadar"
+        Me.txtElementsRadar.ReadOnly = True
+        Me.txtElementsRadar.Size = New System.Drawing.Size(101, 21)
+        Me.txtElementsRadar.TabIndex = 35
         '
         'btnAddRecord
         '
@@ -938,7 +939,7 @@ Partial Class ProjectsCosts
         Me.btnFindProject.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.btnFindProject.Image = Global.AVT_TRAKING.My.Resources.Resources.loupe
         Me.btnFindProject.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnFindProject.Location = New System.Drawing.Point(734, 27)
+        Me.btnFindProject.Location = New System.Drawing.Point(622, 28)
         Me.btnFindProject.Name = "btnFindProject"
         Me.btnFindProject.Size = New System.Drawing.Size(57, 23)
         Me.btnFindProject.TabIndex = 36
@@ -1640,7 +1641,7 @@ Partial Class ProjectsCosts
     Friend WithEvents Label16 As Label
     Friend WithEvents txtMensaje As TextBox
     Friend WithEvents btnFindProject As Button
-    Friend WithEvents TextBox1 As TextBox
+    Friend WithEvents txtElementsRadar As TextBox
     Public WithEvents txtAcountNo As TextBox
     Public WithEvents sprHoursEstimate As NumericUpDown
     Public WithEvents dtpEndDate As DateTimePicker

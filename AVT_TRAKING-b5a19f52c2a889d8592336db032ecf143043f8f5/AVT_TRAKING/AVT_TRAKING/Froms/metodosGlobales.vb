@@ -107,14 +107,15 @@ Module metodosGlobales
 
     ''' <summary>
     ''' Este metodo da formato de acuerdo a las dos zonas previstas para isertar en SQLServer 
+    ''' El string para Mexico es de dd/mm/yyyy y para USA es de yyyy/mm/dd
     ''' </summary>
-    ''' <param name="fecha">Necesita un valor de tipo Date</param>
+    ''' <param name="fecha">Necesita un valor de tipo String </param>
     ''' <returns>Devuelbe un String con el formato necesario</returns>
     Public Function validaFechaParaSQl(ByVal fecha As String) As String
         Dim zona As TimeZone = TimeZone.CurrentTimeZone
         If zona.DaylightName = "Hora de verano central (México)" Then
             Dim array() = fecha.Split("/")
-            Dim fecha1 As String = array(2) + "-" + array(0) + "-" + array(1)
+            Dim fecha1 As String = array(2) + "-" + array(1) + "-" + array(0)
             Return fecha1
         Else
             Dim array() As String = CStr(fecha).Split("/")

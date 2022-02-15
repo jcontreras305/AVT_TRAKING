@@ -626,7 +626,7 @@ from job as jb
 inner join projectOrder as po on po.jobNo = jb.jobNo
 inner join workOrder as wo on wo.idPO = po.idPO and wo.jobNo = po.jobNo
 inner join task as tk on tk.idAuxWO = wo.idAuxWO
-where jb.jobNo " + If(jobNumber = "", "> 0", "=" + jobNumber), conn)
+where jb.jobNo " + If(jobNumber = "", "> 0", "=" + jobNumber) + " order by wo.idWO asc", conn)
             If cmd1.ExecuteNonQuery Then
                 tabla.Clear()
                 Dim da As New SqlDataAdapter(cmd1)
@@ -639,7 +639,34 @@ where jb.jobNo " + If(jobNumber = "", "> 0", "=" + jobNumber), conn)
             MsgBox(ex.Message())
         End Try
     End Sub
-
+    Public Sub consultaWOFind(ByVal consulta As String, ByVal tabla As DataTable, ByVal idClient As String)
+        Try
+            conectar()
+            Dim cmd1 As New SqlCommand("select 
+jb.jobNo,
+po.idPO,
+wo.idWO, 
+tk.task,
+tk.idAux,
+wo.idAuxWO
+from job as jb 
+inner join projectOrder as po on po.jobNo = jb.jobNo
+inner join workOrder as wo on wo.idPO = po.idPO and wo.jobNo = po.jobNo
+inner join task as tk on tk.idAuxWO = wo.idAuxWO 
+inner join clients as cl on cl.idClient = jb.idClient
+" + consulta + If(idClient <> "", " and cl.IdClient = '" + idClient + "'", ""), conn)
+            If cmd1.ExecuteNonQuery Then
+                tabla.Clear()
+                Dim da As New SqlDataAdapter(cmd1)
+                da.Fill(tabla)
+                desconectar()
+            Else
+                desconectar()
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message())
+        End Try
+    End Sub
     Public Function deleteMaterial(ByVal idMaterialUsed As String, ByVal itask As String) As Boolean
         Try
             conectar()
@@ -770,7 +797,7 @@ inner join clients as cl on jb.idClient = cl.idClient
 inner join projectOrder as po on jb.jobNo = po.jobNo 
 inner join workOrder as wo on po.idPO = wo.idPO and wo.jobNo = po.jobNo
 left join task as tk on tk.idAuxWO = wo.idAuxWO 
-where jb.jobNo = " + If(idJob = "", "0", idJob).ToString(), conn)
+where jb.jobNo = " + If(idJob = "", "0", idJob).ToString() + " order by wo.idWO asc", conn)
             Dim lstDatosPO As New List(Of String)
             Dim reader As SqlDataReader = cmd.ExecuteReader()
             While reader.Read()
