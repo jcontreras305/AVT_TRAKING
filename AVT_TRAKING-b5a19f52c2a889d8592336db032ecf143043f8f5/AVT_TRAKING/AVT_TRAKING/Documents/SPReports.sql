@@ -117,27 +117,12 @@ as
 begin
 	set @IntialDate = ISNULL(@IntialDate,GETDATE())
 	set @FinalDate = ISNULL(@FinalDate,GETDATE())
-	select 
-		distinct
-		T1.numberClient,
-		T1.jobNo,
-		T1.idPO,
-		T1.idWO,
-		(Select SUM(hw1.hoursST) from hoursWorked as hw1 inner join employees as em1 on em1.idEmployee = hw1.idEmployee inner join task as tk1 on hw1.idAux = tk1.idAux inner join workOrder as wo1 on tk1.idAuxWO = wo1.idAuxWO inner join projectOrder as po1 on po1.idPO = wo1.idPO and po1.jobNo = wo1.jobNo inner join job as jb1 on jb1.jobNo = po1.jobNo inner join clients as cl on cl.idClient = jb1.idClient where T1.numberClient = cl.numberClient and T1.jobNo = jb1.jobNo and T1.idPO = po1.idPO and  T1.idAux = tk1.idAux and [Shift]=hw1.schedule and T1.[Emp: Number] = em1.numberEmploye and hw1.dateWorked between @IntialDate and @FinalDate) as 'hoursST',
-		(Select SUM(hw1.hoursOT) from hoursWorked as hw1 inner join employees as em1 on em1.idEmployee = hw1.idEmployee inner join task as tk1 on hw1.idAux = tk1.idAux inner join workOrder as wo1 on tk1.idAuxWO = wo1.idAuxWO inner join projectOrder as po1 on po1.idPO = wo1.idPO and po1.jobNo = wo1.jobNo inner join job as jb1 on jb1.jobNo = po1.jobNo inner join clients as cl on cl.idClient = jb1.idClient where T1.numberClient = cl.numberClient and T1.jobNo = jb1.jobNo and T1.idPO = po1.idPO and  T1.idAux = tk1.idAux and [Shift]=hw1.schedule and T1.[Emp: Number] = em1.numberEmploye and hw1.dateWorked between @IntialDate and @FinalDate) as 'hoursOT',
-		T1.Code,
-		T1.[Shift],
-		t1.Employee,
-		T1.[Emp: Number],
-		T1.class
-		from(select 
+	select
+	distinct
 		cl.numberClient,
-		jb.jobNo,
 		po.idPO,
-		CONCAT(wo.idWO,' ',tk.task) as 'idWO',
-		tk.idAux,
-		hw.hoursST,
-		hw.hoursOT,
+		(select sum(hw1.hoursST) from hoursWorked as hw1 inner join workCode as wc1 on wc1.idWorkCode = hw1.idWorkCode inner join task as tk1 on tk1.idAux = hw1.idAux inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO inner join projectOrder as po1 on po1.idPO = wo1.idPO and po1.jobNo = wo1.jobNo inner join job as jb1 on jb1.jobNo = po1.jobNo inner join clients as cl1 on cl1.idClient = jb1.idClient where cl1.idClient = cl.idClient and po1.idPO=po.idPO and hw1.idEmployee = em.idEmployee and SUBSTRING( wc.name,1,iif(CHARINDEX('-',wc.name)=0, len(wc.name) ,(CHARINDEX('-',wc.name)-1)))=SUBSTRING( wc1.name,1,iif(CHARINDEX('-',wc1.name)=0, len(wc1.name) ,(CHARINDEX('-',wc1.name)-1))) and hw1.dateWorked between @IntialDate and @FinalDate) as 'Hours ST',
+		(select sum(hw2.hoursOT) from hoursWorked as hw2 inner join workCode as wc2 on wc2.idWorkCode = hw2.idWorkCode inner join task as tk2 on tk2.idAux = hw2.idAux inner join workOrder as wo2 on wo2.idAuxWO = tk2.idAuxWO inner join projectOrder as po2 on po2.idPO = wo2.idPO and po2.jobNo = wo2.jobNo inner join job as jb2 on jb2.jobNo = po2.jobNo inner join clients as cl2 on cl2.idClient = jb2.idClient where cl2.idClient = cl.idClient and po2.idPO=po.idPO and hw2.idEmployee = em.idEmployee and SUBSTRING( wc.name,1,iif(CHARINDEX('-',wc.name)=0, len(wc.name) ,(CHARINDEX('-',wc.name)-1)))=SUBSTRING( wc2.name,1,iif(CHARINDEX('-',wc2.name)=0, len(wc2.name) ,(CHARINDEX('-',wc2.name)-1))) and hw2.dateWorked between @IntialDate and @FinalDate) as 'Hours OT',
 		SUBSTRING( wc.name,1,iif(CHARINDEX('-',wc.name)=0, len(wc.name) ,(CHARINDEX('-',wc.name)-1))) as 'Code',
 		hw.schedule as 'Shift',
 		CONCAT(em.lastName,' ',em.firstName,' ',em.middleName) as 'Employee',
@@ -151,9 +136,8 @@ begin
 					inner join projectOrder as po on po.idPO = wo.idPO and wo.jobNo = po.jobNo 
 					inner join job as jb on jb.jobNo = po.jobNo
 					inner join clients  as cl on cl.idClient = jb.idClient
-		where hw.dateWorked between @IntialDate and @FinalDate and (hw.hoursST > 0 or hw.hoursOT>0 or hw.hours3>0)  and not wc.name like '%vacation%'
-		) as T1
-		order by T1.jobNo , T1.idPO
+		where hw.dateWorked between @IntialDate and @FinalDate
+		order by po.idPO
 END
 go
 
@@ -206,7 +190,6 @@ begin
 		order by t1.Task,t1.[Emp: Number]
 end
 end
-
 go
 
 --##############################################################################################
@@ -224,7 +207,6 @@ begin
 		from employees as em left join payRate as pr on pr.idEmployee = em.idEmployee  
 		where estatus = 'E'	
 end
-
 go
 
 --##############################################################################################
@@ -804,9 +786,8 @@ go
 --##############################################################################################
 --################## SP VACATION EMPLOYEE #######################################################
 --##############################################################################################
-CREATE proc [dbo].[Sp_Vacation_Employee]
-
---ALTER proc [dbo].[Sp_Vacation_Employee]
+--CREATE proc [dbo].[Sp_Vacation_Employee]
+ALTER proc [dbo].[Sp_Vacation_Employee]
 @NoEmployee int,
 @year nVarchar(4),
 @all bit
