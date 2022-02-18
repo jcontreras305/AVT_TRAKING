@@ -68,11 +68,12 @@ Public Class Track
             pdbPercent.Value = 5
             txtMessage.Text = "Message: Meaking new Excel Document."
             Dim ApExcel = New Microsoft.Office.Interop.Excel.Application
-            Dim libro = ApExcel.Workbooks.Add
+            Dim libro = ApExcel.Workbooks.Add()
+            libro.Sheets(1).Name = "Track"
             Try
 
                 txtMessage.Text = "Message: Inserting columns headres..."
-                Dim colums() As String = {tblTrack.Columns(0).HeaderText, tblTrack.Columns(1).HeaderText, tblTrack.Columns(3).HeaderText, tblTrack.Columns(4).HeaderText, tblTrack.Columns(5).HeaderText, tblTrack.Columns(6).HeaderText, tblTrack.Columns(7).HeaderText, tblTrack.Columns(8).HeaderText, tblTrack.Columns(9).HeaderText, tblTrack.Columns(10).HeaderText, tblTrack.Columns(11).HeaderText, tblTrack.Columns(12).HeaderText, tblTrack.Columns(13).HeaderText, tblTrack.Columns(14).HeaderText, tblTrack.Columns(15).HeaderText, tblTrack.Columns(16).HeaderText, tblTrack.Columns(17).HeaderText, tblTrack.Columns(18).HeaderText, tblTrack.Columns(19).HeaderText, tblTrack.Columns(20).HeaderText, tblTrack.Columns(21).HeaderText, tblTrack.Columns(22).HeaderText, tblTrack.Columns(23).HeaderText, tblTrack.Columns(24).HeaderText, tblTrack.Columns(25).HeaderText, tblTrack.Columns(26).HeaderText, tblTrack.Columns(27).HeaderText, tblTrack.Columns(28).HeaderText, tblTrack.Columns(29).HeaderText, tblTrack.Columns(30).HeaderText, tblTrack.Columns(31).HeaderText, tblTrack.Columns(32).HeaderText, tblTrack.Columns(33).HeaderText, tblTrack.Columns(34).HeaderText, tblTrack.Columns(35).HeaderText, tblTrack.Columns(36).HeaderText, tblTrack.Columns(37).HeaderText, tblTrack.Columns(38).HeaderText, tblTrack.Columns(39).HeaderText, tblTrack.Columns(40).HeaderText, tblTrack.Columns(41).HeaderText, tblTrack.Columns(42).HeaderText}
+                Dim colums() As String = {tblTrack.Columns(0).HeaderText, tblTrack.Columns(1).HeaderText, tblTrack.Columns(2).HeaderText, tblTrack.Columns(3).HeaderText, tblTrack.Columns(4).HeaderText, tblTrack.Columns(5).HeaderText, tblTrack.Columns(6).HeaderText, tblTrack.Columns(7).HeaderText, tblTrack.Columns(8).HeaderText, tblTrack.Columns(9).HeaderText, tblTrack.Columns(10).HeaderText, tblTrack.Columns(11).HeaderText, tblTrack.Columns(12).HeaderText, tblTrack.Columns(13).HeaderText, tblTrack.Columns(14).HeaderText, tblTrack.Columns(15).HeaderText, tblTrack.Columns(16).HeaderText, tblTrack.Columns(17).HeaderText, tblTrack.Columns(18).HeaderText, tblTrack.Columns(19).HeaderText, tblTrack.Columns(20).HeaderText, tblTrack.Columns(21).HeaderText, tblTrack.Columns(22).HeaderText, tblTrack.Columns(23).HeaderText, tblTrack.Columns(24).HeaderText, tblTrack.Columns(25).HeaderText, tblTrack.Columns(26).HeaderText, tblTrack.Columns(27).HeaderText, tblTrack.Columns(28).HeaderText, tblTrack.Columns(29).HeaderText, tblTrack.Columns(30).HeaderText, tblTrack.Columns(31).HeaderText, tblTrack.Columns(32).HeaderText, tblTrack.Columns(33).HeaderText, tblTrack.Columns(34).HeaderText, tblTrack.Columns(35).HeaderText, tblTrack.Columns(36).HeaderText, tblTrack.Columns(37).HeaderText, tblTrack.Columns(38).HeaderText, tblTrack.Columns(39).HeaderText, tblTrack.Columns(40).HeaderText, tblTrack.Columns(41).HeaderText, tblTrack.Columns(42).HeaderText}
                 For i As Int16 = 0 To colums.Length - 1
                     libro.Sheets(1).cells(1, i + 1) = colums(i)
                     libro.Sheets(1).cells(1, i + 1).Interior.Color = RGB(255, 255, 0)
@@ -139,7 +140,7 @@ Public Class Track
                 Next
                 Dim sd As New SaveFileDialog
                 sd.DefaultExt = "*.xlsx"
-                sd.FileName = "Track"
+                sd.FileName = "Track" + System.DateTime.Today.Month.ToString() + "-" + System.DateTime.Today.Day.ToString()
                 sd.Filter = "Archivos de Excel (*.xlsx)|*.xlsx"
                 If DialogResult.OK = sd.ShowDialog() Then
                     txtMessage.Text = "Message: Saving file."

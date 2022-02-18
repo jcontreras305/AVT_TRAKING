@@ -58,7 +58,7 @@ Partial Class MainFrom
         Me.TitleBar.Dock = System.Windows.Forms.DockStyle.Top
         Me.TitleBar.Location = New System.Drawing.Point(0, 0)
         Me.TitleBar.Name = "TitleBar"
-        Me.TitleBar.Size = New System.Drawing.Size(802, 25)
+        Me.TitleBar.Size = New System.Drawing.Size(1028, 25)
         Me.TitleBar.TabIndex = 6
         '
         'Label1
@@ -93,7 +93,7 @@ Partial Class MainFrom
         Me.Panel2.Dock = System.Windows.Forms.DockStyle.Left
         Me.Panel2.Location = New System.Drawing.Point(0, 0)
         Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(194, 472)
+        Me.Panel2.Size = New System.Drawing.Size(194, 611)
         Me.Panel2.TabIndex = 6
         '
         'Panel10
@@ -284,7 +284,7 @@ Partial Class MainFrom
         Me.Panel1.Controls.Add(Me.Panel2)
         Me.Panel1.Location = New System.Drawing.Point(0, 28)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(197, 472)
+        Me.Panel1.Size = New System.Drawing.Size(197, 611)
         Me.Panel1.TabIndex = 5
         '
         'PanelChildForm
@@ -295,7 +295,7 @@ Partial Class MainFrom
         Me.PanelChildForm.Controls.Add(Me.Button2)
         Me.PanelChildForm.Location = New System.Drawing.Point(197, 28)
         Me.PanelChildForm.Name = "PanelChildForm"
-        Me.PanelChildForm.Size = New System.Drawing.Size(605, 469)
+        Me.PanelChildForm.Size = New System.Drawing.Size(831, 608)
         Me.PanelChildForm.TabIndex = 7
         '
         'Button2
@@ -303,7 +303,7 @@ Partial Class MainFrom
         Me.Button2.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Button2.ForeColor = System.Drawing.Color.Red
         Me.Button2.Image = Global.AVT_TRAKING.My.Resources.Resources._exit
-        Me.Button2.Location = New System.Drawing.Point(563, 2)
+        Me.Button2.Location = New System.Drawing.Point(789, 2)
         Me.Button2.Margin = New System.Windows.Forms.Padding(2)
         Me.Button2.Name = "Button2"
         Me.Button2.Size = New System.Drawing.Size(39, 46)
@@ -315,7 +315,7 @@ Partial Class MainFrom
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
-        Me.ClientSize = New System.Drawing.Size(802, 500)
+        Me.ClientSize = New System.Drawing.Size(1028, 639)
         Me.Controls.Add(Me.PanelChildForm)
         Me.Controls.Add(Me.TitleBar)
         Me.Controls.Add(Me.Panel1)

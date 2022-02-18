@@ -263,7 +263,7 @@ Public Class TimeSheet
             While workOrders.Cells(contwo, 2).Text <> ""
                 Dim wo = workOrders.Cells(contwo, 2).Text.ToString().Replace(" ", "-")
                 Dim workOrder() As String = wo.Split("-") 'workOrder y task
-                tablaWO.Rows.Add(contwo - 1.ToString(), workOrder(0), workOrder(1), workOrders.Cells(contwo, 2).Text, workOrders.Cells(contwo, 3).Text, workOrders.Cells(contwo, 5).Text, workOrders.Cells(contwo, 6).Text, workOrders.Cells(contwo, 7).Text, workOrders.Cells(contwo, 8).Text, workOrders.Cells(contwo, 9).Text)
+                tablaWO.Rows.Add(contwo - 1.ToString(), workOrder(0), workOrder(1), workOrders.Cells(contwo, 2).Text, workOrders.Cells(contwo, 3).Text, workOrders.Cells(contwo, 5).Text, workOrders.Cells(contwo, 6).Text, workOrders.Cells(contwo, 7).Text, workOrders.Cells(contwo, 8).Text, workOrders.Cells(contwo, 9).Text, workOrders.Cells(contwo, 1).Text)
                 contwo += 1
             End While
             Dim listNewWorkOrders As New List(Of Data.DataRow)
@@ -297,6 +297,7 @@ Public Class TimeSheet
                         newPO.estimateHour = item.ItemArray(7)
                         newPO.idPO = item.ItemArray(8)
                         newPO.jobNum = item.ItemArray(9)
+                        newPO.equipament = item.ItemArray(10)
                         For Each row As DataRow In tablaProject.Rows
                             Dim wo() As String = row(1).ToString().Split("-")
                             If newPO.idWorkOrder = wo(0) Then

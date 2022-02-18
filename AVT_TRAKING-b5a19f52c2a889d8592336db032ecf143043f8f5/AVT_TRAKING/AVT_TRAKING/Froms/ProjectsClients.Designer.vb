@@ -29,8 +29,12 @@ Partial Class ProjectsClients
         Me.btnCompanyInformation = New System.Windows.Forms.Button()
         Me.btnExpences = New System.Windows.Forms.Button()
         Me.btnEmployees = New System.Windows.Forms.Button()
+        Me.btnSetup = New System.Windows.Forms.Button()
         Me.btnUploadSchedule = New System.Windows.Forms.Button()
+        Me.btnTimeEnterSheets = New System.Windows.Forms.Button()
+        Me.btnProyeccts = New System.Windows.Forms.Button()
         Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.pcbLogoPC = New System.Windows.Forms.PictureBox()
         Me.txtFindClientProyects = New System.Windows.Forms.TextBox()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.TableLayoutPanel3 = New System.Windows.Forms.TableLayoutPanel()
@@ -62,39 +66,39 @@ Partial Class ProjectsClients
         Me.Label1 = New System.Windows.Forms.Label()
         Me.tblProjectClients = New System.Windows.Forms.DataGridView()
         Me.Panel4 = New System.Windows.Forms.Panel()
+        Me.btnTrack = New System.Windows.Forms.Button()
+        Me.btnTaxes = New System.Windows.Forms.Button()
+        Me.btnAddClient = New System.Windows.Forms.Button()
         Me.TitleBar = New System.Windows.Forms.Panel()
         Me.Label2 = New System.Windows.Forms.Label()
+        Me.PictureBox2 = New System.Windows.Forms.PictureBox()
+        Me.btnRestore = New System.Windows.Forms.PictureBox()
+        Me.btnMaximize = New System.Windows.Forms.PictureBox()
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
         Me.TableLayoutPanel2 = New System.Windows.Forms.TableLayoutPanel()
         Me.Panel9 = New System.Windows.Forms.Panel()
+        Me.btnAdd = New System.Windows.Forms.Button()
         Me.Panel8 = New System.Windows.Forms.Panel()
         Me.Panel7 = New System.Windows.Forms.Panel()
         Me.Panel6 = New System.Windows.Forms.Panel()
         Me.Panel5 = New System.Windows.Forms.Panel()
+        Me.btnFindClintProyects = New System.Windows.Forms.Button()
+        Me.Button2 = New System.Windows.Forms.Button()
         Me.PanelChildForm = New System.Windows.Forms.Panel()
         Me.TableLayoutPanel4 = New System.Windows.Forms.TableLayoutPanel()
         Me.Panel3 = New System.Windows.Forms.Panel()
-        Me.btnTrack = New System.Windows.Forms.Button()
-        Me.btnTaxes = New System.Windows.Forms.Button()
-        Me.btnAddClient = New System.Windows.Forms.Button()
-        Me.btnAdd = New System.Windows.Forms.Button()
-        Me.btnFindClintProyects = New System.Windows.Forms.Button()
-        Me.Button2 = New System.Windows.Forms.Button()
-        Me.PictureBox2 = New System.Windows.Forms.PictureBox()
-        Me.btnRestore = New System.Windows.Forms.PictureBox()
-        Me.btnMaximize = New System.Windows.Forms.PictureBox()
-        Me.btnSetup = New System.Windows.Forms.Button()
-        Me.btnTimeEnterSheets = New System.Windows.Forms.Button()
-        Me.btnProyeccts = New System.Windows.Forms.Button()
-        Me.pcbLogoPC = New System.Windows.Forms.PictureBox()
         Me.Panel1.SuspendLayout()
         Me.PnllSetup.SuspendLayout()
         Me.Panel2.SuspendLayout()
+        CType(Me.pcbLogoPC, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox1.SuspendLayout()
         Me.TableLayoutPanel3.SuspendLayout()
         CType(Me.tblProjectClients, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel4.SuspendLayout()
         Me.TitleBar.SuspendLayout()
+        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.btnRestore, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.btnMaximize, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.TableLayoutPanel1.SuspendLayout()
         Me.TableLayoutPanel2.SuspendLayout()
         Me.Panel9.SuspendLayout()
@@ -105,10 +109,6 @@ Partial Class ProjectsClients
         Me.PanelChildForm.SuspendLayout()
         Me.TableLayoutPanel4.SuspendLayout()
         Me.Panel3.SuspendLayout()
-        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.btnRestore, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.btnMaximize, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.pcbLogoPC, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'Panel1
@@ -214,6 +214,23 @@ Partial Class ProjectsClients
         Me.btnEmployees.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         Me.btnEmployees.UseVisualStyleBackColor = True
         '
+        'btnSetup
+        '
+        Me.btnSetup.Dock = System.Windows.Forms.DockStyle.Top
+        Me.btnSetup.FlatAppearance.BorderSize = 0
+        Me.btnSetup.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(59, Byte), Integer), CType(CType(69, Byte), Integer), CType(CType(79, Byte), Integer))
+        Me.btnSetup.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnSetup.Font = New System.Drawing.Font("Nirmala UI", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnSetup.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.btnSetup.Image = Global.AVT_TRAKING.My.Resources.Resources.setup
+        Me.btnSetup.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnSetup.Location = New System.Drawing.Point(0, 264)
+        Me.btnSetup.Name = "btnSetup"
+        Me.btnSetup.Size = New System.Drawing.Size(216, 51)
+        Me.btnSetup.TabIndex = 4
+        Me.btnSetup.Text = "Setup"
+        Me.btnSetup.UseVisualStyleBackColor = True
+        '
         'btnUploadSchedule
         '
         Me.btnUploadSchedule.Dock = System.Windows.Forms.DockStyle.Top
@@ -229,6 +246,41 @@ Partial Class ProjectsClients
         Me.btnUploadSchedule.Text = "SCAFFOLD TRAKING"
         Me.btnUploadSchedule.UseVisualStyleBackColor = True
         '
+        'btnTimeEnterSheets
+        '
+        Me.btnTimeEnterSheets.Dock = System.Windows.Forms.DockStyle.Top
+        Me.btnTimeEnterSheets.FlatAppearance.BorderSize = 0
+        Me.btnTimeEnterSheets.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(59, Byte), Integer), CType(CType(69, Byte), Integer), CType(CType(79, Byte), Integer))
+        Me.btnTimeEnterSheets.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnTimeEnterSheets.Font = New System.Drawing.Font("Nirmala UI", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnTimeEnterSheets.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.btnTimeEnterSheets.Image = Global.AVT_TRAKING.My.Resources.Resources.time
+        Me.btnTimeEnterSheets.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnTimeEnterSheets.Location = New System.Drawing.Point(0, 152)
+        Me.btnTimeEnterSheets.Name = "btnTimeEnterSheets"
+        Me.btnTimeEnterSheets.Size = New System.Drawing.Size(216, 54)
+        Me.btnTimeEnterSheets.TabIndex = 2
+        Me.btnTimeEnterSheets.Text = "Time Enter Sheet"
+        Me.btnTimeEnterSheets.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.btnTimeEnterSheets.UseVisualStyleBackColor = True
+        '
+        'btnProyeccts
+        '
+        Me.btnProyeccts.Dock = System.Windows.Forms.DockStyle.Top
+        Me.btnProyeccts.FlatAppearance.BorderSize = 0
+        Me.btnProyeccts.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(59, Byte), Integer), CType(CType(69, Byte), Integer), CType(CType(79, Byte), Integer))
+        Me.btnProyeccts.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnProyeccts.Font = New System.Drawing.Font("Nirmala UI", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnProyeccts.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.btnProyeccts.Image = Global.AVT_TRAKING.My.Resources.Resources.project
+        Me.btnProyeccts.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnProyeccts.Location = New System.Drawing.Point(0, 97)
+        Me.btnProyeccts.Name = "btnProyeccts"
+        Me.btnProyeccts.Size = New System.Drawing.Size(216, 55)
+        Me.btnProyeccts.TabIndex = 1
+        Me.btnProyeccts.Text = "Projects"
+        Me.btnProyeccts.UseVisualStyleBackColor = True
+        '
         'Panel2
         '
         Me.Panel2.Controls.Add(Me.pcbLogoPC)
@@ -238,20 +290,30 @@ Partial Class ProjectsClients
         Me.Panel2.Size = New System.Drawing.Size(216, 97)
         Me.Panel2.TabIndex = 0
         '
+        'pcbLogoPC
+        '
+        Me.pcbLogoPC.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.pcbLogoPC.Location = New System.Drawing.Point(0, 0)
+        Me.pcbLogoPC.Name = "pcbLogoPC"
+        Me.pcbLogoPC.Size = New System.Drawing.Size(216, 97)
+        Me.pcbLogoPC.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
+        Me.pcbLogoPC.TabIndex = 0
+        Me.pcbLogoPC.TabStop = False
+        '
         'txtFindClientProyects
         '
         Me.txtFindClientProyects.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.txtFindClientProyects.Location = New System.Drawing.Point(22, 6)
         Me.txtFindClientProyects.Name = "txtFindClientProyects"
-        Me.txtFindClientProyects.Size = New System.Drawing.Size(223, 20)
+        Me.txtFindClientProyects.Size = New System.Drawing.Size(255, 20)
         Me.txtFindClientProyects.TabIndex = 15
         '
         'GroupBox1
         '
         Me.GroupBox1.Controls.Add(Me.TableLayoutPanel3)
         Me.GroupBox1.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.GroupBox1.Location = New System.Drawing.Point(344, 35)
+        Me.GroupBox1.Location = New System.Drawing.Point(376, 35)
         Me.GroupBox1.Name = "GroupBox1"
         Me.GroupBox1.Size = New System.Drawing.Size(603, 159)
         Me.GroupBox1.TabIndex = 14
@@ -503,7 +565,7 @@ Partial Class ProjectsClients
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.txtCompanyName.Location = New System.Drawing.Point(110, -1)
         Me.txtCompanyName.Name = "txtCompanyName"
-        Me.txtCompanyName.Size = New System.Drawing.Size(153, 20)
+        Me.txtCompanyName.Size = New System.Drawing.Size(185, 20)
         Me.txtCompanyName.TabIndex = 13
         '
         'txtJobNumber
@@ -512,7 +574,7 @@ Partial Class ProjectsClients
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.txtJobNumber.Location = New System.Drawing.Point(110, -1)
         Me.txtJobNumber.Name = "txtJobNumber"
-        Me.txtJobNumber.Size = New System.Drawing.Size(153, 20)
+        Me.txtJobNumber.Size = New System.Drawing.Size(185, 20)
         Me.txtJobNumber.TabIndex = 12
         '
         'txtFirstName
@@ -521,7 +583,7 @@ Partial Class ProjectsClients
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.txtFirstName.Location = New System.Drawing.Point(110, -3)
         Me.txtFirstName.Name = "txtFirstName"
-        Me.txtFirstName.Size = New System.Drawing.Size(153, 20)
+        Me.txtFirstName.Size = New System.Drawing.Size(185, 20)
         Me.txtFirstName.TabIndex = 9
         '
         'Label5
@@ -565,7 +627,7 @@ Partial Class ProjectsClients
         Me.tblProjectClients.Name = "tblProjectClients"
         Me.tblProjectClients.ReadOnly = True
         Me.tblProjectClients.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.tblProjectClients.Size = New System.Drawing.Size(813, 408)
+        Me.tblProjectClients.Size = New System.Drawing.Size(888, 408)
         Me.tblProjectClients.TabIndex = 6
         '
         'Panel4
@@ -574,10 +636,61 @@ Partial Class ProjectsClients
         Me.Panel4.Controls.Add(Me.btnTaxes)
         Me.Panel4.Controls.Add(Me.btnAddClient)
         Me.Panel4.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel4.Location = New System.Drawing.Point(822, 3)
+        Me.Panel4.Location = New System.Drawing.Point(897, 3)
         Me.Panel4.Name = "Panel4"
-        Me.Panel4.Size = New System.Drawing.Size(125, 408)
+        Me.Panel4.Size = New System.Drawing.Size(137, 408)
         Me.Panel4.TabIndex = 8
+        '
+        'btnTrack
+        '
+        Me.btnTrack.Dock = System.Windows.Forms.DockStyle.Top
+        Me.btnTrack.FlatAppearance.BorderSize = 0
+        Me.btnTrack.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(58, Byte), Integer), CType(CType(115, Byte), Integer))
+        Me.btnTrack.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnTrack.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnTrack.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.btnTrack.Image = Global.AVT_TRAKING.My.Resources.Resources.reportshow
+        Me.btnTrack.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnTrack.Location = New System.Drawing.Point(0, 82)
+        Me.btnTrack.Name = "btnTrack"
+        Me.btnTrack.Size = New System.Drawing.Size(137, 41)
+        Me.btnTrack.TabIndex = 9
+        Me.btnTrack.Text = "Track Upload"
+        Me.btnTrack.UseVisualStyleBackColor = True
+        '
+        'btnTaxes
+        '
+        Me.btnTaxes.Dock = System.Windows.Forms.DockStyle.Top
+        Me.btnTaxes.FlatAppearance.BorderSize = 0
+        Me.btnTaxes.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(58, Byte), Integer), CType(CType(115, Byte), Integer))
+        Me.btnTaxes.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnTaxes.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnTaxes.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.btnTaxes.Image = Global.AVT_TRAKING.My.Resources.Resources.payroll
+        Me.btnTaxes.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnTaxes.Location = New System.Drawing.Point(0, 41)
+        Me.btnTaxes.Name = "btnTaxes"
+        Me.btnTaxes.Size = New System.Drawing.Size(137, 41)
+        Me.btnTaxes.TabIndex = 8
+        Me.btnTaxes.Text = "Taxes"
+        Me.btnTaxes.UseVisualStyleBackColor = True
+        '
+        'btnAddClient
+        '
+        Me.btnAddClient.Dock = System.Windows.Forms.DockStyle.Top
+        Me.btnAddClient.FlatAppearance.BorderSize = 0
+        Me.btnAddClient.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(58, Byte), Integer), CType(CType(115, Byte), Integer))
+        Me.btnAddClient.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnAddClient.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnAddClient.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.btnAddClient.Image = Global.AVT_TRAKING.My.Resources.Resources.add
+        Me.btnAddClient.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnAddClient.Location = New System.Drawing.Point(0, 0)
+        Me.btnAddClient.Name = "btnAddClient"
+        Me.btnAddClient.Size = New System.Drawing.Size(137, 41)
+        Me.btnAddClient.TabIndex = 7
+        Me.btnAddClient.Text = "Add client"
+        Me.btnAddClient.UseVisualStyleBackColor = True
         '
         'TitleBar
         '
@@ -589,7 +702,7 @@ Partial Class ProjectsClients
         Me.TitleBar.Dock = System.Windows.Forms.DockStyle.Top
         Me.TitleBar.Location = New System.Drawing.Point(216, 0)
         Me.TitleBar.Name = "TitleBar"
-        Me.TitleBar.Size = New System.Drawing.Size(953, 31)
+        Me.TitleBar.Size = New System.Drawing.Size(1040, 31)
         Me.TitleBar.TabIndex = 9
         '
         'Label2
@@ -602,6 +715,36 @@ Partial Class ProjectsClients
         Me.Label2.Size = New System.Drawing.Size(144, 18)
         Me.Label2.TabIndex = 3
         Me.Label2.Text = "Projects Clients"
+        '
+        'PictureBox2
+        '
+        Me.PictureBox2.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.PictureBox2.Image = Global.AVT_TRAKING.My.Resources.Resources.minimize2
+        Me.PictureBox2.Location = New System.Drawing.Point(979, 3)
+        Me.PictureBox2.Name = "PictureBox2"
+        Me.PictureBox2.Size = New System.Drawing.Size(24, 25)
+        Me.PictureBox2.TabIndex = 2
+        Me.PictureBox2.TabStop = False
+        '
+        'btnRestore
+        '
+        Me.btnRestore.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnRestore.Image = Global.AVT_TRAKING.My.Resources.Resources.restore2
+        Me.btnRestore.Location = New System.Drawing.Point(1009, 7)
+        Me.btnRestore.Name = "btnRestore"
+        Me.btnRestore.Size = New System.Drawing.Size(28, 24)
+        Me.btnRestore.TabIndex = 1
+        Me.btnRestore.TabStop = False
+        '
+        'btnMaximize
+        '
+        Me.btnMaximize.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnMaximize.Image = Global.AVT_TRAKING.My.Resources.Resources.maximize2
+        Me.btnMaximize.Location = New System.Drawing.Point(1012, 4)
+        Me.btnMaximize.Name = "btnMaximize"
+        Me.btnMaximize.Size = New System.Drawing.Size(23, 25)
+        Me.btnMaximize.TabIndex = 0
+        Me.btnMaximize.TabStop = False
         '
         'TableLayoutPanel1
         '
@@ -617,7 +760,7 @@ Partial Class ProjectsClients
         Me.TableLayoutPanel1.RowCount = 2
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 165.0!))
-        Me.TableLayoutPanel1.Size = New System.Drawing.Size(950, 197)
+        Me.TableLayoutPanel1.Size = New System.Drawing.Size(1037, 197)
         Me.TableLayoutPanel1.TabIndex = 10
         '
         'TableLayoutPanel2
@@ -638,7 +781,7 @@ Partial Class ProjectsClients
         Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30.0!))
         Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30.0!))
         Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 36.0!))
-        Me.TableLayoutPanel2.Size = New System.Drawing.Size(335, 159)
+        Me.TableLayoutPanel2.Size = New System.Drawing.Size(367, 159)
         Me.TableLayoutPanel2.TabIndex = 15
         '
         'Panel9
@@ -647,137 +790,8 @@ Partial Class ProjectsClients
         Me.Panel9.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel9.Location = New System.Drawing.Point(3, 128)
         Me.Panel9.Name = "Panel9"
-        Me.Panel9.Size = New System.Drawing.Size(329, 30)
+        Me.Panel9.Size = New System.Drawing.Size(361, 30)
         Me.Panel9.TabIndex = 4
-        '
-        'Panel8
-        '
-        Me.Panel8.Controls.Add(Me.txtFirstName)
-        Me.Panel8.Controls.Add(Me.Label1)
-        Me.Panel8.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel8.Location = New System.Drawing.Point(3, 98)
-        Me.Panel8.Name = "Panel8"
-        Me.Panel8.Size = New System.Drawing.Size(329, 24)
-        Me.Panel8.TabIndex = 3
-        '
-        'Panel7
-        '
-        Me.Panel7.Controls.Add(Me.txtCompanyName)
-        Me.Panel7.Controls.Add(Me.Label5)
-        Me.Panel7.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel7.Location = New System.Drawing.Point(3, 68)
-        Me.Panel7.Name = "Panel7"
-        Me.Panel7.Size = New System.Drawing.Size(329, 24)
-        Me.Panel7.TabIndex = 2
-        '
-        'Panel6
-        '
-        Me.Panel6.Controls.Add(Me.txtJobNumber)
-        Me.Panel6.Controls.Add(Me.Label4)
-        Me.Panel6.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel6.Location = New System.Drawing.Point(3, 38)
-        Me.Panel6.Name = "Panel6"
-        Me.Panel6.Size = New System.Drawing.Size(329, 24)
-        Me.Panel6.TabIndex = 1
-        '
-        'Panel5
-        '
-        Me.Panel5.Controls.Add(Me.btnFindClintProyects)
-        Me.Panel5.Controls.Add(Me.txtFindClientProyects)
-        Me.Panel5.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel5.Location = New System.Drawing.Point(3, 3)
-        Me.Panel5.Name = "Panel5"
-        Me.Panel5.Size = New System.Drawing.Size(329, 29)
-        Me.Panel5.TabIndex = 0
-        '
-        'PanelChildForm
-        '
-        Me.PanelChildForm.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.PanelChildForm.BackColor = System.Drawing.Color.FromArgb(CType(CType(81, Byte), Integer), CType(CType(93, Byte), Integer), CType(CType(102, Byte), Integer))
-        Me.PanelChildForm.Controls.Add(Me.TableLayoutPanel4)
-        Me.PanelChildForm.Controls.Add(Me.TableLayoutPanel1)
-        Me.PanelChildForm.Location = New System.Drawing.Point(216, 33)
-        Me.PanelChildForm.Name = "PanelChildForm"
-        Me.PanelChildForm.Size = New System.Drawing.Size(950, 611)
-        Me.PanelChildForm.TabIndex = 11
-        '
-        'TableLayoutPanel4
-        '
-        Me.TableLayoutPanel4.ColumnCount = 2
-        Me.TableLayoutPanel4.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 86.21053!))
-        Me.TableLayoutPanel4.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 13.78947!))
-        Me.TableLayoutPanel4.Controls.Add(Me.Panel3, 0, 0)
-        Me.TableLayoutPanel4.Controls.Add(Me.Panel4, 1, 0)
-        Me.TableLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.TableLayoutPanel4.Location = New System.Drawing.Point(0, 197)
-        Me.TableLayoutPanel4.Name = "TableLayoutPanel4"
-        Me.TableLayoutPanel4.RowCount = 1
-        Me.TableLayoutPanel4.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
-        Me.TableLayoutPanel4.Size = New System.Drawing.Size(950, 414)
-        Me.TableLayoutPanel4.TabIndex = 11
-        '
-        'Panel3
-        '
-        Me.Panel3.Controls.Add(Me.tblProjectClients)
-        Me.Panel3.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel3.Location = New System.Drawing.Point(3, 3)
-        Me.Panel3.Name = "Panel3"
-        Me.Panel3.Size = New System.Drawing.Size(813, 408)
-        Me.Panel3.TabIndex = 0
-        '
-        'btnTrack
-        '
-        Me.btnTrack.Dock = System.Windows.Forms.DockStyle.Top
-        Me.btnTrack.FlatAppearance.BorderSize = 0
-        Me.btnTrack.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(58, Byte), Integer), CType(CType(115, Byte), Integer))
-        Me.btnTrack.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnTrack.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnTrack.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.btnTrack.Image = Global.AVT_TRAKING.My.Resources.Resources.reportshow
-        Me.btnTrack.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnTrack.Location = New System.Drawing.Point(0, 82)
-        Me.btnTrack.Name = "btnTrack"
-        Me.btnTrack.Size = New System.Drawing.Size(125, 41)
-        Me.btnTrack.TabIndex = 9
-        Me.btnTrack.Text = "Track Upload"
-        Me.btnTrack.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.btnTrack.UseVisualStyleBackColor = True
-        '
-        'btnTaxes
-        '
-        Me.btnTaxes.Dock = System.Windows.Forms.DockStyle.Top
-        Me.btnTaxes.FlatAppearance.BorderSize = 0
-        Me.btnTaxes.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(58, Byte), Integer), CType(CType(115, Byte), Integer))
-        Me.btnTaxes.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnTaxes.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnTaxes.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.btnTaxes.Image = Global.AVT_TRAKING.My.Resources.Resources.payroll
-        Me.btnTaxes.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnTaxes.Location = New System.Drawing.Point(0, 41)
-        Me.btnTaxes.Name = "btnTaxes"
-        Me.btnTaxes.Size = New System.Drawing.Size(125, 41)
-        Me.btnTaxes.TabIndex = 8
-        Me.btnTaxes.Text = "Taxes"
-        Me.btnTaxes.UseVisualStyleBackColor = True
-        '
-        'btnAddClient
-        '
-        Me.btnAddClient.Dock = System.Windows.Forms.DockStyle.Top
-        Me.btnAddClient.FlatAppearance.BorderSize = 0
-        Me.btnAddClient.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(58, Byte), Integer), CType(CType(115, Byte), Integer))
-        Me.btnAddClient.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnAddClient.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnAddClient.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.btnAddClient.Image = Global.AVT_TRAKING.My.Resources.Resources.add
-        Me.btnAddClient.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnAddClient.Location = New System.Drawing.Point(0, 0)
-        Me.btnAddClient.Name = "btnAddClient"
-        Me.btnAddClient.Size = New System.Drawing.Size(125, 41)
-        Me.btnAddClient.TabIndex = 7
-        Me.btnAddClient.Text = "Add client"
-        Me.btnAddClient.UseVisualStyleBackColor = True
         '
         'btnAdd
         '
@@ -795,6 +809,46 @@ Partial Class ProjectsClients
         Me.btnAdd.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         Me.btnAdd.UseVisualStyleBackColor = True
         '
+        'Panel8
+        '
+        Me.Panel8.Controls.Add(Me.txtFirstName)
+        Me.Panel8.Controls.Add(Me.Label1)
+        Me.Panel8.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Panel8.Location = New System.Drawing.Point(3, 98)
+        Me.Panel8.Name = "Panel8"
+        Me.Panel8.Size = New System.Drawing.Size(361, 24)
+        Me.Panel8.TabIndex = 3
+        '
+        'Panel7
+        '
+        Me.Panel7.Controls.Add(Me.txtCompanyName)
+        Me.Panel7.Controls.Add(Me.Label5)
+        Me.Panel7.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Panel7.Location = New System.Drawing.Point(3, 68)
+        Me.Panel7.Name = "Panel7"
+        Me.Panel7.Size = New System.Drawing.Size(361, 24)
+        Me.Panel7.TabIndex = 2
+        '
+        'Panel6
+        '
+        Me.Panel6.Controls.Add(Me.txtJobNumber)
+        Me.Panel6.Controls.Add(Me.Label4)
+        Me.Panel6.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Panel6.Location = New System.Drawing.Point(3, 38)
+        Me.Panel6.Name = "Panel6"
+        Me.Panel6.Size = New System.Drawing.Size(361, 24)
+        Me.Panel6.TabIndex = 1
+        '
+        'Panel5
+        '
+        Me.Panel5.Controls.Add(Me.btnFindClintProyects)
+        Me.Panel5.Controls.Add(Me.txtFindClientProyects)
+        Me.Panel5.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Panel5.Location = New System.Drawing.Point(3, 3)
+        Me.Panel5.Name = "Panel5"
+        Me.Panel5.Size = New System.Drawing.Size(361, 29)
+        Me.Panel5.TabIndex = 0
+        '
         'btnFindClintProyects
         '
         Me.btnFindClintProyects.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
@@ -804,7 +858,7 @@ Partial Class ProjectsClients
         Me.btnFindClintProyects.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.btnFindClintProyects.Image = Global.AVT_TRAKING.My.Resources.Resources.loupe
         Me.btnFindClintProyects.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnFindClintProyects.Location = New System.Drawing.Point(251, 1)
+        Me.btnFindClintProyects.Location = New System.Drawing.Point(283, 1)
         Me.btnFindClintProyects.Name = "btnFindClintProyects"
         Me.btnFindClintProyects.Size = New System.Drawing.Size(75, 28)
         Me.btnFindClintProyects.TabIndex = 16
@@ -819,111 +873,56 @@ Partial Class ProjectsClients
         Me.Button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.Button2.ForeColor = System.Drawing.Color.Red
         Me.Button2.Image = Global.AVT_TRAKING.My.Resources.Resources._exit
-        Me.Button2.Location = New System.Drawing.Point(905, 2)
+        Me.Button2.Location = New System.Drawing.Point(992, 2)
         Me.Button2.Margin = New System.Windows.Forms.Padding(2)
         Me.Button2.Name = "Button2"
         Me.Button2.Size = New System.Drawing.Size(43, 28)
         Me.Button2.TabIndex = 3
         Me.Button2.UseVisualStyleBackColor = True
         '
-        'PictureBox2
+        'PanelChildForm
         '
-        Me.PictureBox2.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.PictureBox2.Image = Global.AVT_TRAKING.My.Resources.Resources.minimize2
-        Me.PictureBox2.Location = New System.Drawing.Point(892, 3)
-        Me.PictureBox2.Name = "PictureBox2"
-        Me.PictureBox2.Size = New System.Drawing.Size(24, 25)
-        Me.PictureBox2.TabIndex = 2
-        Me.PictureBox2.TabStop = False
+        Me.PanelChildForm.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.PanelChildForm.BackColor = System.Drawing.Color.FromArgb(CType(CType(81, Byte), Integer), CType(CType(93, Byte), Integer), CType(CType(102, Byte), Integer))
+        Me.PanelChildForm.Controls.Add(Me.TableLayoutPanel4)
+        Me.PanelChildForm.Controls.Add(Me.TableLayoutPanel1)
+        Me.PanelChildForm.Location = New System.Drawing.Point(216, 33)
+        Me.PanelChildForm.Name = "PanelChildForm"
+        Me.PanelChildForm.Size = New System.Drawing.Size(1037, 611)
+        Me.PanelChildForm.TabIndex = 11
         '
-        'btnRestore
+        'TableLayoutPanel4
         '
-        Me.btnRestore.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnRestore.Image = Global.AVT_TRAKING.My.Resources.Resources.restore2
-        Me.btnRestore.Location = New System.Drawing.Point(922, 7)
-        Me.btnRestore.Name = "btnRestore"
-        Me.btnRestore.Size = New System.Drawing.Size(28, 24)
-        Me.btnRestore.TabIndex = 1
-        Me.btnRestore.TabStop = False
+        Me.TableLayoutPanel4.ColumnCount = 2
+        Me.TableLayoutPanel4.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 86.21053!))
+        Me.TableLayoutPanel4.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 13.78947!))
+        Me.TableLayoutPanel4.Controls.Add(Me.Panel3, 0, 0)
+        Me.TableLayoutPanel4.Controls.Add(Me.Panel4, 1, 0)
+        Me.TableLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.TableLayoutPanel4.Location = New System.Drawing.Point(0, 197)
+        Me.TableLayoutPanel4.Name = "TableLayoutPanel4"
+        Me.TableLayoutPanel4.RowCount = 1
+        Me.TableLayoutPanel4.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
+        Me.TableLayoutPanel4.Size = New System.Drawing.Size(1037, 414)
+        Me.TableLayoutPanel4.TabIndex = 11
         '
-        'btnMaximize
+        'Panel3
         '
-        Me.btnMaximize.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnMaximize.Image = Global.AVT_TRAKING.My.Resources.Resources.maximize2
-        Me.btnMaximize.Location = New System.Drawing.Point(925, 4)
-        Me.btnMaximize.Name = "btnMaximize"
-        Me.btnMaximize.Size = New System.Drawing.Size(23, 25)
-        Me.btnMaximize.TabIndex = 0
-        Me.btnMaximize.TabStop = False
-        '
-        'btnSetup
-        '
-        Me.btnSetup.Dock = System.Windows.Forms.DockStyle.Top
-        Me.btnSetup.FlatAppearance.BorderSize = 0
-        Me.btnSetup.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(59, Byte), Integer), CType(CType(69, Byte), Integer), CType(CType(79, Byte), Integer))
-        Me.btnSetup.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnSetup.Font = New System.Drawing.Font("Nirmala UI", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnSetup.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.btnSetup.Image = Global.AVT_TRAKING.My.Resources.Resources.setup
-        Me.btnSetup.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnSetup.Location = New System.Drawing.Point(0, 264)
-        Me.btnSetup.Name = "btnSetup"
-        Me.btnSetup.Size = New System.Drawing.Size(216, 51)
-        Me.btnSetup.TabIndex = 4
-        Me.btnSetup.Text = "Setup"
-        Me.btnSetup.UseVisualStyleBackColor = True
-        '
-        'btnTimeEnterSheets
-        '
-        Me.btnTimeEnterSheets.Dock = System.Windows.Forms.DockStyle.Top
-        Me.btnTimeEnterSheets.FlatAppearance.BorderSize = 0
-        Me.btnTimeEnterSheets.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(59, Byte), Integer), CType(CType(69, Byte), Integer), CType(CType(79, Byte), Integer))
-        Me.btnTimeEnterSheets.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnTimeEnterSheets.Font = New System.Drawing.Font("Nirmala UI", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnTimeEnterSheets.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.btnTimeEnterSheets.Image = Global.AVT_TRAKING.My.Resources.Resources.time
-        Me.btnTimeEnterSheets.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnTimeEnterSheets.Location = New System.Drawing.Point(0, 152)
-        Me.btnTimeEnterSheets.Name = "btnTimeEnterSheets"
-        Me.btnTimeEnterSheets.Size = New System.Drawing.Size(216, 54)
-        Me.btnTimeEnterSheets.TabIndex = 2
-        Me.btnTimeEnterSheets.Text = "Time Enter Sheet"
-        Me.btnTimeEnterSheets.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.btnTimeEnterSheets.UseVisualStyleBackColor = True
-        '
-        'btnProyeccts
-        '
-        Me.btnProyeccts.Dock = System.Windows.Forms.DockStyle.Top
-        Me.btnProyeccts.FlatAppearance.BorderSize = 0
-        Me.btnProyeccts.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(59, Byte), Integer), CType(CType(69, Byte), Integer), CType(CType(79, Byte), Integer))
-        Me.btnProyeccts.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnProyeccts.Font = New System.Drawing.Font("Nirmala UI", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnProyeccts.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.btnProyeccts.Image = Global.AVT_TRAKING.My.Resources.Resources.project
-        Me.btnProyeccts.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnProyeccts.Location = New System.Drawing.Point(0, 97)
-        Me.btnProyeccts.Name = "btnProyeccts"
-        Me.btnProyeccts.Size = New System.Drawing.Size(216, 55)
-        Me.btnProyeccts.TabIndex = 1
-        Me.btnProyeccts.Text = "Projects"
-        Me.btnProyeccts.UseVisualStyleBackColor = True
-        '
-        'pcbLogoPC
-        '
-        Me.pcbLogoPC.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.pcbLogoPC.Location = New System.Drawing.Point(0, 0)
-        Me.pcbLogoPC.Name = "pcbLogoPC"
-        Me.pcbLogoPC.Size = New System.Drawing.Size(216, 97)
-        Me.pcbLogoPC.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
-        Me.pcbLogoPC.TabIndex = 0
-        Me.pcbLogoPC.TabStop = False
+        Me.Panel3.Controls.Add(Me.tblProjectClients)
+        Me.Panel3.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Panel3.Location = New System.Drawing.Point(3, 3)
+        Me.Panel3.Name = "Panel3"
+        Me.Panel3.Size = New System.Drawing.Size(888, 408)
+        Me.Panel3.TabIndex = 0
         '
         'ProjectsClients
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(83, Byte), Integer), CType(CType(93, Byte), Integer), CType(CType(102, Byte), Integer))
-        Me.ClientSize = New System.Drawing.Size(1169, 644)
+        Me.ClientSize = New System.Drawing.Size(1256, 644)
         Me.Controls.Add(Me.PanelChildForm)
         Me.Controls.Add(Me.TitleBar)
         Me.Controls.Add(Me.Panel1)
@@ -934,6 +933,7 @@ Partial Class ProjectsClients
         Me.Panel1.ResumeLayout(False)
         Me.PnllSetup.ResumeLayout(False)
         Me.Panel2.ResumeLayout(False)
+        CType(Me.pcbLogoPC, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupBox1.ResumeLayout(False)
         Me.TableLayoutPanel3.ResumeLayout(False)
         Me.TableLayoutPanel3.PerformLayout()
@@ -941,6 +941,9 @@ Partial Class ProjectsClients
         Me.Panel4.ResumeLayout(False)
         Me.TitleBar.ResumeLayout(False)
         Me.TitleBar.PerformLayout()
+        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.btnRestore, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.btnMaximize, System.ComponentModel.ISupportInitialize).EndInit()
         Me.TableLayoutPanel1.ResumeLayout(False)
         Me.TableLayoutPanel2.ResumeLayout(False)
         Me.Panel9.ResumeLayout(False)
@@ -955,10 +958,6 @@ Partial Class ProjectsClients
         Me.PanelChildForm.ResumeLayout(False)
         Me.TableLayoutPanel4.ResumeLayout(False)
         Me.Panel3.ResumeLayout(False)
-        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.btnRestore, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.btnMaximize, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.pcbLogoPC, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
