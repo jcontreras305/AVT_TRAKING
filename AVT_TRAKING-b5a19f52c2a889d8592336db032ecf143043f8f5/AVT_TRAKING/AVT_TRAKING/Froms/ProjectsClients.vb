@@ -322,6 +322,15 @@ Public Class ProjectsClients
         Me.WindowState = FormWindowState.Minimized
     End Sub
 
+    Private Sub btnTrack_Click(sender As Object, e As EventArgs) Handles btnTrack.Click
+        Try
+            Dim trackU As New Track
+            trackU.Show()
+        Catch ex As Exception
+
+        End Try
+    End Sub
+
     Private Sub cmbCostCode_Leave(sender As Object, e As EventArgs) Handles cmbCostCode.Leave
         If btnAdd.Text = "Add" Then  'Se supone que no esta agregando si no que esta actualizando o visualizado unicamente
             mtdJobs.actualizarCostCode(cmbCostCode.Text, txtJobNumber.Text)

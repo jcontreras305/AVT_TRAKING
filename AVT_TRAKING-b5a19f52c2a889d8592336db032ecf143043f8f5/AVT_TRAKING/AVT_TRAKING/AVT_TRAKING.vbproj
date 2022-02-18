@@ -270,6 +270,12 @@
     <Compile Include="Froms\TimeSheet.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Froms\Track.Designer.vb">
+      <DependentUpon>Track.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Froms\Track.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Froms\Vendor.Designer.vb">
       <DependentUpon>Vendor.vb</DependentUpon>
     </Compile>
@@ -597,6 +603,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Froms\TimeSheet.resx">
       <DependentUpon>TimeSheet.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Froms\Track.resx">
+      <DependentUpon>Track.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Froms\Vendor.resx">
       <DependentUpon>Vendor.vb</DependentUpon>

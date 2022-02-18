@@ -24,16 +24,16 @@ Partial Class FindTask
     Private Sub InitializeComponent()
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
         Me.TitleBar = New System.Windows.Forms.Panel()
-        Me.Label28 = New System.Windows.Forms.Label()
         Me.PictureBox3 = New System.Windows.Forms.PictureBox()
         Me.Panel2 = New System.Windows.Forms.Panel()
         Me.cmbElement = New System.Windows.Forms.ComboBox()
         Me.sprElement = New System.Windows.Forms.NumericUpDown()
+        Me.mtpElement = New System.Windows.Forms.MonthCalendar()
         Me.lblMessage = New System.Windows.Forms.Label()
         Me.btnFind = New System.Windows.Forms.Button()
         Me.txtElement = New System.Windows.Forms.TextBox()
         Me.cmbFindElement = New System.Windows.Forms.ComboBox()
-        Me.mtpElement = New System.Windows.Forms.MonthCalendar()
+        Me.Label28 = New System.Windows.Forms.Label()
         Me.TableLayoutPanel1.SuspendLayout()
         Me.TitleBar.SuspendLayout()
         CType(Me.PictureBox3, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -44,6 +44,7 @@ Partial Class FindTask
         'TableLayoutPanel1
         '
         Me.TableLayoutPanel1.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(58, Byte), Integer), CType(CType(115, Byte), Integer))
+        Me.TableLayoutPanel1.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.[Single]
         Me.TableLayoutPanel1.ColumnCount = 1
         Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
         Me.TableLayoutPanel1.Controls.Add(Me.TitleBar, 0, 0)
@@ -62,27 +63,16 @@ Partial Class FindTask
         Me.TitleBar.Controls.Add(Me.Label28)
         Me.TitleBar.Controls.Add(Me.PictureBox3)
         Me.TitleBar.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.TitleBar.Location = New System.Drawing.Point(3, 3)
+        Me.TitleBar.Location = New System.Drawing.Point(4, 4)
         Me.TitleBar.Name = "TitleBar"
-        Me.TitleBar.Size = New System.Drawing.Size(472, 45)
+        Me.TitleBar.Size = New System.Drawing.Size(470, 45)
         Me.TitleBar.TabIndex = 0
-        '
-        'Label28
-        '
-        Me.Label28.AutoSize = True
-        Me.Label28.Font = New System.Drawing.Font("Verdana", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label28.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.Label28.Location = New System.Drawing.Point(9, 9)
-        Me.Label28.Name = "Label28"
-        Me.Label28.Size = New System.Drawing.Size(113, 18)
-        Me.Label28.TabIndex = 45
-        Me.Label28.Text = "Find Project"
         '
         'PictureBox3
         '
         Me.PictureBox3.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.PictureBox3.Image = Global.AVT_TRAKING.My.Resources.Resources._exit
-        Me.PictureBox3.Location = New System.Drawing.Point(435, 9)
+        Me.PictureBox3.Location = New System.Drawing.Point(433, 9)
         Me.PictureBox3.Name = "PictureBox3"
         Me.PictureBox3.Size = New System.Drawing.Size(34, 31)
         Me.PictureBox3.TabIndex = 43
@@ -99,9 +89,9 @@ Partial Class FindTask
         Me.Panel2.Controls.Add(Me.txtElement)
         Me.Panel2.Controls.Add(Me.cmbFindElement)
         Me.Panel2.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel2.Location = New System.Drawing.Point(3, 54)
+        Me.Panel2.Location = New System.Drawing.Point(4, 56)
         Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(472, 87)
+        Me.Panel2.Size = New System.Drawing.Size(470, 84)
         Me.Panel2.TabIndex = 1
         '
         'cmbElement
@@ -120,6 +110,12 @@ Partial Class FindTask
         Me.sprElement.Name = "sprElement"
         Me.sprElement.Size = New System.Drawing.Size(248, 20)
         Me.sprElement.TabIndex = 5
+        '
+        'mtpElement
+        '
+        Me.mtpElement.Location = New System.Drawing.Point(227, 39)
+        Me.mtpElement.Name = "mtpElement"
+        Me.mtpElement.TabIndex = 7
         '
         'lblMessage
         '
@@ -156,11 +152,16 @@ Partial Class FindTask
         Me.cmbFindElement.Size = New System.Drawing.Size(118, 21)
         Me.cmbFindElement.TabIndex = 0
         '
-        'mtpElement
+        'Label28
         '
-        Me.mtpElement.Location = New System.Drawing.Point(227, 39)
-        Me.mtpElement.Name = "mtpElement"
-        Me.mtpElement.TabIndex = 7
+        Me.Label28.AutoSize = True
+        Me.Label28.Font = New System.Drawing.Font("Verdana", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label28.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.Label28.Location = New System.Drawing.Point(9, 9)
+        Me.Label28.Name = "Label28"
+        Me.Label28.Size = New System.Drawing.Size(113, 18)
+        Me.Label28.TabIndex = 45
+        Me.Label28.Text = "Find Project"
         '
         'FindTask
         '
@@ -189,9 +190,9 @@ Partial Class FindTask
     Friend WithEvents txtElement As TextBox
     Friend WithEvents cmbFindElement As ComboBox
     Friend WithEvents PictureBox3 As PictureBox
-    Friend WithEvents Label28 As Label
     Friend WithEvents lblMessage As Label
     Friend WithEvents sprElement As NumericUpDown
     Friend WithEvents cmbElement As ComboBox
     Friend WithEvents mtpElement As MonthCalendar
+    Friend WithEvents Label28 As Label
 End Class

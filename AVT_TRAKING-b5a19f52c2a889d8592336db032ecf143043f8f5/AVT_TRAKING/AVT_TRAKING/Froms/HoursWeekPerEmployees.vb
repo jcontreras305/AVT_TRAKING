@@ -919,6 +919,7 @@ Public Class HoursWeekPerEmployees
         selectFecha.HWPE = True
         selectFecha.ShowDialog()
         If fechaStart <> auxF1 Or fechaEnd <> auxF2 Then
+            Dim mount As String = fechaStart.Month.ToString()
             mtdHPW.buscarHoras(tblRecordEmployee, idEmpleado, validaFechaParaSQl(fechaStart), validaFechaParaSQl(fechaEnd))
         End If
     End Sub
@@ -928,13 +929,13 @@ Public Class HoursWeekPerEmployees
             Try
                 Dim array = txtFindFecha.Text.Split(" ")
                 If array.Count = 1 Then
-                    Dim fecha1 As Date = validarFechaParaVB(array(0))
-                    Dim fecha2 As Date = validarFechaParaVB(array(0))
-                    mtdHPW.buscarHoras(tblRecordEmployee, idEmpleado, validaFechaParaSQl(fecha1), validaFechaParaSQl(fecha2))
+                    fechaStart = validarFechaParaVB(array(0))
+                    fechaEnd = validarFechaParaVB(array(0))
+                    mtdHPW.buscarHoras(tblRecordEmployee, idEmpleado, validaFechaParaSQl(fechaStart), validaFechaParaSQl(fechaEnd))
                 ElseIf array.Count = 3 Then
-                    Dim fecha1 As Date = validarFechaParaVB(array(0))
-                    Dim fecha2 As Date = validarFechaParaVB(array(2))
-                    mtdHPW.buscarHoras(tblRecordEmployee, idEmpleado, validaFechaParaSQl(fecha1), validaFechaParaSQl(fecha2))
+                    fechaStart = validarFechaParaVB(array(0))
+                    fechaEnd = validarFechaParaVB(array(2))
+                    mtdHPW.buscarHoras(tblRecordEmployee, idEmpleado, validaFechaParaSQl(fechaStart), validaFechaParaSQl(fechaEnd))
                 End If
             Catch ex As Exception
                 MsgBox(ex.Message)

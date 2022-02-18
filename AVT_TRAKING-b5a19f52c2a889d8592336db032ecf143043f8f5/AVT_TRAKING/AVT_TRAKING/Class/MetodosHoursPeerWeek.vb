@@ -11,6 +11,7 @@ Public Class MetodosHoursPeerWeek
                 Dim da As New SqlDataAdapter(cmd)
                 da.Fill(tabla)
             End If
+            combo.Items.Clear()
             For Each row As DataRow In tabla.Rows
                 combo.Items.Add(row.ItemArray(1))
             Next
@@ -624,4 +625,145 @@ order by em.numberEmploye", conn)
         End Try
     End Function
 
+    '##################################################################################################################################################################
+    '############ METODOS PARA TRACK ##################################################################################################################################
+    '##################################################################################################################################################################
+
+    Public Function selectHorasTrack(ByVal beginDate As Date, ByVal endDate As Date) As DataTable
+        Try
+            conectar()
+            Dim cmd As New SqlCommand("select 
+ROW_NUMBER() OVER(order by (select 1)) as 'Record ID',
+T1.[Date],
+T1.[Resource ID],
+T1.[Resource Name],
+T1.[Skill Type],
+T1.Shifth,
+T1.[Level 1 ID],
+T1.[Level 2 ID],
+T1.[S/T Hrs],
+(iif(T1.[S/T Hrs] > 0 , 'NA','')) as 'S/T Hrs Activity Code',
+T1.[O/T Hrs],
+(iif(T1.[O/T Hrs] > 0 , 'NA','')) as 'O/T Hrs Activity Code',
+T1.[D/T Hrs],
+(iif(T1.[D/T Hrs] > 0 , 'NA','')) as 'D/T Hrs Activity Code',
+'' as 'Extra Change'
+ from (
+	
+	select    
+	distinct
+	REPLACE(CONVERT(nvarchar, hw.dateWorked),'-','') as 'Date', 
+	iif(em.SAPNumber is null,'',em.SAPNumber) as 'Resource ID' ,
+	CONCAT(em.lastName,', ',em.firstName,' ',em.middleName)as 'Resource Name', 
+	wc.EQExp1 as 'Skill Type',
+	hw.schedule as 'Shifth', 
+	iif((select CHARINDEX('6.4',wc.name))>0,'NB',concat(wo.idWO,'-', tk.task)) as 'Level 1 ID',
+	po.idPO as 'Level 2 ID',
+	(select SUM( hw1.hoursST) from hoursWorked as hw1 inner join task as tk1 on tk1.idAux = hw1.idAux inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO inner join projectOrder as po1 on po1.idPO =wo1.idPO and po1.jobNo = wo1.jobNo inner join job as jb1 on jb1.jobNo = po1.jobNo inner join clients as cl1 on cl1.idClient = jb.idClient
+		where tk1.idAux = tk.idAux  and wo1.idAuxWO = wo.idAuxWO and po1.idPO =po.idPO and jb1.jobNo = jb.jobNo and cl1.idClient = cl.idClient and hw1.schedule = hw.schedule and hw1.idEmployee = hw.idEmployee and hw1.dateWorked = hw.dateWorked and hw1.idWorkCode = hw.idWorkCode)as 'S/T Hrs',
+	(select SUM( hw1.hoursOT) from hoursWorked as hw1 inner join task as tk1 on tk1.idAux = hw1.idAux inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO inner join projectOrder as po1 on po1.idPO =wo1.idPO and po1.jobNo = wo1.jobNo inner join job as jb1 on jb1.jobNo = po1.jobNo inner join clients as cl1 on cl1.idClient = jb.idClient
+		where tk1.idAux = tk.idAux  and wo1.idAuxWO = wo.idAuxWO and po1.idPO =po.idPO and jb1.jobNo = jb.jobNo and cl1.idClient = cl.idClient and hw1.schedule = hw.schedule and hw1.idEmployee = hw.idEmployee and hw1.dateWorked = hw.dateWorked and hw1.idWorkCode = hw.idWorkCode)as 'O/T Hrs',
+	(select SUM( hw1.hours3) from hoursWorked as hw1 inner join task as tk1 on tk1.idAux = hw1.idAux inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO inner join projectOrder as po1 on po1.idPO =wo1.idPO and po1.jobNo = wo1.jobNo inner join job as jb1 on jb1.jobNo = po1.jobNo inner join clients as cl1 on cl1.idClient = jb.idClient
+		where tk1.idAux = tk.idAux  and wo1.idAuxWO = wo.idAuxWO and po1.idPO =po.idPO and jb1.jobNo = jb.jobNo and cl1.idClient = cl.idClient and hw1.schedule = hw.schedule and hw1.idEmployee = hw.idEmployee and hw1.dateWorked = hw.dateWorked and hw1.idWorkCode = hw.idWorkCode)as 'D/T Hrs'
+	,isnull( (select sum(exu.amount) from expensesUsed as exu inner join task as tk1 on tk1.idAux = exu.idAux inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO inner join projectOrder as po1 on po1.idPO = wo1.idPO and wo1.jobNo=po1.jobNo inner join job as jb1 on jb1.jobNo = po1.jobNo inner join clients as cl1 on cl1.idClient = jb1.idClient 
+	where tk.idAux = tk1.idAux and wo.idAuxWO = wo1.idAuxWO and po.idPO = po1.idPO and jb.jobNo = jb1.jobNo and cl.idClient = cl1.idClient and exu.dateExpense = hw.dateWorked and exu.idEmployee =hw.idEmployee ),'') as 'Extra Change'
+	from hoursWorked as hw 
+	inner join workCode as wc on wc.idWorkCode = hw.idWorkCode
+	inner join employees as em on hw.idEmployee = em.idEmployee
+	inner join task as tk on tk.idAux = hw.idAux
+	inner join workOrder as wo on tk.idAuxWO = wo.idAuxWO 
+	inner join projectOrder as po on po.idPO = wo.idPO and po.jobNo = wo.jobNo 
+	inner join job as jb on jb.jobNo = po.jobNo
+	inner join clients as cl on cl.idClient = jb.idClient
+	where hw.dateWorked between '" + validaFechaParaSQl(beginDate) + "' and '" + validaFechaParaSQl(endDate) + "'	
+)as T1", conn)
+            If cmd.ExecuteNonQuery Then
+                Dim da As New SqlDataAdapter(cmd)
+                Dim dt As New DataTable
+                da.Fill(dt)
+                Return dt
+            Else
+                Return Nothing
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message())
+            Return Nothing
+        Finally
+            desconectar()
+        End Try
+    End Function
+
+    Public Function selectPerdiemTrack(ByVal beginDate As Date, ByVal endDate As Date) As DataTable
+        Try
+            conectar()
+            Dim cmd As New SqlCommand("select 
+distinct 
+REPLACE(CONVERT(nvarchar, exu.dateExpense),'-','') as 'Date', 
+iif(em.SAPNumber is null,'',em.SAPNumber) as 'Resource ID' ,
+CONCAT(em.lastName,', ',em.firstName,' ',em.middleName)as 'Resource Name', 
+concat(wo.idWO,'-', tk.task) as 'Level 1 ID',
+po.idPO as 'Level 2 ID',
+isnull( (select sum(exu1.amount) from expensesUsed as exu1 inner join task as tk1 on tk1.idAux = exu1.idAux inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO inner join projectOrder as po1 on po1.idPO = wo1.idPO and wo1.jobNo=po1.jobNo inner join job as jb1 on jb1.jobNo = po1.jobNo inner join clients as cl1 on cl1.idClient = jb1.idClient 
+	where tk.idAux = tk1.idAux and wo.idAuxWO = wo1.idAuxWO and po.idPO = po1.idPO and jb.jobNo = jb1.jobNo and cl.idClient = cl1.idClient and exu.dateExpense = exu1.dateExpense and exu.idEmployee =exu1.idEmployee ),'') as 'Extra Change'
+from expensesUsed as exu 
+	inner join employees as em on exu.idEmployee = em.idEmployee
+	inner join task as tk on tk.idAux = exu.idAux
+	inner join workOrder as wo on tk.idAuxWO = wo.idAuxWO 
+	inner join projectOrder as po on po.idPO = wo.idPO and po.jobNo = wo.jobNo 
+	inner join job as jb on jb.jobNo = po.jobNo
+	inner join clients as cl on cl.idClient = jb.idClient
+	where exu.dateExpense between '" + validaFechaParaSQl(beginDate) + "' and '" + validaFechaParaSQl(endDate) + "'", conn)
+            If cmd.ExecuteNonQuery Then
+                Dim da As New SqlDataAdapter(cmd)
+                Dim dt As New DataTable
+                da.Fill(dt)
+                Return dt
+            Else
+                Return Nothing
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message())
+            Return Nothing
+        Finally
+            desconectar()
+        End Try
+    End Function
+
+    Public Function llenarTablaElementosTrack(ByVal tbl As DataGridView) As Boolean
+        Try
+            conectar()
+            Dim cmd As New SqlCommand("select typeElement,element from TrackElements order by id asc", conn)
+            Dim dr As SqlDataReader = cmd.ExecuteReader()
+            tbl.Rows.Clear()
+            While dr.Read()
+                tbl.Rows.Add(dr("typeElement"), dr("element"))
+            End While
+            dr.Close()
+            Return True
+        Catch ex As Exception
+            MsgBox(ex.Message())
+            Return False
+        Finally
+            desconectar()
+        End Try
+    End Function
+
+    Public Function updateDefaultElement(ByVal column As String, ByVal val As String) As Boolean
+        Try
+            conectar()
+            Dim cmd As New SqlCommand("update TrackElements set element = '" + val + "' where typeElement= '" + column + "'", conn)
+            If cmd.ExecuteNonQuery > 0 Then
+                MsgBox("Successful")
+                Return True
+            Else
+                MsgBox("Error")
+                Return False
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message())
+            Return False
+        Finally
+            desconectar()
+        End Try
+    End Function
 End Class

@@ -61,7 +61,44 @@ GO
 
 insert into typeEmployee values ('Manager'),('Normal')
 GO
-
+--##########################################################################################
+--##################  TABLA DE UNITMEASSUREMENTS ###########################################
+--##########################################################################################
+create table TrackElements(
+	id int identity (1,1),
+	typeElement varchar(40),
+	element varchar(30)
+)
+go
+insert into TrackElements values
+('Force or Reject',''),
+('Source',''),
+('Order Type','POWO'),
+('Location ID','2'),
+('Company Code','987'),
+('Area',''),
+('Group Name',''),
+('Agreement','OUTAGE'),
+('Level 3 ID',''),
+('Level 4 ID',''),
+('Hours Total',''),
+('Hours Total Activity Code',''),
+('Extra Charges $ Activity Code',''),
+('Extra',''),
+('Extra 1',''),
+('Extra 2',''),
+('Add Time','N'),
+('Pay Type',''),
+('R4 (Hrs)','0.00'),
+('R5 (Hrs)','0.00'),
+('R6 (Hrs)','0.00'),
+('GL Account',''),
+('ST Adders	',''),
+('OT Adders	',''),
+('DT Adders	',''),
+('R4 Adders	',''),
+('R5 Adders	',''),
+('R6 Adders','')
 --##########################################################################################
 --##################  TABLA DE workTMLumpSum ###############################################
 --##########################################################################################
@@ -972,7 +1009,6 @@ create table taxesST(
 	QtyHelper int
 )
 GO
-
 --##########################################################################################
 --##################  TABLA DE UNITMEASSUREMENTS ###########################################
 --##########################################################################################
@@ -1443,6 +1479,27 @@ ALTER TABLE    workOrder   WITH CHECK ADD  CONSTRAINT  fk_idPO_workOrder  FOREIG
 REFERENCES    projectOrder  ( idPO , jobNo)
 on update cascade
 on delete cascade
+GO
+
+--[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[
+--[[[[[[[[[[[[[[[ FUNCTIONS DE LA BASE DE DATOS [[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[
+--[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[
+
+CREATE FUNCTION addCaracter(@text AS NVARCHAR(100), @caracters AS NVARCHAR(1) ,@qty AS INT,@side AS INT)
+RETURNS NVARCHAR(100)
+AS 
+BEGIN
+	DECLARE @var NVARCHAR(100)
+	DECLARE @count int
+	SET @count =0
+	SET @var = @text
+	WHILE @count < @qty
+	BEGIN
+		SET @var = iif(@side=0,concat(@caracters,@var) ,concat(@var,@caracters))
+		SET @count = @count + 1
+	END
+	RETURN @var
+END
 GO
 
 --========================================================================================================
@@ -2892,132 +2949,41 @@ go
 
 ---- PARA DESCOMENTAR USAR LAS TECLAS (CTRL+K)(CTRL+U) Y PARA COMENTAR (CTRL+K)(CTRL+C)
 
-----CREAMOS UN CASCADE PARA PODER ELIMNAR LOS SCFESTIMATION Y LOS ESTMETERS 
-
---ALTER TABLE EstMeters  DROP  CONSTRAINT fk_EstNumber_EstMeters 
---GO
-
---ALTER TABLE EstMeters  WITH CHECK ADD  CONSTRAINT fk_EstNumber_EstMeters FOREIGN KEY(EstNumber)
---REFERENCES scfEstimation (EstNumber)
---ON UPDATE CASCADE
---ON DELETE CASCADE
---GO
----- AGREGAMOS EL CAMPO DE UNIT EN SCFESTPROYECT 
----- VERIFICAR QUE EXISTA LA TABLA CON SOLO UN CAMPO
---SELECT * FROM scfEstProyect -- DEBE SALIR SOLO UN CAMPO CCNUM 
-----SI PARECE EL CAMPO UNIT "NO" EJECUTE EL SIGUIENTE 
---ALTER TABLE scfEstProyect 
---ADD unit VARCHAR(30) NOT NULL
---GO
----- SI NO EXISTE LA TABLA CREARLA
---CREATE TABLE scfEstProyect(
---	ccnum varchar(30) NOT NULL primary key,
---	unit varchar(30) NOT NULL
+----##########################################################################################
+----##################  TABLA DE UNITMEASSUREMENTS ###########################################
+----##########################################################################################
+--create table TrackElements(
+--	id int identity (1,1),
+--	typeElement varchar(40),
+--	element varchar(30)
 --)
 --go
-----VERIFICAMOS QUE EXISTA EL CAMPO CCNUM EN LA TABLE DE SCFESTIMATION
---SELECT ccnum FROM scfEstimation
-----SI NO EXISTE EJECUTAR LOS SIGUIENTE
---ALTER TABLE scfEstimation
---ADD ccnum VARCHAR(30)
---GO
-----ELIMINAMOS LA COMLUMNA DE UNIT EN SCFESTIMATION
---ALTER TABLE scfEstimation 
---DROP COLUMN unit
---go
----- CREAMOS LA UNION DE SCFESTIMATION CON LA TABLA DE SCFESTPROYECT
---ALTER TABLE scfEstimation  WITH CHECK ADD  CONSTRAINT fk_ccnum_scfEstimation FOREIGN KEY(ccnum)
---REFERENCES scfEstProyect (ccnum)
---GO
-
-----TAMBIEN AGREGAMOS EL IDCLIENT EN LA TABLA DE ESTIMACION PARA SEPARAR LAS ESTIMACIONES 
-
---ALTER TABLE scfEstimation 
---ADD idClient VARCHAR(36) null
---GO
-
---ALTER TABLE scfEstimation WITH CHECK ADD CONSTRAINT fk_idClient_scfEstimation
---FOREIGN KEY (idClient) REFERENCES clients(idClient)
---go
-
-----CORRECCION DE LA TABLA SCDINFO TIENE DUPLICADOS LAS UNIONES 
-
---ALTER TABLE scaffoldInformation DROP CONSTRAINT fk_type_SCFInformation
---GO
-
---ALTER TABLE scaffoldInformation DROP CONSTRAINT fk_tag_SCFInformation
---GO
-
---ALTER TABLE scaffoldInformation DROP CONSTRAINT fk_idModification_SCFInformation
---GO
-
-----FALTABA UNION DE EN EL SCRIPT
-
---ALTER TABLE taxesPT  WITH CHECK ADD  CONSTRAINT fk_idAux_TaxesPT FOREIGN KEY(idAux)
---REFERENCES task (idAux)
---GO
-
-----CORRECCION DEL PROCEDIMIENTO SP_SCFESTIMATION
-
---ALTER proc [dbo].[sp_scfEstimation]
---@ccnum as varchar(30),
---@EstNumber as varchar(36),
---@IdClient as varchar(36),
---@all as bit
---as 
---begin 
---	if @all = 1
---	begin
---		select 
---				scfE.EstNumber,ISNULL(scfp.unit,'')as 'unit',ISNULL(scfP.ccnum,'') as 'ccnum',scfE.location,scfE.width,scfE.length,scfE.heigth,scfE.descks,scfE.daysActive,estM.DA,
---				scfE.M3,scfE.M2,scfT.SCTP, ISNULL((select hFactor from scfFactor where heigth = scfe.heigth+scfe.groundHeigth),(select hFactor from scfFactor where heigth = (select MAX(heigth)from scfFactor) )) as 'Factor', scfT.BDRATE, estm.PMANHRS,
---				estM.BPRICE,estM.DECKBP,estM.DPRICE,estM.DECKDP,
---				estM.EDM3C,estM.EDM2C,estM.EDM3,estM.EDM2,
---				estM.M3LBP,estM.M3LDP,estM.M2LBP,estM.M2LDP,
---				estM.M3MBP,estM.M3MDP,estM.M2MBP,estM.M2MDP,
---				estM.M3EBP,estM.M3EDP,estM.M2EBP,estM.M2EDP
---			from scfEstimation as scfE
---				inner join EstMeters as estM on estM.EstNumber = scfE.EstNumber
---				inner join ScafEstCost as scfC on scfC.idEstCost = scfE.idEstCost
---				inner join scfTypeCost as scfT on scfT.scfTypeId = scfE.scfTypeId 
---				left join  scfEstProyect as scfP on scfP.ccnum = scfE.ccnum
---			where idClient= @IdClient 
---			order by scfP.ccnum
---	end
---	else if @ccnum<> '' and @all = 0
---	begin
---		select 
---				scfE.EstNumber,ISNULL(scfp.unit,'')as 'unit',ISNULL(scfP.ccnum,'') as 'ccnum',scfE.location,scfE.width,scfE.length,scfE.heigth,scfE.descks,scfE.daysActive,estM.DA,
---				scfE.M3,scfE.M2,scfT.SCTP, ISNULL((select hFactor from scfFactor where heigth = scfe.heigth+scfe.groundHeigth),(select hFactor from scfFactor where heigth = (select MAX(heigth)from scfFactor) )) as 'Factor', scfT.BDRATE, estm.PMANHRS,
---				estM.BPRICE,estM.DECKBP,estM.DPRICE,estM.DECKDP,
---				estM.EDM3C,estM.EDM2C,estM.EDM3,estM.EDM2,
---				estM.M3LBP,estM.M3LDP,estM.M2LBP,estM.M2LDP,
---				estM.M3MBP,estM.M3MDP,estM.M2MBP,estM.M2MDP,
---				estM.M3EBP,estM.M3EDP,estM.M2EBP,estM.M2EDP
---			from scfEstimation as scfE
---				inner join EstMeters as estM on estM.EstNumber = scfE.EstNumber
---				inner join ScafEstCost as scfC on scfC.idEstCost = scfE.idEstCost
---				inner join scfTypeCost as scfT on scfT.scfTypeId = scfE.scfTypeId 
---				left join  scfEstProyect as scfP on scfP.ccnum = scfE.ccnum
---				where scfP.ccnum = @ccnum and scfE.idClient = @IdClient
---			order by scfP.ccnum
---	end
---	else if @ccnum ='' and @all = 0
---	begin
---		select 
---				scfE.EstNumber,ISNULL(scfp.unit,'')as 'unit',ISNULL(scfP.ccnum,'') as 'ccnum',scfE.location,scfE.width,scfE.length,scfE.heigth,scfE.descks,scfE.daysActive,estM.DA,
---				scfE.M3,scfE.M2,scfT.SCTP, ISNULL((select hFactor from scfFactor where heigth = scfe.heigth+scfe.groundHeigth),(select hFactor from scfFactor where heigth = (select MAX(heigth)from scfFactor) )) as 'Factor', scfT.BDRATE, estm.PMANHRS,
---				estM.BPRICE,estM.DECKBP,estM.DPRICE,estM.DECKDP,
---				estM.EDM3C,estM.EDM2C,estM.EDM3,estM.EDM2,
---				estM.M3LBP,estM.M3LDP,estM.M2LBP,estM.M2LDP,
---				estM.M3MBP,estM.M3MDP,estM.M2MBP,estM.M2MDP,
---				estM.M3EBP,estM.M3EDP,estM.M2EBP,estM.M2EDP
---			from scfEstimation as scfE
---				inner join EstMeters as estM on estM.EstNumber = scfE.EstNumber
---				inner join ScafEstCost as scfC on scfC.idEstCost = scfE.idEstCost
---				inner join scfTypeCost as scfT on scfT.scfTypeId = scfE.scfTypeId 
---				left join  scfEstProyect as scfP on scfP.ccnum = scfE.ccnum
---			where scfE.EstNumber =@EstNumber and idClient= @IdClient 
---	end
---end
---go
+--insert into TrackElements values
+--('Force or Reject',''),
+--('Source',''),
+--('Order Type','POWO'),
+--('Location ID','2'),
+--('Company Code','987'),
+--('Area',''),
+--('Group Name',''),
+--('Agreement','OUTAGE'),
+--('Level 3 ID',''),
+--('Level 4 ID',''),
+--('Hours Total',''),
+--('Hours Total Activity Code',''),
+--('Extra Charges $ Activity Code',''),
+--('Extra',''),
+--('Extra 1',''),
+--('Extra 2',''),
+--('Add Time','N'),
+--('Pay Type',''),
+--('R4 (Hrs)','0.00'),
+--('R5 (Hrs)','0.00'),
+--('R6 (Hrs)','0.00'),
+--('GL Account',''),
+--('ST Adders	',''),
+--('OT Adders	',''),
+--('DT Adders	',''),
+--('R4 Adders	',''),
+--('R5 Adders	',''),
+--('R6 Adders','')
