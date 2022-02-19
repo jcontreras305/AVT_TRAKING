@@ -26,37 +26,46 @@ Public Class Track
 
     Private Sub btnFindExcel_Click(sender As Object, e As EventArgs) Handles btnSearch.Click
         Try
-            txtMessage.Text = "Message: Loading data..."
-            pdbPercent.Value = 10
-            Dim tblhrs = mtdHPW.selectHorasTrack(dtpBeginDate.Value, dtpEndDate.Value)
-            pdbPercent.Value = pdbPercent.Value + 20
-            Dim tblPdm = mtdHPW.selectPerdiemTrack(dtpBeginDate.Value, dtpEndDate.Value)
-            pdbPercent.Value = pdbPercent.Value + 20
-            If tblPdm IsNot Nothing And tblhrs IsNot Nothing Then
-                txtMessage.Text = "Message: Reading data..."
-                tblTrack.Rows.Clear()
-                Dim cont As Integer = 0
-                For Each row1 As DataRow In tblhrs.Rows
-                    cont += 1
-                    txtMessage.Text = "Message: Writing data of hours worked...Row number(" + cont.ToString + " of " + tblhrs.Rows.Count.ToString() + ")."
-                    tblTrack.Rows.Add(row1.ItemArray(0).ToString(), listDefault(0), listDefault(1), row1.ItemArray(1).ToString(), listDefault(2), listDefault(3), listDefault(4), row1.ItemArray(2).ToString(), row1.ItemArray(3).ToString(), listDefault(5), listDefault(6), listDefault(7), row1.ItemArray(4).ToString(), row1.ItemArray(5).ToString(), row1.ItemArray(6).ToString(), row1.ItemArray(7).ToString(), listDefault(8), listDefault(9), listDefault(10), listDefault(11), row1.ItemArray(8).ToString(), row1.ItemArray(9).ToString(), row1.ItemArray(10).ToString(), row1.ItemArray(11).ToString(), row1.ItemArray(12).ToString(), row1.ItemArray(13).ToString(), row1.ItemArray(14).ToString(), listDefault(12), listDefault(13), listDefault(14), listDefault(15), listDefault(16), listDefault(17), listDefault(18), listDefault(19), listDefault(20), listDefault(21), listDefault(22), listDefault(23), listDefault(24), listDefault(25), listDefault(26), listDefault(27))
-                Next
-                pdbPercent.Value = pdbPercent.Value + 30
-                cont = 0
-                For Each row As DataRow In tblPdm.Rows()
-                    cont += 1
-                    txtMessage.Text = "Message: Writing data of Perdiem used...Row number(" + cont.ToString + " of " + tblPdm.Rows.Count.ToString() + ")."
-                    For Each row2 As DataGridViewRow In tblTrack.Rows()
-                        If row2.Cells("Date1").Value = row.ItemArray(0) And row2.Cells("ResourceID").Value = row.ItemArray(1) And row2.Cells("ResourceName").Value = row.ItemArray(2) And row2.Cells("Level1ID").Value = row.ItemArray(3) And row2.Cells("Level2ID").Value = row.ItemArray(4) Then
-                            row2.Cells("ExtraCharges").Value = row.ItemArray(5)
-                            Exit For
-                        End If
-                    Next
-                Next
-                pdbPercent.Value = pdbPercent.Value + 5
+            If cmbClient.SelectedItem IsNot Nothing Then
+                If cmbJobs.SelectedItem IsNot Nothing Or chbAllJobs.Checked Then
+                    txtMessage.Text = "Message: Loading data..."
+                    pdbPercent.Value = 10
+                    Dim array() As String = cmbClient.SelectedItem.ToString().Split(" ")
+                    Dim tblhrs = mtdHPW.selectHorasTrack(dtpBeginDate.Value, dtpEndDate.Value, array(0), If(chbAllJobs.Checked, "", cmbJobs.SelectedItem.ToString()))
+                    pdbPercent.Value = pdbPercent.Value + 20
+                    Dim tblPdm = mtdHPW.selectPerdiemTrack(dtpBeginDate.Value, dtpEndDate.Value, array(0), If(chbAllJobs.Checked, "", cmbJobs.SelectedItem.ToString()))
+                    pdbPercent.Value = pdbPercent.Value + 20
+                    If tblPdm IsNot Nothing And tblhrs IsNot Nothing Then
+                        txtMessage.Text = "Message: Reading data..."
+                        tblTrack.Rows.Clear()
+                        Dim cont As Integer = 0
+                        For Each row1 As DataRow In tblhrs.Rows
+                            cont += 1
+                            txtMessage.Text = "Message: Writing data of hours worked...Row number(" + cont.ToString + " of " + tblhrs.Rows.Count.ToString() + ")."
+                            tblTrack.Rows.Add(row1.ItemArray(0).ToString(), listDefault(0), listDefault(1), row1.ItemArray(1).ToString(), listDefault(2), listDefault(3), listDefault(4), row1.ItemArray(2).ToString(), row1.ItemArray(3).ToString(), listDefault(5), listDefault(6), listDefault(7), row1.ItemArray(4).ToString(), row1.ItemArray(5).ToString(), row1.ItemArray(6).ToString(), row1.ItemArray(7).ToString(), listDefault(8), listDefault(9), listDefault(10), listDefault(11), row1.ItemArray(8).ToString(), row1.ItemArray(9).ToString(), row1.ItemArray(10).ToString(), row1.ItemArray(11).ToString(), row1.ItemArray(12).ToString(), row1.ItemArray(13).ToString(), row1.ItemArray(14).ToString(), listDefault(12), listDefault(13), listDefault(14), listDefault(15), listDefault(16), listDefault(17), listDefault(18), listDefault(19), listDefault(20), listDefault(21), listDefault(22), listDefault(23), listDefault(24), listDefault(25), listDefault(26), listDefault(27))
+                        Next
+                        pdbPercent.Value = pdbPercent.Value + 30
+                        cont = 0
+                        For Each row As DataRow In tblPdm.Rows()
+                            cont += 1
+                            txtMessage.Text = "Message: Writing data of Perdiem used...Row number(" + cont.ToString + " of " + tblPdm.Rows.Count.ToString() + ")."
+                            For Each row2 As DataGridViewRow In tblTrack.Rows()
+                                If row2.Cells("Date1").Value = row.ItemArray(0) And row2.Cells("ResourceID").Value = row.ItemArray(1) And row2.Cells("ResourceName").Value = row.ItemArray(2) And row2.Cells("Level1ID").Value = row.ItemArray(3) And row2.Cells("Level2ID").Value = row.ItemArray(4) Then
+                                    row2.Cells("ExtraCharges").Value = row.ItemArray(5)
+                                    Exit For
+                                End If
+                            Next
+                        Next
+                        pdbPercent.Value = pdbPercent.Value + 5
+                    End If
+                    txtMessage.Text = "Message: End."
+                    pdbPercent.Value = 100
+                Else
+                    MessageBox.Show("Please select a Job Number to continue or select All Jobs", "Important", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+                End If
+            Else
+                MessageBox.Show("Please select a Client to continue or select All Jobs", "Important", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
             End If
-            txtMessage.Text = "Message: End."
-            pdbPercent.Value = 100
         Catch ex As Exception
             MsgBox(ex.Message())
             pdbPercent.Value = 0
@@ -171,6 +180,7 @@ Public Class Track
         mtdHPW.llenarTablaElementosTrack(tblDefaultElements)
         actulizaeListDefault()
         btnSave.Enabled = False
+        llenarComboClientsReports(cmbClient)
     End Sub
     Dim selectColumn As String = ""
     Private Sub tblDefaultElements_CellMouseDoubleClick(sender As Object, e As DataGridViewCellMouseEventArgs) Handles tblDefaultElements.CellMouseDoubleClick
@@ -223,5 +233,40 @@ Public Class Track
         For Each row As DataGridViewRow In tblDefaultElements.Rows
             listDefault.Add(row.Cells(1).Value.ToString())
         Next
+    End Sub
+
+    Private Sub PictureBox4_Click(sender As Object, e As EventArgs) Handles PictureBox4.Click
+        Me.WindowState = FormWindowState.Minimized
+    End Sub
+
+    Private Sub btnRestore_Click(sender As Object, e As EventArgs) Handles btnRestore.Click
+        WindowState = FormWindowState.Normal
+        btnRestore.Visible = False
+        btnMaximize.Visible = True
+    End Sub
+
+    Private Sub btnMaximize_Click(sender As Object, e As EventArgs) Handles btnMaximize.Click
+        WindowState = FormWindowState.Maximized
+        btnMaximize.Visible = False
+        btnRestore.Visible = True
+    End Sub
+
+    Private Sub cmbClient_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbClient.SelectedIndexChanged
+        Try
+            Dim mtdJ As New MetodosJobs
+            Dim array() As String = cmbClient.SelectedItem.ToString.Split(" ")
+            mtdJ.llenarComboJob(cmbJobs, CInt(array(0)))
+            cmbJobs.Text = ""
+        Catch ex As Exception
+            MsgBox(ex.Message())
+        End Try
+    End Sub
+
+    Private Sub chbAllJobs_CheckedChanged(sender As Object, e As EventArgs) Handles chbAllJobs.CheckedChanged
+        If chbAllJobs.Checked Then
+            cmbJobs.Enabled = False
+        Else
+            cmbJobs.Enabled = True
+        End If
     End Sub
 End Class

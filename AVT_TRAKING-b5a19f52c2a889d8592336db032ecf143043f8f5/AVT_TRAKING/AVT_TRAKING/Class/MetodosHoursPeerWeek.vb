@@ -629,7 +629,7 @@ order by em.numberEmploye", conn)
     '############ METODOS PARA TRACK ##################################################################################################################################
     '##################################################################################################################################################################
 
-    Public Function selectHorasTrack(ByVal beginDate As Date, ByVal endDate As Date) As DataTable
+    Public Function selectHorasTrack(ByVal beginDate As Date, ByVal endDate As Date, ByVal numberClient As String, ByVal job As String) As DataTable
         Try
             conectar()
             Dim cmd As New SqlCommand("select 
@@ -673,7 +673,8 @@ T1.[D/T Hrs],
 	inner join projectOrder as po on po.idPO = wo.idPO and po.jobNo = wo.jobNo 
 	inner join job as jb on jb.jobNo = po.jobNo
 	inner join clients as cl on cl.idClient = jb.idClient
-	where hw.dateWorked between '" + validaFechaParaSQl(beginDate) + "' and '" + validaFechaParaSQl(endDate) + "'	
+	where hw.dateWorked between '" + validaFechaParaSQl(beginDate) + "' and '" + validaFechaParaSQl(endDate) + "' 
+        and cl.numberClient = " + numberClient + "  " + If(job <> "", " and jb.jobNo = " + job + " ", "") + "
 )as T1", conn)
             If cmd.ExecuteNonQuery Then
                 Dim da As New SqlDataAdapter(cmd)
@@ -691,7 +692,7 @@ T1.[D/T Hrs],
         End Try
     End Function
 
-    Public Function selectPerdiemTrack(ByVal beginDate As Date, ByVal endDate As Date) As DataTable
+    Public Function selectPerdiemTrack(ByVal beginDate As Date, ByVal endDate As Date, ByVal numberClient As String, ByVal job As String) As DataTable
         Try
             conectar()
             Dim cmd As New SqlCommand("select 
@@ -710,7 +711,8 @@ from expensesUsed as exu
 	inner join projectOrder as po on po.idPO = wo.idPO and po.jobNo = wo.jobNo 
 	inner join job as jb on jb.jobNo = po.jobNo
 	inner join clients as cl on cl.idClient = jb.idClient
-	where exu.dateExpense between '" + validaFechaParaSQl(beginDate) + "' and '" + validaFechaParaSQl(endDate) + "'", conn)
+	where exu.dateExpense between '" + validaFechaParaSQl(beginDate) + "' and '" + validaFechaParaSQl(endDate) + "'
+    and cl.numberClient = " + numberClient + "  " + If(job <> "", " and jb.jobNo = " + job + " ", ""), conn)
             If cmd.ExecuteNonQuery Then
                 Dim da As New SqlDataAdapter(cmd)
                 Dim dt As New DataTable

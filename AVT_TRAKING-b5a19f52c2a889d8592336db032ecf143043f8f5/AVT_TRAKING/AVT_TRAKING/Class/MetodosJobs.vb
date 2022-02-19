@@ -611,7 +611,21 @@ where cl.idClient like '" + If(idclient = "", "%", idclient) + "'", conn)
             MsgBox(ex.Message())
         End Try
     End Sub
-
+    Public Sub llenarComboJob(ByVal cmbJob As ComboBox, ByVal numClient As Integer)
+        Try
+            conectar()
+            Dim cmd As New SqlCommand("select jb.jobNo from job as jb inner join clients as cl on jb.idClient = cl.idClient 
+where cl.numberClient =" + numClient.ToString() + "", conn)
+            Dim reader As SqlDataReader = cmd.ExecuteReader()
+            cmbJob.Items.Clear()
+            While reader.Read()
+                cmbJob.Items.Add(reader(0))
+            End While
+            desconectar()
+        Catch ex As Exception
+            MsgBox(ex.Message())
+        End Try
+    End Sub
     Public Sub consultaWO(ByVal jobNumber As String, ByVal tabla As DataTable)
         Try
             conectar()
