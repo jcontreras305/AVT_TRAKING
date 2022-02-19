@@ -207,19 +207,42 @@ ha.idHomeAdress, ha.avenue ,ha.number, ha.city ,ha.providence,ha.postalCode,phot
     Dim consultaProyetosClientes As String = "select 
 	(select CONCAT(wo.idWO,' ',tk.task)) as 'Work Order' , 
 	
-	case when tk.description is null then ''
-	else tk.description end as 'Project Description', 
+	ISNULL( tk.description ,'') as 'Project Description', 
 	
-	case when tk.status is null then 0
-	else tk.status end as 'Cmp',
-	case when (select tk.totalSpend from task where idWO = wo.idWO and idAux = tk.idAux ) is null then CONCAT('$' ,0)
-	else concat( '$',(select tk.totalSpend from task where idWO = wo.idWO and idAux = tk.idAux ) )end
-	 as 'Total Spend',
+	ISNULL( tk.status, 0 ) as 'Cmp',
 	
-	case when (select SUM(hoursST) from hoursWorked as hw where hw.idAux = tk.idAux) is null then 0 
-	else (select SUM(hoursST) from hoursWorked as hw where hw.idAux = tk.idAux)
-	end	as 'Total Hours ST',
+	concat('$', (
 		
+			(select ISNULL(SUM(T2.Amount),0) as 'Billings ST' from 
+			(select SUM(T1.hoursST*T1.billingRate1) AS 'Amount'
+			from (select hoursST, hw.idWorkCode , billingRate1  from hoursWorked as hw inner join workCode as wc on wc.idWorkCode = hw.idWorkCode inner join task as tk1 on tk1.idAux = hw.idAux inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO inner join projectOrder as po1 on po1.idPO = wo1.idPO and wo1.jobNo = po1.jobNo inner join job as jb1 on jb1.jobNo = po1.jobNo  inner join clients as cl1 on cl1.idClient = jb1.idClient
+			where cl1.idClient = cln.idClient and jb.jobNo = jb1.jobNo and po1.idPO = po.idPO and wo.idAuxWO = wo1.idAuxWO and hw.idAux=tk.idAux  )as T1    
+			group by T1.idWorkCode) as T2)--Billing ST
+			+
+			(select  ISNULL( SUM(T2.Amount),0) as 'Billing OT' from 
+			(select SUM(T1.hoursOT*T1.billingRateOT) AS 'Amount'
+			from (select hoursOT, hw.idWorkCode , billingRateOT  from hoursWorked as hw inner join workCode as wc on wc.idWorkCode = hw.idWorkCode inner join task as tk1 on tk1.idAux = hw.idAux inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO inner join projectOrder as po1 on po1.idPO = wo1.idPO and wo1.jobNo = po1.jobNo inner join job as jb1 on jb1.jobNo = po1.jobNo inner join clients as cl1 on cl1.idClient = jb1.idClient 
+			where cl1.idClient = cln.idClient and jb.jobNo = jb1.jobNo and po1.idPO = po.idPO and wo.idAuxWO = wo1.idAuxWO and hw.idAux=tk.idAux)as T1    
+			group by T1.idWorkCode) as T2) --Billing OT
+			+
+			(select  ISNULL( SUM(T2.Amount),0) as 'Billing 3T' from 
+			(select SUM(T1.hours3*T1.billingRate3) AS 'Amount'
+			from (select hours3, hw.idWorkCode , billingRate3  from hoursWorked as hw inner join workCode as wc on wc.idWorkCode = hw.idWorkCode inner join task as tk1 on tk1.idAux = hw.idAux inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO inner join projectOrder as po1 on po1.idPO = wo1.idPO and wo1.jobNo = po1.jobNo inner join job as jb1 on jb1.jobNo = po1.jobNo inner join clients as cl1 on cl1.idClient = jb1.idClient 
+			where cl1.idClient = cln.idClient and jb.jobNo = jb1.jobNo and po1.idPO = po.idPO and wo.idAuxWO = wo1.idAuxWO and hw.idAux=tk.idAux)as T1    
+			group by T1.idWorkCode) as T2) --Billing 3T
+			+
+			ISNULL((select sum(amount) from expensesUsed as exu inner join task as tk1 on tk1.idAux = exu.idAux inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO inner join projectOrder as po1 on po1.idPO = wo1.idPO and wo1.jobNo = po1.jobNo inner join job as jb1 on jb1.jobNo = po1.jobNo inner join clients as cl1 on cl1.idClient = jb1.idClient 
+			where cl1.idClient = cln.idClient and jb.jobNo = jb1.jobNo and po1.idPO = po.idPO and wo.idAuxWO = wo1.idAuxWO and exu.idAux=tk.idAux ),  0)--Expenses Used
+			+
+			ISNULL((select sum(amount) from materialUsed as mau inner join task as tk1 on tk1.idAux = mau.idAux inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO inner join projectOrder as po1 on po1.idPO = wo1.idPO and wo1.jobNo = po1.jobNo inner join job as jb1 on jb1.jobNo = po1.jobNo inner join clients as cl1 on cl1.idClient = jb1.idClient 
+			where cl1.idClient = cln.idClient and jb.jobNo = jb1.jobNo and po1.idPO = po.idPO and wo.idAuxWO = wo1.idAuxWO and mau.idAux=tk.idAux), 0)-- Material Used
+			)
+		) as 'Total Spend',
+
+	case when (select SUM(hourssT) from hoursWorked as hw where hw.idAux = tk.idAux) is null then 0
+	else (select SUM(hoursST) from hoursWorked as hw where hw.idAux = tk.idAux)
+	end	as 'Total Hours sT',
+
 	case when 
 	(
 	select CONCAT('$' ,SUM(T2.Amount)) as 'Total Amount ST' from 
@@ -286,19 +309,14 @@ ha.idHomeAdress, ha.avenue ,ha.number, ha.city ,ha.providence,ha.postalCode,phot
     jb.jobNo,
    	jb.workTMLumpSum,
 	jb.costDistribution,
-	CASE WHEN jb.custumerNo IS NULL THEN ''
-	ELSE jb.custumerNo END AS 'custumerNo' ,
-	CASE  WHEN jb.contractNo IS NULL THEN ''
-	ELSE jb.contractNo END AS 'contractNo',
+	ISNULL(jb.custumerNo,'')AS 'custumerNo' ,
+	ISNULL(jb.contractNo,'')AS 'contractNo',
 	jb.costCode,
     cln.idClient,
     po.idPO,
-	CASE WHEN tk.task IS NULL THEN ''
-	ELSE tk.task END AS 'idTask', 
-    CASE WHEN wo.idAuxWO IS NULL THEN ''
-	ELSE wo.idAuxWO END AS 'idAuxWO',
-    CASE WHEN tk.idAux IS NULL THEN ''
-	ELSE tk.idAux END AS 'idAux',
+	ISNULL(tk.task ,'') AS 'idTask',
+    ISNULL(wo.idAuxWO,'') AS 'idAuxWO',
+	ISNULL(tk.idAux,'') AS 'idAux',
 	cln.photo
 from
 clients as cln left join job as jb on jb.idClient = cln.idClient
@@ -327,7 +345,7 @@ cln.lastName Like '" + consulta + "'", conn)
                 da.Fill(dt)
 
                 tabla.DataSource = dt
-                If tabla.Columns.Count <= 24 Then
+                If tabla.Columns.Count = 24 Then
                     Dim clmChb As New DataGridViewCheckBoxColumn
                     clmChb.Name = "Complete"
                     tabla.Columns.Add(clmChb)
@@ -335,7 +353,7 @@ cln.lastName Like '" + consulta + "'", conn)
                 End If
                 tabla.Columns("idClient").Visible = False
                 tabla.Columns("Cmp").Visible = False
-                tabla.Columns("jobNo").Visible = False
+                tabla.Columns("jobNo").Visible = True
                 tabla.Columns("workTMLumpSum").Visible = False
                 tabla.Columns("costDistribution").Visible = False
                 tabla.Columns("custumerNo").Visible = False

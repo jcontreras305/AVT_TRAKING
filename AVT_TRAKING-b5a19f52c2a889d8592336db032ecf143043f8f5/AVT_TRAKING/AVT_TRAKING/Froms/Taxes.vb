@@ -8,11 +8,15 @@ Public Class Taxes
     Public idWO As String = ""
     Public po As String = ""
     Public job As String = ""
+    Public totalHoursJob As Decimal
     Dim loadingData As Boolean
     Dim arraySprST(18) As NumericUpDown
     Dim arraySprPT(3) As NumericUpDown
     Private Sub Taxes_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        lblTask.Text = If(wo = "", "00000000", wo) + "-" + If(task = "", "0000", task)
+        lblTask.Text = If(job = "", "", job)
+        sprHours.Value = totalHoursJob
+        tx.TotalHours = sprHours.Value
+        tx.TotalHoursP = sprHours.Value
         tblTaxesST.Rows.Add("Foreman", "$0.00", "$0.00", "$0.00", "$0.00", "$0.00", "$0.00", "$0.00", "$0.00", "$0.00", "$0.00", "$0.00", "$0.00", "$0.00", "$0.00", "$0.00", "$0.00", "$0.00", "$0.00", "$0.00")
         tblTaxesST.Rows.Add("Journeyman", "$0.00", "$0.00", "$0.00", "$0.00", "$0.00", "$0.00", "$0.00", "$0.00", "$0.00", "$0.00", "$0.00", "$0.00", "$0.00", "$0.00", "$0.00", "$0.00", "$0.00", "$0.00", "$0.00")
         tblTaxesST.Rows.Add("Craftsman", "$0.00", "$0.00", "$0.00", "$0.00", "$0.00", "$0.00", "$0.00", "$0.00", "$0.00", "$0.00", "$0.00", "$0.00", "$0.00", "$0.00", "$0.00", "$0.00", "$0.00", "$0.00", "$0.00")
@@ -28,7 +32,7 @@ Public Class Taxes
         arraySprST = {sprFICA, sprFUI, sprSUI, sprWC, sprGenLiab, sprUmbr, sprPollution, sprHealt, sprFringe, sprSmall, sprPPE, sprConsumable, sprScaffold, sprYoYos, sprMesh, sprMiselaneos, sprOverhead, sprProfit}
         arraySprPT = {sprFicaP, sprFUIP, sprSUIP}
         If task <> "" Then
-            tx = mtdTX.selectTaxes(idTask)
+            tx = mtdTX.selectTaxes(job)
             cargardatosTaxes(tx)
         Else
             btnSave.Enabled = False
@@ -508,7 +512,7 @@ Public Class Taxes
     Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
         If mtdTX.savetaxes(tx) Then
             MsgBox("Successful.")
-            tx = mtdTX.selectTaxes(tx.idAux)
+            tx = mtdTX.selectTaxes(tx.JobNo)
         End If
     End Sub
 

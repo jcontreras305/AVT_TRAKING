@@ -1,5 +1,5 @@
 ﻿Public Class TaxesClass
-    Dim _idTaxes, _idTaxesP, _idAux As String
+    Dim _idTaxes, _idTaxesP, _JobNo As String
     Dim _FICA, _FUI, _SUI, _WC, _GenLiab, _Umbr, _Pollution, _Healt, _Fringe, _Small, _PPE, _Consumable, _Scaffold, _YoYos, _Mesh, _Miselaneos, _Overhead, _Profit, _TotalHours As Double
     Dim _BWForeman, _BWJourneyman, _BWCraftsman, _BWApprentice, _BWHelper As Double
     Dim _QtyForeman, _QtyJourneyman, _QtyCraftsman, _QtyApprentice, _QtyHelper As Integer
@@ -10,7 +10,7 @@
     Public Function Clear() As Boolean
         _idTaxes = ""
         _idTaxesP = ""
-        _idAux = ""
+        _JobNo = ""
         _FICA = 0.00
         _FUI = 0.00
         _SUI = 0.00
@@ -78,16 +78,16 @@
             _idTaxesP = idTaxesP
         End Set
     End Property
-    Public Property idAux() As String
+    Public Property JobNo() As String
         Get
-            If _idAux = Nothing Then
+            If _JobNo = Nothing Then
                 Return ""
             Else
-                Return _idAux
+                Return _JobNo
             End If
         End Get
-        Set(ByVal idAux As String)
-            _idAux = idAux
+        Set(ByVal JobNo As String)
+            _JobNo = JobNo
         End Set
     End Property
     Public Property FICA() As Double

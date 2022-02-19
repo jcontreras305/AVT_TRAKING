@@ -22,8 +22,6 @@ Partial Class Taxes
     'No lo modifique con el editor de código.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
         Me.TitleBar = New System.Windows.Forms.Panel()
         Me.btnRestore = New System.Windows.Forms.PictureBox()
@@ -209,6 +207,8 @@ Partial Class Taxes
         Me.sprFicaP = New System.Windows.Forms.NumericUpDown()
         Me.Label33 = New System.Windows.Forms.Label()
         Me.Panel10 = New System.Windows.Forms.Panel()
+        Me.Panel11 = New System.Windows.Forms.Panel()
+        Me.Panel12 = New System.Windows.Forms.Panel()
         Me.TableLayoutPanel1.SuspendLayout()
         Me.TitleBar.SuspendLayout()
         CType(Me.btnRestore, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -287,6 +287,8 @@ Partial Class Taxes
         CType(Me.sprSUIP, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.sprFUIP, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.sprFicaP, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.Panel11.SuspendLayout()
+        Me.Panel12.SuspendLayout()
         Me.SuspendLayout()
         '
         'TableLayoutPanel1
@@ -373,7 +375,7 @@ Partial Class Taxes
         Me.btnSave.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnSave.Image = Global.AVT_TRAKING.My.Resources.Resources.save
         Me.btnSave.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnSave.Location = New System.Drawing.Point(384, 39)
+        Me.btnSave.Location = New System.Drawing.Point(346, 37)
         Me.btnSave.Name = "btnSave"
         Me.btnSave.Size = New System.Drawing.Size(75, 32)
         Me.btnSave.TabIndex = 5
@@ -388,21 +390,23 @@ Partial Class Taxes
         Me.lblTask.ForeColor = System.Drawing.Color.White
         Me.lblTask.Location = New System.Drawing.Point(181, 44)
         Me.lblTask.Name = "lblTask"
-        Me.lblTask.Size = New System.Drawing.Size(136, 18)
+        Me.lblTask.Size = New System.Drawing.Size(74, 18)
         Me.lblTask.TabIndex = 4
-        Me.lblTask.Text = "00000000-000"
+        Me.lblTask.Text = "000000"
+        Me.lblTask.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         '
         'Label28
         '
         Me.Label28.AutoSize = True
-        Me.Label28.Location = New System.Drawing.Point(138, 44)
+        Me.Label28.Location = New System.Drawing.Point(135, 47)
         Me.Label28.Name = "Label28"
-        Me.Label28.Size = New System.Drawing.Size(33, 13)
+        Me.Label28.Size = New System.Drawing.Size(49, 13)
         Me.Label28.TabIndex = 3
-        Me.Label28.Text = "Task"
+        Me.Label28.Text = "Job No."
         '
         'sprHours
         '
+        Me.sprHours.DecimalPlaces = 2
         Me.sprHours.Location = New System.Drawing.Point(51, 42)
         Me.sprHours.Maximum = New Decimal(New Integer() {20000, 0, 0, 0})
         Me.sprHours.Name = "sprHours"
@@ -1078,8 +1082,8 @@ Partial Class Taxes
         Me.TableLayoutPanel4.BackColor = System.Drawing.Color.FromArgb(CType(CType(81, Byte), Integer), CType(CType(93, Byte), Integer), CType(CType(102, Byte), Integer))
         Me.TableLayoutPanel4.ColumnCount = 1
         Me.TableLayoutPanel4.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-        Me.TableLayoutPanel4.Controls.Add(Me.tblTaxesST, 0, 0)
-        Me.TableLayoutPanel4.Controls.Add(Me.tblAverage, 0, 1)
+        Me.TableLayoutPanel4.Controls.Add(Me.Panel11, 0, 0)
+        Me.TableLayoutPanel4.Controls.Add(Me.Panel12, 0, 1)
         Me.TableLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Fill
         Me.TableLayoutPanel4.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TableLayoutPanel4.ForeColor = System.Drawing.SystemColors.ControlLightLight
@@ -1098,16 +1102,8 @@ Partial Class Taxes
         Me.tblTaxesST.BackgroundColor = System.Drawing.SystemColors.Window
         Me.tblTaxesST.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.tblTaxesST.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.clmEmployee, Me.FICA, Me.FUI, Me.SUI, Me.WC, Me.GenLiab, Me.Umbr, Me.Pollution, Me.Healt, Me.Fringe, Me.Small, Me.PPE, Me.Consumable, Me.Scaffold, Me.YoYos, Me.Mesh, Me.Miselaneos, Me.Overhead, Me.Profit, Me.STTOTAL})
-        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle1.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.tblTaxesST.DefaultCellStyle = DataGridViewCellStyle1
         Me.tblTaxesST.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.tblTaxesST.Location = New System.Drawing.Point(3, 3)
+        Me.tblTaxesST.Location = New System.Drawing.Point(0, 0)
         Me.tblTaxesST.Name = "tblTaxesST"
         Me.tblTaxesST.ReadOnly = True
         Me.tblTaxesST.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders
@@ -1242,16 +1238,8 @@ Partial Class Taxes
         Me.tblAverage.BackgroundColor = System.Drawing.SystemColors.Window
         Me.tblAverage.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.tblAverage.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.EmployeeBW, Me.FICAAV, Me.FUIAV, Me.SUIAV, Me.WCAV, Me.GenLiabAV, Me.UmbrAV, Me.PullutionAV, Me.HealtAV, Me.FringeAV, Me.SmallAV, Me.PPEAV, Me.ConsumableAV, Me.ScaffoldAV, Me.YoyosAV, Me.MeshAV, Me.MiselaneosAV, Me.OverheadAV, Me.ProfitAV, Me.STTOTALAV})
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle2.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.tblAverage.DefaultCellStyle = DataGridViewCellStyle2
         Me.tblAverage.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.tblAverage.Location = New System.Drawing.Point(3, 201)
+        Me.tblAverage.Location = New System.Drawing.Point(0, 0)
         Me.tblAverage.Name = "tblAverage"
         Me.tblAverage.ReadOnly = True
         Me.tblAverage.Size = New System.Drawing.Size(729, 84)
@@ -2190,6 +2178,26 @@ Partial Class Taxes
         Me.Panel10.Size = New System.Drawing.Size(723, 77)
         Me.Panel10.TabIndex = 2
         '
+        'Panel11
+        '
+        Me.Panel11.Controls.Add(Me.tblTaxesST)
+        Me.Panel11.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Panel11.ForeColor = System.Drawing.SystemColors.ControlText
+        Me.Panel11.Location = New System.Drawing.Point(3, 3)
+        Me.Panel11.Name = "Panel11"
+        Me.Panel11.Size = New System.Drawing.Size(729, 192)
+        Me.Panel11.TabIndex = 0
+        '
+        'Panel12
+        '
+        Me.Panel12.Controls.Add(Me.tblAverage)
+        Me.Panel12.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Panel12.ForeColor = System.Drawing.SystemColors.ControlText
+        Me.Panel12.Location = New System.Drawing.Point(3, 201)
+        Me.Panel12.Name = "Panel12"
+        Me.Panel12.Size = New System.Drawing.Size(729, 84)
+        Me.Panel12.TabIndex = 1
+        '
         'Taxes
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -2286,6 +2294,8 @@ Partial Class Taxes
         CType(Me.sprSUIP, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.sprFUIP, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.sprFicaP, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.Panel11.ResumeLayout(False)
+        Me.Panel12.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
@@ -2475,4 +2485,6 @@ Partial Class Taxes
     Friend WithEvents FUIAVP As DataGridViewTextBoxColumn
     Friend WithEvents SUIAVP As DataGridViewTextBoxColumn
     Friend WithEvents PTTOTALAV As DataGridViewTextBoxColumn
+    Friend WithEvents Panel11 As Panel
+    Friend WithEvents Panel12 As Panel
 End Class

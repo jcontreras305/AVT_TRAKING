@@ -304,9 +304,9 @@ Partial Class ProjectsClients
         '
         Me.txtFindClientProyects.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.txtFindClientProyects.Location = New System.Drawing.Point(22, 6)
+        Me.txtFindClientProyects.Location = New System.Drawing.Point(3, 6)
         Me.txtFindClientProyects.Name = "txtFindClientProyects"
-        Me.txtFindClientProyects.Size = New System.Drawing.Size(255, 20)
+        Me.txtFindClientProyects.Size = New System.Drawing.Size(208, 20)
         Me.txtFindClientProyects.TabIndex = 15
         '
         'GroupBox1
@@ -858,7 +858,7 @@ Partial Class ProjectsClients
         Me.btnFindClintProyects.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.btnFindClintProyects.Image = Global.AVT_TRAKING.My.Resources.Resources.loupe
         Me.btnFindClintProyects.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnFindClintProyects.Location = New System.Drawing.Point(283, 1)
+        Me.btnFindClintProyects.Location = New System.Drawing.Point(217, 1)
         Me.btnFindClintProyects.Name = "btnFindClintProyects"
         Me.btnFindClintProyects.Size = New System.Drawing.Size(75, 28)
         Me.btnFindClintProyects.TabIndex = 16

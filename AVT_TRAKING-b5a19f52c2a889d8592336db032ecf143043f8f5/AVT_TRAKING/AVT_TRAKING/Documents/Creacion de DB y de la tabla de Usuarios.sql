@@ -953,7 +953,6 @@ GO
 
 create table taxesPT(
 	idTaxesPT varchar(36)primary key not null,
-	idAux varchar(36),
 	totalHours float,
 	FICA float,
 	FUI float,  
@@ -967,7 +966,8 @@ create table taxesPT(
 	QtyJourneyman int,
 	QtyCraftsman int,
 	QtyApprentice int,
-	QtyHelper int
+	QtyHelper int,
+	jobNo bigint
 )
 GO
 
@@ -977,7 +977,6 @@ GO
 
 create table taxesST(
 	idTaxesST varchar(36)primary key not null,
-	idAux varchar(36),
 	totalHours float,
 	FICA float,
 	FUI float,  
@@ -1006,7 +1005,8 @@ create table taxesST(
 	QtyJourneyman int,
 	QtyCraftsman int,
 	QtyApprentice int,
-	QtyHelper int
+	QtyHelper int,
+	jobNo bigint
 )
 GO
 --##########################################################################################
@@ -1448,27 +1448,23 @@ ON DELETE CASCADE
 GO
 
 --##########################################################################################
---##################  FOREIG KEYS TAXESPT ##################################################
+--##################  FOREIG KEYS TAXESST ##################################################
 --##########################################################################################
 
-ALTER TABLE taxesPT WITH CHECK ADD CONSTRAINT fk_idAux_TaxesPT
-FOREIGN KEY (idAux) REFERENCES task(idAux)
+ALTER TABLE taxesST WITH CHECK ADD CONSTRAINT fk_jobNo_taxesST 
+FOREIGN KEY (jobNo) REFERENCES job(jobNo)
+ON UPDATE CASCADE
+ON DELETE CASCADE
 GO
 
 --##########################################################################################
 --##################  FOREIG KEYS TAXESST ##################################################
 --##########################################################################################
 
-ALTER TABLE taxesST WITH CHECK ADD CONSTRAINT fk_idAux_TaxesST
-FOREIGN KEY (idAux) REFERENCES task(idAux)
-GO
-
---##########################################################################################
---##################  FOREIG KEYS TAXESST ##################################################
---##########################################################################################
-
-ALTER TABLE taxesPT WITH CHECK ADD  CONSTRAINT fk_idAux_TaxesPT FOREIGN KEY(idAux)
-REFERENCES task (idAux)
+ALTER TABLE taxesPT WITH CHECK ADD CONSTRAINT fk_jobNo_taxesPT 
+FOREIGN KEY (jobNo) REFERENCES job(jobNo)
+ON UPDATE CASCADE
+ON DELETE CASCADE
 GO
 
 --##########################################################################################
@@ -2900,7 +2896,6 @@ begin
 end
 go
 
-
 --##############################################################################################
 --################## SP YEAR FINAL HOURS #######################################################
 --##############################################################################################
@@ -2950,40 +2945,41 @@ go
 ---- PARA DESCOMENTAR USAR LAS TECLAS (CTRL+K)(CTRL+U) Y PARA COMENTAR (CTRL+K)(CTRL+C)
 
 ----##########################################################################################
-----##################  TABLA DE UNITMEASSUREMENTS ###########################################
+----##################  CAMBIOS DE LAS TABLAS DE TAXES ST Y PT ###############################
 ----##########################################################################################
---create table TrackElements(
---	id int identity (1,1),
---	typeElement varchar(40),
---	element varchar(30)
---)
+
+--alter table taxesST
+--drop constraint fk_idAux_taxesST
 --go
---insert into TrackElements values
---('Force or Reject',''),
---('Source',''),
---('Order Type','POWO'),
---('Location ID','2'),
---('Company Code','987'),
---('Area',''),
---('Group Name',''),
---('Agreement','OUTAGE'),
---('Level 3 ID',''),
---('Level 4 ID',''),
---('Hours Total',''),
---('Hours Total Activity Code',''),
---('Extra Charges $ Activity Code',''),
---('Extra',''),
---('Extra 1',''),
---('Extra 2',''),
---('Add Time','N'),
---('Pay Type',''),
---('R4 (Hrs)','0.00'),
---('R5 (Hrs)','0.00'),
---('R6 (Hrs)','0.00'),
---('GL Account',''),
---('ST Adders	',''),
---('OT Adders	',''),
---('DT Adders	',''),
---('R4 Adders	',''),
---('R5 Adders	',''),
---('R6 Adders','')
+
+--alter table taxesST
+--drop column idAux
+--go
+
+--alter table taxesST
+--add jobNo bigint
+--go
+
+--ALTER TABLE taxesST WITH CHECK ADD CONSTRAINT fk_jobNo_taxesST 
+--FOREIGN KEY (jobNo) REFERENCES job(jobNo)
+--ON UPDATE CASCADE
+--ON DELETE CASCADE
+--go
+
+--alter table taxesPT
+--drop constraint fk_idAux_taxesPT
+--go
+
+--alter table taxesPT
+--drop column idAux
+--go
+
+--alter table taxesPT
+--add jobNo bigint
+--go
+
+--ALTER TABLE taxesPT WITH CHECK ADD CONSTRAINT fk_jobNo_taxesPT 
+--FOREIGN KEY (jobNo) REFERENCES job(jobNo)
+--ON UPDATE CASCADE
+--ON DELETE CASCADE
+--go
