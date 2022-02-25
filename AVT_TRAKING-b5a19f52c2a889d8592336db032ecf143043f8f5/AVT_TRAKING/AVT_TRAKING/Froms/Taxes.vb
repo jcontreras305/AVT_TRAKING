@@ -8,15 +8,12 @@ Public Class Taxes
     Public idWO As String = ""
     Public po As String = ""
     Public job As String = ""
-    Public totalHoursJob As Decimal
+    Public totalHoursJob As Decimal()
     Dim loadingData As Boolean
     Dim arraySprST(18) As NumericUpDown
     Dim arraySprPT(3) As NumericUpDown
     Private Sub Taxes_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         lblTask.Text = If(job = "", "", job)
-        sprHours.Value = totalHoursJob
-        tx.TotalHours = sprHours.Value
-        tx.TotalHoursP = sprHours.Value
         tblTaxesST.Rows.Add("Foreman", "$0.00", "$0.00", "$0.00", "$0.00", "$0.00", "$0.00", "$0.00", "$0.00", "$0.00", "$0.00", "$0.00", "$0.00", "$0.00", "$0.00", "$0.00", "$0.00", "$0.00", "$0.00", "$0.00")
         tblTaxesST.Rows.Add("Journeyman", "$0.00", "$0.00", "$0.00", "$0.00", "$0.00", "$0.00", "$0.00", "$0.00", "$0.00", "$0.00", "$0.00", "$0.00", "$0.00", "$0.00", "$0.00", "$0.00", "$0.00", "$0.00", "$0.00")
         tblTaxesST.Rows.Add("Craftsman", "$0.00", "$0.00", "$0.00", "$0.00", "$0.00", "$0.00", "$0.00", "$0.00", "$0.00", "$0.00", "$0.00", "$0.00", "$0.00", "$0.00", "$0.00", "$0.00", "$0.00", "$0.00", "$0.00")
@@ -29,6 +26,8 @@ Public Class Taxes
         tblTaxesPT.Rows.Add("Apprentice", "$0.00", "$0.00", "$0.00", "$0.00")
         tblTaxesPT.Rows.Add("Helper", "$0.00", "$0.00", "$0.00", "$0.00")
         tblAverageP.Rows.Add("$0.00", "$0.00", "$0.00", "$0.00", "$0.00")
+        tblWkly.Rows.Add("$0.00", "$0.00", "$0.00", "$0.00", "$0.00", "$0.00", "$0.00", "$0.00", "$0.00", "$0.00", "$0.00", "$0.00", "$0.00", "$0.00", "$0.00", "$0.00", "$0.00", "$0.00", "$0.00", "$0.00")
+        tblWkly.Rows.Add("$0.00", "$0.00", "$0.00", "$0.00", "$0.00", "$0.00", "$0.00", "$0.00", "$0.00", "$0.00", "$0.00", "$0.00", "$0.00", "$0.00", "$0.00", "$0.00", "$0.00", "$0.00", "$0.00", "$0.00")
         arraySprST = {sprFICA, sprFUI, sprSUI, sprWC, sprGenLiab, sprUmbr, sprPollution, sprHealt, sprFringe, sprSmall, sprPPE, sprConsumable, sprScaffold, sprYoYos, sprMesh, sprMiselaneos, sprOverhead, sprProfit}
         arraySprPT = {sprFicaP, sprFUIP, sprSUIP}
         If task <> "" Then
@@ -85,8 +84,20 @@ Public Class Taxes
             sprQtyApprenticeP.Value = taxes.QtyApprenticeP
             loadingData = False
             sprQtyHelperP.Value = taxes.QtyHelperP
+
+            dtpBeginDate.Value = tx.BeginDaTe
+            dtpEndDate.Value = tx.EndDate
+            sprHours.Value = tx.TotalHours
+
+            Dim horas = mtdTX.selectTotalHoursCount(job, tx.BeginDaTe, tx.EndDate)
+
+            sprHours.Value = horas(0)
+            sprHoursST.Value = horas(1)
+            sprHoursOT.Value = horas(2)
+
             calcularPTTotal()
             calcularSTTotal()
+            calcularFilaWklyAV()
             Return True
         Catch ex As Exception
             Return False
@@ -94,11 +105,20 @@ Public Class Taxes
     End Function
     Private Function calcularPorcentaje(ByVal columnName As String, ByVal moneyF As Decimal, ByVal moneyJ As Decimal, ByVal moneyC As Decimal, ByVal moneyA As Decimal, ByVal moneyH As Decimal, ByVal percent As Decimal) As Boolean
         Try
-            tblTaxesST.Rows(0).Cells(columnName).Value = "$" + Decimal.Round(((moneyF * percent) / 100), 2).ToString
-            tblTaxesST.Rows(1).Cells(columnName).Value = "$" + Decimal.Round(((moneyJ * percent) / 100), 2).ToString
-            tblTaxesST.Rows(2).Cells(columnName).Value = "$" + Decimal.Round(((moneyC * percent) / 100), 2).ToString
-            tblTaxesST.Rows(3).Cells(columnName).Value = "$" + Decimal.Round(((moneyA * percent) / 100), 2).ToString
-            tblTaxesST.Rows(4).Cells(columnName).Value = "$" + Decimal.Round(((moneyH * percent) / 100), 2).ToString
+            If tblTaxesST.Columns(columnName).Index <= 12 Or tblTaxesST.Columns(columnName).Index > 16 Then
+                tblTaxesST.Rows(0).Cells(columnName).Value = "$" + Decimal.Round(((moneyF * percent) / 100), 2).ToString
+                tblTaxesST.Rows(1).Cells(columnName).Value = "$" + Decimal.Round(((moneyJ * percent) / 100), 2).ToString
+                tblTaxesST.Rows(2).Cells(columnName).Value = "$" + Decimal.Round(((moneyC * percent) / 100), 2).ToString
+                tblTaxesST.Rows(3).Cells(columnName).Value = "$" + Decimal.Round(((moneyA * percent) / 100), 2).ToString
+                tblTaxesST.Rows(4).Cells(columnName).Value = "$" + Decimal.Round(((moneyH * percent) / 100), 2).ToString
+            Else
+                tblTaxesST.Rows(0).Cells(columnName).Value = "$" + Decimal.Round((moneyF * percent), 2).ToString
+                tblTaxesST.Rows(1).Cells(columnName).Value = "$" + Decimal.Round((moneyJ * percent), 2).ToString
+                tblTaxesST.Rows(2).Cells(columnName).Value = "$" + Decimal.Round((moneyC * percent), 2).ToString
+                tblTaxesST.Rows(3).Cells(columnName).Value = "$" + Decimal.Round((moneyA * percent), 2).ToString
+                tblTaxesST.Rows(4).Cells(columnName).Value = "$" + Decimal.Round((moneyH * percent), 2).ToString
+            End If
+            calcularSTTotal()
             Return True
         Catch ex As Exception
             Return False
@@ -230,7 +250,9 @@ Public Class Taxes
                 Case "sprQtyHelper"
                     tx.QtyHelper = sprQtyHelper.Value
             End Select
+            calcularSTTotal()
             calcualarAverge()
+            calcularFilaWklyAV()
         End If
     End Sub
     Private Function calcularSTTotal() As Boolean
@@ -270,8 +292,13 @@ Public Class Taxes
             For Each cell As DataGridViewCell In tblTaxesST.Rows(row).Cells()
                 If cell.ColumnIndex > 0 And Not cell.ColumnIndex = tblTaxesST.Columns("STTOTAL").Index Then
                     Dim percent As Decimal = arraySprST(cont).Value
-                    cell.Value = "$" + Decimal.Round(((bw * percent) / 100), 2).ToString()
-                    total = total + ((bw * percent) / 100)
+                    If cell.ColumnIndex <= 12 Or cell.ColumnIndex > 16 Then
+                        cell.Value = "$" + Decimal.Round(((bw * percent) / 100), 2).ToString()
+                        total = total + ((bw * percent) / 100)
+                    Else
+                        cell.Value = "$" + Decimal.Round(((bw * percent)), 2).ToString()
+                        total = total + ((bw * percent))
+                    End If
                     cont += 1
                 ElseIf cell.ColumnIndex = tblTaxesST.Columns("STTOTAL").Index Then
                     cell.Value = "$" + Decimal.Round(total, 2).ToString()
@@ -289,26 +316,26 @@ Public Class Taxes
             Dim CostCraftsman As Decimal = tx.QtyCraftsman * tx.BWCraftsman
             Dim CostApprentice As Decimal = tx.QtyApprentice * tx.BWApprentice
             Dim CostHellper As Decimal = tx.QtyHelper * tx.BWHelper
-            Dim totalCostAverge As Decimal = Decimal.Round(((CostApprentice + CostHellper + CostCraftsman + CostJourneyman + CostForeman) / (tx.QtyForeman + tx.QtyJourneyman + tx.QtyCraftsman + tx.QtyApprentice + tx.QtyHelper)), 2).ToString
+            Dim totalCostAverge As Decimal = (((CostApprentice + CostHellper + CostCraftsman + CostJourneyman + CostForeman) / (tx.QtyForeman + tx.QtyJourneyman + tx.QtyCraftsman + tx.QtyApprentice + tx.QtyHelper))).ToString("#,##0.00")
             tblAverage.Rows(0).Cells("EmployeeBW").Value = "$" + totalCostAverge.ToString()
-            tblAverage.Rows(0).Cells("FICAAV").Value = "$" + Decimal.Round(CDec((totalCostAverge * tx.FICA) / 100), 2).ToString()
-            tblAverage.Rows(0).Cells("FUIAV").Value = "$" + Decimal.Round(CDec((totalCostAverge * tx.FUI) / 100), 2).ToString()
-            tblAverage.Rows(0).Cells("SUIAV").Value = "$" + Decimal.Round(CDec((totalCostAverge * tx.SUI) / 100), 2).ToString()
-            tblAverage.Rows(0).Cells("WCAV").Value = "$" + Decimal.Round(CDec((totalCostAverge * tx.WC) / 100), 2).ToString()
-            tblAverage.Rows(0).Cells("GenLiabAV").Value = "$" + Decimal.Round(CDec((totalCostAverge * tx.GenLiab) / 100), 2).ToString()
-            tblAverage.Rows(0).Cells("UmbrAV").Value = "$" + Decimal.Round(CDec((totalCostAverge * tx.Umbr) / 100), 2).ToString()
-            tblAverage.Rows(0).Cells("PullutionAV").Value = "$" + Decimal.Round(CDec((totalCostAverge * tx.Pollution) / 100), 2).ToString()
-            tblAverage.Rows(0).Cells("HealtAV").Value = "$" + Decimal.Round(CDec((totalCostAverge * tx.Healt) / 100), 2).ToString()
-            tblAverage.Rows(0).Cells("FringeAV").Value = "$" + Decimal.Round(CDec((totalCostAverge * tx.Fringe) / 100), 2).ToString()
-            tblAverage.Rows(0).Cells("SmallAV").Value = "$" + Decimal.Round(CDec((totalCostAverge * tx.Small) / 100), 2).ToString()
-            tblAverage.Rows(0).Cells("PPEAV").Value = "$" + Decimal.Round(CDec((totalCostAverge * tx.PPE) / 100), 2).ToString()
-            tblAverage.Rows(0).Cells("ConsumableAV").Value = "$" + Decimal.Round(CDec((totalCostAverge * tx.Consumable) / 100), 2).ToString()
-            tblAverage.Rows(0).Cells("ScaffoldAV").Value = "$" + Decimal.Round(CDec((totalCostAverge * tx.Scaffold) / 100), 2).ToString()
-            tblAverage.Rows(0).Cells("YoyosAV").Value = "$" + Decimal.Round(CDec((totalCostAverge * tx.YoYos) / 100), 2).ToString()
-            tblAverage.Rows(0).Cells("MeshAV").Value = "$" + Decimal.Round(CDec((totalCostAverge * tx.Mesh) / 100), 2).ToString()
-            tblAverage.Rows(0).Cells("MiselaneosAV").Value = "$" + Decimal.Round(CDec((totalCostAverge * tx.Miselaneos) / 100), 2).ToString()
-            tblAverage.Rows(0).Cells("OverheadAV").Value = "$" + Decimal.Round(CDec((totalCostAverge * tx.Overhead) / 100), 2).ToString()
-            tblAverage.Rows(0).Cells("ProfitAV").Value = "$" + Decimal.Round(CDec((totalCostAverge * tx.Profit) / 100), 2).ToString()
+            tblAverage.Rows(0).Cells("FICAAV").Value = "$" + (CDec((totalCostAverge * tx.FICA) / 100)).ToString("#,##0.00")
+            tblAverage.Rows(0).Cells("FUIAV").Value = "$" + (CDec((totalCostAverge * tx.FUI) / 100)).ToString("#,##0.00")
+            tblAverage.Rows(0).Cells("SUIAV").Value = "$" + (CDec((totalCostAverge * tx.SUI) / 100)).ToString("#,##0.00")
+            tblAverage.Rows(0).Cells("WCAV").Value = "$" + (CDec((totalCostAverge * tx.WC) / 100)).ToString("#,##0.00")
+            tblAverage.Rows(0).Cells("GenLiabAV").Value = "$" + (CDec((totalCostAverge * tx.GenLiab) / 100)).ToString("#,##0.00")
+            tblAverage.Rows(0).Cells("UmbrAV").Value = "$" + (CDec((totalCostAverge * tx.Umbr) / 100)).ToString("#,##0.00")
+            tblAverage.Rows(0).Cells("PullutionAV").Value = "$" + (CDec((totalCostAverge * tx.Pollution) / 100)).ToString("#,##0.00")
+            tblAverage.Rows(0).Cells("HealtAV").Value = "$" + (CDec((totalCostAverge * tx.Healt) / 100)).ToString("#,##0.00")
+            tblAverage.Rows(0).Cells("FringeAV").Value = "$" + (CDec((totalCostAverge * tx.Fringe) / 100)).ToString("#,##0.00")
+            tblAverage.Rows(0).Cells("SmallAV").Value = "$" + (CDec((totalCostAverge * tx.Small) / 100)).ToString("#,##0.00")
+            tblAverage.Rows(0).Cells("PPEAV").Value = "$" + (CDec((totalCostAverge * tx.PPE) / 100)).ToString("#,##0.00")
+            tblAverage.Rows(0).Cells("ConsumableAV").Value = "$" + (CDec((totalCostAverge * tx.Consumable) / 100)).ToString("#,##0.00")
+            tblAverage.Rows(0).Cells("ScaffoldAV").Value = "$" + (CDec(tx.Scaffold)).ToString("#,##0.00")
+            tblAverage.Rows(0).Cells("YoyosAV").Value = "$" + (CDec(tx.YoYos)).ToString("#,##0.00")
+            tblAverage.Rows(0).Cells("MeshAV").Value = "$" + (CDec(tx.Mesh)).ToString("#,##0.00")
+            tblAverage.Rows(0).Cells("MiselaneosAV").Value = "$" + (CDec(tx.Miselaneos)).ToString("#,##0.00")
+            tblAverage.Rows(0).Cells("OverheadAV").Value = "$" + (CDec((totalCostAverge * tx.Overhead) / 100)).ToString("#,##0.00")
+            tblAverage.Rows(0).Cells("ProfitAV").Value = "$" + (CDec((totalCostAverge * tx.Profit) / 100)).ToString("#,##0.00")
             Dim STTotalAverge As Decimal = 0.00
             For Each cell As DataGridViewCell In tblAverage.Rows(0).Cells()
                 If Not cell.ColumnIndex = tblAverage.Columns("STTOTALAV").Index Then
@@ -317,7 +344,7 @@ Public Class Taxes
                     STTotalAverge = STTotalAverge + val
                 End If
             Next
-            tblAverage.Rows(0).Cells("STTOTALAV").Value = "$" + Decimal.Round(STTotalAverge, 2).ToString()
+            tblAverage.Rows(0).Cells("STTOTALAV").Value = "$" + (STTotalAverge).ToString("#,##0.00")
             Return True
         Catch ex As Exception
             Return False
@@ -338,7 +365,7 @@ Public Class Taxes
                     Case "sprFicaP"
                         Dim percent As Decimal = sprFicaP.Value
                         calcularPorcentajeP("FICAP", dineroF, dineroJ, dineroC, dineroA, dineroH, percent)
-                        calcularSTTotal()
+                        calcularPTTotal()
                         tx.FICAP = percent
                     Case "sprFUIP"
                         Dim percent As Decimal = sprFUIP.Value
@@ -379,6 +406,7 @@ Public Class Taxes
                         tx.QtyHelperP = sprQtyHelperP.Value
                 End Select
                 calcualarAvergePT()
+                calcularFilaWklyAV()
             Catch ex As Exception
 
             End Try
@@ -434,11 +462,11 @@ Public Class Taxes
             For Each cell As DataGridViewCell In tblTaxesPT.Rows(row).Cells()
                 If cell.ColumnIndex > 0 And Not cell.ColumnIndex = tblTaxesPT.Columns("PTTOTAL").Index Then
                     Dim percent As Decimal = arraySprPT(cont).Value
-                    cell.Value = "$" + Decimal.Round(((bw * percent) / 100), 2).ToString()
-                    total = total + ((bw * percent) / 100)
+                    cell.Value = "$" + ((bw * percent) / 100).ToString("#,##0.00")
+                    total = total + Math.Round(((bw * percent) / 100), 2)
                     cont += 1
                 ElseIf cell.ColumnIndex = tblTaxesPT.Columns("PTTOTAL").Index Then
-                    cell.Value = "$" + Decimal.Round(total, 2).ToString()
+                    cell.Value = "$" + total.ToString("#,##0.00")
                 End If
             Next
             Return True
@@ -472,6 +500,110 @@ Public Class Taxes
             Return False
         End Try
     End Function
+    Public Function calcularFilaWklyAV() As Boolean
+        Try
+            Dim valS As Decimal = 0.0
+            Dim valP As Decimal = 0.0
+            Dim sumRow0 As Decimal = 0.0
+            Dim sumRow1 As Decimal = 0.0
+            Dim rowST As DataGridViewRow = tblAverage.Rows(0)
+            Dim rowOT As DataGridViewRow = tblAverageP.Rows(0)
+
+            valS = CDec(rowST.Cells("EmployeeBW").Value.ToString.Replace("$", ""))
+            valP = CDec(rowOT.Cells("EmployeeBWP").Value.ToString.Replace("$", ""))
+            tblWkly.Rows(0).Cells("WklyBaseWage").Value = "$" + (((valS * sprHoursST.Value) + (valP * sprHoursOT.Value)) / sprHours.Value).ToString("#,##0.00")
+            tblWkly.Rows(1).Cells("WklyBaseWage").Value = "$" + ((valS * sprHoursST.Value) + (valP * sprHoursOT.Value)).ToString("#,##0.00")
+
+            valS = CDec(rowST.Cells("FICAAV").Value.ToString.Replace("$", ""))
+            valP = CDec(rowOT.Cells("FICAAVP").Value.ToString.Replace("$", ""))
+            tblWkly.Rows(0).Cells("FicaWkly").Value = "$" + (((valS * sprHoursST.Value) + (valP * sprHoursOT.Value)) / sprHours.Value).ToString("#,##0.00")
+            tblWkly.Rows(1).Cells("FicaWkly").Value = "$" + ((valS * sprHoursST.Value) + (valP * sprHoursOT.Value)).ToString("#,##0.00")
+
+            valS = CDec(rowST.Cells("FUIAV").Value.ToString.Replace("$", ""))
+            valP = CDec(rowOT.Cells("FUIAVP").Value.ToString.Replace("$", ""))
+            tblWkly.Rows(0).Cells("FUIWkly").Value = "$" + (((valS * sprHoursST.Value) + (valP * sprHoursOT.Value)) / sprHours.Value).ToString("#,##0.00")
+            tblWkly.Rows(1).Cells("FUIWkly").Value = "$" + ((valS * sprHoursST.Value) + (valP * sprHoursOT.Value)).ToString("#,##0.00")
+
+            valS = CDec(rowST.Cells("SUIAV").Value.ToString.Replace("$", ""))
+            valP = CDec(rowOT.Cells("SUIAVP").Value.ToString.Replace("$", ""))
+            tblWkly.Rows(0).Cells("SUIWkly").Value = "$" + (((valS * sprHoursST.Value) + (valP * sprHoursOT.Value)) / sprHours.Value).ToString("#,##0.00")
+            tblWkly.Rows(1).Cells("SUIWkly").Value = "$" + ((valS * sprHoursST.Value) + (valP * sprHoursOT.Value)).ToString("#,##0.00")
+
+            valS = CDec(rowST.Cells("WCAV").Value.ToString.Replace("$", ""))
+            tblWkly.Rows(0).Cells("WCWkly").Value = "$" + (((valS * sprHoursST.Value)) / sprHours.Value).ToString("#,##0.00")
+            tblWkly.Rows(1).Cells("WCWkly").Value = rowST.Cells("WCAV").Value
+
+            valS = CDec(rowST.Cells("GenLiabAV").Value.ToString.Replace("$", ""))
+            tblWkly.Rows(0).Cells("GenLiabWkly").Value = "$" + (((valS * sprHoursST.Value)) / sprHours.Value).ToString("#,##0.00")
+            tblWkly.Rows(1).Cells("GenLiabWkly").Value = rowST.Cells("GenLiabAV").Value
+
+            valS = CDec(rowST.Cells("UmbrAV").Value.ToString.Replace("$", ""))
+            tblWkly.Rows(0).Cells("UmbrWkly").Value = "$" + (((valS * sprHoursST.Value)) / sprHours.Value).ToString("#,##0.00")
+            tblWkly.Rows(1).Cells("UmbrWkly").Value = rowST.Cells("UmbrAV").Value
+
+            valS = CDec(rowST.Cells("PullutionAV").Value.ToString.Replace("$", ""))
+            tblWkly.Rows(0).Cells("PollutionWkly").Value = "$" + (((valS * sprHoursST.Value)) / sprHours.Value).ToString("#,##0.00")
+            tblWkly.Rows(1).Cells("PollutionWkly").Value = rowST.Cells("PullutionAV").Value
+
+            valS = CDec(rowST.Cells("HealtAV").Value.ToString.Replace("$", ""))
+            tblWkly.Rows(0).Cells("HealtWkly").Value = "$" + (((valS * sprHoursST.Value)) / sprHours.Value).ToString("#,##0.00")
+            tblWkly.Rows(1).Cells("HealtWkly").Value = rowST.Cells("HealtAV").Value
+
+            valS = CDec(rowST.Cells("FringeAV").Value.ToString.Replace("$", ""))
+            tblWkly.Rows(0).Cells("FringeBinWkly").Value = "$" + (((valS * sprHoursST.Value)) / sprHours.Value).ToString("#,##0.00")
+            tblWkly.Rows(1).Cells("FringeBinWkly").Value = rowST.Cells("FringeAV").Value
+
+            valS = CDec(rowST.Cells("SmallAV").Value.ToString.Replace("$", ""))
+            tblWkly.Rows(0).Cells("SmallTools").Value = "$" + (((valS * sprHoursST.Value)) / sprHours.Value).ToString("#,##0.00")
+            tblWkly.Rows(1).Cells("SmallTools").Value = rowST.Cells("SmallAV").Value
+
+            valS = CDec(rowST.Cells("PPEAV").Value.ToString.Replace("$", ""))
+            tblWkly.Rows(0).Cells("PPEWkly").Value = "$" + (((valS * sprHoursST.Value)) / sprHours.Value).ToString("#,##0.00")
+            tblWkly.Rows(1).Cells("PPEWkly").Value = rowST.Cells("PPEAV").Value
+
+            valS = CDec(rowST.Cells("ConsumableAV").Value.ToString.Replace("$", ""))
+            tblWkly.Rows(0).Cells("ConsumablesWkly").Value = "$" + (((valS * sprHoursST.Value)) / sprHours.Value).ToString("#,##0.00")
+            tblWkly.Rows(1).Cells("ConsumablesWkly").Value = rowST.Cells("ConsumableAV").Value
+
+            valS = CDec(rowST.Cells("ScaffoldAV").Value.ToString.Replace("$", ""))
+            tblWkly.Rows(0).Cells("ScaffoldRentalWkly").Value = "$" + (sprScaffold.Value * sprHours.Value).ToString("#,##0.00")
+            tblWkly.Rows(1).Cells("ScaffoldRentalWkly").Value = "$" + (sprScaffold.Value * sprHours.Value).ToString("#,##0.00")
+
+            valS = CDec(rowST.Cells("YoyosAV").Value.ToString.Replace("$", ""))
+            tblWkly.Rows(0).Cells("YoyosWkly").Value = "$" + (sprYoYos.Value * sprHours.Value).ToString("#,##0.00")
+            tblWkly.Rows(1).Cells("YoyosWkly").Value = "$" + (sprYoYos.Value * sprHours.Value).ToString("#,##0.00")
+
+            valS = CDec(rowST.Cells("MeshAV").Value.ToString.Replace("$", ""))
+            tblWkly.Rows(0).Cells("MeshWkly").Value = "$" + (sprMesh.Value * sprHours.Value).ToString("#,##0.00")
+            tblWkly.Rows(1).Cells("MeshWkly").Value = "$" + (sprMesh.Value * sprHours.Value).ToString("#,##0.00")
+
+            valS = CDec(rowST.Cells("MiselaneosAV").Value.ToString.Replace("$", ""))
+            tblWkly.Rows(0).Cells("MisWkly").Value = "$" + (sprMiselaneos.Value * sprHours.Value).ToString("#,##0.00")
+            tblWkly.Rows(1).Cells("MisWkly").Value = "$" + (sprMiselaneos.Value * sprHours.Value).ToString("#,##0.00")
+
+            For Each column As DataGridViewColumn In tblWkly.Columns
+                If Not column.Index = tblWkly.Columns("OverHeadWkly").Index Then
+                    sumRow0 = sumRow0 + tblWkly.Rows(0).Cells(column.Index).Value.ToString().Replace("$", "")
+                    sumRow1 = sumRow1 + tblWkly.Rows(1).Cells(column.Index).Value.ToString().Replace("$", "")
+                Else
+                    Exit For
+                End If
+            Next
+
+            tblWkly.Rows(0).Cells("OverHeadWkly").Value = "$" + ((sprOverhead.Value * sumRow0) / 100).ToString("#,##0.00")
+            tblWkly.Rows(1).Cells("OverHeadWkly").Value = "$" + (((sprOverhead.Value * sumRow0) / 100) * sprHours.Value).ToString("#,##0.00")
+
+            tblWkly.Rows(0).Cells("ProfitWkly").Value = "$" + ((sprProfit.Value * sumRow0) / 100).ToString("#,##0.00")
+            tblWkly.Rows(1).Cells("ProfitWkly").Value = "$" + (((sprProfit.Value * sumRow0) / 100) * sprHours.Value).ToString("#,##0.00")
+            sumRow0 = sumRow0 + CDec(tblWkly.Rows(0).Cells("OverHeadWkly").Value.ToString().Replace("$", "")) + CDec(tblWkly.Rows(0).Cells("ProfitWkly").Value.ToString().Replace("$", ""))
+            sumRow1 = sumRow1 + CDec(tblWkly.Rows(1).Cells("OverHeadWkly").Value.ToString().Replace("$", "")) + CDec(tblWkly.Rows(1).Cells("ProfitWkly").Value.ToString().Replace("$", ""))
+            tblWkly.Rows(0).Cells("TotalWkly").Value = "$" + (sumRow0).ToString("#,##0.00")
+            tblWkly.Rows(1).Cells("TotalWkly").Value = "$" + (sumRow1).ToString("#,##0.00")
+            Return True
+        Catch ex As Exception
+            Return False
+        End Try
+    End Function
     '##############################################################################################################################
     '################## CODIGO PARA EL DISENIO ####################################################################################
     '##############################################################################################################################
@@ -490,7 +622,8 @@ Public Class Taxes
         SendMessage(Me.Handle, &H112&, &HF012&, 0)
     End Sub
     Private Sub btnMaximize_Click(sender As Object, e As EventArgs) Handles btnMaximize.Click
-        WindowState = FormWindowState.Maximized
+        MaximizedBounds = Screen.FromHandle(Me.Handle).WorkingArea
+        Me.WindowState = FormWindowState.Maximized
         btnMaximize.Visible = False
         btnRestore.Visible = True
     End Sub
@@ -516,5 +649,30 @@ Public Class Taxes
         End If
     End Sub
 
+    Private Sub btnRefreshHours_Click(sender As Object, e As EventArgs) Handles btnRefreshHours.Click
+        Try
+            Dim horas = mtdTX.selectTotalHoursCount(lblTask.Text, dtpBeginDate.Value, dtpEndDate.Value)
+            sprHours.Value = horas(0)
+            sprHoursST.Value = horas(1)
+            sprHoursOT.Value = horas(2)
+        Catch ex As Exception
 
+        End Try
+    End Sub
+
+    Private Sub dtpBeginDate_ValueChanged(sender As Object, e As EventArgs) Handles dtpBeginDate.ValueChanged
+        Try
+            tx.BeginDaTe = dtpBeginDate.Value
+        Catch ex As Exception
+
+        End Try
+    End Sub
+
+    Private Sub dtpEndDate_ValueChanged(sender As Object, e As EventArgs) Handles dtpEndDate.ValueChanged
+        Try
+            tx.EndDate = dtpEndDate.Value
+        Catch ex As Exception
+
+        End Try
+    End Sub
 End Class

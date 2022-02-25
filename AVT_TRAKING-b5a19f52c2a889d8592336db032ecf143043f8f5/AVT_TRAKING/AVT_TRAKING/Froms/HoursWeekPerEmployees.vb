@@ -1085,7 +1085,9 @@ Public Class HoursWeekPerEmployees
                     Dim mtdEm As New MetodosEmployees
                     If mtdEm.updatePerDiem(lblEmployeeNumber.Text, chbPerDiem.Checked) Then
                         tblExpenses.Enabled = True
+                        Dim nameEmp As String = cmbEmpleados.SelectedItem.ToString()
                         mtdHPW.llenarEmpleadosCombo(cmbEmpleados, idsEmployees)
+                        cmbEmpleados.SelectedItem = cmbEmpleados.Items(cmbEmpleados.FindString(nameEmp))
                     Else
                         MsgBox("Error,Plese Try Again And Check That You Chose An Employee.")
                         tblExpenses.Enabled = False
@@ -1099,8 +1101,10 @@ Public Class HoursWeekPerEmployees
                 If DialogResult.OK = MessageBox.Show("Are you sure to changue the Per-Diem status for this Employe?", "Importan", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) Then
                     Dim mtdEm As New MetodosEmployees
                     If mtdEm.updatePerDiem(lblEmployeeNumber.Text, chbPerDiem.Checked) Then
+                        Dim nameEmp As String = cmbEmpleados.SelectedItem.ToString()
                         tblExpenses.Enabled = False
                         mtdHPW.llenarEmpleadosCombo(cmbEmpleados, idsEmployees)
+                        cmbEmpleados.SelectedItem = cmbEmpleados.Items(cmbEmpleados.FindString(nameEmp))
                     Else
                         MsgBox("Error,Plese Try Again And Check That You Chose An Employee.")
                         tblExpenses.Enabled = True

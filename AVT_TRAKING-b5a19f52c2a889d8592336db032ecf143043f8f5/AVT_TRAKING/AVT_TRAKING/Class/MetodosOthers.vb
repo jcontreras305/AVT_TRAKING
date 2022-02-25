@@ -123,7 +123,7 @@ Public Class MetodosOthers
             Dim cmd As New SqlCommand("select idExpCode, name from expcode", conn)
             Dim reader As SqlDataReader = cmd.ExecuteReader
             Dim listR As New List(Of String)
-
+            list.Items.Clear()
             While reader.Read()
                 Dim item As New ListViewItem()
                 item.Text = reader("idExpCode")
@@ -138,7 +138,6 @@ Public Class MetodosOthers
         End Try
     End Function
 
-
     Public Function addExpCode(ByVal number As String, ByVal name As String) As ListViewItem
         Try
             conectar()
@@ -146,17 +145,17 @@ Public Class MetodosOthers
             Dim item As New ListViewItem
             item.Text = number
             item.SubItems.Add(name)
-            If cmd.ExecuteNonQuery Then
+            If cmd.ExecuteNonQuery > 0 Then
                 Return item
             Else
                 Return Nothing
             End If
-            desconectar()
         Catch ex As Exception
             Return Nothing
+        Finally
+            desconectar()
         End Try
     End Function
-
     Public Function updateExpCode(ByVal ItemN As String, ByVal ItemV As String) As Boolean
         Try
             conectar()
@@ -437,7 +436,6 @@ Public Class MetodosOthers
         End Try
     End Function
 
-
     Public Function llenarCostCode(ByVal list As ListView) As List(Of String)
         Try
             conectar()
@@ -520,6 +518,111 @@ Public Class MetodosOthers
         End Try
     End Function
 
+    '=================================================================================================================
+    '=================================================================================================================
+    '=================================================================================================================
+    Public Function llenarComboMaterialClass(ByVal cmb As ComboBox) As Boolean
+        Try
+            conectar()
+            Dim cmd As New SqlCommand("select code, description from materialClass", conn)
+            Dim dr As SqlDataReader = cmd.ExecuteReader()
+            cmb.Items.Clear()
+            While dr.Read()
+                cmb.Items.Add(dr("code") + " " + dr("description"))
+            End While
+            dr.Close()
+            Return True
+        Catch ex As Exception
+            Return False
+        Finally
+            desconectar()
+        End Try
+    End Function
+    Public Function llenarListMatClasss(ByVal list As ListView) As List(Of String)
+        Try
+            conectar()
+            Dim cmd As New SqlCommand("select code,description from materialClass", conn)
+            Dim dr As SqlDataReader = cmd.ExecuteReader
+            Dim lstMC As New List(Of String)
+            list.Items.Clear()
+            While dr.Read()
+                Dim item As New ListViewItem()
+                item.Text = dr("code")
+                item.SubItems.Add(dr("description"))
+                list.Items.Add(item)
+                lstMC.Add(dr("code"))
+            End While
+            Return lstMC
+        Catch ex As Exception
+            Return Nothing
+        Finally
+            desconectar()
+        End Try
+    End Function
+    Public Function addMatClass(ByVal classM As String, ByVal desc As String) As ListViewItem
+        Try
+            conectar()
+            Dim cmd As New SqlCommand("insert into materialClass values ('" + classM + "','" + desc + "')", conn)
+            Dim item As New ListViewItem
+            item.Text = classM
+            item.SubItems.Add(desc)
+            If cmd.ExecuteNonQuery > 0 Then
+                Return item
+            Else
+                Return Nothing
+            End If
+        Catch ex As Exception
+            Return Nothing
+        Finally
+            desconectar()
+        End Try
+    End Function
+    Public Function updateMatClass(ByVal matclass As String, ByVal matDesc As String, ByVal lastMatClass As String) As Boolean
+        Try
+            conectar()
+            Dim cmd As New SqlCommand("update materialClass set code = '" + matclass + "' , description = '" + matDesc + "' where code = '" + lastMatClass + "'", conn)
+            If cmd.ExecuteNonQuery > 0 Then
+                Return True
+            Else
+                Return False
+            End If
+        Catch ex As Exception
+            Return False
+        Finally
+            desconectar()
+        End Try
+    End Function
+    Public Function deleteMatClass(ByVal matClass As String) As Boolean
+        Try
+            conectar()
+            Dim cmd As New SqlCommand("update material set code = NULL where code = '" + matClass + "'", conn)
+            Dim cmd1 As New SqlCommand("delete from materialClass where code = '" + matClass + "'", conn)
+            Dim tran As SqlTransaction
+            tran = conn.BeginTransaction()
+            cmd.Transaction = tran
+            cmd1.Transaction = tran
+            If cmd.ExecuteNonQuery() >= 0 Then
+                If cmd1.ExecuteNonQuery > 0 Then
+                    tran.Commit()
+                    Return True
+                Else
+                    tran.Rollback()
+                    Return False
+                End If
+            Else
+                tran.Rollback()
+                Return False
+            End If
+        Catch ex As Exception
+            Return False
+        Finally
+            desconectar()
+        End Try
+    End Function
+
+    '=================================================================================================================
+    '=================================================================================================================
+    '=================================================================================================================
     Public Function primerDiaDeLaSemana(ByVal fecha As Date) As Date
         While fecha.DayOfWeek <> DayOfWeek.Monday
             fecha.AddDays(-1)

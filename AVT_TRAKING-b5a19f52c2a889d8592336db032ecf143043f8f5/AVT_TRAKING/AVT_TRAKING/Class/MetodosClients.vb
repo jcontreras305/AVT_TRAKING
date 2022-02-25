@@ -182,7 +182,7 @@ ha.idHomeAdress, ha.avenue ,ha.number, ha.city ,ha.providence,ha.postalCode,phot
                 Dim dt As New DataTable
                 da.Fill(dt)
                 tabla.DataSource = dt
-                If tabla.Columns.Count <= 22 Then
+                If tabla.Columns.Count = 24 Then
                     Dim clmChb As New DataGridViewCheckBoxColumn
                     tabla.Columns("idClient").Visible = False
                     clmChb.Name = "Complete"
@@ -329,7 +329,9 @@ where "
     Public Sub buscarProyectosDeClientePorProyeto(ByVal tabla As DataGridView, ByVal consulta As String)
         Try
             conectar()
-            Dim cmd As New SqlCommand(consultaProyetosClientes + " 
+            Dim cmd As New SqlCommand(consultaProyetosClientes + "
+cln.numberClient like '" + consulta + "'
+Or
 cln.idClient Like '" + consulta + "' 
 Or
 jb.jobNo Like '" + consulta + "'

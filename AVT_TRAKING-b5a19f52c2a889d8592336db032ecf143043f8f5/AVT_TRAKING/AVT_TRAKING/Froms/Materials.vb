@@ -8,16 +8,18 @@ Public Class Materials
 
     Public idVedor, idMaterial, idDM, idOrder As String
     Dim dataVendor, listIdVendors As New List(Of String)
-    Dim dataMaterial(5) As String
+    Dim dataMaterial(6) As String
     Dim flagUpdateOrder As Boolean = False
     Public siSeleccionoMaterial As Boolean = False
 
 
     Dim mtdMaterial As MetodosMaterials = New MetodosMaterials()
+    Dim mtdOther As New MetodosOthers
     Private Sub Materials_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         txtNumeroMaterial.Enabled = False
         txtNumeroMaterial.Text = mtdMaterial.valueMaxMaterial
         txtNumeroVendedor.Enabled = False
+        mtdOther.llenarComboMaterialClass(cmbClassMaterial)
         txtNumeroVendedor.Text = mtdMaterial.valueMaxVendor
         btnUpdateVendor.Enabled = False
         btnUpdateMaterial.Enabled = False
@@ -81,15 +83,20 @@ Public Class Materials
 
     Private Sub btnSaveMaterial_Click(sender As Object, e As EventArgs) Handles btnSaveMaterial.Click
         Try
-            Dim dataMaterial(3) As String
+            Dim dataMaterial(4) As String
             dataMaterial(0) = txtNameMaterials.Text
             dataMaterial(1) = txtNumeroMaterial.Text
             dataMaterial(2) = listIdVendors(cmbVendedor.FindString(cmbVendedor.Text))
             dataMaterial(3) = If(chbEnableMaterial.Checked, "E", "D")
-
+            If cmbClassMaterial.SelectedItem IsNot Nothing Then
+                Dim array() As String = cmbClassMaterial.SelectedItem.ToString.Split(" ")
+                dataMaterial(4) = array(0)
+            Else
+                dataMaterial(4) = ""
+            End If
             mtdMaterial.insertarMaterial(dataMaterial)
         Catch ex As Exception
-            MsgBox("Something went wrong, check the data and try again")
+            MsgBox("Something went wrong, check the data and try again.")
         End Try
         limpiarCamposMaterail()
         mtdMaterial.selectMaterial(tblMaterial, If(txtFiltro.Text = "", "%", txtFiltro.Text))
@@ -100,12 +107,18 @@ Public Class Materials
 
     Private Sub btnUpdateMaterial_Click(sender As Object, e As EventArgs) Handles btnUpdateMaterial.Click
         Try
-            Dim dataMaterialnuevos(4) As String
+            Dim dataMaterialnuevos(5) As String
             dataMaterialnuevos(0) = txtNameMaterials.Text
             dataMaterialnuevos(1) = txtNumeroMaterial.Text
             dataMaterialnuevos(2) = listIdVendors(cmbVendedor.FindString(cmbVendedor.Text))
             dataMaterialnuevos(3) = If(chbEnableMaterial.Checked, "E", "A")
             dataMaterialnuevos(4) = idMaterial
+            If cmbClassMaterial.SelectedItem IsNot Nothing Then
+                Dim array() As String = cmbClassMaterial.SelectedItem.ToString.Split(" ")
+                dataMaterialnuevos(5) = array(0)
+            Else
+                dataMaterialnuevos(5) = ""
+            End If
             mtdMaterial.actualizarMaterial(dataMaterialnuevos, dataMaterial(1))
             mtdMaterial.selectMaterial(tblMaterial, txtFiltro.Text)
             limpiarCamposMaterail()
@@ -133,8 +146,10 @@ Public Class Materials
         txtNameMaterials.Text = dataMaterial(2)
         txtNumeroMaterial.Text = dataMaterial(3)
         chbEnableMaterial.Checked = If(dataMaterial(4).Equals("Enable"), True, False)
+        cmbVendedor.SelectedItem = cmbVendedor.Items(cmbVendedor.FindString(dataMaterial(5)))
         cmbVendedor.Text = dataMaterial(5)
-        cmbVendedor.SelectedIndex = cmbVendedor.FindString(dataMaterial(5))
+        cmbClassMaterial.SelectedItem = cmbClassMaterial.Items(cmbClassMaterial.FindString(dataMaterial(6)))
+        cmbClassMaterial.Text = dataMaterial(6)
         btnSaveMaterial.Enabled = False
         btnCancelMaterial.Enabled = True
         btnUpdateMaterial.Enabled = True
@@ -280,8 +295,10 @@ Public Class Materials
     Private Sub limpiarCamposMaterail()
         txtNumeroMaterial.Text = mtdMaterial.valueMaxMaterial()
         txtNameMaterials.Text = ""
-        cmbVendedor.SelectedItem = cmbVendedor.Items(0)
-        cmbVendedor.SelectedIndex = 0
+        cmbClassMaterial.SelectedItem = Nothing
+        cmbClassMaterial.Text = ""
+        cmbVendedor.SelectedItem = Nothing
+        cmbVendedor.Text = ""
     End Sub
 
     Private Sub btnCancelOrder_Click(sender As Object, e As EventArgs) Handles btnCancelOrder.Click
@@ -497,7 +514,9 @@ Public Class Materials
         End Try
     End Sub
 
+    Private Sub tblMaterial_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles tblMaterial.CellContentClick
 
+    End Sub
 
     Private Sub btnMaterialUploadExcel_Click(sender As Object, e As EventArgs) Handles btnMaterialUploadExcel.Click
         Try

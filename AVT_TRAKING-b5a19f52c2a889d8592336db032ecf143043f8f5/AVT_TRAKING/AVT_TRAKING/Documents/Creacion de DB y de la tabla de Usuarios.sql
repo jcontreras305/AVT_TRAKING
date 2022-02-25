@@ -479,9 +479,20 @@ create table material(
 	idMaterial varchar(36) primary key not null,
 	number int not null,
 	name varchar(50), 
-	estatus char (1) 
+	estatus char (1),
+	code varchar(20)
 )
 GO
+
+--##########################################################################################
+--##################  TABLA DE MATERIALCLASS ###############################################
+--##########################################################################################
+
+create table materialClass(
+	code varchar(20) primary key not null,
+	description varchar(50)
+)
+go
 
 --##########################################################################################
 --##################  TABLA DE MATERIAL HANDELING ##########################################
@@ -1212,6 +1223,15 @@ FOREIGN KEY (tag) REFERENCES scaffoldTraking(tag)
 GO
 
 --##########################################################################################
+--##################  FOREIG KEYS MATERIAL #################################################
+--##########################################################################################
+
+ALTER TABLE material WITH CHECK ADD CONSTRAINT fk_code_material
+FOREIGN KEY (code)  REFERENCES materialClass (code)
+ON UPDATE CASCADE
+GO
+
+--##########################################################################################
 --##################  FOREIG KEYS MATERIAL HANDELING #######################################
 --##########################################################################################
 
@@ -1501,7 +1521,7 @@ GO
 --========================================================================================================
 --===================  PROCEDIMIENTOS ALMACENDADOS =======================================================
 --========================================================================================================
-create proc sp_actualizaMaterial
+create proc [dbo].[sp_actualizaMaterial]
 @idMaterial varchar(36),
 @nombreN varchar(50),
 @numeroN int,
@@ -1509,6 +1529,7 @@ create proc sp_actualizaMaterial
 @statusN char(1),
 --datos viejos
 @idVendorV varchar(36),
+@class varchar(20),
 @msg varchar(100) out
 as 
 declare @vendor1 varchar(36)
@@ -1520,7 +1541,7 @@ begin
 			set @error = 0
 			if @idVendorN = @idVendorV
 			begin --solo cambian los datos de material 
-				update material set name = @nombreN , estatus = @statusN where idMaterial = @idMaterial 
+				update material set name = @nombreN , estatus = @statusN,code = iif(@class = '',NUll,@class) where idMaterial = @idMaterial 
 				set @msg = 'Successful.'
 			end
 			else --Cambio de Vendedor
@@ -1531,8 +1552,15 @@ begin
 					set @error = 1
 				end
 				else begin
-				update detalleMaterial set idVendor = @idVendorN where idMaterial = @idMaterial and idVendor = @idVendorV
-				update material set name = @nombreN , estatus = @statusN where idMaterial = @idMaterial 
+				if (select  COUNT(*) from material as ma right join detalleMaterial as dm  on ma.idMaterial = dm.idMaterial where ma.name = @nombreN)=0
+				begin 
+					insert into detalleMaterial values (NEWID(),'','','',0.0,'',0.0,@idMaterial,@idVendorN,'')
+				end
+				else
+				begin
+					update detalleMaterial set idVendor = @idVendorN where idMaterial = @idMaterial and idVendor = @idVendorV
+				end
+				update material set name = @nombreN , estatus = @statusN,code = iif(@class = '',NUll,@class) where idMaterial = @idMaterial 
 				set @msg = 'Successful.'
 				end
 			end
@@ -1732,6 +1760,7 @@ CREATE proc  [dbo].[sp_insert_Material]
 @numero int,
 @idVendor varchar(36),
 @status char(1),
+@class varchar(20),
 @msg varchar(100) out
 as
 declare @idMaterial varchar(36)
@@ -1744,7 +1773,7 @@ begin
 			set @idDM = NEWID()
 			if not @nombre = '' and not @idVendor = ''
 			begin 
-				insert into material values (@idMaterial,@numero,@nombre,@status)
+				insert into material values (@idMaterial,@numero,@nombre,@status,iif(@class='',Null,@class))
 				insert into detalleMaterial values (@idDM,'','','',0.0,'',0.0,@idMaterial,@idVendor,'')
 				insert into existences values (@idDM , 0.0)
 				set @msg= 'Successful'
@@ -2982,4 +3011,123 @@ go
 --FOREIGN KEY (jobNo) REFERENCES job(jobNo)
 --ON UPDATE CASCADE
 --ON DELETE CASCADE
+--go
+
+----##########################################################################################
+----##################  CAMBIOS DE LA TABLA PARA MATERIALES ##################################
+----##########################################################################################
+
+--alter table material 
+--add code varchar(20)
+--go
+
+
+--create table materialClass(
+--	code varchar(20) primary key not null,
+--	description varchar(50)
+--)
+--go
+
+
+--alter table material with check add constraint fk_code_material
+--foreign key (code)  references materialClass (code)
+--go
+
+
+--AALTER proc  [dbo].[sp_insert_Material]
+--@nombre varchar(50),
+--@numero int,
+--@idVendor varchar(36),
+--@status char(1),
+--@class varchar(20),
+--@msg varchar(100) out
+--as
+--declare @idMaterial varchar(36)
+--declare @idDM varchar(36)
+--declare @error int
+--begin
+--	begin tran
+--		begin try	 
+--			set @idMaterial = NEWID()
+--			set @idDM = NEWID()
+--			if not @nombre = '' and not @idVendor = ''
+--			begin 
+--				insert into material values (@idMaterial,@numero,@nombre,@status,iif(@class='',Null,@class))
+--				insert into detalleMaterial values (@idDM,'','','',0.0,'',0.0,@idMaterial,@idVendor,'')
+--				insert into existences values (@idDM , 0.0)
+--				set @msg= 'Successful'
+--			end
+--			else 
+--			begin 
+--				set @error = 1
+--				goto solveProblem
+--			end
+--		end try
+--		begin catch
+--			goto solveProblem
+--		end catch
+--	commit tran
+--	solveProblem:
+--	if @error <> 0 
+--	begin 
+--		rollback tran
+--		set @msg = concat('Is problably that the Material ',@nombre,' have been inserted, or try to changue the Vendor')
+--	end  
+--end
+--go
+
+--alter proc [dbo].[sp_actualizaMaterial]
+--@idMaterial varchar(36),
+--@nombreN varchar(50),
+--@numeroN int,
+--@idVendorN varchar(36),
+--@statusN char(1),
+----datos viejos
+--@idVendorV varchar(36),
+--@class varchar(20),
+--@msg varchar(100) out
+--as 
+--declare @vendor1 varchar(36)
+--declare @vendor2 varchar(36)
+--declare @error int
+--begin
+--	begin tran 
+--		begin try 
+--			set @error = 0
+--			if @idVendorN = @idVendorV
+--			begin --solo cambian los datos de material 
+--				update material set name = @nombreN , estatus = @statusN,code = iif(@class = '',NUll,@class) where idMaterial = @idMaterial 
+--				set @msg = 'Successful.'
+--			end
+--			else --Cambio de Vendedor
+--			begin
+--				set @Vendor2 = (select  top 1 dm.idVendor from material as ma right join detalleMaterial as dm  on ma.idMaterial = dm.idMaterial where ma.name = @nombreN) 
+--				if @vendor2 = @idVendorN begin
+--					set @msg = 'Rigth now exists a material whit the same Vendor.'
+--					set @error = 1
+--				end
+--				else begin
+--				if (select  COUNT(*) from material as ma right join detalleMaterial as dm  on ma.idMaterial = dm.idMaterial where ma.name = @nombreN)=0
+--				begin 
+--					insert into detalleMaterial values (NEWID(),'','','',0.0,'',0.0,@idMaterial,@idVendorN,'')
+--				end
+--				else
+--				begin
+--					update detalleMaterial set idVendor = @idVendorN where idMaterial = @idMaterial and idVendor = @idVendorV
+--				end
+--				update material set name = @nombreN , estatus = @statusN,code = iif(@class = '',NUll,@class) where idMaterial = @idMaterial 
+--				set @msg = 'Successful.'
+--				end
+--			end
+--		end try
+--		begin catch
+--			goto solveproblem
+--		end catch
+--	commit tran 
+--	solveproblem:
+--	if @error <> 0 
+--	begin 
+--		rollback tran
+--	end 
+--end
 --go

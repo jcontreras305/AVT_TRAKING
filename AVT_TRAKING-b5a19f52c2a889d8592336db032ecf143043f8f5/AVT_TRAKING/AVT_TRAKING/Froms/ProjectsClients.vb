@@ -387,7 +387,7 @@ Public Class ProjectsClients
                 taxes.idTask = taskTaxes
                 taxes.idWO = idWOAuxTaxes
                 taxes.job = jobNum
-                taxes.totalHoursJob = calcularTotalHoursJob(jobNum)
+
                 taxes.Show()
             Else
                 MessageBox.Show("Please select a Job Number.", "Important", MessageBoxButtons.OK, MessageBoxIcon.Information)
@@ -397,19 +397,20 @@ Public Class ProjectsClients
         End Try
     End Sub
 
-    Private Function calcularTotalHoursJob(ByVal job As String) As Decimal
-        Try
-            Dim THours As Decimal = 0.0
-            For Each row As DataGridViewRow In tblProjectClients.Rows 'el job esta el la columna 12 de la consulta
-                If job = row.Cells("jobNo").Value.ToString() Then
-                    THours = THours + CDec(row.Cells("Total Hours ST").Value) + CDec(row.Cells("Total Hours OT").Value) + CDec(row.Cells("Total Hours 3").Value)
-                End If
-            Next
-            Return THours
-        Catch ex As Exception
-            Return 0
-        End Try
-    End Function
+    'Private Function calcularTotalHoursJob(ByVal job As String) As Decimal()
+    '    Try
+    '        Dim THours As Decimal = 0.0
+    '        Dim THoursST As Decimal = 0.0
+    '        Dim THoursOT As Decimal = 0.0
+    '        Dim mtdTx As New MetodosTaxes
+    '        Dim horas = mtdTx.selectTotalHoursCount()
+
+    '        Dim array() As Decimal = {THours, THoursST, THoursOT}
+    '        Return array
+    '    Catch ex As Exception
+    '        Return {0.0, 0.0, 0.0}
+    '    End Try
+    'End Function
     Private Sub OpenFormPanel(Of Miform As {Form, New})()
         Dim FormPanel As Form
         FormPanel = PanelChildForm.Controls.OfType(Of Miform)().FirstOrDefault()

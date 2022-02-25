@@ -93,6 +93,7 @@ Public Class MetodosMaterials
         cmd.Parameters.Add("@numero", SqlDbType.Int).Value = datos(1)
         cmd.Parameters.Add("@idVendor", SqlDbType.VarChar, 50).Value = datos(2)
         cmd.Parameters.Add("@status", SqlDbType.Char, 1).Value = datos(3)
+        cmd.Parameters.Add("@class", SqlDbType.VarChar, 20).Value = datos(4)
         cmd.Parameters.Add("@msg", SqlDbType.VarChar, 100)
         cmd.Parameters("@msg").Direction = ParameterDirection.Output
         If cmd.ExecuteNonQuery Then
@@ -156,6 +157,7 @@ Public Class MetodosMaterials
         cmd.Parameters.Add("@idVendorN", SqlDbType.VarChar, 36).Value = newdatos(2)
         cmd.Parameters.Add("@statusN", SqlDbType.Char, 1).Value = newdatos(3)
         cmd.Parameters.Add("@idVendorV", SqlDbType.VarChar, 36).Value = idVendorOld
+        cmd.Parameters.Add("@class", SqlDbType.VarChar, 20).Value = newdatos(5)
         cmd.Parameters.Add("@msg", SqlDbType.VarChar, 100)
         cmd.Parameters("@msg").Direction = ParameterDirection.Output
         If cmd.ExecuteNonQuery Then
@@ -201,13 +203,15 @@ or v.estatus like concat('%', '" + consulta + "','%')", conn)
         cmd.Connection = conn
         Try
             If consulta.Length = 0 Then
-                cmd.CommandText = "select ma.idMaterial , vd.idVendor , ma.name As Name , ma.number as Number, case ma.estatus  when 'E' then 'Enable' when 'D' then 'Disable' else 'Disanle'end as 'Status', vd.name as Vendor   
-from material as ma inner join detalleMaterial as dm on ma.idMaterial = dm.idMaterial 
-left join vendor as vd on vd.idVendor = dm.idVendor"
+                cmd.CommandText = "select ma.idMaterial , vd.idVendor , ma.name As Name , ma.number as Number, case ma.estatus  when 'E' then 'Enable' when 'D' then 'Disable' else 'Disable'end as 'Status', vd.name as Vendor,isnull(mc.code,'') As 'Class'
+from material as ma left join detalleMaterial as dm on ma.idMaterial = dm.idMaterial 
+left join vendor as vd on vd.idVendor = dm.idVendor
+left join materialClass as mc on mc.code = ma.code"
             Else
-                cmd.CommandText = "select ma.idMaterial , vd.idVendor , ma.name As Name , ma.number as Number, case ma.estatus  when 'E' then 'Enable' when 'D' then 'Disable' else 'Disanle'end as 'Status', vd.name as Vendor   
-from material as ma inner join detalleMaterial as dm on ma.idMaterial = dm.idMaterial 
-left join vendor as vd on vd.idVendor = dm.idVendor 
+                cmd.CommandText = "select ma.idMaterial , vd.idVendor , ma.name As Name , ma.number as Number, case ma.estatus  when 'E' then 'Enable' when 'D' then 'Disable' else 'Disable'end as 'Status', vd.name as Vendor,isnull(mc.code,'') As 'Class'
+from material as ma left join detalleMaterial as dm on ma.idMaterial = dm.idMaterial 
+left join vendor as vd on vd.idVendor = dm.idVendor
+left join materialClass as mc on mc.code = ma.code
 where ma.name like concat('%','" + consulta + "','%')
 or ma.number like concat('%','" + consulta + "','%')
 or vd.name like concat('%','" + consulta + "','%')"

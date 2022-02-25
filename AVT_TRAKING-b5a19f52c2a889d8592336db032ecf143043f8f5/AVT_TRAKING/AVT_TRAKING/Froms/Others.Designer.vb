@@ -32,6 +32,14 @@ Partial Class Others
         Me.TabPage1 = New System.Windows.Forms.TabPage()
         Me.TableLayoutPanel9 = New System.Windows.Forms.TableLayoutPanel()
         Me.Panel17 = New System.Windows.Forms.Panel()
+        Me.GroupBox7 = New System.Windows.Forms.GroupBox()
+        Me.btnAddMatClass = New System.Windows.Forms.Button()
+        Me.txtMatClass = New System.Windows.Forms.TextBox()
+        Me.lstMatClass = New System.Windows.Forms.ListView()
+        Me.ColumnHeader4 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ColumnHeader5 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.btnDeleteMatClass = New System.Windows.Forms.Button()
+        Me.btnUpdateMatClass = New System.Windows.Forms.Button()
         Me.Panel16 = New System.Windows.Forms.Panel()
         Me.GroupBox4 = New System.Windows.Forms.GroupBox()
         Me.btnAddCostDristribution = New System.Windows.Forms.Button()
@@ -126,6 +134,7 @@ Partial Class Others
         Me.PictureBox2 = New System.Windows.Forms.PictureBox()
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.Label7 = New System.Windows.Forms.Label()
+        Me.txtMatDesc = New System.Windows.Forms.TextBox()
         btnDeleteTypeEmployee = New System.Windows.Forms.Button()
         Me.Panel1.SuspendLayout()
         Me.TableLayoutPanel10.SuspendLayout()
@@ -134,6 +143,8 @@ Partial Class Others
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
         Me.TableLayoutPanel9.SuspendLayout()
+        Me.Panel17.SuspendLayout()
+        Me.GroupBox7.SuspendLayout()
         Me.Panel16.SuspendLayout()
         Me.GroupBox4.SuspendLayout()
         Me.Panel15.SuspendLayout()
@@ -293,11 +304,113 @@ Partial Class Others
         '
         'Panel17
         '
+        Me.Panel17.Controls.Add(Me.GroupBox7)
         Me.Panel17.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel17.Location = New System.Drawing.Point(657, 226)
         Me.Panel17.Name = "Panel17"
         Me.Panel17.Size = New System.Drawing.Size(285, 217)
         Me.Panel17.TabIndex = 5
+        '
+        'GroupBox7
+        '
+        Me.GroupBox7.BackColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(59, Byte), Integer), CType(CType(115, Byte), Integer))
+        Me.GroupBox7.Controls.Add(Me.txtMatDesc)
+        Me.GroupBox7.Controls.Add(Me.btnAddMatClass)
+        Me.GroupBox7.Controls.Add(Me.txtMatClass)
+        Me.GroupBox7.Controls.Add(Me.lstMatClass)
+        Me.GroupBox7.Controls.Add(Me.btnDeleteMatClass)
+        Me.GroupBox7.Controls.Add(Me.btnUpdateMatClass)
+        Me.GroupBox7.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.GroupBox7.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.GroupBox7.Location = New System.Drawing.Point(0, 0)
+        Me.GroupBox7.Name = "GroupBox7"
+        Me.GroupBox7.Size = New System.Drawing.Size(285, 217)
+        Me.GroupBox7.TabIndex = 4
+        Me.GroupBox7.TabStop = False
+        Me.GroupBox7.Text = "Material Class"
+        '
+        'btnAddMatClass
+        '
+        Me.btnAddMatClass.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnAddMatClass.FlatAppearance.BorderSize = 0
+        Me.btnAddMatClass.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(41, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(185, Byte), Integer))
+        Me.btnAddMatClass.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnAddMatClass.Image = Global.AVT_TRAKING.My.Resources.Resources.add
+        Me.btnAddMatClass.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnAddMatClass.Location = New System.Drawing.Point(194, 79)
+        Me.btnAddMatClass.Name = "btnAddMatClass"
+        Me.btnAddMatClass.Size = New System.Drawing.Size(75, 34)
+        Me.btnAddMatClass.TabIndex = 6
+        Me.btnAddMatClass.Text = "Add"
+        Me.btnAddMatClass.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.btnAddMatClass.UseVisualStyleBackColor = True
+        '
+        'txtMatClass
+        '
+        Me.txtMatClass.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.txtMatClass.Location = New System.Drawing.Point(191, 16)
+        Me.txtMatClass.Name = "txtMatClass"
+        Me.txtMatClass.Size = New System.Drawing.Size(88, 23)
+        Me.txtMatClass.TabIndex = 5
+        '
+        'lstMatClass
+        '
+        Me.lstMatClass.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.lstMatClass.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader4, Me.ColumnHeader5})
+        Me.lstMatClass.FullRowSelect = True
+        Me.lstMatClass.HideSelection = False
+        Me.lstMatClass.Location = New System.Drawing.Point(6, 16)
+        Me.lstMatClass.MultiSelect = False
+        Me.lstMatClass.Name = "lstMatClass"
+        Me.lstMatClass.Size = New System.Drawing.Size(179, 195)
+        Me.lstMatClass.TabIndex = 3
+        Me.lstMatClass.UseCompatibleStateImageBehavior = False
+        Me.lstMatClass.View = System.Windows.Forms.View.Details
+        '
+        'ColumnHeader4
+        '
+        Me.ColumnHeader4.Text = "Class"
+        Me.ColumnHeader4.Width = 80
+        '
+        'ColumnHeader5
+        '
+        Me.ColumnHeader5.Text = "Description"
+        Me.ColumnHeader5.Width = 100
+        '
+        'btnDeleteMatClass
+        '
+        Me.btnDeleteMatClass.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnDeleteMatClass.FlatAppearance.BorderSize = 0
+        Me.btnDeleteMatClass.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(41, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(185, Byte), Integer))
+        Me.btnDeleteMatClass.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnDeleteMatClass.Image = Global.AVT_TRAKING.My.Resources.Resources.delete
+        Me.btnDeleteMatClass.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnDeleteMatClass.Location = New System.Drawing.Point(194, 178)
+        Me.btnDeleteMatClass.Name = "btnDeleteMatClass"
+        Me.btnDeleteMatClass.Size = New System.Drawing.Size(85, 33)
+        Me.btnDeleteMatClass.TabIndex = 2
+        Me.btnDeleteMatClass.Text = "Delete"
+        Me.btnDeleteMatClass.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.btnDeleteMatClass.UseVisualStyleBackColor = True
+        '
+        'btnUpdateMatClass
+        '
+        Me.btnUpdateMatClass.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnUpdateMatClass.FlatAppearance.BorderSize = 0
+        Me.btnUpdateMatClass.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(41, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(185, Byte), Integer))
+        Me.btnUpdateMatClass.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnUpdateMatClass.Image = Global.AVT_TRAKING.My.Resources.Resources.update
+        Me.btnUpdateMatClass.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnUpdateMatClass.Location = New System.Drawing.Point(191, 140)
+        Me.btnUpdateMatClass.Name = "btnUpdateMatClass"
+        Me.btnUpdateMatClass.Size = New System.Drawing.Size(88, 32)
+        Me.btnUpdateMatClass.TabIndex = 1
+        Me.btnUpdateMatClass.Text = "Update"
+        Me.btnUpdateMatClass.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.btnUpdateMatClass.UseVisualStyleBackColor = True
         '
         'Panel16
         '
@@ -1297,7 +1410,7 @@ Partial Class Others
         Me.TableLayoutPanel7.ColumnCount = 3
         Me.TableLayoutPanel7.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 35.26316!))
         Me.TableLayoutPanel7.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 64.73684!))
-        Me.TableLayoutPanel7.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 197.0!))
+        Me.TableLayoutPanel7.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 199.0!))
         Me.TableLayoutPanel7.Controls.Add(Me.Panel10, 0, 0)
         Me.TableLayoutPanel7.Controls.Add(Me.Panel11, 1, 0)
         Me.TableLayoutPanel7.Dock = System.Windows.Forms.DockStyle.Fill
@@ -1315,7 +1428,7 @@ Partial Class Others
         Me.Panel10.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel10.Location = New System.Drawing.Point(3, 3)
         Me.Panel10.Name = "Panel10"
-        Me.Panel10.Size = New System.Drawing.Size(257, 48)
+        Me.Panel10.Size = New System.Drawing.Size(256, 48)
         Me.Panel10.TabIndex = 0
         '
         'Label5
@@ -1341,9 +1454,9 @@ Partial Class Others
         Me.Panel11.Controls.Add(Me.Label6)
         Me.Panel11.Controls.Add(Me.txtPathFile)
         Me.Panel11.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel11.Location = New System.Drawing.Point(266, 3)
+        Me.Panel11.Location = New System.Drawing.Point(265, 3)
         Me.Panel11.Name = "Panel11"
-        Me.Panel11.Size = New System.Drawing.Size(477, 48)
+        Me.Panel11.Size = New System.Drawing.Size(476, 48)
         Me.Panel11.TabIndex = 1
         '
         'btnFindImage
@@ -1418,6 +1531,15 @@ Partial Class Others
         Me.Label7.TabIndex = 0
         Me.Label7.Text = "Others"
         '
+        'txtMatDesc
+        '
+        Me.txtMatDesc.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.txtMatDesc.Location = New System.Drawing.Point(191, 45)
+        Me.txtMatDesc.Name = "txtMatDesc"
+        Me.txtMatDesc.Size = New System.Drawing.Size(88, 23)
+        Me.txtMatDesc.TabIndex = 7
+        '
         'Others
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1435,6 +1557,9 @@ Partial Class Others
         Me.TabControl1.ResumeLayout(False)
         Me.TabPage1.ResumeLayout(False)
         Me.TableLayoutPanel9.ResumeLayout(False)
+        Me.Panel17.ResumeLayout(False)
+        Me.GroupBox7.ResumeLayout(False)
+        Me.GroupBox7.PerformLayout()
         Me.Panel16.ResumeLayout(False)
         Me.GroupBox4.ResumeLayout(False)
         Me.GroupBox4.PerformLayout()
@@ -1591,4 +1716,13 @@ Partial Class Others
     Friend WithEvents TableLayoutPanel10 As TableLayoutPanel
     Friend WithEvents Panel18 As Panel
     Friend WithEvents Panel19 As Panel
+    Friend WithEvents GroupBox7 As GroupBox
+    Friend WithEvents btnAddMatClass As Button
+    Friend WithEvents txtMatClass As TextBox
+    Friend WithEvents lstMatClass As ListView
+    Public WithEvents ColumnHeader4 As ColumnHeader
+    Public WithEvents ColumnHeader5 As ColumnHeader
+    Friend WithEvents btnDeleteMatClass As Button
+    Friend WithEvents btnUpdateMatClass As Button
+    Friend WithEvents txtMatDesc As TextBox
 End Class

@@ -3,6 +3,7 @@
     Dim _FICA, _FUI, _SUI, _WC, _GenLiab, _Umbr, _Pollution, _Healt, _Fringe, _Small, _PPE, _Consumable, _Scaffold, _YoYos, _Mesh, _Miselaneos, _Overhead, _Profit, _TotalHours As Double
     Dim _BWForeman, _BWJourneyman, _BWCraftsman, _BWApprentice, _BWHelper As Double
     Dim _QtyForeman, _QtyJourneyman, _QtyCraftsman, _QtyApprentice, _QtyHelper As Integer
+    Dim _BeginDate, _EndDate As Date
 
     Dim _FICAP, _FUIP, _SUIP As Double
     Dim _BWForemanP, _BWJourneymanP, _BWCraftsmanP, _BWApprenticeP, _BWHelperP, _TotalHoursP As Double
@@ -294,7 +295,6 @@
             _Overhead = Overhead
         End Set
     End Property
-
     Public Property Profit() As Double
         Get
             If _Profit = Nothing Then
@@ -307,7 +307,6 @@
             _Profit = Profit
         End Set
     End Property
-
     Public Property TotalHours() As Double
         Get
             If _TotalHours = Nothing Then
@@ -438,6 +437,32 @@
         End Get
         Set(ByVal QtyHelper As Integer)
             _QtyHelper = QtyHelper
+        End Set
+    End Property
+    Public Property BeginDaTe() As Date
+        Get
+            If _BeginDate = Nothing Then
+                _BeginDate = System.DateTime.Today
+                Return _BeginDate
+            Else
+                Return _BeginDate
+            End If
+        End Get
+        Set(ByVal BeginDate As Date)
+            _BeginDate = BeginDate
+        End Set
+    End Property
+    Public Property EndDate() As Date
+        Get
+            If _EndDate = Nothing Then
+                _EndDate = System.DateTime.Today
+                Return _EndDate
+            Else
+                Return _EndDate
+            End If
+        End Get
+        Set(ByVal EndDate As Date)
+            _EndDate = EndDate
         End Set
     End Property
     Public Property FICAP() As Double

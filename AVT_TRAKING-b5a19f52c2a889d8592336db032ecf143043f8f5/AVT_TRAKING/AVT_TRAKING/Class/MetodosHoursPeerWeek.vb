@@ -7,6 +7,7 @@ Public Class MetodosHoursPeerWeek
         Try
             conectar()
             Dim cmd As New SqlCommand("select idEmployee, CONCAT(firstName,' ',middleName,' ',lastName) , photo as 'Photo', SAPNumber, numberEmploye , perdiem from employees where estatus = 'E' ", conn)
+            tabla.Rows.Clear()
             If cmd.ExecuteNonQuery Then
                 Dim da As New SqlDataAdapter(cmd)
                 da.Fill(tabla)

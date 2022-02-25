@@ -10,6 +10,7 @@ Public Class Others
         mtdOthers.llenarListWorkTMLump(lstWTMLS)
         mtdOthers.llenarCostDistrinbution(lstCostDistribution)
         mtdOthers.llenarCostCode(lstCostCode)
+        mtdOthers.llenarListMatClasss(lstMatClass)
         mtdOthers.llenarImageClientTable(tblImage)
         btnAddImg.Enabled = False
     End Sub
@@ -355,5 +356,90 @@ Public Class Others
 
     Private Sub TitleBar_Paint(sender As Object, e As PaintEventArgs) Handles TitleBar.Paint
 
+    End Sub
+
+    Private Sub btnAddMatClass_Click(sender As Object, e As EventArgs) Handles btnAddMatClass.Click
+        Dim classM As String = txtMatClass.Text
+        Dim desc As String = txtMatDesc.Text
+        If Not classM = "" Then
+            Dim newitem As New ListViewItem
+            Dim flag As Boolean = True
+            For Each item As ListViewItem In lstMatClass.Items
+                If item.Text = classM Then
+                    flag = False
+                    Exit For
+                Else
+                    flag = True
+                End If
+            Next
+            If flag Then
+                Dim item = mtdOthers.addMatClass(classM, desc)
+                If item IsNot Nothing Then
+                    lstMatClass.Items.Add(item)
+                    txtMatClass.Text = ""
+                    txtMatDesc.Text = ""
+                Else
+                    MsgBox("Error, try again.")
+                End If
+            Else
+                MessageBox.Show("These Class '" + classM + "' was inserted, try to write a new one.", "Important", MessageBoxButtons.OK, MessageBoxIcon.Information)
+            End If
+        Else
+            MessageBox.Show("Please Write a new Class", "Important", MessageBoxButtons.OK, MessageBoxIcon.Information)
+        End If
+    End Sub
+    Dim lastMatClas As String = ""
+    Private Sub btnUpdateMatClass_Click(sender As Object, e As EventArgs) Handles btnUpdateMatClass.Click
+        If btnUpdateMatClass.Text = "Update" Then
+            If lstMatClass.SelectedItems IsNot Nothing Then
+                lastMatClas = lstMatClass.SelectedItems(0).Text
+                Dim item As ListViewItem = lstMatClass.SelectedItems(0)
+                txtMatClass.Text = item.Text
+                txtMatDesc.Text = item.SubItems(1).Text
+                btnUpdateMatClass.Text = "Save"
+            Else
+                MessageBox.Show("Please Select a item from the list.", "Important", MessageBoxButtons.OK, MessageBoxIcon.Information)
+            End If
+        ElseIf btnUpdateMatClass.Text = "Save" Then
+            Dim flag As Boolean = True
+            For Each item As ListViewItem In lstMatClass.Items
+                If txtMatClass.Text = item.Text Then
+                    If lastMatClas = txtMatClass.Text Then 'es el mismo
+                        flag = True
+                        Exit For
+                    Else 'ya existe otro
+                        flag = False
+                        Exit For
+                    End If
+                End If
+            Next
+            If flag Then
+                If mtdOthers.updateMatClass(txtMatClass.Text, txtMatDesc.Text, lastMatClas) Then
+                    mtdOthers.llenarListMatClasss(lstMatClass)
+                    txtMatClass.Text = ""
+                    txtMatDesc.Text = ""
+                    btnUpdateMatClass.Text = "Update"
+                Else
+                    MessageBox.Show("Error try again.", "Important", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                End If
+            Else
+                MessageBox.Show("Please Write a diferent Class.", "Important", MessageBoxButtons.OK, MessageBoxIcon.Information)
+            End If
+        End If
+    End Sub
+
+    Private Sub btnDeleteMatClass_Click(sender As Object, e As EventArgs) Handles btnDeleteMatClass.Click
+        If lstMatClass.SelectedItems IsNot Nothing Then
+            If DialogResult.OK = MessageBox.Show("Are you sure you want Delete this Class '" + lstMatClass.SelectedItems(0).Text + "'?, the Materials with this Code will be null in their Class.", "Important", MessageBoxButtons.OKCancel, MessageBoxIcon.Information) Then
+                If mtdOthers.deleteMatClass(lstMatClass.SelectedItems(0).Text) Then
+                    mtdOthers.llenarListMatClasss(lstMatClass)
+                    MsgBox("Succesfull.")
+                Else
+                    MsgBox("Error.")
+                End If
+            End If
+        Else
+            MessageBox.Show("Please select a Item from the list.", "Important", MessageBoxButtons.OK, MessageBoxIcon.Information)
+        End If
     End Sub
 End Class
