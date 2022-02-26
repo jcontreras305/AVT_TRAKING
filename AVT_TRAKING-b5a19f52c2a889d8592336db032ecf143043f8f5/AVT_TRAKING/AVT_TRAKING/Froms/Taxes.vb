@@ -531,39 +531,39 @@ Public Class Taxes
 
             valS = CDec(rowST.Cells("WCAV").Value.ToString.Replace("$", ""))
             tblWkly.Rows(0).Cells("WCWkly").Value = "$" + (((valS * sprHoursST.Value)) / sprHours.Value).ToString("#,##0.00")
-            tblWkly.Rows(1).Cells("WCWkly").Value = rowST.Cells("WCAV").Value
+            tblWkly.Rows(1).Cells("WCWkly").Value = "$" + (valS * sprHours.Value).ToString("#,##0.00")
 
             valS = CDec(rowST.Cells("GenLiabAV").Value.ToString.Replace("$", ""))
             tblWkly.Rows(0).Cells("GenLiabWkly").Value = "$" + (((valS * sprHoursST.Value)) / sprHours.Value).ToString("#,##0.00")
-            tblWkly.Rows(1).Cells("GenLiabWkly").Value = rowST.Cells("GenLiabAV").Value
+            tblWkly.Rows(1).Cells("GenLiabWkly").Value = "$" + (valS * sprHours.Value).ToString("#,##0.00")
 
             valS = CDec(rowST.Cells("UmbrAV").Value.ToString.Replace("$", ""))
             tblWkly.Rows(0).Cells("UmbrWkly").Value = "$" + (((valS * sprHoursST.Value)) / sprHours.Value).ToString("#,##0.00")
-            tblWkly.Rows(1).Cells("UmbrWkly").Value = rowST.Cells("UmbrAV").Value
+            tblWkly.Rows(1).Cells("UmbrWkly").Value = "$" + (valS * sprHours.Value).ToString("#,##0.00")
 
             valS = CDec(rowST.Cells("PullutionAV").Value.ToString.Replace("$", ""))
             tblWkly.Rows(0).Cells("PollutionWkly").Value = "$" + (((valS * sprHoursST.Value)) / sprHours.Value).ToString("#,##0.00")
-            tblWkly.Rows(1).Cells("PollutionWkly").Value = rowST.Cells("PullutionAV").Value
+            tblWkly.Rows(1).Cells("PollutionWkly").Value = "$" + (valS * sprHours.Value).ToString("#,##0.00")
 
             valS = CDec(rowST.Cells("HealtAV").Value.ToString.Replace("$", ""))
             tblWkly.Rows(0).Cells("HealtWkly").Value = "$" + (((valS * sprHoursST.Value)) / sprHours.Value).ToString("#,##0.00")
-            tblWkly.Rows(1).Cells("HealtWkly").Value = rowST.Cells("HealtAV").Value
+            tblWkly.Rows(1).Cells("HealtWkly").Value = "$" + (valS * sprHours.Value).ToString("#,##0.00")
 
             valS = CDec(rowST.Cells("FringeAV").Value.ToString.Replace("$", ""))
             tblWkly.Rows(0).Cells("FringeBinWkly").Value = "$" + (((valS * sprHoursST.Value)) / sprHours.Value).ToString("#,##0.00")
-            tblWkly.Rows(1).Cells("FringeBinWkly").Value = rowST.Cells("FringeAV").Value
+            tblWkly.Rows(1).Cells("FringeBinWkly").Value = "$" + (valS * sprHours.Value).ToString("#,##0.00")
 
             valS = CDec(rowST.Cells("SmallAV").Value.ToString.Replace("$", ""))
             tblWkly.Rows(0).Cells("SmallTools").Value = "$" + (((valS * sprHoursST.Value)) / sprHours.Value).ToString("#,##0.00")
-            tblWkly.Rows(1).Cells("SmallTools").Value = rowST.Cells("SmallAV").Value
+            tblWkly.Rows(1).Cells("SmallTools").Value = "$" + (valS * sprHours.Value).ToString("#,##0.00")
 
             valS = CDec(rowST.Cells("PPEAV").Value.ToString.Replace("$", ""))
             tblWkly.Rows(0).Cells("PPEWkly").Value = "$" + (((valS * sprHoursST.Value)) / sprHours.Value).ToString("#,##0.00")
-            tblWkly.Rows(1).Cells("PPEWkly").Value = rowST.Cells("PPEAV").Value
+            tblWkly.Rows(1).Cells("PPEWkly").Value = "$" + (valS * sprHours.Value).ToString("#,##0.00")
 
             valS = CDec(rowST.Cells("ConsumableAV").Value.ToString.Replace("$", ""))
             tblWkly.Rows(0).Cells("ConsumablesWkly").Value = "$" + (((valS * sprHoursST.Value)) / sprHours.Value).ToString("#,##0.00")
-            tblWkly.Rows(1).Cells("ConsumablesWkly").Value = rowST.Cells("ConsumableAV").Value
+            tblWkly.Rows(1).Cells("ConsumablesWkly").Value = "$" + (valS * sprHours.Value).ToString("#,##0.00")
 
             valS = CDec(rowST.Cells("ScaffoldAV").Value.ToString.Replace("$", ""))
             tblWkly.Rows(0).Cells("ScaffoldRentalWkly").Value = "$" + (sprScaffold.Value * sprHours.Value).ToString("#,##0.00")
@@ -674,5 +674,9 @@ Public Class Taxes
         Catch ex As Exception
 
         End Try
+    End Sub
+
+    Private Sub TableLayoutPanel10_Paint(sender As Object, e As PaintEventArgs) Handles TableLayoutPanel10.Paint
+
     End Sub
 End Class

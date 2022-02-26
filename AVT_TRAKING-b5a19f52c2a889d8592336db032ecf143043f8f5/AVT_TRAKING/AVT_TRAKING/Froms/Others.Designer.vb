@@ -33,6 +33,7 @@ Partial Class Others
         Me.TableLayoutPanel9 = New System.Windows.Forms.TableLayoutPanel()
         Me.Panel17 = New System.Windows.Forms.Panel()
         Me.GroupBox7 = New System.Windows.Forms.GroupBox()
+        Me.txtMatDesc = New System.Windows.Forms.TextBox()
         Me.btnAddMatClass = New System.Windows.Forms.Button()
         Me.txtMatClass = New System.Windows.Forms.TextBox()
         Me.lstMatClass = New System.Windows.Forms.ListView()
@@ -134,7 +135,6 @@ Partial Class Others
         Me.PictureBox2 = New System.Windows.Forms.PictureBox()
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.Label7 = New System.Windows.Forms.Label()
-        Me.txtMatDesc = New System.Windows.Forms.TextBox()
         btnDeleteTypeEmployee = New System.Windows.Forms.Button()
         Me.Panel1.SuspendLayout()
         Me.TableLayoutPanel10.SuspendLayout()
@@ -329,6 +329,15 @@ Partial Class Others
         Me.GroupBox7.TabStop = False
         Me.GroupBox7.Text = "Material Class"
         '
+        'txtMatDesc
+        '
+        Me.txtMatDesc.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.txtMatDesc.Location = New System.Drawing.Point(191, 45)
+        Me.txtMatDesc.Name = "txtMatDesc"
+        Me.txtMatDesc.Size = New System.Drawing.Size(88, 23)
+        Me.txtMatDesc.TabIndex = 7
+        '
         'btnAddMatClass
         '
         Me.btnAddMatClass.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
@@ -356,9 +365,6 @@ Partial Class Others
         '
         'lstMatClass
         '
-        Me.lstMatClass.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.lstMatClass.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader4, Me.ColumnHeader5})
         Me.lstMatClass.FullRowSelect = True
         Me.lstMatClass.HideSelection = False
@@ -1410,7 +1416,7 @@ Partial Class Others
         Me.TableLayoutPanel7.ColumnCount = 3
         Me.TableLayoutPanel7.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 35.26316!))
         Me.TableLayoutPanel7.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 64.73684!))
-        Me.TableLayoutPanel7.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 199.0!))
+        Me.TableLayoutPanel7.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 200.0!))
         Me.TableLayoutPanel7.Controls.Add(Me.Panel10, 0, 0)
         Me.TableLayoutPanel7.Controls.Add(Me.Panel11, 1, 0)
         Me.TableLayoutPanel7.Dock = System.Windows.Forms.DockStyle.Fill
@@ -1456,7 +1462,7 @@ Partial Class Others
         Me.Panel11.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel11.Location = New System.Drawing.Point(265, 3)
         Me.Panel11.Name = "Panel11"
-        Me.Panel11.Size = New System.Drawing.Size(476, 48)
+        Me.Panel11.Size = New System.Drawing.Size(475, 48)
         Me.Panel11.TabIndex = 1
         '
         'btnFindImage
@@ -1530,15 +1536,6 @@ Partial Class Others
         Me.Label7.Size = New System.Drawing.Size(68, 18)
         Me.Label7.TabIndex = 0
         Me.Label7.Text = "Others"
-        '
-        'txtMatDesc
-        '
-        Me.txtMatDesc.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.txtMatDesc.Location = New System.Drawing.Point(191, 45)
-        Me.txtMatDesc.Name = "txtMatDesc"
-        Me.txtMatDesc.Size = New System.Drawing.Size(88, 23)
-        Me.txtMatDesc.TabIndex = 7
         '
         'Others
         '

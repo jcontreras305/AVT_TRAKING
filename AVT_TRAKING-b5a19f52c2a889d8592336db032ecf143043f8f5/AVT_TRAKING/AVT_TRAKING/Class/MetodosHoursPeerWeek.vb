@@ -311,8 +311,17 @@ end", conn)
     Public Function insertExpensesUsed(ByVal datos As List(Of String)) As Boolean
         Try
             conectar()
-            Dim cmd As New SqlCommand("insert into expensesUsed values (NEWID(),'" + datos(1) + "'," + datos(2) + ",'" + datos(3) + "','" + datos(4) + "','" + datos(5) + "','" + datos(6) + "')", conn)
-            If cmd.ExecuteNonQuery = 1 Then
+            Dim id As Guid = Guid.NewGuid()
+            Dim cmd As New SqlCommand("if (select count(*) from hoursWorked where idAux = '" + datos(5) + "' and dateWorked = '" + datos(1) + "') = 0
+begin 
+	insert into hoursWorked values ('" + id.ToString() + "',0,0,0,'" + datos(1) + "','" + datos(6) + "',NUll,'" + datos(5) + "','DAYS')
+	insert into expensesUsed values (NEWID(),'" + datos(1) + "'," + datos(2) + ",'" + datos(3).ToString().Replace("'", "''") + "','" + datos(4) + "','" + datos(5) + "','" + datos(6) + "','" + id.ToString() + "')
+end
+else
+begin 
+	insert into expensesUsed values (NEWID(),'" + datos(1) + "'," + datos(2) + ",'" + datos(3) + "','" + datos(4) + "','" + datos(5) + "','" + datos(6) + "',(select top 1 idHorsWorked from hoursWorked where idAux = '" + datos(5) + "' and dateWorked = '" + datos(1) + "'))
+end", conn)
+            If cmd.ExecuteNonQuery >= 1 Then
                 mtdJobs.UpdateTotalSpendTask(datos(5))
                 desconectar()
                 Return True

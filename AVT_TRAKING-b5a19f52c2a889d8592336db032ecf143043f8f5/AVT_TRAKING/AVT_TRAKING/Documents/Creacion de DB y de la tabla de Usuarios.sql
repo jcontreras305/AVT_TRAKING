@@ -3013,6 +3013,20 @@ go
 --ON DELETE CASCADE
 --go
 
+--alter table taxesPT
+--add beginDate date
+--go
+--alter table taxesPT
+--add endDate date
+--go
+
+--alter table taxesST
+--add beginDate date
+--go
+--alter table taxesST
+--add endDate date
+--go
+
 ----##########################################################################################
 ----##################  CAMBIOS DE LA TABLA PARA MATERIALES ##################################
 ----##########################################################################################

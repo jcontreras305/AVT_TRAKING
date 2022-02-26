@@ -202,6 +202,7 @@ Partial Class Taxes
         Me.Panel9 = New System.Windows.Forms.Panel()
         Me.Panel15 = New System.Windows.Forms.Panel()
         Me.GroupBox3 = New System.Windows.Forms.GroupBox()
+        Me.Panel18 = New System.Windows.Forms.Panel()
         Me.tblAverageP = New System.Windows.Forms.DataGridView()
         Me.EmployeeBWP = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.FICAAVP = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -210,6 +211,7 @@ Partial Class Taxes
         Me.PTTOTALAV = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Panel14 = New System.Windows.Forms.Panel()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.Panel17 = New System.Windows.Forms.Panel()
         Me.tblTaxesPT = New System.Windows.Forms.DataGridView()
         Me.clmEmployeeP = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.FICAP = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -250,8 +252,6 @@ Partial Class Taxes
         Me.OverHeadWkly = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.ProfitWkly = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.TotalWkly = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Panel17 = New System.Windows.Forms.Panel()
-        Me.Panel18 = New System.Windows.Forms.Panel()
         Me.TableLayoutPanel1.SuspendLayout()
         Me.TitleBar.SuspendLayout()
         CType(Me.sprHoursOT, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -330,9 +330,11 @@ Partial Class Taxes
         Me.Panel9.SuspendLayout()
         Me.Panel15.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
+        Me.Panel18.SuspendLayout()
         CType(Me.tblAverageP, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel14.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
+        Me.Panel17.SuspendLayout()
         CType(Me.tblTaxesPT, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.TableLayoutPanel7.SuspendLayout()
         Me.Panel1.SuspendLayout()
@@ -344,8 +346,6 @@ Partial Class Taxes
         Me.GroupBox1.SuspendLayout()
         Me.Panel16.SuspendLayout()
         CType(Me.tblWkly, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.Panel17.SuspendLayout()
-        Me.Panel18.SuspendLayout()
         Me.SuspendLayout()
         '
         'TableLayoutPanel1
@@ -2192,6 +2192,16 @@ Partial Class Taxes
         Me.GroupBox3.TabStop = False
         Me.GroupBox3.Text = "AVG Wage Comp."
         '
+        'Panel18
+        '
+        Me.Panel18.Controls.Add(Me.tblAverageP)
+        Me.Panel18.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Panel18.ForeColor = System.Drawing.SystemColors.ControlText
+        Me.Panel18.Location = New System.Drawing.Point(3, 16)
+        Me.Panel18.Name = "Panel18"
+        Me.Panel18.Size = New System.Drawing.Size(767, 84)
+        Me.Panel18.TabIndex = 0
+        '
         'tblAverageP
         '
         Me.tblAverageP.AllowUserToAddRows = False
@@ -2269,6 +2279,16 @@ Partial Class Taxes
         Me.GroupBox2.TabIndex = 0
         Me.GroupBox2.TabStop = False
         Me.GroupBox2.Text = "Breakdown-PT"
+        '
+        'Panel17
+        '
+        Me.Panel17.Controls.Add(Me.tblTaxesPT)
+        Me.Panel17.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Panel17.ForeColor = System.Drawing.SystemColors.ControlText
+        Me.Panel17.Location = New System.Drawing.Point(3, 16)
+        Me.Panel17.Name = "Panel17"
+        Me.Panel17.Size = New System.Drawing.Size(767, 195)
+        Me.Panel17.TabIndex = 0
         '
         'tblTaxesPT
         '
@@ -2589,26 +2609,6 @@ Partial Class Taxes
         Me.TotalWkly.HeaderText = "Total"
         Me.TotalWkly.Name = "TotalWkly"
         '
-        'Panel17
-        '
-        Me.Panel17.Controls.Add(Me.tblTaxesPT)
-        Me.Panel17.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel17.ForeColor = System.Drawing.SystemColors.ControlText
-        Me.Panel17.Location = New System.Drawing.Point(3, 16)
-        Me.Panel17.Name = "Panel17"
-        Me.Panel17.Size = New System.Drawing.Size(767, 195)
-        Me.Panel17.TabIndex = 0
-        '
-        'Panel18
-        '
-        Me.Panel18.Controls.Add(Me.tblAverageP)
-        Me.Panel18.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel18.ForeColor = System.Drawing.SystemColors.ControlText
-        Me.Panel18.Location = New System.Drawing.Point(3, 16)
-        Me.Panel18.Name = "Panel18"
-        Me.Panel18.Size = New System.Drawing.Size(767, 84)
-        Me.Panel18.TabIndex = 0
-        '
         'Taxes
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -2704,9 +2704,11 @@ Partial Class Taxes
         Me.Panel9.ResumeLayout(False)
         Me.Panel15.ResumeLayout(False)
         Me.GroupBox3.ResumeLayout(False)
+        Me.Panel18.ResumeLayout(False)
         CType(Me.tblAverageP, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel14.ResumeLayout(False)
         Me.GroupBox2.ResumeLayout(False)
+        Me.Panel17.ResumeLayout(False)
         CType(Me.tblTaxesPT, System.ComponentModel.ISupportInitialize).EndInit()
         Me.TableLayoutPanel7.ResumeLayout(False)
         Me.Panel1.ResumeLayout(False)
@@ -2719,8 +2721,6 @@ Partial Class Taxes
         Me.GroupBox1.ResumeLayout(False)
         Me.Panel16.ResumeLayout(False)
         CType(Me.tblWkly, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.Panel17.ResumeLayout(False)
-        Me.Panel18.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub

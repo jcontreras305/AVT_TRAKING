@@ -42,8 +42,8 @@ Public Class MetodosTaxes
                 tx.QtyCraftsman = rd("QtyCraftsman")
                 tx.QtyApprentice = rd("QtyApprentice")
                 tx.QtyHelper = rd("QtyHelper")
-                tx.BeginDaTe = rd("beginDate")
-                tx.EndDate = rd("endDate")
+                tx.BeginDaTe = If(rd("beginDate") Is DBNull.Value, System.DateTime.Today, rd("beginDate"))
+                tx.EndDate = If(rd("endDate") Is DBNull.Value, System.DateTime.Today, rd("endDate"))
             End While
             rd.Close()
             'Datos para OT

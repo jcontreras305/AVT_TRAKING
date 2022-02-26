@@ -278,7 +278,7 @@ from workOrder
                         Else
                             Dim cmdInsertTask1 As New SqlCommand("insert into task 
                         values (NEWID(),'" + CStr(projectN.idTask) + "','" + projectN.idAuxWO + "',0.0,'" + projectN.equipament + "','" + projectN.manager + "'
-                        ,'" + projectN.description + "'," + CStr(projectN.totalBilling) + ",'" + validaFechaParaSQl(projectN.beginDate) + "','" + validaFechaParaSQl(projectN.endDate) + "'
+                        ,'" + projectN.description.ToString.Replace("'", "''") + "'," + CStr(projectN.totalBilling) + ",'" + validaFechaParaSQl(projectN.beginDate) + "','" + validaFechaParaSQl(projectN.endDate) + "'
                         ,'" + projectN.expCode + "','" + projectN.accountNum + "'," + CStr(projectN.estimateHour) + ",'" + CStr(projectN.status) + "'," + CStr(projectN.PercentComplete) + ")", conn)
                             If cmdInsertTask1.ExecuteNonQuery = 1 Then
                                 desconectar()
@@ -293,7 +293,7 @@ from workOrder
                         Dim cmdInsertNewWO As New SqlCommand("insert into workOrder values('" + newWO + "', '" + projectN.idWorkOrder + "'," + CStr(projectN.idPO) + ", " + CStr(projectN.jobNum) + ")", conn)
                         Dim cmdInsertTask2 As New SqlCommand("insert into task 
                         values (NEWID(),'" + CStr(projectN.idTask) + "','" + newWO + "',0.0,'" + projectN.equipament + "','" + projectN.manager + "'
-                        ,'" + projectN.description + "'," + CStr(projectN.totalBilling) + ",'" + validaFechaParaSQl(projectN.beginDate) + "','" + validaFechaParaSQl(projectN.endDate) + "'
+                        ,'" + projectN.description.ToString.Replace("'", "''") + "'," + CStr(projectN.totalBilling) + ",'" + validaFechaParaSQl(projectN.beginDate) + "','" + validaFechaParaSQl(projectN.endDate) + "'
                         ,'" + projectN.expCode + "','" + projectN.accountNum + "'," + CStr(projectN.estimateHour) + ",'" + CStr(projectN.status) + "'," + CStr(projectN.PercentComplete) + ")", conn)
                         Dim tranWO As SqlTransaction
                         tranWO = conn.BeginTransaction
@@ -318,7 +318,7 @@ from workOrder
                     Dim cmdInsertNewWO As New SqlCommand("insert into workOrder values('" + newWO + "','" + projectN.idWorkOrder + "'," + CStr(projectN.idPO) + ", " + CStr(projectN.jobNum) + ")", conn)
                     Dim cmdInsertTask2 As New SqlCommand("insert into task 
                         values (NEWID(),'" + CStr(projectN.idTask) + "','" + newWO + "',0.0,'" + projectN.equipament + "','" + projectN.manager + "'
-                        ,'" + projectN.description + "'," + CStr(projectN.totalBilling) + ",'" + validaFechaParaSQl(projectN.beginDate) + "','" + validaFechaParaSQl(projectN.endDate) + "'
+                        ,'" + projectN.description.ToString.Replace("'", "''") + "'," + CStr(projectN.totalBilling) + ",'" + validaFechaParaSQl(projectN.beginDate) + "','" + validaFechaParaSQl(projectN.endDate) + "'
                         ,'" + projectN.expCode + "','" + projectN.accountNum + "'," + CStr(projectN.estimateHour) + ",'" + CStr(projectN.status) + "'," + CStr(projectN.PercentComplete) + ")", conn)
                     Dim tranPO As SqlTransaction
                     tranPO = conn.BeginTransaction
