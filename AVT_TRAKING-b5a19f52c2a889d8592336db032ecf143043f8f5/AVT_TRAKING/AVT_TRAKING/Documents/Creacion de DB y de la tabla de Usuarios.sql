@@ -375,7 +375,8 @@ create  table expensesUsed(
 	description varchar(100) null,
 	idExpense varchar(36),
 	idAux varchar(36),
-	idEmployee varchar(36)
+	idEmployee varchar(36),
+	idHorsWorked varchar(36)
 )
 GO
 
@@ -1183,6 +1184,10 @@ GO
 ALTER TABLE    expensesUsed   WITH CHECK ADD  CONSTRAINT  fk_idEmployee_EU  FOREIGN KEY( idEmployee  )
 REFERENCES    employees ( idEmployee )
 GO
+
+ALTER TABLE expensesUsed WITH CHECK ADD CONSTRAINT fk_idHoursWorked_expensesUsed FOREIGN KEY (idHorsWorked) 
+REFERENCES  hoursWorked (idHorsWorked)
+go
 
 --##########################################################################################
 --##################  FOREIG KEYS HOURS WORKED #############################################
@@ -3145,3 +3150,17 @@ go
 --	end 
 --end
 --go
+
+----##########################################################################################
+----##################  CAMBIOS DE LA TABLA EXPENSES USED PARA ###############################
+----##########################################################################################
+
+--alter table expensesUsed 
+--add idHorsWorked varchar(36)
+--go
+
+--alter table expensesUsed with check add constraint fk_idHoursWorked_expensesUsed
+--foreign key (idHorsWorked) references  hoursWorked (idHorsWorked)
+--go
+
+--update expensesUsed set idHorsWorked = isnull((select top 1 idHorsWorked from hoursWorked where idAux = expensesUsed.idAux and expensesUsed.dateExpense = hoursWorked.dateWorked),NULL)
