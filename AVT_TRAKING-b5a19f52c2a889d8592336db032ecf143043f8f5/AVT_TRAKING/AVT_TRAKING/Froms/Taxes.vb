@@ -589,14 +589,16 @@ Public Class Taxes
                     Exit For
                 End If
             Next
+            valS = CDec(rowST.Cells("OverHeadAV").Value.ToString.Replace("$", ""))
+            tblWkly.Rows(0).Cells("OverHeadWkly").Value = "$" + (valS).ToString("#,##0.00")
+            tblWkly.Rows(1).Cells("OverHeadWkly").Value = "$" + (valS * sprHours.Value).ToString("#,##0.00")
 
-            tblWkly.Rows(0).Cells("OverHeadWkly").Value = "$" + ((sprOverhead.Value * sumRow0) / 100).ToString("#,##0.00")
-            tblWkly.Rows(1).Cells("OverHeadWkly").Value = "$" + (((sprOverhead.Value * sumRow0) / 100) * sprHours.Value).ToString("#,##0.00")
-
-            tblWkly.Rows(0).Cells("ProfitWkly").Value = "$" + ((sprProfit.Value * sumRow0) / 100).ToString("#,##0.00")
-            tblWkly.Rows(1).Cells("ProfitWkly").Value = "$" + (((sprProfit.Value * sumRow0) / 100) * sprHours.Value).ToString("#,##0.00")
+            valS = CDec(rowST.Cells("ProfitAV").Value.ToString.Replace("$", ""))
+            tblWkly.Rows(0).Cells("ProfitWkly").Value = "$" + (valS).ToString("#,##0.00")
+            tblWkly.Rows(1).Cells("ProfitWkly").Value = "$" + (valS * sprHours.Value).ToString("#,##0.00")
             sumRow0 = sumRow0 + CDec(tblWkly.Rows(0).Cells("OverHeadWkly").Value.ToString().Replace("$", "")) + CDec(tblWkly.Rows(0).Cells("ProfitWkly").Value.ToString().Replace("$", ""))
             sumRow1 = sumRow1 + CDec(tblWkly.Rows(1).Cells("OverHeadWkly").Value.ToString().Replace("$", "")) + CDec(tblWkly.Rows(1).Cells("ProfitWkly").Value.ToString().Replace("$", ""))
+
             tblWkly.Rows(0).Cells("TotalWkly").Value = "$" + (sumRow0).ToString("#,##0.00")
             tblWkly.Rows(1).Cells("TotalWkly").Value = "$" + (sumRow1).ToString("#,##0.00")
             Return True
