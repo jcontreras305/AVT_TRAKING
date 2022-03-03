@@ -3,18 +3,7 @@ Imports System.Data.SqlClient
 Public Class ReportClientBillingProject
     Dim conection As New ConnectioDB
     Private Sub ReportClientBillingProject_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        Try
-            conection.conectar()
-            Dim cmd As New SqlCommand("select numberClient , CONCAT(lastName,', ',firstName,' ',middleName) as 'Name' from clients ", conection.conn)
-            Dim dr As SqlDataReader = cmd.ExecuteReader()
-            While dr.Read()
-                cmbClients.Items.Add(CStr(dr("numberClient")) + "   " + dr("Name"))
-            End While
-        Catch ex As Exception
-            MsgBox(ex.Message())
-        Finally
-            conection.desconectar()
-        End Try
+        llenarComboClientsReports(cmbClients)
     End Sub
     Private Sub PictureBox3_Click(sender As Object, e As EventArgs) Handles PictureBox3.Click
         Me.WindowState = FormWindowState.Minimized

@@ -40,6 +40,10 @@ Partial Class ReportEmployeePerDiem
         Me.PictureBox3 = New System.Windows.Forms.PictureBox()
         Me.btnRestore = New System.Windows.Forms.PictureBox()
         Me.btnMaximize = New System.Windows.Forms.PictureBox()
+        Me.chbAllJobs = New System.Windows.Forms.CheckBox()
+        Me.Label5 = New System.Windows.Forms.Label()
+        Me.cmbJob = New System.Windows.Forms.ComboBox()
+        Me.Label4 = New System.Windows.Forms.Label()
         Me.TableLayoutPanel1.SuspendLayout()
         Me.Panel4.SuspendLayout()
         Me.Panel3.SuspendLayout()
@@ -91,6 +95,10 @@ Partial Class ReportEmployeePerDiem
         'Panel3
         '
         Me.Panel3.BackColor = System.Drawing.Color.FromArgb(CType(CType(83, Byte), Integer), CType(CType(93, Byte), Integer), CType(CType(102, Byte), Integer))
+        Me.Panel3.Controls.Add(Me.chbAllJobs)
+        Me.Panel3.Controls.Add(Me.Label5)
+        Me.Panel3.Controls.Add(Me.cmbJob)
+        Me.Panel3.Controls.Add(Me.Label4)
         Me.Panel3.Controls.Add(Me.cmbClients)
         Me.Panel3.Controls.Add(Me.Button1)
         Me.Panel3.Controls.Add(Me.PictureBox4)
@@ -107,9 +115,9 @@ Partial Class ReportEmployeePerDiem
         'cmbClients
         '
         Me.cmbClients.FormattingEnabled = True
-        Me.cmbClients.Location = New System.Drawing.Point(227, 10)
+        Me.cmbClients.Location = New System.Drawing.Point(257, 10)
         Me.cmbClients.Name = "cmbClients"
-        Me.cmbClients.Size = New System.Drawing.Size(228, 21)
+        Me.cmbClients.Size = New System.Drawing.Size(135, 21)
         Me.cmbClients.TabIndex = 17
         '
         'Button1
@@ -121,7 +129,7 @@ Partial Class ReportEmployeePerDiem
         Me.Button1.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.Button1.Image = Global.AVT_TRAKING.My.Resources.Resources.reportshow
         Me.Button1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.Button1.Location = New System.Drawing.Point(372, 37)
+        Me.Button1.Location = New System.Drawing.Point(493, 8)
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(83, 33)
         Me.Button1.TabIndex = 8
@@ -245,6 +253,47 @@ Partial Class ReportEmployeePerDiem
         Me.btnMaximize.TabIndex = 4
         Me.btnMaximize.TabStop = False
         '
+        'chbAllJobs
+        '
+        Me.chbAllJobs.AutoSize = True
+        Me.chbAllJobs.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.chbAllJobs.Location = New System.Drawing.Point(398, 44)
+        Me.chbAllJobs.Name = "chbAllJobs"
+        Me.chbAllJobs.Size = New System.Drawing.Size(62, 17)
+        Me.chbAllJobs.TabIndex = 29
+        Me.chbAllJobs.Text = "All Jobs"
+        Me.chbAllJobs.UseVisualStyleBackColor = True
+        '
+        'Label5
+        '
+        Me.Label5.AutoSize = True
+        Me.Label5.Font = New System.Drawing.Font("Verdana", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label5.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.Label5.Location = New System.Drawing.Point(208, 47)
+        Me.Label5.Name = "Label5"
+        Me.Label5.Size = New System.Drawing.Size(35, 14)
+        Me.Label5.TabIndex = 28
+        Me.Label5.Text = "Jobs"
+        '
+        'cmbJob
+        '
+        Me.cmbJob.FormattingEnabled = True
+        Me.cmbJob.Location = New System.Drawing.Point(257, 42)
+        Me.cmbJob.Name = "cmbJob"
+        Me.cmbJob.Size = New System.Drawing.Size(135, 21)
+        Me.cmbJob.TabIndex = 27
+        '
+        'Label4
+        '
+        Me.Label4.AutoSize = True
+        Me.Label4.Font = New System.Drawing.Font("Verdana", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label4.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.Label4.Location = New System.Drawing.Point(208, 18)
+        Me.Label4.Name = "Label4"
+        Me.Label4.Size = New System.Drawing.Size(43, 14)
+        Me.Label4.TabIndex = 26
+        Me.Label4.Text = "Client"
+        '
         'ReportEmployeePerDiem
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -287,4 +336,8 @@ Partial Class ReportEmployeePerDiem
     Friend WithEvents btnRestore As PictureBox
     Friend WithEvents btnMaximize As PictureBox
     Friend WithEvents cmbClients As ComboBox
+    Friend WithEvents chbAllJobs As CheckBox
+    Friend WithEvents Label5 As Label
+    Friend WithEvents cmbJob As ComboBox
+    Friend WithEvents Label4 As Label
 End Class

@@ -4,6 +4,9 @@ Imports System.Runtime.InteropServices
 Public Class Track
     Dim mtdHPW As New MetodosHoursPeerWeek
     Dim listDefault As New List(Of String)
+    Dim listHeaderT As New List(Of String)
+    Dim listHeaderV As New List(Of Boolean)
+    Dim numberClient As String
     Private Sub PictureBox3_Click(sender As Object, e As EventArgs) Handles PictureBox3.Click
         Me.Close()
     End Sub
@@ -58,6 +61,7 @@ Public Class Track
                         Next
                         pdbPercent.Value = pdbPercent.Value + 5
                     End If
+                    actulizaColumnasTblTrack()
                     txtMessage.Text = "Message: End."
                     pdbPercent.Value = 100
                 Else
@@ -82,10 +86,18 @@ Public Class Track
             Try
 
                 txtMessage.Text = "Message: Inserting columns headres..."
-                Dim colums() As String = {tblTrack.Columns(0).HeaderText, tblTrack.Columns(1).HeaderText, tblTrack.Columns(2).HeaderText, tblTrack.Columns(3).HeaderText, tblTrack.Columns(4).HeaderText, tblTrack.Columns(5).HeaderText, tblTrack.Columns(6).HeaderText, tblTrack.Columns(7).HeaderText, tblTrack.Columns(8).HeaderText, tblTrack.Columns(9).HeaderText, tblTrack.Columns(10).HeaderText, tblTrack.Columns(11).HeaderText, tblTrack.Columns(12).HeaderText, tblTrack.Columns(13).HeaderText, tblTrack.Columns(14).HeaderText, tblTrack.Columns(15).HeaderText, tblTrack.Columns(16).HeaderText, tblTrack.Columns(17).HeaderText, tblTrack.Columns(18).HeaderText, tblTrack.Columns(19).HeaderText, tblTrack.Columns(20).HeaderText, tblTrack.Columns(21).HeaderText, tblTrack.Columns(22).HeaderText, tblTrack.Columns(23).HeaderText, tblTrack.Columns(24).HeaderText, tblTrack.Columns(25).HeaderText, tblTrack.Columns(26).HeaderText, tblTrack.Columns(27).HeaderText, tblTrack.Columns(28).HeaderText, tblTrack.Columns(29).HeaderText, tblTrack.Columns(30).HeaderText, tblTrack.Columns(31).HeaderText, tblTrack.Columns(32).HeaderText, tblTrack.Columns(33).HeaderText, tblTrack.Columns(34).HeaderText, tblTrack.Columns(35).HeaderText, tblTrack.Columns(36).HeaderText, tblTrack.Columns(37).HeaderText, tblTrack.Columns(38).HeaderText, tblTrack.Columns(39).HeaderText, tblTrack.Columns(40).HeaderText, tblTrack.Columns(41).HeaderText, tblTrack.Columns(42).HeaderText}
-                For i As Int16 = 0 To colums.Length - 1
-                    libro.Sheets(1).cells(1, i + 1) = colums(i)
-                    libro.Sheets(1).cells(1, i + 1).Interior.Color = RGB(255, 255, 0)
+                Dim listColumnsV As New List(Of String)
+                For Each columnT As DataGridViewColumn In tblTrack.Columns
+                    If columnT.Visible = True Then
+                        listColumnsV.Add(columnT.HeaderText)
+                    End If
+                Next
+                'Dim colums() As String = {tblTrack.Columns(0).HeaderText, tblTrack.Columns(1).HeaderText, tblTrack.Columns(2).HeaderText, tblTrack.Columns(3).HeaderText, tblTrack.Columns(4).HeaderText, tblTrack.Columns(5).HeaderText, tblTrack.Columns(6).HeaderText, tblTrack.Columns(7).HeaderText, tblTrack.Columns(8).HeaderText, tblTrack.Columns(9).HeaderText, tblTrack.Columns(10).HeaderText, tblTrack.Columns(11).HeaderText, tblTrack.Columns(12).HeaderText, tblTrack.Columns(13).HeaderText, tblTrack.Columns(14).HeaderText, tblTrack.Columns(15).HeaderText, tblTrack.Columns(16).HeaderText, tblTrack.Columns(17).HeaderText, tblTrack.Columns(18).HeaderText, tblTrack.Columns(19).HeaderText, tblTrack.Columns(20).HeaderText, tblTrack.Columns(21).HeaderText, tblTrack.Columns(22).HeaderText, tblTrack.Columns(23).HeaderText, tblTrack.Columns(24).HeaderText, tblTrack.Columns(25).HeaderText, tblTrack.Columns(26).HeaderText, tblTrack.Columns(27).HeaderText, tblTrack.Columns(28).HeaderText, tblTrack.Columns(29).HeaderText, tblTrack.Columns(30).HeaderText, tblTrack.Columns(31).HeaderText, tblTrack.Columns(32).HeaderText, tblTrack.Columns(33).HeaderText, tblTrack.Columns(34).HeaderText, tblTrack.Columns(35).HeaderText, tblTrack.Columns(36).HeaderText, tblTrack.Columns(37).HeaderText, tblTrack.Columns(38).HeaderText, tblTrack.Columns(39).HeaderText, tblTrack.Columns(40).HeaderText, tblTrack.Columns(41).HeaderText, tblTrack.Columns(42).HeaderText}
+                Dim countColumns As Integer = 1
+                For Each item As String In listColumnsV
+                    libro.Sheets(1).cells(1, countColumns) = item
+                    libro.Sheets(1).cells(1, countColumns).Interior.Color = RGB(255, 255, 0)
+                    countColumns += 1
                 Next
                 txtMessage.Text = "Message: Inserting data..."
                 pdbPercent.Value = pdbPercent.Value + 5
@@ -93,50 +105,17 @@ Public Class Track
                 Dim flagIncrement = If(increment > 1, (90 / tblTrack.Rows.Count()), If(increment < 1 And increment > 0.5, 2, If(increment < 0.5 And increment > 0.25, 3, 4)))
                 Dim count As Integer = 2
                 Dim countIncrement As Integer = 0
+
                 For Each row As DataGridViewRow In tblTrack.Rows()
-                    libro.Sheets(1).cells(count, 1) = row.Cells(0).Value.ToString()
-                    libro.Sheets(1).cells(count, 2) = row.Cells(1).Value.ToString()
-                    libro.Sheets(1).cells(count, 3) = row.Cells(2).Value.ToString()
-                    libro.Sheets(1).cells(count, 4) = row.Cells(3).Value.ToString()
-                    libro.Sheets(1).cells(count, 5) = row.Cells(4).Value.ToString()
-                    libro.Sheets(1).cells(count, 6) = row.Cells(5).Value.ToString()
-                    libro.Sheets(1).cells(count, 7) = row.Cells(6).Value.ToString()
-                    libro.Sheets(1).cells(count, 8) = row.Cells(7).Value.ToString()
-                    libro.Sheets(1).cells(count, 9) = row.Cells(8).Value.ToString()
-                    libro.Sheets(1).cells(count, 10) = row.Cells(9).Value.ToString()
-                    libro.Sheets(1).cells(count, 11) = row.Cells(10).Value.ToString()
-                    libro.Sheets(1).cells(count, 12) = row.Cells(11).Value.ToString()
-                    libro.Sheets(1).cells(count, 13) = row.Cells(12).Value.ToString()
-                    libro.Sheets(1).cells(count, 14) = row.Cells(13).Value.ToString()
-                    libro.Sheets(1).cells(count, 15) = row.Cells(14).Value.ToString()
-                    libro.Sheets(1).cells(count, 16) = row.Cells(15).Value.ToString()
-                    libro.Sheets(1).cells(count, 17) = row.Cells(16).Value.ToString()
-                    libro.Sheets(1).cells(count, 18) = row.Cells(17).Value.ToString()
-                    libro.Sheets(1).cells(count, 19) = row.Cells(18).Value.ToString()
-                    libro.Sheets(1).cells(count, 20) = row.Cells(19).Value.ToString()
-                    libro.Sheets(1).cells(count, 21) = row.Cells(20).Value.ToString()
-                    libro.Sheets(1).cells(count, 22) = row.Cells(21).Value.ToString()
-                    libro.Sheets(1).cells(count, 23) = row.Cells(22).Value.ToString()
-                    libro.Sheets(1).cells(count, 24) = row.Cells(23).Value.ToString()
-                    libro.Sheets(1).cells(count, 25) = row.Cells(24).Value.ToString()
-                    libro.Sheets(1).cells(count, 26) = row.Cells(25).Value.ToString()
-                    libro.Sheets(1).cells(count, 27) = row.Cells(26).Value.ToString()
-                    libro.Sheets(1).cells(count, 28) = row.Cells(27).Value.ToString()
-                    libro.Sheets(1).cells(count, 29) = row.Cells(28).Value.ToString()
-                    libro.Sheets(1).cells(count, 30) = row.Cells(29).Value.ToString()
-                    libro.Sheets(1).cells(count, 31) = row.Cells(30).Value.ToString()
-                    libro.Sheets(1).cells(count, 32) = row.Cells(31).Value.ToString()
-                    libro.Sheets(1).cells(count, 33) = row.Cells(32).Value.ToString()
-                    libro.Sheets(1).cells(count, 34) = row.Cells(33).Value.ToString()
-                    libro.Sheets(1).cells(count, 35) = row.Cells(34).Value.ToString()
-                    libro.Sheets(1).cells(count, 36) = row.Cells(35).Value.ToString()
-                    libro.Sheets(1).cells(count, 37) = row.Cells(36).Value.ToString()
-                    libro.Sheets(1).cells(count, 38) = row.Cells(37).Value.ToString()
-                    libro.Sheets(1).cells(count, 39) = row.Cells(38).Value.ToString()
-                    libro.Sheets(1).cells(count, 40) = row.Cells(39).Value.ToString()
-                    libro.Sheets(1).cells(count, 41) = row.Cells(40).Value.ToString()
-                    libro.Sheets(1).cells(count, 42) = row.Cells(41).Value.ToString()
-                    libro.Sheets(1).cells(count, 43) = row.Cells(42).Value.ToString()
+                    Dim contCell As Integer = 0
+                    Dim countVisibleColumn As Integer = 1
+                    For Each cell As DataGridViewCell In row.Cells
+                        If cell.Visible = True Then
+                            libro.Sheets(1).cells(count, countVisibleColumn) = row.Cells(contCell).Value.ToString()
+                            countVisibleColumn += 1
+                        End If
+                        contCell += 1
+                    Next
                     count += 1
                     countIncrement += 1
                     txtMessage.Text = "Message: Inserting data...Row number (" + count.ToString() + ")."
@@ -177,36 +156,35 @@ Public Class Track
     End Sub
 
     Private Sub Track_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        mtdHPW.llenarTablaElementosTrack(tblDefaultElements)
-        actulizaeListDefault()
+        llenarComboClientsReports(cmbClient)
+        If cmbClient.SelectedItem IsNot Nothing Then
+            Dim array() As String = cmbClient.SelectedItem.ToString.Split(" ")
+            mtdHPW.llenarTablaDefaultElemtTrack(tblDefaultElements, array(0))
+        End If
+        actualizarListDefault()
         btnSave.Enabled = False
+        btnSaveHeaderText.Enabled = False
         llenarComboClientsReports(cmbClient)
     End Sub
-    Dim selectColumn As String = ""
+    Dim selectColumnTblDeault As String = ""
     Private Sub tblDefaultElements_CellMouseDoubleClick(sender As Object, e As DataGridViewCellMouseEventArgs) Handles tblDefaultElements.CellMouseDoubleClick
-        If btnUpdateCancel.Text = "Update" Then
-            btnUpdateCancel.Text = "Cancel"
-            selectColumn = tblDefaultElements.CurrentRow.Cells(0).Value.ToString()
-            lblColumnName.Text = "Column:" + tblDefaultElements.CurrentRow.Cells(0).Value.ToString()
-            txtDefaultElement.Text = tblDefaultElements.CurrentRow.Cells(1).Value.ToString()
-            btnSave.Enabled = True
-        ElseIf btnUpdateCancel.Text = "Cancel" Then
-            btnUpdateCancel.Text = "Update"
-            lblColumnName.Text = "Column:"
-            txtDefaultElement.Text = ""
-            btnSave.Enabled = False
-        End If
+        btnUpdateCancel.Text = "Cancel"
+        selectColumnTblDeault = tblDefaultElements.CurrentRow.Cells(0).Value.ToString()
+        lblColumnName.Text = "Column:" + tblDefaultElements.CurrentRow.Cells(0).Value.ToString()
+        txtDefaultElement.Text = tblDefaultElements.CurrentRow.Cells(1).Value.ToString()
+        btnSave.Enabled = True
     End Sub
 
     Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
         Try
-            If mtdHPW.updateDefaultElement(selectColumn, txtDefaultElement.Text) Then
+            If mtdHPW.updateDefaultElement(selectColumnTblDeault, txtDefaultElement.Text, numberClient) Then
                 lblColumnName.Text = "Column:"
                 btnUpdateCancel.Text = "Update"
                 txtDefaultElement.Text = ""
                 btnSave.Enabled = False
-                mtdHPW.llenarTablaElementosTrack(tblDefaultElements)
-                actulizaeListDefault()
+
+                mtdHPW.llenarTablaDefaultElemtTrack(tblDefaultElements, numberClient)
+                actualizarListDefault()
             End If
         Catch ex As Exception
             MsgBox(ex.Message())
@@ -216,7 +194,7 @@ Public Class Track
     Private Sub btnUpdateCancel_Click(sender As Object, e As EventArgs) Handles btnUpdateCancel.Click
         If btnUpdateCancel.Text = "Update" Then
             btnUpdateCancel.Text = "Cancel"
-            selectColumn = tblDefaultElements.CurrentRow.Cells(0).Value.ToString()
+            selectColumnTblDeault = tblDefaultElements.CurrentRow.Cells(0).Value.ToString()
             lblColumnName.Text = "Column:" + tblDefaultElements.CurrentRow.Cells(0).Value.ToString()
             txtDefaultElement.Text = tblDefaultElements.CurrentRow.Cells(1).Value.ToString()
             btnSave.Enabled = True
@@ -228,13 +206,65 @@ Public Class Track
         End If
     End Sub
 
-    Private Sub actulizaeListDefault()
+    Private Sub actualizarListDefault()
         listDefault.Clear()
         For Each row As DataGridViewRow In tblDefaultElements.Rows
             listDefault.Add(row.Cells(1).Value.ToString())
         Next
     End Sub
+    Private Sub actualizarListHeader()
+        listHeaderT.Clear()
+        listHeaderV.Clear()
+        For Each row As DataGridViewRow In tblFormatColumns.Rows
+            listHeaderV.Add(row.Cells(1).Value.ToString())
+            listHeaderT.Add(row.Cells(2).Value.ToString())
+        Next
+    End Sub
 
+    Dim selectColumnTblHeader As String = ""
+    Private Sub tblFormatColumns_CellMouseDoubleClick(sender As Object, e As DataGridViewCellMouseEventArgs) Handles tblFormatColumns.CellMouseDoubleClick
+        btnUpdateCancelHeaderText.Text = "Update"
+        btnSaveHeaderText.Enabled = True
+        btnUpdateCancelHeaderText.Text = "Cancel"
+        selectColumnTblHeader = tblFormatColumns.CurrentRow.Cells(0).Value.ToString()
+        lblColumnNameHeader.Text = "Column: " + tblFormatColumns.CurrentRow.Cells(0).Value.ToString()
+        If tblFormatColumns.CurrentRow.Cells(1).Value = True Then
+            chbVisibleHeaderText.Checked = True
+        Else
+            chbVisibleHeaderText.Checked = False
+        End If
+        txtHeaderText.Text = tblFormatColumns.CurrentRow.Cells(2).Value.ToString()
+    End Sub
+    Private Sub btnUpdateCancelHeaderText_Click(sender As Object, e As EventArgs) Handles btnUpdateCancelHeaderText.Click
+        If btnUpdateCancelHeaderText.Text = "Cancel" Then
+            btnUpdateCancelHeaderText.Text = "Update"
+            lblColumnNameHeader.Text = "Column:"
+            txtHeaderText.Text = ""
+            chbVisibleHeaderText.Checked = False
+        ElseIf btnUpdateCancel.Text = "Update" Then
+            btnUpdateCancelHeaderText.Text = "Cancel"
+            selectColumnTblHeader = tblFormatColumns.CurrentRow.Cells(0).Value.ToString()
+            lblColumnNameHeader.Text = "Column:" + tblFormatColumns.CurrentRow.Cells(0).Value.ToString()
+            chbVisibleHeaderText.Checked = tblFormatColumns.CurrentRow.Cells(1).Value
+            txtHeaderText.Text = tblFormatColumns.CurrentRow.Cells(2).Value.ToString()
+            btnSaveHeaderText.Enabled = True
+        End If
+    End Sub
+    Private Sub btnSaveHeaderText_Click(sender As Object, e As EventArgs) Handles btnSaveHeaderText.Click
+        Try
+            If mtdHPW.updateHeaderColumn(selectColumnTblHeader, txtHeaderText.Text, If(chbVisibleHeaderText.Checked, "1", "0"), numberClient) Then
+                lblColumnNameHeader.Text = "Column:"
+                btnUpdateCancelHeaderText.Text = "Update"
+                txtHeaderText.Text = ""
+                btnSaveHeaderText.Enabled = False
+                chbVisibleHeaderText.Checked = False
+                mtdHPW.llenarTablaFormatColumns(tblFormatColumns, numberClient)
+                actualizarListHeader()
+            End If
+        Catch ex As Exception
+
+        End Try
+    End Sub
     Private Sub PictureBox4_Click(sender As Object, e As EventArgs) Handles PictureBox4.Click
         Me.WindowState = FormWindowState.Minimized
     End Sub
@@ -257,6 +287,14 @@ Public Class Track
             Dim array() As String = cmbClient.SelectedItem.ToString.Split(" ")
             mtdJ.llenarComboJob(cmbJobs, CInt(array(0)))
             cmbJobs.Text = ""
+            If cmbClient.SelectedItem IsNot Nothing Then
+                Dim array1() As String = cmbClient.SelectedItem.ToString.Split(" ")
+                numberClient = array1(0)
+                mtdHPW.llenarTablaDefaultElemtTrack(tblDefaultElements, array1(0))
+                mtdHPW.llenarTablaFormatColumns(tblFormatColumns, array1(0))
+                actualizarListDefault()
+                actualizarListHeader()
+            End If
         Catch ex As Exception
             MsgBox(ex.Message())
         End Try
@@ -267,6 +305,40 @@ Public Class Track
             cmbJobs.Enabled = False
         Else
             cmbJobs.Enabled = True
+        End If
+    End Sub
+
+    Private Sub TitleBar_Paint(sender As Object, e As PaintEventArgs) Handles TitleBar.Paint
+
+    End Sub
+
+    Private Sub actulizaColumnasTblTrack()
+        For Each rowF As DataGridViewRow In tblFormatColumns.Rows()
+            If rowF.Cells(1).Value = True Then
+                tblTrack.Columns(rowF.Index).Visible = True
+                tblTrack.Columns(rowF.Index).HeaderText = rowF.Cells(2).Value
+            Else
+                tblTrack.Columns(rowF.Index).Visible = False
+                tblTrack.Columns(rowF.Index).HeaderText = rowF.Cells(2).Value
+            End If
+        Next
+    End Sub
+
+    Private Sub txtDefaultElement_KeyPress(sender As Object, e As KeyEventArgs) Handles txtDefaultElement.KeyDown
+        If (e.KeyValue = 13) Then
+            Try
+                If mtdHPW.updateDefaultElement(selectColumnTblDeault, txtDefaultElement.Text, numberClient) Then
+                    lblColumnName.Text = "Column:"
+                    btnUpdateCancel.Text = "Update"
+                    txtDefaultElement.Text = ""
+                    btnSave.Enabled = False
+
+                    mtdHPW.llenarTablaDefaultElemtTrack(tblDefaultElements, numberClient)
+                    actualizarListDefault()
+                End If
+            Catch ex As Exception
+                MsgBox(ex.Message())
+            End Try
         End If
     End Sub
 End Class

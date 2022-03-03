@@ -34,26 +34,12 @@ Public Class ReportCompleteByDateRange
 
     Private Sub ReportCompleteByDateRange_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Try
+            llenarComboClientsReports(cmbClients)
             conection.conectar()
-            Dim cmd As New SqlCommand("select numberClient , companyName as 'Name' from clients ", conection.conn)
-            Dim dr As SqlDataReader = cmd.ExecuteReader()
-
-            While dr.Read()
-                cmbClients.Items.Add(CStr(dr("numberClient")) + "   " + dr("Name"))
-            End While
-            dr.Close()
-
             If cmbClients.SelectedItem IsNot Nothing Then
                 Dim arraycl() As String = cmbClients.SelectedItem.ToString.Split(" ")
-                Dim cmd2 As New SqlCommand("select jb.jobNo from job as jb inner join clients as cl on jb.idClient=cl.idClient where cl.numberClient=" + arraycl(0) + "", conection.conn)
-                Dim dr2 As SqlDataReader = cmd2.ExecuteReader()
-                cmbJobs.Items.Clear()
-                While dr2.Read()
-                    cmbJobs.Items.Add(dr2("jobNo"))
-                End While
-                dr2.Close()
+                llenarComboJobsReports(cmbJobs, arraycl(0))
             End If
-
         Catch ex As Exception
             MsgBox(ex.Message())
         Finally

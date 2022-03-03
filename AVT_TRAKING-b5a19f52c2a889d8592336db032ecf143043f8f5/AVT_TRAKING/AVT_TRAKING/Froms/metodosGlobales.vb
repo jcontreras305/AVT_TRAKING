@@ -3,7 +3,41 @@ Imports System.Text.RegularExpressions
 
 Module metodosGlobales
     Dim con As New ConnectioDB
-    Public Function llenarComboEmployeeReports(ByVal combo As ComboBox)
+    ''' <summary>
+    ''' Hace una consulta a la BD filtrando por el numberClient, retornando los jobs asignados a ese cliente.
+    ''' </summary>
+    ''' <param name="combo"></param>
+    ''' <param name="numberClient"></param>
+    ''' <returns>
+    ''' etorna el combo lleno con los empleados en contrados en la BD
+    ''' </returns>
+    Public Function llenarComboJobsReports(ByVal combo As ComboBox, ByVal numberClient As String) As Boolean
+        Try
+            con.conectar()
+            Dim cmd As New SqlCommand("select jb.jobNo from job as jb inner join clients as cl on cl.idClient = jb.idClient where cl.numberClient = " + numberClient + "", con.conn) '
+            Dim dr As SqlDataReader = cmd.ExecuteReader()
+            combo.Items.Clear()
+            While dr.Read()
+                combo.Items.Add(dr("jobNo"))
+            End While
+            dr.Close()
+            Return True
+        Catch ex As Exception
+            MsgBox(ex.Message)
+            Return False
+        Finally
+            con.desconectar()
+        End Try
+    End Function
+    ''' <summary>
+    ''' Hace una consulta a la BD, retornando los empleados con su numero de empleado
+    ''' y su nombre (lastname, firstname y middlename).
+    ''' </summary>
+    ''' <param name="combo"></param>
+    ''' <returns> 
+    ''' Retorna el combo lleno con los empleados en contrados en la BD.
+    ''' </returns>
+    Public Function llenarComboEmployeeReports(ByVal combo As ComboBox) As Boolean
         Try
             con.conectar()
             Dim cmd As New SqlCommand("select numberEmploye, CONCAT(em.lastName,' ',em.firstName,' ',em.middleName) as 'name' from employees as em", con.conn) '
@@ -13,24 +47,35 @@ Module metodosGlobales
                 combo.Items.Add(CStr(dr("numberEmploye")) + " " + dr("name"))
             End While
             dr.Close()
+            Return True
         Catch ex As Exception
             MsgBox(ex.Message)
+            Return False
         Finally
             con.desconectar()
         End Try
     End Function
-    Public Function llenarComboClientsReports(ByVal combo As ComboBox)
+    ''' <summary>
+    ''' Hace una consulta a la BD, retornando los clientes con su numero de cliente, el nombre de la empresa
+    ''' y su nombre (lastname, firstname y middlename).
+    ''' </summary>
+    ''' <param name="combo"></param>
+    ''' <returns>Retorna el combo lleno con los empleados en contrados en la BD.
+    ''' </returns>
+    Public Function llenarComboClientsReports(ByVal combo As ComboBox) As Boolean
         Try
             con.conectar()
-            Dim cmd As New SqlCommand("select numberClient , companyName from clients", con.conn) '
+            Dim cmd As New SqlCommand("select numberClient , companyName , CONCAT(lastName,' ',firstName,' ',middleName) as name from clients", con.conn) '
             Dim dr As SqlDataReader = cmd.ExecuteReader()
             combo.Items.Clear()
             While dr.Read()
-                combo.Items.Add(CStr(dr("numberClient")) + " " + dr("companyName"))
+                combo.Items.Add(CStr(dr("numberClient")) + " " + dr("companyName") + "|" + dr("name"))
             End While
             dr.Close()
+            Return True
         Catch ex As Exception
             MsgBox(ex.Message)
+            Return False
         Finally
             con.desconectar()
         End Try

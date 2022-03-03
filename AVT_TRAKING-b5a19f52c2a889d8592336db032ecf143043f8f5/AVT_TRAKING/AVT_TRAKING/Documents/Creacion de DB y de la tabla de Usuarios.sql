@@ -1022,6 +1022,93 @@ create table taxesST(
 )
 GO
 --##########################################################################################
+--##################  TABLA DE TRACKDEFAULTELEMENTS ########################################
+--##########################################################################################
+create table TrackDefaultElements(
+idTDe varchar(36) primary key not null,
+idClient varchar(36),
+[Force or Reject] varchar(15),	
+[Source] varchar(15),
+[Order Type] varchar(15),
+[Location ID] varchar(15),
+[Company Code] varchar(15),
+[Area] varchar(15),
+[Group Name] varchar(15),
+[Agreement] varchar(15),
+[Level 3 ID] varchar(15),
+[Level 4 ID] varchar(15),
+[Hours Total] varchar(15),
+[Hours Total Activity Code] varchar(15),
+[Extra Charges $ Activity Code] varchar(15),
+[Extra] varchar(15),
+[Extra 1] varchar(15),
+[Extra 2] varchar(15),
+[Add Time] varchar(15),
+[Pay Type] varchar(15),
+[R4 (Hrs)] varchar(15),
+[R5 (Hrs)] varchar(15),
+[R6 (Hrs)] varchar(15),
+[GL Account] varchar(15),
+[ST Adders] varchar(15),
+[OT Adders] varchar(15),
+[DT Adders] varchar(15),
+[R4 Adders] varchar(15),
+[R5 Adders] varchar(15),
+[R6 Adders] varchar(15)
+)
+GO
+--##########################################################################################
+--##################  TABLA DE TRACKFORMATELEMENTS #########################################
+--##########################################################################################
+create table TrackFormatColums(
+	idTFE varchar(36) primary key not null,
+	idClient varchar(36),
+	[Record ID]varchar(31),
+	[Force or Reject]varchar(31),
+	[Source]varchar(31),
+	[Date]varchar(31),
+	[Order Type]varchar(31),
+	[Location ID]varchar(31),
+	[Company Code]varchar(31),
+	[Resource ID]varchar(31),
+	[Resource Name]varchar(31),
+	[Area]varchar(31),
+	[Group Name]varchar(31),
+	[Agreement]varchar(31),
+	[Skill Type]varchar(31),
+	[Shift]varchar(31),
+	[Level 1 ID]varchar(31),
+	[Level 2 ID]varchar(31),
+	[Level 3 ID]varchar(31),
+	[Level 4 ID]varchar(31),
+	[Hours Total]varchar(31),
+	[Hours Total Activity Code]varchar(31),
+	[S/T (Hrs)]varchar(31),
+	[S/T Hrs Activity Code]varchar(31),
+	[O/T (Hrs)]varchar(31),
+	[O/T Hrs Activity Code]varchar(31),
+	[D/T (Hrs)]varchar(31),
+	[D/T Hrs Activity Code]varchar(31),
+	[Extra Charges $]varchar(31),
+	[Extra Charges $ Activity Code]varchar(31),
+	[Extra]varchar(31),
+	[Extra 1]varchar(31),
+	[Extra 2]varchar(31),
+	[Add Time]varchar(31),
+	[Pay Type]varchar(31),
+	[R4 (Hrs)]varchar(31),
+	[R5 (Hrs)]varchar(31),
+	[R6 (Hrs)]varchar(31),
+	[GL Account]varchar(31),
+	[ST Adders]varchar(31),
+	[OT Adders]varchar(31),
+	[DT Adders]varchar(31),
+	[R4 Adders]varchar(31),
+	[R5 Adders]varchar(31),
+	[R6 Adders]varchar(31)
+)
+GO
+--##########################################################################################
 --##################  TABLA DE UNITMEASSUREMENTS ###########################################
 --##########################################################################################
 
@@ -1483,7 +1570,7 @@ ON DELETE CASCADE
 GO
 
 --##########################################################################################
---##################  FOREIG KEYS TAXESST ##################################################
+--##################  FOREIG KEYS TAXESPT ##################################################
 --##########################################################################################
 
 ALTER TABLE taxesPT WITH CHECK ADD CONSTRAINT fk_jobNo_taxesPT 
@@ -1491,6 +1578,26 @@ FOREIGN KEY (jobNo) REFERENCES job(jobNo)
 ON UPDATE CASCADE
 ON DELETE CASCADE
 GO
+
+--##########################################################################################
+--##################  FOREIG KEYS TRAKDEFAULTELEMENTS ######################################
+--##########################################################################################
+
+ALTER TABLE TrackDefaultElements WITH CHECK ADD CONSTRAINT fk_idClient_TrackDefaultElements
+FOREIGN KEY (idClient) REFERENCES clients(idClient)
+ON UPDATE CASCADE
+ON DELETE CASCADE
+go
+
+--##########################################################################################
+--##################  FOREIG KEYS TRAKFORMATCOLUMS #########################################
+--##########################################################################################
+
+ALTER TABLE TrackFormatColums WITH CHECK ADD CONSTRAINT fk_idClient_TrackFormatColums
+FOREIGN KEY (idClient) REFERENCES clients(idClient)
+ON UPDATE CASCADE
+ON DELETE CASCADE
+go
 
 --##########################################################################################
 --##################  FOREIG KEYS WORKORDER ################################################
@@ -1582,57 +1689,51 @@ begin
 end
 GO
 
-create proc [dbo].[sp_Insert_Cient] 
-	@ClientID int,
-	@FirstName varchar (30),
-	@MiddleName varchar (30),
-	@LastName varchar (30),
-	@CompanyName varchar (50),
-	@Status char(1),
-	--Contact
-	@phoneNumer1 varchar(13),
-	@phoneNumer2 varchar(13),
-	@email varchar(50),
-	--Addres
-	@avenue varchar(80),
-	@number int,
-	@city varchar (20),
-	@providence varchar (20),
-	@postalcode int,
-	--Photo
-	@img image
+create proc [dbo].[Sp_All_Jobs]
+@startdate as date, 
+@finaldate as date,
+@clientnum as int
 as
-declare @error int  -- declaro variables para los ID que son nuevos y una variable de error
-declare @idClient varchar(36) 
-declare @idContact varchar(36)
-declare @idHomeAdress varchar(36)
-begin 
-	begin tran 
-		begin try
-			--se inserta un contacto
-			
-				set @idContact = NEWID() 
-				insert into contact values(@idContact,@phoneNumer1,@phoneNumer2,@email)
-				if @@ERROR <> 0 begin set @error = @@ERROR goto solveproblem end
-			
-				set @idHomeAdress = NEWID()
-				insert into HomeAddress values (@idHomeAdress , @avenue , @number , @city , @providence , @postalCode)
-				if @@ERROR <> 0 begin set @error = @@ERROR goto solveproblem end 
-			
-				set @idClient = NEWID()
-				insert into clients values (@idClient , @ClientID, @FirstName, @MiddleName, @LastName , @CompanyName, @idContact , @idHomeAdress ,@Status,@img)
-				if @@ERROR <> 0 begin set @error = @@ERROR goto solveproblem end 
-			
-		end try
-		begin catch
-			goto solveproblem
-		end catch
-	commit tran
-	solveproblem:
-	if @error <> 0
-	begin 
-		rollback tran 
-	end
+begin
+select distinct
+	jb.jobNo,
+	po.idPO,
+	wo.idWO,
+	tk.task,
+	em.SAPNumber,
+	em.numberEmploye, 
+	datename(dw,hw.dateWorked) as 'DAY',
+	concat(em.lastName,', ', em.firstName,' ' ,em.middleName) as 'Employee Name',
+	hw.dateWorked,
+	ISNULL(SUBSTRING( wc.name,1,iif(CHARINDEX('-',wc.name)=0, len(wc.name) ,(CHARINDEX('-',wc.name)-1))),'') as 'Code',
+
+	case when ((select iif(SUM(hw1.hoursST)is null,0,SUM(hw1.hoursST)) from hoursWorked as hw1 inner join workCode as wc1 on wc1.idWorkCode = hw.idWorkCode inner join task as tk1 on tk1.idAux = hw1.idAux inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO inner join projectOrder as po1 on po1.idPO = wo1.idPO and wo1.jobNo = po1.jobNo inner join job as jb1 on jb1.jobNo = po1.jobNo  where hw1.dateWorked between @startdate and @finaldate and em.idEmployee = hw1.idEmployee and jb.jobNo = jb1.jobNo and po1.idPO = po.idPO and wo.idAuxWO = wo1.idAuxWO and tk1.idAux = tk.idAux and (SUBSTRING( wc1.name,1,iif(CHARINDEX('-',wc.name)=0, len(wc1.name) ,(CHARINDEX('-',wc1.name)-1))) =SUBSTRING( wc.name,1,iif(CHARINDEX('-',wc.name)=0, len(wc.name) ,(CHARINDEX('-',wc.name)-1)))  ) and not wc1.name like '%6.4%' )) = 0 then 0 
+	else(select iif(SUM(hw1.hoursST)is null,0,SUM(hw1.hoursST)) from hoursWorked as hw1 inner join workCode as wc1 on wc1.idWorkCode = hw.idWorkCode inner join task as tk1 on tk1.idAux = hw1.idAux inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO inner join projectOrder as po1 on po1.idPO = wo1.idPO and wo1.jobNo = po1.jobNo inner join job as jb1 on jb1.jobNo = po1.jobNo  where hw1.dateWorked between @startdate and @finaldate and em.idEmployee = hw1.idEmployee and jb.jobNo = jb1.jobNo and po1.idPO = po.idPO and wo.idAuxWO = wo1.idAuxWO and tk1.idAux = tk.idAux and (SUBSTRING( wc1.name,1,iif(CHARINDEX('-',wc.name)=0, len(wc1.name) ,(CHARINDEX('-',wc1.name)-1))) =SUBSTRING( wc.name,1,iif(CHARINDEX('-',wc.name)=0, len(wc.name) ,(CHARINDEX('-',wc.name)-1)))  ) and not wc1.name like '%6.4%') end as 'Hours ST',
+	
+	ISNULL(wc.billingRate1,0)AS 'billingRate1',
+
+	case when ((select iif(SUM(hw1.hoursOT)is null,0,SUM(hw1.hoursOT)) from hoursWorked as hw1 inner join workCode as wc1 on wc1.idWorkCode = hw.idWorkCode inner join task as tk1 on tk1.idAux = hw1.idAux inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO inner join projectOrder as po1 on po1.idPO = wo1.idPO and wo1.jobNo = po1.jobNo inner join job as jb1 on jb1.jobNo = po1.jobNo  where hw1.dateWorked between @startdate and @finaldate and em.idEmployee = hw1.idEmployee and jb.jobNo = jb1.jobNo and po1.idPO = po.idPO and wo.idAuxWO = wo1.idAuxWO and tk1.idAux = tk.idAux and (SUBSTRING( wc1.name,1,iif(CHARINDEX('-',wc.name)=0, len(wc1.name) ,(CHARINDEX('-',wc1.name)-1))) =SUBSTRING( wc.name,1,iif(CHARINDEX('-',wc.name)=0, len(wc.name) ,(CHARINDEX('-',wc.name)-1)))  ) and not wc1.name like '%6.4%' )) = 0 then 0 
+	else(select iif(SUM(hw1.hoursOT)is null,0,SUM(hw1.hoursOT)) from hoursWorked as hw1 inner join workCode as wc1 on wc1.idWorkCode = hw.idWorkCode inner join task as tk1 on tk1.idAux = hw1.idAux inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO inner join projectOrder as po1 on po1.idPO = wo1.idPO and wo1.jobNo = po1.jobNo inner join job as jb1 on jb1.jobNo = po1.jobNo  where hw1.dateWorked between @startdate and @finaldate and em.idEmployee = hw1.idEmployee and jb.jobNo = jb1.jobNo and po1.idPO = po.idPO and wo.idAuxWO = wo1.idAuxWO and tk1.idAux = tk.idAux and (SUBSTRING( wc1.name,1,iif(CHARINDEX('-',wc.name)=0, len(wc1.name) ,(CHARINDEX('-',wc1.name)-1))) =SUBSTRING( wc.name,1,iif(CHARINDEX('-',wc.name)=0, len(wc.name) ,(CHARINDEX('-',wc.name)-1)))  ) and not wc1.name like '%6.4%') end as 'Hours OT',
+
+	ISNULL(wc.billingRateOT,0)as 'billingRateOT',
+	ISNULL((select exu.amount from expensesUsed as exu inner join expenses as ex on ex.idExpenses = exu.idExpense inner join task as tk1 on tk1.idAux = exu.idAux inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO inner join projectOrder as po1 on po1.idPO = wo1.idPO and wo1.jobNo = po1.jobNo inner join job as jb1 on jb1.jobNo = po1.jobNo 
+	 where tk1.idAux = tk.idAux and wo1.idAuxWO = wo.idAuxWO and po.idPO = po1.idPO and jb.jobNo = jb1.jobNo and exu.dateExpense between @startdate and @finaldate and exu.idEmployee= em.idEmployee and ex.expenseCode like 'Per-Diem') ,0) as 'PerDiem' ,
+
+	ISNULL((select exu.amount from expensesUsed as exu inner join expenses as ex on ex.idExpenses = exu.idExpense inner join task as tk1 on tk1.idAux = exu.idAux inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO inner join projectOrder as po1 on po1.idPO = wo1.idPO and wo1.jobNo = po1.jobNo inner join job as jb1 on jb1.jobNo = po1.jobNo 
+	 where tk1.idAux = tk.idAux and wo1.idAuxWO = wo.idAuxWO and po.idPO = po1.idPO and jb.jobNo = jb1.jobNo and exu.dateExpense between @startdate and @finaldate and exu.idEmployee= em.idEmployee and ex.expenseCode like 'Travel') ,0) as 'Travel' 
+	 
+	from employees as em 
+		inner join hoursWorked as hw on hw.idEmployee = em.idEmployee
+		left join workCode as wc on wc.idWorkCode = hw.idWorkCode
+		inner join task as tk on tk.idAux= hw.idAux
+		inner join workOrder wo on  wo.idAuxWO=tk.idAuxWO
+		inner join projectOrder as po on po.idPO = wo.idPO and po.jobNo = wo.jobNo
+		inner join job as jb on jb.jobNo = wo.jobNo 
+		inner join clients as cl on cl.idClient = jb.idClient
+		where hw.dateWorked between @startdate and @finaldate and cl.numberClient = @clientnum
+	order by 
+	concat(em.lastName,', ', em.firstName,' ' ,em.middleName),
+	hw.dateWorked
 end
 GO
 
@@ -2979,188 +3080,171 @@ go
 ---- PARA DESCOMENTAR USAR LAS TECLAS (CTRL+K)(CTRL+U) Y PARA COMENTAR (CTRL+K)(CTRL+C)
 
 ----##########################################################################################
-----##################  CAMBIOS DE LAS TABLAS DE TAXES ST Y PT ###############################
+----##################  CAMBIOS PARA VER CAMBIAR EL FORMATO DE TRACK #########################
 ----##########################################################################################
 
---alter table taxesST
---drop constraint fk_idAux_taxesST
---go
+--drop table TrackElements
+--go	
 
---alter table taxesST
---drop column idAux
---go
-
---alter table taxesST
---add jobNo bigint
---go
-
---ALTER TABLE taxesST WITH CHECK ADD CONSTRAINT fk_jobNo_taxesST 
---FOREIGN KEY (jobNo) REFERENCES job(jobNo)
---ON UPDATE CASCADE
---ON DELETE CASCADE
---go
-
---alter table taxesPT
---drop constraint fk_idAux_taxesPT
---go
-
---alter table taxesPT
---drop column idAux
---go
-
---alter table taxesPT
---add jobNo bigint
---go
-
---ALTER TABLE taxesPT WITH CHECK ADD CONSTRAINT fk_jobNo_taxesPT 
---FOREIGN KEY (jobNo) REFERENCES job(jobNo)
---ON UPDATE CASCADE
---ON DELETE CASCADE
---go
-
---alter table taxesPT
---add beginDate date
---go
---alter table taxesPT
---add endDate date
---go
-
---alter table taxesST
---add beginDate date
---go
---alter table taxesST
---add endDate date
---go
-
-----##########################################################################################
-----##################  CAMBIOS DE LA TABLA PARA MATERIALES ##################################
-----##########################################################################################
-
---alter table material 
---add code varchar(20)
---go
-
-
---create table materialClass(
---	code varchar(20) primary key not null,
---	description varchar(50)
+--create table TrackFormatColums(
+--	idTFE varchar(36) primary key not null,
+--	idClient varchar(36),
+--	[Record ID]varchar(51),
+--	[Force or Reject]varchar(51),
+--	[Source]varchar(51),
+--	[Date]varchar(51),
+--	[Order Type]varchar(51),
+--	[Location ID]varchar(51),
+--	[Company Code]varchar(51),
+--	[Resource ID]varchar(51),
+--	[Resource Name]varchar(51),
+--	[Area]varchar(51),
+--	[Group Name]varchar(51),
+--	[Agreement]varchar(51),
+--	[Skill Type]varchar(51),
+--	[Shift]varchar(51),
+--	[Level 1 ID]varchar(51),
+--	[Level 2 ID]varchar(51),
+--	[Level 3 ID]varchar(51),
+--	[Level 4 ID]varchar(51),
+--	[Hours Total]varchar(51),
+--	[Hours Total Activity Code]varchar(51),
+--	[S/T (Hrs)]varchar(51),
+--	[S/T Hrs Activity Code]varchar(51),
+--	[O/T (Hrs)]varchar(51),
+--	[O/T Hrs Activity Code]varchar(51),
+--	[D/T (Hrs)]varchar(51),
+--	[D/T Hrs Activity Code]varchar(51),
+--	[Extra Charges $]varchar(51),
+--	[Extra Charges $ Activity Code]varchar(51),
+--	[Extra]varchar(51),
+--	[Extra 1]varchar(51),
+--	[Extra 2]varchar(51),
+--	[Add Time]varchar(51),
+--	[Pay Type]varchar(51),
+--	[R4 (Hrs)]varchar(51),
+--	[R5 (Hrs)]varchar(51),
+--	[R6 (Hrs)]varchar(51),
+--	[GL Account]varchar(51),
+--	[ST Adders]varchar(51),
+--	[OT Adders]varchar(51),
+--	[DT Adders]varchar(51),
+--	[R4 Adders]varchar(51),
+--	[R5 Adders]varchar(51),
+--	[R6 Adders]varchar(51)
 --)
 --go
 
-
---alter table material with check add constraint fk_code_material
---foreign key (code)  references materialClass (code)
+--ALTER TABLE TrackFormatColums WITH CHECK ADD CONSTRAINT fk_idClient_TrackFormatColums
+--FOREIGN KEY (idClient) REFERENCES clients(idClient)
+--ON UPDATE CASCADE
+--ON DELETE CASCADE
 --go
 
+--create table TrackDefaultElements(
+--idTDe varchar(36) primary key not null,
+--idClient varchar(36),
+--[Force or Reject] varchar(15),	
+--[Source] varchar(15),
+--[Order Type] varchar(15),
+--[Location ID] varchar(15),
+--[Company Code] varchar(15),
+--[Area] varchar(15),
+--[Group Name] varchar(15),
+--[Agreement] varchar(15),
+--[Level 3 ID] varchar(15),
+--[Level 4 ID] varchar(15),
+--[Hours Total] varchar(15),
+--[Hours Total Activity Code] varchar(15),
+--[Extra Charges $ Activity Code] varchar(15),
+--[Extra] varchar(15),
+--[Extra 1] varchar(15),
+--[Extra 2] varchar(15),
+--[Add Time] varchar(15),
+--[Pay Type] varchar(15),
+--[R4 (Hrs)] varchar(15),
+--[R5 (Hrs)] varchar(15),
+--[R6 (Hrs)] varchar(15),
+--[GL Account] varchar(15),
+--[ST Adders] varchar(15),
+--[OT Adders] varchar(15),
+--[DT Adders] varchar(15),
+--[R4 Adders] varchar(15),
+--[R5 Adders] varchar(15),
+--[R6 Adders] varchar(15)
+--)
+--go 
 
---AALTER proc  [dbo].[sp_insert_Material]
---@nombre varchar(50),
---@numero int,
---@idVendor varchar(36),
---@status char(1),
---@class varchar(20),
---@msg varchar(100) out
+--ALTER TABLE TrackDefaultElements WITH CHECK ADD CONSTRAINT fk_idClient_TrackDefaultElements
+--FOREIGN KEY (idClient) REFERENCES clients(idClient)
+--ON UPDATE CASCADE
+--ON DELETE CASCADE
+--go
+
+--ALTER proc [dbo].[sp_Insert_Cient] 
+--	@ClientID int,
+--	@FirstName varchar (30),
+--	@MiddleName varchar (30),
+--	@LastName varchar (30),
+--	@CompanyName varchar (50),
+--	@Status char(1),
+--	--Contact
+--	@phoneNumer1 varchar(13),
+--	@phoneNumer2 varchar(13),
+--	@email varchar(50),
+--	--Addres
+--	@avenue varchar(80),
+--	@number int,
+--	@city varchar (20),
+--	@providence varchar (20),
+--	@postalcode int,
+--	--Photo
+--	@img image
 --as
---declare @idMaterial varchar(36)
---declare @idDM varchar(36)
---declare @error int
---begin
---	begin tran
---		begin try	 
---			set @idMaterial = NEWID()
---			set @idDM = NEWID()
---			if not @nombre = '' and not @idVendor = ''
---			begin 
---				insert into material values (@idMaterial,@numero,@nombre,@status,iif(@class='',Null,@class))
---				insert into detalleMaterial values (@idDM,'','','',0.0,'',0.0,@idMaterial,@idVendor,'')
---				insert into existences values (@idDM , 0.0)
---				set @msg= 'Successful'
---			end
---			else 
---			begin 
---				set @error = 1
---				goto solveProblem
---			end
---		end try
---		begin catch
---			goto solveProblem
---		end catch
---	commit tran
---	solveProblem:
---	if @error <> 0 
---	begin 
---		rollback tran
---		set @msg = concat('Is problably that the Material ',@nombre,' have been inserted, or try to changue the Vendor')
---	end  
---end
---go
-
---alter proc [dbo].[sp_actualizaMaterial]
---@idMaterial varchar(36),
---@nombreN varchar(50),
---@numeroN int,
---@idVendorN varchar(36),
---@statusN char(1),
-----datos viejos
---@idVendorV varchar(36),
---@class varchar(20),
---@msg varchar(100) out
---as 
---declare @vendor1 varchar(36)
---declare @vendor2 varchar(36)
---declare @error int
---begin
+--declare @error int  -- declaro variables para los ID que son nuevos y una variable de error
+--declare @idClient varchar(36) 
+--declare @idContact varchar(36)
+--declare @idHomeAdress varchar(36)
+--begin 
 --	begin tran 
---		begin try 
---			set @error = 0
---			if @idVendorN = @idVendorV
---			begin --solo cambian los datos de material 
---				update material set name = @nombreN , estatus = @statusN,code = iif(@class = '',NUll,@class) where idMaterial = @idMaterial 
---				set @msg = 'Successful.'
---			end
---			else --Cambio de Vendedor
---			begin
---				set @Vendor2 = (select  top 1 dm.idVendor from material as ma right join detalleMaterial as dm  on ma.idMaterial = dm.idMaterial where ma.name = @nombreN) 
---				if @vendor2 = @idVendorN begin
---					set @msg = 'Rigth now exists a material whit the same Vendor.'
---					set @error = 1
---				end
---				else begin
---				if (select  COUNT(*) from material as ma right join detalleMaterial as dm  on ma.idMaterial = dm.idMaterial where ma.name = @nombreN)=0
---				begin 
---					insert into detalleMaterial values (NEWID(),'','','',0.0,'',0.0,@idMaterial,@idVendorN,'')
---				end
---				else
---				begin
---					update detalleMaterial set idVendor = @idVendorN where idMaterial = @idMaterial and idVendor = @idVendorV
---				end
---				update material set name = @nombreN , estatus = @statusN,code = iif(@class = '',NUll,@class) where idMaterial = @idMaterial 
---				set @msg = 'Successful.'
---				end
---			end
+--		begin try
+--			--se inserta un contacto
+			
+--				set @idContact = NEWID() 
+--				insert into contact values(@idContact,@phoneNumer1,@phoneNumer2,@email)
+--				if @@ERROR <> 0 begin set @error = @@ERROR goto solveproblem end
+			
+--				set @idHomeAdress = NEWID()
+--				insert into HomeAddress values (@idHomeAdress , @avenue , @number , @city , @providence , @postalCode)
+--				if @@ERROR <> 0 begin set @error = @@ERROR goto solveproblem end 
+			
+--				set @idClient = NEWID()
+--				insert into clients values (@idClient , @ClientID, @FirstName, @MiddleName, @LastName , @CompanyName, @idContact , @idHomeAdress ,@Status,@img)
+--				if @@ERROR <> 0 begin set @error = @@ERROR goto solveproblem end 
+
+--				insert into TrackDefaultElements values(NEWID(),@idClient,'','','','','','','','','','','','','','','','','','','','','','','','','','','','')
+--				if @@ERROR <> 0 begin set @error = @@ERROR goto solveproblem end
+				
+--				insert into TrackFormatColums values(NEWID(),@idClient,'Record ID1','Force or Reject1','Source1','Date1','Order Type1','Location ID1','Company Code1','Resource ID1','Resource Name1','Area1','Group Name1','Agreement1','Skill Type1','Shift1','Level 1 ID1','Level 2 ID1','Level 3 ID1','Level 4 ID1','Hours Total1','Hours Total Activity Code1','S/T (Hrs)1','S/T Hrs Activity Code1','O/T (Hrs)1','O/T Hrs Activity Code1','D/T (Hrs)1','D/T Hrs Activity Code1','Extra Charges $1','Extra Charges $ Activity Code1','Extra1','Extra 11','Extra 21','Add Time1','Pay Type1','R4 (Hrs)1','R5 (Hrs)1','R6 (Hrs)1','GL Account1','ST Adders1','OT Adders1','DT Adders1','R4 Adders1','R5 Adders1','R6 Adders1')
+--				if @@ERROR <> 0 begin set @error = @@ERROR goto solveproblem end
 --		end try
 --		begin catch
 --			goto solveproblem
 --		end catch
---	commit tran 
+--	commit tran
 --	solveproblem:
---	if @error <> 0 
+--	if @error <> 0
 --	begin 
---		rollback tran
---	end 
+--		rollback tran 
+--	end
 --end
 --go
 
-----##########################################################################################
-----##################  CAMBIOS DE LA TABLA EXPENSES USED PARA ###############################
-----##########################################################################################
+----EJECUTAR EL SIGUIENTE SELECT Y POR CADA CLIENTE COPIAR LAS DOS FILAS SIGUIENTES
+----Y REMPLASAR EL "idClient" (SON LOS QUE TIENEN LETRAS Y NUMERO AL AZAR) 
+----DONDE DICE 'IDCLIENTE' EN LOS COMANDOS DE INSERT DEJANDO LAS COMILLAS 
+----EJEMPLO "VALUES (NEWID(), 'ECF6F45B-0D0B-40DB-B096-1410A39E29F9', ..."
 
---alter table expensesUsed 
---add idHorsWorked varchar(36)
---go
-
---alter table expensesUsed with check add constraint fk_idHoursWorked_expensesUsed
---foreign key (idHorsWorked) references  hoursWorked (idHorsWorked)
---go
-
---update expensesUsed set idHorsWorked = isnull((select top 1 idHorsWorked from hoursWorked where idAux = expensesUsed.idAux and expensesUsed.dateExpense = hoursWorked.dateWorked),NULL)
+--SELECT * FROM clients
+--insert into TrackDefaultElements values(NEWID(),'IDCLIENT','','','','','','','','','','','','','','','','','','','','','','','','','','','','')
+--insert into TrackFormatColums values(NEWID(),'IDCLIENT','Record ID1','Force or Reject1','Source1','Date1','Order Type1','Location ID1','Company Code1','Resource ID1','Resource Name1','Area1','Group Name1','Agreement1','Skill Type1','Shift1','Level 1 ID1','Level 2 ID1','Level 3 ID1','Level 4 ID1','Hours Total1','Hours Total Activity Code1','S/T (Hrs)1','S/T Hrs Activity Code1','O/T (Hrs)1','O/T Hrs Activity Code1','D/T (Hrs)1','D/T Hrs Activity Code1','Extra Charges $1','Extra Charges $ Activity Code1','Extra1','Extra 11','Extra 21','Add Time1','Pay Type1','R4 (Hrs)1','R5 (Hrs)1','R6 (Hrs)1','GL Account1','ST Adders1','OT Adders1','DT Adders1','R4 Adders1','R5 Adders1','R6 Adders1')

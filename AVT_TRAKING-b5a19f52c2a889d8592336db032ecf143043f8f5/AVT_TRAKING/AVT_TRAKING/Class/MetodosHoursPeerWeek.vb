@@ -739,14 +739,41 @@ from expensesUsed as exu
         End Try
     End Function
 
-    Public Function llenarTablaElementosTrack(ByVal tbl As DataGridView) As Boolean
+    Public Function llenarTablaDefaultElemtTrack(ByVal tbl As DataGridView, ByVal idClient As String) As Boolean
         Try
             conectar()
-            Dim cmd As New SqlCommand("select typeElement,element from TrackElements order by id asc", conn)
+            Dim cmd As New SqlCommand("select * from TrackDefaultElements as tde inner join clients as cl on cl.idClient =tde.idClient where cl.numberClient = " + idClient + "", conn)
             Dim dr As SqlDataReader = cmd.ExecuteReader()
             tbl.Rows.Clear()
             While dr.Read()
-                tbl.Rows.Add(dr("typeElement"), dr("element"))
+                tbl.Rows.Add("Force Or Reject", dr("Force Or Reject"))
+                tbl.Rows.Add("Source", dr("Source"))
+                tbl.Rows.Add("Order Type", dr("Order Type"))
+                tbl.Rows.Add("Location ID", dr("Location ID"))
+                tbl.Rows.Add("Company Code", dr("Company Code"))
+                tbl.Rows.Add("Area", dr("Area"))
+                tbl.Rows.Add("Group Name", dr("Group Name"))
+                tbl.Rows.Add("Agreement", dr("Agreement"))
+                tbl.Rows.Add("Level 3 ID", dr("Level 3 ID"))
+                tbl.Rows.Add("Level 4 ID", dr("Level 4 ID"))
+                tbl.Rows.Add("Hours Total", dr("Hours Total"))
+                tbl.Rows.Add("Hours Total Activity Code", dr("Hours Total Activity Code"))
+                tbl.Rows.Add("Extra Charges $ Activity Code", dr("Extra Charges $ Activity Code"))
+                tbl.Rows.Add("Extra", dr("Extra"))
+                tbl.Rows.Add("Extra 1", dr("Extra 1"))
+                tbl.Rows.Add("Extra 2", dr("Extra 2"))
+                tbl.Rows.Add("Add Time", dr("Add Time"))
+                tbl.Rows.Add("Pay Type", dr("Pay Type"))
+                tbl.Rows.Add("R4 (Hrs)", dr(20))
+                tbl.Rows.Add("R5 (Hrs)", dr(21))
+                tbl.Rows.Add("R6 (Hrs)", dr(22))
+                tbl.Rows.Add("GL Account", dr("GL Account"))
+                tbl.Rows.Add("ST Adders", dr("ST Adders"))
+                tbl.Rows.Add("OT Adders", dr("OT Adders"))
+                tbl.Rows.Add("DT Adders", dr("DT Adders"))
+                tbl.Rows.Add("R4 Adders", dr("R4 Adders"))
+                tbl.Rows.Add("R5 Adders", dr("R5 Adders"))
+                tbl.Rows.Add("R6 Adders", dr("R6 Adders"))
             End While
             dr.Close()
             Return True
@@ -758,10 +785,185 @@ from expensesUsed as exu
         End Try
     End Function
 
-    Public Function updateDefaultElement(ByVal column As String, ByVal val As String) As Boolean
+    Public Function llenarTablaFormatColumns(ByVal tbl As DataGridView, ByVal idClient As String) As Boolean
         Try
             conectar()
-            Dim cmd As New SqlCommand("update TrackElements set element = '" + val + "' where typeElement= '" + column + "'", conn)
+            Dim cmd As New SqlCommand("select * from TrackFormatColums as tfe inner join clients as cl on cl.idClient =tfe.idClient where cl.numberClient = " + idClient + "", conn)
+            Dim dr As SqlDataReader = cmd.ExecuteReader()
+            tbl.Rows.Clear()
+            Dim values() As String
+            While dr.Read()
+                values = seperarDatosFormatColumnsTable(dr("Record ID"))
+                tbl.Rows.Add("Record ID", If(values(1) = "1", True, False), values(0))
+
+                values = seperarDatosFormatColumnsTable(dr("Force Or Reject"))
+                tbl.Rows.Add("Force Or Reject", If(values(1) = "1", True, False), values(0))
+
+                values = seperarDatosFormatColumnsTable(dr("Source"))
+                tbl.Rows.Add("Source", If(values(1) = "1", True, False), values(0))
+
+                values = seperarDatosFormatColumnsTable(dr("Date"))
+                tbl.Rows.Add("Date", If(values(1) = "1", True, False), values(0))
+
+                values = seperarDatosFormatColumnsTable(dr("Order Type"))
+                tbl.Rows.Add("Order Type", If(values(1) = "1", True, False), values(0))
+
+                values = seperarDatosFormatColumnsTable(dr("Location ID"))
+                tbl.Rows.Add("Location ID", If(values(1) = "1", True, False), values(0))
+
+                values = seperarDatosFormatColumnsTable(dr("Company Code"))
+                tbl.Rows.Add("Company Code", If(values(1) = "1", True, False), values(0))
+
+                values = seperarDatosFormatColumnsTable(dr("Resource ID"))
+                tbl.Rows.Add("Resource ID", If(values(1) = "1", True, False), values(0))
+
+                values = seperarDatosFormatColumnsTable(dr("Resource Name"))
+                tbl.Rows.Add("Resource Name", If(values(1) = "1", True, False), values(0))
+
+                values = seperarDatosFormatColumnsTable(dr("Area"))
+                tbl.Rows.Add("Area", If(values(1) = "1", True, False), values(0))
+
+                values = seperarDatosFormatColumnsTable(dr("Group Name"))
+                tbl.Rows.Add("Group Name", If(values(1) = "1", True, False), values(0))
+
+                values = seperarDatosFormatColumnsTable(dr("Agreement"))
+                tbl.Rows.Add("Agreement", If(values(1) = "1", True, False), values(0))
+
+                values = seperarDatosFormatColumnsTable(dr("Skill Type"))
+                tbl.Rows.Add("Skill Type", If(values(1) = "1", True, False), values(0))
+
+                values = seperarDatosFormatColumnsTable(dr("Shift"))
+                tbl.Rows.Add("Shift", If(values(1) = "1", True, False), values(0))
+
+                values = seperarDatosFormatColumnsTable(dr("Level 1 ID"))
+                tbl.Rows.Add("Level 1 ID", If(values(1) = "1", True, False), values(0))
+
+                values = seperarDatosFormatColumnsTable(dr("Level 2 ID"))
+                tbl.Rows.Add("Level 2 ID", If(values(1) = "1", True, False), values(0))
+
+                values = seperarDatosFormatColumnsTable(dr("Level 3 ID"))
+                tbl.Rows.Add("Level 3 ID", If(values(1) = "1", True, False), values(0))
+
+                values = seperarDatosFormatColumnsTable(dr("Level 4 ID"))
+                tbl.Rows.Add("Level 4 ID", If(values(1) = "1", True, False), values(0))
+
+                values = seperarDatosFormatColumnsTable(dr("Hours Total"))
+                tbl.Rows.Add("Hours Total", If(values(1) = "1", True, False), values(0))
+
+                values = seperarDatosFormatColumnsTable(dr("Hours Total Activity Code"))
+                tbl.Rows.Add("Hours Total Activity Code", If(values(1) = "1", True, False), values(0))
+
+                values = seperarDatosFormatColumnsTable(dr(22))
+                tbl.Rows.Add("S/T (Hrs)", If(values(1) = "1", True, False), values(0))
+
+                values = seperarDatosFormatColumnsTable(dr("S/T Hrs Activity Code"))
+                tbl.Rows.Add("S/T Hrs Activity Code", If(values(1) = "1", True, False), values(0))
+
+                values = seperarDatosFormatColumnsTable(dr(24))
+                tbl.Rows.Add("O/T (Hrs)", If(values(1) = "1", True, False), values(0))
+
+                values = seperarDatosFormatColumnsTable(dr("O/T Hrs Activity Code"))
+                tbl.Rows.Add("O/T Hrs Activity Code", If(values(1) = "1", True, False), values(0))
+
+                values = seperarDatosFormatColumnsTable(dr(26))
+                tbl.Rows.Add("D/T (Hrs)", If(values(1) = "1", True, False), values(0))
+
+                values = seperarDatosFormatColumnsTable(dr("D/T Hrs Activity Code"))
+                tbl.Rows.Add("D/T Hrs Activity Code", If(values(1) = "1", True, False), values(0))
+
+                values = seperarDatosFormatColumnsTable(dr("Extra Charges $"))
+                tbl.Rows.Add("Extra Charges $", If(values(1) = "1", True, False), values(0))
+
+                values = seperarDatosFormatColumnsTable(dr("Extra Charges $ Activity Code"))
+                tbl.Rows.Add("Extra Charges $ Activity Code", If(values(1) = "1", True, False), values(0))
+
+                values = seperarDatosFormatColumnsTable(dr("Extra"))
+                tbl.Rows.Add("Extra", If(values(1) = "1", True, False), values(0))
+
+                values = seperarDatosFormatColumnsTable(dr("Extra 1"))
+                tbl.Rows.Add("Extra 1", If(values(1) = "1", True, False), values(0))
+
+                values = seperarDatosFormatColumnsTable(dr("Extra 2"))
+                tbl.Rows.Add("Extra 2", If(values(1) = "1", True, False), values(0))
+
+                values = seperarDatosFormatColumnsTable(dr("Add Time"))
+                tbl.Rows.Add("Add Time", If(values(1) = "1", True, False), values(0))
+
+                values = seperarDatosFormatColumnsTable(dr("Pay Type"))
+                tbl.Rows.Add("Pay Type", If(values(1) = "1", True, False), values(0))
+
+                values = seperarDatosFormatColumnsTable(dr(35))
+                tbl.Rows.Add("R4 (Hrs)", If(values(1) = "1", True, False), values(0))
+
+                values = seperarDatosFormatColumnsTable(dr(36))
+                tbl.Rows.Add("R5 (Hrs)", If(values(1) = "1", True, False), values(0))
+
+                values = seperarDatosFormatColumnsTable(dr(37))
+                tbl.Rows.Add("R6 (Hrs)", If(values(1) = "1", True, False), values(0))
+
+                values = seperarDatosFormatColumnsTable(dr("GL Account"))
+                tbl.Rows.Add("GL Account", If(values(1) = "1", True, False), values(0))
+
+                values = seperarDatosFormatColumnsTable(dr("ST Adders"))
+                tbl.Rows.Add("ST Adders", If(values(1) = "1", True, False), values(0))
+
+                values = seperarDatosFormatColumnsTable(dr("OT Adders"))
+                tbl.Rows.Add("OT Adders", If(values(1) = "1", True, False), values(0))
+
+                values = seperarDatosFormatColumnsTable(dr("DT Adders"))
+                tbl.Rows.Add("DT Adders", If(values(1) = "1", True, False), values(0))
+
+                values = seperarDatosFormatColumnsTable(dr("R4 Adders"))
+                tbl.Rows.Add("R4 Adders", If(values(1) = "1", True, False), values(0))
+
+                values = seperarDatosFormatColumnsTable(dr("R5 Adders"))
+                tbl.Rows.Add("R5 Adders", If(values(1) = "1", True, False), values(0))
+
+                values = seperarDatosFormatColumnsTable(dr("R6 Adders"))
+                tbl.Rows.Add("R6 Adders", If(values(1) = "1", True, False), values(0))
+                Exit While
+            End While
+            dr.Close()
+            Return True
+        Catch ex As Exception
+            MsgBox(ex.Message())
+            Return False
+        Finally
+            desconectar()
+        End Try
+    End Function
+    Private Function seperarDatosFormatColumnsTable(ByVal drVal As String) As String()
+        Try
+            Dim val1 = "", val2 = ""
+            val1 = drVal.ToString.Remove(drVal.ToString.Length - 1)
+            val2 = If(drVal.ToString.Chars(drVal.ToString.Length() - 1) = "1", "1", "0")
+            Dim array() As String = {val1, val2}
+            Return array
+        Catch ex As Exception
+            Return {"", "0"}
+        End Try
+    End Function
+    Public Function updateHeaderColumn(ByVal columnName As String, ByVal headerText As String, ByVal visible As String, ByVal numberClient As String) As Boolean
+        Try
+            conectar()
+            Dim cmd As New SqlCommand("update trackFormatColums set [" + columnName + "] = '" + headerText + "" + visible + "' where idClient = (select top 1 idClient from clients where numberClient = " + numberClient + ")", conn)
+            If cmd.ExecuteNonQuery > 0 Then
+                MsgBox("Successful")
+                Return True
+            Else
+                Return False
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message())
+            Return False
+        Finally
+            desconectar()
+        End Try
+    End Function
+    Public Function updateDefaultElement(ByVal columnName As String, ByVal defaultValue As String, ByVal numberClient As String) As Boolean
+        Try
+            conectar()
+            Dim cmd As New SqlCommand("update TrackDefaultElements set [" + columnName + "] = '" + defaultValue + "' where idClient = (select top 1 idClient from clients where numberClient = " + numberClient + ")", conn)
             If cmd.ExecuteNonQuery > 0 Then
                 MsgBox("Successful")
                 Return True

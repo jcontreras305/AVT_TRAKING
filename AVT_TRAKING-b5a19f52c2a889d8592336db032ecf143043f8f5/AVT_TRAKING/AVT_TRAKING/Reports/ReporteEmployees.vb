@@ -48,6 +48,8 @@ Public Class ReporteEmployees
                     reportTS.SetParameterValue("@IntialDate", validaFechaParaSQl(dtpInitialDate.Value.Date))
                     reportTS.SetParameterValue("@FinalDate", validaFechaParaSQl(dtpFinalDate.Value.Date))
                     reportTS.SetParameterValue("@numclient", idcl)
+                    reportTS.SetParameterValue("@job", If(cmbJobs.SelectedItem IsNot Nothing, CInt(cmbJobs.SelectedItem), 0))
+                    reportTS.SetParameterValue("@all", If(chbAllJobs.Checked, 1, 0))
                     crvTimeSheetEmployee.ReportSource = reportTS
                 End If
             Else
@@ -60,5 +62,20 @@ Public Class ReporteEmployees
 
     Private Sub ReporteEmployees_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         llenarComboClientsReports(cmbClient)
+    End Sub
+
+    Private Sub cmbClient_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbClient.SelectedIndexChanged
+        If cmbClient.SelectedItem IsNot Nothing Then
+            Dim arra() As String = cmbClient.SelectedItem.ToString.Split(" ")
+            llenarComboJobsReports(cmbJobs, arra(0))
+        End If
+    End Sub
+
+    Private Sub chbAllJobs_CheckedChanged(sender As Object, e As EventArgs) Handles chbAllJobs.CheckedChanged
+        If chbAllJobs.Checked = True Then
+            cmbJobs.Enabled = False
+        Else
+            cmbJobs.Enabled = True
+        End If
     End Sub
 End Class

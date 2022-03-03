@@ -32,18 +32,7 @@ Public Class ReportClientBillingsReCapBYProject
     End Sub
 
     Private Sub ReportClientBillingsReCapBYProject_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        Try
-            conection.conectar()
-            Dim cmd As New SqlCommand("select numberClient , CONCAT(lastName,', ',firstName,' ',middleName) as 'Name' from clients ", conection.conn)
-            Dim dr As SqlDataReader = cmd.ExecuteReader()
-            While dr.Read()
-                cmbClients.Items.Add(CStr(dr("numberClient")) + "   " + dr("Name"))
-            End While
-        Catch ex As Exception
-            MsgBox(ex.Message())
-        Finally
-            conection.desconectar()
-        End Try
+        llenarComboClientsReports(cmbClients)
     End Sub
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
@@ -54,6 +43,8 @@ Public Class ReportClientBillingsReCapBYProject
             reportTS.SetParameterValue("@startdate", validaFechaParaSQl(dtpInitialDate.Value.Date))
             reportTS.SetParameterValue("@finaldate", validaFechaParaSQl(dtpFinalDate.Value.Date))
             reportTS.SetParameterValue("@clientnum", idClient)
+            reportTS.SetParameterValue("@job", If(cmbJob.SelectedItem IsNot Nothing, cmbJob.SelectedItem, 0))
+            reportTS.SetParameterValue("@all", If(chbAllJobs.Checked, 1, 0))
             crvClientBillingsReCapBYProject.ReportSource = reportTS
         Else
             MsgBox("Please select a Client.")
@@ -62,5 +53,20 @@ Public Class ReportClientBillingsReCapBYProject
 
     Private Sub PictureBox4_Click(sender As Object, e As EventArgs) Handles PictureBox4.Click
         Me.Close()
+    End Sub
+
+    Private Sub cmbClients_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbClients.SelectedIndexChanged
+        If cmbClients.SelectedItem IsNot Nothing Then
+            Dim array() As String = cmbClients.SelectedItem.ToString.Split(" ")
+            llenarComboJobsReports(cmbJob, array(0))
+        End If
+    End Sub
+
+    Private Sub chbAllJobs_CheckedChanged(sender As Object, e As EventArgs) Handles chbAllJobs.CheckedChanged
+        If chbAllJobs.Checked Then
+            cmbJob.Enabled = False
+        Else
+            cmbJob.Enabled = True
+        End If
     End Sub
 End Class

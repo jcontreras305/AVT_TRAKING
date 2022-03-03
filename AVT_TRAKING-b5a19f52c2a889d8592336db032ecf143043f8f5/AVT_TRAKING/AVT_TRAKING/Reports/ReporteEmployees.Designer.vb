@@ -28,6 +28,7 @@ Partial Class ReporteEmployees
         Me.Panel4 = New System.Windows.Forms.Panel()
         Me.crvTimeSheetEmployee = New CrystalDecisions.Windows.Forms.CrystalReportViewer()
         Me.Panel3 = New System.Windows.Forms.Panel()
+        Me.cmbClient = New System.Windows.Forms.ComboBox()
         Me.Button1 = New System.Windows.Forms.Button()
         Me.PictureBox4 = New System.Windows.Forms.PictureBox()
         Me.Label2 = New System.Windows.Forms.Label()
@@ -40,7 +41,10 @@ Partial Class ReporteEmployees
         Me.PictureBox3 = New System.Windows.Forms.PictureBox()
         Me.btnRestore = New System.Windows.Forms.PictureBox()
         Me.btnMaximize = New System.Windows.Forms.PictureBox()
-        Me.cmbClient = New System.Windows.Forms.ComboBox()
+        Me.cmbJobs = New System.Windows.Forms.ComboBox()
+        Me.Label4 = New System.Windows.Forms.Label()
+        Me.Label5 = New System.Windows.Forms.Label()
+        Me.chbAllJobs = New System.Windows.Forms.CheckBox()
         Me.Panel1.SuspendLayout()
         Me.TableLayoutPanel1.SuspendLayout()
         Me.Panel4.SuspendLayout()
@@ -102,6 +106,10 @@ Partial Class ReporteEmployees
         '
         'Panel3
         '
+        Me.Panel3.Controls.Add(Me.chbAllJobs)
+        Me.Panel3.Controls.Add(Me.Label5)
+        Me.Panel3.Controls.Add(Me.Label4)
+        Me.Panel3.Controls.Add(Me.cmbJobs)
         Me.Panel3.Controls.Add(Me.cmbClient)
         Me.Panel3.Controls.Add(Me.Button1)
         Me.Panel3.Controls.Add(Me.PictureBox4)
@@ -115,6 +123,14 @@ Partial Class ReporteEmployees
         Me.Panel3.Size = New System.Drawing.Size(744, 73)
         Me.Panel3.TabIndex = 1
         '
+        'cmbClient
+        '
+        Me.cmbClient.FormattingEnabled = True
+        Me.cmbClient.Location = New System.Drawing.Point(245, 3)
+        Me.cmbClient.Name = "cmbClient"
+        Me.cmbClient.Size = New System.Drawing.Size(121, 21)
+        Me.cmbClient.TabIndex = 9
+        '
         'Button1
         '
         Me.Button1.FlatAppearance.BorderSize = 0
@@ -124,9 +140,9 @@ Partial Class ReporteEmployees
         Me.Button1.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.Button1.Image = Global.AVT_TRAKING.My.Resources.Resources.reportshow
         Me.Button1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.Button1.Location = New System.Drawing.Point(377, 3)
+        Me.Button1.Location = New System.Drawing.Point(454, 3)
         Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(83, 33)
+        Me.Button1.Size = New System.Drawing.Size(81, 33)
         Me.Button1.TabIndex = 8
         Me.Button1.Text = "Report"
         Me.Button1.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -248,13 +264,46 @@ Partial Class ReporteEmployees
         Me.btnMaximize.TabIndex = 4
         Me.btnMaximize.TabStop = False
         '
-        'cmbClient
+        'cmbJobs
         '
-        Me.cmbClient.FormattingEnabled = True
-        Me.cmbClient.Location = New System.Drawing.Point(211, 2)
-        Me.cmbClient.Name = "cmbClient"
-        Me.cmbClient.Size = New System.Drawing.Size(121, 21)
-        Me.cmbClient.TabIndex = 9
+        Me.cmbJobs.FormattingEnabled = True
+        Me.cmbJobs.Location = New System.Drawing.Point(247, 34)
+        Me.cmbJobs.Name = "cmbJobs"
+        Me.cmbJobs.Size = New System.Drawing.Size(121, 21)
+        Me.cmbJobs.TabIndex = 10
+        '
+        'Label4
+        '
+        Me.Label4.AutoSize = True
+        Me.Label4.Font = New System.Drawing.Font("Verdana", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label4.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.Label4.Location = New System.Drawing.Point(196, 8)
+        Me.Label4.Name = "Label4"
+        Me.Label4.Size = New System.Drawing.Size(43, 14)
+        Me.Label4.TabIndex = 11
+        Me.Label4.Text = "Client"
+        '
+        'Label5
+        '
+        Me.Label5.AutoSize = True
+        Me.Label5.Font = New System.Drawing.Font("Verdana", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label5.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.Label5.Location = New System.Drawing.Point(196, 36)
+        Me.Label5.Name = "Label5"
+        Me.Label5.Size = New System.Drawing.Size(28, 14)
+        Me.Label5.TabIndex = 12
+        Me.Label5.Text = "Job"
+        '
+        'chbAllJobs
+        '
+        Me.chbAllJobs.AutoSize = True
+        Me.chbAllJobs.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.chbAllJobs.Location = New System.Drawing.Point(375, 35)
+        Me.chbAllJobs.Name = "chbAllJobs"
+        Me.chbAllJobs.Size = New System.Drawing.Size(62, 17)
+        Me.chbAllJobs.TabIndex = 13
+        Me.chbAllJobs.Text = "All Jobs"
+        Me.chbAllJobs.UseVisualStyleBackColor = True
         '
         'ReporteEmployees
         '
@@ -301,4 +350,8 @@ Partial Class ReporteEmployees
     Friend WithEvents Label3 As Label
     Friend WithEvents Button1 As Button
     Friend WithEvents cmbClient As ComboBox
+    Friend WithEvents chbAllJobs As CheckBox
+    Friend WithEvents Label5 As Label
+    Friend WithEvents Label4 As Label
+    Friend WithEvents cmbJobs As ComboBox
 End Class

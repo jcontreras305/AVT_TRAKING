@@ -12,7 +12,9 @@
 ALTER proc [dbo].[Client_Billings_Re_Cap_By_Project]
 @startdate as date, 
 @finaldate as date,
-@clientnum as int
+@clientnum as int,
+@job as bigint,
+@all as bit
 as 
 begin
 
@@ -91,20 +93,16 @@ T2.Complete,T2.[Es-Hrs],T2.[Total Expenses],T2.[Total Material],T2.[Total Spend]
 	inner join projectOrder as po on po.idPO=wo.idPO
 	inner join job as jb on jb.jobNo=po.jobNo
 	inner join clients cl on cl.idClient=jb.idClient
-	where cl.numberClient=@clientnum and
-		((select sum(hoursST)
-		 from hoursWorked where idAux = ts.idAux)> 0 or
-		 (select sum(hoursOT)
-		 from hoursWorked where idAux = ts.idAux)> 0 or
-		 (select sum(hours3)
-		 from hoursWorked where idAux = ts.idAux)> 0 or
-		 (select sum(amount) from expensesUsed where idAux=ts.idAux)> 0 or
-		(select sum(amount) from materialUsed where idAux=ts.idAux)>0)
+	where cl.numberClient=@clientnum and ((select sum(hoursST) from hoursWorked where idAux = ts.idAux)> 0 or (select sum(hoursOT)
+		 from hoursWorked where idAux = ts.idAux)> 0 or (select sum(hours3)
+		 from hoursWorked where idAux = ts.idAux)> 0 or (select sum(amount) 
+		 from expensesUsed where idAux=ts.idAux)> 0 or (select sum(amount)
+		 from materialUsed where idAux=ts.idAux)>0)
+		 and jb.jobNo like iif(@all=1,'%%',CONCAT('',@job,''))
 		)as T2
 		where T2.[Billings ST]<>0 OR T2.[Billings OT]<>0 OR T2.[Total Expenses]<>0 OR T2.[Total Material]<>0
 		order by t2.jobNo asc
 end
-
 go
 
 --##############################################################################################
@@ -113,7 +111,10 @@ go
 --CREATE proc [dbo].[select_Time_Sheet_PO]
 ALTER proc [dbo].[select_Time_Sheet_PO]
 	@IntialDate date,
-	@FinalDate date
+	@FinalDate date,
+	@clientnum as int,
+	@job as bigint,
+	@all as bit
 as 
 begin
 	set @IntialDate = ISNULL(@IntialDate,GETDATE())
@@ -137,9 +138,9 @@ begin
 					inner join projectOrder as po on po.idPO = wo.idPO and wo.jobNo = po.jobNo 
 					inner join job as jb on jb.jobNo = po.jobNo
 					inner join clients  as cl on cl.idClient = jb.idClient
-		where hw.dateWorked between @IntialDate and @FinalDate
+		where hw.dateWorked between @IntialDate and @FinalDate and cl.numberClient = @clientnum and jb.jobNo like iif(@all=1,'%%',CONCAT('',@job,''))
 		order by po.idPO
-END
+end
 go
 
 --##############################################################################################
@@ -149,7 +150,9 @@ go
 ALTER proc [dbo].[select_TimeSheet_Report]
 	@IntialDate date,
 	@FinalDate date,
-	@numclient int
+	@numclient int,
+	@job bigint,
+	@all bit
 as 
 begin
 	if @IntialDate is not null and @FinalDate is not null
@@ -165,9 +168,9 @@ begin
 			CONCAT(wo.idWO,'-',tk.task)AS 'task' ,
 			tk.equipament,
 			tk.description,
-			(select iif(SUM(hw1.hoursST)is null,0,SUM(hw1.hoursST)) from hoursWorked as hw1 inner join workCode as wc1 on wc1.idWorkCode = hw.idWorkCode inner join task as tk1 on tk1.idAux = hw1.idAux inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO inner join projectOrder as po1 on po1.idPO = wo1.idPO and wo1.jobNo = po1.jobNo inner join job as jb1 on jb1.jobNo = po1.jobNo where hw1.dateWorked between @IntialDate and @FinalDate and em.idEmployee = hw1.idEmployee and jb.jobNo = jb1.jobNo and po1.idPO = po.idPO and wo.idAuxWO = wo1.idAuxWO and tk1.idAux = tk.idAux and not wc1.name like '%6.4%' ) as 'hoursST',
-			(select iif(SUM(hw1.hoursOT)is null,0,SUM(hw1.hoursOT)) from hoursWorked as hw1 inner join workCode as wc1 on wc1.idWorkCode = hw.idWorkCode inner join task as tk1 on tk1.idAux = hw1.idAux inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO inner join projectOrder as po1 on po1.idPO = wo1.idPO and wo1.jobNo = po1.jobNo inner join job as jb1 on jb1.jobNo = po1.jobNo where hw1.dateWorked between @IntialDate and @FinalDate and em.idEmployee = hw1.idEmployee and jb.jobNo = jb1.jobNo and po1.idPO = po.idPO and wo.idAuxWO = wo1.idAuxWO and tk1.idAux = tk.idAux and not wc1.name like '%6.4%' ) as 'hoursOT',
-			(select iif(SUM(hw1.hours3 )is null,0,SUM(hw1.hours3 )) from hoursWorked as hw1 inner join workCode as wc1 on wc1.idWorkCode = hw.idWorkCode inner join task as tk1 on tk1.idAux = hw1.idAux inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO inner join projectOrder as po1 on po1.idPO = wo1.idPO and wo1.jobNo = po1.jobNo inner join job as jb1 on jb1.jobNo = po1.jobNo where hw1.dateWorked between @IntialDate and @FinalDate and em.idEmployee = hw1.idEmployee and jb.jobNo = jb1.jobNo and po1.idPO = po.idPO and wo.idAuxWO = wo1.idAuxWO and tk1.idAux = tk.idAux and not wc1.name like '%6.4%' ) as 'hours3',
+			(select iif(SUM(hw1.hoursST)is null,0,SUM(hw1.hoursST)) from hoursWorked as hw1 inner join workCode as wc1 on wc1.idWorkCode = hw.idWorkCode inner join task as tk1 on tk1.idAux = hw1.idAux inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO inner join projectOrder as po1 on po1.idPO = wo1.idPO and wo1.jobNo = po1.jobNo inner join job as jb1 on jb1.jobNo = po1.jobNo where hw1.dateWorked = hw.dateWorked and em.idEmployee = hw1.idEmployee and jb.jobNo = jb1.jobNo and po1.idPO = po.idPO and wo.idAuxWO = wo1.idAuxWO and tk1.idAux = tk.idAux and not wc1.name like '%6.4%' ) as 'hoursST',
+			(select iif(SUM(hw1.hoursOT)is null,0,SUM(hw1.hoursOT)) from hoursWorked as hw1 inner join workCode as wc1 on wc1.idWorkCode = hw.idWorkCode inner join task as tk1 on tk1.idAux = hw1.idAux inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO inner join projectOrder as po1 on po1.idPO = wo1.idPO and wo1.jobNo = po1.jobNo inner join job as jb1 on jb1.jobNo = po1.jobNo where hw1.dateWorked = hw.dateWorked and em.idEmployee = hw1.idEmployee and jb.jobNo = jb1.jobNo and po1.idPO = po.idPO and wo.idAuxWO = wo1.idAuxWO and tk1.idAux = tk.idAux and not wc1.name like '%6.4%' ) as 'hoursOT',
+			(select iif(SUM(hw1.hours3 )is null,0,SUM(hw1.hours3 )) from hoursWorked as hw1 inner join workCode as wc1 on wc1.idWorkCode = hw.idWorkCode inner join task as tk1 on tk1.idAux = hw1.idAux inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO inner join projectOrder as po1 on po1.idPO = wo1.idPO and wo1.jobNo = po1.jobNo inner join job as jb1 on jb1.jobNo = po1.jobNo where hw1.dateWorked = hw.dateWorked and em.idEmployee = hw1.idEmployee and jb.jobNo = jb1.jobNo and po1.idPO = po.idPO and wo.idAuxWO = wo1.idAuxWO and tk1.idAux = tk.idAux and not wc1.name like '%6.4%' ) as 'hours3',
 			SUBSTRING( wc.name,1,iif(CHARINDEX('-',wc.name)=0, len(wc.name) ,(CHARINDEX('-',wc.name)-1))) as 'Code',
 			hw.schedule as 'Shift', 
 			tk.expCode,
@@ -184,7 +187,7 @@ begin
 			inner join projectOrder as po on po.idPO = wo.idPO and wo.jobNo = po.jobNo 
 			inner join job as jb on jb.jobNo = po.jobNo
 			inner join clients as cl on cl.idClient=jb.idClient
-			where hw.dateWorked between @IntialDate and @FinalDate and (hw.hoursST > 0 or hw.hoursOT>0 or hw.hours3>0) and cl.numberClient=@numclient--and em.numberEmploye = 16874
+			where hw.dateWorked between @IntialDate and @FinalDate and (hw.hoursST > 0 or hw.hoursOT>0 or hw.hours3>0) and cl.numberClient=@numclient and jb.jobNo like IIF(@all=1,'%%',CONCAT('',@job,''))--and em.numberEmploye = 16874
 		) as T1
 		group by T1.jobNo,t1.idPO,t1.Task,t1.equipament,t1.description,t1.hoursST,t1.hoursOT,t1.hours3,t1.Code,t1.Shift,t1.expCode,t1.Complete,
 		t1.hrEst,t1.Employee,t1.[Emp: Number],t1.class
@@ -192,7 +195,6 @@ begin
 end
 end
 go
-
 --##############################################################################################
 --################## SP REPORT ACTIVE EMPLOYEE AVERAGE #########################################
 --##############################################################################################
@@ -216,7 +218,8 @@ go
 --CREATE proc [dbo].[Sp_All_Jobs]
 ALTER proc [dbo].[Sp_All_Jobs]
 @startdate as date, 
-@finaldate as date
+@finaldate as date,
+@clientnum as int
 as
 begin
 select distinct
@@ -254,7 +257,7 @@ select distinct
 		inner join projectOrder as po on po.idPO = wo.idPO and po.jobNo = wo.jobNo
 		inner join job as jb on jb.jobNo = wo.jobNo 
 		inner join clients as cl on cl.idClient = jb.idClient
-		where hw.dateWorked between @startdate and @finaldate 
+		where hw.dateWorked between @startdate and @finaldate and cl.numberClient = @clientnum
 	order by 
 	concat(em.lastName,', ', em.firstName,' ' ,em.middleName),
 	hw.dateWorked
@@ -268,7 +271,9 @@ go
 ALTER proc [dbo].[Sp_By_JobNumber]
 @startdate as date, 
 @finaldate as date,
-@clientnum as int
+@clientnum as int,
+@job as bigint,
+@all as bit
 as
 begin
 select distinct
@@ -309,7 +314,7 @@ select distinct
 		inner join projectOrder as po on po.idPO = wo.idPO and po.jobNo = wo.jobNo
 		inner join job as jb on jb.jobNo = wo.jobNo 
 		inner join clients as cl on cl.idClient = jb.idClient
-		where hw.dateWorked between @startdate and @finaldate and cl.numberClient = @clientnum
+		where hw.dateWorked between @startdate and @finaldate and cl.numberClient = @clientnum and jb.jobNo like iif(@all=1,'%%',CONCAT('',@job,''))
 	order by 
 	concat(em.lastName,', ', em.firstName,' ' ,em.middleName),
 	hw.dateWorked
@@ -494,57 +499,33 @@ go
 ALTER proc [dbo].[Sp_Employee_Per_Diem_Sheets]
 @startdate as date, 
 @finaldate as date,
-@clientnum as int
+@clientnum as int,
+@job as bigInt,
+@all as bit
 as
 begin
-if @startDate is not null and @FinalDate is not null
-begin
-	select CONVERT(date, DATEADD(DAY,  8-(DATEPART(dw, GETDATE())) ,GETDATE())) as 'Weekending',
-		po.jobNo as 'Job Num',
-		CONCAT(wo.idWO,' ', tk.task) as 'Project Name',
-		ex.expenseCode as 'Project Description' ,
-		cl.companyName as 'Company Name', 
-		CONCAT(em.lastName,',',em.firstName,' ',em.middleName) as 'Employee Name',
-		em.numberEmploye as 'Emp: Number',
-		em.typeEmployee as 'Class', 
-		sum(xp.amount) as 'Amount' 
-		from expensesUsed as xp 
-		inner join expenses as ex on xp.idExpense = ex.idExpenses
-		inner join employees as em on em.idEmployee = xp.idEmployee 
-		inner join task as tk on tk.idAux = xp.idAux
-		inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO
-		inner join projectOrder as po on po.idPO = wo.idPO and po.jobNo = wo.jobNo
-		inner join job as jb on jb.jobNo = wo.jobNo 
-		inner join clients as cl on cl.idClient = jb.idClient
-		where xp.dateExpense  between @startdate and @finaldate and cl.numberClient = @clientnum 
-		group by po.jobNo, wo.idWO, tk.task,cl.companyName, ex.expenseCode,
-		CONCAT(em.lastName,',',em.firstName,' ',em.middleName),em.numberEmploye,em.typeEmployee
+	select 
+	CONVERT(date, DATEADD(DAY,  8-(DATEPART(dw, xp.dateExpense)) ,xp.dateExpense)) as 'Weekending',
+			po.jobNo as 'Job Num',
+			CONCAT(wo.idWO,' ', tk.task) as 'Project Name',
+			ex.expenseCode as 'Project Description' ,
+			cl.companyName as 'Company Name',  
+			CONCAT(em.lastName,',',em.firstName,' ',em.middleName) as 'Employee Name',
+			em.numberEmploye as 'Emp: Number',
+			em.typeEmployee as 'Class', 
+			sum(xp.amount) as 'Amount' 
+			from expensesUsed as xp 
+			inner join expenses as ex on xp.idExpense = ex.idExpenses
+			inner join employees as em on em.idEmployee = xp.idEmployee 
+			inner join task as tk on tk.idAux = xp.idAux
+			inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO
+			inner join projectOrder as po on po.idPO = wo.idPO and po.jobNo = wo.jobNo
+			inner join job as jb on jb.jobNo = wo.jobNo 
+			inner join clients as cl on cl.idClient = jb.idClient
+			where xp.dateExpense  between @startdate and @finaldate and cl.numberClient = @clientnum and jb.jobNo like iif(@all=1,'%%',CONCAT('',@job,''))
+			group by CONVERT(date, DATEADD(DAY,  8-(DATEPART(dw, xp.dateExpense)) ,xp.dateExpense)),po.jobNo, wo.idWO, tk.task,cl.companyName, ex.expenseCode,
+			CONCAT(em.lastName,',',em.firstName,' ',em.middleName),em.numberEmploye,em.typeEmployee
 end
-else 
-begin
-	select CONVERT(date, DATEADD(DAY,  8-(DATEPART(dw, GETDATE())) ,GETDATE())) as 'Weekending',
-		po.jobNo as 'Job Num',
-		CONCAT(wo.idWO,' ', tk.task) as 'Project Name',
-		ex.expenseCode as 'Project Description' ,
-		cl.companyName as 'Company Name',  
-		CONCAT(em.lastName,',',em.firstName,' ',em.middleName) as 'Employee Name',
-		em.numberEmploye as 'Emp: Number',
-		em.typeEmployee as 'Class', 
-		sum(xp.amount) as 'Amount' 
-		from expensesUsed as xp 
-		inner join expenses as ex on xp.idExpense = ex.idExpenses
-		inner join employees as em on em.idEmployee = xp.idEmployee 
-		inner join task as tk on tk.idAux = xp.idAux
-		inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO
-		inner join projectOrder as po on po.idPO = wo.idPO and po.jobNo = wo.jobNo
-		inner join job as jb on jb.jobNo = wo.jobNo 
-		inner join clients as cl on cl.idClient = jb.idClient
-		where xp.dateExpense  between @startdate and @finaldate and cl.numberClient = @clientnum
-		group by po.jobNo, wo.idWO, tk.task,cl.companyName, ex.expenseCode,
-		CONCAT(em.lastName,',',em.firstName,' ',em.middleName),em.numberEmploye,em.typeEmployee
-end 
-end
-
 go
 
 --##############################################################################################

@@ -33,9 +33,20 @@ Public Class ReportAllJob
     End Sub
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
-        Dim reportTS As New AllJobs
-        reportTS.SetParameterValue("@startdate", validaFechaParaSQl(dtpInitialDate.Value.Date))
-        reportTS.SetParameterValue("@finaldate", validaFechaParaSQl(dtpFinalDate.Value.Date))
-        crvAllJobs.ReportSource = reportTS
+        If cmbClients.SelectedItem IsNot Nothing Then
+            Dim array() As String = cmbClients.SelectedItem.ToString.Split(" ")
+            Dim idclient As String = array(0)
+            Dim reportTS As New AllJobs
+            reportTS.SetParameterValue("@startdate", validaFechaParaSQl(dtpInitialDate.Value.Date))
+            reportTS.SetParameterValue("@finaldate", validaFechaParaSQl(dtpFinalDate.Value.Date))
+            reportTS.SetParameterValue("@clientnum", idclient)
+            crvAllJobs.ReportSource = reportTS
+        Else
+            MsgBox("Please select a Client.")
+        End If
+    End Sub
+
+    Private Sub ReportAllJob_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        llenarComboClientsReports(cmbClients)
     End Sub
 End Class

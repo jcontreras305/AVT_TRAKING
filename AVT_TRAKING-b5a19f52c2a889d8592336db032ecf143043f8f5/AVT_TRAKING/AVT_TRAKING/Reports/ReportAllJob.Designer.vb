@@ -40,6 +40,8 @@ Partial Class ReportAllJob
         Me.PictureBox3 = New System.Windows.Forms.PictureBox()
         Me.btnRestore = New System.Windows.Forms.PictureBox()
         Me.btnMaximize = New System.Windows.Forms.PictureBox()
+        Me.cmbClients = New System.Windows.Forms.ComboBox()
+        Me.Label4 = New System.Windows.Forms.Label()
         Me.TableLayoutPanel1.SuspendLayout()
         Me.Panel3.SuspendLayout()
         Me.Panel2.SuspendLayout()
@@ -92,6 +94,8 @@ Partial Class ReportAllJob
         'Panel2
         '
         Me.Panel2.BackColor = System.Drawing.Color.FromArgb(CType(CType(83, Byte), Integer), CType(CType(93, Byte), Integer), CType(CType(102, Byte), Integer))
+        Me.Panel2.Controls.Add(Me.Label4)
+        Me.Panel2.Controls.Add(Me.cmbClients)
         Me.Panel2.Controls.Add(Me.Button1)
         Me.Panel2.Controls.Add(Me.Label2)
         Me.Panel2.Controls.Add(Me.Label1)
@@ -113,7 +117,7 @@ Partial Class ReportAllJob
         Me.Button1.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.Button1.Image = Global.AVT_TRAKING.My.Resources.Resources.reportshow
         Me.Button1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.Button1.Location = New System.Drawing.Point(213, 20)
+        Me.Button1.Location = New System.Drawing.Point(401, 4)
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(83, 33)
         Me.Button1.TabIndex = 14
@@ -247,6 +251,25 @@ Partial Class ReportAllJob
         Me.btnMaximize.TabIndex = 7
         Me.btnMaximize.TabStop = False
         '
+        'cmbClients
+        '
+        Me.cmbClients.FormattingEnabled = True
+        Me.cmbClients.Location = New System.Drawing.Point(245, 2)
+        Me.cmbClients.Name = "cmbClients"
+        Me.cmbClients.Size = New System.Drawing.Size(137, 21)
+        Me.cmbClients.TabIndex = 15
+        '
+        'Label4
+        '
+        Me.Label4.AutoSize = True
+        Me.Label4.Font = New System.Drawing.Font("Verdana", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label4.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.Label4.Location = New System.Drawing.Point(196, 4)
+        Me.Label4.Name = "Label4"
+        Me.Label4.Size = New System.Drawing.Size(43, 14)
+        Me.Label4.TabIndex = 16
+        Me.Label4.Text = "Client"
+        '
         'ReportAllJob
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -290,4 +313,6 @@ Partial Class ReportAllJob
     Friend WithEvents PictureBox3 As PictureBox
     Friend WithEvents btnRestore As PictureBox
     Friend WithEvents btnMaximize As PictureBox
+    Friend WithEvents Label4 As Label
+    Friend WithEvents cmbClients As ComboBox
 End Class

@@ -33,9 +33,37 @@ Public Class ReportTimeSheetsPO
     End Sub
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
-        Dim reportTS As New TimeSheetPO
-        reportTS.SetParameterValue("@IntialDate", validaFechaParaSQl(dtpInitialDate.Value.Date))
-        reportTS.SetParameterValue("@FinalDate", validaFechaParaSQl(dtpFinalDate.Value.Date))
-        crvTimeSheetPO.ReportSource = reportTS
+        Dim array() = cmbClients.SelectedItem.ToString().Split("    ")
+        Dim idClient As String = array(0)
+        If idClient <> "" Or idClient IsNot Nothing Then
+            Dim reportTS As New TimeSheetPO
+            reportTS.SetParameterValue("@IntialDate", validaFechaParaSQl(dtpInitialDate.Value.Date))
+            reportTS.SetParameterValue("@FinalDate", validaFechaParaSQl(dtpFinalDate.Value.Date))
+            reportTS.SetParameterValue("@clientnum", idClient)
+            reportTS.SetParameterValue("@job", If(cmbJob.SelectedItem IsNot Nothing, CInt(cmbJob.SelectedItem), 0))
+            reportTS.SetParameterValue("@all", If(chbAllJobs.CheckAlign, 1, 0))
+            crvTimeSheetPO.ReportSource = reportTS
+        Else
+            MsgBox("Please select a 'Client'")
+        End If
+    End Sub
+
+    Private Sub ReportTimeSheetsPO_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        llenarComboClientsReports(cmbClients)
+    End Sub
+
+    Private Sub cmbClients_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbClients.SelectedIndexChanged
+        If cmbClients.SelectedItem IsNot Nothing Then
+            Dim array() As String = cmbClients.SelectedItem.ToString.Split(" ")
+            llenarComboJobsReports(cmbJob, array(0))
+        End If
+    End Sub
+
+    Private Sub chbAllJobs_CheckedChanged(sender As Object, e As EventArgs) Handles chbAllJobs.CheckedChanged
+        If chbAllJobs.Checked Then
+            cmbJob.Enabled = False
+        Else
+            cmbJob.Enabled = True
+        End If
     End Sub
 End Class
