@@ -29,6 +29,8 @@ Public Class scafoldTarking
     Dim loadingData As Boolean 'Estas variables las utilizo para que los datos no activen los events de los elementos en la interfaz
     Dim loadingDataModification As Boolean
     Dim loadingDataDismentle As Boolean
+    Dim cmbProyect As New DataGridViewComboBoxCell
+    Dim cmbProyect1 As New DataGridViewComboBoxCell
     Private Sub scafoldTarking_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         If IdCliente <> "" Then
             lblCompanyName.Text = "Client: " + Company
@@ -102,7 +104,7 @@ Public Class scafoldTarking
         mtdScaffold.llenarEmpleadosCombo(cmbForemanScaffold, tablaEmpleados)
         mtdScaffold.llenarEmpleadosCombo(cmbErectorScaffold, tablaEmpleados)
         tblScaffoldInformation.Rows.Add("", "", "", "", "", "", "", "")
-        Dim cmbProyect As New DataGridViewComboBoxCell
+
         With cmbProyect
             mtdScaffold.llenarRentaTypeCombo(cmbProyect)
         End With
@@ -120,7 +122,7 @@ Public Class scafoldTarking
         dtpModificationDate.Format = DateTimePickerFormat.Custom
         dtpModificationDate.CustomFormat = "MM/dd/yyyy"
         tblScaffoldInformationSM.Rows.Add("", "", "", "", "", "", "", "")
-        Dim cmbProyect1 As New DataGridViewComboBoxCell
+
         With cmbProyect
             mtdScaffold.llenarRentaTypeCombo(cmbProyect1)
         End With
@@ -227,6 +229,12 @@ Public Class scafoldTarking
                 End If
             Case tblRentTable.Name
                 If mtdScaffold.SaveRentalTable(tblRentTable) Then
+                    Dim valcmb = If(cmbProyect.Value <> "", cmbProyect.Value, "")
+                    Dim valcmb1 = If(cmbProyect.Value <> "", cmbProyect.Value, "")
+                    mtdScaffold.llenarRentaTypeCombo(cmbProyect)
+                    mtdScaffold.llenarRentaTypeCombo(cmbProyect1)
+                    cmbProyect.Value = valcmb
+                    cmbProyect.Value = valcmb1
                     MsgBox("Sucessfull")
                 End If
             Case tblProduct.Name
@@ -439,6 +447,12 @@ Public Class scafoldTarking
                 mtdScaffold.SaveClassification(tblClassification)
                 mtdScaffold.SaveUnitMeassurement(tblUnitMeassurement)
                 mtdScaffold.SaveRentalTable(tblRentTable)
+                Dim valcmb = If(cmbProyect.Value <> "", cmbProyect.Value, "")
+                Dim valcmb1 = If(cmbProyect.Value <> "", cmbProyect.Value, "")
+                mtdScaffold.llenarRentaTypeCombo(cmbProyect)
+                mtdScaffold.llenarRentaTypeCombo(cmbProyect1)
+                cmbProyect.Value = valcmb
+                cmbProyect.Value = valcmb1
             Case "Supervisor"
             Case "ScaffoldTraking"
                 If mtdScaffold.saveScaffoldTraking(sc) Then
@@ -532,6 +546,7 @@ Public Class scafoldTarking
                     Dim cmbPd As New DataGridViewComboBoxCell
                     With cmbPd
                         mtdScaffold.llenarCellComboIDProduct(cmbPd, tblProductScaffoldAux)
+                        cmbPd.DropDownWidth = 280
                     End With
                     If tblProductosScaffold.CurrentRow.Cells(1).Value IsNot Nothing Then
                         For Each row As Data.DataRow In tblProductScaffoldAux.Rows()
@@ -717,6 +732,8 @@ Public Class scafoldTarking
                         mtdScaffold.llenarProduct(tblProductosAux)
                     End If
                 End If
+            Case "Dis"
+
             Case "Est"
                 If mtdEstimation.ccnum <> "" And DialogResult.OK = MessageBox.Show("The Estimation will be delete, Are you sure to continue?", "Important", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) Then
                     If mtdEstimation.deleteEstimation(mtdEstimation.idEstnumber) Then
@@ -1446,7 +1463,7 @@ Public Class scafoldTarking
 
     Private Sub btnSaveRowProduct_Click(sender As Object, e As EventArgs) Handles btnSaveRowProduct.Click
         If tblProduct.SelectedRows().Count > 0 Then
-            Dim lis = mtdScaffold.saveProducto(tblProduct, False)
+            Dim lis = mtdScaffold.saveProducto(tblProduct, True)
             If lis.Count = 0 Or lis IsNot Nothing Then
                 MsgBox("Sucessfull")
                 mtdScaffold.llenarProduct(tblProduct)
@@ -1643,7 +1660,14 @@ Public Class scafoldTarking
         End If
         mtdScaffold.llenarPoductosIncoming(tblInComing, txtTicketNumInComing.Text)
     End Sub
+    Private Sub btnUpdateExcelInConming_Click(sender As Object, e As EventArgs) Handles btnUpdateExcelInConming.Click
+        Try
+            Dim pdscfe As New ProductSCFExcel
+            pdscfe.ShowDialog()
+        Catch ex As Exception
 
+        End Try
+    End Sub
     Private Sub cmbJobNumOutGoing_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbJobNumOutGoing.SelectedIndexChanged
         Try
             If cmbJobNumOutGoing.Text <> "" Then
@@ -2867,6 +2891,7 @@ Public Class scafoldTarking
                     Dim cmbPd As New DataGridViewComboBoxCell
                     With cmbPd
                         mtdScaffold.llenarCellComboIDProduct(cmbPd, tblProductScaffoldAux)
+                        cmbPd.DropDownWidth = 260
                     End With
                     If tblModificationProductMS.CurrentRow.Cells(1).Value IsNot Nothing Then
                         For Each row As Data.DataRow In tblProductScaffoldAux.Rows()
@@ -3430,6 +3455,7 @@ Public Class scafoldTarking
     End Sub
 
     Private Sub btnMaximize_Click(sender As Object, e As EventArgs) Handles btnMaximize.Click
+        MaximizedBounds = Screen.FromHandle(Me.Handle).WorkingArea
         WindowState = FormWindowState.Maximized
         btnMaximize.Visible = False
         btnRestore.Visible = True
@@ -3877,7 +3903,6 @@ Public Class scafoldTarking
         Catch ex As Exception
         End Try
     End Sub
-
     Private Sub cmbCCNUM_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbCCNUM.SelectedIndexChanged
         Try
             If cmbCCNUM.SelectedItem IsNot Nothing Then

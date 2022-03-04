@@ -686,7 +686,7 @@ where ps.tag = '" + tag + "'", conn)
             conectar()
             Dim cmd As New SqlCommand("select mh.truck,mh.forklift,mh.trailer,mh.crane,mh.rope,mh.passed,mh.elevator,idMaterialHandeling
 from materialHandeling as mh
-where mh.tag = '" + tag + "' and idModification is Null", conn)
+where mh.tag = '" + tag + "' and idModAux is Null", conn)
             Dim dr As SqlDataReader = cmd.ExecuteReader()
             While dr.Read()
                 materialHandeling(0) = If(dr("truck") = "t", True, False)

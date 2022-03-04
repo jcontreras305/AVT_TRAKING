@@ -539,6 +539,7 @@ Partial Class scafoldTarking
         Me.btnSaveTable = New System.Windows.Forms.Button()
         Me.btnDeleteRows = New System.Windows.Forms.Button()
         Me.btnSaveAll = New System.Windows.Forms.Button()
+        Me.btnUpdateExcelInConming = New System.Windows.Forms.Button()
         Me.Panel1.SuspendLayout()
         Me.Panel3.SuspendLayout()
         Me.tabControl1.SuspendLayout()
@@ -864,6 +865,7 @@ Partial Class scafoldTarking
         '
         'Panel5
         '
+        Me.Panel5.Controls.Add(Me.btnUpdateExcelInConming)
         Me.Panel5.Controls.Add(Me.btnDeleteRowInComing)
         Me.Panel5.Controls.Add(Me.btnSaveRowInComing)
         Me.Panel5.Controls.Add(Me.btnNextInComing)
@@ -923,11 +925,11 @@ Partial Class scafoldTarking
         Me.btnNextInComing.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(58, Byte), Integer), CType(CType(115, Byte), Integer))
         Me.btnNextInComing.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnNextInComing.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnNextInComing.Image = Global.AVT_TRAKING.My.Resources.Resources._next
         Me.btnNextInComing.Location = New System.Drawing.Point(126, 260)
         Me.btnNextInComing.Name = "btnNextInComing"
         Me.btnNextInComing.Size = New System.Drawing.Size(110, 44)
         Me.btnNextInComing.TabIndex = 14
-        Me.btnNextInComing.Text = "-->"
         Me.btnNextInComing.UseVisualStyleBackColor = True
         '
         'btnBackInComing
@@ -936,11 +938,11 @@ Partial Class scafoldTarking
         Me.btnBackInComing.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(58, Byte), Integer), CType(CType(115, Byte), Integer))
         Me.btnBackInComing.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnBackInComing.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnBackInComing.Image = Global.AVT_TRAKING.My.Resources.Resources.after1
         Me.btnBackInComing.Location = New System.Drawing.Point(6, 259)
         Me.btnBackInComing.Name = "btnBackInComing"
         Me.btnBackInComing.Size = New System.Drawing.Size(110, 45)
         Me.btnBackInComing.TabIndex = 13
-        Me.btnBackInComing.Text = "<--"
         Me.btnBackInComing.UseVisualStyleBackColor = True
         '
         'btnNewInComing
@@ -6335,6 +6337,21 @@ Partial Class scafoldTarking
         Me.btnSaveAll.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         Me.btnSaveAll.UseVisualStyleBackColor = True
         '
+        'btnUpdateExcelInConming
+        '
+        Me.btnUpdateExcelInConming.FlatAppearance.BorderSize = 0
+        Me.btnUpdateExcelInConming.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(58, Byte), Integer), CType(CType(115, Byte), Integer))
+        Me.btnUpdateExcelInConming.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnUpdateExcelInConming.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnUpdateExcelInConming.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnUpdateExcelInConming.Location = New System.Drawing.Point(6, 300)
+        Me.btnUpdateExcelInConming.Name = "btnUpdateExcelInConming"
+        Me.btnUpdateExcelInConming.Size = New System.Drawing.Size(125, 36)
+        Me.btnUpdateExcelInConming.TabIndex = 15
+        Me.btnUpdateExcelInConming.Text = "Update Excel"
+        Me.btnUpdateExcelInConming.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.btnUpdateExcelInConming.UseVisualStyleBackColor = True
+        '
         'scafoldTarking
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -7089,4 +7106,5 @@ Partial Class scafoldTarking
     Friend WithEvents Panel93 As Panel
     Friend WithEvents cmbCCNUM As ComboBox
     Friend WithEvents lblCompanyName As Label
+    Friend WithEvents btnUpdateExcelInConming As Button
 End Class

@@ -186,11 +186,11 @@ Public Class ModificationSC
             _status = status
         End Set
     End Property
-    Public Function llenarSacffoldInformation(ByVal ModiAux As String, ByVal tag As String) As Boolean
+    Public Function llenarSacffoldInformation(ByVal tag As String) As Boolean
         Try
             conectar()
             Dim cmd As New SqlCommand("select idScaffoldInformation,type,width,length,heigth,descks,ko,base,extraDeck from scaffoldInformation
-                where tag = '" + tag + "' and idModAux='" + ModAux + "'", conn)
+                where tag = '" + tag + "'", conn)
             Dim rd As SqlDataReader = cmd.ExecuteReader()
             While rd.Read()
                 _idScaffoldinformation = If(rd("idScaffoldInformation") Is DBNull.Value, "", rd("idScaffoldInformation"))

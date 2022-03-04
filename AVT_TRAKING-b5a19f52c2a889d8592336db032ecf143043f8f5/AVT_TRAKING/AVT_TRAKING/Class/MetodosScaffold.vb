@@ -2168,22 +2168,22 @@ end", conn)
             cmdTraking.Transaction = tran
             If cmdTraking.ExecuteNonQuery > 0 Then 'si entra se tubo que insertar o actualizar si no hubo un error 
                 Dim cmdScaffoflInfo As New SqlCommand("
-if (select count(*) from scaffoldInformation where tag ='" + sc.tag + "' and idModification is Null)=0
+if (select count(*) from scaffoldInformation where tag ='" + sc.tag + "' and idModAux is Null)=0
 begin 
 	insert into scaffoldInformation values(NEWID()," + If(sc.sciType = "", "Null", "'" + sc.sciType + "'") + "," + CStr(sc.sciWidth) + "," + CStr(sc.sciLength) + "," + CStr(sc.sciHeigth) + "," + CStr(sc.sciDecks) + "," + CStr(sc.sciKo) + "," + CStr(sc.sciBase) + "," + CStr(sc.sciExtraDeck) + ",'" + sc.tag + "',Null)
 end
-else if(select count(*) from scaffoldInformation where tag ='" + sc.tag + "' and idModification is Null)=1 
+else if(select count(*) from scaffoldInformation where tag ='" + sc.tag + "' and idModAux is Null)=1 
 begin 
 	update scaffoldInformation set type=" + If(sc.sciType = "", "Null", "'" + sc.sciType + "'") + ",width=" + CStr(sc.sciWidth) + ",length=" + CStr(sc.sciLength) + ",heigth=" + CStr(sc.sciHeigth) + ",descks=" + CStr(sc.sciDecks) + ",ko=" + CStr(sc.sciKo) + ",base=" + CStr(sc.sciBase) + ",extraDeck=" + CStr(sc.sciExtraDeck) + " where idScaffoldInformation = '" + sc.idScaffoldinformation + "'
 end", conn)
                 cmdScaffoflInfo.Transaction = tran
                 If cmdScaffoflInfo.ExecuteNonQuery Then 'si entra se tubo que insertar o actulzar la tabla de ScaffoldInformation
                     Dim cmdHours As New SqlCommand("
-if (select count(*) from activityHours where tag ='" + sc.tag + "'  and idModification is Null and idDismantle is Null)=0
+if (select count(*) from activityHours where tag ='" + sc.tag + "'  and idModAux is Null and idDismantle is Null)=0
 begin 
 	insert into activityHours values(NEWID()," + CStr(sc.ahrBuild) + "," + CStr(sc.ahrMaterial) + "," + CStr(sc.ahrTravel) + "," + CStr(sc.ahrWeather) + "," + CStr(sc.ahrAlarm) + "," + CStr(sc.ahrSafety) + "," + CStr(sc.ahrStdBy) + "," + CStr(sc.ahrOther) + ",'" + sc.tag + "',Null,Null)
 end
-else if(select count(*) from activityHours where tag ='" + sc.tag + "'  and idModification is Null and idDismantle is Null)=1
+else if(select count(*) from activityHours where tag ='" + sc.tag + "'  and idModAux is Null and idDismantle is Null)=1
 begin 
 	update activityHours set build=" + CStr(sc.ahrBuild) + ",material=" + CStr(sc.ahrMaterial) + ",travel=" + CStr(sc.ahrTravel) + ",weather=" + CStr(sc.ahrWeather) + ",alarm=" + CStr(sc.ahrAlarm) + ",safety=" + CStr(sc.ahrSafety) + ",stdBy=" + CStr(sc.ahrStdBy) + ",other=" + CStr(sc.ahrOther) + " where idActivityHours = '" + sc.ahrIdActivityHours + "'
 end ", conn)
@@ -2201,11 +2201,11 @@ end", conn)
                         cmdScfInfo.Transaction = tran
                         If cmdScfInfo.ExecuteNonQuery > 0 Then 'si entra se tubo que isertar o actualizarr la tabla de scfInfo 
                             Dim cmdMaterialHandeling As New SqlCommand("
-if (select count(*) from materialHandeling where tag='" + sc.tag + "' and idModification is Null and idDismantle is Null)=0
+if (select count(*) from materialHandeling where tag='" + sc.tag + "' and idModAux is Null and idDismantle is Null)=0
 begin 
 	insert into materialHandeling values(NEWID(),'" + If(sc.materialHandeling(0), "t", "f") + "','" + If(sc.materialHandeling(1), "t", "f") + "','" + If(sc.materialHandeling(2), "t", "f") + "','" + If(sc.materialHandeling(3), "t", "f") + "','" + If(sc.materialHandeling(4), "t", "f") + "','" + If(sc.materialHandeling(5), "t", "f") + "','" + If(sc.materialHandeling(6), "t", "f") + "','" + sc.tag + "',Null,Null)
 end
-else if (select count(*) from materialHandeling where tag='" + sc.tag + "' and idModification is Null and idDismantle is Null)=1
+else if (select count(*) from materialHandeling where tag='" + sc.tag + "' and idModAux is Null and idDismantle is Null)=1
 begin
 	update materialHandeling set truck='" + If(sc.materialHandeling(0), "t", "f") + "',forklift='" + If(sc.materialHandeling(1), "t", "f") + "',trailer='" + If(sc.materialHandeling(2), "t", "f") + "',crane='" + If(sc.materialHandeling(3), "t", "f") + "',rope='" + If(sc.materialHandeling(4), "t", "f") + "',passed='" + If(sc.materialHandeling(5), "t", "f") + "',elevator='" + If(sc.materialHandeling(6), "t", "f") + "' where idMaterialHandeling ='" + sc.idMaterialHandeling + "' 
 end", conn)
@@ -2342,7 +2342,7 @@ end", conn)
             End If
         Catch ex As Exception
             MsgBox(ex.Message())
-            tran.Rollback()
+            'tran.Rollback()
             Return False
         Finally
             desconectar()
@@ -2581,7 +2581,7 @@ inner join materialHandeling as mh on md.idModAux = mh.idModAux
 inner join scaffoldTraking as scf on scf.tag = md.tag
 inner join task as tk on tk.idAux = scf.idAux
 inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO
-inner join projectOrder as po on po.idPO = wo.idWO and po.jobNo = wo.jobNo 
+inner join projectOrder as po on po.idPO = wo.idPO and po.jobNo = wo.jobNo 
 inner join job as jb on jb.jobNo = po.jobNo" +
 If(idCliente = "", "", " where idClient ='" + idCliente + "'"), conn)
             tabla.Clear()
@@ -2621,9 +2621,10 @@ If(idCliente = "", "", " where idClient ='" + idCliente + "'"), conn)
             dr1.Close()
             md.llenarActivityHours(md.ModAux, md.tag)
             md.llenarMaterialHandeling(md.ModAux, md.tag)
-            md.llenarSacffoldInformation(md.ModAux, md.tag)
+            md.llenarSacffoldInformation(md.tag)
             md.productsAdds = md.llenarTablaProductMod(md.ModAux, md.tag)
             md.llenarTablaProductTag(md.tag)
+
             Return md
         Catch ex As Exception
             Return md

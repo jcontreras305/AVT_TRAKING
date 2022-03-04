@@ -213,6 +213,12 @@
     <Compile Include="Froms\Perdiem.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Froms\ProductSCFExcel.Designer.vb">
+      <DependentUpon>ProductSCFExcel.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Froms\ProductSCFExcel.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Froms\Project.vb" />
     <Compile Include="Froms\ProjectsCosts.Designer.vb">
       <DependentUpon>ProjectsCosts.vb</DependentUpon>
@@ -576,6 +582,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Froms\Perdiem.resx">
       <DependentUpon>Perdiem.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Froms\ProductSCFExcel.resx">
+      <DependentUpon>ProductSCFExcel.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Froms\ProjectsCosts.resx">
       <DependentUpon>ProjectsCosts.vb</DependentUpon>
