@@ -578,11 +578,31 @@ end ", conn)
     End Function
 
     '========================================================= Empleados =================================================================
+    Public Function llenarEmpleadosCombo(ByVal combo As ComboBox) As Boolean
+        Try
+            conectar()
+            Dim cmd As New SqlCommand("select numberEmploye , CONCAT(lastName,' ',firstName,' ',middleName) as 'name' from employees", conn)
+            Dim dr As SqlDataReader = cmd.ExecuteReader()
+            combo.Items.Clear()
+            While dr.Read()
+                combo.Items.Add(CStr(dr("numberEmploye")) + " " + dr("name"))
+            End While
+            dr.Close()
+            Return True
+        Catch ex As Exception
+            MsgBox(ex.Message)
+            Return False
+        Finally
+            desconectar()
+        End Try
+    End Function
     Public Function llenarEmpleadosCombo(ByVal combo As ComboBox, ByVal tabla As DataTable) As Boolean
         Try
             conectar()
             Dim cmd As New SqlCommand("select idEmployee, CONCAT(firstName,' ',middleName,' ',lastName) , photo as 'Photo', SAPNumber, numberEmploye from employees where estatus = 'E' ", conn)
-            tabla.Clear()
+            If tabla IsNot Nothing Then
+                tabla.Rows.Clear()
+            End If
             If cmd.ExecuteNonQuery Then
                 Dim da As New SqlDataAdapter(cmd)
                 da.Fill(tabla)
@@ -1624,7 +1644,21 @@ where ticketNum = '" + list(0) + "'"
             desconectar()
         End Try
     End Function
-
+    Public Function llenarTablaProductosIcomminOutgoing(ByVal tblProducts As DataTable) As Boolean
+        Try
+            conectar()
+            Dim cmd As New SqlCommand("select idProduct, price, um,name,quantity,PLF,PSQF from product", conn)
+            If cmd.ExecuteNonQuery() Then
+                Dim da As New SqlDataAdapter(cmd)
+                da.Fill(tblProducts)
+                Return True
+            Else
+                Return False
+            End If
+        Catch ex As Exception
+            Return False
+        End Try
+    End Function
     Public Function llenarCellComboIDProduct(ByVal cmb As DataGridViewComboBoxCell, ByVal tablaPoductoIncoming As DataTable) As Boolean
         Try
             conectar()
@@ -1965,7 +1999,7 @@ end", conn)
             Dim cont As Integer = 0
             If tbl.SelectedRows.Count() > 0 Then
                 For Each row As DataGridViewRow In tbl.SelectedRows()
-                    If CStr(row.Cells(1).Value) <> "" Then
+                    If CStr(row.Cells(1).Value) <> "" And row.Cells(5).Value IsNot Nothing Then
                         Dim idProduct() = row.Cells(1).Value.ToString().Split("  ")
                         Dim cmdUpdateProduct As New SqlCommand("update product set quantity = quantity + (select quantity from productOutGoing where idProductOutGoing = '" + row.Cells(5).Value.ToString() + "') where idProduct = " + idProduct(0) + "", conn)
                         cmdUpdateProduct.Transaction = tran

@@ -353,7 +353,7 @@ Module metodosGlobales
     ''' <param name="nColum"></param>
     ''' <returns></returns>
     Public Function nreg(ByVal sheet As Microsoft.Office.Interop.Excel.Worksheet, ByVal rowStart As Long, ByVal nColum As Long) As Long
-        Do Until sheet.Cells(rowStart, nColum).Value = ""
+        Do Until CStr(sheet.Cells(rowStart, nColum).Value) = ""
             rowStart += 1
         Loop
         Return rowStart

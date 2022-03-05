@@ -24,56 +24,60 @@ Partial Class ProductSCFExcel
     Private Sub InitializeComponent()
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
         Me.Panel1 = New System.Windows.Forms.Panel()
-        Me.Panel2 = New System.Windows.Forms.Panel()
         Me.PictureBox3 = New System.Windows.Forms.PictureBox()
         Me.btnRestore = New System.Windows.Forms.PictureBox()
         Me.btnMaximize = New System.Windows.Forms.PictureBox()
         Me.PictureBox4 = New System.Windows.Forms.PictureBox()
         Me.lblTitle = New System.Windows.Forms.Label()
-        Me.ComboBox1 = New System.Windows.Forms.ComboBox()
-        Me.ComboBox2 = New System.Windows.Forms.ComboBox()
+        Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.tblProducts = New System.Windows.Forms.DataGridView()
+        Me.Panel3 = New System.Windows.Forms.Panel()
         Me.btnUpdateExcel = New System.Windows.Forms.Button()
-        Me.Label1 = New System.Windows.Forms.Label()
-        Me.Label2 = New System.Windows.Forms.Label()
-        Me.DataGridView1 = New System.Windows.Forms.DataGridView()
+        Me.Panel4 = New System.Windows.Forms.Panel()
+        Me.lblMessage = New System.Windows.Forms.Label()
+        Me.pgbComplete = New System.Windows.Forms.ProgressBar()
+        Me.btnUpdateTableSCF = New System.Windows.Forms.Button()
         Me.QTY = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.ProductID = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.CostUM = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.UM = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.ProductDescription = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.QTYMax = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.TableLayoutPanel1.SuspendLayout()
         Me.Panel1.SuspendLayout()
-        Me.Panel2.SuspendLayout()
         CType(Me.PictureBox3, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.btnRestore, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.btnMaximize, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox4, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.Panel2.SuspendLayout()
+        CType(Me.tblProducts, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.Panel3.SuspendLayout()
+        Me.Panel4.SuspendLayout()
         Me.SuspendLayout()
         '
         'TableLayoutPanel1
         '
-        Me.TableLayoutPanel1.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(58, Byte), Integer), CType(CType(115, Byte), Integer))
+        Me.TableLayoutPanel1.BackColor = System.Drawing.Color.FromArgb(CType(CType(83, Byte), Integer), CType(CType(93, Byte), Integer), CType(CType(102, Byte), Integer))
         Me.TableLayoutPanel1.ColumnCount = 1
-        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
+        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
         Me.TableLayoutPanel1.Controls.Add(Me.Panel1, 0, 0)
-        Me.TableLayoutPanel1.Controls.Add(Me.Panel2, 0, 1)
+        Me.TableLayoutPanel1.Controls.Add(Me.Panel2, 0, 2)
+        Me.TableLayoutPanel1.Controls.Add(Me.Panel3, 0, 1)
+        Me.TableLayoutPanel1.Controls.Add(Me.Panel4, 0, 3)
         Me.TableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.TableLayoutPanel1.Location = New System.Drawing.Point(0, 0)
         Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
-        Me.TableLayoutPanel1.RowCount = 2
-        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 27.8481!))
-        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 72.1519!))
-        Me.TableLayoutPanel1.Size = New System.Drawing.Size(674, 291)
+        Me.TableLayoutPanel1.RowCount = 4
+        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 80.0!))
+        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 60.0!))
+        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
+        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 49.0!))
+        Me.TableLayoutPanel1.Size = New System.Drawing.Size(805, 445)
         Me.TableLayoutPanel1.TabIndex = 0
         '
         'Panel1
         '
-        Me.Panel1.Controls.Add(Me.Label2)
-        Me.Panel1.Controls.Add(Me.Label1)
-        Me.Panel1.Controls.Add(Me.btnUpdateExcel)
-        Me.Panel1.Controls.Add(Me.ComboBox2)
-        Me.Panel1.Controls.Add(Me.ComboBox1)
+        Me.Panel1.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(58, Byte), Integer), CType(CType(115, Byte), Integer))
         Me.Panel1.Controls.Add(Me.PictureBox3)
         Me.Panel1.Controls.Add(Me.btnRestore)
         Me.Panel1.Controls.Add(Me.btnMaximize)
@@ -82,24 +86,14 @@ Partial Class ProductSCFExcel
         Me.Panel1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel1.Location = New System.Drawing.Point(3, 3)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(668, 75)
+        Me.Panel1.Size = New System.Drawing.Size(799, 74)
         Me.Panel1.TabIndex = 0
-        '
-        'Panel2
-        '
-        Me.Panel2.BackColor = System.Drawing.Color.FromArgb(CType(CType(83, Byte), Integer), CType(CType(93, Byte), Integer), CType(CType(102, Byte), Integer))
-        Me.Panel2.Controls.Add(Me.DataGridView1)
-        Me.Panel2.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel2.Location = New System.Drawing.Point(3, 84)
-        Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(668, 204)
-        Me.Panel2.TabIndex = 1
         '
         'PictureBox3
         '
         Me.PictureBox3.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.PictureBox3.Image = Global.AVT_TRAKING.My.Resources.Resources.minimize2
-        Me.PictureBox3.Location = New System.Drawing.Point(607, 3)
+        Me.PictureBox3.Location = New System.Drawing.Point(738, 3)
         Me.PictureBox3.Name = "PictureBox3"
         Me.PictureBox3.Size = New System.Drawing.Size(27, 29)
         Me.PictureBox3.TabIndex = 15
@@ -109,7 +103,7 @@ Partial Class ProductSCFExcel
         '
         Me.btnRestore.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnRestore.Image = Global.AVT_TRAKING.My.Resources.Resources.restore2
-        Me.btnRestore.Location = New System.Drawing.Point(591, 30)
+        Me.btnRestore.Location = New System.Drawing.Point(768, 0)
         Me.btnRestore.Name = "btnRestore"
         Me.btnRestore.Size = New System.Drawing.Size(26, 29)
         Me.btnRestore.TabIndex = 13
@@ -119,7 +113,7 @@ Partial Class ProductSCFExcel
         '
         Me.btnMaximize.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnMaximize.Image = Global.AVT_TRAKING.My.Resources.Resources.maximize2
-        Me.btnMaximize.Location = New System.Drawing.Point(637, 3)
+        Me.btnMaximize.Location = New System.Drawing.Point(768, 3)
         Me.btnMaximize.Name = "btnMaximize"
         Me.btnMaximize.Size = New System.Drawing.Size(31, 29)
         Me.btnMaximize.TabIndex = 12
@@ -129,7 +123,7 @@ Partial Class ProductSCFExcel
         '
         Me.PictureBox4.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.PictureBox4.Image = Global.AVT_TRAKING.My.Resources.Resources._exit
-        Me.PictureBox4.Location = New System.Drawing.Point(634, 43)
+        Me.PictureBox4.Location = New System.Drawing.Point(761, 40)
         Me.PictureBox4.Name = "PictureBox4"
         Me.PictureBox4.Size = New System.Drawing.Size(37, 29)
         Me.PictureBox4.TabIndex = 14
@@ -146,68 +140,100 @@ Partial Class ProductSCFExcel
         Me.lblTitle.TabIndex = 16
         Me.lblTitle.Text = "Product Inconming or OutGoing"
         '
-        'ComboBox1
+        'Panel2
         '
-        Me.ComboBox1.FormattingEnabled = True
-        Me.ComboBox1.Location = New System.Drawing.Point(48, 43)
-        Me.ComboBox1.Name = "ComboBox1"
-        Me.ComboBox1.Size = New System.Drawing.Size(149, 21)
-        Me.ComboBox1.TabIndex = 17
+        Me.Panel2.BackColor = System.Drawing.Color.FromArgb(CType(CType(83, Byte), Integer), CType(CType(93, Byte), Integer), CType(CType(102, Byte), Integer))
+        Me.Panel2.Controls.Add(Me.tblProducts)
+        Me.Panel2.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Panel2.Location = New System.Drawing.Point(3, 143)
+        Me.Panel2.Name = "Panel2"
+        Me.Panel2.Size = New System.Drawing.Size(799, 250)
+        Me.Panel2.TabIndex = 1
         '
-        'ComboBox2
+        'tblProducts
         '
-        Me.ComboBox2.FormattingEnabled = True
-        Me.ComboBox2.Location = New System.Drawing.Point(244, 43)
-        Me.ComboBox2.Name = "ComboBox2"
-        Me.ComboBox2.Size = New System.Drawing.Size(149, 21)
-        Me.ComboBox2.TabIndex = 18
+        Me.tblProducts.AllowUserToAddRows = False
+        Me.tblProducts.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
+        Me.tblProducts.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.tblProducts.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.QTY, Me.ProductID, Me.CostUM, Me.UM, Me.ProductDescription, Me.QTYMax})
+        Me.tblProducts.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.tblProducts.Location = New System.Drawing.Point(0, 0)
+        Me.tblProducts.Name = "tblProducts"
+        Me.tblProducts.Size = New System.Drawing.Size(799, 250)
+        Me.tblProducts.TabIndex = 0
+        '
+        'Panel3
+        '
+        Me.Panel3.BackColor = System.Drawing.Color.FromArgb(CType(CType(83, Byte), Integer), CType(CType(93, Byte), Integer), CType(CType(102, Byte), Integer))
+        Me.Panel3.Controls.Add(Me.btnUpdateTableSCF)
+        Me.Panel3.Controls.Add(Me.btnUpdateExcel)
+        Me.Panel3.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Panel3.Location = New System.Drawing.Point(3, 83)
+        Me.Panel3.Name = "Panel3"
+        Me.Panel3.Size = New System.Drawing.Size(799, 54)
+        Me.Panel3.TabIndex = 2
         '
         'btnUpdateExcel
         '
+        Me.btnUpdateExcel.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnUpdateExcel.BackColor = System.Drawing.SystemColors.ButtonShadow
         Me.btnUpdateExcel.FlatAppearance.BorderSize = 0
         Me.btnUpdateExcel.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(58, Byte), Integer), CType(CType(115, Byte), Integer))
         Me.btnUpdateExcel.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnUpdateExcel.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnUpdateExcel.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.btnUpdateExcel.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnUpdateExcel.Location = New System.Drawing.Point(411, 36)
+        Me.btnUpdateExcel.Location = New System.Drawing.Point(573, 10)
         Me.btnUpdateExcel.Name = "btnUpdateExcel"
-        Me.btnUpdateExcel.Size = New System.Drawing.Size(92, 33)
+        Me.btnUpdateExcel.Size = New System.Drawing.Size(93, 32)
         Me.btnUpdateExcel.TabIndex = 20
         Me.btnUpdateExcel.Text = "..."
-        Me.btnUpdateExcel.UseVisualStyleBackColor = True
+        Me.btnUpdateExcel.UseVisualStyleBackColor = False
         '
-        'Label1
+        'Panel4
         '
-        Me.Label1.AutoSize = True
-        Me.Label1.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.Label1.Location = New System.Drawing.Point(9, 46)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(33, 13)
-        Me.Label1.TabIndex = 21
-        Me.Label1.Text = "Client"
+        Me.Panel4.BackColor = System.Drawing.Color.FromArgb(CType(CType(83, Byte), Integer), CType(CType(93, Byte), Integer), CType(CType(102, Byte), Integer))
+        Me.Panel4.Controls.Add(Me.lblMessage)
+        Me.Panel4.Controls.Add(Me.pgbComplete)
+        Me.Panel4.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Panel4.Location = New System.Drawing.Point(3, 399)
+        Me.Panel4.Name = "Panel4"
+        Me.Panel4.Size = New System.Drawing.Size(799, 43)
+        Me.Panel4.TabIndex = 3
         '
-        'Label2
+        'lblMessage
         '
-        Me.Label2.AutoSize = True
-        Me.Label2.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.Label2.Location = New System.Drawing.Point(203, 46)
-        Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(24, 13)
-        Me.Label2.TabIndex = 22
-        Me.Label2.Text = "Job"
+        Me.lblMessage.AutoSize = True
+        Me.lblMessage.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.lblMessage.Location = New System.Drawing.Point(9, 11)
+        Me.lblMessage.Name = "lblMessage"
+        Me.lblMessage.Size = New System.Drawing.Size(53, 13)
+        Me.lblMessage.TabIndex = 4
+        Me.lblMessage.Text = "Message:"
         '
-        'DataGridView1
+        'pgbComplete
         '
-        Me.DataGridView1.AllowUserToAddRows = False
-        Me.DataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
-        Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DataGridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.QTY, Me.ProductID, Me.CostUM, Me.UM, Me.ProductDescription})
-        Me.DataGridView1.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.DataGridView1.Location = New System.Drawing.Point(0, 0)
-        Me.DataGridView1.Name = "DataGridView1"
-        Me.DataGridView1.Size = New System.Drawing.Size(668, 204)
-        Me.DataGridView1.TabIndex = 0
+        Me.pgbComplete.Location = New System.Drawing.Point(561, 11)
+        Me.pgbComplete.Name = "pgbComplete"
+        Me.pgbComplete.Size = New System.Drawing.Size(229, 23)
+        Me.pgbComplete.TabIndex = 3
+        '
+        'btnUpdateTableSCF
+        '
+        Me.btnUpdateTableSCF.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnUpdateTableSCF.BackColor = System.Drawing.SystemColors.ButtonShadow
+        Me.btnUpdateTableSCF.FlatAppearance.BorderSize = 0
+        Me.btnUpdateTableSCF.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(58, Byte), Integer), CType(CType(115, Byte), Integer))
+        Me.btnUpdateTableSCF.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnUpdateTableSCF.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnUpdateTableSCF.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.btnUpdateTableSCF.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnUpdateTableSCF.Location = New System.Drawing.Point(691, 10)
+        Me.btnUpdateTableSCF.Name = "btnUpdateTableSCF"
+        Me.btnUpdateTableSCF.Size = New System.Drawing.Size(88, 32)
+        Me.btnUpdateTableSCF.TabIndex = 21
+        Me.btnUpdateTableSCF.Text = "Update"
+        Me.btnUpdateTableSCF.UseVisualStyleBackColor = False
         '
         'QTY
         '
@@ -234,23 +260,32 @@ Partial Class ProductSCFExcel
         Me.ProductDescription.HeaderText = "Product Description"
         Me.ProductDescription.Name = "ProductDescription"
         '
+        'QTYMax
+        '
+        Me.QTYMax.HeaderText = "QTYMax"
+        Me.QTYMax.Name = "QTYMax"
+        Me.QTYMax.Visible = False
+        '
         'ProductSCFExcel
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(674, 291)
+        Me.ClientSize = New System.Drawing.Size(805, 445)
         Me.Controls.Add(Me.TableLayoutPanel1)
         Me.Name = "ProductSCFExcel"
         Me.Text = "ProductSCExcel"
         Me.TableLayoutPanel1.ResumeLayout(False)
         Me.Panel1.ResumeLayout(False)
         Me.Panel1.PerformLayout()
-        Me.Panel2.ResumeLayout(False)
         CType(Me.PictureBox3, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.btnRestore, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.btnMaximize, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PictureBox4, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.Panel2.ResumeLayout(False)
+        CType(Me.tblProducts, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.Panel3.ResumeLayout(False)
+        Me.Panel4.ResumeLayout(False)
+        Me.Panel4.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -263,15 +298,17 @@ Partial Class ProductSCFExcel
     Friend WithEvents btnMaximize As PictureBox
     Friend WithEvents PictureBox4 As PictureBox
     Friend WithEvents lblTitle As Label
-    Friend WithEvents ComboBox2 As ComboBox
-    Friend WithEvents ComboBox1 As ComboBox
-    Friend WithEvents Label2 As Label
-    Friend WithEvents Label1 As Label
     Friend WithEvents btnUpdateExcel As Button
-    Friend WithEvents DataGridView1 As DataGridView
+    Friend WithEvents tblProducts As DataGridView
+    Friend WithEvents Panel3 As Panel
+    Friend WithEvents Panel4 As Panel
+    Friend WithEvents lblMessage As Label
+    Friend WithEvents pgbComplete As ProgressBar
+    Friend WithEvents btnUpdateTableSCF As Button
     Friend WithEvents QTY As DataGridViewTextBoxColumn
     Friend WithEvents ProductID As DataGridViewTextBoxColumn
     Friend WithEvents CostUM As DataGridViewTextBoxColumn
     Friend WithEvents UM As DataGridViewTextBoxColumn
     Friend WithEvents ProductDescription As DataGridViewTextBoxColumn
+    Friend WithEvents QTYMax As DataGridViewTextBoxColumn
 End Class

@@ -1205,7 +1205,7 @@ Public Class scafoldTarking
         Next
         If flag Then
             Dim index As Integer = tblOutGoing.CurrentCell.RowIndex()
-            tblOutGoing.Rows(index).Cells(1).Value = If(cmb.SelectedItem = Nothing, "", cmb.SelectedItem.ToString())
+            tblOutGoing.Rows(index).Cells(1).Value = If(cmb.SelectedItem Is Nothing, "", cmb.SelectedItem.ToString())
             For Each row As DataRow In tblProductOutGoing.Rows()
                 If row.ItemArray(0) = cmb.SelectedItem() Then
                     tblOutGoing.Rows(index).Cells(2).Value = row.ItemArray(3)
@@ -1215,6 +1215,7 @@ Public Class scafoldTarking
                     If tblOutGoing.Rows(index).Cells(0).Value IsNot Nothing Then
                         If CDbl(tblOutGoing.Rows(index).Cells(0).Value) > CDbl(row.ItemArray(5)) Then
                             MsgBox("The QTY of this product exceeds your Stock." + vbCrLf + "Your Stock is " + CStr(row.ItemArray(5)) + ".")
+                            tblOutGoing.Rows(index).Cells(0).Value = row.ItemArray(5)
                         End If
                     End If
                     Exit For
@@ -1663,6 +1664,18 @@ Public Class scafoldTarking
     Private Sub btnUpdateExcelInConming_Click(sender As Object, e As EventArgs) Handles btnUpdateExcelInConming.Click
         Try
             Dim pdscfe As New ProductSCFExcel
+            AddOwnedForm(pdscfe)
+            pdscfe.windowStart = "Incoming"
+            pdscfe.ShowDialog()
+        Catch ex As Exception
+
+        End Try
+    End Sub
+    Private Sub btnUpdateExcelOutgoing_Click(sender As Object, e As EventArgs) Handles btnUpdateExcelOutgoing.Click
+        Try
+            Dim pdscfe As New ProductSCFExcel
+            AddOwnedForm(pdscfe)
+            pdscfe.windowStart = "Outgoing"
             pdscfe.ShowDialog()
         Catch ex As Exception
 
@@ -1703,6 +1716,7 @@ Public Class scafoldTarking
                         If tblOutGoing.CurrentCell.GetType.Name = "DataGridViewTextBoxCell" Then
                             Dim cmbIdProduct As New DataGridViewComboBoxCell
                             With cmbIdProduct
+                                cmbIdProduct.DropDownWidth = 280
                                 mtdScaffold.llenarCellComboIDProductExistences(cmbIdProduct, tblProductOutGoing)
                             End With
                             If tblOutGoing.CurrentRow.Cells("IDOut").Value IsNot Nothing Then
@@ -1732,11 +1746,11 @@ Public Class scafoldTarking
 
     Private Sub tblOutGoing_CellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles tblOutGoing.CellEndEdit
         If e.ColumnIndex = 0 Then
-            If Not soloNumero(If(tblInComing.CurrentCell.Value IsNot Nothing, tblInComing.CurrentCell.Value.ToString(), "")) Then
-                tblInComing.CurrentCell.Value = "0"
-            ElseIf tblInComing.CurrentCell.Value.ToString() IsNot "" Then
-                If CInt(tblInComing.CurrentCell.Value) < 0 Then
-                    tblInComing.CurrentCell.Value = CInt(tblInComing.CurrentCell.Value) * -1
+            If Not soloNumero(If(tblOutGoing.CurrentCell.Value IsNot Nothing, tblOutGoing.CurrentCell.Value.ToString(), "")) Then
+                tblOutGoing.CurrentCell.Value = "0"
+            ElseIf tblOutGoing.CurrentCell.Value.ToString() IsNot "" Then
+                If CInt(tblOutGoing.CurrentCell.Value) < 0 Then
+                    tblOutGoing.CurrentCell.Value = CInt(tblOutGoing.CurrentCell.Value) * -1
                 End If
                 If tblOutGoing.Rows(tblOutGoing.CurrentCell.RowIndex).Cells(5).Value IsNot Nothing Then
                     If CDbl(tblOutGoing.Rows(tblOutGoing.CurrentCell.RowIndex).Cells(5).Value) > CDbl(tblOutGoing.CurrentCell.Value) Then
@@ -3925,5 +3939,6 @@ Public Class scafoldTarking
 
         End Try
     End Sub
+
 
 End Class
