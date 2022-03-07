@@ -31,18 +31,18 @@ Partial Class ProductSCFExcel
         Me.lblTitle = New System.Windows.Forms.Label()
         Me.Panel2 = New System.Windows.Forms.Panel()
         Me.tblProducts = New System.Windows.Forms.DataGridView()
-        Me.Panel3 = New System.Windows.Forms.Panel()
-        Me.btnUpdateExcel = New System.Windows.Forms.Button()
-        Me.Panel4 = New System.Windows.Forms.Panel()
-        Me.lblMessage = New System.Windows.Forms.Label()
-        Me.pgbComplete = New System.Windows.Forms.ProgressBar()
-        Me.btnUpdateTableSCF = New System.Windows.Forms.Button()
         Me.QTY = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.ProductID = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.CostUM = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.UM = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.ProductDescription = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.QTYMax = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Panel3 = New System.Windows.Forms.Panel()
+        Me.btnUpdateTableSCF = New System.Windows.Forms.Button()
+        Me.btnUpdateExcel = New System.Windows.Forms.Button()
+        Me.Panel4 = New System.Windows.Forms.Panel()
+        Me.lblMessage = New System.Windows.Forms.Label()
+        Me.pgbComplete = New System.Windows.Forms.ProgressBar()
         Me.TableLayoutPanel1.SuspendLayout()
         Me.Panel1.SuspendLayout()
         CType(Me.PictureBox3, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -162,6 +162,37 @@ Partial Class ProductSCFExcel
         Me.tblProducts.Size = New System.Drawing.Size(799, 250)
         Me.tblProducts.TabIndex = 0
         '
+        'QTY
+        '
+        Me.QTY.HeaderText = "QTY"
+        Me.QTY.Name = "QTY"
+        '
+        'ProductID
+        '
+        Me.ProductID.HeaderText = "Product ID"
+        Me.ProductID.Name = "ProductID"
+        '
+        'CostUM
+        '
+        Me.CostUM.HeaderText = "$/UM"
+        Me.CostUM.Name = "CostUM"
+        '
+        'UM
+        '
+        Me.UM.HeaderText = "UM"
+        Me.UM.Name = "UM"
+        '
+        'ProductDescription
+        '
+        Me.ProductDescription.HeaderText = "Product Description"
+        Me.ProductDescription.Name = "ProductDescription"
+        '
+        'QTYMax
+        '
+        Me.QTYMax.HeaderText = "QTYMax"
+        Me.QTYMax.Name = "QTYMax"
+        Me.QTYMax.Visible = False
+        '
         'Panel3
         '
         Me.Panel3.BackColor = System.Drawing.Color.FromArgb(CType(CType(83, Byte), Integer), CType(CType(93, Byte), Integer), CType(CType(102, Byte), Integer))
@@ -172,6 +203,23 @@ Partial Class ProductSCFExcel
         Me.Panel3.Name = "Panel3"
         Me.Panel3.Size = New System.Drawing.Size(799, 54)
         Me.Panel3.TabIndex = 2
+        '
+        'btnUpdateTableSCF
+        '
+        Me.btnUpdateTableSCF.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnUpdateTableSCF.BackColor = System.Drawing.SystemColors.ButtonShadow
+        Me.btnUpdateTableSCF.FlatAppearance.BorderSize = 0
+        Me.btnUpdateTableSCF.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(58, Byte), Integer), CType(CType(115, Byte), Integer))
+        Me.btnUpdateTableSCF.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnUpdateTableSCF.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnUpdateTableSCF.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.btnUpdateTableSCF.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnUpdateTableSCF.Location = New System.Drawing.Point(691, 10)
+        Me.btnUpdateTableSCF.Name = "btnUpdateTableSCF"
+        Me.btnUpdateTableSCF.Size = New System.Drawing.Size(88, 32)
+        Me.btnUpdateTableSCF.TabIndex = 21
+        Me.btnUpdateTableSCF.Text = "Update"
+        Me.btnUpdateTableSCF.UseVisualStyleBackColor = False
         '
         'btnUpdateExcel
         '
@@ -217,54 +265,6 @@ Partial Class ProductSCFExcel
         Me.pgbComplete.Name = "pgbComplete"
         Me.pgbComplete.Size = New System.Drawing.Size(229, 23)
         Me.pgbComplete.TabIndex = 3
-        '
-        'btnUpdateTableSCF
-        '
-        Me.btnUpdateTableSCF.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnUpdateTableSCF.BackColor = System.Drawing.SystemColors.ButtonShadow
-        Me.btnUpdateTableSCF.FlatAppearance.BorderSize = 0
-        Me.btnUpdateTableSCF.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(58, Byte), Integer), CType(CType(115, Byte), Integer))
-        Me.btnUpdateTableSCF.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnUpdateTableSCF.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnUpdateTableSCF.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.btnUpdateTableSCF.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnUpdateTableSCF.Location = New System.Drawing.Point(691, 10)
-        Me.btnUpdateTableSCF.Name = "btnUpdateTableSCF"
-        Me.btnUpdateTableSCF.Size = New System.Drawing.Size(88, 32)
-        Me.btnUpdateTableSCF.TabIndex = 21
-        Me.btnUpdateTableSCF.Text = "Update"
-        Me.btnUpdateTableSCF.UseVisualStyleBackColor = False
-        '
-        'QTY
-        '
-        Me.QTY.HeaderText = "QTY"
-        Me.QTY.Name = "QTY"
-        '
-        'ProductID
-        '
-        Me.ProductID.HeaderText = "Product ID"
-        Me.ProductID.Name = "ProductID"
-        '
-        'CostUM
-        '
-        Me.CostUM.HeaderText = "$/UM"
-        Me.CostUM.Name = "CostUM"
-        '
-        'UM
-        '
-        Me.UM.HeaderText = "UM"
-        Me.UM.Name = "UM"
-        '
-        'ProductDescription
-        '
-        Me.ProductDescription.HeaderText = "Product Description"
-        Me.ProductDescription.Name = "ProductDescription"
-        '
-        'QTYMax
-        '
-        Me.QTYMax.HeaderText = "QTYMax"
-        Me.QTYMax.Name = "QTYMax"
-        Me.QTYMax.Visible = False
         '
         'ProductSCFExcel
         '

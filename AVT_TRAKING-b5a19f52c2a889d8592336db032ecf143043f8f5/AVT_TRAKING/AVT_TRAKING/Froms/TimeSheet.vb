@@ -371,7 +371,6 @@ Public Class TimeSheet
                                     If CStr(row.ItemArray(1)) = timesheet.Cells(cont, 4).Text And timesheet.Cells(cont, 5).Text = CStr(row.ItemArray(3)) Then 'idtask
                                         list.Add(CStr(row.ItemArray(0))) '
                                         Exit For
-
                                     End If
                                 Next
                                 If list.Count = 8 Then ' validando que se encotro el task
@@ -452,5 +451,144 @@ Public Class TimeSheet
         Me.WindowState = FormWindowState.Minimized
     End Sub
 
+    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
+        Try 'general 
+            txtSalidaCSV.Text = "Opening the excel document..."
+            Dim openFile As New OpenFileDialog
+            openFile.DefaultExt = "*.xlsm"
+            Dim countErrors As Integer = 0
+            Dim flagRepeat As Boolean = False
+            If DialogResult.OK = openFile.ShowDialog() Then
+                Dim ApExcel = New Microsoft.Office.Interop.Excel.Application
+                Dim libro = ApExcel.Workbooks.Open(openFile.FileName)
+                Dim workOrders As New Worksheet
+                Try
+                    txtSalidaCSV.Text = "Opening the excel document..."
+                    Try
+                        workOrders = libro.Worksheets("Work Order")
+                        txtSalida.Text = txtSalida.Text + vbCrLf + "Open sheet 'Work Order.'"
+                    Catch ex As Exception
+                        workOrders = libro.Worksheets("WorkOrder")
+                        txtSalida.Text = txtSalida.Text + vbCrLf + "Open sheet 'WorkOrder.'"
+                    End Try
+                    txtSalidaCSV.Text = txtSalidaCSV.Text + vbCrLf + "Start to Rading Excel... "
+                    Dim tablaWO As New Data.DataTable
+                    tablaWO.Columns.Add("index")
+                    tablaWO.Columns.Add("wo")
+                    tablaWO.Columns.Add("task")
+                    tablaWO.Columns.Add("workorder")
+                    tablaWO.Columns.Add("description")
+                    tablaWO.Columns.Add("account")
+                    tablaWO.Columns.Add("expConde")
+                    tablaWO.Columns.Add("horas")
+                    tablaWO.Columns.Add("po")
+                    tablaWO.Columns.Add("job")
+                    tablaWO.Columns.Add("idAuxWO")
+                    Dim mensaje As String = ""
+                    Dim contwo As Integer = 2
+                    Dim filasError As String = ""
+                    txtSalidaCSV.Text = txtSalidaCSV.Text + vbCrLf + "Verifying if exist new Workrders... "
+                    While workOrders.Cells(contwo, 2).Text <> ""
+                        Dim wo = workOrders.Cells(contwo, 2).Text.ToString().Replace(" ", "-")
+                        Dim workOrder() As String = wo.Split("-") 'workOrder y task
+                        tablaWO.Rows.Add(contwo - 1.ToString(), workOrder(0), workOrder(1), workOrders.Cells(contwo, 2).Text, workOrders.Cells(contwo, 3).Text, workOrders.Cells(contwo, 5).Text, workOrders.Cells(contwo, 6).Text, workOrders.Cells(contwo, 7).Text, workOrders.Cells(contwo, 8).Text, workOrders.Cells(contwo, 9).Text, workOrders.Cells(contwo, 1).Text)
+                        contwo += 1
+                    End While
+                    Dim listNewWorkOrders As New List(Of Data.DataRow)
+                    Dim flagExistWO As Boolean = False
+                    For Each row As DataRow In tablaWO.Rows()
+                        flagExistWO = False
+                        For Each row1 As DataRow In tablaProject.Rows()
+                            Dim workOrder() As String = row1.ItemArray(1).ToString().Split("-")
+                            If row.ItemArray(3).ToString().Equals(row1.ItemArray(1).ToString()) And row.ItemArray(8).ToString.Equals(row1.ItemArray(3).ToString()) And row.ItemArray(9).ToString.Equals(row1.ItemArray(4).ToString()) Then
+                                flagExistWO = True
+                                Exit For
+                            Else
+                                flagExistWO = False
+                            End If
+                        Next
+                        If Not flagExistWO Then
+                            listNewWorkOrders.Add(row)
+                        End If
+                    Next
+                    If listNewWorkOrders.Count > 0 Then
+                        txtSalidaCSV.Text = txtSalidaCSV.Text + vbCrLf + listNewWorkOrders.Count.ToString() + " New 'Work Codes', trying to insert the new 'Work Orders'."
+                        If DialogResult.Yes = MessageBox.Show("New 'Work Orders' found. Would you like to insert the new 'Work Orders'?", "Message", MessageBoxButtons.YesNo, MessageBoxIcon.Information) Then
+                            For Each item As DataRow In listNewWorkOrders
+                                Dim newPO As New Project
+                                newPO.clear()
+                                newPO.idWorkOrder = item.ItemArray(1)
+                                newPO.idTask = item.ItemArray(2)
+                                newPO.description = item.ItemArray(4)
+                                newPO.accountNum = item.ItemArray(5)
+                                newPO.expCode = item.ItemArray(6)
+                                newPO.estimateHour = item.ItemArray(7)
+                                newPO.idPO = item.ItemArray(8)
+                                newPO.jobNum = item.ItemArray(9)
+                                newPO.equipament = item.ItemArray(10)
+                                For Each row As DataRow In tablaProject.Rows
+                                    Dim wo() As String = row(1).ToString().Split("-")
+                                    If newPO.idWorkOrder = wo(0) Then
+                                        newPO.idAuxWO = row("idAuxWO")
+                                        Exit For
+                                    Else
+                                        newPO.idAuxWO = ""
+                                    End If
+                                Next
+                                If mtdJobs.insertarNuevaTarea(newPO) = False Then
+                                    mensaje = If(mensaje = "", item.ItemArray(0), mensaje + ", " + item.ItemArray(0))
+                                End If
+                            Next
+                            txtSalidaCSV.Text = txtSalidaCSV.Text + vbCrLf + "The 'Work Order' insertion process is over."
+                        End If
+                    Else
+                        txtSalidaCSV.Text = txtSalidaCSV.Text + vbCrLf + listNewWorkOrders.Count.ToString() + " Work Codes News."
+                    End If
+                    Dim insertar As Boolean = True
+                    If mensaje <> "" Then
+                        txtSalidaCSV.Text = txtSalidaCSV.Text + vbCrLf + mensaje
+                        If DialogResult.Yes = MessageBox.Show("Error at workOrders (" + vbCrLf + mensaje + "." + "), Would you like to cotinue?" + vbCrLf + "You probably won't be able to insert the records if you continue.", "Important", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) Then
+                            insertar = True
+                        Else
+                            insertar = False
+                        End If
+                    End If
+                Catch ex As Exception
 
+                Finally
+                    NAR(workOrders)
+                    libro.Close(False)
+                    NAR(libro)
+                End Try
+
+                mtdHPW.llenarTablaProyecto(tablaProject)
+
+                Try 'documento
+
+
+                    '#########################  workcodes ########################################################################################################
+                    txtSalida.Text = txtSalidaCSV.Text + vbCrLf + "Starting to read the document..."
+                    Dim libro2 = ApExcel.Workbooks.Open(openFile.FileName)
+                    Dim records As New Worksheet
+
+                    Try
+                        records = libro.Worksheets("Time Sheet")
+                        txtSalida.Text = txtSalida.Text + vbCrLf + "Open sheet 'Time Sheet.'"
+                    Catch ex As Exception
+                        records = libro.Worksheets("TimeSheet")
+                        txtSalida.Text = txtSalida.Text + vbCrLf + "Open sheet 'TimeSheet.'"
+                    End Try
+                    txtSalidaCSV.Text = txtSalidaCSV.Text + vbCrLf + "Message: Open sheet '" + records.Name + "'"
+
+
+
+                Catch ex As Exception
+
+                End Try
+            End If
+
+        Catch ex As Exception
+
+        End Try
+    End Sub
 End Class

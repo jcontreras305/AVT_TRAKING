@@ -978,4 +978,18 @@ from expensesUsed as exu
             desconectar()
         End Try
     End Function
+
+    '###########################################################  consultas prueba insertar records ##################################################################
+
+    Public Function existTask() As Boolean
+        Try
+            conectar()
+            Dim cmd As New SqlCommand("select * from ")
+        Catch ex As Exception
+
+        Finally
+            desconectar()
+        End Try
+    End Function
+
 End Class

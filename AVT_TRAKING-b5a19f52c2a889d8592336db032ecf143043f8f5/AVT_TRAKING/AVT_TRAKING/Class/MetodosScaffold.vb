@@ -2998,7 +2998,7 @@ where ds.tag = '" + tag + "'", conn)
         Try
             Dim cmd As New SqlCommand("
     declare @tag as varchar(20) = '" + ds.tag + "'
-	declare @idDismantle as varchar(36) = '" + If(ds.idDismantle = "", "NEWID()", ds.idDismantle) + "'
+	declare @idDismantle as varchar(36) = " + If(ds.idDismantle = "", "NEWID()", "'" + ds.idDismantle + "'") + "
 	declare @countProduct as int = (select COUNT (*) from productTotalScaffold where tag = @tag and status = 't')
 	declare @qty as float
 	declare @idProduct as int 
