@@ -980,16 +980,121 @@ from expensesUsed as exu
     End Function
 
     '###########################################################  consultas prueba insertar records ##################################################################
-
-    Public Function existTask() As Boolean
+    Public Function llenarTablaProjects() As DataTable
         Try
             conectar()
-            Dim cmd As New SqlCommand("select * from ")
-        Catch ex As Exception
+            Dim cmd As New SqlCommand("if OBJECT_ID('projects','U') IS NOT NULL 
+BEGIN 
+	print 'exists'
+	drop table projects
+	select CONCAT(wo.idWO,'-',tk.task)as 'worknum' , tk.task, tk.idAux, wo.idWO,tk.idAuxWO, po.idPO , jb.jobNo , cl.numberClient 
+		into projects 
+		from task as tk 
+		inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO
+		inner join projectOrder as po on po.idPO = wo.idPO and wo.jobNo = po.jobNo
+		inner join job as jb on jb.jobNo = po.jobNo 
+		inner join clients as cl on cl.idClient = jb.idClient
+	create clustered index worknum_projects on projects(worknum)
+END 
+ELSE 
+BEGIN
+	print 'not exists'
+	select CONCAT(wo.idWO,'-',tk.task)as 'worknum' , tk.task, tk.idAux, wo.idWO,tk.idAuxWO, po.idPO , jb.jobNo , cl.numberClient 
+		into projects 
+		from task as tk 
+		inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO
+		inner join projectOrder as po on po.idPO = wo.idPO and wo.jobNo = po.jobNo
+		inner join job as jb on jb.jobNo = po.jobNo 
+		inner join clients as cl on cl.idClient = jb.idClient
+	create clustered index worknum_projects on projects(worknum)
+END
+select * from projects", conn)
+            Dim dt As New DataTable
 
+            If cmd.ExecuteNonQuery Then
+                Dim da As New SqlDataAdapter(cmd)
+                da.Fill(dt)
+            Else
+                dt.Columns.Add("worknum")
+                dt.Columns.Add("task")
+                dt.Columns.Add("idAux")
+                dt.Columns.Add("idWO")
+                dt.Columns.Add("idAuxWO")
+                dt.Columns.Add("idPO")
+                dt.Columns.Add("jobNo")
+                dt.Columns.Add("numberClient")
+            End If
+            Return dt
+        Catch ex As Exception
+            Return Nothing
+        Finally
+            desconectar()
+        End Try
+    End Function
+    Public Function lllenarTablaWorkCodes() As DataTable
+        Try
+            conectar()
+            Dim cmd As New SqlCommand("select idWorkCode , name , description from workCode", conn)
+            Dim dt As New DataTable
+            If cmd.ExecuteNonQuery Then
+                Dim da As New SqlDataAdapter(cmd)
+                da.Fill(dt)
+            Else
+                dt.Columns.Add("idWorkCode")
+                dt.Columns.Add("name")
+                dt.Columns.Add("description")
+            End If
+            Return dt
+        Catch ex As Exception
+            Return Nothing
+        Finally
+            desconectar()
+        End Try
+    End Function
+    Public Function llenarTablaEmpleado() As DataTable
+        Try
+            conectar()
+            Dim cmd As New SqlCommand("select numberEmploye , CONCAT(lastName,', ',firstName , iif(middleName<>'' ,concat(' ',middleName),''))as name ,idEmployee from employees", conn)
+            Dim dt As New DataTable
+            If cmd.ExecuteNonQuery Then
+                Dim da As New SqlDataAdapter(cmd)
+                da.Fill(dt)
+            Else
+                dt.Columns.Add("numberEmploye")
+                dt.Columns.Add("name")
+                dt.Columns.Add("idEmployee")
+            End If
+            Return dt
+        Catch ex As Exception
+            Return Nothing
         Finally
             desconectar()
         End Try
     End Function
 
+    Public Function execBulkInsertRecords() As Boolean
+        Try
+            conectar()
+            Dim cmd As New SqlCommand("Bulk INSERT 
+	hoursWorked
+FROM 
+	'C:\TMP\TimeSheetTemp.csv'
+WITH(
+	FIELDTERMINATOR =',',
+	ROWTERMINATOR = '\n',
+	FIRSTROW = 2,
+	MAXERRORS = 3 --NORMALMENTE SE ENCUENTRA EN 10 
+)", conn)
+            If cmd.ExecuteNonQuery Then
+                Return True
+            Else
+                Return False
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message())
+            Return False
+        Finally
+            desconectar()
+        End Try
+    End Function
 End Class
