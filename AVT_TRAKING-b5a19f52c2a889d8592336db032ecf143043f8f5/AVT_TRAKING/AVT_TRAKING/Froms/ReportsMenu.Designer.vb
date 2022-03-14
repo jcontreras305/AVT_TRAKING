@@ -38,6 +38,7 @@ Partial Class ReportsMenu
         Me.btnTimeSheet = New System.Windows.Forms.Button()
         Me.Panel3 = New System.Windows.Forms.Panel()
         Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.btnVacationE = New System.Windows.Forms.Button()
         Me.Button11 = New System.Windows.Forms.Button()
         Me.Button10 = New System.Windows.Forms.Button()
         Me.Button9 = New System.Windows.Forms.Button()
@@ -46,7 +47,7 @@ Partial Class ReportsMenu
         Me.Button6 = New System.Windows.Forms.Button()
         Me.Button5 = New System.Windows.Forms.Button()
         Me.PictureBox4 = New System.Windows.Forms.PictureBox()
-        Me.btnVacationE = New System.Windows.Forms.Button()
+        Me.Button12 = New System.Windows.Forms.Button()
         Me.TitleBar.SuspendLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.btnRestore, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -270,6 +271,7 @@ Partial Class ReportsMenu
         'Panel1
         '
         Me.Panel1.BackColor = System.Drawing.Color.FromArgb(CType(CType(30, Byte), Integer), CType(CType(38, Byte), Integer), CType(CType(60, Byte), Integer))
+        Me.Panel1.Controls.Add(Me.Button12)
         Me.Panel1.Controls.Add(Me.btnVacationE)
         Me.Panel1.Controls.Add(Me.Button11)
         Me.Panel1.Controls.Add(Me.Button10)
@@ -283,6 +285,23 @@ Partial Class ReportsMenu
         Me.Panel1.Name = "Panel1"
         Me.Panel1.Size = New System.Drawing.Size(206, 501)
         Me.Panel1.TabIndex = 4
+        '
+        'btnVacationE
+        '
+        Me.btnVacationE.FlatAppearance.BorderSize = 0
+        Me.btnVacationE.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(81, Byte), Integer), CType(CType(93, Byte), Integer), CType(CType(102, Byte), Integer))
+        Me.btnVacationE.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnVacationE.Font = New System.Drawing.Font("Verdana", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnVacationE.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.btnVacationE.Image = Global.AVT_TRAKING.My.Resources.Resources.billing
+        Me.btnVacationE.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnVacationE.Location = New System.Drawing.Point(6, 367)
+        Me.btnVacationE.Name = "btnVacationE"
+        Me.btnVacationE.Size = New System.Drawing.Size(200, 42)
+        Me.btnVacationE.TabIndex = 14
+        Me.btnVacationE.Text = "Vacation Employee"
+        Me.btnVacationE.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.btnVacationE.UseVisualStyleBackColor = True
         '
         'Button11
         '
@@ -413,22 +432,22 @@ Partial Class ReportsMenu
         Me.PictureBox4.TabIndex = 3
         Me.PictureBox4.TabStop = False
         '
-        'btnVacationE
+        'Button12
         '
-        Me.btnVacationE.FlatAppearance.BorderSize = 0
-        Me.btnVacationE.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(81, Byte), Integer), CType(CType(93, Byte), Integer), CType(CType(102, Byte), Integer))
-        Me.btnVacationE.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnVacationE.Font = New System.Drawing.Font("Verdana", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnVacationE.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.btnVacationE.Image = Global.AVT_TRAKING.My.Resources.Resources.billing
-        Me.btnVacationE.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnVacationE.Location = New System.Drawing.Point(6, 367)
-        Me.btnVacationE.Name = "btnVacationE"
-        Me.btnVacationE.Size = New System.Drawing.Size(200, 42)
-        Me.btnVacationE.TabIndex = 14
-        Me.btnVacationE.Text = "Vacation Employee"
-        Me.btnVacationE.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.btnVacationE.UseVisualStyleBackColor = True
+        Me.Button12.FlatAppearance.BorderSize = 0
+        Me.Button12.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(81, Byte), Integer), CType(CType(93, Byte), Integer), CType(CType(102, Byte), Integer))
+        Me.Button12.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.Button12.Font = New System.Drawing.Font("Verdana", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Button12.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.Button12.Image = Global.AVT_TRAKING.My.Resources.Resources.billing
+        Me.Button12.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.Button12.Location = New System.Drawing.Point(3, 415)
+        Me.Button12.Name = "Button12"
+        Me.Button12.Size = New System.Drawing.Size(200, 42)
+        Me.Button12.TabIndex = 15
+        Me.Button12.Text = "Invoice"
+        Me.Button12.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.Button12.UseVisualStyleBackColor = True
         '
         'ReportsMenu
         '
@@ -480,4 +499,5 @@ Partial Class ReportsMenu
     Friend WithEvents Button10 As Button
     Friend WithEvents Button11 As Button
     Friend WithEvents btnVacationE As Button
+    Friend WithEvents Button12 As Button
 End Class

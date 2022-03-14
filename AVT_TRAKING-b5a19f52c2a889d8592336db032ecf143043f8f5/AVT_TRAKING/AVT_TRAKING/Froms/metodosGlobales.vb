@@ -80,6 +80,32 @@ Module metodosGlobales
             con.desconectar()
         End Try
     End Function
+    ''' <summary>
+    ''' Hace una consulta a la BD, retornando los Project Order de un client
+    ''' </summary>
+    ''' <param name="combo"></param>
+    ''' <param name="numberClient"></param>
+    ''' <returns>Retorna un True si no hubo problemas con la consulta</returns>
+    Public Function llenarComoboPOByClient(ByVal combo As ComboBox, ByVal numberClient As String) As Boolean
+        Try
+            con.conectar()
+            Dim cmd As New SqlCommand("select distinct 
+po.idPO
+from projectOrder as po 
+inner join job as jb on jb.jobNo = po.jobNo
+inner join clients as cl on cl.idClient = jb.idClient 
+where cl.numberClient = '" + numberClient + "'", con.conn)
+            Dim dr As SqlDataReader = cmd.ExecuteReader()
+            combo.Items.Clear()
+            While dr.Read()
+                combo.Items.Add(dr("idPO"))
+            End While
+            dr.Close()
+            Return True
+        Catch ex As Exception
+            Return False
+        End Try
+    End Function
     Public Function imageToByte(ByVal img As Image) As Byte()
         Try
             Dim aux As New IO.MemoryStream()

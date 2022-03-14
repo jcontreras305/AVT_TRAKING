@@ -382,6 +382,12 @@
       <DependentUpon>CompleteByDateRange.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Reports\InvoicePO.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>InvoicePO.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Reports\EmployeePeerDiemSheets.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -434,6 +440,12 @@
       <DependentUpon>ReportHoursPerWeek.vb</DependentUpon>
     </Compile>
     <Compile Include="Reports\ReportHoursPerWeek.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Reports\ReportInvoice.Designer.vb">
+      <DependentUpon>ReportInvoice.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\ReportInvoice.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Reports\ReportJNumber.Designer.vb">
@@ -683,6 +695,10 @@
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>CompleteByDateRange.vb</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reports\InvoicePO.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>InvoicePO.vb</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reports\EmployeePeerDiemSheets.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>EmployeePeerDiemSheets.vb</LastGenOutput>
@@ -712,6 +728,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\ReportHoursPerWeek.resx">
       <DependentUpon>ReportHoursPerWeek.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\ReportInvoice.resx">
+      <DependentUpon>ReportInvoice.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\ReportJNumber.resx">
       <DependentUpon>ReportJNumber.vb</DependentUpon>

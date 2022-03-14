@@ -103,4 +103,9 @@ Public Class ReportsMenu
         Dim tse As New ReportVacationEmployee
         tse.ShowDialog()
     End Sub
+
+    Private Sub Button12_Click(sender As Object, e As EventArgs) Handles Button12.Click
+        Dim tse As New ReportInvoice
+        tse.ShowDialog()
+    End Sub
 End Class
