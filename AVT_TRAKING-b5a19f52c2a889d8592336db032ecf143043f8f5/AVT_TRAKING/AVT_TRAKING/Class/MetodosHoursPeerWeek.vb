@@ -987,7 +987,7 @@ from expensesUsed as exu
 BEGIN 
 	print 'exists'
 	drop table projects
-	select CONCAT(wo.idWO,'-',tk.task)as 'worknum' , tk.task, tk.idAux, wo.idWO,tk.idAuxWO, po.idPO , jb.jobNo , cl.numberClient 
+	select CONCAT(wo.idWO,'-',tk.task)as 'worknum' , tk.task, tk.idAux, wo.idWO,tk.idAuxWO, po.idPO , jb.jobNo , cl.numberClient , cl.idClient
 		into projects 
 		from task as tk 
 		inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO
@@ -999,7 +999,7 @@ END
 ELSE 
 BEGIN
 	print 'not exists'
-	select CONCAT(wo.idWO,'-',tk.task)as 'worknum' , tk.task, tk.idAux, wo.idWO,tk.idAuxWO, po.idPO , jb.jobNo , cl.numberClient 
+	select CONCAT(wo.idWO,'-',tk.task)as 'worknum' , tk.task, tk.idAux, wo.idWO,tk.idAuxWO, po.idPO , jb.jobNo , cl.numberClient , cl.idClient
 		into projects 
 		from task as tk 
 		inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO

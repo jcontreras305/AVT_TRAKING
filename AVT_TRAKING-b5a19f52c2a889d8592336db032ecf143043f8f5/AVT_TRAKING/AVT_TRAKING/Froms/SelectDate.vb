@@ -4,6 +4,8 @@ Public Class SelectDate
     Dim fechaStart, fechaEnd As Date
     Public HWPE As Boolean
     Public DVT As Boolean
+    Public TVT As Boolean
+    Public MVT As Boolean
     Private Sub SelectDate_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         flagExtenion = False
     End Sub
@@ -36,10 +38,15 @@ Public Class SelectDate
             dvtf.fechaStart = fechaStart
             dvtf.txtFecha.Text = fechaStart.ToShortDateString()
             Me.Close()
-        Else
+        ElseIf TVT Then
             Dim tvt As TagsValidationTable = CType(Owner, TagsValidationTable)
             tvt.fechaStart = fechaStart
             tvt.txtFecha.Text = fechaStart.ToShortDateString()
+            Me.Close()
+        ElseIf MVT Then
+            Dim mvt As ModificationValidationTable = CType(Owner, ModificationValidationTable)
+            mvt.fechaStart = fechaStart
+            mvt.txtFecha.Text = fechaStart.ToShortDateString()
             Me.Close()
         End If
     End Sub

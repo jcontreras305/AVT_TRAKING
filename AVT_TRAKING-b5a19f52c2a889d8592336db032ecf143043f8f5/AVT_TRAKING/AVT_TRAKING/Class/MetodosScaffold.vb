@@ -1,9 +1,75 @@
 ﻿Imports System.Data.SqlClient
 Public Class MetodosScaffold
     Inherits ConnectioDB
+    Public Function llenarClientsComboBoxCell(ByVal cmb As DataGridViewComboBoxCell) As Boolean
+        Try
+            conectar()
+            Dim cmd As New SqlCommand("Select numberClient , CompanyName from clients where estatus = 'E'", conn)
+            Dim dr As SqlDataReader = cmd.ExecuteReader()
+            cmb.Items.Clear()
+            cmb.Items.Add("")
+            While dr.Read()
+                cmb.Items.Add(CStr(dr("numberClient")) + " " + dr("CompanyName"))
+            End While
+            dr.Close()
+            Return True
+        Catch ex As Exception
+            Return False
+        End Try
+    End Function
+    Public Function llenarTablaProjects() As DataTable
+        Try
+            conectar()
+            Dim cmd As New SqlCommand("if OBJECT_ID('projects','U') IS NOT NULL 
+BEGIN 
+	print 'exists'
+	drop table projects
+	select CONCAT(wo.idWO,'-',tk.task)as 'worknum' , tk.task, tk.idAux, wo.idWO,tk.idAuxWO, po.idPO , jb.jobNo , cl.numberClient , cl.idClient
+		into projects 
+		from task as tk 
+		inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO
+		inner join projectOrder as po on po.idPO = wo.idPO and wo.jobNo = po.jobNo
+		inner join job as jb on jb.jobNo = po.jobNo 
+		inner join clients as cl on cl.idClient = jb.idClient
+	create clustered index worknum_projects on projects(worknum)
+END 
+ELSE 
+BEGIN
+	print 'not exists'
+	select CONCAT(wo.idWO,'-',tk.task)as 'worknum' , tk.task, tk.idAux, wo.idWO,tk.idAuxWO, po.idPO , jb.jobNo , cl.numberClient , cl.idClient
+		into projects 
+		from task as tk 
+		inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO
+		inner join projectOrder as po on po.idPO = wo.idPO and wo.jobNo = po.jobNo
+		inner join job as jb on jb.jobNo = po.jobNo 
+		inner join clients as cl on cl.idClient = jb.idClient
+	create clustered index worknum_projects on projects(worknum)
+END
+select * from projects", conn)
+            Dim dt As New DataTable
 
+            If cmd.ExecuteNonQuery Then
+                Dim da As New SqlDataAdapter(cmd)
+                da.Fill(dt)
+            Else
+                dt.Columns.Add("worknum")
+                dt.Columns.Add("task")
+                dt.Columns.Add("idAux")
+                dt.Columns.Add("idWO")
+                dt.Columns.Add("idAuxWO")
+                dt.Columns.Add("idPO")
+                dt.Columns.Add("jobNo")
+                dt.Columns.Add("numberClient")
+            End If
+            Return dt
+        Catch ex As Exception
+            Return Nothing
+        Finally
+            desconectar()
+        End Try
+    End Function
     '========================================================= Job CAT ======================================================================= 
-    Public Function llenarComboJobCat(ByVal combo As ComboBox) As DataTable
+    Public Function llenarComboJobCat(ByVal combo As ComboBox, ByVal idClient As String) As DataTable
         Dim tabla As New DataTable
         tabla.Columns.Add("cmb")
         tabla.Columns.Add("id")
@@ -11,7 +77,7 @@ Public Class MetodosScaffold
         tabla.Columns.Add("hours")
         Try
             conectar()
-            Dim cmd As New SqlCommand("select idJobCat as 'ID' , cat as 'Description', days as 'Days' from jobCat", conn)
+            Dim cmd As New SqlCommand("select idJobCat as 'ID' , cat as 'Description', days as 'Days' from jobCat " + If(idClient = "", "", " where idClient = '" + idClient + "'"), conn)
             Dim dr As SqlDataReader = cmd.ExecuteReader()
             combo.Items.Clear()
             While dr.Read()
@@ -27,10 +93,12 @@ Public Class MetodosScaffold
         End Try
     End Function
 
-    Public Function llenarJobCat(ByVal tabla As DataGridView) As Boolean
+    Public Function llenarJobCat(ByVal tabla As DataGridView, ByVal idClient As String) As Boolean
         Try
             conectar()
-            Dim cmd As New SqlCommand("select idJobCat as 'ID' , cat as 'Description' , days as 'Days' from jobCat", conn)
+            Dim cmd As New SqlCommand("select idJobCat as 'ID' , cat as 'Description' , days as 'Days', ISNULL(CONVERT(NVARCHAR,cl.numberClient),'') as 'Client',ISNULL(CONVERT(NVARCHAR,cl.numberClient),'') as 'Client2'
+from jobCat as jc 
+left join clients as cl on cl.idClient = jc.idClient " + If(idClient <> "", "where cl.idClient = '" + idClient + "'", ""), conn)
             If cmd.ExecuteNonQuery Then
                 Dim da As New SqlDataAdapter(cmd)
                 Dim dt As New DataTable
@@ -72,16 +140,28 @@ Public Class MetodosScaffold
             tran = conn.BeginTransaction()
             Dim flag As Boolean = True
             Dim cont As Integer = 0
-            For Each row As DataGridViewRow In tabla.Rows
+            For Each row As DataGridViewRow In tabla.SelectedRows
                 If row.Cells(0).Value() IsNot Nothing Then
+                    Dim array() As String = row.Cells(3).Value().ToString().Split(" ")
                     Dim cmd As New SqlCommand("
-if (select COUNT(*) from jobCat where idJobCat = '" + row.Cells(0).Value().ToString() + "' ) = 0
+declare @JobCat as varchar(25) = '" + row.Cells(0).Value().ToString() + "'
+declare @numberClientN as int = " + If(array(0) = "", "0", array(0)) + "
+declare @numberClientL as int = " + If(row.Cells(4).Value().ToString() = "", "0", row.Cells(4).Value().ToString()) + "
+
+if (select COUNT(*) from jobCat as jc left join clients as cl on cl.idClient = jc.idClient where jc.idJobCat = @JobCat and (cl.numberClient = @numberClientN or cl.numberClient is Null))=0
 begin 
-	insert into jobCat values('" + row.Cells(0).Value().ToString() + "', '" + row.Cells(1).Value().ToString() + "'," + If(row.Cells(2).Value().ToString() = "", "0", row.Cells(2).Value().ToString()) + ")
+	if (select count(*) from jobCat as jc left join clients as cl on cl.idClient = jc.idClient where jc.idJobCat = @JobCat and (cl.numberClient = @numberClientL or cl.numberClient is Null)) = 0
+	begin
+		insert into jobCat values(@JobCat,'" + row.Cells(1).Value().ToString() + "'," + row.Cells(2).Value().ToString() + ",(select idclient from clients where numberClient = @numberClientN)) 
+	end
+	else if (select count(*) from jobCat as jc left join clients as cl on cl.idClient = jc.idClient where jc.idJobCat = @JobCat and (cl.numberClient = @numberClientL or cl.numberClient is Null)) = 1
+	begin 
+		update jobCat set cat ='" + row.Cells(1).Value().ToString() + "',[days] = " + row.Cells(2).Value().ToString() + ",idClient = (select idclient from clients where numberClient = @numberClientN)  where idJobCat=@JobCat
+	end
 end
-else if(select COUNT(*) from jobCat where idJobCat = '" + row.Cells(0).Value().ToString() + "' ) = 1
+else if (select COUNT(*) from jobCat as jc left join clients as cl on cl.idClient = jc.idClient where jc.idJobCat = @JobCat and (cl.numberClient = @numberClientN or cl.numberClient is Null))=1
 begin
-	update jobCat set cat = '" + row.Cells(1).Value().ToString() + "', days = " + If(row.Cells(2).Value().ToString() = "", "0", row.Cells(2).Value().ToString()) + " where idJobCat = '" + row.Cells(0).Value().ToString() + "' 
+	update jobCat set cat ='" + row.Cells(1).Value().ToString() + "',[days] = " + row.Cells(2).Value().ToString() + ",idClient = (select idclient from clients where numberClient = @numberClientN) where idJobCat=@JobCat
 end", conn)
                     cmd.Transaction = tran
                     If cmd.ExecuteNonQuery = 1 Then
@@ -148,14 +228,14 @@ end", conn)
     End Function
 
     '========================================================= Areas ======================================================================= 
-    Public Function llenarComboArea(ByVal combo As ComboBox) As DataTable
+    Public Function llenarComboArea(ByVal combo As ComboBox, ByVal idClient As String) As DataTable
         Dim tabla As New DataTable
         tabla.Columns.Add("cmb")
         tabla.Columns.Add("id")
         tabla.Columns.Add("name")
         Try
             conectar()
-            Dim cmd As New SqlCommand("select idArea as 'ID', name as 'Name' from areas", conn)
+            Dim cmd As New SqlCommand("select idArea as 'ID', name as 'Name' from areas " + If(idClient = "", "", " where idClient = '" + idClient + "'"), conn)
             Dim dr As SqlDataReader = cmd.ExecuteReader()
             combo.Items.Clear()
             While dr.Read()
@@ -171,10 +251,12 @@ end", conn)
         End Try
     End Function
 
-    Public Function llenarAreas(ByVal tabla As DataGridView) As Boolean
+    Public Function llenarAreas(ByVal tabla As DataGridView, ByVal idCliente As String) As Boolean
         Try
             conectar()
-            Dim cmd As New SqlCommand("select ar.idArea as 'Area ID', ar.name as 'Area Name', cordinator AS 'Cordinator' from areas as ar", conn)
+            Dim cmd As New SqlCommand("select ar.idArea as 'Area ID', ar.name as 'Area Name', cordinator AS 'Cordinator' , ISNULL(CONVERT(NVARCHAR,cl.numberClient),'') as 'Client',ISNULL(CONVERT(NVARCHAR,cl.numberClient),'') as 'Client2'
+from areas as ar 
+left join clients as cl on cl.idClient = ar.idClient " + If(idCliente <> "", "where cl.idClient = '" + idCliente + "'", ""), conn)
             If cmd.ExecuteNonQuery Then
                 Dim da As New SqlDataAdapter(cmd)
                 Dim dt As New DataTable
@@ -216,17 +298,30 @@ end", conn)
             tran = conn.BeginTransaction()
             Dim flag As Boolean = True
             Dim cont As Integer = 0
-            For Each row As DataGridViewRow In tabla.Rows
+            For Each row As DataGridViewRow In tabla.SelectedRows()
                 If row.Cells(0).Value() IsNot Nothing Then
+                    Dim array() As String = row.Cells(3).Value().ToString().Split(" ")
                     Dim cmd As New SqlCommand("
-if (select count(*) from areas where idArea = " + row.Cells(0).Value().ToString() + ") = 0
+declare @numberClientL as int = " + If(row.Cells(4).Value().ToString() = "", "0", row.Cells(4).Value().ToString()) + "
+declare @numberClientN as int = " + If(array(0) = "", "0", array(0)) + "
+declare @idArea as int = " + row.Cells(0).Value().ToString() + "
+
+if (select count(*) from areas as ar left join clients as cl on cl.idClient = ar.idClient where ar.idArea = @idArea and (cl.numberClient = @numberClientN or cl.numberClient is Null)) = 0
 begin
-	insert into areas values(" + row.Cells(0).Value().ToString() + ",'" + row.Cells(1).Value().ToString() + "','" + row.Cells(2).Value().ToString() + "') 
+	if (select count(*) from areas as ar left join clients as cl on cl.idClient = ar.idClient where ar.idArea = @idArea and (cl.numberClient = @numberClientL or cl.numberClient is Null)) = 0
+	begin
+		insert into areas values(@idArea,'" + row.Cells(1).Value().ToString() + "','" + row.Cells(2).Value().ToString() + "',(select idclient from clients where numberClient = @numberClientN)) 
+	end
+	else if (select count(*) from areas as ar left join clients as cl on cl.idClient = ar.idClient where ar.idArea = @idArea and (cl.numberClient = @numberClientL or cl.numberClient is Null)) = 1
+	begin 
+		update areas set name ='" + row.Cells(1).Value().ToString() + "',cordinator = '" + row.Cells(2).Value().ToString() + "',idClient = (select idclient from clients where numberClient = @numberClientN)  where idArea=@idArea
+	end
 end
-else if (select count(*) from areas where idArea = " + row.Cells(0).Value().ToString() + ") = 1
+else if (select count(*) from areas as ar left join clients as cl on cl.idClient = ar.idClient where ar.idArea = @idArea and (cl.numberClient = @numberClientN or cl.numberClient is Null)) = 1
 begin
-	update areas set name ='" + row.Cells(1).Value().ToString() + "',cordinator = '" + row.Cells(2).Value().ToString() + "' where idArea=" + row.Cells(0).Value().ToString() + "
-end ", conn)
+	update areas set name ='" + row.Cells(1).Value().ToString() + "',cordinator = '" + row.Cells(2).Value().ToString() + "',idClient = (select idclient from clients where numberClient = @numberClientN) where idArea=@idArea
+end 
+", conn)
                     cmd.Transaction = tran
                     If cmd.ExecuteNonQuery = 1 Then
                         cont += 1
@@ -293,14 +388,15 @@ end", conn)
 
     '========================================================= WO ==========================================================================
 
-    Public Function llenarTableWO(ByVal tabla As DataTable) As Boolean
+    Public Function llenarTableWO(ByVal tabla As DataTable, ByVal idClient As String) As Boolean
         Try
             conectar()
             Dim cmd As New SqlCommand("select CONCAT(wo.idWO,'-',tk.task) as 'WO No',wo.idWO, tk.idAux, tk.idAuxWO,jb.jobNo as 'Job No' ,tk.description as 'Description'
 from job as jb 
+	inner join clients as cl on cl.idClient = jb.idClient 
     inner join projectOrder as po on po.jobNo = jb.jobNo
-    inner join workOrder as wo on wo.idPO = po.idPO
-    inner join task as tk on tk.idAuxWO = wo.idAuxWO", conn)
+    inner join workOrder as wo on wo.idPO = po.idPO and wo.jobNo = po.jobNo
+    inner join task as tk on tk.idAuxWO = wo.idAuxWO " + If(idClient = "ALL", "", " where cl.idClient = '" + idClient + "'"), conn)
             If cmd.ExecuteNonQuery() Then
                 Dim da As New SqlDataAdapter(cmd)
                 da.Fill(tabla)
@@ -327,13 +423,13 @@ from job as jb
             Dim cmd As New SqlCommand("select CONCAT(wo.idWO,'-',tk.task) as 'WO No',wo.idWO, tk.idAux, jb.jobNo as 'Job No' ,tk.description as 'Description'
 from job as jb 
 inner join projectOrder as po on po.jobNo = jb.jobNo
-inner join workOrder as wo on wo.idPO = po.idPO
-inner join task as tk on tk.idAuxWO = wo.idAuxWO " + If(IdCliente = "", "", "where jb.idClient = '" + IdCliente + "'"), conn)
+inner join workOrder as wo on wo.idPO = po.idPO and wo.jobNo = po.jobNo
+inner join task as tk on tk.idAuxWO = wo.idAuxWO " + If(IdCliente = "", "", "where jb.idClient = '" + IdCliente + "' ") + " Order by 'WO No'", conn)
             Dim dr As SqlDataReader = cmd.ExecuteReader()
             combo.Items.Clear()
             combo.Items.Add("")
             While dr.Read()
-                combo.Items.Add(CStr(dr("WO No")) + "    " + CStr(dr("Job No")) + "    " + dr("Description"))
+                combo.Items.Add(CStr(dr("WO No")) + " " + CStr(dr("Job No")) + " " + dr("Description"))
                 tabla.Rows.Add(CStr(dr("WO No")), CStr(dr("idWO")), CStr(dr("idAux")), CStr(dr("Job No")), CStr(dr("Description")), (CStr(dr("WO No")) + "    " + CStr(dr("Job No")) + "    " + dr("Description")))
             End While
             Return tabla
@@ -370,20 +466,11 @@ inner join task as tk on tk.idAuxWO = wo.idAuxWO " + If(IdCliente = "", "", "whe
         End Try
     End Function
 
-    Public Function existWO(ByVal Workorder As String) As Boolean
+    Public Function existWO(ByVal Workorder As String, ByVal JobNum As String) As Boolean
         Try
             conectar()
-            Workorder = Workorder.Replace("-", " ")
-            Workorder = Workorder.Replace("/", " ")
-            Dim array1 = Workorder.Split(" ")
-            Dim wo As String = array1(0)
-            Dim task As String = array1(1)
-            Dim cmd As New SqlCommand("select COUNT(*) as 'num' from (select CONCAT(wo.idWO,'-',tk.task) as 'WONo',wo.idWO ,tk.task
-from job as jb 
-inner join projectOrder as po on po.jobNo = jb.jobNo
-inner join workOrder as wo on wo.idPO = po.idPO
-inner join task as tk on tk.idAuxWO = wo.idAuxWO) as T1
-where  T1.WONo = '" + wo + "-" + task + "' or (T1.idWO='" + wo + "' and T1.task='" + task + "')", conn)
+            Dim cmd As New SqlCommand("select count(*) as 'num' from projects as pj
+where pj.worknum = '" + Workorder + "' and pj.jobNo = " + JobNum + "", conn)
             Dim dr As SqlDataReader = cmd.ExecuteReader()
             Dim exist As Boolean = False
             While dr.Read
@@ -398,14 +485,14 @@ where  T1.WONo = '" + wo + "-" + task + "' or (T1.idWO='" + wo + "' and T1.task=
     End Function
 
     '========================================================= Sub Jobs ====================================================================
-    Public Function llenarComboSubJob(ByVal combo As ComboBox) As DataTable
+    Public Function llenarComboSubJob(ByVal combo As ComboBox, ByVal idClient As String) As DataTable
         Dim tabla As New DataTable
         tabla.Columns.Add("cmb")
         tabla.Columns.Add("subJob")
         tabla.Columns.Add("description")
         Try
             conectar()
-            Dim cmd As New SqlCommand("select idSubJob as 'Sub Job', description as 'Description' from subJobs", conn)
+            Dim cmd As New SqlCommand("select idSubJob as 'Sub Job', description as 'Description' from subJobs " + If(idClient = "", "", " where idClient = '" + idClient + "'"), conn)
             Dim dr As SqlDataReader = cmd.ExecuteReader()
             combo.Items.Clear()
             While dr.Read()
@@ -421,10 +508,12 @@ where  T1.WONo = '" + wo + "-" + task + "' or (T1.idWO='" + wo + "' and T1.task=
         End Try
     End Function
 
-    Public Function llenarSubJobs(ByVal tabla As DataGridView) As Boolean
+    Public Function llenarSubJobs(ByVal tabla As DataGridView, ByVal idClient As String) As Boolean
         Try
             conectar()
-            Dim cmd As New SqlCommand("select idSubJob as 'Sub Job', description as 'Description' from subJobs", conn)
+            Dim cmd As New SqlCommand("select sj.idSubJob as 'Sub Job', sj.description as 'Description', ISNULL(CONVERT(NVARCHAR,cl.numberClient),'') as 'Client',ISNULL(CONVERT(NVARCHAR,cl.numberClient),'') as 'Client2'
+from subJobs as sj 
+left join clients as cl on cl.idClient = sj.idClient " + If(idClient <> "", " where cl.idClient = '" + idClient + "'", ""), conn)
             If cmd.ExecuteNonQuery Then
                 Dim da As New SqlDataAdapter(cmd)
                 Dim dt As New DataTable
@@ -468,15 +557,28 @@ where  T1.WONo = '" + wo + "-" + task + "' or (T1.idWO='" + wo + "' and T1.task=
             tran = conn.BeginTransaction()
             Dim flag As Boolean = True
             Dim cont As Integer = 0
-            For Each row As DataGridViewRow In tabla.Rows
+            For Each row As DataGridViewRow In tabla.SelectedRows
                 If row.Cells(0).Value() IsNot Nothing Then
-                    Dim cmd As New SqlCommand("if (select count(*) from subJobs where idSubJob = " + row.Cells(0).Value().ToString() + " )= 0
-begin
-	insert into subJobs values(" + row.Cells(0).Value().ToString() + ",'" + row.Cells(1).Value().ToString() + "') 
+                    Dim array() As String = row.Cells(2).Value().ToString().Split(" ")
+                    Dim cmd As New SqlCommand("
+declare @SubJob as int = " + row.Cells(0).Value().ToString() + "
+declare @numberClientN as int = " + If(array(0) = "", "0", array(0)) + "
+declare @numberClientL as int = " + If(row.Cells(3).Value().ToString() = "", "0", row.Cells(4).Value().ToString()) + "
+
+if (select COUNT(*) from subJobs as sj left join clients as cl on cl.idClient = sj.idClient where sj.idSubJob = @SubJob and (cl.numberClient = @numberClientN or cl.numberClient is Null))=0
+begin 
+	if (select count(*) from subJobs as sj left join clients as cl on cl.idClient = sj.idClient where sj.idSubJob= @SubJob and (cl.numberClient = @numberClientL or cl.numberClient is Null)) = 0
+	begin
+		insert into subJobs values(@SubJob,'" + row.Cells(1).Value().ToString() + "',(select idclient from clients where numberClient = @numberClientN)) 
+	end
+	else if (select count(*) from subJobs as sj  left join clients as cl on cl.idClient = sj.idClient where sj.idSubJob = @SubJob and (cl.numberClient = @numberClientL or cl.numberClient is Null)) = 1
+	begin 
+		update subJobs set [description] ='" + row.Cells(0).Value().ToString() + "', idClient = (select idclient from clients where numberClient = @numberClientN)  where idSubJob=@SubJob
+	end
 end
-else if (select count(*) from subJobs where idSubJob = " + row.Cells(0).Value().ToString() + ")= 1
+else if (select COUNT(*) from subJobs as sj left join clients as cl on cl.idClient = sj.idClient where sj.idSubJob = @SubJob and (cl.numberClient = @numberClientN or cl.numberClient is Null))=1
 begin
-	update subJobs set description = '" + row.Cells(1).Value().ToString() + "' where idSubJob=" + row.Cells(0).Value().ToString() + "
+	update subJobs set [description] ='" + row.Cells(0).Value().ToString() + "',idClient = (select idclient from clients where numberClient = @numberClientN) where idSubJob=@SubJob	
 end ", conn)
                     cmd.Transaction = tran
                     If cmd.ExecuteNonQuery = 1 Then
@@ -2523,14 +2625,15 @@ end", conn)
         End Try
     End Function
 
-    Public Function llenarTags(ByVal tabla As DataTable) As Boolean
+    Public Function llenarTags(ByVal tabla As DataTable, ByVal idClient As String) As Boolean
         Try
             conectar()
-            Dim cmd As New SqlCommand("select  sc.tag, CONCAT(wo.idWO,'-',tk.task) as wo , wo.idPO from scaffoldTraking as sc 
+            Dim cmd As New SqlCommand("select  sc.tag, CONCAT(wo.idWO,'-',tk.task) as wo , wo.idPO, sc.[status] from scaffoldTraking as sc 
 left join task as tk on tk.idAux = sc.idAux
-left join workOrder as wo on wo.idAuxWO = tk.idAuxWO
-left join projectOrder as po on po.idPO = wo.idPO
-left join job as jb on jb.jobNo = po.jobNo", conn)
+inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO
+inner join projectOrder as po on po.idPO = wo.idPO and po.jobNo = wo.jobNo
+inner join job as jb on jb.jobNo = po.jobNo
+inner join clients as cl on cl.idClient = jb.idClient " + If(idClient = "ALL", "", " where cl.idClient = '" + idClient + "'"), conn)
             If cmd.ExecuteNonQuery Then
                 Dim da As New SqlDataAdapter(cmd)
                 da.Fill(tabla)
@@ -2544,16 +2647,87 @@ left join job as jb on jb.jobNo = po.jobNo", conn)
             desconectar()
         End Try
     End Function
-
+    Public Function findTags(ByVal query As String, ByVal tbl As DataGridView, ByVal idClient As String, ByVal isDate As Boolean) As Boolean
+        Try
+            conectar()
+            Dim cmd As New SqlCommand("select tag , CONCAT(wo.idWO , '-', tk.task) as 'project' ,jb.jobNo , sc.comments from scaffoldTraking as sc
+inner join task as tk on tk.idAux = sc.idAux
+inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO
+inner join projectOrder as po on po.idPO = wo.idPO and wo.jobNo = po.jobNo
+inner join job as jb on jb.jobNo = po.jobNo
+inner join clients as cl on cl.idClient = jb.idClient " + If(isDate = False, "where 
+(tag like '%" + query + "%' or
+CONCAT(wo.idWO , '-', tk.task) like '%" + query + "%' or 
+CONVERT(nvarchar, jb.jobNo) like '%" + query + "%' or 
+comments like '%" + query + "%')", " where (ds.rentStopDate = '" + query + "')" +
+If(idClient = "ALL", "", " and cl.idClient = '" + idClient + "'")), conn)
+            If cmd.ExecuteNonQuery Then
+                Dim dt As New DataTable
+                Dim da As New SqlDataAdapter(cmd)
+                da.Fill(dt)
+                tbl.DataSource = dt
+            End If
+            Return True
+        Catch ex As Exception
+            Return False
+        End Try
+    End Function
+    Public Function findTagsDismantle(ByVal query As String, ByVal tbl As DataGridView, ByVal idClient As String, ByVal isDate As Boolean) As Boolean
+        Try
+            conectar()
+            Dim cmd As New SqlCommand("select ds.tag , CONCAT(wo.idWO , '-', tk.task) as 'project' ,jb.jobNo , ds.comments from dismantle as ds
+inner join scaffoldTraking as sc on ds.tag = sc.tag
+inner join task as tk on tk.idAux = sc.idAux
+inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO
+inner join projectOrder as po on po.idPO = wo.idPO and wo.jobNo = po.jobNo
+inner join job as jb on jb.jobNo = po.jobNo
+inner join clients as cl on cl.idClient = jb.idClient " + If(isDate = False, "where
+ds.tag like '%" + query + "%' or
+CONCAT(wo.idWO , '-', tk.task) like '%" + query + "%' or 
+CONVERT(nvarchar, jb.jobNo) like '%" + query + "%' or 
+ds.comments like '%" + query + "%'", " where (ds.rentStopDate = '" + query + "')") +
+If(idClient = "ALL", "", " and cl.idClient = '" + idClient + "'"), conn)
+            If cmd.ExecuteNonQuery Then
+                Dim dt As New DataTable
+                Dim da As New SqlDataAdapter(cmd)
+                da.Fill(dt)
+                tbl.DataSource = dt
+            End If
+            Return True
+        Catch ex As Exception
+            Return False
+        End Try
+    End Function
     '####################################################################################################################################################################################
     '############################### METODOS PARA LA MODIFICAION DEL SCAFFOLD ###########################################################################################################
     '####################################################################################################################################################################################
-
+    Public Function llenarComboTagModificaion(ByVal cmb As ComboBox, ByVal idclient As String) As Boolean
+        Try
+            conectar()
+            Dim cmd As New SqlCommand("select tag from scaffoldTraking as sc
+inner join task as tk on tk.idAux = sc.idAux
+inner join workOrder as wo on tk.idAuxWO = wo.idAuxWO
+inner join projectOrder as po on po.idPO = wo.idPO and wo.jobNo = po.jobNo
+inner join job as jb on jb.jobNo = po.jobNo
+inner join clients as cl on jb.idClient = cl.idClient
+where sc.status = 'f' " + If(idclient = "", "", " and cl.idClient = '" + idclient.ToString() + "'"), conn)
+            Dim dr As SqlDataReader = cmd.ExecuteReader
+            cmb.Items.Clear()
+            While dr.Read
+                cmb.Items.Add(dr("tag"))
+            End While
+            Return True
+        Catch ex As Exception
+            Return False
+        Finally
+            desconectar()
+        End Try
+    End Function
     Public Function selectMaxModId(ByVal tag As String) As String
         Try
             conectar()
             Dim maxModID As String = "1000"
-            Dim cmd As New SqlCommand("select MAX(CONVERT(int, idModification))+1 as Maxvalue from modification " + If(tag <> "", " where tag = '" + tag + "'", ""), conn)
+            Dim cmd As New SqlCommand("select MAX(CONVERT(int, REPLACE(REPLACE(idModification,'-',''),' ','')))+1 As Maxvalue from modification " + If(CStr(tag) <> "", " where tag = '" + CStr(tag) + "'", ""), conn)
             Dim rd As SqlDataReader = cmd.ExecuteReader()
             While rd.Read()
                 maxModID = If(rd("Maxvalue") Is DBNull.Value, maxModID, rd("Maxvalue"))
@@ -2561,7 +2735,7 @@ left join job as jb on jb.jobNo = po.jobNo", conn)
             End While
             Return maxModID
         Catch ex As Exception
-            MsgBox(ex.Message())
+            'MsgBox(ex.Message())
             Return "1000"
         Finally
             desconectar()
@@ -2673,12 +2847,21 @@ If(idCliente = "", "", " where idClient ='" + idCliente + "'"), conn)
         tran = conn.BeginTransaction
         Dim flagComplete As Boolean = True
         Try
-            If md.ModAux = "" Then
-                Dim g As Guid
-                g = Guid.NewGuid()
-                md.ModAux = g.ToString()
-            End If
-            Dim cmdMod As New SqlCommand("if (select count (idModAux) from modification where idModAux='" + md.ModAux + "')=0
+            Dim cmdAvaibleMod As New SqlCommand("select [status] from scaffoldTraking where tag = '" + md.tag + "'", conn)
+            Dim dr As SqlDataReader = cmdAvaibleMod.ExecuteReader()
+            Dim flag As Boolean = False
+            cmdAvaibleMod.ExecuteNonQuery()
+            While dr.Read()
+                flag = If(dr("status") = "f", True, False)
+                Exit While
+            End While
+            If flag Then
+                If md.ModAux = "" Then
+                    Dim g As Guid
+                    g = Guid.NewGuid()
+                    md.ModAux = g.ToString()
+                End If
+                Dim cmdMod As New SqlCommand("if (select count (idModAux) from modification where idModAux='" + md.ModAux + "')=0
                 begin
 	                insert into modification values ('" + md.ModAux + "','" + md.ModID + "','" + md.reqCompany + "','" + md.requestBy + "','" + validaFechaParaSQl(md.ModDate) + "','" + md.foreman + "','" + md.erector + "','" + md.comments + "','" + md.tag + "','" + If(md.status = True, "t", "f") + "')
                 end
@@ -2686,9 +2869,9 @@ If(idCliente = "", "", " where idClient ='" + idCliente + "'"), conn)
                 begin
 	                update modification set reqCompany='" + md.reqCompany + "',requestBy='" + md.requestBy + "',modificationDate='" + validaFechaParaSQl(md.ModDate) + "' ,foreman='" + md.foreman + "',erector='" + md.erector + "',comments='" + md.comments + "',tag='" + md.tag + "',status='" + If(md.status = True, "t", "f") + "' where idModAux = '" + md.ModAux + "'
                 end", conn)
-            cmdMod.Transaction = tran
-            If cmdMod.ExecuteNonQuery = 1 Then 'Actualizar o Insertar la Modificacion 
-                Dim cmdActivityHour As New SqlCommand("if (select COUNT(*) from activityHours where idModAux = '" + md.ModAux + "' and tag = '" + md.tag + "')=0
+                cmdMod.Transaction = tran
+                If cmdMod.ExecuteNonQuery = 1 Then 'Actualizar o Insertar la Modificacion 
+                    Dim cmdActivityHour As New SqlCommand("if (select COUNT(*) from activityHours where idModAux = '" + md.ModAux + "' and tag = '" + md.tag + "')=0
                     begin 
 	                    insert into activityHours values (NEWID()," + CStr(md.ahrBuild) + "," + CStr(md.ahrMaterial) + "," + CStr(md.ahrTravel) + "," + CStr(md.ahrWeather) + "," + CStr(md.ahrAlarm) + "," + CStr(md.ahrSafety) + "," + CStr(md.ahrStdBy) + "," + CStr(md.ahrOther) + ",'" + md.tag + "','" + md.ModAux + "',NULL)
                     end
@@ -2696,19 +2879,19 @@ If(idCliente = "", "", " where idClient ='" + idCliente + "'"), conn)
                     begin 
 	                    update activityHours set build=" + CStr(md.ahrBuild) + ",material=" + CStr(md.ahrMaterial) + ",travel=" + CStr(md.ahrTravel) + ",weather=" + CStr(md.ahrWeather) + ",alarm=" + CStr(md.ahrAlarm) + ",safety=" + CStr(md.ahrSafety) + ",stdBy=" + CStr(md.ahrStdBy) + ",other=" + CStr(md.ahrOther) + " ,tag='" + md.tag + "' where idActivityHours = '" + md.ahrIdActivityHours + "'
                     end", conn)
-                cmdActivityHour.Transaction = tran
-                'If cmdActivityHour.ExecuteNonQuery = 1 Then 'Actualizar o Insertar las Horas de Actividades
-                '    Dim cmdScfInfo As New SqlCommand("if (select count(*) from scaffoldInformation where idModAux='" + md.ModAux + "' and tag = '" + md.tag + "')=0
-                '        begin 
-                '         insert into scaffoldInformation values(NEWID(),'" + md.sciType + "'," + CStr(md.sciWidth) + "," + CStr(md.sciLength) + "," + CStr(md.sciHeigth) + "," + CStr(md.sciDecks) + "," + CStr(md.sciKo) + "," + CStr(md.sciBase) + "," + CStr(md.sciExtraDeck) + ",'" + md.tag + "','" + md.ModAux + "')
-                '        end
-                '        else if (select count(*) from scaffoldInformation where idModAux='" + md.ModAux + "' and tag = '" + md.tag + "')=1
-                '        begin 
-                '         update scaffoldInformation set type='" + md.sciType + "',width=" + CStr(md.sciWidth) + ",length=" + CStr(md.sciLength) + ",heigth=" + CStr(md.sciHeigth) + ",descks=" + CStr(md.sciDecks) + ",ko=" + CStr(md.sciKo) + ",base=" + CStr(md.sciBase) + ",extraDeck=" + CStr(md.sciExtraDeck) + ",tag='" + md.tag + "' where idScaffoldInformation='" + md.idScaffoldinformation + "'
-                '        end", conn)
-                '    cmdScfInfo.Transaction = tran
-                If cmdActivityHour.ExecuteNonQuery = 1 Then 'Actualizar o Insertar la informacion del Andamio
-                    Dim cmdMatHand As New SqlCommand("if(select COUNT(*) from materialHandeling where tag = '" + md.tag + "' and idModAux = '" + md.ModAux + "')=0
+                    cmdActivityHour.Transaction = tran
+                    'If cmdActivityHour.ExecuteNonQuery = 1 Then 'Actualizar o Insertar las Horas de Actividades
+                    '    Dim cmdScfInfo As New SqlCommand("if (select count(*) from scaffoldInformation where idModAux='" + md.ModAux + "' and tag = '" + md.tag + "')=0
+                    '        begin 
+                    '         insert into scaffoldInformation values(NEWID(),'" + md.sciType + "'," + CStr(md.sciWidth) + "," + CStr(md.sciLength) + "," + CStr(md.sciHeigth) + "," + CStr(md.sciDecks) + "," + CStr(md.sciKo) + "," + CStr(md.sciBase) + "," + CStr(md.sciExtraDeck) + ",'" + md.tag + "','" + md.ModAux + "')
+                    '        end
+                    '        else if (select count(*) from scaffoldInformation where idModAux='" + md.ModAux + "' and tag = '" + md.tag + "')=1
+                    '        begin 
+                    '         update scaffoldInformation set type='" + md.sciType + "',width=" + CStr(md.sciWidth) + ",length=" + CStr(md.sciLength) + ",heigth=" + CStr(md.sciHeigth) + ",descks=" + CStr(md.sciDecks) + ",ko=" + CStr(md.sciKo) + ",base=" + CStr(md.sciBase) + ",extraDeck=" + CStr(md.sciExtraDeck) + ",tag='" + md.tag + "' where idScaffoldInformation='" + md.idScaffoldinformation + "'
+                    '        end", conn)
+                    '    cmdScfInfo.Transaction = tran
+                    If cmdActivityHour.ExecuteNonQuery = 1 Then 'Actualizar o Insertar la informacion del Andamio
+                        Dim cmdMatHand As New SqlCommand("if(select COUNT(*) from materialHandeling where tag = '" + md.tag + "' and idModAux = '" + md.ModAux + "')=0
                             begin
 	                            insert into materialHandeling values(NEWID(),'" + If(md.materialHandeling(0), "t", "f") + "','" + If(md.materialHandeling(1), "t", "f") + "','" + If(md.materialHandeling(2), "t", "f") + "','" + If(md.materialHandeling(3), "t", "f") + "','" + If(md.materialHandeling(4), "t", "f") + "','" + If(md.materialHandeling(5), "t", "f") + "','" + If(md.materialHandeling(6), "t", "f") + "','" + md.tag + "','" + md.ModAux + "', Null)
                             end
@@ -2716,14 +2899,14 @@ If(idCliente = "", "", " where idClient ='" + idCliente + "'"), conn)
                             begin
 	                            update materialHandeling set truck='" + If(md.materialHandeling(0), "t", "f") + "',forklift='" + If(md.materialHandeling(1), "t", "f") + "',trailer='" + If(md.materialHandeling(2), "t", "f") + "',crane='" + If(md.materialHandeling(3), "t", "f") + "',rope='" + If(md.materialHandeling(4), "t", "f") + "',passed='" + If(md.materialHandeling(5), "t", "f") + "',elevator='" + If(md.materialHandeling(6), "t", "f") + "' ,tag='" + md.tag + "' where idMaterialHandeling ='" + md.idMaterialHandeling + "'
                             end", conn)
-                    cmdMatHand.Transaction = tran
-                    If cmdMatHand.ExecuteNonQuery = 1 Then 'Actualizar o Insertar la Manipulacion de materiales
-                        Dim contProduct As Integer = 1
-                        For Each row As DataRow In md.productsAdds.Rows()
-                            Dim array() = row.ItemArray(1).ToString.Split(" ")
-                            Dim idProduct = array(0).ToString
-                            Dim idProductModification = row.ItemArray(0).ToString()
-                            Dim cmdProductInsertUpdate As New SqlCommand("
+                        cmdMatHand.Transaction = tran
+                        If cmdMatHand.ExecuteNonQuery = 1 Then 'Actualizar o Insertar la Manipulacion de materiales
+                            Dim contProduct As Integer = 1
+                            For Each row As DataRow In md.productsAdds.Rows()
+                                Dim array() = row.ItemArray(1).ToString.Split(" ")
+                                Dim idProduct = array(0).ToString
+                                Dim idProductModification = row.ItemArray(0).ToString()
+                                Dim cmdProductInsertUpdate As New SqlCommand("
 declare @modID as varchar(36)
 declare @cantidad as float
 declare @idProduct as int
@@ -2763,40 +2946,44 @@ begin --EXISTE PRODUCTO EN MODIFICACION
 	update productModification set quantity = @cantidad where  idModAux=@modID and idProduct=@idProduct 	
 	delete from productTotalScaffold where quantity <= 0 and tag = @tag
 end", conn)
-                            cmdProductInsertUpdate.Transaction = tran
-                            If cmdProductInsertUpdate.ExecuteNonQuery > 0 Then
-                                contProduct += 1
-                            Else
-                                tran.Rollback()
-                                MessageBox.Show("Error, check the data and try again." + vbCrLf + "The error is likely in the Products 'table' at row " + CStr(contProduct) + ".", "Important", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-                                flagComplete = False
-                            End If
-                        Next
-                        flagComplete = True
-                        'Else
-                        '    flagComplete = False
-                        '    MessageBox.Show("Error, check the data and try again." + vbCrLf + "The error is likely in the Data of 'Material Handeling'.", "Important", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-                        'End If
+                                cmdProductInsertUpdate.Transaction = tran
+                                If cmdProductInsertUpdate.ExecuteNonQuery > 0 Then
+                                    contProduct += 1
+                                Else
+                                    tran.Rollback()
+                                    MessageBox.Show("Error, check the data and try again." + vbCrLf + "The error is likely in the Products 'table' at row " + CStr(contProduct) + ".", "Important", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                                    flagComplete = False
+                                End If
+                            Next
+                            flagComplete = True
+                            'Else
+                            '    flagComplete = False
+                            '    MessageBox.Show("Error, check the data and try again." + vbCrLf + "The error is likely in the Data of 'Material Handeling'.", "Important", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                            'End If
+                        Else
+                            flagComplete = False
+                            MessageBox.Show("Error, check the data and try again." + vbCrLf + "The error is likely in the Table 'Scaffold Information'.", "Important", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                        End If
                     Else
                         flagComplete = False
-                        MessageBox.Show("Error, check the data and try again." + vbCrLf + "The error is likely in the Table 'Scaffold Information'.", "Important", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                        MessageBox.Show("Error, check the data and try again." + vbCrLf + "The error is likely in the Table 'Activity Hours'.", "Important", MessageBoxButtons.OK, MessageBoxIcon.Warning)
                     End If
                 Else
                     flagComplete = False
-                    MessageBox.Show("Error, check the data and try again." + vbCrLf + "The error is likely in the Table 'Activity Hours'.", "Important", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                    MessageBox.Show("Error, check the data and try again." + vbCrLf + "The error is likely in the 'Modification Data', try a new ID.", "Important", MessageBoxButtons.OK, MessageBoxIcon.Warning)
                 End If
+                If flagComplete Then
+                    tran.Commit()
+                    Return True
+                Else
+                    tran.Rollback()
+                    Return False
+                End If
+                Return flagComplete
             Else
-                flagComplete = False
-                MessageBox.Show("Error, check the data and try again." + vbCrLf + "The error is likely in the 'Modification Data', try a new ID.", "Important", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-            End If
-            If flagComplete Then
-                tran.Commit()
-                Return True
-            Else
-                tran.Rollback()
+                MessageBox.Show("Error, check the data and try again." + vbCrLf + "The error is Probably that the Scaffold is Dismantled.", "Important", MessageBoxButtons.OK, MessageBoxIcon.Warning)
                 Return False
             End If
-            Return flagComplete
         Catch ex As Exception
             MsgBox(ex.Message())
             tran.Rollback()
@@ -2932,7 +3119,7 @@ end", conn)
     Public Function deleteModificaion(ByVal tag As String, ByVal modIDAux As String) As Boolean
         Try
             conectar()
-            Dim cmd As New SqlCommand("sp_DeleteModification")
+            Dim cmd As New SqlCommand("sp_DeleteModAux")
             cmd.Connection = conn
             cmd.CommandType = CommandType.StoredProcedure
             cmd.Parameters.Add("@tag", SqlDbType.VarChar, 20).Value = tag

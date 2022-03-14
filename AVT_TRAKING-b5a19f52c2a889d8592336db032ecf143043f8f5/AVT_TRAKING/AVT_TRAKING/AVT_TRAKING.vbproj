@@ -130,10 +130,22 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Froms\EstMeters.vb" />
+    <Compile Include="Froms\FindTagDismantle.Designer.vb">
+      <DependentUpon>FindTagDismantle.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Froms\FindTagDismantle.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Froms\FindEmployee.Designer.vb">
       <DependentUpon>FindEmployee.vb</DependentUpon>
     </Compile>
     <Compile Include="Froms\FindEmployee.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Froms\FindTagScaffold.Designer.vb">
+      <DependentUpon>FindTagScaffold.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Froms\FindTagScaffold.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Froms\FindTask.Designer.vb">
@@ -552,6 +564,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Froms\FindEmployee.resx">
       <DependentUpon>FindEmployee.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Froms\FindTagDismantle.resx">
+      <DependentUpon>FindTagDismantle.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Froms\FindTagScaffold.resx">
+      <DependentUpon>FindTagScaffold.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Froms\FindTask.resx">
       <DependentUpon>FindTask.vb</DependentUpon>

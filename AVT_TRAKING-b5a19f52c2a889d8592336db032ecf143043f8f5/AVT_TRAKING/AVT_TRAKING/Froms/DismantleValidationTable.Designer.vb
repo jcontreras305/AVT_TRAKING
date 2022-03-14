@@ -232,6 +232,7 @@ Partial Class DismantleValidationTable
         '
         'cmbDatos
         '
+        Me.cmbDatos.DropDownWidth = 260
         Me.cmbDatos.FormattingEnabled = True
         Me.cmbDatos.Location = New System.Drawing.Point(9, 45)
         Me.cmbDatos.Name = "cmbDatos"

@@ -76,10 +76,18 @@ Public Class scafoldTarking
             txtTicketNumOutGoing.Enabled = False
         End If
         'Area/WO/Sub-Job/JobCat
-        mtdScaffold.llenarSubJobs(tblSubJobs)
-        mtdScaffold.llenarAreas(tblAreas)
+        mtdScaffold.llenarSubJobs(tblSubJobs, If(IdCliente <> "", IdCliente, ""))
+        mtdScaffold.llenarAreas(tblAreas, If(IdCliente <> "", IdCliente, ""))
         mtdScaffold.llenarWO(tblWO, IdCliente)
-        mtdScaffold.llenarJobCat(tblJobCat)
+        mtdScaffold.llenarJobCat(tblJobCat, If(IdCliente <> "", IdCliente, ""))
+        tblAreas.Columns("Client2").Visible = False
+        tblSubJobs.Columns("Client2").Visible = False
+        tblJobCat.Columns("Client2").Visible = False
+        If Not lblCompanyName.Text = "Client: All" Then
+            tblAreas.Columns("Client").Visible = False
+            tblSubJobs.Columns("Client").Visible = False
+            tblJobCat.Columns("Client").Visible = False
+        End If
         'UM/Class/Status
         mtdScaffold.llenarClassification(tblClassification)
         mtdScaffold.llenarMaterialStatus(tblMaterialStatus)
@@ -97,10 +105,10 @@ Public Class scafoldTarking
         dtpReqCompScaffold.CustomFormat = "MM/dd/yyyy"
         dtpBldDate.Format = DateTimePickerFormat.Custom
         dtpBldDate.CustomFormat = "MM/dd/yyyy"
-        tblArea = mtdScaffold.llenarComboArea(cmbAreaID)
-        tblCat = mtdScaffold.llenarComboJobCat(cmbJobCAT)
+        tblArea = mtdScaffold.llenarComboArea(cmbAreaID, If(IdCliente <> "", IdCliente, ""))
+        tblCat = mtdScaffold.llenarComboJobCat(cmbJobCAT, If(IdCliente <> "", IdCliente, ""))
         tblWOTASK = mtdScaffold.llenarComboWO(cmbWONum, IdCliente)
-        tblSubJob = mtdScaffold.llenarComboSubJob(cmbSubJob)
+        tblSubJob = mtdScaffold.llenarComboSubJob(cmbSubJob, If(IdCliente <> "", IdCliente, ""))
         mtdScaffold.llenarEmpleadosCombo(cmbForemanScaffold, tablaEmpleados)
         mtdScaffold.llenarEmpleadosCombo(cmbErectorScaffold, tablaEmpleados)
         tblScaffoldInformation.Rows.Add("", "", "", "", "", "", "", "")
@@ -130,9 +138,10 @@ Public Class scafoldTarking
         tblActivityHoursSM.Rows.Add("", "", "", "", "", "", "", "", "")
         tblActivityHoursSM.Rows(0).Cells("ToHrs").ReadOnly = True
         tblActivityHoursSM.Rows(0).Cells("ToHrs").Style.BackColor = Color.Green
-        If tblScaffoldTags.Rows.Count > 0 Then
-            llenarComboTag(cmbTagScaffold, tblScaffoldTags)
-        End If
+        mtdScaffold.llenarComboTagModificaion(cmbTagScaffold, IdCliente)
+        'If tblScaffoldTags.Rows.Count > 0 Then
+        '    llenarComboTag(cmbTagScaffold, tblScaffoldTags)
+        'End If
         mtdScaffold.llenarEmpleadosCombo(cmbForemanModification, tablaEmpleados)
         mtdScaffold.llenarEmpleadosCombo(cmbErectorModification, tablaEmpleados)
         mtdScaffold.llenarComboReqCompany(cmbReqCompany)
@@ -181,7 +190,9 @@ Public Class scafoldTarking
                 cmb.Items.Clear()
             End If
             For Each row As DataRow In tblTags.Rows()
-                cmb.Items.Add(row.ItemArray(0).ToString())
+                If row.ItemArray(6).ToString() = "f" Then
+                    cmb.Items.Add(row.ItemArray(0).ToString())
+                End If
             Next
         End If
         Return If(cmb.Items IsNot Nothing, cmb.Items.Count(), 0)
@@ -212,10 +223,12 @@ Public Class scafoldTarking
         Select Case selectedTable
             Case tblAreas.Name
                 If mtdScaffold.SaveAreas(tblAreas) Then
+                    tblArea = mtdScaffold.llenarComboArea(cmbAreaID, If(IdCliente <> "", IdCliente, ""))
                     MsgBox("Sucessfull")
                 End If
             Case tblSubJobs.Name
                 If mtdScaffold.SaveSubJobs(tblSubJobs) Then
+                    tblSubJob = mtdScaffold.llenarComboSubJob(cmbSubJob, If(IdCliente <> "", IdCliente, ""))
                     MsgBox("Sucessfull")
                 End If
             Case tblMaterialStatus.Name
@@ -229,6 +242,7 @@ Public Class scafoldTarking
                 End If
             Case tblJobCat.Name
                 If mtdScaffold.SaveJobCat(tblJobCat) Then
+                    tblCat = mtdScaffold.llenarComboJobCat(cmbJobCAT, If(IdCliente <> "", IdCliente, ""))
                     MsgBox("Sucessfull")
                 End If
             Case tblClassification.Name
@@ -310,7 +324,7 @@ Public Class scafoldTarking
                         cmbTagScaffold.Items.Clear()
                         If tblScaffoldTags.Rows.Count > 0 Then
                             llenarComboTag(cmbTagDismantle, tblScaffoldTags)
-                            llenarComboTag(cmbTagScaffold, tblScaffoldTags)
+                            mtdScaffold.llenarComboTagModificaion(cmbTagScaffold, IdCliente)
                         End If
                         cmbTagScaffold.SelectedItem = cmbTagScaffold.Items(cmbTagScaffold.FindString(tagSelected))
                         cmbTagScaffold.Text = tagSelected
@@ -365,6 +379,8 @@ Public Class scafoldTarking
                 End If
             Case "Dis"
                 If mtdScaffold.saveDismantle(ds, False) Then
+                    mtdScaffold.llenarScaffold(tblScaffoldTags, If(lblCompanyName.Text = "Client: All", "", IdCliente))
+                    llenarComboTag(cmbTagDismantle, tblScaffoldTags)
                     cargarDatosDismantle(ds.tag)
                     mtdScaffold.llenarProduct(tblProductosAux)
                     If ds.tag = sc.tag Then
@@ -379,9 +395,9 @@ Public Class scafoldTarking
                     mtdScaffold.llenarProduct(tblProductosAux)
                 End If
             Case "Est"
-                If IdCliente Is Nothing Then
+                If IdClientEstmation Is Nothing Then
                     selectClient()
-                    mtdEstimation.idClient = IdCliente
+                    mtdEstimation.idClient = IdClientEstmation
                 End If
                 If mtdEstimation.saveEstimation(estMeter) Then
                     btnNewEst.Text = "New"
@@ -479,7 +495,7 @@ Public Class scafoldTarking
                         cmbTagScaffold.Items.Clear()
                         If tblScaffoldTags.Rows.Count > 0 Then
                             llenarComboTag(cmbTagDismantle, tblScaffoldTags)
-                            llenarComboTag(cmbTagScaffold, tblScaffoldTags)
+                            mtdScaffold.llenarComboTagModificaion(cmbTagScaffold, IdCliente)
                         End If
                         'cmbTagScaffold.SelectedItem = cmbTagScaffold.Items(cmbTagScaffold.FindString(tagSelected))
                         'cmbTagScaffold.Text = tagSelected
@@ -671,22 +687,33 @@ Public Class scafoldTarking
                             mtdScaffold.llenarProduct(tblProduct)
                             mtdScaffold.llenarProduct(tblProductosAux)
                             mtdScaffold.llenarScaffold(tblScaffoldTags, IdCliente)
+                            mtdScaffold.llenarModification(tblModification, IdCliente)
                             If cmbTagScaffold.Text <> "" And tblScaffoldTags.Rows.Count() > 0 Then
                                 Dim tagSelected = cmbTagScaffold.Text
                                 cmbTagScaffold.Items.Clear()
-                                For Each row As Data.DataRow In tblScaffoldTags.Rows()
-                                    cmbTagScaffold.Items.Add(row.ItemArray(0))
-                                Next
-                                cmbTagScaffold.SelectedItem = cmbTagScaffold.Items(cmbTagScaffold.FindString(tagSelected))
-                                cmbTagScaffold.Text = tagSelected
+                                mtdScaffold.llenarComboTagModificaion(cmbTagScaffold, IdCliente)
+                                If cmbTagScaffold.FindString(tagSelected) = -1 Then
+                                    cmbTagScaffold.SelectedItem = Nothing
+                                    cmbTagScaffold.Text = ""
+                                    md.Clear()
+                                    cargarDatosDismantle("")
+                                Else
+                                    cmbTagScaffold.SelectedItem = cmbTagScaffold.Items(cmbTagScaffold.FindString(tagSelected))
+                                    cmbTagScaffold.Text = tagSelected
+                                End If
                             End If
                             sc = mtdScaffold.llenarScaffold(tblScaffoldTags.Rows(0).ItemArray(0).ToString())
                             cargarDatosScaffold(sc.tag)
                         End If
                     Else
                         MessageBox.Show("Error, try to close the window.", "Message", MessageBoxButtons.OK, MessageBoxIcon.Error)
-                        sc = mtdScaffold.llenarScaffold(tblScaffoldTags.Rows(0).ItemArray(0).ToString())
-                        cargarDatosScaffold(sc.tag)
+                        If tblScaffoldTags.Rows.Count > 0 Then
+                            sc = mtdScaffold.llenarScaffold(tblScaffoldTags.Rows(0).ItemArray(0).ToString())
+                            cargarDatosScaffold(sc.tag)
+                        Else
+                            sc.Clear()
+                            cargarDatosScaffold(sc.tag)
+                        End If
                     End If
                 End If
             Case tblProductosScaffold.Name
@@ -2509,11 +2536,26 @@ Public Class scafoldTarking
                     End If
                 End If
             End If
+            selectedTable = "tag"
         Catch ex As Exception
 
         End Try
     End Sub
+    Public tagFind As String = ""
+    Private Sub btnFindTagScaffold_Click(sender As Object, e As EventArgs) Handles btnFindTagScaffold.Click
+        Try
+            Dim FindSC As New FindTagScaffold
+            AddOwnedForm(FindSC)
+            FindSC.idclient = If(lblCompanyName.Text = "Client: All", "ALL", IdCliente)
+            FindSC.OpenWindow = "Sccaffold"
+            FindSC.ShowDialog()
+            If tagFind <> "" Then
+                cargarDatosScaffold(tagFind)
+            End If
+        Catch ex As Exception
 
+        End Try
+    End Sub
     Private Sub btnNextTag_Click(sender As Object, e As EventArgs) Handles btnNextTag.Click
         Try
             If tblProductScaffoldAux.Rows IsNot Nothing Then
@@ -2534,10 +2576,16 @@ Public Class scafoldTarking
                         If sc.tag = "" Then
                             count -= 1
                         End If
-                        cargarDatosScaffold(tblScaffoldTags.Rows(count).ItemArray(0))
+                        If tblScaffoldTags.Rows.Count < count Then
+                            cargarDatosScaffold(tblScaffoldTags.Rows(count).ItemArray(0))
+                        Else
+                            cargarDatosScaffold(tblScaffoldTags.Rows(count - 1).ItemArray(0))
+                        End If
+
                     End If
                 End If
             End If
+            selectedTable = "tag"
         Catch ex As Exception
 
         End Try
@@ -2547,7 +2595,9 @@ Public Class scafoldTarking
         If DialogResult.Yes = MessageBox.Show("The selected rows will be removed from the 'PRODUCTS TABLE'. Are you sure to do it?", "Important", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) Then
             If mtdScaffold.deleteRowsProductScaffold(tblProductosScaffold, sc.tag) Then
                 For Each row As DataGridViewRow In tblProductosScaffold.SelectedRows()
-                    tblProductosScaffold.Rows.Remove(row)
+                    If Not row.IsNewRow Then
+                        tblProductosScaffold.Rows.Remove(row)
+                    End If
                 Next
                 sc.llenarTablaProductTag(sc.tag)
                 sc.llenarProductTotalScaffold(sc.tag)
@@ -2962,6 +3012,7 @@ Public Class scafoldTarking
     Private Sub btnNewModification_Click(sender As Object, e As EventArgs) Handles btnNewModification.Click
         md.Clear()
         cargarDatosModification("")
+
     End Sub
     Private Sub tblModificationProductMS_CellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles tblModificationProductMS.CellEndEdit
         If e.ColumnIndex = 2 Then
@@ -3148,6 +3199,10 @@ Public Class scafoldTarking
             ds.scStartDate = dateAux
 
             If ds.tag <> "" Then
+                Dim indexCmb = cmbTagDismantle.FindString(ds.tag)
+                If indexCmb = -1 Then
+                    cmbTagDismantle.Items.Add(ds.tag)
+                End If
                 cmbTagDismantle.SelectedItem = cmbTagDismantle.Items(cmbTagDismantle.FindString(ds.tag))
             End If
             If ds.wo = "" Then
@@ -3266,7 +3321,7 @@ Public Class scafoldTarking
                 End If
                 Dim totalHours As Double = 0
                 For Each cell As DataGridViewCell In tblActivityHoursDismantle.Rows(0).Cells()
-                    If cell.Value.ToString() <> "" And cell.ColumnIndex < 8 And cell.ColumnIndex > 0 Then
+                    If cell.Value.ToString() <> "" And cell.ColumnIndex < 9 And cell.ColumnIndex > 0 Then
                         totalHours = totalHours + CDbl(cell.Value.ToString())
                     End If
                 Next
@@ -3503,7 +3558,7 @@ Public Class scafoldTarking
 
     Private Sub btnUploadExcelModification_Click(sender As Object, e As EventArgs) Handles btnUploadExcelModification.Click
         Dim mvt As New ModificationValidationTable
-        If IdCliente <> "" Then
+        If lblCompanyName.Text <> "Client: All" Then
             mvt.IdCliente = IdCliente
         Else
             mvt.IdCliente = ""
@@ -3722,7 +3777,7 @@ Public Class scafoldTarking
                 sprDecksEst.Value = mtdEstimation.descks
                 sprGroudHeigthEst.Value = mtdEstimation.groundheigth
                 sprElevatorEst.Value = mtdEstimation.elevation
-                IdCliente = mtdEstimation.idClient
+                IdClientEstmation = mtdEstimation.idClient
                 loadingEst = False
             End If
             Return True
@@ -3730,6 +3785,7 @@ Public Class scafoldTarking
             Return False
         End Try
     End Function
+    Dim IdClientEstmation As String = Nothing
     Private Sub selectClient()
         Dim idc As String = ""
         Dim mtdCl As New MetodosClients
@@ -3746,7 +3802,7 @@ Public Class scafoldTarking
                     For Each row As Data.DataRow In tblCl.Rows()
                         If idc = row.ItemArray(1) Then
                             flag = True
-                            IdCliente = row.ItemArray(0)
+                            IdClientEstmation = row.ItemArray(0)
                             Exit For
                         Else
                             flag = False
@@ -3764,12 +3820,13 @@ Public Class scafoldTarking
     Public Sub limpiarCamposEstimation()
         loadingEst = True
         If lblCompanyName.Text = "Client: All" Then
-            IdCliente = Nothing
+            IdClientEstmation = Nothing
+
         End If
-        If IdCliente = Nothing Then
+        If IdClientEstmation = Nothing Then
             selectClient()
         Else
-            IdCliente = mtdEstimation.idClient
+            IdClientEstmation = mtdEstimation.idClient
         End If
         cmbCCNUM.SelectedItem = cmbCCNUM.Items(0)
         cmbScaffolType.SelectedItem = cmbScaffolType.Items(0)
@@ -3786,7 +3843,7 @@ Public Class scafoldTarking
         sprGroudHeigthEst.Value = 0
         sprElevatorEst.Value = 0
         mtdEstimation.Clear()
-        mtdEstimation.idClient = IdCliente
+        mtdEstimation.idClient = IdClientEstmation
         estMeter.Clear()
         loadingEst = False
     End Sub
@@ -3976,6 +4033,173 @@ Public Class scafoldTarking
                 End If
             Else
                 MsgBox("Plase select a Control Number Or Write a New one 'CCNUM', Space and the Area Name.")
+            End If
+        Catch ex As Exception
+
+        End Try
+    End Sub
+    Private Sub tblAreas_CellMouseDoubleClick(sender As Object, e As DataGridViewCellMouseEventArgs) Handles tblAreas.CellMouseDoubleClick
+        If tblAreas.CurrentCell.ColumnIndex = tblAreas.Columns("Client").Index Then
+            Try
+                If tblAreas.CurrentCell.GetType.Name = "DataGridViewTextBoxCell" Then
+                    Dim cmbAreaCell As New DataGridViewComboBoxCell
+                    With cmbAreaCell
+                        mtdScaffold.llenarClientsComboBoxCell(cmbAreaCell)
+                        cmbAreaCell.DropDownWidth = 240
+                    End With
+                    If tblAreas.CurrentRow.Cells(3).Value IsNot Nothing Then
+                        For Each row As String In cmbAreaCell.Items
+                            Dim array() As String = row.Split(" ")
+                            If array(0) = tblAreas.CurrentRow.Cells(3).Value Then
+                                cmbAreaCell.Value = row
+                            End If
+                        Next
+                    End If
+                    tblAreas.CurrentRow.Cells(3) = cmbAreaCell
+                    tblAreas.CurrentCell = tblAreas.Rows(tblAreas.CurrentCell.RowIndex).Cells(2)
+                    tblAreas.CurrentCell = tblAreas.Rows(tblAreas.CurrentCell.RowIndex).Cells(3)
+                End If
+            Catch ex As Exception
+
+            End Try
+        End If
+    End Sub
+    Private Sub tblAreas_EditingControlShowing(sender As Object, e As DataGridViewEditingControlShowingEventArgs) Handles tblAreas.EditingControlShowing
+        Dim Index = tblAreas.CurrentCell.ColumnIndex
+        FlagSelectTablaAreaJobcatSubjob = "Area"
+        If Index = 3 Then
+            If tblAreas.CurrentCell.GetType.Name = "DataGridViewComboBoxCell" Then
+                Dim cb As ComboBox = CType(e.Control, ComboBox)
+                If e.Control IsNot Nothing Then
+                    RemoveHandler cb.SelectedIndexChanged, AddressOf cmb_SelectedIndexChanguedClients
+                    AddHandler cb.SelectedIndexChanged, AddressOf cmb_SelectedIndexChanguedClients
+                End If
+            End If
+        End If
+    End Sub
+    Dim FlagSelectTablaAreaJobcatSubjob As String
+    Private Sub tblSubJobs_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles tblSubJobs.CellClick
+        FlagSelectTablaAreaJobcatSubjob = "SubJob"
+    End Sub
+    Private Sub tblJobCat_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles tblJobCat.CellClick
+        FlagSelectTablaAreaJobcatSubjob = "JobCat"
+    End Sub
+    Private Sub tblAreas_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles tblAreas.CellClick
+        FlagSelectTablaAreaJobcatSubjob = "Area"
+    End Sub
+    Public Sub cmb_SelectedIndexChanguedClients(sender As Object, e As EventArgs)
+        Try
+            Dim cmb As ComboBox = CType(sender, ComboBox)
+            If cmb.SelectedItem IsNot Nothing Then
+                If FlagSelectTablaAreaJobcatSubjob = "Area" Then
+                    If tblAreas.CurrentCell.Value <> cmb.SelectedItem.ToString() Then
+                        tblAreas.CurrentCell.Value = cmb.SelectedItem.ToString()
+                    End If
+                ElseIf FlagSelectTablaAreaJobcatSubjob = "SubJob" Then
+                    If tblSubJobs.CurrentCell.Value <> cmb.SelectedItem.ToString() Then
+                        tblSubJobs.CurrentCell.Value = cmb.SelectedItem.ToString()
+                    End If
+                ElseIf FlagSelectTablaAreaJobcatSubjob = "JobCat" Then
+                    If tblJobCat.CurrentCell.Value <> cmb.SelectedItem.ToString() Then
+                        tblJobCat.CurrentCell.Value = cmb.SelectedItem.ToString()
+                    End If
+                End If
+            End If
+        Catch ex As Exception
+
+        End Try
+    End Sub
+    Private Sub tblJobCat_CellMouseDoubleClick(sender As Object, e As DataGridViewCellMouseEventArgs) Handles tblJobCat.CellMouseDoubleClick
+        If tblJobCat.CurrentCell.ColumnIndex = tblJobCat.Columns("Client").Index Then
+            Try
+                If tblJobCat.CurrentCell.GetType.Name = "DataGridViewTextBoxCell" Then
+                    Dim cmbJobCatCell As New DataGridViewComboBoxCell
+                    With cmbJobCatCell
+                        mtdScaffold.llenarClientsComboBoxCell(cmbJobCatCell)
+                        cmbJobCatCell.DropDownWidth = 240
+                    End With
+                    If tblJobCat.CurrentRow.Cells(3).Value IsNot Nothing Then
+                        For Each row As String In cmbJobCatCell.Items
+                            Dim array() As String = row.Split(" ")
+                            If array(0) = tblJobCat.CurrentRow.Cells(3).Value Then
+                                cmbJobCatCell.Value = row
+                            End If
+                        Next
+                    End If
+                    tblJobCat.CurrentRow.Cells(3) = cmbJobCatCell
+                    tblJobCat.CurrentCell = tblJobCat.Rows(tblJobCat.CurrentCell.RowIndex).Cells(2)
+                    tblJobCat.CurrentCell = tblJobCat.Rows(tblJobCat.CurrentCell.RowIndex).Cells(3)
+                End If
+            Catch ex As Exception
+
+            End Try
+        End If
+    End Sub
+    Private Sub tblJobCat_DataError(sender As Object, e As DataGridViewDataErrorEventArgs) Handles tblJobCat.DataError, tblSubJobs.DataError, tblAreas.DataError
+        e.Cancel = True
+    End Sub
+    Private Sub tblJobcat_EditingControlShowing(sender As Object, e As DataGridViewEditingControlShowingEventArgs) Handles tblJobCat.EditingControlShowing
+        Dim Index = tblAreas.CurrentCell.ColumnIndex
+        FlagSelectTablaAreaJobcatSubjob = "JobCat"
+        If Index = 3 Then
+            If tblAreas.CurrentCell.GetType.Name = "DataGridViewComboBoxCell" Then
+                Dim cb As ComboBox = CType(e.Control, ComboBox)
+                If e.Control IsNot Nothing Then
+                    RemoveHandler cb.SelectedIndexChanged, AddressOf cmb_SelectedIndexChanguedClients
+                    AddHandler cb.SelectedIndexChanged, AddressOf cmb_SelectedIndexChanguedClients
+                End If
+            End If
+        End If
+    End Sub
+    Private Sub tblSubJobs_CellMouseDoubleClick(sender As Object, e As DataGridViewCellMouseEventArgs) Handles tblSubJobs.CellMouseDoubleClick
+        If tblSubJobs.CurrentCell.ColumnIndex = tblSubJobs.Columns("Client").Index Then
+            Try
+                If tblSubJobs.CurrentCell.GetType.Name = "DataGridViewTextBoxCell" Then
+                    Dim cmbSubJobCell As New DataGridViewComboBoxCell
+                    With cmbSubJobCell
+                        mtdScaffold.llenarClientsComboBoxCell(cmbSubJobCell)
+                        cmbSubJobCell.DropDownWidth = 240
+                    End With
+                    If tblSubJobs.CurrentRow.Cells(3).Value IsNot Nothing Then
+                        For Each row As String In cmbSubJobCell.Items
+                            Dim array() As String = row.Split(" ")
+                            If array(0) = tblSubJobs.CurrentRow.Cells(3).Value Then
+                                cmbSubJobCell.Value = row
+                            End If
+                        Next
+                    End If
+                    tblSubJobs.CurrentRow.Cells(3) = cmbSubJobCell
+                    tblSubJobs.CurrentCell = tblSubJobs.Rows(tblSubJobs.CurrentCell.RowIndex).Cells(2)
+                    tblSubJobs.CurrentCell = tblSubJobs.Rows(tblSubJobs.CurrentCell.RowIndex).Cells(3)
+                End If
+            Catch ex As Exception
+
+            End Try
+        End If
+    End Sub
+    Private Sub tblSubJobs_EditingControlShowing(sender As Object, e As DataGridViewEditingControlShowingEventArgs) Handles tblSubJobs.EditingControlShowing
+        Dim Index = tblSubJobs.CurrentCell.ColumnIndex
+        FlagSelectTablaAreaJobcatSubjob = "SubJob"
+        If Index = 3 Then
+            If tblSubJobs.CurrentCell.GetType.Name = "DataGridViewComboBoxCell" Then
+                Dim cb As ComboBox = CType(e.Control, ComboBox)
+                If e.Control IsNot Nothing Then
+                    RemoveHandler cb.SelectedIndexChanged, AddressOf cmb_SelectedIndexChanguedClients
+                    AddHandler cb.SelectedIndexChanged, AddressOf cmb_SelectedIndexChanguedClients
+                End If
+            End If
+        End If
+    End Sub
+    Private Sub btnFindDismantle_Click(sender As Object, e As EventArgs) Handles btnFindDismantle.Click
+        Try
+            Dim FindSC As New FindTagScaffold
+            AddOwnedForm(FindSC)
+            FindSC.idclient = If(lblCompanyName.Text = "Client: All", "ALL", IdCliente)
+            FindSC.OpenWindow = "Dismantle"
+            FindSC.ShowDialog()
+            If tagFind <> "" Then
+                llenarComboTag(cmbTagDismantle, tblScaffoldTags)
+                cargarDatosDismantle(tagFind)
             End If
         Catch ex As Exception
 

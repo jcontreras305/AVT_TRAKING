@@ -47,6 +47,7 @@ Partial Class TagsValidationTable
         Me.jobCat = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.AreaID = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.WorkNum = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.JobNum = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.SubJob = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.DateBuild = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Location = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -239,7 +240,9 @@ Partial Class TagsValidationTable
         '
         'cmbDatos
         '
+        Me.cmbDatos.DropDownHeight = 260
         Me.cmbDatos.FormattingEnabled = True
+        Me.cmbDatos.IntegralHeight = False
         Me.cmbDatos.Location = New System.Drawing.Point(6, 50)
         Me.cmbDatos.Name = "cmbDatos"
         Me.cmbDatos.Size = New System.Drawing.Size(167, 21)
@@ -309,7 +312,7 @@ Partial Class TagsValidationTable
         Me.tblTagsScaffold.AllowUserToAddRows = False
         Me.tblTagsScaffold.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells
         Me.tblTagsScaffold.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.tblTagsScaffold.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.clmError, Me.TagNum, Me.jobCat, Me.AreaID, Me.WorkNum, Me.SubJob, Me.DateBuild, Me.Location, Me.Porpuse, Me.Type, Me.Width, Me.Length, Me.Heigth, Me.Decks, Me.KO, Me.Base, Me.CSAP, Me.Rolling, Me.Internal, Me.Hanging, Me.Truck, Me.Forklift, Me.Trailer, Me.Crane, Me.Rope, Me.Passed, Me.Elevator, Me.ReqComp, Me.RequestBy, Me.Foreman, Me.Erector, Me.Build, Me.Material, Me.Travel, Me.Weather, Me.Alarm, Me.Safety, Me.stdBy, Me.Other, Me.TotalHours, Me.Comment})
+        Me.tblTagsScaffold.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.clmError, Me.TagNum, Me.jobCat, Me.AreaID, Me.WorkNum, Me.JobNum, Me.SubJob, Me.DateBuild, Me.Location, Me.Porpuse, Me.Type, Me.Width, Me.Length, Me.Heigth, Me.Decks, Me.KO, Me.Base, Me.CSAP, Me.Rolling, Me.Internal, Me.Hanging, Me.Truck, Me.Forklift, Me.Trailer, Me.Crane, Me.Rope, Me.Passed, Me.Elevator, Me.ReqComp, Me.RequestBy, Me.Foreman, Me.Erector, Me.Build, Me.Material, Me.Travel, Me.Weather, Me.Alarm, Me.Safety, Me.stdBy, Me.Other, Me.TotalHours, Me.Comment})
         Me.tblTagsScaffold.Dock = System.Windows.Forms.DockStyle.Fill
         Me.tblTagsScaffold.Location = New System.Drawing.Point(3, 3)
         Me.tblTagsScaffold.Name = "tblTagsScaffold"
@@ -331,7 +334,7 @@ Partial Class TagsValidationTable
         Me.clmError.Name = "clmError"
         Me.clmError.ReadOnly = True
         Me.clmError.Visible = False
-        Me.clmError.Width = 54
+        Me.clmError.Width = 61
         '
         'TagNum
         '
@@ -357,6 +360,12 @@ Partial Class TagsValidationTable
         Me.WorkNum.HeaderText = "WorkNum"
         Me.WorkNum.Name = "WorkNum"
         Me.WorkNum.Width = 87
+        '
+        'JobNum
+        '
+        Me.JobNum.HeaderText = "JobNum"
+        Me.JobNum.Name = "JobNum"
+        Me.JobNum.Width = 77
         '
         'SubJob
         '
@@ -680,11 +689,29 @@ Partial Class TagsValidationTable
     Friend WithEvents btnSave As Button
     Friend WithEvents btnSubirExcel As Button
     Friend WithEvents lblMessage As Label
+    Friend WithEvents TabControl1 As TabControl
+    Friend WithEvents tbpTags As TabPage
+    Friend WithEvents tbpProducts As TabPage
+    Friend WithEvents tblProductSheet As DataGridView
+    Friend WithEvents clmErrorP As DataGridViewTextBoxColumn
+    Friend WithEvents clmTagID As DataGridViewTextBoxColumn
+    Friend WithEvents clmProductID As DataGridViewTextBoxColumn
+    Friend WithEvents clmQuantity As DataGridViewTextBoxColumn
+    Friend WithEvents Panel3 As Panel
+    Friend WithEvents pgbComplete As ProgressBar
+    Friend WithEvents cmbDatos As ComboBox
+    Public WithEvents txtFecha As TextBox
+    Friend WithEvents PictureBox4 As PictureBox
+    Friend WithEvents PictureBox3 As PictureBox
+    Friend WithEvents btnRestore As PictureBox
+    Friend WithEvents btnMaximize As PictureBox
+    Friend WithEvents Label1 As Label
     Friend WithEvents clmError As DataGridViewTextBoxColumn
     Friend WithEvents TagNum As DataGridViewTextBoxColumn
     Friend WithEvents jobCat As DataGridViewTextBoxColumn
     Friend WithEvents AreaID As DataGridViewTextBoxColumn
     Friend WithEvents WorkNum As DataGridViewTextBoxColumn
+    Friend WithEvents JobNum As DataGridViewTextBoxColumn
     Friend WithEvents SubJob As DataGridViewTextBoxColumn
     Friend WithEvents DateBuild As DataGridViewTextBoxColumn
     Friend WithEvents Location As DataGridViewTextBoxColumn
@@ -721,21 +748,4 @@ Partial Class TagsValidationTable
     Friend WithEvents Other As DataGridViewTextBoxColumn
     Friend WithEvents TotalHours As DataGridViewTextBoxColumn
     Friend WithEvents Comment As DataGridViewTextBoxColumn
-    Friend WithEvents TabControl1 As TabControl
-    Friend WithEvents tbpTags As TabPage
-    Friend WithEvents tbpProducts As TabPage
-    Friend WithEvents tblProductSheet As DataGridView
-    Friend WithEvents clmErrorP As DataGridViewTextBoxColumn
-    Friend WithEvents clmTagID As DataGridViewTextBoxColumn
-    Friend WithEvents clmProductID As DataGridViewTextBoxColumn
-    Friend WithEvents clmQuantity As DataGridViewTextBoxColumn
-    Friend WithEvents Panel3 As Panel
-    Friend WithEvents pgbComplete As ProgressBar
-    Friend WithEvents cmbDatos As ComboBox
-    Public WithEvents txtFecha As TextBox
-    Friend WithEvents PictureBox4 As PictureBox
-    Friend WithEvents PictureBox3 As PictureBox
-    Friend WithEvents btnRestore As PictureBox
-    Friend WithEvents btnMaximize As PictureBox
-    Friend WithEvents Label1 As Label
 End Class

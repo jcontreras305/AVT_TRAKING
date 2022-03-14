@@ -17,6 +17,7 @@ Public Class myCompany
         txtPhoneNumber.Text = mtdCompany.phoneNumber
         txtPostalCode.Text = mtdCompany.postalCode
         txtStateProvidence.Text = mtdCompany.stateProvidence
+        imgPhoto.Image = mtdCompany.img
     End Sub
 
     Private Sub myCompany_Closing(sender As Object, e As CancelEventArgs) Handles Me.Closing
@@ -175,5 +176,18 @@ Public Class myCompany
 
     Private Sub PictureBox2_Click(sender As Object, e As EventArgs) Handles PictureBox2.Click
         Me.Close()
+    End Sub
+
+    Private Sub btnFindImage_Click(sender As Object, e As EventArgs) Handles btnFindImage.Click
+        Try
+            Dim file As New OpenFileDialog
+            file.Filter = "Imagenes JPG|*.jpg|Images PNG|*.png"
+            If file.ShowDialog = Windows.Forms.DialogResult.OK Then
+                imgPhoto.Image = Image.FromFile(file.FileName)
+                mtdCompany.img = Image.FromFile(file.FileName)
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message)
+        End Try
     End Sub
 End Class

@@ -178,7 +178,8 @@ GO
 create table areas(
 	idArea int primary key not null,
 	name varchar(30),
-	cordinator varchar(50)
+	cordinator varchar(50),
+	idClient varchar(36)
 )
 GO
 
@@ -221,7 +222,8 @@ create table company(
 	payTerms varchar(30),
 	invoiceDescr text,
 	idHomeAddress varchar(36),
-	idContact varchar(36)  
+	idContact varchar(36),
+	img image
 )
 GO
 
@@ -456,7 +458,8 @@ GO
 create table jobCat(
 	idJobCat varchar(25) primary key not null,
 	cat varchar(35),
-	days int
+	days int,
+	idClient varchar(36)
 )
 go
 
@@ -932,7 +935,8 @@ go
 
 create table subJobs(
 	idSubJob int primary key not null,
-	description varchar(30)
+	description varchar(30),
+	idClient varchar(36)
 )
 GO
 
@@ -1185,6 +1189,14 @@ FOREIGN KEY(idDismantle) REFERENCES dismantle(idDismantle)
 GO
 
 --##########################################################################################
+--##################  FOREIG KEYS AREAS ####################################################
+--##########################################################################################
+
+ALTER TABLE areas WITH CHECK ADD CONSTRAINT fk_idClient_areas
+FOREIGN KEY (idClient) REFERENCES clients(idClient)
+GO
+
+--##########################################################################################
 --##################  FOREIG KEYS CLIENTES #################################################
 --##########################################################################################
 
@@ -1304,6 +1316,14 @@ GO
 
 ALTER TABLE    job   WITH CHECK ADD  CONSTRAINT  fk_idClient_job  FOREIGN KEY( idClient )
 REFERENCES    clients  ( idClient )
+GO
+
+--##########################################################################################
+--##################  FOREIG KEYS JOBCAT ###################################################
+--##########################################################################################
+
+ALTER TABLE jobCat WITH CHECK ADD CONSTRAINT fk_idClient_jobCat 
+FOREIGN KEY (idClient) REFERENCES clients(idClient)
 GO
 
 --##########################################################################################
@@ -1550,6 +1570,14 @@ FOREIGN KEY (tag) REFERENCES scaffoldTraking(tag)
 GO
 
 --##########################################################################################
+--##################  FOREIG KEYS SUBJOB ###################################################
+--##########################################################################################
+
+ALTER TABLE subJobs WITH CHECK ADD CONSTRAINT fk_idClient_subJobs 
+FOREIGN KEY (idClient) REFERENCES clients(idClient)
+GO
+
+--##########################################################################################
 --##################  FOREIG KEYS TASK #####################################################
 --##########################################################################################
 
@@ -1737,17 +1765,17 @@ select distinct
 end
 GO
 
-create proc sp_DeleteModAux
+create proc [dbo].[sp_DeleteModAux]
 @tag varchar(20),
 @modID varchar(36),
-@msg varchar(120) 
+@msg varchar(120) output
 as
 declare @error as int = 0
 declare @flag as int
 declare @idProduct as int
 declare @qty as float
 begin 
-	if (select COUNT(*) from modification where idModification=@modID and tag = @tag) >0 
+	if (select COUNT(*) from modification where idModAux = @modID and tag = @tag) >0 
 	begin 
 		begin tran	
 			begin try
@@ -1760,7 +1788,7 @@ begin
 				set @flag = (select COUNT(*) from productModification where tag = @tag and idModAux = @modID)
 				while (@flag > 0)
 				begin
-					select  @qty = quantity ,@idProduct = idProduct from (select top 1  quantity,idProduct from productModification where tag = '9999' and idModAux = @modID) as t1
+					select  @qty = quantity ,@idProduct = idProduct from (select top 1  quantity,idProduct from productModification where tag = @tag and idModAux = @modID) as t1
 					set	@msg = CONCAT('Error trying to delete Product Modification Record from Modification: ', @modID,', with the idProduct: ',CONVERT(varchar(12), @idProduct))
 					select quantity from product where idProduct = @idProduct
 					update product set quantity = quantity + @qty where idProduct = @idProduct
@@ -1768,7 +1796,7 @@ begin
 					update productTotalScaffold set quantity = quantity + IIF(@qty>0,@qty*-1,@qty*-1) where idProduct = @idProduct and tag = @tag
 					delete from productModification where idProduct = @idProduct and tag = @tag and idModAux = @modID
 					delete from productTotalScaffold where quantity = 0 and tag = @tag
-					select @flag = COUNT(*) from productModification where tag = @tag and idModAux = @modID
+					set @flag = ( select COUNT(*) from productModification where tag = @tag and idModAux = @modID)
 				end
 				delete from modification where idModification = @modID and tag = @tag	
 				set @msg = 'Successful'	 
@@ -1783,7 +1811,6 @@ begin
 		if @error <> 0
 		begin 
 			rollback tran 
-			print @msg
 		end
 	end
 end
@@ -3083,168 +3110,95 @@ go
 ----##################  CAMBIOS PARA VER CAMBIAR EL FORMATO DE TRACK #########################
 ----##########################################################################################
 
---drop table TrackElements
---go	
+--ALTER TABLE areas ALTER COLUMN name varchar(50)
+--GO
 
---create table TrackFormatColums(
---	idTFE varchar(36) primary key not null,
---	idClient varchar(36),
---	[Record ID]varchar(51),
---	[Force or Reject]varchar(51),
---	[Source]varchar(51),
---	[Date]varchar(51),
---	[Order Type]varchar(51),
---	[Location ID]varchar(51),
---	[Company Code]varchar(51),
---	[Resource ID]varchar(51),
---	[Resource Name]varchar(51),
---	[Area]varchar(51),
---	[Group Name]varchar(51),
---	[Agreement]varchar(51),
---	[Skill Type]varchar(51),
---	[Shift]varchar(51),
---	[Level 1 ID]varchar(51),
---	[Level 2 ID]varchar(51),
---	[Level 3 ID]varchar(51),
---	[Level 4 ID]varchar(51),
---	[Hours Total]varchar(51),
---	[Hours Total Activity Code]varchar(51),
---	[S/T (Hrs)]varchar(51),
---	[S/T Hrs Activity Code]varchar(51),
---	[O/T (Hrs)]varchar(51),
---	[O/T Hrs Activity Code]varchar(51),
---	[D/T (Hrs)]varchar(51),
---	[D/T Hrs Activity Code]varchar(51),
---	[Extra Charges $]varchar(51),
---	[Extra Charges $ Activity Code]varchar(51),
---	[Extra]varchar(51),
---	[Extra 1]varchar(51),
---	[Extra 2]varchar(51),
---	[Add Time]varchar(51),
---	[Pay Type]varchar(51),
---	[R4 (Hrs)]varchar(51),
---	[R5 (Hrs)]varchar(51),
---	[R6 (Hrs)]varchar(51),
---	[GL Account]varchar(51),
---	[ST Adders]varchar(51),
---	[OT Adders]varchar(51),
---	[DT Adders]varchar(51),
---	[R4 Adders]varchar(51),
---	[R5 Adders]varchar(51),
---	[R6 Adders]varchar(51)
---)
---go
+----##########################################################################################
+----##################  CAMBIOS PARA AGREGAR UNA IMAGEN A LA COMPANIA ########################
+----##########################################################################################
 
---ALTER TABLE TrackFormatColums WITH CHECK ADD CONSTRAINT fk_idClient_TrackFormatColums
+--ALTER TABLE company 
+--ADD img image
+--GO
+
+----##########################################################################################
+----############ CAMBIOS PARA AGREGAR IDCLIENT EN AREA, JOBCAT Y SUBJOB ######################
+----##########################################################################################
+
+--ALTER TABLE areas 
+--ADD idClient varchar(36)
+--GO
+
+--ALTER TABLE areas WITH CHECK ADD CONSTRAINT fk_idClient_areas
 --FOREIGN KEY (idClient) REFERENCES clients(idClient)
---ON UPDATE CASCADE
---ON DELETE CASCADE
---go
+--GO
 
---create table TrackDefaultElements(
---idTDe varchar(36) primary key not null,
---idClient varchar(36),
---[Force or Reject] varchar(15),	
---[Source] varchar(15),
---[Order Type] varchar(15),
---[Location ID] varchar(15),
---[Company Code] varchar(15),
---[Area] varchar(15),
---[Group Name] varchar(15),
---[Agreement] varchar(15),
---[Level 3 ID] varchar(15),
---[Level 4 ID] varchar(15),
---[Hours Total] varchar(15),
---[Hours Total Activity Code] varchar(15),
---[Extra Charges $ Activity Code] varchar(15),
---[Extra] varchar(15),
---[Extra 1] varchar(15),
---[Extra 2] varchar(15),
---[Add Time] varchar(15),
---[Pay Type] varchar(15),
---[R4 (Hrs)] varchar(15),
---[R5 (Hrs)] varchar(15),
---[R6 (Hrs)] varchar(15),
---[GL Account] varchar(15),
---[ST Adders] varchar(15),
---[OT Adders] varchar(15),
---[DT Adders] varchar(15),
---[R4 Adders] varchar(15),
---[R5 Adders] varchar(15),
---[R6 Adders] varchar(15)
---)
---go 
+--ALTER TABLE jobCat 
+--ADD idClient varchar(36)
+--GO
 
---ALTER TABLE TrackDefaultElements WITH CHECK ADD CONSTRAINT fk_idClient_TrackDefaultElements
+--ALTER TABLE jobCat WITH CHECK ADD CONSTRAINT fk_idClient_jobCat 
 --FOREIGN KEY (idClient) REFERENCES clients(idClient)
---ON UPDATE CASCADE
---ON DELETE CASCADE
---go
+--GO
 
---ALTER proc [dbo].[sp_Insert_Cient] 
---	@ClientID int,
---	@FirstName varchar (30),
---	@MiddleName varchar (30),
---	@LastName varchar (30),
---	@CompanyName varchar (50),
---	@Status char(1),
---	--Contact
---	@phoneNumer1 varchar(13),
---	@phoneNumer2 varchar(13),
---	@email varchar(50),
---	--Addres
---	@avenue varchar(80),
---	@number int,
---	@city varchar (20),
---	@providence varchar (20),
---	@postalcode int,
---	--Photo
---	@img image
+--ALTER TABLE subJobs
+--ADD idClient varchar(36)
+--GO
+
+--ALTER TABLE subJobs WITH CHECK ADD CONSTRAINT fk_idClient_subJobs 
+--FOREIGN KEY (idClient) REFERENCES clients(idClient)
+--GO
+
+----##########################################################################################
+----############## ACTUALIZACION DEL PROCEDIMIENTO DELETE MODIFICACION #######################
+----##########################################################################################
+--alter proc [dbo].[sp_DeleteModAux]
+--@tag varchar(20),
+--@modID varchar(36),
+--@msg varchar(120) output
 --as
---declare @error int  -- declaro variables para los ID que son nuevos y una variable de error
---declare @idClient varchar(36) 
---declare @idContact varchar(36)
---declare @idHomeAdress varchar(36)
+--declare @error as int = 0
+--declare @flag as int
+--declare @idProduct as int
+--declare @qty as float
 --begin 
---	begin tran 
---		begin try
---			--se inserta un contacto
-			
---				set @idContact = NEWID() 
---				insert into contact values(@idContact,@phoneNumer1,@phoneNumer2,@email)
---				if @@ERROR <> 0 begin set @error = @@ERROR goto solveproblem end
-			
---				set @idHomeAdress = NEWID()
---				insert into HomeAddress values (@idHomeAdress , @avenue , @number , @city , @providence , @postalCode)
---				if @@ERROR <> 0 begin set @error = @@ERROR goto solveproblem end 
-			
---				set @idClient = NEWID()
---				insert into clients values (@idClient , @ClientID, @FirstName, @MiddleName, @LastName , @CompanyName, @idContact , @idHomeAdress ,@Status,@img)
---				if @@ERROR <> 0 begin set @error = @@ERROR goto solveproblem end 
-
---				insert into TrackDefaultElements values(NEWID(),@idClient,'','','','','','','','','','','','','','','','','','','','','','','','','','','','')
---				if @@ERROR <> 0 begin set @error = @@ERROR goto solveproblem end
-				
---				insert into TrackFormatColums values(NEWID(),@idClient,'Record ID1','Force or Reject1','Source1','Date1','Order Type1','Location ID1','Company Code1','Resource ID1','Resource Name1','Area1','Group Name1','Agreement1','Skill Type1','Shift1','Level 1 ID1','Level 2 ID1','Level 3 ID1','Level 4 ID1','Hours Total1','Hours Total Activity Code1','S/T (Hrs)1','S/T Hrs Activity Code1','O/T (Hrs)1','O/T Hrs Activity Code1','D/T (Hrs)1','D/T Hrs Activity Code1','Extra Charges $1','Extra Charges $ Activity Code1','Extra1','Extra 11','Extra 21','Add Time1','Pay Type1','R4 (Hrs)1','R5 (Hrs)1','R6 (Hrs)1','GL Account1','ST Adders1','OT Adders1','DT Adders1','R4 Adders1','R5 Adders1','R6 Adders1')
---				if @@ERROR <> 0 begin set @error = @@ERROR goto solveproblem end
---		end try
---		begin catch
---			goto solveproblem
---		end catch
---	commit tran
---	solveproblem:
---	if @error <> 0
+--	if (select COUNT(*) from modification where idModAux = @modID and tag = @tag) >0 
 --	begin 
---		rollback tran 
+--		begin tran	
+--			begin try
+--				set	@msg = CONCAT('Error trying to delete Activity Hours from Modification ',@modID)
+--				delete from activityHours where tag = @tag and idModAux = @modID
+--				set	@msg = CONCAT('Error trying to delete Material Handeling from Modification ',@modID)
+--				delete from materialHandeling where tag = @tag and idModAux = @modID
+--				set	@msg = CONCAT('Error trying to delete Scaffold Information from Modification ',@modID)
+--				delete from scaffoldInformation where tag = @tag and idModAux=@modID
+--				set @flag = (select COUNT(*) from productModification where tag = @tag and idModAux = @modID)
+--				while (@flag > 0)
+--				begin
+--					select  @qty = quantity ,@idProduct = idProduct from (select top 1  quantity,idProduct from productModification where tag = '9999' and idModAux = @modID) as t1
+--					set	@msg = CONCAT('Error trying to delete Product Modification Record from Modification: ', @modID,', with the idProduct: ',CONVERT(varchar(12), @idProduct))
+--					select quantity from product where idProduct = @idProduct
+--					update product set quantity = quantity + @qty where idProduct = @idProduct
+--					select quantity from productTotalScaffold where idProduct = @idProduct and tag = @tag
+--					update productTotalScaffold set quantity = quantity + IIF(@qty>0,@qty*-1,@qty*-1) where idProduct = @idProduct and tag = @tag
+--					delete from productModification where idProduct = @idProduct and tag = @tag and idModAux = @modID
+--					delete from productTotalScaffold where quantity = 0 and tag = @tag
+--					select @flag = COUNT(*) from productModification where tag = @tag and idModAux = @modID
+--				end
+--				delete from modification where idModification = @modID and tag = @tag	
+--				set @msg = 'Successful'	 
+--			end try
+--			begin catch
+--				set @error = 1
+--				goto solveProblem
+--			end catch
+--		commit tran 
+--		print @msg	
+--		solveProblem:
+--		if @error <> 0
+--		begin 
+--			rollback tran 
+--		end
 --	end
 --end
---go
-
-----EJECUTAR EL SIGUIENTE SELECT Y POR CADA CLIENTE COPIAR LAS DOS FILAS SIGUIENTES
-----Y REMPLASAR EL "idClient" (SON LOS QUE TIENEN LETRAS Y NUMERO AL AZAR) 
-----DONDE DICE 'IDCLIENTE' EN LOS COMANDOS DE INSERT DEJANDO LAS COMILLAS 
-----EJEMPLO "VALUES (NEWID(), 'ECF6F45B-0D0B-40DB-B096-1410A39E29F9', ..."
-
---SELECT * FROM clients
---insert into TrackDefaultElements values(NEWID(),'IDCLIENT','','','','','','','','','','','','','','','','','','','','','','','','','','','','')
---insert into TrackFormatColums values(NEWID(),'IDCLIENT','Record ID1','Force or Reject1','Source1','Date1','Order Type1','Location ID1','Company Code1','Resource ID1','Resource Name1','Area1','Group Name1','Agreement1','Skill Type1','Shift1','Level 1 ID1','Level 2 ID1','Level 3 ID1','Level 4 ID1','Hours Total1','Hours Total Activity Code1','S/T (Hrs)1','S/T Hrs Activity Code1','O/T (Hrs)1','O/T Hrs Activity Code1','D/T (Hrs)1','D/T Hrs Activity Code1','Extra Charges $1','Extra Charges $ Activity Code1','Extra1','Extra 11','Extra 21','Add Time1','Pay Type1','R4 (Hrs)1','R5 (Hrs)1','R6 (Hrs)1','GL Account1','ST Adders1','OT Adders1','DT Adders1','R4 Adders1','R5 Adders1','R6 Adders1')
+--GO

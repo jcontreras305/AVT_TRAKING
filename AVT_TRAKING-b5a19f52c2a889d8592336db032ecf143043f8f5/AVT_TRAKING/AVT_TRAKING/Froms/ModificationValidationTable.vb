@@ -1,4 +1,5 @@
 ﻿Imports Microsoft.Office.Interop.Excel
+Imports System.Globalization
 Imports System.Runtime.InteropServices
 Public Class ModificationValidationTable
     Public IdCliente As String
@@ -12,14 +13,14 @@ Public Class ModificationValidationTable
     Dim listProduct As New List(Of String)
     Dim listModExcel As New List(Of String)
     Dim selectTable As String
-    Public fechaStart As Date
+    Public fechaStart As New Date
     Private flagClick As Boolean
     Private Sub ModificationValidationTable_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         mtdScaffold.llenarModification(tblMod, IdCliente)
-        mtdScaffold.llenarTags(tblTags)
+        mtdScaffold.llenarTags(tblTags, If(IdCliente = "", "ALL", IdCliente))
         mtdScaffold.llenarRental(tblType)
         mtdScaffold.llenarProduct(tblProducts)
-        mtdScaffold.llenarTableWO(tblWO)
+        mtdScaffold.llenarTableWO(tblWO, If(IdCliente = "", "ALL", IdCliente))
         For Each row As Data.DataRow In tblProducts.Rows
             listProduct.Add(row("ID").ToString())
         Next
@@ -249,13 +250,13 @@ Public Class ModificationValidationTable
             While sheet.Cells(contMD, 1).Text <> "" Or sheet.Cells(contMD + 1, 1).Text <> ""
                 If contMD >= sprFirstRow.Value Then
                     If sheet.Cells(contMD, 1).Text <> "" Then
-                        tblModificationScaffold.Rows.Add("", sheet.Cells(contMD, 1).Text, sheet.Cells(contMD, 2).Text, sheet.Cells(contMD, 3).Text, sheet.Cells(contMD, 4).Text, sheet.Cells(contMD, 5).Text, sheet.Cells(contMD, 6).Text, sheet.Cells(contMD, 7).Text, sheet.Cells(contMD, 13).Text, If(sheet.Cells(contMD, 14).Text = "yes", True, False), If(sheet.Cells(contMD, 15).Text = "yes", True, False), If(sheet.Cells(contMD, 16).Text = "yes", True, False), If(sheet.Cells(contMD, 17).Text = "yes", True, False), If(sheet.Cells(contMD, 18).Text = "yes", True, False), If(sheet.Cells(contMD, 19).Text = "yes", True, False), If(sheet.Cells(contMD, 20).Text = "yes", True, False), sheet.Cells(contMD, 21).Text, sheet.Cells(contMD, 22).Text, sheet.Cells(contMD, 23).Text, sheet.Cells(contMD, 24).Text, sheet.Cells(contMD, 25).Text, sheet.Cells(contMD, 26).Text, sheet.Cells(contMD, 27).Text, sheet.Cells(contMD, 28).Text, sheet.Cells(contMD, 29).Text, sheet.Cells(contMD, 30).Text, sheet.Cells(contMD, 32).Text)
+                        tblModificationScaffold.Rows.Add("", sheet.Cells(contMD, 1).Text, sheet.Cells(contMD, 2).Text, sheet.Cells(contMD, 3).Text, sheet.Cells(contMD, 4).Text, sheet.Cells(contMD, 5).Text, sheet.Cells(contMD, 6).Text, sheet.Cells(contMD, 7).Text, sheet.Cells(contMD, 13).Text, If(sheet.Cells(contMD, 14).Text = "yes" Or sheet.Cells(contMD, 14).Text = "YES", True, False), If(sheet.Cells(contMD, 15).Text = "yes" Or sheet.Cells(contMD, 15).Text = "YES", True, False), If(sheet.Cells(contMD, 16).Text = "yes" Or sheet.Cells(contMD, 16).Text = "YES", True, False), If(sheet.Cells(contMD, 17).Text = "yes" Or sheet.Cells(contMD, 17).Text = "YES", True, False), If(sheet.Cells(contMD, 18).Text = "yes" Or sheet.Cells(contMD, 18).Text = "YES", True, False), If(sheet.Cells(contMD, 19).Text = "yes" Or sheet.Cells(contMD, 19).Text = "YES", True, False), If(sheet.Cells(contMD, 20).Text = "yes" Or sheet.Cells(contMD, 20).Text = "YES", True, False), sheet.Cells(contMD, 21).Text, sheet.Cells(contMD, 22).Text, sheet.Cells(contMD, 23).Text, sheet.Cells(contMD, 24).Text, sheet.Cells(contMD, 25).Text, sheet.Cells(contMD, 26).Text, sheet.Cells(contMD, 27).Text, sheet.Cells(contMD, 28).Text, sheet.Cells(contMD, 29).Text, sheet.Cells(contMD, 30).Text, sheet.Cells(contMD, 32).Text)
                         tblModificationScaffold.Rows(tblModificationScaffold.Rows.Count() - 1).HeaderCell.Value = contMD.ToString()
                     End If
                 End If
                 If contMD + 1 >= sprFirstRow.Value Then
                     If sheet.Cells(contMD + 1, 1).Text <> "" Then
-                        tblModificationScaffold.Rows.Add("", sheet.Cells(contMD + 1, 1).Text, sheet.Cells(contMD + 1, 2).Text, sheet.Cells(contMD + 1, 3).Text, sheet.Cells(contMD + 1, 4).Text, sheet.Cells(contMD + 1, 5).Text, sheet.Cells(contMD + 1, 6).Text, sheet.Cells(contMD + 1, 7).Text, sheet.Cells(contMD + 1, 13).Text, If(sheet.Cells(contMD + 1, 14).Text = "yes", True, False), If(sheet.Cells(contMD + 1, 15).Text = "yes", True, False), If(sheet.Cells(contMD + 1, 16).Text = "yes", True, False), If(sheet.Cells(contMD + 1, 17).Text = "yes", True, False), If(sheet.Cells(contMD + 1, 18).Text = "yes", True, False), If(sheet.Cells(contMD + 1, 19).Text = "yes", True, False), If(sheet.Cells(contMD + 1, 20).Text = "yes", True, False), sheet.Cells(contMD + 1, 21).Text, sheet.Cells(contMD + 1, 22).Text, sheet.Cells(contMD + 1, 23).Text, sheet.Cells(contMD + 1, 24).Text, sheet.Cells(contMD + 1, 25).Text, sheet.Cells(contMD + 1, 26).Text, sheet.Cells(contMD + 1, 27).Text, sheet.Cells(contMD + 1, 28).Text, sheet.Cells(contMD + 1, 29).Text, sheet.Cells(contMD + 1, 30).Text, sheet.Cells(contMD + 1, 32).Text)
+                        tblModificationScaffold.Rows.Add("", sheet.Cells(contMD + 1, 1).Text, sheet.Cells(contMD + 1, 2).Text, sheet.Cells(contMD + 1, 3).Text, sheet.Cells(contMD + 1, 4).Text, sheet.Cells(contMD + 1, 5).Text, sheet.Cells(contMD + 1, 6).Text, sheet.Cells(contMD + 1, 7).Text, sheet.Cells(contMD + 1, 13).Text, If(sheet.Cells(contMD + 1, 14).Text = "yes" Or sheet.Cells(contMD + 1, 14).Text = "YES", True, False), If(sheet.Cells(contMD + 1, 15).Text = "yes" Or sheet.Cells(contMD + 1, 15).Text = "YES", True, False), If(sheet.Cells(contMD + 1, 16).Text = "yes" Or sheet.Cells(contMD + 1, 16).Text = "YES", True, False), If(sheet.Cells(contMD + 1, 17).Text = "yes" Or sheet.Cells(contMD + 1, 17).Text = "YES", True, False), If(sheet.Cells(contMD + 1, 18).Text = "yes" Or sheet.Cells(contMD + 1, 19).Text = "YES", True, False), If(sheet.Cells(contMD + 1, 19).Text = "yes" Or sheet.Cells(contMD + 1, 19).Text = "YES", True, False), If(sheet.Cells(contMD + 1, 20).Text = "yes" Or sheet.Cells(contMD + 1, 20).Text = "YES", True, False), sheet.Cells(contMD + 1, 21).Text, sheet.Cells(contMD + 1, 22).Text, sheet.Cells(contMD + 1, 23).Text, sheet.Cells(contMD + 1, 24).Text, sheet.Cells(contMD + 1, 25).Text, sheet.Cells(contMD + 1, 26).Text, sheet.Cells(contMD + 1, 27).Text, sheet.Cells(contMD + 1, 28).Text, sheet.Cells(contMD + 1, 29).Text, sheet.Cells(contMD + 1, 30).Text, sheet.Cells(contMD + 1, 32).Text)
                         tblModificationScaffold.Rows(tblModificationScaffold.Rows.Count() - 1).HeaderCell.Value = (contMD + 1).ToString()
                     End If
                 End If
@@ -304,7 +305,7 @@ Public Class ModificationValidationTable
             'validamos que existe el tag    
             If Not existTag(row.Cells("TagNum").Value) Then
                 row.Cells("TagNum").Style.BackColor = Color.Red
-                row.Cells("clmError").Value = If(row.Cells("clmError").Value = "", "Tag Num doesn't exist", row.Cells("clmError").Value & ",Tag Num doesn't exist")
+                row.Cells("clmError").Value = If(row.Cells("clmError").Value = "", "Tag Num doesn't exist or is Dismantled.", row.Cells("clmError").Value & ",Tag Num doesn't exist")
             End If
             'validamos que exista el type
             If Not existType(row.Cells("Type").Value) Then
@@ -344,7 +345,11 @@ Public Class ModificationValidationTable
         Dim exist As Boolean = False
         For Each row As Data.DataRow In tblTags.Rows()
             If tag = row.ItemArray(0) Then
-                exist = True
+                If row.ItemArray(3) = "f" Then
+                    exist = True
+                Else
+                    exist = False
+                End If
                 Exit For
             End If
         Next
@@ -365,7 +370,7 @@ Public Class ModificationValidationTable
             cmb.Items.Clear()
             cmb.Items.Add("")
             For Each row As Data.DataRow In tbl.Rows()
-                cmb.Items.Add(row.ItemArray(clmIndex))
+                cmb.Items.Add(CStr(row.ItemArray(clmIndex)) + If(row.ItemArray.Length > 1, " " + row.ItemArray(clmIndex + 1), "") + If(row.ItemArray.Length > 4, " QTY " + CStr(row.ItemArray(10)), ""))
             Next
             cmb.Text = ""
             Return True
@@ -424,7 +429,7 @@ Public Class ModificationValidationTable
                     Dim tagRowSelected = tblModificationScaffold.CurrentRow.Cells("TagNum").Value
                     Dim maxModID = mtdScaffold.selectMaxModId(tagRowSelected)
                     For Each row As DataGridViewRow In tblModificationScaffold.Rows()
-                        If row.Cells("TagNum").Value = tagRowSelected And CDec(maxModID) = CDec(row.Cells("ModID").Value) Then
+                        If row.Cells("TagNum").Value = tagRowSelected And CDec(maxModID) = CDec(row.Cells("ModID").Value.ToString.Remove("-")) Then
                             maxModID = (CInt(maxModID) + 1).ToString("D4")
                         End If
                     Next
@@ -441,10 +446,11 @@ Public Class ModificationValidationTable
                 Case tblModificationScaffold.Columns("DateModification").Index
                     Dim auxF1 As Date = fechaStart
                     Dim selectFecha As New SelectDate
+                    selectFecha.MVT = True
                     AddOwnedForm(selectFecha)
                     selectFecha.ShowDialog()
                     txtFecha.Enabled = True
-                    txtFecha.Text = fechaStart.ToShortDateString()
+                    txtFecha.Text = fechaStart.ToString("MM/dd/yyyy", CultureInfo.InvariantCulture)
                     cmbDatos.Enabled = False
             End Select
             flagClick = True
@@ -458,14 +464,17 @@ Public Class ModificationValidationTable
             selectTable = TabControl1.TabPages(1).Text
             Select Case e.ColumnIndex
                 Case tblProductSheet.Columns("clmTagID").Index
+                    cmbDatos.DropDownWidth = 260
                     llenarCombo(cmbDatos, tblTags, 0)
                     cmbDatos.Enabled = True
                     txtFecha.Enabled = False
                 Case tblProductSheet.Columns("clmProductID").Index
+                    cmbDatos.DropDownWidth = 360
                     llenarCombo(cmbDatos, tblProducts, 0)
                     cmbDatos.Enabled = True
                     txtFecha.Enabled = False
                 Case tblProductSheet.Columns("clmModID").Index
+                    cmbDatos.DropDownWidth = 160
                     Dim tagCurrentRow As String = tblProductSheet.CurrentRow.Cells("clmTagID").Value
                     listModExcel.Clear()
                     For Each row As DataGridViewRow In tblModificationScaffold.Rows()
@@ -508,26 +517,31 @@ Public Class ModificationValidationTable
             If flagClick Then
                 If selectTable = TabControl1.TabPages(0).Text Then
                     If tblModificationScaffold.CurrentCell.ColumnIndex = tblModificationScaffold.Columns("TagNum").Index And cmbDatos.SelectedItem IsNot Nothing Then
-                        actualizarTagTblProductExcel(tblProductSheet, tblModificationScaffold.CurrentCell.Value, cmbDatos.SelectedItem.ToString())
-                        tblModificationScaffold.CurrentCell.Value = cmbDatos.SelectedItem.ToString()
-                        If asignModIDToProductM(cmbDatos.SelectedItem.ToString(), tblModificationScaffold) = False Then
+                        Dim NewTag() As String = cmbDatos.SelectedItem.ToString().Split(" ")
+                        actualizarTagTblProductExcel(tblProductSheet, tblModificationScaffold.CurrentCell.Value, NewTag(0))
+                        tblModificationScaffold.CurrentCell.Value = NewTag(0)
+                        If asignModIDToProductM(NewTag(0), tblModificationScaffold) = False Then
                             tblProductSheet.Columns("clmErrorP").Visible = True
                             For Each row1 As DataGridViewRow In tblProductSheet.Rows()
-                                If row1.Cells("clmTagID").Value = cmbDatos.SelectedItem.ToString() Then
+                                Dim array() As String = cmbDatos.SelectedItem.ToString.Split(" ")
+                                If row1.Cells("clmTagID").Value = array(0) Then
                                     row1.Cells("clmErrorP").Value = If(row1.Cells("clmErrorP").Value = "", "No exist a Modification inserted o added in the Modification Table.", row1.Cells("clmErrorP").Value + ", No exist a Modification inserted o added in the Modification Table")
                                 End If
                             Next
                         End If
                     ElseIf tblModificationScaffold.CurrentCell.ColumnIndex = tblModificationScaffold.Columns("Type").Index Then
-                        tblModificationScaffold.CurrentCell.Value = cmbDatos.SelectedItem.ToString()
+                        Dim array() As String = cmbDatos.SelectedItem.ToString.Split(" ")
+                        tblModificationScaffold.CurrentCell.Value = array(0)
                     End If
                     validarExistErrorTblProducts()
                     validarFilasModification(tblModificationScaffold.CurrentRow())
                 ElseIf selectTable = TabControl1.TabPages(1).Text Then
                     If tblProductSheet.CurrentCell.ColumnIndex = tblProductSheet.Columns("clmTagID").Index Then
-                        tblProductSheet.CurrentCell.Value = cmbDatos.SelectedItem.ToString()
+                        Dim array() As String = cmbDatos.SelectedItem.ToString().Split(" ")
+                        tblProductSheet.CurrentCell.Value = array(0)
                     ElseIf tblProductSheet.CurrentCell.ColumnIndex = tblProductSheet.Columns("clmProductID").Index Then
-                        tblProductSheet.CurrentCell.Value = cmbDatos.SelectedItem.ToString()
+                        Dim array() As String = cmbDatos.SelectedItem.ToString().Split(" ")
+                        tblProductSheet.CurrentCell.Value = array(0)
                     ElseIf tblProductSheet.CurrentCell.ColumnIndex = tblProductSheet.Columns("clmModID").Index Then
                         For Each cells As DataGridViewCell In tblProductSheet.SelectedCells
                             If cells.ColumnIndex = tblProductSheet.Columns("clmModID").Index Then

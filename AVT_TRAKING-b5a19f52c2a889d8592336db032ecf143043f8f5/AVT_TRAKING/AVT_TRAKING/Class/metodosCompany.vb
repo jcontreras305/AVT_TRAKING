@@ -1,8 +1,20 @@
 ﻿Imports System.Data.SqlClient
 Public Class metodosCompany
     Inherits ConnectioDB
-    Private _idCompany, _idContact, _idHomeAddress, _name, _address, _number, _city, _stateProvidence, _postalCode, _country, _paymentTerms, _invoiceDescr, _phoneNumber, _faxNumber, _email As String
-
+    Private _idCompany, _idContact, _idHomeAddress, _name, _address, _number, _city, _stateProvidence, _postalCode, _country, _paymentTerms, _invoiceDescr, _phoneNumber, _faxNumber, _email, _CP As String
+    Private _img As Image
+    Public Property img() As Image
+        Get
+            If _img Is Nothing Then
+                Return Nothing
+            Else
+                Return _img
+            End If
+        End Get
+        Set(ByVal img As Image)
+            _img = img
+        End Set
+    End Property
     Public Property name() As String
         Get
             Return _name
@@ -144,6 +156,16 @@ update HomeAddress set avenue = '" + _address + "' , number = '" + _number + "' 
 update contact set phoneNumber1 = '" + _phoneNumber + "' , phoneNumber2= '" + _faxNumber + "' ,email = '" + _email + "' where	idContact = '" + _idContact + "' 
 ", conn)
             cmd.ExecuteNonQuery()
+            If _img IsNot Nothing Then
+                Dim cmdImage As New SqlCommand()
+                With cmdImage
+                    .CommandType = CommandType.Text
+                    .CommandText = "update company set img = @Imagen where name = '" + _name + "'"
+                    .Connection = conn
+                    .Parameters.Add(New SqlParameter("@Imagen", SqlDbType.Image)).Value = imageToByte(_img)
+                End With
+                cmdImage.ExecuteNonQuery()
+            End If
             desconectar()
         Catch ex As Exception
             desconectar()
@@ -162,7 +184,7 @@ begin
 	set @idContact = NEWID()
 	insert into HomeAddress values(@idAddress,'',0,'','',0)
 	insert into contact values(@idContact,'','','')
-	insert into company values(NEWID(),'My Company','USA','','',@idAddress,@idContact)
+	insert into company values(NEWID(),'My Company','USA','','',@idAddress,@idContact,NULL)
 	select TOP(1) * from company as cp 
 	inner join HomeAddress as hm on cp.idHomeAddress = hm.idHomeAdress 
 	inner join contact as cn on cp.idContact = cn.idContact
@@ -190,6 +212,7 @@ end", conn)
                 _phoneNumber = rd("phoneNumber1")
                 _faxNumber = rd("phoneNumber2")
                 _email = rd("email")
+                _img = If(rd("img") Is DBNull.Value, Nothing, BytetoImage(CType(rd("img"), Byte())))
             End While
         Catch ex As Exception
             desconectar()
