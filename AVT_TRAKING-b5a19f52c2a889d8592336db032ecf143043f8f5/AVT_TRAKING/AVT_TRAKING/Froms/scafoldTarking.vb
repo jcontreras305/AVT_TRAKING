@@ -1999,7 +1999,7 @@ Public Class scafoldTarking
             If cmbWONum.SelectedItem IsNot Nothing Then
                 For Each row As DataRow In tblWOTASK.Rows()
                     Dim datos() = cmbWONum.SelectedItem.ToString().Split(" ")
-                    If datos(0) = row.ItemArray(0) Then
+                    If datos(0) = row.ItemArray(0) And datos(1) = row.ItemArray(3) Then
                         sc.wo = row.ItemArray(1)
                         sc.task = row.ItemArray(2)
                         sc.job = row.ItemArray(3)
@@ -2412,7 +2412,8 @@ Public Class scafoldTarking
             txtWOInfo.Text = ""
             For Each row As Data.DataRow In tblWOTASK.Rows()
                 If row("task") = sc.task Then
-                    cmbWONum.SelectedItem = row("cmb")
+                    cmbWONum.SelectedItem = cmbWONum.Items(cmbWONum.FindString(row("cmb")))
+                    cmbWONum.Text = row.ItemArray(0)
                     txtWOInfo.Text = sc.descriptionWO
                     Exit For
                 End If

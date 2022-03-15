@@ -72,13 +72,7 @@ Public Class DismantleValidationTable
                         tblDismantleSC.Rows(tblDismantleSC.Rows.Count() - 1).HeaderCell.Value = contDis.ToString()
                     End If
                 End If
-                If contDis + 1 >= sprFirstRow.Value Then
-                    If sheet.Cells(contDis + 1, 1).Text <> "" Then
-                        contDis += 1
-                        tblDismantleSC.Rows.Add("", sheet.Cells(contDis, 1).Text, sheet.Cells(contDis, 2).Text, sheet.Cells(contDis, 3).Text, sheet.Cells(contDis, 4).Text, sheet.Cells(contDis, 5).Text, sheet.Cells(contDis, 6).Text, sheet.Cells(contDis, 7).Text, sheet.Cells(contDis, 8).Text, If(sheet.Cells(contDis, 9).Text = "Yes" Or sheet.Cells(contDis, 9).Text = "YES", True, False), If(sheet.Cells(contDis, 10).Text = "Yes" Or sheet.Cells(contDis, 10).Text = "YES", True, False), If(sheet.Cells(contDis, 11).Text = "Yes" Or sheet.Cells(contDis, 11).Text = "YES", True, False), If(sheet.Cells(contDis, 12).Text = "Yes" Or sheet.Cells(contDis, 12).Text = "YES", True, False), If(sheet.Cells(contDis, 13).Text = "Yes" Or sheet.Cells(contDis, 13).Text = "YES", True, False), If(sheet.Cells(contDis, 14).Text = "Yes" Or sheet.Cells(contDis, 14).Text = "YES", True, False), If(sheet.Cells(contDis, 15).Text = "Yes" Or sheet.Cells(contDis, 15).Text = "YES", True, False), sheet.Cells(contDis, 16).Text, sheet.Cells(contDis, 17).Text, sheet.Cells(contDis, 18).Text, sheet.Cells(contDis, 19).Text, sheet.Cells(contDis, 20).Text, sheet.Cells(contDis, 21).Text, sheet.Cells(contDis, 22).Text, sheet.Cells(contDis, 23).Text, sheet.Cells(contDis, 24).Text, sheet.Cells(contDis, 25).Text)
-                        tblDismantleSC.Rows(tblDismantleSC.Rows.Count() - 1).HeaderCell.Value = (contDis + 1).ToString()
-                    End If
-                End If
+                contDis += 1
             End While
             pgbComplete.Value = pgbComplete.Value + 20
             lblMessage.Text = "Message: Validating the values."

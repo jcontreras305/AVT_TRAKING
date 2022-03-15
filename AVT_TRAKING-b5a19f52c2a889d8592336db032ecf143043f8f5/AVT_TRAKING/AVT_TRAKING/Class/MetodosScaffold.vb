@@ -430,7 +430,7 @@ inner join task as tk on tk.idAuxWO = wo.idAuxWO " + If(IdCliente = "", "", "whe
             combo.Items.Add("")
             While dr.Read()
                 combo.Items.Add(CStr(dr("WO No")) + " " + CStr(dr("Job No")) + " " + dr("Description"))
-                tabla.Rows.Add(CStr(dr("WO No")), CStr(dr("idWO")), CStr(dr("idAux")), CStr(dr("Job No")), CStr(dr("Description")), (CStr(dr("WO No")) + "    " + CStr(dr("Job No")) + "    " + dr("Description")))
+                tabla.Rows.Add(CStr(dr("WO No")), CStr(dr("idWO")), CStr(dr("idAux")), CStr(dr("Job No")), CStr(dr("Description")), (CStr(dr("WO No")) + " " + CStr(dr("Job No")) + " " + dr("Description")))
             End While
             Return tabla
         Catch ex As Exception
