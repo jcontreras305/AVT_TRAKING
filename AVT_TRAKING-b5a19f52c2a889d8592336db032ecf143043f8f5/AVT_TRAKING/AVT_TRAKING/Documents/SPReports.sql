@@ -915,8 +915,8 @@ go
 --##############################################################################################
 --################## SP INVOICE PO RESUME ######################################################
 --##############################################################################################
---alter proc sp_Invoice_PO_Resume
-create proc sp_Invoice_PO_Resume
+--create proc sp_Invoice_PO_Resume
+ALTER proc [dbo].[sp_Invoice_PO_Resume]
 @numberClient  int,
 @startDate date,
 @FinalDate date,
@@ -933,6 +933,17 @@ select
 	jb.jobNo,
 	isnull(jb.contractNo,'') as 'contractNo',
 	po.idPO,
+
+	ISNULL((select sum(hw1.hoursST)+sum(hw1.hoursOT)+sum(hw1.hours3) as 'Total Hours' from hoursWorked as hw1 
+		inner join workCode as wc1 on wc1.idWorkCode = hw1.idWorkCode
+		inner join task as tk1 on tk1.idAux = hw1.idAux 
+		inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO
+		inner join projectOrder as po1 on po1.idPO = wo1.idPO and wo1.jobNo = po1.jobNo
+		inner join job as jb1 on po1.jobNo = jb1.jobNo
+		inner join clients as cl1 on cl1.idClient = jb1.idClient
+		where po1.idPO = po.idPO and cl1.numberClient = @numberClient and hw1.dateWorked between @startDate and @FinalDate),0) 
+	as 'Total Hours PO',
+
 	ISNULL((select sum(hw1.hoursST)+sum(hw1.hoursOT)+sum(hw1.hours3) as 'Total Hours' from hoursWorked as hw1 
 		inner join workCode as wc1 on wc1.idWorkCode = hw1.idWorkCode
 		inner join task as tk1 on tk1.idAux = hw1.idAux 
@@ -942,6 +953,7 @@ select
 		inner join clients as cl1 on cl1.idClient = jb1.idClient
 		where po1.idPO = po.idPO and jb1.jobNo = jb.jobNo and cl1.numberClient = @numberClient and hw1.dateWorked between @startDate and @FinalDate),0) 
 	as 'Total Hours',
+
 	ISNULL((select sum(hw1.hoursST*wc1.billingRate1)+sum(hw1.hoursOT*wc1.billingRateOT)+sum(hw1.hours3*wc1.billingRate3) as 'Labor' from hoursWorked as hw1 
 		inner join workCode as wc1 on wc1.idWorkCode = hw1.idWorkCode
 		inner join task as tk1 on tk1.idAux = hw1.idAux 
@@ -951,6 +963,7 @@ select
 		inner join clients as cl1 on cl1.idClient = jb1.idClient
 		where po1.idPO = po.idPO and jb1.jobNo = jb.jobNo and cl1.numberClient = @numberClient and hw1.dateWorked between @startDate and @FinalDate),0) 
 	as 'Total Labor',
+
 	ISNULL((select sum(exu1.amount) from expensesUsed as exu1
 		inner join expenses as ex1 on exu1.idExpense = ex1.idExpenses
 		inner join task as tk1 on tk1.idAux = exu1.idAux 
@@ -960,6 +973,7 @@ select
 		inner join clients  as cl1 on cl1.idClient = jb1.idClient
 		where po1.idPO = po.idPO and jb1.jobNo = jb.jobNo and cl1.numberClient = @numberClient and exu1.dateExpense between @startDate and @FinalDate),0)
 	as 'Total Expenses',
+
 	ISNULL((select sum(mtu1.amount) from materialUsed as mtu1
 		inner join material as mt1 on mtu1.idMaterial = mt1.idMaterial
 		inner join task as tk1 on tk1.idAux = mtu1.idAux 
@@ -968,7 +982,35 @@ select
 		inner join job as jb1 on po1.jobNo = jb1.jobNo
 		inner join clients  as cl1 on cl1.idClient = jb1.idClient
 		where po1.idPO = po.idPO and jb1.jobNo = jb.jobNo and cl1.numberClient = @numberClient and mtu1.dateMaterial between @startDate and @FinalDate),0) 
-	as 'Total Material'
+	as 'Total Material',
+
+	ISNULL((select sum(hw1.hoursST*wc1.billingRate1)+sum(hw1.hoursOT*wc1.billingRateOT)+sum(hw1.hours3*wc1.billingRate3) as 'Labor' from hoursWorked as hw1 
+		inner join workCode as wc1 on wc1.idWorkCode = hw1.idWorkCode
+		inner join task as tk1 on tk1.idAux = hw1.idAux 
+		inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO
+		inner join projectOrder as po1 on po1.idPO = wo1.idPO and wo1.jobNo = po1.jobNo
+		inner join job as jb1 on po1.jobNo = jb1.jobNo
+		inner join clients as cl1 on cl1.idClient = jb1.idClient
+		where po1.idPO = po.idPO and cl1.numberClient = @numberClient and hw1.dateWorked between @startDate and @FinalDate),0)
+	+
+	ISNULL((select sum(exu1.amount) from expensesUsed as exu1
+		inner join expenses as ex1 on exu1.idExpense = ex1.idExpenses
+		inner join task as tk1 on tk1.idAux = exu1.idAux 
+		inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO
+		inner join projectOrder as po1 on po1.idPO = wo1.idPO and wo1.jobNo = po1.jobNo
+		inner join job as jb1 on po1.jobNo = jb1.jobNo
+		inner join clients  as cl1 on cl1.idClient = jb1.idClient
+		where po1.idPO = po.idPO and cl1.numberClient = @numberClient and exu1.dateExpense between @startDate and @FinalDate),0)
+	+
+	ISNULL((select sum(mtu1.amount) from materialUsed as mtu1
+		inner join material as mt1 on mtu1.idMaterial = mt1.idMaterial
+		inner join task as tk1 on tk1.idAux = mtu1.idAux 
+		inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO
+		inner join projectOrder as po1 on po1.idPO = wo1.idPO and wo1.jobNo = po1.jobNo
+		inner join job as jb1 on po1.jobNo = jb1.jobNo
+		inner join clients  as cl1 on cl1.idClient = jb1.idClient
+		where po1.idPO = po.idPO and cl1.numberClient = @numberClient and mtu1.dateMaterial between @startDate and @FinalDate),0 )
+	as 'Total Cost'
 from job as jb 
 inner join clients as cl on cl.idClient = jb.idClient 
 left join HomeAddress as ha on ha.idHomeAdress = cl.idHomeAddress

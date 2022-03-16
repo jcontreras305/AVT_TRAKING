@@ -2,9 +2,14 @@
 Public Class ReportInvoice
     Private Sub ReportInvoice_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         llenarComboClientsReports(cmbClient)
-        'Dim array() As String = If(cmbClient.SelectedItem IsNot Nothing, cmbClient.SelectedItem.ToString().Split(" "), "")
-        'llenarComoboPOByClient(cmbPO, array(0))
-        cmbPO.Enabled = False
+        If cmbClient.Text <> "" Then
+            Dim array() As String = cmbClient.Text.ToString.Split(" ")
+            llenarComoboPOByClient(cmbPO, array(0))
+            cmbPO.Enabled = True
+        Else
+            cmbPO.Enabled = False
+            chbAllPO.Checked = True
+        End If
     End Sub
     Private Sub PictureBox4_Click(sender As Object, e As EventArgs) Handles PictureBox4.Click
         Me.Close()
