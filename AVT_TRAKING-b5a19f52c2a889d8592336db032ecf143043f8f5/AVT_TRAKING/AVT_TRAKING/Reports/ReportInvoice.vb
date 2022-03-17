@@ -61,7 +61,7 @@ Public Class ReportInvoice
             Dim array() = cmbClient.SelectedItem.ToString().Split(" ")
             Dim idClient As String = array(0)
             If idClient <> "" Or idClient IsNot Nothing Then
-                Dim reportInvoice As New InvoicePO
+                Dim reportInvoice As New POInvoice
                 reportInvoice.SetParameterValue("@numberClient", idClient)
                 reportInvoice.SetParameterValue("@startDate", validaFechaParaSQl(dtpStartDate.Value.Date))
                 reportInvoice.SetParameterValue("@FinalDate", validaFechaParaSQl(dtpEndDate.Value.Date))

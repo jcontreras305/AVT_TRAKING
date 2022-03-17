@@ -382,12 +382,6 @@
       <DependentUpon>CompleteByDateRange.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Reports\InvoicePO.vb">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>InvoicePO.rpt</DependentUpon>
-      <SubType>Component</SubType>
-    </Compile>
     <Compile Include="Reports\EmployeePeerDiemSheets.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -404,6 +398,12 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>HoursPerWeek.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports\POInvoice1.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>POInvoice.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Reports\ReportAllJob.Designer.vb">
@@ -695,10 +695,6 @@
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>CompleteByDateRange.vb</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Reports\InvoicePO.rpt">
-      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
-      <LastGenOutput>InvoicePO.vb</LastGenOutput>
-    </EmbeddedResource>
     <EmbeddedResource Include="Reports\EmployeePeerDiemSheets.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>EmployeePeerDiemSheets.vb</LastGenOutput>
@@ -710,6 +706,10 @@
     <EmbeddedResource Include="Reports\HoursPerWeek.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>HoursPerWeek.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\POInvoice.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>POInvoice1.vb</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\ReportAllJob.resx">
       <DependentUpon>ReportAllJob.vb</DependentUpon>

@@ -1312,6 +1312,7 @@ end ", conn)
             conectar()
             Dim cmd As New SqlCommand("select type from rental", conn)
             Dim reader As SqlDataReader = cmd.ExecuteReader()
+            combo.Items.Clear()
             While reader.Read()
                 combo.Items.Add(reader("type"))
             End While
@@ -3248,6 +3249,62 @@ where ds.tag = '" + tag + "'", conn)
             Else
                 Return False
             End If
+        Catch ex As Exception
+            Return False
+        Finally
+            desconectar()
+        End Try
+    End Function
+    '###########################################################################################################################################################################
+    '############################### METODOS PARA COSTUMERS AND JOBS ###########################################################################################################
+    '###########################################################################################################################################################################
+    Public Function selectCostumerInfo() As Data.DataTable
+        Try
+            conectar()
+            Dim cmd As New SqlCommand("select cl.idClient ,cl.numberClient , cl.companyName , CONCAT(ha.number,'th ',ha.avenue) as 'Billing Addres', CONCAT(cl.firstName,' ',cl.middleName,', ',cl.lastName ) as 'Contact Name',
+isnull(ha.city,'') as 'City', isnull(ha.providence,'') as 'Providence' , isnull(ha.postalCode,'') as 'CP' ,isnull(ct.phoneNumber1,'') as 'PH 1', isnull(ct.phoneNumber2,'') as 'PH 2',
+isnull(ct.email,'') as 'Email'
+from clients as cl
+left join HomeAddress as ha on cl.idHomeAddress = ha.idHomeAdress
+left join contact as ct on ct.idContact = cl.idContact", conn)
+            Dim dt As New DataTable
+            If cmd.ExecuteNonQuery Then
+                Dim da As New SqlDataAdapter(cmd)
+                da.Fill(dt)
+            End If
+            Return dt
+        Catch ex As Exception
+            Return Nothing
+        Finally
+            desconectar()
+        End Try
+    End Function
+    Public Function selectScaffoldProjectCostumer(ByVal idClient As String, ByVal tbl As DataGridView) As Boolean
+        Try
+            conectar()
+            Dim cmd As New SqlCommand("select sc.tag as 'Tag' , CONCAT (scInf.[length],'x',scInf.width,'x',scInf.heigth) as 'Dimention',
+sc.buildDate as 'SC Build Date'
+, CONCAT(wo.idWO,'-',tk.task)as 'Work Order'
+, po.idPO as 'PO', jb.jobNo as 'Job Num', sc.comments as 'Comments', iif(sc.[status]='f',0,1 ) as 'Is Dismantled'
+, jc.cat as 'Job Cat' , sj.[description] as 'Sub Job' , ar.name as 'Area'
+, (select COUNT(*) from modification as md where md.tag = sc.tag) as 'Modifications Count'
+from scaffoldTraking as sc
+left join jobCat as jc on sc.idJobCat = jc.idJobCat
+left join subJobs as sj on sc.idSubJob = sj.idSubJob
+left join areas as ar on sc.idArea = ar.idArea
+left join scaffoldInformation as scInf on scInf.tag = sc.tag  
+inner join task as tk on tk.idAux = sc.idAux 
+inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO 
+inner join projectOrder as po on po.idPO = wo.idPO and wo.jobNo = po.jobNo 
+inner join job as jb on jb.jobNo = po.jobNo
+inner join clients as cl on cl.idClient = jb.idClient
+where cl.idClient = " + If(idClient = "", "'%%'", "'" + idClient + "'") + "", conn)
+            Dim dr As SqlDataReader = cmd.ExecuteReader
+            tbl.Rows.Clear()
+            While dr.Read()
+                tbl.Rows.Add(dr("Tag"), dr("Dimention"), dr("SC Build Date"), dr("Work Order"), dr("PO"), dr("Job Num"), dr("Comments"), If(dr("Is Dismantled") = "1", True, False), dr("Job Cat"), dr("Sub Job"), dr("Area"), dr("Modifications Count"))
+            End While
+            Return True
         Catch ex As Exception
             Return False
         Finally
