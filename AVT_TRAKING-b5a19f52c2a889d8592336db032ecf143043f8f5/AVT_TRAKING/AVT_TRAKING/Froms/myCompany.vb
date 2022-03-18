@@ -111,7 +111,7 @@ Public Class myCompany
         End If
     End Sub
 
-    Private Sub txtPaymenTerms_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtPaymenTerms.KeyPress
+    Private Sub txtPaymenTerms_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtPaymenTerms.TextChanged
         mtdCompany.paymentTerms = txtPaymenTerms.Text
     End Sub
 

@@ -106,6 +106,74 @@ where cl.numberClient = '" + numberClient + "'", con.conn)
             Return False
         End Try
     End Function
+    Public Function llenarTableInvoicePO(ByVal clientNumber As String, ByVal startDate As String, ByVal endDate As String, ByVal idPO As String, ByVal all As Boolean, ByVal tbl As DataGridView) As Boolean
+        Try
+            con.conectar()
+            Dim cmd As New SqlCommand("select distinct
+po.idPO from clients as cl 
+inner join job as jb on cl.idClient = jb.idClient
+inner join projectOrder as po on po.jobNo = jb.jobNo
+inner join workOrder as wo on wo.idPO = po.idPO and wo.jobNo = po.jobNo
+inner join task as tk on tk.idAuxWO = wo.idAuxWO
+inner join hoursWorked as hw on hw.idAux = tk.idAux
+left join materialUsed as mtu on mtu.idAux = tk.idAux
+left join expensesUsed as exu on exu.idAux = tk.idAux
+where (hw.dateWorked between '" + startDate + "' and '" + endDate + "' 
+	or exu.dateExpense between '" + startDate + "' and '" + endDate + "'
+	or mtu.dateMaterial between '" + startDate + "' and '" + endDate + "') 
+	and cl.numberClient = " + clientNumber + " and po.idPO like " + If(all, "'%%'", "'" + idPO + "' 
+order by po.idPO asc"), con.conn)
+            Dim dr As SqlDataReader = cmd.ExecuteReader()
+            tbl.Rows.Clear()
+            While dr.Read()
+                tbl.Rows.Add(dr("idPO"), "")
+            End While
+            dr.Close()
+            Return True
+        Catch ex As Exception
+            MsgBox(ex.Message())
+            Return False
+        Finally
+            con.desconectar()
+        End Try
+    End Function
+    Public Function actualizarInvoicePO(ByVal tbl As DataGridView, ByVal clientNumber As String, ByVal startDate As String, ByVal Finaldate As String) As Boolean
+        con.conectar()
+        Dim tran As SqlTransaction
+        tran = con.conn.BeginTransaction
+        Try
+            Dim flag As Boolean = True
+            For Each row As DataGridViewRow In tbl.Rows()
+                Dim cmd As New SqlCommand("
+if (select count(*) from invoice as inv inner join clients as cl on cl.idClient = inv.idClient where cl.numberClient = " + clientNumber + " and inv.idPO = " + row.Cells(0).Value.ToString() + " and inv.startDate = '" + startDate + "' and inv.FinalDate = '" + Finaldate + "')=0
+begin 
+	insert into invoice values ((select top 1 idClient from clients where numberClient = " + clientNumber + ")," + row.Cells(0).Value.ToString() + ",'" + row.Cells(1).Value.ToString() + "','" + startDate + "','" + Finaldate + "')
+end
+else if (select count(*) from invoice as inv inner join clients as cl on cl.idClient = inv.idClient where cl.numberClient = " + clientNumber + " and inv.idPO = " + row.Cells(0).Value.ToString() + " and inv.startDate = '" + startDate + "' and inv.FinalDate = '" + Finaldate + "')>0
+begin
+	update invoice  set invoice = '" + row.Cells(1).Value.ToString() + "'  where idClient = (select top 1 idClient from clients where numberClient = " + clientNumber + ") and idPO = " + row.Cells(0).Value.ToString() + " and startDate = '" + startDate + "' and FinalDate = '" + Finaldate + "'
+end", con.conn)
+                cmd.Transaction = tran
+                If cmd.ExecuteNonQuery > 0 Then
+                    flag = True
+                Else
+                    tran.Rollback()
+                    flag = False
+                    Exit For
+                End If
+            Next
+            If flag Then
+                tran.Commit()
+                Return True
+            Else
+                Return False
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message())
+            tran.Rollback()
+            Return False
+        End Try
+    End Function
     Public Function imageToByte(ByVal img As Image) As Byte()
         Try
             Dim aux As New IO.MemoryStream()

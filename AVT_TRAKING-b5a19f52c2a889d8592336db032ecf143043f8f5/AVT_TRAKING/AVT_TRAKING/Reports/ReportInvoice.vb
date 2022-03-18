@@ -47,33 +47,54 @@ Public Class ReportInvoice
         Catch ex As Exception
         End Try
     End Sub
-
     Private Sub chbAllPO_CheckedChanged(sender As Object, e As EventArgs) Handles chbAllPO.CheckedChanged
         If chbAllPO.Checked Then
             cmbPO.Enabled = False
         Else
             cmbPO.Enabled = True
         End If
+        llenarTabla()
     End Sub
-
     Private Sub btnReport_Click(sender As Object, e As EventArgs) Handles btnReport.Click
         Try
-            Dim array() = cmbClient.SelectedItem.ToString().Split(" ")
-            Dim idClient As String = array(0)
-            If idClient <> "" Or idClient IsNot Nothing Then
-                Dim reportInvoice As New POInvoice
-                reportInvoice.SetParameterValue("@numberClient", idClient)
-                reportInvoice.SetParameterValue("@startDate", validaFechaParaSQl(dtpStartDate.Value.Date))
-                reportInvoice.SetParameterValue("@FinalDate", validaFechaParaSQl(dtpEndDate.Value.Date))
-                reportInvoice.SetParameterValue("@idPO", If(cmbPO.SelectedItem IsNot Nothing, cmbPO.SelectedItem, "0"))
-                reportInvoice.SetParameterValue("@all", If(chbAllPO.Checked, 1, 0))
-                reportInvoice.SetParameterValue("@CompanyName", "Brock")
-                crvIvoice.ReportSource = reportInvoice
+            If tblInvoiceCodes.Rows.Count > 0 Then
+                Dim array() = cmbClient.SelectedItem.ToString().Split(" ")
+                Dim idClient As String = array(0)
+                If actualizarInvoicePO(tblInvoiceCodes, array(0), validaFechaParaSQl(dtpStartDate.Value.Date), validaFechaParaSQl(dtpEndDate.Value.Date)) Then
+                    If idClient <> "" Or idClient IsNot Nothing Then
+                        Dim reportInvoice As New POInvoice
+                        reportInvoice.SetParameterValue("@numberClient", idClient)
+                        reportInvoice.SetParameterValue("@startDate", validaFechaParaSQl(dtpStartDate.Value.Date))
+                        reportInvoice.SetParameterValue("@FinalDate", validaFechaParaSQl(dtpEndDate.Value.Date))
+                        reportInvoice.SetParameterValue("@idPO", If(cmbPO.SelectedItem IsNot Nothing, cmbPO.SelectedItem, "0"))
+                        reportInvoice.SetParameterValue("@all", If(chbAllPO.Checked, 1, 0))
+                        reportInvoice.SetParameterValue("@CompanyName", "Brock")
+                        crvIvoice.ReportSource = reportInvoice
+                    Else
+                        MsgBox("Please select a Client.")
+                    End If
+                End If
             Else
-                MsgBox("Please select a Client.")
+                MessageBox.Show("Did not found any 'PO' to make an Invoice, try to change other 'PO' or range of Dates.", "Important", MessageBoxButtons.OK, MessageBoxIcon.Warning)
             End If
         Catch ex As Exception
-
+            MsgBox(ex.Message())
+        End Try
+    End Sub
+    Private Sub cmbPO_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbPO.SelectedIndexChanged
+        llenarTabla()
+    End Sub
+    Private Sub dtpEndDate_ValueChanged(sender As Object, e As EventArgs) Handles dtpStartDate.ValueChanged, dtpEndDate.ValueChanged
+        llenarTabla()
+    End Sub
+    Private Sub llenarTabla()
+        Try
+            If cmbClient.Text <> "" Then
+                Dim array() As String = cmbClient.SelectedItem.ToString.Split(" ")
+                llenarTableInvoicePO(array(0), validaFechaParaSQl(dtpStartDate.Value.Date), validaFechaParaSQl(dtpEndDate.Value.Date), cmbPO.Text, chbAllPO.Checked, tblInvoiceCodes)
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message())
         End Try
     End Sub
 End Class

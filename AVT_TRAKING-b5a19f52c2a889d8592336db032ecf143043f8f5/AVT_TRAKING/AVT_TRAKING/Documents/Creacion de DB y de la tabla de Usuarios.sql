@@ -3101,104 +3101,149 @@ end
 go
 
 --==============================================================================================================================
---===== ESTE CODIGO ES PARA AGREGAR EL CAMPO DE PERDIEM EN LA VENTA DE EMPLOYEES ===============================================
+--=============== ESTE CODIGO ES PARA AGREGAR LA EL IVOICE PARA LOS REPORTES ===================================================
 --==============================================================================================================================
 
----- PARA DESCOMENTAR USAR LAS TECLAS (CTRL+K)(CTRL+U) Y PARA COMENTAR (CTRL+K)(CTRL+C)
+--create table invoice(
+--	idClient varchar(36)not null,
+--	idPO bigint not null,
+--	invoice varchar(20),
+--	startDate date,
+--	FinalDate date 
+--)
+--go
 
-----##########################################################################################
-----##################  CAMBIOS PARA VER CAMBIAR EL FORMATO DE TRACK #########################
-----##########################################################################################
+--alter table invoice add constraint pk_idClient_idPO_invoice
+--primary key (idClient,idPO)
+--go
 
---ALTER TABLE areas ALTER COLUMN name varchar(50)
---GO
+--alter table invoice add constraint pk_idClient_invoice
+--foreign key (idClient) references clients(idClient)
+--go
 
-----##########################################################################################
-----##################  CAMBIOS PARA AGREGAR UNA IMAGEN A LA COMPANIA ########################
-----##########################################################################################
+--==============================================================================================================================
+--=============== ESTE CODIGO ES PARA CAMBIAR EL ORDEN DE LA DIRECCION EN INVOICE_RESUME =======================================
+--==============================================================================================================================
 
---ALTER TABLE company 
---ADD img image
---GO
-
-----##########################################################################################
-----############ CAMBIOS PARA AGREGAR IDCLIENT EN AREA, JOBCAT Y SUBJOB ######################
-----##########################################################################################
-
---ALTER TABLE areas 
---ADD idClient varchar(36)
---GO
-
---ALTER TABLE areas WITH CHECK ADD CONSTRAINT fk_idClient_areas
---FOREIGN KEY (idClient) REFERENCES clients(idClient)
---GO
-
---ALTER TABLE jobCat 
---ADD idClient varchar(36)
---GO
-
---ALTER TABLE jobCat WITH CHECK ADD CONSTRAINT fk_idClient_jobCat 
---FOREIGN KEY (idClient) REFERENCES clients(idClient)
---GO
-
---ALTER TABLE subJobs
---ADD idClient varchar(36)
---GO
-
---ALTER TABLE subJobs WITH CHECK ADD CONSTRAINT fk_idClient_subJobs 
---FOREIGN KEY (idClient) REFERENCES clients(idClient)
---GO
-
-----##########################################################################################
-----############## ACTUALIZACION DEL PROCEDIMIENTO DELETE MODIFICACION #######################
-----##########################################################################################
---alter proc [dbo].[sp_DeleteModAux]
---@tag varchar(20),
---@modID varchar(36),
---@msg varchar(120) output
+--ALTER proc [dbo].[sp_Invoice_PO_Resume]
+--@numberClient  int,
+--@startDate date,
+--@FinalDate date,
+--@idPO bigint,
+--@all bit
 --as
---declare @error as int = 0
---declare @flag as int
---declare @idProduct as int
---declare @qty as float
---begin 
---	if (select COUNT(*) from modification where idModAux = @modID and tag = @tag) >0 
---	begin 
---		begin tran	
---			begin try
---				set	@msg = CONCAT('Error trying to delete Activity Hours from Modification ',@modID)
---				delete from activityHours where tag = @tag and idModAux = @modID
---				set	@msg = CONCAT('Error trying to delete Material Handeling from Modification ',@modID)
---				delete from materialHandeling where tag = @tag and idModAux = @modID
---				set	@msg = CONCAT('Error trying to delete Scaffold Information from Modification ',@modID)
---				delete from scaffoldInformation where tag = @tag and idModAux=@modID
---				set @flag = (select COUNT(*) from productModification where tag = @tag and idModAux = @modID)
---				while (@flag > 0)
---				begin
---					select  @qty = quantity ,@idProduct = idProduct from (select top 1  quantity,idProduct from productModification where tag = '9999' and idModAux = @modID) as t1
---					set	@msg = CONCAT('Error trying to delete Product Modification Record from Modification: ', @modID,', with the idProduct: ',CONVERT(varchar(12), @idProduct))
---					select quantity from product where idProduct = @idProduct
---					update product set quantity = quantity + @qty where idProduct = @idProduct
---					select quantity from productTotalScaffold where idProduct = @idProduct and tag = @tag
---					update productTotalScaffold set quantity = quantity + IIF(@qty>0,@qty*-1,@qty*-1) where idProduct = @idProduct and tag = @tag
---					delete from productModification where idProduct = @idProduct and tag = @tag and idModAux = @modID
---					delete from productTotalScaffold where quantity = 0 and tag = @tag
---					select @flag = COUNT(*) from productModification where tag = @tag and idModAux = @modID
---				end
---				delete from modification where idModification = @modID and tag = @tag	
---				set @msg = 'Successful'	 
---			end try
---			begin catch
---				set @error = 1
---				goto solveProblem
---			end catch
---		commit tran 
---		print @msg	
---		solveProblem:
---		if @error <> 0
---		begin 
---			rollback tran 
---		end
---	end
+--begin
+--select T1.companyName,T1.providence,T1.[Address],T1.postalCode,T1.jobNo,T1.contractNo,T1.idPO,
+--T1.[Total Hours PO],T1.[Total Hours],T1.[Total Labor],T1.[Total Expenses],T1.[Total Material],T1.[Total Cost]
+-- from (
+--select 
+--	cl.companyName,
+--	ha.city,
+--	ha.providence,
+--	CONCAT(ha.number,' ',ha.avenue) as 'Address',
+--	ha.postalCode,
+--	jb.jobNo,
+--	isnull(jb.contractNo,'') as 'contractNo',
+--	po.idPO,
+
+--	ISNULL((select sum(hw1.hoursST)+sum(hw1.hoursOT)+sum(hw1.hours3) as 'Total Hours' from hoursWorked as hw1 
+--		inner join workCode as wc1 on wc1.idWorkCode = hw1.idWorkCode
+--		inner join task as tk1 on tk1.idAux = hw1.idAux 
+--		inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO
+--		inner join projectOrder as po1 on po1.idPO = wo1.idPO and wo1.jobNo = po1.jobNo
+--		inner join job as jb1 on po1.jobNo = jb1.jobNo
+--		inner join clients as cl1 on cl1.idClient = jb1.idClient
+--		where po1.idPO = po.idPO and jb1.jobNo = jb.jobNo and cl1.numberClient = @numberClient and hw1.dateWorked between @startDate and @FinalDate),0) 
+--	as 'Total Hours PO',
+
+--	ISNULL((select sum(hw1.hoursST)+sum(hw1.hoursOT)+sum(hw1.hours3) as 'Total Hours' from hoursWorked as hw1 
+--		inner join workCode as wc1 on wc1.idWorkCode = hw1.idWorkCode
+--		inner join task as tk1 on tk1.idAux = hw1.idAux 
+--		inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO
+--		inner join projectOrder as po1 on po1.idPO = wo1.idPO and wo1.jobNo = po1.jobNo
+--		inner join job as jb1 on po1.jobNo = jb1.jobNo
+--		inner join clients as cl1 on cl1.idClient = jb1.idClient
+--		where po1.idPO = po.idPO and jb1.jobNo = jb.jobNo and cl1.numberClient = @numberClient and hw1.dateWorked between @startDate and @FinalDate),0) 
+--	as 'Total Hours',
+
+--	ISNULL((select sum(hw1.hoursST*wc1.billingRate1)+sum(hw1.hoursOT*wc1.billingRateOT)+sum(hw1.hours3*wc1.billingRate3) as 'Labor' from hoursWorked as hw1 
+--		inner join workCode as wc1 on wc1.idWorkCode = hw1.idWorkCode
+--		inner join task as tk1 on tk1.idAux = hw1.idAux 
+--		inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO
+--		inner join projectOrder as po1 on po1.idPO = wo1.idPO and wo1.jobNo = po1.jobNo
+--		inner join job as jb1 on po1.jobNo = jb1.jobNo
+--		inner join clients as cl1 on cl1.idClient = jb1.idClient
+--		where po1.idPO = po.idPO and jb1.jobNo = jb.jobNo and cl1.numberClient = @numberClient and hw1.dateWorked between @startDate and @FinalDate),0) 
+--	as 'Total Labor',
+
+--	ISNULL((select sum(exu1.amount) from expensesUsed as exu1
+--		inner join expenses as ex1 on exu1.idExpense = ex1.idExpenses
+--		inner join task as tk1 on tk1.idAux = exu1.idAux 
+--		inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO
+--		inner join projectOrder as po1 on po1.idPO = wo1.idPO and wo1.jobNo = po1.jobNo
+--		inner join job as jb1 on po1.jobNo = jb1.jobNo
+--		inner join clients  as cl1 on cl1.idClient = jb1.idClient
+--		where po1.idPO = po.idPO and jb1.jobNo = jb.jobNo and cl1.numberClient = @numberClient and exu1.dateExpense between @startDate and @FinalDate),0)
+--	as 'Total Expenses',
+
+--	ISNULL((select sum(mtu1.amount) from materialUsed as mtu1
+--		inner join material as mt1 on mtu1.idMaterial = mt1.idMaterial
+--		inner join task as tk1 on tk1.idAux = mtu1.idAux 
+--		inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO
+--		inner join projectOrder as po1 on po1.idPO = wo1.idPO and wo1.jobNo = po1.jobNo
+--		inner join job as jb1 on po1.jobNo = jb1.jobNo
+--		inner join clients  as cl1 on cl1.idClient = jb1.idClient
+--		where po1.idPO = po.idPO and jb1.jobNo = jb.jobNo and cl1.numberClient = @numberClient and mtu1.dateMaterial between @startDate and @FinalDate),0) 
+--	as 'Total Material',
+
+--	ISNULL((select sum(hw1.hoursST*wc1.billingRate1)+sum(hw1.hoursOT*wc1.billingRateOT)+sum(hw1.hours3*wc1.billingRate3) as 'Labor' from hoursWorked as hw1 
+--		inner join workCode as wc1 on wc1.idWorkCode = hw1.idWorkCode
+--		inner join task as tk1 on tk1.idAux = hw1.idAux 
+--		inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO
+--		inner join projectOrder as po1 on po1.idPO = wo1.idPO and wo1.jobNo = po1.jobNo
+--		inner join job as jb1 on po1.jobNo = jb1.jobNo
+--		inner join clients as cl1 on cl1.idClient = jb1.idClient
+--		where po1.idPO = po.idPO and jb1.jobNo = jb.jobNo and cl1.numberClient = @numberClient and hw1.dateWorked between @startDate and @FinalDate),0)
+--	+
+--	ISNULL((select sum(exu1.amount) from expensesUsed as exu1
+--		inner join expenses as ex1 on exu1.idExpense = ex1.idExpenses
+--		inner join task as tk1 on tk1.idAux = exu1.idAux 
+--		inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO
+--		inner join projectOrder as po1 on po1.idPO = wo1.idPO and wo1.jobNo = po1.jobNo
+--		inner join job as jb1 on po1.jobNo = jb1.jobNo
+--		inner join clients  as cl1 on cl1.idClient = jb1.idClient
+--		where po1.idPO = po.idPO and cl1.numberClient = @numberClient and exu1.dateExpense between @startDate and @FinalDate),0)
+--	+
+--	ISNULL((select sum(mtu1.amount) from materialUsed as mtu1
+--		inner join material as mt1 on mtu1.idMaterial = mt1.idMaterial
+--		inner join task as tk1 on tk1.idAux = mtu1.idAux 
+--		inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO
+--		inner join projectOrder as po1 on po1.idPO = wo1.idPO and wo1.jobNo = po1.jobNo
+--		inner join job as jb1 on po1.jobNo = jb1.jobNo
+--		inner join clients  as cl1 on cl1.idClient = jb1.idClient
+--		where po1.idPO = po.idPO and cl1.numberClient = @numberClient and mtu1.dateMaterial between @startDate and @FinalDate),0 )
+--	as 'Total Cost'
+--from job as jb 
+--inner join clients as cl on cl.idClient = jb.idClient 
+--left join HomeAddress as ha on ha.idHomeAdress = cl.idHomeAddress
+--inner join projectOrder as po on po.jobNo = jb.jobNo
+--where cl.idClient = (select idClient from clients where numberClient = @numberClient)  and  po.idPO like iif(@all = 1 ,'%%',convert(nvarchar, @idPO)) 
+--) as T1 where [Total Cost] > 0
 --end
---GO
+
+--==============================================================================================================================
+--=============== ESTE CODIGO ES PARA AGREGAR EL SP_INVOICE_NUMBER PARA EL REPORTE =============================================
+--==============================================================================================================================
+
+--create proc sp_invoice_number
+--@numberClient int,
+--@startDate date,
+--@FinalDate date
+--as 
+--begin 
+--	select invoice , idPO from invoice 
+--	where startDate = @startDate 
+--		and FinalDate = @FinalDate 
+--		and idClient = (select idclient from clients where numberClient = @numberClient)
+--end
+--go

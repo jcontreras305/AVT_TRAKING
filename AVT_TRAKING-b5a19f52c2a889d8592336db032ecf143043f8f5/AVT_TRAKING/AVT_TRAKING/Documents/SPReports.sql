@@ -924,11 +924,13 @@ ALTER proc [dbo].[sp_Invoice_PO_Resume]
 @all bit
 as
 begin
+select T1.companyName,T1.providence,T1.[Address],T1.postalCode,T1.jobNo,T1.contractNo,T1.idPO, T1.[Total Hours PO],T1.[Total Hours],T1.[Total Labor],T1.[Total Expenses],T1.[Total Material],T1.[Total Cost]
+ from (
 select 
 	cl.companyName,
 	ha.city,
 	ha.providence,
-	CONCAT(ha.avenue , ' ',ha.number) as 'Address',
+	CONCAT(ha.number,' ',ha.avenue) as 'Address',
 	ha.postalCode,
 	jb.jobNo,
 	isnull(jb.contractNo,'') as 'contractNo',
@@ -941,7 +943,7 @@ select
 		inner join projectOrder as po1 on po1.idPO = wo1.idPO and wo1.jobNo = po1.jobNo
 		inner join job as jb1 on po1.jobNo = jb1.jobNo
 		inner join clients as cl1 on cl1.idClient = jb1.idClient
-		where po1.idPO = po.idPO and cl1.numberClient = @numberClient and hw1.dateWorked between @startDate and @FinalDate),0) 
+		where po1.idPO = po.idPO and jb1.jobNo = jb.jobNo and cl1.numberClient = @numberClient and hw1.dateWorked between @startDate and @FinalDate),0) 
 	as 'Total Hours PO',
 
 	ISNULL((select sum(hw1.hoursST)+sum(hw1.hoursOT)+sum(hw1.hours3) as 'Total Hours' from hoursWorked as hw1 
@@ -991,7 +993,7 @@ select
 		inner join projectOrder as po1 on po1.idPO = wo1.idPO and wo1.jobNo = po1.jobNo
 		inner join job as jb1 on po1.jobNo = jb1.jobNo
 		inner join clients as cl1 on cl1.idClient = jb1.idClient
-		where po1.idPO = po.idPO and cl1.numberClient = @numberClient and hw1.dateWorked between @startDate and @FinalDate),0)
+		where po1.idPO = po.idPO and jb1.jobNo = jb.jobNo and cl1.numberClient = @numberClient and hw1.dateWorked between @startDate and @FinalDate),0)
 	+
 	ISNULL((select sum(exu1.amount) from expensesUsed as exu1
 		inner join expenses as ex1 on exu1.idExpense = ex1.idExpenses
@@ -1016,8 +1018,8 @@ inner join clients as cl on cl.idClient = jb.idClient
 left join HomeAddress as ha on ha.idHomeAdress = cl.idHomeAddress
 inner join projectOrder as po on po.jobNo = jb.jobNo
 where cl.idClient = (select idClient from clients where numberClient = @numberClient)  and  po.idPO like iif(@all = 1 ,'%%',convert(nvarchar, @idPO)) 
+) as T1 where [Total Cost] > 0
 end
-go
 --##############################################################################################
 --################## SP SELECT MY COMPANY INFORMATION ##########################################
 --##############################################################################################
@@ -1041,5 +1043,21 @@ from company as cmp
 left join HomeAddress as ha on ha.idHomeAdress	= cmp.idHomeAddress
 left join contact as ct on ct.idContact = cmp.idContact
 where cmp.name = @CompanyName
+end
+go
+--##############################################################################################
+--################## SP SELECT MY COMPANY INFORMATION ##########################################
+--##############################################################################################
+--alter proc sp_invoice_number
+create proc sp_invoice_number
+@numberClient int,
+@startDate date,
+@FinalDate date
+as 
+begin 
+	select invoice , idPO from invoice 
+	where startDate = @startDate 
+		and FinalDate = @FinalDate 
+		and idClient = (select idclient from clients where numberClient = @numberClient)
 end
 go
