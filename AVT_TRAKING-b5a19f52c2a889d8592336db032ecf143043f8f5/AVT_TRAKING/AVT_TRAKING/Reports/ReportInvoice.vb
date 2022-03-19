@@ -57,7 +57,7 @@ Public Class ReportInvoice
     End Sub
     Private Sub btnReport_Click(sender As Object, e As EventArgs) Handles btnReport.Click
         Try
-            If tblInvoiceCodes.Rows.Count > 0 Then
+            If tblInvoiceCodes.Rows.Count > 0 And validarInvoice() Then
                 Dim array() = cmbClient.SelectedItem.ToString().Split(" ")
                 Dim idClient As String = array(0)
                 If actualizarInvoicePO(tblInvoiceCodes, array(0), validaFechaParaSQl(dtpStartDate.Value.Date), validaFechaParaSQl(dtpEndDate.Value.Date)) Then
@@ -75,7 +75,7 @@ Public Class ReportInvoice
                     End If
                 End If
             Else
-                MessageBox.Show("Did not found any 'PO' to make an Invoice, try to change other 'PO' or range of Dates.", "Important", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                MessageBox.Show(If(tblInvoiceCodes.Rows.Count = 0, "Did not found any 'PO' to make an Invoice, try to change other 'PO' or range of Dates.", "Error,Exist a inconsistency in table Invoice, try to verify that the Invoices are not repeated."), "Important", MessageBoxButtons.OK, MessageBoxIcon.Warning)
             End If
         Catch ex As Exception
             MsgBox(ex.Message())
@@ -97,4 +97,36 @@ Public Class ReportInvoice
             MsgBox(ex.Message())
         End Try
     End Sub
+    Private Sub tblInvoiceCodes_CellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles tblInvoiceCodes.CellEndEdit
+        Try
+            If e.ColumnIndex = 1 Then
+                If Not existInvoice(tblInvoiceCodes.Rows(e.RowIndex).Cells(0).Value.ToString(), tblInvoiceCodes.Rows(e.RowIndex).Cells(1).Value.ToString(), validaFechaParaSQl(dtpStartDate.Value.Date()), validaFechaParaSQl(dtpEndDate.Value.Date())) Then
+                    MessageBox.Show("Please assign a different invoice, it was used with this PO.", "", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                End If
+            End If
+        Catch ex As Exception
+
+        End Try
+    End Sub
+
+    Private Sub btnSaveInvoiceNumbers_Click(sender As Object, e As EventArgs) Handles btnSaveInvoiceNumbers.Click
+        If validarInvoice() Then
+            guardarInvoicePO()
+        End If
+    End Sub
+    Private Function validarInvoice() As Boolean
+        Try
+            Dim flag As Boolean = True
+            For Each row As DataGridViewRow In tblInvoiceCodes.Rows
+                If Not existInvoice(row.Cells(0).Value.ToString(), row.Cells(1).Value.ToString(), validaFechaParaSQl(dtpStartDate.Value.Date()), validaFechaParaSQl(dtpEndDate.Value.Date())) Then
+                    flag = False
+                    Exit For
+                End If
+            Next
+            Return flag
+        Catch ex As Exception
+            MsgBox(ex.Message)
+            Return False
+        End Try
+    End Function
 End Class

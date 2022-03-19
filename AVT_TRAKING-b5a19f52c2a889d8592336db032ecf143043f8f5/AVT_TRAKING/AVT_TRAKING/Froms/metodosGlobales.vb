@@ -137,22 +137,51 @@ order by po.idPO asc"), con.conn)
             con.desconectar()
         End Try
     End Function
+    Public Function existInvoice(ByVal idpo As String, ByVal invoice As String, ByVal startDate As String, ByVal finalDate As String) As Boolean
+        Try
+            con.conectar()
+            Dim cmd As New SqlCommand("
+if (select COUNT(*) from invoice where idPO = " + idpo + " and invoice = '" + invoice + "')> 0
+begin
+	if  (select COUNT(*) from invoice where idPO = " + idpo + " and invoice = '" + invoice + "' and startDate = '" + startDate + "' and FinalDate = '" + finalDate + "' )>0
+	begin 
+		select 0 as 'QTY' -- si existe pero no es con esa fecha (no se permite)
+	end
+	else
+	begin 
+		select 1 as 'QTY'--  si existe pero con esa fecha (se permite)
+	end 
+end
+else
+begin 
+	select 0 as 'QTY' -- no existe
+end", con.conn)
+            Dim dr As SqlDataReader = cmd.ExecuteReader
+            Dim count As Integer = 0
+            While dr.Read()
+                count = dr("QTY")
+                Exit While
+            End While
+            dr.Close()
+            Return If(count = 0, True, False)
+        Catch ex As Exception
+            Return False
+        Finally
+            con.desconectar()
+        End Try
+    End Function
     Public Function actualizarInvoicePO(ByVal tbl As DataGridView, ByVal clientNumber As String, ByVal startDate As String, ByVal Finaldate As String) As Boolean
         con.conectar()
         Dim tran As SqlTransaction
         tran = con.conn.BeginTransaction
         Try
             Dim flag As Boolean = True
+            Dim cmdDeleteInv As New SqlCommand("delete from tempInvoice", con.conn)
+            cmdDeleteInv.Transaction = tran
+            cmdDeleteInv.ExecuteNonQuery()
             For Each row As DataGridViewRow In tbl.Rows()
                 Dim cmd As New SqlCommand("
-if (select count(*) from invoice as inv inner join clients as cl on cl.idClient = inv.idClient where cl.numberClient = " + clientNumber + " and inv.idPO = " + row.Cells(0).Value.ToString() + " and inv.startDate = '" + startDate + "' and inv.FinalDate = '" + Finaldate + "')=0
-begin 
-	insert into invoice values ((select top 1 idClient from clients where numberClient = " + clientNumber + ")," + row.Cells(0).Value.ToString() + ",'" + row.Cells(1).Value.ToString() + "','" + startDate + "','" + Finaldate + "')
-end
-else if (select count(*) from invoice as inv inner join clients as cl on cl.idClient = inv.idClient where cl.numberClient = " + clientNumber + " and inv.idPO = " + row.Cells(0).Value.ToString() + " and inv.startDate = '" + startDate + "' and inv.FinalDate = '" + Finaldate + "')>0
-begin
-	update invoice  set invoice = '" + row.Cells(1).Value.ToString() + "'  where idClient = (select top 1 idClient from clients where numberClient = " + clientNumber + ") and idPO = " + row.Cells(0).Value.ToString() + " and startDate = '" + startDate + "' and FinalDate = '" + Finaldate + "'
-end", con.conn)
+	                insert into tempInvoice values ('" + row.Cells(1).Value.ToString() + "'," + row.Cells(0).Value.ToString() + ",(select top 1 idClient from clients where numberClient = " + clientNumber + "),'" + startDate + "','" + Finaldate + "')", con.conn)
                 cmd.Transaction = tran
                 If cmd.ExecuteNonQuery > 0 Then
                     flag = True
@@ -162,6 +191,32 @@ end", con.conn)
                     Exit For
                 End If
             Next
+            If flag Then
+                tran.Commit()
+                Return True
+            Else
+                Return False
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message())
+            tran.Rollback()
+            Return False
+        End Try
+    End Function
+    Public Function guardarInvoicePO() As Boolean
+        con.conectar()
+        Dim tran As SqlTransaction
+        tran = con.conn.BeginTransaction
+        Try
+            Dim flag As Boolean = True
+            Dim cmd As New SqlCommand("insert into invoice (invoice,idPO,idClient,startDate,FinalDate) select * from tempInvoice", con.conn)
+                cmd.Transaction = tran
+            If cmd.ExecuteNonQuery > 0 Then
+                flag = True
+            Else
+                tran.Rollback()
+                flag = False
+            End If
             If flag Then
                 tran.Commit()
                 Return True

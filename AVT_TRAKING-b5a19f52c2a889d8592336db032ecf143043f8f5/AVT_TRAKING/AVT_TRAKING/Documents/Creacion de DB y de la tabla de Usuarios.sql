@@ -437,6 +437,23 @@ create table incoming(
 GO
 
 --##########################################################################################
+--##################  TABLA DE INVOICE #####################################################
+--##########################################################################################
+
+create table invoice(
+	invoice varchar(20)not null,
+	idPO bigint not null,
+	idClient varchar(36)not null,
+	startDate date,
+	FinalDate date,
+)
+go
+
+alter table invoice add constraint pk_idClient_idPO_invoice
+primary key (invoice,idPO)
+go
+
+--##########################################################################################
 --##################  TABLA DE JOB #########################################################
 --##########################################################################################
 
@@ -1025,6 +1042,24 @@ create table taxesST(
 	jobNo bigint
 )
 GO
+
+--##########################################################################################
+--##################  TABLA DE TEMPINVOICE #################################################
+--##########################################################################################
+
+create table tempInvoice(
+	invoice varchar(20)not null,
+	idPO bigint not null,
+	idClient varchar(36)not null,
+	startDate date,
+	FinalDate date
+)
+go
+
+alter table tempInvoice add constraint pk_invoice_TempInvoice
+primary key (invoice, idPO)
+go
+
 --##########################################################################################
 --##################  TABLA DE TRACKDEFAULTELEMENTS ########################################
 --##########################################################################################
@@ -1308,6 +1343,18 @@ GO
 
 ALTER TABLE incoming WITH CHECK ADD CONSTRAINT fk_jobNum_inComing FOREIGN KEY (jobNo) 
 REFERENCES job (jobNo)
+GO
+
+--##########################################################################################
+--##################  FOREIG KEYS INCOMING Y TEMINVOCE #####################################
+--##########################################################################################
+
+ALTER TABLE tempInvoice WITH CHECK ADD CONSTRAINT pk_idClient_Tempinvoice
+FOREIGN KEY (idClient) REFERENCES clients(idClient)
+GO
+
+ALTER TABLE invoice WITH CHECK ADD CONSTRAINT pk_idClient_invoice
+FOREIGN KEY (idClient) REFERENCES clients(idClient)
 GO
 
 --##########################################################################################
@@ -3104,17 +3151,39 @@ go
 --=============== ESTE CODIGO ES PARA AGREGAR LA EL IVOICE PARA LOS REPORTES ===================================================
 --==============================================================================================================================
 
---create table invoice(
---	idClient varchar(36)not null,
+--delete from invoice
+--go
+--drop table invoice
+--go
+
+--create table tempInvoice(
+--	invoice varchar(20)not null,
 --	idPO bigint not null,
---	invoice varchar(20),
+--	idClient varchar(36)not null,
 --	startDate date,
---	FinalDate date 
+--	FinalDate date
+--)
+--go
+
+--alter table tempInvoice add constraint pk_invoice_TempInvoice
+--primary key (invoice, idPO)
+--go
+
+--alter table tempInvoice add constraint pk_idClient_Tempinvoice
+--foreign key (idClient) references clients(idClient)
+--go
+
+--create table invoice(
+--	invoice varchar(20)not null,
+--	idPO bigint not null,
+--	idClient varchar(36)not null,
+--	startDate date,
+--	FinalDate date,
 --)
 --go
 
 --alter table invoice add constraint pk_idClient_idPO_invoice
---primary key (idClient,idPO)
+--primary key (invoice,idPO)
 --go
 
 --alter table invoice add constraint pk_idClient_invoice
@@ -3133,8 +3202,11 @@ go
 --@all bit
 --as
 --begin
---select T1.companyName,T1.providence,T1.[Address],T1.postalCode,T1.jobNo,T1.contractNo,T1.idPO,
---T1.[Total Hours PO],T1.[Total Hours],T1.[Total Labor],T1.[Total Expenses],T1.[Total Material],T1.[Total Cost]
+--select T1.companyName,T1.providence,T1.[Address],T1.postalCode,T1.jobNo,T1.custumerNo,T1.contractNo,T1.idPO,
+--T1.[Total Hours PO],T1.[Total Hours],T1.[Total Labor],
+--T1.[Total Expenses],T1.[Total PerDiem],T1.[3rdParty],T1.[ScRent],T1.[CoEQ],T1.[Material],T1.[Subcontractors],T1.[Other],T1.[ExtraCostMaterial]
+--,T1.[Total Material]
+--,T1.[Total Cost]
 -- from (
 --select 
 --	cl.companyName,
@@ -3143,9 +3215,10 @@ go
 --	CONCAT(ha.number,' ',ha.avenue) as 'Address',
 --	ha.postalCode,
 --	jb.jobNo,
+--	jb.custumerNo,
 --	isnull(jb.contractNo,'') as 'contractNo',
 --	po.idPO,
-
+	
 --	ISNULL((select sum(hw1.hoursST)+sum(hw1.hoursOT)+sum(hw1.hours3) as 'Total Hours' from hoursWorked as hw1 
 --		inner join workCode as wc1 on wc1.idWorkCode = hw1.idWorkCode
 --		inner join task as tk1 on tk1.idAux = hw1.idAux 
@@ -3183,19 +3256,121 @@ go
 --		inner join projectOrder as po1 on po1.idPO = wo1.idPO and wo1.jobNo = po1.jobNo
 --		inner join job as jb1 on po1.jobNo = jb1.jobNo
 --		inner join clients  as cl1 on cl1.idClient = jb1.idClient
---		where po1.idPO = po.idPO and jb1.jobNo = jb.jobNo and cl1.numberClient = @numberClient and exu1.dateExpense between @startDate and @FinalDate),0)
+--		where po1.idPO = po.idPO and jb1.jobNo = jb.jobNo and cl1.numberClient = @numberClient and exu1.dateExpense between @startDate and @FinalDate and ex1.expenseCode like '%travel%'),0)
 --	as 'Total Expenses',
+
+--	ISNULL((select sum(exu1.amount) from expensesUsed as exu1
+--		inner join expenses as ex1 on exu1.idExpense = ex1.idExpenses
+--		inner join task as tk1 on tk1.idAux = exu1.idAux 
+--		inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO
+--		inner join projectOrder as po1 on po1.idPO = wo1.idPO and wo1.jobNo = po1.jobNo
+--		inner join job as jb1 on po1.jobNo = jb1.jobNo
+--		inner join clients  as cl1 on cl1.idClient = jb1.idClient
+--		where po1.idPO = po.idPO and jb1.jobNo = jb.jobNo and cl1.numberClient = @numberClient and exu1.dateExpense between @startDate and @FinalDate and ex1.expenseCode like '%per-diem%'),0)
+--	as 'Total PerDiem',
 
 --	ISNULL((select sum(mtu1.amount) from materialUsed as mtu1
 --		inner join material as mt1 on mtu1.idMaterial = mt1.idMaterial
+--		left join materialClass as mtc1 on mtc1.code = mt1.code
+--		inner join task as tk1 on tk1.idAux = mtu1.idAux 
+--		inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO
+--		inner join projectOrder as po1 on po1.idPO = wo1.idPO and wo1.jobNo = po1.jobNo
+--		inner join job as jb1 on po1.jobNo = jb1.jobNo
+--		inner join clients  as cl1 on cl1.idClient = jb1.idClient
+--		where po1.idPO = po.idPO and jb1.jobNo = jb.jobNo and cl1.numberClient = @numberClient and mtu1.dateMaterial between @startDate and @FinalDate 
+--		and (mtc1.code = '2.201-D' or mtc1.code = '2.255-D' or mtc1.code = '2.256-D' or mtc1.code = '2.202-D'or mtc1.code = '2.203-D'or mtc1.code = '2.303-F'or mtc1.code = '2.304-F' )),0) 
+--	as '3rdParty',
+
+--	ISNULL((select sum(mtu1.amount) from materialUsed as mtu1
+--		inner join material as mt1 on mtu1.idMaterial = mt1.idMaterial
+--		left join materialClass as mtc1 on mtc1.code = mt1.code
+--		inner join task as tk1 on tk1.idAux = mtu1.idAux 
+--		inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO
+--		inner join projectOrder as po1 on po1.idPO = wo1.idPO and wo1.jobNo = po1.jobNo
+--		inner join job as jb1 on po1.jobNo = jb1.jobNo
+--		inner join clients  as cl1 on cl1.idClient = jb1.idClient
+--		where po1.idPO = po.idPO and jb1.jobNo = jb.jobNo and cl1.numberClient = @numberClient and mtu1.dateMaterial between @startDate and @FinalDate 
+--		and (mtc1.code = '2.204-D' or mtc1.code = '2.207-D' or mtc1.code = '2.254-E' or mtc1.code = '2.257-E')),0) 
+--	as 'ScRent',
+
+--	ISNULL((select sum(mtu1.amount) from materialUsed as mtu1
+--		inner join material as mt1 on mtu1.idMaterial = mt1.idMaterial
+--		left join materialClass as mtc1 on mtc1.code = mt1.code
+--		inner join task as tk1 on tk1.idAux = mtu1.idAux 
+--		inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO
+--		inner join projectOrder as po1 on po1.idPO = wo1.idPO and wo1.jobNo = po1.jobNo
+--		inner join job as jb1 on po1.jobNo = jb1.jobNo
+--		inner join clients  as cl1 on cl1.idClient = jb1.idClient
+--		where po1.idPO = po.idPO and jb1.jobNo = jb.jobNo and cl1.numberClient = @numberClient and mtu1.dateMaterial between @startDate and @FinalDate 
+--		and (mtc1.code = '2.251-E' or mtc1.code = '2.252-D' or mtc1.code = '2.253-E' or mtc1.code = '2.301-F' or mtc1.code = '2.302-F'or mtc1.code = '2.907-Y')),0) 
+--	as 'CoEQ',
+
+--	ISNULL((select sum(mtu1.amount) from materialUsed as mtu1
+--		inner join material as mt1 on mtu1.idMaterial = mt1.idMaterial
+--		left join materialClass as mtc1 on mtc1.code = mt1.code
+--		inner join task as tk1 on tk1.idAux = mtu1.idAux 
+--		inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO
+--		inner join projectOrder as po1 on po1.idPO = wo1.idPO and wo1.jobNo = po1.jobNo
+--		inner join job as jb1 on po1.jobNo = jb1.jobNo
+--		inner join clients  as cl1 on cl1.idClient = jb1.idClient
+--		where po1.idPO = po.idPO and jb1.jobNo = jb.jobNo and cl1.numberClient = @numberClient and mtu1.dateMaterial between @startDate and @FinalDate 
+--		and (mtc1.code = '2.500-M' or mtc1.code = '2.515-M')),0) 
+--	as 'Material',
+
+--	ISNULL((select sum(mtu1.amount) from materialUsed as mtu1
+--		inner join material as mt1 on mtu1.idMaterial = mt1.idMaterial
+--		left join materialClass as mtc1 on mtc1.code = mt1.code
+--		inner join task as tk1 on tk1.idAux = mtu1.idAux 
+--		inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO
+--		inner join projectOrder as po1 on po1.idPO = wo1.idPO and wo1.jobNo = po1.jobNo
+--		inner join job as jb1 on po1.jobNo = jb1.jobNo
+--		inner join clients  as cl1 on cl1.idClient = jb1.idClient
+--		where po1.idPO = po.idPO and jb1.jobNo = jb.jobNo and cl1.numberClient = @numberClient and mtu1.dateMaterial between @startDate and @FinalDate 
+--		and (mtc1.code = '2.600-S')),0) 
+--	as 'Subcontractors',
+
+--	ISNULL((select sum(mtu1.amount) from materialUsed as mtu1
+--		inner join material as mt1 on mtu1.idMaterial = mt1.idMaterial
+--		left join materialClass as mtc1 on mtc1.code = mt1.code
+--		inner join task as tk1 on tk1.idAux = mtu1.idAux 
+--		inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO
+--		inner join projectOrder as po1 on po1.idPO = wo1.idPO and wo1.jobNo = po1.jobNo
+--		inner join job as jb1 on po1.jobNo = jb1.jobNo
+--		inner join clients  as cl1 on cl1.idClient = jb1.idClient
+--		where po1.idPO = po.idPO and jb1.jobNo = jb.jobNo and cl1.numberClient = @numberClient and mtu1.dateMaterial between @startDate and @FinalDate 
+--		and (mtc1.code = '2.900-Y' or mtc1.code = '2.911-Y')),0) 
+--	as 'Other',
+
+--	ISNULL((select sum(mtu1.amount) from materialUsed as mtu1
+--		inner join material as mt1 on mtu1.idMaterial = mt1.idMaterial
+--		left join materialClass as mtc1 on mtc1.code = mt1.code
+--		inner join task as tk1 on tk1.idAux = mtu1.idAux 
+--		inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO
+--		inner join projectOrder as po1 on po1.idPO = wo1.idPO and wo1.jobNo = po1.jobNo
+--		inner join job as jb1 on po1.jobNo = jb1.jobNo
+--		inner join clients  as cl1 on cl1.idClient = jb1.idClient
+--		where po1.idPO = po.idPO and jb1.jobNo = jb.jobNo and cl1.numberClient = @numberClient and mtu1.dateMaterial between @startDate and @FinalDate 
+--		and not (
+--		   mtc1.code = '2.201-D' or mtc1.code = '2.202-D' or mtc1.code = '2.203-D' or mtc1.code = '2.255-D' or mtc1.code = '2.256-D' or mtc1.code = '2.303-F' or mtc1.code = '2.304-F'
+--		or mtc1.code = '2.204-D' or mtc1.code = '2.207-D' or mtc1.code = '2.254-E' or mtc1.code = '2.257-E' 
+--		or mtc1.code = '2.252-D' or mtc1.code = '2.253-E' or mtc1.code = '2.301-F' or mtc1.code = '2.302-F' or mtc1.code = '2.251-E' or mtc1.code = '2.907-Y'
+--		or mtc1.code = '2.500-M' or mtc1.code = '2.515-M' 
+--		or mtc1.code = '2.600-S' 
+--		or mtc1.code = '2.900-Y' or mtc1.code = '2.911-Y')),0) 
+--	as 'ExtraCostMaterial',
+
+--	ISNULL((select sum(mtu1.amount) from materialUsed as mtu1
+--		inner join material as mt1 on mtu1.idMaterial = mt1.idMaterial
+--		left join materialClass as mtc1 on mtc1.code = mt1.code
 --		inner join task as tk1 on tk1.idAux = mtu1.idAux 
 --		inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO
 --		inner join projectOrder as po1 on po1.idPO = wo1.idPO and wo1.jobNo = po1.jobNo
 --		inner join job as jb1 on po1.jobNo = jb1.jobNo
 --		inner join clients  as cl1 on cl1.idClient = jb1.idClient
 --		where po1.idPO = po.idPO and jb1.jobNo = jb.jobNo and cl1.numberClient = @numberClient and mtu1.dateMaterial between @startDate and @FinalDate),0) 
---	as 'Total Material',
-
+--	as 'Total Material'
+	
+--	,
 --	ISNULL((select sum(hw1.hoursST*wc1.billingRate1)+sum(hw1.hoursOT*wc1.billingRateOT)+sum(hw1.hours3*wc1.billingRate3) as 'Labor' from hoursWorked as hw1 
 --		inner join workCode as wc1 on wc1.idWorkCode = hw1.idWorkCode
 --		inner join task as tk1 on tk1.idAux = hw1.idAux 
@@ -3212,7 +3387,7 @@ go
 --		inner join projectOrder as po1 on po1.idPO = wo1.idPO and wo1.jobNo = po1.jobNo
 --		inner join job as jb1 on po1.jobNo = jb1.jobNo
 --		inner join clients  as cl1 on cl1.idClient = jb1.idClient
---		where po1.idPO = po.idPO and cl1.numberClient = @numberClient and exu1.dateExpense between @startDate and @FinalDate),0)
+--		where po1.idPO = po.idPO and jb1.jobNo = jb.jobNo and cl1.numberClient = @numberClient and exu1.dateExpense between @startDate and @FinalDate),0)
 --	+
 --	ISNULL((select sum(mtu1.amount) from materialUsed as mtu1
 --		inner join material as mt1 on mtu1.idMaterial = mt1.idMaterial
@@ -3221,27 +3396,30 @@ go
 --		inner join projectOrder as po1 on po1.idPO = wo1.idPO and wo1.jobNo = po1.jobNo
 --		inner join job as jb1 on po1.jobNo = jb1.jobNo
 --		inner join clients  as cl1 on cl1.idClient = jb1.idClient
---		where po1.idPO = po.idPO and cl1.numberClient = @numberClient and mtu1.dateMaterial between @startDate and @FinalDate),0 )
+--		where po1.idPO = po.idPO and jb1.jobNo = jb.jobNo and cl1.numberClient = @numberClient and mtu1.dateMaterial between @startDate and @FinalDate),0 )
 --	as 'Total Cost'
 --from job as jb 
 --inner join clients as cl on cl.idClient = jb.idClient 
 --left join HomeAddress as ha on ha.idHomeAdress = cl.idHomeAddress
 --inner join projectOrder as po on po.jobNo = jb.jobNo
 --where cl.idClient = (select idClient from clients where numberClient = @numberClient)  and  po.idPO like iif(@all = 1 ,'%%',convert(nvarchar, @idPO)) 
---) as T1 where [Total Cost] > 0
+--) as T1 where T1.[Total Labor]>0 or
+--T1.[Total Expenses]>0 or T1.[Total PerDiem]>0 or T1.[3rdParty]>0 or T1.[ScRent]>0 or T1.[CoEQ]>0 or T1.[Material]>0 or T1.[Subcontractors]
+-->0 or T1.[Other]>0 or t1.[ExtraCostMaterial]
+-->0 or T1.[Total Material] >0
 --end
-
+--GO
 --==============================================================================================================================
---=============== ESTE CODIGO ES PARA AGREGAR EL SP_INVOICE_NUMBER PARA EL REPORTE =============================================
+--=============== ESTE CODIGO ES PARA ACTUALIZAR EL SP_INVOICE_NUMBER PARA EL REPORTE =============================================
 --==============================================================================================================================
 
---create proc sp_invoice_number
+--alter proc sp_invoice_number
 --@numberClient int,
 --@startDate date,
 --@FinalDate date
 --as 
 --begin 
---	select invoice , idPO from invoice 
+--	select invoice , idPO from tempInvoice
 --	where startDate = @startDate 
 --		and FinalDate = @FinalDate 
 --		and idClient = (select idclient from clients where numberClient = @numberClient)
