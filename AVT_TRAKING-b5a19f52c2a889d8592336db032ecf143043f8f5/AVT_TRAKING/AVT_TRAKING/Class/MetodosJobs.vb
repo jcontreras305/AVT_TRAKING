@@ -1290,7 +1290,7 @@ where tk.idAux = '" + idAux + "' and wo.idAuxWO = '" + WO + "'", conn)
         Try
             conectar()
             Dim cmd As New SqlCommand("
-                update materialUsed set dateMaterial = '" + datos(1) + "' , amount = " + datos(3) + " ,description = '" + datos(5) + "' , idAux = '" + datos(2) + If(datos(4).Length = 36, "',idMaterial = '" + datos(4), "") + "' where idMaterialUsed = '" + datos(0) + "'", conn)
+                update materialUsed set dateMaterial = '" + datos(1) + "' , amount = " + datos(3) + " ,description = '" + datos(5) + "' , idAux = '" + datos(2) + "',idMaterial = '" + datos(4) + "' where idMaterialUsed = '" + datos(0) + "'", conn)
             If cmd.ExecuteNonQuery = 1 Then
                 UpdateTotalSpendTask(datos(5))
                 desconectar()

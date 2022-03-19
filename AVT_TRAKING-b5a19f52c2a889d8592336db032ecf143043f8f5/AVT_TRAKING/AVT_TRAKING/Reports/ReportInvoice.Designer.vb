@@ -49,6 +49,10 @@ Partial Class ReportInvoice
         Me.tblInvoiceCodes = New System.Windows.Forms.DataGridView()
         Me.PO = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Invoice = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.btnSaveInvoiceNumbers = New System.Windows.Forms.Button()
+        Me.TableLayoutPanel3 = New System.Windows.Forms.TableLayoutPanel()
+        Me.Panel6 = New System.Windows.Forms.Panel()
+        Me.Panel7 = New System.Windows.Forms.Panel()
         Me.TableLayoutPanel1.SuspendLayout()
         Me.Panel1.SuspendLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -62,6 +66,9 @@ Partial Class ReportInvoice
         Me.Panel4.SuspendLayout()
         Me.Panel5.SuspendLayout()
         CType(Me.tblInvoiceCodes, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.TableLayoutPanel3.SuspendLayout()
+        Me.Panel6.SuspendLayout()
+        Me.Panel7.SuspendLayout()
         Me.SuspendLayout()
         '
         'TableLayoutPanel1
@@ -177,7 +184,7 @@ Partial Class ReportInvoice
         Me.btnReport.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.btnReport.Image = Global.AVT_TRAKING.My.Resources.Resources.reportshow
         Me.btnReport.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnReport.Location = New System.Drawing.Point(504, 32)
+        Me.btnReport.Location = New System.Drawing.Point(479, 30)
         Me.btnReport.Name = "btnReport"
         Me.btnReport.Size = New System.Drawing.Size(83, 33)
         Me.btnReport.TabIndex = 10
@@ -323,7 +330,7 @@ Partial Class ReportInvoice
         '
         'Panel5
         '
-        Me.Panel5.Controls.Add(Me.tblInvoiceCodes)
+        Me.Panel5.Controls.Add(Me.TableLayoutPanel3)
         Me.Panel5.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel5.Location = New System.Drawing.Point(714, 3)
         Me.Panel5.Name = "Panel5"
@@ -340,7 +347,7 @@ Partial Class ReportInvoice
         Me.tblInvoiceCodes.Dock = System.Windows.Forms.DockStyle.Fill
         Me.tblInvoiceCodes.Location = New System.Drawing.Point(0, 0)
         Me.tblInvoiceCodes.Name = "tblInvoiceCodes"
-        Me.tblInvoiceCodes.Size = New System.Drawing.Size(213, 404)
+        Me.tblInvoiceCodes.Size = New System.Drawing.Size(207, 320)
         Me.tblInvoiceCodes.TabIndex = 0
         '
         'PO
@@ -353,6 +360,56 @@ Partial Class ReportInvoice
         '
         Me.Invoice.HeaderText = "Invoice"
         Me.Invoice.Name = "Invoice"
+        '
+        'btnSaveInvoiceNumbers
+        '
+        Me.btnSaveInvoiceNumbers.FlatAppearance.BorderSize = 0
+        Me.btnSaveInvoiceNumbers.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(58, Byte), Integer), CType(CType(115, Byte), Integer))
+        Me.btnSaveInvoiceNumbers.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnSaveInvoiceNumbers.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnSaveInvoiceNumbers.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.btnSaveInvoiceNumbers.Image = Global.AVT_TRAKING.My.Resources.Resources.save1
+        Me.btnSaveInvoiceNumbers.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnSaveInvoiceNumbers.Location = New System.Drawing.Point(80, 20)
+        Me.btnSaveInvoiceNumbers.Name = "btnSaveInvoiceNumbers"
+        Me.btnSaveInvoiceNumbers.Size = New System.Drawing.Size(115, 33)
+        Me.btnSaveInvoiceNumbers.TabIndex = 11
+        Me.btnSaveInvoiceNumbers.Text = "Save Invoice"
+        Me.btnSaveInvoiceNumbers.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.btnSaveInvoiceNumbers.UseVisualStyleBackColor = True
+        '
+        'TableLayoutPanel3
+        '
+        Me.TableLayoutPanel3.ColumnCount = 1
+        Me.TableLayoutPanel3.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
+        Me.TableLayoutPanel3.Controls.Add(Me.Panel6, 0, 0)
+        Me.TableLayoutPanel3.Controls.Add(Me.Panel7, 0, 1)
+        Me.TableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.TableLayoutPanel3.Location = New System.Drawing.Point(0, 0)
+        Me.TableLayoutPanel3.Name = "TableLayoutPanel3"
+        Me.TableLayoutPanel3.RowCount = 2
+        Me.TableLayoutPanel3.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 80.69307!))
+        Me.TableLayoutPanel3.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 19.30693!))
+        Me.TableLayoutPanel3.Size = New System.Drawing.Size(213, 404)
+        Me.TableLayoutPanel3.TabIndex = 0
+        '
+        'Panel6
+        '
+        Me.Panel6.Controls.Add(Me.tblInvoiceCodes)
+        Me.Panel6.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Panel6.Location = New System.Drawing.Point(3, 3)
+        Me.Panel6.Name = "Panel6"
+        Me.Panel6.Size = New System.Drawing.Size(207, 320)
+        Me.Panel6.TabIndex = 0
+        '
+        'Panel7
+        '
+        Me.Panel7.Controls.Add(Me.btnSaveInvoiceNumbers)
+        Me.Panel7.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Panel7.Location = New System.Drawing.Point(3, 329)
+        Me.Panel7.Name = "Panel7"
+        Me.Panel7.Size = New System.Drawing.Size(207, 72)
+        Me.Panel7.TabIndex = 1
         '
         'ReportInvoice
         '
@@ -378,6 +435,9 @@ Partial Class ReportInvoice
         Me.Panel4.ResumeLayout(False)
         Me.Panel5.ResumeLayout(False)
         CType(Me.tblInvoiceCodes, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.TableLayoutPanel3.ResumeLayout(False)
+        Me.Panel6.ResumeLayout(False)
+        Me.Panel7.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
@@ -409,4 +469,8 @@ Partial Class ReportInvoice
     Friend WithEvents tblInvoiceCodes As DataGridView
     Friend WithEvents PO As DataGridViewTextBoxColumn
     Friend WithEvents Invoice As DataGridViewTextBoxColumn
+    Friend WithEvents TableLayoutPanel3 As TableLayoutPanel
+    Friend WithEvents Panel6 As Panel
+    Friend WithEvents Panel7 As Panel
+    Friend WithEvents btnSaveInvoiceNumbers As Button
 End Class

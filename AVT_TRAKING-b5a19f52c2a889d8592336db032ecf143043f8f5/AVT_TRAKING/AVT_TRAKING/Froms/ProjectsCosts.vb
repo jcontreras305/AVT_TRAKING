@@ -85,8 +85,10 @@ Public Class ProjectsCosts
                     _dtpMaterial.Size = New Size(_rectangulo.Width, _rectangulo.Height)
                     _dtpMaterial.Location = New Point(_rectangulo.X, _rectangulo.Y)
                     _dtpMaterial.Visible = True
-                    _dtpMaterial.Value = fechaAnterior
                     _dtpMaterial.CustomFormat = "MM/dd/yyyy"
+                    _dtpMaterial.Format = DateTimePickerFormat.Custom
+                    _dtpMaterial.Value = fechaAnterior
+
                 Case "Material Code"
                     Try
                         If tblMaterialProjects.CurrentCell.GetType.Name = "DataGridViewTextBoxCell" Then
@@ -1253,6 +1255,8 @@ Public Class ProjectsCosts
                     actualizarMateriales(row.Index)
                 Next
             End If
+            mtdJobs.buscarMaterialesPorProyecto(tblMaterialProjects, idAuxWO, task)
+            calcularValores()
         Else
             MessageBox.Show("Plese select a row to continue.", "Important", MessageBoxButtons.OK, MessageBoxIcon.Warning)
         End If
@@ -1624,7 +1628,7 @@ Public Class ProjectsCosts
         Else
             mensaje = If(mensaje = "", "Check the 'Amount' Cell.", vbCrLf + "Check the 'Amount' Cell.")
         End If
-
+        mtdJobs.llenarTablaMaterialsIds(listIdsMaterial)
         If tblMaterialProjects.Rows(fila).Cells("Material Code").GetType.Name = "DataGridViewComboBox" Then
             If tblMaterialProjects.Rows(fila).Cells("Material Code").Value IsNot DBNull.Value Then
                 For Each row As DataRow In listIdsMaterial.Rows
@@ -1670,12 +1674,12 @@ Public Class ProjectsCosts
         Else
             If datosMaterial(0) = "" Then 'insert
                 mtdJobs.insertMaterialUsed(datosMaterial)
-                mtdJobs.buscarMaterialesPorProyecto(tblMaterialProjects, idAuxWO, task)
-                calcularValores()
+                'mtdJobs.buscarMaterialesPorProyecto(tblMaterialProjects, idAuxWO, task)
+                'calcularValores()
             Else 'update
                 mtdJobs.updateMaterialUsed(datosMaterial)
-                mtdJobs.buscarMaterialesPorProyecto(tblMaterialProjects, idAuxWO, task)
-                calcularValores()
+                'mtdJobs.buscarMaterialesPorProyecto(tblMaterialProjects, idAuxWO, task)
+                'calcularValores()
             End If
         End If
     End Sub
