@@ -363,10 +363,10 @@ end", con.conn)
                     End Try
                 Else
                     Try
-                        Dim newfecha As Date = New Date(CInt(array(2)), CInt(array(0)), CInt(array(1)))
+                        Dim newfecha As Date = New Date(CInt(array(2)), CInt(array(1)), CInt(array(0)))
                         Return newfecha
                     Catch ex As Exception
-                        Dim newfecha As Date = New Date(CInt(array(2)), CInt(array(1)), CInt(array(0)))
+                        Dim newfecha As Date = New Date(CInt(array(2)), CInt(array(0)), CInt(array(1)))
                         Return newfecha
                     End Try
                 End If

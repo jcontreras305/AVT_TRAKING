@@ -1044,7 +1044,7 @@ ALTER proc [dbo].[sp_Invoice_PO_Resume]
 @all bit
 as
 begin
-select T1.companyName,T1.providence,T1.[Address],T1.postalCode,T1.jobNo,T1.custumerNo,T1.contractNo,T1.idPO,
+select T1.companyName,T1.city,T1.providence,T1.[Address],T1.postalCode,T1.jobNo,T1.custumerNo,T1.contractNo,T1.idPO,
 T1.[Total Hours PO],T1.[Total Hours],T1.[Total Labor],
 T1.[Total Expenses],T1.[Total PerDiem],T1.[3rdParty],T1.[ScRent],T1.[CoEQ],T1.[Material],T1.[Subcontractors],T1.[Other],T1.[ExtraCostMaterial]
 ,T1.[Total Material]

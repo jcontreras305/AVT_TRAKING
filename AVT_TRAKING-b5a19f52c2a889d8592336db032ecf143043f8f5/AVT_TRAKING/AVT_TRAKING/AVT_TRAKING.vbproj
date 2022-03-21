@@ -400,6 +400,12 @@
       <DependentUpon>HoursPerWeek.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Reports\InvoiceProjectOrder.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>InvoiceProjectOrder.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Reports\POInvoice1.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -706,6 +712,10 @@
     <EmbeddedResource Include="Reports\HoursPerWeek.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>HoursPerWeek.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\InvoiceProjectOrder.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>InvoiceProjectOrder.vb</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\POInvoice.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>

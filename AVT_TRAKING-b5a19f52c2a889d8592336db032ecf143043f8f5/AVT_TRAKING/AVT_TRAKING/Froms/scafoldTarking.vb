@@ -34,169 +34,6 @@ Public Class scafoldTarking
     Dim cmbProyect1 As New DataGridViewComboBoxCell
     Private Sub scafoldTarking_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         cargarDatosByClient(IdCliente, Company)
-        'If IdCliente <> "" Then
-        '    lblCompanyName.Text = "Client: " + Company
-        'Else
-        '    lblCompanyName.Text = "Client: All"
-        'End If
-        ''In Coming
-        'dtpDateInComing.Format = DateTimePickerFormat.Custom
-        'dtpDateInComing.CustomFormat = "MM/dd/yyyy"
-        'mtdScaffold.llenarEmpleadosCombo(cmbEmployeesInComing, tablaEmpleados)
-        'If IdCliente <> "" Then
-        '    mtdScaffold.llenarJobCombo(cmbJobNumInComing, IdCliente)
-        'Else
-        '    mtdScaffold.llenarJobCombo(cmbJobNumInComing)
-        'End If
-
-        'Dim datosIncoming As List(Of String) = mtdScaffold.llenarInComming(tblInComing, tblTicketInComing, IdCliente)
-        'If datosIncoming.Count <> 0 Then
-        '    txtTicketNumInComing.Text = datosIncoming(0)
-        '    dtpDateInComing.Value = validarFechaParaVB(datosIncoming(1))
-        '    cmbEmployeesInComing.Text = datosIncoming(2)
-        '    txtCommentsInComing.Text = datosIncoming(3)
-        '    cmbJobNumInComing.Text = datosIncoming(4)
-        '    txtTicketNumInComing.Enabled = False
-        'End If
-        ''Products
-        'mtdScaffold.llenarProduct(tblProduct)
-        'mtdScaffold.llenarProduct(tblProductosAux)
-        ''Out Going
-        'mtdScaffold.llenarJobCombo(cmbJobNumOutGoing, IdCliente)
-        'mtdScaffold.llenarEmpleadosCombo(cmbShippedBY, tablaEmpleados)
-        'mtdScaffold.llenarEmpleadosCombo(cmbSuperintendent, tablaEmpleados)
-        'dtpDateOutGoing.Format = DateTimePickerFormat.Custom
-        'dtpDateOutGoing.CustomFormat = "MM/dd/yyyy"
-        'Dim datosOutGoing As List(Of String) = mtdScaffold.llenarOutGoing(tblOutGoing, tblTicketOutGoing, IdCliente)
-        'If datosOutGoing.Count > 0 Then
-        '    txtTicketNumOutGoing.Text = datosOutGoing(0)
-        '    dtpDateOutGoing.Value = validarFechaParaVB(datosOutGoing(1))
-        '    txtCommentOut.Text = datosOutGoing(2)
-        '    cmbShippedBY.Text = datosOutGoing(3)
-        '    cmbSuperintendent.Text = datosOutGoing(4)
-        '    cmbJobNumOutGoing.Text = datosOutGoing(5)
-        '    txtTicketNumOutGoing.Enabled = False
-        'End If
-        ''Area/WO/Sub-Job/JobCat
-        'mtdScaffold.llenarSubJobs(tblSubJobs, If(IdCliente <> "", IdCliente, ""))
-        'mtdScaffold.llenarAreas(tblAreas, If(IdCliente <> "", IdCliente, ""))
-        'mtdScaffold.llenarWO(tblWO, IdCliente)
-        'mtdScaffold.llenarJobCat(tblJobCat, If(IdCliente <> "", IdCliente, ""))
-        'tblAreas.Columns("Client2").Visible = False
-        'tblSubJobs.Columns("Client2").Visible = False
-        'tblJobCat.Columns("Client2").Visible = False
-        'If Not lblCompanyName.Text = "Client: All" Then
-        '    tblAreas.Columns("Client").Visible = False
-        '    tblSubJobs.Columns("Client").Visible = False
-        '    tblJobCat.Columns("Client").Visible = False
-        'End If
-        ''UM/Class/Status
-        'mtdScaffold.llenarClassification(tblClassification)
-        'mtdScaffold.llenarMaterialStatus(tblMaterialStatus)
-        'For Each row As DataGridViewRow In tblMaterialStatus.Rows()
-        '    If row.Cells(0).Value IsNot Nothing Then
-        '        tblMaterialStatusAux.Add(row.Cells(0).Value.ToString())
-        '    End If
-        'Next
-        'mtdScaffold.llenarRental(tblRentTable)
-        'mtdScaffold.llenarUnitMeassurements(tblUnitMeassurement)
-        ''Supervisor
-        'mtdScaffold.llenarSupervisor(tblSupervisor)
-        ''ScaffoldTraking
-        'dtpReqCompScaffold.Format = DateTimePickerFormat.Custom
-        'dtpReqCompScaffold.CustomFormat = "MM/dd/yyyy"
-        'dtpBldDate.Format = DateTimePickerFormat.Custom
-        'dtpBldDate.CustomFormat = "MM/dd/yyyy"
-        'tblArea = mtdScaffold.llenarComboArea(cmbAreaID, If(IdCliente <> "", IdCliente, ""))
-        'tblCat = mtdScaffold.llenarComboJobCat(cmbJobCAT, If(IdCliente <> "", IdCliente, ""))
-        'tblWOTASK = mtdScaffold.llenarComboWO(cmbWONum, IdCliente)
-        'tblSubJob = mtdScaffold.llenarComboSubJob(cmbSubJob, If(IdCliente <> "", IdCliente, ""))
-        'mtdScaffold.llenarEmpleadosCombo(cmbForemanScaffold, tablaEmpleados)
-        'mtdScaffold.llenarEmpleadosCombo(cmbErectorScaffold, tablaEmpleados)
-        'tblScaffoldInformation.Rows.Add("", "", "", "", "", "", "", "")
-
-        'With cmbProyect
-        '    mtdScaffold.llenarRentaTypeCombo(cmbProyect)
-        'End With
-        'tblScaffoldInformation.Rows(0).Cells(0) = cmbProyect
-        'tblActivityHours.Rows.Add("", "", "", "", "", "", "", "", "")
-        'tblActivityHours.Rows(0).Cells("clmTotal").ReadOnly = True
-        'tblActivityHours.Rows(0).Cells("clmTotal").Style.BackColor = Color.Green
-        'If mtdScaffold.llenarScaffold(tblScaffoldTags, If(lblCompanyName.Text = "Client: All", "", IdCliente)) Then
-        '    If tblScaffoldTags.Rows.Count > 0 Then
-        '        cargarDatosScaffold(tblScaffoldTags.Rows(0).ItemArray(0).ToString())
-        '    End If
-        'End If
-        'btnDeleteRowScaffoldLeg.Enabled = False
-        ''Modification
-        'dtpModificationDate.Format = DateTimePickerFormat.Custom
-        'dtpModificationDate.CustomFormat = "MM/dd/yyyy"
-        'tblScaffoldInformationSM.Rows.Add("", "", "", "", "", "", "", "")
-
-        'With cmbProyect
-        '    mtdScaffold.llenarRentaTypeCombo(cmbProyect1)
-        'End With
-        'tblScaffoldInformationSM.Rows(0).Cells(0) = cmbProyect1
-        'tblActivityHoursSM.Rows.Add("", "", "", "", "", "", "", "", "")
-        'tblActivityHoursSM.Rows(0).Cells("ToHrs").ReadOnly = True
-        'tblActivityHoursSM.Rows(0).Cells("ToHrs").Style.BackColor = Color.Green
-        'mtdScaffold.llenarComboTagModificaion(cmbTagScaffold, IdCliente)
-        'mtdScaffold.llenarEmpleadosCombo(cmbForemanModification, tablaEmpleados)
-        'mtdScaffold.llenarEmpleadosCombo(cmbErectorModification, tablaEmpleados)
-        'mtdScaffold.llenarComboReqCompany(cmbReqCompany)
-        'mtdScaffold.llenarComboRequestBy(cmbRequestBY)
-        'If mtdScaffold.llenarModification(tblModification, IdCliente) Then
-        '    If tblModification.Rows.Count > 0 Then
-        '        md = mtdScaffold.llenarModificationData(tblModification.Rows(0).ItemArray(0), tblModification.Rows(0).ItemArray(5))
-        '        If md.ModAux <> "" Then
-        '            cargarDatosModification(md.ModAux)
-        '        End If
-        '    Else
-        '        md.Clear()
-        '    End If
-        'End If
-        ''Dismantle
-        'tblActivityHoursDismantle.Rows.Add("", "", "", "", "", "", "", "", "")
-        'tblActivityHoursDismantle.Rows(0).Cells("clmTotalHD").ReadOnly = True
-        'tblActivityHoursDismantle.Rows(0).Cells("clmTotalHD").Style.BackColor = Color.Green
-        'llenarComboTag(cmbTagDismantle, tblScaffoldTags)
-        'If tblScaffoldTags.Rows.Count() > 0 Then
-        '    cargarDatosDismantle(tblScaffoldTags.Rows(0).ItemArray(0))
-        'End If
-        'If tblScaffoldTags.Rows.Count > 0 Then
-        '    llenarComboTag(cmbTagDismantle, tblScaffoldTags)
-        'End If
-        ''Estimation
-        'mtdScaffold.llenarComboWO(cmbProjectNameEst, IdCliente)
-        'mtdEstimation.llenarComboTypeScfCost(cmbScaffolType)
-        'mtdEstimation.llenarComboScfEstCost(CmbScaffoldCost)
-        'mtdEstimation.llenarComboControlNumber(cmbCCNUM)
-        'If mtdEstimation.llenartablaEstimacion(tblEstimation, IdCliente) Then
-        '    If tblEstimation.Rows.Count > 0 Then
-        '        If mtdEstimation.cargarDatosEstimation(tblEstimation.Rows(0).ItemArray(0)) Then
-        '            cargarDatosEstimation(tblEstimation.Rows(0).ItemArray(0))
-        '        End If
-        '    End If
-        'End If
-        ''Costumer
-        'tblCostumers = mtdScaffold.selectCostumerInfo()
-        'If tblCostumers.Rows.Count() > 0 Then
-        '    If IdCliente <> "" Then
-        '        Dim flag As Boolean = False
-        '        For Each row As DataRow In tblCostumers.Rows
-        '            If row.ItemArray(0) = IdCliente Then
-        '                cargarDatosCostumer(row)
-        '                flag = True
-        '                Exit For
-        '            End If
-        '        Next
-        '        If flag = False Then
-        '            cargarDatosCostumer(tblCostumers.Rows(0))
-        '        End If
-        '    Else
-        '        cargarDatosCostumer(tblCostumers.Rows(0))
-        '    End If
-        'End If
     End Sub
     Private Function llenarComboTag(ByVal cmb As ComboBox, ByVal tblTags As Data.DataTable) As Integer
         If tblTags.Rows.Count > 0 Then
@@ -340,6 +177,7 @@ Public Class scafoldTarking
                             llenarComboTag(cmbTagDismantle, tblScaffoldTags)
                             mtdScaffold.llenarComboTagModificaion(cmbTagScaffold, IdCliente)
                         End If
+                        loadingDataModification = True
                         cmbTagScaffold.SelectedItem = cmbTagScaffold.Items(cmbTagScaffold.FindString(tagSelected))
                         cmbTagScaffold.Text = tagSelected
                     End If
@@ -356,6 +194,7 @@ Public Class scafoldTarking
                         For Each row As Data.DataRow In tblScaffoldTags.Rows()
                             cmbTagScaffold.Items.Add(row.ItemArray(0))
                         Next
+                        loadingDataModification = True
                         cmbTagScaffold.SelectedItem = cmbTagScaffold.Items(cmbTagScaffold.FindString(tagSelected))
                         cmbTagScaffold.Text = tagSelected
                     End If
@@ -2576,7 +2415,7 @@ Public Class scafoldTarking
             If tblProductScaffoldAux.Rows IsNot Nothing Then
                 If DialogResult.Yes = MessageBox.Show("If you made any changes it will not be saved, are you sure to continue?", "Important", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) Then
                     mtdScaffold.llenarScaffold(tblScaffoldTags, If(lblCompanyName.Text = "Client: All", "", IdCliente))
-                    Dim count = 1
+                    Dim count = 0
                     For Each row As Data.DataRow In tblScaffoldTags.Rows()
                         If sc.tag = row("tag") Then
                             Exit For
@@ -2590,12 +2429,16 @@ Public Class scafoldTarking
                     Else
                         If sc.tag = "" Then
                             count -= 1
-                        End If
-                        If tblScaffoldTags.Rows.Count < count Then
-                            cargarDatosScaffold(tblScaffoldTags.Rows(count).ItemArray(0))
+                        ElseIf (count + 1) = tblScaffoldTags.Rows.Count() Then
+                            cargarDatosScaffold(tblScaffoldTags.Rows(0).ItemArray(0))
                         Else
-                            cargarDatosScaffold(tblScaffoldTags.Rows(count - 1).ItemArray(0))
+                            cargarDatosScaffold(tblScaffoldTags.Rows(count + 1).ItemArray(0))
                         End If
+                        'If tblScaffoldTags.Rows.Count < count Then
+                        '    cargarDatosScaffold(tblScaffoldTags.Rows(count).ItemArray(0))
+                        'Else
+                        '    cargarDatosScaffold(tblScaffoldTags.Rows(count - 1).ItemArray(0))
+                        'End If
 
                     End If
                 End If
@@ -3529,17 +3372,17 @@ Public Class scafoldTarking
         Try
             If mtdScaffold.llenarModification(tblModification, IdCliente) Then
                 If tblModification.Rows.Count > 0 Then
-                    Dim cont As Integer = 1
+                    Dim cont As Integer = 0
                     For Each rowMod As DataRow In tblModification.Rows
                         If md.ModID = rowMod.ItemArray(1) And md.tag = rowMod.ItemArray(5) Then
-                            If cont = tblModification.Rows.Count() Then 'es la ultima fila 
+                            If cont = tblModification.Rows.Count() - 1 Then 'es la ultima fila 
                                 md = mtdScaffold.llenarModificationData(tblModification.Rows(0).ItemArray(0), tblModification.Rows(0).ItemArray(5))
                                 If md.ModID <> "" Then
                                     cargarDatosModification(md.ModAux)
                                 End If
                                 Exit For
                             Else 'no es la ultima fila
-                                md = mtdScaffold.llenarModificationData(tblModification.Rows(cont).ItemArray(0), tblModification.Rows(cont).ItemArray(5))
+                                md = mtdScaffold.llenarModificationData(tblModification.Rows(cont + 1).ItemArray(0), tblModification.Rows(cont + 1).ItemArray(5))
                                 cargarDatosModification(md.ModAux)
                                 Exit For
                             End If

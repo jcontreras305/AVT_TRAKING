@@ -62,7 +62,7 @@ Public Class ReportInvoice
                 Dim idClient As String = array(0)
                 If actualizarInvoicePO(tblInvoiceCodes, array(0), validaFechaParaSQl(dtpStartDate.Value.Date), validaFechaParaSQl(dtpEndDate.Value.Date)) Then
                     If idClient <> "" Or idClient IsNot Nothing Then
-                        Dim reportInvoice As New POInvoice
+                        Dim reportInvoice As New InvoiceProjectOrder
                         reportInvoice.SetParameterValue("@numberClient", idClient)
                         reportInvoice.SetParameterValue("@startDate", validaFechaParaSQl(dtpStartDate.Value.Date))
                         reportInvoice.SetParameterValue("@FinalDate", validaFechaParaSQl(dtpEndDate.Value.Date))
@@ -70,6 +70,7 @@ Public Class ReportInvoice
                         reportInvoice.SetParameterValue("@all", If(chbAllPO.Checked, 1, 0))
                         reportInvoice.SetParameterValue("@CompanyName", "Brock")
                         crvIvoice.ReportSource = reportInvoice
+                        'crvIvoice.RefreshReport()
                     Else
                         MsgBox("Please select a Client.")
                     End If

@@ -363,13 +363,13 @@ Public Class TimeSheet
                                         If rowWC.Length > 0 Then
                                             textDoc += newidRecord.ToString() & "," & hst & "," & hot & "," & "0" & "," & dateRecord & "," & CStr(rowE(0).ItemArray(2)) & "," & CStr(rowWC(0).ItemArray(0)) & "," & rowP(0).ItemArray(2) & "," & schedule & vbCrLf
                                         Else
-                                            listErrors.Add("Row " + contRecord + ": Work Code Error.")
+                                            listErrors.Add("Row " + CStr(contRecord) + ": Work Code Error.")
                                         End If
                                     Else
-                                        listErrors.Add("Row " + contRecord + ": Number Employee Error.")
+                                        listErrors.Add("Row " + CStr(contRecord) + ": Number Employee Error.")
                                     End If
                                 Else
-                                    listErrors.Add("Row " + contRecord + ": Work Order Error.")
+                                    listErrors.Add("Row " + CStr(contRecord) + ": Work Order Error.")
                                 End If
                                 txtSalidaCSV.Text = msgAux + "Reading Excel Row: " + contRecord.ToString()
                                 txtSalidaCSV.Select(txtSalidaCSV.Text.Length, 0)

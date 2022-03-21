@@ -2849,13 +2849,14 @@ If(idCliente = "", "", " where idClient ='" + idCliente + "'"), conn)
         Dim flagComplete As Boolean = True
         Try
             Dim cmdAvaibleMod As New SqlCommand("select [status] from scaffoldTraking where tag = '" + md.tag + "'", conn)
+            cmdAvaibleMod.Transaction = tran
             Dim dr As SqlDataReader = cmdAvaibleMod.ExecuteReader()
             Dim flag As Boolean = False
-            cmdAvaibleMod.ExecuteNonQuery()
             While dr.Read()
                 flag = If(dr("status") = "f", True, False)
                 Exit While
             End While
+            dr.Close()
             If flag Then
                 If md.ModAux = "" Then
                     Dim g As Guid
@@ -2983,6 +2984,7 @@ end", conn)
                 Return flagComplete
             Else
                 MessageBox.Show("Error, check the data and try again." + vbCrLf + "The error is Probably that the Scaffold is Dismantled.", "Important", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                tran.Rollback()
                 Return False
             End If
         Catch ex As Exception
