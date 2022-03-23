@@ -2006,11 +2006,27 @@ Public Class scafoldTarking
                 lblPLF.Text = plf(0)
                 lblPSQF.Text = plf(1)
                 sc.llenarTablaProduct(tblProductosScaffold)
+                calcularTagQTY(tblProductosScaffold, lblTagQTY, 2)
             End If
         Catch ex As Exception
 
         End Try
     End Sub
+    Private Function calcularTagQTY(ByVal tbl As DataGridView, ByVal lbl As System.Windows.Forms.Label, ByVal columnindex As Integer) As Boolean
+        Try
+            Dim cont As Double = 0
+            For Each row As DataGridViewRow In tbl.Rows()
+                If row.Cells(columnindex).Value IsNot Nothing Then
+                    cont += CDec(row.Cells(columnindex).Value)
+                End If
+            Next
+            lbl.Text = "Tag QTY:" + CStr(cont)
+            Return True
+        Catch ex As Exception
+            MsgBox(ex.Message())
+            Return False
+        End Try
+    End Function
     Private Sub txtTag_Leave(sender As Object, e As EventArgs) Handles txtTag.Leave
         sc.tag = txtTag.Text
     End Sub
@@ -2350,6 +2366,7 @@ Public Class scafoldTarking
                 For Each row As Data.DataRow In sc.products.Rows()
                     tblProductosScaffold.Rows.Add(row("idProductScaffold"), row("idProduct"), row("QTY"), row("description"), row("stock"))
                 Next
+                calcularTagQTY(tblProductosScaffold, lblTagQTY, 2)
             Else
                 tblProductosScaffold.Rows.Clear()
             End If

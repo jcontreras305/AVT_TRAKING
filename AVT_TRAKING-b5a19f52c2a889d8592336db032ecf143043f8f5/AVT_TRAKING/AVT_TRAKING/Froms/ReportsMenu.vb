@@ -108,4 +108,14 @@ Public Class ReportsMenu
         Dim tse As New ReportInvoice
         tse.ShowDialog()
     End Sub
+
+    Private Sub Button17_Click(sender As Object, e As EventArgs) Handles Button17.Click
+        Dim tse As New ScaffoldHistoryByJobNo
+        tse.ShowDialog()
+    End Sub
+
+    Private Sub Button16_Click(sender As Object, e As EventArgs) Handles Button16.Click
+        Dim tse As New ScaffoldHistoryByJobAndWO
+        tse.ShowDialog()
+    End Sub
 End Class

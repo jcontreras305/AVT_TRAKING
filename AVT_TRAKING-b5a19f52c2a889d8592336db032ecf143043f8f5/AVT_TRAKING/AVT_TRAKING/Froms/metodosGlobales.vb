@@ -115,7 +115,7 @@ inner join job as jb on cl.idClient = jb.idClient
 inner join projectOrder as po on po.jobNo = jb.jobNo
 inner join workOrder as wo on wo.idPO = po.idPO and wo.jobNo = po.jobNo
 inner join task as tk on tk.idAuxWO = wo.idAuxWO
-inner join hoursWorked as hw on hw.idAux = tk.idAux
+left join hoursWorked as hw on hw.idAux = tk.idAux
 left join materialUsed as mtu on mtu.idAux = tk.idAux
 left join expensesUsed as exu on exu.idAux = tk.idAux
 where (hw.dateWorked between '" + startDate + "' and '" + endDate + "' 

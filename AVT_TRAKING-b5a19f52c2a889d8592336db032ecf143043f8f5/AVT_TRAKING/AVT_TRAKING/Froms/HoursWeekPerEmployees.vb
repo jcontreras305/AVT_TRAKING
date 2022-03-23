@@ -137,7 +137,7 @@ Public Class HoursWeekPerEmployees
         Next
     End Sub
 
-    Private Sub tblExpenses_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles tblExpenses.CellClick
+    Private Sub tblExpenses_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles tblExpenses.CellDoubleClick
         If e.ColumnIndex <> -1 And e.RowIndex <> -1 Then
             Select Case tblExpenses.Columns(e.ColumnIndex).Name
                 Case "Date"
@@ -200,7 +200,7 @@ Public Class HoursWeekPerEmployees
         End If
     End Sub
     Dim flagCellClickRecords As Boolean
-    Private Sub tblRecordEmployee_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles tblRecordEmployee.CellClick
+    Private Sub tblRecordEmployee_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles tblRecordEmployee.CellDoubleClick
         If e.ColumnIndex <> -1 And e.RowIndex <> -1 Then
             Select Case tblRecordEmployee.Columns(e.ColumnIndex).Name
                 Case "Date"
@@ -441,20 +441,26 @@ Public Class HoursWeekPerEmployees
     Private Sub tblRecordEmployee_EditingControlShowing(sender As Object, e As DataGridViewEditingControlShowingEventArgs) Handles tblRecordEmployee.EditingControlShowing
         Dim Index = tblRecordEmployee.CurrentCell.ColumnIndex
         If Index = 2 Or Index = 4 Or Index = 9 Then
-            Dim cb As ComboBox = CType(e.Control, ComboBox)
-            If e.Control IsNot Nothing Then
-                RemoveHandler cb.SelectedIndexChanged, AddressOf cmb_SelectedIndexChangued
-                AddHandler cb.SelectedIndexChanged, AddressOf cmb_SelectedIndexChangued
+            Dim typecell = tblRecordEmployee.CurrentCell.GetType.ToString
+            If Not typecell = "System.Windows.Forms.DataGridViewTextBoxCell" Then
+                Dim cb As ComboBox = CType(e.Control, ComboBox)
+                If e.Control IsNot Nothing Then
+                    RemoveHandler cb.SelectedIndexChanged, AddressOf cmb_SelectedIndexChangued
+                    AddHandler cb.SelectedIndexChanged, AddressOf cmb_SelectedIndexChangued
+                End If
             End If
         End If
     End Sub
 
     Private Sub tblExpenses_EditingControlShowing(sender As Object, e As DataGridViewEditingControlShowingEventArgs) Handles tblExpenses.EditingControlShowing
         If tblExpenses.CurrentCell.ColumnIndex = 2 Then
-            Dim cb As ComboBox = CType(e.Control, ComboBox)
-            If e.Control IsNot Nothing Then
-                RemoveHandler cb.SelectedIndexChanged, AddressOf cmb_SelectedIndexChangued
-                AddHandler cb.SelectedIndexChanged, AddressOf cmb_SelectedIndexChangued
+            Dim typecell = tblExpenses.CurrentCell.GetType.ToString()
+            If Not typecell = "System.Windows.Forms.DataGridViewTextBoxCell" Then
+                Dim cb As ComboBox = CType(e.Control, ComboBox)
+                If e.Control IsNot Nothing Then
+                    RemoveHandler cb.SelectedIndexChanged, AddressOf cmb_SelectedIndexChangued
+                    AddHandler cb.SelectedIndexChanged, AddressOf cmb_SelectedIndexChangued
+                End If
             End If
         End If
     End Sub
@@ -489,20 +495,26 @@ Public Class HoursWeekPerEmployees
     End Sub
 
     Private Sub tblExpenses_KeyPress(sender As Object, e As KeyPressEventArgs) Handles tblExpenses.KeyPress
-        If Asc(e.KeyChar) = Keys.Enter Then
-            If recolectarDatosExpenses() Then
-                cargarDatos(idEmpleado)
-                flagPressCellDateExpense = False
+        Try
+            If Asc(e.KeyChar) = Keys.Enter Then
+                If recolectarDatosExpenses() Then
+                    cargarDatos(idEmpleado)
+                    flagPressCellDateExpense = False
+                End If
+            ElseIf Asc(e.KeyChar) = 3 Then
+                listRowCopy.Clear()
+                For Each row As DataGridViewRow In tblExpenses.SelectedRows
+                    Dim dataCell() As String = {row.Cells("Date").Value.ToString(), row.Cells("Project").Value.ToString(), row.Cells("Expense Code").Value.ToString(), row.Cells("Amount").Value.ToString(), row.Cells("Description").Value.ToString()}
+                    listRowCopyExp.Add(dataCell)
+                Next
+            ElseIf Asc(e.KeyChar) = 22 Then
+                If listRowCopyExp.Count > 0 Then
+                    pegarFilas(listRowCopyExp, tblExpenses)
+                End If
             End If
-        ElseIf Asc(e.KeyChar) = 3 Then
-            listRowCopy.Clear()
-            For Each row As DataGridViewRow In tblExpenses.SelectedRows
-                Dim dataCell() As String = {row.Cells("Date").Value.ToString(), row.Cells("Project").Value.ToString(), row.Cells("Expense Code").Value.ToString(), row.Cells("Amount").Value.ToString(), row.Cells("Description").Value.ToString()}
-                listRowCopyExp.Add(dataCell)
-            Next
-        ElseIf Asc(e.KeyChar) = 22 Then
-            pegarFilas(listRowCopyExp, tblExpenses)
-        End If
+        Catch ex As Exception
+
+        End Try
     End Sub
 
     Public Function recolectarDatosExpenses() As Boolean
@@ -970,13 +982,17 @@ Public Class HoursWeekPerEmployees
             If tblExpenses.SelectedRows.Count > 0 Then
                 For Each row As DataGridViewRow In tblExpenses.SelectedRows
                     Dim idTask As String = ""
-                    For Each fila As DataRow In proyectTable.Rows
-                        If fila.ItemArray(1) = tblExpenses.Rows(row.Index).Cells("Project").Value Then
-                            idTask = fila.ItemArray(0)
-                            Exit For
-                        End If
-                    Next
-                    mtdHPW.deleteExpense(row.Cells("idExpenseUsed").Value, idTask)
+                    If row.Cells(0).Value = "" Then
+                        tblExpenses.Rows.Remove(row)
+                    Else
+                        For Each fila As DataRow In proyectTable.Rows
+                            If fila.ItemArray(1) = tblExpenses.Rows(row.Index).Cells("Project").Value Then
+                                idTask = fila.ItemArray(0)
+                                Exit For
+                            End If
+                        Next
+                        mtdHPW.deleteExpense(row.Cells("idExpenseUsed").Value, idTask)
+                    End If
                 Next
             End If
             mtdHPW.bucarExpensesEmpleado(tblExpenses, idEmpleado)

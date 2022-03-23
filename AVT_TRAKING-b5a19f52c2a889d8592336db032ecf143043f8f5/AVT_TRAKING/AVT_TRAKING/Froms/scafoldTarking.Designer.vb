@@ -215,7 +215,7 @@ Partial Class scafoldTarking
         Me.dtpReqCompScaffold = New System.Windows.Forms.DateTimePicker()
         Me.Panel43 = New System.Windows.Forms.Panel()
         Me.btnFindTagScaffold = New System.Windows.Forms.Button()
-        Me.lblInfoSC = New System.Windows.Forms.Label()
+        Me.lblTagQTY = New System.Windows.Forms.Label()
         Me.btnExcelScaffold = New System.Windows.Forms.Button()
         Me.lblPSQF = New System.Windows.Forms.Label()
         Me.lblPLF = New System.Windows.Forms.Label()
@@ -296,6 +296,13 @@ Partial Class scafoldTarking
         Me.ToHrs = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Panel59 = New System.Windows.Forms.Panel()
         Me.tblScaffoldInformationSM = New System.Windows.Forms.DataGridView()
+        Me.Type = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Width = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Length = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Heigth = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Decks = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.KOs = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Base = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Panel57 = New System.Windows.Forms.Panel()
         Me.TableLayoutPanel2 = New System.Windows.Forms.TableLayoutPanel()
         Me.Panel58 = New System.Windows.Forms.Panel()
@@ -548,13 +555,6 @@ Partial Class scafoldTarking
         Me.btnSaveTable = New System.Windows.Forms.Button()
         Me.btnDeleteRows = New System.Windows.Forms.Button()
         Me.btnSaveAll = New System.Windows.Forms.Button()
-        Me.Type = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Width = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Length = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Heigth = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Decks = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.KOs = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Base = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Panel1.SuspendLayout()
         Me.Panel3.SuspendLayout()
         Me.tabControl1.SuspendLayout()
@@ -2671,7 +2671,7 @@ Partial Class scafoldTarking
         '
         Me.Panel43.BackColor = System.Drawing.Color.FromArgb(CType(CType(83, Byte), Integer), CType(CType(93, Byte), Integer), CType(CType(102, Byte), Integer))
         Me.Panel43.Controls.Add(Me.btnFindTagScaffold)
-        Me.Panel43.Controls.Add(Me.lblInfoSC)
+        Me.Panel43.Controls.Add(Me.lblTagQTY)
         Me.Panel43.Controls.Add(Me.btnExcelScaffold)
         Me.Panel43.Controls.Add(Me.lblPSQF)
         Me.Panel43.Controls.Add(Me.lblPLF)
@@ -2702,14 +2702,14 @@ Partial Class scafoldTarking
         Me.btnFindTagScaffold.TabIndex = 11
         Me.btnFindTagScaffold.UseVisualStyleBackColor = True
         '
-        'lblInfoSC
+        'lblTagQTY
         '
-        Me.lblInfoSC.AutoSize = True
-        Me.lblInfoSC.Location = New System.Drawing.Point(159, 16)
-        Me.lblInfoSC.Name = "lblInfoSC"
-        Me.lblInfoSC.Size = New System.Drawing.Size(35, 13)
-        Me.lblInfoSC.TabIndex = 10
-        Me.lblInfoSC.Text = "Info:"
+        Me.lblTagQTY.AutoSize = True
+        Me.lblTagQTY.Location = New System.Drawing.Point(144, 16)
+        Me.lblTagQTY.Name = "lblTagQTY"
+        Me.lblTagQTY.Size = New System.Drawing.Size(58, 13)
+        Me.lblTagQTY.TabIndex = 10
+        Me.lblTagQTY.Text = "Tag QTY:"
         '
         'btnExcelScaffold
         '
@@ -2719,7 +2719,7 @@ Partial Class scafoldTarking
         Me.btnExcelScaffold.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnExcelScaffold.Image = Global.AVT_TRAKING.My.Resources.Resources.upload2
         Me.btnExcelScaffold.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnExcelScaffold.Location = New System.Drawing.Point(210, 11)
+        Me.btnExcelScaffold.Location = New System.Drawing.Point(267, 11)
         Me.btnExcelScaffold.Name = "btnExcelScaffold"
         Me.btnExcelScaffold.Size = New System.Drawing.Size(132, 23)
         Me.btnExcelScaffold.TabIndex = 9
@@ -3622,6 +3622,48 @@ Partial Class scafoldTarking
         Me.tblScaffoldInformationSM.RowHeadersVisible = False
         Me.tblScaffoldInformationSM.Size = New System.Drawing.Size(464, 56)
         Me.tblScaffoldInformationSM.TabIndex = 18
+        '
+        'Type
+        '
+        Me.Type.HeaderText = "Type"
+        Me.Type.Name = "Type"
+        Me.Type.ReadOnly = True
+        '
+        'Width
+        '
+        Me.Width.HeaderText = "Width"
+        Me.Width.Name = "Width"
+        Me.Width.ReadOnly = True
+        '
+        'Length
+        '
+        Me.Length.HeaderText = "Length"
+        Me.Length.Name = "Length"
+        Me.Length.ReadOnly = True
+        '
+        'Heigth
+        '
+        Me.Heigth.HeaderText = "Heigth"
+        Me.Heigth.Name = "Heigth"
+        Me.Heigth.ReadOnly = True
+        '
+        'Decks
+        '
+        Me.Decks.HeaderText = "Decks"
+        Me.Decks.Name = "Decks"
+        Me.Decks.ReadOnly = True
+        '
+        'KOs
+        '
+        Me.KOs.HeaderText = "KOs"
+        Me.KOs.Name = "KOs"
+        Me.KOs.ReadOnly = True
+        '
+        'Base
+        '
+        Me.Base.HeaderText = "Base"
+        Me.Base.Name = "Base"
+        Me.Base.ReadOnly = True
         '
         'Panel57
         '
@@ -6464,48 +6506,6 @@ Partial Class scafoldTarking
         Me.btnSaveAll.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         Me.btnSaveAll.UseVisualStyleBackColor = True
         '
-        'Type
-        '
-        Me.Type.HeaderText = "Type"
-        Me.Type.Name = "Type"
-        Me.Type.ReadOnly = True
-        '
-        'Width
-        '
-        Me.Width.HeaderText = "Width"
-        Me.Width.Name = "Width"
-        Me.Width.ReadOnly = True
-        '
-        'Length
-        '
-        Me.Length.HeaderText = "Length"
-        Me.Length.Name = "Length"
-        Me.Length.ReadOnly = True
-        '
-        'Heigth
-        '
-        Me.Heigth.HeaderText = "Heigth"
-        Me.Heigth.Name = "Heigth"
-        Me.Heigth.ReadOnly = True
-        '
-        'Decks
-        '
-        Me.Decks.HeaderText = "Decks"
-        Me.Decks.Name = "Decks"
-        Me.Decks.ReadOnly = True
-        '
-        'KOs
-        '
-        Me.KOs.HeaderText = "KOs"
-        Me.KOs.Name = "KOs"
-        Me.KOs.ReadOnly = True
-        '
-        'Base
-        '
-        Me.Base.HeaderText = "Base"
-        Me.Base.Name = "Base"
-        Me.Base.ReadOnly = True
-        '
         'scafoldTarking
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -7184,7 +7184,7 @@ Partial Class scafoldTarking
     Friend WithEvents Panel24 As Panel
     Friend WithEvents Panel23 As Panel
     Friend WithEvents Panel20 As Panel
-    Friend WithEvents lblInfoSC As Label
+    Friend WithEvents lblTagQTY As Label
     Friend WithEvents clmType As DataGridViewTextBoxColumn
     Friend WithEvents clmWidth As DataGridViewTextBoxColumn
     Friend WithEvents clmLength As DataGridViewTextBoxColumn

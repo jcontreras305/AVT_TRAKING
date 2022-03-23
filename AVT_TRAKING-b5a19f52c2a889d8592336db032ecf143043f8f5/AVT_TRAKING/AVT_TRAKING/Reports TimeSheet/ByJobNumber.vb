@@ -18,7 +18,7 @@ Imports System
 Imports System.ComponentModel
 
 
-Public Class POInvoice
+Public Class ByJobNumber
     Inherits ReportClass
     
     Public Sub New()
@@ -27,7 +27,7 @@ Public Class POInvoice
     
     Public Overrides Property ResourceName() As String
         Get
-            Return "POInvoice.rpt"
+            Return "ByJobNumber.rpt"
         End Get
         Set
             'Do nothing
@@ -45,7 +45,7 @@ Public Class POInvoice
     
     Public Overrides Property FullResourceName() As String
         Get
-            Return "AVT_TRAKING.POInvoice.rpt"
+            Return "AVT_TRAKING.ByJobNumber.rpt"
         End Get
         Set
             'Do nothing
@@ -126,7 +126,7 @@ Public Class POInvoice
     
     <Browsable(false),  _
      DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)>  _
-    Public ReadOnly Property Parameter_numberClient() As CrystalDecisions.[Shared].IParameterField
+    Public ReadOnly Property Parameter_startdate() As CrystalDecisions.[Shared].IParameterField
         Get
             Return Me.DataDefinition.ParameterFields(0)
         End Get
@@ -134,7 +134,7 @@ Public Class POInvoice
     
     <Browsable(false),  _
      DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)>  _
-    Public ReadOnly Property Parameter_startDate() As CrystalDecisions.[Shared].IParameterField
+    Public ReadOnly Property Parameter_finaldate() As CrystalDecisions.[Shared].IParameterField
         Get
             Return Me.DataDefinition.ParameterFields(1)
         End Get
@@ -142,7 +142,7 @@ Public Class POInvoice
     
     <Browsable(false),  _
      DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)>  _
-    Public ReadOnly Property Parameter_FinalDate() As CrystalDecisions.[Shared].IParameterField
+    Public ReadOnly Property Parameter_clientnum() As CrystalDecisions.[Shared].IParameterField
         Get
             Return Me.DataDefinition.ParameterFields(2)
         End Get
@@ -150,7 +150,7 @@ Public Class POInvoice
     
     <Browsable(false),  _
      DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)>  _
-    Public ReadOnly Property Parameter_idPO() As CrystalDecisions.[Shared].IParameterField
+    Public ReadOnly Property Parameter_job() As CrystalDecisions.[Shared].IParameterField
         Get
             Return Me.DataDefinition.ParameterFields(3)
         End Get
@@ -163,18 +163,10 @@ Public Class POInvoice
             Return Me.DataDefinition.ParameterFields(4)
         End Get
     End Property
-    
-    <Browsable(false),  _
-     DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)>  _
-    Public ReadOnly Property Parameter_CompanyName() As CrystalDecisions.[Shared].IParameterField
-        Get
-            Return Me.DataDefinition.ParameterFields(5)
-        End Get
-    End Property
 End Class
 
 <System.Drawing.ToolboxBitmapAttribute(GetType(CrystalDecisions.[Shared].ExportOptions), "report.bmp")>  _
-Public Class CachedPOInvoice
+Public Class CachedByJobNumber
     Inherits Component
     Implements ICachedReport
     
@@ -216,7 +208,7 @@ Public Class CachedPOInvoice
     End Property
     
     Public Overridable Function CreateReport() As CrystalDecisions.CrystalReports.Engine.ReportDocument Implements CrystalDecisions.ReportSource.ICachedReport.CreateReport
-        Dim rpt As POInvoice = New POInvoice()
+        Dim rpt As ByJobNumber = New ByJobNumber()
         rpt.Site = Me.Site
         Return rpt
     End Function

@@ -340,214 +340,232 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="Reports\ActiveAv.vb">
+    <Compile Include="Reports TimeSheet\ActiveAv.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>ActiveAv.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Reports\AllJobs.vb">
+    <Compile Include="Reports TimeSheet\AllJobs.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>AllJobs.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Reports\ByJobNumber.vb">
+    <Compile Include="Reports TimeSheet\ByJobNumber.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>ByJobNumber.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Reports\CatsEmployeebyProject.vb">
+    <Compile Include="Reports TimeSheet\CatsEmployeebyProject.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>CatsEmployeebyProject.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Reports\ClientBillingProject.vb">
+    <Compile Include="Reports TimeSheet\ClientBillingProject.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>ClientBillingProject.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Reports\ClientBillingsReCapBYProject.vb">
+    <Compile Include="Reports TimeSheet\ClientBillingsReCapBYProject.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>ClientBillingsReCapBYProject.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Reports\CompleteByDateRange.vb">
+    <Compile Include="Reports TimeSheet\CompleteByDateRange.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>CompleteByDateRange.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Reports\EmployeePeerDiemSheets.vb">
+    <Compile Include="Reports TimeSheet\EmployeePeerDiemSheets.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>EmployeePeerDiemSheets.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Reports\EmployeesTime.vb">
+    <Compile Include="Reports TimeSheet\EmployeesTime.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>EmployeesTime.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Reports\HoursPerWeek.vb">
+    <Compile Include="Reports TimeSheet\HoursPerWeek.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>HoursPerWeek.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Reports\InvoiceProjectOrder.vb">
+    <Compile Include="Reports TimeSheet\InvoiceProjectOrder.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>InvoiceProjectOrder.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Reports\POInvoice1.vb">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>POInvoice.rpt</DependentUpon>
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Reports\ReportAllJob.Designer.vb">
+    <Compile Include="Reports TimeSheet\ReportAllJob.Designer.vb">
       <DependentUpon>ReportAllJob.vb</DependentUpon>
     </Compile>
-    <Compile Include="Reports\ReportAllJob.vb">
+    <Compile Include="Reports TimeSheet\ReportAllJob.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Reports\ReportClientBillingsReCapBYProject.Designer.vb">
+    <Compile Include="Reports TimeSheet\ReportClientBillingsReCapBYProject.Designer.vb">
       <DependentUpon>ReportClientBillingsReCapBYProject.vb</DependentUpon>
     </Compile>
-    <Compile Include="Reports\ReportClientBillingsReCapBYProject.vb">
+    <Compile Include="Reports TimeSheet\ReportClientBillingsReCapBYProject.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Reports\ReportCompleteByDateRange.Designer.vb">
+    <Compile Include="Reports TimeSheet\ReportCompleteByDateRange.Designer.vb">
       <DependentUpon>ReportCompleteByDateRange.vb</DependentUpon>
     </Compile>
-    <Compile Include="Reports\ReportCompleteByDateRange.vb">
+    <Compile Include="Reports TimeSheet\ReportCompleteByDateRange.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Reports\ReportEmployeePerDiem.Designer.vb">
+    <Compile Include="Reports TimeSheet\ReportEmployeePerDiem.Designer.vb">
       <DependentUpon>ReportEmployeePerDiem.vb</DependentUpon>
     </Compile>
-    <Compile Include="Reports\ReportEmployeePerDiem.vb">
+    <Compile Include="Reports TimeSheet\ReportEmployeePerDiem.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Reports\ReportEmployeesTime.Designer.vb">
+    <Compile Include="Reports TimeSheet\ReportEmployeesTime.Designer.vb">
       <DependentUpon>ReportEmployeesTime.vb</DependentUpon>
     </Compile>
-    <Compile Include="Reports\ReportEmployeesTime.vb">
+    <Compile Include="Reports TimeSheet\ReportEmployeesTime.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Reports\ReportHoursPerWeek.Designer.vb">
+    <Compile Include="Reports TimeSheet\ReportHoursPerWeek.Designer.vb">
       <DependentUpon>ReportHoursPerWeek.vb</DependentUpon>
     </Compile>
-    <Compile Include="Reports\ReportHoursPerWeek.vb">
+    <Compile Include="Reports TimeSheet\ReportHoursPerWeek.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Reports\ReportInvoice.Designer.vb">
+    <Compile Include="Reports TimeSheet\ReportInvoice.Designer.vb">
       <DependentUpon>ReportInvoice.vb</DependentUpon>
     </Compile>
-    <Compile Include="Reports\ReportInvoice.vb">
+    <Compile Include="Reports TimeSheet\ReportInvoice.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Reports\ReportJNumber.Designer.vb">
+    <Compile Include="Reports TimeSheet\ReportJNumber.Designer.vb">
       <DependentUpon>ReportJNumber.vb</DependentUpon>
     </Compile>
-    <Compile Include="Reports\ReportJNumber.vb">
+    <Compile Include="Reports TimeSheet\ReportJNumber.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Reports\ReportTimeSheetsPO.Designer.vb">
+    <Compile Include="Reports TimeSheet\ReportTimeSheetsPO.Designer.vb">
       <DependentUpon>ReportTimeSheetsPO.vb</DependentUpon>
     </Compile>
-    <Compile Include="Reports\ReportTimeSheetsPO.vb">
+    <Compile Include="Reports TimeSheet\ReportTimeSheetsPO.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Reports\ReportVacationEmployee.Designer.vb">
+    <Compile Include="Reports TimeSheet\ReportVacationEmployee.Designer.vb">
       <DependentUpon>ReportVacationEmployee.vb</DependentUpon>
     </Compile>
-    <Compile Include="Reports\ReportVacationEmployee.vb">
+    <Compile Include="Reports TimeSheet\ReportVacationEmployee.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Reports\ReportWONotComplete.Designer.vb">
+    <Compile Include="Reports TimeSheet\ReportWONotComplete.Designer.vb">
       <DependentUpon>ReportWONotComplete.vb</DependentUpon>
     </Compile>
-    <Compile Include="Reports\ReportWONotComplete.vb">
+    <Compile Include="Reports TimeSheet\ReportWONotComplete.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Reports\ScaffoldEstimate.vb">
+    <Compile Include="Reports TimeSheet\ScaffoldEstimate.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>ScaffoldEstimate.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Reports\ReportActiveAverageE.Designer.vb">
+    <Compile Include="Reports TimeSheet\ReportActiveAverageE.Designer.vb">
       <DependentUpon>ReportActiveAverageE.vb</DependentUpon>
     </Compile>
-    <Compile Include="Reports\ReportActiveAverageE.vb">
+    <Compile Include="Reports TimeSheet\ReportActiveAverageE.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Reports\ReportCatsEmployeePorject.Designer.vb">
+    <Compile Include="Reports TimeSheet\ReportCatsEmployeePorject.Designer.vb">
       <DependentUpon>ReportCatsEmployeePorject.vb</DependentUpon>
     </Compile>
-    <Compile Include="Reports\ReportCatsEmployeePorject.vb">
+    <Compile Include="Reports TimeSheet\ReportCatsEmployeePorject.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Reports\ReportClientBillingProject.Designer.vb">
+    <Compile Include="Reports TimeSheet\ReportClientBillingProject.Designer.vb">
       <DependentUpon>ReportClientBillingProject.vb</DependentUpon>
     </Compile>
-    <Compile Include="Reports\ReportClientBillingProject.vb">
+    <Compile Include="Reports TimeSheet\ReportClientBillingProject.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Reports\ReportE.vb">
+    <Compile Include="Reports TimeSheet\ReportE.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>ReportE.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Reports\ReporteEmployees.Designer.vb">
+    <Compile Include="Reports TimeSheet\ReporteEmployees.Designer.vb">
       <DependentUpon>ReporteEmployees.vb</DependentUpon>
     </Compile>
-    <Compile Include="Reports\ReporteEmployees.vb">
+    <Compile Include="Reports TimeSheet\ReporteEmployees.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Reports\ReportScaffoldEstimate.Designer.vb">
+    <Compile Include="Reports TimeSheet\ReportScaffoldEstimate.Designer.vb">
       <DependentUpon>ReportScaffoldEstimate.vb</DependentUpon>
     </Compile>
-    <Compile Include="Reports\ReportScaffoldEstimate.vb">
+    <Compile Include="Reports TimeSheet\ReportScaffoldEstimate.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Reports\ReportYearFinalHours.Designer.vb">
+    <Compile Include="Reports TimeSheet\ReportYearFinalHours.Designer.vb">
       <DependentUpon>ReportYearFinalHours.vb</DependentUpon>
     </Compile>
-    <Compile Include="Reports\ReportYearFinalHours.vb">
+    <Compile Include="Reports TimeSheet\ReportYearFinalHours.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Reports\TimeSheetPO.vb">
+    <Compile Include="Reports TimeSheet\TimeSheetPO.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>TimeSheetPO.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Reports\Vacation_Employee.vb">
+    <Compile Include="Reports TimeSheet\Vacation_Employee.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Vacation_Employee.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Reports\WONotComplete.vb">
+    <Compile Include="Reports TimeSheet\WONotComplete.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>WONotComplete.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Reports\YearFinalHours.vb">
+    <Compile Include="Reports TimeSheet\YearFinalHours.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>YearFinalHours.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="RerportsScaffold\SCFHistoryByJobNoAndWo.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SCFHistoryByJobNoAndWo.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="RerportsScaffold\ScaffoldHistoryByJobAndWO.Designer.vb">
+      <DependentUpon>ScaffoldHistoryByJobAndWO.vb</DependentUpon>
+    </Compile>
+    <Compile Include="RerportsScaffold\ScaffoldHistoryByJobAndWO.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RerportsScaffold\ScaffoldHistoryByJobNo.Designer.vb">
+      <DependentUpon>ScaffoldHistoryByJobNo.vb</DependentUpon>
+    </Compile>
+    <Compile Include="RerportsScaffold\ScaffoldHistoryByJobNo.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RerportsScaffold\SCFHistoryByJobNo.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SCFHistoryByJobNo.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="VRT_TRAKINGDataSet.Designer.vb">
@@ -673,128 +691,138 @@
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Reports\ActiveAv.rpt">
+    <EmbeddedResource Include="Reports TimeSheet\ActiveAv.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>ActiveAv.vb</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Reports\AllJobs.rpt">
+    <EmbeddedResource Include="Reports TimeSheet\AllJobs.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>AllJobs.vb</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Reports\ByJobNumber.rpt">
+    <EmbeddedResource Include="Reports TimeSheet\ByJobNumber.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>ByJobNumber.vb</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Reports\CatsEmployeebyProject.rpt">
+    <EmbeddedResource Include="Reports TimeSheet\CatsEmployeebyProject.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>CatsEmployeebyProject.vb</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Reports\ClientBillingProject.rpt">
+    <EmbeddedResource Include="Reports TimeSheet\ClientBillingProject.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>ClientBillingProject.vb</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Reports\ClientBillingsReCapBYProject.rpt">
+    <EmbeddedResource Include="Reports TimeSheet\ClientBillingsReCapBYProject.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>ClientBillingsReCapBYProject.vb</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Reports\CompleteByDateRange.rpt">
+    <EmbeddedResource Include="Reports TimeSheet\CompleteByDateRange.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>CompleteByDateRange.vb</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Reports\EmployeePeerDiemSheets.rpt">
+    <EmbeddedResource Include="Reports TimeSheet\EmployeePeerDiemSheets.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>EmployeePeerDiemSheets.vb</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Reports\EmployeesTime.rpt">
+    <EmbeddedResource Include="Reports TimeSheet\EmployeesTime.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>EmployeesTime.vb</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Reports\HoursPerWeek.rpt">
+    <EmbeddedResource Include="Reports TimeSheet\HoursPerWeek.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>HoursPerWeek.vb</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Reports\InvoiceProjectOrder.rpt">
+    <EmbeddedResource Include="Reports TimeSheet\InvoiceProjectOrder.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>InvoiceProjectOrder.vb</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Reports\POInvoice.rpt">
-      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
-      <LastGenOutput>POInvoice1.vb</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Reports\ReportAllJob.resx">
+    <EmbeddedResource Include="Reports TimeSheet\ReportAllJob.resx">
       <DependentUpon>ReportAllJob.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Reports\ReportClientBillingsReCapBYProject.resx">
+    <EmbeddedResource Include="Reports TimeSheet\ReportClientBillingsReCapBYProject.resx">
       <DependentUpon>ReportClientBillingsReCapBYProject.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Reports\ReportCompleteByDateRange.resx">
+    <EmbeddedResource Include="Reports TimeSheet\ReportCompleteByDateRange.resx">
       <DependentUpon>ReportCompleteByDateRange.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Reports\ReportEmployeePerDiem.resx">
+    <EmbeddedResource Include="Reports TimeSheet\ReportEmployeePerDiem.resx">
       <DependentUpon>ReportEmployeePerDiem.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Reports\ReportEmployeesTime.resx">
+    <EmbeddedResource Include="Reports TimeSheet\ReportEmployeesTime.resx">
       <DependentUpon>ReportEmployeesTime.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Reports\ReportHoursPerWeek.resx">
+    <EmbeddedResource Include="Reports TimeSheet\ReportHoursPerWeek.resx">
       <DependentUpon>ReportHoursPerWeek.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Reports\ReportInvoice.resx">
+    <EmbeddedResource Include="Reports TimeSheet\ReportInvoice.resx">
       <DependentUpon>ReportInvoice.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Reports\ReportJNumber.resx">
+    <EmbeddedResource Include="Reports TimeSheet\ReportJNumber.resx">
       <DependentUpon>ReportJNumber.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Reports\ReportTimeSheetsPO.resx">
+    <EmbeddedResource Include="Reports TimeSheet\ReportTimeSheetsPO.resx">
       <DependentUpon>ReportTimeSheetsPO.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Reports\ReportVacationEmployee.resx">
+    <EmbeddedResource Include="Reports TimeSheet\ReportVacationEmployee.resx">
       <DependentUpon>ReportVacationEmployee.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Reports\ReportWONotComplete.resx">
+    <EmbeddedResource Include="Reports TimeSheet\ReportWONotComplete.resx">
       <DependentUpon>ReportWONotComplete.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Reports\ReportYearFinalHours.resx">
+    <EmbeddedResource Include="Reports TimeSheet\ReportYearFinalHours.resx">
       <DependentUpon>ReportYearFinalHours.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Reports\ScaffoldEstimate.rpt">
+    <EmbeddedResource Include="Reports TimeSheet\ScaffoldEstimate.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>ScaffoldEstimate.vb</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Reports\ReportActiveAverageE.resx">
+    <EmbeddedResource Include="Reports TimeSheet\ReportActiveAverageE.resx">
       <DependentUpon>ReportActiveAverageE.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Reports\ReportCatsEmployeePorject.resx">
+    <EmbeddedResource Include="Reports TimeSheet\ReportCatsEmployeePorject.resx">
       <DependentUpon>ReportCatsEmployeePorject.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Reports\ReportClientBillingProject.resx">
+    <EmbeddedResource Include="Reports TimeSheet\ReportClientBillingProject.resx">
       <DependentUpon>ReportClientBillingProject.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Reports\ReportE.rpt">
+    <EmbeddedResource Include="Reports TimeSheet\ReportE.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>ReportE.vb</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Reports\ReporteEmployees.resx">
+    <EmbeddedResource Include="Reports TimeSheet\ReporteEmployees.resx">
       <DependentUpon>ReporteEmployees.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Reports\ReportScaffoldEstimate.resx">
+    <EmbeddedResource Include="Reports TimeSheet\ReportScaffoldEstimate.resx">
       <DependentUpon>ReportScaffoldEstimate.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Reports\TimeSheetPO.rpt">
+    <EmbeddedResource Include="Reports TimeSheet\TimeSheetPO.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>TimeSheetPO.vb</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Reports\Vacation_Employee.rpt">
+    <EmbeddedResource Include="Reports TimeSheet\Vacation_Employee.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>Vacation_Employee.vb</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Reports\WONotComplete.rpt">
+    <EmbeddedResource Include="Reports TimeSheet\WONotComplete.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>WONotComplete.vb</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Reports\YearFinalHours.rpt">
+    <EmbeddedResource Include="Reports TimeSheet\YearFinalHours.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>YearFinalHours.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RerportsScaffold\SCFHistoryByJobNoAndWo.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>SCFHistoryByJobNoAndWo.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RerportsScaffold\ScaffoldHistoryByJobAndWO.resx">
+      <DependentUpon>ScaffoldHistoryByJobAndWO.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RerportsScaffold\ScaffoldHistoryByJobNo.resx">
+      <DependentUpon>ScaffoldHistoryByJobNo.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RerportsScaffold\SCFHistoryByJobNo.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>SCFHistoryByJobNo.vb</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
