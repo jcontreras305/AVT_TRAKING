@@ -563,7 +563,7 @@ left join clients as cl on cl.idClient = sj.idClient " + If(idClient <> "", " wh
                     Dim cmd As New SqlCommand("
 declare @SubJob as int = " + row.Cells(0).Value().ToString() + "
 declare @numberClientN as int = " + If(array(0) = "", "0", array(0)) + "
-declare @numberClientL as int = " + If(row.Cells(3).Value().ToString() = "", "0", row.Cells(4).Value().ToString()) + "
+declare @numberClientL as int = " + If(row.Cells(3).Value().ToString() = "", "0", row.Cells(3).Value().ToString()) + "
 
 if (select COUNT(*) from subJobs as sj left join clients as cl on cl.idClient = sj.idClient where sj.idSubJob = @SubJob and (cl.numberClient = @numberClientN or cl.numberClient is Null))=0
 begin 
@@ -573,12 +573,12 @@ begin
 	end
 	else if (select count(*) from subJobs as sj  left join clients as cl on cl.idClient = sj.idClient where sj.idSubJob = @SubJob and (cl.numberClient = @numberClientL or cl.numberClient is Null)) = 1
 	begin 
-		update subJobs set [description] ='" + row.Cells(0).Value().ToString() + "', idClient = (select idclient from clients where numberClient = @numberClientN)  where idSubJob=@SubJob
+		update subJobs set [description] ='" + row.Cells(1).Value().ToString() + "', idClient = (select idclient from clients where numberClient = @numberClientN)  where idSubJob=@SubJob
 	end
 end
 else if (select COUNT(*) from subJobs as sj left join clients as cl on cl.idClient = sj.idClient where sj.idSubJob = @SubJob and (cl.numberClient = @numberClientN or cl.numberClient is Null))=1
 begin
-	update subJobs set [description] ='" + row.Cells(0).Value().ToString() + "',idClient = (select idclient from clients where numberClient = @numberClientN) where idSubJob=@SubJob	
+	update subJobs set [description] ='" + row.Cells(1).Value().ToString() + "',idClient = (select idclient from clients where numberClient = @numberClientN) where idSubJob=@SubJob	
 end ", conn)
                     cmd.Transaction = tran
                     If cmd.ExecuteNonQuery = 1 Then

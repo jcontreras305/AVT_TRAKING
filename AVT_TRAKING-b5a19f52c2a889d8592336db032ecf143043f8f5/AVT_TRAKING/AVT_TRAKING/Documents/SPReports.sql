@@ -1273,3 +1273,137 @@ where sc.buildDate between @startDate and @FinalDate and cl.numberClient = @numb
 order by T1.[Tag No] , t1.Task
 end
 go
+--##############################################################################################
+--################## SP  SCF HISTORY BY JOB NO AND UNIT ########################################
+--##############################################################################################
+create proc sp_SCF_History_By_JobNo_And_Unit
+@startDate as date,
+@FinalDate as date,
+@numberClient as int
+as 
+begin
+select sc.tag, sc.location as 'Location',sj.[description] , CONCAT(sci.[type],'- ',sci.[length],' x',sci.width,' x',sci.heigth,'- ',(sci.descks+sci.extraDeck),' Decks') as 'ScaffoldDescription',
+sc.reqComp as 'dateRequest',sc.contact as 'requestBy', isnull(sc.buildDate,'') as 'buildDate', dis.dismantleDate as 'dismantleDate',
+IIF(sc.tag is not null,'Build','Mod') as 'Task',
+IIF(DATEDIFF(DAY,sc.buildDate,isnull(dis.dismantleDate,GETDATE()))= 0,1,DATEDIFF(DAY,sc.buildDate,isnull(dis.dismantleDate,GETDATE()))) as 'Days'
+,ISNULL( (select SUM(ptsc.quantity * pd.PLF) from productTotalScaffold as ptsc 
+	inner join product as pd on pd.idProduct = ptsc.idProduct where ptsc.tag = sc.tag),0) as 'PLF'
+,ISNULL((select SUM(ptsc.quantity * pd.PSQF) from productTotalScaffold as ptsc 
+	inner join product as pd on pd.idProduct = ptsc.idProduct where ptsc.tag = sc.tag),0) as 'PSQF'
+,ISNULL((select sum(ptsc.quantity) from productTotalScaffold as ptsc
+	inner join product as pd on pd.idProduct = ptsc.idProduct where ptsc.tag = sc.tag),0) as 'QTY'
+,CONCAT(ar.idArea,' ',ar.name) as 'Unit'
+,ISNULL(sj.[description],'') as 'SubJob'
+from scaffoldTraking as sc
+left join areas as ar on ar.idArea = sc.idArea
+left join subJobs as sj on sj.idSubJob = sc.idSubJob
+left join scaffoldInformation as sci on sci.tag = sc.tag
+left join dismantle as dis on dis.tag = sc.tag
+inner join task as tk on tk.idAux = sc.idAux
+inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO
+inner join projectOrder as po on po.idPO = wo.idPO and po.jobNo = wo.jobNo
+inner join job as jb on jb.jobNo = po.jobNo 
+inner join clients as cl on cl.idClient = jb.idClient
+where sc.buildDate between @startDate and @FinalDate and cl.numberClient = @numberClient
+end
+go
+
+--##############################################################################################
+--################## SP  SCF HISTORY DISMANTLE #################################################
+--##############################################################################################
+
+create proc sp_SCF_History_Dismantle
+@numberClient as int,
+@all as bit
+as 
+begin
+select 
+sj.[description] as 'Log#',
+sc.tag as 'Tag',
+sc.buildDate as 'Date Ord.',
+sc.reqComp as 'Date Request',
+CONCAT(wo.idWO,' ',tk.task) as 'W.O.N',
+cl.companyName  as 'Copany',
+sc.contact as 'Requestee',
+CONCAT(ar.idArea,' ',ar.Name) as 'Area',
+CONCAT(sci.[type],'- ',sci.[length],' x',sci.width,' x',sci.heigth,'- ',(sci.descks+sci.extraDeck),' Decks') as 'Scaff Original Size',
+sc.location as 'Location'
+from scaffoldTraking as sc 
+left join areas as ar on ar.idArea = sc.idArea
+left join subJobs as sj on sj.idSubJob = sc.idSubJob
+left join scaffoldInformation as sci on sci.tag = sc.tag
+inner join task as tk on tk.idAux = sc.idAux 
+inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO
+inner join projectOrder as po on po.idPO = wo.idPO and po.jobNo = wo.jobNo
+inner join job as jb on jb.jobNo = po.jobNo 
+inner join clients as cl on cl.idClient = jb.idClient
+where cl.numberClient like IIF(@all=1,'%%' , CONVERT(NVARCHAR, @numberClient))
+end
+go
+
+--##############################################################################################
+--################## SP  SCF HISTORY BY JOB ####################################################
+--##############################################################################################
+
+alter proc sp_SCF_History_By_Job
+@numberClient as int,
+@all as bit
+as
+begin
+select 
+sc.tag as 'Tag',
+sj.[description] as 'SubJob',
+sc.location as 'Location',
+CONCAT(sci.[type],'- ',sci.[length],' x',sci.width,' x',sci.heigth,'- ',(sci.descks+sci.extraDeck),' Decks') as 'Scaff Original Size',
+'Build' as 'Task',
+sc.buildDate as 'Start',
+ds.dismantleDate as 'Demo',
+IIF(DATEDIFF(DAY,sc.buildDate,ISNULL(ds.dismantleDate,GETDATE()))=0,1,DATEDIFF(DAY,sc.buildDate,ISNULL(ds.dismantleDate,GETDATE()))) as 'Days'
+,ISNULL((select SUM(ptsc.quantity * pd.PLF) from productScaffold as ptsc 
+	inner join product as pd on pd.idProduct = ptsc.idProduct where ptsc.tag = sc.tag),0) as 'PSQF'
+,ISNULL((select SUM(ptsc.quantity * pd.PSQF) from productScaffold as ptsc 
+	inner join product as pd on pd.idProduct = ptsc.idProduct where ptsc.tag = sc.tag),0) as 'PSQF'
+,ISNULL((select sum(ptsc.quantity) from productScaffold as ptsc
+	inner join product as pd on pd.idProduct = ptsc.idProduct where ptsc.tag = sc.tag),0) as 'QTY'
+from scaffoldTraking as sc 
+left join areas as ar on ar.idArea = sc.tag 
+left join subJobs as sj on sj.idSubJob = sc.idSubJob
+left join scaffoldInformation as sci on sci.tag = sc.tag
+left join dismantle as ds on ds.tag = sc.tag 
+inner join task as tk on tk.idAux = sc.idAux 
+inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO
+inner join projectOrder as po on po.idPO = wo.idPO and po.jobNo = wo.jobNo
+inner join job as jb on jb.jobNo = po.jobNo 
+inner join clients as cl on cl.idClient = jb.idClient
+where cl.numberClient like IIF(@all=1,'%%' , CONVERT(NVARCHAR, @numberClient))
+union all
+select 
+md.tag as 'Tag',
+sj.[description] as 'SubJob',
+sc.location as 'Location',
+CONCAT(sci.[type],'- ',sci.[length],' x',sci.width,' x',sci.heigth,'- ',(sci.descks+sci.extraDeck),' Decks') as 'Scaff Original Size',
+'Mod' as 'Task',
+md.modificationDate as 'Start',
+ds.dismantleDate as 'Demo',
+IIF(DATEDIFF(DAY,sc.buildDate,ISNULL(ds.dismantleDate,GETDATE()))=0,1,DATEDIFF(DAY,sc.buildDate,ISNULL(ds.dismantleDate,GETDATE()))) as 'Days'
+,ISNULL((select SUM(ptmd.quantity * pd.PLF) from productModification as ptmd 
+	inner join product as pd on pd.idProduct = ptmd.idProduct where ptmd.tag = sc.tag),0) as 'PSQF'
+,ISNULL((select SUM(ptmd.quantity * pd.PSQF) from productModification as ptmd
+	inner join product as pd on pd.idProduct = ptmd.idProduct where ptmd.tag = sc.tag),0) as 'PSQF'
+,ISNULL((select sum(ptmd.quantity) from productModification as ptmd
+	inner join product as pd on pd.idProduct = ptmd.idProduct where ptmd.tag = sc.tag),0) as 'QTY'
+from modification md
+left join scaffoldTraking as sc on sc.tag = md.tag
+left join areas as ar on ar.idArea = sc.tag 
+left join subJobs as sj on sj.idSubJob = sc.idSubJob
+left join scaffoldInformation as sci on sci.tag = sc.tag
+left join dismantle as ds on ds.tag = sc.tag 
+inner join task as tk on tk.idAux = sc.idAux 
+inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO
+inner join projectOrder as po on po.idPO = wo.idPO and po.jobNo = wo.jobNo
+inner join job as jb on jb.jobNo = po.jobNo 
+inner join clients as cl on cl.idClient = jb.idClient
+where cl.numberClient like IIF(@all=1,'%%' , CONVERT(NVARCHAR, @numberClient))
+order by [Tag],[Task]
+end
+go

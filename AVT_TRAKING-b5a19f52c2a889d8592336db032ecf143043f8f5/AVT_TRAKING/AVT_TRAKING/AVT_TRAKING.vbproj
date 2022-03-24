@@ -544,6 +544,36 @@
       <DependentUpon>YearFinalHours.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="RerportsScaffold\ScaffoldHisoryByJob.Designer.vb">
+      <DependentUpon>ScaffoldHisoryByJob.vb</DependentUpon>
+    </Compile>
+    <Compile Include="RerportsScaffold\ScaffoldHisoryByJob.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RerportsScaffold\ScaffoldHistoryByJobAndUnit.Designer.vb">
+      <DependentUpon>ScaffoldHistoryByJobAndUnit.vb</DependentUpon>
+    </Compile>
+    <Compile Include="RerportsScaffold\ScaffoldHistoryByJobAndUnit.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RerportsScaffold\ScaffoldHistoryDismantled.Designer.vb">
+      <DependentUpon>ScaffoldHistoryDismantled.vb</DependentUpon>
+    </Compile>
+    <Compile Include="RerportsScaffold\ScaffoldHistoryDismantled.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RerportsScaffold\SCFHistoryByJob.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SCFHistoryByJob.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="RerportsScaffold\SCFHistoryByJobAndUnit.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SCFHistoryByJobAndUnit.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="RerportsScaffold\SCFHistoryByJobNoAndWo.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -566,6 +596,12 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>SCFHistoryByJobNo.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="RerportsScaffold\SCFHistoryDismantled.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SCFHistoryDismantled.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="VRT_TRAKINGDataSet.Designer.vb">
@@ -810,6 +846,23 @@
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>YearFinalHours.vb</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="RerportsScaffold\ScaffoldHisoryByJob.resx">
+      <DependentUpon>ScaffoldHisoryByJob.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RerportsScaffold\ScaffoldHistoryByJobAndUnit.resx">
+      <DependentUpon>ScaffoldHistoryByJobAndUnit.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RerportsScaffold\ScaffoldHistoryDismantled.resx">
+      <DependentUpon>ScaffoldHistoryDismantled.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RerportsScaffold\SCFHistoryByJob.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>SCFHistoryByJob.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RerportsScaffold\SCFHistoryByJobAndUnit.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>SCFHistoryByJobAndUnit.vb</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="RerportsScaffold\SCFHistoryByJobNoAndWo.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>SCFHistoryByJobNoAndWo.vb</LastGenOutput>
@@ -823,6 +876,10 @@
     <EmbeddedResource Include="RerportsScaffold\SCFHistoryByJobNo.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>SCFHistoryByJobNo.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RerportsScaffold\SCFHistoryDismantled.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>SCFHistoryDismantled.vb</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

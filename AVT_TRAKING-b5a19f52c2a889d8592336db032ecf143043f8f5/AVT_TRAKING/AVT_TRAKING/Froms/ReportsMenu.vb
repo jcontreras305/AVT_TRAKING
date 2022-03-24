@@ -118,4 +118,19 @@ Public Class ReportsMenu
         Dim tse As New ScaffoldHistoryByJobAndWO
         tse.ShowDialog()
     End Sub
+
+    Private Sub Button15_Click(sender As Object, e As EventArgs) Handles Button15.Click
+        Dim tse As New ScaffoldHistoryByJobAndUnit
+        tse.ShowDialog()
+    End Sub
+
+    Private Sub Button14_Click(sender As Object, e As EventArgs) Handles Button14.Click
+        Dim tse As New ScaffoldHistoryDismantled
+        tse.ShowDialog()
+    End Sub
+
+    Private Sub Button13_Click(sender As Object, e As EventArgs) Handles Button13.Click
+        Dim tse As New ScaffoldHisoryByJob
+        tse.ShowDialog()
+    End Sub
 End Class
