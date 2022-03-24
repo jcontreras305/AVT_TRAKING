@@ -1177,14 +1177,14 @@ go
 --################## SP  SCF HISTORY BY JOB NO  ################################################
 --##############################################################################################
 
-create proc sp_SCF_History_By_JobNo 
+alter proc sp_SCF_History_By_JobNo 
 @startDate as date,
 @FinalDate as date,
 @numberClient as int
 as
 begin
 select sc.tag, sc.location as 'Location',sj.[description] , CONCAT(sci.[type],'- ',sci.[length],' x',sci.width,' x',sci.heigth,'- ',(sci.descks+sci.extraDeck),' Decks') as 'ScaffoldDescription',
-sc.reqComp as 'dateRequest',sc.contact as 'requestBy', isnull(sc.buildDate,'') as 'buildDate', isnull(dis.dismantleDate,'') as 'dismantleDate',
+sc.reqComp as 'dateRequest',sc.contact as 'requestBy', isnull(sc.buildDate,'') as 'buildDate', dis.dismantleDate as 'dismantleDate',
 IIF(DATEDIFF(DAY,sc.buildDate,isnull(dis.dismantleDate,GETDATE()))= 0,1,DATEDIFF(DAY,sc.buildDate,isnull(dis.dismantleDate,GETDATE()))) as 'Days'
 ,iif(sc.tag is not null,'Build','Mod') as 'Task'
 ,ISNULL( (select SUM(ptsc.quantity * pd.PLF) from productTotalScaffold as ptsc 
@@ -1209,10 +1209,10 @@ end
 go
 
 --##############################################################################################
---################## SP  SCF HISTORY BY JOB NO  ################################################
+--################## SP  SCF HISTORY BY JOB NO AND WO ##########################################
 --##############################################################################################
 
-create proc sp_SCF_History_By_Job_And_WO
+alter proc sp_SCF_History_By_Job_And_WO
 @startDate as date,
 @FinalDate as date,
 @numberClient as int
