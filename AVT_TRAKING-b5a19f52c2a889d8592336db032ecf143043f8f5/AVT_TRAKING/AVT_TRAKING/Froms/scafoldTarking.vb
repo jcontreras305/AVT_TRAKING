@@ -3069,6 +3069,11 @@ Public Class scafoldTarking
             Return True
         Else
             ds = mtdScaffold.llenarDismantleData(tag)
+            If ds.idDismantle <> "" Then
+                btnReportDismantled.Enabled = True
+            Else
+                btnReportDismantled.Enabled = False
+            End If
             Dim scAux = mtdScaffold.llenarScaffold(tag)
             Dim dateAux As New Date(scAux.dateBild.Year, scAux.dateBild.Month, scAux.dateBild.Day)
             ds.scStartDate = dateAux
@@ -4148,6 +4153,53 @@ Public Class scafoldTarking
             cargarDatosByClient(idClientAuxCostumer, txtCompanyName.Text)
         End If
     End Sub
+
+    Private Sub btnReport_Click(sender As Object, e As EventArgs) Handles btnReport.Click
+        Try
+            If sc.tag <> "" Then
+                Dim frp As New ScaffoldProductReport
+                frp.WindowStart = "scf"
+                frp.tagNum = sc.tag
+                frp.ShowDialog()
+            Else
+                MsgBox("Please select a Sacaffold.")
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message)
+        End Try
+    End Sub
+
+    Private Sub btnReportModification_Click(sender As Object, e As EventArgs) Handles btnReportModification.Click
+        Try
+            If md.tag <> "" And md.ModID <> "" Then
+                Dim frp As New ScaffoldProductReport
+                frp.WindowStart = "mod"
+                frp.tagNum = md.tag
+                frp.ModNum = md.ModID
+                frp.ShowDialog()
+            Else
+                MsgBox("Please select a Sacaffold.")
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message)
+        End Try
+    End Sub
+
+    Private Sub btnReportDismantled_Click(sender As Object, e As EventArgs) Handles btnReportDismantled.Click
+        Try
+            If ds.tag <> "" And ds.idDismantle <> "" Then
+                Dim frp As New ScaffoldProductReport
+                frp.WindowStart = "dis"
+                frp.tagNum = ds.tag
+                frp.ShowDialog()
+            Else
+                MsgBox("Please select a Sacaffold.")
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message)
+        End Try
+    End Sub
+
     Public Function cargarDatosByClient(ByVal idClientF As String, ByVal companyNameF As String) As Boolean
         Try
             IdCliente = idClientF

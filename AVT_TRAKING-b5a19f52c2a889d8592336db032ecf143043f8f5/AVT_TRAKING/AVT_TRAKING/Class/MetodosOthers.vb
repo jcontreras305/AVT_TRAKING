@@ -1,5 +1,11 @@
 ﻿Imports System.Data.SqlClient
-
+Imports System.Net
+Imports System.Net.Mail
+Imports System.Diagnostics
+Imports System.Linq
+Imports System.Reflection
+Imports System.Runtime.InteropServices
+Imports Outlook = Microsoft.Office.Interop.Outlook
 Public Class MetodosOthers
     Inherits ConnectioDB
 
@@ -724,6 +730,378 @@ insert into imageClient(name,img,imgDefault)  values(@name,@img,@imgDefault)
             Return Nothing
         Finally
             desconectar()
+        End Try
+    End Function
+    Public Function selectOwnEmail() As String()
+        Try
+            conectar()
+            Dim cmd As New SqlCommand("select * from ownEmail", conn)
+            Dim dr As SqlDataReader = cmd.ExecuteReader
+            Dim ownemail As String = ""
+            Dim ownpass As String = ""
+            While dr.Read()
+                ownemail = dr("email")
+                ownpass = dr("pass")
+                Exit While
+            End While
+            Dim datos() As String = {ownemail, ownpass}
+            dr.Close()
+            Return datos
+        Catch ex As Exception
+            MsgBox(ex.Message())
+            Return {"", ""}
+        Finally
+            desconectar()
+        End Try
+    End Function
+    Public Function selectEmails(ByVal tbl As DataGridView) As Boolean
+        Try
+            conectar()
+            Dim cmd As New SqlCommand("select * from emails", conn)
+            Dim dr As SqlDataReader = cmd.ExecuteReader
+            tbl.Rows.Clear()
+            While dr.Read()
+                tbl.Rows.Add(dr("email"), dr("name"), dr("status"))
+            End While
+            dr.Close()
+            Return True
+        Catch ex As Exception
+            MsgBox(ex.Message())
+            Return False
+        Finally
+            desconectar()
+        End Try
+    End Function
+    Public Function saveUpdateOwnEmail(ByVal email As String, ByVal pass As String) As Boolean
+        Try
+            conectar()
+            Dim cmd As New SqlCommand("if (select count(*) from ownEmail)=0
+begin
+	insert into ownEmail values ('" + email + "','" + pass + "')
+end 
+else if (select count(*) from ownEmail)>0
+begin
+	update ownEmail set email = '" + email + "' ,pass = '" + pass + "'
+end", conn)
+            If cmd.ExecuteNonQuery > 0 Then
+                MsgBox("Successful")
+                Return True
+            Else
+                Return False
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message())
+            Return True
+        Finally
+            desconectar()
+        End Try
+    End Function
+    Public Function saveUpdateOtherEmail(ByVal emailN As String, ByVal NameN As String, ByVal Status As Boolean, ByVal email As String, ByVal name As String) As Boolean
+        Try
+            conectar()
+            Dim cmd As New SqlCommand("if (select count(*) from emails where email = '" + email + "' and name = '" + name + "')=0
+begin
+	insert into emails values ('" + emailN + "','" + NameN + "', " + If(Status, "1", "0") + ")
+end 
+else if (select count(*) from emails where email = '" + email + "' and name = '" + name + "')>0
+begin
+	update emails set email = '" + emailN + "' ,name = '" + NameN + "', status = " + If(Status, "1", "0") + " where email = '" + email + "' and name = '" + name + "'
+end", conn)
+            If cmd.ExecuteNonQuery > 0 Then
+                MsgBox("Successful")
+                Return True
+            Else
+                Return False
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message())
+            Return True
+        Finally
+            desconectar()
+        End Try
+    End Function
+    Public Function deleteOwnEmail() As Boolean
+        Try
+            conectar()
+            Dim cmd As New SqlCommand("delete * from ownEmail")
+            If cmd.ExecuteNonQuery Then
+                Return True
+            Else
+                Return False
+            End If
+        Catch ex As Exception
+            Return False
+        Finally
+            desconectar()
+        End Try
+    End Function
+    Public Function deleteOtherEmail(ByVal email As String, ByVal name As String) As Boolean
+        Try
+            conectar()
+            Dim cmd As New SqlCommand("delete from emails where email = '" + email + "' and name = '" + name + "'", conn)
+            If cmd.ExecuteNonQuery > 0 Then
+                MsgBox("Succesfull")
+                Return True
+            Else
+                Return False
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message())
+            Return False
+        Finally
+            desconectar()
+        End Try
+    End Function
+    Public Function llenarTablaEmailReports(ByVal tbl As DataGridView, ByVal reportName As String) As Boolean
+        Try
+            conectar()
+            Dim cmd As New SqlCommand("select em.email , 
+em.name , 
+isnull( (select lem.statusSend from listEmailReport as lem where lem.email = em.email and lem.reportName='" + reportName + "'),0) as 'statusSend'
+from emails as em where em.status = 1 ", conn)
+            Dim dr As SqlDataReader = cmd.ExecuteReader
+            tbl.Rows.Clear()
+            While dr.Read()
+                tbl.Rows.Add(dr("email"), dr("name"), dr("statusSend"))
+            End While
+            dr.Close()
+            Return True
+        Catch ex As Exception
+            MsgBox(ex.Message())
+            Return False
+        Finally
+            desconectar()
+        End Try
+    End Function
+    Public Function saveUpdateEmailReport(ByVal tbl As DataGridView, ByVal reportName As String, ByVal estatus As Boolean) As Boolean
+        Try
+            conectar()
+            Dim flag As Boolean = True
+            Dim tran As SqlTransaction
+            tran = conn.BeginTransaction
+            For Each row As DataGridViewRow In tbl.SelectedRows()
+                Dim cmd As New SqlCommand("
+if (select COUNT(*) from ReportEmail where reportName = '" + reportName + "')=0
+begin 
+	insert into ReportEmail values ('" + reportName + "','','')
+end
+if (select COUNT(*) from listEmailReport as em where email='" + row.Cells(0).Value + "' and reportName= '" + reportName + "' ) = 0
+begin 
+	insert into listEmailReport values ('" + reportName + "','" + row.Cells(0).Value + "'," + If(estatus, "1", "0") + ")
+end
+else if (select COUNT(*) from listEmailReport as em where em.email='" + row.Cells(0).Value + "' and em.reportName= '" + reportName + "' ) >0
+begin 
+	update listEmailReport set statusSend = " + If(estatus, "1", "0") + " where email='" + row.Cells(0).Value + "' and reportName= '" + reportName + "' 
+end", conn)
+                cmd.Transaction = tran
+                If cmd.ExecuteNonQuery() > 0 Then
+                    flag = True
+                Else
+                    tran.Rollback()
+                    flag = False
+                    Exit For
+                End If
+            Next
+            If flag Then
+                tran.Commit()
+                MsgBox("Successful")
+                Return flag
+            Else
+                tran.Rollback()
+                MsgBox("Error")
+                Return flag
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message())
+            Return False
+        Finally
+            desconectar()
+        End Try
+    End Function
+    Public Function saveUpdateEmailReport(ByVal row As DataGridViewRow, ByVal reportName As String) As Boolean
+        Try
+            conectar()
+
+            Dim cmd As New SqlCommand("if (select COUNT(*) from ReportEmail where reportName = '" + reportName + "')=0
+begin 
+	insert into ReportEmail values ('" + reportName + "','','')
+end
+if (select COUNT(*) from listEmailReport as em where email='" + row.Cells(0).Value + "' and reportName= '" + reportName + "' ) = 0
+begin 
+	insert into listEmailReport values ('" + reportName + "','" + row.Cells(0).Value + "'," + If(row.Cells(2).Value, "1", "0") + ")
+end
+else if (select COUNT(*) from listEmailReport as em where em.email='" + row.Cells(0).Value + "' and em.reportName= '" + reportName + "' ) >0
+begin 
+	update listEmailReport set statusSend = " + If(row.Cells(2).Value, "1", "0") + " where email='" + row.Cells(0).Value + "' and reportName= '" + reportName + "' 
+end", conn)
+            If cmd.ExecuteNonQuery() > 0 Then
+                MsgBox("Successful")
+                Return True
+            Else
+                MsgBox("Error")
+                Return False
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message())
+            Return False
+        Finally
+            desconectar()
+        End Try
+    End Function
+    Public Function selectSubjectEmail(ByVal reportName As String) As String()
+        Try
+            conectar()
+            Dim cmd As New SqlCommand("select [subject] , body from ReportEmail where reportName = '" + reportName + "'", conn)
+            Dim dr As SqlDataReader = cmd.ExecuteReader()
+            Dim email() As String = {"", ""}
+            While dr.Read()
+                email(0) = If(dr("subject") Is DBNull.Value, "", dr("subject"))
+                email(1) = If(dr("body") Is DBNull.Value, "", dr("body"))
+            End While
+            dr.Close()
+            Return email
+        Catch ex As Exception
+            MsgBox(ex.Message())
+            Return {"", ""}
+        End Try
+    End Function
+    Public Function saveUpdateSubjet(ByVal reportName As String, ByVal subject As String, ByVal body As String) As Boolean
+        Try
+            conectar()
+            Dim cmd As New SqlCommand("if (select COUNT(*) from ReportEmail where reportName = '" + reportName + "')=0
+begin 
+	insert into ReportEmail values ('" + reportName + "','" + subject + "','" + body + "')
+end
+else if (select COUNT(*) from ReportEmail where reportName = '" + reportName + "')>0
+begin
+	update ReportEmail set [subject] = '" + subject + "' , body = '" + body + "' where reportName = '" + reportName + "'
+end", conn)
+            If cmd.ExecuteNonQuery > 0 Then
+                Return True
+            Else
+                Return False
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message)
+            Return False
+        Finally
+            desconectar()
+        End Try
+    End Function
+    Public Function sendEmail(ByVal ownEmail As String, ByVal pswrdOwnEmail As String, ByVal subject As String, ByVal body As String, ByVal emails As List(Of String), ByVal document As System.IO.MemoryStream) As Boolean
+        Try
+            Dim mail As New MailMessage
+            Dim sender As New SmtpClient
+            mail.To.Clear()
+            mail.Body = ""
+            mail.Subject = ""
+            mail.Body = body
+            mail.Subject = subject
+            mail.IsBodyHtml = True
+            For Each email As String In emails
+                mail.To.Add(Trim(email))
+            Next
+
+            If System.IO.Directory.Exists("C:\TMP") Then
+                Dim ArchivoPDF As New System.IO.FileStream("C:\TMP\Rerport.pdf", IO.FileMode.Create)
+                ArchivoPDF.Write(document.ToArray, 0, document.ToArray.Length)
+                ArchivoPDF.Flush()
+                Dim doc As Net.Mail.Attachment = New Net.Mail.Attachment("C:\TMP\Rerport.pdf")
+                mail.Attachments.Add(doc)
+            End If
+            mail.From = New MailAddress(Trim(ownEmail))
+            sender.Credentials = New NetworkCredential(ownEmail, pswrdOwnEmail)
+            Dim domain As String() = Trim(ownEmail).Split("@")
+            sender.Host = "smtp." & domain(1)
+            sender.Port = 587
+            sender.EnableSsl = True
+            sender.Send(mail)
+            Return True
+        Catch ex As Exception
+            MsgBox(ex.Message())
+            Return False
+        End Try
+    End Function
+    Dim mail As New MailMessage
+    Dim sender As New SmtpClient
+    Public Function sendEmail(ByVal ownEmail As String, ByVal pswrdOwnEmail As String, ByVal subject As String, ByVal body As String, ByVal emails As List(Of String), ByVal route As String) As Boolean
+        Try
+            Dim domain As String() = Trim(ownEmail).Split("@")
+            If domain(1) = "outlook.com" Or domain(1) = "brockgroup.com .com" Then
+                Dim app As Outlook.Application
+                If Process.GetProcessesByName("OUTLOOK").Count() > 0 Then 'si es > 0 la apliaccion ya esta abierta de lo contrario incializa una nueva
+                    app = DirectCast(Marshal.GetActiveObject("Outlook.Application"), Outlook.Application)
+                Else 'si no esta la aplicacion abierta o enlazada con el correo pasamos el correo y la contrasenia para abrirlo 
+                    app = New Outlook.Application()
+                    Dim ns As Outlook.NameSpace = app.GetNamespace("MAPI")
+                    ns.Logon(ownEmail, pswrdOwnEmail, Missing.Value, Missing.Value)
+                    ns = Nothing
+                End If
+                Dim OutlookMessage As Outlook.MailItem
+                Try
+                    OutlookMessage = app.CreateItem(Outlook.OlItemType.olMailItem) 'creamos un email nuevo 
+                    Dim Recipents As Outlook.Recipients = OutlookMessage.Recipients 'creamos la lista de correos a enviar 
+                    For Each email As String In emails
+                        Recipents.Add(Trim(email)) ' los agregamos
+                    Next
+                    OutlookMessage.Attachments.Add(route) ' adjuntamos el archivo
+                    OutlookMessage.Subject = subject ' pegamos el asunto del email
+                    OutlookMessage.Body = body ' pegamos el cuerpo del email
+                    OutlookMessage.BodyFormat = Outlook.OlBodyFormat.olFormatHTML ' le asignamos un formato para ser leido en el navegador
+                    OutlookMessage.Send() ' lo enviamos 
+                    MsgBox("Successful") ' de no haber problemas muestra mensaje de que se a enviado
+                    Return True
+                Catch ex As Exception
+                    MessageBox.Show("The mail could not be sent." + vbCrLf + ex.Message) 'si hay un error lo mostrara en pantalla
+                    Return False
+                Finally
+                    OutlookMessage = Nothing
+                    app = Nothing
+                End Try
+            Else
+                Try
+                    mail.To.Clear() ' limpiamos los valores por si es que aun tiene
+                    mail.Body = ""
+                    mail.Subject = ""
+                    mail.Body = body ' asignamos el asunto del email
+                    mail.Subject = subject ' asignamos el cuerpo del email
+                    mail.IsBodyHtml = True ' le asignamos un formato para ser leido en el navegador
+                    For Each email As String In emails 'insertamos los correos que seran los remitentes
+                        mail.To.Add(Trim(email))
+                    Next
+                    If System.IO.File.Exists(route) Then
+                        Dim doc As Net.Mail.Attachment = New Net.Mail.Attachment(route) 'inicializamos el poder agregar archivos adjuntos
+                        mail.Attachments.Add(doc) ' pegamos el archivo con la ruta del archivo
+                    End If
+                    mail.From = New MailAddress(Trim(ownEmail)) ' agrefamos nuestras referencias 
+                    sender.Credentials = New NetworkCredential(Trim(ownEmail), Trim(pswrdOwnEmail)) ' correo del emisor y su contrasenia
+
+                    If domain(1) = "gmail.com" Then ' virificamos cual es el dominio del correo emisor 
+                        sender.Host = "smtp." & domain(1) ' asignamos el dominio del cual sera enviado el email
+                        sender.EnableSsl = True 'activamos la seguridad del mensaje 
+                        sender.Port = 587 ' asignamos el puerto de salida
+                    ElseIf domain(1) = "outlook.com" Then
+                        sender.Host = "smtp-mail." & domain(1)
+                        sender.EnableSsl = True
+                        sender.Port = 587
+                        ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls 'en el caso especiasl de outlook necesita de seguridad TLS (es igual que ssl pero mas seguro y nuevo)
+                    Else
+                        sender.Host = "smtp.mail" & domain(1)
+                        sender.EnableSsl = True
+                        sender.Port = 587 ' 25 o 265 
+                    End If
+                    sender.Send(mail) ' enviamos el correo
+                    MsgBox("Successful") ' de ser enviado mostrara este mensaje 
+                    Return True
+                Catch ex As Exception
+                    MsgBox("The mail could not be sent.")
+                    mail = Nothing
+                    Return False
+                End Try
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message())
+            Return False
         End Try
     End Function
 End Class

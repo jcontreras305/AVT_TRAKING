@@ -12,6 +12,7 @@ Public Class Others
         mtdOthers.llenarCostCode(lstCostCode)
         mtdOthers.llenarListMatClasss(lstMatClass)
         mtdOthers.llenarImageClientTable(tblImage)
+        llenarEmails()
         btnAddImg.Enabled = False
     End Sub
 
@@ -441,5 +442,87 @@ Public Class Others
         Else
             MessageBox.Show("Please select a Item from the list.", "Important", MessageBoxButtons.OK, MessageBoxIcon.Information)
         End If
+    End Sub
+
+    Private Sub btnSaveEmail_Click(sender As Object, e As EventArgs) Handles btnSaveOwnEmail.Click
+        mtdOthers.saveUpdateOwnEmail(txtOwnEmail.Text, txtPassOwnEmail.Text)
+    End Sub
+
+    Private Sub btnSaveEmailOthher_Click(sender As Object, e As EventArgs) Handles btnSaveOtherEmail.Click
+        Try
+            If mtdOthers.saveUpdateOtherEmail(txtEmailOther.Text, txtNameEmail.Text, chbStatusEmail.Checked, lastEmail, lastName) Then
+                txtEmailOther.Text = ""
+                txtNameEmail.Text = ""
+                btnCancel.Visible = False
+                btnSaveOtherEmail.Text = "Save"
+                mtdOthers.selectEmails(tblEmails)
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message())
+        End Try
+    End Sub
+    Private Sub btnDeleteEmail_Click(sender As Object, e As EventArgs) Handles btnDeleteOwnEmail.Click
+        Try
+            If mtdOthers.deleteOwnEmail() Then
+                txtOwnEmail.Text = ""
+                txtPassOwnEmail.Text = ""
+            End If
+        Catch ex As Exception
+
+        End Try
+    End Sub
+    Public Sub llenarEmails()
+        Dim datosOwnEmail() As String = mtdOthers.selectOwnEmail()
+        txtOwnEmail.Text = datosOwnEmail(0)
+        txtPassOwnEmail.Text = datosOwnEmail(1)
+        mtdOthers.selectEmails(tblEmails)
+    End Sub
+    Dim flag As Boolean = True
+    Dim lastEmail As String = ""
+    Dim lastName As String = ""
+    Private Sub btnVerPass_Click(sender As Object, e As EventArgs) Handles btnVerPass.Click
+        Try
+            If flag = True Then ' si flag esta en verdadero entra y desactiva la proteccion 
+                txtPassOwnEmail.UseSystemPasswordChar = False
+                flag = False
+            Else
+                txtPassOwnEmail.UseSystemPasswordChar = True
+                flag = True
+            End If
+        Catch ex As Exception
+
+        End Try
+    End Sub
+    Private Sub tblEmails_CellMouseDoubleClick(sender As Object, e As DataGridViewCellMouseEventArgs) Handles tblEmails.CellMouseDoubleClick
+        Try
+            lastEmail = tblEmails.CurrentRow.Cells(0).Value
+            txtEmailOther.Text = tblEmails.CurrentRow.Cells(0).Value
+            lastName = tblEmails.CurrentRow.Cells(1).Value
+            txtNameEmail.Text = tblEmails.CurrentRow.Cells(1).Value
+            chbStatusEmail.Checked = tblEmails.CurrentRow.Cells(2).Value
+            btnCancel.Visible = True
+            btnSaveOtherEmail.Text = "Update"
+        Catch ex As Exception
+
+        End Try
+    End Sub
+
+    Private Sub btnDeleteOtherEmail_Click(sender As Object, e As EventArgs) Handles btnDeleteOtherEmail.Click
+        If txtNameEmail.Text <> "" And txtEmailOther.Text <> "" Then
+            If mtdOthers.deleteOtherEmail(lastEmail, lastName) Then
+                txtEmailOther.Text = ""
+                txtNameEmail.Text = ""
+                btnCancel.Visible = False
+                mtdOthers.selectEmails(tblEmails)
+            End If
+        End If
+    End Sub
+
+    Private Sub btnCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click
+        lastEmail = ""
+        lastName = ""
+        txtEmailOther.Text = ""
+        txtNameEmail.Text = ""
+        btnCancel.Visible = False
     End Sub
 End Class

@@ -22,16 +22,16 @@ Partial Class scafoldTarking
     'No lo modifique con el editor de código.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle9 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle10 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle11 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle12 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle13 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle14 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle15 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle16 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle17 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle18 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle19 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle20 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.Panel3 = New System.Windows.Forms.Panel()
         Me.tabControl1 = New System.Windows.Forms.TabControl()
@@ -214,6 +214,7 @@ Partial Class scafoldTarking
         Me.Label51 = New System.Windows.Forms.Label()
         Me.dtpReqCompScaffold = New System.Windows.Forms.DateTimePicker()
         Me.Panel43 = New System.Windows.Forms.Panel()
+        Me.btnReport = New System.Windows.Forms.Button()
         Me.btnFindTagScaffold = New System.Windows.Forms.Button()
         Me.lblTagQTY = New System.Windows.Forms.Label()
         Me.btnExcelScaffold = New System.Windows.Forms.Button()
@@ -555,6 +556,8 @@ Partial Class scafoldTarking
         Me.btnSaveTable = New System.Windows.Forms.Button()
         Me.btnDeleteRows = New System.Windows.Forms.Button()
         Me.btnSaveAll = New System.Windows.Forms.Button()
+        Me.btnReportModification = New System.Windows.Forms.Button()
+        Me.btnReportDismantled = New System.Windows.Forms.Button()
         Me.Panel1.SuspendLayout()
         Me.Panel3.SuspendLayout()
         Me.tabControl1.SuspendLayout()
@@ -750,7 +753,7 @@ Partial Class scafoldTarking
         Me.Panel1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel1.Location = New System.Drawing.Point(0, 0)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(949, 590)
+        Me.Panel1.Size = New System.Drawing.Size(972, 590)
         Me.Panel1.TabIndex = 1
         '
         'Panel3
@@ -759,7 +762,7 @@ Partial Class scafoldTarking
         Me.Panel3.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel3.Location = New System.Drawing.Point(0, 92)
         Me.Panel3.Name = "Panel3"
-        Me.Panel3.Size = New System.Drawing.Size(949, 498)
+        Me.Panel3.Size = New System.Drawing.Size(972, 498)
         Me.Panel3.TabIndex = 2
         '
         'tabControl1
@@ -780,7 +783,7 @@ Partial Class scafoldTarking
         Me.tabControl1.Location = New System.Drawing.Point(0, 0)
         Me.tabControl1.Name = "tabControl1"
         Me.tabControl1.SelectedIndex = 0
-        Me.tabControl1.Size = New System.Drawing.Size(949, 498)
+        Me.tabControl1.Size = New System.Drawing.Size(972, 498)
         Me.tabControl1.TabIndex = 0
         '
         'tbpInComing
@@ -791,7 +794,7 @@ Partial Class scafoldTarking
         Me.tbpInComing.Location = New System.Drawing.Point(4, 22)
         Me.tbpInComing.Name = "tbpInComing"
         Me.tbpInComing.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbpInComing.Size = New System.Drawing.Size(941, 472)
+        Me.tbpInComing.Size = New System.Drawing.Size(964, 472)
         Me.tbpInComing.TabIndex = 0
         Me.tbpInComing.Text = "In Coming"
         '
@@ -802,7 +805,7 @@ Partial Class scafoldTarking
         Me.Panel4.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel4.Location = New System.Drawing.Point(3, 3)
         Me.Panel4.Name = "Panel4"
-        Me.Panel4.Size = New System.Drawing.Size(935, 466)
+        Me.Panel4.Size = New System.Drawing.Size(958, 466)
         Me.Panel4.TabIndex = 0
         '
         'Panel6
@@ -811,7 +814,7 @@ Partial Class scafoldTarking
         Me.Panel6.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel6.Location = New System.Drawing.Point(251, 0)
         Me.Panel6.Name = "Panel6"
-        Me.Panel6.Size = New System.Drawing.Size(684, 466)
+        Me.Panel6.Size = New System.Drawing.Size(707, 466)
         Me.Panel6.TabIndex = 12
         '
         'Panel93
@@ -821,7 +824,7 @@ Partial Class scafoldTarking
         Me.Panel93.ForeColor = System.Drawing.SystemColors.ControlText
         Me.Panel93.Location = New System.Drawing.Point(0, 0)
         Me.Panel93.Name = "Panel93"
-        Me.Panel93.Size = New System.Drawing.Size(684, 466)
+        Me.Panel93.Size = New System.Drawing.Size(707, 466)
         Me.Panel93.TabIndex = 0
         '
         'tblInComing
@@ -829,18 +832,18 @@ Partial Class scafoldTarking
         Me.tblInComing.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.tblInComing.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.tblInComing.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.QTY, Me.ID, Me.UM, Me.UMCost, Me.ProductDescription, Me.idProductInComing})
-        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle1.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.ControlLightLight
-        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.tblInComing.DefaultCellStyle = DataGridViewCellStyle1
+        DataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle11.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle11.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle11.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle11.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle11.SelectionForeColor = System.Drawing.SystemColors.ControlLightLight
+        DataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.tblInComing.DefaultCellStyle = DataGridViewCellStyle11
         Me.tblInComing.Dock = System.Windows.Forms.DockStyle.Fill
         Me.tblInComing.Location = New System.Drawing.Point(0, 0)
         Me.tblInComing.Name = "tblInComing"
-        Me.tblInComing.Size = New System.Drawing.Size(684, 466)
+        Me.tblInComing.Size = New System.Drawing.Size(707, 466)
         Me.tblInComing.TabIndex = 10
         '
         'QTY
@@ -1090,7 +1093,7 @@ Partial Class scafoldTarking
         Me.tbpOutGoing.Location = New System.Drawing.Point(4, 22)
         Me.tbpOutGoing.Name = "tbpOutGoing"
         Me.tbpOutGoing.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbpOutGoing.Size = New System.Drawing.Size(941, 472)
+        Me.tbpOutGoing.Size = New System.Drawing.Size(964, 472)
         Me.tbpOutGoing.TabIndex = 1
         Me.tbpOutGoing.Text = "Out Going"
         '
@@ -1101,7 +1104,7 @@ Partial Class scafoldTarking
         Me.Panel7.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel7.Location = New System.Drawing.Point(3, 3)
         Me.Panel7.Name = "Panel7"
-        Me.Panel7.Size = New System.Drawing.Size(935, 466)
+        Me.Panel7.Size = New System.Drawing.Size(958, 466)
         Me.Panel7.TabIndex = 0
         '
         'Panel9
@@ -1110,7 +1113,7 @@ Partial Class scafoldTarking
         Me.Panel9.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel9.Location = New System.Drawing.Point(293, 0)
         Me.Panel9.Name = "Panel9"
-        Me.Panel9.Size = New System.Drawing.Size(642, 466)
+        Me.Panel9.Size = New System.Drawing.Size(665, 466)
         Me.Panel9.TabIndex = 1
         '
         'tblOutGoing
@@ -1121,7 +1124,7 @@ Partial Class scafoldTarking
         Me.tblOutGoing.Dock = System.Windows.Forms.DockStyle.Fill
         Me.tblOutGoing.Location = New System.Drawing.Point(0, 0)
         Me.tblOutGoing.Name = "tblOutGoing"
-        Me.tblOutGoing.Size = New System.Drawing.Size(642, 466)
+        Me.tblOutGoing.Size = New System.Drawing.Size(665, 466)
         Me.tblOutGoing.TabIndex = 0
         '
         'QTYOOut
@@ -1449,7 +1452,7 @@ Partial Class scafoldTarking
         Me.tbpScaffoldTraking.Controls.Add(Me.Panel41)
         Me.tbpScaffoldTraking.Location = New System.Drawing.Point(4, 22)
         Me.tbpScaffoldTraking.Name = "tbpScaffoldTraking"
-        Me.tbpScaffoldTraking.Size = New System.Drawing.Size(941, 472)
+        Me.tbpScaffoldTraking.Size = New System.Drawing.Size(964, 472)
         Me.tbpScaffoldTraking.TabIndex = 7
         Me.tbpScaffoldTraking.Text = "ScaffoldTraking"
         Me.tbpScaffoldTraking.UseVisualStyleBackColor = True
@@ -1460,7 +1463,7 @@ Partial Class scafoldTarking
         Me.Panel41.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel41.Location = New System.Drawing.Point(0, 0)
         Me.Panel41.Name = "Panel41"
-        Me.Panel41.Size = New System.Drawing.Size(941, 472)
+        Me.Panel41.Size = New System.Drawing.Size(964, 472)
         Me.Panel41.TabIndex = 0
         '
         'TableLayoutPanel8
@@ -1478,7 +1481,7 @@ Partial Class scafoldTarking
         Me.TableLayoutPanel8.RowCount = 2
         Me.TableLayoutPanel8.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 90.0!))
         Me.TableLayoutPanel8.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10.0!))
-        Me.TableLayoutPanel8.Size = New System.Drawing.Size(941, 472)
+        Me.TableLayoutPanel8.Size = New System.Drawing.Size(964, 472)
         Me.TableLayoutPanel8.TabIndex = 3
         '
         'Panel42
@@ -1486,9 +1489,9 @@ Partial Class scafoldTarking
         Me.Panel42.Controls.Add(Me.Panel52)
         Me.Panel42.Controls.Add(Me.Panel51)
         Me.Panel42.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel42.Location = New System.Drawing.Point(708, 3)
+        Me.Panel42.Location = New System.Drawing.Point(726, 3)
         Me.Panel42.Name = "Panel42"
-        Me.Panel42.Size = New System.Drawing.Size(230, 418)
+        Me.Panel42.Size = New System.Drawing.Size(235, 418)
         Me.Panel42.TabIndex = 0
         '
         'Panel52
@@ -1497,7 +1500,7 @@ Partial Class scafoldTarking
         Me.Panel52.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel52.Location = New System.Drawing.Point(0, 28)
         Me.Panel52.Name = "Panel52"
-        Me.Panel52.Size = New System.Drawing.Size(230, 390)
+        Me.Panel52.Size = New System.Drawing.Size(235, 390)
         Me.Panel52.TabIndex = 1
         '
         'tblProductosScaffold
@@ -1508,7 +1511,7 @@ Partial Class scafoldTarking
         Me.tblProductosScaffold.Dock = System.Windows.Forms.DockStyle.Fill
         Me.tblProductosScaffold.Location = New System.Drawing.Point(0, 0)
         Me.tblProductosScaffold.Name = "tblProductosScaffold"
-        Me.tblProductosScaffold.Size = New System.Drawing.Size(230, 390)
+        Me.tblProductosScaffold.Size = New System.Drawing.Size(235, 390)
         Me.tblProductosScaffold.TabIndex = 0
         '
         'clmIdProductScaffold
@@ -1548,7 +1551,7 @@ Partial Class scafoldTarking
         Me.Panel51.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.Panel51.Location = New System.Drawing.Point(0, 0)
         Me.Panel51.Name = "Panel51"
-        Me.Panel51.Size = New System.Drawing.Size(230, 28)
+        Me.Panel51.Size = New System.Drawing.Size(235, 28)
         Me.Panel51.TabIndex = 0
         '
         'Label54
@@ -1573,7 +1576,7 @@ Partial Class scafoldTarking
         Me.TableLayoutPanel9.RowCount = 2
         Me.TableLayoutPanel9.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 40.0!))
         Me.TableLayoutPanel9.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 60.0!))
-        Me.TableLayoutPanel9.Size = New System.Drawing.Size(699, 418)
+        Me.TableLayoutPanel9.Size = New System.Drawing.Size(717, 418)
         Me.TableLayoutPanel9.TabIndex = 2
         '
         'Panel72
@@ -1582,7 +1585,7 @@ Partial Class scafoldTarking
         Me.Panel72.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel72.Location = New System.Drawing.Point(3, 3)
         Me.Panel72.Name = "Panel72"
-        Me.Panel72.Size = New System.Drawing.Size(693, 161)
+        Me.Panel72.Size = New System.Drawing.Size(711, 161)
         Me.Panel72.TabIndex = 1
         '
         'TableLayoutPanel10
@@ -1597,7 +1600,7 @@ Partial Class scafoldTarking
         Me.TableLayoutPanel10.RowCount = 2
         Me.TableLayoutPanel10.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 73.0!))
         Me.TableLayoutPanel10.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 27.0!))
-        Me.TableLayoutPanel10.Size = New System.Drawing.Size(693, 161)
+        Me.TableLayoutPanel10.Size = New System.Drawing.Size(711, 161)
         Me.TableLayoutPanel10.TabIndex = 0
         '
         'Panel73
@@ -1606,7 +1609,7 @@ Partial Class scafoldTarking
         Me.Panel73.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel73.Location = New System.Drawing.Point(3, 3)
         Me.Panel73.Name = "Panel73"
-        Me.Panel73.Size = New System.Drawing.Size(687, 111)
+        Me.Panel73.Size = New System.Drawing.Size(705, 111)
         Me.Panel73.TabIndex = 0
         '
         'TableLayoutPanel11
@@ -1624,7 +1627,7 @@ Partial Class scafoldTarking
         Me.TableLayoutPanel11.RowCount = 1
         Me.TableLayoutPanel11.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
         Me.TableLayoutPanel11.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 111.0!))
-        Me.TableLayoutPanel11.Size = New System.Drawing.Size(687, 111)
+        Me.TableLayoutPanel11.Size = New System.Drawing.Size(705, 111)
         Me.TableLayoutPanel11.TabIndex = 0
         '
         'Panel69
@@ -1642,7 +1645,7 @@ Partial Class scafoldTarking
         Me.Panel69.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.Panel69.Location = New System.Drawing.Point(3, 3)
         Me.Panel69.Name = "Panel69"
-        Me.Panel69.Size = New System.Drawing.Size(223, 105)
+        Me.Panel69.Size = New System.Drawing.Size(229, 105)
         Me.Panel69.TabIndex = 0
         '
         'Label34
@@ -1660,7 +1663,7 @@ Partial Class scafoldTarking
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.txtTag.Location = New System.Drawing.Point(54, 3)
         Me.txtTag.Name = "txtTag"
-        Me.txtTag.Size = New System.Drawing.Size(166, 21)
+        Me.txtTag.Size = New System.Drawing.Size(172, 21)
         Me.txtTag.TabIndex = 14
         '
         'cmbJobCAT
@@ -1671,7 +1674,7 @@ Partial Class scafoldTarking
         Me.cmbJobCAT.FormattingEnabled = True
         Me.cmbJobCAT.Location = New System.Drawing.Point(54, 26)
         Me.cmbJobCAT.Name = "cmbJobCAT"
-        Me.cmbJobCAT.Size = New System.Drawing.Size(166, 21)
+        Me.cmbJobCAT.Size = New System.Drawing.Size(172, 21)
         Me.cmbJobCAT.TabIndex = 15
         '
         'cmbAreaID
@@ -1682,7 +1685,7 @@ Partial Class scafoldTarking
         Me.cmbAreaID.FormattingEnabled = True
         Me.cmbAreaID.Location = New System.Drawing.Point(54, 50)
         Me.cmbAreaID.Name = "cmbAreaID"
-        Me.cmbAreaID.Size = New System.Drawing.Size(166, 21)
+        Me.cmbAreaID.Size = New System.Drawing.Size(172, 21)
         Me.cmbAreaID.TabIndex = 16
         '
         'txtLocation
@@ -1691,7 +1694,7 @@ Partial Class scafoldTarking
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.txtLocation.Location = New System.Drawing.Point(54, 74)
         Me.txtLocation.Name = "txtLocation"
-        Me.txtLocation.Size = New System.Drawing.Size(166, 21)
+        Me.txtLocation.Size = New System.Drawing.Size(172, 21)
         Me.txtLocation.TabIndex = 20
         '
         'Label35
@@ -1734,9 +1737,9 @@ Partial Class scafoldTarking
         Me.Panel71.Controls.Add(Me.Label44)
         Me.Panel71.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel71.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.Panel71.Location = New System.Drawing.Point(461, 3)
+        Me.Panel71.Location = New System.Drawing.Point(473, 3)
         Me.Panel71.Name = "Panel71"
-        Me.Panel71.Size = New System.Drawing.Size(223, 105)
+        Me.Panel71.Size = New System.Drawing.Size(229, 105)
         Me.Panel71.TabIndex = 2
         '
         'sprDays
@@ -1746,7 +1749,7 @@ Partial Class scafoldTarking
         Me.sprDays.Location = New System.Drawing.Point(57, 75)
         Me.sprDays.Maximum = New Decimal(New Integer() {10000, 0, 0, 0})
         Me.sprDays.Name = "sprDays"
-        Me.sprDays.Size = New System.Drawing.Size(163, 21)
+        Me.sprDays.Size = New System.Drawing.Size(169, 21)
         Me.sprDays.TabIndex = 26
         Me.sprDays.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
@@ -1758,7 +1761,7 @@ Partial Class scafoldTarking
         Me.dtpBldDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom
         Me.dtpBldDate.Location = New System.Drawing.Point(57, 51)
         Me.dtpBldDate.Name = "dtpBldDate"
-        Me.dtpBldDate.Size = New System.Drawing.Size(163, 21)
+        Me.dtpBldDate.Size = New System.Drawing.Size(169, 21)
         Me.dtpBldDate.TabIndex = 25
         '
         'txtWOInfo
@@ -1768,7 +1771,7 @@ Partial Class scafoldTarking
         Me.txtWOInfo.Location = New System.Drawing.Point(57, 2)
         Me.txtWOInfo.Name = "txtWOInfo"
         Me.txtWOInfo.ReadOnly = True
-        Me.txtWOInfo.Size = New System.Drawing.Size(163, 21)
+        Me.txtWOInfo.Size = New System.Drawing.Size(169, 21)
         Me.txtWOInfo.TabIndex = 21
         '
         'cmbSubJob
@@ -1778,7 +1781,7 @@ Partial Class scafoldTarking
         Me.cmbSubJob.FormattingEnabled = True
         Me.cmbSubJob.Location = New System.Drawing.Point(57, 26)
         Me.cmbSubJob.Name = "cmbSubJob"
-        Me.cmbSubJob.Size = New System.Drawing.Size(163, 21)
+        Me.cmbSubJob.Size = New System.Drawing.Size(169, 21)
         Me.cmbSubJob.TabIndex = 24
         '
         'Label63
@@ -1831,9 +1834,9 @@ Partial Class scafoldTarking
         Me.Panel70.Controls.Add(Me.txtCAT)
         Me.Panel70.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel70.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.Panel70.Location = New System.Drawing.Point(232, 3)
+        Me.Panel70.Location = New System.Drawing.Point(238, 3)
         Me.Panel70.Name = "Panel70"
-        Me.Panel70.Size = New System.Drawing.Size(223, 105)
+        Me.Panel70.Size = New System.Drawing.Size(229, 105)
         Me.Panel70.TabIndex = 3
         '
         'Label38
@@ -1852,7 +1855,7 @@ Partial Class scafoldTarking
         Me.txtArea.Location = New System.Drawing.Point(48, 50)
         Me.txtArea.Name = "txtArea"
         Me.txtArea.ReadOnly = True
-        Me.txtArea.Size = New System.Drawing.Size(168, 21)
+        Me.txtArea.Size = New System.Drawing.Size(174, 21)
         Me.txtArea.TabIndex = 19
         '
         'Label39
@@ -1881,7 +1884,7 @@ Partial Class scafoldTarking
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.txtPurpose.Location = New System.Drawing.Point(48, 74)
         Me.txtPurpose.Name = "txtPurpose"
-        Me.txtPurpose.Size = New System.Drawing.Size(168, 21)
+        Me.txtPurpose.Size = New System.Drawing.Size(174, 21)
         Me.txtPurpose.TabIndex = 26
         '
         'cmbWONum
@@ -1892,7 +1895,7 @@ Partial Class scafoldTarking
         Me.cmbWONum.FormattingEnabled = True
         Me.cmbWONum.Location = New System.Drawing.Point(48, 1)
         Me.cmbWONum.Name = "cmbWONum"
-        Me.cmbWONum.Size = New System.Drawing.Size(168, 21)
+        Me.cmbWONum.Size = New System.Drawing.Size(174, 21)
         Me.cmbWONum.TabIndex = 17
         '
         'Label46
@@ -1911,7 +1914,7 @@ Partial Class scafoldTarking
         Me.txtCAT.Location = New System.Drawing.Point(48, 26)
         Me.txtCAT.Name = "txtCAT"
         Me.txtCAT.ReadOnly = True
-        Me.txtCAT.Size = New System.Drawing.Size(168, 21)
+        Me.txtCAT.Size = New System.Drawing.Size(174, 21)
         Me.txtCAT.TabIndex = 18
         '
         'Panel74
@@ -1922,7 +1925,7 @@ Partial Class scafoldTarking
         Me.Panel74.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel74.Location = New System.Drawing.Point(3, 120)
         Me.Panel74.Name = "Panel74"
-        Me.Panel74.Size = New System.Drawing.Size(687, 38)
+        Me.Panel74.Size = New System.Drawing.Size(705, 38)
         Me.Panel74.TabIndex = 1
         '
         'txtNotesAndComments
@@ -1933,7 +1936,7 @@ Partial Class scafoldTarking
         Me.txtNotesAndComments.Location = New System.Drawing.Point(139, 3)
         Me.txtNotesAndComments.Multiline = True
         Me.txtNotesAndComments.Name = "txtNotesAndComments"
-        Me.txtNotesAndComments.Size = New System.Drawing.Size(542, 32)
+        Me.txtNotesAndComments.Size = New System.Drawing.Size(560, 32)
         Me.txtNotesAndComments.TabIndex = 27
         '
         'Label47
@@ -1952,7 +1955,7 @@ Partial Class scafoldTarking
         Me.Panel75.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel75.Location = New System.Drawing.Point(3, 170)
         Me.Panel75.Name = "Panel75"
-        Me.Panel75.Size = New System.Drawing.Size(693, 245)
+        Me.Panel75.Size = New System.Drawing.Size(711, 245)
         Me.Panel75.TabIndex = 2
         '
         'TableLayoutPanel12
@@ -1967,7 +1970,7 @@ Partial Class scafoldTarking
         Me.TableLayoutPanel12.Name = "TableLayoutPanel12"
         Me.TableLayoutPanel12.RowCount = 1
         Me.TableLayoutPanel12.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-        Me.TableLayoutPanel12.Size = New System.Drawing.Size(693, 245)
+        Me.TableLayoutPanel12.Size = New System.Drawing.Size(711, 245)
         Me.TableLayoutPanel12.TabIndex = 0
         '
         'Panel46
@@ -1976,7 +1979,7 @@ Partial Class scafoldTarking
         Me.Panel46.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel46.Location = New System.Drawing.Point(3, 3)
         Me.Panel46.Name = "Panel46"
-        Me.Panel46.Size = New System.Drawing.Size(201, 239)
+        Me.Panel46.Size = New System.Drawing.Size(207, 239)
         Me.Panel46.TabIndex = 29
         '
         'GroupBox3
@@ -1988,7 +1991,7 @@ Partial Class scafoldTarking
         Me.GroupBox3.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.GroupBox3.Location = New System.Drawing.Point(0, 0)
         Me.GroupBox3.Name = "GroupBox3"
-        Me.GroupBox3.Size = New System.Drawing.Size(201, 239)
+        Me.GroupBox3.Size = New System.Drawing.Size(207, 239)
         Me.GroupBox3.TabIndex = 12
         Me.GroupBox3.TabStop = False
         Me.GroupBox3.Text = "Extra Decks"
@@ -2000,7 +2003,7 @@ Partial Class scafoldTarking
         Me.Panel92.ForeColor = System.Drawing.SystemColors.WindowText
         Me.Panel92.Location = New System.Drawing.Point(3, 66)
         Me.Panel92.Name = "Panel92"
-        Me.Panel92.Size = New System.Drawing.Size(195, 170)
+        Me.Panel92.Size = New System.Drawing.Size(201, 170)
         Me.Panel92.TabIndex = 3
         '
         'tblLeg
@@ -2008,21 +2011,21 @@ Partial Class scafoldTarking
         Me.tblLeg.AllowUserToAddRows = False
         Me.tblLeg.AllowUserToDeleteRows = False
         Me.tblLeg.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle2.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.tblLeg.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle2
+        DataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle12.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle12.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle12.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle12.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle12.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.tblLeg.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle12
         Me.tblLeg.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.tblLeg.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.clmLegID, Me.clmQYT, Me.clmHeigthExtra, Me.clmIdProductLeg, Me.clmPlf, Me.clmPsqf})
         Me.tblLeg.Dock = System.Windows.Forms.DockStyle.Fill
         Me.tblLeg.Location = New System.Drawing.Point(0, 0)
         Me.tblLeg.Name = "tblLeg"
         Me.tblLeg.RowHeadersVisible = False
-        Me.tblLeg.Size = New System.Drawing.Size(195, 170)
+        Me.tblLeg.Size = New System.Drawing.Size(201, 170)
         Me.tblLeg.TabIndex = 0
         '
         'clmLegID
@@ -2067,7 +2070,7 @@ Partial Class scafoldTarking
         Me.Panel48.Dock = System.Windows.Forms.DockStyle.Top
         Me.Panel48.Location = New System.Drawing.Point(3, 17)
         Me.Panel48.Name = "Panel48"
-        Me.Panel48.Size = New System.Drawing.Size(195, 49)
+        Me.Panel48.Size = New System.Drawing.Size(201, 49)
         Me.Panel48.TabIndex = 2
         '
         'Panel50
@@ -2076,7 +2079,7 @@ Partial Class scafoldTarking
         Me.Panel50.Dock = System.Windows.Forms.DockStyle.Bottom
         Me.Panel50.Location = New System.Drawing.Point(0, 25)
         Me.Panel50.Name = "Panel50"
-        Me.Panel50.Size = New System.Drawing.Size(195, 24)
+        Me.Panel50.Size = New System.Drawing.Size(201, 24)
         Me.Panel50.TabIndex = 5
         '
         'Label53
@@ -2112,9 +2115,9 @@ Partial Class scafoldTarking
         '
         Me.Panel47.Controls.Add(Me.TableLayoutPanel13)
         Me.Panel47.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel47.Location = New System.Drawing.Point(210, 3)
+        Me.Panel47.Location = New System.Drawing.Point(216, 3)
         Me.Panel47.Name = "Panel47"
-        Me.Panel47.Size = New System.Drawing.Size(480, 239)
+        Me.Panel47.Size = New System.Drawing.Size(492, 239)
         Me.Panel47.TabIndex = 30
         '
         'TableLayoutPanel13
@@ -2130,7 +2133,7 @@ Partial Class scafoldTarking
         Me.TableLayoutPanel13.RowCount = 2
         Me.TableLayoutPanel13.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
         Me.TableLayoutPanel13.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
-        Me.TableLayoutPanel13.Size = New System.Drawing.Size(480, 239)
+        Me.TableLayoutPanel13.Size = New System.Drawing.Size(492, 239)
         Me.TableLayoutPanel13.TabIndex = 12
         '
         'TableLayoutPanel14
@@ -2145,7 +2148,7 @@ Partial Class scafoldTarking
         Me.TableLayoutPanel14.RowCount = 2
         Me.TableLayoutPanel14.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
         Me.TableLayoutPanel14.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
-        Me.TableLayoutPanel14.Size = New System.Drawing.Size(474, 113)
+        Me.TableLayoutPanel14.Size = New System.Drawing.Size(486, 113)
         Me.TableLayoutPanel14.TabIndex = 0
         '
         'Panel44
@@ -2154,7 +2157,7 @@ Partial Class scafoldTarking
         Me.Panel44.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel44.Location = New System.Drawing.Point(3, 3)
         Me.Panel44.Name = "Panel44"
-        Me.Panel44.Size = New System.Drawing.Size(468, 50)
+        Me.Panel44.Size = New System.Drawing.Size(480, 50)
         Me.Panel44.TabIndex = 0
         '
         'tblScaffoldInformation
@@ -2164,14 +2167,14 @@ Partial Class scafoldTarking
         Me.tblScaffoldInformation.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.tblScaffoldInformation.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCellsExceptHeaders
         Me.tblScaffoldInformation.BackgroundColor = System.Drawing.Color.White
-        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle3.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.tblScaffoldInformation.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle3
+        DataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle13.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle13.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle13.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle13.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle13.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle13.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.tblScaffoldInformation.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle13
         Me.tblScaffoldInformation.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.tblScaffoldInformation.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.clmType, Me.clmWidth, Me.clmLength, Me.clmHeigth, Me.clmDecks, Me.clmKOs, Me.clmBase})
         Me.tblScaffoldInformation.Dock = System.Windows.Forms.DockStyle.Fill
@@ -2179,9 +2182,9 @@ Partial Class scafoldTarking
         Me.tblScaffoldInformation.MultiSelect = False
         Me.tblScaffoldInformation.Name = "tblScaffoldInformation"
         Me.tblScaffoldInformation.RowHeadersVisible = False
-        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.tblScaffoldInformation.RowsDefaultCellStyle = DataGridViewCellStyle4
-        Me.tblScaffoldInformation.Size = New System.Drawing.Size(468, 50)
+        DataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.tblScaffoldInformation.RowsDefaultCellStyle = DataGridViewCellStyle14
+        Me.tblScaffoldInformation.Size = New System.Drawing.Size(480, 50)
         Me.tblScaffoldInformation.TabIndex = 0
         '
         'clmType
@@ -2226,7 +2229,7 @@ Partial Class scafoldTarking
         Me.Panel45.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel45.Location = New System.Drawing.Point(3, 59)
         Me.Panel45.Name = "Panel45"
-        Me.Panel45.Size = New System.Drawing.Size(468, 51)
+        Me.Panel45.Size = New System.Drawing.Size(480, 51)
         Me.Panel45.TabIndex = 1
         '
         'tblActivityHours
@@ -2236,14 +2239,14 @@ Partial Class scafoldTarking
         Me.tblActivityHours.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.tblActivityHours.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCellsExceptHeaders
         Me.tblActivityHours.BackgroundColor = System.Drawing.Color.White
-        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle5.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.tblActivityHours.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle5
+        DataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle15.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle15.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle15.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle15.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle15.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle15.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.tblActivityHours.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle15
         Me.tblActivityHours.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.tblActivityHours.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.clmBuild, Me.clmMabl, Me.clmTravl, Me.clmWhtr, Me.clmAlarm, Me.clmSafty, Me.clmStdBy, Me.clmOthh, Me.clmTotal})
         Me.tblActivityHours.Dock = System.Windows.Forms.DockStyle.Fill
@@ -2251,9 +2254,9 @@ Partial Class scafoldTarking
         Me.tblActivityHours.MultiSelect = False
         Me.tblActivityHours.Name = "tblActivityHours"
         Me.tblActivityHours.RowHeadersVisible = False
-        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.tblActivityHours.RowsDefaultCellStyle = DataGridViewCellStyle6
-        Me.tblActivityHours.Size = New System.Drawing.Size(468, 51)
+        DataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.tblActivityHours.RowsDefaultCellStyle = DataGridViewCellStyle16
+        Me.tblActivityHours.Size = New System.Drawing.Size(480, 51)
         Me.tblActivityHours.TabIndex = 1
         '
         'clmBuild
@@ -2307,7 +2310,7 @@ Partial Class scafoldTarking
         Me.Panel76.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel76.Location = New System.Drawing.Point(3, 122)
         Me.Panel76.Name = "Panel76"
-        Me.Panel76.Size = New System.Drawing.Size(474, 114)
+        Me.Panel76.Size = New System.Drawing.Size(486, 114)
         Me.Panel76.TabIndex = 1
         '
         'TableLayoutPanel15
@@ -2324,16 +2327,16 @@ Partial Class scafoldTarking
         Me.TableLayoutPanel15.Name = "TableLayoutPanel15"
         Me.TableLayoutPanel15.RowCount = 1
         Me.TableLayoutPanel15.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-        Me.TableLayoutPanel15.Size = New System.Drawing.Size(474, 114)
+        Me.TableLayoutPanel15.Size = New System.Drawing.Size(486, 114)
         Me.TableLayoutPanel15.TabIndex = 0
         '
         'Panel77
         '
         Me.Panel77.Controls.Add(Me.GroupBox1)
         Me.Panel77.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel77.Location = New System.Drawing.Point(369, 3)
+        Me.Panel77.Location = New System.Drawing.Point(379, 3)
         Me.Panel77.Name = "Panel77"
-        Me.Panel77.Size = New System.Drawing.Size(102, 108)
+        Me.Panel77.Size = New System.Drawing.Size(104, 108)
         Me.Panel77.TabIndex = 0
         '
         'GroupBox1
@@ -2344,7 +2347,7 @@ Partial Class scafoldTarking
         Me.GroupBox1.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.GroupBox1.Location = New System.Drawing.Point(0, 0)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(102, 108)
+        Me.GroupBox1.Size = New System.Drawing.Size(104, 108)
         Me.GroupBox1.TabIndex = 2
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Add SCF Info"
@@ -2364,7 +2367,7 @@ Partial Class scafoldTarking
         Me.TableLayoutPanel17.RowCount = 2
         Me.TableLayoutPanel17.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
         Me.TableLayoutPanel17.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
-        Me.TableLayoutPanel17.Size = New System.Drawing.Size(96, 88)
+        Me.TableLayoutPanel17.Size = New System.Drawing.Size(98, 88)
         Me.TableLayoutPanel17.TabIndex = 0
         '
         'chbHanging
@@ -2373,9 +2376,9 @@ Partial Class scafoldTarking
         Me.chbHanging.CheckAlign = System.Drawing.ContentAlignment.BottomCenter
         Me.chbHanging.Dock = System.Windows.Forms.DockStyle.Fill
         Me.chbHanging.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.chbHanging.Location = New System.Drawing.Point(51, 47)
+        Me.chbHanging.Location = New System.Drawing.Point(52, 47)
         Me.chbHanging.Name = "chbHanging"
-        Me.chbHanging.Size = New System.Drawing.Size(42, 38)
+        Me.chbHanging.Size = New System.Drawing.Size(43, 38)
         Me.chbHanging.TabIndex = 3
         Me.chbHanging.Text = "Hanging"
         Me.chbHanging.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -2389,7 +2392,7 @@ Partial Class scafoldTarking
         Me.chbCSAP.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.chbCSAP.Location = New System.Drawing.Point(3, 3)
         Me.chbCSAP.Name = "chbCSAP"
-        Me.chbCSAP.Size = New System.Drawing.Size(42, 38)
+        Me.chbCSAP.Size = New System.Drawing.Size(43, 38)
         Me.chbCSAP.TabIndex = 0
         Me.chbCSAP.Text = "CSAP"
         Me.chbCSAP.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -2403,7 +2406,7 @@ Partial Class scafoldTarking
         Me.chbInternal.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.chbInternal.Location = New System.Drawing.Point(3, 47)
         Me.chbInternal.Name = "chbInternal"
-        Me.chbInternal.Size = New System.Drawing.Size(42, 38)
+        Me.chbInternal.Size = New System.Drawing.Size(43, 38)
         Me.chbInternal.TabIndex = 2
         Me.chbInternal.Text = "Internal"
         Me.chbInternal.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -2415,9 +2418,9 @@ Partial Class scafoldTarking
         Me.chbRolling.CheckAlign = System.Drawing.ContentAlignment.BottomCenter
         Me.chbRolling.Dock = System.Windows.Forms.DockStyle.Fill
         Me.chbRolling.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.chbRolling.Location = New System.Drawing.Point(51, 3)
+        Me.chbRolling.Location = New System.Drawing.Point(52, 3)
         Me.chbRolling.Name = "chbRolling"
-        Me.chbRolling.Size = New System.Drawing.Size(42, 38)
+        Me.chbRolling.Size = New System.Drawing.Size(43, 38)
         Me.chbRolling.TabIndex = 1
         Me.chbRolling.Text = "Rolling"
         Me.chbRolling.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -2427,9 +2430,9 @@ Partial Class scafoldTarking
         '
         Me.Panel78.Controls.Add(Me.GroupBox2)
         Me.Panel78.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel78.Location = New System.Drawing.Point(192, 3)
+        Me.Panel78.Location = New System.Drawing.Point(197, 3)
         Me.Panel78.Name = "Panel78"
-        Me.Panel78.Size = New System.Drawing.Size(171, 108)
+        Me.Panel78.Size = New System.Drawing.Size(176, 108)
         Me.Panel78.TabIndex = 1
         '
         'GroupBox2
@@ -2440,7 +2443,7 @@ Partial Class scafoldTarking
         Me.GroupBox2.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.GroupBox2.Location = New System.Drawing.Point(0, 0)
         Me.GroupBox2.Name = "GroupBox2"
-        Me.GroupBox2.Size = New System.Drawing.Size(171, 108)
+        Me.GroupBox2.Size = New System.Drawing.Size(176, 108)
         Me.GroupBox2.TabIndex = 3
         Me.GroupBox2.TabStop = False
         Me.GroupBox2.Text = "Material Handeling"
@@ -2465,7 +2468,7 @@ Partial Class scafoldTarking
         Me.TableLayoutPanel16.RowCount = 2
         Me.TableLayoutPanel16.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
         Me.TableLayoutPanel16.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
-        Me.TableLayoutPanel16.Size = New System.Drawing.Size(165, 88)
+        Me.TableLayoutPanel16.Size = New System.Drawing.Size(170, 88)
         Me.TableLayoutPanel16.TabIndex = 0
         '
         'chbElevator
@@ -2474,9 +2477,9 @@ Partial Class scafoldTarking
         Me.chbElevator.CheckAlign = System.Drawing.ContentAlignment.BottomCenter
         Me.chbElevator.Dock = System.Windows.Forms.DockStyle.Fill
         Me.chbElevator.Font = New System.Drawing.Font("Verdana", 6.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.chbElevator.Location = New System.Drawing.Point(85, 47)
+        Me.chbElevator.Location = New System.Drawing.Point(87, 47)
         Me.chbElevator.Name = "chbElevator"
-        Me.chbElevator.Size = New System.Drawing.Size(35, 38)
+        Me.chbElevator.Size = New System.Drawing.Size(36, 38)
         Me.chbElevator.TabIndex = 10
         Me.chbElevator.Text = "Elevator"
         Me.chbElevator.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -2490,7 +2493,7 @@ Partial Class scafoldTarking
         Me.chbTruck.Font = New System.Drawing.Font("Verdana", 6.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.chbTruck.Location = New System.Drawing.Point(3, 3)
         Me.chbTruck.Name = "chbTruck"
-        Me.chbTruck.Size = New System.Drawing.Size(35, 38)
+        Me.chbTruck.Size = New System.Drawing.Size(36, 38)
         Me.chbTruck.TabIndex = 4
         Me.chbTruck.Text = "Truck"
         Me.chbTruck.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -2502,9 +2505,9 @@ Partial Class scafoldTarking
         Me.chbForklift.CheckAlign = System.Drawing.ContentAlignment.BottomCenter
         Me.chbForklift.Dock = System.Windows.Forms.DockStyle.Fill
         Me.chbForklift.Font = New System.Drawing.Font("Verdana", 6.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.chbForklift.Location = New System.Drawing.Point(44, 3)
+        Me.chbForklift.Location = New System.Drawing.Point(45, 3)
         Me.chbForklift.Name = "chbForklift"
-        Me.chbForklift.Size = New System.Drawing.Size(35, 38)
+        Me.chbForklift.Size = New System.Drawing.Size(36, 38)
         Me.chbForklift.TabIndex = 5
         Me.chbForklift.Text = "Forklift"
         Me.chbForklift.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -2516,9 +2519,9 @@ Partial Class scafoldTarking
         Me.chbPassed.CheckAlign = System.Drawing.ContentAlignment.BottomCenter
         Me.chbPassed.Dock = System.Windows.Forms.DockStyle.Fill
         Me.chbPassed.Font = New System.Drawing.Font("Verdana", 6.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.chbPassed.Location = New System.Drawing.Point(44, 47)
+        Me.chbPassed.Location = New System.Drawing.Point(45, 47)
         Me.chbPassed.Name = "chbPassed"
-        Me.chbPassed.Size = New System.Drawing.Size(35, 38)
+        Me.chbPassed.Size = New System.Drawing.Size(36, 38)
         Me.chbPassed.TabIndex = 9
         Me.chbPassed.Text = "Passed"
         Me.chbPassed.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -2530,9 +2533,9 @@ Partial Class scafoldTarking
         Me.chbTrailer.CheckAlign = System.Drawing.ContentAlignment.BottomCenter
         Me.chbTrailer.Dock = System.Windows.Forms.DockStyle.Fill
         Me.chbTrailer.Font = New System.Drawing.Font("Verdana", 6.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.chbTrailer.Location = New System.Drawing.Point(85, 3)
+        Me.chbTrailer.Location = New System.Drawing.Point(87, 3)
         Me.chbTrailer.Name = "chbTrailer"
-        Me.chbTrailer.Size = New System.Drawing.Size(35, 38)
+        Me.chbTrailer.Size = New System.Drawing.Size(36, 38)
         Me.chbTrailer.TabIndex = 6
         Me.chbTrailer.Text = "Trailer"
         Me.chbTrailer.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -2544,9 +2547,9 @@ Partial Class scafoldTarking
         Me.chbCrane.CheckAlign = System.Drawing.ContentAlignment.BottomCenter
         Me.chbCrane.Dock = System.Windows.Forms.DockStyle.Fill
         Me.chbCrane.Font = New System.Drawing.Font("Verdana", 6.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.chbCrane.Location = New System.Drawing.Point(126, 3)
+        Me.chbCrane.Location = New System.Drawing.Point(129, 3)
         Me.chbCrane.Name = "chbCrane"
-        Me.chbCrane.Size = New System.Drawing.Size(36, 38)
+        Me.chbCrane.Size = New System.Drawing.Size(38, 38)
         Me.chbCrane.TabIndex = 7
         Me.chbCrane.Text = "Crane"
         Me.chbCrane.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -2560,7 +2563,7 @@ Partial Class scafoldTarking
         Me.chbRope.Font = New System.Drawing.Font("Verdana", 6.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.chbRope.Location = New System.Drawing.Point(3, 47)
         Me.chbRope.Name = "chbRope"
-        Me.chbRope.Size = New System.Drawing.Size(35, 38)
+        Me.chbRope.Size = New System.Drawing.Size(36, 38)
         Me.chbRope.TabIndex = 8
         Me.chbRope.Text = "Rope"
         Me.chbRope.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -2581,7 +2584,7 @@ Partial Class scafoldTarking
         Me.Panel79.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.Panel79.Location = New System.Drawing.Point(3, 3)
         Me.Panel79.Name = "Panel79"
-        Me.Panel79.Size = New System.Drawing.Size(183, 108)
+        Me.Panel79.Size = New System.Drawing.Size(188, 108)
         Me.Panel79.TabIndex = 2
         '
         'Label48
@@ -2602,7 +2605,7 @@ Partial Class scafoldTarking
         Me.cmbErectorScaffold.IntegralHeight = False
         Me.cmbErectorScaffold.Location = New System.Drawing.Point(67, 80)
         Me.cmbErectorScaffold.Name = "cmbErectorScaffold"
-        Me.cmbErectorScaffold.Size = New System.Drawing.Size(113, 21)
+        Me.cmbErectorScaffold.Size = New System.Drawing.Size(118, 21)
         Me.cmbErectorScaffold.TabIndex = 11
         '
         'Label49
@@ -2623,7 +2626,7 @@ Partial Class scafoldTarking
         Me.cmbForemanScaffold.IntegralHeight = False
         Me.cmbForemanScaffold.Location = New System.Drawing.Point(67, 54)
         Me.cmbForemanScaffold.Name = "cmbForemanScaffold"
-        Me.cmbForemanScaffold.Size = New System.Drawing.Size(113, 21)
+        Me.cmbForemanScaffold.Size = New System.Drawing.Size(118, 21)
         Me.cmbForemanScaffold.TabIndex = 10
         '
         'Label50
@@ -2644,7 +2647,7 @@ Partial Class scafoldTarking
         Me.cmbContactScaffold.IntegralHeight = False
         Me.cmbContactScaffold.Location = New System.Drawing.Point(67, 28)
         Me.cmbContactScaffold.Name = "cmbContactScaffold"
-        Me.cmbContactScaffold.Size = New System.Drawing.Size(113, 21)
+        Me.cmbContactScaffold.Size = New System.Drawing.Size(118, 21)
         Me.cmbContactScaffold.TabIndex = 9
         '
         'Label51
@@ -2664,12 +2667,13 @@ Partial Class scafoldTarking
         Me.dtpReqCompScaffold.Format = System.Windows.Forms.DateTimePickerFormat.Custom
         Me.dtpReqCompScaffold.Location = New System.Drawing.Point(67, 3)
         Me.dtpReqCompScaffold.Name = "dtpReqCompScaffold"
-        Me.dtpReqCompScaffold.Size = New System.Drawing.Size(113, 21)
+        Me.dtpReqCompScaffold.Size = New System.Drawing.Size(118, 21)
         Me.dtpReqCompScaffold.TabIndex = 8
         '
         'Panel43
         '
         Me.Panel43.BackColor = System.Drawing.Color.FromArgb(CType(CType(83, Byte), Integer), CType(CType(93, Byte), Integer), CType(CType(102, Byte), Integer))
+        Me.Panel43.Controls.Add(Me.btnReport)
         Me.Panel43.Controls.Add(Me.btnFindTagScaffold)
         Me.Panel43.Controls.Add(Me.lblTagQTY)
         Me.Panel43.Controls.Add(Me.btnExcelScaffold)
@@ -2684,8 +2688,26 @@ Partial Class scafoldTarking
         Me.Panel43.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.Panel43.Location = New System.Drawing.Point(3, 427)
         Me.Panel43.Name = "Panel43"
-        Me.Panel43.Size = New System.Drawing.Size(699, 42)
+        Me.Panel43.Size = New System.Drawing.Size(717, 42)
         Me.Panel43.TabIndex = 1
+        '
+        'btnReport
+        '
+        Me.btnReport.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnReport.FlatAppearance.BorderSize = 0
+        Me.btnReport.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(58, Byte), Integer), CType(CType(115, Byte), Integer))
+        Me.btnReport.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnReport.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnReport.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.btnReport.Image = Global.AVT_TRAKING.My.Resources.Resources.report
+        Me.btnReport.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnReport.Location = New System.Drawing.Point(288, 7)
+        Me.btnReport.Name = "btnReport"
+        Me.btnReport.Size = New System.Drawing.Size(85, 29)
+        Me.btnReport.TabIndex = 12
+        Me.btnReport.Text = "Report"
+        Me.btnReport.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.btnReport.UseVisualStyleBackColor = True
         '
         'btnFindTagScaffold
         '
@@ -2696,7 +2718,7 @@ Partial Class scafoldTarking
         Me.btnFindTagScaffold.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnFindTagScaffold.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.btnFindTagScaffold.Image = Global.AVT_TRAKING.My.Resources.Resources.loupe
-        Me.btnFindTagScaffold.Location = New System.Drawing.Point(556, 8)
+        Me.btnFindTagScaffold.Location = New System.Drawing.Point(589, 8)
         Me.btnFindTagScaffold.Name = "btnFindTagScaffold"
         Me.btnFindTagScaffold.Size = New System.Drawing.Size(42, 31)
         Me.btnFindTagScaffold.TabIndex = 11
@@ -2705,7 +2727,7 @@ Partial Class scafoldTarking
         'lblTagQTY
         '
         Me.lblTagQTY.AutoSize = True
-        Me.lblTagQTY.Location = New System.Drawing.Point(144, 16)
+        Me.lblTagQTY.Location = New System.Drawing.Point(137, 16)
         Me.lblTagQTY.Name = "lblTagQTY"
         Me.lblTagQTY.Size = New System.Drawing.Size(58, 13)
         Me.lblTagQTY.TabIndex = 10
@@ -2716,10 +2738,10 @@ Partial Class scafoldTarking
         Me.btnExcelScaffold.FlatAppearance.BorderSize = 0
         Me.btnExcelScaffold.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(58, Byte), Integer), CType(CType(115, Byte), Integer))
         Me.btnExcelScaffold.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnExcelScaffold.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnExcelScaffold.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnExcelScaffold.Image = Global.AVT_TRAKING.My.Resources.Resources.upload2
         Me.btnExcelScaffold.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnExcelScaffold.Location = New System.Drawing.Point(267, 11)
+        Me.btnExcelScaffold.Location = New System.Drawing.Point(383, 10)
         Me.btnExcelScaffold.Name = "btnExcelScaffold"
         Me.btnExcelScaffold.Size = New System.Drawing.Size(132, 23)
         Me.btnExcelScaffold.TabIndex = 9
@@ -2773,10 +2795,10 @@ Partial Class scafoldTarking
         Me.btnNewTag.FlatAppearance.BorderSize = 0
         Me.btnNewTag.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(58, Byte), Integer), CType(CType(115, Byte), Integer))
         Me.btnNewTag.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnNewTag.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnNewTag.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnNewTag.Image = Global.AVT_TRAKING.My.Resources.Resources._new
         Me.btnNewTag.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnNewTag.Location = New System.Drawing.Point(618, 11)
+        Me.btnNewTag.Location = New System.Drawing.Point(636, 11)
         Me.btnNewTag.Name = "btnNewTag"
         Me.btnNewTag.Size = New System.Drawing.Size(75, 23)
         Me.btnNewTag.TabIndex = 3
@@ -2793,9 +2815,9 @@ Partial Class scafoldTarking
         Me.btnNextTag.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnNextTag.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.btnNextTag.Image = Global.AVT_TRAKING.My.Resources.Resources._next
-        Me.btnNextTag.Location = New System.Drawing.Point(475, 11)
+        Me.btnNextTag.Location = New System.Drawing.Point(553, 10)
         Me.btnNextTag.Name = "btnNextTag"
-        Me.btnNextTag.Size = New System.Drawing.Size(75, 23)
+        Me.btnNextTag.Size = New System.Drawing.Size(33, 23)
         Me.btnNextTag.TabIndex = 1
         Me.btnNextTag.UseVisualStyleBackColor = True
         '
@@ -2808,9 +2830,9 @@ Partial Class scafoldTarking
         Me.btnBackTag.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnBackTag.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.btnBackTag.Image = Global.AVT_TRAKING.My.Resources.Resources.after1
-        Me.btnBackTag.Location = New System.Drawing.Point(394, 11)
+        Me.btnBackTag.Location = New System.Drawing.Point(521, 10)
         Me.btnBackTag.Name = "btnBackTag"
-        Me.btnBackTag.Size = New System.Drawing.Size(75, 23)
+        Me.btnBackTag.Size = New System.Drawing.Size(33, 23)
         Me.btnBackTag.TabIndex = 0
         Me.btnBackTag.UseVisualStyleBackColor = True
         '
@@ -2820,9 +2842,9 @@ Partial Class scafoldTarking
         Me.Panel80.Controls.Add(Me.btnRefreshProduct)
         Me.Panel80.Controls.Add(Me.btnDeleteRowScaffoldLeg)
         Me.Panel80.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel80.Location = New System.Drawing.Point(708, 427)
+        Me.Panel80.Location = New System.Drawing.Point(726, 427)
         Me.Panel80.Name = "Panel80"
-        Me.Panel80.Size = New System.Drawing.Size(230, 42)
+        Me.Panel80.Size = New System.Drawing.Size(235, 42)
         Me.Panel80.TabIndex = 3
         '
         'btnRefreshProduct
@@ -2864,7 +2886,7 @@ Partial Class scafoldTarking
         Me.tbpModification.Controls.Add(Me.Panel55)
         Me.tbpModification.Location = New System.Drawing.Point(4, 22)
         Me.tbpModification.Name = "tbpModification"
-        Me.tbpModification.Size = New System.Drawing.Size(941, 472)
+        Me.tbpModification.Size = New System.Drawing.Size(964, 472)
         Me.tbpModification.TabIndex = 8
         Me.tbpModification.Text = "Modification"
         Me.tbpModification.UseVisualStyleBackColor = True
@@ -2877,7 +2899,7 @@ Partial Class scafoldTarking
         Me.Panel55.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel55.Location = New System.Drawing.Point(0, 0)
         Me.Panel55.Name = "Panel55"
-        Me.Panel55.Size = New System.Drawing.Size(941, 472)
+        Me.Panel55.Size = New System.Drawing.Size(964, 472)
         Me.Panel55.TabIndex = 0
         '
         'TableLayoutPanel3
@@ -2898,16 +2920,16 @@ Partial Class scafoldTarking
         Me.TableLayoutPanel3.RowCount = 2
         Me.TableLayoutPanel3.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 83.0!))
         Me.TableLayoutPanel3.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 17.0!))
-        Me.TableLayoutPanel3.Size = New System.Drawing.Size(941, 326)
+        Me.TableLayoutPanel3.Size = New System.Drawing.Size(964, 326)
         Me.TableLayoutPanel3.TabIndex = 1
         '
         'Panel64
         '
         Me.Panel64.Controls.Add(Me.TableLayoutPanel5)
         Me.Panel64.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel64.Location = New System.Drawing.Point(212, 3)
+        Me.Panel64.Location = New System.Drawing.Point(217, 3)
         Me.Panel64.Name = "Panel64"
-        Me.Panel64.Size = New System.Drawing.Size(464, 264)
+        Me.Panel64.Size = New System.Drawing.Size(476, 264)
         Me.Panel64.TabIndex = 0
         '
         'TableLayoutPanel5
@@ -2922,7 +2944,7 @@ Partial Class scafoldTarking
         Me.TableLayoutPanel5.RowCount = 2
         Me.TableLayoutPanel5.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 7.0!))
         Me.TableLayoutPanel5.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 93.0!))
-        Me.TableLayoutPanel5.Size = New System.Drawing.Size(464, 264)
+        Me.TableLayoutPanel5.Size = New System.Drawing.Size(476, 264)
         Me.TableLayoutPanel5.TabIndex = 1
         '
         'tblModificationProductMS
@@ -2933,7 +2955,7 @@ Partial Class scafoldTarking
         Me.tblModificationProductMS.Dock = System.Windows.Forms.DockStyle.Fill
         Me.tblModificationProductMS.Location = New System.Drawing.Point(3, 21)
         Me.tblModificationProductMS.Name = "tblModificationProductMS"
-        Me.tblModificationProductMS.Size = New System.Drawing.Size(458, 240)
+        Me.tblModificationProductMS.Size = New System.Drawing.Size(470, 240)
         Me.tblModificationProductMS.TabIndex = 27
         '
         'idProductM
@@ -2972,7 +2994,7 @@ Partial Class scafoldTarking
         Me.Label65.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.Label65.Location = New System.Drawing.Point(3, 0)
         Me.Label65.Name = "Label65"
-        Me.Label65.Size = New System.Drawing.Size(458, 18)
+        Me.Label65.Size = New System.Drawing.Size(470, 18)
         Me.Label65.TabIndex = 1
         Me.Label65.Text = "Modification Material  List Count"
         Me.Label65.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -2981,9 +3003,9 @@ Partial Class scafoldTarking
         '
         Me.Panel65.Controls.Add(Me.TableLayoutPanel6)
         Me.Panel65.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel65.Location = New System.Drawing.Point(682, 3)
+        Me.Panel65.Location = New System.Drawing.Point(699, 3)
         Me.Panel65.Name = "Panel65"
-        Me.Panel65.Size = New System.Drawing.Size(256, 264)
+        Me.Panel65.Size = New System.Drawing.Size(262, 264)
         Me.Panel65.TabIndex = 1
         '
         'TableLayoutPanel6
@@ -2998,7 +3020,7 @@ Partial Class scafoldTarking
         Me.TableLayoutPanel6.RowCount = 2
         Me.TableLayoutPanel6.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 7.0!))
         Me.TableLayoutPanel6.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 93.0!))
-        Me.TableLayoutPanel6.Size = New System.Drawing.Size(256, 264)
+        Me.TableLayoutPanel6.Size = New System.Drawing.Size(262, 264)
         Me.TableLayoutPanel6.TabIndex = 1
         '
         'Label66
@@ -3010,7 +3032,7 @@ Partial Class scafoldTarking
         Me.Label66.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.Label66.Location = New System.Drawing.Point(3, 0)
         Me.Label66.Name = "Label66"
-        Me.Label66.Size = New System.Drawing.Size(250, 18)
+        Me.Label66.Size = New System.Drawing.Size(256, 18)
         Me.Label66.TabIndex = 2
         Me.Label66.Text = "Scaffold Total Material  List Count"
         Me.Label66.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -3024,19 +3046,19 @@ Partial Class scafoldTarking
         Me.tblScaffoldTotalProductMS.BackgroundColor = System.Drawing.Color.White
         Me.tblScaffoldTotalProductMS.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.tblScaffoldTotalProductMS.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.clmIDProductSM, Me.clmQTYSM, Me.psqfM, Me.plfM})
-        DataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle7.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle7.SelectionBackColor = System.Drawing.Color.DarkGray
-        DataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.tblScaffoldTotalProductMS.DefaultCellStyle = DataGridViewCellStyle7
+        DataGridViewCellStyle17.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle17.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle17.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle17.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle17.SelectionBackColor = System.Drawing.Color.DarkGray
+        DataGridViewCellStyle17.SelectionForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle17.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.tblScaffoldTotalProductMS.DefaultCellStyle = DataGridViewCellStyle17
         Me.tblScaffoldTotalProductMS.Dock = System.Windows.Forms.DockStyle.Fill
         Me.tblScaffoldTotalProductMS.Location = New System.Drawing.Point(3, 21)
         Me.tblScaffoldTotalProductMS.Name = "tblScaffoldTotalProductMS"
         Me.tblScaffoldTotalProductMS.RowHeadersVisible = False
-        Me.tblScaffoldTotalProductMS.Size = New System.Drawing.Size(250, 240)
+        Me.tblScaffoldTotalProductMS.Size = New System.Drawing.Size(256, 240)
         Me.tblScaffoldTotalProductMS.TabIndex = 0
         '
         'clmIDProductSM
@@ -3067,7 +3089,7 @@ Partial Class scafoldTarking
         Me.Panel66.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel66.Location = New System.Drawing.Point(3, 3)
         Me.Panel66.Name = "Panel66"
-        Me.Panel66.Size = New System.Drawing.Size(203, 264)
+        Me.Panel66.Size = New System.Drawing.Size(208, 264)
         Me.Panel66.TabIndex = 2
         '
         'TableLayoutPanel4
@@ -3082,7 +3104,7 @@ Partial Class scafoldTarking
         Me.TableLayoutPanel4.RowCount = 2
         Me.TableLayoutPanel4.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 38.27161!))
         Me.TableLayoutPanel4.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 61.72839!))
-        Me.TableLayoutPanel4.Size = New System.Drawing.Size(203, 264)
+        Me.TableLayoutPanel4.Size = New System.Drawing.Size(208, 264)
         Me.TableLayoutPanel4.TabIndex = 0
         '
         'GroupBox4
@@ -3094,7 +3116,7 @@ Partial Class scafoldTarking
         Me.GroupBox4.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.GroupBox4.Location = New System.Drawing.Point(3, 3)
         Me.GroupBox4.Name = "GroupBox4"
-        Me.GroupBox4.Size = New System.Drawing.Size(197, 95)
+        Me.GroupBox4.Size = New System.Drawing.Size(202, 95)
         Me.GroupBox4.TabIndex = 0
         Me.GroupBox4.TabStop = False
         Me.GroupBox4.Text = "Material Handeling"
@@ -3119,7 +3141,7 @@ Partial Class scafoldTarking
         Me.TableLayoutPanel7.RowCount = 2
         Me.TableLayoutPanel7.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
         Me.TableLayoutPanel7.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
-        Me.TableLayoutPanel7.Size = New System.Drawing.Size(191, 75)
+        Me.TableLayoutPanel7.Size = New System.Drawing.Size(196, 75)
         Me.TableLayoutPanel7.TabIndex = 0
         '
         'chbPassedM
@@ -3129,9 +3151,9 @@ Partial Class scafoldTarking
         Me.chbPassedM.CheckAlign = System.Drawing.ContentAlignment.BottomCenter
         Me.chbPassedM.Dock = System.Windows.Forms.DockStyle.Fill
         Me.chbPassedM.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.chbPassedM.Location = New System.Drawing.Point(97, 40)
+        Me.chbPassedM.Location = New System.Drawing.Point(101, 40)
         Me.chbPassedM.Name = "chbPassedM"
-        Me.chbPassedM.Size = New System.Drawing.Size(41, 32)
+        Me.chbPassedM.Size = New System.Drawing.Size(43, 32)
         Me.chbPassedM.TabIndex = 26
         Me.chbPassedM.Text = "Passed"
         Me.chbPassedM.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -3144,9 +3166,9 @@ Partial Class scafoldTarking
         Me.chbElevtrM.CheckAlign = System.Drawing.ContentAlignment.BottomCenter
         Me.chbElevtrM.Dock = System.Windows.Forms.DockStyle.Fill
         Me.chbElevtrM.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.chbElevtrM.Location = New System.Drawing.Point(144, 3)
+        Me.chbElevtrM.Location = New System.Drawing.Point(150, 3)
         Me.chbElevtrM.Name = "chbElevtrM"
-        Me.chbElevtrM.Size = New System.Drawing.Size(44, 31)
+        Me.chbElevtrM.Size = New System.Drawing.Size(43, 31)
         Me.chbElevtrM.TabIndex = 23
         Me.chbElevtrM.Text = "Elevtr"
         Me.chbElevtrM.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -3161,7 +3183,7 @@ Partial Class scafoldTarking
         Me.chbTruckMS.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.chbTruckMS.Location = New System.Drawing.Point(3, 3)
         Me.chbTruckMS.Name = "chbTruckMS"
-        Me.chbTruckMS.Size = New System.Drawing.Size(41, 31)
+        Me.chbTruckMS.Size = New System.Drawing.Size(43, 31)
         Me.chbTruckMS.TabIndex = 20
         Me.chbTruckMS.Text = "Truck"
         Me.chbTruckMS.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -3174,9 +3196,9 @@ Partial Class scafoldTarking
         Me.chbRopeM.CheckAlign = System.Drawing.ContentAlignment.BottomCenter
         Me.chbRopeM.Dock = System.Windows.Forms.DockStyle.Fill
         Me.chbRopeM.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.chbRopeM.Location = New System.Drawing.Point(50, 40)
+        Me.chbRopeM.Location = New System.Drawing.Point(52, 40)
         Me.chbRopeM.Name = "chbRopeM"
-        Me.chbRopeM.Size = New System.Drawing.Size(41, 32)
+        Me.chbRopeM.Size = New System.Drawing.Size(43, 32)
         Me.chbRopeM.TabIndex = 25
         Me.chbRopeM.Text = "Rope"
         Me.chbRopeM.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -3189,9 +3211,9 @@ Partial Class scafoldTarking
         Me.chbForkliftM.CheckAlign = System.Drawing.ContentAlignment.BottomCenter
         Me.chbForkliftM.Dock = System.Windows.Forms.DockStyle.Fill
         Me.chbForkliftM.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.chbForkliftM.Location = New System.Drawing.Point(50, 3)
+        Me.chbForkliftM.Location = New System.Drawing.Point(52, 3)
         Me.chbForkliftM.Name = "chbForkliftM"
-        Me.chbForkliftM.Size = New System.Drawing.Size(41, 31)
+        Me.chbForkliftM.Size = New System.Drawing.Size(43, 31)
         Me.chbForkliftM.TabIndex = 21
         Me.chbForkliftM.Text = "Forklift"
         Me.chbForkliftM.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -3204,9 +3226,9 @@ Partial Class scafoldTarking
         Me.chbTrailerM.CheckAlign = System.Drawing.ContentAlignment.BottomCenter
         Me.chbTrailerM.Dock = System.Windows.Forms.DockStyle.Fill
         Me.chbTrailerM.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.chbTrailerM.Location = New System.Drawing.Point(97, 3)
+        Me.chbTrailerM.Location = New System.Drawing.Point(101, 3)
         Me.chbTrailerM.Name = "chbTrailerM"
-        Me.chbTrailerM.Size = New System.Drawing.Size(41, 31)
+        Me.chbTrailerM.Size = New System.Drawing.Size(43, 31)
         Me.chbTrailerM.TabIndex = 22
         Me.chbTrailerM.Text = "Trailer"
         Me.chbTrailerM.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -3221,7 +3243,7 @@ Partial Class scafoldTarking
         Me.chbCraneM.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.chbCraneM.Location = New System.Drawing.Point(3, 40)
         Me.chbCraneM.Name = "chbCraneM"
-        Me.chbCraneM.Size = New System.Drawing.Size(41, 32)
+        Me.chbCraneM.Size = New System.Drawing.Size(43, 32)
         Me.chbCraneM.TabIndex = 24
         Me.chbCraneM.Text = "Crane"
         Me.chbCraneM.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -3236,7 +3258,7 @@ Partial Class scafoldTarking
         Me.GroupBox5.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.GroupBox5.Location = New System.Drawing.Point(3, 104)
         Me.GroupBox5.Name = "GroupBox5"
-        Me.GroupBox5.Size = New System.Drawing.Size(197, 157)
+        Me.GroupBox5.Size = New System.Drawing.Size(202, 157)
         Me.GroupBox5.TabIndex = 1
         Me.GroupBox5.TabStop = False
         Me.GroupBox5.Text = "Leg  Count"
@@ -3248,17 +3270,17 @@ Partial Class scafoldTarking
         Me.Panel86.ForeColor = System.Drawing.SystemColors.WindowText
         Me.Panel86.Location = New System.Drawing.Point(3, 17)
         Me.Panel86.Name = "Panel86"
-        Me.Panel86.Size = New System.Drawing.Size(191, 137)
+        Me.Panel86.Size = New System.Drawing.Size(196, 137)
         Me.Panel86.TabIndex = 1
         '
         'tblLegMS
         '
         Me.tblLegMS.AllowUserToAddRows = False
         Me.tblLegMS.AllowUserToDeleteRows = False
-        DataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.tblLegMS.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle8
+        DataGridViewCellStyle18.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle18.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle18.SelectionForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.tblLegMS.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle18
         Me.tblLegMS.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.tblLegMS.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.tblLegMS.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.clmIDLCModification, Me.clmQTYLCModification, Me.clmHeigthLCModification, Me.plf, Me.psqf})
@@ -3266,7 +3288,7 @@ Partial Class scafoldTarking
         Me.tblLegMS.Location = New System.Drawing.Point(0, 0)
         Me.tblLegMS.Name = "tblLegMS"
         Me.tblLegMS.RowHeadersVisible = False
-        Me.tblLegMS.Size = New System.Drawing.Size(191, 137)
+        Me.tblLegMS.Size = New System.Drawing.Size(196, 137)
         Me.tblLegMS.TabIndex = 0
         '
         'clmIDLCModification
@@ -3300,6 +3322,7 @@ Partial Class scafoldTarking
         'Panel63
         '
         Me.Panel63.BackColor = System.Drawing.Color.FromArgb(CType(CType(83, Byte), Integer), CType(CType(93, Byte), Integer), CType(CType(102, Byte), Integer))
+        Me.Panel63.Controls.Add(Me.btnReportModification)
         Me.Panel63.Controls.Add(Me.btnUploadExcelModification)
         Me.Panel63.Controls.Add(Me.btnNewModification)
         Me.Panel63.Controls.Add(Me.btnDeleteRowM)
@@ -3308,9 +3331,9 @@ Partial Class scafoldTarking
         Me.Panel63.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel63.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Panel63.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.Panel63.Location = New System.Drawing.Point(212, 273)
+        Me.Panel63.Location = New System.Drawing.Point(217, 273)
         Me.Panel63.Name = "Panel63"
-        Me.Panel63.Size = New System.Drawing.Size(464, 50)
+        Me.Panel63.Size = New System.Drawing.Size(476, 50)
         Me.Panel63.TabIndex = 3
         '
         'btnUploadExcelModification
@@ -3321,7 +3344,7 @@ Partial Class scafoldTarking
         Me.btnUploadExcelModification.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnUploadExcelModification.Image = Global.AVT_TRAKING.My.Resources.Resources.upload2
         Me.btnUploadExcelModification.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnUploadExcelModification.Location = New System.Drawing.Point(102, 12)
+        Me.btnUploadExcelModification.Location = New System.Drawing.Point(187, 13)
         Me.btnUploadExcelModification.Name = "btnUploadExcelModification"
         Me.btnUploadExcelModification.Size = New System.Drawing.Size(109, 23)
         Me.btnUploadExcelModification.TabIndex = 32
@@ -3352,9 +3375,9 @@ Partial Class scafoldTarking
         Me.btnDeleteRowM.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnDeleteRowM.Image = Global.AVT_TRAKING.My.Resources.Resources.delete
         Me.btnDeleteRowM.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnDeleteRowM.Location = New System.Drawing.Point(343, 12)
+        Me.btnDeleteRowM.Location = New System.Drawing.Point(357, 12)
         Me.btnDeleteRowM.Name = "btnDeleteRowM"
-        Me.btnDeleteRowM.Size = New System.Drawing.Size(109, 23)
+        Me.btnDeleteRowM.Size = New System.Drawing.Size(107, 23)
         Me.btnDeleteRowM.TabIndex = 31
         Me.btnDeleteRowM.Text = "Delete Row"
         Me.btnDeleteRowM.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -3367,9 +3390,9 @@ Partial Class scafoldTarking
         Me.btnNextModification.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(58, Byte), Integer), CType(CType(115, Byte), Integer))
         Me.btnNextModification.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnNextModification.Image = Global.AVT_TRAKING.My.Resources.Resources._next
-        Me.btnNextModification.Location = New System.Drawing.Point(282, 12)
+        Me.btnNextModification.Location = New System.Drawing.Point(332, 12)
         Me.btnNextModification.Name = "btnNextModification"
-        Me.btnNextModification.Size = New System.Drawing.Size(57, 23)
+        Me.btnNextModification.Size = New System.Drawing.Size(22, 23)
         Me.btnNextModification.TabIndex = 30
         Me.btnNextModification.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         Me.btnNextModification.UseVisualStyleBackColor = True
@@ -3381,9 +3404,9 @@ Partial Class scafoldTarking
         Me.btnBackModification.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(58, Byte), Integer), CType(CType(115, Byte), Integer))
         Me.btnBackModification.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnBackModification.Image = Global.AVT_TRAKING.My.Resources.Resources.after1
-        Me.btnBackModification.Location = New System.Drawing.Point(221, 12)
+        Me.btnBackModification.Location = New System.Drawing.Point(302, 12)
         Me.btnBackModification.Name = "btnBackModification"
-        Me.btnBackModification.Size = New System.Drawing.Size(57, 23)
+        Me.btnBackModification.Size = New System.Drawing.Size(22, 23)
         Me.btnBackModification.TabIndex = 29
         Me.btnBackModification.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         Me.btnBackModification.UseVisualStyleBackColor = True
@@ -3400,7 +3423,7 @@ Partial Class scafoldTarking
         Me.Panel68.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.Panel68.Location = New System.Drawing.Point(3, 273)
         Me.Panel68.Name = "Panel68"
-        Me.Panel68.Size = New System.Drawing.Size(203, 50)
+        Me.Panel68.Size = New System.Drawing.Size(208, 50)
         Me.Panel68.TabIndex = 4
         '
         'lblPSQFM
@@ -3454,9 +3477,9 @@ Partial Class scafoldTarking
         Me.Panel67.Controls.Add(Me.btnRefreshTPSM)
         Me.Panel67.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Panel67.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.Panel67.Location = New System.Drawing.Point(682, 273)
+        Me.Panel67.Location = New System.Drawing.Point(699, 273)
         Me.Panel67.Name = "Panel67"
-        Me.Panel67.Size = New System.Drawing.Size(256, 50)
+        Me.Panel67.Size = New System.Drawing.Size(262, 50)
         Me.Panel67.TabIndex = 5
         '
         'lblTotalQTYProductMS
@@ -3465,7 +3488,7 @@ Partial Class scafoldTarking
         Me.lblTotalQTYProductMS.AutoSize = True
         Me.lblTotalQTYProductMS.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblTotalQTYProductMS.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(58, Byte), Integer), CType(CType(115, Byte), Integer))
-        Me.lblTotalQTYProductMS.Location = New System.Drawing.Point(196, 16)
+        Me.lblTotalQTYProductMS.Location = New System.Drawing.Point(202, 16)
         Me.lblTotalQTYProductMS.Name = "lblTotalQTYProductMS"
         Me.lblTotalQTYProductMS.Size = New System.Drawing.Size(16, 16)
         Me.lblTotalQTYProductMS.TabIndex = 4
@@ -3475,7 +3498,7 @@ Partial Class scafoldTarking
         '
         Me.Label71.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Label71.AutoSize = True
-        Me.Label71.Location = New System.Drawing.Point(137, 17)
+        Me.Label71.Location = New System.Drawing.Point(143, 17)
         Me.Label71.Name = "Label71"
         Me.Label71.Size = New System.Drawing.Size(61, 13)
         Me.Label71.TabIndex = 3
@@ -3503,7 +3526,7 @@ Partial Class scafoldTarking
         Me.Panel56.Dock = System.Windows.Forms.DockStyle.Top
         Me.Panel56.Location = New System.Drawing.Point(0, 0)
         Me.Panel56.Name = "Panel56"
-        Me.Panel56.Size = New System.Drawing.Size(941, 146)
+        Me.Panel56.Size = New System.Drawing.Size(964, 146)
         Me.Panel56.TabIndex = 0
         '
         'panel58TablesInfoModification
@@ -3513,7 +3536,7 @@ Partial Class scafoldTarking
         Me.panel58TablesInfoModification.Dock = System.Windows.Forms.DockStyle.Fill
         Me.panel58TablesInfoModification.Location = New System.Drawing.Point(0, 84)
         Me.panel58TablesInfoModification.Name = "panel58TablesInfoModification"
-        Me.panel58TablesInfoModification.Size = New System.Drawing.Size(941, 62)
+        Me.panel58TablesInfoModification.Size = New System.Drawing.Size(964, 62)
         Me.panel58TablesInfoModification.TabIndex = 23
         '
         'TableLayoutPanel1
@@ -3530,7 +3553,7 @@ Partial Class scafoldTarking
         Me.TableLayoutPanel1.RowCount = 1
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 62.0!))
-        Me.TableLayoutPanel1.Size = New System.Drawing.Size(941, 62)
+        Me.TableLayoutPanel1.Size = New System.Drawing.Size(964, 62)
         Me.TableLayoutPanel1.TabIndex = 0
         '
         'tblActivityHoursSM
@@ -3544,10 +3567,10 @@ Partial Class scafoldTarking
         Me.tblActivityHoursSM.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.tblActivityHoursSM.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Build, Me.Martl, Me.Travl, Me.Wthr, Me.Alarm, Me.Safty, Me.StdBy, Me.Other, Me.ToHrs})
         Me.tblActivityHoursSM.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.tblActivityHoursSM.Location = New System.Drawing.Point(473, 3)
+        Me.tblActivityHoursSM.Location = New System.Drawing.Point(485, 3)
         Me.tblActivityHoursSM.Name = "tblActivityHoursSM"
         Me.tblActivityHoursSM.RowHeadersVisible = False
-        Me.tblActivityHoursSM.Size = New System.Drawing.Size(465, 56)
+        Me.tblActivityHoursSM.Size = New System.Drawing.Size(476, 56)
         Me.tblActivityHoursSM.TabIndex = 19
         '
         'Build
@@ -3602,7 +3625,7 @@ Partial Class scafoldTarking
         Me.Panel59.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel59.Location = New System.Drawing.Point(3, 3)
         Me.Panel59.Name = "Panel59"
-        Me.Panel59.Size = New System.Drawing.Size(464, 56)
+        Me.Panel59.Size = New System.Drawing.Size(476, 56)
         Me.Panel59.TabIndex = 0
         '
         'tblScaffoldInformationSM
@@ -3620,7 +3643,7 @@ Partial Class scafoldTarking
         Me.tblScaffoldInformationSM.Name = "tblScaffoldInformationSM"
         Me.tblScaffoldInformationSM.ReadOnly = True
         Me.tblScaffoldInformationSM.RowHeadersVisible = False
-        Me.tblScaffoldInformationSM.Size = New System.Drawing.Size(464, 56)
+        Me.tblScaffoldInformationSM.Size = New System.Drawing.Size(476, 56)
         Me.tblScaffoldInformationSM.TabIndex = 18
         '
         'Type
@@ -3671,7 +3694,7 @@ Partial Class scafoldTarking
         Me.Panel57.Dock = System.Windows.Forms.DockStyle.Top
         Me.Panel57.Location = New System.Drawing.Point(0, 0)
         Me.Panel57.Name = "Panel57"
-        Me.Panel57.Size = New System.Drawing.Size(941, 84)
+        Me.Panel57.Size = New System.Drawing.Size(964, 84)
         Me.Panel57.TabIndex = 22
         '
         'TableLayoutPanel2
@@ -3690,7 +3713,7 @@ Partial Class scafoldTarking
         Me.TableLayoutPanel2.Name = "TableLayoutPanel2"
         Me.TableLayoutPanel2.RowCount = 1
         Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-        Me.TableLayoutPanel2.Size = New System.Drawing.Size(941, 84)
+        Me.TableLayoutPanel2.Size = New System.Drawing.Size(964, 84)
         Me.TableLayoutPanel2.TabIndex = 0
         '
         'Panel58
@@ -3707,7 +3730,7 @@ Partial Class scafoldTarking
         Me.Panel58.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.Panel58.Location = New System.Drawing.Point(3, 3)
         Me.Panel58.Name = "Panel58"
-        Me.Panel58.Size = New System.Drawing.Size(307, 78)
+        Me.Panel58.Size = New System.Drawing.Size(315, 78)
         Me.Panel58.TabIndex = 0
         '
         'Label43
@@ -3725,7 +3748,7 @@ Partial Class scafoldTarking
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.txtModificationID.Location = New System.Drawing.Point(65, 5)
         Me.txtModificationID.Name = "txtModificationID"
-        Me.txtModificationID.Size = New System.Drawing.Size(233, 21)
+        Me.txtModificationID.Size = New System.Drawing.Size(241, 21)
         Me.txtModificationID.TabIndex = 9
         '
         'Label56
@@ -3753,7 +3776,7 @@ Partial Class scafoldTarking
         Me.txtWOModification.Location = New System.Drawing.Point(65, 53)
         Me.txtWOModification.Name = "txtWOModification"
         Me.txtWOModification.ReadOnly = True
-        Me.txtWOModification.Size = New System.Drawing.Size(233, 21)
+        Me.txtWOModification.Size = New System.Drawing.Size(241, 21)
         Me.txtWOModification.TabIndex = 11
         '
         'cmbTagScaffold
@@ -3763,7 +3786,7 @@ Partial Class scafoldTarking
         Me.cmbTagScaffold.FormattingEnabled = True
         Me.cmbTagScaffold.Location = New System.Drawing.Point(65, 29)
         Me.cmbTagScaffold.Name = "cmbTagScaffold"
-        Me.cmbTagScaffold.Size = New System.Drawing.Size(233, 21)
+        Me.cmbTagScaffold.Size = New System.Drawing.Size(241, 21)
         Me.cmbTagScaffold.TabIndex = 10
         '
         'Panel61
@@ -3777,9 +3800,9 @@ Partial Class scafoldTarking
         Me.Panel61.Controls.Add(Me.cmbRequestBY)
         Me.Panel61.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel61.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Panel61.Location = New System.Drawing.Point(316, 3)
+        Me.Panel61.Location = New System.Drawing.Point(324, 3)
         Me.Panel61.Name = "Panel61"
-        Me.Panel61.Size = New System.Drawing.Size(307, 78)
+        Me.Panel61.Size = New System.Drawing.Size(315, 78)
         Me.Panel61.TabIndex = 1
         '
         'Label57
@@ -3807,7 +3830,7 @@ Partial Class scafoldTarking
         Me.dtpModificationDate.CustomFormat = "MM/dd/yyyy"
         Me.dtpModificationDate.Location = New System.Drawing.Point(87, 52)
         Me.dtpModificationDate.Name = "dtpModificationDate"
-        Me.dtpModificationDate.Size = New System.Drawing.Size(216, 21)
+        Me.dtpModificationDate.Size = New System.Drawing.Size(224, 21)
         Me.dtpModificationDate.TabIndex = 14
         '
         'cmbReqCompany
@@ -3817,7 +3840,7 @@ Partial Class scafoldTarking
         Me.cmbReqCompany.FormattingEnabled = True
         Me.cmbReqCompany.Location = New System.Drawing.Point(88, 3)
         Me.cmbReqCompany.Name = "cmbReqCompany"
-        Me.cmbReqCompany.Size = New System.Drawing.Size(216, 21)
+        Me.cmbReqCompany.Size = New System.Drawing.Size(224, 21)
         Me.cmbReqCompany.TabIndex = 12
         '
         'Label58
@@ -3836,7 +3859,7 @@ Partial Class scafoldTarking
         Me.cmbRequestBY.FormattingEnabled = True
         Me.cmbRequestBY.Location = New System.Drawing.Point(87, 28)
         Me.cmbRequestBY.Name = "cmbRequestBY"
-        Me.cmbRequestBY.Size = New System.Drawing.Size(216, 21)
+        Me.cmbRequestBY.Size = New System.Drawing.Size(224, 21)
         Me.cmbRequestBY.TabIndex = 13
         '
         'Panel62
@@ -3851,9 +3874,9 @@ Partial Class scafoldTarking
         Me.Panel62.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel62.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Panel62.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.Panel62.Location = New System.Drawing.Point(629, 3)
+        Me.Panel62.Location = New System.Drawing.Point(645, 3)
         Me.Panel62.Name = "Panel62"
-        Me.Panel62.Size = New System.Drawing.Size(309, 78)
+        Me.Panel62.Size = New System.Drawing.Size(316, 78)
         Me.Panel62.TabIndex = 2
         '
         'Label60
@@ -3872,7 +3895,7 @@ Partial Class scafoldTarking
         Me.cmbErectorModification.FormattingEnabled = True
         Me.cmbErectorModification.Location = New System.Drawing.Point(63, 26)
         Me.cmbErectorModification.Name = "cmbErectorModification"
-        Me.cmbErectorModification.Size = New System.Drawing.Size(239, 21)
+        Me.cmbErectorModification.Size = New System.Drawing.Size(246, 21)
         Me.cmbErectorModification.TabIndex = 16
         '
         'cmbForemanModification
@@ -3882,7 +3905,7 @@ Partial Class scafoldTarking
         Me.cmbForemanModification.FormattingEnabled = True
         Me.cmbForemanModification.Location = New System.Drawing.Point(63, 2)
         Me.cmbForemanModification.Name = "cmbForemanModification"
-        Me.cmbForemanModification.Size = New System.Drawing.Size(239, 21)
+        Me.cmbForemanModification.Size = New System.Drawing.Size(246, 21)
         Me.cmbForemanModification.TabIndex = 15
         '
         'Label61
@@ -3900,7 +3923,7 @@ Partial Class scafoldTarking
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.txtCommentsModification.Location = New System.Drawing.Point(63, 50)
         Me.txtCommentsModification.Name = "txtCommentsModification"
-        Me.txtCommentsModification.Size = New System.Drawing.Size(239, 21)
+        Me.txtCommentsModification.Size = New System.Drawing.Size(246, 21)
         Me.txtCommentsModification.TabIndex = 17
         '
         'Label62
@@ -3918,7 +3941,7 @@ Partial Class scafoldTarking
         Me.tbpDismantle.Location = New System.Drawing.Point(4, 22)
         Me.tbpDismantle.Name = "tbpDismantle"
         Me.tbpDismantle.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbpDismantle.Size = New System.Drawing.Size(941, 472)
+        Me.tbpDismantle.Size = New System.Drawing.Size(964, 472)
         Me.tbpDismantle.TabIndex = 10
         Me.tbpDismantle.Text = "Dismantle"
         Me.tbpDismantle.UseVisualStyleBackColor = True
@@ -3929,7 +3952,7 @@ Partial Class scafoldTarking
         Me.Panel81.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel81.Location = New System.Drawing.Point(3, 3)
         Me.Panel81.Name = "Panel81"
-        Me.Panel81.Size = New System.Drawing.Size(935, 466)
+        Me.Panel81.Size = New System.Drawing.Size(958, 466)
         Me.Panel81.TabIndex = 0
         '
         'TableLayoutPanel18
@@ -3946,7 +3969,7 @@ Partial Class scafoldTarking
         Me.TableLayoutPanel18.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 24.17583!))
         Me.TableLayoutPanel18.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.7033!))
         Me.TableLayoutPanel18.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 58.68132!))
-        Me.TableLayoutPanel18.Size = New System.Drawing.Size(935, 466)
+        Me.TableLayoutPanel18.Size = New System.Drawing.Size(958, 466)
         Me.TableLayoutPanel18.TabIndex = 0
         '
         'Panel82
@@ -3955,7 +3978,7 @@ Partial Class scafoldTarking
         Me.Panel82.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel82.Location = New System.Drawing.Point(3, 116)
         Me.Panel82.Name = "Panel82"
-        Me.Panel82.Size = New System.Drawing.Size(929, 72)
+        Me.Panel82.Size = New System.Drawing.Size(952, 72)
         Me.Panel82.TabIndex = 0
         '
         'TableLayoutPanel21
@@ -3970,7 +3993,7 @@ Partial Class scafoldTarking
         Me.TableLayoutPanel21.Name = "TableLayoutPanel21"
         Me.TableLayoutPanel21.RowCount = 1
         Me.TableLayoutPanel21.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-        Me.TableLayoutPanel21.Size = New System.Drawing.Size(929, 72)
+        Me.TableLayoutPanel21.Size = New System.Drawing.Size(952, 72)
         Me.TableLayoutPanel21.TabIndex = 0
         '
         'tblActivityHoursDismantle
@@ -3980,14 +4003,14 @@ Partial Class scafoldTarking
         Me.tblActivityHoursDismantle.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.tblActivityHoursDismantle.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCellsExceptHeaders
         Me.tblActivityHoursDismantle.BackgroundColor = System.Drawing.Color.White
-        DataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle9.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle9.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle9.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle9.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle9.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.tblActivityHoursDismantle.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle9
+        DataGridViewCellStyle19.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle19.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle19.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle19.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle19.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle19.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle19.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.tblActivityHoursDismantle.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle19
         Me.tblActivityHoursDismantle.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.tblActivityHoursDismantle.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.clmIdActvHrsDS, Me.clmDismentleD, Me.clmMablD, Me.clmTravlD, Me.clmWthrD, Me.clmAlarmD, Me.clmSaftyD, Me.clmStdByD, Me.clmOthHD, Me.clmTotalHD})
         Me.tblActivityHoursDismantle.Dock = System.Windows.Forms.DockStyle.Fill
@@ -3995,9 +4018,9 @@ Partial Class scafoldTarking
         Me.tblActivityHoursDismantle.MultiSelect = False
         Me.tblActivityHoursDismantle.Name = "tblActivityHoursDismantle"
         Me.tblActivityHoursDismantle.RowHeadersVisible = False
-        DataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.tblActivityHoursDismantle.RowsDefaultCellStyle = DataGridViewCellStyle10
-        Me.tblActivityHoursDismantle.Size = New System.Drawing.Size(644, 66)
+        DataGridViewCellStyle20.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.tblActivityHoursDismantle.RowsDefaultCellStyle = DataGridViewCellStyle20
+        Me.tblActivityHoursDismantle.Size = New System.Drawing.Size(660, 66)
         Me.tblActivityHoursDismantle.TabIndex = 10
         '
         'clmIdActvHrsDS
@@ -4062,9 +4085,9 @@ Partial Class scafoldTarking
         Me.GroupBox6.Controls.Add(Me.TableLayoutPanel22)
         Me.GroupBox6.Dock = System.Windows.Forms.DockStyle.Fill
         Me.GroupBox6.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.GroupBox6.Location = New System.Drawing.Point(653, 3)
+        Me.GroupBox6.Location = New System.Drawing.Point(669, 3)
         Me.GroupBox6.Name = "GroupBox6"
-        Me.GroupBox6.Size = New System.Drawing.Size(273, 66)
+        Me.GroupBox6.Size = New System.Drawing.Size(280, 66)
         Me.GroupBox6.TabIndex = 4
         Me.GroupBox6.TabStop = False
         Me.GroupBox6.Text = "Material Handeling"
@@ -4089,7 +4112,7 @@ Partial Class scafoldTarking
         Me.TableLayoutPanel22.RowCount = 2
         Me.TableLayoutPanel22.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
         Me.TableLayoutPanel22.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
-        Me.TableLayoutPanel22.Size = New System.Drawing.Size(267, 46)
+        Me.TableLayoutPanel22.Size = New System.Drawing.Size(274, 46)
         Me.TableLayoutPanel22.TabIndex = 0
         '
         'chbCraneDS
@@ -4098,9 +4121,9 @@ Partial Class scafoldTarking
         Me.chbCraneDS.CheckAlign = System.Drawing.ContentAlignment.MiddleRight
         Me.chbCraneDS.Dock = System.Windows.Forms.DockStyle.Fill
         Me.chbCraneDS.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.0!)
-        Me.chbCraneDS.Location = New System.Drawing.Point(201, 3)
+        Me.chbCraneDS.Location = New System.Drawing.Point(207, 3)
         Me.chbCraneDS.Name = "chbCraneDS"
-        Me.chbCraneDS.Size = New System.Drawing.Size(63, 17)
+        Me.chbCraneDS.Size = New System.Drawing.Size(64, 17)
         Me.chbCraneDS.TabIndex = 14
         Me.chbCraneDS.Text = "Crane"
         Me.chbCraneDS.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -4112,9 +4135,9 @@ Partial Class scafoldTarking
         Me.chbElevatorDS.CheckAlign = System.Drawing.ContentAlignment.MiddleRight
         Me.chbElevatorDS.Dock = System.Windows.Forms.DockStyle.Fill
         Me.chbElevatorDS.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.0!)
-        Me.chbElevatorDS.Location = New System.Drawing.Point(135, 26)
+        Me.chbElevatorDS.Location = New System.Drawing.Point(139, 26)
         Me.chbElevatorDS.Name = "chbElevatorDS"
-        Me.chbElevatorDS.Size = New System.Drawing.Size(60, 17)
+        Me.chbElevatorDS.Size = New System.Drawing.Size(62, 17)
         Me.chbElevatorDS.TabIndex = 17
         Me.chbElevatorDS.Text = "Elevator"
         Me.chbElevatorDS.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -4128,7 +4151,7 @@ Partial Class scafoldTarking
         Me.chbTruckDS.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.0!)
         Me.chbTruckDS.Location = New System.Drawing.Point(3, 3)
         Me.chbTruckDS.Name = "chbTruckDS"
-        Me.chbTruckDS.Size = New System.Drawing.Size(60, 17)
+        Me.chbTruckDS.Size = New System.Drawing.Size(62, 17)
         Me.chbTruckDS.TabIndex = 11
         Me.chbTruckDS.Text = "Truck"
         Me.chbTruckDS.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -4140,9 +4163,9 @@ Partial Class scafoldTarking
         Me.chbForkliftDS.CheckAlign = System.Drawing.ContentAlignment.MiddleRight
         Me.chbForkliftDS.Dock = System.Windows.Forms.DockStyle.Fill
         Me.chbForkliftDS.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.0!)
-        Me.chbForkliftDS.Location = New System.Drawing.Point(69, 3)
+        Me.chbForkliftDS.Location = New System.Drawing.Point(71, 3)
         Me.chbForkliftDS.Name = "chbForkliftDS"
-        Me.chbForkliftDS.Size = New System.Drawing.Size(60, 17)
+        Me.chbForkliftDS.Size = New System.Drawing.Size(62, 17)
         Me.chbForkliftDS.TabIndex = 12
         Me.chbForkliftDS.Text = "Forklift"
         Me.chbForkliftDS.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -4154,9 +4177,9 @@ Partial Class scafoldTarking
         Me.chbPassedDS.CheckAlign = System.Drawing.ContentAlignment.MiddleRight
         Me.chbPassedDS.Dock = System.Windows.Forms.DockStyle.Fill
         Me.chbPassedDS.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.0!)
-        Me.chbPassedDS.Location = New System.Drawing.Point(69, 26)
+        Me.chbPassedDS.Location = New System.Drawing.Point(71, 26)
         Me.chbPassedDS.Name = "chbPassedDS"
-        Me.chbPassedDS.Size = New System.Drawing.Size(60, 17)
+        Me.chbPassedDS.Size = New System.Drawing.Size(62, 17)
         Me.chbPassedDS.TabIndex = 16
         Me.chbPassedDS.Text = "Passed"
         Me.chbPassedDS.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -4168,9 +4191,9 @@ Partial Class scafoldTarking
         Me.chbTrailerDS.CheckAlign = System.Drawing.ContentAlignment.MiddleRight
         Me.chbTrailerDS.Dock = System.Windows.Forms.DockStyle.Fill
         Me.chbTrailerDS.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.0!)
-        Me.chbTrailerDS.Location = New System.Drawing.Point(135, 3)
+        Me.chbTrailerDS.Location = New System.Drawing.Point(139, 3)
         Me.chbTrailerDS.Name = "chbTrailerDS"
-        Me.chbTrailerDS.Size = New System.Drawing.Size(60, 17)
+        Me.chbTrailerDS.Size = New System.Drawing.Size(62, 17)
         Me.chbTrailerDS.TabIndex = 13
         Me.chbTrailerDS.Text = "Trailer"
         Me.chbTrailerDS.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -4184,7 +4207,7 @@ Partial Class scafoldTarking
         Me.chbRopeDS.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.0!)
         Me.chbRopeDS.Location = New System.Drawing.Point(3, 26)
         Me.chbRopeDS.Name = "chbRopeDS"
-        Me.chbRopeDS.Size = New System.Drawing.Size(60, 17)
+        Me.chbRopeDS.Size = New System.Drawing.Size(62, 17)
         Me.chbRopeDS.TabIndex = 15
         Me.chbRopeDS.Text = "Rope"
         Me.chbRopeDS.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -4204,7 +4227,7 @@ Partial Class scafoldTarking
         Me.TableLayoutPanel19.Name = "TableLayoutPanel19"
         Me.TableLayoutPanel19.RowCount = 1
         Me.TableLayoutPanel19.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-        Me.TableLayoutPanel19.Size = New System.Drawing.Size(929, 107)
+        Me.TableLayoutPanel19.Size = New System.Drawing.Size(952, 107)
         Me.TableLayoutPanel19.TabIndex = 1
         '
         'Panel83
@@ -4213,7 +4236,7 @@ Partial Class scafoldTarking
         Me.Panel83.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel83.Location = New System.Drawing.Point(3, 3)
         Me.Panel83.Name = "Panel83"
-        Me.Panel83.Size = New System.Drawing.Size(303, 101)
+        Me.Panel83.Size = New System.Drawing.Size(311, 101)
         Me.Panel83.TabIndex = 0
         '
         'TableLayoutPanel25
@@ -4230,7 +4253,7 @@ Partial Class scafoldTarking
         Me.TableLayoutPanel25.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 60.0!))
         Me.TableLayoutPanel25.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
         Me.TableLayoutPanel25.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
-        Me.TableLayoutPanel25.Size = New System.Drawing.Size(303, 101)
+        Me.TableLayoutPanel25.Size = New System.Drawing.Size(311, 101)
         Me.TableLayoutPanel25.TabIndex = 0
         '
         'Panel90
@@ -4244,7 +4267,7 @@ Partial Class scafoldTarking
         Me.Panel90.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.Panel90.Location = New System.Drawing.Point(3, 3)
         Me.Panel90.Name = "Panel90"
-        Me.Panel90.Size = New System.Drawing.Size(297, 34)
+        Me.Panel90.Size = New System.Drawing.Size(305, 34)
         Me.Panel90.TabIndex = 0
         '
         'cmbTagDismantle
@@ -4262,7 +4285,7 @@ Partial Class scafoldTarking
         Me.txtWODismantle.Location = New System.Drawing.Point(197, 6)
         Me.txtWODismantle.Name = "txtWODismantle"
         Me.txtWODismantle.ReadOnly = True
-        Me.txtWODismantle.Size = New System.Drawing.Size(99, 21)
+        Me.txtWODismantle.Size = New System.Drawing.Size(107, 21)
         Me.txtWODismantle.TabIndex = 2
         '
         'Label73
@@ -4292,7 +4315,7 @@ Partial Class scafoldTarking
         Me.Panel91.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.Panel91.Location = New System.Drawing.Point(3, 43)
         Me.Panel91.Name = "Panel91"
-        Me.Panel91.Size = New System.Drawing.Size(297, 55)
+        Me.Panel91.Size = New System.Drawing.Size(305, 55)
         Me.Panel91.TabIndex = 1
         '
         'txtCommentDismantle
@@ -4302,7 +4325,7 @@ Partial Class scafoldTarking
         Me.txtCommentDismantle.Location = New System.Drawing.Point(59, 1)
         Me.txtCommentDismantle.Multiline = True
         Me.txtCommentDismantle.Name = "txtCommentDismantle"
-        Me.txtCommentDismantle.Size = New System.Drawing.Size(237, 41)
+        Me.txtCommentDismantle.Size = New System.Drawing.Size(245, 41)
         Me.txtCommentDismantle.TabIndex = 3
         '
         'Label75
@@ -4327,9 +4350,9 @@ Partial Class scafoldTarking
         Me.Panel84.Controls.Add(Me.Label78)
         Me.Panel84.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel84.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.Panel84.Location = New System.Drawing.Point(312, 3)
+        Me.Panel84.Location = New System.Drawing.Point(320, 3)
         Me.Panel84.Name = "Panel84"
-        Me.Panel84.Size = New System.Drawing.Size(303, 101)
+        Me.Panel84.Size = New System.Drawing.Size(311, 101)
         Me.Panel84.TabIndex = 1
         '
         'cmbErectorDismantle
@@ -4339,7 +4362,7 @@ Partial Class scafoldTarking
         Me.cmbErectorDismantle.FormattingEnabled = True
         Me.cmbErectorDismantle.Location = New System.Drawing.Point(91, 75)
         Me.cmbErectorDismantle.Name = "cmbErectorDismantle"
-        Me.cmbErectorDismantle.Size = New System.Drawing.Size(209, 21)
+        Me.cmbErectorDismantle.Size = New System.Drawing.Size(217, 21)
         Me.cmbErectorDismantle.TabIndex = 8
         '
         'Label82
@@ -4358,7 +4381,7 @@ Partial Class scafoldTarking
         Me.cmbForemanDismantle.FormattingEnabled = True
         Me.cmbForemanDismantle.Location = New System.Drawing.Point(91, 51)
         Me.cmbForemanDismantle.Name = "cmbForemanDismantle"
-        Me.cmbForemanDismantle.Size = New System.Drawing.Size(209, 21)
+        Me.cmbForemanDismantle.Size = New System.Drawing.Size(217, 21)
         Me.cmbForemanDismantle.TabIndex = 6
         '
         'cmbRequestByDismantle
@@ -4368,7 +4391,7 @@ Partial Class scafoldTarking
         Me.cmbRequestByDismantle.FormattingEnabled = True
         Me.cmbRequestByDismantle.Location = New System.Drawing.Point(91, 27)
         Me.cmbRequestByDismantle.Name = "cmbRequestByDismantle"
-        Me.cmbRequestByDismantle.Size = New System.Drawing.Size(209, 21)
+        Me.cmbRequestByDismantle.Size = New System.Drawing.Size(217, 21)
         Me.cmbRequestByDismantle.TabIndex = 5
         '
         'cmbReqCompanyDismantle
@@ -4378,7 +4401,7 @@ Partial Class scafoldTarking
         Me.cmbReqCompanyDismantle.FormattingEnabled = True
         Me.cmbReqCompanyDismantle.Location = New System.Drawing.Point(91, 3)
         Me.cmbReqCompanyDismantle.Name = "cmbReqCompanyDismantle"
-        Me.cmbReqCompanyDismantle.Size = New System.Drawing.Size(209, 21)
+        Me.cmbReqCompanyDismantle.Size = New System.Drawing.Size(217, 21)
         Me.cmbReqCompanyDismantle.TabIndex = 4
         '
         'Label76
@@ -4419,9 +4442,9 @@ Partial Class scafoldTarking
         Me.Panel85.Controls.Add(Me.Label81)
         Me.Panel85.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel85.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.Panel85.Location = New System.Drawing.Point(621, 3)
+        Me.Panel85.Location = New System.Drawing.Point(637, 3)
         Me.Panel85.Name = "Panel85"
-        Me.Panel85.Size = New System.Drawing.Size(305, 101)
+        Me.Panel85.Size = New System.Drawing.Size(312, 101)
         Me.Panel85.TabIndex = 2
         '
         'txtDaysActive
@@ -4431,7 +4454,7 @@ Partial Class scafoldTarking
         Me.txtDaysActive.Location = New System.Drawing.Point(95, 54)
         Me.txtDaysActive.Name = "txtDaysActive"
         Me.txtDaysActive.ReadOnly = True
-        Me.txtDaysActive.Size = New System.Drawing.Size(207, 21)
+        Me.txtDaysActive.Size = New System.Drawing.Size(214, 21)
         Me.txtDaysActive.TabIndex = 9
         '
         'dtpDismantleDate
@@ -4442,7 +4465,7 @@ Partial Class scafoldTarking
         Me.dtpDismantleDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom
         Me.dtpDismantleDate.Location = New System.Drawing.Point(95, 29)
         Me.dtpDismantleDate.Name = "dtpDismantleDate"
-        Me.dtpDismantleDate.Size = New System.Drawing.Size(207, 21)
+        Me.dtpDismantleDate.Size = New System.Drawing.Size(214, 21)
         Me.dtpDismantleDate.TabIndex = 8
         '
         'dtpRentStop
@@ -4453,7 +4476,7 @@ Partial Class scafoldTarking
         Me.dtpRentStop.Format = System.Windows.Forms.DateTimePickerFormat.Custom
         Me.dtpRentStop.Location = New System.Drawing.Point(95, 3)
         Me.dtpRentStop.Name = "dtpRentStop"
-        Me.dtpRentStop.Size = New System.Drawing.Size(207, 21)
+        Me.dtpRentStop.Size = New System.Drawing.Size(214, 21)
         Me.dtpRentStop.TabIndex = 7
         '
         'Label79
@@ -4498,7 +4521,7 @@ Partial Class scafoldTarking
         Me.TableLayoutPanel20.RowCount = 2
         Me.TableLayoutPanel20.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 80.0!))
         Me.TableLayoutPanel20.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20.0!))
-        Me.TableLayoutPanel20.Size = New System.Drawing.Size(929, 269)
+        Me.TableLayoutPanel20.Size = New System.Drawing.Size(952, 269)
         Me.TableLayoutPanel20.TabIndex = 2
         '
         'TableLayoutPanel24
@@ -4508,7 +4531,7 @@ Partial Class scafoldTarking
         Me.TableLayoutPanel24.Controls.Add(Me.Panel89, 0, 0)
         Me.TableLayoutPanel24.Controls.Add(Me.tblTotalScaffoldProductDS, 0, 1)
         Me.TableLayoutPanel24.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.TableLayoutPanel24.Location = New System.Drawing.Point(606, 3)
+        Me.TableLayoutPanel24.Location = New System.Drawing.Point(621, 3)
         Me.TableLayoutPanel24.Name = "TableLayoutPanel24"
         Me.TableLayoutPanel24.RowCount = 2
         Me.TableLayoutPanel24.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10.0!))
@@ -4516,7 +4539,7 @@ Partial Class scafoldTarking
         Me.TableLayoutPanel24.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
         Me.TableLayoutPanel24.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
         Me.TableLayoutPanel24.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
-        Me.TableLayoutPanel24.Size = New System.Drawing.Size(320, 209)
+        Me.TableLayoutPanel24.Size = New System.Drawing.Size(328, 209)
         Me.TableLayoutPanel24.TabIndex = 4
         '
         'Panel89
@@ -4526,7 +4549,7 @@ Partial Class scafoldTarking
         Me.Panel89.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel89.Location = New System.Drawing.Point(3, 3)
         Me.Panel89.Name = "Panel89"
-        Me.Panel89.Size = New System.Drawing.Size(314, 14)
+        Me.Panel89.Size = New System.Drawing.Size(322, 14)
         Me.Panel89.TabIndex = 3
         '
         'Label72
@@ -4554,7 +4577,7 @@ Partial Class scafoldTarking
         Me.tblTotalScaffoldProductDS.Name = "tblTotalScaffoldProductDS"
         Me.tblTotalScaffoldProductDS.ReadOnly = True
         Me.tblTotalScaffoldProductDS.RowHeadersVisible = False
-        Me.tblTotalScaffoldProductDS.Size = New System.Drawing.Size(314, 183)
+        Me.tblTotalScaffoldProductDS.Size = New System.Drawing.Size(322, 183)
         Me.tblTotalScaffoldProductDS.TabIndex = 0
         '
         'clmIdProductTD
@@ -4581,7 +4604,7 @@ Partial Class scafoldTarking
         Me.TableLayoutPanel23.RowCount = 2
         Me.TableLayoutPanel23.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10.0!))
         Me.TableLayoutPanel23.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 90.0!))
-        Me.TableLayoutPanel23.Size = New System.Drawing.Size(597, 209)
+        Me.TableLayoutPanel23.Size = New System.Drawing.Size(612, 209)
         Me.TableLayoutPanel23.TabIndex = 3
         '
         'tblDismantleProduct
@@ -4595,7 +4618,7 @@ Partial Class scafoldTarking
         Me.tblDismantleProduct.Location = New System.Drawing.Point(3, 23)
         Me.tblDismantleProduct.Name = "tblDismantleProduct"
         Me.tblDismantleProduct.ReadOnly = True
-        Me.tblDismantleProduct.Size = New System.Drawing.Size(591, 183)
+        Me.tblDismantleProduct.Size = New System.Drawing.Size(606, 183)
         Me.tblDismantleProduct.TabIndex = 0
         '
         'idProductD
@@ -4623,7 +4646,7 @@ Partial Class scafoldTarking
         Me.Panel87.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel87.Location = New System.Drawing.Point(3, 3)
         Me.Panel87.Name = "Panel87"
-        Me.Panel87.Size = New System.Drawing.Size(591, 14)
+        Me.Panel87.Size = New System.Drawing.Size(606, 14)
         Me.Panel87.TabIndex = 1
         '
         'Label70
@@ -4642,6 +4665,7 @@ Partial Class scafoldTarking
         'Panel88
         '
         Me.Panel88.BackColor = System.Drawing.Color.FromArgb(CType(CType(83, Byte), Integer), CType(CType(93, Byte), Integer), CType(CType(102, Byte), Integer))
+        Me.Panel88.Controls.Add(Me.btnReportDismantled)
         Me.Panel88.Controls.Add(Me.btnFindDismantle)
         Me.Panel88.Controls.Add(Me.btnUploadExcelDismantle)
         Me.Panel88.Controls.Add(Me.btnNextDismantle)
@@ -4649,7 +4673,7 @@ Partial Class scafoldTarking
         Me.Panel88.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel88.Location = New System.Drawing.Point(3, 218)
         Me.Panel88.Name = "Panel88"
-        Me.Panel88.Size = New System.Drawing.Size(597, 48)
+        Me.Panel88.Size = New System.Drawing.Size(612, 48)
         Me.Panel88.TabIndex = 5
         '
         'btnFindDismantle
@@ -4661,7 +4685,7 @@ Partial Class scafoldTarking
         Me.btnFindDismantle.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnFindDismantle.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.btnFindDismantle.Image = Global.AVT_TRAKING.My.Resources.Resources.loupe
-        Me.btnFindDismantle.Location = New System.Drawing.Point(552, 9)
+        Me.btnFindDismantle.Location = New System.Drawing.Point(567, 9)
         Me.btnFindDismantle.Name = "btnFindDismantle"
         Me.btnFindDismantle.Size = New System.Drawing.Size(42, 31)
         Me.btnFindDismantle.TabIndex = 12
@@ -4672,7 +4696,7 @@ Partial Class scafoldTarking
         Me.btnUploadExcelDismantle.FlatAppearance.BorderSize = 0
         Me.btnUploadExcelDismantle.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(58, Byte), Integer), CType(CType(115, Byte), Integer))
         Me.btnUploadExcelDismantle.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnUploadExcelDismantle.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnUploadExcelDismantle.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnUploadExcelDismantle.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.btnUploadExcelDismantle.Image = Global.AVT_TRAKING.My.Resources.Resources.upload2
         Me.btnUploadExcelDismantle.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
@@ -4693,7 +4717,7 @@ Partial Class scafoldTarking
         Me.btnNextDismantle.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnNextDismantle.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.btnNextDismantle.Image = Global.AVT_TRAKING.My.Resources.Resources._next
-        Me.btnNextDismantle.Location = New System.Drawing.Point(471, 13)
+        Me.btnNextDismantle.Location = New System.Drawing.Point(486, 13)
         Me.btnNextDismantle.Name = "btnNextDismantle"
         Me.btnNextDismantle.Size = New System.Drawing.Size(75, 23)
         Me.btnNextDismantle.TabIndex = 1
@@ -4708,7 +4732,7 @@ Partial Class scafoldTarking
         Me.btnBackDS.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnBackDS.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.btnBackDS.Image = Global.AVT_TRAKING.My.Resources.Resources.after1
-        Me.btnBackDS.Location = New System.Drawing.Point(400, 13)
+        Me.btnBackDS.Location = New System.Drawing.Point(415, 13)
         Me.btnBackDS.Name = "btnBackDS"
         Me.btnBackDS.Size = New System.Drawing.Size(75, 23)
         Me.btnBackDS.TabIndex = 0
@@ -4720,7 +4744,7 @@ Partial Class scafoldTarking
         Me.tbpProducts.Controls.Add(Me.Panel10)
         Me.tbpProducts.Location = New System.Drawing.Point(4, 22)
         Me.tbpProducts.Name = "tbpProducts"
-        Me.tbpProducts.Size = New System.Drawing.Size(941, 472)
+        Me.tbpProducts.Size = New System.Drawing.Size(964, 472)
         Me.tbpProducts.TabIndex = 3
         Me.tbpProducts.Text = "Products"
         Me.tbpProducts.UseVisualStyleBackColor = True
@@ -4731,7 +4755,7 @@ Partial Class scafoldTarking
         Me.Panel11.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel11.Location = New System.Drawing.Point(200, 0)
         Me.Panel11.Name = "Panel11"
-        Me.Panel11.Size = New System.Drawing.Size(741, 472)
+        Me.Panel11.Size = New System.Drawing.Size(764, 472)
         Me.Panel11.TabIndex = 1
         '
         'tblProduct
@@ -4740,7 +4764,7 @@ Partial Class scafoldTarking
         Me.tblProduct.Dock = System.Windows.Forms.DockStyle.Fill
         Me.tblProduct.Location = New System.Drawing.Point(0, 0)
         Me.tblProduct.Name = "tblProduct"
-        Me.tblProduct.Size = New System.Drawing.Size(741, 472)
+        Me.tblProduct.Size = New System.Drawing.Size(764, 472)
         Me.tblProduct.TabIndex = 0
         '
         'Panel10
@@ -4889,7 +4913,7 @@ Partial Class scafoldTarking
         Me.tbpAreaWOJob.Controls.Add(Me.Panel14)
         Me.tbpAreaWOJob.Location = New System.Drawing.Point(4, 22)
         Me.tbpAreaWOJob.Name = "tbpAreaWOJob"
-        Me.tbpAreaWOJob.Size = New System.Drawing.Size(941, 472)
+        Me.tbpAreaWOJob.Size = New System.Drawing.Size(964, 472)
         Me.tbpAreaWOJob.TabIndex = 4
         Me.tbpAreaWOJob.Text = "Area/WO/Sub-Job"
         Me.tbpAreaWOJob.UseVisualStyleBackColor = True
@@ -4900,7 +4924,7 @@ Partial Class scafoldTarking
         Me.Panel14.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel14.Location = New System.Drawing.Point(0, 0)
         Me.Panel14.Name = "Panel14"
-        Me.Panel14.Size = New System.Drawing.Size(941, 472)
+        Me.Panel14.Size = New System.Drawing.Size(964, 472)
         Me.Panel14.TabIndex = 0
         '
         'TableLayoutPanel26
@@ -4915,7 +4939,7 @@ Partial Class scafoldTarking
         Me.TableLayoutPanel26.RowCount = 2
         Me.TableLayoutPanel26.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
         Me.TableLayoutPanel26.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
-        Me.TableLayoutPanel26.Size = New System.Drawing.Size(941, 472)
+        Me.TableLayoutPanel26.Size = New System.Drawing.Size(964, 472)
         Me.TableLayoutPanel26.TabIndex = 3
         '
         'TableLayoutPanel27
@@ -4936,7 +4960,7 @@ Partial Class scafoldTarking
         Me.TableLayoutPanel27.RowCount = 2
         Me.TableLayoutPanel27.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30.0!))
         Me.TableLayoutPanel27.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-        Me.TableLayoutPanel27.Size = New System.Drawing.Size(935, 230)
+        Me.TableLayoutPanel27.Size = New System.Drawing.Size(958, 230)
         Me.TableLayoutPanel27.TabIndex = 0
         '
         'Panel17
@@ -4946,9 +4970,9 @@ Partial Class scafoldTarking
         Me.Panel17.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel17.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Panel17.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.Panel17.Location = New System.Drawing.Point(625, 3)
+        Me.Panel17.Location = New System.Drawing.Point(641, 3)
         Me.Panel17.Name = "Panel17"
-        Me.Panel17.Size = New System.Drawing.Size(307, 24)
+        Me.Panel17.Size = New System.Drawing.Size(314, 24)
         Me.Panel17.TabIndex = 5
         '
         'Label27
@@ -4970,9 +4994,9 @@ Partial Class scafoldTarking
         Me.Panel16.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel16.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Panel16.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.Panel16.Location = New System.Drawing.Point(314, 3)
+        Me.Panel16.Location = New System.Drawing.Point(322, 3)
         Me.Panel16.Name = "Panel16"
-        Me.Panel16.Size = New System.Drawing.Size(305, 24)
+        Me.Panel16.Size = New System.Drawing.Size(313, 24)
         Me.Panel16.TabIndex = 4
         '
         'Label42
@@ -4993,7 +5017,7 @@ Partial Class scafoldTarking
         Me.Panel19.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel19.Location = New System.Drawing.Point(3, 33)
         Me.Panel19.Name = "Panel19"
-        Me.Panel19.Size = New System.Drawing.Size(305, 194)
+        Me.Panel19.Size = New System.Drawing.Size(313, 194)
         Me.Panel19.TabIndex = 2
         '
         'tblAreas
@@ -5003,16 +5027,16 @@ Partial Class scafoldTarking
         Me.tblAreas.Dock = System.Windows.Forms.DockStyle.Fill
         Me.tblAreas.Location = New System.Drawing.Point(0, 0)
         Me.tblAreas.Name = "tblAreas"
-        Me.tblAreas.Size = New System.Drawing.Size(305, 194)
+        Me.tblAreas.Size = New System.Drawing.Size(313, 194)
         Me.tblAreas.TabIndex = 0
         '
         'Panel53
         '
         Me.Panel53.Controls.Add(Me.tblJobCat)
         Me.Panel53.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel53.Location = New System.Drawing.Point(314, 33)
+        Me.Panel53.Location = New System.Drawing.Point(322, 33)
         Me.Panel53.Name = "Panel53"
-        Me.Panel53.Size = New System.Drawing.Size(305, 194)
+        Me.Panel53.Size = New System.Drawing.Size(313, 194)
         Me.Panel53.TabIndex = 2
         '
         'tblJobCat
@@ -5022,16 +5046,16 @@ Partial Class scafoldTarking
         Me.tblJobCat.Dock = System.Windows.Forms.DockStyle.Fill
         Me.tblJobCat.Location = New System.Drawing.Point(0, 0)
         Me.tblJobCat.Name = "tblJobCat"
-        Me.tblJobCat.Size = New System.Drawing.Size(305, 194)
+        Me.tblJobCat.Size = New System.Drawing.Size(313, 194)
         Me.tblJobCat.TabIndex = 0
         '
         'Panel29
         '
         Me.Panel29.Controls.Add(Me.tblSubJobs)
         Me.Panel29.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel29.Location = New System.Drawing.Point(625, 33)
+        Me.Panel29.Location = New System.Drawing.Point(641, 33)
         Me.Panel29.Name = "Panel29"
-        Me.Panel29.Size = New System.Drawing.Size(307, 194)
+        Me.Panel29.Size = New System.Drawing.Size(314, 194)
         Me.Panel29.TabIndex = 2
         '
         'tblSubJobs
@@ -5041,7 +5065,7 @@ Partial Class scafoldTarking
         Me.tblSubJobs.Dock = System.Windows.Forms.DockStyle.Fill
         Me.tblSubJobs.Location = New System.Drawing.Point(0, 0)
         Me.tblSubJobs.Name = "tblSubJobs"
-        Me.tblSubJobs.Size = New System.Drawing.Size(307, 194)
+        Me.tblSubJobs.Size = New System.Drawing.Size(314, 194)
         Me.tblSubJobs.TabIndex = 0
         '
         'Panel15
@@ -5053,7 +5077,7 @@ Partial Class scafoldTarking
         Me.Panel15.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.Panel15.Location = New System.Drawing.Point(3, 3)
         Me.Panel15.Name = "Panel15"
-        Me.Panel15.Size = New System.Drawing.Size(305, 24)
+        Me.Panel15.Size = New System.Drawing.Size(313, 24)
         Me.Panel15.TabIndex = 3
         '
         'Label28
@@ -5080,7 +5104,7 @@ Partial Class scafoldTarking
         Me.TableLayoutPanel28.RowCount = 2
         Me.TableLayoutPanel28.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30.0!))
         Me.TableLayoutPanel28.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-        Me.TableLayoutPanel28.Size = New System.Drawing.Size(935, 230)
+        Me.TableLayoutPanel28.Size = New System.Drawing.Size(958, 230)
         Me.TableLayoutPanel28.TabIndex = 1
         '
         'Panel18
@@ -5092,7 +5116,7 @@ Partial Class scafoldTarking
         Me.Panel18.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.Panel18.Location = New System.Drawing.Point(3, 3)
         Me.Panel18.Name = "Panel18"
-        Me.Panel18.Size = New System.Drawing.Size(929, 24)
+        Me.Panel18.Size = New System.Drawing.Size(952, 24)
         Me.Panel18.TabIndex = 5
         '
         'Label26
@@ -5113,7 +5137,7 @@ Partial Class scafoldTarking
         Me.Panel27.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel27.Location = New System.Drawing.Point(3, 33)
         Me.Panel27.Name = "Panel27"
-        Me.Panel27.Size = New System.Drawing.Size(929, 194)
+        Me.Panel27.Size = New System.Drawing.Size(952, 194)
         Me.Panel27.TabIndex = 2
         '
         'tblWO
@@ -5126,7 +5150,7 @@ Partial Class scafoldTarking
         Me.tblWO.Location = New System.Drawing.Point(0, 0)
         Me.tblWO.Name = "tblWO"
         Me.tblWO.ReadOnly = True
-        Me.tblWO.Size = New System.Drawing.Size(929, 194)
+        Me.tblWO.Size = New System.Drawing.Size(952, 194)
         Me.tblWO.TabIndex = 0
         '
         'tbpUMClassStatus
@@ -5134,7 +5158,7 @@ Partial Class scafoldTarking
         Me.tbpUMClassStatus.Controls.Add(Me.Panel21)
         Me.tbpUMClassStatus.Location = New System.Drawing.Point(4, 22)
         Me.tbpUMClassStatus.Name = "tbpUMClassStatus"
-        Me.tbpUMClassStatus.Size = New System.Drawing.Size(941, 472)
+        Me.tbpUMClassStatus.Size = New System.Drawing.Size(964, 472)
         Me.tbpUMClassStatus.TabIndex = 5
         Me.tbpUMClassStatus.Text = "UM/Class/Status"
         Me.tbpUMClassStatus.UseVisualStyleBackColor = True
@@ -5145,7 +5169,7 @@ Partial Class scafoldTarking
         Me.Panel21.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel21.Location = New System.Drawing.Point(0, 0)
         Me.Panel21.Name = "Panel21"
-        Me.Panel21.Size = New System.Drawing.Size(941, 472)
+        Me.Panel21.Size = New System.Drawing.Size(964, 472)
         Me.Panel21.TabIndex = 0
         '
         'Panel22
@@ -5154,7 +5178,7 @@ Partial Class scafoldTarking
         Me.Panel22.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel22.Location = New System.Drawing.Point(0, 0)
         Me.Panel22.Name = "Panel22"
-        Me.Panel22.Size = New System.Drawing.Size(941, 472)
+        Me.Panel22.Size = New System.Drawing.Size(964, 472)
         Me.Panel22.TabIndex = 0
         '
         'TableLayoutPanel29
@@ -5171,7 +5195,7 @@ Partial Class scafoldTarking
         Me.TableLayoutPanel29.RowCount = 2
         Me.TableLayoutPanel29.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
         Me.TableLayoutPanel29.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
-        Me.TableLayoutPanel29.Size = New System.Drawing.Size(941, 472)
+        Me.TableLayoutPanel29.Size = New System.Drawing.Size(964, 472)
         Me.TableLayoutPanel29.TabIndex = 3
         '
         'TableLayoutPanel31
@@ -5186,7 +5210,7 @@ Partial Class scafoldTarking
         Me.TableLayoutPanel31.RowCount = 2
         Me.TableLayoutPanel31.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30.0!))
         Me.TableLayoutPanel31.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-        Me.TableLayoutPanel31.Size = New System.Drawing.Size(935, 230)
+        Me.TableLayoutPanel31.Size = New System.Drawing.Size(958, 230)
         Me.TableLayoutPanel31.TabIndex = 1
         '
         'Panel25
@@ -5198,7 +5222,7 @@ Partial Class scafoldTarking
         Me.Panel25.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.Panel25.Location = New System.Drawing.Point(3, 3)
         Me.Panel25.Name = "Panel25"
-        Me.Panel25.Size = New System.Drawing.Size(929, 24)
+        Me.Panel25.Size = New System.Drawing.Size(952, 24)
         Me.Panel25.TabIndex = 4
         '
         'Label32
@@ -5220,7 +5244,7 @@ Partial Class scafoldTarking
         Me.Panel37.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel37.Location = New System.Drawing.Point(3, 33)
         Me.Panel37.Name = "Panel37"
-        Me.Panel37.Size = New System.Drawing.Size(929, 194)
+        Me.Panel37.Size = New System.Drawing.Size(952, 194)
         Me.Panel37.TabIndex = 2
         '
         'tblRentTable
@@ -5230,7 +5254,7 @@ Partial Class scafoldTarking
         Me.tblRentTable.Dock = System.Windows.Forms.DockStyle.Fill
         Me.tblRentTable.Location = New System.Drawing.Point(0, 0)
         Me.tblRentTable.Name = "tblRentTable"
-        Me.tblRentTable.Size = New System.Drawing.Size(929, 194)
+        Me.tblRentTable.Size = New System.Drawing.Size(952, 194)
         Me.tblRentTable.TabIndex = 0
         '
         'TableLayoutPanel30
@@ -5251,7 +5275,7 @@ Partial Class scafoldTarking
         Me.TableLayoutPanel30.RowCount = 2
         Me.TableLayoutPanel30.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30.0!))
         Me.TableLayoutPanel30.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-        Me.TableLayoutPanel30.Size = New System.Drawing.Size(935, 230)
+        Me.TableLayoutPanel30.Size = New System.Drawing.Size(958, 230)
         Me.TableLayoutPanel30.TabIndex = 0
         '
         'Panel24
@@ -5261,9 +5285,9 @@ Partial Class scafoldTarking
         Me.Panel24.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel24.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Panel24.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.Panel24.Location = New System.Drawing.Point(657, 3)
+        Me.Panel24.Location = New System.Drawing.Point(673, 3)
         Me.Panel24.Name = "Panel24"
-        Me.Panel24.Size = New System.Drawing.Size(275, 24)
+        Me.Panel24.Size = New System.Drawing.Size(282, 24)
         Me.Panel24.TabIndex = 5
         '
         'Label31
@@ -5288,7 +5312,7 @@ Partial Class scafoldTarking
         Me.Panel23.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.Panel23.Location = New System.Drawing.Point(3, 3)
         Me.Panel23.Name = "Panel23"
-        Me.Panel23.Size = New System.Drawing.Size(274, 24)
+        Me.Panel23.Size = New System.Drawing.Size(281, 24)
         Me.Panel23.TabIndex = 4
         '
         'Label29
@@ -5308,9 +5332,9 @@ Partial Class scafoldTarking
         '
         Me.Panel35.Controls.Add(Me.tblMaterialStatus)
         Me.Panel35.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel35.Location = New System.Drawing.Point(657, 33)
+        Me.Panel35.Location = New System.Drawing.Point(673, 33)
         Me.Panel35.Name = "Panel35"
-        Me.Panel35.Size = New System.Drawing.Size(275, 194)
+        Me.Panel35.Size = New System.Drawing.Size(282, 194)
         Me.Panel35.TabIndex = 2
         '
         'tblMaterialStatus
@@ -5320,7 +5344,7 @@ Partial Class scafoldTarking
         Me.tblMaterialStatus.Dock = System.Windows.Forms.DockStyle.Fill
         Me.tblMaterialStatus.Location = New System.Drawing.Point(0, 0)
         Me.tblMaterialStatus.Name = "tblMaterialStatus"
-        Me.tblMaterialStatus.Size = New System.Drawing.Size(275, 194)
+        Me.tblMaterialStatus.Size = New System.Drawing.Size(282, 194)
         Me.tblMaterialStatus.TabIndex = 0
         '
         'Panel31
@@ -5329,7 +5353,7 @@ Partial Class scafoldTarking
         Me.Panel31.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel31.Location = New System.Drawing.Point(3, 33)
         Me.Panel31.Name = "Panel31"
-        Me.Panel31.Size = New System.Drawing.Size(274, 194)
+        Me.Panel31.Size = New System.Drawing.Size(281, 194)
         Me.Panel31.TabIndex = 2
         '
         'tblUnitMeassurement
@@ -5339,16 +5363,16 @@ Partial Class scafoldTarking
         Me.tblUnitMeassurement.Dock = System.Windows.Forms.DockStyle.Fill
         Me.tblUnitMeassurement.Location = New System.Drawing.Point(0, 0)
         Me.tblUnitMeassurement.Name = "tblUnitMeassurement"
-        Me.tblUnitMeassurement.Size = New System.Drawing.Size(274, 194)
+        Me.tblUnitMeassurement.Size = New System.Drawing.Size(281, 194)
         Me.tblUnitMeassurement.TabIndex = 0
         '
         'Panel33
         '
         Me.Panel33.Controls.Add(Me.tblClassification)
         Me.Panel33.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel33.Location = New System.Drawing.Point(283, 33)
+        Me.Panel33.Location = New System.Drawing.Point(290, 33)
         Me.Panel33.Name = "Panel33"
-        Me.Panel33.Size = New System.Drawing.Size(368, 194)
+        Me.Panel33.Size = New System.Drawing.Size(377, 194)
         Me.Panel33.TabIndex = 2
         '
         'tblClassification
@@ -5358,7 +5382,7 @@ Partial Class scafoldTarking
         Me.tblClassification.Dock = System.Windows.Forms.DockStyle.Fill
         Me.tblClassification.Location = New System.Drawing.Point(0, 0)
         Me.tblClassification.Name = "tblClassification"
-        Me.tblClassification.Size = New System.Drawing.Size(368, 194)
+        Me.tblClassification.Size = New System.Drawing.Size(377, 194)
         Me.tblClassification.TabIndex = 0
         '
         'Panel20
@@ -5368,9 +5392,9 @@ Partial Class scafoldTarking
         Me.Panel20.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel20.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Panel20.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.Panel20.Location = New System.Drawing.Point(283, 3)
+        Me.Panel20.Location = New System.Drawing.Point(290, 3)
         Me.Panel20.Name = "Panel20"
-        Me.Panel20.Size = New System.Drawing.Size(368, 24)
+        Me.Panel20.Size = New System.Drawing.Size(377, 24)
         Me.Panel20.TabIndex = 3
         '
         'Label30
@@ -5391,7 +5415,7 @@ Partial Class scafoldTarking
         Me.tbpSupervisor.Controls.Add(Me.Panel38)
         Me.tbpSupervisor.Location = New System.Drawing.Point(4, 22)
         Me.tbpSupervisor.Name = "tbpSupervisor"
-        Me.tbpSupervisor.Size = New System.Drawing.Size(941, 472)
+        Me.tbpSupervisor.Size = New System.Drawing.Size(964, 472)
         Me.tbpSupervisor.TabIndex = 6
         Me.tbpSupervisor.Text = "Supervisor"
         Me.tbpSupervisor.UseVisualStyleBackColor = True
@@ -5403,7 +5427,7 @@ Partial Class scafoldTarking
         Me.Panel38.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel38.Location = New System.Drawing.Point(0, 0)
         Me.Panel38.Name = "Panel38"
-        Me.Panel38.Size = New System.Drawing.Size(941, 472)
+        Me.Panel38.Size = New System.Drawing.Size(964, 472)
         Me.Panel38.TabIndex = 0
         '
         'Panel40
@@ -5412,7 +5436,7 @@ Partial Class scafoldTarking
         Me.Panel40.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel40.Location = New System.Drawing.Point(0, 32)
         Me.Panel40.Name = "Panel40"
-        Me.Panel40.Size = New System.Drawing.Size(941, 440)
+        Me.Panel40.Size = New System.Drawing.Size(964, 440)
         Me.Panel40.TabIndex = 1
         '
         'tblSupervisor
@@ -5422,7 +5446,7 @@ Partial Class scafoldTarking
         Me.tblSupervisor.Dock = System.Windows.Forms.DockStyle.Fill
         Me.tblSupervisor.Location = New System.Drawing.Point(0, 0)
         Me.tblSupervisor.Name = "tblSupervisor"
-        Me.tblSupervisor.Size = New System.Drawing.Size(941, 440)
+        Me.tblSupervisor.Size = New System.Drawing.Size(964, 440)
         Me.tblSupervisor.TabIndex = 0
         '
         'Panel39
@@ -5434,7 +5458,7 @@ Partial Class scafoldTarking
         Me.Panel39.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.Panel39.Location = New System.Drawing.Point(0, 0)
         Me.Panel39.Name = "Panel39"
-        Me.Panel39.Size = New System.Drawing.Size(941, 32)
+        Me.Panel39.Size = New System.Drawing.Size(964, 32)
         Me.Panel39.TabIndex = 0
         '
         'Label33
@@ -5456,7 +5480,7 @@ Partial Class scafoldTarking
         Me.tbpCostJobsN.Controls.Add(Me.Panel12)
         Me.tbpCostJobsN.Location = New System.Drawing.Point(4, 22)
         Me.tbpCostJobsN.Name = "tbpCostJobsN"
-        Me.tbpCostJobsN.Size = New System.Drawing.Size(941, 472)
+        Me.tbpCostJobsN.Size = New System.Drawing.Size(964, 472)
         Me.tbpCostJobsN.TabIndex = 2
         Me.tbpCostJobsN.Text = "Costumers & JobsN."
         Me.tbpCostJobsN.UseVisualStyleBackColor = True
@@ -5467,7 +5491,7 @@ Partial Class scafoldTarking
         Me.Panel13.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel13.Location = New System.Drawing.Point(240, 0)
         Me.Panel13.Name = "Panel13"
-        Me.Panel13.Size = New System.Drawing.Size(701, 472)
+        Me.Panel13.Size = New System.Drawing.Size(724, 472)
         Me.Panel13.TabIndex = 1
         '
         'tblCostumersJobs
@@ -5480,7 +5504,7 @@ Partial Class scafoldTarking
         Me.tblCostumersJobs.Location = New System.Drawing.Point(0, 0)
         Me.tblCostumersJobs.Name = "tblCostumersJobs"
         Me.tblCostumersJobs.ReadOnly = True
-        Me.tblCostumersJobs.Size = New System.Drawing.Size(701, 472)
+        Me.tblCostumersJobs.Size = New System.Drawing.Size(724, 472)
         Me.tblCostumersJobs.TabIndex = 0
         '
         'Tag
@@ -5820,7 +5844,7 @@ Partial Class scafoldTarking
         Me.tbpEstimating.Controls.Add(Me.TableLayoutPanel32)
         Me.tbpEstimating.Location = New System.Drawing.Point(4, 22)
         Me.tbpEstimating.Name = "tbpEstimating"
-        Me.tbpEstimating.Size = New System.Drawing.Size(941, 472)
+        Me.tbpEstimating.Size = New System.Drawing.Size(964, 472)
         Me.tbpEstimating.TabIndex = 9
         Me.tbpEstimating.Text = "Estimating"
         Me.tbpEstimating.UseVisualStyleBackColor = True
@@ -5837,7 +5861,7 @@ Partial Class scafoldTarking
         Me.TableLayoutPanel32.Name = "TableLayoutPanel32"
         Me.TableLayoutPanel32.RowCount = 1
         Me.TableLayoutPanel32.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-        Me.TableLayoutPanel32.Size = New System.Drawing.Size(941, 472)
+        Me.TableLayoutPanel32.Size = New System.Drawing.Size(964, 472)
         Me.TableLayoutPanel32.TabIndex = 0
         '
         'Panel28
@@ -6075,7 +6099,7 @@ Partial Class scafoldTarking
         Me.TableLayoutPanel33.RowCount = 2
         Me.TableLayoutPanel33.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
         Me.TableLayoutPanel33.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 103.0!))
-        Me.TableLayoutPanel33.Size = New System.Drawing.Size(665, 466)
+        Me.TableLayoutPanel33.Size = New System.Drawing.Size(688, 466)
         Me.TableLayoutPanel33.TabIndex = 0
         '
         'Panel30
@@ -6087,7 +6111,7 @@ Partial Class scafoldTarking
         Me.Panel30.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel30.Location = New System.Drawing.Point(3, 366)
         Me.Panel30.Name = "Panel30"
-        Me.Panel30.Size = New System.Drawing.Size(659, 97)
+        Me.Panel30.Size = New System.Drawing.Size(682, 97)
         Me.Panel30.TabIndex = 1
         '
         'btnReportEstimationSC
@@ -6100,7 +6124,7 @@ Partial Class scafoldTarking
         Me.btnReportEstimationSC.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.btnReportEstimationSC.Image = Global.AVT_TRAKING.My.Resources.Resources.report
         Me.btnReportEstimationSC.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnReportEstimationSC.Location = New System.Drawing.Point(425, 0)
+        Me.btnReportEstimationSC.Location = New System.Drawing.Point(448, 0)
         Me.btnReportEstimationSC.Name = "btnReportEstimationSC"
         Me.btnReportEstimationSC.Size = New System.Drawing.Size(107, 97)
         Me.btnReportEstimationSC.TabIndex = 14
@@ -6133,7 +6157,7 @@ Partial Class scafoldTarking
         Me.btnEstimationCostSC.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnEstimationCostSC.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnEstimationCostSC.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.btnEstimationCostSC.Location = New System.Drawing.Point(532, 0)
+        Me.btnEstimationCostSC.Location = New System.Drawing.Point(555, 0)
         Me.btnEstimationCostSC.Name = "btnEstimationCostSC"
         Me.btnEstimationCostSC.Size = New System.Drawing.Size(127, 97)
         Me.btnEstimationCostSC.TabIndex = 15
@@ -6149,7 +6173,7 @@ Partial Class scafoldTarking
         Me.Panel26.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel26.Location = New System.Drawing.Point(3, 3)
         Me.Panel26.Name = "Panel26"
-        Me.Panel26.Size = New System.Drawing.Size(659, 357)
+        Me.Panel26.Size = New System.Drawing.Size(682, 357)
         Me.Panel26.TabIndex = 0
         '
         'TableLayoutPanel35
@@ -6178,7 +6202,7 @@ Partial Class scafoldTarking
         Me.TableLayoutPanel35.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 42.0!))
         Me.TableLayoutPanel35.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 15.0!))
         Me.TableLayoutPanel35.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 44.0!))
-        Me.TableLayoutPanel35.Size = New System.Drawing.Size(659, 357)
+        Me.TableLayoutPanel35.Size = New System.Drawing.Size(682, 357)
         Me.TableLayoutPanel35.TabIndex = 12
         '
         'Panel36
@@ -6186,7 +6210,7 @@ Partial Class scafoldTarking
         Me.Panel36.Controls.Add(Me.Label91)
         Me.Panel36.Controls.Add(Me.sprDecksEst)
         Me.Panel36.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel36.Location = New System.Drawing.Point(251, 122)
+        Me.Panel36.Location = New System.Drawing.Point(263, 122)
         Me.Panel36.Name = "Panel36"
         Me.Panel36.Size = New System.Drawing.Size(154, 83)
         Me.Panel36.TabIndex = 2
@@ -6217,7 +6241,7 @@ Partial Class scafoldTarking
         Me.Panel32.Controls.Add(Me.sprHeigthEst)
         Me.Panel32.Controls.Add(Me.Label90)
         Me.Panel32.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel32.Location = New System.Drawing.Point(47, 122)
+        Me.Panel32.Location = New System.Drawing.Point(53, 122)
         Me.Panel32.Name = "Panel32"
         Me.Panel32.Size = New System.Drawing.Size(154, 83)
         Me.Panel32.TabIndex = 4
@@ -6247,7 +6271,7 @@ Partial Class scafoldTarking
         '
         Me.Panel34.Controls.Add(Me.Label92)
         Me.Panel34.Controls.Add(Me.sprWidthEst)
-        Me.Panel34.Location = New System.Drawing.Point(455, 211)
+        Me.Panel34.Location = New System.Drawing.Point(473, 211)
         Me.Panel34.Name = "Panel34"
         Me.Panel34.Size = New System.Drawing.Size(154, 41)
         Me.Panel34.TabIndex = 3
@@ -6278,7 +6302,7 @@ Partial Class scafoldTarking
         Me.Panel49.Controls.Add(Me.Label93)
         Me.Panel49.Controls.Add(Me.sprLengthEst)
         Me.Panel49.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel49.Location = New System.Drawing.Point(251, 258)
+        Me.Panel49.Location = New System.Drawing.Point(263, 258)
         Me.Panel49.Name = "Panel49"
         Me.Panel49.Size = New System.Drawing.Size(154, 36)
         Me.Panel49.TabIndex = 5
@@ -6309,7 +6333,7 @@ Partial Class scafoldTarking
         Me.Panel54.Controls.Add(Me.Label94)
         Me.Panel54.Controls.Add(Me.sprGroudHeigthEst)
         Me.Panel54.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel54.Location = New System.Drawing.Point(47, 315)
+        Me.Panel54.Location = New System.Drawing.Point(53, 315)
         Me.Panel54.Name = "Panel54"
         Me.Panel54.Size = New System.Drawing.Size(154, 39)
         Me.Panel54.TabIndex = 6
@@ -6339,7 +6363,7 @@ Partial Class scafoldTarking
         '
         Me.Panel60.Controls.Add(Me.sprElevatorEst)
         Me.Panel60.Controls.Add(Me.Label95)
-        Me.Panel60.Location = New System.Drawing.Point(455, 315)
+        Me.Panel60.Location = New System.Drawing.Point(473, 315)
         Me.Panel60.Name = "Panel60"
         Me.Panel60.Size = New System.Drawing.Size(154, 39)
         Me.Panel60.TabIndex = 7
@@ -6377,7 +6401,7 @@ Partial Class scafoldTarking
         Me.Panel2.Dock = System.Windows.Forms.DockStyle.Top
         Me.Panel2.Location = New System.Drawing.Point(0, 0)
         Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(949, 92)
+        Me.Panel2.Size = New System.Drawing.Size(972, 92)
         Me.Panel2.TabIndex = 1
         '
         'lblCompanyName
@@ -6395,7 +6419,7 @@ Partial Class scafoldTarking
         '
         Me.PictureBox2.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.PictureBox2.Image = Global.AVT_TRAKING.My.Resources.Resources.exit2
-        Me.PictureBox2.Location = New System.Drawing.Point(899, 43)
+        Me.PictureBox2.Location = New System.Drawing.Point(922, 43)
         Me.PictureBox2.Name = "PictureBox2"
         Me.PictureBox2.Size = New System.Drawing.Size(38, 28)
         Me.PictureBox2.TabIndex = 4
@@ -6411,14 +6435,14 @@ Partial Class scafoldTarking
         Me.TitleBar.Dock = System.Windows.Forms.DockStyle.Top
         Me.TitleBar.Location = New System.Drawing.Point(0, 0)
         Me.TitleBar.Name = "TitleBar"
-        Me.TitleBar.Size = New System.Drawing.Size(949, 37)
+        Me.TitleBar.Size = New System.Drawing.Size(972, 37)
         Me.TitleBar.TabIndex = 3
         '
         'PictureBox1
         '
         Me.PictureBox1.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.PictureBox1.Image = Global.AVT_TRAKING.My.Resources.Resources.minimize2
-        Me.PictureBox1.Location = New System.Drawing.Point(880, 7)
+        Me.PictureBox1.Location = New System.Drawing.Point(903, 7)
         Me.PictureBox1.Name = "PictureBox1"
         Me.PictureBox1.Size = New System.Drawing.Size(25, 24)
         Me.PictureBox1.TabIndex = 3
@@ -6428,7 +6452,7 @@ Partial Class scafoldTarking
         '
         Me.btnRestore.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnRestore.Image = Global.AVT_TRAKING.My.Resources.Resources.restore2
-        Me.btnRestore.Location = New System.Drawing.Point(911, 7)
+        Me.btnRestore.Location = New System.Drawing.Point(934, 7)
         Me.btnRestore.Name = "btnRestore"
         Me.btnRestore.Size = New System.Drawing.Size(26, 27)
         Me.btnRestore.TabIndex = 2
@@ -6438,7 +6462,7 @@ Partial Class scafoldTarking
         '
         Me.btnMaximize.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnMaximize.Image = Global.AVT_TRAKING.My.Resources.Resources.maximize2
-        Me.btnMaximize.Location = New System.Drawing.Point(911, 7)
+        Me.btnMaximize.Location = New System.Drawing.Point(934, 7)
         Me.btnMaximize.Name = "btnMaximize"
         Me.btnMaximize.Size = New System.Drawing.Size(26, 27)
         Me.btnMaximize.TabIndex = 1
@@ -6506,11 +6530,47 @@ Partial Class scafoldTarking
         Me.btnSaveAll.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         Me.btnSaveAll.UseVisualStyleBackColor = True
         '
+        'btnReportModification
+        '
+        Me.btnReportModification.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnReportModification.FlatAppearance.BorderSize = 0
+        Me.btnReportModification.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(58, Byte), Integer), CType(CType(115, Byte), Integer))
+        Me.btnReportModification.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnReportModification.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnReportModification.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.btnReportModification.Image = Global.AVT_TRAKING.My.Resources.Resources.report
+        Me.btnReportModification.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnReportModification.Location = New System.Drawing.Point(87, 10)
+        Me.btnReportModification.Name = "btnReportModification"
+        Me.btnReportModification.Size = New System.Drawing.Size(85, 29)
+        Me.btnReportModification.TabIndex = 33
+        Me.btnReportModification.Text = "Report"
+        Me.btnReportModification.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.btnReportModification.UseVisualStyleBackColor = True
+        '
+        'btnReportDismantled
+        '
+        Me.btnReportDismantled.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnReportDismantled.FlatAppearance.BorderSize = 0
+        Me.btnReportDismantled.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(58, Byte), Integer), CType(CType(115, Byte), Integer))
+        Me.btnReportDismantled.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnReportDismantled.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnReportDismantled.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.btnReportDismantled.Image = Global.AVT_TRAKING.My.Resources.Resources.report
+        Me.btnReportDismantled.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnReportDismantled.Location = New System.Drawing.Point(113, 11)
+        Me.btnReportDismantled.Name = "btnReportDismantled"
+        Me.btnReportDismantled.Size = New System.Drawing.Size(85, 29)
+        Me.btnReportDismantled.TabIndex = 34
+        Me.btnReportDismantled.Text = "Report"
+        Me.btnReportDismantled.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.btnReportDismantled.UseVisualStyleBackColor = True
+        '
         'scafoldTarking
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(949, 590)
+        Me.ClientSize = New System.Drawing.Size(972, 590)
         Me.Controls.Add(Me.Panel1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
         Me.Name = "scafoldTarking"
@@ -7276,4 +7336,7 @@ Partial Class scafoldTarking
     Friend WithEvents Decks As DataGridViewTextBoxColumn
     Friend WithEvents KOs As DataGridViewTextBoxColumn
     Friend WithEvents Base As DataGridViewTextBoxColumn
+    Friend WithEvents btnReport As Button
+    Friend WithEvents btnReportModification As Button
+    Friend WithEvents btnReportDismantled As Button
 End Class

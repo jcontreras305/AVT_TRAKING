@@ -87,29 +87,32 @@ Partial Class Others
         Me.TableLayoutPanel2 = New System.Windows.Forms.TableLayoutPanel()
         Me.Panel4 = New System.Windows.Forms.Panel()
         Me.Label1 = New System.Windows.Forms.Label()
-        Me.txtEmail = New System.Windows.Forms.TextBox()
+        Me.txtOwnEmail = New System.Windows.Forms.TextBox()
         Me.Panel5 = New System.Windows.Forms.Panel()
         Me.btnVerPass = New System.Windows.Forms.Button()
         Me.label2 = New System.Windows.Forms.Label()
-        Me.txtPassword = New System.Windows.Forms.TextBox()
+        Me.txtPassOwnEmail = New System.Windows.Forms.TextBox()
         Me.Panel6 = New System.Windows.Forms.Panel()
-        Me.btnDeleteEmail = New System.Windows.Forms.Button()
-        Me.btnSaveEmail = New System.Windows.Forms.Button()
+        Me.btnDeleteOwnEmail = New System.Windows.Forms.Button()
+        Me.btnSaveOwnEmail = New System.Windows.Forms.Button()
         Me.TableLayoutPanel3 = New System.Windows.Forms.TableLayoutPanel()
-        Me.DataGridView1 = New System.Windows.Forms.DataGridView()
+        Me.tblEmails = New System.Windows.Forms.DataGridView()
         Me.clmEmail = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.clmName = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.clmStatus = New System.Windows.Forms.DataGridViewCheckBoxColumn()
         Me.Panel7 = New System.Windows.Forms.Panel()
-        Me.btnDeleteEmailOther = New System.Windows.Forms.Button()
-        Me.btnSaveEmailOthher = New System.Windows.Forms.Button()
+        Me.btnDeleteOtherEmail = New System.Windows.Forms.Button()
+        Me.btnSaveOtherEmail = New System.Windows.Forms.Button()
         Me.TableLayoutPanel4 = New System.Windows.Forms.TableLayoutPanel()
         Me.Panel3 = New System.Windows.Forms.Panel()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.txtEmailOther = New System.Windows.Forms.TextBox()
         Me.Panel8 = New System.Windows.Forms.Panel()
+        Me.chbStatusEmail = New System.Windows.Forms.CheckBox()
         Me.Label4 = New System.Windows.Forms.Label()
-        Me.txtNameOther = New System.Windows.Forms.TextBox()
+        Me.txtNameEmail = New System.Windows.Forms.TextBox()
+        Me.Panel20 = New System.Windows.Forms.Panel()
+        Me.btnCancel = New System.Windows.Forms.Button()
         Me.TabPage3 = New System.Windows.Forms.TabPage()
         Me.Panel9 = New System.Windows.Forms.Panel()
         Me.TableLayoutPanel5 = New System.Windows.Forms.TableLayoutPanel()
@@ -164,11 +167,12 @@ Partial Class Others
         Me.Panel5.SuspendLayout()
         Me.Panel6.SuspendLayout()
         Me.TableLayoutPanel3.SuspendLayout()
-        CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.tblEmails, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel7.SuspendLayout()
         Me.TableLayoutPanel4.SuspendLayout()
         Me.Panel3.SuspendLayout()
         Me.Panel8.SuspendLayout()
+        Me.Panel20.SuspendLayout()
         Me.TabPage3.SuspendLayout()
         Me.Panel9.SuspendLayout()
         Me.TableLayoutPanel5.SuspendLayout()
@@ -980,7 +984,7 @@ Partial Class Others
         'Panel4
         '
         Me.Panel4.Controls.Add(Me.Label1)
-        Me.Panel4.Controls.Add(Me.txtEmail)
+        Me.Panel4.Controls.Add(Me.txtOwnEmail)
         Me.Panel4.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel4.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.Panel4.Location = New System.Drawing.Point(3, 3)
@@ -997,20 +1001,21 @@ Partial Class Others
         Me.Label1.TabIndex = 1
         Me.Label1.Text = "Email"
         '
-        'txtEmail
+        'txtOwnEmail
         '
-        Me.txtEmail.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+        Me.txtOwnEmail.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.txtEmail.Location = New System.Drawing.Point(73, 18)
-        Me.txtEmail.Name = "txtEmail"
-        Me.txtEmail.Size = New System.Drawing.Size(273, 22)
-        Me.txtEmail.TabIndex = 0
+        Me.txtOwnEmail.Location = New System.Drawing.Point(73, 18)
+        Me.txtOwnEmail.MaxLength = 70
+        Me.txtOwnEmail.Name = "txtOwnEmail"
+        Me.txtOwnEmail.Size = New System.Drawing.Size(273, 22)
+        Me.txtOwnEmail.TabIndex = 0
         '
         'Panel5
         '
         Me.Panel5.Controls.Add(Me.btnVerPass)
         Me.Panel5.Controls.Add(Me.label2)
-        Me.Panel5.Controls.Add(Me.txtPassword)
+        Me.Panel5.Controls.Add(Me.txtPassOwnEmail)
         Me.Panel5.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel5.Location = New System.Drawing.Point(378, 3)
         Me.Panel5.Name = "Panel5"
@@ -1040,69 +1045,72 @@ Partial Class Others
         Me.label2.TabIndex = 2
         Me.label2.Text = "Password"
         '
-        'txtPassword
+        'txtPassOwnEmail
         '
-        Me.txtPassword.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+        Me.txtPassOwnEmail.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.txtPassword.Location = New System.Drawing.Point(76, 16)
-        Me.txtPassword.Name = "txtPassword"
-        Me.txtPassword.Size = New System.Drawing.Size(223, 22)
-        Me.txtPassword.TabIndex = 1
-        Me.txtPassword.UseSystemPasswordChar = True
+        Me.txtPassOwnEmail.Location = New System.Drawing.Point(76, 16)
+        Me.txtPassOwnEmail.MaxLength = 50
+        Me.txtPassOwnEmail.Name = "txtPassOwnEmail"
+        Me.txtPassOwnEmail.Size = New System.Drawing.Size(223, 22)
+        Me.txtPassOwnEmail.TabIndex = 1
+        Me.txtPassOwnEmail.UseSystemPasswordChar = True
         '
         'Panel6
         '
-        Me.Panel6.Controls.Add(Me.btnDeleteEmail)
-        Me.Panel6.Controls.Add(Me.btnSaveEmail)
+        Me.Panel6.Controls.Add(Me.btnDeleteOwnEmail)
+        Me.Panel6.Controls.Add(Me.btnSaveOwnEmail)
         Me.Panel6.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel6.Location = New System.Drawing.Point(753, 3)
         Me.Panel6.Name = "Panel6"
         Me.Panel6.Size = New System.Drawing.Size(182, 57)
         Me.Panel6.TabIndex = 2
         '
-        'btnDeleteEmail
+        'btnDeleteOwnEmail
         '
-        Me.btnDeleteEmail.FlatAppearance.BorderSize = 0
-        Me.btnDeleteEmail.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(41, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(185, Byte), Integer))
-        Me.btnDeleteEmail.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnDeleteEmail.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnDeleteEmail.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.btnDeleteEmail.Image = Global.AVT_TRAKING.My.Resources.Resources.delete
-        Me.btnDeleteEmail.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnDeleteEmail.Location = New System.Drawing.Point(94, 17)
-        Me.btnDeleteEmail.Name = "btnDeleteEmail"
-        Me.btnDeleteEmail.Size = New System.Drawing.Size(82, 23)
-        Me.btnDeleteEmail.TabIndex = 1
-        Me.btnDeleteEmail.Text = "Delete"
-        Me.btnDeleteEmail.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.btnDeleteEmail.UseVisualStyleBackColor = True
+        Me.btnDeleteOwnEmail.FlatAppearance.BorderSize = 0
+        Me.btnDeleteOwnEmail.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(41, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(185, Byte), Integer))
+        Me.btnDeleteOwnEmail.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnDeleteOwnEmail.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnDeleteOwnEmail.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.btnDeleteOwnEmail.Image = Global.AVT_TRAKING.My.Resources.Resources.delete
+        Me.btnDeleteOwnEmail.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnDeleteOwnEmail.Location = New System.Drawing.Point(94, 17)
+        Me.btnDeleteOwnEmail.Name = "btnDeleteOwnEmail"
+        Me.btnDeleteOwnEmail.Size = New System.Drawing.Size(82, 23)
+        Me.btnDeleteOwnEmail.TabIndex = 1
+        Me.btnDeleteOwnEmail.Text = "Delete"
+        Me.btnDeleteOwnEmail.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.btnDeleteOwnEmail.UseVisualStyleBackColor = True
         '
-        'btnSaveEmail
+        'btnSaveOwnEmail
         '
-        Me.btnSaveEmail.FlatAppearance.BorderSize = 0
-        Me.btnSaveEmail.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(41, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(185, Byte), Integer))
-        Me.btnSaveEmail.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnSaveEmail.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnSaveEmail.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.btnSaveEmail.Image = Global.AVT_TRAKING.My.Resources.Resources.save
-        Me.btnSaveEmail.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnSaveEmail.Location = New System.Drawing.Point(13, 17)
-        Me.btnSaveEmail.Name = "btnSaveEmail"
-        Me.btnSaveEmail.Size = New System.Drawing.Size(75, 23)
-        Me.btnSaveEmail.TabIndex = 0
-        Me.btnSaveEmail.Text = "Save"
-        Me.btnSaveEmail.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.btnSaveEmail.UseVisualStyleBackColor = True
+        Me.btnSaveOwnEmail.FlatAppearance.BorderSize = 0
+        Me.btnSaveOwnEmail.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(41, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(185, Byte), Integer))
+        Me.btnSaveOwnEmail.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnSaveOwnEmail.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnSaveOwnEmail.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.btnSaveOwnEmail.Image = Global.AVT_TRAKING.My.Resources.Resources.save
+        Me.btnSaveOwnEmail.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnSaveOwnEmail.Location = New System.Drawing.Point(13, 17)
+        Me.btnSaveOwnEmail.Name = "btnSaveOwnEmail"
+        Me.btnSaveOwnEmail.Size = New System.Drawing.Size(75, 24)
+        Me.btnSaveOwnEmail.TabIndex = 0
+        Me.btnSaveOwnEmail.Text = "Save"
+        Me.btnSaveOwnEmail.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.btnSaveOwnEmail.UseVisualStyleBackColor = True
         '
         'TableLayoutPanel3
         '
         Me.TableLayoutPanel3.ColumnCount = 2
         Me.TableLayoutPanel3.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 80.0!))
         Me.TableLayoutPanel3.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20.0!))
-        Me.TableLayoutPanel3.Controls.Add(Me.DataGridView1, 0, 1)
+        Me.TableLayoutPanel3.Controls.Add(Me.tblEmails, 0, 1)
         Me.TableLayoutPanel3.Controls.Add(Me.Panel7, 1, 0)
         Me.TableLayoutPanel3.Controls.Add(Me.TableLayoutPanel4, 0, 0)
+        Me.TableLayoutPanel3.Controls.Add(Me.Panel20, 1, 1)
         Me.TableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.TableLayoutPanel3.ForeColor = System.Drawing.SystemColors.ControlText
         Me.TableLayoutPanel3.Location = New System.Drawing.Point(3, 93)
         Me.TableLayoutPanel3.Name = "TableLayoutPanel3"
         Me.TableLayoutPanel3.RowCount = 2
@@ -1111,17 +1119,19 @@ Partial Class Others
         Me.TableLayoutPanel3.Size = New System.Drawing.Size(944, 356)
         Me.TableLayoutPanel3.TabIndex = 1
         '
-        'DataGridView1
+        'tblEmails
         '
-        Me.DataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
-        Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DataGridView1.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.clmEmail, Me.clmName, Me.clmStatus})
-        Me.DataGridView1.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.DataGridView1.Location = New System.Drawing.Point(3, 62)
-        Me.DataGridView1.Name = "DataGridView1"
-        Me.DataGridView1.RowHeadersVisible = False
-        Me.DataGridView1.Size = New System.Drawing.Size(749, 291)
-        Me.DataGridView1.TabIndex = 0
+        Me.tblEmails.AllowUserToAddRows = False
+        Me.tblEmails.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
+        Me.tblEmails.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.tblEmails.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.clmEmail, Me.clmName, Me.clmStatus})
+        Me.tblEmails.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.tblEmails.Location = New System.Drawing.Point(3, 62)
+        Me.tblEmails.Name = "tblEmails"
+        Me.tblEmails.RowHeadersVisible = False
+        Me.tblEmails.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
+        Me.tblEmails.Size = New System.Drawing.Size(749, 291)
+        Me.tblEmails.TabIndex = 0
         '
         'clmEmail
         '
@@ -1143,44 +1153,46 @@ Partial Class Others
         '
         'Panel7
         '
-        Me.Panel7.Controls.Add(Me.btnDeleteEmailOther)
-        Me.Panel7.Controls.Add(Me.btnSaveEmailOthher)
+        Me.Panel7.Controls.Add(Me.btnDeleteOtherEmail)
+        Me.Panel7.Controls.Add(Me.btnSaveOtherEmail)
         Me.Panel7.Location = New System.Drawing.Point(758, 3)
         Me.Panel7.Name = "Panel7"
         Me.Panel7.Size = New System.Drawing.Size(183, 50)
         Me.Panel7.TabIndex = 2
         '
-        'btnDeleteEmailOther
+        'btnDeleteOtherEmail
         '
-        Me.btnDeleteEmailOther.FlatAppearance.BorderSize = 0
-        Me.btnDeleteEmailOther.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(41, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(185, Byte), Integer))
-        Me.btnDeleteEmailOther.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnDeleteEmailOther.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnDeleteEmailOther.Image = Global.AVT_TRAKING.My.Resources.Resources.delete
-        Me.btnDeleteEmailOther.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnDeleteEmailOther.Location = New System.Drawing.Point(91, 15)
-        Me.btnDeleteEmailOther.Name = "btnDeleteEmailOther"
-        Me.btnDeleteEmailOther.Size = New System.Drawing.Size(83, 23)
-        Me.btnDeleteEmailOther.TabIndex = 3
-        Me.btnDeleteEmailOther.Text = "Delete"
-        Me.btnDeleteEmailOther.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.btnDeleteEmailOther.UseVisualStyleBackColor = True
+        Me.btnDeleteOtherEmail.FlatAppearance.BorderSize = 0
+        Me.btnDeleteOtherEmail.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(41, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(185, Byte), Integer))
+        Me.btnDeleteOtherEmail.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnDeleteOtherEmail.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnDeleteOtherEmail.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.btnDeleteOtherEmail.Image = Global.AVT_TRAKING.My.Resources.Resources.delete
+        Me.btnDeleteOtherEmail.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnDeleteOtherEmail.Location = New System.Drawing.Point(92, 15)
+        Me.btnDeleteOtherEmail.Name = "btnDeleteOtherEmail"
+        Me.btnDeleteOtherEmail.Size = New System.Drawing.Size(82, 28)
+        Me.btnDeleteOtherEmail.TabIndex = 3
+        Me.btnDeleteOtherEmail.Text = "Delete"
+        Me.btnDeleteOtherEmail.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.btnDeleteOtherEmail.UseVisualStyleBackColor = True
         '
-        'btnSaveEmailOthher
+        'btnSaveOtherEmail
         '
-        Me.btnSaveEmailOthher.FlatAppearance.BorderSize = 0
-        Me.btnSaveEmailOthher.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(41, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(185, Byte), Integer))
-        Me.btnSaveEmailOthher.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnSaveEmailOthher.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnSaveEmailOthher.Image = Global.AVT_TRAKING.My.Resources.Resources.save1
-        Me.btnSaveEmailOthher.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnSaveEmailOthher.Location = New System.Drawing.Point(11, 15)
-        Me.btnSaveEmailOthher.Name = "btnSaveEmailOthher"
-        Me.btnSaveEmailOthher.Size = New System.Drawing.Size(75, 23)
-        Me.btnSaveEmailOthher.TabIndex = 2
-        Me.btnSaveEmailOthher.Text = "Save"
-        Me.btnSaveEmailOthher.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.btnSaveEmailOthher.UseVisualStyleBackColor = True
+        Me.btnSaveOtherEmail.FlatAppearance.BorderSize = 0
+        Me.btnSaveOtherEmail.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(41, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(185, Byte), Integer))
+        Me.btnSaveOtherEmail.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnSaveOtherEmail.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnSaveOtherEmail.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.btnSaveOtherEmail.Image = Global.AVT_TRAKING.My.Resources.Resources.save1
+        Me.btnSaveOtherEmail.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnSaveOtherEmail.Location = New System.Drawing.Point(11, 15)
+        Me.btnSaveOtherEmail.Name = "btnSaveOtherEmail"
+        Me.btnSaveOtherEmail.Size = New System.Drawing.Size(75, 28)
+        Me.btnSaveOtherEmail.TabIndex = 2
+        Me.btnSaveOtherEmail.Text = "Save"
+        Me.btnSaveOtherEmail.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.btnSaveOtherEmail.UseVisualStyleBackColor = True
         '
         'TableLayoutPanel4
         '
@@ -1210,6 +1222,7 @@ Partial Class Others
         'Label3
         '
         Me.Label3.AutoSize = True
+        Me.Label3.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.Label3.Location = New System.Drawing.Point(7, 14)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(43, 14)
@@ -1221,37 +1234,82 @@ Partial Class Others
         Me.txtEmailOther.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.txtEmailOther.Location = New System.Drawing.Point(73, 11)
+        Me.txtEmailOther.MaxLength = 70
         Me.txtEmailOther.Name = "txtEmailOther"
         Me.txtEmailOther.Size = New System.Drawing.Size(272, 22)
         Me.txtEmailOther.TabIndex = 2
         '
         'Panel8
         '
+        Me.Panel8.Controls.Add(Me.chbStatusEmail)
         Me.Panel8.Controls.Add(Me.Label4)
-        Me.Panel8.Controls.Add(Me.txtNameOther)
+        Me.Panel8.Controls.Add(Me.txtNameEmail)
         Me.Panel8.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel8.Location = New System.Drawing.Point(377, 3)
         Me.Panel8.Name = "Panel8"
         Me.Panel8.Size = New System.Drawing.Size(369, 47)
         Me.Panel8.TabIndex = 1
         '
+        'chbStatusEmail
+        '
+        Me.chbStatusEmail.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.chbStatusEmail.AutoSize = True
+        Me.chbStatusEmail.CheckAlign = System.Drawing.ContentAlignment.BottomCenter
+        Me.chbStatusEmail.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.chbStatusEmail.Location = New System.Drawing.Point(311, 8)
+        Me.chbStatusEmail.Name = "chbStatusEmail"
+        Me.chbStatusEmail.Size = New System.Drawing.Size(53, 32)
+        Me.chbStatusEmail.TabIndex = 5
+        Me.chbStatusEmail.Text = "Status"
+        Me.chbStatusEmail.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.chbStatusEmail.UseVisualStyleBackColor = True
+        '
         'Label4
         '
         Me.Label4.AutoSize = True
+        Me.Label4.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.Label4.Location = New System.Drawing.Point(13, 16)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(45, 14)
         Me.Label4.TabIndex = 4
         Me.Label4.Text = "Name"
         '
-        'txtNameOther
+        'txtNameEmail
         '
-        Me.txtNameOther.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+        Me.txtNameEmail.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.txtNameOther.Location = New System.Drawing.Point(68, 13)
-        Me.txtNameOther.Name = "txtNameOther"
-        Me.txtNameOther.Size = New System.Drawing.Size(258, 22)
-        Me.txtNameOther.TabIndex = 3
+        Me.txtNameEmail.Location = New System.Drawing.Point(68, 13)
+        Me.txtNameEmail.MaxLength = 50
+        Me.txtNameEmail.Name = "txtNameEmail"
+        Me.txtNameEmail.Size = New System.Drawing.Size(232, 22)
+        Me.txtNameEmail.TabIndex = 3
+        '
+        'Panel20
+        '
+        Me.Panel20.Controls.Add(Me.btnCancel)
+        Me.Panel20.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Panel20.Location = New System.Drawing.Point(758, 62)
+        Me.Panel20.Name = "Panel20"
+        Me.Panel20.Size = New System.Drawing.Size(183, 291)
+        Me.Panel20.TabIndex = 4
+        '
+        'btnCancel
+        '
+        Me.btnCancel.FlatAppearance.BorderSize = 0
+        Me.btnCancel.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(41, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(185, Byte), Integer))
+        Me.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnCancel.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnCancel.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.btnCancel.Image = Global.AVT_TRAKING.My.Resources.Resources.close2
+        Me.btnCancel.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnCancel.Location = New System.Drawing.Point(11, 3)
+        Me.btnCancel.Name = "btnCancel"
+        Me.btnCancel.Size = New System.Drawing.Size(88, 28)
+        Me.btnCancel.TabIndex = 3
+        Me.btnCancel.Text = "Cancel"
+        Me.btnCancel.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.btnCancel.UseVisualStyleBackColor = True
+        Me.btnCancel.Visible = False
         '
         'TabPage3
         '
@@ -1416,7 +1474,7 @@ Partial Class Others
         Me.TableLayoutPanel7.ColumnCount = 3
         Me.TableLayoutPanel7.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 35.26316!))
         Me.TableLayoutPanel7.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 64.73684!))
-        Me.TableLayoutPanel7.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 200.0!))
+        Me.TableLayoutPanel7.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 202.0!))
         Me.TableLayoutPanel7.Controls.Add(Me.Panel10, 0, 0)
         Me.TableLayoutPanel7.Controls.Add(Me.Panel11, 1, 0)
         Me.TableLayoutPanel7.Dock = System.Windows.Forms.DockStyle.Fill
@@ -1434,7 +1492,7 @@ Partial Class Others
         Me.Panel10.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel10.Location = New System.Drawing.Point(3, 3)
         Me.Panel10.Name = "Panel10"
-        Me.Panel10.Size = New System.Drawing.Size(256, 48)
+        Me.Panel10.Size = New System.Drawing.Size(255, 48)
         Me.Panel10.TabIndex = 0
         '
         'Label5
@@ -1460,9 +1518,9 @@ Partial Class Others
         Me.Panel11.Controls.Add(Me.Label6)
         Me.Panel11.Controls.Add(Me.txtPathFile)
         Me.Panel11.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel11.Location = New System.Drawing.Point(265, 3)
+        Me.Panel11.Location = New System.Drawing.Point(264, 3)
         Me.Panel11.Name = "Panel11"
-        Me.Panel11.Size = New System.Drawing.Size(475, 48)
+        Me.Panel11.Size = New System.Drawing.Size(474, 48)
         Me.Panel11.TabIndex = 1
         '
         'btnFindImage
@@ -1583,13 +1641,14 @@ Partial Class Others
         Me.Panel5.PerformLayout()
         Me.Panel6.ResumeLayout(False)
         Me.TableLayoutPanel3.ResumeLayout(False)
-        CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.tblEmails, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel7.ResumeLayout(False)
         Me.TableLayoutPanel4.ResumeLayout(False)
         Me.Panel3.ResumeLayout(False)
         Me.Panel3.PerformLayout()
         Me.Panel8.ResumeLayout(False)
         Me.Panel8.PerformLayout()
+        Me.Panel20.ResumeLayout(False)
         Me.TabPage3.ResumeLayout(False)
         Me.Panel9.ResumeLayout(False)
         Me.TableLayoutPanel5.ResumeLayout(False)
@@ -1654,29 +1713,28 @@ Partial Class Others
     Friend WithEvents TableLayoutPanel2 As TableLayoutPanel
     Friend WithEvents Panel4 As Panel
     Friend WithEvents Label1 As Label
-    Friend WithEvents txtEmail As TextBox
+    Friend WithEvents txtOwnEmail As TextBox
     Friend WithEvents Panel5 As Panel
     Friend WithEvents btnVerPass As Button
     Friend WithEvents label2 As Label
-    Friend WithEvents txtPassword As TextBox
+    Friend WithEvents txtPassOwnEmail As TextBox
     Friend WithEvents Panel6 As Panel
-    Friend WithEvents btnSaveEmail As Button
-    Friend WithEvents btnDeleteEmail As Button
+    Friend WithEvents btnSaveOwnEmail As Button
+    Friend WithEvents btnDeleteOwnEmail As Button
     Friend WithEvents TableLayoutPanel3 As TableLayoutPanel
-    Friend WithEvents DataGridView1 As DataGridView
+    Friend WithEvents tblEmails As DataGridView
     Friend WithEvents clmEmail As DataGridViewTextBoxColumn
     Friend WithEvents clmName As DataGridViewTextBoxColumn
     Friend WithEvents clmStatus As DataGridViewCheckBoxColumn
     Friend WithEvents Panel7 As Panel
-    Friend WithEvents btnDeleteEmailOther As Button
-    Friend WithEvents btnSaveEmailOthher As Button
+    Friend WithEvents btnDeleteOtherEmail As Button
     Friend WithEvents TableLayoutPanel4 As TableLayoutPanel
     Friend WithEvents Panel3 As Panel
     Friend WithEvents Label3 As Label
     Friend WithEvents txtEmailOther As TextBox
     Friend WithEvents Panel8 As Panel
     Friend WithEvents Label4 As Label
-    Friend WithEvents txtNameOther As TextBox
+    Friend WithEvents txtNameEmail As TextBox
     Friend WithEvents TabPage3 As TabPage
     Friend WithEvents Panel9 As Panel
     Friend WithEvents TableLayoutPanel5 As TableLayoutPanel
@@ -1722,4 +1780,8 @@ Partial Class Others
     Friend WithEvents btnDeleteMatClass As Button
     Friend WithEvents btnUpdateMatClass As Button
     Friend WithEvents txtMatDesc As TextBox
+    Friend WithEvents chbStatusEmail As CheckBox
+    Friend WithEvents btnSaveOtherEmail As Button
+    Friend WithEvents Panel20 As Panel
+    Friend WithEvents btnCancel As Button
 End Class

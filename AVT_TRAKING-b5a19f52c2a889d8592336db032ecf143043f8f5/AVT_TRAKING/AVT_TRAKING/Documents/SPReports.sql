@@ -397,7 +397,7 @@ begin
 			(select isnull(T1.ST,0.0) from  (select sum(hoursST) as 'ST' from hoursWorked  as hw1 inner join task as tk1 on tk1.idAux = hw1.idAux inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO inner join projectOrder as po1 on po1.idPO = wo1.idPO and wo1.jobNo = po1.jobNo inner join job as jb1 on jb1.jobNo = po1.jobNo where jb.jobNo = jb1.jobNo and po1.idPO = po.idPO and wo.idAuxWO = wo1.idAuxWO and tk1.idAux = ts.idAux and dateWorked between @startdate and @finaldate) as T1) as 'Hours ST',
 		
 		
-			(select CONCAT('$' ,ISNULL(SUM(T2.Amount),'0')) as 'Billings ST' from 
+			(select ISNULL(SUM(T2.Amount),0) as 'Billings ST' from 
 			(select SUM(T1.hoursST*T1.billingRate1) AS 'Amount'
 			from (select hoursST, hw.idWorkCode , billingRate1  from hoursWorked as hw inner join workCode as wc on wc.idWorkCode = hw.idWorkCode inner join task as tk1 on tk1.idAux = hw.idAux inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO inner join projectOrder as po1 on po1.idPO = wo1.idPO and wo1.jobNo = po1.jobNo inner join job as jb1 on jb1.jobNo = po1.jobNo  
 			where cl.idClient = jb1.idClient and jb.jobNo = jb1.jobNo and po1.idPO = po.idPO and wo.idAuxWO = wo1.idAuxWO and hw.idAux=ts.idAux  and dateWorked between @startdate and @finaldate)as T1    
@@ -406,23 +406,21 @@ begin
 			(select isnull(T1.OT,0.0) from  (select sum(hoursOT) as 'OT' from hoursWorked  as hw1 inner join task as tk1 on tk1.idAux = hw1.idAux inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO inner join projectOrder as po1 on po1.idPO = wo1.idPO and wo1.jobNo = po1.jobNo inner join job as jb1 on jb1.jobNo = po1.jobNo where jb.jobNo = jb1.jobNo and po1.idPO = po.idPO and wo.idAuxWO = wo1.idAuxWO and tk1.idAux = ts.idAux and dateWorked between @startdate and @finaldate) as T1) as 'Hours OT',
 	
 		
-			(select CONCAT('$' , ISNULL( SUM(T2.Amount),'0')) as 'Billings OT' from 
+			(select  ISNULL( SUM(T2.Amount),0) as 'Billings OT' from 
 			(select SUM(T1.hoursOT*T1.billingRateOT) AS 'Amount'
 			from (select hoursOT, hw.idWorkCode , billingRateOT  from hoursWorked as hw inner join workCode as wc on wc.idWorkCode = hw.idWorkCode inner join task as tk1 on tk1.idAux = hw.idAux inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO inner join projectOrder as po1 on po1.idPO = wo1.idPO and wo1.jobNo = po1.jobNo inner join job as jb1 on jb1.jobNo = po1.jobNo  
 			where cl.idClient = jb1.idClient and jb.jobNo = jb1.jobNo and po1.idPO = po.idPO and wo.idAuxWO = wo1.idAuxWO and hw.idAux=ts.idAux  and dateWorked between @startdate and @finaldate)as T1    
 			group by T1.idWorkCode) as T2) as 'Billings OT',
 
 
-			concat('$', ISNULL((select sum(amount) from expensesUsed as exu inner join task as tk1 on tk1.idAux = exu.idAux inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO inner join projectOrder as po1 on po1.idPO = wo1.idPO and wo1.jobNo = po1.jobNo inner join job as jb1 on jb1.jobNo = po1.jobNo
-			where cl.idClient = jb1.idClient and jb.jobNo = jb1.jobNo and po1.idPO = po.idPO and wo.idAuxWO = wo1.idAuxWO and exu.idAux=ts.idAux and exu.dateExpense between @startdate and @finaldate),  0)) as 'Total Expenses',
+			ISNULL((select sum(amount) from expensesUsed as exu inner join task as tk1 on tk1.idAux = exu.idAux inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO inner join projectOrder as po1 on po1.idPO = wo1.idPO and wo1.jobNo = po1.jobNo inner join job as jb1 on jb1.jobNo = po1.jobNo
+			where cl.idClient = jb1.idClient and jb.jobNo = jb1.jobNo and po1.idPO = po.idPO and wo.idAuxWO = wo1.idAuxWO and exu.idAux=ts.idAux and exu.dateExpense between @startdate and @finaldate),  0) as 'Total Expenses',
 			
 			
-			CONCAT('$', ISNULL((select sum(amount) from materialUsed as mau inner join task as tk1 on tk1.idAux = mau.idAux inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO inner join projectOrder as po1 on po1.idPO = wo1.idPO and wo1.jobNo = po1.jobNo inner join job as jb1 on jb1.jobNo = po1.jobNo
-			where cl.idClient = jb1.idClient and jb.jobNo = jb1.jobNo and po1.idPO = po.idPO and wo.idAuxWO = wo1.idAuxWO and mau.idAux=ts.idAux and mau.dateMaterial between @startdate and @finaldate), 0)) as 'Total Material',
+			ISNULL((select sum(amount) from materialUsed as mau inner join task as tk1 on tk1.idAux = mau.idAux inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO inner join projectOrder as po1 on po1.idPO = wo1.idPO and wo1.jobNo = po1.jobNo inner join job as jb1 on jb1.jobNo = po1.jobNo
+			where cl.idClient = jb1.idClient and jb.jobNo = jb1.jobNo and po1.idPO = po.idPO and wo.idAuxWO = wo1.idAuxWO and mau.idAux=ts.idAux and mau.dateMaterial between @startdate and @finaldate), 0) as 'Total Material',
 	
-			concat('$', (
-		
-			(select ISNULL(SUM(T2.Amount),0) as 'Billings ST' from 
+			((select ISNULL(SUM(T2.Amount),0) as 'Billings ST' from 
 			(select SUM(T1.hoursST*T1.billingRate1) AS 'Amount'
 			from (select hoursST, hw.idWorkCode , billingRate1  from hoursWorked as hw inner join workCode as wc on wc.idWorkCode = hw.idWorkCode inner join task as tk1 on tk1.idAux = hw.idAux inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO inner join projectOrder as po1 on po1.idPO = wo1.idPO and wo1.jobNo = po1.jobNo inner join job as jb1 on jb1.jobNo = po1.jobNo  
 			where cl.idClient = jb1.idClient and jb.jobNo = jb1.jobNo and po1.idPO = po.idPO and wo.idAuxWO = wo1.idAuxWO and hw.idAux=ts.idAux  and dateWorked between @startdate and @finaldate)as T1    
@@ -439,7 +437,7 @@ begin
 			+
 			ISNULL((select sum(amount) from materialUsed as mau inner join task as tk1 on tk1.idAux = mau.idAux inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO inner join projectOrder as po1 on po1.idPO = wo1.idPO and wo1.jobNo = po1.jobNo inner join job as jb1 on jb1.jobNo = po1.jobNo
 			where cl.idClient = jb1.idClient and jb.jobNo = jb1.jobNo and po1.idPO = po.idPO and wo.idAuxWO = wo1.idAuxWO and mau.idAux=ts.idAux and mau.dateMaterial between @startdate and @finaldate), 0)
-			)) as 'Total Spend'
+			) as 'Total Spend'
 
 			from Clients as cl
 			inner join job as jb on jb.idClient= cl.idClient
@@ -450,7 +448,7 @@ begin
 			where cl.numberClient=@clientnum 
 			)as T2 
 			where
-			T2.[Billings ST]<>'$0' OR T2.[Billings OT]<>'$0' OR T2.[Total Expenses]<>'$0' OR T2.[Total Material]<>'$0' or T2.[Total Expenses] <> '$0'
+			T2.[Billings ST]>0 OR T2.[Billings OT]>0 OR T2.[Total Expenses]>0 OR T2.[Total Material]>0 or T2.[Total Expenses] > 0
 			group by T2.companyName,T2.jobNo,T2.idPO,T2.[Work Order],T2.[Project Desription],
 			T2.[Total Hours],T2.[Hours ST],T2.[Billings ST], T2.[Hours OT],
 			T2.[Billings OT],T2.[Total Expenses],T2.[Total Material],T2.[Total Spend]
@@ -1405,5 +1403,183 @@ inner join job as jb on jb.jobNo = po.jobNo
 inner join clients as cl on cl.idClient = jb.idClient
 where cl.numberClient like IIF(@all=1,'%%' , CONVERT(NVARCHAR, @numberClient))
 order by [Tag],[Task]
+end
+go
+
+--##############################################################################################
+--################## SP SCF PRODUCT TO SCAFFOLD,MODIFICATION AND DISMANTLE #####################
+--##############################################################################################
+
+create proc sp_Scaffold_Product
+@tagID as varchar(20) ,
+@modID as varchar(20) ,
+@scf as bit,
+@mod as bit,
+@dis as bit
+as
+begin
+	if @scf = 1 
+	begin 
+	select 
+		sc.tag , 
+		cl.photo as 'imgClient' ,
+		jb.jobNo ,
+		CONCAT(wo.idWO, '-' ,tk.task) as 'WO',
+		jc.cat as 'Area',
+		CONCAT(ar.idArea,'-',ar.name) as 'Unit',
+		sj.[description] as 'Sub Job',
+		sc.location as 'Location',
+		sc.purpose as 'Purpose',
+		sc.buildDate as 'BuildDate',
+		ds.dismantleDate as 'DemoDate',
+		sc.foreman as 'Foreman',
+		si.width as 'Width',
+		si.[length] as 'Length',
+		si.heigth as 'Heigth',
+		ISNULL((si.descks + si.extraDeck),0) as 'Decks',
+		ISNULL((select (ah.build + ah.material + ah.travel + ah.weather+ ah.alarm+ ah.[safety]+ ah.stdBy+ ah.other) from activityHours as ah where ah.tag = sc.tag and ah.idModAux IS NUll and ah.idDismantle IS NUll),0) as 'Erection Hours',
+		pd.QID as 'QuanID',
+		pd.idProduct as 'ProductId',
+		pd.name as 'Product Name',
+		ps.quantity as 'QTY',
+		pd.[weight] as 'Weight',
+		pd.dailyRentalRate as 'DailyRent'
+		from scaffoldTraking as sc
+		left join scaffoldInformation as si on si.tag = sc.tag
+		left join dismantle as ds on ds.tag = sc.tag
+		left join areas as ar on ar.idArea = sc.idArea 
+		left join subJobs as sj on sj.idSubJob = sc.idSubJob
+		left join jobCat as jc on jc.idJobCat = sc.idJobCat
+		left join task as tk on tk.idAux = sc.idAux
+		left join productScaffold as ps on ps.tag = sc.tag
+		inner join product as pd on pd.idProduct = ps.idProduct
+		inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO
+		inner join projectOrder as po on po.idPO = wo.idPO and po.jobNo = wo.jobNo
+		inner join job as jb on jb.jobNo = po.jobNo 
+		inner join clients as cl on cl.idClient = jb.idClient
+		where sc.tag = @tagID
+	end
+	else if @mod = 1 
+	begin 
+	select 
+		sc.tag , 
+		cl.photo as 'imgClient' ,
+		jb.jobNo ,
+		CONCAT(wo.idWO, '-' ,tk.task) as 'WO',
+		jc.cat as 'Area',
+		CONCAT(ar.idArea,'-',ar.name) as 'Unit',
+		sj.[description] as 'Sub Job',
+		sc.location as 'Location',
+		sc.purpose as 'Purpose',
+		sc.buildDate as 'BuildDate',
+		ds.dismantleDate as 'DemoDate',
+		sc.foreman as 'Foreman',
+		si.width as 'Width',
+		si.[length] as 'Length',
+		si.heigth as 'Heigth',
+		ISNULL((si.descks + si.extraDeck),0) as 'Decks',
+		ISNULL((select (ah.build + ah.material + ah.travel + ah.weather+ ah.alarm+ ah.[safety]+ ah.stdBy+ ah.other) from activityHours as ah where ah.tag = sc.tag and ah.idModAux IS NUll and ah.idDismantle IS NUll),0) as 'Erection Hours',
+		pd.QID as 'QuanID',
+		pd.idProduct as 'ProductId',
+		pd.name as 'Product Name',
+		ps.quantity as 'QTY',
+		pd.[weight] as 'Weight',
+		pd.dailyRentalRate as 'DailyRent'
+		from scaffoldTraking as sc
+		left join scaffoldInformation as si on si.tag = sc.tag
+		left join dismantle as ds on ds.tag = sc.tag
+		left join areas as ar on ar.idArea = sc.idArea 
+		left join subJobs as sj on sj.idSubJob = sc.idSubJob
+		left join jobCat as jc on jc.idJobCat = sc.idJobCat
+		left join task as tk on tk.idAux = sc.idAux
+		left join productScaffold as ps on ps.tag = sc.tag
+		inner join product as pd on pd.idProduct = ps.idProduct
+		inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO
+		inner join projectOrder as po on po.idPO = wo.idPO and po.jobNo = wo.jobNo
+		inner join job as jb on jb.jobNo = po.jobNo 
+		inner join clients as cl on cl.idClient = jb.idClient
+		where sc.tag = @tagID 
+		union all 
+		select 
+		sc.tag , 
+		cl.photo as 'imgClient' ,
+		jb.jobNo ,
+		CONCAT(wo.idWO, '-' ,tk.task) as 'WO',
+		jc.cat as 'Area',
+		CONCAT(ar.idArea,'-',ar.name) as 'Unit',
+		sj.[description] as 'Sub Job',
+		sc.location as 'Location',
+		sc.purpose as 'Purpose',
+		sc.buildDate as 'BuildDate',
+		ds.dismantleDate as 'DemoDate',
+		sc.foreman as 'Foreman',
+		si.width as 'Width',
+		si.[length] as 'Length',
+		si.heigth as 'Heigth',
+		ISNULL((si.descks + si.extraDeck),0) as 'Decks',
+		ISNULL((select(sum(ah.build)+sum(ah.material)+sum(ah.travel)+sum(ah.weather)+sum(ah.alarm)+sum(ah.[safety])+sum(ah.stdBy)+sum(ah.other)) from activityHours as ah where ah.tag = sc.tag and ah.idModAux = md.idModAux and ah.idDismantle IS NUll),0) as 'Erection Hours',
+		pd.QID as 'QuanID',
+		pd.idProduct as 'ProductId',
+		pd.name as 'Product Name',
+		pm.quantity as 'QTY',
+		pd.[weight] as 'Weight',
+		pd.dailyRentalRate as 'DailyRent'
+		from scaffoldTraking as sc
+		left join modification as md on md.tag = sc.tag
+		left join scaffoldInformation as si on si.tag = sc.tag 
+		left join dismantle as ds on ds.tag = sc.tag
+		left join areas as ar on ar.idArea = sc.idArea 
+		left join subJobs as sj on sj.idSubJob = sc.idSubJob
+		left join jobCat as jc on jc.idJobCat = sc.idJobCat
+		left join task as tk on tk.idAux = sc.idAux
+		left join productModification as pm on pm.tag = sc.tag and pm.idModAux = md.idModAux
+		inner join product as pd on pd.idProduct = pm.idProduct
+		inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO
+		inner join projectOrder as po on po.idPO = wo.idPO and po.jobNo = wo.jobNo
+		inner join job as jb on jb.jobNo = po.jobNo 
+		inner join clients as cl on cl.idClient = jb.idClient
+		where sc.tag = @tagID and md.idModification = @modID
+	end
+	else if @dis = 1
+	begin
+	select 
+		sc.tag , 
+		cl.photo as 'imgClient' ,
+		jb.jobNo ,
+		CONCAT(wo.idWO, '-' ,tk.task) as 'WO',
+		jc.cat as 'Area',
+		CONCAT(ar.idArea,'-',ar.name) as 'Unit',
+		sj.[description] as 'Sub Job',
+		sc.location as 'Location',
+		sc.purpose as 'Purpose',
+		sc.buildDate as 'BuildDate',
+		ds.dismantleDate as 'DemoDate',
+		sc.foreman as 'Foreman',
+		si.width as 'Width',
+		si.[length] as 'Length',
+		si.heigth as 'Heigth',
+		ISNULL((si.descks + si.extraDeck),0) as 'Decks',
+		ISNULL((select (ah.build + ah.material + ah.travel + ah.weather+ ah.alarm+ ah.[safety]+ ah.stdBy+ ah.other) from activityHours as ah where ah.tag = sc.tag and ah.idModAux IS NUll and ah.idDismantle IS NUll),0) as 'Erection Hours',
+		pd.QID as 'QuanID',
+		pd.idProduct as 'ProductId',
+		pd.name as 'Product Name',
+		ps.quantity as 'QTY',
+		pd.[weight] as 'Weight',
+		pd.dailyRentalRate as 'DailyRent'
+		from scaffoldTraking as sc
+		left join scaffoldInformation as si on si.tag = sc.tag
+		left join dismantle as ds on ds.tag = sc.tag
+		left join areas as ar on ar.idArea = sc.idArea 
+		left join subJobs as sj on sj.idSubJob = sc.idSubJob
+		left join jobCat as jc on jc.idJobCat = sc.idJobCat
+		left join task as tk on tk.idAux = sc.idAux
+		left join productTotalScaffold as ps on ps.tag = sc.tag
+		inner join product as pd on pd.idProduct = ps.idProduct
+		inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO
+		inner join projectOrder as po on po.idPO = wo.idPO and po.jobNo = wo.jobNo
+		inner join job as jb on jb.jobNo = po.jobNo 
+		inner join clients as cl on cl.idClient = jb.idClient
+		where sc.tag = @tagID and ds.tag = @tagID
+	end
 end
 go

@@ -562,6 +562,12 @@
     <Compile Include="RerportsScaffold\ScaffoldHistoryDismantled.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="RerportsScaffold\ScaffoldProduct.Designer.vb">
+      <DependentUpon>ScaffoldProduct.vb</DependentUpon>
+    </Compile>
+    <Compile Include="RerportsScaffold\ScaffoldProduct.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="RerportsScaffold\SCFHistoryByJob.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -602,6 +608,12 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>SCFHistoryDismantled.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="RerportsScaffold\SCFProduct.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SCFProduct.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="VRT_TRAKINGDataSet.Designer.vb">
@@ -855,6 +867,9 @@
     <EmbeddedResource Include="RerportsScaffold\ScaffoldHistoryDismantled.resx">
       <DependentUpon>ScaffoldHistoryDismantled.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="RerportsScaffold\ScaffoldProduct.resx">
+      <DependentUpon>ScaffoldProduct.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="RerportsScaffold\SCFHistoryByJob.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>SCFHistoryByJob.vb</LastGenOutput>
@@ -880,6 +895,10 @@
     <EmbeddedResource Include="RerportsScaffold\SCFHistoryDismantled.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>SCFHistoryDismantled.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RerportsScaffold\SCFProduct.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>SCFProduct.vb</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
@@ -987,7 +1006,37 @@
     <None Include="Images\ScaffoldImageEST2.png" />
     <None Include="Images\scaffoldestimate.png" />
     <None Include="Images\ReCap.png" />
+    <None Include="Images\Send.png" />
     <Content Include="Images\user.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="Microsoft.Office.Core">
+      <Guid>{2DF8D04C-5BFA-101B-BDE5-00AA0044DE52}</Guid>
+      <VersionMajor>2</VersionMajor>
+      <VersionMinor>8</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="Microsoft.Office.Interop.Outlook">
+      <Guid>{00062FFF-0000-0000-C000-000000000046}</Guid>
+      <VersionMajor>9</VersionMajor>
+      <VersionMinor>6</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="stdole">
+      <Guid>{00020430-0000-0000-C000-000000000046}</Guid>
+      <VersionMajor>2</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>
