@@ -104,7 +104,12 @@ Public Class metodosCompany
 
     Public Property paymentTerms() As String
         Get
-            Return _paymentTerms
+            If _paymentTerms Is Nothing Then
+                Return ""
+            Else
+                Return _paymentTerms
+            End If
+
         End Get
         Set(ByVal value As String)
             _paymentTerms = value

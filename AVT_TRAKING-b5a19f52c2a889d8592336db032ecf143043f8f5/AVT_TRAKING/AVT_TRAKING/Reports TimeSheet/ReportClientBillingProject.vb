@@ -46,6 +46,7 @@ Public Class ReportClientBillingProject
             reportTS.SetParameterValue("@startdate", validaFechaParaSQl(dtpInitialDate.Value.Date))
             reportTS.SetParameterValue("@finaldate", validaFechaParaSQl(dtpFinalDate.Value.Date))
             reportTS.SetParameterValue("@clientnum", idClient)
+            reportTS.SetParameterValue("@CompanyName", "brock")
             crvClientBillingsProject.ReportSource = reportTS
         Else
             MsgBox("Please select a Client.")

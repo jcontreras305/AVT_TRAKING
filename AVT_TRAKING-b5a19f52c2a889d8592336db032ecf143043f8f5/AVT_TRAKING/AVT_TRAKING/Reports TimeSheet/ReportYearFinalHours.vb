@@ -40,6 +40,7 @@ Public Class ReportYearFinalHours
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         Dim reportTS As New YearFinalHours
         reportTS.SetParameterValue("@year", If(cmbYear.SelectedItem IsNot Nothing, cmbYear.SelectedItem, CStr(System.DateTime.Today.Year)))
+        reportTS.SetParameterValue("@CompanyName", "brock")
         crvYearFinalHours.ReportSource = reportTS
     End Sub
 

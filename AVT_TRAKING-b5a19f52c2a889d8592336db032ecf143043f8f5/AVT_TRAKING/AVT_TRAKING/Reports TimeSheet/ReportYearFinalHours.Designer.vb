@@ -27,6 +27,7 @@ Partial Class ReportYearFinalHours
         Me.Panel3 = New System.Windows.Forms.Panel()
         Me.crvYearFinalHours = New CrystalDecisions.Windows.Forms.CrystalReportViewer()
         Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.cmbYear = New System.Windows.Forms.ComboBox()
         Me.Button1 = New System.Windows.Forms.Button()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.PictureBox4 = New System.Windows.Forms.PictureBox()
@@ -37,7 +38,6 @@ Partial Class ReportYearFinalHours
         Me.PictureBox3 = New System.Windows.Forms.PictureBox()
         Me.btnRestore = New System.Windows.Forms.PictureBox()
         Me.btnMaximize = New System.Windows.Forms.PictureBox()
-        Me.cmbYear = New System.Windows.Forms.ComboBox()
         Me.TableLayoutPanel1.SuspendLayout()
         Me.Panel3.SuspendLayout()
         Me.Panel2.SuspendLayout()
@@ -100,6 +100,14 @@ Partial Class ReportYearFinalHours
         Me.Panel2.Size = New System.Drawing.Size(664, 64)
         Me.Panel2.TabIndex = 1
         '
+        'cmbYear
+        '
+        Me.cmbYear.FormattingEnabled = True
+        Me.cmbYear.Location = New System.Drawing.Point(43, 6)
+        Me.cmbYear.Name = "cmbYear"
+        Me.cmbYear.Size = New System.Drawing.Size(87, 21)
+        Me.cmbYear.TabIndex = 15
+        '
         'Button1
         '
         Me.Button1.FlatAppearance.BorderSize = 0
@@ -122,7 +130,7 @@ Partial Class ReportYearFinalHours
         Me.Label1.AutoSize = True
         Me.Label1.Font = New System.Drawing.Font("Verdana", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label1.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.Label1.Location = New System.Drawing.Point(9, 3)
+        Me.Label1.Location = New System.Drawing.Point(9, 8)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(42, 14)
         Me.Label1.TabIndex = 12
@@ -211,14 +219,6 @@ Partial Class ReportYearFinalHours
         Me.btnMaximize.Size = New System.Drawing.Size(31, 29)
         Me.btnMaximize.TabIndex = 7
         Me.btnMaximize.TabStop = False
-        '
-        'cmbYear
-        '
-        Me.cmbYear.FormattingEnabled = True
-        Me.cmbYear.Location = New System.Drawing.Point(43, 1)
-        Me.cmbYear.Name = "cmbYear"
-        Me.cmbYear.Size = New System.Drawing.Size(87, 21)
-        Me.cmbYear.TabIndex = 15
         '
         'ReportYearFinalHours
         '

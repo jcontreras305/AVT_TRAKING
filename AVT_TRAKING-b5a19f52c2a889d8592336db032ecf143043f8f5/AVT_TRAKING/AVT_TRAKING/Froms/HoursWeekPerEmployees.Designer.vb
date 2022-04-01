@@ -710,7 +710,7 @@ Partial Class HoursWeekPerEmployees
         Me.tbpExpenses.Location = New System.Drawing.Point(4, 22)
         Me.tbpExpenses.Name = "tbpExpenses"
         Me.tbpExpenses.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbpExpenses.Size = New System.Drawing.Size(1174, 158)
+        Me.tbpExpenses.Size = New System.Drawing.Size(1186, 220)
         Me.tbpExpenses.TabIndex = 1
         Me.tbpExpenses.Text = "Expenses"
         Me.tbpExpenses.UseVisualStyleBackColor = True
@@ -722,7 +722,7 @@ Partial Class HoursWeekPerEmployees
         Me.tblExpenses.Dock = System.Windows.Forms.DockStyle.Fill
         Me.tblExpenses.Location = New System.Drawing.Point(3, 3)
         Me.tblExpenses.Name = "tblExpenses"
-        Me.tblExpenses.Size = New System.Drawing.Size(1168, 152)
+        Me.tblExpenses.Size = New System.Drawing.Size(1180, 214)
         Me.tblExpenses.TabIndex = 0
         '
         'txtHours3

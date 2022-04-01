@@ -38,6 +38,7 @@ Partial Class ReportsMenu
         Me.btnTimeSheet = New System.Windows.Forms.Button()
         Me.Panel3 = New System.Windows.Forms.Panel()
         Me.Panel4 = New System.Windows.Forms.Panel()
+        Me.Button18 = New System.Windows.Forms.Button()
         Me.Button13 = New System.Windows.Forms.Button()
         Me.Button14 = New System.Windows.Forms.Button()
         Me.Button15 = New System.Windows.Forms.Button()
@@ -54,6 +55,7 @@ Partial Class ReportsMenu
         Me.Button6 = New System.Windows.Forms.Button()
         Me.Button5 = New System.Windows.Forms.Button()
         Me.PictureBox4 = New System.Windows.Forms.PictureBox()
+        Me.Button19 = New System.Windows.Forms.Button()
         Me.TitleBar.SuspendLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.btnRestore, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -143,7 +145,7 @@ Partial Class ReportsMenu
         Me.Panel2.Dock = System.Windows.Forms.DockStyle.Left
         Me.Panel2.Location = New System.Drawing.Point(0, 67)
         Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(206, 501)
+        Me.Panel2.Size = New System.Drawing.Size(206, 550)
         Me.Panel2.TabIndex = 2
         '
         'Button4
@@ -273,12 +275,13 @@ Partial Class ReportsMenu
         Me.Panel3.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel3.Location = New System.Drawing.Point(206, 67)
         Me.Panel3.Name = "Panel3"
-        Me.Panel3.Size = New System.Drawing.Size(594, 501)
+        Me.Panel3.Size = New System.Drawing.Size(594, 550)
         Me.Panel3.TabIndex = 3
         '
         'Panel4
         '
         Me.Panel4.BackColor = System.Drawing.Color.FromArgb(CType(CType(30, Byte), Integer), CType(CType(38, Byte), Integer), CType(CType(60, Byte), Integer))
+        Me.Panel4.Controls.Add(Me.Button18)
         Me.Panel4.Controls.Add(Me.Button13)
         Me.Panel4.Controls.Add(Me.Button14)
         Me.Panel4.Controls.Add(Me.Button15)
@@ -287,8 +290,26 @@ Partial Class ReportsMenu
         Me.Panel4.Dock = System.Windows.Forms.DockStyle.Left
         Me.Panel4.Location = New System.Drawing.Point(206, 0)
         Me.Panel4.Name = "Panel4"
-        Me.Panel4.Size = New System.Drawing.Size(246, 501)
+        Me.Panel4.Size = New System.Drawing.Size(246, 550)
         Me.Panel4.TabIndex = 5
+        '
+        'Button18
+        '
+        Me.Button18.Dock = System.Windows.Forms.DockStyle.Top
+        Me.Button18.FlatAppearance.BorderSize = 0
+        Me.Button18.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(81, Byte), Integer), CType(CType(93, Byte), Integer), CType(CType(102, Byte), Integer))
+        Me.Button18.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.Button18.Font = New System.Drawing.Font("Verdana", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Button18.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.Button18.Image = Global.AVT_TRAKING.My.Resources.Resources.project
+        Me.Button18.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.Button18.Location = New System.Drawing.Point(0, 295)
+        Me.Button18.Name = "Button18"
+        Me.Button18.Size = New System.Drawing.Size(246, 59)
+        Me.Button18.TabIndex = 16
+        Me.Button18.Text = "SCF Rental Details"
+        Me.Button18.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.Button18.UseVisualStyleBackColor = True
         '
         'Button13
         '
@@ -383,6 +404,7 @@ Partial Class ReportsMenu
         'Panel1
         '
         Me.Panel1.BackColor = System.Drawing.Color.FromArgb(CType(CType(30, Byte), Integer), CType(CType(38, Byte), Integer), CType(CType(75, Byte), Integer))
+        Me.Panel1.Controls.Add(Me.Button19)
         Me.Panel1.Controls.Add(Me.Button12)
         Me.Panel1.Controls.Add(Me.btnVacationE)
         Me.Panel1.Controls.Add(Me.Button11)
@@ -395,7 +417,7 @@ Partial Class ReportsMenu
         Me.Panel1.Dock = System.Windows.Forms.DockStyle.Left
         Me.Panel1.Location = New System.Drawing.Point(0, 0)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(206, 501)
+        Me.Panel1.Size = New System.Drawing.Size(206, 550)
         Me.Panel1.TabIndex = 4
         '
         'Button12
@@ -561,11 +583,28 @@ Partial Class ReportsMenu
         Me.PictureBox4.TabIndex = 3
         Me.PictureBox4.TabStop = False
         '
+        'Button19
+        '
+        Me.Button19.FlatAppearance.BorderSize = 0
+        Me.Button19.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(81, Byte), Integer), CType(CType(93, Byte), Integer), CType(CType(102, Byte), Integer))
+        Me.Button19.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.Button19.Font = New System.Drawing.Font("Verdana", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Button19.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.Button19.Image = Global.AVT_TRAKING.My.Resources.Resources.billing
+        Me.Button19.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.Button19.Location = New System.Drawing.Point(3, 463)
+        Me.Button19.Name = "Button19"
+        Me.Button19.Size = New System.Drawing.Size(200, 42)
+        Me.Button19.TabIndex = 16
+        Me.Button19.Text = "Invoice Details"
+        Me.Button19.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.Button19.UseVisualStyleBackColor = True
+        '
         'ReportsMenu
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(800, 568)
+        Me.ClientSize = New System.Drawing.Size(800, 617)
         Me.Controls.Add(Me.Panel3)
         Me.Controls.Add(Me.Panel2)
         Me.Controls.Add(Me.TitleBar)
@@ -619,4 +658,6 @@ Partial Class ReportsMenu
     Friend WithEvents Button15 As Button
     Friend WithEvents Button16 As Button
     Friend WithEvents Button17 As Button
+    Friend WithEvents Button18 As Button
+    Friend WithEvents Button19 As Button
 End Class

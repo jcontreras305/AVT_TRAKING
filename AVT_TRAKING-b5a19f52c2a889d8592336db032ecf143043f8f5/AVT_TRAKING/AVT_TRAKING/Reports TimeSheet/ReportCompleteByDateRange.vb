@@ -56,6 +56,7 @@ Public Class ReportCompleteByDateRange
                 reportTS.SetParameterValue("@clientnum", idClient)
                 reportTS.SetParameterValue("@jobNum", If(chbAllJobs.Checked, 0, cmbJobs.SelectedItem))
                 reportTS.SetParameterValue("@all", If(chbAllJobs.Checked, True, False))
+                reportTS.SetParameterValue("@CompanyName", "brock")
                 crvCompleteByDateRange.ReportSource = reportTS
             Else
                 MsgBox("Please select a Client.")

@@ -64,6 +64,7 @@ Public Class ReportScaffoldEstimate
                 reportSE.SetParameterValue("@EstNumber", EstNumber)
                 reportSE.SetParameterValue("@IdClient", idClient)
                 reportSE.SetParameterValue("@all", False)
+                reportSE.SetParameterValue("@CompanyName", "brock")
                 crvReportScaffoldEstimate.ReportSource = reportSE
             Else
                 If cmbUnit.SelectedItem IsNot Nothing Then

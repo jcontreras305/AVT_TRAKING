@@ -406,6 +406,12 @@
       <DependentUpon>InvoiceProjectOrder.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Reports TimeSheet\InvoiceProjectOrderDetails.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>InvoiceProjectOrderDetails.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Reports TimeSheet\ReportAllJob.Designer.vb">
       <DependentUpon>ReportAllJob.vb</DependentUpon>
     </Compile>
@@ -446,6 +452,12 @@
       <DependentUpon>ReportInvoice.vb</DependentUpon>
     </Compile>
     <Compile Include="Reports TimeSheet\ReportInvoice.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Reports TimeSheet\ReportInvoiceDetails.Designer.vb">
+      <DependentUpon>ReportInvoiceDetails.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Reports TimeSheet\ReportInvoiceDetails.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Reports TimeSheet\ReportJNumber.Designer.vb">
@@ -568,6 +580,12 @@
     <Compile Include="RerportsScaffold\ScaffoldProduct.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="RerportsScaffold\ScaffoldRentalDatails.Designer.vb">
+      <DependentUpon>ScaffoldRentalDatails.vb</DependentUpon>
+    </Compile>
+    <Compile Include="RerportsScaffold\ScaffoldRentalDatails.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="RerportsScaffold\SCFHistoryByJob.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -614,6 +632,12 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>SCFProduct.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="RerportsScaffold\SCFRentalDetails.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SCFRentalDetails.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="VRT_TRAKINGDataSet.Designer.vb">
@@ -783,6 +807,10 @@
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>InvoiceProjectOrder.vb</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reports TimeSheet\InvoiceProjectOrderDetails.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>InvoiceProjectOrderDetails.vb</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reports TimeSheet\ReportAllJob.resx">
       <DependentUpon>ReportAllJob.vb</DependentUpon>
     </EmbeddedResource>
@@ -803,6 +831,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Reports TimeSheet\ReportInvoice.resx">
       <DependentUpon>ReportInvoice.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports TimeSheet\ReportInvoiceDetails.resx">
+      <DependentUpon>ReportInvoiceDetails.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports TimeSheet\ReportJNumber.resx">
       <DependentUpon>ReportJNumber.vb</DependentUpon>
@@ -870,6 +901,9 @@
     <EmbeddedResource Include="RerportsScaffold\ScaffoldProduct.resx">
       <DependentUpon>ScaffoldProduct.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="RerportsScaffold\ScaffoldRentalDatails.resx">
+      <DependentUpon>ScaffoldRentalDatails.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="RerportsScaffold\SCFHistoryByJob.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>SCFHistoryByJob.vb</LastGenOutput>
@@ -899,6 +933,10 @@
     <EmbeddedResource Include="RerportsScaffold\SCFProduct.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>SCFProduct.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RerportsScaffold\SCFRentalDetails.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>SCFRentalDetails.vb</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

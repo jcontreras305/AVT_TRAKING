@@ -564,8 +564,12 @@ Public Class HoursWeekPerEmployees
 
         If tblExpenses.Rows(index).Cells("Project").Value IsNot DBNull.Value Then
             For Each row As DataRow In proyectTable.Rows
-                If row.ItemArray(1) = tblExpenses.Rows(index).Cells("Project").Value Then
-                    list.Add(row.ItemArray(0)) '
+                Dim array() As String = tblExpenses.Rows(index).Cells("Project").Value.ToString.Replace("    ", "/").Split("/")
+                Dim wono As String = array(0)
+                Dim po As String = array(1)
+                Dim job As String = array(2)
+                If wono = row.ItemArray(1).ToString() And po = row.ItemArray(3).ToString() And job = row.ItemArray(4).ToString() Then
+                    list.Add(row.ItemArray(0))
                     Exit For
                 End If
             Next
@@ -1137,6 +1141,11 @@ Public Class HoursWeekPerEmployees
     Private Sub Panel1_Paint(sender As Object, e As PaintEventArgs) Handles Panel1.Paint
 
     End Sub
+
+    Private Sub tblExpenses_DataError(sender As Object, e As DataGridViewDataErrorEventArgs) Handles tblExpenses.DataError
+        e.Cancel = True
+    End Sub
+
     Private Sub btnTime_Click(sender As Object, e As EventArgs) Handles btnTime.Click
         Dim timeSheet As New TimeSheet
         timeSheet.tablaEmpleadosId = idsEmployees

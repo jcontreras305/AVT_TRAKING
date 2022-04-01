@@ -56,6 +56,7 @@ Public Class ReportCatsEmployeePorject
             reportTS.SetParameterValue("@finaldate", validaFechaParaSQl(dtpFinalDate.Value.Date))
             reportTS.SetParameterValue("@employeenumber", DBNull.Value)
             reportTS.SetParameterValue("@all", 1)
+            reportTS.SetParameterValue("@CompanyName", "brock")
             crvCatsEmployeebyProject.ReportSource = reportTS
         ElseIf cmbEmployees.SelectedItem IsNot Nothing Then
             Dim array() = cmbEmployees.SelectedItem.ToString().Split("    ")

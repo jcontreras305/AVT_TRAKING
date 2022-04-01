@@ -51,6 +51,7 @@ Public Class ReportEmployeePerDiem
             reportTS.SetParameterValue("@clientnum", idClient)
             reportTS.SetParameterValue("@job", If(cmbJob.SelectedItem IsNot Nothing, CInt(cmbJob.SelectedItem), 0))
             reportTS.SetParameterValue("@all", If(chbAllJobs.Checked, 1, 0))
+            reportTS.SetParameterValue("@CompanyName", "brock")
             crvEmployeePerDiem.ReportSource = reportTS
         Else
             MsgBox("Please select a Client.")

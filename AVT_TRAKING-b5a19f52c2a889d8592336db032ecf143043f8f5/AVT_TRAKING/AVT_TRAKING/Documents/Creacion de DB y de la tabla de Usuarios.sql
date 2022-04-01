@@ -658,6 +658,16 @@ create table outgoing(
 GO
 
 --##########################################################################################
+--##################  TABLA DE OUTGOING ####################################################
+--##########################################################################################
+
+create table ownEmail(
+	email varchar(70) primary key NOT NULL,
+	pass varchar(50) NULL
+)
+GO
+
+--##########################################################################################
 --##################  TABLA DE PRODUCT #####################################################
 --##########################################################################################
 
@@ -1219,6 +1229,14 @@ create table workCode(
 	EQExp1 varchar(50),
 	EQExp2 varchar(50) 
 )
+GO
+
+INSERT INTO workCode values
+(95,'LMP','LMP',0,0,0,'',''),
+(96,'LMI','LMI',0,0,0,'',''),
+(97,'LMS','LMS',0,0,0,'',''),
+(98,'LMA','LMA',0,0,0,'',''),
+(99,'LML','LML',0,0,0,'','')
 GO
 
 --##########################################################################################
@@ -3202,220 +3220,84 @@ end
 go
 
 ----==============================================================================================================================
-----=============== ESTE CODIGO ES PARA AGREGAR LAS TABLAS PARA ENVIAR EMAILS ====================================================
+----=============== ESTE CODIGO ES PARA AGREGAR LOS WORK CODES PARA EVITAR LOS NULLS EN PERDIEM ==================================
 ----==============================================================================================================================
 
---create table emails(
---	email varchar(70) not null primary key,
---	name varchar(50) ,
---	status bit
---)
---go
+----######## ACTUALIZAR LOS PROCEDIMIENTOS EN EL ARCHIVO DE SPREPORT #############################################################
+----######## ACTUALIZE Y CAMBIE UN POCO LA CONSULTA DE ESTOS #####################################################################
 
---create table ReportEmail(
---	reportName varchar(50) not null primary key,
---	subject text ,
---	body text 
---)
---go
+---- 1.- ReCapByProject (linea 12 - 106)
+---- 2.- select_Time_Sheet_PO (linea 112 - 146   
+---- 3.- sp_client_Billing_Porject (linea 381 - 458)
 
---create table listEmailReport(
---	reportName varchar(50) not null ,
---	email varchar(70) not null,
---	statusSend bit ,
---)
---go
-
---ALTER TABLE listEmailReport ADD CONSTRAINT pk_listEmailReport
---PRIMARY KEY (reportName,email)
---go
-
---ALTER TABLE listEmailReport  WITH CHECK ADD  CONSTRAINT fk_email_listEmailReport 
---FOREIGN KEY(email) REFERENCES emails (email)
---ON UPDATE CASCADE
---ON DELETE CASCADE
+--INSERT INTO workCode values
+--(95,'LMP','LMP',0,0,0,'',''),
+----(96,'LMI','LMI',0,0,0,'',''),--si ya tiene el LMI no descomentar esta linea 
+----(97,'LMS','LMS',0,0,0,'',''),--si ya tiene el LMS no descomentar esta linea
+--(98,'LMA','LMA',0,0,0,'',''),
+--(99,'LML','LML',0,0,0,'','')
 --GO
 
---ALTER TABLE listEmailReport  WITH CHECK ADD  CONSTRAINT fk_reportName_listEmailReport 
---FOREIGN KEY(reportName) REFERENCES ReportEmail (reportName)
---ON UPDATE CASCADE
---ON DELETE CASCADE
---GO
+----==============================================================================================================================
+----=============== ESTE CODIGO ES PARA ACTUALIZAR EL PROCEDIMIENTO DE INVOICE PO DETALLADO ======================================
+----==============================================================================================================================
 
---==============================================================================================================================
---=============== ESTE CODIGO ES PARA PROCEDIMIENTO SCAFFOLD PRODUCT TO SCAFFOLD, MODIFIACTION Y DISMANTLE =====================
---==============================================================================================================================
+--ALTER proc [dbo].[sp_Invoice_PO]
+--@numberClient  int,
+--@startDate date, 
+--@FinalDate date, 
+--@idPO bigint,
+--@all bit 
+--as 
+--begin 
+--select 
+--	cl.numberClient,
+--	cl.companyName,
+--	jb.jobNo,
+--	po.idPO, 
+--	SUBSTRING( wc.name,1,iif(CHARINDEX('-',wc.name)=0, len(wc.name) ,(CHARINDEX('-',wc.name)-1))) 'Class',
+--	hw.hoursST,
+--	(hw.hoursST*wc.billingRate1) as 'CostST',
+--	hw.hoursOT,
+--	(hw.hoursOT*wc.billingRateOT) as 'CostOT',
+--	isnull((select sum(amount) from expensesUsed as exu where exu.idHorsWorked = hw.idHorsWorked and exu.dateExpense between @startDate and @FinalDate),0)as 'Perdiem'
+--	into #TablaHorasClassPerdiem
+--	from hoursWorked as hw 
+--		inner join workCode as wc on wc.idWorkCode = hw.idWorkCode
+--		inner join task as tk on tk.idAux = hw.idAux 
+--		inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO
+--		inner join projectOrder as po on po.idPO = wo.idPO and wo.jobNo = po.jobNo
+--		inner join job as jb on po.jobNo = jb.jobNo
+--		inner join clients as cl on cl.idClient = jb.idClient
+--		where cl.numberClient = @numberClient and hw.dateWorked between @startDate and @FinalDate and po.idPO like iif(@all = 1 ,'%%%',convert(nvarchar, @idPO))
 
---CREATE proc [dbo].[sp_Scaffold_Product]
---@tagID as varchar(20) ,
---@modID as varchar(20) ,
---@scf as bit,
---@mod as bit,
---@dis as bit
---as
---begin
---	if @scf = 1 
---	begin 
---	select 
---		sc.tag , 
---		cl.photo as 'imgClient' ,
---		jb.jobNo ,
---		CONCAT(wo.idWO, '-' ,tk.task) as 'WO',
---		jc.cat as 'Area',
---		CONCAT(ar.idArea,'-',ar.name) as 'Unit',
---		sj.[description] as 'Sub Job',
---		sc.location as 'Location',
---		sc.purpose as 'Purpose',
---		sc.buildDate as 'BuildDate',
---		ds.dismantleDate as 'DemoDate',
---		sc.foreman as 'Foreman',
---		si.width as 'Width',
---		si.[length] as 'Length',
---		si.heigth as 'Heigth',
---		ISNULL((si.descks + si.extraDeck),0) as 'Decks',
---		ISNULL((select (ah.build + ah.material + ah.travel + ah.weather+ ah.alarm+ ah.[safety]+ ah.stdBy+ ah.other) from activityHours as ah where ah.tag = sc.tag and ah.idModAux IS NUll and ah.idDismantle IS NUll),0) as 'Erection Hours',
---		pd.QID as 'QuanID',
---		pd.idProduct as 'ProductId',
---		pd.name as 'Product Name',
---		ps.quantity as 'QTY',
---		pd.[weight] as 'Weight',
---		pd.dailyRentalRate as 'DailyRent'
---		from scaffoldTraking as sc
---		left join scaffoldInformation as si on si.tag = sc.tag
---		left join dismantle as ds on ds.tag = sc.tag
---		left join areas as ar on ar.idArea = sc.idArea 
---		left join subJobs as sj on sj.idSubJob = sc.idSubJob
---		left join jobCat as jc on jc.idJobCat = sc.idJobCat
---		left join task as tk on tk.idAux = sc.idAux
---		left join productScaffold as ps on ps.tag = sc.tag
---		inner join product as pd on pd.idProduct = ps.idProduct
---		inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO
---		inner join projectOrder as po on po.idPO = wo.idPO and po.jobNo = wo.jobNo
---		inner join job as jb on jb.jobNo = po.jobNo 
---		inner join clients as cl on cl.idClient = jb.idClient
---		where sc.tag = @tagID
---	end
---	else if @mod = 1 
---	begin 
---	select 
---		sc.tag , 
---		cl.photo as 'imgClient' ,
---		jb.jobNo ,
---		CONCAT(wo.idWO, '-' ,tk.task) as 'WO',
---		jc.cat as 'Area',
---		CONCAT(ar.idArea,'-',ar.name) as 'Unit',
---		sj.[description] as 'Sub Job',
---		sc.location as 'Location',
---		sc.purpose as 'Purpose',
---		sc.buildDate as 'BuildDate',
---		ds.dismantleDate as 'DemoDate',
---		sc.foreman as 'Foreman',
---		si.width as 'Width',
---		si.[length] as 'Length',
---		si.heigth as 'Heigth',
---		ISNULL((si.descks + si.extraDeck),0) as 'Decks',
---		ISNULL((select (ah.build + ah.material + ah.travel + ah.weather+ ah.alarm+ ah.[safety]+ ah.stdBy+ ah.other) from activityHours as ah where ah.tag = sc.tag and ah.idModAux IS NUll and ah.idDismantle IS NUll),0) as 'Erection Hours',
---		pd.QID as 'QuanID',
---		pd.idProduct as 'ProductId',
---		pd.name as 'Product Name',
---		ps.quantity as 'QTY',
---		pd.[weight] as 'Weight',
---		pd.dailyRentalRate as 'DailyRent'
---		from scaffoldTraking as sc
---		left join scaffoldInformation as si on si.tag = sc.tag
---		left join dismantle as ds on ds.tag = sc.tag
---		left join areas as ar on ar.idArea = sc.idArea 
---		left join subJobs as sj on sj.idSubJob = sc.idSubJob
---		left join jobCat as jc on jc.idJobCat = sc.idJobCat
---		left join task as tk on tk.idAux = sc.idAux
---		left join productScaffold as ps on ps.tag = sc.tag
---		inner join product as pd on pd.idProduct = ps.idProduct
---		inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO
---		inner join projectOrder as po on po.idPO = wo.idPO and po.jobNo = wo.jobNo
---		inner join job as jb on jb.jobNo = po.jobNo 
---		inner join clients as cl on cl.idClient = jb.idClient
---		where sc.tag = @tagID 
---		union all 
---		select 
---		sc.tag , 
---		cl.photo as 'imgClient' ,
---		jb.jobNo ,
---		CONCAT(wo.idWO, '-' ,tk.task) as 'WO',
---		jc.cat as 'Area',
---		CONCAT(ar.idArea,'-',ar.name) as 'Unit',
---		sj.[description] as 'Sub Job',
---		sc.location as 'Location',
---		sc.purpose as 'Purpose',
---		sc.buildDate as 'BuildDate',
---		ds.dismantleDate as 'DemoDate',
---		sc.foreman as 'Foreman',
---		si.width as 'Width',
---		si.[length] as 'Length',
---		si.heigth as 'Heigth',
---		ISNULL((si.descks + si.extraDeck),0) as 'Decks',
---		ISNULL((select(sum(ah.build)+sum(ah.material)+sum(ah.travel)+sum(ah.weather)+sum(ah.alarm)+sum(ah.[safety])+sum(ah.stdBy)+sum(ah.other)) from activityHours as ah where ah.tag = sc.tag and ah.idModAux = md.idModAux and ah.idDismantle IS NUll),0) as 'Erection Hours',
---		pd.QID as 'QuanID',
---		pd.idProduct as 'ProductId',
---		pd.name as 'Product Name',
---		pm.quantity as 'QTY',
---		pd.[weight] as 'Weight',
---		pd.dailyRentalRate as 'DailyRent'
---		from scaffoldTraking as sc
---		left join modification as md on md.tag = sc.tag
---		left join scaffoldInformation as si on si.tag = sc.tag 
---		left join dismantle as ds on ds.tag = sc.tag
---		left join areas as ar on ar.idArea = sc.idArea 
---		left join subJobs as sj on sj.idSubJob = sc.idSubJob
---		left join jobCat as jc on jc.idJobCat = sc.idJobCat
---		left join task as tk on tk.idAux = sc.idAux
---		left join productModification as pm on pm.tag = sc.tag and pm.idModAux = md.idModAux
---		inner join product as pd on pd.idProduct = pm.idProduct
---		inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO
---		inner join projectOrder as po on po.idPO = wo.idPO and po.jobNo = wo.jobNo
---		inner join job as jb on jb.jobNo = po.jobNo 
---		inner join clients as cl on cl.idClient = jb.idClient
---		where sc.tag = @tagID and md.idModification = @modID
---	end
---	else if @dis = 1
---	begin
---	select 
---		sc.tag , 
---		cl.photo as 'imgClient' ,
---		jb.jobNo ,
---		CONCAT(wo.idWO, '-' ,tk.task) as 'WO',
---		jc.cat as 'Area',
---		CONCAT(ar.idArea,'-',ar.name) as 'Unit',
---		sj.[description] as 'Sub Job',
---		sc.location as 'Location',
---		sc.purpose as 'Purpose',
---		sc.buildDate as 'BuildDate',
---		ds.dismantleDate as 'DemoDate',
---		sc.foreman as 'Foreman',
---		si.width as 'Width',
---		si.[length] as 'Length',
---		si.heigth as 'Heigth',
---		ISNULL((si.descks + si.extraDeck),0) as 'Decks',
---		ISNULL((select (ah.build + ah.material + ah.travel + ah.weather+ ah.alarm+ ah.[safety]+ ah.stdBy+ ah.other) from activityHours as ah where ah.tag = sc.tag and ah.idModAux IS NUll and ah.idDismantle IS NUll),0) as 'Erection Hours',
---		pd.QID as 'QuanID',
---		pd.idProduct as 'ProductId',
---		pd.name as 'Product Name',
---		ps.quantity as 'QTY',
---		pd.[weight] as 'Weight',
---		pd.dailyRentalRate as 'DailyRent'
---		from scaffoldTraking as sc
---		left join scaffoldInformation as si on si.tag = sc.tag
---		left join dismantle as ds on ds.tag = sc.tag
---		left join areas as ar on ar.idArea = sc.idArea 
---		left join subJobs as sj on sj.idSubJob = sc.idSubJob
---		left join jobCat as jc on jc.idJobCat = sc.idJobCat
---		left join task as tk on tk.idAux = sc.idAux
---		left join productTotalScaffold as ps on ps.tag = sc.tag
---		inner join product as pd on pd.idProduct = ps.idProduct
---		inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO
---		inner join projectOrder as po on po.idPO = wo.idPO and po.jobNo = wo.jobNo
---		inner join job as jb on jb.jobNo = po.jobNo 
---		inner join clients as cl on cl.idClient = jb.idClient
---		where sc.tag = @tagID and ds.tag = @tagID
---	end
+--select
+--	distinct
+--	t1.numberClient,
+--	t1.companyName,
+--	t1.jobNo,
+--	t1.idPO,
+--	t1.Class,
+--	(select
+--	sum(hoursST)
+--	from #TablaHorasClassPerdiem as t2 
+--	where t2.numberClient = t2.numberClient and t2.jobNo = t1.jobNo and t2.idPO	= t1.idPO and t2.Class = t1.Class) as 'ST',
+--	(select
+--	sum(CostST)
+--	from #TablaHorasClassPerdiem as t2 
+--	where t2.numberClient = t2.numberClient and t2.jobNo = t1.jobNo and t2.idPO	= t1.idPO and t2.Class = t1.Class) as 'CostST',
+--	(select
+--	sum(hoursOT)
+--	from #TablaHorasClassPerdiem as t2 
+--	where t2.numberClient = t2.numberClient and t2.jobNo = t1.jobNo and t2.idPO	= t1.idPO and t2.Class = t1.Class) as 'OT',
+--	(select
+--	sum(CostOT)
+--	from #TablaHorasClassPerdiem as t2 
+--	where t2.numberClient = t2.numberClient and t2.jobNo = t1.jobNo and t2.idPO	= t1.idPO and t2.Class = t1.Class) as 'CostOT',
+--	(select
+--	sum(perdiem)
+--	from #TablaHorasClassPerdiem as t2 
+--	where t2.numberClient = t2.numberClient and t2.jobNo = t1.jobNo and t2.idPO	= t1.idPO and t2.Class = t1.Class) as 'Perdiem'
+--from #TablaHorasClassPerdiem as t1 
+--drop table #TablaHorasClassPerdiem
 --end
---go

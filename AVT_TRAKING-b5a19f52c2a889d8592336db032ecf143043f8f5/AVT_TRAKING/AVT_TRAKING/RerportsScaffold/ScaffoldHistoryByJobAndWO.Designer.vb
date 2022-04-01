@@ -260,6 +260,7 @@ Partial Class ScaffoldHistoryByJobAndWO
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(800, 450)
         Me.Controls.Add(Me.TableLayoutPanel1)
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
         Me.Name = "ScaffoldHistoryByJobAndWO"
         Me.Text = "ScaffoldHistoryByJobAndWO"
         Me.TableLayoutPanel1.ResumeLayout(False)

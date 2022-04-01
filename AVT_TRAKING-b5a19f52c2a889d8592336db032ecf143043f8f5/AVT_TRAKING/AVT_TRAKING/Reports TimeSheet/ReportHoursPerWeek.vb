@@ -36,6 +36,7 @@ Public Class ReportHoursPerWeek
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         Dim reportTS As New HoursPerWeek
         reportTS.SetParameterValue("@date", validaFechaParaSQl(dtpDate.Value.Date))
+        reportTS.SetParameterValue("@CompanyName", "brock")
         crvHoursPerWeek.ReportSource = reportTS
     End Sub
 

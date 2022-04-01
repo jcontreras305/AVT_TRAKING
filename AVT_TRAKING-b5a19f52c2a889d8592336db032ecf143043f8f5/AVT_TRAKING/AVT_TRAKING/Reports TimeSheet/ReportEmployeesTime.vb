@@ -82,6 +82,7 @@ Public Class ReportEmployeesTime
                     reportTS.SetParameterValue("@jobNum", If(chbAllJobs.Checked, 0, jobNo))
                     reportTS.SetParameterValue("@numClient", CInt(clNum))
                     reportTS.SetParameterValue("@all", If(chbAllJobs.Checked, 1, 0))
+                    reportTS.SetParameterValue("@CompanyName", "brock")
                     crvEmployeesTime.ReportSource = reportTS
                 Else
                     MsgBox("Please select a Client.")

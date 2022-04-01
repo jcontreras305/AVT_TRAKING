@@ -40,6 +40,7 @@ Public Class ReportAllJob
             reportTS.SetParameterValue("@startdate", validaFechaParaSQl(dtpInitialDate.Value.Date))
             reportTS.SetParameterValue("@finaldate", validaFechaParaSQl(dtpFinalDate.Value.Date))
             reportTS.SetParameterValue("@clientnum", idclient)
+            reportTS.SetParameterValue("@CompanyName", "brock")
             crvAllJobs.ReportSource = reportTS
         Else
             MsgBox("Please select a Client.")

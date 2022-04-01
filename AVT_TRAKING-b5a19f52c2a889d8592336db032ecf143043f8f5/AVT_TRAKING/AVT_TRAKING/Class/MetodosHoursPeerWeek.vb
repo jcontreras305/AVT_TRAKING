@@ -103,7 +103,7 @@ exu.idExpenseUsed,
 CONVERT(varchar,exu.dateExpense,101) as 'Date',
 CONCAT(wo.idWO,'-',tk.task) as 'Project',
 ex.expenseCode as 'Expense Code',
-exu.amount as 'Amount',
+exu.amount as 'Amount $',
 exu.description as 'Description'
 from expensesUsed as exu
 inner join expenses as ex on ex.idExpenses = exu.idExpense
@@ -158,13 +158,17 @@ inner join job as jb on jb.jobNo = po.jobNo", conn)
             conectar()
             cmbProyect.Items.Clear()
             proyectTable.Clear()
-            Dim cmd As New SqlCommand("select tk.idAux as 'task', CONCAT(wo.idWO,'-',tk.task) as 'project' , tk.description from workOrder as wo 
-inner join task as tk on wo.idAuxWO = tk.idAuxWO", conn)
+            Dim cmd As New SqlCommand("select tk.idAux as 'task', CONCAT(wo.idWO,'-',tk.task) as 'project' , tk.description , po.idPO , jb.jobNo from workOrder as wo 
+inner join task as tk on wo.idAuxWO = tk.idAuxWO
+inner join projectOrder as po on po.idPO = wo.idPO and wo.jobNo = po.jobNo
+inner join job as jb on po.jobNo = jb.jobNo
+order by CONCAT(wo.idWO,'-',tk.task) asc
+", conn)
             If cmd.ExecuteNonQuery Then
                 Dim da As New SqlDataAdapter(cmd)
                 da.Fill(proyectTable)
                 For Each row As DataRow In proyectTable.Rows
-                    cmbProyect.Items.Add(row.ItemArray(1))
+                    cmbProyect.Items.Add(CStr(row.ItemArray(1)) + "    " + CStr(row.ItemArray(3)) + "    " + CStr(row.ItemArray(4)))
                 Next
                 desconectar()
                 Return True

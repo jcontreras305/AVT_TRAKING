@@ -45,6 +45,7 @@ Public Class ReportClientBillingsReCapBYProject
             reportTS.SetParameterValue("@clientnum", idClient)
             reportTS.SetParameterValue("@job", If(cmbJob.SelectedItem IsNot Nothing, cmbJob.SelectedItem, 0))
             reportTS.SetParameterValue("@all", If(chbAllJobs.Checked, 1, 0))
+            reportTS.SetParameterValue("@CompanyName", "brock")
             crvClientBillingsReCapBYProject.ReportSource = reportTS
         Else
             MsgBox("Please select a Client.")

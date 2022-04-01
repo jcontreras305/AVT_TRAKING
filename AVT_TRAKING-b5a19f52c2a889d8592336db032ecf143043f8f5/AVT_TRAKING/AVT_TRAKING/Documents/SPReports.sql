@@ -90,7 +90,7 @@ T2.Complete,T2.[Es-Hrs],T2.[Total Expenses],T2.[Total Material],T2.[Total Spend]
 	ts.estTotalBilling as 'Estimate'
 	from task as ts
 	inner join workOrder as wo on wo.idAuxWO=ts.idAuxWO
-	inner join projectOrder as po on po.idPO=wo.idPO
+	inner join projectOrder as po on po.idPO=wo.idPO and po.jobNo = wo.jobNo
 	inner join job as jb on jb.jobNo=po.jobNo
 	inner join clients cl on cl.idClient=jb.idClient
 	where cl.numberClient=@clientnum and ((select sum(hoursST) from hoursWorked where idAux = ts.idAux)> 0 or (select sum(hoursOT)
@@ -119,12 +119,14 @@ as
 begin
 	set @IntialDate = ISNULL(@IntialDate,GETDATE())
 	set @FinalDate = ISNULL(@FinalDate,GETDATE())
+	select * from (
 	select
 	distinct
 		cl.numberClient,
+		jb.jobNo,
 		po.idPO,
-		(select sum(hw1.hoursST) from hoursWorked as hw1 inner join workCode as wc1 on wc1.idWorkCode = hw1.idWorkCode inner join task as tk1 on tk1.idAux = hw1.idAux inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO inner join projectOrder as po1 on po1.idPO = wo1.idPO and po1.jobNo = wo1.jobNo inner join job as jb1 on jb1.jobNo = po1.jobNo inner join clients as cl1 on cl1.idClient = jb1.idClient where cl1.idClient = cl.idClient and po1.idPO=po.idPO and hw1.idEmployee = em.idEmployee and SUBSTRING( wc.name,1,iif(CHARINDEX('-',wc.name)=0, len(wc.name) ,(CHARINDEX('-',wc.name)-1)))=SUBSTRING( wc1.name,1,iif(CHARINDEX('-',wc1.name)=0, len(wc1.name) ,(CHARINDEX('-',wc1.name)-1))) and hw1.dateWorked between @IntialDate and @FinalDate) as 'hoursST',
-		(select sum(hw2.hoursOT) from hoursWorked as hw2 inner join workCode as wc2 on wc2.idWorkCode = hw2.idWorkCode inner join task as tk2 on tk2.idAux = hw2.idAux inner join workOrder as wo2 on wo2.idAuxWO = tk2.idAuxWO inner join projectOrder as po2 on po2.idPO = wo2.idPO and po2.jobNo = wo2.jobNo inner join job as jb2 on jb2.jobNo = po2.jobNo inner join clients as cl2 on cl2.idClient = jb2.idClient where cl2.idClient = cl.idClient and po2.idPO=po.idPO and hw2.idEmployee = em.idEmployee and SUBSTRING( wc.name,1,iif(CHARINDEX('-',wc.name)=0, len(wc.name) ,(CHARINDEX('-',wc.name)-1)))=SUBSTRING( wc2.name,1,iif(CHARINDEX('-',wc2.name)=0, len(wc2.name) ,(CHARINDEX('-',wc2.name)-1))) and hw2.dateWorked between @IntialDate and @FinalDate) as 'hoursOT',
+		(select sum(hw1.hoursST) from hoursWorked as hw1 inner join workCode as wc1 on wc1.idWorkCode = hw1.idWorkCode inner join task as tk1 on tk1.idAux = hw1.idAux inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO inner join projectOrder as po1 on po1.idPO = wo1.idPO and po1.jobNo = wo1.jobNo inner join job as jb1 on jb1.jobNo = po1.jobNo inner join clients as cl1 on cl1.idClient = jb1.idClient where cl1.idClient = cl.idClient and po1.idPO=po.idPO and jb.jobNo = jb1.jobNo and hw1.idEmployee = em.idEmployee and SUBSTRING( wc.name,1,iif(CHARINDEX('-',wc.name)=0, len(wc.name) ,(CHARINDEX('-',wc.name)-1)))=SUBSTRING( wc1.name,1,iif(CHARINDEX('-',wc1.name)=0, len(wc1.name) ,(CHARINDEX('-',wc1.name)-1))) and hw1.dateWorked between @IntialDate and @FinalDate) as 'hoursST',
+		(select sum(hw2.hoursOT) from hoursWorked as hw2 inner join workCode as wc2 on wc2.idWorkCode = hw2.idWorkCode inner join task as tk2 on tk2.idAux = hw2.idAux inner join workOrder as wo2 on wo2.idAuxWO = tk2.idAuxWO inner join projectOrder as po2 on po2.idPO = wo2.idPO and po2.jobNo = wo2.jobNo inner join job as jb2 on jb2.jobNo = po2.jobNo inner join clients as cl2 on cl2.idClient = jb2.idClient where cl2.idClient = cl.idClient and po2.idPO=po.idPO and jb.jobNo = jb2.jobNo and hw2.idEmployee = em.idEmployee and SUBSTRING( wc.name,1,iif(CHARINDEX('-',wc.name)=0, len(wc.name) ,(CHARINDEX('-',wc.name)-1)))=SUBSTRING( wc2.name,1,iif(CHARINDEX('-',wc2.name)=0, len(wc2.name) ,(CHARINDEX('-',wc2.name)-1))) and hw2.dateWorked between @IntialDate and @FinalDate) as 'hoursOT',
 		SUBSTRING( wc.name,1,iif(CHARINDEX('-',wc.name)=0, len(wc.name) ,(CHARINDEX('-',wc.name)-1))) as 'Code',
 		hw.schedule as 'Shift',
 		CONCAT(em.lastName,' ',em.firstName,' ',em.middleName) as 'Employee',
@@ -139,7 +141,7 @@ begin
 					inner join job as jb on jb.jobNo = po.jobNo
 					inner join clients  as cl on cl.idClient = jb.idClient
 		where hw.dateWorked between @IntialDate and @FinalDate and cl.numberClient = @clientnum and jb.jobNo like iif(@all=1,'%%',CONCAT('',@job,''))
-		order by po.idPO
+		) as T1 where T1.hoursST > 0 or  T1.hoursOT>0 order by T1.idPO 
 end
 go
 
@@ -441,8 +443,8 @@ begin
 
 			from Clients as cl
 			inner join job as jb on jb.idClient= cl.idClient
-			inner join projectOrder as po on po.jobNo= jb.jobNo
-			inner join workOrder as wo on wo.idPO=po.idPO
+			inner join projectOrder as po on po.jobNo= jb.jobNo 
+			inner join workOrder as wo on wo.idPO=po.idPO and po.jobNo = wo.jobNo
 			inner join task as ts on ts.idAuxWO=wo.idAuxWO
 	 
 			where cl.numberClient=@clientnum 
@@ -839,8 +841,8 @@ go
 --##############################################################################################
 --################## SP INVOICE PO #############################################################
 --##############################################################################################
---alter proc sp_Invoice_PO
-create proc sp_Invoice_PO
+--CREATE proc sp_Invoice_PO
+ALTER proc [dbo].[sp_Invoice_PO]
 @numberClient  int,
 @startDate date, 
 @FinalDate date, 
@@ -849,64 +851,55 @@ create proc sp_Invoice_PO
 as 
 begin 
 select 
-distinct
-cl.numberClient,
-jb.jobNo,
-po.idPO, 
-SUBSTRING( wc.name,1,iif(CHARINDEX('-',wc.name)=0, len(wc.name) ,(CHARINDEX('-',wc.name)-1))) 'Class',
-ISNULL((select SUM(hw1.hoursST) from hoursWorked as hw1 
-	inner join workCode as wc1 on wc1.idWorkCode = hw1.idWorkCode
-	inner join task as tk1 on tk1.idAux = hw1.idAux 
-	inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO
-	inner join projectOrder as po1 on po1.idPO = wo1.idPO and wo1.jobNo = po1.jobNo
-	inner join job as jb1 on po1.jobNo = jb1.jobNo
-	inner join clients as cl1 on cl1.idClient = jb1.idClient 
-	where --tk.idAux = tk1.idAux and wo.idAuxWO = wo1.idAuxWO and 
-	jb.jobNo = jb1.jobNo and hw1.dateWorked between @startDate and @FinalDate and po1.idPO = po.idPO and cl1.numberClient = @numberClient
-	and SUBSTRING( wc1.name,1,iif(CHARINDEX('-',wc1.name)=0, len(wc1.name) ,(CHARINDEX('-',wc1.name)-1))) = SUBSTRING( wc.name,1,iif(CHARINDEX('-',wc.name)=0, len(wc.name) ,(CHARINDEX('-',wc.name)-1)))),0)
-as 'Hrs ST' ,
-ISNULL((select SUM(hw1.hoursST * wc1.billingRate1) from hoursWorked as hw1 
-	inner join workCode as wc1 on wc1.idWorkCode = hw1.idWorkCode
-	inner join task as tk1 on tk1.idAux = hw1.idAux 
-	inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO
-	inner join projectOrder as po1 on po1.idPO = wo1.idPO and wo1.jobNo = po1.jobNo
-	inner join job as jb1 on po1.jobNo = jb1.jobNo
-	inner join clients as cl1 on cl1.idClient = jb1.idClient 
-	where --tk.idAux = tk1.idAux and wo.idAuxWO = wo1.idAuxWO and 
-	jb.jobNo = jb1.jobNo and hw1.dateWorked between @startDate and @FinalDate and po1.idPO = po.idPO and cl1.numberClient = @numberClient
-	and SUBSTRING( wc1.name,1,iif(CHARINDEX('-',wc1.name)=0, len(wc1.name) ,(CHARINDEX('-',wc1.name)-1))) = SUBSTRING( wc.name,1,iif(CHARINDEX('-',wc.name)=0, len(wc.name) ,(CHARINDEX('-',wc.name)-1)))),0)
-as 'Cost ST' ,
-ISNULL((select SUM(hw1.hoursOT) from hoursWorked as hw1 
-	inner join workCode as wc1 on wc1.idWorkCode = hw1.idWorkCode
-	inner join task as tk1 on tk1.idAux = hw1.idAux 
-	inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO
-	inner join projectOrder as po1 on po1.idPO = wo1.idPO and wo1.jobNo = po1.jobNo
-	inner join job as jb1 on po1.jobNo = jb1.jobNo
-	inner join clients as cl1 on cl1.idClient = jb1.idClient 
-	where --tk.idAux = tk1.idAux and wo.idAuxWO = wo1.idAuxWO and 
-	jb.jobNo = jb1.jobNo and hw1.dateWorked between @startDate and @FinalDate and po1.idPO = po.idPO and cl1.numberClient = @numberClient
-	and SUBSTRING( wc1.name,1,iif(CHARINDEX('-',wc1.name)=0, len(wc1.name) ,(CHARINDEX('-',wc1.name)-1))) = SUBSTRING( wc.name,1,iif(CHARINDEX('-',wc.name)=0, len(wc.name) ,(CHARINDEX('-',wc.name)-1)))),0)
-as 'Hrs OT' ,
-ISNULL((select SUM(hw1.hoursOT*wc1.billingRateOT) from hoursWorked as hw1 
-	inner join workCode as wc1 on wc1.idWorkCode = hw1.idWorkCode
-	inner join task as tk1 on tk1.idAux = hw1.idAux 
-	inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO
-	inner join projectOrder as po1 on po1.idPO = wo1.idPO and wo1.jobNo = po1.jobNo
-	inner join job as jb1 on po1.jobNo = jb1.jobNo
-	inner join clients as cl1 on cl1.idClient = jb1.idClient 
-	where --tk.idAux = tk1.idAux and wo.idAuxWO = wo1.idAuxWO and 
-	jb.jobNo = jb1.jobNo and hw1.dateWorked between @startDate and @FinalDate and po1.idPO = po.idPO and cl1.numberClient = @numberClient
-	and SUBSTRING( wc1.name,1,iif(CHARINDEX('-',wc1.name)=0, len(wc1.name) ,(CHARINDEX('-',wc1.name)-1))) = SUBSTRING( wc.name,1,iif(CHARINDEX('-',wc.name)=0, len(wc.name) ,(CHARINDEX('-',wc.name)-1)))),0)
-as 'Cost OT' 
-from hoursWorked as hw 
-	inner join workCode as wc on wc.idWorkCode = hw.idWorkCode
-	left join task as tk on tk.idAux = hw.idAux 
-	inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO
-	inner join projectOrder as po on po.idPO = wo.idPO and wo.jobNo = po.jobNo
-	inner join job as jb on po.jobNo = jb.jobNo
-	inner join clients as cl on cl.idClient = jb.idClient
-	where cl.numberClient = @numberClient and hw.dateWorked between @startDate and @FinalDate and po.idPO like iif(@all = 1 ,'%%',convert(nvarchar, @idPO))
-group by cl.numberClient, jb.jobNo, po.idPO, wo.idWO ,tk.task ,SUBSTRING( wc.name,1,iif(CHARINDEX('-',wc.name)=0, len(wc.name) ,(CHARINDEX('-',wc.name)-1))) ,tk.idAux , wo.idAuxWO
+	cl.numberClient,
+	cl.companyName,
+	jb.jobNo,
+	po.idPO, 
+	SUBSTRING( wc.name,1,iif(CHARINDEX('-',wc.name)=0, len(wc.name) ,(CHARINDEX('-',wc.name)-1))) 'Class',
+	hw.hoursST,
+	(hw.hoursST*wc.billingRate1) as 'CostST',
+	hw.hoursOT,
+	(hw.hoursOT*wc.billingRateOT) as 'CostOT',
+	isnull((select sum(amount) from expensesUsed as exu where exu.idHorsWorked = hw.idHorsWorked and exu.dateExpense between @startDate and @FinalDate),0)as 'Perdiem'
+	into #TablaHorasClassPerdiem
+	from hoursWorked as hw 
+		inner join workCode as wc on wc.idWorkCode = hw.idWorkCode
+		inner join task as tk on tk.idAux = hw.idAux 
+		inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO
+		inner join projectOrder as po on po.idPO = wo.idPO and wo.jobNo = po.jobNo
+		inner join job as jb on po.jobNo = jb.jobNo
+		inner join clients as cl on cl.idClient = jb.idClient
+		where cl.numberClient = @numberClient and hw.dateWorked between @startDate and @FinalDate and po.idPO like iif(@all = 1 ,'%%%',convert(nvarchar, @idPO))
+
+select
+	distinct
+	t1.numberClient,
+	t1.companyName,
+	t1.jobNo,
+	t1.idPO,
+	t1.Class,
+	(select
+	sum(hoursST)
+	from #TablaHorasClassPerdiem as t2 
+	where t2.numberClient = t2.numberClient and t2.jobNo = t1.jobNo and t2.idPO	= t1.idPO and t2.Class = t1.Class) as 'ST',
+	(select
+	sum(CostST)
+	from #TablaHorasClassPerdiem as t2 
+	where t2.numberClient = t2.numberClient and t2.jobNo = t1.jobNo and t2.idPO	= t1.idPO and t2.Class = t1.Class) as 'CostST',
+	(select
+	sum(hoursOT)
+	from #TablaHorasClassPerdiem as t2 
+	where t2.numberClient = t2.numberClient and t2.jobNo = t1.jobNo and t2.idPO	= t1.idPO and t2.Class = t1.Class) as 'OT',
+	(select
+	sum(CostOT)
+	from #TablaHorasClassPerdiem as t2 
+	where t2.numberClient = t2.numberClient and t2.jobNo = t1.jobNo and t2.idPO	= t1.idPO and t2.Class = t1.Class) as 'CostOT',
+	(select
+	sum(perdiem)
+	from #TablaHorasClassPerdiem as t2 
+	where t2.numberClient = t2.numberClient and t2.jobNo = t1.jobNo and t2.idPO	= t1.idPO and t2.Class = t1.Class) as 'Perdiem'
+from #TablaHorasClassPerdiem as t1 
+drop table #TablaHorasClassPerdiem
 end
 go
 
@@ -1274,7 +1267,7 @@ go
 --##############################################################################################
 --################## SP  SCF HISTORY BY JOB NO AND UNIT ########################################
 --##############################################################################################
-create proc sp_SCF_History_By_JobNo_And_Unit
+ALTER proc sp_SCF_History_By_JobNo_And_Unit
 @startDate as date,
 @FinalDate as date,
 @numberClient as int
@@ -1310,7 +1303,7 @@ go
 --################## SP  SCF HISTORY DISMANTLE #################################################
 --##############################################################################################
 
-create proc sp_SCF_History_Dismantle
+ALTER proc sp_SCF_History_Dismantle
 @numberClient as int,
 @all as bit
 as 
@@ -1410,7 +1403,7 @@ go
 --################## SP SCF PRODUCT TO SCAFFOLD,MODIFICATION AND DISMANTLE #####################
 --##############################################################################################
 
-create proc sp_Scaffold_Product
+ALTER proc [dbo].[sp_Scaffold_Product]
 @tagID as varchar(20) ,
 @modID as varchar(20) ,
 @scf as bit,
@@ -1423,6 +1416,9 @@ begin
 	select 
 		sc.tag , 
 		cl.photo as 'imgClient' ,
+		ha.city as 'City',
+		ha.providence as 'Providence',
+		ha.postalCode as 'CP',
 		jb.jobNo ,
 		CONCAT(wo.idWO, '-' ,tk.task) as 'WO',
 		jc.cat as 'Area',
@@ -1457,6 +1453,7 @@ begin
 		inner join projectOrder as po on po.idPO = wo.idPO and po.jobNo = wo.jobNo
 		inner join job as jb on jb.jobNo = po.jobNo 
 		inner join clients as cl on cl.idClient = jb.idClient
+		left join HomeAddress as ha on ha.idHomeAdress = cl.idHomeAddress
 		where sc.tag = @tagID
 	end
 	else if @mod = 1 
@@ -1464,6 +1461,9 @@ begin
 	select 
 		sc.tag , 
 		cl.photo as 'imgClient' ,
+		ha.city as 'City',
+		ha.providence as 'Providence',
+		ha.postalCode as 'CP',
 		jb.jobNo ,
 		CONCAT(wo.idWO, '-' ,tk.task) as 'WO',
 		jc.cat as 'Area',
@@ -1498,11 +1498,15 @@ begin
 		inner join projectOrder as po on po.idPO = wo.idPO and po.jobNo = wo.jobNo
 		inner join job as jb on jb.jobNo = po.jobNo 
 		inner join clients as cl on cl.idClient = jb.idClient
+		left join HomeAddress as ha on ha.idHomeAdress = cl.idHomeAddress
 		where sc.tag = @tagID 
 		union all 
 		select 
 		sc.tag , 
 		cl.photo as 'imgClient' ,
+		ha.city as 'City',
+		ha.providence as 'Providence',
+		ha.postalCode as 'CP',
 		jb.jobNo ,
 		CONCAT(wo.idWO, '-' ,tk.task) as 'WO',
 		jc.cat as 'Area',
@@ -1538,6 +1542,7 @@ begin
 		inner join projectOrder as po on po.idPO = wo.idPO and po.jobNo = wo.jobNo
 		inner join job as jb on jb.jobNo = po.jobNo 
 		inner join clients as cl on cl.idClient = jb.idClient
+		left join HomeAddress as ha on ha.idHomeAdress = cl.idHomeAddress
 		where sc.tag = @tagID and md.idModification = @modID
 	end
 	else if @dis = 1
@@ -1545,6 +1550,9 @@ begin
 	select 
 		sc.tag , 
 		cl.photo as 'imgClient' ,
+		ha.city as 'City',
+		ha.providence as 'Providence',
+		ha.postalCode as 'CP',
 		jb.jobNo ,
 		CONCAT(wo.idWO, '-' ,tk.task) as 'WO',
 		jc.cat as 'Area',
@@ -1579,7 +1587,55 @@ begin
 		inner join projectOrder as po on po.idPO = wo.idPO and po.jobNo = wo.jobNo
 		inner join job as jb on jb.jobNo = po.jobNo 
 		inner join clients as cl on cl.idClient = jb.idClient
+		left join HomeAddress as ha on ha.idHomeAdress = cl.idHomeAddress
 		where sc.tag = @tagID and ds.tag = @tagID
 	end
+end
+go
+
+--##############################################################################################
+--################## SP SCF RENTAL DETAILS #####################################################
+--##############################################################################################
+
+ALTER proc sp_SCF_Rental_Details
+@startDate date,
+@FinalDate  date,
+@numberClient int
+as
+begin 
+	select 
+		sc.tag,
+		cl.companyName,
+		sc.location as 'Location',
+		sj.[description] , 
+		CONCAT(wo.idWO,'-',tk.task) as 'PO/WONo',
+		CONCAT(sci.[type],'- ',sci.[length],' x',sci.width,' x',sci.heigth,'- ',(sci.descks+sci.extraDeck),' Decks') as 'ScaffoldDescription',
+		sc.reqComp as 'dateRequest',
+		sc.contact as 'requestBy', 
+		sc.buildDate as 'buildDate', 
+		dis.dismantleDate as 'dismantleDate',
+		dis.rentStopDate as 'rentStopDate',
+		IIF(DATEDIFF(DAY,sc.buildDate,isnull(dis.dismantleDate,GETDATE()))= 0,1,DATEDIFF(DAY,sc.buildDate,ISNULL(dis.dismantleDate,GETDATE()))) as 'ActiveDays',
+		IIF(sc.tag is not null,'Build','Mod') as 'Task',
+		IIF(DATEDIFF(DAY,IIF(sc.buildDate<@startDate,@startdate,sc.buildDate),IIF(dis.dismantleDate is not Null,IIF(dis.dismantleDate<@FinalDate,dis.dismantleDate,@FinalDate),@FinalDate)) = 0,1,DATEDIFF(DAY,IIF(sc.buildDate<@startDate,@startdate,sc.buildDate),IIF(dis.dismantleDate is not Null,IIF(dis.dismantleDate<@FinalDate,dis.dismantleDate,@FinalDate),@FinalDate)))as 'DaysRent'
+		,(select COUNT(*) from productTotalScaffold where tag = sc.tag) AS 'QTY'
+		,pts.idProduct as 'idPrduct',
+		pts.quantity as 'qtyPoduct',
+		pd.name as 'productName',
+		ISNULL(pd.dailyRentalRate,0) as 'dailyRent',
+		(pts.quantity * ISNULL(pd.dailyRentalRate,0)) as 'Total'
+		from scaffoldTraking as sc 
+		left join areas as ar on ar.idArea = sc.idArea
+		left join subJobs as sj on sj.idSubJob = sc.idSubJob
+		left join scaffoldInformation as sci on sci.tag = sc.tag
+		left join dismantle as dis on dis.tag = sc.tag
+		left join productTotalScaffold as pts on pts.tag = sc.tag
+		inner join product as pd on pd.idProduct= pts.idProduct
+		inner join task as tk on tk.idAux = sc.idAux
+		inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO
+		inner join projectOrder as po on po.idPO = wo.idPO and po.jobNo = wo.jobNo
+		inner join job as jb on jb.jobNo = po.jobNo 
+		inner join clients as cl on cl.idClient = jb.idClient
+		where sc.buildDate between @startDate and @FinalDate and cl.numberClient = @numberClient
 end
 go

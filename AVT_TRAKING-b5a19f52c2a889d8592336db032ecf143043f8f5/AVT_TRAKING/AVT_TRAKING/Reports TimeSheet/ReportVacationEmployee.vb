@@ -90,6 +90,7 @@ where wc.name like '%vacation%'", conection.conn)
                 rtp.SetParameterValue("@year", If(cmbYear.SelectedItem IsNot Nothing, cmbYear.SelectedItem, CStr(System.DateTime.Today.Year)))
                 rtp.SetParameterValue("@NoEmployee", empNum)
                 rtp.SetParameterValue("@all", If(chbAllEmployees.Checked, True, False))
+                rtp.SetParameterValue("@CompanyName", "brock")
                 crvVacationEmployee.ReportSource = rtp
             End If
         Catch ex As Exception
