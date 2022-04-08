@@ -665,7 +665,7 @@ end ", conn)
     Public Function llenarJobCombo(ByVal combo As ComboBox, ByVal idclient As String) As Boolean
         Try
             conectar()
-            Dim cmd As New SqlCommand("select jb.jobNo from job as jb where jb.idClient = '" + idclient + "'", conn)
+            Dim cmd As New SqlCommand("select jb.jobNo from job as jb where jb.idClient like '" + If(idclient Is Nothing, "%%", idclient) + "'", conn)
             Dim reader As SqlDataReader = cmd.ExecuteReader()
             While reader.Read()
                 combo.Items.Add(reader("jobNo"))
@@ -1635,6 +1635,30 @@ If(flagIdProduct, "where pd.idProduct = " + text + " or pd.QID = '" + text + "'"
             desconectar()
         End Try
     End Function
+    Public Function llenarProductByJob(ByVal tabla As DataGridView, ByVal text As String, ByVal jobNo As String) As Boolean
+        Try
+            conectar()
+            Dim cmd As New SqlCommand("
+select pd.idProduct, price, um,pd.name, pdj.qty as 'quantity',PLF, PSQF from productJob as pdj
+inner join product as pd on pd.idProduct = pdj.idProduct
+inner join classification as cl on cl.class = pd.class 
+where (pd.idProduct like '%" + text + "%' or pd.QID like '%" + text + "%' or pd.name like '%" + text + "%' or cl.class Like '%" + text + "%' or cl.name like '%" + text + "%') and pdj.JobNo = " + jobNo + "
+order by pd.idProduct", conn)
+            If cmd.ExecuteNonQuery Then
+                Dim da As New SqlDataAdapter(cmd)
+                Dim tablaAux As New DataTable
+                da.Fill(tablaAux)
+                tabla.DataSource = tablaAux
+                Return True
+            Else
+                Return False
+            End If
+        Catch ex As Exception
+            Return False
+        Finally
+            desconectar()
+        End Try
+    End Function
 
     Public Function DeleteRowsProducto(ByVal tabla As DataGridView, ByVal flagAllStatus As Boolean) As Boolean
         Try
@@ -1747,10 +1771,17 @@ where ticketNum = '" + list(0) + "'"
             desconectar()
         End Try
     End Function
-    Public Function llenarTablaProductosIcomminOutgoing(ByVal tblProducts As DataTable) As Boolean
+    Public Function llenarTablaProductosIcomminOutgoing(ByVal tblProducts As DataTable, Optional jobno As String = "") As Boolean
         Try
             conectar()
-            Dim cmd As New SqlCommand("select idProduct, price, um,name,quantity,PLF,PSQF from product", conn)
+            Dim cmd As New SqlCommand("", conn)
+            If jobno <> "" Then
+                cmd.CommandText = "select pd.idProduct, price, um,name, pdj.qty as 'quantity',PLF, PSQF from productJob as pdj
+inner join product as pd on pd.idProduct = pdj.idProduct
+where jobNo = " + jobno + ""
+            Else
+                cmd.CommandText = "select idProduct, price, um,name,quantity,PLF,PSQF from product"
+            End If
             If cmd.ExecuteNonQuery() Then
                 Dim da As New SqlDataAdapter(cmd)
                 da.Fill(tblProducts)
@@ -1761,6 +1792,109 @@ where ticketNum = '" + list(0) + "'"
         Catch ex As Exception
             Return False
         End Try
+    End Function
+    Public Function llenarTablaProductosByJobNo(ByVal tblProducts As DataGridView, Optional jobno As String = "") As Boolean
+        Try
+            conectar()
+            Dim cmd As New SqlCommand("", conn)
+            If jobno <> "" Then
+                cmd.CommandText = "select pd.idProduct, price, um,name, pdj.qty as 'quantity',PLF, PSQF,QID from productJob as pdj
+inner join product as pd on pd.idProduct = pdj.idProduct
+where jobNo = " + jobno + ""
+            Else
+                cmd.CommandText = "select idProduct, price, um,name,quantity,PLF,PSQF,QID from product"
+            End If
+            If cmd.ExecuteNonQuery() Then
+                Dim da As New SqlDataAdapter(cmd)
+                Dim dt As New DataTable
+                da.Fill(dt)
+                tblProducts.DataSource = dt
+                Return True
+            Else
+                Return False
+            End If
+        Catch ex As Exception
+            Return False
+        End Try
+    End Function
+    Public Function cargarDatosProductUtlization(ByVal tblSc As DataGridView, ByVal tblMd As DataGridView, ByVal tblDs As DataGridView, ByVal tblIn As DataGridView, ByVal tblOg As DataGridView, ByVal idproduct As String) As Boolean
+        Try
+            conectar()
+            Dim cmdSC As New SqlCommand("select sc.tag, psc.idProduct,psc.quantity,CONVERT(varchar,sc.buildDate,101) as buildDate from productScaffold as psc 
+inner join scaffoldTraking as sc on sc.tag = psc.tag
+where idProduct = " + idproduct + "", conn)
+            Dim dr1 As SqlDataReader = cmdSC.ExecuteReader()
+            tblSc.Rows.Clear()
+            While dr1.Read()
+                tblSc.Rows.Add(dr1("tag"), dr1("idProduct"), dr1("quantity"), dr1("buildDate"))
+            End While
+            dr1.Close()
+
+            Dim cmdMd As New SqlCommand("select md.tag, md.idModification, pmd.idProduct ,pmd.quantity,CONVERT(varchar,md.modificationDate,101) as modificationDate from productModification as pmd
+inner join modification as md on md.idModAux = pmd.idModAux
+where idProduct = " + idproduct + "", conn)
+            Dim dr2 As SqlDataReader = cmdMd.ExecuteReader()
+            tblMd.Rows.Clear()
+            While dr2.Read()
+                tblMd.Rows.Add(dr2("tag"), dr2("idModification"), dr2("idProduct"), dr2("quantity"), dr2("modificationDate"))
+            End While
+            dr2.Close()
+
+            Dim cmdDs As New SqlCommand("select ds.tag , pds.idProduct,pds.quantity,CONVERT(varchar,ds.dismantleDate,101)as dismantleDate from productDismantle as pds 
+inner join dismantle as ds on ds.idDismantle = pds.idDismantle
+where idProduct = " + idproduct + "", conn)
+            Dim dr3 As SqlDataReader = cmdDs.ExecuteReader()
+            tblDs.Rows.Clear()
+            While dr3.Read()
+                tblDs.Rows.Add(dr3("tag"), dr3("idProduct"), dr3("quantity"), dr3("dismantleDate"))
+            End While
+            dr3.Close()
+
+            Dim cmdIn As New SqlCommand("select inc.ticketNum , CONVERT(varchar,inc.dateRecived,101) as dateRecived,pin.idProduct,pin.quantity from productComing as pin 
+inner join incoming  as inc on inc.ticketNum = pin.ticketNum
+where pin.idProduct = " + idproduct + "", conn)
+            Dim dr4 As SqlDataReader = cmdIn.ExecuteReader()
+            tblIn.Rows.Clear()
+            While dr4.Read()
+                tblIn.Rows.Add(dr4("ticketNum"), dr4("dateRecived"), dr4("idProduct"), dr4("quantity"))
+            End While
+            dr4.Close()
+
+            Dim cmdOg As New SqlCommand("select outg.ticketNum , CONVERT(varchar,outg.dateShipped,101) as dateShipped,pout.idProduct,pout.quantity from productOutGoing as pout 
+inner join outgoing as outg on outg.ticketNum = pout.ticketNum
+where pout.idProduct = " + idproduct + "", conn)
+            Dim dr5 As SqlDataReader = cmdOg.ExecuteReader()
+            tblOg.Rows.Clear()
+            While dr5.Read()
+                tblOg.Rows.Add(dr5("ticketNum"), dr5("dateShipped"), dr5("idProduct"), dr5("quantity"))
+            End While
+            dr5.Close()
+            Return True
+        Catch ex As Exception
+            MsgBox(ex.Message())
+            Return False
+        Finally
+            desconectar()
+        End Try
+    End Function
+    Public Function llenarComboProductUtilization(ByVal cmb As ComboBox) As Boolean
+        Try
+            conectar()
+            Dim cmd As New SqlCommand("select idProduct , name , quantity from product", conn)
+            Dim dr As SqlDataReader = cmd.ExecuteReader()
+            cmb.Items.Clear()
+            While dr.Read()
+                cmb.Items.Add(CStr(dr("idProduct")) + "  " + CStr(dr("name")) + "  " + CStr(dr("quantity")))
+            End While
+            dr.Close()
+            Return True
+        Catch ex As Exception
+            MsgBox(ex.Message())
+            Return False
+        Finally
+            desconectar()
+        End Try
+
     End Function
     Public Function llenarCellComboIDProduct(ByVal cmb As DataGridViewComboBoxCell, ByVal tablaPoductoIncoming As DataTable) As Boolean
         Try
@@ -1808,6 +1942,31 @@ where ticketNum = '" + list(0) + "'"
         End Try
     End Function
 
+    Public Function llenarCellComboIdProductExistByJobNNo(ByVal cmb As DataGridViewComboBoxCell, ByVal jobNo As String, ByVal tablaPoductoJob As DataTable) As Boolean
+        Try
+            conectar()
+            Dim cmd As New SqlCommand("select concat(pd.idProduct,'    ',name)as product , pd.idProduct, price, um,name, pdj.qty,PLF, PSQF jobNo , pdj.jobNo from productJob as pdj
+inner join product as pd on pd.idProduct = pdj.idProduct
+where jobNo = " + jobNo + "", conn)
+            Dim dr As SqlDataReader = cmd.ExecuteReader()
+            While dr.Read()
+                cmb.Items.Add(dr("product"))
+            End While
+            dr.Close()
+            If cmd.ExecuteNonQuery() Then
+                Dim da As New SqlDataAdapter(cmd)
+                da.Fill(tablaPoductoJob)
+                Return True
+            Else
+                Return False
+            End If
+        Catch ex As Exception
+            Return False
+        Finally
+            desconectar()
+        End Try
+    End Function
+
     Public Function saveInComing(ByVal tblProductos As DataGridView, ByVal datosTicket As List(Of String), ByVal allRows As Boolean) As Boolean
         conectar()
         Dim tran As SqlTransaction
@@ -1815,7 +1974,7 @@ where ticketNum = '" + list(0) + "'"
         Dim cont = 0
         Try
             Dim cmd As New SqlCommand("
-if (select count(*) from incoming where ticketNum = '" + datosTicket(0) + "')= 0
+If (select count(*) from incoming where ticketNum = '" + datosTicket(0) + "')= 0
 begin 
 	insert into incoming values ('" + datosTicket(0) + "','" + datosTicket(1) + "', '" + datosTicket(2) + "' ,'" + datosTicket(3) + "'," + datosTicket(4) + ")
 end 
@@ -1834,12 +1993,23 @@ if (select count(*) from productComing where idProduct = " + Product(0) + " and 
 begin 
 	insert into productComing values(NEWID(),'" + datosTicket(0) + "'," + Product(0) + "," + row.Cells(0).Value.ToString() + ")
 	update product set quantity = quantity + " + row.Cells(0).Value.ToString() + " where idProduct = " + Product(0) + "
+
+    if (select COUNT(*) from productJob where idProduct = " + Product(0) + " and jobNo = " + datosTicket(4) + ")=0
+    begin
+	    insert into productJob values (" + Product(0) + ", " + datosTicket(4) + " , " + row.Cells(0).Value.ToString() + ")
+    end 
+    else
+    begin 
+	    update productJob set qty = qty + " + row.Cells(0).Value.ToString() + " where idProduct = " + Product(0) + " and jobNo = " + datosTicket(4) + "
+    end
+
 end
 else if(select count(*) from productComing where idProduct =  " + Product(0) + " and ticketNum = '" + datosTicket(0) + "')=1
 begin 
 	update product set quantity = quantity - (select quantity from productComing where idProduct = " + Product(0) + " and ticketNum = '" + datosTicket(0) + "') where idProduct = " + Product(0) + "
 	update productComing set quantity = " + row.Cells(0).Value.ToString() + " where idProduct = " + Product(0) + " and ticketNum = '" + datosTicket(0) + "'
 	update product set quantity = quantity + " + row.Cells(0).Value.ToString() + " where idProduct = " + Product(0) + "
+    update productJob set qty = qty + " + row.Cells(0).Value.ToString() + " where idProduct = " + Product(0) + " and jobNo = " + datosTicket(4) + "
 end", conn)
                         cmdproduct.Transaction = tran
                         If cmdproduct.ExecuteNonQuery > 0 Then
@@ -2055,12 +2225,14 @@ if (select COUNT(*) from productOutGoing where idProduct = " + Product(0) + " an
 begin
 	insert into productOutGoing values (NEWID(),'" + datosTicket(0) + "'," + Product(0) + "," + CStr(row.Cells(0).Value) + ")
 	update product set quantity = quantity - " + CStr(row.Cells(0).Value) + " where idProduct = " + Product(0) + "
+    update productJob set qty = qty - " + CStr(row.Cells(0).Value) + " where idProduct = " + Product(0) + " and jobNo = " + datosTicket(5) + "    
 end
 else if(select COUNT(*) from productOutGoing where idProduct = " + Product(0) + " and ticketNum = '" + datosTicket(0) + "' )= 1
 begin
 	update product set quantity = quantity + (select quantity from productOutGoing where idProduct = " + Product(0) + " and ticketNum = '" + datosTicket(0) + "') where idProduct = " + Product(0) + "
 	update productOutGoing set quantity = " + CStr(row.Cells(0).Value) + " where idProduct = " + Product(0) + " and ticketNum = '" + datosTicket(0) + "'
 	update product set quantity = quantity - " + CStr(row.Cells(0).Value) + " where idProduct = " + Product(0) + "
+    update productJob set qty = qty - " + CStr(row.Cells(0).Value) + " where idProduct = " + Product(0) + " and jobNo = " + datosTicket(5) + "
 end", conn)
                         cmdproduct.Transaction = tran
                         If cmdproduct.ExecuteNonQuery > 0 Then
@@ -2093,7 +2265,7 @@ end", conn)
         End Try
     End Function
 
-    Public Function DeleteOutGoing(ByVal tbl As DataGridView) As Boolean
+    Public Function DeleteOutGoing(ByVal tbl As DataGridView, ByVal JobNo As String) As Boolean
         conectar()
         Dim tran As SqlTransaction
         tran = conn.BeginTransaction()
@@ -2107,11 +2279,18 @@ end", conn)
                         Dim cmdUpdateProduct As New SqlCommand("update product set quantity = quantity + (select quantity from productOutGoing where idProductOutGoing = '" + row.Cells(5).Value.ToString() + "') where idProduct = " + idProduct(0) + "", conn)
                         cmdUpdateProduct.Transaction = tran
                         If cmdUpdateProduct.ExecuteNonQuery > 0 Then
-                            Dim cmdDeleteInComing As New SqlCommand("delete from productOutGoing where idProductOutGoing = '" + row.Cells(5).Value.ToString() + "'", conn)
-                            cmdDeleteInComing.Transaction = tran
-                            If cmdDeleteInComing.ExecuteNonQuery > 0 Then
-                                flag = True
-                                cont += 1
+                            Dim cmdUpdateProductJob As New SqlCommand("update productJob set qty = qty + " + CStr(row.Cells(1).Value) + " where idProduct = " + idProduct(0) + " and jobNo = " + JobNo + "", conn)
+                            cmdUpdateProductJob.Transaction = tran
+                            If cmdUpdateProductJob.ExecuteNonQuery > 0 Then
+                                Dim cmdDeleteInComing As New SqlCommand("delete from productOutGoing where idProductOutGoing = '" + row.Cells(5).Value.ToString() + "'", conn)
+                                cmdDeleteInComing.Transaction = tran
+                                If cmdDeleteInComing.ExecuteNonQuery > 0 Then
+                                    flag = True
+                                    cont += 1
+                                Else
+                                    flag = False
+                                    Exit For
+                                End If
                             Else
                                 flag = False
                                 Exit For
@@ -2359,11 +2538,13 @@ declare @idProduct as int
 declare @tag as varchar(20)
 declare @lQTY as float 
 declare @lIdProduct as int
+declare @jobNo as bigint
 
 set @idPS = '" + row.ItemArray(0).ToString() + "'
 set @idProduct = " + idProduct + "
 set @qty = " + row.ItemArray(2).ToString() + "
 set @tag = '" + sc.tag + "'
+set @jobNo = " + sc.job + "
 
 if @idPS = ''
 begin
@@ -2380,14 +2561,18 @@ begin
 			update productTotalScaffold set quantity = (select quantity from productTotalScaffold where tag = @tag and idProduct = @idProduct)+@qty where idProduct =@idProduct and tag = @tag
 		end
 		update product set quantity = (select quantity from product where idProduct = @idProduct) - @qty where idProduct = @idProduct
+		update productJob set qty = qty - @qty where idProduct = @idProduct and jobNo = @jobNo
 	end
 	else if (select count(*) from productScaffold where idProduct=@idProduct and tag = @tag)>0
 	begin--SI HAY PRODUCTO EN PRODUCTSCAFFOLD REGISTRADO CON ESE TAG PERO NO ESTABA EN LA LISTA
 		set @idPS = (select top 1 idProductScafold from productScaffold where idProduct = @idProduct and tag = @tag)
-		set @lQTY = (select top 1 quantity from productScaffold where idProductScafold=@idPS)
-		update product set quantity = quantity + @lQTY where idProduct = @idProduct
-		update productScaffold set quantity = @qty where idProductScafold = @idPS
-		update product set quantity = quantity - @qty where idProduct = @idProduct
+		set @lQTY = (select top 1 quantity from productScaffold where idProductScafold=@idPS) --OBTENGO LA CANTIDAD ANTERIORS
+		update product set quantity = quantity + @lQTY where idProduct = @idProduct--RECUPERO LA CANTIDAD QUITADA EN EL ANTERIOR
+		update productScaffold set quantity = @qty where idProductScafold = @idPS --ACTUALIZO LA CANTIDAD EN PTS
+		update productJob set qty  = qty + @lQTY where idProduct = @idProduct and jobNo = @jobNo --RECUPERO LA CANTIDAD DEL QUE YA SE INSERTO Y LA VUELVO A SUMAR
+		update productJob set qty  = qty - @qty where idProduct = @idProduct and jobNo = @jobNo --DISMINULLO LA CANTIDAD DEL VALOR ACTUAL ENVIADO
+		update product set quantity = quantity - @qty where idProduct = @idProduct --DIMINULLO LA CANTIDAD DEL VALOR ACTUAL ENVIADO
+		
 		if (select COUNT(*) from productTotalScaffold where tag= @tag and idProduct = @idProduct)=0
 		begin --DE NO EXISTIR EN PTS SE TIENE QUE AGREGAR A LA LISTA TOTAL DE PRODUCTOS
 			insert into productTotalScaffold values(newid(),@qty,@idProduct,@tag,'t')
@@ -2404,11 +2589,13 @@ begin --EXISTE UN IDPRODUCTSCAFFOLD
 	if(select count(idProduct) from productScaffold where idProductScafold =@idPS and idProduct = @idProduct)=1
 	begin --EL PRODUCTO COINCIDE CON EL IDPRODCUTSACFFOLD SOLO SE ACTUALIZAN LOS VALORES
 		set @lQTY =  (select top 1 quantity from productScaffold where idProductScafold = @idPS)
-		update product set quantity = quantity + @lQTY where idProduct = @idProduct
-		update product set quantity = quantity - @qty where idProduct = @idProduct
-		update productTotalScaffold set quantity = quantity - @lQTY where idProduct = @idProduct and tag = @tag
+		update product set quantity = quantity + @lQTY where idProduct = @idProduct--RECUPARO LA CANTIDAD INSERTADA ANTERIORMENTE AL STOCK GENERAL
+		update product set quantity = quantity - @qty where idProduct = @idProduct--DISMINULLO LA CANTIDAD ACTUAL AL STOCK GENERAL
+		update productTotalScaffold set quantity = quantity - @lQTY where idProduct = @idProduct and tag = @tag--
 		update productTotalScaffold set quantity = quantity + @qty where idProduct = @idProduct and tag = @tag
 		update productScaffold set quantity = @qty where idProductScafold = @idPS
+		update productJob set qty  = qty + @lQTY where idProduct = @idProduct and jobNo = @jobNo --RECUPERO LA CANTIDAD DEL QUE YA SE INSERTO Y LA VUELVO A SUMAR
+		update productJob set qty  = qty - @qty where idProduct = @idProduct and jobNo = @jobNo --DISMINULLO LA CANTIDAD DEL VALOR ACTUAL 
 	end
 	else --EL PRODUCTO CAMBIO EN EL REGISTRO DEL IDPRODUCTSCAFFOLD 
 	begin 
@@ -2418,9 +2605,11 @@ begin --EXISTE UN IDPRODUCTSCAFFOLD
 		print @lQTY
 		print @lIdProduct
 		update product set quantity = quantity + @lQTY where idProduct = @lIdProduct
+		update productJob set qty = qty + @lQTY where idProduct = @lIdProduct and jobNo = @jobNo
 		update productTotalScaffold set quantity = quantity - @lQTY where idProduct = @lIdProduct and tag = @tag
 		-- ACTUALIZANDO EL STOCK DEL PRODUCT NUEVO
 		update product set quantity = quantity - @qty where idProduct = @idProduct
+		update productJob set qty = qty - @qty where idProduct = @idProduct and jobNo = @jobNo
 		if (select COUNT(*) from productTotalScaffold where idProduct = @idProduct and tag = @tag)=0
 		begin--NO TIENE REGISTRO EN TOTAL SACAFFOLD
 			insert into productTotalScaffold values(NEWID(),@qty,@idProduct,@tag,'t')
@@ -2516,7 +2705,7 @@ end", conn)
         End Try
     End Function
 
-    Public Function deleteRowsProductScaffold(ByVal tbl As DataGridView, ByVal tag As String) As Boolean
+    Public Function deleteRowsProductScaffold(ByVal tbl As DataGridView, ByVal tag As String, ByVal jobNo As String) As Boolean
         conectar()
         Dim tran As SqlTransaction
         tran = conn.BeginTransaction
@@ -2532,16 +2721,19 @@ declare @idProduct as int
 declare @tag as varchar(20)
 declare @lQTY as float 
 declare @lIdProduct as int
+declare @jobNo as bigint
 
 set @idPS = '" + row.Cells(0).Value + "'
 set @idProduct = " + idPd + "
 set @tag = '" + tag + "'
+set @jobNo = " + jobNo + "
 
 if (select COUNT(*) from productScaffold where idProduct = @idProduct and idProductScafold = @idPS)=1
 begin --EL PRODUCTO DEL PS ES EL MISMO
 	set @lQTY = (select top 1 quantity from productScaffold where idProductScafold=@idPS)
 	update productTotalScaffold set quantity = quantity - @lQTY where idProduct = @idProduct and tag = @tag
 	update product set quantity = quantity + @lQTY where idProduct = @idProduct
+    update productJob set qty = qty + @lQTY where idProduct = @idProduct and jobNo = @jobNo
 	delete from productScaffold where idProductScafold = @idPS
 	delete from productTotalScaffold where quantity = 0 and tag = @tag
 end", conn)
@@ -2914,11 +3106,19 @@ declare @cantidad as float
 declare @idProduct as int
 declare @tag as varchar(36)
 declare @lqty as float
- 
+declare @jobNo as bigint
+
 set @modID = '" + md.ModAux + "'
 set @cantidad = " + row.ItemArray(2) + "
 set @idProduct = " + idProduct + "
 set @tag = '" + md.tag + "'
+set @jobNo = (select top 1 jb.jobNo from modification as md 
+inner join scaffoldTraking as sc on sc.tag = md.tag
+inner join task as tk on tk.idAux = sc.idAux 
+inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO
+inner join projectOrder as po on po.idPO = wo.idPO and po.jobNo = wo.jobNo
+inner join job as jb on jb.jobNo = po.jobNo
+where md.idModAux = @modID )
 
 if(select COUNT(*) from productModification where idProduct = @idProduct and idModAux = @modID)=0
 begin --NO EXISTE PRODUCTO
@@ -2927,6 +3127,7 @@ begin --NO EXISTE PRODUCTO
 		insert into productTotalScaffold values(NEWID(),@cantidad,@idProduct,@tag,'t')
 		insert into productModification values(NEWID(),@modID,@idProduct,@cantidad,@tag)
 		update product set quantity = quantity - IIF(@cantidad > 0,@cantidad,@cantidad*-1) where idProduct = @idProduct
+        update productJob set qty = qty - IIF(@cantidad > 0,@cantidad,@cantidad*-1) where idProduct = @idProduct and jobNo = @jobNo
 		delete from productTotalScaffold where quantity = 0 and tag = @tag
 	end
 	else if(select COUNT(*) from productTotalScaffold where idProduct = @idProduct and tag=@tag)>0
@@ -2934,6 +3135,7 @@ begin --NO EXISTE PRODUCTO
 		insert into productModification values(NEWID(),@modID,@idProduct,@cantidad,@tag)
 		update productTotalScaffold set quantity = quantity + @cantidad where tag= @tag and idProduct = @idProduct
 		update product set quantity = quantity - IIF(@cantidad > 0 ,@cantidad,@cantidad*-1) where idProduct = @idProduct
+        update productJob set qty = qty - IIF(@cantidad > 0,@cantidad,@cantidad*-1) where idProduct = @idProduct and jobNo = @jobNo
 		delete from productTotalScaffold where quantity <= 0 and tag = @tag
 	end
 end
@@ -2941,12 +3143,15 @@ else
 if(select COUNT(*) from productModification where idProduct = @idProduct and idModAux = @modID)>0
 begin --EXISTE PRODUCTO EN MODIFICACION 
 	set @lqty = (select top 1 quantity from productModification where idModAux=@modID and idProduct=@idProduct)
-	update product set quantity = quantity + (IIF(@lqty>0,@lqty,@lqty*-1)) where idProduct = @idProduct
-	update productTotalScaffold set quantity = quantity - @lqty where tag = @tag and idProduct = @idProduct
-	update product set quantity = quantity -  iif(@cantidad>0,@cantidad,@cantidad) where idProduct = @idProduct
+	update product set quantity = quantity + (IIF(@lqty>0,@lqty,@lqty)) where idProduct = @idProduct --REGRESO EL VALOR ANTERIOR 
+	update productJob set qty = qty + (IIF(@lqty>0,@lqty,@lqty)) where idProduct = @idProduct and jobNo	= @jobNo--REGRESO EL VALOR ANERIOR
+	update productTotalScaffold set quantity = quantity - (IIF(@lqty>0,@lqty,@lqty*-1)) where tag = @tag and idProduct = @idProduct--REGRESO EL VALOR ANTERIOR 
+
+	update product set quantity = quantity -  IIF(@cantidad>0,@cantidad,@cantidad*-1) where idProduct = @idProduct
+	update productJob set qty = qty - IIF(@cantidad > 0,@cantidad,@cantidad*-1) where idProduct = @idProduct and jobNo = @jobNo
 	update productTotalScaffold set quantity = quantity + @cantidad where idProduct= @idProduct and tag= @tag
+
 	update productModification set quantity = @cantidad where  idModAux=@modID and idProduct=@idProduct 	
-	delete from productTotalScaffold where quantity <= 0 and tag = @tag
 end", conn)
                                 cmdProductInsertUpdate.Transaction = tran
                                 If cmdProductInsertUpdate.ExecuteNonQuery > 0 Then
@@ -3059,7 +3264,7 @@ end", conn)
             Return ex.Message
         End Try
     End Function
-    Public Function deleteRowsProductModification(ByVal tbl As DataGridView, ByVal tag As String, ByVal modID As String) As Boolean
+    Public Function deleteRowsProductModification(ByVal tbl As DataGridView, ByVal tag As String, ByVal modAux As String) As Boolean
         conectar()
         Dim tran As SqlTransaction
         tran = conn.BeginTransaction
@@ -3070,23 +3275,30 @@ end", conn)
                     Dim array() = row.Cells(1).Value.ToString.Split(" ")
                     Dim idPd = array(0)
                     Dim cmdDeletePS As New SqlCommand("
-declare @modID as varchar(20)
+declare @modID as varchar(36)
 declare @tag as varchar(20)
 declare @idProduct as int 
 declare @qty as float
-
-set @modID = '" + modID + "'
+declare @jobNo as bigint 
+set @modID = '" + modAux + "'
 set @tag = '" + tag + "'
-set @idProduct = " + idPd + "
-
-if (select COUNT(*) from productModification where idProduct = @idProduct and idModification = @modID and tag=@tag )>0
+set @idProduct = " + row.Cells(1).Value.ToString() + "
+set @jobNo = (select top 1 jb.jobNo from modification as md 
+inner join scaffoldTraking as sc on sc.tag = md.tag
+inner join task as tk on tk.idAux = sc.idAux 
+inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO
+inner join projectOrder as po on po.idPO = wo.idPO and po.jobNo = wo.jobNo
+inner join job as jb on jb.jobNo = po.jobNo
+where md.idModAux = @modID )
+if (select COUNT(*) from productModification where idProduct = @idProduct and idModAux = @modID and tag=@tag )>0
 begin 
-	set @qty = (select top 1 quantity from productModification where idProduct = @idProduct and idModification = @modID and tag=@tag)
+	set @qty = (select top 1 quantity from productModification where idProduct = @idProduct and idModAux = @modID and tag=@tag)
 	if @qty >= 0 
 	begin 
 		update product set quantity = quantity + @qty where idProduct = @idProduct
 		update productTotalScaffold set quantity = quantity - @qty where idProduct = @idProduct and tag = @tag
-		delete from productModification where idProduct = @idProduct and idModification = @modID and tag = @tag
+		update productJob set qty = qty + @qty where idProduct = @idProduct and jobNo = @jobNo
+		delete from productModification where idProduct = @idProduct and idModAux = @modID and tag = @tag
 		delete from productTotalScaffold where quantity = 0 and tag = @tag
 	end
 	else IF @qty < 0
@@ -3094,7 +3306,8 @@ begin
 		--@QTY ES NEGATIVA POR ENDE SOLO CON QUE SE SUME RESTARA LOS REGISTROS  
 		update product set quantity = quantity + @qty where idProduct = @idProduct 
 		update productTotalScaffold set quantity = quantity + (@qty*-1) where idProduct = @idProduct and tag = @tag
-		delete from productModification where idProduct = @idProduct and idModification = @modID and tag = @tag
+		update productJob set qty = qty + @qty where idProduct = @idProduct and jobNo = @jobNo
+		delete from productModification where idProduct = @idProduct and idModAux = @modID and tag = @tag
 		delete from productTotalScaffold where quantity = 0 and tag = @tag
 	end
 end", conn)
@@ -3192,6 +3405,12 @@ where ds.tag = '" + tag + "'", conn)
 	declare @countProduct as int = (select COUNT (*) from productTotalScaffold where tag = @tag and status = 't')
 	declare @qty as float
 	declare @idProduct as int 
+    declare @jobNo as bigint = (select top 1 jb.jobNo from scaffoldTraking as sc
+    inner join task as tk on tk.idAux = sc.idAux 
+    inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO
+    inner join projectOrder as po on po.idPO = wo.idPO and po.jobNo = wo.jobNo
+    inner join job as jb on jb.jobNo = po.jobNo
+    where sc.tag = @tag )
 
     if (select COUNT(*) from dismantle where tag = @tag or idDismantle = @idDismantle)=0
 	begin 
@@ -3213,6 +3432,7 @@ where ds.tag = '" + tag + "'", conn)
 	    	--select quantity from product where idProduct = @idProduct
 	    	update product set quantity = quantity + @qty where idProduct = @idProduct
 	    	--select quantity from productTotalScaffold where idProduct = @idProduct and tag = @tag
+            update productJob set qty = qty + @qty where idProduct = @idProduct and jobNo = @jobNo
 	    	update productTotalScaffold set status = 'f' where tag = @tag and idProduct = @idProduct
             insert into productDismantle values (NEWID(),@qty,@idProduct,@tag,@idDismantle)
 	    	set @countProduct = @countProduct-1

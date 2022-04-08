@@ -319,6 +319,7 @@ Partial Class ReportInvoiceDetails
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1031, 523)
         Me.Controls.Add(Me.TableLayoutPanel1)
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
         Me.Name = "ReportInvoiceDetails"
         Me.Text = "ReportInvoiceDetails"
         Me.TableLayoutPanel1.ResumeLayout(False)

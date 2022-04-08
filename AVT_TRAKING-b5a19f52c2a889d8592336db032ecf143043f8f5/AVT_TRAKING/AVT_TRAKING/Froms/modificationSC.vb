@@ -558,9 +558,16 @@ left join product as pd on pd.idProduct = leg.idProduct where tag = '" + tag + "
         End With
         Try
             conectar()
-            Dim cmd As New SqlCommand("select pm.idModAux, pd.idProduct,pm.quantity,pd.name,pd.quantity as stock 
+            Dim cmd As New SqlCommand("select pm.idModAux, pd.idProduct,pm.quantity,pd.name,pdj.qty as stock 
 from productModification as pm 
-inner join product as pd on pm.idProduct = pd.idProduct
+inner join productJob as pdj on pm.idProduct = pdj.idProduct and pdj.jobNo = (select top 1 jb.jobNo from modification as md 
+inner join scaffoldTraking as sc on sc.tag = md.tag
+inner join task as tk on tk.idAux = sc.idAux 
+inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO
+inner join projectOrder as po on po.idPO = wo.idPO and po.jobNo = wo.jobNo
+inner join job as jb on jb.jobNo = po.jobNo
+where md.idModAux = '42256164-7015-4b89-aa69-c376f1edbc49' )
+inner join product as pd on pd.idProduct = pdj.idProduct
 where pm.idModAux = '" + ModAux + "' and tag='" + tag + "'", conn)
             Dim dr As SqlDataReader = cmd.ExecuteReader()
             While dr.Read()

@@ -40,7 +40,7 @@ Public Class Clients
 
     Private Function recolectar()
         Try
-            Dim datosClientes(17) As String
+            Dim datosClientes(18) As String
             datosClientes(0) = IdCliente
             datosClientes(1) = txtIdClient.Text
             datosClientes(2) = txtFirstName.Text
@@ -90,6 +90,7 @@ Public Class Clients
                 datosClientes(15) = ""
                 datosClientes(16) = "0"
             End If
+            datosClientes(17) = txtPayTerms.Text
             Return datosClientes
         Catch ex As Exception
             Return Nothing
@@ -110,6 +111,8 @@ Public Class Clients
             txtPhoneNumber.Enabled = True
             txtPhoneNumber2.Enabled = True
             txtEmail.Enabled = True
+            Return True
+        Else
             Return True
         End If
     End Function
@@ -242,6 +245,7 @@ Public Class Clients
                 'ActivarCamposContacto(False)
                 chbAddress.Checked = False
             End If
+            txtPayTerms.Text = dataClient(17)
         End If
 
     End Sub

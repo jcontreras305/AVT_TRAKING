@@ -1,7 +1,7 @@
 ﻿Imports System.Data.SqlClient
 Public Class metodosCompany
     Inherits ConnectioDB
-    Private _idCompany, _idContact, _idHomeAddress, _name, _address, _number, _city, _stateProvidence, _postalCode, _country, _paymentTerms, _invoiceDescr, _phoneNumber, _faxNumber, _email, _CP As String
+    Private _idCompany, _idContact, _idHomeAddress, _name, _address, _number, _city, _stateProvidence, _postalCode, _country, _invoiceDescr, _phoneNumber, _faxNumber, _email, _CP As String
     Private _img As Image
     Public Property img() As Image
         Get
@@ -102,19 +102,19 @@ Public Class metodosCompany
         End Set
     End Property
 
-    Public Property paymentTerms() As String
-        Get
-            If _paymentTerms Is Nothing Then
-                Return ""
-            Else
-                Return _paymentTerms
-            End If
+    'Public Property paymentTerms() As String
+    '    Get
+    '        If _paymentTerms Is Nothing Then
+    '            Return ""
+    '        Else
+    '            Return _paymentTerms
+    '        End If
 
-        End Get
-        Set(ByVal value As String)
-            _paymentTerms = value
-        End Set
-    End Property
+    '    End Get
+    '    Set(ByVal value As String)
+    '        _paymentTerms = value
+    '    End Set
+    'End Property
 
     Public Property invoiceDescr() As String
         Get
@@ -156,7 +156,7 @@ Public Class metodosCompany
         Try
             conectar()
             Dim cmd As New SqlCommand("
-update company set name = '" + _name + "' , country = '" + _country + "' ,payTerms ='" + _paymentTerms + "' ,invoiceDescr ='" + _invoiceDescr + "' where idCompany = '" + _idCompany + "'
+update company set name = '" + _name + "' , country = '" + _country + "' ,invoiceDescr ='" + _invoiceDescr + "' where idCompany = '" + _idCompany + "'
 update HomeAddress set avenue = '" + _address + "' , number = '" + _number + "' , city = '" + _city + "' , providence = '" + _stateProvidence + "' ,postalCode='" + _postalCode + "' where idHomeAdress= '" + _idHomeAddress + "'
 update contact set phoneNumber1 = '" + _phoneNumber + "' , phoneNumber2= '" + _faxNumber + "' ,email = '" + _email + "' where	idContact = '" + _idContact + "' 
 ", conn)
@@ -189,7 +189,7 @@ begin
 	set @idContact = NEWID()
 	insert into HomeAddress values(@idAddress,'',0,'','',0)
 	insert into contact values(@idContact,'','','')
-	insert into company values(NEWID(),'My Company','USA','','',@idAddress,@idContact,NULL)
+	insert into company values(NEWID(),'My Company','USA','',@idAddress,@idContact,NULL)
 	select TOP(1) * from company as cp 
 	inner join HomeAddress as hm on cp.idHomeAddress = hm.idHomeAdress 
 	inner join contact as cn on cp.idContact = cn.idContact
@@ -205,7 +205,7 @@ end", conn)
                 _idCompany = rd("idCompany")
                 _name = rd("name")
                 _country = rd("country")
-                _paymentTerms = rd("payTerms")
+                '_paymentTerms = rd("payTerms")
                 _invoiceDescr = rd("invoiceDescr")
                 _idHomeAddress = rd("idHomeAddress")
                 _idContact = rd("idContact")

@@ -7,6 +7,7 @@ Public Class scafoldTarking
     Dim tblProductInComing As New Data.DataTable
     Dim tblTicketInComing As New Data.DataTable
     Dim tblProductOutGoing As New Data.DataTable
+    Dim tblProductJob As New Data.DataTable
     Dim tblTicketOutGoing As New Data.DataTable
     Dim tblArea As New Data.DataTable 'se utiliza para buscar despues de ser seleccionado el combo y encontrar al insertar o actualizar
     Dim tblCat As New Data.DataTable 'se utiliza para buscar despues de ser seleccionado el combo y encontrar al insertar o actualizar
@@ -178,7 +179,8 @@ Public Class scafoldTarking
                             mtdScaffold.llenarComboTagModificaion(cmbTagScaffold, IdCliente)
                         End If
                         loadingDataModification = True
-                        cmbTagScaffold.SelectedItem = cmbTagScaffold.Items(cmbTagScaffold.FindString(tagSelected))
+                        Dim indexCmb = cmbTagScaffold.FindString(tagSelected)
+                        cmbTagScaffold.SelectedItem = cmbTagScaffold.Items(If(indexCmb >= 0, indexCmb, 0))
                         cmbTagScaffold.Text = tagSelected
                     End If
                     MsgBox("Successfull")
@@ -195,7 +197,8 @@ Public Class scafoldTarking
                             cmbTagScaffold.Items.Add(row.ItemArray(0))
                         Next
                         loadingDataModification = True
-                        cmbTagScaffold.SelectedItem = cmbTagScaffold.Items(cmbTagScaffold.FindString(tagSelected))
+                        Dim indexCmb = cmbTagScaffold.FindString(tagSelected)
+                        cmbTagScaffold.SelectedItem = cmbTagScaffold.Items(If(indexCmb > 0, indexCmb, 0))
                         cmbTagScaffold.Text = tagSelected
                     End If
                     MsgBox("Successfull")
@@ -219,7 +222,7 @@ Public Class scafoldTarking
             Case "Mod"
                 If mtdScaffold.saveModification(md) Then
                     md = mtdScaffold.llenarModificationData(md.ModAux, md.tag)
-                    cargarDatosModification(md.ModID)
+                    cargarDatosModification(md.ModAux)
                     mtdScaffold.llenarProduct(tblProduct)
                     mtdScaffold.llenarProduct(tblProductosAux)
                 End If
@@ -360,7 +363,7 @@ Public Class scafoldTarking
                         For Each row As DataRow In tblModification.Rows
                             If row.ItemArray(0) = md.ModID Then
                                 md = mtdScaffold.llenarModificationData(row.ItemArray(0), row.ItemArray(5))
-                                cargarDatosModification(md.ModID)
+                                cargarDatosModification(md.ModAux)
                             End If
                         Next
                     End If
@@ -432,20 +435,25 @@ Public Class scafoldTarking
         btnDeleteRowScaffoldLeg.Enabled = True
         If e.ColumnIndex = 1 Then
             Try
-                If tblProductosScaffold.CurrentCell.GetType.Name = "DataGridViewTextBoxCell" Then
-                    Dim cmbPd As New DataGridViewComboBoxCell
-                    With cmbPd
-                        mtdScaffold.llenarCellComboIDProduct(cmbPd, tblProductScaffoldAux)
-                        cmbPd.DropDownWidth = 280
-                    End With
-                    If tblProductosScaffold.CurrentRow.Cells(1).Value IsNot Nothing Then
-                        For Each row As Data.DataRow In tblProductScaffoldAux.Rows()
-                            If row.ItemArray(1) = tblProductosScaffold.CurrentRow.Cells(1).Value Then
-                                cmbPd.Value = row.ItemArray(0)
-                            End If
-                        Next
+                If cmbWONum.SelectedItem IsNot Nothing Then
+                    If tblProductosScaffold.CurrentCell.GetType.Name = "DataGridViewTextBoxCell" Then
+                        Dim cmbPd As New DataGridViewComboBoxCell
+                        With cmbPd
+                            Dim array() As String = cmbWONum.SelectedItem.ToString.Split(" ")
+                            mtdScaffold.llenarCellComboIdProductExistByJobNNo(cmbPd, array(1), tblProductScaffoldAux) 'llenarCellComboIdProductExistByJobNNo
+                            cmbPd.DropDownWidth = 280
+                        End With
+                        If tblProductosScaffold.CurrentRow.Cells(1).Value IsNot Nothing Then
+                            For Each row As Data.DataRow In tblProductScaffoldAux.Rows()
+                                If row.ItemArray(1) = tblProductosScaffold.CurrentRow.Cells(1).Value Then
+                                    cmbPd.Value = row.ItemArray(0)
+                                End If
+                            Next
+                        End If
+                        tblProductosScaffold.CurrentRow.Cells(1) = cmbPd
                     End If
-                    tblProductosScaffold.CurrentRow.Cells(1) = cmbPd
+                Else
+                    MessageBox.Show("Please select a project to charge the list of products that you can asing.", "Message", MessageBoxButtons.OK, MessageBoxIcon.Warning)
                 End If
             Catch ex As Exception
 
@@ -525,7 +533,7 @@ Public Class scafoldTarking
                 End If
             Case tblOutGoing.Name
                 If DialogResult.Yes = MessageBox.Show("The products are likely to be related to some records and it will NOT be possible to delete them. Would you like to continue?", "Message", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) Then
-                    If mtdScaffold.DeleteOutGoing(tblOutGoing) Then
+                    If mtdScaffold.DeleteOutGoing(tblOutGoing, cmbJobNumOutGoing.SelectedItem) Then
                         For Each row As DataGridViewRow In tblOutGoing.SelectedRows()
                             tblOutGoing.Rows.Remove(row)
                         Next
@@ -602,8 +610,8 @@ Public Class scafoldTarking
                         If mtdScaffold.llenarModification(tblModification, IdCliente) Then
                             If tblModification.Rows.Count > 0 Then
                                 md = mtdScaffold.llenarModificationData(tblModification.Rows(0).ItemArray(0), tblModification.Rows(0).ItemArray(5))
-                                If md.ModID <> "" Then
-                                    cargarDatosModification(md.ModID)
+                                If md.ModAux <> "" Then
+                                    cargarDatosModification(md.ModAux)
                                 End If
                             Else
                                 md.Clear()
@@ -621,8 +629,8 @@ Public Class scafoldTarking
                             If tblModification.Rows.Count > 0 Then
                                 md.Clear()
                                 md = mtdScaffold.llenarModificationData(tblModification.Rows(0).ItemArray(0), tblModification.Rows(0).ItemArray(5))
-                                If md.ModID <> "" Then
-                                    cargarDatosModification(md.ModID)
+                                If md.ModAux <> "" Then
+                                    cargarDatosModification(md.ModAux)
                                 End If
                             Else
                                 md.Clear()
@@ -1094,42 +1102,45 @@ Public Class scafoldTarking
     Public Sub cmb_SelectedIndexChanguedOutGoing(sender As Object, e As EventArgs)
         Dim cmb As ComboBox = CType(sender, ComboBox)
         Dim flag As Boolean = True
-        For Each row As DataGridViewRow In tblOutGoing.Rows()
-            If row.Index <> tblOutGoing.CurrentCell.RowIndex And row.Index < tblOutGoing.Rows.Count - 1 Then
-                Dim idproducto() = row.Cells(1).Value.ToString().Split("   ")
-                Dim idproductoCmb() = cmb.SelectedItem.ToString().Split("   ")
-                If idproductoCmb(0).Equals(idproducto(0)) Then
-                    flag = False
-                    Exit For
-                End If
-            End If
-        Next
-        If flag Then
-            Dim index As Integer = tblOutGoing.CurrentCell.RowIndex()
-            tblOutGoing.Rows(index).Cells(1).Value = If(cmb.SelectedItem Is Nothing, "", cmb.SelectedItem.ToString())
-            For Each row As DataRow In tblProductOutGoing.Rows()
-                If row.ItemArray(0) = cmb.SelectedItem() Then
-                    tblOutGoing.Rows(index).Cells(2).Value = row.ItemArray(3)
-                    tblOutGoing.Rows(index).Cells(3).Value = row.ItemArray(2)
-                    tblOutGoing.Rows(index).Cells(4).Value = row.ItemArray(4)
-                    tblOutGoing.Rows(index).Cells(6).Value = row.ItemArray(5)
-                    If tblOutGoing.Rows(index).Cells(0).Value IsNot Nothing Then
-                        If CDbl(tblOutGoing.Rows(index).Cells(0).Value) > CDbl(row.ItemArray(5)) Then
-                            MsgBox("The QTY of this product exceeds your Stock." + vbCrLf + "Your Stock is " + CStr(row.ItemArray(5)) + ".")
-                            tblOutGoing.Rows(index).Cells(0).Value = row.ItemArray(5)
-                        End If
+        If cmb.SelectedItem IsNot Nothing Then
+
+            For Each row As DataGridViewRow In tblOutGoing.Rows() 'validamos que no se repita el producto
+                If row.Index <> tblOutGoing.CurrentCell.RowIndex And row.Index < tblOutGoing.Rows.Count - 1 Then
+                    Dim idproducto() = row.Cells(1).Value.ToString().Split("   ")
+                    Dim idproductoCmb() = cmb.SelectedItem.ToString().Split("   ")
+                    If idproductoCmb(0).Equals(idproducto(0)) Then
+                        flag = False
+                        Exit For
                     End If
-                    Exit For
                 End If
             Next
-        Else
-            MessageBox.Show("This Product is the list.", "Important", MessageBoxButtons.OK, MessageBoxIcon.Information)
-            Dim index1 = tblOutGoing.CurrentCell.RowIndex()
-            tblOutGoing.Rows(index1).Cells(2).Value = ""
-            tblOutGoing.Rows(index1).Cells(3).Value = ""
-            tblOutGoing.Rows(index1).Cells(4).Value = ""
-            tblOutGoing.Rows(index1).Cells(6).Value = ""
-            cmb.Text = ""
+            If flag Then 'si no existe repetidos entra
+                Dim index As Integer = tblOutGoing.CurrentCell.RowIndex()
+                tblOutGoing.Rows(index).Cells(1).Value = If(cmb.SelectedItem Is Nothing, "", cmb.SelectedItem.ToString())
+                For Each row As DataRow In tblProductJob.Rows()
+                    If row.ItemArray(0) = cmb.SelectedItem() Then 'si encuentra el nombre y el idproducto asigna los valores
+                        tblOutGoing.Rows(index).Cells(2).Value = row.ItemArray(3)
+                        tblOutGoing.Rows(index).Cells(3).Value = row.ItemArray(2)
+                        tblOutGoing.Rows(index).Cells(4).Value = row.ItemArray(4)
+                        tblOutGoing.Rows(index).Cells(6).Value = row.ItemArray(5)
+                        If tblOutGoing.Rows(index).Cells(0).Value IsNot Nothing Then
+                            If CDbl(tblOutGoing.Rows(index).Cells(0).Value) > CDbl(row.ItemArray(5)) Then
+                                MsgBox("The QTY of this product exceeds your Stock." + vbCrLf + "Your Stock is " + CStr(row.ItemArray(5)) + ".")
+                                tblOutGoing.Rows(index).Cells(0).Value = row.ItemArray(5)
+                            End If
+                        End If
+                        Exit For
+                    End If
+                Next
+            Else
+                MessageBox.Show("This Product is the list.", "Important", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                Dim index1 = tblOutGoing.CurrentCell.RowIndex()
+                tblOutGoing.Rows(index1).Cells(2).Value = ""
+                tblOutGoing.Rows(index1).Cells(3).Value = ""
+                tblOutGoing.Rows(index1).Cells(4).Value = ""
+                tblOutGoing.Rows(index1).Cells(6).Value = ""
+                cmb.Text = ""
+            End If
         End If
     End Sub
 
@@ -1210,7 +1221,7 @@ Public Class scafoldTarking
             If tblProductosScaffold.CurrentCell.ColumnIndex = tblProductosScaffold.Columns("clmID").Index Then
                 If tblProductosScaffold.CurrentCell.Value <> cmb.SelectedItem Then
                     Dim flagExist = True
-                    For Each row As DataRow In sc.products.Rows()
+                    For Each row As DataRow In sc.products.Rows() 'validamos que no exita ese product en la lista 
                         Dim array = cmb.SelectedItem.ToString.Split(" ")
                         Dim idProductoCmbSelected = array(0)
                         array = If(row.ItemArray(1) = Nothing, {""}, row.ItemArray(1).ToString.Split(" "))
@@ -1346,7 +1357,30 @@ Public Class scafoldTarking
         End If
 
     End Sub
+    Private Sub txtFindProducJobNo_TextChanged(sender As Object, e As EventArgs) Handles txtFindProducJobNo.TextChanged
+        If cmbJobProduct.SelectedItem IsNot Nothing Then
+            Dim query As String = txtFindProducJobNo.Text.Replace("'", "''")
+            Dim flag = mtdScaffold.llenarProductByJob(tblProductByJobNo, query, cmbJobProduct.SelectedItem.ToString())
+            If flag = False Then
+                mtdScaffold.llenarTablaProductosByJobNo(tblProductByJobNo)
+            End If
+            tblProductByJobNo.ReadOnly = True
+        Else
+            MsgBox("Please select a Job No.")
+        End If
+    End Sub
+    Private Sub cmbProductUtilization_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbProductUtilization.SelectedIndexChanged
+        Try
+            If cmbProductUtilization.SelectedItem IsNot Nothing Then
+                Dim idProduct() As String = cmbProductUtilization.SelectedItem.ToString.Split(" ")
+                mtdScaffold.cargarDatosProductUtlization(tblBuildsMaterial, tblModificationMaterial, tblDismantleMaterial, tblInBoundMaterial, tblOutBoundMaterial, idProduct(0))
+            Else
+                MessageBox.Show("Please choose a product to continue", "Important", MessageBoxButtons.OK, MessageBoxIcon.Information)
+            End If
+        Catch ex As Exception
 
+        End Try
+    End Sub
     Private Sub txtCategory_TextChanged(sender As Object, e As EventArgs) Handles txtCategory.TextChanged
         Dim flag = mtdScaffold.llenarProduct(tblProduct, txtCategory.Text, False)
         If flag = False Then
@@ -1354,7 +1388,6 @@ Public Class scafoldTarking
             mtdScaffold.llenarProduct(tblProductosAux)
         End If
     End Sub
-
     Private Sub txtIDProduct_TextChanged(sender As Object, e As EventArgs) Handles txtIDProduct.TextChanged
         Dim flag = mtdScaffold.llenarProduct(tblProduct, txtIDProduct.Text, True)
         If flag = False Then
@@ -1362,7 +1395,26 @@ Public Class scafoldTarking
             mtdScaffold.llenarProduct(tblProductosAux)
         End If
     End Sub
-
+    Private Sub TabControl2_SelectedIndexChanged(sender As Object, e As EventArgs) Handles TabControl2.SelectedIndexChanged
+        If TabControl2.SelectedTab.Text = "Inventory By Job No." Then
+            btnDeleteProduct.Enabled = False
+            btnUploadProducts.Enabled = False
+        Else
+            btnDeleteProduct.Enabled = True
+            btnUploadProducts.Enabled = True
+        End If
+    End Sub
+    Private Sub cmbJobProduct_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbJobProduct.SelectedIndexChanged
+        Try
+            If cmbJobProduct.SelectedItem IsNot Nothing Then
+                mtdScaffold.llenarTablaProductosByJobNo(tblProductByJobNo, cmbJobProduct.SelectedItem.ToString())
+            Else
+                mtdScaffold.llenarTablaProductosByJobNo(tblProductByJobNo)
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message)
+        End Try
+    End Sub
     Private Sub btnSaveRowProduct_Click(sender As Object, e As EventArgs) Handles btnSaveRowProduct.Click
         If tblProduct.SelectedRows().Count > 0 Then
             Dim lis = mtdScaffold.saveProducto(tblProduct, True)
@@ -1577,6 +1629,11 @@ Public Class scafoldTarking
         Try
             Dim pdscfe As New ProductSCFExcel
             AddOwnedForm(pdscfe)
+            pdscfe.idClient = IdCliente
+            pdscfe.nameClient = lblCompanyName.Text
+            If cmbJobNumOutGoing.Text <> "" Then
+                pdscfe.jobNo = cmbJobNumOutGoing.Text
+            End If
             pdscfe.windowStart = "Outgoing"
             pdscfe.ShowDialog()
         Catch ex As Exception
@@ -1614,21 +1671,25 @@ Public Class scafoldTarking
         If e.ColumnIndex > 0 Then
             Select Case tblOutGoing.Columns(e.ColumnIndex).Name
                 Case "IDOut"
-                    Try
-                        If tblOutGoing.CurrentCell.GetType.Name = "DataGridViewTextBoxCell" Then
-                            Dim cmbIdProduct As New DataGridViewComboBoxCell
-                            With cmbIdProduct
-                                cmbIdProduct.DropDownWidth = 280
-                                mtdScaffold.llenarCellComboIDProductExistences(cmbIdProduct, tblProductOutGoing)
-                            End With
-                            If tblOutGoing.CurrentRow.Cells("IDOut").Value IsNot Nothing Then
-                                cmbIdProduct.Value = tblOutGoing.CurrentRow.Cells("IDOut").Value
+                    If cmbJobNumOutGoing.Text IsNot Nothing Then
+                        Try
+                            If tblOutGoing.CurrentCell.GetType.Name = "DataGridViewTextBoxCell" Then
+                                Dim cmbIdProduct As New DataGridViewComboBoxCell
+                                With cmbIdProduct
+                                    cmbIdProduct.DropDownWidth = 280
+                                    mtdScaffold.llenarCellComboIdProductExistByJobNNo(cmbIdProduct, cmbJobNumOutGoing.Text, tblProductJob)
+                                End With
+                                If tblOutGoing.CurrentRow.Cells("IDOut").Value IsNot Nothing Then
+                                    cmbIdProduct.Value = tblOutGoing.CurrentRow.Cells("IDOut").Value
+                                End If
+                                tblOutGoing.CurrentRow.Cells("IDOut") = cmbIdProduct
                             End If
-                            tblOutGoing.CurrentRow.Cells("IDOut") = cmbIdProduct
-                        End If
-                    Catch ex As Exception
+                        Catch ex As Exception
 
-                    End Try
+                        End Try
+                    Else
+                        MessageBox.Show("Please select a Job No to charge the list of the products you can retrun.","Messague",MessageBoxButtons.OK,MessageBoxIcon.Warning)
+                    End If
             End Select
         End If
     End Sub
@@ -1654,9 +1715,10 @@ Public Class scafoldTarking
                 If CInt(tblOutGoing.CurrentCell.Value) < 0 Then
                     tblOutGoing.CurrentCell.Value = CInt(tblOutGoing.CurrentCell.Value) * -1
                 End If
-                If tblOutGoing.Rows(tblOutGoing.CurrentCell.RowIndex).Cells(5).Value IsNot Nothing Then
-                    If CDbl(tblOutGoing.Rows(tblOutGoing.CurrentCell.RowIndex).Cells(5).Value) > CDbl(tblOutGoing.CurrentCell.Value) Then
-                        MsgBox("The QTY of this product exceeds your stock.")
+                If tblOutGoing.Rows(tblOutGoing.CurrentCell.RowIndex).Cells(6).Value IsNot Nothing Then
+                    If CDbl(tblOutGoing.Rows(tblOutGoing.CurrentCell.RowIndex).Cells(6).Value) < CDbl(tblOutGoing.CurrentCell.Value) Then
+                        MsgBox("The QTY of this product exceeds your stock by this Job No.")
+                        tblOutGoing.CurrentCell.Value = CDbl(tblOutGoing.Rows(tblOutGoing.CurrentCell.RowIndex).Cells(6).Value)
                     End If
                 End If
             End If
@@ -1689,7 +1751,7 @@ Public Class scafoldTarking
     Private Sub btnDeleteRowOutGoing_Click(sender As Object, e As EventArgs) Handles btnDeleteRowOutGoing.Click
         Try
             If tblOutGoing.SelectedRows.Count() > 0 Then
-                If mtdScaffold.DeleteOutGoing(tblOutGoing) Then
+                If mtdScaffold.DeleteOutGoing(tblOutGoing, cmbJobNumOutGoing.SelectedItem) Then
                     For Each row As DataGridViewRow In tblOutGoing.SelectedRows()
                         tblOutGoing.Rows.Remove(row)
                     Next
@@ -2468,7 +2530,8 @@ Public Class scafoldTarking
 
     Private Sub btnDeleteRowScaffoldLeg_Click(sender As Object, e As EventArgs) Handles btnDeleteRowScaffoldLeg.Click
         If DialogResult.Yes = MessageBox.Show("The selected rows will be removed from the 'PRODUCTS TABLE'. Are you sure to do it?", "Important", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) Then
-            If mtdScaffold.deleteRowsProductScaffold(tblProductosScaffold, sc.tag) Then
+
+            If mtdScaffold.deleteRowsProductScaffold(tblProductosScaffold, sc.tag, sc.job) Then
                 For Each row As DataGridViewRow In tblProductosScaffold.SelectedRows()
                     If Not row.IsNewRow Then
                         tblProductosScaffold.Rows.Remove(row)
@@ -2984,7 +3047,7 @@ Public Class scafoldTarking
 
     Private Sub btnDeleteRowM_Click(sender As Object, e As EventArgs) Handles btnDeleteRowM.Click
         Try
-            If mtdScaffold.deleteRowsProductModification(tblModificationProductMS, md.tag, md.ModID) Then
+            If mtdScaffold.deleteRowsProductModification(tblModificationProductMS, md.tag, md.ModAux) Then
                 For Each row As DataGridViewRow In tblModificationProductMS.SelectedRows()
                     tblModificationProductMS.Rows.Remove(row)
                 Next
@@ -3047,12 +3110,12 @@ Public Class scafoldTarking
         If mtdScaffold.llenarModification(tblModification, IdCliente) Then
             If tblModification.Rows.Count > 0 Then
                 md = mtdScaffold.llenarModificationData(md.ModAux, md.tag)
-                If md.ModID <> "" Then
-                    cargarDatosModification(md.ModID)
+                If md.ModAux <> "" Then
+                    cargarDatosModification(md.ModAux)
                 Else
                     md = mtdScaffold.llenarModificationData(tblModification.Rows(0).ItemArray(0), tblModification.Rows(0).ItemArray(5))
-                    If md.ModID <> "" Then
-                        cargarDatosModification(md.ModID)
+                    If md.ModAux <> "" Then
+                        cargarDatosModification(md.ModAux)
                     End If
                 End If
             Else
@@ -4199,7 +4262,6 @@ Public Class scafoldTarking
             MsgBox(ex.Message)
         End Try
     End Sub
-
     Public Function cargarDatosByClient(ByVal idClientF As String, ByVal companyNameF As String) As Boolean
         Try
             IdCliente = idClientF
@@ -4231,6 +4293,15 @@ Public Class scafoldTarking
             'Products
             mtdScaffold.llenarProduct(tblProduct)
             mtdScaffold.llenarProduct(tblProductosAux)
+            llenarComboJobsReportsIDclient(cmbJobProduct, IdCliente)
+            If cmbJobProduct.Items IsNot Nothing Then
+                cmbJobProduct.SelectedItem = cmbJobProduct.Items(0)
+                mtdScaffold.llenarTablaProductosByJobNo(tblProductByJobNo, cmbJobProduct.Items(0).ToString())
+            Else
+                mtdScaffold.llenarTablaProductosByJobNo(tblProductByJobNo)
+            End If
+            mtdScaffold.llenarComboProductUtilization(cmbProductUtilization)
+            'mtdScaffold.llenar
             'Out Going
             mtdScaffold.llenarJobCombo(cmbJobNumOutGoing, IdCliente)
             mtdScaffold.llenarEmpleadosCombo(cmbShippedBY, tablaEmpleados)

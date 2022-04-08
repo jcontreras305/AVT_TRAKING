@@ -14,7 +14,7 @@ Public Class myCompany
         txtFaxNumber.Text = mtdCompany.faxNumber
         txtNameCompany.Text = mtdCompany.name
         txtNum.Text = mtdCompany.number
-        txtPaymentTerms.Text = mtdCompany.paymentTerms
+        'txtPaymentTerms.Text = mtdCompany.paymentTerms
         txtPhoneNumber.Text = mtdCompany.phoneNumber
         txtPostalCode.Text = mtdCompany.postalCode
         txtStateProvidence.Text = mtdCompany.stateProvidence
@@ -70,7 +70,7 @@ Public Class myCompany
         End If
     End Sub
 
-    Private Sub txtPostalCode_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtPostalCode.KeyPress
+    Private Sub txtPostalCode_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtPostalCode.KeyPress, TextBox1.KeyPress
         If Char.IsDigit(e.KeyChar) Or Asc(e.KeyChar) = Keys.Back Then
             e.Handled = False
         Else
@@ -78,7 +78,7 @@ Public Class myCompany
         End If
     End Sub
 
-    Private Sub txtPostalCode_TextChanged(sender As Object, e As EventArgs) Handles txtPostalCode.TextChanged
+    Private Sub txtPostalCode_TextChanged(sender As Object, e As EventArgs) Handles txtPostalCode.TextChanged, TextBox1.TextChanged
         If loadInfo = False Then
             mtdCompany.postalCode = txtPostalCode.Text
         End If
@@ -134,13 +134,11 @@ Public Class myCompany
             End If
         End If
     End Sub
-
-    Private Sub txtPaymenTerms_TextChanged(sender As Object, e As EventArgs) Handles txtPaymentTerms.TextChanged
-        If loadInfo = False Then
-            mtdCompany.paymentTerms = txtPaymentTerms.Text
-        End If
-    End Sub
-
+    'Private Sub txtPaymenTerms_TextChanged(sender As Object, e As EventArgs)
+    '    If loadInfo = False Then
+    '        mtdCompany.paymentTerms = txtPaymentTerms.Text
+    '    End If
+    'End Sub
     Private Sub txtStateProvidence_TextChanged(sender As Object, e As EventArgs) Handles txtStateProvidence.TextChanged
         If loadInfo = False Then
             mtdCompany.stateProvidence = txtStateProvidence.Text

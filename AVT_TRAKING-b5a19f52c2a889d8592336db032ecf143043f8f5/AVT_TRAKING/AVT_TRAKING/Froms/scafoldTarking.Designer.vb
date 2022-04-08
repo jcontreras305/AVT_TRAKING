@@ -22,16 +22,21 @@ Partial Class scafoldTarking
     'No lo modifique con el editor de código.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle9 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle10 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle11 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle12 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle13 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle14 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle15 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle16 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle17 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle18 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle19 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle20 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.Panel3 = New System.Windows.Forms.Panel()
         Me.tabControl1 = New System.Windows.Forms.TabControl()
@@ -268,6 +273,7 @@ Partial Class scafoldTarking
         Me.plf = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.psqf = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Panel63 = New System.Windows.Forms.Panel()
+        Me.btnReportModification = New System.Windows.Forms.Button()
         Me.btnUploadExcelModification = New System.Windows.Forms.Button()
         Me.btnNewModification = New System.Windows.Forms.Button()
         Me.btnDeleteRowM = New System.Windows.Forms.Button()
@@ -394,13 +400,61 @@ Partial Class scafoldTarking
         Me.Panel87 = New System.Windows.Forms.Panel()
         Me.Label70 = New System.Windows.Forms.Label()
         Me.Panel88 = New System.Windows.Forms.Panel()
+        Me.btnReportDismantled = New System.Windows.Forms.Button()
         Me.btnFindDismantle = New System.Windows.Forms.Button()
         Me.btnUploadExcelDismantle = New System.Windows.Forms.Button()
         Me.btnNextDismantle = New System.Windows.Forms.Button()
         Me.btnBackDS = New System.Windows.Forms.Button()
         Me.tbpProducts = New System.Windows.Forms.TabPage()
         Me.Panel11 = New System.Windows.Forms.Panel()
+        Me.TabControl2 = New System.Windows.Forms.TabControl()
+        Me.TabPage1 = New System.Windows.Forms.TabPage()
         Me.tblProduct = New System.Windows.Forms.DataGridView()
+        Me.TabPage2 = New System.Windows.Forms.TabPage()
+        Me.TableLayoutPanel36 = New System.Windows.Forms.TableLayoutPanel()
+        Me.Panel94 = New System.Windows.Forms.Panel()
+        Me.PictureBox3 = New System.Windows.Forms.PictureBox()
+        Me.txtFindProducJobNo = New System.Windows.Forms.TextBox()
+        Me.Label97 = New System.Windows.Forms.Label()
+        Me.cmbJobProduct = New System.Windows.Forms.ComboBox()
+        Me.Panel95 = New System.Windows.Forms.Panel()
+        Me.tblProductByJobNo = New System.Windows.Forms.DataGridView()
+        Me.TabPage3 = New System.Windows.Forms.TabPage()
+        Me.TableLayoutPanel37 = New System.Windows.Forms.TableLayoutPanel()
+        Me.GroupBox11 = New System.Windows.Forms.GroupBox()
+        Me.tblOutBoundMaterial = New System.Windows.Forms.DataGridView()
+        Me.DataGridViewTextBoxColumn1 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DataGridViewTextBoxColumn2 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DataGridViewTextBoxColumn3 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DataGridViewTextBoxColumn4 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.GroupBox10 = New System.Windows.Forms.GroupBox()
+        Me.tblInBoundMaterial = New System.Windows.Forms.DataGridView()
+        Me.TicketNoIn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DateIn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ProductIDIn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.QtyIn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.GroupBox9 = New System.Windows.Forms.GroupBox()
+        Me.tblDismantleMaterial = New System.Windows.Forms.DataGridView()
+        Me.TagNoDis = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ProductDis = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.QtyDis = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DismantleDis = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Panel96 = New System.Windows.Forms.Panel()
+        Me.PictureBox4 = New System.Windows.Forms.PictureBox()
+        Me.cmbProductUtilization = New System.Windows.Forms.ComboBox()
+        Me.GroupBox7 = New System.Windows.Forms.GroupBox()
+        Me.tblBuildsMaterial = New System.Windows.Forms.DataGridView()
+        Me.TagNoSc = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ProductIdSc = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.QtySc = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.BuildSc = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.GroupBox8 = New System.Windows.Forms.GroupBox()
+        Me.tblModificationMaterial = New System.Windows.Forms.DataGridView()
+        Me.TagNoMod = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ModIDMod = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ProductIDMod = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.QtyMod = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ModMod = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Panel10 = New System.Windows.Forms.Panel()
         Me.btnRefreshTblProduct = New System.Windows.Forms.Button()
         Me.txtSalida = New System.Windows.Forms.TextBox()
@@ -556,195 +610,215 @@ Partial Class scafoldTarking
         Me.btnSaveTable = New System.Windows.Forms.Button()
         Me.btnDeleteRows = New System.Windows.Forms.Button()
         Me.btnSaveAll = New System.Windows.Forms.Button()
-        Me.btnReportModification = New System.Windows.Forms.Button()
-        Me.btnReportDismantled = New System.Windows.Forms.Button()
-        Me.Panel1.SuspendLayout()
-        Me.Panel3.SuspendLayout()
-        Me.tabControl1.SuspendLayout()
-        Me.tbpInComing.SuspendLayout()
-        Me.Panel4.SuspendLayout()
-        Me.Panel6.SuspendLayout()
-        Me.Panel93.SuspendLayout()
-        CType(Me.tblInComing, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.Panel5.SuspendLayout()
-        Me.tbpOutGoing.SuspendLayout()
-        Me.Panel7.SuspendLayout()
-        Me.Panel9.SuspendLayout()
-        CType(Me.tblOutGoing, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.Panel8.SuspendLayout()
-        Me.tbpScaffoldTraking.SuspendLayout()
-        Me.Panel41.SuspendLayout()
-        Me.TableLayoutPanel8.SuspendLayout()
-        Me.Panel42.SuspendLayout()
-        Me.Panel52.SuspendLayout()
-        CType(Me.tblProductosScaffold, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.Panel51.SuspendLayout()
-        Me.TableLayoutPanel9.SuspendLayout()
-        Me.Panel72.SuspendLayout()
-        Me.TableLayoutPanel10.SuspendLayout()
-        Me.Panel73.SuspendLayout()
-        Me.TableLayoutPanel11.SuspendLayout()
-        Me.Panel69.SuspendLayout()
-        Me.Panel71.SuspendLayout()
-        CType(Me.sprDays, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.Panel70.SuspendLayout()
-        Me.Panel74.SuspendLayout()
-        Me.Panel75.SuspendLayout()
-        Me.TableLayoutPanel12.SuspendLayout()
-        Me.Panel46.SuspendLayout()
-        Me.GroupBox3.SuspendLayout()
-        Me.Panel92.SuspendLayout()
-        CType(Me.tblLeg, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.Panel48.SuspendLayout()
-        Me.Panel50.SuspendLayout()
-        CType(Me.sprDecks, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.Panel47.SuspendLayout()
-        Me.TableLayoutPanel13.SuspendLayout()
-        Me.TableLayoutPanel14.SuspendLayout()
-        Me.Panel44.SuspendLayout()
-        CType(Me.tblScaffoldInformation, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.Panel45.SuspendLayout()
-        CType(Me.tblActivityHours, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.Panel76.SuspendLayout()
-        Me.TableLayoutPanel15.SuspendLayout()
-        Me.Panel77.SuspendLayout()
-        Me.GroupBox1.SuspendLayout()
-        Me.TableLayoutPanel17.SuspendLayout()
-        Me.Panel78.SuspendLayout()
-        Me.GroupBox2.SuspendLayout()
-        Me.TableLayoutPanel16.SuspendLayout()
-        Me.Panel79.SuspendLayout()
-        Me.Panel43.SuspendLayout()
-        Me.Panel80.SuspendLayout()
-        Me.tbpModification.SuspendLayout()
-        Me.Panel55.SuspendLayout()
-        Me.TableLayoutPanel3.SuspendLayout()
-        Me.Panel64.SuspendLayout()
-        Me.TableLayoutPanel5.SuspendLayout()
-        CType(Me.tblModificationProductMS, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.Panel65.SuspendLayout()
-        Me.TableLayoutPanel6.SuspendLayout()
-        CType(Me.tblScaffoldTotalProductMS, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.Panel66.SuspendLayout()
-        Me.TableLayoutPanel4.SuspendLayout()
-        Me.GroupBox4.SuspendLayout()
-        Me.TableLayoutPanel7.SuspendLayout()
-        Me.GroupBox5.SuspendLayout()
-        Me.Panel86.SuspendLayout()
-        CType(Me.tblLegMS, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.Panel63.SuspendLayout()
-        Me.Panel68.SuspendLayout()
-        Me.Panel67.SuspendLayout()
-        Me.Panel56.SuspendLayout()
-        Me.panel58TablesInfoModification.SuspendLayout()
-        Me.TableLayoutPanel1.SuspendLayout()
-        CType(Me.tblActivityHoursSM, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.Panel59.SuspendLayout()
-        CType(Me.tblScaffoldInformationSM, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.Panel57.SuspendLayout()
-        Me.TableLayoutPanel2.SuspendLayout()
-        Me.Panel58.SuspendLayout()
-        Me.Panel61.SuspendLayout()
-        Me.Panel62.SuspendLayout()
-        Me.tbpDismantle.SuspendLayout()
-        Me.Panel81.SuspendLayout()
-        Me.TableLayoutPanel18.SuspendLayout()
-        Me.Panel82.SuspendLayout()
-        Me.TableLayoutPanel21.SuspendLayout()
-        CType(Me.tblActivityHoursDismantle, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.GroupBox6.SuspendLayout()
-        Me.TableLayoutPanel22.SuspendLayout()
-        Me.TableLayoutPanel19.SuspendLayout()
-        Me.Panel83.SuspendLayout()
-        Me.TableLayoutPanel25.SuspendLayout()
-        Me.Panel90.SuspendLayout()
-        Me.Panel91.SuspendLayout()
-        Me.Panel84.SuspendLayout()
-        Me.Panel85.SuspendLayout()
-        Me.TableLayoutPanel20.SuspendLayout()
-        Me.TableLayoutPanel24.SuspendLayout()
-        Me.Panel89.SuspendLayout()
-        CType(Me.tblTotalScaffoldProductDS, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.TableLayoutPanel23.SuspendLayout()
-        CType(Me.tblDismantleProduct, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.Panel87.SuspendLayout()
-        Me.Panel88.SuspendLayout()
-        Me.tbpProducts.SuspendLayout()
-        Me.Panel11.SuspendLayout()
-        CType(Me.tblProduct, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.Panel10.SuspendLayout()
-        Me.tbpAreaWOJob.SuspendLayout()
-        Me.Panel14.SuspendLayout()
-        Me.TableLayoutPanel26.SuspendLayout()
-        Me.TableLayoutPanel27.SuspendLayout()
-        Me.Panel17.SuspendLayout()
-        Me.Panel16.SuspendLayout()
-        Me.Panel19.SuspendLayout()
-        CType(Me.tblAreas, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.Panel53.SuspendLayout()
-        CType(Me.tblJobCat, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.Panel29.SuspendLayout()
-        CType(Me.tblSubJobs, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.Panel15.SuspendLayout()
-        Me.TableLayoutPanel28.SuspendLayout()
-        Me.Panel18.SuspendLayout()
-        Me.Panel27.SuspendLayout()
-        CType(Me.tblWO, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.tbpUMClassStatus.SuspendLayout()
-        Me.Panel21.SuspendLayout()
-        Me.Panel22.SuspendLayout()
-        Me.TableLayoutPanel29.SuspendLayout()
-        Me.TableLayoutPanel31.SuspendLayout()
-        Me.Panel25.SuspendLayout()
-        Me.Panel37.SuspendLayout()
-        CType(Me.tblRentTable, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.TableLayoutPanel30.SuspendLayout()
-        Me.Panel24.SuspendLayout()
-        Me.Panel23.SuspendLayout()
-        Me.Panel35.SuspendLayout()
-        CType(Me.tblMaterialStatus, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.Panel31.SuspendLayout()
-        CType(Me.tblUnitMeassurement, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.Panel33.SuspendLayout()
-        CType(Me.tblClassification, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.Panel20.SuspendLayout()
-        Me.tbpSupervisor.SuspendLayout()
-        Me.Panel38.SuspendLayout()
-        Me.Panel40.SuspendLayout()
-        CType(Me.tblSupervisor, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.Panel39.SuspendLayout()
-        Me.tbpCostJobsN.SuspendLayout()
-        Me.Panel13.SuspendLayout()
-        CType(Me.tblCostumersJobs, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.Panel12.SuspendLayout()
-        Me.tbpEstimating.SuspendLayout()
-        Me.TableLayoutPanel32.SuspendLayout()
-        Me.Panel28.SuspendLayout()
-        Me.TableLayoutPanel34.SuspendLayout()
-        CType(Me.sprOperationalDays, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.TableLayoutPanel33.SuspendLayout()
-        Me.Panel30.SuspendLayout()
-        Me.Panel26.SuspendLayout()
-        Me.TableLayoutPanel35.SuspendLayout()
-        Me.Panel36.SuspendLayout()
-        CType(Me.sprDecksEst, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.Panel32.SuspendLayout()
-        CType(Me.sprHeigthEst, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.Panel34.SuspendLayout()
-        CType(Me.sprWidthEst, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.Panel49.SuspendLayout()
-        CType(Me.sprLengthEst, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.Panel54.SuspendLayout()
-        CType(Me.sprGroudHeigthEst, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.Panel60.SuspendLayout()
-        CType(Me.sprElevatorEst, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.Panel2.SuspendLayout()
-        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.TitleBar.SuspendLayout()
-        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.btnRestore, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.btnMaximize, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.SuspendLayout()
+        Me.Panel1.SuspendLayout
+        Me.Panel3.SuspendLayout
+        Me.tabControl1.SuspendLayout
+        Me.tbpInComing.SuspendLayout
+        Me.Panel4.SuspendLayout
+        Me.Panel6.SuspendLayout
+        Me.Panel93.SuspendLayout
+        CType(Me.tblInComing, System.ComponentModel.ISupportInitialize).BeginInit
+        Me.Panel5.SuspendLayout
+        Me.tbpOutGoing.SuspendLayout
+        Me.Panel7.SuspendLayout
+        Me.Panel9.SuspendLayout
+        CType(Me.tblOutGoing, System.ComponentModel.ISupportInitialize).BeginInit
+        Me.Panel8.SuspendLayout
+        Me.tbpScaffoldTraking.SuspendLayout
+        Me.Panel41.SuspendLayout
+        Me.TableLayoutPanel8.SuspendLayout
+        Me.Panel42.SuspendLayout
+        Me.Panel52.SuspendLayout
+        CType(Me.tblProductosScaffold, System.ComponentModel.ISupportInitialize).BeginInit
+        Me.Panel51.SuspendLayout
+        Me.TableLayoutPanel9.SuspendLayout
+        Me.Panel72.SuspendLayout
+        Me.TableLayoutPanel10.SuspendLayout
+        Me.Panel73.SuspendLayout
+        Me.TableLayoutPanel11.SuspendLayout
+        Me.Panel69.SuspendLayout
+        Me.Panel71.SuspendLayout
+        CType(Me.sprDays, System.ComponentModel.ISupportInitialize).BeginInit
+        Me.Panel70.SuspendLayout
+        Me.Panel74.SuspendLayout
+        Me.Panel75.SuspendLayout
+        Me.TableLayoutPanel12.SuspendLayout
+        Me.Panel46.SuspendLayout
+        Me.GroupBox3.SuspendLayout
+        Me.Panel92.SuspendLayout
+        CType(Me.tblLeg, System.ComponentModel.ISupportInitialize).BeginInit
+        Me.Panel48.SuspendLayout
+        Me.Panel50.SuspendLayout
+        CType(Me.sprDecks, System.ComponentModel.ISupportInitialize).BeginInit
+        Me.Panel47.SuspendLayout
+        Me.TableLayoutPanel13.SuspendLayout
+        Me.TableLayoutPanel14.SuspendLayout
+        Me.Panel44.SuspendLayout
+        CType(Me.tblScaffoldInformation, System.ComponentModel.ISupportInitialize).BeginInit
+        Me.Panel45.SuspendLayout
+        CType(Me.tblActivityHours, System.ComponentModel.ISupportInitialize).BeginInit
+        Me.Panel76.SuspendLayout
+        Me.TableLayoutPanel15.SuspendLayout
+        Me.Panel77.SuspendLayout
+        Me.GroupBox1.SuspendLayout
+        Me.TableLayoutPanel17.SuspendLayout
+        Me.Panel78.SuspendLayout
+        Me.GroupBox2.SuspendLayout
+        Me.TableLayoutPanel16.SuspendLayout
+        Me.Panel79.SuspendLayout
+        Me.Panel43.SuspendLayout
+        Me.Panel80.SuspendLayout
+        Me.tbpModification.SuspendLayout
+        Me.Panel55.SuspendLayout
+        Me.TableLayoutPanel3.SuspendLayout
+        Me.Panel64.SuspendLayout
+        Me.TableLayoutPanel5.SuspendLayout
+        CType(Me.tblModificationProductMS, System.ComponentModel.ISupportInitialize).BeginInit
+        Me.Panel65.SuspendLayout
+        Me.TableLayoutPanel6.SuspendLayout
+        CType(Me.tblScaffoldTotalProductMS, System.ComponentModel.ISupportInitialize).BeginInit
+        Me.Panel66.SuspendLayout
+        Me.TableLayoutPanel4.SuspendLayout
+        Me.GroupBox4.SuspendLayout
+        Me.TableLayoutPanel7.SuspendLayout
+        Me.GroupBox5.SuspendLayout
+        Me.Panel86.SuspendLayout
+        CType(Me.tblLegMS, System.ComponentModel.ISupportInitialize).BeginInit
+        Me.Panel63.SuspendLayout
+        Me.Panel68.SuspendLayout
+        Me.Panel67.SuspendLayout
+        Me.Panel56.SuspendLayout
+        Me.panel58TablesInfoModification.SuspendLayout
+        Me.TableLayoutPanel1.SuspendLayout
+        CType(Me.tblActivityHoursSM, System.ComponentModel.ISupportInitialize).BeginInit
+        Me.Panel59.SuspendLayout
+        CType(Me.tblScaffoldInformationSM, System.ComponentModel.ISupportInitialize).BeginInit
+        Me.Panel57.SuspendLayout
+        Me.TableLayoutPanel2.SuspendLayout
+        Me.Panel58.SuspendLayout
+        Me.Panel61.SuspendLayout
+        Me.Panel62.SuspendLayout
+        Me.tbpDismantle.SuspendLayout
+        Me.Panel81.SuspendLayout
+        Me.TableLayoutPanel18.SuspendLayout
+        Me.Panel82.SuspendLayout
+        Me.TableLayoutPanel21.SuspendLayout
+        CType(Me.tblActivityHoursDismantle, System.ComponentModel.ISupportInitialize).BeginInit
+        Me.GroupBox6.SuspendLayout
+        Me.TableLayoutPanel22.SuspendLayout
+        Me.TableLayoutPanel19.SuspendLayout
+        Me.Panel83.SuspendLayout
+        Me.TableLayoutPanel25.SuspendLayout
+        Me.Panel90.SuspendLayout
+        Me.Panel91.SuspendLayout
+        Me.Panel84.SuspendLayout
+        Me.Panel85.SuspendLayout
+        Me.TableLayoutPanel20.SuspendLayout
+        Me.TableLayoutPanel24.SuspendLayout
+        Me.Panel89.SuspendLayout
+        CType(Me.tblTotalScaffoldProductDS, System.ComponentModel.ISupportInitialize).BeginInit
+        Me.TableLayoutPanel23.SuspendLayout
+        CType(Me.tblDismantleProduct, System.ComponentModel.ISupportInitialize).BeginInit
+        Me.Panel87.SuspendLayout
+        Me.Panel88.SuspendLayout
+        Me.tbpProducts.SuspendLayout
+        Me.Panel11.SuspendLayout
+        Me.TabControl2.SuspendLayout
+        Me.TabPage1.SuspendLayout
+        CType(Me.tblProduct, System.ComponentModel.ISupportInitialize).BeginInit
+        Me.TabPage2.SuspendLayout
+        Me.TableLayoutPanel36.SuspendLayout
+        Me.Panel94.SuspendLayout
+        CType(Me.PictureBox3, System.ComponentModel.ISupportInitialize).BeginInit
+        Me.Panel95.SuspendLayout
+        CType(Me.tblProductByJobNo, System.ComponentModel.ISupportInitialize).BeginInit
+        Me.TabPage3.SuspendLayout
+        Me.TableLayoutPanel37.SuspendLayout
+        Me.GroupBox11.SuspendLayout
+        CType(Me.tblOutBoundMaterial, System.ComponentModel.ISupportInitialize).BeginInit
+        Me.GroupBox10.SuspendLayout
+        CType(Me.tblInBoundMaterial, System.ComponentModel.ISupportInitialize).BeginInit
+        Me.GroupBox9.SuspendLayout
+        CType(Me.tblDismantleMaterial, System.ComponentModel.ISupportInitialize).BeginInit
+        Me.Panel96.SuspendLayout
+        CType(Me.PictureBox4, System.ComponentModel.ISupportInitialize).BeginInit
+        Me.GroupBox7.SuspendLayout
+        CType(Me.tblBuildsMaterial, System.ComponentModel.ISupportInitialize).BeginInit
+        Me.GroupBox8.SuspendLayout
+        CType(Me.tblModificationMaterial, System.ComponentModel.ISupportInitialize).BeginInit
+        Me.Panel10.SuspendLayout
+        Me.tbpAreaWOJob.SuspendLayout
+        Me.Panel14.SuspendLayout
+        Me.TableLayoutPanel26.SuspendLayout
+        Me.TableLayoutPanel27.SuspendLayout
+        Me.Panel17.SuspendLayout
+        Me.Panel16.SuspendLayout
+        Me.Panel19.SuspendLayout
+        CType(Me.tblAreas, System.ComponentModel.ISupportInitialize).BeginInit
+        Me.Panel53.SuspendLayout
+        CType(Me.tblJobCat, System.ComponentModel.ISupportInitialize).BeginInit
+        Me.Panel29.SuspendLayout
+        CType(Me.tblSubJobs, System.ComponentModel.ISupportInitialize).BeginInit
+        Me.Panel15.SuspendLayout
+        Me.TableLayoutPanel28.SuspendLayout
+        Me.Panel18.SuspendLayout
+        Me.Panel27.SuspendLayout
+        CType(Me.tblWO, System.ComponentModel.ISupportInitialize).BeginInit
+        Me.tbpUMClassStatus.SuspendLayout
+        Me.Panel21.SuspendLayout
+        Me.Panel22.SuspendLayout
+        Me.TableLayoutPanel29.SuspendLayout
+        Me.TableLayoutPanel31.SuspendLayout
+        Me.Panel25.SuspendLayout
+        Me.Panel37.SuspendLayout
+        CType(Me.tblRentTable, System.ComponentModel.ISupportInitialize).BeginInit
+        Me.TableLayoutPanel30.SuspendLayout
+        Me.Panel24.SuspendLayout
+        Me.Panel23.SuspendLayout
+        Me.Panel35.SuspendLayout
+        CType(Me.tblMaterialStatus, System.ComponentModel.ISupportInitialize).BeginInit
+        Me.Panel31.SuspendLayout
+        CType(Me.tblUnitMeassurement, System.ComponentModel.ISupportInitialize).BeginInit
+        Me.Panel33.SuspendLayout
+        CType(Me.tblClassification, System.ComponentModel.ISupportInitialize).BeginInit
+        Me.Panel20.SuspendLayout
+        Me.tbpSupervisor.SuspendLayout
+        Me.Panel38.SuspendLayout
+        Me.Panel40.SuspendLayout
+        CType(Me.tblSupervisor, System.ComponentModel.ISupportInitialize).BeginInit
+        Me.Panel39.SuspendLayout
+        Me.tbpCostJobsN.SuspendLayout
+        Me.Panel13.SuspendLayout
+        CType(Me.tblCostumersJobs, System.ComponentModel.ISupportInitialize).BeginInit
+        Me.Panel12.SuspendLayout
+        Me.tbpEstimating.SuspendLayout
+        Me.TableLayoutPanel32.SuspendLayout
+        Me.Panel28.SuspendLayout
+        Me.TableLayoutPanel34.SuspendLayout
+        CType(Me.sprOperationalDays, System.ComponentModel.ISupportInitialize).BeginInit
+        Me.TableLayoutPanel33.SuspendLayout
+        Me.Panel30.SuspendLayout
+        Me.Panel26.SuspendLayout
+        Me.TableLayoutPanel35.SuspendLayout
+        Me.Panel36.SuspendLayout
+        CType(Me.sprDecksEst, System.ComponentModel.ISupportInitialize).BeginInit
+        Me.Panel32.SuspendLayout
+        CType(Me.sprHeigthEst, System.ComponentModel.ISupportInitialize).BeginInit
+        Me.Panel34.SuspendLayout
+        CType(Me.sprWidthEst, System.ComponentModel.ISupportInitialize).BeginInit
+        Me.Panel49.SuspendLayout
+        CType(Me.sprLengthEst, System.ComponentModel.ISupportInitialize).BeginInit
+        Me.Panel54.SuspendLayout
+        CType(Me.sprGroudHeigthEst, System.ComponentModel.ISupportInitialize).BeginInit
+        Me.Panel60.SuspendLayout
+        CType(Me.sprElevatorEst, System.ComponentModel.ISupportInitialize).BeginInit
+        Me.Panel2.SuspendLayout
+        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit
+        Me.TitleBar.SuspendLayout
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit
+        CType(Me.btnRestore, System.ComponentModel.ISupportInitialize).BeginInit
+        CType(Me.btnMaximize, System.ComponentModel.ISupportInitialize).BeginInit
+        Me.SuspendLayout
         '
         'Panel1
         '
@@ -832,14 +906,14 @@ Partial Class scafoldTarking
         Me.tblInComing.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.tblInComing.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.tblInComing.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.QTY, Me.ID, Me.UM, Me.UMCost, Me.ProductDescription, Me.idProductInComing})
-        DataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle11.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle11.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle11.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle11.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle11.SelectionForeColor = System.Drawing.SystemColors.ControlLightLight
-        DataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.tblInComing.DefaultCellStyle = DataGridViewCellStyle11
+        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle1.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.ControlLightLight
+        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.tblInComing.DefaultCellStyle = DataGridViewCellStyle1
         Me.tblInComing.Dock = System.Windows.Forms.DockStyle.Fill
         Me.tblInComing.Location = New System.Drawing.Point(0, 0)
         Me.tblInComing.Name = "tblInComing"
@@ -2011,14 +2085,14 @@ Partial Class scafoldTarking
         Me.tblLeg.AllowUserToAddRows = False
         Me.tblLeg.AllowUserToDeleteRows = False
         Me.tblLeg.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
-        DataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle12.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle12.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle12.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle12.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle12.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.tblLeg.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle12
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle2.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.tblLeg.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle2
         Me.tblLeg.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.tblLeg.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.clmLegID, Me.clmQYT, Me.clmHeigthExtra, Me.clmIdProductLeg, Me.clmPlf, Me.clmPsqf})
         Me.tblLeg.Dock = System.Windows.Forms.DockStyle.Fill
@@ -2167,14 +2241,14 @@ Partial Class scafoldTarking
         Me.tblScaffoldInformation.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.tblScaffoldInformation.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCellsExceptHeaders
         Me.tblScaffoldInformation.BackgroundColor = System.Drawing.Color.White
-        DataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle13.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle13.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle13.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle13.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle13.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle13.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.tblScaffoldInformation.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle13
+        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle3.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.tblScaffoldInformation.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle3
         Me.tblScaffoldInformation.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.tblScaffoldInformation.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.clmType, Me.clmWidth, Me.clmLength, Me.clmHeigth, Me.clmDecks, Me.clmKOs, Me.clmBase})
         Me.tblScaffoldInformation.Dock = System.Windows.Forms.DockStyle.Fill
@@ -2182,8 +2256,8 @@ Partial Class scafoldTarking
         Me.tblScaffoldInformation.MultiSelect = False
         Me.tblScaffoldInformation.Name = "tblScaffoldInformation"
         Me.tblScaffoldInformation.RowHeadersVisible = False
-        DataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.tblScaffoldInformation.RowsDefaultCellStyle = DataGridViewCellStyle14
+        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.tblScaffoldInformation.RowsDefaultCellStyle = DataGridViewCellStyle4
         Me.tblScaffoldInformation.Size = New System.Drawing.Size(480, 50)
         Me.tblScaffoldInformation.TabIndex = 0
         '
@@ -2239,14 +2313,14 @@ Partial Class scafoldTarking
         Me.tblActivityHours.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.tblActivityHours.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCellsExceptHeaders
         Me.tblActivityHours.BackgroundColor = System.Drawing.Color.White
-        DataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle15.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle15.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle15.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle15.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle15.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle15.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.tblActivityHours.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle15
+        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle5.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.tblActivityHours.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle5
         Me.tblActivityHours.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.tblActivityHours.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.clmBuild, Me.clmMabl, Me.clmTravl, Me.clmWhtr, Me.clmAlarm, Me.clmSafty, Me.clmStdBy, Me.clmOthh, Me.clmTotal})
         Me.tblActivityHours.Dock = System.Windows.Forms.DockStyle.Fill
@@ -2254,8 +2328,8 @@ Partial Class scafoldTarking
         Me.tblActivityHours.MultiSelect = False
         Me.tblActivityHours.Name = "tblActivityHours"
         Me.tblActivityHours.RowHeadersVisible = False
-        DataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.tblActivityHours.RowsDefaultCellStyle = DataGridViewCellStyle16
+        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.tblActivityHours.RowsDefaultCellStyle = DataGridViewCellStyle6
         Me.tblActivityHours.Size = New System.Drawing.Size(480, 51)
         Me.tblActivityHours.TabIndex = 1
         '
@@ -3046,14 +3120,14 @@ Partial Class scafoldTarking
         Me.tblScaffoldTotalProductMS.BackgroundColor = System.Drawing.Color.White
         Me.tblScaffoldTotalProductMS.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.tblScaffoldTotalProductMS.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.clmIDProductSM, Me.clmQTYSM, Me.psqfM, Me.plfM})
-        DataGridViewCellStyle17.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle17.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle17.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle17.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle17.SelectionBackColor = System.Drawing.Color.DarkGray
-        DataGridViewCellStyle17.SelectionForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle17.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.tblScaffoldTotalProductMS.DefaultCellStyle = DataGridViewCellStyle17
+        DataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle7.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle7.SelectionBackColor = System.Drawing.Color.DarkGray
+        DataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.tblScaffoldTotalProductMS.DefaultCellStyle = DataGridViewCellStyle7
         Me.tblScaffoldTotalProductMS.Dock = System.Windows.Forms.DockStyle.Fill
         Me.tblScaffoldTotalProductMS.Location = New System.Drawing.Point(3, 21)
         Me.tblScaffoldTotalProductMS.Name = "tblScaffoldTotalProductMS"
@@ -3277,10 +3351,10 @@ Partial Class scafoldTarking
         '
         Me.tblLegMS.AllowUserToAddRows = False
         Me.tblLegMS.AllowUserToDeleteRows = False
-        DataGridViewCellStyle18.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle18.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle18.SelectionForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.tblLegMS.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle18
+        DataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.tblLegMS.AlternatingRowsDefaultCellStyle = DataGridViewCellStyle8
         Me.tblLegMS.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.tblLegMS.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.tblLegMS.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.clmIDLCModification, Me.clmQTYLCModification, Me.clmHeigthLCModification, Me.plf, Me.psqf})
@@ -3335,6 +3409,24 @@ Partial Class scafoldTarking
         Me.Panel63.Name = "Panel63"
         Me.Panel63.Size = New System.Drawing.Size(476, 50)
         Me.Panel63.TabIndex = 3
+        '
+        'btnReportModification
+        '
+        Me.btnReportModification.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnReportModification.FlatAppearance.BorderSize = 0
+        Me.btnReportModification.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(58, Byte), Integer), CType(CType(115, Byte), Integer))
+        Me.btnReportModification.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnReportModification.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnReportModification.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.btnReportModification.Image = Global.AVT_TRAKING.My.Resources.Resources.report
+        Me.btnReportModification.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnReportModification.Location = New System.Drawing.Point(87, 10)
+        Me.btnReportModification.Name = "btnReportModification"
+        Me.btnReportModification.Size = New System.Drawing.Size(85, 29)
+        Me.btnReportModification.TabIndex = 33
+        Me.btnReportModification.Text = "Report"
+        Me.btnReportModification.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.btnReportModification.UseVisualStyleBackColor = True
         '
         'btnUploadExcelModification
         '
@@ -4003,14 +4095,14 @@ Partial Class scafoldTarking
         Me.tblActivityHoursDismantle.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.tblActivityHoursDismantle.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCellsExceptHeaders
         Me.tblActivityHoursDismantle.BackgroundColor = System.Drawing.Color.White
-        DataGridViewCellStyle19.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle19.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle19.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle19.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle19.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle19.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle19.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.tblActivityHoursDismantle.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle19
+        DataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle9.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle9.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle9.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle9.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle9.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.tblActivityHoursDismantle.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle9
         Me.tblActivityHoursDismantle.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.tblActivityHoursDismantle.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.clmIdActvHrsDS, Me.clmDismentleD, Me.clmMablD, Me.clmTravlD, Me.clmWthrD, Me.clmAlarmD, Me.clmSaftyD, Me.clmStdByD, Me.clmOthHD, Me.clmTotalHD})
         Me.tblActivityHoursDismantle.Dock = System.Windows.Forms.DockStyle.Fill
@@ -4018,8 +4110,8 @@ Partial Class scafoldTarking
         Me.tblActivityHoursDismantle.MultiSelect = False
         Me.tblActivityHoursDismantle.Name = "tblActivityHoursDismantle"
         Me.tblActivityHoursDismantle.RowHeadersVisible = False
-        DataGridViewCellStyle20.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        Me.tblActivityHoursDismantle.RowsDefaultCellStyle = DataGridViewCellStyle20
+        DataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        Me.tblActivityHoursDismantle.RowsDefaultCellStyle = DataGridViewCellStyle10
         Me.tblActivityHoursDismantle.Size = New System.Drawing.Size(660, 66)
         Me.tblActivityHoursDismantle.TabIndex = 10
         '
@@ -4676,6 +4768,24 @@ Partial Class scafoldTarking
         Me.Panel88.Size = New System.Drawing.Size(612, 48)
         Me.Panel88.TabIndex = 5
         '
+        'btnReportDismantled
+        '
+        Me.btnReportDismantled.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnReportDismantled.FlatAppearance.BorderSize = 0
+        Me.btnReportDismantled.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(58, Byte), Integer), CType(CType(115, Byte), Integer))
+        Me.btnReportDismantled.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnReportDismantled.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnReportDismantled.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.btnReportDismantled.Image = Global.AVT_TRAKING.My.Resources.Resources.report
+        Me.btnReportDismantled.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnReportDismantled.Location = New System.Drawing.Point(113, 11)
+        Me.btnReportDismantled.Name = "btnReportDismantled"
+        Me.btnReportDismantled.Size = New System.Drawing.Size(85, 29)
+        Me.btnReportDismantled.TabIndex = 34
+        Me.btnReportDismantled.Text = "Report"
+        Me.btnReportDismantled.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.btnReportDismantled.UseVisualStyleBackColor = True
+        '
         'btnFindDismantle
         '
         Me.btnFindDismantle.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
@@ -4751,21 +4861,496 @@ Partial Class scafoldTarking
         '
         'Panel11
         '
-        Me.Panel11.Controls.Add(Me.tblProduct)
+        Me.Panel11.BackColor = System.Drawing.Color.FromArgb(CType(CType(83, Byte), Integer), CType(CType(93, Byte), Integer), CType(CType(102, Byte), Integer))
+        Me.Panel11.Controls.Add(Me.TabControl2)
         Me.Panel11.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel11.Location = New System.Drawing.Point(200, 0)
         Me.Panel11.Name = "Panel11"
         Me.Panel11.Size = New System.Drawing.Size(764, 472)
         Me.Panel11.TabIndex = 1
         '
+        'TabControl2
+        '
+        Me.TabControl2.Controls.Add(Me.TabPage1)
+        Me.TabControl2.Controls.Add(Me.TabPage2)
+        Me.TabControl2.Controls.Add(Me.TabPage3)
+        Me.TabControl2.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.TabControl2.Location = New System.Drawing.Point(0, 0)
+        Me.TabControl2.Name = "TabControl2"
+        Me.TabControl2.SelectedIndex = 0
+        Me.TabControl2.Size = New System.Drawing.Size(764, 472)
+        Me.TabControl2.TabIndex = 0
+        '
+        'TabPage1
+        '
+        Me.TabPage1.Controls.Add(Me.tblProduct)
+        Me.TabPage1.Location = New System.Drawing.Point(4, 22)
+        Me.TabPage1.Name = "TabPage1"
+        Me.TabPage1.Padding = New System.Windows.Forms.Padding(3)
+        Me.TabPage1.Size = New System.Drawing.Size(756, 446)
+        Me.TabPage1.TabIndex = 0
+        Me.TabPage1.Text = "Inventory"
+        Me.TabPage1.UseVisualStyleBackColor = True
+        '
         'tblProduct
         '
         Me.tblProduct.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.tblProduct.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.tblProduct.Location = New System.Drawing.Point(0, 0)
+        Me.tblProduct.Location = New System.Drawing.Point(3, 3)
         Me.tblProduct.Name = "tblProduct"
-        Me.tblProduct.Size = New System.Drawing.Size(764, 472)
+        Me.tblProduct.Size = New System.Drawing.Size(750, 440)
         Me.tblProduct.TabIndex = 0
+        '
+        'TabPage2
+        '
+        Me.TabPage2.Controls.Add(Me.TableLayoutPanel36)
+        Me.TabPage2.Location = New System.Drawing.Point(4, 22)
+        Me.TabPage2.Name = "TabPage2"
+        Me.TabPage2.Padding = New System.Windows.Forms.Padding(3)
+        Me.TabPage2.Size = New System.Drawing.Size(756, 446)
+        Me.TabPage2.TabIndex = 1
+        Me.TabPage2.Text = "Inventory By Job No."
+        Me.TabPage2.UseVisualStyleBackColor = True
+        '
+        'TableLayoutPanel36
+        '
+        Me.TableLayoutPanel36.BackColor = System.Drawing.Color.FromArgb(CType(CType(83, Byte), Integer), CType(CType(93, Byte), Integer), CType(CType(102, Byte), Integer))
+        Me.TableLayoutPanel36.ColumnCount = 1
+        Me.TableLayoutPanel36.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
+        Me.TableLayoutPanel36.Controls.Add(Me.Panel94, 0, 0)
+        Me.TableLayoutPanel36.Controls.Add(Me.Panel95, 0, 1)
+        Me.TableLayoutPanel36.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.TableLayoutPanel36.Location = New System.Drawing.Point(3, 3)
+        Me.TableLayoutPanel36.Name = "TableLayoutPanel36"
+        Me.TableLayoutPanel36.RowCount = 2
+        Me.TableLayoutPanel36.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50.0!))
+        Me.TableLayoutPanel36.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
+        Me.TableLayoutPanel36.Size = New System.Drawing.Size(750, 440)
+        Me.TableLayoutPanel36.TabIndex = 0
+        '
+        'Panel94
+        '
+        Me.Panel94.Controls.Add(Me.PictureBox3)
+        Me.Panel94.Controls.Add(Me.txtFindProducJobNo)
+        Me.Panel94.Controls.Add(Me.Label97)
+        Me.Panel94.Controls.Add(Me.cmbJobProduct)
+        Me.Panel94.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Panel94.Location = New System.Drawing.Point(3, 3)
+        Me.Panel94.Name = "Panel94"
+        Me.Panel94.Size = New System.Drawing.Size(744, 44)
+        Me.Panel94.TabIndex = 0
+        '
+        'PictureBox3
+        '
+        Me.PictureBox3.Image = Global.AVT_TRAKING.My.Resources.Resources.loupe
+        Me.PictureBox3.Location = New System.Drawing.Point(417, 9)
+        Me.PictureBox3.Name = "PictureBox3"
+        Me.PictureBox3.Size = New System.Drawing.Size(30, 27)
+        Me.PictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
+        Me.PictureBox3.TabIndex = 15
+        Me.PictureBox3.TabStop = False
+        '
+        'txtFindProducJobNo
+        '
+        Me.txtFindProducJobNo.Location = New System.Drawing.Point(277, 13)
+        Me.txtFindProducJobNo.Name = "txtFindProducJobNo"
+        Me.txtFindProducJobNo.Size = New System.Drawing.Size(134, 21)
+        Me.txtFindProducJobNo.TabIndex = 14
+        '
+        'Label97
+        '
+        Me.Label97.AutoSize = True
+        Me.Label97.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.Label97.Location = New System.Drawing.Point(13, 18)
+        Me.Label97.Name = "Label97"
+        Me.Label97.Size = New System.Drawing.Size(49, 13)
+        Me.Label97.TabIndex = 12
+        Me.Label97.Text = "Job No."
+        '
+        'cmbJobProduct
+        '
+        Me.cmbJobProduct.FormattingEnabled = True
+        Me.cmbJobProduct.Location = New System.Drawing.Point(68, 13)
+        Me.cmbJobProduct.Name = "cmbJobProduct"
+        Me.cmbJobProduct.Size = New System.Drawing.Size(134, 21)
+        Me.cmbJobProduct.TabIndex = 11
+        '
+        'Panel95
+        '
+        Me.Panel95.Controls.Add(Me.tblProductByJobNo)
+        Me.Panel95.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Panel95.Location = New System.Drawing.Point(3, 53)
+        Me.Panel95.Name = "Panel95"
+        Me.Panel95.Size = New System.Drawing.Size(744, 384)
+        Me.Panel95.TabIndex = 1
+        '
+        'tblProductByJobNo
+        '
+        Me.tblProductByJobNo.AllowUserToAddRows = False
+        Me.tblProductByJobNo.AllowUserToDeleteRows = False
+        Me.tblProductByJobNo.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.tblProductByJobNo.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.tblProductByJobNo.Location = New System.Drawing.Point(0, 0)
+        Me.tblProductByJobNo.Name = "tblProductByJobNo"
+        Me.tblProductByJobNo.Size = New System.Drawing.Size(744, 384)
+        Me.tblProductByJobNo.TabIndex = 0
+        '
+        'TabPage3
+        '
+        Me.TabPage3.Controls.Add(Me.TableLayoutPanel37)
+        Me.TabPage3.Location = New System.Drawing.Point(4, 22)
+        Me.TabPage3.Name = "TabPage3"
+        Me.TabPage3.Size = New System.Drawing.Size(756, 446)
+        Me.TabPage3.TabIndex = 2
+        Me.TabPage3.Text = "Utilization"
+        Me.TabPage3.UseVisualStyleBackColor = True
+        '
+        'TableLayoutPanel37
+        '
+        Me.TableLayoutPanel37.BackColor = System.Drawing.Color.FromArgb(CType(CType(83, Byte), Integer), CType(CType(93, Byte), Integer), CType(CType(102, Byte), Integer))
+        Me.TableLayoutPanel37.ColumnCount = 2
+        Me.TableLayoutPanel37.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
+        Me.TableLayoutPanel37.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
+        Me.TableLayoutPanel37.Controls.Add(Me.GroupBox11, 1, 2)
+        Me.TableLayoutPanel37.Controls.Add(Me.GroupBox10, 1, 1)
+        Me.TableLayoutPanel37.Controls.Add(Me.GroupBox9, 0, 3)
+        Me.TableLayoutPanel37.Controls.Add(Me.Panel96, 0, 0)
+        Me.TableLayoutPanel37.Controls.Add(Me.GroupBox7, 0, 1)
+        Me.TableLayoutPanel37.Controls.Add(Me.GroupBox8, 0, 2)
+        Me.TableLayoutPanel37.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.TableLayoutPanel37.Location = New System.Drawing.Point(0, 0)
+        Me.TableLayoutPanel37.Name = "TableLayoutPanel37"
+        Me.TableLayoutPanel37.RowCount = 4
+        Me.TableLayoutPanel37.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40.0!))
+        Me.TableLayoutPanel37.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25.0!))
+        Me.TableLayoutPanel37.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25.0!))
+        Me.TableLayoutPanel37.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25.0!))
+        Me.TableLayoutPanel37.Size = New System.Drawing.Size(756, 446)
+        Me.TableLayoutPanel37.TabIndex = 0
+        '
+        'GroupBox11
+        '
+        Me.GroupBox11.Controls.Add(Me.tblOutBoundMaterial)
+        Me.GroupBox11.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.GroupBox11.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.GroupBox11.Location = New System.Drawing.Point(381, 178)
+        Me.GroupBox11.Name = "GroupBox11"
+        Me.GroupBox11.Size = New System.Drawing.Size(372, 129)
+        Me.GroupBox11.TabIndex = 2
+        Me.GroupBox11.TabStop = False
+        Me.GroupBox11.Text = "OUT-BOUND MATERIAL"
+        '
+        'tblOutBoundMaterial
+        '
+        Me.tblOutBoundMaterial.AllowUserToAddRows = False
+        Me.tblOutBoundMaterial.AllowUserToDeleteRows = False
+        Me.tblOutBoundMaterial.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
+        Me.tblOutBoundMaterial.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.tblOutBoundMaterial.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.DataGridViewTextBoxColumn1, Me.DataGridViewTextBoxColumn2, Me.DataGridViewTextBoxColumn3, Me.DataGridViewTextBoxColumn4})
+        DataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle11.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle11.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle11.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle11.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle11.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.tblOutBoundMaterial.DefaultCellStyle = DataGridViewCellStyle11
+        Me.tblOutBoundMaterial.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.tblOutBoundMaterial.Location = New System.Drawing.Point(3, 17)
+        Me.tblOutBoundMaterial.Name = "tblOutBoundMaterial"
+        Me.tblOutBoundMaterial.ReadOnly = True
+        Me.tblOutBoundMaterial.Size = New System.Drawing.Size(366, 109)
+        Me.tblOutBoundMaterial.TabIndex = 1
+        '
+        'DataGridViewTextBoxColumn1
+        '
+        Me.DataGridViewTextBoxColumn1.HeaderText = "Ticket No"
+        Me.DataGridViewTextBoxColumn1.Name = "DataGridViewTextBoxColumn1"
+        Me.DataGridViewTextBoxColumn1.ReadOnly = True
+        '
+        'DataGridViewTextBoxColumn2
+        '
+        Me.DataGridViewTextBoxColumn2.HeaderText = "Date"
+        Me.DataGridViewTextBoxColumn2.Name = "DataGridViewTextBoxColumn2"
+        Me.DataGridViewTextBoxColumn2.ReadOnly = True
+        '
+        'DataGridViewTextBoxColumn3
+        '
+        Me.DataGridViewTextBoxColumn3.HeaderText = "Product ID"
+        Me.DataGridViewTextBoxColumn3.Name = "DataGridViewTextBoxColumn3"
+        Me.DataGridViewTextBoxColumn3.ReadOnly = True
+        '
+        'DataGridViewTextBoxColumn4
+        '
+        Me.DataGridViewTextBoxColumn4.HeaderText = "Qty"
+        Me.DataGridViewTextBoxColumn4.Name = "DataGridViewTextBoxColumn4"
+        Me.DataGridViewTextBoxColumn4.ReadOnly = True
+        '
+        'GroupBox10
+        '
+        Me.GroupBox10.Controls.Add(Me.tblInBoundMaterial)
+        Me.GroupBox10.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.GroupBox10.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.GroupBox10.Location = New System.Drawing.Point(381, 43)
+        Me.GroupBox10.Name = "GroupBox10"
+        Me.GroupBox10.Size = New System.Drawing.Size(372, 129)
+        Me.GroupBox10.TabIndex = 2
+        Me.GroupBox10.TabStop = False
+        Me.GroupBox10.Text = "IN-BOUND MATERIAL"
+        '
+        'tblInBoundMaterial
+        '
+        Me.tblInBoundMaterial.AllowUserToAddRows = False
+        Me.tblInBoundMaterial.AllowUserToDeleteRows = False
+        Me.tblInBoundMaterial.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
+        Me.tblInBoundMaterial.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.tblInBoundMaterial.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.TicketNoIn, Me.DateIn, Me.ProductIDIn, Me.QtyIn})
+        DataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle12.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle12.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle12.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle12.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle12.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.tblInBoundMaterial.DefaultCellStyle = DataGridViewCellStyle12
+        Me.tblInBoundMaterial.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.tblInBoundMaterial.Location = New System.Drawing.Point(3, 17)
+        Me.tblInBoundMaterial.Name = "tblInBoundMaterial"
+        Me.tblInBoundMaterial.ReadOnly = True
+        Me.tblInBoundMaterial.Size = New System.Drawing.Size(366, 109)
+        Me.tblInBoundMaterial.TabIndex = 0
+        '
+        'TicketNoIn
+        '
+        Me.TicketNoIn.HeaderText = "Ticket No"
+        Me.TicketNoIn.Name = "TicketNoIn"
+        Me.TicketNoIn.ReadOnly = True
+        '
+        'DateIn
+        '
+        Me.DateIn.HeaderText = "Date"
+        Me.DateIn.Name = "DateIn"
+        Me.DateIn.ReadOnly = True
+        '
+        'ProductIDIn
+        '
+        Me.ProductIDIn.HeaderText = "Product ID"
+        Me.ProductIDIn.Name = "ProductIDIn"
+        Me.ProductIDIn.ReadOnly = True
+        '
+        'QtyIn
+        '
+        Me.QtyIn.HeaderText = "Qty"
+        Me.QtyIn.Name = "QtyIn"
+        Me.QtyIn.ReadOnly = True
+        '
+        'GroupBox9
+        '
+        Me.GroupBox9.Controls.Add(Me.tblDismantleMaterial)
+        Me.GroupBox9.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.GroupBox9.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.GroupBox9.Location = New System.Drawing.Point(3, 313)
+        Me.GroupBox9.Name = "GroupBox9"
+        Me.GroupBox9.Size = New System.Drawing.Size(372, 130)
+        Me.GroupBox9.TabIndex = 2
+        Me.GroupBox9.TabStop = False
+        Me.GroupBox9.Text = "DISMANTLE MATERIAL"
+        '
+        'tblDismantleMaterial
+        '
+        Me.tblDismantleMaterial.AllowUserToAddRows = False
+        Me.tblDismantleMaterial.AllowUserToDeleteRows = False
+        Me.tblDismantleMaterial.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
+        Me.tblDismantleMaterial.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.tblDismantleMaterial.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.TagNoDis, Me.ProductDis, Me.QtyDis, Me.DismantleDis})
+        DataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle13.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle13.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle13.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle13.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle13.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle13.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.tblDismantleMaterial.DefaultCellStyle = DataGridViewCellStyle13
+        Me.tblDismantleMaterial.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.tblDismantleMaterial.Location = New System.Drawing.Point(3, 17)
+        Me.tblDismantleMaterial.Name = "tblDismantleMaterial"
+        Me.tblDismantleMaterial.ReadOnly = True
+        Me.tblDismantleMaterial.Size = New System.Drawing.Size(366, 110)
+        Me.tblDismantleMaterial.TabIndex = 1
+        '
+        'TagNoDis
+        '
+        Me.TagNoDis.HeaderText = "Tag No"
+        Me.TagNoDis.Name = "TagNoDis"
+        Me.TagNoDis.ReadOnly = True
+        '
+        'ProductDis
+        '
+        Me.ProductDis.HeaderText = "ID"
+        Me.ProductDis.Name = "ProductDis"
+        Me.ProductDis.ReadOnly = True
+        '
+        'QtyDis
+        '
+        Me.QtyDis.HeaderText = "Qty"
+        Me.QtyDis.Name = "QtyDis"
+        Me.QtyDis.ReadOnly = True
+        '
+        'DismantleDis
+        '
+        Me.DismantleDis.HeaderText = "Dism"
+        Me.DismantleDis.Name = "DismantleDis"
+        Me.DismantleDis.ReadOnly = True
+        '
+        'Panel96
+        '
+        Me.Panel96.Controls.Add(Me.PictureBox4)
+        Me.Panel96.Controls.Add(Me.cmbProductUtilization)
+        Me.Panel96.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Panel96.Location = New System.Drawing.Point(3, 3)
+        Me.Panel96.Name = "Panel96"
+        Me.Panel96.Size = New System.Drawing.Size(372, 34)
+        Me.Panel96.TabIndex = 0
+        '
+        'PictureBox4
+        '
+        Me.PictureBox4.Image = Global.AVT_TRAKING.My.Resources.Resources.loupe
+        Me.PictureBox4.Location = New System.Drawing.Point(219, 4)
+        Me.PictureBox4.Name = "PictureBox4"
+        Me.PictureBox4.Size = New System.Drawing.Size(30, 27)
+        Me.PictureBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
+        Me.PictureBox4.TabIndex = 16
+        Me.PictureBox4.TabStop = False
+        '
+        'cmbProductUtilization
+        '
+        Me.cmbProductUtilization.FormattingEnabled = True
+        Me.cmbProductUtilization.Location = New System.Drawing.Point(6, 5)
+        Me.cmbProductUtilization.Name = "cmbProductUtilization"
+        Me.cmbProductUtilization.Size = New System.Drawing.Size(209, 21)
+        Me.cmbProductUtilization.TabIndex = 0
+        '
+        'GroupBox7
+        '
+        Me.GroupBox7.Controls.Add(Me.tblBuildsMaterial)
+        Me.GroupBox7.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.GroupBox7.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.GroupBox7.Location = New System.Drawing.Point(3, 43)
+        Me.GroupBox7.Name = "GroupBox7"
+        Me.GroupBox7.Size = New System.Drawing.Size(372, 129)
+        Me.GroupBox7.TabIndex = 1
+        Me.GroupBox7.TabStop = False
+        Me.GroupBox7.Text = "BUILDS MATERIAL"
+        '
+        'tblBuildsMaterial
+        '
+        Me.tblBuildsMaterial.AllowUserToAddRows = False
+        Me.tblBuildsMaterial.AllowUserToDeleteRows = False
+        Me.tblBuildsMaterial.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
+        Me.tblBuildsMaterial.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.tblBuildsMaterial.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.TagNoSc, Me.ProductIdSc, Me.QtySc, Me.BuildSc})
+        DataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle14.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle14.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle14.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle14.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle14.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle14.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.tblBuildsMaterial.DefaultCellStyle = DataGridViewCellStyle14
+        Me.tblBuildsMaterial.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.tblBuildsMaterial.Location = New System.Drawing.Point(3, 17)
+        Me.tblBuildsMaterial.Name = "tblBuildsMaterial"
+        Me.tblBuildsMaterial.ReadOnly = True
+        Me.tblBuildsMaterial.Size = New System.Drawing.Size(366, 109)
+        Me.tblBuildsMaterial.TabIndex = 0
+        '
+        'TagNoSc
+        '
+        Me.TagNoSc.HeaderText = "Tag No"
+        Me.TagNoSc.Name = "TagNoSc"
+        Me.TagNoSc.ReadOnly = True
+        '
+        'ProductIdSc
+        '
+        Me.ProductIdSc.HeaderText = "ID"
+        Me.ProductIdSc.Name = "ProductIdSc"
+        Me.ProductIdSc.ReadOnly = True
+        '
+        'QtySc
+        '
+        Me.QtySc.HeaderText = "Qty"
+        Me.QtySc.Name = "QtySc"
+        Me.QtySc.ReadOnly = True
+        '
+        'BuildSc
+        '
+        Me.BuildSc.HeaderText = "Build"
+        Me.BuildSc.Name = "BuildSc"
+        Me.BuildSc.ReadOnly = True
+        '
+        'GroupBox8
+        '
+        Me.GroupBox8.Controls.Add(Me.tblModificationMaterial)
+        Me.GroupBox8.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.GroupBox8.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.GroupBox8.Location = New System.Drawing.Point(3, 178)
+        Me.GroupBox8.Name = "GroupBox8"
+        Me.GroupBox8.Size = New System.Drawing.Size(372, 129)
+        Me.GroupBox8.TabIndex = 2
+        Me.GroupBox8.TabStop = False
+        Me.GroupBox8.Text = "MODIFICATION MATERIAL"
+        '
+        'tblModificationMaterial
+        '
+        Me.tblModificationMaterial.AllowUserToAddRows = False
+        Me.tblModificationMaterial.AllowUserToDeleteRows = False
+        Me.tblModificationMaterial.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
+        Me.tblModificationMaterial.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.tblModificationMaterial.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.TagNoMod, Me.ModIDMod, Me.ProductIDMod, Me.QtyMod, Me.ModMod})
+        DataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle15.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle15.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle15.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle15.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle15.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle15.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.tblModificationMaterial.DefaultCellStyle = DataGridViewCellStyle15
+        Me.tblModificationMaterial.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.tblModificationMaterial.Location = New System.Drawing.Point(3, 17)
+        Me.tblModificationMaterial.Name = "tblModificationMaterial"
+        Me.tblModificationMaterial.ReadOnly = True
+        Me.tblModificationMaterial.Size = New System.Drawing.Size(366, 109)
+        Me.tblModificationMaterial.TabIndex = 1
+        '
+        'TagNoMod
+        '
+        Me.TagNoMod.HeaderText = "Mod"
+        Me.TagNoMod.Name = "TagNoMod"
+        Me.TagNoMod.ReadOnly = True
+        '
+        'ModIDMod
+        '
+        Me.ModIDMod.HeaderText = "Mod ID"
+        Me.ModIDMod.Name = "ModIDMod"
+        Me.ModIDMod.ReadOnly = True
+        '
+        'ProductIDMod
+        '
+        Me.ProductIDMod.HeaderText = "ID"
+        Me.ProductIDMod.Name = "ProductIDMod"
+        Me.ProductIDMod.ReadOnly = True
+        '
+        'QtyMod
+        '
+        Me.QtyMod.HeaderText = "Qty"
+        Me.QtyMod.Name = "QtyMod"
+        Me.QtyMod.ReadOnly = True
+        '
+        'ModMod
+        '
+        Me.ModMod.HeaderText = "Build"
+        Me.ModMod.Name = "ModMod"
+        Me.ModMod.ReadOnly = True
         '
         'Panel10
         '
@@ -4805,11 +5390,13 @@ Partial Class scafoldTarking
         '
         'txtSalida
         '
-        Me.txtSalida.Location = New System.Drawing.Point(13, 342)
+        Me.txtSalida.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.txtSalida.Location = New System.Drawing.Point(13, 343)
         Me.txtSalida.Multiline = True
         Me.txtSalida.Name = "txtSalida"
         Me.txtSalida.ReadOnly = True
-        Me.txtSalida.Size = New System.Drawing.Size(174, 111)
+        Me.txtSalida.Size = New System.Drawing.Size(174, 121)
         Me.txtSalida.TabIndex = 9
         '
         'btnDownloadExcel
@@ -6530,42 +7117,6 @@ Partial Class scafoldTarking
         Me.btnSaveAll.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         Me.btnSaveAll.UseVisualStyleBackColor = True
         '
-        'btnReportModification
-        '
-        Me.btnReportModification.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnReportModification.FlatAppearance.BorderSize = 0
-        Me.btnReportModification.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(58, Byte), Integer), CType(CType(115, Byte), Integer))
-        Me.btnReportModification.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnReportModification.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnReportModification.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.btnReportModification.Image = Global.AVT_TRAKING.My.Resources.Resources.report
-        Me.btnReportModification.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnReportModification.Location = New System.Drawing.Point(87, 10)
-        Me.btnReportModification.Name = "btnReportModification"
-        Me.btnReportModification.Size = New System.Drawing.Size(85, 29)
-        Me.btnReportModification.TabIndex = 33
-        Me.btnReportModification.Text = "Report"
-        Me.btnReportModification.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.btnReportModification.UseVisualStyleBackColor = True
-        '
-        'btnReportDismantled
-        '
-        Me.btnReportDismantled.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnReportDismantled.FlatAppearance.BorderSize = 0
-        Me.btnReportDismantled.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(58, Byte), Integer), CType(CType(115, Byte), Integer))
-        Me.btnReportDismantled.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnReportDismantled.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnReportDismantled.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.btnReportDismantled.Image = Global.AVT_TRAKING.My.Resources.Resources.report
-        Me.btnReportDismantled.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnReportDismantled.Location = New System.Drawing.Point(113, 11)
-        Me.btnReportDismantled.Name = "btnReportDismantled"
-        Me.btnReportDismantled.Size = New System.Drawing.Size(85, 29)
-        Me.btnReportDismantled.TabIndex = 34
-        Me.btnReportDismantled.Text = "Report"
-        Me.btnReportDismantled.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.btnReportDismantled.UseVisualStyleBackColor = True
-        '
         'scafoldTarking
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -6582,233 +7133,256 @@ Partial Class scafoldTarking
         Me.Panel4.ResumeLayout(False)
         Me.Panel6.ResumeLayout(False)
         Me.Panel93.ResumeLayout(False)
-        CType(Me.tblInComing, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.tblInComing, System.ComponentModel.ISupportInitialize).EndInit
         Me.Panel5.ResumeLayout(False)
-        Me.Panel5.PerformLayout()
+        Me.Panel5.PerformLayout
         Me.tbpOutGoing.ResumeLayout(False)
         Me.Panel7.ResumeLayout(False)
         Me.Panel9.ResumeLayout(False)
-        CType(Me.tblOutGoing, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.tblOutGoing, System.ComponentModel.ISupportInitialize).EndInit
         Me.Panel8.ResumeLayout(False)
-        Me.Panel8.PerformLayout()
+        Me.Panel8.PerformLayout
         Me.tbpScaffoldTraking.ResumeLayout(False)
         Me.Panel41.ResumeLayout(False)
         Me.TableLayoutPanel8.ResumeLayout(False)
         Me.Panel42.ResumeLayout(False)
         Me.Panel52.ResumeLayout(False)
-        CType(Me.tblProductosScaffold, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.tblProductosScaffold, System.ComponentModel.ISupportInitialize).EndInit
         Me.Panel51.ResumeLayout(False)
-        Me.Panel51.PerformLayout()
+        Me.Panel51.PerformLayout
         Me.TableLayoutPanel9.ResumeLayout(False)
         Me.Panel72.ResumeLayout(False)
         Me.TableLayoutPanel10.ResumeLayout(False)
         Me.Panel73.ResumeLayout(False)
         Me.TableLayoutPanel11.ResumeLayout(False)
         Me.Panel69.ResumeLayout(False)
-        Me.Panel69.PerformLayout()
+        Me.Panel69.PerformLayout
         Me.Panel71.ResumeLayout(False)
-        Me.Panel71.PerformLayout()
-        CType(Me.sprDays, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.Panel71.PerformLayout
+        CType(Me.sprDays, System.ComponentModel.ISupportInitialize).EndInit
         Me.Panel70.ResumeLayout(False)
-        Me.Panel70.PerformLayout()
+        Me.Panel70.PerformLayout
         Me.Panel74.ResumeLayout(False)
-        Me.Panel74.PerformLayout()
+        Me.Panel74.PerformLayout
         Me.Panel75.ResumeLayout(False)
         Me.TableLayoutPanel12.ResumeLayout(False)
         Me.Panel46.ResumeLayout(False)
         Me.GroupBox3.ResumeLayout(False)
         Me.Panel92.ResumeLayout(False)
-        CType(Me.tblLeg, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.tblLeg, System.ComponentModel.ISupportInitialize).EndInit
         Me.Panel48.ResumeLayout(False)
-        Me.Panel48.PerformLayout()
+        Me.Panel48.PerformLayout
         Me.Panel50.ResumeLayout(False)
-        Me.Panel50.PerformLayout()
-        CType(Me.sprDecks, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.Panel50.PerformLayout
+        CType(Me.sprDecks, System.ComponentModel.ISupportInitialize).EndInit
         Me.Panel47.ResumeLayout(False)
         Me.TableLayoutPanel13.ResumeLayout(False)
         Me.TableLayoutPanel14.ResumeLayout(False)
         Me.Panel44.ResumeLayout(False)
-        CType(Me.tblScaffoldInformation, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.tblScaffoldInformation, System.ComponentModel.ISupportInitialize).EndInit
         Me.Panel45.ResumeLayout(False)
-        CType(Me.tblActivityHours, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.tblActivityHours, System.ComponentModel.ISupportInitialize).EndInit
         Me.Panel76.ResumeLayout(False)
         Me.TableLayoutPanel15.ResumeLayout(False)
         Me.Panel77.ResumeLayout(False)
         Me.GroupBox1.ResumeLayout(False)
         Me.TableLayoutPanel17.ResumeLayout(False)
-        Me.TableLayoutPanel17.PerformLayout()
+        Me.TableLayoutPanel17.PerformLayout
         Me.Panel78.ResumeLayout(False)
         Me.GroupBox2.ResumeLayout(False)
         Me.TableLayoutPanel16.ResumeLayout(False)
-        Me.TableLayoutPanel16.PerformLayout()
+        Me.TableLayoutPanel16.PerformLayout
         Me.Panel79.ResumeLayout(False)
-        Me.Panel79.PerformLayout()
+        Me.Panel79.PerformLayout
         Me.Panel43.ResumeLayout(False)
-        Me.Panel43.PerformLayout()
+        Me.Panel43.PerformLayout
         Me.Panel80.ResumeLayout(False)
         Me.tbpModification.ResumeLayout(False)
         Me.Panel55.ResumeLayout(False)
         Me.TableLayoutPanel3.ResumeLayout(False)
         Me.Panel64.ResumeLayout(False)
         Me.TableLayoutPanel5.ResumeLayout(False)
-        Me.TableLayoutPanel5.PerformLayout()
-        CType(Me.tblModificationProductMS, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.TableLayoutPanel5.PerformLayout
+        CType(Me.tblModificationProductMS, System.ComponentModel.ISupportInitialize).EndInit
         Me.Panel65.ResumeLayout(False)
         Me.TableLayoutPanel6.ResumeLayout(False)
-        Me.TableLayoutPanel6.PerformLayout()
-        CType(Me.tblScaffoldTotalProductMS, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.TableLayoutPanel6.PerformLayout
+        CType(Me.tblScaffoldTotalProductMS, System.ComponentModel.ISupportInitialize).EndInit
         Me.Panel66.ResumeLayout(False)
         Me.TableLayoutPanel4.ResumeLayout(False)
         Me.GroupBox4.ResumeLayout(False)
         Me.TableLayoutPanel7.ResumeLayout(False)
-        Me.TableLayoutPanel7.PerformLayout()
+        Me.TableLayoutPanel7.PerformLayout
         Me.GroupBox5.ResumeLayout(False)
         Me.Panel86.ResumeLayout(False)
-        CType(Me.tblLegMS, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.tblLegMS, System.ComponentModel.ISupportInitialize).EndInit
         Me.Panel63.ResumeLayout(False)
         Me.Panel68.ResumeLayout(False)
-        Me.Panel68.PerformLayout()
+        Me.Panel68.PerformLayout
         Me.Panel67.ResumeLayout(False)
-        Me.Panel67.PerformLayout()
+        Me.Panel67.PerformLayout
         Me.Panel56.ResumeLayout(False)
         Me.panel58TablesInfoModification.ResumeLayout(False)
         Me.TableLayoutPanel1.ResumeLayout(False)
-        CType(Me.tblActivityHoursSM, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.tblActivityHoursSM, System.ComponentModel.ISupportInitialize).EndInit
         Me.Panel59.ResumeLayout(False)
-        CType(Me.tblScaffoldInformationSM, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.tblScaffoldInformationSM, System.ComponentModel.ISupportInitialize).EndInit
         Me.Panel57.ResumeLayout(False)
         Me.TableLayoutPanel2.ResumeLayout(False)
         Me.Panel58.ResumeLayout(False)
-        Me.Panel58.PerformLayout()
+        Me.Panel58.PerformLayout
         Me.Panel61.ResumeLayout(False)
-        Me.Panel61.PerformLayout()
+        Me.Panel61.PerformLayout
         Me.Panel62.ResumeLayout(False)
-        Me.Panel62.PerformLayout()
+        Me.Panel62.PerformLayout
         Me.tbpDismantle.ResumeLayout(False)
         Me.Panel81.ResumeLayout(False)
         Me.TableLayoutPanel18.ResumeLayout(False)
         Me.Panel82.ResumeLayout(False)
         Me.TableLayoutPanel21.ResumeLayout(False)
-        CType(Me.tblActivityHoursDismantle, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.tblActivityHoursDismantle, System.ComponentModel.ISupportInitialize).EndInit
         Me.GroupBox6.ResumeLayout(False)
         Me.TableLayoutPanel22.ResumeLayout(False)
-        Me.TableLayoutPanel22.PerformLayout()
+        Me.TableLayoutPanel22.PerformLayout
         Me.TableLayoutPanel19.ResumeLayout(False)
         Me.Panel83.ResumeLayout(False)
         Me.TableLayoutPanel25.ResumeLayout(False)
         Me.Panel90.ResumeLayout(False)
-        Me.Panel90.PerformLayout()
+        Me.Panel90.PerformLayout
         Me.Panel91.ResumeLayout(False)
-        Me.Panel91.PerformLayout()
+        Me.Panel91.PerformLayout
         Me.Panel84.ResumeLayout(False)
-        Me.Panel84.PerformLayout()
+        Me.Panel84.PerformLayout
         Me.Panel85.ResumeLayout(False)
-        Me.Panel85.PerformLayout()
+        Me.Panel85.PerformLayout
         Me.TableLayoutPanel20.ResumeLayout(False)
         Me.TableLayoutPanel24.ResumeLayout(False)
         Me.Panel89.ResumeLayout(False)
-        Me.Panel89.PerformLayout()
-        CType(Me.tblTotalScaffoldProductDS, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.Panel89.PerformLayout
+        CType(Me.tblTotalScaffoldProductDS, System.ComponentModel.ISupportInitialize).EndInit
         Me.TableLayoutPanel23.ResumeLayout(False)
-        CType(Me.tblDismantleProduct, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.tblDismantleProduct, System.ComponentModel.ISupportInitialize).EndInit
         Me.Panel87.ResumeLayout(False)
-        Me.Panel87.PerformLayout()
+        Me.Panel87.PerformLayout
         Me.Panel88.ResumeLayout(False)
         Me.tbpProducts.ResumeLayout(False)
         Me.Panel11.ResumeLayout(False)
-        CType(Me.tblProduct, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.TabControl2.ResumeLayout(False)
+        Me.TabPage1.ResumeLayout(False)
+        CType(Me.tblProduct, System.ComponentModel.ISupportInitialize).EndInit
+        Me.TabPage2.ResumeLayout(False)
+        Me.TableLayoutPanel36.ResumeLayout(False)
+        Me.Panel94.ResumeLayout(False)
+        Me.Panel94.PerformLayout
+        CType(Me.PictureBox3, System.ComponentModel.ISupportInitialize).EndInit
+        Me.Panel95.ResumeLayout(False)
+        CType(Me.tblProductByJobNo, System.ComponentModel.ISupportInitialize).EndInit
+        Me.TabPage3.ResumeLayout(False)
+        Me.TableLayoutPanel37.ResumeLayout(False)
+        Me.GroupBox11.ResumeLayout(False)
+        CType(Me.tblOutBoundMaterial, System.ComponentModel.ISupportInitialize).EndInit
+        Me.GroupBox10.ResumeLayout(False)
+        CType(Me.tblInBoundMaterial, System.ComponentModel.ISupportInitialize).EndInit
+        Me.GroupBox9.ResumeLayout(False)
+        CType(Me.tblDismantleMaterial, System.ComponentModel.ISupportInitialize).EndInit
+        Me.Panel96.ResumeLayout(False)
+        CType(Me.PictureBox4, System.ComponentModel.ISupportInitialize).EndInit
+        Me.GroupBox7.ResumeLayout(False)
+        CType(Me.tblBuildsMaterial, System.ComponentModel.ISupportInitialize).EndInit
+        Me.GroupBox8.ResumeLayout(False)
+        CType(Me.tblModificationMaterial, System.ComponentModel.ISupportInitialize).EndInit
         Me.Panel10.ResumeLayout(False)
-        Me.Panel10.PerformLayout()
+        Me.Panel10.PerformLayout
         Me.tbpAreaWOJob.ResumeLayout(False)
         Me.Panel14.ResumeLayout(False)
         Me.TableLayoutPanel26.ResumeLayout(False)
         Me.TableLayoutPanel27.ResumeLayout(False)
         Me.Panel17.ResumeLayout(False)
-        Me.Panel17.PerformLayout()
+        Me.Panel17.PerformLayout
         Me.Panel16.ResumeLayout(False)
-        Me.Panel16.PerformLayout()
+        Me.Panel16.PerformLayout
         Me.Panel19.ResumeLayout(False)
-        CType(Me.tblAreas, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.tblAreas, System.ComponentModel.ISupportInitialize).EndInit
         Me.Panel53.ResumeLayout(False)
-        CType(Me.tblJobCat, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.tblJobCat, System.ComponentModel.ISupportInitialize).EndInit
         Me.Panel29.ResumeLayout(False)
-        CType(Me.tblSubJobs, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.tblSubJobs, System.ComponentModel.ISupportInitialize).EndInit
         Me.Panel15.ResumeLayout(False)
-        Me.Panel15.PerformLayout()
+        Me.Panel15.PerformLayout
         Me.TableLayoutPanel28.ResumeLayout(False)
         Me.Panel18.ResumeLayout(False)
-        Me.Panel18.PerformLayout()
+        Me.Panel18.PerformLayout
         Me.Panel27.ResumeLayout(False)
-        CType(Me.tblWO, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.tblWO, System.ComponentModel.ISupportInitialize).EndInit
         Me.tbpUMClassStatus.ResumeLayout(False)
         Me.Panel21.ResumeLayout(False)
         Me.Panel22.ResumeLayout(False)
         Me.TableLayoutPanel29.ResumeLayout(False)
         Me.TableLayoutPanel31.ResumeLayout(False)
         Me.Panel25.ResumeLayout(False)
-        Me.Panel25.PerformLayout()
+        Me.Panel25.PerformLayout
         Me.Panel37.ResumeLayout(False)
-        CType(Me.tblRentTable, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.tblRentTable, System.ComponentModel.ISupportInitialize).EndInit
         Me.TableLayoutPanel30.ResumeLayout(False)
         Me.Panel24.ResumeLayout(False)
-        Me.Panel24.PerformLayout()
+        Me.Panel24.PerformLayout
         Me.Panel23.ResumeLayout(False)
-        Me.Panel23.PerformLayout()
+        Me.Panel23.PerformLayout
         Me.Panel35.ResumeLayout(False)
-        CType(Me.tblMaterialStatus, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.tblMaterialStatus, System.ComponentModel.ISupportInitialize).EndInit
         Me.Panel31.ResumeLayout(False)
-        CType(Me.tblUnitMeassurement, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.tblUnitMeassurement, System.ComponentModel.ISupportInitialize).EndInit
         Me.Panel33.ResumeLayout(False)
-        CType(Me.tblClassification, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.tblClassification, System.ComponentModel.ISupportInitialize).EndInit
         Me.Panel20.ResumeLayout(False)
-        Me.Panel20.PerformLayout()
+        Me.Panel20.PerformLayout
         Me.tbpSupervisor.ResumeLayout(False)
         Me.Panel38.ResumeLayout(False)
         Me.Panel40.ResumeLayout(False)
-        CType(Me.tblSupervisor, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.tblSupervisor, System.ComponentModel.ISupportInitialize).EndInit
         Me.Panel39.ResumeLayout(False)
-        Me.Panel39.PerformLayout()
+        Me.Panel39.PerformLayout
         Me.tbpCostJobsN.ResumeLayout(False)
         Me.Panel13.ResumeLayout(False)
-        CType(Me.tblCostumersJobs, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.tblCostumersJobs, System.ComponentModel.ISupportInitialize).EndInit
         Me.Panel12.ResumeLayout(False)
-        Me.Panel12.PerformLayout()
+        Me.Panel12.PerformLayout
         Me.tbpEstimating.ResumeLayout(False)
         Me.TableLayoutPanel32.ResumeLayout(False)
         Me.Panel28.ResumeLayout(False)
         Me.TableLayoutPanel34.ResumeLayout(False)
-        Me.TableLayoutPanel34.PerformLayout()
-        CType(Me.sprOperationalDays, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.TableLayoutPanel34.PerformLayout
+        CType(Me.sprOperationalDays, System.ComponentModel.ISupportInitialize).EndInit
         Me.TableLayoutPanel33.ResumeLayout(False)
         Me.Panel30.ResumeLayout(False)
         Me.Panel26.ResumeLayout(False)
         Me.TableLayoutPanel35.ResumeLayout(False)
         Me.Panel36.ResumeLayout(False)
-        Me.Panel36.PerformLayout()
-        CType(Me.sprDecksEst, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.Panel36.PerformLayout
+        CType(Me.sprDecksEst, System.ComponentModel.ISupportInitialize).EndInit
         Me.Panel32.ResumeLayout(False)
-        Me.Panel32.PerformLayout()
-        CType(Me.sprHeigthEst, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.Panel32.PerformLayout
+        CType(Me.sprHeigthEst, System.ComponentModel.ISupportInitialize).EndInit
         Me.Panel34.ResumeLayout(False)
-        Me.Panel34.PerformLayout()
-        CType(Me.sprWidthEst, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.Panel34.PerformLayout
+        CType(Me.sprWidthEst, System.ComponentModel.ISupportInitialize).EndInit
         Me.Panel49.ResumeLayout(False)
-        Me.Panel49.PerformLayout()
-        CType(Me.sprLengthEst, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.Panel49.PerformLayout
+        CType(Me.sprLengthEst, System.ComponentModel.ISupportInitialize).EndInit
         Me.Panel54.ResumeLayout(False)
-        Me.Panel54.PerformLayout()
-        CType(Me.sprGroudHeigthEst, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.Panel54.PerformLayout
+        CType(Me.sprGroudHeigthEst, System.ComponentModel.ISupportInitialize).EndInit
         Me.Panel60.ResumeLayout(False)
-        Me.Panel60.PerformLayout()
-        CType(Me.sprElevatorEst, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.Panel60.PerformLayout
+        CType(Me.sprElevatorEst, System.ComponentModel.ISupportInitialize).EndInit
         Me.Panel2.ResumeLayout(False)
-        Me.Panel2.PerformLayout()
-        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.Panel2.PerformLayout
+        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).EndInit
         Me.TitleBar.ResumeLayout(False)
-        Me.TitleBar.PerformLayout()
-        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.btnRestore, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.btnMaximize, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.TitleBar.PerformLayout
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit
+        CType(Me.btnRestore, System.ComponentModel.ISupportInitialize).EndInit
+        CType(Me.btnMaximize, System.ComponentModel.ISupportInitialize).EndInit
         Me.ResumeLayout(False)
 
     End Sub
@@ -7339,4 +7913,51 @@ Partial Class scafoldTarking
     Friend WithEvents btnReport As Button
     Friend WithEvents btnReportModification As Button
     Friend WithEvents btnReportDismantled As Button
+    Friend WithEvents TabControl2 As TabControl
+    Friend WithEvents TabPage1 As TabPage
+    Friend WithEvents TabPage2 As TabPage
+    Friend WithEvents tblProductByJobNo As DataGridView
+    Friend WithEvents TableLayoutPanel36 As TableLayoutPanel
+    Friend WithEvents Panel94 As Panel
+    Friend WithEvents Label97 As Label
+    Friend WithEvents cmbJobProduct As ComboBox
+    Friend WithEvents Panel95 As Panel
+    Friend WithEvents PictureBox3 As PictureBox
+    Friend WithEvents txtFindProducJobNo As TextBox
+    Friend WithEvents TabPage3 As TabPage
+    Friend WithEvents TableLayoutPanel37 As TableLayoutPanel
+    Friend WithEvents Panel96 As Panel
+    Friend WithEvents GroupBox11 As GroupBox
+    Friend WithEvents GroupBox10 As GroupBox
+    Friend WithEvents GroupBox9 As GroupBox
+    Friend WithEvents cmbProductUtilization As ComboBox
+    Friend WithEvents GroupBox7 As GroupBox
+    Friend WithEvents GroupBox8 As GroupBox
+    Friend WithEvents tblOutBoundMaterial As DataGridView
+    Friend WithEvents DataGridViewTextBoxColumn1 As DataGridViewTextBoxColumn
+    Friend WithEvents DataGridViewTextBoxColumn2 As DataGridViewTextBoxColumn
+    Friend WithEvents DataGridViewTextBoxColumn3 As DataGridViewTextBoxColumn
+    Friend WithEvents DataGridViewTextBoxColumn4 As DataGridViewTextBoxColumn
+    Friend WithEvents tblInBoundMaterial As DataGridView
+    Friend WithEvents TicketNoIn As DataGridViewTextBoxColumn
+    Friend WithEvents DateIn As DataGridViewTextBoxColumn
+    Friend WithEvents ProductIDIn As DataGridViewTextBoxColumn
+    Friend WithEvents QtyIn As DataGridViewTextBoxColumn
+    Friend WithEvents tblDismantleMaterial As DataGridView
+    Friend WithEvents TagNoDis As DataGridViewTextBoxColumn
+    Friend WithEvents ProductDis As DataGridViewTextBoxColumn
+    Friend WithEvents QtyDis As DataGridViewTextBoxColumn
+    Friend WithEvents DismantleDis As DataGridViewTextBoxColumn
+    Friend WithEvents PictureBox4 As PictureBox
+    Friend WithEvents tblBuildsMaterial As DataGridView
+    Friend WithEvents TagNoSc As DataGridViewTextBoxColumn
+    Friend WithEvents ProductIdSc As DataGridViewTextBoxColumn
+    Friend WithEvents QtySc As DataGridViewTextBoxColumn
+    Friend WithEvents BuildSc As DataGridViewTextBoxColumn
+    Friend WithEvents tblModificationMaterial As DataGridView
+    Friend WithEvents TagNoMod As DataGridViewTextBoxColumn
+    Friend WithEvents ModIDMod As DataGridViewTextBoxColumn
+    Friend WithEvents ProductIDMod As DataGridViewTextBoxColumn
+    Friend WithEvents QtyMod As DataGridViewTextBoxColumn
+    Friend WithEvents ModMod As DataGridViewTextBoxColumn
 End Class

@@ -1935,6 +1935,66 @@ begin
 end
 go
 
+create proc [dbo].[sp_Insert_Cient] 
+	@ClientID int,
+	@FirstName varchar (30),
+	@MiddleName varchar (30),
+	@LastName varchar (30),
+	@CompanyName varchar (50),
+	@Status char(1),
+	--Contact
+	@phoneNumer1 varchar(13),
+	@phoneNumer2 varchar(13),
+	@email varchar(50),
+	--Addres
+	@avenue varchar(80),
+	@number int,
+	@city varchar (20),
+	@providence varchar (20),
+	@postalcode int,
+	--Photo
+	@img image,
+	@payTerms varchar(30)
+as
+declare @error int  -- declaro variables para los ID que son nuevos y una variable de error
+declare @idClient varchar(36) 
+declare @idContact varchar(36)
+declare @idHomeAdress varchar(36)
+begin 
+	begin tran 
+		begin try
+			--se inserta un contacto
+			
+				set @idContact = NEWID() 
+				insert into contact values(@idContact,@phoneNumer1,@phoneNumer2,@email)
+				if @@ERROR <> 0 begin set @error = @@ERROR goto solveproblem end
+			
+				set @idHomeAdress = NEWID()
+				insert into HomeAddress values (@idHomeAdress , @avenue , @number , @city , @providence , @postalCode)
+				if @@ERROR <> 0 begin set @error = @@ERROR goto solveproblem end 
+			
+				set @idClient = NEWID()
+				insert into clients values (@idClient , @ClientID, @FirstName, @MiddleName, @LastName , @CompanyName, @idContact , @idHomeAdress ,@Status,@img,@payTerms)
+				if @@ERROR <> 0 begin set @error = @@ERROR goto solveproblem end 
+
+				insert into TrackDefaultElements values(NEWID(),@idClient,'','','','','','','','','','','','','','','','','','','','','','','','','','','','')
+				if @@ERROR <> 0 begin set @error = @@ERROR goto solveproblem end
+				
+				insert into TrackFormatColums values(NEWID(),@idClient,'Record ID1','Force or Reject1','Source1','Date1','Order Type1','Location ID1','Company Code1','Resource ID1','Resource Name1','Area1','Group Name1','Agreement1','Skill Type1','Shift1','Level 1 ID1','Level 2 ID1','Level 3 ID1','Level 4 ID1','Hours Total1','Hours Total Activity Code1','S/T (Hrs)1','S/T Hrs Activity Code1','O/T (Hrs)1','O/T Hrs Activity Code1','D/T (Hrs)1','D/T Hrs Activity Code1','Extra Charges $1','Extra Charges $ Activity Code1','Extra1','Extra 11','Extra 21','Add Time1','Pay Type1','R4 (Hrs)1','R5 (Hrs)1','R6 (Hrs)1','GL Account1','ST Adders1','OT Adders1','DT Adders1','R4 Adders1','R5 Adders1','R6 Adders1')
+				if @@ERROR <> 0 begin set @error = @@ERROR goto solveproblem end
+		end try
+		begin catch
+			goto solveproblem
+		end catch
+	commit tran
+	solveproblem:
+	if @error <> 0
+	begin 
+		rollback tran 
+	end
+end
+go
+
 create proc [dbo].[sp_insert_Employee]
 	--general
 	@numberEmploye int, 
@@ -2152,7 +2212,8 @@ create proc [dbo].[sp_Update_Client]
 	@city varchar (20),
 	@providence varchar (20),
 	@postalcode int,
-	@img image
+	@img image,
+	@payTerms varchar(30)
 as
 declare @error int  -- declaro variables para los ID que son nuevos y una variable de error
 begin 
@@ -2164,7 +2225,7 @@ begin
 				if @@ERROR <> 0 begin set @error = @@ERROR goto solveproblem end
 				update HomeAddress set avenue= @avenue, number = number , city=@city , providence =@providence, postalCode = @postalcode where idHomeAdress = @idAddres
 				if @@ERROR <> 0 begin set @error = @@ERROR goto solveproblem end
-				update  clients set firstName= @FirstName,middleName= @MiddleName,lastName= @LastName ,companyName=@CompanyName,estatus = @Status, photo = @img  where idClient = @idCL
+				update  clients set firstName= @FirstName,middleName= @MiddleName,lastName= @LastName ,companyName=@CompanyName,estatus = @Status, photo = @img ,payTerms = @payTerms where idClient = @idCL
 				if @@ERROR <> 0 begin set @error = @@ERROR goto solveproblem end 
 		end try
 		begin catch
@@ -2177,7 +2238,6 @@ begin
 		rollback tran 
 	end
 end
-GO
 GO
 
 create proc sp_UpdateTotalSpendTask
@@ -2644,7 +2704,7 @@ end
 go
 
 --##############################################################################################
---################## SP REPORT ###################################################
+--################## SP REPORT #################################################################
 --##############################################################################################
 CREATE proc [dbo].[Sp_By_JobNumber]
 @startdate as date, 
@@ -3219,85 +3279,298 @@ begin
 end
 go
 
-----==============================================================================================================================
-----=============== ESTE CODIGO ES PARA AGREGAR LOS WORK CODES PARA EVITAR LOS NULLS EN PERDIEM ==================================
-----==============================================================================================================================
+----============================================================================================================================================
+----========== ESTE CODIGO ES PARA CREAR LA TABLA DE PRODUCTJOB Y CONSULTAR POR SEPARADO LOS PRODUCTOS DEL SCAFFOLD ============================
+----============================================================================================================================================
 
-----######## ACTUALIZAR LOS PROCEDIMIENTOS EN EL ARCHIVO DE SPREPORT #############################################################
-----######## ACTUALIZE Y CAMBIE UN POCO LA CONSULTA DE ESTOS #####################################################################
+--create table productJob (
+--	idProduct int not null,
+--	jobNo bigint not null,
+--	qty float
+--)
+--go
 
----- 1.- ReCapByProject (linea 12 - 106)
----- 2.- select_Time_Sheet_PO (linea 112 - 146   
----- 3.- sp_client_Billing_Porject (linea 381 - 458)
+--alter table productJob with check add constraint pk_idProduct_jobNo
+--primary key (idProduct,jobNo)
+--go
 
---INSERT INTO workCode values
---(95,'LMP','LMP',0,0,0,'',''),
-----(96,'LMI','LMI',0,0,0,'',''),--si ya tiene el LMI no descomentar esta linea 
-----(97,'LMS','LMS',0,0,0,'',''),--si ya tiene el LMS no descomentar esta linea
---(98,'LMA','LMA',0,0,0,'',''),
---(99,'LML','LML',0,0,0,'','')
+--alter table productJob with check add constraint fk_idProduct_productJob
+--foreign key (idProduct) references product(idProduct)
+--go
+
+--alter table productJob with check add constraint fk_jobNo_productJob
+--foreign key (jobNo) references job(jobNo)
+--go
+
+----============================================================================================================================================
+----========== EL SIGUIENTE CODIGO ES PARA INSERTAR Y TENER INFORMACION EN LA TABLA DE PRODUCTJOB RECIEN CREADA ================================
+----============================================================================================================================================
+
+---- ESTE CODIGO INSERTA TODOS LOS PRODUCTOS INGRESADOS POR INCOMING  
+--insert into productJob
+--select distinct
+--pinc.idProduct , 
+--inc.jobNo , 
+--	(select sum(pinc1.quantity) from productComing as pinc1
+--	inner join incoming as inc1 on inc1.ticketNum = pinc1.ticketNum
+--	where pinc1.idProduct = pinc.idProduct and inc.jobNo = inc1.jobNo) as 'quantity'
+--from productComing as pinc
+--inner join incoming as inc on inc.ticketNum = pinc.ticketNum
+--order by pinc.idProduct
+--go
+
+---- EL SIGUIENTE CODIGO MODIFICA LA TABLA DE PRODUCJOB EN BASE AL TOTALPRODUCTSCAFFOLD QUE SERIAN LOS CAMBIOS TOTALES HECHOS (CREACION DE SCAFFOLD Y ,MODIFICAIONES)
+
+--declare @rowIndex as int = 1
+--declare @maxValue as int = (select COUNT(*) from productTotalScaffold where status = 't')
+--declare @idproduct as int 
+--declare @jobNo as bigInt
+--declare @pqty as float
+
+--while @maxValue > 0
+--begin
+--	print concat('fila=',@rowIndex) 
+--	print concat('cont=',@maxValue) 
+--	select @idproduct=t1.idProduct , @jobNo = t1.jobNo , @pqty = t1.quantity  from 
+--	(select ROW_NUMBER() over (order by idProduct asc) as 'row', pts.idProduct , jb.jobNo , pts.quantity from productTotalScaffold as pts
+--	inner join scaffoldTraking as sc on sc.tag = pts.tag
+--	inner join task as tk on tk.idAux = sc.idAux
+--	inner join workOrder  as wo on wo.idAuxWO = tk.idAuxWO 
+--	inner join projectOrder as po on po.idPO = wo.idPO and po.jobNo = wo.jobNo
+--	inner join job as jb on jb.jobNo = po.jobNo
+--	where pts.[status] = 't') 
+--	as t1
+--	where t1.row = @rowIndex
+--	print @idproduct
+--	print @jobNo 
+--	print @pqty 
+--	update productJob set qty = qty - @pqty where idProduct = @idproduct and jobNo = @jobNo 
+--	set @rowIndex += 1
+--	set @maxValue -= 1
+--end
+--go
+----============================================================================================================================================
+----========== ESTE CODIGO ES PARA ACTUALIZAR LOS TABLAS Y PODER INSERTAR Y ACTUALIZAR LOS CLIENTES PARA EL PAY TERMS ==========================
+----============================================================================================================================================
+
+--alter table company 
+--drop column  payTerms
+--go
+
+--alter table clients 
+--add payTerms varchar(30)
+--go
+
+--update clients set payTerms = '' 
+--go
+
+--ALTER proc [dbo].[sp_Update_Client]
+--	@idCL varchar(36),
+--	@ClientID int,
+--	@FirstName varchar (30),
+--	@MiddleName varchar (30),
+--	@LastName varchar (30),
+--	@CompanyName varchar (50),
+--	@Status char(1),
+--	--Contact
+--	@idContact varchar(36),
+--	@phoneNumer1 varchar(13),
+--	@phoneNumer2 varchar(13),
+--	@email varchar(50),
+--	--Addres
+--	@idAddres varchar(36),
+--	@avenue varchar(80),
+--	@number int,
+--	@city varchar (20),
+--	@providence varchar (20),
+--	@postalcode int,
+--	@img image,
+--	@payTerms varchar(30)
+--as
+--declare @error int  -- declaro variables para los ID que son nuevos y una variable de error
+--begin 
+--	begin tran 
+--		begin try
+--			--se inserta un contacto
+
+--				update contact set phoneNumber1= @phoneNumer1 , phoneNumber2=@phoneNumer2 ,email = @email where idContact = @idContact
+--				if @@ERROR <> 0 begin set @error = @@ERROR goto solveproblem end
+--				update HomeAddress set avenue= @avenue, number = number , city=@city , providence =@providence, postalCode = @postalcode where idHomeAdress = @idAddres
+--				if @@ERROR <> 0 begin set @error = @@ERROR goto solveproblem end
+--				update  clients set firstName= @FirstName,middleName= @MiddleName,lastName= @LastName ,companyName=@CompanyName,estatus = @Status, photo = @img ,payTerms = @payTerms where idClient = @idCL
+--				if @@ERROR <> 0 begin set @error = @@ERROR goto solveproblem end 
+--		end try
+--		begin catch
+--			goto solveproblem
+--		end catch
+--	commit tran
+--	solveproblem:
+--	if @error <> 0
+--	begin 
+--		rollback tran 
+--	end
+--end
+--go
+
+--ALTER proc [dbo].[sp_Insert_Cient] 
+--	@ClientID int,
+--	@FirstName varchar (30),
+--	@MiddleName varchar (30),
+--	@LastName varchar (30),
+--	@CompanyName varchar (50),
+--	@Status char(1),
+--	--Contact
+--	@phoneNumer1 varchar(13),
+--	@phoneNumer2 varchar(13),
+--	@email varchar(50),
+--	--Addres
+--	@avenue varchar(80),
+--	@number int,
+--	@city varchar (20),
+--	@providence varchar (20),
+--	@postalcode int,
+--	--Photo
+--	@img image,
+--	@payTerms varchar(30)
+--as
+--declare @error int  -- declaro variables para los ID que son nuevos y una variable de error
+--declare @idClient varchar(36) 
+--declare @idContact varchar(36)
+--declare @idHomeAdress varchar(36)
+--begin 
+--	begin tran 
+--		begin try
+--			--se inserta un contacto
+			
+--				set @idContact = NEWID() 
+--				insert into contact values(@idContact,@phoneNumer1,@phoneNumer2,@email)
+--				if @@ERROR <> 0 begin set @error = @@ERROR goto solveproblem end
+			
+--				set @idHomeAdress = NEWID()
+--				insert into HomeAddress values (@idHomeAdress , @avenue , @number , @city , @providence , @postalCode)
+--				if @@ERROR <> 0 begin set @error = @@ERROR goto solveproblem end 
+			
+--				set @idClient = NEWID()
+--				insert into clients values (@idClient , @ClientID, @FirstName, @MiddleName, @LastName , @CompanyName, @idContact , @idHomeAdress ,@Status,@img,@payTerms)
+--				if @@ERROR <> 0 begin set @error = @@ERROR goto solveproblem end 
+
+--				insert into TrackDefaultElements values(NEWID(),@idClient,'','','','','','','','','','','','','','','','','','','','','','','','','','','','')
+--				if @@ERROR <> 0 begin set @error = @@ERROR goto solveproblem end
+				
+--				insert into TrackFormatColums values(NEWID(),@idClient,'Record ID1','Force or Reject1','Source1','Date1','Order Type1','Location ID1','Company Code1','Resource ID1','Resource Name1','Area1','Group Name1','Agreement1','Skill Type1','Shift1','Level 1 ID1','Level 2 ID1','Level 3 ID1','Level 4 ID1','Hours Total1','Hours Total Activity Code1','S/T (Hrs)1','S/T Hrs Activity Code1','O/T (Hrs)1','O/T Hrs Activity Code1','D/T (Hrs)1','D/T Hrs Activity Code1','Extra Charges $1','Extra Charges $ Activity Code1','Extra1','Extra 11','Extra 21','Add Time1','Pay Type1','R4 (Hrs)1','R5 (Hrs)1','R6 (Hrs)1','GL Account1','ST Adders1','OT Adders1','DT Adders1','R4 Adders1','R5 Adders1','R6 Adders1')
+--				if @@ERROR <> 0 begin set @error = @@ERROR goto solveproblem end
+--		end try
+--		begin catch
+--			goto solveproblem
+--		end catch
+--	commit tran
+--	solveproblem:
+--	if @error <> 0
+--	begin 
+--		rollback tran 
+--	end
+--end
 --GO
 
-----==============================================================================================================================
-----=============== ESTE CODIGO ES PARA ACTUALIZAR EL PROCEDIMIENTO DE INVOICE PO DETALLADO ======================================
-----==============================================================================================================================
+----############################################################################################################################################
+----########## ESTE CODIGO ES PARA AGREGAR EL PROCEDIMIENTO DE SP_SCF_MATERIAL_INVENTORY NUEVO REPORTE #########################################
+----############################################################################################################################################
 
---ALTER proc [dbo].[sp_Invoice_PO]
---@numberClient  int,
---@startDate date, 
---@FinalDate date, 
---@idPO bigint,
---@all bit 
---as 
---begin 
+--create proc sp_SCF_Material_Inventory
+--@numberClient as int
+--as
+--begin
 --select 
---	cl.numberClient,
---	cl.companyName,
---	jb.jobNo,
---	po.idPO, 
---	SUBSTRING( wc.name,1,iif(CHARINDEX('-',wc.name)=0, len(wc.name) ,(CHARINDEX('-',wc.name)-1))) 'Class',
---	hw.hoursST,
---	(hw.hoursST*wc.billingRate1) as 'CostST',
---	hw.hoursOT,
---	(hw.hoursOT*wc.billingRateOT) as 'CostOT',
---	isnull((select sum(amount) from expensesUsed as exu where exu.idHorsWorked = hw.idHorsWorked and exu.dateExpense between @startDate and @FinalDate),0)as 'Perdiem'
---	into #TablaHorasClassPerdiem
---	from hoursWorked as hw 
---		inner join workCode as wc on wc.idWorkCode = hw.idWorkCode
---		inner join task as tk on tk.idAux = hw.idAux 
---		inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO
---		inner join projectOrder as po on po.idPO = wo.idPO and wo.jobNo = po.jobNo
---		inner join job as jb on po.jobNo = jb.jobNo
---		inner join clients as cl on cl.idClient = jb.idClient
---		where cl.numberClient = @numberClient and hw.dateWorked between @startDate and @FinalDate and po.idPO like iif(@all = 1 ,'%%%',convert(nvarchar, @idPO))
-
---select
---	distinct
---	t1.numberClient,
---	t1.companyName,
---	t1.jobNo,
---	t1.idPO,
---	t1.Class,
---	(select
---	sum(hoursST)
---	from #TablaHorasClassPerdiem as t2 
---	where t2.numberClient = t2.numberClient and t2.jobNo = t1.jobNo and t2.idPO	= t1.idPO and t2.Class = t1.Class) as 'ST',
---	(select
---	sum(CostST)
---	from #TablaHorasClassPerdiem as t2 
---	where t2.numberClient = t2.numberClient and t2.jobNo = t1.jobNo and t2.idPO	= t1.idPO and t2.Class = t1.Class) as 'CostST',
---	(select
---	sum(hoursOT)
---	from #TablaHorasClassPerdiem as t2 
---	where t2.numberClient = t2.numberClient and t2.jobNo = t1.jobNo and t2.idPO	= t1.idPO and t2.Class = t1.Class) as 'OT',
---	(select
---	sum(CostOT)
---	from #TablaHorasClassPerdiem as t2 
---	where t2.numberClient = t2.numberClient and t2.jobNo = t1.jobNo and t2.idPO	= t1.idPO and t2.Class = t1.Class) as 'CostOT',
---	(select
---	sum(perdiem)
---	from #TablaHorasClassPerdiem as t2 
---	where t2.numberClient = t2.numberClient and t2.jobNo = t1.jobNo and t2.idPO	= t1.idPO and t2.Class = t1.Class) as 'Perdiem'
---from #TablaHorasClassPerdiem as t1 
---drop table #TablaHorasClassPerdiem
+--jb.jobNo,
+--pd.QID,
+--pd.idProduct ,
+--pd.name ,
+--ISNULL((select sum(pinc.quantity) from productComing as pinc 
+--inner join incoming as inc on inc.ticketNum = pinc.ticketNum
+--where inc.jobNo = jb.jobNo and pinc.idProduct = pj.idProduct),0) as 'Incoming', 
+--ISNULL((select sum(pout.quantity) from productOutGoing as pout 
+--inner join outgoing as outg on outg.ticketNum = outg.ticketNum
+--where outg.jobNo = jb.jobNo and pout.idProduct = pj.idProduct),0) as 'Outgoing',
+--ISNULL(pj.qty,0) as 'Inventory',
+--ISNULL((select sum(pts.quantity) from productTotalScaffold as pts
+--inner join scaffoldTraking as sc on sc.tag = pts.tag
+--inner join task as tk on tk.idAux = sc.idAux 
+--inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO
+--inner join projectOrder as po on po.idPO = wo.idPO and po.jobNo = wo.jobNo 
+--inner join job as jb1 on jb1.jobNo = po.jobNo
+--where jb1.jobNo = jb.jobNo and pts.idProduct = pj.idProduct),0) as 'OnRent',
+--ISNULL(pd.quantity,0) as 'InYard',
+--pd.[weight] as 'Weight'
+--from  productJob as pj  
+--inner join product as pd on pd.idProduct = pj.idProduct 
+--left join job as jb on jb.jobNo = pj.jobNo
+--inner join clients as cl on cl.idClient = jb.idClient 
+--where cl.numberClient  = @numberClient
+--ORDER BY pd.idProduct
 --end
+
+----############################################################################################################################################
+----########## ESTE CODIGO ES PARA ACTUALIZAR EL PROCEDIMIENTO SP_SCF_RENTAL_DATAILS ###########################################################
+----############################################################################################################################################
+
+--ALTER proc [dbo].[sp_SCF_Rental_Details]
+--@startDate date,
+--@FinalDate  date,
+--@numberClient int
+--as
+--begin 
+--	select * 
+--from(
+--select 
+--sc.tag,
+--cl.companyName,
+--sc.location as 'Location',
+--sj.[description] , 
+--CONCAT(wo.idWO,'-',tk.task) as 'PO/WONo',
+--CONCAT(sci.[type],'- ',sci.[length],' x',sci.width,' x',sci.heigth,'- ',(sci.descks+sci.extraDeck),' Decks') as 'ScaffoldDescription',
+--sc.reqComp as 'dateRequest',
+--sc.contact as 'requestBy', 
+--sc.buildDate as 'buildDate', 
+----DATEADD(DAY,isnull(jc.[days],0),sc.buildDate) as 'ContractEndDate',
+--dis.dismantleDate as 'dismantleDate',
+--isnull(dis.rentStopDate,getdate()) as 'rentStopDate',
+----isnull(jc.[days],0) as 'Contract days',
+--DATEDIFF(DAY,sc.buildDate,ISNULL(dis.rentStopDate,GETDATE())) as 'ActivityDays',
+--IIF(sc.tag is not null,'Build','Mod') as 'Task',
+--IIF( ISNULL(dis.rentStopDate,GETDATE()) >= @startDate ,
+--	IIF( DATEADD(DAY,isnull(jc.[days],0),sc.buildDate) <= @FinalDate -- EL DIA FINAL DE RENTA GRATIS ES MENOR O IGUAL AL FINALDATE?
+--	,-- SI ES MENOR O IGUAL POR LO TANTO SI HAY DIAS QUE COBRAR (ESTA DENTRO DEL RANGO)
+--		IIF(DATEADD(DAY,isnull(jc.[days],0),sc.buildDate) > @startDate -- (PUNTO DE INICIO) EL DIA FINAL DE RENTA GRATIS ES MAYOR AL STARTDATE?
+--		,--DIAFINAL DE RENTA GRATIS
+--			IIF(dis.rentStopDate < @FinalDate -- EL DIA FINAL DE RENTA GRATIS ES MENOR QUE EL FINALDATE?
+--			,DATEDIFF(DAY,DATEADD(DAY,isnull(jc.[days],0),sc.buildDate),dis.rentStopDate)
+--			,DATEDIFF(DAY,DATEADD(DAY,isnull(jc.[days],0),sc.buildDate),@FinalDate))
+--		,--STARTDATE
+--			IIF(dis.rentStopDate < @FinalDate, 
+--				DATEDIFF(DAY,@startDate,dis.rentStopDate), 
+--				DATEDIFF(DAY,@startDate,@finalDate)))	,-- NO ES MENOR O IGUAL POR ENDE NO HAY DIAS QUE COBAR (NO ESTA DENTRO DEL RANGO)
+--	0),0) AS 'DaysRent',
+----IIF(DATEADD(DAY,isnull(jc.[days],0),sc.buildDate)<@FinalDate,1,0) as 'ExedContractDate',
+--(select COUNT(*) from productTotalScaffold where tag = sc.tag) AS 'QTY'
+--,pts.idProduct as 'idPrduct',
+--pts.quantity as 'qtyPoduct',
+--pd.name as 'productName',
+--ISNULL(pd.dailyRentalRate,0) as 'dailyRent',
+--(pts.quantity * ISNULL(pd.dailyRentalRate,0)) as 'Total'
+--from scaffoldTraking as sc 
+--left join areas as ar on ar.idArea = sc.idArea
+--left join subJobs as sj on sj.idSubJob = sc.idSubJob
+--left join jobCat as jc on jc.idJobCat = sc.idJobCat
+--left join scaffoldInformation as sci on sci.tag = sc.tag
+--left join dismantle as dis on dis.tag = sc.tag
+--left join productTotalScaffold as pts on pts.tag = sc.tag
+--inner join product as pd on pd.idProduct= pts.idProduct
+--inner join task as tk on tk.idAux = sc.idAux
+--inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO
+--inner join projectOrder as po on po.idPO = wo.idPO and po.jobNo = wo.jobNo
+--inner join job as jb on jb.jobNo = po.jobNo 
+--inner join clients as cl on cl.idClient = jb.idClient
+--where cl.numberClient = @numberClient
+--) as T1 where T1.ActivityDays > 0 
+--end
+--go

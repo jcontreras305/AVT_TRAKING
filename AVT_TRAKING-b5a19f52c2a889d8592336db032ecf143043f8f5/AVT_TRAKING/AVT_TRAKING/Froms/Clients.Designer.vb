@@ -98,6 +98,8 @@ Partial Class Clients
         Me.btnMaximize = New System.Windows.Forms.PictureBox()
         Me.Label10 = New System.Windows.Forms.Label()
         Me.Button1 = New System.Windows.Forms.Button()
+        Me.Label13 = New System.Windows.Forms.Label()
+        Me.txtPayTerms = New System.Windows.Forms.TextBox()
         CType(Me.tblClientes, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
@@ -144,13 +146,13 @@ Partial Class Clients
         Me.txtIdClient.Location = New System.Drawing.Point(109, 8)
         Me.txtIdClient.Margin = New System.Windows.Forms.Padding(2)
         Me.txtIdClient.Name = "txtIdClient"
-        Me.txtIdClient.Size = New System.Drawing.Size(126, 23)
+        Me.txtIdClient.Size = New System.Drawing.Size(125, 23)
         Me.txtIdClient.TabIndex = 2
         '
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(15, 23)
+        Me.Label2.Location = New System.Drawing.Point(15, 20)
         Me.Label2.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(123, 16)
@@ -217,7 +219,7 @@ Partial Class Clients
         Me.TableLayoutPanel2.ColumnCount = 3
         Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 47.45763!))
         Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 52.54237!))
-        Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 152.0!))
+        Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 153.0!))
         Me.TableLayoutPanel2.Controls.Add(Me.Panel10, 2, 1)
         Me.TableLayoutPanel2.Controls.Add(Me.Panel9, 1, 1)
         Me.TableLayoutPanel2.Controls.Add(Me.Panel8, 0, 1)
@@ -237,9 +239,9 @@ Partial Class Clients
         '
         Me.Panel10.Controls.Add(Me.btnSelectClient)
         Me.Panel10.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel10.Location = New System.Drawing.Point(565, 175)
+        Me.Panel10.Location = New System.Drawing.Point(564, 175)
         Me.Panel10.Name = "Panel10"
-        Me.Panel10.Size = New System.Drawing.Size(147, 46)
+        Me.Panel10.Size = New System.Drawing.Size(148, 46)
         Me.Panel10.TabIndex = 5
         '
         'btnSelectClient
@@ -252,7 +254,7 @@ Partial Class Clients
         Me.btnSelectClient.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.btnSelectClient.Location = New System.Drawing.Point(0, 0)
         Me.btnSelectClient.Name = "btnSelectClient"
-        Me.btnSelectClient.Size = New System.Drawing.Size(147, 46)
+        Me.btnSelectClient.Size = New System.Drawing.Size(148, 46)
         Me.btnSelectClient.TabIndex = 50
         Me.btnSelectClient.Text = "Select Client"
         Me.btnSelectClient.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -262,7 +264,7 @@ Partial Class Clients
         '
         Me.Panel9.Controls.Add(Me.btnShowAll1)
         Me.Panel9.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel9.Location = New System.Drawing.Point(270, 175)
+        Me.Panel9.Location = New System.Drawing.Point(269, 175)
         Me.Panel9.Name = "Panel9"
         Me.Panel9.Size = New System.Drawing.Size(289, 46)
         Me.Panel9.TabIndex = 4
@@ -290,7 +292,7 @@ Partial Class Clients
         Me.Panel8.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel8.Location = New System.Drawing.Point(3, 175)
         Me.Panel8.Name = "Panel8"
-        Me.Panel8.Size = New System.Drawing.Size(261, 46)
+        Me.Panel8.Size = New System.Drawing.Size(260, 46)
         Me.Panel8.TabIndex = 3
         '
         'txtFiltro
@@ -300,7 +302,7 @@ Partial Class Clients
         Me.txtFiltro.Location = New System.Drawing.Point(72, 15)
         Me.txtFiltro.Margin = New System.Windows.Forms.Padding(2)
         Me.txtFiltro.Name = "txtFiltro"
-        Me.txtFiltro.Size = New System.Drawing.Size(189, 23)
+        Me.txtFiltro.Size = New System.Drawing.Size(188, 23)
         Me.txtFiltro.TabIndex = 10
         '
         'Label6
@@ -316,9 +318,9 @@ Partial Class Clients
         '
         Me.Panel6.Controls.Add(Me.TableLayoutPanel4)
         Me.Panel6.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel6.Location = New System.Drawing.Point(565, 3)
+        Me.Panel6.Location = New System.Drawing.Point(564, 3)
         Me.Panel6.Name = "Panel6"
-        Me.Panel6.Size = New System.Drawing.Size(147, 166)
+        Me.Panel6.Size = New System.Drawing.Size(148, 166)
         Me.Panel6.TabIndex = 2
         '
         'TableLayoutPanel4
@@ -333,7 +335,7 @@ Partial Class Clients
         Me.TableLayoutPanel4.RowCount = 2
         Me.TableLayoutPanel4.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 81.16883!))
         Me.TableLayoutPanel4.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 18.83117!))
-        Me.TableLayoutPanel4.Size = New System.Drawing.Size(147, 166)
+        Me.TableLayoutPanel4.Size = New System.Drawing.Size(148, 166)
         Me.TableLayoutPanel4.TabIndex = 1
         '
         'btnChooseImage
@@ -347,7 +349,7 @@ Partial Class Clients
         Me.btnChooseImage.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.btnChooseImage.Location = New System.Drawing.Point(3, 137)
         Me.btnChooseImage.Name = "btnChooseImage"
-        Me.btnChooseImage.Size = New System.Drawing.Size(141, 26)
+        Me.btnChooseImage.Size = New System.Drawing.Size(142, 26)
         Me.btnChooseImage.TabIndex = 12
         Me.btnChooseImage.Text = "Choose Image ..."
         Me.btnChooseImage.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -360,13 +362,15 @@ Partial Class Clients
         Me.imgPhoto.Image = Global.AVT_TRAKING.My.Resources.Resources.user
         Me.imgPhoto.Location = New System.Drawing.Point(3, 3)
         Me.imgPhoto.Name = "imgPhoto"
-        Me.imgPhoto.Size = New System.Drawing.Size(141, 128)
+        Me.imgPhoto.Size = New System.Drawing.Size(142, 128)
         Me.imgPhoto.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
         Me.imgPhoto.TabIndex = 0
         Me.imgPhoto.TabStop = False
         '
         'Panel7
         '
+        Me.Panel7.Controls.Add(Me.Label13)
+        Me.Panel7.Controls.Add(Me.txtPayTerms)
         Me.Panel7.Controls.Add(Me.Label2)
         Me.Panel7.Controls.Add(Me.txtCompanyName)
         Me.Panel7.Controls.Add(Me.chbStatus)
@@ -374,7 +378,7 @@ Partial Class Clients
         Me.Panel7.Controls.Add(Me.Label11)
         Me.Panel7.Controls.Add(Me.btnUpdate)
         Me.Panel7.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel7.Location = New System.Drawing.Point(270, 3)
+        Me.Panel7.Location = New System.Drawing.Point(269, 3)
         Me.Panel7.Name = "Panel7"
         Me.Panel7.Size = New System.Drawing.Size(289, 166)
         Me.Panel7.TabIndex = 1
@@ -383,7 +387,7 @@ Partial Class Clients
         '
         Me.chbStatus.AutoSize = True
         Me.chbStatus.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
-        Me.chbStatus.Location = New System.Drawing.Point(144, 50)
+        Me.chbStatus.Location = New System.Drawing.Point(144, 79)
         Me.chbStatus.Name = "chbStatus"
         Me.chbStatus.Size = New System.Drawing.Size(76, 20)
         Me.chbStatus.TabIndex = 7
@@ -397,7 +401,7 @@ Partial Class Clients
         Me.btnSaveClient.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnSaveClient.Image = Global.AVT_TRAKING.My.Resources.Resources.save
         Me.btnSaveClient.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnSaveClient.Location = New System.Drawing.Point(60, 98)
+        Me.btnSaveClient.Location = New System.Drawing.Point(60, 126)
         Me.btnSaveClient.Margin = New System.Windows.Forms.Padding(2)
         Me.btnSaveClient.Name = "btnSaveClient"
         Me.btnSaveClient.Size = New System.Drawing.Size(78, 27)
@@ -409,7 +413,7 @@ Partial Class Clients
         'Label11
         '
         Me.Label11.AutoSize = True
-        Me.Label11.Location = New System.Drawing.Point(83, 53)
+        Me.Label11.Location = New System.Drawing.Point(83, 82)
         Me.Label11.Name = "Label11"
         Me.Label11.Size = New System.Drawing.Size(55, 16)
         Me.Label11.TabIndex = 40
@@ -422,7 +426,7 @@ Partial Class Clients
         Me.btnUpdate.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnUpdate.Image = Global.AVT_TRAKING.My.Resources.Resources.update
         Me.btnUpdate.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnUpdate.Location = New System.Drawing.Point(162, 98)
+        Me.btnUpdate.Location = New System.Drawing.Point(162, 126)
         Me.btnUpdate.Margin = New System.Windows.Forms.Padding(2)
         Me.btnUpdate.Name = "btnUpdate"
         Me.btnUpdate.Size = New System.Drawing.Size(91, 29)
@@ -446,7 +450,7 @@ Partial Class Clients
         Me.Panel5.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel5.Location = New System.Drawing.Point(3, 3)
         Me.Panel5.Name = "Panel5"
-        Me.Panel5.Size = New System.Drawing.Size(261, 166)
+        Me.Panel5.Size = New System.Drawing.Size(260, 166)
         Me.Panel5.TabIndex = 0
         '
         'Label7
@@ -486,7 +490,7 @@ Partial Class Clients
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.txtLastName.Location = New System.Drawing.Point(109, 117)
         Me.txtLastName.Name = "txtLastName"
-        Me.txtLastName.Size = New System.Drawing.Size(126, 23)
+        Me.txtLastName.Size = New System.Drawing.Size(125, 23)
         Me.txtLastName.TabIndex = 5
         '
         'txtFirstName
@@ -495,7 +499,7 @@ Partial Class Clients
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.txtFirstName.Location = New System.Drawing.Point(109, 46)
         Me.txtFirstName.Name = "txtFirstName"
-        Me.txtFirstName.Size = New System.Drawing.Size(126, 23)
+        Me.txtFirstName.Size = New System.Drawing.Size(125, 23)
         Me.txtFirstName.TabIndex = 3
         '
         'txtMiddleName
@@ -504,7 +508,7 @@ Partial Class Clients
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.txtMiddleName.Location = New System.Drawing.Point(109, 82)
         Me.txtMiddleName.Name = "txtMiddleName"
-        Me.txtMiddleName.Size = New System.Drawing.Size(126, 23)
+        Me.txtMiddleName.Size = New System.Drawing.Size(125, 23)
         Me.txtMiddleName.TabIndex = 4
         '
         'Label8
@@ -1021,6 +1025,26 @@ Partial Class Clients
         Me.Button1.TabIndex = 22
         Me.Button1.UseVisualStyleBackColor = True
         '
+        'Label13
+        '
+        Me.Label13.AutoSize = True
+        Me.Label13.Location = New System.Drawing.Point(52, 49)
+        Me.Label13.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.Label13.Name = "Label13"
+        Me.Label13.Size = New System.Drawing.Size(84, 16)
+        Me.Label13.TabIndex = 41
+        Me.Label13.Text = "Pay Terms"
+        '
+        'txtPayTerms
+        '
+        Me.txtPayTerms.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.txtPayTerms.Location = New System.Drawing.Point(140, 46)
+        Me.txtPayTerms.Margin = New System.Windows.Forms.Padding(2)
+        Me.txtPayTerms.Name = "txtPayTerms"
+        Me.txtPayTerms.Size = New System.Drawing.Size(146, 23)
+        Me.txtPayTerms.TabIndex = 42
+        '
         'Clients
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1144,4 +1168,6 @@ Partial Class Clients
     Friend WithEvents TableLayoutPanel4 As TableLayoutPanel
     Friend WithEvents btnChooseImage As Button
     Friend WithEvents imgPhoto As PictureBox
+    Friend WithEvents Label13 As Label
+    Friend WithEvents txtPayTerms As TextBox
 End Class

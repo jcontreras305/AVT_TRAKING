@@ -67,6 +67,7 @@ Public Class MetodosClients
             cmd.Parameters.AddWithValue("@city", datos(14))
             cmd.Parameters.AddWithValue("@providence", datos(15))
             cmd.Parameters.AddWithValue("@postalcode", datos(16))
+            cmd.Parameters.AddWithValue("@payTerms", datos(17))
             'image
             cmd.Parameters.Add("@img", SqlDbType.Image).Value = img
             If cmd.ExecuteNonQuery Then
@@ -116,7 +117,7 @@ or ha.city like concat('%','" + text + "','%')", conn)
             Dim cmd As New SqlCommand("
 select cl.idClient,cl.numberClient,cl.firstName,cl.middleName,cl.lastName,cl.companyName,cl.estatus,
 ct.idContact,ct.phoneNumber1, ct.phoneNumber2,ct.email,
-ha.idHomeAdress, ha.avenue ,ha.number, ha.city ,ha.providence,ha.postalCode,photo from
+ha.idHomeAdress, ha.avenue ,ha.number, ha.city ,ha.providence,ha.postalCode,photo,cl.payTerms from
 " + consultaInner, conn)
 
             If cmd.ExecuteNonQuery Then
@@ -126,7 +127,7 @@ ha.idHomeAdress, ha.avenue ,ha.number, ha.city ,ha.providence,ha.postalCode,phot
                 tblClientes.DataSource = dt
             End If
             For Each colum As DataGridViewColumn In tblClientes.Columns
-                If colum.Index = 0 Or colum.Index = 7 Or colum.Index = 11 Or colum.Index = 17 Then
+                If colum.Index = 0 Or colum.Index = 7 Or colum.Index = 11 Or colum.Index = 17 Or colum.Index = 18 Then
                     colum.Visible = False
                 End If
             Next
@@ -159,6 +160,7 @@ ha.idHomeAdress, ha.avenue ,ha.number, ha.city ,ha.providence,ha.postalCode,phot
             cmd.Parameters.AddWithValue("@city", dataList(14))
             cmd.Parameters.AddWithValue("@providence", dataList(15))
             cmd.Parameters.AddWithValue("@postalcode", dataList(16))
+            cmd.Parameters.AddWithValue("@payTerms", dataList(17))
             cmd.Parameters.Add("@img", SqlDbType.Image).Value = img
             If cmd.ExecuteNonQuery Then
                 MsgBox("Successfull")

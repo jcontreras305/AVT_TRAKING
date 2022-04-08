@@ -30,6 +30,32 @@ Module metodosGlobales
         End Try
     End Function
     ''' <summary>
+    ''' Hace una consulta a la BD filtrando por el numberClient, retornando los jobs asignados a ese cliente.
+    ''' </summary>
+    ''' <param name="combo"></param>
+    ''' <param name="idclientClient"></param>
+    ''' <returns>
+    ''' etorna el combo lleno con los empleados en contrados en la BD
+    ''' </returns>
+    Public Function llenarComboJobsReportsIDclient(ByVal combo As ComboBox, ByVal idClient As String) As Boolean
+        Try
+            con.conectar()
+            Dim cmd As New SqlCommand("select jb.jobNo from job as jb inner join clients as cl on cl.idClient = jb.idClient where cl.idClient like '" + If(idClient = "", "%%", idClient) + "'", con.conn) '
+            Dim dr As SqlDataReader = cmd.ExecuteReader()
+            combo.Items.Clear()
+            While dr.Read()
+                combo.Items.Add(dr("jobNo"))
+            End While
+            dr.Close()
+            Return True
+        Catch ex As Exception
+            MsgBox(ex.Message)
+            Return False
+        Finally
+            con.desconectar()
+        End Try
+    End Function
+    ''' <summary>
     ''' Hace una consulta a la BD, retornando los empleados con su numero de empleado
     ''' y su nombre (lastname, firstname y middlename).
     ''' </summary>

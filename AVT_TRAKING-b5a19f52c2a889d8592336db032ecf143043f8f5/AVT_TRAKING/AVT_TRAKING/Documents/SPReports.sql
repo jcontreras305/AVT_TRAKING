@@ -915,7 +915,7 @@ ALTER proc [dbo].[sp_Invoice_PO_Resume]
 @all bit
 as
 begin
-select T1.companyName,T1.city,T1.providence,T1.[Address],T1.postalCode,T1.jobNo,T1.custumerNo,T1.contractNo,T1.idPO,
+select T1.companyName,T1.payTerms,T1.city,T1.providence,T1.[Address],T1.postalCode,T1.jobNo,T1.custumerNo,T1.contractNo,T1.idPO,
 T1.[Total Hours PO],T1.[Total Hours],T1.[Total Labor],
 T1.[Total Expenses],T1.[Total PerDiem],T1.[3rdParty],T1.[ScRent],T1.[CoEQ],T1.[Material],T1.[Subcontractors],T1.[Other],T1.[ExtraCostMaterial]
 ,T1.[Total Material]
@@ -923,6 +923,7 @@ T1.[Total Expenses],T1.[Total PerDiem],T1.[3rdParty],T1.[ScRent],T1.[CoEQ],T1.[M
  from (
 select 
 	cl.companyName,
+	cl.payTerms,
 	ha.city,
 	ha.providence,
 	CONCAT(ha.number,' ',ha.avenue) as 'Address',
@@ -1126,7 +1127,7 @@ go
 --################## SP SELECT MY COMPANY INFORMATION ##########################################
 --##############################################################################################
 --alter proc sp_select_MyComapny_Info
-alter proc sp_select_MyComapny_Info
+ALTER proc [dbo].[sp_select_MyComapny_Info]
 @CompanyName varchar(30)
 as
 begin
@@ -1135,7 +1136,7 @@ select cmp.name,
 	ha.providence,
 	CONCAT(ha.avenue , ' ',ha.number) as 'Address',
 	ha.postalCode,
-	cmp.payTerms,cmp.idContact,
+	cmp.idContact,
 	cmp.invoiceDescr,
 	ct.email,
 	ct.phoneNumber1 as 'PhoneNumber1',

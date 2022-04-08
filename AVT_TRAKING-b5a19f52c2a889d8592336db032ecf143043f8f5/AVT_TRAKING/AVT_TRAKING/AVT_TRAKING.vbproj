@@ -628,6 +628,12 @@
       <DependentUpon>SCFHistoryDismantled.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="RerportsScaffold\SCFMaterialInventory.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SCFMaterialInventory.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="RerportsScaffold\SCFProduct.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -929,6 +935,10 @@
     <EmbeddedResource Include="RerportsScaffold\SCFHistoryDismantled.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>SCFHistoryDismantled.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RerportsScaffold\SCFMaterialInventory.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>SCFMaterialInventory.vb</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="RerportsScaffold\SCFProduct.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
