@@ -118,4 +118,8 @@ Public Class ReportsMenu
         Dim tse As New ScaffoldRentalDatails
         tse.ShowDialog()
     End Sub
+    Private Sub Button20_Click(sender As Object, e As EventArgs) Handles Button20.Click
+        Dim tse As New ScaffoldMaterialInventory
+        tse.ShowDialog()
+    End Sub
 End Class

@@ -1598,45 +1598,65 @@ go
 --################## SP SCF RENTAL DETAILS #####################################################
 --##############################################################################################
 
-ALTER proc sp_SCF_Rental_Details
+ALTER proc [dbo].[sp_SCF_Rental_Details]
 @startDate date,
 @FinalDate  date,
 @numberClient int
 as
 begin 
-	select 
-		sc.tag,
-		cl.companyName,
-		sc.location as 'Location',
-		sj.[description] , 
-		CONCAT(wo.idWO,'-',tk.task) as 'PO/WONo',
-		CONCAT(sci.[type],'- ',sci.[length],' x',sci.width,' x',sci.heigth,'- ',(sci.descks+sci.extraDeck),' Decks') as 'ScaffoldDescription',
-		sc.reqComp as 'dateRequest',
-		sc.contact as 'requestBy', 
-		sc.buildDate as 'buildDate', 
-		dis.dismantleDate as 'dismantleDate',
-		dis.rentStopDate as 'rentStopDate',
-		IIF(DATEDIFF(DAY,sc.buildDate,isnull(dis.dismantleDate,GETDATE()))= 0,1,DATEDIFF(DAY,sc.buildDate,ISNULL(dis.dismantleDate,GETDATE()))) as 'ActiveDays',
-		IIF(sc.tag is not null,'Build','Mod') as 'Task',
-		IIF(DATEDIFF(DAY,IIF(sc.buildDate<@startDate,@startdate,sc.buildDate),IIF(dis.dismantleDate is not Null,IIF(dis.dismantleDate<@FinalDate,dis.dismantleDate,@FinalDate),@FinalDate)) = 0,1,DATEDIFF(DAY,IIF(sc.buildDate<@startDate,@startdate,sc.buildDate),IIF(dis.dismantleDate is not Null,IIF(dis.dismantleDate<@FinalDate,dis.dismantleDate,@FinalDate),@FinalDate)))as 'DaysRent'
-		,(select COUNT(*) from productTotalScaffold where tag = sc.tag) AS 'QTY'
-		,pts.idProduct as 'idPrduct',
-		pts.quantity as 'qtyPoduct',
-		pd.name as 'productName',
-		ISNULL(pd.dailyRentalRate,0) as 'dailyRent',
-		(pts.quantity * ISNULL(pd.dailyRentalRate,0)) as 'Total'
-		from scaffoldTraking as sc 
-		left join areas as ar on ar.idArea = sc.idArea
-		left join subJobs as sj on sj.idSubJob = sc.idSubJob
-		left join scaffoldInformation as sci on sci.tag = sc.tag
-		left join dismantle as dis on dis.tag = sc.tag
-		left join productTotalScaffold as pts on pts.tag = sc.tag
-		inner join product as pd on pd.idProduct= pts.idProduct
-		inner join task as tk on tk.idAux = sc.idAux
-		inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO
-		inner join projectOrder as po on po.idPO = wo.idPO and po.jobNo = wo.jobNo
-		inner join job as jb on jb.jobNo = po.jobNo 
-		inner join clients as cl on cl.idClient = jb.idClient
-		where sc.buildDate between @startDate and @FinalDate and cl.numberClient = @numberClient
+	select * 
+from(
+select 
+sc.tag,
+cl.companyName,
+sc.location as 'Location',
+sj.[description] , 
+CONCAT(wo.idWO,'-',tk.task) as 'PO/WONo',
+CONCAT(sci.[type],'- ',sci.[length],' x',sci.width,' x',sci.heigth,'- ',(sci.descks+sci.extraDeck),' Decks') as 'ScaffoldDescription',
+sc.reqComp as 'dateRequest',
+sc.contact as 'requestBy', 
+sc.buildDate as 'buildDate', 
+--DATEADD(DAY,isnull(jc.[days],0),sc.buildDate) as 'ContractEndDate',
+dis.dismantleDate as 'dismantleDate',
+dis.rentStopDate as 'rentStopDate',
+--isnull(jc.[days],0) as 'Contract days',
+DATEDIFF(DAY,sc.buildDate,ISNULL(dis.rentStopDate,GETDATE())) as 'ActivityDays',
+IIF(sc.tag is not null,'Build','Mod') as 'Task',
+IIF( ISNULL(dis.rentStopDate,GETDATE()) >= @startDate ,
+	IIF( DATEADD(DAY,isnull(jc.[days],0),sc.buildDate) <= @FinalDate -- EL DIA FINAL DE RENTA GRATIS ES MENOR O IGUAL AL FINALDATE?
+	,-- SI ES MENOR O IGUAL POR LO TANTO SI HAY DIAS QUE COBRAR (ESTA DENTRO DEL RANGO)
+		IIF(DATEADD(DAY,isnull(jc.[days],0),sc.buildDate) > @startDate -- (PUNTO DE INICIO) EL DIA FINAL DE RENTA GRATIS ES MAYOR AL STARTDATE?
+		,--DIAFINAL DE RENTA GRATIS
+			IIF(dis.rentStopDate < @FinalDate -- EL DIA FINAL DE RENTA GRATIS ES MENOR QUE EL FINALDATE?
+			,DATEDIFF(DAY,DATEADD(DAY,isnull(jc.[days],0),DATEADD(DAY,-1,sc.buildDate)),dis.rentStopDate)
+			,DATEDIFF(DAY,DATEADD(DAY,isnull(jc.[days],0),DATEADD(DAY,-1,sc.buildDate)),@FinalDate))
+		,--STARTDATE
+			IIF(dis.rentStopDate < @FinalDate, 
+				DATEDIFF(DAY,DATEADD(DAY,-1 ,@startDate),dis.rentStopDate), 
+				DATEDIFF(DAY,DATEADD(DAY,-1 ,@startDate),@finalDate))
+		)	,-- NO ES MENOR O IGUAL POR ENDE NO HAY DIAS QUE COBAR (NO ESTA DENTRO DEL RANGO)
+	0),0) AS 'DaysRent',
+--IIF(DATEADD(DAY,isnull(jc.[days],0),sc.buildDate)<@FinalDate,1,0) as 'ExedContractDate',
+(select COUNT(*) from productTotalScaffold where tag = sc.tag) AS 'QTY'
+,pts.idProduct as 'idPrduct',
+pts.quantity as 'qtyPoduct',
+pd.name as 'productName',
+ISNULL(pd.dailyRentalRate,0) as 'dailyRent',
+(pts.quantity * ISNULL(pd.dailyRentalRate,0)) as 'Total'
+from scaffoldTraking as sc 
+left join areas as ar on ar.idArea = sc.idArea
+left join subJobs as sj on sj.idSubJob = sc.idSubJob
+left join jobCat as jc on jc.idJobCat = sc.idJobCat
+left join scaffoldInformation as sci on sci.tag = sc.tag
+left join dismantle as dis on dis.tag = sc.tag
+left join productTotalScaffold as pts on pts.tag = sc.tag
+inner join product as pd on pd.idProduct= pts.idProduct
+inner join task as tk on tk.idAux = sc.idAux
+inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO
+inner join projectOrder as po on po.idPO = wo.idPO and po.jobNo = wo.jobNo
+inner join job as jb on jb.jobNo = po.jobNo 
+inner join clients as cl on cl.idClient = jb.idClient
+where cl.numberClient = @numberClient
+) as T1 where T1.DaysRent > 0 
 end
 go
