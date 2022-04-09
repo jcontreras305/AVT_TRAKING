@@ -1660,3 +1660,41 @@ where cl.numberClient = @numberClient
 ) as T1 where T1.DaysRent > 0 
 end
 go
+
+--##############################################################################################
+--################## SP SCF MATERIAL INVETORY ##################################################
+--##############################################################################################
+
+ALTER proc [dbo].[sp_SCF_Material_Inventory]
+@numberClient as int,
+@all as bit
+as
+begin
+select 
+jb.jobNo,
+pd.QID,
+pd.idProduct ,
+pd.name ,
+ISNULL((select sum(pinc.quantity) from productComing as pinc 
+inner join incoming as inc on inc.ticketNum = pinc.ticketNum
+where inc.jobNo = jb.jobNo and pinc.idProduct = pj.idProduct),0) as 'Incoming', 
+ISNULL((select sum(pout.quantity) from productOutGoing as pout 
+inner join outgoing as outg on outg.ticketNum = outg.ticketNum
+where outg.jobNo = jb.jobNo and pout.idProduct = pj.idProduct),0) as 'Outgoing',
+ISNULL(pj.qty,0) as 'Inventory',
+ISNULL((select sum(pts.quantity) from productTotalScaffold as pts
+inner join scaffoldTraking as sc on sc.tag = pts.tag
+inner join task as tk on tk.idAux = sc.idAux 
+inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO
+inner join projectOrder as po on po.idPO = wo.idPO and po.jobNo = wo.jobNo 
+inner join job as jb1 on jb1.jobNo = po.jobNo
+where jb1.jobNo = jb.jobNo and pts.idProduct = pj.idProduct),0) as 'OnRent',
+ISNULL(pd.quantity,0) as 'InYard',
+pd.[weight] as 'Weight'
+from  productJob as pj  
+inner join product as pd on pd.idProduct = pj.idProduct 
+left join job as jb on jb.jobNo = pj.jobNo
+inner join clients as cl on cl.idClient = jb.idClient 
+where cl.numberClient like iif(@all = 1, '%%', concat('%',@numberClient,'%'))
+ORDER BY pd.idProduct
+end

@@ -3476,8 +3476,9 @@ go
 ----########## ESTE CODIGO ES PARA AGREGAR EL PROCEDIMIENTO DE SP_SCF_MATERIAL_INVENTORY NUEVO REPORTE #########################################
 ----############################################################################################################################################
 
---create proc sp_SCF_Material_Inventory
---@numberClient as int
+--ALTER proc [dbo].[sp_SCF_Material_Inventory]
+--@numberClient as int,
+--@all as bit
 --as
 --begin
 --select 
@@ -3505,9 +3506,10 @@ go
 --inner join product as pd on pd.idProduct = pj.idProduct 
 --left join job as jb on jb.jobNo = pj.jobNo
 --inner join clients as cl on cl.idClient = jb.idClient 
---where cl.numberClient  = @numberClient
+--where cl.numberClient like iif(@all = 1, '%%', concat('%',@numberClient,'%'))
 --ORDER BY pd.idProduct
 --end
+--go
 
 ----############################################################################################################################################
 ----########## ESTE CODIGO ES PARA ACTUALIZAR EL PROCEDIMIENTO SP_SCF_RENTAL_DATAILS ###########################################################
