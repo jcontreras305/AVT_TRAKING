@@ -123,6 +123,12 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Froms\dismantle.vb" />
+    <Compile Include="Froms\EquipmentValidation.Designer.vb">
+      <DependentUpon>EquipmentValidation.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Froms\EquipmentValidation.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Froms\EstimationCost.Designer.vb">
       <DependentUpon>EstimationCost.vb</DependentUpon>
     </Compile>
@@ -392,6 +398,18 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>EmployeesTime.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Reports TimeSheet\EquipmentDailyRent.Designer.vb">
+      <DependentUpon>EquipmentDailyRent.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Reports TimeSheet\EquipmentDailyRent.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Reports TimeSheet\EquipmentDailyTimeSheet.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EquipmentDailyTimeSheet.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Reports TimeSheet\HoursPerWeek.vb">
@@ -679,6 +697,9 @@
     <EmbeddedResource Include="Froms\Employees.resx">
       <DependentUpon>Employees.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Froms\EquipmentValidation.resx">
+      <DependentUpon>EquipmentValidation.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Froms\EstimationCost.resx">
       <DependentUpon>EstimationCost.vb</DependentUpon>
     </EmbeddedResource>
@@ -810,6 +831,13 @@
     <EmbeddedResource Include="Reports TimeSheet\EmployeesTime.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>EmployeesTime.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports TimeSheet\EquipmentDailyRent.resx">
+      <DependentUpon>EquipmentDailyRent.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports TimeSheet\EquipmentDailyTimeSheet.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>EquipmentDailyTimeSheet.vb</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports TimeSheet\HoursPerWeek.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
@@ -959,6 +987,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Documents\InvoicePieces.xlsx" />
     <None Include="Documents\Time Sheet Prueba.xlsx" />
     <None Include="My Project\Application.myapp">
       <Generator>MyApplicationCodeGenerator</Generator>
@@ -1024,6 +1053,7 @@
     <Content Include="Documents\SPReports.sql" />
     <None Include="Images\after1.png" />
     <Content Include="Images\byjobnumt.png" />
+    <None Include="Images\excel.png" />
     <Content Include="Images\eye.png" />
     <None Include="Images\minimize.png" />
     <None Include="Images\show.png" />

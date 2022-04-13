@@ -30,6 +30,8 @@ Partial Class ScaffoldRentalDatails
         Me.btnRestore = New System.Windows.Forms.PictureBox()
         Me.btnMaximize = New System.Windows.Forms.PictureBox()
         Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.btnDownloadExcel = New System.Windows.Forms.Button()
+        Me.btnSend = New System.Windows.Forms.Button()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
@@ -58,7 +60,6 @@ Partial Class ScaffoldRentalDatails
         Me.Email = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.SendName = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Send = New System.Windows.Forms.DataGridViewCheckBoxColumn()
-        Me.btnSend = New System.Windows.Forms.Button()
         Me.TableLayoutPanel1.SuspendLayout()
         Me.Panel1.SuspendLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -163,6 +164,7 @@ Partial Class ScaffoldRentalDatails
         'Panel2
         '
         Me.Panel2.BackColor = System.Drawing.Color.FromArgb(CType(CType(83, Byte), Integer), CType(CType(93, Byte), Integer), CType(CType(102, Byte), Integer))
+        Me.Panel2.Controls.Add(Me.btnDownloadExcel)
         Me.Panel2.Controls.Add(Me.btnSend)
         Me.Panel2.Controls.Add(Me.Label4)
         Me.Panel2.Controls.Add(Me.Label3)
@@ -177,6 +179,40 @@ Partial Class ScaffoldRentalDatails
         Me.Panel2.Name = "Panel2"
         Me.Panel2.Size = New System.Drawing.Size(910, 79)
         Me.Panel2.TabIndex = 1
+        '
+        'btnDownloadExcel
+        '
+        Me.btnDownloadExcel.FlatAppearance.BorderSize = 0
+        Me.btnDownloadExcel.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(58, Byte), Integer), CType(CType(115, Byte), Integer))
+        Me.btnDownloadExcel.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnDownloadExcel.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnDownloadExcel.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.btnDownloadExcel.Image = Global.AVT_TRAKING.My.Resources.Resources.excel
+        Me.btnDownloadExcel.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnDownloadExcel.Location = New System.Drawing.Point(686, 30)
+        Me.btnDownloadExcel.Name = "btnDownloadExcel"
+        Me.btnDownloadExcel.Size = New System.Drawing.Size(107, 34)
+        Me.btnDownloadExcel.TabIndex = 17
+        Me.btnDownloadExcel.Text = "Download"
+        Me.btnDownloadExcel.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.btnDownloadExcel.UseVisualStyleBackColor = True
+        '
+        'btnSend
+        '
+        Me.btnSend.FlatAppearance.BorderSize = 0
+        Me.btnSend.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(58, Byte), Integer), CType(CType(115, Byte), Integer))
+        Me.btnSend.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnSend.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnSend.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.btnSend.Image = Global.AVT_TRAKING.My.Resources.Resources.Send1
+        Me.btnSend.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnSend.Location = New System.Drawing.Point(587, 31)
+        Me.btnSend.Name = "btnSend"
+        Me.btnSend.Size = New System.Drawing.Size(93, 33)
+        Me.btnSend.TabIndex = 16
+        Me.btnSend.Text = "Send"
+        Me.btnSend.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.btnSend.UseVisualStyleBackColor = True
         '
         'Label4
         '
@@ -493,23 +529,6 @@ Partial Class ScaffoldRentalDatails
         Me.Send.HeaderText = "Send"
         Me.Send.Name = "Send"
         '
-        'btnSend
-        '
-        Me.btnSend.FlatAppearance.BorderSize = 0
-        Me.btnSend.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(58, Byte), Integer), CType(CType(115, Byte), Integer))
-        Me.btnSend.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnSend.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnSend.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.btnSend.Image = Global.AVT_TRAKING.My.Resources.Resources.Send1
-        Me.btnSend.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnSend.Location = New System.Drawing.Point(587, 31)
-        Me.btnSend.Name = "btnSend"
-        Me.btnSend.Size = New System.Drawing.Size(93, 33)
-        Me.btnSend.TabIndex = 16
-        Me.btnSend.Text = "Send"
-        Me.btnSend.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.btnSend.UseVisualStyleBackColor = True
-        '
         'ScaffoldRentalDatails
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -580,4 +599,5 @@ Partial Class ScaffoldRentalDatails
     Friend WithEvents SendName As DataGridViewTextBoxColumn
     Friend WithEvents Send As DataGridViewCheckBoxColumn
     Friend WithEvents btnSend As Button
+    Friend WithEvents btnDownloadExcel As Button
 End Class

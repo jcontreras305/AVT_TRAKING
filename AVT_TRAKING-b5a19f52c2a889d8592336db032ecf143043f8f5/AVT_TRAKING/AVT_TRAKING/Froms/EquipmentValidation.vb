@@ -1,0 +1,278 @@
+﻿Imports System.Runtime.InteropServices
+Imports Microsoft.Office.Core
+Imports Microsoft.Office.Interop.Excel
+Public Class EquipmentValidation
+    Public idclient As String
+    Dim mtdSC As New MetodosScaffold
+    Dim mtdJobs As New MetodosJobs
+    Dim tblProject As Data.DataTable
+    Dim tblMaterial As Data.DataTable
+    Private Sub EquipmentValidation_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        cmbInformation.Location = New System.Drawing.Point(31, 43)
+        dtpInformation.Location = New System.Drawing.Point(31, 43)
+        tblProject = mtdSC.llenarComboWO(cmbInformation, idclient)
+    End Sub
+
+    Private Sub PictureBox4_Click(sender As Object, e As EventArgs) Handles PictureBox4.Click
+        Me.Close()
+    End Sub
+    Private Sub btnMinimize_Click(sender As Object, e As EventArgs) Handles btnMinimize.Click
+        Me.WindowState = FormWindowState.Minimized
+    End Sub
+    Private Sub btnRestore_Click(sender As Object, e As EventArgs) Handles btnRestore.Click
+        WindowState = FormWindowState.Normal
+        btnRestore.Visible = False
+        btnMaximize.Visible = True
+    End Sub
+    Private Sub btnMaximize_Click(sender As Object, e As EventArgs) Handles btnMaximize.Click
+        MaximizedBounds = Screen.FromHandle(Me.Handle).WorkingArea
+        WindowState = FormWindowState.Maximized
+        btnMaximize.Visible = False
+        btnRestore.Visible = True
+    End Sub
+    <DllImport("user32.DLL", EntryPoint:="ReleaseCapture")>
+    Private Shared Sub ReleaseCapture()
+    End Sub
+    <DllImport("user32.DLL", EntryPoint:="SendMessage")>
+    Private Shared Sub SendMessage(hWnd As IntPtr, wMsg As Integer, wParam As Integer, lParam As Integer)
+    End Sub
+    Private Sub Panel1_MouseMove(sender As Object, e As MouseEventArgs) Handles Panel1.MouseMove
+        ReleaseCapture()
+        SendMessage(Me.Handle, &H112&, &HF012&, 0)
+    End Sub
+
+    Private Sub tblEquipment_CellEnter(sender As Object, e As DataGridViewCellEventArgs) Handles tblEquipment.CellEnter
+        Select Case e.ColumnIndex
+            Case tblEquipment.Columns("DateEquip").Index
+                txtInformation.Visible = False
+                dtpInformation.Visible = True
+                cmbInformation.Visible = False
+            Case tblEquipment.Columns("ProjectEquip").Index
+                txtInformation.Visible = False
+                dtpInformation.Visible = False
+                cmbInformation.Visible = True
+                cmbInformation.Items.Clear()
+                cmbInformation.Text = ""
+                tblProject = mtdSC.llenarComboWO(cmbInformation, idclient)
+                cmbInformation.DropDownWidth = 330
+            Case tblEquipment.Columns("MaterialCode").Index
+                txtInformation.Visible = False
+                dtpInformation.Visible = False
+                cmbInformation.Visible = True
+                cmbInformation.Items.Clear()
+                cmbInformation.Text = ""
+                mtdJobs.llenarComboCellMaterial(cmbInformation, tblMaterial)
+                cmbInformation.DropDownWidth = 200
+            Case tblEquipment.Columns("Amount").Index
+                txtInformation.Visible = True
+                dtpInformation.Visible = False
+                cmbInformation.Visible = False
+                txtInformation.Text = If(tblEquipment.CurrentCell.Value Is Nothing, "", tblEquipment.CurrentCell.Value.ToString())
+            Case tblEquipment.Columns("Description").Index
+                txtInformation.Visible = True
+                dtpInformation.Visible = False
+                cmbInformation.Visible = False
+                txtInformation.Text = If(tblEquipment.CurrentCell.Value Is Nothing, "", tblEquipment.CurrentCell.Value.ToString())
+            Case tblEquipment.Columns("STHrs").Index
+                txtInformation.Visible = True
+                dtpInformation.Visible = False
+                cmbInformation.Visible = False
+                txtInformation.Text = If(tblEquipment.CurrentCell.Value Is Nothing, "", tblEquipment.CurrentCell.Value.ToString())
+        End Select
+    End Sub
+    Private Sub txtInformation_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtInformation.KeyPress
+        If tblEquipment.CurrentCell IsNot Nothing Then
+            Select Case tblEquipment.CurrentCell.ColumnIndex
+                Case tblEquipment.Columns("Amount").Index
+                    If Not (IsNumeric(e.KeyChar) Or e.KeyChar = "." Or e.KeyChar = vbBack Or e.KeyChar = vbCr) Then
+                        e.Handled = True
+                    End If
+                Case tblEquipment.Columns("STHrs").Index
+                    If Not (IsNumeric(e.KeyChar) Or e.KeyChar = "." Or e.KeyChar = vbBack Or e.KeyChar = vbCr) Then
+                        e.Handled = True
+                    End If
+            End Select
+        End If
+    End Sub
+
+    Private Sub txtInformation_TextChanged(sender As Object, e As EventArgs) Handles txtInformation.TextChanged
+        If tblEquipment.CurrentCell.ColumnIndex <> tblEquipment.Columns("ClassEquip").Index Then
+            tblEquipment.CurrentCell.Value = txtInformation.Text
+        End If
+    End Sub
+
+    Private Sub cmbInformation_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbInformation.SelectedIndexChanged
+        If tblEquipment.CurrentCell IsNot Nothing Then
+            Select Case tblEquipment.CurrentCell.ColumnIndex
+                Case tblEquipment.Columns("ProjectEquip").Index
+                    If cmbInformation.SelectedItem IsNot Nothing Then
+                        Dim array() As String = cmbInformation.SelectedItem.ToString.Split(" ")
+                        For Each row As Data.DataRow In tblProject.Rows
+                            If array(0) = row.ItemArray(0) And array(1) = row.ItemArray(3) Then
+                                tblEquipment.CurrentCell.Value = row(0) + " " + row(3)
+                                tblEquipment.CurrentRow.Cells("idAux").Value = row(2)
+                            End If
+                        Next
+                    End If
+                Case tblEquipment.Columns("MaterialCode").Index
+                    If cmbInformation.SelectedItem IsNot Nothing Then
+                        tblEquipment.CurrentCell.Value = cmbInformation.SelectedItem
+                        Dim classMt() As String = cmbInformation.SelectedItem.ToString.Split(" ")
+                        tblEquipment.Rows(tblEquipment.CurrentCell.RowIndex).Cells("ClassEquip").Value = classMt(0)
+                    End If
+            End Select
+        End If
+    End Sub
+
+    Private Sub dtpInformation_ValueChanged(sender As Object, e As EventArgs) Handles dtpInformation.ValueChanged
+        Dim dateVal As DateTime = dtpInformation.Value
+        tblEquipment.CurrentCell.Value = dateVal.ToString("MM/dd/yyyy")
+    End Sub
+
+    Private Sub btnUpdateMaterialExcel_Click(sender As Object, e As EventArgs) Handles btnUpdateMaterialExcel.Click
+        Try
+            Dim opFile As New OpenFileDialog()
+            pgbComplete.Value = 0
+            opFile.DefaultExt = "xlsx|xls"
+            opFile.FileName = "Vehicle Tracker"
+            lblMessage.Text = "Message: " + "Loading"
+            If DialogResult.OK = opFile.ShowDialog() Then
+                pgbComplete.Value = pgbComplete.Value + 5
+                Cursor = Cursors.WaitCursor
+                Dim ApExcel = New Microsoft.Office.Interop.Excel.Application
+                lblMessage.Text = "Message: " + "Opening Document " + opFile.FileName
+                Dim libro = ApExcel.Workbooks.Open(opFile.FileName)
+                pgbComplete.Value = pgbComplete.Value + 5
+                Try
+                    Dim Hoja1 As New Worksheet
+                    Dim sheetNumber1 As Integer = 1
+                    Dim flagExist1 As Boolean = False
+                    lblMessage.Text = "Message: " + "Verifying that the 'Upload' sheet exists..."
+                    For Each sheet As Worksheet In libro.Worksheets
+                        If sheet.Name = "Upload" Then
+                            flagExist1 = True
+                            Exit For
+                        End If
+                        sheetNumber1 += 1
+                    Next
+                    If flagExist1 Then
+                        pgbComplete.Value = pgbComplete.Value + 10
+                        tblEquipment.Rows.Clear()
+                        Dim count As Integer = 2
+                        Hoja1 = libro.Worksheets("Upload")
+                        Dim numFilas = CInt(nreg(Hoja1, 2, 8))
+                        Dim increment As Integer = 0
+                        Dim everyIncrement As Integer = 0
+                        If numFilas <= 75 Then
+                            increment = CInt(75 / numFilas)
+                            everyIncrement = 1
+                        Else
+                            increment = 1
+                            everyIncrement = If(numFilas / 75 < 2, 1, CInt(numFilas / 75))
+                        End If
+                        Dim countRowsInc As Integer = 0
+                        While Hoja1.Cells(count, 8).Text <> ""
+                            tblEquipment.Rows.Add("", Hoja1.Cells(count, 8).Text, Hoja1.Cells(count, 9).Text, "", Hoja1.Cells(count, 10).Text, Hoja1.Cells(count, 11).Text, Hoja1.Cells(count, 12).Text, "", Hoja1.Cells(count, 13).Text)
+                            count += 1
+                            lblMessage.Text = "Message: " + "Reading Row " + CStr(count)
+                            countRowsInc += 1
+                            If everyIncrement >= countRowsInc And pgbComplete.Value < 90 Then
+                                pgbComplete.Value = pgbComplete.Value + increment
+                                countRowsInc = 0
+                            End If
+                        End While
+                        lblMessage.Text = "Message: " + " Data Validation..."
+                        buscarIdAuxTable()
+                        pgbComplete.Value = 94
+                        validarRepetidos()
+                        pgbComplete.Value = 98
+                    Else
+                        MessageBox.Show("Sheet Upload Not Found.", "Important")
+                    End If
+                    NAR(Hoja1)
+                    lblMessage.Text = "Message: " + "Closing... "
+                Catch ex As Exception
+                    MessageBox.Show("Sheet Upload Not Found.", "Important")
+                Finally
+                    libro.Close()
+                    NAR(libro)
+                    ApExcel.Quit()
+                    NAR(ApExcel)
+                    pgbComplete.Value = 100
+                    lblMessage.Text = "Message: " + "End."
+                End Try
+                Cursor = Cursors.Default
+            End If
+        Catch ex As Exception
+
+        End Try
+    End Sub
+
+    Private Sub buscarIdAuxTable()
+        For Each row As DataGridViewRow In tblEquipment.Rows()
+            If Not row.IsNewRow Then
+                Dim array() As String = row.Cells("ProjectEquip").Value.ToString().Split(" ")
+                Dim rows() As DataRow = tblProject.Select("wono like '" + array(0).Replace(" ", "-") + "'")
+                If rows.Count > 0 Then
+                    row.Cells("IdAux").Value = rows(0).ItemArray(2)
+                Else
+                    row.DefaultCellStyle.BackColor = Color.Red
+                    row.Cells("ErrorClm").Value = "Project Not Found"
+                    tblEquipment.Columns("ErrorClm").Visible = True
+                End If
+            End If
+        Next
+    End Sub
+    Private Function validarRepetidos() As Boolean
+        Try
+            Dim flag As Boolean = False
+            Dim contExist As Integer = 0
+            For Each row As DataGridViewRow In tblEquipment.Rows()
+                If Not row.IsNewRow Then
+                    contExist = 0
+                    For Each row1 As DataGridViewRow In tblEquipment.Rows()
+                        If Not row.IsNewRow Then
+                            If row.Cells("DateEquip").Value = row1.Cells("DateEquip").Value And row.Cells("idAux").Value = row1.Cells("idAux").Value And row.Cells("MaterialCode").Value = row1.Cells("MaterialCode").Value Then
+                                contExist += 1
+                                If contExist > 1 Then
+                                    row.DefaultCellStyle.BackColor = Color.Yellow
+                                    tblEquipment.Columns("ErrorClm").Visible = True
+                                    row.Cells("ErrorClm").Value = If(row.Cells("ErrorClm").Value = "", "Reat.", row.Cells("ErrorClm").Value + ", Repeat.")
+                                End If
+                            End If
+                        End If
+                    Next
+                End If
+            Next
+            Return True
+        Catch ex As Exception
+            MsgBox(ex.Message())
+            Return False
+        End Try
+    End Function
+    Private Function validarRepetidos(ByVal row As DataGridViewRow)
+        Dim isRepeat As Boolean = False
+        Dim contExist As Integer = 0
+        For Each row1 As DataGridViewRow In tblEquipment.Rows()
+            If Not row.IsNewRow Then
+                If row.Cells("DateEquip").Value = row1.Cells("DateEquip").Value And row.Cells("idAux").Value = row1.Cells("idAux").Value And row.Cells("MaterialCode").Value = row1.Cells("MaterialCode").Value Then
+                    contExist += 1
+                    If contExist > 1 Then
+                        isRepeat = True
+                        row.DefaultCellStyle.BackColor = Color.Yellow
+                        tblEquipment.Columns("ErrorClm").Visible = True
+                        row.Cells("ErrorClm").Value = If(row.Cells("ErrorClm").Value = "", "Reat.", row.Cells("ErrorClm").Value + ", Repeat.")
+                    End If
+                End If
+            End If
+        Next
+        Return isRepeat
+    End Function
+
+    Private Sub tblEquipment_CellLeave(sender As Object, e As DataGridViewCellEventArgs) Handles tblEquipment.CellLeave
+        If Not validarRepetidos(tblEquipment.Rows(tblEquipment.CurrentCell.RowIndex)) Then
+            tblEquipment.Rows(tblEquipment.CurrentCell.RowIndex).DefaultCellStyle.BackColor = Color.White
+
+        End If
+    End Sub
+End Class

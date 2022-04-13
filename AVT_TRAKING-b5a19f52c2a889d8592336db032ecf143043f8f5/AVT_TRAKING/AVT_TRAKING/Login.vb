@@ -4,11 +4,13 @@ Public Class Login
 
     Dim mtdLogin As New MetodosLogin
     Dim mtdOther As New MetodosOthers
+    Dim mtdCompany As New metodosCompany
     Dim flag As Boolean = True
     Dim listImg As List(Of Byte())
     Private Sub Login_Load(sender As Object, e As EventArgs) Handles Me.Load
         Try
             listImg = mtdOther.llenarComboImage(cmbImagenes)
+            mtdCompany.cargarDatos()
             If listImg IsNot Nothing And listImg.Count > 0 Then
                 cmbImagenes.SelectedIndex = 0
                 cmbImagenes.SelectedItem = cmbImagenes.Items(0)
@@ -38,9 +40,12 @@ Public Class Login
                 If mtdLogin.StartLogin(txtUser.Text, txtPassword.Text) Then
                     Dim a As New MainFrom
                     Try
+                        If mtdCompany.img IsNot Nothing Then
+                            a.pcbLogoMain.Image = mtdCompany.img
+                        End If
                         If listImg IsNot Nothing And listImg.Count > 0 Then
                             Dim arrayByte As Byte() = listImg(cmbImagenes.SelectedIndex)
-                            a.pcbLogoMain.Image = BytetoImage(arrayByte)
+                            a.imageClientLogin = BytetoImage(arrayByte)
                         End If
                     Catch ex As Exception
                     End Try

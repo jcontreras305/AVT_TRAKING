@@ -511,7 +511,8 @@ where tk.task = '" + idTask + "' and tk.idAuxWO = '" + idWO + "'", conn)
     Public Function llenarComboCellMaterial(ByVal cmbMaterial As DataGridViewComboBoxCell, ByVal tabla As DataTable) As Boolean
         Try
             conectar()
-            Dim cmd As New SqlCommand("select idMaterial,CONCAT(number,' ' ,name) as name from material", conn)
+            Dim cmd As New SqlCommand("select idMaterial, number ,name , isnull(mt.code,'') as 'class'from material as mt 
+left join materialClass as mc on mc.code = mt.code", conn)
             Dim reader As SqlDataReader = cmd.ExecuteReader
             tabla.Clear()
             Dim cont = 0
@@ -531,14 +532,78 @@ where tk.task = '" + idTask + "' and tk.idAuxWO = '" + idWO + "'", conn)
                 column.ReadOnly = False
                 column.Unique = False
                 tabla.Columns.Add(column)
+                column = New DataColumn()
+                column.DataType = System.Type.GetType("System.String")
+                column.ColumnName = "Class"
+                column.AutoIncrement = False
+                column.ReadOnly = False
+                column.Unique = False
+                tabla.Columns.Add(column)
             End If
             While reader.Read()
                 Dim row As DataRow
                 row = tabla.NewRow()
                 row("id") = reader("idMaterial")
-                row("Material") = reader("name")
+                row("Material") = CStr(reader("number")) + " " + reader("name")
+                row("Class") = reader("class")
                 tabla.Rows.Add(row)
-                cmbMaterial.Items.Add(reader("name"))
+                cmbMaterial.Items.Add(CStr(reader("number")) + " " + reader("name") + " " + reader("class"))
+            End While
+            desconectar()
+            If tabla.Rows.Count > 0 Then
+                Return True
+            Else
+                Return False
+            End If
+        Catch ex As Exception
+            desconectar()
+            Return False
+        End Try
+    End Function
+    Public Function llenarComboCellMaterial(ByVal cmbMaterial As ComboBox, ByVal tabla As DataTable) As Boolean
+        Try
+            conectar()
+            Dim cmd As New SqlCommand("select idMaterial, number ,name , isnull(mt.code,'') as 'class'from material as mt 
+left join materialClass as mc on mc.code = mt.code", conn)
+            Dim reader As SqlDataReader = cmd.ExecuteReader
+            If tabla IsNot Nothing Then
+                tabla.Clear()
+            Else
+                tabla = New Data.DataTable
+            End If
+            Dim cont = 0
+            Dim column As DataColumn
+            If tabla.Columns.Count = 0 Then
+                column = New DataColumn()
+                column.DataType = System.Type.GetType("System.String")
+                column.ColumnName = "id"
+                column.AutoIncrement = False
+                column.ReadOnly = False
+                column.Unique = False
+                tabla.Columns.Add(column)
+                column = New DataColumn()
+                column.DataType = System.Type.GetType("System.String")
+                column.ColumnName = "Material"
+                column.AutoIncrement = False
+                column.ReadOnly = False
+                column.Unique = False
+                tabla.Columns.Add(column)
+                column = New DataColumn()
+                column.DataType = System.Type.GetType("System.String")
+                column.ColumnName = "Class"
+                column.AutoIncrement = False
+                column.ReadOnly = False
+                column.Unique = False
+                tabla.Columns.Add(column)
+            End If
+            While reader.Read()
+                Dim row As DataRow
+                row = tabla.NewRow()
+                row("id") = reader("idMaterial")
+                row("Material") = CStr(reader("number")) + " " + reader("name")
+                row("Class") = reader("class")
+                tabla.Rows.Add(row)
+                cmbMaterial.Items.Add(reader("class") + " " + reader("name"))
             End While
             desconectar()
             If tabla.Rows.Count > 0 Then
@@ -561,6 +626,7 @@ convert (varchar,mu.dateMaterial, 101) as 'Date',
 concat(wo.idWO,' ',tk.task)as 'Work Order',
 mu.amount as 'Amount',
 concat(mt.number,' ', mt.name) as 'Material Code',
+mu.hoursST as 'Hours',
 mu.description as 'Description'
 from 
 materialUsed as mu inner join task as tk on tk.idAux = mu.idAux
@@ -1270,7 +1336,7 @@ where tk.idAux = '" + idAux + "' and wo.idAuxWO = '" + WO + "'", conn)
         Try
             conectar()
             Dim cmd As New SqlCommand("
-                insert into materialUsed values(NEWID(),'" + datos(1) + "',1," + datos(3) + ",'" + datos(5) + "','" + datos(2) + "','" + datos(4) + "')", conn)
+                insert into materialUsed values(NEWID(),'" + datos(1) + "',1," + datos(3) + ",'" + datos(6) + "','" + datos(2) + "','" + datos(4) + "'," + datos(5) + ")", conn)
             If cmd.ExecuteNonQuery = 1 Then
                 UpdateTotalSpendTask(datos(5))
                 desconectar()
@@ -1290,7 +1356,7 @@ where tk.idAux = '" + idAux + "' and wo.idAuxWO = '" + WO + "'", conn)
         Try
             conectar()
             Dim cmd As New SqlCommand("
-                update materialUsed set dateMaterial = '" + datos(1) + "' , amount = " + datos(3) + " ,description = '" + datos(5) + "' , idAux = '" + datos(2) + "',idMaterial = '" + datos(4) + "' where idMaterialUsed = '" + datos(0) + "'", conn)
+                update materialUsed set dateMaterial = '" + datos(1) + "' , amount = " + datos(3) + " ,description = '" + datos(6) + "' , idAux = '" + datos(2) + "',idMaterial = '" + datos(4) + "' , hoursST = " + datos(5) + " where idMaterialUsed = '" + datos(0) + "'", conn)
             If cmd.ExecuteNonQuery = 1 Then
                 UpdateTotalSpendTask(datos(5))
                 desconectar()

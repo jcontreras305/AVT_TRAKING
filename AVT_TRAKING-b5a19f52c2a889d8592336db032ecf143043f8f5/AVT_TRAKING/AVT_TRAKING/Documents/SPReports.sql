@@ -1622,7 +1622,7 @@ dis.rentStopDate as 'rentStopDate',
 --isnull(jc.[days],0) as 'Contract days',
 DATEDIFF(DAY,sc.buildDate,ISNULL(dis.rentStopDate,GETDATE())) as 'ActivityDays',
 IIF(sc.tag is not null,'Build','Mod') as 'Task',
-IIF( ISNULL(dis.rentStopDate,GETDATE()) >= @startDate ,
+IIF( ISNULL(dis.rentStopDate,GETDATE()) >= @startDate and sc.buildDate <= @startDate ,
 	IIF( DATEADD(DAY,isnull(jc.[days],0),sc.buildDate) <= @FinalDate -- EL DIA FINAL DE RENTA GRATIS ES MENOR O IGUAL AL FINALDATE?
 	,-- SI ES MENOR O IGUAL POR LO TANTO SI HAY DIAS QUE COBRAR (ESTA DENTRO DEL RANGO)
 		IIF(DATEADD(DAY,isnull(jc.[days],0),sc.buildDate) > @startDate -- (PUNTO DE INICIO) EL DIA FINAL DE RENTA GRATIS ES MAYOR AL STARTDATE?

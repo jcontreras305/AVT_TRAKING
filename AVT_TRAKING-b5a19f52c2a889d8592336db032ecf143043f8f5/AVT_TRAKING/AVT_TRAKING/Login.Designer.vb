@@ -37,12 +37,10 @@ Partial Class Login
         Me.Panel2 = New System.Windows.Forms.Panel()
         Me.PictureBox2 = New System.Windows.Forms.PictureBox()
         Me.Panel3 = New System.Windows.Forms.Panel()
-        Me.Panel4 = New System.Windows.Forms.Panel()
-        Me.PictureBox4 = New System.Windows.Forms.PictureBox()
-        Me.Panel5 = New System.Windows.Forms.Panel()
-        Me.PictureBox3 = New System.Windows.Forms.PictureBox()
         Me.Panel6 = New System.Windows.Forms.Panel()
         Me.Panel7 = New System.Windows.Forms.Panel()
+        Me.PictureBox3 = New System.Windows.Forms.PictureBox()
+        Me.PictureBox4 = New System.Windows.Forms.PictureBox()
         Me.TitleBar.SuspendLayout()
         Me.TableLayoutPanel1.SuspendLayout()
         CType(Me.btnMinimize, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -53,12 +51,10 @@ Partial Class Login
         Me.Panel2.SuspendLayout()
         CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel3.SuspendLayout()
-        Me.Panel4.SuspendLayout()
-        CType(Me.PictureBox4, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.Panel5.SuspendLayout()
-        CType(Me.PictureBox3, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel6.SuspendLayout()
         Me.Panel7.SuspendLayout()
+        CType(Me.PictureBox3, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.PictureBox4, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'txtUser
@@ -68,7 +64,8 @@ Partial Class Login
         Me.txtUser.Location = New System.Drawing.Point(0, 0)
         Me.txtUser.Name = "txtUser"
         Me.txtUser.Size = New System.Drawing.Size(174, 26)
-        Me.txtUser.TabIndex = 0
+        Me.txtUser.TabIndex = 3
+        Me.txtUser.Tag = ""
         '
         'txtPassword
         '
@@ -77,7 +74,7 @@ Partial Class Login
         Me.txtPassword.Location = New System.Drawing.Point(0, 0)
         Me.txtPassword.Name = "txtPassword"
         Me.txtPassword.Size = New System.Drawing.Size(174, 26)
-        Me.txtPassword.TabIndex = 1
+        Me.txtPassword.TabIndex = 5
         Me.txtPassword.UseSystemPasswordChar = True
         '
         'btnIniciar
@@ -91,7 +88,7 @@ Partial Class Login
         Me.btnIniciar.Location = New System.Drawing.Point(8, 1)
         Me.btnIniciar.Name = "btnIniciar"
         Me.btnIniciar.Size = New System.Drawing.Size(159, 43)
-        Me.btnIniciar.TabIndex = 2
+        Me.btnIniciar.TabIndex = 6
         Me.btnIniciar.Text = "Login"
         Me.btnIniciar.UseVisualStyleBackColor = False
         '
@@ -103,7 +100,7 @@ Partial Class Login
         Me.TitleBar.Location = New System.Drawing.Point(0, 0)
         Me.TitleBar.Name = "TitleBar"
         Me.TitleBar.Size = New System.Drawing.Size(379, 32)
-        Me.TitleBar.TabIndex = 8
+        Me.TitleBar.TabIndex = 9
         '
         'TableLayoutPanel1
         '
@@ -151,49 +148,50 @@ Partial Class Login
         Me.Panel1.Location = New System.Drawing.Point(0, 421)
         Me.Panel1.Name = "Panel1"
         Me.Panel1.Size = New System.Drawing.Size(379, 20)
-        Me.Panel1.TabIndex = 9
+        Me.Panel1.TabIndex = 7
         '
         'cmbImagenes
         '
+        Me.cmbImagenes.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.cmbImagenes.BackColor = System.Drawing.Color.FromArgb(CType(CType(30, Byte), Integer), CType(CType(38, Byte), Integer), CType(CType(70, Byte), Integer))
         Me.cmbImagenes.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cmbImagenes.ForeColor = System.Drawing.SystemColors.Window
         Me.cmbImagenes.FormattingEnabled = True
-        Me.cmbImagenes.Location = New System.Drawing.Point(183, -2)
+        Me.cmbImagenes.Location = New System.Drawing.Point(189, -2)
         Me.cmbImagenes.Name = "cmbImagenes"
         Me.cmbImagenes.Size = New System.Drawing.Size(183, 21)
-        Me.cmbImagenes.TabIndex = 3
+        Me.cmbImagenes.TabIndex = 8
         '
         'TableLayoutPanel2
         '
         Me.TableLayoutPanel2.ColumnCount = 3
-        Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 60.0!))
+        Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
         Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 180.0!))
-        Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 40.0!))
+        Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
         Me.TableLayoutPanel2.Controls.Add(Me.PictureBox1, 2, 2)
         Me.TableLayoutPanel2.Controls.Add(Me.Panel2, 1, 0)
         Me.TableLayoutPanel2.Controls.Add(Me.Panel3, 1, 1)
-        Me.TableLayoutPanel2.Controls.Add(Me.Panel4, 0, 2)
-        Me.TableLayoutPanel2.Controls.Add(Me.Panel5, 0, 1)
         Me.TableLayoutPanel2.Controls.Add(Me.Panel6, 1, 3)
         Me.TableLayoutPanel2.Controls.Add(Me.Panel7, 1, 2)
+        Me.TableLayoutPanel2.Controls.Add(Me.PictureBox3, 0, 1)
+        Me.TableLayoutPanel2.Controls.Add(Me.PictureBox4, 0, 2)
         Me.TableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill
         Me.TableLayoutPanel2.Location = New System.Drawing.Point(0, 32)
         Me.TableLayoutPanel2.Name = "TableLayoutPanel2"
         Me.TableLayoutPanel2.RowCount = 5
-        Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 39.81289!))
-        Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 9.953223!))
-        Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 9.953223!))
-        Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 14.36031!))
-        Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 26.10966!))
+        Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 39.73766!))
+        Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 9.934417!))
+        Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 9.934417!))
+        Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 14.33318!))
+        Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 26.06033!))
         Me.TableLayoutPanel2.Size = New System.Drawing.Size(379, 389)
-        Me.TableLayoutPanel2.TabIndex = 11
+        Me.TableLayoutPanel2.TabIndex = 0
         '
         'PictureBox1
         '
         Me.PictureBox1.Dock = System.Windows.Forms.DockStyle.Left
         Me.PictureBox1.Image = Global.AVT_TRAKING.My.Resources.Resources.show
-        Me.PictureBox1.Location = New System.Drawing.Point(302, 195)
+        Me.PictureBox1.Location = New System.Drawing.Point(282, 195)
         Me.PictureBox1.Name = "PictureBox1"
         Me.PictureBox1.Size = New System.Drawing.Size(30, 32)
         Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize
@@ -204,7 +202,7 @@ Partial Class Login
         '
         Me.Panel2.Controls.Add(Me.PictureBox2)
         Me.Panel2.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel2.Location = New System.Drawing.Point(122, 3)
+        Me.Panel2.Location = New System.Drawing.Point(102, 3)
         Me.Panel2.Name = "Panel2"
         Me.Panel2.Size = New System.Drawing.Size(174, 148)
         Me.Panel2.TabIndex = 11
@@ -223,65 +221,48 @@ Partial Class Login
         'Panel3
         '
         Me.Panel3.Controls.Add(Me.txtUser)
-        Me.Panel3.Location = New System.Drawing.Point(122, 157)
+        Me.Panel3.Location = New System.Drawing.Point(102, 157)
         Me.Panel3.Name = "Panel3"
         Me.Panel3.Size = New System.Drawing.Size(174, 32)
-        Me.Panel3.TabIndex = 12
-        '
-        'Panel4
-        '
-        Me.Panel4.Controls.Add(Me.PictureBox4)
-        Me.Panel4.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel4.Location = New System.Drawing.Point(3, 195)
-        Me.Panel4.Name = "Panel4"
-        Me.Panel4.Size = New System.Drawing.Size(113, 32)
-        Me.Panel4.TabIndex = 13
-        '
-        'PictureBox4
-        '
-        Me.PictureBox4.Image = Global.AVT_TRAKING.My.Resources.Resources.lock
-        Me.PictureBox4.Location = New System.Drawing.Point(83, 3)
-        Me.PictureBox4.Name = "PictureBox4"
-        Me.PictureBox4.Size = New System.Drawing.Size(27, 29)
-        Me.PictureBox4.TabIndex = 0
-        Me.PictureBox4.TabStop = False
-        '
-        'Panel5
-        '
-        Me.Panel5.Controls.Add(Me.PictureBox3)
-        Me.Panel5.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel5.Location = New System.Drawing.Point(3, 157)
-        Me.Panel5.Name = "Panel5"
-        Me.Panel5.Size = New System.Drawing.Size(113, 32)
-        Me.Panel5.TabIndex = 14
-        '
-        'PictureBox3
-        '
-        Me.PictureBox3.Anchor = System.Windows.Forms.AnchorStyles.Right
-        Me.PictureBox3.Image = Global.AVT_TRAKING.My.Resources.Resources.users
-        Me.PictureBox3.Location = New System.Drawing.Point(83, 0)
-        Me.PictureBox3.Name = "PictureBox3"
-        Me.PictureBox3.Size = New System.Drawing.Size(27, 29)
-        Me.PictureBox3.TabIndex = 0
-        Me.PictureBox3.TabStop = False
+        Me.Panel3.TabIndex = 2
         '
         'Panel6
         '
         Me.Panel6.Controls.Add(Me.btnIniciar)
         Me.Panel6.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel6.Location = New System.Drawing.Point(122, 233)
+        Me.Panel6.Location = New System.Drawing.Point(102, 233)
         Me.Panel6.Name = "Panel6"
         Me.Panel6.Size = New System.Drawing.Size(174, 49)
-        Me.Panel6.TabIndex = 15
+        Me.Panel6.TabIndex = 5
         '
         'Panel7
         '
         Me.Panel7.Controls.Add(Me.txtPassword)
         Me.Panel7.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel7.Location = New System.Drawing.Point(122, 195)
+        Me.Panel7.Location = New System.Drawing.Point(102, 195)
         Me.Panel7.Name = "Panel7"
         Me.Panel7.Size = New System.Drawing.Size(174, 32)
-        Me.Panel7.TabIndex = 16
+        Me.Panel7.TabIndex = 4
+        '
+        'PictureBox3
+        '
+        Me.PictureBox3.Anchor = System.Windows.Forms.AnchorStyles.Right
+        Me.PictureBox3.Image = Global.AVT_TRAKING.My.Resources.Resources.users
+        Me.PictureBox3.Location = New System.Drawing.Point(69, 158)
+        Me.PictureBox3.Name = "PictureBox3"
+        Me.PictureBox3.Size = New System.Drawing.Size(27, 29)
+        Me.PictureBox3.TabIndex = 0
+        Me.PictureBox3.TabStop = False
+        '
+        'PictureBox4
+        '
+        Me.PictureBox4.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.PictureBox4.Image = Global.AVT_TRAKING.My.Resources.Resources.lock
+        Me.PictureBox4.Location = New System.Drawing.Point(69, 195)
+        Me.PictureBox4.Name = "PictureBox4"
+        Me.PictureBox4.Size = New System.Drawing.Size(27, 29)
+        Me.PictureBox4.TabIndex = 0
+        Me.PictureBox4.TabStop = False
         '
         'Login
         '
@@ -311,13 +292,11 @@ Partial Class Login
         CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel3.ResumeLayout(False)
         Me.Panel3.PerformLayout()
-        Me.Panel4.ResumeLayout(False)
-        CType(Me.PictureBox4, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.Panel5.ResumeLayout(False)
-        CType(Me.PictureBox3, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel6.ResumeLayout(False)
         Me.Panel7.ResumeLayout(False)
         Me.Panel7.PerformLayout()
+        CType(Me.PictureBox3, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.PictureBox4, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -335,8 +314,6 @@ Partial Class Login
     Friend WithEvents TableLayoutPanel2 As TableLayoutPanel
     Friend WithEvents Panel2 As Panel
     Friend WithEvents Panel3 As Panel
-    Friend WithEvents Panel4 As Panel
-    Friend WithEvents Panel5 As Panel
     Friend WithEvents Panel6 As Panel
     Friend WithEvents Panel7 As Panel
     Friend WithEvents PictureBox3 As PictureBox

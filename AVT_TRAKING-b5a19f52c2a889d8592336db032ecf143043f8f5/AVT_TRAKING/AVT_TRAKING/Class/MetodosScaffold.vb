@@ -1619,7 +1619,7 @@ quantity as 'QTY', pd.QID,PLF, PSQF
 from product as pd 
 inner join unitMeassurements as um on pd.um = um.um
 inner join classification as cl on cl.class = pd.class " +
-If(flagIdProduct, "where pd.idProduct = " + text + " or pd.QID = '" + text + "'", "where pd.class Like '%" + text + "%' or cl.name like '%" + text + "%'") + " order by pd.idProduct", conn)
+If(flagIdProduct, "where pd.idProduct = " + text + " or pd.QID = '" + text + "'", "where pd.name like '%" + text + "%' or pd.class Like '%" + text + "%' or cl.name like '%" + text + "%'") + " order by pd.idProduct", conn)
             If cmd.ExecuteNonQuery Then
                 Dim da As New SqlDataAdapter(cmd)
                 Dim tablaAux As New DataTable
@@ -3527,6 +3527,173 @@ where cl.idClient = " + If(idClient = "", "'%%'", "'" + idClient + "'") + "", co
                 tbl.Rows.Add(dr("Tag"), dr("Dimention"), dr("SC Build Date"), dr("Work Order"), dr("PO"), dr("Job Num"), dr("Comments"), If(dr("Is Dismantled") = "1", True, False), dr("Job Cat"), dr("Sub Job"), dr("Area"), dr("Modifications Count"))
             End While
             Return True
+        Catch ex As Exception
+            Return False
+        Finally
+            desconectar()
+        End Try
+    End Function
+    '###########################################################################################################################################################################
+    '############################### METODOS PARA REPROTES DE SCAFFOLD #########################################################################################################
+    '###########################################################################################################################################################################
+    Public Function actualizarInvoiceExcel(ByVal startDate As String, ByVal finalDate As String, ByVal numberClient As String) As Boolean
+        Try
+            conectar()
+            Dim cmd As New SqlCommand("
+declare @startDate as date = '" + startDate + "'
+declare @FinalDate as date = '" + finalDate + "'
+declare @numberClient as int = " + numberClient + "
+
+IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES where TABLE_SCHEMA = 'dbo' and TABLE_NAME = 'invoiceExcel')
+BEGIN 
+	drop table invoiceExcel
+END
+
+select T1.[Labor WO / NERWORK #],T1.[Type (O,M,T,C)],T1.[Tag #],T1.[Pieces],T1.[UNIT],T1.[Location],T1.[Date UP],T1.[Date Down],
+(T1.[Product Amount]*t1.[RDays])as 'Invoice Amount',T1.[ACTIVEDAYS],T1.[RDays],T1.[Work]
+into InvoiceExcel
+from (
+select wo.idWO as 'Labor WO / NERWORK #',
+case  sj.[description] 
+when 'Operation' then 'O'
+when 'Maintenance' then 'M'
+when 'T/A' then 'T'
+when 'Capital' then 'C'
+when 'Winterization' then 'W'
+when 'All' then 'All'
+when NULL then ''
+else SUBSTRING(sj.[description],1,1) end  as 'Type (O,M,T,C)',
+md.tag as 'Tag #',
+ISNULL((select sum(pmd.quantity) from productModification as pmd where pmd.idModAux = md.idModAux),0) as 'Pieces',
+ar.name as 'UNIT',
+sc.location as 'Location',
+CONVERT(VARCHAR, md.modificationDate, 101) as 'Date UP',
+ISNULL(CONVERT(VARCHAR, ds.dismantleDate, 101),'') as 'Date Down',
+ISNULL((select sum(pmd.quantity * pd.dailyRentalRate) from productModification as pmd 
+inner join product as pd on pd.idProduct = pmd.idProduct
+where pmd.idModAux = md.idModAux),0) as 'Product Amount',
+DATEDIFF(day,sc.buildDate, IIF(ds.dismantleDate is Null,GETDATE(),ds.dismantleDate)) as 'ACTIVEDAYS',
+IIF( ISNULL(ds.rentStopDate,GETDATE()) >= @startDate and sc.buildDate <= @startDate,
+	IIF( DATEADD(DAY,isnull(jc.[days],0),sc.buildDate) <= @FinalDate -- EL DIA FINAL DE RENTA GRATIS ES MENOR O IGUAL AL FINALDATE?
+	,-- SI ES MENOR O IGUAL POR LO TANTO SI HAY DIAS QUE COBRAR (ESTA DENTRO DEL RANGO)
+		IIF(DATEADD(DAY,isnull(jc.[days],0),sc.buildDate) > @startDate -- (PUNTO DE INICIO) EL DIA FINAL DE RENTA GRATIS ES MAYOR AL STARTDATE?
+		,--DIAFINAL DE RENTA GRATIS
+			IIF(ds.rentStopDate < @FinalDate -- EL DIA FINAL DE RENTA GRATIS ES MENOR QUE EL FINALDATE?
+			,DATEDIFF(DAY,DATEADD(DAY,isnull(jc.[days],0),DATEADD(DAY,-1,sc.buildDate)),ds.rentStopDate)
+			,DATEDIFF(DAY,DATEADD(DAY,isnull(jc.[days],0),DATEADD(DAY,-1,sc.buildDate)),@FinalDate))
+		,--STARTDATE
+			IIF(ds.rentStopDate < @FinalDate, 
+				DATEDIFF(DAY,DATEADD(DAY,-1 ,@startDate),ds.rentStopDate), 
+				DATEDIFF(DAY,DATEADD(DAY,-1 ,@startDate),@finalDate))
+		)	,-- NO ES MENOR O IGUAL POR ENDE NO HAY DIAS QUE COBAR (NO ESTA DENTRO DEL RANGO)
+	0),0) AS 'RDAYS',
+'Mod' as 'Work'
+from modification as md 
+left join scaffoldTraking as sc on sc.tag = md.tag
+left join dismantle as ds on ds.tag = sc.tag
+left join areas as ar on ar.idArea = sc.idArea
+left join subJobs as sj on sj.idSubJob = sc.idSubJob
+left join jobCat as jc on jc.idJobCat = sc.idJobCat
+left join task as tk on tk.idAux = sc.idAux
+inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO
+inner join projectOrder as po on po.idPO = wo.idPO and po.jobNo = wo.jobNo
+inner join job as jb on jb.jobNo = po.jobNo
+inner join clients as cl on cl.idClient = jb.idClient
+where cl.numberClient = @numberClient
+UNION ALL
+select wo.idWO as 'Labor WO / Network #',
+case  sj.[description] 
+when 'Operation' then 'O'
+when 'Maintenance' then 'M'
+when 'T/A' then 'T'
+when 'Capital' then 'C'
+when 'Winterization' then 'W'
+when 'All' then 'All'
+when NULL then ''
+else SUBSTRING(sj.[description],1,1) end  as 'Type (O,M,T,C)',
+sc.tag as 'Tag #',
+ISNULL((select sum(psc.quantity) from productScaffold as psc where psc.tag = sc.tag),0) as 'Pieces',
+ar.name as 'UNIT',
+sc.location as 'Location',
+CONVERT(VARCHAR, sc.buildDate, 101) as 'Date UP',
+ISNULL(CONVERT(VARCHAR, ds.dismantleDate, 101),'') as 'Date Down',
+ISNULL((select sum(psc.quantity * pd.dailyRentalRate) from productScaffold as psc 
+inner join product as pd on pd.idProduct = psc.idProduct
+where psc.tag = sc.tag),0) as 'Product Amount',
+DATEDIFF(day,sc.buildDate, IIF(ds.dismantleDate is Null,GETDATE(),ds.dismantleDate)) as 'ACTIVEDAYS',
+IIF( ISNULL(ds.rentStopDate,GETDATE()) >= @startDate and sc.buildDate <= @startDate,
+	IIF( DATEADD(DAY,isnull(jc.[days],0),sc.buildDate) <= @FinalDate -- EL DIA FINAL DE RENTA GRATIS ES MENOR O IGUAL AL FINALDATE?
+	,-- SI ES MENOR O IGUAL POR LO TANTO SI HAY DIAS QUE COBRAR (ESTA DENTRO DEL RANGO)
+		IIF(DATEADD(DAY,isnull(jc.[days],0),sc.buildDate) > @startDate -- (PUNTO DE INICIO) EL DIA FINAL DE RENTA GRATIS ES MAYOR AL STARTDATE?
+		,--DIAFINAL DE RENTA GRATIS
+			IIF(ds.rentStopDate < @FinalDate -- EL DIA FINAL DE RENTA GRATIS ES MENOR QUE EL FINALDATE?
+			,DATEDIFF(DAY,DATEADD(DAY,isnull(jc.[days],0),DATEADD(DAY,-1,sc.buildDate)),ds.rentStopDate)
+			,DATEDIFF(DAY,DATEADD(DAY,isnull(jc.[days],0),DATEADD(DAY,-1,sc.buildDate)),@FinalDate))
+		,--STARTDATE
+			IIF(ds.rentStopDate < @FinalDate, 
+				DATEDIFF(DAY,DATEADD(DAY,-1 ,@startDate),ds.rentStopDate), 
+				DATEDIFF(DAY,DATEADD(DAY,-1 ,@startDate),@finalDate))
+		)	,-- NO ES MENOR O IGUAL POR ENDE NO HAY DIAS QUE COBAR (NO ESTA DENTRO DEL RANGO)
+	0),0) AS 'RDAYS',
+'Build' as 'Work'
+from scaffoldTraking as sc
+left join dismantle as ds on ds.tag = sc.tag
+left join areas as ar on ar.idArea = sc.idArea
+left join subJobs as sj on sj.idSubJob = sc.idSubJob
+left join jobCat as jc on jc.idJobCat = sc.idJobCat
+left join task as tk on tk.idAux = sc.idAux
+inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO
+inner join projectOrder as po on po.idPO = wo.idPO and po.jobNo = wo.jobNo
+inner join job as jb on jb.jobNo = po.jobNo
+inner join clients as cl on cl.idClient = jb.idClient
+where cl.numberClient = @numberClient
+) as T1 
+where T1.[RDays] > 0 and (T1.[Product Amount]*t1.[RDays]) > 0
+order by T1.[Tag #] asc
+
+IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES where TABLE_SCHEMA = 'dbo' and TABLE_NAME = 'InvoiceExcelYOYOS')
+BEGIN 
+	drop table InvoiceExcelYOYOS
+END
+select T1.[Labor WO / Network #],T1.[Type (O,M,T,C)],T1.[Tag #],T1.[Pieces]
+,T1.[UNIT],T1.[Location],T1.[Date UP],T1.[Date Down]
+into InvoiceExcelYOYOS
+from (
+select wo.idWO as 'Labor WO / Network #',
+case  sj.[description] 
+when 'Operation' then 'O'
+when 'Maintenance' then 'M'
+when 'T/A' then 'T'
+when 'Capital' then 'C'
+when 'Winterization' then 'W'
+when 'All' then 'All'
+when NULL then ''
+else SUBSTRING(sj.[description],1,1) end  as 'Type (O,M,T,C)',
+sc.tag as 'Tag #',
+ISNULL((select sum(psc.quantity) from productScaffold as psc 
+inner join product as pd on pd.idProduct = psc.idProduct 
+where psc.tag = sc.tag and pd.name like '%yo-yo%'),0) as 'Pieces',
+ar.name as 'UNIT',
+sc.location as 'Location',
+CONVERT(VARCHAR, sc.buildDate, 101) as 'Date UP',
+ISNULL(CONVERT(VARCHAR, ds.dismantleDate, 101),'') as 'Date Down'
+from scaffoldTraking as sc
+left join dismantle as ds on ds.tag = sc.tag
+left join areas as ar on ar.idArea = sc.idArea
+left join subJobs as sj on sj.idSubJob = sc.idSubJob
+left join task as tk on tk.idAux = sc.idAux
+inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO
+inner join projectOrder as po on po.idPO = wo.idPO and po.jobNo = wo.jobNo
+inner join job as jb on jb.jobNo = po.jobNo
+inner join clients as cl on cl.idClient = jb.idClient
+where cl.numberClient = @numberClient ) as T1
+where T1.[Pieces]>0", conn)
+
+            If cmd.ExecuteNonQuery Then
+                Return True
+            Else
+                Return False
+            End If
         Catch ex As Exception
             Return False
         Finally

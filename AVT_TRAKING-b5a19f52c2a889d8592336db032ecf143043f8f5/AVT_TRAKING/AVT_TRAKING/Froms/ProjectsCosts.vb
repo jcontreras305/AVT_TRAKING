@@ -1443,6 +1443,12 @@ Public Class ProjectsCosts
         End If
     End Sub
 
+    Private Sub btnUpdateMaterialExcel_Click(sender As Object, e As EventArgs) Handles btnUpdateMaterialExcel.Click
+        Dim UpExcel As New EquipmentValidation
+        UpExcel.idclient = idCliente
+        UpExcel.ShowDialog()
+    End Sub
+
     Private Sub btnFindProject_Click(sender As Object, e As EventArgs) Handles btnFindProject.Click
         Dim FT As New FindTask
         FT.FindElement = FindElement
@@ -1548,7 +1554,7 @@ Public Class ProjectsCosts
     End Function
 
     Private Sub tblMaterialProjects_CellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles tblMaterialProjects.CellEndEdit
-        If tblExpencesProjects.Rows.Count > 0 Then
+        If tblMaterialProjects.Rows.Count > 0 Then
             Select Case tblMaterialProjects.Columns(e.ColumnIndex).Name
                 Case "Description"
                     Dim mensaje As String = ""
@@ -1582,6 +1588,11 @@ Public Class ProjectsCosts
                         Next
                     Else
                         mensaje = If(mensaje = "", "Check the 'Material Code' Cell.", vbCrLf + "Check the 'Material Code' Cell.")
+                    End If
+                    If tblMaterialProjects.CurrentRow.Cells("Hours").Value IsNot DBNull.Value Then
+                        datosMaterial.Add(tblMaterialProjects.CurrentRow.Cells("Hours").Value)
+                    Else
+                        datosMaterial.Add("0")
                     End If
                     If tblMaterialProjects.CurrentRow.Cells("Description").Value IsNot DBNull.Value Then
                         datosMaterial.Add(tblMaterialProjects.CurrentRow.Cells("Description").Value)
@@ -1662,7 +1673,11 @@ Public Class ProjectsCosts
         'Else
         '    mensaje = If(mensaje = "", "Check the 'Material Code' Cell.", vbCrLf + "Check the 'Material Code' Cell.")
         'End If
-
+        If tblMaterialProjects.CurrentRow.Cells("Hours").Value IsNot DBNull.Value Then
+            datosMaterial.Add(tblMaterialProjects.CurrentRow.Cells("Hours").Value)
+        Else
+            datosMaterial.Add("0")
+        End If
 
         If tblMaterialProjects.Rows(fila).Cells("Description").Value IsNot DBNull.Value Then
             datosMaterial.Add(tblMaterialProjects.Rows(fila).Cells("Description").Value)

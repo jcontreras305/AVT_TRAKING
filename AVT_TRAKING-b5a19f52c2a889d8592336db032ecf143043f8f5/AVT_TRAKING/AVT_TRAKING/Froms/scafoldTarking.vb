@@ -1417,7 +1417,7 @@ Public Class scafoldTarking
     End Sub
     Private Sub btnSaveRowProduct_Click(sender As Object, e As EventArgs) Handles btnSaveRowProduct.Click
         If tblProduct.SelectedRows().Count > 0 Then
-            Dim lis = mtdScaffold.saveProducto(tblProduct, True)
+            Dim lis = mtdScaffold.saveProducto(tblProduct, False)
             If lis.Count = 0 Or lis IsNot Nothing Then
                 MsgBox("Sucessfull")
                 mtdScaffold.llenarProduct(tblProduct)
@@ -1478,11 +1478,13 @@ Public Class scafoldTarking
 
     Private Sub tblInComing_CellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles tblInComing.CellEndEdit
         If e.ColumnIndex = 0 Then
-            If Not soloNumero(tblInComing.CurrentCell.Value.ToString()) Then
-                tblInComing.CurrentCell.Value = "0"
-            ElseIf tblInComing.CurrentCell.Value.ToString() IsNot "" Then
-                If CInt(tblInComing.CurrentCell.Value) < 0 Then
-                    tblInComing.CurrentCell.Value = CInt(tblInComing.CurrentCell.Value) * -1
+            If tblInComing.CurrentCell.Value IsNot Nothing Then
+                If Not soloNumero(tblInComing.CurrentCell.Value.ToString()) Then
+                    tblInComing.CurrentCell.Value = "0"
+                ElseIf tblInComing.CurrentCell.Value.ToString() IsNot "" Then
+                    If CInt(tblInComing.CurrentCell.Value) < 0 Then
+                        tblInComing.CurrentCell.Value = CInt(tblInComing.CurrentCell.Value) * -1
+                    End If
                 End If
             End If
         End If

@@ -1,8 +1,11 @@
 ﻿Imports System.Runtime.InteropServices
+Imports Microsoft.Office.Core
+Imports Microsoft.Office.Interop.Excel
 Public Class ScaffoldRentalDatails
     Dim mtdOther As New MetodosOthers
     Dim windowStart As String = "SCFRentalDetails"
     Dim reportTs As New SCFRentalDetails
+    Dim mtdSc As New MetodosScaffold
     Private Sub ScaffoldRentalDatails_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         llenarComboClientsReports(cmbClient)
         btnSend.Enabled = False
@@ -121,6 +124,91 @@ Public Class ScaffoldRentalDatails
                     MessageBox.Show("Please, assign the emails to send the Report.")
                 End If
             End If
+        Catch ex As Exception
+            MsgBox(ex.Message)
+        End Try
+    End Sub
+
+    Private Sub btnDownloadExcel_Click(sender As Object, e As EventArgs) Handles btnDownloadExcel.Click
+        Try
+            Dim flagOpen As Boolean = False
+            If cmbClient.SelectedItem IsNot Nothing Then
+                Dim array() As String = cmbClient.SelectedItem.ToString().Split(" ")
+                mtdSc.actualizarInvoiceExcel(validaFechaParaSQl(dtpStartDate.Value), validaFechaParaSQl(dtpFinalDate.Value), array(0))
+                Cursor = Cursors.WaitCursor
+                Dim opFile As New OpenFileDialog
+                opFile.DefaultExt = "xlsx|xls"
+                opFile.FileName = "InvoicePieces"
+                If DialogResult.OK = opFile.ShowDialog() Then
+                    Cursor = Cursors.WaitCursor
+                    Dim ApExcel = New Microsoft.Office.Interop.Excel.Application
+
+                    Dim libro = ApExcel.Workbooks.Open(opFile.FileName)
+                    Try
+                        Dim Hoja1 As New Worksheet
+                        Dim Hoja2 As New Worksheet
+                        Dim sheetNumber1 As Integer = 1
+                        Dim flagExist1 As Boolean = False
+                        For Each sheet As Worksheet In libro.Worksheets
+                            If sheet.Name = "Pieces" Then
+                                flagExist1 = True
+                                Exit For
+                            End If
+                            sheetNumber1 += 1
+                        Next
+                        Dim sheetNumber2 As Integer = 1
+                        Dim flagExist2 As Boolean = False
+                        For Each sheet As Worksheet In libro.Worksheets
+                            If sheet.Name = "SRLs" Then
+                                flagExist2 = True
+                                Exit For
+                            End If
+                            sheetNumber2 += 1
+                        Next
+
+                        If flagExist1 Then
+                            Hoja1 = libro.Worksheets("Pieces")
+                            Hoja1.Cells(1, 10) = validaFechaParaSQl(dtpStartDate.Value)
+                            Hoja1.Cells(2, 10) = validaFechaParaSQl(dtpFinalDate.Value)
+                            Dim nameClient() As String = array(1).Split("|")
+                            Hoja1.Cells(4, 11) = "CALCULATED COLUMNS FOR " + nameClient(0) + " REVIEW"
+                        Else
+                            MessageBox.Show("Sheet Pieces Not Found." + vbCrLf + "The Data was Updated but the excel could not be overwritten.", "Important")
+                        End If
+
+                        If flagExist2 Then
+                            Hoja2 = libro.Worksheets("SRLs")
+                            Hoja2.Cells(1, 10) = validaFechaParaSQl(dtpStartDate.Value)
+                            Hoja2.Cells(2, 10) = validaFechaParaSQl(dtpFinalDate.Value)
+                        Else
+                            MessageBox.Show("Sheet SRLs Not Found." + vbCrLf + "The Data was Updated but the excel could not be overwritten.", "Important")
+                        End If
+                        libro.Save()
+                        If DialogResult.Yes = MessageBox.Show("Successful" + vbCrLf + "Would you like to open the excel?", "Message", MessageBoxButtons.YesNo, MessageBoxIcon.Question) Then
+                            flagOpen = True
+                        End If
+                        NAR(Hoja1)
+                        NAR(Hoja2)
+                        'Hoja1 = Nothing
+                    Catch ex As Exception
+                        MessageBox.Show("Sheet Pieces Not Found." + vbCrLf + "The Data was Updated but the excel could not be overwritten.", "Important")
+                    Finally
+                        libro.Close()
+                        NAR(libro)
+                        'libro = Nothing
+                        ApExcel.Quit()
+                        NAR(ApExcel)
+                        'ApExcel = Nothing
+                        If flagOpen Then
+                            System.Diagnostics.Process.Start(opFile.FileName)
+                        End If
+                    End Try
+                End If
+                Cursor = Cursors.Default
+            Else
+                MessageBox.Show("Please select a Client.", "Important", MessageBoxButtons.OK, MessageBoxIcon.Information)
+            End If
+
         Catch ex As Exception
             MsgBox(ex.Message)
         End Try

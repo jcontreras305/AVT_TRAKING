@@ -135,6 +135,7 @@ Partial Class ProjectsCosts
         Me.Panel8 = New System.Windows.Forms.Panel()
         Me.btnUpdate = New System.Windows.Forms.Button()
         Me.pnlTablas = New System.Windows.Forms.Panel()
+        Me.btnUpdateMaterialExcel = New System.Windows.Forms.Button()
         Me.Panel1.SuspendLayout()
         Me.TableLayoutPanel2.SuspendLayout()
         Me.Panel5.SuspendLayout()
@@ -953,6 +954,7 @@ Partial Class ProjectsCosts
         Me.btnDelete.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(58, Byte), Integer), CType(CType(115, Byte), Integer))
         Me.btnDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnDelete.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.btnDelete.Image = Global.AVT_TRAKING.My.Resources.Resources.delete
         Me.btnDelete.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.btnDelete.Location = New System.Drawing.Point(3, 47)
         Me.btnDelete.Name = "btnDelete"
@@ -1488,6 +1490,7 @@ Partial Class ProjectsCosts
         'Panel8
         '
         Me.Panel8.BackColor = System.Drawing.Color.FromArgb(CType(CType(83, Byte), Integer), CType(CType(93, Byte), Integer), CType(CType(102, Byte), Integer))
+        Me.Panel8.Controls.Add(Me.btnUpdateMaterialExcel)
         Me.Panel8.Controls.Add(Me.btnUpdate)
         Me.Panel8.Controls.Add(Me.btnDelete)
         Me.Panel8.Dock = System.Windows.Forms.DockStyle.Fill
@@ -1522,6 +1525,22 @@ Partial Class ProjectsCosts
         Me.pnlTablas.Name = "pnlTablas"
         Me.pnlTablas.Size = New System.Drawing.Size(1107, 234)
         Me.pnlTablas.TabIndex = 4
+        '
+        'btnUpdateMaterialExcel
+        '
+        Me.btnUpdateMaterialExcel.FlatAppearance.BorderSize = 0
+        Me.btnUpdateMaterialExcel.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(58, Byte), Integer), CType(CType(115, Byte), Integer))
+        Me.btnUpdateMaterialExcel.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnUpdateMaterialExcel.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.btnUpdateMaterialExcel.Image = Global.AVT_TRAKING.My.Resources.Resources.excel
+        Me.btnUpdateMaterialExcel.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnUpdateMaterialExcel.Location = New System.Drawing.Point(2, 81)
+        Me.btnUpdateMaterialExcel.Name = "btnUpdateMaterialExcel"
+        Me.btnUpdateMaterialExcel.Size = New System.Drawing.Size(128, 38)
+        Me.btnUpdateMaterialExcel.TabIndex = 39
+        Me.btnUpdateMaterialExcel.Text = "Update Excel"
+        Me.btnUpdateMaterialExcel.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.btnUpdateMaterialExcel.UseVisualStyleBackColor = True
         '
         'ProjectsCosts
         '
@@ -1714,4 +1733,5 @@ Partial Class ProjectsCosts
     Friend WithEvents btnMaximize As PictureBox
     Friend WithEvents PictureBox3 As PictureBox
     Friend WithEvents Label28 As Label
+    Friend WithEvents btnUpdateMaterialExcel As Button
 End Class

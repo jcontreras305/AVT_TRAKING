@@ -2,6 +2,7 @@
 Imports System.ComponentModel
 
 Public Class MainFrom
+    Public imageClientLogin As Image
     Private Sub BtnMaterials_Click(sender As Object, e As EventArgs) Handles btnMaterials.Click
         OpenFormPanel(Of Materials)()
         'Dim a As New Materials
@@ -27,8 +28,8 @@ Public Class MainFrom
     End Sub
 
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
-        Dim a As New Login
-        a.Show()
+        'Dim a As New Login
+        'a.Show()
         Me.Close()
     End Sub
 
@@ -103,7 +104,9 @@ Public Class MainFrom
 
         If FormPanel Is Nothing Then
             Dim newPC = New Miform()
-            newPC.pcbLogoPC.Image = pcbLogoMain.Image
+            If imageClientLogin IsNot Nothing Then
+                newPC.pcbLogoPC.Image = imageClientLogin
+            End If
             FormPanel = newPC
             FormPanel.TopLevel = False
             FormPanel.Dock = DockStyle.Fill
