@@ -1622,7 +1622,8 @@ dis.rentStopDate as 'rentStopDate',
 --isnull(jc.[days],0) as 'Contract days',
 DATEDIFF(DAY,sc.buildDate,ISNULL(dis.rentStopDate,GETDATE())) as 'ActivityDays',
 IIF(sc.tag is not null,'Build','Mod') as 'Task',
-IIF( ISNULL(dis.rentStopDate,GETDATE()) >= @startDate and sc.buildDate <= @startDate ,
+IIF( ISNULL(dis.rentStopDate,GETDATE()) >= @startDate --and sc.buildDate <= @startDate 
+,
 	IIF( DATEADD(DAY,isnull(jc.[days],0),sc.buildDate) <= @FinalDate -- EL DIA FINAL DE RENTA GRATIS ES MENOR O IGUAL AL FINALDATE?
 	,-- SI ES MENOR O IGUAL POR LO TANTO SI HAY DIAS QUE COBRAR (ESTA DENTRO DEL RANGO)
 		IIF(DATEADD(DAY,isnull(jc.[days],0),sc.buildDate) > @startDate -- (PUNTO DE INICIO) EL DIA FINAL DE RENTA GRATIS ES MAYOR AL STARTDATE?
@@ -1698,3 +1699,67 @@ inner join clients as cl on cl.idClient = jb.idClient
 where cl.numberClient like iif(@all = 1, '%%', concat('%',@numberClient,'%'))
 ORDER BY pd.idProduct
 end
+go
+
+--##############################################################################################
+--################## SP EQUIPMENT DAILY ########################################################
+--##############################################################################################
+
+ALTER proc [dbo].[sp_Equipament_Daily]
+@startDate date,
+@FinalDate date,
+@numberClient int
+as
+begin 
+	select cl.companyName 'Comapany Name',CONCAT(cl.firstName,' ',cl.lastName,' ',cl.middleName) as 'Client' ,
+	jb.jobNo, po.idPO,CONCAT(wo.idWO,'-',tk.task) as 'WO No',tk.accountNum,tk.expCode as 'CostAllocation', jb.costCode as 'CostCenter',
+	ISNULL(CONVERT(varchar,jb.contractNo),'') as 'Contract' ,tk.[description] as'Project Description' 
+	,mu.[dateMaterial] as 'Date Worked'
+	,mc.code as 'Equip No'
+	,mc.[description] as 'Equipment Class'
+	,mt.name as 'Equipament Description'
+	,mu.hoursST as 'ST Hours'
+	,mu.amount as 'Daily Cost'
+	from materialUsed as mu 
+	inner join material as mt on mt.idMaterial = mu.idMaterial
+	inner join materialClass as mc on mc.code = mt.code
+	inner join task as tk on tk.idAux = mu.idAux
+	inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO
+	inner join projectOrder as po on po.idPO = wo.idPO and wo.jobNo = po.jobNo
+	inner join job as jb on jb.jobNo = po.jobNo
+	inner join clients as cl on cl.idClient = jb.idClient
+	where SUBSTRING(mc.code,1,2) = '2.' 
+	and cl.numberClient = @numberClient
+	and (mu.dateMaterial between @startDate and @FinalDate)
+end
+go
+
+--##############################################################################################
+--################## SP SCAFFOLD ACTIVE ########################################################
+--##############################################################################################
+
+create proc sp_SCF_Active
+@numberClient as int
+as 
+begin
+select CONCAT(wo.idWO,' ',tk.task) as 'WO#', sc.tag as 'Tag' ,sc.location as 'Location','Build' as 'Task',
+sc.buildDate as 'Build', IIF(ds.dismantleDate is null , DATEDIFF(DAY,sc.buildDate ,GETDATE()),DATEDIFF(DAY,sc.buildDate ,ds.dismantleDate)) as 'D.Ac.',
+ds.dismantleDate as 'R. Stop', 
+CONCAT(si.[length],' x ',si.width,' x ',si.heigth,' - ',(si.descks+si.extraDeck),' Deck (s)') as 'Scaffold Description',
+sc.foreman as 'Foreman',
+CONCAT(CONVERT(VARCHAR, sc.reqComp,101),' - ',sc.erector) as 'Comp - Req',
+ISNULL((select SUM(IIF(pd.PLF <> 0,pd.PLF*psc.quantity,pd.PSQF*psc.quantity)) from productScaffold as psc 
+	inner join product as pd on pd.idProduct = psc.idProduct 
+	where psc.tag = sc.tag),0)as 'Leg',
+ISNULL((select SUM(psc.quantity) from productScaffold as psc where psc.tag = sc.tag),0) as 'QTY'
+from scaffoldTraking as sc
+left join scaffoldInformation as si on si.tag = sc.tag
+left join dismantle as ds on ds.tag = sc.tag
+inner join task as tk on tk.idAux = sc.idAux
+inner join workOrder as wo on wo.idAuxWO= tk.idAuxWO
+inner join projectOrder as po on po.idPO = wo.idPO and po.jobNo = wo.jobNo
+inner join job as jb on jb.jobNo = po.jobNo
+inner join clients as cl on cl.idClient = jb.idClient
+where ds.idDismantle is null and cl.numberClient = @numberClient
+end
+go

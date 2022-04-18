@@ -560,17 +560,13 @@ left join materialClass as mc on mc.code = mt.code", conn)
             Return False
         End Try
     End Function
-    Public Function llenarComboCellMaterial(ByVal cmbMaterial As ComboBox, ByVal tabla As DataTable) As Boolean
+    Public Function llenarComboCellMaterial(ByVal cmbMaterial As ComboBox) As DataTable
         Try
             conectar()
             Dim cmd As New SqlCommand("select idMaterial, number ,name , isnull(mt.code,'') as 'class'from material as mt 
 left join materialClass as mc on mc.code = mt.code", conn)
             Dim reader As SqlDataReader = cmd.ExecuteReader
-            If tabla IsNot Nothing Then
-                tabla.Clear()
-            Else
-                tabla = New Data.DataTable
-            End If
+            Dim tabla As New Data.DataTable
             Dim cont = 0
             Dim column As DataColumn
             If tabla.Columns.Count = 0 Then
@@ -583,7 +579,14 @@ left join materialClass as mc on mc.code = mt.code", conn)
                 tabla.Columns.Add(column)
                 column = New DataColumn()
                 column.DataType = System.Type.GetType("System.String")
-                column.ColumnName = "Material"
+                column.ColumnName = "Number"
+                column.AutoIncrement = False
+                column.ReadOnly = False
+                column.Unique = False
+                tabla.Columns.Add(column)
+                column = New DataColumn()
+                column.DataType = System.Type.GetType("System.String")
+                column.ColumnName = "Name"
                 column.AutoIncrement = False
                 column.ReadOnly = False
                 column.Unique = False
@@ -600,20 +603,21 @@ left join materialClass as mc on mc.code = mt.code", conn)
                 Dim row As DataRow
                 row = tabla.NewRow()
                 row("id") = reader("idMaterial")
-                row("Material") = CStr(reader("number")) + " " + reader("name")
+                row("Number") = CStr(reader("number"))
+                row("Name") = reader("name")
                 row("Class") = reader("class")
                 tabla.Rows.Add(row)
                 cmbMaterial.Items.Add(reader("class") + " " + reader("name"))
             End While
-            desconectar()
+            reader.Close()
             If tabla.Rows.Count > 0 Then
-                Return True
+                Return tabla
             Else
-                Return False
+                Return tabla
             End If
         Catch ex As Exception
             desconectar()
-            Return False
+            Return Nothing
         End Try
     End Function
     Public Sub buscarMaterialesPorProyecto(ByVal tblMateriales As DataGridView, ByVal idWO As String, ByVal idTask As String)
@@ -1332,17 +1336,28 @@ where tk.idAux = '" + idAux + "' and wo.idAuxWO = '" + WO + "'", conn)
         End Try
     End Function
 
-    Public Function insertMaterialUsed(ByVal datos As List(Of String)) As Boolean
+    Public Function insertMaterialUsed(ByVal datos As List(Of String), Optional tran As SqlTransaction = Nothing, Optional connection As SqlConnection = Nothing) As Boolean
         Try
-            conectar()
+
             Dim cmd As New SqlCommand("
-                insert into materialUsed values(NEWID(),'" + datos(1) + "',1," + datos(3) + ",'" + datos(6) + "','" + datos(2) + "','" + datos(4) + "'," + datos(5) + ")", conn)
+                insert into materialUsed values(NEWID(),'" + datos(1) + "',1," + datos(3) + ",'" + datos(6) + "','" + datos(2) + "','" + datos(4) + "'," + datos(5) + ")")
+            If tran IsNot Nothing Then
+                cmd.Connection = connection
+                cmd.Transaction = tran
+            Else
+                conectar()
+                cmd.Connection = conn
+            End If
             If cmd.ExecuteNonQuery = 1 Then
-                UpdateTotalSpendTask(datos(5))
-                desconectar()
+                'UpdateTotalSpendTask(datos(5))
+                If tran Is Nothing Then
+                    desconectar()
+                End If
                 Return True
             Else
-                desconectar()
+                If tran Is Nothing Then
+                    desconectar()
+                End If
                 Return False
             End If
         Catch ex As Exception

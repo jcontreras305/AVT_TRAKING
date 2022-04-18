@@ -1239,9 +1239,9 @@ Public Class ProjectsCosts
             If DialogResult.Yes = MessageBox.Show("Are you sure to delete " + tblMaterialProjects.SelectedRows.Count.ToString() + " materials?" + vbCrLf + "If you accept you can't recober this records.", "Important", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) Then
                 For Each row As DataGridViewRow In tblMaterialProjects.SelectedRows
                     mtdJobs.deleteMaterial(row.Cells("idMaterialUsed").Value, idAuxWO)
-                    mtdJobs.buscarMaterialesPorProyecto(tblMaterialProjects, idAuxWO, task)
-                    calcularValores()
                 Next
+                mtdJobs.buscarMaterialesPorProyecto(tblMaterialProjects, idAuxWO, task)
+                calcularValores()
             End If
         Else
             MessageBox.Show("Plese select a row to continue.", "Important", MessageBoxButtons.OK, MessageBoxIcon.Warning)
@@ -1447,6 +1447,8 @@ Public Class ProjectsCosts
         Dim UpExcel As New EquipmentValidation
         UpExcel.idclient = idCliente
         UpExcel.ShowDialog()
+        mtdJobs.buscarMaterialesPorProyecto(tblMaterialProjects, idAuxWO, task)
+        calcularValores()
     End Sub
 
     Private Sub btnFindProject_Click(sender As Object, e As EventArgs) Handles btnFindProject.Click

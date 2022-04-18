@@ -3700,4 +3700,56 @@ where T1.[Pieces]>0", conn)
             desconectar()
         End Try
     End Function
+
+    '======================== METODOS PARA REPORTES ================================================================================================
+
+    Public Function llenarTablaActiveScaffold(ByVal tbl As DataGridView, ByVal numberClient As String) As Boolean
+        Try
+            conectar()
+            Dim cmd As New SqlCommand("select T1.[WO#],T1.[Type (O,M,T,C)],T1.[Tag #],T1.[Pieces],T1.[Unit],T1.[Location],T1.[Build],T1.[ActiveDays] from ( 
+select wo.idWO as 'WO#', 
+case sj.[description] 
+	when 'Maintenance' then 'M'
+	when 'T/A' then 'T'
+	when 'Capital' then 'C' 
+	when 'Winterization' then 'W'
+	when 'Operation' then 'O'
+	when 'All' then 'All'
+	when NULL then ''
+	else sj.[description] 
+end as 'Type (O,M,T,C)',
+sc.tag as 'Tag #',
+ISNULL((select SUM(pts.quantity) from productTotalScaffold as pts where pts.tag = sc.tag),0) as 'Pieces',
+CONCAT(ar.idArea ,' ',ar.name) as 'Unit',
+sc.location as 'Location',
+sc.buildDate as 'Build'
+,IIF(ds.dismantleDate is null , DATEDIFF(DAY,DATEADD(DAY, -1,sc.buildDate),GETDATE()),DATEDIFF(DAY,DATEADD(DAY, -1,sc.buildDate) ,ds.dismantleDate)) as 'ActiveDays'
+,ISNULL(jc.[days],0) as 'Conctract Days'
+from scaffoldTraking as sc
+left join subJobs as sj on sj.idSubJob = sc.idSubJob
+left join areas as ar on ar.idArea = sc.idArea
+left join jobCat as jc on jc.idJobCat = sc.idJobCat
+left join dismantle as ds on ds.tag = sc.tag
+inner join task as tk on tk.idAux = sc.idAux
+inner join workOrder as wo on wo.idAuxWO= tk.idAuxWO
+inner join projectOrder as po on po.idPO = wo.idPO and po.jobNo = wo.jobNo
+inner join job as jb on jb.jobNo = po.jobNo
+inner join clients as cl on cl.idClient = jb.idClient
+where ds.idDismantle is null and cl.numberClient = " + numberClient + "
+) as T1 where T1.[ActiveDays] <= T1.[Conctract Days]", conn)
+            Dim dr As SqlDataReader = cmd.ExecuteReader
+            If tbl.Rows IsNot Nothing Then
+                tbl.Rows.Clear()
+            End If
+            While dr.Read()
+                tbl.Rows.Add(dr("WO#"), dr("Type (O,M,T,C)"), dr("Tag #"), dr("Pieces"), dr("Unit"), dr("Location"), CDate(dr("Build")).ToString("MM/dd/yyyy"), dr("ActiveDays"))
+            End While
+            dr.Close()
+            Return True
+        Catch ex As Exception
+            Return False
+        Finally
+            desconectar()
+        End Try
+    End Function
 End Class

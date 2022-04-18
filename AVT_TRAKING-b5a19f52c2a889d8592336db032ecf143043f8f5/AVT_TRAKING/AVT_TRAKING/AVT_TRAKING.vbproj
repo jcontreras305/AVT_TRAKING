@@ -574,6 +574,12 @@
       <DependentUpon>YearFinalHours.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="RerportsScaffold\ScaffoldActive.Designer.vb">
+      <DependentUpon>ScaffoldActive.vb</DependentUpon>
+    </Compile>
+    <Compile Include="RerportsScaffold\ScaffoldActive.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="RerportsScaffold\ScaffoldHisoryByJob.Designer.vb">
       <DependentUpon>ScaffoldHisoryByJob.vb</DependentUpon>
     </Compile>
@@ -609,6 +615,12 @@
     </Compile>
     <Compile Include="RerportsScaffold\ScaffoldRentalDatails.vb">
       <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RerportsScaffold\SCFActive.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SCFActive.rpt</DependentUpon>
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="RerportsScaffold\SCFHistoryByJob.vb">
       <AutoGen>True</AutoGen>
@@ -929,6 +941,9 @@
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>YearFinalHours.vb</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="RerportsScaffold\ScaffoldActive.resx">
+      <DependentUpon>ScaffoldActive.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="RerportsScaffold\ScaffoldHisoryByJob.resx">
       <DependentUpon>ScaffoldHisoryByJob.vb</DependentUpon>
     </EmbeddedResource>
@@ -946,6 +961,10 @@
     </EmbeddedResource>
     <EmbeddedResource Include="RerportsScaffold\ScaffoldRentalDatails.resx">
       <DependentUpon>ScaffoldRentalDatails.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RerportsScaffold\SCFActive.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>SCFActive.vb</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="RerportsScaffold\SCFHistoryByJob.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>

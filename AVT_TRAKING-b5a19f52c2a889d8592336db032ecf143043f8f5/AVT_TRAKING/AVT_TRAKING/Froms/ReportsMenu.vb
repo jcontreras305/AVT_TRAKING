@@ -127,4 +127,9 @@ Public Class ReportsMenu
         Dim tse As New DailyEquipmentRent
         tse.ShowDialog()
     End Sub
+
+    Private Sub Button22_Click(sender As Object, e As EventArgs) Handles Button22.Click
+        Dim tse As New ScaffoldActive
+        tse.ShowDialog()
+    End Sub
 End Class

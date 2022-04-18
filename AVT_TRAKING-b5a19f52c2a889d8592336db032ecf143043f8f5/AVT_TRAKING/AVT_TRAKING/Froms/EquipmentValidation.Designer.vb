@@ -36,6 +36,9 @@ Partial Class EquipmentValidation
         Me.cmbInformation = New System.Windows.Forms.ComboBox()
         Me.Panel2 = New System.Windows.Forms.Panel()
         Me.tblEquipment = New System.Windows.Forms.DataGridView()
+        Me.Panel3 = New System.Windows.Forms.Panel()
+        Me.pgbComplete = New System.Windows.Forms.ProgressBar()
+        Me.lblMessage = New System.Windows.Forms.Label()
         Me.ErrorClm = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.DateEquip = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.ProjectEquip = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -45,9 +48,6 @@ Partial Class EquipmentValidation
         Me.Description = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.ClassEquip = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.STHrs = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Panel3 = New System.Windows.Forms.Panel()
-        Me.pgbComplete = New System.Windows.Forms.ProgressBar()
-        Me.lblMessage = New System.Windows.Forms.Label()
         Me.TableLayoutPanel1.SuspendLayout()
         Me.Panel1.SuspendLayout()
         CType(Me.PictureBox4, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -228,6 +228,35 @@ Partial Class EquipmentValidation
         Me.tblEquipment.Size = New System.Drawing.Size(794, 330)
         Me.tblEquipment.TabIndex = 0
         '
+        'Panel3
+        '
+        Me.Panel3.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(58, Byte), Integer), CType(CType(115, Byte), Integer))
+        Me.Panel3.Controls.Add(Me.pgbComplete)
+        Me.Panel3.Controls.Add(Me.lblMessage)
+        Me.Panel3.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Panel3.Location = New System.Drawing.Point(3, 419)
+        Me.Panel3.Name = "Panel3"
+        Me.Panel3.Size = New System.Drawing.Size(794, 28)
+        Me.Panel3.TabIndex = 2
+        '
+        'pgbComplete
+        '
+        Me.pgbComplete.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.pgbComplete.Location = New System.Drawing.Point(588, 3)
+        Me.pgbComplete.Name = "pgbComplete"
+        Me.pgbComplete.Size = New System.Drawing.Size(197, 23)
+        Me.pgbComplete.TabIndex = 1
+        '
+        'lblMessage
+        '
+        Me.lblMessage.AutoSize = True
+        Me.lblMessage.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.lblMessage.Location = New System.Drawing.Point(21, 10)
+        Me.lblMessage.Name = "lblMessage"
+        Me.lblMessage.Size = New System.Drawing.Size(56, 13)
+        Me.lblMessage.TabIndex = 0
+        Me.lblMessage.Text = "Message: "
+        '
         'ErrorClm
         '
         Me.ErrorClm.HeaderText = "Error"
@@ -277,35 +306,6 @@ Partial Class EquipmentValidation
         Me.STHrs.HeaderText = "ST Hrs"
         Me.STHrs.Name = "STHrs"
         '
-        'Panel3
-        '
-        Me.Panel3.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(58, Byte), Integer), CType(CType(115, Byte), Integer))
-        Me.Panel3.Controls.Add(Me.pgbComplete)
-        Me.Panel3.Controls.Add(Me.lblMessage)
-        Me.Panel3.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel3.Location = New System.Drawing.Point(3, 419)
-        Me.Panel3.Name = "Panel3"
-        Me.Panel3.Size = New System.Drawing.Size(794, 28)
-        Me.Panel3.TabIndex = 2
-        '
-        'pgbComplete
-        '
-        Me.pgbComplete.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.pgbComplete.Location = New System.Drawing.Point(588, 3)
-        Me.pgbComplete.Name = "pgbComplete"
-        Me.pgbComplete.Size = New System.Drawing.Size(197, 23)
-        Me.pgbComplete.TabIndex = 1
-        '
-        'lblMessage
-        '
-        Me.lblMessage.AutoSize = True
-        Me.lblMessage.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.lblMessage.Location = New System.Drawing.Point(21, 10)
-        Me.lblMessage.Name = "lblMessage"
-        Me.lblMessage.Size = New System.Drawing.Size(56, 13)
-        Me.lblMessage.TabIndex = 0
-        Me.lblMessage.Text = "Message: "
-        '
         'EquipmentValidation
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -346,6 +346,7 @@ Partial Class EquipmentValidation
     Friend WithEvents btnMinimize As PictureBox
     Friend WithEvents btnRestore As PictureBox
     Friend WithEvents btnMaximize As PictureBox
+    Friend WithEvents btnSave As Button
     Friend WithEvents ErrorClm As DataGridViewTextBoxColumn
     Friend WithEvents DateEquip As DataGridViewTextBoxColumn
     Friend WithEvents ProjectEquip As DataGridViewTextBoxColumn
@@ -355,5 +356,4 @@ Partial Class EquipmentValidation
     Friend WithEvents Description As DataGridViewTextBoxColumn
     Friend WithEvents ClassEquip As DataGridViewTextBoxColumn
     Friend WithEvents STHrs As DataGridViewTextBoxColumn
-    Friend WithEvents btnSave As Button
 End Class
