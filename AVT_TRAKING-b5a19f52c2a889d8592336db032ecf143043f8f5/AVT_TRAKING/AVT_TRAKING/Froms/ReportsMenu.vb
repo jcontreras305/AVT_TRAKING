@@ -132,4 +132,50 @@ Public Class ReportsMenu
         Dim tse As New ScaffoldActive
         tse.ShowDialog()
     End Sub
+    Public datos As New List(Of String)
+    Public cancelProcess As Boolean
+    Private Sub Button23_Click(sender As Object, e As EventArgs) Handles Button23.Click
+        Dim resultMessage = MessageBox.Show("Would you like to Asign diferent Range of Date?", "Message", MessageBoxButtons.YesNoCancel)
+        If resultMessage = DialogResult.Yes Then
+            Cursor = Cursors.WaitCursor
+            Dim rpData As New ReportDateExcel
+            AddOwnedForm(rpData)
+            rpData.startDate = True
+            rpData.finalDate = False
+            rpData.clients = False
+            rpData.jobs = False
+            rpData.windowStart = "UnderFourty"
+            rpData.ShowDialog()
+            If Not cancelProcess Then
+                Dim mtdReportMenu As New ReportsExcel
+                mtdReportMenu.createExcelUnderFourty(If(datos.Count > 0, datos(0), validaFechaParaSQl(System.DateTime.Today)))
+                Cursor = Cursors.Default
+            End If
+        ElseIf resultMessage = DialogResult.No Then
+            Cursor = Cursors.WaitCursor
+            Dim mtdReportMenu As New ReportsExcel
+            mtdReportMenu.createExcelUnderFourty(validaFechaParaSQl(System.DateTime.Today))
+            Cursor = Cursors.Default
+        Else
+        End If
+    End Sub
+
+    Private Sub Button24_Click(sender As Object, e As EventArgs) Handles Button24.Click
+        Cursor = Cursors.WaitCursor
+        Dim rpData As New ReportDateExcel
+        AddOwnedForm(rpData)
+        rpData.startDate = True
+        rpData.finalDate = True
+        rpData.clients = True
+        rpData.jobs = True
+        rpData.dtpStartDate.Value = New Date(System.DateTime.Today.Year, System.DateTime.Today.Month, 1)
+        rpData.dtpFinalDate.Value = New Date(System.DateTime.Today.Year, System.DateTime.Today.Month, DateTime.DaysInMonth(System.DateTime.Today.Year, System.DateTime.Today.Month))
+        rpData.windowStart = "MounthHours"
+        rpData.ShowDialog()
+        If Not cancelProcess Then
+            Dim mtdReportMenu As New ReportsExcel
+            mtdReportMenu.createExcelMoutlyHours(datos(2), datos(0), datos(1), If(datos(4) = "1", Nothing, datos(3)))
+            Cursor = Cursors.Default
+        End If
+    End Sub
 End Class

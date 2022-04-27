@@ -1146,6 +1146,7 @@ Public Class HoursWeekPerEmployees
         e.Cancel = True
     End Sub
 
+
     Private Sub btnTime_Click(sender As Object, e As EventArgs) Handles btnTime.Click
         Dim timeSheet As New TimeSheet
         timeSheet.tablaEmpleadosId = idsEmployees

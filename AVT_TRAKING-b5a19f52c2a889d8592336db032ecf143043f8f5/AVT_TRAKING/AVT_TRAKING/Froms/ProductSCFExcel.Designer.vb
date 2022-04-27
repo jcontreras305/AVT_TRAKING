@@ -31,6 +31,12 @@ Partial Class ProductSCFExcel
         Me.lblTitle = New System.Windows.Forms.Label()
         Me.Panel2 = New System.Windows.Forms.Panel()
         Me.tblProducts = New System.Windows.Forms.DataGridView()
+        Me.QTY = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ProductID = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.CostUM = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.UM = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ProductDescription = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.QTYMax = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Panel3 = New System.Windows.Forms.Panel()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.cmbJobNo = New System.Windows.Forms.ComboBox()
@@ -40,12 +46,6 @@ Partial Class ProductSCFExcel
         Me.Panel4 = New System.Windows.Forms.Panel()
         Me.lblMessage = New System.Windows.Forms.Label()
         Me.pgbComplete = New System.Windows.Forms.ProgressBar()
-        Me.QTY = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.ProductID = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.CostUM = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.UM = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.ProductDescription = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.QTYMax = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.TableLayoutPanel1.SuspendLayout()
         Me.Panel1.SuspendLayout()
         CType(Me.PictureBox3, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -149,6 +149,7 @@ Partial Class ProductSCFExcel
         Me.lblTitle.Size = New System.Drawing.Size(285, 18)
         Me.lblTitle.TabIndex = 16
         Me.lblTitle.Text = "Product Inconming or OutGoing"
+        Me.lblTitle.UseWaitCursor = True
         '
         'Panel2
         '
@@ -173,118 +174,6 @@ Partial Class ProductSCFExcel
         Me.tblProducts.Size = New System.Drawing.Size(795, 240)
         Me.tblProducts.TabIndex = 0
         Me.tblProducts.UseWaitCursor = True
-        '
-        'Panel3
-        '
-        Me.Panel3.BackColor = System.Drawing.Color.FromArgb(CType(CType(83, Byte), Integer), CType(CType(93, Byte), Integer), CType(CType(102, Byte), Integer))
-        Me.Panel3.Controls.Add(Me.Label1)
-        Me.Panel3.Controls.Add(Me.cmbJobNo)
-        Me.Panel3.Controls.Add(Me.lblClient)
-        Me.Panel3.Controls.Add(Me.btnUpdateTableSCF)
-        Me.Panel3.Controls.Add(Me.btnUpdateExcel)
-        Me.Panel3.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel3.Location = New System.Drawing.Point(5, 87)
-        Me.Panel3.Name = "Panel3"
-        Me.Panel3.Size = New System.Drawing.Size(795, 54)
-        Me.Panel3.TabIndex = 2
-        Me.Panel3.UseWaitCursor = True
-        '
-        'Label1
-        '
-        Me.Label1.AutoSize = True
-        Me.Label1.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label1.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.Label1.Location = New System.Drawing.Point(23, 33)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(50, 13)
-        Me.Label1.TabIndex = 24
-        Me.Label1.Text = "Job No:"
-        '
-        'cmbJobNo
-        '
-        Me.cmbJobNo.FormattingEnabled = True
-        Me.cmbJobNo.Location = New System.Drawing.Point(79, 30)
-        Me.cmbJobNo.Name = "cmbJobNo"
-        Me.cmbJobNo.Size = New System.Drawing.Size(152, 21)
-        Me.cmbJobNo.TabIndex = 23
-        Me.cmbJobNo.UseWaitCursor = True
-        '
-        'lblClient
-        '
-        Me.lblClient.AutoSize = True
-        Me.lblClient.Font = New System.Drawing.Font("Verdana", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblClient.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.lblClient.Location = New System.Drawing.Point(18, 10)
-        Me.lblClient.Name = "lblClient"
-        Me.lblClient.Size = New System.Drawing.Size(55, 16)
-        Me.lblClient.TabIndex = 22
-        Me.lblClient.Text = "Client:"
-        '
-        'btnUpdateTableSCF
-        '
-        Me.btnUpdateTableSCF.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnUpdateTableSCF.BackColor = System.Drawing.SystemColors.ButtonShadow
-        Me.btnUpdateTableSCF.FlatAppearance.BorderSize = 0
-        Me.btnUpdateTableSCF.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(58, Byte), Integer), CType(CType(115, Byte), Integer))
-        Me.btnUpdateTableSCF.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnUpdateTableSCF.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnUpdateTableSCF.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.btnUpdateTableSCF.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnUpdateTableSCF.Location = New System.Drawing.Point(687, 10)
-        Me.btnUpdateTableSCF.Name = "btnUpdateTableSCF"
-        Me.btnUpdateTableSCF.Size = New System.Drawing.Size(88, 32)
-        Me.btnUpdateTableSCF.TabIndex = 21
-        Me.btnUpdateTableSCF.Text = "Update"
-        Me.btnUpdateTableSCF.UseVisualStyleBackColor = False
-        Me.btnUpdateTableSCF.UseWaitCursor = True
-        '
-        'btnUpdateExcel
-        '
-        Me.btnUpdateExcel.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnUpdateExcel.BackColor = System.Drawing.SystemColors.ButtonShadow
-        Me.btnUpdateExcel.FlatAppearance.BorderSize = 0
-        Me.btnUpdateExcel.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(58, Byte), Integer), CType(CType(115, Byte), Integer))
-        Me.btnUpdateExcel.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnUpdateExcel.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnUpdateExcel.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.btnUpdateExcel.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnUpdateExcel.Location = New System.Drawing.Point(569, 10)
-        Me.btnUpdateExcel.Name = "btnUpdateExcel"
-        Me.btnUpdateExcel.Size = New System.Drawing.Size(93, 32)
-        Me.btnUpdateExcel.TabIndex = 20
-        Me.btnUpdateExcel.Text = "..."
-        Me.btnUpdateExcel.UseVisualStyleBackColor = False
-        Me.btnUpdateExcel.UseWaitCursor = True
-        '
-        'Panel4
-        '
-        Me.Panel4.BackColor = System.Drawing.Color.FromArgb(CType(CType(83, Byte), Integer), CType(CType(93, Byte), Integer), CType(CType(102, Byte), Integer))
-        Me.Panel4.Controls.Add(Me.lblMessage)
-        Me.Panel4.Controls.Add(Me.pgbComplete)
-        Me.Panel4.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel4.Location = New System.Drawing.Point(5, 397)
-        Me.Panel4.Name = "Panel4"
-        Me.Panel4.Size = New System.Drawing.Size(795, 43)
-        Me.Panel4.TabIndex = 3
-        Me.Panel4.UseWaitCursor = True
-        '
-        'lblMessage
-        '
-        Me.lblMessage.AutoSize = True
-        Me.lblMessage.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.lblMessage.Location = New System.Drawing.Point(9, 11)
-        Me.lblMessage.Name = "lblMessage"
-        Me.lblMessage.Size = New System.Drawing.Size(53, 13)
-        Me.lblMessage.TabIndex = 4
-        Me.lblMessage.Text = "Message:"
-        '
-        'pgbComplete
-        '
-        Me.pgbComplete.Location = New System.Drawing.Point(561, 11)
-        Me.pgbComplete.Name = "pgbComplete"
-        Me.pgbComplete.Size = New System.Drawing.Size(229, 23)
-        Me.pgbComplete.TabIndex = 3
-        Me.pgbComplete.UseWaitCursor = True
         '
         'QTY
         '
@@ -321,6 +210,123 @@ Partial Class ProductSCFExcel
         Me.QTYMax.Name = "QTYMax"
         Me.QTYMax.ReadOnly = True
         Me.QTYMax.Visible = False
+        '
+        'Panel3
+        '
+        Me.Panel3.BackColor = System.Drawing.Color.FromArgb(CType(CType(83, Byte), Integer), CType(CType(93, Byte), Integer), CType(CType(102, Byte), Integer))
+        Me.Panel3.Controls.Add(Me.Label1)
+        Me.Panel3.Controls.Add(Me.cmbJobNo)
+        Me.Panel3.Controls.Add(Me.lblClient)
+        Me.Panel3.Controls.Add(Me.btnUpdateTableSCF)
+        Me.Panel3.Controls.Add(Me.btnUpdateExcel)
+        Me.Panel3.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Panel3.Location = New System.Drawing.Point(5, 87)
+        Me.Panel3.Name = "Panel3"
+        Me.Panel3.Size = New System.Drawing.Size(795, 54)
+        Me.Panel3.TabIndex = 2
+        Me.Panel3.UseWaitCursor = True
+        '
+        'Label1
+        '
+        Me.Label1.AutoSize = True
+        Me.Label1.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label1.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.Label1.Location = New System.Drawing.Point(23, 33)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(50, 13)
+        Me.Label1.TabIndex = 24
+        Me.Label1.Text = "Job No:"
+        Me.Label1.UseWaitCursor = True
+        '
+        'cmbJobNo
+        '
+        Me.cmbJobNo.FormattingEnabled = True
+        Me.cmbJobNo.Location = New System.Drawing.Point(79, 30)
+        Me.cmbJobNo.Name = "cmbJobNo"
+        Me.cmbJobNo.Size = New System.Drawing.Size(152, 21)
+        Me.cmbJobNo.TabIndex = 23
+        Me.cmbJobNo.UseWaitCursor = True
+        '
+        'lblClient
+        '
+        Me.lblClient.AutoSize = True
+        Me.lblClient.Font = New System.Drawing.Font("Verdana", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblClient.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.lblClient.Location = New System.Drawing.Point(18, 10)
+        Me.lblClient.Name = "lblClient"
+        Me.lblClient.Size = New System.Drawing.Size(55, 16)
+        Me.lblClient.TabIndex = 22
+        Me.lblClient.Text = "Client:"
+        Me.lblClient.UseWaitCursor = True
+        '
+        'btnUpdateTableSCF
+        '
+        Me.btnUpdateTableSCF.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnUpdateTableSCF.FlatAppearance.BorderSize = 0
+        Me.btnUpdateTableSCF.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(58, Byte), Integer), CType(CType(115, Byte), Integer))
+        Me.btnUpdateTableSCF.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnUpdateTableSCF.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnUpdateTableSCF.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.btnUpdateTableSCF.Image = Global.AVT_TRAKING.My.Resources.Resources.save1
+        Me.btnUpdateTableSCF.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnUpdateTableSCF.Location = New System.Drawing.Point(695, 12)
+        Me.btnUpdateTableSCF.Name = "btnUpdateTableSCF"
+        Me.btnUpdateTableSCF.Size = New System.Drawing.Size(79, 32)
+        Me.btnUpdateTableSCF.TabIndex = 21
+        Me.btnUpdateTableSCF.Text = "Save"
+        Me.btnUpdateTableSCF.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.btnUpdateTableSCF.UseVisualStyleBackColor = False
+        Me.btnUpdateTableSCF.UseWaitCursor = True
+        '
+        'btnUpdateExcel
+        '
+        Me.btnUpdateExcel.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnUpdateExcel.FlatAppearance.BorderSize = 0
+        Me.btnUpdateExcel.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(58, Byte), Integer), CType(CType(115, Byte), Integer))
+        Me.btnUpdateExcel.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnUpdateExcel.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnUpdateExcel.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.btnUpdateExcel.Image = Global.AVT_TRAKING.My.Resources.Resources.excel
+        Me.btnUpdateExcel.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnUpdateExcel.Location = New System.Drawing.Point(591, 12)
+        Me.btnUpdateExcel.Name = "btnUpdateExcel"
+        Me.btnUpdateExcel.Size = New System.Drawing.Size(81, 36)
+        Me.btnUpdateExcel.TabIndex = 20
+        Me.btnUpdateExcel.Text = "Find"
+        Me.btnUpdateExcel.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.btnUpdateExcel.UseVisualStyleBackColor = False
+        Me.btnUpdateExcel.UseWaitCursor = True
+        '
+        'Panel4
+        '
+        Me.Panel4.BackColor = System.Drawing.Color.FromArgb(CType(CType(83, Byte), Integer), CType(CType(93, Byte), Integer), CType(CType(102, Byte), Integer))
+        Me.Panel4.Controls.Add(Me.lblMessage)
+        Me.Panel4.Controls.Add(Me.pgbComplete)
+        Me.Panel4.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Panel4.Location = New System.Drawing.Point(5, 397)
+        Me.Panel4.Name = "Panel4"
+        Me.Panel4.Size = New System.Drawing.Size(795, 43)
+        Me.Panel4.TabIndex = 3
+        Me.Panel4.UseWaitCursor = True
+        '
+        'lblMessage
+        '
+        Me.lblMessage.AutoSize = True
+        Me.lblMessage.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.lblMessage.Location = New System.Drawing.Point(9, 11)
+        Me.lblMessage.Name = "lblMessage"
+        Me.lblMessage.Size = New System.Drawing.Size(53, 13)
+        Me.lblMessage.TabIndex = 4
+        Me.lblMessage.Text = "Message:"
+        Me.lblMessage.UseWaitCursor = True
+        '
+        'pgbComplete
+        '
+        Me.pgbComplete.Location = New System.Drawing.Point(561, 11)
+        Me.pgbComplete.Name = "pgbComplete"
+        Me.pgbComplete.Size = New System.Drawing.Size(229, 23)
+        Me.pgbComplete.TabIndex = 3
+        Me.pgbComplete.UseWaitCursor = True
         '
         'ProductSCFExcel
         '

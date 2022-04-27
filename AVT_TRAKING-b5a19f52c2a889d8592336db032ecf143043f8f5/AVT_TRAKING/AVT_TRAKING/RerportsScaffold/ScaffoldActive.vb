@@ -77,6 +77,7 @@ Public Class ScaffoldActive
                         With .Interior
                             .ColorIndex = 15
                         End With
+                        .BorderAround(Microsoft.Office.Interop.Excel.XlLineStyle.xlContinuous, Microsoft.Office.Interop.Excel.XlBorderWeight.xlThin, Microsoft.Office.Interop.Excel.XlColorIndex.xlColorIndexAutomatic, Color.Black)
                     End With
                     lblMessage.Text = "Message: " + "Writing data..."
                     For Each colm As DataGridViewColumn In tblScaffoldActive.Columns
