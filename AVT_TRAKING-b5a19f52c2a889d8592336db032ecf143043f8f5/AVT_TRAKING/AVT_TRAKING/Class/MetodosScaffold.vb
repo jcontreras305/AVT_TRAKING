@@ -3701,6 +3701,229 @@ where T1.[Pieces]>0", conn)
         End Try
     End Function
 
+    '======================== METODOS PARA KPI ====================================================================================================
+    Public Function selectKPIByClient(ByVal tbl As DataGridView, ByVal idClient As String) As Boolean
+        Try
+            conectar()
+            Dim cmd As New SqlCommand("select kpi.idKPI,kpi.typeKPI,kpi.jobNo,(select top 1 CONCAT(wo.idWO,'-',tk.task) as 'wono' from task as tk inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO where tk.idAux = kpi.idAux) as 'wono'
+,kpi.idAux,kpi.[description],kpi.thinck,kpi.size,CONVERT(varchar, kpi.dateWorked,101)as 'DateWorked',kpi.LF,kpi.SQF,kpi.qty90,kpi.qty45,kpi.TEE,kpi.VLV,kpi.RED,kpi.CAP,kpi.FLG,kpi.FIT,kpi.hoursST,kpi.hoursOT
+,kpi.casePaint,kpi.install,kpi.lead,kpi.stResistence
+from KPI as kpi
+inner join job as jb on jb.jobNo = kpi.jobNo
+inner join clients as cl on cl.idClient = jb.idClient 
+where cl.idClient = '" + idClient + "'", conn)
+            Dim dr As SqlDataReader = cmd.ExecuteReader()
+            tbl.Rows.Clear()
+            While dr.Read
+                tbl.Rows.Add(dr("idKPI").ToString(), dr("typeKPI").ToString(), dr("jobNo").ToString(), dr("wono").ToString(), dr("idAux").ToString(), dr("description").ToString(), dr("thinck").ToString(), dr("size").ToString(), dr("DateWorked").ToString(), dr("LF").ToString(), dr("SQF").ToString(), dr("qty90").ToString(), dr("qty45").ToString(), dr("TEE").ToString(), dr("VLV").ToString(), dr("RED").ToString(), dr("CAP").ToString(), dr("FLG").ToString(), dr("FIT").ToString(), dr("hoursST").ToString(), dr("hoursOT").ToString(), dr("install").ToString(), dr("casePaint").ToString(), If(dr("lead") = 1, True, False), If(dr("stResistence") = 1, True, False))
+            End While
+            Return True
+        Catch ex As Exception
+            MsgBox(ex.Message())
+            Return False
+        End Try
+    End Function
+    Public Function saveUpdateKPI(ByVal tbl As DataGridView) As Boolean
+        Try
+            conectar()
+            Dim tran As SqlTransaction
+            tran = conn.BeginTransaction
+            Dim flagTran As Boolean = True
+            For Each row As DataGridViewRow In tbl.SelectedRows()
+                Dim query As String
+                If validarRowKPI(row) Then
+                    If row.Cells(0).Value = Nothing Then
+                        query = "insert into KPI values('" + row.Cells("TypeKPIS").Value + "','" + row.Cells("CasePaintS").Value.ToString() + "'," + If(row.Cells("LeadS").Value = True, "1", "0") + "," + If(row.Cells("STResistenceS").Value = True, "1", "0") + ",'" + If(row.Cells("descriptionS").Value Is DBNull.Value, "", row.Cells("descriptionS").Value.ToString()) + "'," + row.Cells("JobNoS").Value.ToString() + ",'" + row.Cells("IdAuxS").Value.ToString() + "','" + validaFechaParaSQl(row.Cells("DateWorkedS").Value.ToString()) + "',
+                        " + If(row.Cells("TinckS").Value = "", "0", row.Cells("TinckS").Value.ToString) + "," + If(row.Cells("SizeS").Value = "", "0", row.Cells("SizeS").Value.ToString) + "," + If(row.Cells("SQFTS").Value = "", "0", row.Cells("SQFTS").Value.ToString) + "," + If(row.Cells("LFS").Value = "", "0", row.Cells("LFS").Value.ToString) + ",
+                        " + If(row.Cells("Qty90S").Value = "", "0", row.Cells("Qty90S").Value.ToString) + "," + If(row.Cells("Qty45S").Value = "", "0", row.Cells("Qty45S").Value.ToString) + "," + If(row.Cells("TEES").Value = "", "0", row.Cells("TEES").Value.ToString) + "," + If(row.Cells("REDS").Value = "", "0", row.Cells("REDS").Value.ToString) + "," + If(row.Cells("CAPS").Value = "", "0", row.Cells("CAPS").Value.ToString) + "," + If(row.Cells("FLGS").Value = "", "0", row.Cells("FLGS").Value.ToString) + "," + If(row.Cells("FITS").Value = "", "0", row.Cells("FITS").Value.ToString) + "," + If(row.Cells("ValvesS").Value = "", "0", row.Cells("ValvesS").Value.ToString) + ",
+                        " + If(row.Cells("STS").Value = "", "0", row.Cells("STS").Value.ToString) + "," + If(row.Cells("OTS").Value = "", "0", row.Cells("OTS").Value.ToString) + ",'" + If(row.Cells("InstallS").Value = "", "", row.Cells("InstallS").Value.ToString) + "')"
+                    Else
+                        query = "update KPI set typeKPI ='" + row.Cells("TypeKPIS").Value.ToString() + "' ,casePaint = '" + row.Cells("CasePaintS").Value.ToString() + "',lead = " + If(row.Cells("LeadS").Value = True, "1", "0") + " , stResistence = " + If(row.Cells("STResistenceS").Value = True, "1", "0") + ",[description]='" + row.Cells("descriptionS").Value.ToString() + "',jobNo=" + row.Cells("JobNoS").Value.ToString() + ",idAux='" + row.Cells("IdAuxS").Value.ToString() + "',dateWorked ='" + validaFechaParaSQl(row.Cells("DateWorkedS").Value.ToString()) + "',
+                        thinck = " + If(row.Cells("TinckS").Value.ToString() = "", "0", row.Cells("TinckS").Value.ToString()) + ",size=" + If(row.Cells("SizeS").Value.ToString() = "", "0", row.Cells("SizeS").Value.ToString()) + ",SQF=" + If(row.Cells("SQFTS").Value.ToString() = "", "0", row.Cells("SQFTS").Value.ToString()) + ",LF= " + If(row.Cells("LFS").Value.ToString() = "", "0", row.Cells("LFS").Value.ToString()) + ",
+                        qty90 = " + If(row.Cells("Qty90S").Value.ToString() = "", "0", row.Cells("Qty90S").Value.ToString()) + ",qty45=" + If(row.Cells("Qty45S").Value.ToString() = "", "0", row.Cells("Qty45S").Value.ToString()) + ",TEE=" + If(row.Cells("TEES").Value.ToString() = "", "0", row.Cells("TEES").Value.ToString()) + ",RED=" + If(row.Cells("REDS").Value.ToString() = "", "0", row.Cells("REDS").Value.ToString()) + ",CAP=" + If(row.Cells("CAPS").Value.ToString() = "", "0", row.Cells("CAPS").Value.ToString()) + ",FLG=" + If(row.Cells("FLGS").Value.ToString() = "", "0", row.Cells("FLGS").Value.ToString()) + ",FIT=" + If(row.Cells("FITS").Value.ToString() = "", "0", row.Cells("FITS").Value.ToString()) + ",VLV=" + If(row.Cells("ValvesS").Value.ToString() = "", "0", row.Cells("ValvesS").Value.ToString()) + ",
+                        hoursSt = " + If(row.Cells("STS").Value.ToString() = "", "0", row.Cells("STS").Value.ToString()) + ",hoursOT=" + If(row.Cells("OTS").Value.ToString() = "", "0", row.Cells("OTS").Value.ToString()) + ",install='" + If(row.Cells("InstallS").Value.ToString() = "", "", row.Cells("InstallS").Value.ToString()) + "'
+                        where idKPI=" + row.Cells("idKPI").Value.ToString() + ""
+                    End If
+                    Dim cmd As New SqlCommand(query, conn)
+                    cmd.Transaction = tran
+                    If cmd.ExecuteNonQuery = 0 Then
+                        If DialogResult.No = MessageBox.Show("Error at row number " + CStr(row.HeaderCell.Value) + vbCrLf + "Wold you like to Continue?", "Important", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) Then
+                            flagTran = False
+                            Exit For
+                        Else
+                            flagTran = True
+                        End If
+                    End If
+                Else
+                    If DialogResult.Yes = MessageBox.Show("Error at row number " + CStr(row.HeaderCell.Value) + vbCrLf + "Wold you like to Continue?", "Important", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) Then
+                        flagTran = False
+                        Exit For
+                    Else
+                        flagTran = True
+                        MsgBox("Successful")
+                    End If
+                End If
+            Next
+            If flagTran Then
+                tran.Commit()
+                Return True
+            Else
+                tran.Rollback()
+                Return False
+            End If
+            Return True
+        Catch ex As Exception
+            MsgBox(ex.Message())
+            Return False
+        End Try
+    End Function
+
+    Private Function validarRowKPI(ByVal row As DataGridViewRow) As Boolean
+        Try
+            Dim flag As Boolean = True
+            For Each cell As DataGridViewCell In row.Cells()
+                Select Case cell.ColumnIndex
+                    Case row.Cells("TypeKPIS").ColumnIndex
+                        If cell.Value Is DBNull.Value Then
+                            flag = False
+                            Exit For
+                        End If
+                    Case row.Cells("IdAuxS").ColumnIndex
+                        If cell.Value Is DBNull.Value Then
+                            flag = False
+                            Exit For
+                        End If
+                    Case row.Cells("DateWorkedS").ColumnIndex
+                        If cell.Value Is DBNull.Value Then
+                            cell.Value = CStr(System.DateTime.Today.Month) + "/" + CStr(System.DateTime.Today.Day) + "/" + CStr(System.DateTime.Today.Year)
+                        End If
+                    Case 9 To 20
+                        If cell.Value Is DBNull.Value Or cell.Value = "" Then
+                            cell.Value = "0"
+                        End If
+                    Case 21 To 22
+                        If cell.Value Is DBNull.Value Or cell.Value = "" Then
+                            cell.Value = ""
+                        End If
+                End Select
+            Next
+            Return flag
+        Catch ex As Exception
+
+        End Try
+    End Function
+    Public Function InsertKPIs(ByVal tbl As DataGridView, ByVal TypeKPI As String, ByRef pgb As ProgressBar, ByRef lblMesage As Label) As Boolean
+        conectar()
+        Dim tran As SqlTransaction
+        tran = conn.BeginTransaction
+        Try
+            lblMesage.Text = "Message: Starting insert process..."
+
+            Dim flagCommit As Boolean = False
+            Dim indexRowError As Integer = 0
+            pgb.Value = 5
+            Dim rowstbl As Integer = tbl.Rows.Count
+            Dim increment = (90 / rowstbl)
+
+            Dim flagIncrement = If(increment > 1, CInt(90 / rowstbl), If(increment < 1 And increment > 0.5, 2, If(increment < 0.5 And increment > 0.25, 3, 4)))
+            'lblMessage.Text = "Message: Reading Excel..."
+            pgb.Value = pgb.Value + 5
+            Dim countIncrement As Integer = 0
+
+            For Each row As DataGridViewRow In tbl.Rows()
+                Try
+                    lblMesage.Text = "Message: Row number " + CStr(row.Index)
+                    If Not row.IsNewRow Then
+                        indexRowError = row.Index
+                        Dim cmd As New SqlCommand("insert into KPI values('" + TypeKPI + "','" + row.Cells("CasePaint").Value.ToString() + "'," + If(row.Cells("Lead").Value = True, "1", "0") + "," + If(row.Cells("STResistence").Value = True, "1", "0") + ",'" + If(row.Cells("description").Value Is DBNull.Value, "", row.Cells("description").Value.ToString) + "'," + row.Cells("JobNo").Value.ToString() + ",'" + row.Cells("IdAux").Value.ToString() + "','" + validaFechaParaSQl(row.Cells("DateWorked").Value.ToString()) + "',
+                        " + If(row.Cells("Tinck").Value = "", "0", row.Cells("Tinck").Value.ToString) + "," + If(row.Cells("Size").Value = "", "0", row.Cells("Size").Value.ToString) + "," + If(row.Cells("SQFT").Value = "", "0", row.Cells("SQFT").Value.ToString) + "," + If(row.Cells("LF").Value = "", "0", row.Cells("LF").Value.ToString) + ",
+                        " + If(row.Cells("Qty90").Value = "", "0", row.Cells("Qty90").Value.ToString) + "," + If(row.Cells("Qty45").Value = "", "0", row.Cells("Qty45").Value.ToString) + "," + If(row.Cells("TEE").Value = "", "0", row.Cells("TEE").Value.ToString) + "," + If(row.Cells("RED").Value = "", "0", row.Cells("RED").Value.ToString) + "," + If(row.Cells("CAP").Value = "", "0", row.Cells("CAP").Value.ToString) + "," + If(row.Cells("FLG").Value = "", "0", row.Cells("FLG").Value.ToString) + "," + If(row.Cells("FIT").Value = "", "0", row.Cells("FIT").Value.ToString) + "," + If(row.Cells("Valves").Value = "", "0", row.Cells("Valves").Value.ToString) + ",
+                        " + If(row.Cells("ST").Value = "", "0", row.Cells("ST").Value.ToString) + "," + If(row.Cells("OT").Value = "", "0", row.Cells("OT").Value.ToString) + ",'" + If(row.Cells("Install").Value = "", "", row.Cells("Install").Value.ToString) + "')")
+                        cmd.Connection = conn
+                        cmd.Transaction = tran
+                        If cmd.ExecuteNonQuery > 0 Then
+                            flagCommit = True
+                            countIncrement += 1
+                            If pgb.Value <= 96 Then
+                                If flagIncrement = countIncrement Then
+                                    pgb.Value = pgb.Value + 1
+                                    countIncrement = 0
+                                End If
+                            End If
+                        Else
+                            If DialogResult.Yes = MessageBox.Show("Error at the row " + CStr(indexRowError) + ", Would you like to cancel the process?", "Important", MessageBoxButtons.OK, MessageBoxIcon.Warning) Then
+                                pgb.Value = 100
+                                flagCommit = False
+                                Exit For
+                            Else
+                                flagCommit = True
+                            End If
+                        End If
+                    End If
+                Catch ex As Exception
+                    If DialogResult.Yes = MessageBox.Show("Error at the row " + CStr(indexRowError) + ", Would you like to cancel the process?" + ex.Message(), "Important", MessageBoxButtons.OK, MessageBoxIcon.Warning) Then
+                        pgb.Value = 100
+                        flagCommit = False
+                    Else
+                        flagCommit = True
+                        Exit For
+                    End If
+                End Try
+            Next
+            If flagCommit Then
+                tran.Commit()
+                lblMesage.Text = "Message: End."
+                pgb.Value = 100
+            Else
+                tran.Rollback()
+                lblMesage.Text = "Message: Error."
+                pgb.Value = 100
+                MessageBox.Show("Error at the row " + CStr(indexRowError) + ", Please verify the Data and try Againg.", "Important", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message())
+        Finally
+            desconectar()
+        End Try
+        Return False
+    End Function
+
+    Public Function deleteKPI(ByVal tbl As DataGridView) As Boolean
+        Try
+            conectar()
+            Dim tran As SqlTransaction
+            tran = conn.BeginTransaction
+            Dim flagTran As Boolean = True
+            For Each row As DataGridViewRow In tbl.SelectedRows()
+                Dim query As String
+                If row.Cells(0).Value IsNot Nothing Then
+                    query = "delete from KPI where idKPI=" + row.Cells("idKPI").Value.ToString() + ""
+                    Dim cmd As New SqlCommand(query, conn)
+                    cmd.Transaction = tran
+                    If cmd.ExecuteNonQuery = 0 Then
+                        MessageBox.Show("Error at row number " + CStr(row.HeaderCell.Value) + vbCrLf + "Is not posible delete the row.", "Important", MessageBoxButtons.YesNo, MessageBoxIcon.Warning)
+                        flagTran = False
+                        Exit For
+                    End If
+                End If
+            Next
+            If flagTran Then
+                tran.Commit()
+                For Each row As DataGridViewRow In tbl.SelectedRows()
+                    tbl.Rows.Remove(row)
+                Next
+                MsgBox("Successful")
+                Return True
+            Else
+                tran.Rollback()
+                Return False
+            End If
+            Return True
+        Catch ex As Exception
+            MsgBox(ex.Message())
+            Return False
+        End Try
+    End Function
     '======================== METODOS PARA REPORTES ================================================================================================
 
     Public Function llenarTablaActiveScaffold(ByVal tbl As DataGridView, ByVal numberClient As String) As Boolean

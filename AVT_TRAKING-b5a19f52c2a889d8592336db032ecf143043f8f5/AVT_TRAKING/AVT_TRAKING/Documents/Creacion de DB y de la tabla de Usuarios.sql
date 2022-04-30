@@ -492,6 +492,38 @@ create table jobCat(
 go
 
 --##########################################################################################
+--##################  TABLA DE KPI #########################################################
+--##########################################################################################
+
+create table KPI(
+	idKPI int identity(1,1) primary key not null,
+	typeKPI varchar(15), 
+	casePaint varchar(35),
+	lead bit,
+	stResistence bit,
+	[description] varchar(150),
+	jobNo bigint,
+	idAux varchar(36),
+	dateWorked date,
+	thinck float,
+	size float,
+	SQF  float,
+	LF  float,
+	qty90 int,
+	qty45 int,
+	TEE int,
+	RED int,
+	CAP int,
+	FLG int,
+	FIT int,
+	VLV int, 
+	hoursST float,
+	hoursOT float,
+	install varchar(20)
+)
+go
+
+--##########################################################################################
 --##################  TABLA DE LEG #########################################################
 --##########################################################################################
 
@@ -1428,6 +1460,18 @@ GO
 ALTER TABLE jobCat WITH CHECK ADD CONSTRAINT fk_idClient_jobCat 
 FOREIGN KEY (idClient) REFERENCES clients(idClient)
 GO
+
+--##########################################################################################
+--##################  FOREIG KEYS JOBCAT ###################################################
+--##########################################################################################
+
+ALTER TABLE KPI WITH CHECK ADD CONSTRAINT fk_idAux_KPI
+FOREIGN KEY (idAux) REFERENCES task(idAux)
+go
+
+ALTER TABLE KPI WITH CHECK ADD CONSTRAINT fk_jobNo_KPI
+FOREIGN KEY (jobNo) REFERENCES job(jobNo)
+go
 
 --##########################################################################################
 --##################  FOREIG KEYS LEG ######################################################
@@ -3283,28 +3327,39 @@ go
 ----========== ESTE CODIGO ES PARA AGREGAR EL PROCEDIMIENTO DE SCAFFOLDS ACTIVE ================================================================
 ----============================================================================================================================================
 
---create proc sp_SCF_Active
---@numberClient as int
---as 
---begin
---select CONCAT(wo.idWO,' ',tk.task) as 'WO#', sc.tag as 'Tag' ,sc.location as 'Location','Build' as 'Task',
---sc.buildDate as 'Build', IIF(ds.dismantleDate is null , DATEDIFF(DAY,sc.buildDate ,GETDATE()),DATEDIFF(DAY,sc.buildDate ,ds.dismantleDate)) as 'D.Ac.',
---ds.dismantleDate as 'R. Stop', 
---CONCAT(si.[length],' x ',si.width,' x ',si.heigth,' - ',(si.descks+si.extraDeck),' Deck (s)') as 'Scaffold Description',
---sc.foreman as 'Foreman',
---CONCAT(CONVERT(VARCHAR, sc.reqComp,101),' - ',sc.erector) as 'Comp - Req',
---ISNULL((select SUM(IIF(pd.PLF <> 0,pd.PLF*psc.quantity,pd.PSQF*psc.quantity)) from productScaffold as psc 
---	inner join product as pd on pd.idProduct = psc.idProduct 
---	where psc.tag = sc.tag),0)as 'Leg',
---ISNULL((select SUM(psc.quantity) from productScaffold as psc where psc.tag = sc.tag),0) as 'QTY'
---from scaffoldTraking as sc
---left join scaffoldInformation as si on si.tag = sc.tag
---left join dismantle as ds on ds.tag = sc.tag
---inner join task as tk on tk.idAux = sc.idAux
---inner join workOrder as wo on wo.idAuxWO= tk.idAuxWO
---inner join projectOrder as po on po.idPO = wo.idPO and po.jobNo = wo.jobNo
---inner join job as jb on jb.jobNo = po.jobNo
---inner join clients as cl on cl.idClient = jb.idClient
---where ds.idDismantle is null and cl.numberClient = @numberClient
---end
+--create table KPI(
+--	idKPI int identity(1,1) primary key not null,
+--	typeKPI varchar(15), 
+--	casePaint varchar(35),
+--	lead bit,
+--	stResistence bit,
+--	[description] varchar(150),
+--	jobNo bigint,
+--	idAux varchar(36),--wono
+--	dateWorked date,
+--	thinck float,
+--	size float,
+--	SQF  float,
+--	LF  float,
+--	qty90 int,
+--	qty45 int,
+--	TEE int,
+--	RED int,
+--	CAP int,
+--	FLG int,
+--	FIT int,
+--	VLV int, 
+--	hoursST float,
+--	hoursOT float,
+--	install varchar(20)
+--)
+--go
+
+--alter table KPI with check add constraint fk_idAux_KPI
+--foreign key (idAux) references task(idAux)
+--go
+
+
+--alter table KPI with check add constraint fk_jobNo_KPI
+--foreign key (jobNo) references job(jobNo)
 --go
