@@ -70,7 +70,6 @@ Public Class ReportInvoice
                         reportInvoice.SetParameterValue("@all", If(chbAllPO.Checked, 1, 0))
                         reportInvoice.SetParameterValue("@CompanyName", "Brock")
                         crvIvoice.ReportSource = reportInvoice
-                        'crvIvoice.RefreshReport()
                     Else
                         MsgBox("Please select a Client.")
                     End If

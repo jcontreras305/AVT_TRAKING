@@ -161,21 +161,25 @@ Public Class ReportsMenu
     End Sub
 
     Private Sub Button24_Click(sender As Object, e As EventArgs) Handles Button24.Click
-        Cursor = Cursors.WaitCursor
-        Dim rpData As New ReportDateExcel
-        AddOwnedForm(rpData)
-        rpData.startDate = True
-        rpData.finalDate = True
-        rpData.clients = True
-        rpData.jobs = True
-        rpData.dtpStartDate.Value = New Date(System.DateTime.Today.Year, System.DateTime.Today.Month, 1)
-        rpData.dtpFinalDate.Value = New Date(System.DateTime.Today.Year, System.DateTime.Today.Month, DateTime.DaysInMonth(System.DateTime.Today.Year, System.DateTime.Today.Month))
-        rpData.windowStart = "MounthHours"
-        rpData.ShowDialog()
-        If Not cancelProcess Then
-            Dim mtdReportMenu As New ReportsExcel
-            mtdReportMenu.createExcelMoutlyHours(datos(2), datos(0), datos(1), If(datos(4) = "1", Nothing, datos(3)))
-            Cursor = Cursors.Default
-        End If
+        Try
+            Cursor = Cursors.WaitCursor
+            Dim rpData As New ReportDateExcel
+            AddOwnedForm(rpData)
+            rpData.startDate = True
+            rpData.finalDate = True
+            rpData.clients = True
+            rpData.jobs = True
+            rpData.dtpStartDate.Value = New Date(System.DateTime.Today.Year, System.DateTime.Today.Month, 1)
+            rpData.dtpFinalDate.Value = New Date(System.DateTime.Today.Year, System.DateTime.Today.Month, DateTime.DaysInMonth(System.DateTime.Today.Year, System.DateTime.Today.Month))
+            rpData.windowStart = "MounthHours"
+            rpData.ShowDialog()
+            If Not cancelProcess Then
+                Dim mtdReportMenu As New ReportsExcel
+                mtdReportMenu.createExcelMoutlyHours(datos(2), datos(0), datos(1), If(datos(4) = "1", Nothing, datos(3)))
+                Cursor = Cursors.Default
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message)
+        End Try
     End Sub
 End Class

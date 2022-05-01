@@ -149,36 +149,36 @@ from (select distinct
 inner join task as tk1 on tk1.idAux = hw1.idAux 
 inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO
 inner join projectOrder as po1 on po1.idPO = wo1.idPO and wo1.jobNo = po1.jobNo
-inner join job as jb1 on jb1.jobNo = jb1.jobNo 
+inner join job as jb1 on jb1.jobNo = po1.jobNo 
 inner join clients as cl1 on cl1.idClient = jb1.idClient
 where
 		DATENAME(mm,hw.dateWorked) = DATENAME(mm,hw1.dateWorked)
-		and (po1.idPO = po.idPO) and cl1.numberClient = @numClient) as 'WO ST',
+		and (po1.idPO = po.idPO)and (jb1.jobNo = jb.jobNo) and cl1.numberClient = @numClient) as 'WO ST',
 (select sum(hw1.hoursOT) from hoursWorked as hw1 
 inner join task as tk1 on tk1.idAux = hw1.idAux 
 inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO
 inner join projectOrder as po1 on po1.idPO = wo1.idPO and wo1.jobNo = po1.jobNo
-inner join job as jb1 on jb1.jobNo = jb1.jobNo
+inner join job as jb1 on jb1.jobNo = po1.jobNo
 inner join clients as cl1 on cl1.idClient = jb1.idClient
 where
 		DATENAME(mm,hw.dateWorked) = DATENAME(mm,hw1.dateWorked)
-		and (po1.idPO = po.idPO)and cl1.numberClient = @numClient ) as 'WO OT',
+		and (po1.idPO = po.idPO) and (jb1.jobNo = jb.jobNo) and cl1.numberClient = @numClient ) as 'WO OT',
 (select sum(hw1.hours3) from hoursWorked as hw1 
 inner join task as tk1 on tk1.idAux = hw1.idAux 
 inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO
 inner join projectOrder as po1 on po1.idPO = wo1.idPO and wo1.jobNo = po1.jobNo
-inner join job as jb1 on jb1.jobNo = jb1.jobNo
+inner join job as jb1 on jb1.jobNo = po1.jobNo
 inner join clients as cl1 on cl1.idClient = jb1.idClient
 where
 		DATENAME(mm,hw.dateWorked) = DATENAME(mm,hw1.dateWorked)
-		and (po1.idPO = po.idPO) and cl1.numberClient = @numClient ) as 'WO XT',
+		and (po1.idPO = po.idPO) and (jb1.jobNo = jb.jobNo) and cl1.numberClient = @numClient ) as 'WO XT',
 (select DATEPART(mm,hw.dateWorked)) as 'Mo',
 po.idPO
 from hoursWorked as hw 
 inner join task as tk on tk.idAux = hw.idAux 
 inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO
 inner join projectOrder as po on po.idPO = wo.idPO and wo.jobNo = po.jobNo
-inner join job as jb on jb.jobNo = jb.jobNo
+inner join job as jb on jb.jobNo = po.jobNo
 inner join clients as cl on cl.idClient = jb.idClient
 where hw.dateWorked between @StarDate and @FinalDate and cl.numberClient = @numClient " + If(JobNo IsNot Nothing, "and  jb.jobNo = " + JobNo + "", "") + " 
 ) as T1 where (T1.[WO ST] + T1.[WO OT] + T1.[WO XT] )>0", conn)
