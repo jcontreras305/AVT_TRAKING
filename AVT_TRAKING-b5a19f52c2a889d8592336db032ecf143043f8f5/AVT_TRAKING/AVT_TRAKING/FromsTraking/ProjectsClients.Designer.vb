@@ -66,6 +66,7 @@ Partial Class ProjectsClients
         Me.Label1 = New System.Windows.Forms.Label()
         Me.tblProjectClients = New System.Windows.Forms.DataGridView()
         Me.Panel4 = New System.Windows.Forms.Panel()
+        Me.btnKPI = New System.Windows.Forms.Button()
         Me.btnTrack = New System.Windows.Forms.Button()
         Me.btnTaxes = New System.Windows.Forms.Button()
         Me.btnAddClient = New System.Windows.Forms.Button()
@@ -87,7 +88,6 @@ Partial Class ProjectsClients
         Me.PanelChildForm = New System.Windows.Forms.Panel()
         Me.TableLayoutPanel4 = New System.Windows.Forms.TableLayoutPanel()
         Me.Panel3 = New System.Windows.Forms.Panel()
-        Me.btnKPI = New System.Windows.Forms.Button()
         Me.Panel1.SuspendLayout()
         Me.PnllSetup.SuspendLayout()
         Me.Panel2.SuspendLayout()
@@ -644,6 +644,23 @@ Partial Class ProjectsClients
         Me.Panel4.Size = New System.Drawing.Size(124, 408)
         Me.Panel4.TabIndex = 8
         '
+        'btnKPI
+        '
+        Me.btnKPI.Dock = System.Windows.Forms.DockStyle.Top
+        Me.btnKPI.FlatAppearance.BorderSize = 0
+        Me.btnKPI.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(58, Byte), Integer), CType(CType(115, Byte), Integer))
+        Me.btnKPI.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnKPI.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnKPI.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.btnKPI.Image = Global.AVT_TRAKING.My.Resources.Resources.material
+        Me.btnKPI.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnKPI.Location = New System.Drawing.Point(0, 123)
+        Me.btnKPI.Name = "btnKPI"
+        Me.btnKPI.Size = New System.Drawing.Size(124, 41)
+        Me.btnKPI.TabIndex = 10
+        Me.btnKPI.Text = "KPI"
+        Me.btnKPI.UseVisualStyleBackColor = True
+        '
         'btnTrack
         '
         Me.btnTrack.Dock = System.Windows.Forms.DockStyle.Top
@@ -920,23 +937,6 @@ Partial Class ProjectsClients
         Me.Panel3.Name = "Panel3"
         Me.Panel3.Size = New System.Drawing.Size(901, 408)
         Me.Panel3.TabIndex = 0
-        '
-        'btnKPI
-        '
-        Me.btnKPI.Dock = System.Windows.Forms.DockStyle.Top
-        Me.btnKPI.FlatAppearance.BorderSize = 0
-        Me.btnKPI.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(58, Byte), Integer), CType(CType(115, Byte), Integer))
-        Me.btnKPI.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnKPI.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnKPI.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.btnKPI.Image = Global.AVT_TRAKING.My.Resources.Resources.material
-        Me.btnKPI.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnKPI.Location = New System.Drawing.Point(0, 123)
-        Me.btnKPI.Name = "btnKPI"
-        Me.btnKPI.Size = New System.Drawing.Size(124, 41)
-        Me.btnKPI.TabIndex = 10
-        Me.btnKPI.Text = "KPI"
-        Me.btnKPI.UseVisualStyleBackColor = True
         '
         'ProjectsClients
         '

@@ -210,6 +210,20 @@ estatus char(1),
 photo image
 )
 GO
+--##########################################################################################
+--##################  TABLA DE CLIENTES ####################################################
+--##########################################################################################
+
+create table clientsEst(
+	idClientEst varchar(36) primary key not null,
+	numberClient int,
+	contactName varchar(30),
+	companyName varchar(50),
+	plant varchar(50),
+	idContact varchar(36),
+	idHomeAdress varchar(36)
+)
+go
 
 --##########################################################################################
 --##################  TABLA DE COMPANY #####################################################
@@ -783,6 +797,18 @@ create table productTotalScaffold(
 	status char(1)
 )
 GO
+--##########################################################################################
+--##################  TABLA DE PROYECT CLIENTS EST #########################################
+--##########################################################################################
+
+create table projectClientEst(
+	projectId varchar(30) primary key not null,
+	[description] varchar(150),
+	unit varchar(50),
+	releaseDate date,
+	idClientEst varchar(36)
+)
+go
 
 --##########################################################################################
 --##################  TABLA DE PROYECT ORDER ###############################################
@@ -1332,6 +1358,18 @@ REFERENCES [dbo].[HomeAddress] ([idHomeAdress])
 GO
 
 --##########################################################################################
+--##################  FOREIG KEYS CLIENTES ESTIMATION ######################################
+--##########################################################################################
+
+ALTER TABLE clientsEst WITH CHECK ADD CONSTRAINT fk_idContact_clientsEst
+FOREIGN KEY (idContact) REFERENCES contact(idContact)
+GO
+
+ALTER TABLE clientsEst WITH CHECK ADD CONSTRAINT fk_idContact_HomeAddress
+FOREIGN KEY (idHomeAdress) REFERENCES HomeAddress(idHomeAdress)
+GO
+
+--##########################################################################################
 --##################  FOREIG KEYS COMPANY ##################################################
 --##########################################################################################
 
@@ -1657,6 +1695,16 @@ GO
 ALTER TABLE productTotalScaffold WITH CHECK ADD CONSTRAINT fk_tag_productTotalScaffold
 FOREIGN KEY (tag) REFERENCES scaffoldTraking(tag)
 GO
+
+--##########################################################################################
+--##################  FOREIG KEYS PROJECT CLIENTS EST ######################################
+--##########################################################################################
+
+ALTER TABLE projectClientEst WITH CHECK ADD CONSTRAINT fk_idClintEst_projectClientEst
+FOREIGN KEY (idClientEst) REFERENCES clientsEst(idClientEst)
+on update cascade
+on delete cascade
+go
 
 --##########################################################################################
 --##################  FOREIG KEYS PROJECT OREDER ###########################################
@@ -3324,42 +3372,37 @@ end
 go
 
 ----============================================================================================================================================
-----========== ESTE CODIGO ES PARA AGREGAR EL PROCEDIMIENTO DE SCAFFOLDS ACTIVE ================================================================
+----========== ESTE CODIGO ES PARA AGREGAR LA TABLA DE CLIENTES Y PROYECTOS DE ESTIMACION ======================================================
 ----============================================================================================================================================
 
---create table KPI(
---	idKPI int identity(1,1) primary key not null,
---	typeKPI varchar(15), 
---	casePaint varchar(35),
---	lead bit,
---	stResistence bit,
---	[description] varchar(150),
---	jobNo bigint,
---	idAux varchar(36),--wono
---	dateWorked date,
---	thinck float,
---	size float,
---	SQF  float,
---	LF  float,
---	qty90 int,
---	qty45 int,
---	TEE int,
---	RED int,
---	CAP int,
---	FLG int,
---	FIT int,
---	VLV int, 
---	hoursST float,
---	hoursOT float,
---	install varchar(20)
+--create table clientsEst(
+--	idClientEst varchar(36) primary key not null,
+--	numberClient int,
+--	contactName varchar(30),
+--	companyName varchar(50),
+--	plant varchar(50),
+--	idContact varchar(36),
+--	idHomeAdress varchar(36)
 --)
 --go
 
---alter table KPI with check add constraint fk_idAux_KPI
---foreign key (idAux) references task(idAux)
+--ALTER TABLE clientsEst WITH CHECK ADD CONSTRAINT fk_idContact_clientsEst
+--FOREIGN KEY (idContact) REFERENCES contact(idContact)
+--GO
+
+--ALTER TABLE clientsEst WITH CHECK ADD CONSTRAINT fk_idContact_HomeAddress
+--FOREIGN KEY (idHomeAdress) REFERENCES HomeAddress(idHomeAdress)
+--GO
+
+--create table projectClientEst(
+--	projectId varchar(30) primary key not null,
+--	[description] varchar(150),
+--	unit varchar(50),
+--	releaseDate date,
+--	idClientEst varchar(36)
+--)
 --go
 
-
---alter table KPI with check add constraint fk_jobNo_KPI
---foreign key (jobNo) references job(jobNo)
+--ALTER TABLE projectClientEst WITH CHECK ADD CONSTRAINT fk_idClintEst_projectClientEst
+--FOREIGN KEY (idClientEst) REFERENCES clientsEst(idClientEst)
 --go

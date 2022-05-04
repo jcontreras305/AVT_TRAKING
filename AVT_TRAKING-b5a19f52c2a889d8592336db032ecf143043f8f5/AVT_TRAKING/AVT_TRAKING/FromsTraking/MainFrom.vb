@@ -130,4 +130,28 @@ Public Class MainFrom
         'Dim rpm As New ReportsMenu
         'rpm.ShowDialog()
     End Sub
+
+    Private Sub btnEstimation_Click(sender As Object, e As EventArgs) Handles btnEstimation.Click
+        OpenFormPanel3(Of MenuEstimation)()
+    End Sub
+
+    Private Sub OpenFormPanel3(Of Miform As {MenuEstimation, New})()
+        Dim FormPanel As Form
+        FormPanel = PanelChildForm.Controls.OfType(Of Miform)().FirstOrDefault()
+
+        If FormPanel Is Nothing Then
+            Dim newPC = New Miform()
+            FormPanel = newPC
+            FormPanel.TopLevel = False
+            FormPanel.Dock = DockStyle.Fill
+
+            PanelChildForm.Controls.Add(FormPanel)
+            PanelChildForm.Tag = FormPanel
+            FormPanel.Show()
+            FormPanel.BringToFront()
+        Else
+            FormPanel.BringToFront()
+        End If
+    End Sub
+
 End Class

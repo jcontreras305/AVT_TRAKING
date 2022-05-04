@@ -91,6 +91,7 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ClassEstimation\ClientsEST.vb" />
     <Compile Include="Class\EstimationSC.vb" />
     <Compile Include="Class\MetodosClients.vb" />
     <Compile Include="Class\metodosCompany.vb" />
@@ -104,224 +105,236 @@
     <Compile Include="Class\MetodosTaxes.vb" />
     <Compile Include="Class\MetodosVendor.vb" />
     <Compile Include="Class\MetodosJobs.vb" />
-    <Compile Include="Froms\AbsentsEmployee.Designer.vb">
+    <Compile Include="FromsEstimation\MenuEstimation.Designer.vb">
+      <DependentUpon>MenuEstimation.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FromsEstimation\MenuEstimation.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FromsEstimation\SettingsEstimation.Designer.vb">
+      <DependentUpon>SettingsEstimation.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FromsEstimation\SettingsEstimation.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FromsTraking\AbsentsEmployee.Designer.vb">
       <DependentUpon>AbsentsEmployee.vb</DependentUpon>
     </Compile>
-    <Compile Include="Froms\AbsentsEmployee.vb">
+    <Compile Include="FromsTraking\AbsentsEmployee.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Froms\All_Tables.Designer.vb">
+    <Compile Include="FromsTraking\All_Tables.Designer.vb">
       <DependentUpon>All_Tables.vb</DependentUpon>
     </Compile>
-    <Compile Include="Froms\All_Tables.vb">
+    <Compile Include="FromsTraking\All_Tables.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Froms\DismantleValidationTable.Designer.vb">
+    <Compile Include="FromsTraking\DismantleValidationTable.Designer.vb">
       <DependentUpon>DismantleValidationTable.vb</DependentUpon>
     </Compile>
-    <Compile Include="Froms\DismantleValidationTable.vb">
+    <Compile Include="FromsTraking\DismantleValidationTable.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Froms\dismantle.vb" />
-    <Compile Include="Froms\EquipmentValidation.Designer.vb">
+    <Compile Include="FromsTraking\dismantle.vb" />
+    <Compile Include="FromsTraking\EquipmentValidation.Designer.vb">
       <DependentUpon>EquipmentValidation.vb</DependentUpon>
     </Compile>
-    <Compile Include="Froms\EquipmentValidation.vb">
+    <Compile Include="FromsTraking\EquipmentValidation.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Froms\EstimationCost.Designer.vb">
+    <Compile Include="FromsTraking\EstimationCost.Designer.vb">
       <DependentUpon>EstimationCost.vb</DependentUpon>
     </Compile>
-    <Compile Include="Froms\EstimationCost.vb">
+    <Compile Include="FromsTraking\EstimationCost.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Froms\EstMeters.vb" />
-    <Compile Include="Froms\FindTagDismantle.Designer.vb">
+    <Compile Include="FromsTraking\EstMeters.vb" />
+    <Compile Include="FromsTraking\FindTagDismantle.Designer.vb">
       <DependentUpon>FindTagDismantle.vb</DependentUpon>
     </Compile>
-    <Compile Include="Froms\FindTagDismantle.vb">
+    <Compile Include="FromsTraking\FindTagDismantle.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Froms\FindEmployee.Designer.vb">
+    <Compile Include="FromsTraking\FindEmployee.Designer.vb">
       <DependentUpon>FindEmployee.vb</DependentUpon>
     </Compile>
-    <Compile Include="Froms\FindEmployee.vb">
+    <Compile Include="FromsTraking\FindEmployee.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Froms\FindTagScaffold.Designer.vb">
+    <Compile Include="FromsTraking\FindTagScaffold.Designer.vb">
       <DependentUpon>FindTagScaffold.vb</DependentUpon>
     </Compile>
-    <Compile Include="Froms\FindTagScaffold.vb">
+    <Compile Include="FromsTraking\FindTagScaffold.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Froms\FindTask.Designer.vb">
+    <Compile Include="FromsTraking\FindTask.Designer.vb">
       <DependentUpon>FindTask.vb</DependentUpon>
     </Compile>
-    <Compile Include="Froms\FindTask.vb">
+    <Compile Include="FromsTraking\FindTask.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Froms\Herramientas.Designer.vb">
+    <Compile Include="FromsTraking\Herramientas.Designer.vb">
       <DependentUpon>Herramientas.vb</DependentUpon>
     </Compile>
-    <Compile Include="Froms\Herramientas.vb">
+    <Compile Include="FromsTraking\Herramientas.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Froms\HoursWeekPerEmployees.Designer.vb">
+    <Compile Include="FromsTraking\HoursWeekPerEmployees.Designer.vb">
       <DependentUpon>HoursWeekPerEmployees.vb</DependentUpon>
     </Compile>
-    <Compile Include="Froms\HoursWeekPerEmployees.vb">
+    <Compile Include="FromsTraking\HoursWeekPerEmployees.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Froms\KPI.Designer.vb">
+    <Compile Include="FromsTraking\KPI.Designer.vb">
       <DependentUpon>KPI.vb</DependentUpon>
     </Compile>
-    <Compile Include="Froms\KPI.vb">
+    <Compile Include="FromsTraking\KPI.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Froms\metodosGlobales.vb" />
+    <Compile Include="FromsTraking\metodosGlobales.vb" />
     <Compile Include="Class\MetodosLogin.vb" />
     <Compile Include="Class\MetodosMaterials.vb" />
-    <Compile Include="Froms\Clients.Designer.vb">
+    <Compile Include="FromsTraking\Clients.Designer.vb">
       <DependentUpon>Clients.vb</DependentUpon>
     </Compile>
-    <Compile Include="Froms\Clients.vb">
+    <Compile Include="FromsTraking\Clients.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="ConnectioDB.vb" />
-    <Compile Include="Froms\Employees.Designer.vb">
+    <Compile Include="FromsTraking\Employees.Designer.vb">
       <DependentUpon>Employees.vb</DependentUpon>
     </Compile>
-    <Compile Include="Froms\Employees.vb">
+    <Compile Include="FromsTraking\Employees.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Froms\MainFrom.Designer.vb">
+    <Compile Include="FromsTraking\MainFrom.Designer.vb">
       <DependentUpon>MainFrom.vb</DependentUpon>
     </Compile>
-    <Compile Include="Froms\MainFrom.vb">
+    <Compile Include="FromsTraking\MainFrom.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Froms\Expences.Designer.vb">
+    <Compile Include="FromsTraking\Expences.Designer.vb">
       <DependentUpon>Expences.vb</DependentUpon>
     </Compile>
-    <Compile Include="Froms\Expences.vb">
+    <Compile Include="FromsTraking\Expences.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Froms\modificationSC.vb" />
-    <Compile Include="Froms\ModificationValidationTable.Designer.vb">
+    <Compile Include="FromsTraking\modificationSC.vb" />
+    <Compile Include="FromsTraking\ModificationValidationTable.Designer.vb">
       <DependentUpon>ModificationValidationTable.vb</DependentUpon>
     </Compile>
-    <Compile Include="Froms\ModificationValidationTable.vb">
+    <Compile Include="FromsTraking\ModificationValidationTable.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Froms\myCompany.Designer.vb">
+    <Compile Include="FromsTraking\myCompany.Designer.vb">
       <DependentUpon>myCompany.vb</DependentUpon>
     </Compile>
-    <Compile Include="Froms\myCompany.vb">
+    <Compile Include="FromsTraking\myCompany.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Froms\Others.Designer.vb">
+    <Compile Include="FromsTraking\Others.Designer.vb">
       <DependentUpon>Others.vb</DependentUpon>
     </Compile>
-    <Compile Include="Froms\Others.vb">
+    <Compile Include="FromsTraking\Others.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Froms\PayRoll.Designer.vb">
+    <Compile Include="FromsTraking\PayRoll.Designer.vb">
       <DependentUpon>PayRoll.vb</DependentUpon>
     </Compile>
-    <Compile Include="Froms\PayRoll.vb">
+    <Compile Include="FromsTraking\PayRoll.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Froms\Perdiem.Designer.vb">
+    <Compile Include="FromsTraking\Perdiem.Designer.vb">
       <DependentUpon>Perdiem.vb</DependentUpon>
     </Compile>
-    <Compile Include="Froms\Perdiem.vb">
+    <Compile Include="FromsTraking\Perdiem.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Froms\ProductSCFExcel.Designer.vb">
+    <Compile Include="FromsTraking\ProductSCFExcel.Designer.vb">
       <DependentUpon>ProductSCFExcel.vb</DependentUpon>
     </Compile>
-    <Compile Include="Froms\ProductSCFExcel.vb">
+    <Compile Include="FromsTraking\ProductSCFExcel.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Froms\Project.vb" />
-    <Compile Include="Froms\ProjectsCosts.Designer.vb">
+    <Compile Include="FromsTraking\Project.vb" />
+    <Compile Include="FromsTraking\ProjectsCosts.Designer.vb">
       <DependentUpon>ProjectsCosts.vb</DependentUpon>
     </Compile>
-    <Compile Include="Froms\ProjectsCosts.vb">
+    <Compile Include="FromsTraking\ProjectsCosts.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Froms\Renta.Designer.vb">
+    <Compile Include="FromsTraking\Renta.Designer.vb">
       <DependentUpon>Renta.vb</DependentUpon>
     </Compile>
-    <Compile Include="Froms\Renta.vb">
+    <Compile Include="FromsTraking\Renta.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Froms\ReportsMenu.Designer.vb">
+    <Compile Include="FromsTraking\ReportsMenu.Designer.vb">
       <DependentUpon>ReportsMenu.vb</DependentUpon>
     </Compile>
-    <Compile Include="Froms\ReportsMenu.vb">
+    <Compile Include="FromsTraking\ReportsMenu.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Froms\scaffold.vb" />
-    <Compile Include="Froms\scafoldTarking.Designer.vb">
+    <Compile Include="FromsTraking\scaffold.vb" />
+    <Compile Include="FromsTraking\scafoldTarking.Designer.vb">
       <DependentUpon>scafoldTarking.vb</DependentUpon>
     </Compile>
-    <Compile Include="Froms\scafoldTarking.vb">
+    <Compile Include="FromsTraking\scafoldTarking.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Froms\SelectDate.Designer.vb">
+    <Compile Include="FromsTraking\SelectDate.Designer.vb">
       <DependentUpon>SelectDate.vb</DependentUpon>
     </Compile>
-    <Compile Include="Froms\SelectDate.vb">
+    <Compile Include="FromsTraking\SelectDate.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Froms\SelectMaterial.Designer.vb">
+    <Compile Include="FromsTraking\SelectMaterial.Designer.vb">
       <DependentUpon>SelectMaterial.vb</DependentUpon>
     </Compile>
-    <Compile Include="Froms\SelectMaterial.vb">
+    <Compile Include="FromsTraking\SelectMaterial.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Froms\TagsValidationTable.Designer.vb">
+    <Compile Include="FromsTraking\TagsValidationTable.Designer.vb">
       <DependentUpon>TagsValidationTable.vb</DependentUpon>
     </Compile>
-    <Compile Include="Froms\TagsValidationTable.vb">
+    <Compile Include="FromsTraking\TagsValidationTable.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Froms\Taxes.Designer.vb">
+    <Compile Include="FromsTraking\Taxes.Designer.vb">
       <DependentUpon>Taxes.vb</DependentUpon>
     </Compile>
-    <Compile Include="Froms\Taxes.vb">
+    <Compile Include="FromsTraking\Taxes.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Froms\TaxesClass.vb" />
-    <Compile Include="Froms\TimeSheet.Designer.vb">
+    <Compile Include="FromsTraking\TaxesClass.vb" />
+    <Compile Include="FromsTraking\TimeSheet.Designer.vb">
       <DependentUpon>TimeSheet.vb</DependentUpon>
     </Compile>
-    <Compile Include="Froms\TimeSheet.vb">
+    <Compile Include="FromsTraking\TimeSheet.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Froms\Track.Designer.vb">
+    <Compile Include="FromsTraking\Track.Designer.vb">
       <DependentUpon>Track.vb</DependentUpon>
     </Compile>
-    <Compile Include="Froms\Track.vb">
+    <Compile Include="FromsTraking\Track.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Froms\Vendor.Designer.vb">
+    <Compile Include="FromsTraking\Vendor.Designer.vb">
       <DependentUpon>Vendor.vb</DependentUpon>
     </Compile>
-    <Compile Include="Froms\Vendor.vb">
+    <Compile Include="FromsTraking\Vendor.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Froms\ProjectsClients.Designer.vb">
+    <Compile Include="FromsTraking\ProjectsClients.Designer.vb">
       <DependentUpon>ProjectsClients.vb</DependentUpon>
     </Compile>
-    <Compile Include="Froms\ProjectsClients.vb">
+    <Compile Include="FromsTraking\ProjectsClients.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Froms\WorkCodes.Designer.vb">
+    <Compile Include="FromsTraking\WorkCodes.Designer.vb">
       <DependentUpon>WorkCodes.vb</DependentUpon>
     </Compile>
-    <Compile Include="Froms\WorkCodes.vb">
+    <Compile Include="FromsTraking\WorkCodes.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Login.vb">
@@ -331,10 +344,10 @@
       <DependentUpon>Login.vb</DependentUpon>
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Froms\Materials.Designer.vb">
+    <Compile Include="FromsTraking\Materials.Designer.vb">
       <DependentUpon>Materials.vb</DependentUpon>
     </Compile>
-    <Compile Include="Froms\Materials.vb">
+    <Compile Include="FromsTraking\Materials.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="My Project\AssemblyInfo.vb" />
@@ -707,115 +720,121 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Froms\AbsentsEmployee.resx">
+    <EmbeddedResource Include="FromsEstimation\MenuEstimation.resx">
+      <DependentUpon>MenuEstimation.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FromsEstimation\SettingsEstimation.resx">
+      <DependentUpon>SettingsEstimation.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FromsTraking\AbsentsEmployee.resx">
       <DependentUpon>AbsentsEmployee.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Froms\All_Tables.resx">
+    <EmbeddedResource Include="FromsTraking\All_Tables.resx">
       <DependentUpon>All_Tables.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Froms\Clients.resx">
+    <EmbeddedResource Include="FromsTraking\Clients.resx">
       <DependentUpon>Clients.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Froms\DismantleValidationTable.resx">
+    <EmbeddedResource Include="FromsTraking\DismantleValidationTable.resx">
       <DependentUpon>DismantleValidationTable.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Froms\Employees.resx">
+    <EmbeddedResource Include="FromsTraking\Employees.resx">
       <DependentUpon>Employees.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Froms\EquipmentValidation.resx">
+    <EmbeddedResource Include="FromsTraking\EquipmentValidation.resx">
       <DependentUpon>EquipmentValidation.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Froms\EstimationCost.resx">
+    <EmbeddedResource Include="FromsTraking\EstimationCost.resx">
       <DependentUpon>EstimationCost.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Froms\FindEmployee.resx">
+    <EmbeddedResource Include="FromsTraking\FindEmployee.resx">
       <DependentUpon>FindEmployee.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Froms\FindTagDismantle.resx">
+    <EmbeddedResource Include="FromsTraking\FindTagDismantle.resx">
       <DependentUpon>FindTagDismantle.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Froms\FindTagScaffold.resx">
+    <EmbeddedResource Include="FromsTraking\FindTagScaffold.resx">
       <DependentUpon>FindTagScaffold.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Froms\FindTask.resx">
+    <EmbeddedResource Include="FromsTraking\FindTask.resx">
       <DependentUpon>FindTask.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Froms\Herramientas.resx">
+    <EmbeddedResource Include="FromsTraking\Herramientas.resx">
       <DependentUpon>Herramientas.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Froms\HoursWeekPerEmployees.resx">
+    <EmbeddedResource Include="FromsTraking\HoursWeekPerEmployees.resx">
       <DependentUpon>HoursWeekPerEmployees.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Froms\KPI.resx">
+    <EmbeddedResource Include="FromsTraking\KPI.resx">
       <DependentUpon>KPI.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Froms\MainFrom.resx">
+    <EmbeddedResource Include="FromsTraking\MainFrom.resx">
       <DependentUpon>MainFrom.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Froms\Expences.resx">
+    <EmbeddedResource Include="FromsTraking\Expences.resx">
       <DependentUpon>Expences.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Froms\ModificationValidationTable.resx">
+    <EmbeddedResource Include="FromsTraking\ModificationValidationTable.resx">
       <DependentUpon>ModificationValidationTable.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Froms\myCompany.resx">
+    <EmbeddedResource Include="FromsTraking\myCompany.resx">
       <DependentUpon>myCompany.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Froms\Others.resx">
+    <EmbeddedResource Include="FromsTraking\Others.resx">
       <DependentUpon>Others.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Froms\PayRoll.resx">
+    <EmbeddedResource Include="FromsTraking\PayRoll.resx">
       <DependentUpon>PayRoll.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Froms\Perdiem.resx">
+    <EmbeddedResource Include="FromsTraking\Perdiem.resx">
       <DependentUpon>Perdiem.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Froms\ProductSCFExcel.resx">
+    <EmbeddedResource Include="FromsTraking\ProductSCFExcel.resx">
       <DependentUpon>ProductSCFExcel.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Froms\ProjectsCosts.resx">
+    <EmbeddedResource Include="FromsTraking\ProjectsCosts.resx">
       <DependentUpon>ProjectsCosts.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Froms\Renta.resx">
+    <EmbeddedResource Include="FromsTraking\Renta.resx">
       <DependentUpon>Renta.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Froms\ReportsMenu.resx">
+    <EmbeddedResource Include="FromsTraking\ReportsMenu.resx">
       <DependentUpon>ReportsMenu.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Froms\scafoldTarking.resx">
+    <EmbeddedResource Include="FromsTraking\scafoldTarking.resx">
       <DependentUpon>scafoldTarking.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Froms\SelectDate.resx">
+    <EmbeddedResource Include="FromsTraking\SelectDate.resx">
       <DependentUpon>SelectDate.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Froms\SelectMaterial.resx">
+    <EmbeddedResource Include="FromsTraking\SelectMaterial.resx">
       <DependentUpon>SelectMaterial.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Froms\TagsValidationTable.resx">
+    <EmbeddedResource Include="FromsTraking\TagsValidationTable.resx">
       <DependentUpon>TagsValidationTable.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Froms\Taxes.resx">
+    <EmbeddedResource Include="FromsTraking\Taxes.resx">
       <DependentUpon>Taxes.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Froms\TimeSheet.resx">
+    <EmbeddedResource Include="FromsTraking\TimeSheet.resx">
       <DependentUpon>TimeSheet.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Froms\Track.resx">
+    <EmbeddedResource Include="FromsTraking\Track.resx">
       <DependentUpon>Track.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Froms\Vendor.resx">
+    <EmbeddedResource Include="FromsTraking\Vendor.resx">
       <DependentUpon>Vendor.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Froms\ProjectsClients.resx">
+    <EmbeddedResource Include="FromsTraking\ProjectsClients.resx">
       <DependentUpon>ProjectsClients.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Froms\WorkCodes.resx">
+    <EmbeddedResource Include="FromsTraking\WorkCodes.resx">
       <DependentUpon>WorkCodes.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Login.resx">
       <DependentUpon>Login.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Froms\Materials.resx">
+    <EmbeddedResource Include="FromsTraking\Materials.resx">
       <DependentUpon>Materials.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
