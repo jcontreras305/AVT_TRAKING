@@ -156,4 +156,56 @@
             MsgBox(ex.Message)
         End Try
     End Sub
+
+    Private Sub btnAfter_Click(sender As Object, e As EventArgs) Handles btnAfter.Click
+        Try
+            Dim countRow As Integer = 0
+            Dim flag As Boolean = False
+            For Each row As Data.DataRow In mtdClients.tablaClientEst.Rows
+                If row.ItemArray(0) = mtdClients.idClient Or row.ItemArray(1) = mtdClients.numberClient Then
+                    flag = True
+                    Exit For
+                Else
+                    countRow += 1
+                End If
+            Next
+            If flag Then
+                If (countRow + 1) <= mtdClients.tablaClientEst.Rows.Count - 1 Then
+                    mtdClients.cargarDatosClientEst(mtdClients.tablaClientEst.Rows(countRow + 1).ItemArray(1))
+                    cargarDatos()
+                Else
+                    mtdClients.cargarDatosClientEst(mtdClients.tablaClientEst.Rows(mtdClients.tablaClientEst.Rows.Count - 1).ItemArray(1))
+                    cargarDatos()
+                End If
+            End If
+        Catch ex As Exception
+
+        End Try
+    End Sub
+
+    Private Sub btnNext_Click(sender As Object, e As EventArgs) Handles btnNext.Click
+        Try
+            Dim countRow As Integer = 0
+            Dim flag As Boolean = False
+            For Each row As Data.DataRow In mtdClients.tablaClientEst.Rows
+                If row.ItemArray(0) = mtdClients.idClient Or row.ItemArray(1) = mtdClients.numberClient Then
+                    flag = True
+                    Exit For
+                Else
+                    countRow += 1
+                End If
+            Next
+            If flag Then
+                If (countRow - 1) > 0 Then
+                    mtdClients.cargarDatosClientEst(mtdClients.tablaClientEst.Rows(countRow - 1).ItemArray(1))
+                    cargarDatos()
+                Else
+                    mtdClients.cargarDatosClientEst(mtdClients.tablaClientEst.Rows(0).ItemArray(1))
+                    cargarDatos()
+                End If
+            End If
+        Catch ex As Exception
+
+        End Try
+    End Sub
 End Class

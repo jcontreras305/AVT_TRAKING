@@ -308,11 +308,14 @@ Partial Class PayRoll
         Me.btnFindMasterPayroll.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnFindMasterPayroll.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnFindMasterPayroll.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.btnFindMasterPayroll.Location = New System.Drawing.Point(572, 8)
+        Me.btnFindMasterPayroll.Image = Global.AVT_TRAKING.My.Resources.Resources.excel
+        Me.btnFindMasterPayroll.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnFindMasterPayroll.Location = New System.Drawing.Point(568, 3)
         Me.btnFindMasterPayroll.Name = "btnFindMasterPayroll"
-        Me.btnFindMasterPayroll.Size = New System.Drawing.Size(75, 23)
+        Me.btnFindMasterPayroll.Size = New System.Drawing.Size(82, 45)
         Me.btnFindMasterPayroll.TabIndex = 4
-        Me.btnFindMasterPayroll.Text = "..."
+        Me.btnFindMasterPayroll.Text = "Find"
+        Me.btnFindMasterPayroll.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         Me.btnFindMasterPayroll.UseVisualStyleBackColor = True
         '
         'sprRowStartNBL

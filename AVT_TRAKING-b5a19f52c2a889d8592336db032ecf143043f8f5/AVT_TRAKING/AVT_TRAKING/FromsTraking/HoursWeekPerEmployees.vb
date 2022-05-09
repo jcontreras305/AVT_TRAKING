@@ -1146,6 +1146,24 @@ Public Class HoursWeekPerEmployees
         e.Cancel = True
     End Sub
 
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+        Try
+            Dim report As New ReportVacationEmployee
+            report.ShowDialog()
+        Catch ex As Exception
+
+        End Try
+    End Sub
+
+
+    Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
+        Try
+            Dim report As New ReportEmployeePerDiem
+            report.ShowDialog()
+        Catch ex As Exception
+
+        End Try
+    End Sub
 
     Private Sub btnTime_Click(sender As Object, e As EventArgs) Handles btnTime.Click
         Dim timeSheet As New TimeSheet

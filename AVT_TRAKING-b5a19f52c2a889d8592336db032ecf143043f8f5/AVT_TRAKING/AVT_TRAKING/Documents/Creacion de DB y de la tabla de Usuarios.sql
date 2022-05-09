@@ -287,6 +287,16 @@ create table dismantle(
 	erector varchar(30)
 )
 GO
+--##########################################################################################
+--##################  TABLA DE DRAWING #####################################################
+--##########################################################################################
+
+create table drawing(
+	idDrawingNum varchar(45) primary key not null,
+	[description] varchar(150),
+	projectId varchar(30)
+)
+go
 
 --##########################################################################################
 --##################  TABLA DE EMPLOYEES ###################################################
@@ -900,6 +910,25 @@ CREATE TABLE ScafEstCost(
 	EDDAYS money NULL
 )
 go
+--##########################################################################################
+--##################  TABLA DE SCAFFOLDEST #################################################
+--##########################################################################################
+
+create table scaffoldEst(
+	tag varchar(20) primary key not null,
+	location varchar(150),
+	[days] int,
+	width float,
+	[length] float,
+	heigth float,
+	decks int,
+	build int,
+	idLaborRate varchar(40) not null,
+	idSCFUR varchar(35) not null,
+	idEnviroment varchar(40) not null,
+	idDrawingNum varchar(45) not null
+)
+go
 
 --##########################################################################################
 --##################  TABLA DE SCAFFOLD INFORMATION ########################################
@@ -1363,10 +1392,14 @@ GO
 
 ALTER TABLE clientsEst WITH CHECK ADD CONSTRAINT fk_idContact_clientsEst
 FOREIGN KEY (idContact) REFERENCES contact(idContact)
+on update cascade
+on delete cascade
 GO
 
 ALTER TABLE clientsEst WITH CHECK ADD CONSTRAINT fk_idContact_HomeAddress
 FOREIGN KEY (idHomeAdress) REFERENCES HomeAddress(idHomeAdress)
+on update cascade
+on delete cascade
 GO
 
 --##########################################################################################
@@ -1400,6 +1433,16 @@ GO
 ALTER TABLE dismantle WITH CHECK ADD CONSTRAINT fk_tag_dismantle
 FOREIGN KEY (tag) REFERENCES scaffoldTraking (tag)	
 GO
+
+--##########################################################################################
+--##################  FOREIG KEYS DISMANTLE ################################################
+--##########################################################################################
+
+ALTER TABLE drawing WITH CHECK ADD CONSTRAINT fk_projectId_drawing
+FOREIGN KEY (projectId) REFERENCES projectClientEst(projectId)
+ON UPDATE CASCADE
+ON DELETE CASCADE
+go
 
 --##########################################################################################
 --##################  FOREIG KEYS EMPLOYEES ################################################
@@ -1771,6 +1814,33 @@ GO
 
 ALTER TABLE [dbo].[scfEstimation] WITH CHECK ADD CONSTRAINT [fk_idClient_scfEstimation] FOREIGN KEY ([idClient]) 
 REFERENCES [dbo].[clients]([idClient])
+go
+--##########################################################################################
+--##################  FOREIG KEYS SCFFOLDEST ###############################################
+--##########################################################################################
+
+ALTER TABLE scaffoldEst WITH CHECK ADD CONSTRAINT fk_idLaborRate_scaffoldEst
+FOREIGN KEY (idLaborRate) REFERENCES laborRate(idLaborRate)
+ON UPDATE CASCADE
+ON DELETE CASCADE
+go
+
+ALTER TABLE scaffoldEst WITH CHECK ADD CONSTRAINT fk_idEnviroment_scaffoldEst
+FOREIGN KEY (idEnviroment) REFERENCES enviroment(idEnviroment)
+ON UPDATE CASCADE
+ON DELETE CASCADE
+go
+
+ALTER TABLE scaffoldEst WITH CHECK ADD CONSTRAINT fk_idSCFUR_scaffoldEst
+FOREIGN KEY (idSCFUR) REFERENCES scfUnitsRates(idSCFUR)
+ON UPDATE CASCADE
+ON DELETE CASCADE
+go
+
+ALTER TABLE scaffoldEst WITH CHECK ADD CONSTRAINT fk_idDrawingNum_scaffoldEst
+FOREIGN KEY (idDrawingNum) REFERENCES drawing(idDrawingNum)
+ON UPDATE CASCADE
+ON DELETE CASCADE
 go
 --##########################################################################################
 --##################  FOREIG KEYS SCFINFO ##################################################
@@ -3388,10 +3458,14 @@ go
 
 --ALTER TABLE clientsEst WITH CHECK ADD CONSTRAINT fk_idContact_clientsEst
 --FOREIGN KEY (idContact) REFERENCES contact(idContact)
+--on update cascade
+--on delete cascade
 --GO
 
 --ALTER TABLE clientsEst WITH CHECK ADD CONSTRAINT fk_idContact_HomeAddress
 --FOREIGN KEY (idHomeAdress) REFERENCES HomeAddress(idHomeAdress)
+--on update cascade
+--on delete cascade
 --GO
 
 --create table projectClientEst(
@@ -3405,4 +3479,78 @@ go
 
 --ALTER TABLE projectClientEst WITH CHECK ADD CONSTRAINT fk_idClintEst_projectClientEst
 --FOREIGN KEY (idClientEst) REFERENCES clientsEst(idClientEst)
+--on update cascade
+--on delete cascade
 --go
+
+----============================================================================================================================================
+----========== ESTE CODIGO ES PARA AGREGAR LA TABLA DE FACTOR DE ELEVAION EN SCF Y PAINT =======================================================
+----============================================================================================================================================
+
+--create table factorElevationSCF(
+--	elevation int primary key not null,
+--	[percent] int 
+--)
+--go
+
+--create table factorElevationPaint(
+--	elevation int primary key not null,
+--	[percent] int
+--)
+--go
+----============================================================================================================================================
+----========== ESTE CODIGO ES PARA AGREGAR LAS TABLAS DE DRAWING Y SCAFFOLDEST =================================================================
+----============================================================================================================================================
+
+create table drawing(
+	idDrawingNum varchar(45) primary key not null,
+	[description] varchar(150),
+	projectId varchar(30)
+)
+go
+
+ALTER TABLE drawing WITH CHECK ADD CONSTRAINT fk_projectId_drawing
+FOREIGN KEY (projectId) REFERENCES projectClientEst(projectId)
+ON UPDATE CASCADE
+ON DELETE CASCADE
+go
+
+create table scaffoldEst(
+	tag varchar(20) primary key not null,
+	location varchar(150),
+	[days] int,
+	width float,
+	[length] float,
+	heigth float,
+	decks int,
+	build int,
+	idLaborRate varchar(40) not null,
+	idSCFUR varchar(35) not null,
+	idEnviroment varchar(40) not null,
+	idDrawingNum varchar(45) not null
+)
+go
+
+ALTER TABLE scaffoldEst WITH CHECK ADD CONSTRAINT fk_idLaborRate_scaffoldEst
+FOREIGN KEY (idLaborRate) REFERENCES laborRate(idLaborRate)
+ON UPDATE CASCADE
+ON DELETE CASCADE
+go
+
+ALTER TABLE scaffoldEst WITH CHECK ADD CONSTRAINT fk_idEnviroment_scaffoldEst
+FOREIGN KEY (idEnviroment) REFERENCES enviroment(idEnviroment)
+ON UPDATE CASCADE
+ON DELETE CASCADE
+go
+
+ALTER TABLE scaffoldEst WITH CHECK ADD CONSTRAINT fk_idSCFUR_scaffoldEst
+FOREIGN KEY (idSCFUR) REFERENCES scfUnitsRates(idSCFUR)
+ON UPDATE CASCADE
+ON DELETE CASCADE
+go
+
+ALTER TABLE scaffoldEst WITH CHECK ADD CONSTRAINT fk_idDrawingNum_scaffoldEst
+FOREIGN KEY (idDrawingNum) REFERENCES drawing(idDrawingNum)
+ON UPDATE CASCADE
+ON DELETE CASCADE
+go

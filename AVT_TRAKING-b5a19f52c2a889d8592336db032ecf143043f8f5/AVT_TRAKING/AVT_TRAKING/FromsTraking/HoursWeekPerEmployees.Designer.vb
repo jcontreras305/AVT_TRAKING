@@ -64,13 +64,10 @@ Partial Class HoursWeekPerEmployees
         Me.Button12 = New System.Windows.Forms.Button()
         Me.btnNextEmploye = New System.Windows.Forms.Button()
         Me.btnLatsEmploye = New System.Windows.Forms.Button()
-        Me.Button9 = New System.Windows.Forms.Button()
         Me.btnTime = New System.Windows.Forms.Button()
         Me.btnExpenses = New System.Windows.Forms.Button()
         Me.Button6 = New System.Windows.Forms.Button()
-        Me.Button5 = New System.Windows.Forms.Button()
         Me.Button4 = New System.Windows.Forms.Button()
-        Me.Button3 = New System.Windows.Forms.Button()
         Me.btnEmpleados = New System.Windows.Forms.Button()
         Me.Button1 = New System.Windows.Forms.Button()
         Me.btnFindEmployee = New System.Windows.Forms.Button()
@@ -414,13 +411,10 @@ Partial Class HoursWeekPerEmployees
         Me.GroupBox1.Controls.Add(Me.Button12)
         Me.GroupBox1.Controls.Add(Me.btnNextEmploye)
         Me.GroupBox1.Controls.Add(Me.btnLatsEmploye)
-        Me.GroupBox1.Controls.Add(Me.Button9)
         Me.GroupBox1.Controls.Add(Me.btnTime)
         Me.GroupBox1.Controls.Add(Me.btnExpenses)
         Me.GroupBox1.Controls.Add(Me.Button6)
-        Me.GroupBox1.Controls.Add(Me.Button5)
         Me.GroupBox1.Controls.Add(Me.Button4)
-        Me.GroupBox1.Controls.Add(Me.Button3)
         Me.GroupBox1.Controls.Add(Me.btnEmpleados)
         Me.GroupBox1.Controls.Add(Me.Button1)
         Me.GroupBox1.Controls.Add(Me.btnFindEmployee)
@@ -461,11 +455,14 @@ Partial Class HoursWeekPerEmployees
         Me.btnProyect.FlatAppearance.BorderSize = 0
         Me.btnProyect.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(58, Byte), Integer), CType(CType(115, Byte), Integer))
         Me.btnProyect.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnProyect.Location = New System.Drawing.Point(1048, 69)
+        Me.btnProyect.Image = Global.AVT_TRAKING.My.Resources.Resources.estimation
+        Me.btnProyect.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnProyect.Location = New System.Drawing.Point(904, 22)
         Me.btnProyect.Name = "btnProyect"
-        Me.btnProyect.Size = New System.Drawing.Size(78, 23)
+        Me.btnProyect.Size = New System.Drawing.Size(124, 26)
         Me.btnProyect.TabIndex = 20
         Me.btnProyect.Text = "Open Project"
+        Me.btnProyect.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         Me.btnProyect.UseVisualStyleBackColor = True
         '
         'Button12
@@ -473,11 +470,14 @@ Partial Class HoursWeekPerEmployees
         Me.Button12.FlatAppearance.BorderSize = 0
         Me.Button12.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(58, Byte), Integer), CType(CType(115, Byte), Integer))
         Me.Button12.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.Button12.Location = New System.Drawing.Point(915, 65)
+        Me.Button12.Image = Global.AVT_TRAKING.My.Resources.Resources.peerdiem
+        Me.Button12.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.Button12.Location = New System.Drawing.Point(844, 57)
         Me.Button12.Name = "Button12"
-        Me.Button12.Size = New System.Drawing.Size(111, 29)
+        Me.Button12.Size = New System.Drawing.Size(148, 29)
         Me.Button12.TabIndex = 19
         Me.Button12.Text = "Dialv Per Diem"
+        Me.Button12.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         Me.Button12.UseVisualStyleBackColor = True
         '
         'btnNextEmploye
@@ -485,11 +485,14 @@ Partial Class HoursWeekPerEmployees
         Me.btnNextEmploye.FlatAppearance.BorderSize = 0
         Me.btnNextEmploye.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(58, Byte), Integer), CType(CType(115, Byte), Integer))
         Me.btnNextEmploye.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnNextEmploye.Location = New System.Drawing.Point(809, 65)
+        Me.btnNextEmploye.Image = Global.AVT_TRAKING.My.Resources.Resources._next
+        Me.btnNextEmploye.ImageAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.btnNextEmploye.Location = New System.Drawing.Point(741, 57)
         Me.btnNextEmploye.Name = "btnNextEmploye"
-        Me.btnNextEmploye.Size = New System.Drawing.Size(100, 32)
+        Me.btnNextEmploye.Size = New System.Drawing.Size(81, 32)
         Me.btnNextEmploye.TabIndex = 18
-        Me.btnNextEmploye.Text = "Record ->"
+        Me.btnNextEmploye.Text = "Record"
+        Me.btnNextEmploye.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.btnNextEmploye.UseVisualStyleBackColor = True
         '
         'btnLatsEmploye
@@ -497,24 +500,15 @@ Partial Class HoursWeekPerEmployees
         Me.btnLatsEmploye.FlatAppearance.BorderSize = 0
         Me.btnLatsEmploye.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(58, Byte), Integer), CType(CType(115, Byte), Integer))
         Me.btnLatsEmploye.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnLatsEmploye.Location = New System.Drawing.Point(691, 63)
+        Me.btnLatsEmploye.Image = Global.AVT_TRAKING.My.Resources.Resources.after1
+        Me.btnLatsEmploye.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnLatsEmploye.Location = New System.Drawing.Point(641, 57)
         Me.btnLatsEmploye.Name = "btnLatsEmploye"
-        Me.btnLatsEmploye.Size = New System.Drawing.Size(99, 32)
+        Me.btnLatsEmploye.Size = New System.Drawing.Size(88, 32)
         Me.btnLatsEmploye.TabIndex = 17
-        Me.btnLatsEmploye.Text = "<- Record"
+        Me.btnLatsEmploye.Text = "Record"
+        Me.btnLatsEmploye.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         Me.btnLatsEmploye.UseVisualStyleBackColor = True
-        '
-        'Button9
-        '
-        Me.Button9.FlatAppearance.BorderSize = 0
-        Me.Button9.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(58, Byte), Integer), CType(CType(115, Byte), Integer))
-        Me.Button9.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.Button9.Location = New System.Drawing.Point(630, 61)
-        Me.Button9.Name = "Button9"
-        Me.Button9.Size = New System.Drawing.Size(55, 32)
-        Me.Button9.TabIndex = 16
-        Me.Button9.Text = "<---"
-        Me.Button9.UseVisualStyleBackColor = True
         '
         'btnTime
         '
@@ -523,7 +517,7 @@ Partial Class HoursWeekPerEmployees
         Me.btnTime.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnTime.Image = Global.AVT_TRAKING.My.Resources.Resources.upload2
         Me.btnTime.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnTime.Location = New System.Drawing.Point(868, 22)
+        Me.btnTime.Location = New System.Drawing.Point(670, 22)
         Me.btnTime.Name = "btnTime"
         Me.btnTime.Size = New System.Drawing.Size(93, 26)
         Me.btnTime.TabIndex = 15
@@ -536,11 +530,14 @@ Partial Class HoursWeekPerEmployees
         Me.btnExpenses.FlatAppearance.BorderSize = 0
         Me.btnExpenses.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(58, Byte), Integer), CType(CType(115, Byte), Integer))
         Me.btnExpenses.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnExpenses.Location = New System.Drawing.Point(969, 19)
+        Me.btnExpenses.Image = Global.AVT_TRAKING.My.Resources.Resources.payroll
+        Me.btnExpenses.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnExpenses.Location = New System.Drawing.Point(769, 19)
         Me.btnExpenses.Name = "btnExpenses"
-        Me.btnExpenses.Size = New System.Drawing.Size(95, 32)
+        Me.btnExpenses.Size = New System.Drawing.Size(116, 32)
         Me.btnExpenses.TabIndex = 14
         Me.btnExpenses.Text = "Upload Exp"
+        Me.btnExpenses.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         Me.btnExpenses.UseVisualStyleBackColor = True
         '
         'Button6
@@ -550,28 +547,13 @@ Partial Class HoursWeekPerEmployees
         Me.Button6.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.Button6.Image = Global.AVT_TRAKING.My.Resources.Resources.payroll
         Me.Button6.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.Button6.Location = New System.Drawing.Point(769, 19)
+        Me.Button6.Location = New System.Drawing.Point(554, 19)
         Me.Button6.Name = "Button6"
         Me.Button6.Size = New System.Drawing.Size(93, 32)
         Me.Button6.TabIndex = 13
         Me.Button6.Text = "Pay Roll"
         Me.Button6.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         Me.Button6.UseVisualStyleBackColor = True
-        '
-        'Button5
-        '
-        Me.Button5.FlatAppearance.BorderSize = 0
-        Me.Button5.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(58, Byte), Integer), CType(CType(115, Byte), Integer))
-        Me.Button5.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.Button5.Image = Global.AVT_TRAKING.My.Resources.Resources.material
-        Me.Button5.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.Button5.Location = New System.Drawing.Point(670, 23)
-        Me.Button5.Name = "Button5"
-        Me.Button5.Size = New System.Drawing.Size(93, 32)
-        Me.Button5.TabIndex = 12
-        Me.Button5.Text = "Material Entry From"
-        Me.Button5.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.Button5.UseVisualStyleBackColor = True
         '
         'Button4
         '
@@ -587,18 +569,6 @@ Partial Class HoursWeekPerEmployees
         Me.Button4.Text = "Per-Diem"
         Me.Button4.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         Me.Button4.UseVisualStyleBackColor = True
-        '
-        'Button3
-        '
-        Me.Button3.FlatAppearance.BorderSize = 0
-        Me.Button3.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(58, Byte), Integer), CType(CType(115, Byte), Integer))
-        Me.Button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.Button3.Location = New System.Drawing.Point(554, 19)
-        Me.Button3.Name = "Button3"
-        Me.Button3.Size = New System.Drawing.Size(110, 32)
-        Me.Button3.TabIndex = 10
-        Me.Button3.Text = "Wo-Per-Diem"
-        Me.Button3.UseVisualStyleBackColor = True
         '
         'btnEmpleados
         '
@@ -929,13 +899,10 @@ Partial Class HoursWeekPerEmployees
     Friend WithEvents Button12 As Button
     Friend WithEvents btnNextEmploye As Button
     Friend WithEvents btnLatsEmploye As Button
-    Friend WithEvents Button9 As Button
     Friend WithEvents btnTime As Button
     Friend WithEvents btnExpenses As Button
     Friend WithEvents Button6 As Button
-    Friend WithEvents Button5 As Button
     Friend WithEvents Button4 As Button
-    Friend WithEvents Button3 As Button
     Friend WithEvents btnEmpleados As Button
     Friend WithEvents Button1 As Button
     Friend WithEvents TabControl1 As TabControl

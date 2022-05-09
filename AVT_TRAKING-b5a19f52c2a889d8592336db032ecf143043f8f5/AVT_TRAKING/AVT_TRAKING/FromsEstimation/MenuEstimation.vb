@@ -49,4 +49,47 @@
             FormPanel.BringToFront()
         End If
     End Sub
+    Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
+        OpenFormPanel2(Of Factors)()
+    End Sub
+    Private Sub OpenFormPanel2(Of Miform As {Factors, New})()
+        Dim FormPanel As Form
+        FormPanel = PanelViewFrom.Controls.OfType(Of Miform)().FirstOrDefault()
+
+        If FormPanel Is Nothing Then
+            Dim newPC = New Miform()
+            FormPanel = newPC
+            FormPanel.TopLevel = False
+            FormPanel.Dock = DockStyle.Fill
+
+            PanelViewFrom.Controls.Add(FormPanel)
+            PanelViewFrom.Tag = FormPanel
+            FormPanel.Show()
+            FormPanel.BringToFront()
+        Else
+            FormPanel.BringToFront()
+        End If
+    End Sub
+
+    Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
+        OpenFormPanel3(Of Estimating)()
+    End Sub
+    Private Sub OpenFormPanel3(Of Miform As {Estimating, New})()
+        Dim FormPanel As Form
+        FormPanel = PanelViewFrom.Controls.OfType(Of Miform)().FirstOrDefault()
+
+        If FormPanel Is Nothing Then
+            Dim newPC = New Miform()
+            FormPanel = newPC
+            FormPanel.TopLevel = False
+            FormPanel.Dock = DockStyle.Fill
+
+            PanelViewFrom.Controls.Add(FormPanel)
+            PanelViewFrom.Tag = FormPanel
+            FormPanel.Show()
+            FormPanel.BringToFront()
+        Else
+            FormPanel.BringToFront()
+        End If
+    End Sub
 End Class

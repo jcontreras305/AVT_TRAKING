@@ -92,6 +92,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ClassEstimation\ClientsEST.vb" />
+    <Compile Include="ClassEstimation\ElevationEstimation.vb" />
+    <Compile Include="ClassEstimation\MetodosEstimating.vb" />
+    <Compile Include="ClassEstimation\MetodosFactor.vb" />
     <Compile Include="Class\EstimationSC.vb" />
     <Compile Include="Class\MetodosClients.vb" />
     <Compile Include="Class\metodosCompany.vb" />
@@ -105,6 +108,18 @@
     <Compile Include="Class\MetodosTaxes.vb" />
     <Compile Include="Class\MetodosVendor.vb" />
     <Compile Include="Class\MetodosJobs.vb" />
+    <Compile Include="FromsEstimation\Estimating.Designer.vb">
+      <DependentUpon>Estimating.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FromsEstimation\Estimating.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FromsEstimation\Factors.Designer.vb">
+      <DependentUpon>Factors.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FromsEstimation\Factors.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="FromsEstimation\MenuEstimation.Designer.vb">
       <DependentUpon>MenuEstimation.vb</DependentUpon>
     </Compile>
@@ -720,6 +735,12 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="FromsEstimation\Estimating.resx">
+      <DependentUpon>Estimating.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FromsEstimation\Factors.resx">
+      <DependentUpon>Factors.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FromsEstimation\MenuEstimation.resx">
       <DependentUpon>MenuEstimation.vb</DependentUpon>
     </EmbeddedResource>

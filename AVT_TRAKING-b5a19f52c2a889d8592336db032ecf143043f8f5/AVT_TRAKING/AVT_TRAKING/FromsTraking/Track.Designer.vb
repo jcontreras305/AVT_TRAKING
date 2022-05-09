@@ -22,9 +22,9 @@ Partial Class Track
     'No lo modifique con el editor de código.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle9 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
         Me.TitleBar = New System.Windows.Forms.Panel()
         Me.PictureBox4 = New System.Windows.Forms.PictureBox()
@@ -303,35 +303,35 @@ Partial Class Track
         'tblTrack
         '
         Me.tblTrack.AllowUserToAddRows = False
-        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.tblTrack.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle1
+        DataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle7.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.tblTrack.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle7
         Me.tblTrack.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.tblTrack.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.RecordID, Me.ForceOrReject, Me.Source, Me.Date1, Me.OrderType, Me.LocationID, Me.CompanyCode, Me.ResourceID, Me.ResourceName, Me.Area, Me.GroupName, Me.Agreement, Me.SkillType, Me.Shift, Me.Level1ID, Me.Level2ID, Me.Level3ID, Me.Level4ID, Me.HoursTotal, Me.HoursTotalActivityCode, Me.STHrs, Me.STHrsActivityCode, Me.OTHrs, Me.OTHrsActivityCode, Me.DTHrs, Me.DTHrsActivityCode, Me.ExtraCharges, Me.ExtraChargesActivityCode, Me.Extra, Me.Extra1, Me.Extra2, Me.AddTime, Me.PayType, Me.R4Hrs, Me.R5Hrs, Me.R6Hrs, Me.GLAccount, Me.STAdders, Me.OTAdders, Me.DTAdders, Me.R4Adders, Me.R5Adders, Me.R6Adders})
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.tblTrack.DefaultCellStyle = DataGridViewCellStyle2
+        DataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle8.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.tblTrack.DefaultCellStyle = DataGridViewCellStyle8
         Me.tblTrack.Dock = System.Windows.Forms.DockStyle.Fill
         Me.tblTrack.Location = New System.Drawing.Point(3, 3)
         Me.tblTrack.Name = "tblTrack"
-        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle3.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.tblTrack.RowHeadersDefaultCellStyle = DataGridViewCellStyle3
+        DataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle9.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle9.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle9.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle9.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle9.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.tblTrack.RowHeadersDefaultCellStyle = DataGridViewCellStyle9
         Me.tblTrack.Size = New System.Drawing.Size(918, 253)
         Me.tblTrack.TabIndex = 0
         '
@@ -787,7 +787,7 @@ Partial Class Track
         Me.chbAllJobs.AutoSize = True
         Me.chbAllJobs.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.chbAllJobs.ForeColor = System.Drawing.SystemColors.ControlLight
-        Me.chbAllJobs.Location = New System.Drawing.Point(235, 30)
+        Me.chbAllJobs.Location = New System.Drawing.Point(214, 30)
         Me.chbAllJobs.Name = "chbAllJobs"
         Me.chbAllJobs.Size = New System.Drawing.Size(71, 20)
         Me.chbAllJobs.TabIndex = 49
@@ -819,7 +819,7 @@ Partial Class Track
         'cmbJobs
         '
         Me.cmbJobs.FormattingEnabled = True
-        Me.cmbJobs.Location = New System.Drawing.Point(91, 30)
+        Me.cmbJobs.Location = New System.Drawing.Point(70, 30)
         Me.cmbJobs.Name = "cmbJobs"
         Me.cmbJobs.Size = New System.Drawing.Size(138, 21)
         Me.cmbJobs.TabIndex = 49
@@ -827,7 +827,7 @@ Partial Class Track
         'cmbClient
         '
         Me.cmbClient.FormattingEnabled = True
-        Me.cmbClient.Location = New System.Drawing.Point(91, 4)
+        Me.cmbClient.Location = New System.Drawing.Point(70, 4)
         Me.cmbClient.Name = "cmbClient"
         Me.cmbClient.Size = New System.Drawing.Size(138, 21)
         Me.cmbClient.TabIndex = 48
@@ -835,40 +835,46 @@ Partial Class Track
         'btnFindDoc
         '
         Me.btnFindDoc.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnFindDoc.BackColor = System.Drawing.Color.DarkGray
+        Me.btnFindDoc.BackColor = System.Drawing.Color.FromArgb(CType(CType(83, Byte), Integer), CType(CType(93, Byte), Integer), CType(CType(102, Byte), Integer))
         Me.btnFindDoc.FlatAppearance.BorderSize = 0
         Me.btnFindDoc.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(58, Byte), Integer), CType(CType(115, Byte), Integer))
         Me.btnFindDoc.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnFindDoc.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnFindDoc.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.btnFindDoc.Location = New System.Drawing.Point(852, 14)
+        Me.btnFindDoc.Image = Global.AVT_TRAKING.My.Resources.Resources.excel
+        Me.btnFindDoc.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnFindDoc.Location = New System.Drawing.Point(840, 6)
         Me.btnFindDoc.Name = "btnFindDoc"
-        Me.btnFindDoc.Size = New System.Drawing.Size(75, 23)
+        Me.btnFindDoc.Size = New System.Drawing.Size(88, 44)
         Me.btnFindDoc.TabIndex = 54
-        Me.btnFindDoc.Text = "..."
+        Me.btnFindDoc.Text = "Excel"
+        Me.btnFindDoc.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         Me.btnFindDoc.UseVisualStyleBackColor = False
         '
         'btnSearch
         '
         Me.btnSearch.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnSearch.BackColor = System.Drawing.Color.DarkGray
+        Me.btnSearch.BackColor = System.Drawing.Color.FromArgb(CType(CType(83, Byte), Integer), CType(CType(93, Byte), Integer), CType(CType(102, Byte), Integer))
         Me.btnSearch.FlatAppearance.BorderSize = 0
         Me.btnSearch.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(58, Byte), Integer), CType(CType(115, Byte), Integer))
         Me.btnSearch.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnSearch.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnSearch.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.btnSearch.Location = New System.Drawing.Point(771, 14)
+        Me.btnSearch.Image = Global.AVT_TRAKING.My.Resources.Resources.loupe
+        Me.btnSearch.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnSearch.Location = New System.Drawing.Point(744, 14)
         Me.btnSearch.Name = "btnSearch"
-        Me.btnSearch.Size = New System.Drawing.Size(75, 23)
+        Me.btnSearch.Size = New System.Drawing.Size(90, 33)
         Me.btnSearch.TabIndex = 53
         Me.btnSearch.Text = "Search"
+        Me.btnSearch.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         Me.btnSearch.UseVisualStyleBackColor = False
         '
         'dtpBeginDate
         '
         Me.dtpBeginDate.CustomFormat = "MM/dd/yyyy"
         Me.dtpBeginDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom
-        Me.dtpBeginDate.Location = New System.Drawing.Point(389, 6)
+        Me.dtpBeginDate.Location = New System.Drawing.Point(367, 6)
         Me.dtpBeginDate.Name = "dtpBeginDate"
         Me.dtpBeginDate.Size = New System.Drawing.Size(130, 20)
         Me.dtpBeginDate.TabIndex = 51
@@ -877,7 +883,7 @@ Partial Class Track
         '
         Me.dtpEndDate.CustomFormat = "MM/dd/yyyy"
         Me.dtpEndDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom
-        Me.dtpEndDate.Location = New System.Drawing.Point(608, 6)
+        Me.dtpEndDate.Location = New System.Drawing.Point(586, 6)
         Me.dtpEndDate.Name = "dtpEndDate"
         Me.dtpEndDate.Size = New System.Drawing.Size(130, 20)
         Me.dtpEndDate.TabIndex = 52
@@ -887,7 +893,7 @@ Partial Class Track
         Me.Label2.AutoSize = True
         Me.Label2.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label2.ForeColor = System.Drawing.SystemColors.ControlLight
-        Me.Label2.Location = New System.Drawing.Point(524, 8)
+        Me.Label2.Location = New System.Drawing.Point(502, 8)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(82, 16)
         Me.Label2.TabIndex = 3
@@ -898,7 +904,7 @@ Partial Class Track
         Me.Label1.AutoSize = True
         Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label1.ForeColor = System.Drawing.SystemColors.ControlLight
-        Me.Label1.Location = New System.Drawing.Point(308, 8)
+        Me.Label1.Location = New System.Drawing.Point(286, 8)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(75, 16)
         Me.Label1.TabIndex = 2

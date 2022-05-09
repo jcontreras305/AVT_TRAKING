@@ -1,6 +1,7 @@
 ﻿Imports System.Data.SqlClient
 Imports System.Text.RegularExpressions
-
+Imports Microsoft.Office.Core
+Imports Microsoft.Office.Interop.Excel
 Module metodosGlobales
     Dim con As New ConnectioDB
     ''' <summary>
@@ -585,5 +586,85 @@ end", con.conn)
             MsgBox(ex.Message)
         End Try
     End Sub
+    Public Function leerExcel(ByRef label As System.Windows.Forms.Label, ByRef pgb As System.Windows.Forms.ProgressBar, ByVal sheetName As String) As Data.DataTable
+        Try
+            Dim openFile As New OpenFileDialog
+            openFile.DefaultExt = "*.xlsm"
+            openFile.FileName = "FactorsEstimation"
+            openFile.ShowDialog()
+            If DialogResult.OK = MessageBox.Show("Please verify that the Sheets name are '" + sheetName + "', if not do the changues and Close de Excel Application.", "Important", MessageBoxButtons.OKCancel, MessageBoxIcon.Information) Then
+                Dim ApExcel = New Microsoft.Office.Interop.Excel.Application
+                Dim libro = ApExcel.Workbooks.Open(openFile.FileName)
+                Dim flag As Boolean = False
+                For i = 1 To libro.Worksheets.Count
+                    If libro.Worksheets(i).Name = sheetName Then
+                        flag = True
+                        Exit For
+                    End If
+                Next
+                Dim sheet As New Worksheet
+                Try
+                    If flag = True Then
+                        sheet = libro.Worksheets(sheetName)
+                        label.Text = "Message: Opening Sheet '" + sheetName + "'."
+                        Dim countColumn As Integer = 1
+                        Dim countRow As Integer = 1
+                        pgb.Value = 5
+                        Dim flagCommit As Boolean = False
+                        Dim rowstbl As Integer = CInt(nreg(sheet, 2, 1))
+                        Dim increment = (90 / rowstbl)
 
+                        Dim flagIncrement = If(increment > 1, CInt(90 / rowstbl), If(increment < 1 And increment > 0.5, 2, If(increment < 0.5 And increment > 0.25, 3, 4)))
+                        pgb.Value = pgb.Value + 5
+                        Dim countIncrement As Integer = 0
+
+                        Dim tbl As New Data.DataTable
+                        label.Text = "Message: Reading Sheet '" + sheetName + "'."
+                        While sheet.Cells(countRow, countColumn).Text <> ""
+                            tbl.Columns.Add(sheet.Cells(countRow, countColumn).Text)
+                            countColumn += 1
+                        End While
+                        pgb.Value = pgb.Value + 5
+                        countRow += 1
+                        While sheet.Cells(countRow, 1).Text <> ""
+                            label.Text = "Message: Reading Sheet Row " + CStr(countRow) + "."
+                            Dim nrow As Data.DataRow = tbl.NewRow
+                            Dim itemArray(countColumn - 2) As Object
+                            For i = 1 To (countColumn - 1)
+                                itemArray((i - 1)) = CStr(sheet.Cells(countRow, i).text)
+                            Next
+                            nrow.ItemArray = itemArray
+                            tbl.Rows.Add(nrow)
+                            countIncrement += 1
+                            If pgb.Value <= 90 Then
+                                If flagIncrement = countIncrement Then
+                                    pgb.Value = pgb.Value + 1
+                                    countIncrement = 0
+                                End If
+                            End If
+                            countRow += 1
+                        End While
+                        Return tbl
+                    Else
+                        MessageBox.Show("The sheet '" + sheetName + "' was not found.", "Important", MessageBoxButtons.OK, MessageBoxIcon.Asterisk)
+                        Return Nothing
+                    End If
+                Catch ex As Exception
+                    MsgBox(ex.Message())
+                    Return Nothing
+                Finally
+                    NAR(sheet)
+                    libro.Close()
+                    NAR(libro)
+                    ApExcel.Quit()
+                    NAR(ApExcel)
+                End Try
+            Else
+                Return Nothing
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message)
+            Return Nothing
+        End Try
+    End Function
 End Module

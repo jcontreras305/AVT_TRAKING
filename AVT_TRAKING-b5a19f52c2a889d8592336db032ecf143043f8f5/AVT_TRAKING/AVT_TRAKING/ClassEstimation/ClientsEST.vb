@@ -237,11 +237,12 @@ begin
 	declare @idClient as varchar(36) = '" + cl.idClient + "'
 	declare @idContact as varchar(36) = '" + cl.idContact + "'
 	declare @idHomeAddress as varchar(36) = '" + cl.idHomeAddress + "'
-	insert into clientsEst  values (@idClient," + CStr(cl.numberClient) + ",'" + cl.contactName + "','" + cl.companyName + "','" + cl.plant + "',@idContact,@idHomeAddress)
-	insert into HomeAddress values (@idHomeAddress,'" + cl.avenue + "'," + CStr(cl.number) + ",'" + cl.city + "','" + cl.province + "'," + CStr(cl.postalCode) + ")
+    insert into HomeAddress values (@idHomeAddress,'" + cl.avenue + "'," + CStr(cl.number) + ",'" + cl.city + "','" + cl.province + "'," + CStr(cl.postalCode) + ")
 	insert into contact values (@idContact,'" + cl.phone1 + "','" + cl.phone2 + "','')
+    insert into clientsEst  values (@idClient," + CStr(cl.numberClient) + ",'" + cl.contactName + "','" + cl.companyName + "','" + cl.plant + "',@idContact,@idHomeAddress)
     end try
 	begin catch
+        set @error = 1
 		goto solveproblem
 	end catch
 	commit tran
@@ -419,6 +420,33 @@ end", conn)
         Catch ex As Exception
             MsgBox(ex.Message)
             Return False
+        Finally
+            desconectar()
+        End Try
+    End Function
+    Public Function llenarComboClientsEst(ByVal cmb As ComboBox) As Data.DataTable
+        Try
+            conectar()
+            Dim cmd As New SqlCommand("select cl.idClientEst, cl.numberClient ,cl.contactName,po.projectId, po.unit, po.[description] from clientsEst as cl
+inner join projectClientEst as po on cl.idClientEst = po.idClientEst", conn)
+            Dim dr As SqlDataReader = cmd.ExecuteReader()
+            Dim dt As New Data.DataTable
+            dt.Columns.Add("idClient")
+            dt.Columns.Add("numberClient")
+            dt.Columns.Add("contactName")
+            dt.Columns.Add("projectId")
+            dt.Columns.Add("unit")
+            dt.Columns.Add("description")
+            cmb.Items.Clear()
+            While dr.Read()
+                dt.Rows.Add(dr("idClientEst").ToString(), dr("numberClient").ToString(), dr("contactName"), dr("projectId"), dr("unit").ToString(), dr("description").ToString())
+                cmb.Items.Add(dr("numberClient").ToString() + " " + dr("contactName").ToString() + " " + dr("description").ToString())
+            End While
+            dr.Close()
+            Return dt
+        Catch ex As Exception
+            MsgBox(ex.Message())
+            Return Nothing
         Finally
             desconectar()
         End Try

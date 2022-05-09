@@ -348,7 +348,7 @@ Partial Class MenuEstimation
         '
         Me.PanelViewFrom.BackColor = System.Drawing.Color.FromArgb(CType(CType(83, Byte), Integer), CType(CType(92, Byte), Integer), CType(CType(102, Byte), Integer))
         Me.PanelViewFrom.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.PanelViewFrom.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.PanelViewFrom.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
         Me.PanelViewFrom.Location = New System.Drawing.Point(3, 53)
         Me.PanelViewFrom.Name = "PanelViewFrom"
         Me.PanelViewFrom.Size = New System.Drawing.Size(772, 599)
