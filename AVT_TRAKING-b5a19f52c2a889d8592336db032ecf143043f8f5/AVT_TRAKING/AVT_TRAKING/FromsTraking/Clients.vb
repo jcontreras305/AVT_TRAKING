@@ -159,11 +159,11 @@ Public Class Clients
         End If
     End Sub
 
-    Private Sub TabPage1_Click(sender As Object, e As EventArgs) Handles TabPage1.Click
+    Private Sub TabPage1_Click(sender As Object, e As EventArgs)
         txtFiltro.Text = txtFiltro2.Text
     End Sub
 
-    Private Sub TabPage2_Click(sender As Object, e As EventArgs) Handles TabPage2.Click
+    Private Sub TabPage2_Click(sender As Object, e As EventArgs)
         txtFiltro2.Text = txtFiltro.Text
     End Sub
 
@@ -334,6 +334,7 @@ Public Class Clients
             MsgBox(ex.Message)
         End Try
     End Sub
+
 
     Private Function validar_Correo(ByVal mail As String) As Boolean
         Return Regex.IsMatch(mail, "^[a-zA-Z][\w\.-]*[a-zA-Z0-9]@[a-zA-Z0-9][\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]{2,4}$") '"^[_a-zA-B0-9]+(\._a-zA-B0-9+)*@[a-zA-B0-9-]+(\.[a-zA-B0-9-]+)*(\.[a-z]{2,4})$")

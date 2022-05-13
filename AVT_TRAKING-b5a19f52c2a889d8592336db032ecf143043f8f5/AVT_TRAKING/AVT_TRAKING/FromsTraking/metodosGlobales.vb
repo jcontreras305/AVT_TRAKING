@@ -299,7 +299,7 @@ end", con.conn)
     End Function
 
     Public Function soloNumero(ByVal numerotext As String) As Boolean
-        Dim flag As Boolean = False
+        Dim flag As Boolean = True
         Dim array() As Char = numerotext.ToCharArray()
         For Each letra As Char In array
             If Char.IsDigit(letra) Or letra = "." Or letra = "-" Then

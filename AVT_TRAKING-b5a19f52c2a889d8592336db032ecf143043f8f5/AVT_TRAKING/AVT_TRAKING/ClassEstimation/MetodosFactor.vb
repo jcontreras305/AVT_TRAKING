@@ -367,7 +367,504 @@ Public Class MetodosFactor
         End Try
     End Function
     '=====================================================================================================================================================================
-    '===========  ========================================================================================================================================================
+    '=========== METODOS INSFITTING ======================================================================================================================================
     '=====================================================================================================================================================================
+
+    Public Function selectInsFitting(ByVal tbl As DataGridView) As Boolean
+        Try
+            conectar()
+            Dim cmd As New SqlCommand("select [type] as 'idType', [type],support,p90,p45,bend,tee,red,cap,flangePair,flangeVlv,controlVlv,weldedVlv,bebel,cutOut from insFitting", conn)
+            Dim dr As SqlDataReader = cmd.ExecuteReader()
+            tbl.Rows.Clear()
+            While dr.Read()
+                tbl.Rows.Add(dr("idType"), dr("type"), dr("support"), dr("p90"), dr("p45"), dr("bend"), dr("tee"), dr("red"), dr("cap"), dr("flangePair"), dr("flangeVlv"), dr("controlVlv"), dr("weldedVlv"), dr("bebel"), dr("cutOut"))
+            End While
+            Return True
+        Catch ex As Exception
+            MsgBox(ex.Message)
+            Return False
+        Finally
+            desconectar()
+        End Try
+    End Function
+    Public Function saveUpdateInsFitting(ByVal tbl As DataGridView) As Boolean
+        conectar()
+        Dim tran As SqlTransaction
+        tran = conn.BeginTransaction
+        Try
+            Dim flag As Boolean = True
+            For Each row As DataGridViewRow In tbl.SelectedRows()
+                Dim cmd As New SqlCommand
+                If row.Cells("typeId").Value Is Nothing Or row.Cells("typeId").Value = "" Then
+                    cmd.CommandText = "if (select count (*) from insFitting where [type]='" + row.Cells("Type").Value.ToString() + "')=0
+                    begin
+	                    insert into insFitting values('" + row.Cells("Type").Value.ToString() + "'," + row.Cells("Support").Value.ToString() + "," + row.Cells("p90").Value.ToString() + "," + row.Cells("p45").Value.ToString() + "," + row.Cells("Bend").Value.ToString() + "," + row.Cells("TEE").Value.ToString() + "," + row.Cells("RED").Value.ToString() + "," + row.Cells("CAP").Value.ToString() + "," + row.Cells("FlangePair").Value.ToString() + "," + row.Cells("FlangeVlv").Value.ToString() + "," + row.Cells("ControlVlv").Value.ToString() + "," + row.Cells("WeldVlv").Value.ToString() + "," + row.Cells("Bebel").Value.ToString() + "," + row.Cells("CutOut").Value.ToString() + ")
+                    end"
+                Else
+                    cmd.CommandText = "if(select count(*) from insFitting where [type]='" + row.Cells("typeId").Value.ToString() + "')=1
+                    begin 
+	                    update insFitting set [type]='" + row.Cells("Type").Value.ToString() + "' ,support=" + row.Cells("Support").Value.ToString() + ",p90=" + row.Cells("p90").Value.ToString() + ",p45=" + row.Cells("p45").Value.ToString() + ",bend=" + row.Cells("Bend").Value.ToString() + ",tee=" + row.Cells("TEE").Value.ToString() + ",red=" + row.Cells("RED").Value.ToString() + ",cap=" + row.Cells("CAP").Value.ToString() + ",flangePair=" + row.Cells("FlangePair").Value.ToString() + ",flangeVlv=" + row.Cells("FlangeVlv").Value.ToString() + ",controlVlv=" + row.Cells("ControlVlv").Value.ToString() + ",weldedVlv=" + row.Cells("WeldVlv").Value.ToString() + ",bebel=" + row.Cells("Bebel").Value.ToString() + ",cutOut=" + row.Cells("CutOut").Value.ToString() + " where [type]='" + row.Cells("typeId").Value.ToString() + "'
+                    end"
+                End If
+                cmd.Connection = conn
+                cmd.Transaction = tran
+                If cmd.ExecuteNonQuery > 0 Then
+                    flag = True
+                Else
+                    flag = False
+                    Exit For
+                End If
+            Next
+            If flag Then
+                tran.Commit()
+                Return True
+            Else
+                tran.Rollback()
+                Return False
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message())
+            Return False
+        Finally
+            desconectar()
+        End Try
+    End Function
+    Public Function deleteInsFitting(ByVal tbl As DataGridView) As Boolean
+        conectar()
+        Dim tran As SqlTransaction
+        tran = conn.BeginTransaction
+        Try
+            Dim flag As Boolean = True
+            For Each row As DataGridViewRow In tbl.SelectedRows()
+                If row.Cells("typeId").Value IsNot Nothing Or row.Cells("typeId").Value = "" Then
+                    Dim cmd As New SqlCommand("delete insFitting where [type]='" + row.Cells("typeId").Value.ToString() + "'", conn)
+                    cmd.Transaction = tran
+                    If cmd.ExecuteNonQuery > 0 Then
+                        flag = True
+                    Else
+                        flag = False
+                        Exit For
+                    End If
+                Else
+                    flag = True
+                End If
+            Next
+            If flag Then
+                tran.Commit()
+                Return True
+            Else
+                tran.Rollback()
+                Return False
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message)
+            Return False
+        Finally
+            desconectar()
+        End Try
+    End Function
+    Public Function llenarComboCellInsFitting(ByVal cmb As DataGridViewComboBoxCell) As Data.DataTable
+        Try
+            conectar()
+            Dim cmd As New SqlCommand("select [type] as 'idType', [type],support,p90,p45,bend,tee,red,cap,flangePair,flangeVlv,controlVlv,weldedVlv,bebel,cutOut from insFitting", conn)
+            Dim dt As New Data.DataTable
+            dt.Columns.Add("type")
+            dt.Columns.Add("support")
+            dt.Columns.Add("p90")
+            dt.Columns.Add("p45")
+            dt.Columns.Add("bend")
+            dt.Columns.Add("tee")
+            dt.Columns.Add("red")
+            dt.Columns.Add("cap")
+            dt.Columns.Add("flangePair")
+            dt.Columns.Add("flangeVlv")
+            dt.Columns.Add("controlVlv")
+            dt.Columns.Add("weldedVlv")
+            dt.Columns.Add("bebel")
+            dt.Columns.Add("cutOut")
+            Dim dr As SqlDataReader = cmd.ExecuteReader()
+            cmb.Items.Clear()
+            While dr.Read()
+                cmb.Items.Add(dr("type"))
+                dt.Rows.Add(dr("type"), dr("support"), dr("p90"), dr("p45"), dr("bend"), dr("tee"), dr("red"), dr("cap"), dr("flangePair"), dr("flangeVlv"), dr("controlVlv"), dr("weldedVlv"), dr("bebel"), dr("cutOut"))
+            End While
+            dr.Close()
+            Return dt
+        Catch ex As Exception
+            MsgBox(ex.Message())
+            Return Nothing
+        Finally
+            desconectar()
+        End Try
+    End Function
+
+    '=====================================================================================================================================================================
+    '=========== METODOS PNTFITTING ======================================================================================================================================
+    '=====================================================================================================================================================================
+    Public Function selectPntFitting(ByVal tbl As DataGridView) As Boolean
+        Try
+            conectar()
+            Dim cmd As New SqlCommand("select pntOption as 'idPntOption', pntOption,p90,p45,tee,flangePair,flangeVlv,controlVlv,weldedVlv from pntFitting", conn)
+            Dim dr As SqlDataReader = cmd.ExecuteReader()
+            tbl.Rows.Clear()
+            While dr.Read()
+                tbl.Rows.Add(dr("idPntOption"), dr("pntOption"), dr("p90"), dr("p45"), dr("tee"), dr("flangePair"), dr("flangeVlv"), dr("controlVlv"), dr("weldedVlv"))
+            End While
+            Return True
+        Catch ex As Exception
+            MsgBox(ex.Message)
+            Return False
+        Finally
+            desconectar()
+        End Try
+    End Function
+    Public Function saveUpdatePntFitting(ByVal tbl As DataGridView) As Boolean
+        conectar()
+        Dim tran As SqlTransaction
+        tran = conn.BeginTransaction
+        Try
+            Dim flag As Boolean = True
+            For Each row As DataGridViewRow In tbl.SelectedRows()
+                Dim cmd As New SqlCommand
+                If row.Cells("idOption").Value Is Nothing Or row.Cells("idOption").Value = "" Then
+                    cmd.CommandText = "if (select count (*) from pntFitting where pntOption='" + row.Cells("PaintOption").Value.ToString() + "')=0
+                        begin
+	                        insert into pntFitting values('" + row.Cells("PaintOption").Value.ToString() + "'," + row.Cells("p90p").Value.ToString() + "," + row.Cells("p45p").Value.ToString() + "," + row.Cells("TEEp").Value.ToString() + "," + row.Cells("FlangePairp").Value.ToString() + "," + row.Cells("FlangeVlvp").Value.ToString() + "," + row.Cells("ControlVlvp").Value.ToString() + "," + row.Cells("WeldedVlvp").Value.ToString() + ")
+                        end"
+                Else
+                    cmd.CommandText = "if(select count(*) from pntFitting where pntOption='" + row.Cells("idOption").Value.ToString() + "')=1
+                        begin 
+	                        update pntFitting set pntOption='" + row.Cells("PaintOption").Value.ToString() + "' ,p90=" + row.Cells("p90p").Value.ToString() + ",p45=" + row.Cells("p45p").Value.ToString() + ",tee=" + row.Cells("TEEp").Value.ToString() + ",flangePair=" + row.Cells("FlangePairp").Value.ToString() + ",flangeVlv=" + row.Cells("FlangeVlvp").Value.ToString() + ",controlVlv=" + row.Cells("ControlVlvp").Value.ToString() + ",weldedVlv=" + row.Cells("WeldedVlvp").Value.ToString() + " where pntOption='" + row.Cells("idOption").Value.ToString() + "'
+                        end"
+                End If
+                cmd.Connection = conn
+                cmd.Transaction = tran
+                If cmd.ExecuteNonQuery > 0 Then
+                    flag = True
+                Else
+                    flag = False
+                    Exit For
+                End If
+            Next
+            If flag Then
+                tran.Commit()
+                Return True
+            Else
+                tran.Rollback()
+                Return False
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message())
+            Return False
+        Finally
+            desconectar()
+        End Try
+    End Function
+    Public Function deletePntFitting(ByVal tbl As DataGridView) As Boolean
+        conectar()
+        Dim tran As SqlTransaction
+        tran = conn.BeginTransaction
+        Try
+            Dim flag As Boolean = True
+            For Each row As DataGridViewRow In tbl.SelectedRows()
+                If row.Cells("idOption").Value IsNot Nothing Or row.Cells("idOption").Value = "" Then
+                    Dim cmd As New SqlCommand("delete pntFitting where pntOption='" + row.Cells("idOption").Value.ToString() + "'", conn)
+                    cmd.Transaction = tran
+                    If cmd.ExecuteNonQuery > 0 Then
+                        flag = True
+                    Else
+                        flag = False
+                        Exit For
+                    End If
+                Else
+                    flag = True
+                End If
+            Next
+            If flag Then
+                tran.Commit()
+                Return True
+            Else
+                tran.Rollback()
+                Return False
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message)
+            Return False
+        Finally
+            desconectar()
+        End Try
+    End Function
+    Public Function llenarComboCellPntFitting(ByVal cmb As DataGridViewComboBoxCell) As Data.DataTable
+        Try
+            conectar()
+            Dim cmd As New SqlCommand("select pntOption,p90,p45,tee,flangePair,flangeVlv,controlVlv,weldedVlv from pntFitting", conn)
+            Dim dt As New Data.DataTable
+            dt.Columns.Add("pntOption")
+            dt.Columns.Add("p90")
+            dt.Columns.Add("p45")
+            dt.Columns.Add("tee")
+            dt.Columns.Add("flangePair")
+            dt.Columns.Add("flangeVlv")
+            dt.Columns.Add("controlVlv")
+            dt.Columns.Add("weldedVlv")
+            Dim dr As SqlDataReader = cmd.ExecuteReader()
+            cmb.Items.Clear()
+            While dr.Read()
+                cmb.Items.Add(dr("pntOption"))
+                dt.Rows.Add(dr("pntOption"), dr("p90"), dr("p45"), dr("tee"), dr("flangePair"), dr("flangeVlv"), dr("controlVlv"), dr("weldedVlv"))
+            End While
+            dr.Close()
+            Return dt
+        Catch ex As Exception
+            MsgBox(ex.Message())
+            Return Nothing
+        Finally
+            desconectar()
+        End Try
+    End Function
+    '=====================================================================================================================================================================
+    '=========== METODOS EQUIPMENTPAINTUNITRATE ==========================================================================================================================
+    '=====================================================================================================================================================================
+    Public Function selectEqPntUnitRate(ByVal tbl As DataGridView) As Boolean
+        Try
+            conectar()
+            Dim cmd As New SqlCommand("select systemPntEq,pntOption,laborProd,matRate,eqRate from eqPaintUnitRate", conn)
+            Dim dr As SqlDataReader = cmd.ExecuteReader()
+            tbl.Rows.Clear()
+            While dr.Read()
+                tbl.Rows.Add(dr("systemPntEq"), dr("pntOption"), dr("systemPntEq"), dr("pntOption"), dr("laborProd"), dr("matRate"), dr("eqRate"))
+            End While
+            Return True
+        Catch ex As Exception
+            MsgBox(ex.Message)
+            Return False
+        Finally
+            desconectar()
+        End Try
+    End Function
+    Public Function saveUpdateEqPntUnitRate(ByVal tbl As DataGridView) As Boolean
+        conectar()
+        Dim tran As SqlTransaction
+        tran = conn.BeginTransaction
+        Try
+            Dim flag As Boolean = True
+            For Each row As DataGridViewRow In tbl.SelectedRows()
+                Dim cmd As New SqlCommand
+                If (row.Cells("SystemEqId").Value Is Nothing Or row.Cells("SystemEqId").Value = "") And (row.Cells("OptionEQId").Value Is Nothing Or row.Cells("OptionEQId").Value = "") Then
+                    cmd.CommandText = "if(select COUNT(*) from eqPaintUnitRate where systemPntEq='" + row.Cells("SystemEq").Value.ToString() + "' and pntOption = '" + row.Cells("OptionEq").Value.ToString() + "')=0
+begin
+	insert into eqPaintUnitRate values('" + row.Cells("SystemEq").Value.ToString() + "','" + row.Cells("OptionEq").Value.ToString() + "'," + row.Cells("laborProdEq").Value.ToString() + "," + row.Cells("materialRateEq").Value.ToString() + "," + row.Cells("eqRateEq").Value.ToString() + ")
+end"
+                Else
+                    cmd.CommandText = "if(select COUNT(*) from eqPaintUnitRate where systemPntEq='" + row.Cells("SystemEqId").Value.ToString() + "' and pntOption = '" + row.Cells("OptionEQId").Value.ToString() + "')=1
+begin 
+	update eqPaintUnitRate set systemPntEq='" + row.Cells("SystemEq").Value.ToString() + "',pntOption='" + row.Cells("OptionEq").Value.ToString() + "',laborProd=" + row.Cells("laborProdEq").Value.ToString() + ",matRate=" + row.Cells("materialRateEq").Value.ToString() + ",eqRate=" + row.Cells("eqRateEq").Value.ToString() + " where systemPntEq = '" + row.Cells("SystemEqId").Value.ToString() + "' and pntOption='" + row.Cells("OptionEQId").Value.ToString() + "'
+end"
+                End If
+                cmd.Connection = conn
+                cmd.Transaction = tran
+                If cmd.ExecuteNonQuery > 0 Then
+                    flag = True
+                Else
+                    flag = False
+                    Exit For
+                End If
+            Next
+            If flag Then
+                tran.Commit()
+                Return True
+            Else
+                tran.Rollback()
+                Return False
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message())
+            Return False
+        Finally
+            desconectar()
+        End Try
+    End Function
+    Public Function deleteEqPntUnitRate(ByVal tbl As DataGridView) As Boolean
+        conectar()
+        Dim tran As SqlTransaction
+        tran = conn.BeginTransaction
+        Try
+            Dim flag As Boolean = True
+            For Each row As DataGridViewRow In tbl.SelectedRows()
+                If (row.Cells("SystemEqId").Value IsNot Nothing Or row.Cells("SystemEqId").Value = "") And (row.Cells("OptionEQId").Value IsNot Nothing Or row.Cells("OptionEQId").Value = "") Then
+                    Dim cmd As New SqlCommand("delete from eqPaintUnitRate where systemPntEq = '" + row.Cells("SystemEqId").Value.ToString() + "' and pntOption = '" + row.Cells("OptionEQId").Value.ToString() + "'", conn)
+                    cmd.Transaction = tran
+                    If cmd.ExecuteNonQuery > 0 Then
+                        flag = True
+                    Else
+                        flag = False
+                        Exit For
+                    End If
+                Else
+                    flag = True
+                End If
+            Next
+            If flag Then
+                tran.Commit()
+                Return True
+            Else
+                tran.Rollback()
+                Return False
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message)
+            Return False
+        Finally
+            desconectar()
+        End Try
+    End Function
+    Public Function llenarComboCellEqPntUnitRate(ByVal cmb As DataGridViewComboBoxCell) As Data.DataTable
+        Try
+            conectar()
+            Dim cmd As New SqlCommand("select systemPntEq,pntOption,laborProd,matRate,eqRate from eqPaintUnitRate", conn)
+            Dim dt As New Data.DataTable
+            dt.Columns.Add("systemPntEq")
+            dt.Columns.Add("pntOption")
+            dt.Columns.Add("laborProd")
+            dt.Columns.Add("matRate")
+            dt.Columns.Add("eqRate")
+            Dim dr As SqlDataReader = cmd.ExecuteReader()
+            cmb.Items.Clear()
+            While dr.Read()
+                cmb.Items.Add(dr("systemPntEq") + "|" + dr("pntOption"))
+                dt.Rows.Add(dr("systemPntEq"), dr("pntOption"), dr("laborProd"), dr("matRate"), dr("eqRate"))
+            End While
+            dr.Close()
+            Return dt
+        Catch ex As Exception
+            MsgBox(ex.Message())
+            Return Nothing
+        Finally
+            desconectar()
+        End Try
+    End Function
+    '=====================================================================================================================================================================
+    '=========== METODOS EQUIPMENTPAINTUNITRATE ==========================================================================================================================
+    '=====================================================================================================================================================================
+    Public Function selectPpPntUnitRate(ByVal tbl As DataGridView) As Boolean
+        Try
+            conectar()
+            Dim cmd As New SqlCommand("select systemPntPP, pntOption, size, laborProd, matRate, eqRate from ppPaintUnitRate", conn)
+            Dim dr As SqlDataReader = cmd.ExecuteReader()
+            tbl.Rows.Clear()
+            While dr.Read()
+                tbl.Rows.Add(dr("systemPntPP"), dr("pntOption"), dr("size"), dr("systemPntPP"), dr("pntOption"), dr("size"), dr("laborProd"), dr("matRate"), dr("eqRate"))
+            End While
+            Return True
+        Catch ex As Exception
+            MsgBox(ex.Message)
+            Return False
+        Finally
+            desconectar()
+        End Try
+    End Function
+    Public Function saveUpdatePpPntUnitRate(ByVal tbl As DataGridView) As Boolean
+        conectar()
+        Dim tran As SqlTransaction
+        tran = conn.BeginTransaction
+        Try
+            Dim flag As Boolean = True
+            For Each row As DataGridViewRow In tbl.SelectedRows()
+                Dim cmd As New SqlCommand
+                If (row.Cells("systemPPId").Value Is Nothing Or row.Cells("systemPPId").Value = "") And (row.Cells("optionPPId").Value Is Nothing Or row.Cells("optionPPId").Value = "") And (row.Cells("sizePPId").Value Is Nothing Or row.Cells("sizePPId").Value = "") Then
+                    cmd.CommandText = "if(select COUNT(*) from ppPaintUnitRate where systemPntPP='" + row.Cells("SystemPP").Value.ToString + "' and pntOption = '" + row.Cells("optionPP").Value.ToString + "' and size = " + row.Cells("sizePP").Value.ToString + ")=0
+                        begin
+	                        insert into ppPaintUnitRate values('" + row.Cells("SystemPP").Value.ToString() + "','" + row.Cells("optionPP").Value.ToString() + "'," + row.Cells("sizePP").Value.ToString() + "," + row.Cells("laborProdPP").Value.ToString() + "," + row.Cells("matRatePP").Value.ToString() + "," + row.Cells("eqRatePP").Value.ToString() + ")
+                        end"
+                Else
+                    cmd.CommandText = "if(select COUNT(*) from ppPaintUnitRate where systemPntpp ='" + row.Cells("systemPPId").Value.ToString() + "' and pntOption = '" + row.Cells("optionPPId").Value.ToString() + "' and size = " + row.Cells("sizePPId").Value.ToString() + ")=1
+                        begin 
+	                        update ppPaintUnitRate set systemPntPP='" + row.Cells("SystemPP").Value.ToString() + "',pntOption='" + row.Cells("optionPP").Value.ToString() + "',size=" + row.Cells("sizePP").Value.ToString() + ",laborProd=" + row.Cells("laborProdPP").Value.ToString() + ",matRate=" + row.Cells("matRatePP").Value.ToString() + ",eqRate=" + row.Cells("eqRatePP").Value.ToString() + " where systemPntPP = '" + row.Cells("systemPPId").Value.ToString() + "' and pntOption='" + row.Cells("optionPPId").Value.ToString() + "' and size = " + row.Cells("sizePPId").Value.ToString() + "
+                        end"
+                End If
+                cmd.Connection = conn
+                cmd.Transaction = tran
+                If cmd.ExecuteNonQuery > 0 Then
+                    flag = True
+                Else
+                    flag = False
+                    Exit For
+                End If
+            Next
+            If flag Then
+                tran.Commit()
+                Return True
+            Else
+                tran.Rollback()
+                Return False
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message())
+            Return False
+        Finally
+            desconectar()
+        End Try
+    End Function
+    Public Function deletePpPntUnitRate(ByVal tbl As DataGridView) As Boolean
+        conectar()
+        Dim tran As SqlTransaction
+        tran = conn.BeginTransaction
+        Try
+            Dim flag As Boolean = True
+            For Each row As DataGridViewRow In tbl.SelectedRows()
+                If (row.Cells("systemPPId").Value IsNot Nothing Or row.Cells("systemPPId").Value = "") And (row.Cells("optionPPId").Value IsNot Nothing Or row.Cells("optionPPId").Value = "") And (row.Cells("sizePPId").Value IsNot Nothing Or row.Cells("sizePPId").Value.ToString() = "") Then
+                    Dim cmd As New SqlCommand("delete from ppPaintUnitRate where systemPntPP ='" + row.Cells("systemPPId").Value.ToString() + "' and pntOption = '" + row.Cells("optionPPId").Value.ToString() + "' and size =" + row.Cells("sizePPId").Value.ToString() + "", conn)
+                    cmd.Transaction = tran
+                    If cmd.ExecuteNonQuery > 0 Then
+                        flag = True
+                    Else
+                        flag = False
+                        Exit For
+                    End If
+                Else
+                    flag = True
+                End If
+            Next
+            If flag Then
+                tran.Commit()
+                Return True
+            Else
+                tran.Rollback()
+                Return False
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message)
+            Return False
+        Finally
+            desconectar()
+        End Try
+    End Function
+    Public Function llenarComboCellPpPntUnitRate(ByVal cmb As DataGridViewComboBoxCell) As Data.DataTable
+        Try
+            conectar()
+            Dim cmd As New SqlCommand("select systemPntPP, pntOption, size, laborProd, matRate, eqRate from ppPaintUnitRate", conn)
+            Dim dt As New Data.DataTable
+            dt.Columns.Add("systemPntPP")
+            dt.Columns.Add("pntOption")
+            dt.Columns.Add("size")
+            dt.Columns.Add("laborProd")
+            dt.Columns.Add("matRate")
+            dt.Columns.Add("eqRate")
+            Dim dr As SqlDataReader = cmd.ExecuteReader()
+            cmb.Items.Clear()
+            While dr.Read()
+                cmb.Items.Add(dr("systemPntPP") + "|" + dr("pntOption"))
+                dt.Rows.Add(dr("systemPntPP"), dr("pntOption"), dr("size"), dr("laborProd"), dr("matRate"), dr("eqRate"))
+            End While
+            dr.Close()
+            Return dt
+        Catch ex As Exception
+            MsgBox(ex.Message())
+            Return Nothing
+        Finally
+            desconectar()
+        End Try
+    End Function
+
 
 End Class

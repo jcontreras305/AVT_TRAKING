@@ -242,7 +242,6 @@
                 Catch ex As Exception
 
                 End Try
-            Case 4
         End Select
     End Sub
     Dim clmIndexSCFDrawing

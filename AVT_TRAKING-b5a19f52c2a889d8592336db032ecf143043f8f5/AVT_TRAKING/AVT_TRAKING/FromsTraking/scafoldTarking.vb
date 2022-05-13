@@ -49,8 +49,29 @@ Public Class scafoldTarking
         End If
         Return If(cmb.Items IsNot Nothing, cmb.Items.Count(), 0)
     End Function
-    Private Sub tabControl1_SelectedIndexChanged(sender As Object, e As EventArgs) Handles tabControl1.SelectedIndexChanged
-        Select Case tabControl1.SelectedTab.Text
+    'Private Sub tabControl1_SelectedIndexChanged(sender As Object, e As EventArgs) Handles tabControl1.SelectedIndexChanged
+    '    Select Case tabControl1.SelectedTab.Text
+    '        Case "In Coming"
+    '            selectedTable = tblInComing.Name()
+    '        Case "Out Going"
+    '            selectedTable = tblOutGoing.Name()
+    '        Case "Costumers & JobsN."
+    '        Case "Products"
+    '        Case "Area/WO/Sub-Job"
+    '        Case "UM/Class/Status"
+    '        Case "Supervisor"
+    '        Case "ScaffoldTraking"
+    '            selectedTable = "tag"
+    '        Case "Modification"
+    '            selectedTable = "Mod"
+    '        Case "Dismantle"
+    '            selectedTable = "Dis"
+    '        Case "Estimating"
+    '            selectedTable = "Est"
+    '    End Select
+    'End Sub
+    Private Sub MyTabControl1_SelectedIndexChanged(sender As Object, e As EventArgs) Handles MyTabControl1.SelectedIndexChanged
+        Select Case MyTabControl1.SelectedTab.Text
             Case "In Coming"
                 selectedTable = tblInComing.Name()
             Case "Out Going"
@@ -70,7 +91,6 @@ Public Class scafoldTarking
                 selectedTable = "Est"
         End Select
     End Sub
-
     Private Sub btnSaveTable_Click(sender As Object, e As EventArgs) Handles btnSaveTable.Click
         Select Case selectedTable
             Case tblAreas.Name
@@ -264,7 +284,7 @@ Public Class scafoldTarking
     End Sub
 
     Private Sub btnSaveAll_Click(sender As Object, e As EventArgs) Handles btnSaveAll.Click
-        Select Case tabControl1.SelectedTab.Text
+        Select Case MyTabControl1.SelectedTab.Text
             Case "In Coming"
                 Dim list As New List(Of String)
                 If cmbJobNumInComing.SelectedItem IsNot Nothing And txtTicketNumInComing.Text <> "" Then
@@ -4457,4 +4477,6 @@ Public Class scafoldTarking
             Return False
         End Try
     End Function
+
+
 End Class

@@ -24,7 +24,6 @@ Partial Class Materials
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Materials))
         Me.tblMaterial = New System.Windows.Forms.DataGridView()
-        Me.TabPage2 = New System.Windows.Forms.TabPage()
         Me.TableLayoutPanel4 = New System.Windows.Forms.TableLayoutPanel()
         Me.Panel7 = New System.Windows.Forms.Panel()
         Me.TableLayoutPanel6 = New System.Windows.Forms.TableLayoutPanel()
@@ -73,7 +72,6 @@ Partial Class Materials
         Me.btnCancelOrder = New System.Windows.Forms.Button()
         Me.Panel9 = New System.Windows.Forms.Panel()
         Me.tblMaterialAndOrders = New System.Windows.Forms.DataGridView()
-        Me.TabPage1 = New System.Windows.Forms.TabPage()
         Me.TableLayoutPanel3 = New System.Windows.Forms.TableLayoutPanel()
         Me.Panel6 = New System.Windows.Forms.Panel()
         Me.TableLayoutPanel11 = New System.Windows.Forms.TableLayoutPanel()
@@ -83,6 +81,8 @@ Partial Class Materials
         Me.PictureBox2 = New System.Windows.Forms.PictureBox()
         Me.Panel26 = New System.Windows.Forms.Panel()
         Me.Panel5 = New System.Windows.Forms.Panel()
+        Me.Label23 = New System.Windows.Forms.Label()
+        Me.cmbClassMaterial = New System.Windows.Forms.ComboBox()
         Me.txtNumeroMaterial = New System.Windows.Forms.TextBox()
         Me.btnCancelMaterial = New System.Windows.Forms.Button()
         Me.btnSaveMaterial = New System.Windows.Forms.Button()
@@ -93,8 +93,6 @@ Partial Class Materials
         Me.Label2 = New System.Windows.Forms.Label()
         Me.cmbVendedor = New System.Windows.Forms.ComboBox()
         Me.txtNameMaterials = New System.Windows.Forms.TextBox()
-        Me.TabControl1 = New System.Windows.Forms.TabControl()
-        Me.TabPage3 = New System.Windows.Forms.TabPage()
         Me.TableLayoutPanel2 = New System.Windows.Forms.TableLayoutPanel()
         Me.Panel4 = New System.Windows.Forms.Panel()
         Me.TableLayoutPanel12 = New System.Windows.Forms.TableLayoutPanel()
@@ -115,7 +113,6 @@ Partial Class Materials
         Me.btnSaveVendor = New System.Windows.Forms.Button()
         Me.chbEnableVendor = New System.Windows.Forms.CheckBox()
         Me.btnUpdateVendor = New System.Windows.Forms.Button()
-        Me.TabPage4 = New System.Windows.Forms.TabPage()
         Me.TableLayoutPanel7 = New System.Windows.Forms.TableLayoutPanel()
         Me.Panel18 = New System.Windows.Forms.Panel()
         Me.txtMensajeProseso = New System.Windows.Forms.TextBox()
@@ -144,10 +141,12 @@ Partial Class Materials
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
         Me.Panel2 = New System.Windows.Forms.Panel()
         Me.Panel1 = New System.Windows.Forms.Panel()
-        Me.Label23 = New System.Windows.Forms.Label()
-        Me.cmbClassMaterial = New System.Windows.Forms.ComboBox()
+        Me.MyTabControl1 = New AVT_TRAKING.MyTabControl()
+        Me.TabPage5 = New System.Windows.Forms.TabPage()
+        Me.TabPage6 = New System.Windows.Forms.TabPage()
+        Me.TabPage7 = New System.Windows.Forms.TabPage()
+        Me.TabPage8 = New System.Windows.Forms.TabPage()
         CType(Me.tblMaterial, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.TabPage2.SuspendLayout()
         Me.TableLayoutPanel4.SuspendLayout()
         Me.Panel7.SuspendLayout()
         Me.TableLayoutPanel6.SuspendLayout()
@@ -166,7 +165,6 @@ Partial Class Materials
         Me.Panel10.SuspendLayout()
         Me.Panel9.SuspendLayout()
         CType(Me.tblMaterialAndOrders, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.TabPage1.SuspendLayout()
         Me.TableLayoutPanel3.SuspendLayout()
         Me.Panel6.SuspendLayout()
         Me.TableLayoutPanel11.SuspendLayout()
@@ -174,8 +172,6 @@ Partial Class Materials
         CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel26.SuspendLayout()
         Me.Panel5.SuspendLayout()
-        Me.TabControl1.SuspendLayout()
-        Me.TabPage3.SuspendLayout()
         Me.TableLayoutPanel2.SuspendLayout()
         Me.Panel4.SuspendLayout()
         Me.TableLayoutPanel12.SuspendLayout()
@@ -184,7 +180,6 @@ Partial Class Materials
         Me.Panel28.SuspendLayout()
         CType(Me.tblVendor, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel3.SuspendLayout()
-        Me.TabPage4.SuspendLayout()
         Me.TableLayoutPanel7.SuspendLayout()
         Me.Panel18.SuspendLayout()
         Me.Panel17.SuspendLayout()
@@ -205,6 +200,11 @@ Partial Class Materials
         Me.TableLayoutPanel1.SuspendLayout()
         Me.Panel2.SuspendLayout()
         Me.Panel1.SuspendLayout()
+        Me.MyTabControl1.SuspendLayout()
+        Me.TabPage5.SuspendLayout()
+        Me.TabPage6.SuspendLayout()
+        Me.TabPage7.SuspendLayout()
+        Me.TabPage8.SuspendLayout()
         Me.SuspendLayout()
         '
         'tblMaterial
@@ -221,22 +221,8 @@ Partial Class Materials
         Me.tblMaterial.RowHeadersWidth = 62
         Me.tblMaterial.RowTemplate.Height = 28
         Me.tblMaterial.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.tblMaterial.Size = New System.Drawing.Size(498, 336)
+        Me.tblMaterial.Size = New System.Drawing.Size(497, 337)
         Me.tblMaterial.TabIndex = 7
-        '
-        'TabPage2
-        '
-        Me.TabPage2.BackColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(59, Byte), Integer), CType(CType(104, Byte), Integer))
-        Me.TabPage2.Controls.Add(Me.TableLayoutPanel4)
-        Me.TabPage2.Font = New System.Drawing.Font("Verdana", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TabPage2.ForeColor = System.Drawing.SystemColors.ControlText
-        Me.TabPage2.Location = New System.Drawing.Point(4, 25)
-        Me.TabPage2.Margin = New System.Windows.Forms.Padding(2)
-        Me.TabPage2.Name = "TabPage2"
-        Me.TabPage2.Padding = New System.Windows.Forms.Padding(2)
-        Me.TabPage2.Size = New System.Drawing.Size(769, 417)
-        Me.TabPage2.TabIndex = 1
-        Me.TabPage2.Text = "Materials bills"
         '
         'TableLayoutPanel4
         '
@@ -245,12 +231,12 @@ Partial Class Materials
         Me.TableLayoutPanel4.Controls.Add(Me.Panel7, 0, 0)
         Me.TableLayoutPanel4.Controls.Add(Me.Panel8, 0, 1)
         Me.TableLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.TableLayoutPanel4.Location = New System.Drawing.Point(2, 2)
+        Me.TableLayoutPanel4.Location = New System.Drawing.Point(3, 3)
         Me.TableLayoutPanel4.Name = "TableLayoutPanel4"
         Me.TableLayoutPanel4.RowCount = 2
         Me.TableLayoutPanel4.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 62.71186!))
         Me.TableLayoutPanel4.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 37.28814!))
-        Me.TableLayoutPanel4.Size = New System.Drawing.Size(765, 413)
+        Me.TableLayoutPanel4.Size = New System.Drawing.Size(763, 414)
         Me.TableLayoutPanel4.TabIndex = 41
         '
         'Panel7
@@ -259,7 +245,7 @@ Partial Class Materials
         Me.Panel7.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel7.Location = New System.Drawing.Point(3, 3)
         Me.Panel7.Name = "Panel7"
-        Me.Panel7.Size = New System.Drawing.Size(759, 252)
+        Me.Panel7.Size = New System.Drawing.Size(757, 253)
         Me.Panel7.TabIndex = 0
         '
         'TableLayoutPanel6
@@ -267,7 +253,7 @@ Partial Class Materials
         Me.TableLayoutPanel6.ColumnCount = 3
         Me.TableLayoutPanel6.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 54.76674!))
         Me.TableLayoutPanel6.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 45.23326!))
-        Me.TableLayoutPanel6.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 267.0!))
+        Me.TableLayoutPanel6.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 268.0!))
         Me.TableLayoutPanel6.Controls.Add(Me.Panel16, 2, 1)
         Me.TableLayoutPanel6.Controls.Add(Me.Panel15, 1, 1)
         Me.TableLayoutPanel6.Controls.Add(Me.Panel14, 0, 1)
@@ -280,23 +266,23 @@ Partial Class Materials
         Me.TableLayoutPanel6.RowCount = 2
         Me.TableLayoutPanel6.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 78.1893!))
         Me.TableLayoutPanel6.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 21.8107!))
-        Me.TableLayoutPanel6.Size = New System.Drawing.Size(759, 252)
+        Me.TableLayoutPanel6.Size = New System.Drawing.Size(757, 253)
         Me.TableLayoutPanel6.TabIndex = 41
         '
         'Panel16
         '
         Me.Panel16.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel16.Location = New System.Drawing.Point(494, 200)
+        Me.Panel16.Location = New System.Drawing.Point(491, 200)
         Me.Panel16.Name = "Panel16"
-        Me.Panel16.Size = New System.Drawing.Size(262, 49)
+        Me.Panel16.Size = New System.Drawing.Size(263, 50)
         Me.Panel16.TabIndex = 5
         '
         'Panel15
         '
         Me.Panel15.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel15.Location = New System.Drawing.Point(272, 200)
+        Me.Panel15.Location = New System.Drawing.Point(270, 200)
         Me.Panel15.Name = "Panel15"
-        Me.Panel15.Size = New System.Drawing.Size(216, 49)
+        Me.Panel15.Size = New System.Drawing.Size(215, 50)
         Me.Panel15.TabIndex = 4
         '
         'Panel14
@@ -307,7 +293,7 @@ Partial Class Materials
         Me.Panel14.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel14.Location = New System.Drawing.Point(3, 200)
         Me.Panel14.Name = "Panel14"
-        Me.Panel14.Size = New System.Drawing.Size(263, 49)
+        Me.Panel14.Size = New System.Drawing.Size(261, 50)
         Me.Panel14.TabIndex = 3
         '
         'txtSearch
@@ -317,7 +303,7 @@ Partial Class Materials
         Me.txtSearch.Location = New System.Drawing.Point(102, 17)
         Me.txtSearch.Margin = New System.Windows.Forms.Padding(2)
         Me.txtSearch.Name = "txtSearch"
-        Me.txtSearch.Size = New System.Drawing.Size(162, 22)
+        Me.txtSearch.Size = New System.Drawing.Size(160, 20)
         Me.txtSearch.TabIndex = 14
         '
         'Label7
@@ -327,7 +313,7 @@ Partial Class Materials
         Me.Label7.Location = New System.Drawing.Point(5, 25)
         Me.Label7.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(53, 14)
+        Me.Label7.Size = New System.Drawing.Size(41, 13)
         Me.Label7.TabIndex = 20
         Me.Label7.Text = "Search"
         '
@@ -353,9 +339,9 @@ Partial Class Materials
         Me.Panel13.Controls.Add(Me.Label20)
         Me.Panel13.Controls.Add(Me.sprPrice)
         Me.Panel13.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel13.Location = New System.Drawing.Point(272, 3)
+        Me.Panel13.Location = New System.Drawing.Point(270, 3)
         Me.Panel13.Name = "Panel13"
-        Me.Panel13.Size = New System.Drawing.Size(216, 191)
+        Me.Panel13.Size = New System.Drawing.Size(215, 191)
         Me.Panel13.TabIndex = 2
         '
         'Label17
@@ -365,7 +351,7 @@ Partial Class Materials
         Me.Label17.Location = New System.Drawing.Point(36, 11)
         Me.Label17.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label17.Name = "Label17"
-        Me.Label17.Size = New System.Drawing.Size(35, 14)
+        Me.Label17.Size = New System.Drawing.Size(27, 13)
         Me.Label17.TabIndex = 6
         Me.Label17.Text = "Size"
         '
@@ -376,7 +362,7 @@ Partial Class Materials
         Me.txtDescripcion.Location = New System.Drawing.Point(76, 107)
         Me.txtDescripcion.Margin = New System.Windows.Forms.Padding(2)
         Me.txtDescripcion.Name = "txtDescripcion"
-        Me.txtDescripcion.Size = New System.Drawing.Size(137, 22)
+        Me.txtDescripcion.Size = New System.Drawing.Size(136, 20)
         Me.txtDescripcion.TabIndex = 7
         '
         'txtTipo
@@ -386,7 +372,7 @@ Partial Class Materials
         Me.txtTipo.Location = New System.Drawing.Point(77, 39)
         Me.txtTipo.Margin = New System.Windows.Forms.Padding(2)
         Me.txtTipo.Name = "txtTipo"
-        Me.txtTipo.Size = New System.Drawing.Size(135, 22)
+        Me.txtTipo.Size = New System.Drawing.Size(134, 20)
         Me.txtTipo.TabIndex = 5
         '
         'txtPartNum
@@ -396,7 +382,7 @@ Partial Class Materials
         Me.txtPartNum.Location = New System.Drawing.Point(75, 143)
         Me.txtPartNum.Margin = New System.Windows.Forms.Padding(2)
         Me.txtPartNum.Name = "txtPartNum"
-        Me.txtPartNum.Size = New System.Drawing.Size(137, 22)
+        Me.txtPartNum.Size = New System.Drawing.Size(136, 20)
         Me.txtPartNum.TabIndex = 38
         '
         'Label5
@@ -406,7 +392,7 @@ Partial Class Materials
         Me.Label5.Location = New System.Drawing.Point(-5, 111)
         Me.Label5.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(84, 14)
+        Me.Label5.Size = New System.Drawing.Size(63, 13)
         Me.Label5.TabIndex = 14
         Me.Label5.Text = "Descripcion"
         '
@@ -420,7 +406,7 @@ Partial Class Materials
         Me.sprTamanio.Location = New System.Drawing.Point(75, 7)
         Me.sprTamanio.Maximum = New Decimal(New Integer() {100000, 0, 0, 0})
         Me.sprTamanio.Name = "sprTamanio"
-        Me.sprTamanio.Size = New System.Drawing.Size(137, 22)
+        Me.sprTamanio.Size = New System.Drawing.Size(136, 20)
         Me.sprTamanio.TabIndex = 4
         '
         'Label21
@@ -430,7 +416,7 @@ Partial Class Materials
         Me.Label21.Location = New System.Drawing.Point(26, 147)
         Me.Label21.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label21.Name = "Label21"
-        Me.Label21.Size = New System.Drawing.Size(45, 14)
+        Me.Label21.Size = New System.Drawing.Size(33, 13)
         Me.Label21.TabIndex = 39
         Me.Label21.Text = "Part#"
         '
@@ -441,7 +427,7 @@ Partial Class Materials
         Me.Label18.Location = New System.Drawing.Point(34, 41)
         Me.Label18.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label18.Name = "Label18"
-        Me.Label18.Size = New System.Drawing.Size(39, 14)
+        Me.Label18.Size = New System.Drawing.Size(31, 13)
         Me.Label18.TabIndex = 7
         Me.Label18.Text = "Type"
         '
@@ -451,7 +437,7 @@ Partial Class Materials
         Me.Label20.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.Label20.Location = New System.Drawing.Point(32, 78)
         Me.Label20.Name = "Label20"
-        Me.Label20.Size = New System.Drawing.Size(41, 14)
+        Me.Label20.Size = New System.Drawing.Size(31, 13)
         Me.Label20.TabIndex = 37
         Me.Label20.Text = "Price"
         '
@@ -464,7 +450,7 @@ Partial Class Materials
         Me.sprPrice.Location = New System.Drawing.Point(77, 75)
         Me.sprPrice.Maximum = New Decimal(New Integer() {10000, 0, 0, 0})
         Me.sprPrice.Name = "sprPrice"
-        Me.sprPrice.Size = New System.Drawing.Size(136, 22)
+        Me.sprPrice.Size = New System.Drawing.Size(135, 20)
         Me.sprPrice.TabIndex = 6
         '
         'Panel12
@@ -479,7 +465,7 @@ Partial Class Materials
         Me.Panel12.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel12.Location = New System.Drawing.Point(3, 3)
         Me.Panel12.Name = "Panel12"
-        Me.Panel12.Size = New System.Drawing.Size(263, 191)
+        Me.Panel12.Size = New System.Drawing.Size(261, 191)
         Me.Panel12.TabIndex = 1
         '
         'btnUpdateMareialData
@@ -506,7 +492,7 @@ Partial Class Materials
         Me.Label14.Location = New System.Drawing.Point(89, 15)
         Me.Label14.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label14.Name = "Label14"
-        Me.Label14.Size = New System.Drawing.Size(61, 14)
+        Me.Label14.Size = New System.Drawing.Size(44, 13)
         Me.Label14.TabIndex = 0
         Me.Label14.Text = "Material"
         '
@@ -517,7 +503,7 @@ Partial Class Materials
         Me.txtRM.Location = New System.Drawing.Point(150, 58)
         Me.txtRM.Margin = New System.Windows.Forms.Padding(2)
         Me.txtRM.Name = "txtRM"
-        Me.txtRM.Size = New System.Drawing.Size(111, 22)
+        Me.txtRM.Size = New System.Drawing.Size(109, 20)
         Me.txtRM.TabIndex = 2
         '
         'txtDMaterial
@@ -527,7 +513,7 @@ Partial Class Materials
         Me.txtDMaterial.Location = New System.Drawing.Point(152, 11)
         Me.txtDMaterial.Margin = New System.Windows.Forms.Padding(2)
         Me.txtDMaterial.Name = "txtDMaterial"
-        Me.txtDMaterial.Size = New System.Drawing.Size(109, 22)
+        Me.txtDMaterial.Size = New System.Drawing.Size(107, 20)
         Me.txtDMaterial.TabIndex = 1
         '
         'Label15
@@ -537,7 +523,7 @@ Partial Class Materials
         Me.Label15.Location = New System.Drawing.Point(21, 62)
         Me.Label15.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label15.Name = "Label15"
-        Me.Label15.Size = New System.Drawing.Size(126, 14)
+        Me.Label15.Size = New System.Drawing.Size(93, 13)
         Me.Label15.TabIndex = 2
         Me.Label15.Text = "Resource Material"
         '
@@ -549,7 +535,7 @@ Partial Class Materials
         Me.cmbUnidadDeMedida.Items.AddRange(New Object() {"Each", "Foot", "Yard", "Galon", "Ounce", "LB", "Square foot"})
         Me.cmbUnidadDeMedida.Location = New System.Drawing.Point(152, 108)
         Me.cmbUnidadDeMedida.Name = "cmbUnidadDeMedida"
-        Me.cmbUnidadDeMedida.Size = New System.Drawing.Size(109, 22)
+        Me.cmbUnidadDeMedida.Size = New System.Drawing.Size(107, 21)
         Me.cmbUnidadDeMedida.TabIndex = 3
         '
         'Label16
@@ -559,7 +545,7 @@ Partial Class Materials
         Me.Label16.Location = New System.Drawing.Point(7, 112)
         Me.Label16.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label16.Name = "Label16"
-        Me.Label16.Size = New System.Drawing.Size(145, 14)
+        Me.Label16.Size = New System.Drawing.Size(104, 13)
         Me.Label16.TabIndex = 4
         Me.Label16.Text = "Unit of measurement"
         '
@@ -567,9 +553,9 @@ Partial Class Materials
         '
         Me.Panel11.Controls.Add(Me.GroupBox1)
         Me.Panel11.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel11.Location = New System.Drawing.Point(494, 3)
+        Me.Panel11.Location = New System.Drawing.Point(491, 3)
         Me.Panel11.Name = "Panel11"
-        Me.Panel11.Size = New System.Drawing.Size(262, 191)
+        Me.Panel11.Size = New System.Drawing.Size(263, 191)
         Me.Panel11.TabIndex = 0
         '
         'GroupBox1
@@ -588,7 +574,7 @@ Partial Class Materials
         Me.GroupBox1.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.GroupBox1.Location = New System.Drawing.Point(0, 0)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(262, 191)
+        Me.GroupBox1.Size = New System.Drawing.Size(263, 191)
         Me.GroupBox1.TabIndex = 36
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "New Order"
@@ -613,9 +599,9 @@ Partial Class Materials
         '
         Me.chbOrden.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.chbOrden.AutoSize = True
-        Me.chbOrden.Location = New System.Drawing.Point(192, 38)
+        Me.chbOrden.Location = New System.Drawing.Point(201, 38)
         Me.chbOrden.Name = "chbOrden"
-        Me.chbOrden.Size = New System.Drawing.Size(56, 18)
+        Me.chbOrden.Size = New System.Drawing.Size(48, 17)
         Me.chbOrden.TabIndex = 9
         Me.chbOrden.Text = "New"
         Me.chbOrden.UseVisualStyleBackColor = True
@@ -626,7 +612,7 @@ Partial Class Materials
         Me.Label1.Location = New System.Drawing.Point(34, 37)
         Me.Label1.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(41, 14)
+        Me.Label1.Size = New System.Drawing.Size(31, 13)
         Me.Label1.TabIndex = 13
         Me.Label1.Text = "Price"
         '
@@ -639,7 +625,7 @@ Partial Class Materials
         Me.dtpFechaOrden.Format = System.Windows.Forms.DateTimePickerFormat.Custom
         Me.dtpFechaOrden.Location = New System.Drawing.Point(78, 111)
         Me.dtpFechaOrden.Name = "dtpFechaOrden"
-        Me.dtpFechaOrden.Size = New System.Drawing.Size(150, 22)
+        Me.dtpFechaOrden.Size = New System.Drawing.Size(151, 20)
         Me.dtpFechaOrden.TabIndex = 12
         '
         'Label6
@@ -648,7 +634,7 @@ Partial Class Materials
         Me.Label6.Location = New System.Drawing.Point(11, 77)
         Me.Label6.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(64, 14)
+        Me.Label6.Size = New System.Drawing.Size(46, 13)
         Me.Label6.TabIndex = 15
         Me.Label6.Text = "Quantity"
         '
@@ -657,7 +643,7 @@ Partial Class Materials
         Me.Label9.AutoSize = True
         Me.Label9.Location = New System.Drawing.Point(37, 116)
         Me.Label9.Name = "Label9"
-        Me.Label9.Size = New System.Drawing.Size(38, 14)
+        Me.Label9.Size = New System.Drawing.Size(30, 13)
         Me.Label9.TabIndex = 34
         Me.Label9.Text = "Date"
         '
@@ -671,7 +657,7 @@ Partial Class Materials
         Me.sprCantidadOrden.Location = New System.Drawing.Point(78, 73)
         Me.sprCantidadOrden.Maximum = New Decimal(New Integer() {10000, 0, 0, 0})
         Me.sprCantidadOrden.Name = "sprCantidadOrden"
-        Me.sprCantidadOrden.Size = New System.Drawing.Size(108, 22)
+        Me.sprCantidadOrden.Size = New System.Drawing.Size(109, 20)
         Me.sprCantidadOrden.TabIndex = 11
         '
         'sprPricioOrden
@@ -684,7 +670,7 @@ Partial Class Materials
         Me.sprPricioOrden.Location = New System.Drawing.Point(78, 34)
         Me.sprPricioOrden.Maximum = New Decimal(New Integer() {10000, 0, 0, 0})
         Me.sprPricioOrden.Name = "sprPricioOrden"
-        Me.sprPricioOrden.Size = New System.Drawing.Size(108, 22)
+        Me.sprPricioOrden.Size = New System.Drawing.Size(109, 20)
         Me.sprPricioOrden.TabIndex = 10
         '
         'Label8
@@ -692,7 +678,7 @@ Partial Class Materials
         Me.Label8.AutoSize = True
         Me.Label8.Location = New System.Drawing.Point(34, 145)
         Me.Label8.Name = "Label8"
-        Me.Label8.Size = New System.Drawing.Size(40, 14)
+        Me.Label8.Size = New System.Drawing.Size(31, 13)
         Me.Label8.TabIndex = 31
         Me.Label8.Text = "Total"
         '
@@ -713,9 +699,9 @@ Partial Class Materials
         '
         Me.Panel8.Controls.Add(Me.TableLayoutPanel5)
         Me.Panel8.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel8.Location = New System.Drawing.Point(3, 261)
+        Me.Panel8.Location = New System.Drawing.Point(3, 262)
         Me.Panel8.Name = "Panel8"
-        Me.Panel8.Size = New System.Drawing.Size(759, 149)
+        Me.Panel8.Size = New System.Drawing.Size(757, 149)
         Me.Panel8.TabIndex = 1
         '
         'TableLayoutPanel5
@@ -730,7 +716,7 @@ Partial Class Materials
         Me.TableLayoutPanel5.Name = "TableLayoutPanel5"
         Me.TableLayoutPanel5.RowCount = 1
         Me.TableLayoutPanel5.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
-        Me.TableLayoutPanel5.Size = New System.Drawing.Size(759, 149)
+        Me.TableLayoutPanel5.Size = New System.Drawing.Size(757, 149)
         Me.TableLayoutPanel5.TabIndex = 21
         '
         'Panel10
@@ -739,7 +725,7 @@ Partial Class Materials
         Me.Panel10.Controls.Add(Me.btnDeleteOrder)
         Me.Panel10.Controls.Add(Me.btnCancelOrder)
         Me.Panel10.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel10.Location = New System.Drawing.Point(644, 3)
+        Me.Panel10.Location = New System.Drawing.Point(642, 3)
         Me.Panel10.Name = "Panel10"
         Me.Panel10.Size = New System.Drawing.Size(112, 143)
         Me.Panel10.TabIndex = 1
@@ -801,7 +787,7 @@ Partial Class Materials
         Me.Panel9.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel9.Location = New System.Drawing.Point(3, 3)
         Me.Panel9.Name = "Panel9"
-        Me.Panel9.Size = New System.Drawing.Size(635, 143)
+        Me.Panel9.Size = New System.Drawing.Size(633, 143)
         Me.Panel9.TabIndex = 0
         '
         'tblMaterialAndOrders
@@ -819,21 +805,8 @@ Partial Class Materials
         Me.tblMaterialAndOrders.RowHeadersWidth = 62
         Me.tblMaterialAndOrders.RowTemplate.Height = 28
         Me.tblMaterialAndOrders.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.tblMaterialAndOrders.Size = New System.Drawing.Size(635, 143)
+        Me.tblMaterialAndOrders.Size = New System.Drawing.Size(633, 143)
         Me.tblMaterialAndOrders.TabIndex = 20
-        '
-        'TabPage1
-        '
-        Me.TabPage1.BackColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(59, Byte), Integer), CType(CType(104, Byte), Integer))
-        Me.TabPage1.Controls.Add(Me.TableLayoutPanel3)
-        Me.TabPage1.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.TabPage1.Location = New System.Drawing.Point(4, 25)
-        Me.TabPage1.Margin = New System.Windows.Forms.Padding(2)
-        Me.TabPage1.Name = "TabPage1"
-        Me.TabPage1.Padding = New System.Windows.Forms.Padding(2)
-        Me.TabPage1.Size = New System.Drawing.Size(769, 417)
-        Me.TabPage1.TabIndex = 0
-        Me.TabPage1.Text = "Materials"
         '
         'TableLayoutPanel3
         '
@@ -843,20 +816,20 @@ Partial Class Materials
         Me.TableLayoutPanel3.Controls.Add(Me.Panel6, 1, 0)
         Me.TableLayoutPanel3.Controls.Add(Me.Panel5, 0, 0)
         Me.TableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.TableLayoutPanel3.Location = New System.Drawing.Point(2, 2)
+        Me.TableLayoutPanel3.Location = New System.Drawing.Point(3, 3)
         Me.TableLayoutPanel3.Name = "TableLayoutPanel3"
         Me.TableLayoutPanel3.RowCount = 1
         Me.TableLayoutPanel3.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
-        Me.TableLayoutPanel3.Size = New System.Drawing.Size(765, 413)
+        Me.TableLayoutPanel3.Size = New System.Drawing.Size(763, 414)
         Me.TableLayoutPanel3.TabIndex = 32
         '
         'Panel6
         '
         Me.Panel6.Controls.Add(Me.TableLayoutPanel11)
         Me.Panel6.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel6.Location = New System.Drawing.Point(258, 3)
+        Me.Panel6.Location = New System.Drawing.Point(257, 3)
         Me.Panel6.Name = "Panel6"
-        Me.Panel6.Size = New System.Drawing.Size(504, 407)
+        Me.Panel6.Size = New System.Drawing.Size(503, 408)
         Me.Panel6.TabIndex = 1
         '
         'TableLayoutPanel11
@@ -871,7 +844,7 @@ Partial Class Materials
         Me.TableLayoutPanel11.RowCount = 2
         Me.TableLayoutPanel11.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 15.97052!))
         Me.TableLayoutPanel11.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 84.02949!))
-        Me.TableLayoutPanel11.Size = New System.Drawing.Size(504, 407)
+        Me.TableLayoutPanel11.Size = New System.Drawing.Size(503, 408)
         Me.TableLayoutPanel11.TabIndex = 32
         '
         'Panel25
@@ -882,16 +855,17 @@ Partial Class Materials
         Me.Panel25.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel25.Location = New System.Drawing.Point(3, 3)
         Me.Panel25.Name = "Panel25"
-        Me.Panel25.Size = New System.Drawing.Size(498, 59)
+        Me.Panel25.Size = New System.Drawing.Size(497, 59)
         Me.Panel25.TabIndex = 0
         '
         'Label13
         '
         Me.Label13.AutoSize = True
+        Me.Label13.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.Label13.Location = New System.Drawing.Point(20, 19)
         Me.Label13.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label13.Name = "Label13"
-        Me.Label13.Size = New System.Drawing.Size(58, 16)
+        Me.Label13.Size = New System.Drawing.Size(41, 13)
         Me.Label13.TabIndex = 26
         Me.Label13.Text = "Search"
         '
@@ -902,7 +876,7 @@ Partial Class Materials
         Me.txtFiltro.Location = New System.Drawing.Point(123, 16)
         Me.txtFiltro.Margin = New System.Windows.Forms.Padding(2)
         Me.txtFiltro.Name = "txtFiltro"
-        Me.txtFiltro.Size = New System.Drawing.Size(287, 23)
+        Me.txtFiltro.Size = New System.Drawing.Size(286, 20)
         Me.txtFiltro.TabIndex = 6
         '
         'PictureBox2
@@ -912,7 +886,7 @@ Partial Class Materials
         Me.PictureBox2.Image = Global.AVT_TRAKING.My.Resources.Resources.loupe
         Me.PictureBox2.Location = New System.Drawing.Point(83, 17)
         Me.PictureBox2.Name = "PictureBox2"
-        Me.PictureBox2.Size = New System.Drawing.Size(35, 33)
+        Me.PictureBox2.Size = New System.Drawing.Size(34, 33)
         Me.PictureBox2.TabIndex = 31
         Me.PictureBox2.TabStop = False
         '
@@ -923,7 +897,7 @@ Partial Class Materials
         Me.Panel26.ForeColor = System.Drawing.SystemColors.WindowText
         Me.Panel26.Location = New System.Drawing.Point(3, 68)
         Me.Panel26.Name = "Panel26"
-        Me.Panel26.Size = New System.Drawing.Size(498, 336)
+        Me.Panel26.Size = New System.Drawing.Size(497, 337)
         Me.Panel26.TabIndex = 1
         '
         'Panel5
@@ -943,8 +917,28 @@ Partial Class Materials
         Me.Panel5.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel5.Location = New System.Drawing.Point(3, 3)
         Me.Panel5.Name = "Panel5"
-        Me.Panel5.Size = New System.Drawing.Size(249, 407)
+        Me.Panel5.Size = New System.Drawing.Size(248, 408)
         Me.Panel5.TabIndex = 0
+        '
+        'Label23
+        '
+        Me.Label23.AutoSize = True
+        Me.Label23.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.Label23.Location = New System.Drawing.Point(31, 123)
+        Me.Label23.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.Label23.Name = "Label23"
+        Me.Label23.Size = New System.Drawing.Size(32, 13)
+        Me.Label23.TabIndex = 31
+        Me.Label23.Text = "Class"
+        '
+        'cmbClassMaterial
+        '
+        Me.cmbClassMaterial.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.cmbClassMaterial.Location = New System.Drawing.Point(97, 120)
+        Me.cmbClassMaterial.Name = "cmbClassMaterial"
+        Me.cmbClassMaterial.Size = New System.Drawing.Size(137, 21)
+        Me.cmbClassMaterial.TabIndex = 32
         '
         'txtNumeroMaterial
         '
@@ -953,7 +947,7 @@ Partial Class Materials
         Me.txtNumeroMaterial.Location = New System.Drawing.Point(97, 42)
         Me.txtNumeroMaterial.Margin = New System.Windows.Forms.Padding(2)
         Me.txtNumeroMaterial.Name = "txtNumeroMaterial"
-        Me.txtNumeroMaterial.Size = New System.Drawing.Size(138, 23)
+        Me.txtNumeroMaterial.Size = New System.Drawing.Size(137, 20)
         Me.txtNumeroMaterial.TabIndex = 1
         '
         'btnCancelMaterial
@@ -965,7 +959,7 @@ Partial Class Materials
         Me.btnCancelMaterial.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.btnCancelMaterial.Image = Global.AVT_TRAKING.My.Resources.Resources.cancel
         Me.btnCancelMaterial.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnCancelMaterial.Location = New System.Drawing.Point(142, 331)
+        Me.btnCancelMaterial.Location = New System.Drawing.Point(141, 331)
         Me.btnCancelMaterial.Margin = New System.Windows.Forms.Padding(2)
         Me.btnCancelMaterial.Name = "btnCancelMaterial"
         Me.btnCancelMaterial.Size = New System.Drawing.Size(93, 35)
@@ -983,7 +977,7 @@ Partial Class Materials
         Me.btnSaveMaterial.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.btnSaveMaterial.Image = Global.AVT_TRAKING.My.Resources.Resources.add
         Me.btnSaveMaterial.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnSaveMaterial.Location = New System.Drawing.Point(35, 262)
+        Me.btnSaveMaterial.Location = New System.Drawing.Point(34, 262)
         Me.btnSaveMaterial.Margin = New System.Windows.Forms.Padding(2)
         Me.btnSaveMaterial.Name = "btnSaveMaterial"
         Me.btnSaveMaterial.Size = New System.Drawing.Size(85, 35)
@@ -996,9 +990,10 @@ Partial Class Materials
         '
         Me.chbEnableMaterial.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.chbEnableMaterial.AutoSize = True
-        Me.chbEnableMaterial.Location = New System.Drawing.Point(170, 226)
+        Me.chbEnableMaterial.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.chbEnableMaterial.Location = New System.Drawing.Point(186, 226)
         Me.chbEnableMaterial.Name = "chbEnableMaterial"
-        Me.chbEnableMaterial.Size = New System.Drawing.Size(76, 20)
+        Me.chbEnableMaterial.Size = New System.Drawing.Size(59, 17)
         Me.chbEnableMaterial.TabIndex = 4
         Me.chbEnableMaterial.Text = "Enable"
         Me.chbEnableMaterial.UseVisualStyleBackColor = True
@@ -1012,7 +1007,7 @@ Partial Class Materials
         Me.btnUpdateMaterial.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.btnUpdateMaterial.Image = Global.AVT_TRAKING.My.Resources.Resources.update
         Me.btnUpdateMaterial.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnUpdateMaterial.Location = New System.Drawing.Point(142, 262)
+        Me.btnUpdateMaterial.Location = New System.Drawing.Point(141, 262)
         Me.btnUpdateMaterial.Margin = New System.Windows.Forms.Padding(2)
         Me.btnUpdateMaterial.Name = "btnUpdateMaterial"
         Me.btnUpdateMaterial.Size = New System.Drawing.Size(93, 35)
@@ -1024,30 +1019,33 @@ Partial Class Materials
         'Label4
         '
         Me.Label4.AutoSize = True
+        Me.Label4.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.Label4.Location = New System.Drawing.Point(31, 87)
         Me.Label4.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(50, 16)
+        Me.Label4.Size = New System.Drawing.Size(35, 13)
         Me.Label4.TabIndex = 3
         Me.Label4.Text = "Name"
         '
         'Label3
         '
         Me.Label3.AutoSize = True
+        Me.Label3.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.Label3.Location = New System.Drawing.Point(31, 45)
         Me.Label3.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(65, 16)
+        Me.Label3.Size = New System.Drawing.Size(44, 13)
         Me.Label3.TabIndex = 30
         Me.Label3.Text = "Number"
         '
         'Label2
         '
         Me.Label2.AutoSize = True
+        Me.Label2.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.Label2.Location = New System.Drawing.Point(31, 164)
         Me.Label2.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(60, 16)
+        Me.Label2.Size = New System.Drawing.Size(41, 13)
         Me.Label2.TabIndex = 1
         Me.Label2.Text = "Vendor"
         '
@@ -1057,7 +1055,7 @@ Partial Class Materials
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.cmbVendedor.Location = New System.Drawing.Point(97, 161)
         Me.cmbVendedor.Name = "cmbVendedor"
-        Me.cmbVendedor.Size = New System.Drawing.Size(138, 24)
+        Me.cmbVendedor.Size = New System.Drawing.Size(137, 21)
         Me.cmbVendedor.TabIndex = 3
         '
         'txtNameMaterials
@@ -1067,34 +1065,8 @@ Partial Class Materials
         Me.txtNameMaterials.Location = New System.Drawing.Point(97, 84)
         Me.txtNameMaterials.Margin = New System.Windows.Forms.Padding(2)
         Me.txtNameMaterials.Name = "txtNameMaterials"
-        Me.txtNameMaterials.Size = New System.Drawing.Size(138, 23)
+        Me.txtNameMaterials.Size = New System.Drawing.Size(137, 20)
         Me.txtNameMaterials.TabIndex = 2
-        '
-        'TabControl1
-        '
-        Me.TabControl1.Controls.Add(Me.TabPage3)
-        Me.TabControl1.Controls.Add(Me.TabPage1)
-        Me.TabControl1.Controls.Add(Me.TabPage2)
-        Me.TabControl1.Controls.Add(Me.TabPage4)
-        Me.TabControl1.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.TabControl1.Font = New System.Drawing.Font("Verdana", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TabControl1.Location = New System.Drawing.Point(0, 0)
-        Me.TabControl1.Margin = New System.Windows.Forms.Padding(2)
-        Me.TabControl1.Name = "TabControl1"
-        Me.TabControl1.SelectedIndex = 0
-        Me.TabControl1.Size = New System.Drawing.Size(777, 446)
-        Me.TabControl1.TabIndex = 3
-        '
-        'TabPage3
-        '
-        Me.TabPage3.BackColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(59, Byte), Integer), CType(CType(104, Byte), Integer))
-        Me.TabPage3.Controls.Add(Me.TableLayoutPanel2)
-        Me.TabPage3.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.TabPage3.Location = New System.Drawing.Point(4, 25)
-        Me.TabPage3.Name = "TabPage3"
-        Me.TabPage3.Size = New System.Drawing.Size(769, 417)
-        Me.TabPage3.TabIndex = 2
-        Me.TabPage3.Text = "Vendor"
         '
         'TableLayoutPanel2
         '
@@ -1104,20 +1076,20 @@ Partial Class Materials
         Me.TableLayoutPanel2.Controls.Add(Me.Panel4, 1, 0)
         Me.TableLayoutPanel2.Controls.Add(Me.Panel3, 0, 0)
         Me.TableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.TableLayoutPanel2.Location = New System.Drawing.Point(0, 0)
+        Me.TableLayoutPanel2.Location = New System.Drawing.Point(3, 3)
         Me.TableLayoutPanel2.Name = "TableLayoutPanel2"
         Me.TableLayoutPanel2.RowCount = 1
         Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
-        Me.TableLayoutPanel2.Size = New System.Drawing.Size(769, 417)
+        Me.TableLayoutPanel2.Size = New System.Drawing.Size(763, 414)
         Me.TableLayoutPanel2.TabIndex = 28
         '
         'Panel4
         '
         Me.Panel4.Controls.Add(Me.TableLayoutPanel12)
         Me.Panel4.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel4.Location = New System.Drawing.Point(228, 3)
+        Me.Panel4.Location = New System.Drawing.Point(226, 3)
         Me.Panel4.Name = "Panel4"
-        Me.Panel4.Size = New System.Drawing.Size(538, 411)
+        Me.Panel4.Size = New System.Drawing.Size(534, 408)
         Me.Panel4.TabIndex = 1
         '
         'TableLayoutPanel12
@@ -1132,7 +1104,7 @@ Partial Class Materials
         Me.TableLayoutPanel12.RowCount = 2
         Me.TableLayoutPanel12.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 60.0!))
         Me.TableLayoutPanel12.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-        Me.TableLayoutPanel12.Size = New System.Drawing.Size(538, 411)
+        Me.TableLayoutPanel12.Size = New System.Drawing.Size(534, 408)
         Me.TableLayoutPanel12.TabIndex = 28
         '
         'Panel27
@@ -1143,16 +1115,17 @@ Partial Class Materials
         Me.Panel27.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel27.Location = New System.Drawing.Point(3, 3)
         Me.Panel27.Name = "Panel27"
-        Me.Panel27.Size = New System.Drawing.Size(532, 54)
+        Me.Panel27.Size = New System.Drawing.Size(528, 54)
         Me.Panel27.TabIndex = 0
         '
         'Label12
         '
         Me.Label12.AutoSize = True
         Me.Label12.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.Label12.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.Label12.Location = New System.Drawing.Point(17, 19)
         Me.Label12.Name = "Label12"
-        Me.Label12.Size = New System.Drawing.Size(58, 16)
+        Me.Label12.Size = New System.Drawing.Size(41, 13)
         Me.Label12.TabIndex = 25
         Me.Label12.Text = "Search"
         Me.Label12.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -1164,7 +1137,7 @@ Partial Class Materials
         Me.txtSearchVendedor.Location = New System.Drawing.Point(114, 16)
         Me.txtSearchVendedor.Margin = New System.Windows.Forms.Padding(2)
         Me.txtSearchVendedor.Name = "txtSearchVendedor"
-        Me.txtSearchVendedor.Size = New System.Drawing.Size(406, 23)
+        Me.txtSearchVendedor.Size = New System.Drawing.Size(402, 20)
         Me.txtSearchVendedor.TabIndex = 24
         '
         'PictureBox1
@@ -1172,9 +1145,9 @@ Partial Class Materials
         Me.PictureBox1.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.PictureBox1.Image = Global.AVT_TRAKING.My.Resources.Resources.loupe
-        Me.PictureBox1.Location = New System.Drawing.Point(81, 16)
+        Me.PictureBox1.Location = New System.Drawing.Point(78, 12)
         Me.PictureBox1.Name = "PictureBox1"
-        Me.PictureBox1.Size = New System.Drawing.Size(228, 23)
+        Me.PictureBox1.Size = New System.Drawing.Size(31, 31)
         Me.PictureBox1.TabIndex = 27
         Me.PictureBox1.TabStop = False
         '
@@ -1185,7 +1158,7 @@ Partial Class Materials
         Me.Panel28.ForeColor = System.Drawing.SystemColors.WindowText
         Me.Panel28.Location = New System.Drawing.Point(3, 63)
         Me.Panel28.Name = "Panel28"
-        Me.Panel28.Size = New System.Drawing.Size(532, 345)
+        Me.Panel28.Size = New System.Drawing.Size(528, 342)
         Me.Panel28.TabIndex = 1
         '
         'tblVendor
@@ -1203,7 +1176,7 @@ Partial Class Materials
         Me.tblVendor.RowHeadersWidth = 62
         Me.tblVendor.RowTemplate.Height = 28
         Me.tblVendor.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.tblVendor.Size = New System.Drawing.Size(532, 345)
+        Me.tblVendor.Size = New System.Drawing.Size(528, 342)
         Me.tblVendor.TabIndex = 17
         '
         'Panel3
@@ -1221,26 +1194,28 @@ Partial Class Materials
         Me.Panel3.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel3.Location = New System.Drawing.Point(3, 3)
         Me.Panel3.Name = "Panel3"
-        Me.Panel3.Size = New System.Drawing.Size(219, 411)
+        Me.Panel3.Size = New System.Drawing.Size(217, 408)
         Me.Panel3.TabIndex = 0
         '
         'Label19
         '
         Me.Label19.AutoSize = True
+        Me.Label19.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.Label19.Location = New System.Drawing.Point(40, 14)
         Me.Label19.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label19.Name = "Label19"
-        Me.Label19.Size = New System.Drawing.Size(65, 16)
+        Me.Label19.Size = New System.Drawing.Size(44, 13)
         Me.Label19.TabIndex = 22
         Me.Label19.Text = "Number"
         '
         'Label11
         '
         Me.Label11.AutoSize = True
+        Me.Label11.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.Label11.Location = New System.Drawing.Point(54, 49)
         Me.Label11.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label11.Name = "Label11"
-        Me.Label11.Size = New System.Drawing.Size(50, 16)
+        Me.Label11.Size = New System.Drawing.Size(35, 13)
         Me.Label11.TabIndex = 10
         Me.Label11.Text = "Name"
         '
@@ -1250,9 +1225,10 @@ Partial Class Materials
         Me.btnCancelVendor.FlatAppearance.BorderSize = 0
         Me.btnCancelVendor.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(41, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(185, Byte), Integer))
         Me.btnCancelVendor.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnCancelVendor.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.btnCancelVendor.Image = Global.AVT_TRAKING.My.Resources.Resources.cancel
         Me.btnCancelVendor.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnCancelVendor.Location = New System.Drawing.Point(111, 235)
+        Me.btnCancelVendor.Location = New System.Drawing.Point(109, 235)
         Me.btnCancelVendor.Name = "btnCancelVendor"
         Me.btnCancelVendor.Size = New System.Drawing.Size(103, 36)
         Me.btnCancelVendor.TabIndex = 26
@@ -1263,10 +1239,11 @@ Partial Class Materials
         'Label10
         '
         Me.Label10.AutoSize = True
+        Me.Label10.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.Label10.Location = New System.Drawing.Point(14, 91)
         Me.Label10.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label10.Name = "Label10"
-        Me.Label10.Size = New System.Drawing.Size(92, 16)
+        Me.Label10.Size = New System.Drawing.Size(63, 13)
         Me.Label10.TabIndex = 11
         Me.Label10.Text = "Descripcion"
         '
@@ -1277,7 +1254,7 @@ Partial Class Materials
         Me.txtNombreVendedor.Location = New System.Drawing.Point(106, 44)
         Me.txtNombreVendedor.Margin = New System.Windows.Forms.Padding(2)
         Me.txtNombreVendedor.Name = "txtNombreVendedor"
-        Me.txtNombreVendedor.Size = New System.Drawing.Size(109, 23)
+        Me.txtNombreVendedor.Size = New System.Drawing.Size(107, 20)
         Me.txtNombreVendedor.TabIndex = 13
         '
         'txtDescripcionVendedor
@@ -1287,7 +1264,7 @@ Partial Class Materials
         Me.txtDescripcionVendedor.Location = New System.Drawing.Point(106, 86)
         Me.txtDescripcionVendedor.Margin = New System.Windows.Forms.Padding(2)
         Me.txtDescripcionVendedor.Name = "txtDescripcionVendedor"
-        Me.txtDescripcionVendedor.Size = New System.Drawing.Size(110, 23)
+        Me.txtDescripcionVendedor.Size = New System.Drawing.Size(108, 20)
         Me.txtDescripcionVendedor.TabIndex = 14
         '
         'txtNumeroVendedor
@@ -1297,7 +1274,7 @@ Partial Class Materials
         Me.txtNumeroVendedor.Location = New System.Drawing.Point(106, 10)
         Me.txtNumeroVendedor.Margin = New System.Windows.Forms.Padding(2)
         Me.txtNumeroVendedor.Name = "txtNumeroVendedor"
-        Me.txtNumeroVendedor.Size = New System.Drawing.Size(109, 23)
+        Me.txtNumeroVendedor.Size = New System.Drawing.Size(107, 20)
         Me.txtNumeroVendedor.TabIndex = 23
         '
         'btnSaveVendor
@@ -1306,9 +1283,10 @@ Partial Class Materials
         Me.btnSaveVendor.FlatAppearance.BorderSize = 0
         Me.btnSaveVendor.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(41, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(185, Byte), Integer))
         Me.btnSaveVendor.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnSaveVendor.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.btnSaveVendor.Image = Global.AVT_TRAKING.My.Resources.Resources.add
         Me.btnSaveVendor.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnSaveVendor.Location = New System.Drawing.Point(35, 177)
+        Me.btnSaveVendor.Location = New System.Drawing.Point(33, 177)
         Me.btnSaveVendor.Margin = New System.Windows.Forms.Padding(2)
         Me.btnSaveVendor.Name = "btnSaveVendor"
         Me.btnSaveVendor.Size = New System.Drawing.Size(71, 32)
@@ -1322,9 +1300,10 @@ Partial Class Materials
         Me.chbEnableVendor.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.chbEnableVendor.AutoSize = True
+        Me.chbEnableVendor.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.chbEnableVendor.Location = New System.Drawing.Point(95, 128)
         Me.chbEnableVendor.Name = "chbEnableVendor"
-        Me.chbEnableVendor.Size = New System.Drawing.Size(76, 20)
+        Me.chbEnableVendor.Size = New System.Drawing.Size(59, 17)
         Me.chbEnableVendor.TabIndex = 18
         Me.chbEnableVendor.Text = "Enable"
         Me.chbEnableVendor.UseVisualStyleBackColor = True
@@ -1335,25 +1314,16 @@ Partial Class Materials
         Me.btnUpdateVendor.FlatAppearance.BorderSize = 0
         Me.btnUpdateVendor.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(41, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(185, Byte), Integer))
         Me.btnUpdateVendor.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnUpdateVendor.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.btnUpdateVendor.Image = Global.AVT_TRAKING.My.Resources.Resources.update
         Me.btnUpdateVendor.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnUpdateVendor.Location = New System.Drawing.Point(111, 177)
+        Me.btnUpdateVendor.Location = New System.Drawing.Point(109, 177)
         Me.btnUpdateVendor.Name = "btnUpdateVendor"
         Me.btnUpdateVendor.Size = New System.Drawing.Size(103, 32)
         Me.btnUpdateVendor.TabIndex = 19
         Me.btnUpdateVendor.Text = "Update"
         Me.btnUpdateVendor.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         Me.btnUpdateVendor.UseVisualStyleBackColor = True
-        '
-        'TabPage4
-        '
-        Me.TabPage4.BackColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(59, Byte), Integer), CType(CType(104, Byte), Integer))
-        Me.TabPage4.Controls.Add(Me.TableLayoutPanel7)
-        Me.TabPage4.Location = New System.Drawing.Point(4, 25)
-        Me.TabPage4.Name = "TabPage4"
-        Me.TabPage4.Size = New System.Drawing.Size(769, 417)
-        Me.TabPage4.TabIndex = 3
-        Me.TabPage4.Text = "Others"
         '
         'TableLayoutPanel7
         '
@@ -1362,21 +1332,21 @@ Partial Class Materials
         Me.TableLayoutPanel7.Controls.Add(Me.Panel18, 0, 1)
         Me.TableLayoutPanel7.Controls.Add(Me.Panel17, 0, 0)
         Me.TableLayoutPanel7.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.TableLayoutPanel7.Location = New System.Drawing.Point(0, 0)
+        Me.TableLayoutPanel7.Location = New System.Drawing.Point(3, 3)
         Me.TableLayoutPanel7.Name = "TableLayoutPanel7"
         Me.TableLayoutPanel7.RowCount = 2
         Me.TableLayoutPanel7.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 64.50839!))
         Me.TableLayoutPanel7.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 35.49161!))
-        Me.TableLayoutPanel7.Size = New System.Drawing.Size(769, 417)
+        Me.TableLayoutPanel7.Size = New System.Drawing.Size(763, 414)
         Me.TableLayoutPanel7.TabIndex = 5
         '
         'Panel18
         '
         Me.Panel18.Controls.Add(Me.txtMensajeProseso)
         Me.Panel18.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel18.Location = New System.Drawing.Point(3, 271)
+        Me.Panel18.Location = New System.Drawing.Point(3, 270)
         Me.Panel18.Name = "Panel18"
-        Me.Panel18.Size = New System.Drawing.Size(763, 143)
+        Me.Panel18.Size = New System.Drawing.Size(757, 141)
         Me.Panel18.TabIndex = 1
         '
         'txtMensajeProseso
@@ -1389,7 +1359,7 @@ Partial Class Materials
         Me.txtMensajeProseso.ReadOnly = True
         Me.txtMensajeProseso.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
         Me.txtMensajeProseso.ShortcutsEnabled = False
-        Me.txtMensajeProseso.Size = New System.Drawing.Size(763, 143)
+        Me.txtMensajeProseso.Size = New System.Drawing.Size(757, 141)
         Me.txtMensajeProseso.TabIndex = 3
         '
         'Panel17
@@ -1398,7 +1368,7 @@ Partial Class Materials
         Me.Panel17.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel17.Location = New System.Drawing.Point(3, 3)
         Me.Panel17.Name = "Panel17"
-        Me.Panel17.Size = New System.Drawing.Size(763, 262)
+        Me.Panel17.Size = New System.Drawing.Size(757, 261)
         Me.Panel17.TabIndex = 0
         '
         'TableLayoutPanel8
@@ -1413,16 +1383,16 @@ Partial Class Materials
         Me.TableLayoutPanel8.Name = "TableLayoutPanel8"
         Me.TableLayoutPanel8.RowCount = 1
         Me.TableLayoutPanel8.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
-        Me.TableLayoutPanel8.Size = New System.Drawing.Size(763, 262)
+        Me.TableLayoutPanel8.Size = New System.Drawing.Size(757, 261)
         Me.TableLayoutPanel8.TabIndex = 0
         '
         'Panel19
         '
         Me.Panel19.Controls.Add(Me.TextBox1)
         Me.Panel19.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel19.Location = New System.Drawing.Point(460, 3)
+        Me.Panel19.Location = New System.Drawing.Point(457, 3)
         Me.Panel19.Name = "Panel19"
-        Me.Panel19.Size = New System.Drawing.Size(300, 256)
+        Me.Panel19.Size = New System.Drawing.Size(297, 255)
         Me.Panel19.TabIndex = 1
         '
         'TextBox1
@@ -1437,7 +1407,7 @@ Partial Class Materials
         Me.TextBox1.ReadOnly = True
         Me.TextBox1.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
         Me.TextBox1.ShortcutsEnabled = False
-        Me.TextBox1.Size = New System.Drawing.Size(225, 236)
+        Me.TextBox1.Size = New System.Drawing.Size(222, 236)
         Me.TextBox1.TabIndex = 4
         Me.TextBox1.Text = resources.GetString("TextBox1.Text")
         '
@@ -1448,7 +1418,7 @@ Partial Class Materials
         Me.Panel20.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel20.Location = New System.Drawing.Point(3, 3)
         Me.Panel20.Name = "Panel20"
-        Me.Panel20.Size = New System.Drawing.Size(451, 256)
+        Me.Panel20.Size = New System.Drawing.Size(448, 255)
         Me.Panel20.TabIndex = 2
         '
         'GroupBox3
@@ -1459,7 +1429,7 @@ Partial Class Materials
         Me.GroupBox3.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.GroupBox3.Location = New System.Drawing.Point(3, 141)
         Me.GroupBox3.Name = "GroupBox3"
-        Me.GroupBox3.Size = New System.Drawing.Size(445, 120)
+        Me.GroupBox3.Size = New System.Drawing.Size(442, 120)
         Me.GroupBox3.TabIndex = 2
         Me.GroupBox3.TabStop = False
         Me.GroupBox3.Text = "Material"
@@ -1472,20 +1442,20 @@ Partial Class Materials
         Me.TableLayoutPanel10.Controls.Add(Me.Panel24, 1, 0)
         Me.TableLayoutPanel10.Controls.Add(Me.Panel23, 0, 0)
         Me.TableLayoutPanel10.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.TableLayoutPanel10.Location = New System.Drawing.Point(3, 19)
+        Me.TableLayoutPanel10.Location = New System.Drawing.Point(3, 16)
         Me.TableLayoutPanel10.Name = "TableLayoutPanel10"
         Me.TableLayoutPanel10.RowCount = 1
         Me.TableLayoutPanel10.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
-        Me.TableLayoutPanel10.Size = New System.Drawing.Size(439, 98)
+        Me.TableLayoutPanel10.Size = New System.Drawing.Size(436, 101)
         Me.TableLayoutPanel10.TabIndex = 2
         '
         'Panel24
         '
         Me.Panel24.Controls.Add(Me.btnMaterialUploadExcel)
         Me.Panel24.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel24.Location = New System.Drawing.Point(222, 3)
+        Me.Panel24.Location = New System.Drawing.Point(221, 3)
         Me.Panel24.Name = "Panel24"
-        Me.Panel24.Size = New System.Drawing.Size(214, 92)
+        Me.Panel24.Size = New System.Drawing.Size(212, 95)
         Me.Panel24.TabIndex = 1
         '
         'btnMaterialUploadExcel
@@ -1509,7 +1479,7 @@ Partial Class Materials
         Me.Panel23.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel23.Location = New System.Drawing.Point(3, 3)
         Me.Panel23.Name = "Panel23"
-        Me.Panel23.Size = New System.Drawing.Size(213, 92)
+        Me.Panel23.Size = New System.Drawing.Size(212, 95)
         Me.Panel23.TabIndex = 0
         '
         'btnMaterialDownloadExcel
@@ -1520,7 +1490,7 @@ Partial Class Materials
         Me.btnMaterialDownloadExcel.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnMaterialDownloadExcel.Image = CType(resources.GetObject("btnMaterialDownloadExcel.Image"), System.Drawing.Image)
         Me.btnMaterialDownloadExcel.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnMaterialDownloadExcel.Location = New System.Drawing.Point(35, 18)
+        Me.btnMaterialDownloadExcel.Location = New System.Drawing.Point(34, 18)
         Me.btnMaterialDownloadExcel.Name = "btnMaterialDownloadExcel"
         Me.btnMaterialDownloadExcel.Size = New System.Drawing.Size(160, 33)
         Me.btnMaterialDownloadExcel.TabIndex = 0
@@ -1536,7 +1506,7 @@ Partial Class Materials
         Me.GroupBox2.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.GroupBox2.Location = New System.Drawing.Point(3, 3)
         Me.GroupBox2.Name = "GroupBox2"
-        Me.GroupBox2.Size = New System.Drawing.Size(445, 132)
+        Me.GroupBox2.Size = New System.Drawing.Size(442, 132)
         Me.GroupBox2.TabIndex = 0
         Me.GroupBox2.TabStop = False
         Me.GroupBox2.Text = "Vendor"
@@ -1549,20 +1519,20 @@ Partial Class Materials
         Me.TableLayoutPanel9.Controls.Add(Me.Panel22, 1, 0)
         Me.TableLayoutPanel9.Controls.Add(Me.Panel21, 0, 0)
         Me.TableLayoutPanel9.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.TableLayoutPanel9.Location = New System.Drawing.Point(3, 19)
+        Me.TableLayoutPanel9.Location = New System.Drawing.Point(3, 16)
         Me.TableLayoutPanel9.Name = "TableLayoutPanel9"
         Me.TableLayoutPanel9.RowCount = 1
         Me.TableLayoutPanel9.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
-        Me.TableLayoutPanel9.Size = New System.Drawing.Size(439, 110)
+        Me.TableLayoutPanel9.Size = New System.Drawing.Size(436, 113)
         Me.TableLayoutPanel9.TabIndex = 2
         '
         'Panel22
         '
         Me.Panel22.Controls.Add(Me.btnVendorUploadExcel)
         Me.Panel22.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel22.Location = New System.Drawing.Point(222, 3)
+        Me.Panel22.Location = New System.Drawing.Point(221, 3)
         Me.Panel22.Name = "Panel22"
-        Me.Panel22.Size = New System.Drawing.Size(214, 104)
+        Me.Panel22.Size = New System.Drawing.Size(212, 107)
         Me.Panel22.TabIndex = 1
         '
         'btnVendorUploadExcel
@@ -1586,7 +1556,7 @@ Partial Class Materials
         Me.Panel21.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel21.Location = New System.Drawing.Point(3, 3)
         Me.Panel21.Name = "Panel21"
-        Me.Panel21.Size = New System.Drawing.Size(213, 104)
+        Me.Panel21.Size = New System.Drawing.Size(212, 107)
         Me.Panel21.TabIndex = 0
         '
         'btnVendorDownloadExcel
@@ -1597,7 +1567,7 @@ Partial Class Materials
         Me.btnVendorDownloadExcel.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnVendorDownloadExcel.Image = CType(resources.GetObject("btnVendorDownloadExcel.Image"), System.Drawing.Image)
         Me.btnVendorDownloadExcel.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnVendorDownloadExcel.Location = New System.Drawing.Point(35, 29)
+        Me.btnVendorDownloadExcel.Location = New System.Drawing.Point(34, 29)
         Me.btnVendorDownloadExcel.Name = "btnVendorDownloadExcel"
         Me.btnVendorDownloadExcel.Size = New System.Drawing.Size(160, 33)
         Me.btnVendorDownloadExcel.TabIndex = 0
@@ -1666,8 +1636,8 @@ Partial Class Materials
         '
         Me.TableLayoutPanel1.ColumnCount = 1
         Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
-        Me.TableLayoutPanel1.Controls.Add(Me.Panel2, 0, 1)
         Me.TableLayoutPanel1.Controls.Add(Me.Panel1, 0, 0)
+        Me.TableLayoutPanel1.Controls.Add(Me.Panel2, 0, 1)
         Me.TableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.TableLayoutPanel1.Location = New System.Drawing.Point(0, 27)
         Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
@@ -1679,7 +1649,7 @@ Partial Class Materials
         '
         'Panel2
         '
-        Me.Panel2.Controls.Add(Me.TabControl1)
+        Me.Panel2.Controls.Add(Me.MyTabControl1)
         Me.Panel2.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel2.Location = New System.Drawing.Point(3, 64)
         Me.Panel2.Name = "Panel2"
@@ -1695,24 +1665,72 @@ Partial Class Materials
         Me.Panel1.Size = New System.Drawing.Size(777, 55)
         Me.Panel1.TabIndex = 0
         '
-        'Label23
+        'MyTabControl1
         '
-        Me.Label23.AutoSize = True
-        Me.Label23.Location = New System.Drawing.Point(31, 123)
-        Me.Label23.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
-        Me.Label23.Name = "Label23"
-        Me.Label23.Size = New System.Drawing.Size(47, 16)
-        Me.Label23.TabIndex = 31
-        Me.Label23.Text = "Class"
+        Me.MyTabControl1.BackColor1 = New System.Drawing.Color() {System.Drawing.Color.LightBlue, System.Drawing.Color.LightGreen, System.Drawing.Color.LightPink, System.Drawing.Color.LightYellow, System.Drawing.Color.LightGray, System.Drawing.Color.Salmon, System.Drawing.Color.LightSkyBlue, System.Drawing.Color.LightCoral, System.Drawing.Color.LightSteelBlue, System.Drawing.Color.Green, System.Drawing.Color.Yellow, System.Drawing.Color.Blue, System.Drawing.Color.Red, System.Drawing.Color.Purple, System.Drawing.Color.Orange}
+        Me.MyTabControl1.Controls.Add(Me.TabPage5)
+        Me.MyTabControl1.Controls.Add(Me.TabPage6)
+        Me.MyTabControl1.Controls.Add(Me.TabPage7)
+        Me.MyTabControl1.Controls.Add(Me.TabPage8)
+        Me.MyTabControl1.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.MyTabControl1.ForeColor1 = System.Drawing.Color.Black
+        Me.MyTabControl1.Heigth = 18
+        Me.MyTabControl1.ItemSize = New System.Drawing.Size(100, 18)
+        Me.MyTabControl1.LinebackColor = System.Drawing.Color.Gainsboro
+        Me.MyTabControl1.LineForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(58, Byte), Integer), CType(CType(115, Byte), Integer))
+        Me.MyTabControl1.Location = New System.Drawing.Point(0, 0)
+        Me.MyTabControl1.Name = "MyTabControl1"
+        Me.MyTabControl1.SelectedIndex = 0
+        Me.MyTabControl1.Size = New System.Drawing.Size(777, 446)
+        Me.MyTabControl1.SizeMode = System.Windows.Forms.TabSizeMode.Fixed
+        Me.MyTabControl1.TabIndex = 4
+        Me.MyTabControl1.TabStyle = AVT_TRAKING.MyTabControl.Style.Line
+        Me.MyTabControl1.Width1 = 100
         '
-        'cmbClassMaterial
+        'TabPage5
         '
-        Me.cmbClassMaterial.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.cmbClassMaterial.Location = New System.Drawing.Point(97, 120)
-        Me.cmbClassMaterial.Name = "cmbClassMaterial"
-        Me.cmbClassMaterial.Size = New System.Drawing.Size(138, 24)
-        Me.cmbClassMaterial.TabIndex = 32
+        Me.TabPage5.BackColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(59, Byte), Integer), CType(CType(104, Byte), Integer))
+        Me.TabPage5.Controls.Add(Me.TableLayoutPanel2)
+        Me.TabPage5.Location = New System.Drawing.Point(4, 22)
+        Me.TabPage5.Name = "TabPage5"
+        Me.TabPage5.Padding = New System.Windows.Forms.Padding(3)
+        Me.TabPage5.Size = New System.Drawing.Size(769, 420)
+        Me.TabPage5.TabIndex = 0
+        Me.TabPage5.Text = "Vendor"
+        '
+        'TabPage6
+        '
+        Me.TabPage6.BackColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(59, Byte), Integer), CType(CType(104, Byte), Integer))
+        Me.TabPage6.Controls.Add(Me.TableLayoutPanel3)
+        Me.TabPage6.Location = New System.Drawing.Point(4, 22)
+        Me.TabPage6.Name = "TabPage6"
+        Me.TabPage6.Padding = New System.Windows.Forms.Padding(3)
+        Me.TabPage6.Size = New System.Drawing.Size(769, 420)
+        Me.TabPage6.TabIndex = 1
+        Me.TabPage6.Text = "Material"
+        '
+        'TabPage7
+        '
+        Me.TabPage7.BackColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(59, Byte), Integer), CType(CType(104, Byte), Integer))
+        Me.TabPage7.Controls.Add(Me.TableLayoutPanel4)
+        Me.TabPage7.ForeColor = System.Drawing.Color.Coral
+        Me.TabPage7.Location = New System.Drawing.Point(4, 22)
+        Me.TabPage7.Name = "TabPage7"
+        Me.TabPage7.Padding = New System.Windows.Forms.Padding(3)
+        Me.TabPage7.Size = New System.Drawing.Size(769, 420)
+        Me.TabPage7.TabIndex = 2
+        Me.TabPage7.Text = "Material Order"
+        '
+        'TabPage8
+        '
+        Me.TabPage8.BackColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(59, Byte), Integer), CType(CType(104, Byte), Integer))
+        Me.TabPage8.Controls.Add(Me.TableLayoutPanel7)
+        Me.TabPage8.Location = New System.Drawing.Point(4, 22)
+        Me.TabPage8.Name = "TabPage8"
+        Me.TabPage8.Padding = New System.Windows.Forms.Padding(3)
+        Me.TabPage8.Size = New System.Drawing.Size(769, 420)
+        Me.TabPage8.TabIndex = 3
+        Me.TabPage8.Text = "Update By Excel"
         '
         'Materials
         '
@@ -1726,7 +1744,6 @@ Partial Class Materials
         Me.Name = "Materials"
         Me.Text = "Materials"
         CType(Me.tblMaterial, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.TabPage2.ResumeLayout(False)
         Me.TableLayoutPanel4.ResumeLayout(False)
         Me.Panel7.ResumeLayout(False)
         Me.TableLayoutPanel6.ResumeLayout(False)
@@ -1749,7 +1766,6 @@ Partial Class Materials
         Me.Panel10.ResumeLayout(False)
         Me.Panel9.ResumeLayout(False)
         CType(Me.tblMaterialAndOrders, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.TabPage1.ResumeLayout(False)
         Me.TableLayoutPanel3.ResumeLayout(False)
         Me.Panel6.ResumeLayout(False)
         Me.TableLayoutPanel11.ResumeLayout(False)
@@ -1759,8 +1775,6 @@ Partial Class Materials
         Me.Panel26.ResumeLayout(False)
         Me.Panel5.ResumeLayout(False)
         Me.Panel5.PerformLayout()
-        Me.TabControl1.ResumeLayout(False)
-        Me.TabPage3.ResumeLayout(False)
         Me.TableLayoutPanel2.ResumeLayout(False)
         Me.Panel4.ResumeLayout(False)
         Me.TableLayoutPanel12.ResumeLayout(False)
@@ -1771,7 +1785,6 @@ Partial Class Materials
         CType(Me.tblVendor, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel3.ResumeLayout(False)
         Me.Panel3.PerformLayout()
-        Me.TabPage4.ResumeLayout(False)
         Me.TableLayoutPanel7.ResumeLayout(False)
         Me.Panel18.ResumeLayout(False)
         Me.Panel18.PerformLayout()
@@ -1795,12 +1808,16 @@ Partial Class Materials
         Me.TableLayoutPanel1.ResumeLayout(False)
         Me.Panel2.ResumeLayout(False)
         Me.Panel1.ResumeLayout(False)
+        Me.MyTabControl1.ResumeLayout(False)
+        Me.TabPage5.ResumeLayout(False)
+        Me.TabPage6.ResumeLayout(False)
+        Me.TabPage7.ResumeLayout(False)
+        Me.TabPage8.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
     Friend WithEvents tblMaterial As DataGridView
     Friend WithEvents Button5 As Button
-    Friend WithEvents TabPage2 As TabPage
     Friend WithEvents btnUpdateMareialData As Button
     Friend WithEvents Label7 As Label
     Friend WithEvents txtSearch As TextBox
@@ -1812,7 +1829,6 @@ Partial Class Materials
     Friend WithEvents Label16 As Label
     Friend WithEvents Label15 As Label
     Friend WithEvents Label14 As Label
-    Friend WithEvents TabPage1 As TabPage
     Friend WithEvents btnUpdateMaterial As Button
     Friend WithEvents txtFiltro As TextBox
     Friend WithEvents txtNameMaterials As TextBox
@@ -1820,7 +1836,6 @@ Partial Class Materials
     Friend WithEvents btnSaveMaterial As Button
     Friend WithEvents Label2 As Label
     Friend WithEvents Label4 As Label
-    Friend WithEvents TabControl1 As TabControl
     Friend WithEvents tblMaterialAndOrders As DataGridView
     Friend WithEvents sprPricioOrden As NumericUpDown
     Friend WithEvents lblTotal As Label
@@ -1829,7 +1844,6 @@ Partial Class Materials
     Friend WithEvents txtNumeroMaterial As TextBox
     Friend WithEvents Label3 As Label
     Friend WithEvents cmbVendedor As ComboBox
-    Friend WithEvents TabPage3 As TabPage
     Friend WithEvents tblVendor As DataGridView
     Friend WithEvents btnSaveVendor As Button
     Friend WithEvents txtDescripcionVendedor As TextBox
@@ -1861,7 +1875,6 @@ Partial Class Materials
     Friend WithEvents btnCancelVendor As Button
     Friend WithEvents btnCancelMaterial As Button
     Friend WithEvents btnCancelOrder As Button
-    Friend WithEvents TabPage4 As TabPage
     Friend WithEvents GroupBox3 As GroupBox
     Friend WithEvents btnMaterialUploadExcel As Button
     Friend WithEvents btnMaterialDownloadExcel As Button
@@ -1921,4 +1934,9 @@ Partial Class Materials
     Friend WithEvents Panel28 As Panel
     Friend WithEvents Label23 As Label
     Friend WithEvents cmbClassMaterial As ComboBox
+    Friend WithEvents MyTabControl1 As MyTabControl
+    Friend WithEvents TabPage5 As TabPage
+    Friend WithEvents TabPage6 As TabPage
+    Friend WithEvents TabPage7 As TabPage
+    Friend WithEvents TabPage8 As TabPage
 End Class
