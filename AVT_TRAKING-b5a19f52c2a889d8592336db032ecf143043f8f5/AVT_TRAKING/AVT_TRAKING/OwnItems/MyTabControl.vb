@@ -100,7 +100,6 @@ Public Class MyTabControl
         SetStyle(ControlStyles.UserPaint, True)
         SetStyle(ControlStyles.OptimizedDoubleBuffer, True)
         SetStyle(ControlStyles.ResizeRedraw, True)
-
         SizeMode = TabSizeMode.Fixed
         ItemSize = New Size(Width1, Heigth)
         _TabStyle = Style.Line

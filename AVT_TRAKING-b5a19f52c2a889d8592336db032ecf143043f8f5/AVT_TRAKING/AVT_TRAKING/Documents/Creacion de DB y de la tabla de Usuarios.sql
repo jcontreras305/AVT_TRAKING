@@ -331,6 +331,98 @@ create table employees(
 GO
 
 --##########################################################################################
+--##################  TABLA DE EQUIPMENTEST ################################################
+--##########################################################################################
+
+create table equipmentEst(
+	idEquimentEst int primary key not null,
+	[description] varchar(45)not null,
+	elevation int,
+	systemPntEq varchar(10),
+	pntOption varchar(25),
+	[type] varchar(25),
+	thick float,
+	idJacket varchar(25),
+	remIns bit,
+	idLaborRateRmv varchar(40),
+	sqrFtRmv float,
+	idLaborRatePnt varchar(40),
+	sqrFtPnt float,
+	idLaborRateII varchar(40),
+	sqrFtII float,
+	bevel float,
+	cutout float,
+	idDrawingNum varchar(45) not null
+)
+go
+
+ALTER TABLE equipmentEst WITH CHECK ADD CONSTRAINT fk_idDrawing_equipmentEst
+FOREIGN KEY (idDrawingNum) REFERENCES drawing(idDrawingNum)
+GO
+ALTER TABLE equipmentEst WITH CHECK ADD CONSTRAINT fk_elevation_equipmentEst
+FOREIGN KEY (elevation) REFERENCES factorElevationScf(elevation)
+GO
+ALTER TABLE equipmentEst WITH CHECK ADD CONSTRAINT fk_systemPntEq_pntOption_equipmentEst
+FOREIGN KEY (systemPntEq,pntOption) REFERENCES eqPaintUnitRate(systemPntEq,pntOption)
+GO
+ALTER TABLE equipmentEst WITH CHECK ADD CONSTRAINT fk_type_thick_equipmentEst
+FOREIGN KEY ([type],thick) REFERENCES eqInsUnitRate([type],thick)
+GO
+ALTER TABLE equipmentEst WITH CHECK ADD CONSTRAINT fk_idJacket_equipmentEst
+FOREIGN KEY (idJacket) REFERENCES eqJktUnitRate(idJacket)
+GO
+ALTER TABLE equipmentEst WITH CHECK ADD CONSTRAINT fk_idLaborRateRmv_equipmentEst
+FOREIGN KEY (idLaborRateRmv) REFERENCES laborRate(idLaborRate)
+GO
+ALTER TABLE equipmentEst WITH CHECK ADD CONSTRAINT fk_idLaborRatePnt_equipmentEst
+FOREIGN KEY (idLaborRatePnt) REFERENCES laborRate(idLaborRate)
+GO
+ALTER TABLE equipmentEst WITH CHECK ADD CONSTRAINT fk_idLaborII_equipmentEst
+FOREIGN KEY (idLaborRateII) REFERENCES laborRate(idLaborRate)
+GO
+ALTER TABLE ppInsUnitRate WITH CHECK ADD CONSTRAINT PK_size_type_thick_PPInsUnitRate
+PRIMARY KEY (size,[type],thick)
+GO
+--##########################################################################################
+--##################  TABLA DE EQINSUNITRATE ###############################################
+--##########################################################################################
+
+create table eqInsUnitRate(
+	[type] varchar(25)not null,
+	thick float not null,
+	laborProd float,
+	matRate float,
+	eqRate float
+)
+go
+
+--##########################################################################################
+--##################  TABLA DE EQJKTUNITRATE ###############################################
+--##########################################################################################
+
+create table eqJktUnitRate(
+	idJacket varchar(25) primary key not null,
+	name varchar(60) not null,
+	laborProd float,
+	matFactor float,
+	eqFactor float
+)
+go
+
+--##########################################################################################
+--##################  TABLA DE EQPAINTUNITRATE #############################################
+--##########################################################################################
+
+create table eqPaintUnitRate(
+	systemPntEq varchar(10)not null,
+	pntOption varchar(25)not null,
+	laborProd float,
+	matRate float,
+	eqRate float
+)
+go
+
+--##########################################################################################
 --##################  TABLA DE ESTMETERS ###################################################
 --##########################################################################################
 
@@ -380,18 +472,7 @@ CREATE TABLE EstMeters(
 )
 GO
 
---##########################################################################################
---##################  TABLA DE EQPAINTUNITRATE #############################################
---##########################################################################################
 
-create table eqPaintUnitRate(
-	systemPntEq varchar(10)not null,
-	pntOption varchar(25)not null,
-	laborProd float,
-	matRate float,
-	eqRate float
-)
-go
 
 --##########################################################################################
 --##################  TABLA DE EXISTENCES ##################################################
@@ -771,6 +852,33 @@ create table pntFitting(
 	flangeVlv float,
 	controlVlv float,
 	weldedVlv float
+)
+go
+
+--##########################################################################################
+--##################  TABLA DE PPINSUNITRATE ###############################################
+--##########################################################################################
+
+create table ppInsUnitRate(
+	size float not null, 
+	[type] varchar(25) not null,
+	thick float not null,
+	laborProd float,
+	matRate float,
+	eqRate float
+)
+go
+
+--##########################################################################################
+--##################  TABLA DE PPJKTUNITRATE ###############################################
+--##########################################################################################
+
+create table ppJktUnitRate(
+	idJacket varchar(25) primary key not null,
+	name varchar(60) not null,
+	laborProd float,
+	matFactor float,
+	eqFactor float 
 )
 go
 
@@ -1535,6 +1643,65 @@ GO
 --##################  FOREIG KEYS EQPAINTUNITRATE ##########################################
 --##########################################################################################
 
+ALTER TABLE equipmentEst WITH CHECK ADD CONSTRAINT fk_idDrawing_equipmentEst
+FOREIGN KEY (idDrawingNum) REFERENCES drawing(idDrawingNum)
+ON UPDATE CASCADE
+ON DELETE CASCADE
+GO
+ALTER TABLE equipmentEst WITH CHECK ADD CONSTRAINT fk_elevation_equipmentEst
+FOREIGN KEY (elevation) REFERENCES factorElevationScf(elevation)
+ON UPDATE CASCADE
+ON DELETE CASCADE
+GO
+ALTER TABLE equipmentEst WITH CHECK ADD CONSTRAINT fk_systemPntEq_pntOption_equipmentEst
+FOREIGN KEY (systemPntEq,pntOption) REFERENCES eqPaintUnitRate(systemPntEq,pntOption)
+ON UPDATE CASCADE
+ON DELETE CASCADE
+GO
+ALTER TABLE equipmentEst WITH CHECK ADD CONSTRAINT fk_type_thick_equipmentEst
+FOREIGN KEY ([type],thick) REFERENCES eqInsUnitRate([type],thick)
+ON UPDATE CASCADE
+ON DELETE CASCADE
+GO
+ALTER TABLE equipmentEst WITH CHECK ADD CONSTRAINT fk_idJacket_equipmentEst
+FOREIGN KEY (idJacket) REFERENCES eqJktUnitRate(idJacket)
+ON UPDATE CASCADE
+ON DELETE CASCADE
+GO
+ALTER TABLE equipmentEst WITH CHECK ADD CONSTRAINT fk_idLaborRateRmv_equipmentEst
+FOREIGN KEY (idLaborRateRmv) REFERENCES laborRate(idLaborRate)
+ON UPDATE CASCADE
+ON DELETE CASCADE
+GO
+ALTER TABLE equipmentEst WITH CHECK ADD CONSTRAINT fk_idLaborRatePnt_equipmentEst
+FOREIGN KEY (idLaborRatePnt) REFERENCES laborRate(idLaborRate)
+ON UPDATE CASCADE
+ON DELETE CASCADE
+GO
+ALTER TABLE equipmentEst WITH CHECK ADD CONSTRAINT fk_idLaborII_equipmentEst
+FOREIGN KEY (idLaborRateII) REFERENCES laborRate(idLaborRate)
+ON UPDATE CASCADE
+ON DELETE CASCADE
+GO
+
+--##########################################################################################
+--##################  FOREIG KEYS EQPAINTUNITRATE ##########################################
+--##########################################################################################
+
+ALTER TABLE eqInsUnitRate WITH CHECK ADD CONSTRAINT PK_type_think_eqinsUnitRate
+PRIMARY KEY([type],thick)
+GO
+
+ALTER TABLE eqInsUnitRate WITH CHECK ADD CONSTRAINT fk_type_eqInsUnitRate
+FOREIGN KEY([TYPE]) REFERENCES insFitting([type])
+ON UPDATE CASCADE
+ON DELETE CASCADE
+GO
+
+--##########################################################################################
+--##################  FOREIG KEYS EQPAINTUNITRATE ##########################################
+--##########################################################################################
+
 ALTER TABLE eqPaintUnitRate WITH CHECK ADD CONSTRAINT pk_systemPntEq_pntFitting
 PRIMARY KEY (systemPntEq,pntOption)
 go
@@ -1724,6 +1891,14 @@ GO
 
 ALTER TABLE payRate WITH CHECK ADD CONSTRAINT fk_idEmployee_payRate 
 FOREIGN KEY(idEmployee) REFERENCES employees (idEmployee)
+GO
+
+--##########################################################################################
+--##################  FOREIG KEYS PPPAINTUNITRATE ##########################################
+--##########################################################################################
+
+ALTER TABLE ppInsUnitRate WITH CHECK ADD CONSTRAINT PK_size_type_thick_PPInsUnitRate
+PRIMARY KEY (size,[type],thick)
 GO
 
 --##########################################################################################
@@ -3538,6 +3713,10 @@ go
 ----========== ESTE CODIGO ES PARA AGREGAR LA TABLA DE CLIENTES Y PROYECTOS DE ESTIMACION ======================================================
 ----============================================================================================================================================
 
+----##########################################################################################################################
+----############# TABLA DE CLIENTEST #########################################################################################
+----##########################################################################################################################
+----1
 --create table clientsEst(
 --	idClientEst varchar(36) primary key not null,
 --	numberClient int,
@@ -3551,16 +3730,16 @@ go
 
 --ALTER TABLE clientsEst WITH CHECK ADD CONSTRAINT fk_idContact_clientsEst
 --FOREIGN KEY (idContact) REFERENCES contact(idContact)
---on update cascade
---on delete cascade
 --GO
 
 --ALTER TABLE clientsEst WITH CHECK ADD CONSTRAINT fk_idContact_HomeAddress
 --FOREIGN KEY (idHomeAdress) REFERENCES HomeAddress(idHomeAdress)
---on update cascade
---on delete cascade
 --GO
 
+----##########################################################################################################################
+----############## TABLA DE PROJECTCLIENTEST #################################################################################
+----##########################################################################################################################
+----2
 --create table projectClientEst(
 --	projectId varchar(30) primary key not null,
 --	[description] varchar(150),
@@ -3572,29 +3751,68 @@ go
 
 --ALTER TABLE projectClientEst WITH CHECK ADD CONSTRAINT fk_idClintEst_projectClientEst
 --FOREIGN KEY (idClientEst) REFERENCES clientsEst(idClientEst)
---on update cascade
---on delete cascade
 --go
-
-----============================================================================================================================================
-----========== ESTE CODIGO ES PARA AGREGAR LA TABLA DE FACTOR DE ELEVAION EN SCF Y PAINT =======================================================
-----============================================================================================================================================
-
+----##########################################################################################################################
+----############## TABLA DE ELEVACION DE SCAFFOLD ############################################################################
+----##########################################################################################################################
+----3
 --create table factorElevationSCF(
 --	elevation int primary key not null,
 --	[percent] int 
 --)
 --go
-
+----##########################################################################################################################
+----############## TABLA DE ELEVACION PAINT INSULATION #######################################################################
+----##########################################################################################################################
+----4
 --create table factorElevationPaint(
 --	elevation int primary key not null,
 --	[percent] int
 --)
 --go
-----============================================================================================================================================
-----========== ESTE CODIGO ES PARA AGREGAR LAS TABLAS DE DRAWING Y SCAFFOLDEST =================================================================
-----============================================================================================================================================
 
+----##########################################################################################################################
+----############## TABLA DE LABORRATE ########################################################################################
+----##########################################################################################################################
+----5
+--create table laborRate(
+--	idLaborRate varchar(40) primary key not null,
+--	insRate money,
+--	abatRate money,
+--	paintRate money,
+--	scafRate money
+--)
+--go
+----##########################################################################################################################
+----############## TABLA DE SCFUNITRATES #####################################################################################
+----##########################################################################################################################
+----6
+--create table scfUnitsRates(
+--	idSCFUR varchar(35) primary key not null,
+--	buildPercent int,
+--	laborB float,
+--	materialB float,
+--	equipmentB float,
+--	dismantlePercent int,
+--	laborD float,
+--	materialD float,
+--	equipmentD float
+--)
+--go
+----##########################################################################################################################
+----############## TABLA DE ENVIROMENT #######################################################################################
+----##########################################################################################################################
+----7
+--create table enviroment(
+--	idEnviroment varchar(40) primary Key not null,
+--	dueDays int 
+--)
+--go
+
+----##########################################################################################################################
+----############## TABLA DE DRAWING ##########################################################################################
+----##########################################################################################################################
+----8
 --create table drawing(
 --	idDrawingNum varchar(45) primary key not null,
 --	[description] varchar(150),
@@ -3608,6 +3826,10 @@ go
 --ON DELETE CASCADE
 --go
 
+----##########################################################################################################################
+----############## TABLA DE DRAWING ##########################################################################################
+----##########################################################################################################################
+----9
 --create table scaffoldEst(
 --	tag varchar(20) primary key not null,
 --	location varchar(150),
@@ -3647,9 +3869,11 @@ go
 --ON UPDATE CASCADE
 --ON DELETE CASCADE
 --go
-----============================================================================================================================================
-----========== ESTE CODIGO ES PARA AGREGAR LAS TABLAS DE INSFITTING, PNTFITTING, EQPAINTUNITRATE Y PPPAINT =====================================
-----============================================================================================================================================
+
+----##########################################################################################################################
+----############## TABLA DE INSFITTING #######################################################################################
+----##########################################################################################################################
+----10
 --create table insFitting(
 --	[type] varchar(25) primary key not null,
 --	support float,
@@ -3668,6 +3892,10 @@ go
 --)
 --go
 
+----##########################################################################################################################
+----############## TABLA DE PNTFITTING #######################################################################################
+----##########################################################################################################################
+----11
 --create table pntFitting(
 --	pntOption varchar(25) primary key not null,
 --	p90 float,
@@ -3680,6 +3908,10 @@ go
 --)
 --go
 
+----##########################################################################################################################
+----############## TABLA DE EQPAINTUNITRATE ##################################################################################
+----##########################################################################################################################
+----12
 --create table eqPaintUnitRate(
 --	systemPntEq varchar(10)not null,
 --	pntOption varchar(25)not null,
@@ -3697,6 +3929,10 @@ go
 --FOREIGN KEY (pntOption) REFERENCES pntFitting(pntOption)
 --go
 
+----##########################################################################################################################
+----############## TABLA DE ppPAINTUNITRATE ##################################################################################
+----##########################################################################################################################
+----13
 --create table ppPaintUnitRate(
 --	systemPntPP varchar(10)not null,
 --	pntOption varchar(25)not null,
@@ -3714,3 +3950,122 @@ go
 --ALTER TABLE ppPaintUnitRate WITH CHECK ADD CONSTRAINT Fk_pntOption_pntFitting
 --FOREIGN KEY (pntOption) REFERENCES pntFitting(pntOption) 
 --go
+
+--| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
+--| | | | | | | | ESTO ES LO NUEVO  | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
+--V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V 
+----##########################################################################################################################
+----############## TABLA DE eqJktUnitrate ####################################################################################
+----##########################################################################################################################
+----14
+--create table eqJktUnitRate(
+--	idJacket varchar(25) primary key not null,
+--	name varchar(60) not null,
+--	laborProd float,
+--	matFactor float,
+--	eqFactor float
+--)
+--go
+
+----##########################################################################################################################
+----############## TABLA DE ppJktUnitRate ####################################################################################
+----##########################################################################################################################
+----15
+--create table ppJktUnitRate(
+--	idJacket varchar(25) primary key not null,
+--	name varchar(60) not null,
+--	laborProd float,
+--	matFactor float,
+--	eqFactor float 
+--)
+--go
+
+----##########################################################################################################################
+----############## TABLA DE ppPAINTUNITRATE ##################################################################################
+----##########################################################################################################################
+----16
+--create table eqInsUnitRate(
+--	[type] varchar(25)not null,
+--	thick float not null,
+--	laborProd float,
+--	matRate float,
+--	eqRate float
+--)
+--go
+
+--ALTER TABLE eqInsUnitRate WITH CHECK ADD CONSTRAINT PK_type_think_eqinsUnitRate
+--PRIMARY KEY([type],thick)
+--go
+
+--ALTER TABLE eqInsunitRate WITH CHECK ADD CONSTRAINT fk_type_eqInsUnitRate
+--FOREIGN KEY([TYPE]) REFERENCES insFitting([type])
+--go
+
+----##########################################################################################################################
+----############## TABLA DE ppInsUnitRate ####################################################################################
+----##########################################################################################################################
+----17
+--create table ppInsUnitRate(
+--	size float not null, 
+--	[type] varchar(25) not null,
+--	thick float not null,
+--	laborProd float,
+--	matRate float,
+--	eqRate float
+--)
+--go
+
+--ALTER TABLE ppInsUnitRate WITH CHECK ADD CONSTRAINT PK_size_type_thick_PPInsUnitRate
+--PRIMARY KEY (size,[type],thick)
+--go
+
+----##########################################################################################################################
+----############## TABLA DE equipmentEst #####################################################################################
+----##########################################################################################################################
+----18
+--create table equipmentEst(
+--	idEquimentEst int primary key not null,
+--	[description] varchar(45)not null,
+--	elevation int,
+--	systemPntEq varchar(10),
+--	pntOption varchar(25),
+--	[type] varchar(25),
+--	thick float,
+--	idJacket varchar(25),
+--	remIns bit,
+--	idLaborRateRmv varchar(40),
+--	sqrFtRmv float,
+--	idLaborRatePnt varchar(40),
+--	sqrFtPnt float,
+--	idLaborRateII varchar(40),
+--	sqrFtII float,
+--	bevel float,
+--	cutout float,
+--	idDrawingNum varchar(45) not null
+--)
+--go
+
+--ALTER TABLE equipmentEst WITH CHECK ADD CONSTRAINT fk_idDrawing_equipmentEst
+--FOREIGN KEY (idDrawingNum) REFERENCES drawing(idDrawingNum)
+--GO
+--ALTER TABLE equipmentEst WITH CHECK ADD CONSTRAINT fk_elevation_equipmentEst
+--FOREIGN KEY (elevation) REFERENCES factorElevationScf(elevation)
+--GO
+--ALTER TABLE equipmentEst WITH CHECK ADD CONSTRAINT fk_systemPntEq_pntOption_equipmentEst
+--FOREIGN KEY (systemPntEq,pntOption) REFERENCES eqPaintUnitRate(systemPntEq,pntOption)
+--GO
+--ALTER TABLE equipmentEst WITH CHECK ADD CONSTRAINT fk_type_thick_equipmentEst
+--FOREIGN KEY ([type],thick) REFERENCES eqInsUnitRate([type],thick)
+--GO
+--ALTER TABLE equipmentEst WITH CHECK ADD CONSTRAINT fk_idJacket_equipmentEst
+--FOREIGN KEY (idJacket) REFERENCES eqJktUnitRate(idJacket)
+--GO
+--ALTER TABLE equipmentEst WITH CHECK ADD CONSTRAINT fk_idLaborRateRmv_equipmentEst
+--FOREIGN KEY (idLaborRateRmv) REFERENCES laborRate(idLaborRate)
+--GO
+--ALTER TABLE equipmentEst WITH CHECK ADD CONSTRAINT fk_idLaborRatePnt_equipmentEst
+--FOREIGN KEY (idLaborRatePnt) REFERENCES laborRate(idLaborRate)
+--GO
+--ALTER TABLE equipmentEst WITH CHECK ADD CONSTRAINT fk_idLaborII_equipmentEst
+--FOREIGN KEY (idLaborRateII) REFERENCES laborRate(idLaborRate)
+--GO

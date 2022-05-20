@@ -12,6 +12,9 @@
     Dim selectTable As String
     Dim idProject As String = ""
     Dim flagNewDrawing As Boolean = False
+    Dim rowsEqDrawing As New List(Of Form)
+    Public selectRow As Integer = -1
+    Dim tblEqDrawingRead As New Data.DataTable
     Private Sub Estimating_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         tblProjects = mtdClients.llenarComboClientsEst(cmbProjects)
         tblDrawing = mtdEstimation.selectProjectsDrawing()
@@ -31,6 +34,7 @@
             End If
             cmbProjects.SelectedIndex = 0
         End If
+        btnAddRowEquipment.Visible = False
     End Sub
     Private Sub btnSalir_Click(sender As Object, e As EventArgs) Handles btnSalir.Click
         Me.Close()
@@ -77,7 +81,6 @@
                 txtDrawingNum.Text = ""
                 txtDescriptionDrawing.Text = ""
             End If
-
         Catch ex As Exception
 
         End Try
@@ -149,8 +152,51 @@
                 Else
                     MessageBox.Show("Please check the information, Is likely that you have not assigned information.", "Impotant", MessageBoxButtons.OK, MessageBoxIcon.Warning)
                 End If
+            Case "EQUIPMENT"
+                tblEqDrawingRead.Rows.Clear()
+                For Each rowEq As RowEqDrawing In rowsEqDrawing
+                    If rowEq.isSelectRow1 Then
+                        tblEqDrawingRead.Rows.Add(rowEq.ItemArray1(0), rowEq.ItemArray1(1), rowEq.ItemArray1(2), If(rowEq.ItemArray1(3) = "", "NULL", rowEq.ItemArray1(3)), If(rowEq.ItemArray1(4) = "", "NULL", rowEq.ItemArray1(4)), If(rowEq.ItemArray1(5) = "", "NULL", rowEq.ItemArray1(5)), If(rowEq.ItemArray1(6) = "", "NULL", rowEq.ItemArray1(6)), If(rowEq.ItemArray1(7) = "", "0", rowEq.ItemArray1(7)), If(rowEq.ItemArray1(8) = "", "NULL", rowEq.ItemArray1(8)), rowEq.ItemArray1(9), If(rowEq.ItemArray1(10) = "", "NULL", rowEq.ItemArray1(10)), If(rowEq.ItemArray1(11) = "", "0", rowEq.ItemArray1(11)), If(rowEq.ItemArray1(12) = "", "NULL", rowEq.ItemArray1(12)), If(rowEq.ItemArray1(13) = "", "0", rowEq.ItemArray1(13)), If(rowEq.ItemArray1(14) = "", "NULL", rowEq.ItemArray1(14)), If(rowEq.ItemArray1(15) = "", "0", rowEq.ItemArray1(15)), If(rowEq.ItemArray1(16) = "", "0", rowEq.ItemArray1(16)), If(rowEq.ItemArray1(17) = "", "0", rowEq.ItemArray1(17)), If(rowEq.ItemArray1(18) = "", "No", rowEq.ItemArray1(18)))
+                    End If
+                Next
+                If (tblEqDrawingRead.Rows.Count > 0) Then
+                    If (mtdEstimation.saveUpdateEqDrawingProject(tblEqDrawingRead, txtDrawingNum.Text, txtDescriptionDrawing.Text, idProject, If(idDrawing = "", "", idDrawing))) Then
+                        cargarDatosDrawing(idClient, idProject, idDrawing, True)
+                        MsgBox("Successful")
+                    End If
+                Else
+                    MessageBox.Show("No poroject was selected.", "Messague", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                End If
             Case ""
-            Case ""
+        End Select
+    End Sub
+    Private Sub btnDelete_Click(sender As Object, e As EventArgs) Handles btnDelete.Click
+        Select Case selectTable
+            Case "SCF"
+                If tblSCFDrawing.SelectedRows.Count > 0 Then
+                    If (mtdEstimation.deleteSCFDrawing(tblSCFDrawing)) Then
+                        cargarDatosDrawing(idClient, idProject, idDrawing, True)
+                        MsgBox("Successful")
+                    End If
+                Else
+                    MessageBox.Show("Please select a Row in the Table of Scaffolds.", "Impotant", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                End If
+            Case "EQUIPMENT"
+                tblEqDrawingRead.Rows.Clear()
+                For Each rowEq As RowEqDrawing In rowsEqDrawing
+                    If rowEq.isSelectRow1 Then
+                        tblEqDrawingRead.Rows.Add(rowEq.ItemArray1(0), rowEq.ItemArray1(1), rowEq.ItemArray1(2), rowEq.ItemArray1(3), If(rowEq.ItemArray1(4) = "", "NUll", rowEq.ItemArray1(4)), If(rowEq.ItemArray1(5) = "", "Null", rowEq.ItemArray1(5)), If(rowEq.ItemArray1(6) = "", "Null", rowEq.ItemArray1(6)), If(rowEq.ItemArray1(7) = "", "0", rowEq.ItemArray1(7)), If(rowEq.ItemArray1(8) = "", "NULL", rowEq.ItemArray1(8)), rowEq.ItemArray1(9), If(rowEq.ItemArray1(10) = "", "NULL", rowEq.ItemArray1(10)), rowEq.ItemArray1(11), If(rowEq.ItemArray1(12) = "", "NULL", rowEq.ItemArray1(12)), rowEq.ItemArray1(13), If(rowEq.ItemArray1(14) = "", "NULL", rowEq.ItemArray1(14)), rowEq.ItemArray1(15), rowEq.ItemArray1(16), rowEq.ItemArray1(17), rowEq.ItemArray1(18))
+                    End If
+                Next
+                If (tblEqDrawingRead.Rows.Count > 0) Then
+                    If mtdEstimation.deleteEqDrawingProject(tblEqDrawingRead) Then
+                        cargarDatosDrawing(idClient, idProject, idDrawing, True)
+                        MsgBox("Successful")
+                    End If
+                Else
+                    MessageBox.Show("No poroject was selected.", "Messague", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                End If
+            Case "PIPING"
         End Select
     End Sub
     Private Function validarRowSCF() As Boolean
@@ -311,13 +357,13 @@
                 drawing = tblDrawing.Rows(tblDrawing.Rows.Count - 1).ItemArray(0)
                 idDrawing = tblDrawing.Rows(tblDrawing.Rows.Count - 1).ItemArray(0)
                 client = tblDrawing.Rows(tblDrawing.Rows.Count - 1).ItemArray(3)
-                cargarDatosDrawing(client, project, drawing)
+                cargarDatosDrawing(client, project, drawing, True)
             ElseIf rowIndex <> -1 Then
                 project = tblDrawing.Rows(rowIndex - 1).ItemArray(2)
                 drawing = tblDrawing.Rows(rowIndex - 1).ItemArray(0)
                 idDrawing = tblDrawing.Rows(rowIndex - 1).ItemArray(0)
                 client = tblDrawing.Rows(rowIndex - 1).ItemArray(3)
-                cargarDatosDrawing(client, project, drawing)
+                cargarDatosDrawing(client, project, drawing, True)
             End If
         Catch ex As Exception
         End Try
@@ -340,13 +386,13 @@
                 drawing = tblDrawing.Rows(0).ItemArray(0)
                 idDrawing = tblDrawing.Rows(0).ItemArray(0)
                 client = tblDrawing.Rows(0).ItemArray(3)
-                cargarDatosDrawing(client, project, drawing)
+                cargarDatosDrawing(client, project, drawing, True)
             Else
                 project = tblDrawing.Rows(rowIndex + 1).ItemArray(2)
                 drawing = tblDrawing.Rows(rowIndex + 1).ItemArray(0)
                 idDrawing = tblDrawing.Rows(rowIndex + 1).ItemArray(0)
                 client = tblDrawing.Rows(rowIndex + 1).ItemArray(3)
-                cargarDatosDrawing(client, project, drawing)
+                cargarDatosDrawing(client, project, drawing, True)
             End If
         Catch ex As Exception
         End Try
@@ -363,8 +409,7 @@
 
         End Try
     End Sub
-
-    Private Function cargarDatosDrawing(ByVal clientNum As String, ByVal Project As String, ByVal Drawing As String) As Boolean
+    Private Function cargarDatosDrawing(ByVal clientNum As String, ByVal Project As String, ByVal Drawing As String, Optional refresh As Boolean = False) As Boolean
         Try
             Dim itemIndex As Integer = -1
             Dim rowsQuery() As Data.DataRow = tblDrawing.Select("projectId='" + Project + "' and  idDrawingNum = '" + Drawing + "'")
@@ -373,20 +418,105 @@
                 idDrawing = rowsQuery(0).ItemArray(0)
                 txtDescriptionDrawing.Text = rowsQuery(0).ItemArray(1)
                 tblScaffoldProjects = mtdEstimation.selectSCFDrawingProject(tblSCFDrawing, clientNum, Project, Drawing)
+                tblEqDrawingRead = mtdEstimation.selectEqDrawingProject(clientNum, Project, Drawing)
+
+                If refresh Then
+                    llenarTablaEquipmentDrawing(tblEqDrawingRead, True)
+                Else
+                    llenarTablaEquipmentDrawing(tblEqDrawingRead)
+                End If
             End If
-            If idClient <> clientNum Then
-                For Each item As Object In cmbProjects.Items
-                    itemIndex += 1
-                    Dim array() As String = item.ToString.Split(" ")
-                    If array(0) = clientNum Then
-                        cmbProjects.SelectedIndex = itemIndex
+                If idClient <> clientNum Then
+                    For Each item As Object In cmbProjects.Items
+                        itemIndex += 1
+                        Dim array() As String = item.ToString.Split(" ")
+                        If array(0) = clientNum Then
+                            cmbProjects.SelectedIndex = itemIndex
+                        End If
+                    Next
+                End If
+                Return True
+        Catch ex As Exception
+            Return False
+        End Try
+    End Function
+    Private Function llenarTablaEquipmentDrawing(ByVal tbl As Data.DataTable, Optional refresh As Boolean = False) As Boolean
+        Try
+            Dim count As Integer = 0
+            rowsEqDrawing.Clear()
+            pnlRowaEq.Controls.Clear()
+            If tbl.Rows.Count > 0 Then
+                For Each row As Data.DataRow In tbl.Rows
+                    OpenFormPanel1(Of RowEqDrawing)()
+                Next
+                For Each row1 As RowEqDrawing In pnlRowaEq.Controls
+                    row1.cargardatos(tbl.Rows(count))
+                    If refresh Then
+                        row1.cargardatos()
                     End If
+                    count += 1
                 Next
             End If
+            mtdEstimation.selectMaxIdEquipment(lblMaxIDEq)
             Return True
         Catch ex As Exception
             Return False
         End Try
     End Function
+    Private Sub TabControl1_SelectedIndexChanged(sender As Object, e As EventArgs) Handles TabControl1.SelectedIndexChanged
+        Select Case TabControl1.SelectedIndex
+            Case 0
+                btnAddRowEquipment.Visible = False
+                selectTable = "SCF"
+            Case 1
+                btnAddRowEquipment.Visible = True
+                selectTable = "EQUIPMENT"
+            Case 2
+                btnAddRowEquipment.Visible = False
+                selectTable = "PIPING"
+            Case Else
+        End Select
+    End Sub
+    Private Sub btnAddRowEquipment_Click(sender As Object, e As EventArgs) Handles btnAddRowEquipment.Click
+        OpenFormPanel1(Of RowEqDrawing)()
+
+    End Sub
+    Private Sub OpenFormPanel1(Of Miform As {RowEqDrawing, New})()
+        Dim FormPanel As Form
+        Dim newPC = New Miform()
+        FormPanel = newPC
+        FormPanel.TopLevel = False
+        FormPanel.Dock = DockStyle.Top
+        rowsEqDrawing.Add(FormPanel)
+        pnlRowaEq.Controls.Add(rowsEqDrawing(rowsEqDrawing.Count - 1))
+        pnlRowaEq.Tag = rowsEqDrawing(rowsEqDrawing.Count - 1)
+        rowsEqDrawing(rowsEqDrawing.Count - 1).Show()
+        rowsEqDrawing(rowsEqDrawing.Count - 1).BringToFront()
+    End Sub
+
+    Private Sub pnlRowaEq_ControlAdded(sender As Object, e As ControlEventArgs) Handles pnlRowaEq.ControlAdded
+        Dim indexRow As Integer = 0
+        For Each rowEq As RowEqDrawing In rowsEqDrawing
+            rowEq.RowIndex1 = indexRow
+            indexRow += 1
+        Next
+    End Sub
+    Private Sub pnlRowaEq_ControlRemoved(sender As Object, e As ControlEventArgs) Handles pnlRowaEq.ControlRemoved
+        Dim indexRow As Integer = 0
+        Dim indexDelete As Integer = 0
+        Dim newlist As New List(Of Integer)
+
+        For Each rowEq As RowEqDrawing In rowsEqDrawing
+            If rowEq.Equals(e.Control) Then
+                newlist.Add(indexDelete)
+            End If
+            indexDelete += 1
+        Next
+
+        For i = newlist.Count() To 1 Step -1
+            rowsEqDrawing.Remove(rowsEqDrawing(newlist(i - 1)))
+        Next
+    End Sub
+
 
 End Class

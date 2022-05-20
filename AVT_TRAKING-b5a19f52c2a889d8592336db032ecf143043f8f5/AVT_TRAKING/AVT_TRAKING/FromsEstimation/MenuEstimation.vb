@@ -83,7 +83,6 @@
             FormPanel = newPC
             FormPanel.TopLevel = False
             FormPanel.Dock = DockStyle.Fill
-
             PanelViewFrom.Controls.Add(FormPanel)
             PanelViewFrom.Tag = FormPanel
             FormPanel.Show()

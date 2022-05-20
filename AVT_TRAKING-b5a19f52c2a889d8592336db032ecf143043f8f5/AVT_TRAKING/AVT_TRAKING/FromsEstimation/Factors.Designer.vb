@@ -22,9 +22,9 @@ Partial Class Factors
     'No lo modifique con el editor de código.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle9 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.btnSalir = New System.Windows.Forms.Button()
@@ -92,7 +92,57 @@ Partial Class Factors
         Me.Enviroment = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.RevitionDueDay = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.TabPage4 = New System.Windows.Forms.TabPage()
+        Me.TableLayoutPanel14 = New System.Windows.Forms.TableLayoutPanel()
+        Me.GroupBox11 = New System.Windows.Forms.GroupBox()
+        Me.TableLayoutPanel16 = New System.Windows.Forms.TableLayoutPanel()
+        Me.btnExcelUpdatePpInsUR = New System.Windows.Forms.Button()
+        Me.Panel14 = New System.Windows.Forms.Panel()
+        Me.tblPpInsUnitRate = New System.Windows.Forms.DataGridView()
+        Me.idSizePpIUR = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.idTypePpIUR = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.idThickPpIUR = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.SizePpIUR = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.typePpIUR = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.thickPpIUR = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.laborProdPpIUR = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.matRatePpIUR = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.eqRatePpIUR = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.GroupBox10 = New System.Windows.Forms.GroupBox()
+        Me.TableLayoutPanel15 = New System.Windows.Forms.TableLayoutPanel()
+        Me.btnExcelUpdateEqInsUR = New System.Windows.Forms.Button()
+        Me.Panel13 = New System.Windows.Forms.Panel()
+        Me.tblEqInsUnitRate = New System.Windows.Forms.DataGridView()
+        Me.idTypeEQIUR = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.idThickEQIUR = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.typeEQIUR = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ThickEQIUR = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.laborProdEQIUR = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.matRateEQIUR = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.eqRateEQIUR = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.TabPage5 = New System.Windows.Forms.TabPage()
+        Me.TableLayoutPanel17 = New System.Windows.Forms.TableLayoutPanel()
+        Me.GroupBox12 = New System.Windows.Forms.GroupBox()
+        Me.TableLayoutPanel18 = New System.Windows.Forms.TableLayoutPanel()
+        Me.btnExcelJacketPp = New System.Windows.Forms.Button()
+        Me.Panel15 = New System.Windows.Forms.Panel()
+        Me.tblJacketPp = New System.Windows.Forms.DataGridView()
+        Me.idJacketPp = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.JacketTypePp = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.jacketNamePp = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.laborProdJckPp = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.matFactorJckPp = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.eqFactorJckPp = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.GroupBox13 = New System.Windows.Forms.GroupBox()
+        Me.TableLayoutPanel19 = New System.Windows.Forms.TableLayoutPanel()
+        Me.btnExcelJacketEq = New System.Windows.Forms.Button()
+        Me.Panel16 = New System.Windows.Forms.Panel()
+        Me.tblJacketEq = New System.Windows.Forms.DataGridView()
+        Me.idJacket = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.JacketType = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.jacketName = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.laborProdJckEq = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.matFactorJckEq = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.eqFactorJckEq = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.TabPage6 = New System.Windows.Forms.TabPage()
         Me.TableLayoutPanel11 = New System.Windows.Forms.TableLayoutPanel()
         Me.GroupBox9 = New System.Windows.Forms.GroupBox()
@@ -193,6 +243,26 @@ Partial Class Factors
         Me.TableLayoutPanel8.SuspendLayout()
         Me.Panel12.SuspendLayout()
         CType(Me.tblEnviroment, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.TabPage4.SuspendLayout()
+        Me.TableLayoutPanel14.SuspendLayout()
+        Me.GroupBox11.SuspendLayout()
+        Me.TableLayoutPanel16.SuspendLayout()
+        Me.Panel14.SuspendLayout()
+        CType(Me.tblPpInsUnitRate, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.GroupBox10.SuspendLayout()
+        Me.TableLayoutPanel15.SuspendLayout()
+        Me.Panel13.SuspendLayout()
+        CType(Me.tblEqInsUnitRate, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.TabPage5.SuspendLayout()
+        Me.TableLayoutPanel17.SuspendLayout()
+        Me.GroupBox12.SuspendLayout()
+        Me.TableLayoutPanel18.SuspendLayout()
+        Me.Panel15.SuspendLayout()
+        CType(Me.tblJacketPp, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.GroupBox13.SuspendLayout()
+        Me.TableLayoutPanel19.SuspendLayout()
+        Me.Panel16.SuspendLayout()
+        CType(Me.tblJacketEq, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.TabPage6.SuspendLayout()
         Me.TableLayoutPanel11.SuspendLayout()
         Me.GroupBox9.SuspendLayout()
@@ -377,14 +447,14 @@ Partial Class Factors
         Me.tblWorkWeekScheduleLaborRates.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.tblWorkWeekScheduleLaborRates.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.tblWorkWeekScheduleLaborRates.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.IdLaborRate, Me.Description, Me.InsulRate, Me.AbatRate, Me.PaintRate, Me.ScafRate})
-        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.tblWorkWeekScheduleLaborRates.DefaultCellStyle = DataGridViewCellStyle1
+        DataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle7.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.tblWorkWeekScheduleLaborRates.DefaultCellStyle = DataGridViewCellStyle7
         Me.tblWorkWeekScheduleLaborRates.Dock = System.Windows.Forms.DockStyle.Fill
         Me.tblWorkWeekScheduleLaborRates.Location = New System.Drawing.Point(0, 0)
         Me.tblWorkWeekScheduleLaborRates.Name = "tblWorkWeekScheduleLaborRates"
@@ -546,14 +616,14 @@ Partial Class Factors
         Me.tblPaintElevation.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.tblPaintElevation.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.tblPaintElevation.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.idElevationPaint, Me.ElevationPaint, Me.Increment})
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.tblPaintElevation.DefaultCellStyle = DataGridViewCellStyle2
+        DataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle8.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.tblPaintElevation.DefaultCellStyle = DataGridViewCellStyle8
         Me.tblPaintElevation.Dock = System.Windows.Forms.DockStyle.Fill
         Me.tblPaintElevation.Location = New System.Drawing.Point(0, 0)
         Me.tblPaintElevation.Name = "tblPaintElevation"
@@ -644,14 +714,14 @@ Partial Class Factors
         Me.tblScafElevation.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.tblScafElevation.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.tblScafElevation.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.idElevationSCF, Me.ElevationSCF, Me.IncrementSCF})
-        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle3.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.tblScafElevation.DefaultCellStyle = DataGridViewCellStyle3
+        DataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle9.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle9.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle9.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle9.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle9.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.tblScafElevation.DefaultCellStyle = DataGridViewCellStyle9
         Me.tblScafElevation.Dock = System.Windows.Forms.DockStyle.Fill
         Me.tblScafElevation.Location = New System.Drawing.Point(0, 0)
         Me.tblScafElevation.Name = "tblScafElevation"
@@ -896,20 +966,457 @@ Partial Class Factors
         'TabPage4
         '
         Me.TabPage4.BackColor = System.Drawing.Color.FromArgb(CType(CType(83, Byte), Integer), CType(CType(93, Byte), Integer), CType(CType(102, Byte), Integer))
+        Me.TabPage4.Controls.Add(Me.TableLayoutPanel14)
         Me.TabPage4.Location = New System.Drawing.Point(4, 22)
         Me.TabPage4.Name = "TabPage4"
         Me.TabPage4.Size = New System.Drawing.Size(954, 213)
         Me.TabPage4.TabIndex = 3
         Me.TabPage4.Text = "INS Units Rate"
         '
+        'TableLayoutPanel14
+        '
+        Me.TableLayoutPanel14.ColumnCount = 2
+        Me.TableLayoutPanel14.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
+        Me.TableLayoutPanel14.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
+        Me.TableLayoutPanel14.Controls.Add(Me.GroupBox11, 1, 0)
+        Me.TableLayoutPanel14.Controls.Add(Me.GroupBox10, 0, 0)
+        Me.TableLayoutPanel14.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.TableLayoutPanel14.Location = New System.Drawing.Point(0, 0)
+        Me.TableLayoutPanel14.Name = "TableLayoutPanel14"
+        Me.TableLayoutPanel14.RowCount = 1
+        Me.TableLayoutPanel14.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
+        Me.TableLayoutPanel14.Size = New System.Drawing.Size(954, 213)
+        Me.TableLayoutPanel14.TabIndex = 0
+        '
+        'GroupBox11
+        '
+        Me.GroupBox11.Controls.Add(Me.TableLayoutPanel16)
+        Me.GroupBox11.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.GroupBox11.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.GroupBox11.Location = New System.Drawing.Point(480, 3)
+        Me.GroupBox11.Name = "GroupBox11"
+        Me.GroupBox11.Size = New System.Drawing.Size(471, 207)
+        Me.GroupBox11.TabIndex = 1
+        Me.GroupBox11.TabStop = False
+        Me.GroupBox11.Text = "Piping Insulation Unit Rate"
+        '
+        'TableLayoutPanel16
+        '
+        Me.TableLayoutPanel16.ColumnCount = 2
+        Me.TableLayoutPanel16.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
+        Me.TableLayoutPanel16.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100.0!))
+        Me.TableLayoutPanel16.Controls.Add(Me.btnExcelUpdatePpInsUR, 1, 0)
+        Me.TableLayoutPanel16.Controls.Add(Me.Panel14, 0, 0)
+        Me.TableLayoutPanel16.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.TableLayoutPanel16.Location = New System.Drawing.Point(3, 16)
+        Me.TableLayoutPanel16.Name = "TableLayoutPanel16"
+        Me.TableLayoutPanel16.RowCount = 1
+        Me.TableLayoutPanel16.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
+        Me.TableLayoutPanel16.Size = New System.Drawing.Size(465, 188)
+        Me.TableLayoutPanel16.TabIndex = 1
+        '
+        'btnExcelUpdatePpInsUR
+        '
+        Me.btnExcelUpdatePpInsUR.FlatAppearance.BorderSize = 0
+        Me.btnExcelUpdatePpInsUR.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(59, Byte), Integer), CType(CType(69, Byte), Integer), CType(CType(79, Byte), Integer))
+        Me.btnExcelUpdatePpInsUR.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnExcelUpdatePpInsUR.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnExcelUpdatePpInsUR.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.btnExcelUpdatePpInsUR.Image = Global.AVT_TRAKING.My.Resources.Resources.excel
+        Me.btnExcelUpdatePpInsUR.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnExcelUpdatePpInsUR.Location = New System.Drawing.Point(368, 3)
+        Me.btnExcelUpdatePpInsUR.Name = "btnExcelUpdatePpInsUR"
+        Me.btnExcelUpdatePpInsUR.Size = New System.Drawing.Size(94, 35)
+        Me.btnExcelUpdatePpInsUR.TabIndex = 35
+        Me.btnExcelUpdatePpInsUR.Text = "Upload"
+        Me.btnExcelUpdatePpInsUR.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.btnExcelUpdatePpInsUR.UseVisualStyleBackColor = True
+        '
+        'Panel14
+        '
+        Me.Panel14.Controls.Add(Me.tblPpInsUnitRate)
+        Me.Panel14.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Panel14.ForeColor = System.Drawing.SystemColors.ControlText
+        Me.Panel14.Location = New System.Drawing.Point(3, 3)
+        Me.Panel14.Name = "Panel14"
+        Me.Panel14.Size = New System.Drawing.Size(359, 182)
+        Me.Panel14.TabIndex = 0
+        '
+        'tblPpInsUnitRate
+        '
+        Me.tblPpInsUnitRate.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
+        Me.tblPpInsUnitRate.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.tblPpInsUnitRate.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.idSizePpIUR, Me.idTypePpIUR, Me.idThickPpIUR, Me.SizePpIUR, Me.typePpIUR, Me.thickPpIUR, Me.laborProdPpIUR, Me.matRatePpIUR, Me.eqRatePpIUR})
+        Me.tblPpInsUnitRate.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.tblPpInsUnitRate.Location = New System.Drawing.Point(0, 0)
+        Me.tblPpInsUnitRate.Name = "tblPpInsUnitRate"
+        Me.tblPpInsUnitRate.Size = New System.Drawing.Size(359, 182)
+        Me.tblPpInsUnitRate.TabIndex = 0
+        '
+        'idSizePpIUR
+        '
+        Me.idSizePpIUR.HeaderText = "idSizePpIUR"
+        Me.idSizePpIUR.Name = "idSizePpIUR"
+        Me.idSizePpIUR.Visible = False
+        '
+        'idTypePpIUR
+        '
+        Me.idTypePpIUR.HeaderText = "idTypePpIUR"
+        Me.idTypePpIUR.Name = "idTypePpIUR"
+        Me.idTypePpIUR.Visible = False
+        '
+        'idThickPpIUR
+        '
+        Me.idThickPpIUR.HeaderText = "idThickPpIUR"
+        Me.idThickPpIUR.Name = "idThickPpIUR"
+        Me.idThickPpIUR.Visible = False
+        '
+        'SizePpIUR
+        '
+        Me.SizePpIUR.HeaderText = "Size"
+        Me.SizePpIUR.Name = "SizePpIUR"
+        '
+        'typePpIUR
+        '
+        Me.typePpIUR.HeaderText = "Type"
+        Me.typePpIUR.Name = "typePpIUR"
+        '
+        'thickPpIUR
+        '
+        Me.thickPpIUR.HeaderText = "Thick"
+        Me.thickPpIUR.Name = "thickPpIUR"
+        '
+        'laborProdPpIUR
+        '
+        Me.laborProdPpIUR.HeaderText = "Labor Prod."
+        Me.laborProdPpIUR.Name = "laborProdPpIUR"
+        '
+        'matRatePpIUR
+        '
+        Me.matRatePpIUR.HeaderText = "Mat. Rate"
+        Me.matRatePpIUR.Name = "matRatePpIUR"
+        '
+        'eqRatePpIUR
+        '
+        Me.eqRatePpIUR.HeaderText = "Eq. Rate"
+        Me.eqRatePpIUR.Name = "eqRatePpIUR"
+        '
+        'GroupBox10
+        '
+        Me.GroupBox10.Controls.Add(Me.TableLayoutPanel15)
+        Me.GroupBox10.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.GroupBox10.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.GroupBox10.Location = New System.Drawing.Point(3, 3)
+        Me.GroupBox10.Name = "GroupBox10"
+        Me.GroupBox10.Size = New System.Drawing.Size(471, 207)
+        Me.GroupBox10.TabIndex = 0
+        Me.GroupBox10.TabStop = False
+        Me.GroupBox10.Text = "Equipment Insulation Unit Rate"
+        '
+        'TableLayoutPanel15
+        '
+        Me.TableLayoutPanel15.ColumnCount = 2
+        Me.TableLayoutPanel15.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
+        Me.TableLayoutPanel15.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100.0!))
+        Me.TableLayoutPanel15.Controls.Add(Me.btnExcelUpdateEqInsUR, 1, 0)
+        Me.TableLayoutPanel15.Controls.Add(Me.Panel13, 0, 0)
+        Me.TableLayoutPanel15.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.TableLayoutPanel15.Location = New System.Drawing.Point(3, 16)
+        Me.TableLayoutPanel15.Name = "TableLayoutPanel15"
+        Me.TableLayoutPanel15.RowCount = 1
+        Me.TableLayoutPanel15.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
+        Me.TableLayoutPanel15.Size = New System.Drawing.Size(465, 188)
+        Me.TableLayoutPanel15.TabIndex = 0
+        '
+        'btnExcelUpdateEqInsUR
+        '
+        Me.btnExcelUpdateEqInsUR.FlatAppearance.BorderSize = 0
+        Me.btnExcelUpdateEqInsUR.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(59, Byte), Integer), CType(CType(69, Byte), Integer), CType(CType(79, Byte), Integer))
+        Me.btnExcelUpdateEqInsUR.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnExcelUpdateEqInsUR.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnExcelUpdateEqInsUR.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.btnExcelUpdateEqInsUR.Image = Global.AVT_TRAKING.My.Resources.Resources.excel
+        Me.btnExcelUpdateEqInsUR.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnExcelUpdateEqInsUR.Location = New System.Drawing.Point(368, 3)
+        Me.btnExcelUpdateEqInsUR.Name = "btnExcelUpdateEqInsUR"
+        Me.btnExcelUpdateEqInsUR.Size = New System.Drawing.Size(94, 35)
+        Me.btnExcelUpdateEqInsUR.TabIndex = 35
+        Me.btnExcelUpdateEqInsUR.Text = "Upload"
+        Me.btnExcelUpdateEqInsUR.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.btnExcelUpdateEqInsUR.UseVisualStyleBackColor = True
+        '
+        'Panel13
+        '
+        Me.Panel13.Controls.Add(Me.tblEqInsUnitRate)
+        Me.Panel13.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Panel13.ForeColor = System.Drawing.SystemColors.ControlText
+        Me.Panel13.Location = New System.Drawing.Point(3, 3)
+        Me.Panel13.Name = "Panel13"
+        Me.Panel13.Size = New System.Drawing.Size(359, 182)
+        Me.Panel13.TabIndex = 0
+        '
+        'tblEqInsUnitRate
+        '
+        Me.tblEqInsUnitRate.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
+        Me.tblEqInsUnitRate.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.tblEqInsUnitRate.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.idTypeEQIUR, Me.idThickEQIUR, Me.typeEQIUR, Me.ThickEQIUR, Me.laborProdEQIUR, Me.matRateEQIUR, Me.eqRateEQIUR})
+        Me.tblEqInsUnitRate.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.tblEqInsUnitRate.Location = New System.Drawing.Point(0, 0)
+        Me.tblEqInsUnitRate.Name = "tblEqInsUnitRate"
+        Me.tblEqInsUnitRate.Size = New System.Drawing.Size(359, 182)
+        Me.tblEqInsUnitRate.TabIndex = 0
+        '
+        'idTypeEQIUR
+        '
+        Me.idTypeEQIUR.HeaderText = "idTypeEQIUR"
+        Me.idTypeEQIUR.Name = "idTypeEQIUR"
+        Me.idTypeEQIUR.Visible = False
+        '
+        'idThickEQIUR
+        '
+        Me.idThickEQIUR.HeaderText = "idThickEQIUR"
+        Me.idThickEQIUR.Name = "idThickEQIUR"
+        Me.idThickEQIUR.Visible = False
+        '
+        'typeEQIUR
+        '
+        Me.typeEQIUR.HeaderText = "Type"
+        Me.typeEQIUR.Name = "typeEQIUR"
+        '
+        'ThickEQIUR
+        '
+        Me.ThickEQIUR.HeaderText = "Thick"
+        Me.ThickEQIUR.Name = "ThickEQIUR"
+        '
+        'laborProdEQIUR
+        '
+        Me.laborProdEQIUR.HeaderText = "Labor Prod."
+        Me.laborProdEQIUR.Name = "laborProdEQIUR"
+        '
+        'matRateEQIUR
+        '
+        Me.matRateEQIUR.HeaderText = "Mat. Rate"
+        Me.matRateEQIUR.Name = "matRateEQIUR"
+        '
+        'eqRateEQIUR
+        '
+        Me.eqRateEQIUR.HeaderText = "Eq. Rate"
+        Me.eqRateEQIUR.Name = "eqRateEQIUR"
+        '
         'TabPage5
         '
         Me.TabPage5.BackColor = System.Drawing.Color.FromArgb(CType(CType(83, Byte), Integer), CType(CType(93, Byte), Integer), CType(CType(102, Byte), Integer))
+        Me.TabPage5.Controls.Add(Me.TableLayoutPanel17)
         Me.TabPage5.Location = New System.Drawing.Point(4, 22)
         Me.TabPage5.Name = "TabPage5"
         Me.TabPage5.Size = New System.Drawing.Size(954, 213)
         Me.TabPage5.TabIndex = 4
         Me.TabPage5.Text = "INS Jackets Rates"
+        '
+        'TableLayoutPanel17
+        '
+        Me.TableLayoutPanel17.ColumnCount = 2
+        Me.TableLayoutPanel17.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
+        Me.TableLayoutPanel17.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
+        Me.TableLayoutPanel17.Controls.Add(Me.GroupBox12, 1, 0)
+        Me.TableLayoutPanel17.Controls.Add(Me.GroupBox13, 0, 0)
+        Me.TableLayoutPanel17.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.TableLayoutPanel17.Location = New System.Drawing.Point(0, 0)
+        Me.TableLayoutPanel17.Name = "TableLayoutPanel17"
+        Me.TableLayoutPanel17.RowCount = 1
+        Me.TableLayoutPanel17.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
+        Me.TableLayoutPanel17.Size = New System.Drawing.Size(954, 213)
+        Me.TableLayoutPanel17.TabIndex = 1
+        '
+        'GroupBox12
+        '
+        Me.GroupBox12.Controls.Add(Me.TableLayoutPanel18)
+        Me.GroupBox12.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.GroupBox12.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.GroupBox12.Location = New System.Drawing.Point(480, 3)
+        Me.GroupBox12.Name = "GroupBox12"
+        Me.GroupBox12.Size = New System.Drawing.Size(471, 207)
+        Me.GroupBox12.TabIndex = 1
+        Me.GroupBox12.TabStop = False
+        Me.GroupBox12.Text = "Piping"
+        '
+        'TableLayoutPanel18
+        '
+        Me.TableLayoutPanel18.ColumnCount = 2
+        Me.TableLayoutPanel18.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
+        Me.TableLayoutPanel18.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100.0!))
+        Me.TableLayoutPanel18.Controls.Add(Me.btnExcelJacketPp, 1, 0)
+        Me.TableLayoutPanel18.Controls.Add(Me.Panel15, 0, 0)
+        Me.TableLayoutPanel18.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.TableLayoutPanel18.Location = New System.Drawing.Point(3, 16)
+        Me.TableLayoutPanel18.Name = "TableLayoutPanel18"
+        Me.TableLayoutPanel18.RowCount = 1
+        Me.TableLayoutPanel18.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
+        Me.TableLayoutPanel18.Size = New System.Drawing.Size(465, 188)
+        Me.TableLayoutPanel18.TabIndex = 1
+        '
+        'btnExcelJacketPp
+        '
+        Me.btnExcelJacketPp.FlatAppearance.BorderSize = 0
+        Me.btnExcelJacketPp.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(59, Byte), Integer), CType(CType(69, Byte), Integer), CType(CType(79, Byte), Integer))
+        Me.btnExcelJacketPp.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnExcelJacketPp.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnExcelJacketPp.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.btnExcelJacketPp.Image = Global.AVT_TRAKING.My.Resources.Resources.excel
+        Me.btnExcelJacketPp.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnExcelJacketPp.Location = New System.Drawing.Point(368, 3)
+        Me.btnExcelJacketPp.Name = "btnExcelJacketPp"
+        Me.btnExcelJacketPp.Size = New System.Drawing.Size(94, 35)
+        Me.btnExcelJacketPp.TabIndex = 35
+        Me.btnExcelJacketPp.Text = "Upload"
+        Me.btnExcelJacketPp.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.btnExcelJacketPp.UseVisualStyleBackColor = True
+        '
+        'Panel15
+        '
+        Me.Panel15.Controls.Add(Me.tblJacketPp)
+        Me.Panel15.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Panel15.ForeColor = System.Drawing.SystemColors.ControlText
+        Me.Panel15.Location = New System.Drawing.Point(3, 3)
+        Me.Panel15.Name = "Panel15"
+        Me.Panel15.Size = New System.Drawing.Size(359, 182)
+        Me.Panel15.TabIndex = 0
+        '
+        'tblJacketPp
+        '
+        Me.tblJacketPp.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.tblJacketPp.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.idJacketPp, Me.JacketTypePp, Me.jacketNamePp, Me.laborProdJckPp, Me.matFactorJckPp, Me.eqFactorJckPp})
+        Me.tblJacketPp.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.tblJacketPp.Location = New System.Drawing.Point(0, 0)
+        Me.tblJacketPp.Name = "tblJacketPp"
+        Me.tblJacketPp.Size = New System.Drawing.Size(359, 182)
+        Me.tblJacketPp.TabIndex = 0
+        '
+        'idJacketPp
+        '
+        Me.idJacketPp.HeaderText = "idJacketPp"
+        Me.idJacketPp.Name = "idJacketPp"
+        Me.idJacketPp.Visible = False
+        '
+        'JacketTypePp
+        '
+        Me.JacketTypePp.HeaderText = "Jacket Type"
+        Me.JacketTypePp.Name = "JacketTypePp"
+        '
+        'jacketNamePp
+        '
+        Me.jacketNamePp.HeaderText = "Jacket Name"
+        Me.jacketNamePp.Name = "jacketNamePp"
+        '
+        'laborProdJckPp
+        '
+        Me.laborProdJckPp.HeaderText = "Labor Prod."
+        Me.laborProdJckPp.Name = "laborProdJckPp"
+        '
+        'matFactorJckPp
+        '
+        Me.matFactorJckPp.HeaderText = "Mat. Factor"
+        Me.matFactorJckPp.Name = "matFactorJckPp"
+        '
+        'eqFactorJckPp
+        '
+        Me.eqFactorJckPp.HeaderText = "Eq. Factor"
+        Me.eqFactorJckPp.Name = "eqFactorJckPp"
+        '
+        'GroupBox13
+        '
+        Me.GroupBox13.Controls.Add(Me.TableLayoutPanel19)
+        Me.GroupBox13.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.GroupBox13.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.GroupBox13.Location = New System.Drawing.Point(3, 3)
+        Me.GroupBox13.Name = "GroupBox13"
+        Me.GroupBox13.Size = New System.Drawing.Size(471, 207)
+        Me.GroupBox13.TabIndex = 0
+        Me.GroupBox13.TabStop = False
+        Me.GroupBox13.Text = "Equipment"
+        '
+        'TableLayoutPanel19
+        '
+        Me.TableLayoutPanel19.ColumnCount = 2
+        Me.TableLayoutPanel19.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
+        Me.TableLayoutPanel19.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100.0!))
+        Me.TableLayoutPanel19.Controls.Add(Me.btnExcelJacketEq, 1, 0)
+        Me.TableLayoutPanel19.Controls.Add(Me.Panel16, 0, 0)
+        Me.TableLayoutPanel19.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.TableLayoutPanel19.Location = New System.Drawing.Point(3, 16)
+        Me.TableLayoutPanel19.Name = "TableLayoutPanel19"
+        Me.TableLayoutPanel19.RowCount = 1
+        Me.TableLayoutPanel19.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
+        Me.TableLayoutPanel19.Size = New System.Drawing.Size(465, 188)
+        Me.TableLayoutPanel19.TabIndex = 0
+        '
+        'btnExcelJacketEq
+        '
+        Me.btnExcelJacketEq.FlatAppearance.BorderSize = 0
+        Me.btnExcelJacketEq.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(59, Byte), Integer), CType(CType(69, Byte), Integer), CType(CType(79, Byte), Integer))
+        Me.btnExcelJacketEq.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnExcelJacketEq.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnExcelJacketEq.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.btnExcelJacketEq.Image = Global.AVT_TRAKING.My.Resources.Resources.excel
+        Me.btnExcelJacketEq.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnExcelJacketEq.Location = New System.Drawing.Point(368, 3)
+        Me.btnExcelJacketEq.Name = "btnExcelJacketEq"
+        Me.btnExcelJacketEq.Size = New System.Drawing.Size(94, 35)
+        Me.btnExcelJacketEq.TabIndex = 35
+        Me.btnExcelJacketEq.Text = "Upload"
+        Me.btnExcelJacketEq.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.btnExcelJacketEq.UseVisualStyleBackColor = True
+        '
+        'Panel16
+        '
+        Me.Panel16.Controls.Add(Me.tblJacketEq)
+        Me.Panel16.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Panel16.ForeColor = System.Drawing.SystemColors.ControlText
+        Me.Panel16.Location = New System.Drawing.Point(3, 3)
+        Me.Panel16.Name = "Panel16"
+        Me.Panel16.Size = New System.Drawing.Size(359, 182)
+        Me.Panel16.TabIndex = 0
+        '
+        'tblJacketEq
+        '
+        Me.tblJacketEq.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.tblJacketEq.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.idJacket, Me.JacketType, Me.jacketName, Me.laborProdJckEq, Me.matFactorJckEq, Me.eqFactorJckEq})
+        Me.tblJacketEq.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.tblJacketEq.Location = New System.Drawing.Point(0, 0)
+        Me.tblJacketEq.Name = "tblJacketEq"
+        Me.tblJacketEq.Size = New System.Drawing.Size(359, 182)
+        Me.tblJacketEq.TabIndex = 0
+        '
+        'idJacket
+        '
+        Me.idJacket.HeaderText = "idJacket"
+        Me.idJacket.Name = "idJacket"
+        Me.idJacket.Visible = False
+        '
+        'JacketType
+        '
+        Me.JacketType.HeaderText = "Jacket Type"
+        Me.JacketType.Name = "JacketType"
+        '
+        'jacketName
+        '
+        Me.jacketName.HeaderText = "Jacket Name"
+        Me.jacketName.Name = "jacketName"
+        '
+        'laborProdJckEq
+        '
+        Me.laborProdJckEq.HeaderText = "Labor Prod."
+        Me.laborProdJckEq.Name = "laborProdJckEq"
+        '
+        'matFactorJckEq
+        '
+        Me.matFactorJckEq.HeaderText = "Mat. Factor"
+        Me.matFactorJckEq.Name = "matFactorJckEq"
+        '
+        'eqFactorJckEq
+        '
+        Me.eqFactorJckEq.HeaderText = "Eq. Factor"
+        Me.eqFactorJckEq.Name = "eqFactorJckEq"
         '
         'TabPage6
         '
@@ -1523,6 +2030,26 @@ Partial Class Factors
         Me.TableLayoutPanel8.ResumeLayout(False)
         Me.Panel12.ResumeLayout(False)
         CType(Me.tblEnviroment, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.TabPage4.ResumeLayout(False)
+        Me.TableLayoutPanel14.ResumeLayout(False)
+        Me.GroupBox11.ResumeLayout(False)
+        Me.TableLayoutPanel16.ResumeLayout(False)
+        Me.Panel14.ResumeLayout(False)
+        CType(Me.tblPpInsUnitRate, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.GroupBox10.ResumeLayout(False)
+        Me.TableLayoutPanel15.ResumeLayout(False)
+        Me.Panel13.ResumeLayout(False)
+        CType(Me.tblEqInsUnitRate, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.TabPage5.ResumeLayout(False)
+        Me.TableLayoutPanel17.ResumeLayout(False)
+        Me.GroupBox12.ResumeLayout(False)
+        Me.TableLayoutPanel18.ResumeLayout(False)
+        Me.Panel15.ResumeLayout(False)
+        CType(Me.tblJacketPp, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.GroupBox13.ResumeLayout(False)
+        Me.TableLayoutPanel19.ResumeLayout(False)
+        Me.Panel16.ResumeLayout(False)
+        CType(Me.tblJacketEq, System.ComponentModel.ISupportInitialize).EndInit()
         Me.TabPage6.ResumeLayout(False)
         Me.TableLayoutPanel11.ResumeLayout(False)
         Me.GroupBox9.ResumeLayout(False)
@@ -1680,4 +2207,54 @@ Partial Class Factors
     Friend WithEvents laborProdPP As DataGridViewTextBoxColumn
     Friend WithEvents matRatePP As DataGridViewTextBoxColumn
     Friend WithEvents eqRatePP As DataGridViewTextBoxColumn
+    Friend WithEvents TableLayoutPanel14 As TableLayoutPanel
+    Friend WithEvents GroupBox11 As GroupBox
+    Friend WithEvents TableLayoutPanel16 As TableLayoutPanel
+    Friend WithEvents btnExcelUpdatePpInsUR As Button
+    Friend WithEvents Panel14 As Panel
+    Friend WithEvents tblPpInsUnitRate As DataGridView
+    Friend WithEvents GroupBox10 As GroupBox
+    Friend WithEvents TableLayoutPanel15 As TableLayoutPanel
+    Friend WithEvents btnExcelUpdateEqInsUR As Button
+    Friend WithEvents Panel13 As Panel
+    Friend WithEvents tblEqInsUnitRate As DataGridView
+    Friend WithEvents TableLayoutPanel17 As TableLayoutPanel
+    Friend WithEvents GroupBox12 As GroupBox
+    Friend WithEvents TableLayoutPanel18 As TableLayoutPanel
+    Friend WithEvents btnExcelJacketPp As Button
+    Friend WithEvents Panel15 As Panel
+    Friend WithEvents tblJacketPp As DataGridView
+    Friend WithEvents GroupBox13 As GroupBox
+    Friend WithEvents TableLayoutPanel19 As TableLayoutPanel
+    Friend WithEvents btnExcelJacketEq As Button
+    Friend WithEvents Panel16 As Panel
+    Friend WithEvents tblJacketEq As DataGridView
+    Friend WithEvents idJacket As DataGridViewTextBoxColumn
+    Friend WithEvents JacketType As DataGridViewTextBoxColumn
+    Friend WithEvents jacketName As DataGridViewTextBoxColumn
+    Friend WithEvents laborProdJckEq As DataGridViewTextBoxColumn
+    Friend WithEvents matFactorJckEq As DataGridViewTextBoxColumn
+    Friend WithEvents eqFactorJckEq As DataGridViewTextBoxColumn
+    Friend WithEvents idJacketPp As DataGridViewTextBoxColumn
+    Friend WithEvents JacketTypePp As DataGridViewTextBoxColumn
+    Friend WithEvents jacketNamePp As DataGridViewTextBoxColumn
+    Friend WithEvents laborProdJckPp As DataGridViewTextBoxColumn
+    Friend WithEvents matFactorJckPp As DataGridViewTextBoxColumn
+    Friend WithEvents eqFactorJckPp As DataGridViewTextBoxColumn
+    Friend WithEvents idSizePpIUR As DataGridViewTextBoxColumn
+    Friend WithEvents idTypePpIUR As DataGridViewTextBoxColumn
+    Friend WithEvents idThickPpIUR As DataGridViewTextBoxColumn
+    Friend WithEvents SizePpIUR As DataGridViewTextBoxColumn
+    Friend WithEvents typePpIUR As DataGridViewTextBoxColumn
+    Friend WithEvents thickPpIUR As DataGridViewTextBoxColumn
+    Friend WithEvents laborProdPpIUR As DataGridViewTextBoxColumn
+    Friend WithEvents matRatePpIUR As DataGridViewTextBoxColumn
+    Friend WithEvents eqRatePpIUR As DataGridViewTextBoxColumn
+    Friend WithEvents idTypeEQIUR As DataGridViewTextBoxColumn
+    Friend WithEvents idThickEQIUR As DataGridViewTextBoxColumn
+    Friend WithEvents typeEQIUR As DataGridViewTextBoxColumn
+    Friend WithEvents ThickEQIUR As DataGridViewTextBoxColumn
+    Friend WithEvents laborProdEQIUR As DataGridViewTextBoxColumn
+    Friend WithEvents matRateEQIUR As DataGridViewTextBoxColumn
+    Friend WithEvents eqRateEQIUR As DataGridViewTextBoxColumn
 End Class

@@ -123,6 +123,35 @@ Public Class MetodosFactor
             desconectar()
         End Try
     End Function
+    Public Function llenarComboLaporRate(ByVal cmb As ComboBox) As Data.DataTable
+        Try
+            conectar()
+            Dim cmd As New SqlCommand("select idLaborRate,insRate,abatRate,paintRate, scafRate from laborRate", conn)
+            Dim dt As New Data.DataTable
+            dt.Columns.Add("idLaborRate")
+            dt.Columns.Add("insRate")
+            dt.Columns.Add("abatRate")
+            dt.Columns.Add("paintRate")
+            dt.Columns.Add("scafRate")
+            Dim dr As SqlDataReader = cmd.ExecuteReader()
+            Dim item As String = If(cmb.SelectedItem Is Nothing, "", cmb.SelectedItem.ToString())
+            cmb.Items.Clear()
+            While dr.Read()
+                cmb.Items.Add(dr("idLaborRate"))
+                dt.Rows.Add(dr("idLaborRate"), dr("insRate"), dr("abatRate"), dr("paintRate"), dr("scafRate"))
+            End While
+            If item <> "" Then
+                cmb.SelectedItem = cmb.Items(cmb.FindString(item))
+            End If
+            dr.Close()
+            Return dt
+        Catch ex As Exception
+            MsgBox(ex.Message())
+            Return Nothing
+        Finally
+            desconectar()
+        End Try
+    End Function
     '=====================================================================================================================================================================
     '=========== MOTODOS UNITS RATES =====================================================================================================================================
     '=====================================================================================================================================================================
@@ -497,6 +526,46 @@ Public Class MetodosFactor
             desconectar()
         End Try
     End Function
+    Public Function llenarComboInsFitting(ByVal cmb As ComboBox) As Data.DataTable
+        Try
+            conectar()
+            Dim cmd As New SqlCommand("select [type] as 'idType', [type],support,p90,p45,bend,tee,red,cap,flangePair,flangeVlv,controlVlv,weldedVlv,bebel,cutOut from insFitting", conn)
+            Dim dt As New Data.DataTable
+            dt.Columns.Add("type")
+            dt.Columns.Add("support")
+            dt.Columns.Add("p90")
+            dt.Columns.Add("p45")
+            dt.Columns.Add("bend")
+            dt.Columns.Add("tee")
+            dt.Columns.Add("red")
+            dt.Columns.Add("cap")
+            dt.Columns.Add("flangePair")
+            dt.Columns.Add("flangeVlv")
+            dt.Columns.Add("controlVlv")
+            dt.Columns.Add("weldedVlv")
+            dt.Columns.Add("bebel")
+            dt.Columns.Add("cutOut")
+            Dim dr As SqlDataReader = cmd.ExecuteReader()
+            Dim item As String = If(cmb.SelectedItem Is Nothing, "", cmb.SelectedItem.ToString())
+            cmb.Items.Clear()
+            While dr.Read()
+                If cmb.FindString(dr("type")) > -1 Then
+                    cmb.Items.Add(dr("type"))
+                End If
+                dt.Rows.Add(dr("type"), dr("support"), dr("p90"), dr("p45"), dr("bend"), dr("tee"), dr("red"), dr("cap"), dr("flangePair"), dr("flangeVlv"), dr("controlVlv"), dr("weldedVlv"), dr("bebel"), dr("cutOut"))
+            End While
+            If item <> "" Then
+                cmb.SelectedItem = cmb.Items(cmb.FindString(item))
+            End If
+            dr.Close()
+            Return dt
+        Catch ex As Exception
+            MsgBox(ex.Message())
+            Return Nothing
+        Finally
+            desconectar()
+        End Try
+    End Function
 
     '=====================================================================================================================================================================
     '=========== METODOS PNTFITTING ======================================================================================================================================
@@ -743,6 +812,37 @@ end"
             desconectar()
         End Try
     End Function
+    Public Function llenarComboEqPntUnitRate(ByVal cmb As ComboBox) As Data.DataTable
+        Try
+            conectar()
+            Dim cmd As New SqlCommand("select systemPntEq,pntOption,laborProd,matRate,eqRate from eqPaintUnitRate", conn)
+            Dim dt As New Data.DataTable
+            dt.Columns.Add("systemPntEq")
+            dt.Columns.Add("pntOption")
+            dt.Columns.Add("laborProd")
+            dt.Columns.Add("matRate")
+            dt.Columns.Add("eqRate")
+            Dim dr As SqlDataReader = cmd.ExecuteReader()
+            Dim item As String = If(cmb.SelectedItem Is Nothing, "", cmb.SelectedItem.ToString())
+            cmb.Items.Clear()
+            While dr.Read()
+                If cmb.FindString(CStr(dr("systemPntEq"))) = -1 Then
+                    cmb.Items.Add(dr("systemPntEq"))
+                End If
+                dt.Rows.Add(dr("systemPntEq"), dr("pntOption"), dr("laborProd"), dr("matRate"), dr("eqRate"))
+            End While
+            dr.Close()
+            If item <> "" Then
+                cmb.SelectedItem = cmb.Items(cmb.FindString(item))
+            End If
+            Return dt
+        Catch ex As Exception
+            MsgBox(ex.Message())
+            Return Nothing
+        Finally
+            desconectar()
+        End Try
+    End Function
     '=====================================================================================================================================================================
     '=========== METODOS EQUIPMENTPAINTUNITRATE ==========================================================================================================================
     '=====================================================================================================================================================================
@@ -865,6 +965,583 @@ end"
             desconectar()
         End Try
     End Function
-
+    '=====================================================================================================================================================================
+    '=========== METODOS EQUIPMENTJACKETUNITRATE =========================================================================================================================
+    '=====================================================================================================================================================================
+    Public Function selectEqJacketunitRate(ByVal tbl As DataGridView) As Boolean
+        Try
+            conectar()
+            Dim cmd As New SqlCommand("select idJacket,name,laborProd,matFactor,eqFactor from eqJktUnitRate", conn)
+            Dim dr As SqlDataReader = cmd.ExecuteReader()
+            tbl.Rows.Clear()
+            While dr.Read()
+                tbl.Rows.Add(dr("idJacket"), dr("idJacket"), dr("name"), dr("laborProd"), dr("matFactor"), dr("eqFactor"))
+            End While
+            Return True
+        Catch ex As Exception
+            MsgBox(ex.Message)
+            Return False
+        Finally
+            desconectar()
+        End Try
+    End Function
+    Public Function saveUpdateEqJacketUnitRate(ByVal tbl As DataGridView) As Boolean
+        conectar()
+        Dim tran As SqlTransaction
+        tran = conn.BeginTransaction
+        Try
+            Dim flag As Boolean = True
+            For Each row As DataGridViewRow In tbl.SelectedRows()
+                Dim cmd As New SqlCommand
+                If (row.Cells("idJacket").Value Is Nothing Or row.Cells("idJacket").Value = "") Then
+                    cmd.CommandText = "if (select count (*) from eqJktUnitRate where idJacket = '" + row.Cells("JacketType").Value.ToString() + "')=0
+                        begin
+	                        insert into eqJktUnitRate values('" + row.Cells("JacketType").Value.ToString() + "','" + row.Cells("jacketName").Value.ToString() + "'," + row.Cells("laborProdJckEq").Value.ToString() + "," + row.Cells("matFactorJckEq").Value.ToString() + "," + row.Cells("eqFactorJckEq").Value.ToString() + ")
+                        end"
+                Else
+                    cmd.CommandText = "if(select count(*) from eqJktUnitRate where idJacket='" + row.Cells("idJacket").Value.ToString() + "')=1
+                        begin 
+	                        update eqJktUnitRate set idJacket='" + row.Cells("JacketType").Value.ToString() + "' ,name='" + row.Cells("jacketName").Value.ToString() + "',laborProd=" + row.Cells("laborProdJckEq").Value.ToString() + ",matFactor=" + row.Cells("matFactorJckEq").Value.ToString() + ",eqFactor=" + row.Cells("eqFactorJckEq").Value.ToString() + " where idJacket='" + row.Cells("idJacket").Value.ToString() + "'
+                        end"
+                End If
+                cmd.Connection = conn
+                cmd.Transaction = tran
+                If cmd.ExecuteNonQuery > 0 Then
+                    flag = True
+                Else
+                    flag = False
+                    Exit For
+                End If
+            Next
+            If flag Then
+                tran.Commit()
+                Return True
+            Else
+                tran.Rollback()
+                Return False
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message())
+            Return False
+        Finally
+            desconectar()
+        End Try
+    End Function
+    Public Function deleteEqJacketUnitRate(ByVal tbl As DataGridView) As Boolean
+        conectar()
+        Dim tran As SqlTransaction
+        tran = conn.BeginTransaction
+        Try
+            Dim flag As Boolean = True
+            For Each row As DataGridViewRow In tbl.SelectedRows()
+                If (row.Cells("idJacket").Value IsNot Nothing Or row.Cells("idJacket").Value = "") Then
+                    Dim cmd As New SqlCommand("delete eqJktUnitRate where idJacket='" + row.Cells("idJacket").Value.ToString() + "'", conn)
+                    cmd.Transaction = tran
+                    If cmd.ExecuteNonQuery > 0 Then
+                        flag = True
+                    Else
+                        flag = False
+                        Exit For
+                    End If
+                Else
+                    flag = True
+                End If
+            Next
+            If flag Then
+                tran.Commit()
+                Return True
+            Else
+                tran.Rollback()
+                Return False
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message)
+            Return False
+        Finally
+            desconectar()
+        End Try
+    End Function
+    Public Function llenarComboCellEqJacketUnitRate(ByVal cmb As DataGridViewComboBoxCell) As Data.DataTable
+        Try
+            conectar()
+            Dim cmd As New SqlCommand("select idJacket,name,laborProd,matFactor,eqFactor from eqJktUnitRate", conn)
+            Dim dt As New Data.DataTable
+            dt.Columns.Add("idJacket")
+            dt.Columns.Add("name")
+            dt.Columns.Add("laborProd")
+            dt.Columns.Add("matFactor")
+            dt.Columns.Add("eqFactor")
+            Dim dr As SqlDataReader = cmd.ExecuteReader()
+            cmb.Items.Clear()
+            While dr.Read()
+                cmb.Items.Add(dr("idJacket") + "|" + dr("name"))
+                dt.Rows.Add(dr("idJacket"), dr("name"), dr("labroProd"), dr("matFactor"), dr("eqFactor"))
+            End While
+            dr.Close()
+            Return dt
+        Catch ex As Exception
+            MsgBox(ex.Message())
+            Return Nothing
+        Finally
+            desconectar()
+        End Try
+    End Function
+    Public Function llenarComboEqJacketUnitRate(ByVal cmb As ComboBox) As Data.DataTable
+        Try
+            conectar()
+            Dim cmd As New SqlCommand("select idJacket,name,laborProd,matFactor,eqFactor from eqJktUnitRate", conn)
+            Dim dt As New Data.DataTable
+            dt.Columns.Add("idJacket")
+            dt.Columns.Add("name")
+            dt.Columns.Add("laborProd")
+            dt.Columns.Add("matFactor")
+            dt.Columns.Add("eqFactor")
+            Dim dr As SqlDataReader = cmd.ExecuteReader()
+            Dim item As String = If(cmb.SelectedItem Is Nothing, "", cmb.SelectedItem.ToString())
+            cmb.Items.Clear()
+            While dr.Read()
+                If cmb.FindString(dr("idJacket")) = -1 Then
+                    cmb.Items.Add(dr("idJacket"))
+                End If
+                dt.Rows.Add(dr("idJacket"), dr("name"), dr("laborProd"), dr("matFactor"), dr("eqFactor"))
+            End While
+            dr.Close()
+            If item <> "" Then
+                cmb.SelectedItem = cmb.Items(cmb.FindString(item))
+            End If
+            Return dt
+        Catch ex As Exception
+            MsgBox(ex.Message())
+            Return Nothing
+        Finally
+            desconectar()
+        End Try
+    End Function
+    '=====================================================================================================================================================================
+    '=========== METODOS PINPINGJACKETUNITRATE ===========================================================================================================================
+    '=====================================================================================================================================================================
+    Public Function selectPpJacketunitRate(ByVal tbl As DataGridView) As Boolean
+        Try
+            conectar()
+            Dim cmd As New SqlCommand("select idJacket,name,laborProd,matFactor,eqFactor from ppJktUnitRate", conn)
+            Dim dr As SqlDataReader = cmd.ExecuteReader()
+            tbl.Rows.Clear()
+            While dr.Read()
+                tbl.Rows.Add(dr("idJacket"), dr("idJacket"), dr("name"), dr("laborProd"), dr("matFactor"), dr("eqFactor"))
+            End While
+            Return True
+        Catch ex As Exception
+            MsgBox(ex.Message)
+            Return False
+        Finally
+            desconectar()
+        End Try
+    End Function
+    Public Function saveUpdatePpJacketUnitRate(ByVal tbl As DataGridView) As Boolean
+        conectar()
+        Dim tran As SqlTransaction
+        tran = conn.BeginTransaction
+        Try
+            Dim flag As Boolean = True
+            For Each row As DataGridViewRow In tbl.SelectedRows()
+                Dim cmd As New SqlCommand
+                If (row.Cells("idJacketPp").Value Is Nothing Or row.Cells("idJacketPp").Value = "") Then
+                    cmd.CommandText = "if (select count (*) from ppJktUnitRate where idJacket = '" + row.Cells("JacketTypePp").Value.ToString() + "')=0
+                        begin
+	                        insert into ppJktUnitRate values('" + row.Cells("JacketTypePp").Value.ToString() + "','" + row.Cells("jacketNamePp").Value.ToString() + "'," + row.Cells("laborProdJckPp").Value.ToString() + "," + row.Cells("matFactorJckPp").Value.ToString() + "," + row.Cells("eqFactorJckPp").Value.ToString() + ")
+                        end"
+                Else
+                    cmd.CommandText = "if(select count(*) from eqJktUnitRate where idJacket='" + row.Cells("idJacketPp").Value.ToString() + "')=1
+                        begin 
+	                        update eqJktUnitRate set idJacket='" + row.Cells("JacketTypePp").Value.ToString() + "' ,name='" + row.Cells("jacketNamePp").Value.ToString() + "',laborProd=" + row.Cells("laborProdJckPp").Value.ToString() + ",matFactor=" + row.Cells("matFactorJckPp").Value.ToString() + ",eqFactor=" + row.Cells("eqFactorJckPp").Value.ToString() + " where idJacket='" + row.Cells("idJacketPp").Value.ToString() + "'
+                        end"
+                End If
+                cmd.Connection = conn
+                cmd.Transaction = tran
+                If cmd.ExecuteNonQuery > 0 Then
+                    flag = True
+                Else
+                    flag = False
+                    Exit For
+                End If
+            Next
+            If flag Then
+                tran.Commit()
+                Return True
+            Else
+                tran.Rollback()
+                Return False
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message())
+            Return False
+        Finally
+            desconectar()
+        End Try
+    End Function
+    Public Function deletePpJacketUnitRate(ByVal tbl As DataGridView) As Boolean
+        conectar()
+        Dim tran As SqlTransaction
+        tran = conn.BeginTransaction
+        Try
+            Dim flag As Boolean = True
+            For Each row As DataGridViewRow In tbl.SelectedRows()
+                If (row.Cells("idJacketPp").Value IsNot Nothing Or row.Cells("idJacketPp").Value = "") Then
+                    Dim cmd As New SqlCommand("delete ppJktUnitRate where idJacket='" + row.Cells("idJacketPp").Value.ToString() + "'", conn)
+                    cmd.Transaction = tran
+                    If cmd.ExecuteNonQuery > 0 Then
+                        flag = True
+                    Else
+                        flag = False
+                        Exit For
+                    End If
+                Else
+                    flag = True
+                End If
+            Next
+            If flag Then
+                tran.Commit()
+                Return True
+            Else
+                tran.Rollback()
+                Return False
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message)
+            Return False
+        Finally
+            desconectar()
+        End Try
+    End Function
+    Public Function llenarComboCellPpJacketUnitRate(ByVal cmb As DataGridViewComboBoxCell) As Data.DataTable
+        Try
+            conectar()
+            Dim cmd As New SqlCommand("select idJacket,name,laborProd,matFactor,eqFactor from ppJktUnitRate", conn)
+            Dim dt As New Data.DataTable
+            dt.Columns.Add("idJacket")
+            dt.Columns.Add("name")
+            dt.Columns.Add("laborProd")
+            dt.Columns.Add("matFactor")
+            dt.Columns.Add("eqFactor")
+            Dim dr As SqlDataReader = cmd.ExecuteReader()
+            cmb.Items.Clear()
+            While dr.Read()
+                cmb.Items.Add(dr("idJacket") + "|" + dr("name"))
+                dt.Rows.Add(dr("idJacket"), dr("name"), dr("laborProd"), dr("matFactor"), dr("eqFactor"))
+            End While
+            dr.Close()
+            Return dt
+        Catch ex As Exception
+            MsgBox(ex.Message())
+            Return Nothing
+        Finally
+            desconectar()
+        End Try
+    End Function
+    Public Function llenarComboPpJacketUnitRate(ByVal cmb As ComboBox) As Data.DataTable
+        Try
+            conectar()
+            Dim cmd As New SqlCommand("select idJacket,name,laborProd,matFactor,eqFactor from ppJktUnitRate", conn)
+            Dim dt As New Data.DataTable
+            dt.Columns.Add("idJacket")
+            dt.Columns.Add("name")
+            dt.Columns.Add("laborProd")
+            dt.Columns.Add("matFactor")
+            dt.Columns.Add("eqFactor")
+            Dim dr As SqlDataReader = cmd.ExecuteReader()
+            Dim item As String = If(cmb.SelectedItem Is Nothing, "", cmb.SelectedItem.ToString())
+            cmb.Items.Clear()
+            While dr.Read()
+                If cmb.FindString(dr("idJacket") + "|" + dr("name")) = -1 Then
+                    cmb.Items.Add(dr("idJacket") + "|" + dr("name"))
+                End If
+                dt.Rows.Add(dr("idJacket"), dr("name"), dr("laborProd"), dr("matFactor"), dr("eqFactor"))
+            End While
+            dr.Close()
+            If item <> "" Then
+                cmb.SelectedItem = cmb.Items(cmb.FindString(item))
+            End If
+            Return dt
+        Catch ex As Exception
+            MsgBox(ex.Message())
+            Return Nothing
+        Finally
+            desconectar()
+        End Try
+    End Function
+    '=====================================================================================================================================================================
+    '=========== METODOS EQUIPMENT INSULATION UNIT RATE ==================================================================================================================
+    '=====================================================================================================================================================================
+    Public Function selectEqInsUnitRate(ByVal tbl As DataGridView) As Boolean
+        Try
+            conectar()
+            Dim cmd As New SqlCommand("select [type],thick,laborProd,matRate,eqRate from eqInsUnitRate", conn)
+            Dim dr As SqlDataReader = cmd.ExecuteReader()
+            tbl.Rows.Clear()
+            While dr.Read()
+                tbl.Rows.Add(dr("type"), dr("thick"), dr("type"), dr("thick"), dr("laborProd"), dr("matRate"), dr("eqRate"))
+            End While
+            Return True
+        Catch ex As Exception
+            MsgBox(ex.Message)
+            Return False
+        Finally
+            desconectar()
+        End Try
+    End Function
+    Public Function saveUpdateEqInsUnitRate(ByVal tbl As DataGridView) As Boolean
+        conectar()
+        Dim tran As SqlTransaction
+        tran = conn.BeginTransaction
+        Try
+            Dim flag As Boolean = True
+            For Each row As DataGridViewRow In tbl.SelectedRows()
+                Dim cmd As New SqlCommand
+                If (row.Cells("idTypeEQIUR").Value Is Nothing Or If(row.Cells("idTypeEQIUR").Value Is Nothing, "", row.Cells("idTypeEQIUR").Value.ToString()) = "") And (row.Cells("idThickEQIUR").Value Is Nothing Or If(row.Cells("idThickEQIUR").Value Is Nothing, "", row.Cells("idThickEQIUR").Value.ToString()) = "") Then
+                    cmd.CommandText = "if (select count (*) from eqInsUnitRate where [type] = '" + row.Cells("typeEQIUR").Value.ToString() + "' and thick=" + row.Cells("ThickEQIUR").Value.ToString() + ")=0
+                        begin
+	                        insert into eqInsUnitRate values('" + row.Cells("typeEQIUR").Value.ToString() + "'," + row.Cells("ThickEQIUR").Value.ToString() + "," + row.Cells("laborProdEQIUR").Value.ToString() + "," + row.Cells("matRateEQIUR").Value.ToString() + "," + row.Cells("eqRateEQIUR").Value.ToString() + ")
+                        end"
+                Else
+                    cmd.CommandText = "if(select count(*) from eqInsUnitRate where [type]='" + row.Cells("idTypeEQIUR").Value.ToString() + "' and thick = " + row.Cells("idThickEQIUR").Value.ToString() + ")=1
+                        begin 
+	                        update eqInsUnitRate set [type]='" + row.Cells("typeEQIUR").Value.ToString() + "' ,thick=" + row.Cells("ThickEQIUR").Value.ToString() + ",laborProd=" + row.Cells("laborProdEQIUR").Value.ToString() + ",matRate=" + row.Cells("matRateEQIUR").Value.ToString() + ",eqRate=" + row.Cells("eqRateEQIUR").Value.ToString() + " where [type]='" + row.Cells("idTypeEQIUR").Value.ToString() + "' and thick = " + row.Cells("idThickEQIUR").Value.ToString() + "
+                        end"
+                End If
+                cmd.Connection = conn
+                cmd.Transaction = tran
+                If cmd.ExecuteNonQuery > 0 Then
+                    flag = True
+                Else
+                    flag = False
+                    Exit For
+                End If
+            Next
+            If flag Then
+                tran.Commit()
+                Return True
+            Else
+                tran.Rollback()
+                Return False
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message())
+            Return False
+        Finally
+            desconectar()
+        End Try
+    End Function
+    Public Function deleteEqInsUnitRate(ByVal tbl As DataGridView) As Boolean
+        conectar()
+        Dim tran As SqlTransaction
+        tran = conn.BeginTransaction
+        Try
+            Dim flag As Boolean = True
+            For Each row As DataGridViewRow In tbl.SelectedRows()
+                If (row.Cells("idTypeEQIUR").Value IsNot Nothing Or If(row.Cells("idTypeEQIUR").Value Is Nothing, "", row.Cells("idTypeEQIUR").Value.ToString()) = "") And (row.Cells("idThickEQIUR").Value IsNot Nothing Or If(row.Cells("idThickEQIUR").Value Is Nothing, "", row.Cells("idThickEQIUR").Value.ToString) = "") Then
+                    Dim cmd As New SqlCommand("delete eqInsUnitRate where [type]='" + row.Cells("idTypeEQIUR").Value.ToString() + "' and thick = " + row.Cells("idThickEQIUR").Value.ToString() + "", conn)
+                    cmd.Transaction = tran
+                    If cmd.ExecuteNonQuery > 0 Then
+                        flag = True
+                    Else
+                        flag = False
+                        Exit For
+                    End If
+                Else
+                    flag = True
+                End If
+            Next
+            If flag Then
+                tran.Commit()
+                Return True
+            Else
+                tran.Rollback()
+                Return False
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message)
+            Return False
+        Finally
+            desconectar()
+        End Try
+    End Function
+    Public Function llenarComboCellEqInsUnitRate(ByVal cmb As DataGridViewComboBoxCell) As Data.DataTable
+        Try
+            conectar()
+            Dim cmd As New SqlCommand("select [type],thick,laborProd,matRate,eqRate from eqInsUnitRate", conn)
+            Dim dt As New Data.DataTable
+            dt.Columns.Add("type")
+            dt.Columns.Add("thick")
+            dt.Columns.Add("laborProd")
+            dt.Columns.Add("matRate")
+            dt.Columns.Add("eqRate")
+            Dim dr As SqlDataReader = cmd.ExecuteReader()
+            cmb.Items.Clear()
+            While dr.Read()
+                cmb.Items.Add(dr("type") + "|" + dr("thick"))
+                dt.Rows.Add(dr("type"), dr("thick"), dr("laborProd"), dr("matRate"), dr("eqRate"))
+            End While
+            dr.Close()
+            Return dt
+        Catch ex As Exception
+            MsgBox(ex.Message())
+            Return Nothing
+        Finally
+            desconectar()
+        End Try
+    End Function
+    Public Function llenarComboEqInsUnitRate(ByVal cmb As ComboBox) As Data.DataTable
+        Try
+            conectar()
+            Dim cmd As New SqlCommand("select [type],thick,laborProd,matRate,eqRate from eqInsUnitRate", conn)
+            Dim dt As New Data.DataTable
+            dt.Columns.Add("type")
+            dt.Columns.Add("thick")
+            dt.Columns.Add("laborProd")
+            dt.Columns.Add("matRate")
+            dt.Columns.Add("eqRate")
+            Dim dr As SqlDataReader = cmd.ExecuteReader()
+            Dim item As String = If(cmb.SelectedItem Is Nothing, "", cmb.SelectedItem.ToString())
+            cmb.Items.Clear()
+            While dr.Read()
+                If cmb.FindString(dr("type")) = -1 Then
+                    cmb.Items.Add(dr("type"))
+                End If
+                dt.Rows.Add(dr("type"), dr("thick"), dr("laborProd"), dr("matRate"), dr("eqRate"))
+            End While
+            If item <> "" Then
+                cmb.SelectedItem = cmb.Items(cmb.FindString(item))
+            End If
+            dr.Close()
+            Return dt
+        Catch ex As Exception
+            MsgBox(ex.Message())
+            Return Nothing
+        Finally
+            desconectar()
+        End Try
+    End Function
+    '=====================================================================================================================================================================
+    '=========== METODOS PIPING INSULATION UNIT RATE =====================================================================================================================
+    '=====================================================================================================================================================================
+    Public Function selectPpInsUnitRate(ByVal tbl As DataGridView) As Boolean
+        Try
+            conectar()
+            Dim cmd As New SqlCommand("select size,[type],thick,laborProd,matRate,eqRate from ppInsUnitRate", conn)
+            Dim dr As SqlDataReader = cmd.ExecuteReader()
+            tbl.Rows.Clear()
+            While dr.Read()
+                tbl.Rows.Add(dr("size"), dr("type"), dr("thick"), dr("size"), dr("type"), dr("thick"), dr("laborProd"), dr("matRate"), dr("eqRate"))
+            End While
+            Return True
+        Catch ex As Exception
+            MsgBox(ex.Message)
+            Return False
+        Finally
+            desconectar()
+        End Try
+    End Function
+    Public Function saveUpdatePpInsUnitRate(ByVal tbl As DataGridView) As Boolean
+        conectar()
+        Dim tran As SqlTransaction
+        tran = conn.BeginTransaction
+        Try
+            Dim flag As Boolean = True
+            For Each row As DataGridViewRow In tbl.SelectedRows()
+                Dim cmd As New SqlCommand
+                If (If(row.Cells("idSizePpIUR").Value Is Nothing, "", row.Cells("idSizePpIUR").Value.ToString) = "") And (If(row.Cells("idTypePpIUR").Value Is Nothing, "", row.Cells("idTypePpIUR").Value.ToString) = "") And (If(row.Cells("idThickPpIUR").Value Is Nothing, "", row.Cells("idThickPpIUR").Value.ToString()) = "") Then
+                    cmd.CommandText = "if (select count (*) from ppInsUnitRate where size = " + row.Cells("SizePpIUR").Value.ToString() + " and [type] = '" + row.Cells("typePpIUR").Value.ToString() + "' and thick = " + row.Cells("thickPpIUR").Value.ToString() + ")=0
+begin
+	insert into ppInsUnitRate values(" + row.Cells("SizePpIUR").Value.ToString() + ",'" + row.Cells("typePpIUR").Value.ToString() + "'," + row.Cells("thickPpIUR").Value.ToString() + "," + row.Cells("laborProdPpIUR").Value.ToString() + "," + row.Cells("matRatePpIUR").Value.ToString() + "," + row.Cells("eqRatePpIUR").Value.ToString() + ")
+end"
+                Else
+                    cmd.CommandText = "if(select count(*) from ppInsUnitRate where size=" + row.Cells("idSizePpIUR").Value.ToString() + " and [type]='" + row.Cells("idTypePpIUR").Value.ToString() + "' and thick=" + row.Cells("idThickPpIUR").Value.ToString() + ")=1
+begin 
+	update ppInsUnitRate set size=" + row.Cells("SizePpIUR").Value.ToString() + " ,[type]='" + row.Cells("typePpIUR").Value.ToString() + "',thick=" + row.Cells("thickPpIUR").Value.ToString() + ",laborProd=" + row.Cells("laborProdPpIUR").Value.ToString() + ",matRate=" + row.Cells("matRateEQIUR").Value.ToString() + ",eqRate=" + row.Cells("eqRateEQIUR").Value.ToString() + " where size=" + row.Cells("idSizePpIUR").Value.ToString() + " and [type]='" + row.Cells("idTypePpIUR").Value.ToString() + "' and thick = " + row.Cells("idThickPpIUR").Value.ToString() + "
+end"
+                End If
+                cmd.Connection = conn
+                cmd.Transaction = tran
+                If cmd.ExecuteNonQuery > 0 Then
+                    flag = True
+                Else
+                    flag = False
+                    Exit For
+                End If
+            Next
+            If flag Then
+                tran.Commit()
+                Return True
+            Else
+                tran.Rollback()
+                Return False
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message())
+            Return False
+        Finally
+            desconectar()
+        End Try
+    End Function
+    Public Function deletePpInsUnitRate(ByVal tbl As DataGridView) As Boolean
+        conectar()
+        Dim tran As SqlTransaction
+        tran = conn.BeginTransaction
+        Try
+            Dim flag As Boolean = True
+            For Each row As DataGridViewRow In tbl.SelectedRows()
+                If (If(row.Cells("idSizePpIUR").Value Is Nothing, "", row.Cells("idSizePpIUR").Value.ToString()) <> "") And (If(row.Cells("idTypePpIUR").Value Is Nothing, "", row.Cells("idTypePpIUR").Value.ToString()) <> "") And (If(row.Cells("idThickPpIUR").Value Is Nothing, "", row.Cells("idThickPpIUR").Value.ToString()) <> "") Then
+                    Dim cmd As New SqlCommand("delete ppInsUnitRate where size = " + row.Cells("idSizePpIUR").Value.ToString() + " and [type]='" + row.Cells("idTypePpIUR").Value.ToString() + "' and thick = " + row.Cells("idThickPpIUR").Value.ToString() + "", conn)
+                    cmd.Transaction = tran
+                    If cmd.ExecuteNonQuery > 0 Then
+                        flag = True
+                    Else
+                        flag = False
+                        Exit For
+                    End If
+                Else
+                    flag = True
+                End If
+            Next
+            If flag Then
+                tran.Commit()
+                Return True
+            Else
+                tran.Rollback()
+                Return False
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message)
+            Return False
+        Finally
+            desconectar()
+        End Try
+    End Function
+    Public Function llenarComboCellPpInsUnitRate(ByVal cmb As DataGridViewComboBoxCell) As Data.DataTable
+        Try
+            conectar()
+            Dim cmd As New SqlCommand("select size,[type],thick,laborProd,matRate,eqRate from ppInsUnitRate", conn)
+            Dim dt As New Data.DataTable
+            dt.Columns.Add("size")
+            dt.Columns.Add("type")
+            dt.Columns.Add("thick")
+            dt.Columns.Add("laborProd")
+            dt.Columns.Add("matRate")
+            dt.Columns.Add("eqRate")
+            Dim dr As SqlDataReader = cmd.ExecuteReader()
+            cmb.Items.Clear()
+            While dr.Read()
+                cmb.Items.Add(dr("size") + "|" + dr("type") + "|" + dr("thick"))
+                dt.Rows.Add(dr("size"), dr("type"), dr("thick"), dr("laborProd"), dr("matRate"), dr("eqRate"))
+            End While
+            dr.Close()
+            Return dt
+        Catch ex As Exception
+            MsgBox(ex.Message())
+            Return Nothing
+        Finally
+            desconectar()
+        End Try
+    End Function
 
 End Class

@@ -126,6 +126,18 @@
     <Compile Include="FromsEstimation\MenuEstimation.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="FromsEstimation\RowEqDrawing.Designer.vb">
+      <DependentUpon>RowEqDrawing.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FromsEstimation\RowEqDrawing.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FromsEstimation\RowPpDrawing.Designer.vb">
+      <DependentUpon>RowPpDrawing.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FromsEstimation\RowPpDrawing.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="FromsEstimation\SettingsEstimation.Designer.vb">
       <DependentUpon>SettingsEstimation.vb</DependentUpon>
     </Compile>
@@ -369,6 +381,7 @@
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
       <DependentUpon>Application.myapp</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="My Project\Resources.Designer.vb">
       <AutoGen>True</AutoGen>
@@ -380,7 +393,10 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="OunItems\MyTabControl.vb">
+    <Compile Include="OwnItems\MyComboBox.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="OwnItems\MyTabControl.vb">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Reports TimeSheet\ActiveAv.vb">
@@ -746,6 +762,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FromsEstimation\MenuEstimation.resx">
       <DependentUpon>MenuEstimation.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FromsEstimation\RowEqDrawing.resx">
+      <DependentUpon>RowEqDrawing.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FromsEstimation\RowPpDrawing.resx">
+      <DependentUpon>RowPpDrawing.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FromsEstimation\SettingsEstimation.resx">
       <DependentUpon>SettingsEstimation.vb</DependentUpon>

@@ -26,6 +26,8 @@ Partial Class MainFrom
         Me.TitleBar = New System.Windows.Forms.Panel()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.btnEstimation = New System.Windows.Forms.Button()
+        Me.Panel11 = New System.Windows.Forms.Panel()
         Me.Panel10 = New System.Windows.Forms.Panel()
         Me.btnReports = New System.Windows.Forms.Button()
         Me.pcbLogoMain = New System.Windows.Forms.PictureBox()
@@ -44,8 +46,6 @@ Partial Class MainFrom
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.PanelChildForm = New System.Windows.Forms.Panel()
         Me.Button2 = New System.Windows.Forms.Button()
-        Me.Panel11 = New System.Windows.Forms.Panel()
-        Me.btnEstimation = New System.Windows.Forms.Button()
         Me.TitleBar.SuspendLayout()
         Me.Panel2.SuspendLayout()
         CType(Me.pcbLogoMain, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -99,6 +99,32 @@ Partial Class MainFrom
         Me.Panel2.Name = "Panel2"
         Me.Panel2.Size = New System.Drawing.Size(194, 611)
         Me.Panel2.TabIndex = 6
+        '
+        'btnEstimation
+        '
+        Me.btnEstimation.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.btnEstimation.FlatAppearance.BorderSize = 0
+        Me.btnEstimation.FlatAppearance.MouseOverBackColor = System.Drawing.Color.RoyalBlue
+        Me.btnEstimation.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnEstimation.Font = New System.Drawing.Font("Nirmala UI", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnEstimation.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.btnEstimation.Image = Global.AVT_TRAKING.My.Resources.Resources.catsemployee
+        Me.btnEstimation.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnEstimation.Location = New System.Drawing.Point(0, 459)
+        Me.btnEstimation.Margin = New System.Windows.Forms.Padding(2)
+        Me.btnEstimation.Name = "btnEstimation"
+        Me.btnEstimation.Size = New System.Drawing.Size(192, 45)
+        Me.btnEstimation.TabIndex = 13
+        Me.btnEstimation.Text = "    Estimation"
+        Me.btnEstimation.UseVisualStyleBackColor = True
+        '
+        'Panel11
+        '
+        Me.Panel11.BackColor = System.Drawing.Color.RoyalBlue
+        Me.Panel11.Location = New System.Drawing.Point(-1, 452)
+        Me.Panel11.Name = "Panel11"
+        Me.Panel11.Size = New System.Drawing.Size(198, 5)
+        Me.Panel11.TabIndex = 12
         '
         'Panel10
         '
@@ -314,32 +340,6 @@ Partial Class MainFrom
         Me.Button2.TabIndex = 4
         Me.Button2.UseVisualStyleBackColor = True
         '
-        'Panel11
-        '
-        Me.Panel11.BackColor = System.Drawing.Color.RoyalBlue
-        Me.Panel11.Location = New System.Drawing.Point(-1, 452)
-        Me.Panel11.Name = "Panel11"
-        Me.Panel11.Size = New System.Drawing.Size(198, 5)
-        Me.Panel11.TabIndex = 12
-        '
-        'btnEstimation
-        '
-        Me.btnEstimation.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.btnEstimation.FlatAppearance.BorderSize = 0
-        Me.btnEstimation.FlatAppearance.MouseOverBackColor = System.Drawing.Color.RoyalBlue
-        Me.btnEstimation.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnEstimation.Font = New System.Drawing.Font("Nirmala UI", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnEstimation.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.btnEstimation.Image = Global.AVT_TRAKING.My.Resources.Resources.catsemployee
-        Me.btnEstimation.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnEstimation.Location = New System.Drawing.Point(0, 459)
-        Me.btnEstimation.Margin = New System.Windows.Forms.Padding(2)
-        Me.btnEstimation.Name = "btnEstimation"
-        Me.btnEstimation.Size = New System.Drawing.Size(192, 45)
-        Me.btnEstimation.TabIndex = 13
-        Me.btnEstimation.Text = "    Estimation"
-        Me.btnEstimation.UseVisualStyleBackColor = True
-        '
         'MainFrom
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -350,6 +350,7 @@ Partial Class MainFrom
         Me.Controls.Add(Me.TitleBar)
         Me.Controls.Add(Me.Panel1)
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
+        Me.IsMdiContainer = True
         Me.Margin = New System.Windows.Forms.Padding(2)
         Me.Name = "MainFrom"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen

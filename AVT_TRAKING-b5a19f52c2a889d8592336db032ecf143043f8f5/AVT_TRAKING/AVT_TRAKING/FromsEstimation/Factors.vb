@@ -1,6 +1,7 @@
 ﻿Public Class Factors
     Dim mtdElevation As New ElevationEstimation
     Dim mtdFactor As New MetodosFactor
+    Dim tablaTypeSize As New Data.DataTable
     Dim selectTable As String
     Private Sub Factors_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         mtdElevation.selectElevationSCF(tblScafElevation)
@@ -12,6 +13,10 @@
         mtdFactor.selectPntFitting(tblPntFitting)
         mtdFactor.selectEqPntUnitRate(tblEqPaintUnitRate)
         mtdFactor.selectPpPntUnitRate(tblPpPaintUnitRate)
+        mtdFactor.selectEqJacketunitRate(tblJacketEq)
+        mtdFactor.selectPpJacketunitRate(tblJacketPp)
+        mtdFactor.selectEqInsUnitRate(tblEqInsUnitRate)
+        mtdFactor.selectPpInsUnitRate(tblPpInsUnitRate)
     End Sub
     Private Sub btnSalir_Click(sender As Object, e As EventArgs) Handles btnSalir.Click
         Me.Close()
@@ -83,6 +88,18 @@
     Private Sub tblPpPaintUnitRate_Enter(sender As Object, e As EventArgs) Handles tblPpPaintUnitRate.Enter
         selectTable = "PpPntUnitRate"
     End Sub
+    Private Sub tblJacketEq_Enter(sender As Object, e As EventArgs) Handles tblJacketEq.Enter
+        selectTable = "eqJacketUnitRate"
+    End Sub
+    Private Sub tblJacketPp_Enter(sender As Object, e As EventArgs) Handles tblJacketPp.Enter
+        selectTable = "ppJacketUnitRate"
+    End Sub
+    Private Sub tblEqInsUnitRate_Enter(sender As Object, e As EventArgs) Handles tblEqInsUnitRate.Enter
+        selectTable = "EquipmentInsUR"
+    End Sub
+    Private Sub tblPpInsUnitRate_Enter(sender As Object, e As EventArgs) Handles tblPpInsUnitRate.Enter
+        selectTable = "PipingInsUR"
+    End Sub
     Private Sub tblWorkWeekScheduleLaborRates_CellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles tblWorkWeekScheduleLaborRates.CellEndEdit
         Select Case e.ColumnIndex
             Case 2 To 5
@@ -93,7 +110,7 @@
                 End If
         End Select
     End Sub
-    Private Sub tblOnlyDigitCell_CellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles tblPntFitting.CellEndEdit, tblInsFitting.CellEndEdit, tblEnviroment.CellEndEdit, tblSCFUnitsRates.CellEndEdit, tblPaintElevation.CellEndEdit, tblScafElevation.CellEndEdit, tblPpPaintUnitRate.CellEndEdit, tblEqPaintUnitRate.CellEndEdit
+    Private Sub tblOnlyDigitCell_CellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles tblPpInsUnitRate.CellEndEdit, tblEqInsUnitRate.CellEndEdit, tblPntFitting.CellEndEdit, tblInsFitting.CellEndEdit, tblEnviroment.CellEndEdit, tblSCFUnitsRates.CellEndEdit, tblPaintElevation.CellEndEdit, tblScafElevation.CellEndEdit, tblPpPaintUnitRate.CellEndEdit, tblEqPaintUnitRate.CellEndEdit
         Select Case selectTable
             Case "ElevationSCF"
                 Select Case e.ColumnIndex
@@ -175,10 +192,55 @@
                         End If
                     Case Else
                 End Select
+            Case "eqJacketUnitRate"
+                Select Case e.ColumnIndex
+                    Case 3 To 5
+                        If tblJacketEq.CurrentRow.Cells(e.ColumnIndex).Value IsNot Nothing Then
+                            If Not soloNumero(tblJacketEq.CurrentRow.Cells(e.ColumnIndex).Value.ToString()) Then
+                                tblJacketEq.CurrentRow.Cells(e.ColumnIndex).Value = "0"
+                            End If
+                        End If
+                    Case Else
+                End Select
+            Case "ppJacketUnitRate"
+                Select Case e.ColumnIndex
+                    Case 3 To 5
+                        If tblJacketPp.CurrentRow.Cells(e.ColumnIndex).Value IsNot Nothing Then
+                            If Not soloNumero(tblJacketPp.CurrentRow.Cells(e.ColumnIndex).Value.ToString()) Then
+                                tblJacketPp.CurrentRow.Cells(e.ColumnIndex).Value = "0"
+                            End If
+                        End If
+                    Case Else
+                End Select
+            Case "EquipmentInsUR"
+                Select Case e.ColumnIndex
+                    Case 3 To 6
+                        If tblEqInsUnitRate.CurrentRow.Cells(e.ColumnIndex).Value IsNot Nothing Then
+                            If Not soloNumero(tblEqInsUnitRate.CurrentRow.Cells(e.ColumnIndex).Value.ToString()) Then
+                                tblEqInsUnitRate.CurrentRow.Cells(e.ColumnIndex).Value = "0"
+                            End If
+                        End If
+                    Case Else
+                End Select
+            Case "PipingInsUR"
+                Select Case e.ColumnIndex
+                    Case 3
+                        If tblPpInsUnitRate.CurrentRow.Cells(e.ColumnIndex).Value IsNot Nothing Then
+                            If Not soloNumero(tblPpInsUnitRate.CurrentRow.Cells(e.ColumnIndex).Value.ToString()) Then
+                                tblPpInsUnitRate.CurrentRow.Cells(e.ColumnIndex).Value = "0"
+                            End If
+                        End If
+                    Case 5 To 8
+                        If tblPpInsUnitRate.CurrentRow.Cells(e.ColumnIndex).Value IsNot Nothing Then
+                            If Not soloNumero(tblPpInsUnitRate.CurrentRow.Cells(e.ColumnIndex).Value.ToString()) Then
+                                tblPpInsUnitRate.CurrentRow.Cells(e.ColumnIndex).Value = "0"
+                            End If
+                        End If
+                    Case Else
+                End Select
         End Select
-
     End Sub
-    Private Sub btnFactorTbl_Click(sender As Object, e As EventArgs) Handles btnSaveFactorTbl.Click
+    Private Sub btnSaveFactorTbl_Click(sender As Object, e As EventArgs) Handles btnSaveFactorTbl.Click
         Select Case selectTable
             Case "ElevationSCF"
                 If tblScafElevation.SelectedRows.Count > 0 Then
@@ -251,6 +313,42 @@
                     End If
                 Else
                     MessageBox.Show("Please Select a row in the Table Equipment Paint Unit Rate to Constinue.", "Important", MessageBoxButtons.OK, MessageBoxIcon.Asterisk)
+                End If
+            Case "eqJacketUnitRate"
+                If tblJacketEq.SelectedRows.Count > 0 Then
+                    If mtdFactor.saveUpdateEqJacketUnitRate(tblJacketEq) Then
+                        mtdFactor.selectEqJacketunitRate(tblJacketEq)
+                        MsgBox("Successful.")
+                    End If
+                Else
+                    MessageBox.Show("Please Select a row in the Table Equipment in Insulation Jackets Unit Rates to Constinue.", "Important", MessageBoxButtons.OK, MessageBoxIcon.Asterisk)
+                End If
+            Case "ppJacketUnitRate"
+                If tblJacketPp.SelectedRows.Count > 0 Then
+                    If mtdFactor.saveUpdatePpJacketUnitRate(tblJacketPp) Then
+                        mtdFactor.selectPpJacketunitRate(tblJacketPp)
+                        MsgBox("Successful.")
+                    End If
+                Else
+                    MessageBox.Show("Please Select a row in the Table Piping in Insulation Jacket Unit Rate to Constinue.", "Important", MessageBoxButtons.OK, MessageBoxIcon.Asterisk)
+                End If
+            Case "EquipmentInsUR"
+                If tblEqInsUnitRate.SelectedRows.Count > 0 Then
+                    If mtdFactor.saveUpdateEqInsUnitRate(tblEqInsUnitRate) Then
+                        mtdFactor.selectEqInsUnitRate(tblEqInsUnitRate)
+                        MsgBox("Successful.")
+                    End If
+                Else
+                    MessageBox.Show("Please Select a row in the Table Equipment Insulation Rate Unit Rates to Constinue.", "Important", MessageBoxButtons.OK, MessageBoxIcon.Asterisk)
+                End If
+            Case "PipingInsUR"
+                If tblPpInsUnitRate.SelectedRows.Count > 0 Then
+                    If mtdFactor.saveUpdatePpInsUnitRate(tblPpInsUnitRate) Then
+                        mtdFactor.selectPpInsUnitRate(tblPpInsUnitRate)
+                        MsgBox("Successful.")
+                    End If
+                Else
+                    MessageBox.Show("Please Select a row in the Table Piping Insulation Rate Unit Rate to Constinue.", "Important", MessageBoxButtons.OK, MessageBoxIcon.Asterisk)
                 End If
         End Select
     End Sub
@@ -376,9 +474,69 @@
                 Else
                     MessageBox.Show("Please Select A Row.", "Message", MessageBoxButtons.OK, MessageBoxIcon.Asterisk)
                 End If
+            Case "eqJacketUnitRate"
+                If tblJacketEq.SelectedRows.Count > 0 Then
+                    If DialogResult.Yes = MessageBox.Show("If you Accept, is likely that you delete an Element that is related to this Records. Are you sure to continue?", "Message", MessageBoxButtons.YesNo, MessageBoxIcon.Asterisk) Then
+                        If mtdFactor.deleteEqJacketUnitRate(tblJacketEq) Then
+                            For Each row As DataGridViewRow In tblJacketEq.SelectedRows()
+                                tblJacketEq.Rows.Remove(row)
+                            Next
+                            MsgBox("Successfull")
+                        Else
+                            MsgBox("Error, check the Data or refresh the Window.")
+                        End If
+                    End If
+                Else
+                    MessageBox.Show("Please Select A Row.", "Message", MessageBoxButtons.OK, MessageBoxIcon.Asterisk)
+                End If
+            Case "ppJacketUnitRate"
+                If tblJacketPp.SelectedRows.Count > 0 Then
+                    If DialogResult.Yes = MessageBox.Show("If you Accept, is likely that you delete an Element that is related to this Records. Are you sure to continue?", "Message", MessageBoxButtons.YesNo, MessageBoxIcon.Asterisk) Then
+                        If mtdFactor.deletePpJacketUnitRate(tblJacketPp) Then
+                            For Each row As DataGridViewRow In tblJacketPp.SelectedRows()
+                                tblJacketPp.Rows.Remove(row)
+                            Next
+                            MsgBox("Successfull")
+                        Else
+                            MsgBox("Error, check the Data or refresh the Window.")
+                        End If
+                    End If
+                Else
+                    MessageBox.Show("Please Select A Row.", "Message", MessageBoxButtons.OK, MessageBoxIcon.Asterisk)
+                End If
+            Case "EquipmentInsUR"
+                If tblEqInsUnitRate.SelectedRows.Count > 0 Then
+                    If DialogResult.Yes = MessageBox.Show("If you Accept, is likely that you delete an Element that is related to this Records. Are you sure to continue?", "Message", MessageBoxButtons.YesNo, MessageBoxIcon.Asterisk) Then
+                        If mtdFactor.deleteEqInsUnitRate(tblEqInsUnitRate) Then
+                            For Each row As DataGridViewRow In tblEqInsUnitRate.SelectedRows()
+                                tblEqInsUnitRate.Rows.Remove(row)
+                            Next
+                            MsgBox("Successfull")
+                        Else
+                            MsgBox("Error, check the Data or refresh the Window.")
+                        End If
+                    End If
+                Else
+                    MessageBox.Show("Please Select A Row.", "Message", MessageBoxButtons.OK, MessageBoxIcon.Asterisk)
+                End If
+            Case "PipingInsUR"
+                If tblPpInsUnitRate.SelectedRows.Count > 0 Then
+                    If DialogResult.Yes = MessageBox.Show("If you Accept, is likely that you delete an Element that is related to this Records. Are you sure to continue?", "Message", MessageBoxButtons.YesNo, MessageBoxIcon.Asterisk) Then
+                        If mtdFactor.deletePpInsUnitRate(tblPpInsUnitRate) Then
+                            For Each row As DataGridViewRow In tblPpInsUnitRate.SelectedRows()
+                                tblPpInsUnitRate.Rows.Remove(row)
+                            Next
+                            MsgBox("Successfull")
+                        Else
+                            MsgBox("Error, check the Data or refresh the Window.")
+                        End If
+                    End If
+                Else
+                    MessageBox.Show("Please Select A Row.", "Message", MessageBoxButtons.OK, MessageBoxIcon.Asterisk)
+                End If
+
         End Select
     End Sub
-
     Private Sub btnSaveWWSLR_Click(sender As Object, e As EventArgs) Handles btnSaveWWSLR.Click
         Try
             If tblWorkWeekScheduleLaborRates.SelectedRows.Count > 0 Then
@@ -499,7 +657,6 @@
         End Try
         selectTable = "PntFitting"
     End Sub
-
     Private Sub btnExcelEqPntUnitRate_Click(sender As Object, e As EventArgs) Handles btnExcelEqPntUnitRate.Click
         Try
             Dim sheetName = InputBox("Please Write the name of the Sheet to Read.", "Find Excel Sheet", "Sheet 1")
@@ -542,6 +699,91 @@
         End Try
         selectTable = "PpPntUnitRate"
     End Sub
+    Private Sub btnExcelJacketEq_Click(sender As Object, e As EventArgs) Handles btnExcelJacketEq.Click
+        Try
+            Dim sheetName = InputBox("Please Write the name of the Sheet to Read.", "Find Excel Sheet", "Sheet 1")
+            While sheetName <> ""
+                Dim tbl = leerExcel(lblMessage, pgbProgress, sheetName)
+                If tbl IsNot Nothing Then
+                    For Each row As Data.DataRow In tbl.Rows()
+                        tblJacketEq.Rows.Add("", row.ItemArray(0).ToString(), row.ItemArray(1).ToString(), row.ItemArray(2).ToString(), row.ItemArray(3).ToString(), row.ItemArray(4).ToString())
+                    Next
+                    pgbProgress.Value = 100
+                    lblMessage.Text = "Message: End."
+                    Exit While
+                Else
+                    sheetName = InputBox("Please Write the name of the Sheet to Read." + "If do not wish to continue, leave the space blank.", "find Excel Sheet", "Sheet 1")
+                End If
+            End While
+        Catch ex As Exception
+            MsgBox(ex.Message())
+        End Try
+        selectTable = "eqJacketUnitRate"
+    End Sub
+
+    Private Sub btnExcelJacketPp_Click(sender As Object, e As EventArgs) Handles btnExcelJacketPp.Click
+        Try
+            Dim sheetName = InputBox("Please Write the name of the Sheet to Read.", "Find Excel Sheet", "Sheet 1")
+            While sheetName <> ""
+                Dim tbl = leerExcel(lblMessage, pgbProgress, sheetName)
+                If tbl IsNot Nothing Then
+                    For Each row As Data.DataRow In tbl.Rows()
+                        tblJacketPp.Rows.Add("", row.ItemArray(0).ToString(), row.ItemArray(1).ToString(), row.ItemArray(2).ToString(), row.ItemArray(3).ToString(), row.ItemArray(4).ToString())
+                    Next
+                    pgbProgress.Value = 100
+                    lblMessage.Text = "Message: End."
+                    Exit While
+                Else
+                    sheetName = InputBox("Please Write the name of the Sheet to Read." + "If do not wish to continue, leave the space blank.", "find Excel Sheet", "Sheet 1")
+                End If
+            End While
+        Catch ex As Exception
+            MsgBox(ex.Message())
+        End Try
+        selectTable = "ppJacketUnitRate"
+    End Sub
+    Private Sub btnExcelUpdateEqInsUR_Click(sender As Object, e As EventArgs) Handles btnExcelUpdateEqInsUR.Click
+        Try
+            Dim sheetName = InputBox("Please Write the name of the Sheet to Read.", "Find Excel Sheet", "Sheet 1")
+            While sheetName <> ""
+                Dim tbl = leerExcel(lblMessage, pgbProgress, sheetName)
+                If tbl IsNot Nothing Then
+                    For Each row As Data.DataRow In tbl.Rows()
+                        tblEqInsUnitRate.Rows.Add("", "", row.ItemArray(0).ToString(), row.ItemArray(1).ToString(), row.ItemArray(2).ToString(), row.ItemArray(3).ToString(), row.ItemArray(4).ToString())
+                    Next
+                    pgbProgress.Value = 100
+                    lblMessage.Text = "Message: End."
+                    Exit While
+                Else
+                    sheetName = InputBox("Please Write the name of the Sheet to Read." + "If do not wish to continue, leave the space blank.", "find Excel Sheet", "Sheet 1")
+                End If
+            End While
+        Catch ex As Exception
+            MsgBox(ex.Message())
+        End Try
+        selectTable = "EquipmentInsUR"
+    End Sub
+    Private Sub btnExcelUpdatePpInsUR_Click(sender As Object, e As EventArgs) Handles btnExcelUpdatePpInsUR.Click
+        Try
+            Dim sheetName = InputBox("Please Write the name of the Sheet to Read.", "Find Excel Sheet", "Sheet 1")
+            While sheetName <> ""
+                Dim tbl = leerExcel(lblMessage, pgbProgress, sheetName)
+                If tbl IsNot Nothing Then
+                    For Each row As Data.DataRow In tbl.Rows()
+                        tblPpInsUnitRate.Rows.Add("", "", "", row.ItemArray(0).ToString(), row.ItemArray(1).ToString(), row.ItemArray(2).ToString(), row.ItemArray(3).ToString(), row.ItemArray(4).ToString(), row.ItemArray(5).ToString())
+                    Next
+                    pgbProgress.Value = 100
+                    lblMessage.Text = "Message: End."
+                    Exit While
+                Else
+                    sheetName = InputBox("Please Write the name of the Sheet to Read." + "If do not wish to continue, leave the space blank.", "find Excel Sheet", "Sheet 1")
+                End If
+            End While
+        Catch ex As Exception
+            MsgBox(ex.Message())
+        End Try
+        selectTable = "PipingInsUR"
+    End Sub
     Private Sub tblEqPaintUnitRate_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles tblEqPaintUnitRate.CellClick
         Select Case e.ColumnIndex
             Case 3 'Option
@@ -583,6 +825,11 @@
             End If
         End If
     End Sub
+    Private Sub tblEqPaintUnitRate_DataError(sender As Object, e As DataGridViewDataErrorEventArgs) Handles tblEqPaintUnitRate.DataError
+        If e.ColumnIndex = 3 Then
+            e.ThrowException = False
+        End If
+    End Sub
     Private Sub tblPaintUnitRate_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles tblPpPaintUnitRate.CellClick
         Select Case e.ColumnIndex
             Case 4 'Option
@@ -596,7 +843,7 @@
                     Else
                         Dim cmbOption1 As DataGridViewComboBoxCell = tblPpPaintUnitRate.CurrentRow.Cells("OptionPp")
                         With cmbOption1
-                            mtdFactor.llenarComboCellPntFitting(tblEqPaintUnitRate.CurrentRow.Cells("OptionPp"))
+                            mtdFactor.llenarComboCellInsFitting(tblEqPaintUnitRate.CurrentRow.Cells("OptionPp"))
                         End With
                     End If
                 Catch ex As Exception
@@ -606,9 +853,9 @@
     End Sub
     Public Sub cmb_SelectedIndexChanguedPp(sender As Object, e As EventArgs)
         Dim cmb As ComboBox = CType(sender, ComboBox)
-        Select Case tblEqPaintUnitRate.CurrentCell.ColumnIndex
+        Select Case tblEqInsUnitRate.CurrentCell.ColumnIndex
             Case 4 'Option
-                tblEqPaintUnitRate.CurrentCell.Value = cmb.Text
+                tblEqInsUnitRate.CurrentCell.Value = cmb.Text
         End Select
     End Sub
     Private Sub tblPpPaintUnitRate_EditingControlShowing(sender As Object, e As DataGridViewEditingControlShowingEventArgs) Handles tblPpPaintUnitRate.EditingControlShowing
@@ -622,6 +869,119 @@
                     AddHandler cb.SelectedIndexChanged, AddressOf cmb_SelectedIndexChanguedPp
                 End If
             End If
+        End If
+    End Sub
+    Private Sub tblPpPaintUnitRate_DataError(sender As Object, e As DataGridViewDataErrorEventArgs) Handles tblPpPaintUnitRate.DataError
+        If e.ColumnIndex = 4 Then
+            e.ThrowException = False
+        End If
+    End Sub
+    '############################################################################################################################################################################################################################################################
+    '############################################################################################################################################################################################################################################################
+    '############################################################################################################################################################################################################################################################
+    Private Sub tblEqInsUnitRate_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles tblEqInsUnitRate.CellClick
+        Select Case e.ColumnIndex
+            Case 2 ' Type
+                Try
+                    If tblEqInsUnitRate.CurrentCell.GetType.Name = "DataGridViewTextBoxCell" Then
+                        Dim cmbOption As New DataGridViewComboBoxCell
+                        With cmbOption
+                            mtdFactor.llenarComboCellInsFitting(cmbOption)
+                        End With
+                        tblEqInsUnitRate.CurrentRow.Cells("typeEQIUR") = cmbOption
+                    Else
+                        Dim cmbOption1 As DataGridViewComboBoxCell = tblEqInsUnitRate.CurrentRow.Cells("typeEQIUR")
+                        With cmbOption1
+                            mtdFactor.llenarComboCellInsFitting(tblEqInsUnitRate.CurrentRow.Cells("typeEQIUR"))
+                        End With
+                    End If
+                Catch ex As Exception
+
+                End Try
+        End Select
+    End Sub
+    Public Sub cmb_SelectedIndexChanguedEqInsUR(sender As Object, e As EventArgs)
+        Dim cmb As ComboBox = CType(sender, ComboBox)
+        Select Case tblEqInsUnitRate.CurrentCell.ColumnIndex
+            Case 2 'type
+                tblEqInsUnitRate.CurrentCell.Value = cmb.Text
+        End Select
+    End Sub
+    Private Sub tblEqInsUnitRate_EditingControlShowing(sender As Object, e As DataGridViewEditingControlShowingEventArgs) Handles tblEqInsUnitRate.EditingControlShowing
+        Dim Index = tblEqInsUnitRate.CurrentCell.ColumnIndex
+        If Index = 2 Then ' type
+            Dim typecell = tblEqInsUnitRate.CurrentCell.GetType.ToString
+            If Not typecell = "System.Windows.Forms.DataGridViewTextBoxCell" Then
+                Dim cb As ComboBox = CType(e.Control, ComboBox)
+                If e.Control IsNot Nothing Then
+                    RemoveHandler cb.SelectedIndexChanged, AddressOf cmb_SelectedIndexChanguedEqInsUR
+                    AddHandler cb.SelectedIndexChanged, AddressOf cmb_SelectedIndexChanguedEqInsUR
+                End If
+            End If
+        End If
+    End Sub
+    Private Sub tblEqInsUnitRate_DataError(sender As Object, e As DataGridViewDataErrorEventArgs) Handles tblEqInsUnitRate.DataError
+        If e.ColumnIndex = 2 Then
+            e.ThrowException = False
+        End If
+    End Sub
+    Private Sub tblPpInsUnitRate_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles tblPpInsUnitRate.CellClick
+        Try
+            Select Case e.ColumnIndex
+                Case 4 ' Type
+                    Try
+                        If tblPpInsUnitRate.CurrentCell.GetType.Name = "DataGridViewTextBoxCell" Then
+                            Dim cmbType As New DataGridViewComboBoxCell
+                            With cmbType
+                                mtdFactor.llenarComboCellInsFitting(cmbType)
+                            End With
+                            tblPpInsUnitRate.CurrentRow.Cells("typePpIUR") = cmbType
+                        Else
+                            Dim cmbOption2 As DataGridViewComboBoxCell = tblPpInsUnitRate.CurrentRow.Cells("typePpIUR")
+                            With cmbOption2
+                                mtdFactor.llenarComboCellInsFitting(tblPpInsUnitRate.CurrentRow.Cells("typePpIUR"))
+                            End With
+                        End If
+                    Catch ex As Exception
+
+                    End Try
+            End Select
+        Catch ex As Exception
+            MsgBox(ex.Message())
+        End Try
+    End Sub
+    Public Sub cmb_SelectedIndexChanguedPpInsUR(sender As Object, e As EventArgs)
+        Try
+            Dim cmb As ComboBox = CType(sender, ComboBox)
+            Select Case tblPpInsUnitRate.CurrentCell.ColumnIndex
+                Case 4 'type
+                    tblPpInsUnitRate.CurrentCell.Value = cmb.Text
+            End Select
+        Catch ex As Exception
+
+        End Try
+    End Sub
+    Private Sub tblPpInsUnitRate_EditingControlShowing(sender As Object, e As DataGridViewEditingControlShowingEventArgs) Handles tblPpInsUnitRate.EditingControlShowing
+        Try
+            Dim Index = tblPpInsUnitRate.CurrentCell.ColumnIndex
+            If Index = 4 Then ' Type
+                Dim typecell = tblPpInsUnitRate.CurrentCell.GetType.ToString
+                If Not typecell = "System.Windows.Forms.DataGridViewTextBoxCell" Then
+                    Dim cb As ComboBox = CType(e.Control, ComboBox)
+                    If e.Control IsNot Nothing Then
+                        RemoveHandler cb.SelectedIndexChanged, AddressOf cmb_SelectedIndexChanguedPpInsUR
+                        AddHandler cb.SelectedIndexChanged, AddressOf cmb_SelectedIndexChanguedPpInsUR
+                    End If
+                End If
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message())
+        End Try
+    End Sub
+
+    Private Sub tblPpInsUnitRate_DataError(sender As Object, e As DataGridViewDataErrorEventArgs) Handles tblPpInsUnitRate.DataError
+        If e.ColumnIndex = 4 Then
+            e.ThrowException = False
         End If
     End Sub
 End Class
