@@ -88,8 +88,7 @@ Public Class MyComboBox
     End Property
 
     'El siguente método se utiliza para modificar el alto del control
-    Private Sub subSComboBoxHeight(ByVal ctlComboBox As ComboBox,
-    ByVal Height As Int32)
+    Private Sub subSComboBoxHeight(ByVal ctlComboBox As ComboBox, ByVal Height As Int32)
         SendMessage(ctlComboBox.Handle, CB_SIH, -1, Height - 6)
         Me.Refresh()
     End Sub

@@ -840,6 +840,64 @@ create table ownEmail(
 GO
 
 --##########################################################################################
+--##################  TABLA DE PIPINGEST ###################################################
+--##########################################################################################
+
+create table pipingEst(
+	idPipingEst int primary key not null,
+	line varchar(20)not null,
+	size float,
+	[type]varchar(25),
+	thick float,
+	systemPntPP varchar(10),
+	pntOption varchar(25),
+	idJacket varchar(25),
+	elevation int,
+	idLaborRateRmv varchar(40),
+	lFtRmv float,
+	idLaborRatePnt varchar(40),
+	lFtPnt float,
+	p90Pnt int,
+	p45Pnt int,
+	pTeePnt int,
+	pPairPnt int,
+	pVlvPnt int,
+	pControlPnt int,
+	pWeldPnt int,
+	idLaborRateII varchar(40),
+	lFtII float,
+	p90II int,
+	p45II int,
+	pBendII int,
+	pTeeII int,
+	pReducII int,
+	pCapsII int,
+	pPairII int,
+	pVlvII int,
+	pControlII int,
+	pWeldII int,
+	pCutOutII int,
+	psupportII int,
+	acm bit,
+	st bit,
+	idDrawingNum varchar(45)
+)
+go
+
+--##########################################################################################
+--##################  TABLA DE PIPINGMATERIAL ##############################################
+--##########################################################################################
+
+create table pipingMaterial(
+	size float not null,
+	[type] varchar(25)not null,
+	thick float not null, 
+	prize money,
+	[description] varchar(50)
+)
+go
+
+--##########################################################################################
 --##################  TABLA DE PNTFITTING ##################################################
 --##########################################################################################
 
@@ -1893,6 +1951,59 @@ ALTER TABLE payRate WITH CHECK ADD CONSTRAINT fk_idEmployee_payRate
 FOREIGN KEY(idEmployee) REFERENCES employees (idEmployee)
 GO
 
+--##########################################################################################
+--##################  FOREIG KEYS PIPINGEST ################################################
+--##########################################################################################
+
+ALTER TABLE pipingEst WITH CHECK ADD CONSTRAINT fk_elevation_pipingEst
+FOREIGN KEY (elevation) REFERENCES factorElevationPaint(elevation)
+ON UPDATE CASCADE
+ON DELETE CASCADE
+GO
+
+ALTER TABLE pipingEst WITH CHECK ADD CONSTRAINT fk_idJacket_pipingEst
+FOREIGN KEY (idJacket) REFERENCES ppJktUnitRate(idJacket)
+ON UPDATE CASCADE
+ON DELETE CASCADE
+GO
+
+ALTER TABLE pipingEst WITH CHECK ADD CONSTRAINT fk_idLaborRateRmv_pipingEst
+FOREIGN KEY (idLaborRateRmv) REFERENCES laborRate(idLaborRate)
+ON UPDATE CASCADE
+ON DELETE CASCADE
+GO
+
+ALTER TABLE pipingEst WITH CHECK ADD CONSTRAINT fk_idLaborRatePnt_pipingEst
+FOREIGN KEY (idLaborRatePnt) REFERENCES laborRate(idLaborRate)
+ON UPDATE CASCADE
+ON DELETE CASCADE
+GO
+
+ALTER TABLE pipingEst WITH CHECK ADD CONSTRAINT fk_idLaborRateII_pipingEst
+FOREIGN KEY (idLaborRateII) REFERENCES laborRate(idLaborRate)
+ON UPDATE CASCADE
+ON DELETE CASCADE
+GO
+
+ALTER TABLE pipingEst WITH CHECK ADD CONSTRAINT fk_idDrawingNum_pipingEst
+FOREIGN KEY (idDrawingNum) REFERENCES drawing(idDrawingNum)
+ON UPDATE CASCADE
+ON DELETE CASCADE
+GO
+
+--##########################################################################################
+--##################  FOREIG KEYS PIPINGMATERIAL ###########################################
+--##########################################################################################
+
+ALTER TABLE pipingMaterial WITH CHECK ADD CONSTRAINT pk_size_type_thick
+PRIMARY KEY (size, [type], thick)
+go
+
+ALTER TABLE pipingMaterial WITH CHECK ADD CONSTRAINT fk_type_pipingmaterial
+FOREIGN KEY ([type]) REFERENCES insFitting([type])
+ON UPDATE CASCADE
+ON DELETE CASCADE
+go
 --##########################################################################################
 --##################  FOREIG KEYS PPPAINTUNITRATE ##########################################
 --##########################################################################################
@@ -3950,10 +4061,6 @@ go
 --ALTER TABLE ppPaintUnitRate WITH CHECK ADD CONSTRAINT Fk_pntOption_pntFitting
 --FOREIGN KEY (pntOption) REFERENCES pntFitting(pntOption) 
 --go
-
---| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
---| | | | | | | | ESTO ES LO NUEVO  | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
---V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V 
 ----##########################################################################################################################
 ----############## TABLA DE eqJktUnitrate ####################################################################################
 ----##########################################################################################################################
@@ -4068,4 +4175,109 @@ go
 --GO
 --ALTER TABLE equipmentEst WITH CHECK ADD CONSTRAINT fk_idLaborII_equipmentEst
 --FOREIGN KEY (idLaborRateII) REFERENCES laborRate(idLaborRate)
+--GO
+--| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
+--| | | | | | | | ESTO ES LO NUEVO  | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
+--V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V 
+----##########################################################################################################################
+----############## TABLA DE pipingEst ########################################################################################
+----##########################################################################################################################
+----19
+--create table pipingEst(
+--	idPipingEst int primary key not null,
+--	line varchar(20)not null,
+--	size float,
+--	[type]varchar(25),
+--	thick float,
+--	systemPntPP varchar(10),
+--	pntOption varchar(25),
+--	idJacket varchar(25),
+--	elevation int,
+--	idLaborRateRmv varchar(40),
+--	lFtRmv float,
+--	idLaborRatePnt varchar(40),
+--	lFtPnt float,
+--	p90Pnt int,
+--	p45Pnt int,
+--	pTeePnt int,
+--	pPairPnt int,
+--	pVlvPnt int,
+--	pControlPnt int,
+--	pWeldPnt int,
+--	idLaborRateII varchar(40),
+--	lFtII float,
+--	p90II int,
+--	p45II int,
+--	pBendII int,
+--	pTeeII int,
+--	pReducII int,
+--	pCapsII int,
+--	pPairII int,
+--	pVlvII int,
+--	pControlII int,
+--	pWeldII int,
+--	pCutOutII int,
+--	psupportII int,
+--	acm bit,
+--	st bit,
+--	idDrawingNum varchar(45)
+--)
+--go
+
+--ALTER TABLE pipingEst WITH CHECK ADD CONSTRAINT fk_elevation_pipingEst
+--FOREIGN KEY (elevation) REFERENCES factorElevationPaint(elevation)
+--ON UPDATE CASCADE
+--ON DELETE CASCADE
+--GO
+
+--ALTER TABLE pipingEst WITH CHECK ADD CONSTRAINT fk_idJacket_pipingEst
+--FOREIGN KEY (idJacket) REFERENCES ppJktUnitRate(idJacket)
+--ON UPDATE CASCADE
+--ON DELETE CASCADE
+--GO
+
+--ALTER TABLE pipingEst WITH CHECK ADD CONSTRAINT fk_idLaborRateRmv_pipingEst
+--FOREIGN KEY (idLaborRateRmv) REFERENCES laborRate(idLaborRate)
+--ON UPDATE CASCADE
+--ON DELETE CASCADE
+--GO
+
+--ALTER TABLE pipingEst WITH CHECK ADD CONSTRAINT fk_idLaborRatePnt_pipingEst
+--FOREIGN KEY (idLaborRatePnt) REFERENCES laborRate(idLaborRate)
+--ON UPDATE CASCADE
+--ON DELETE CASCADE
+--GO
+
+--ALTER TABLE pipingEst WITH CHECK ADD CONSTRAINT fk_idLaborRateII_pipingEst
+--FOREIGN KEY (idLaborRateII) REFERENCES laborRate(idLaborRate)
+--ON UPDATE CASCADE
+--ON DELETE CASCADE
+--GO
+
+--ALTER TABLE pipingEst WITH CHECK ADD CONSTRAINT fk_idDrawingNum_pipingEst
+--FOREIGN KEY (idDrawingNum) REFERENCES drawing(idDrawingNum)
+--ON UPDATE CASCADE
+--ON DELETE CASCADE
+--GO
+
+------##########################################################################################################################
+------############## TABLA DE pipingMaterial ###################################################################################
+------##########################################################################################################################
+------20
+--create table pipingMaterial(
+--	size float not null,
+--	[type] varchar(25)not null,
+--	thick float not null, 
+--	prize money,
+--	[description] varchar(50)
+--)
+--go
+
+--ALTER TABLE pipingMaterial WITH CHECK ADD CONSTRAINT pk_size_type_thick
+--PRIMARY KEY (size, [type], thick)
+--GO
+--ALTER TABLE pipingMaterial WITH CHECK ADD CONSTRAINT fk_type_pipingmaterial
+--FOREIGN KEY ([type]) REFERENCES insFitting([type])
+--ON UPDATE CASCADE
+--ON DELETE CASCADE
 --GO

@@ -43,6 +43,31 @@ order by dr.projectId", conn)
             Return Nothing
         End Try
     End Function
+    Public Function selectPipingEst() As Data.DataTable
+        Try
+            conectar()
+            Dim cmd As New SqlCommand("
+select idPipingEst,line,pp.size,pp.[type],pp.thick,pp.systemPntPP,pp.pntOption,pp.idJacket,pp.elevation,pp.idLaborRateRmv,pp.lFtRmv, 
+pp.idLaborRatePnt,pp.lFtPnt,pp.p90Pnt,pp.p45Pnt,pp.pTeePnt,pp.pPairPnt,pp.pVlvPnt,pp.pControlPnt,pp.pWeldPnt,
+pp.idLaborRateII,pp.lFtII,pp.p90II,pp.p45II,pp.pBendII,pp.pTeeII,pp.pReducII,pp.pCapsII,pp.pPairII,pp.pVlvII,pp.pControlII,pp.pWeldII,pp.pCutOutII,pp.psupportII,
+pp.acm,pp.st,pp.idDrawingNum from pipingEst as pp
+inner join drawing as dr on dr.idDrawingNum = pp.idDrawingNum
+inner join projectClientEst as po on po.projectId = dr.projectId
+inner join clientsEst as cl on cl.idClientEst = po.idClientEst
+order by po.projectId", conn)
+            If cmd.ExecuteNonQuery Then
+                Dim dt As New Data.DataTable
+                Dim da As New SqlDataAdapter(cmd)
+                da.Fill(dt)
+                Return dt
+            Else
+                Return Nothing
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message)
+            Return Nothing
+        End Try
+    End Function
     Public Function selectSCFDrawingProject(ByVal tbl As DataGridView, ByVal numberClient As String, ByVal project As String, Optional idDrawing As String = "") As Data.DataTable
         Try
             conectar()
@@ -206,6 +231,7 @@ where cl.numberClient = " + numberClient + " and po.projectId = '" + project + "
                 Return 1
             End If
         Catch ex As Exception
+            Return 1
         Finally
             desconectar()
         End Try
@@ -323,6 +349,135 @@ where cl.numberClient = " + numberClient + " and po.projectId = '" + project + "
             For Each row As Data.DataRow In tbl.Rows()
                 If row.ItemArray(0) IsNot Nothing Or row.ItemArray(0) = "" Then
                     Dim cmd As New SqlCommand("delete from equipmentEst where idEquimentEst = " + row.ItemArray(0).ToString() + "", conn)
+                    cmd.Transaction = tran
+                    If cmd.ExecuteNonQuery > 0 Then
+                        flag = True
+                    Else
+                        flag = False
+                        Exit For
+                    End If
+                Else
+                    flag = True
+                End If
+            Next
+            If flag Then
+                tran.Commit()
+                Return True
+            Else
+                tran.Rollback()
+                Return False
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message)
+            Return False
+        Finally
+            desconectar()
+        End Try
+    End Function
+
+    '########################################################################################################################################################################################################################################################
+    '###################### METODOS PARA PIPING ESTIMATION ##################################################################################################################################################################################################
+    '########################################################################################################################################################################################################################################################
+    Public Function selectPipingProjectsEst(ByVal numberClient As String, ByVal project As String, Optional idDrawing As String = "") As Data.DataTable
+        Try
+            conectar()
+            Dim cmd As New SqlCommand("select idPipingEst,line,pp.size,pp.[type],pp.thick,pp.systemPntPP,pp.pntOption,pp.idJacket,pp.elevation,pp.idLaborRateRmv,pp.lFtRmv, 
+pp.idLaborRatePnt,pp.lFtPnt,pp.p90Pnt,pp.p45Pnt,pp.pTeePnt,pp.pPairPnt,pp.pVlvPnt,pp.pControlPnt,pp.pWeldPnt,
+pp.idLaborRateII,pp.lFtII,pp.p90II,pp.p45II,pp.pBendII,pp.pTeeII,pp.pReducII,pp.pCapsII,pp.pPairII,pp.pVlvII,pp.pControlII,pp.pWeldII,pp.pCutOutII,pp.psupportII,
+pp.acm,pp.st,pp.idDrawingNum from pipingEst as pp
+inner join drawing as dr on dr.idDrawingNum = pp.idDrawingNum
+inner join projectClientEst as po on po.projectId = dr.projectId
+inner join clientsEst as cl on cl.idClientEst = po.idClientEst
+where cl.numberClient = " + numberClient + " and po.projectId = '" + project + "'" + If(idDrawing = "", "", " and dr.idDrawingNum = '" + idDrawing + "'") + " order by pp.idPipingEst desc ", conn)
+            Dim dr As SqlDataReader = cmd.ExecuteReader()
+            Dim dt As New Data.DataTable
+            Dim arrayColumns() As String = {"idPipingEstAux", "idPipingEst", "line", "size", "type", "thick", "systemPntPP", "pntOption", "idJacket", "elevation", "idLaborRateRmv", "lFtRmv", "idLaborRatePnt", "lFtPnt", "p90Pnt", "p45Pnt", "pTeePnt", "pPairPnt", "pVlvPnt", "pControlPnt", "pWeldPnt", "idLaborRateII", "lFtII", "p90II", "p45II", "pBendII", "pTeeII", "pReducII", "pCapsII", "pPairII", "pVlvII", "pControlII", "pWeldII", "pCutOutII", "psupportII", "acm", "st", "idDrawingNum"}
+            For Each clm As String In arrayColumns
+                dt.Columns.Add(clm)
+            Next
+            While dr.Read()
+                dt.Rows.Add(dr("idPipingEst"), dr("idPipingEst"), dr("line"), dr("size"), If(dr("type") Is DBNull.Value, "", dr("type")), If(dr("thick") Is DBNull.Value, "", dr("thick")), If(dr("systemPntPP") Is DBNull.Value, "", dr("systemPntPP")), If(dr("pntOption") Is DBNull.Value, "", dr("pntOption")), If(dr("idJacket") Is DBNull.Value, "", dr("idJacket")), If(dr("elevation") Is DBNull.Value, "", dr("elevation")), If(dr("idLaborRateRmv") Is DBNull.Value, "", dr("idLaborRateRmv")), dr("lFtRmv"), If(dr("idLaborRatePnt") Is DBNull.Value, "", dr("idLaborRatePnt")), dr("lFtPnt"), dr("p90Pnt"), dr("p45Pnt"), dr("pTeePnt"), dr("pPairPnt"), dr("pVlvPnt"), dr("pControlPnt"), dr("pWeldPnt"), If(dr("idLaborRateII") Is DBNull.Value, "", dr("idLaborRateII")), dr("lFtII"), dr("p90II"), dr("p45II"), dr("pBendII"), dr("pTeeII"), dr("pReducII"), dr("pCapsII"), dr("pPairII"), dr("pVlvII"), dr("pControlII"), dr("pWeldII"), dr("pCutOutII"), dr("psupportII"), dr("acm"), dr("st"), dr("idDrawingNum"))
+            End While
+            dr.Close()
+            Return dt
+        Catch ex As Exception
+            MsgBox(ex.Message)
+            Return Nothing
+        Finally
+            desconectar()
+        End Try
+    End Function
+    Public Function saveUpdatePpDrawingProject(ByVal tbl As Data.DataTable, ByVal idDrawing As String, ByVal descriptionDrawing As String, ByVal projectId As String, Optional lastIdDrawing As String = "") As Boolean
+        conectar()
+        Dim tran As SqlTransaction
+        tran = conn.BeginTransaction
+        Try
+            Dim cmdDrawing As New SqlCommand
+            If lastIdDrawing = "" Then 'insert 
+                cmdDrawing.CommandText = "if (select COUNT (*) from drawing where idDrawingNum = '" + idDrawing + "')=0
+                    begin
+	                    insert into drawing values('" + idDrawing + "','" + descriptionDrawing + "','" + projectId + "')
+                    end"
+            Else ' update
+                cmdDrawing.CommandText = "if (select COUNT (*) from drawing where idDrawingNum = '" + idDrawing + "')=1
+                    begin 
+	                    update drawing set idDrawingNum='" + idDrawing + "',[description]='" + descriptionDrawing + "',projectId='" + projectId + "' where idDrawingNum = '" + lastIdDrawing + "'
+                    end"
+            End If
+            cmdDrawing.Connection = conn
+            cmdDrawing.Transaction = tran
+            If cmdDrawing.ExecuteNonQuery > 0 Then
+                Dim flag As Boolean = True
+                For Each row As DataRow In tbl.Rows()
+                    Dim cmbTags As New SqlCommand
+                    If row.ItemArray(0) = "" Then
+                        cmbTags.CommandText = "if (select count(*) from pipingEst where idPipingEst = " + row.ItemArray(1).ToString() + " )=0
+begin 
+	insert into pipingEst values (" + row.ItemArray(1).ToString() + ",'" + row.ItemArray(2).ToString() + "'," + row.ItemArray(3).ToString() + "," + If(row.ItemArray(4) = "NULL", "NULL", "'" + row.ItemArray(4).ToString() + "'") + "," + row.ItemArray(5).ToString() + "," + If(row.ItemArray(6) = "NULL", "NULL", "'" + row.ItemArray(6).ToString() + "'") + "," + If(row.ItemArray(7) = "NULL", "NULL", "'" + row.ItemArray(7).ToString() + "'") + "," + If(row.ItemArray(8) = "NULL", "NULL", "'" + row.ItemArray(8).ToString() + "'") + "," + row.ItemArray(9).ToString() + "," + If(row.ItemArray(10) = "NULL", "NULL", "'" + row.ItemArray(10).ToString() + "'") + "," + row.ItemArray(11).ToString() + "," + If(row.ItemArray(12) = "NULL", "NULL", "'" + row.ItemArray(12).ToString() + "'") + "," + row.ItemArray(13).ToString() + "," + row.ItemArray(14).ToString() + "," + row.ItemArray(15).ToString() + "," + row.ItemArray(16).ToString() + "," + row.ItemArray(17).ToString() + "," + row.ItemArray(18).ToString() + "," + row.ItemArray(19).ToString() + "," + row.ItemArray(20).ToString() + "," + If(row.ItemArray(21) = "NULL", "NULL", "'" + row.ItemArray(21).ToString() + "'") + "," + row.ItemArray(22).ToString() + "," + row.ItemArray(23).ToString() + "," + row.ItemArray(24).ToString() + "," + row.ItemArray(25).ToString() + "," + row.ItemArray(26).ToString() + "," + row.ItemArray(27).ToString() + "," + row.ItemArray(28).ToString() + "," + row.ItemArray(29).ToString() + "," + row.ItemArray(30).ToString() + "," + row.ItemArray(31).ToString() + "," + row.ItemArray(32).ToString() + "," + row.ItemArray(33).ToString() + "," + row.ItemArray(34).ToString() + "," + row.ItemArray(35).ToString() + "," + row.ItemArray(36).ToString() + ",'" + idDrawing + "')
+end"
+                    Else
+                        cmbTags.CommandText = "if (select count(*) from pipingEst where idPipingEst = " + row.ItemArray(0).ToString() + " )=1
+begin 
+	update pipingEst set idPipingEst = " + row.ItemArray(1).ToString() + ",line='" + row.ItemArray(2).ToString() + "',size=" + row.ItemArray(3).ToString() + ",[type]=" + If(row.ItemArray(4) = "", "NULL", "'" + row.ItemArray(4).ToString() + "'") + ",systemPntPP=" + If(row.ItemArray(6) = "", "NULL", "'" + row.ItemArray(6).ToString() + "'") + ",pntOption=" + If(row.ItemArray(7) = "", "NULL", "'" + row.ItemArray(7).ToString() + "'") + ",idJacket=" + If(row.ItemArray(8) = "", "NULL", "'" + row.ItemArray(8).ToString() + "'") + ",elevation=" + row.ItemArray(9).ToString() + ",idLaborRateRmv=" + If(row.ItemArray(10) = "", "NULL", row.ItemArray(10).ToString() + "'") + ",lFtRmv=" + row.ItemArray(11).ToString() + ",idLaborRatePnt=" + If(row.ItemArray(12) = "", "NULL", "'" + row.ItemArray(12).ToString() + "'") + ",lFtPnt=" + row.ItemArray(13).ToString() + ",p90Pnt=" + row.ItemArray(14).ToString() + ",p45Pnt=" + row.ItemArray(15).ToString() + ",pTeePnt=" + row.ItemArray(16).ToString() + ",pPairPnt=" + row.ItemArray(17).ToString() + ",pVlvPnt=" + row.ItemArray(18).ToString() + ",pControlPnt=" + row.ItemArray(19).ToString() + ",pWeldPnt=" + row.ItemArray(20).ToString() + ",idLaborRateII=" + If(row.ItemArray(21) = "", "NULL", "'" + row.ItemArray(21).ToString() + "'") + ",lFtII=" + row.ItemArray(22).ToString() + ",p90II=" + row.ItemArray(23).ToString() + ",p45II=" + row.ItemArray(24).ToString() + ",pBendII=" + row.ItemArray(25).ToString() + ",pTeeII=" + row.ItemArray(26).ToString() + ",pReducII=" + row.ItemArray(27).ToString() + ",pCapsII=" + row.ItemArray(28).ToString() + ",pPairII=" + row.ItemArray(29).ToString() + ",pVlvII=" + row.ItemArray(30).ToString() + ",pControlII=" + row.ItemArray(31).ToString() + ",pWeldII=" + row.ItemArray(32).ToString() + ",pCutOutII=" + row.ItemArray(33).ToString() + ",psupportII=" + row.ItemArray(34).ToString() + ",acm=" + row.ItemArray(35).ToString() + ",st=" + row.ItemArray(35).ToString() + " where idPipingEst = " + row.ItemArray(0).ToString() + " and idDrawingNum = '" + If(lastIdDrawing <> "", lastIdDrawing, idDrawing) + "' 
+end"
+                    End If
+                    cmbTags.Connection = conn
+                    cmbTags.Transaction = tran
+                    If cmbTags.ExecuteNonQuery > 0 Then
+                        flag = True
+                    Else
+                        flag = False
+                        Exit For
+                    End If
+                Next
+                If flag Then
+                    tran.Commit()
+                    Return True
+                Else
+                    tran.Rollback()
+                    Return False
+                End If
+            Else
+                MessageBox.Show(If(lastIdDrawing = "", "Is not posible to Insert ", "Is not prosible Update") + "the Drawing Project Plese check that is not inserted.", "Important", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                tran.Rollback()
+                Return False
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message())
+            Return False
+        Finally
+            desconectar()
+        End Try
+    End Function
+    Public Function deletePpDrawingProject(ByVal tbl As Data.DataTable) As Boolean
+        conectar()
+        Dim tran As SqlTransaction
+        tran = conn.BeginTransaction
+        Try
+            Dim flag As Boolean = True
+            For Each row As Data.DataRow In tbl.Rows()
+                If row.ItemArray(0) IsNot Nothing Or row.ItemArray(0) = "" Then
+                    Dim cmd As New SqlCommand("delete from pipingEst where idPipingEst = " + row.ItemArray(0).ToString() + "", conn)
                     cmd.Transaction = tran
                     If cmd.ExecuteNonQuery > 0 Then
                         flag = True

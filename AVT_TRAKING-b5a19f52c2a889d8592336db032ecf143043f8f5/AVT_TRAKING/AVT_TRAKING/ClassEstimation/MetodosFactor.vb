@@ -844,7 +844,7 @@ end"
         End Try
     End Function
     '=====================================================================================================================================================================
-    '=========== METODOS EQUIPMENTPAINTUNITRATE ==========================================================================================================================
+    '=========== METODOS PIPINGPAINTUNITRATE =============================================================================================================================
     '=====================================================================================================================================================================
     Public Function selectPpPntUnitRate(ByVal tbl As DataGridView) As Boolean
         Try
@@ -954,6 +954,34 @@ end"
             cmb.Items.Clear()
             While dr.Read()
                 cmb.Items.Add(dr("systemPntPP") + "|" + dr("pntOption"))
+                dt.Rows.Add(dr("systemPntPP"), dr("pntOption"), dr("size"), dr("laborProd"), dr("matRate"), dr("eqRate"))
+            End While
+            dr.Close()
+            Return dt
+        Catch ex As Exception
+            MsgBox(ex.Message())
+            Return Nothing
+        Finally
+            desconectar()
+        End Try
+    End Function
+    Public Function llenarComboPpPntUnitRate(ByVal cmb As ComboBox) As Data.DataTable
+        Try
+            conectar()
+            Dim cmd As New SqlCommand("select systemPntPP, pntOption, size, laborProd, matRate, eqRate from ppPaintUnitRate", conn)
+            Dim dt As New Data.DataTable
+            dt.Columns.Add("systemPntPP")
+            dt.Columns.Add("pntOption")
+            dt.Columns.Add("size")
+            dt.Columns.Add("laborProd")
+            dt.Columns.Add("matRate")
+            dt.Columns.Add("eqRate")
+            Dim dr As SqlDataReader = cmd.ExecuteReader()
+            cmb.Items.Clear()
+            While dr.Read()
+                If cmb.FindString(CStr(dr("systemPntPP"))) = -1 Then
+                    cmb.Items.Add(dr("systemPntPP"))
+                End If
                 dt.Rows.Add(dr("systemPntPP"), dr("pntOption"), dr("size"), dr("laborProd"), dr("matRate"), dr("eqRate"))
             End While
             dr.Close()
@@ -1543,5 +1571,160 @@ end"
             desconectar()
         End Try
     End Function
-
+    Public Function llenarComboPpInsUnitRate(ByVal cmb As ComboBox) As Data.DataTable
+        Try
+            conectar()
+            Dim cmd As New SqlCommand("select size,[type],thick,laborProd,matRate,eqRate from ppInsUnitRate", conn)
+            Dim dt As New Data.DataTable
+            dt.Columns.Add("size")
+            dt.Columns.Add("type")
+            dt.Columns.Add("thick")
+            dt.Columns.Add("laborProd")
+            dt.Columns.Add("matRate")
+            dt.Columns.Add("eqRate")
+            Dim dr As SqlDataReader = cmd.ExecuteReader()
+            Dim item As String = If(cmb.SelectedItem Is Nothing, "", cmb.SelectedItem.ToString())
+            cmb.Items.Clear()
+            While dr.Read()
+                If cmb.FindString(dr("type")) = -1 Then
+                    cmb.Items.Add(dr("type"))
+                End If
+                dt.Rows.Add(dr("size"), dr("type"), dr("thick"), dr("laborProd"), dr("matRate"), dr("eqRate"))
+            End While
+            If item <> "" Then
+                cmb.SelectedItem = cmb.Items(cmb.FindString(item))
+            End If
+            dr.Close()
+            Return dt
+        Catch ex As Exception
+            MsgBox(ex.Message())
+            Return Nothing
+        Finally
+            desconectar()
+        End Try
+    End Function
+    '=====================================================================================================================================================================
+    '=========== METODOS PIPING INSULATION UNIT RATE =====================================================================================================================
+    '=====================================================================================================================================================================
+    Public Function selectSizesMaterialPiping() As Data.DataTable
+        Try
+            conectar()
+            Dim cmd As New SqlCommand("select distinct size from pipingMaterial", conn)
+            Dim dt As New Data.DataTable
+            If cmd.ExecuteNonQuery Then
+                Dim da As New SqlDataAdapter(cmd)
+                da.Fill(dt)
+                Return dt
+            Else
+                dt.Columns.Add("size")
+                Return dt
+            End If
+        Catch ex As Exception
+            Return Nothing
+        Finally
+            desconectar()
+        End Try
+    End Function
+    Public Function saveUpdatePipingMaterial(ByVal tbl As DataGridView) As Boolean
+        conectar()
+        Dim tran As SqlTransaction
+        tran = conn.BeginTransaction
+        Dim contRow As Integer = 0
+        Try
+            Dim flag As Boolean = True
+            For Each row As DataGridViewRow In tbl.SelectedRows()
+                Dim cmd As New SqlCommand
+                If (If(row.Cells("idSizeMat").Value Is Nothing, "", row.Cells("idSizeMat").Value.ToString) = "") And (If(row.Cells("idTypeMat").Value Is Nothing, "", row.Cells("idTypeMat").Value.ToString) = "") And (If(row.Cells("idThickMat").Value Is Nothing, "", row.Cells("idThickMat").Value.ToString()) = "") Then
+                    cmd.CommandText = "if (select count(*) from pipingMaterial where size = " + row.Cells("SizeMat").Value.ToString() + " and [type]='" + row.Cells("TypeMat").Value.ToString() + "' and thick = " + row.Cells("ThickMat").Value.ToString() + " )=0
+                        begin 
+	                        insert into pipingMaterial values (" + row.Cells("SizeMat").Value.ToString() + ",'" + row.Cells("TypeMat").Value.ToString() + "'," + row.Cells("ThickMat").Value.ToString() + "," + row.Cells("PriceMat").Value.ToString() + ",'" + row.Cells("DescriptionMat").Value.ToString() + "')
+                        end"
+                Else
+                    cmd.CommandText = "if (select count(*) from pipingMaterial where size = " + row.Cells("idSizeMat").Value.ToString + " and [type]='" + row.Cells("idTypeMat").Value.ToString + "' and thick = " + row.Cells("TypeMat").Value.ToString + " )=1
+                        begin 
+	                        update pipingMaterial set size = " + row.Cells("SizeMat").Value.ToString() + " , [type]='" + row.Cells("TypeMat").Value.ToString() + "', thick= " + row.Cells("ThickMat").Value.ToString() + " , prize =" + row.Cells("PriceMat").Value.ToString() + ", [description]='" + row.Cells("DescriptionMat").Value.ToString() + "'where size = " + row.Cells("idSizeMat").Value.ToString() + " and [type]='" + row.Cells("idTypeMat").Value.ToString() + "' and thick=" + row.Cells("idThickMat").Value.ToString() + " 
+                        end"
+                End If
+                contRow += 1
+                cmd.Connection = conn
+                cmd.Transaction = tran
+                If cmd.ExecuteNonQuery > 0 Then
+                    flag = True
+                Else
+                    flag = False
+                    Exit For
+                End If
+            Next
+            If flag Then
+                tran.Commit()
+                Return True
+            Else
+                tran.Rollback()
+                Return False
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message() + " " + contRow.ToString())
+            Return False
+        Finally
+            desconectar()
+        End Try
+    End Function
+    Public Function deletePipingMaterial(ByVal tbl As DataGridView) As Boolean
+        conectar()
+        Dim tran As SqlTransaction
+        tran = conn.BeginTransaction
+        Try
+            Dim flag As Boolean = True
+            For Each row As DataGridViewRow In tbl.SelectedRows()
+                If (If(row.Cells("idSizeMat").Value Is Nothing, "", row.Cells("idSizeMat").Value.ToString()) <> "") And (If(row.Cells("idTypeMat").Value Is Nothing, "", row.Cells("idTypeMat").Value.ToString()) <> "") And (If(row.Cells("idThickMat").Value Is Nothing, "", row.Cells("idThickMat").Value.ToString()) <> "") Then
+                    Dim cmd As New SqlCommand("delete from pipingMaterial where size = " + row.Cells("idSizeMat").Value.ToString() + " and [type] = '" + row.Cells("idTypeMat").Value.ToString() + "' and thick =" + row.Cells("idThickMat").Value.ToString() + "", conn)
+                    cmd.Transaction = tran
+                    If cmd.ExecuteNonQuery > 0 Then
+                        flag = True
+                    Else
+                        flag = False
+                        Exit For
+                    End If
+                Else
+                    flag = True
+                End If
+            Next
+            If flag Then
+                tran.Commit()
+                Return True
+            Else
+                tran.Rollback()
+                Return False
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message)
+            Return False
+        Finally
+            desconectar()
+        End Try
+    End Function
+    Public Function selectSizesMaterialPiping(ByVal tbl As DataGridView) As Data.DataTable
+        Try
+            conectar()
+            Dim cmd As New SqlCommand("select size,[type],thick,prize,[description] from pipingMaterial", conn)
+            Dim dt As New Data.DataTable
+            dt.Columns.Add("size")
+            dt.Columns.Add("type")
+            dt.Columns.Add("thick")
+            dt.Columns.Add("prize")
+            dt.Columns.Add("description")
+            Dim dr As SqlDataReader = cmd.ExecuteReader()
+            tbl.Rows.Clear()
+            While dr.Read()
+                dt.Rows.Add(dr("size"), dr("type"), dr("thick"), dr("prize"), dr("description"))
+                tbl.Rows.Add(dr("size"), dr("type"), dr("thick"), dr("size"), dr("type"), dr("thick"), dr("prize"), dr("description"))
+            End While
+            dr.Close()
+            Return dt
+        Catch ex As Exception
+            Return Nothing
+        Finally
+            desconectar()
+        End Try
+    End Function
 End Class

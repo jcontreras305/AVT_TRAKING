@@ -7,18 +7,21 @@
     Dim tblDrawing As New Data.DataTable
     Dim tblAllSCFTags As New Data.DataTable
     Dim tblScaffoldProjects As New Data.DataTable
+    Dim tblPipingProjects As New Data.DataTable
     Dim idClient As String
     Dim idDrawing As String = ""
     Dim selectTable As String
     Dim idProject As String = ""
     Dim flagNewDrawing As Boolean = False
     Dim rowsEqDrawing As New List(Of Form)
+    Dim rowsPpDrawing As New List(Of Form)
     Public selectRow As Integer = -1
     Dim tblEqDrawingRead As New Data.DataTable
     Private Sub Estimating_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         tblProjects = mtdClients.llenarComboClientsEst(cmbProjects)
         tblDrawing = mtdEstimation.selectProjectsDrawing()
         tblAllSCFTags = mtdEstimation.selectSacffoldEst()
+        tblPipingProjects = Nothing
         If tblProjects.Rows.Count > 0 Then
             Dim array() As String = cmbProjects.Items(0).ToString().Split(" ")
             idClient = array(0)
@@ -34,6 +37,7 @@
             End If
             cmbProjects.SelectedIndex = 0
         End If
+        ltyHearderChangueWith()
         btnAddRowEquipment.Visible = False
     End Sub
     Private Sub btnSalir_Click(sender As Object, e As EventArgs) Handles btnSalir.Click
@@ -167,7 +171,21 @@
                 Else
                     MessageBox.Show("No poroject was selected.", "Messague", MessageBoxButtons.OK, MessageBoxIcon.Information)
                 End If
-            Case ""
+            Case "PIPING"
+                tblPipingProjects.Rows.Clear()
+                For Each rowPp As RowPpDrawing In rowsPpDrawing
+                    If rowPp.IsSelected Then
+                        tblPipingProjects.Rows.Add(rowPp.ItemArray(0), rowPp.ItemArray(1), rowPp.ItemArray(2), rowPp.ItemArray(3), rowPp.ItemArray(4), rowPp.ItemArray(5), rowPp.ItemArray(6), rowPp.ItemArray(7), rowPp.ItemArray(8), rowPp.ItemArray(9), rowPp.ItemArray(10), If(rowPp.ItemArray(11) = "", "0", rowPp.ItemArray(11)), rowPp.ItemArray(12), If(rowPp.ItemArray(13) = "", "0", rowPp.ItemArray(13)), If(rowPp.ItemArray(14) = "", "0", rowPp.ItemArray(14)), If(rowPp.ItemArray(15) = "", "0", rowPp.ItemArray(15)), If(rowPp.ItemArray(16) = "", "0", rowPp.ItemArray(16)), If(rowPp.ItemArray(17) = "", "0", rowPp.ItemArray(17)), If(rowPp.ItemArray(18) = "", "0", rowPp.ItemArray(18)), If(rowPp.ItemArray(19) = "", "0", rowPp.ItemArray(19)), If(rowPp.ItemArray(20) = "", "0", rowPp.ItemArray(20)), rowPp.ItemArray(21), If(rowPp.ItemArray(22) = "", "0", rowPp.ItemArray(22)), If(rowPp.ItemArray(23) = "", "0", rowPp.ItemArray(23)), If(rowPp.ItemArray(24) = "", "0", rowPp.ItemArray(24)), If(rowPp.ItemArray(25) = "", "0", rowPp.ItemArray(25)), If(rowPp.ItemArray(26) = "", "0", rowPp.ItemArray(26)), If(rowPp.ItemArray(27) = "", "0", rowPp.ItemArray(27)), If(rowPp.ItemArray(28) = "", "0", rowPp.ItemArray(28)), If(rowPp.ItemArray(29) = "", "0", rowPp.ItemArray(29)), If(rowPp.ItemArray(30) = "", "0", rowPp.ItemArray(30)), If(rowPp.ItemArray(31) = "", "0", rowPp.ItemArray(31)), If(rowPp.ItemArray(32) = "", "0", rowPp.ItemArray(32)), If(rowPp.ItemArray(33) = "", "0", rowPp.ItemArray(33)), If(rowPp.ItemArray(34) = "", "0", rowPp.ItemArray(34)), rowPp.ItemArray(35), rowPp.ItemArray(36))
+                    End If
+                Next
+                If (tblPipingProjects.Rows.Count > 0) Then
+                    If (mtdEstimation.saveUpdatePpDrawingProject(tblPipingProjects, txtDrawingNum.Text, txtDescriptionDrawing.Text, idProject, If(idDrawing = "", "", idDrawing))) Then
+                        cargarDatosDrawing(idClient, idProject, idDrawing, True)
+                        MsgBox("Successful")
+                    End If
+                Else
+                    MessageBox.Show("No poroject was selected.", "Messague", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                End If
         End Select
     End Sub
     Private Sub btnDelete_Click(sender As Object, e As EventArgs) Handles btnDelete.Click
@@ -194,11 +212,42 @@
                         MsgBox("Successful")
                     End If
                 Else
-                    MessageBox.Show("No poroject was selected.", "Messague", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                    MessageBox.Show("Any project of Equipment was not selected.", "Messague", MessageBoxButtons.OK, MessageBoxIcon.Information)
                 End If
             Case "PIPING"
+                tblPipingProjects.Rows.Clear()
+                For Each rowpp As RowPpDrawing In rowsPpDrawing
+                    If rowpp.IsSelected Then
+                        tblPipingProjects.Rows.Add(rowpp.ItemArray(0), "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "")
+                    End If
+                Next
+                If (tblPipingProjects.Rows.Count > 0) Then
+                    If mtdEstimation.deletePpDrawingProject(tblPipingProjects) Then
+                        cargarDatosDrawing(idClient, idProject, idDrawing, True)
+                        MsgBox("Successful")
+                    End If
+                Else
+                    MessageBox.Show("Any project of Piping was not selected.", "Messague", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                End If
         End Select
     End Sub
+    Private Sub TabControl1_SelectedIndexChanged(sender As Object, e As EventArgs) Handles TabControl1.SelectedIndexChanged
+        Select Case TabControl1.SelectedIndex
+            Case 0
+                btnAddRowEquipment.Visible = False
+                selectTable = "SCF"
+            Case 1
+                btnAddRowEquipment.Visible = True
+                selectTable = "EQUIPMENT"
+            Case 2
+                btnAddRowEquipment.Visible = True
+                selectTable = "PIPING"
+            Case Else
+        End Select
+    End Sub
+    '=======================================================================================================================================================================================================================================
+    '================== CODIGO PARA AGREGAR Y QUITAR FILAS DE SCAFFOLD =====================================================================================================================================================================
+    '=======================================================================================================================================================================================================================================
     Private Function validarRowSCF() As Boolean
         Try
             Dim flagError As Boolean = True
@@ -321,6 +370,8 @@
             flagNewDrawing = True
             idDrawing = ""
             tblSCFDrawing.Rows.Clear()
+            pnlRowsEq.Controls.Clear()
+            pnlRowsPiping.Controls.Clear()
             txtDrawingNum.Text = ""
             txtDescriptionDrawing.Text = ""
             btnAfterDrawing.Enabled = False
@@ -394,6 +445,7 @@
                 client = tblDrawing.Rows(rowIndex + 1).ItemArray(3)
                 cargarDatosDrawing(client, project, drawing, True)
             End If
+            ltyHearderChangueWith()
         Catch ex As Exception
         End Try
     End Sub
@@ -419,37 +471,56 @@
                 txtDescriptionDrawing.Text = rowsQuery(0).ItemArray(1)
                 tblScaffoldProjects = mtdEstimation.selectSCFDrawingProject(tblSCFDrawing, clientNum, Project, Drawing)
                 tblEqDrawingRead = mtdEstimation.selectEqDrawingProject(clientNum, Project, Drawing)
-
+                tblPipingProjects = mtdEstimation.selectPipingProjectsEst(clientNum, Project, Drawing)
                 If refresh Then
                     llenarTablaEquipmentDrawing(tblEqDrawingRead, True)
+                    llenarTablaPipingDrawing(tblPipingProjects, True)
                 Else
                     llenarTablaEquipmentDrawing(tblEqDrawingRead)
+                    llenarTablaPipingDrawing(tblPipingProjects)
+                    ltyHearderChangueWith()
+                    ltyHearderChangueWithPP()
                 End If
             End If
-                If idClient <> clientNum Then
-                    For Each item As Object In cmbProjects.Items
-                        itemIndex += 1
-                        Dim array() As String = item.ToString.Split(" ")
-                        If array(0) = clientNum Then
-                            cmbProjects.SelectedIndex = itemIndex
-                        End If
-                    Next
-                End If
-                Return True
+            If idClient <> clientNum Then
+                For Each item As Object In cmbProjects.Items
+                    itemIndex += 1
+                    Dim array() As String = item.ToString.Split(" ")
+                    If array(0) = clientNum Then
+                        cmbProjects.SelectedIndex = itemIndex
+                    End If
+                Next
+            End If
+            Return True
         Catch ex As Exception
             Return False
         End Try
     End Function
+
+
+
+    '==========================================================================================================================================================================================================
+    '========= AGREGAR Y ELIMINAR ROWS EQUIPMENT ==============================================================================================================================================================
+    '==========================================================================================================================================================================================================
+
+    Private Sub btnAddRowEquipment_Click(sender As Object, e As EventArgs) Handles btnAddRowEquipment.Click
+        Select Case TabControl1.SelectedIndex
+            Case 1
+                OpenFormPanel1(Of RowEqDrawing)()
+            Case 2
+                OpenFormPanel2(Of RowPpDrawing)()
+        End Select
+    End Sub
     Private Function llenarTablaEquipmentDrawing(ByVal tbl As Data.DataTable, Optional refresh As Boolean = False) As Boolean
         Try
             Dim count As Integer = 0
             rowsEqDrawing.Clear()
-            pnlRowaEq.Controls.Clear()
+            pnlRowsEq.Controls.Clear()
             If tbl.Rows.Count > 0 Then
                 For Each row As Data.DataRow In tbl.Rows
                     OpenFormPanel1(Of RowEqDrawing)()
                 Next
-                For Each row1 As RowEqDrawing In pnlRowaEq.Controls
+                For Each row1 As RowEqDrawing In pnlRowsEq.Controls
                     row1.cargardatos(tbl.Rows(count))
                     If refresh Then
                         row1.cargardatos()
@@ -463,24 +534,6 @@
             Return False
         End Try
     End Function
-    Private Sub TabControl1_SelectedIndexChanged(sender As Object, e As EventArgs) Handles TabControl1.SelectedIndexChanged
-        Select Case TabControl1.SelectedIndex
-            Case 0
-                btnAddRowEquipment.Visible = False
-                selectTable = "SCF"
-            Case 1
-                btnAddRowEquipment.Visible = True
-                selectTable = "EQUIPMENT"
-            Case 2
-                btnAddRowEquipment.Visible = False
-                selectTable = "PIPING"
-            Case Else
-        End Select
-    End Sub
-    Private Sub btnAddRowEquipment_Click(sender As Object, e As EventArgs) Handles btnAddRowEquipment.Click
-        OpenFormPanel1(Of RowEqDrawing)()
-
-    End Sub
     Private Sub OpenFormPanel1(Of Miform As {RowEqDrawing, New})()
         Dim FormPanel As Form
         Dim newPC = New Miform()
@@ -488,20 +541,21 @@
         FormPanel.TopLevel = False
         FormPanel.Dock = DockStyle.Top
         rowsEqDrawing.Add(FormPanel)
-        pnlRowaEq.Controls.Add(rowsEqDrawing(rowsEqDrawing.Count - 1))
-        pnlRowaEq.Tag = rowsEqDrawing(rowsEqDrawing.Count - 1)
+        pnlRowsEq.Controls.Add(rowsEqDrawing(rowsEqDrawing.Count - 1))
+        pnlRowsEq.Tag = rowsEqDrawing(rowsEqDrawing.Count - 1)
         rowsEqDrawing(rowsEqDrawing.Count - 1).Show()
         rowsEqDrawing(rowsEqDrawing.Count - 1).BringToFront()
+        ltyHearderChangueWith()
     End Sub
 
-    Private Sub pnlRowaEq_ControlAdded(sender As Object, e As ControlEventArgs) Handles pnlRowaEq.ControlAdded
+    Private Sub pnlRowsEq_ControlAdded(sender As Object, e As ControlEventArgs) Handles pnlRowsEq.ControlAdded
         Dim indexRow As Integer = 0
         For Each rowEq As RowEqDrawing In rowsEqDrawing
             rowEq.RowIndex1 = indexRow
             indexRow += 1
         Next
     End Sub
-    Private Sub pnlRowaEq_ControlRemoved(sender As Object, e As ControlEventArgs) Handles pnlRowaEq.ControlRemoved
+    Private Sub pnlRowaEq_ControlRemoved(sender As Object, e As ControlEventArgs) Handles pnlRowsEq.ControlRemoved
         Dim indexRow As Integer = 0
         Dim indexDelete As Integer = 0
         Dim newlist As New List(Of Integer)
@@ -516,7 +570,95 @@
         For i = newlist.Count() To 1 Step -1
             rowsEqDrawing.Remove(rowsEqDrawing(newlist(i - 1)))
         Next
+        ltyHearderChangueWith()
+    End Sub
+    Private Sub ltyHearderChangueWith()
+        If pnlRowsEq.VerticalScroll.Visible Then
+            lytHeaderEq.Width = pnlHeaderEq.Width - 25
+        Else
+            lytHeaderEq.Width = pnlHeaderEq.Width - 4
+        End If
     End Sub
 
+    Private Sub SelectAll_Click(sender As Object, e As EventArgs) Handles SelectAll.Click
+        Try
+            For Each row1 As RowEqDrawing In pnlRowsEq.Controls
+                row1.btnRow.BackColor = Color.LightBlue
+                row1.isSelectRow1 = True
+            Next
+        Catch ex As Exception
+        End Try
+    End Sub
+    '==========================================================================================================================================================================================================
+    '========= AGREGAR Y ELIMINAR ROWS PIPING =================================================================================================================================================================
+    '==========================================================================================================================================================================================================
+    Private Function llenarTablaPipingDrawing(ByVal tbl As Data.DataTable, Optional refresh As Boolean = False) As Boolean
+        Try
+            Dim count As Integer = 0
+            rowsPpDrawing.Clear()
+            pnlRowsPiping.Controls.Clear()
+            If tbl.Rows.Count > 0 Then
+                For Each row As Data.DataRow In tbl.Rows
+                    OpenFormPanel2(Of RowPpDrawing)()
+                Next
+                For Each row1 As RowPpDrawing In pnlRowsPiping.Controls
+                    row1.cargarDatos(tbl.Rows(count))
+                    If refresh Then
+                        row1.cargarDatos()
+                    End If
+                    count += 1
+                Next
+            End If
+            mtdEstimation.selectMaxIdEquipment(lblMaxIDEq)
+            Return True
+        Catch ex As Exception
+            Return False
+        End Try
+    End Function
+    Private Sub OpenFormPanel2(Of Miform As {RowPpDrawing, New})()
+        Dim FormPanel As Form
+        Dim newPC = New Miform()
+        FormPanel = newPC
+        FormPanel.TopLevel = False
+        FormPanel.Dock = DockStyle.Top
+        rowsPpDrawing.Add(FormPanel)
+        pnlRowsPiping.Controls.Add(rowsPpDrawing(rowsPpDrawing.Count - 1))
+        pnlRowsPiping.Tag = rowsPpDrawing(rowsPpDrawing.Count - 1)
+        rowsPpDrawing(rowsPpDrawing.Count - 1).Show()
+        rowsPpDrawing(rowsPpDrawing.Count - 1).BringToFront()
+        ltyHearderChangueWithPP()
+    End Sub
+
+    Private Sub pnlRowsPiping_ControlAdded(sender As Object, e As ControlEventArgs) Handles pnlRowsPiping.ControlAdded
+        Dim indexRow As Integer = 0
+        For Each rowPp As RowPpDrawing In rowsPpDrawing
+            rowPp.RowIndex = indexRow
+            indexRow += 1
+        Next
+    End Sub
+    Private Sub pnlRowsPiping_ControlRemoved(sender As Object, e As ControlEventArgs) Handles pnlRowsPiping.ControlRemoved
+        Dim indexRow As Integer = 0
+        Dim indexDelete As Integer = 0
+        Dim newlist As New List(Of Integer)
+
+        For Each rowPp As RowPpDrawing In rowsPpDrawing
+            If rowPp.Equals(e.Control) Then
+                newlist.Add(indexDelete)
+            End If
+            indexDelete += 1
+        Next
+
+        For i = newlist.Count() To 1 Step -1
+            rowsPpDrawing.Remove(rowsPpDrawing(newlist(i - 1)))
+        Next
+        ltyHearderChangueWithPP()
+    End Sub
+    Private Sub ltyHearderChangueWithPP()
+        If pnlRowsPiping.VerticalScroll.Visible Then
+            lytHeaderPp.Width = pnlHeaderPp.Width - 25
+        Else
+            lytHeaderPp.Width = pnlHeaderPp.Width - 10
+        End If
+    End Sub
 
 End Class

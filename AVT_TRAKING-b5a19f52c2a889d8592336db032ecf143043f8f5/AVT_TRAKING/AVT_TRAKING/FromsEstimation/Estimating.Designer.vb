@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class Estimating
     Inherits System.Windows.Forms.Form
 
     'Form reemplaza a Dispose para limpiar la lista de componentes.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,7 +20,7 @@ Partial Class Estimating
     'NOTA: el Diseñador de Windows Forms necesita el siguiente procedimiento
     'Se puede modificar usando el Diseñador de Windows Forms.  
     'No lo modifique con el editor de código.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
         Me.TableLayoutPanel3 = New System.Windows.Forms.TableLayoutPanel()
@@ -64,8 +64,10 @@ Partial Class Estimating
         Me.Build = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.TabPage2 = New System.Windows.Forms.TabPage()
         Me.Panel5 = New System.Windows.Forms.Panel()
-        Me.pnlRowaEq = New System.Windows.Forms.Panel()
         Me.TableLayoutPanel2 = New System.Windows.Forms.TableLayoutPanel()
+        Me.pnlHeaderEq = New System.Windows.Forms.Panel()
+        Me.lytHeaderEq = New System.Windows.Forms.TableLayoutPanel()
+        Me.SelectAll = New System.Windows.Forms.Button()
         Me.Panel30 = New System.Windows.Forms.Panel()
         Me.Label20 = New System.Windows.Forms.Label()
         Me.Panel29 = New System.Windows.Forms.Panel()
@@ -88,10 +90,55 @@ Partial Class Estimating
         Me.Label11 = New System.Windows.Forms.Label()
         Me.Panel20 = New System.Windows.Forms.Panel()
         Me.Label10 = New System.Windows.Forms.Label()
-        Me.Label8 = New System.Windows.Forms.Label()
         Me.Panel7 = New System.Windows.Forms.Panel()
         Me.Label9 = New System.Windows.Forms.Label()
+        Me.Panel6 = New System.Windows.Forms.Panel()
+        Me.lblMaxIDEq = New System.Windows.Forms.Label()
+        Me.Label8 = New System.Windows.Forms.Label()
+        Me.pnlRowsEq = New System.Windows.Forms.Panel()
         Me.TabPage3 = New System.Windows.Forms.TabPage()
+        Me.TableLayoutPanel4 = New System.Windows.Forms.TableLayoutPanel()
+        Me.pnlHeaderPp = New System.Windows.Forms.Panel()
+        Me.lytHeaderPp = New System.Windows.Forms.TableLayoutPanel()
+        Me.Button1 = New System.Windows.Forms.Button()
+        Me.Panel9 = New System.Windows.Forms.Panel()
+        Me.Label7 = New System.Windows.Forms.Label()
+        Me.Panel10 = New System.Windows.Forms.Panel()
+        Me.Label21 = New System.Windows.Forms.Label()
+        Me.Panel11 = New System.Windows.Forms.Panel()
+        Me.Label22 = New System.Windows.Forms.Label()
+        Me.Panel12 = New System.Windows.Forms.Panel()
+        Me.Label23 = New System.Windows.Forms.Label()
+        Me.Panel13 = New System.Windows.Forms.Panel()
+        Me.Label24 = New System.Windows.Forms.Label()
+        Me.Panel14 = New System.Windows.Forms.Panel()
+        Me.Label25 = New System.Windows.Forms.Label()
+        Me.Panel15 = New System.Windows.Forms.Panel()
+        Me.Label26 = New System.Windows.Forms.Label()
+        Me.Panel16 = New System.Windows.Forms.Panel()
+        Me.Label27 = New System.Windows.Forms.Label()
+        Me.Panel17 = New System.Windows.Forms.Panel()
+        Me.Label28 = New System.Windows.Forms.Label()
+        Me.Panel18 = New System.Windows.Forms.Panel()
+        Me.Label29 = New System.Windows.Forms.Label()
+        Me.Panel19 = New System.Windows.Forms.Panel()
+        Me.Label30 = New System.Windows.Forms.Label()
+        Me.Panel31 = New System.Windows.Forms.Panel()
+        Me.Label31 = New System.Windows.Forms.Label()
+        Me.Panel32 = New System.Windows.Forms.Panel()
+        Me.Label32 = New System.Windows.Forms.Label()
+        Me.Label33 = New System.Windows.Forms.Label()
+        Me.Label34 = New System.Windows.Forms.Label()
+        Me.Label35 = New System.Windows.Forms.Label()
+        Me.Label36 = New System.Windows.Forms.Label()
+        Me.Label37 = New System.Windows.Forms.Label()
+        Me.Label38 = New System.Windows.Forms.Label()
+        Me.Label39 = New System.Windows.Forms.Label()
+        Me.Label40 = New System.Windows.Forms.Label()
+        Me.Label41 = New System.Windows.Forms.Label()
+        Me.Label42 = New System.Windows.Forms.Label()
+        Me.Label43 = New System.Windows.Forms.Label()
+        Me.pnlRowsPiping = New System.Windows.Forms.Panel()
         Me.Panel4 = New System.Windows.Forms.Panel()
         Me.btnAddRowEquipment = New System.Windows.Forms.Button()
         Me.btnDelete = New System.Windows.Forms.Button()
@@ -101,8 +148,6 @@ Partial Class Estimating
         Me.RightToolStripPanel = New System.Windows.Forms.ToolStripPanel()
         Me.LeftToolStripPanel = New System.Windows.Forms.ToolStripPanel()
         Me.ContentPanel = New System.Windows.Forms.ToolStripContentPanel()
-        Me.lblMaxIDEq = New System.Windows.Forms.Label()
-        Me.Panel6 = New System.Windows.Forms.Panel()
         Me.TableLayoutPanel1.SuspendLayout()
         Me.TableLayoutPanel3.SuspendLayout()
         Me.Panel2.SuspendLayout()
@@ -114,6 +159,8 @@ Partial Class Estimating
         Me.TabPage2.SuspendLayout()
         Me.Panel5.SuspendLayout()
         Me.TableLayoutPanel2.SuspendLayout()
+        Me.pnlHeaderEq.SuspendLayout()
+        Me.lytHeaderEq.SuspendLayout()
         Me.Panel30.SuspendLayout()
         Me.Panel29.SuspendLayout()
         Me.Panel28.SuspendLayout()
@@ -126,8 +173,25 @@ Partial Class Estimating
         Me.Panel21.SuspendLayout()
         Me.Panel20.SuspendLayout()
         Me.Panel7.SuspendLayout()
-        Me.Panel4.SuspendLayout()
         Me.Panel6.SuspendLayout()
+        Me.TabPage3.SuspendLayout()
+        Me.TableLayoutPanel4.SuspendLayout()
+        Me.pnlHeaderPp.SuspendLayout()
+        Me.lytHeaderPp.SuspendLayout()
+        Me.Panel9.SuspendLayout()
+        Me.Panel10.SuspendLayout()
+        Me.Panel11.SuspendLayout()
+        Me.Panel12.SuspendLayout()
+        Me.Panel13.SuspendLayout()
+        Me.Panel14.SuspendLayout()
+        Me.Panel15.SuspendLayout()
+        Me.Panel16.SuspendLayout()
+        Me.Panel17.SuspendLayout()
+        Me.Panel18.SuspendLayout()
+        Me.Panel19.SuspendLayout()
+        Me.Panel31.SuspendLayout()
+        Me.Panel32.SuspendLayout()
+        Me.Panel4.SuspendLayout()
         Me.SuspendLayout()
         '
         'TableLayoutPanel1
@@ -562,7 +626,6 @@ Partial Class Estimating
         '
         'Panel5
         '
-        Me.Panel5.Controls.Add(Me.pnlRowaEq)
         Me.Panel5.Controls.Add(Me.TableLayoutPanel2)
         Me.Panel5.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel5.Location = New System.Drawing.Point(3, 3)
@@ -570,63 +633,91 @@ Partial Class Estimating
         Me.Panel5.Size = New System.Drawing.Size(934, 219)
         Me.Panel5.TabIndex = 0
         '
-        'pnlRowaEq
-        '
-        Me.pnlRowaEq.AutoScroll = True
-        Me.pnlRowaEq.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.pnlRowaEq.Location = New System.Drawing.Point(0, 49)
-        Me.pnlRowaEq.Name = "pnlRowaEq"
-        Me.pnlRowaEq.Size = New System.Drawing.Size(934, 170)
-        Me.pnlRowaEq.TabIndex = 34
-        '
         'TableLayoutPanel2
         '
         Me.TableLayoutPanel2.BackColor = System.Drawing.Color.FromArgb(CType(CType(83, Byte), Integer), CType(CType(93, Byte), Integer), CType(CType(102, Byte), Integer))
-        Me.TableLayoutPanel2.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.[Single]
-        Me.TableLayoutPanel2.ColumnCount = 14
-        Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 22.0!))
-        Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 7.740773!))
-        Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 17.17172!))
-        Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 11.70117!))
-        Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10.40104!))
-        Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10.15101!))
-        Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 13.58136!))
-        Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 9.250924!))
-        Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 14.72147!))
-        Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 5.280528!))
-        Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 75.0!))
-        Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 75.0!))
-        Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 75.0!))
-        Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 85.0!))
-        Me.TableLayoutPanel2.Controls.Add(Me.Panel30, 13, 0)
-        Me.TableLayoutPanel2.Controls.Add(Me.Panel29, 12, 0)
-        Me.TableLayoutPanel2.Controls.Add(Me.Panel28, 11, 0)
-        Me.TableLayoutPanel2.Controls.Add(Me.Panel27, 10, 0)
-        Me.TableLayoutPanel2.Controls.Add(Me.Panel26, 9, 0)
-        Me.TableLayoutPanel2.Controls.Add(Me.Panel25, 8, 0)
-        Me.TableLayoutPanel2.Controls.Add(Me.Panel24, 7, 0)
-        Me.TableLayoutPanel2.Controls.Add(Me.Panel23, 6, 0)
-        Me.TableLayoutPanel2.Controls.Add(Me.Panel22, 5, 0)
-        Me.TableLayoutPanel2.Controls.Add(Me.Panel21, 4, 0)
-        Me.TableLayoutPanel2.Controls.Add(Me.Panel20, 3, 0)
-        Me.TableLayoutPanel2.Controls.Add(Me.Panel7, 2, 0)
-        Me.TableLayoutPanel2.Controls.Add(Me.Panel6, 1, 0)
-        Me.TableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Top
-        Me.TableLayoutPanel2.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.TableLayoutPanel2.ColumnCount = 1
+        Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
+        Me.TableLayoutPanel2.Controls.Add(Me.pnlHeaderEq, 0, 0)
+        Me.TableLayoutPanel2.Controls.Add(Me.pnlRowsEq, 0, 1)
+        Me.TableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill
         Me.TableLayoutPanel2.Location = New System.Drawing.Point(0, 0)
         Me.TableLayoutPanel2.Name = "TableLayoutPanel2"
-        Me.TableLayoutPanel2.RowCount = 1
+        Me.TableLayoutPanel2.RowCount = 2
+        Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 56.0!))
         Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-        Me.TableLayoutPanel2.Size = New System.Drawing.Size(934, 49)
-        Me.TableLayoutPanel2.TabIndex = 0
+        Me.TableLayoutPanel2.Size = New System.Drawing.Size(934, 219)
+        Me.TableLayoutPanel2.TabIndex = 36
+        '
+        'pnlHeaderEq
+        '
+        Me.pnlHeaderEq.Controls.Add(Me.lytHeaderEq)
+        Me.pnlHeaderEq.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.pnlHeaderEq.Location = New System.Drawing.Point(3, 3)
+        Me.pnlHeaderEq.Name = "pnlHeaderEq"
+        Me.pnlHeaderEq.Size = New System.Drawing.Size(928, 50)
+        Me.pnlHeaderEq.TabIndex = 0
+        '
+        'lytHeaderEq
+        '
+        Me.lytHeaderEq.BackColor = System.Drawing.Color.FromArgb(CType(CType(83, Byte), Integer), CType(CType(93, Byte), Integer), CType(CType(102, Byte), Integer))
+        Me.lytHeaderEq.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.[Single]
+        Me.lytHeaderEq.ColumnCount = 14
+        Me.lytHeaderEq.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 21.0!))
+        Me.lytHeaderEq.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 7.740774!))
+        Me.lytHeaderEq.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 17.17172!))
+        Me.lytHeaderEq.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 11.70117!))
+        Me.lytHeaderEq.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10.40104!))
+        Me.lytHeaderEq.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10.15101!))
+        Me.lytHeaderEq.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 13.58136!))
+        Me.lytHeaderEq.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 9.250925!))
+        Me.lytHeaderEq.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 14.72147!))
+        Me.lytHeaderEq.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 5.280529!))
+        Me.lytHeaderEq.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 75.0!))
+        Me.lytHeaderEq.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 75.0!))
+        Me.lytHeaderEq.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 75.0!))
+        Me.lytHeaderEq.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 86.0!))
+        Me.lytHeaderEq.Controls.Add(Me.SelectAll, 0, 0)
+        Me.lytHeaderEq.Controls.Add(Me.Panel30, 13, 0)
+        Me.lytHeaderEq.Controls.Add(Me.Panel29, 12, 0)
+        Me.lytHeaderEq.Controls.Add(Me.Panel28, 11, 0)
+        Me.lytHeaderEq.Controls.Add(Me.Panel27, 10, 0)
+        Me.lytHeaderEq.Controls.Add(Me.Panel26, 9, 0)
+        Me.lytHeaderEq.Controls.Add(Me.Panel25, 8, 0)
+        Me.lytHeaderEq.Controls.Add(Me.Panel24, 7, 0)
+        Me.lytHeaderEq.Controls.Add(Me.Panel23, 6, 0)
+        Me.lytHeaderEq.Controls.Add(Me.Panel22, 5, 0)
+        Me.lytHeaderEq.Controls.Add(Me.Panel21, 4, 0)
+        Me.lytHeaderEq.Controls.Add(Me.Panel20, 3, 0)
+        Me.lytHeaderEq.Controls.Add(Me.Panel7, 2, 0)
+        Me.lytHeaderEq.Controls.Add(Me.Panel6, 1, 0)
+        Me.lytHeaderEq.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.lytHeaderEq.Location = New System.Drawing.Point(2, 1)
+        Me.lytHeaderEq.Name = "lytHeaderEq"
+        Me.lytHeaderEq.RowCount = 1
+        Me.lytHeaderEq.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
+        Me.lytHeaderEq.Size = New System.Drawing.Size(920, 49)
+        Me.lytHeaderEq.TabIndex = 0
+        '
+        'SelectAll
+        '
+        Me.SelectAll.BackColor = System.Drawing.Color.FromArgb(CType(CType(83, Byte), Integer), CType(CType(93, Byte), Integer), CType(CType(102, Byte), Integer))
+        Me.SelectAll.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.SelectAll.FlatAppearance.BorderSize = 0
+        Me.SelectAll.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.SelectAll.Location = New System.Drawing.Point(4, 4)
+        Me.SelectAll.Name = "SelectAll"
+        Me.SelectAll.Size = New System.Drawing.Size(15, 41)
+        Me.SelectAll.TabIndex = 0
+        Me.SelectAll.UseVisualStyleBackColor = False
         '
         'Panel30
         '
         Me.Panel30.Controls.Add(Me.Label20)
         Me.Panel30.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel30.Location = New System.Drawing.Point(846, 4)
+        Me.Panel30.Location = New System.Drawing.Point(833, 4)
         Me.Panel30.Name = "Panel30"
-        Me.Panel30.Size = New System.Drawing.Size(84, 41)
+        Me.Panel30.Size = New System.Drawing.Size(83, 41)
         Me.Panel30.TabIndex = 14
         '
         'Label20
@@ -634,7 +725,7 @@ Partial Class Estimating
         Me.Label20.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Label20.Location = New System.Drawing.Point(0, 0)
         Me.Label20.Name = "Label20"
-        Me.Label20.Size = New System.Drawing.Size(84, 41)
+        Me.Label20.Size = New System.Drawing.Size(83, 41)
         Me.Label20.TabIndex = 2
         Me.Label20.Text = "Cut Out"
         Me.Label20.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -643,7 +734,7 @@ Partial Class Estimating
         '
         Me.Panel29.Controls.Add(Me.Label19)
         Me.Panel29.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel29.Location = New System.Drawing.Point(770, 4)
+        Me.Panel29.Location = New System.Drawing.Point(757, 4)
         Me.Panel29.Name = "Panel29"
         Me.Panel29.Size = New System.Drawing.Size(69, 41)
         Me.Panel29.TabIndex = 13
@@ -662,7 +753,7 @@ Partial Class Estimating
         '
         Me.Panel28.Controls.Add(Me.Label18)
         Me.Panel28.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel28.Location = New System.Drawing.Point(694, 4)
+        Me.Panel28.Location = New System.Drawing.Point(681, 4)
         Me.Panel28.Name = "Panel28"
         Me.Panel28.Size = New System.Drawing.Size(69, 41)
         Me.Panel28.TabIndex = 12
@@ -681,7 +772,7 @@ Partial Class Estimating
         '
         Me.Panel27.Controls.Add(Me.Label17)
         Me.Panel27.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel27.Location = New System.Drawing.Point(618, 4)
+        Me.Panel27.Location = New System.Drawing.Point(605, 4)
         Me.Panel27.Name = "Panel27"
         Me.Panel27.Size = New System.Drawing.Size(69, 41)
         Me.Panel27.TabIndex = 11
@@ -700,7 +791,7 @@ Partial Class Estimating
         '
         Me.Panel26.Controls.Add(Me.Label16)
         Me.Panel26.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel26.Location = New System.Drawing.Point(587, 4)
+        Me.Panel26.Location = New System.Drawing.Point(574, 4)
         Me.Panel26.Name = "Panel26"
         Me.Panel26.Size = New System.Drawing.Size(24, 41)
         Me.Panel26.TabIndex = 10
@@ -719,9 +810,9 @@ Partial Class Estimating
         '
         Me.Panel25.Controls.Add(Me.Label15)
         Me.Panel25.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel25.Location = New System.Drawing.Point(500, 4)
+        Me.Panel25.Location = New System.Drawing.Point(489, 4)
         Me.Panel25.Name = "Panel25"
-        Me.Panel25.Size = New System.Drawing.Size(80, 41)
+        Me.Panel25.Size = New System.Drawing.Size(78, 41)
         Me.Panel25.TabIndex = 9
         '
         'Label15
@@ -729,7 +820,7 @@ Partial Class Estimating
         Me.Label15.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Label15.Location = New System.Drawing.Point(0, 0)
         Me.Label15.Name = "Label15"
-        Me.Label15.Size = New System.Drawing.Size(80, 41)
+        Me.Label15.Size = New System.Drawing.Size(78, 41)
         Me.Label15.TabIndex = 2
         Me.Label15.Text = "Jkt"
         Me.Label15.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -738,9 +829,9 @@ Partial Class Estimating
         '
         Me.Panel24.Controls.Add(Me.Label14)
         Me.Panel24.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel24.Location = New System.Drawing.Point(445, 4)
+        Me.Panel24.Location = New System.Drawing.Point(435, 4)
         Me.Panel24.Name = "Panel24"
-        Me.Panel24.Size = New System.Drawing.Size(48, 41)
+        Me.Panel24.Size = New System.Drawing.Size(47, 41)
         Me.Panel24.TabIndex = 8
         '
         'Label14
@@ -748,7 +839,7 @@ Partial Class Estimating
         Me.Label14.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Label14.Location = New System.Drawing.Point(0, 0)
         Me.Label14.Name = "Label14"
-        Me.Label14.Size = New System.Drawing.Size(48, 41)
+        Me.Label14.Size = New System.Drawing.Size(47, 41)
         Me.Label14.TabIndex = 2
         Me.Label14.Text = "Ins Thk"
         Me.Label14.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -757,9 +848,9 @@ Partial Class Estimating
         '
         Me.Panel23.Controls.Add(Me.Label13)
         Me.Panel23.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel23.Location = New System.Drawing.Point(365, 4)
+        Me.Panel23.Location = New System.Drawing.Point(357, 4)
         Me.Panel23.Name = "Panel23"
-        Me.Panel23.Size = New System.Drawing.Size(73, 41)
+        Me.Panel23.Size = New System.Drawing.Size(71, 41)
         Me.Panel23.TabIndex = 7
         '
         'Label13
@@ -767,7 +858,7 @@ Partial Class Estimating
         Me.Label13.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Label13.Location = New System.Drawing.Point(0, 0)
         Me.Label13.Name = "Label13"
-        Me.Label13.Size = New System.Drawing.Size(73, 41)
+        Me.Label13.Size = New System.Drawing.Size(71, 41)
         Me.Label13.TabIndex = 2
         Me.Label13.Text = "Ins Type"
         Me.Label13.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -776,9 +867,9 @@ Partial Class Estimating
         '
         Me.Panel22.Controls.Add(Me.Label12)
         Me.Panel22.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel22.Location = New System.Drawing.Point(305, 4)
+        Me.Panel22.Location = New System.Drawing.Point(298, 4)
         Me.Panel22.Name = "Panel22"
-        Me.Panel22.Size = New System.Drawing.Size(53, 41)
+        Me.Panel22.Size = New System.Drawing.Size(52, 41)
         Me.Panel22.TabIndex = 6
         '
         'Label12
@@ -786,7 +877,7 @@ Partial Class Estimating
         Me.Label12.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Label12.Location = New System.Drawing.Point(0, 0)
         Me.Label12.Name = "Label12"
-        Me.Label12.Size = New System.Drawing.Size(53, 41)
+        Me.Label12.Size = New System.Drawing.Size(52, 41)
         Me.Label12.TabIndex = 2
         Me.Label12.Text = "Paint Option"
         Me.Label12.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -795,9 +886,9 @@ Partial Class Estimating
         '
         Me.Panel21.Controls.Add(Me.Label11)
         Me.Panel21.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel21.Location = New System.Drawing.Point(243, 4)
+        Me.Panel21.Location = New System.Drawing.Point(238, 4)
         Me.Panel21.Name = "Panel21"
-        Me.Panel21.Size = New System.Drawing.Size(55, 41)
+        Me.Panel21.Size = New System.Drawing.Size(53, 41)
         Me.Panel21.TabIndex = 5
         '
         'Label11
@@ -805,7 +896,7 @@ Partial Class Estimating
         Me.Label11.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Label11.Location = New System.Drawing.Point(0, 0)
         Me.Label11.Name = "Label11"
-        Me.Label11.Size = New System.Drawing.Size(55, 41)
+        Me.Label11.Size = New System.Drawing.Size(53, 41)
         Me.Label11.TabIndex = 2
         Me.Label11.Text = "Sytem"
         Me.Label11.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -814,9 +905,9 @@ Partial Class Estimating
         '
         Me.Panel20.Controls.Add(Me.Label10)
         Me.Panel20.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel20.Location = New System.Drawing.Point(174, 4)
+        Me.Panel20.Location = New System.Drawing.Point(170, 4)
         Me.Panel20.Name = "Panel20"
-        Me.Panel20.Size = New System.Drawing.Size(62, 41)
+        Me.Panel20.Size = New System.Drawing.Size(61, 41)
         Me.Panel20.TabIndex = 4
         '
         'Label10
@@ -824,10 +915,49 @@ Partial Class Estimating
         Me.Label10.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Label10.Location = New System.Drawing.Point(0, 0)
         Me.Label10.Name = "Label10"
-        Me.Label10.Size = New System.Drawing.Size(62, 41)
+        Me.Label10.Size = New System.Drawing.Size(61, 41)
         Me.Label10.TabIndex = 2
         Me.Label10.Text = "Heigth"
         Me.Label10.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'Panel7
+        '
+        Me.Panel7.Controls.Add(Me.Label9)
+        Me.Panel7.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Panel7.Location = New System.Drawing.Point(71, 4)
+        Me.Panel7.Name = "Panel7"
+        Me.Panel7.Size = New System.Drawing.Size(92, 41)
+        Me.Panel7.TabIndex = 2
+        '
+        'Label9
+        '
+        Me.Label9.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Label9.Location = New System.Drawing.Point(0, 0)
+        Me.Label9.Name = "Label9"
+        Me.Label9.Size = New System.Drawing.Size(92, 41)
+        Me.Label9.TabIndex = 2
+        Me.Label9.Text = "Equipment"
+        Me.Label9.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'Panel6
+        '
+        Me.Panel6.Controls.Add(Me.lblMaxIDEq)
+        Me.Panel6.Controls.Add(Me.Label8)
+        Me.Panel6.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Panel6.Location = New System.Drawing.Point(26, 4)
+        Me.Panel6.Name = "Panel6"
+        Me.Panel6.Size = New System.Drawing.Size(38, 41)
+        Me.Panel6.TabIndex = 15
+        '
+        'lblMaxIDEq
+        '
+        Me.lblMaxIDEq.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.lblMaxIDEq.AutoSize = True
+        Me.lblMaxIDEq.Location = New System.Drawing.Point(0, 28)
+        Me.lblMaxIDEq.Name = "lblMaxIDEq"
+        Me.lblMaxIDEq.Size = New System.Drawing.Size(13, 13)
+        Me.lblMaxIDEq.TabIndex = 0
+        Me.lblMaxIDEq.Text = "0"
         '
         'Label8
         '
@@ -840,33 +970,513 @@ Partial Class Estimating
         Me.Label8.Text = "ID"
         Me.Label8.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
-        'Panel7
+        'pnlRowsEq
         '
-        Me.Panel7.Controls.Add(Me.Label9)
-        Me.Panel7.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel7.Location = New System.Drawing.Point(73, 4)
-        Me.Panel7.Name = "Panel7"
-        Me.Panel7.Size = New System.Drawing.Size(94, 41)
-        Me.Panel7.TabIndex = 2
-        '
-        'Label9
-        '
-        Me.Label9.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Label9.Location = New System.Drawing.Point(0, 0)
-        Me.Label9.Name = "Label9"
-        Me.Label9.Size = New System.Drawing.Size(94, 41)
-        Me.Label9.TabIndex = 2
-        Me.Label9.Text = "Equipment"
-        Me.Label9.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.pnlRowsEq.AutoScroll = True
+        Me.pnlRowsEq.BackColor = System.Drawing.SystemColors.ControlLightLight
+        Me.pnlRowsEq.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.pnlRowsEq.Location = New System.Drawing.Point(3, 59)
+        Me.pnlRowsEq.Name = "pnlRowsEq"
+        Me.pnlRowsEq.Size = New System.Drawing.Size(928, 157)
+        Me.pnlRowsEq.TabIndex = 34
         '
         'TabPage3
         '
+        Me.TabPage3.Controls.Add(Me.TableLayoutPanel4)
         Me.TabPage3.Location = New System.Drawing.Point(4, 22)
         Me.TabPage3.Name = "TabPage3"
         Me.TabPage3.Size = New System.Drawing.Size(940, 225)
         Me.TabPage3.TabIndex = 2
         Me.TabPage3.Text = "PIPING"
         Me.TabPage3.UseVisualStyleBackColor = True
+        '
+        'TableLayoutPanel4
+        '
+        Me.TableLayoutPanel4.BackColor = System.Drawing.Color.FromArgb(CType(CType(83, Byte), Integer), CType(CType(93, Byte), Integer), CType(CType(102, Byte), Integer))
+        Me.TableLayoutPanel4.ColumnCount = 1
+        Me.TableLayoutPanel4.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
+        Me.TableLayoutPanel4.Controls.Add(Me.pnlHeaderPp, 0, 0)
+        Me.TableLayoutPanel4.Controls.Add(Me.pnlRowsPiping, 0, 1)
+        Me.TableLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.TableLayoutPanel4.Location = New System.Drawing.Point(0, 0)
+        Me.TableLayoutPanel4.Name = "TableLayoutPanel4"
+        Me.TableLayoutPanel4.RowCount = 2
+        Me.TableLayoutPanel4.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 62.0!))
+        Me.TableLayoutPanel4.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
+        Me.TableLayoutPanel4.Size = New System.Drawing.Size(940, 225)
+        Me.TableLayoutPanel4.TabIndex = 37
+        '
+        'pnlHeaderPp
+        '
+        Me.pnlHeaderPp.Controls.Add(Me.lytHeaderPp)
+        Me.pnlHeaderPp.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.pnlHeaderPp.Location = New System.Drawing.Point(3, 3)
+        Me.pnlHeaderPp.Name = "pnlHeaderPp"
+        Me.pnlHeaderPp.Size = New System.Drawing.Size(934, 56)
+        Me.pnlHeaderPp.TabIndex = 0
+        '
+        'lytHeaderPp
+        '
+        Me.lytHeaderPp.BackColor = System.Drawing.Color.FromArgb(CType(CType(83, Byte), Integer), CType(CType(93, Byte), Integer), CType(CType(102, Byte), Integer))
+        Me.lytHeaderPp.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.[Single]
+        Me.lytHeaderPp.ColumnCount = 24
+        Me.lytHeaderPp.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 19.0!))
+        Me.lytHeaderPp.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 3.91784!))
+        Me.lytHeaderPp.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 8.526188!))
+        Me.lytHeaderPp.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 5.481121!))
+        Me.lytHeaderPp.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 7.186358!))
+        Me.lytHeaderPp.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 7.186358!))
+        Me.lytHeaderPp.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 7.064556!))
+        Me.lytHeaderPp.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 5.359318!))
+        Me.lytHeaderPp.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 6.333739!))
+        Me.lytHeaderPp.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 7.186358!))
+        Me.lytHeaderPp.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 78.0!))
+        Me.lytHeaderPp.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 3.093949!))
+        Me.lytHeaderPp.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 3.093949!))
+        Me.lytHeaderPp.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 3.093949!))
+        Me.lytHeaderPp.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 3.093949!))
+        Me.lytHeaderPp.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 3.093949!))
+        Me.lytHeaderPp.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 3.093949!))
+        Me.lytHeaderPp.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 3.093949!))
+        Me.lytHeaderPp.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 3.093949!))
+        Me.lytHeaderPp.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 3.093949!))
+        Me.lytHeaderPp.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 3.093949!))
+        Me.lytHeaderPp.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 3.093949!))
+        Me.lytHeaderPp.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 3.093949!))
+        Me.lytHeaderPp.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 3.093949!))
+        Me.lytHeaderPp.Controls.Add(Me.Button1, 0, 0)
+        Me.lytHeaderPp.Controls.Add(Me.Panel9, 13, 0)
+        Me.lytHeaderPp.Controls.Add(Me.Panel10, 12, 0)
+        Me.lytHeaderPp.Controls.Add(Me.Panel11, 11, 0)
+        Me.lytHeaderPp.Controls.Add(Me.Panel12, 10, 0)
+        Me.lytHeaderPp.Controls.Add(Me.Panel13, 9, 0)
+        Me.lytHeaderPp.Controls.Add(Me.Panel14, 8, 0)
+        Me.lytHeaderPp.Controls.Add(Me.Panel15, 7, 0)
+        Me.lytHeaderPp.Controls.Add(Me.Panel16, 6, 0)
+        Me.lytHeaderPp.Controls.Add(Me.Panel17, 5, 0)
+        Me.lytHeaderPp.Controls.Add(Me.Panel18, 4, 0)
+        Me.lytHeaderPp.Controls.Add(Me.Panel19, 3, 0)
+        Me.lytHeaderPp.Controls.Add(Me.Panel31, 2, 0)
+        Me.lytHeaderPp.Controls.Add(Me.Panel32, 1, 0)
+        Me.lytHeaderPp.Controls.Add(Me.Label34, 14, 0)
+        Me.lytHeaderPp.Controls.Add(Me.Label35, 15, 0)
+        Me.lytHeaderPp.Controls.Add(Me.Label36, 16, 0)
+        Me.lytHeaderPp.Controls.Add(Me.Label37, 17, 0)
+        Me.lytHeaderPp.Controls.Add(Me.Label38, 18, 0)
+        Me.lytHeaderPp.Controls.Add(Me.Label39, 19, 0)
+        Me.lytHeaderPp.Controls.Add(Me.Label40, 20, 0)
+        Me.lytHeaderPp.Controls.Add(Me.Label41, 21, 0)
+        Me.lytHeaderPp.Controls.Add(Me.Label42, 22, 0)
+        Me.lytHeaderPp.Controls.Add(Me.Label43, 23, 0)
+        Me.lytHeaderPp.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.lytHeaderPp.Location = New System.Drawing.Point(2, 1)
+        Me.lytHeaderPp.Name = "lytHeaderPp"
+        Me.lytHeaderPp.RowCount = 1
+        Me.lytHeaderPp.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
+        Me.lytHeaderPp.Size = New System.Drawing.Size(921, 55)
+        Me.lytHeaderPp.TabIndex = 0
+        '
+        'Button1
+        '
+        Me.Button1.BackColor = System.Drawing.Color.FromArgb(CType(CType(83, Byte), Integer), CType(CType(93, Byte), Integer), CType(CType(102, Byte), Integer))
+        Me.Button1.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Button1.FlatAppearance.BorderSize = 0
+        Me.Button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.Button1.Location = New System.Drawing.Point(4, 4)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(13, 47)
+        Me.Button1.TabIndex = 0
+        Me.Button1.UseVisualStyleBackColor = False
+        '
+        'Panel9
+        '
+        Me.Panel9.Controls.Add(Me.Label7)
+        Me.Panel9.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Panel9.Location = New System.Drawing.Point(633, 4)
+        Me.Panel9.Name = "Panel9"
+        Me.Panel9.Size = New System.Drawing.Size(19, 47)
+        Me.Panel9.TabIndex = 14
+        '
+        'Label7
+        '
+        Me.Label7.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Label7.Location = New System.Drawing.Point(0, 0)
+        Me.Label7.Name = "Label7"
+        Me.Label7.Size = New System.Drawing.Size(19, 47)
+        Me.Label7.TabIndex = 2
+        Me.Label7.Text = "45"
+        Me.Label7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'Panel10
+        '
+        Me.Panel10.Controls.Add(Me.Label21)
+        Me.Panel10.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Panel10.Location = New System.Drawing.Point(607, 4)
+        Me.Panel10.Name = "Panel10"
+        Me.Panel10.Size = New System.Drawing.Size(19, 47)
+        Me.Panel10.TabIndex = 13
+        '
+        'Label21
+        '
+        Me.Label21.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Label21.Location = New System.Drawing.Point(0, 0)
+        Me.Label21.Name = "Label21"
+        Me.Label21.Size = New System.Drawing.Size(19, 47)
+        Me.Label21.TabIndex = 2
+        Me.Label21.Text = "90"
+        Me.Label21.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'Panel11
+        '
+        Me.Panel11.Controls.Add(Me.Label22)
+        Me.Panel11.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Panel11.Location = New System.Drawing.Point(581, 4)
+        Me.Panel11.Name = "Panel11"
+        Me.Panel11.Size = New System.Drawing.Size(19, 47)
+        Me.Panel11.TabIndex = 12
+        '
+        'Label22
+        '
+        Me.Label22.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Label22.Location = New System.Drawing.Point(0, 0)
+        Me.Label22.Name = "Label22"
+        Me.Label22.Size = New System.Drawing.Size(19, 47)
+        Me.Label22.TabIndex = 2
+        Me.Label22.Text = "L ft"
+        Me.Label22.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'Panel12
+        '
+        Me.Panel12.Controls.Add(Me.Label23)
+        Me.Panel12.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Panel12.Location = New System.Drawing.Point(502, 4)
+        Me.Panel12.Name = "Panel12"
+        Me.Panel12.Size = New System.Drawing.Size(72, 47)
+        Me.Panel12.TabIndex = 11
+        '
+        'Label23
+        '
+        Me.Label23.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Label23.Location = New System.Drawing.Point(0, 0)
+        Me.Label23.Name = "Label23"
+        Me.Label23.Size = New System.Drawing.Size(72, 47)
+        Me.Label23.TabIndex = 2
+        Me.Label23.Text = "Worl Week"
+        Me.Label23.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'Panel13
+        '
+        Me.Panel13.Controls.Add(Me.Label24)
+        Me.Panel13.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Panel13.Location = New System.Drawing.Point(443, 4)
+        Me.Panel13.Name = "Panel13"
+        Me.Panel13.Size = New System.Drawing.Size(52, 47)
+        Me.Panel13.TabIndex = 10
+        '
+        'Label24
+        '
+        Me.Label24.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Label24.Location = New System.Drawing.Point(0, 0)
+        Me.Label24.Name = "Label24"
+        Me.Label24.Size = New System.Drawing.Size(52, 47)
+        Me.Label24.TabIndex = 2
+        Me.Label24.Text = "Height"
+        Me.Label24.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'Panel14
+        '
+        Me.Panel14.Controls.Add(Me.Label25)
+        Me.Panel14.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Panel14.Location = New System.Drawing.Point(391, 4)
+        Me.Panel14.Name = "Panel14"
+        Me.Panel14.Size = New System.Drawing.Size(45, 47)
+        Me.Panel14.TabIndex = 9
+        '
+        'Label25
+        '
+        Me.Label25.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Label25.Location = New System.Drawing.Point(0, 0)
+        Me.Label25.Name = "Label25"
+        Me.Label25.Size = New System.Drawing.Size(45, 47)
+        Me.Label25.TabIndex = 2
+        Me.Label25.Text = "Jkt"
+        Me.Label25.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'Panel15
+        '
+        Me.Panel15.Controls.Add(Me.Label26)
+        Me.Panel15.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Panel15.Location = New System.Drawing.Point(347, 4)
+        Me.Panel15.Name = "Panel15"
+        Me.Panel15.Size = New System.Drawing.Size(37, 47)
+        Me.Panel15.TabIndex = 8
+        '
+        'Label26
+        '
+        Me.Label26.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Label26.Location = New System.Drawing.Point(0, 0)
+        Me.Label26.Name = "Label26"
+        Me.Label26.Size = New System.Drawing.Size(37, 47)
+        Me.Label26.TabIndex = 2
+        Me.Label26.Text = "Ins Thk"
+        Me.Label26.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'Panel16
+        '
+        Me.Panel16.Controls.Add(Me.Label27)
+        Me.Panel16.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Panel16.Location = New System.Drawing.Point(289, 4)
+        Me.Panel16.Name = "Panel16"
+        Me.Panel16.Size = New System.Drawing.Size(51, 47)
+        Me.Panel16.TabIndex = 7
+        '
+        'Label27
+        '
+        Me.Label27.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Label27.Location = New System.Drawing.Point(0, 0)
+        Me.Label27.Name = "Label27"
+        Me.Label27.Size = New System.Drawing.Size(51, 47)
+        Me.Label27.TabIndex = 2
+        Me.Label27.Text = "Ins Type"
+        Me.Label27.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'Panel17
+        '
+        Me.Panel17.Controls.Add(Me.Label28)
+        Me.Panel17.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Panel17.Location = New System.Drawing.Point(230, 4)
+        Me.Panel17.Name = "Panel17"
+        Me.Panel17.Size = New System.Drawing.Size(52, 47)
+        Me.Panel17.TabIndex = 6
+        '
+        'Label28
+        '
+        Me.Label28.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Label28.Location = New System.Drawing.Point(0, 0)
+        Me.Label28.Name = "Label28"
+        Me.Label28.Size = New System.Drawing.Size(52, 47)
+        Me.Label28.TabIndex = 2
+        Me.Label28.Text = "Paint Option"
+        Me.Label28.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'Panel18
+        '
+        Me.Panel18.Controls.Add(Me.Label29)
+        Me.Panel18.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Panel18.Location = New System.Drawing.Point(171, 4)
+        Me.Panel18.Name = "Panel18"
+        Me.Panel18.Size = New System.Drawing.Size(52, 47)
+        Me.Panel18.TabIndex = 5
+        '
+        'Label29
+        '
+        Me.Label29.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Label29.Location = New System.Drawing.Point(0, 0)
+        Me.Label29.Name = "Label29"
+        Me.Label29.Size = New System.Drawing.Size(52, 47)
+        Me.Label29.TabIndex = 2
+        Me.Label29.Text = "Sytem"
+        Me.Label29.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'Panel19
+        '
+        Me.Panel19.Controls.Add(Me.Label30)
+        Me.Panel19.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Panel19.Location = New System.Drawing.Point(126, 4)
+        Me.Panel19.Name = "Panel19"
+        Me.Panel19.Size = New System.Drawing.Size(38, 47)
+        Me.Panel19.TabIndex = 4
+        '
+        'Label30
+        '
+        Me.Label30.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Label30.Location = New System.Drawing.Point(0, 0)
+        Me.Label30.Name = "Label30"
+        Me.Label30.Size = New System.Drawing.Size(38, 47)
+        Me.Label30.TabIndex = 2
+        Me.Label30.Text = "Size"
+        Me.Label30.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'Panel31
+        '
+        Me.Panel31.Controls.Add(Me.Label31)
+        Me.Panel31.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Panel31.Location = New System.Drawing.Point(56, 4)
+        Me.Panel31.Name = "Panel31"
+        Me.Panel31.Size = New System.Drawing.Size(63, 47)
+        Me.Panel31.TabIndex = 2
+        '
+        'Label31
+        '
+        Me.Label31.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Label31.Location = New System.Drawing.Point(0, 0)
+        Me.Label31.Name = "Label31"
+        Me.Label31.RightToLeft = System.Windows.Forms.RightToLeft.No
+        Me.Label31.Size = New System.Drawing.Size(63, 47)
+        Me.Label31.TabIndex = 2
+        Me.Label31.Text = "Line"
+        Me.Label31.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'Panel32
+        '
+        Me.Panel32.Controls.Add(Me.Label32)
+        Me.Panel32.Controls.Add(Me.Label33)
+        Me.Panel32.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Panel32.Location = New System.Drawing.Point(24, 4)
+        Me.Panel32.Name = "Panel32"
+        Me.Panel32.Size = New System.Drawing.Size(25, 47)
+        Me.Panel32.TabIndex = 15
+        '
+        'Label32
+        '
+        Me.Label32.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.Label32.AutoSize = True
+        Me.Label32.Location = New System.Drawing.Point(0, 34)
+        Me.Label32.Name = "Label32"
+        Me.Label32.Size = New System.Drawing.Size(13, 13)
+        Me.Label32.TabIndex = 0
+        Me.Label32.Text = "0"
+        '
+        'Label33
+        '
+        Me.Label33.AutoSize = True
+        Me.Label33.Location = New System.Drawing.Point(3, 0)
+        Me.Label33.Name = "Label33"
+        Me.Label33.Padding = New System.Windows.Forms.Padding(3)
+        Me.Label33.Size = New System.Drawing.Size(24, 19)
+        Me.Label33.TabIndex = 1
+        Me.Label33.Text = "ID"
+        Me.Label33.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'Label34
+        '
+        Me.Label34.AutoSize = True
+        Me.Label34.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Label34.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.5!)
+        Me.Label34.Location = New System.Drawing.Point(659, 1)
+        Me.Label34.Name = "Label34"
+        Me.Label34.Size = New System.Drawing.Size(19, 53)
+        Me.Label34.TabIndex = 16
+        Me.Label34.Text = "B" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "e" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "n" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "d"
+        Me.Label34.TextAlign = System.Drawing.ContentAlignment.TopCenter
+        '
+        'Label35
+        '
+        Me.Label35.AutoSize = True
+        Me.Label35.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Label35.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.0!)
+        Me.Label35.Location = New System.Drawing.Point(685, 1)
+        Me.Label35.Name = "Label35"
+        Me.Label35.Size = New System.Drawing.Size(19, 53)
+        Me.Label35.TabIndex = 17
+        Me.Label35.Text = "T" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "E" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "E"
+        Me.Label35.TextAlign = System.Drawing.ContentAlignment.TopCenter
+        '
+        'Label36
+        '
+        Me.Label36.AutoSize = True
+        Me.Label36.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Label36.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.0!)
+        Me.Label36.Location = New System.Drawing.Point(711, 1)
+        Me.Label36.Name = "Label36"
+        Me.Label36.Size = New System.Drawing.Size(19, 53)
+        Me.Label36.TabIndex = 18
+        Me.Label36.Text = "R" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "E" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "D" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "U" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "C"
+        Me.Label36.TextAlign = System.Drawing.ContentAlignment.TopCenter
+        '
+        'Label37
+        '
+        Me.Label37.AutoSize = True
+        Me.Label37.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Label37.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.0!)
+        Me.Label37.Location = New System.Drawing.Point(737, 1)
+        Me.Label37.Name = "Label37"
+        Me.Label37.Size = New System.Drawing.Size(19, 53)
+        Me.Label37.TabIndex = 19
+        Me.Label37.Text = "C" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "A" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "P'" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "S"
+        Me.Label37.TextAlign = System.Drawing.ContentAlignment.TopCenter
+        '
+        'Label38
+        '
+        Me.Label38.AutoSize = True
+        Me.Label38.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Label38.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.0!)
+        Me.Label38.Location = New System.Drawing.Point(763, 1)
+        Me.Label38.Name = "Label38"
+        Me.Label38.Size = New System.Drawing.Size(19, 53)
+        Me.Label38.TabIndex = 20
+        Me.Label38.Text = "P" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "A" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "I" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "R"
+        Me.Label38.TextAlign = System.Drawing.ContentAlignment.TopCenter
+        '
+        'Label39
+        '
+        Me.Label39.AutoSize = True
+        Me.Label39.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Label39.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.0!)
+        Me.Label39.Location = New System.Drawing.Point(789, 1)
+        Me.Label39.Name = "Label39"
+        Me.Label39.Size = New System.Drawing.Size(19, 53)
+        Me.Label39.TabIndex = 21
+        Me.Label39.Text = "V" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "A" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "L" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "V" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "E"
+        Me.Label39.TextAlign = System.Drawing.ContentAlignment.TopCenter
+        '
+        'Label40
+        '
+        Me.Label40.AutoSize = True
+        Me.Label40.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Label40.Font = New System.Drawing.Font("Microsoft Sans Serif", 4.5!)
+        Me.Label40.Location = New System.Drawing.Point(815, 1)
+        Me.Label40.Name = "Label40"
+        Me.Label40.Size = New System.Drawing.Size(19, 53)
+        Me.Label40.TabIndex = 22
+        Me.Label40.Text = "C" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "O" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "N" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "T" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "R" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "O" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "L"
+        Me.Label40.TextAlign = System.Drawing.ContentAlignment.TopCenter
+        '
+        'Label41
+        '
+        Me.Label41.AutoSize = True
+        Me.Label41.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Label41.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.0!)
+        Me.Label41.Location = New System.Drawing.Point(841, 1)
+        Me.Label41.Name = "Label41"
+        Me.Label41.Size = New System.Drawing.Size(19, 53)
+        Me.Label41.TabIndex = 23
+        Me.Label41.Text = "W" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "E" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "L" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "D"
+        Me.Label41.TextAlign = System.Drawing.ContentAlignment.TopCenter
+        '
+        'Label42
+        '
+        Me.Label42.AutoSize = True
+        Me.Label42.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Label42.Font = New System.Drawing.Font("Microsoft Sans Serif", 5.5!)
+        Me.Label42.Location = New System.Drawing.Point(867, 1)
+        Me.Label42.Name = "Label42"
+        Me.Label42.Size = New System.Drawing.Size(19, 53)
+        Me.Label42.TabIndex = 24
+        Me.Label42.Text = "C" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "U" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "T-" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "O" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "U" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "T"
+        Me.Label42.TextAlign = System.Drawing.ContentAlignment.TopCenter
+        '
+        'Label43
+        '
+        Me.Label43.AutoSize = True
+        Me.Label43.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Label43.Font = New System.Drawing.Font("Microsoft Sans Serif", 5.5!)
+        Me.Label43.Location = New System.Drawing.Point(893, 1)
+        Me.Label43.Name = "Label43"
+        Me.Label43.Size = New System.Drawing.Size(24, 53)
+        Me.Label43.TabIndex = 25
+        Me.Label43.Text = "S" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "P" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "P" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "O" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "R" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "T"
+        Me.Label43.TextAlign = System.Drawing.ContentAlignment.TopCenter
+        '
+        'pnlRowsPiping
+        '
+        Me.pnlRowsPiping.AutoScroll = True
+        Me.pnlRowsPiping.BackColor = System.Drawing.SystemColors.ControlLightLight
+        Me.pnlRowsPiping.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.pnlRowsPiping.Location = New System.Drawing.Point(3, 65)
+        Me.pnlRowsPiping.Name = "pnlRowsPiping"
+        Me.pnlRowsPiping.Size = New System.Drawing.Size(934, 157)
+        Me.pnlRowsPiping.TabIndex = 34
         '
         'Panel4
         '
@@ -968,26 +1578,6 @@ Partial Class Estimating
         '
         Me.ContentPanel.Size = New System.Drawing.Size(150, 150)
         '
-        'lblMaxIDEq
-        '
-        Me.lblMaxIDEq.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.lblMaxIDEq.AutoSize = True
-        Me.lblMaxIDEq.Location = New System.Drawing.Point(0, 28)
-        Me.lblMaxIDEq.Name = "lblMaxIDEq"
-        Me.lblMaxIDEq.Size = New System.Drawing.Size(13, 13)
-        Me.lblMaxIDEq.TabIndex = 0
-        Me.lblMaxIDEq.Text = "0"
-        '
-        'Panel6
-        '
-        Me.Panel6.Controls.Add(Me.lblMaxIDEq)
-        Me.Panel6.Controls.Add(Me.Label8)
-        Me.Panel6.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel6.Location = New System.Drawing.Point(27, 4)
-        Me.Panel6.Name = "Panel6"
-        Me.Panel6.Size = New System.Drawing.Size(39, 41)
-        Me.Panel6.TabIndex = 15
-        '
         'Estimating
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1011,6 +1601,8 @@ Partial Class Estimating
         Me.TabPage2.ResumeLayout(False)
         Me.Panel5.ResumeLayout(False)
         Me.TableLayoutPanel2.ResumeLayout(False)
+        Me.pnlHeaderEq.ResumeLayout(False)
+        Me.lytHeaderEq.ResumeLayout(False)
         Me.Panel30.ResumeLayout(False)
         Me.Panel29.ResumeLayout(False)
         Me.Panel28.ResumeLayout(False)
@@ -1023,9 +1615,28 @@ Partial Class Estimating
         Me.Panel21.ResumeLayout(False)
         Me.Panel20.ResumeLayout(False)
         Me.Panel7.ResumeLayout(False)
-        Me.Panel4.ResumeLayout(False)
         Me.Panel6.ResumeLayout(False)
         Me.Panel6.PerformLayout()
+        Me.TabPage3.ResumeLayout(False)
+        Me.TableLayoutPanel4.ResumeLayout(False)
+        Me.pnlHeaderPp.ResumeLayout(False)
+        Me.lytHeaderPp.ResumeLayout(False)
+        Me.lytHeaderPp.PerformLayout()
+        Me.Panel9.ResumeLayout(False)
+        Me.Panel10.ResumeLayout(False)
+        Me.Panel11.ResumeLayout(False)
+        Me.Panel12.ResumeLayout(False)
+        Me.Panel13.ResumeLayout(False)
+        Me.Panel14.ResumeLayout(False)
+        Me.Panel15.ResumeLayout(False)
+        Me.Panel16.ResumeLayout(False)
+        Me.Panel17.ResumeLayout(False)
+        Me.Panel18.ResumeLayout(False)
+        Me.Panel19.ResumeLayout(False)
+        Me.Panel31.ResumeLayout(False)
+        Me.Panel32.ResumeLayout(False)
+        Me.Panel32.PerformLayout()
+        Me.Panel4.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
@@ -1094,7 +1705,7 @@ Partial Class Estimating
     Friend WithEvents LeftToolStripPanel As ToolStripPanel
     Friend WithEvents ContentPanel As ToolStripContentPanel
     Friend WithEvents Panel5 As Panel
-    Friend WithEvents TableLayoutPanel2 As TableLayoutPanel
+    Friend WithEvents lytHeaderEq As TableLayoutPanel
     Friend WithEvents Panel30 As Panel
     Friend WithEvents Label20 As Label
     Friend WithEvents Panel29 As Panel
@@ -1108,7 +1719,52 @@ Partial Class Estimating
     Friend WithEvents Panel21 As Panel
     Friend WithEvents Panel20 As Panel
     Friend WithEvents Panel7 As Panel
-    Public WithEvents pnlRowaEq As Panel
+    Public WithEvents pnlRowsEq As Panel
     Friend WithEvents Panel6 As Panel
     Friend WithEvents lblMaxIDEq As Label
+    Friend WithEvents TableLayoutPanel2 As TableLayoutPanel
+    Friend WithEvents pnlHeaderEq As Panel
+    Friend WithEvents SelectAll As Button
+    Friend WithEvents TableLayoutPanel4 As TableLayoutPanel
+    Friend WithEvents pnlHeaderPp As Panel
+    Friend WithEvents lytHeaderPp As TableLayoutPanel
+    Friend WithEvents Button1 As Button
+    Friend WithEvents Panel9 As Panel
+    Friend WithEvents Label7 As Label
+    Friend WithEvents Panel10 As Panel
+    Friend WithEvents Label21 As Label
+    Friend WithEvents Panel11 As Panel
+    Friend WithEvents Label22 As Label
+    Friend WithEvents Panel12 As Panel
+    Friend WithEvents Label23 As Label
+    Friend WithEvents Panel13 As Panel
+    Friend WithEvents Label24 As Label
+    Friend WithEvents Panel14 As Panel
+    Friend WithEvents Label25 As Label
+    Friend WithEvents Panel15 As Panel
+    Friend WithEvents Label26 As Label
+    Friend WithEvents Panel16 As Panel
+    Friend WithEvents Label27 As Label
+    Friend WithEvents Panel17 As Panel
+    Friend WithEvents Label28 As Label
+    Friend WithEvents Panel18 As Panel
+    Friend WithEvents Label29 As Label
+    Friend WithEvents Panel19 As Panel
+    Friend WithEvents Label30 As Label
+    Friend WithEvents Panel31 As Panel
+    Friend WithEvents Label31 As Label
+    Friend WithEvents Panel32 As Panel
+    Friend WithEvents Label32 As Label
+    Friend WithEvents Label33 As Label
+    Public WithEvents pnlRowsPiping As Panel
+    Friend WithEvents Label34 As Label
+    Friend WithEvents Label35 As Label
+    Friend WithEvents Label36 As Label
+    Friend WithEvents Label37 As Label
+    Friend WithEvents Label38 As Label
+    Friend WithEvents Label39 As Label
+    Friend WithEvents Label40 As Label
+    Friend WithEvents Label41 As Label
+    Friend WithEvents Label42 As Label
+    Friend WithEvents Label43 As Label
 End Class

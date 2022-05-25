@@ -17,6 +17,7 @@
         mtdFactor.selectPpJacketunitRate(tblJacketPp)
         mtdFactor.selectEqInsUnitRate(tblEqInsUnitRate)
         mtdFactor.selectPpInsUnitRate(tblPpInsUnitRate)
+        mtdFactor.selectSizesMaterialPiping(tblPipingMaterial)
     End Sub
     Private Sub btnSalir_Click(sender As Object, e As EventArgs) Handles btnSalir.Click
         Me.Close()
@@ -350,6 +351,15 @@
                 Else
                     MessageBox.Show("Please Select a row in the Table Piping Insulation Rate Unit Rate to Constinue.", "Important", MessageBoxButtons.OK, MessageBoxIcon.Asterisk)
                 End If
+            Case "PipingMaterial"
+                If tblPipingMaterial.SelectedRows.Count > 0 Then
+                    If mtdFactor.saveUpdatePipingMaterial(tblPipingMaterial) Then
+                        mtdFactor.selectSizesMaterialPiping(tblPipingMaterial)
+                        MsgBox("Successful.")
+                    End If
+                Else
+                    MessageBox.Show("Please Select a row in the Table Piping Insulation Rate Unit Rate to Constinue.", "Important", MessageBoxButtons.OK, MessageBoxIcon.Asterisk)
+                End If
         End Select
     End Sub
     Private Sub btnDeleteFactorTbl_Click(sender As Object, e As EventArgs) Handles btnDeleteFactorTbl.Click
@@ -523,6 +533,21 @@
                 If tblPpInsUnitRate.SelectedRows.Count > 0 Then
                     If DialogResult.Yes = MessageBox.Show("If you Accept, is likely that you delete an Element that is related to this Records. Are you sure to continue?", "Message", MessageBoxButtons.YesNo, MessageBoxIcon.Asterisk) Then
                         If mtdFactor.deletePpInsUnitRate(tblPpInsUnitRate) Then
+                            For Each row As DataGridViewRow In tblPpInsUnitRate.SelectedRows()
+                                tblPpInsUnitRate.Rows.Remove(row)
+                            Next
+                            MsgBox("Successfull")
+                        Else
+                            MsgBox("Error, check the Data or refresh the Window.")
+                        End If
+                    End If
+                Else
+                    MessageBox.Show("Please Select A Row.", "Message", MessageBoxButtons.OK, MessageBoxIcon.Asterisk)
+                End If
+            Case "PipingMaterial"
+                If tblPipingMaterial.SelectedRows.Count > 0 Then
+                    If DialogResult.Yes = MessageBox.Show("If you Accept, is likely that you delete an Element that is related to this Records. Are you sure to continue?", "Message", MessageBoxButtons.YesNo, MessageBoxIcon.Asterisk) Then
+                        If mtdFactor.deletePipingMaterial(tblPipingMaterial) Then
                             For Each row As DataGridViewRow In tblPpInsUnitRate.SelectedRows()
                                 tblPpInsUnitRate.Rows.Remove(row)
                             Next
@@ -980,6 +1005,67 @@
     End Sub
 
     Private Sub tblPpInsUnitRate_DataError(sender As Object, e As DataGridViewDataErrorEventArgs) Handles tblPpInsUnitRate.DataError
+        If e.ColumnIndex = 4 Then
+            e.ThrowException = False
+        End If
+    End Sub
+    '############################################################################################################################################################################################################################################################
+    '############################################################################################################################################################################################################################################################
+    '############################################################################################################################################################################################################################################################
+    Private Sub btnExcelPipingMaterial_Click(sender As Object, e As EventArgs) Handles btnExcelPipingMaterial.Click
+        Try
+            Dim sheetName = InputBox("Please Write the name of the Sheet to Read.", "Find Excel Sheet", "Sheet 1")
+            While sheetName <> ""
+                Dim tbl = leerExcel(lblMessage, pgbProgress, sheetName)
+                If tbl IsNot Nothing Then
+                    For Each row As Data.DataRow In tbl.Rows()
+                        tblPipingMaterial.Rows.Add("", "", "", row.ItemArray(0).ToString(), row.ItemArray(1).ToString(), row.ItemArray(2).ToString(), row.ItemArray(3).ToString(), row.ItemArray(4).ToString())
+                    Next
+                    pgbProgress.Value = 100
+                    lblMessage.Text = "Message: End."
+                    Exit While
+                Else
+                    sheetName = InputBox("Please Write the name of the Sheet to Read." + "If do not wish to continue, leave the space blank.", "find Excel Sheet", "Sheet 1")
+                End If
+            End While
+        Catch ex As Exception
+            MsgBox(ex.Message())
+        End Try
+        selectTable = "PipingMaterial"
+    End Sub
+    Private Sub tblPipingMaterial_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles tblPipingMaterial.CellClick
+        Select Case e.ColumnIndex
+            Case 4 ' Type
+                Try
+                    If tblPipingMaterial.CurrentCell.GetType.Name = "DataGridViewTextBoxCell" Then
+                        Dim cmbOption As New DataGridViewComboBoxCell
+                        With cmbOption
+                            mtdFactor.llenarComboCellInsFitting(cmbOption)
+                        End With
+                        tblPipingMaterial.CurrentRow.Cells("typeMat") = cmbOption
+                    Else
+                        Dim cmbOption1 As DataGridViewComboBoxCell = tblPipingMaterial.CurrentRow.Cells("typeMat")
+                        With cmbOption1
+                            mtdFactor.llenarComboCellInsFitting(tblPipingMaterial.CurrentRow.Cells("typeMat"))
+                        End With
+                    End If
+                Catch ex As Exception
+
+                End Try
+        End Select
+    End Sub
+    Public Sub cmb_SelectedIndexChanguedPipingMat(sender As Object, e As EventArgs)
+        Try
+            Dim cmb As ComboBox = CType(sender, ComboBox)
+            Select Case tblPipingMaterial.CurrentCell.ColumnIndex
+                Case 4 'type
+                    tblPipingMaterial.CurrentCell.Value = cmb.Text
+            End Select
+        Catch ex As Exception
+
+        End Try
+    End Sub
+    Private Sub tblPipingMaterial_DataError(sender As Object, e As DataGridViewDataErrorEventArgs) Handles tblPipingMaterial.DataError
         If e.ColumnIndex = 4 Then
             e.ThrowException = False
         End If

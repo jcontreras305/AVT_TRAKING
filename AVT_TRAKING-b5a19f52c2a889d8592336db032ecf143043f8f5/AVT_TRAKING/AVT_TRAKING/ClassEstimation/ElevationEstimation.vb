@@ -210,4 +210,29 @@ Public Class ElevationEstimation
             desconectar()
         End Try
     End Function
+    Public Function llenarComboElvPaint(ByVal cmb As ComboBox) As Data.DataTable
+        Try
+            conectar()
+            Dim dt As New Data.DataTable
+            dt.Columns.Add("elevation")
+            dt.Columns.Add("percent")
+            Dim cmd As New SqlCommand("select elevation,[percent] from factorElevationPaint", conn)
+            Dim dr As SqlDataReader = cmd.ExecuteReader
+            Dim item As String = If(cmb.SelectedItem Is Nothing, "", cmb.SelectedItem.ToString())
+            cmb.Items.Clear()
+            While dr.Read()
+                cmb.Items.Add(dr("elevation"))
+                dt.Rows.Add(dr("elevation"), dr("percent"))
+            End While
+            If item <> "" Then
+                cmb.SelectedItem = cmb.Items(cmb.FindString(item))
+            End If
+            dr.Close()
+            Return dt
+        Catch ex As Exception
+            Return Nothing
+        Finally
+            desconectar()
+        End Try
+    End Function
 End Class
