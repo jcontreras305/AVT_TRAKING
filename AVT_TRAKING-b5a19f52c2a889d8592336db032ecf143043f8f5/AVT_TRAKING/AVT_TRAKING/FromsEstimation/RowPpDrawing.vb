@@ -95,7 +95,7 @@
             If cmbLaborRatePnt.FindString(ItemArray(12).ToString()) > -1 And ItemArray(12) <> "" Then
                 cmbLaborRatePnt.SelectedItem = cmbLaborRatePnt.Items(cmbLaborRatePnt.FindString(ItemArray(12).ToString()))
             End If
-            txtLFtRmv.Text = ItemArray(13)
+            txtLFtPnt.Text = ItemArray(13)
             txt90Pnt.Text = ItemArray(14)
             txt45Pnt.Text = ItemArray(15)
             txtTeePnt.Text = ItemArray(16)
@@ -396,12 +396,12 @@
         End If
     End Sub
     Private Sub txt45II_Leave(sender As Object, e As EventArgs) Handles txt45II.Leave
-        If txtLFtII.Text IsNot Nothing Then
-            If soloNumero(txtLFtII.Text) Then
-                _itemArray(24) = txtLFtII.Text
+        If txt45II.Text IsNot Nothing Then
+            If soloNumero(txt45II.Text) Then
+                _itemArray(24) = txt45II.Text
             Else
-                txtLFtII.Text = "0"
-                _itemArray(24) = txtLFtII.Text
+                txt45II.Text = "0"
+                _itemArray(24) = txt45II.Text
             End If
         End If
     End Sub

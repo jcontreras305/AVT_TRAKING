@@ -29,6 +29,7 @@ Partial Class RowPpDrawing
         Me.lytLaborRate = New System.Windows.Forms.TableLayoutPanel()
         Me.GroupBox3 = New System.Windows.Forms.GroupBox()
         Me.lytII = New System.Windows.Forms.TableLayoutPanel()
+        Me.cmbLaborRateII = New AVT_TRAKING.MyComboBox()
         Me.txtLFtII = New System.Windows.Forms.TextBox()
         Me.txt90II = New System.Windows.Forms.TextBox()
         Me.txt45II = New System.Windows.Forms.TextBox()
@@ -44,6 +45,7 @@ Partial Class RowPpDrawing
         Me.txtSupportII = New System.Windows.Forms.TextBox()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
         Me.lytPnt = New System.Windows.Forms.TableLayoutPanel()
+        Me.cmbLaborRatePnt = New AVT_TRAKING.MyComboBox()
         Me.txtLFtPnt = New System.Windows.Forms.TextBox()
         Me.txt90Pnt = New System.Windows.Forms.TextBox()
         Me.txt45Pnt = New System.Windows.Forms.TextBox()
@@ -54,19 +56,17 @@ Partial Class RowPpDrawing
         Me.txtWeldPnt = New System.Windows.Forms.TextBox()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.lytRmv = New System.Windows.Forms.TableLayoutPanel()
+        Me.cmbLaborRateRmv = New AVT_TRAKING.MyComboBox()
         Me.txtLFtRmv = New System.Windows.Forms.TextBox()
         Me.chbAcm = New System.Windows.Forms.CheckBox()
         Me.txtIdPpDrawing = New System.Windows.Forms.TextBox()
-        Me.Panel1 = New System.Windows.Forms.Panel()
-        Me.txtSize = New System.Windows.Forms.TextBox()
-        Me.chbST = New System.Windows.Forms.CheckBox()
-        Me.cmbLaborRateII = New AVT_TRAKING.MyComboBox()
-        Me.cmbLaborRatePnt = New AVT_TRAKING.MyComboBox()
-        Me.cmbLaborRateRmv = New AVT_TRAKING.MyComboBox()
         Me.cmbSystem = New AVT_TRAKING.MyComboBox()
         Me.cmbPaintOption = New AVT_TRAKING.MyComboBox()
         Me.cmbInsType = New AVT_TRAKING.MyComboBox()
         Me.cmbJacked = New AVT_TRAKING.MyComboBox()
+        Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.txtSize = New System.Windows.Forms.TextBox()
+        Me.chbST = New System.Windows.Forms.CheckBox()
         Me.cmbHeight = New AVT_TRAKING.MyComboBox()
         Me.lytMain.SuspendLayout()
         Me.lytLaborRate.SuspendLayout()
@@ -226,6 +226,22 @@ Partial Class RowPpDrawing
         Me.lytII.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
         Me.lytII.Size = New System.Drawing.Size(420, 29)
         Me.lytII.TabIndex = 0
+        '
+        'cmbLaborRateII
+        '
+        Me.cmbLaborRateII.ArrowColor = System.Drawing.Color.FromArgb(CType(CType(74, Byte), Integer), CType(CType(97, Byte), Integer), CType(CType(132, Byte), Integer))
+        Me.cmbLaborRateII.ArrowPersonalized = False
+        Me.cmbLaborRateII.ArrowStyle = AVT_TRAKING.MyComboBox.enumArrowStyle.Arrow3D
+        Me.cmbLaborRateII.BorderColor = System.Drawing.SystemColors.ControlLightLight
+        Me.cmbLaborRateII.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.cmbLaborRateII.DropDownWidth = 80
+        Me.cmbLaborRateII.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!)
+        Me.cmbLaborRateII.FormattingEnabled = True
+        Me.cmbLaborRateII.Location = New System.Drawing.Point(4, 4)
+        Me.cmbLaborRateII.Name = "cmbLaborRateII"
+        Me.cmbLaborRateII.Size = New System.Drawing.Size(66, 21)
+        Me.cmbLaborRateII.SizeHeight = 21
+        Me.cmbLaborRateII.TabIndex = 27
         '
         'txtLFtII
         '
@@ -447,6 +463,21 @@ Partial Class RowPpDrawing
         Me.lytPnt.Size = New System.Drawing.Size(420, 28)
         Me.lytPnt.TabIndex = 0
         '
+        'cmbLaborRatePnt
+        '
+        Me.cmbLaborRatePnt.ArrowColor = System.Drawing.Color.FromArgb(CType(CType(74, Byte), Integer), CType(CType(97, Byte), Integer), CType(CType(132, Byte), Integer))
+        Me.cmbLaborRatePnt.ArrowPersonalized = False
+        Me.cmbLaborRatePnt.ArrowStyle = AVT_TRAKING.MyComboBox.enumArrowStyle.Arrow3D
+        Me.cmbLaborRatePnt.BorderColor = System.Drawing.SystemColors.ControlLightLight
+        Me.cmbLaborRatePnt.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.cmbLaborRatePnt.DropDownWidth = 80
+        Me.cmbLaborRatePnt.FormattingEnabled = True
+        Me.cmbLaborRatePnt.Location = New System.Drawing.Point(4, 4)
+        Me.cmbLaborRatePnt.Name = "cmbLaborRatePnt"
+        Me.cmbLaborRatePnt.Size = New System.Drawing.Size(66, 21)
+        Me.cmbLaborRatePnt.SizeHeight = 21
+        Me.cmbLaborRatePnt.TabIndex = 18
+        '
         'txtLFtPnt
         '
         Me.txtLFtPnt.BorderStyle = System.Windows.Forms.BorderStyle.None
@@ -586,6 +617,22 @@ Partial Class RowPpDrawing
         Me.lytRmv.Size = New System.Drawing.Size(420, 28)
         Me.lytRmv.TabIndex = 0
         '
+        'cmbLaborRateRmv
+        '
+        Me.cmbLaborRateRmv.ArrowColor = System.Drawing.Color.FromArgb(CType(CType(74, Byte), Integer), CType(CType(97, Byte), Integer), CType(CType(132, Byte), Integer))
+        Me.cmbLaborRateRmv.ArrowPersonalized = False
+        Me.cmbLaborRateRmv.ArrowStyle = AVT_TRAKING.MyComboBox.enumArrowStyle.Arrow3D
+        Me.cmbLaborRateRmv.BorderColor = System.Drawing.SystemColors.ControlLightLight
+        Me.cmbLaborRateRmv.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.cmbLaborRateRmv.DropDownWidth = 80
+        Me.cmbLaborRateRmv.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!)
+        Me.cmbLaborRateRmv.FormattingEnabled = True
+        Me.cmbLaborRateRmv.Location = New System.Drawing.Point(4, 4)
+        Me.cmbLaborRateRmv.Name = "cmbLaborRateRmv"
+        Me.cmbLaborRateRmv.Size = New System.Drawing.Size(66, 21)
+        Me.cmbLaborRateRmv.SizeHeight = 21
+        Me.cmbLaborRateRmv.TabIndex = 14
+        '
         'txtLFtRmv
         '
         Me.txtLFtRmv.BorderStyle = System.Windows.Forms.BorderStyle.None
@@ -622,85 +669,6 @@ Partial Class RowPpDrawing
         Me.txtIdPpDrawing.Name = "txtIdPpDrawing"
         Me.txtIdPpDrawing.Size = New System.Drawing.Size(29, 141)
         Me.txtIdPpDrawing.TabIndex = 3
-        '
-        'Panel1
-        '
-        Me.Panel1.Controls.Add(Me.txtSize)
-        Me.Panel1.Controls.Add(Me.chbST)
-        Me.Panel1.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel1.Location = New System.Drawing.Point(123, 2)
-        Me.Panel1.Margin = New System.Windows.Forms.Padding(1)
-        Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(41, 143)
-        Me.Panel1.TabIndex = 12
-        '
-        'txtSize
-        '
-        Me.txtSize.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.txtSize.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.txtSize.Location = New System.Drawing.Point(0, 0)
-        Me.txtSize.Multiline = True
-        Me.txtSize.Name = "txtSize"
-        Me.txtSize.Size = New System.Drawing.Size(41, 112)
-        Me.txtSize.TabIndex = 5
-        '
-        'chbST
-        '
-        Me.chbST.AutoSize = True
-        Me.chbST.CheckAlign = System.Drawing.ContentAlignment.BottomCenter
-        Me.chbST.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.chbST.Location = New System.Drawing.Point(0, 112)
-        Me.chbST.Name = "chbST"
-        Me.chbST.Size = New System.Drawing.Size(41, 31)
-        Me.chbST.TabIndex = 6
-        Me.chbST.Text = "ST"
-        Me.chbST.TextAlign = System.Drawing.ContentAlignment.TopCenter
-        Me.chbST.UseVisualStyleBackColor = True
-        '
-        'cmbLaborRateII
-        '
-        Me.cmbLaborRateII.ArrowColor = System.Drawing.Color.FromArgb(CType(CType(74, Byte), Integer), CType(CType(97, Byte), Integer), CType(CType(132, Byte), Integer))
-        Me.cmbLaborRateII.ArrowPersonalized = False
-        Me.cmbLaborRateII.ArrowStyle = AVT_TRAKING.MyComboBox.enumArrowStyle.Arrow3D
-        Me.cmbLaborRateII.BorderColor = System.Drawing.SystemColors.ControlLightLight
-        Me.cmbLaborRateII.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.cmbLaborRateII.DropDownWidth = 80
-        Me.cmbLaborRateII.FormattingEnabled = True
-        Me.cmbLaborRateII.Location = New System.Drawing.Point(4, 4)
-        Me.cmbLaborRateII.Name = "cmbLaborRateII"
-        Me.cmbLaborRateII.Size = New System.Drawing.Size(66, 21)
-        Me.cmbLaborRateII.SizeHeight = 21
-        Me.cmbLaborRateII.TabIndex = 27
-        '
-        'cmbLaborRatePnt
-        '
-        Me.cmbLaborRatePnt.ArrowColor = System.Drawing.Color.FromArgb(CType(CType(74, Byte), Integer), CType(CType(97, Byte), Integer), CType(CType(132, Byte), Integer))
-        Me.cmbLaborRatePnt.ArrowPersonalized = False
-        Me.cmbLaborRatePnt.ArrowStyle = AVT_TRAKING.MyComboBox.enumArrowStyle.Arrow3D
-        Me.cmbLaborRatePnt.BorderColor = System.Drawing.SystemColors.ControlLightLight
-        Me.cmbLaborRatePnt.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.cmbLaborRatePnt.DropDownWidth = 80
-        Me.cmbLaborRatePnt.FormattingEnabled = True
-        Me.cmbLaborRatePnt.Location = New System.Drawing.Point(4, 4)
-        Me.cmbLaborRatePnt.Name = "cmbLaborRatePnt"
-        Me.cmbLaborRatePnt.Size = New System.Drawing.Size(66, 21)
-        Me.cmbLaborRatePnt.SizeHeight = 21
-        Me.cmbLaborRatePnt.TabIndex = 18
-        '
-        'cmbLaborRateRmv
-        '
-        Me.cmbLaborRateRmv.ArrowColor = System.Drawing.Color.FromArgb(CType(CType(74, Byte), Integer), CType(CType(97, Byte), Integer), CType(CType(132, Byte), Integer))
-        Me.cmbLaborRateRmv.ArrowPersonalized = False
-        Me.cmbLaborRateRmv.ArrowStyle = AVT_TRAKING.MyComboBox.enumArrowStyle.Arrow3D
-        Me.cmbLaborRateRmv.BorderColor = System.Drawing.SystemColors.ControlLightLight
-        Me.cmbLaborRateRmv.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.cmbLaborRateRmv.DropDownWidth = 80
-        Me.cmbLaborRateRmv.FormattingEnabled = True
-        Me.cmbLaborRateRmv.Location = New System.Drawing.Point(4, 4)
-        Me.cmbLaborRateRmv.Name = "cmbLaborRateRmv"
-        Me.cmbLaborRateRmv.Size = New System.Drawing.Size(66, 21)
-        Me.cmbLaborRateRmv.SizeHeight = 21
-        Me.cmbLaborRateRmv.TabIndex = 14
         '
         'cmbSystem
         '
@@ -758,6 +726,40 @@ Partial Class RowPpDrawing
         Me.cmbJacked.Size = New System.Drawing.Size(46, 21)
         Me.cmbJacked.SizeHeight = 21
         Me.cmbJacked.TabIndex = 11
+        '
+        'Panel1
+        '
+        Me.Panel1.Controls.Add(Me.txtSize)
+        Me.Panel1.Controls.Add(Me.chbST)
+        Me.Panel1.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Panel1.Location = New System.Drawing.Point(123, 2)
+        Me.Panel1.Margin = New System.Windows.Forms.Padding(1)
+        Me.Panel1.Name = "Panel1"
+        Me.Panel1.Size = New System.Drawing.Size(41, 143)
+        Me.Panel1.TabIndex = 12
+        '
+        'txtSize
+        '
+        Me.txtSize.BorderStyle = System.Windows.Forms.BorderStyle.None
+        Me.txtSize.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.txtSize.Location = New System.Drawing.Point(0, 0)
+        Me.txtSize.Multiline = True
+        Me.txtSize.Name = "txtSize"
+        Me.txtSize.Size = New System.Drawing.Size(41, 112)
+        Me.txtSize.TabIndex = 5
+        '
+        'chbST
+        '
+        Me.chbST.AutoSize = True
+        Me.chbST.CheckAlign = System.Drawing.ContentAlignment.BottomCenter
+        Me.chbST.Dock = System.Windows.Forms.DockStyle.Bottom
+        Me.chbST.Location = New System.Drawing.Point(0, 112)
+        Me.chbST.Name = "chbST"
+        Me.chbST.Size = New System.Drawing.Size(41, 31)
+        Me.chbST.TabIndex = 6
+        Me.chbST.Text = "ST"
+        Me.chbST.TextAlign = System.Drawing.ContentAlignment.TopCenter
+        Me.chbST.UseVisualStyleBackColor = True
         '
         'cmbHeight
         '

@@ -609,7 +609,7 @@
                     count += 1
                 Next
             End If
-            mtdEstimation.selectMaxIdEquipment(lblMaxIDEq)
+            mtdEstimation.selectMaxIdPiping(lblMaxIdPp)
             Return True
         Catch ex As Exception
             Return False
@@ -661,4 +661,20 @@
         End If
     End Sub
 
+    Private Sub btnReportDrawEst_Click(sender As Object, e As EventArgs) Handles btnReportDrawEst.Click
+        Try
+            If mtdEstimation.updateCostEstSCF(idClient, txtDrawingNum.Text, idProject, If(idDrawing = "", "", idDrawing), txtDescriptionDrawing.Text) Then
+                If mtdEstimation.updateCostEstEquipment(idClient, idProject, txtDrawingNum.Text, If(idDrawing = "", "", idDrawing), txtDescriptionDrawing.Text) Then
+                    If mtdEstimation.updateCostEstPiping(idClient, idProject, txtDrawingNum.Text, If(idDrawing = "", "", idDrawing), txtDescriptionDrawing.Text) Then
+                        Dim rptEstSum As New EstimateSummary
+                        rptEstSum.clientNum = idClient
+                        rptEstSum.Project = idProject
+                        rptEstSum.ShowDialog()
+                    End If
+                End If
+            End If
+        Catch ex As Exception
+
+        End Try
+    End Sub
 End Class

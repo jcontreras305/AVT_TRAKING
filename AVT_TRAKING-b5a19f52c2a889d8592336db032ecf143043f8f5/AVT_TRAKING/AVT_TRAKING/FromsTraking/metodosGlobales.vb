@@ -87,7 +87,7 @@ Module metodosGlobales
     ''' y su nombre (lastname, firstname y middlename).
     ''' </summary>
     ''' <param name="combo"></param>
-    ''' <returns>Retorna el combo lleno con los empleados en contrados en la BD.
+    ''' <returns>Retorna el combo lleno con los Clientes en contrados en la BD.
     ''' </returns>
     Public Function llenarComboClientsReports(ByVal combo As ComboBox) As Boolean
         Try
@@ -126,6 +126,78 @@ where cl.numberClient = '" + numberClient + "'", con.conn)
             combo.Items.Clear()
             While dr.Read()
                 combo.Items.Add(dr("idPO"))
+            End While
+            dr.Close()
+            Return True
+        Catch ex As Exception
+            Return False
+        End Try
+    End Function
+    ''' <summary>
+    ''' Hace una consulta a la BD, retornando los clientes de Estimacion con su numero de cliente, el Contact Name
+    ''' y su nombre (lastname, firstname y middlename).
+    ''' </summary>
+    ''' <param name="combo"></param>
+    ''' <returns>Retorna el combo lleno con los clientes encontrados en la BD.
+    ''' </returns>
+    Public Function llenarComboClientsEstReports(ByVal combo As ComboBox) As Boolean
+        Try
+            con.conectar()
+            Dim cmd As New SqlCommand("select numberClient, contactName as 'name' , companyName from clientsEst ", con.conn)
+            Dim dr As SqlDataReader = cmd.ExecuteReader()
+            combo.Items.Clear()
+            While dr.Read()
+                combo.Items.Add(CStr(dr("numberClient")) + " " + dr("companyName") + "|" + dr("name"))
+            End While
+            dr.Close()
+            Return True
+        Catch ex As Exception
+            MsgBox(ex.Message)
+            Return False
+        Finally
+            con.desconectar()
+        End Try
+    End Function
+    ''' <summary>
+    ''' Hace una consulta a la BD, retornando los Projects de un client de Estimacion
+    ''' </summary>
+    ''' <param name="combo"></param>
+    ''' <param name="numberClient"></param>
+    ''' <returns>Retorna un True si no hubo problemas con la consulta</returns>
+    Public Function llenarComboPOClientEst(ByVal combo As ComboBox, ByVal numberClient As String) As Boolean
+        Try
+            con.conectar()
+            Dim cmd As New SqlCommand("select po.projectId , po.[description] , po.unit from projectClientEst as po
+inner join clientsEst as cl on cl.idClientEst = po.idClientEst
+where cl.numberClient = " + numberClient + "", con.conn)
+            Dim dr As SqlDataReader = cmd.ExecuteReader()
+            combo.Items.Clear()
+            While dr.Read()
+                combo.Items.Add(dr("projectId"))
+            End While
+            dr.Close()
+            Return True
+        Catch ex As Exception
+            Return False
+        End Try
+    End Function
+    ''' <summary>
+    ''' Hace una consulta a la BD, retornando los Projects de un client de Estimacion
+    ''' </summary>
+    ''' <param name="combo"></param>
+    ''' <param name="numberClient"></param>
+    ''' <returns>Retorna un True si no hubo problemas con la consulta</returns>
+    Public Function llenarComboDrawing(ByVal combo As ComboBox, ByVal numberClient As String, ByVal project As String) As Boolean
+        Try
+            con.conectar()
+            Dim cmd As New SqlCommand("select dr.idDrawingNum , dr.[description] from drawing as dr 
+inner join projectClientEst as po on po.projectId = dr.projectId
+inner join clientsEst as cl on cl.idClientEst = po.idClientEst
+where cl.numberClient = " + numberClient + " and po.projectId = '" + project + "'", con.conn)
+            Dim dr As SqlDataReader = cmd.ExecuteReader()
+            combo.Items.Clear()
+            While dr.Read()
+                combo.Items.Add(dr("idDrawing") + "|  " + dr("description"))
             End While
             dr.Close()
             Return True

@@ -25,9 +25,6 @@ Partial Class Estimating
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
         Me.TableLayoutPanel3 = New System.Windows.Forms.TableLayoutPanel()
         Me.Panel2 = New System.Windows.Forms.Panel()
-        Me.btnFindProject = New System.Windows.Forms.Button()
-        Me.btnNextProject = New System.Windows.Forms.Button()
-        Me.btnAfterProjects = New System.Windows.Forms.Button()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
@@ -35,17 +32,11 @@ Partial Class Estimating
         Me.txtUnit = New System.Windows.Forms.TextBox()
         Me.cmbProjects = New System.Windows.Forms.ComboBox()
         Me.Panel3 = New System.Windows.Forms.Panel()
-        Me.btnCancel = New System.Windows.Forms.Button()
-        Me.btnNew = New System.Windows.Forms.Button()
-        Me.btnFindDrawingN = New System.Windows.Forms.Button()
-        Me.btnNextDrawingN = New System.Windows.Forms.Button()
-        Me.btnAfterDrawing = New System.Windows.Forms.Button()
         Me.Label6 = New System.Windows.Forms.Label()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.txtDescriptionDrawing = New System.Windows.Forms.TextBox()
         Me.txtDrawingNum = New System.Windows.Forms.TextBox()
         Me.Panel1 = New System.Windows.Forms.Panel()
-        Me.btnSalir = New System.Windows.Forms.Button()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.TabPage1 = New System.Windows.Forms.TabPage()
@@ -126,7 +117,7 @@ Partial Class Estimating
         Me.Panel31 = New System.Windows.Forms.Panel()
         Me.Label31 = New System.Windows.Forms.Label()
         Me.Panel32 = New System.Windows.Forms.Panel()
-        Me.Label32 = New System.Windows.Forms.Label()
+        Me.lblMaxIdPp = New System.Windows.Forms.Label()
         Me.Label33 = New System.Windows.Forms.Label()
         Me.Label34 = New System.Windows.Forms.Label()
         Me.Label35 = New System.Windows.Forms.Label()
@@ -140,14 +131,24 @@ Partial Class Estimating
         Me.Label43 = New System.Windows.Forms.Label()
         Me.pnlRowsPiping = New System.Windows.Forms.Panel()
         Me.Panel4 = New System.Windows.Forms.Panel()
-        Me.btnAddRowEquipment = New System.Windows.Forms.Button()
-        Me.btnDelete = New System.Windows.Forms.Button()
-        Me.btnSave = New System.Windows.Forms.Button()
         Me.BottomToolStripPanel = New System.Windows.Forms.ToolStripPanel()
         Me.TopToolStripPanel = New System.Windows.Forms.ToolStripPanel()
         Me.RightToolStripPanel = New System.Windows.Forms.ToolStripPanel()
         Me.LeftToolStripPanel = New System.Windows.Forms.ToolStripPanel()
         Me.ContentPanel = New System.Windows.Forms.ToolStripContentPanel()
+        Me.btnFindProject = New System.Windows.Forms.Button()
+        Me.btnNextProject = New System.Windows.Forms.Button()
+        Me.btnAfterProjects = New System.Windows.Forms.Button()
+        Me.btnCancel = New System.Windows.Forms.Button()
+        Me.btnNew = New System.Windows.Forms.Button()
+        Me.btnFindDrawingN = New System.Windows.Forms.Button()
+        Me.btnNextDrawingN = New System.Windows.Forms.Button()
+        Me.btnAfterDrawing = New System.Windows.Forms.Button()
+        Me.btnSalir = New System.Windows.Forms.Button()
+        Me.btnAddRowEquipment = New System.Windows.Forms.Button()
+        Me.btnDelete = New System.Windows.Forms.Button()
+        Me.btnSave = New System.Windows.Forms.Button()
+        Me.btnReportDrawEst = New System.Windows.Forms.Button()
         Me.TableLayoutPanel1.SuspendLayout()
         Me.TableLayoutPanel3.SuspendLayout()
         Me.Panel2.SuspendLayout()
@@ -246,54 +247,6 @@ Partial Class Estimating
         Me.Panel2.Size = New System.Drawing.Size(345, 88)
         Me.Panel2.TabIndex = 0
         '
-        'btnFindProject
-        '
-        Me.btnFindProject.FlatAppearance.BorderSize = 0
-        Me.btnFindProject.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(59, Byte), Integer), CType(CType(69, Byte), Integer), CType(CType(79, Byte), Integer))
-        Me.btnFindProject.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnFindProject.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnFindProject.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.btnFindProject.Image = Global.AVT_TRAKING.My.Resources.Resources.loupe
-        Me.btnFindProject.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnFindProject.Location = New System.Drawing.Point(279, 0)
-        Me.btnFindProject.Name = "btnFindProject"
-        Me.btnFindProject.Size = New System.Drawing.Size(36, 32)
-        Me.btnFindProject.TabIndex = 32
-        Me.btnFindProject.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.btnFindProject.UseVisualStyleBackColor = True
-        '
-        'btnNextProject
-        '
-        Me.btnNextProject.FlatAppearance.BorderSize = 0
-        Me.btnNextProject.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(59, Byte), Integer), CType(CType(69, Byte), Integer), CType(CType(79, Byte), Integer))
-        Me.btnNextProject.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnNextProject.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnNextProject.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.btnNextProject.Image = Global.AVT_TRAKING.My.Resources.Resources._next
-        Me.btnNextProject.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnNextProject.Location = New System.Drawing.Point(245, 2)
-        Me.btnNextProject.Name = "btnNextProject"
-        Me.btnNextProject.Size = New System.Drawing.Size(36, 28)
-        Me.btnNextProject.TabIndex = 31
-        Me.btnNextProject.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.btnNextProject.UseVisualStyleBackColor = True
-        '
-        'btnAfterProjects
-        '
-        Me.btnAfterProjects.FlatAppearance.BorderSize = 0
-        Me.btnAfterProjects.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(59, Byte), Integer), CType(CType(69, Byte), Integer), CType(CType(79, Byte), Integer))
-        Me.btnAfterProjects.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnAfterProjects.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnAfterProjects.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.btnAfterProjects.Image = Global.AVT_TRAKING.My.Resources.Resources.after1
-        Me.btnAfterProjects.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnAfterProjects.Location = New System.Drawing.Point(201, 3)
-        Me.btnAfterProjects.Name = "btnAfterProjects"
-        Me.btnAfterProjects.Size = New System.Drawing.Size(36, 28)
-        Me.btnAfterProjects.TabIndex = 30
-        Me.btnAfterProjects.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.btnAfterProjects.UseVisualStyleBackColor = True
-        '
         'Label4
         '
         Me.Label4.AutoSize = True
@@ -351,6 +304,7 @@ Partial Class Estimating
         '
         'Panel3
         '
+        Me.Panel3.Controls.Add(Me.btnReportDrawEst)
         Me.Panel3.Controls.Add(Me.btnCancel)
         Me.Panel3.Controls.Add(Me.btnNew)
         Me.Panel3.Controls.Add(Me.btnFindDrawingN)
@@ -365,88 +319,6 @@ Partial Class Estimating
         Me.Panel3.Name = "Panel3"
         Me.Panel3.Size = New System.Drawing.Size(591, 88)
         Me.Panel3.TabIndex = 1
-        '
-        'btnCancel
-        '
-        Me.btnCancel.FlatAppearance.BorderSize = 0
-        Me.btnCancel.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(59, Byte), Integer), CType(CType(69, Byte), Integer), CType(CType(79, Byte), Integer))
-        Me.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnCancel.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnCancel.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.btnCancel.Image = Global.AVT_TRAKING.My.Resources.Resources.close2
-        Me.btnCancel.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnCancel.Location = New System.Drawing.Point(331, 29)
-        Me.btnCancel.Name = "btnCancel"
-        Me.btnCancel.Size = New System.Drawing.Size(86, 34)
-        Me.btnCancel.TabIndex = 37
-        Me.btnCancel.Text = "Cancel"
-        Me.btnCancel.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.btnCancel.UseVisualStyleBackColor = True
-        Me.btnCancel.Visible = False
-        '
-        'btnNew
-        '
-        Me.btnNew.FlatAppearance.BorderSize = 0
-        Me.btnNew.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(59, Byte), Integer), CType(CType(69, Byte), Integer), CType(CType(79, Byte), Integer))
-        Me.btnNew.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnNew.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnNew.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.btnNew.Image = Global.AVT_TRAKING.My.Resources.Resources._new
-        Me.btnNew.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnNew.Location = New System.Drawing.Point(324, -1)
-        Me.btnNew.Name = "btnNew"
-        Me.btnNew.Size = New System.Drawing.Size(36, 32)
-        Me.btnNew.TabIndex = 36
-        Me.btnNew.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.btnNew.UseVisualStyleBackColor = True
-        '
-        'btnFindDrawingN
-        '
-        Me.btnFindDrawingN.FlatAppearance.BorderSize = 0
-        Me.btnFindDrawingN.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(59, Byte), Integer), CType(CType(69, Byte), Integer), CType(CType(79, Byte), Integer))
-        Me.btnFindDrawingN.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnFindDrawingN.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnFindDrawingN.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.btnFindDrawingN.Image = Global.AVT_TRAKING.My.Resources.Resources.loupe
-        Me.btnFindDrawingN.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnFindDrawingN.Location = New System.Drawing.Point(282, -2)
-        Me.btnFindDrawingN.Name = "btnFindDrawingN"
-        Me.btnFindDrawingN.Size = New System.Drawing.Size(36, 32)
-        Me.btnFindDrawingN.TabIndex = 35
-        Me.btnFindDrawingN.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.btnFindDrawingN.UseVisualStyleBackColor = True
-        '
-        'btnNextDrawingN
-        '
-        Me.btnNextDrawingN.FlatAppearance.BorderSize = 0
-        Me.btnNextDrawingN.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(59, Byte), Integer), CType(CType(69, Byte), Integer), CType(CType(79, Byte), Integer))
-        Me.btnNextDrawingN.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnNextDrawingN.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnNextDrawingN.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.btnNextDrawingN.Image = Global.AVT_TRAKING.My.Resources.Resources._next
-        Me.btnNextDrawingN.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnNextDrawingN.Location = New System.Drawing.Point(244, 0)
-        Me.btnNextDrawingN.Name = "btnNextDrawingN"
-        Me.btnNextDrawingN.Size = New System.Drawing.Size(36, 28)
-        Me.btnNextDrawingN.TabIndex = 34
-        Me.btnNextDrawingN.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.btnNextDrawingN.UseVisualStyleBackColor = True
-        '
-        'btnAfterDrawing
-        '
-        Me.btnAfterDrawing.FlatAppearance.BorderSize = 0
-        Me.btnAfterDrawing.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(59, Byte), Integer), CType(CType(69, Byte), Integer), CType(CType(79, Byte), Integer))
-        Me.btnAfterDrawing.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnAfterDrawing.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnAfterDrawing.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.btnAfterDrawing.Image = Global.AVT_TRAKING.My.Resources.Resources.after1
-        Me.btnAfterDrawing.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnAfterDrawing.Location = New System.Drawing.Point(200, 1)
-        Me.btnAfterDrawing.Name = "btnAfterDrawing"
-        Me.btnAfterDrawing.Size = New System.Drawing.Size(36, 28)
-        Me.btnAfterDrawing.TabIndex = 33
-        Me.btnAfterDrawing.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.btnAfterDrawing.UseVisualStyleBackColor = True
         '
         'Label6
         '
@@ -492,20 +364,6 @@ Partial Class Estimating
         Me.Panel1.Name = "Panel1"
         Me.Panel1.Size = New System.Drawing.Size(948, 62)
         Me.Panel1.TabIndex = 0
-        '
-        'btnSalir
-        '
-        Me.btnSalir.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnSalir.FlatAppearance.BorderSize = 0
-        Me.btnSalir.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnSalir.ForeColor = System.Drawing.Color.White
-        Me.btnSalir.Image = Global.AVT_TRAKING.My.Resources.Resources._exit
-        Me.btnSalir.Location = New System.Drawing.Point(901, 5)
-        Me.btnSalir.Margin = New System.Windows.Forms.Padding(2)
-        Me.btnSalir.Name = "btnSalir"
-        Me.btnSalir.Size = New System.Drawing.Size(43, 55)
-        Me.btnSalir.TabIndex = 35
-        Me.btnSalir.UseVisualStyleBackColor = True
         '
         'Label1
         '
@@ -676,7 +534,7 @@ Partial Class Estimating
         Me.lytHeaderEq.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 75.0!))
         Me.lytHeaderEq.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 75.0!))
         Me.lytHeaderEq.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 75.0!))
-        Me.lytHeaderEq.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 86.0!))
+        Me.lytHeaderEq.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 90.0!))
         Me.lytHeaderEq.Controls.Add(Me.SelectAll, 0, 0)
         Me.lytHeaderEq.Controls.Add(Me.Panel30, 13, 0)
         Me.lytHeaderEq.Controls.Add(Me.Panel29, 12, 0)
@@ -715,9 +573,9 @@ Partial Class Estimating
         '
         Me.Panel30.Controls.Add(Me.Label20)
         Me.Panel30.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel30.Location = New System.Drawing.Point(833, 4)
+        Me.Panel30.Location = New System.Drawing.Point(828, 4)
         Me.Panel30.Name = "Panel30"
-        Me.Panel30.Size = New System.Drawing.Size(83, 41)
+        Me.Panel30.Size = New System.Drawing.Size(88, 41)
         Me.Panel30.TabIndex = 14
         '
         'Label20
@@ -725,7 +583,7 @@ Partial Class Estimating
         Me.Label20.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Label20.Location = New System.Drawing.Point(0, 0)
         Me.Label20.Name = "Label20"
-        Me.Label20.Size = New System.Drawing.Size(83, 41)
+        Me.Label20.Size = New System.Drawing.Size(88, 41)
         Me.Label20.TabIndex = 2
         Me.Label20.Text = "Cut Out"
         Me.Label20.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -734,7 +592,7 @@ Partial Class Estimating
         '
         Me.Panel29.Controls.Add(Me.Label19)
         Me.Panel29.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel29.Location = New System.Drawing.Point(757, 4)
+        Me.Panel29.Location = New System.Drawing.Point(752, 4)
         Me.Panel29.Name = "Panel29"
         Me.Panel29.Size = New System.Drawing.Size(69, 41)
         Me.Panel29.TabIndex = 13
@@ -753,7 +611,7 @@ Partial Class Estimating
         '
         Me.Panel28.Controls.Add(Me.Label18)
         Me.Panel28.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel28.Location = New System.Drawing.Point(681, 4)
+        Me.Panel28.Location = New System.Drawing.Point(676, 4)
         Me.Panel28.Name = "Panel28"
         Me.Panel28.Size = New System.Drawing.Size(69, 41)
         Me.Panel28.TabIndex = 12
@@ -772,7 +630,7 @@ Partial Class Estimating
         '
         Me.Panel27.Controls.Add(Me.Label17)
         Me.Panel27.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel27.Location = New System.Drawing.Point(605, 4)
+        Me.Panel27.Location = New System.Drawing.Point(600, 4)
         Me.Panel27.Name = "Panel27"
         Me.Panel27.Size = New System.Drawing.Size(69, 41)
         Me.Panel27.TabIndex = 11
@@ -791,7 +649,7 @@ Partial Class Estimating
         '
         Me.Panel26.Controls.Add(Me.Label16)
         Me.Panel26.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel26.Location = New System.Drawing.Point(574, 4)
+        Me.Panel26.Location = New System.Drawing.Point(569, 4)
         Me.Panel26.Name = "Panel26"
         Me.Panel26.Size = New System.Drawing.Size(24, 41)
         Me.Panel26.TabIndex = 10
@@ -810,9 +668,9 @@ Partial Class Estimating
         '
         Me.Panel25.Controls.Add(Me.Label15)
         Me.Panel25.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel25.Location = New System.Drawing.Point(489, 4)
+        Me.Panel25.Location = New System.Drawing.Point(485, 4)
         Me.Panel25.Name = "Panel25"
-        Me.Panel25.Size = New System.Drawing.Size(78, 41)
+        Me.Panel25.Size = New System.Drawing.Size(77, 41)
         Me.Panel25.TabIndex = 9
         '
         'Label15
@@ -820,7 +678,7 @@ Partial Class Estimating
         Me.Label15.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Label15.Location = New System.Drawing.Point(0, 0)
         Me.Label15.Name = "Label15"
-        Me.Label15.Size = New System.Drawing.Size(78, 41)
+        Me.Label15.Size = New System.Drawing.Size(77, 41)
         Me.Label15.TabIndex = 2
         Me.Label15.Text = "Jkt"
         Me.Label15.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -829,9 +687,9 @@ Partial Class Estimating
         '
         Me.Panel24.Controls.Add(Me.Label14)
         Me.Panel24.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel24.Location = New System.Drawing.Point(435, 4)
+        Me.Panel24.Location = New System.Drawing.Point(432, 4)
         Me.Panel24.Name = "Panel24"
-        Me.Panel24.Size = New System.Drawing.Size(47, 41)
+        Me.Panel24.Size = New System.Drawing.Size(46, 41)
         Me.Panel24.TabIndex = 8
         '
         'Label14
@@ -839,7 +697,7 @@ Partial Class Estimating
         Me.Label14.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Label14.Location = New System.Drawing.Point(0, 0)
         Me.Label14.Name = "Label14"
-        Me.Label14.Size = New System.Drawing.Size(47, 41)
+        Me.Label14.Size = New System.Drawing.Size(46, 41)
         Me.Label14.TabIndex = 2
         Me.Label14.Text = "Ins Thk"
         Me.Label14.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -848,7 +706,7 @@ Partial Class Estimating
         '
         Me.Panel23.Controls.Add(Me.Label13)
         Me.Panel23.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel23.Location = New System.Drawing.Point(357, 4)
+        Me.Panel23.Location = New System.Drawing.Point(354, 4)
         Me.Panel23.Name = "Panel23"
         Me.Panel23.Size = New System.Drawing.Size(71, 41)
         Me.Panel23.TabIndex = 7
@@ -867,9 +725,9 @@ Partial Class Estimating
         '
         Me.Panel22.Controls.Add(Me.Label12)
         Me.Panel22.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel22.Location = New System.Drawing.Point(298, 4)
+        Me.Panel22.Location = New System.Drawing.Point(296, 4)
         Me.Panel22.Name = "Panel22"
-        Me.Panel22.Size = New System.Drawing.Size(52, 41)
+        Me.Panel22.Size = New System.Drawing.Size(51, 41)
         Me.Panel22.TabIndex = 6
         '
         'Label12
@@ -877,7 +735,7 @@ Partial Class Estimating
         Me.Label12.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Label12.Location = New System.Drawing.Point(0, 0)
         Me.Label12.Name = "Label12"
-        Me.Label12.Size = New System.Drawing.Size(52, 41)
+        Me.Label12.Size = New System.Drawing.Size(51, 41)
         Me.Label12.TabIndex = 2
         Me.Label12.Text = "Paint Option"
         Me.Label12.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -886,7 +744,7 @@ Partial Class Estimating
         '
         Me.Panel21.Controls.Add(Me.Label11)
         Me.Panel21.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel21.Location = New System.Drawing.Point(238, 4)
+        Me.Panel21.Location = New System.Drawing.Point(236, 4)
         Me.Panel21.Name = "Panel21"
         Me.Panel21.Size = New System.Drawing.Size(53, 41)
         Me.Panel21.TabIndex = 5
@@ -905,9 +763,9 @@ Partial Class Estimating
         '
         Me.Panel20.Controls.Add(Me.Label10)
         Me.Panel20.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel20.Location = New System.Drawing.Point(170, 4)
+        Me.Panel20.Location = New System.Drawing.Point(169, 4)
         Me.Panel20.Name = "Panel20"
-        Me.Panel20.Size = New System.Drawing.Size(61, 41)
+        Me.Panel20.Size = New System.Drawing.Size(60, 41)
         Me.Panel20.TabIndex = 4
         '
         'Label10
@@ -915,7 +773,7 @@ Partial Class Estimating
         Me.Label10.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Label10.Location = New System.Drawing.Point(0, 0)
         Me.Label10.Name = "Label10"
-        Me.Label10.Size = New System.Drawing.Size(61, 41)
+        Me.Label10.Size = New System.Drawing.Size(60, 41)
         Me.Label10.TabIndex = 2
         Me.Label10.Text = "Heigth"
         Me.Label10.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -926,7 +784,7 @@ Partial Class Estimating
         Me.Panel7.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel7.Location = New System.Drawing.Point(71, 4)
         Me.Panel7.Name = "Panel7"
-        Me.Panel7.Size = New System.Drawing.Size(92, 41)
+        Me.Panel7.Size = New System.Drawing.Size(91, 41)
         Me.Panel7.TabIndex = 2
         '
         'Label9
@@ -934,7 +792,7 @@ Partial Class Estimating
         Me.Label9.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Label9.Location = New System.Drawing.Point(0, 0)
         Me.Label9.Name = "Label9"
-        Me.Label9.Size = New System.Drawing.Size(92, 41)
+        Me.Label9.Size = New System.Drawing.Size(91, 41)
         Me.Label9.TabIndex = 2
         Me.Label9.Text = "Equipment"
         Me.Label9.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -1319,7 +1177,7 @@ Partial Class Estimating
         '
         'Panel32
         '
-        Me.Panel32.Controls.Add(Me.Label32)
+        Me.Panel32.Controls.Add(Me.lblMaxIdPp)
         Me.Panel32.Controls.Add(Me.Label33)
         Me.Panel32.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel32.Location = New System.Drawing.Point(24, 4)
@@ -1327,15 +1185,15 @@ Partial Class Estimating
         Me.Panel32.Size = New System.Drawing.Size(25, 47)
         Me.Panel32.TabIndex = 15
         '
-        'Label32
+        'lblMaxIdPp
         '
-        Me.Label32.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.Label32.AutoSize = True
-        Me.Label32.Location = New System.Drawing.Point(0, 34)
-        Me.Label32.Name = "Label32"
-        Me.Label32.Size = New System.Drawing.Size(13, 13)
-        Me.Label32.TabIndex = 0
-        Me.Label32.Text = "0"
+        Me.lblMaxIdPp.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.lblMaxIdPp.AutoSize = True
+        Me.lblMaxIdPp.Location = New System.Drawing.Point(0, 34)
+        Me.lblMaxIdPp.Name = "lblMaxIdPp"
+        Me.lblMaxIdPp.Size = New System.Drawing.Size(13, 13)
+        Me.lblMaxIdPp.TabIndex = 0
+        Me.lblMaxIdPp.Text = "0"
         '
         'Label33
         '
@@ -1489,6 +1347,186 @@ Partial Class Estimating
         Me.Panel4.Size = New System.Drawing.Size(948, 50)
         Me.Panel4.TabIndex = 35
         '
+        'BottomToolStripPanel
+        '
+        Me.BottomToolStripPanel.Location = New System.Drawing.Point(0, 0)
+        Me.BottomToolStripPanel.Name = "BottomToolStripPanel"
+        Me.BottomToolStripPanel.Orientation = System.Windows.Forms.Orientation.Horizontal
+        Me.BottomToolStripPanel.RowMargin = New System.Windows.Forms.Padding(3, 0, 0, 0)
+        Me.BottomToolStripPanel.Size = New System.Drawing.Size(0, 0)
+        '
+        'TopToolStripPanel
+        '
+        Me.TopToolStripPanel.Location = New System.Drawing.Point(0, 0)
+        Me.TopToolStripPanel.Name = "TopToolStripPanel"
+        Me.TopToolStripPanel.Orientation = System.Windows.Forms.Orientation.Horizontal
+        Me.TopToolStripPanel.RowMargin = New System.Windows.Forms.Padding(3, 0, 0, 0)
+        Me.TopToolStripPanel.Size = New System.Drawing.Size(0, 0)
+        '
+        'RightToolStripPanel
+        '
+        Me.RightToolStripPanel.Location = New System.Drawing.Point(0, 0)
+        Me.RightToolStripPanel.Name = "RightToolStripPanel"
+        Me.RightToolStripPanel.Orientation = System.Windows.Forms.Orientation.Horizontal
+        Me.RightToolStripPanel.RowMargin = New System.Windows.Forms.Padding(3, 0, 0, 0)
+        Me.RightToolStripPanel.Size = New System.Drawing.Size(0, 0)
+        '
+        'LeftToolStripPanel
+        '
+        Me.LeftToolStripPanel.Location = New System.Drawing.Point(0, 0)
+        Me.LeftToolStripPanel.Name = "LeftToolStripPanel"
+        Me.LeftToolStripPanel.Orientation = System.Windows.Forms.Orientation.Horizontal
+        Me.LeftToolStripPanel.RowMargin = New System.Windows.Forms.Padding(3, 0, 0, 0)
+        Me.LeftToolStripPanel.Size = New System.Drawing.Size(0, 0)
+        '
+        'ContentPanel
+        '
+        Me.ContentPanel.Size = New System.Drawing.Size(150, 150)
+        '
+        'btnFindProject
+        '
+        Me.btnFindProject.FlatAppearance.BorderSize = 0
+        Me.btnFindProject.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(59, Byte), Integer), CType(CType(69, Byte), Integer), CType(CType(79, Byte), Integer))
+        Me.btnFindProject.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnFindProject.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnFindProject.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.btnFindProject.Image = Global.AVT_TRAKING.My.Resources.Resources.loupe
+        Me.btnFindProject.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnFindProject.Location = New System.Drawing.Point(279, 0)
+        Me.btnFindProject.Name = "btnFindProject"
+        Me.btnFindProject.Size = New System.Drawing.Size(36, 32)
+        Me.btnFindProject.TabIndex = 32
+        Me.btnFindProject.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.btnFindProject.UseVisualStyleBackColor = True
+        '
+        'btnNextProject
+        '
+        Me.btnNextProject.FlatAppearance.BorderSize = 0
+        Me.btnNextProject.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(59, Byte), Integer), CType(CType(69, Byte), Integer), CType(CType(79, Byte), Integer))
+        Me.btnNextProject.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnNextProject.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnNextProject.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.btnNextProject.Image = Global.AVT_TRAKING.My.Resources.Resources._next
+        Me.btnNextProject.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnNextProject.Location = New System.Drawing.Point(245, 2)
+        Me.btnNextProject.Name = "btnNextProject"
+        Me.btnNextProject.Size = New System.Drawing.Size(36, 28)
+        Me.btnNextProject.TabIndex = 31
+        Me.btnNextProject.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.btnNextProject.UseVisualStyleBackColor = True
+        '
+        'btnAfterProjects
+        '
+        Me.btnAfterProjects.FlatAppearance.BorderSize = 0
+        Me.btnAfterProjects.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(59, Byte), Integer), CType(CType(69, Byte), Integer), CType(CType(79, Byte), Integer))
+        Me.btnAfterProjects.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnAfterProjects.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnAfterProjects.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.btnAfterProjects.Image = Global.AVT_TRAKING.My.Resources.Resources.after1
+        Me.btnAfterProjects.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnAfterProjects.Location = New System.Drawing.Point(201, 3)
+        Me.btnAfterProjects.Name = "btnAfterProjects"
+        Me.btnAfterProjects.Size = New System.Drawing.Size(36, 28)
+        Me.btnAfterProjects.TabIndex = 30
+        Me.btnAfterProjects.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.btnAfterProjects.UseVisualStyleBackColor = True
+        '
+        'btnCancel
+        '
+        Me.btnCancel.FlatAppearance.BorderSize = 0
+        Me.btnCancel.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(59, Byte), Integer), CType(CType(69, Byte), Integer), CType(CType(79, Byte), Integer))
+        Me.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnCancel.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnCancel.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.btnCancel.Image = Global.AVT_TRAKING.My.Resources.Resources.close2
+        Me.btnCancel.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnCancel.Location = New System.Drawing.Point(331, 29)
+        Me.btnCancel.Name = "btnCancel"
+        Me.btnCancel.Size = New System.Drawing.Size(86, 34)
+        Me.btnCancel.TabIndex = 37
+        Me.btnCancel.Text = "Cancel"
+        Me.btnCancel.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.btnCancel.UseVisualStyleBackColor = True
+        Me.btnCancel.Visible = False
+        '
+        'btnNew
+        '
+        Me.btnNew.FlatAppearance.BorderSize = 0
+        Me.btnNew.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(59, Byte), Integer), CType(CType(69, Byte), Integer), CType(CType(79, Byte), Integer))
+        Me.btnNew.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnNew.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnNew.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.btnNew.Image = Global.AVT_TRAKING.My.Resources.Resources._new
+        Me.btnNew.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnNew.Location = New System.Drawing.Point(324, -1)
+        Me.btnNew.Name = "btnNew"
+        Me.btnNew.Size = New System.Drawing.Size(36, 32)
+        Me.btnNew.TabIndex = 36
+        Me.btnNew.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.btnNew.UseVisualStyleBackColor = True
+        '
+        'btnFindDrawingN
+        '
+        Me.btnFindDrawingN.FlatAppearance.BorderSize = 0
+        Me.btnFindDrawingN.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(59, Byte), Integer), CType(CType(69, Byte), Integer), CType(CType(79, Byte), Integer))
+        Me.btnFindDrawingN.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnFindDrawingN.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnFindDrawingN.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.btnFindDrawingN.Image = Global.AVT_TRAKING.My.Resources.Resources.loupe
+        Me.btnFindDrawingN.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnFindDrawingN.Location = New System.Drawing.Point(282, -2)
+        Me.btnFindDrawingN.Name = "btnFindDrawingN"
+        Me.btnFindDrawingN.Size = New System.Drawing.Size(36, 32)
+        Me.btnFindDrawingN.TabIndex = 35
+        Me.btnFindDrawingN.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.btnFindDrawingN.UseVisualStyleBackColor = True
+        '
+        'btnNextDrawingN
+        '
+        Me.btnNextDrawingN.FlatAppearance.BorderSize = 0
+        Me.btnNextDrawingN.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(59, Byte), Integer), CType(CType(69, Byte), Integer), CType(CType(79, Byte), Integer))
+        Me.btnNextDrawingN.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnNextDrawingN.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnNextDrawingN.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.btnNextDrawingN.Image = Global.AVT_TRAKING.My.Resources.Resources._next
+        Me.btnNextDrawingN.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnNextDrawingN.Location = New System.Drawing.Point(244, 0)
+        Me.btnNextDrawingN.Name = "btnNextDrawingN"
+        Me.btnNextDrawingN.Size = New System.Drawing.Size(36, 28)
+        Me.btnNextDrawingN.TabIndex = 34
+        Me.btnNextDrawingN.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.btnNextDrawingN.UseVisualStyleBackColor = True
+        '
+        'btnAfterDrawing
+        '
+        Me.btnAfterDrawing.FlatAppearance.BorderSize = 0
+        Me.btnAfterDrawing.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(59, Byte), Integer), CType(CType(69, Byte), Integer), CType(CType(79, Byte), Integer))
+        Me.btnAfterDrawing.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnAfterDrawing.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnAfterDrawing.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.btnAfterDrawing.Image = Global.AVT_TRAKING.My.Resources.Resources.after1
+        Me.btnAfterDrawing.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnAfterDrawing.Location = New System.Drawing.Point(200, 1)
+        Me.btnAfterDrawing.Name = "btnAfterDrawing"
+        Me.btnAfterDrawing.Size = New System.Drawing.Size(36, 28)
+        Me.btnAfterDrawing.TabIndex = 33
+        Me.btnAfterDrawing.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.btnAfterDrawing.UseVisualStyleBackColor = True
+        '
+        'btnSalir
+        '
+        Me.btnSalir.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnSalir.FlatAppearance.BorderSize = 0
+        Me.btnSalir.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnSalir.ForeColor = System.Drawing.Color.White
+        Me.btnSalir.Image = Global.AVT_TRAKING.My.Resources.Resources._exit
+        Me.btnSalir.Location = New System.Drawing.Point(901, 5)
+        Me.btnSalir.Margin = New System.Windows.Forms.Padding(2)
+        Me.btnSalir.Name = "btnSalir"
+        Me.btnSalir.Size = New System.Drawing.Size(43, 55)
+        Me.btnSalir.TabIndex = 35
+        Me.btnSalir.UseVisualStyleBackColor = True
+        '
         'btnAddRowEquipment
         '
         Me.btnAddRowEquipment.FlatAppearance.BorderSize = 0
@@ -1542,41 +1580,23 @@ Partial Class Estimating
         Me.btnSave.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         Me.btnSave.UseVisualStyleBackColor = True
         '
-        'BottomToolStripPanel
+        'btnReportDrawEst
         '
-        Me.BottomToolStripPanel.Location = New System.Drawing.Point(0, 0)
-        Me.BottomToolStripPanel.Name = "BottomToolStripPanel"
-        Me.BottomToolStripPanel.Orientation = System.Windows.Forms.Orientation.Horizontal
-        Me.BottomToolStripPanel.RowMargin = New System.Windows.Forms.Padding(3, 0, 0, 0)
-        Me.BottomToolStripPanel.Size = New System.Drawing.Size(0, 0)
-        '
-        'TopToolStripPanel
-        '
-        Me.TopToolStripPanel.Location = New System.Drawing.Point(0, 0)
-        Me.TopToolStripPanel.Name = "TopToolStripPanel"
-        Me.TopToolStripPanel.Orientation = System.Windows.Forms.Orientation.Horizontal
-        Me.TopToolStripPanel.RowMargin = New System.Windows.Forms.Padding(3, 0, 0, 0)
-        Me.TopToolStripPanel.Size = New System.Drawing.Size(0, 0)
-        '
-        'RightToolStripPanel
-        '
-        Me.RightToolStripPanel.Location = New System.Drawing.Point(0, 0)
-        Me.RightToolStripPanel.Name = "RightToolStripPanel"
-        Me.RightToolStripPanel.Orientation = System.Windows.Forms.Orientation.Horizontal
-        Me.RightToolStripPanel.RowMargin = New System.Windows.Forms.Padding(3, 0, 0, 0)
-        Me.RightToolStripPanel.Size = New System.Drawing.Size(0, 0)
-        '
-        'LeftToolStripPanel
-        '
-        Me.LeftToolStripPanel.Location = New System.Drawing.Point(0, 0)
-        Me.LeftToolStripPanel.Name = "LeftToolStripPanel"
-        Me.LeftToolStripPanel.Orientation = System.Windows.Forms.Orientation.Horizontal
-        Me.LeftToolStripPanel.RowMargin = New System.Windows.Forms.Padding(3, 0, 0, 0)
-        Me.LeftToolStripPanel.Size = New System.Drawing.Size(0, 0)
-        '
-        'ContentPanel
-        '
-        Me.ContentPanel.Size = New System.Drawing.Size(150, 150)
+        Me.btnReportDrawEst.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnReportDrawEst.FlatAppearance.BorderSize = 0
+        Me.btnReportDrawEst.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(59, Byte), Integer), CType(CType(69, Byte), Integer), CType(CType(79, Byte), Integer))
+        Me.btnReportDrawEst.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnReportDrawEst.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnReportDrawEst.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.btnReportDrawEst.Image = Global.AVT_TRAKING.My.Resources.Resources.report
+        Me.btnReportDrawEst.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnReportDrawEst.Location = New System.Drawing.Point(491, 5)
+        Me.btnReportDrawEst.Name = "btnReportDrawEst"
+        Me.btnReportDrawEst.Size = New System.Drawing.Size(96, 27)
+        Me.btnReportDrawEst.TabIndex = 38
+        Me.btnReportDrawEst.Text = "Draw Est."
+        Me.btnReportDrawEst.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.btnReportDrawEst.UseVisualStyleBackColor = True
         '
         'Estimating
         '
@@ -1754,7 +1774,7 @@ Partial Class Estimating
     Friend WithEvents Panel31 As Panel
     Friend WithEvents Label31 As Label
     Friend WithEvents Panel32 As Panel
-    Friend WithEvents Label32 As Label
+    Friend WithEvents lblMaxIdPp As Label
     Friend WithEvents Label33 As Label
     Public WithEvents pnlRowsPiping As Panel
     Friend WithEvents Label34 As Label
@@ -1767,4 +1787,5 @@ Partial Class Estimating
     Friend WithEvents Label41 As Label
     Friend WithEvents Label42 As Label
     Friend WithEvents Label43 As Label
+    Friend WithEvents btnReportDrawEst As Button
 End Class

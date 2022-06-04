@@ -634,6 +634,18 @@
       <DependentUpon>YearFinalHours.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="ReportsEstimation\EstimateSummary.Designer.vb">
+      <DependentUpon>EstimateSummary.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ReportsEstimation\EstimateSummary.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ReportsEstimation\EstSummary.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EstSummary.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="RerportsScaffold\ScaffoldActive.Designer.vb">
       <DependentUpon>ScaffoldActive.vb</DependentUpon>
     </Compile>
@@ -1024,6 +1036,13 @@
     <EmbeddedResource Include="Reports TimeSheet\YearFinalHours.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>YearFinalHours.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportsEstimation\EstimateSummary.resx">
+      <DependentUpon>EstimateSummary.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportsEstimation\EstSummary.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>EstSummary.vb</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="RerportsScaffold\ScaffoldActive.resx">
       <DependentUpon>ScaffoldActive.vb</DependentUpon>
