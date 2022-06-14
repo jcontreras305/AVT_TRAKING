@@ -108,6 +108,12 @@
     <Compile Include="Class\MetodosTaxes.vb" />
     <Compile Include="Class\MetodosVendor.vb" />
     <Compile Include="Class\MetodosJobs.vb" />
+    <Compile Include="FromsEstimation\EstimateReports.Designer.vb">
+      <DependentUpon>EstimateReports.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FromsEstimation\EstimateReports.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="FromsEstimation\Estimating.Designer.vb">
       <DependentUpon>Estimating.vb</DependentUpon>
     </Compile>
@@ -646,6 +652,42 @@
       <DependentUpon>EstSummary.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="ReportsEstimation\JobNoEquipmentBudget.Designer.vb">
+      <DependentUpon>JobNoEquipmentBudget.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ReportsEstimation\JobNoEquipmentBudget.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ReportsEstimation\JobNoEquipmentBudgetReport.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>JobNoEquipmentBudgetReport.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ReportsEstimation\JobNoPipingBudget.Designer.vb">
+      <DependentUpon>JobNoPipingBudget.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ReportsEstimation\JobNoPipingBudget.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ReportsEstimation\JobNoPipingBudgetReport.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>JobNoPipingBudgetReport.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ReportsEstimation\JobNoSCFBudget.Designer.vb">
+      <DependentUpon>JobNoSCFBudget.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ReportsEstimation\JobNoSCFBudget.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ReportsEstimation\JobNoSCFBudgetReport.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>JobNoSCFBudgetReport.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="RerportsScaffold\ScaffoldActive.Designer.vb">
       <DependentUpon>ScaffoldActive.vb</DependentUpon>
     </Compile>
@@ -766,6 +808,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="FromsEstimation\EstimateReports.resx">
+      <DependentUpon>EstimateReports.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FromsEstimation\Estimating.resx">
       <DependentUpon>Estimating.vb</DependentUpon>
     </EmbeddedResource>
@@ -1043,6 +1088,27 @@
     <EmbeddedResource Include="ReportsEstimation\EstSummary.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>EstSummary.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportsEstimation\JobNoEquipmentBudget.resx">
+      <DependentUpon>JobNoEquipmentBudget.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportsEstimation\JobNoEquipmentBudgetReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>JobNoEquipmentBudgetReport.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportsEstimation\JobNoPipingBudget.resx">
+      <DependentUpon>JobNoPipingBudget.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportsEstimation\JobNoPipingBudgetReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>JobNoPipingBudgetReport.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportsEstimation\JobNoSCFBudget.resx">
+      <DependentUpon>JobNoSCFBudget.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportsEstimation\JobNoSCFBudgetReport.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>JobNoSCFBudgetReport.vb</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="RerportsScaffold\ScaffoldActive.resx">
       <DependentUpon>ScaffoldActive.vb</DependentUpon>

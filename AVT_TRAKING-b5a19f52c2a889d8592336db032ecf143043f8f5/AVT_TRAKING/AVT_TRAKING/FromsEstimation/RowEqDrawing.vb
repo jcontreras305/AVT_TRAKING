@@ -261,7 +261,7 @@
     ''' </summary>
     ''' <param name="dtRow">DataRow con itemArray con 18 valores</param>
     Public Sub cargardatos(ByVal dtRow As Data.DataRow)
-        itemArray = {dtRow.ItemArray(0).ToString(), dtRow.ItemArray(1).ToString(), dtRow.ItemArray(2).ToString(), dtRow.ItemArray(3).ToString(), dtRow.ItemArray(4).ToString(), dtRow.ItemArray(5).ToString(), dtRow.ItemArray(6).ToString(), dtRow.ItemArray(7).ToString(), dtRow.ItemArray(8).ToString(), If(dtRow.ItemArray(9) = "True", "Yes", "No"), dtRow.ItemArray(10).ToString(), dtRow.ItemArray(11).ToString(), dtRow.ItemArray(12).ToString(), dtRow.ItemArray(13).ToString(), dtRow.ItemArray(14).ToString(), dtRow.ItemArray(15).ToString(), dtRow.ItemArray(16).ToString(), dtRow.ItemArray(17).ToString(), If(dtRow.ItemArray(18) = "True", "Yes", "No")}
+        itemArray = {dtRow.ItemArray(0).ToString(), dtRow.ItemArray(1).ToString(), dtRow.ItemArray(2).ToString(), dtRow.ItemArray(3).ToString(), dtRow.ItemArray(4).ToString(), dtRow.ItemArray(5).ToString(), dtRow.ItemArray(6).ToString(), dtRow.ItemArray(7).ToString(), dtRow.ItemArray(8).ToString(), If(dtRow.ItemArray(9) = "Yes" Or dtRow.ItemArray(9) = "True", "Yes", "No"), dtRow.ItemArray(10).ToString(), dtRow.ItemArray(11).ToString(), dtRow.ItemArray(12).ToString(), dtRow.ItemArray(13).ToString(), dtRow.ItemArray(14).ToString(), dtRow.ItemArray(15).ToString(), dtRow.ItemArray(16).ToString(), dtRow.ItemArray(17).ToString(), If(dtRow.ItemArray(18) = "Yes" Or dtRow.ItemArray(18) = "True", "Yes", "No")}
         _idEquipmentAux = dtRow.ItemArray(0)
         _idEquipment = dtRow.ItemArray(1)
         _eqDescription = dtRow.ItemArray(2)
@@ -306,7 +306,7 @@
         If cmbJkt.FindString(ItemArray1(8).ToString()) > -1 And ItemArray1(8) > "" Then
             cmbJkt.SelectedItem = cmbJkt.Items(cmbJkt.FindString(ItemArray1(8).ToString()))
         End If
-        chbRemIns.Checked = If(ItemArray1(9) = "Yes", False, True)
+        chbRemIns.Checked = If(ItemArray1(9) = "Yes", True, False)
         If cmbLaborRateRmv.FindString(ItemArray1(10).ToString) > -1 And ItemArray1(10) <> "" Then
             cmbLaborRateRmv.SelectedItem = cmbLaborRateRmv.Items(cmbLaborRateRmv.FindString(ItemArray1(10).ToString))
         End If

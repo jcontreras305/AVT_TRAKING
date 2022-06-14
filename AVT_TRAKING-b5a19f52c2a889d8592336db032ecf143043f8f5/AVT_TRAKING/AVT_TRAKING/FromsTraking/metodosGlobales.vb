@@ -168,8 +168,7 @@ where cl.numberClient = '" + numberClient + "'", con.conn)
         Try
             con.conectar()
             Dim cmd As New SqlCommand("select po.projectId , po.[description] , po.unit from projectClientEst as po
-inner join clientsEst as cl on cl.idClientEst = po.idClientEst
-where cl.numberClient = " + numberClient + "", con.conn)
+inner join clientsEst as cl on cl.idClientEst = po.idClientEst " + If(numberClient <> "", " where cl.numberClient = " + numberClient + "", ""), con.conn)
             Dim dr As SqlDataReader = cmd.ExecuteReader()
             combo.Items.Clear()
             While dr.Read()

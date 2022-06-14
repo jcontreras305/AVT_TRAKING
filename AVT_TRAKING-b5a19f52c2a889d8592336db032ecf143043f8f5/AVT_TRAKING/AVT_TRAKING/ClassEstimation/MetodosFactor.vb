@@ -31,14 +31,14 @@ Public Class MetodosFactor
             For Each row As DataGridViewRow In tbl.SelectedRows()
                 Dim cmd As New SqlCommand
                 If row.Cells("IdLaborRate").Value Is Nothing Or row.Cells("IdLaborRate").Value = "" Then
-                    cmd.CommandText = "if (select COUNT(*) from laborRate where idLaborRate = '" + row.Cells("Description").Value + "')=0
+                    cmd.CommandText = "if (select COUNT(*) from laborRate where idLaborRate = '" + row.Cells("Description").Value.ToString.Replace("'", "''") + "')=0
                         begin 
-	                        insert into laborRate values('" + row.Cells("Description").Value.ToString() + "'," + row.Cells("InsulRate").Value.ToString() + "," + row.Cells("AbatRate").Value.ToString() + "," + row.Cells("PaintRate").Value.ToString() + "," + row.Cells("ScafRate").Value.ToString() + ")
+	                        insert into laborRate values('" + row.Cells("Description").Value.ToString().ToString.Replace("'", "''") + "'," + row.Cells("InsulRate").Value.ToString() + "," + row.Cells("AbatRate").Value.ToString() + "," + row.Cells("PaintRate").Value.ToString() + "," + row.Cells("ScafRate").Value.ToString() + ")
                         end"
                 Else
-                    cmd.CommandText = "if (select COUNT(*) from laborRate where idLaborRate = '" + row.Cells("IdLaborRate").Value + "')=1
+                    cmd.CommandText = "if (select COUNT(*) from laborRate where idLaborRate = '" + row.Cells("IdLaborRate").Value.ToString.Replace("'", "''") + "')=1
                         begin
-                            update laborRate set idLaborRate = '" + row.Cells("Description").Value.ToString() + "' , insRate = " + row.Cells("InsulRate").Value.ToString() + ",abatRate=" + row.Cells("AbatRate").Value.ToString() + ",paintRate=" + row.Cells("PaintRate").Value.ToString() + ",scafRate=" + row.Cells("ScafRate").Value.ToString() + " where idLaborRate = '" + row.Cells("IdLaborRate").Value.ToString() + "'
+                            update laborRate set idLaborRate = '" + row.Cells("Description").Value.ToString().Replace("'", "''") + "' , insRate = " + row.Cells("InsulRate").Value.ToString() + ",abatRate=" + row.Cells("AbatRate").Value.ToString() + ",paintRate=" + row.Cells("PaintRate").Value.ToString() + ",scafRate=" + row.Cells("ScafRate").Value.ToString() + " where idLaborRate = '" + row.Cells("IdLaborRate").Value.ToString().ToString.Replace("'", "''") + "'
                         end"
                 End If
                 cmd.Connection = conn

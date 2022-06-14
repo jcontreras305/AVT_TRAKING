@@ -367,6 +367,10 @@
     Private Sub btnNew_Click(sender As Object, e As EventArgs) Handles btnNew.Click
         Try
             btnCancel.Visible = True
+            'idProject = ""
+            'cmbProjects.SelectedItem = Nothing
+            'cmbProjects.Text = ""
+            'txt
             flagNewDrawing = True
             idDrawing = ""
             tblSCFDrawing.Rows.Clear()
@@ -388,7 +392,20 @@
         txtDescription.Text = tblProjects.Rows(rowindex).ItemArray(5)
         idClient = tblProjects.Rows(rowindex).ItemArray(1)
         cmbProjects.Text = tblProjects.Rows(rowindex).ItemArray(3)
-        idProject = tblProjects.Rows(rowIndex).ItemArray(3)
+        idProject = tblProjects.Rows(rowindex).ItemArray(3)
+        Dim arrayRows() As Data.DataRow = tblDrawing.Select("projectId = '" + tblProjects.Rows(rowindex).ItemArray(3) + "' and numberClient = '" + tblProjects.Rows(rowindex).ItemArray(1).ToString() + "'")
+        If arrayRows.Length > 0 Then
+            Dim project As String = ""
+            Dim drawing As String = ""
+            Dim client As String = ""
+            project = tblDrawing.Rows(tblDrawing.Rows.Count - 1).ItemArray(2)
+            Drawing = tblDrawing.Rows(tblDrawing.Rows.Count - 1).ItemArray(0)
+            idDrawing = tblDrawing.Rows(tblDrawing.Rows.Count - 1).ItemArray(0)
+            client = tblDrawing.Rows(tblDrawing.Rows.Count - 1).ItemArray(3)
+            cargarDatosDrawing(client, project, drawing, True)
+        Else
+            limpiarDrawing()
+        End If
     End Sub
 
     Private Sub btnAfterDrawing_Click(sender As Object, e As EventArgs) Handles btnAfterDrawing.Click
@@ -497,7 +514,18 @@
         End Try
     End Function
 
-
+    Private Function limpiarDrawing() As Boolean
+        Try
+            txtDrawingNum.Text = ""
+            txtDescriptionDrawing.Text = ""
+            tblSCFDrawing.Rows.Clear()
+            pnlRowsEq.Controls.Clear()
+            pnlRowsPiping.Controls.Clear()
+            Return True
+        Catch ex As Exception
+            Return False
+        End Try
+    End Function
 
     '==========================================================================================================================================================================================================
     '========= AGREGAR Y ELIMINAR ROWS EQUIPMENT ==============================================================================================================================================================
@@ -677,4 +705,6 @@
 
         End Try
     End Sub
+
+
 End Class

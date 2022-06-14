@@ -1768,7 +1768,7 @@ go
 --################## SP SELECT ESTIMATION COST BY PROJECT ######################################
 --##############################################################################################
 
-create proc sp_SelectEstCostByProject
+ALTER proc [dbo].[sp_SelectEstCostByProject]
 @projectId as varchar(40)
 as 
 begin
@@ -1778,8 +1778,8 @@ begin
 select po.ProjectId, po.[description],po.unit,
 cl.numberClient, cl.contactName, cl.companyName, cl.plant, ha.avenue, ha.city, ha.providence,
 dr.idDrawingNum,dr.[description],
-CONVERT(NVARCHAR, scfD.tag)as 'Tag' ,'SCF Deck DISM' as 'TASK',scfD.SBHR as 'HRS',scfD.SCOSTLB as 'COSTL',scfD.SCOSTMB as 'COSTM',scfD.SCOSTEB as 'COSTE',scfD.DSCOSTL + scfD.DSCOSTMD + scfD.SCOSTEDD  as 'TCOST' 
-from EstCostScf as scfD
+CONVERT(NVARCHAR, scfD.tag)as 'Tag' ,'SCF Deck DISM' as 'TASK',scfD.SHRD as 'HRS',scfD.DSCOSTL as 'COSTL',scfD.DSCOSTM as 'COSTM',scfD.SCOSTEDD as 'COSTE',scfD.DSCOSTL + scfD.DSCOSTMD + scfD.SCOSTEDD  as 'TCOST' 
+from EstCostDism as scfD
 inner join drawing as dr on dr.idDrawingNum = scfD.idDrawingNum
 inner join projectClientEst as po on po.projectId = scfD.projectId
 inner join clientsEst as cl on cl.idClientEst = po.idClientEst
@@ -2515,5 +2515,179 @@ begin
 	begin
 		update EstCostPp set IRELF = @IRELF ,ACMH = @ACMH,PIRHRS = @PIRHRS,PIRCOSTL = @PIRCOSTL,PIRCOSTM = @PIRCOSTM,PIRCOSTE = @PIRCOSTE,PIRTCOST = @PIRTCOST,IIELF = @IIELF,PIIHRS = @PIIHRS,PIICOSTL = @PIICOSTL,PIICOSTM = @PIICOSTM,PIICOSTE = @PIICOSTE,PIITCOST = @PIITCOST,PESQF = @PESQF,PPHRS = @PPHRS,PPCOSTL = @PPCOSTL,PPCOSTM = @PPCOSTM,PPCOSTE = @PPCOSTE,PPTCOST = @PPTCOST where tag = CONVERT(NVARCHAR, (select idPipingEst from inserted)) and idDrawingNum = (select idDrawingNum from inserted) and projectId = @projectId
 	end
+end
+go
+
+--##########################################################################################################################################################################################################################
+--########## PROCEDIMENTO PARA REPORTE DE SCAFFOLD BUDGET ESTIMATION #######################################################################################################################################################
+--##########################################################################################################################################################################################################################
+
+create proc [dbo].[sp_SelectScaffoldBudgetEstimate]
+	@projectId as varchar(30)
+as
+begin
+select 
+cl.numberClient, cl.contactName, cl.companyName, cl.plant, ha.avenue, ha.city, ha.providence,
+po.projectId as 'Project' ,po.[description] as 'Description',estCScf.tag , dr.idDrawingNum , scf.location as 'Location', CONCAT(scf.width,'x',scf.[length],'x',scf.heigth) as 'Dimention',scf.build as 'Elevation',
+scf.[days] as 'Days Active',scf.idSCFUR as 'Scaf.Type', FORMAT ((((scf.width)*(scf.[length])*(scf.heigth))/35.31),'###.00') as 'M3',estCScf.M2 as 'M2', scf.idLaborRate as 'Work Week' ,
+--MAN HRS 
+estCScf.SBHR as 'Man Hrs B' ,estCScf.SDHR as 'Man Hrs D',
+--MAN HRS DECKS
+ISNULL((select top 1 estB.SBHR from EstCostScf as estB where estB.idDrawingNum = estCScf.idDrawingNum and estB.projectId = estCScf.projectId and estB.tag = estCScf.tag),0) as 'Man Hrs Deck B',
+ISNULL((select top 1 estB.SDHR from EstCostScf as estB where estB.idDrawingNum = estCScf.idDrawingNum and estB.projectId = estCScf.projectId and estB.tag = estCScf.tag),0) as 'Man Hrs Deck D',
+scf.decks as 'Decks',
+--DESCKS LABOR
+ISNULL((select estB.SCOSTLB from EstCostBuild as estB where estB.idDrawingNum = estCScf.idDrawingNum and estB.projectId = estCScf.projectId and estB.tag = estCScf.tag),0) as 'Decks Labor B',
+ISNULL((select estD.DSCOSTL from EstCostDism as estD where estD.idDrawingNum = estCScf.idDrawingNum and estD.projectId = estCScf.projectId and estD.tag = estCScf.tag),0) as 'Decks Labor D',
+--SCAF LABOR 
+ISNULL((select estB.SCOSTLB from EstCostScf as estB where estB.idDrawingNum = estCScf.idDrawingNum and estB.projectId = estCScf.projectId and estB.tag = estCScf.tag),0) as 'SCF Labor B',
+ISNULL((select estB.SCOSTLD from EstCostScf as estB where estB.idDrawingNum = estCScf.idDrawingNum and estB.projectId = estCScf.projectId and estB.tag = estCScf.tag),0) as 'SCF Labor D',
+--MATERIAL
+ISNULL((select estB.SCOSTMB from EstCostScf as estB where estB.idDrawingNum = estCScf.idDrawingNum and estB.projectId = estCScf.projectId and estB.tag = estCScf.tag),0) as 'SCF Material B',
+ISNULL((select estD.SCOSTMD from EstCostScf as estD where estD.idDrawingNum = estCScf.idDrawingNum and estD.projectId = estCScf.projectId and estD.tag = estCScf.tag),0) as 'SCF Material D',
+ISNULL((select estB.SCOSTMB from EstCostBuild as estB where estB.idDrawingNum = estCScf.idDrawingNum and estB.projectId = estCScf.projectId and estB.tag = estCScf.tag),0) as 'DECK Material B',
+ISNULL((select estD.DSCOSTMD from EstCostDism as estD where estD.idDrawingNum = estCScf.idDrawingNum and estD.projectId = estCScf.projectId and estD.tag = estCScf.tag),0) as 'DECK Material D',
+--EQUIPMENT
+ISNULL((select estB.SCOSTEB from EstCostScf as estB where estB.idDrawingNum = estCScf.idDrawingNum and estB.projectId = estCScf.projectId and estB.tag = estCScf.tag),0) as 'SCF Equipment B',
+ISNULL((select estD.SCOSTED from EstCostScf as estD where estD.idDrawingNum = estCScf.idDrawingNum and estD.projectId = estCScf.projectId and estD.tag = estCScf.tag),0) as 'SCF Equipment D',
+ISNULL((select estB.SCOSTEB from EstCostBuild as estB where estB.idDrawingNum = estCScf.idDrawingNum and estB.projectId = estCScf.projectId and estB.tag = estCScf.tag),0) as 'DECK Equipment B',
+ISNULL((select estD.SCOSTEDD from EstCostDism as estD where estD.idDrawingNum = estCScf.idDrawingNum and estD.projectId = estCScf.projectId and estD.tag = estCScf.tag),0) as 'DECK Equipment D'
+
+from EstCostScf as estCScf
+inner join scaffoldEst as scf on scf.idDrawingNum = estCScf.idDrawingNum and scf.tag = estCScf.tag
+inner join drawing as dr on dr.idDrawingNum = estCScf.idDrawingNum
+inner join projectClientEst as po on po.projectId = estCScf.projectId
+inner join clientsEst as cl on cl.idClientEst = po.idClientEst
+inner join HomeAddress as ha on ha.idHomeAdress = cl.idHomeAdress
+where estCScf.projectId  = @projectId
+end
+go
+
+--##########################################################################################################################################################################################################################
+--########## PROCEDIMENTO PARA REPORTE DE EQUIPMENT BUDGET ESTIMATION ######################################################################################################################################################
+--##########################################################################################################################################################################################################################
+
+create proc sp_SelectEquipmentBudgetEstimate
+	@projectId as varchar(30)
+as
+begin 
+	select 
+	cl.numberClient, cl.contactName, cl.companyName, cl.plant, ha.avenue, ha.city, ha.providence,
+	estCEq.tag as 'ID',
+	estCEq.idDrawingNum as 'Drawing',
+	po.projectId as 'Project',
+	po.[description] as 'Description',
+	eq.idEquimentEst as 'Equipment', 
+	eq.elevation as 'Height',
+	eq.systemPntEq as 'System',
+	eq.pntOption as 'Paint Option',
+	eq.[type] as 'Ins Type',
+	eq.thick as 'Ins Thick',
+	eq.idJacket as 'JKT',
+	'Insul Removal' as 'TaskRmv',
+	eq.sqrFtRmv as 'SqrFtRmv',
+	'Insul Install' as 'TaskII',
+	eq.sqrFtII as 'SqrFtII',
+	eq.bevel as 'Bevel',
+	eq.cutout as 'Cut Out',
+	'Paint' as 'TaskPnt',
+	eq.sqrFtPnt as 'SqrFtPnt',
+	eq.acm as 'ACM',	
+	--remove
+	ISNULL(eq.idLaborRateRmv,'') as 'WW Rmv',
+	ISNULL(estCEq.EIRHRS,0) as 'Horas Rmv',
+	ISNULL(estCEq.EIRCOSTL,0) as 'Labor Rmv',
+	ISNULL(estCEq.EIRCOSTM,0) as 'Materal Rmv',
+	ISNULL(estCeq.EIRCOSTE,0) as 'Equipment Rmv',
+	--instalation
+	ISNULL(eq.idLaborRateII,'') as 'WW II',
+	ISNULL(estceq.EIIHRS,0) as 'Horas II', 
+	ISNULL(estCEq.EIICOSTL,0) as 'Labor II' ,
+	ISNULL(estCEq.EIICOSTM,0) as 'Material II',
+	ISNULL(estCEq.EIICOSTE,0) as 'Equipment II',
+	--paint
+	ISNULL(eq.idLaborRatePnt,'') as 'WW Pnt',
+	ISNULL(estCEq.EPHRS,0) as 'Horas Pnt',
+	ISNULL(estCEq.EPCOSTL,0) as 'Labor Pnt',
+	ISNULL(estCEq.EPCOSTM,0) as 'Material Pnt',
+	ISNULL(estCEq.EPCOSTE,0) as 'Equipment Pnt'
+	from EstCostEq as estCEq
+	inner join equipmentEst as eq on eq.idEquimentEst = estCEq.tag and eq.idDrawingNum = estCEq.idDrawingNum 
+	inner join drawing as dr on dr.idDrawingNum = eq.idDrawingNum and dr.idDrawingNum = estCEq.idDrawingNum  
+	inner join projectClientEst as po on po.projectId = dr.projectId and estCEq.projectId = po.projectId
+	inner join clientsEst as cl on cl.idClientEst =po.idClientEst
+	inner join HomeAddress as ha on ha.idHomeAdress = cl.idHomeAdress
+	where po.projectId =@projectId
+end
+go
+
+--##########################################################################################################################################################################################################################
+--########## PROCEDIMENTO PARA REPORTE DE PIPING BUDGET ESTIMATION #########################################################################################################################################################
+--##########################################################################################################################################################################################################################
+
+create proc sp_SelectPipingBudgetEstimate
+	@projectId as varchar(30)
+as
+begin
+	select 
+	cl.numberClient, cl.contactName, cl.companyName, cl.plant, ha.avenue, ha.city, ha.providence,
+	estCPp.tag as 'ID',
+	pp.acm as 'ACM',
+	pp.st as 'ST',
+	estCPp.idDrawingNum as 'Drawing',
+	po.projectId as 'Project',
+	po.[description] as 'Description',
+	pp.line as 'PipingDescription',
+	pp.size as 'PZ',
+	pp.elevation as 'Elevation',
+	pp.systemPntPP as 'System',
+	pp.pntOption as 'Paint Option',
+	pp.[type] as 'InsType',
+	pp.thick as 'InsThick',
+	pp.idJacket as 'JKT',
+	pp.lFtRmv as 'LnFtRmv',
+	ISNULL(pp.idLaborRateRmv,'') as 'LaborRateRmv',
+	ISNULL(pp.lFtII,0) as 'LnFtII',
+	ISNULL(pp.p90II,0) as '90II',
+	ISNULL(pp.p45II,0) as '45II',
+	ISNULL(pp.pBendII,0) as 'BendII',
+	ISNULL(pp.pTeeII,0) as 'TEEII',
+	ISNULL(pp.pReducII,0) as 'REDII',
+	ISNULL(pp.pCapsII,0) as 'CapII',
+	ISNULL(pp.pPairII,0) as 'PairII',
+	ISNULL(pp.pVlvII,0) as 'VlvII',
+	ISNULL(pp.pControlII,0) as 'CtrlII',
+	ISNULL(pp.pWeldII,0) as 'WldII',
+	ISNULL(pp.pCutOutII,0) as 'CutOut',
+	ISNULL(pp.psupportII,0) as 'SpptII',
+	ISNULL(pp.idLaborRateII,'') as 'LaborRateII',
+	ISNULL(pp.lFtPnt,0) as 'LnFtPnt',
+	ISNULL(pp.p90Pnt,0) as '90Pnt',
+	ISNULL(pp.p45Pnt,0) as '45Pnt',
+	ISNULL(pp.pTeePnt,0) as 'TEEPnt',
+	ISNULL(pp.pPairPnt,0) as 'PairPnt',
+	ISNULL(pp.pVlvPnt,0) as 'VlvPnt',
+	ISNULL(pp.pControlPnt,0) as 'CtrlPnt',
+	ISNULL(pp.pWeldPnt,0) as 'WldPnt',
+	ISNULL(pp.idLaborRatePnt,'') as 'LaborRatePnt',
+	ISNULL(estCPp.PIRHRS,0) as 'ManHrsRmv',
+	ISNULL(estCPp.PIIHRS,0) as 'ManHrsII',
+	ISNULL(estCPp.PPHRS,0) as 'ManHrsPnt',
+	ISNULL(estCPp.PIRCOSTL,0) as 'LaborRmv',
+	ISNULL(estCPp.PIICOSTL,0) as 'LaborII',
+	ISNULL(estCPp.PPCOSTL,0) as 'LaborPnt',
+	ISNULL(estCPp.PIRCOSTM,0) as 'MaterialRmv',
+	ISNULL(estCPp.PIICOSTM,0) as 'MaterialII',
+	ISNULL(estCPp.PPCOSTM,0)  as 'MaterialPnt',
+	ISNULL(estCPp.PIRCOSTE,0) as 'EquipmentRmv',
+	ISNULL(estCPp.PIICOSTE,0) as 'EquipmentII',
+	ISNULL(estCPp.PPCOSTE,0)  as 'EquipmentPnt' 
+from EstCostPp as estCPp 
+inner join pipingEst as pp on pp.idPipingEst = estCPp.tag and pp.idDrawingNum = estCPp.idDrawingNum
+inner join drawing as dr on dr.idDrawingNum = pp.idDrawingNum and dr.idDrawingNum = estCPp.idDrawingNum
+inner join projectClientEst as po on po.projectId = dr.projectId and po.projectId = estCPp.projectId
+inner join clientsEst as cl on cl.idClientEst = po.idClientEst
+inner join HomeAddress as ha on ha.idHomeAdress = cl.idHomeAdress
+where po.projectId = @projectId
 end
 go

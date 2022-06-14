@@ -18,7 +18,7 @@ Imports System
 Imports System.ComponentModel
 
 
-Public Class WONotComplete
+Public Class JobNoSCFBudgetReport
     Inherits ReportClass
     
     Public Sub New()
@@ -27,7 +27,7 @@ Public Class WONotComplete
     
     Public Overrides Property ResourceName() As String
         Get
-            Return "WONotComplete.rpt"
+            Return "JobNoSCFBudgetReport.rpt"
         End Get
         Set
             'Do nothing
@@ -45,7 +45,7 @@ Public Class WONotComplete
     
     Public Overrides Property FullResourceName() As String
         Get
-            Return "AVT_TRAKING.WONotComplete.rpt"
+            Return "AVT_TRAKING.JobNoSCFBudgetReport.rpt"
         End Get
         Set
             'Do nothing
@@ -110,7 +110,7 @@ Public Class WONotComplete
     
     <Browsable(false),  _
      DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)>  _
-    Public ReadOnly Property Parameter_clientnum() As CrystalDecisions.[Shared].IParameterField
+    Public ReadOnly Property Parameter_projectId() As CrystalDecisions.[Shared].IParameterField
         Get
             Return Me.DataDefinition.ParameterFields(0)
         End Get
@@ -118,31 +118,15 @@ Public Class WONotComplete
     
     <Browsable(false),  _
      DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)>  _
-    Public ReadOnly Property Parameter_jobNum() As CrystalDecisions.[Shared].IParameterField
-        Get
-            Return Me.DataDefinition.ParameterFields(1)
-        End Get
-    End Property
-    
-    <Browsable(false),  _
-     DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)>  _
-    Public ReadOnly Property Parameter_all() As CrystalDecisions.[Shared].IParameterField
-        Get
-            Return Me.DataDefinition.ParameterFields(2)
-        End Get
-    End Property
-    
-    <Browsable(false),  _
-     DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)>  _
     Public ReadOnly Property Parameter_CompanyName() As CrystalDecisions.[Shared].IParameterField
         Get
-            Return Me.DataDefinition.ParameterFields(3)
+            Return Me.DataDefinition.ParameterFields(1)
         End Get
     End Property
 End Class
 
 <System.Drawing.ToolboxBitmapAttribute(GetType(CrystalDecisions.[Shared].ExportOptions), "report.bmp")>  _
-Public Class CachedWONotComplete
+Public Class CachedJobNoSCFBudgetReport
     Inherits Component
     Implements ICachedReport
     
@@ -184,7 +168,7 @@ Public Class CachedWONotComplete
     End Property
     
     Public Overridable Function CreateReport() As CrystalDecisions.CrystalReports.Engine.ReportDocument Implements CrystalDecisions.ReportSource.ICachedReport.CreateReport
-        Dim rpt As WONotComplete = New WONotComplete()
+        Dim rpt As JobNoSCFBudgetReport = New JobNoSCFBudgetReport()
         rpt.Site = Me.Site
         Return rpt
     End Function
