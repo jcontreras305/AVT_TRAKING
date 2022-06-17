@@ -18,6 +18,8 @@
         mtdFactor.selectEqInsUnitRate(tblEqInsUnitRate)
         mtdFactor.selectPpInsUnitRate(tblPpInsUnitRate)
         mtdFactor.selectSizesMaterialPiping(tblPipingMaterial)
+        mtdFactor.selectEqIRHC(tblEquipmentIRHC)
+        mtdFactor.selectPpIRHC(tblPipingIRHC)
     End Sub
     Private Sub btnSalir_Click(sender As Object, e As EventArgs) Handles btnSalir.Click
         Me.Close()
@@ -360,6 +362,24 @@
                 Else
                     MessageBox.Show("Please Select a row in the Table Piping Insulation Rate Unit Rate to Constinue.", "Important", MessageBoxButtons.OK, MessageBoxIcon.Asterisk)
                 End If
+            Case "EquipmentHC"
+                If tblEquipmentIRHC.SelectedRows.Count > 0 Then
+                    If mtdFactor.saveUpdateEqIRHC(tblEquipmentIRHC) Then
+                        mtdFactor.selectEqIRHC(tblEquipmentIRHC)
+                        MsgBox("Successful.")
+                    End If
+                Else
+                    MessageBox.Show("Please Select a row in the Table Equipment IR HC Insulation Rate Unit Rate to Constinue.", "Important", MessageBoxButtons.OK, MessageBoxIcon.Asterisk)
+                End If
+            Case "PipingIRHC"
+                If tblPipingIRHC.SelectedRows.Count > 0 Then
+                    If mtdFactor.saveUpdatePpIRHC(tblPipingIRHC) Then
+                        mtdFactor.selectPpIRHC(tblPipingIRHC)
+                        MsgBox("Successful.")
+                    End If
+                Else
+                    MessageBox.Show("Please Select a row in the Table Piping IR HC Insulation Rate Unit Rate to Constinue.", "Important", MessageBoxButtons.OK, MessageBoxIcon.Asterisk)
+                End If
         End Select
     End Sub
     Private Sub btnDeleteFactorTbl_Click(sender As Object, e As EventArgs) Handles btnDeleteFactorTbl.Click
@@ -559,7 +579,36 @@
                 Else
                     MessageBox.Show("Please Select A Row.", "Message", MessageBoxButtons.OK, MessageBoxIcon.Asterisk)
                 End If
-
+            Case "EquipmentHC"
+                If tblEquipmentIRHC.SelectedRows.Count > 0 Then
+                    If DialogResult.Yes = MessageBox.Show("If you Accept, is likely that you delete an Element that is related to this Records. Are you sure to continue?", "Message", MessageBoxButtons.YesNo, MessageBoxIcon.Asterisk) Then
+                        If mtdFactor.deleteEqIRHC(tblEquipmentIRHC) Then
+                            For Each row As DataGridViewRow In tblEquipmentIRHC.SelectedRows()
+                                tblEquipmentIRHC.Rows.Remove(row)
+                            Next
+                            MsgBox("Successfull")
+                        Else
+                            MsgBox("Error, check the Data or refresh the Window.")
+                        End If
+                    End If
+                Else
+                    MessageBox.Show("Please Select A Row.", "Message", MessageBoxButtons.OK, MessageBoxIcon.Asterisk)
+                End If
+            Case "PipingIRHC"
+                If tblPipingIRHC.SelectedRows.Count > 0 Then
+                    If DialogResult.Yes = MessageBox.Show("If you Accept, is likely that you delete an Element that is related to this Records. Are you sure to continue?", "Message", MessageBoxButtons.YesNo, MessageBoxIcon.Asterisk) Then
+                        If mtdFactor.deletePpIRHC(tblPipingIRHC) Then
+                            For Each row As DataGridViewRow In tblPipingIRHC.SelectedRows()
+                                tblPipingIRHC.Rows.Remove(row)
+                            Next
+                            MsgBox("Successfull")
+                        Else
+                            MsgBox("Error, check the Data or refresh the Window.")
+                        End If
+                    End If
+                Else
+                    MessageBox.Show("Please Select A Row.", "Message", MessageBoxButtons.OK, MessageBoxIcon.Asterisk)
+                End If
         End Select
     End Sub
     Private Sub btnSaveWWSLR_Click(sender As Object, e As EventArgs) Handles btnSaveWWSLR.Click
@@ -1069,5 +1118,56 @@
         If e.ColumnIndex = 4 Then
             e.ThrowException = False
         End If
+    End Sub
+    '############################################################################################################################################################################################################################################################
+    '############################################################################################################################################################################################################################################################
+    '############################################################################################################################################################################################################################################################
+
+    Private Sub btnExcelEquipmentIRHC_Click(sender As Object, e As EventArgs) Handles btnExcelEquipmentIRHC.Click
+        Try
+            Dim sheetName = InputBox("Please Write the name of the Sheet to Read.", "Find Excel Sheet", "Sheet 1")
+            While sheetName <> ""
+                Dim tbl = leerExcel(lblMessage, pgbProgress, sheetName)
+                If tbl IsNot Nothing Then
+                    For Each row As Data.DataRow In tbl.Rows()
+                        tblEquipmentIRHC.Rows.Add("", "", row.ItemArray(0).ToString(), row.ItemArray(1).ToString(), row.ItemArray(2).ToString(), row.ItemArray(3).ToString(), row.ItemArray(4).ToString())
+                    Next
+                    pgbProgress.Value = 100
+                    lblMessage.Text = "Message: End."
+                    Exit While
+                Else
+                    sheetName = InputBox("Please Write the name of the Sheet to Read." + "If do not wish to continue, leave the space blank.", "find Excel Sheet", "Sheet 1")
+                End If
+            End While
+        Catch ex As Exception
+            MsgBox(ex.Message())
+        End Try
+        selectTable = "EquipmentHC"
+    End Sub
+
+    '############################################################################################################################################################################################################################################################
+    '############################################################################################################################################################################################################################################################
+    '############################################################################################################################################################################################################################################################
+
+    Private Sub btnExcelPipingIRHC_Click(sender As Object, e As EventArgs) Handles btnExcelPipingIRHC.Click
+        Try
+            Dim sheetName = InputBox("Please Write the name of the Sheet to Read.", "Find Excel Sheet", "Sheet 1")
+            While sheetName <> ""
+                Dim tbl = leerExcel(lblMessage, pgbProgress, sheetName)
+                If tbl IsNot Nothing Then
+                    For Each row As Data.DataRow In tbl.Rows()
+                        tblPipingIRHC.Rows.Add("", "", "", row.ItemArray(0).ToString(), row.ItemArray(1).ToString(), row.ItemArray(2).ToString(), row.ItemArray(3).ToString(), row.ItemArray(4).ToString(), row.ItemArray(5).ToString())
+                    Next
+                    pgbProgress.Value = 100
+                    lblMessage.Text = "Message: End."
+                    Exit While
+                Else
+                    sheetName = InputBox("Please Write the name of the Sheet to Read." + "If do not wish to continue, leave the space blank.", "find Excel Sheet", "Sheet 1")
+                End If
+            End While
+        Catch ex As Exception
+            MsgBox(ex.Message())
+        End Try
+        selectTable = "PipingIRHC"
     End Sub
 End Class

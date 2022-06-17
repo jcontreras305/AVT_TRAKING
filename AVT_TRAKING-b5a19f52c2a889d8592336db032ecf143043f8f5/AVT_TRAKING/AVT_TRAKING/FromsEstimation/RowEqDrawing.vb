@@ -334,7 +334,7 @@
         cmbLaborRateII.SizeHeight = ((lytLaborRates.Height) / 3) - 22
         tblElevation = mtdElevation.llenarComboElvSCF(cmbHeight)
         tblSystemPaint = mtdFactor.llenarComboEqPntUnitRate(cmbSystem)
-        tblInsType = mtdFactor.llenarComboEqInsUnitRate(cmbInstType)
+        tblInsType = mtdFactor.llenarComboEqIRHC(cmbInstType)
         tblJacket = mtdFactor.llenarComboEqJacketUnitRate(cmbJkt)
         mtdFactor.llenarComboLaporRate(cmbLaborRateRmv)
         mtdFactor.llenarComboLaporRate(cmbLaborRatePnt)
@@ -368,7 +368,7 @@
             Case "thick"
                 If txtThick.Text IsNot Nothing Then
                     If soloNumero(txtThick.Text) And txtThick.Text <> "" Then
-                        Dim listRows() As Data.DataRow = tblInsType.Select("type = '" + InsType + "' and thick = '" + txtThick.Text + "'")
+                        Dim listRows() As Data.DataRow = tblInsType.Select("type = '" + InsType + "' and thickness = '" + txtThick.Text + "'")
                         If listRows.Length > 0 Then
                             Thick = txtThick.Text
                         Else

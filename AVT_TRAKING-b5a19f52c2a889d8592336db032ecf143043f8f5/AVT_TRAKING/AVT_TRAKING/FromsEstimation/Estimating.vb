@@ -141,7 +141,7 @@
                 If validarRowSCF() And idProject <> "" Then
                     If mtdEstimation.saveUpdateSCFDrawing(tblSCFDrawing, txtDrawingNum.Text, txtDescriptionDrawing.Text, idProject, If(idDrawing = "", "", idDrawing)) Then
                         MsgBox("Successful")
-                        Dim array() As String = cmbProjects.Items(0).ToString().Split(" ")
+                        Dim array() As String = cmbProjects.SelectedItem.ToString().Split(" ")
                         mtdEstimation.selectSCFDrawingProject(tblSCFDrawing, array(0), idProject, idDrawing)
                         idDrawing = txtDrawingNum.Text
                         tblProjects = mtdClients.llenarComboClientsEst(cmbProjects)
@@ -398,10 +398,10 @@
             Dim project As String = ""
             Dim drawing As String = ""
             Dim client As String = ""
-            project = tblDrawing.Rows(tblDrawing.Rows.Count - 1).ItemArray(2)
-            Drawing = tblDrawing.Rows(tblDrawing.Rows.Count - 1).ItemArray(0)
-            idDrawing = tblDrawing.Rows(tblDrawing.Rows.Count - 1).ItemArray(0)
-            client = tblDrawing.Rows(tblDrawing.Rows.Count - 1).ItemArray(3)
+            project = arrayRows(0).ItemArray(2)
+            drawing = arrayRows(0).ItemArray(0)
+            idDrawing = arrayRows(0).ItemArray(0)
+            client = arrayRows(0).ItemArray(3)
             cargarDatosDrawing(client, project, drawing, True)
         Else
             limpiarDrawing()
@@ -505,6 +505,7 @@
                     Dim array() As String = item.ToString.Split(" ")
                     If array(0) = clientNum Then
                         cmbProjects.SelectedIndex = itemIndex
+                        Exit For
                     End If
                 Next
             End If

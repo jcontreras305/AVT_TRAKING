@@ -174,10 +174,18 @@ where cl.numberClient = " + numberClient + " and po.projectId = '" + project + "
                     cmbTags.Connection = conn
                     cmbTags.Transaction = tran
                     If cmbTags.ExecuteNonQuery > 0 Then
-                        flag = True
-                    Else
-                        flag = False
-                        Exit For
+                        Dim cmdEstCostBuild As New SqlCommand("exec sp_insertUpdateEstCostBuild '" + row.Cells("Tag").Value.ToString().Replace("'", "''") + "','" + idDrawing + "'," + row.Cells("Width").Value.ToString() + "," + row.Cells("Length").Value.ToString() + "," + row.Cells("Decks").Value.ToString() + ",'" + row.Cells("TypeSC").Value.ToString().Replace("'", "''") + "','" + row.Cells("LaborRate").Value.ToString().Replace("'", "''") + "'", conn)
+                        cmdEstCostBuild.Transaction = tran
+                        If cmdEstCostBuild.ExecuteNonQuery > 0 Then
+                            Dim cmdEstCostDism As New SqlCommand("exec sp_insertUpdateEstCostDism '" + row.Cells("Tag").Value.ToString().Replace(",", "''") + "','" + idDrawing + "'," + row.Cells("Width").Value.ToString() + "," + row.Cells("Length").Value.ToString() + "," + row.Cells("Decks").Value.ToString() + ",'" + row.Cells("TypeSC").Value.ToString().Replace("'", "''") + "','" + row.Cells("LaborRate").Value.ToString().Replace("'", "''") + "'", conn)
+                            cmdEstCostDism.Transaction = tran
+                            If cmdEstCostDism.ExecuteNonQuery > 0 Then
+                                flag = True
+                            Else
+                                flag = False
+                                Exit For
+                            End If
+                        End If
                     End If
                 Next
                 If flag Then
@@ -267,7 +275,7 @@ idEquimentEst,eq.[description],elevation,systemPntEq,pntOption,[type],thick,idJa
 inner join drawing as dr on dr.idDrawingNum = eq.idDrawingNum
 inner join projectClientEst as po on po.projectId = dr.projectId
 inner join clientsEst as cl on cl.idClientEst = po.idClientEst" +
- If(numberClient <> "", " where cl.numberClient = " + numberClient + "", "") + If(project <> "", If(numberClient <> "", " Where ", " And ") + " po.projectId = '" + project + "'", ""), connection)
+ If(numberClient <> "", " where cl.numberClient = " + numberClient + "", "") + If(project <> "", If(numberClient = "", " Where ", " And ") + " po.projectId = '" + project + "'", ""), connection)
             cmd.Transaction = transaction
             Dim dt As New Data.DataTable
             If cmd.ExecuteNonQuery Then

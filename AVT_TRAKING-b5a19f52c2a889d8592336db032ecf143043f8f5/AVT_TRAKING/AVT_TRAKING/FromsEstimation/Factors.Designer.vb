@@ -22,9 +22,9 @@ Partial Class Factors
     'No lo modifique con el editor de código.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.btnSalir = New System.Windows.Forms.Button()
@@ -204,10 +204,36 @@ Partial Class Factors
         Me.ControlVlvp = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.WeldedVlvp = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.TabPage9 = New System.Windows.Forms.TabPage()
+        Me.TableLayoutPanel21 = New System.Windows.Forms.TableLayoutPanel()
+        Me.GroupBox15 = New System.Windows.Forms.GroupBox()
+        Me.TableLayoutPanel22 = New System.Windows.Forms.TableLayoutPanel()
+        Me.btnExcelPipingIRHC = New System.Windows.Forms.Button()
+        Me.tblPipingIRHC = New System.Windows.Forms.DataGridView()
+        Me.idSizePPIRHC = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.idTypePPIRHC = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.idThicknessPPIRHC = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.SizePPIRHC = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.TypePPIRHC = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ThicknessPPIRHC = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.LaborProdPPIRHC = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.MaterialRatePPIRHC = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.EquipmentRatePPIRHC = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.GroupBox16 = New System.Windows.Forms.GroupBox()
+        Me.TableLayoutPanel23 = New System.Windows.Forms.TableLayoutPanel()
+        Me.btnExcelEquipmentIRHC = New System.Windows.Forms.Button()
+        Me.tblEquipmentIRHC = New System.Windows.Forms.DataGridView()
+        Me.idTypeEqIRHC = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.idThickIEqRHC = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.TypeEqIRHC = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ThicknessEqIRHC = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.LaborProdEqIRHC = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.MaterialRateEqIRHC = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.EquipmentEqIRHC = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.TabPage10 = New System.Windows.Forms.TabPage()
         Me.GroupBox14 = New System.Windows.Forms.GroupBox()
         Me.TableLayoutPanel20 = New System.Windows.Forms.TableLayoutPanel()
         Me.btnExcelPipingMaterial = New System.Windows.Forms.Button()
+        Me.Panel17 = New System.Windows.Forms.Panel()
         Me.tblPipingMaterial = New System.Windows.Forms.DataGridView()
         Me.idSizeMat = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.idTypeMat = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -222,7 +248,6 @@ Partial Class Factors
         Me.lblMessage = New System.Windows.Forms.Label()
         Me.btnSaveFactorTbl = New System.Windows.Forms.Button()
         Me.pgbProgress = New System.Windows.Forms.ProgressBar()
-        Me.Panel17 = New System.Windows.Forms.Panel()
         Me.TableLayoutPanel1.SuspendLayout()
         Me.Panel1.SuspendLayout()
         Me.Panel2.SuspendLayout()
@@ -292,12 +317,20 @@ Partial Class Factors
         Me.GroupBox7.SuspendLayout()
         Me.TableLayoutPanel10.SuspendLayout()
         CType(Me.tblPntFitting, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.TabPage9.SuspendLayout()
+        Me.TableLayoutPanel21.SuspendLayout()
+        Me.GroupBox15.SuspendLayout()
+        Me.TableLayoutPanel22.SuspendLayout()
+        CType(Me.tblPipingIRHC, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.GroupBox16.SuspendLayout()
+        Me.TableLayoutPanel23.SuspendLayout()
+        CType(Me.tblEquipmentIRHC, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.TabPage10.SuspendLayout()
         Me.GroupBox14.SuspendLayout()
         Me.TableLayoutPanel20.SuspendLayout()
+        Me.Panel17.SuspendLayout()
         CType(Me.tblPipingMaterial, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel3.SuspendLayout()
-        Me.Panel17.SuspendLayout()
         Me.SuspendLayout()
         '
         'TableLayoutPanel1
@@ -465,14 +498,14 @@ Partial Class Factors
         Me.tblWorkWeekScheduleLaborRates.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.tblWorkWeekScheduleLaborRates.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.tblWorkWeekScheduleLaborRates.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.IdLaborRate, Me.Description, Me.InsulRate, Me.AbatRate, Me.PaintRate, Me.ScafRate})
-        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.tblWorkWeekScheduleLaborRates.DefaultCellStyle = DataGridViewCellStyle1
+        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle4.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.tblWorkWeekScheduleLaborRates.DefaultCellStyle = DataGridViewCellStyle4
         Me.tblWorkWeekScheduleLaborRates.Dock = System.Windows.Forms.DockStyle.Fill
         Me.tblWorkWeekScheduleLaborRates.Location = New System.Drawing.Point(0, 0)
         Me.tblWorkWeekScheduleLaborRates.Name = "tblWorkWeekScheduleLaborRates"
@@ -634,14 +667,14 @@ Partial Class Factors
         Me.tblPaintElevation.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.tblPaintElevation.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.tblPaintElevation.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.idElevationPaint, Me.ElevationPaint, Me.Increment})
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.tblPaintElevation.DefaultCellStyle = DataGridViewCellStyle2
+        DataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle5.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.tblPaintElevation.DefaultCellStyle = DataGridViewCellStyle5
         Me.tblPaintElevation.Dock = System.Windows.Forms.DockStyle.Fill
         Me.tblPaintElevation.Location = New System.Drawing.Point(0, 0)
         Me.tblPaintElevation.Name = "tblPaintElevation"
@@ -732,14 +765,14 @@ Partial Class Factors
         Me.tblScafElevation.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.tblScafElevation.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.tblScafElevation.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.idElevationSCF, Me.ElevationSCF, Me.IncrementSCF})
-        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle3.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.tblScafElevation.DefaultCellStyle = DataGridViewCellStyle3
+        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle6.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.tblScafElevation.DefaultCellStyle = DataGridViewCellStyle6
         Me.tblScafElevation.Dock = System.Windows.Forms.DockStyle.Fill
         Me.tblScafElevation.Location = New System.Drawing.Point(0, 0)
         Me.tblScafElevation.Name = "tblScafElevation"
@@ -1926,11 +1959,222 @@ Partial Class Factors
         'TabPage9
         '
         Me.TabPage9.BackColor = System.Drawing.Color.FromArgb(CType(CType(83, Byte), Integer), CType(CType(93, Byte), Integer), CType(CType(102, Byte), Integer))
+        Me.TabPage9.Controls.Add(Me.TableLayoutPanel21)
         Me.TabPage9.Location = New System.Drawing.Point(4, 22)
         Me.TabPage9.Name = "TabPage9"
         Me.TabPage9.Size = New System.Drawing.Size(954, 213)
         Me.TabPage9.TabIndex = 8
-        Me.TabPage9.Text = "PIP RH HC"
+        Me.TabPage9.Text = "IR HC "
+        '
+        'TableLayoutPanel21
+        '
+        Me.TableLayoutPanel21.ColumnCount = 2
+        Me.TableLayoutPanel21.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
+        Me.TableLayoutPanel21.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
+        Me.TableLayoutPanel21.Controls.Add(Me.GroupBox15, 1, 0)
+        Me.TableLayoutPanel21.Controls.Add(Me.GroupBox16, 0, 0)
+        Me.TableLayoutPanel21.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.TableLayoutPanel21.Location = New System.Drawing.Point(0, 0)
+        Me.TableLayoutPanel21.Name = "TableLayoutPanel21"
+        Me.TableLayoutPanel21.RowCount = 1
+        Me.TableLayoutPanel21.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
+        Me.TableLayoutPanel21.Size = New System.Drawing.Size(954, 213)
+        Me.TableLayoutPanel21.TabIndex = 1
+        '
+        'GroupBox15
+        '
+        Me.GroupBox15.Controls.Add(Me.TableLayoutPanel22)
+        Me.GroupBox15.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.GroupBox15.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.GroupBox15.Location = New System.Drawing.Point(480, 3)
+        Me.GroupBox15.Name = "GroupBox15"
+        Me.GroupBox15.Size = New System.Drawing.Size(471, 207)
+        Me.GroupBox15.TabIndex = 1
+        Me.GroupBox15.TabStop = False
+        Me.GroupBox15.Text = "Piping IR HC"
+        '
+        'TableLayoutPanel22
+        '
+        Me.TableLayoutPanel22.ColumnCount = 2
+        Me.TableLayoutPanel22.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
+        Me.TableLayoutPanel22.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100.0!))
+        Me.TableLayoutPanel22.Controls.Add(Me.btnExcelPipingIRHC, 0, 0)
+        Me.TableLayoutPanel22.Controls.Add(Me.tblPipingIRHC, 0, 0)
+        Me.TableLayoutPanel22.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.TableLayoutPanel22.ForeColor = System.Drawing.SystemColors.ControlText
+        Me.TableLayoutPanel22.Location = New System.Drawing.Point(3, 16)
+        Me.TableLayoutPanel22.Name = "TableLayoutPanel22"
+        Me.TableLayoutPanel22.RowCount = 1
+        Me.TableLayoutPanel22.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
+        Me.TableLayoutPanel22.Size = New System.Drawing.Size(465, 188)
+        Me.TableLayoutPanel22.TabIndex = 1
+        '
+        'btnExcelPipingIRHC
+        '
+        Me.btnExcelPipingIRHC.FlatAppearance.BorderSize = 0
+        Me.btnExcelPipingIRHC.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(59, Byte), Integer), CType(CType(69, Byte), Integer), CType(CType(79, Byte), Integer))
+        Me.btnExcelPipingIRHC.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnExcelPipingIRHC.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnExcelPipingIRHC.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.btnExcelPipingIRHC.Image = Global.AVT_TRAKING.My.Resources.Resources.excel
+        Me.btnExcelPipingIRHC.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnExcelPipingIRHC.Location = New System.Drawing.Point(368, 3)
+        Me.btnExcelPipingIRHC.Name = "btnExcelPipingIRHC"
+        Me.btnExcelPipingIRHC.Size = New System.Drawing.Size(94, 35)
+        Me.btnExcelPipingIRHC.TabIndex = 36
+        Me.btnExcelPipingIRHC.Text = "  Upload"
+        Me.btnExcelPipingIRHC.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.btnExcelPipingIRHC.UseVisualStyleBackColor = True
+        '
+        'tblPipingIRHC
+        '
+        Me.tblPipingIRHC.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.tblPipingIRHC.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.idSizePPIRHC, Me.idTypePPIRHC, Me.idThicknessPPIRHC, Me.SizePPIRHC, Me.TypePPIRHC, Me.ThicknessPPIRHC, Me.LaborProdPPIRHC, Me.MaterialRatePPIRHC, Me.EquipmentRatePPIRHC})
+        Me.tblPipingIRHC.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.tblPipingIRHC.Location = New System.Drawing.Point(3, 3)
+        Me.tblPipingIRHC.Name = "tblPipingIRHC"
+        Me.tblPipingIRHC.Size = New System.Drawing.Size(359, 182)
+        Me.tblPipingIRHC.TabIndex = 1
+        '
+        'idSizePPIRHC
+        '
+        Me.idSizePPIRHC.HeaderText = "idSizePPIRHC"
+        Me.idSizePPIRHC.Name = "idSizePPIRHC"
+        Me.idSizePPIRHC.Visible = False
+        '
+        'idTypePPIRHC
+        '
+        Me.idTypePPIRHC.HeaderText = "idTypePPIRHC"
+        Me.idTypePPIRHC.Name = "idTypePPIRHC"
+        Me.idTypePPIRHC.Visible = False
+        '
+        'idThicknessPPIRHC
+        '
+        Me.idThicknessPPIRHC.HeaderText = "idThicknessPPIRHC"
+        Me.idThicknessPPIRHC.Name = "idThicknessPPIRHC"
+        Me.idThicknessPPIRHC.Visible = False
+        '
+        'SizePPIRHC
+        '
+        Me.SizePPIRHC.HeaderText = "Size"
+        Me.SizePPIRHC.Name = "SizePPIRHC"
+        '
+        'TypePPIRHC
+        '
+        Me.TypePPIRHC.HeaderText = "Type"
+        Me.TypePPIRHC.Name = "TypePPIRHC"
+        '
+        'ThicknessPPIRHC
+        '
+        Me.ThicknessPPIRHC.HeaderText = "Thickness"
+        Me.ThicknessPPIRHC.Name = "ThicknessPPIRHC"
+        '
+        'LaborProdPPIRHC
+        '
+        Me.LaborProdPPIRHC.HeaderText = "Labor Prod."
+        Me.LaborProdPPIRHC.Name = "LaborProdPPIRHC"
+        '
+        'MaterialRatePPIRHC
+        '
+        Me.MaterialRatePPIRHC.HeaderText = "Material"
+        Me.MaterialRatePPIRHC.Name = "MaterialRatePPIRHC"
+        '
+        'EquipmentRatePPIRHC
+        '
+        Me.EquipmentRatePPIRHC.HeaderText = "Eq. Rate"
+        Me.EquipmentRatePPIRHC.Name = "EquipmentRatePPIRHC"
+        '
+        'GroupBox16
+        '
+        Me.GroupBox16.Controls.Add(Me.TableLayoutPanel23)
+        Me.GroupBox16.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.GroupBox16.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.GroupBox16.Location = New System.Drawing.Point(3, 3)
+        Me.GroupBox16.Name = "GroupBox16"
+        Me.GroupBox16.Size = New System.Drawing.Size(471, 207)
+        Me.GroupBox16.TabIndex = 0
+        Me.GroupBox16.TabStop = False
+        Me.GroupBox16.Text = "Equipment IR HC"
+        '
+        'TableLayoutPanel23
+        '
+        Me.TableLayoutPanel23.ColumnCount = 2
+        Me.TableLayoutPanel23.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
+        Me.TableLayoutPanel23.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100.0!))
+        Me.TableLayoutPanel23.Controls.Add(Me.btnExcelEquipmentIRHC, 1, 0)
+        Me.TableLayoutPanel23.Controls.Add(Me.tblEquipmentIRHC, 0, 0)
+        Me.TableLayoutPanel23.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.TableLayoutPanel23.ForeColor = System.Drawing.SystemColors.ControlText
+        Me.TableLayoutPanel23.Location = New System.Drawing.Point(3, 16)
+        Me.TableLayoutPanel23.Name = "TableLayoutPanel23"
+        Me.TableLayoutPanel23.RowCount = 1
+        Me.TableLayoutPanel23.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
+        Me.TableLayoutPanel23.Size = New System.Drawing.Size(465, 188)
+        Me.TableLayoutPanel23.TabIndex = 0
+        '
+        'btnExcelEquipmentIRHC
+        '
+        Me.btnExcelEquipmentIRHC.FlatAppearance.BorderSize = 0
+        Me.btnExcelEquipmentIRHC.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(59, Byte), Integer), CType(CType(69, Byte), Integer), CType(CType(79, Byte), Integer))
+        Me.btnExcelEquipmentIRHC.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnExcelEquipmentIRHC.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnExcelEquipmentIRHC.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.btnExcelEquipmentIRHC.Image = Global.AVT_TRAKING.My.Resources.Resources.excel
+        Me.btnExcelEquipmentIRHC.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnExcelEquipmentIRHC.Location = New System.Drawing.Point(368, 3)
+        Me.btnExcelEquipmentIRHC.Name = "btnExcelEquipmentIRHC"
+        Me.btnExcelEquipmentIRHC.Size = New System.Drawing.Size(94, 35)
+        Me.btnExcelEquipmentIRHC.TabIndex = 35
+        Me.btnExcelEquipmentIRHC.Text = "  Upload"
+        Me.btnExcelEquipmentIRHC.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.btnExcelEquipmentIRHC.UseVisualStyleBackColor = True
+        '
+        'tblEquipmentIRHC
+        '
+        Me.tblEquipmentIRHC.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.tblEquipmentIRHC.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.idTypeEqIRHC, Me.idThickIEqRHC, Me.TypeEqIRHC, Me.ThicknessEqIRHC, Me.LaborProdEqIRHC, Me.MaterialRateEqIRHC, Me.EquipmentEqIRHC})
+        Me.tblEquipmentIRHC.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.tblEquipmentIRHC.Location = New System.Drawing.Point(3, 3)
+        Me.tblEquipmentIRHC.Name = "tblEquipmentIRHC"
+        Me.tblEquipmentIRHC.Size = New System.Drawing.Size(359, 182)
+        Me.tblEquipmentIRHC.TabIndex = 0
+        '
+        'idTypeEqIRHC
+        '
+        Me.idTypeEqIRHC.HeaderText = "idTypeEqIRHC"
+        Me.idTypeEqIRHC.Name = "idTypeEqIRHC"
+        Me.idTypeEqIRHC.Visible = False
+        '
+        'idThickIEqRHC
+        '
+        Me.idThickIEqRHC.HeaderText = "idThicknessEqIRHC"
+        Me.idThickIEqRHC.Name = "idThickIEqRHC"
+        Me.idThickIEqRHC.Visible = False
+        '
+        'TypeEqIRHC
+        '
+        Me.TypeEqIRHC.HeaderText = "Type"
+        Me.TypeEqIRHC.Name = "TypeEqIRHC"
+        '
+        'ThicknessEqIRHC
+        '
+        Me.ThicknessEqIRHC.HeaderText = "Thickness"
+        Me.ThicknessEqIRHC.Name = "ThicknessEqIRHC"
+        '
+        'LaborProdEqIRHC
+        '
+        Me.LaborProdEqIRHC.HeaderText = "Labor Prod."
+        Me.LaborProdEqIRHC.Name = "LaborProdEqIRHC"
+        '
+        'MaterialRateEqIRHC
+        '
+        Me.MaterialRateEqIRHC.HeaderText = "Material Rate"
+        Me.MaterialRateEqIRHC.Name = "MaterialRateEqIRHC"
+        '
+        'EquipmentEqIRHC
+        '
+        Me.EquipmentEqIRHC.HeaderText = "Eq. Rete"
+        Me.EquipmentEqIRHC.Name = "EquipmentEqIRHC"
         '
         'TabPage10
         '
@@ -1987,6 +2231,16 @@ Partial Class Factors
         Me.btnExcelPipingMaterial.Text = "Upload"
         Me.btnExcelPipingMaterial.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         Me.btnExcelPipingMaterial.UseVisualStyleBackColor = True
+        '
+        'Panel17
+        '
+        Me.Panel17.Controls.Add(Me.tblPipingMaterial)
+        Me.Panel17.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Panel17.ForeColor = System.Drawing.SystemColors.ControlText
+        Me.Panel17.Location = New System.Drawing.Point(3, 3)
+        Me.Panel17.Name = "Panel17"
+        Me.Panel17.Size = New System.Drawing.Size(633, 188)
+        Me.Panel17.TabIndex = 36
         '
         'tblPipingMaterial
         '
@@ -2056,6 +2310,7 @@ Partial Class Factors
         '
         'btnDeleteFactorTbl
         '
+        Me.btnDeleteFactorTbl.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnDeleteFactorTbl.FlatAppearance.BorderSize = 0
         Me.btnDeleteFactorTbl.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(59, Byte), Integer), CType(CType(69, Byte), Integer), CType(CType(79, Byte), Integer))
         Me.btnDeleteFactorTbl.FlatStyle = System.Windows.Forms.FlatStyle.Flat
@@ -2083,6 +2338,7 @@ Partial Class Factors
         '
         'btnSaveFactorTbl
         '
+        Me.btnSaveFactorTbl.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnSaveFactorTbl.FlatAppearance.BorderSize = 0
         Me.btnSaveFactorTbl.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(59, Byte), Integer), CType(CType(69, Byte), Integer), CType(CType(79, Byte), Integer))
         Me.btnSaveFactorTbl.FlatStyle = System.Windows.Forms.FlatStyle.Flat
@@ -2105,16 +2361,6 @@ Partial Class Factors
         Me.pgbProgress.Name = "pgbProgress"
         Me.pgbProgress.Size = New System.Drawing.Size(196, 23)
         Me.pgbProgress.TabIndex = 0
-        '
-        'Panel17
-        '
-        Me.Panel17.Controls.Add(Me.tblPipingMaterial)
-        Me.Panel17.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel17.ForeColor = System.Drawing.SystemColors.ControlText
-        Me.Panel17.Location = New System.Drawing.Point(3, 3)
-        Me.Panel17.Name = "Panel17"
-        Me.Panel17.Size = New System.Drawing.Size(633, 188)
-        Me.Panel17.TabIndex = 36
         '
         'Factors
         '
@@ -2195,13 +2441,21 @@ Partial Class Factors
         Me.GroupBox7.ResumeLayout(False)
         Me.TableLayoutPanel10.ResumeLayout(False)
         CType(Me.tblPntFitting, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.TabPage9.ResumeLayout(False)
+        Me.TableLayoutPanel21.ResumeLayout(False)
+        Me.GroupBox15.ResumeLayout(False)
+        Me.TableLayoutPanel22.ResumeLayout(False)
+        CType(Me.tblPipingIRHC, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.GroupBox16.ResumeLayout(False)
+        Me.TableLayoutPanel23.ResumeLayout(False)
+        CType(Me.tblEquipmentIRHC, System.ComponentModel.ISupportInitialize).EndInit()
         Me.TabPage10.ResumeLayout(False)
         Me.GroupBox14.ResumeLayout(False)
         Me.TableLayoutPanel20.ResumeLayout(False)
+        Me.Panel17.ResumeLayout(False)
         CType(Me.tblPipingMaterial, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel3.ResumeLayout(False)
         Me.Panel3.PerformLayout()
-        Me.Panel17.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
@@ -2404,4 +2658,29 @@ Partial Class Factors
     Friend WithEvents PriceMat As DataGridViewTextBoxColumn
     Friend WithEvents DescriptionMat As DataGridViewTextBoxColumn
     Friend WithEvents Panel17 As Panel
+    Friend WithEvents TableLayoutPanel21 As TableLayoutPanel
+    Friend WithEvents GroupBox15 As GroupBox
+    Friend WithEvents TableLayoutPanel22 As TableLayoutPanel
+    Friend WithEvents btnExcelPipingIRHC As Button
+    Friend WithEvents tblPipingIRHC As DataGridView
+    Friend WithEvents idSizePPIRHC As DataGridViewTextBoxColumn
+    Friend WithEvents idTypePPIRHC As DataGridViewTextBoxColumn
+    Friend WithEvents idThicknessPPIRHC As DataGridViewTextBoxColumn
+    Friend WithEvents SizePPIRHC As DataGridViewTextBoxColumn
+    Friend WithEvents TypePPIRHC As DataGridViewTextBoxColumn
+    Friend WithEvents ThicknessPPIRHC As DataGridViewTextBoxColumn
+    Friend WithEvents LaborProdPPIRHC As DataGridViewTextBoxColumn
+    Friend WithEvents MaterialRatePPIRHC As DataGridViewTextBoxColumn
+    Friend WithEvents EquipmentRatePPIRHC As DataGridViewTextBoxColumn
+    Friend WithEvents GroupBox16 As GroupBox
+    Friend WithEvents TableLayoutPanel23 As TableLayoutPanel
+    Friend WithEvents btnExcelEquipmentIRHC As Button
+    Friend WithEvents tblEquipmentIRHC As DataGridView
+    Friend WithEvents idTypeEqIRHC As DataGridViewTextBoxColumn
+    Friend WithEvents idThickIEqRHC As DataGridViewTextBoxColumn
+    Friend WithEvents TypeEqIRHC As DataGridViewTextBoxColumn
+    Friend WithEvents ThicknessEqIRHC As DataGridViewTextBoxColumn
+    Friend WithEvents LaborProdEqIRHC As DataGridViewTextBoxColumn
+    Friend WithEvents MaterialRateEqIRHC As DataGridViewTextBoxColumn
+    Friend WithEvents EquipmentEqIRHC As DataGridViewTextBoxColumn
 End Class

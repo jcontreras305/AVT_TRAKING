@@ -75,7 +75,7 @@ Partial Class RowEqDrawing
         Me.lytMain.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 9.246876!))
         Me.lytMain.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 14.71951!))
         Me.lytMain.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 5.283928!))
-        Me.lytMain.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 320.0!))
+        Me.lytMain.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 327.0!))
         Me.lytMain.Controls.Add(Me.txtIdEquipment, 1, 0)
         Me.lytMain.Controls.Add(Me.btnRow, 0, 0)
         Me.lytMain.Controls.Add(Me.lytLaborRates, 10, 0)
@@ -129,13 +129,13 @@ Partial Class RowEqDrawing
         Me.lytLaborRates.Controls.Add(Me.GroupBox2, 0, 1)
         Me.lytLaborRates.Controls.Add(Me.GroupBox1, 0, 0)
         Me.lytLaborRates.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.lytLaborRates.Location = New System.Drawing.Point(610, 4)
+        Me.lytLaborRates.Location = New System.Drawing.Point(605, 4)
         Me.lytLaborRates.Name = "lytLaborRates"
         Me.lytLaborRates.RowCount = 3
         Me.lytLaborRates.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333!))
         Me.lytLaborRates.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33334!))
         Me.lytLaborRates.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33334!))
-        Me.lytLaborRates.Size = New System.Drawing.Size(320, 140)
+        Me.lytLaborRates.Size = New System.Drawing.Size(325, 140)
         Me.lytLaborRates.TabIndex = 11
         '
         'GroupBox3
@@ -146,7 +146,7 @@ Partial Class RowEqDrawing
         Me.GroupBox3.Location = New System.Drawing.Point(5, 96)
         Me.GroupBox3.Name = "GroupBox3"
         Me.GroupBox3.Padding = New System.Windows.Forms.Padding(1)
-        Me.GroupBox3.Size = New System.Drawing.Size(310, 39)
+        Me.GroupBox3.Size = New System.Drawing.Size(315, 39)
         Me.GroupBox3.TabIndex = 19
         Me.GroupBox3.TabStop = False
         Me.GroupBox3.Text = "Insulation Instalation"
@@ -167,36 +167,36 @@ Partial Class RowEqDrawing
         Me.TableLayoutPanel5.Name = "TableLayoutPanel5"
         Me.TableLayoutPanel5.RowCount = 1
         Me.TableLayoutPanel5.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-        Me.TableLayoutPanel5.Size = New System.Drawing.Size(308, 27)
+        Me.TableLayoutPanel5.Size = New System.Drawing.Size(313, 27)
         Me.TableLayoutPanel5.TabIndex = 20
         '
         'txtBevel
         '
         Me.txtBevel.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.txtBevel.Location = New System.Drawing.Point(157, 3)
+        Me.txtBevel.Location = New System.Drawing.Point(159, 3)
         Me.txtBevel.Multiline = True
         Me.txtBevel.Name = "txtBevel"
-        Me.txtBevel.Size = New System.Drawing.Size(71, 21)
+        Me.txtBevel.Size = New System.Drawing.Size(72, 21)
         Me.txtBevel.TabIndex = 23
         Me.txtBevel.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'txtSqrFtII
         '
         Me.txtSqrFtII.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.txtSqrFtII.Location = New System.Drawing.Point(80, 3)
+        Me.txtSqrFtII.Location = New System.Drawing.Point(81, 3)
         Me.txtSqrFtII.Multiline = True
         Me.txtSqrFtII.Name = "txtSqrFtII"
-        Me.txtSqrFtII.Size = New System.Drawing.Size(71, 21)
+        Me.txtSqrFtII.Size = New System.Drawing.Size(72, 21)
         Me.txtSqrFtII.TabIndex = 22
         Me.txtSqrFtII.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'txtCutout
         '
         Me.txtCutout.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.txtCutout.Location = New System.Drawing.Point(234, 3)
+        Me.txtCutout.Location = New System.Drawing.Point(237, 3)
         Me.txtCutout.Multiline = True
         Me.txtCutout.Name = "txtCutout"
-        Me.txtCutout.Size = New System.Drawing.Size(71, 21)
+        Me.txtCutout.Size = New System.Drawing.Size(73, 21)
         Me.txtCutout.TabIndex = 24
         Me.txtCutout.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
@@ -212,7 +212,7 @@ Partial Class RowEqDrawing
         Me.cmbLaborRateII.FormattingEnabled = True
         Me.cmbLaborRateII.Location = New System.Drawing.Point(3, 3)
         Me.cmbLaborRateII.Name = "cmbLaborRateII"
-        Me.cmbLaborRateII.Size = New System.Drawing.Size(71, 21)
+        Me.cmbLaborRateII.Size = New System.Drawing.Size(72, 21)
         Me.cmbLaborRateII.SizeHeight = 21
         Me.cmbLaborRateII.TabIndex = 21
         '
@@ -224,7 +224,7 @@ Partial Class RowEqDrawing
         Me.GroupBox2.Location = New System.Drawing.Point(5, 50)
         Me.GroupBox2.Name = "GroupBox2"
         Me.GroupBox2.Padding = New System.Windows.Forms.Padding(2)
-        Me.GroupBox2.Size = New System.Drawing.Size(310, 38)
+        Me.GroupBox2.Size = New System.Drawing.Size(315, 38)
         Me.GroupBox2.TabIndex = 15
         Me.GroupBox2.TabStop = False
         Me.GroupBox2.Text = "Paint"
@@ -244,16 +244,16 @@ Partial Class RowEqDrawing
         Me.TableLayoutPanel4.Name = "TableLayoutPanel4"
         Me.TableLayoutPanel4.RowCount = 1
         Me.TableLayoutPanel4.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-        Me.TableLayoutPanel4.Size = New System.Drawing.Size(306, 24)
+        Me.TableLayoutPanel4.Size = New System.Drawing.Size(311, 24)
         Me.TableLayoutPanel4.TabIndex = 16
         '
         'txtSqrFtPnt
         '
         Me.txtSqrFtPnt.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.txtSqrFtPnt.Location = New System.Drawing.Point(79, 3)
+        Me.txtSqrFtPnt.Location = New System.Drawing.Point(80, 3)
         Me.txtSqrFtPnt.Multiline = True
         Me.txtSqrFtPnt.Name = "txtSqrFtPnt"
-        Me.txtSqrFtPnt.Size = New System.Drawing.Size(70, 18)
+        Me.txtSqrFtPnt.Size = New System.Drawing.Size(71, 18)
         Me.txtSqrFtPnt.TabIndex = 18
         Me.txtSqrFtPnt.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
@@ -269,7 +269,7 @@ Partial Class RowEqDrawing
         Me.cmbLaborRatePnt.FormattingEnabled = True
         Me.cmbLaborRatePnt.Location = New System.Drawing.Point(3, 3)
         Me.cmbLaborRatePnt.Name = "cmbLaborRatePnt"
-        Me.cmbLaborRatePnt.Size = New System.Drawing.Size(70, 21)
+        Me.cmbLaborRatePnt.Size = New System.Drawing.Size(71, 21)
         Me.cmbLaborRatePnt.SizeHeight = 21
         Me.cmbLaborRatePnt.TabIndex = 17
         '
@@ -278,9 +278,9 @@ Partial Class RowEqDrawing
         Me.chbACM.AutoSize = True
         Me.chbACM.Dock = System.Windows.Forms.DockStyle.Fill
         Me.chbACM.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.chbACM.Location = New System.Drawing.Point(231, 3)
+        Me.chbACM.Location = New System.Drawing.Point(234, 3)
         Me.chbACM.Name = "chbACM"
-        Me.chbACM.Size = New System.Drawing.Size(72, 18)
+        Me.chbACM.Size = New System.Drawing.Size(74, 18)
         Me.chbACM.TabIndex = 15
         Me.chbACM.Text = "ACM"
         Me.chbACM.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -294,7 +294,7 @@ Partial Class RowEqDrawing
         Me.GroupBox1.Location = New System.Drawing.Point(5, 5)
         Me.GroupBox1.Name = "GroupBox1"
         Me.GroupBox1.Padding = New System.Windows.Forms.Padding(1)
-        Me.GroupBox1.Size = New System.Drawing.Size(310, 37)
+        Me.GroupBox1.Size = New System.Drawing.Size(315, 37)
         Me.GroupBox1.TabIndex = 12
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Insulation Removal"
@@ -313,16 +313,16 @@ Partial Class RowEqDrawing
         Me.TableLayoutPanel3.Name = "TableLayoutPanel3"
         Me.TableLayoutPanel3.RowCount = 1
         Me.TableLayoutPanel3.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-        Me.TableLayoutPanel3.Size = New System.Drawing.Size(308, 25)
+        Me.TableLayoutPanel3.Size = New System.Drawing.Size(313, 25)
         Me.TableLayoutPanel3.TabIndex = 0
         '
         'txtSqrFtRmv
         '
         Me.txtSqrFtRmv.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.txtSqrFtRmv.Location = New System.Drawing.Point(80, 3)
+        Me.txtSqrFtRmv.Location = New System.Drawing.Point(81, 3)
         Me.txtSqrFtRmv.Multiline = True
         Me.txtSqrFtRmv.Name = "txtSqrFtRmv"
-        Me.txtSqrFtRmv.Size = New System.Drawing.Size(71, 19)
+        Me.txtSqrFtRmv.Size = New System.Drawing.Size(72, 19)
         Me.txtSqrFtRmv.TabIndex = 14
         Me.txtSqrFtRmv.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
@@ -338,7 +338,7 @@ Partial Class RowEqDrawing
         Me.cmbLaborRateRmv.FormattingEnabled = True
         Me.cmbLaborRateRmv.Location = New System.Drawing.Point(3, 3)
         Me.cmbLaborRateRmv.Name = "cmbLaborRateRmv"
-        Me.cmbLaborRateRmv.Size = New System.Drawing.Size(71, 21)
+        Me.cmbLaborRateRmv.Size = New System.Drawing.Size(72, 21)
         Me.cmbLaborRateRmv.SizeHeight = 21
         Me.cmbLaborRateRmv.TabIndex = 13
         '
@@ -346,10 +346,10 @@ Partial Class RowEqDrawing
         '
         Me.txtThick.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.txtThick.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.txtThick.Location = New System.Drawing.Point(439, 4)
+        Me.txtThick.Location = New System.Drawing.Point(436, 4)
         Me.txtThick.Multiline = True
         Me.txtThick.Name = "txtThick"
-        Me.txtThick.Size = New System.Drawing.Size(47, 140)
+        Me.txtThick.Size = New System.Drawing.Size(46, 140)
         Me.txtThick.TabIndex = 8
         Me.txtThick.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
@@ -362,9 +362,9 @@ Partial Class RowEqDrawing
         Me.cmbInstType.Dock = System.Windows.Forms.DockStyle.Fill
         Me.cmbInstType.DropDownWidth = 120
         Me.cmbInstType.FormattingEnabled = True
-        Me.cmbInstType.Location = New System.Drawing.Point(360, 4)
+        Me.cmbInstType.Location = New System.Drawing.Point(358, 4)
         Me.cmbInstType.Name = "cmbInstType"
-        Me.cmbInstType.Size = New System.Drawing.Size(72, 21)
+        Me.cmbInstType.Size = New System.Drawing.Size(71, 21)
         Me.cmbInstType.SizeHeight = 21
         Me.cmbInstType.TabIndex = 7
         '
@@ -377,7 +377,7 @@ Partial Class RowEqDrawing
         Me.cmbPaintOption.Dock = System.Windows.Forms.DockStyle.Fill
         Me.cmbPaintOption.DropDownWidth = 120
         Me.cmbPaintOption.FormattingEnabled = True
-        Me.cmbPaintOption.Location = New System.Drawing.Point(301, 4)
+        Me.cmbPaintOption.Location = New System.Drawing.Point(299, 4)
         Me.cmbPaintOption.Name = "cmbPaintOption"
         Me.cmbPaintOption.Size = New System.Drawing.Size(52, 21)
         Me.cmbPaintOption.SizeHeight = 21
@@ -392,9 +392,9 @@ Partial Class RowEqDrawing
         Me.cmbSystem.Dock = System.Windows.Forms.DockStyle.Fill
         Me.cmbSystem.DropDownWidth = 120
         Me.cmbSystem.FormattingEnabled = True
-        Me.cmbSystem.Location = New System.Drawing.Point(240, 4)
+        Me.cmbSystem.Location = New System.Drawing.Point(239, 4)
         Me.cmbSystem.Name = "cmbSystem"
-        Me.cmbSystem.Size = New System.Drawing.Size(54, 21)
+        Me.cmbSystem.Size = New System.Drawing.Size(53, 21)
         Me.cmbSystem.SizeHeight = 21
         Me.cmbSystem.TabIndex = 5
         '
@@ -406,7 +406,7 @@ Partial Class RowEqDrawing
         Me.cmbHeight.BorderColor = System.Drawing.SystemColors.ControlLightLight
         Me.cmbHeight.Dock = System.Windows.Forms.DockStyle.Fill
         Me.cmbHeight.FormattingEnabled = True
-        Me.cmbHeight.Location = New System.Drawing.Point(172, 4)
+        Me.cmbHeight.Location = New System.Drawing.Point(171, 4)
         Me.cmbHeight.Name = "cmbHeight"
         Me.cmbHeight.Size = New System.Drawing.Size(61, 21)
         Me.cmbHeight.SizeHeight = 21
@@ -419,7 +419,7 @@ Partial Class RowEqDrawing
         Me.txtEqDescription.Location = New System.Drawing.Point(72, 4)
         Me.txtEqDescription.Multiline = True
         Me.txtEqDescription.Name = "txtEqDescription"
-        Me.txtEqDescription.Size = New System.Drawing.Size(93, 140)
+        Me.txtEqDescription.Size = New System.Drawing.Size(92, 140)
         Me.txtEqDescription.TabIndex = 3
         Me.txtEqDescription.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
@@ -427,7 +427,7 @@ Partial Class RowEqDrawing
         '
         Me.Panel1.Controls.Add(Me.chbRemIns)
         Me.Panel1.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel1.Location = New System.Drawing.Point(579, 4)
+        Me.Panel1.Location = New System.Drawing.Point(574, 4)
         Me.Panel1.Name = "Panel1"
         Me.Panel1.Size = New System.Drawing.Size(24, 140)
         Me.Panel1.TabIndex = 9
@@ -451,9 +451,9 @@ Partial Class RowEqDrawing
         Me.cmbJkt.Dock = System.Windows.Forms.DockStyle.Fill
         Me.cmbJkt.DropDownWidth = 220
         Me.cmbJkt.FormattingEnabled = True
-        Me.cmbJkt.Location = New System.Drawing.Point(493, 4)
+        Me.cmbJkt.Location = New System.Drawing.Point(489, 4)
         Me.cmbJkt.Name = "cmbJkt"
-        Me.cmbJkt.Size = New System.Drawing.Size(79, 21)
+        Me.cmbJkt.Size = New System.Drawing.Size(78, 21)
         Me.cmbJkt.SizeHeight = 21
         Me.cmbJkt.TabIndex = 9
         '

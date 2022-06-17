@@ -299,6 +299,23 @@ create table drawing(
 go
 
 --##########################################################################################
+--##################  TABLA DE EIRHC #######################################################
+--##########################################################################################
+
+create table EqIRHC(
+	[type]  varchar(25) not null,
+	thickness float not null,
+	laborProd float, 
+	matRate float,
+	eqRate float
+)
+go
+
+ALTER TABLE EqIRHC ADD CONSTRAINT pk_type_thickness_EqIRHC
+PRIMARY KEY ([type],thickness)
+go
+
+--##########################################################################################
 --##################  TABLA DE EMPLOYEES ###################################################
 --##########################################################################################
 
@@ -356,33 +373,6 @@ create table equipmentEst(
 )
 go
 
-ALTER TABLE equipmentEst WITH CHECK ADD CONSTRAINT fk_idDrawing_equipmentEst
-FOREIGN KEY (idDrawingNum) REFERENCES drawing(idDrawingNum)
-GO
-ALTER TABLE equipmentEst WITH CHECK ADD CONSTRAINT fk_elevation_equipmentEst
-FOREIGN KEY (elevation) REFERENCES factorElevationScf(elevation)
-GO
-ALTER TABLE equipmentEst WITH CHECK ADD CONSTRAINT fk_systemPntEq_pntOption_equipmentEst
-FOREIGN KEY (systemPntEq,pntOption) REFERENCES eqPaintUnitRate(systemPntEq,pntOption)
-GO
-ALTER TABLE equipmentEst WITH CHECK ADD CONSTRAINT fk_type_thick_equipmentEst
-FOREIGN KEY ([type],thick) REFERENCES eqInsUnitRate([type],thick)
-GO
-ALTER TABLE equipmentEst WITH CHECK ADD CONSTRAINT fk_idJacket_equipmentEst
-FOREIGN KEY (idJacket) REFERENCES eqJktUnitRate(idJacket)
-GO
-ALTER TABLE equipmentEst WITH CHECK ADD CONSTRAINT fk_idLaborRateRmv_equipmentEst
-FOREIGN KEY (idLaborRateRmv) REFERENCES laborRate(idLaborRate)
-GO
-ALTER TABLE equipmentEst WITH CHECK ADD CONSTRAINT fk_idLaborRatePnt_equipmentEst
-FOREIGN KEY (idLaborRatePnt) REFERENCES laborRate(idLaborRate)
-GO
-ALTER TABLE equipmentEst WITH CHECK ADD CONSTRAINT fk_idLaborII_equipmentEst
-FOREIGN KEY (idLaborRateII) REFERENCES laborRate(idLaborRate)
-GO
-ALTER TABLE ppInsUnitRate WITH CHECK ADD CONSTRAINT PK_size_type_thick_PPInsUnitRate
-PRIMARY KEY (size,[type],thick)
-GO
 --##########################################################################################
 --##################  TABLA DE EQINSUNITRATE ###############################################
 --##########################################################################################
@@ -1108,6 +1098,24 @@ create table ppInsUnitRate(
 	matRate float,
 	eqRate float
 )
+go
+
+--##########################################################################################
+--##################  TABLA DE PPIRHC ######################################################
+--##########################################################################################
+
+create table PpIRHC(
+	size float not null,
+	[type] varchar(25) not null,
+	thickness float not null,
+	laborProd float,
+	matRate float,
+	eqRate float
+)
+go
+
+ALTER TABLE PpIRHC ADD CONSTRAINT pk_size_type_thickness_PpIRHC
+PRIMARY KEY (size,[type],thickness)
 go
 
 --##########################################################################################
@@ -1859,6 +1867,16 @@ ON DELETE CASCADE
 go
 
 --##########################################################################################
+--##################  FOREIG KEYS EQIRHC ###################################################
+--##########################################################################################
+
+ALTER TABLE EqIRHC WITH CHECK ADD CONSTRAINT fk_type_EqIRHC
+FOREIGN KEY ([type]) REFERENCES insFitting([type])
+ON UPDATE CASCADE
+ON DELETE CASCADE
+go
+
+--##########################################################################################
 --##################  FOREIG KEYS ESTCOSTBUILD #############################################
 --##########################################################################################
 
@@ -1981,7 +1999,7 @@ ON UPDATE CASCADE
 ON DELETE CASCADE
 GO
 ALTER TABLE equipmentEst WITH CHECK ADD CONSTRAINT fk_type_thick_equipmentEst
-FOREIGN KEY ([type],thick) REFERENCES eqInsUnitRate([type],thick)
+FOREIGN KEY ([type],thick) REFERENCES EqIRHC([type],thickness)
 ON UPDATE CASCADE
 ON DELETE CASCADE
 GO
@@ -2269,12 +2287,22 @@ ON UPDATE CASCADE
 ON DELETE CASCADE
 go
 --##########################################################################################
---##################  FOREIG KEYS PPPAINTUNITRATE ##########################################
+--##################  FOREIG KEYS PPINSUNITRATE ############################################
 --##########################################################################################
 
 ALTER TABLE ppInsUnitRate WITH CHECK ADD CONSTRAINT PK_size_type_thick_PPInsUnitRate
 PRIMARY KEY (size,[type],thick)
 GO
+
+--##########################################################################################
+--##################  FOREIG KEYS PPIRHC ###################################################
+--##########################################################################################
+
+ALTER TABLE PpIRHC WITH CHECK ADD CONSTRAINT fk_type_PpIRHC
+FOREIGN KEY ([type]) REFERENCES insFitting([type])
+ON UPDATE CASCADE
+ON DELETE CASCADE
+go
 
 --##########################################################################################
 --##################  FOREIG KEYS PPPAINTUNITRATE ##########################################
@@ -5386,11 +5414,8 @@ go
 --end
 --go
 
---| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | 
---| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | 
---v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v 
 --------##########################################################################################################################
---------########## ESTE ES EL PROCEDIMIENTO PARA EL REPORTE DE COSTO DE ESTIMACION ############################################### VOLVER A EJECUTAR
+--------########## ESTE ES EL PROCEDIMIENTO PARA EL REPORTE DE COSTO DE ESTIMACION ###############################################
 --------##########################################################################################################################
 --ALTER proc [dbo].[sp_SelectEstCostByProject]
 --@projectId as varchar(40)
@@ -5689,3 +5714,686 @@ go
 --where po.projectId = @projectId
 --end
 --go
+
+--| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | 
+--| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | 
+--v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v v 
+--------##########################################################################################################################
+--------########## ESTE ES EL TRIGGER Y EL PROC PARA INSERTAR SCAFFOLD EN ESTIMACION ############################################# VOLVER A EJECUTAR
+--------##########################################################################################################################
+ALTER trigger [dbo].[addCostScfEsDr]
+on [dbo].[scaffoldEst] 
+after insert , Update
+as
+begin
+	declare @idProjectEst as varchar(30) = Null
+	declare @M2 as float = 0
+	declare @SHRD as float = 0
+	declare @SBHRD as float = 0
+	declare @SDHRD as float = 0
+	declare @DSCOSTL as float = 0
+	declare @DSCOSTM as float = 0
+	declare @SCOSTMBD as float = 0
+	declare @DSCOSTMD as float = 0
+	declare @SCOSTEBD as float = 0
+	declare @BSCOSTEB as float = 0
+	declare @SCOSTEDD  as float = 0
+	declare @SCM as float = 0
+	declare @SHR as float = 0
+	declare @SBHR as float = 0
+	declare @SDHR as float = 0
+	declare @SCOSTL as float = 0
+	declare @SCOSTLB as float = 0
+	declare @SCOSTLD as float = 0
+	declare @SCOSTM as float = 0
+	declare @SCOSTMB as float = 0
+	declare @SCOSTMD as float = 0
+	declare @SCOSTE as float = 0
+	declare @SCOSTEB as float = 0
+	declare @SCOSTED as float = 0
+	declare @STCOST as float = 0
+	declare @STCOSTB as float = 0
+	declare @STCOSTD as float = 0
+	declare @buildPercent as float = 0
+	declare @dismantlePercent as float = 0
+	set @idProjectEst = (select projectId from drawing where idDrawingNum = (select idDrawingNum from inserted))
+	set @M2 = FORMAT((ISNULL((select width from inserted),0)*ISNULL((select length from inserted),0)*ISNULL((select decks from inserted),0))/10.76391,'###.00')
+	set @SHRD = ROUND((@M2/(select laborB from scfUnitsRates where idSCFUR =(select idSCFUR from inserted))),1)
+	set @buildPercent = (select buildPercent from scfUnitsRates where idSCFUR = (select idSCFUR from inserted))
+	set @SBHRD = ROUND(( @SHRD * (@buildPercent*0.01)),1)
+	set @SDHRD = @SHRD - @SBHRD 
+
+	set @DSCOSTL = ROUND((@SBHRD * (select scafRate from laborRate where idLaborRate = (select idLaborRate from inserted))) + (@SDHRD * (select scafRate from laborRate where idLaborRate = (select idLaborRate from inserted))),2)
+	set @DSCOSTM = ROUND((@SHRD * (select materialD from scfUnitsRates where idSCFUR = (select idSCFUR from inserted))),2)
+	set @SCOSTMBD = ROUND((@SBHRD * (select materialD from scfUnitsRates where idSCFUR = (select idSCFUR from inserted))),2)
+	set @DSCOSTMD = @DSCOSTM - @SCOSTMBD
+
+	set @SCOSTEBD = ROUND((@SHRD * (select equipmentD from scfUnitsRates where idSCFUR = (select idSCFUR from inserted))),2)
+	set @BSCOSTEB = ROUND((@SBHRD * (select equipmentD from scfUnitsRates where idSCFUR = (select idSCFUR from inserted))),2)
+	set @SCOSTEDD = (@SCOSTEBD - @BSCOSTEB)
+
+	set @SCM = ROUND((((select width from inserted) * (select [length] from inserted) * (select heigth from inserted))/35.3),2)
+	set @SHR = ROUND((@SCM / (select laborD from scfUnitsRates where idSCFUR = (select idSCFUR from inserted))),1)
+	set @dismantlePercent = (select dismantlePercent from scfUnitsRates where idSCFUR = (select idSCFUR from inserted))
+	set @SBHR = ROUND((@SHR * (@dismantlePercent*0.01)),1)
+	set @SDHR = @SHR - @SBHR
+
+	set @SCOSTL = (ROUND((@SBHR * (select scafRate from laborRate where idLaborRate = (select idLaborRate from inserted))),2) + ROUND((@SDHR * (select scafRate from laborRate where idLaborRate = (select idLaborRate from inserted))),2))
+	set @SCOSTLB = ROUND((@SBHR * (select scafRate from laborRate where idLaborRate = (select idLaborRate from inserted))),2)
+	set @SCOSTLD = @SCOSTL - @SCOSTLB 
+				
+	set @SCOSTM = ROUND((@SHR * (select materialB from scfUnitsRates where idSCFUR = (select idSCFUR from inserted))),2)
+	set @SCOSTMB = ROUND((@SBHR * (select materialB from scfUnitsRates where idSCFUR = (select idSCFUR from inserted))),2)
+	set @SCOSTMD = @SCOSTM - @SCOSTMB
+				
+	set @SCOSTE = ROUND((@SHR * (select equipmentB from scfUnitsRates where idSCFUR = (select idSCFUR from inserted))),2) 
+	set @SCOSTEB = ROUND((@SBHR * (select equipmentB from scfUnitsRates where idSCFUR = (select idSCFUR from inserted))),2)
+	set @SCOSTED = @SCOSTE - @SCOSTEB
+
+	set @STCOST = ISNULL(@SCOSTL,0) + ISNULL(@SCOSTM,0) + ISNULL(@SCOSTE,0)
+	set @STCOSTB = ISNULL(@SCOSTLB,0) + ISNULL(@SCOSTMB,0) + ISNULL(@SCOSTEB,0)
+	set @STCOSTD = ISNULL(@SCOSTLD,0) + ISNULL(@SCOSTMD,0) + ISNULL(@SCOSTED,0)
+				 
+	if (select count(*) from EstCostScf where tag=(select tag from inserted) and idDrawingNum=(select idDrawingNum from inserted) and projectId = @idProjectEst)= 0 
+	begin  
+		insert into EstCostScf values ((select tag from inserted),(select idDrawingNum from inserted),@idProjectEst,@M2, @SHRD ,@SBHRD ,@DSCOSTL ,@DSCOSTM ,@SCOSTMBD ,@DSCOSTMD ,@SCOSTEBD ,@BSCOSTEB ,@SCOSTEDD ,@SCM ,@SHR ,@SBHR ,@SDHR ,@SCOSTL ,@SCOSTLB ,@SCOSTLD ,@SCOSTM ,@SCOSTMB ,@SCOSTMD ,@SCOSTE ,@SCOSTEB ,@SCOSTEBD ,@STCOST ,@STCOSTB ,@STCOSTD)
+	end 
+	else if(select count(*) from EstCostScf where tag=(select tag from inserted) and idDrawingNum=(select idDrawingNum from inserted) and projectId = @idProjectEst)>0 
+	begin
+		update EstCostScf set M2 = @M2, SHRD = @SHRD ,SBHRD = @SBHRD , DSCOSTL = @DSCOSTL, DSCOSTM = @DSCOSTM, SCOSTMBD = @SCOSTMBD,DSCOSTMD = @DSCOSTMD,SCOSTEBD = @SCOSTEBD,BSCOSTEB = @BSCOSTEB, SCOSTEDD = @SCOSTEDD, SCM = @SCM,SHR = @SHR,SBHR = @SBHR,SDHR =@SDHR,SCOSTL = @SCOSTL,SCOSTLB = @SCOSTLB, SCOSTLD = @SCOSTLD,SCOSTM = @SCOSTM,SCOSTMB = @SCOSTMB,SCOSTMD = @SCOSTMD,SCOSTE = @SCOSTE,SCOSTEB = @SCOSTEB,SCOSTED = @SCOSTED,STCOST = @STCOST,STCOSTB = @STCOSTB,STCOSTD = @STCOSTD where tag = (select tag from inserted) and idDrawingNum = (select idDrawingNum from inserted) and projectId = @idProjectEst
+	end
+end
+GO
+--=======================================================================================================================================================================================================================================================================
+--=======================================================================================================================================================================================================================================================================
+--=======================================================================================================================================================================================================================================================================
+ALTER proc [dbo].[sp_insertUpdateEstCostScf]
+@tagEst as varchar(20),
+@days as int,
+@width as float,
+@length as float,
+@heigth as float,
+@decks as int,
+@build as int,
+@idLabor as varchar(40),
+@idSCFUR as varchar(35),
+@idDrawingNum as varchar(45)
+as
+declare @idProjectEst as varchar(30) = Null
+declare @M2 as float = 0
+declare @SHRD as float = 0
+declare @SBHRD as float = 0
+declare @SDHRD as float = 0
+declare @DSCOSTL as float = 0
+declare @DSCOSTM as float = 0
+declare @SCOSTMBD as float = 0
+declare @DSCOSTMD as float = 0
+declare @SCOSTEBD as float = 0
+declare @BSCOSTEB as float = 0
+declare @SCOSTEDD  as float = 0
+declare @SCM as float = 0
+declare @SHR as float = 0
+declare @SBHR as float = 0
+declare @SDHR as float = 0
+declare @SCOSTL as float = 0
+declare @SCOSTLB as float = 0
+declare @SCOSTLD as float = 0
+declare @SCOSTM as float = 0
+declare @SCOSTMB as float = 0
+declare @SCOSTMD as float = 0
+declare @SCOSTE as float = 0
+declare @SCOSTEB as float = 0
+declare @SCOSTED as float = 0
+declare @STCOST as float = 0
+declare @STCOSTB as float = 0
+declare @STCOSTD as float = 0
+declare @buildPercent as float = 0
+declare @dismantlePercent as float = 0
+begin
+	set @idProjectEst = (select projectId from drawing where idDrawingNum = @idDrawingNum)
+	set @M2 = FORMAT(((ISNULL( @width,0)*ISNULL(@length,0)*ISNULL(@decks,0))/10.76391),'###.00')
+	set @SHRD = ROUND((@M2/(select laborB from scfUnitsRates where idSCFUR = @idSCFUR)),1)
+	set @dismantlePercent = (select dismantlePercent from scfUnitsRates where idSCFUR = @idSCFUR)
+	set @SBHRD = ROUND(( @SHRD * (@dismantlePercent*0.01)),1)
+	set @SDHRD = @SHRD - @SBHRD
+
+	set @DSCOSTL = ROUND((@SBHRD * (select scafRate from laborRate where idLaborRate = @idLabor)),2) + ROUND((@SDHRD * (select scafRate from laborRate where idLaborRate = @idLabor)),2)
+	set @DSCOSTM = ROUND((@SHRD * (select materialD from scfUnitsRates where idSCFUR = @idSCFUR)),2)
+	set @SCOSTMBD = ROUND((@SBHRD * (select materialD from scfUnitsRates where idSCFUR = @idSCFUR)),2)
+	set @DSCOSTMD = @DSCOSTM - @SCOSTMBD
+				
+	set @SCOSTEBD = ROUND((@SHRD * (select equipmentD from scfUnitsRates where idSCFUR = @idSCFUR)),2)
+	set @BSCOSTEB = ROUND((@SBHRD * (select equipmentD from scfUnitsRates where idSCFUR = @idSCFUR)),2)
+	set @SCOSTEDD = (@SCOSTEBD - @BSCOSTEB)
+
+	set @SCM = ROUND(((@width * @heigth * @length)/35.3),2)
+	set @SHR = ROUND((@SCM / (select top 1 laborD from scfUnitsRates where idSCFUR = @idSCFUR)),1)
+	set @buildPercent = (select top 1 buildPercent from scfUnitsRates where idSCFUR = @idSCFUR)
+	set @SBHR = ROUND((@SHR * (@buildPercent*0.01)),1)
+	set @SDHR = @SHR - @SBHR
+
+	set @SCOSTL = (ROUND((@SBHR * (select top 1 scafRate from laborRate where idLaborRate = @idLabor)),2) + ROUND((@SDHR * (select top 1 scafRate from laborRate where idLaborRate = @idLabor)),2))
+	set @SCOSTLB = ROUND((@SBHR * (select top 1 scafRate from laborRate where idLaborRate = @idLabor)),2)
+	set @SCOSTLD = @SCOSTL - @SCOSTLB		
+	set @SCOSTM = ROUND((@SHR * (select top 1 materialB from scfUnitsRates where idSCFUR = @idSCFUR)),2)
+	set @SCOSTMB = ROUND((@SBHR * (select top 1 materialB from scfUnitsRates where idSCFUR = @idSCFUR)),2)
+	set @SCOSTMD = @SCOSTM - @SCOSTMB
+				
+	set @SCOSTE = ROUND((@SHR * (select top 1 equipmentB from scfUnitsRates where idSCFUR = @idSCFUR)),2) 
+	set @SCOSTEB = ROUND((@SBHR * (select top 1 equipmentB from scfUnitsRates where idSCFUR = @idSCFUR)),2)
+	set @SCOSTED = @SCOSTE - @SCOSTEB	
+
+	set @STCOST = ISNULL(@SCOSTL,0) + ISNULL(@SCOSTM,0) + ISNULL(@SCOSTE,0)
+	set @STCOSTB = ISNULL(@SCOSTLB,0) + ISNULL(@SCOSTMB,0) + ISNULL(@SCOSTEB,0)
+	set @STCOSTD = ISNULL(@SCOSTLD,0) + ISNULL(@SCOSTMD,0) + ISNULL(@SCOSTED,0)
+				 
+	if (select count(*) from EstCostScf where tag=@tagEst and idDrawingNum=@idDrawingNum and projectId = @idProjectEst)= 0 
+	begin  
+		insert into EstCostScf values (@tagEst,@idDrawingNum,@idProjectEst,@M2, @SHRD ,@SBHRD ,@DSCOSTL ,@DSCOSTM ,@SCOSTMBD ,@DSCOSTMD ,@SCOSTEBD ,@BSCOSTEB ,@SCOSTEDD ,@SCM ,@SHR ,@SBHR ,@SDHR ,@SCOSTL ,@SCOSTLB ,@SCOSTLD ,@SCOSTM ,@SCOSTMB ,@SCOSTMD ,@SCOSTE ,@SCOSTEB ,@SCOSTEBD ,@STCOST ,@STCOSTB ,@STCOSTD)
+		exec sp_insertUpdateEstCostBuild @tagEst,@idDrawingNum,@width,@length,@decks,@idSCFUR,@idLabor
+		exec sp_insertUpdateEstCostDism @tagEst,@idDrawingNum,@width,@length,@decks,@idSCFUR,@idLabor
+	end 
+	else if(select count(*) from EstCostScf where tag=@tagEst and idDrawingNum=@idDrawingNum and projectId = @idProjectEst)>0 
+	begin
+		update EstCostScf set M2 = @M2, SHRD = @SHRD , DSCOSTL = @DSCOSTL, DSCOSTM = @DSCOSTM, SCOSTMBD = @SCOSTMBD,DSCOSTMD = @DSCOSTMD,SCOSTEBD = @SCOSTEBD,BSCOSTEB = @BSCOSTEB, SCOSTEDD = @SCOSTEDD, SCM = @SCM,SHR = @SHR,SBHR = @SBHR,SDHR =@SDHR,SCOSTL = @SCOSTL,SCOSTLB = @SCOSTLB, SCOSTLD = @SCOSTLD,SCOSTM = @SCOSTM,SCOSTMB = @SCOSTMB,SCOSTMD = @SCOSTMD,SCOSTE = @SCOSTE,SCOSTEB = @SCOSTEB,SCOSTED = @SCOSTED,STCOST = @STCOST,STCOSTB = @STCOSTB,STCOSTD = @STCOSTD where tag = @tagEst and idDrawingNum = @idDrawingNum and projectId = @idProjectEst
+		exec sp_insertUpdateEstCostBuild @tagEst,@idDrawingNum,@width,@length,@decks,@idSCFUR,@idLabor
+		exec sp_insertUpdateEstCostDism @tagEst,@idDrawingNum,@width,@length,@decks,@idSCFUR,@idLabor
+	end
+end
+GO
+--------##########################################################################################################################
+--------########## ESTE ES EL PROCEDIMIENTO PARA EL BUILD DE SCAFFOLD EN ESTIMATION ############################################## VOLVER A EJECUTAR
+--------##########################################################################################################################
+ALTER proc [dbo].[sp_insertUpdateEstCostBuild]
+@tag as varchar(20),
+@idDrawingNum as varchar(45),
+@width as float,
+@length as float,
+@decks as int,
+@idSUFR as varchar(35),
+@idLaborRate as varchar(40)
+as 
+declare @projectId varchar(30)
+declare @M2 float = 0 
+declare @SHR float = 0
+declare @BUILDPERCENT float = 0
+declare @SBHR float = 0
+declare @SDHR float = 0
+declare @SCOSTL float = 0
+declare @SCOSTLB float = 0
+declare @SCOSTLD float = 0
+declare @SCOSTM float = 0
+declare @SCOSTMB float = 0
+declare @SCOSTMD float = 0
+declare @SCOSTE float = 0
+declare @SCOSTEB float = 0
+declare @SCOSTED float = 0
+declare @STCOST float = 0
+declare @STCOSTB float = 0
+declare @STCOSTD float = 0
+begin
+	set @projectId=  (select projectId from drawing where idDrawingNum = @idDrawingNum)
+	set @M2 = FORMAT(((ISNULL( @width,0)*ISNULL(@length,0)*ISNULL(@decks,0))/10.76391),'###.00')
+	set @SHR = ROUND(@M2/(select laborD from scfUnitsRates where idSCFUR =@idSUFR),1)
+	set @BUILDPERCENT = (select dismantlePercent from scfUnitsRates where idSCFUR =@idSUFR)
+	set @BUILDPERCENT = @BUILDPERCENT *0.01
+	set @SBHR = ROUND(@SHR * @BUILDPERCENT,1)
+	set @SDHR = @SHR- @SBHR
+
+	set @SCOSTL = ROUND(@SBHR*(select scafRate from laborRate where idLaborRate = @idLaborRate),2)+ROUND(@SDHR * (select scafRate from laborRate where idLaborRate = @idLaborRate),2)
+	set @SCOSTLB = ROUND(@SBHR * (select scafRate from laborRate where idLaborRate = @idLaborRate),2)
+	set @SCOSTLD = @SCOSTL - @SCOSTLB
+
+	set @SCOSTM = ROUND(@SHR * (select materialD from scfUnitsRates where idSCFUR = @idSUFR) ,2)
+	set @SCOSTMB = ROUND(@SBHR * (select materialD from scfUnitsRates where idSCFUR = @idSUFR) ,2)
+	set @SCOSTMD = @SCOSTM - @SCOSTMB
+
+	set @SCOSTE = ROUND(@SHR * (select equipmentD from scfUnitsRates where idSCFUR = @idSUFR) ,2)
+	set @SCOSTEB = ROUND(@SBHR * (select equipmentD from scfUnitsRates where idSCFUR = @idSUFR) ,2)
+	set @SCOSTED = @SCOSTE - @SCOSTEB
+
+	set @STCOST = ISNULL(@SCOSTL,0)+ISNULL(@SCOSTM,0)+ISNULL(@SCOSTE,0)
+	set @STCOSTB = ISNULL(@SCOSTLB,0)+ISNULL(@SCOSTMB,0)+ISNULL(@SCOSTEB,0)
+	set @STCOSTD = @STCOST - @STCOSTB
+
+	if (select COUNT(*) from EstCostBuild where tag = @tag and idDrawingNum = @idDrawingNum and projectId = @projectId)=0
+	begin 
+		insert into EstCostBuild values (@tag,@idDrawingNum,@projectId,@M2,@SHR,@SBHR,@SDHR,@SCOSTL,@SCOSTLB,@SCOSTLD,@SCOSTM,@SCOSTMB,@SCOSTMD,@SCOSTE,@SCOSTEB,@SCOSTED,@STCOST)
+	end 
+	else if (select COUNT(*) from EstCostBuild where tag = @tag and idDrawingNum = @idDrawingNum and projectId = @projectId)>0
+	begin 
+		update EstCostBuild set M2= @M2,SHR=@SHR,SBHR=@SBHR,SDHR=@SDHR,SCOSTL=@SCOSTL,SCOSTLB=@SCOSTLB,SCOSTLD=@SCOSTLD,SCOSTM=@SCOSTM,SCOSTMB=@SCOSTMB,SCOSTMD=@SCOSTMD,SCOSTE=@SCOSTE,SCOSTEB=@SCOSTEB,SCOSTED=@SCOSTED,STCOST=@STCOST where tag = @tag and idDrawingNum = @idDrawingNum and projectId = @projectId
+	end
+end
+go
+--------##########################################################################################################################
+--------########## ESTE ES EL PROCEDIMIENTO PARA EL DIMANTLE DE SCAFFOLD EN ESTIMATION ########################################### VOLVER A EJECUTAR
+--------##########################################################################################################################
+
+ALTER proc [dbo].[sp_insertUpdateEstCostDism]
+@tag as varchar(20),
+@idDrawingNum as varchar(45),
+@width as float,
+@length as float,
+@decks as int,
+@idSCFUnitRate as varchar (35),
+@idLaborRate as varchar (40)
+as
+declare @projectId varchar(30) = NULL
+declare @M2 float = 0
+declare @SHRD float = 0
+declare @SBHRD float = 0
+declare @BUILDPERCENT float = 0
+declare @SDHRD float = 0
+declare @DSCOSTL float = 0
+declare @DSCOSTM float = 0
+declare @SCOSTMBD float = 0
+declare @DSCOSTMD float = 0
+declare @SCOSTEBD float = 0
+declare @BSCOSTEB float = 0
+declare @SCOSTEDD float = 0
+begin
+	set @projectId = Convert(varchar, (select projectId from drawing where idDrawingNum = @idDrawingNum))
+	set @M2 =  FORMAT(((ISNULL( @width,0)*ISNULL(@length,0)*ISNULL(@decks,0))/10.76391),'###.00')
+	set @SHRD = ROUND(@M2 /(select laborB from scfUnitsRates where idSCFUR = @idSCFUnitRate ),1)
+	set @BUILDPERCENT = (select dismantlePercent from scfUnitsRates where idSCFUR = @idSCFUnitRate)
+	set @SBHRD = ROUND(@SHRD * (@BUILDPERCENT*0.01),1)
+	set @SDHRD = ISNULL(@SHRD,0) - ISNULL(@SBHRD,0)
+
+	set @DSCOSTL = ROUND(@SDHRD * (select scafRate from laborRate where idLaborRate = @idLaborRate),2)
+	set @DSCOSTM = ROUND(@SHRD * (select materialD from scfUnitsRates where idSCFUR = @idSCFUnitRate),2)
+	set @SCOSTMBD = ROUND(@SBHRD *(select materialD from scfUnitsRates where idSCFUR = @idSCFUnitRate),2)
+	set @DSCOSTMD = @DSCOSTM - @SCOSTMBD
+	set @SCOSTEBD = ROUND(@SHRD * (select equipmentD from scfUnitsRates where idSCFUR = @idSCFUnitRate),2)
+	set @BSCOSTEB = ROUND(@SBHRD* (select equipmentD from scfUnitsRates where idSCFUR = @idSCFUnitRate),2)
+	set @SCOSTEDD = @SCOSTEBD - @BSCOSTEB
+
+	if (select COUNT(*) FROM EstCostDism where tag = @tag and idDrawingNum = @idDrawingNum and projectId = @projectId) = 0
+	begin 
+		insert into EstCostDism values (@tag,@idDrawingNum,@projectId,@M2,@SHRD,@SBHRD,@SDHRD,@DSCOSTL,@DSCOSTM,@SCOSTMBD,@DSCOSTMD,@SCOSTEBD,@BSCOSTEB,@SCOSTEDD)
+	end
+	else if (select COUNT(*) FROM EstCostDism where tag = @tag and idDrawingNum = @idDrawingNum and projectId = @projectId) > 0
+	begin 
+		update EstCostDism set M2 =@M2,SHRD = @SHRD,SBHRD = @SBHRD,SDHRD = @SDHRD,DSCOSTL = @DSCOSTL,DSCOSTM = @DSCOSTM,SCOSTMBD = @SCOSTMBD,DSCOSTMD = @DSCOSTMD,SCOSTEBD = @SCOSTEBD,BSCOSTEB = @BSCOSTEB,SCOSTEDD = @SCOSTEDD
+	end
+end
+go
+
+--------##########################################################################################################################
+--------########## ESTA ES LA RELACION DE LA TABLA EQUIPMENT INS RATE HC CON EQUIPMENT ESTIMATION ################################ VOLVER A EJECUTAR
+--------##########################################################################################################################
+
+ALTER TABLE equipmentEst DROP CONSTRAINT fk_type_thick_equipmentEst
+go 
+
+ALTER TABLE equipmentEst WITH CHECK ADD CONSTRAINT fk_type_thick_equipmentEst
+FOREIGN KEY ([type],thick) REFERENCES EqIRHC([type],thickness)
+ON UPDATE CASCADE
+ON DELETE CASCADE
+GO
+--------##########################################################################################################################
+--------########## ESTOS SON EL SP Y EL TRIGEER DE EQUIPMENT PARA CALCULAR EL ESTCOSTEQ DE EQIPMENT ############################## VOLVER A EJECUTAR
+--------##########################################################################################################################
+
+ALTER proc [dbo].[sp_insertUpdateEstCostEq] 
+@idEquipmentEst as int,
+@elevation as int,
+@systemPntEq as varchar(10),
+@pntOption as varchar(25),
+@type as varchar(25),
+@thick as float,
+@idJacket as varchar(25),
+@remIns as bit,
+@idLaborRmv as varchar(40),
+@sqrFtRmv as float ,
+@idLaborPnt as varchar(40),
+@sqrFtPnt as float,
+@idLaborII as varchar(40),
+@sqrFtII as float,
+@bevel as float,
+@cutout as float,
+@acm as bit,
+@idDrawingNum as varchar(45)
+as
+declare @IPEFFACTOR as float = 0
+declare @projectId as varchar(30) = NULL
+--REMOVAL
+declare @IRESQF  as float = 0
+declare @ACMH as float = 0
+declare @EIRHRS as float = 0
+declare @EIRCOSTL  as float = 0
+declare @EIRCOSTM as float = 0
+declare @EIRCOSTE as float = 0
+declare @EIRTCOST as float = 0
+--INSTALATION INSULATION
+declare @IIESQF as float = 0
+declare @EIIHRS as float = 0
+declare @EIICOSTL as float = 0
+declare @EIICOSTM as float = 0
+declare @EIICOSTE as float = 0
+declare @EIITCOST as float = 0
+--PAINT 
+declare @PESQF as float = 0
+declare @EPHRS as float = 0
+declare @EPCOSTL as float = 0
+declare @EPCOSTM as float = 0
+declare @EPCOSTE as float = 0
+declare @EPTCOST as float = 0
+declare @error as int  = 0
+begin 
+	set @projectId = (select projectId from drawing where idDrawingNum = @idDrawingNum)
+	--REMOVAL
+	set @IPEFFACTOR = (select top 1 [percent] from factorElevationPaint where elevation = @elevation)*0.01
+	set @IRESQF = @sqrFtRmv * iif(@idLaborRmv is not NULL,1,0) 
+	set @ACMH = ROUND( iif(@acm = 1 , (@IRESQF * (select top 1 isnull(laborProd,0) from eqInsUnitRate where [type] = @type and thick = @thick )* @IPEFFACTOR * (select top 1 laborProd from eqJktUnitRate where idJacket = @idJacket)),0)*3.5,1)
+	set @EIRHRS = ROUND((@IRESQF * (select top 1 isnull(laborProd,0) from EiRHC where [type] = @type and thickness = @thick) * @IPEFFACTOR * (select top 1 laborProd from eqJktUnitRate where idJacket = @idJacket)),1) + ISNULL(@ACMH,0)
+	set @EIRCOSTL = ROUND((@EIRHRS * (select top 1 insRate from laborRate where idLaborRate = @idLaborRmv)) ,2)
+	set @EIRCOSTM = ROUND((@IRESQF * (select top 1 isnull(matRate,0) from EiRHC where [type] = @type and thickness = @thick) * (select top 1 isnull(matFactor,1) from eqJktUnitRate where idJacket = @idJacket)),2)
+	set @EIRCOSTE = ROUND((@IRESQF * (select top 1 isnull(eqRate,0) from EiRHC where [type] = @type and thickness = @thick) * (select top 1 isnull(eqFactor,1) from eqJktUnitRate where idJacket = @idJacket)),2) 
+	set @EIRTCOST = ISNULL(@EIRCOSTL,0)+ISNULL(@EIRCOSTM,0)+ISNULL(@EIRCOSTE,0)
+	--INTALATION INSULATION
+	set @IIESQF = @sqrFtII + (@bevel * (select top 1 bebel from insfitting where [type] = @type)) + (@cutout * (select cutOut from insfitting where [type]=@type)) 
+	set @EIIHRS = ROUND((@IIESQF * (select top 1 isnull(laborProd,0) from eqInsUnitRate where [type] = @type and thick = @thick) * @IPEFFACTOR * (select top 1 isnull(laborProd,1) from eqJktUnitRate where idJacket = @idJacket)),1)
+	set @EIICOSTL = ROUND((@EIIHRS * (select top 1 insRate from laborRate where idLaborRate = @idLaborII)),2) 
+	set @EIICOSTM = ROUND((@IIESQF * (select top 1 isnull(matRate,0) from eqInsUnitRate where [type] = @type and thick = @thick) * (select top 1 isnull(matFactor,1) from eqJktUnitRate where idJacket = @idJacket)),2) 
+	set @EIICOSTE = ROUND((@IIESQF * (select top 1 isnull(eqRate,0) from eqInsUnitRate where [type] = @type and thick = @thick) * (select top 1 isnull(eqFactor,1) from eqJktUnitRate where idJacket = @idJacket)),2)
+	set @EIITCOST = ISNULL(@EIICOSTL,0)+ISNULL(@EIICOSTM,0)+ISNULL(@EIICOSTE,0)
+	--PAINT
+	set @PESQF = ISNULL(@sqrFtPnt,0)
+	set @EPHRS = ROUND((@PESQF * (select top 1 isnull(laborProd,0) from eqPaintUnitRate where systemPntEq = @systemPntEq and pntOption = @pntOption)  * @IPEFFACTOR),1)
+	set @EPCOSTL = ROUND((@EPHRS *(select top 1 paintRate from laborRate where idLaborRate = @idLaborPnt)),2)
+	set @EPCOSTM = ROUND((@PESQF * (select top 1 isnull(matRate,0) from eqPaintUnitRate where systemPntEq = @systemPntEq and pntOption = @pntOption)),2) 
+	set @EPCOSTE = ROUND((@PESQF * (select top 1 isnull(eqRate,0) from eqPaintUnitRate where systemPntEq = @systemPntEq and pntOption = @pntOption)),2)
+	set @EPTCOST = ISNULL(@EPCOSTL,0) + ISNULL(@EPCOSTM,0) + ISNULL(@EPCOSTE,0)
+			
+	if (select count(*) from EstCostEq where tag=@idEquipmentEst and idDrawingNum=@idDrawingNum and projectId = @projectId)= 0 
+	begin  
+		insert into EstCostEq values (@idEquipmentEst,@idDrawingNum,@projectId,@IRESQF,@ACMH,@EIRHRS,@EIRCOSTL,@EIRCOSTM,@EIRCOSTE,@EIRTCOST,@IIESQF,@EIIHRS,@EIICOSTL,@EIICOSTM,@EIICOSTE,@EIITCOST,@PESQF,@EPHRS,@EPCOSTL,@EPCOSTM,@EPCOSTE,@EPTCOST)
+	end 
+	else if(select count(*) from EstCostEq where tag=@idEquipmentest and idDrawingNum=@idDrawingNum and projectId = @projectId)>0 
+	begin
+		update EstCostEq set @IRESQF = @IRESQF,ACMH=@ACMH,EIRHRS= @EIRHRS,EIRCOSTL=@EIRCOSTL,EIRCOSTM=@EIRCOSTM,EIRCOSTE=@EIRCOSTE,EIRTCOST=@EIRTCOST,IIESQF=@IIESQF,EIIHRS=@EIIHRS,EIICOSTL=@EIICOSTL,EIICOSTM=@EIICOSTM,EIICOSTE=@EIICOSTE,EIITCOST=@EIITCOST,PESQF=@PESQF,EPHRS=@EPHRS,EPCOSTL=@EPCOSTL,EPCOSTM=@EPCOSTM,EPCOSTE=@EPCOSTE,EPTCOST=@EPTCOST where tag = @idEquipmentEst and idDrawingNum = @idDrawingNum and projectId = @projectId
+	end
+end
+GO
+--=======================================================================================================================================================================================================================================================================
+--=======================================================================================================================================================================================================================================================================
+--=======================================================================================================================================================================================================================================================================
+ALTER trigger [dbo].[addCostEqEsDr]
+on [dbo].[equipmentEst] 
+after insert , Update
+as
+begin
+	declare @IPEFFACTOR as float = 0
+	declare @projectId as varchar(30) = NULL
+	--REMOVAL
+	declare @IRESQF  as float = 0
+	declare @ACMH as float = 0
+	declare @EIRHRS as float = 0
+	declare @EIRCOSTL  as float = 0
+	declare @EIRCOSTM as float = 0
+	declare @EIRCOSTE as float = 0
+	declare @EIRTCOST as float = 0
+	--INSTALATION INSULATION
+	declare @IIESQF as float = 0
+	declare @EIIHRS as float = 0
+	declare @EIICOSTL as float = 0
+	declare @EIICOSTM as float = 0
+	declare @EIICOSTE as float = 0
+	declare @EIITCOST as float = 0
+	--PAINT 
+	declare @PESQF as float = 0
+	declare @EPHRS as float = 0
+	declare @EPCOSTL as float = 0
+	declare @EPCOSTM as float = 0
+	declare @EPCOSTE as float = 0
+	declare @EPTCOST as float = 0
+	
+	set @projectId = (select projectId from drawing where idDrawingNum = (select idDrawingNum from inserted))
+	--REMOVAL
+	set @IPEFFACTOR = (select top 1 [percent] from factorElevationPaint where elevation = (select elevation from inserted))*0.01
+	set @IRESQF = (select sqrFtRmv from inserted)* iif((select idLaborRateRmv from inserted) is not NULL,1,0) 
+	set @ACMH =  ROUND( iif((select acm from inserted) = 1 , (@IRESQF * (select isnull(laborProd,0) from EqIRHC where [type] = (select [type] from inserted) and thickness = (select thick from inserted))* @IPEFFACTOR * (select laborProd from eqJktUnitRate where idJacket = (select idJacket from inserted))),0)*3.5,1)
+	set @EIRHRS = ROUND((@IRESQF * (select isnull(laborProd,0) from EqIRHC where [type] = (select [type] from inserted) and thickness = (select thick from inserted)) * @IPEFFACTOR * (select laborProd from eqJktUnitRate where idJacket = (select idJacket from inserted))),1) + ISNULL(@ACMH,0)
+	set @EIRCOSTL = ROUND((@EIRHRS * (select insRate from laborRate where idLaborRate = (select idLaborRateRmv from inserted))) ,2)
+	set @EIRCOSTM = ROUND((@IRESQF * (select isnull(matRate,0) from EqIRHC where [type] = (select [type] from inserted) and thickness = (select thick from inserted)) * (select isnull(matFactor,1) from eqJktUnitRate where idJacket = (select idJacket from inserted))),2)
+	set @EIRCOSTE = ROUND((@IRESQF * (select isnull(eqRate,0) from EqIRHC where [type] = (select [type] from inserted) and thickness = (select thick from inserted)) * (select isnull(eqFactor,1) from eqJktUnitRate where idJacket = (select idJacket from inserted))),2) 
+	set @EIRTCOST = ISNULL(@EIRCOSTL,0)+ISNULL(@EIRCOSTM,0)+ISNULL(@EIRCOSTE,0)
+	--INTALATION INSULATION
+	set @IIESQF = (select sqrFtII from inserted) + ((select bevel from inserted) * (select bebel from insfitting where [type] = (select [type] from inserted))) + ((select cutOut from inserted) * (select cutOut from insfitting where [type]=(select [type] from inserted))) 
+	set @EIIHRS = ROUND((@IIESQF * (select isnull(laborProd,0) from eqInsUnitRate where [type]= (select [type] from inserted) and thick = (select thick from inserted)) * @IPEFFACTOR * (select isnull(laborProd,1) from eqJktUnitRate where idJacket = (select idJacket from inserted))),1)
+	set @EIICOSTL = ROUND((@EIIHRS * (select insRate from laborRate where idLaborRate = (select idLaborRateII from inserted))),2) 
+	set @EIICOSTM = ROUND((@IIESQF * (select isnull(matRate,0) from eqInsUnitRate where [type] = (select [type] from inserted) and thick = (select thick from inserted)) * (select isnull(matFactor,1) from eqJktUnitRate where idJacket = (select idJacket from inserted))),2) 
+	set @EIICOSTE = ROUND((@IIESQF * (select isnull(eqRate,0) from eqInsUnitRate where [type] = (select [type] from inserted) and thick = (select thick from inserted)) * (select isnull(eqFactor,1) from eqJktUnitRate where idJacket = (select idJacket from inserted))),2)
+	set @EIITCOST = ISNULL(@EIICOSTL,0)+ISNULL(@EIICOSTM,0)+ISNULL(@EIICOSTE,0)
+	--PAINT
+	set @PESQF = ISNULL((select sqrFtPnt from inserted),0)
+	set @EPHRS = ROUND((@PESQF * (select isnull(laborProd,0) from eqPaintUnitRate where systemPntEq = (select systemPntEq from inserted) and pntOption = (select pntOption from inserted))  * @IPEFFACTOR),1)
+	set @EPCOSTL = ROUND((@EPHRS *(select paintRate from laborRate where idLaborRate = (select idLaborRatePnt from inserted))),2)
+	set @EPCOSTM = ROUND((@PESQF * (select isnull(matRate,0) from eqPaintUnitRate where systemPntEq = (select systemPntEq from inserted) and pntOption = (select pntOption from inserted))),2)
+	set @EPCOSTE = ROUND((@PESQF * (select isnull(eqRate,0) from eqPaintUnitRate where systemPntEq = (select systemPntEq from inserted) and pntOption = (select pntOption from inserted))),2) 
+	set @EPTCOST = ISNULL(@EPCOSTL,0) + ISNULL(@EPCOSTM,0) + ISNULL(@EPCOSTE,0)
+			
+	if (select count(*) from EstCostEq where tag= (select idEquimentEst from inserted) and idDrawingNum=(select idDrawingNum from inserted) and projectId = @projectId)= 0 
+	begin  
+		insert into EstCostEq values ((select idEquimentEst from inserted),(select idDrawingNum from inserted),@projectId,@IRESQF,@ACMH,@EIRHRS,@EIRCOSTL,@EIRCOSTM,@EIRCOSTE,@EIRTCOST,@IIESQF,@EIIHRS,@EIICOSTL,@EIICOSTM,@EIICOSTE,@EIITCOST,@PESQF,@EPHRS,@EPCOSTL,@EPCOSTM,@EPCOSTE,@EPTCOST)
+	end 
+	else if(select count(*) from EstCostEq where tag=(select idEquimentEst from inserted) and idDrawingNum=(select idDrawingNum from inserted) and projectId = @projectId)>0 
+	begin
+		update EstCostEq set @IRESQF = @IRESQF,ACMH=@ACMH,EIRHRS= @EIRHRS,EIRCOSTL=@EIRCOSTL,EIRCOSTM=@EIRCOSTM,EIRCOSTE=@EIRCOSTE,EIRTCOST=@EIRTCOST,IIESQF=@IIESQF,EIIHRS=@EIIHRS,EIICOSTL=@EIICOSTL,EIICOSTM=@EIICOSTM,EIICOSTE=@EIICOSTE,EIITCOST=@EIITCOST,PESQF=@PESQF,EPHRS=@EPHRS,EPCOSTL=@EPCOSTL,EPCOSTM=@EPCOSTM,EPCOSTE=@EPCOSTE,EPTCOST=@EPTCOST where tag = (select idEquimentEst from inserted) and idDrawingNum = (select idDrawingNum from inserted) and projectId = @projectId
+	end
+end
+GO
+--=======================================================================================================================================================================================================================================================================
+--=======ESTOS SON EL SP Y EL TRIGGER DE PIPING PARA CALCULAR LA ESTIMACION DE PIPINGESTCOST ============================================================================================================================================================================
+--=======================================================================================================================================================================================================================================================================
+ALTER TRIGGER [dbo].[addCostPpEst]
+ON [dbo].[pipingEst]
+after insert, update
+as 
+begin
+	declare @projectId as varchar(45) = NULL
+	declare @IPPEFFACTOR as float = 0
+	--REMOVAL
+	declare @IRELF as float =0
+	declare @ACMH as float =0
+	declare @PIRHRS as float =0
+	declare @PIRCOSTL as float =0
+	declare @PIRCOSTM as float =0
+	declare @PIRCOSTE as float =0
+	declare @PIRTCOST as float =0
+	--INSTALATION INSULATION
+	declare @IIELF as float =0
+	declare @PIIHRS as float =0
+	declare @PIICOSTL as float =0
+	declare @PIICOSTM as float =0
+	declare @PIICOSTE as float =0
+	declare @PIITCOST as float =0
+	--PAINT
+	declare @PESQF as float =0
+	declare @PPHRS as float =0
+	declare @PPCOSTL as float =0
+	declare @PPCOSTM as float =0
+	declare @PPCOSTE as float =0
+	declare @PPTCOST as float =0 
+	declare @type as varchar(25) = NULL
+	set @projectId = (select projectId from drawing where idDrawingNum = (select idDrawingNum from inserted))
+	set @type = (select [type] from inserted)
+	--REMOVAl
+	set @IPPEFFACTOR = (select ISNULL([percent],0) from factorElevationPaint where elevation = (select elevation from inserted))*0.01
+	set @IRELF=  (select lFtRmv from inserted) * IIF((select idLaborRateRmv from inserted) is not NULL,1,0)
+	set @ACMH= ROUND(IIF((select acm from inserted) = 1, @IRELF * (select laborProd from PpIRHC where size =(select size from inserted) and [type]= (select [type] from inserted) and thickness = (select thick from inserted)) * @IPPEFFACTOR * (select laborProd from ppJktUnitRate where idJacket = (select idJacket from inserted)),0)*3,1)
+	set @PIRHRS= ROUND((@IRELF * (select laborProd from PpIRHC where size =(select size from inserted) and [type]= (select [type] from inserted) and thickness = (select thick from inserted)) * @IPPEFFACTOR * (select laborProd from ppJktUnitRate where idJacket = (select idJacket from inserted)) + ISNULL(@ACMH,0)),0)
+	set @PIRCOSTL= ROUND(@PIRHRS * (select top 1 insRate from laborRate where idLaborRate = (select idLaborRateRmv from inserted)),2) 
+	set @PIRCOSTM= ROUND(@IRELF * (select top 1 matRate from PpIRHC where size =(select size from inserted) and [type]= (select [type] from inserted) and thickness = (select thick from inserted)) * (select matFactor from ppJktUnitRate where idJacket = (select idJacket from inserted)),2)
+	set @PIRCOSTE= ROUND(@IRELF * (select top 1 eqRate from PpIRHC where size =(select size from inserted) and [type]= (select [type] from inserted) and thickness = (select thick from inserted)) * (select eqFactor from ppJktUnitRate where idJacket = (select idJacket from inserted)) ,2) 
+	set @PIRTCOST= ISNULL(@PIRCOSTL,0)+ISNULL(@PIRCOSTM ,0)+ISNULL(@PIRCOSTE ,0) 
+	--INSTALATION INSULATION
+	set @IIELF= ((select lFtII from inserted)+ ((select p90II from inserted) * (select p90 from insFitting where [type] = @type)) + ((select p45II from inserted) * (select p45 from insFitting where [type] = @type) ) + ( (select pBendII from inserted) * (select bend from insFitting where [type] = @type) ) + ( (select pTeeII from inserted) * (select tee from insFitting where [type] = @type) ) + ((select pReducII from inserted) * (select red from insFitting where [type] = @type) ) + ( (select pCapsII from inserted) * (select cap from insFitting where [type] = @type) ) + ( (select pPairII from inserted) * (select flangePair from insFitting where [type] = @type) ) + ( (select pVlvII from inserted) * (select flangeVlv from insFitting where [type] = @type) ) + ((select pControlII from inserted) * (select controlVlv from insFitting where [type] = @type) ) + ((select pWeldII from inserted) * (select weldedVlv from insFitting where [type] = @type) ) + ((select pCutOutII from inserted) * (select cutOut from insFitting where [type] = @type)) + ((select psupportII from inserted) * (select support from insFitting where [type] = @type)))
+	set @PIIHRS= ROUND(@IIELF * (select laborProd from ppInsUnitRate where size = (select size from inserted) and [type] = (select [type] from inserted) and thick = (select thick from inserted)) * @IPPEFFACTOR * (select laborProd from ppJktUnitRate where idJacket = (select idJacket from inserted)),1)
+	set @PIICOSTL= ROUND(@PIIHRS * (select top 1 insRate from laborRate where idLaborRate = (select idLaborRateII from inserted)),2)
+	set @PIICOSTM= ROUND(@IIELF * (select top 1 matRate from ppInsUnitRate where size = (select size from inserted) and [type] = (select [type] from inserted) and thick = (select thick from inserted)) * (select matFactor from ppJktUnitRate where idJacket = (select idJacket from inserted)),2)
+	set @PIICOSTE= ROUND(@IIELF * (select top 1 eqRate from ppInsUnitRate where size = (select size from inserted) and [type] = (select [type] from inserted) and thick = (select thick from inserted)) * (select eqFactor from ppJktUnitRate where idJacket = (select idJacket from inserted)) ,2) 
+	set @PIITCOST= ISNULL( @PIICOSTL ,0)+ISNULL( @PIICOSTM ,0)+ISNULL( @PIICOSTE ,0)
+	--PAINT
+	set @PESQF= IIF((select size from inserted)<=3, 1, (select size from inserted) / 3.82 )*((select lFtPnt from inserted) + ((select p90Pnt from inserted) * (select p90 from pntFitting where pntOption = (select pntOption from inserted))) + ((select p45Pnt from inserted) * (select p45 from pntFitting where pntOption = (select pntOption from inserted)) ) + ( (select pTeePnt from inserted) * (select tee from pntFitting where pntOption = (select pntOption from inserted))) + ((select pPairPnt from inserted) * (select flangePair from pntFitting where pntOption = (select pntOption from inserted)) ) + ((select pVlvPnt from inserted) * (select flangeVlv from pntFitting where pntOption = (select pntOption from inserted))) + ((select pControlPnt from inserted) * (select controlVlv from pntFitting where pntOption = (select pntOption from inserted))) + ((select pWeldPnt from inserted) * (select weldedVlv from pntFitting where pntOption = (select pntOption from inserted)))) 
+	set @PPHRS= ROUND(@PESQF * (select laborProd from ppPaintUnitRate where systemPntPP = (select systemPntPP from inserted) and pntOption = (select pntOption from inserted) and size = (select size from inserted)) * @IPPEFFACTOR ,1)
+	set @PPCOSTL= ROUND(@PPHRS * (select top 1 paintRate from laborRate where idLaborRate = (select idLaborRatePnt from inserted)),2)
+	set @PPCOSTM= ROUND(@PESQF * (select top 1 matRate from ppPaintUnitRate where size = (select size from inserted) and pntOption = (select pntOption from inserted) and systemPntPP = (select systemPntPP from inserted)),2) 
+	set @PPCOSTE= ROUND(@PESQF * (select top 1 eqRate from ppPaintUnitRate where size = (select size from inserted) and pntOption = (select pntOption from inserted) and systemPntPP = (select systemPntPP from inserted)),2)
+	set @PPTCOST= ISNULL(@PPCOSTL ,0)+ISNULL(@PPCOSTM ,0)+ISNULL(@PPCOSTE ,0)
+	if(select COUNT(*) from EstCostPp where tag = CONVERT(NVARCHAR, (select idPipingEst from inserted)) and idDrawingNum = (select idDrawingNum from inserted) and projectId = @projectId)=0
+	begin
+		insert into EstCostPp values(CONVERT(NVARCHAR,(select idPipingEst from inserted)) , (select idDrawingNum from inserted),@projectId,@IRELF,@ACMH,@PIRHRS,@PIRCOSTL,@PIRCOSTM,@PIRCOSTE,@PIRTCOST,@IIELF,@PIIHRS,@PIICOSTL,@PIICOSTM,@PIICOSTE,@PIITCOST,@PESQF,@PPHRS,@PPCOSTL,@PPCOSTM,@PPCOSTE,@PPTCOST)
+	end
+	else if(select COUNT(*) from EstCostPp where tag = CONVERT(NVARCHAR,(select idPipingEst from inserted)) and idDrawingNum = (select idDrawingNum from inserted) and projectId = @projectId)>0
+	begin
+		update EstCostPp set IRELF = @IRELF ,ACMH = @ACMH,PIRHRS = @PIRHRS,PIRCOSTL = @PIRCOSTL,PIRCOSTM = @PIRCOSTM,PIRCOSTE = @PIRCOSTE,PIRTCOST = @PIRTCOST,IIELF = @IIELF,PIIHRS = @PIIHRS,PIICOSTL = @PIICOSTL,PIICOSTM = @PIICOSTM,PIICOSTE = @PIICOSTE,PIITCOST = @PIITCOST,PESQF = @PESQF,PPHRS = @PPHRS,PPCOSTL = @PPCOSTL,PPCOSTM = @PPCOSTM,PPCOSTE = @PPCOSTE,PPTCOST = @PPTCOST where tag = CONVERT(NVARCHAR, (select idPipingEst from inserted)) and idDrawingNum = (select idDrawingNum from inserted) and projectId = @projectId
+	end
+end
+GO
+--=======================================================================================================================================================================================================================================================================
+--=======================================================================================================================================================================================================================================================================
+--=======================================================================================================================================================================================================================================================================
+
+ALTER proc [dbo].[sp_InsertUpdateEstCostPp]
+@idPipingEst as int, 	
+@size as float,
+@type as varchar(25),
+@thick as float,
+@systemPntPP as varchar(10), 	
+@pntOption as varchar(25), 
+@idJacket as varchar(25),
+@elevation as int,
+@idLaborRateRmv	as varchar(40),
+@lFtRmv	as float,
+@idLaborRatePnt	as varchar(40),
+@lFtPnt	as float,
+@p90Pnt	as float,
+@p45Pnt	as int,
+@pTeePnt as int,	
+@pPairPnt as int,
+@pVlvPnt as int,
+@pControlPnt as int,
+@pWeldPnt as int,
+@idLaborRateII as varchar(40),
+@lFtII as float,
+@p90II as int,
+@p45II as int,
+@pBendII as int,
+@pTeeII as int,
+@pReducII as int,	
+@pCapsII as int,
+@pPairII as int,
+@pVlvII	as int,
+@pControlII	as int,
+@pWeldII as int,
+@pCutOutII as int,
+@psupportII	as int,
+@acm as bit,
+@idDrawingNum as varchar(45)
+as
+declare @projectId as varchar(45) = NULL
+declare @error as bit = 0
+declare @IPPEFFACTOR as float = 0
+--REMOVAL
+declare @IRELF as float =0
+declare @ACMH as float =0
+declare @PIRHRS as float =0
+declare @PIRCOSTL as float =0
+declare @PIRCOSTM as float =0
+declare @PIRCOSTE as float =0
+declare @PIRTCOST as float =0
+--INSTALATION INSULATION
+declare @IIELF as float =0
+declare @PIIHRS as float =0
+declare @PIICOSTL as float =0
+declare @PIICOSTM as float =0
+declare @PIICOSTE as float =0
+declare @PIITCOST as float =0
+--PAINT
+declare @PESQF as float =0
+declare @PPHRS as float =0
+declare @PPCOSTL as float =0
+declare @PPCOSTM as float =0
+declare @PPCOSTE as float =0
+declare @PPTCOST as float =0 
+begin 
+	set @projectId = (select projectId from drawing where idDrawingNum = @idDrawingNum)
+	--REMOVAl
+	set @IPPEFFACTOR = (select ISNULL([percent],0) from factorElevationPaint where elevation = @elevation)/100
+	set @IRELF=  @lFtRmv * IIF(@idLaborRateRmv is not NULL,1,0)
+	set @ACMH= ROUND(IIF(@ACM = 1, @IRELF * (select laborProd from PpIRHC where size =@size and [type]= @type and thickness = @thick) * @IPPEFFACTOR * (select top 1 laborProd from ppJktUnitRate where idJacket = @idJacket),0)*3,1)
+	set @PIRHRS= ROUND((@IRELF * (select top 1 laborProd from PpIRHC where size =@size and [type]= @type and thickness = @thick) * @IPPEFFACTOR * (select top 1 laborProd from ppJktUnitRate where idJacket = @idJacket) + ISNULL(@ACMH,0)),0)
+	set @PIRCOSTL= ROUND(@PIRHRS * (select top 1 insRate from laborRate where idLaborRate = @idLaborRateRmv),2) 
+	set @PIRCOSTM= ROUND(@IRELF * (select top 1 matRate from PpIRHC where size =@size and [type]= @type and thickness = @thick) * (select top 1 matFactor from ppJktUnitRate where idJacket = @idJacket),2)
+	set @PIRCOSTE= ROUND(@IRELF * (select top 1 eqRate from PpIRHC where size =@size and [type]= @type and thickness = @thick) * (select top 1 eqFactor from ppJktUnitRate where idJacket = @idJacket) ,2) 
+	set @PIRTCOST= ISNULL(@PIRCOSTL,0)+ISNULL(@PIRCOSTM ,0)+ISNULL(@PIRCOSTE ,0) 
+	--INSTALATION INSULATION
+	set @IIELF= (@lFtII + (@p90II * (select top 1 p90 from insFitting where [type] = @type)) + (@p45II * (select top 1 p45 from insFitting where [type] = @type) ) + ( @pBendII * (select top 1 bend from insFitting where [type] = @type) ) + ( @pTeeII * (select top 1 tee from insFitting where [type] = @type) ) + ( @pReducII * (select top 1 red from insFitting where [type] = @type) ) + ( @pCapsII * (select top 1 cap from insFitting where [type] = @type) ) + ( @pPairII * (select top 1 flangePair from insFitting where [type] = @type) ) + ( @pVlvII * (select top 1 flangeVlv from insFitting where [type] = @type) ) + ( @pControlII * (select top 1 controlVlv from insFitting where [type] = @type) ) + ( @pWeldII * (select top 1 weldedVlv from insFitting where [type] = @type) ) + ( @pCutOutII * (select top 1 cutOut from insFitting where [type] = @type)) + ( @psupportII * (select top 1 support from insFitting where [type] = @type)))
+	set @PIIHRS= ROUND(@IIELF * (select top 1 laborProd from ppInsUnitRate where size = @size and [type] = @type and thick = @thick) * @IPPEFFACTOR * (select top 1 laborProd from ppJktUnitRate where idJacket = @idJacket),1)
+	set @PIICOSTL= ROUND(@PIIHRS * (select top 1 insRate from laborRate where idLaborRate = @idLaborRateII),2)
+	set @PIICOSTM= ROUND(@IIELF * (select top 1 matRate from ppInsUnitRate where size = @size and thick = @thick and [type] = @type) * (select top 1 matFactor from ppJktUnitRate where idJacket = @idJacket),2)
+	set @PIICOSTE= ROUND(@IIELF * (select top 1 eqRate from ppInsUnitRate where size = @size and thick = @thick and [type] = @type) * (select top 1 eqFactor from ppJktUnitRate where idJacket = @idJacket) ,2) 
+	set @PIITCOST= ISNULL( @PIICOSTL ,0)+ISNULL( @PIICOSTM ,0)+ISNULL( @PIICOSTE ,0)
+	--PAINT
+	set @PESQF= IIF(@size<=3, 1, @size / 3.82 )* ( @lFtPnt + (@p90Pnt * (select top 1 p90 from pntFitting where pntOption = @pntOption))+ ( @p45Pnt * (select top 1 p45 from pntFitting where pntOption = @pntOption))+ ( @pTeePnt * (select top 1 tee from pntFitting where pntOption = @pntOption))+ ( @pPairPnt * (select flangePair from pntFitting where pntOption = @pntOption))+ ( @pVlvPnt * (select flangeVlv from pntFitting where pntOption = @pntOption))+ ( @pControlPnt * (select controlVlv from pntFitting where pntOption = @pntOption))+ ( @pWeldPnt * (select weldedVlv from pntFitting where pntOption = @pntOption)))
+	set @PPHRS= ROUND(@PESQF * (select top 1 laborProd from ppPaintUnitRate where systemPntPP = @systemPntPP and pntOption = @pntOption and size = @size) * @IPPEFFACTOR ,1)
+	set @PPCOSTL= ROUND(@PPHRS * (select top 1 paintRate from laborRate where idLaborRate = @idLaborRatePnt),2)
+	set @PPCOSTM= ROUND(@PESQF * (select top 1 matRate from ppPaintUnitRate where size = @size and pntOption = @pntOption and systemPntPP = @systemPntPP),2) 
+	set @PPCOSTE= ROUND(@PESQF * (select top 1 eqRate from ppPaintUnitRate where size = @size and pntOption = @pntOption and systemPntPP = @systemPntPP),2) 
+	set @PPTCOST= ISNULL(@PPCOSTL ,0)+ISNULL(@PPCOSTM ,0)+ISNULL(@PPCOSTE ,0)
+	if(select COUNT(*) from EstCostPp where tag = @idPipingEst and idDrawingNum = @idDrawingNum and projectId = @projectId)=0
+	begin
+		insert into EstCostPp values(@idPipingEst ,CONVERT(NVARCHAR, @idDrawingNum),@projectId,@IRELF,@ACMH,@PIRHRS,@PIRCOSTL,@PIRCOSTM,@PIRCOSTE,@PIRTCOST,@IIELF,@PIIHRS,@PIICOSTL,@PIICOSTM,@PIICOSTE,@PIITCOST,@PESQF,@PPHRS,@PPCOSTL,@PPCOSTM,@PPCOSTE,@PPTCOST)
+	end
+	else if(select COUNT(*) from EstCostPp where tag = @idPipingEst and idDrawingNum = @idDrawingNum and projectId = @projectId)>0
+	begin
+		update EstCostPp set IRELF = @IRELF ,ACMH = @ACMH,PIRHRS = @PIRHRS,PIRCOSTL = @PIRCOSTL,PIRCOSTM = @PIRCOSTM,PIRCOSTE = @PIRCOSTE,PIRTCOST = @PIRTCOST,IIELF = @IIELF,PIIHRS = @PIIHRS,PIICOSTL = @PIICOSTL,PIICOSTM = @PIICOSTM,PIICOSTE = @PIICOSTE,PIITCOST = @PIITCOST,PESQF = @PESQF,PPHRS = @PPHRS,PPCOSTL = @PPCOSTL,PPCOSTM = @PPCOSTM,PPCOSTE = @PPCOSTE,PPTCOST = @PPTCOST where tag = @idPipingEst and idDrawingNum = @idDrawingNum and projectId = @projectId
+	end	
+end
+go
+--=======================================================================================================================================================================================================================================================================
+--============ CORRECCION DE REPORTE SCAFFOLD BUDGET ESTIMATE ===========================================================================================================================================================================================================
+--=======================================================================================================================================================================================================================================================================
+
+ALTER proc [dbo].[sp_SelectScaffoldBudgetEstimate]
+	@projectId as varchar(30)
+as
+begin
+select 
+cl.numberClient, cl.contactName, cl.companyName, cl.plant, ha.avenue, ha.city, ha.providence,
+po.projectId as 'Project' ,po.[description] as 'Description',estCScf.tag , dr.idDrawingNum , scf.location as 'Location', CONCAT(scf.width,'x',scf.[length],'x',scf.heigth) as 'Dimention',scf.build as 'Elevation',
+scf.[days] as 'Days Active',scf.idSCFUR as 'Scaf.Type', FORMAT ((((scf.width)*(scf.[length])*(scf.heigth))/35.31),'###.00') as 'M3',estCScf.M2 as 'M2', scf.idLaborRate as 'Work Week' ,
+--MAN HRS 
+estCScf.SBHR as 'Man Hrs B' ,estCScf.SDHR as 'Man Hrs D',
+--MAN HRS DECKS
+ISNULL(ROUND((select top 1 estB.SBHRD from EstCostScf as estB where estB.idDrawingNum = estCScf.idDrawingNum and estB.projectId = estCScf.projectId and estB.tag = estCScf.tag),0),0) as 'Man Hrs Deck B',
+ISNULL(ROUND((select top 1 estD.SDHRD from EstCostDism as estD where estD.idDrawingNum = estCScf.idDrawingNum and estD.projectId = estCScf.projectId and estD.tag = estCScf.tag),0),0) as 'Man Hrs Deck D',
+scf.decks as 'Decks',
+--DESCKS LABOR
+ISNULL((select estB.SCOSTLB from EstCostBuild as estB where estB.idDrawingNum = estCScf.idDrawingNum and estB.projectId = estCScf.projectId and estB.tag = estCScf.tag),0) as 'Decks Labor B',
+ISNULL((select estD.DSCOSTL from EstCostDism as estD where estD.idDrawingNum = estCScf.idDrawingNum and estD.projectId = estCScf.projectId and estD.tag = estCScf.tag),0) as 'Decks Labor D',
+--SCAF LABOR 
+ISNULL((select estB.SCOSTLB from EstCostScf as estB where estB.idDrawingNum = estCScf.idDrawingNum and estB.projectId = estCScf.projectId and estB.tag = estCScf.tag),0) as 'SCF Labor B',
+ISNULL((select estB.SCOSTLD from EstCostScf as estB where estB.idDrawingNum = estCScf.idDrawingNum and estB.projectId = estCScf.projectId and estB.tag = estCScf.tag),0) as 'SCF Labor D',
+--MATERIAL
+ISNULL((select estB.SCOSTMB from EstCostScf as estB where estB.idDrawingNum = estCScf.idDrawingNum and estB.projectId = estCScf.projectId and estB.tag = estCScf.tag),0) as 'SCF Material B',
+ISNULL((select estD.SCOSTMD from EstCostScf as estD where estD.idDrawingNum = estCScf.idDrawingNum and estD.projectId = estCScf.projectId and estD.tag = estCScf.tag),0) as 'SCF Material D',
+ISNULL((select estB.SCOSTMB from EstCostBuild as estB where estB.idDrawingNum = estCScf.idDrawingNum and estB.projectId = estCScf.projectId and estB.tag = estCScf.tag),0) as 'DECK Material B',
+ISNULL((select estD.DSCOSTMD from EstCostDism as estD where estD.idDrawingNum = estCScf.idDrawingNum and estD.projectId = estCScf.projectId and estD.tag = estCScf.tag),0) as 'DECK Material D',
+--EQUIPMENT
+ISNULL((select estB.SCOSTEB from EstCostScf as estB where estB.idDrawingNum = estCScf.idDrawingNum and estB.projectId = estCScf.projectId and estB.tag = estCScf.tag),0) as 'SCF Equipment B',
+ISNULL((select estD.SCOSTED from EstCostScf as estD where estD.idDrawingNum = estCScf.idDrawingNum and estD.projectId = estCScf.projectId and estD.tag = estCScf.tag),0) as 'SCF Equipment D',
+ISNULL((select estB.SCOSTEB from EstCostBuild as estB where estB.idDrawingNum = estCScf.idDrawingNum and estB.projectId = estCScf.projectId and estB.tag = estCScf.tag),0) as 'DECK Equipment B',
+ISNULL((select estD.SCOSTEDD from EstCostDism as estD where estD.idDrawingNum = estCScf.idDrawingNum and estD.projectId = estCScf.projectId and estD.tag = estCScf.tag),0) as 'DECK Equipment D'
+
+from EstCostScf as estCScf
+inner join scaffoldEst as scf on scf.idDrawingNum = estCScf.idDrawingNum and scf.tag = estCScf.tag
+inner join drawing as dr on dr.idDrawingNum = estCScf.idDrawingNum
+inner join projectClientEst as po on po.projectId = estCScf.projectId
+inner join clientsEst as cl on cl.idClientEst = po.idClientEst
+inner join HomeAddress as ha on ha.idHomeAdress = cl.idHomeAdress
+where estCScf.projectId  = @projectId
+end
+go

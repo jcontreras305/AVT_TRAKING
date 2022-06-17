@@ -871,7 +871,7 @@ end"
             Dim flag As Boolean = True
             For Each row As DataGridViewRow In tbl.SelectedRows()
                 Dim cmd As New SqlCommand
-                If (row.Cells("systemPPId").Value Is Nothing Or row.Cells("systemPPId").Value = "") And (row.Cells("optionPPId").Value Is Nothing Or row.Cells("optionPPId").Value = "") And (row.Cells("sizePPId").Value Is Nothing Or row.Cells("sizePPId").Value = "") Then
+                If (row.Cells("systemPPId").Value.ToString() Is Nothing Or row.Cells("systemPPId").Value.ToString() = "") And (row.Cells("optionPPId").Value.ToString() Is Nothing Or row.Cells("optionPPId").Value.ToString() = "") And (row.Cells("sizePPId").Value.ToString() Is Nothing Or row.Cells("sizePPId").Value.ToString() = "") Then
                     cmd.CommandText = "if(select COUNT(*) from ppPaintUnitRate where systemPntPP='" + row.Cells("SystemPP").Value.ToString + "' and pntOption = '" + row.Cells("optionPP").Value.ToString + "' and size = " + row.Cells("sizePP").Value.ToString + ")=0
                         begin
 	                        insert into ppPaintUnitRate values('" + row.Cells("SystemPP").Value.ToString() + "','" + row.Cells("optionPP").Value.ToString() + "'," + row.Cells("sizePP").Value.ToString() + "," + row.Cells("laborProdPP").Value.ToString() + "," + row.Cells("matRatePP").Value.ToString() + "," + row.Cells("eqRatePP").Value.ToString() + ")
@@ -1722,6 +1722,315 @@ end"
             dr.Close()
             Return dt
         Catch ex As Exception
+            Return Nothing
+        Finally
+            desconectar()
+        End Try
+    End Function
+    '=====================================================================================================================================================================
+    '=========== METODOS EQIPMNET IR HC ==================================================================================================================================
+    '=====================================================================================================================================================================
+
+    Public Function selectEqIRHC(ByVal tbl As DataGridView) As Boolean
+        Try
+            conectar()
+            Dim cmd As New SqlCommand("select [type],thickness,laborProd,matRate,eqRate from EqIRHC", conn)
+            Dim dr As SqlDataReader = cmd.ExecuteReader()
+            tbl.Rows.Clear()
+            While dr.Read()
+                tbl.Rows.Add(dr("type"), dr("thickness"), dr("type"), dr("thickness"), dr("laborProd"), dr("matRate"), dr("eqRate"))
+            End While
+            Return True
+        Catch ex As Exception
+            MsgBox(ex.Message)
+            Return False
+        Finally
+            desconectar()
+        End Try
+    End Function
+    Public Function saveUpdateEqIRHC(ByVal tbl As DataGridView) As Boolean
+        conectar()
+        Dim tran As SqlTransaction
+        tran = conn.BeginTransaction
+        Try
+            Dim flag As Boolean = True
+            For Each row As DataGridViewRow In tbl.SelectedRows()
+                Dim cmd As New SqlCommand
+                If (row.Cells("idTypeEqIRHC").Value Is Nothing Or If(row.Cells("idTypeEqIRHC").Value Is Nothing, "", row.Cells("idTypeEqIRHC").Value.ToString()) = "") And (row.Cells("idThickIEqRHC").Value Is Nothing Or If(row.Cells("idThickIEqRHC").Value Is Nothing, "", row.Cells("idThickIEqRHC").Value.ToString()) = "") Then
+                    cmd.CommandText = "if (select count(*) from EqIRHC where [type]= '" + row.Cells("TypeEqIRHC").Value.ToString() + "' and thickness =" + row.Cells("ThicknessEqIRHC").Value.ToString() + " )=0
+                        begin 
+	                        insert into EqIRHC values ('" + row.Cells("TypeEqIRHC").Value.ToString() + "'," + row.Cells("ThicknessEqIRHC").Value.ToString() + "," + row.Cells("LaborProdEqIRHC").Value.ToString() + "," + row.Cells("MaterialRateEqIRHC").Value.ToString() + "," + row.Cells("EquipmentEqIRHC").Value.ToString() + ")
+                        end"
+                Else
+                    cmd.CommandText = "if (select count(*) from EqIRHC where [type]='" + row.Cells("idTypeEqIRHC").Value.ToString + "' and thickness =" + row.Cells("idThickIEqRHC").Value.ToString + ")>0
+                        begin 
+	                        update EqIRHC set [type] = '" + row.Cells("TypeEqIRHC").Value.ToString + "' , thickness = '" + row.Cells("ThicknessEqIRHC").Value.ToString + "' , laborProd = " + row.Cells("LaborProdEqIRHC").Value.ToString + " , matRate = " + row.Cells("MaterialRateEqIRHC").Value.ToString + ", eqRate = " + row.Cells("EquipmentEqIRHC").Value.ToString + " where [type] = '" + row.Cells("idTypeEqIRHC").Value.ToString + "' and thickness = " + row.Cells("idThickIEqRHC").Value.ToString + "
+                        end"
+                End If
+                cmd.Connection = conn
+                cmd.Transaction = tran
+                If cmd.ExecuteNonQuery > 0 Then
+                    flag = True
+                Else
+                    flag = False
+                    Exit For
+                End If
+            Next
+            If flag Then
+                tran.Commit()
+                Return True
+            Else
+                tran.Rollback()
+                Return False
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message())
+            Return False
+        Finally
+            desconectar()
+        End Try
+    End Function
+    Public Function deleteEqIRHC(ByVal tbl As DataGridView) As Boolean
+        conectar()
+        Dim tran As SqlTransaction
+        tran = conn.BeginTransaction
+        Try
+            Dim flag As Boolean = True
+            For Each row As DataGridViewRow In tbl.SelectedRows()
+                If (row.Cells("idTypeEqIRHC").Value IsNot Nothing Or If(row.Cells("idTypeEqIRHC").Value Is Nothing, "", row.Cells("idTypeEqIRHC").Value.ToString()) = "") And (row.Cells("idThickIEqRHC").Value IsNot Nothing Or If(row.Cells("idThickIEqRHC").Value Is Nothing, "", row.Cells("idThickIEqRHC").Value.ToString) = "") Then
+                    Dim cmd As New SqlCommand("delete eqInsUnitRate where [type]='" + row.Cells("idTypeEqIRHC").Value.ToString() + "' and thickness = " + row.Cells("idThickIEqRHC").Value.ToString() + "", conn)
+                    cmd.Transaction = tran
+                    If cmd.ExecuteNonQuery > 0 Then
+                        flag = True
+                    Else
+                        flag = False
+                        Exit For
+                    End If
+                Else
+                    flag = True
+                End If
+            Next
+            If flag Then
+                tran.Commit()
+                Return True
+            Else
+                tran.Rollback()
+                Return False
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message)
+            Return False
+        Finally
+            desconectar()
+        End Try
+    End Function
+    Public Function llenarComboCellEqIRHC(ByVal cmb As DataGridViewComboBoxCell) As Data.DataTable
+        Try
+            conectar()
+            Dim cmd As New SqlCommand("select [type],thickness,laborProd,matRate,eqRate from EqIRHC", conn)
+            Dim dt As New Data.DataTable
+            dt.Columns.Add("type")
+            dt.Columns.Add("thickness")
+            dt.Columns.Add("laborProd")
+            dt.Columns.Add("matRate")
+            dt.Columns.Add("eqRate")
+            Dim dr As SqlDataReader = cmd.ExecuteReader()
+            cmb.Items.Clear()
+            While dr.Read()
+                cmb.Items.Add(dr("type") + "|" + dr("thickness"))
+                dt.Rows.Add(dr("type"), dr("thickness"), dr("laborProd"), dr("matRate"), dr("eqRate"))
+            End While
+            dr.Close()
+            Return dt
+        Catch ex As Exception
+            MsgBox(ex.Message())
+            Return Nothing
+        Finally
+            desconectar()
+        End Try
+    End Function
+    Public Function llenarComboEqIRHC(ByVal cmb As ComboBox) As Data.DataTable
+        Try
+            conectar()
+            Dim cmd As New SqlCommand("select [type],thickness,laborProd,matRate,eqRate from EqIRHC", conn)
+            Dim dt As New Data.DataTable
+            dt.Columns.Add("type")
+            dt.Columns.Add("thickness")
+            dt.Columns.Add("laborProd")
+            dt.Columns.Add("matRate")
+            dt.Columns.Add("eqRate")
+            Dim dr As SqlDataReader = cmd.ExecuteReader()
+            Dim item As String = If(cmb.SelectedItem Is Nothing, "", cmb.SelectedItem.ToString())
+            cmb.Items.Clear()
+            While dr.Read()
+                If cmb.FindString(dr("type")) = -1 Then
+                    cmb.Items.Add(dr("type"))
+                End If
+                dt.Rows.Add(dr("type"), dr("thickness"), dr("laborProd"), dr("matRate"), dr("eqRate"))
+            End While
+            If item <> "" Then
+                cmb.SelectedItem = cmb.Items(cmb.FindString(item))
+            End If
+            dr.Close()
+            Return dt
+        Catch ex As Exception
+            MsgBox(ex.Message())
+            Return Nothing
+        Finally
+            desconectar()
+        End Try
+    End Function
+
+    '=====================================================================================================================================================================
+    '=========== METODOS EQIPMNET IR HC ==================================================================================================================================
+    '=====================================================================================================================================================================
+    Public Function selectPpIRHC(ByVal tbl As DataGridView) As Boolean
+        Try
+            conectar()
+            Dim cmd As New SqlCommand("select size , [type], thickness,laborProd,matRate,eqRate from PpIRHC", conn)
+            Dim dr As SqlDataReader = cmd.ExecuteReader()
+            tbl.Rows.Clear()
+            While dr.Read()
+                tbl.Rows.Add(dr("size"), dr("type"), dr("thickness"), dr("size"), dr("type"), dr("thickness"), dr("laborProd"), dr("matRate"), dr("eqRate"))
+            End While
+            Return True
+        Catch ex As Exception
+            MsgBox(ex.Message)
+            Return False
+        Finally
+            desconectar()
+        End Try
+    End Function
+    Public Function saveUpdatePpIRHC(ByVal tbl As DataGridView) As Boolean
+        conectar()
+        Dim tran As SqlTransaction
+        tran = conn.BeginTransaction
+        Try
+            Dim flag As Boolean = True
+            For Each row As DataGridViewRow In tbl.SelectedRows()
+                Dim cmd As New SqlCommand
+                If (If(row.Cells("idSizePPIRHC").Value Is Nothing, "", row.Cells("idSizePPIRHC").Value.ToString) = "") And (If(row.Cells("idTypePPIRHC").Value Is Nothing, "", row.Cells("idTypePPIRHC").Value.ToString) = "") And (If(row.Cells("idThicknessPPIRHC").Value Is Nothing, "", row.Cells("idThicknessPPIRHC").Value.ToString()) = "") Then
+                    cmd.CommandText = "if (select count(*) from PpIRHC where size = " + row.Cells("SizePPIRHC").Value.ToString() + " and [type]= '" + row.Cells("TypePPIRHC").Value.ToString() + "' and thickness = " + row.Cells("ThicknessPPIRHC").Value.ToString() + ")=0
+begin 
+	insert into PpIRHC values (" + row.Cells("SizePPIRHC").Value.ToString() + " , '" + row.Cells("TypePPIRHC").Value.ToString() + "' , " + row.Cells("ThicknessPPIRHC").Value.ToString() + ", " + row.Cells("LaborProdPPIRHC").Value.ToString() + ", " + row.Cells("MaterialRatePPIRHC").Value.ToString() + ", " + row.Cells("EquipmentRatePPIRHC").Value.ToString() + ")
+end"
+                Else
+                    cmd.CommandText = "if(select count(*) from PpIRHC where size = " + row.Cells("idSizePPIRHC").Value.ToString() + " and [type] = '" + row.Cells("idTypePPIRHC").Value.ToString() + "' and thickness = " + row.Cells("idThicknessPPIRHC").Value.ToString() + ")>0
+begin
+	update PpIRHC set size = " + row.Cells("SizePPIRHC").Value.ToString() + ", [type] = '" + row.Cells("TypePPIRHC").Value.ToString() + "', thickness = " + row.Cells("ThicknessPPIRHC").Value.ToString() + ", laborProd = " + row.Cells("LaborProdPPIRHC").Value.ToString() + ", matRate= " + row.Cells("MaterialRatePPIRHC").Value.ToString() + ", eqRate = " + row.Cells("EquipmentRatePPIRHC").Value.ToString() + " where size = " + row.Cells("idSizePPIRHC").Value.ToString() + " and [type] = '" + row.Cells("idTypePPIRHC").Value.ToString() + "' and thickness = " + row.Cells("idThicknessPPIRHC").Value.ToString() + "
+end
+go"
+                End If
+                cmd.Connection = conn
+                cmd.Transaction = tran
+                If cmd.ExecuteNonQuery > 0 Then
+                    flag = True
+                Else
+                    flag = False
+                    Exit For
+                End If
+            Next
+            If flag Then
+                tran.Commit()
+                Return True
+            Else
+                tran.Rollback()
+                Return False
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message())
+            Return False
+        Finally
+            desconectar()
+        End Try
+    End Function
+    Public Function deletePpIRHC(ByVal tbl As DataGridView) As Boolean
+        conectar()
+        Dim tran As SqlTransaction
+        tran = conn.BeginTransaction
+        Try
+            Dim flag As Boolean = True
+            For Each row As DataGridViewRow In tbl.SelectedRows()
+                If (If(row.Cells("idSizePPIRHC").Value Is Nothing, "", row.Cells("idSizePPIRHC").Value.ToString()) <> "") And (If(row.Cells("idTypePPIRHC").Value Is Nothing, "", row.Cells("idTypePPIRHC").Value.ToString()) <> "") And (If(row.Cells("idThicknessPPIRHC").Value Is Nothing, "", row.Cells("idThicknessPPIRHC").Value.ToString()) <> "") Then
+                    Dim cmd As New SqlCommand("delete PpIRHC where size = " + row.Cells("idSizePPIRHC").Value.ToString() + " and [type]='" + row.Cells("idTypePPIRHC").Value.ToString() + "' and thickness = " + row.Cells("idThicknessPPIRHC").Value.ToString() + "", conn)
+                    cmd.Transaction = tran
+                    If cmd.ExecuteNonQuery > 0 Then
+                        flag = True
+                    Else
+                        flag = False
+                        Exit For
+                    End If
+                Else
+                    flag = True
+                End If
+            Next
+            If flag Then
+                tran.Commit()
+                Return True
+            Else
+                tran.Rollback()
+                Return False
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message)
+            Return False
+        Finally
+            desconectar()
+        End Try
+    End Function
+    Public Function llenarComboCellPpIRHC(ByVal cmb As DataGridViewComboBoxCell) As Data.DataTable
+        Try
+            conectar()
+            Dim cmd As New SqlCommand("select size,[type],thickness,laborProd,matRate,eqRate from PpIRHC", conn)
+            Dim dt As New Data.DataTable
+            dt.Columns.Add("size")
+            dt.Columns.Add("type")
+            dt.Columns.Add("thickness")
+            dt.Columns.Add("laborProd")
+            dt.Columns.Add("matRate")
+            dt.Columns.Add("eqRate")
+            Dim dr As SqlDataReader = cmd.ExecuteReader()
+            cmb.Items.Clear()
+            While dr.Read()
+                cmb.Items.Add(dr("size") + "|" + dr("type") + "|" + dr("thickness"))
+                dt.Rows.Add(dr("size"), dr("type"), dr("thickness"), dr("laborProd"), dr("matRate"), dr("eqRate"))
+            End While
+            dr.Close()
+            Return dt
+        Catch ex As Exception
+            MsgBox(ex.Message())
+            Return Nothing
+        Finally
+            desconectar()
+        End Try
+    End Function
+    Public Function llenarComboPpIRHC(ByVal cmb As ComboBox) As Data.DataTable
+        Try
+            conectar()
+            Dim cmd As New SqlCommand("select size,[type],thickness,laborProd,matRate,eqRate from PpIRHC", conn)
+            Dim dt As New Data.DataTable
+            dt.Columns.Add("size")
+            dt.Columns.Add("type")
+            dt.Columns.Add("thickness")
+            dt.Columns.Add("laborProd")
+            dt.Columns.Add("matRate")
+            dt.Columns.Add("eqRate")
+            Dim dr As SqlDataReader = cmd.ExecuteReader()
+            Dim item As String = If(cmb.SelectedItem Is Nothing, "", cmb.SelectedItem.ToString())
+            cmb.Items.Clear()
+            While dr.Read()
+                If cmb.FindString(dr("type")) = -1 Then
+                    cmb.Items.Add(dr("type"))
+                End If
+                dt.Rows.Add(dr("size"), dr("type"), dr("thickness"), dr("laborProd"), dr("matRate"), dr("eqRate"))
+            End While
+            If item <> "" Then
+                cmb.SelectedItem = cmb.Items(cmb.FindString(item))
+            End If
+            dr.Close()
+            Return dt
+        Catch ex As Exception
+            MsgBox(ex.Message())
             Return Nothing
         Finally
             desconectar()
