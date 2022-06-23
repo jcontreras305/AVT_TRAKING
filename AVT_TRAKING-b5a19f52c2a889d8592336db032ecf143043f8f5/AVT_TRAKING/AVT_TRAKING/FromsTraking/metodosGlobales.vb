@@ -185,6 +185,7 @@ inner join clientsEst as cl on cl.idClientEst = po.idClientEst " + If(numberClie
     ''' </summary>
     ''' <param name="combo"></param>
     ''' <param name="numberClient"></param>
+    ''' <param name="project"></param>
     ''' <returns>Retorna un True si no hubo problemas con la consulta</returns>
     Public Function llenarComboDrawing(ByVal combo As ComboBox, ByVal numberClient As String, ByVal project As String) As Boolean
         Try

@@ -26,22 +26,22 @@ Partial Class MenuEstimation
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.TableLayoutPanel3 = New System.Windows.Forms.TableLayoutPanel()
         Me.Panel4 = New System.Windows.Forms.Panel()
+        Me.btnReports = New System.Windows.Forms.Button()
         Me.pnlProyects = New System.Windows.Forms.Panel()
         Me.Button7 = New System.Windows.Forms.Button()
         Me.Button6 = New System.Windows.Forms.Button()
-        Me.Button5 = New System.Windows.Forms.Button()
+        Me.btnDrawingProgress = New System.Windows.Forms.Button()
         Me.Button4 = New System.Windows.Forms.Button()
+        Me.btnProjects = New System.Windows.Forms.Button()
         Me.pnlSetting = New System.Windows.Forms.Panel()
         Me.Button3 = New System.Windows.Forms.Button()
         Me.Button2 = New System.Windows.Forms.Button()
+        Me.btnSettings = New System.Windows.Forms.Button()
         Me.TableLayoutPanel2 = New System.Windows.Forms.TableLayoutPanel()
         Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.btnSalir = New System.Windows.Forms.Button()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.PanelViewFrom = New System.Windows.Forms.Panel()
-        Me.btnReports = New System.Windows.Forms.Button()
-        Me.btnProjects = New System.Windows.Forms.Button()
-        Me.btnSettings = New System.Windows.Forms.Button()
-        Me.btnSalir = New System.Windows.Forms.Button()
         Me.TableLayoutPanel1.SuspendLayout()
         Me.Panel1.SuspendLayout()
         Me.TableLayoutPanel3.SuspendLayout()
@@ -105,11 +105,28 @@ Partial Class MenuEstimation
         Me.Panel4.Size = New System.Drawing.Size(188, 425)
         Me.Panel4.TabIndex = 0
         '
+        'btnReports
+        '
+        Me.btnReports.Dock = System.Windows.Forms.DockStyle.Top
+        Me.btnReports.FlatAppearance.BorderSize = 0
+        Me.btnReports.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(59, Byte), Integer), CType(CType(69, Byte), Integer), CType(CType(79, Byte), Integer))
+        Me.btnReports.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnReports.Font = New System.Drawing.Font("Nirmala UI", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnReports.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.btnReports.Image = Global.AVT_TRAKING.My.Resources.Resources.project
+        Me.btnReports.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnReports.Location = New System.Drawing.Point(0, 334)
+        Me.btnReports.Name = "btnReports"
+        Me.btnReports.Size = New System.Drawing.Size(188, 55)
+        Me.btnReports.TabIndex = 6
+        Me.btnReports.Text = "Reports"
+        Me.btnReports.UseVisualStyleBackColor = True
+        '
         'pnlProyects
         '
         Me.pnlProyects.Controls.Add(Me.Button7)
         Me.pnlProyects.Controls.Add(Me.Button6)
-        Me.pnlProyects.Controls.Add(Me.Button5)
+        Me.pnlProyects.Controls.Add(Me.btnDrawingProgress)
         Me.pnlProyects.Controls.Add(Me.Button4)
         Me.pnlProyects.Dock = System.Windows.Forms.DockStyle.Top
         Me.pnlProyects.Location = New System.Drawing.Point(0, 185)
@@ -155,24 +172,24 @@ Partial Class MenuEstimation
         Me.Button6.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         Me.Button6.UseVisualStyleBackColor = False
         '
-        'Button5
+        'btnDrawingProgress
         '
-        Me.Button5.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(48, Byte), Integer), CType(CType(95, Byte), Integer))
-        Me.Button5.Dock = System.Windows.Forms.DockStyle.Top
-        Me.Button5.FlatAppearance.BorderSize = 0
-        Me.Button5.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(59, Byte), Integer), CType(CType(69, Byte), Integer), CType(CType(79, Byte), Integer))
-        Me.Button5.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.Button5.Font = New System.Drawing.Font("Nirmala UI", 13.0!, System.Drawing.FontStyle.Bold)
-        Me.Button5.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.Button5.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.Button5.Location = New System.Drawing.Point(0, 37)
-        Me.Button5.Name = "Button5"
-        Me.Button5.Padding = New System.Windows.Forms.Padding(0, 0, 6, 0)
-        Me.Button5.Size = New System.Drawing.Size(188, 37)
-        Me.Button5.TabIndex = 8
-        Me.Button5.Text = "Drawing Progress"
-        Me.Button5.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.Button5.UseVisualStyleBackColor = False
+        Me.btnDrawingProgress.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(48, Byte), Integer), CType(CType(95, Byte), Integer))
+        Me.btnDrawingProgress.Dock = System.Windows.Forms.DockStyle.Top
+        Me.btnDrawingProgress.FlatAppearance.BorderSize = 0
+        Me.btnDrawingProgress.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(59, Byte), Integer), CType(CType(69, Byte), Integer), CType(CType(79, Byte), Integer))
+        Me.btnDrawingProgress.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnDrawingProgress.Font = New System.Drawing.Font("Nirmala UI", 13.0!, System.Drawing.FontStyle.Bold)
+        Me.btnDrawingProgress.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.btnDrawingProgress.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnDrawingProgress.Location = New System.Drawing.Point(0, 37)
+        Me.btnDrawingProgress.Name = "btnDrawingProgress"
+        Me.btnDrawingProgress.Padding = New System.Windows.Forms.Padding(0, 0, 6, 0)
+        Me.btnDrawingProgress.Size = New System.Drawing.Size(188, 37)
+        Me.btnDrawingProgress.TabIndex = 8
+        Me.btnDrawingProgress.Text = "Drawing Progress"
+        Me.btnDrawingProgress.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.btnDrawingProgress.UseVisualStyleBackColor = False
         '
         'Button4
         '
@@ -192,6 +209,23 @@ Partial Class MenuEstimation
         Me.Button4.Text = "Estimating"
         Me.Button4.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         Me.Button4.UseVisualStyleBackColor = False
+        '
+        'btnProjects
+        '
+        Me.btnProjects.Dock = System.Windows.Forms.DockStyle.Top
+        Me.btnProjects.FlatAppearance.BorderSize = 0
+        Me.btnProjects.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(59, Byte), Integer), CType(CType(69, Byte), Integer), CType(CType(79, Byte), Integer))
+        Me.btnProjects.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnProjects.Font = New System.Drawing.Font("Nirmala UI", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnProjects.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.btnProjects.Image = Global.AVT_TRAKING.My.Resources.Resources.catsemployee
+        Me.btnProjects.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnProjects.Location = New System.Drawing.Point(0, 130)
+        Me.btnProjects.Name = "btnProjects"
+        Me.btnProjects.Size = New System.Drawing.Size(188, 55)
+        Me.btnProjects.TabIndex = 4
+        Me.btnProjects.Text = "   Projects"
+        Me.btnProjects.UseVisualStyleBackColor = True
         '
         'pnlSetting
         '
@@ -241,6 +275,24 @@ Partial Class MenuEstimation
         Me.Button2.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         Me.Button2.UseVisualStyleBackColor = False
         '
+        'btnSettings
+        '
+        Me.btnSettings.Dock = System.Windows.Forms.DockStyle.Top
+        Me.btnSettings.FlatAppearance.BorderSize = 0
+        Me.btnSettings.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(59, Byte), Integer), CType(CType(69, Byte), Integer), CType(CType(79, Byte), Integer))
+        Me.btnSettings.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnSettings.Font = New System.Drawing.Font("Nirmala UI", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnSettings.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.btnSettings.Image = Global.AVT_TRAKING.My.Resources.Resources.code
+        Me.btnSettings.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnSettings.Location = New System.Drawing.Point(0, 0)
+        Me.btnSettings.Name = "btnSettings"
+        Me.btnSettings.Padding = New System.Windows.Forms.Padding(10, 0, 0, 0)
+        Me.btnSettings.Size = New System.Drawing.Size(188, 55)
+        Me.btnSettings.TabIndex = 2
+        Me.btnSettings.Text = "Settings"
+        Me.btnSettings.UseVisualStyleBackColor = True
+        '
         'TableLayoutPanel2
         '
         Me.TableLayoutPanel2.BackColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(64, Byte), Integer))
@@ -267,6 +319,20 @@ Partial Class MenuEstimation
         Me.Panel2.Size = New System.Drawing.Size(772, 44)
         Me.Panel2.TabIndex = 0
         '
+        'btnSalir
+        '
+        Me.btnSalir.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnSalir.FlatAppearance.BorderSize = 0
+        Me.btnSalir.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnSalir.ForeColor = System.Drawing.Color.Red
+        Me.btnSalir.Image = Global.AVT_TRAKING.My.Resources.Resources._exit
+        Me.btnSalir.Location = New System.Drawing.Point(724, 7)
+        Me.btnSalir.Margin = New System.Windows.Forms.Padding(2)
+        Me.btnSalir.Name = "btnSalir"
+        Me.btnSalir.Size = New System.Drawing.Size(43, 28)
+        Me.btnSalir.TabIndex = 4
+        Me.btnSalir.UseVisualStyleBackColor = True
+        '
         'Label1
         '
         Me.Label1.AutoSize = True
@@ -287,72 +353,6 @@ Partial Class MenuEstimation
         Me.PanelViewFrom.Name = "PanelViewFrom"
         Me.PanelViewFrom.Size = New System.Drawing.Size(772, 599)
         Me.PanelViewFrom.TabIndex = 1
-        '
-        'btnReports
-        '
-        Me.btnReports.Dock = System.Windows.Forms.DockStyle.Top
-        Me.btnReports.FlatAppearance.BorderSize = 0
-        Me.btnReports.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(59, Byte), Integer), CType(CType(69, Byte), Integer), CType(CType(79, Byte), Integer))
-        Me.btnReports.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnReports.Font = New System.Drawing.Font("Nirmala UI", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnReports.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.btnReports.Image = Global.AVT_TRAKING.My.Resources.Resources.project
-        Me.btnReports.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnReports.Location = New System.Drawing.Point(0, 334)
-        Me.btnReports.Name = "btnReports"
-        Me.btnReports.Size = New System.Drawing.Size(188, 55)
-        Me.btnReports.TabIndex = 6
-        Me.btnReports.Text = "Reports"
-        Me.btnReports.UseVisualStyleBackColor = True
-        '
-        'btnProjects
-        '
-        Me.btnProjects.Dock = System.Windows.Forms.DockStyle.Top
-        Me.btnProjects.FlatAppearance.BorderSize = 0
-        Me.btnProjects.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(59, Byte), Integer), CType(CType(69, Byte), Integer), CType(CType(79, Byte), Integer))
-        Me.btnProjects.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnProjects.Font = New System.Drawing.Font("Nirmala UI", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnProjects.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.btnProjects.Image = Global.AVT_TRAKING.My.Resources.Resources.catsemployee
-        Me.btnProjects.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnProjects.Location = New System.Drawing.Point(0, 130)
-        Me.btnProjects.Name = "btnProjects"
-        Me.btnProjects.Size = New System.Drawing.Size(188, 55)
-        Me.btnProjects.TabIndex = 4
-        Me.btnProjects.Text = "   Projects"
-        Me.btnProjects.UseVisualStyleBackColor = True
-        '
-        'btnSettings
-        '
-        Me.btnSettings.Dock = System.Windows.Forms.DockStyle.Top
-        Me.btnSettings.FlatAppearance.BorderSize = 0
-        Me.btnSettings.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(59, Byte), Integer), CType(CType(69, Byte), Integer), CType(CType(79, Byte), Integer))
-        Me.btnSettings.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnSettings.Font = New System.Drawing.Font("Nirmala UI", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnSettings.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.btnSettings.Image = Global.AVT_TRAKING.My.Resources.Resources.code
-        Me.btnSettings.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnSettings.Location = New System.Drawing.Point(0, 0)
-        Me.btnSettings.Name = "btnSettings"
-        Me.btnSettings.Padding = New System.Windows.Forms.Padding(10, 0, 0, 0)
-        Me.btnSettings.Size = New System.Drawing.Size(188, 55)
-        Me.btnSettings.TabIndex = 2
-        Me.btnSettings.Text = "Settings"
-        Me.btnSettings.UseVisualStyleBackColor = True
-        '
-        'btnSalir
-        '
-        Me.btnSalir.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnSalir.FlatAppearance.BorderSize = 0
-        Me.btnSalir.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnSalir.ForeColor = System.Drawing.Color.Red
-        Me.btnSalir.Image = Global.AVT_TRAKING.My.Resources.Resources._exit
-        Me.btnSalir.Location = New System.Drawing.Point(724, 7)
-        Me.btnSalir.Margin = New System.Windows.Forms.Padding(2)
-        Me.btnSalir.Name = "btnSalir"
-        Me.btnSalir.Size = New System.Drawing.Size(43, 28)
-        Me.btnSalir.TabIndex = 4
-        Me.btnSalir.UseVisualStyleBackColor = True
         '
         'MenuEstimation
         '
@@ -390,7 +390,7 @@ Partial Class MenuEstimation
     Friend WithEvents pnlProyects As Panel
     Friend WithEvents Button7 As Button
     Friend WithEvents Button6 As Button
-    Friend WithEvents Button5 As Button
+    Friend WithEvents btnDrawingProgress As Button
     Friend WithEvents Button4 As Button
     Friend WithEvents btnProjects As Button
     Friend WithEvents pnlSetting As Panel

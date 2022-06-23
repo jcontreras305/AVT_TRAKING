@@ -34,6 +34,8 @@
         If mtdClients.saveClient(mtdClients) Then
             MsgBox("Successful")
             mtdClients.selectClientsEst()
+            btnSave.Enabled = True
+            btnDelete.Enabled = True
         End If
     End Sub
 

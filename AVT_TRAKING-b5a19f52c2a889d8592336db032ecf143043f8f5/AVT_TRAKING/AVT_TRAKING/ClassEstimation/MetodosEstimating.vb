@@ -1,6 +1,10 @@
 ﻿Imports System.Data.SqlClient
 Public Class MetodosEstimating
     Inherits ConnectioDB
+    '====================================================================================================================================================================================
+    '========== METODOS PARA DRAWING ====================================================================================================================================================
+    '====================================================================================================================================================================================
+
     Public Function selectProjectsDrawing() As Data.DataTable
         Try
             conectar()
@@ -21,6 +25,64 @@ Public Class MetodosEstimating
             Return Nothing
         End Try
     End Function
+    Public Function saveUpdateDrawing(ByVal idDrawing As String, ByVal descriptionDrawing As String, ByVal projectId As String, Optional lastIdDrawing As String = "") As Boolean
+        Try
+            conectar()
+            Dim cmdDrawing As New SqlCommand
+            If lastIdDrawing = "" Then 'insert 
+                cmdDrawing.CommandText = "if (select COUNT (*) from drawing where idDrawingNum = '" + idDrawing + "')=0
+                    begin
+	                    insert into drawing values('" + idDrawing + "','" + descriptionDrawing + "','" + projectId + "')
+                    end"
+            Else ' update
+                cmdDrawing.CommandText = "if (select COUNT (*) from drawing where idDrawingNum = '" + idDrawing + "')=0 and (select COUNT (*) from drawing where idDrawingNum = '" + lastIdDrawing + "' and projectId= '" + projectId + "')=1  
+                    begin 
+	                    update drawing set idDrawingNum='" + idDrawing + "',[description]='" + descriptionDrawing + "',projectId='" + projectId + "' where idDrawingNum = '" + lastIdDrawing + "'
+                    end"
+            End If
+            cmdDrawing.Connection = conn
+            If cmdDrawing.ExecuteNonQuery > 0 Then
+                MsgBox("Successful")
+                Return True
+            Else
+                MsgBox("Is probably that this Drawing Project was inserted.")
+                Return False
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message)
+            Return False
+        Finally
+            desconectar()
+        End Try
+    End Function
+    Public Function deleteDrawing(ByVal project As String, ByVal drawing As String) As Boolean
+        Try
+            conectar()
+            Dim cmd As New SqlCommand("sp_delete_drawing", conn)
+            cmd.CommandType = CommandType.StoredProcedure
+            cmd.Parameters.AddWithValue("@idDrawingNum", drawing)
+            cmd.Parameters.AddWithValue("@projectId", project)
+            cmd.Parameters.Add("@msg", SqlDbType.VarChar, 100).Direction = ParameterDirection.Output
+            Dim resultCmd = cmd.ExecuteNonQuery
+            If resultCmd > 0 Then
+                Dim resultado As String = cmd.Parameters("@msg").Value.ToString()
+                MsgBox(resultado)
+                Return True
+            Else
+                MsgBox("Error")
+                Return False
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message())
+            Return False
+        Finally
+            desconectar()
+        End Try
+    End Function
+    '========================================================================================================================================================================
+    '===========METODOS DE SCAFFOLD =========================================================================================================================================
+    '========================================================================================================================================================================
+
     Public Function selectSacffoldEst() As Data.DataTable
         Try
             conectar()
@@ -209,7 +271,7 @@ where cl.numberClient = " + numberClient + " and po.projectId = '" + project + "
             desconectar()
         End Try
     End Function
-    Public Function deleteSCFDrawing(ByVal tbl As DataGridView) As Boolean
+    Public Function deleteSCFDrawing(ByVal tbl As DataGridView, ByVal idDrawing As String) As Boolean
         conectar()
         Dim tran As SqlTransaction
         tran = conn.BeginTransaction
@@ -218,13 +280,28 @@ where cl.numberClient = " + numberClient + " and po.projectId = '" + project + "
             For Each row As DataGridViewRow In tbl.SelectedRows()
                 If row.Cells("TagId").Value IsNot Nothing Or row.Cells("TagId").Value = "" Then
                     Dim cmd As New SqlCommand("delete scaffoldEst where tag = '" + row.Cells("TagId").Value.ToString() + "'", conn)
+                    Dim cmdCostScf As New SqlCommand("delete from EstCostScf  where tag = '" + row.Cells("TagId").Value.ToString() + "' and idDrawingNum = '" + idDrawing + "'", conn)
+                    Dim cmdCostBuild As New SqlCommand("delete from EstCostBuild where tag = '" + row.Cells("TagId").Value.ToString() + "' and idDrawingNum = '" + idDrawing + "'", conn)
+                    cmdCostScf.Transaction = tran
                     cmd.Transaction = tran
-                    If cmd.ExecuteNonQuery > 0 Then
-                        flag = True
+                    cmdCostBuild.Transaction = tran
+                    If cmdCostBuild.ExecuteNonQuery > 0 Then
+                        If cmdCostScf.ExecuteNonQuery > 0 Then
+                            If cmd.ExecuteNonQuery > 0 Then
+                                flag = True
+                            Else
+                                flag = False
+                                Exit For
+                            End If
+                        Else
+                            flag = False
+                            Exit For
+                        End If
                     Else
                         flag = False
                         Exit For
                     End If
+
                 Else
                     flag = True
                 End If
@@ -394,7 +471,7 @@ where cl.numberClient = " + numberClient + " and po.projectId = '" + project + "
             desconectar()
         End Try
     End Function
-    Public Function deleteEqDrawingProject(ByVal tbl As Data.DataTable) As Boolean
+    Public Function deleteEqDrawingProject(ByVal tbl As Data.DataTable, ByVal idDrawing As String) As Boolean
         conectar()
         Dim tran As SqlTransaction
         tran = conn.BeginTransaction
@@ -403,9 +480,16 @@ where cl.numberClient = " + numberClient + " and po.projectId = '" + project + "
             For Each row As Data.DataRow In tbl.Rows()
                 If row.ItemArray(0) IsNot Nothing Or row.ItemArray(0) = "" Then
                     Dim cmd As New SqlCommand("delete from equipmentEst where idEquimentEst = " + row.ItemArray(0).ToString() + "", conn)
+                    Dim cmdCostEq As New SqlCommand("delete from EstCostEq where tag = '" + row.ItemArray(0).ToString() + "' and idDrawingNum = '" + idDrawing + "'", conn)
                     cmd.Transaction = tran
-                    If cmd.ExecuteNonQuery > 0 Then
-                        flag = True
+                    cmdCostEq.Transaction = tran
+                    If cmdCostEq.ExecuteNonQuery > 0 Then
+                        If cmd.ExecuteNonQuery > 0 Then
+                            flag = True
+                        Else
+                            flag = False
+                            Exit For
+                        End If
                     Else
                         flag = False
                         Exit For
@@ -463,7 +547,7 @@ pp.acm,pp.st,pp.idDrawingNum from pipingEst as pp
 inner join drawing as dr on dr.idDrawingNum = pp.idDrawingNum
 inner join projectClientEst as po on po.projectId = dr.projectId
 inner join clientsEst as cl on cl.idClientEst = po.idClientEst" +
-If(numberClient <> "", " where cl.numberClient = " + numberClient + "", "") + If(project <> "", If(numberClient <> "", " Where ", " And ") + " po.projectId = '" + project + "'", ""), connection)
+If(numberClient <> "", " where cl.numberClient = " + numberClient + "", "") + If(project <> "", If(numberClient = "", " Where ", " And ") + " po.projectId = '" + project + "'", ""), connection)
             cmd.Transaction = transaction
             Dim dt As New Data.DataTable
             If cmd.ExecuteNonQuery Then
@@ -578,9 +662,16 @@ end"
             For Each row As Data.DataRow In tbl.Rows()
                 If row.ItemArray(0) IsNot Nothing Or row.ItemArray(0) = "" Then
                     Dim cmd As New SqlCommand("delete from pipingEst where idPipingEst = " + row.ItemArray(0).ToString() + "", conn)
+                    Dim cmdEstCostPp As New SqlCommand("delete from EstCostPp where tag = '" + row.ItemArray(0).ToString() + "' and idDrawingNum = '" + row.ItemArray(37).ToString() + "'", conn)
                     cmd.Transaction = tran
-                    If cmd.ExecuteNonQuery > 0 Then
-                        flag = True
+                    cmdEstCostPp.Transaction = tran
+                    If cmdEstCostPp.ExecuteNonQuery > 0 Then
+                        If cmd.ExecuteNonQuery > 0 Then
+                            flag = True
+                        Else
+                            flag = False
+                            Exit For
+                        End If
                     Else
                         flag = False
                         Exit For

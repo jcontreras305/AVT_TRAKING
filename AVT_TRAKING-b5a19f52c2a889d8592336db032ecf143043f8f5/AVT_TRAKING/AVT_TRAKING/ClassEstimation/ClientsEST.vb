@@ -440,7 +440,7 @@ inner join projectClientEst as po on cl.idClientEst = po.idClientEst", conn)
             cmb.Items.Clear()
             While dr.Read()
                 dt.Rows.Add(dr("idClientEst").ToString(), dr("numberClient").ToString(), dr("contactName"), dr("projectId"), dr("unit").ToString(), dr("description").ToString())
-                cmb.Items.Add(dr("numberClient").ToString() + " " + dr("contactName").ToString() + " " + dr("description").ToString())
+                cmb.Items.Add(dr("numberClient").ToString() + " " + dr("projectId") + " " + dr("contactName").ToString() + " " + dr("description").ToString())
             End While
             dr.Close()
             Return dt

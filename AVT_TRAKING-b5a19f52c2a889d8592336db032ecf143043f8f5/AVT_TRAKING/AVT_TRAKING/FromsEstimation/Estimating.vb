@@ -135,8 +135,18 @@
 
         End Try
     End Sub
+    Private Sub txtDescriptionDrawing_Enter(sender As Object, e As EventArgs) Handles txtDrawingNum.Enter, txtDescriptionDrawing.Enter
+        selectTable = "Drawing"
+    End Sub
     Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
         Select Case selectTable
+            Case "Drawing"
+                If idProject <> "" And txtDrawingNum.Text <> "" Then
+                    If mtdEstimation.saveUpdateDrawing(txtDrawingNum.Text, txtDescriptionDrawing.Text, idProject, idDrawing) Then
+                        idDrawing = txtDrawingNum.Text
+                        btnCancel.Visible = False
+                    End If
+                End If
             Case "SCF"
                 If validarRowSCF() And idProject <> "" Then
                     If mtdEstimation.saveUpdateSCFDrawing(tblSCFDrawing, txtDrawingNum.Text, txtDescriptionDrawing.Text, idProject, If(idDrawing = "", "", idDrawing)) Then
@@ -190,9 +200,36 @@
     End Sub
     Private Sub btnDelete_Click(sender As Object, e As EventArgs) Handles btnDelete.Click
         Select Case selectTable
+            Case "Drawing"
+                If idDrawing <> "" Then
+                    If MessageBox.Show("Are you sure to delete The Drawing '" + idDrawing + " - " + txtDescriptionDrawing.Text + "'" + vbCrLf + "If you accept all recors realted to this Drawing Will be Deleted. ", "Important", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) = DialogResult.Yes Then
+                        If mtdEstimation.deleteDrawing(idProject, idDrawing) Then
+                            limpiarDrawing()
+                            tblProjects = mtdClients.llenarComboClientsEst(cmbProjects)
+                            tblDrawing = mtdEstimation.selectProjectsDrawing()
+                            tblAllSCFTags = mtdEstimation.selectSacffoldEst()
+                            Dim listRow() As DataRow = tblDrawing.Select("numberClient = " + idClient + "")
+                            If listRow.Length > 0 Then
+                                idDrawing = listRow(0).ItemArray(0).ToString()
+                                idProject = listRow(0).ItemArray(2).ToString()
+                                idClient = listRow(0).ItemArray(3).ToString()
+                                cargarDatosDrawing(idClient, idProject, idDrawing, True)
+                                cmbProjects.SelectedItem = cmbProjects.Items(cmbProjects.FindString(idClient))
+                            ElseIf tblDrawing.Rows IsNot Nothing Then
+                                idDrawing = tblDrawing.Rows(0).ItemArray(0).ToString()
+                                idProject = tblDrawing.Rows(0).ItemArray(2).ToString()
+                                idClient = tblDrawing.Rows(0).ItemArray(3).ToString()
+                                cargarDatosDrawing(idClient, idProject, idDrawing, True)
+                                cmbProjects.SelectedItem = cmbProjects.Items(cmbProjects.FindString(idClient))
+                            Else
+                                cmbProjects.SelectedItem = Nothing
+                            End If
+                        End If
+                    End If
+                End If
             Case "SCF"
                 If tblSCFDrawing.SelectedRows.Count > 0 Then
-                    If (mtdEstimation.deleteSCFDrawing(tblSCFDrawing)) Then
+                    If (mtdEstimation.deleteSCFDrawing(tblSCFDrawing, idDrawing)) Then
                         cargarDatosDrawing(idClient, idProject, idDrawing, True)
                         MsgBox("Successful")
                     End If
@@ -207,7 +244,7 @@
                     End If
                 Next
                 If (tblEqDrawingRead.Rows.Count > 0) Then
-                    If mtdEstimation.deleteEqDrawingProject(tblEqDrawingRead) Then
+                    If mtdEstimation.deleteEqDrawingProject(tblEqDrawingRead, idDrawing) Then
                         cargarDatosDrawing(idClient, idProject, idDrawing, True)
                         MsgBox("Successful")
                     End If
@@ -218,7 +255,7 @@
                 tblPipingProjects.Rows.Clear()
                 For Each rowpp As RowPpDrawing In rowsPpDrawing
                     If rowpp.IsSelected Then
-                        tblPipingProjects.Rows.Add(rowpp.ItemArray(0), "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "")
+                        tblPipingProjects.Rows.Add(rowpp.ItemArray(0), rowpp.ItemArray(1), rowpp.ItemArray(2), rowpp.ItemArray(3), rowpp.ItemArray(4), rowpp.ItemArray(5), rowpp.ItemArray(6), rowpp.ItemArray(7), rowpp.ItemArray(8), rowpp.ItemArray(9), rowpp.ItemArray(10), rowpp.ItemArray(11), rowpp.ItemArray(12), rowpp.ItemArray(13), rowpp.ItemArray(14), rowpp.ItemArray(15), rowpp.ItemArray(16), rowpp.ItemArray(17), rowpp.ItemArray(18), rowpp.ItemArray(19), rowpp.ItemArray(20), rowpp.ItemArray(21), rowpp.ItemArray(22), rowpp.ItemArray(23), rowpp.ItemArray(24), rowpp.ItemArray(25), rowpp.ItemArray(26), rowpp.ItemArray(27), rowpp.ItemArray(28), rowpp.ItemArray(29), rowpp.ItemArray(30), rowpp.ItemArray(31), rowpp.ItemArray(32), rowpp.ItemArray(33), rowpp.ItemArray(34), rowpp.ItemArray(35), rowpp.ItemArray(36), rowpp.ItemArray(37))
                     End If
                 Next
                 If (tblPipingProjects.Rows.Count > 0) Then
@@ -391,7 +428,7 @@
         txtUnit.Text = tblProjects.Rows(rowindex).ItemArray(4)
         txtDescription.Text = tblProjects.Rows(rowindex).ItemArray(5)
         idClient = tblProjects.Rows(rowindex).ItemArray(1)
-        cmbProjects.Text = tblProjects.Rows(rowindex).ItemArray(3)
+        'cmbProjects.Text = tblProjects.Rows(rowindex).ItemArray(3)
         idProject = tblProjects.Rows(rowindex).ItemArray(3)
         Dim arrayRows() As Data.DataRow = tblDrawing.Select("projectId = '" + tblProjects.Rows(rowindex).ItemArray(3) + "' and numberClient = '" + tblProjects.Rows(rowindex).ItemArray(1).ToString() + "'")
         If arrayRows.Length > 0 Then
@@ -403,6 +440,7 @@
             idDrawing = arrayRows(0).ItemArray(0)
             client = arrayRows(0).ItemArray(3)
             cargarDatosDrawing(client, project, drawing, True)
+            'cmbProjects.Text = tblProjects.Rows(rowindex).ItemArray(3)
         Else
             limpiarDrawing()
         End If
@@ -583,6 +621,7 @@
             rowEq.RowIndex1 = indexRow
             indexRow += 1
         Next
+        selectTable = "EQUIPMENT"
     End Sub
     Private Sub pnlRowaEq_ControlRemoved(sender As Object, e As ControlEventArgs) Handles pnlRowsEq.ControlRemoved
         Dim indexRow As Integer = 0
@@ -600,6 +639,7 @@
             rowsEqDrawing.Remove(rowsEqDrawing(newlist(i - 1)))
         Next
         ltyHearderChangueWith()
+        selectTable = "EQUIPMENT"
     End Sub
     Private Sub ltyHearderChangueWith()
         If pnlRowsEq.VerticalScroll.Visible Then
@@ -664,6 +704,7 @@
             rowPp.RowIndex = indexRow
             indexRow += 1
         Next
+        selectTable = "PIPING"
     End Sub
     Private Sub pnlRowsPiping_ControlRemoved(sender As Object, e As ControlEventArgs) Handles pnlRowsPiping.ControlRemoved
         Dim indexRow As Integer = 0
@@ -681,6 +722,7 @@
             rowsPpDrawing.Remove(rowsPpDrawing(newlist(i - 1)))
         Next
         ltyHearderChangueWithPP()
+        selectTable = "PIPING"
     End Sub
     Private Sub ltyHearderChangueWithPP()
         If pnlRowsPiping.VerticalScroll.Visible Then
@@ -706,6 +748,4 @@
 
         End Try
     End Sub
-
-
 End Class
