@@ -130,7 +130,7 @@ Partial Class Clients
         Me.txtCompanyName.Location = New System.Drawing.Point(101, 16)
         Me.txtCompanyName.Margin = New System.Windows.Forms.Padding(2)
         Me.txtCompanyName.Name = "txtCompanyName"
-        Me.txtCompanyName.Size = New System.Drawing.Size(178, 20)
+        Me.txtCompanyName.Size = New System.Drawing.Size(177, 20)
         Me.txtCompanyName.TabIndex = 6
         '
         'txtIdClient
@@ -139,7 +139,7 @@ Partial Class Clients
         Me.txtIdClient.Location = New System.Drawing.Point(80, 8)
         Me.txtIdClient.Margin = New System.Windows.Forms.Padding(2)
         Me.txtIdClient.Name = "txtIdClient"
-        Me.txtIdClient.Size = New System.Drawing.Size(148, 20)
+        Me.txtIdClient.Size = New System.Drawing.Size(172, 20)
         Me.txtIdClient.TabIndex = 2
         '
         'Label2
@@ -157,7 +157,7 @@ Partial Class Clients
         '
         Me.Label1.AutoSize = True
         Me.Label1.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.Label1.Location = New System.Drawing.Point(30, 9)
+        Me.Label1.Location = New System.Drawing.Point(31, 11)
         Me.Label1.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(43, 13)
@@ -185,7 +185,7 @@ Partial Class Clients
         Me.TableLayoutPanel2.ColumnCount = 3
         Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 47.45763!))
         Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 52.54237!))
-        Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 158.0!))
+        Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 159.0!))
         Me.TableLayoutPanel2.Controls.Add(Me.Panel10, 2, 1)
         Me.TableLayoutPanel2.Controls.Add(Me.Panel9, 1, 1)
         Me.TableLayoutPanel2.Controls.Add(Me.Panel8, 0, 1)
@@ -205,9 +205,9 @@ Partial Class Clients
         '
         Me.Panel10.Controls.Add(Me.btnSelectClient)
         Me.Panel10.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel10.Location = New System.Drawing.Point(551, 151)
+        Me.Panel10.Location = New System.Drawing.Point(550, 151)
         Me.Panel10.Name = "Panel10"
-        Me.Panel10.Size = New System.Drawing.Size(153, 38)
+        Me.Panel10.Size = New System.Drawing.Size(154, 38)
         Me.Panel10.TabIndex = 5
         '
         'btnSelectClient
@@ -221,7 +221,7 @@ Partial Class Clients
         Me.btnSelectClient.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.btnSelectClient.Location = New System.Drawing.Point(0, 0)
         Me.btnSelectClient.Name = "btnSelectClient"
-        Me.btnSelectClient.Size = New System.Drawing.Size(153, 38)
+        Me.btnSelectClient.Size = New System.Drawing.Size(154, 38)
         Me.btnSelectClient.TabIndex = 50
         Me.btnSelectClient.Text = "Select Client"
         Me.btnSelectClient.UseVisualStyleBackColor = True
@@ -232,7 +232,7 @@ Partial Class Clients
         Me.Panel9.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel9.Location = New System.Drawing.Point(263, 151)
         Me.Panel9.Name = "Panel9"
-        Me.Panel9.Size = New System.Drawing.Size(282, 38)
+        Me.Panel9.Size = New System.Drawing.Size(281, 38)
         Me.Panel9.TabIndex = 4
         '
         'btnShowAll1
@@ -285,9 +285,9 @@ Partial Class Clients
         '
         Me.Panel6.Controls.Add(Me.TableLayoutPanel4)
         Me.Panel6.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel6.Location = New System.Drawing.Point(551, 3)
+        Me.Panel6.Location = New System.Drawing.Point(550, 3)
         Me.Panel6.Name = "Panel6"
-        Me.Panel6.Size = New System.Drawing.Size(153, 142)
+        Me.Panel6.Size = New System.Drawing.Size(154, 142)
         Me.Panel6.TabIndex = 2
         '
         'TableLayoutPanel4
@@ -302,7 +302,7 @@ Partial Class Clients
         Me.TableLayoutPanel4.RowCount = 2
         Me.TableLayoutPanel4.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 81.16883!))
         Me.TableLayoutPanel4.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 18.83117!))
-        Me.TableLayoutPanel4.Size = New System.Drawing.Size(153, 142)
+        Me.TableLayoutPanel4.Size = New System.Drawing.Size(154, 142)
         Me.TableLayoutPanel4.TabIndex = 1
         '
         'btnChooseImage
@@ -315,7 +315,7 @@ Partial Class Clients
         Me.btnChooseImage.ForeColor = System.Drawing.SystemColors.Control
         Me.btnChooseImage.Location = New System.Drawing.Point(3, 118)
         Me.btnChooseImage.Name = "btnChooseImage"
-        Me.btnChooseImage.Size = New System.Drawing.Size(147, 21)
+        Me.btnChooseImage.Size = New System.Drawing.Size(148, 21)
         Me.btnChooseImage.TabIndex = 12
         Me.btnChooseImage.Text = "Choose Image ..."
         Me.btnChooseImage.UseVisualStyleBackColor = False
@@ -327,7 +327,7 @@ Partial Class Clients
         Me.imgPhoto.Image = Global.AVT_TRAKING.My.Resources.Resources.user
         Me.imgPhoto.Location = New System.Drawing.Point(3, 3)
         Me.imgPhoto.Name = "imgPhoto"
-        Me.imgPhoto.Size = New System.Drawing.Size(147, 109)
+        Me.imgPhoto.Size = New System.Drawing.Size(148, 109)
         Me.imgPhoto.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
         Me.imgPhoto.TabIndex = 0
         Me.imgPhoto.TabStop = False
@@ -345,7 +345,7 @@ Partial Class Clients
         Me.Panel7.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel7.Location = New System.Drawing.Point(263, 3)
         Me.Panel7.Name = "Panel7"
-        Me.Panel7.Size = New System.Drawing.Size(282, 142)
+        Me.Panel7.Size = New System.Drawing.Size(281, 142)
         Me.Panel7.TabIndex = 1
         '
         'Label13
@@ -366,7 +366,7 @@ Partial Class Clients
         Me.txtPayTerms.Location = New System.Drawing.Point(101, 46)
         Me.txtPayTerms.Margin = New System.Windows.Forms.Padding(2)
         Me.txtPayTerms.Name = "txtPayTerms"
-        Me.txtPayTerms.Size = New System.Drawing.Size(178, 20)
+        Me.txtPayTerms.Size = New System.Drawing.Size(177, 20)
         Me.txtPayTerms.TabIndex = 42
         '
         'chbStatus
@@ -375,7 +375,7 @@ Partial Class Clients
         Me.chbStatus.AutoSize = True
         Me.chbStatus.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
         Me.chbStatus.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.chbStatus.Location = New System.Drawing.Point(218, 81)
+        Me.chbStatus.Location = New System.Drawing.Point(217, 81)
         Me.chbStatus.Name = "chbStatus"
         Me.chbStatus.Size = New System.Drawing.Size(59, 17)
         Me.chbStatus.TabIndex = 7
@@ -404,7 +404,7 @@ Partial Class Clients
         Me.Label11.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Label11.AutoSize = True
         Me.Label11.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.Label11.Location = New System.Drawing.Point(157, 82)
+        Me.Label11.Location = New System.Drawing.Point(156, 82)
         Me.Label11.Name = "Label11"
         Me.Label11.Size = New System.Drawing.Size(37, 13)
         Me.Label11.TabIndex = 40
@@ -447,7 +447,7 @@ Partial Class Clients
         '
         Me.Label7.AutoSize = True
         Me.Label7.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.Label7.Location = New System.Drawing.Point(16, 49)
+        Me.Label7.Location = New System.Drawing.Point(17, 49)
         Me.Label7.Name = "Label7"
         Me.Label7.Size = New System.Drawing.Size(57, 13)
         Me.Label7.TabIndex = 33
@@ -458,7 +458,7 @@ Partial Class Clients
         Me.txtLastName.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.txtLastName.Location = New System.Drawing.Point(80, 117)
         Me.txtLastName.Name = "txtLastName"
-        Me.txtLastName.Size = New System.Drawing.Size(148, 20)
+        Me.txtLastName.Size = New System.Drawing.Size(172, 20)
         Me.txtLastName.TabIndex = 5
         '
         'txtFirstName
@@ -466,7 +466,7 @@ Partial Class Clients
         Me.txtFirstName.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.txtFirstName.Location = New System.Drawing.Point(80, 46)
         Me.txtFirstName.Name = "txtFirstName"
-        Me.txtFirstName.Size = New System.Drawing.Size(148, 20)
+        Me.txtFirstName.Size = New System.Drawing.Size(172, 20)
         Me.txtFirstName.TabIndex = 3
         '
         'txtMiddleName
@@ -474,14 +474,14 @@ Partial Class Clients
         Me.txtMiddleName.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.txtMiddleName.Location = New System.Drawing.Point(80, 82)
         Me.txtMiddleName.Name = "txtMiddleName"
-        Me.txtMiddleName.Size = New System.Drawing.Size(148, 20)
+        Me.txtMiddleName.Size = New System.Drawing.Size(172, 20)
         Me.txtMiddleName.TabIndex = 4
         '
         'Label8
         '
         Me.Label8.AutoSize = True
         Me.Label8.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.Label8.Location = New System.Drawing.Point(2, 89)
+        Me.Label8.Location = New System.Drawing.Point(5, 85)
         Me.Label8.Name = "Label8"
         Me.Label8.Size = New System.Drawing.Size(69, 13)
         Me.Label8.TabIndex = 35
@@ -491,7 +491,7 @@ Partial Class Clients
         '
         Me.Label12.AutoSize = True
         Me.Label12.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.Label12.Location = New System.Drawing.Point(16, 117)
+        Me.Label12.Location = New System.Drawing.Point(17, 122)
         Me.Label12.Name = "Label12"
         Me.Label12.Size = New System.Drawing.Size(58, 13)
         Me.Label12.TabIndex = 37

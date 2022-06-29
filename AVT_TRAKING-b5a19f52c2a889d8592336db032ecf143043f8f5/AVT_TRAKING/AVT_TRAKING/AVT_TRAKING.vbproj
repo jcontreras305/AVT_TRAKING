@@ -96,6 +96,7 @@
     <Compile Include="ClassEstimation\MetodosEstimating.vb" />
     <Compile Include="ClassEstimation\MetodosFactor.vb" />
     <Compile Include="ClassEstimation\MetodosProgress.vb" />
+    <Compile Include="ClassEstimation\MetodosProjectsActuals.vb" />
     <Compile Include="Class\EstimationSC.vb" />
     <Compile Include="Class\MetodosClients.vb" />
     <Compile Include="Class\metodosCompany.vb" />
@@ -137,6 +138,12 @@
       <DependentUpon>MenuEstimation.vb</DependentUpon>
     </Compile>
     <Compile Include="FromsEstimation\MenuEstimation.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FromsEstimation\ProjectsActuals.Designer.vb">
+      <DependentUpon>ProjectsActuals.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FromsEstimation\ProjectsActuals.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="FromsEstimation\RowEqDrawing.Designer.vb">
@@ -829,6 +836,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FromsEstimation\MenuEstimation.resx">
       <DependentUpon>MenuEstimation.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FromsEstimation\ProjectsActuals.resx">
+      <DependentUpon>ProjectsActuals.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FromsEstimation\RowEqDrawing.resx">
       <DependentUpon>RowEqDrawing.vb</DependentUpon>

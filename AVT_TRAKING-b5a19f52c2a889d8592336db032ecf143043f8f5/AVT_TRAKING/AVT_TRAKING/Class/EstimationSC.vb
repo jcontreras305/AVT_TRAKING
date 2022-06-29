@@ -989,6 +989,8 @@ end", conn)
                             tran.Rollback()
                             Return False
                         End If
+                    Else
+                        Return False
                     End If
                 Else
                     MsgBox("Error Check the data.")

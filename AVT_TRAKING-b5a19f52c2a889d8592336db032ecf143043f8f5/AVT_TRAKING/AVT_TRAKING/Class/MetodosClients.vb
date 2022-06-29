@@ -32,7 +32,7 @@ Public Class MetodosClients
         Try
             Dim idMaxIdCL As Integer = 0
             conectar()
-            Dim cmd As New SqlCommand("select MAX(numberClient)as maxNumID from clients", conn)
+            Dim cmd As New SqlCommand("select isnull(MAX(numberClient),100)as maxNumID from clients", conn)
             Dim reader As SqlDataReader = cmd.ExecuteReader
 
             While reader.Read()

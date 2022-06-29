@@ -287,17 +287,16 @@ Public Class TimeSheet
                                     newPO.idPO = item.ItemArray(8)
                                     newPO.jobNum = item.ItemArray(9)
                                     newPO.equipament = item.ItemArray(10)
-                                    For Each row As DataRow In tablaProject.Rows
-                                        Dim wo() As String = row(1).ToString().Split("-")
-                                        If newPO.idWorkOrder = wo(0) Then
-                                            newPO.idAuxWO = row("idAuxWO")
-                                            Exit For
-                                        Else
-                                            newPO.idAuxWO = ""
-                                        End If
-                                    Next
+                                    Dim listRows() As DataRow = tablaProject.Select("idWO = '" + newPO.idWorkOrder + "' and idPO = " + newPO.idPO.ToString() + " and jobNo = "+newPO.jobNum.ToString()+" ")
+                                    If listRows.Length > 0 Then
+                                        newPO.idAuxWO = listRows(0).ItemArray(5)
+                                    Else
+                                        newPO.idAuxWO = ""
+                                    End If
                                     If mtdJobs.insertarNuevaTarea(newPO) = False Then
                                         mensaje = If(mensaje = "", item.ItemArray(0), mensaje + ", " + item.ItemArray(0))
+                                    Else
+                                        mtdHPW.llenarTablaProyecto(tablaProject)
                                     End If
                                 Next
                                 MsgSalida(txtSalidaCSV, "The 'Work Order' insertion process is over.")

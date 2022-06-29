@@ -131,9 +131,9 @@ where exu.idEmployee = '" + idEmployee + "'", conn)
     Public Function llenarTablaProyecto(ByVal proyectTable As DataTable) As Boolean
         Try
             conectar()
-            Dim cmd As New SqlCommand("select tk.idAux as 'task', CONCAT(wo.idWO,'-',tk.task) as 'project' , tk.description, po.idPO, jb.jobNo, wo.idAuxWO from workOrder as wo 
+            Dim cmd As New SqlCommand("select tk.idAux as 'task', CONCAT(wo.idWO,'-',tk.task) as 'project' , tk.description, po.idPO, jb.jobNo, wo.idAuxWO,wo.idWO,tk.task from workOrder as wo 
 inner join task as tk on wo.idAuxWO = tk.idAuxWO
-inner join projectOrder as po on po.idPO = wo.idPO
+inner join projectOrder as po on po.idPO = wo.idPO and po.jobNo = wo.jobNo
 inner join job as jb on jb.jobNo = po.jobNo", conn)
             If cmd.ExecuteNonQuery Then
                 proyectTable.Clear()
