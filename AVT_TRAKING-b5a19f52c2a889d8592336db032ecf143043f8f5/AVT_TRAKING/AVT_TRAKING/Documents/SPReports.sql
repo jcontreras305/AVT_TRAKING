@@ -218,8 +218,8 @@ go
 --##############################################################################################
 --################## SP REPORT ALL JOBS ########################################################
 --##############################################################################################
---CREATE proc [dbo].[Sp_All_Jobs]
-ALTER proc [dbo].[Sp_All_Jobs]
+CREATE proc [dbo].[Sp_All_Jobs]
+--ALTER proc [dbo].[Sp_All_Jobs]
 @startdate as date, 
 @finaldate as date,
 @clientnum as int
@@ -628,8 +628,8 @@ go
 --##############################################################################################
 --################## SP REPORT NOT COMPLETE ####################################################
 --##############################################################################################
-CREATE proc [dbo].[Sp_Not_Complete]
---ALTER proc [dbo].[Sp_Not_Complete]
+--CREATE proc [dbo].[Sp_Not_Complete]
+ALTER proc [dbo].[Sp_Not_Complete]
 @clientnum as int,
 @jobNum as bigint,
 @all as bit
@@ -841,8 +841,8 @@ go
 --##############################################################################################
 --################## SP INVOICE PO #############################################################
 --##############################################################################################
---CREATE proc sp_Invoice_PO
-ALTER proc [dbo].[sp_Invoice_PO]
+CREATE proc sp_Invoice_PO
+--ALTER proc [dbo].[sp_Invoice_PO]
 @numberClient  int,
 @startDate date, 
 @FinalDate date, 
@@ -906,8 +906,8 @@ go
 --##############################################################################################
 --################## SP INVOICE PO RESUME ######################################################
 --##############################################################################################
---create proc sp_Invoice_PO_Resume
-ALTER proc [dbo].[sp_Invoice_PO_Resume]
+create proc sp_Invoice_PO_Resume
+--ALTER proc [dbo].[sp_Invoice_PO_Resume]
 @numberClient  int,
 @startDate date,
 @FinalDate date,
@@ -1126,8 +1126,8 @@ go
 --##############################################################################################
 --################## SP SELECT MY COMPANY INFORMATION ##########################################
 --##############################################################################################
---alter proc sp_select_MyComapny_Info
-ALTER proc [dbo].[sp_select_MyComapny_Info]
+create proc sp_select_MyComapny_Info
+--ALTER proc [dbo].[sp_select_MyComapny_Info]
 @CompanyName varchar(30)
 as
 begin
@@ -1151,8 +1151,8 @@ go
 --##############################################################################################
 --################## SP SELECT MY COMPANY INFORMATION ##########################################
 --##############################################################################################
+create proc sp_invoice_number
 --alter proc sp_invoice_number
-alter proc sp_invoice_number
 @numberClient int,
 @startDate date,
 @FinalDate date
@@ -1169,7 +1169,8 @@ go
 --################## SP  SCF HISTORY BY JOB NO  ################################################
 --##############################################################################################
 
-alter proc sp_SCF_History_By_JobNo 
+create proc sp_SCF_History_By_JobNo 
+--alter proc sp_SCF_History_By_JobNo 
 @startDate as date,
 @FinalDate as date,
 @numberClient as int
@@ -1204,7 +1205,8 @@ go
 --################## SP  SCF HISTORY BY JOB NO AND WO ##########################################
 --##############################################################################################
 
-alter proc sp_SCF_History_By_Job_And_WO
+create proc sp_SCF_History_By_Job_And_WO
+--alter proc sp_SCF_History_By_Job_And_WO
 @startDate as date,
 @FinalDate as date,
 @numberClient as int
@@ -1268,7 +1270,8 @@ go
 --##############################################################################################
 --################## SP  SCF HISTORY BY JOB NO AND UNIT ########################################
 --##############################################################################################
-ALTER proc sp_SCF_History_By_JobNo_And_Unit
+create proc sp_SCF_History_By_JobNo_And_Unit
+--ALTER proc sp_SCF_History_By_JobNo_And_Unit
 @startDate as date,
 @FinalDate as date,
 @numberClient as int
@@ -1304,7 +1307,8 @@ go
 --################## SP  SCF HISTORY DISMANTLE #################################################
 --##############################################################################################
 
-ALTER proc sp_SCF_History_Dismantle
+create proc sp_SCF_History_Dismantle
+--ALTER proc sp_SCF_History_Dismantle
 @numberClient as int,
 @all as bit
 as 
@@ -1337,7 +1341,8 @@ go
 --################## SP  SCF HISTORY BY JOB ####################################################
 --##############################################################################################
 
-alter proc sp_SCF_History_By_Job
+create proc sp_SCF_History_By_Job
+--alter proc sp_SCF_History_By_Job
 @numberClient as int,
 @all as bit
 as
@@ -1404,7 +1409,8 @@ go
 --################## SP SCF PRODUCT TO SCAFFOLD,MODIFICATION AND DISMANTLE #####################
 --##############################################################################################
 
-ALTER proc [dbo].[sp_Scaffold_Product]
+create proc [dbo].[sp_Scaffold_Product]
+--ALTER proc [dbo].[sp_Scaffold_Product]
 @tagID as varchar(20) ,
 @modID as varchar(20) ,
 @scf as bit,
@@ -1598,7 +1604,8 @@ go
 --################## SP SCF RENTAL DETAILS #####################################################
 --##############################################################################################
 
-ALTER proc [dbo].[sp_SCF_Rental_Details]
+create proc [dbo].[sp_SCF_Rental_Details]
+--ALTER proc [dbo].[sp_SCF_Rental_Details]
 @startDate date,
 @FinalDate  date,
 @numberClient int
@@ -1666,7 +1673,8 @@ go
 --################## SP SCF MATERIAL INVETORY ##################################################
 --##############################################################################################
 
-ALTER proc [dbo].[sp_SCF_Material_Inventory]
+create proc [dbo].[sp_SCF_Material_Inventory]
+--ALTER proc [dbo].[sp_SCF_Material_Inventory]
 @numberClient as int,
 @all as bit
 as
@@ -1702,10 +1710,11 @@ end
 go
 
 --##############################################################################################
---################## SP EQUIPMENT DAILY ########################################################
+--################## SP EQUIPMENT DAILY ########################################################==========================================================================================================================================================================================================
 --##############################################################################################
 
-ALTER proc [dbo].[sp_Equipament_Daily]
+create proc [dbo].[sp_Equipament_Daily]
+--ALTER proc [dbo].[sp_Equipament_Daily]
 @startDate date,
 @FinalDate date,
 @numberClient int
@@ -1768,7 +1777,8 @@ go
 --################## SP SELECT ESTIMATION COST BY PROJECT ######################################
 --##############################################################################################
 
-ALTER proc [dbo].[sp_SelectEstCostByProject]
+create proc [dbo].[sp_SelectEstCostByProject]
+--ALTER proc [dbo].[sp_SelectEstCostByProject]
 @projectId as varchar(40)
 as 
 begin

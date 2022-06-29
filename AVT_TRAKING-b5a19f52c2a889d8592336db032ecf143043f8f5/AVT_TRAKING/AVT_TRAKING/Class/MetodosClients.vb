@@ -115,8 +115,8 @@ or ha.city like concat('%','" + text + "','%')", conn)
         Try
             conectar()
             Dim cmd As New SqlCommand("
-select cl.idClient,cl.numberClient,cl.firstName,cl.middleName,cl.lastName,cl.companyName,cl.estatus,
-ct.idContact,ct.phoneNumber1, ct.phoneNumber2,ct.email,
+select cl.idClient as 'ID Client',cl.numberClient as '# Client',cl.firstName as 'First Name',cl.middleName as 'Middlename',cl.lastName as 'Lastname',cl.companyName as 'Comapny Name',cl.estatus as 'Status',
+ct.idContact ,ct.phoneNumber1, ct.phoneNumber2,ct.email,
 ha.idHomeAdress, ha.avenue ,ha.number, ha.city ,ha.providence,ha.postalCode,photo,cl.payTerms from
 " + consultaInner, conn)
 

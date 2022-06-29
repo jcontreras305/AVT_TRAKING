@@ -10,12 +10,12 @@ Public Class Clients
 
 
     Private Sub Clients_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        lblN1.Visible = False
-        lblN2.Visible = False
-        lblN3.Visible = False
-        lblN4.Visible = False
-        lblN5.Visible = False
-        lblN6.Visible = False
+        'lblN1.Visible = False
+        'lblN2.Visible = False
+        'lblN3.Visible = False
+        'lblN4.Visible = False
+        'lblN5.Visible = False
+        'lblN6.Visible = False
         ActivarCamposContacto(False)
         ActivarCamposDrieccion(False)
         btnUpdate.Enabled = False
@@ -32,9 +32,9 @@ Public Class Clients
             txtIdClient.Text = MaxID
             limpiarcampos()
             mtd.buscarClienteTodos(tblClientes)
-        Else
-            lblN5.Visible = True
-            lblN6.Visible = True
+            'Else
+            '    'lblN5.Visible = True
+            'lblN6.Visible = True
         End If
     End Sub
 
@@ -138,24 +138,24 @@ Public Class Clients
     Private Sub chbContact_CheckedChanged(sender As Object, e As EventArgs) Handles chbContact.CheckedChanged
         If chbContact.Checked Then
             ActivarCamposContacto(True)
-            lblN1.Visible = True
-            lblN2.Visible = True
+            'lblN1.Visible = True
+            'lblN2.Visible = True
         Else
             ActivarCamposContacto(False)
-            lblN1.Visible = False
-            lblN2.Visible = False
+            'lblN1.Visible = False
+            'lblN2.Visible = False
         End If
     End Sub
 
     Private Sub chbAddress_CheckedChanged(sender As Object, e As EventArgs) Handles chbAddress.CheckedChanged
         If chbAddress.Checked Then
             ActivarCamposDrieccion(True)
-            lblN3.Visible = True
-            lblN4.Visible = True
+            'lblN3.Visible = True
+            'lblN4.Visible = True
         Else
             ActivarCamposDrieccion(False)
-            lblN3.Visible = False
-            lblN4.Visible = False
+            'lblN3.Visible = False
+            'lblN4.Visible = False
         End If
     End Sub
 
@@ -295,7 +295,7 @@ Public Class Clients
         txtPC.Text = ""
     End Sub
 
-    Private Sub lblN3_Click(sender As Object, e As EventArgs) Handles lblN3.Click
+    Private Sub lblN3_Click(sender As Object, e As EventArgs)
 
     End Sub
 

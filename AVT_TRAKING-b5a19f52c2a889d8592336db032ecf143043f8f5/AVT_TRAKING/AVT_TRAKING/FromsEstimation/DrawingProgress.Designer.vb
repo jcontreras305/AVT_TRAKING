@@ -24,7 +24,6 @@ Partial Class DrawingProgress
     Private Sub InitializeComponent()
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
         Me.Panel4 = New System.Windows.Forms.Panel()
-        Me.btnAddRowEquipment = New System.Windows.Forms.Button()
         Me.btnDelete = New System.Windows.Forms.Button()
         Me.btnSave = New System.Windows.Forms.Button()
         Me.Panel1 = New System.Windows.Forms.Panel()
@@ -37,15 +36,21 @@ Partial Class DrawingProgress
         Me.Label4 = New System.Windows.Forms.Label()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
-        Me.TextBox4 = New System.Windows.Forms.TextBox()
-        Me.TextBox3 = New System.Windows.Forms.TextBox()
-        Me.TextBox2 = New System.Windows.Forms.TextBox()
-        Me.TextBox1 = New System.Windows.Forms.TextBox()
+        Me.txtClientNumber = New System.Windows.Forms.TextBox()
+        Me.txtDescriptionDR = New System.Windows.Forms.TextBox()
+        Me.txtUnitPO = New System.Windows.Forms.TextBox()
+        Me.txtDescriptionPO = New System.Windows.Forms.TextBox()
         Me.cmbDrawing = New System.Windows.Forms.ComboBox()
         Me.cmbJobNo = New System.Windows.Forms.ComboBox()
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.TabPage1 = New System.Windows.Forms.TabPage()
         Me.tblScaffold = New System.Windows.Forms.DataGridView()
+        Me.TagAux = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.WeekendAux = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Tag = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Weekend = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Build = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Demo = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.TabPage2 = New System.Windows.Forms.TabPage()
         Me.tblEquipment = New System.Windows.Forms.DataGridView()
         Me.EquipmentIdAux = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -64,12 +69,6 @@ Partial Class DrawingProgress
         Me.InsRemovalPP = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.InsInstallPp = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.PaintPp = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Demo = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Build = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Weekend = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Tag = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.WeekendAux = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.TagAux = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.TableLayoutPanel1.SuspendLayout()
         Me.Panel4.SuspendLayout()
         Me.Panel1.SuspendLayout()
@@ -105,7 +104,6 @@ Partial Class DrawingProgress
         '
         'Panel4
         '
-        Me.Panel4.Controls.Add(Me.btnAddRowEquipment)
         Me.Panel4.Controls.Add(Me.btnDelete)
         Me.Panel4.Controls.Add(Me.btnSave)
         Me.Panel4.Dock = System.Windows.Forms.DockStyle.Fill
@@ -113,23 +111,6 @@ Partial Class DrawingProgress
         Me.Panel4.Name = "Panel4"
         Me.Panel4.Size = New System.Drawing.Size(932, 50)
         Me.Panel4.TabIndex = 36
-        '
-        'btnAddRowEquipment
-        '
-        Me.btnAddRowEquipment.FlatAppearance.BorderSize = 0
-        Me.btnAddRowEquipment.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(59, Byte), Integer), CType(CType(69, Byte), Integer), CType(CType(79, Byte), Integer))
-        Me.btnAddRowEquipment.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnAddRowEquipment.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnAddRowEquipment.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.btnAddRowEquipment.Image = Global.AVT_TRAKING.My.Resources.Resources.add
-        Me.btnAddRowEquipment.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnAddRowEquipment.Location = New System.Drawing.Point(7, 6)
-        Me.btnAddRowEquipment.Name = "btnAddRowEquipment"
-        Me.btnAddRowEquipment.Size = New System.Drawing.Size(77, 35)
-        Me.btnAddRowEquipment.TabIndex = 34
-        Me.btnAddRowEquipment.Text = "Add"
-        Me.btnAddRowEquipment.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.btnAddRowEquipment.UseVisualStyleBackColor = True
         '
         'btnDelete
         '
@@ -211,10 +192,10 @@ Partial Class DrawingProgress
         Me.Panel2.Controls.Add(Me.Label4)
         Me.Panel2.Controls.Add(Me.Label3)
         Me.Panel2.Controls.Add(Me.Label2)
-        Me.Panel2.Controls.Add(Me.TextBox4)
-        Me.Panel2.Controls.Add(Me.TextBox3)
-        Me.Panel2.Controls.Add(Me.TextBox2)
-        Me.Panel2.Controls.Add(Me.TextBox1)
+        Me.Panel2.Controls.Add(Me.txtClientNumber)
+        Me.Panel2.Controls.Add(Me.txtDescriptionDR)
+        Me.Panel2.Controls.Add(Me.txtUnitPO)
+        Me.Panel2.Controls.Add(Me.txtDescriptionPO)
         Me.Panel2.Controls.Add(Me.cmbDrawing)
         Me.Panel2.Controls.Add(Me.cmbJobNo)
         Me.Panel2.Dock = System.Windows.Forms.DockStyle.Fill
@@ -283,33 +264,37 @@ Partial Class DrawingProgress
         Me.Label2.TabIndex = 6
         Me.Label2.Text = "Job No."
         '
-        'TextBox4
+        'txtClientNumber
         '
-        Me.TextBox4.Location = New System.Drawing.Point(530, 4)
-        Me.TextBox4.Name = "TextBox4"
-        Me.TextBox4.Size = New System.Drawing.Size(134, 20)
-        Me.TextBox4.TabIndex = 5
+        Me.txtClientNumber.Enabled = False
+        Me.txtClientNumber.Location = New System.Drawing.Point(530, 4)
+        Me.txtClientNumber.Name = "txtClientNumber"
+        Me.txtClientNumber.Size = New System.Drawing.Size(65, 20)
+        Me.txtClientNumber.TabIndex = 5
         '
-        'TextBox3
+        'txtDescriptionDR
         '
-        Me.TextBox3.Location = New System.Drawing.Point(302, 30)
-        Me.TextBox3.Name = "TextBox3"
-        Me.TextBox3.Size = New System.Drawing.Size(134, 20)
-        Me.TextBox3.TabIndex = 4
+        Me.txtDescriptionDR.Enabled = False
+        Me.txtDescriptionDR.Location = New System.Drawing.Point(302, 30)
+        Me.txtDescriptionDR.Name = "txtDescriptionDR"
+        Me.txtDescriptionDR.Size = New System.Drawing.Size(134, 20)
+        Me.txtDescriptionDR.TabIndex = 4
         '
-        'TextBox2
+        'txtUnitPO
         '
-        Me.TextBox2.Location = New System.Drawing.Point(80, 56)
-        Me.TextBox2.Name = "TextBox2"
-        Me.TextBox2.Size = New System.Drawing.Size(134, 20)
-        Me.TextBox2.TabIndex = 3
+        Me.txtUnitPO.Enabled = False
+        Me.txtUnitPO.Location = New System.Drawing.Point(80, 56)
+        Me.txtUnitPO.Name = "txtUnitPO"
+        Me.txtUnitPO.Size = New System.Drawing.Size(134, 20)
+        Me.txtUnitPO.TabIndex = 3
         '
-        'TextBox1
+        'txtDescriptionPO
         '
-        Me.TextBox1.Location = New System.Drawing.Point(80, 30)
-        Me.TextBox1.Name = "TextBox1"
-        Me.TextBox1.Size = New System.Drawing.Size(134, 20)
-        Me.TextBox1.TabIndex = 2
+        Me.txtDescriptionPO.Enabled = False
+        Me.txtDescriptionPO.Location = New System.Drawing.Point(80, 30)
+        Me.txtDescriptionPO.Name = "txtDescriptionPO"
+        Me.txtDescriptionPO.Size = New System.Drawing.Size(134, 20)
+        Me.txtDescriptionPO.TabIndex = 2
         '
         'cmbDrawing
         '
@@ -347,7 +332,7 @@ Partial Class DrawingProgress
         Me.TabPage1.Padding = New System.Windows.Forms.Padding(3)
         Me.TabPage1.Size = New System.Drawing.Size(924, 186)
         Me.TabPage1.TabIndex = 0
-        Me.TabPage1.Text = "TabPage1"
+        Me.TabPage1.Text = "Scaffold"
         Me.TabPage1.UseVisualStyleBackColor = True
         '
         'tblScaffold
@@ -361,6 +346,38 @@ Partial Class DrawingProgress
         Me.tblScaffold.Size = New System.Drawing.Size(918, 180)
         Me.tblScaffold.TabIndex = 0
         '
+        'TagAux
+        '
+        Me.TagAux.HeaderText = "TagAux"
+        Me.TagAux.Name = "TagAux"
+        Me.TagAux.Visible = False
+        '
+        'WeekendAux
+        '
+        Me.WeekendAux.HeaderText = "WeekendAux"
+        Me.WeekendAux.Name = "WeekendAux"
+        Me.WeekendAux.Visible = False
+        '
+        'Tag
+        '
+        Me.Tag.HeaderText = "Tag No."
+        Me.Tag.Name = "Tag"
+        '
+        'Weekend
+        '
+        Me.Weekend.HeaderText = "Weekend"
+        Me.Weekend.Name = "Weekend"
+        '
+        'Build
+        '
+        Me.Build.HeaderText = "Build %"
+        Me.Build.Name = "Build"
+        '
+        'Demo
+        '
+        Me.Demo.HeaderText = "Demo%"
+        Me.Demo.Name = "Demo"
+        '
         'TabPage2
         '
         Me.TabPage2.Controls.Add(Me.tblEquipment)
@@ -369,7 +386,7 @@ Partial Class DrawingProgress
         Me.TabPage2.Padding = New System.Windows.Forms.Padding(3)
         Me.TabPage2.Size = New System.Drawing.Size(924, 186)
         Me.TabPage2.TabIndex = 1
-        Me.TabPage2.Text = "TabPage2"
+        Me.TabPage2.Text = "Equipment"
         Me.TabPage2.UseVisualStyleBackColor = True
         '
         'tblEquipment
@@ -428,7 +445,7 @@ Partial Class DrawingProgress
         Me.TabPage3.Padding = New System.Windows.Forms.Padding(3)
         Me.TabPage3.Size = New System.Drawing.Size(924, 186)
         Me.TabPage3.TabIndex = 2
-        Me.TabPage3.Text = "TabPage3"
+        Me.TabPage3.Text = "Piping"
         Me.TabPage3.UseVisualStyleBackColor = True
         '
         'tblPiping
@@ -479,38 +496,6 @@ Partial Class DrawingProgress
         Me.PaintPp.HeaderText = "Paint %"
         Me.PaintPp.Name = "PaintPp"
         '
-        'Demo
-        '
-        Me.Demo.HeaderText = "Demo%"
-        Me.Demo.Name = "Demo"
-        '
-        'Build
-        '
-        Me.Build.HeaderText = "Build %"
-        Me.Build.Name = "Build"
-        '
-        'Weekend
-        '
-        Me.Weekend.HeaderText = "Weekend"
-        Me.Weekend.Name = "Weekend"
-        '
-        'Tag
-        '
-        Me.Tag.HeaderText = "Tag No."
-        Me.Tag.Name = "Tag"
-        '
-        'WeekendAux
-        '
-        Me.WeekendAux.HeaderText = "WeekendAux"
-        Me.WeekendAux.Name = "WeekendAux"
-        Me.WeekendAux.Visible = False
-        '
-        'TagAux
-        '
-        Me.TagAux.HeaderText = "TagAux"
-        Me.TagAux.Name = "TagAux"
-        Me.TagAux.Visible = False
-        '
         'DrawingProgress
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -542,17 +527,16 @@ Partial Class DrawingProgress
     Friend WithEvents btnSalir As Button
     Friend WithEvents Label1 As Label
     Friend WithEvents Panel4 As Panel
-    Friend WithEvents btnAddRowEquipment As Button
     Friend WithEvents btnDelete As Button
     Friend WithEvents btnSave As Button
     Friend WithEvents Panel2 As Panel
     Friend WithEvents Label4 As Label
     Friend WithEvents Label3 As Label
     Friend WithEvents Label2 As Label
-    Friend WithEvents TextBox4 As TextBox
-    Friend WithEvents TextBox3 As TextBox
-    Friend WithEvents TextBox2 As TextBox
-    Friend WithEvents TextBox1 As TextBox
+    Friend WithEvents txtClientNumber As TextBox
+    Friend WithEvents txtDescriptionDR As TextBox
+    Friend WithEvents txtUnitPO As TextBox
+    Friend WithEvents txtDescriptionPO As TextBox
     Friend WithEvents cmbDrawing As ComboBox
     Friend WithEvents cmbJobNo As ComboBox
     Friend WithEvents Label7 As Label

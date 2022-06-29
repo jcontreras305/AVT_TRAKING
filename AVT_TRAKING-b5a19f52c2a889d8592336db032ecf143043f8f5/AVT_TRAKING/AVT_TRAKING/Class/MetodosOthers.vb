@@ -565,6 +565,25 @@ Public Class MetodosOthers
             desconectar()
         End Try
     End Function
+    Public Function selectMaterialCodes() As Data.DataTable
+        Try
+            conectar()
+            Dim cmd As New SqlCommand("select code,description from materialClass", conn)
+            Dim dt As New DataTable
+            If cmd.ExecuteNonQuery Then
+                Dim da As New SqlDataAdapter(cmd)
+                da.Fill(dt)
+            Else
+                dt.Columns.Add("code")
+                dt.Columns.Add("description")
+            End If
+            Return dt
+        Catch ex As Exception
+            Return Nothing
+        Finally
+            desconectar()
+        End Try
+    End Function
     Public Function addMatClass(ByVal classM As String, ByVal desc As String) As ListViewItem
         Try
             conectar()

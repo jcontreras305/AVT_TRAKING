@@ -94,7 +94,10 @@ Public Class Materials
             Else
                 dataMaterial(4) = ""
             End If
-            mtdMaterial.insertarMaterial(dataMaterial)
+            If mtdMaterial.insertarMaterial(dataMaterial) Then
+                MsgBox("Successful")
+            End If
+
         Catch ex As Exception
             MsgBox("Something went wrong, check the data and try again.")
         End Try
@@ -490,7 +493,7 @@ Public Class Materials
         End Try
     End Sub
 
-    Private Sub btnMaterialDownloadExcel_Click(sender As Object, e As EventArgs) Handles btnMaterialDownloadExcel.Click
+    Private Sub btnMaterialDownloadExcel_Click(sender As Object, e As EventArgs) Handles btnMaterialSourceDownloadExcel.Click
         Try
             Dim ApExcel = New Microsoft.Office.Interop.Excel.Application
             Dim libro = ApExcel.Workbooks.Add
@@ -518,7 +521,7 @@ Public Class Materials
 
     End Sub
 
-    Private Sub btnMaterialUploadExcel_Click(sender As Object, e As EventArgs) Handles btnMaterialUploadExcel.Click
+    Private Sub btnMaterialUploadExcel_Click(sender As Object, e As EventArgs) Handles btnMaterialSourceUploadExcel.Click
         Try
             Dim openFile As New OpenFileDialog
             openFile.DefaultExt = "*.xlsx"
@@ -578,18 +581,161 @@ Public Class Materials
             txtMensajeProseso.Text = txtMensajeProseso.Text + vbCrLf + "Error"
         End Try
     End Sub
-
     <DllImport("user32.DLL", EntryPoint:="ReleaseCapture")>
     Private Shared Sub ReleaseCapture()
     End Sub
+
+    Private Sub chbEnableMaterial_CheckedChanged(sender As Object, e As EventArgs) Handles chbEnableMaterial.CheckedChanged
+
+    End Sub
+
     <DllImport("user32.DLL", EntryPoint:="SendMessage")>
     Private Shared Sub SendMessage(hWnd As IntPtr, wMsg As Integer, wParam As Integer, lParam As Integer)
     End Sub
-
-
     Private Sub TitleBar_MouseMove(sender As Object, e As MouseEventArgs) Handles TitleBar.MouseMove
         ReleaseCapture()
         SendMessage(Me.Handle, &H112&, &HF012&, 0)
     End Sub
 
+    Private Sub btnDownLoadExcelMaterial_Click(sender As Object, e As EventArgs) Handles btnDownLoadExcelMaterial.Click
+
+        Dim ApExcel = New Microsoft.Office.Interop.Excel.Application
+        'Hoja de Material
+        Dim libro = ApExcel.Workbooks.Add()
+        Try
+            Dim Hoja1 = libro.Sheets.Add()
+            Dim Hoja2 = libro.Sheets.Add()
+            Dim Hoja3 = libro.Sheets.Add()
+
+            Dim count As Integer = 1
+            With Hoja1.Range("A1:E1")
+                .Font.Bold = True
+                .Font.ColorIndex = 1
+                With .Interior
+                    .ColorIndex = 15
+                End With
+                .BorderAround(Microsoft.Office.Interop.Excel.XlLineStyle.xlContinuous, Microsoft.Office.Interop.Excel.XlBorderWeight.xlThin, Microsoft.Office.Interop.Excel.XlColorIndex.xlColorIndexAutomatic, Color.Black)
+            End With
+            Dim columsMaterial() As String = {"ID Material", "Name", "Status", "Vendor", "Class"}
+            For i As Int64 = 0 To columsMaterial.Length - 1
+                Hoja1.cells(1, i + 1) = columsMaterial(i)
+            Next
+            Hoja1.Name = "Material"
+            'Hoja de Clases
+            With Hoja2.Range("A1:B1")
+                .Font.Bold = True
+                .Font.ColorIndex = 1
+                With .Interior
+                    .ColorIndex = 15
+                End With
+                .BorderAround(Microsoft.Office.Interop.Excel.XlLineStyle.xlContinuous, Microsoft.Office.Interop.Excel.XlBorderWeight.xlThin, Microsoft.Office.Interop.Excel.XlColorIndex.xlColorIndexAutomatic, Color.Black)
+            End With
+            Dim columsClass() As String = {"Code", "Description"}
+            For i As Int64 = 0 To columsClass.Length - 1
+                Hoja2.cells(1, i + 1) = columsClass(i)
+            Next
+            Dim tblClass As Data.DataTable = mtdOther.selectMaterialCodes()
+            If tblClass.Rows IsNot Nothing Then
+                Dim cont As Integer = 2
+                For Each row As Data.DataRow In tblClass.Rows()
+                    Hoja2.cells(cont, 1) = row.ItemArray(0)
+                    Hoja2.cells(cont, 2) = row.ItemArray(1)
+                    cont += 1
+                Next
+            End If
+            Hoja2.Name = "Material Class"
+
+            'Hoja de Vendor
+
+            With Hoja3.Range("A1:B1")
+                .Font.Bold = True
+                .Font.ColorIndex = 1
+                With .Interior
+                    .ColorIndex = 15
+                End With
+                .BorderAround(Microsoft.Office.Interop.Excel.XlLineStyle.xlContinuous, Microsoft.Office.Interop.Excel.XlBorderWeight.xlThin, Microsoft.Office.Interop.Excel.XlColorIndex.xlColorIndexAutomatic, Color.Black)
+            End With
+            Dim columsVendor() As String = {"# Vendor", "Name"}
+            For i As Int64 = 0 To columsVendor.Length - 1
+                Hoja3.cells(1, i + 1) = columsVendor(i)
+            Next
+            Dim tblVendor As Data.DataTable = mtdMaterial.selectVendor()
+            If tblVendor.Rows IsNot Nothing Then
+                Dim cont As Integer = 2
+                For Each row As Data.DataRow In tblVendor.Rows()
+                    Hoja3.cells(cont, 1) = row.ItemArray(0)
+                    Hoja3.cells(cont, 2) = row.ItemArray(1)
+                    cont += 1
+                Next
+            End If
+            Hoja3.name = "Vendor"
+            Dim sd As New SaveFileDialog
+            sd.DefaultExt = "*.xlsx"
+            sd.FileName = "MaterialList"
+            sd.Filter = "Archivos de Excel (*.xlsx)|*.xlsx"
+            sd.ShowDialog()
+            libro.SaveAs(sd.FileName)
+            NAR(Hoja1)
+            NAR(Hoja2)
+            NAR(Hoja3)
+        Catch ex As Exception
+            MsgBox(ex.Message)
+        Finally
+            libro.Close()
+            NAR(libro)
+            ApExcel.Quit()
+            NAR(ApExcel)
+        End Try
+    End Sub
+    Private Sub btnUploadMaterial_Click(sender As Object, e As EventArgs) Handles btnUploadMaterial.Click
+        Try
+            Dim sheetName = "Material"
+            While sheetName <> ""
+                Dim lblMessage As New System.Windows.Forms.Label
+                lblMessage.Visible = False
+                Dim pgbProgress As New System.Windows.Forms.ProgressBar
+                pgbProgress.Visible = False
+                Dim tbl = leerExcel(lblMessage, pgbProgress, sheetName)
+                If tbl IsNot Nothing Then
+                    Dim tblVendorIds As Data.DataTable = mtdMaterial.selectVendor()
+                    Dim tblClassIds As Data.DataTable = mtdOther.selectMaterialCodes()
+                    Dim tblNewMaterial As New Data.DataTable
+                    tblNewMaterial.Columns.Add("ID")
+                    tblNewMaterial.Columns.Add("Name")
+                    tblNewMaterial.Columns.Add("Status")
+                    tblNewMaterial.Columns.Add("IdVendor")
+                    tblNewMaterial.Columns.Add("idClass")
+                    For Each row As Data.DataRow In tbl.Rows()
+                        Dim listRowVendor() As Data.DataRow = tblVendorIds.Select("ID ='" + row.ItemArray(3).ToString() + "' or Name = '" + row.ItemArray(3).ToString() + "'")
+                        Dim NewIDVendor As String = "NULL"
+                        If listRowVendor.Length > 0 Then
+                            NewIDVendor = listRowVendor(0).ItemArray(2)
+                        End If
+                        Dim listRowClass() As Data.DataRow = tblClassIds.Select("code = '" + row.ItemArray(4).ToString() + "' or description = '" + row.ItemArray(4).ToString() + "'")
+                        Dim newidClass As String = "NULL"
+                        If listRowClass.Length > 0 Then
+                            newidClass = listRowClass(0).ItemArray(0)
+                        End If
+                        tblNewMaterial.Rows.Add(row.ItemArray(1).ToString(), row.ItemArray(0).ToString(), NewIDVendor, If(row.ItemArray(2).ToString() = "Yes" Or row.ItemArray(2).ToString() = "YES", "E", "D"), newidClass)
+                    Next
+                    For Each row As Data.DataRow In tblNewMaterial.Rows
+                        Dim datos() As String = {row.ItemArray(0), row.ItemArray(1), row.ItemArray(2), row.ItemArray(3), row.ItemArray(4)}
+                        If Not mtdMaterial.insertarMaterial(datos) Then
+                            If DialogResult.No = MessageBox.Show("Would you like to continue?", "Important", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) Then
+                                Exit For
+                            End If
+                        End If
+                    Next
+                    llenarTablas()
+                    pgbProgress.Value = 100
+                    lblMessage.Text = "Message: End."
+                    Exit While
+                Else
+                    sheetName = InputBox("Please Write the name of the Sheet to Read." + "If do not wish to continue, leave the space blank.", "find Excel Sheet", "Sheet 1")
+                End If
+            End While
+        Catch ex As Exception
+
+        End Try
+    End Sub
 End Class

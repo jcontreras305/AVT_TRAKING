@@ -121,12 +121,18 @@ Partial Class Materials
         Me.Panel19 = New System.Windows.Forms.Panel()
         Me.TextBox1 = New System.Windows.Forms.TextBox()
         Me.Panel20 = New System.Windows.Forms.Panel()
+        Me.GroupBox4 = New System.Windows.Forms.GroupBox()
+        Me.TableLayoutPanel13 = New System.Windows.Forms.TableLayoutPanel()
+        Me.Panel29 = New System.Windows.Forms.Panel()
+        Me.btnUploadMaterial = New System.Windows.Forms.Button()
+        Me.Panel30 = New System.Windows.Forms.Panel()
+        Me.btnDownLoadExcelMaterial = New System.Windows.Forms.Button()
         Me.GroupBox3 = New System.Windows.Forms.GroupBox()
         Me.TableLayoutPanel10 = New System.Windows.Forms.TableLayoutPanel()
         Me.Panel24 = New System.Windows.Forms.Panel()
-        Me.btnMaterialUploadExcel = New System.Windows.Forms.Button()
+        Me.btnMaterialSourceUploadExcel = New System.Windows.Forms.Button()
         Me.Panel23 = New System.Windows.Forms.Panel()
-        Me.btnMaterialDownloadExcel = New System.Windows.Forms.Button()
+        Me.btnMaterialSourceDownloadExcel = New System.Windows.Forms.Button()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
         Me.TableLayoutPanel9 = New System.Windows.Forms.TableLayoutPanel()
         Me.Panel22 = New System.Windows.Forms.Panel()
@@ -139,8 +145,8 @@ Partial Class Materials
         Me.Label22 = New System.Windows.Forms.Label()
         Me.Button5 = New System.Windows.Forms.Button()
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
-        Me.Panel2 = New System.Windows.Forms.Panel()
         Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.Panel2 = New System.Windows.Forms.Panel()
         Me.MyTabControl1 = New AVT_TRAKING.MyTabControl()
         Me.TabPage5 = New System.Windows.Forms.TabPage()
         Me.TabPage6 = New System.Windows.Forms.TabPage()
@@ -186,6 +192,10 @@ Partial Class Materials
         Me.TableLayoutPanel8.SuspendLayout()
         Me.Panel19.SuspendLayout()
         Me.Panel20.SuspendLayout()
+        Me.GroupBox4.SuspendLayout()
+        Me.TableLayoutPanel13.SuspendLayout()
+        Me.Panel29.SuspendLayout()
+        Me.Panel30.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
         Me.TableLayoutPanel10.SuspendLayout()
         Me.Panel24.SuspendLayout()
@@ -198,8 +208,8 @@ Partial Class Materials
         CType(Me.PictureBox4, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox3, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.TableLayoutPanel1.SuspendLayout()
-        Me.Panel2.SuspendLayout()
         Me.Panel1.SuspendLayout()
+        Me.Panel2.SuspendLayout()
         Me.MyTabControl1.SuspendLayout()
         Me.TabPage5.SuspendLayout()
         Me.TabPage6.SuspendLayout()
@@ -253,7 +263,7 @@ Partial Class Materials
         Me.TableLayoutPanel6.ColumnCount = 3
         Me.TableLayoutPanel6.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 54.76674!))
         Me.TableLayoutPanel6.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 45.23326!))
-        Me.TableLayoutPanel6.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 268.0!))
+        Me.TableLayoutPanel6.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 271.0!))
         Me.TableLayoutPanel6.Controls.Add(Me.Panel16, 2, 1)
         Me.TableLayoutPanel6.Controls.Add(Me.Panel15, 1, 1)
         Me.TableLayoutPanel6.Controls.Add(Me.Panel14, 0, 1)
@@ -272,17 +282,17 @@ Partial Class Materials
         'Panel16
         '
         Me.Panel16.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel16.Location = New System.Drawing.Point(491, 200)
+        Me.Panel16.Location = New System.Drawing.Point(488, 200)
         Me.Panel16.Name = "Panel16"
-        Me.Panel16.Size = New System.Drawing.Size(263, 50)
+        Me.Panel16.Size = New System.Drawing.Size(266, 50)
         Me.Panel16.TabIndex = 5
         '
         'Panel15
         '
         Me.Panel15.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel15.Location = New System.Drawing.Point(270, 200)
+        Me.Panel15.Location = New System.Drawing.Point(269, 200)
         Me.Panel15.Name = "Panel15"
-        Me.Panel15.Size = New System.Drawing.Size(215, 50)
+        Me.Panel15.Size = New System.Drawing.Size(213, 50)
         Me.Panel15.TabIndex = 4
         '
         'Panel14
@@ -293,7 +303,7 @@ Partial Class Materials
         Me.Panel14.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel14.Location = New System.Drawing.Point(3, 200)
         Me.Panel14.Name = "Panel14"
-        Me.Panel14.Size = New System.Drawing.Size(261, 50)
+        Me.Panel14.Size = New System.Drawing.Size(260, 50)
         Me.Panel14.TabIndex = 3
         '
         'txtSearch
@@ -303,7 +313,7 @@ Partial Class Materials
         Me.txtSearch.Location = New System.Drawing.Point(102, 17)
         Me.txtSearch.Margin = New System.Windows.Forms.Padding(2)
         Me.txtSearch.Name = "txtSearch"
-        Me.txtSearch.Size = New System.Drawing.Size(160, 20)
+        Me.txtSearch.Size = New System.Drawing.Size(159, 20)
         Me.txtSearch.TabIndex = 14
         '
         'Label7
@@ -339,9 +349,9 @@ Partial Class Materials
         Me.Panel13.Controls.Add(Me.Label20)
         Me.Panel13.Controls.Add(Me.sprPrice)
         Me.Panel13.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel13.Location = New System.Drawing.Point(270, 3)
+        Me.Panel13.Location = New System.Drawing.Point(269, 3)
         Me.Panel13.Name = "Panel13"
-        Me.Panel13.Size = New System.Drawing.Size(215, 191)
+        Me.Panel13.Size = New System.Drawing.Size(213, 191)
         Me.Panel13.TabIndex = 2
         '
         'Label17
@@ -362,7 +372,7 @@ Partial Class Materials
         Me.txtDescripcion.Location = New System.Drawing.Point(76, 107)
         Me.txtDescripcion.Margin = New System.Windows.Forms.Padding(2)
         Me.txtDescripcion.Name = "txtDescripcion"
-        Me.txtDescripcion.Size = New System.Drawing.Size(136, 20)
+        Me.txtDescripcion.Size = New System.Drawing.Size(134, 20)
         Me.txtDescripcion.TabIndex = 7
         '
         'txtTipo
@@ -372,7 +382,7 @@ Partial Class Materials
         Me.txtTipo.Location = New System.Drawing.Point(77, 39)
         Me.txtTipo.Margin = New System.Windows.Forms.Padding(2)
         Me.txtTipo.Name = "txtTipo"
-        Me.txtTipo.Size = New System.Drawing.Size(134, 20)
+        Me.txtTipo.Size = New System.Drawing.Size(132, 20)
         Me.txtTipo.TabIndex = 5
         '
         'txtPartNum
@@ -382,7 +392,7 @@ Partial Class Materials
         Me.txtPartNum.Location = New System.Drawing.Point(75, 143)
         Me.txtPartNum.Margin = New System.Windows.Forms.Padding(2)
         Me.txtPartNum.Name = "txtPartNum"
-        Me.txtPartNum.Size = New System.Drawing.Size(136, 20)
+        Me.txtPartNum.Size = New System.Drawing.Size(134, 20)
         Me.txtPartNum.TabIndex = 38
         '
         'Label5
@@ -406,7 +416,7 @@ Partial Class Materials
         Me.sprTamanio.Location = New System.Drawing.Point(75, 7)
         Me.sprTamanio.Maximum = New Decimal(New Integer() {100000, 0, 0, 0})
         Me.sprTamanio.Name = "sprTamanio"
-        Me.sprTamanio.Size = New System.Drawing.Size(136, 20)
+        Me.sprTamanio.Size = New System.Drawing.Size(134, 20)
         Me.sprTamanio.TabIndex = 4
         '
         'Label21
@@ -450,7 +460,7 @@ Partial Class Materials
         Me.sprPrice.Location = New System.Drawing.Point(77, 75)
         Me.sprPrice.Maximum = New Decimal(New Integer() {10000, 0, 0, 0})
         Me.sprPrice.Name = "sprPrice"
-        Me.sprPrice.Size = New System.Drawing.Size(135, 20)
+        Me.sprPrice.Size = New System.Drawing.Size(133, 20)
         Me.sprPrice.TabIndex = 6
         '
         'Panel12
@@ -465,7 +475,7 @@ Partial Class Materials
         Me.Panel12.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel12.Location = New System.Drawing.Point(3, 3)
         Me.Panel12.Name = "Panel12"
-        Me.Panel12.Size = New System.Drawing.Size(261, 191)
+        Me.Panel12.Size = New System.Drawing.Size(260, 191)
         Me.Panel12.TabIndex = 1
         '
         'btnUpdateMareialData
@@ -503,7 +513,7 @@ Partial Class Materials
         Me.txtRM.Location = New System.Drawing.Point(150, 58)
         Me.txtRM.Margin = New System.Windows.Forms.Padding(2)
         Me.txtRM.Name = "txtRM"
-        Me.txtRM.Size = New System.Drawing.Size(109, 20)
+        Me.txtRM.Size = New System.Drawing.Size(108, 20)
         Me.txtRM.TabIndex = 2
         '
         'txtDMaterial
@@ -513,7 +523,7 @@ Partial Class Materials
         Me.txtDMaterial.Location = New System.Drawing.Point(152, 11)
         Me.txtDMaterial.Margin = New System.Windows.Forms.Padding(2)
         Me.txtDMaterial.Name = "txtDMaterial"
-        Me.txtDMaterial.Size = New System.Drawing.Size(107, 20)
+        Me.txtDMaterial.Size = New System.Drawing.Size(106, 20)
         Me.txtDMaterial.TabIndex = 1
         '
         'Label15
@@ -535,7 +545,7 @@ Partial Class Materials
         Me.cmbUnidadDeMedida.Items.AddRange(New Object() {"Each", "Foot", "Yard", "Galon", "Ounce", "LB", "Square foot"})
         Me.cmbUnidadDeMedida.Location = New System.Drawing.Point(152, 108)
         Me.cmbUnidadDeMedida.Name = "cmbUnidadDeMedida"
-        Me.cmbUnidadDeMedida.Size = New System.Drawing.Size(107, 21)
+        Me.cmbUnidadDeMedida.Size = New System.Drawing.Size(106, 21)
         Me.cmbUnidadDeMedida.TabIndex = 3
         '
         'Label16
@@ -553,9 +563,9 @@ Partial Class Materials
         '
         Me.Panel11.Controls.Add(Me.GroupBox1)
         Me.Panel11.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel11.Location = New System.Drawing.Point(491, 3)
+        Me.Panel11.Location = New System.Drawing.Point(488, 3)
         Me.Panel11.Name = "Panel11"
-        Me.Panel11.Size = New System.Drawing.Size(263, 191)
+        Me.Panel11.Size = New System.Drawing.Size(266, 191)
         Me.Panel11.TabIndex = 0
         '
         'GroupBox1
@@ -574,7 +584,7 @@ Partial Class Materials
         Me.GroupBox1.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.GroupBox1.Location = New System.Drawing.Point(0, 0)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(263, 191)
+        Me.GroupBox1.Size = New System.Drawing.Size(266, 191)
         Me.GroupBox1.TabIndex = 36
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "New Order"
@@ -599,7 +609,7 @@ Partial Class Materials
         '
         Me.chbOrden.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.chbOrden.AutoSize = True
-        Me.chbOrden.Location = New System.Drawing.Point(201, 38)
+        Me.chbOrden.Location = New System.Drawing.Point(204, 38)
         Me.chbOrden.Name = "chbOrden"
         Me.chbOrden.Size = New System.Drawing.Size(48, 17)
         Me.chbOrden.TabIndex = 9
@@ -625,7 +635,7 @@ Partial Class Materials
         Me.dtpFechaOrden.Format = System.Windows.Forms.DateTimePickerFormat.Custom
         Me.dtpFechaOrden.Location = New System.Drawing.Point(78, 111)
         Me.dtpFechaOrden.Name = "dtpFechaOrden"
-        Me.dtpFechaOrden.Size = New System.Drawing.Size(151, 20)
+        Me.dtpFechaOrden.Size = New System.Drawing.Size(154, 20)
         Me.dtpFechaOrden.TabIndex = 12
         '
         'Label6
@@ -657,7 +667,7 @@ Partial Class Materials
         Me.sprCantidadOrden.Location = New System.Drawing.Point(78, 73)
         Me.sprCantidadOrden.Maximum = New Decimal(New Integer() {10000, 0, 0, 0})
         Me.sprCantidadOrden.Name = "sprCantidadOrden"
-        Me.sprCantidadOrden.Size = New System.Drawing.Size(109, 20)
+        Me.sprCantidadOrden.Size = New System.Drawing.Size(112, 20)
         Me.sprCantidadOrden.TabIndex = 11
         '
         'sprPricioOrden
@@ -670,7 +680,7 @@ Partial Class Materials
         Me.sprPricioOrden.Location = New System.Drawing.Point(78, 34)
         Me.sprPricioOrden.Maximum = New Decimal(New Integer() {10000, 0, 0, 0})
         Me.sprPricioOrden.Name = "sprPricioOrden"
-        Me.sprPricioOrden.Size = New System.Drawing.Size(109, 20)
+        Me.sprPricioOrden.Size = New System.Drawing.Size(112, 20)
         Me.sprPricioOrden.TabIndex = 10
         '
         'Label8
@@ -1328,15 +1338,15 @@ Partial Class Materials
         'TableLayoutPanel7
         '
         Me.TableLayoutPanel7.ColumnCount = 1
-        Me.TableLayoutPanel7.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
+        Me.TableLayoutPanel7.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
         Me.TableLayoutPanel7.Controls.Add(Me.Panel18, 0, 1)
         Me.TableLayoutPanel7.Controls.Add(Me.Panel17, 0, 0)
         Me.TableLayoutPanel7.Dock = System.Windows.Forms.DockStyle.Fill
         Me.TableLayoutPanel7.Location = New System.Drawing.Point(3, 3)
         Me.TableLayoutPanel7.Name = "TableLayoutPanel7"
         Me.TableLayoutPanel7.RowCount = 2
-        Me.TableLayoutPanel7.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 64.50839!))
-        Me.TableLayoutPanel7.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 35.49161!))
+        Me.TableLayoutPanel7.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 300.0!))
+        Me.TableLayoutPanel7.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
         Me.TableLayoutPanel7.Size = New System.Drawing.Size(763, 414)
         Me.TableLayoutPanel7.TabIndex = 5
         '
@@ -1344,9 +1354,9 @@ Partial Class Materials
         '
         Me.Panel18.Controls.Add(Me.txtMensajeProseso)
         Me.Panel18.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel18.Location = New System.Drawing.Point(3, 270)
+        Me.Panel18.Location = New System.Drawing.Point(3, 303)
         Me.Panel18.Name = "Panel18"
-        Me.Panel18.Size = New System.Drawing.Size(757, 141)
+        Me.Panel18.Size = New System.Drawing.Size(757, 108)
         Me.Panel18.TabIndex = 1
         '
         'txtMensajeProseso
@@ -1359,7 +1369,7 @@ Partial Class Materials
         Me.txtMensajeProseso.ReadOnly = True
         Me.txtMensajeProseso.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
         Me.txtMensajeProseso.ShortcutsEnabled = False
-        Me.txtMensajeProseso.Size = New System.Drawing.Size(757, 141)
+        Me.txtMensajeProseso.Size = New System.Drawing.Size(757, 108)
         Me.txtMensajeProseso.TabIndex = 3
         '
         'Panel17
@@ -1368,71 +1378,146 @@ Partial Class Materials
         Me.Panel17.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel17.Location = New System.Drawing.Point(3, 3)
         Me.Panel17.Name = "Panel17"
-        Me.Panel17.Size = New System.Drawing.Size(757, 261)
+        Me.Panel17.Size = New System.Drawing.Size(757, 294)
         Me.Panel17.TabIndex = 0
         '
         'TableLayoutPanel8
         '
         Me.TableLayoutPanel8.ColumnCount = 2
-        Me.TableLayoutPanel8.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 60.02621!))
-        Me.TableLayoutPanel8.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 39.97379!))
+        Me.TableLayoutPanel8.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
+        Me.TableLayoutPanel8.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 250.0!))
         Me.TableLayoutPanel8.Controls.Add(Me.Panel19, 1, 0)
         Me.TableLayoutPanel8.Controls.Add(Me.Panel20, 0, 0)
         Me.TableLayoutPanel8.Dock = System.Windows.Forms.DockStyle.Fill
         Me.TableLayoutPanel8.Location = New System.Drawing.Point(0, 0)
         Me.TableLayoutPanel8.Name = "TableLayoutPanel8"
         Me.TableLayoutPanel8.RowCount = 1
-        Me.TableLayoutPanel8.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
-        Me.TableLayoutPanel8.Size = New System.Drawing.Size(757, 261)
+        Me.TableLayoutPanel8.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
+        Me.TableLayoutPanel8.Size = New System.Drawing.Size(757, 294)
         Me.TableLayoutPanel8.TabIndex = 0
         '
         'Panel19
         '
         Me.Panel19.Controls.Add(Me.TextBox1)
         Me.Panel19.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel19.Location = New System.Drawing.Point(457, 3)
+        Me.Panel19.Location = New System.Drawing.Point(510, 3)
         Me.Panel19.Name = "Panel19"
-        Me.Panel19.Size = New System.Drawing.Size(297, 255)
+        Me.Panel19.Size = New System.Drawing.Size(244, 288)
         Me.Panel19.TabIndex = 1
         '
         'TextBox1
         '
-        Me.TextBox1.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.TextBox1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.TextBox1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox1.Location = New System.Drawing.Point(55, 13)
+        Me.TextBox1.Location = New System.Drawing.Point(0, 0)
         Me.TextBox1.MaxLength = 327670000
         Me.TextBox1.Multiline = True
         Me.TextBox1.Name = "TextBox1"
         Me.TextBox1.ReadOnly = True
         Me.TextBox1.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
         Me.TextBox1.ShortcutsEnabled = False
-        Me.TextBox1.Size = New System.Drawing.Size(222, 236)
+        Me.TextBox1.Size = New System.Drawing.Size(244, 288)
         Me.TextBox1.TabIndex = 4
         Me.TextBox1.Text = resources.GetString("TextBox1.Text")
         '
         'Panel20
         '
+        Me.Panel20.Controls.Add(Me.GroupBox4)
         Me.Panel20.Controls.Add(Me.GroupBox3)
         Me.Panel20.Controls.Add(Me.GroupBox2)
         Me.Panel20.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel20.Location = New System.Drawing.Point(3, 3)
         Me.Panel20.Name = "Panel20"
-        Me.Panel20.Size = New System.Drawing.Size(448, 255)
+        Me.Panel20.Size = New System.Drawing.Size(501, 288)
         Me.Panel20.TabIndex = 2
+        '
+        'GroupBox4
+        '
+        Me.GroupBox4.Controls.Add(Me.TableLayoutPanel13)
+        Me.GroupBox4.Dock = System.Windows.Forms.DockStyle.Top
+        Me.GroupBox4.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.GroupBox4.Location = New System.Drawing.Point(0, 193)
+        Me.GroupBox4.Name = "GroupBox4"
+        Me.GroupBox4.Size = New System.Drawing.Size(501, 90)
+        Me.GroupBox4.TabIndex = 3
+        Me.GroupBox4.TabStop = False
+        Me.GroupBox4.Text = "Material"
+        '
+        'TableLayoutPanel13
+        '
+        Me.TableLayoutPanel13.ColumnCount = 2
+        Me.TableLayoutPanel13.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
+        Me.TableLayoutPanel13.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
+        Me.TableLayoutPanel13.Controls.Add(Me.Panel29, 1, 0)
+        Me.TableLayoutPanel13.Controls.Add(Me.Panel30, 0, 0)
+        Me.TableLayoutPanel13.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.TableLayoutPanel13.Location = New System.Drawing.Point(3, 16)
+        Me.TableLayoutPanel13.Name = "TableLayoutPanel13"
+        Me.TableLayoutPanel13.RowCount = 1
+        Me.TableLayoutPanel13.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
+        Me.TableLayoutPanel13.Size = New System.Drawing.Size(495, 71)
+        Me.TableLayoutPanel13.TabIndex = 2
+        '
+        'Panel29
+        '
+        Me.Panel29.Controls.Add(Me.btnUploadMaterial)
+        Me.Panel29.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Panel29.Location = New System.Drawing.Point(250, 3)
+        Me.Panel29.Name = "Panel29"
+        Me.Panel29.Size = New System.Drawing.Size(242, 65)
+        Me.Panel29.TabIndex = 1
+        '
+        'btnUploadMaterial
+        '
+        Me.btnUploadMaterial.FlatAppearance.BorderSize = 0
+        Me.btnUploadMaterial.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(41, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(185, Byte), Integer))
+        Me.btnUploadMaterial.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnUploadMaterial.Image = CType(resources.GetObject("btnUploadMaterial.Image"), System.Drawing.Image)
+        Me.btnUploadMaterial.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnUploadMaterial.Location = New System.Drawing.Point(29, 16)
+        Me.btnUploadMaterial.Name = "btnUploadMaterial"
+        Me.btnUploadMaterial.Size = New System.Drawing.Size(155, 33)
+        Me.btnUploadMaterial.TabIndex = 1
+        Me.btnUploadMaterial.Text = "Upload Excel"
+        Me.btnUploadMaterial.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.btnUploadMaterial.UseVisualStyleBackColor = True
+        '
+        'Panel30
+        '
+        Me.Panel30.Controls.Add(Me.btnDownLoadExcelMaterial)
+        Me.Panel30.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Panel30.Location = New System.Drawing.Point(3, 3)
+        Me.Panel30.Name = "Panel30"
+        Me.Panel30.Size = New System.Drawing.Size(241, 65)
+        Me.Panel30.TabIndex = 0
+        '
+        'btnDownLoadExcelMaterial
+        '
+        Me.btnDownLoadExcelMaterial.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnDownLoadExcelMaterial.FlatAppearance.BorderSize = 0
+        Me.btnDownLoadExcelMaterial.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(41, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(185, Byte), Integer))
+        Me.btnDownLoadExcelMaterial.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnDownLoadExcelMaterial.Image = CType(resources.GetObject("btnDownLoadExcelMaterial.Image"), System.Drawing.Image)
+        Me.btnDownLoadExcelMaterial.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnDownLoadExcelMaterial.Location = New System.Drawing.Point(53, 16)
+        Me.btnDownLoadExcelMaterial.Name = "btnDownLoadExcelMaterial"
+        Me.btnDownLoadExcelMaterial.Size = New System.Drawing.Size(160, 33)
+        Me.btnDownLoadExcelMaterial.TabIndex = 0
+        Me.btnDownLoadExcelMaterial.Text = "Download Excel"
+        Me.btnDownLoadExcelMaterial.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.btnDownLoadExcelMaterial.UseVisualStyleBackColor = True
         '
         'GroupBox3
         '
-        Me.GroupBox3.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.GroupBox3.Controls.Add(Me.TableLayoutPanel10)
+        Me.GroupBox3.Dock = System.Windows.Forms.DockStyle.Top
         Me.GroupBox3.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.GroupBox3.Location = New System.Drawing.Point(3, 141)
+        Me.GroupBox3.Location = New System.Drawing.Point(0, 103)
         Me.GroupBox3.Name = "GroupBox3"
-        Me.GroupBox3.Size = New System.Drawing.Size(442, 120)
+        Me.GroupBox3.Size = New System.Drawing.Size(501, 90)
         Me.GroupBox3.TabIndex = 2
         Me.GroupBox3.TabStop = False
-        Me.GroupBox3.Text = "Material"
+        Me.GroupBox3.Text = "Material Source"
         '
         'TableLayoutPanel10
         '
@@ -1446,67 +1531,66 @@ Partial Class Materials
         Me.TableLayoutPanel10.Name = "TableLayoutPanel10"
         Me.TableLayoutPanel10.RowCount = 1
         Me.TableLayoutPanel10.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
-        Me.TableLayoutPanel10.Size = New System.Drawing.Size(436, 101)
+        Me.TableLayoutPanel10.Size = New System.Drawing.Size(495, 71)
         Me.TableLayoutPanel10.TabIndex = 2
         '
         'Panel24
         '
-        Me.Panel24.Controls.Add(Me.btnMaterialUploadExcel)
+        Me.Panel24.Controls.Add(Me.btnMaterialSourceUploadExcel)
         Me.Panel24.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel24.Location = New System.Drawing.Point(221, 3)
+        Me.Panel24.Location = New System.Drawing.Point(250, 3)
         Me.Panel24.Name = "Panel24"
-        Me.Panel24.Size = New System.Drawing.Size(212, 95)
+        Me.Panel24.Size = New System.Drawing.Size(242, 65)
         Me.Panel24.TabIndex = 1
         '
-        'btnMaterialUploadExcel
+        'btnMaterialSourceUploadExcel
         '
-        Me.btnMaterialUploadExcel.FlatAppearance.BorderSize = 0
-        Me.btnMaterialUploadExcel.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(41, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(185, Byte), Integer))
-        Me.btnMaterialUploadExcel.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnMaterialUploadExcel.Image = CType(resources.GetObject("btnMaterialUploadExcel.Image"), System.Drawing.Image)
-        Me.btnMaterialUploadExcel.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnMaterialUploadExcel.Location = New System.Drawing.Point(29, 18)
-        Me.btnMaterialUploadExcel.Name = "btnMaterialUploadExcel"
-        Me.btnMaterialUploadExcel.Size = New System.Drawing.Size(155, 33)
-        Me.btnMaterialUploadExcel.TabIndex = 1
-        Me.btnMaterialUploadExcel.Text = "Upload Excel"
-        Me.btnMaterialUploadExcel.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.btnMaterialUploadExcel.UseVisualStyleBackColor = True
+        Me.btnMaterialSourceUploadExcel.FlatAppearance.BorderSize = 0
+        Me.btnMaterialSourceUploadExcel.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(41, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(185, Byte), Integer))
+        Me.btnMaterialSourceUploadExcel.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnMaterialSourceUploadExcel.Image = CType(resources.GetObject("btnMaterialSourceUploadExcel.Image"), System.Drawing.Image)
+        Me.btnMaterialSourceUploadExcel.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnMaterialSourceUploadExcel.Location = New System.Drawing.Point(29, 16)
+        Me.btnMaterialSourceUploadExcel.Name = "btnMaterialSourceUploadExcel"
+        Me.btnMaterialSourceUploadExcel.Size = New System.Drawing.Size(155, 33)
+        Me.btnMaterialSourceUploadExcel.TabIndex = 1
+        Me.btnMaterialSourceUploadExcel.Text = "Upload Excel"
+        Me.btnMaterialSourceUploadExcel.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.btnMaterialSourceUploadExcel.UseVisualStyleBackColor = True
         '
         'Panel23
         '
-        Me.Panel23.Controls.Add(Me.btnMaterialDownloadExcel)
+        Me.Panel23.Controls.Add(Me.btnMaterialSourceDownloadExcel)
         Me.Panel23.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel23.Location = New System.Drawing.Point(3, 3)
         Me.Panel23.Name = "Panel23"
-        Me.Panel23.Size = New System.Drawing.Size(212, 95)
+        Me.Panel23.Size = New System.Drawing.Size(241, 65)
         Me.Panel23.TabIndex = 0
         '
-        'btnMaterialDownloadExcel
+        'btnMaterialSourceDownloadExcel
         '
-        Me.btnMaterialDownloadExcel.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnMaterialDownloadExcel.FlatAppearance.BorderSize = 0
-        Me.btnMaterialDownloadExcel.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(41, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(185, Byte), Integer))
-        Me.btnMaterialDownloadExcel.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnMaterialDownloadExcel.Image = CType(resources.GetObject("btnMaterialDownloadExcel.Image"), System.Drawing.Image)
-        Me.btnMaterialDownloadExcel.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnMaterialDownloadExcel.Location = New System.Drawing.Point(34, 18)
-        Me.btnMaterialDownloadExcel.Name = "btnMaterialDownloadExcel"
-        Me.btnMaterialDownloadExcel.Size = New System.Drawing.Size(160, 33)
-        Me.btnMaterialDownloadExcel.TabIndex = 0
-        Me.btnMaterialDownloadExcel.Text = "Download Excel"
-        Me.btnMaterialDownloadExcel.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.btnMaterialDownloadExcel.UseVisualStyleBackColor = True
+        Me.btnMaterialSourceDownloadExcel.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnMaterialSourceDownloadExcel.FlatAppearance.BorderSize = 0
+        Me.btnMaterialSourceDownloadExcel.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(41, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(185, Byte), Integer))
+        Me.btnMaterialSourceDownloadExcel.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnMaterialSourceDownloadExcel.Image = CType(resources.GetObject("btnMaterialSourceDownloadExcel.Image"), System.Drawing.Image)
+        Me.btnMaterialSourceDownloadExcel.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnMaterialSourceDownloadExcel.Location = New System.Drawing.Point(53, 16)
+        Me.btnMaterialSourceDownloadExcel.Name = "btnMaterialSourceDownloadExcel"
+        Me.btnMaterialSourceDownloadExcel.Size = New System.Drawing.Size(160, 33)
+        Me.btnMaterialSourceDownloadExcel.TabIndex = 0
+        Me.btnMaterialSourceDownloadExcel.Text = "Download Excel"
+        Me.btnMaterialSourceDownloadExcel.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.btnMaterialSourceDownloadExcel.UseVisualStyleBackColor = True
         '
         'GroupBox2
         '
-        Me.GroupBox2.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.GroupBox2.Controls.Add(Me.TableLayoutPanel9)
+        Me.GroupBox2.Dock = System.Windows.Forms.DockStyle.Top
         Me.GroupBox2.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.GroupBox2.Location = New System.Drawing.Point(3, 3)
+        Me.GroupBox2.Location = New System.Drawing.Point(0, 0)
         Me.GroupBox2.Name = "GroupBox2"
-        Me.GroupBox2.Size = New System.Drawing.Size(442, 132)
+        Me.GroupBox2.Size = New System.Drawing.Size(501, 103)
         Me.GroupBox2.TabIndex = 0
         Me.GroupBox2.TabStop = False
         Me.GroupBox2.Text = "Vendor"
@@ -1523,16 +1607,16 @@ Partial Class Materials
         Me.TableLayoutPanel9.Name = "TableLayoutPanel9"
         Me.TableLayoutPanel9.RowCount = 1
         Me.TableLayoutPanel9.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
-        Me.TableLayoutPanel9.Size = New System.Drawing.Size(436, 113)
+        Me.TableLayoutPanel9.Size = New System.Drawing.Size(495, 84)
         Me.TableLayoutPanel9.TabIndex = 2
         '
         'Panel22
         '
         Me.Panel22.Controls.Add(Me.btnVendorUploadExcel)
         Me.Panel22.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel22.Location = New System.Drawing.Point(221, 3)
+        Me.Panel22.Location = New System.Drawing.Point(250, 3)
         Me.Panel22.Name = "Panel22"
-        Me.Panel22.Size = New System.Drawing.Size(212, 107)
+        Me.Panel22.Size = New System.Drawing.Size(242, 78)
         Me.Panel22.TabIndex = 1
         '
         'btnVendorUploadExcel
@@ -1542,7 +1626,7 @@ Partial Class Materials
         Me.btnVendorUploadExcel.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnVendorUploadExcel.Image = CType(resources.GetObject("btnVendorUploadExcel.Image"), System.Drawing.Image)
         Me.btnVendorUploadExcel.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnVendorUploadExcel.Location = New System.Drawing.Point(29, 29)
+        Me.btnVendorUploadExcel.Location = New System.Drawing.Point(26, 14)
         Me.btnVendorUploadExcel.Name = "btnVendorUploadExcel"
         Me.btnVendorUploadExcel.Size = New System.Drawing.Size(155, 33)
         Me.btnVendorUploadExcel.TabIndex = 1
@@ -1556,7 +1640,7 @@ Partial Class Materials
         Me.Panel21.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel21.Location = New System.Drawing.Point(3, 3)
         Me.Panel21.Name = "Panel21"
-        Me.Panel21.Size = New System.Drawing.Size(212, 107)
+        Me.Panel21.Size = New System.Drawing.Size(241, 78)
         Me.Panel21.TabIndex = 0
         '
         'btnVendorDownloadExcel
@@ -1567,7 +1651,7 @@ Partial Class Materials
         Me.btnVendorDownloadExcel.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnVendorDownloadExcel.Image = CType(resources.GetObject("btnVendorDownloadExcel.Image"), System.Drawing.Image)
         Me.btnVendorDownloadExcel.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnVendorDownloadExcel.Location = New System.Drawing.Point(34, 29)
+        Me.btnVendorDownloadExcel.Location = New System.Drawing.Point(50, 14)
         Me.btnVendorDownloadExcel.Name = "btnVendorDownloadExcel"
         Me.btnVendorDownloadExcel.Size = New System.Drawing.Size(160, 33)
         Me.btnVendorDownloadExcel.TabIndex = 0
@@ -1647,15 +1731,6 @@ Partial Class Materials
         Me.TableLayoutPanel1.Size = New System.Drawing.Size(783, 513)
         Me.TableLayoutPanel1.TabIndex = 6
         '
-        'Panel2
-        '
-        Me.Panel2.Controls.Add(Me.MyTabControl1)
-        Me.Panel2.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel2.Location = New System.Drawing.Point(3, 64)
-        Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(777, 446)
-        Me.Panel2.TabIndex = 1
-        '
         'Panel1
         '
         Me.Panel1.Controls.Add(Me.Button5)
@@ -1664,6 +1739,15 @@ Partial Class Materials
         Me.Panel1.Name = "Panel1"
         Me.Panel1.Size = New System.Drawing.Size(777, 55)
         Me.Panel1.TabIndex = 0
+        '
+        'Panel2
+        '
+        Me.Panel2.Controls.Add(Me.MyTabControl1)
+        Me.Panel2.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Panel2.Location = New System.Drawing.Point(3, 64)
+        Me.Panel2.Name = "Panel2"
+        Me.Panel2.Size = New System.Drawing.Size(777, 446)
+        Me.Panel2.TabIndex = 1
         '
         'MyTabControl1
         '
@@ -1793,6 +1877,10 @@ Partial Class Materials
         Me.Panel19.ResumeLayout(False)
         Me.Panel19.PerformLayout()
         Me.Panel20.ResumeLayout(False)
+        Me.GroupBox4.ResumeLayout(False)
+        Me.TableLayoutPanel13.ResumeLayout(False)
+        Me.Panel29.ResumeLayout(False)
+        Me.Panel30.ResumeLayout(False)
         Me.GroupBox3.ResumeLayout(False)
         Me.TableLayoutPanel10.ResumeLayout(False)
         Me.Panel24.ResumeLayout(False)
@@ -1806,8 +1894,8 @@ Partial Class Materials
         CType(Me.PictureBox4, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PictureBox3, System.ComponentModel.ISupportInitialize).EndInit()
         Me.TableLayoutPanel1.ResumeLayout(False)
-        Me.Panel2.ResumeLayout(False)
         Me.Panel1.ResumeLayout(False)
+        Me.Panel2.ResumeLayout(False)
         Me.MyTabControl1.ResumeLayout(False)
         Me.TabPage5.ResumeLayout(False)
         Me.TabPage6.ResumeLayout(False)
@@ -1876,8 +1964,8 @@ Partial Class Materials
     Friend WithEvents btnCancelMaterial As Button
     Friend WithEvents btnCancelOrder As Button
     Friend WithEvents GroupBox3 As GroupBox
-    Friend WithEvents btnMaterialUploadExcel As Button
-    Friend WithEvents btnMaterialDownloadExcel As Button
+    Friend WithEvents btnMaterialSourceUploadExcel As Button
+    Friend WithEvents btnMaterialSourceDownloadExcel As Button
     Friend WithEvents GroupBox2 As GroupBox
     Friend WithEvents btnVendorUploadExcel As Button
     Friend WithEvents btnVendorDownloadExcel As Button
@@ -1939,4 +2027,10 @@ Partial Class Materials
     Friend WithEvents TabPage6 As TabPage
     Friend WithEvents TabPage7 As TabPage
     Friend WithEvents TabPage8 As TabPage
+    Friend WithEvents GroupBox4 As GroupBox
+    Friend WithEvents TableLayoutPanel13 As TableLayoutPanel
+    Friend WithEvents Panel29 As Panel
+    Friend WithEvents btnUploadMaterial As Button
+    Friend WithEvents Panel30 As Panel
+    Friend WithEvents btnDownLoadExcelMaterial As Button
 End Class

@@ -85,24 +85,36 @@ Public Class MetodosMaterials
         desconectar()
     End Sub
 
-    Public Sub insertarMaterial(ByVal datos() As String)
-        conectar()
-        Dim cmd As New SqlCommand("sp_insert_Material", conn)
-        cmd.CommandType = CommandType.StoredProcedure
-        cmd.Parameters.Add("@nombre", SqlDbType.VarChar, 36).Value = datos(0)
-        cmd.Parameters.Add("@numero", SqlDbType.Int).Value = datos(1)
-        cmd.Parameters.Add("@idVendor", SqlDbType.VarChar, 50).Value = datos(2)
-        cmd.Parameters.Add("@status", SqlDbType.Char, 1).Value = datos(3)
-        cmd.Parameters.Add("@class", SqlDbType.VarChar, 20).Value = datos(4)
-        cmd.Parameters.Add("@msg", SqlDbType.VarChar, 100)
-        cmd.Parameters("@msg").Direction = ParameterDirection.Output
-        If cmd.ExecuteNonQuery Then
-            MsgBox(cmd.Parameters("@msg").Value.ToString)
-        Else
-            MsgBox("Error")
-        End If
-        desconectar()
-    End Sub
+    Public Function insertarMaterial(ByVal datos() As String) As Boolean
+        Try
+            conectar()
+            Dim cmd As New SqlCommand("sp_insert_Material", conn)
+            cmd.CommandType = CommandType.StoredProcedure
+            cmd.Parameters.Add("@nombre", SqlDbType.VarChar, 36).Value = datos(0)
+            cmd.Parameters.Add("@numero", SqlDbType.Int).Value = datos(1)
+            cmd.Parameters.Add("@idVendor", SqlDbType.VarChar, 50).Value = datos(2)
+            cmd.Parameters.Add("@status", SqlDbType.Char, 1).Value = datos(3)
+            cmd.Parameters.Add("@class", SqlDbType.VarChar, 20).Value = datos(4)
+            cmd.Parameters.Add("@msg", SqlDbType.VarChar, 100)
+            cmd.Parameters("@msg").Direction = ParameterDirection.Output
+            If cmd.ExecuteNonQuery Then
+                If cmd.Parameters("@msg").Value.ToString() <> "Successful" Then
+                    MsgBox(cmd.Parameters("@msg").Value.ToString())
+                    Return False
+                Else
+                    Return True
+                End If
+            Else
+                MsgBox("Error")
+                Return False
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message())
+            Return False
+        Finally
+            desconectar()
+        End Try
+    End Function
 
     Public Sub insertarMaterial(ByVal datos() As String, listdatosMaterial As List(Of String), message As Boolean, validar As Boolean)
         conectar()
@@ -196,6 +208,26 @@ or v.estatus like concat('%', '" + consulta + "','%')", conn)
         End If
         desconectar()
     End Sub
+    Public Function selectVendor() As Data.DataTable
+        Try
+            conectar()
+            Dim cmd As New SqlCommand("select convert(nvarchar, numberVendor) as 'ID' , name as 'Name' , idVendor from vendor where estatus = 'E'", conn)
+            Dim dt As New DataTable
+            If cmd.ExecuteNonQuery Then
+                Dim da As New SqlDataAdapter(cmd)
+                da.Fill(dt)
+            Else
+                dt.Columns.Add("ID")
+                dt.Columns.Add("Name")
+                dt.Columns.Add("idVendor")
+            End If
+            Return dt
+        Catch ex As Exception
+            Return Nothing
+        Finally
+            desconectar()
+        End Try
+    End Function
 
     Public Sub selectMaterial(ByVal tabla As DataGridView, ByVal consulta As String)
         conectar()

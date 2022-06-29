@@ -189,7 +189,7 @@ begin
 	set @idContact = NEWID()
 	insert into HomeAddress values(@idAddress,'',0,'','',0)
 	insert into contact values(@idContact,'','','')
-	insert into company values(NEWID(),'My Company','USA','',@idAddress,@idContact,NULL)
+	insert into company values(NEWID(),'My Company','USA','','',@idAddress,@idContact,NULL)
 	select TOP(1) * from company as cp 
 	inner join HomeAddress as hm on cp.idHomeAddress = hm.idHomeAdress 
 	inner join contact as cn on cp.idContact = cn.idContact
