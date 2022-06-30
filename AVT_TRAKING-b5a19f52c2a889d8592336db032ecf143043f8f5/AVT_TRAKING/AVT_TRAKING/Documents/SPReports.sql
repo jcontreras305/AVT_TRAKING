@@ -377,8 +377,8 @@ go
 --##############################################################################################
 --################## SP REPORT CLIENT BILLINGS PROJECT #########################################
 --##############################################################################################
---CREATE proc [dbo].[sp_Client_billings_Project]
-ALTER proc [dbo].[sp_Client_billings_Project]
+CREATE proc [dbo].[sp_Client_billings_Project]
+--ALTER proc [dbo].[sp_Client_billings_Project]
 @startdate as date, 
 @finaldate as date,
 @clientnum as int

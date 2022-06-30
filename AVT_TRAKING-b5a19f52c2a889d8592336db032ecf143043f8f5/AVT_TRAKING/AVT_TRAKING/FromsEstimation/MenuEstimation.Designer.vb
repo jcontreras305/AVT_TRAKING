@@ -29,7 +29,7 @@ Partial Class MenuEstimation
         Me.btnReports = New System.Windows.Forms.Button()
         Me.pnlProyects = New System.Windows.Forms.Panel()
         Me.Button7 = New System.Windows.Forms.Button()
-        Me.Button6 = New System.Windows.Forms.Button()
+        Me.btnProjectActuals = New System.Windows.Forms.Button()
         Me.btnDrawingProgress = New System.Windows.Forms.Button()
         Me.Button4 = New System.Windows.Forms.Button()
         Me.btnProjects = New System.Windows.Forms.Button()
@@ -125,7 +125,7 @@ Partial Class MenuEstimation
         'pnlProyects
         '
         Me.pnlProyects.Controls.Add(Me.Button7)
-        Me.pnlProyects.Controls.Add(Me.Button6)
+        Me.pnlProyects.Controls.Add(Me.btnProjectActuals)
         Me.pnlProyects.Controls.Add(Me.btnDrawingProgress)
         Me.pnlProyects.Controls.Add(Me.Button4)
         Me.pnlProyects.Dock = System.Windows.Forms.DockStyle.Top
@@ -153,24 +153,24 @@ Partial Class MenuEstimation
         Me.Button7.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         Me.Button7.UseVisualStyleBackColor = False
         '
-        'Button6
+        'btnProjectActuals
         '
-        Me.Button6.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(48, Byte), Integer), CType(CType(95, Byte), Integer))
-        Me.Button6.Dock = System.Windows.Forms.DockStyle.Top
-        Me.Button6.FlatAppearance.BorderSize = 0
-        Me.Button6.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(59, Byte), Integer), CType(CType(69, Byte), Integer), CType(CType(79, Byte), Integer))
-        Me.Button6.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.Button6.Font = New System.Drawing.Font("Nirmala UI", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button6.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.Button6.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.Button6.Location = New System.Drawing.Point(0, 74)
-        Me.Button6.Name = "Button6"
-        Me.Button6.Padding = New System.Windows.Forms.Padding(0, 0, 6, 0)
-        Me.Button6.Size = New System.Drawing.Size(188, 37)
-        Me.Button6.TabIndex = 9
-        Me.Button6.Text = "Project Actuals"
-        Me.Button6.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.Button6.UseVisualStyleBackColor = False
+        Me.btnProjectActuals.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(48, Byte), Integer), CType(CType(95, Byte), Integer))
+        Me.btnProjectActuals.Dock = System.Windows.Forms.DockStyle.Top
+        Me.btnProjectActuals.FlatAppearance.BorderSize = 0
+        Me.btnProjectActuals.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(59, Byte), Integer), CType(CType(69, Byte), Integer), CType(CType(79, Byte), Integer))
+        Me.btnProjectActuals.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnProjectActuals.Font = New System.Drawing.Font("Nirmala UI", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnProjectActuals.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.btnProjectActuals.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnProjectActuals.Location = New System.Drawing.Point(0, 74)
+        Me.btnProjectActuals.Name = "btnProjectActuals"
+        Me.btnProjectActuals.Padding = New System.Windows.Forms.Padding(0, 0, 6, 0)
+        Me.btnProjectActuals.Size = New System.Drawing.Size(188, 37)
+        Me.btnProjectActuals.TabIndex = 9
+        Me.btnProjectActuals.Text = "Project Actuals"
+        Me.btnProjectActuals.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.btnProjectActuals.UseVisualStyleBackColor = False
         '
         'btnDrawingProgress
         '
@@ -389,7 +389,7 @@ Partial Class MenuEstimation
     Friend WithEvents btnReports As Button
     Friend WithEvents pnlProyects As Panel
     Friend WithEvents Button7 As Button
-    Friend WithEvents Button6 As Button
+    Friend WithEvents btnProjectActuals As Button
     Friend WithEvents btnDrawingProgress As Button
     Friend WithEvents Button4 As Button
     Friend WithEvents btnProjects As Button
