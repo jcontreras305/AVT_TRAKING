@@ -54,12 +54,6 @@ Partial Class ProjectsActuals
         Me.pntToDate = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.TabPage2 = New System.Windows.Forms.TabPage()
         Me.tblCost = New System.Windows.Forms.DataGridView()
-        Me.Demo = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Build = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Weekend = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Tag = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.WeekendAux = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.TagAux = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.projectIdCost = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.weekendCostAux = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.weekendCost = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -71,6 +65,12 @@ Partial Class ProjectsActuals
         Me.rmvToDateCost = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.iiToDateCost = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.pntToDateCost = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Demo = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Build = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Weekend = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Tag = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.WeekendAux = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.TagAux = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.TableLayoutPanel1.SuspendLayout()
         Me.Panel4.SuspendLayout()
         Me.Panel1.SuspendLayout()
@@ -346,21 +346,25 @@ Partial Class ProjectsActuals
         '
         Me.scfHrsToDate.HeaderText = "SCF ToDate"
         Me.scfHrsToDate.Name = "scfHrsToDate"
+        Me.scfHrsToDate.ReadOnly = True
         '
         'rmvToDate
         '
         Me.rmvToDate.HeaderText = "Rmv ToDate"
         Me.rmvToDate.Name = "rmvToDate"
+        Me.rmvToDate.ReadOnly = True
         '
         'iiToDate
         '
         Me.iiToDate.HeaderText = "II ToDate"
         Me.iiToDate.Name = "iiToDate"
+        Me.iiToDate.ReadOnly = True
         '
         'pntToDate
         '
         Me.pntToDate.HeaderText = "Pnt ToDate"
         Me.pntToDate.Name = "pntToDate"
+        Me.pntToDate.ReadOnly = True
         '
         'TabPage2
         '
@@ -383,38 +387,6 @@ Partial Class ProjectsActuals
         Me.tblCost.Name = "tblCost"
         Me.tblCost.Size = New System.Drawing.Size(902, 141)
         Me.tblCost.TabIndex = 0
-        '
-        'Demo
-        '
-        Me.Demo.HeaderText = "Demo%"
-        Me.Demo.Name = "Demo"
-        '
-        'Build
-        '
-        Me.Build.HeaderText = "Build %"
-        Me.Build.Name = "Build"
-        '
-        'Weekend
-        '
-        Me.Weekend.HeaderText = "Weekend"
-        Me.Weekend.Name = "Weekend"
-        '
-        'Tag
-        '
-        Me.Tag.HeaderText = "Tag No."
-        Me.Tag.Name = "Tag"
-        '
-        'WeekendAux
-        '
-        Me.WeekendAux.HeaderText = "WeekendAux"
-        Me.WeekendAux.Name = "WeekendAux"
-        Me.WeekendAux.Visible = False
-        '
-        'TagAux
-        '
-        Me.TagAux.HeaderText = "TagAux"
-        Me.TagAux.Name = "TagAux"
-        Me.TagAux.Visible = False
         '
         'projectIdCost
         '
@@ -473,6 +445,38 @@ Partial Class ProjectsActuals
         Me.pntToDateCost.HeaderText = "pnt ToDate"
         Me.pntToDateCost.Name = "pntToDateCost"
         '
+        'Demo
+        '
+        Me.Demo.HeaderText = "Demo%"
+        Me.Demo.Name = "Demo"
+        '
+        'Build
+        '
+        Me.Build.HeaderText = "Build %"
+        Me.Build.Name = "Build"
+        '
+        'Weekend
+        '
+        Me.Weekend.HeaderText = "Weekend"
+        Me.Weekend.Name = "Weekend"
+        '
+        'Tag
+        '
+        Me.Tag.HeaderText = "Tag No."
+        Me.Tag.Name = "Tag"
+        '
+        'WeekendAux
+        '
+        Me.WeekendAux.HeaderText = "WeekendAux"
+        Me.WeekendAux.Name = "WeekendAux"
+        Me.WeekendAux.Visible = False
+        '
+        'TagAux
+        '
+        Me.TagAux.HeaderText = "TagAux"
+        Me.TagAux.Name = "TagAux"
+        Me.TagAux.Visible = False
+        '
         'ProjectsActuals
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -524,17 +528,6 @@ Partial Class ProjectsActuals
     Friend WithEvents Tag As DataGridViewTextBoxColumn
     Friend WithEvents WeekendAux As DataGridViewTextBoxColumn
     Friend WithEvents TagAux As DataGridViewTextBoxColumn
-    Friend WithEvents projectIdAux As DataGridViewTextBoxColumn
-    Friend WithEvents weekAux As DataGridViewTextBoxColumn
-    Friend WithEvents WeekendHrs As DataGridViewTextBoxColumn
-    Friend WithEvents scfHrs As DataGridViewTextBoxColumn
-    Friend WithEvents rmvHrs As DataGridViewTextBoxColumn
-    Friend WithEvents iiHrs As DataGridViewTextBoxColumn
-    Friend WithEvents pntHrs As DataGridViewTextBoxColumn
-    Friend WithEvents scfHrsToDate As DataGridViewTextBoxColumn
-    Friend WithEvents rmvToDate As DataGridViewTextBoxColumn
-    Friend WithEvents iiToDate As DataGridViewTextBoxColumn
-    Friend WithEvents pntToDate As DataGridViewTextBoxColumn
     Friend WithEvents projectIdCost As DataGridViewTextBoxColumn
     Friend WithEvents weekendCostAux As DataGridViewTextBoxColumn
     Friend WithEvents weekendCost As DataGridViewTextBoxColumn
@@ -546,4 +539,15 @@ Partial Class ProjectsActuals
     Friend WithEvents rmvToDateCost As DataGridViewTextBoxColumn
     Friend WithEvents iiToDateCost As DataGridViewTextBoxColumn
     Friend WithEvents pntToDateCost As DataGridViewTextBoxColumn
+    Friend WithEvents projectIdAux As DataGridViewTextBoxColumn
+    Friend WithEvents weekAux As DataGridViewTextBoxColumn
+    Friend WithEvents WeekendHrs As DataGridViewTextBoxColumn
+    Friend WithEvents scfHrs As DataGridViewTextBoxColumn
+    Friend WithEvents rmvHrs As DataGridViewTextBoxColumn
+    Friend WithEvents iiHrs As DataGridViewTextBoxColumn
+    Friend WithEvents pntHrs As DataGridViewTextBoxColumn
+    Friend WithEvents scfHrsToDate As DataGridViewTextBoxColumn
+    Friend WithEvents rmvToDate As DataGridViewTextBoxColumn
+    Friend WithEvents iiToDate As DataGridViewTextBoxColumn
+    Friend WithEvents pntToDate As DataGridViewTextBoxColumn
 End Class

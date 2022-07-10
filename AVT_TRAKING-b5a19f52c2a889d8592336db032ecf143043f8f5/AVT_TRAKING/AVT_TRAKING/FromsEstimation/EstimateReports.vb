@@ -51,4 +51,11 @@
         ventanaReporte.ClientNum = clientNum
         ventanaReporte.ShowDialog()
     End Sub
+
+    Private Sub btnRFIScf_Click(sender As Object, e As EventArgs) Handles btnRFIScf.Click
+        Dim rpt As New RFIReports
+        rpt.TypeRFI = "Scaffold"
+        rpt.projectId = projectId
+        rpt.Show()
+    End Sub
 End Class

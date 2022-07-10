@@ -2702,3 +2702,191 @@ inner join HomeAddress as ha on ha.idHomeAdress = cl.idHomeAdress
 where po.projectId = @projectId
 end
 go
+----#########################################################################################################################################################################################
+----############## PROCEDIMIENTO ELIMINAR RFI SCAFFOLD ######################################################################################################################################
+----#########################################################################################################################################################################################
+CREATE proc sp_deleteRFIScaffold 
+@idRFIDelete varchar(35),
+@idRFINext varchar(35),
+@tag varchar(20),
+@idDrawingNum varchar(45)
+as
+declare @error as bit
+declare @Days as int
+declare @With as float
+declare @Length as float
+declare @Heigth as float
+declare @Build as float
+declare @IdLabor as varchar(40)
+declare @IdSCFUR as varchar(35)
+begin
+	begin tran
+		begin try
+			set @error = 0
+			if (@idRFINext <> '')--existe un RFI adelante en base a los IDs
+			begin
+				if (select COUNT(*) from RFIScaffoldEst where idRFI = @idRFINext and tag = @tag)=1
+				begin 
+					--Tomo los valor de LAST del que tengo que eliminar 
+					select top 1 @Days = lastDays,@With = lastWith,@Length = lastLength,@Heigth=lastHeigth,@Build=lastBuild,@IdLabor = lastIdLaborRate,@IdSCFUR = lastIdSCFUR from RFIScaffoldEst where idRFI = @idRFIDelete and tag = @tag	
+					--Actualizo los valore del que esta enseguida con los valores que deseo eliminar
+					update RFIScaffoldEst set lastDays = @Days ,lastWith = @With,lastLength=@Length,lastHeigth=@Heigth,lastBuild=@Build,lastIdLaborRate=@IdLabor,lastIdSCFUR=@IdSCFUR 
+					where tag = @tag and idDrawingNum = @idDrawingNum and idRFI = @idRFINext
+					--elimino el RFI
+					delete RFIScaffoldEst where tag = @tag and idDrawingNum = @idDrawingNum and idRFI = @idRFIDelete
+				end
+				else
+				begin 
+					delete RFIScaffoldEst where tag = @tag and idDrawingNum = @idDrawingNum and idRFI = @idRFIDelete
+				end
+			end
+			else --No existe un RFI mas o depeues de este, por ende tiene que tomar los valores de su Last ya que ES el Scaffold mismo o un anterior a el,
+			begin -- y se tiene que actualizar el scaffoldEst ya que es el RFI a eliminar es el ultimo cambio que se le hizo
+				--Tomo los valor de LAST del que tengo que eliminar 
+				select top 1 @Days = lastDays,@With = lastWith,@Length = lastLength,@Heigth=lastHeigth,@Build=lastBuild,@IdLabor = lastIdLaborRate,@IdSCFUR = lastIdSCFUR from RFIScaffoldEst where idRFI = @idRFIDelete and tag = @tag	
+				--Actualizo el ScaffoldEst con los valores LAST del RFI a eliminar
+				update scaffoldEst set [days]=@Days,width=@With,[length]=@Length,heigth=@Heigth,build=@Build,idLaborRate= @IdLabor,idSCFUR=@IdSCFUR where tag = @tag and idDrawingNum = @idDrawingNum
+				--Elimino el RFI
+				delete RFIScaffoldEst where tag = @tag and idDrawingNum = @idDrawingNum and idRFI = @idRFIDelete
+			end
+		end try
+		begin catch
+			set @error = 1
+			goto solveError
+		end catch
+	commit tran
+	solveError:
+	if @error = 1
+	begin 
+		rollback tran
+	end 
+end
+go
+----#########################################################################################################################################################################################
+----############# PROCDIMIENTO PARA LA CONSULTA DEL REPORTE DE RFI DE SCAFFOLD #############################################################################################################
+----#########################################################################################################################################################################################
+create proc sp_RFIDiffScf
+	@idRFI varchar(35),
+	@tag varchar(20),
+	@idDrawingNum varchar(45)
+as 
+begin
+	exec sp_insertUpdateRFIScaffoldEst @idRFI,@tag,@idDrawingNum
+	select rfiD.idRFI,rfiD.tag,rfiD.idDrawingNum,scf.location, po.projectId,po.[description],rfi.basicFCR,
+	rfiD.oSHR ,rfiD.oSBHR,rfiD.oSDHR,rfiD.nSHR,rfiD.nSBHR,rfiD.nSDHR,
+	rfiD.oSBCOSTL,rfiD.oSDCOSTL,rfiD.oSCOSTL,rfiD.nSBCOSTL,rfiD.nSDCOSTL,rfiD.nSCOSTL,
+	rfiD.oSCOSTM,rfiD.nSCOSTM,
+	rfiD.oSCOSTE,rfiD.nSCOSTE
+	from RFIDiffScf as rfiD
+	inner join scaffoldEst as scf on scf.tag = rfiD.tag and rfiD.idDrawingNum = scf.idDrawingNum
+	inner join RFIScaffoldEst as rfi on rfi.tag = rfiD.tag and rfi.idDrawingNum = scf.idDrawingNum and rfi.idRFI= rfiD.idRFI
+	inner join drawing as dr on dr.idDrawingNum = rfiD.idDrawingNum
+	inner join projectClientEst as po on po.projectId = dr.projectId
+	where rfiD.idDrawingNum = @idDrawingNum and rfiD.tag = @tag and rfiD.idRFI = @idRFI
+end
+go
+
+----#########################################################################################################################################################################################
+----############# PROCDIMIENTO PARA INSERTAR Y ACTUALIZAR RFI DIF DE ESCAFFOLD EST ##########################################################################################################
+----#########################################################################################################################################################################################
+
+create proc sp_insertUpdateRFIScaffoldEst
+	@idRFI varchar(35),
+	@tag varchar(20),
+	@idDrawingNum varchar(45)
+as
+declare @with as float = 0
+declare @length as float = 0
+declare @heigth as float = 0
+declare @buildPercent as float = 0
+declare @laborB as float = 0
+declare @materialB as float = 0
+declare @equipmentB as float = 0
+declare @scafRate as float = 0
+declare @oSCM as float = 0
+declare @oSHR as float = 0
+declare @oSBHR as float = 0
+declare @oSDHR as float = 0
+declare @oSBCOSTL as float = 0
+declare @oSDCOSTL as float = 0
+declare @oSCOSTL as float = 0
+declare @oSBCOSTM as float = 0
+declare @oSDCOSTM as float = 0
+declare @oSCOSTM as float = 0
+declare @oSBCOSTE as float = 0
+declare @oSDCOSTE as float = 0
+declare @oSCOSTE as float = 0
+declare @oSBTCOST as float = 0
+declare @oSDTCOST as float = 0
+declare @oSTCOST as float = 0
+declare @nSCM as float = 0
+declare @nSHR as float = 0
+declare @nSBHR as float = 0
+declare @nSDHR as float = 0
+declare @nSBCOSTL as float = 0
+declare @nSDCOSTL as float = 0
+declare @nSCOSTL as float = 0
+declare @nSBCOSTM as float = 0
+declare @nSDCOSTM as float = 0
+declare @nSCOSTM as float = 0
+declare @nSBCOSTE as float = 0
+declare @nSDCOSTE as float = 0
+declare @nSCOSTE as float = 0
+declare @nSBTCOST as float = 0
+declare @nSDTCOST as float = 0
+declare @nSTCOST as float = 0
+begin
+	--CARGAMOS LOS DATOS DE LA VARIABLE QUE VAMOS A UTILIZAR
+	select @with= lastWith,@length= lastLength ,@heigth = lastHeigth from RFIScaffoldEst where idDrawingNum=@idDrawingNum and tag= @tag and idRFI = @idRFI
+	select @laborB = laborB, @materialB = materialB,@equipmentB = equipmentB,@buildPercent = buildPercent from scfUnitsRates where idSCFUR = (select lastIdSCFUR from RFIScaffoldEst where idDrawingNum=@idDrawingNum and tag= @tag and idRFI = @idRFI)
+	set @buildPercent = IIF(ISNULL(@buildPercent,1)=1,0,@buildPercent*0.01)  
+	select @scafRate = scafRate from laborRate where idLaborRate = (select lastIdLaborRate from RFIScaffoldEst where idDrawingNum=@idDrawingNum and tag= @tag and idRFI = @idRFI)
+	--HACEMOS LAS OPERACIONES DEL SCAFFOLD QUE CAMBIO
+	SET @oSCM= ROUND(ISNULL(@with,0)*ISNULL(@length,0)*ISNULL(@heigth,0)/35.3,2)
+	SET @oSHR= ROUND(@oSCM/@laborB,1)
+	SET @oSBHR= ROUND(@oSHR*@buildPercent,1)
+	SET @oSDHR= @oSHR-@oSBHR 
+	SET @oSBCOSTL= ROUND(@oSBHR*@scafRate,2)
+	SET @oSDCOSTL= ROUND(@oSDHR*@scafRate,2)
+	SET @oSCOSTL= @oSBCOSTL+@oSDCOSTL 
+	SET @oSBCOSTM= ROUND(@oSBHR*@materialB,2)
+	SET @oSDCOSTM= ROUND(@oSDHR*@materialB,2)
+	SET @oSCOSTM= @oSBCOSTM+@oSDCOSTM
+	SET @oSBCOSTE= ROUND(@oSBHR*@equipmentB,2)
+	SET @oSDCOSTE= ROUND(@oSDHR*@equipmentB,2)
+	SET @oSCOSTE= @oSBCOSTE+@oSDCOSTE
+	SET @oSBTCOST= ISNULL(@oSBCOSTL,0)+ISNULL(@oSBCOSTM,0)+ISNULL(@oSBCOSTE,0)
+	SET @oSDTCOST= ISNULL(@oSDCOSTL,0)+ISNULL(@oSDCOSTM,0)+ISNULL(@oSDCOSTE,0)
+	SET @oSTCOST= ISNULL(@oSCOSTL,0)+ISNULL(@oSCOSTM,0)+ISNULL(@oSCOSTE,0)
+	--CARGAMOS AHORA LOS DATOS DE LA ACTUALIZACION DEL RFI
+	select @with= ISNULL(newWith,0),@length= ISNULL( newLength,0) ,@heigth = ISNULL(newHeigth,0) from RFIScaffoldEst where idDrawingNum=@idDrawingNum and tag= @tag and idRFI = @idRFI
+	select @scafRate = scafRate from laborRate where idLaborRate = (select newIdLaborRate from RFIScaffoldEst where idDrawingNum=@idDrawingNum and tag= @tag and idRFI = @idRFI)
+	--HACEMOS LAS OPERACION PARA EL SCAFFOLD CON LA INFORMACION NUEVA
+	SET @nSCM= ROUND(ISNULL(@with,0)*ISNULL(@length,0)*ISNULL(@length,0)/35.3,2)
+	SET @nSHR= ROUND(@nSCM/@laborB,1)
+	SET @nSBHR= ROUND(@nSHR*@buildPercent,1) 
+	SET @nSDHR= @nSHR - @nSBHR   
+	SET @nSBCOSTL= ROUND(@nSBHR*@scafRate,2)
+	SET @nSDCOSTL= ROUND(@nSDHR*@scafRate,2)
+	SET @nSCOSTL= @nSBCOSTL+@nSDCOSTL 
+	SET @nSBCOSTM= ROUND(@nSBHR*@materialB,2)
+	SET @nSDCOSTM= ROUND(@nSDHR*@materialB,2)
+	SET @nSCOSTM= @nSBCOSTM+@nSDCOSTM 
+	SET @nSBCOSTE= ROUND(@nSBHR*@equipmentB,2) 
+	SET @nSDCOSTE= ROUND(@nSDHR*@equipmentB,2) 
+	SET @nSCOSTE= @nSBCOSTE+@nSDCOSTE
+	SET @nSBTCOST= ISNULL(@nSBCOSTL,0)+ISNULL(@nSBCOSTM,0)+ISNULL(@nSBCOSTE,0)
+	SET @nSDTCOST= ISNULL(@nSDCOSTL,0)+ISNULL(@nSDCOSTM,0)+ISNULL(@nSDCOSTE,0)
+	SET @nSTCOST= ISNULL(@nSCOSTL,0)+ISNULL(@nSCOSTM,0)+ISNULL(@nSCOSTE,0)
+
+	if (select COUNT(*)from RFIDiffScf where idDrawingNum=@idDrawingNum and tag= @tag and idRFI = @idRFI )=0
+	begin
+		insert into RFIDiffScf values (@idRFI,@tag,@idDrawingNum,@oSCM,@oSHR,@oSBHR,@oSDHR,@oSBCOSTL,@oSDCOSTL,@oSCOSTL,@oSBCOSTM,@oSDCOSTM,@oSCOSTM,@oSBCOSTE,@oSDCOSTE,@oSCOSTE,@oSBTCOST,@oSDTCOST,@oSTCOST,@nSCM,@nSHR,@nSBHR,@nSDHR,@nSBCOSTL,@nSDCOSTL,@nSCOSTL,@nSBCOSTM,@nSDCOSTM,@nSCOSTM,@nSBCOSTE,@nSDCOSTE,@nSCOSTE,@nSBTCOST,@nSDTCOST,@nSTCOST)
+	end
+	else if (select COUNT(*)from RFIDiffScf where idDrawingNum=@idDrawingNum and tag= @tag and idRFI = @idRFI )=1
+	begin
+		update RFIDiffScf set  oSCM = @oSCM,oSHR = @oSHR,oSBHR = @oSBHR,oSDHR = @oSDHR,oSBCOSTL = @oSBCOSTL,oSDCOSTL = @oSDCOSTL,oSCOSTL = @oSCOSTL,oSBCOSTM = @oSBCOSTM,oSDCOSTM = @oSDCOSTM,oSCOSTM = @oSCOSTM,oSBCOSTE = @oSBCOSTE,oSDCOSTE = @oSDCOSTE,oSCOSTE = @oSCOSTE,oSBTCOST = @oSBTCOST,oSDTCOST = @oSDTCOST,oSTCOST = @oSTCOST,nSCM = @nSCM,nSHR = @nSHR,nSBHR = @nSBHR,nSDHR = @nSDHR,nSBCOSTL = @nSBCOSTL,nSDCOSTL = @nSDCOSTL,nSCOSTL = @nSCOSTL,nSBCOSTM = @nSBCOSTM,nSDCOSTM = @nSDCOSTM,nSCOSTM = @nSCOSTM,nSBCOSTE = @nSBCOSTE,nSDCOSTE = @nSDCOSTE,nSCOSTE = @nSCOSTE,nSBTCOST = @nSBTCOST,nSDTCOST = @nSDTCOST,nSTCOST = @nSTCOST where idRFI = @idRFI and tag =  @tag and idDrawingNum = @idDrawingNum
+	end
+	
+end
+go

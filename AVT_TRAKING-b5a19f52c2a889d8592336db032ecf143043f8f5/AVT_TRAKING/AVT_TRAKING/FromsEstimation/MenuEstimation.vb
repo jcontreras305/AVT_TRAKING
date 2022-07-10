@@ -4,27 +4,27 @@
     End Sub
 
     Private Sub MenuEstimation_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        pnlProyects.Visible = False
         pnlSetting.Visible = False
+        pnlProjects.Visible = False
     End Sub
 
     Private Sub btnSettings_Click(sender As Object, e As EventArgs) Handles btnSettings.Click
         If pnlSetting.Visible Then
             pnlSetting.Visible = False
-            pnlProyects.Visible = False
+            pnlProjects.Visible = False
         Else
             pnlSetting.Visible = True
-            pnlProyects.Visible = False
+            pnlProjects.Visible = False
         End If
     End Sub
 
     Private Sub btnProjects_Click(sender As Object, e As EventArgs) Handles btnProjects.Click
-        If pnlProyects.Visible Then
+        If pnlProjects.Visible Then
             pnlSetting.Visible = False
-            pnlProyects.Visible = False
+            pnlProjects.Visible = False
         Else
             pnlSetting.Visible = False
-            pnlProyects.Visible = True
+            pnlProjects.Visible = True
         End If
     End Sub
 
@@ -111,7 +111,6 @@
             FormPanel.BringToFront()
         End If
     End Sub
-
     Private Sub btnDrawingProgress_Click(sender As Object, e As EventArgs) Handles btnDrawingProgress.Click
         OpenFormPanel5(Of DrawingProgress)()
     End Sub
@@ -150,6 +149,23 @@
             FormPanel.BringToFront()
         End If
     End Sub
-
-
+    Private Sub btnScaffolRFI_Click(sender As Object, e As EventArgs) Handles btnScaffolRFI.Click
+        OpenFormPanel7(Of RFISacffold)()
+    End Sub
+    Private Sub OpenFormPanel7(Of Miform As {RFISacffold, New})()
+        Dim FormPanel As Form
+        FormPanel = PanelViewFrom.Controls.OfType(Of Miform)().FirstOrDefault()
+        If FormPanel Is Nothing Then
+            Dim newPC = New Miform()
+            FormPanel = newPC
+            FormPanel.TopLevel = False
+            FormPanel.Dock = DockStyle.Fill
+            PanelViewFrom.Controls.Add(FormPanel)
+            PanelViewFrom.Tag = FormPanel
+            FormPanel.Show()
+            FormPanel.BringToFront()
+        Else
+            FormPanel.BringToFront()
+        End If
+    End Sub
 End Class

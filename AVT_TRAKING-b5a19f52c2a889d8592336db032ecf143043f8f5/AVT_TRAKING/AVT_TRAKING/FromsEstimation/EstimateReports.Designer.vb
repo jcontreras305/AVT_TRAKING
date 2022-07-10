@@ -24,6 +24,7 @@ Partial Class EstimateReports
     Private Sub InitializeComponent()
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
         Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.btnSalir = New System.Windows.Forms.Button()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Panel2 = New System.Windows.Forms.Panel()
         Me.cmbClient = New System.Windows.Forms.ComboBox()
@@ -32,15 +33,19 @@ Partial Class EstimateReports
         Me.Label2 = New System.Windows.Forms.Label()
         Me.TableLayoutPanel2 = New System.Windows.Forms.TableLayoutPanel()
         Me.Panel3 = New System.Windows.Forms.Panel()
-        Me.btnSalir = New System.Windows.Forms.Button()
         Me.btnPipingBudget = New System.Windows.Forms.Button()
         Me.btnEquipmentBudged = New System.Windows.Forms.Button()
         Me.btnReportsSCFBudget = New System.Windows.Forms.Button()
+        Me.Panel4 = New System.Windows.Forms.Panel()
+        Me.btnRFIPiping = New System.Windows.Forms.Button()
+        Me.btnRFIEq = New System.Windows.Forms.Button()
+        Me.btnRFIScf = New System.Windows.Forms.Button()
         Me.TableLayoutPanel1.SuspendLayout()
         Me.Panel1.SuspendLayout()
         Me.Panel2.SuspendLayout()
         Me.TableLayoutPanel2.SuspendLayout()
         Me.Panel3.SuspendLayout()
+        Me.Panel4.SuspendLayout()
         Me.SuspendLayout()
         '
         'TableLayoutPanel1
@@ -71,6 +76,20 @@ Partial Class EstimateReports
         Me.Panel1.Name = "Panel1"
         Me.Panel1.Size = New System.Drawing.Size(750, 62)
         Me.Panel1.TabIndex = 0
+        '
+        'btnSalir
+        '
+        Me.btnSalir.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnSalir.FlatAppearance.BorderSize = 0
+        Me.btnSalir.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnSalir.ForeColor = System.Drawing.Color.White
+        Me.btnSalir.Image = Global.AVT_TRAKING.My.Resources.Resources._exit
+        Me.btnSalir.Location = New System.Drawing.Point(706, 14)
+        Me.btnSalir.Margin = New System.Windows.Forms.Padding(2)
+        Me.btnSalir.Name = "btnSalir"
+        Me.btnSalir.Size = New System.Drawing.Size(39, 34)
+        Me.btnSalir.TabIndex = 37
+        Me.btnSalir.UseVisualStyleBackColor = True
         '
         'Label1
         '
@@ -135,15 +154,17 @@ Partial Class EstimateReports
         '
         'TableLayoutPanel2
         '
-        Me.TableLayoutPanel2.ColumnCount = 2
-        Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 26.4!))
-        Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 73.6!))
+        Me.TableLayoutPanel2.ColumnCount = 3
+        Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 190.0!))
+        Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 156.0!))
+        Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
+        Me.TableLayoutPanel2.Controls.Add(Me.Panel4, 0, 0)
         Me.TableLayoutPanel2.Controls.Add(Me.Panel3, 0, 0)
         Me.TableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill
         Me.TableLayoutPanel2.Location = New System.Drawing.Point(3, 116)
         Me.TableLayoutPanel2.Name = "TableLayoutPanel2"
         Me.TableLayoutPanel2.RowCount = 1
-        Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
+        Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
         Me.TableLayoutPanel2.Size = New System.Drawing.Size(750, 441)
         Me.TableLayoutPanel2.TabIndex = 2
         '
@@ -155,22 +176,8 @@ Partial Class EstimateReports
         Me.Panel3.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel3.Location = New System.Drawing.Point(3, 3)
         Me.Panel3.Name = "Panel3"
-        Me.Panel3.Size = New System.Drawing.Size(191, 435)
+        Me.Panel3.Size = New System.Drawing.Size(184, 435)
         Me.Panel3.TabIndex = 8
-        '
-        'btnSalir
-        '
-        Me.btnSalir.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnSalir.FlatAppearance.BorderSize = 0
-        Me.btnSalir.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnSalir.ForeColor = System.Drawing.Color.White
-        Me.btnSalir.Image = Global.AVT_TRAKING.My.Resources.Resources._exit
-        Me.btnSalir.Location = New System.Drawing.Point(706, 14)
-        Me.btnSalir.Margin = New System.Windows.Forms.Padding(2)
-        Me.btnSalir.Name = "btnSalir"
-        Me.btnSalir.Size = New System.Drawing.Size(39, 34)
-        Me.btnSalir.TabIndex = 37
-        Me.btnSalir.UseVisualStyleBackColor = True
         '
         'btnPipingBudget
         '
@@ -184,7 +191,7 @@ Partial Class EstimateReports
         Me.btnPipingBudget.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.btnPipingBudget.Location = New System.Drawing.Point(0, 120)
         Me.btnPipingBudget.Name = "btnPipingBudget"
-        Me.btnPipingBudget.Size = New System.Drawing.Size(191, 60)
+        Me.btnPipingBudget.Size = New System.Drawing.Size(184, 60)
         Me.btnPipingBudget.TabIndex = 39
         Me.btnPipingBudget.Text = "Job No. Pipe Budget"
         Me.btnPipingBudget.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -202,7 +209,7 @@ Partial Class EstimateReports
         Me.btnEquipmentBudged.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.btnEquipmentBudged.Location = New System.Drawing.Point(0, 60)
         Me.btnEquipmentBudged.Name = "btnEquipmentBudged"
-        Me.btnEquipmentBudged.Size = New System.Drawing.Size(191, 60)
+        Me.btnEquipmentBudged.Size = New System.Drawing.Size(184, 60)
         Me.btnEquipmentBudged.TabIndex = 38
         Me.btnEquipmentBudged.Text = "Job No. Eq. Budget"
         Me.btnEquipmentBudged.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -220,11 +227,76 @@ Partial Class EstimateReports
         Me.btnReportsSCFBudget.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.btnReportsSCFBudget.Location = New System.Drawing.Point(0, 0)
         Me.btnReportsSCFBudget.Name = "btnReportsSCFBudget"
-        Me.btnReportsSCFBudget.Size = New System.Drawing.Size(191, 60)
+        Me.btnReportsSCFBudget.Size = New System.Drawing.Size(184, 60)
         Me.btnReportsSCFBudget.TabIndex = 7
         Me.btnReportsSCFBudget.Text = "Job No. SCF Budget"
         Me.btnReportsSCFBudget.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         Me.btnReportsSCFBudget.UseVisualStyleBackColor = True
+        '
+        'Panel4
+        '
+        Me.Panel4.Controls.Add(Me.btnRFIPiping)
+        Me.Panel4.Controls.Add(Me.btnRFIEq)
+        Me.Panel4.Controls.Add(Me.btnRFIScf)
+        Me.Panel4.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Panel4.Location = New System.Drawing.Point(193, 3)
+        Me.Panel4.Name = "Panel4"
+        Me.Panel4.Size = New System.Drawing.Size(150, 435)
+        Me.Panel4.TabIndex = 9
+        '
+        'btnRFIPiping
+        '
+        Me.btnRFIPiping.Dock = System.Windows.Forms.DockStyle.Top
+        Me.btnRFIPiping.FlatAppearance.BorderSize = 0
+        Me.btnRFIPiping.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(59, Byte), Integer), CType(CType(69, Byte), Integer), CType(CType(79, Byte), Integer))
+        Me.btnRFIPiping.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnRFIPiping.Font = New System.Drawing.Font("Nirmala UI", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnRFIPiping.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.btnRFIPiping.Image = Global.AVT_TRAKING.My.Resources.Resources.report
+        Me.btnRFIPiping.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnRFIPiping.Location = New System.Drawing.Point(0, 120)
+        Me.btnRFIPiping.Name = "btnRFIPiping"
+        Me.btnRFIPiping.Size = New System.Drawing.Size(150, 60)
+        Me.btnRFIPiping.TabIndex = 39
+        Me.btnRFIPiping.Text = "RFI Piping"
+        Me.btnRFIPiping.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.btnRFIPiping.UseVisualStyleBackColor = True
+        '
+        'btnRFIEq
+        '
+        Me.btnRFIEq.Dock = System.Windows.Forms.DockStyle.Top
+        Me.btnRFIEq.FlatAppearance.BorderSize = 0
+        Me.btnRFIEq.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(59, Byte), Integer), CType(CType(69, Byte), Integer), CType(CType(79, Byte), Integer))
+        Me.btnRFIEq.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnRFIEq.Font = New System.Drawing.Font("Nirmala UI", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnRFIEq.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.btnRFIEq.Image = Global.AVT_TRAKING.My.Resources.Resources.report
+        Me.btnRFIEq.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnRFIEq.Location = New System.Drawing.Point(0, 60)
+        Me.btnRFIEq.Name = "btnRFIEq"
+        Me.btnRFIEq.Size = New System.Drawing.Size(150, 60)
+        Me.btnRFIEq.TabIndex = 38
+        Me.btnRFIEq.Text = "RFI Equipment"
+        Me.btnRFIEq.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.btnRFIEq.UseVisualStyleBackColor = True
+        '
+        'btnRFIScf
+        '
+        Me.btnRFIScf.Dock = System.Windows.Forms.DockStyle.Top
+        Me.btnRFIScf.FlatAppearance.BorderSize = 0
+        Me.btnRFIScf.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(59, Byte), Integer), CType(CType(69, Byte), Integer), CType(CType(79, Byte), Integer))
+        Me.btnRFIScf.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnRFIScf.Font = New System.Drawing.Font("Nirmala UI", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnRFIScf.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.btnRFIScf.Image = Global.AVT_TRAKING.My.Resources.Resources.report
+        Me.btnRFIScf.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnRFIScf.Location = New System.Drawing.Point(0, 0)
+        Me.btnRFIScf.Name = "btnRFIScf"
+        Me.btnRFIScf.Size = New System.Drawing.Size(150, 60)
+        Me.btnRFIScf.TabIndex = 7
+        Me.btnRFIScf.Text = "RFI Scaffold"
+        Me.btnRFIScf.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.btnRFIScf.UseVisualStyleBackColor = True
         '
         'EstimateReports
         '
@@ -242,6 +314,7 @@ Partial Class EstimateReports
         Me.Panel2.PerformLayout()
         Me.TableLayoutPanel2.ResumeLayout(False)
         Me.Panel3.ResumeLayout(False)
+        Me.Panel4.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
@@ -260,4 +333,8 @@ Partial Class EstimateReports
     Friend WithEvents btnReportsSCFBudget As Button
     Friend WithEvents cmbClient As ComboBox
     Friend WithEvents Label3 As Label
+    Friend WithEvents Panel4 As Panel
+    Friend WithEvents btnRFIPiping As Button
+    Friend WithEvents btnRFIEq As Button
+    Friend WithEvents btnRFIScf As Button
 End Class

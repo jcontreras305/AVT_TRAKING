@@ -97,6 +97,8 @@
     <Compile Include="ClassEstimation\MetodosFactor.vb" />
     <Compile Include="ClassEstimation\MetodosProgress.vb" />
     <Compile Include="ClassEstimation\MetodosProjectsActuals.vb" />
+    <Compile Include="ClassEstimation\MetodosRFIScaffold.vb" />
+    <Compile Include="ClassEstimation\RFIScaffoldClass.vb" />
     <Compile Include="Class\EstimationSC.vb" />
     <Compile Include="Class\MetodosClients.vb" />
     <Compile Include="Class\metodosCompany.vb" />
@@ -144,6 +146,12 @@
       <DependentUpon>ProjectsActuals.vb</DependentUpon>
     </Compile>
     <Compile Include="FromsEstimation\ProjectsActuals.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FromsEstimation\RFISacffold.Designer.vb">
+      <DependentUpon>RFISacffold.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FromsEstimation\RFISacffold.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="FromsEstimation\RowEqDrawing.Designer.vb">
@@ -702,6 +710,18 @@
       <DependentUpon>JobNoSCFBudgetReport.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="ReportsEstimation\RFIReports.Designer.vb">
+      <DependentUpon>RFIReports.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ReportsEstimation\RFIReports.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ReportsEstimation\RFIReportSCF.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RFIReportSCF.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="RerportsScaffold\ScaffoldActive.Designer.vb">
       <DependentUpon>ScaffoldActive.vb</DependentUpon>
     </Compile>
@@ -839,6 +859,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FromsEstimation\ProjectsActuals.resx">
       <DependentUpon>ProjectsActuals.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FromsEstimation\RFISacffold.resx">
+      <DependentUpon>RFISacffold.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FromsEstimation\RowEqDrawing.resx">
       <DependentUpon>RowEqDrawing.vb</DependentUpon>
@@ -1129,6 +1152,13 @@
     <EmbeddedResource Include="ReportsEstimation\JobNoSCFBudgetReport.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>JobNoSCFBudgetReport.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportsEstimation\RFIReports.resx">
+      <DependentUpon>RFIReports.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportsEstimation\RFIReportSCF.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>RFIReportSCF.vb</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="RerportsScaffold\ScaffoldActive.resx">
       <DependentUpon>ScaffoldActive.vb</DependentUpon>
