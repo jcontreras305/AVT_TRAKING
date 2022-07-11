@@ -148,6 +148,12 @@
     <Compile Include="FromsEstimation\ProjectsActuals.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="FromsEstimation\RFIEquipment.Designer.vb">
+      <DependentUpon>RFIEquipment.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FromsEstimation\RFIEquipment.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="FromsEstimation\RFISacffold.Designer.vb">
       <DependentUpon>RFISacffold.vb</DependentUpon>
     </Compile>
@@ -859,6 +865,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FromsEstimation\ProjectsActuals.resx">
       <DependentUpon>ProjectsActuals.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FromsEstimation\RFIEquipment.resx">
+      <DependentUpon>RFIEquipment.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FromsEstimation\RFISacffold.resx">
       <DependentUpon>RFISacffold.vb</DependentUpon>

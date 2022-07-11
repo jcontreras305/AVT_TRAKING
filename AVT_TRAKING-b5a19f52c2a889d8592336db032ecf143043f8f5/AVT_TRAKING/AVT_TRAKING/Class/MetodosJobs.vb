@@ -371,11 +371,11 @@ select
 CONCAT (em.firstName , ' ',em.middleName,' ',em.lastName) as Employee,
 wc.name as Work,
 wc.billingRate1 as 'Billing Rate', 
-hw.hoursST as 'Billable Rate',
+hw.hoursST as 'Billable Hrs. ST',
 wc.billingRateOT as 'Billing RateOT',
-hw.hoursOT as 'Billable OT',
+hw.hoursOT as 'Billable Hrs. OT',
 wc.billingRate3 as 'Billing Rate 3',
-hw.hours3 as 'Billable 3',
+hw.hours3 as 'Billable Hrs. 3',
 convert (varchar,hw.dateWorked,101 )as 'Date Worked',
 wc.description as 'Description'
 from 
@@ -1217,7 +1217,6 @@ where tk.idAux = '" + idAux + "' and wo.idAuxWO = '" + WO + "'", conn)
             Dim cmd As New SqlCommand("update task set status = '" + If(status = True, "1", "0") + "'
 where idAux = '" + idAux + "' and idAuxWO = '" + WO + "'", conn)
             If cmd.ExecuteNonQuery > 0 Then
-                desconectar()
                 Return True
             Else
                 Return False
@@ -1225,6 +1224,8 @@ where idAux = '" + idAux + "' and idAuxWO = '" + WO + "'", conn)
         Catch ex As Exception
             MsgBox(ex.Message)
             Return False
+        Finally
+            desconectar()
         End Try
     End Function
 

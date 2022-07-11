@@ -24,34 +24,34 @@ Partial Class MenuEstimation
     Private Sub InitializeComponent()
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
         Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.TableLayoutPanel3 = New System.Windows.Forms.TableLayoutPanel()
+        Me.Panel4 = New System.Windows.Forms.Panel()
+        Me.btnReports = New System.Windows.Forms.Button()
+        Me.pnlProjects = New System.Windows.Forms.Panel()
+        Me.btnPipingRFI = New System.Windows.Forms.Button()
+        Me.btnEuipmentRFI = New System.Windows.Forms.Button()
         Me.btnScaffolRFI = New System.Windows.Forms.Button()
         Me.btnProjectActuals = New System.Windows.Forms.Button()
         Me.btnDrawingProgress = New System.Windows.Forms.Button()
         Me.Button4 = New System.Windows.Forms.Button()
-        Me.Button3 = New System.Windows.Forms.Button()
+        Me.btnProjects = New System.Windows.Forms.Button()
+        Me.pnlSetting = New System.Windows.Forms.Panel()
         Me.Button2 = New System.Windows.Forms.Button()
+        Me.Button3 = New System.Windows.Forms.Button()
+        Me.btnSettings = New System.Windows.Forms.Button()
         Me.TableLayoutPanel2 = New System.Windows.Forms.TableLayoutPanel()
         Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.btnSalir = New System.Windows.Forms.Button()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.PanelViewFrom = New System.Windows.Forms.Panel()
-        Me.btnEuipmentRFI = New System.Windows.Forms.Button()
-        Me.btnPipingRFI = New System.Windows.Forms.Button()
-        Me.TableLayoutPanel3 = New System.Windows.Forms.TableLayoutPanel()
-        Me.Panel4 = New System.Windows.Forms.Panel()
-        Me.pnlSetting = New System.Windows.Forms.Panel()
-        Me.pnlProjects = New System.Windows.Forms.Panel()
-        Me.btnReports = New System.Windows.Forms.Button()
-        Me.btnProjects = New System.Windows.Forms.Button()
-        Me.btnSettings = New System.Windows.Forms.Button()
-        Me.btnSalir = New System.Windows.Forms.Button()
         Me.TableLayoutPanel1.SuspendLayout()
         Me.Panel1.SuspendLayout()
-        Me.TableLayoutPanel2.SuspendLayout()
-        Me.Panel2.SuspendLayout()
         Me.TableLayoutPanel3.SuspendLayout()
         Me.Panel4.SuspendLayout()
-        Me.pnlSetting.SuspendLayout()
         Me.pnlProjects.SuspendLayout()
+        Me.pnlSetting.SuspendLayout()
+        Me.TableLayoutPanel2.SuspendLayout()
+        Me.Panel2.SuspendLayout()
         Me.SuspendLayout()
         '
         'TableLayoutPanel1
@@ -78,6 +78,103 @@ Partial Class MenuEstimation
         Me.Panel1.Name = "Panel1"
         Me.Panel1.Size = New System.Drawing.Size(194, 655)
         Me.Panel1.TabIndex = 0
+        '
+        'TableLayoutPanel3
+        '
+        Me.TableLayoutPanel3.ColumnCount = 1
+        Me.TableLayoutPanel3.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
+        Me.TableLayoutPanel3.Controls.Add(Me.Panel4, 0, 1)
+        Me.TableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.TableLayoutPanel3.Location = New System.Drawing.Point(0, 0)
+        Me.TableLayoutPanel3.Name = "TableLayoutPanel3"
+        Me.TableLayoutPanel3.RowCount = 2
+        Me.TableLayoutPanel3.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 90.0!))
+        Me.TableLayoutPanel3.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
+        Me.TableLayoutPanel3.Size = New System.Drawing.Size(194, 655)
+        Me.TableLayoutPanel3.TabIndex = 0
+        '
+        'Panel4
+        '
+        Me.Panel4.AutoScroll = True
+        Me.Panel4.Controls.Add(Me.btnReports)
+        Me.Panel4.Controls.Add(Me.pnlProjects)
+        Me.Panel4.Controls.Add(Me.btnProjects)
+        Me.Panel4.Controls.Add(Me.pnlSetting)
+        Me.Panel4.Controls.Add(Me.btnSettings)
+        Me.Panel4.Dock = System.Windows.Forms.DockStyle.Top
+        Me.Panel4.Location = New System.Drawing.Point(3, 93)
+        Me.Panel4.Name = "Panel4"
+        Me.Panel4.Size = New System.Drawing.Size(188, 559)
+        Me.Panel4.TabIndex = 0
+        '
+        'btnReports
+        '
+        Me.btnReports.Dock = System.Windows.Forms.DockStyle.Top
+        Me.btnReports.FlatAppearance.BorderSize = 0
+        Me.btnReports.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(59, Byte), Integer), CType(CType(69, Byte), Integer), CType(CType(79, Byte), Integer))
+        Me.btnReports.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnReports.Font = New System.Drawing.Font("Nirmala UI", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnReports.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.btnReports.Image = Global.AVT_TRAKING.My.Resources.Resources.project
+        Me.btnReports.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnReports.Location = New System.Drawing.Point(0, 382)
+        Me.btnReports.Name = "btnReports"
+        Me.btnReports.Size = New System.Drawing.Size(188, 55)
+        Me.btnReports.TabIndex = 6
+        Me.btnReports.Text = "Reports"
+        Me.btnReports.UseVisualStyleBackColor = True
+        '
+        'pnlProjects
+        '
+        Me.pnlProjects.Controls.Add(Me.btnPipingRFI)
+        Me.pnlProjects.Controls.Add(Me.btnEuipmentRFI)
+        Me.pnlProjects.Controls.Add(Me.btnScaffolRFI)
+        Me.pnlProjects.Controls.Add(Me.btnProjectActuals)
+        Me.pnlProjects.Controls.Add(Me.btnDrawingProgress)
+        Me.pnlProjects.Controls.Add(Me.Button4)
+        Me.pnlProjects.Dock = System.Windows.Forms.DockStyle.Top
+        Me.pnlProjects.Location = New System.Drawing.Point(0, 178)
+        Me.pnlProjects.Name = "pnlProjects"
+        Me.pnlProjects.Size = New System.Drawing.Size(188, 204)
+        Me.pnlProjects.TabIndex = 5
+        '
+        'btnPipingRFI
+        '
+        Me.btnPipingRFI.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(48, Byte), Integer), CType(CType(95, Byte), Integer))
+        Me.btnPipingRFI.Dock = System.Windows.Forms.DockStyle.Top
+        Me.btnPipingRFI.FlatAppearance.BorderSize = 0
+        Me.btnPipingRFI.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(59, Byte), Integer), CType(CType(69, Byte), Integer), CType(CType(79, Byte), Integer))
+        Me.btnPipingRFI.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnPipingRFI.Font = New System.Drawing.Font("Nirmala UI", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnPipingRFI.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.btnPipingRFI.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnPipingRFI.Location = New System.Drawing.Point(0, 170)
+        Me.btnPipingRFI.Name = "btnPipingRFI"
+        Me.btnPipingRFI.Padding = New System.Windows.Forms.Padding(0, 0, 6, 0)
+        Me.btnPipingRFI.Size = New System.Drawing.Size(188, 34)
+        Me.btnPipingRFI.TabIndex = 12
+        Me.btnPipingRFI.Text = "Piping RFI"
+        Me.btnPipingRFI.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.btnPipingRFI.UseVisualStyleBackColor = False
+        '
+        'btnEuipmentRFI
+        '
+        Me.btnEuipmentRFI.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(48, Byte), Integer), CType(CType(95, Byte), Integer))
+        Me.btnEuipmentRFI.Dock = System.Windows.Forms.DockStyle.Top
+        Me.btnEuipmentRFI.FlatAppearance.BorderSize = 0
+        Me.btnEuipmentRFI.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(59, Byte), Integer), CType(CType(69, Byte), Integer), CType(CType(79, Byte), Integer))
+        Me.btnEuipmentRFI.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnEuipmentRFI.Font = New System.Drawing.Font("Nirmala UI", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnEuipmentRFI.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.btnEuipmentRFI.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnEuipmentRFI.Location = New System.Drawing.Point(0, 136)
+        Me.btnEuipmentRFI.Name = "btnEuipmentRFI"
+        Me.btnEuipmentRFI.Padding = New System.Windows.Forms.Padding(0, 0, 6, 0)
+        Me.btnEuipmentRFI.Size = New System.Drawing.Size(188, 34)
+        Me.btnEuipmentRFI.TabIndex = 11
+        Me.btnEuipmentRFI.Text = "Equipment RFI"
+        Me.btnEuipmentRFI.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.btnEuipmentRFI.UseVisualStyleBackColor = False
         '
         'btnScaffolRFI
         '
@@ -155,24 +252,32 @@ Partial Class MenuEstimation
         Me.Button4.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         Me.Button4.UseVisualStyleBackColor = False
         '
-        'Button3
+        'btnProjects
         '
-        Me.Button3.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(48, Byte), Integer), CType(CType(95, Byte), Integer))
-        Me.Button3.Dock = System.Windows.Forms.DockStyle.Top
-        Me.Button3.FlatAppearance.BorderSize = 0
-        Me.Button3.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(59, Byte), Integer), CType(CType(69, Byte), Integer), CType(CType(79, Byte), Integer))
-        Me.Button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.Button3.Font = New System.Drawing.Font("Nirmala UI", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button3.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.Button3.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.Button3.Location = New System.Drawing.Point(0, 0)
-        Me.Button3.Name = "Button3"
-        Me.Button3.Padding = New System.Windows.Forms.Padding(0, 0, 6, 0)
-        Me.Button3.Size = New System.Drawing.Size(188, 34)
-        Me.Button3.TabIndex = 7
-        Me.Button3.Text = "Factors"
-        Me.Button3.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.Button3.UseVisualStyleBackColor = False
+        Me.btnProjects.Dock = System.Windows.Forms.DockStyle.Top
+        Me.btnProjects.FlatAppearance.BorderSize = 0
+        Me.btnProjects.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(59, Byte), Integer), CType(CType(69, Byte), Integer), CType(CType(79, Byte), Integer))
+        Me.btnProjects.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnProjects.Font = New System.Drawing.Font("Nirmala UI", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnProjects.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.btnProjects.Image = Global.AVT_TRAKING.My.Resources.Resources.catsemployee
+        Me.btnProjects.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnProjects.Location = New System.Drawing.Point(0, 123)
+        Me.btnProjects.Name = "btnProjects"
+        Me.btnProjects.Size = New System.Drawing.Size(188, 55)
+        Me.btnProjects.TabIndex = 4
+        Me.btnProjects.Text = "   Projects"
+        Me.btnProjects.UseVisualStyleBackColor = True
+        '
+        'pnlSetting
+        '
+        Me.pnlSetting.Controls.Add(Me.Button2)
+        Me.pnlSetting.Controls.Add(Me.Button3)
+        Me.pnlSetting.Dock = System.Windows.Forms.DockStyle.Top
+        Me.pnlSetting.Location = New System.Drawing.Point(0, 55)
+        Me.pnlSetting.Name = "pnlSetting"
+        Me.pnlSetting.Size = New System.Drawing.Size(188, 68)
+        Me.pnlSetting.TabIndex = 3
         '
         'Button2
         '
@@ -192,6 +297,43 @@ Partial Class MenuEstimation
         Me.Button2.Text = "   Clients And Jobs"
         Me.Button2.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         Me.Button2.UseVisualStyleBackColor = False
+        '
+        'Button3
+        '
+        Me.Button3.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(48, Byte), Integer), CType(CType(95, Byte), Integer))
+        Me.Button3.Dock = System.Windows.Forms.DockStyle.Top
+        Me.Button3.FlatAppearance.BorderSize = 0
+        Me.Button3.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(59, Byte), Integer), CType(CType(69, Byte), Integer), CType(CType(79, Byte), Integer))
+        Me.Button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.Button3.Font = New System.Drawing.Font("Nirmala UI", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Button3.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.Button3.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.Button3.Location = New System.Drawing.Point(0, 0)
+        Me.Button3.Name = "Button3"
+        Me.Button3.Padding = New System.Windows.Forms.Padding(0, 0, 6, 0)
+        Me.Button3.Size = New System.Drawing.Size(188, 34)
+        Me.Button3.TabIndex = 7
+        Me.Button3.Text = "Factors"
+        Me.Button3.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.Button3.UseVisualStyleBackColor = False
+        '
+        'btnSettings
+        '
+        Me.btnSettings.Dock = System.Windows.Forms.DockStyle.Top
+        Me.btnSettings.FlatAppearance.BorderSize = 0
+        Me.btnSettings.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(59, Byte), Integer), CType(CType(69, Byte), Integer), CType(CType(79, Byte), Integer))
+        Me.btnSettings.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnSettings.Font = New System.Drawing.Font("Nirmala UI", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnSettings.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.btnSettings.Image = Global.AVT_TRAKING.My.Resources.Resources.code
+        Me.btnSettings.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnSettings.Location = New System.Drawing.Point(0, 0)
+        Me.btnSettings.Name = "btnSettings"
+        Me.btnSettings.Padding = New System.Windows.Forms.Padding(10, 0, 0, 0)
+        Me.btnSettings.Size = New System.Drawing.Size(188, 55)
+        Me.btnSettings.TabIndex = 2
+        Me.btnSettings.Text = "Settings"
+        Me.btnSettings.UseVisualStyleBackColor = True
         '
         'TableLayoutPanel2
         '
@@ -219,6 +361,20 @@ Partial Class MenuEstimation
         Me.Panel2.Size = New System.Drawing.Size(772, 44)
         Me.Panel2.TabIndex = 0
         '
+        'btnSalir
+        '
+        Me.btnSalir.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnSalir.FlatAppearance.BorderSize = 0
+        Me.btnSalir.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnSalir.ForeColor = System.Drawing.Color.Red
+        Me.btnSalir.Image = Global.AVT_TRAKING.My.Resources.Resources._exit
+        Me.btnSalir.Location = New System.Drawing.Point(724, 7)
+        Me.btnSalir.Margin = New System.Windows.Forms.Padding(2)
+        Me.btnSalir.Name = "btnSalir"
+        Me.btnSalir.Size = New System.Drawing.Size(43, 28)
+        Me.btnSalir.TabIndex = 4
+        Me.btnSalir.UseVisualStyleBackColor = True
+        '
         'Label1
         '
         Me.Label1.AutoSize = True
@@ -240,162 +396,6 @@ Partial Class MenuEstimation
         Me.PanelViewFrom.Size = New System.Drawing.Size(772, 599)
         Me.PanelViewFrom.TabIndex = 1
         '
-        'btnEuipmentRFI
-        '
-        Me.btnEuipmentRFI.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(48, Byte), Integer), CType(CType(95, Byte), Integer))
-        Me.btnEuipmentRFI.Dock = System.Windows.Forms.DockStyle.Top
-        Me.btnEuipmentRFI.FlatAppearance.BorderSize = 0
-        Me.btnEuipmentRFI.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(59, Byte), Integer), CType(CType(69, Byte), Integer), CType(CType(79, Byte), Integer))
-        Me.btnEuipmentRFI.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnEuipmentRFI.Font = New System.Drawing.Font("Nirmala UI", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnEuipmentRFI.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.btnEuipmentRFI.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnEuipmentRFI.Location = New System.Drawing.Point(0, 136)
-        Me.btnEuipmentRFI.Name = "btnEuipmentRFI"
-        Me.btnEuipmentRFI.Padding = New System.Windows.Forms.Padding(0, 0, 6, 0)
-        Me.btnEuipmentRFI.Size = New System.Drawing.Size(188, 34)
-        Me.btnEuipmentRFI.TabIndex = 11
-        Me.btnEuipmentRFI.Text = "Equipment RFI"
-        Me.btnEuipmentRFI.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.btnEuipmentRFI.UseVisualStyleBackColor = False
-        '
-        'btnPipingRFI
-        '
-        Me.btnPipingRFI.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(48, Byte), Integer), CType(CType(95, Byte), Integer))
-        Me.btnPipingRFI.Dock = System.Windows.Forms.DockStyle.Top
-        Me.btnPipingRFI.FlatAppearance.BorderSize = 0
-        Me.btnPipingRFI.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(59, Byte), Integer), CType(CType(69, Byte), Integer), CType(CType(79, Byte), Integer))
-        Me.btnPipingRFI.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnPipingRFI.Font = New System.Drawing.Font("Nirmala UI", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnPipingRFI.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.btnPipingRFI.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnPipingRFI.Location = New System.Drawing.Point(0, 170)
-        Me.btnPipingRFI.Name = "btnPipingRFI"
-        Me.btnPipingRFI.Padding = New System.Windows.Forms.Padding(0, 0, 6, 0)
-        Me.btnPipingRFI.Size = New System.Drawing.Size(188, 34)
-        Me.btnPipingRFI.TabIndex = 12
-        Me.btnPipingRFI.Text = "Piping RFI"
-        Me.btnPipingRFI.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.btnPipingRFI.UseVisualStyleBackColor = False
-        '
-        'TableLayoutPanel3
-        '
-        Me.TableLayoutPanel3.ColumnCount = 1
-        Me.TableLayoutPanel3.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-        Me.TableLayoutPanel3.Controls.Add(Me.Panel4, 0, 1)
-        Me.TableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.TableLayoutPanel3.Location = New System.Drawing.Point(0, 0)
-        Me.TableLayoutPanel3.Name = "TableLayoutPanel3"
-        Me.TableLayoutPanel3.RowCount = 2
-        Me.TableLayoutPanel3.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 90.0!))
-        Me.TableLayoutPanel3.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-        Me.TableLayoutPanel3.Size = New System.Drawing.Size(194, 655)
-        Me.TableLayoutPanel3.TabIndex = 0
-        '
-        'Panel4
-        '
-        Me.Panel4.AutoScroll = True
-        Me.Panel4.Controls.Add(Me.btnReports)
-        Me.Panel4.Controls.Add(Me.pnlProjects)
-        Me.Panel4.Controls.Add(Me.btnProjects)
-        Me.Panel4.Controls.Add(Me.pnlSetting)
-        Me.Panel4.Controls.Add(Me.btnSettings)
-        Me.Panel4.Dock = System.Windows.Forms.DockStyle.Top
-        Me.Panel4.Location = New System.Drawing.Point(3, 93)
-        Me.Panel4.Name = "Panel4"
-        Me.Panel4.Size = New System.Drawing.Size(188, 559)
-        Me.Panel4.TabIndex = 0
-        '
-        'pnlSetting
-        '
-        Me.pnlSetting.Controls.Add(Me.Button2)
-        Me.pnlSetting.Controls.Add(Me.Button3)
-        Me.pnlSetting.Dock = System.Windows.Forms.DockStyle.Top
-        Me.pnlSetting.Location = New System.Drawing.Point(0, 55)
-        Me.pnlSetting.Name = "pnlSetting"
-        Me.pnlSetting.Size = New System.Drawing.Size(188, 68)
-        Me.pnlSetting.TabIndex = 3
-        '
-        'pnlProjects
-        '
-        Me.pnlProjects.Controls.Add(Me.btnPipingRFI)
-        Me.pnlProjects.Controls.Add(Me.btnEuipmentRFI)
-        Me.pnlProjects.Controls.Add(Me.btnScaffolRFI)
-        Me.pnlProjects.Controls.Add(Me.btnProjectActuals)
-        Me.pnlProjects.Controls.Add(Me.btnDrawingProgress)
-        Me.pnlProjects.Controls.Add(Me.Button4)
-        Me.pnlProjects.Dock = System.Windows.Forms.DockStyle.Top
-        Me.pnlProjects.Location = New System.Drawing.Point(0, 178)
-        Me.pnlProjects.Name = "pnlProjects"
-        Me.pnlProjects.Size = New System.Drawing.Size(188, 204)
-        Me.pnlProjects.TabIndex = 5
-        '
-        'btnReports
-        '
-        Me.btnReports.Dock = System.Windows.Forms.DockStyle.Top
-        Me.btnReports.FlatAppearance.BorderSize = 0
-        Me.btnReports.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(59, Byte), Integer), CType(CType(69, Byte), Integer), CType(CType(79, Byte), Integer))
-        Me.btnReports.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnReports.Font = New System.Drawing.Font("Nirmala UI", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnReports.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.btnReports.Image = Global.AVT_TRAKING.My.Resources.Resources.project
-        Me.btnReports.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnReports.Location = New System.Drawing.Point(0, 382)
-        Me.btnReports.Name = "btnReports"
-        Me.btnReports.Size = New System.Drawing.Size(188, 55)
-        Me.btnReports.TabIndex = 6
-        Me.btnReports.Text = "Reports"
-        Me.btnReports.UseVisualStyleBackColor = True
-        '
-        'btnProjects
-        '
-        Me.btnProjects.Dock = System.Windows.Forms.DockStyle.Top
-        Me.btnProjects.FlatAppearance.BorderSize = 0
-        Me.btnProjects.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(59, Byte), Integer), CType(CType(69, Byte), Integer), CType(CType(79, Byte), Integer))
-        Me.btnProjects.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnProjects.Font = New System.Drawing.Font("Nirmala UI", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnProjects.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.btnProjects.Image = Global.AVT_TRAKING.My.Resources.Resources.catsemployee
-        Me.btnProjects.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnProjects.Location = New System.Drawing.Point(0, 123)
-        Me.btnProjects.Name = "btnProjects"
-        Me.btnProjects.Size = New System.Drawing.Size(188, 55)
-        Me.btnProjects.TabIndex = 4
-        Me.btnProjects.Text = "   Projects"
-        Me.btnProjects.UseVisualStyleBackColor = True
-        '
-        'btnSettings
-        '
-        Me.btnSettings.Dock = System.Windows.Forms.DockStyle.Top
-        Me.btnSettings.FlatAppearance.BorderSize = 0
-        Me.btnSettings.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(59, Byte), Integer), CType(CType(69, Byte), Integer), CType(CType(79, Byte), Integer))
-        Me.btnSettings.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnSettings.Font = New System.Drawing.Font("Nirmala UI", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnSettings.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.btnSettings.Image = Global.AVT_TRAKING.My.Resources.Resources.code
-        Me.btnSettings.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnSettings.Location = New System.Drawing.Point(0, 0)
-        Me.btnSettings.Name = "btnSettings"
-        Me.btnSettings.Padding = New System.Windows.Forms.Padding(10, 0, 0, 0)
-        Me.btnSettings.Size = New System.Drawing.Size(188, 55)
-        Me.btnSettings.TabIndex = 2
-        Me.btnSettings.Text = "Settings"
-        Me.btnSettings.UseVisualStyleBackColor = True
-        '
-        'btnSalir
-        '
-        Me.btnSalir.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnSalir.FlatAppearance.BorderSize = 0
-        Me.btnSalir.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnSalir.ForeColor = System.Drawing.Color.Red
-        Me.btnSalir.Image = Global.AVT_TRAKING.My.Resources.Resources._exit
-        Me.btnSalir.Location = New System.Drawing.Point(724, 7)
-        Me.btnSalir.Margin = New System.Windows.Forms.Padding(2)
-        Me.btnSalir.Name = "btnSalir"
-        Me.btnSalir.Size = New System.Drawing.Size(43, 28)
-        Me.btnSalir.TabIndex = 4
-        Me.btnSalir.UseVisualStyleBackColor = True
-        '
         'MenuEstimation
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -407,13 +407,13 @@ Partial Class MenuEstimation
         Me.Text = "MenuEstimation"
         Me.TableLayoutPanel1.ResumeLayout(False)
         Me.Panel1.ResumeLayout(False)
+        Me.TableLayoutPanel3.ResumeLayout(False)
+        Me.Panel4.ResumeLayout(False)
+        Me.pnlProjects.ResumeLayout(False)
+        Me.pnlSetting.ResumeLayout(False)
         Me.TableLayoutPanel2.ResumeLayout(False)
         Me.Panel2.ResumeLayout(False)
         Me.Panel2.PerformLayout()
-        Me.TableLayoutPanel3.ResumeLayout(False)
-        Me.Panel4.ResumeLayout(False)
-        Me.pnlSetting.ResumeLayout(False)
-        Me.pnlProjects.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub

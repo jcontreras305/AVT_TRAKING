@@ -22,8 +22,8 @@ Partial Class RFISacffold
     'No lo modifique con el editor de código.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.cmbDrawing = New System.Windows.Forms.ComboBox()
         Me.txtDescriptionPO = New System.Windows.Forms.TextBox()
         Me.txtUnitPO = New System.Windows.Forms.TextBox()
@@ -36,11 +36,8 @@ Partial Class RFISacffold
         Me.Label6 = New System.Windows.Forms.Label()
         Me.Label7 = New System.Windows.Forms.Label()
         Me.Panel1 = New System.Windows.Forms.Panel()
-        Me.btnSalir = New System.Windows.Forms.Button()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Panel4 = New System.Windows.Forms.Panel()
-        Me.btnDelete = New System.Windows.Forms.Button()
-        Me.btnSave = New System.Windows.Forms.Button()
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
         Me.TableLayoutPanel2 = New System.Windows.Forms.TableLayoutPanel()
         Me.Panel9 = New System.Windows.Forms.Panel()
@@ -57,9 +54,6 @@ Partial Class RFISacffold
         Me.Label19 = New System.Windows.Forms.Label()
         Me.txtIdRFIScaffold = New System.Windows.Forms.TextBox()
         Me.Panel14 = New System.Windows.Forms.Panel()
-        Me.btnNextDrawingN = New System.Windows.Forms.Button()
-        Me.btnAddRFIScaffold = New System.Windows.Forms.Button()
-        Me.btnAfterDrawing = New System.Windows.Forms.Button()
         Me.TableLayoutPanel3 = New System.Windows.Forms.TableLayoutPanel()
         Me.Panel3 = New System.Windows.Forms.Panel()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
@@ -107,7 +101,13 @@ Partial Class RFISacffold
         Me.Label11 = New System.Windows.Forms.Label()
         Me.txtNameReq = New System.Windows.Forms.TextBox()
         Me.Label10 = New System.Windows.Forms.Label()
+        Me.btnNextDrawingN = New System.Windows.Forms.Button()
+        Me.btnAddRFIScaffold = New System.Windows.Forms.Button()
+        Me.btnAfterDrawing = New System.Windows.Forms.Button()
         Me.btnReportRFIScaffold = New System.Windows.Forms.Button()
+        Me.btnDelete = New System.Windows.Forms.Button()
+        Me.btnSave = New System.Windows.Forms.Button()
+        Me.btnSalir = New System.Windows.Forms.Button()
         Me.Panel1.SuspendLayout()
         Me.Panel4.SuspendLayout()
         Me.TableLayoutPanel1.SuspendLayout()
@@ -262,20 +262,6 @@ Partial Class RFISacffold
         Me.Panel1.Size = New System.Drawing.Size(948, 62)
         Me.Panel1.TabIndex = 1
         '
-        'btnSalir
-        '
-        Me.btnSalir.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnSalir.FlatAppearance.BorderSize = 0
-        Me.btnSalir.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnSalir.ForeColor = System.Drawing.Color.White
-        Me.btnSalir.Image = Global.AVT_TRAKING.My.Resources.Resources._exit
-        Me.btnSalir.Location = New System.Drawing.Point(901, 5)
-        Me.btnSalir.Margin = New System.Windows.Forms.Padding(2)
-        Me.btnSalir.Name = "btnSalir"
-        Me.btnSalir.Size = New System.Drawing.Size(43, 55)
-        Me.btnSalir.TabIndex = 35
-        Me.btnSalir.UseVisualStyleBackColor = True
-        '
         'Label1
         '
         Me.Label1.AutoSize = True
@@ -297,42 +283,6 @@ Partial Class RFISacffold
         Me.Panel4.Name = "Panel4"
         Me.Panel4.Size = New System.Drawing.Size(948, 47)
         Me.Panel4.TabIndex = 36
-        '
-        'btnDelete
-        '
-        Me.btnDelete.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnDelete.FlatAppearance.BorderSize = 0
-        Me.btnDelete.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(59, Byte), Integer), CType(CType(69, Byte), Integer), CType(CType(79, Byte), Integer))
-        Me.btnDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnDelete.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnDelete.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.btnDelete.Image = Global.AVT_TRAKING.My.Resources.Resources.delete
-        Me.btnDelete.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnDelete.Location = New System.Drawing.Point(854, 6)
-        Me.btnDelete.Name = "btnDelete"
-        Me.btnDelete.Size = New System.Drawing.Size(90, 35)
-        Me.btnDelete.TabIndex = 32
-        Me.btnDelete.Text = "Delete"
-        Me.btnDelete.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.btnDelete.UseVisualStyleBackColor = True
-        '
-        'btnSave
-        '
-        Me.btnSave.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnSave.FlatAppearance.BorderSize = 0
-        Me.btnSave.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(59, Byte), Integer), CType(CType(69, Byte), Integer), CType(CType(79, Byte), Integer))
-        Me.btnSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnSave.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnSave.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.btnSave.Image = Global.AVT_TRAKING.My.Resources.Resources.save
-        Me.btnSave.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnSave.Location = New System.Drawing.Point(758, 6)
-        Me.btnSave.Name = "btnSave"
-        Me.btnSave.Size = New System.Drawing.Size(90, 35)
-        Me.btnSave.TabIndex = 31
-        Me.btnSave.Text = "Save"
-        Me.btnSave.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.btnSave.UseVisualStyleBackColor = True
         '
         'TableLayoutPanel1
         '
@@ -520,55 +470,6 @@ Partial Class RFISacffold
         Me.Panel14.Size = New System.Drawing.Size(188, 26)
         Me.Panel14.TabIndex = 8
         '
-        'btnNextDrawingN
-        '
-        Me.btnNextDrawingN.FlatAppearance.BorderSize = 0
-        Me.btnNextDrawingN.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(59, Byte), Integer), CType(CType(69, Byte), Integer), CType(CType(79, Byte), Integer))
-        Me.btnNextDrawingN.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnNextDrawingN.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnNextDrawingN.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.btnNextDrawingN.Image = Global.AVT_TRAKING.My.Resources.Resources._next
-        Me.btnNextDrawingN.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnNextDrawingN.Location = New System.Drawing.Point(41, 1)
-        Me.btnNextDrawingN.Name = "btnNextDrawingN"
-        Me.btnNextDrawingN.Size = New System.Drawing.Size(36, 28)
-        Me.btnNextDrawingN.TabIndex = 36
-        Me.btnNextDrawingN.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.btnNextDrawingN.UseVisualStyleBackColor = True
-        '
-        'btnAddRFIScaffold
-        '
-        Me.btnAddRFIScaffold.FlatAppearance.BorderSize = 0
-        Me.btnAddRFIScaffold.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(59, Byte), Integer), CType(CType(69, Byte), Integer), CType(CType(79, Byte), Integer))
-        Me.btnAddRFIScaffold.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnAddRFIScaffold.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnAddRFIScaffold.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.btnAddRFIScaffold.Image = Global.AVT_TRAKING.My.Resources.Resources._new
-        Me.btnAddRFIScaffold.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnAddRFIScaffold.Location = New System.Drawing.Point(79, 2)
-        Me.btnAddRFIScaffold.Name = "btnAddRFIScaffold"
-        Me.btnAddRFIScaffold.Size = New System.Drawing.Size(77, 26)
-        Me.btnAddRFIScaffold.TabIndex = 35
-        Me.btnAddRFIScaffold.Text = "New"
-        Me.btnAddRFIScaffold.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.btnAddRFIScaffold.UseVisualStyleBackColor = True
-        '
-        'btnAfterDrawing
-        '
-        Me.btnAfterDrawing.FlatAppearance.BorderSize = 0
-        Me.btnAfterDrawing.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(59, Byte), Integer), CType(CType(69, Byte), Integer), CType(CType(79, Byte), Integer))
-        Me.btnAfterDrawing.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnAfterDrawing.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnAfterDrawing.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.btnAfterDrawing.Image = Global.AVT_TRAKING.My.Resources.Resources.after1
-        Me.btnAfterDrawing.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnAfterDrawing.Location = New System.Drawing.Point(4, 2)
-        Me.btnAfterDrawing.Name = "btnAfterDrawing"
-        Me.btnAfterDrawing.Size = New System.Drawing.Size(36, 28)
-        Me.btnAfterDrawing.TabIndex = 35
-        Me.btnAfterDrawing.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.btnAfterDrawing.UseVisualStyleBackColor = True
-        '
         'TableLayoutPanel3
         '
         Me.TableLayoutPanel3.ColumnCount = 1
@@ -616,14 +517,14 @@ Partial Class RFISacffold
         Me.tblScaffoldInfo.BackgroundColor = System.Drawing.SystemColors.ControlLightLight
         Me.tblScaffoldInfo.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.tblScaffoldInfo.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Type, Me.DaysActive, Me.width, Me.length, Me.heigth, Me.Build, Me.Decks})
-        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle3.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        DataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.tblScaffoldInfo.DefaultCellStyle = DataGridViewCellStyle3
+        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.tblScaffoldInfo.DefaultCellStyle = DataGridViewCellStyle1
         Me.tblScaffoldInfo.Dock = System.Windows.Forms.DockStyle.Fill
         Me.tblScaffoldInfo.Location = New System.Drawing.Point(3, 16)
         Me.tblScaffoldInfo.Name = "tblScaffoldInfo"
@@ -685,14 +586,14 @@ Partial Class RFISacffold
         Me.tblGeneralScaffold.BackgroundColor = System.Drawing.SystemColors.ControlLightLight
         Me.tblGeneralScaffold.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.tblGeneralScaffold.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.idLaborLast, Me.Datos, Me.laborRateNew})
-        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle4.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        DataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.tblGeneralScaffold.DefaultCellStyle = DataGridViewCellStyle4
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.tblGeneralScaffold.DefaultCellStyle = DataGridViewCellStyle2
         Me.tblGeneralScaffold.Dock = System.Windows.Forms.DockStyle.Fill
         Me.tblGeneralScaffold.Location = New System.Drawing.Point(3, 16)
         Me.tblGeneralScaffold.Name = "tblGeneralScaffold"
@@ -1021,6 +922,55 @@ Partial Class RFISacffold
         Me.Label10.TabIndex = 0
         Me.Label10.Text = "Name:"
         '
+        'btnNextDrawingN
+        '
+        Me.btnNextDrawingN.FlatAppearance.BorderSize = 0
+        Me.btnNextDrawingN.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(59, Byte), Integer), CType(CType(69, Byte), Integer), CType(CType(79, Byte), Integer))
+        Me.btnNextDrawingN.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnNextDrawingN.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnNextDrawingN.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.btnNextDrawingN.Image = Global.AVT_TRAKING.My.Resources.Resources._next
+        Me.btnNextDrawingN.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnNextDrawingN.Location = New System.Drawing.Point(41, 1)
+        Me.btnNextDrawingN.Name = "btnNextDrawingN"
+        Me.btnNextDrawingN.Size = New System.Drawing.Size(36, 28)
+        Me.btnNextDrawingN.TabIndex = 36
+        Me.btnNextDrawingN.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.btnNextDrawingN.UseVisualStyleBackColor = True
+        '
+        'btnAddRFIScaffold
+        '
+        Me.btnAddRFIScaffold.FlatAppearance.BorderSize = 0
+        Me.btnAddRFIScaffold.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(59, Byte), Integer), CType(CType(69, Byte), Integer), CType(CType(79, Byte), Integer))
+        Me.btnAddRFIScaffold.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnAddRFIScaffold.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnAddRFIScaffold.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.btnAddRFIScaffold.Image = Global.AVT_TRAKING.My.Resources.Resources._new
+        Me.btnAddRFIScaffold.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnAddRFIScaffold.Location = New System.Drawing.Point(79, 2)
+        Me.btnAddRFIScaffold.Name = "btnAddRFIScaffold"
+        Me.btnAddRFIScaffold.Size = New System.Drawing.Size(77, 26)
+        Me.btnAddRFIScaffold.TabIndex = 35
+        Me.btnAddRFIScaffold.Text = "New"
+        Me.btnAddRFIScaffold.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.btnAddRFIScaffold.UseVisualStyleBackColor = True
+        '
+        'btnAfterDrawing
+        '
+        Me.btnAfterDrawing.FlatAppearance.BorderSize = 0
+        Me.btnAfterDrawing.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(59, Byte), Integer), CType(CType(69, Byte), Integer), CType(CType(79, Byte), Integer))
+        Me.btnAfterDrawing.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnAfterDrawing.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnAfterDrawing.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.btnAfterDrawing.Image = Global.AVT_TRAKING.My.Resources.Resources.after1
+        Me.btnAfterDrawing.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnAfterDrawing.Location = New System.Drawing.Point(4, 2)
+        Me.btnAfterDrawing.Name = "btnAfterDrawing"
+        Me.btnAfterDrawing.Size = New System.Drawing.Size(36, 28)
+        Me.btnAfterDrawing.TabIndex = 35
+        Me.btnAfterDrawing.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.btnAfterDrawing.UseVisualStyleBackColor = True
+        '
         'btnReportRFIScaffold
         '
         Me.btnReportRFIScaffold.FlatAppearance.BorderSize = 0
@@ -1037,6 +987,56 @@ Partial Class RFISacffold
         Me.btnReportRFIScaffold.Text = "Report"
         Me.btnReportRFIScaffold.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         Me.btnReportRFIScaffold.UseVisualStyleBackColor = True
+        '
+        'btnDelete
+        '
+        Me.btnDelete.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnDelete.FlatAppearance.BorderSize = 0
+        Me.btnDelete.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(59, Byte), Integer), CType(CType(69, Byte), Integer), CType(CType(79, Byte), Integer))
+        Me.btnDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnDelete.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnDelete.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.btnDelete.Image = Global.AVT_TRAKING.My.Resources.Resources.delete
+        Me.btnDelete.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnDelete.Location = New System.Drawing.Point(854, 6)
+        Me.btnDelete.Name = "btnDelete"
+        Me.btnDelete.Size = New System.Drawing.Size(90, 35)
+        Me.btnDelete.TabIndex = 32
+        Me.btnDelete.Text = "Delete"
+        Me.btnDelete.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.btnDelete.UseVisualStyleBackColor = True
+        '
+        'btnSave
+        '
+        Me.btnSave.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnSave.FlatAppearance.BorderSize = 0
+        Me.btnSave.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(59, Byte), Integer), CType(CType(69, Byte), Integer), CType(CType(79, Byte), Integer))
+        Me.btnSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnSave.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnSave.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.btnSave.Image = Global.AVT_TRAKING.My.Resources.Resources.save
+        Me.btnSave.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnSave.Location = New System.Drawing.Point(758, 6)
+        Me.btnSave.Name = "btnSave"
+        Me.btnSave.Size = New System.Drawing.Size(90, 35)
+        Me.btnSave.TabIndex = 31
+        Me.btnSave.Text = "Save"
+        Me.btnSave.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.btnSave.UseVisualStyleBackColor = True
+        '
+        'btnSalir
+        '
+        Me.btnSalir.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnSalir.FlatAppearance.BorderSize = 0
+        Me.btnSalir.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnSalir.ForeColor = System.Drawing.Color.White
+        Me.btnSalir.Image = Global.AVT_TRAKING.My.Resources.Resources._exit
+        Me.btnSalir.Location = New System.Drawing.Point(901, 5)
+        Me.btnSalir.Margin = New System.Windows.Forms.Padding(2)
+        Me.btnSalir.Name = "btnSalir"
+        Me.btnSalir.Size = New System.Drawing.Size(43, 55)
+        Me.btnSalir.TabIndex = 35
+        Me.btnSalir.UseVisualStyleBackColor = True
         '
         'RFISacffold
         '

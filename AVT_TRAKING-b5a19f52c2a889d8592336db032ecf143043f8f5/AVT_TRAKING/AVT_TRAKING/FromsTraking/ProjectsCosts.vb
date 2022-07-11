@@ -1308,30 +1308,32 @@ Public Class ProjectsCosts
 
 
     Private Sub chbComplete_CheckedChanged(sender As Object, e As EventArgs) Handles chbComplete.CheckedChanged
-        If chbComplete.Checked Then
-            If flagAddRecord Then
-                pjtNuevo.status = "1"
-            Else
-                If mtdJobs.updateComplete(If(chbComplete.Checked, True, False), pjt.idAux, pjt.idAuxWO) Then
-                    activarCampos(True)
-                    pjt.status = "1"
+        If Not flagBtnNextBackFind Then
+            If chbComplete.Checked Then
+                If flagAddRecord Then
+                    pjtNuevo.status = "1"
                 Else
-                    chbComplete.Checked = False
-                    pjt.status = "0"
-                    activarCampos(True)
+                    If mtdJobs.updateComplete(If(chbComplete.Checked, True, False), pjt.idAux, pjt.idAuxWO) Then
+                        activarCampos(True)
+                        pjt.status = "1"
+                    Else
+                        chbComplete.Checked = False
+                        pjt.status = "0"
+                        activarCampos(True)
+                    End If
                 End If
-            End If
-        Else
-            If flagAddRecord Then
-                pjtNuevo.status = "0"
             Else
-                If mtdJobs.updateComplete(If(chbComplete.Checked, True, False), pjt.idAux, pjt.idAuxWO) Then
-                    activarCampos(False)
-                    pjt.status = "0"
+                If flagAddRecord Then
+                    pjtNuevo.status = "0"
                 Else
-                    chbComplete.Checked = False
-                    pjt.status = "1"
-                    activarCampos(True)
+                    If mtdJobs.updateComplete(If(chbComplete.Checked, True, False), pjt.idAux, pjt.idAuxWO) Then
+                        activarCampos(False)
+                        pjt.status = "0"
+                    Else
+                        chbComplete.Checked = False
+                        pjt.status = "1"
+                        activarCampos(True)
+                    End If
                 End If
             End If
         End If
@@ -1488,12 +1490,12 @@ Public Class ProjectsCosts
         If tblHoursWorkedProject.Rows.Count > 0 Then
 
             For Each row As DataGridViewRow In tblHoursWorkedProject.Rows
-                totalHoursST += CDbl(row.Cells("Billable Rate").Value)
-                totalHoursOT += CDbl(row.Cells("Billable OT").Value)
-                totalHours3 += CDbl(row.Cells("Billable 3").Value)
-                totalCostHoursST += CDbl(row.Cells("Billing Rate").Value) * CDbl(row.Cells("Billable Rate").Value)
-                totalCostHoursOT += CDbl(row.Cells("Billing RateOT").Value) * CDbl(row.Cells("Billable OT").Value)
-                totalCostHours3 += CDbl(row.Cells("Billing Rate 3").Value) * CDbl(row.Cells("Billable 3").Value)
+                totalHoursST += CDbl(row.Cells("Billable Hrs. ST").Value)
+                totalHoursOT += CDbl(row.Cells("Billable Hrs. OT").Value)
+                totalHours3 += CDbl(row.Cells("Billable Hrs. 3").Value)
+                totalCostHoursST += CDbl(row.Cells("Billing Rate").Value) * CDbl(row.Cells("Billable Hrs. ST").Value)
+                totalCostHoursOT += CDbl(row.Cells("Billing RateOT").Value) * CDbl(row.Cells("Billable Hrs. OT").Value)
+                totalCostHours3 += CDbl(row.Cells("Billing Rate 3").Value) * CDbl(row.Cells("Billable Hrs. 3").Value)
             Next
 
         End If
