@@ -501,4 +501,11 @@
         rpt.idRFI = txtIdRFIScaffold.Text
         rpt.Show()
     End Sub
+
+    Private Sub txtBasicForNum_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtBasicForNum.KeyPress
+        If Not (IsNumeric(e.KeyChar) Or e.KeyChar = vbBack Or e.KeyChar = vbLf) Then
+            e.Handled = True
+        End If
+    End Sub
+
 End Class

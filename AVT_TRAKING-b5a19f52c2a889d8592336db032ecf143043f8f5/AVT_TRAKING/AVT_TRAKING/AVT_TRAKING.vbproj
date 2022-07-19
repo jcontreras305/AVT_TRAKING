@@ -97,6 +97,7 @@
     <Compile Include="ClassEstimation\MetodosFactor.vb" />
     <Compile Include="ClassEstimation\MetodosProgress.vb" />
     <Compile Include="ClassEstimation\MetodosProjectsActuals.vb" />
+    <Compile Include="ClassEstimation\MetodosRFIEquipment.vb" />
     <Compile Include="ClassEstimation\MetodosRFIScaffold.vb" />
     <Compile Include="ClassEstimation\RFIScaffoldClass.vb" />
     <Compile Include="Class\EstimationSC.vb" />
@@ -716,6 +717,12 @@
       <DependentUpon>JobNoSCFBudgetReport.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="ReportsEstimation\RFIReportEQ.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RFIReportEQ.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="ReportsEstimation\RFIReports.Designer.vb">
       <DependentUpon>RFIReports.vb</DependentUpon>
     </Compile>
@@ -1161,6 +1168,10 @@
     <EmbeddedResource Include="ReportsEstimation\JobNoSCFBudgetReport.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>JobNoSCFBudgetReport.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportsEstimation\RFIReportEQ.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>RFIReportEQ.vb</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="ReportsEstimation\RFIReports.resx">
       <DependentUpon>RFIReports.vb</DependentUpon>

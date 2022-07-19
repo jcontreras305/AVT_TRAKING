@@ -1,7 +1,7 @@
 ﻿Imports System.Runtime.InteropServices
 Public Class RFIReports
     Dim mtdRFISCF As New MetodosRFIScaffold
-    'Dim mtdRFIEquip  As New MetodosRFIEquipment
+    Dim mtdRFIEquip As New MetodosRFIEquipment
     'Dim mtdRFIPiping  As New MetodosRFIPiping
     Public TypeRFI As String = "RFI"
     Public projectId As String = ""
@@ -9,6 +9,7 @@ Public Class RFIReports
     Public idTag As String = ""
     Public idRFI As String = ""
     Dim tblRFISCF As New Data.DataTable
+    Dim tblRFIEq As New Data.DataTable
     Dim flagLoad As Boolean = True
     Private Sub PictureBox4_Click(sender As Object, e As EventArgs) Handles PictureBox4.Click
         Me.Close()
@@ -45,6 +46,7 @@ Public Class RFIReports
             mtdRFISCF.selectDrawing(cmbDrawing, projectId)
         End If
         If idDrawingNum <> "" Then
+            flagLoad = True
             cmbDrawing.SelectedItem = cmbDrawing.Items(cmbDrawing.FindString(idDrawingNum))
             Select Case TypeRFI
                 Case "Scaffold"
@@ -57,10 +59,16 @@ Public Class RFIReports
                             cmbRFI.SelectedItem = cmbRFI.Items(cmbRFI.FindString(idRFI))
                         End If
                     End If
-                Case "Equipemnt"
-                    lblTag.Text = "Equipment Tag."
-
-
+                Case "Equipment"
+                    lblTag.Text = "Equip. Tag."
+                    mtdRFIEquip.selectTagDrawing(idDrawingNum, cmbTag)
+                    If idTag <> "" Then
+                        cmbTag.SelectedItem = cmbTag.Items(cmbTag.FindString(idTag))
+                        tblRFIEq = mtdRFIEquip.selectRFIEquipment(idTag, cmbRFI, idDrawingNum)
+                        If idRFI <> "" Then
+                            cmbRFI.SelectedItem = cmbRFI.Items(cmbRFI.FindString(idRFI))
+                        End If
+                    End If
                 Case "Piping"
                     lblTag.Text = "Piping Tag."
             End Select
@@ -70,7 +78,7 @@ Public Class RFIReports
 
     Private Sub cmbDrawing_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbDrawing.SelectedIndexChanged
         Try
-            If flagLoad = True Then
+            If Not flagLoad = True Then
                 If cmbDrawing.SelectedItem IsNot Nothing Then
                     Select Case TypeRFI
                         Case "Scaffold"
@@ -80,10 +88,13 @@ Public Class RFIReports
                             idTag = ""
                             cmbRFI.Items.Clear()
                             idRFI = ""
-                        Case "Equipemnt"
-                            lblTag.Text = "Equipment Tag."
-
-
+                        Case "Equipment"
+                            Dim array() As String = cmbDrawing.SelectedItem.ToString.Split("|")
+                            idDrawingNum = array(0)
+                            mtdRFIEquip.selectTagDrawing(idDrawingNum, cmbTag)
+                            idTag = ""
+                            cmbRFI.Items.Clear()
+                            idRFI = ""
                         Case "Piping"
                             lblTag.Text = "Piping Tag."
                     End Select
@@ -96,7 +107,7 @@ Public Class RFIReports
 
     Private Sub cmbTag_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbTag.SelectedIndexChanged
         Try
-            If flagLoad = True Then
+            If Not flagLoad = True Then
                 If cmbTag.SelectedItem IsNot Nothing Then
                     Select Case TypeRFI
                         Case "Scaffold"
@@ -104,10 +115,11 @@ Public Class RFIReports
                             idTag = array(0)
                             mtdRFISCF.selectRFI(idTag, cmbRFI)
                             idRFI = ""
-                        Case "Equipemnt"
-                            lblTag.Text = "Equipment Tag."
-
-
+                        Case "Equipment"
+                            Dim array() As String = cmbTag.SelectedItem.ToString.Split("|")
+                            idTag = array(0)
+                            mtdRFIEquip.selectRFIEquipment(idTag, cmbRFI, idDrawingNum)
+                            idRFI = ""
                         Case "Piping"
                             lblTag.Text = "Piping Tag."
                     End Select
@@ -120,14 +132,15 @@ Public Class RFIReports
 
     Private Sub cmbRFI_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbRFI.SelectedIndexChanged
         Try
-            If flagLoad = True Then
+            If Not flagLoad = True Then
                 If cmbDrawing.SelectedItem IsNot Nothing Then
                     Select Case TypeRFI
                         Case "Scaffold"
                             Dim array() As String = cmbRFI.SelectedItem.ToString.Split("|")
                             idRFI = array(0)
-                        Case "Equipemnt"
-                            lblTag.Text = "Equipment Tag."
+                        Case "Equipment"
+                            Dim array() As String = cmbRFI.SelectedItem.ToString.Split("|")
+                            idRFI = array(0)
                         Case "Piping"
                             lblTag.Text = "Piping Tag."
                     End Select
@@ -149,7 +162,13 @@ Public Class RFIReports
                         reportTs.SetParameterValue("@idDrawingNum", idDrawingNum)
                         'reportTs.SetParameterValue("@CompanyName", "Brock")
                         crvReport.ReportSource = reportTs
-                    Case ""
+                    Case "Equipment"
+                        Dim reportTs As New RFIReportEQ
+                        reportTs.SetParameterValue("@idRFIEq", idRFI)
+                        reportTs.SetParameterValue("@tag", idTag)
+                        reportTs.SetParameterValue("@idDrawingNum", idDrawingNum)
+                        'reportTs.SetParameterValue("@CompanyName", "Brock")
+                        crvReport.ReportSource = reportTs
                     Case ""
                 End Select
 

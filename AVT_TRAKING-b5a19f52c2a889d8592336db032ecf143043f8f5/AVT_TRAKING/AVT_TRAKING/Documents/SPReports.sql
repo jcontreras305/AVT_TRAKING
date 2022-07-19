@@ -2890,3 +2890,257 @@ begin
 	
 end
 go
+----#########################################################################################################################################################################################
+----######## PROCEDIMIENTO PARA ELIMINAR UN RFI EQUIPMENT ###################################################################################################################################
+----#########################################################################################################################################################################################
+create proc [dbo].[sp_deleteRFIEquipment] 
+@idRFIDelete varchar(35),
+@idRFINext varchar(35),
+@tag int,
+@idDrawingNum varchar(45)
+as
+declare @error as bit
+
+declare @Elevation int
+declare @WwPaint varchar(40)
+declare @System varchar(10) 
+declare @Option varchar(25) 
+declare @SqrFtPnt float
+declare @WwRemove varchar(40)
+declare @Remove bit
+declare @SqrFtRmv float
+declare @WwInstall varchar(40)
+declare @Type varchar(25)
+declare @Thick float
+declare @Jacket varchar(25)
+declare @SqrFtII float
+declare @Bevel float
+declare @CutOut float
+
+begin
+	begin tran
+		begin try
+			set @error = 0
+			if (@idRFINext <> '')--existe un RFI adelante en base a los IDs
+			begin
+				if (select COUNT(*) from RFIEquipment where idRFIEq = @idRFINext and tag = @tag)=1
+				begin 
+					--Tomo los valor de LAST del que tengo que eliminar 
+					select top 1 @Elevation=oldElevation ,@WwPaint = oldWwPaint,@System=oldSystem,@Option=oldOption,@SqrFtPnt=oldSqrFtPnt,@WwRemove=oldWwRemove,
+					@Remove=oldRemove,@SqrFtRmv=oldSqrFtRmv,@WwInstall=oldWwInstall,@Type=oldType,@Thick=oldThick,@Jacket=oldJacket,@SqrFtII=oldSqrFtII,@Bevel=oldBevel,@CutOut=oldCutOut from RFIEquipment where idRFIEq = @idRFIDelete and tag = @tag and idDrawingNum = @idDrawingNum
+					--Actualizo los valore del que esta enseguida con los valores que deseo eliminar
+					update RFIEquipment set oldElevation=@Elevation,oldWwPaint=@WwPaint,oldSystem=@System,oldOption=@Option,oldSqrFtPnt=@SqrFtPnt,oldWwRemove=@WwRemove,
+					oldRemove=@Remove,oldSqrFtRmv=@SqrFtRmv,oldWwInstall=@WwInstall,oldType=@Type,oldThick=@Thick,oldJacket=@Jacket,oldSqrFtII=@SqrFtII,oldBevel=@Bevel,oldCutOut=@CutOut
+					where tag = @tag and idDrawingNum = @idDrawingNum and idRFIEq = @idRFINext
+					--elimino el RFI
+					delete RFIEquipment where tag = @tag and idDrawingNum = @idDrawingNum and idRFIEq = @idRFIDelete
+				end
+				else
+				begin 
+					delete RFIEquipment where tag = @tag and idDrawingNum = @idDrawingNum and idRFIEq = @idRFIDelete
+				end
+			end
+			else --No existe un RFI mas o depeues de este, por ende tiene que tomar los valores de su Last ya que es el mismo EQUIPMENT o un anterior a el,
+			begin -- y se tiene que actualizar el equipmentEst ya que es el RFI a eliminar es el ultimo cambio que se le hizo
+				--Tomo los valor de LAST del que tengo que eliminar 
+				select top 1 @Elevation=oldElevation ,@WwPaint = oldWwPaint,@System=oldSystem,@Option=oldOption,@SqrFtPnt=oldSqrFtPnt,@WwRemove=oldWwRemove,
+					@Remove=oldRemove,@SqrFtRmv=oldSqrFtRmv,@WwInstall=oldWwInstall,@Type=oldType,@Thick=oldThick,@Jacket=oldJacket,@SqrFtII=oldSqrFtII,@Bevel=oldBevel,@CutOut=oldCutOut from RFIEquipment where idRFIEq = @idRFIDelete and tag = @tag and idDrawingNum = @idDrawingNum
+				--Actualizo el equipmentEst con los valores LAST del RFI a eliminar
+				update equipmentEst set elevation=@Elevation,idLaborRatePnt=@WwPaint,systemPntEq=@System,pntOption=@Option,sqrFtPnt=@SqrFtPnt,idLaborRateRmv=@WwRemove,
+					remIns=@Remove,sqrFtRmv=@SqrFtRmv,idLaborRateII=@WwInstall,[type]=@Type,thick=@Thick,idJacket=@Jacket,sqrFtII=@SqrFtII,bevel=@Bevel,cutout=@CutOut
+					where idEquimentEst = @tag and idDrawingNum = @idDrawingNum 
+				--Elimino el RFI
+				delete RFIEquipment where tag = @tag and idDrawingNum = @idDrawingNum and idRFIEq = @idRFIDelete
+			end
+		end try
+		begin catch
+			set @error = 1
+			goto solveError
+		end catch
+	commit tran
+	solveError:
+	if @error = 1
+	begin 
+		rollback tran
+	end 
+end
+go
+----#########################################################################################################################################################################################
+----######## PROCEDIMIENTO PARA INSERTAR Y ACTUALIZAR RFI EQUIPMENT #########################################################################################################################
+----#########################################################################################################################################################################################
+create proc sp_insertUpdateRFIEquipmentEst
+	@idRFIEq varchar(35),
+	@tag int,
+	@idDrawingNum varchar(45)
+as
+	declare @Elevation as int = 1
+	declare @WwPaint as varchar(40) = NULL
+	declare @System as varchar(10) = NULL 
+	declare @Option as varchar(25) = NULL
+	declare @SqrFtPnt as float = 0 
+	declare @WwRemove as varchar(40) = NULL
+	declare @Remove as bit= 0 
+	declare @SqrFtRmv as float = 0
+	declare @WwInstall as varchar(40) = NULL 
+	declare @Type as varchar(25) = NULL
+	declare @Thick as float = 0 
+	declare @Jacket as varchar(25) = NULL
+	declare @SqrFtII as float =0  
+	declare @Bevel as float =0 
+	declare @CutOut as float = 0
+	declare @oIRESQF as float = 0
+	declare @oEIRHRS as float = 0
+	declare @oEIRCOSTL as float = 0
+	declare @oEIRCOSTM as float = 0
+	declare @oEIRCOSTE as float = 0
+	declare @oEIRTCOST as float = 0
+	declare @oIIESQF as float = 0
+	declare @oEIIHRS as float = 0
+	declare @oEIICOSTL as float = 0
+	declare @oEIICOSTM as float = 0
+	declare @oEIICOSTE as float = 0
+	declare @oEIITCOST as float = 0
+	declare @oEPHRS as float = 0
+	declare @oEPCOSTL as float = 0
+	declare @oEPCOSTM  as float = 0
+	declare @oEPCOSTE  as float = 0
+	declare @oEPTCOST  as float = 0
+	declare @nIRESQF as float = 0
+	declare @nEIRHRS as float = 0
+	declare @nEIRCOSTL as float = 0
+	declare @nEIRCOSTM as float = 0
+	declare @nEIRCOSTE as float = 0
+	declare @nEIRTCOST as float = 0
+	declare @nIIESQF as float = 0
+	declare @nEIIHRS as float = 0 
+	declare @nEIICOSTL as float = 0
+	declare @nEIICOSTM as float = 0
+	declare @nEIICOSTE as float = 0
+	declare @nEIITCOST as float = 0
+	declare @nEPHRS as float = 0
+	declare @nEPCOSTL as float = 0
+	declare @nEPCOSTM as float = 0
+	declare @nEPCOSTE as float = 0
+	declare @nEPTCOST as float = 0
+
+	declare @laborPrEqUR as float = 0
+	declare @matRateEqUR as float = 0
+	declare @eqRateEqUR as float = 0
+	declare @percent as float = 0
+	declare @laborPrJkt as float = 0 
+	declare @matFacJkt as float = 0
+	declare @eqFacJkt as float = 0
+	declare @insRate as float = 0 
+	declare @bevelIf as float = 0
+	declare @cutOutIf as float = 0
+begin
+	--CARGAERMOS LA INFORMACION DEL RFI EQUIPMENT DE LOS DATOS ANTERIORES (old)
+	select @Elevation = oldElevation,@WwPaint=oldWwPaint,@System=oldSystem,@Option=oldOption,@SqrFtPnt=oldSqrFtPnt,
+	@WwRemove=oldWwRemove,@Remove=oldRemove,@SqrFtRmv=oldSqrFtRmv,
+	@WwInstall=oldWwInstall,@Type=oldType,@Thick=oldThick,@Jacket=oldJacket,@SqrFtII=oldSqrFtII,@Bevel=oldBevel,@CutOut=oldCutOut 
+	from RFIEquipment where idRFIEq = @idRFIEq and tag = @tag and idDrawingNum=@idDrawingNum
+	select @laborPrEqUR = laborProd, @matRateEqUR = matRate,@eqRateEqUR=eqRate from eqInsUnitRate where [type] = @Type and thick=@Thick
+	select @percent = [percent] from factorElevationPaint where elevation = @Elevation 
+	set @percent = IIF(ISNULL(@percent,1)=1,0,@percent*0.01)
+	select @laborPrJkt=laborProd,@matFacJkt = matFactor,@eqFacJkt=eqFactor from eqJktUnitRate where idJacket = @Jacket
+	select @bevelIf=bebel,@cutOutIf=cutOut from insFitting where [type]= @Type
+	--HACEMOS LAS OPERACIONES PARA LOS VALORES OLD
+	set @oIRESQF= @SqrFtRmv * IIF(@Remove=1,1,0)
+	set @oEIRHRS= ROUND(@oIRESQF * @laborPrEqUR * @percent * @laborPrJkt,1)
+	select @insRate = insRate from laborRate where idLaborRate = @WwRemove --ESTE SE DEBE DE ACTUALIZAR DEBIDO A LA QUE PUEDE CAMBIAR EL VALOR
+	set @oEIRCOSTL= ROUND(@oEIRHRS * @insRate,2) 
+	set @oEIRCOSTM= ROUND(@SqrFtRmv * @matRateEqUR * @matFacJkt,2)
+	set @oEIRCOSTE= ROUND(@SqrFtRmv * @eqRateEqUR * @eqFacJkt,2)
+	set @oEIRTCOST= ISNULL(@oEIRCOSTL,0)+ISNULL(@oEIRCOSTM,0)+ISNULL(@oEIRCOSTE,0)
+
+	set @oIIESQF= ROUND(@SqrFtII+(@Bevel*@bevelIf)+(@CutOut*@cutOutIf),2)
+	set @oEIIHRS= ROUND(@oIIESQF * @laborPrEqUR * @percent * @laborPrJkt,1)
+	select @insRate = insRate from laborRate where idLaborRate = @WwInstall --SE ACTUALIZA CON EL LABOR DE INSTALL
+	set @oEIICOSTL= ROUND(@oEIIHRS * @insRate,2)
+	set @oEIICOSTM= ROUND(@oIIESQF * @matRateEqUR * @matFacJkt,2)
+	set @oEIICOSTE= ROUND(@oIIESQF * @eqRateEqUR * @eqFacJkt,2)
+	set @oEIITCOST= ISNULL(@oEIICOSTL,0)+ISNULL(@oEIICOSTM,0)+ISNULL(@oEIICOSTE,0)
+
+	select @laborPrEqUR = laborProd, @matRateEqUR = matRate,@eqRateEqUR=eqRate from eqPaintUnitRate where systemPntEq = @System and pntOption= @Option
+
+	set @oEPHRS= ROUND(@SqrFtPnt * @laborPrEqUR * @percent ,1)
+	select @insRate = insRate from laborRate where idLaborRate = @WwPaint
+	set @oEPCOSTL= ROUND(@oEPHRS * @insRate ,2)
+	set @oEPCOSTM= ROUND(@SqrFtPnt * @matRateEqUR,2)
+	set @oEPCOSTE= ROUND(@SqrFtPnt * @eqRateEqUR,2)
+	set @oEPTCOST= ISNULL(@oEPCOSTL,0)+ISNULL(@oEPCOSTM,0)+ISNULL(@oEPCOSTE,0)
+	
+	--CARGAMOS LOS DATOS PARA LAS FORMULAS DE NEW 
+	select @Elevation=newElevation,@WwPaint=newWwPaint,@System=newSystem,@Option=newOption,@SqrFtPnt=newSqrFtPnt,
+	@WwRemove=newWwRemove,@Remove=newRemove,@SqrFtRmv=newSqrFtRmv,
+	@WwInstall=newWwInstall,@Type=newType,@Thick=newThick,@Jacket=newJacket,@SqrFtII=newSqrFtII,@Bevel=newBevel,@CutOut=newCutOut 
+	from RFIEquipment where idRFIEq = @idRFIEq and tag = @tag and idDrawingNum=@idDrawingNum
+	select @laborPrEqUR = laborProd, @matRateEqUR = matRate,@eqRateEqUR=eqRate from eqInsUnitRate where [type] = @Type and thick=@Thick
+	select @laborPrJkt=laborProd,@matFacJkt = matFactor,@eqFacJkt=eqFactor from eqJktUnitRate where idJacket = @Jacket
+	select @percent = [percent] from factorElevationPaint where elevation = @Elevation 
+	set @percent = IIF(ISNULL(@percent,1)=1,0,@percent*0.01)
+	select @bevelIf=bebel,@cutOutIf=cutOut from insFitting where [type]= @Type
+	--HACEMOS LAS OPERACIONES DE NEW
+	set @nIRESQF= @SqrFtRmv * IIF(@Remove=1,1,0)
+	set @nEIRHRS= ROUND(@nIRESQF * @laborPrEqUR * @percent * @laborPrJkt,1)
+	select @insRate = insRate from laborRate where idLaborRate = @WwRemove
+	set @nEIRCOSTL= ROUND(ROUND(@nIRESQF * @laborPrEqUR * @percent * @laborPrJkt,1) * @insRate,2)
+	set @nEIRCOSTM= RoUND(@nIRESQF * @matRateEqUR * @matFacJkt ,2)
+	set @nEIRCOSTE= ROUND(@nIRESQF * @eqRateEqUR * @eqFacJkt,2)
+	set @nEIRTCOST= ISNULL(@nEIRCOSTL,0)+ISNULL(@nEIRCOSTM,0)+ISNULL(@nEIRCOSTE,0)
+
+	set @nIIESQF= ROUND(@SqrFtII + (@Bevel * @bevelIf) + (@CutOut * @cutOutIf),2)
+	set @nEIIHRS= ROUND(@nIIESQF * @laborPrEqUR * @percent * @laborPrJkt ,1)
+	select @insRate = insRate from laborRate where idLaborRate = @WwInstall
+	set @nEIICOSTL= ROUND(ROUND(@nIIESQF * @laborPrEqUR * @percent * @laborPrJkt,1)* @insRate,2)
+	set @nEIICOSTM= ROUND(@nIIESQF * @matRateEqUR * @matFacJkt ,2)
+	set @nEIICOSTE= ROUND(@nIIESQF * @eqRateEqUR * @eqFacJkt ,2)
+	set @nEIITCOST= ISNULL(@nEIICOSTL,0)+ISNULL(@nEIICOSTM,0)+ISNULL(@nEIICOSTE,0)
+
+	select @laborPrEqUR = laborProd, @matRateEqUR = matRate,@eqRateEqUR=eqRate from eqPaintUnitRate where systemPntEq = @System and pntOption= @Option
+	
+	set @nEPHRS= ROUND(@SqrFtPnt * @laborPrEqUR * @percent,1)
+	select @insRate = insRate from laborRate where idLaborRate = @WwPaint
+	set @nEPCOSTL= ROUND(ROUND(@SqrFtPnt * @laborPrEqUR * @percent,1) * @insRate,2)
+	set @nEPCOSTM= ROUND(@SqrFtPnt * @matRateEqUR ,2)
+	set @nEPCOSTE= ROUND(@SqrFtPnt * @eqRateEqUR ,2)
+	set @nEPTCOST= ISNULL(@nEPCOSTL,0)+ISNULL(@nEPCOSTM,0)+ISNULL(@nEPCOSTE,0)
+
+	if (select COUNT(*)from RFIDiffEq where idDrawingNum=@idDrawingNum and tag= @tag and idRFIEq = @idRFIEq )=0
+	begin
+		insert into RFIDiffEq values (@idRFIEq,@tag,@idDrawingNum,@oIRESQF,@oEIRHRS,@oEIRCOSTL,@oEIRCOSTM,@oEIRCOSTE,@oEIRTCOST,@oIIESQF,@oEIIHRS,@oEIICOSTL,@oEIICOSTM,@oEIICOSTE,@oEIITCOST,@oEPHRS,@oEPCOSTL,@oEPCOSTM,@oEPCOSTE,@oEPTCOST,@nIRESQF,@nEIRHRS,@nEIRCOSTL,@nEIRCOSTM,@nEIRCOSTE,@nEIRTCOST,@nIIESQF,@nEIIHRS,@nEIICOSTL,@nEIICOSTM,@nEIICOSTE,@nEIITCOST,@nEPHRS,@nEPCOSTL,@nEPCOSTM,@nEPCOSTE,@nEPTCOST)	
+	end	else if (select COUNT(*)from RFIDiffEq where idDrawingNum=@idDrawingNum and tag= @tag and idRFIEq = @idRFIEq )=1
+	begin
+		update RFIDiffEq set  
+		oIRESQF = @oIRESQF,oEIRHRS = @oEIRHRS,oEIRCOSTL = @oEIRCOSTL,oEIRCOSTM = @oEIRCOSTM,oEIRCOSTE = @oEIRCOSTE,oEIRTCOST = @oEIRTCOST,
+		oIIESQF = @oIIESQF,oEIIHRS = @oEIIHRS,oEIICOSTL = @oEIICOSTL,oEIICOSTM = @oEIICOSTM,oEIICOSTE = @oEIICOSTE,oEIITCOST = @oEIITCOST,
+		oEPHRS = @oEPHRS,oEPCOSTL = @oEPCOSTL,oEPCOSTM = @oEPCOSTM,oEPCOSTE = @oEPCOSTE,oEPTCOST = @oEPTCOST,
+		nIRESQF = @nIRESQF,nEIRHRS = @nEIRHRS,nEIRCOSTL = @nEIRCOSTL,nEIRCOSTM = @nEIRCOSTM,nEIRCOSTE = @nEIRCOSTE,nEIRTCOST = @nEIRTCOST,
+		nIIESQF = @nIIESQF,nEIIHRS = @nEIIHRS,nEIICOSTL = @nEIICOSTL,nEIICOSTM = @nEIICOSTM,nEIICOSTE = @nEIICOSTE,nEIITCOST = @nEIITCOST,
+		nEPHRS = @nEPHRS,nEPCOSTL = @nEPCOSTL,nEPCOSTM = @nEPCOSTM,nEPCOSTE = @nEPCOSTE,nEPTCOST = @nEPTCOST 
+		where idRFIEq = @idRFIEq and tag =  @tag and idDrawingNum = @idDrawingNum
+	end
+end
+go
+----#########################################################################################################################################################################################
+----######## PROCEDIMIENTO PARA REPORTE DE RFI DIFF EQUIPMENT ###############################################################################################################################
+----#########################################################################################################################################################################################
+create proc sp_RFIDiffEq
+	@idRFIEq varchar(35),
+	@tag int,
+	@idDrawingNum varchar(45)
+as 
+begin
+	exec sp_insertUpdateRFIEquipmentEst @idRFIEq ,@tag, @idDrawingNum
+	select rfiD.idRFIEq,rfiD.tag,rfiD.idDrawingNum, po.projectId,po.[description],rfi.basicFCR,
+	rfiD.oIRESQF, rfiD.oEIRHRS, rfiD.oEIRCOSTL, rfiD.oEIRCOSTM, rfiD.oEIRCOSTE, rfiD.oEIRTCOST, rfiD.nIRESQF, rfiD.nEIRHRS, rfiD.nEIRCOSTL, rfiD.nEIRCOSTM, rfiD.nEIRCOSTE, rfiD.nEIRTCOST,
+	rfiD.oIIESQF, rfiD.oEIIHRS, rfiD.oEIICOSTL, rfiD.oEIICOSTM, rfiD.oEIICOSTE, rfiD.oEIITCOST, rfiD.nIIESQF, rfiD.nEIIHRS, rfiD.nEIICOSTL, rfiD.nEIICOSTM, rfiD.nEIICOSTE, rfiD.nEIITCOST,
+				  rfiD.oEPHRS , rfiD.oEPCOSTL , rfiD.oEPCOSTM , rfiD.oEPCOSTE , rfiD.oEPTCOST , rfiD.nEPHRS , rfiD.nEPHRS , rfiD.nEPCOSTL , rfiD.nEPCOSTM , rfiD.nEPCOSTE , rfiD.nEPTCOST
+	from RFIDiffEq as rfiD
+	inner join equipmentEst as eq on eq.idEquimentEst = rfiD.tag and rfiD.idDrawingNum = eq.idDrawingNum
+	inner join RFIEquipment as rfi on rfi.tag = rfiD.tag and rfi.idDrawingNum = eq.idDrawingNum and rfi.idRFIEq = rfiD.idRFIEq
+	inner join drawing as dr on dr.idDrawingNum = rfiD.idDrawingNum
+	inner join projectClientEst as po on po.projectId = dr.projectId
+	where rfiD.idDrawingNum = @idDrawingNum and rfiD.tag = @tag and rfiD.idRFIEq = @idRFIEq
+end  
+go

@@ -24,8 +24,8 @@ Partial Class RFIEquipment
     Private Sub InitializeComponent()
         Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
         Me.TableLayoutPanel2 = New System.Windows.Forms.TableLayoutPanel()
         Me.Panel9 = New System.Windows.Forms.Panel()
@@ -51,10 +51,10 @@ Partial Class RFIEquipment
         Me.Label4 = New System.Windows.Forms.Label()
         Me.Panel10 = New System.Windows.Forms.Panel()
         Me.Label19 = New System.Windows.Forms.Label()
-        Me.txtIdRFIScaffold = New System.Windows.Forms.TextBox()
+        Me.txtIdRFIEquipment = New System.Windows.Forms.TextBox()
         Me.Panel14 = New System.Windows.Forms.Panel()
         Me.btnNextDrawingN = New System.Windows.Forms.Button()
-        Me.btnAddRFIScaffold = New System.Windows.Forms.Button()
+        Me.btnAddRFIEquipment = New System.Windows.Forms.Button()
         Me.btnAfterDrawing = New System.Windows.Forms.Button()
         Me.Panel4 = New System.Windows.Forms.Panel()
         Me.btnReportRFIScaffold = New System.Windows.Forms.Button()
@@ -65,10 +65,17 @@ Partial Class RFIEquipment
         Me.Label1 = New System.Windows.Forms.Label()
         Me.TableLayoutPanel3 = New System.Windows.Forms.TableLayoutPanel()
         Me.Panel3 = New System.Windows.Forms.Panel()
+        Me.TableLayoutPanel6 = New System.Windows.Forms.TableLayoutPanel()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
         Me.tblPaintEq = New System.Windows.Forms.DataGridView()
+        Me.idLaborRatePnt = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.systemPnt = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.optionPnt = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.sqftPnt = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.tblGeneralEquipment = New System.Windows.Forms.DataGridView()
+        Me.Datos = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.HeigthEq = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.TableLayoutPanel4 = New System.Windows.Forms.TableLayoutPanel()
         Me.GroupBox5 = New System.Windows.Forms.GroupBox()
         Me.Panel15 = New System.Windows.Forms.Panel()
@@ -101,20 +108,9 @@ Partial Class RFIEquipment
         Me.txtNameReq = New System.Windows.Forms.TextBox()
         Me.Label10 = New System.Windows.Forms.Label()
         Me.Panel16 = New System.Windows.Forms.Panel()
-        Me.GroupBox6 = New System.Windows.Forms.GroupBox()
-        Me.btlInsRemoval = New System.Windows.Forms.DataGridView()
         Me.TableLayoutPanel5 = New System.Windows.Forms.TableLayoutPanel()
         Me.GroupBox7 = New System.Windows.Forms.GroupBox()
         Me.tblInsInsulation = New System.Windows.Forms.DataGridView()
-        Me.Datos = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.HeigthEq = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.idLaborRateRmv = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.RemoveEq = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.SqftEq = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.idLaborRatePnt = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.systemPnt = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.optionPnt = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.sqftPnt = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.idLaborRateII = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.typeII = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.thickII = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -122,7 +118,11 @@ Partial Class RFIEquipment
         Me.sqftII = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.bevelII = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.cutOutII = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.TableLayoutPanel6 = New System.Windows.Forms.TableLayoutPanel()
+        Me.GroupBox6 = New System.Windows.Forms.GroupBox()
+        Me.tblInsRemoval = New System.Windows.Forms.DataGridView()
+        Me.idLaborRateRmv = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.RemoveEq = New System.Windows.Forms.DataGridViewCheckBoxColumn()
+        Me.SqftEqRmv = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.TableLayoutPanel1.SuspendLayout()
         Me.TableLayoutPanel2.SuspendLayout()
         Me.Panel9.SuspendLayout()
@@ -138,6 +138,7 @@ Partial Class RFIEquipment
         Me.Panel1.SuspendLayout()
         Me.TableLayoutPanel3.SuspendLayout()
         Me.Panel3.SuspendLayout()
+        Me.TableLayoutPanel6.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         CType(Me.tblPaintEq, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox1.SuspendLayout()
@@ -151,12 +152,11 @@ Partial Class RFIEquipment
         Me.GroupBox3.SuspendLayout()
         Me.Panel12.SuspendLayout()
         Me.Panel16.SuspendLayout()
-        Me.GroupBox6.SuspendLayout()
-        CType(Me.btlInsRemoval, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.TableLayoutPanel5.SuspendLayout()
         Me.GroupBox7.SuspendLayout()
         CType(Me.tblInsInsulation, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.TableLayoutPanel6.SuspendLayout()
+        Me.GroupBox6.SuspendLayout()
+        CType(Me.tblInsRemoval, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'TableLayoutPanel1
@@ -312,11 +312,11 @@ Partial Class RFIEquipment
         '
         Me.Label9.AutoSize = True
         Me.Label9.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.Label9.Location = New System.Drawing.Point(5, 5)
+        Me.Label9.Location = New System.Drawing.Point(2, 5)
         Me.Label9.Name = "Label9"
-        Me.Label9.Size = New System.Drawing.Size(68, 13)
+        Me.Label9.Size = New System.Drawing.Size(79, 13)
         Me.Label9.TabIndex = 14
-        Me.Label9.Text = "Scaffold Tag"
+        Me.Label9.Text = "Equipment Tag"
         '
         'cmbTag
         '
@@ -374,7 +374,7 @@ Partial Class RFIEquipment
         Me.txtJobNum.Location = New System.Drawing.Point(69, 1)
         Me.txtJobNum.Name = "txtJobNum"
         Me.txtJobNum.ReadOnly = True
-        Me.txtJobNum.Size = New System.Drawing.Size(175, 20)
+        Me.txtJobNum.Size = New System.Drawing.Size(183, 20)
         Me.txtJobNum.TabIndex = 1
         '
         'Label2
@@ -421,7 +421,7 @@ Partial Class RFIEquipment
         'Panel10
         '
         Me.Panel10.Controls.Add(Me.Label19)
-        Me.Panel10.Controls.Add(Me.txtIdRFIScaffold)
+        Me.Panel10.Controls.Add(Me.txtIdRFIEquipment)
         Me.Panel10.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel10.Location = New System.Drawing.Point(519, 65)
         Me.Panel10.Name = "Panel10"
@@ -439,19 +439,19 @@ Partial Class RFIEquipment
         Me.Label19.TabIndex = 15
         Me.Label19.Text = "RFI No."
         '
-        'txtIdRFIScaffold
+        'txtIdRFIEquipment
         '
-        Me.txtIdRFIScaffold.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.txtIdRFIScaffold.Enabled = False
-        Me.txtIdRFIScaffold.Location = New System.Drawing.Point(153, 3)
-        Me.txtIdRFIScaffold.Name = "txtIdRFIScaffold"
-        Me.txtIdRFIScaffold.Size = New System.Drawing.Size(100, 20)
-        Me.txtIdRFIScaffold.TabIndex = 36
+        Me.txtIdRFIEquipment.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.txtIdRFIEquipment.Enabled = False
+        Me.txtIdRFIEquipment.Location = New System.Drawing.Point(153, 3)
+        Me.txtIdRFIEquipment.Name = "txtIdRFIEquipment"
+        Me.txtIdRFIEquipment.Size = New System.Drawing.Size(100, 20)
+        Me.txtIdRFIEquipment.TabIndex = 36
         '
         'Panel14
         '
         Me.Panel14.Controls.Add(Me.btnNextDrawingN)
-        Me.Panel14.Controls.Add(Me.btnAddRFIScaffold)
+        Me.Panel14.Controls.Add(Me.btnAddRFIEquipment)
         Me.Panel14.Controls.Add(Me.btnAfterDrawing)
         Me.Panel14.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel14.Location = New System.Drawing.Point(781, 65)
@@ -475,22 +475,22 @@ Partial Class RFIEquipment
         Me.btnNextDrawingN.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         Me.btnNextDrawingN.UseVisualStyleBackColor = True
         '
-        'btnAddRFIScaffold
+        'btnAddRFIEquipment
         '
-        Me.btnAddRFIScaffold.FlatAppearance.BorderSize = 0
-        Me.btnAddRFIScaffold.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(59, Byte), Integer), CType(CType(69, Byte), Integer), CType(CType(79, Byte), Integer))
-        Me.btnAddRFIScaffold.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnAddRFIScaffold.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnAddRFIScaffold.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.btnAddRFIScaffold.Image = Global.AVT_TRAKING.My.Resources.Resources._new
-        Me.btnAddRFIScaffold.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnAddRFIScaffold.Location = New System.Drawing.Point(79, 2)
-        Me.btnAddRFIScaffold.Name = "btnAddRFIScaffold"
-        Me.btnAddRFIScaffold.Size = New System.Drawing.Size(77, 26)
-        Me.btnAddRFIScaffold.TabIndex = 35
-        Me.btnAddRFIScaffold.Text = "New"
-        Me.btnAddRFIScaffold.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.btnAddRFIScaffold.UseVisualStyleBackColor = True
+        Me.btnAddRFIEquipment.FlatAppearance.BorderSize = 0
+        Me.btnAddRFIEquipment.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(59, Byte), Integer), CType(CType(69, Byte), Integer), CType(CType(79, Byte), Integer))
+        Me.btnAddRFIEquipment.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnAddRFIEquipment.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnAddRFIEquipment.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.btnAddRFIEquipment.Image = Global.AVT_TRAKING.My.Resources.Resources._new
+        Me.btnAddRFIEquipment.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnAddRFIEquipment.Location = New System.Drawing.Point(79, 2)
+        Me.btnAddRFIEquipment.Name = "btnAddRFIEquipment"
+        Me.btnAddRFIEquipment.Size = New System.Drawing.Size(77, 26)
+        Me.btnAddRFIEquipment.TabIndex = 35
+        Me.btnAddRFIEquipment.Text = "New"
+        Me.btnAddRFIEquipment.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.btnAddRFIEquipment.UseVisualStyleBackColor = True
         '
         'btnAfterDrawing
         '
@@ -620,7 +620,7 @@ Partial Class RFIEquipment
         Me.TableLayoutPanel3.Name = "TableLayoutPanel3"
         Me.TableLayoutPanel3.RowCount = 3
         Me.TableLayoutPanel3.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 99.0!))
-        Me.TableLayoutPanel3.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 110.0!))
+        Me.TableLayoutPanel3.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 111.0!))
         Me.TableLayoutPanel3.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
         Me.TableLayoutPanel3.Size = New System.Drawing.Size(978, 338)
         Me.TableLayoutPanel3.TabIndex = 37
@@ -633,6 +633,21 @@ Partial Class RFIEquipment
         Me.Panel3.Name = "Panel3"
         Me.Panel3.Size = New System.Drawing.Size(972, 93)
         Me.Panel3.TabIndex = 2
+        '
+        'TableLayoutPanel6
+        '
+        Me.TableLayoutPanel6.ColumnCount = 2
+        Me.TableLayoutPanel6.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 27.26337!))
+        Me.TableLayoutPanel6.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 72.73663!))
+        Me.TableLayoutPanel6.Controls.Add(Me.GroupBox2, 1, 0)
+        Me.TableLayoutPanel6.Controls.Add(Me.GroupBox1, 0, 0)
+        Me.TableLayoutPanel6.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.TableLayoutPanel6.Location = New System.Drawing.Point(0, 0)
+        Me.TableLayoutPanel6.Name = "TableLayoutPanel6"
+        Me.TableLayoutPanel6.RowCount = 1
+        Me.TableLayoutPanel6.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
+        Me.TableLayoutPanel6.Size = New System.Drawing.Size(972, 93)
+        Me.TableLayoutPanel6.TabIndex = 6
         '
         'GroupBox2
         '
@@ -669,6 +684,26 @@ Partial Class RFIEquipment
         Me.tblPaintEq.Size = New System.Drawing.Size(696, 68)
         Me.tblPaintEq.TabIndex = 6
         '
+        'idLaborRatePnt
+        '
+        Me.idLaborRatePnt.HeaderText = "Work Week"
+        Me.idLaborRatePnt.Name = "idLaborRatePnt"
+        '
+        'systemPnt
+        '
+        Me.systemPnt.HeaderText = "System"
+        Me.systemPnt.Name = "systemPnt"
+        '
+        'optionPnt
+        '
+        Me.optionPnt.HeaderText = "Option"
+        Me.optionPnt.Name = "optionPnt"
+        '
+        'sqftPnt
+        '
+        Me.sqftPnt.HeaderText = "Sqft"
+        Me.sqftPnt.Name = "sqftPnt"
+        '
         'GroupBox1
         '
         Me.GroupBox1.Controls.Add(Me.tblGeneralEquipment)
@@ -703,6 +738,17 @@ Partial Class RFIEquipment
         Me.tblGeneralEquipment.Size = New System.Drawing.Size(252, 68)
         Me.tblGeneralEquipment.TabIndex = 4
         '
+        'Datos
+        '
+        Me.Datos.HeaderText = "Datos"
+        Me.Datos.Name = "Datos"
+        Me.Datos.ReadOnly = True
+        '
+        'HeigthEq
+        '
+        Me.HeigthEq.HeaderText = "Heigth"
+        Me.HeigthEq.Name = "HeigthEq"
+        '
         'TableLayoutPanel4
         '
         Me.TableLayoutPanel4.ColumnCount = 3
@@ -713,11 +759,11 @@ Partial Class RFIEquipment
         Me.TableLayoutPanel4.Controls.Add(Me.GroupBox4, 1, 0)
         Me.TableLayoutPanel4.Controls.Add(Me.GroupBox3, 0, 0)
         Me.TableLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.TableLayoutPanel4.Location = New System.Drawing.Point(3, 212)
+        Me.TableLayoutPanel4.Location = New System.Drawing.Point(3, 213)
         Me.TableLayoutPanel4.Name = "TableLayoutPanel4"
         Me.TableLayoutPanel4.RowCount = 1
         Me.TableLayoutPanel4.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-        Me.TableLayoutPanel4.Size = New System.Drawing.Size(972, 123)
+        Me.TableLayoutPanel4.Size = New System.Drawing.Size(972, 122)
         Me.TableLayoutPanel4.TabIndex = 3
         '
         'GroupBox5
@@ -727,7 +773,7 @@ Partial Class RFIEquipment
         Me.GroupBox5.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.GroupBox5.Location = New System.Drawing.Point(650, 3)
         Me.GroupBox5.Name = "GroupBox5"
-        Me.GroupBox5.Size = New System.Drawing.Size(319, 117)
+        Me.GroupBox5.Size = New System.Drawing.Size(319, 116)
         Me.GroupBox5.TabIndex = 0
         Me.GroupBox5.TabStop = False
         Me.GroupBox5.Text = "Histoty RFI Equipment"
@@ -739,7 +785,7 @@ Partial Class RFIEquipment
         Me.Panel15.ForeColor = System.Drawing.SystemColors.ControlText
         Me.Panel15.Location = New System.Drawing.Point(3, 16)
         Me.Panel15.Name = "Panel15"
-        Me.Panel15.Size = New System.Drawing.Size(313, 98)
+        Me.Panel15.Size = New System.Drawing.Size(313, 97)
         Me.Panel15.TabIndex = 13
         '
         'tblHistoryRFIEquipment
@@ -754,7 +800,7 @@ Partial Class RFIEquipment
         Me.tblHistoryRFIEquipment.Name = "tblHistoryRFIEquipment"
         Me.tblHistoryRFIEquipment.ReadOnly = True
         Me.tblHistoryRFIEquipment.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.tblHistoryRFIEquipment.Size = New System.Drawing.Size(313, 98)
+        Me.tblHistoryRFIEquipment.Size = New System.Drawing.Size(313, 97)
         Me.tblHistoryRFIEquipment.TabIndex = 0
         '
         'idRFI
@@ -782,7 +828,7 @@ Partial Class RFIEquipment
         Me.GroupBox4.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.GroupBox4.Location = New System.Drawing.Point(229, 3)
         Me.GroupBox4.Name = "GroupBox4"
-        Me.GroupBox4.Size = New System.Drawing.Size(415, 117)
+        Me.GroupBox4.Size = New System.Drawing.Size(415, 116)
         Me.GroupBox4.TabIndex = 12
         Me.GroupBox4.TabStop = False
         Me.GroupBox4.Text = "Changue UP-Date Information"
@@ -919,7 +965,7 @@ Partial Class RFIEquipment
         Me.GroupBox3.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.GroupBox3.Location = New System.Drawing.Point(3, 3)
         Me.GroupBox3.Name = "GroupBox3"
-        Me.GroupBox3.Size = New System.Drawing.Size(220, 117)
+        Me.GroupBox3.Size = New System.Drawing.Size(220, 116)
         Me.GroupBox3.TabIndex = 7
         Me.GroupBox3.TabStop = False
         Me.GroupBox3.Text = "Changue Request Information"
@@ -1014,42 +1060,8 @@ Partial Class RFIEquipment
         Me.Panel16.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel16.Location = New System.Drawing.Point(3, 102)
         Me.Panel16.Name = "Panel16"
-        Me.Panel16.Size = New System.Drawing.Size(972, 104)
+        Me.Panel16.Size = New System.Drawing.Size(972, 105)
         Me.Panel16.TabIndex = 4
-        '
-        'GroupBox6
-        '
-        Me.GroupBox6.Controls.Add(Me.btlInsRemoval)
-        Me.GroupBox6.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.GroupBox6.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.GroupBox6.Location = New System.Drawing.Point(3, 3)
-        Me.GroupBox6.Name = "GroupBox6"
-        Me.GroupBox6.Size = New System.Drawing.Size(304, 98)
-        Me.GroupBox6.TabIndex = 4
-        Me.GroupBox6.TabStop = False
-        Me.GroupBox6.Text = "Instalation Removal"
-        '
-        'btlInsRemoval
-        '
-        Me.btlInsRemoval.AllowUserToAddRows = False
-        Me.btlInsRemoval.AllowUserToDeleteRows = False
-        Me.btlInsRemoval.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
-        Me.btlInsRemoval.BackgroundColor = System.Drawing.SystemColors.ControlLightLight
-        Me.btlInsRemoval.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.btlInsRemoval.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.idLaborRateRmv, Me.RemoveEq, Me.SqftEq})
-        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle4.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        DataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.btlInsRemoval.DefaultCellStyle = DataGridViewCellStyle4
-        Me.btlInsRemoval.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.btlInsRemoval.Location = New System.Drawing.Point(3, 16)
-        Me.btlInsRemoval.Name = "btlInsRemoval"
-        Me.btlInsRemoval.Size = New System.Drawing.Size(298, 79)
-        Me.btlInsRemoval.TabIndex = 4
         '
         'TableLayoutPanel5
         '
@@ -1063,7 +1075,7 @@ Partial Class RFIEquipment
         Me.TableLayoutPanel5.Name = "TableLayoutPanel5"
         Me.TableLayoutPanel5.RowCount = 1
         Me.TableLayoutPanel5.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
-        Me.TableLayoutPanel5.Size = New System.Drawing.Size(972, 104)
+        Me.TableLayoutPanel5.Size = New System.Drawing.Size(972, 105)
         Me.TableLayoutPanel5.TabIndex = 5
         '
         'GroupBox7
@@ -1073,7 +1085,7 @@ Partial Class RFIEquipment
         Me.GroupBox7.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.GroupBox7.Location = New System.Drawing.Point(313, 3)
         Me.GroupBox7.Name = "GroupBox7"
-        Me.GroupBox7.Size = New System.Drawing.Size(656, 98)
+        Me.GroupBox7.Size = New System.Drawing.Size(656, 99)
         Me.GroupBox7.TabIndex = 6
         Me.GroupBox7.TabStop = False
         Me.GroupBox7.Text = "Insulation Instalation"
@@ -1098,54 +1110,8 @@ Partial Class RFIEquipment
         Me.tblInsInsulation.Dock = System.Windows.Forms.DockStyle.Fill
         Me.tblInsInsulation.Location = New System.Drawing.Point(3, 16)
         Me.tblInsInsulation.Name = "tblInsInsulation"
-        Me.tblInsInsulation.Size = New System.Drawing.Size(650, 79)
+        Me.tblInsInsulation.Size = New System.Drawing.Size(650, 80)
         Me.tblInsInsulation.TabIndex = 6
-        '
-        'Datos
-        '
-        Me.Datos.HeaderText = "Datos"
-        Me.Datos.Name = "Datos"
-        Me.Datos.ReadOnly = True
-        '
-        'HeigthEq
-        '
-        Me.HeigthEq.HeaderText = "Heigth"
-        Me.HeigthEq.Name = "HeigthEq"
-        '
-        'idLaborRateRmv
-        '
-        Me.idLaborRateRmv.HeaderText = "Work Week"
-        Me.idLaborRateRmv.Name = "idLaborRateRmv"
-        '
-        'RemoveEq
-        '
-        Me.RemoveEq.HeaderText = "Remove"
-        Me.RemoveEq.Name = "RemoveEq"
-        '
-        'SqftEq
-        '
-        Me.SqftEq.HeaderText = "Sqft"
-        Me.SqftEq.Name = "SqftEq"
-        '
-        'idLaborRatePnt
-        '
-        Me.idLaborRatePnt.HeaderText = "Work Week"
-        Me.idLaborRatePnt.Name = "idLaborRatePnt"
-        '
-        'systemPnt
-        '
-        Me.systemPnt.HeaderText = "System"
-        Me.systemPnt.Name = "systemPnt"
-        '
-        'optionPnt
-        '
-        Me.optionPnt.HeaderText = "Option"
-        Me.optionPnt.Name = "optionPnt"
-        '
-        'sqftPnt
-        '
-        Me.sqftPnt.HeaderText = "Sqft"
-        Me.sqftPnt.Name = "sqftPnt"
         '
         'idLaborRateII
         '
@@ -1182,20 +1148,56 @@ Partial Class RFIEquipment
         Me.cutOutII.HeaderText = "Cut Out"
         Me.cutOutII.Name = "cutOutII"
         '
-        'TableLayoutPanel6
+        'GroupBox6
         '
-        Me.TableLayoutPanel6.ColumnCount = 2
-        Me.TableLayoutPanel6.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 27.26337!))
-        Me.TableLayoutPanel6.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 72.73663!))
-        Me.TableLayoutPanel6.Controls.Add(Me.GroupBox2, 1, 0)
-        Me.TableLayoutPanel6.Controls.Add(Me.GroupBox1, 0, 0)
-        Me.TableLayoutPanel6.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.TableLayoutPanel6.Location = New System.Drawing.Point(0, 0)
-        Me.TableLayoutPanel6.Name = "TableLayoutPanel6"
-        Me.TableLayoutPanel6.RowCount = 1
-        Me.TableLayoutPanel6.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
-        Me.TableLayoutPanel6.Size = New System.Drawing.Size(972, 93)
-        Me.TableLayoutPanel6.TabIndex = 6
+        Me.GroupBox6.Controls.Add(Me.tblInsRemoval)
+        Me.GroupBox6.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.GroupBox6.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.GroupBox6.Location = New System.Drawing.Point(3, 3)
+        Me.GroupBox6.Name = "GroupBox6"
+        Me.GroupBox6.Size = New System.Drawing.Size(304, 99)
+        Me.GroupBox6.TabIndex = 4
+        Me.GroupBox6.TabStop = False
+        Me.GroupBox6.Text = "Instalation Removal"
+        '
+        'tblInsRemoval
+        '
+        Me.tblInsRemoval.AllowUserToAddRows = False
+        Me.tblInsRemoval.AllowUserToDeleteRows = False
+        Me.tblInsRemoval.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
+        Me.tblInsRemoval.BackgroundColor = System.Drawing.SystemColors.ControlLightLight
+        Me.tblInsRemoval.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.tblInsRemoval.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.idLaborRateRmv, Me.RemoveEq, Me.SqftEqRmv})
+        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle4.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        DataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.tblInsRemoval.DefaultCellStyle = DataGridViewCellStyle4
+        Me.tblInsRemoval.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.tblInsRemoval.Location = New System.Drawing.Point(3, 16)
+        Me.tblInsRemoval.Name = "tblInsRemoval"
+        Me.tblInsRemoval.Size = New System.Drawing.Size(298, 80)
+        Me.tblInsRemoval.TabIndex = 4
+        '
+        'idLaborRateRmv
+        '
+        Me.idLaborRateRmv.HeaderText = "Work Week"
+        Me.idLaborRateRmv.Name = "idLaborRateRmv"
+        '
+        'RemoveEq
+        '
+        Me.RemoveEq.HeaderText = "Remove"
+        Me.RemoveEq.Name = "RemoveEq"
+        Me.RemoveEq.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.RemoveEq.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
+        '
+        'SqftEqRmv
+        '
+        Me.SqftEqRmv.HeaderText = "Sqft"
+        Me.SqftEqRmv.Name = "SqftEqRmv"
         '
         'RFIEquipment
         '
@@ -1230,6 +1232,7 @@ Partial Class RFIEquipment
         Me.Panel1.PerformLayout()
         Me.TableLayoutPanel3.ResumeLayout(False)
         Me.Panel3.ResumeLayout(False)
+        Me.TableLayoutPanel6.ResumeLayout(False)
         Me.GroupBox2.ResumeLayout(False)
         CType(Me.tblPaintEq, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupBox1.ResumeLayout(False)
@@ -1245,12 +1248,11 @@ Partial Class RFIEquipment
         Me.Panel12.ResumeLayout(False)
         Me.Panel12.PerformLayout()
         Me.Panel16.ResumeLayout(False)
-        Me.GroupBox6.ResumeLayout(False)
-        CType(Me.btlInsRemoval, System.ComponentModel.ISupportInitialize).EndInit()
         Me.TableLayoutPanel5.ResumeLayout(False)
         Me.GroupBox7.ResumeLayout(False)
         CType(Me.tblInsInsulation, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.TableLayoutPanel6.ResumeLayout(False)
+        Me.GroupBox6.ResumeLayout(False)
+        CType(Me.tblInsRemoval, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -1280,10 +1282,10 @@ Partial Class RFIEquipment
     Friend WithEvents Label4 As Label
     Friend WithEvents Panel10 As Panel
     Friend WithEvents Label19 As Label
-    Friend WithEvents txtIdRFIScaffold As TextBox
+    Friend WithEvents txtIdRFIEquipment As TextBox
     Friend WithEvents Panel14 As Panel
     Friend WithEvents btnNextDrawingN As Button
-    Friend WithEvents btnAddRFIScaffold As Button
+    Friend WithEvents btnAddRFIEquipment As Button
     Friend WithEvents btnAfterDrawing As Button
     Friend WithEvents Panel4 As Panel
     Friend WithEvents btnReportRFIScaffold As Button
@@ -1348,8 +1350,8 @@ Partial Class RFIEquipment
     Friend WithEvents bevelII As DataGridViewTextBoxColumn
     Friend WithEvents cutOutII As DataGridViewTextBoxColumn
     Friend WithEvents GroupBox6 As GroupBox
-    Friend WithEvents btlInsRemoval As DataGridView
+    Friend WithEvents tblInsRemoval As DataGridView
     Friend WithEvents idLaborRateRmv As DataGridViewTextBoxColumn
-    Friend WithEvents RemoveEq As DataGridViewTextBoxColumn
-    Friend WithEvents SqftEq As DataGridViewTextBoxColumn
+    Friend WithEvents RemoveEq As DataGridViewCheckBoxColumn
+    Friend WithEvents SqftEqRmv As DataGridViewTextBoxColumn
 End Class
