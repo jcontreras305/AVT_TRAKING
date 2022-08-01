@@ -3144,3 +3144,378 @@ begin
 	where rfiD.idDrawingNum = @idDrawingNum and rfiD.tag = @tag and rfiD.idRFIEq = @idRFIEq
 end  
 go
+----#########################################################################################################################################################################################
+----######## PROCEDIMIENTO PARA ELIMINAR UN RFI PIPING ######################################################################################################################################
+----#########################################################################################################################################################################################
+create proc [dbo].[sp_deleteRFIPiping] 
+@idRFIDelete varchar(35),
+@idRFINext varchar(35),
+@tag int,
+@idDrawingNum varchar(45)
+as
+	declare @error as bit
+
+	declare @Size float 
+	declare @Elevation int 
+	declare @system varchar(10) 
+	declare @option varchar(25) 
+	declare @type varchar(25) 
+	declare @Thick float 
+	declare @IdJacket varchar(25) 
+    declare @IdLaborRatePnt varchar(40) 
+	declare @LFtPnt float 
+	declare @P90Pnt int 
+	declare @P45Pnt int 
+	declare @PTeePnt int 
+	declare @PPairPnt int 
+	declare @PVlvPnt int 
+	declare @PControlPnt int
+	declare @PWeldPnt int
+    declare @IdLaborRateRmv varchar(40) 
+	declare @LFtRmv float 
+    declare @IdLaborRateII varchar(40) 
+	declare @LFtII float
+	declare @P90II int 
+	declare @P45II int 
+	declare @PBendII int 
+	declare @PTeeII int 
+	declare @PReducII int 
+	declare @PCapsII int 
+	declare @PPairII int 
+	declare @PVlvII int 
+	declare @PControlII int 
+	declare @PWeldII int 
+	declare @PCutOutII int 
+	declare @PsupportII int 
+
+begin
+	begin tran
+		begin try
+			set @error = 0
+			if (@idRFINext <> '')--existe un RFI adelante en base a los IDs
+			begin
+				if (select COUNT(*) from RFIPiping where idRFIPp = @idRFINext and tag = @tag)=1
+				begin 
+					--Tomo los valor de LAST del que tengo que eliminar 
+					select top 1 @Size = oldSize ,@Elevation = oldElevation ,@system = oldSystem ,@option = oldOption ,@type = oldType ,@Thick = oldThick ,@IdJacket = oldIdJacket ,
+						@IdLaborRatePnt = oldIdLaborRatePnt ,@LFtPnt = oldLFtPnt ,@P90Pnt = oldP90Pnt ,@P45Pnt = oldP45Pnt ,@PTeePnt = oldPTeePnt ,@PPairPnt = oldPPairPnt ,@PVlvPnt = oldPVlvPnt ,@PControlPnt = oldPControlPnt ,@PWeldPnt = oldPWeldPnt ,
+						@IdLaborRateRmv = oldIdLaborRateRmv ,@LFtRmv = oldLFtRmv ,
+						@IdLaborRateII = oldIdLaborRateII ,@LFtII = oldLFtII ,@P90II = oldP90II ,@P45II = oldP45II ,@PTeeII = oldPTeeII ,@PBendII = oldPBendII ,@PReducII = oldPReducII ,@PCapsII = oldPCapsII ,@PPairII = oldPPairPnt ,@PVlvII = oldPVlvII ,@PControlII = oldPControlII ,@PWeldII = oldPWeldII ,@PCutOutII = oldPCutOutII ,@PsupportII = oldPsupportII
+						from RFIPiping where idRFIPp = @idRFIDelete and tag = @tag and idDrawingNum = @idDrawingNum
+					--Actualizo los valore del que esta enseguida con los valores que deseo eliminar
+					update RFIPiping set oldSize = @Size ,oldElevation = @Elevation ,oldSystem = @system ,oldOption= @option ,oldType = @type ,oldThick = @Thick ,
+					oldIdLaborRatePnt = @IdLaborRatePnt ,oldLFtPnt = @LFtPnt ,oldP90Pnt = @P90Pnt ,oldP45Pnt = @P45Pnt ,oldPTeePnt = @PTeePnt ,oldPPairPnt = @PPairPnt ,oldPVlvPnt = @PVlvPnt ,oldPControlPnt = @PControlPnt ,oldPWeldPnt = @PWeldPnt ,
+					oldIdLaborRateRmv = @IdLaborRateRmv ,oldLFtRmv = @LFtRmv ,
+					oldIdLaborRateII = @IdLaborRateII ,oldLFtII = @LFtII ,oldP90II = @P90II ,oldP45II = @P45II ,oldPBendII= @PBendII ,oldPTeeII = @PTeeII ,oldPReducII = @PReducII ,oldPCapsII = @PCapsII ,oldPPairII = @PPairII ,oldPVlvII = @PVlvII ,oldPControlII = @PControlII ,oldPWeldII = @PWeldII ,oldPCutOutII = @PCutOutII ,oldPsupportII = @PsupportII 
+					where tag = @tag and idDrawingNum = @idDrawingNum and idRFIPp = @idRFINext
+					--elimino el RFI
+					delete RFIPiping where tag = @tag and idDrawingNum = @idDrawingNum and idRFIPp = @idRFIDelete
+				end
+				else
+				begin 
+					delete RFIPiping where tag = @tag and idDrawingNum = @idDrawingNum and idRFIPp = @idRFIDelete
+				end
+			end
+			else --No existe un RFI mas o depeues de este, por ende tiene que tomar los valores de su Last ya que es el mismo EQUIPMENT o un anterior a el,
+			begin -- y se tiene que actualizar el equipmentEst ya que es el RFI a eliminar es el ultimo cambio que se le hizo
+				--Tomo los valor de LAST del que tengo que eliminar 
+				select top 1 @Size = oldSize ,@Elevation = oldElevation ,@system = oldSystem ,@option = oldOption ,@type = oldType ,@Thick = oldThick ,@IdJacket = oldIdJacket ,
+						@IdLaborRatePnt = oldIdLaborRatePnt ,@LFtPnt = oldLFtPnt ,@P90Pnt = oldP90Pnt ,@P45Pnt = oldP45Pnt ,@PTeePnt = oldPTeePnt ,@PPairPnt = oldPPairPnt ,@PVlvPnt = oldPVlvPnt ,@PControlPnt = oldPControlPnt ,@PWeldPnt = oldPWeldPnt ,
+						@IdLaborRateRmv = oldIdLaborRateRmv ,@LFtRmv = oldLFtRmv ,
+						@IdLaborRateII = oldIdLaborRateII ,@LFtII = oldLFtII ,@P90II = oldP90II ,@P45II = oldP45II ,@PTeeII = oldPTeeII ,@PBendII = oldPBendII ,@PReducII = oldPReducII ,@PCapsII = oldPCapsII ,@PPairII = oldPPairPnt ,@PVlvII = oldPVlvII ,@PControlII = oldPControlII ,@PWeldII = oldPWeldII ,@PCutOutII = oldPCutOutII ,@PsupportII = oldPsupportII
+						from RFIPiping where idRFIPp = @idRFIDelete and tag = @tag and idDrawingNum = @idDrawingNum
+				--Actualizo el equipmentEst con los valores LAST del RFI a eliminar
+				select * from pipingEst
+				update pipingEst set size= @Size ,elevation= @Elevation ,[type]= @type ,systemPntPP= @system,pntOption=@option ,idJacket = @IdJacket ,
+				idLaborRateRmv = @IdLaborRateRmv ,lFtRmv= @LFtRmv ,
+				idLaborRatePnt = @IdLaborRatePnt ,lFtPnt = @LFtPnt ,p90Pnt= @P90Pnt ,p45Pnt = @P45Pnt ,pTeePnt= @PTeePnt ,pPairPnt= @PPairPnt ,pVlvPnt= @PVlvPnt ,pControlPnt= @PControlPnt ,pWeldPnt= @PWeldPnt ,
+				idLaborRateII= @IdLaborRateII ,lFtII= @LFtII ,p90II = @P90II ,p45II = @P45II ,pBendII = @PBendII ,pTeeII = @PTeeII ,pReducII = @PReducII ,pCapsII = @PCapsII ,pPairII = @PPairII ,pVlvII = @PVlvII ,pControlII = @PControlII ,pWeldII = @PWeldII ,pCutOutII = @PCutOutII ,psupportII = @PsupportII
+				where idPipingEst = @tag and idDrawingNum = @idDrawingNum 
+				--Elimino el RFI
+				delete RFIPiping where tag = @tag and idDrawingNum = @idDrawingNum and idRFIPp = @idRFIDelete
+			end
+		end try
+		begin catch
+			set @error = 1
+			goto solveError
+		end catch
+	commit tran
+	solveError:
+	if @error = 1
+	begin 
+		rollback tran
+	end 
+end
+go
+----#########################################################################################################################################################################################
+----######## PROCEDIMIENTO INSERT Y UPDATE RFI PIPING DIFF ##################################################################################################################################
+----#########################################################################################################################################################################################
+create proc sp_insertUpdateRFIPipingEst
+	@idRFIPp varchar(35),
+	@tag int,
+	@idDrawingNum varchar(45)
+as
+	--INFO PIPING
+	declare @Size as float 
+	declare @Elevation as int 
+	declare @System as varchar(10) 
+	declare @Option as varchar(25) 
+	declare @Type as varchar(25) 
+	declare @Thick as float 
+	declare @IdJacket as varchar(25)
+    declare @IdLaborRatePnt as varchar(40) 
+	declare @LFtPnt as float 
+	declare @P90Pnt as int 
+	declare @P45Pnt as int 
+	declare @PTeePnt as int 
+	declare @PPairPnt as int 
+	declare @PVlvPnt as int
+	declare @PControlPnt as int 
+	declare @PWeldPnt as int
+	declare @IdLaborRateRmv as varchar(40) 
+	declare @LFtRmv as float 
+    declare @IdLaborRateII as varchar(40) 
+	declare @LFtII as float
+	declare @P90II as int 
+	declare @P45II as int 
+	declare @PBendII as int 
+	declare @PTeeII as int 
+	declare @PReducII as int 
+	declare @PCapsII as int 
+	declare @PPairII as int 
+	declare @PVlvII as int 
+	declare @PControlII as int 
+	declare @PWeldII as int 
+	declare @PCutOutII as int 
+	declare @PsupportII as int
+	--EXTRA INFO 
+	declare @PIUPL as float = 0
+	declare @PJKTL as float = 0
+	declare @percent as float = 0
+	declare @insRate as float = 0
+	declare @PIUPM as float = 0
+	declare @PJKTM as float =0
+	declare @PIUPE as float = 0
+	declare @PJKTE as float =0 
+
+	declare @IFF90 as float =0 
+	declare @IFF45 as float =0
+	declare @IFFBEND as float = 0
+	declare @IFFTEE as float = 0
+	declare @IFFREDUC as float = 0
+	declare @IFFCAP as float =0
+	declare @IFFPAIR as float = 0
+	declare @IFFVLV as float = 0
+	declare @IFFCONTROL as float = 0
+	declare @IFFWELD as float = 0
+	declare @IFFCUTOUT as float = 0
+	declare @IFFSUP as float = 0
+
+	declare @PFF90 as float = 0
+	declare @PFF45 as float = 0
+	declare @PFFTEE as float = 0
+	declare @PFFPAIR as float = 0
+	declare @PFFVLV as float = 0
+	declare @PFFCONTROL as float = 0
+	declare @PFFWLED as float = 0
+
+	declare @PPUPL as float = 0
+	declare @PPUPM as float = 0
+	declare @PPUPE as float = 0
+	declare @pntRate as float = 0
+	--VARIABLES PARA OLD
+	--REMOVE OLD
+	declare @oPIRHRS as float = 0 
+	declare @oPIRCOSTL as float = 0
+	declare @oPIRCOSTM as float = 0
+	declare @oPIRCOSTE as float = 0
+	declare @oPIRTCOST as float = 0 
+	--INSULATION OLD
+	declare @oIIELF as float =0
+	
+	declare @oPIIHRS as float = 0
+	declare @oPIICOSTL as float = 0
+	declare @oPIICOSTM as float = 0
+	declare @oPIICOSTE as float = 0
+	declare @oPIITCOST as float = 0
+	--PAINT OLD
+	declare @oPESQF as float = 0
+	
+	declare @oPPHRS as float = 0 
+	
+	declare @oPPCOSTL as float = 0
+	declare @oPPCOSTM as float = 0
+	declare @oPPCOSTE as float = 0
+	declare @oPPTCOST as float = 0
+	--REMOVE NEW 
+	declare @nPIRHRS as float = 0
+	declare @nPIRCOSTL as float = 0
+	declare @nPIRCOSTM as float = 0
+	declare @nPIRCOSTE as float = 0
+	declare @nPIRTCOST as float = 0
+	--INSTALATION NEW
+	declare @nIIELF as float = 0
+	declare @nPIIHRS as float = 0
+	declare @nPIICOSTL as float = 0
+	declare @nPIICOSTM as float = 0
+	declare @nPIICOSTE as float = 0
+	declare @nPIITCOST as float = 0
+	--PAINT NEW 
+	declare @nPESQF as float = 0
+	declare @nPPHRS as float = 0
+	declare @nPPCOSTL as float =0
+	declare @nPPCOSTM as float = 0 
+	declare @nPPCOSTE as float = 0
+	declare @nPPTCOST as float = 0
+begin 
+
+	--OLD VALUES
+	select  
+		@Size = oldSize ,@Elevation   = oldElevation ,@System   = oldSystem ,@Option   = oldOption ,@Type  = oldType ,@Thick   = oldThick ,@IdJacket  = oldIdJacket ,
+		@IdLaborRatePnt  = oldIdLaborRatePnt ,@LFtPnt   = oldLFtPnt ,@P90Pnt   = oldP90Pnt ,@P45Pnt   = oldP45Pnt ,@PTeePnt   = oldPTeePnt ,@PPairPnt   = oldPPairPnt ,@PVlvPnt  = oldPVlvPnt ,@PControlPnt   = oldPControlPnt ,@PWeldPnt  = oldPWeldPnt ,
+		@IdLaborRateRmv = oldIdLaborRateRmv ,@LFtRmv   = oldLFtRmv ,
+		@IdLaborRateII  = oldIdLaborRateII ,@LFtII  = oldLFtII ,@P90II   = oldP90II ,@P45II   = oldP45II ,@PBendII   = oldPBendII ,@PTeeII   = oldPTeePnt ,	@PReducII   = oldPReducII ,@PCapsII   = oldPCapsII ,@PPairII   = oldPPairII ,@PVlvII   = oldPVlvII ,@PControlII   = oldPControlII ,@PWeldII   = oldPWeldII ,@PCutOutII   = oldPCutOutII ,@PsupportII  = oldPsupportII 
+	from RFIPiping where idDrawingNum = @idDrawingNum and tag = @tag and idRFIPp = @idRFIPp
+
+	set @percent = (select [percent] from factorElevationPaint where elevation = @Elevation)
+	set @percent = IIF(ISNULL(@percent,1)=1,0,@percent*0.01)
+	set @insRate =(select insRate from laborRate where idLaborRate = @IdLaborRateRmv)
+	
+	set @PIUPL = (select top 1 laborProd from ppInsUnitRate where size=@Size and [type]=@Type and [thick]=@Thick)
+	set @PIUPM = (select top 1 matRate from ppInsUnitRate where size=@Size and [type]=@Type and [thick]=@Thick)
+	set @PIUPE = (select top 1 eqRate from ppInsUnitRate where size=@Size and [type]=@Type and [thick]=@Thick)
+	
+	set @PJKTL = (select top 1 laborProd from ppJktUnitRate where idJacket = @IdJacket)
+	set @PJKTM = (select top 1 matFactor from ppJktUnitRate where IdJacket = @IdJacket)
+	set @PJKTE = (select top 1 eqFactor from ppJktUnitRate where idJacket = @IdJacket)
+	
+	-- INSULATION REMOVE
+	
+	set @oPIRHRS = ROUND(@LFtRmv*@PIUPL*@percent*@PJKTL,1)
+	set @oPIRCOSTL = ROUND(@oPIRHRS*@insRate,2)
+	set @oPIRCOSTM = ROUND(@LFtRmv*@PIUPM*@PJKTM,2)
+	set @oPIRCOSTE = ROUND(@LFtRmv*@PIUPE*@PJKTE,2)
+	set @oPIRTCOST= ROUND(ISNULL(@oPIRCOSTL,0)+ISNULL(@oPIRCOSTM,0)+ISNULL(@oPIRCOSTE,0),2)
+	
+	--INSULATION RATE (EL INSRATE TIENE QUE CAMBIAR POR EL IDLABOR DEL INSULATION INSTALL)
+	set @insRate =(select insRate from laborRate where idLaborRate = @IdLaborRateII)
+	select top 1 @IFF90= p90,@IFF45=p45,@IFFBEND=bend,@IFFTEE=tee,@IFFREDUC=red,@IFFCAP=cap,@IFFPAIR=flangePair,@IFFVLV=flangeVlv,@IFFCONTROL=controlVlv,@IFFWELD=weldedVlv,@IFFSUP=support from insFitting where [type] = @Type
+	
+	set @oIIELF = ROUND(@LFtII+(@P90II*@IFF90)+(@P45II*@IFF45)+ (@PBendII*@IFFBEND)+(@PTeeII*@IFFTEE)+(@PReducII*@IFFREDUC)+(@PCapsII*@IFFCAP)+ (@PPairII*@IFFPAIR)+(@PVlvII*@IFFVLV)+(@PControlII*@IFFCONTROL)+(@PWeldII*@IFFWELD)+(@PCutOutII*@IFFCUTOUT)+(@PsupportII*@IFFSUP),2)
+	set @oPIIHRS = ROUND(@oIIELF*@PIUPL*@percent*@PJKTL,1)
+	set @oPIICOSTL = ROUND(@oPIIHRS*@insRate,2)
+	set @oPIICOSTM = ROUND(@oIIELF*@PIUPM*@PJKTM,2)
+	set @oPIICOSTE = ROUND(@oIIELF*@PIUPE*@PJKTE,2)
+	set @oPIITCOST = ROUND(ISNULL(@oPIICOSTL,0)+ISNULL(@oPIICOSTM,0)+ISNULL(@oPIICOSTE,0),2)
+
+	--INSULATION PAINT
+
+	set @pntRate = (select top 1 paintRate from laborRate where idLaborRate = @IdLaborRatePnt)
+	select @PFF90 = p90 , @PFF45 = p45, @PFFTEE = tee , @PFFPAIR = flangePair , @PFFVLV = flangeVlv , @PFFCONTROL = controlVlv, @PFFWLED = weldedVlv from pntFitting where pntOption = @Option
+	select @PPUPL = laborProd, @PPUPM=matRate, @PPUPE=eqRate from ppPaintUnitRate where systemPntPP = @System and pntOption = @Option and size =  @Size
+
+	set @oPESQF = ROUND(IIF(@Size <=3,1,@Size/3.82)*(@LFtPnt+(@P90Pnt*@PFF90)+(@P45Pnt*@PFF45)+(@PTeePnt*@PFFTEE)+(@PPairPnt*@PFFPAIR)+(@PVlvPnt*@PFFVLV)+(@PControlPnt*@PFFCONTROL)+(@PWeldPnt*@PFFWLED)),2)
+	set @oPPHRS = ROUND(@oPESQF*@PPUPL*@percent,1)
+	set @oPPCOSTL = ROUND(@oPPHRS * @pntRate,2)
+	set @oPPCOSTM = ROUND(@oPESQF * @PPUPM,2)
+	set @oPPCOSTE = ROUND(@oPESQF * @PPUPE,2)
+	set @oPPTCOST = ROUND(ISNULL(@oPPCOSTL,0)+ISNULL(@oPPCOSTM,0)+ISNULL(@oPPCOSTE,0),2)
+	--=============================================================================================================================
+	--====== NEW VALUES ===========================================================================================================
+	--=============================================================================================================================
+	select  
+		@Size = newSize ,@Elevation   = newElevation ,@System   = newSystem ,@Option   = newOption ,@Type  = newType ,@Thick   = newThick ,@IdJacket  = newIdJacket ,
+		@IdLaborRatePnt  = newIdLaborRatePnt ,@LFtPnt   = newLFtPnt ,@P90Pnt   = newP90Pnt ,@P45Pnt   = newP45Pnt ,@PTeePnt   = newPTeePnt ,@PPairPnt   = newPPairPnt ,@PVlvPnt  = newPVlvPnt ,@PControlPnt   = newPControlPnt ,@PWeldPnt  = newPWeldPnt ,
+		@IdLaborRateRmv = newIdLaborRateRmv ,@LFtRmv   = newLFtRmv ,
+		@IdLaborRateII  = newIdLaborRateII ,@LFtII  = newLFtII ,@P90II   = newP90II ,@P45II   = newP45II ,@PBendII   = newPBendII ,@PTeeII   = newPTeePnt ,	@PReducII   = newPReducII ,@PCapsII   = newPCapsII ,@PPairII   = newPPairII ,@PVlvII   = newPVlvII ,@PControlII   = newPControlII ,@PWeldII   = newPWeldII ,@PCutOutII   = newPCutOutII ,@PsupportII  = newPsupportII 
+	from RFIPiping where idDrawingNum = @idDrawingNum and tag = @tag and idRFIPp = @idRFIPp
+	
+	set @percent = (select [percent] from factorElevationPaint where elevation = @Elevation)
+	set @percent = IIF(ISNULL(@percent,1)=1,0,@percent*0.01)
+	set @PIUPL = (select top 1 laborProd from ppInsUnitRate where size=@Size and [type]=@Type and [thick]=@Thick)
+	set @PIUPM = (select top 1 matRate from ppInsUnitRate where size=@Size and [type]=@Type and [thick]=@Thick)
+	set @PIUPE = (select top 1 eqRate from ppInsUnitRate where size=@Size and [type]=@Type and [thick]=@Thick)
+	
+	set @PJKTL = (select laborProd from ppJktUnitRate where idJacket = @IdJacket)
+	set @PJKTM = (select top 1 matFactor from ppJktUnitRate where @IdJacket = @IdJacket)
+	set @PJKTE = (select top 1 eqFactor from ppJktUnitRate where idJacket = @IdJacket)
+
+	--INSULATION REMOVE
+	set @insRate = (select top 1 insRate from laborRate where idLaborRate = @IdLaborRateRmv)
+
+	set @nPIRHRS = ROUND(@LFtRmv*@PIUPL*@percent *@PJKTL,1)
+	set @nPIRCOSTL = ROUND(@nPIRHRS*@insRate,2)
+	set @nPIRCOSTM = ROUND(@LFtRmv*@PIUPM*@PJKTM,2)
+	set @nPIRCOSTE = ROUND(@LFtRmv*@PIUPE*@PJKTE,2)
+	set @nPIRTCOST = ROUND(ISNULL(@nPIRCOSTL,0)+ISNULL(@nPIRCOSTM,0)+ISNULL(@nPIRCOSTE,0),2)
+
+	--INSULATION INSULATION
+	set @insRate = (select top 1 insRate from laborRate where idLaborRate = @IdLaborRateII)
+	select top 1 @IFF90= p90,@IFF45=p45,@IFFBEND=bend,@IFFTEE=tee,@IFFREDUC=red,@IFFCAP=cap,@IFFPAIR=flangePair,@IFFVLV=flangeVlv,@IFFCONTROL=controlVlv,@IFFWELD=weldedVlv,@IFFSUP=support from insFitting where [type] = @Type
+	
+	set @nIIELF = ROUND(@LFtII+(@P90II*@IFF90)+(@P45II*@IFF45)+(@PBendII*@IFFBEND)+(@PTeeII*@IFFTEE)+(@PReducII*@IFFREDUC)+(@PCapsII*@IFFCAP)+(@PPairII*@IFFPAIR+(@PVlvII*@IFFVLV)+@PControlII*@IFFCONTROL)+(@PWeldII*@IFFWELD)+(@PCutOutII*@IFFCUTOUT)+(@PsupportII*@IFFSUP),2)
+	set @nPIIHRS = ROUND(@nIIELF*@PIUPL*@percent*@PJKTL,1)
+	set @nPIICOSTL = ROUND(@nPIRHRS*@insRate,2)
+	set @nPIICOSTM = ROUND(@nIIELF*@PIUPM*@PJKTM,2)
+	set @nPIICOSTE = ROUND(@nIIELF*@PIUPE*@PJKTE,2)
+	set @nPIITCOST = ROUND(ISNULL(@nPIICOSTL,0)+ISNULL(@nPIICOSTM,0)+ISNULL(@nPIICOSTE,0),2)
+
+	--INUSLATION PAINT
+	set @pntRate = (select top 1 paintRate from laborRate where idLaborRate = @IdLaborRatePnt)
+	select @PPUPL = laborProd,@PPUPM=matRate,@PPUPE=eqRate from ppPaintUnitRate where systemPntPP = @System and pntOption = @Option and size =  @Size
+	select @PFF90 = p90 , @PFF45 = p45, @PFFTEE = tee , @PFFPAIR = flangePair , @PFFVLV = flangeVlv , @PFFCONTROL = controlVlv, @PFFWLED = weldedVlv from pntFitting where pntOption = @Option
+	
+	set @nPESQF = ROUND(IIF(@Size<=3,1,@Size/3.82)*(@LFtPnt+(@P90Pnt*@PFF90)+(@P45Pnt*@PFF45)+(@PTeePnt*@PFFTEE)+(@PPairPnt*@PFFPAIR)+(@PVlvPnt*@PFFVLV)+(@PControlPnt*@PFFCONTROL)+(@PWeldPnt*@PFFWLED)),2)
+	set @nPPHRS = ROUND(@nPESQF*@PPUPL*@percent,1)
+	set @nPPCOSTL = ROUND(@nPPHRS*@pntRate,2)
+	set @nPPCOSTM = ROUND(@nPESQF*@PPUPM,2)
+	set @nPPCOSTE = ROUND(@nPESQF*@PPUPE,2)
+	set @nPPTCOST = ROUND(ISNULL(@nPPCOSTL,0)+ISNULL(@nPPCOSTM,0)+ISNULL(@nPPCOSTE,0),2)
+	
+	if (select COUNT(*)from RFIDiffPp where idDrawingNum=@idDrawingNum and tag= @tag and idRFIpP = @idRFIPp )=0
+	begin
+		insert into RFIDiffPp values (@idRFIPp,@tag,@idDrawingNum,
+									@oPIRHRS,@oPIRCOSTL,@oPIRCOSTM,@oPIRCOSTE,@oPIRTCOST,
+									@oIIELF,@oPIIHRS,@oPIICOSTL,@oPIICOSTM,@oPIICOSTE,@oPIITCOST,
+									@oPESQF,@oPPHRS,@oPPCOSTL,@oPPCOSTM,@oPPCOSTE,@oPPTCOST,
+									@nPIRHRS,@nPIRCOSTL,@nPIRCOSTM,@nPIRCOSTE,@nPIRTCOST,
+									@nIIELF,@nPIIHRS,@nPIICOSTL,@nPIICOSTM,@nPIICOSTE,@nPIITCOST,
+									@nPESQF,@nPPHRS,@nPPCOSTL,@nPPCOSTM,@nPPCOSTE,@nPPTCOST)	
+	end	else if (select COUNT(*)from RFIDiffEq where idDrawingNum=@idDrawingNum and tag= @tag and idRFIEq = @idRFIPp )=1
+	begin
+		update RFIDiffPp set  
+			oPIRHRS = @oPIRHRS,oPIRCOSTL = @oPIRCOSTL , oPIRCOSTM = @oPIRCOSTM ,oPIRCOSTE = @oPIRCOSTE , oPIRTCOST = @oPIRTCOST ,  
+			oIIELF = @oIIELF ,oPIIHRS = @oPIIHRS , oPIICOSTL = @oPIICOSTL , oPIICOSTM = @oPIICOSTM , oPIICOSTE = @oPIICOSTE , oPIITCOST = @oPIITCOST , 
+			oPESQF = @oPESQF , oPPHRS = @oPPHRS ,  oPPCOSTL = @oPPCOSTL , oPPCOSTM = @oPPCOSTM , oPPCOSTE = @oPPCOSTE , oPPTCOST = @oPPTCOST , 
+			nPIRHRS = @nPIRHRS , nPIRCOSTL = @nPIRCOSTL , nPIRCOSTM = @nPIRCOSTM , nPIRCOSTE = @nPIRCOSTE , nPIRTCOST = @nPIRTCOST , 
+			nIIELF = @nIIELF , nPIIHRS = @nPIIHRS , nPIICOSTL = @nPIICOSTL , nPIICOSTM = @nPIICOSTM , nPIICOSTE = @nPIICOSTE , nPIITCOST = @nPIITCOST , 
+			nPESQF = @nPESQF , nPPHRS = @nPPHRS , nPPCOSTL = @nPPCOSTL ,nPPCOSTM = @nPPCOSTM ,  nPPCOSTE = @nPPCOSTE , nPPTCOST = @nPPTCOST 
+		where idRFIPp = @idRFIPp and tag = @tag and idDrawingNum = @idDrawingNum
+	end
+end
+go
+----#########################################################################################################################################################################################
+----######## PROCEDIMIENTO PARA REPORTE RFI DIFF ############################################################################################################################################
+----#########################################################################################################################################################################################
+create proc sp_RFIDiffPp
+	@idRFIPp varchar(35),
+	@tag int,
+	@idDrawingNum varchar(45)
+as 
+begin
+	exec sp_insertUpdateRFIPipingEst @idRFIPp ,@tag, @idDrawingNum
+	select rfiD.idRFIPp,rfiD.tag,rfiD.idDrawingNum, po.projectId,po.[description],rfi.basicFCR,pp.line	,
+		oPIRHRS  , oPIRCOSTL  , oPIRCOSTM  , oPIRCOSTE  , oPIRTCOST  ,  
+		oPIIHRS  , oPIICOSTL  , oPIICOSTM  , oPIICOSTE  , oPIITCOST  , 
+		oPPHRS  ,  oPPCOSTL  , oPPCOSTM  , oPPCOSTE  , oPPTCOST  , 
+		nPIRHRS  , nPIRCOSTL  , nPIRCOSTM  , nPIRCOSTE  , nPIRTCOST  , 
+		nPIIHRS  , nPIICOSTL  , nPIICOSTM  , nPIICOSTE  , nPIITCOST  , 
+		nPPHRS  , nPPCOSTL  , nPPCOSTM  ,  nPPCOSTE  , nPPTCOST  
+	from RFIDiffPp as rfiD
+	inner join pipingEst as pp on pp.idPipingEst = rfiD.tag and rfiD.idDrawingNum = pp.idDrawingNum
+	inner join RFIEquipment as rfi on rfi.tag = rfiD.tag and rfi.idDrawingNum = pp.idDrawingNum and rfi.idRFIEq = rfiD.idRFIPp
+	inner join drawing as dr on dr.idDrawingNum = rfiD.idDrawingNum
+	inner join projectClientEst as po on po.projectId = dr.projectId
+	where rfiD.idDrawingNum = @idDrawingNum and rfiD.tag = @tag and rfiD.idRFIPp = @idRFIPp
+end  
+go

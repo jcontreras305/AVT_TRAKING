@@ -58,4 +58,18 @@
         rpt.projectId = projectId
         rpt.Show()
     End Sub
+
+    Private Sub btnRFIEq_Click(sender As Object, e As EventArgs) Handles btnRFIEq.Click
+        Dim rpt As New RFIReports
+        rpt.TypeRFI = "Equipment"
+        rpt.projectId = projectId
+        rpt.Show()
+    End Sub
+
+    Private Sub btnRFIPiping_Click(sender As Object, e As EventArgs) Handles btnRFIPiping.Click
+        Dim rpt As New RFIReports
+        rpt.TypeRFI = "Piping"
+        rpt.projectId = projectId
+        rpt.Show()
+    End Sub
 End Class

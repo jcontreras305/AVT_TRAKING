@@ -2,6 +2,7 @@
 Public Class RFIReports
     Dim mtdRFISCF As New MetodosRFIScaffold
     Dim mtdRFIEquip As New MetodosRFIEquipment
+    Dim mtdRFIPiping As New MetodosRFIPiping
     'Dim mtdRFIPiping  As New MetodosRFIPiping
     Public TypeRFI As String = "RFI"
     Public projectId As String = ""
@@ -10,6 +11,7 @@ Public Class RFIReports
     Public idRFI As String = ""
     Dim tblRFISCF As New Data.DataTable
     Dim tblRFIEq As New Data.DataTable
+    Dim tblRFIPp As New Data.DataTable
     Dim flagLoad As Boolean = True
     Private Sub PictureBox4_Click(sender As Object, e As EventArgs) Handles PictureBox4.Click
         Me.Close()
@@ -71,9 +73,17 @@ Public Class RFIReports
                     End If
                 Case "Piping"
                     lblTag.Text = "Piping Tag."
+                    mtdRFIPiping.selectTagDrawing(idDrawingNum, cmbTag)
+                    If idTag <> "" Then
+                        cmbTag.SelectedItem = cmbTag.Items(cmbTag.FindString(idTag))
+                        tblRFIPp = mtdRFIPiping.selectRFIPiping(idTag, cmbRFI, idDrawingNum)
+                        If idRFI <> "" Then
+                            cmbRFI.SelectedItem = cmbRFI.Items(cmbRFI.FindString(idRFI))
+                        End If
+                    End If
             End Select
-            flagLoad = False
         End If
+        flagLoad = False
     End Sub
 
     Private Sub cmbDrawing_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbDrawing.SelectedIndexChanged
@@ -96,7 +106,12 @@ Public Class RFIReports
                             cmbRFI.Items.Clear()
                             idRFI = ""
                         Case "Piping"
-                            lblTag.Text = "Piping Tag."
+                            Dim array() As String = cmbDrawing.SelectedItem.ToString.Split("|")
+                            idDrawingNum = array(0)
+                            mtdRFIEquip.selectTagDrawing(idDrawingNum, cmbTag)
+                            idTag = ""
+                            cmbRFI.Items.Clear()
+                            idRFI = ""
                     End Select
                 End If
             End If
@@ -121,7 +136,10 @@ Public Class RFIReports
                             mtdRFIEquip.selectRFIEquipment(idTag, cmbRFI, idDrawingNum)
                             idRFI = ""
                         Case "Piping"
-                            lblTag.Text = "Piping Tag."
+                            Dim array() As String = cmbTag.SelectedItem.ToString.Split("|")
+                            idTag = array(0)
+                            mtdRFIEquip.selectRFIEquipment(idTag, cmbRFI, idDrawingNum)
+                            idRFI = ""
                     End Select
                 End If
             End If
@@ -142,7 +160,8 @@ Public Class RFIReports
                             Dim array() As String = cmbRFI.SelectedItem.ToString.Split("|")
                             idRFI = array(0)
                         Case "Piping"
-                            lblTag.Text = "Piping Tag."
+                            Dim array() As String = cmbRFI.SelectedItem.ToString.Split("|")
+                            idRFI = array(0)
                     End Select
                 End If
             End If
@@ -169,10 +188,14 @@ Public Class RFIReports
                         reportTs.SetParameterValue("@idDrawingNum", idDrawingNum)
                         'reportTs.SetParameterValue("@CompanyName", "Brock")
                         crvReport.ReportSource = reportTs
-                    Case ""
+                    Case "Piping"
+                        Dim reportTs As New RFIReportPp
+                        reportTs.SetParameterValue("@idRFIPp", idRFI)
+                        reportTs.SetParameterValue("@tag", idTag)
+                        reportTs.SetParameterValue("@idDrawingNum", idDrawingNum)
+                        'reportTs.SetParameterValue("@CompanyName", "Brock")
+                        crvReport.ReportSource = reportTs
                 End Select
-
-
             Else
                 MessageBox.Show("Please especifi the de Scaffold RFI.", "Impotant", MessageBoxButtons.OK, MessageBoxIcon.Asterisk)
             End If

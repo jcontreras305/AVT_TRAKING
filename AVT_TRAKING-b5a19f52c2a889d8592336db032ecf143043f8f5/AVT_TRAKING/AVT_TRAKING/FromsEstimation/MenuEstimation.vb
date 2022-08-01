@@ -188,4 +188,24 @@
             FormPanel.BringToFront()
         End If
     End Sub
+
+    Private Sub btnPipingRFI_Click(sender As Object, e As EventArgs) Handles btnPipingRFI.Click
+        OpenFormPanel9(Of RFIPiping)()
+    End Sub
+    Private Sub OpenFormPanel9(Of Miform As {RFIPiping, New})()
+        Dim FormPanel As Form
+        FormPanel = PanelViewFrom.Controls.OfType(Of Miform)().FirstOrDefault()
+        If FormPanel Is Nothing Then
+            Dim newPC = New Miform()
+            FormPanel = newPC
+            FormPanel.TopLevel = False
+            FormPanel.Dock = DockStyle.Fill
+            PanelViewFrom.Controls.Add(FormPanel)
+            PanelViewFrom.Tag = FormPanel
+            FormPanel.Show()
+            FormPanel.BringToFront()
+        Else
+            FormPanel.BringToFront()
+        End If
+    End Sub
 End Class

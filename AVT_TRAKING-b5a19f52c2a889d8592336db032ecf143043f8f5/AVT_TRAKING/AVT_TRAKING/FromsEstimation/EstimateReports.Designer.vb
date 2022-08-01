@@ -32,20 +32,20 @@ Partial Class EstimateReports
         Me.cmbProject = New System.Windows.Forms.ComboBox()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.TableLayoutPanel2 = New System.Windows.Forms.TableLayoutPanel()
-        Me.Panel3 = New System.Windows.Forms.Panel()
-        Me.btnPipingBudget = New System.Windows.Forms.Button()
-        Me.btnEquipmentBudged = New System.Windows.Forms.Button()
-        Me.btnReportsSCFBudget = New System.Windows.Forms.Button()
         Me.Panel4 = New System.Windows.Forms.Panel()
         Me.btnRFIPiping = New System.Windows.Forms.Button()
         Me.btnRFIEq = New System.Windows.Forms.Button()
         Me.btnRFIScf = New System.Windows.Forms.Button()
+        Me.Panel3 = New System.Windows.Forms.Panel()
+        Me.btnPipingBudget = New System.Windows.Forms.Button()
+        Me.btnEquipmentBudged = New System.Windows.Forms.Button()
+        Me.btnReportsSCFBudget = New System.Windows.Forms.Button()
         Me.TableLayoutPanel1.SuspendLayout()
         Me.Panel1.SuspendLayout()
         Me.Panel2.SuspendLayout()
         Me.TableLayoutPanel2.SuspendLayout()
-        Me.Panel3.SuspendLayout()
         Me.Panel4.SuspendLayout()
+        Me.Panel3.SuspendLayout()
         Me.SuspendLayout()
         '
         'TableLayoutPanel1
@@ -168,71 +168,6 @@ Partial Class EstimateReports
         Me.TableLayoutPanel2.Size = New System.Drawing.Size(750, 441)
         Me.TableLayoutPanel2.TabIndex = 2
         '
-        'Panel3
-        '
-        Me.Panel3.Controls.Add(Me.btnPipingBudget)
-        Me.Panel3.Controls.Add(Me.btnEquipmentBudged)
-        Me.Panel3.Controls.Add(Me.btnReportsSCFBudget)
-        Me.Panel3.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel3.Location = New System.Drawing.Point(3, 3)
-        Me.Panel3.Name = "Panel3"
-        Me.Panel3.Size = New System.Drawing.Size(184, 435)
-        Me.Panel3.TabIndex = 8
-        '
-        'btnPipingBudget
-        '
-        Me.btnPipingBudget.Dock = System.Windows.Forms.DockStyle.Top
-        Me.btnPipingBudget.FlatAppearance.BorderSize = 0
-        Me.btnPipingBudget.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(59, Byte), Integer), CType(CType(69, Byte), Integer), CType(CType(79, Byte), Integer))
-        Me.btnPipingBudget.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnPipingBudget.Font = New System.Drawing.Font("Nirmala UI", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnPipingBudget.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.btnPipingBudget.Image = Global.AVT_TRAKING.My.Resources.Resources.report
-        Me.btnPipingBudget.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnPipingBudget.Location = New System.Drawing.Point(0, 120)
-        Me.btnPipingBudget.Name = "btnPipingBudget"
-        Me.btnPipingBudget.Size = New System.Drawing.Size(184, 60)
-        Me.btnPipingBudget.TabIndex = 39
-        Me.btnPipingBudget.Text = "Job No. Pipe Budget"
-        Me.btnPipingBudget.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.btnPipingBudget.UseVisualStyleBackColor = True
-        '
-        'btnEquipmentBudged
-        '
-        Me.btnEquipmentBudged.Dock = System.Windows.Forms.DockStyle.Top
-        Me.btnEquipmentBudged.FlatAppearance.BorderSize = 0
-        Me.btnEquipmentBudged.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(59, Byte), Integer), CType(CType(69, Byte), Integer), CType(CType(79, Byte), Integer))
-        Me.btnEquipmentBudged.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnEquipmentBudged.Font = New System.Drawing.Font("Nirmala UI", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnEquipmentBudged.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.btnEquipmentBudged.Image = Global.AVT_TRAKING.My.Resources.Resources.report
-        Me.btnEquipmentBudged.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnEquipmentBudged.Location = New System.Drawing.Point(0, 60)
-        Me.btnEquipmentBudged.Name = "btnEquipmentBudged"
-        Me.btnEquipmentBudged.Size = New System.Drawing.Size(184, 60)
-        Me.btnEquipmentBudged.TabIndex = 38
-        Me.btnEquipmentBudged.Text = "Job No. Eq. Budget"
-        Me.btnEquipmentBudged.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.btnEquipmentBudged.UseVisualStyleBackColor = True
-        '
-        'btnReportsSCFBudget
-        '
-        Me.btnReportsSCFBudget.Dock = System.Windows.Forms.DockStyle.Top
-        Me.btnReportsSCFBudget.FlatAppearance.BorderSize = 0
-        Me.btnReportsSCFBudget.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(59, Byte), Integer), CType(CType(69, Byte), Integer), CType(CType(79, Byte), Integer))
-        Me.btnReportsSCFBudget.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnReportsSCFBudget.Font = New System.Drawing.Font("Nirmala UI", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnReportsSCFBudget.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.btnReportsSCFBudget.Image = Global.AVT_TRAKING.My.Resources.Resources.report
-        Me.btnReportsSCFBudget.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnReportsSCFBudget.Location = New System.Drawing.Point(0, 0)
-        Me.btnReportsSCFBudget.Name = "btnReportsSCFBudget"
-        Me.btnReportsSCFBudget.Size = New System.Drawing.Size(184, 60)
-        Me.btnReportsSCFBudget.TabIndex = 7
-        Me.btnReportsSCFBudget.Text = "Job No. SCF Budget"
-        Me.btnReportsSCFBudget.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.btnReportsSCFBudget.UseVisualStyleBackColor = True
-        '
         'Panel4
         '
         Me.Panel4.Controls.Add(Me.btnRFIPiping)
@@ -298,6 +233,71 @@ Partial Class EstimateReports
         Me.btnRFIScf.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         Me.btnRFIScf.UseVisualStyleBackColor = True
         '
+        'Panel3
+        '
+        Me.Panel3.Controls.Add(Me.btnPipingBudget)
+        Me.Panel3.Controls.Add(Me.btnEquipmentBudged)
+        Me.Panel3.Controls.Add(Me.btnReportsSCFBudget)
+        Me.Panel3.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Panel3.Location = New System.Drawing.Point(3, 3)
+        Me.Panel3.Name = "Panel3"
+        Me.Panel3.Size = New System.Drawing.Size(184, 435)
+        Me.Panel3.TabIndex = 8
+        '
+        'btnPipingBudget
+        '
+        Me.btnPipingBudget.Dock = System.Windows.Forms.DockStyle.Top
+        Me.btnPipingBudget.FlatAppearance.BorderSize = 0
+        Me.btnPipingBudget.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(59, Byte), Integer), CType(CType(69, Byte), Integer), CType(CType(79, Byte), Integer))
+        Me.btnPipingBudget.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnPipingBudget.Font = New System.Drawing.Font("Nirmala UI", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnPipingBudget.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.btnPipingBudget.Image = Global.AVT_TRAKING.My.Resources.Resources.report
+        Me.btnPipingBudget.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnPipingBudget.Location = New System.Drawing.Point(0, 120)
+        Me.btnPipingBudget.Name = "btnPipingBudget"
+        Me.btnPipingBudget.Size = New System.Drawing.Size(184, 60)
+        Me.btnPipingBudget.TabIndex = 39
+        Me.btnPipingBudget.Text = "Job No. Pipe Budget"
+        Me.btnPipingBudget.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.btnPipingBudget.UseVisualStyleBackColor = True
+        '
+        'btnEquipmentBudged
+        '
+        Me.btnEquipmentBudged.Dock = System.Windows.Forms.DockStyle.Top
+        Me.btnEquipmentBudged.FlatAppearance.BorderSize = 0
+        Me.btnEquipmentBudged.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(59, Byte), Integer), CType(CType(69, Byte), Integer), CType(CType(79, Byte), Integer))
+        Me.btnEquipmentBudged.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnEquipmentBudged.Font = New System.Drawing.Font("Nirmala UI", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnEquipmentBudged.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.btnEquipmentBudged.Image = Global.AVT_TRAKING.My.Resources.Resources.report
+        Me.btnEquipmentBudged.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnEquipmentBudged.Location = New System.Drawing.Point(0, 60)
+        Me.btnEquipmentBudged.Name = "btnEquipmentBudged"
+        Me.btnEquipmentBudged.Size = New System.Drawing.Size(184, 60)
+        Me.btnEquipmentBudged.TabIndex = 38
+        Me.btnEquipmentBudged.Text = "Job No. Eq. Budget"
+        Me.btnEquipmentBudged.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.btnEquipmentBudged.UseVisualStyleBackColor = True
+        '
+        'btnReportsSCFBudget
+        '
+        Me.btnReportsSCFBudget.Dock = System.Windows.Forms.DockStyle.Top
+        Me.btnReportsSCFBudget.FlatAppearance.BorderSize = 0
+        Me.btnReportsSCFBudget.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(59, Byte), Integer), CType(CType(69, Byte), Integer), CType(CType(79, Byte), Integer))
+        Me.btnReportsSCFBudget.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnReportsSCFBudget.Font = New System.Drawing.Font("Nirmala UI", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnReportsSCFBudget.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.btnReportsSCFBudget.Image = Global.AVT_TRAKING.My.Resources.Resources.report
+        Me.btnReportsSCFBudget.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnReportsSCFBudget.Location = New System.Drawing.Point(0, 0)
+        Me.btnReportsSCFBudget.Name = "btnReportsSCFBudget"
+        Me.btnReportsSCFBudget.Size = New System.Drawing.Size(184, 60)
+        Me.btnReportsSCFBudget.TabIndex = 7
+        Me.btnReportsSCFBudget.Text = "Job No. SCF Budget"
+        Me.btnReportsSCFBudget.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.btnReportsSCFBudget.UseVisualStyleBackColor = True
+        '
         'EstimateReports
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -313,8 +313,8 @@ Partial Class EstimateReports
         Me.Panel2.ResumeLayout(False)
         Me.Panel2.PerformLayout()
         Me.TableLayoutPanel2.ResumeLayout(False)
-        Me.Panel3.ResumeLayout(False)
         Me.Panel4.ResumeLayout(False)
+        Me.Panel3.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub

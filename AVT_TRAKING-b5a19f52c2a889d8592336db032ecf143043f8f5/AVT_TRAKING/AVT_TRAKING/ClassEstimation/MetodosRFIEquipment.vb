@@ -127,7 +127,7 @@ order by convert (decimal, idRFIEq) asc", conn)
                     cmb.Items.Add(row.ItemArray(0) + "| " + row.ItemArray(1))
                 Next
             Else
-                Dim clmArray() As String = {"rfiEq.idRFIEq", "reqDate", "idDrawingNum", "drDescription", "projectId", "poDescription", "unit", "numberClient"}
+                Dim clmArray() As String = {"idRFIEq", "reqDate", "idDrawingNum", "drDescription", "projectId", "poDescription", "unit", "numberClient"}
                 For Each element As String In clmArray
                     dt.Columns.Add(element)
                 Next
