@@ -1,6 +1,32 @@
 ﻿Imports System.Data.SqlClient
 Public Class MetodosRFIEquipment
     Inherits ConnectioDB
+    Public Function selectRFIPo() As Data.DataTable
+        Try
+            conectar()
+            Dim cmd As New SqlCommand("select cl.numberClient, po.projectId, dr.idDrawingNum , eq.idEquimentEst as 'tag',ISNULL( rfi.idRFIEq,'' ) as 'idRFI' from equipmentEst as eq
+left join RFIEquipment as rfi on rfi.tag = eq.idEquimentEst and eq.idDrawingNum = rfi.idDrawingNum 
+inner join drawing as dr on dr.idDrawingNum = eq.idDrawingNum 
+inner join projectClientEst as po on po.projectId = dr.projectId 
+inner join clientsEst as cl on cl.idClientEst = po.idClientEst", conn)
+            Dim dt As New Data.DataTable
+            If cmd.ExecuteNonQuery Then
+                Dim da As New SqlDataAdapter(cmd)
+                da.Fill(dt)
+            Else
+                dt.Columns.Add("numberClient")
+                dt.Columns.Add("projectId")
+                dt.Columns.Add("idDrawingNum")
+                dt.Columns.Add("tag")
+                dt.Columns.Add("idRFI")
+            End If
+            Return dt
+        Catch ex As Exception
+            Return Nothing
+        Finally
+            desconectar()
+        End Try
+    End Function
     Public Function selectDrawing(Optional cmb As ComboBox = Nothing, Optional projectId As String = "") As Data.DataTable
         Try
             conectar()

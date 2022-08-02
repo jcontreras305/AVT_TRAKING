@@ -996,6 +996,123 @@
         rpt.idRFI = txtIdRFIPiping.Text
         rpt.Show()
     End Sub
+
+    Private Sub btnNextDrawingN_Click(sender As Object, e As EventArgs) Handles btnNextDrawingN.Click
+        Try
+            Dim tblPos As Data.DataTable = mtdRFIPiping.selectRFIPo()
+            Dim idRFIPp As String = txtIdRFIPiping.Text
+            Dim nextIdDrawingNum As String = ""
+            Dim nextTag As String = ""
+            Dim nextRFI As String = ""
+            Dim count As Integer = 0
+            Dim flag As Boolean = False
+            If tblPos.Rows IsNot Nothing Then
+                For Each row As Data.DataRow In tblPos.Rows
+                    If If(idDrawingNum <> "", If(idDrawingNum = row.ItemArray(2), True, False), True) And If(idTagPp <> "", If(idTagPp = row.ItemArray(3), True, False), True) And If(idRFIPp <> "", If(idRFIPp = row.ItemArray(4), True, False), True) Then
+                        flag = True
+                        Exit For
+                    End If
+                    count += 1
+                Next
+                If flag Then
+                    If count = tblPos.Rows.Count - 1 Then 'es el ultimo (ir al primero)
+                        count = 0
+                    Else
+                        count = count + 1
+                    End If
+                    nextIdDrawingNum = tblPos.Rows(count).ItemArray(2)
+                    nextTag = tblPos.Rows(count).ItemArray(3)
+                    nextRFI = tblPos.Rows(count).ItemArray(4)
+                    llenarDatos(nextRFI, nextTag, nextIdDrawingNum)
+                End If
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message())
+        End Try
+    End Sub
+
+    Private Sub btnAfterDrawing_Click(sender As Object, e As EventArgs) Handles btnAfterDrawing.Click
+        Try
+            Dim tblPos As Data.DataTable = mtdRFIPiping.selectRFIPo()
+            Dim idRFIPp As String = txtIdRFIPiping.Text
+            Dim nextIdDrawingNum As String = ""
+            Dim nextTag As String = ""
+            Dim nextRFI As String = ""
+            Dim count As Integer = 0
+            Dim flag As Boolean = False
+            If tblPos.Rows IsNot Nothing Then
+                For Each row As Data.DataRow In tblPos.Rows
+                    If If(idDrawingNum <> "", If(idDrawingNum = row.ItemArray(2), True, False), True) And If(idTagPp <> "", If(idTagPp = row.ItemArray(3), True, False), True) And If(idRFIPp <> "", If(idRFIPp = row.ItemArray(4), True, False), True) Then
+                        flag = True
+                        Exit For
+                    End If
+                    count += 1
+                Next
+                If flag Then
+                    If count = 0 Then 'es el primero (ir al ultimo)
+                        count = tblPos.Rows.Count - 1
+                    Else
+                        count = count - 1
+                    End If
+                    nextIdDrawingNum = tblPos.Rows(count).ItemArray(2)
+                    nextTag = tblPos.Rows(count).ItemArray(3)
+                    nextRFI = tblPos.Rows(count).ItemArray(4)
+                    llenarDatos(nextRFI, nextTag, nextIdDrawingNum)
+                End If
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message())
+        End Try
+    End Sub
+    Private Sub llenarDatos(ByVal idRFI As String, ByVal idTag As String, ByVal idDrawing As String)
+        Try
+            Dim countIndex As Integer = -1
+            Dim flag As Boolean = False
+            For Each item As String In cmbDrawing.Items
+                countIndex += 1
+                Dim array() As String = item.ToString.Split("|")
+                If idDrawing = array(0) Then
+                    flag = True
+                    Exit For
+                End If
+            Next
+            If countIndex >= 0 And flag Then
+                cmbDrawing.SelectedIndex = countIndex
+                countIndex = -1
+                flag = False
+                For Each item As String In cmbTag.Items
+                    countIndex += 1
+                    Dim array() As String = item.ToString.Split("|")
+                    If idTag = array(0) Then
+                        flag = True
+                        Exit For
+                    End If
+                Next
+                If countIndex >= 0 And flag Then
+                    cmbTag.SelectedIndex = countIndex
+                    countIndex = -1
+                    flag = False
+                    For Each row As DataGridViewRow In tblHistoryRFIPiping.Rows
+                        countIndex += 1
+                        If idRFI = row.Cells("idRFI").Value Then
+                            flag = True
+                            Exit For
+                        End If
+                    Next
+                    If countIndex >= 0 And flag Then
+                        Dim listRow() As DataRow = tblRFIPipingHistory.Select("idRFIPp='" + tblHistoryRFIPiping.Rows(countIndex).Cells("idRFI").Value + "' and idTag = '" + idTag + "'")
+                        If listRow.Length > 0 Then
+                            btnDelete.Enabled = True
+                            llenarDatosRFI(listRow(0))
+                        End If
+                    End If
+                End If
+            End If
+
+        Catch ex As Exception
+
+        End Try
+    End Sub
 End Class
 Public Class RFIPPClass
     Private _idRFIPp As String

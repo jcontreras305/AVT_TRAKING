@@ -2,6 +2,33 @@
 
 Public Class MetodosRFIScaffold
     Inherits ConnectioDB
+    Public Function selectRFIPo() As Data.DataTable
+        Try
+            conectar()
+            Dim cmd As New SqlCommand("select cl.numberClient, po.projectId, dr.idDrawingNum, scf.tag , ISNULL( rfi.idRFI,'' ) as 'idRFI' from scaffoldEst as scf 
+left join RFIScaffoldEst as rfi on rfi.tag = scf.tag and scf.idDrawingNum = rfi.idDrawingNum 
+inner join drawing as dr on dr.idDrawingNum = scf.idDrawingNum 
+inner join projectClientEst as po on po.projectId = dr.projectId 
+inner join clientsEst as cl on cl.idClientEst = po.idClientEst", conn)
+            Dim dt As New Data.DataTable
+            If cmd.ExecuteNonQuery Then
+                Dim da As New SqlDataAdapter(cmd)
+                da.Fill(dt)
+            Else
+                dt.Columns.Add("numberClient")
+                dt.Columns.Add("projectId")
+                dt.Columns.Add("idDrawingNum")
+                dt.Columns.Add("tag")
+                dt.Columns.Add("idRFI")
+            End If
+            Return dt
+        Catch ex As Exception
+            MsgBox(ex.Message())
+            Return Nothing
+        Finally
+            desconectar()
+        End Try
+    End Function
     Public Function selectRFIScaffold(ByVal tag As String, Optional idDrawing As String = "") As Data.DataTable
         Try
             conectar()

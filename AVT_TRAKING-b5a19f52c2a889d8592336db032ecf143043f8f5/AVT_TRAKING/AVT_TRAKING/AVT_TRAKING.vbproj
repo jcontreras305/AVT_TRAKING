@@ -109,7 +109,6 @@
     <Compile Include="ClassEstimation\MetodosRFIEquipment.vb" />
     <Compile Include="ClassEstimation\MetodosRFIPiping.vb" />
     <Compile Include="ClassEstimation\MetodosRFIScaffold.vb" />
-    <Compile Include="ClassEstimation\RFIScaffoldClass.vb" />
     <Compile Include="Class\EstimationSC.vb" />
     <Compile Include="Class\MetodosClients.vb" />
     <Compile Include="Class\metodosCompany.vb" />
