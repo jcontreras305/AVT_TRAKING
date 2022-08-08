@@ -594,6 +594,7 @@ Public Class TagsValidationTable
                         If task = rowtask.ItemArray(0) Then
                             sc.wo = rowtask.ItemArray(3)
                             sc.task = rowtask.ItemArray(2)
+                            sc.job = rowtask.ItemArray(4)
                             Exit For
                         End If
                     Next

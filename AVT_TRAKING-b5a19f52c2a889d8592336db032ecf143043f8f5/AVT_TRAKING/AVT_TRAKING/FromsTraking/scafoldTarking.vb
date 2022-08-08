@@ -4284,6 +4284,11 @@ Public Class scafoldTarking
             MsgBox(ex.Message)
         End Try
     End Sub
+
+    Private Sub tblModificationMaterial_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles tblModificationMaterial.CellContentClick
+
+    End Sub
+
     Public Function cargarDatosByClient(ByVal idClientF As String, ByVal companyNameF As String) As Boolean
         Try
             IdCliente = idClientF

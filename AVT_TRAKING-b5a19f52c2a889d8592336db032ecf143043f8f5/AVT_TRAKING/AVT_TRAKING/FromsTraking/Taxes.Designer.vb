@@ -213,21 +213,43 @@ Partial Class Taxes
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
         Me.Panel17 = New System.Windows.Forms.Panel()
         Me.tblTaxesPT = New System.Windows.Forms.DataGridView()
-        Me.clmEmployeeP = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.FICAP = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.FUIP = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.SUIP = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.PTTOTAL = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.TableLayoutPanel7 = New System.Windows.Forms.TableLayoutPanel()
-        Me.Panel1 = New System.Windows.Forms.Panel()
-        Me.TableLayoutPanel15 = New System.Windows.Forms.TableLayoutPanel()
+        Me.sprProfitP = New System.Windows.Forms.NumericUpDown()
+        Me.sprOverheadP = New System.Windows.Forms.NumericUpDown()
+        Me.sprScaffoldP = New System.Windows.Forms.NumericUpDown()
+        Me.sprFringeP = New System.Windows.Forms.NumericUpDown()
+        Me.sprGenLiabP = New System.Windows.Forms.NumericUpDown()
+        Me.Label60 = New System.Windows.Forms.Label()
+        Me.sprWCP = New System.Windows.Forms.NumericUpDown()
         Me.sprSUIP = New System.Windows.Forms.NumericUpDown()
+        Me.Label59 = New System.Windows.Forms.Label()
         Me.sprFUIP = New System.Windows.Forms.NumericUpDown()
-        Me.Label34 = New System.Windows.Forms.Label()
         Me.Label32 = New System.Windows.Forms.Label()
         Me.sprFicaP = New System.Windows.Forms.NumericUpDown()
         Me.Label33 = New System.Windows.Forms.Label()
-        Me.Panel10 = New System.Windows.Forms.Panel()
+        Me.Label34 = New System.Windows.Forms.Label()
+        Me.Label61 = New System.Windows.Forms.Label()
+        Me.Label62 = New System.Windows.Forms.Label()
+        Me.Label63 = New System.Windows.Forms.Label()
+        Me.Label64 = New System.Windows.Forms.Label()
+        Me.Label65 = New System.Windows.Forms.Label()
+        Me.Label66 = New System.Windows.Forms.Label()
+        Me.Label67 = New System.Windows.Forms.Label()
+        Me.Label68 = New System.Windows.Forms.Label()
+        Me.Label69 = New System.Windows.Forms.Label()
+        Me.Label70 = New System.Windows.Forms.Label()
+        Me.Label71 = New System.Windows.Forms.Label()
+        Me.Label72 = New System.Windows.Forms.Label()
+        Me.Label73 = New System.Windows.Forms.Label()
+        Me.sprUmbrP = New System.Windows.Forms.NumericUpDown()
+        Me.sprPollotionP = New System.Windows.Forms.NumericUpDown()
+        Me.sprHealtP = New System.Windows.Forms.NumericUpDown()
+        Me.sprSmallP = New System.Windows.Forms.NumericUpDown()
+        Me.sprPPEP = New System.Windows.Forms.NumericUpDown()
+        Me.sprConsumableP = New System.Windows.Forms.NumericUpDown()
+        Me.sprYoYosP = New System.Windows.Forms.NumericUpDown()
+        Me.sprMeshP = New System.Windows.Forms.NumericUpDown()
+        Me.sprMiselaneosP = New System.Windows.Forms.NumericUpDown()
         Me.Panel13 = New System.Windows.Forms.Panel()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         Me.Panel16 = New System.Windows.Forms.Panel()
@@ -252,6 +274,26 @@ Partial Class Taxes
         Me.OverHeadWkly = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.ProfitWkly = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.TotalWkly = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.clmEmployeeP = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.FICAP = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.FUIP = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.SUIP = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.clmWCP = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.clmGenLianP = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.clmUmbrP = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.clmPollutionP = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.clmHealtP = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.clmFringeP = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.clmSmallP = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.clmPPEP = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.clmConsumableP = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.clmScaffoldP = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.clmYoyosP = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.clmMeshP = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.clmMiselaneosP = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.clmOverheadP = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.clmProfitP = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.PTTOTAL = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.TableLayoutPanel1.SuspendLayout()
         Me.TitleBar.SuspendLayout()
         CType(Me.sprHoursOT, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -337,11 +379,24 @@ Partial Class Taxes
         Me.Panel17.SuspendLayout()
         CType(Me.tblTaxesPT, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.TableLayoutPanel7.SuspendLayout()
-        Me.Panel1.SuspendLayout()
-        Me.TableLayoutPanel15.SuspendLayout()
+        CType(Me.sprProfitP, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.sprOverheadP, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.sprScaffoldP, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.sprFringeP, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.sprGenLiabP, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.sprWCP, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.sprSUIP, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.sprFUIP, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.sprFicaP, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.sprUmbrP, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.sprPollotionP, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.sprHealtP, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.sprSmallP, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.sprPPEP, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.sprConsumableP, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.sprYoYosP, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.sprMeshP, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.sprMiselaneosP, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel13.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
         Me.Panel16.SuspendLayout()
@@ -1860,7 +1915,7 @@ Partial Class Taxes
         Me.TableLayoutPanel6.Location = New System.Drawing.Point(3, 3)
         Me.TableLayoutPanel6.Name = "TableLayoutPanel6"
         Me.TableLayoutPanel6.RowCount = 2
-        Me.TableLayoutPanel6.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 89.0!))
+        Me.TableLayoutPanel6.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 111.0!))
         Me.TableLayoutPanel6.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
         Me.TableLayoutPanel6.Size = New System.Drawing.Size(984, 430)
         Me.TableLayoutPanel6.TabIndex = 0
@@ -1873,11 +1928,11 @@ Partial Class Taxes
         Me.TableLayoutPanel8.Controls.Add(Me.Panel8, 0, 0)
         Me.TableLayoutPanel8.Controls.Add(Me.TableLayoutPanel9, 1, 0)
         Me.TableLayoutPanel8.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.TableLayoutPanel8.Location = New System.Drawing.Point(3, 92)
+        Me.TableLayoutPanel8.Location = New System.Drawing.Point(3, 114)
         Me.TableLayoutPanel8.Name = "TableLayoutPanel8"
         Me.TableLayoutPanel8.RowCount = 1
         Me.TableLayoutPanel8.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
-        Me.TableLayoutPanel8.Size = New System.Drawing.Size(978, 335)
+        Me.TableLayoutPanel8.Size = New System.Drawing.Size(978, 313)
         Me.TableLayoutPanel8.TabIndex = 1
         '
         'Panel8
@@ -1913,7 +1968,7 @@ Partial Class Taxes
         Me.Panel8.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.Panel8.Location = New System.Drawing.Point(3, 3)
         Me.Panel8.Name = "Panel8"
-        Me.Panel8.Size = New System.Drawing.Size(187, 329)
+        Me.Panel8.Size = New System.Drawing.Size(187, 307)
         Me.Panel8.TabIndex = 2
         '
         'Label54
@@ -2158,16 +2213,16 @@ Partial Class Taxes
         Me.TableLayoutPanel9.RowCount = 2
         Me.TableLayoutPanel9.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 67.01755!))
         Me.TableLayoutPanel9.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 32.98246!))
-        Me.TableLayoutPanel9.Size = New System.Drawing.Size(779, 329)
+        Me.TableLayoutPanel9.Size = New System.Drawing.Size(779, 307)
         Me.TableLayoutPanel9.TabIndex = 0
         '
         'Panel9
         '
         Me.Panel9.Controls.Add(Me.Panel15)
         Me.Panel9.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel9.Location = New System.Drawing.Point(3, 223)
+        Me.Panel9.Location = New System.Drawing.Point(3, 208)
         Me.Panel9.Name = "Panel9"
-        Me.Panel9.Size = New System.Drawing.Size(773, 103)
+        Me.Panel9.Size = New System.Drawing.Size(773, 96)
         Me.Panel9.TabIndex = 1
         '
         'Panel15
@@ -2177,7 +2232,7 @@ Partial Class Taxes
         Me.Panel15.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel15.Location = New System.Drawing.Point(0, 0)
         Me.Panel15.Name = "Panel15"
-        Me.Panel15.Size = New System.Drawing.Size(773, 103)
+        Me.Panel15.Size = New System.Drawing.Size(773, 96)
         Me.Panel15.TabIndex = 0
         '
         'GroupBox3
@@ -2187,7 +2242,7 @@ Partial Class Taxes
         Me.GroupBox3.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.GroupBox3.Location = New System.Drawing.Point(0, 0)
         Me.GroupBox3.Name = "GroupBox3"
-        Me.GroupBox3.Size = New System.Drawing.Size(773, 103)
+        Me.GroupBox3.Size = New System.Drawing.Size(773, 96)
         Me.GroupBox3.TabIndex = 0
         Me.GroupBox3.TabStop = False
         Me.GroupBox3.Text = "AVG Wage Comp."
@@ -2199,7 +2254,7 @@ Partial Class Taxes
         Me.Panel18.ForeColor = System.Drawing.SystemColors.ControlText
         Me.Panel18.Location = New System.Drawing.Point(3, 16)
         Me.Panel18.Name = "Panel18"
-        Me.Panel18.Size = New System.Drawing.Size(767, 84)
+        Me.Panel18.Size = New System.Drawing.Size(767, 77)
         Me.Panel18.TabIndex = 0
         '
         'tblAverageP
@@ -2222,7 +2277,7 @@ Partial Class Taxes
         Me.tblAverageP.Location = New System.Drawing.Point(0, 0)
         Me.tblAverageP.Name = "tblAverageP"
         Me.tblAverageP.ReadOnly = True
-        Me.tblAverageP.Size = New System.Drawing.Size(767, 84)
+        Me.tblAverageP.Size = New System.Drawing.Size(767, 77)
         Me.tblAverageP.TabIndex = 0
         '
         'EmployeeBWP
@@ -2265,7 +2320,7 @@ Partial Class Taxes
         Me.Panel14.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel14.Location = New System.Drawing.Point(3, 3)
         Me.Panel14.Name = "Panel14"
-        Me.Panel14.Size = New System.Drawing.Size(773, 214)
+        Me.Panel14.Size = New System.Drawing.Size(773, 199)
         Me.Panel14.TabIndex = 2
         '
         'GroupBox2
@@ -2275,7 +2330,7 @@ Partial Class Taxes
         Me.GroupBox2.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.GroupBox2.Location = New System.Drawing.Point(0, 0)
         Me.GroupBox2.Name = "GroupBox2"
-        Me.GroupBox2.Size = New System.Drawing.Size(773, 214)
+        Me.GroupBox2.Size = New System.Drawing.Size(773, 199)
         Me.GroupBox2.TabIndex = 0
         Me.GroupBox2.TabStop = False
         Me.GroupBox2.Text = "Breakdown-PT"
@@ -2287,17 +2342,17 @@ Partial Class Taxes
         Me.Panel17.ForeColor = System.Drawing.SystemColors.ControlText
         Me.Panel17.Location = New System.Drawing.Point(3, 16)
         Me.Panel17.Name = "Panel17"
-        Me.Panel17.Size = New System.Drawing.Size(767, 195)
+        Me.Panel17.Size = New System.Drawing.Size(767, 180)
         Me.Panel17.TabIndex = 0
         '
         'tblTaxesPT
         '
         Me.tblTaxesPT.AllowUserToAddRows = False
         Me.tblTaxesPT.AllowUserToDeleteRows = False
-        Me.tblTaxesPT.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
+        Me.tblTaxesPT.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells
         Me.tblTaxesPT.BackgroundColor = System.Drawing.SystemColors.Window
         Me.tblTaxesPT.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.tblTaxesPT.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.clmEmployeeP, Me.FICAP, Me.FUIP, Me.SUIP, Me.PTTOTAL})
+        Me.tblTaxesPT.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.clmEmployeeP, Me.FICAP, Me.FUIP, Me.SUIP, Me.clmWCP, Me.clmGenLianP, Me.clmUmbrP, Me.clmPollutionP, Me.clmHealtP, Me.clmFringeP, Me.clmSmallP, Me.clmPPEP, Me.clmConsumableP, Me.clmScaffoldP, Me.clmYoyosP, Me.clmMeshP, Me.clmMiselaneosP, Me.clmOverheadP, Me.clmProfitP, Me.PTTOTAL})
         DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
         DataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window
         DataGridViewCellStyle2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -2309,127 +2364,189 @@ Partial Class Taxes
         Me.tblTaxesPT.Dock = System.Windows.Forms.DockStyle.Fill
         Me.tblTaxesPT.Location = New System.Drawing.Point(0, 0)
         Me.tblTaxesPT.Name = "tblTaxesPT"
-        Me.tblTaxesPT.Size = New System.Drawing.Size(767, 195)
+        Me.tblTaxesPT.Size = New System.Drawing.Size(767, 180)
         Me.tblTaxesPT.TabIndex = 0
-        '
-        'clmEmployeeP
-        '
-        Me.clmEmployeeP.HeaderText = "Employee"
-        Me.clmEmployeeP.Name = "clmEmployeeP"
-        Me.clmEmployeeP.ReadOnly = True
-        '
-        'FICAP
-        '
-        Me.FICAP.HeaderText = "FICA"
-        Me.FICAP.Name = "FICAP"
-        Me.FICAP.ReadOnly = True
-        '
-        'FUIP
-        '
-        Me.FUIP.HeaderText = "FUI"
-        Me.FUIP.Name = "FUIP"
-        Me.FUIP.ReadOnly = True
-        '
-        'SUIP
-        '
-        Me.SUIP.HeaderText = "SUI"
-        Me.SUIP.Name = "SUIP"
-        Me.SUIP.ReadOnly = True
-        '
-        'PTTOTAL
-        '
-        Me.PTTOTAL.HeaderText = "PT TOTAL"
-        Me.PTTOTAL.Name = "PTTOTAL"
-        Me.PTTOTAL.ReadOnly = True
         '
         'TableLayoutPanel7
         '
-        Me.TableLayoutPanel7.ColumnCount = 2
-        Me.TableLayoutPanel7.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20.06579!))
-        Me.TableLayoutPanel7.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 79.93421!))
-        Me.TableLayoutPanel7.Controls.Add(Me.Panel1, 0, 0)
-        Me.TableLayoutPanel7.Controls.Add(Me.Panel10, 1, 0)
+        Me.TableLayoutPanel7.ColumnCount = 10
+        Me.TableLayoutPanel7.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10.0!))
+        Me.TableLayoutPanel7.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10.0!))
+        Me.TableLayoutPanel7.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10.0!))
+        Me.TableLayoutPanel7.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10.0!))
+        Me.TableLayoutPanel7.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10.0!))
+        Me.TableLayoutPanel7.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10.0!))
+        Me.TableLayoutPanel7.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10.0!))
+        Me.TableLayoutPanel7.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10.0!))
+        Me.TableLayoutPanel7.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10.0!))
+        Me.TableLayoutPanel7.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10.0!))
+        Me.TableLayoutPanel7.Controls.Add(Me.sprProfitP, 9, 1)
+        Me.TableLayoutPanel7.Controls.Add(Me.sprOverheadP, 9, 0)
+        Me.TableLayoutPanel7.Controls.Add(Me.sprScaffoldP, 7, 0)
+        Me.TableLayoutPanel7.Controls.Add(Me.sprFringeP, 5, 0)
+        Me.TableLayoutPanel7.Controls.Add(Me.sprGenLiabP, 3, 0)
+        Me.TableLayoutPanel7.Controls.Add(Me.Label60, 2, 0)
+        Me.TableLayoutPanel7.Controls.Add(Me.sprWCP, 1, 3)
+        Me.TableLayoutPanel7.Controls.Add(Me.sprSUIP, 1, 2)
+        Me.TableLayoutPanel7.Controls.Add(Me.Label59, 0, 3)
+        Me.TableLayoutPanel7.Controls.Add(Me.sprFUIP, 1, 1)
+        Me.TableLayoutPanel7.Controls.Add(Me.Label32, 0, 0)
+        Me.TableLayoutPanel7.Controls.Add(Me.sprFicaP, 1, 0)
+        Me.TableLayoutPanel7.Controls.Add(Me.Label33, 0, 1)
+        Me.TableLayoutPanel7.Controls.Add(Me.Label34, 0, 2)
+        Me.TableLayoutPanel7.Controls.Add(Me.Label61, 2, 1)
+        Me.TableLayoutPanel7.Controls.Add(Me.Label62, 2, 2)
+        Me.TableLayoutPanel7.Controls.Add(Me.Label63, 2, 3)
+        Me.TableLayoutPanel7.Controls.Add(Me.Label64, 4, 0)
+        Me.TableLayoutPanel7.Controls.Add(Me.Label65, 4, 1)
+        Me.TableLayoutPanel7.Controls.Add(Me.Label66, 4, 2)
+        Me.TableLayoutPanel7.Controls.Add(Me.Label67, 4, 3)
+        Me.TableLayoutPanel7.Controls.Add(Me.Label68, 6, 0)
+        Me.TableLayoutPanel7.Controls.Add(Me.Label69, 6, 1)
+        Me.TableLayoutPanel7.Controls.Add(Me.Label70, 6, 2)
+        Me.TableLayoutPanel7.Controls.Add(Me.Label71, 6, 3)
+        Me.TableLayoutPanel7.Controls.Add(Me.Label72, 8, 0)
+        Me.TableLayoutPanel7.Controls.Add(Me.Label73, 8, 1)
+        Me.TableLayoutPanel7.Controls.Add(Me.sprUmbrP, 3, 1)
+        Me.TableLayoutPanel7.Controls.Add(Me.sprPollotionP, 3, 2)
+        Me.TableLayoutPanel7.Controls.Add(Me.sprHealtP, 3, 3)
+        Me.TableLayoutPanel7.Controls.Add(Me.sprSmallP, 5, 1)
+        Me.TableLayoutPanel7.Controls.Add(Me.sprPPEP, 5, 2)
+        Me.TableLayoutPanel7.Controls.Add(Me.sprConsumableP, 5, 3)
+        Me.TableLayoutPanel7.Controls.Add(Me.sprYoYosP, 7, 1)
+        Me.TableLayoutPanel7.Controls.Add(Me.sprMeshP, 7, 2)
+        Me.TableLayoutPanel7.Controls.Add(Me.sprMiselaneosP, 7, 3)
         Me.TableLayoutPanel7.Dock = System.Windows.Forms.DockStyle.Fill
         Me.TableLayoutPanel7.Location = New System.Drawing.Point(3, 3)
         Me.TableLayoutPanel7.Name = "TableLayoutPanel7"
-        Me.TableLayoutPanel7.RowCount = 1
-        Me.TableLayoutPanel7.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
-        Me.TableLayoutPanel7.Size = New System.Drawing.Size(978, 83)
+        Me.TableLayoutPanel7.RowCount = 4
+        Me.TableLayoutPanel7.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25.0!))
+        Me.TableLayoutPanel7.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25.0!))
+        Me.TableLayoutPanel7.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25.0!))
+        Me.TableLayoutPanel7.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 25.0!))
+        Me.TableLayoutPanel7.Size = New System.Drawing.Size(978, 105)
         Me.TableLayoutPanel7.TabIndex = 0
         '
-        'Panel1
+        'sprProfitP
         '
-        Me.Panel1.BackColor = System.Drawing.Color.FromArgb(CType(CType(81, Byte), Integer), CType(CType(93, Byte), Integer), CType(CType(102, Byte), Integer))
-        Me.Panel1.Controls.Add(Me.TableLayoutPanel15)
-        Me.Panel1.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel1.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Panel1.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.Panel1.Location = New System.Drawing.Point(3, 3)
-        Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(190, 77)
-        Me.Panel1.TabIndex = 1
+        Me.sprProfitP.DecimalPlaces = 2
+        Me.sprProfitP.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.sprProfitP.Increment = New Decimal(New Integer() {10, 0, 0, 131072})
+        Me.sprProfitP.Location = New System.Drawing.Point(876, 29)
+        Me.sprProfitP.Name = "sprProfitP"
+        Me.sprProfitP.Size = New System.Drawing.Size(99, 20)
+        Me.sprProfitP.TabIndex = 50
+        Me.sprProfitP.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
-        'TableLayoutPanel15
+        'sprOverheadP
         '
-        Me.TableLayoutPanel15.ColumnCount = 2
-        Me.TableLayoutPanel15.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
-        Me.TableLayoutPanel15.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
-        Me.TableLayoutPanel15.Controls.Add(Me.sprSUIP, 1, 2)
-        Me.TableLayoutPanel15.Controls.Add(Me.sprFUIP, 1, 1)
-        Me.TableLayoutPanel15.Controls.Add(Me.Label34, 0, 2)
-        Me.TableLayoutPanel15.Controls.Add(Me.Label32, 0, 0)
-        Me.TableLayoutPanel15.Controls.Add(Me.sprFicaP, 1, 0)
-        Me.TableLayoutPanel15.Controls.Add(Me.Label33, 0, 1)
-        Me.TableLayoutPanel15.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.TableLayoutPanel15.Location = New System.Drawing.Point(0, 0)
-        Me.TableLayoutPanel15.Name = "TableLayoutPanel15"
-        Me.TableLayoutPanel15.RowCount = 3
-        Me.TableLayoutPanel15.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333!))
-        Me.TableLayoutPanel15.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333!))
-        Me.TableLayoutPanel15.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 33.33333!))
-        Me.TableLayoutPanel15.Size = New System.Drawing.Size(190, 77)
-        Me.TableLayoutPanel15.TabIndex = 0
+        Me.sprOverheadP.DecimalPlaces = 2
+        Me.sprOverheadP.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.sprOverheadP.Increment = New Decimal(New Integer() {10, 0, 0, 131072})
+        Me.sprOverheadP.Location = New System.Drawing.Point(876, 3)
+        Me.sprOverheadP.Name = "sprOverheadP"
+        Me.sprOverheadP.Size = New System.Drawing.Size(99, 20)
+        Me.sprOverheadP.TabIndex = 49
+        Me.sprOverheadP.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
+        'sprScaffoldP
+        '
+        Me.sprScaffoldP.DecimalPlaces = 2
+        Me.sprScaffoldP.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.sprScaffoldP.Increment = New Decimal(New Integer() {10, 0, 0, 131072})
+        Me.sprScaffoldP.Location = New System.Drawing.Point(682, 3)
+        Me.sprScaffoldP.Name = "sprScaffoldP"
+        Me.sprScaffoldP.Size = New System.Drawing.Size(91, 20)
+        Me.sprScaffoldP.TabIndex = 45
+        Me.sprScaffoldP.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
+        'sprFringeP
+        '
+        Me.sprFringeP.DecimalPlaces = 2
+        Me.sprFringeP.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.sprFringeP.Increment = New Decimal(New Integer() {10, 0, 0, 131072})
+        Me.sprFringeP.Location = New System.Drawing.Point(488, 3)
+        Me.sprFringeP.Name = "sprFringeP"
+        Me.sprFringeP.Size = New System.Drawing.Size(91, 20)
+        Me.sprFringeP.TabIndex = 41
+        Me.sprFringeP.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
+        'sprGenLiabP
+        '
+        Me.sprGenLiabP.DecimalPlaces = 2
+        Me.sprGenLiabP.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.sprGenLiabP.Increment = New Decimal(New Integer() {10, 0, 0, 131072})
+        Me.sprGenLiabP.Location = New System.Drawing.Point(294, 3)
+        Me.sprGenLiabP.Name = "sprGenLiabP"
+        Me.sprGenLiabP.Size = New System.Drawing.Size(91, 20)
+        Me.sprGenLiabP.TabIndex = 37
+        Me.sprGenLiabP.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
+        'Label60
+        '
+        Me.Label60.AutoSize = True
+        Me.Label60.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Label60.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.Label60.Location = New System.Drawing.Point(197, 0)
+        Me.Label60.Name = "Label60"
+        Me.Label60.Size = New System.Drawing.Size(91, 26)
+        Me.Label60.TabIndex = 21
+        Me.Label60.Text = "Gen Liab"
+        Me.Label60.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'sprWCP
+        '
+        Me.sprWCP.DecimalPlaces = 2
+        Me.sprWCP.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.sprWCP.Increment = New Decimal(New Integer() {10, 0, 0, 131072})
+        Me.sprWCP.Location = New System.Drawing.Point(100, 81)
+        Me.sprWCP.Name = "sprWCP"
+        Me.sprWCP.Size = New System.Drawing.Size(91, 20)
+        Me.sprWCP.TabIndex = 20
+        Me.sprWCP.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'sprSUIP
         '
         Me.sprSUIP.DecimalPlaces = 2
         Me.sprSUIP.Dock = System.Windows.Forms.DockStyle.Fill
         Me.sprSUIP.Increment = New Decimal(New Integer() {10, 0, 0, 131072})
-        Me.sprSUIP.Location = New System.Drawing.Point(98, 53)
+        Me.sprSUIP.Location = New System.Drawing.Point(100, 55)
         Me.sprSUIP.Name = "sprSUIP"
-        Me.sprSUIP.Size = New System.Drawing.Size(89, 21)
+        Me.sprSUIP.Size = New System.Drawing.Size(91, 20)
         Me.sprSUIP.TabIndex = 2
         Me.sprSUIP.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
+        'Label59
+        '
+        Me.Label59.AutoSize = True
+        Me.Label59.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Label59.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.Label59.Location = New System.Drawing.Point(3, 78)
+        Me.Label59.Name = "Label59"
+        Me.Label59.Size = New System.Drawing.Size(91, 27)
+        Me.Label59.TabIndex = 19
+        Me.Label59.Text = "WC"
+        Me.Label59.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'sprFUIP
         '
         Me.sprFUIP.DecimalPlaces = 2
         Me.sprFUIP.Dock = System.Windows.Forms.DockStyle.Fill
         Me.sprFUIP.Increment = New Decimal(New Integer() {10, 0, 0, 131072})
-        Me.sprFUIP.Location = New System.Drawing.Point(98, 28)
+        Me.sprFUIP.Location = New System.Drawing.Point(100, 29)
         Me.sprFUIP.Name = "sprFUIP"
-        Me.sprFUIP.Size = New System.Drawing.Size(89, 21)
+        Me.sprFUIP.Size = New System.Drawing.Size(91, 20)
         Me.sprFUIP.TabIndex = 1
         Me.sprFUIP.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        '
-        'Label34
-        '
-        Me.Label34.AutoSize = True
-        Me.Label34.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Label34.Location = New System.Drawing.Point(3, 50)
-        Me.Label34.Name = "Label34"
-        Me.Label34.Size = New System.Drawing.Size(89, 27)
-        Me.Label34.TabIndex = 18
-        Me.Label34.Text = "SUI"
-        Me.Label34.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'Label32
         '
         Me.Label32.AutoSize = True
         Me.Label32.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Label32.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.Label32.Location = New System.Drawing.Point(3, 0)
         Me.Label32.Name = "Label32"
-        Me.Label32.Size = New System.Drawing.Size(89, 25)
+        Me.Label32.Size = New System.Drawing.Size(91, 26)
         Me.Label32.TabIndex = 16
         Me.Label32.Text = "FICA"
         Me.Label32.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -2439,9 +2556,9 @@ Partial Class Taxes
         Me.sprFicaP.DecimalPlaces = 2
         Me.sprFicaP.Dock = System.Windows.Forms.DockStyle.Fill
         Me.sprFicaP.Increment = New Decimal(New Integer() {10, 0, 0, 131072})
-        Me.sprFicaP.Location = New System.Drawing.Point(98, 3)
+        Me.sprFicaP.Location = New System.Drawing.Point(100, 3)
         Me.sprFicaP.Name = "sprFicaP"
-        Me.sprFicaP.Size = New System.Drawing.Size(89, 21)
+        Me.sprFicaP.Size = New System.Drawing.Size(91, 20)
         Me.sprFicaP.TabIndex = 0
         Me.sprFicaP.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
@@ -2449,21 +2566,280 @@ Partial Class Taxes
         '
         Me.Label33.AutoSize = True
         Me.Label33.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Label33.Location = New System.Drawing.Point(3, 25)
+        Me.Label33.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.Label33.Location = New System.Drawing.Point(3, 26)
         Me.Label33.Name = "Label33"
-        Me.Label33.Size = New System.Drawing.Size(89, 25)
+        Me.Label33.Size = New System.Drawing.Size(91, 26)
         Me.Label33.TabIndex = 17
         Me.Label33.Text = "FUI"
         Me.Label33.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
-        'Panel10
+        'Label34
         '
-        Me.Panel10.BackColor = System.Drawing.Color.FromArgb(CType(CType(81, Byte), Integer), CType(CType(93, Byte), Integer), CType(CType(102, Byte), Integer))
-        Me.Panel10.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel10.Location = New System.Drawing.Point(199, 3)
-        Me.Panel10.Name = "Panel10"
-        Me.Panel10.Size = New System.Drawing.Size(776, 77)
-        Me.Panel10.TabIndex = 2
+        Me.Label34.AutoSize = True
+        Me.Label34.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Label34.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.Label34.Location = New System.Drawing.Point(3, 52)
+        Me.Label34.Name = "Label34"
+        Me.Label34.Size = New System.Drawing.Size(91, 26)
+        Me.Label34.TabIndex = 18
+        Me.Label34.Text = "SUI"
+        Me.Label34.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'Label61
+        '
+        Me.Label61.AutoSize = True
+        Me.Label61.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Label61.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.Label61.Location = New System.Drawing.Point(197, 26)
+        Me.Label61.Name = "Label61"
+        Me.Label61.Size = New System.Drawing.Size(91, 26)
+        Me.Label61.TabIndex = 22
+        Me.Label61.Text = "Umbr"
+        Me.Label61.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'Label62
+        '
+        Me.Label62.AutoSize = True
+        Me.Label62.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Label62.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.Label62.Location = New System.Drawing.Point(197, 52)
+        Me.Label62.Name = "Label62"
+        Me.Label62.Size = New System.Drawing.Size(91, 26)
+        Me.Label62.TabIndex = 23
+        Me.Label62.Text = "Pollution"
+        Me.Label62.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'Label63
+        '
+        Me.Label63.AutoSize = True
+        Me.Label63.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Label63.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.Label63.Location = New System.Drawing.Point(197, 78)
+        Me.Label63.Name = "Label63"
+        Me.Label63.Size = New System.Drawing.Size(91, 27)
+        Me.Label63.TabIndex = 24
+        Me.Label63.Text = "Healt"
+        Me.Label63.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'Label64
+        '
+        Me.Label64.AutoSize = True
+        Me.Label64.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Label64.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.Label64.Location = New System.Drawing.Point(391, 0)
+        Me.Label64.Name = "Label64"
+        Me.Label64.Size = New System.Drawing.Size(91, 26)
+        Me.Label64.TabIndex = 25
+        Me.Label64.Text = "Fringe"
+        Me.Label64.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'Label65
+        '
+        Me.Label65.AutoSize = True
+        Me.Label65.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Label65.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.Label65.Location = New System.Drawing.Point(391, 26)
+        Me.Label65.Name = "Label65"
+        Me.Label65.Size = New System.Drawing.Size(91, 26)
+        Me.Label65.TabIndex = 26
+        Me.Label65.Text = "Small"
+        Me.Label65.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'Label66
+        '
+        Me.Label66.AutoSize = True
+        Me.Label66.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Label66.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.Label66.Location = New System.Drawing.Point(391, 52)
+        Me.Label66.Name = "Label66"
+        Me.Label66.Size = New System.Drawing.Size(91, 26)
+        Me.Label66.TabIndex = 27
+        Me.Label66.Text = "PPE"
+        Me.Label66.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'Label67
+        '
+        Me.Label67.AutoSize = True
+        Me.Label67.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Label67.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.Label67.Location = New System.Drawing.Point(391, 78)
+        Me.Label67.Name = "Label67"
+        Me.Label67.Size = New System.Drawing.Size(91, 27)
+        Me.Label67.TabIndex = 28
+        Me.Label67.Text = "Consumable"
+        Me.Label67.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'Label68
+        '
+        Me.Label68.AutoSize = True
+        Me.Label68.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Label68.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.Label68.Location = New System.Drawing.Point(585, 0)
+        Me.Label68.Name = "Label68"
+        Me.Label68.Size = New System.Drawing.Size(91, 26)
+        Me.Label68.TabIndex = 29
+        Me.Label68.Text = "Scaffold"
+        Me.Label68.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'Label69
+        '
+        Me.Label69.AutoSize = True
+        Me.Label69.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Label69.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.Label69.Location = New System.Drawing.Point(585, 26)
+        Me.Label69.Name = "Label69"
+        Me.Label69.Size = New System.Drawing.Size(91, 26)
+        Me.Label69.TabIndex = 30
+        Me.Label69.Text = "Yo-Yo's"
+        Me.Label69.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'Label70
+        '
+        Me.Label70.AutoSize = True
+        Me.Label70.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Label70.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.Label70.Location = New System.Drawing.Point(585, 52)
+        Me.Label70.Name = "Label70"
+        Me.Label70.Size = New System.Drawing.Size(91, 26)
+        Me.Label70.TabIndex = 31
+        Me.Label70.Text = "Mesh"
+        Me.Label70.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'Label71
+        '
+        Me.Label71.AutoSize = True
+        Me.Label71.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Label71.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.Label71.Location = New System.Drawing.Point(585, 78)
+        Me.Label71.Name = "Label71"
+        Me.Label71.Size = New System.Drawing.Size(91, 27)
+        Me.Label71.TabIndex = 32
+        Me.Label71.Text = "Miselaneos"
+        Me.Label71.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'Label72
+        '
+        Me.Label72.AutoSize = True
+        Me.Label72.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Label72.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.Label72.Location = New System.Drawing.Point(779, 0)
+        Me.Label72.Name = "Label72"
+        Me.Label72.Size = New System.Drawing.Size(91, 26)
+        Me.Label72.TabIndex = 33
+        Me.Label72.Text = "Overhead"
+        Me.Label72.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'Label73
+        '
+        Me.Label73.AutoSize = True
+        Me.Label73.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Label73.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.Label73.Location = New System.Drawing.Point(779, 26)
+        Me.Label73.Name = "Label73"
+        Me.Label73.Size = New System.Drawing.Size(91, 26)
+        Me.Label73.TabIndex = 34
+        Me.Label73.Text = "Profit"
+        Me.Label73.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'sprUmbrP
+        '
+        Me.sprUmbrP.DecimalPlaces = 2
+        Me.sprUmbrP.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.sprUmbrP.Increment = New Decimal(New Integer() {10, 0, 0, 131072})
+        Me.sprUmbrP.Location = New System.Drawing.Point(294, 29)
+        Me.sprUmbrP.Name = "sprUmbrP"
+        Me.sprUmbrP.Size = New System.Drawing.Size(91, 20)
+        Me.sprUmbrP.TabIndex = 38
+        Me.sprUmbrP.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
+        'sprPollotionP
+        '
+        Me.sprPollotionP.DecimalPlaces = 2
+        Me.sprPollotionP.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.sprPollotionP.Increment = New Decimal(New Integer() {10, 0, 0, 131072})
+        Me.sprPollotionP.Location = New System.Drawing.Point(294, 55)
+        Me.sprPollotionP.Name = "sprPollotionP"
+        Me.sprPollotionP.Size = New System.Drawing.Size(91, 20)
+        Me.sprPollotionP.TabIndex = 39
+        Me.sprPollotionP.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
+        'sprHealtP
+        '
+        Me.sprHealtP.DecimalPlaces = 2
+        Me.sprHealtP.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.sprHealtP.Increment = New Decimal(New Integer() {10, 0, 0, 131072})
+        Me.sprHealtP.Location = New System.Drawing.Point(294, 81)
+        Me.sprHealtP.Name = "sprHealtP"
+        Me.sprHealtP.Size = New System.Drawing.Size(91, 20)
+        Me.sprHealtP.TabIndex = 40
+        Me.sprHealtP.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
+        'sprSmallP
+        '
+        Me.sprSmallP.DecimalPlaces = 2
+        Me.sprSmallP.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.sprSmallP.Increment = New Decimal(New Integer() {10, 0, 0, 131072})
+        Me.sprSmallP.Location = New System.Drawing.Point(488, 29)
+        Me.sprSmallP.Name = "sprSmallP"
+        Me.sprSmallP.Size = New System.Drawing.Size(91, 20)
+        Me.sprSmallP.TabIndex = 42
+        Me.sprSmallP.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
+        'sprPPEP
+        '
+        Me.sprPPEP.DecimalPlaces = 2
+        Me.sprPPEP.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.sprPPEP.Increment = New Decimal(New Integer() {10, 0, 0, 131072})
+        Me.sprPPEP.Location = New System.Drawing.Point(488, 55)
+        Me.sprPPEP.Name = "sprPPEP"
+        Me.sprPPEP.Size = New System.Drawing.Size(91, 20)
+        Me.sprPPEP.TabIndex = 43
+        Me.sprPPEP.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
+        'sprConsumableP
+        '
+        Me.sprConsumableP.DecimalPlaces = 2
+        Me.sprConsumableP.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.sprConsumableP.Increment = New Decimal(New Integer() {10, 0, 0, 131072})
+        Me.sprConsumableP.Location = New System.Drawing.Point(488, 81)
+        Me.sprConsumableP.Name = "sprConsumableP"
+        Me.sprConsumableP.Size = New System.Drawing.Size(91, 20)
+        Me.sprConsumableP.TabIndex = 44
+        Me.sprConsumableP.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
+        'sprYoYosP
+        '
+        Me.sprYoYosP.DecimalPlaces = 2
+        Me.sprYoYosP.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.sprYoYosP.Increment = New Decimal(New Integer() {10, 0, 0, 131072})
+        Me.sprYoYosP.Location = New System.Drawing.Point(682, 29)
+        Me.sprYoYosP.Name = "sprYoYosP"
+        Me.sprYoYosP.Size = New System.Drawing.Size(91, 20)
+        Me.sprYoYosP.TabIndex = 46
+        Me.sprYoYosP.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
+        'sprMeshP
+        '
+        Me.sprMeshP.DecimalPlaces = 2
+        Me.sprMeshP.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.sprMeshP.Increment = New Decimal(New Integer() {10, 0, 0, 131072})
+        Me.sprMeshP.Location = New System.Drawing.Point(682, 55)
+        Me.sprMeshP.Name = "sprMeshP"
+        Me.sprMeshP.Size = New System.Drawing.Size(91, 20)
+        Me.sprMeshP.TabIndex = 47
+        Me.sprMeshP.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
+        'sprMiselaneosP
+        '
+        Me.sprMiselaneosP.DecimalPlaces = 2
+        Me.sprMiselaneosP.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.sprMiselaneosP.Increment = New Decimal(New Integer() {10, 0, 0, 131072})
+        Me.sprMiselaneosP.Location = New System.Drawing.Point(682, 81)
+        Me.sprMiselaneosP.Name = "sprMiselaneosP"
+        Me.sprMiselaneosP.Size = New System.Drawing.Size(91, 20)
+        Me.sprMiselaneosP.TabIndex = 48
+        Me.sprMiselaneosP.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'Panel13
         '
@@ -2609,6 +2985,131 @@ Partial Class Taxes
         Me.TotalWkly.HeaderText = "Total"
         Me.TotalWkly.Name = "TotalWkly"
         '
+        'clmEmployeeP
+        '
+        Me.clmEmployeeP.HeaderText = "Employee"
+        Me.clmEmployeeP.Name = "clmEmployeeP"
+        Me.clmEmployeeP.ReadOnly = True
+        Me.clmEmployeeP.Width = 78
+        '
+        'FICAP
+        '
+        Me.FICAP.HeaderText = "FICA"
+        Me.FICAP.Name = "FICAP"
+        Me.FICAP.ReadOnly = True
+        Me.FICAP.Width = 55
+        '
+        'FUIP
+        '
+        Me.FUIP.HeaderText = "FUI"
+        Me.FUIP.Name = "FUIP"
+        Me.FUIP.ReadOnly = True
+        Me.FUIP.Width = 49
+        '
+        'SUIP
+        '
+        Me.SUIP.HeaderText = "SUI"
+        Me.SUIP.Name = "SUIP"
+        Me.SUIP.ReadOnly = True
+        Me.SUIP.Width = 50
+        '
+        'clmWCP
+        '
+        Me.clmWCP.HeaderText = "WC"
+        Me.clmWCP.Name = "clmWCP"
+        Me.clmWCP.Width = 50
+        '
+        'clmGenLianP
+        '
+        Me.clmGenLianP.HeaderText = "GenLian"
+        Me.clmGenLianP.Name = "clmGenLianP"
+        Me.clmGenLianP.Width = 72
+        '
+        'clmUmbrP
+        '
+        Me.clmUmbrP.HeaderText = "Umbr"
+        Me.clmUmbrP.Name = "clmUmbrP"
+        Me.clmUmbrP.Width = 57
+        '
+        'clmPollutionP
+        '
+        Me.clmPollutionP.HeaderText = "Pollution"
+        Me.clmPollutionP.Name = "clmPollutionP"
+        Me.clmPollutionP.Width = 72
+        '
+        'clmHealtP
+        '
+        Me.clmHealtP.HeaderText = "Healt"
+        Me.clmHealtP.Name = "clmHealtP"
+        Me.clmHealtP.Width = 57
+        '
+        'clmFringeP
+        '
+        Me.clmFringeP.HeaderText = "Fringe"
+        Me.clmFringeP.Name = "clmFringeP"
+        Me.clmFringeP.Width = 61
+        '
+        'clmSmallP
+        '
+        Me.clmSmallP.HeaderText = "Small"
+        Me.clmSmallP.Name = "clmSmallP"
+        Me.clmSmallP.Width = 57
+        '
+        'clmPPEP
+        '
+        Me.clmPPEP.HeaderText = "PPE"
+        Me.clmPPEP.Name = "clmPPEP"
+        Me.clmPPEP.Width = 53
+        '
+        'clmConsumableP
+        '
+        Me.clmConsumableP.HeaderText = "Consumable"
+        Me.clmConsumableP.Name = "clmConsumableP"
+        Me.clmConsumableP.Width = 90
+        '
+        'clmScaffoldP
+        '
+        Me.clmScaffoldP.HeaderText = "Scaffold"
+        Me.clmScaffoldP.Name = "clmScaffoldP"
+        Me.clmScaffoldP.Width = 71
+        '
+        'clmYoyosP
+        '
+        Me.clmYoyosP.HeaderText = "Yo-Yo's"
+        Me.clmYoyosP.Name = "clmYoyosP"
+        Me.clmYoyosP.Width = 68
+        '
+        'clmMeshP
+        '
+        Me.clmMeshP.HeaderText = "Mesh"
+        Me.clmMeshP.Name = "clmMeshP"
+        Me.clmMeshP.Width = 58
+        '
+        'clmMiselaneosP
+        '
+        Me.clmMiselaneosP.HeaderText = "Miselaneos"
+        Me.clmMiselaneosP.Name = "clmMiselaneosP"
+        Me.clmMiselaneosP.Width = 85
+        '
+        'clmOverheadP
+        '
+        Me.clmOverheadP.HeaderText = "Overhead"
+        Me.clmOverheadP.Name = "clmOverheadP"
+        Me.clmOverheadP.Width = 79
+        '
+        'clmProfitP
+        '
+        Me.clmProfitP.HeaderText = "Profit"
+        Me.clmProfitP.Name = "clmProfitP"
+        Me.clmProfitP.Width = 56
+        '
+        'PTTOTAL
+        '
+        Me.PTTOTAL.HeaderText = "PT TOTAL"
+        Me.PTTOTAL.Name = "PTTOTAL"
+        Me.PTTOTAL.ReadOnly = True
+        Me.PTTOTAL.Width = 78
+        '
         'Taxes
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -2711,12 +3212,25 @@ Partial Class Taxes
         Me.Panel17.ResumeLayout(False)
         CType(Me.tblTaxesPT, System.ComponentModel.ISupportInitialize).EndInit()
         Me.TableLayoutPanel7.ResumeLayout(False)
-        Me.Panel1.ResumeLayout(False)
-        Me.TableLayoutPanel15.ResumeLayout(False)
-        Me.TableLayoutPanel15.PerformLayout()
+        Me.TableLayoutPanel7.PerformLayout()
+        CType(Me.sprProfitP, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.sprOverheadP, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.sprScaffoldP, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.sprFringeP, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.sprGenLiabP, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.sprWCP, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.sprSUIP, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.sprFUIP, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.sprFicaP, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.sprUmbrP, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.sprPollotionP, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.sprHealtP, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.sprSmallP, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.sprPPEP, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.sprConsumableP, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.sprYoYosP, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.sprMeshP, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.sprMiselaneosP, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel13.ResumeLayout(False)
         Me.GroupBox1.ResumeLayout(False)
         Me.Panel16.ResumeLayout(False)
@@ -2832,18 +3346,6 @@ Partial Class Taxes
     Friend WithEvents tblTaxesPT As DataGridView
     Friend WithEvents Panel9 As Panel
     Friend WithEvents TableLayoutPanel7 As TableLayoutPanel
-    Friend WithEvents Panel1 As Panel
-    Friend WithEvents Label32 As Label
-    Friend WithEvents sprFicaP As NumericUpDown
-    Friend WithEvents sprFUIP As NumericUpDown
-    Friend WithEvents sprSUIP As NumericUpDown
-    Friend WithEvents Label33 As Label
-    Friend WithEvents Label34 As Label
-    Friend WithEvents clmEmployeeP As DataGridViewTextBoxColumn
-    Friend WithEvents FICAP As DataGridViewTextBoxColumn
-    Friend WithEvents FUIP As DataGridViewTextBoxColumn
-    Friend WithEvents SUIP As DataGridViewTextBoxColumn
-    Friend WithEvents PTTOTAL As DataGridViewTextBoxColumn
     Friend WithEvents TableLayoutPanel10 As TableLayoutPanel
     Friend WithEvents TableLayoutPanel11 As TableLayoutPanel
     Friend WithEvents TableLayoutPanel12 As TableLayoutPanel
@@ -2894,9 +3396,7 @@ Partial Class Taxes
     Friend WithEvents Overhead As DataGridViewTextBoxColumn
     Friend WithEvents Profit As DataGridViewTextBoxColumn
     Friend WithEvents STTOTAL As DataGridViewTextBoxColumn
-    Friend WithEvents Panel10 As Panel
     Friend WithEvents tblAverageP As DataGridView
-    Friend WithEvents TableLayoutPanel15 As TableLayoutPanel
     Friend WithEvents Label35 As Label
     Friend WithEvents Label54 As Label
     Friend WithEvents Label53 As Label
@@ -2953,4 +3453,60 @@ Partial Class Taxes
     Friend WithEvents Label27 As Label
     Friend WithEvents Panel18 As Panel
     Friend WithEvents Panel17 As Panel
+    Friend WithEvents sprProfitP As NumericUpDown
+    Friend WithEvents sprOverheadP As NumericUpDown
+    Friend WithEvents sprScaffoldP As NumericUpDown
+    Friend WithEvents sprFringeP As NumericUpDown
+    Friend WithEvents sprGenLiabP As NumericUpDown
+    Friend WithEvents Label60 As Label
+    Friend WithEvents sprWCP As NumericUpDown
+    Friend WithEvents sprSUIP As NumericUpDown
+    Friend WithEvents Label59 As Label
+    Friend WithEvents sprFUIP As NumericUpDown
+    Friend WithEvents Label32 As Label
+    Friend WithEvents sprFicaP As NumericUpDown
+    Friend WithEvents Label33 As Label
+    Friend WithEvents Label34 As Label
+    Friend WithEvents Label61 As Label
+    Friend WithEvents Label62 As Label
+    Friend WithEvents Label63 As Label
+    Friend WithEvents Label64 As Label
+    Friend WithEvents Label65 As Label
+    Friend WithEvents Label66 As Label
+    Friend WithEvents Label67 As Label
+    Friend WithEvents Label68 As Label
+    Friend WithEvents Label69 As Label
+    Friend WithEvents Label70 As Label
+    Friend WithEvents Label71 As Label
+    Friend WithEvents Label72 As Label
+    Friend WithEvents Label73 As Label
+    Friend WithEvents sprUmbrP As NumericUpDown
+    Friend WithEvents sprPollotionP As NumericUpDown
+    Friend WithEvents sprHealtP As NumericUpDown
+    Friend WithEvents sprSmallP As NumericUpDown
+    Friend WithEvents sprPPEP As NumericUpDown
+    Friend WithEvents sprConsumableP As NumericUpDown
+    Friend WithEvents sprYoYosP As NumericUpDown
+    Friend WithEvents sprMeshP As NumericUpDown
+    Friend WithEvents sprMiselaneosP As NumericUpDown
+    Friend WithEvents clmEmployeeP As DataGridViewTextBoxColumn
+    Friend WithEvents FICAP As DataGridViewTextBoxColumn
+    Friend WithEvents FUIP As DataGridViewTextBoxColumn
+    Friend WithEvents SUIP As DataGridViewTextBoxColumn
+    Friend WithEvents clmWCP As DataGridViewTextBoxColumn
+    Friend WithEvents clmGenLianP As DataGridViewTextBoxColumn
+    Friend WithEvents clmUmbrP As DataGridViewTextBoxColumn
+    Friend WithEvents clmPollutionP As DataGridViewTextBoxColumn
+    Friend WithEvents clmHealtP As DataGridViewTextBoxColumn
+    Friend WithEvents clmFringeP As DataGridViewTextBoxColumn
+    Friend WithEvents clmSmallP As DataGridViewTextBoxColumn
+    Friend WithEvents clmPPEP As DataGridViewTextBoxColumn
+    Friend WithEvents clmConsumableP As DataGridViewTextBoxColumn
+    Friend WithEvents clmScaffoldP As DataGridViewTextBoxColumn
+    Friend WithEvents clmYoyosP As DataGridViewTextBoxColumn
+    Friend WithEvents clmMeshP As DataGridViewTextBoxColumn
+    Friend WithEvents clmMiselaneosP As DataGridViewTextBoxColumn
+    Friend WithEvents clmOverheadP As DataGridViewTextBoxColumn
+    Friend WithEvents clmProfitP As DataGridViewTextBoxColumn
+    Friend WithEvents PTTOTAL As DataGridViewTextBoxColumn
 End Class

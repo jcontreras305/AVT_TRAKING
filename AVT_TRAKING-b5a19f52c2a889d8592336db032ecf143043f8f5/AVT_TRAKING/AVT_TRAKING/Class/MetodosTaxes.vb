@@ -110,7 +110,6 @@ end", conn)
         Finally
             desconectar()
         End Try
-
     End Function
 
     Public Function selectTotalHoursCount(ByVal jobNo As String, ByVal beginDate As Date, ByVal endDate As Date) As Decimal()

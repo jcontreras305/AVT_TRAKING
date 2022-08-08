@@ -470,7 +470,7 @@ where tk.task = '" + idTask + "' and tk.idAuxWO = '" + idWO + "'", conn)
     Public Function llenarTablaMaterialsIds(ByVal tabla As DataTable) As Boolean
         Try
             conectar()
-            Dim cmd As New SqlCommand("select idMaterial,CONCAT(number,' ' ,name) as name from material", conn)
+            Dim cmd As New SqlCommand("select idMaterial,CONCAT(number,' ' ,name) as 'Material',code  as 'Class'from material", conn)
             Dim reader As SqlDataReader = cmd.ExecuteReader
             tabla.Clear()
             Dim column As DataColumn
@@ -489,12 +489,20 @@ where tk.task = '" + idTask + "' and tk.idAuxWO = '" + idWO + "'", conn)
                 column.ReadOnly = False
                 column.Unique = False
                 tabla.Columns.Add(column)
+                column = New DataColumn()
+                column.DataType = System.Type.GetType("System.String")
+                column.ColumnName = "Class"
+                column.AutoIncrement = False
+                column.ReadOnly = False
+                column.Unique = False
+                tabla.Columns.Add(column)
             End If
             While reader.Read()
                 Dim row As DataRow
                 row = tabla.NewRow()
                 row("id") = reader("idMaterial")
-                row("Material") = reader("name")
+                row("Material") = reader("Material")
+                row("Class") = reader("Class")
                 tabla.Rows.Add(row)
             End While
             desconectar()

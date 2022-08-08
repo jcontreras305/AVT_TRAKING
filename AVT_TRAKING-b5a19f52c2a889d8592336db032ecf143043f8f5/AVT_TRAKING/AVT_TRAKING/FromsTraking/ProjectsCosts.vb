@@ -1644,10 +1644,12 @@ Public Class ProjectsCosts
             mensaje = If(mensaje = "", "Check the 'Amount' Cell.", vbCrLf + "Check the 'Amount' Cell.")
         End If
         mtdJobs.llenarTablaMaterialsIds(listIdsMaterial)
-        If tblMaterialProjects.Rows(fila).Cells("Material Code").GetType.Name = "DataGridViewComboBox" Then
+        If tblMaterialProjects.Rows(fila).Cells("Material Code").GetType.Name = "DataGridViewComboBoxCell" Then
             If tblMaterialProjects.Rows(fila).Cells("Material Code").Value IsNot DBNull.Value Then
                 For Each row As DataRow In listIdsMaterial.Rows
-                    If row.Item(1) = tblMaterialProjects.Rows(fila).Cells("Material Code").Value Then
+                    Dim array() As String = tblMaterialProjects.Rows(fila).Cells("Material Code").Value.ToString.Split(" ")
+                    Dim arrayL() As String = row.ItemArray(1).ToString.Split(" ")
+                    If arrayL(0) = array(0) Then
                         datosMaterial.Add(row.Item(0))
                         Exit For
                     End If

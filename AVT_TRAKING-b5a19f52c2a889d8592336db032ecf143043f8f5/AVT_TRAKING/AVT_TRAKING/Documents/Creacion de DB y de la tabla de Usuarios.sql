@@ -1248,6 +1248,19 @@ GO
 --##########################################################################################
 --##################  TABLA DE PRODUCT MODIFICATION ########################################
 --##########################################################################################
+CREATE TABLE [dbo].[productJob](
+	[idProduct] [int] NOT NULL,
+	[jobNo] [bigint] NOT NULL,
+	[qty] [float] NULL
+)
+GO
+
+ALTER TABLE productJob WITH CHECK ADD CONSTRAINT pk_idProduct_jobNo
+PRIMARY KEY(idProduct,jobNo)
+go
+--##########################################################################################
+--##################  TABLA DE PRODUCT MODIFICATION ########################################
+--##########################################################################################
 
 create table productModification(
 	idProductModification varchar(36) primary key not null,
@@ -2773,6 +2786,18 @@ GO
 
 ALTER TABLE productDismantle WITH CHECK ADD CONSTRAINT fk_tag_productDismantle 
 FOREIGN KEY(tag) REFERENCES scaffoldTraking(tag)
+GO
+
+--##########################################################################################
+--##################  FOREIG KEYS PRODUCT JOB ##############################################
+--##########################################################################################
+
+ALTER TABLE productJob  WITH CHECK ADD CONSTRAINT fk_idProduct_productJob FOREIGN KEY(idProduct)
+REFERENCES product (idProduct)
+GO
+
+ALTER TABLE productJob  WITH CHECK ADD  CONSTRAINT fk_jobNo_productJob FOREIGN KEY(jobNo)
+REFERENCES job (jobNo)
 GO
 
 --##########################################################################################
