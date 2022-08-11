@@ -13,7 +13,7 @@ Public Class MetodosTaxes
             While rd.Read()
                 tx.idTaxes = rd("idTaxesST")
                 tx.JobNo = rd("jobNo")
-                tx.TotalHours = rd("totalHours")
+                'tx.TotalHours = rd("totalHours")
                 tx.FICA = rd("FICA")
                 tx.FUI = rd("FUI")
                 tx.SUI = rd("SUI")
@@ -42,8 +42,8 @@ Public Class MetodosTaxes
                 tx.QtyCraftsman = rd("QtyCraftsman")
                 tx.QtyApprentice = rd("QtyApprentice")
                 tx.QtyHelper = rd("QtyHelper")
-                tx.BeginDaTe = If(rd("beginDate") Is DBNull.Value, System.DateTime.Today, rd("beginDate"))
-                tx.EndDate = If(rd("endDate") Is DBNull.Value, System.DateTime.Today, rd("endDate"))
+                'tx.BeginDaTe = If(rd("beginDate") Is DBNull.Value, System.DateTime.Today, rd("beginDate"))
+                'tx.EndDate = If(rd("endDate") Is DBNull.Value, System.DateTime.Today, rd("endDate"))
             End While
             rd.Close()
             'Datos para OT
@@ -51,10 +51,25 @@ Public Class MetodosTaxes
             Dim rd1 As SqlDataReader = cmd1.ExecuteReader()
             While rd1.Read()
                 tx.idTaxesP = rd1("idTaxesPT")
-                tx.TotalHoursP = rd1("totalHours")
+                'tx.TotalHoursP = rd1("totalHours")
                 tx.FICAP = rd1("FICA")
                 tx.FUIP = rd1("FUI")
                 tx.SUIP = rd1("SUI")
+                tx.WCP = rd1("WC")
+                tx.GenLiabP = rd1("GenLiab")
+                tx.UmbrP = rd1("Umbr")
+                tx.PollutionP = rd1("Pollution")
+                tx.HealtP = rd1("Healt")
+                tx.FringeP = rd1("Fringe")
+                tx.SmallP = rd1("Small")
+                tx.PPEP = rd1("PPE")
+                tx.ConsumableP = rd1("Consumable")
+                tx.ScaffoldP = rd1("Scaffold")
+                tx.YoYosP = rd1("Yoyo")
+                tx.MeshP = rd1("Mesh")
+                tx.MiselaneosP = rd1("Miselaneos")
+                tx.OverheadP = rd1("Overhead")
+                tx.ProfitP = rd1("Profit")
                 tx.BWForemanP = rd1("BWForeman")
                 tx.BWJourneymanP = rd1("BWJourneyman")
                 tx.BWCraftsmanP = rd1("BWCraftsman")
@@ -79,25 +94,23 @@ Public Class MetodosTaxes
         Try
             conectar()
             Dim cmd As New SqlCommand("
-if(select COUNT(*) from taxesST where jobNo = '" + tx.JobNo + "' or idTaxesST = '" + tx.idTaxes + "')=0
+if(select COUNT(*) from taxesST where jobNo = '" & tx.JobNo & "' or idTaxesST = '" & tx.idTaxes & "')=0
 begin
-	insert into taxesST values(NEWID()," + tx.TotalHours.ToString() + "," + tx.FICA.ToString() + "," + tx.FUI.ToString() + "," + tx.SUI.ToString() + "," + tx.WC.ToString() + "," + tx.GenLiab.ToString() + "," + tx.Umbr.ToString() + "," + tx.Pollution.ToString() + "," + tx.Healt.ToString() + "," + tx.Fringe.ToString() + "," + tx.Small.ToString() + "," + tx.PPE.ToString() + "," + tx.Consumable.ToString() + "," + tx.Scaffold.ToString() + "," + tx.YoYos.ToString() + "," + tx.Mesh.ToString() + "," + tx.Miselaneos.ToString() + "," + tx.Overhead.ToString() + "," + tx.Profit.ToString() + "," + tx.BWForeman.ToString() + "," + tx.BWJourneyman.ToString() + "," + tx.BWCraftsman.ToString() + "," + tx.BWApprentice.ToString() + "," + tx.BWHelper.ToString() + "," + tx.QtyForeman.ToString() + "," + tx.QtyJourneyman.ToString() + "," + tx.QtyCraftsman.ToString() + "," + tx.QtyApprentice.ToString() + "," + tx.QtyHelper.ToString() + ",'" + tx.JobNo + "','" + validaFechaParaSQl(tx.BeginDaTe) + "','" + validaFechaParaSQl(tx.EndDate) + "')
-	insert into taxesPT values(NEWID()," + tx.TotalHours.ToString() + "," + tx.FICAP.ToString() + "," + tx.FUIP.ToString() + ", " + tx.SUIP.ToString() + "," + tx.BWForemanP.ToString() + "," + tx.BWJourneymanP.ToString() + "," + tx.BWCraftsmanP.ToString() + "," + tx.BWApprenticeP.ToString() + "," + tx.BWHelperP.ToString() + ", " + tx.QtyForemanP.ToString() + "," + tx.QtyJourneymanP.ToString() + "," + tx.QtyCraftsmanP.ToString() + "," + tx.QtyApprenticeP.ToString() + "," + tx.QtyHelperP.ToString() + ",'" + tx.JobNo + "','" + validaFechaParaSQl(tx.BeginDaTe) + "','" + validaFechaParaSQl(tx.EndDate) + "')
+	insert into taxesST values(NEWID()," & tx.FICA.ToString() & "," & tx.FUI.ToString() & "," & tx.SUI.ToString() & "," & tx.WC.ToString() & "," & tx.GenLiab.ToString() & "," & tx.Umbr.ToString() & "," & tx.Pollution.ToString() & "," & tx.Healt.ToString() & "," & tx.Fringe.ToString() & "," & tx.Small.ToString() & "," & tx.PPE.ToString() & "," & tx.Consumable.ToString() & "," & tx.Scaffold.ToString() & "," & tx.YoYos.ToString() & "," & tx.Mesh.ToString() & "," & tx.Miselaneos.ToString() & "," & tx.Overhead.ToString() & "," & tx.Profit.ToString() & "," & tx.BWForeman.ToString() & "," & tx.BWJourneyman.ToString() & "," & tx.BWCraftsman.ToString() & "," & tx.BWApprentice.ToString() & "," & tx.BWHelper.ToString() & "," & tx.QtyForeman.ToString() & "," & tx.QtyJourneyman.ToString() & "," & tx.QtyCraftsman.ToString() & "," & tx.QtyApprentice.ToString() & "," & tx.QtyHelper.ToString() & ",'" & tx.JobNo & "')
+	insert into taxesPT values(NEWID()," & tx.FICAP.ToString() & "," & tx.FUIP.ToString() & ", " & tx.SUIP.ToString() & "," & tx.WCP.ToString() & "," & tx.GenLiabP.ToString() & "," & tx.UmbrP.ToString() & "," & tx.PollutionP.ToString() & "," & tx.HealtP.ToString() & "," & tx.FringeP.ToString() & "," & tx.SmallP.ToString() & "," & tx.PPEP.ToString() & "," & tx.ConsumableP.ToString() & "," & tx.ScaffoldP.ToString() & "," & tx.YoYosP.ToString() & "," & tx.MeshP.ToString() & "," & tx.MiselaneosP.ToString() & "," & tx.OverheadP.ToString() & "," & tx.ProfitP.ToString() & "," & tx.BWForemanP.ToString() & "," & tx.BWJourneymanP.ToString() & "," & tx.BWCraftsmanP.ToString() & "," & tx.BWApprenticeP.ToString() & "," & tx.BWHelperP.ToString() & ", " & tx.QtyForemanP.ToString() & "," & tx.QtyJourneymanP.ToString() & "," & tx.QtyCraftsmanP.ToString() & "," & tx.QtyApprenticeP.ToString() & "," & tx.QtyHelperP.ToString() & ",'" & tx.JobNo & "')
 end
-else if(select COUNT(*) from taxesST where jobNo = '" + tx.JobNo + "' or idTaxesST = '" + tx.idTaxes + "')>0
-begin 
-	update taxesST set totalHours = " + tx.TotalHours.ToString() + ",FICA= " + tx.FICA.ToString() + ",FUI= " + tx.FUI.ToString() + ",SUI= " + tx.SUI.ToString() + ",WC= " + tx.WC.ToString() + ",GenLiab= " + tx.GenLiab.ToString() + ",Umbr= " + tx.Umbr.ToString() + ",Pollution= " + tx.Pollution.ToString() + ",Healt= " + tx.Healt.ToString() + ",Fringe= " + tx.Fringe.ToString() + ",Small= " + tx.Small.ToString() + ",Consumable= " + tx.Consumable.ToString() + ",Scaffold= " + tx.Scaffold.ToString() + ",YoYo= " + tx.YoYos.ToString() + ",Mesh= " + tx.Mesh.ToString() + ",Miselaneos= " + tx.Miselaneos.ToString() + ",Overhead= " + tx.Overhead.ToString() + ",Profit= " + tx.Profit.ToString() + ",
-	BWForeman= " + tx.BWForeman.ToString() + ",BWJourneyman= " + tx.BWJourneyman.ToString() + ",BWCraftsman= " + tx.BWCraftsman.ToString() + ",BWApprentice= " + tx.BWApprentice.ToString() + ",BWHelper= " + tx.BWHelper.ToString() + ",
-	QtyForeman= " + tx.QtyForeman.ToString() + ",QtyJourneyman= " + tx.QtyJourneyman.ToString() + ",QtyCraftsman= " + tx.QtyCraftsman.ToString() + ",QtyApprentice= " + tx.QtyApprentice.ToString() + ",QtyHelper= " + tx.QtyHelper.ToString() + ",
-	beginDate= '" + validaFechaParaSQl(tx.BeginDaTe) + "',endDate= '" + validaFechaParaSQl(tx.EndDate) + "'
-    where idTaxesST = '" + tx.idTaxes + "' or jobNo = '" + tx.JobNo + "'
-	
-    update taxesPT set totalHours = " + tx.TotalHours.ToString() + ",FICA= " + tx.FICAP.ToString() + ",FUI= " + tx.FUIP.ToString() + ",SUI= " + tx.SUIP.ToString() + ",
-	BWForeman= " + tx.BWForemanP.ToString() + ",BWJourneyman= " + tx.BWJourneymanP.ToString() + ",BWCraftsman= " + tx.BWCraftsmanP.ToString() + ",BWApprentice= " + tx.BWApprenticeP.ToString() + ",BWHelper= " + tx.BWHelperP.ToString() + ",
-	QtyForeman= " + tx.QtyForemanP.ToString() + ",QtyJourneyman= " + tx.QtyJourneymanP.ToString() + ",QtyCraftsman= " + tx.QtyCraftsmanP.ToString() + ",QtyApprentice= " + tx.QtyApprenticeP.ToString() + ",QtyHelper= " + tx.QtyHelperP.ToString() + ",
-	beginDate= '" + validaFechaParaSQl(tx.BeginDaTe) + "',endDate= '" + validaFechaParaSQl(tx.EndDate) + "'
-    where idTaxesPT = '" + tx.idTaxesP + "' or jobNO = '" + tx.JobNo + "'
-end", conn)
+else if (select COUNT(*) from taxesST where jobNo = '" + tx.JobNo + "' or idTaxesST = '" + tx.idTaxes + "')>0
+begin
+    update taxesST set FICA = " & tx.FICA.ToString() & ", FUI = " & tx.FUI.ToString() & ", SUI = " & tx.SUI.ToString() & ", WC = " & tx.WC.ToString() & ", GenLiab = " & tx.GenLiab.ToString() & ", Umbr = " & tx.Umbr.ToString() & ", Pollution = " & tx.Pollution.ToString() & ", Healt = " & tx.Healt.ToString() & ", Fringe = " & tx.Fringe.ToString() & ", Small = " & tx.Small.ToString() & ", PPE = " & tx.PPE.ToString() & " ,Consumable = " & tx.Consumable.ToString() & ", Scaffold = " & tx.Scaffold.ToString() & ", YoYo = " & tx.YoYos.ToString() & ", Mesh = " & tx.Mesh.ToString() & ", Miselaneos = " & tx.Miselaneos.ToString() & ", Overhead = " & tx.Overhead.ToString() & ", Profit = " & tx.Profit.ToString() & ",
+        BWForeman = " & tx.BWForeman.ToString() & ", BWJourneyman = " & tx.BWJourneyman.ToString() & ", BWCraftsman = " & tx.BWCraftsman.ToString() & ", BWApprentice = " & tx.BWApprentice.ToString() & ", BWHelper = " & tx.BWHelper.ToString() & ",
+        QtyForeman = " & tx.QtyForeman.ToString() & ", QtyJourneyman = " & tx.QtyJourneyman.ToString() & ", QtyCraftsman = " & tx.QtyCraftsman.ToString() & ", QtyApprentice = " & tx.QtyApprentice.ToString() & ", QtyHelper = " & tx.QtyHelper.ToString() & "
+        where idTaxesST = '" & tx.idTaxes & "' or jobNo = '" & tx.JobNo & "'
+
+    update taxesPT set FICA = " & tx.FICAP.ToString() & ", FUI = " & tx.FUIP.ToString() & ", SUI = " & tx.SUIP.ToString() & ", WC = " & tx.WCP.ToString() & ", GenLiab = " & tx.GenLiabP.ToString() & ", Umbr = " & tx.UmbrP.ToString() & ", Pollution = " & tx.PollutionP.ToString() & ", Healt = " & tx.HealtP.ToString() & ", Fringe = " & tx.FringeP.ToString() & ", Small = " & tx.SmallP.ToString() & ",PPE = " & tx.PPEP.ToString() & " ,Consumable = " & tx.ConsumableP.ToString() & ", Scaffold = " & tx.ScaffoldP.ToString() & ", YoYo = " & tx.YoYosP.ToString() & ", Mesh = " & tx.MeshP.ToString() & ", Miselaneos = " & tx.MiselaneosP.ToString() & ", Overhead = " & tx.OverheadP.ToString() & ", Profit = " & tx.ProfitP.ToString() & ",
+        BWForeman = " & tx.BWForemanP.ToString() & ", BWJourneyman = " & tx.BWJourneymanP.ToString() & ", BWCraftsman = " & tx.BWCraftsmanP.ToString() & ", BWApprentice = " & tx.BWApprenticeP.ToString() & ", BWHelper = " & tx.BWHelperP.ToString() & ",
+        QtyForeman = " & tx.QtyForemanP.ToString() & ", QtyJourneyman = " & tx.QtyJourneymanP.ToString() & ", QtyCraftsman = " & tx.QtyCraftsmanP.ToString() & ", QtyApprentice = " & tx.QtyApprenticeP.ToString() & ", QtyHelper = " & tx.QtyHelperP.ToString() & "
+        where idTaxesPT = '" & tx.idTaxesP & "' or jobNO = '" & tx.JobNo & "'
+            end", conn)
             If cmd.ExecuteNonQuery() > 0 Then
                 Return True
             Else

@@ -204,15 +204,30 @@ Partial Class Taxes
         Me.GroupBox3 = New System.Windows.Forms.GroupBox()
         Me.Panel18 = New System.Windows.Forms.Panel()
         Me.tblAverageP = New System.Windows.Forms.DataGridView()
-        Me.EmployeeBWP = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.FICAAVP = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.FUIAVP = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.SUIAVP = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.PTTOTALAV = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Panel14 = New System.Windows.Forms.Panel()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
         Me.Panel17 = New System.Windows.Forms.Panel()
         Me.tblTaxesPT = New System.Windows.Forms.DataGridView()
+        Me.clmEmployeeP = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.FICAP = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.FUIP = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.SUIP = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.clmWCP = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.clmGenLianP = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.clmUmbrP = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.clmPollutionP = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.clmHealtP = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.clmFringeP = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.clmSmallP = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.clmPPEP = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.clmConsumableP = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.clmScaffoldP = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.clmYoyosP = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.clmMeshP = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.clmMiselaneosP = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.clmOverheadP = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.clmProfitP = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.PTTOTAL = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.TableLayoutPanel7 = New System.Windows.Forms.TableLayoutPanel()
         Me.sprProfitP = New System.Windows.Forms.NumericUpDown()
         Me.sprOverheadP = New System.Windows.Forms.NumericUpDown()
@@ -242,7 +257,7 @@ Partial Class Taxes
         Me.Label72 = New System.Windows.Forms.Label()
         Me.Label73 = New System.Windows.Forms.Label()
         Me.sprUmbrP = New System.Windows.Forms.NumericUpDown()
-        Me.sprPollotionP = New System.Windows.Forms.NumericUpDown()
+        Me.sprPollutionP = New System.Windows.Forms.NumericUpDown()
         Me.sprHealtP = New System.Windows.Forms.NumericUpDown()
         Me.sprSmallP = New System.Windows.Forms.NumericUpDown()
         Me.sprPPEP = New System.Windows.Forms.NumericUpDown()
@@ -274,26 +289,26 @@ Partial Class Taxes
         Me.OverHeadWkly = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.ProfitWkly = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.TotalWkly = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.clmEmployeeP = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.FICAP = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.FUIP = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.SUIP = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.clmWCP = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.clmGenLianP = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.clmUmbrP = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.clmPollutionP = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.clmHealtP = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.clmFringeP = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.clmSmallP = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.clmPPEP = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.clmConsumableP = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.clmScaffoldP = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.clmYoyosP = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.clmMeshP = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.clmMiselaneosP = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.clmOverheadP = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.clmProfitP = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.PTTOTAL = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.EmployeeBWP = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.FICAAVP = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.FUIAVP = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.SUIAVP = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.WCAVP = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.GenLiabAVP = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.UmbrAVP = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.PollutionAVP = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.HealtAVP = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.FringeAVP = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.SmallAVP = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.PPEAVP = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ConsumableAVP = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ScaffoldAVP = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.YoyosAVP = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.MeshAVP = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.MiselaneosAVP = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.OverheadAVP = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ProfitAVP = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.PTTOTALAV = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.TableLayoutPanel1.SuspendLayout()
         Me.TitleBar.SuspendLayout()
         CType(Me.sprHoursOT, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -389,7 +404,7 @@ Partial Class Taxes
         CType(Me.sprFUIP, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.sprFicaP, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.sprUmbrP, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.sprPollotionP, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.sprPollutionP, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.sprHealtP, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.sprSmallP, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.sprPPEP, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -2261,10 +2276,10 @@ Partial Class Taxes
         '
         Me.tblAverageP.AllowUserToAddRows = False
         Me.tblAverageP.AllowUserToDeleteRows = False
-        Me.tblAverageP.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
+        Me.tblAverageP.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells
         Me.tblAverageP.BackgroundColor = System.Drawing.SystemColors.Window
         Me.tblAverageP.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.tblAverageP.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.EmployeeBWP, Me.FICAAVP, Me.FUIAVP, Me.SUIAVP, Me.PTTOTALAV})
+        Me.tblAverageP.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.EmployeeBWP, Me.FICAAVP, Me.FUIAVP, Me.SUIAVP, Me.WCAVP, Me.GenLiabAVP, Me.UmbrAVP, Me.PollutionAVP, Me.HealtAVP, Me.FringeAVP, Me.SmallAVP, Me.PPEAVP, Me.ConsumableAVP, Me.ScaffoldAVP, Me.YoyosAVP, Me.MeshAVP, Me.MiselaneosAVP, Me.OverheadAVP, Me.ProfitAVP, Me.PTTOTALAV})
         DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
         DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window
         DataGridViewCellStyle1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -2279,39 +2294,6 @@ Partial Class Taxes
         Me.tblAverageP.ReadOnly = True
         Me.tblAverageP.Size = New System.Drawing.Size(767, 77)
         Me.tblAverageP.TabIndex = 0
-        '
-        'EmployeeBWP
-        '
-        Me.EmployeeBWP.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
-        Me.EmployeeBWP.Frozen = True
-        Me.EmployeeBWP.HeaderText = "EmployeeBW"
-        Me.EmployeeBWP.Name = "EmployeeBWP"
-        Me.EmployeeBWP.ReadOnly = True
-        Me.EmployeeBWP.Width = 170
-        '
-        'FICAAVP
-        '
-        Me.FICAAVP.HeaderText = "FICA AV"
-        Me.FICAAVP.Name = "FICAAVP"
-        Me.FICAAVP.ReadOnly = True
-        '
-        'FUIAVP
-        '
-        Me.FUIAVP.HeaderText = "FUI AV"
-        Me.FUIAVP.Name = "FUIAVP"
-        Me.FUIAVP.ReadOnly = True
-        '
-        'SUIAVP
-        '
-        Me.SUIAVP.HeaderText = "SUI AV"
-        Me.SUIAVP.Name = "SUIAVP"
-        Me.SUIAVP.ReadOnly = True
-        '
-        'PTTOTALAV
-        '
-        Me.PTTOTALAV.HeaderText = "PT TOTAL AV"
-        Me.PTTOTALAV.Name = "PTTOTALAV"
-        Me.PTTOTALAV.ReadOnly = True
         '
         'Panel14
         '
@@ -2367,6 +2349,131 @@ Partial Class Taxes
         Me.tblTaxesPT.Size = New System.Drawing.Size(767, 180)
         Me.tblTaxesPT.TabIndex = 0
         '
+        'clmEmployeeP
+        '
+        Me.clmEmployeeP.HeaderText = "Employee"
+        Me.clmEmployeeP.Name = "clmEmployeeP"
+        Me.clmEmployeeP.ReadOnly = True
+        Me.clmEmployeeP.Width = 78
+        '
+        'FICAP
+        '
+        Me.FICAP.HeaderText = "FICA"
+        Me.FICAP.Name = "FICAP"
+        Me.FICAP.ReadOnly = True
+        Me.FICAP.Width = 55
+        '
+        'FUIP
+        '
+        Me.FUIP.HeaderText = "FUI"
+        Me.FUIP.Name = "FUIP"
+        Me.FUIP.ReadOnly = True
+        Me.FUIP.Width = 49
+        '
+        'SUIP
+        '
+        Me.SUIP.HeaderText = "SUI"
+        Me.SUIP.Name = "SUIP"
+        Me.SUIP.ReadOnly = True
+        Me.SUIP.Width = 50
+        '
+        'clmWCP
+        '
+        Me.clmWCP.HeaderText = "WC"
+        Me.clmWCP.Name = "clmWCP"
+        Me.clmWCP.Width = 50
+        '
+        'clmGenLianP
+        '
+        Me.clmGenLianP.HeaderText = "GenLian"
+        Me.clmGenLianP.Name = "clmGenLianP"
+        Me.clmGenLianP.Width = 72
+        '
+        'clmUmbrP
+        '
+        Me.clmUmbrP.HeaderText = "Umbr"
+        Me.clmUmbrP.Name = "clmUmbrP"
+        Me.clmUmbrP.Width = 57
+        '
+        'clmPollutionP
+        '
+        Me.clmPollutionP.HeaderText = "Pollution"
+        Me.clmPollutionP.Name = "clmPollutionP"
+        Me.clmPollutionP.Width = 72
+        '
+        'clmHealtP
+        '
+        Me.clmHealtP.HeaderText = "Healt"
+        Me.clmHealtP.Name = "clmHealtP"
+        Me.clmHealtP.Width = 57
+        '
+        'clmFringeP
+        '
+        Me.clmFringeP.HeaderText = "Fringe"
+        Me.clmFringeP.Name = "clmFringeP"
+        Me.clmFringeP.Width = 61
+        '
+        'clmSmallP
+        '
+        Me.clmSmallP.HeaderText = "Small"
+        Me.clmSmallP.Name = "clmSmallP"
+        Me.clmSmallP.Width = 57
+        '
+        'clmPPEP
+        '
+        Me.clmPPEP.HeaderText = "PPE"
+        Me.clmPPEP.Name = "clmPPEP"
+        Me.clmPPEP.Width = 53
+        '
+        'clmConsumableP
+        '
+        Me.clmConsumableP.HeaderText = "Consumable"
+        Me.clmConsumableP.Name = "clmConsumableP"
+        Me.clmConsumableP.Width = 90
+        '
+        'clmScaffoldP
+        '
+        Me.clmScaffoldP.HeaderText = "Scaffold"
+        Me.clmScaffoldP.Name = "clmScaffoldP"
+        Me.clmScaffoldP.Width = 71
+        '
+        'clmYoyosP
+        '
+        Me.clmYoyosP.HeaderText = "Yo-Yo's"
+        Me.clmYoyosP.Name = "clmYoyosP"
+        Me.clmYoyosP.Width = 68
+        '
+        'clmMeshP
+        '
+        Me.clmMeshP.HeaderText = "Mesh"
+        Me.clmMeshP.Name = "clmMeshP"
+        Me.clmMeshP.Width = 58
+        '
+        'clmMiselaneosP
+        '
+        Me.clmMiselaneosP.HeaderText = "Miselaneos"
+        Me.clmMiselaneosP.Name = "clmMiselaneosP"
+        Me.clmMiselaneosP.Width = 85
+        '
+        'clmOverheadP
+        '
+        Me.clmOverheadP.HeaderText = "Overhead"
+        Me.clmOverheadP.Name = "clmOverheadP"
+        Me.clmOverheadP.Width = 79
+        '
+        'clmProfitP
+        '
+        Me.clmProfitP.HeaderText = "Profit"
+        Me.clmProfitP.Name = "clmProfitP"
+        Me.clmProfitP.Width = 56
+        '
+        'PTTOTAL
+        '
+        Me.PTTOTAL.HeaderText = "PT TOTAL"
+        Me.PTTOTAL.Name = "PTTOTAL"
+        Me.PTTOTAL.ReadOnly = True
+        Me.PTTOTAL.Width = 84
+        '
         'TableLayoutPanel7
         '
         Me.TableLayoutPanel7.ColumnCount = 10
@@ -2408,7 +2515,7 @@ Partial Class Taxes
         Me.TableLayoutPanel7.Controls.Add(Me.Label72, 8, 0)
         Me.TableLayoutPanel7.Controls.Add(Me.Label73, 8, 1)
         Me.TableLayoutPanel7.Controls.Add(Me.sprUmbrP, 3, 1)
-        Me.TableLayoutPanel7.Controls.Add(Me.sprPollotionP, 3, 2)
+        Me.TableLayoutPanel7.Controls.Add(Me.sprPollutionP, 3, 2)
         Me.TableLayoutPanel7.Controls.Add(Me.sprHealtP, 3, 3)
         Me.TableLayoutPanel7.Controls.Add(Me.sprSmallP, 5, 1)
         Me.TableLayoutPanel7.Controls.Add(Me.sprPPEP, 5, 2)
@@ -2753,16 +2860,16 @@ Partial Class Taxes
         Me.sprUmbrP.TabIndex = 38
         Me.sprUmbrP.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
-        'sprPollotionP
+        'sprPollutionP
         '
-        Me.sprPollotionP.DecimalPlaces = 2
-        Me.sprPollotionP.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.sprPollotionP.Increment = New Decimal(New Integer() {10, 0, 0, 131072})
-        Me.sprPollotionP.Location = New System.Drawing.Point(294, 55)
-        Me.sprPollotionP.Name = "sprPollotionP"
-        Me.sprPollotionP.Size = New System.Drawing.Size(91, 20)
-        Me.sprPollotionP.TabIndex = 39
-        Me.sprPollotionP.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        Me.sprPollutionP.DecimalPlaces = 2
+        Me.sprPollutionP.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.sprPollutionP.Increment = New Decimal(New Integer() {10, 0, 0, 131072})
+        Me.sprPollutionP.Location = New System.Drawing.Point(294, 55)
+        Me.sprPollutionP.Name = "sprPollutionP"
+        Me.sprPollutionP.Size = New System.Drawing.Size(91, 20)
+        Me.sprPollutionP.TabIndex = 39
+        Me.sprPollutionP.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         '
         'sprHealtP
         '
@@ -2985,130 +3092,147 @@ Partial Class Taxes
         Me.TotalWkly.HeaderText = "Total"
         Me.TotalWkly.Name = "TotalWkly"
         '
-        'clmEmployeeP
+        'EmployeeBWP
         '
-        Me.clmEmployeeP.HeaderText = "Employee"
-        Me.clmEmployeeP.Name = "clmEmployeeP"
-        Me.clmEmployeeP.ReadOnly = True
-        Me.clmEmployeeP.Width = 78
+        Me.EmployeeBWP.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None
+        Me.EmployeeBWP.Frozen = True
+        Me.EmployeeBWP.HeaderText = "EmployeeBW"
+        Me.EmployeeBWP.Name = "EmployeeBWP"
+        Me.EmployeeBWP.ReadOnly = True
+        Me.EmployeeBWP.Width = 170
         '
-        'FICAP
+        'FICAAVP
         '
-        Me.FICAP.HeaderText = "FICA"
-        Me.FICAP.Name = "FICAP"
-        Me.FICAP.ReadOnly = True
-        Me.FICAP.Width = 55
+        Me.FICAAVP.HeaderText = "FICA-AV"
+        Me.FICAAVP.Name = "FICAAVP"
+        Me.FICAAVP.ReadOnly = True
+        Me.FICAAVP.Width = 72
         '
-        'FUIP
+        'FUIAVP
         '
-        Me.FUIP.HeaderText = "FUI"
-        Me.FUIP.Name = "FUIP"
-        Me.FUIP.ReadOnly = True
-        Me.FUIP.Width = 49
+        Me.FUIAVP.HeaderText = "FUI-AV"
+        Me.FUIAVP.Name = "FUIAVP"
+        Me.FUIAVP.ReadOnly = True
+        Me.FUIAVP.Width = 66
         '
-        'SUIP
+        'SUIAVP
         '
-        Me.SUIP.HeaderText = "SUI"
-        Me.SUIP.Name = "SUIP"
-        Me.SUIP.ReadOnly = True
-        Me.SUIP.Width = 50
+        Me.SUIAVP.HeaderText = "SUI-AV"
+        Me.SUIAVP.Name = "SUIAVP"
+        Me.SUIAVP.ReadOnly = True
+        Me.SUIAVP.Width = 67
         '
-        'clmWCP
+        'WCAVP
         '
-        Me.clmWCP.HeaderText = "WC"
-        Me.clmWCP.Name = "clmWCP"
-        Me.clmWCP.Width = 50
+        Me.WCAVP.HeaderText = "WC-AV"
+        Me.WCAVP.Name = "WCAVP"
+        Me.WCAVP.ReadOnly = True
+        Me.WCAVP.Width = 67
         '
-        'clmGenLianP
+        'GenLiabAVP
         '
-        Me.clmGenLianP.HeaderText = "GenLian"
-        Me.clmGenLianP.Name = "clmGenLianP"
-        Me.clmGenLianP.Width = 72
+        Me.GenLiabAVP.HeaderText = "GenLiab-AV"
+        Me.GenLiabAVP.Name = "GenLiabAVP"
+        Me.GenLiabAVP.ReadOnly = True
+        Me.GenLiabAVP.Width = 89
         '
-        'clmUmbrP
+        'UmbrAVP
         '
-        Me.clmUmbrP.HeaderText = "Umbr"
-        Me.clmUmbrP.Name = "clmUmbrP"
-        Me.clmUmbrP.Width = 57
+        Me.UmbrAVP.HeaderText = "Umbr-AV"
+        Me.UmbrAVP.Name = "UmbrAVP"
+        Me.UmbrAVP.ReadOnly = True
+        Me.UmbrAVP.Width = 74
         '
-        'clmPollutionP
+        'PollutionAVP
         '
-        Me.clmPollutionP.HeaderText = "Pollution"
-        Me.clmPollutionP.Name = "clmPollutionP"
-        Me.clmPollutionP.Width = 72
+        Me.PollutionAVP.HeaderText = "Pollution-AV"
+        Me.PollutionAVP.Name = "PollutionAVP"
+        Me.PollutionAVP.ReadOnly = True
+        Me.PollutionAVP.Width = 89
         '
-        'clmHealtP
+        'HealtAVP
         '
-        Me.clmHealtP.HeaderText = "Healt"
-        Me.clmHealtP.Name = "clmHealtP"
-        Me.clmHealtP.Width = 57
+        Me.HealtAVP.HeaderText = "Healt-AV"
+        Me.HealtAVP.Name = "HealtAVP"
+        Me.HealtAVP.ReadOnly = True
+        Me.HealtAVP.Width = 74
         '
-        'clmFringeP
+        'FringeAVP
         '
-        Me.clmFringeP.HeaderText = "Fringe"
-        Me.clmFringeP.Name = "clmFringeP"
-        Me.clmFringeP.Width = 61
+        Me.FringeAVP.HeaderText = "Fringe-AV"
+        Me.FringeAVP.Name = "FringeAVP"
+        Me.FringeAVP.ReadOnly = True
+        Me.FringeAVP.Width = 78
         '
-        'clmSmallP
+        'SmallAVP
         '
-        Me.clmSmallP.HeaderText = "Small"
-        Me.clmSmallP.Name = "clmSmallP"
-        Me.clmSmallP.Width = 57
+        Me.SmallAVP.HeaderText = "Small-AV"
+        Me.SmallAVP.Name = "SmallAVP"
+        Me.SmallAVP.ReadOnly = True
+        Me.SmallAVP.Width = 74
         '
-        'clmPPEP
+        'PPEAVP
         '
-        Me.clmPPEP.HeaderText = "PPE"
-        Me.clmPPEP.Name = "clmPPEP"
-        Me.clmPPEP.Width = 53
+        Me.PPEAVP.HeaderText = "PPE-AV"
+        Me.PPEAVP.Name = "PPEAVP"
+        Me.PPEAVP.ReadOnly = True
+        Me.PPEAVP.Width = 70
         '
-        'clmConsumableP
+        'ConsumableAVP
         '
-        Me.clmConsumableP.HeaderText = "Consumable"
-        Me.clmConsumableP.Name = "clmConsumableP"
-        Me.clmConsumableP.Width = 90
+        Me.ConsumableAVP.HeaderText = "Consumable-AV"
+        Me.ConsumableAVP.Name = "ConsumableAVP"
+        Me.ConsumableAVP.ReadOnly = True
+        Me.ConsumableAVP.Width = 107
         '
-        'clmScaffoldP
+        'ScaffoldAVP
         '
-        Me.clmScaffoldP.HeaderText = "Scaffold"
-        Me.clmScaffoldP.Name = "clmScaffoldP"
-        Me.clmScaffoldP.Width = 71
+        Me.ScaffoldAVP.HeaderText = "Scaffold-AV"
+        Me.ScaffoldAVP.Name = "ScaffoldAVP"
+        Me.ScaffoldAVP.ReadOnly = True
+        Me.ScaffoldAVP.Width = 88
         '
-        'clmYoyosP
+        'YoyosAVP
         '
-        Me.clmYoyosP.HeaderText = "Yo-Yo's"
-        Me.clmYoyosP.Name = "clmYoyosP"
-        Me.clmYoyosP.Width = 68
+        Me.YoyosAVP.HeaderText = " Yo-Yo's-AV"
+        Me.YoyosAVP.Name = "YoyosAVP"
+        Me.YoyosAVP.ReadOnly = True
+        Me.YoyosAVP.Width = 88
         '
-        'clmMeshP
+        'MeshAVP
         '
-        Me.clmMeshP.HeaderText = "Mesh"
-        Me.clmMeshP.Name = "clmMeshP"
-        Me.clmMeshP.Width = 58
+        Me.MeshAVP.HeaderText = "Mesh-AV"
+        Me.MeshAVP.Name = "MeshAVP"
+        Me.MeshAVP.ReadOnly = True
+        Me.MeshAVP.Width = 75
         '
-        'clmMiselaneosP
+        'MiselaneosAVP
         '
-        Me.clmMiselaneosP.HeaderText = "Miselaneos"
-        Me.clmMiselaneosP.Name = "clmMiselaneosP"
-        Me.clmMiselaneosP.Width = 85
+        Me.MiselaneosAVP.HeaderText = "Miselaneos-AV"
+        Me.MiselaneosAVP.Name = "MiselaneosAVP"
+        Me.MiselaneosAVP.ReadOnly = True
+        Me.MiselaneosAVP.Width = 102
         '
-        'clmOverheadP
+        'OverheadAVP
         '
-        Me.clmOverheadP.HeaderText = "Overhead"
-        Me.clmOverheadP.Name = "clmOverheadP"
-        Me.clmOverheadP.Width = 79
+        Me.OverheadAVP.HeaderText = "Overhead-AV"
+        Me.OverheadAVP.Name = "OverheadAVP"
+        Me.OverheadAVP.ReadOnly = True
+        Me.OverheadAVP.Width = 96
         '
-        'clmProfitP
+        'ProfitAVP
         '
-        Me.clmProfitP.HeaderText = "Profit"
-        Me.clmProfitP.Name = "clmProfitP"
-        Me.clmProfitP.Width = 56
+        Me.ProfitAVP.HeaderText = "Profit-AV"
+        Me.ProfitAVP.Name = "ProfitAVP"
+        Me.ProfitAVP.ReadOnly = True
+        Me.ProfitAVP.Width = 73
         '
-        'PTTOTAL
+        'PTTOTALAV
         '
-        Me.PTTOTAL.HeaderText = "PT TOTAL"
-        Me.PTTOTAL.Name = "PTTOTAL"
-        Me.PTTOTAL.ReadOnly = True
-        Me.PTTOTAL.Width = 78
+        Me.PTTOTALAV.HeaderText = "PT TOTAL-AV"
+        Me.PTTOTALAV.Name = "PTTOTALAV"
+        Me.PTTOTALAV.ReadOnly = True
+        Me.PTTOTALAV.Width = 101
         '
         'Taxes
         '
@@ -3223,7 +3347,7 @@ Partial Class Taxes
         CType(Me.sprFUIP, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.sprFicaP, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.sprUmbrP, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.sprPollotionP, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.sprPollutionP, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.sprHealtP, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.sprSmallP, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.sprPPEP, System.ComponentModel.ISupportInitialize).EndInit()
@@ -3403,11 +3527,6 @@ Partial Class Taxes
     Friend WithEvents Label52 As Label
     Friend WithEvents Label51 As Label
     Friend WithEvents Label50 As Label
-    Friend WithEvents EmployeeBWP As DataGridViewTextBoxColumn
-    Friend WithEvents FICAAVP As DataGridViewTextBoxColumn
-    Friend WithEvents FUIAVP As DataGridViewTextBoxColumn
-    Friend WithEvents SUIAVP As DataGridViewTextBoxColumn
-    Friend WithEvents PTTOTALAV As DataGridViewTextBoxColumn
     Friend WithEvents Panel11 As Panel
     Friend WithEvents Panel12 As Panel
     Friend WithEvents Panel13 As Panel
@@ -3481,7 +3600,7 @@ Partial Class Taxes
     Friend WithEvents Label72 As Label
     Friend WithEvents Label73 As Label
     Friend WithEvents sprUmbrP As NumericUpDown
-    Friend WithEvents sprPollotionP As NumericUpDown
+    Friend WithEvents sprPollutionP As NumericUpDown
     Friend WithEvents sprHealtP As NumericUpDown
     Friend WithEvents sprSmallP As NumericUpDown
     Friend WithEvents sprPPEP As NumericUpDown
@@ -3509,4 +3628,24 @@ Partial Class Taxes
     Friend WithEvents clmOverheadP As DataGridViewTextBoxColumn
     Friend WithEvents clmProfitP As DataGridViewTextBoxColumn
     Friend WithEvents PTTOTAL As DataGridViewTextBoxColumn
+    Friend WithEvents EmployeeBWP As DataGridViewTextBoxColumn
+    Friend WithEvents FICAAVP As DataGridViewTextBoxColumn
+    Friend WithEvents FUIAVP As DataGridViewTextBoxColumn
+    Friend WithEvents SUIAVP As DataGridViewTextBoxColumn
+    Friend WithEvents WCAVP As DataGridViewTextBoxColumn
+    Friend WithEvents GenLiabAVP As DataGridViewTextBoxColumn
+    Friend WithEvents UmbrAVP As DataGridViewTextBoxColumn
+    Friend WithEvents PollutionAVP As DataGridViewTextBoxColumn
+    Friend WithEvents HealtAVP As DataGridViewTextBoxColumn
+    Friend WithEvents FringeAVP As DataGridViewTextBoxColumn
+    Friend WithEvents SmallAVP As DataGridViewTextBoxColumn
+    Friend WithEvents PPEAVP As DataGridViewTextBoxColumn
+    Friend WithEvents ConsumableAVP As DataGridViewTextBoxColumn
+    Friend WithEvents ScaffoldAVP As DataGridViewTextBoxColumn
+    Friend WithEvents YoyosAVP As DataGridViewTextBoxColumn
+    Friend WithEvents MeshAVP As DataGridViewTextBoxColumn
+    Friend WithEvents MiselaneosAVP As DataGridViewTextBoxColumn
+    Friend WithEvents OverheadAVP As DataGridViewTextBoxColumn
+    Friend WithEvents ProfitAVP As DataGridViewTextBoxColumn
+    Friend WithEvents PTTOTALAV As DataGridViewTextBoxColumn
 End Class

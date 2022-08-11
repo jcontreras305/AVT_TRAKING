@@ -6,6 +6,7 @@
     Dim _BeginDate, _EndDate As Date
 
     Dim _FICAP, _FUIP, _SUIP As Double
+    Dim _WCP, _GenLiabP, _UmbrP, _PollutionP, _HealtP, _FringeP, _SmallP, _PPEP, _ConsumableP, _ScaffoldP, _YoYosP, _MeshP, _MiselaneosP, _OverheadP, _ProfitP As Double
     Dim _BWForemanP, _BWJourneymanP, _BWCraftsmanP, _BWApprenticeP, _BWHelperP, _TotalHoursP As Double
     Dim _QtyForemanP, _QtyJourneymanP, _QtyCraftsmanP, _QtyApprenticeP, _QtyHelperP As Integer
     Public Function Clear() As Boolean
@@ -44,6 +45,21 @@
         _FICAP = 0.00
         _FUIP = 0.00
         _SUIP = 0.00
+        _WCP = 0.0
+        _GenLiabP = 0.0
+        _UmbrP = 0.0
+        _PollutionP = 0.0
+        _HealtP = 0.0
+        _FringeP = 0.0
+        _SmallP = 0.0
+        _PPEP = 0.0
+        _ConsumableP = 0.0
+        _ScaffoldP = 0.0
+        _YoYosP = 0.0
+        _MeshP = 0.0
+        _MiselaneosP = 0.0
+        _OverheadP = 0.0
+        _ProfitP = 0.0
         _BWForemanP = 0.00
         _BWJourneymanP = 0.00
         _BWCraftsmanP = 0.00
@@ -631,6 +647,186 @@
         End Get
         Set(ByVal QtyHelperP As Integer)
             _QtyHelperP = QtyHelperP
+        End Set
+    End Property
+
+    Public Property WCP As Double
+        Get
+            If _WCP = Nothing Then
+                _WCP = 0
+            End If
+            Return _WCP
+        End Get
+        Set(value As Double)
+            _WCP = value
+        End Set
+    End Property
+
+    Public Property GenLiabP As Double
+        Get
+            If _GenLiabP = Nothing Then
+                _GenLiabP = 0
+            End If
+            Return _GenLiabP
+        End Get
+        Set(value As Double)
+            _GenLiabP = value
+        End Set
+    End Property
+
+    Public Property UmbrP As Double
+        Get
+            If _UmbrP = Nothing Then
+                _UmbrP = 0
+            End If
+            Return _UmbrP
+        End Get
+        Set(value As Double)
+            _UmbrP = value
+        End Set
+    End Property
+
+    Public Property PollutionP As Double
+        Get
+            If _PollutionP = Nothing Then
+                _PollutionP = 0
+            End If
+            Return _PollutionP
+        End Get
+        Set(value As Double)
+            _PollutionP = value
+        End Set
+    End Property
+
+    Public Property HealtP As Double
+        Get
+            If _HealtP = Nothing Then
+                _HealtP = 0
+            End If
+            Return _HealtP
+        End Get
+        Set(value As Double)
+            _HealtP = value
+        End Set
+    End Property
+
+    Public Property FringeP As Double
+        Get
+            If _FringeP = Nothing Then
+                _FringeP = 0
+            End If
+            Return _FringeP
+        End Get
+        Set(value As Double)
+            _FringeP = value
+        End Set
+    End Property
+
+    Public Property SmallP As Double
+        Get
+            If _SmallP = Nothing Then
+                _SmallP = 0
+            End If
+            Return _SmallP
+        End Get
+        Set(value As Double)
+            _SmallP = value
+        End Set
+    End Property
+
+    Public Property PPEP As Double
+        Get
+            If _PPEP = Nothing Then
+                _PPEP = 0
+            End If
+            Return _PPEP
+        End Get
+        Set(value As Double)
+            _PPEP = value
+        End Set
+    End Property
+
+    Public Property ConsumableP As Double
+        Get
+            If _ConsumableP = Nothing Then
+                _ConsumableP = 0
+            End If
+            Return _ConsumableP
+        End Get
+        Set(value As Double)
+            _ConsumableP = value
+        End Set
+    End Property
+
+    Public Property ScaffoldP As Double
+        Get
+            If _ScaffoldP = Nothing Then
+                _ScaffoldP = 0
+            End If
+            Return _ScaffoldP
+        End Get
+        Set(value As Double)
+            _ScaffoldP = value
+        End Set
+    End Property
+
+    Public Property YoYosP As Double
+        Get
+            If _YoYosP = Nothing Then
+                _YoYosP = 0
+            End If
+            Return _YoYosP
+        End Get
+        Set(value As Double)
+            _YoYosP = value
+        End Set
+    End Property
+
+    Public Property MeshP As Double
+        Get
+            If _MeshP = Nothing Then
+                _MeshP = 0
+            End If
+            Return _MeshP
+        End Get
+        Set(value As Double)
+            _MeshP = value
+        End Set
+    End Property
+
+    Public Property MiselaneosP As Double
+        Get
+            If _MiselaneosP = Nothing Then
+                _MiselaneosP = 0
+            End If
+            Return _MiselaneosP
+        End Get
+        Set(value As Double)
+            _MiselaneosP = value
+        End Set
+    End Property
+
+    Public Property OverheadP As Double
+        Get
+            If _OverheadP = Nothing Then
+                _OverheadP = 0
+            End If
+            Return _OverheadP
+        End Get
+        Set(value As Double)
+            _OverheadP = value
+        End Set
+    End Property
+
+    Public Property ProfitP As Double
+        Get
+            If _ProfitP = Nothing Then
+                _ProfitP = 0
+            End If
+            Return _ProfitP
+        End Get
+        Set(value As Double)
+            _ProfitP = value
         End Set
     End Property
 End Class
