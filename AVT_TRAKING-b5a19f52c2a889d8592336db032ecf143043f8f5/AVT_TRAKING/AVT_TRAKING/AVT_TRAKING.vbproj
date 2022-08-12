@@ -122,6 +122,12 @@
     <Compile Include="Class\MetodosTaxes.vb" />
     <Compile Include="Class\MetodosVendor.vb" />
     <Compile Include="Class\MetodosJobs.vb" />
+    <Compile Include="FromsEstimation\BuscarEst.Designer.vb">
+      <DependentUpon>BuscarEst.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FromsEstimation\BuscarEst.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="FromsEstimation\DrawingProgress.Designer.vb">
       <DependentUpon>DrawingProgress.vb</DependentUpon>
     </Compile>
@@ -876,6 +882,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="FromsEstimation\BuscarEst.resx">
+      <DependentUpon>BuscarEst.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FromsEstimation\DrawingProgress.resx">
       <DependentUpon>DrawingProgress.vb</DependentUpon>
     </EmbeddedResource>
@@ -1275,7 +1284,7 @@
   <ItemGroup>
     <None Include="Documents\InvoicePieces.xlsx" />
     <None Include="Documents\Time Sheet Prueba.xlsx" />
-    <None Include="Documents\Working1.xlsm" />
+    <None Include="Documents\Working.xlsm" />
     <None Include="My Project\Application.myapp">
       <Generator>MyApplicationCodeGenerator</Generator>
       <LastGenOutput>Application.Designer.vb</LastGenOutput>

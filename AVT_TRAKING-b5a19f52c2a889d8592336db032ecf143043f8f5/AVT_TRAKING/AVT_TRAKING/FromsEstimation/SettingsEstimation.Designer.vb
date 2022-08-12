@@ -33,7 +33,6 @@ Partial Class SettingsEstimation
         Me.btnAfter = New System.Windows.Forms.Button()
         Me.btnSaveClient = New System.Windows.Forms.Button()
         Me.btnNext = New System.Windows.Forms.Button()
-        Me.btnFind = New System.Windows.Forms.Button()
         Me.TableLayoutPanel3 = New System.Windows.Forms.TableLayoutPanel()
         Me.Panel12 = New System.Windows.Forms.Panel()
         Me.txtPlant = New System.Windows.Forms.TextBox()
@@ -78,6 +77,7 @@ Partial Class SettingsEstimation
         Me.Panel15 = New System.Windows.Forms.Panel()
         Me.btnDelete = New System.Windows.Forms.Button()
         Me.btnSave = New System.Windows.Forms.Button()
+        Me.btnSaveInClients = New System.Windows.Forms.Button()
         Me.TableLayoutPanel1.SuspendLayout()
         Me.Panel1.SuspendLayout()
         Me.Panel2.SuspendLayout()
@@ -115,7 +115,7 @@ Partial Class SettingsEstimation
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 70.0!))
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 188.0!))
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-        Me.TableLayoutPanel1.Size = New System.Drawing.Size(757, 549)
+        Me.TableLayoutPanel1.Size = New System.Drawing.Size(736, 549)
         Me.TableLayoutPanel1.TabIndex = 0
         '
         'Panel1
@@ -126,7 +126,7 @@ Partial Class SettingsEstimation
         Me.Panel1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel1.Location = New System.Drawing.Point(3, 3)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(751, 64)
+        Me.Panel1.Size = New System.Drawing.Size(730, 64)
         Me.Panel1.TabIndex = 30
         '
         'btnSalir
@@ -136,7 +136,7 @@ Partial Class SettingsEstimation
         Me.btnSalir.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnSalir.ForeColor = System.Drawing.Color.Red
         Me.btnSalir.Image = Global.AVT_TRAKING.My.Resources.Resources._exit
-        Me.btnSalir.Location = New System.Drawing.Point(700, 7)
+        Me.btnSalir.Location = New System.Drawing.Point(679, 7)
         Me.btnSalir.Margin = New System.Windows.Forms.Padding(2)
         Me.btnSalir.Name = "btnSalir"
         Me.btnSalir.Size = New System.Drawing.Size(43, 55)
@@ -161,14 +161,14 @@ Partial Class SettingsEstimation
         Me.Panel2.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel2.Location = New System.Drawing.Point(3, 73)
         Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(751, 182)
+        Me.Panel2.Size = New System.Drawing.Size(730, 182)
         Me.Panel2.TabIndex = 1
         '
         'TableLayoutPanel4
         '
         Me.TableLayoutPanel4.ColumnCount = 2
-        Me.TableLayoutPanel4.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 80.0!))
-        Me.TableLayoutPanel4.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20.0!))
+        Me.TableLayoutPanel4.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 83.9726!))
+        Me.TableLayoutPanel4.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.0274!))
         Me.TableLayoutPanel4.Controls.Add(Me.Panel13, 1, 0)
         Me.TableLayoutPanel4.Controls.Add(Me.TableLayoutPanel3, 0, 0)
         Me.TableLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Fill
@@ -176,7 +176,7 @@ Partial Class SettingsEstimation
         Me.TableLayoutPanel4.Name = "TableLayoutPanel4"
         Me.TableLayoutPanel4.RowCount = 1
         Me.TableLayoutPanel4.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-        Me.TableLayoutPanel4.Size = New System.Drawing.Size(751, 182)
+        Me.TableLayoutPanel4.Size = New System.Drawing.Size(730, 182)
         Me.TableLayoutPanel4.TabIndex = 0
         '
         'Panel13
@@ -185,11 +185,10 @@ Partial Class SettingsEstimation
         Me.Panel13.Controls.Add(Me.btnAfter)
         Me.Panel13.Controls.Add(Me.btnSaveClient)
         Me.Panel13.Controls.Add(Me.btnNext)
-        Me.Panel13.Controls.Add(Me.btnFind)
         Me.Panel13.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel13.Location = New System.Drawing.Point(603, 3)
+        Me.Panel13.Location = New System.Drawing.Point(616, 3)
         Me.Panel13.Name = "Panel13"
-        Me.Panel13.Size = New System.Drawing.Size(145, 176)
+        Me.Panel13.Size = New System.Drawing.Size(111, 176)
         Me.Panel13.TabIndex = 20
         '
         'btnNew
@@ -203,7 +202,7 @@ Partial Class SettingsEstimation
         Me.btnNew.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.btnNew.Location = New System.Drawing.Point(13, 86)
         Me.btnNew.Name = "btnNew"
-        Me.btnNew.Size = New System.Drawing.Size(85, 33)
+        Me.btnNew.Size = New System.Drawing.Size(87, 33)
         Me.btnNew.TabIndex = 22
         Me.btnNew.Text = "New"
         Me.btnNew.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -256,21 +255,6 @@ Partial Class SettingsEstimation
         Me.btnNext.TabIndex = 24
         Me.btnNext.UseVisualStyleBackColor = True
         '
-        'btnFind
-        '
-        Me.btnFind.FlatAppearance.BorderSize = 0
-        Me.btnFind.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(59, Byte), Integer), CType(CType(69, Byte), Integer), CType(CType(79, Byte), Integer))
-        Me.btnFind.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnFind.Font = New System.Drawing.Font("Nirmala UI", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnFind.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.btnFind.Image = Global.AVT_TRAKING.My.Resources.Resources.loupe
-        Me.btnFind.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnFind.Location = New System.Drawing.Point(103, 3)
-        Me.btnFind.Name = "btnFind"
-        Me.btnFind.Size = New System.Drawing.Size(37, 45)
-        Me.btnFind.TabIndex = 25
-        Me.btnFind.UseVisualStyleBackColor = True
-        '
         'TableLayoutPanel3
         '
         Me.TableLayoutPanel3.ColumnCount = 2
@@ -295,7 +279,7 @@ Partial Class SettingsEstimation
         Me.TableLayoutPanel3.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 19.86755!))
         Me.TableLayoutPanel3.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20.0883!))
         Me.TableLayoutPanel3.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20.0883!))
-        Me.TableLayoutPanel3.Size = New System.Drawing.Size(594, 176)
+        Me.TableLayoutPanel3.Size = New System.Drawing.Size(607, 176)
         Me.TableLayoutPanel3.TabIndex = 0
         '
         'Panel12
@@ -303,16 +287,16 @@ Partial Class SettingsEstimation
         Me.Panel12.Controls.Add(Me.txtPlant)
         Me.Panel12.Controls.Add(Me.Label11)
         Me.Panel12.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel12.Location = New System.Drawing.Point(300, 141)
+        Me.Panel12.Location = New System.Drawing.Point(306, 141)
         Me.Panel12.Name = "Panel12"
-        Me.Panel12.Size = New System.Drawing.Size(291, 32)
+        Me.Panel12.Size = New System.Drawing.Size(298, 32)
         Me.Panel12.TabIndex = 18
         '
         'txtPlant
         '
         Me.txtPlant.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.txtPlant.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-        Me.txtPlant.Location = New System.Drawing.Point(118, 4)
+        Me.txtPlant.Location = New System.Drawing.Point(125, 4)
         Me.txtPlant.Name = "txtPlant"
         Me.txtPlant.Size = New System.Drawing.Size(164, 23)
         Me.txtPlant.TabIndex = 19
@@ -335,14 +319,14 @@ Partial Class SettingsEstimation
         Me.Panel11.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel11.Location = New System.Drawing.Point(3, 141)
         Me.Panel11.Name = "Panel11"
-        Me.Panel11.Size = New System.Drawing.Size(291, 32)
+        Me.Panel11.Size = New System.Drawing.Size(297, 32)
         Me.Panel11.TabIndex = 8
         '
         'txtProvince
         '
         Me.txtProvince.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.txtProvince.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-        Me.txtProvince.Location = New System.Drawing.Point(108, 4)
+        Me.txtProvince.Location = New System.Drawing.Point(114, 4)
         Me.txtProvince.Name = "txtProvince"
         Me.txtProvince.Size = New System.Drawing.Size(183, 23)
         Me.txtProvince.TabIndex = 9
@@ -363,16 +347,16 @@ Partial Class SettingsEstimation
         Me.Panel10.Controls.Add(Me.txtFaxNum)
         Me.Panel10.Controls.Add(Me.Label9)
         Me.Panel10.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel10.Location = New System.Drawing.Point(300, 106)
+        Me.Panel10.Location = New System.Drawing.Point(306, 106)
         Me.Panel10.Name = "Panel10"
-        Me.Panel10.Size = New System.Drawing.Size(291, 29)
+        Me.Panel10.Size = New System.Drawing.Size(298, 29)
         Me.Panel10.TabIndex = 16
         '
         'txtFaxNum
         '
         Me.txtFaxNum.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.txtFaxNum.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-        Me.txtFaxNum.Location = New System.Drawing.Point(118, 3)
+        Me.txtFaxNum.Location = New System.Drawing.Point(125, 3)
         Me.txtFaxNum.Name = "txtFaxNum"
         Me.txtFaxNum.Size = New System.Drawing.Size(164, 23)
         Me.txtFaxNum.TabIndex = 17
@@ -395,14 +379,14 @@ Partial Class SettingsEstimation
         Me.Panel5.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel5.Location = New System.Drawing.Point(3, 38)
         Me.Panel5.Name = "Panel5"
-        Me.Panel5.Size = New System.Drawing.Size(291, 28)
+        Me.Panel5.Size = New System.Drawing.Size(297, 28)
         Me.Panel5.TabIndex = 2
         '
         'txtCompanyName
         '
         Me.txtCompanyName.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.txtCompanyName.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-        Me.txtCompanyName.Location = New System.Drawing.Point(108, 2)
+        Me.txtCompanyName.Location = New System.Drawing.Point(114, 2)
         Me.txtCompanyName.Name = "txtCompanyName"
         Me.txtCompanyName.Size = New System.Drawing.Size(182, 23)
         Me.txtCompanyName.TabIndex = 3
@@ -423,16 +407,16 @@ Partial Class SettingsEstimation
         Me.Panel6.Controls.Add(Me.txtContactName)
         Me.Panel6.Controls.Add(Me.Label5)
         Me.Panel6.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel6.Location = New System.Drawing.Point(300, 38)
+        Me.Panel6.Location = New System.Drawing.Point(306, 38)
         Me.Panel6.Name = "Panel6"
-        Me.Panel6.Size = New System.Drawing.Size(291, 28)
+        Me.Panel6.Size = New System.Drawing.Size(298, 28)
         Me.Panel6.TabIndex = 12
         '
         'txtContactName
         '
         Me.txtContactName.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.txtContactName.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-        Me.txtContactName.Location = New System.Drawing.Point(117, 2)
+        Me.txtContactName.Location = New System.Drawing.Point(124, 2)
         Me.txtContactName.Name = "txtContactName"
         Me.txtContactName.Size = New System.Drawing.Size(164, 23)
         Me.txtContactName.TabIndex = 13
@@ -453,16 +437,16 @@ Partial Class SettingsEstimation
         Me.Panel4.Controls.Add(Me.txtPostalCode)
         Me.Panel4.Controls.Add(Me.Label3)
         Me.Panel4.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel4.Location = New System.Drawing.Point(300, 3)
+        Me.Panel4.Location = New System.Drawing.Point(306, 3)
         Me.Panel4.Name = "Panel4"
-        Me.Panel4.Size = New System.Drawing.Size(291, 29)
+        Me.Panel4.Size = New System.Drawing.Size(298, 29)
         Me.Panel4.TabIndex = 10
         '
         'txtPostalCode
         '
         Me.txtPostalCode.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.txtPostalCode.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-        Me.txtPostalCode.Location = New System.Drawing.Point(116, 4)
+        Me.txtPostalCode.Location = New System.Drawing.Point(123, 4)
         Me.txtPostalCode.MaxLength = 5
         Me.txtPostalCode.Name = "txtPostalCode"
         Me.txtPostalCode.Size = New System.Drawing.Size(164, 23)
@@ -486,14 +470,14 @@ Partial Class SettingsEstimation
         Me.Panel3.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel3.Location = New System.Drawing.Point(3, 3)
         Me.Panel3.Name = "Panel3"
-        Me.Panel3.Size = New System.Drawing.Size(291, 29)
+        Me.Panel3.Size = New System.Drawing.Size(297, 29)
         Me.Panel3.TabIndex = 0
         '
         'txtNumberClient
         '
         Me.txtNumberClient.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.txtNumberClient.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-        Me.txtNumberClient.Location = New System.Drawing.Point(108, 2)
+        Me.txtNumberClient.Location = New System.Drawing.Point(114, 2)
         Me.txtNumberClient.Name = "txtNumberClient"
         Me.txtNumberClient.Size = New System.Drawing.Size(183, 23)
         Me.txtNumberClient.TabIndex = 1
@@ -517,14 +501,14 @@ Partial Class SettingsEstimation
         Me.Panel7.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel7.Location = New System.Drawing.Point(3, 72)
         Me.Panel7.Name = "Panel7"
-        Me.Panel7.Size = New System.Drawing.Size(291, 28)
+        Me.Panel7.Size = New System.Drawing.Size(297, 28)
         Me.Panel7.TabIndex = 4
         '
         'txtNumberAddress
         '
         Me.txtNumberAddress.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.txtNumberAddress.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-        Me.txtNumberAddress.Location = New System.Drawing.Point(224, 2)
+        Me.txtNumberAddress.Location = New System.Drawing.Point(230, 2)
         Me.txtNumberAddress.Name = "txtNumberAddress"
         Me.txtNumberAddress.Size = New System.Drawing.Size(64, 23)
         Me.txtNumberAddress.TabIndex = 7
@@ -533,7 +517,7 @@ Partial Class SettingsEstimation
         '
         Me.txtBuilddingAddress.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.txtBuilddingAddress.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-        Me.txtBuilddingAddress.Location = New System.Drawing.Point(108, 2)
+        Me.txtBuilddingAddress.Location = New System.Drawing.Point(114, 2)
         Me.txtBuilddingAddress.Name = "txtBuilddingAddress"
         Me.txtBuilddingAddress.Size = New System.Drawing.Size(110, 23)
         Me.txtBuilddingAddress.TabIndex = 5
@@ -554,16 +538,16 @@ Partial Class SettingsEstimation
         Me.Panel8.Controls.Add(Me.txtPhoneNum)
         Me.Panel8.Controls.Add(Me.Label7)
         Me.Panel8.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel8.Location = New System.Drawing.Point(300, 72)
+        Me.Panel8.Location = New System.Drawing.Point(306, 72)
         Me.Panel8.Name = "Panel8"
-        Me.Panel8.Size = New System.Drawing.Size(291, 28)
+        Me.Panel8.Size = New System.Drawing.Size(298, 28)
         Me.Panel8.TabIndex = 14
         '
         'txtPhoneNum
         '
         Me.txtPhoneNum.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.txtPhoneNum.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-        Me.txtPhoneNum.Location = New System.Drawing.Point(117, 3)
+        Me.txtPhoneNum.Location = New System.Drawing.Point(124, 3)
         Me.txtPhoneNum.Name = "txtPhoneNum"
         Me.txtPhoneNum.Size = New System.Drawing.Size(164, 23)
         Me.txtPhoneNum.TabIndex = 15
@@ -586,14 +570,14 @@ Partial Class SettingsEstimation
         Me.Panel9.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel9.Location = New System.Drawing.Point(3, 106)
         Me.Panel9.Name = "Panel9"
-        Me.Panel9.Size = New System.Drawing.Size(291, 29)
+        Me.Panel9.Size = New System.Drawing.Size(297, 29)
         Me.Panel9.TabIndex = 6
         '
         'txtCity
         '
         Me.txtCity.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.txtCity.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-        Me.txtCity.Location = New System.Drawing.Point(108, 2)
+        Me.txtCity.Location = New System.Drawing.Point(114, 2)
         Me.txtCity.Name = "txtCity"
         Me.txtCity.Size = New System.Drawing.Size(183, 23)
         Me.txtCity.TabIndex = 7
@@ -623,7 +607,7 @@ Partial Class SettingsEstimation
         Me.TableLayoutPanel2.RowCount = 2
         Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
         Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 58.0!))
-        Me.TableLayoutPanel2.Size = New System.Drawing.Size(751, 285)
+        Me.TableLayoutPanel2.Size = New System.Drawing.Size(730, 285)
         Me.TableLayoutPanel2.TabIndex = 2
         '
         'Panel14
@@ -632,7 +616,7 @@ Partial Class SettingsEstimation
         Me.Panel14.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel14.Location = New System.Drawing.Point(3, 3)
         Me.Panel14.Name = "Panel14"
-        Me.Panel14.Size = New System.Drawing.Size(745, 221)
+        Me.Panel14.Size = New System.Drawing.Size(724, 221)
         Me.Panel14.TabIndex = 0
         '
         'tblClientProjects
@@ -643,7 +627,7 @@ Partial Class SettingsEstimation
         Me.tblClientProjects.Dock = System.Windows.Forms.DockStyle.Fill
         Me.tblClientProjects.Location = New System.Drawing.Point(0, 0)
         Me.tblClientProjects.Name = "tblClientProjects"
-        Me.tblClientProjects.Size = New System.Drawing.Size(745, 221)
+        Me.tblClientProjects.Size = New System.Drawing.Size(724, 221)
         Me.tblClientProjects.TabIndex = 26
         '
         'NumClient
@@ -680,12 +664,13 @@ Partial Class SettingsEstimation
         '
         'Panel15
         '
+        Me.Panel15.Controls.Add(Me.btnSaveInClients)
         Me.Panel15.Controls.Add(Me.btnDelete)
         Me.Panel15.Controls.Add(Me.btnSave)
         Me.Panel15.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel15.Location = New System.Drawing.Point(3, 230)
         Me.Panel15.Name = "Panel15"
-        Me.Panel15.Size = New System.Drawing.Size(745, 52)
+        Me.Panel15.Size = New System.Drawing.Size(724, 52)
         Me.Panel15.TabIndex = 27
         '
         'btnDelete
@@ -698,7 +683,7 @@ Partial Class SettingsEstimation
         Me.btnDelete.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.btnDelete.Image = Global.AVT_TRAKING.My.Resources.Resources.delete
         Me.btnDelete.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnDelete.Location = New System.Drawing.Point(649, 8)
+        Me.btnDelete.Location = New System.Drawing.Point(628, 8)
         Me.btnDelete.Name = "btnDelete"
         Me.btnDelete.Size = New System.Drawing.Size(90, 35)
         Me.btnDelete.TabIndex = 29
@@ -716,7 +701,7 @@ Partial Class SettingsEstimation
         Me.btnSave.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.btnSave.Image = Global.AVT_TRAKING.My.Resources.Resources.save
         Me.btnSave.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnSave.Location = New System.Drawing.Point(559, 8)
+        Me.btnSave.Location = New System.Drawing.Point(538, 8)
         Me.btnSave.Name = "btnSave"
         Me.btnSave.Size = New System.Drawing.Size(90, 35)
         Me.btnSave.TabIndex = 28
@@ -724,11 +709,28 @@ Partial Class SettingsEstimation
         Me.btnSave.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         Me.btnSave.UseVisualStyleBackColor = True
         '
+        'btnSaveInClients
+        '
+        Me.btnSaveInClients.FlatAppearance.BorderSize = 0
+        Me.btnSaveInClients.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(59, Byte), Integer), CType(CType(69, Byte), Integer), CType(CType(79, Byte), Integer))
+        Me.btnSaveInClients.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnSaveInClients.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnSaveInClients.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.btnSaveInClients.Image = Global.AVT_TRAKING.My.Resources.Resources.upload
+        Me.btnSaveInClients.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnSaveInClients.Location = New System.Drawing.Point(15, 8)
+        Me.btnSaveInClients.Name = "btnSaveInClients"
+        Me.btnSaveInClients.Size = New System.Drawing.Size(145, 35)
+        Me.btnSaveInClients.TabIndex = 30
+        Me.btnSaveInClients.Text = "Save in Clients"
+        Me.btnSaveInClients.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.btnSaveInClients.UseVisualStyleBackColor = True
+        '
         'SettingsEstimation
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(757, 549)
+        Me.ClientSize = New System.Drawing.Size(736, 549)
         Me.Controls.Add(Me.TableLayoutPanel1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
         Me.Name = "SettingsEstimation"
@@ -810,7 +812,6 @@ Partial Class SettingsEstimation
     Friend WithEvents Panel9 As Panel
     Friend WithEvents txtCity As TextBox
     Friend WithEvents Label8 As Label
-    Friend WithEvents btnFind As Button
     Friend WithEvents btnNext As Button
     Friend WithEvents btnAfter As Button
     Friend WithEvents btnSaveClient As Button
@@ -824,4 +825,5 @@ Partial Class SettingsEstimation
     Friend WithEvents Unit As DataGridViewTextBoxColumn
     Friend WithEvents ReleaseDate As DataGridViewTextBoxColumn
     Friend WithEvents ProjectName As DataGridViewTextBoxColumn
+    Friend WithEvents btnSaveInClients As Button
 End Class

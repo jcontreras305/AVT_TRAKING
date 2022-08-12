@@ -210,4 +210,24 @@
 
         End Try
     End Sub
+
+    Private Sub btnReleaseClient_Click(sender As Object, e As EventArgs) Handles btnSaveInClients.Click
+        Try
+            If DialogResult.Yes = MessageBox.Show(" Are you sure to export this Client to the table of  Clients to begin the projects?", "Message", MessageBoxButtons.YesNo, MessageBoxIcon.Question) Then
+                If mtdClients.saveClientEstOnClientProject(mtdClients) Then
+                    MsgBox("Successful")
+                    mtdClients.cargarDatosClientEst(mtdClients.numberClient.ToString())
+                    llenarTablaPojects()
+                End If
+            Else
+                MessageBox.Show("Please select a row.", "Important", MessageBoxButtons.OK, MessageBoxIcon.Asterisk)
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message)
+        End Try
+    End Sub
+
+    Private Sub btnFind_Click(sender As Object, e As EventArgs) 
+
+    End Sub
 End Class

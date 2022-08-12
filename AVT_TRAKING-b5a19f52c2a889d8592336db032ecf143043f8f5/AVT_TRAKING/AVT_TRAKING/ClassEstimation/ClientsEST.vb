@@ -268,6 +268,39 @@ end", conn)
             Return False
         End Try
     End Function
+    Public Function saveClientEstOnClientProject(ByVal cl As ClientsEST) As Boolean
+        Try
+            conectar()
+            Dim cmd As New SqlCommand("if (select COUNT(*) from clients where numberClient = " & CStr(cl.numberClient) & ")=0
+begin
+	if (select COUNT(*) from clientsEst where numberClient = " & CStr(cl.numberClient) & ")> 0
+	begin
+		insert top(1) into clients (idClient , numberClient, firstName, middleName, lastName, companyName, idContact,idHomeAddress, estatus, photo, payTerms) 
+		select top 1 clE.idClientEst as 'idClient',clE.numberClient as 'numberClient',clE.contactName as 'firstName','' as 'middleName','' as 'lastName',clE.companyName,clE.idContact,clE.idHomeAdress,'E' as 'estatus',NULL as 'photo',''as 'payterms' from clientsEst as clE where numberClient = " & CStr(cl.numberClient) & " 
+	end
+	else --No esta aun insertado en la client Est
+	begin
+		declare @idClient as varchar(36)='" & CStr(cl.idClient) & "'
+		declare @idHomeAddres as varchar(36)='" & CStr(cl.idHomeAddress) & "'
+		declare @idContact as varchar(36)='" & CStr(cl.idContact) & "'
+		insert into HomeAddress values (@idHomeAddres,'" & cl.avenue & "'," & CStr(cl.number) & ",'" & cl.city & "','" & cl.province & "'," & CStr(cl.postalCode) & ")
+		insert into contact values (@idContact,'" & cl.phone1 & "','" & cl.phone2 & "','')
+		insert into clientsEst values (@idClient," & CStr(cl.numberClient) & ",'" & cl.contactName & "','" & cl.companyName & "','" & cl.plant & "',@idContact,@idHomeAddres)
+		insert top(1) into clients (idClient , numberClient, firstName, middleName, lastName, companyName, idContact,idHomeAddress, estatus, photo, payTerms) 
+		select top 1 clE.idClientEst as 'idClient',clE.numberClient as 'numberClient',clE.contactName as 'firstName','' as 'middleName','' as 'lastName',clE.companyName,clE.idContact,clE.idHomeAdress,'E' as 'estatus',NULL as 'photo',''as 'payterms' from clientsEst as clE where numberClient = " & CStr(cl.numberClient) & " ;
+	end
+end", conn)
+            If cmd.ExecuteNonQuery > 0 Then
+                Return True
+            Else
+                MessageBox.Show("Is probably that the number of this Client exist on the table of Clients.", "Message", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+                Return False
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message())
+            Return False
+        End Try
+    End Function
     Public Sub Clear()
         _idclient = Nothing
         _idHomeAddress = Nothing
