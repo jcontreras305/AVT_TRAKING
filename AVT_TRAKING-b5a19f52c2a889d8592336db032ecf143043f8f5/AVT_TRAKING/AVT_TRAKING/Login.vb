@@ -11,7 +11,7 @@ Public Class Login
         Try
             listImg = mtdOther.llenarComboImage(cmbImagenes)
             mtdCompany.cargarDatos()
-            If listImg IsNot Nothing And listImg.Count > 0 Then
+            If listImg IsNot Nothing Then
                 cmbImagenes.SelectedIndex = 0
                 cmbImagenes.SelectedItem = cmbImagenes.Items(0)
             End If

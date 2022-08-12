@@ -740,7 +740,12 @@ insert into imageClient(name,img,imgDefault)  values(@name,@img,@imgDefault)
             Dim cmd As New SqlCommand("select photo, companyName from clients ", conn)
             Dim dr As SqlDataReader = cmd.ExecuteReader()
             While dr.Read()
-                list.Add(dr("photo"))
+                If dr("photo") Is DBNull.Value Then
+                    Dim img As Image = Global.AVT_TRAKING.My.Resources.user
+                    list.Add(imageToByte(img))
+                Else
+                    list.Add(dr("photo"))
+                End If
                 cmb.Items.Add(dr("companyName"))
             End While
             dr.Close()
@@ -754,7 +759,7 @@ insert into imageClient(name,img,imgDefault)  values(@name,@img,@imgDefault)
     Public Function selectOwnEmail() As String()
         Try
             conectar()
-            Dim cmd As New SqlCommand("select * from ownEmail", conn)
+            Dim cmd As New SqlCommand("Select * from ownEmail", conn)
             Dim dr As SqlDataReader = cmd.ExecuteReader
             Dim ownemail As String = ""
             Dim ownpass As String = ""
@@ -776,7 +781,7 @@ insert into imageClient(name,img,imgDefault)  values(@name,@img,@imgDefault)
     Public Function selectEmails(ByVal tbl As DataGridView) As Boolean
         Try
             conectar()
-            Dim cmd As New SqlCommand("select * from emails", conn)
+            Dim cmd As New SqlCommand("Select * from emails", conn)
             Dim dr As SqlDataReader = cmd.ExecuteReader
             tbl.Rows.Clear()
             While dr.Read()
@@ -794,7 +799,7 @@ insert into imageClient(name,img,imgDefault)  values(@name,@img,@imgDefault)
     Public Function saveUpdateOwnEmail(ByVal email As String, ByVal pass As String) As Boolean
         Try
             conectar()
-            Dim cmd As New SqlCommand("if (select count(*) from ownEmail)=0
+            Dim cmd As New SqlCommand("If (Select count(*) from ownEmail) = 0
 begin
 	insert into ownEmail values ('" + email + "','" + pass + "')
 end 
