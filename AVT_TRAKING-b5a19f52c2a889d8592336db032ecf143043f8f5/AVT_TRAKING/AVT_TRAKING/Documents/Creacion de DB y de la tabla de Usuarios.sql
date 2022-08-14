@@ -4624,3 +4624,58 @@ go
 ALTER TABLE equipmentMaterial ADD CONSTRAINT fk_type_EquipmentMaterial
 FOREIGN KEY ([type]) REFERENCES insFitting ([type])
 GO
+
+
+create proc sp_MaterialEstimationProject
+@ProjectId as varchar(30)
+as
+begin
+	select
+	distinct
+	T1.idDrawingNum ,
+	(select TOP 1 SUM(T2.[SQF/LF]) from 
+					(select TA.[SQF/LF] from
+						(select dr.idDrawingNum, ppE.lFtII  as 'SQF/LF', ppE.size , ppE.thick , ppM.price , ppM.description , (ppE.lFtII * ppM.price) as 'PMCost' from pipingEst as ppE
+							inner join pipingMaterial ppM on ppE.size = ppM.size and ppE.thick = ppM.thick and ppe.[type]= ppM.[type]
+							inner join drawing as dr on dr.idDrawingNum = ppE.idDrawingNum 
+							inner join projectClientEst as po on po.projectId  = dr.projectId
+							where po.projectId = @ProjectId and (ppE.lFtII > 0 and not ppE.lFtII is null )
+							union all
+							select dr.idDrawingNum ,eqE.sqrFtII as 'SQF/LF', 0 as 'Size' , eqE.thick , eqM.price , eqM.description , (eqE.sqrFtII * eqM.price) as 'PMCost' from equipmentEst as eqE
+							inner join equipmentMaterial as eqM on  eqM.[type] = eqE.[type] and eqM.[thick] = eqE.[thick]
+							inner join drawing as dr on dr.idDrawingNum = eqE.idDrawingNum 
+							inner join projectClientEst as po on po.projectId  = dr.projectId
+							where po.projectId = @ProjectId and (eqE.sqrFtII > 0 and not eqE.sqrFtII is null)) as TA 
+						where TA.[description] = T1.[description] and TA.[thick] = T1.[thick] and TA.[price] = T1.[price] and TA.[idDrawingNum] = T1.[idDrawingNum] ) as T2) AS 'SQF/LF',
+	T1.size , 
+	T1.thick,
+	T1.price,
+	T1.[description],
+	(select TOP 1 SUM(T2.[SQF/LF]) from 
+					(select TA.[SQF/LF] from
+						(select dr.idDrawingNum, ppE.lFtII  as 'SQF/LF', ppE.size , ppE.thick , ppM.price , ppM.description , (ppE.lFtII * ppM.price) as 'PMCost' from pipingEst as ppE
+							inner join pipingMaterial ppM on ppE.size = ppM.size and ppE.thick = ppM.thick and ppe.[type]= ppM.[type]
+							inner join drawing as dr on dr.idDrawingNum = ppE.idDrawingNum 
+							inner join projectClientEst as po on po.projectId  = dr.projectId
+							where po.projectId = @ProjectId and (ppE.lFtII > 0 and not ppE.lFtII is null )
+							union all
+							select dr.idDrawingNum ,eqE.sqrFtII as 'SQF/LF', 0 as 'Size' , eqE.thick , eqM.price , eqM.description , (eqE.sqrFtII * eqM.price) as 'PMCost' from equipmentEst as eqE
+							inner join equipmentMaterial as eqM on  eqM.[type] = eqE.[type] and eqM.[thick] = eqE.[thick]
+							inner join drawing as dr on dr.idDrawingNum = eqE.idDrawingNum 
+							inner join projectClientEst as po on po.projectId  = dr.projectId
+							where po.projectId = @ProjectId and (eqE.sqrFtII > 0 and not eqE.sqrFtII is null)) as TA 
+						where TA.[description] = T1.[description] and TA.[thick] = T1.[thick] and TA.[price] = T1.[price] and TA.[idDrawingNum] = T1.[idDrawingNum] ) as T2) AS 'PMCost'
+	from(
+	select dr.idDrawingNum, ppE.lFtII  as 'SQF/LF', ppE.size , ppE.thick , ppM.price , ppM.description , (ppE.lFtII * ppM.price) as 'PMCost' from pipingEst as ppE
+	inner join pipingMaterial ppM on ppE.size = ppM.size and ppE.thick = ppM.thick and ppe.[type]= ppM.[type]
+	inner join drawing as dr on dr.idDrawingNum = ppE.idDrawingNum 
+	inner join projectClientEst as po on po.projectId  = dr.projectId
+	where po.projectId = @ProjectId and (ppE.lFtII > 0 and not ppE.lFtII is null )
+	union all
+	select dr.idDrawingNum ,eqE.sqrFtII as 'SQF/LF', 0 as 'Size' , eqE.thick , eqM.price , eqM.description , (eqE.sqrFtII * eqM.price) as 'PMCost' from equipmentEst as eqE
+	inner join equipmentMaterial as eqM on  eqM.[type] = eqE.[type] and eqM.[thick] = eqE.[thick]
+	inner join drawing as dr on dr.idDrawingNum = eqE.idDrawingNum 
+	inner join projectClientEst as po on po.projectId  = dr.projectId
+	where po.projectId = @ProjectId and (eqE.sqrFtII > 0 and not eqE.sqrFtII is null)) as T1
+end
+go
