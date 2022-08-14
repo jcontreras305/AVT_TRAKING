@@ -203,6 +203,24 @@ ha.idHomeAdress, ha.avenue ,ha.number, ha.city ,ha.providence,ha.postalCode,phot
             End If
         Catch ex As Exception
             MsgBox(ex.Message())
+        Finally
+            desconectar()
+        End Try
+    End Sub
+    Public Sub buscarProyectosDeClienteAll(ByVal tabla As DataGridView, ByVal idCliente As String)
+        Try
+            conectar()
+            Dim cmd As New SqlCommand(consultaProyetosClientes + " cln.idClient = '" + idCliente + "'", conn)
+            Dim dr As SqlDataReader = cmd.ExecuteReader()
+            tabla.Rows.Clear()
+            While dr.Read()
+                tabla.Rows.Add(dr("Work Order"), dr("Project Description"), If(dr("Cmp") = "0", False, True), dr("Total Spend"), dr("Total Hours ST"), dr("Total Amount ST"), dr("Total Hours OT"), dr("Total Amount OT"), dr("Total Hours 3"), dr("Total Amount 3"), dr("Total Expenses Spend"), dr("Total Material Spend"), dr("jobNo"), dr("workTMLumpSum"), dr("costDistribution"), dr("custumerNo"), dr("contractNo"), dr("costCode"), dr("idClient"), dr("idPO"), dr("idTask"), dr("idAuxWO"), dr("idAux"), dr("photo"))
+            End While
+            dr.Close()
+        Catch ex As Exception
+            MsgBox(ex.Message())
+        Finally
+            desconectar()
         End Try
     End Sub
 
@@ -241,74 +259,42 @@ ha.idHomeAdress, ha.avenue ,ha.number, ha.city ,ha.providence,ha.postalCode,phot
 			)
 		) as 'Total Spend',
 
-	case when (select SUM(hourssT) from hoursWorked as hw where hw.idAux = tk.idAux) is null then 0
-	else (select SUM(hoursST) from hoursWorked as hw where hw.idAux = tk.idAux)
-	end	as 'Total Hours sT',
+	ISNULL( (select SUM(hoursST) from hoursWorked as hw where hw.idAux = tk.idAux) ,0)
+	as 'Total Hours ST',
 
-	case when 
-	(
-	select CONCAT('$' ,SUM(T2.Amount)) as 'Total Amount ST' from 
+	(select CONCAT('$' ,ISNULL(SUM(T2.Amount),0)) as 'Total Amount ST' from 
 	(select SUM(T1.hoursST*T1.billingRate1) AS 'Amount'
 	from (select idHorsWorked,hoursST, hw.idWorkCode , billingRate1  from hoursWorked as hw inner join workCode as wc on wc.idWorkCode = hw.idWorkCode 
 	where idAux=tk.idAux)as T1    
-	group by T1.idWorkCode) as T2
-	) is null then '$0' 
-	else 
-	(
-	select CONCAT('$' ,IIF(SUM(T2.Amount)is null ,'0',SUM(T2.Amount))) as 'Total Amount ST' from 
-	(select SUM(T1.hoursST*T1.billingRate1) AS 'Amount'
-	from (select idHorsWorked,hoursST, hw.idWorkCode , billingRate1  from hoursWorked as hw inner join workCode as wc on wc.idWorkCode = hw.idWorkCode 
-	where idAux=tk.idAux)as T1    
-	group by T1.idWorkCode) as T2
-	)end	as 'Total Amount ST',
+	group by T1.idWorkCode) as T2)
+	as 'Total Amount ST',
 
-	case when (select SUM(hoursOT) from hoursWorked as hw where hw.idAux = tk.idAux) is null then 0
-	else (select SUM(hoursOT) from hoursWorked as hw where hw.idAux = tk.idAux)
-	end	as 'Total Hours OT',
+	ISNULL( (select SUM(hoursOT) from hoursWorked as hw where hw.idAux = tk.idAux),0)
+	as 'Total Hours OT',
 
-	case when 
-	(select CONCAT('$' , SUM(T2.Amount)) from 
+	(select CONCAT('$' ,ISNULL(SUM(T2.Amount),0)) from 
 	(select SUM(T1.hoursOT*T1.billingRateOT) AS 'Amount'
 	from (select idHorsWorked,hoursOT, hw.idWorkCode , billingRateOT  from hoursWorked as hw inner join workCode as wc on wc.idWorkCode = hw.idWorkCode 
 	where idAux=tk.idAux)as T1 
-	group by T1.idWorkCode) as T2
-	) IS NULL  THEN CONCAT('$' , 0)
-	ELSE
-	(select CONCAT('$' ,IIF( SUM(T2.Amount)is null,'0',SUM(T2.Amount))) from 
-	(select SUM(T1.hoursOT*T1.billingRateOT) AS 'Amount'
-	from (select idHorsWorked,hoursOT, hw.idWorkCode , billingRateOT  from hoursWorked as hw inner join workCode as wc on wc.idWorkCode = hw.idWorkCode 
+	group by T1.idWorkCode) as T2)
+	as 'Total Amount OT',
+
+    ISNULL( (select SUM(hours3) from hoursWorked as hw where hw.idAux = tk.idAux),0)
+	as 'Total Hours 3',
+		
+	(select CONCAT('$' ,ISNULL(SUM(T2.Amount),0)) from 
+	(select SUM(T1.hours3*T1.billingRate3) AS 'Amount'
+	from (select idHorsWorked,hours3, hw.idWorkCode , billingRate3  from hoursWorked as hw inner join workCode as wc on wc.idWorkCode = hw.idWorkCode 
 	where idAux=tk.idAux)as T1 
 	group by T1.idWorkCode) as T2
 	)
-	END	as 'Total Amount OT',
+	as 'Total Amount 3',
 
-    case when (select SUM(hours3) from hoursWorked as hw where hw.idAux = tk.idAux) is null then 0 
-	else (select SUM(hours3) from hoursWorked as hw where hw.idAux = tk.idAux)
-	end	as 'Total Hours 3',
-	case when 
+	CONCAT('$' ,ISNULL((select SUM( amount) from expensesUsed where idAux = tk.idAux),'0')) AS 'Total Expenses Spend', 
 	
-	(select CONCAT('$' ,SUM(T2.Amount)) from 
-	(select SUM(T1.hours3*T1.billingRate3) AS 'Amount'
-	from (select idHorsWorked,hours3, hw.idWorkCode , billingRate3  from hoursWorked as hw inner join workCode as wc on wc.idWorkCode = hw.idWorkCode 
-	where idAux=tk.idAux)as T1 
-	group by T1.idWorkCode) as T2
-	) IS NULL  THEN CONCAT('$' , 0)
-	ELSE
-	(select CONCAT('$' ,IIF(SUM(T2.Amount)is null,'0',SUM(T2.Amount))) from 
-	(select SUM(T1.hours3*T1.billingRate3) AS 'Amount'
-	from (select idHorsWorked,hours3, hw.idWorkCode , billingRate3  from hoursWorked as hw inner join workCode as wc on wc.idWorkCode = hw.idWorkCode 
-	where idAux=tk.idAux)as T1 
-	group by T1.idWorkCode) as T2
-	)
-	END	as 'Total Amount 3',
-
-	CASE WHEN 
-	(select  SUM( amount) from expensesUsed where idAux = tk.idAux) IS NULL THEN CONCAT('$' ,0)
-	ELSE CONCAT('$' ,(select SUM( amount) from expensesUsed where idAux = tk.idAux)) END AS 'Total Expenses Spend', 
-	CASE WHEN 
-	(select sum (amount) from materialUsed where idAux = tk.idAux) IS NULL THEN CONCAT('$' , 0)
-	ELSE CONCAT('$' ,(select sum (amount) from materialUsed where idAux = tk.idAux)) END AS 'Total Material Spend',
-    jb.jobNo,
+	CONCAT('$' ,ISNULL((select sum (amount) from materialUsed where idAux = tk.idAux),'0')) AS 'Total Material Spend',
+    
+	jb.jobNo,
    	jb.workTMLumpSum,
 	jb.costDistribution,
 	ISNULL(jb.custumerNo,'')AS 'custumerNo' ,
@@ -370,6 +356,35 @@ cln.lastName Like '" + consulta + "'", conn)
             End If
         Catch ex As Exception
             MsgBox(ex.Message())
+        End Try
+    End Sub
+    Public Sub buscarProyectosDeClientePorProyetoAll(ByVal tabla As DataGridView, ByVal consulta As String)
+        Try
+            conectar()
+            Dim cmd As New SqlCommand(consultaProyetosClientes + "
+cln.numberClient like '" + consulta + "'
+Or
+cln.idClient Like '" + consulta + "' 
+Or
+CONCAT(wo.idWO , ' ', tk.task) like '%" + consulta + "%'
+Or
+jb.jobNo Like '" + consulta + "'
+Or
+cln.firstName Like '" + consulta + "'
+Or
+cln.middleName Like '" + consulta + "'
+Or
+cln.lastName Like '" + consulta + "'", conn)
+            Dim dr As SqlDataReader = cmd.ExecuteReader
+            tabla.Rows.Clear()
+            While dr.Read()
+                tabla.Rows.Add(dr("Work Order"), dr("Project Description"), If(dr("Cmp") = "0", False, True), dr("Total Spend"), dr("Total Hours ST"), dr("Total Amount ST"), dr("Total Hours OT"), dr("Total Amount OT"), dr("Total Hours 3"), dr("Total Amount 3"), dr("Total Expenses Spend"), dr("Total Material Spend"), dr("jobNo"), dr("workTMLumpSum"), dr("costDistribution"), dr("custumerNo"), dr("contractNo"), dr("costCode"), dr("idClient"), dr("idPO"), dr("idTask"), dr("idAuxWO"), dr("idAux"), dr("photo"))
+            End While
+            dr.Close()
+        Catch ex As Exception
+            MsgBox(ex.Message())
+        Finally
+            desconectar()
         End Try
     End Sub
 

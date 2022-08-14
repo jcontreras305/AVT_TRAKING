@@ -523,7 +523,7 @@ end", conn)
     Public Function selectPayroll(ByVal tbl As DataGridView, ByVal startDate As Date) As Boolean
         Try
             conectar()
-            Dim cmd As New SqlCommand("elect distinct 
+            Dim cmd As New SqlCommand("select distinct 
 	em.numberEmploye, 
 	case when (select top 1 weekN from weeks where dateWeek >=	hw.dateWorked order by dateWeek asc) is null then 0 
 		else (select top 1 weekN from weeks where dateWeek >= hw.dateWorked order by dateWeek asc) end as 'WeekNumber',

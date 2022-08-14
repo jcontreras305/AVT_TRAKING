@@ -741,7 +741,7 @@ insert into imageClient(name,img,imgDefault)  values(@name,@img,@imgDefault)
             Dim dr As SqlDataReader = cmd.ExecuteReader()
             While dr.Read()
                 If dr("photo") Is DBNull.Value Then
-                    Dim img As Image = Global.AVT_TRAKING.My.Resources.user
+                    Dim img As Image = Global.AVT_TRAKING.My.Resources.NoImage
                     list.Add(imageToByte(img))
                 Else
                     list.Add(dr("photo"))

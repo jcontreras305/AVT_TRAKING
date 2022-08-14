@@ -1642,7 +1642,7 @@ end"
                 Else
                     cmd.CommandText = "if (select count(*) from pipingMaterial where size = " + row.Cells("idSizeMat").Value.ToString + " and [type]='" + row.Cells("idTypeMat").Value.ToString + "' and thick = " + row.Cells("TypeMat").Value.ToString + " )=1
                         begin 
-	                        update pipingMaterial set size = " + row.Cells("SizeMat").Value.ToString() + " , [type]='" + row.Cells("TypeMat").Value.ToString() + "', thick= " + row.Cells("ThickMat").Value.ToString() + " , prize =" + row.Cells("PriceMat").Value.ToString() + ", [description]='" + row.Cells("DescriptionMat").Value.ToString() + "'where size = " + row.Cells("idSizeMat").Value.ToString() + " and [type]='" + row.Cells("idTypeMat").Value.ToString() + "' and thick=" + row.Cells("idThickMat").Value.ToString() + " 
+	                        update pipingMaterial set size = " + row.Cells("SizeMat").Value.ToString() + " , [type]='" + row.Cells("TypeMat").Value.ToString() + "', thick= " + row.Cells("ThickMat").Value.ToString() + " , price =" + row.Cells("PriceMat").Value.ToString() + ", [description]='" + row.Cells("DescriptionMat").Value.ToString() + "'where size = " + row.Cells("idSizeMat").Value.ToString() + " and [type]='" + row.Cells("idTypeMat").Value.ToString() + "' and thick=" + row.Cells("idThickMat").Value.ToString() + " 
                         end"
                 End If
                 contRow += 1
@@ -1706,18 +1706,18 @@ end"
     Public Function selectSizesMaterialPiping(ByVal tbl As DataGridView) As Data.DataTable
         Try
             conectar()
-            Dim cmd As New SqlCommand("select size,[type],thick,prize,[description] from pipingMaterial", conn)
+            Dim cmd As New SqlCommand("select size,[type],thick,price,[description] from pipingMaterial", conn)
             Dim dt As New Data.DataTable
             dt.Columns.Add("size")
             dt.Columns.Add("type")
             dt.Columns.Add("thick")
-            dt.Columns.Add("prize")
+            dt.Columns.Add("price")
             dt.Columns.Add("description")
             Dim dr As SqlDataReader = cmd.ExecuteReader()
             tbl.Rows.Clear()
             While dr.Read()
-                dt.Rows.Add(dr("size"), dr("type"), dr("thick"), dr("prize"), dr("description"))
-                tbl.Rows.Add(dr("size"), dr("type"), dr("thick"), dr("size"), dr("type"), dr("thick"), dr("prize"), dr("description"))
+                dt.Rows.Add(dr("size"), dr("type"), dr("thick"), dr("price"), dr("description"))
+                tbl.Rows.Add(dr("size"), dr("type"), dr("thick"), dr("size"), dr("type"), dr("thick"), dr("price"), dr("description"))
             End While
             dr.Close()
             Return dt
@@ -1727,6 +1727,131 @@ end"
             desconectar()
         End Try
     End Function
+    '=====================================================================================================================================================================
+    '=========== METODOS EQIPMNET MATERIAL ===============================================================================================================================
+    '=====================================================================================================================================================================
+    Public Function selectSizesMaterialEquipment() As Data.DataTable
+        Try
+            conectar()
+            Dim cmd As New SqlCommand("select distinct size from equipmentMaterial", conn)
+            Dim dt As New Data.DataTable
+            If cmd.ExecuteNonQuery Then
+                Dim da As New SqlDataAdapter(cmd)
+                da.Fill(dt)
+                Return dt
+            Else
+                dt.Columns.Add("size")
+                Return dt
+            End If
+        Catch ex As Exception
+            Return Nothing
+        Finally
+            desconectar()
+        End Try
+    End Function
+    Public Function saveUpdateEqipmentMaterial(ByVal tbl As DataGridView) As Boolean
+        conectar()
+        Dim tran As SqlTransaction
+        tran = conn.BeginTransaction
+        Dim contRow As Integer = 0
+        Try
+            Dim flag As Boolean = True
+            For Each row As DataGridViewRow In tbl.SelectedRows()
+                Dim cmd As New SqlCommand
+                If (If(row.Cells("idTypeEqMat").Value Is Nothing, "", row.Cells("idTypeEqMat").Value.ToString) = "") And (If(row.Cells("idThickEqMat").Value Is Nothing, "", row.Cells("idThickEqMat").Value.ToString()) = "") Then
+                    cmd.CommandText = "if (select count(*) from equipmentMaterial where [type]='" + row.Cells("TypeEqMat").Value.ToString() + "' and thick = " + row.Cells("ThickEqMat").Value.ToString() + " )=0
+                        begin 
+	                        insert into equipmentMaterial values ('" + row.Cells("TypeEqMat").Value.ToString() + "'," + row.Cells("ThickEqMat").Value.ToString() + "," + row.Cells("PriceEqMat").Value.ToString() + ",'" + row.Cells("DescriptionEqMat").Value.ToString() + "')
+                        end"
+                Else
+                    cmd.CommandText = "if (select count(*) from pipingMaterial where [type]='" + row.Cells("TypeEqMat").Value.ToString + "' and thick = " + row.Cells("ThickEqMat").Value.ToString + " )=1
+                        begin 
+	                        update equipmentMaterial set [type]='" + row.Cells("TypeEqMat").Value.ToString() + "', thick= " + row.Cells("ThickEqMat").Value.ToString() + " , price =" + row.Cells("PriceEqMat").Value.ToString() + ", [description]='" + row.Cells("DescriptionEqMat").Value.ToString() + "'where [type]='" + row.Cells("idTypeEqMat").Value.ToString() + "' and thick=" + row.Cells("idThickEqMat").Value.ToString() + " 
+                        end"
+                End If
+                contRow += 1
+                cmd.Connection = conn
+                cmd.Transaction = tran
+                If cmd.ExecuteNonQuery > 0 Then
+                    flag = True
+                Else
+                    flag = False
+                    Exit For
+                End If
+            Next
+            If flag Then
+                tran.Commit()
+                Return True
+            Else
+                tran.Rollback()
+                Return False
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message() + " " + contRow.ToString())
+            Return False
+        Finally
+            desconectar()
+        End Try
+    End Function
+    Public Function deleteEquipmentMaterial(ByVal tbl As DataGridView) As Boolean
+        conectar()
+        Dim tran As SqlTransaction
+        tran = conn.BeginTransaction
+        Try
+            Dim flag As Boolean = True
+            For Each row As DataGridViewRow In tbl.SelectedRows()
+                If (If(row.Cells("idTypeEqMat").Value Is Nothing, "", row.Cells("idTypeEqMat").Value.ToString()) <> "") And (If(row.Cells("idThickEqMat").Value Is Nothing, "", row.Cells("idThickEqMat").Value.ToString()) <> "") Then
+                    Dim cmd As New SqlCommand("delete from equipmentMaterial where [type] = '" + row.Cells("idTypeEqMat").Value.ToString() + "' and thick =" + row.Cells("idThickEqMat").Value.ToString() + "", conn)
+                    cmd.Transaction = tran
+                    If cmd.ExecuteNonQuery > 0 Then
+                        flag = True
+                    Else
+                        flag = False
+                        Exit For
+                    End If
+                Else
+                    flag = True
+                End If
+            Next
+            If flag Then
+                tran.Commit()
+                Return True
+            Else
+                tran.Rollback()
+                Return False
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message)
+            Return False
+        Finally
+            desconectar()
+        End Try
+    End Function
+    Public Function selectSizesMaterialEquipment(ByVal tbl As DataGridView) As Data.DataTable
+        Try
+            conectar()
+            Dim cmd As New SqlCommand("select size,[type],thick,price,[description] from equipmentMaterial", conn)
+            Dim dt As New Data.DataTable
+            dt.Columns.Add("size")
+            dt.Columns.Add("type")
+            dt.Columns.Add("thick")
+            dt.Columns.Add("price")
+            dt.Columns.Add("description")
+            Dim dr As SqlDataReader = cmd.ExecuteReader()
+            tbl.Rows.Clear()
+            While dr.Read()
+                dt.Rows.Add(dr("size"), dr("type"), dr("thick"), dr("price"), dr("description"))
+                tbl.Rows.Add(dr("size"), dr("type"), dr("thick"), dr("size"), dr("type"), dr("thick"), dr("price"), dr("description"))
+            End While
+            dr.Close()
+            Return dt
+        Catch ex As Exception
+            Return Nothing
+        Finally
+            desconectar()
+        End Try
+    End Function
+
     '=====================================================================================================================================================================
     '=========== METODOS EQIPMNET IR HC ==================================================================================================================================
     '=====================================================================================================================================================================

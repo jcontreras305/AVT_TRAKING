@@ -134,6 +134,7 @@ Partial Class RowPpDrawing
         Me.txtLine.Dock = System.Windows.Forms.DockStyle.Fill
         Me.txtLine.Location = New System.Drawing.Point(58, 3)
         Me.txtLine.Margin = New System.Windows.Forms.Padding(2)
+        Me.txtLine.MaxLength = 20
         Me.txtLine.Multiline = True
         Me.txtLine.Name = "txtLine"
         Me.txtLine.Size = New System.Drawing.Size(61, 141)

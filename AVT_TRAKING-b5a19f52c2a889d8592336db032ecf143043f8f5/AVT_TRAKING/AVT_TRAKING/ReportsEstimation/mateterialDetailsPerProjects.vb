@@ -18,7 +18,7 @@ Imports System
 Imports System.ComponentModel
 
 
-Public Class EstSummary
+Public Class mateterialDetailsPerProjects
     Inherits ReportClass
     
     Public Sub New()
@@ -27,7 +27,7 @@ Public Class EstSummary
     
     Public Overrides Property ResourceName() As String
         Get
-            Return "EstSummary.rpt"
+            Return "mateterialDetailsPerProjects.rpt"
         End Get
         Set
             'Do nothing
@@ -45,7 +45,7 @@ Public Class EstSummary
     
     Public Overrides Property FullResourceName() As String
         Get
-            Return "AVT_TRAKING.EstSummary.rpt"
+            Return "AVT_TRAKING.mateterialDetailsPerProjects.rpt"
         End Get
         Set
             'Do nothing
@@ -70,7 +70,7 @@ Public Class EstSummary
     
     <Browsable(false),  _
      DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)>  _
-    Public ReadOnly Property GroupHeaderSection1() As CrystalDecisions.CrystalReports.Engine.Section
+    Public ReadOnly Property Section3() As CrystalDecisions.CrystalReports.Engine.Section
         Get
             Return Me.ReportDefinition.Sections(2)
         End Get
@@ -78,7 +78,7 @@ Public Class EstSummary
     
     <Browsable(false),  _
      DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)>  _
-    Public ReadOnly Property Section3() As CrystalDecisions.CrystalReports.Engine.Section
+    Public ReadOnly Property Section4() As CrystalDecisions.CrystalReports.Engine.Section
         Get
             Return Me.ReportDefinition.Sections(3)
         End Get
@@ -86,7 +86,7 @@ Public Class EstSummary
     
     <Browsable(false),  _
      DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)>  _
-    Public ReadOnly Property GroupFooterSection1() As CrystalDecisions.CrystalReports.Engine.Section
+    Public ReadOnly Property Section5() As CrystalDecisions.CrystalReports.Engine.Section
         Get
             Return Me.ReportDefinition.Sections(4)
         End Get
@@ -94,23 +94,7 @@ Public Class EstSummary
     
     <Browsable(false),  _
      DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)>  _
-    Public ReadOnly Property Section4() As CrystalDecisions.CrystalReports.Engine.Section
-        Get
-            Return Me.ReportDefinition.Sections(5)
-        End Get
-    End Property
-    
-    <Browsable(false),  _
-     DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)>  _
-    Public ReadOnly Property Section5() As CrystalDecisions.CrystalReports.Engine.Section
-        Get
-            Return Me.ReportDefinition.Sections(6)
-        End Get
-    End Property
-    
-    <Browsable(false),  _
-     DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)>  _
-    Public ReadOnly Property Parameter_CompanyName() As CrystalDecisions.[Shared].IParameterField
+    Public ReadOnly Property Parameter_ProjectId() As CrystalDecisions.[Shared].IParameterField
         Get
             Return Me.DataDefinition.ParameterFields(0)
         End Get
@@ -118,31 +102,15 @@ Public Class EstSummary
     
     <Browsable(false),  _
      DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)>  _
-    Public ReadOnly Property Parameter_projectId() As CrystalDecisions.[Shared].IParameterField
+    Public ReadOnly Property Parameter_CompanyName() As CrystalDecisions.[Shared].IParameterField
         Get
             Return Me.DataDefinition.ParameterFields(1)
-        End Get
-    End Property
-    
-    <Browsable(false),  _
-     DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)>  _
-    Public ReadOnly Property Parameter_mateterialDetailsPerProjectsrpt_ProjectId() As CrystalDecisions.[Shared].IParameterField
-        Get
-            Return Me.DataDefinition.ParameterFields(2)
-        End Get
-    End Property
-    
-    <Browsable(false),  _
-     DesignerSerializationVisibilityAttribute(System.ComponentModel.DesignerSerializationVisibility.Hidden)>  _
-    Public ReadOnly Property Parameter_mateterialDetailsPerProjectsrpt_CompanyName() As CrystalDecisions.[Shared].IParameterField
-        Get
-            Return Me.DataDefinition.ParameterFields(3)
         End Get
     End Property
 End Class
 
 <System.Drawing.ToolboxBitmapAttribute(GetType(CrystalDecisions.[Shared].ExportOptions), "report.bmp")>  _
-Public Class CachedEstSummary
+Public Class CachedmateterialDetailsPerProjects
     Inherits Component
     Implements ICachedReport
     
@@ -184,7 +152,7 @@ Public Class CachedEstSummary
     End Property
     
     Public Overridable Function CreateReport() As CrystalDecisions.CrystalReports.Engine.ReportDocument Implements CrystalDecisions.ReportSource.ICachedReport.CreateReport
-        Dim rpt As EstSummary = New EstSummary()
+        Dim rpt As mateterialDetailsPerProjects = New mateterialDetailsPerProjects()
         rpt.Site = Me.Site
         Return rpt
     End Function

@@ -64,7 +64,6 @@ Partial Class ProjectsClients
         Me.Label5 = New System.Windows.Forms.Label()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
-        Me.tblProjectClients = New System.Windows.Forms.DataGridView()
         Me.Panel4 = New System.Windows.Forms.Panel()
         Me.btnKPI = New System.Windows.Forms.Button()
         Me.btnTrack = New System.Windows.Forms.Button()
@@ -88,13 +87,37 @@ Partial Class ProjectsClients
         Me.PanelChildForm = New System.Windows.Forms.Panel()
         Me.TableLayoutPanel4 = New System.Windows.Forms.TableLayoutPanel()
         Me.Panel3 = New System.Windows.Forms.Panel()
+        Me.tblProjectClientsAll = New System.Windows.Forms.DataGridView()
+        Me.clmWorkOrder = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.clmProjectDescription = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.clmCoplete = New System.Windows.Forms.DataGridViewCheckBoxColumn()
+        Me.clmTotalSpend = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.clmTotalHoursST = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.clmTotalAmountST = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.clmTotalHoursOT = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.clmTotalAmountOT = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.clmTotalHours3 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.clmTotalAmount3 = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.clmTotalExpensesSpend = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.clmTotalMaterialSpend = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.jobNo = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.workTMLumpSum = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.costDistribution = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.custumerNo = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.contractNo = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.costCode = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.idClient = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.clmIdPO = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.idTask = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.idAuxWO = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.idAux = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.photo = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Panel1.SuspendLayout()
         Me.PnllSetup.SuspendLayout()
         Me.Panel2.SuspendLayout()
         CType(Me.pcbLogoPC, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox1.SuspendLayout()
         Me.TableLayoutPanel3.SuspendLayout()
-        CType(Me.tblProjectClients, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel4.SuspendLayout()
         Me.TitleBar.SuspendLayout()
         CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -110,6 +133,7 @@ Partial Class ProjectsClients
         Me.PanelChildForm.SuspendLayout()
         Me.TableLayoutPanel4.SuspendLayout()
         Me.Panel3.SuspendLayout()
+        CType(Me.tblProjectClientsAll, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'Panel1
@@ -618,20 +642,6 @@ Partial Class ProjectsClients
         Me.Label1.TabIndex = 4
         Me.Label1.Text = "Name "
         '
-        'tblProjectClients
-        '
-        Me.tblProjectClients.AllowUserToAddRows = False
-        Me.tblProjectClients.AllowUserToDeleteRows = False
-        Me.tblProjectClients.BackgroundColor = System.Drawing.SystemColors.ControlLight
-        Me.tblProjectClients.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.tblProjectClients.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.tblProjectClients.Location = New System.Drawing.Point(0, 0)
-        Me.tblProjectClients.Name = "tblProjectClients"
-        Me.tblProjectClients.ReadOnly = True
-        Me.tblProjectClients.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.tblProjectClients.Size = New System.Drawing.Size(901, 408)
-        Me.tblProjectClients.TabIndex = 6
-        '
         'Panel4
         '
         Me.Panel4.Controls.Add(Me.btnKPI)
@@ -931,12 +941,181 @@ Partial Class ProjectsClients
         '
         'Panel3
         '
-        Me.Panel3.Controls.Add(Me.tblProjectClients)
+        Me.Panel3.Controls.Add(Me.tblProjectClientsAll)
         Me.Panel3.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel3.Location = New System.Drawing.Point(3, 3)
         Me.Panel3.Name = "Panel3"
         Me.Panel3.Size = New System.Drawing.Size(901, 408)
         Me.Panel3.TabIndex = 0
+        '
+        'tblProjectClientsAll
+        '
+        Me.tblProjectClientsAll.AllowUserToAddRows = False
+        Me.tblProjectClientsAll.AllowUserToDeleteRows = False
+        Me.tblProjectClientsAll.BackgroundColor = System.Drawing.SystemColors.ControlLight
+        Me.tblProjectClientsAll.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.tblProjectClientsAll.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.clmWorkOrder, Me.clmProjectDescription, Me.clmCoplete, Me.clmTotalSpend, Me.clmTotalHoursST, Me.clmTotalAmountST, Me.clmTotalHoursOT, Me.clmTotalAmountOT, Me.clmTotalHours3, Me.clmTotalAmount3, Me.clmTotalExpensesSpend, Me.clmTotalMaterialSpend, Me.jobNo, Me.workTMLumpSum, Me.costDistribution, Me.custumerNo, Me.contractNo, Me.costCode, Me.idClient, Me.clmIdPO, Me.idTask, Me.idAuxWO, Me.idAux, Me.photo})
+        Me.tblProjectClientsAll.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.tblProjectClientsAll.Location = New System.Drawing.Point(0, 0)
+        Me.tblProjectClientsAll.Name = "tblProjectClientsAll"
+        Me.tblProjectClientsAll.ReadOnly = True
+        Me.tblProjectClientsAll.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
+        Me.tblProjectClientsAll.Size = New System.Drawing.Size(901, 408)
+        Me.tblProjectClientsAll.TabIndex = 7
+        '
+        'clmWorkOrder
+        '
+        Me.clmWorkOrder.HeaderText = "Work Order"
+        Me.clmWorkOrder.Name = "clmWorkOrder"
+        Me.clmWorkOrder.ReadOnly = True
+        '
+        'clmProjectDescription
+        '
+        Me.clmProjectDescription.HeaderText = "Project Description"
+        Me.clmProjectDescription.Name = "clmProjectDescription"
+        Me.clmProjectDescription.ReadOnly = True
+        '
+        'clmCoplete
+        '
+        Me.clmCoplete.HeaderText = "clmCoplete"
+        Me.clmCoplete.Name = "clmCoplete"
+        Me.clmCoplete.ReadOnly = True
+        '
+        'clmTotalSpend
+        '
+        Me.clmTotalSpend.HeaderText = "Total Spend"
+        Me.clmTotalSpend.Name = "clmTotalSpend"
+        Me.clmTotalSpend.ReadOnly = True
+        '
+        'clmTotalHoursST
+        '
+        Me.clmTotalHoursST.HeaderText = "Total Hours ST"
+        Me.clmTotalHoursST.Name = "clmTotalHoursST"
+        Me.clmTotalHoursST.ReadOnly = True
+        '
+        'clmTotalAmountST
+        '
+        Me.clmTotalAmountST.HeaderText = "Total Amount ST"
+        Me.clmTotalAmountST.Name = "clmTotalAmountST"
+        Me.clmTotalAmountST.ReadOnly = True
+        '
+        'clmTotalHoursOT
+        '
+        Me.clmTotalHoursOT.HeaderText = "Total Hours OT"
+        Me.clmTotalHoursOT.Name = "clmTotalHoursOT"
+        Me.clmTotalHoursOT.ReadOnly = True
+        '
+        'clmTotalAmountOT
+        '
+        Me.clmTotalAmountOT.HeaderText = "Total Amount OT"
+        Me.clmTotalAmountOT.Name = "clmTotalAmountOT"
+        Me.clmTotalAmountOT.ReadOnly = True
+        '
+        'clmTotalHours3
+        '
+        Me.clmTotalHours3.HeaderText = "Total Hours 3"
+        Me.clmTotalHours3.Name = "clmTotalHours3"
+        Me.clmTotalHours3.ReadOnly = True
+        '
+        'clmTotalAmount3
+        '
+        Me.clmTotalAmount3.HeaderText = "Total Amount 3"
+        Me.clmTotalAmount3.Name = "clmTotalAmount3"
+        Me.clmTotalAmount3.ReadOnly = True
+        '
+        'clmTotalExpensesSpend
+        '
+        Me.clmTotalExpensesSpend.HeaderText = "Total Expenses Spend"
+        Me.clmTotalExpensesSpend.Name = "clmTotalExpensesSpend"
+        Me.clmTotalExpensesSpend.ReadOnly = True
+        '
+        'clmTotalMaterialSpend
+        '
+        Me.clmTotalMaterialSpend.HeaderText = "Total Material Spend"
+        Me.clmTotalMaterialSpend.Name = "clmTotalMaterialSpend"
+        Me.clmTotalMaterialSpend.ReadOnly = True
+        '
+        'jobNo
+        '
+        Me.jobNo.HeaderText = "Job No"
+        Me.jobNo.Name = "jobNo"
+        Me.jobNo.ReadOnly = True
+        '
+        'workTMLumpSum
+        '
+        Me.workTMLumpSum.HeaderText = "Work TM Lump Sum"
+        Me.workTMLumpSum.Name = "workTMLumpSum"
+        Me.workTMLumpSum.ReadOnly = True
+        Me.workTMLumpSum.Visible = False
+        '
+        'costDistribution
+        '
+        Me.costDistribution.HeaderText = "costDistribution"
+        Me.costDistribution.Name = "costDistribution"
+        Me.costDistribution.ReadOnly = True
+        Me.costDistribution.Visible = False
+        '
+        'custumerNo
+        '
+        Me.custumerNo.HeaderText = "custumerNo"
+        Me.custumerNo.Name = "custumerNo"
+        Me.custumerNo.ReadOnly = True
+        Me.custumerNo.Visible = False
+        '
+        'contractNo
+        '
+        Me.contractNo.HeaderText = "contractNo"
+        Me.contractNo.Name = "contractNo"
+        Me.contractNo.ReadOnly = True
+        Me.contractNo.Visible = False
+        '
+        'costCode
+        '
+        Me.costCode.HeaderText = "costCode"
+        Me.costCode.Name = "costCode"
+        Me.costCode.ReadOnly = True
+        Me.costCode.Visible = False
+        '
+        'idClient
+        '
+        Me.idClient.HeaderText = "idClient"
+        Me.idClient.Name = "idClient"
+        Me.idClient.ReadOnly = True
+        Me.idClient.Visible = False
+        '
+        'clmIdPO
+        '
+        Me.clmIdPO.HeaderText = "idPO"
+        Me.clmIdPO.Name = "clmIdPO"
+        Me.clmIdPO.ReadOnly = True
+        '
+        'idTask
+        '
+        Me.idTask.HeaderText = "idTask"
+        Me.idTask.Name = "idTask"
+        Me.idTask.ReadOnly = True
+        Me.idTask.Visible = False
+        '
+        'idAuxWO
+        '
+        Me.idAuxWO.HeaderText = "idAuxWO"
+        Me.idAuxWO.Name = "idAuxWO"
+        Me.idAuxWO.ReadOnly = True
+        Me.idAuxWO.Visible = False
+        '
+        'idAux
+        '
+        Me.idAux.HeaderText = "idAux"
+        Me.idAux.Name = "idAux"
+        Me.idAux.ReadOnly = True
+        Me.idAux.Visible = False
+        '
+        'photo
+        '
+        Me.photo.HeaderText = "photo"
+        Me.photo.Name = "photo"
+        Me.photo.ReadOnly = True
+        Me.photo.Visible = False
         '
         'ProjectsClients
         '
@@ -958,7 +1137,6 @@ Partial Class ProjectsClients
         Me.GroupBox1.ResumeLayout(False)
         Me.TableLayoutPanel3.ResumeLayout(False)
         Me.TableLayoutPanel3.PerformLayout()
-        CType(Me.tblProjectClients, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel4.ResumeLayout(False)
         Me.TitleBar.ResumeLayout(False)
         Me.TitleBar.PerformLayout()
@@ -979,6 +1157,7 @@ Partial Class ProjectsClients
         Me.PanelChildForm.ResumeLayout(False)
         Me.TableLayoutPanel4.ResumeLayout(False)
         Me.Panel3.ResumeLayout(False)
+        CType(Me.tblProjectClientsAll, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -992,7 +1171,6 @@ Partial Class ProjectsClients
     Friend WithEvents Label4 As Label
     Friend WithEvents Label3 As Label
     Friend WithEvents Label1 As Label
-    Friend WithEvents tblProjectClients As DataGridView
     Friend WithEvents PnllSetup As Panel
     Friend WithEvents btnWK As Button
     Friend WithEvents btnMaterialCodes As Button
@@ -1048,4 +1226,29 @@ Partial Class ProjectsClients
     Friend WithEvents Panel3 As Panel
     Friend WithEvents btnTrack As Button
     Friend WithEvents btnKPI As Button
+    Public WithEvents tblProjectClientsAll As DataGridView
+    Friend WithEvents clmWorkOrder As DataGridViewTextBoxColumn
+    Friend WithEvents clmProjectDescription As DataGridViewTextBoxColumn
+    Friend WithEvents clmCoplete As DataGridViewCheckBoxColumn
+    Friend WithEvents clmTotalSpend As DataGridViewTextBoxColumn
+    Friend WithEvents clmTotalHoursST As DataGridViewTextBoxColumn
+    Friend WithEvents clmTotalAmountST As DataGridViewTextBoxColumn
+    Friend WithEvents clmTotalHoursOT As DataGridViewTextBoxColumn
+    Friend WithEvents clmTotalAmountOT As DataGridViewTextBoxColumn
+    Friend WithEvents clmTotalHours3 As DataGridViewTextBoxColumn
+    Friend WithEvents clmTotalAmount3 As DataGridViewTextBoxColumn
+    Friend WithEvents clmTotalExpensesSpend As DataGridViewTextBoxColumn
+    Friend WithEvents clmTotalMaterialSpend As DataGridViewTextBoxColumn
+    Friend WithEvents jobNo As DataGridViewTextBoxColumn
+    Friend WithEvents workTMLumpSum As DataGridViewTextBoxColumn
+    Friend WithEvents costDistribution As DataGridViewTextBoxColumn
+    Friend WithEvents custumerNo As DataGridViewTextBoxColumn
+    Friend WithEvents contractNo As DataGridViewTextBoxColumn
+    Friend WithEvents costCode As DataGridViewTextBoxColumn
+    Friend WithEvents idClient As DataGridViewTextBoxColumn
+    Friend WithEvents clmIdPO As DataGridViewTextBoxColumn
+    Friend WithEvents idTask As DataGridViewTextBoxColumn
+    Friend WithEvents idAuxWO As DataGridViewTextBoxColumn
+    Friend WithEvents idAux As DataGridViewTextBoxColumn
+    Friend WithEvents photo As DataGridViewTextBoxColumn
 End Class

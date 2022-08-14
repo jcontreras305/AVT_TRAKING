@@ -18,6 +18,7 @@
         mtdFactor.selectEqInsUnitRate(tblEqInsUnitRate)
         mtdFactor.selectPpInsUnitRate(tblPpInsUnitRate)
         mtdFactor.selectSizesMaterialPiping(tblPipingMaterial)
+        mtdFactor.selectSizesMaterialEquipment(tblEquipmentMaterial)
         mtdFactor.selectEqIRHC(tblEquipmentIRHC)
         mtdFactor.selectPpIRHC(tblPipingIRHC)
     End Sub
@@ -103,6 +104,12 @@
     Private Sub tblPpInsUnitRate_Enter(sender As Object, e As EventArgs) Handles tblPpInsUnitRate.Enter
         selectTable = "PipingInsUR"
     End Sub
+    Private Sub tblEquipmentMaterial_Enter(sender As Object, e As EventArgs) Handles tblEquipmentMaterial.Enter
+        selectTable = "EquipmentMaterial"
+    End Sub
+    Private Sub tblPipingMaterial_Enter(sender As Object, e As EventArgs) Handles tblPipingMaterial.Enter
+        selectTable = "PipingMaterial"
+    End Sub
     Private Sub tblWorkWeekScheduleLaborRates_CellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles tblWorkWeekScheduleLaborRates.CellEndEdit
         Select Case e.ColumnIndex
             Case 2 To 5
@@ -113,7 +120,7 @@
                 End If
         End Select
     End Sub
-    Private Sub tblOnlyDigitCell_CellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles tblPpInsUnitRate.CellEndEdit, tblEqInsUnitRate.CellEndEdit, tblPntFitting.CellEndEdit, tblInsFitting.CellEndEdit, tblEnviroment.CellEndEdit, tblSCFUnitsRates.CellEndEdit, tblPaintElevation.CellEndEdit, tblScafElevation.CellEndEdit, tblPpPaintUnitRate.CellEndEdit, tblEqPaintUnitRate.CellEndEdit
+    Private Sub tblOnlyDigitCell_CellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles tblPpInsUnitRate.CellEndEdit, tblEqInsUnitRate.CellEndEdit, tblPntFitting.CellEndEdit, tblInsFitting.CellEndEdit, tblEnviroment.CellEndEdit, tblSCFUnitsRates.CellEndEdit, tblPaintElevation.CellEndEdit, tblScafElevation.CellEndEdit, tblPpPaintUnitRate.CellEndEdit, tblEqPaintUnitRate.CellEndEdit, tblPipingMaterial.CellEndEdit, tblEquipmentMaterial.CellEndEdit
         Select Case selectTable
             Case "ElevationSCF"
                 Select Case e.ColumnIndex
@@ -240,6 +247,30 @@
                             End If
                         End If
                     Case Else
+                End Select
+            Case "EquipmentMaterial"
+                Select Case e.ColumnIndex
+                    Case 3 To 4
+                        If tblEquipmentMaterial.CurrentRow.Cells(e.ColumnIndex).Value IsNot Nothing Then
+                            If Not soloNumero(tblEquipmentMaterial.CurrentRow.Cells(e.ColumnIndex).Value.ToString()) Then
+                                tblEquipmentMaterial.CurrentRow.Cells(e.ColumnIndex).Value = "0"
+                            End If
+                        End If
+                End Select
+            Case "PipingMaterial"
+                Select Case e.ColumnIndex
+                    Case 3
+                        If tblPipingMaterial.CurrentRow.Cells(e.ColumnIndex).Value IsNot Nothing Then
+                            If Not soloNumero(tblPipingMaterial.CurrentRow.Cells(e.ColumnIndex).Value.ToString()) Then
+                                tblPipingMaterial.CurrentRow.Cells(e.ColumnIndex).Value = "0"
+                            End If
+                        End If
+                    Case 5 To 6
+                        If tblPipingMaterial.CurrentRow.Cells(e.ColumnIndex).Value IsNot Nothing Then
+                            If Not soloNumero(tblPipingMaterial.CurrentRow.Cells(e.ColumnIndex).Value.ToString()) Then
+                                tblPipingMaterial.CurrentRow.Cells(e.ColumnIndex).Value = "0"
+                            End If
+                        End If
                 End Select
         End Select
     End Sub
@@ -379,6 +410,15 @@
                     End If
                 Else
                     MessageBox.Show("Please Select a row in the Table Piping IR HC Insulation Rate Unit Rate to Constinue.", "Important", MessageBoxButtons.OK, MessageBoxIcon.Asterisk)
+                End If
+            Case "EquipmentMaterial"
+                If tblEquipmentMaterial.SelectedRows.Count > 0 Then
+                    If mtdFactor.saveUpdateEqipmentMaterial(tblEquipmentMaterial) Then
+                        mtdFactor.selectSizesMaterialEquipment(tblEquipmentMaterial)
+                        MsgBox("Successful.")
+                    End If
+                Else
+                    MessageBox.Show("Please Select a row in the Table Piping Insulation Rate Unit Rate to Constinue.", "Important", MessageBoxButtons.OK, MessageBoxIcon.Asterisk)
                 End If
         End Select
     End Sub
@@ -568,8 +608,8 @@
                 If tblPipingMaterial.SelectedRows.Count > 0 Then
                     If DialogResult.Yes = MessageBox.Show("If you Accept, is likely that you delete an Element that is related to this Records. Are you sure to continue?", "Message", MessageBoxButtons.YesNo, MessageBoxIcon.Asterisk) Then
                         If mtdFactor.deletePipingMaterial(tblPipingMaterial) Then
-                            For Each row As DataGridViewRow In tblPpInsUnitRate.SelectedRows()
-                                tblPpInsUnitRate.Rows.Remove(row)
+                            For Each row As DataGridViewRow In tblPipingMaterial.SelectedRows()
+                                tblPipingMaterial.Rows.Remove(row)
                             Next
                             MsgBox("Successfull")
                         Else
@@ -600,6 +640,21 @@
                         If mtdFactor.deletePpIRHC(tblPipingIRHC) Then
                             For Each row As DataGridViewRow In tblPipingIRHC.SelectedRows()
                                 tblPipingIRHC.Rows.Remove(row)
+                            Next
+                            MsgBox("Successfull")
+                        Else
+                            MsgBox("Error, check the Data or refresh the Window.")
+                        End If
+                    End If
+                Else
+                    MessageBox.Show("Please Select A Row.", "Message", MessageBoxButtons.OK, MessageBoxIcon.Asterisk)
+                End If
+            Case "EquipmentMaterial"
+                If tblEquipmentMaterial.SelectedRows.Count > 0 Then
+                    If DialogResult.Yes = MessageBox.Show("If you Accept, is likely that you delete an Element that is related to this Records. Are you sure to continue?", "Message", MessageBoxButtons.YesNo, MessageBoxIcon.Asterisk) Then
+                        If mtdFactor.deleteEquipmentMaterial(tblEquipmentMaterial) Then
+                            For Each row As DataGridViewRow In tblEquipmentMaterial.SelectedRows()
+                                tblEquipmentMaterial.Rows.Remove(row)
                             Next
                             MsgBox("Successfull")
                         Else
@@ -857,6 +912,27 @@
             MsgBox(ex.Message())
         End Try
         selectTable = "PipingInsUR"
+    End Sub
+    Private Sub btnExcelTblEquipmentMaterial_Click(sender As Object, e As EventArgs) Handles btnExcelTblEquipmentMaterial.Click
+        Try
+            Dim sheetName = InputBox("Please Write the name of the Sheet to Read.", "Find Excel Sheet", "Sheet 1")
+            While sheetName <> ""
+                Dim tbl = leerExcel(lblMessage, pgbProgress, sheetName)
+                If tbl IsNot Nothing Then
+                    For Each row As Data.DataRow In tbl.Rows()
+                        tblEquipmentMaterial.Rows.Add("", "", row.ItemArray(0).ToString(), row.ItemArray(1).ToString(), row.ItemArray(2).ToString(), row.ItemArray(3).ToString())
+                    Next
+                    pgbProgress.Value = 100
+                    lblMessage.Text = "Message: End."
+                    Exit While
+                Else
+                    sheetName = InputBox("Please Write the name of the Sheet to Read." + "If do not wish to continue, leave the space blank.", "find Excel Sheet", "Sheet 1")
+                End If
+            End While
+        Catch ex As Exception
+            MsgBox(ex.Message())
+        End Try
+        selectTable = "EquipmentMaterial"
     End Sub
     Private Sub tblEqPaintUnitRate_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles tblEqPaintUnitRate.CellClick
         Select Case e.ColumnIndex

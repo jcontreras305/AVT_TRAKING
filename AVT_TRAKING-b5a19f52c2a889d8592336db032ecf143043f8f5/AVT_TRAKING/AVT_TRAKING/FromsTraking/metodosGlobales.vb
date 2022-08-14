@@ -331,7 +331,12 @@ end", con.conn)
     Public Function imageToByte(ByVal img As Image) As Byte()
         Try
             Dim aux As New IO.MemoryStream()
-            img.Save(aux, img.RawFormat)
+            If img IsNot Nothing Then
+                img.Save(aux, img.RawFormat)
+            Else
+                img = Global.AVT_TRAKING.My.Resources.NoImage
+                img.Save(aux, img.RawFormat)
+            End If
             'imageToByte = aux.GetBuffer()
             Return aux.GetBuffer()
         Catch ex As Exception

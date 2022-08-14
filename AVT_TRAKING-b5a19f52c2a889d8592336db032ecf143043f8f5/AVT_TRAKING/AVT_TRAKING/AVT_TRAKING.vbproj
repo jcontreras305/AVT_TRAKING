@@ -122,12 +122,6 @@
     <Compile Include="Class\MetodosTaxes.vb" />
     <Compile Include="Class\MetodosVendor.vb" />
     <Compile Include="Class\MetodosJobs.vb" />
-    <Compile Include="FromsEstimation\BuscarEst.Designer.vb">
-      <DependentUpon>BuscarEst.vb</DependentUpon>
-    </Compile>
-    <Compile Include="FromsEstimation\BuscarEst.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="FromsEstimation\DrawingProgress.Designer.vb">
       <DependentUpon>DrawingProgress.vb</DependentUpon>
     </Compile>
@@ -738,6 +732,12 @@
       <DependentUpon>JobNoSCFBudgetReport.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="ReportsEstimation\mateterialDetailsPerProjects.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>mateterialDetailsPerProjects.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="ReportsEstimation\RFIReportEQ.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -882,9 +882,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="FromsEstimation\BuscarEst.resx">
-      <DependentUpon>BuscarEst.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="FromsEstimation\DrawingProgress.resx">
       <DependentUpon>DrawingProgress.vb</DependentUpon>
     </EmbeddedResource>
@@ -1202,6 +1199,10 @@
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>JobNoSCFBudgetReport.vb</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="ReportsEstimation\mateterialDetailsPerProjects.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>mateterialDetailsPerProjects.vb</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="ReportsEstimation\RFIReportEQ.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>RFIReportEQ.vb</LastGenOutput>
@@ -1391,6 +1392,7 @@
     <None Include="Images\ReCap.png" />
     <None Include="Images\Send.png" />
     <None Include="Images\ok-check-mark.png" />
+    <Content Include="Images\NoImage.png" />
     <Content Include="Images\user.png" />
   </ItemGroup>
   <ItemGroup>

@@ -243,6 +243,18 @@ Partial Class Factors
         Me.ThickMat = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.PriceMat = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.DescriptionMat = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.TabPage11 = New System.Windows.Forms.TabPage()
+        Me.GroupBox17 = New System.Windows.Forms.GroupBox()
+        Me.TableLayoutPanel24 = New System.Windows.Forms.TableLayoutPanel()
+        Me.btnExcelTblEquipmentMaterial = New System.Windows.Forms.Button()
+        Me.Panel18 = New System.Windows.Forms.Panel()
+        Me.tblEquipmentMaterial = New System.Windows.Forms.DataGridView()
+        Me.idTypeEqMat = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.idThickEqMat = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.TypeEqMat = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ThickEqMat = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.PriceEqMat = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DescriptionEqMat = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Panel3 = New System.Windows.Forms.Panel()
         Me.btnDeleteFactorTbl = New System.Windows.Forms.Button()
         Me.lblMessage = New System.Windows.Forms.Label()
@@ -330,6 +342,11 @@ Partial Class Factors
         Me.TableLayoutPanel20.SuspendLayout()
         Me.Panel17.SuspendLayout()
         CType(Me.tblPipingMaterial, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.TabPage11.SuspendLayout()
+        Me.GroupBox17.SuspendLayout()
+        Me.TableLayoutPanel24.SuspendLayout()
+        Me.Panel18.SuspendLayout()
+        CType(Me.tblEquipmentMaterial, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel3.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -555,6 +572,7 @@ Partial Class Factors
         Me.TabControl1.Controls.Add(Me.TabPage8)
         Me.TabControl1.Controls.Add(Me.TabPage9)
         Me.TabControl1.Controls.Add(Me.TabPage10)
+        Me.TabControl1.Controls.Add(Me.TabPage11)
         Me.TabControl1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.TabControl1.Location = New System.Drawing.Point(3, 159)
         Me.TabControl1.Name = "TabControl1"
@@ -2296,6 +2314,116 @@ Partial Class Factors
         Me.DescriptionMat.HeaderText = "Description"
         Me.DescriptionMat.Name = "DescriptionMat"
         '
+        'TabPage11
+        '
+        Me.TabPage11.BackColor = System.Drawing.Color.FromArgb(CType(CType(83, Byte), Integer), CType(CType(93, Byte), Integer), CType(CType(102, Byte), Integer))
+        Me.TabPage11.Controls.Add(Me.GroupBox17)
+        Me.TabPage11.Location = New System.Drawing.Point(4, 22)
+        Me.TabPage11.Name = "TabPage11"
+        Me.TabPage11.Padding = New System.Windows.Forms.Padding(3)
+        Me.TabPage11.Size = New System.Drawing.Size(954, 213)
+        Me.TabPage11.TabIndex = 10
+        Me.TabPage11.Text = "EQ Material"
+        '
+        'GroupBox17
+        '
+        Me.GroupBox17.Controls.Add(Me.TableLayoutPanel24)
+        Me.GroupBox17.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.GroupBox17.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.GroupBox17.Location = New System.Drawing.Point(3, 3)
+        Me.GroupBox17.Name = "GroupBox17"
+        Me.GroupBox17.Size = New System.Drawing.Size(948, 207)
+        Me.GroupBox17.TabIndex = 1
+        Me.GroupBox17.TabStop = False
+        Me.GroupBox17.Text = "Equipment Material"
+        '
+        'TableLayoutPanel24
+        '
+        Me.TableLayoutPanel24.ColumnCount = 3
+        Me.TableLayoutPanel24.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 75.0!))
+        Me.TableLayoutPanel24.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 111.0!))
+        Me.TableLayoutPanel24.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25.0!))
+        Me.TableLayoutPanel24.Controls.Add(Me.btnExcelTblEquipmentMaterial, 1, 0)
+        Me.TableLayoutPanel24.Controls.Add(Me.Panel18, 0, 0)
+        Me.TableLayoutPanel24.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.TableLayoutPanel24.Location = New System.Drawing.Point(3, 16)
+        Me.TableLayoutPanel24.Name = "TableLayoutPanel24"
+        Me.TableLayoutPanel24.RowCount = 1
+        Me.TableLayoutPanel24.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
+        Me.TableLayoutPanel24.Size = New System.Drawing.Size(942, 188)
+        Me.TableLayoutPanel24.TabIndex = 0
+        '
+        'btnExcelTblEquipmentMaterial
+        '
+        Me.btnExcelTblEquipmentMaterial.Dock = System.Windows.Forms.DockStyle.Top
+        Me.btnExcelTblEquipmentMaterial.FlatAppearance.BorderSize = 0
+        Me.btnExcelTblEquipmentMaterial.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(59, Byte), Integer), CType(CType(69, Byte), Integer), CType(CType(79, Byte), Integer))
+        Me.btnExcelTblEquipmentMaterial.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnExcelTblEquipmentMaterial.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnExcelTblEquipmentMaterial.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.btnExcelTblEquipmentMaterial.Image = Global.AVT_TRAKING.My.Resources.Resources.excel
+        Me.btnExcelTblEquipmentMaterial.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnExcelTblEquipmentMaterial.Location = New System.Drawing.Point(626, 3)
+        Me.btnExcelTblEquipmentMaterial.Name = "btnExcelTblEquipmentMaterial"
+        Me.btnExcelTblEquipmentMaterial.Size = New System.Drawing.Size(105, 35)
+        Me.btnExcelTblEquipmentMaterial.TabIndex = 35
+        Me.btnExcelTblEquipmentMaterial.Text = "Upload"
+        Me.btnExcelTblEquipmentMaterial.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.btnExcelTblEquipmentMaterial.UseVisualStyleBackColor = True
+        '
+        'Panel18
+        '
+        Me.Panel18.Controls.Add(Me.tblEquipmentMaterial)
+        Me.Panel18.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Panel18.ForeColor = System.Drawing.SystemColors.ControlText
+        Me.Panel18.Location = New System.Drawing.Point(3, 3)
+        Me.Panel18.Name = "Panel18"
+        Me.Panel18.Size = New System.Drawing.Size(617, 182)
+        Me.Panel18.TabIndex = 36
+        '
+        'tblEquipmentMaterial
+        '
+        Me.tblEquipmentMaterial.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
+        Me.tblEquipmentMaterial.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.tblEquipmentMaterial.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.idTypeEqMat, Me.idThickEqMat, Me.TypeEqMat, Me.ThickEqMat, Me.PriceEqMat, Me.DescriptionEqMat})
+        Me.tblEquipmentMaterial.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.tblEquipmentMaterial.Location = New System.Drawing.Point(0, 0)
+        Me.tblEquipmentMaterial.Name = "tblEquipmentMaterial"
+        Me.tblEquipmentMaterial.Size = New System.Drawing.Size(617, 182)
+        Me.tblEquipmentMaterial.TabIndex = 36
+        '
+        'idTypeEqMat
+        '
+        Me.idTypeEqMat.HeaderText = "idType"
+        Me.idTypeEqMat.Name = "idTypeEqMat"
+        Me.idTypeEqMat.Visible = False
+        '
+        'idThickEqMat
+        '
+        Me.idThickEqMat.HeaderText = "idThick"
+        Me.idThickEqMat.Name = "idThickEqMat"
+        Me.idThickEqMat.Visible = False
+        '
+        'TypeEqMat
+        '
+        Me.TypeEqMat.HeaderText = "Type"
+        Me.TypeEqMat.Name = "TypeEqMat"
+        '
+        'ThickEqMat
+        '
+        Me.ThickEqMat.HeaderText = "Thick"
+        Me.ThickEqMat.Name = "ThickEqMat"
+        '
+        'PriceEqMat
+        '
+        Me.PriceEqMat.HeaderText = "Price"
+        Me.PriceEqMat.Name = "PriceEqMat"
+        '
+        'DescriptionEqMat
+        '
+        Me.DescriptionEqMat.HeaderText = "Description"
+        Me.DescriptionEqMat.Name = "DescriptionEqMat"
+        '
         'Panel3
         '
         Me.Panel3.Controls.Add(Me.btnDeleteFactorTbl)
@@ -2454,6 +2582,11 @@ Partial Class Factors
         Me.TableLayoutPanel20.ResumeLayout(False)
         Me.Panel17.ResumeLayout(False)
         CType(Me.tblPipingMaterial, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.TabPage11.ResumeLayout(False)
+        Me.GroupBox17.ResumeLayout(False)
+        Me.TableLayoutPanel24.ResumeLayout(False)
+        Me.Panel18.ResumeLayout(False)
+        CType(Me.tblEquipmentMaterial, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel3.ResumeLayout(False)
         Me.Panel3.PerformLayout()
         Me.ResumeLayout(False)
@@ -2683,4 +2816,16 @@ Partial Class Factors
     Friend WithEvents LaborProdEqIRHC As DataGridViewTextBoxColumn
     Friend WithEvents MaterialRateEqIRHC As DataGridViewTextBoxColumn
     Friend WithEvents EquipmentEqIRHC As DataGridViewTextBoxColumn
+    Friend WithEvents TabPage11 As TabPage
+    Friend WithEvents GroupBox17 As GroupBox
+    Friend WithEvents TableLayoutPanel24 As TableLayoutPanel
+    Friend WithEvents btnExcelTblEquipmentMaterial As Button
+    Friend WithEvents Panel18 As Panel
+    Friend WithEvents tblEquipmentMaterial As DataGridView
+    Friend WithEvents idTypeEqMat As DataGridViewTextBoxColumn
+    Friend WithEvents idThickEqMat As DataGridViewTextBoxColumn
+    Friend WithEvents TypeEqMat As DataGridViewTextBoxColumn
+    Friend WithEvents ThickEqMat As DataGridViewTextBoxColumn
+    Friend WithEvents PriceEqMat As DataGridViewTextBoxColumn
+    Friend WithEvents DescriptionEqMat As DataGridViewTextBoxColumn
 End Class
