@@ -219,6 +219,7 @@ Public Class HoursWeekPerEmployees
                             Dim cmbProyect As New DataGridViewComboBoxCell
                             With cmbProyect
                                 mtdHPW.llenarComboCellProject(cmbProyect, proyectTable)
+                                .DropDownWidth = 220
                             End With
                             tblRecordEmployee.CurrentRow.Cells("Project") = cmbProyect
                         End If
@@ -233,6 +234,7 @@ Public Class HoursWeekPerEmployees
                             Dim cmbWorkCode As New DataGridViewComboBoxCell
                             With cmbWorkCode
                                 mtdHPW.llenarComboCellWorkCode(cmbWorkCode, workCodeTable)
+                                .DropDownWidth = 180
                             End With
                             tblRecordEmployee.CurrentRow.Cells("Work Code") = cmbWorkCode
                         End If
@@ -828,23 +830,41 @@ Public Class HoursWeekPerEmployees
         list.Add(idEmpleado)
 
         If tblRecordEmployee.Rows(index).Cells("Work Code").Value IsNot DBNull.Value Then
-            For Each row As DataRow In workCodeTable.Rows
-                If row.ItemArray(1) = tblRecordEmployee.Rows(index).Cells("Work Code").Value Then
-                    list.Add(row.ItemArray(0)) 'workCode
-                    Exit For
-                End If
-            Next
+            Dim arrayRowsWC() As DataRow = workCodeTable.Select("name = '" & tblRecordEmployee.Rows(index).Cells("Work Code").Value & "'")
+            If arrayRowsWC.Length > 0 Then
+                list.Add(arrayRowsWC(0).ItemArray(0))
+            Else
+                mensaje = If(mensaje = "", "Please choose a Work Code.", vbCrLf + " Please choose a Work Code")
+            End If
+            'For Each row As DataRow In workCodeTable.Rows
+            '    If row.ItemArray(1) = tblRecordEmployee.Rows(index).Cells("Work Code").Value Then
+            '        list.Add(row.ItemArray(0)) 'workCode
+            '        Exit For
+            '    End If
+            'Next
         Else
             mensaje = If(mensaje = "", "Please choose a Work Code.", vbCrLf + " Please choose a Work Code")
         End If
 
         If tblRecordEmployee.Rows(index).Cells("Project").Value IsNot DBNull.Value Then
-            For Each row As DataRow In proyectTable.Rows
-                If row.ItemArray(1) = tblRecordEmployee.Rows(index).Cells("Project").Value Then
-                    list.Add(row.ItemArray(0)) '
-                    Exit For
+            Dim poAux As String = tblRecordEmployee.Rows(index).Cells("Project").Value.ToString.Replace("    ", "/")
+            Dim array() As String = poAux.Split("/")
+            If array.Length = 3 Then
+                Dim arrayRowsPO() As DataRow = proyectTable.Select("project = '" & array(0) & "' and idPO = " & array(1) & " and jobNo = " & array(2) & "")
+                If arrayRowsPO.Length > 0 Then
+                    list.Add(arrayRowsPO(0).ItemArray(0))
+                Else
+                    mensaje = If(mensaje = "", "Please choose a Proyect.", vbCrLf + " Please choose a Proyect")
                 End If
-            Next
+            Else
+                mensaje = If(mensaje = "", "Please choose a Proyect.", vbCrLf + " Please choose a Proyect")
+            End If
+            'For Each row As DataRow In proyectTable.Rows
+            '    If row.ItemArray(1) = tblRecordEmployee.Rows(index).Cells("Project").Value Then
+            '        list.Add(row.ItemArray(0)) '
+            '        Exit For
+            '    End If
+            'Next
         Else
             mensaje = If(mensaje = "", "Please choose a Proyect.", vbCrLf + " Please choose a Proyect")
         End If

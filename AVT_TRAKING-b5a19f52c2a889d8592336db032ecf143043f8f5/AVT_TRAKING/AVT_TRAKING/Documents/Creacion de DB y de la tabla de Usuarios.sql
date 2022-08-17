@@ -4607,75 +4607,163 @@ go
 ----#########################################################################################################################################################################################
 ----############## CAMBIOS EN LA TABLA DE PIPING MATERIAL Y CREACION DE LA TABLA EQUIPMENT MATERIAL #########################################################################################
 ----#########################################################################################################################################################################################
-EXEC sp_rename 'dbo.pipingMaterial.prize','price','COLUMN'
-go
+--EXEC sp_rename 'dbo.pipingMaterial.prize','price','COLUMN'
+--go
 
-create table equipmentMaterial(
-	[type] varchar(25) not null,
-	thick float not null,
-	price money,
-	[description] varchar(50)
-)
-go
-ALTER TABLE equipmentMaterial ADD CONSTRAINT pk_type_thick_EquipmentMaterial
-PRIMARY KEY([type],[thick])
-go
+--create table equipmentMaterial(
+--	[type] varchar(25) not null,
+--	thick float not null,
+--	price money,
+--	[description] varchar(50)
+--)
+--go
+--ALTER TABLE equipmentMaterial ADD CONSTRAINT pk_type_thick_EquipmentMaterial
+--PRIMARY KEY([type],[thick])
+--go
 
-ALTER TABLE equipmentMaterial ADD CONSTRAINT fk_type_EquipmentMaterial
-FOREIGN KEY ([type]) REFERENCES insFitting ([type])
-GO
+--ALTER TABLE equipmentMaterial ADD CONSTRAINT fk_type_EquipmentMaterial
+--FOREIGN KEY ([type]) REFERENCES insFitting ([type])
+--GO
 
 
-create proc sp_MaterialEstimationProject
-@ProjectId as varchar(30)
+--create proc sp_MaterialEstimationProject
+--@ProjectId as varchar(30)
+--as
+--begin
+--	select
+--	distinct
+--	T1.idDrawingNum ,
+--	(select TOP 1 SUM(T2.[SQF/LF]) from 
+--					(select TA.[SQF/LF] from
+--						(select dr.idDrawingNum, ppE.lFtII  as 'SQF/LF', ppE.size , ppE.thick , ppM.price , ppM.description , (ppE.lFtII * ppM.price) as 'PMCost' from pipingEst as ppE
+--							inner join pipingMaterial ppM on ppE.size = ppM.size and ppE.thick = ppM.thick and ppe.[type]= ppM.[type]
+--							inner join drawing as dr on dr.idDrawingNum = ppE.idDrawingNum 
+--							inner join projectClientEst as po on po.projectId  = dr.projectId
+--							where po.projectId = @ProjectId and (ppE.lFtII > 0 and not ppE.lFtII is null )
+--							union all
+--							select dr.idDrawingNum ,eqE.sqrFtII as 'SQF/LF', 0 as 'Size' , eqE.thick , eqM.price , eqM.description , (eqE.sqrFtII * eqM.price) as 'PMCost' from equipmentEst as eqE
+--							inner join equipmentMaterial as eqM on  eqM.[type] = eqE.[type] and eqM.[thick] = eqE.[thick]
+--							inner join drawing as dr on dr.idDrawingNum = eqE.idDrawingNum 
+--							inner join projectClientEst as po on po.projectId  = dr.projectId
+--							where po.projectId = @ProjectId and (eqE.sqrFtII > 0 and not eqE.sqrFtII is null)) as TA 
+--						where TA.[description] = T1.[description] and TA.[thick] = T1.[thick] and TA.[price] = T1.[price] and TA.[idDrawingNum] = T1.[idDrawingNum] ) as T2) AS 'SQF/LF',
+--	T1.size , 
+--	T1.thick,
+--	T1.price,
+--	T1.[description],
+--	(select TOP 1 SUM(T2.[SQF/LF]) from 
+--					(select TA.[SQF/LF] from
+--						(select dr.idDrawingNum, ppE.lFtII  as 'SQF/LF', ppE.size , ppE.thick , ppM.price , ppM.description , (ppE.lFtII * ppM.price) as 'PMCost' from pipingEst as ppE
+--							inner join pipingMaterial ppM on ppE.size = ppM.size and ppE.thick = ppM.thick and ppe.[type]= ppM.[type]
+--							inner join drawing as dr on dr.idDrawingNum = ppE.idDrawingNum 
+--							inner join projectClientEst as po on po.projectId  = dr.projectId
+--							where po.projectId = @ProjectId and (ppE.lFtII > 0 and not ppE.lFtII is null )
+--							union all
+--							select dr.idDrawingNum ,eqE.sqrFtII as 'SQF/LF', 0 as 'Size' , eqE.thick , eqM.price , eqM.description , (eqE.sqrFtII * eqM.price) as 'PMCost' from equipmentEst as eqE
+--							inner join equipmentMaterial as eqM on  eqM.[type] = eqE.[type] and eqM.[thick] = eqE.[thick]
+--							inner join drawing as dr on dr.idDrawingNum = eqE.idDrawingNum 
+--							inner join projectClientEst as po on po.projectId  = dr.projectId
+--							where po.projectId = @ProjectId and (eqE.sqrFtII > 0 and not eqE.sqrFtII is null)) as TA 
+--						where TA.[description] = T1.[description] and TA.[thick] = T1.[thick] and TA.[price] = T1.[price] and TA.[idDrawingNum] = T1.[idDrawingNum] ) as T2) AS 'PMCost'
+--	from(
+--	select dr.idDrawingNum, ppE.lFtII  as 'SQF/LF', ppE.size , ppE.thick , ppM.price , ppM.description , (ppE.lFtII * ppM.price) as 'PMCost' from pipingEst as ppE
+--	inner join pipingMaterial ppM on ppE.size = ppM.size and ppE.thick = ppM.thick and ppe.[type]= ppM.[type]
+--	inner join drawing as dr on dr.idDrawingNum = ppE.idDrawingNum 
+--	inner join projectClientEst as po on po.projectId  = dr.projectId
+--	where po.projectId = @ProjectId and (ppE.lFtII > 0 and not ppE.lFtII is null )
+--	union all
+--	select dr.idDrawingNum ,eqE.sqrFtII as 'SQF/LF', 0 as 'Size' , eqE.thick , eqM.price , eqM.description , (eqE.sqrFtII * eqM.price) as 'PMCost' from equipmentEst as eqE
+--	inner join equipmentMaterial as eqM on  eqM.[type] = eqE.[type] and eqM.[thick] = eqE.[thick]
+--	inner join drawing as dr on dr.idDrawingNum = eqE.idDrawingNum 
+--	inner join projectClientEst as po on po.projectId  = dr.projectId
+--	where po.projectId = @ProjectId and (eqE.sqrFtII > 0 and not eqE.sqrFtII is null)) as T1
+--end
+--go
+
+----| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
+----| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
+----V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V
+----#########################################################################################################################################################################################
+----############## CAMBIOS EN LA CONSULTA PARA EL REPORTE DE BY JOB NO ######################################################################################################################
+----#########################################################################################################################################################################################
+ALTER proc [dbo].[Sp_By_JobNumber]
+@startdate as date, 
+@finaldate as date,
+@clientnum as int,
+@job as bigint,
+@all as bit
 as
 begin
-	select
-	distinct
-	T1.idDrawingNum ,
-	(select TOP 1 SUM(T2.[SQF/LF]) from 
-					(select TA.[SQF/LF] from
-						(select dr.idDrawingNum, ppE.lFtII  as 'SQF/LF', ppE.size , ppE.thick , ppM.price , ppM.description , (ppE.lFtII * ppM.price) as 'PMCost' from pipingEst as ppE
-							inner join pipingMaterial ppM on ppE.size = ppM.size and ppE.thick = ppM.thick and ppe.[type]= ppM.[type]
-							inner join drawing as dr on dr.idDrawingNum = ppE.idDrawingNum 
-							inner join projectClientEst as po on po.projectId  = dr.projectId
-							where po.projectId = @ProjectId and (ppE.lFtII > 0 and not ppE.lFtII is null )
-							union all
-							select dr.idDrawingNum ,eqE.sqrFtII as 'SQF/LF', 0 as 'Size' , eqE.thick , eqM.price , eqM.description , (eqE.sqrFtII * eqM.price) as 'PMCost' from equipmentEst as eqE
-							inner join equipmentMaterial as eqM on  eqM.[type] = eqE.[type] and eqM.[thick] = eqE.[thick]
-							inner join drawing as dr on dr.idDrawingNum = eqE.idDrawingNum 
-							inner join projectClientEst as po on po.projectId  = dr.projectId
-							where po.projectId = @ProjectId and (eqE.sqrFtII > 0 and not eqE.sqrFtII is null)) as TA 
-						where TA.[description] = T1.[description] and TA.[thick] = T1.[thick] and TA.[price] = T1.[price] and TA.[idDrawingNum] = T1.[idDrawingNum] ) as T2) AS 'SQF/LF',
-	T1.size , 
-	T1.thick,
-	T1.price,
-	T1.[description],
-	(select TOP 1 SUM(T2.[SQF/LF]) from 
-					(select TA.[SQF/LF] from
-						(select dr.idDrawingNum, ppE.lFtII  as 'SQF/LF', ppE.size , ppE.thick , ppM.price , ppM.description , (ppE.lFtII * ppM.price) as 'PMCost' from pipingEst as ppE
-							inner join pipingMaterial ppM on ppE.size = ppM.size and ppE.thick = ppM.thick and ppe.[type]= ppM.[type]
-							inner join drawing as dr on dr.idDrawingNum = ppE.idDrawingNum 
-							inner join projectClientEst as po on po.projectId  = dr.projectId
-							where po.projectId = @ProjectId and (ppE.lFtII > 0 and not ppE.lFtII is null )
-							union all
-							select dr.idDrawingNum ,eqE.sqrFtII as 'SQF/LF', 0 as 'Size' , eqE.thick , eqM.price , eqM.description , (eqE.sqrFtII * eqM.price) as 'PMCost' from equipmentEst as eqE
-							inner join equipmentMaterial as eqM on  eqM.[type] = eqE.[type] and eqM.[thick] = eqE.[thick]
-							inner join drawing as dr on dr.idDrawingNum = eqE.idDrawingNum 
-							inner join projectClientEst as po on po.projectId  = dr.projectId
-							where po.projectId = @ProjectId and (eqE.sqrFtII > 0 and not eqE.sqrFtII is null)) as TA 
-						where TA.[description] = T1.[description] and TA.[thick] = T1.[thick] and TA.[price] = T1.[price] and TA.[idDrawingNum] = T1.[idDrawingNum] ) as T2) AS 'PMCost'
-	from(
-	select dr.idDrawingNum, ppE.lFtII  as 'SQF/LF', ppE.size , ppE.thick , ppM.price , ppM.description , (ppE.lFtII * ppM.price) as 'PMCost' from pipingEst as ppE
-	inner join pipingMaterial ppM on ppE.size = ppM.size and ppE.thick = ppM.thick and ppe.[type]= ppM.[type]
-	inner join drawing as dr on dr.idDrawingNum = ppE.idDrawingNum 
-	inner join projectClientEst as po on po.projectId  = dr.projectId
-	where po.projectId = @ProjectId and (ppE.lFtII > 0 and not ppE.lFtII is null )
-	union all
-	select dr.idDrawingNum ,eqE.sqrFtII as 'SQF/LF', 0 as 'Size' , eqE.thick , eqM.price , eqM.description , (eqE.sqrFtII * eqM.price) as 'PMCost' from equipmentEst as eqE
-	inner join equipmentMaterial as eqM on  eqM.[type] = eqE.[type] and eqM.[thick] = eqE.[thick]
-	inner join drawing as dr on dr.idDrawingNum = eqE.idDrawingNum 
-	inner join projectClientEst as po on po.projectId  = dr.projectId
-	where po.projectId = @ProjectId and (eqE.sqrFtII > 0 and not eqE.sqrFtII is null)) as T1
+select distinct
+	jb.jobNo,
+	po.idPO,
+	wo.idWO,
+	tk.task,
+	em.SAPNumber,
+	em.numberEmploye, 
+	datename(dw,hw.dateWorked) as 'DAY',
+	concat(em.lastName,', ', em.firstName,' ' ,em.middleName) as 'Employee Name',
+	hw.dateWorked,
+	ISNULL(SUBSTRING( wc.name,1,iif(CHARINDEX('-',wc.name)=0, len(wc.name) ,(CHARINDEX('-',wc.name)-1))),'') as 'Code',
+	
+	
+	ISNULL((select SUM(hw1.hoursST) from 
+	hoursWorked as hw1 
+	inner join workCode as wc1 on wc1.idWorkCode = hw1.idWorkCode 
+	inner join task as tk1 on tk1.idAux = hw1.idAux 
+	inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO 
+	inner join projectOrder as po1 on po1.idPO = wo1.idPO and wo1.jobNo = po1.jobNo 
+	inner join job as jb1 on jb1.jobNo = po1.jobNo  
+	where hw1.dateWorked = hw.dateWorked and em.idEmployee = hw1.idEmployee 
+			and jb.jobNo = jb1.jobNo and po1.idPO = po.idPO 
+			and wo.idAuxWO = wo1.idAuxWO 
+			and tk1.idAux = tk.idAux 
+			and (SUBSTRING(wc1.name,1,iif(CHARINDEX('-',wc1.name)=0, len(wc1.name) ,(CHARINDEX('-',wc1.name)-1))) =SUBSTRING( wc.name,1,iif(CHARINDEX('-',wc.name)=0, len(wc.name) ,(CHARINDEX('-',wc.name)-1)))  ) 
+			and not wc1.name like '%6.4%'),0) 
+	as 'Hours ST',
+		
+	ISNULL(wc.billingRate1,0)as 'billingRate1',
+
+	ISNULL((select ISNULL(SUM(hw1.hoursOT),0) from 
+	hoursWorked as hw1 
+	inner join workCode as wc1 on wc1.idWorkCode = hw1.idWorkCode 
+	inner join task as tk1 on tk1.idAux = hw1.idAux 
+	inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO 
+	inner join projectOrder as po1 on po1.idPO = wo1.idPO and wo1.jobNo = po1.jobNo 
+	inner join job as jb1 on jb1.jobNo = po1.jobNo  
+	where hw1.dateWorked = hw.dateWorked 
+			and em.idEmployee = hw1.idEmployee 
+			and jb.jobNo = jb1.jobNo 
+			and po1.idPO = po.idPO 
+			and wo.idAuxWO = wo1.idAuxWO 
+			and tk1.idAux = tk.idAux 
+			and (SUBSTRING( wc1.name,1,iif(CHARINDEX('-',wc1.name)=0, len(wc1.name) ,(CHARINDEX('-',wc1.name)-1))) =SUBSTRING( wc.name,1,iif(CHARINDEX('-',wc.name)=0, len(wc.name) ,(CHARINDEX('-',wc.name)-1)))  ) 
+			and not wc1.name like '%6.4%') ,0)
+	 as 'Hours OT',
+
+	ISNULL(wc.billingRateOT,0) as 'billingRateOT',
+	
+	ISNULL((select exu.amount from expensesUsed as exu 
+	inner join expenses as ex on ex.idExpenses = exu.idExpense 
+	inner join task as tk1 on tk1.idAux = exu.idAux 
+	inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO 
+	inner join projectOrder as po1 on po1.idPO = wo1.idPO and wo1.jobNo = po1.jobNo 
+	inner join job as jb1 on jb1.jobNo = po1.jobNo 
+	 where tk1.idAux = tk.idAux and wo1.idAuxWO = wo.idAuxWO and po.idPO = po1.idPO and jb.jobNo = jb1.jobNo and exu.dateExpense between @startdate and @finaldate and exu.idEmployee= em.idEmployee and ex.expenseCode like 'Per-Diem') ,0) as 'PerDiem' ,
+
+	ISNULL((select exu.amount from expensesUsed as exu inner join expenses as ex on ex.idExpenses = exu.idExpense inner join task as tk1 on tk1.idAux = exu.idAux inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO inner join projectOrder as po1 on po1.idPO = wo1.idPO and wo1.jobNo = po1.jobNo inner join job as jb1 on jb1.jobNo = po1.jobNo 
+	 where tk1.idAux = tk.idAux and wo1.idAuxWO = wo.idAuxWO and po.idPO = po1.idPO and jb.jobNo = jb1.jobNo and exu.dateExpense between @startdate and @finaldate and exu.idEmployee= em.idEmployee and ex.expenseCode like 'Travel') ,0) as 'Travel' 
+	from employees as em 
+		inner join hoursWorked as hw on hw.idEmployee = em.idEmployee
+		left join workCode as wc on wc.idWorkCode = hw.idWorkCode
+		inner join task as tk on tk.idAux= hw.idAux
+		inner join workOrder wo on  wo.idAuxWO=tk.idAuxWO
+		inner join projectOrder as po on po.idPO = wo.idPO and po.jobNo = wo.jobNo
+		inner join job as jb on jb.jobNo = wo.jobNo 
+		inner join clients as cl on cl.idClient = jb.idClient
+		where hw.dateWorked between @startdate and @finaldate and cl.numberClient = @clientnum and jb.jobNo like iif(@all=1,'%%',CONCAT('',@job,'')) and not wc.name like '%6.4%' 
+	order by 
+	concat(em.lastName,', ', em.firstName,' ' ,em.middleName),
+	hw.dateWorked
 end
 go
