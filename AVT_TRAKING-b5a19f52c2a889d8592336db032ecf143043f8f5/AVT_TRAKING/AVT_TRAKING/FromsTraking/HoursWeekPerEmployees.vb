@@ -16,6 +16,8 @@ Public Class HoursWeekPerEmployees
     Dim _dtpSemanal As New DateTimePicker
     Dim _rectangulo As New Rectangle
     Private Sub HoursWeekPeerEmployees_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        selectMyCompanyImage(pcbCompany)
+        pcbCompany.SizeMode = PictureBoxSizeMode.StretchImage
         mtdHPW.llenarEmpleadosCombo(cmbEmpleados, idsEmployees)
         If cmbEmpleados.Items.Count > 0 Then
             cmbEmpleados.SelectedItem = cmbEmpleados.Items(0)

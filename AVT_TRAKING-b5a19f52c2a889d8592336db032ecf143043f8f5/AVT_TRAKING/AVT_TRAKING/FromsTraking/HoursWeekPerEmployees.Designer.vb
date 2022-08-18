@@ -92,6 +92,7 @@ Partial Class HoursWeekPerEmployees
         Me.btnDelete = New System.Windows.Forms.Button()
         Me.btnInsert = New System.Windows.Forms.Button()
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
+        Me.pcbCompany = New System.Windows.Forms.PictureBox()
         Me.Panel1.SuspendLayout()
         CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.btnRestore, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -108,11 +109,13 @@ Partial Class HoursWeekPerEmployees
         CType(Me.tblExpenses, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel4.SuspendLayout()
         Me.TableLayoutPanel1.SuspendLayout()
+        CType(Me.pcbCompany, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'Panel1
         '
         Me.Panel1.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(58, Byte), Integer), CType(CType(115, Byte), Integer))
+        Me.Panel1.Controls.Add(Me.pcbCompany)
         Me.Panel1.Controls.Add(Me.chbPerDiem)
         Me.Panel1.Controls.Add(Me.PictureBox2)
         Me.Panel1.Controls.Add(Me.btnRestore)
@@ -850,6 +853,16 @@ Partial Class HoursWeekPerEmployees
         Me.TableLayoutPanel1.Size = New System.Drawing.Size(1200, 600)
         Me.TableLayoutPanel1.TabIndex = 3
         '
+        'pcbCompany
+        '
+        Me.pcbCompany.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.pcbCompany.Location = New System.Drawing.Point(9, 21)
+        Me.pcbCompany.Name = "pcbCompany"
+        Me.pcbCompany.Size = New System.Drawing.Size(180, 93)
+        Me.pcbCompany.TabIndex = 13
+        Me.pcbCompany.TabStop = False
+        '
         'HoursWeekPerEmployees
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -878,6 +891,7 @@ Partial Class HoursWeekPerEmployees
         Me.Panel4.ResumeLayout(False)
         Me.Panel4.PerformLayout()
         Me.TableLayoutPanel1.ResumeLayout(False)
+        CType(Me.pcbCompany, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -950,4 +964,5 @@ Partial Class HoursWeekPerEmployees
     Friend WithEvents btnMaximize As PictureBox
     Friend WithEvents TableLayoutPanel1 As TableLayoutPanel
     Friend WithEvents chbPerDiem As CheckBox
+    Friend WithEvents pcbCompany As PictureBox
 End Class

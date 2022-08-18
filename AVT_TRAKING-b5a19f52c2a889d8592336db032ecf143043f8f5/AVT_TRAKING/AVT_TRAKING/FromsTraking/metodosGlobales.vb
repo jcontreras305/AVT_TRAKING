@@ -744,4 +744,28 @@ end", con.conn)
             Return Nothing
         End Try
     End Function
+    Public Function selectMyCompanyImage(ByRef pcbImage As PictureBox) As Boolean
+        Dim conDB As New ConnectioDB
+        Try
+            conDB.conectar()
+            Dim cmd As New SqlCommand("select name, img from company", conDB.conn)
+            Dim dr As SqlDataReader = cmd.ExecuteReader()
+            While dr.Read()
+                If dr("img") IsNot DBNull.Value Then
+                    Dim img As Image = BytetoImage(dr("img"))
+                    pcbImage.Image = img
+                    Return True
+                Else
+                    Dim img As Image = Global.AVT_TRAKING.My.Resources.NoImage
+                    Return True
+                End If
+                Exit While
+            End While
+        Catch ex As Exception
+            Dim img As Image = Global.AVT_TRAKING.My.Resources.NoImage
+            Return False
+        Finally
+            conDB.desconectar()
+        End Try
+    End Function
 End Module
