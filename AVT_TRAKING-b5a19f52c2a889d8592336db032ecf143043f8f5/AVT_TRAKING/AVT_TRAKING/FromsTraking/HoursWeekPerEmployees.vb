@@ -152,11 +152,14 @@ Public Class HoursWeekPerEmployees
                 Case "Project"
                     Try
                         If tblExpenses.CurrentCell.GetType.Name = "DataGridViewTextBoxCell" Then
+                            Dim lastValue As String = If(tblExpenses.CurrentCell.Value IsNot DBNull.Value, tblExpenses.CurrentCell.Value, "")
                             Dim cmbProyect As New DataGridViewComboBoxCell
                             With cmbProyect
-                                mtdHPW.llenarComboCellProject(cmbProyect, proyectTable)
+                                lastValue = mtdHPW.llenarComboCellProject(cmbProyect, proyectTable, lastValue)
+                                .DropDownWidth = 220
                             End With
                             tblExpenses.CurrentRow.Cells("Project") = cmbProyect
+                            tblExpenses.CurrentRow.Cells("Project").Value = lastValue
                         Else
                             tblExpenses.CurrentRow.Cells("Project") = tblExpenses.CurrentCell
                         End If
@@ -166,11 +169,14 @@ Public Class HoursWeekPerEmployees
                 Case "Expense Code"
                     Try
                         If tblExpenses.CurrentCell.GetType.Name = "DataGridViewTextBoxCell" Then
+                            Dim lastValue As String = If(tblExpenses.CurrentCell.Value IsNot DBNull.Value, tblExpenses.CurrentCell.Value, "")
                             Dim cmbExpenseCode As New DataGridViewComboBoxCell
                             With cmbExpenseCode
-                                mtdHPW.llenarComboCellExpeseCode(cmbExpenseCode, expenseCodeTable)
+                                lastValue = mtdHPW.llenarComboCellExpeseCode(cmbExpenseCode, expenseCodeTable)
+                                .DropDownWidth = 120
                             End With
                             tblExpenses.CurrentRow.Cells("Expense Code") = cmbExpenseCode
+                            tblExpenses.CurrentRow.Cells("Expense Code").Value = lastValue
                         Else
                             tblExpenses.CurrentRow.Cells("Expense Code") = tblExpenses.CurrentCell
                         End If
@@ -216,12 +222,14 @@ Public Class HoursWeekPerEmployees
                 Case "Project"
                     Try
                         If tblRecordEmployee.CurrentCell.GetType.Name = "DataGridViewTextBoxCell" Then
+                            Dim lastValue As String = If(tblRecordEmployee.CurrentCell.Value IsNot DBNull.Value, tblRecordEmployee.CurrentCell.Value, "")
                             Dim cmbProyect As New DataGridViewComboBoxCell
                             With cmbProyect
-                                mtdHPW.llenarComboCellProject(cmbProyect, proyectTable)
-                                .DropDownWidth = 220
+                                lastValue = mtdHPW.llenarComboCellProject(cmbProyect, proyectTable, lastValue)
+                                .DropDownWidth = 240
                             End With
                             tblRecordEmployee.CurrentRow.Cells("Project") = cmbProyect
+                            tblRecordEmployee.CurrentRow.Cells("Project").Value = lastValue
                         End If
                         flagFilaActual = "ProjectHours"
                         flagCellClickRecords = True
@@ -231,12 +239,14 @@ Public Class HoursWeekPerEmployees
                 Case "Work Code"
                     Try
                         If tblRecordEmployee.CurrentCell.GetType.Name = "DataGridViewTextBoxCell" Then
+                            Dim lastValue As String = If(tblRecordEmployee.CurrentCell.Value IsNot DBNull.Value, tblRecordEmployee.CurrentCell.Value, "")
                             Dim cmbWorkCode As New DataGridViewComboBoxCell
                             With cmbWorkCode
-                                mtdHPW.llenarComboCellWorkCode(cmbWorkCode, workCodeTable)
+                                lastValue = mtdHPW.llenarComboCellWorkCode(cmbWorkCode, workCodeTable, lastValue)
                                 .DropDownWidth = 180
                             End With
                             tblRecordEmployee.CurrentRow.Cells("Work Code") = cmbWorkCode
+                            tblRecordEmployee.CurrentRow.Cells("Work Code").Value = lastValue
                         End If
                         flagFilaActual = "WorkCode"
                         flagCellClickRecords = True
@@ -1163,7 +1173,9 @@ Public Class HoursWeekPerEmployees
     End Sub
 
     Private Sub tblExpenses_DataError(sender As Object, e As DataGridViewDataErrorEventArgs) Handles tblExpenses.DataError
-        e.Cancel = True
+        If e.Exception.Message = "El valor de DataGridViewComboBoxCell no es válido." Or e.Exception.Message = "DataGridViewComboBoxCell value is not valid." Then
+            e.Cancel = True
+        End If
     End Sub
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
@@ -1183,6 +1195,14 @@ Public Class HoursWeekPerEmployees
         Catch ex As Exception
 
         End Try
+    End Sub
+
+    Private Sub tblRecordEmployee_DataError(sender As Object, e As DataGridViewDataErrorEventArgs) Handles tblRecordEmployee.DataError
+        If e.Exception.Message <> "El valor de DataGridViewComboBoxCell no es válido." And e.Exception.Message <> "DataGridViewComboBoxCell value is not valid." Then
+            MessageBox.Show(e.Exception.Message)
+        Else
+            e.Cancel = True
+        End If
     End Sub
 
     Private Sub btnTime_Click(sender As Object, e As EventArgs) Handles btnTime.Click

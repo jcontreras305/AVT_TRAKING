@@ -153,7 +153,7 @@ inner join job as jb on jb.jobNo = po.jobNo", conn)
 
 
 
-    Public Function llenarComboCellProject(ByVal cmbProyect As DataGridViewComboBoxCell, ByVal proyectTable As DataTable) As Boolean
+    Public Function llenarComboCellProject(ByVal cmbProyect As DataGridViewComboBoxCell, ByVal proyectTable As DataTable, Optional lastValue As String = "") As String
         Try
             conectar()
             cmbProyect.Items.Clear()
@@ -162,23 +162,27 @@ inner join job as jb on jb.jobNo = po.jobNo", conn)
 inner join task as tk on wo.idAuxWO = tk.idAuxWO
 inner join projectOrder as po on po.idPO = wo.idPO and wo.jobNo = po.jobNo
 inner join job as jb on po.jobNo = jb.jobNo
-order by CONCAT(wo.idWO,'-',tk.task) asc
+order by jb.jobNo,po.idPO , CONCAT(wo.idWO,'-',tk.task) asc
 ", conn)
             If cmd.ExecuteNonQuery Then
                 Dim da As New SqlDataAdapter(cmd)
                 da.Fill(proyectTable)
+                Dim cmbValue As String = ""
                 For Each row As DataRow In proyectTable.Rows
                     cmbProyect.Items.Add(CStr(row.ItemArray(1)) + "    " + CStr(row.ItemArray(3)) + "    " + CStr(row.ItemArray(4)))
+                    If lastValue = row.ItemArray(1) Then
+                        cmbValue = CStr(row.ItemArray(1)) + "    " + CStr(row.ItemArray(3)) + "    " + CStr(row.ItemArray(4))
+                    End If
                 Next
                 desconectar()
-                Return True
+                Return cmbValue
             Else
                 desconectar()
-                Return False
+                Return ""
             End If
         Catch ex As Exception
             desconectar()
-            Return False
+            Return ""
         End Try
     End Function
 
@@ -203,7 +207,7 @@ order by CONCAT(wo.idWO,'-',tk.task) asc
             Return False
         End Try
     End Function
-    Public Function llenarComboCellWorkCode(ByVal cmbWorkCode As DataGridViewComboBoxCell, ByVal workCodeTable As DataTable) As Boolean
+    Public Function llenarComboCellWorkCode(ByVal cmbWorkCode As DataGridViewComboBoxCell, ByVal workCodeTable As DataTable, Optional lastValue As String = "") As String
         Try
             conectar()
             cmbWorkCode.Items.Clear()
@@ -212,22 +216,26 @@ order by CONCAT(wo.idWO,'-',tk.task) asc
             If cmd.ExecuteNonQuery Then
                 Dim da As New SqlDataAdapter(cmd)
                 da.Fill(workCodeTable)
+                Dim cmbValue As String = ""
                 For Each row As DataRow In workCodeTable.Rows
                     cmbWorkCode.Items.Add(row.ItemArray(1))
+                    If lastValue = row.ItemArray(1) Then
+                        cmbValue = row.ItemArray(1).ToString()
+                    End If
                 Next
                 desconectar()
-                Return True
+                Return cmbValue
             Else
                 desconectar()
-                Return False
+                Return ""
             End If
         Catch ex As Exception
             desconectar()
-            Return False
+            Return ""
         End Try
     End Function
 
-    Public Function llenarComboCellExpeseCode(ByVal cmbExpenseCode As DataGridViewComboBoxCell, ByVal expenseCodeTable As DataTable) As Boolean
+    Public Function llenarComboCellExpeseCode(ByVal cmbExpenseCode As DataGridViewComboBoxCell, ByVal expenseCodeTable As DataTable, Optional lastValue As String = "") As String
         Try
             conectar()
             cmbExpenseCode.Items.Clear()
@@ -236,19 +244,22 @@ order by CONCAT(wo.idWO,'-',tk.task) asc
             If cmd.ExecuteNonQuery Then
                 Dim da As New SqlDataAdapter(cmd)
                 da.Fill(expenseCodeTable)
+                Dim cmbValue As String = ""
                 For Each row As DataRow In expenseCodeTable.Rows
                     cmbExpenseCode.Items.Add(row.ItemArray(1))
+                    If lastValue = row.ItemArray(1) Then
+                        cmbValue = row.ItemArray(1)
+                    End If
                 Next
-                desconectar()
-                Return True
+                Return cmbValue
             Else
-                desconectar()
-                Return False
+                Return ""
             End If
         Catch ex As Exception
             MsgBox(ex.Message)
+            Return ""
+        Finally
             desconectar()
-            Return False
         End Try
     End Function
 

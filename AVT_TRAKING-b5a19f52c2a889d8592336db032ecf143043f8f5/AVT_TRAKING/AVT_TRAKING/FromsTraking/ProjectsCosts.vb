@@ -92,11 +92,13 @@ Public Class ProjectsCosts
                 Case "Material Code"
                     Try
                         If tblMaterialProjects.CurrentCell.GetType.Name = "DataGridViewTextBoxCell" Then
+                            Dim lastValue As String = If(tblMaterialProjects.CurrentCell.Value IsNot DBNull.Value, tblMaterialProjects.CurrentCell.Value, "")
                             Dim cmbMatrial As New DataGridViewComboBoxCell
                             With cmbMatrial
-                                mtdJobs.llenarComboCellMaterial(cmbMatrial, listIdsMaterial)
+                                lastValue = mtdJobs.llenarComboCellMaterial(cmbMatrial, listIdsMaterial, lastValue)
                             End With
                             tblMaterialProjects.CurrentRow.Cells("Material Code") = cmbMatrial
+                            tblMaterialProjects.CurrentRow.Cells("Material Code").Value = lastValue
                         Else
                             tblMaterialProjects.CurrentRow.Cells("Material Code") = tblMaterialProjects.CurrentCell
                         End If
@@ -112,7 +114,7 @@ Public Class ProjectsCosts
     Private Sub DataGridView1_DataError(ByVal sender As Object, ByVal e As DataGridViewDataErrorEventArgs) Handles tblMaterialProjects.DataError
         ' Excepción
         Dim ex As Exception = e.Exception
-        If e.Exception.Message <> "El valor de DataGridViewComboBoxCell no es válido." Then
+        If e.Exception.Message <> "El valor de DataGridViewComboBoxCell no es válido." And e.Exception.Message <> "DataGridViewComboBoxCell value is not valid." Then
             MessageBox.Show(ex.Message)
         Else
             e.Cancel = True
@@ -1560,7 +1562,7 @@ Public Class ProjectsCosts
     Private Sub tblMaterialProjects_CellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles tblMaterialProjects.CellEndEdit
         If tblMaterialProjects.Rows.Count > 0 Then
             Select Case tblMaterialProjects.Columns(e.ColumnIndex).Name
-                Case "Description"
+                Case "Description1"
                     Dim mensaje As String = ""
                     Dim datosMaterial As New List(Of String)
                     If Not tblMaterialProjects.CurrentRow.Cells("idMaterialUsed").Value Is DBNull.Value Then
@@ -1585,7 +1587,9 @@ Public Class ProjectsCosts
                     End If
                     If tblMaterialProjects.CurrentRow.Cells("Material Code").Value IsNot DBNull.Value Then
                         For Each row As DataRow In listIdsMaterial.Rows
-                            If row.Item(1) = tblMaterialProjects.CurrentRow.Cells("Material Code").Value Then
+                            Dim arrayRow() As String = row.ItemArray(1).ToString.Split(" ")
+                            Dim arrayMatTbl() As String = tblMaterialProjects.CurrentRow.Cells("Material Code").Value.ToString.Split(" ")
+                            If arrayMatTbl(0) = arrayRow(0) Then
                                 datosMaterial.Add(row.Item(0))
                                 Exit For
                             End If
@@ -1647,9 +1651,9 @@ Public Class ProjectsCosts
         If tblMaterialProjects.Rows(fila).Cells("Material Code").GetType.Name = "DataGridViewComboBoxCell" Then
             If tblMaterialProjects.Rows(fila).Cells("Material Code").Value IsNot DBNull.Value Then
                 For Each row As DataRow In listIdsMaterial.Rows
-                    Dim array() As String = tblMaterialProjects.Rows(fila).Cells("Material Code").Value.ToString.Split(" ")
-                    Dim arrayL() As String = row.ItemArray(1).ToString.Split(" ")
-                    If arrayL(0) = array(0) Then
+                    Dim arrayRow() As String = row.ItemArray(1).ToString.Split(" ")
+                    Dim arrayMatTbl() As String = tblMaterialProjects.Rows(fila).Cells("Material Code").Value.ToString.Split(" ")
+                    If arrayMatTbl(0) = arrayRow(0) Or arrayMatTbl(1) = arrayRow(0) Then
                         datosMaterial.Add(row.Item(0))
                         Exit For
                     End If
@@ -1659,7 +1663,9 @@ Public Class ProjectsCosts
             End If
         ElseIf tblMaterialProjects.Rows(fila).Cells("Material Code").Value.ToString() IsNot "" Then
             For Each row As DataRow In listIdsMaterial.Rows
-                If row.Item(1) = tblMaterialProjects.Rows(fila).Cells("Material Code").Value Then
+                Dim arrayRow() As String = row.ItemArray(1).ToString.Split(" ")
+                Dim arrayMatTbl() As String = tblMaterialProjects.Rows(fila).Cells("Material Code").Value.ToString.Split(" ")
+                If arrayMatTbl(0) = arrayRow(0) Then
                     datosMaterial.Add(row.Item(0))
                     Exit For
                 End If

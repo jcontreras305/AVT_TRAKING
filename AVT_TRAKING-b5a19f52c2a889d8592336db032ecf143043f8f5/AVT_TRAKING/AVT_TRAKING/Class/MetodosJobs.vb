@@ -516,11 +516,11 @@ where tk.task = '" + idTask + "' and tk.idAuxWO = '" + idWO + "'", conn)
             Return False
         End Try
     End Function
-    Public Function llenarComboCellMaterial(ByVal cmbMaterial As DataGridViewComboBoxCell, ByVal tabla As DataTable) As Boolean
+    Public Function llenarComboCellMaterial(ByVal cmbMaterial As DataGridViewComboBoxCell, ByVal tabla As DataTable, Optional lastValue As String = "") As String
         Try
             conectar()
             Dim cmd As New SqlCommand("select idMaterial, number ,name , isnull(mt.code,'') as 'class'from material as mt 
-left join materialClass as mc on mc.code = mt.code", conn)
+left join materialClass as mc on mc.code = mt.code order by number", conn)
             Dim reader As SqlDataReader = cmd.ExecuteReader
             tabla.Clear()
             Dim cont = 0
@@ -548,6 +548,7 @@ left join materialClass as mc on mc.code = mt.code", conn)
                 column.Unique = False
                 tabla.Columns.Add(column)
             End If
+            Dim cmbValue As String = ""
             While reader.Read()
                 Dim row As DataRow
                 row = tabla.NewRow()
@@ -556,16 +557,19 @@ left join materialClass as mc on mc.code = mt.code", conn)
                 row("Class") = reader("class")
                 tabla.Rows.Add(row)
                 cmbMaterial.Items.Add(CStr(reader("number")) + " " + reader("name") + " " + reader("class"))
+                If lastValue = CStr(reader("number")) Or lastValue = reader("name") Or lastValue = (CStr(reader("number")) + " " + reader("name")) Then
+                    cmbValue = CStr(reader("number")) + " " + reader("name") + " " + reader("class")
+                End If
             End While
-            desconectar()
             If tabla.Rows.Count > 0 Then
-                Return True
+                Return cmbValue
             Else
-                Return False
+                Return cmbValue
             End If
         Catch ex As Exception
+            Return ""
+        Finally
             desconectar()
-            Return False
         End Try
     End Function
     Public Function llenarComboCellMaterial(ByVal cmbMaterial As ComboBox) As DataTable
