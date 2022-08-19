@@ -3709,3 +3709,34 @@ left join taxesPT as txp on txp.jobNo = T1.jobNo
 
 end
 go
+----#########################################################################################################################################################################################
+----############## PROCEDIMINETO PARA CONSULTA DE MATERIALES EN EXCEL WORKING ###############################################################################################################
+----#########################################################################################################################################################################################
+create proc sp_selectJobMaterialCost
+@StartDate as date,
+@EndDate as date
+as
+begin
+	select jb1.jobNo,mc1.code as 'Code' ,mt1.name as 'Material Name',mu1.[description] as 'Description',amount as 'Cost',CONVERT(NVARCHAR,dateMaterial,101) as 'Date',
+	CASE 
+		WHEN SUBSTRING(mc1.code ,LEN(mc1.code),1) = 'D' THEN '3rd Party Cost'
+		WHEN SUBSTRING(mc1.code ,LEN(mc1.code),1) = 'E' THEN 'In House Vehicles'
+		WHEN SUBSTRING(mc1.code ,LEN(mc1.code),1) = 'F' THEN 'Company Equipment'
+		WHEN SUBSTRING(mc1.code ,LEN(mc1.code),1) = 'M' THEN 'Material Cost'
+		WHEN SUBSTRING(mc1.code ,LEN(mc1.code),1) = 'S' THEN 'Subcontract Cost'
+		WHEN SUBSTRING(mc1.code ,LEN(mc1.code),1) = 'T' THEN 'Tools'
+		WHEN SUBSTRING(mc1.code ,LEN(mc1.code),1) = 'V' THEN 'Consumables'
+		WHEN SUBSTRING(mc1.code ,LEN(mc1.code),1) = 'Y' THEN 'Other Cost'
+		END  as 'Type Material' 
+	from materialUsed as mu1
+		inner join material as mt1 on mu1.idMaterial = mt1.idMaterial
+		left join materialClass as mc1 on mt1.code = mc1.code
+		inner join task as tk1 on tk1.idAux = mu1.idAux
+		inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO
+		inner join projectOrder as po1 on po1.idPO = wo1.idPO and wo1.jobNo = po1.jobNo
+		inner join job as jb1 on jb1.jobNo = po1.jobNo
+		where  mu1.dateMaterial between @StartDate and @EndDate 
+		order by mu1.dateMaterial,mc1.code asc
+end
+go
+

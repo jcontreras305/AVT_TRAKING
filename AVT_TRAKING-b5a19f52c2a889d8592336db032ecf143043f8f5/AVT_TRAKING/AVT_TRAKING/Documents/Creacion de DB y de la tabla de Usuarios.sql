@@ -4680,90 +4680,122 @@ go
 --end
 --go
 
+----#########################################################################################################################################################################################
+----############## CAMBIOS EN LA CONSULTA PARA EL REPORTE DE BY JOB NO ######################################################################################################################
+----#########################################################################################################################################################################################
+--ALTER proc [dbo].[Sp_By_JobNumber]
+--@startdate as date, 
+--@finaldate as date,
+--@clientnum as int,
+--@job as bigint,
+--@all as bit
+--as
+--begin
+--select distinct
+--	jb.jobNo,
+--	po.idPO,
+--	wo.idWO,
+--	tk.task,
+--	em.SAPNumber,
+--	em.numberEmploye, 
+--	datename(dw,hw.dateWorked) as 'DAY',
+--	concat(em.lastName,', ', em.firstName,' ' ,em.middleName) as 'Employee Name',
+--	hw.dateWorked,
+--	ISNULL(SUBSTRING( wc.name,1,iif(CHARINDEX('-',wc.name)=0, len(wc.name) ,(CHARINDEX('-',wc.name)-1))),'') as 'Code',
+	
+	
+--	ISNULL((select SUM(hw1.hoursST) from 
+--	hoursWorked as hw1 
+--	inner join workCode as wc1 on wc1.idWorkCode = hw1.idWorkCode 
+--	inner join task as tk1 on tk1.idAux = hw1.idAux 
+--	inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO 
+--	inner join projectOrder as po1 on po1.idPO = wo1.idPO and wo1.jobNo = po1.jobNo 
+--	inner join job as jb1 on jb1.jobNo = po1.jobNo  
+--	where hw1.dateWorked = hw.dateWorked and em.idEmployee = hw1.idEmployee 
+--			and jb.jobNo = jb1.jobNo and po1.idPO = po.idPO 
+--			and wo.idAuxWO = wo1.idAuxWO 
+--			and tk1.idAux = tk.idAux 
+--			and (SUBSTRING(wc1.name,1,iif(CHARINDEX('-',wc1.name)=0, len(wc1.name) ,(CHARINDEX('-',wc1.name)-1))) =SUBSTRING( wc.name,1,iif(CHARINDEX('-',wc.name)=0, len(wc.name) ,(CHARINDEX('-',wc.name)-1)))  ) 
+--			and not wc1.name like '%6.4%'),0) 
+--	as 'Hours ST',
+		
+--	ISNULL(wc.billingRate1,0)as 'billingRate1',
+
+--	ISNULL((select ISNULL(SUM(hw1.hoursOT),0) from 
+--	hoursWorked as hw1 
+--	inner join workCode as wc1 on wc1.idWorkCode = hw1.idWorkCode 
+--	inner join task as tk1 on tk1.idAux = hw1.idAux 
+--	inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO 
+--	inner join projectOrder as po1 on po1.idPO = wo1.idPO and wo1.jobNo = po1.jobNo 
+--	inner join job as jb1 on jb1.jobNo = po1.jobNo  
+--	where hw1.dateWorked = hw.dateWorked 
+--			and em.idEmployee = hw1.idEmployee 
+--			and jb.jobNo = jb1.jobNo 
+--			and po1.idPO = po.idPO 
+--			and wo.idAuxWO = wo1.idAuxWO 
+--			and tk1.idAux = tk.idAux 
+--			and (SUBSTRING( wc1.name,1,iif(CHARINDEX('-',wc1.name)=0, len(wc1.name) ,(CHARINDEX('-',wc1.name)-1))) =SUBSTRING( wc.name,1,iif(CHARINDEX('-',wc.name)=0, len(wc.name) ,(CHARINDEX('-',wc.name)-1)))  ) 
+--			and not wc1.name like '%6.4%') ,0)
+--	 as 'Hours OT',
+
+--	ISNULL(wc.billingRateOT,0) as 'billingRateOT',
+	
+--	ISNULL((select exu.amount from expensesUsed as exu 
+--	inner join expenses as ex on ex.idExpenses = exu.idExpense 
+--	inner join task as tk1 on tk1.idAux = exu.idAux 
+--	inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO 
+--	inner join projectOrder as po1 on po1.idPO = wo1.idPO and wo1.jobNo = po1.jobNo 
+--	inner join job as jb1 on jb1.jobNo = po1.jobNo 
+--	 where tk1.idAux = tk.idAux and wo1.idAuxWO = wo.idAuxWO and po.idPO = po1.idPO and jb.jobNo = jb1.jobNo and exu.dateExpense between @startdate and @finaldate and exu.idEmployee= em.idEmployee and ex.expenseCode like 'Per-Diem') ,0) as 'PerDiem' ,
+
+--	ISNULL((select exu.amount from expensesUsed as exu inner join expenses as ex on ex.idExpenses = exu.idExpense inner join task as tk1 on tk1.idAux = exu.idAux inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO inner join projectOrder as po1 on po1.idPO = wo1.idPO and wo1.jobNo = po1.jobNo inner join job as jb1 on jb1.jobNo = po1.jobNo 
+--	 where tk1.idAux = tk.idAux and wo1.idAuxWO = wo.idAuxWO and po.idPO = po1.idPO and jb.jobNo = jb1.jobNo and exu.dateExpense between @startdate and @finaldate and exu.idEmployee= em.idEmployee and ex.expenseCode like 'Travel') ,0) as 'Travel' 
+--	from employees as em 
+--		inner join hoursWorked as hw on hw.idEmployee = em.idEmployee
+--		left join workCode as wc on wc.idWorkCode = hw.idWorkCode
+--		inner join task as tk on tk.idAux= hw.idAux
+--		inner join workOrder wo on  wo.idAuxWO=tk.idAuxWO
+--		inner join projectOrder as po on po.idPO = wo.idPO and po.jobNo = wo.jobNo
+--		inner join job as jb on jb.jobNo = wo.jobNo 
+--		inner join clients as cl on cl.idClient = jb.idClient
+--		where hw.dateWorked between @startdate and @finaldate and cl.numberClient = @clientnum and jb.jobNo like iif(@all=1,'%%',CONCAT('',@job,'')) and not wc.name like '%6.4%' 
+--	order by 
+--	concat(em.lastName,', ', em.firstName,' ' ,em.middleName),
+--	hw.dateWorked
+--end
+--go
+
 ----| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
 ----| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
 ----V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V
 ----#########################################################################################################################################################################################
-----############## CAMBIOS EN LA CONSULTA PARA EL REPORTE DE BY JOB NO ######################################################################################################################
+----############## PROCEDIMIENTO PARA CONSULTA DE MATERIALES EN EXCEL #######################################################################################################################
 ----#########################################################################################################################################################################################
-ALTER proc [dbo].[Sp_By_JobNumber]
-@startdate as date, 
-@finaldate as date,
-@clientnum as int,
-@job as bigint,
-@all as bit
+create proc sp_selectJobMaterialCost
+@StartDate as date,
+@EndDate as date
 as
 begin
-select distinct
-	jb.jobNo,
-	po.idPO,
-	wo.idWO,
-	tk.task,
-	em.SAPNumber,
-	em.numberEmploye, 
-	datename(dw,hw.dateWorked) as 'DAY',
-	concat(em.lastName,', ', em.firstName,' ' ,em.middleName) as 'Employee Name',
-	hw.dateWorked,
-	ISNULL(SUBSTRING( wc.name,1,iif(CHARINDEX('-',wc.name)=0, len(wc.name) ,(CHARINDEX('-',wc.name)-1))),'') as 'Code',
-	
-	
-	ISNULL((select SUM(hw1.hoursST) from 
-	hoursWorked as hw1 
-	inner join workCode as wc1 on wc1.idWorkCode = hw1.idWorkCode 
-	inner join task as tk1 on tk1.idAux = hw1.idAux 
-	inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO 
-	inner join projectOrder as po1 on po1.idPO = wo1.idPO and wo1.jobNo = po1.jobNo 
-	inner join job as jb1 on jb1.jobNo = po1.jobNo  
-	where hw1.dateWorked = hw.dateWorked and em.idEmployee = hw1.idEmployee 
-			and jb.jobNo = jb1.jobNo and po1.idPO = po.idPO 
-			and wo.idAuxWO = wo1.idAuxWO 
-			and tk1.idAux = tk.idAux 
-			and (SUBSTRING(wc1.name,1,iif(CHARINDEX('-',wc1.name)=0, len(wc1.name) ,(CHARINDEX('-',wc1.name)-1))) =SUBSTRING( wc.name,1,iif(CHARINDEX('-',wc.name)=0, len(wc.name) ,(CHARINDEX('-',wc.name)-1)))  ) 
-			and not wc1.name like '%6.4%'),0) 
-	as 'Hours ST',
-		
-	ISNULL(wc.billingRate1,0)as 'billingRate1',
-
-	ISNULL((select ISNULL(SUM(hw1.hoursOT),0) from 
-	hoursWorked as hw1 
-	inner join workCode as wc1 on wc1.idWorkCode = hw1.idWorkCode 
-	inner join task as tk1 on tk1.idAux = hw1.idAux 
-	inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO 
-	inner join projectOrder as po1 on po1.idPO = wo1.idPO and wo1.jobNo = po1.jobNo 
-	inner join job as jb1 on jb1.jobNo = po1.jobNo  
-	where hw1.dateWorked = hw.dateWorked 
-			and em.idEmployee = hw1.idEmployee 
-			and jb.jobNo = jb1.jobNo 
-			and po1.idPO = po.idPO 
-			and wo.idAuxWO = wo1.idAuxWO 
-			and tk1.idAux = tk.idAux 
-			and (SUBSTRING( wc1.name,1,iif(CHARINDEX('-',wc1.name)=0, len(wc1.name) ,(CHARINDEX('-',wc1.name)-1))) =SUBSTRING( wc.name,1,iif(CHARINDEX('-',wc.name)=0, len(wc.name) ,(CHARINDEX('-',wc.name)-1)))  ) 
-			and not wc1.name like '%6.4%') ,0)
-	 as 'Hours OT',
-
-	ISNULL(wc.billingRateOT,0) as 'billingRateOT',
-	
-	ISNULL((select exu.amount from expensesUsed as exu 
-	inner join expenses as ex on ex.idExpenses = exu.idExpense 
-	inner join task as tk1 on tk1.idAux = exu.idAux 
-	inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO 
-	inner join projectOrder as po1 on po1.idPO = wo1.idPO and wo1.jobNo = po1.jobNo 
-	inner join job as jb1 on jb1.jobNo = po1.jobNo 
-	 where tk1.idAux = tk.idAux and wo1.idAuxWO = wo.idAuxWO and po.idPO = po1.idPO and jb.jobNo = jb1.jobNo and exu.dateExpense between @startdate and @finaldate and exu.idEmployee= em.idEmployee and ex.expenseCode like 'Per-Diem') ,0) as 'PerDiem' ,
-
-	ISNULL((select exu.amount from expensesUsed as exu inner join expenses as ex on ex.idExpenses = exu.idExpense inner join task as tk1 on tk1.idAux = exu.idAux inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO inner join projectOrder as po1 on po1.idPO = wo1.idPO and wo1.jobNo = po1.jobNo inner join job as jb1 on jb1.jobNo = po1.jobNo 
-	 where tk1.idAux = tk.idAux and wo1.idAuxWO = wo.idAuxWO and po.idPO = po1.idPO and jb.jobNo = jb1.jobNo and exu.dateExpense between @startdate and @finaldate and exu.idEmployee= em.idEmployee and ex.expenseCode like 'Travel') ,0) as 'Travel' 
-	from employees as em 
-		inner join hoursWorked as hw on hw.idEmployee = em.idEmployee
-		left join workCode as wc on wc.idWorkCode = hw.idWorkCode
-		inner join task as tk on tk.idAux= hw.idAux
-		inner join workOrder wo on  wo.idAuxWO=tk.idAuxWO
-		inner join projectOrder as po on po.idPO = wo.idPO and po.jobNo = wo.jobNo
-		inner join job as jb on jb.jobNo = wo.jobNo 
-		inner join clients as cl on cl.idClient = jb.idClient
-		where hw.dateWorked between @startdate and @finaldate and cl.numberClient = @clientnum and jb.jobNo like iif(@all=1,'%%',CONCAT('',@job,'')) and not wc.name like '%6.4%' 
-	order by 
-	concat(em.lastName,', ', em.firstName,' ' ,em.middleName),
-	hw.dateWorked
+	select jb1.jobNo,mc1.code as 'Code' ,mt1.name as 'Material Name',mu1.[description] as 'Description',amount as 'Cost',CONVERT(NVARCHAR,dateMaterial,101) as 'Date',
+	CASE 
+		WHEN SUBSTRING(mc1.code ,LEN(mc1.code),1) = 'D' THEN '3rd Party Cost'
+		WHEN SUBSTRING(mc1.code ,LEN(mc1.code),1) = 'E' THEN 'In House Vehicles'
+		WHEN SUBSTRING(mc1.code ,LEN(mc1.code),1) = 'F' THEN 'Company Equipment'
+		WHEN SUBSTRING(mc1.code ,LEN(mc1.code),1) = 'M' THEN 'Material Cost'
+		WHEN SUBSTRING(mc1.code ,LEN(mc1.code),1) = 'S' THEN 'Subcontract Cost'
+		WHEN SUBSTRING(mc1.code ,LEN(mc1.code),1) = 'T' THEN 'Tools'
+		WHEN SUBSTRING(mc1.code ,LEN(mc1.code),1) = 'V' THEN 'Consumables'
+		WHEN SUBSTRING(mc1.code ,LEN(mc1.code),1) = 'Y' THEN 'Other Cost'
+		END  as 'Type Material' 
+	from materialUsed as mu1
+		inner join material as mt1 on mu1.idMaterial = mt1.idMaterial
+		left join materialClass as mc1 on mt1.code = mc1.code
+		inner join task as tk1 on tk1.idAux = mu1.idAux
+		inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO
+		inner join projectOrder as po1 on po1.idPO = wo1.idPO and wo1.jobNo = po1.jobNo
+		inner join job as jb1 on jb1.jobNo = po1.jobNo
+		where  mu1.dateMaterial between @StartDate and @EndDate 
+		order by mu1.dateMaterial,mc1.code asc
 end
 go
+

@@ -7,20 +7,20 @@
         mtdElevation.selectElevationSCF(tblScafElevation)
         mtdElevation.selectElevationPaint(tblPaintElevation)
         mtdFactor.selectLaborRat(tblWorkWeekScheduleLaborRates)
-        mtdFactor.selectScafUnitsRates(tblSCFUnitsRates)
-        mtdFactor.selectEnviroment(tblEnviroment)
-        mtdFactor.selectInsFitting(tblInsFitting)
-        mtdFactor.selectPntFitting(tblPntFitting)
-        mtdFactor.selectEqPntUnitRate(tblEqPaintUnitRate)
-        mtdFactor.selectPpPntUnitRate(tblPpPaintUnitRate)
-        mtdFactor.selectEqJacketunitRate(tblJacketEq)
-        mtdFactor.selectPpJacketunitRate(tblJacketPp)
-        mtdFactor.selectEqInsUnitRate(tblEqInsUnitRate)
-        mtdFactor.selectPpInsUnitRate(tblPpInsUnitRate)
-        mtdFactor.selectSizesMaterialPiping(tblPipingMaterial)
-        mtdFactor.selectSizesMaterialEquipment(tblEquipmentMaterial)
-        mtdFactor.selectEqIRHC(tblEquipmentIRHC)
-        mtdFactor.selectPpIRHC(tblPipingIRHC)
+        'mtdFactor.selectScafUnitsRates(tblSCFUnitsRates)
+        'mtdFactor.selectEnviroment(tblEnviroment)
+        'mtdFactor.selectInsFitting(tblInsFitting)
+        'mtdFactor.selectPntFitting(tblPntFitting)
+        'mtdFactor.selectEqPntUnitRate(tblEqPaintUnitRate)
+        'mtdFactor.selectPpPntUnitRate(tblPpPaintUnitRate)
+        'mtdFactor.selectEqJacketunitRate(tblJacketEq)
+        'mtdFactor.selectPpJacketunitRate(tblJacketPp)
+        'mtdFactor.selectEqInsUnitRate(tblEqInsUnitRate)
+        'mtdFactor.selectPpInsUnitRate(tblPpInsUnitRate)
+        'mtdFactor.selectSizesMaterialPiping(tblPipingMaterial)
+        'mtdFactor.selectSizesMaterialEquipment(tblEquipmentMaterial)
+        'mtdFactor.selectEqIRHC(tblEquipmentIRHC)
+        'mtdFactor.selectPpIRHC(tblPipingIRHC)
     End Sub
     Private Sub btnSalir_Click(sender As Object, e As EventArgs) Handles btnSalir.Click
         Me.Close()
@@ -1254,5 +1254,68 @@
         selectTable = "EquipmentHC"
     End Sub
 
+    Private Sub TabControl1_SelectedIndexChanged(sender As Object, e As EventArgs) Handles TabControl1.SelectedIndexChanged
+        Select Case TabControl1.SelectedIndex
+            Case 0
+                If tblScafElevation.Rows.Count = 1 Then
+                    mtdElevation.selectElevationSCF(tblScafElevation)
+                End If
+                If tblPaintElevation.Rows.Count = 1 Then
+                    mtdElevation.selectElevationPaint(tblPaintElevation)
+                End If
+            Case 1
+                If tblSCFUnitsRates.Rows.Count = 1 Then
+                    mtdFactor.selectScafUnitsRates(tblSCFUnitsRates)
+                End If
 
+            Case 2
+                If tblEnviroment.Rows.Count = 1 Then
+                    mtdFactor.selectEnviroment(tblEnviroment)
+                End If
+            Case 3
+                If tblEqInsUnitRate.Rows.Count = 1 Then
+                    mtdFactor.selectEqInsUnitRate(tblEqInsUnitRate)
+                End If
+                If tblPpInsUnitRate.Rows.Count = 1 Then
+                    mtdFactor.selectPpInsUnitRate(tblPpInsUnitRate)
+                End If
+            Case 4
+                If tblJacketEq.Rows.Count = 1 Then
+                    mtdFactor.selectEqJacketunitRate(tblJacketEq)
+                End If
+                If tblJacketPp.Rows.Count = 1 Then
+                    mtdFactor.selectPpJacketunitRate(tblJacketPp)
+                End If
+            Case 5
+                If tblEqPaintUnitRate.Rows.Count = 1 Then
+                    mtdFactor.selectEqPntUnitRate(tblEqPaintUnitRate)
+                End If
+                If tblPpPaintUnitRate.Rows.Count = 1 Then
+                    mtdFactor.selectPpPntUnitRate(tblPpPaintUnitRate)
+                End If
+            Case 6
+                If tblInsFitting.Rows.Count = 1 Then
+                    mtdFactor.selectInsFitting(tblInsFitting)
+                End If
+            Case 7
+                If tblPntFitting.Rows.Count = 1 Then
+                    mtdFactor.selectPntFitting(tblPntFitting)
+                End If
+            Case 8
+                If tblEquipmentIRHC.Rows.Count = 1 Then
+                    mtdFactor.selectEqIRHC(tblEquipmentIRHC)
+                End If
+                If tblPipingIRHC.Rows.Count = 1 Then
+                    mtdFactor.selectPpIRHC(tblPipingIRHC)
+                End If
+            Case 9
+                If tblPipingMaterial.Rows.Count = 1 Then
+                    mtdFactor.selectSizesMaterialPiping(tblPipingMaterial)
+                End If
+            Case 10
+                If tblEquipmentMaterial.Rows.Count = 1 Then
+                    mtdFactor.selectSizesMaterialEquipment(tblEquipmentMaterial)
+                End If
+        End Select
+    End Sub
 End Class

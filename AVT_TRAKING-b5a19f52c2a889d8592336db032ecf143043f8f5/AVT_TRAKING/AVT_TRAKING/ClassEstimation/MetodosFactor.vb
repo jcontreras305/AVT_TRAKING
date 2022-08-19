@@ -12,7 +12,7 @@ Public Class MetodosFactor
             Dim dr As SqlDataReader = cmd.ExecuteReader()
             tbl.Rows.Clear()
             While dr.Read()
-                tbl.Rows.Add(dr("idLaborRate"), dr("description"), dr("insRate"), dr("abatRate"), dr("paintRate"), dr("scafRate"))
+                tbl.Rows.Add(dr("idLaborRate"), dr("description"), Format(dr("insRate"), "#,###.00"), Format(dr("abatRate"), "#,###.00"), Format(dr("paintRate"), "#,###.00"), Format(dr("scafRate"), "#,###.00"))
             End While
             Return True
         Catch ex As Exception
@@ -1716,8 +1716,8 @@ end"
             Dim dr As SqlDataReader = cmd.ExecuteReader()
             tbl.Rows.Clear()
             While dr.Read()
-                dt.Rows.Add(dr("size"), dr("type"), dr("thick"), dr("price"), dr("description"))
-                tbl.Rows.Add(dr("size"), dr("type"), dr("thick"), dr("size"), dr("type"), dr("thick"), dr("price"), dr("description"))
+                dt.Rows.Add(dr("size"), dr("type"), dr("thick"), Format(dr("price"), "#,###.00"), dr("description"))
+                tbl.Rows.Add(dr("size"), dr("type"), dr("thick"), dr("size"), dr("type"), dr("thick"), Format(dr("price"), "#,###.00"), dr("description"))
             End While
             dr.Close()
             Return dt
