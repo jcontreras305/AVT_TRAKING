@@ -1,8 +1,10 @@
 ﻿Imports System.Runtime.InteropServices
 
 Public Class EstimateSummary
+    Public Material As Boolean = False
     Public clientNum As String = ""
     Public Project As String = ""
+    Dim calculadora As Process
     Private Sub PictureBox4_Click(sender As Object, e As EventArgs) Handles PictureBox4.Click
         Me.Close()
     End Sub
@@ -40,17 +42,26 @@ Public Class EstimateSummary
                 cmbProject.SelectedItem = cmbProject.Items(cmbProject.FindString(Project))
             End If
         End If
+        If Material Then
+            Label1.Text = "Estimating Summary And Material Description"
+        Else
+            Label1.Text = "Estimating Summary"
+        End If
     End Sub
     Private Sub cmbClient_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbClient.SelectedIndexChanged
         If clientNum IsNot Nothing Then
             Dim lastProject As String = cmbProject.Text
-            llenarComboPOClientEst(cmbProject, clientNum)
-            If cmbProject.FindString(lastProject) > -1 Then
-                cmbProject.SelectedItem = cmbProject.Items(cmbProject.FindString(Project))
-            Else
-                Project = ""
-                cmbProject.Text = ""
-                cmbProject.SelectedItem = Nothing
+            Dim arrayClN() As String = cmbClient.SelectedItem.ToString.Split(" ")
+            If arrayClN.Length > 0 Then
+                clientNum = arrayClN(0)
+                llenarComboPOClientEst(cmbProject, clientNum)
+                If cmbProject.FindString(lastProject) > -1 Then
+                    cmbProject.SelectedItem = cmbProject.Items(cmbProject.FindString(Project))
+                Else
+                    Project = ""
+                    cmbProject.Text = ""
+                    cmbProject.SelectedItem = Nothing
+                End If
             End If
         End If
     End Sub
@@ -62,10 +73,18 @@ Public Class EstimateSummary
         Try
             If clientNum <> "" Or clientNum IsNot Nothing Then
                 If Project <> "" Or Project IsNot Nothing Then
-                    Dim reportTs As New EstSummary
-                    reportTs.SetParameterValue("@projectId", Project)
-                    reportTs.SetParameterValue("@CompanyName", "Brock")
-                    crvReport.ReportSource = reportTs
+                    If Material Then
+                        Dim reportTs As New EstSummary
+                        reportTs.SetParameterValue("@projectId", Project)
+                        reportTs.SetParameterValue("@CompanyName", "Brock")
+                        crvReport.ReportSource = reportTs
+                    Else
+                        Dim reportTs As New EstSummaryMaterial
+                        reportTs.SetParameterValue("@projectId", Project)
+                        reportTs.SetParameterValue("@CompanyName", "Brock")
+                        crvReport.ReportSource = reportTs
+                    End If
+                    calculadora = Process.Start("calc.Exe")
                 Else
                     MsgBox("Please select a Project.")
                 End If

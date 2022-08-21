@@ -2043,8 +2043,7 @@ end"
                     cmd.CommandText = "if(select count(*) from PpIRHC where size = " + row.Cells("idSizePPIRHC").Value.ToString() + " and [type] = '" + row.Cells("idTypePPIRHC").Value.ToString() + "' and thickness = " + row.Cells("idThicknessPPIRHC").Value.ToString() + ")>0
 begin
 	update PpIRHC set size = " + row.Cells("SizePPIRHC").Value.ToString() + ", [type] = '" + row.Cells("TypePPIRHC").Value.ToString() + "', thickness = " + row.Cells("ThicknessPPIRHC").Value.ToString() + ", laborProd = " + row.Cells("LaborProdPPIRHC").Value.ToString() + ", matRate= " + row.Cells("MaterialRatePPIRHC").Value.ToString() + ", eqRate = " + row.Cells("EquipmentRatePPIRHC").Value.ToString() + " where size = " + row.Cells("idSizePPIRHC").Value.ToString() + " and [type] = '" + row.Cells("idTypePPIRHC").Value.ToString() + "' and thickness = " + row.Cells("idThicknessPPIRHC").Value.ToString() + "
-end
-go"
+end"
                 End If
                 cmd.Connection = conn
                 cmd.Transaction = tran
@@ -2157,6 +2156,102 @@ go"
         Catch ex As Exception
             MsgBox(ex.Message())
             Return Nothing
+        Finally
+            desconectar()
+        End Try
+    End Function
+    '=====================================================================================================================================================================
+    '=========== METODOS EQIPMNET MATERIAL ===============================================================================================================================
+    '=====================================================================================================================================================================
+    Public Function selectPPFittingMaterial(ByVal tbl As DataGridView) As Boolean
+        Try
+            conectar()
+            Dim cmd As New SqlCommand("select size, [type], thick,fitting, price,[description] from ppFittingMaterial", conn)
+            Dim dr As SqlDataReader = cmd.ExecuteReader()
+            tbl.Rows.Clear()
+            While dr.Read()
+                tbl.Rows.Add(dr("size"), dr("type"), dr("thick"), dr("fitting"), dr("size"), dr("type"), dr("thick"), dr("fitting"), Format(dr("price"), "#,##0.00"), dr("description"))
+            End While
+            Return True
+        Catch ex As Exception
+            MsgBox(ex.Message)
+            Return False
+        Finally
+            desconectar()
+        End Try
+    End Function
+    Public Function saveUpdatePPFittingMaterial(ByVal tbl As DataGridView) As Boolean
+        conectar()
+        Dim tran As SqlTransaction
+        tran = conn.BeginTransaction
+        Try
+            Dim flag As Boolean = True
+            For Each row As DataGridViewRow In tbl.SelectedRows()
+                Dim cmd As New SqlCommand
+                If (If(row.Cells("idSizePPFM").Value Is Nothing, "", row.Cells("idSizePPFM").Value.ToString) = "") And (If(row.Cells("idTypePPFM").Value Is Nothing, "", row.Cells("idTypePPFM").Value.ToString) = "") And (If(row.Cells("idThickPPFM").Value Is Nothing, "", row.Cells("idThickPPFM").Value.ToString()) = "") And (If(row.Cells("idFittingPPFM").Value Is Nothing, "", row.Cells("idFittingPPFM").Value.ToString()) = "") Then
+                    cmd.CommandText = "if (select COUNT(*) from ppFittingMaterial WHERE size = " & CStr(row.Cells("SizePPFM").Value) & " and [type] = '" & row.Cells("TypePPFM").Value & "' and thick = " & CStr(row.Cells("ThickPPFM").Value) & " and fitting = '" & row.Cells("FittingPPFM").Value & "') = 0
+begin
+	insert into ppFittingMaterial values (" & row.Cells("SizePPFM").Value.ToString() & ",'" & row.Cells("TypePPFM").Value.ToString() & "'," & row.Cells("ThickPPFM").Value.ToString() & ",'" & row.Cells("FittingPPFM").Value.ToString() & "'," & row.Cells("PricePPFM").Value.ToString() & ",'" & row.Cells("DescriptionPPFM").Value.ToString() & "')
+end"
+                Else
+                    cmd.CommandText = "if (select COUNT(*) from ppFittingMaterial WHERE size = " & CStr(row.Cells("idSizePPFM").Value) & " and [type] = '" & row.Cells("idTypePPFM").Value & "' and thick = " & CStr(row.Cells("idThickPPFM").Value) & " and fitting = '" & row.Cells("idFittingPPFM").Value & "') = 1
+begin
+	update ppFittingMaterial set size = " & row.Cells("SizePPFM").Value.ToString() & " , [type] = '" & row.Cells("TypePPFM").Value.ToString() & "', thick = " & row.Cells("ThickPPFM").Value.ToString() & " , fitting = '" & row.Cells("FittingPPFM").Value.ToString() & "' , price = " & row.Cells("PricePPFM").Value.ToString() & " , [description] = '" & row.Cells("DescriptionPPFM").Value.ToString() & "' where size = " & row.Cells("idSizePPFM").Value.ToString() & " and [type] = '" & row.Cells("idTypePPFM").Value.ToString() & "' and thick = " & row.Cells("idThickPPFM").Value.ToString() & " and fitting = '" & row.Cells("idFittingPPFM").Value.ToString() & "'
+end"
+                End If
+                cmd.Connection = conn
+                cmd.Transaction = tran
+                If cmd.ExecuteNonQuery > 0 Then
+                    flag = True
+                Else
+                    flag = False
+                    Exit For
+                End If
+            Next
+            If flag Then
+                tran.Commit()
+                Return True
+            Else
+                tran.Rollback()
+                Return False
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message())
+            Return False
+        Finally
+            desconectar()
+        End Try
+    End Function
+    Public Function deletePPFittingMaterial(ByVal tbl As DataGridView) As Boolean
+        conectar()
+        Dim tran As SqlTransaction
+        tran = conn.BeginTransaction
+        Try
+            Dim flag As Boolean = True
+            For Each row As DataGridViewRow In tbl.SelectedRows()
+                If (If(row.Cells("idSizePPFM").Value Is Nothing, "", row.Cells("idSizePPFM").Value.ToString()) <> "") And (If(row.Cells("idTypePPFM").Value Is Nothing, "", row.Cells("idTypePPFM").Value.ToString()) <> "") And (If(row.Cells("idThickPPFM").Value Is Nothing, "", row.Cells("idThickPPFM").Value.ToString()) <> "") And (If(row.Cells("idFittingPPFM").Value Is Nothing, "", row.Cells("idFittingPPFM").Value.ToString()) <> "") Then
+                    Dim cmd As New SqlCommand("delete ppFittingMaterial where size = " & row.Cells("idSizePPFM").Value.ToString() & " and [type] = '" & row.Cells("idTypePPFM").Value.ToString() & "' and thick = " & row.Cells("idThickPPFM").Value.ToString() & " and fitting = '" & row.Cells("idFittingPPFM").Value.ToString() & "'", conn)
+                    cmd.Transaction = tran
+                    If cmd.ExecuteNonQuery > 0 Then
+                        flag = True
+                    Else
+                        flag = False
+                        Exit For
+                    End If
+                Else
+                    flag = True
+                End If
+            Next
+            If flag Then
+                tran.Commit()
+                Return True
+            Else
+                tran.Rollback()
+                Return False
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message)
+            Return False
         Finally
             desconectar()
         End Try

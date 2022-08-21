@@ -696,6 +696,12 @@
       <DependentUpon>EstSummary.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="RerportsScaffold\EstSummaryMaterial.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EstSummaryMaterial.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="ReportsEstimation\JobNoEquipmentBudget.Designer.vb">
       <DependentUpon>JobNoEquipmentBudget.vb</DependentUpon>
     </Compile>
@@ -1177,6 +1183,10 @@
     <EmbeddedResource Include="ReportsEstimation\EstSummary.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>EstSummary.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RerportsScaffold\EstSummaryMaterial.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>EstSummaryMaterial.vb</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="ReportsEstimation\JobNoEquipmentBudget.resx">
       <DependentUpon>JobNoEquipmentBudget.vb</DependentUpon>

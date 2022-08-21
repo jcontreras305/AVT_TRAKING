@@ -110,6 +110,9 @@
     Private Sub tblPipingMaterial_Enter(sender As Object, e As EventArgs) Handles tblPipingMaterial.Enter
         selectTable = "PipingMaterial"
     End Sub
+    Private Sub tblPPFittingMaterial_Enter(sender As Object, e As EventArgs) Handles tblPPFittingMaterial.Enter
+        selectTable = "PPFittingMaterial"
+    End Sub
     Private Sub tblWorkWeekScheduleLaborRates_CellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles tblWorkWeekScheduleLaborRates.CellEndEdit
         Select Case e.ColumnIndex
             Case 2 To 5
@@ -120,7 +123,7 @@
                 End If
         End Select
     End Sub
-    Private Sub tblOnlyDigitCell_CellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles tblPpInsUnitRate.CellEndEdit, tblEqInsUnitRate.CellEndEdit, tblPntFitting.CellEndEdit, tblInsFitting.CellEndEdit, tblEnviroment.CellEndEdit, tblSCFUnitsRates.CellEndEdit, tblPaintElevation.CellEndEdit, tblScafElevation.CellEndEdit, tblPpPaintUnitRate.CellEndEdit, tblEqPaintUnitRate.CellEndEdit, tblPipingMaterial.CellEndEdit, tblEquipmentMaterial.CellEndEdit
+    Private Sub tblOnlyDigitCell_CellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles tblPpInsUnitRate.CellEndEdit, tblEqInsUnitRate.CellEndEdit, tblPntFitting.CellEndEdit, tblInsFitting.CellEndEdit, tblEnviroment.CellEndEdit, tblSCFUnitsRates.CellEndEdit, tblPaintElevation.CellEndEdit, tblScafElevation.CellEndEdit, tblPpPaintUnitRate.CellEndEdit, tblEqPaintUnitRate.CellEndEdit, tblPipingMaterial.CellEndEdit, tblEquipmentMaterial.CellEndEdit, tblPPFittingMaterial.CellEndEdit
         Select Case selectTable
             Case "ElevationSCF"
                 Select Case e.ColumnIndex
@@ -272,6 +275,27 @@
                             End If
                         End If
                 End Select
+            Case "PPFittingMaterial"
+                Select Case e.ColumnIndex
+                    Case 4
+                        If tblPPFittingMaterial.CurrentRow.Cells(e.ColumnIndex).Value IsNot Nothing Then
+                            If Not soloNumero(tblPPFittingMaterial.CurrentRow.Cells(e.ColumnIndex).Value.ToString()) Then
+                                tblPPFittingMaterial.CurrentRow.Cells(e.ColumnIndex).Value = "0"
+                            End If
+                        End If
+                    Case 6
+                        If tblPPFittingMaterial.CurrentRow.Cells(e.ColumnIndex).Value IsNot Nothing Then
+                            If Not soloNumero(tblPPFittingMaterial.CurrentRow.Cells(e.ColumnIndex).Value.ToString()) Then
+                                tblPPFittingMaterial.CurrentRow.Cells(e.ColumnIndex).Value = "0"
+                            End If
+                        End If
+                    Case 8
+                        If tblPPFittingMaterial.CurrentRow.Cells(e.ColumnIndex).Value IsNot Nothing Then
+                            If Not soloNumero(tblPPFittingMaterial.CurrentRow.Cells(e.ColumnIndex).Value.ToString()) Then
+                                tblPPFittingMaterial.CurrentRow.Cells(e.ColumnIndex).Value = "0"
+                            End If
+                        End If
+                End Select
         End Select
     End Sub
     Private Sub btnSaveFactorTbl_Click(sender As Object, e As EventArgs) Handles btnSaveFactorTbl.Click
@@ -419,6 +443,15 @@
                     End If
                 Else
                     MessageBox.Show("Please Select a row in the Table Piping Insulation Rate Unit Rate to Constinue.", "Important", MessageBoxButtons.OK, MessageBoxIcon.Asterisk)
+                End If
+            Case "PPFittingMaterial"
+                If tblPPFittingMaterial.SelectedRows.Count > 0 Then
+                    If mtdFactor.saveUpdatePPFittingMaterial(tblPPFittingMaterial) Then
+                        mtdFactor.selectPPFittingMaterial(tblPPFittingMaterial)
+                        MsgBox("Successful.")
+                    End If
+                Else
+                    MessageBox.Show("Please Select a row in the Table Piping Fitting Material to Constinue.", "Important", MessageBoxButtons.OK, MessageBoxIcon.Asterisk)
                 End If
         End Select
     End Sub
@@ -655,6 +688,21 @@
                         If mtdFactor.deleteEquipmentMaterial(tblEquipmentMaterial) Then
                             For Each row As DataGridViewRow In tblEquipmentMaterial.SelectedRows()
                                 tblEquipmentMaterial.Rows.Remove(row)
+                            Next
+                            MsgBox("Successfull")
+                        Else
+                            MsgBox("Error, check the Data or refresh the Window.")
+                        End If
+                    End If
+                Else
+                    MessageBox.Show("Please Select A Row.", "Message", MessageBoxButtons.OK, MessageBoxIcon.Asterisk)
+                End If
+            Case "PPFittingMaterial"
+                If tblPPFittingMaterial.SelectedRows.Count > 0 Then
+                    If DialogResult.Yes = MessageBox.Show("If you Accept, is likely that you delete an Element that is related to this Records. Are you sure to continue?", "Message", MessageBoxButtons.YesNo, MessageBoxIcon.Asterisk) Then
+                        If mtdFactor.deletePPFittingMaterial(tblPPFittingMaterial) Then
+                            For Each row As DataGridViewRow In tblPPFittingMaterial.SelectedRows()
+                                tblPPFittingMaterial.Rows.Remove(row)
                             Next
                             MsgBox("Successfull")
                         Else
@@ -1221,8 +1269,8 @@
         selectTable = "EquipmentHC"
     End Sub
 
-    Private Sub tblPipingIRHC_Enter(sender As Object, e As EventArgs) Handles tblPipingIRHC.Enter
-        selectTable = "PipingIRHC"
+    Private Sub tblEquipmentIRHC_Enter(sender As Object, e As EventArgs) Handles tblEquipmentIRHC.Enter
+        selectTable = "EquipmentHC"
     End Sub
     '############################################################################################################################################################################################################################################################
     '############################################################################################################################################################################################################################################################
@@ -1249,9 +1297,34 @@
         End Try
         selectTable = "PipingIRHC"
     End Sub
+    Private Sub tblPipingIRHC_Enter(sender As Object, e As EventArgs) Handles tblPipingIRHC.Enter
+        selectTable = "PipingIRHC"
+    End Sub
 
-    Private Sub tblEquipmentIRHC_Enter(sender As Object, e As EventArgs) Handles tblEquipmentIRHC.Enter
-        selectTable = "EquipmentHC"
+    '############################################################################################################################################################################################################################################################
+    '############################################################################################################################################################################################################################################################
+    '############################################################################################################################################################################################################################################################
+
+    Private Sub btnExcelPPFittingMaterial_Click(sender As Object, e As EventArgs) Handles btnExcelPPFittingMaterial.Click
+        Try
+            Dim sheetName = InputBox("Please Write the name of the Sheet to Read.", "Find Excel Sheet", "Sheet 1")
+            While sheetName <> ""
+                Dim tbl = leerExcel(lblMessage, pgbProgress, sheetName)
+                If tbl IsNot Nothing Then
+                    For Each row As Data.DataRow In tbl.Rows()
+                        tblPPFittingMaterial.Rows.Add("", "", "", "", row.ItemArray(0).ToString(), row.ItemArray(1).ToString(), row.ItemArray(2).ToString(), row.ItemArray(3).ToString(), row.ItemArray(4).ToString(), row.ItemArray(5).ToString())
+                    Next
+                    pgbProgress.Value = 100
+                    lblMessage.Text = "Message: End."
+                    Exit While
+                Else
+                    sheetName = InputBox("Please Write the name of the Sheet to Read." + "If do not wish to continue, leave the space blank.", "find Excel Sheet", "Sheet 1")
+                End If
+            End While
+        Catch ex As Exception
+            MsgBox(ex.Message())
+        End Try
+        selectTable = "PPFittingMaterial"
     End Sub
 
     Private Sub TabControl1_SelectedIndexChanged(sender As Object, e As EventArgs) Handles TabControl1.SelectedIndexChanged
@@ -1315,6 +1388,10 @@
             Case 10
                 If tblEquipmentMaterial.Rows.Count = 1 Then
                     mtdFactor.selectSizesMaterialEquipment(tblEquipmentMaterial)
+                End If
+            Case 11
+                If tblPPFittingMaterial.Rows.Count = 1 Then
+                    mtdFactor.selectPPFittingMaterial(tblPPFittingMaterial)
                 End If
         End Select
     End Sub

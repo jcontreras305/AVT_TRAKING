@@ -3710,6 +3710,126 @@ left join taxesPT as txp on txp.jobNo = T1.jobNo
 end
 go
 ----#########################################################################################################################################################################################
+----############## PROCEDIMINETO PARA SUBREPORTE DE MATERIALES EN ESTIMACION ################################################################################################################
+----#########################################################################################################################################################################################
+
+create proc sp_MaterialEstimationProject
+@ProjectId as varchar(30)
+as
+begin
+	select
+	distinct
+	T1.idDrawingNum ,
+	(select TOP 1 SUM(T2.[SQF/LF]) from 
+					(select TA.[SQF/LF] from
+						(select dr.idDrawingNum, ppE.lFtII  as 'SQF/LF', ppE.size , ppE.thick , ppM.price , ppM.description , (ppE.lFtII * ppM.price) as 'PMCost' from pipingEst as ppE
+							inner join pipingMaterial ppM on ppE.size = ppM.size and ppE.thick = ppM.thick and ppe.[type]= ppM.[type]
+							inner join drawing as dr on dr.idDrawingNum = ppE.idDrawingNum 
+							inner join projectClientEst as po on po.projectId  = dr.projectId
+							where po.projectId = @ProjectId and (ppE.lFtII > 0 and not ppE.lFtII is null )
+							union all
+							select dr.idDrawingNum ,eqE.sqrFtII as 'SQF/LF', 0 as 'Size' , eqE.thick , eqM.price , eqM.description , (eqE.sqrFtII * eqM.price) as 'PMCost' from equipmentEst as eqE
+							inner join equipmentMaterial as eqM on  eqM.[type] = eqE.[type] and eqM.[thick] = eqE.[thick]
+							inner join drawing as dr on dr.idDrawingNum = eqE.idDrawingNum 
+							inner join projectClientEst as po on po.projectId  = dr.projectId
+							where po.projectId = @ProjectId and (eqE.sqrFtII > 0 and not eqE.sqrFtII is null)) as TA 
+						where TA.[description] = T1.[description] and TA.[thick] = T1.[thick] and TA.[price] = T1.[price] and TA.[idDrawingNum] = T1.[idDrawingNum] ) as T2) AS 'SQF/LF',
+	T1.size , 
+	T1.thick,
+	T1.price,
+	T1.[description],
+	(select TOP 1 SUM(T2.[SQF/LF]) from 
+					(select TA.[SQF/LF] from
+						(select dr.idDrawingNum, ppE.lFtII  as 'SQF/LF', ppE.size , ppE.thick , ppM.price , ppM.description , (ppE.lFtII * ppM.price) as 'PMCost' from pipingEst as ppE
+							inner join pipingMaterial ppM on ppE.size = ppM.size and ppE.thick = ppM.thick and ppe.[type]= ppM.[type]
+							inner join drawing as dr on dr.idDrawingNum = ppE.idDrawingNum 
+							inner join projectClientEst as po on po.projectId  = dr.projectId
+							where po.projectId = @ProjectId and (ppE.lFtII > 0 and not ppE.lFtII is null )
+							union all
+							select dr.idDrawingNum ,eqE.sqrFtII as 'SQF/LF', 0 as 'Size' , eqE.thick , eqM.price , eqM.description , (eqE.sqrFtII * eqM.price) as 'PMCost' from equipmentEst as eqE
+							inner join equipmentMaterial as eqM on  eqM.[type] = eqE.[type] and eqM.[thick] = eqE.[thick]
+							inner join drawing as dr on dr.idDrawingNum = eqE.idDrawingNum 
+							inner join projectClientEst as po on po.projectId  = dr.projectId
+							where po.projectId = @ProjectId and (eqE.sqrFtII > 0 and not eqE.sqrFtII is null)) as TA 
+						where TA.[description] = T1.[description] and TA.[thick] = T1.[thick] and TA.[price] = T1.[price] and TA.[idDrawingNum] = T1.[idDrawingNum] ) as T2) AS 'PMCost'
+	from(
+	select dr.idDrawingNum, ppE.lFtII  as 'SQF/LF', ppE.size , ppE.thick , ppM.price , ppM.description , (ppE.lFtII * ppM.price) as 'PMCost' from pipingEst as ppE
+	inner join pipingMaterial ppM on ppE.size = ppM.size and ppE.thick = ppM.thick and ppe.[type]= ppM.[type]
+	inner join drawing as dr on dr.idDrawingNum = ppE.idDrawingNum 
+	inner join projectClientEst as po on po.projectId  = dr.projectId
+	where po.projectId = @ProjectId and (ppE.lFtII > 0 and not ppE.lFtII is null )
+	union all
+	select dr.idDrawingNum ,eqE.sqrFtII as 'SQF/LF', 0 as 'Size' , eqE.thick , eqM.price , eqM.description , (eqE.sqrFtII * eqM.price) as 'PMCost' from equipmentEst as eqE
+	inner join equipmentMaterial as eqM on  eqM.[type] = eqE.[type] and eqM.[thick] = eqE.[thick]
+	inner join drawing as dr on dr.idDrawingNum = eqE.idDrawingNum 
+	inner join projectClientEst as po on po.projectId  = dr.projectId
+	where po.projectId = @ProjectId and (eqE.sqrFtII > 0 and not eqE.sqrFtII is null)) as T1
+	UNION ALL
+	select  * , (T2.[SQF/LF]*[Price]) as 'PMCost' from (
+select dr.idDrawingNum,p90II as 'SQF/LF', ppE.size , ppE.thick , ISNULL((select TOP 1 price from ppFittingMaterial as ppFTM where ppFTM.size = ppE.size and ppFTM.[type] = ppE.[type] and ppFTM.[thick] = ppE.[thick] and ppFTM.fitting = '90°'),0) as 'Price' , CONCAT('90°',' - ',ISNULL((select TOP 1 [description] from ppFittingMaterial as ppFTM where ppFTM.size = ppE.size and ppFTM.[type] = ppE.[type] and ppFTM.[thick] = ppE.[thick] and ppFTM.fitting = '90°'),'')) as 'Description' from pipingEst as ppE
+inner join drawing as dr on dr.idDrawingNum = ppE.idDrawingNum 
+inner join projectClientEst as po  on po.projectId =dr.projectId
+where po.projectId = @ProjectId and (ppE.p90II > 0 and not ppE.p90II is null )
+union All
+select dr.idDrawingNum,p45II as 'SQF/LF', ppE.size , ppE.thick , ISNULL((select TOP 1 price from ppFittingMaterial as ppFTM where ppFTM.size = ppE.size and ppFTM.[type] = ppE.[type] and ppFTM.[thick] = ppE.[thick] and ppFTM.fitting = '45°'),0) as 'Price' , CONCAT('45°',' - ',ISNULL((select TOP 1 [description] from ppFittingMaterial as ppFTM where ppFTM.size = ppE.size and ppFTM.[type] = ppE.[type] and ppFTM.[thick] = ppE.[thick] and ppFTM.fitting = '45°'),'')) as 'Description' from pipingEst as ppE
+inner join drawing as dr on dr.idDrawingNum = ppE.idDrawingNum 
+inner join projectClientEst as po  on po.projectId =dr.projectId
+where po.projectId = @ProjectId and (ppE.p45II > 0 and not ppE.p45II is null )
+union All
+select dr.idDrawingNum,pBendII as 'SQF/LF', ppE.size , ppE.thick , ISNULL((select TOP 1 price from ppFittingMaterial as ppFTM where ppFTM.size = ppE.size and ppFTM.[type] = ppE.[type] and ppFTM.[thick] = ppE.[thick] and ppFTM.fitting = 'Bend'),0) as 'Price' , CONCAT('Bend',' - ',ISNULL((select TOP 1 [description] from ppFittingMaterial as ppFTM where ppFTM.size = ppE.size and ppFTM.[type] = ppE.[type] and ppFTM.[thick] = ppE.[thick] and ppFTM.fitting = 'Bend'),'')) as 'Description' from pipingEst as ppE
+inner join drawing as dr on dr.idDrawingNum = ppE.idDrawingNum 
+inner join projectClientEst as po  on po.projectId =dr.projectId
+where po.projectId = @ProjectId and (ppE.pBendII > 0 and not ppE.pBendII is null )
+union All 
+select dr.idDrawingNum,pTeeII as 'SQF/LF', ppE.size , ppE.thick , ISNULL((select TOP 1 price from ppFittingMaterial as ppFTM where ppFTM.size = ppE.size and ppFTM.[type] = ppE.[type] and ppFTM.[thick] = ppE.[thick] and ppFTM.fitting = 'TEE'),0) as 'Price' , CONCAT('TEE',' - ',ISNULL((select TOP 1 [description] from ppFittingMaterial as ppFTM where ppFTM.size = ppE.size and ppFTM.[type] = ppE.[type] and ppFTM.[thick] = ppE.[thick] and ppFTM.fitting = 'TEE'),'')) as 'Description' from pipingEst as ppE
+inner join drawing as dr on dr.idDrawingNum = ppE.idDrawingNum 
+inner join projectClientEst as po  on po.projectId =dr.projectId
+where po.projectId = @ProjectId and (ppE.pTeeII > 0 and not ppE.pTeeII is null )
+union All 
+select dr.idDrawingNum,pReducII as 'SQF/LF', ppE.size , ppE.thick , ISNULL((select TOP 1 price from ppFittingMaterial as ppFTM where ppFTM.size = ppE.size and ppFTM.[type] = ppE.[type] and ppFTM.[thick] = ppE.[thick] and ppFTM.fitting = 'RED'),0) as 'Price' , CONCAT('Reduction',' - ',ISNULL((select TOP 1 [description] from ppFittingMaterial as ppFTM where ppFTM.size = ppE.size and ppFTM.[type] = ppE.[type] and ppFTM.[thick] = ppE.[thick] and ppFTM.fitting = 'RED'),'')) as 'Description' from pipingEst as ppE
+inner join drawing as dr on dr.idDrawingNum = ppE.idDrawingNum 
+inner join projectClientEst as po  on po.projectId =dr.projectId
+where po.projectId = @ProjectId and (ppE.pReducII > 0 and not ppE.pReducII is null )
+union All 
+select dr.idDrawingNum,ppE.pCapsII as 'SQF/LF', ppE.size , ppE.thick , ISNULL((select TOP 1 price from ppFittingMaterial as ppFTM where ppFTM.size = ppE.size and ppFTM.[type] = ppE.[type] and ppFTM.[thick] = ppE.[thick] and ppFTM.fitting = 'CAP'),0) as 'Price' , CONCAT('CAP',' - ',ISNULL((select TOP 1 [description] from ppFittingMaterial as ppFTM where ppFTM.size = ppE.size and ppFTM.[type] = ppE.[type] and ppFTM.[thick] = ppE.[thick] and ppFTM.fitting = 'CAP'),'')) as 'Description' from pipingEst as ppE
+inner join drawing as dr on dr.idDrawingNum = ppE.idDrawingNum 
+inner join projectClientEst as po  on po.projectId =dr.projectId
+where po.projectId = @ProjectId and (ppE.pCapsII > 0 and not ppE.pCapsII is null )
+union All 
+select dr.idDrawingNum,ppE.pPairII as 'SQF/LF', ppE.size , ppE.thick , ISNULL((select TOP 1 price from ppFittingMaterial as ppFTM where ppFTM.size = ppE.size and ppFTM.[type] = ppE.[type] and ppFTM.[thick] = ppE.[thick] and ppFTM.fitting = 'Flange Pair'),0) as 'Price' , CONCAT('Flange Pair',' - ',ISNULL((select TOP 1 [description] from ppFittingMaterial as ppFTM where ppFTM.size = ppE.size and ppFTM.[type] = ppE.[type] and ppFTM.[thick] = ppE.[thick] and ppFTM.fitting = 'Flange Pair'),'')) as 'Description' from pipingEst as ppE
+inner join drawing as dr on dr.idDrawingNum = ppE.idDrawingNum 
+inner join projectClientEst as po  on po.projectId =dr.projectId
+where po.projectId = @ProjectId and (ppE.pPairII > 0 and not ppE.pPairII is null )
+union All 
+select dr.idDrawingNum,ppE.pVlvII as 'SQF/LF', ppE.size , ppE.thick , ISNULL((select TOP 1 price from ppFittingMaterial as ppFTM where ppFTM.size = ppE.size and ppFTM.[type] = ppE.[type] and ppFTM.[thick] = ppE.[thick] and ppFTM.fitting = 'Flange Valve'),0) as 'Price' , CONCAT('Flange Valve',' - ',ISNULL((select TOP 1 [description] from ppFittingMaterial as ppFTM where ppFTM.size = ppE.size and ppFTM.[type] = ppE.[type] and ppFTM.[thick] = ppE.[thick] and ppFTM.fitting = 'Flange Valve'),'')) as 'Description' from pipingEst as ppE
+inner join drawing as dr on dr.idDrawingNum = ppE.idDrawingNum 
+inner join projectClientEst as po  on po.projectId =dr.projectId
+where po.projectId = @ProjectId and (ppE.pVlvII > 0 and not ppE.pVlvII is null )
+union All 
+select dr.idDrawingNum,ppE.pControlII as 'SQF/LF', ppE.size , ppE.thick , ISNULL((select TOP 1 price from ppFittingMaterial as ppFTM where ppFTM.size = ppE.size and ppFTM.[type] = ppE.[type] and ppFTM.[thick] = ppE.[thick] and ppFTM.fitting = 'Control Valve'),0) as 'Price' , CONCAT('Control Valve',' - ',ISNULL((select TOP 1 [description] from ppFittingMaterial as ppFTM where ppFTM.size = ppE.size and ppFTM.[type] = ppE.[type] and ppFTM.[thick] = ppE.[thick] and ppFTM.fitting = 'Control Valve'),'')) as 'Description' from pipingEst as ppE
+inner join drawing as dr on dr.idDrawingNum = ppE.idDrawingNum 
+inner join projectClientEst as po  on po.projectId =dr.projectId
+where po.projectId = @ProjectId and (ppE.pControlII > 0 and not ppE.pControlII is null )
+union All 
+select dr.idDrawingNum,ppE.pWeldII as 'SQF/LF', ppE.size , ppE.thick , ISNULL((select TOP 1 price from ppFittingMaterial as ppFTM where ppFTM.size = ppE.size and ppFTM.[type] = ppE.[type] and ppFTM.[thick] = ppE.[thick] and ppFTM.fitting = 'Weld Valve'),0) as 'Price' , CONCAT('Weld Valve',' - ',ISNULL((select TOP 1 [description] from ppFittingMaterial as ppFTM where ppFTM.size = ppE.size and ppFTM.[type] = ppE.[type] and ppFTM.[thick] = ppE.[thick] and ppFTM.fitting = 'Weld Valve'),'')) as 'Description' from pipingEst as ppE
+inner join drawing as dr on dr.idDrawingNum = ppE.idDrawingNum 
+inner join projectClientEst as po  on po.projectId =dr.projectId
+where po.projectId = @ProjectId and (ppE.pWeldII > 0 and not ppE.pWeldII is null )
+union All 
+select dr.idDrawingNum,ppE.pCutOutII as 'SQF/LF', ppE.size , ppE.thick , ISNULL((select TOP 1 price from ppFittingMaterial as ppFTM where ppFTM.size = ppE.size and ppFTM.[type] = ppE.[type] and ppFTM.[thick] = ppE.[thick] and ppFTM.fitting = 'Cut-Out'),0) as 'Price' , CONCAT('Cut-Out','-',ISNULL((select TOP 1 [description] from ppFittingMaterial as ppFTM where ppFTM.size = ppE.size and ppFTM.[type] = ppE.[type] and ppFTM.[thick] = ppE.[thick] and ppFTM.fitting = 'Cut-Out'),'')) as 'Description' from pipingEst as ppE
+inner join drawing as dr on dr.idDrawingNum = ppE.idDrawingNum 
+inner join projectClientEst as po  on po.projectId =dr.projectId
+where po.projectId = @ProjectId and (ppE.pCutOutII > 0 and not ppE.pCutOutII is null )
+union All 
+select dr.idDrawingNum,ppE.psupportII as 'SQF/LF', ppE.size , ppE.thick , ISNULL((select TOP 1 price from ppFittingMaterial as ppFTM where ppFTM.size = ppE.size and ppFTM.[type] = ppE.[type] and ppFTM.[thick] = ppE.[thick] and ppFTM.fitting = 'Support'),0) as 'Price' , CONCAT('Support','-',ISNULL((select TOP 1 [description] from ppFittingMaterial as ppFTM where ppFTM.size = ppE.size and ppFTM.[type] = ppE.[type] and ppFTM.[thick] = ppE.[thick] and ppFTM.fitting = 'Support'),'')) as 'Description' from pipingEst as ppE
+inner join drawing as dr on dr.idDrawingNum = ppE.idDrawingNum 
+inner join projectClientEst as po  on po.projectId =dr.projectId
+where po.projectId = @ProjectId and (ppE.psupportII > 0 and not ppE.psupportII is null )
+) as T2 
+order by idDrawingNum
+end
+go
+----#########################################################################################################################################################################################
 ----############## PROCEDIMINETO PARA CONSULTA DE MATERIALES EN EXCEL WORKING ###############################################################################################################
 ----#########################################################################################################################################################################################
 create proc sp_selectJobMaterialCost

@@ -149,6 +149,7 @@ Partial Class Estimating
         Me.RightToolStripPanel = New System.Windows.Forms.ToolStripPanel()
         Me.LeftToolStripPanel = New System.Windows.Forms.ToolStripPanel()
         Me.ContentPanel = New System.Windows.Forms.ToolStripContentPanel()
+        Me.btnEstReport = New System.Windows.Forms.Button()
         Me.TableLayoutPanel1.SuspendLayout()
         Me.TableLayoutPanel3.SuspendLayout()
         Me.Panel2.SuspendLayout()
@@ -352,6 +353,7 @@ Partial Class Estimating
         '
         'Panel3
         '
+        Me.Panel3.Controls.Add(Me.btnEstReport)
         Me.Panel3.Controls.Add(Me.btnReportDrawEst)
         Me.Panel3.Controls.Add(Me.btnCancel)
         Me.Panel3.Controls.Add(Me.btnNew)
@@ -378,11 +380,11 @@ Partial Class Estimating
         Me.btnReportDrawEst.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.btnReportDrawEst.Image = Global.AVT_TRAKING.My.Resources.Resources.report
         Me.btnReportDrawEst.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnReportDrawEst.Location = New System.Drawing.Point(491, 5)
+        Me.btnReportDrawEst.Location = New System.Drawing.Point(465, 5)
         Me.btnReportDrawEst.Name = "btnReportDrawEst"
-        Me.btnReportDrawEst.Size = New System.Drawing.Size(96, 27)
+        Me.btnReportDrawEst.Size = New System.Drawing.Size(122, 27)
         Me.btnReportDrawEst.TabIndex = 38
-        Me.btnReportDrawEst.Text = "Draw Est."
+        Me.btnReportDrawEst.Text = "Draw Est. Mat."
         Me.btnReportDrawEst.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         Me.btnReportDrawEst.UseVisualStyleBackColor = True
         '
@@ -696,7 +698,7 @@ Partial Class Estimating
         Me.lytHeaderEq.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 75.0!))
         Me.lytHeaderEq.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 75.0!))
         Me.lytHeaderEq.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 75.0!))
-        Me.lytHeaderEq.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 131.0!))
+        Me.lytHeaderEq.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 139.0!))
         Me.lytHeaderEq.Controls.Add(Me.SelectAll, 0, 0)
         Me.lytHeaderEq.Controls.Add(Me.Panel30, 13, 0)
         Me.lytHeaderEq.Controls.Add(Me.Panel29, 12, 0)
@@ -735,9 +737,9 @@ Partial Class Estimating
         '
         Me.Panel30.Controls.Add(Me.Label20)
         Me.Panel30.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel30.Location = New System.Drawing.Point(784, 4)
+        Me.Panel30.Location = New System.Drawing.Point(779, 4)
         Me.Panel30.Name = "Panel30"
-        Me.Panel30.Size = New System.Drawing.Size(132, 41)
+        Me.Panel30.Size = New System.Drawing.Size(137, 41)
         Me.Panel30.TabIndex = 14
         '
         'Label20
@@ -745,7 +747,7 @@ Partial Class Estimating
         Me.Label20.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Label20.Location = New System.Drawing.Point(0, 0)
         Me.Label20.Name = "Label20"
-        Me.Label20.Size = New System.Drawing.Size(132, 41)
+        Me.Label20.Size = New System.Drawing.Size(137, 41)
         Me.Label20.TabIndex = 2
         Me.Label20.Text = "Cut Out"
         Me.Label20.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -754,7 +756,7 @@ Partial Class Estimating
         '
         Me.Panel29.Controls.Add(Me.Label19)
         Me.Panel29.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel29.Location = New System.Drawing.Point(708, 4)
+        Me.Panel29.Location = New System.Drawing.Point(703, 4)
         Me.Panel29.Name = "Panel29"
         Me.Panel29.Size = New System.Drawing.Size(69, 41)
         Me.Panel29.TabIndex = 13
@@ -773,7 +775,7 @@ Partial Class Estimating
         '
         Me.Panel28.Controls.Add(Me.Label18)
         Me.Panel28.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel28.Location = New System.Drawing.Point(632, 4)
+        Me.Panel28.Location = New System.Drawing.Point(627, 4)
         Me.Panel28.Name = "Panel28"
         Me.Panel28.Size = New System.Drawing.Size(69, 41)
         Me.Panel28.TabIndex = 12
@@ -792,7 +794,7 @@ Partial Class Estimating
         '
         Me.Panel27.Controls.Add(Me.Label17)
         Me.Panel27.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel27.Location = New System.Drawing.Point(556, 4)
+        Me.Panel27.Location = New System.Drawing.Point(551, 4)
         Me.Panel27.Name = "Panel27"
         Me.Panel27.Size = New System.Drawing.Size(69, 41)
         Me.Panel27.TabIndex = 11
@@ -811,7 +813,7 @@ Partial Class Estimating
         '
         Me.Panel26.Controls.Add(Me.Label16)
         Me.Panel26.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel26.Location = New System.Drawing.Point(528, 4)
+        Me.Panel26.Location = New System.Drawing.Point(523, 4)
         Me.Panel26.Name = "Panel26"
         Me.Panel26.Size = New System.Drawing.Size(21, 41)
         Me.Panel26.TabIndex = 10
@@ -830,9 +832,9 @@ Partial Class Estimating
         '
         Me.Panel25.Controls.Add(Me.Label15)
         Me.Panel25.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel25.Location = New System.Drawing.Point(450, 4)
+        Me.Panel25.Location = New System.Drawing.Point(446, 4)
         Me.Panel25.Name = "Panel25"
-        Me.Panel25.Size = New System.Drawing.Size(71, 41)
+        Me.Panel25.Size = New System.Drawing.Size(70, 41)
         Me.Panel25.TabIndex = 9
         '
         'Label15
@@ -840,7 +842,7 @@ Partial Class Estimating
         Me.Label15.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Label15.Location = New System.Drawing.Point(0, 0)
         Me.Label15.Name = "Label15"
-        Me.Label15.Size = New System.Drawing.Size(71, 41)
+        Me.Label15.Size = New System.Drawing.Size(70, 41)
         Me.Label15.TabIndex = 2
         Me.Label15.Text = "Jkt"
         Me.Label15.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -849,7 +851,7 @@ Partial Class Estimating
         '
         Me.Panel24.Controls.Add(Me.Label14)
         Me.Panel24.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel24.Location = New System.Drawing.Point(401, 4)
+        Me.Panel24.Location = New System.Drawing.Point(397, 4)
         Me.Panel24.Name = "Panel24"
         Me.Panel24.Size = New System.Drawing.Size(42, 41)
         Me.Panel24.TabIndex = 8
@@ -868,9 +870,9 @@ Partial Class Estimating
         '
         Me.Panel23.Controls.Add(Me.Label13)
         Me.Panel23.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel23.Location = New System.Drawing.Point(329, 4)
+        Me.Panel23.Location = New System.Drawing.Point(326, 4)
         Me.Panel23.Name = "Panel23"
-        Me.Panel23.Size = New System.Drawing.Size(65, 41)
+        Me.Panel23.Size = New System.Drawing.Size(64, 41)
         Me.Panel23.TabIndex = 7
         '
         'Label13
@@ -878,7 +880,7 @@ Partial Class Estimating
         Me.Label13.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Label13.Location = New System.Drawing.Point(0, 0)
         Me.Label13.Name = "Label13"
-        Me.Label13.Size = New System.Drawing.Size(65, 41)
+        Me.Label13.Size = New System.Drawing.Size(64, 41)
         Me.Label13.TabIndex = 2
         Me.Label13.Text = "Ins Type"
         Me.Label13.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -887,9 +889,9 @@ Partial Class Estimating
         '
         Me.Panel22.Controls.Add(Me.Label12)
         Me.Panel22.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel22.Location = New System.Drawing.Point(275, 4)
+        Me.Panel22.Location = New System.Drawing.Point(273, 4)
         Me.Panel22.Name = "Panel22"
-        Me.Panel22.Size = New System.Drawing.Size(47, 41)
+        Me.Panel22.Size = New System.Drawing.Size(46, 41)
         Me.Panel22.TabIndex = 6
         '
         'Label12
@@ -897,7 +899,7 @@ Partial Class Estimating
         Me.Label12.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Label12.Location = New System.Drawing.Point(0, 0)
         Me.Label12.Name = "Label12"
-        Me.Label12.Size = New System.Drawing.Size(47, 41)
+        Me.Label12.Size = New System.Drawing.Size(46, 41)
         Me.Label12.TabIndex = 2
         Me.Label12.Text = "Paint Option"
         Me.Label12.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -906,7 +908,7 @@ Partial Class Estimating
         '
         Me.Panel21.Controls.Add(Me.Label11)
         Me.Panel21.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel21.Location = New System.Drawing.Point(220, 4)
+        Me.Panel21.Location = New System.Drawing.Point(218, 4)
         Me.Panel21.Name = "Panel21"
         Me.Panel21.Size = New System.Drawing.Size(48, 41)
         Me.Panel21.TabIndex = 5
@@ -925,9 +927,9 @@ Partial Class Estimating
         '
         Me.Panel20.Controls.Add(Me.Label10)
         Me.Panel20.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel20.Location = New System.Drawing.Point(158, 4)
+        Me.Panel20.Location = New System.Drawing.Point(157, 4)
         Me.Panel20.Name = "Panel20"
-        Me.Panel20.Size = New System.Drawing.Size(55, 41)
+        Me.Panel20.Size = New System.Drawing.Size(54, 41)
         Me.Panel20.TabIndex = 4
         '
         'Label10
@@ -935,7 +937,7 @@ Partial Class Estimating
         Me.Label10.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Label10.Location = New System.Drawing.Point(0, 0)
         Me.Label10.Name = "Label10"
-        Me.Label10.Size = New System.Drawing.Size(55, 41)
+        Me.Label10.Size = New System.Drawing.Size(54, 41)
         Me.Label10.TabIndex = 2
         Me.Label10.Text = "Heigth"
         Me.Label10.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -946,7 +948,7 @@ Partial Class Estimating
         Me.Panel7.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel7.Location = New System.Drawing.Point(67, 4)
         Me.Panel7.Name = "Panel7"
-        Me.Panel7.Size = New System.Drawing.Size(84, 41)
+        Me.Panel7.Size = New System.Drawing.Size(83, 41)
         Me.Panel7.TabIndex = 2
         '
         'Label9
@@ -954,7 +956,7 @@ Partial Class Estimating
         Me.Label9.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Label9.Location = New System.Drawing.Point(0, 0)
         Me.Label9.Name = "Label9"
-        Me.Label9.Size = New System.Drawing.Size(84, 41)
+        Me.Label9.Size = New System.Drawing.Size(83, 41)
         Me.Label9.TabIndex = 2
         Me.Label9.Text = "Equipment"
         Me.Label9.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -1598,6 +1600,24 @@ Partial Class Estimating
         '
         Me.ContentPanel.Size = New System.Drawing.Size(150, 150)
         '
+        'btnEstReport
+        '
+        Me.btnEstReport.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnEstReport.FlatAppearance.BorderSize = 0
+        Me.btnEstReport.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(59, Byte), Integer), CType(CType(69, Byte), Integer), CType(CType(79, Byte), Integer))
+        Me.btnEstReport.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnEstReport.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnEstReport.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.btnEstReport.Image = Global.AVT_TRAKING.My.Resources.Resources.report
+        Me.btnEstReport.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnEstReport.Location = New System.Drawing.Point(465, 38)
+        Me.btnEstReport.Name = "btnEstReport"
+        Me.btnEstReport.Size = New System.Drawing.Size(104, 27)
+        Me.btnEstReport.TabIndex = 39
+        Me.btnEstReport.Text = "Draw Est."
+        Me.btnEstReport.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.btnEstReport.UseVisualStyleBackColor = True
+        '
         'Estimating
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1788,4 +1808,5 @@ Partial Class Estimating
     Friend WithEvents Label42 As Label
     Friend WithEvents Label43 As Label
     Friend WithEvents btnReportDrawEst As Button
+    Friend WithEvents btnEstReport As Button
 End Class

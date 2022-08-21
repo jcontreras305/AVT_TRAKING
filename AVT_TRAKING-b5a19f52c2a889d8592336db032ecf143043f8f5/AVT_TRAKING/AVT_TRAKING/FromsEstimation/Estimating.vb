@@ -740,6 +740,7 @@
                         Dim rptEstSum As New EstimateSummary
                         rptEstSum.clientNum = idClient
                         rptEstSum.Project = idProject
+                        rptEstSum.Material = True
                         rptEstSum.ShowDialog()
                     End If
                 End If
@@ -749,7 +750,21 @@
         End Try
     End Sub
 
-    Private Sub btnRptProjectMaterial_Click(sender As Object, e As EventArgs) 
+    Private Sub btnEstReport_Click(sender As Object, e As EventArgs) Handles btnEstReport.Click
+        Try
+            If mtdEstimation.updateCostEstSCF(idClient, txtDrawingNum.Text, idProject, If(idDrawing = "", "", idDrawing), txtDescriptionDrawing.Text) Then
+                If mtdEstimation.updateCostEstEquipment(idClient, idProject, txtDrawingNum.Text, If(idDrawing = "", "", idDrawing), txtDescriptionDrawing.Text) Then
+                    If mtdEstimation.updateCostEstPiping(idClient, idProject, txtDrawingNum.Text, If(idDrawing = "", "", idDrawing), txtDescriptionDrawing.Text) Then
+                        Dim rptEstSum As New EstimateSummary
+                        rptEstSum.clientNum = idClient
+                        rptEstSum.Project = idProject
+                        rptEstSum.Material = False
+                        rptEstSum.ShowDialog()
+                    End If
+                End If
+            End If
+        Catch ex As Exception
 
+        End Try
     End Sub
 End Class
