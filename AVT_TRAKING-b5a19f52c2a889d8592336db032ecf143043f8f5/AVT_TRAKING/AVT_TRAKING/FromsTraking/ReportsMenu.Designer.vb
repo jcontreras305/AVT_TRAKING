@@ -29,6 +29,7 @@ Partial Class ReportsMenu
         Me.PictureBox2 = New System.Windows.Forms.PictureBox()
         Me.btnMaximize = New System.Windows.Forms.PictureBox()
         Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.Button24 = New System.Windows.Forms.Button()
         Me.Button23 = New System.Windows.Forms.Button()
         Me.Button21 = New System.Windows.Forms.Button()
         Me.Button4 = New System.Windows.Forms.Button()
@@ -60,7 +61,7 @@ Partial Class ReportsMenu
         Me.Button6 = New System.Windows.Forms.Button()
         Me.Button5 = New System.Windows.Forms.Button()
         Me.PictureBox4 = New System.Windows.Forms.PictureBox()
-        Me.Button24 = New System.Windows.Forms.Button()
+        Me.Button25 = New System.Windows.Forms.Button()
         Me.TitleBar.SuspendLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.btnRestore, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -139,13 +140,15 @@ Partial Class ReportsMenu
         '
         'Panel2
         '
+        Me.Panel2.AutoScroll = True
         Me.Panel2.BackColor = System.Drawing.Color.FromArgb(CType(CType(30, Byte), Integer), CType(CType(38, Byte), Integer), CType(CType(90, Byte), Integer))
+        Me.Panel2.Controls.Add(Me.Button25)
         Me.Panel2.Controls.Add(Me.Button24)
         Me.Panel2.Controls.Add(Me.Button23)
         Me.Panel2.Controls.Add(Me.Button21)
+        Me.Panel2.Controls.Add(Me.Button2)
         Me.Panel2.Controls.Add(Me.Button4)
         Me.Panel2.Controls.Add(Me.Button3)
-        Me.Panel2.Controls.Add(Me.Button2)
         Me.Panel2.Controls.Add(Me.Button1)
         Me.Panel2.Controls.Add(Me.btnClientBilling)
         Me.Panel2.Controls.Add(Me.btnActAverage)
@@ -156,8 +159,27 @@ Partial Class ReportsMenu
         Me.Panel2.Size = New System.Drawing.Size(206, 550)
         Me.Panel2.TabIndex = 2
         '
+        'Button24
+        '
+        Me.Button24.Dock = System.Windows.Forms.DockStyle.Top
+        Me.Button24.FlatAppearance.BorderSize = 0
+        Me.Button24.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(81, Byte), Integer), CType(CType(93, Byte), Integer), CType(CType(102, Byte), Integer))
+        Me.Button24.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.Button24.Font = New System.Drawing.Font("Verdana", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Button24.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.Button24.Image = Global.AVT_TRAKING.My.Resources.Resources.excel
+        Me.Button24.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.Button24.Location = New System.Drawing.Point(0, 439)
+        Me.Button24.Name = "Button24"
+        Me.Button24.Size = New System.Drawing.Size(206, 45)
+        Me.Button24.TabIndex = 9
+        Me.Button24.Text = "Mhrs By Date Range"
+        Me.Button24.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.Button24.UseVisualStyleBackColor = True
+        '
         'Button23
         '
+        Me.Button23.Dock = System.Windows.Forms.DockStyle.Top
         Me.Button23.FlatAppearance.BorderSize = 0
         Me.Button23.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(81, Byte), Integer), CType(CType(93, Byte), Integer), CType(CType(102, Byte), Integer))
         Me.Button23.FlatStyle = System.Windows.Forms.FlatStyle.Flat
@@ -165,9 +187,9 @@ Partial Class ReportsMenu
         Me.Button23.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.Button23.Image = Global.AVT_TRAKING.My.Resources.Resources.excel
         Me.Button23.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.Button23.Location = New System.Drawing.Point(3, 413)
+        Me.Button23.Location = New System.Drawing.Point(0, 397)
         Me.Button23.Name = "Button23"
-        Me.Button23.Size = New System.Drawing.Size(200, 42)
+        Me.Button23.Size = New System.Drawing.Size(206, 42)
         Me.Button23.TabIndex = 8
         Me.Button23.Text = "Under Fourty"
         Me.Button23.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -175,6 +197,7 @@ Partial Class ReportsMenu
         '
         'Button21
         '
+        Me.Button21.Dock = System.Windows.Forms.DockStyle.Top
         Me.Button21.FlatAppearance.BorderSize = 0
         Me.Button21.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(81, Byte), Integer), CType(CType(93, Byte), Integer), CType(CType(102, Byte), Integer))
         Me.Button21.FlatStyle = System.Windows.Forms.FlatStyle.Flat
@@ -182,9 +205,9 @@ Partial Class ReportsMenu
         Me.Button21.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.Button21.Image = Global.AVT_TRAKING.My.Resources.Resources.scaffoldestimate
         Me.Button21.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.Button21.Location = New System.Drawing.Point(2, 366)
+        Me.Button21.Location = New System.Drawing.Point(0, 355)
         Me.Button21.Name = "Button21"
-        Me.Button21.Size = New System.Drawing.Size(200, 42)
+        Me.Button21.Size = New System.Drawing.Size(206, 42)
         Me.Button21.TabIndex = 7
         Me.Button21.Text = "        Daily Equipment Time Sheet"
         Me.Button21.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -192,6 +215,7 @@ Partial Class ReportsMenu
         '
         'Button4
         '
+        Me.Button4.Dock = System.Windows.Forms.DockStyle.Top
         Me.Button4.FlatAppearance.BorderSize = 0
         Me.Button4.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(81, Byte), Integer), CType(CType(93, Byte), Integer), CType(CType(102, Byte), Integer))
         Me.Button4.FlatStyle = System.Windows.Forms.FlatStyle.Flat
@@ -199,16 +223,17 @@ Partial Class ReportsMenu
         Me.Button4.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.Button4.Image = Global.AVT_TRAKING.My.Resources.Resources.ComplteByRange
         Me.Button4.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.Button4.Location = New System.Drawing.Point(0, 271)
+        Me.Button4.Location = New System.Drawing.Point(0, 255)
         Me.Button4.Name = "Button4"
-        Me.Button4.Size = New System.Drawing.Size(200, 42)
-        Me.Button4.TabIndex = 6
+        Me.Button4.Size = New System.Drawing.Size(206, 58)
+        Me.Button4.TabIndex = 5
         Me.Button4.Text = "Comp By Date Range"
         Me.Button4.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         Me.Button4.UseVisualStyleBackColor = True
         '
         'Button3
         '
+        Me.Button3.Dock = System.Windows.Forms.DockStyle.Top
         Me.Button3.FlatAppearance.BorderSize = 0
         Me.Button3.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(81, Byte), Integer), CType(CType(93, Byte), Integer), CType(CType(102, Byte), Integer))
         Me.Button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat
@@ -216,16 +241,17 @@ Partial Class ReportsMenu
         Me.Button3.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.Button3.Image = Global.AVT_TRAKING.My.Resources.Resources.ReCap
         Me.Button3.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.Button3.Location = New System.Drawing.Point(3, 223)
+        Me.Button3.Location = New System.Drawing.Point(0, 200)
         Me.Button3.Name = "Button3"
-        Me.Button3.Size = New System.Drawing.Size(203, 42)
-        Me.Button3.TabIndex = 5
+        Me.Button3.Size = New System.Drawing.Size(206, 55)
+        Me.Button3.TabIndex = 4
         Me.Button3.Text = "Client Billings Re-Cap"
         Me.Button3.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         Me.Button3.UseVisualStyleBackColor = True
         '
         'Button2
         '
+        Me.Button2.Dock = System.Windows.Forms.DockStyle.Top
         Me.Button2.FlatAppearance.BorderSize = 0
         Me.Button2.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(81, Byte), Integer), CType(CType(93, Byte), Integer), CType(CType(102, Byte), Integer))
         Me.Button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat
@@ -233,16 +259,17 @@ Partial Class ReportsMenu
         Me.Button2.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.Button2.Image = Global.AVT_TRAKING.My.Resources.Resources.scaffoldestimate
         Me.Button2.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.Button2.Location = New System.Drawing.Point(3, 319)
+        Me.Button2.Location = New System.Drawing.Point(0, 313)
         Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(200, 42)
-        Me.Button2.TabIndex = 4
+        Me.Button2.Size = New System.Drawing.Size(206, 42)
+        Me.Button2.TabIndex = 6
         Me.Button2.Text = "Time Sheets PO"
         Me.Button2.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         Me.Button2.UseVisualStyleBackColor = True
         '
         'Button1
         '
+        Me.Button1.Dock = System.Windows.Forms.DockStyle.Top
         Me.Button1.FlatAppearance.BorderSize = 0
         Me.Button1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(81, Byte), Integer), CType(CType(93, Byte), Integer), CType(CType(102, Byte), Integer))
         Me.Button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
@@ -250,9 +277,9 @@ Partial Class ReportsMenu
         Me.Button1.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.Button1.Image = Global.AVT_TRAKING.My.Resources.Resources.catsemployee
         Me.Button1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.Button1.Location = New System.Drawing.Point(0, 175)
+        Me.Button1.Location = New System.Drawing.Point(0, 149)
         Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(200, 42)
+        Me.Button1.Size = New System.Drawing.Size(206, 51)
         Me.Button1.TabIndex = 3
         Me.Button1.Text = "Cats Employee"
         Me.Button1.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -260,6 +287,7 @@ Partial Class ReportsMenu
         '
         'btnClientBilling
         '
+        Me.btnClientBilling.Dock = System.Windows.Forms.DockStyle.Top
         Me.btnClientBilling.FlatAppearance.BorderSize = 0
         Me.btnClientBilling.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(81, Byte), Integer), CType(CType(93, Byte), Integer), CType(CType(102, Byte), Integer))
         Me.btnClientBilling.FlatStyle = System.Windows.Forms.FlatStyle.Flat
@@ -267,9 +295,9 @@ Partial Class ReportsMenu
         Me.btnClientBilling.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.btnClientBilling.Image = Global.AVT_TRAKING.My.Resources.Resources.billing
         Me.btnClientBilling.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnClientBilling.Location = New System.Drawing.Point(3, 124)
+        Me.btnClientBilling.Location = New System.Drawing.Point(0, 107)
         Me.btnClientBilling.Name = "btnClientBilling"
-        Me.btnClientBilling.Size = New System.Drawing.Size(200, 42)
+        Me.btnClientBilling.Size = New System.Drawing.Size(206, 42)
         Me.btnClientBilling.TabIndex = 2
         Me.btnClientBilling.Text = "Client Billings"
         Me.btnClientBilling.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -277,6 +305,7 @@ Partial Class ReportsMenu
         '
         'btnActAverage
         '
+        Me.btnActAverage.Dock = System.Windows.Forms.DockStyle.Top
         Me.btnActAverage.FlatAppearance.BorderSize = 0
         Me.btnActAverage.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(81, Byte), Integer), CType(CType(93, Byte), Integer), CType(CType(102, Byte), Integer))
         Me.btnActAverage.FlatStyle = System.Windows.Forms.FlatStyle.Flat
@@ -284,9 +313,9 @@ Partial Class ReportsMenu
         Me.btnActAverage.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.btnActAverage.Image = Global.AVT_TRAKING.My.Resources.Resources.average
         Me.btnActAverage.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnActAverage.Location = New System.Drawing.Point(0, 65)
+        Me.btnActAverage.Location = New System.Drawing.Point(0, 48)
         Me.btnActAverage.Name = "btnActAverage"
-        Me.btnActAverage.Size = New System.Drawing.Size(200, 42)
+        Me.btnActAverage.Size = New System.Drawing.Size(206, 59)
         Me.btnActAverage.TabIndex = 1
         Me.btnActAverage.Text = "Active Average"
         Me.btnActAverage.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -294,6 +323,7 @@ Partial Class ReportsMenu
         '
         'btnTimeSheet
         '
+        Me.btnTimeSheet.Dock = System.Windows.Forms.DockStyle.Top
         Me.btnTimeSheet.FlatAppearance.BorderSize = 0
         Me.btnTimeSheet.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(81, Byte), Integer), CType(CType(93, Byte), Integer), CType(CType(102, Byte), Integer))
         Me.btnTimeSheet.FlatStyle = System.Windows.Forms.FlatStyle.Flat
@@ -301,9 +331,9 @@ Partial Class ReportsMenu
         Me.btnTimeSheet.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.btnTimeSheet.Image = Global.AVT_TRAKING.My.Resources.Resources.timesheetreport
         Me.btnTimeSheet.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnTimeSheet.Location = New System.Drawing.Point(3, 6)
+        Me.btnTimeSheet.Location = New System.Drawing.Point(0, 0)
         Me.btnTimeSheet.Name = "btnTimeSheet"
-        Me.btnTimeSheet.Size = New System.Drawing.Size(200, 42)
+        Me.btnTimeSheet.Size = New System.Drawing.Size(206, 48)
         Me.btnTimeSheet.TabIndex = 0
         Me.btnTimeSheet.Text = "Time Sheets"
         Me.btnTimeSheet.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -322,6 +352,7 @@ Partial Class ReportsMenu
         '
         'Panel4
         '
+        Me.Panel4.AutoScroll = True
         Me.Panel4.BackColor = System.Drawing.Color.FromArgb(CType(CType(30, Byte), Integer), CType(CType(38, Byte), Integer), CType(CType(60, Byte), Integer))
         Me.Panel4.Controls.Add(Me.Button22)
         Me.Panel4.Controls.Add(Me.Button20)
@@ -350,7 +381,7 @@ Partial Class ReportsMenu
         Me.Button22.Location = New System.Drawing.Point(0, 413)
         Me.Button22.Name = "Button22"
         Me.Button22.Size = New System.Drawing.Size(246, 59)
-        Me.Button22.TabIndex = 18
+        Me.Button22.TabIndex = 28
         Me.Button22.Text = "SCF Active"
         Me.Button22.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         Me.Button22.UseVisualStyleBackColor = True
@@ -368,7 +399,7 @@ Partial Class ReportsMenu
         Me.Button20.Location = New System.Drawing.Point(0, 354)
         Me.Button20.Name = "Button20"
         Me.Button20.Size = New System.Drawing.Size(246, 59)
-        Me.Button20.TabIndex = 17
+        Me.Button20.TabIndex = 27
         Me.Button20.Text = "SCF Material Inventory"
         Me.Button20.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         Me.Button20.UseVisualStyleBackColor = True
@@ -386,7 +417,7 @@ Partial Class ReportsMenu
         Me.Button18.Location = New System.Drawing.Point(0, 295)
         Me.Button18.Name = "Button18"
         Me.Button18.Size = New System.Drawing.Size(246, 59)
-        Me.Button18.TabIndex = 16
+        Me.Button18.TabIndex = 26
         Me.Button18.Text = "SCF Rental Details"
         Me.Button18.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         Me.Button18.UseVisualStyleBackColor = True
@@ -404,7 +435,7 @@ Partial Class ReportsMenu
         Me.Button13.Location = New System.Drawing.Point(0, 236)
         Me.Button13.Name = "Button13"
         Me.Button13.Size = New System.Drawing.Size(246, 59)
-        Me.Button13.TabIndex = 15
+        Me.Button13.TabIndex = 25
         Me.Button13.Text = "SCF History By Job"
         Me.Button13.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         Me.Button13.UseVisualStyleBackColor = True
@@ -422,7 +453,7 @@ Partial Class ReportsMenu
         Me.Button14.Location = New System.Drawing.Point(0, 177)
         Me.Button14.Name = "Button14"
         Me.Button14.Size = New System.Drawing.Size(246, 59)
-        Me.Button14.TabIndex = 14
+        Me.Button14.TabIndex = 24
         Me.Button14.Text = "SCF Histoty Dismantled"
         Me.Button14.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         Me.Button14.UseVisualStyleBackColor = True
@@ -440,7 +471,7 @@ Partial Class ReportsMenu
         Me.Button15.Location = New System.Drawing.Point(0, 118)
         Me.Button15.Name = "Button15"
         Me.Button15.Size = New System.Drawing.Size(246, 59)
-        Me.Button15.TabIndex = 13
+        Me.Button15.TabIndex = 23
         Me.Button15.Text = "SCF History By Job And Unit"
         Me.Button15.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         Me.Button15.UseVisualStyleBackColor = True
@@ -458,7 +489,7 @@ Partial Class ReportsMenu
         Me.Button16.Location = New System.Drawing.Point(0, 59)
         Me.Button16.Name = "Button16"
         Me.Button16.Size = New System.Drawing.Size(246, 59)
-        Me.Button16.TabIndex = 12
+        Me.Button16.TabIndex = 22
         Me.Button16.Text = "SCF History By Job And WO"
         Me.Button16.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         Me.Button16.UseVisualStyleBackColor = True
@@ -476,13 +507,14 @@ Partial Class ReportsMenu
         Me.Button17.Location = New System.Drawing.Point(0, 0)
         Me.Button17.Name = "Button17"
         Me.Button17.Size = New System.Drawing.Size(246, 59)
-        Me.Button17.TabIndex = 11
+        Me.Button17.TabIndex = 21
         Me.Button17.Text = "SCF History By Job No"
         Me.Button17.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         Me.Button17.UseVisualStyleBackColor = True
         '
         'Panel1
         '
+        Me.Panel1.AutoScroll = True
         Me.Panel1.BackColor = System.Drawing.Color.FromArgb(CType(CType(30, Byte), Integer), CType(CType(38, Byte), Integer), CType(CType(75, Byte), Integer))
         Me.Panel1.Controls.Add(Me.Button19)
         Me.Panel1.Controls.Add(Me.Button12)
@@ -512,7 +544,7 @@ Partial Class ReportsMenu
         Me.Button19.Location = New System.Drawing.Point(3, 463)
         Me.Button19.Name = "Button19"
         Me.Button19.Size = New System.Drawing.Size(200, 42)
-        Me.Button19.TabIndex = 16
+        Me.Button19.TabIndex = 20
         Me.Button19.Text = "Invoice Details"
         Me.Button19.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         Me.Button19.UseVisualStyleBackColor = True
@@ -529,7 +561,7 @@ Partial Class ReportsMenu
         Me.Button12.Location = New System.Drawing.Point(3, 415)
         Me.Button12.Name = "Button12"
         Me.Button12.Size = New System.Drawing.Size(200, 42)
-        Me.Button12.TabIndex = 15
+        Me.Button12.TabIndex = 19
         Me.Button12.Text = "Invoice"
         Me.Button12.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         Me.Button12.UseVisualStyleBackColor = True
@@ -546,7 +578,7 @@ Partial Class ReportsMenu
         Me.btnVacationE.Location = New System.Drawing.Point(6, 367)
         Me.btnVacationE.Name = "btnVacationE"
         Me.btnVacationE.Size = New System.Drawing.Size(200, 42)
-        Me.btnVacationE.TabIndex = 14
+        Me.btnVacationE.TabIndex = 18
         Me.btnVacationE.Text = "Vacation Employee"
         Me.btnVacationE.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         Me.btnVacationE.UseVisualStyleBackColor = True
@@ -563,7 +595,7 @@ Partial Class ReportsMenu
         Me.Button11.Location = New System.Drawing.Point(6, 319)
         Me.Button11.Name = "Button11"
         Me.Button11.Size = New System.Drawing.Size(200, 42)
-        Me.Button11.TabIndex = 13
+        Me.Button11.TabIndex = 17
         Me.Button11.Text = "WO Not Complete"
         Me.Button11.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         Me.Button11.UseVisualStyleBackColor = True
@@ -580,7 +612,7 @@ Partial Class ReportsMenu
         Me.Button10.Location = New System.Drawing.Point(6, 271)
         Me.Button10.Name = "Button10"
         Me.Button10.Size = New System.Drawing.Size(200, 42)
-        Me.Button10.TabIndex = 12
+        Me.Button10.TabIndex = 16
         Me.Button10.Text = "Year Final Hours"
         Me.Button10.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         Me.Button10.UseVisualStyleBackColor = True
@@ -597,7 +629,7 @@ Partial Class ReportsMenu
         Me.Button9.Location = New System.Drawing.Point(3, 223)
         Me.Button9.Name = "Button9"
         Me.Button9.Size = New System.Drawing.Size(200, 42)
-        Me.Button9.TabIndex = 11
+        Me.Button9.TabIndex = 15
         Me.Button9.Text = "Hours Per Week"
         Me.Button9.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         Me.Button9.UseVisualStyleBackColor = True
@@ -614,7 +646,7 @@ Partial Class ReportsMenu
         Me.Button8.Location = New System.Drawing.Point(3, 175)
         Me.Button8.Name = "Button8"
         Me.Button8.Size = New System.Drawing.Size(200, 42)
-        Me.Button8.TabIndex = 10
+        Me.Button8.TabIndex = 14
         Me.Button8.Text = "All Jobs"
         Me.Button8.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         Me.Button8.UseVisualStyleBackColor = True
@@ -631,7 +663,7 @@ Partial Class ReportsMenu
         Me.Button7.Location = New System.Drawing.Point(6, 124)
         Me.Button7.Name = "Button7"
         Me.Button7.Size = New System.Drawing.Size(200, 42)
-        Me.Button7.TabIndex = 9
+        Me.Button7.TabIndex = 13
         Me.Button7.Text = "By Job Number"
         Me.Button7.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         Me.Button7.UseVisualStyleBackColor = True
@@ -648,7 +680,7 @@ Partial Class ReportsMenu
         Me.Button6.Location = New System.Drawing.Point(6, 65)
         Me.Button6.Name = "Button6"
         Me.Button6.Size = New System.Drawing.Size(200, 42)
-        Me.Button6.TabIndex = 8
+        Me.Button6.TabIndex = 12
         Me.Button6.Text = "Employees Time"
         Me.Button6.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         Me.Button6.UseVisualStyleBackColor = True
@@ -665,7 +697,7 @@ Partial Class ReportsMenu
         Me.Button5.Location = New System.Drawing.Point(3, 6)
         Me.Button5.Name = "Button5"
         Me.Button5.Size = New System.Drawing.Size(200, 42)
-        Me.Button5.TabIndex = 7
+        Me.Button5.TabIndex = 11
         Me.Button5.Text = "Employee Per Diem"
         Me.Button5.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         Me.Button5.UseVisualStyleBackColor = True
@@ -680,22 +712,23 @@ Partial Class ReportsMenu
         Me.PictureBox4.TabIndex = 3
         Me.PictureBox4.TabStop = False
         '
-        'Button24
+        'Button25
         '
-        Me.Button24.FlatAppearance.BorderSize = 0
-        Me.Button24.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(81, Byte), Integer), CType(CType(93, Byte), Integer), CType(CType(102, Byte), Integer))
-        Me.Button24.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.Button24.Font = New System.Drawing.Font("Verdana", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button24.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.Button24.Image = Global.AVT_TRAKING.My.Resources.Resources.excel
-        Me.Button24.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.Button24.Location = New System.Drawing.Point(3, 451)
-        Me.Button24.Name = "Button24"
-        Me.Button24.Size = New System.Drawing.Size(200, 42)
-        Me.Button24.TabIndex = 9
-        Me.Button24.Text = "Mhrs By Date Range"
-        Me.Button24.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.Button24.UseVisualStyleBackColor = True
+        Me.Button25.Dock = System.Windows.Forms.DockStyle.Top
+        Me.Button25.FlatAppearance.BorderSize = 0
+        Me.Button25.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(81, Byte), Integer), CType(CType(93, Byte), Integer), CType(CType(102, Byte), Integer))
+        Me.Button25.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.Button25.Font = New System.Drawing.Font("Verdana", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Button25.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.Button25.Image = Global.AVT_TRAKING.My.Resources.Resources.billing
+        Me.Button25.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.Button25.Location = New System.Drawing.Point(0, 484)
+        Me.Button25.Name = "Button25"
+        Me.Button25.Size = New System.Drawing.Size(206, 50)
+        Me.Button25.TabIndex = 10
+        Me.Button25.Text = "Material Details"
+        Me.Button25.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.Button25.UseVisualStyleBackColor = True
         '
         'ReportsMenu
         '
@@ -762,4 +795,5 @@ Partial Class ReportsMenu
     Friend WithEvents Button22 As Button
     Friend WithEvents Button23 As Button
     Friend WithEvents Button24 As Button
+    Friend WithEvents Button25 As Button
 End Class

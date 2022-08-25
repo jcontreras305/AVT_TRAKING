@@ -2629,7 +2629,7 @@ begin
 	estCEq.idDrawingNum as 'Drawing',
 	po.projectId as 'Project',
 	po.[description] as 'Description',
-	eq.idEquimentEst as 'Equipment', 
+	eq.[description] as 'Equipment', 
 	eq.elevation as 'Height',
 	eq.systemPntEq as 'System',
 	eq.pntOption as 'Paint Option',

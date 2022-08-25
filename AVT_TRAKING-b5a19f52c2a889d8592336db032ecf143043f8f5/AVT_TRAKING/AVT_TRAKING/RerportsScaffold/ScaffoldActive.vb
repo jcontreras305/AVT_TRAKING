@@ -14,14 +14,14 @@ Public Class ScaffoldActive
     End Sub
     Private Sub btnRestore_Click(sender As Object, e As EventArgs) Handles btnRestore.Click
         WindowState = FormWindowState.Normal
-        btnMinimize.Visible = False
+        btnRestore.Visible = False
         btnMaximize.Visible = True
     End Sub
     Private Sub btnMaximize_Click(sender As Object, e As EventArgs) Handles btnMaximize.Click
         MaximizedBounds = Screen.FromHandle(Me.Handle).WorkingArea
         WindowState = FormWindowState.Maximized
         btnMaximize.Visible = False
-        btnMinimize.Visible = True
+        btnRestore.Visible = True
     End Sub
     <DllImport("user32.DLL", EntryPoint:="ReleaseCapture")>
     Private Shared Sub ReleaseCapture()
@@ -130,5 +130,9 @@ Public Class ScaffoldActive
             Cursor = Cursors.Default
         End Try
         lblMessage.Text = "Message: End."
+    End Sub
+
+    Private Sub btnExcelAllScafActive_Click(sender As Object, e As EventArgs) Handles btnExcelAllScafActive.Click
+
     End Sub
 End Class

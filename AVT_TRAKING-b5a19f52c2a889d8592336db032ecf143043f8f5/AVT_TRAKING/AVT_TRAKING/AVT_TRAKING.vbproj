@@ -533,6 +533,12 @@
       <DependentUpon>InvoiceProjectOrderDetails.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Reports TimeSheet\MaterialReportByPO.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MaterialReportByPO.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Reports TimeSheet\ReportAllJob.Designer.vb">
       <DependentUpon>ReportAllJob.vb</DependentUpon>
     </Compile>
@@ -695,6 +701,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>EstSummary.rpt</DependentUpon>
       <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ReportsEstimation\MaterialDetails.Designer.vb">
+      <DependentUpon>MaterialDetails.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ReportsEstimation\MaterialDetails.vb">
+      <SubType>Form</SubType>
     </Compile>
     <Compile Include="RerportsScaffold\EstSummaryMaterial.vb">
       <AutoGen>True</AutoGen>
@@ -1096,6 +1108,10 @@
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>InvoiceProjectOrderDetails.vb</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reports TimeSheet\MaterialReportByPO.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>MaterialReportByPO.vb</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reports TimeSheet\ReportAllJob.resx">
       <DependentUpon>ReportAllJob.vb</DependentUpon>
     </EmbeddedResource>
@@ -1183,6 +1199,9 @@
     <EmbeddedResource Include="ReportsEstimation\EstSummary.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>EstSummary.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ReportsEstimation\MaterialDetails.resx">
+      <DependentUpon>MaterialDetails.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="RerportsScaffold\EstSummaryMaterial.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>

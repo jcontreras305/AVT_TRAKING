@@ -977,7 +977,7 @@ Partial Class ProjectsClients
         '
         'clmCoplete
         '
-        Me.clmCoplete.HeaderText = "clmCoplete"
+        Me.clmCoplete.HeaderText = "Complete"
         Me.clmCoplete.Name = "clmCoplete"
         Me.clmCoplete.ReadOnly = True
         '

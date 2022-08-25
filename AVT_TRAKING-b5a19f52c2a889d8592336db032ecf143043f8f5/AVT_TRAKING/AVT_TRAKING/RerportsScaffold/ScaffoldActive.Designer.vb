@@ -24,7 +24,23 @@ Partial Class ScaffoldActive
     Private Sub InitializeComponent()
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
         Me.Panel3 = New System.Windows.Forms.Panel()
+        Me.TabControl1 = New System.Windows.Forms.TabControl()
+        Me.TabPage1 = New System.Windows.Forms.TabPage()
         Me.crvReport = New CrystalDecisions.Windows.Forms.CrystalReportViewer()
+        Me.TabPage2 = New System.Windows.Forms.TabPage()
+        Me.TableLayoutPanel2 = New System.Windows.Forms.TableLayoutPanel()
+        Me.Panel4 = New System.Windows.Forms.Panel()
+        Me.lblMessage = New System.Windows.Forms.Label()
+        Me.btnDownloadExcel = New System.Windows.Forms.Button()
+        Me.tblScaffoldActive = New System.Windows.Forms.DataGridView()
+        Me.LaborWoNetwork = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Type = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Tag = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Pieces = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Unit = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Location = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DateUp = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.ACTIVEDAYS = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Panel2 = New System.Windows.Forms.Panel()
         Me.cmbClients = New System.Windows.Forms.ComboBox()
         Me.btnReport = New System.Windows.Forms.Button()
@@ -37,24 +53,18 @@ Partial Class ScaffoldActive
         Me.btnMinimize = New System.Windows.Forms.PictureBox()
         Me.btnRestore = New System.Windows.Forms.PictureBox()
         Me.btnMaximize = New System.Windows.Forms.PictureBox()
-        Me.btnDownloadExcel = New System.Windows.Forms.Button()
-        Me.TabControl1 = New System.Windows.Forms.TabControl()
-        Me.TabPage1 = New System.Windows.Forms.TabPage()
-        Me.TabPage2 = New System.Windows.Forms.TabPage()
-        Me.TableLayoutPanel2 = New System.Windows.Forms.TableLayoutPanel()
-        Me.Panel4 = New System.Windows.Forms.Panel()
-        Me.tblScaffoldActive = New System.Windows.Forms.DataGridView()
-        Me.LaborWoNetwork = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Type = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Tag = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Pieces = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Unit = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Location = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.DateUp = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.ACTIVEDAYS = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.lblMessage = New System.Windows.Forms.Label()
+        Me.TableLayoutPanel3 = New System.Windows.Forms.TableLayoutPanel()
+        Me.Panel5 = New System.Windows.Forms.Panel()
+        Me.lblMessageAllActive = New System.Windows.Forms.Label()
+        Me.btnExcelAllScafActive = New System.Windows.Forms.Button()
         Me.TableLayoutPanel1.SuspendLayout()
         Me.Panel3.SuspendLayout()
+        Me.TabControl1.SuspendLayout()
+        Me.TabPage1.SuspendLayout()
+        Me.TabPage2.SuspendLayout()
+        Me.TableLayoutPanel2.SuspendLayout()
+        Me.Panel4.SuspendLayout()
+        CType(Me.tblScaffoldActive, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel2.SuspendLayout()
         CType(Me.PictureBox4, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel1.SuspendLayout()
@@ -63,12 +73,8 @@ Partial Class ScaffoldActive
         CType(Me.btnMinimize, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.btnRestore, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.btnMaximize, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.TabControl1.SuspendLayout()
-        Me.TabPage1.SuspendLayout()
-        Me.TabPage2.SuspendLayout()
-        Me.TableLayoutPanel2.SuspendLayout()
-        Me.Panel4.SuspendLayout()
-        CType(Me.tblScaffoldActive, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.TableLayoutPanel3.SuspendLayout()
+        Me.Panel5.SuspendLayout()
         Me.SuspendLayout()
         '
         'TableLayoutPanel1
@@ -98,6 +104,28 @@ Partial Class ScaffoldActive
         Me.Panel3.Size = New System.Drawing.Size(998, 434)
         Me.Panel3.TabIndex = 2
         '
+        'TabControl1
+        '
+        Me.TabControl1.Controls.Add(Me.TabPage1)
+        Me.TabControl1.Controls.Add(Me.TabPage2)
+        Me.TabControl1.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.TabControl1.Location = New System.Drawing.Point(0, 0)
+        Me.TabControl1.Name = "TabControl1"
+        Me.TabControl1.SelectedIndex = 0
+        Me.TabControl1.Size = New System.Drawing.Size(998, 434)
+        Me.TabControl1.TabIndex = 0
+        '
+        'TabPage1
+        '
+        Me.TabPage1.BackColor = System.Drawing.Color.FromArgb(CType(CType(83, Byte), Integer), CType(CType(93, Byte), Integer), CType(CType(102, Byte), Integer))
+        Me.TabPage1.Controls.Add(Me.TableLayoutPanel3)
+        Me.TabPage1.Location = New System.Drawing.Point(4, 22)
+        Me.TabPage1.Name = "TabPage1"
+        Me.TabPage1.Padding = New System.Windows.Forms.Padding(3)
+        Me.TabPage1.Size = New System.Drawing.Size(990, 408)
+        Me.TabPage1.TabIndex = 0
+        Me.TabPage1.Text = "All Scaf Active"
+        '
         'crvReport
         '
         Me.crvReport.ActiveViewIndex = -1
@@ -106,8 +134,135 @@ Partial Class ScaffoldActive
         Me.crvReport.Dock = System.Windows.Forms.DockStyle.Fill
         Me.crvReport.Location = New System.Drawing.Point(3, 3)
         Me.crvReport.Name = "crvReport"
-        Me.crvReport.Size = New System.Drawing.Size(984, 402)
+        Me.crvReport.Size = New System.Drawing.Size(978, 338)
         Me.crvReport.TabIndex = 0
+        '
+        'TabPage2
+        '
+        Me.TabPage2.Controls.Add(Me.TableLayoutPanel2)
+        Me.TabPage2.Location = New System.Drawing.Point(4, 22)
+        Me.TabPage2.Name = "TabPage2"
+        Me.TabPage2.Padding = New System.Windows.Forms.Padding(3)
+        Me.TabPage2.Size = New System.Drawing.Size(990, 408)
+        Me.TabPage2.TabIndex = 1
+        Me.TabPage2.Text = "Without End Rent"
+        Me.TabPage2.UseVisualStyleBackColor = True
+        '
+        'TableLayoutPanel2
+        '
+        Me.TableLayoutPanel2.BackColor = System.Drawing.Color.FromArgb(CType(CType(83, Byte), Integer), CType(CType(93, Byte), Integer), CType(CType(102, Byte), Integer))
+        Me.TableLayoutPanel2.ColumnCount = 1
+        Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
+        Me.TableLayoutPanel2.Controls.Add(Me.Panel4, 0, 1)
+        Me.TableLayoutPanel2.Controls.Add(Me.tblScaffoldActive, 0, 0)
+        Me.TableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.TableLayoutPanel2.Location = New System.Drawing.Point(3, 3)
+        Me.TableLayoutPanel2.Name = "TableLayoutPanel2"
+        Me.TableLayoutPanel2.RowCount = 2
+        Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
+        Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 58.0!))
+        Me.TableLayoutPanel2.Size = New System.Drawing.Size(984, 402)
+        Me.TableLayoutPanel2.TabIndex = 0
+        '
+        'Panel4
+        '
+        Me.Panel4.Controls.Add(Me.lblMessage)
+        Me.Panel4.Controls.Add(Me.btnDownloadExcel)
+        Me.Panel4.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Panel4.Location = New System.Drawing.Point(3, 347)
+        Me.Panel4.Name = "Panel4"
+        Me.Panel4.Size = New System.Drawing.Size(978, 52)
+        Me.Panel4.TabIndex = 0
+        '
+        'lblMessage
+        '
+        Me.lblMessage.AutoSize = True
+        Me.lblMessage.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblMessage.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.lblMessage.Location = New System.Drawing.Point(12, 19)
+        Me.lblMessage.Name = "lblMessage"
+        Me.lblMessage.Size = New System.Drawing.Size(61, 13)
+        Me.lblMessage.TabIndex = 17
+        Me.lblMessage.Text = "Message:"
+        '
+        'btnDownloadExcel
+        '
+        Me.btnDownloadExcel.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnDownloadExcel.FlatAppearance.BorderSize = 0
+        Me.btnDownloadExcel.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(58, Byte), Integer), CType(CType(115, Byte), Integer))
+        Me.btnDownloadExcel.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnDownloadExcel.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnDownloadExcel.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.btnDownloadExcel.Image = Global.AVT_TRAKING.My.Resources.Resources.excel
+        Me.btnDownloadExcel.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnDownloadExcel.Location = New System.Drawing.Point(818, 9)
+        Me.btnDownloadExcel.Name = "btnDownloadExcel"
+        Me.btnDownloadExcel.Size = New System.Drawing.Size(149, 40)
+        Me.btnDownloadExcel.TabIndex = 16
+        Me.btnDownloadExcel.Text = "Without End Rent"
+        Me.btnDownloadExcel.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.btnDownloadExcel.UseVisualStyleBackColor = True
+        '
+        'tblScaffoldActive
+        '
+        Me.tblScaffoldActive.AllowUserToAddRows = False
+        Me.tblScaffoldActive.AllowUserToDeleteRows = False
+        Me.tblScaffoldActive.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
+        Me.tblScaffoldActive.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.tblScaffoldActive.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.LaborWoNetwork, Me.Type, Me.Tag, Me.Pieces, Me.Unit, Me.Location, Me.DateUp, Me.ACTIVEDAYS})
+        Me.tblScaffoldActive.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.tblScaffoldActive.Location = New System.Drawing.Point(3, 3)
+        Me.tblScaffoldActive.Name = "tblScaffoldActive"
+        Me.tblScaffoldActive.Size = New System.Drawing.Size(978, 338)
+        Me.tblScaffoldActive.TabIndex = 1
+        '
+        'LaborWoNetwork
+        '
+        Me.LaborWoNetwork.HeaderText = "Labor Wo / Network #"
+        Me.LaborWoNetwork.Name = "LaborWoNetwork"
+        Me.LaborWoNetwork.ReadOnly = True
+        '
+        'Type
+        '
+        Me.Type.HeaderText = "Type(O,M,T,C)"
+        Me.Type.Name = "Type"
+        Me.Type.ReadOnly = True
+        '
+        'Tag
+        '
+        Me.Tag.HeaderText = "Tag #"
+        Me.Tag.Name = "Tag"
+        Me.Tag.ReadOnly = True
+        '
+        'Pieces
+        '
+        Me.Pieces.HeaderText = "Pieces"
+        Me.Pieces.Name = "Pieces"
+        Me.Pieces.ReadOnly = True
+        '
+        'Unit
+        '
+        Me.Unit.HeaderText = "Unit"
+        Me.Unit.Name = "Unit"
+        Me.Unit.ReadOnly = True
+        '
+        'Location
+        '
+        Me.Location.HeaderText = "Location"
+        Me.Location.Name = "Location"
+        Me.Location.ReadOnly = True
+        '
+        'DateUp
+        '
+        Me.DateUp.HeaderText = "Date Up"
+        Me.DateUp.Name = "DateUp"
+        Me.DateUp.ReadOnly = True
+        '
+        'ACTIVEDAYS
+        '
+        Me.ACTIVEDAYS.HeaderText = "ACTIVEDAYS"
+        Me.ACTIVEDAYS.Name = "ACTIVEDAYS"
+        Me.ACTIVEDAYS.ReadOnly = True
         '
         'Panel2
         '
@@ -242,154 +397,58 @@ Partial Class ScaffoldActive
         Me.btnMaximize.TabIndex = 7
         Me.btnMaximize.TabStop = False
         '
-        'btnDownloadExcel
+        'TableLayoutPanel3
         '
-        Me.btnDownloadExcel.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnDownloadExcel.FlatAppearance.BorderSize = 0
-        Me.btnDownloadExcel.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(58, Byte), Integer), CType(CType(115, Byte), Integer))
-        Me.btnDownloadExcel.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnDownloadExcel.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnDownloadExcel.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.btnDownloadExcel.Image = Global.AVT_TRAKING.My.Resources.Resources.excel
-        Me.btnDownloadExcel.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnDownloadExcel.Location = New System.Drawing.Point(878, 9)
-        Me.btnDownloadExcel.Name = "btnDownloadExcel"
-        Me.btnDownloadExcel.Size = New System.Drawing.Size(89, 33)
-        Me.btnDownloadExcel.TabIndex = 16
-        Me.btnDownloadExcel.Text = "Excel"
-        Me.btnDownloadExcel.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.btnDownloadExcel.UseVisualStyleBackColor = True
+        Me.TableLayoutPanel3.ColumnCount = 1
+        Me.TableLayoutPanel3.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
+        Me.TableLayoutPanel3.Controls.Add(Me.crvReport, 0, 0)
+        Me.TableLayoutPanel3.Controls.Add(Me.Panel5, 0, 1)
+        Me.TableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.TableLayoutPanel3.Location = New System.Drawing.Point(3, 3)
+        Me.TableLayoutPanel3.Name = "TableLayoutPanel3"
+        Me.TableLayoutPanel3.RowCount = 2
+        Me.TableLayoutPanel3.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
+        Me.TableLayoutPanel3.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 58.0!))
+        Me.TableLayoutPanel3.Size = New System.Drawing.Size(984, 402)
+        Me.TableLayoutPanel3.TabIndex = 0
         '
-        'TabControl1
+        'Panel5
         '
-        Me.TabControl1.Controls.Add(Me.TabPage1)
-        Me.TabControl1.Controls.Add(Me.TabPage2)
-        Me.TabControl1.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.TabControl1.Location = New System.Drawing.Point(0, 0)
-        Me.TabControl1.Name = "TabControl1"
-        Me.TabControl1.SelectedIndex = 0
-        Me.TabControl1.Size = New System.Drawing.Size(998, 434)
-        Me.TabControl1.TabIndex = 0
+        Me.Panel5.Controls.Add(Me.btnExcelAllScafActive)
+        Me.Panel5.Controls.Add(Me.lblMessageAllActive)
+        Me.Panel5.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Panel5.Location = New System.Drawing.Point(3, 347)
+        Me.Panel5.Name = "Panel5"
+        Me.Panel5.Size = New System.Drawing.Size(978, 52)
+        Me.Panel5.TabIndex = 1
         '
-        'TabPage1
+        'lblMessageAllActive
         '
-        Me.TabPage1.Controls.Add(Me.crvReport)
-        Me.TabPage1.Location = New System.Drawing.Point(4, 22)
-        Me.TabPage1.Name = "TabPage1"
-        Me.TabPage1.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage1.Size = New System.Drawing.Size(990, 408)
-        Me.TabPage1.TabIndex = 0
-        Me.TabPage1.Text = "Report Active"
-        Me.TabPage1.UseVisualStyleBackColor = True
+        Me.lblMessageAllActive.AutoSize = True
+        Me.lblMessageAllActive.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.lblMessageAllActive.Location = New System.Drawing.Point(10, 21)
+        Me.lblMessageAllActive.Name = "lblMessageAllActive"
+        Me.lblMessageAllActive.Size = New System.Drawing.Size(53, 13)
+        Me.lblMessageAllActive.TabIndex = 0
+        Me.lblMessageAllActive.Text = "Message:"
         '
-        'TabPage2
+        'btnExcelAllScafActive
         '
-        Me.TabPage2.Controls.Add(Me.TableLayoutPanel2)
-        Me.TabPage2.Location = New System.Drawing.Point(4, 22)
-        Me.TabPage2.Name = "TabPage2"
-        Me.TabPage2.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage2.Size = New System.Drawing.Size(990, 408)
-        Me.TabPage2.TabIndex = 1
-        Me.TabPage2.Text = "Withow End Rent"
-        Me.TabPage2.UseVisualStyleBackColor = True
-        '
-        'TableLayoutPanel2
-        '
-        Me.TableLayoutPanel2.BackColor = System.Drawing.Color.FromArgb(CType(CType(83, Byte), Integer), CType(CType(93, Byte), Integer), CType(CType(102, Byte), Integer))
-        Me.TableLayoutPanel2.ColumnCount = 1
-        Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 84.34959!))
-        Me.TableLayoutPanel2.Controls.Add(Me.Panel4, 0, 1)
-        Me.TableLayoutPanel2.Controls.Add(Me.tblScaffoldActive, 0, 0)
-        Me.TableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.TableLayoutPanel2.Location = New System.Drawing.Point(3, 3)
-        Me.TableLayoutPanel2.Name = "TableLayoutPanel2"
-        Me.TableLayoutPanel2.RowCount = 2
-        Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
-        Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 58.0!))
-        Me.TableLayoutPanel2.Size = New System.Drawing.Size(984, 402)
-        Me.TableLayoutPanel2.TabIndex = 0
-        '
-        'Panel4
-        '
-        Me.Panel4.Controls.Add(Me.lblMessage)
-        Me.Panel4.Controls.Add(Me.btnDownloadExcel)
-        Me.Panel4.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel4.Location = New System.Drawing.Point(3, 347)
-        Me.Panel4.Name = "Panel4"
-        Me.Panel4.Size = New System.Drawing.Size(978, 52)
-        Me.Panel4.TabIndex = 0
-        '
-        'tblScaffoldActive
-        '
-        Me.tblScaffoldActive.AllowUserToAddRows = False
-        Me.tblScaffoldActive.AllowUserToDeleteRows = False
-        Me.tblScaffoldActive.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
-        Me.tblScaffoldActive.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.tblScaffoldActive.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.LaborWoNetwork, Me.Type, Me.Tag, Me.Pieces, Me.Unit, Me.Location, Me.DateUp, Me.ACTIVEDAYS})
-        Me.tblScaffoldActive.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.tblScaffoldActive.Location = New System.Drawing.Point(3, 3)
-        Me.tblScaffoldActive.Name = "tblScaffoldActive"
-        Me.tblScaffoldActive.Size = New System.Drawing.Size(978, 338)
-        Me.tblScaffoldActive.TabIndex = 1
-        '
-        'LaborWoNetwork
-        '
-        Me.LaborWoNetwork.HeaderText = "Labor Wo / Network #"
-        Me.LaborWoNetwork.Name = "LaborWoNetwork"
-        Me.LaborWoNetwork.ReadOnly = True
-        '
-        'Type
-        '
-        Me.Type.HeaderText = "Type(O,M,T,C)"
-        Me.Type.Name = "Type"
-        Me.Type.ReadOnly = True
-        '
-        'Tag
-        '
-        Me.Tag.HeaderText = "Tag #"
-        Me.Tag.Name = "Tag"
-        Me.Tag.ReadOnly = True
-        '
-        'Pieces
-        '
-        Me.Pieces.HeaderText = "Pieces"
-        Me.Pieces.Name = "Pieces"
-        Me.Pieces.ReadOnly = True
-        '
-        'Unit
-        '
-        Me.Unit.HeaderText = "Unit"
-        Me.Unit.Name = "Unit"
-        Me.Unit.ReadOnly = True
-        '
-        'Location
-        '
-        Me.Location.HeaderText = "Location"
-        Me.Location.Name = "Location"
-        Me.Location.ReadOnly = True
-        '
-        'DateUp
-        '
-        Me.DateUp.HeaderText = "Date Up"
-        Me.DateUp.Name = "DateUp"
-        Me.DateUp.ReadOnly = True
-        '
-        'ACTIVEDAYS
-        '
-        Me.ACTIVEDAYS.HeaderText = "ACTIVEDAYS"
-        Me.ACTIVEDAYS.Name = "ACTIVEDAYS"
-        Me.ACTIVEDAYS.ReadOnly = True
-        '
-        'lblMessage
-        '
-        Me.lblMessage.AutoSize = True
-        Me.lblMessage.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblMessage.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.lblMessage.Location = New System.Drawing.Point(19, 21)
-        Me.lblMessage.Name = "lblMessage"
-        Me.lblMessage.Size = New System.Drawing.Size(61, 13)
-        Me.lblMessage.TabIndex = 17
-        Me.lblMessage.Text = "Message:"
+        Me.btnExcelAllScafActive.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnExcelAllScafActive.FlatAppearance.BorderSize = 0
+        Me.btnExcelAllScafActive.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(58, Byte), Integer), CType(CType(115, Byte), Integer))
+        Me.btnExcelAllScafActive.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnExcelAllScafActive.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnExcelAllScafActive.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.btnExcelAllScafActive.Image = Global.AVT_TRAKING.My.Resources.Resources.excel
+        Me.btnExcelAllScafActive.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnExcelAllScafActive.Location = New System.Drawing.Point(844, 7)
+        Me.btnExcelAllScafActive.Name = "btnExcelAllScafActive"
+        Me.btnExcelAllScafActive.Size = New System.Drawing.Size(131, 40)
+        Me.btnExcelAllScafActive.TabIndex = 17
+        Me.btnExcelAllScafActive.Text = "All Scaf Active"
+        Me.btnExcelAllScafActive.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.btnExcelAllScafActive.UseVisualStyleBackColor = True
         '
         'ScaffoldActive
         '
@@ -402,6 +461,13 @@ Partial Class ScaffoldActive
         Me.Text = "ScaffoldActive"
         Me.TableLayoutPanel1.ResumeLayout(False)
         Me.Panel3.ResumeLayout(False)
+        Me.TabControl1.ResumeLayout(False)
+        Me.TabPage1.ResumeLayout(False)
+        Me.TabPage2.ResumeLayout(False)
+        Me.TableLayoutPanel2.ResumeLayout(False)
+        Me.Panel4.ResumeLayout(False)
+        Me.Panel4.PerformLayout()
+        CType(Me.tblScaffoldActive, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel2.ResumeLayout(False)
         Me.Panel2.PerformLayout()
         CType(Me.PictureBox4, System.ComponentModel.ISupportInitialize).EndInit()
@@ -412,13 +478,9 @@ Partial Class ScaffoldActive
         CType(Me.btnMinimize, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.btnRestore, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.btnMaximize, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.TabControl1.ResumeLayout(False)
-        Me.TabPage1.ResumeLayout(False)
-        Me.TabPage2.ResumeLayout(False)
-        Me.TableLayoutPanel2.ResumeLayout(False)
-        Me.Panel4.ResumeLayout(False)
-        Me.Panel4.PerformLayout()
-        CType(Me.tblScaffoldActive, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.TableLayoutPanel3.ResumeLayout(False)
+        Me.Panel5.ResumeLayout(False)
+        Me.Panel5.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -454,4 +516,8 @@ Partial Class ScaffoldActive
     Friend WithEvents DateUp As DataGridViewTextBoxColumn
     Friend WithEvents ACTIVEDAYS As DataGridViewTextBoxColumn
     Friend WithEvents lblMessage As Label
+    Friend WithEvents TableLayoutPanel3 As TableLayoutPanel
+    Friend WithEvents Panel5 As Panel
+    Friend WithEvents btnExcelAllScafActive As Button
+    Friend WithEvents lblMessageAllActive As Label
 End Class
