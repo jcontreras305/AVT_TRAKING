@@ -206,6 +206,12 @@
     <Compile Include="FromsTraking\All_Tables.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="FromsTraking\BackUp.Designer.vb">
+      <DependentUpon>BackUp.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FromsTraking\BackUp.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="FromsTraking\DismantleValidationTable.Designer.vb">
       <DependentUpon>DismantleValidationTable.vb</DependentUpon>
     </Compile>
@@ -941,6 +947,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FromsTraking\All_Tables.resx">
       <DependentUpon>All_Tables.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FromsTraking\BackUp.resx">
+      <DependentUpon>BackUp.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FromsTraking\Clients.resx">
       <DependentUpon>Clients.vb</DependentUpon>
