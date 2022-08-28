@@ -54,6 +54,7 @@ Partial Class MainFrom
         Me.btnClients = New System.Windows.Forms.Button()
         Me.pcbLogoMain = New System.Windows.Forms.PictureBox()
         Me.Button2 = New System.Windows.Forms.Button()
+        Me.Button3 = New System.Windows.Forms.Button()
         Me.TitleBar.SuspendLayout()
         Me.Panel2.SuspendLayout()
         Me.Panel1.SuspendLayout()
@@ -93,7 +94,7 @@ Partial Class MainFrom
         Me.Panel2.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel2.Location = New System.Drawing.Point(3, 3)
         Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(194, 608)
+        Me.Panel2.Size = New System.Drawing.Size(194, 632)
         Me.Panel2.TabIndex = 6
         '
         'Panel10
@@ -136,7 +137,7 @@ Partial Class MainFrom
         Me.Panel1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel1.Location = New System.Drawing.Point(0, 0)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(1028, 639)
+        Me.Panel1.Size = New System.Drawing.Size(1028, 663)
         Me.Panel1.TabIndex = 5
         '
         'PanelChildForm
@@ -146,12 +147,13 @@ Partial Class MainFrom
         Me.PanelChildForm.Dock = System.Windows.Forms.DockStyle.Fill
         Me.PanelChildForm.Location = New System.Drawing.Point(203, 3)
         Me.PanelChildForm.Name = "PanelChildForm"
-        Me.PanelChildForm.Size = New System.Drawing.Size(822, 608)
+        Me.PanelChildForm.Size = New System.Drawing.Size(822, 632)
         Me.PanelChildForm.TabIndex = 7
         '
         'Panel12
         '
         Me.Panel12.AutoScroll = True
+        Me.Panel12.Controls.Add(Me.Button3)
         Me.Panel12.Controls.Add(Me.Panel15)
         Me.Panel12.Controls.Add(Me.Button1)
         Me.Panel12.Controls.Add(Me.Panel14)
@@ -171,7 +173,7 @@ Partial Class MainFrom
         Me.Panel12.Controls.Add(Me.Panel10)
         Me.Panel12.Location = New System.Drawing.Point(3, 138)
         Me.Panel12.Name = "Panel12"
-        Me.Panel12.Size = New System.Drawing.Size(188, 467)
+        Me.Panel12.Size = New System.Drawing.Size(188, 491)
         Me.Panel12.TabIndex = 11
         '
         'Panel5
@@ -259,7 +261,7 @@ Partial Class MainFrom
         Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
         Me.TableLayoutPanel1.RowCount = 1
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
-        Me.TableLayoutPanel1.Size = New System.Drawing.Size(1028, 614)
+        Me.TableLayoutPanel1.Size = New System.Drawing.Size(1028, 638)
         Me.TableLayoutPanel1.TabIndex = 11
         '
         'TableLayoutPanel2
@@ -276,7 +278,7 @@ Partial Class MainFrom
         Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 98.0!))
         Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 37.0!))
         Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-        Me.TableLayoutPanel2.Size = New System.Drawing.Size(194, 608)
+        Me.TableLayoutPanel2.Size = New System.Drawing.Size(194, 632)
         Me.TableLayoutPanel2.TabIndex = 11
         '
         'Panel16
@@ -464,12 +466,31 @@ Partial Class MainFrom
         Me.Button2.TabIndex = 4
         Me.Button2.UseVisualStyleBackColor = True
         '
+        'Button3
+        '
+        Me.Button3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        Me.Button3.Dock = System.Windows.Forms.DockStyle.Top
+        Me.Button3.FlatAppearance.BorderSize = 0
+        Me.Button3.FlatAppearance.MouseOverBackColor = System.Drawing.Color.RoyalBlue
+        Me.Button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.Button3.Font = New System.Drawing.Font("Nirmala UI", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Button3.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.Button3.Image = Global.AVT_TRAKING.My.Resources.Resources.setup
+        Me.Button3.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.Button3.Location = New System.Drawing.Point(0, 433)
+        Me.Button3.Margin = New System.Windows.Forms.Padding(2)
+        Me.Button3.Name = "Button3"
+        Me.Button3.Size = New System.Drawing.Size(188, 45)
+        Me.Button3.TabIndex = 18
+        Me.Button3.Text = "Other"
+        Me.Button3.UseVisualStyleBackColor = True
+        '
         'MainFrom
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
-        Me.ClientSize = New System.Drawing.Size(1028, 639)
+        Me.ClientSize = New System.Drawing.Size(1028, 663)
         Me.Controls.Add(Me.Panel1)
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.IsMdiContainer = True
@@ -520,4 +541,5 @@ Partial Class MainFrom
     Friend WithEvents TableLayoutPanel2 As TableLayoutPanel
     Friend WithEvents Panel16 As Panel
     Friend WithEvents TableLayoutPanel1 As TableLayoutPanel
+    Friend WithEvents Button3 As Button
 End Class

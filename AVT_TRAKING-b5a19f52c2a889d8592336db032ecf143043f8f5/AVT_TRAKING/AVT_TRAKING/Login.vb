@@ -5,8 +5,13 @@ Public Class Login
     Dim mtdLogin As New MetodosLogin
     Dim mtdOther As New MetodosOthers
     Dim mtdCompany As New metodosCompany
+    Dim mtdReels As New MetodosReels
+    Dim countReels As Integer = 0
+    Dim countTimeProtector As Integer = 0
+    Dim countTimeNextImage As Integer = 0
     Dim flag As Boolean = True
     Dim listImg As List(Of Byte())
+    Dim listImgReels As List(Of Byte())
     Private Sub Login_Load(sender As Object, e As EventArgs) Handles Me.Load
         Try
             listImg = mtdOther.llenarComboImage(cmbImagenes)
@@ -115,5 +120,72 @@ Public Class Login
     End Sub
     Private Sub btnMaximize_Click(sender As Object, e As EventArgs)
         Me.WindowState = FormWindowState.Maximized
+    End Sub
+
+    Private Sub Login_SizeChanged(sender As Object, e As EventArgs) Handles MyBase.SizeChanged
+        If Me.WindowState = FormWindowState.Maximized Then
+            pcbReels.Visible = True
+            tlyMain.Visible = False
+            listImgReels = mtdReels.selectImgReels()
+            pcbReels.SizeMode = PictureBoxSizeMode.Zoom
+            If listImgReels.Count > 0 Then
+                pcbReels.Image = BytetoImage(listImgReels(0))
+            End If
+        Else
+            pcbReels.Visible = False
+            tlyMain.Visible = True
+        End If
+    End Sub
+
+    Private Sub tmrReels_Tick(sender As Object, e As EventArgs) Handles tmrReels.Tick
+        Try
+            If tlyMain.Visible = True And WindowState = FormWindowState.Maximized Then
+                countTimeProtector = countTimeProtector + 1
+                If countTimeProtector = 10 Then
+                    countTimeProtector = 0
+                    tlyMain.Visible = False
+                    If listImgReels IsNot Nothing And WindowState = FormWindowState.Maximized Then
+                        If listImgReels.Count > 0 Then
+                            If countReels = listImgReels.Count - 1 Then
+                                countReels = 0
+                                pcbReels.Image = BytetoImage(listImgReels(countReels))
+                            Else
+                                pcbReels.Image = BytetoImage(listImgReels(countReels))
+                                countReels += 1
+                            End If
+                        End If
+                    End If
+                End If
+            Else
+                pcbReels.Visible = True
+                countTimeNextImage += 1
+                If countTimeNextImage >= 15 Then
+                    countTimeNextImage = 0
+                    listImgReels = mtdReels.selectImgReels()
+                    If listImgReels IsNot Nothing And WindowState = FormWindowState.Maximized Then
+                        If listImgReels.Count > 0 Then
+                            If countReels > listImgReels.Count - 1 Then
+                                countReels = 0
+                                pcbReels.Image = BytetoImage(listImgReels(countReels))
+                            Else
+                                pcbReels.Image = Nothing
+                                pcbReels.Image = BytetoImage(listImgReels(countReels))
+                                countReels += 1
+                            End If
+                        End If
+                    End If
+                End If
+            End If
+        Catch ex As Exception
+
+        End Try
+    End Sub
+
+    Private Sub pcbReels_Click(sender As Object, e As EventArgs) Handles pcbReels.Click
+        If tlyMain.Visible = False Then
+            pcbReels.Visible = False
+            tlyMain.Visible = True
+            countTimeProtector = 0
+        End If
     End Sub
 End Class

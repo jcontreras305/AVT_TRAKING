@@ -158,4 +158,9 @@ Public Class MainFrom
         Dim backup As New Backup
         backup.ShowDialog()
     End Sub
+
+    Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
+        Dim other As New ConfigReelsAndOther
+        other.ShowDialog()
+    End Sub
 End Class
