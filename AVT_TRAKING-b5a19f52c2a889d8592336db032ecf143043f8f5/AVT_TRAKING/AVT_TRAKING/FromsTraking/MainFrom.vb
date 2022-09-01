@@ -3,11 +3,36 @@ Imports System.ComponentModel
 
 Public Class MainFrom
     Public imageClientLogin As Image
+    Public loginUser As Users
+    Public closeMainForm As Boolean = False
+    Public arrayButtons() As String = {"Clients", "Employees", "Work Codes", "Material", "Others", "Reports", "Estimation", "Backup", "System"}
+    Private Sub MainFrom_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
+    End Sub
+    Public Function validAccess(ByVal lUser As Users) As Boolean
+        Dim showNextPanel As Boolean = False
+        For Each item As Object In pnlButtons.Controls
+            Dim typeItem As String = item.GetType.ToString()
+            If typeItem = "System.Windows.Forms.Button" Then
+                item = CType(item, Button)
+                Dim nameBtn As String = item.Text.ToString.TrimStart
+                nameBtn = nameBtn.TrimEnd
+                If lUser.ListAccess.Exists(Function(val) val = nameBtn) Then
+                    item.Visible = True
+                    showNextPanel = True
+                Else
+                    item.Visible = False
+                    showNextPanel = False
+                End If
+            ElseIf typeItem = "System.Windows.Forms.Panel" Then
+                item.visible = showNextPanel
+            End If
+        Next
+        Return True
+    End Function
+
     Private Sub BtnMaterials_Click(sender As Object, e As EventArgs) Handles btnMaterials.Click
         OpenFormPanel(Of Materials)()
-        'Dim a As New Materials
-        'a.Show()
-
     End Sub
 
     Private Sub BtnClients_Click(sender As Object, e As EventArgs) Handles btnClients.Click
@@ -16,27 +41,19 @@ Public Class MainFrom
 
     Private Sub btnEmployees_Click(sender As Object, e As EventArgs) Handles btnEmployees.Click
         OpenFormPanel(Of Employees)()
-        'Dim a As New Employees
-        'a.Show()
-
     End Sub
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles btnWorkCodes.Click
         OpenFormPanel2(Of ProjectsClients)()
-        'a.Show()
-
     End Sub
 
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
-        'Dim a As New Login
-        'a.Show()
         Me.Close()
     End Sub
 
     Private Sub tbnoOthers_Click(sender As Object, e As EventArgs) Handles tbnoOthers.Click
         OpenFormPanel(Of Others)()
         Dim a As New Others
-        'a.Show()
     End Sub
 
     Private Sub pnlImage_Paint(sender As Object, e As PaintEventArgs)
@@ -47,11 +64,6 @@ Public Class MainFrom
         Application.Exit()
     End Sub
 
-
-
-    Private Sub MainFrom_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-
-    End Sub
 
 
     Private Sub Panel2_Paint(sender As Object, e As PaintEventArgs) Handles Panel2.Paint
@@ -106,6 +118,7 @@ Public Class MainFrom
             Dim newPC = New Miform()
             If imageClientLogin IsNot Nothing Then
                 newPC.pcbLogoPC.Image = imageClientLogin
+                newPC.validAccess(loginUser)
             End If
             FormPanel = newPC
             FormPanel.TopLevel = False
@@ -141,6 +154,7 @@ Public Class MainFrom
 
         If FormPanel Is Nothing Then
             Dim newPC = New Miform()
+            newPC.validAccess(loginUser)
             FormPanel = newPC
             FormPanel.TopLevel = False
             FormPanel.Dock = DockStyle.Fill
@@ -161,6 +175,10 @@ Public Class MainFrom
 
     Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
         Dim other As New ConfigReelsAndOther
+        AddOwnedForm(other)
         other.ShowDialog()
+        If closeMainForm Then
+            Me.Close()
+        End If
     End Sub
 End Class

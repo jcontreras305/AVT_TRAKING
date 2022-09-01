@@ -25,7 +25,7 @@ Partial Class MenuEstimation
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.TableLayoutPanel3 = New System.Windows.Forms.TableLayoutPanel()
-        Me.Panel4 = New System.Windows.Forms.Panel()
+        Me.pnlButtons = New System.Windows.Forms.Panel()
         Me.btnReports = New System.Windows.Forms.Button()
         Me.pnlProjects = New System.Windows.Forms.Panel()
         Me.btnPipingRFI = New System.Windows.Forms.Button()
@@ -47,7 +47,7 @@ Partial Class MenuEstimation
         Me.TableLayoutPanel1.SuspendLayout()
         Me.Panel1.SuspendLayout()
         Me.TableLayoutPanel3.SuspendLayout()
-        Me.Panel4.SuspendLayout()
+        Me.pnlButtons.SuspendLayout()
         Me.pnlProjects.SuspendLayout()
         Me.pnlSetting.SuspendLayout()
         Me.TableLayoutPanel2.SuspendLayout()
@@ -83,7 +83,7 @@ Partial Class MenuEstimation
         '
         Me.TableLayoutPanel3.ColumnCount = 1
         Me.TableLayoutPanel3.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-        Me.TableLayoutPanel3.Controls.Add(Me.Panel4, 0, 1)
+        Me.TableLayoutPanel3.Controls.Add(Me.pnlButtons, 0, 1)
         Me.TableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill
         Me.TableLayoutPanel3.Location = New System.Drawing.Point(0, 0)
         Me.TableLayoutPanel3.Name = "TableLayoutPanel3"
@@ -93,19 +93,19 @@ Partial Class MenuEstimation
         Me.TableLayoutPanel3.Size = New System.Drawing.Size(194, 655)
         Me.TableLayoutPanel3.TabIndex = 0
         '
-        'Panel4
+        'pnlButtons
         '
-        Me.Panel4.AutoScroll = True
-        Me.Panel4.Controls.Add(Me.btnReports)
-        Me.Panel4.Controls.Add(Me.pnlProjects)
-        Me.Panel4.Controls.Add(Me.btnProjects)
-        Me.Panel4.Controls.Add(Me.pnlSetting)
-        Me.Panel4.Controls.Add(Me.btnSettings)
-        Me.Panel4.Dock = System.Windows.Forms.DockStyle.Top
-        Me.Panel4.Location = New System.Drawing.Point(3, 93)
-        Me.Panel4.Name = "Panel4"
-        Me.Panel4.Size = New System.Drawing.Size(188, 559)
-        Me.Panel4.TabIndex = 0
+        Me.pnlButtons.AutoScroll = True
+        Me.pnlButtons.Controls.Add(Me.btnReports)
+        Me.pnlButtons.Controls.Add(Me.pnlProjects)
+        Me.pnlButtons.Controls.Add(Me.btnProjects)
+        Me.pnlButtons.Controls.Add(Me.pnlSetting)
+        Me.pnlButtons.Controls.Add(Me.btnSettings)
+        Me.pnlButtons.Dock = System.Windows.Forms.DockStyle.Top
+        Me.pnlButtons.Location = New System.Drawing.Point(3, 93)
+        Me.pnlButtons.Name = "pnlButtons"
+        Me.pnlButtons.Size = New System.Drawing.Size(188, 559)
+        Me.pnlButtons.TabIndex = 0
         '
         'btnReports
         '
@@ -121,7 +121,7 @@ Partial Class MenuEstimation
         Me.btnReports.Name = "btnReports"
         Me.btnReports.Size = New System.Drawing.Size(188, 55)
         Me.btnReports.TabIndex = 6
-        Me.btnReports.Text = "Reports"
+        Me.btnReports.Text = "      Est. Reports"
         Me.btnReports.UseVisualStyleBackColor = True
         '
         'pnlProjects
@@ -266,7 +266,7 @@ Partial Class MenuEstimation
         Me.btnProjects.Name = "btnProjects"
         Me.btnProjects.Size = New System.Drawing.Size(188, 55)
         Me.btnProjects.TabIndex = 4
-        Me.btnProjects.Text = "   Projects"
+        Me.btnProjects.Text = "     Est. Projects"
         Me.btnProjects.UseVisualStyleBackColor = True
         '
         'pnlSetting
@@ -408,7 +408,7 @@ Partial Class MenuEstimation
         Me.TableLayoutPanel1.ResumeLayout(False)
         Me.Panel1.ResumeLayout(False)
         Me.TableLayoutPanel3.ResumeLayout(False)
-        Me.Panel4.ResumeLayout(False)
+        Me.pnlButtons.ResumeLayout(False)
         Me.pnlProjects.ResumeLayout(False)
         Me.pnlSetting.ResumeLayout(False)
         Me.TableLayoutPanel2.ResumeLayout(False)
@@ -437,7 +437,7 @@ Partial Class MenuEstimation
     Friend WithEvents btnPipingRFI As Button
     Friend WithEvents btnEuipmentRFI As Button
     Friend WithEvents TableLayoutPanel3 As TableLayoutPanel
-    Friend WithEvents Panel4 As Panel
+    Friend WithEvents pnlButtons As Panel
     Friend WithEvents pnlProjects As Panel
     Friend WithEvents pnlSetting As Panel
 End Class

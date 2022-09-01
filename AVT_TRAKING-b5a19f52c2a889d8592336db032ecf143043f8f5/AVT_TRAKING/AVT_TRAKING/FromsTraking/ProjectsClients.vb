@@ -19,7 +19,38 @@ Public Class ProjectsClients
         ocultarPaneles()
         mtdOthers.llenarCmbWokTMLump(cmbWorkTMLumoSum)
     End Sub
-
+    Public Function validAccess(ByVal lUser As Users) As Boolean
+        For Each item As Object In pnlButtonsPOCl.Controls
+            Dim typeItem As String = item.GetType.ToString()
+            If typeItem = "System.Windows.Forms.Button" Then
+                item = CType(item, Button)
+                Dim nameBtn As String = item.Text.ToString.TrimStart
+                nameBtn = nameBtn.TrimEnd
+                If lUser.ListAccess.Exists(Function(val) val = nameBtn) Then
+                    item.Visible = True
+                End If
+            ElseIf typeItem = "System.Windows.Forms.Panel" And item.name = "PnllSetup" Then
+                If lUser.ListAccess.Exists(Function(val) val = "Setup") Then
+                    item.enabled = True
+                    btnSetup.Visible = True
+                    For Each itemSetup As Object In PnllSetup.Controls
+                        itemSetup = CType(itemSetup, Button)
+                        Dim nameBtnSetUp As String = itemSetup.text.ToString.TrimStart
+                        nameBtnSetUp = nameBtnSetUp.TrimEnd
+                        If lUser.ListAccess.Exists(Function(val) val = nameBtnSetUp) Then
+                            itemSetup.Visible = True
+                        Else
+                            itemSetup.visible = False
+                        End If
+                    Next
+                Else
+                    btnSetup.Visible = False
+                    item.Enabled = False
+                End If
+            End If
+        Next
+        Return True
+    End Function
     Private Sub btnWK_Click(sender As Object, e As EventArgs) Handles btnWK.Click
         Dim wk As New WorkCodes
         wk.ShowDialog()
@@ -284,7 +315,7 @@ Public Class ProjectsClients
                 st.Company = txtCompanyName.Text
             End If
         End If
-        Me.Visible = False
+        'Me.Visible = False
         st.ShowDialog()
         Me.Visible = True
     End Sub

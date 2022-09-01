@@ -767,4 +767,12 @@
 
         End Try
     End Sub
+
+    Private Sub TableLayoutPanel2_Resize(sender As Object, e As EventArgs) Handles TableLayoutPanel2.Resize
+        lytHeaderEq.Width = TableLayoutPanel2.Width - 10
+    End Sub
+
+    Private Sub TableLayoutPanel4_Resize(sender As Object, e As EventArgs) Handles TableLayoutPanel4.Resize
+        lytHeaderPp.Width = TableLayoutPanel4.Width - 20
+    End Sub
 End Class

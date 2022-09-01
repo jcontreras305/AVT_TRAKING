@@ -1,4 +1,37 @@
 ﻿Public Class MenuEstimation
+    Public Function validAccess(ByVal lUser As Users) As Boolean
+        For Each item As Object In pnlButtons.Controls
+            Dim typeItem As String = item.GetType.ToString()
+            If typeItem = "System.Windows.Forms.Button" Then
+                item = CType(item, Button)
+                Dim nameBtn As String = item.Text.ToString.TrimStart
+                nameBtn = nameBtn.TrimEnd
+                If lUser.ListAccess.Exists(Function(val) val = nameBtn) Then
+                    item.Visible = True
+                End If
+            ElseIf typeItem = "System.Windows.Forms.Panel" Then
+                If item.name = "pnlSetting" Then
+                    If lUser.ListAccess.Exists(Function(val) val = "Setting") Then
+                        item.enabled = True
+                        btnSettings.Visible = True
+                    Else
+                        btnSettings.Visible = False
+                        item.Enabled = False
+                    End If
+                ElseIf item.Name = "pnlProjects" Then
+                    If lUser.ListAccess.Exists(Function(val) val = "Est. Projects") Then
+                        item.enabled = True
+                        btnProjects.Visible = True
+                    Else
+                        btnProjects.Visible = False
+                        item.Enabled = False
+                    End If
+                End If
+            End If
+        Next
+        Return True
+    End Function
+
     Private Sub btnSalir_Click(sender As Object, e As EventArgs) Handles btnSalir.Click
         Me.Close()
     End Sub

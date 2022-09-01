@@ -48,6 +48,27 @@ Partial Class ConfigReelsAndOther
         Me.btnAdd = New System.Windows.Forms.Button()
         Me.btnNew = New System.Windows.Forms.Button()
         Me.TabPage2 = New System.Windows.Forms.TabPage()
+        Me.TableLayoutPanel5 = New System.Windows.Forms.TableLayoutPanel()
+        Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.TableLayoutPanel6 = New System.Windows.Forms.TableLayoutPanel()
+        Me.tblUsers = New System.Windows.Forms.DataGridView()
+        Me.idUsers = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.UserName = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.userPass = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Panel10 = New System.Windows.Forms.Panel()
+        Me.btnDeleteUser = New System.Windows.Forms.Button()
+        Me.btnSaveUser = New System.Windows.Forms.Button()
+        Me.GroupBox3 = New System.Windows.Forms.GroupBox()
+        Me.TableLayoutPanel7 = New System.Windows.Forms.TableLayoutPanel()
+        Me.Panel8 = New System.Windows.Forms.Panel()
+        Me.btnNewUser = New System.Windows.Forms.Button()
+        Me.chbSee = New System.Windows.Forms.CheckBox()
+        Me.txtPassword = New System.Windows.Forms.TextBox()
+        Me.txtUserName = New System.Windows.Forms.TextBox()
+        Me.Label4 = New System.Windows.Forms.Label()
+        Me.Label2 = New System.Windows.Forms.Label()
+        Me.Panel9 = New System.Windows.Forms.Panel()
+        Me.tvwAccess = New System.Windows.Forms.TreeView()
         Me.TitleBar = New System.Windows.Forms.Panel()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
@@ -69,6 +90,16 @@ Partial Class ConfigReelsAndOther
         Me.TableLayoutPanel3.SuspendLayout()
         CType(Me.pcbImage, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel6.SuspendLayout()
+        Me.TabPage2.SuspendLayout()
+        Me.TableLayoutPanel5.SuspendLayout()
+        Me.GroupBox2.SuspendLayout()
+        Me.TableLayoutPanel6.SuspendLayout()
+        CType(Me.tblUsers, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.Panel10.SuspendLayout()
+        Me.GroupBox3.SuspendLayout()
+        Me.TableLayoutPanel7.SuspendLayout()
+        Me.Panel8.SuspendLayout()
+        Me.Panel9.SuspendLayout()
         Me.TitleBar.SuspendLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox3, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -355,12 +386,252 @@ Partial Class ConfigReelsAndOther
         'TabPage2
         '
         Me.TabPage2.BackColor = System.Drawing.Color.FromArgb(CType(CType(83, Byte), Integer), CType(CType(93, Byte), Integer), CType(CType(102, Byte), Integer))
+        Me.TabPage2.Controls.Add(Me.TableLayoutPanel5)
         Me.TabPage2.Location = New System.Drawing.Point(4, 22)
         Me.TabPage2.Name = "TabPage2"
         Me.TabPage2.Padding = New System.Windows.Forms.Padding(3)
         Me.TabPage2.Size = New System.Drawing.Size(786, 333)
         Me.TabPage2.TabIndex = 1
         Me.TabPage2.Text = "Users"
+        '
+        'TableLayoutPanel5
+        '
+        Me.TableLayoutPanel5.ColumnCount = 2
+        Me.TableLayoutPanel5.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 43.46154!))
+        Me.TableLayoutPanel5.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 56.53846!))
+        Me.TableLayoutPanel5.Controls.Add(Me.GroupBox2, 0, 0)
+        Me.TableLayoutPanel5.Controls.Add(Me.GroupBox3, 1, 0)
+        Me.TableLayoutPanel5.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.TableLayoutPanel5.Location = New System.Drawing.Point(3, 3)
+        Me.TableLayoutPanel5.Name = "TableLayoutPanel5"
+        Me.TableLayoutPanel5.RowCount = 1
+        Me.TableLayoutPanel5.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
+        Me.TableLayoutPanel5.Size = New System.Drawing.Size(780, 327)
+        Me.TableLayoutPanel5.TabIndex = 0
+        '
+        'GroupBox2
+        '
+        Me.GroupBox2.Controls.Add(Me.TableLayoutPanel6)
+        Me.GroupBox2.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.GroupBox2.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.GroupBox2.Location = New System.Drawing.Point(3, 3)
+        Me.GroupBox2.Name = "GroupBox2"
+        Me.GroupBox2.Size = New System.Drawing.Size(333, 321)
+        Me.GroupBox2.TabIndex = 0
+        Me.GroupBox2.TabStop = False
+        Me.GroupBox2.Text = "Users"
+        '
+        'TableLayoutPanel6
+        '
+        Me.TableLayoutPanel6.ColumnCount = 1
+        Me.TableLayoutPanel6.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
+        Me.TableLayoutPanel6.Controls.Add(Me.tblUsers, 0, 0)
+        Me.TableLayoutPanel6.Controls.Add(Me.Panel10, 0, 1)
+        Me.TableLayoutPanel6.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.TableLayoutPanel6.ForeColor = System.Drawing.SystemColors.ControlText
+        Me.TableLayoutPanel6.Location = New System.Drawing.Point(3, 16)
+        Me.TableLayoutPanel6.Name = "TableLayoutPanel6"
+        Me.TableLayoutPanel6.RowCount = 2
+        Me.TableLayoutPanel6.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 80.46358!))
+        Me.TableLayoutPanel6.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 19.53642!))
+        Me.TableLayoutPanel6.Size = New System.Drawing.Size(327, 302)
+        Me.TableLayoutPanel6.TabIndex = 0
+        '
+        'tblUsers
+        '
+        Me.tblUsers.AllowUserToAddRows = False
+        Me.tblUsers.AllowUserToDeleteRows = False
+        Me.tblUsers.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
+        Me.tblUsers.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.tblUsers.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.idUsers, Me.UserName, Me.userPass})
+        Me.tblUsers.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.tblUsers.Location = New System.Drawing.Point(3, 3)
+        Me.tblUsers.Name = "tblUsers"
+        Me.tblUsers.ReadOnly = True
+        Me.tblUsers.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
+        Me.tblUsers.Size = New System.Drawing.Size(321, 237)
+        Me.tblUsers.TabIndex = 0
+        '
+        'idUsers
+        '
+        Me.idUsers.HeaderText = "idUsers"
+        Me.idUsers.Name = "idUsers"
+        Me.idUsers.ReadOnly = True
+        Me.idUsers.Visible = False
+        '
+        'UserName
+        '
+        Me.UserName.HeaderText = "User Name"
+        Me.UserName.Name = "UserName"
+        Me.UserName.ReadOnly = True
+        '
+        'userPass
+        '
+        Me.userPass.HeaderText = "userPass"
+        Me.userPass.Name = "userPass"
+        Me.userPass.ReadOnly = True
+        Me.userPass.Visible = False
+        '
+        'Panel10
+        '
+        Me.Panel10.Controls.Add(Me.btnDeleteUser)
+        Me.Panel10.Controls.Add(Me.btnSaveUser)
+        Me.Panel10.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Panel10.Location = New System.Drawing.Point(3, 246)
+        Me.Panel10.Name = "Panel10"
+        Me.Panel10.Size = New System.Drawing.Size(321, 53)
+        Me.Panel10.TabIndex = 1
+        '
+        'btnDeleteUser
+        '
+        Me.btnDeleteUser.FlatAppearance.BorderSize = 0
+        Me.btnDeleteUser.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnDeleteUser.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.btnDeleteUser.Image = Global.AVT_TRAKING.My.Resources.Resources.delete
+        Me.btnDeleteUser.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnDeleteUser.Location = New System.Drawing.Point(95, 15)
+        Me.btnDeleteUser.Name = "btnDeleteUser"
+        Me.btnDeleteUser.Size = New System.Drawing.Size(75, 35)
+        Me.btnDeleteUser.TabIndex = 2
+        Me.btnDeleteUser.Text = "Delete"
+        Me.btnDeleteUser.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.btnDeleteUser.UseVisualStyleBackColor = True
+        '
+        'btnSaveUser
+        '
+        Me.btnSaveUser.FlatAppearance.BorderSize = 0
+        Me.btnSaveUser.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnSaveUser.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.btnSaveUser.Image = Global.AVT_TRAKING.My.Resources.Resources.save
+        Me.btnSaveUser.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnSaveUser.Location = New System.Drawing.Point(14, 15)
+        Me.btnSaveUser.Name = "btnSaveUser"
+        Me.btnSaveUser.Size = New System.Drawing.Size(75, 35)
+        Me.btnSaveUser.TabIndex = 1
+        Me.btnSaveUser.Text = "Save"
+        Me.btnSaveUser.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.btnSaveUser.UseVisualStyleBackColor = True
+        '
+        'GroupBox3
+        '
+        Me.GroupBox3.Controls.Add(Me.TableLayoutPanel7)
+        Me.GroupBox3.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.GroupBox3.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.GroupBox3.Location = New System.Drawing.Point(342, 3)
+        Me.GroupBox3.Name = "GroupBox3"
+        Me.GroupBox3.Size = New System.Drawing.Size(435, 321)
+        Me.GroupBox3.TabIndex = 0
+        Me.GroupBox3.TabStop = False
+        Me.GroupBox3.Text = "Access"
+        '
+        'TableLayoutPanel7
+        '
+        Me.TableLayoutPanel7.ColumnCount = 2
+        Me.TableLayoutPanel7.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
+        Me.TableLayoutPanel7.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 231.0!))
+        Me.TableLayoutPanel7.Controls.Add(Me.Panel8, 0, 0)
+        Me.TableLayoutPanel7.Controls.Add(Me.Panel9, 1, 0)
+        Me.TableLayoutPanel7.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.TableLayoutPanel7.Location = New System.Drawing.Point(3, 16)
+        Me.TableLayoutPanel7.Name = "TableLayoutPanel7"
+        Me.TableLayoutPanel7.RowCount = 1
+        Me.TableLayoutPanel7.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 27.15232!))
+        Me.TableLayoutPanel7.Size = New System.Drawing.Size(429, 302)
+        Me.TableLayoutPanel7.TabIndex = 0
+        '
+        'Panel8
+        '
+        Me.Panel8.Controls.Add(Me.btnNewUser)
+        Me.Panel8.Controls.Add(Me.chbSee)
+        Me.Panel8.Controls.Add(Me.txtPassword)
+        Me.Panel8.Controls.Add(Me.txtUserName)
+        Me.Panel8.Controls.Add(Me.Label4)
+        Me.Panel8.Controls.Add(Me.Label2)
+        Me.Panel8.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Panel8.ForeColor = System.Drawing.SystemColors.ControlText
+        Me.Panel8.Location = New System.Drawing.Point(3, 3)
+        Me.Panel8.Name = "Panel8"
+        Me.Panel8.Size = New System.Drawing.Size(192, 296)
+        Me.Panel8.TabIndex = 1
+        '
+        'btnNewUser
+        '
+        Me.btnNewUser.FlatAppearance.BorderSize = 0
+        Me.btnNewUser.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnNewUser.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.btnNewUser.Image = Global.AVT_TRAKING.My.Resources.Resources._new
+        Me.btnNewUser.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnNewUser.Location = New System.Drawing.Point(117, 258)
+        Me.btnNewUser.Name = "btnNewUser"
+        Me.btnNewUser.Size = New System.Drawing.Size(72, 35)
+        Me.btnNewUser.TabIndex = 5
+        Me.btnNewUser.Text = "New"
+        Me.btnNewUser.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.btnNewUser.UseVisualStyleBackColor = True
+        '
+        'chbSee
+        '
+        Me.chbSee.AutoSize = True
+        Me.chbSee.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.chbSee.Location = New System.Drawing.Point(164, 88)
+        Me.chbSee.Name = "chbSee"
+        Me.chbSee.Size = New System.Drawing.Size(15, 14)
+        Me.chbSee.TabIndex = 4
+        Me.chbSee.UseVisualStyleBackColor = True
+        '
+        'txtPassword
+        '
+        Me.txtPassword.Location = New System.Drawing.Point(18, 85)
+        Me.txtPassword.Name = "txtPassword"
+        Me.txtPassword.Size = New System.Drawing.Size(137, 20)
+        Me.txtPassword.TabIndex = 3
+        Me.txtPassword.UseSystemPasswordChar = True
+        '
+        'txtUserName
+        '
+        Me.txtUserName.Location = New System.Drawing.Point(18, 34)
+        Me.txtUserName.Name = "txtUserName"
+        Me.txtUserName.Size = New System.Drawing.Size(161, 20)
+        Me.txtUserName.TabIndex = 2
+        '
+        'Label4
+        '
+        Me.Label4.AutoSize = True
+        Me.Label4.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.Label4.Location = New System.Drawing.Point(15, 69)
+        Me.Label4.Name = "Label4"
+        Me.Label4.Size = New System.Drawing.Size(53, 13)
+        Me.Label4.TabIndex = 1
+        Me.Label4.Text = "Password"
+        '
+        'Label2
+        '
+        Me.Label2.AutoSize = True
+        Me.Label2.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.Label2.Location = New System.Drawing.Point(15, 18)
+        Me.Label2.Name = "Label2"
+        Me.Label2.Size = New System.Drawing.Size(63, 13)
+        Me.Label2.TabIndex = 0
+        Me.Label2.Text = "User Name:"
+        '
+        'Panel9
+        '
+        Me.Panel9.Controls.Add(Me.tvwAccess)
+        Me.Panel9.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Panel9.ForeColor = System.Drawing.SystemColors.ControlText
+        Me.Panel9.Location = New System.Drawing.Point(201, 3)
+        Me.Panel9.Name = "Panel9"
+        Me.Panel9.Size = New System.Drawing.Size(225, 296)
+        Me.Panel9.TabIndex = 2
+        '
+        'tvwAccess
+        '
+        Me.tvwAccess.CheckBoxes = True
+        Me.tvwAccess.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.tvwAccess.Location = New System.Drawing.Point(0, 0)
+        Me.tvwAccess.Name = "tvwAccess"
+        Me.tvwAccess.Size = New System.Drawing.Size(225, 296)
+        Me.tvwAccess.TabIndex = 0
         '
         'TitleBar
         '
@@ -449,6 +720,17 @@ Partial Class ConfigReelsAndOther
         CType(Me.pcbImage, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel6.ResumeLayout(False)
         Me.Panel6.PerformLayout()
+        Me.TabPage2.ResumeLayout(False)
+        Me.TableLayoutPanel5.ResumeLayout(False)
+        Me.GroupBox2.ResumeLayout(False)
+        Me.TableLayoutPanel6.ResumeLayout(False)
+        CType(Me.tblUsers, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.Panel10.ResumeLayout(False)
+        Me.GroupBox3.ResumeLayout(False)
+        Me.TableLayoutPanel7.ResumeLayout(False)
+        Me.Panel8.ResumeLayout(False)
+        Me.Panel8.PerformLayout()
+        Me.Panel9.ResumeLayout(False)
         Me.TitleBar.ResumeLayout(False)
         Me.TitleBar.PerformLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
@@ -491,4 +773,25 @@ Partial Class ConfigReelsAndOther
     Friend WithEvents indexImageAux As DataGridViewTextBoxColumn
     Friend WithEvents ImageName As DataGridViewTextBoxColumn
     Friend WithEvents ImageReels As DataGridViewImageColumn
+    Friend WithEvents TableLayoutPanel5 As TableLayoutPanel
+    Friend WithEvents GroupBox2 As GroupBox
+    Friend WithEvents TableLayoutPanel6 As TableLayoutPanel
+    Friend WithEvents tblUsers As DataGridView
+    Friend WithEvents idUsers As DataGridViewTextBoxColumn
+    Friend WithEvents UserName As DataGridViewTextBoxColumn
+    Friend WithEvents userPass As DataGridViewTextBoxColumn
+    Friend WithEvents GroupBox3 As GroupBox
+    Friend WithEvents TableLayoutPanel7 As TableLayoutPanel
+    Friend WithEvents Panel8 As Panel
+    Friend WithEvents txtPassword As TextBox
+    Friend WithEvents txtUserName As TextBox
+    Friend WithEvents Label4 As Label
+    Friend WithEvents Label2 As Label
+    Friend WithEvents Panel9 As Panel
+    Friend WithEvents chbSee As CheckBox
+    Friend WithEvents Panel10 As Panel
+    Friend WithEvents btnDeleteUser As Button
+    Friend WithEvents btnSaveUser As Button
+    Friend WithEvents btnNewUser As Button
+    Friend WithEvents tvwAccess As TreeView
 End Class

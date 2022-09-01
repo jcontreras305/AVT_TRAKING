@@ -6,6 +6,7 @@ Public Class Login
     Dim mtdOther As New MetodosOthers
     Dim mtdCompany As New metodosCompany
     Dim mtdReels As New MetodosReels
+    Dim nUser As New Users
     Dim countReels As Integer = 0
     Dim countTimeProtector As Integer = 0
     Dim countTimeNextImage As Integer = 0
@@ -43,6 +44,7 @@ Public Class Login
         Try 'verifico que los campos de usuer y password esten llenos
             If (txtUser.Text <> String.Empty And txtUser.Text.Length > 0) And (txtPassword.Text <> String.Empty And txtPassword.Text.Length > 0) Then
                 If mtdLogin.StartLogin(txtUser.Text, txtPassword.Text) Then
+                    nUser.selectUser(txtUser.Text, txtPassword.Text)
                     Dim a As New MainFrom
                     Try
                         If mtdCompany.img IsNot Nothing Then
@@ -51,6 +53,10 @@ Public Class Login
                         If listImg IsNot Nothing And listImg.Count > 0 Then
                             Dim arrayByte As Byte() = listImg(cmbImagenes.SelectedIndex)
                             a.imageClientLogin = BytetoImage(arrayByte)
+                        End If
+                        If nUser.ListAccess IsNot Nothing Then
+                            a.validAccess(nUser)
+                            a.loginUser = nUser
                         End If
                     Catch ex As Exception
                     End Try

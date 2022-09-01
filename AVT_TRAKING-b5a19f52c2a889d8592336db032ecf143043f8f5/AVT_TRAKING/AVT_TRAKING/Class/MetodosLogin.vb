@@ -12,15 +12,23 @@ Public Class MetodosLogin
             'con.conectar() 'esto es con la instancia a la clase
             Dim cmd As New SqlCommand("select * from users where nameUser = '" + user + "' and passwordUser = '" + password + "'", conn)
             If cmd.ExecuteNonQuery Then
-                Dim dataTable As New DataTable ' es para tener una tabla igual como la que se muestra en las consultas en la DB
-                Dim dataAdapter As New SqlDataAdapter(cmd)
-                dataAdapter.Fill(dataTable)
-                If dataTable.Rows.Count >= 1 Then 'si encontro por lo menos 1 usuario da la bien benida y retorna true
-                    MsgBox("Welcome")
-                    Return True
-                Else ' si se pudo ejecutar pero no encontro como minimo 1 usuario regresa false
-                    Return False
-                End If
+                Dim dt As New DataTable ' es para tener una tabla igual como la que se muestra en las consultas en la DB
+                Dim da As New SqlDataAdapter(cmd)
+                da.Fill(dt)
+                Dim flag As Boolean = False
+                For Each row As Data.DataRow In dt.Rows
+                    If row.ItemArray(1).Equals(user) And row.ItemArray(2).Equals(password) Then
+                        flag = True
+                        Exit For
+                    End If
+                Next
+                Return flag
+                'If dataTable.Rows.Count >= 1 Then 'si encontro por lo menos 1 usuario da la bien
+                '    MsgBox("Welcome")
+                '    Return True
+                'Else ' si se pudo ejecutar pero no encontro como minimo 1 usuario regresa false
+                '    Return False
+                'End If
             Else 'Si no se pudo ejecutar regresa falso
                 Return False
             End If

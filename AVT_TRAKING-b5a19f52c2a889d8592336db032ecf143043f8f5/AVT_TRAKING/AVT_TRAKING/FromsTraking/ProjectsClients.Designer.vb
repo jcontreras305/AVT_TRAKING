@@ -112,6 +112,7 @@ Partial Class ProjectsClients
         Me.idAuxWO = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.idAux = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.photo = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.pnlButtonsPOCl = New System.Windows.Forms.Panel()
         Me.Panel1.SuspendLayout()
         Me.PnllSetup.SuspendLayout()
         Me.Panel2.SuspendLayout()
@@ -134,16 +135,13 @@ Partial Class ProjectsClients
         Me.TableLayoutPanel4.SuspendLayout()
         Me.Panel3.SuspendLayout()
         CType(Me.tblProjectClientsAll, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.pnlButtonsPOCl.SuspendLayout()
         Me.SuspendLayout()
         '
         'Panel1
         '
         Me.Panel1.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(58, Byte), Integer), CType(CType(115, Byte), Integer))
-        Me.Panel1.Controls.Add(Me.PnllSetup)
-        Me.Panel1.Controls.Add(Me.btnSetup)
-        Me.Panel1.Controls.Add(Me.btnUploadSchedule)
-        Me.Panel1.Controls.Add(Me.btnTimeEnterSheets)
-        Me.Panel1.Controls.Add(Me.btnProyeccts)
+        Me.Panel1.Controls.Add(Me.pnlButtonsPOCl)
         Me.Panel1.Controls.Add(Me.Panel2)
         Me.Panel1.Dock = System.Windows.Forms.DockStyle.Left
         Me.Panel1.Location = New System.Drawing.Point(0, 0)
@@ -159,9 +157,10 @@ Partial Class ProjectsClients
         Me.PnllSetup.Controls.Add(Me.btnCompanyInformation)
         Me.PnllSetup.Controls.Add(Me.btnExpences)
         Me.PnllSetup.Controls.Add(Me.btnEmployees)
-        Me.PnllSetup.Location = New System.Drawing.Point(5, 321)
+        Me.PnllSetup.Dock = System.Windows.Forms.DockStyle.Top
+        Me.PnllSetup.Location = New System.Drawing.Point(0, 218)
         Me.PnllSetup.Name = "PnllSetup"
-        Me.PnllSetup.Size = New System.Drawing.Size(205, 175)
+        Me.PnllSetup.Size = New System.Drawing.Size(216, 175)
         Me.PnllSetup.TabIndex = 5
         '
         'btnWK
@@ -173,9 +172,9 @@ Partial Class ProjectsClients
         Me.btnWK.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.btnWK.Location = New System.Drawing.Point(0, 140)
         Me.btnWK.Name = "btnWK"
-        Me.btnWK.Size = New System.Drawing.Size(205, 32)
+        Me.btnWK.Size = New System.Drawing.Size(216, 32)
         Me.btnWK.TabIndex = 10
-        Me.btnWK.Text = "Work Codes"
+        Me.btnWK.Text = "Work Code"
         Me.btnWK.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         Me.btnWK.UseVisualStyleBackColor = True
         '
@@ -188,7 +187,7 @@ Partial Class ProjectsClients
         Me.btnMaterialCodes.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.btnMaterialCodes.Location = New System.Drawing.Point(0, 105)
         Me.btnMaterialCodes.Name = "btnMaterialCodes"
-        Me.btnMaterialCodes.Size = New System.Drawing.Size(205, 35)
+        Me.btnMaterialCodes.Size = New System.Drawing.Size(216, 35)
         Me.btnMaterialCodes.TabIndex = 9
         Me.btnMaterialCodes.Text = "Material Codes"
         Me.btnMaterialCodes.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -203,9 +202,9 @@ Partial Class ProjectsClients
         Me.btnCompanyInformation.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.btnCompanyInformation.Location = New System.Drawing.Point(0, 70)
         Me.btnCompanyInformation.Name = "btnCompanyInformation"
-        Me.btnCompanyInformation.Size = New System.Drawing.Size(205, 35)
+        Me.btnCompanyInformation.Size = New System.Drawing.Size(216, 35)
         Me.btnCompanyInformation.TabIndex = 8
-        Me.btnCompanyInformation.Text = "Company Information"
+        Me.btnCompanyInformation.Text = "Company"
         Me.btnCompanyInformation.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         Me.btnCompanyInformation.UseVisualStyleBackColor = True
         '
@@ -218,9 +217,9 @@ Partial Class ProjectsClients
         Me.btnExpences.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.btnExpences.Location = New System.Drawing.Point(0, 35)
         Me.btnExpences.Name = "btnExpences"
-        Me.btnExpences.Size = New System.Drawing.Size(205, 35)
+        Me.btnExpences.Size = New System.Drawing.Size(216, 35)
         Me.btnExpences.TabIndex = 7
-        Me.btnExpences.Text = "Expences "
+        Me.btnExpences.Text = "Expenses "
         Me.btnExpences.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         Me.btnExpences.UseVisualStyleBackColor = True
         '
@@ -233,7 +232,7 @@ Partial Class ProjectsClients
         Me.btnEmployees.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.btnEmployees.Location = New System.Drawing.Point(0, 0)
         Me.btnEmployees.Name = "btnEmployees"
-        Me.btnEmployees.Size = New System.Drawing.Size(205, 35)
+        Me.btnEmployees.Size = New System.Drawing.Size(216, 35)
         Me.btnEmployees.TabIndex = 6
         Me.btnEmployees.Text = "Employees"
         Me.btnEmployees.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -249,7 +248,7 @@ Partial Class ProjectsClients
         Me.btnSetup.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.btnSetup.Image = Global.AVT_TRAKING.My.Resources.Resources.setup
         Me.btnSetup.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnSetup.Location = New System.Drawing.Point(0, 264)
+        Me.btnSetup.Location = New System.Drawing.Point(0, 167)
         Me.btnSetup.Name = "btnSetup"
         Me.btnSetup.Size = New System.Drawing.Size(216, 51)
         Me.btnSetup.TabIndex = 4
@@ -264,7 +263,7 @@ Partial Class ProjectsClients
         Me.btnUploadSchedule.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnUploadSchedule.Font = New System.Drawing.Font("Nirmala UI", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnUploadSchedule.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.btnUploadSchedule.Location = New System.Drawing.Point(0, 206)
+        Me.btnUploadSchedule.Location = New System.Drawing.Point(0, 109)
         Me.btnUploadSchedule.Name = "btnUploadSchedule"
         Me.btnUploadSchedule.Size = New System.Drawing.Size(216, 58)
         Me.btnUploadSchedule.TabIndex = 3
@@ -281,7 +280,7 @@ Partial Class ProjectsClients
         Me.btnTimeEnterSheets.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.btnTimeEnterSheets.Image = Global.AVT_TRAKING.My.Resources.Resources.time
         Me.btnTimeEnterSheets.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnTimeEnterSheets.Location = New System.Drawing.Point(0, 152)
+        Me.btnTimeEnterSheets.Location = New System.Drawing.Point(0, 55)
         Me.btnTimeEnterSheets.Name = "btnTimeEnterSheets"
         Me.btnTimeEnterSheets.Size = New System.Drawing.Size(216, 54)
         Me.btnTimeEnterSheets.TabIndex = 2
@@ -299,7 +298,7 @@ Partial Class ProjectsClients
         Me.btnProyeccts.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.btnProyeccts.Image = Global.AVT_TRAKING.My.Resources.Resources.project
         Me.btnProyeccts.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnProyeccts.Location = New System.Drawing.Point(0, 97)
+        Me.btnProyeccts.Location = New System.Drawing.Point(0, 0)
         Me.btnProyeccts.Name = "btnProyeccts"
         Me.btnProyeccts.Size = New System.Drawing.Size(216, 55)
         Me.btnProyeccts.TabIndex = 1
@@ -1117,6 +1116,19 @@ Partial Class ProjectsClients
         Me.photo.ReadOnly = True
         Me.photo.Visible = False
         '
+        'pnlButtonsPOCl
+        '
+        Me.pnlButtonsPOCl.Controls.Add(Me.PnllSetup)
+        Me.pnlButtonsPOCl.Controls.Add(Me.btnSetup)
+        Me.pnlButtonsPOCl.Controls.Add(Me.btnUploadSchedule)
+        Me.pnlButtonsPOCl.Controls.Add(Me.btnTimeEnterSheets)
+        Me.pnlButtonsPOCl.Controls.Add(Me.btnProyeccts)
+        Me.pnlButtonsPOCl.Dock = System.Windows.Forms.DockStyle.Top
+        Me.pnlButtonsPOCl.Location = New System.Drawing.Point(0, 97)
+        Me.pnlButtonsPOCl.Name = "pnlButtonsPOCl"
+        Me.pnlButtonsPOCl.Size = New System.Drawing.Size(216, 393)
+        Me.pnlButtonsPOCl.TabIndex = 6
+        '
         'ProjectsClients
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1158,6 +1170,7 @@ Partial Class ProjectsClients
         Me.TableLayoutPanel4.ResumeLayout(False)
         Me.Panel3.ResumeLayout(False)
         CType(Me.tblProjectClientsAll, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.pnlButtonsPOCl.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
@@ -1251,4 +1264,5 @@ Partial Class ProjectsClients
     Friend WithEvents idAuxWO As DataGridViewTextBoxColumn
     Friend WithEvents idAux As DataGridViewTextBoxColumn
     Friend WithEvents photo As DataGridViewTextBoxColumn
+    Friend WithEvents pnlButtonsPOCl As Panel
 End Class
