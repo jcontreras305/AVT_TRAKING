@@ -35,7 +35,7 @@ ALTER TABLE userAccess WITH CHECK ADD CONSTRAINT fk_idUser_userAccess
 FOREIGN KEY (idUsers) REFERENCES users(idUsers)
 go
 
-declare @idAdminUser as varchar (25) = NEWID()
+declare @idAdminUser as varchar (36) = NEWID()
 insert into users values (@idAdminUser, 'admin' , 'admin')
 insert into userAccess values 
 (@idAdminUser,'Backup'),
@@ -480,6 +480,9 @@ create table eqPaintUnitRate(
 	eqRate float
 )
 go
+ALTER TABLE eqInsUnitRate WITH CHECK ADD CONSTRAINT PK_type_think_eqinsUnitRate
+PRIMARY KEY([type],thick)
+GO
 
 --##########################################################################################
 --##################  TABLA DE ESTCOSTBUILD ################################################
@@ -2508,10 +2511,6 @@ GO
 --##########################################################################################
 --##################  FOREIG KEYS EQPAINTUNITRATE ##########################################
 --##########################################################################################
-
-ALTER TABLE eqInsUnitRate WITH CHECK ADD CONSTRAINT PK_type_think_eqinsUnitRate
-PRIMARY KEY([type],thick)
-GO
 
 ALTER TABLE eqInsUnitRate WITH CHECK ADD CONSTRAINT fk_type_eqInsUnitRate
 FOREIGN KEY([TYPE]) REFERENCES insFitting([type])
@@ -5145,45 +5144,57 @@ go
 --end
 --GO
 
+----#########################################################################################################################################################################################
+----############## TABLA DE USER ACCESS #####################################################################################################################################################
+----#########################################################################################################################################################################################
+--create table userAccess (
+--	idUsers varchar(36) not null,
+--	access varchar(30) not null
+--)
+--go
+
+--ALTER TABLE userAccess WITH CHECK ADD CONSTRAINT pk_idUsers_access_userAccess
+--PRIMARY KEY(idUsers,access)
+--go
+
+--ALTER TABLE userAccess WITH CHECK ADD CONSTRAINT fk_idUser_userAccess
+--FOREIGN KEY (idUsers) REFERENCES users(idUsers)
+--go
+
+--declare @idAdminUser as varchar (36) = (select top 1 idUsers from users where nameUser ='admin' )
+--insert into userAccess values 
+--(@idAdminUser,'Backup'),
+--(@idAdminUser,'Clients'),
+--(@idAdminUser,'Company'),
+--(@idAdminUser,'Employees'),
+--(@idAdminUser,'Est. Projects'),
+--(@idAdminUser,'Est. Reports'),
+--(@idAdminUser,'Estimation'),
+--(@idAdminUser,'Expenses'),
+--(@idAdminUser,'Material'),
+--(@idAdminUser,'Material Code'),
+--(@idAdminUser,'Others'),
+--(@idAdminUser,'Projects'),
+--(@idAdminUser,'Reports'),
+--(@idAdminUser,'Scaffold Traking'),
+--(@idAdminUser,'Setting'),
+--(@idAdminUser,'Setup'),
+--(@idAdminUser,'System'),
+--(@idAdminUser,'Time Enter Sheet'),
+--(@idAdminUser,'Work Code'),
+--(@idAdminUser,'Work Codes')
 ----| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
 ----| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
 ----V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V
 ----#########################################################################################################################################################################################
-----############## TABLA DE USER ACCESS #####################################################################################################################################################
+----############## CAMBIOS EN LA TABLA DE SCAFFOLD PARA LONGITUDE Y LATITUDE ################################################################################################################
 ----#########################################################################################################################################################################################
-create table userAccess (
-	idUsers varchar(36) not null,
-	access varchar(30) not null
-)
+ALTER TABLE scaffoldTraking 
+ADD longitude float
 go
 
-ALTER TABLE userAccess WITH CHECK ADD CONSTRAINT pk_idUsers_access_userAccess
-PRIMARY KEY(idUsers,access)
+ALTER TABLE scaffoldTraking 
+ADD latitude float
 go
 
-ALTER TABLE userAccess WITH CHECK ADD CONSTRAINT fk_idUser_userAccess
-FOREIGN KEY (idUsers) REFERENCES users(idUsers)
-go
-
-declare @idAdminUser as varchar (36) = (select top 1 idUsers from users where nameUser ='admin' )
-insert into userAccess values 
-(@idAdminUser,'Backup'),
-(@idAdminUser,'Clients'),
-(@idAdminUser,'Company'),
-(@idAdminUser,'Employees'),
-(@idAdminUser,'Est. Projects'),
-(@idAdminUser,'Est. Reports'),
-(@idAdminUser,'Estimation'),
-(@idAdminUser,'Expenses'),
-(@idAdminUser,'Material'),
-(@idAdminUser,'Material Code'),
-(@idAdminUser,'Others'),
-(@idAdminUser,'Projects'),
-(@idAdminUser,'Reports'),
-(@idAdminUser,'Scaffold Traking'),
-(@idAdminUser,'Setting'),
-(@idAdminUser,'Setup'),
-(@idAdminUser,'System'),
-(@idAdminUser,'Time Enter Sheet'),
-(@idAdminUser,'Work Code'),
-(@idAdminUser,'Work Codes')
+update scaffoldTraking set longitude = 0 , latitude = 0

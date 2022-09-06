@@ -2381,6 +2381,8 @@ If(idCliente = "", "", " where jb.idClient='" + idCliente + "'"), conn)
                 sc.idsubJob = CStr(dr("idSubJob"))
                 sc.status = If(dr("status") = "f", False, True)
                 sc.days = CInt(dr("days"))
+                sc.latitude = dr("latitude")
+                sc.longitude = dr("longitude")
                 Exit While
             End While
             dr.Close()
@@ -2475,11 +2477,11 @@ inner join task as tk on wo.idAuxWO = tk.idAuxWO where tk.idAux = '" + sc.task +
             Dim cmdTraking As New SqlCommand("
 if (select count(*) from scaffoldTraking where tag = '" + sc.tag + "') = 0
 begin 
-	insert into scaffoldTraking values('" + sc.tag + "','" + validaFechaParaSQl(sc.dateBild) + "','" + sc.location + "','" + sc.purpose + "','" + sc.comments + "','" + validaFechaParaSQl(sc.dateRecComp) + "','" + sc.contact + "','" + sc.foreman + "','" + sc.erector + "','" + sc.task + "','" + sc.jobcat + "'," + sc.areaID + "," + sc.idsubJob + ",'" + If(sc.status = True, "t", "f") + "'," + CStr(sc.days) + ")
+	insert into scaffoldTraking values('" + sc.tag + "','" + validaFechaParaSQl(sc.dateBild) + "','" + sc.location + "','" + sc.purpose + "','" + sc.comments + "','" + validaFechaParaSQl(sc.dateRecComp) + "','" + sc.contact + "','" + sc.foreman + "','" + sc.erector + "','" + sc.task + "','" + sc.jobcat + "'," + sc.areaID + "," + sc.idsubJob + ",'" + If(sc.status = True, "t", "f") + "'," + CStr(sc.days) + "," + sc.longitude.ToString() + "," + sc.longitude.ToString() + ")
 end
 else if (select count(*) from scaffoldTraking where tag = '" + sc.tag + "') = 1
 begin 
-	update scaffoldTraking set buildDate = '" + validaFechaParaSQl(sc.dateBild) + "',location = '" + sc.location + "',purpose ='" + sc.purpose + "',comments='" + sc.comments + "',reqComp='" + validaFechaParaSQl(sc.dateRecComp) + "',contact='" + sc.contact + "',foreman='" + sc.foreman + "',erector='" + sc.erector + "',idAux='" + sc.task + "',idJobCat='" + sc.jobcat + "',idArea=" + sc.areaID + ",idSubJob=" + sc.idsubJob + ", status = '" + If(sc.status = True, "t", "f") + "',days=" + CStr(sc.days) + " where tag= '" + sc.tag + "'
+	update scaffoldTraking set buildDate = '" + validaFechaParaSQl(sc.dateBild) + "',location = '" + sc.location + "',purpose ='" + sc.purpose + "',comments='" + sc.comments + "',reqComp='" + validaFechaParaSQl(sc.dateRecComp) + "',contact='" + sc.contact + "',foreman='" + sc.foreman + "',erector='" + sc.erector + "',idAux='" + sc.task + "',idJobCat='" + sc.jobcat + "',idArea=" + sc.areaID + ",idSubJob=" + sc.idsubJob + ", status = '" + If(sc.status = True, "t", "f") + "',days=" + CStr(sc.days) + " , longitude = " + CStr(sc.longitude) + ", latitude = " + CStr(sc.latitude) + " where tag= '" + sc.tag + "'
 end", conn)
             cmdTraking.Transaction = tran
             If cmdTraking.ExecuteNonQuery > 0 Then 'si entra se tubo que insertar o actualizar si no hubo un error 

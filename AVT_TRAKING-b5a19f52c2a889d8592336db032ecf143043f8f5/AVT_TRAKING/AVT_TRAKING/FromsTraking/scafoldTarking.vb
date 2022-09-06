@@ -2169,7 +2169,20 @@ Public Class scafoldTarking
 
         End Try
     End Sub
+    Private Sub txtLatitude_TextChanged(sender As Object, e As EventArgs) Handles txtLatitude.TextChanged
+        Try
+            sc.latitude = txtLatitude.Text
+        Catch ex As Exception
 
+        End Try
+    End Sub
+    Private Sub txtLongitude_TextChanged(sender As Object, e As EventArgs) Handles txtLongitude.TextChanged
+        Try
+            sc.longitude = txtLongitude.Text
+        Catch ex As Exception
+
+        End Try
+    End Sub
     Private Sub sprDecks_ValueChanged(sender As Object, e As EventArgs) Handles sprDecks.ValueChanged
         Try
             sc.sciExtraDeck = sprDecks.Value
@@ -2298,6 +2311,8 @@ Public Class scafoldTarking
             txtLocation.ReadOnly = status
             txtPurpose.ReadOnly = status
             txtNotesAndComments.ReadOnly = status
+            txtLongitude.ReadOnly = status
+            txtLatitude.ReadOnly = status
             cmbContactScaffold.Enabled = If(status, False, True)
 
             cmbErectorScaffold.Enabled = If(status, False, True)
@@ -2382,6 +2397,8 @@ Public Class scafoldTarking
             txtLocation.Text = sc.location
             txtPurpose.Text = sc.purpose
             txtNotesAndComments.Text = sc.comments
+            txtLongitude.Text = sc.longitude.ToString()
+            txtLatitude.Text = sc.latitude.ToString()
             cmbContactScaffold.SelectedItem = sc.contact
             cmbContactScaffold.Text = sc.contact
             cmbErectorScaffold.SelectedItem = sc.erector
@@ -4289,6 +4306,8 @@ Public Class scafoldTarking
 
     End Sub
 
+
+
     Public Function cargarDatosByClient(ByVal idClientF As String, ByVal companyNameF As String) As Boolean
         Try
             IdCliente = idClientF
@@ -4483,5 +4502,18 @@ Public Class scafoldTarking
         End Try
     End Function
 
-
+    Private Sub txtLatitude_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtLatitude.KeyPress
+        If Not (IsNumeric(e.KeyChar()) Or Asc(e.KeyChar) = Asc(Keys.Enter) Or Asc(e.KeyChar) = 8 Or Asc(e.KeyChar) = 45) Then
+            If Not (e.KeyChar = ChrW(22) Or e.KeyChar = ChrW(3)) Then
+                e.Handled = True
+            End If
+        End If
+    End Sub
+    Private Sub txtLongitude_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtLongitude.KeyPress
+        If Not (IsNumeric(e.KeyChar()) Or Asc(e.KeyChar) = Asc(Keys.Enter) Or Asc(e.KeyChar) = 8 Or Asc(e.KeyChar) = 45) Then
+            If Not (e.KeyChar = ChrW(22) Or e.KeyChar = ChrW(3)) Then
+                e.Handled = True
+            End If
+        End If
+    End Sub
 End Class

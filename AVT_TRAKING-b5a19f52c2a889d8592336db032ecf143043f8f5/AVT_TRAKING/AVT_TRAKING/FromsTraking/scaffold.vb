@@ -6,6 +6,7 @@ Public Class scaffold
     Private _tag, _location, _purpose, _comments, _contact, _foreman, _erector, _task, _wo, _job, _descriptionWO, _jobcat, _category, _areaID, _area, _idsubJob, _subjob As String
     Private _dateBild, _dateRecComp As Date
     Private _status As Boolean
+    Private _latitude, _longitude As Double
     Private _days As Integer
     'scaffoldInformation
     Private _sciType, _idScaffoldinformation As String
@@ -47,6 +48,8 @@ Public Class scaffold
             _dateBild = System.DateTime.Today()
             _dateRecComp = System.DateTime.Today()
             _status = False
+            _latitude = 0
+            _longitude = 0
             _days = 0
             'scaffoldInformation
             _sciType = ""
@@ -140,6 +143,28 @@ Public Class scaffold
         End Get
         Set(ByVal dateRecComp As Date)
             _dateRecComp = dateRecComp
+        End Set
+    End Property
+    Public Property latitude() As Double
+        Get
+            If _latitude = Nothing Then
+                _latitude = 0
+            End If
+            Return _latitude
+        End Get
+        Set(ByVal latitude As Double)
+            _latitude = latitude
+        End Set
+    End Property
+    Public Property longitude() As Double
+        Get
+            If _longitude = Nothing Then
+                _longitude = 0
+            End If
+            Return _longitude
+        End Get
+        Set(ByVal longitude As Double)
+            _longitude = longitude
         End Set
     End Property
     Public Property status() As Boolean
