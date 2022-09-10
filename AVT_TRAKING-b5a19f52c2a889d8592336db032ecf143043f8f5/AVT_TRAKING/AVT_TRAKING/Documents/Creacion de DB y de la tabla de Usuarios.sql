@@ -1850,7 +1850,9 @@ create table scaffoldTraking(
 	idArea int,
 	idSubJob int,
 	status char(1),
-	days int
+	days int,
+	logitude float,
+	latitude float
 )
 GO
 
@@ -5183,18 +5185,32 @@ go
 --(@idAdminUser,'Time Enter Sheet'),
 --(@idAdminUser,'Work Code'),
 --(@idAdminUser,'Work Codes')
+----#########################################################################################################################################################################################
+----############## CAMBIOS EN LA TABLA DE SCAFFOLD PARA LONGITUDE Y LATITUDE ################################################################################################################
+----#########################################################################################################################################################################################
+--ALTER TABLE scaffoldTraking 
+--ADD longitude float
+--go
+
+--ALTER TABLE scaffoldTraking 
+--ADD latitude float
+--go
+
+--update scaffoldTraking set longitude = 0 , latitude = 0
 ----| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
 ----| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
 ----V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V
 ----#########################################################################################################################################################################################
-----############## CAMBIOS EN LA TABLA DE SCAFFOLD PARA LONGITUDE Y LATITUDE ################################################################################################################
+----############## CAMBIOS EN EL REPORTE DE REPORT INVOICE ##################################################################################################################################
 ----#########################################################################################################################################################################################
-ALTER TABLE scaffoldTraking 
-ADD longitude float
-go
-
-ALTER TABLE scaffoldTraking 
-ADD latitude float
-go
-
-update scaffoldTraking set longitude = 0 , latitude = 0
+ALTER proc [dbo].[sp_invoice_number]
+@numberClient int,
+@startDate date,
+@FinalDate date
+as 
+begin 
+	select invoice , idPO from tempInvoice
+	where startDate = @startDate 
+		and FinalDate = @FinalDate 
+		and idClient = (select idclient from clients where numberClient = @numberClient)
+end

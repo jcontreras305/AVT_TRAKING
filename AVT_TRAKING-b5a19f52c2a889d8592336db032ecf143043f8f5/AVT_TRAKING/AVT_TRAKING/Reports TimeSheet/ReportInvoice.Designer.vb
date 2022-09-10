@@ -42,17 +42,38 @@ Partial Class ReportInvoice
         Me.dtpEndDate = New System.Windows.Forms.DateTimePicker()
         Me.dtpStartDate = New System.Windows.Forms.DateTimePicker()
         Me.Panel3 = New System.Windows.Forms.Panel()
-        Me.crvIvoice = New CrystalDecisions.Windows.Forms.CrystalReportViewer()
+        Me.TabControl1 = New System.Windows.Forms.TabControl()
+        Me.TabPage1 = New System.Windows.Forms.TabPage()
         Me.TableLayoutPanel2 = New System.Windows.Forms.TableLayoutPanel()
         Me.Panel4 = New System.Windows.Forms.Panel()
+        Me.crvIvoice = New CrystalDecisions.Windows.Forms.CrystalReportViewer()
         Me.Panel5 = New System.Windows.Forms.Panel()
+        Me.TableLayoutPanel3 = New System.Windows.Forms.TableLayoutPanel()
+        Me.Panel6 = New System.Windows.Forms.Panel()
         Me.tblInvoiceCodes = New System.Windows.Forms.DataGridView()
         Me.PO = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Invoice = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.btnSaveInvoiceNumbers = New System.Windows.Forms.Button()
-        Me.TableLayoutPanel3 = New System.Windows.Forms.TableLayoutPanel()
-        Me.Panel6 = New System.Windows.Forms.Panel()
         Me.Panel7 = New System.Windows.Forms.Panel()
+        Me.btnSaveInvoiceNumbers = New System.Windows.Forms.Button()
+        Me.TabPage2 = New System.Windows.Forms.TabPage()
+        Me.TableLayoutPanel4 = New System.Windows.Forms.TableLayoutPanel()
+        Me.Panel8 = New System.Windows.Forms.Panel()
+        Me.tblInvoices = New System.Windows.Forms.DataGridView()
+        Me.clmInvoiceAux = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.clmPOAux = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.clmInvoice = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.clmPO = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.clmClient = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.clmStartDate = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.clmFinalDate = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Panel9 = New System.Windows.Forms.Panel()
+        Me.chbAllPOFilter = New System.Windows.Forms.CheckBox()
+        Me.Label6 = New System.Windows.Forms.Label()
+        Me.Label7 = New System.Windows.Forms.Label()
+        Me.cmbPOFilter = New System.Windows.Forms.ComboBox()
+        Me.cmbClientFilter = New System.Windows.Forms.ComboBox()
+        Me.btnDeleteInvoce = New System.Windows.Forms.Button()
+        Me.btnRefreshInvoice = New System.Windows.Forms.Button()
         Me.TableLayoutPanel1.SuspendLayout()
         Me.Panel1.SuspendLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -62,13 +83,20 @@ Partial Class ReportInvoice
         Me.Panel2.SuspendLayout()
         CType(Me.PictureBox4, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel3.SuspendLayout()
+        Me.TabControl1.SuspendLayout()
+        Me.TabPage1.SuspendLayout()
         Me.TableLayoutPanel2.SuspendLayout()
         Me.Panel4.SuspendLayout()
         Me.Panel5.SuspendLayout()
-        CType(Me.tblInvoiceCodes, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.TableLayoutPanel3.SuspendLayout()
         Me.Panel6.SuspendLayout()
+        CType(Me.tblInvoiceCodes, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel7.SuspendLayout()
+        Me.TabPage2.SuspendLayout()
+        Me.TableLayoutPanel4.SuspendLayout()
+        Me.Panel8.SuspendLayout()
+        CType(Me.tblInvoices, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.Panel9.SuspendLayout()
         Me.SuspendLayout()
         '
         'TableLayoutPanel1
@@ -84,7 +112,7 @@ Partial Class ReportInvoice
         Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
         Me.TableLayoutPanel1.RowCount = 3
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40.0!))
-        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 85.0!))
+        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 71.0!))
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
         Me.TableLayoutPanel1.Size = New System.Drawing.Size(936, 541)
         Me.TableLayoutPanel1.TabIndex = 0
@@ -172,7 +200,7 @@ Partial Class ReportInvoice
         Me.Panel2.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.Panel2.Location = New System.Drawing.Point(3, 43)
         Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(930, 79)
+        Me.Panel2.Size = New System.Drawing.Size(930, 65)
         Me.Panel2.TabIndex = 1
         '
         'btnReport
@@ -285,24 +313,34 @@ Partial Class ReportInvoice
         'Panel3
         '
         Me.Panel3.BackColor = System.Drawing.Color.FromArgb(CType(CType(83, Byte), Integer), CType(CType(93, Byte), Integer), CType(CType(102, Byte), Integer))
-        Me.Panel3.Controls.Add(Me.TableLayoutPanel2)
+        Me.Panel3.Controls.Add(Me.TabControl1)
         Me.Panel3.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel3.Location = New System.Drawing.Point(3, 128)
+        Me.Panel3.Location = New System.Drawing.Point(3, 114)
         Me.Panel3.Name = "Panel3"
-        Me.Panel3.Size = New System.Drawing.Size(930, 410)
+        Me.Panel3.Size = New System.Drawing.Size(930, 424)
         Me.Panel3.TabIndex = 2
         '
-        'crvIvoice
+        'TabControl1
         '
-        Me.crvIvoice.ActiveViewIndex = -1
-        Me.crvIvoice.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.crvIvoice.Cursor = System.Windows.Forms.Cursors.Default
-        Me.crvIvoice.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.crvIvoice.Location = New System.Drawing.Point(0, 0)
-        Me.crvIvoice.Name = "crvIvoice"
-        Me.crvIvoice.Size = New System.Drawing.Size(705, 404)
-        Me.crvIvoice.TabIndex = 0
-        Me.crvIvoice.ToolPanelWidth = 150
+        Me.TabControl1.Controls.Add(Me.TabPage1)
+        Me.TabControl1.Controls.Add(Me.TabPage2)
+        Me.TabControl1.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.TabControl1.Location = New System.Drawing.Point(0, 0)
+        Me.TabControl1.Name = "TabControl1"
+        Me.TabControl1.SelectedIndex = 0
+        Me.TabControl1.Size = New System.Drawing.Size(930, 424)
+        Me.TabControl1.TabIndex = 1
+        '
+        'TabPage1
+        '
+        Me.TabPage1.BackColor = System.Drawing.Color.FromArgb(CType(CType(83, Byte), Integer), CType(CType(93, Byte), Integer), CType(CType(102, Byte), Integer))
+        Me.TabPage1.Controls.Add(Me.TableLayoutPanel2)
+        Me.TabPage1.Location = New System.Drawing.Point(4, 22)
+        Me.TabPage1.Name = "TabPage1"
+        Me.TabPage1.Padding = New System.Windows.Forms.Padding(3)
+        Me.TabPage1.Size = New System.Drawing.Size(922, 398)
+        Me.TabPage1.TabIndex = 0
+        Me.TabPage1.Text = "Report"
         '
         'TableLayoutPanel2
         '
@@ -312,11 +350,11 @@ Partial Class ReportInvoice
         Me.TableLayoutPanel2.Controls.Add(Me.Panel4, 0, 0)
         Me.TableLayoutPanel2.Controls.Add(Me.Panel5, 1, 0)
         Me.TableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.TableLayoutPanel2.Location = New System.Drawing.Point(0, 0)
+        Me.TableLayoutPanel2.Location = New System.Drawing.Point(3, 3)
         Me.TableLayoutPanel2.Name = "TableLayoutPanel2"
         Me.TableLayoutPanel2.RowCount = 1
         Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
-        Me.TableLayoutPanel2.Size = New System.Drawing.Size(930, 410)
+        Me.TableLayoutPanel2.Size = New System.Drawing.Size(916, 392)
         Me.TableLayoutPanel2.TabIndex = 0
         '
         'Panel4
@@ -325,58 +363,29 @@ Partial Class ReportInvoice
         Me.Panel4.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel4.Location = New System.Drawing.Point(3, 3)
         Me.Panel4.Name = "Panel4"
-        Me.Panel4.Size = New System.Drawing.Size(705, 404)
+        Me.Panel4.Size = New System.Drawing.Size(694, 386)
         Me.Panel4.TabIndex = 0
+        '
+        'crvIvoice
+        '
+        Me.crvIvoice.ActiveViewIndex = -1
+        Me.crvIvoice.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.crvIvoice.Cursor = System.Windows.Forms.Cursors.Default
+        Me.crvIvoice.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.crvIvoice.Location = New System.Drawing.Point(0, 0)
+        Me.crvIvoice.Name = "crvIvoice"
+        Me.crvIvoice.Size = New System.Drawing.Size(694, 386)
+        Me.crvIvoice.TabIndex = 0
+        Me.crvIvoice.ToolPanelWidth = 150
         '
         'Panel5
         '
         Me.Panel5.Controls.Add(Me.TableLayoutPanel3)
         Me.Panel5.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel5.Location = New System.Drawing.Point(714, 3)
+        Me.Panel5.Location = New System.Drawing.Point(703, 3)
         Me.Panel5.Name = "Panel5"
-        Me.Panel5.Size = New System.Drawing.Size(213, 404)
+        Me.Panel5.Size = New System.Drawing.Size(210, 386)
         Me.Panel5.TabIndex = 1
-        '
-        'tblInvoiceCodes
-        '
-        Me.tblInvoiceCodes.AllowUserToAddRows = False
-        Me.tblInvoiceCodes.AllowUserToDeleteRows = False
-        Me.tblInvoiceCodes.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
-        Me.tblInvoiceCodes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.tblInvoiceCodes.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.PO, Me.Invoice})
-        Me.tblInvoiceCodes.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.tblInvoiceCodes.Location = New System.Drawing.Point(0, 0)
-        Me.tblInvoiceCodes.Name = "tblInvoiceCodes"
-        Me.tblInvoiceCodes.Size = New System.Drawing.Size(207, 320)
-        Me.tblInvoiceCodes.TabIndex = 0
-        '
-        'PO
-        '
-        Me.PO.HeaderText = "PO"
-        Me.PO.Name = "PO"
-        Me.PO.ReadOnly = True
-        '
-        'Invoice
-        '
-        Me.Invoice.HeaderText = "Invoice"
-        Me.Invoice.Name = "Invoice"
-        '
-        'btnSaveInvoiceNumbers
-        '
-        Me.btnSaveInvoiceNumbers.FlatAppearance.BorderSize = 0
-        Me.btnSaveInvoiceNumbers.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(58, Byte), Integer), CType(CType(115, Byte), Integer))
-        Me.btnSaveInvoiceNumbers.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnSaveInvoiceNumbers.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnSaveInvoiceNumbers.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.btnSaveInvoiceNumbers.Image = Global.AVT_TRAKING.My.Resources.Resources.save1
-        Me.btnSaveInvoiceNumbers.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnSaveInvoiceNumbers.Location = New System.Drawing.Point(80, 20)
-        Me.btnSaveInvoiceNumbers.Name = "btnSaveInvoiceNumbers"
-        Me.btnSaveInvoiceNumbers.Size = New System.Drawing.Size(115, 33)
-        Me.btnSaveInvoiceNumbers.TabIndex = 11
-        Me.btnSaveInvoiceNumbers.Text = "Save Invoice"
-        Me.btnSaveInvoiceNumbers.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.btnSaveInvoiceNumbers.UseVisualStyleBackColor = True
         '
         'TableLayoutPanel3
         '
@@ -390,7 +399,7 @@ Partial Class ReportInvoice
         Me.TableLayoutPanel3.RowCount = 2
         Me.TableLayoutPanel3.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 80.69307!))
         Me.TableLayoutPanel3.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 19.30693!))
-        Me.TableLayoutPanel3.Size = New System.Drawing.Size(213, 404)
+        Me.TableLayoutPanel3.Size = New System.Drawing.Size(210, 386)
         Me.TableLayoutPanel3.TabIndex = 0
         '
         'Panel6
@@ -399,17 +408,238 @@ Partial Class ReportInvoice
         Me.Panel6.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel6.Location = New System.Drawing.Point(3, 3)
         Me.Panel6.Name = "Panel6"
-        Me.Panel6.Size = New System.Drawing.Size(207, 320)
+        Me.Panel6.Size = New System.Drawing.Size(204, 305)
         Me.Panel6.TabIndex = 0
+        '
+        'tblInvoiceCodes
+        '
+        Me.tblInvoiceCodes.AllowUserToAddRows = False
+        Me.tblInvoiceCodes.AllowUserToDeleteRows = False
+        Me.tblInvoiceCodes.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
+        Me.tblInvoiceCodes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.tblInvoiceCodes.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.PO, Me.Invoice})
+        Me.tblInvoiceCodes.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.tblInvoiceCodes.Location = New System.Drawing.Point(0, 0)
+        Me.tblInvoiceCodes.Name = "tblInvoiceCodes"
+        Me.tblInvoiceCodes.Size = New System.Drawing.Size(204, 305)
+        Me.tblInvoiceCodes.TabIndex = 0
+        '
+        'PO
+        '
+        Me.PO.HeaderText = "PO"
+        Me.PO.Name = "PO"
+        Me.PO.ReadOnly = True
+        '
+        'Invoice
+        '
+        Me.Invoice.HeaderText = "Invoice"
+        Me.Invoice.Name = "Invoice"
         '
         'Panel7
         '
         Me.Panel7.Controls.Add(Me.btnSaveInvoiceNumbers)
         Me.Panel7.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel7.Location = New System.Drawing.Point(3, 329)
+        Me.Panel7.Location = New System.Drawing.Point(3, 314)
         Me.Panel7.Name = "Panel7"
-        Me.Panel7.Size = New System.Drawing.Size(207, 72)
+        Me.Panel7.Size = New System.Drawing.Size(204, 69)
         Me.Panel7.TabIndex = 1
+        '
+        'btnSaveInvoiceNumbers
+        '
+        Me.btnSaveInvoiceNumbers.FlatAppearance.BorderSize = 0
+        Me.btnSaveInvoiceNumbers.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(58, Byte), Integer), CType(CType(115, Byte), Integer))
+        Me.btnSaveInvoiceNumbers.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnSaveInvoiceNumbers.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnSaveInvoiceNumbers.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.btnSaveInvoiceNumbers.Image = Global.AVT_TRAKING.My.Resources.Resources.save1
+        Me.btnSaveInvoiceNumbers.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnSaveInvoiceNumbers.Location = New System.Drawing.Point(50, 15)
+        Me.btnSaveInvoiceNumbers.Name = "btnSaveInvoiceNumbers"
+        Me.btnSaveInvoiceNumbers.Size = New System.Drawing.Size(115, 33)
+        Me.btnSaveInvoiceNumbers.TabIndex = 11
+        Me.btnSaveInvoiceNumbers.Text = "Save Invoice"
+        Me.btnSaveInvoiceNumbers.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.btnSaveInvoiceNumbers.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
+        Me.btnSaveInvoiceNumbers.UseVisualStyleBackColor = True
+        '
+        'TabPage2
+        '
+        Me.TabPage2.BackColor = System.Drawing.Color.FromArgb(CType(CType(83, Byte), Integer), CType(CType(93, Byte), Integer), CType(CType(102, Byte), Integer))
+        Me.TabPage2.Controls.Add(Me.TableLayoutPanel4)
+        Me.TabPage2.Location = New System.Drawing.Point(4, 22)
+        Me.TabPage2.Name = "TabPage2"
+        Me.TabPage2.Padding = New System.Windows.Forms.Padding(3)
+        Me.TabPage2.Size = New System.Drawing.Size(922, 398)
+        Me.TabPage2.TabIndex = 1
+        Me.TabPage2.Text = "Invoices"
+        '
+        'TableLayoutPanel4
+        '
+        Me.TableLayoutPanel4.ColumnCount = 2
+        Me.TableLayoutPanel4.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
+        Me.TableLayoutPanel4.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 200.0!))
+        Me.TableLayoutPanel4.Controls.Add(Me.Panel8, 0, 0)
+        Me.TableLayoutPanel4.Controls.Add(Me.Panel9, 1, 0)
+        Me.TableLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.TableLayoutPanel4.Location = New System.Drawing.Point(3, 3)
+        Me.TableLayoutPanel4.Name = "TableLayoutPanel4"
+        Me.TableLayoutPanel4.RowCount = 1
+        Me.TableLayoutPanel4.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
+        Me.TableLayoutPanel4.Size = New System.Drawing.Size(916, 392)
+        Me.TableLayoutPanel4.TabIndex = 0
+        '
+        'Panel8
+        '
+        Me.Panel8.Controls.Add(Me.tblInvoices)
+        Me.Panel8.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Panel8.Location = New System.Drawing.Point(3, 3)
+        Me.Panel8.Name = "Panel8"
+        Me.Panel8.Size = New System.Drawing.Size(710, 386)
+        Me.Panel8.TabIndex = 0
+        '
+        'tblInvoices
+        '
+        Me.tblInvoices.AllowUserToAddRows = False
+        Me.tblInvoices.AllowUserToDeleteRows = False
+        Me.tblInvoices.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
+        Me.tblInvoices.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.tblInvoices.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.clmInvoiceAux, Me.clmPOAux, Me.clmInvoice, Me.clmPO, Me.clmClient, Me.clmStartDate, Me.clmFinalDate})
+        Me.tblInvoices.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.tblInvoices.Location = New System.Drawing.Point(0, 0)
+        Me.tblInvoices.Name = "tblInvoices"
+        Me.tblInvoices.Size = New System.Drawing.Size(710, 386)
+        Me.tblInvoices.TabIndex = 0
+        '
+        'clmInvoiceAux
+        '
+        Me.clmInvoiceAux.HeaderText = "clmInvoiceAux"
+        Me.clmInvoiceAux.Name = "clmInvoiceAux"
+        Me.clmInvoiceAux.Visible = False
+        '
+        'clmPOAux
+        '
+        Me.clmPOAux.HeaderText = "clmPOAux"
+        Me.clmPOAux.Name = "clmPOAux"
+        Me.clmPOAux.Visible = False
+        '
+        'clmInvoice
+        '
+        Me.clmInvoice.HeaderText = "Invoice"
+        Me.clmInvoice.Name = "clmInvoice"
+        '
+        'clmPO
+        '
+        Me.clmPO.HeaderText = "PO"
+        Me.clmPO.Name = "clmPO"
+        '
+        'clmClient
+        '
+        Me.clmClient.HeaderText = "Client"
+        Me.clmClient.Name = "clmClient"
+        '
+        'clmStartDate
+        '
+        Me.clmStartDate.HeaderText = "Start Date"
+        Me.clmStartDate.Name = "clmStartDate"
+        '
+        'clmFinalDate
+        '
+        Me.clmFinalDate.HeaderText = "Final Date"
+        Me.clmFinalDate.Name = "clmFinalDate"
+        '
+        'Panel9
+        '
+        Me.Panel9.Controls.Add(Me.chbAllPOFilter)
+        Me.Panel9.Controls.Add(Me.Label6)
+        Me.Panel9.Controls.Add(Me.Label7)
+        Me.Panel9.Controls.Add(Me.cmbPOFilter)
+        Me.Panel9.Controls.Add(Me.cmbClientFilter)
+        Me.Panel9.Controls.Add(Me.btnDeleteInvoce)
+        Me.Panel9.Controls.Add(Me.btnRefreshInvoice)
+        Me.Panel9.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Panel9.Location = New System.Drawing.Point(719, 3)
+        Me.Panel9.Name = "Panel9"
+        Me.Panel9.Size = New System.Drawing.Size(194, 386)
+        Me.Panel9.TabIndex = 1
+        '
+        'chbAllPOFilter
+        '
+        Me.chbAllPOFilter.AutoSize = True
+        Me.chbAllPOFilter.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.chbAllPOFilter.Location = New System.Drawing.Point(139, 64)
+        Me.chbAllPOFilter.Name = "chbAllPOFilter"
+        Me.chbAllPOFilter.Size = New System.Drawing.Size(55, 17)
+        Me.chbAllPOFilter.TabIndex = 13
+        Me.chbAllPOFilter.Text = "All PO"
+        Me.chbAllPOFilter.UseVisualStyleBackColor = True
+        '
+        'Label6
+        '
+        Me.Label6.AutoSize = True
+        Me.Label6.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.Label6.Location = New System.Drawing.Point(0, 39)
+        Me.Label6.Name = "Label6"
+        Me.Label6.Size = New System.Drawing.Size(75, 13)
+        Me.Label6.TabIndex = 12
+        Me.Label6.Text = "Project Oreder"
+        '
+        'Label7
+        '
+        Me.Label7.AutoSize = True
+        Me.Label7.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.Label7.Location = New System.Drawing.Point(0, 15)
+        Me.Label7.Name = "Label7"
+        Me.Label7.Size = New System.Drawing.Size(33, 13)
+        Me.Label7.TabIndex = 11
+        Me.Label7.Text = "Client"
+        '
+        'cmbPOFilter
+        '
+        Me.cmbPOFilter.FormattingEnabled = True
+        Me.cmbPOFilter.Location = New System.Drawing.Point(76, 37)
+        Me.cmbPOFilter.Name = "cmbPOFilter"
+        Me.cmbPOFilter.Size = New System.Drawing.Size(121, 21)
+        Me.cmbPOFilter.TabIndex = 10
+        '
+        'cmbClientFilter
+        '
+        Me.cmbClientFilter.FormattingEnabled = True
+        Me.cmbClientFilter.Location = New System.Drawing.Point(76, 12)
+        Me.cmbClientFilter.Name = "cmbClientFilter"
+        Me.cmbClientFilter.Size = New System.Drawing.Size(121, 21)
+        Me.cmbClientFilter.TabIndex = 9
+        '
+        'btnDeleteInvoce
+        '
+        Me.btnDeleteInvoce.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.btnDeleteInvoce.FlatAppearance.BorderSize = 0
+        Me.btnDeleteInvoce.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnDeleteInvoce.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.btnDeleteInvoce.Image = Global.AVT_TRAKING.My.Resources.Resources.delete
+        Me.btnDeleteInvoce.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnDeleteInvoce.Location = New System.Drawing.Point(47, 343)
+        Me.btnDeleteInvoce.Name = "btnDeleteInvoce"
+        Me.btnDeleteInvoce.Size = New System.Drawing.Size(76, 30)
+        Me.btnDeleteInvoce.TabIndex = 1
+        Me.btnDeleteInvoce.Text = "Delete"
+        Me.btnDeleteInvoce.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
+        Me.btnDeleteInvoce.UseVisualStyleBackColor = True
+        '
+        'btnRefreshInvoice
+        '
+        Me.btnRefreshInvoice.FlatAppearance.BorderSize = 0
+        Me.btnRefreshInvoice.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnRefreshInvoice.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.btnRefreshInvoice.Image = Global.AVT_TRAKING.My.Resources.Resources.refresh
+        Me.btnRefreshInvoice.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnRefreshInvoice.Location = New System.Drawing.Point(46, 307)
+        Me.btnRefreshInvoice.Name = "btnRefreshInvoice"
+        Me.btnRefreshInvoice.Size = New System.Drawing.Size(76, 30)
+        Me.btnRefreshInvoice.TabIndex = 0
+        Me.btnRefreshInvoice.Text = "Refresh"
+        Me.btnRefreshInvoice.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
+        Me.btnRefreshInvoice.UseVisualStyleBackColor = True
         '
         'ReportInvoice
         '
@@ -431,13 +661,21 @@ Partial Class ReportInvoice
         Me.Panel2.PerformLayout()
         CType(Me.PictureBox4, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel3.ResumeLayout(False)
+        Me.TabControl1.ResumeLayout(False)
+        Me.TabPage1.ResumeLayout(False)
         Me.TableLayoutPanel2.ResumeLayout(False)
         Me.Panel4.ResumeLayout(False)
         Me.Panel5.ResumeLayout(False)
-        CType(Me.tblInvoiceCodes, System.ComponentModel.ISupportInitialize).EndInit()
         Me.TableLayoutPanel3.ResumeLayout(False)
         Me.Panel6.ResumeLayout(False)
+        CType(Me.tblInvoiceCodes, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel7.ResumeLayout(False)
+        Me.TabPage2.ResumeLayout(False)
+        Me.TableLayoutPanel4.ResumeLayout(False)
+        Me.Panel8.ResumeLayout(False)
+        CType(Me.tblInvoices, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.Panel9.ResumeLayout(False)
+        Me.Panel9.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -473,4 +711,25 @@ Partial Class ReportInvoice
     Friend WithEvents Panel6 As Panel
     Friend WithEvents Panel7 As Panel
     Friend WithEvents btnSaveInvoiceNumbers As Button
+    Friend WithEvents TabControl1 As TabControl
+    Friend WithEvents TabPage1 As TabPage
+    Friend WithEvents TabPage2 As TabPage
+    Friend WithEvents TableLayoutPanel4 As TableLayoutPanel
+    Friend WithEvents Panel8 As Panel
+    Friend WithEvents tblInvoices As DataGridView
+    Friend WithEvents clmInvoiceAux As DataGridViewTextBoxColumn
+    Friend WithEvents clmPOAux As DataGridViewTextBoxColumn
+    Friend WithEvents clmInvoice As DataGridViewTextBoxColumn
+    Friend WithEvents clmPO As DataGridViewTextBoxColumn
+    Friend WithEvents clmClient As DataGridViewTextBoxColumn
+    Friend WithEvents clmStartDate As DataGridViewTextBoxColumn
+    Friend WithEvents clmFinalDate As DataGridViewTextBoxColumn
+    Friend WithEvents Panel9 As Panel
+    Friend WithEvents btnDeleteInvoce As Button
+    Friend WithEvents btnRefreshInvoice As Button
+    Friend WithEvents Label6 As Label
+    Friend WithEvents Label7 As Label
+    Friend WithEvents cmbPOFilter As ComboBox
+    Friend WithEvents cmbClientFilter As ComboBox
+    Friend WithEvents chbAllPOFilter As CheckBox
 End Class

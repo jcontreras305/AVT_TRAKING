@@ -19,7 +19,7 @@ Public Class Absentsemployee
         If sprHoras.Value > 0 Then
             If txtExplanation.Text <> "" Then
                 Dim datos As New List(Of String)
-                datos.Add(dtpDate.Value().ToString())
+                datos.Add(dtpDate.Value.ToString("MM/dd/yyyy"))
                 datos.Add(sprHoras.Value.ToString())
                 datos.Add(txtExplanation.Text)
                 datos.Add(idEmpleado)
@@ -30,10 +30,10 @@ Public Class Absentsemployee
                     txtExplanation.Text = ""
                 End If
             Else
-                MessageBox.Show("You need to add hours.", "Important", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                MessageBox.Show("You need to a explanation.", "Important", MessageBoxButtons.OK, MessageBoxIcon.Information)
             End If
         Else
-            MessageBox.Show("You need to add an explanation.", "Important", MessageBoxButtons.OK, MessageBoxIcon.Information)
+            MessageBox.Show("You need to add hours.", "Important", MessageBoxButtons.OK, MessageBoxIcon.Information)
         End If
     End Sub
 
