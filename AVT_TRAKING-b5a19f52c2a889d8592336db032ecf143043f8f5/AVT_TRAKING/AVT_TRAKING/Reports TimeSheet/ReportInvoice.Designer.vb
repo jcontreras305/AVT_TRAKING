@@ -59,13 +59,6 @@ Partial Class ReportInvoice
         Me.TableLayoutPanel4 = New System.Windows.Forms.TableLayoutPanel()
         Me.Panel8 = New System.Windows.Forms.Panel()
         Me.tblInvoices = New System.Windows.Forms.DataGridView()
-        Me.clmInvoiceAux = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.clmPOAux = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.clmInvoice = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.clmPO = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.clmClient = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.clmStartDate = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.clmFinalDate = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Panel9 = New System.Windows.Forms.Panel()
         Me.chbAllPOFilter = New System.Windows.Forms.CheckBox()
         Me.Label6 = New System.Windows.Forms.Label()
@@ -74,6 +67,16 @@ Partial Class ReportInvoice
         Me.cmbClientFilter = New System.Windows.Forms.ComboBox()
         Me.btnDeleteInvoce = New System.Windows.Forms.Button()
         Me.btnRefreshInvoice = New System.Windows.Forms.Button()
+        Me.clmInvoiceAux = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.clmPOAux = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.clmInvoice = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.clmPO = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.clmClient = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.clmStartDate = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.clmFinalDate = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.clmInvoiceDate = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.clmStatus = New System.Windows.Forms.DataGridViewCheckBoxColumn()
+        Me.clmStatusAux = New System.Windows.Forms.DataGridViewCheckBoxColumn()
         Me.TableLayoutPanel1.SuspendLayout()
         Me.Panel1.SuspendLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -503,49 +506,13 @@ Partial Class ReportInvoice
         Me.tblInvoices.AllowUserToDeleteRows = False
         Me.tblInvoices.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.tblInvoices.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.tblInvoices.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.clmInvoiceAux, Me.clmPOAux, Me.clmInvoice, Me.clmPO, Me.clmClient, Me.clmStartDate, Me.clmFinalDate})
+        Me.tblInvoices.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.clmInvoiceAux, Me.clmPOAux, Me.clmInvoice, Me.clmPO, Me.clmClient, Me.clmStartDate, Me.clmFinalDate, Me.clmInvoiceDate, Me.clmStatus, Me.clmStatusAux})
         Me.tblInvoices.Dock = System.Windows.Forms.DockStyle.Fill
         Me.tblInvoices.Location = New System.Drawing.Point(0, 0)
         Me.tblInvoices.Name = "tblInvoices"
+        Me.tblInvoices.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
         Me.tblInvoices.Size = New System.Drawing.Size(710, 386)
         Me.tblInvoices.TabIndex = 0
-        '
-        'clmInvoiceAux
-        '
-        Me.clmInvoiceAux.HeaderText = "clmInvoiceAux"
-        Me.clmInvoiceAux.Name = "clmInvoiceAux"
-        Me.clmInvoiceAux.Visible = False
-        '
-        'clmPOAux
-        '
-        Me.clmPOAux.HeaderText = "clmPOAux"
-        Me.clmPOAux.Name = "clmPOAux"
-        Me.clmPOAux.Visible = False
-        '
-        'clmInvoice
-        '
-        Me.clmInvoice.HeaderText = "Invoice"
-        Me.clmInvoice.Name = "clmInvoice"
-        '
-        'clmPO
-        '
-        Me.clmPO.HeaderText = "PO"
-        Me.clmPO.Name = "clmPO"
-        '
-        'clmClient
-        '
-        Me.clmClient.HeaderText = "Client"
-        Me.clmClient.Name = "clmClient"
-        '
-        'clmStartDate
-        '
-        Me.clmStartDate.HeaderText = "Start Date"
-        Me.clmStartDate.Name = "clmStartDate"
-        '
-        'clmFinalDate
-        '
-        Me.clmFinalDate.HeaderText = "Final Date"
-        Me.clmFinalDate.Name = "clmFinalDate"
         '
         'Panel9
         '
@@ -611,14 +578,13 @@ Partial Class ReportInvoice
         '
         'btnDeleteInvoce
         '
-        Me.btnDeleteInvoce.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.btnDeleteInvoce.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.btnDeleteInvoce.FlatAppearance.BorderSize = 0
         Me.btnDeleteInvoce.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnDeleteInvoce.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.btnDeleteInvoce.Image = Global.AVT_TRAKING.My.Resources.Resources.delete
         Me.btnDeleteInvoce.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnDeleteInvoce.Location = New System.Drawing.Point(47, 343)
+        Me.btnDeleteInvoce.Location = New System.Drawing.Point(101, 343)
         Me.btnDeleteInvoce.Name = "btnDeleteInvoce"
         Me.btnDeleteInvoce.Size = New System.Drawing.Size(76, 30)
         Me.btnDeleteInvoce.TabIndex = 1
@@ -628,18 +594,82 @@ Partial Class ReportInvoice
         '
         'btnRefreshInvoice
         '
+        Me.btnRefreshInvoice.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.btnRefreshInvoice.FlatAppearance.BorderSize = 0
         Me.btnRefreshInvoice.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnRefreshInvoice.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.btnRefreshInvoice.Image = Global.AVT_TRAKING.My.Resources.Resources.refresh
         Me.btnRefreshInvoice.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnRefreshInvoice.Location = New System.Drawing.Point(46, 307)
+        Me.btnRefreshInvoice.Location = New System.Drawing.Point(19, 343)
         Me.btnRefreshInvoice.Name = "btnRefreshInvoice"
         Me.btnRefreshInvoice.Size = New System.Drawing.Size(76, 30)
         Me.btnRefreshInvoice.TabIndex = 0
         Me.btnRefreshInvoice.Text = "Refresh"
         Me.btnRefreshInvoice.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
         Me.btnRefreshInvoice.UseVisualStyleBackColor = True
+        '
+        'clmInvoiceAux
+        '
+        Me.clmInvoiceAux.HeaderText = "clmInvoiceAux"
+        Me.clmInvoiceAux.Name = "clmInvoiceAux"
+        Me.clmInvoiceAux.ReadOnly = True
+        Me.clmInvoiceAux.Visible = False
+        '
+        'clmPOAux
+        '
+        Me.clmPOAux.HeaderText = "clmPOAux"
+        Me.clmPOAux.Name = "clmPOAux"
+        Me.clmPOAux.ReadOnly = True
+        Me.clmPOAux.Visible = False
+        '
+        'clmInvoice
+        '
+        Me.clmInvoice.HeaderText = "Invoice"
+        Me.clmInvoice.Name = "clmInvoice"
+        Me.clmInvoice.ReadOnly = True
+        '
+        'clmPO
+        '
+        Me.clmPO.HeaderText = "PO"
+        Me.clmPO.Name = "clmPO"
+        Me.clmPO.ReadOnly = True
+        '
+        'clmClient
+        '
+        Me.clmClient.HeaderText = "Client"
+        Me.clmClient.Name = "clmClient"
+        Me.clmClient.ReadOnly = True
+        '
+        'clmStartDate
+        '
+        Me.clmStartDate.HeaderText = "Start Date"
+        Me.clmStartDate.Name = "clmStartDate"
+        Me.clmStartDate.ReadOnly = True
+        '
+        'clmFinalDate
+        '
+        Me.clmFinalDate.HeaderText = "Final Date"
+        Me.clmFinalDate.Name = "clmFinalDate"
+        Me.clmFinalDate.ReadOnly = True
+        '
+        'clmInvoiceDate
+        '
+        Me.clmInvoiceDate.HeaderText = "Invoice Date"
+        Me.clmInvoiceDate.Name = "clmInvoiceDate"
+        Me.clmInvoiceDate.ReadOnly = True
+        '
+        'clmStatus
+        '
+        Me.clmStatus.HeaderText = "Status"
+        Me.clmStatus.Name = "clmStatus"
+        Me.clmStatus.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.clmStatus.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
+        '
+        'clmStatusAux
+        '
+        Me.clmStatusAux.HeaderText = "clmStatusAux"
+        Me.clmStatusAux.Name = "clmStatusAux"
+        Me.clmStatusAux.Visible = False
         '
         'ReportInvoice
         '
@@ -717,13 +747,6 @@ Partial Class ReportInvoice
     Friend WithEvents TableLayoutPanel4 As TableLayoutPanel
     Friend WithEvents Panel8 As Panel
     Friend WithEvents tblInvoices As DataGridView
-    Friend WithEvents clmInvoiceAux As DataGridViewTextBoxColumn
-    Friend WithEvents clmPOAux As DataGridViewTextBoxColumn
-    Friend WithEvents clmInvoice As DataGridViewTextBoxColumn
-    Friend WithEvents clmPO As DataGridViewTextBoxColumn
-    Friend WithEvents clmClient As DataGridViewTextBoxColumn
-    Friend WithEvents clmStartDate As DataGridViewTextBoxColumn
-    Friend WithEvents clmFinalDate As DataGridViewTextBoxColumn
     Friend WithEvents Panel9 As Panel
     Friend WithEvents btnDeleteInvoce As Button
     Friend WithEvents btnRefreshInvoice As Button
@@ -732,4 +755,14 @@ Partial Class ReportInvoice
     Friend WithEvents cmbPOFilter As ComboBox
     Friend WithEvents cmbClientFilter As ComboBox
     Friend WithEvents chbAllPOFilter As CheckBox
+    Friend WithEvents clmInvoiceAux As DataGridViewTextBoxColumn
+    Friend WithEvents clmPOAux As DataGridViewTextBoxColumn
+    Friend WithEvents clmInvoice As DataGridViewTextBoxColumn
+    Friend WithEvents clmPO As DataGridViewTextBoxColumn
+    Friend WithEvents clmClient As DataGridViewTextBoxColumn
+    Friend WithEvents clmStartDate As DataGridViewTextBoxColumn
+    Friend WithEvents clmFinalDate As DataGridViewTextBoxColumn
+    Friend WithEvents clmInvoiceDate As DataGridViewTextBoxColumn
+    Friend WithEvents clmStatus As DataGridViewCheckBoxColumn
+    Friend WithEvents clmStatusAux As DataGridViewCheckBoxColumn
 End Class

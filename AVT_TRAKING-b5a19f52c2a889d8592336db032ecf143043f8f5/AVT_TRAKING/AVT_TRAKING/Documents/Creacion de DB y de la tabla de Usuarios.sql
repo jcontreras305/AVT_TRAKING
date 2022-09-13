@@ -49,6 +49,7 @@ insert into userAccess values
 (@idAdminUser,'Material'),
 (@idAdminUser,'Material Code'),
 (@idAdminUser,'Others'),
+(@idAdminUser,'PBI'),
 (@idAdminUser,'Projects'),
 (@idAdminUser,'Reports'),
 (@idAdminUser,'Scaffold Traking'),
@@ -839,6 +840,8 @@ create table invoice(
 	idClient varchar(36)not null,
 	startDate date,
 	FinalDate date,
+	invoiceDate date NULL,
+	[status] bit NULL
 )
 go
 
@@ -5197,20 +5200,33 @@ go
 --go
 
 --update scaffoldTraking set longitude = 0 , latitude = 0
+----#########################################################################################################################################################################################
+----############## CAMBIOS EN EL REPORTE DE REPORT INVOICE ##################################################################################################################################
+----#########################################################################################################################################################################################
+--ALTER proc [dbo].[sp_invoice_number]
+--@numberClient int,
+--@startDate date,
+--@FinalDate date
+--as 
+--begin 
+--	select invoice , idPO from tempInvoice
+--	where startDate = @startDate 
+--		and FinalDate = @FinalDate 
+--		and idClient = (select idclient from clients where numberClient = @numberClient)
+--end
 ----| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
 ----| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
 ----V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V
 ----#########################################################################################################################################################################################
-----############## CAMBIOS EN EL REPORTE DE REPORT INVOICE ##################################################################################################################################
+----############## CAMBIOS EN LA TABLA DE INVOICE PARA CONSULTAS PBI ########################################################################################################################
 ----#########################################################################################################################################################################################
-ALTER proc [dbo].[sp_invoice_number]
-@numberClient int,
-@startDate date,
-@FinalDate date
-as 
-begin 
-	select invoice , idPO from tempInvoice
-	where startDate = @startDate 
-		and FinalDate = @FinalDate 
-		and idClient = (select idclient from clients where numberClient = @numberClient)
-end
+
+alter table invoice 
+add invoiceDate date 
+go
+
+alter table invoice
+add [status] bit
+go
+
+update invoice set invoiceDate = FinalDate,[status]=0

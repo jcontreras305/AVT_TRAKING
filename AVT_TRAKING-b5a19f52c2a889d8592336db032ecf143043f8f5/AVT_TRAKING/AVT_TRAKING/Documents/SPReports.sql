@@ -1199,7 +1199,7 @@ create proc sp_invoice_number
 @FinalDate date
 as 
 begin 
-	select invoice , idPO from tempInvoice 
+	select invoice , idPO from tempInvoice
 	where startDate = @startDate 
 		and FinalDate = @FinalDate 
 		and idClient = (select idclient from clients where numberClient = @numberClient)

@@ -129,7 +129,7 @@ Public Class ConfigReelsAndOther
         End If
         Dim arrayFormAccess() As String = {"Clients", "Employees", "Work Codes", "Material", "Others", "Reports", "Estimation", "Backup", "System"}
         Dim arraySubFormWorkCode() As String = {"Projects", "Time Enter Sheet", "Scaffold Traking", "Setup"}
-        Dim arraySubFormSetup() As String = {"Expenses", "Company", "Material Code", "Work Code"}
+        Dim arraySubFormSetup() As String = {"Expenses", "Company", "Material Code", "Work Code", "PBI"}
         Dim arraySubFormEstimation() As String = {"Setting", "Est. Projects", "Est. Reports"}
 
         For Each item As String In arrayFormAccess

@@ -2,10 +2,13 @@
 Imports System.Data.SqlClient
 Public Class ReportInvoice
     Dim mtdInvoice As New MetodosInvoice
+    Dim loadInfo As Boolean = True
     Private Sub ReportInvoice_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         llenarComboClientsReports(cmbClient)
         llenarComboClientsReports(cmbClientFilter)
+        loadInfo = True
         mtdInvoice.llenarTableAllInvoicePO(tblInvoices)
+        loadInfo = False
         If cmbClient.Text <> "" Then
             Dim array() As String = cmbClient.Text.ToString.Split(" ")
             llenarComoboPOByClient(cmbPO, array(0))
@@ -137,7 +140,9 @@ Public Class ReportInvoice
         Try
             If cmbClientFilter.Text <> "" Then
                 Dim array() As String = cmbClientFilter.SelectedItem.ToString.Split(" ")
+                loadInfo = True
                 mtdInvoice.llenarTableAllInvoicePO(tblInvoices, cmbPO.Text, array(0))
+                loadInfo = False
             End If
         Catch ex As Exception
             MsgBox(ex.Message())
@@ -188,7 +193,9 @@ Public Class ReportInvoice
     End Function
 
     Private Sub btnRefreshInvoice_Click(sender As Object, e As EventArgs) Handles btnRefreshInvoice.Click
+        loadInfo = True
         mtdInvoice.llenarTableAllInvoicePO(tblInvoices)
+        loadInfo = False
     End Sub
 
     Private Sub btnDeleteInvoce_Click(sender As Object, e As EventArgs) Handles btnDeleteInvoce.Click
@@ -199,7 +206,9 @@ Public Class ReportInvoice
                         cmbClientFilter.Text = ""
                         cmbPOFilter.Text = ""
                         cmbPOFilter.Enabled = False
+                        loadInfo = True
                         mtdInvoice.llenarTableAllInvoicePO(tblInvoices)
+                        loadInfo = False
                     End If
                 End If
             Else
@@ -209,6 +218,22 @@ Public Class ReportInvoice
             MsgBox(ex.Message())
         End Try
     End Sub
+
+    Private Sub tblInvoices_CellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles tblInvoices.CellEndEdit
+        If e.ColumnIndex = tblInvoices.Columns("clmStatus").Index Then
+            If tblInvoices.CurrentRow.Cells("clmStatus").Value <> tblInvoices.CurrentRow.Cells("clmStatusAux").Value Then
+                If DialogResult.Yes = MessageBox.Show("If you accept, delcare that the inovice has " + If(tblInvoices.CurrentRow.Cells("clmStatus").Value, "", "not") + " been paid.", "Message", MessageBoxButtons.YesNo, MessageBoxIcon.Question) Then
+                    If mtdInvoice.updateStatusInvoice(tblInvoices.CurrentRow, tblInvoices.CurrentRow.Cells("clmStatus").Value) Then
+                        tblInvoices.CurrentRow.Cells("clmStatusAux").Value = tblInvoices.CurrentRow.Cells("clmStatus").Value
+                    Else
+                        tblInvoices.CurrentRow.Cells("clmStatus").Value = tblInvoices.CurrentRow.Cells("clmStatusAux").Value
+                    End If
+                Else
+                    tblInvoices.CurrentRow.Cells("clmStatus").Value = tblInvoices.CurrentRow.Cells("clmStatusAuc").Value
+                End If
+            End If
+        End If
+    End Sub
 End Class
 
 Public Class MetodosInvoice
@@ -217,7 +242,7 @@ Public Class MetodosInvoice
         Try
             conectar()
             Dim cmd As New SqlCommand("
-select inv.invoice,inv.idPO,cl.companyName,CONVERT(nvarchar, inv.startDate,101)as 'startDate',CONVERT(nvarchar, inv.FinalDate,101) as 'finalDate' 
+select inv.invoice,inv.idPO,cl.companyName,CONVERT(nvarchar, inv.startDate,101)as 'startDate',CONVERT(nvarchar, inv.FinalDate,101) as 'finalDate' ,CONVERT(nvarchar, inv.invoiceDate,101) as 'invoiceDate',inv.[status]
 from invoice as inv
 inner join clients as cl on cl.idClient = inv.idClient 
 " + If(idPO <> "", "where inv.idPO = " + idPO, "") + " " + If(clientNumber <> "", If(idPO = "", " Where ", "") + " cl.numberClient =" + clientNumber, "") + "
@@ -225,7 +250,7 @@ order by inv.invoice", conn)
             Dim dr As SqlDataReader = cmd.ExecuteReader
             tbl.Rows.Clear()
             While dr.Read()
-                tbl.Rows.Add(dr("invoice"), dr("idPO"), dr("invoice"), dr("idPO"), dr("companyName"), dr("startDate"), dr("finalDate"))
+                tbl.Rows.Add(dr("invoice"), dr("idPO"), dr("invoice"), dr("idPO"), dr("companyName"), dr("startDate"), dr("finalDate"), dr("invoiceDate"), dr("status"), dr("status"))
             End While
             dr.Close()
             Return True
@@ -345,7 +370,7 @@ end", conn)
             For Each row As DataGridViewRow In tbl.Rows
                 Dim cmd As New SqlCommand("if (select COUNT(*) from invoice where invoice ='" + row.Cells("Invoice").Value.ToString + "' and idPO = " + row.Cells("PO").Value.ToString + ")=0
 begin 
-	insert into invoice values ('" + row.Cells("Invoice").Value.ToString + "'," + row.Cells("PO").Value.ToString + ",(select idClient from clients where numberClient = " + clientNum + "),'" + validaFechaParaSQl(startDate) + "','" + validaFechaParaSQl(endDate) + "')
+	insert into invoice values ('" + row.Cells("Invoice").Value.ToString + "'," + row.Cells("PO").Value.ToString + ",(select idClient from clients where numberClient = " + clientNum + "),'" + validaFechaParaSQl(startDate) + "','" + validaFechaParaSQl(endDate) + "','" + validaFechaParaSQl(Date.Today) + "',0)
 end
 else if(select COUNT(*) from invoice where invoice = '" + row.Cells("Invoice").Value.ToString + "' and idPO = " + row.Cells("PO").Value.ToString + ")=1
 begin
@@ -400,6 +425,24 @@ end", conn)
             End If
         Catch ex As Exception
             MsgBox(ex.Message)
+            Return False
+        Finally
+            desconectar()
+        End Try
+    End Function
+
+    Public Function updateStatusInvoice(ByVal row As DataGridViewRow, ByVal status As Boolean) As Boolean
+        Try
+            conectar()
+            Dim cmd As New SqlCommand("update invoice set [status]= " + If(status, "1", "0") + " where invoice = '" + row.Cells("clmInvoice").Value.ToString() + "' and idPO = " + row.Cells("clmPO").Value.ToString() + "", conn)
+            If cmd.ExecuteNonQuery > 0 Then
+                MsgBox("Successful.")
+                Return True
+            Else
+                Return False
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message())
             Return False
         Finally
             desconectar()

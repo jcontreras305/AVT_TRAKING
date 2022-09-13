@@ -339,6 +339,12 @@
     <Compile Include="FromsTraking\Perdiem.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="FromsTraking\Power BI Queries.Designer.vb">
+      <DependentUpon>Power BI Queries.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FromsTraking\Power BI Queries.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="FromsTraking\ProductSCFExcel.Designer.vb">
       <DependentUpon>ProductSCFExcel.vb</DependentUpon>
     </Compile>
@@ -1017,6 +1023,9 @@
     <EmbeddedResource Include="FromsTraking\Perdiem.resx">
       <DependentUpon>Perdiem.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FromsTraking\Power BI Queries.resx">
+      <DependentUpon>Power BI Queries.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FromsTraking\ProductSCFExcel.resx">
       <DependentUpon>ProductSCFExcel.vb</DependentUpon>
     </EmbeddedResource>
@@ -1330,6 +1339,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Documents\Consultas para PBI.xlsx" />
     <None Include="Documents\InvoicePieces.xlsx" />
     <None Include="Documents\Time Sheet Prueba.xlsx" />
     <None Include="Documents\tScaffolds.xlsx" />
@@ -1372,6 +1382,7 @@
     <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Documents\Consultas para POWERBI.sql" />
     <Content Include="Documents\Creacion de DB y de la tabla de Usuarios.sql" />
     <None Include="Images\users.png" />
     <None Include="Images\userlogin.png" />
