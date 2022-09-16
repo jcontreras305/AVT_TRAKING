@@ -5230,3 +5230,5 @@ add [status] bit
 go
 
 update invoice set invoiceDate = FinalDate,[status]=0
+
+select * from clients

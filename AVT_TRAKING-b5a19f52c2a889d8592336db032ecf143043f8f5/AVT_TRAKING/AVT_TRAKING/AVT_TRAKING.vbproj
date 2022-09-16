@@ -1339,11 +1339,11 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Documents\Consultas para PBI.xlsx" />
-    <None Include="Documents\InvoicePieces.xlsx" />
-    <None Include="Documents\Time Sheet Prueba.xlsx" />
-    <None Include="Documents\tScaffolds.xlsx" />
-    <None Include="Documents\Working.xlsm" />
+    <None Include="Documents\ExcelDoc\Consultas para PBI.xlsx" />
+    <None Include="Documents\ExcelDoc\InvoicePieces.xlsx" />
+    <None Include="Documents\ExcelDoc\Time Sheet Prueba.xlsx" />
+    <None Include="Documents\ExcelDoc\tScaffolds.xlsx" />
+    <None Include="Documents\ExcelDoc\Working.xlsm" />
     <None Include="My Project\Application.myapp">
       <Generator>MyApplicationCodeGenerator</Generator>
       <LastGenOutput>Application.Designer.vb</LastGenOutput>
@@ -1382,8 +1382,8 @@
     <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Documents\Consultas para POWERBI.sql" />
-    <Content Include="Documents\Creacion de DB y de la tabla de Usuarios.sql" />
+    <Content Include="Documents\SQLDoc\Consultas para POWERBI.sql" />
+    <Content Include="Documents\SQLDoc\Creacion de DB y de la tabla de Usuarios.sql" />
     <None Include="Images\users.png" />
     <None Include="Images\userlogin.png" />
     <None Include="Images\close.png" />
@@ -1406,7 +1406,7 @@
     <None Include="Images\billing.png" />
     <None Include="Images\catsemployee.png" />
     <None Include="Images\ComplteByRange.png" />
-    <Content Include="Documents\SPReports.sql" />
+    <Content Include="Documents\SQLDoc\SPReports.sql" />
     <None Include="Images\after1.png" />
     <Content Include="Images\byjobnumt.png" />
     <None Include="Images\excel.png" />

@@ -141,7 +141,7 @@ END
 ELSE
 BEGIN 
 	PRINT 'THE SCHAME PBI EXIST'
-END"
+END "
 	Private _startDate As String = ""
 	Private _finalDate As String = ""
 
@@ -172,11 +172,10 @@ END"
 		Try
 			conectar()
 			Dim flag As Boolean = True
-			Dim tran As SqlTransaction
-			tran = conn.BeginTransaction
 			Dim cmd As New SqlCommand(cmdSchemaPBI, conn)
-			cmd.Transaction = tran
 			If cmd.ExecuteNonQuery Then
+				Dim tran As SqlTransaction
+				tran = conn.BeginTransaction
 				For Each name As String In tblName
 					Dim cmd1 As New SqlCommand()
 					Select Case name
@@ -217,23 +216,24 @@ END"
 					End Select
 					cmd1.Connection = conn
 					cmd1.Transaction = tran
-					If cmd1.ExecuteNonQuery() Then
+					If cmd1.ExecuteNonQuery() >= 0 Then
 						flag = True
 					Else
 						flag = False
 						Exit For
 					End If
 				Next
+				If flag Then
+					tran.Commit()
+					Return True
+				Else
+					tran.Rollback()
+					Return False
+				End If
 			Else
 				Return False
 			End If
-			If flag Then
-				tran.Commit()
-				Return True
-			Else
-				tran.Rollback()
-				Return False
-			End If
+
 		Catch ex As Exception
 			MsgBox(ex.Message())
 			Return False
@@ -404,7 +404,7 @@ BEGIN
 	drop table PBI.[ALLBarriers]
 END
 
-select T1.[Year],T1.[ClientID],T1.[Month],T1.[MonthN],T1.[name] AS 'CLASS',T1.[ST Hours],T1.[OT Hours], T1.[ST Hours] + T1.[OT Hours] AS 'TotalHours' 
+select T1.[Year],T1.[ClientID],T1.[Month],T1.[MonthN],T1.[name] AS 'CLASS',T1.[ST Hours],T1.[OT Hours], T1.[ST Hours] + T1.[OT Hours] AS 'TotalHours', T1.[ST Cost],T1.[OT Cost]
 into PBI.ALLBarriers
 from (
 select 
@@ -412,7 +412,9 @@ distinct
 YEAR(hw.dateWorked) as 'Year',
 jb.jobNo as 'ClientID', MONTH(hw.dateWorked) as 'Month' , DATENAME(MONTH,hw.dateWorked) as 'MonthN',wc.name , 
 SUM(hw.hoursST) OVER (PARTITION BY YEAR(hw.dateWorked),wc.name,MONTH(hw.dateWorked),jb.jobNo) as 'ST Hours',
-SUM(hw.hoursOT+ hw.hours3) OVER (PARTITION BY YEAR(hw.dateWorked),wc.name,MONTH(hw.dateWorked),jb.jobNo) as 'OT Hours'
+SUM(hw.hoursOT+ hw.hours3) OVER (PARTITION BY YEAR(hw.dateWorked),wc.name,MONTH(hw.dateWorked),jb.jobNo) as 'OT Hours',
+SUM(hw.hoursST*wc.billingRate1) OVER (PARTITION BY YEAR(hw.dateWorked),wc.name,MONTH(hw.dateWorked),jb.jobNo) as 'ST Cost',
+SUM((hw.hoursOT*wc.billingRateOT) + (hw.hours3*wc.billingRate3)) OVER (PARTITION BY YEAR(hw.dateWorked),wc.name,MONTH(hw.dateWorked),jb.jobNo) as 'OT Cost'
 from hoursWorked as hw 
 inner join workCode as wc on wc.idWorkCode = hw.idWorkCode
 inner join task as tk on tk.idAux = hw.idAux
@@ -420,8 +422,7 @@ inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO
 inner join projectOrder as po on po.idPO = wo.idPO and po.jobNo = wo.jobNo
 inner join job as jb on jb.jobNo = po.jobNo 
 where wc.name like '%-%' and hw.dateWorked between @startDate and @EndDate and wc.name not like '%covid%') 
-AS T1 ORDER BY T1.ClientID,T1.[Month] 
-"
+AS T1 ORDER BY T1.ClientID,T1.[Month]"
 			Return _ALL_Barries
 		End Get
 		Set(value As String)
@@ -431,11 +432,15 @@ AS T1 ORDER BY T1.ClientID,T1.[Month]
 
 	Public Property All_CHP_1 As String
 		Get
-			All_CHP_1 = "IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES where TABLE_SCHEMA = 'PBI' and TABLE_NAME = 'ALLCPH1')
+			_All_CHP_1 = "IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES where TABLE_SCHEMA = 'PBI' and TABLE_NAME = 'ALLCPH1')
 BEGIN 
 	drop table PBI.[ALLCPH1]
 END
 
+select 
+T1.[Year],T1.[Month],T1.[MonthN],T1.[ST Hours],T1.[OT Hours],T1.[TotalHours],T1.[Cost],T1.[Cost]/IIF(T1.[TotalHours]=0,1,T1.[TotalHours]) as 'CostPH',T1.ClientID
+INTO PBI.ALLCPH1
+from(
 select 
 DISTINCT
 YEAR(hw.dateWorked) as 'Year',MONTH(hw.dateWorked) as 'Month',DATENAME(MONTH,hw.dateWorked) as 'MonthN',
@@ -443,16 +448,16 @@ SUM(hw.hoursST) OVER (PARTITION BY YEAR(hw.dateWorked),MONTH(hw.dateWorked),jb.j
 SUM(hw.hoursOT+hw.hours3) OVER (PARTITION BY YEAR(hw.dateWorked),MONTH(hw.dateWorked),jb.jobNo) as 'OT Hours',
 SUM(hw.hoursST + hw.hoursOT + hours3) OVER (PARTITION BY YEAR(hw.dateWorked),MONTH(hw.dateWorked),jb.jobNo) as 'TotalHours',
 ROUND(SUM(((hw.hoursST*wc.billingRate1) + (hw.hoursOT*wc.billingRateOT) + (hours3*wc.billingRate3))) OVER (PARTITION BY YEAR(hw.dateWorked),MONTH(hw.dateWorked),jb.jobNo),2) as 'Cost',
-SUM(((hw.hoursST*wc.billingRate1) + (hw.hoursOT*wc.billingRateOT) + (hours3*wc.billingRate3))/IIF((hw.hoursST + hw.hoursOT + hours3)=0,1,(hw.hoursST + hw.hoursOT + hours3))) OVER (PARTITION BY YEAR(hw.dateWorked),MONTH(hw.dateWorked),jb.jobNo) as 'CostPH',
 jb.jobNo as 'ClientID'
-INTO PBI.ALLCPH1
+
 from hoursWorked as hw 
 left join workCode as wc on wc.idWorkCode = hw.idWorkCode
 inner join task as tk on tk.idAux = hw.idAux 
 inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO 
 inner join projectOrder as po on po.idPO = wo.idPO and po.jobNo = wo.jobNo 
 inner join job as jb on jb.jobNo = po.jobNo
-where hw.dateWorked between @StartDate and @EndDate and wc.name not like '%6.4%' and wc.name not like '%covid%'"
+where hw.dateWorked between @StartDate and @EndDate and wc.name not like '%6.4%' and wc.name not like '%covid%'
+) as T1"
 			Return _All_CHP_1
 		End Get
 		Set(value As String)
@@ -499,22 +504,26 @@ BEGIN
 END
 --todos las horas de time sheet sin supervisor y sin holidays 
 select 
+T1.[Year],T1.[Month],T1.[MonthN],T1.[ST Hours],T1.[OT Hours],T1.[TotalHours],T1.[Cost],T1.[Cost]/T1.[TotalHours] as 'CostPH',T1.[ClientID]
+INTO PBI.ALLCPH3
+from(
+select 
 DISTINCT
 YEAR(hw.dateWorked) as 'Year',MONTH(hw.dateWorked) as 'Month',DATENAME(MONTH,hw.dateWorked) as 'MonthN',
 SUM(hw.hoursST) OVER (PARTITION BY YEAR(hw.dateWorked),MONTH(hw.dateWorked),jb.jobNo) as 'ST Hours',
 SUM(hw.hoursOT+hw.hours3) OVER (PARTITION BY YEAR(hw.dateWorked),MONTH(hw.dateWorked),jb.jobNo) as 'OT Hours',
 SUM(hw.hoursST + hw.hoursOT + hours3) OVER (PARTITION BY YEAR(hw.dateWorked),MONTH(hw.dateWorked),jb.jobNo) as 'TotalHours',
 ROUND(SUM(((hw.hoursST*wc.billingRate1) + (hw.hoursOT*wc.billingRateOT) + (hours3*wc.billingRate3))) OVER (PARTITION BY YEAR(hw.dateWorked),MONTH(hw.dateWorked),jb.jobNo),2) as 'Cost',
-SUM(((hw.hoursST*wc.billingRate1) + (hw.hoursOT*wc.billingRateOT) + (hours3*wc.billingRate3))/IIF((hw.hoursST + hw.hoursOT + hours3)=0,1,(hw.hoursST + hw.hoursOT + hours3))) OVER (PARTITION BY YEAR(hw.dateWorked),MONTH(hw.dateWorked),jb.jobNo) as 'CostPH',
 jb.jobNo as 'ClientID'
-INTO PBI.ALLCPH3
+
 from hoursWorked as hw 
 left join workCode as wc on wc.idWorkCode = hw.idWorkCode
 inner join task as tk on tk.idAux = hw.idAux 
 inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO 
 inner join projectOrder as po on po.idPO = wo.idPO and po.jobNo = wo.jobNo 
 inner join job as jb on jb.jobNo = po.jobNo
-where hw.dateWorked between @StartDate and @EndDate and wc.name not like 'LM%' and wc.name not like '%6.4%' and wc.name not like '%covid%'"
+where hw.dateWorked between @StartDate and @EndDate and wc.name not like 'LM%' and wc.name not like '%6.4%' and wc.name not like '%covid%'
+) as T1"
 			Return _All_CHP_3
 		End Get
 		Set(value As String)
@@ -533,17 +542,17 @@ select DISTINCT
 T1.[Year],
 T1.[ClientID],
 T1.[Month],T1.[MonthN],
-SUM((T1.[ST Hours] + T1.[OT Hours])) OVER (PARTITION BY T1.[Month],T1.[ClientID]) AS 'TotalHours',
-SUM(T1.[ST Hours]) OVER (PARTITION BY T1.[Month],T1.[ClientID]) as 'ST Hours',
-SUM(T1.[OT Hours]) OVER (PARTITION BY T1.[Month],T1.[ClientID]) as 'OT Hours' 
+SUM((T1.[ST]+ T1.[OT])) OVER (PARTITION BY T1.[Month],T1.[ClientID]) AS 'TotalHours',
+SUM(T1.[ST]) OVER (PARTITION BY T1.[Month],T1.[ClientID]) as 'ST',
+SUM(T1.[OT]) OVER (PARTITION BY T1.[Month],T1.[ClientID]) as 'OT' 
 into PBI.ALLHours1
 from(
 select 
 distinct
 YEAR(hw.dateWorked) as 'Year',jb.jobNo as 'ClientID', MONTH(hw.dateWorked) as 'Month' , DATENAME(MONTH,hw.dateWorked) as 'MonthN', 
 SUM(hw.hoursST+hw.hoursOT+ hw.hours3) OVER (PARTITION BY YEAR(hw.dateWorked),MONTH(hw.dateWorked),jb.jobNo) as 'Total Hours',
-SUM(hw.hoursST) OVER (PARTITION BY YEAR(hw.dateWorked),MONTH(hw.dateWorked),jb.jobNo) as 'ST Hours',
-SUM(hw.hoursOT+ hw.hours3) OVER (PARTITION BY YEAR(hw.dateWorked),MONTH(hw.dateWorked),jb.jobNo) as 'OT Hours'
+SUM(hw.hoursST) OVER (PARTITION BY YEAR(hw.dateWorked),MONTH(hw.dateWorked),jb.jobNo) as 'ST',
+SUM(hw.hoursOT+ hw.hours3) OVER (PARTITION BY YEAR(hw.dateWorked),MONTH(hw.dateWorked),jb.jobNo) as 'OT'
 from hoursWorked as hw 
 inner join workCode as wc on wc.idWorkCode = hw.idWorkCode
 inner join task as tk on tk.idAux = hw.idAux
@@ -570,17 +579,17 @@ select DISTINCT
 T1.[Year],
 T1.[ClientID],
 T1.[Month],T1.[MonthN],
-SUM((T1.[ST Hours] + T1.[OT Hours])) OVER (PARTITION BY T1.[Month],T1.[ClientID]) AS 'TotalHours',
-SUM(T1.[ST Hours]) OVER (PARTITION BY T1.[Month],T1.[ClientID]) as 'ST Hours',
-SUM(T1.[OT Hours]) OVER (PARTITION BY T1.[Month],T1.[ClientID]) as 'OT Hours' 
+SUM((T1.[ST] + T1.[OT])) OVER (PARTITION BY T1.[Month],T1.[ClientID]) AS 'TotalHours',
+SUM(T1.[ST]) OVER (PARTITION BY T1.[Month],T1.[ClientID]) as 'ST',
+SUM(T1.[OT]) OVER (PARTITION BY T1.[Month],T1.[ClientID]) as 'OT' 
 into PBI.ALLHours2
 from(
 select 
 distinct
 YEAR(hw.dateWorked) as 'Year',jb.jobNo as 'ClientID', MONTH(hw.dateWorked) as 'Month' , DATENAME(MONTH,hw.dateWorked) as 'MonthN', 
 SUM(hw.hoursST+hw.hoursOT+ hw.hours3) OVER (PARTITION BY YEAR(hw.dateWorked),MONTH(hw.dateWorked),jb.jobNo) as 'Total Hours',
-SUM(hw.hoursST) OVER (PARTITION BY YEAR(hw.dateWorked),MONTH(hw.dateWorked),jb.jobNo) as 'ST Hours',
-SUM(hw.hoursOT+ hw.hours3) OVER (PARTITION BY YEAR(hw.dateWorked),MONTH(hw.dateWorked),jb.jobNo) as 'OT Hours'
+SUM(hw.hoursST) OVER (PARTITION BY YEAR(hw.dateWorked),MONTH(hw.dateWorked),jb.jobNo) as 'ST',
+SUM(hw.hoursOT+ hw.hours3) OVER (PARTITION BY YEAR(hw.dateWorked),MONTH(hw.dateWorked),jb.jobNo) as 'OT'
 from hoursWorked as hw 
 inner join workCode as wc on wc.idWorkCode = hw.idWorkCode
 inner join task as tk on tk.idAux = hw.idAux
@@ -756,7 +765,9 @@ IIF(DATEDIFF(DAY,sc.buildDate,ISNULL((select dismantleDate from dismantle as ds 
 ISNULL((select count(*) from productTotalScaffold as pt inner join product as pd on pd.idProduct = pt.idProduct where pt.tag= sc.tag and pd.name = '%YO-YO%'),0) as 'SRL''s', 
 ROUND(ISNULL((select SUM(pt.quantity*pd.dailyRentalRate) from productTotalScaffold as pt 
 inner join product as pd on pd.idProduct = pt.idProduct
-where pt.tag = sc.tag ) ,0),2) as 'M-Rent'
+where pt.tag = sc.tag ) ,0),2) as 'M-Rent',
+sc.latitude as 'Lat', 
+sc.longitude as 'Long'
 INTO PBI.Scaffold
 from scaffoldTraking as sc
 left join subJobs as sj on sj.idSubJob = sc.idSubJob
@@ -785,7 +796,7 @@ INTO PBI.[ScaBTools]
 from (
 select  
 DISTINCT
-YEAR(sc.buildDate) as 'Year',MONTH(sc.buildDate) as 'MONTHB',
+YEAR(sc.buildDate) as 'Year',DATENAME(MONTH,sc.buildDate) as 'MONTHB',
 SUM(ach.[build]) OVER (PARTITION BY YEAR(sc.buildDate),MONTH(sc.buildDate)) as 'STWRKHRS',
 SUM(ach.[material]) OVER (PARTITION BY YEAR(sc.buildDate),MONTH(sc.buildDate)) as 'STMTRLHRS',
 SUM(ach.[travel]) OVER (PARTITION BY YEAR(sc.buildDate),MONTH(sc.buildDate)) as 'STTRVL',
@@ -794,10 +805,10 @@ SUM(ach.[alarm]) OVER (PARTITION BY YEAR(sc.buildDate),MONTH(sc.buildDate)) as '
 SUM(ach.[safety]) OVER (PARTITION BY YEAR(sc.buildDate),MONTH(sc.buildDate)) as 'STSFTYHRS',
 SUM(ach.[stdBy]) OVER (PARTITION BY YEAR(sc.buildDate),MONTH(sc.buildDate)) as 'STSTDBYHRS',
 SUM(ach.[other]) OVER (PARTITION BY YEAR(sc.buildDate),MONTH(sc.buildDate)) as 'OTHERHRS',
-'Build' AS 'Task',
 SUM(ach.[build]+ach.[material]+ach.[travel]+ach.[weather]+ach.[alarm]+ach.[safety]+ach.[stdBy]+ach.[other]) OVER (PARTITION BY YEAR(sc.buildDate),MONTH(sc.buildDate)) as 'STHRS',
+'Build' AS 'Task',
 SUM(ISNULL((select SUM(quantity) from productScaffold as ps where ps.tag = sc.tag),0)) OVER (PARTITION BY YEAR(sc.buildDate),MONTH(sc.buildDate)) as 'MTMBQY',
-DATENAME(MONTH,sc.buildDate) as 'Month'
+MONTH(sc.buildDate) as 'MONTH'
 from activityHours as ach 
 inner join scaffoldTraking as sc on sc.tag = ach.tag
 where sc.buildDate between @StartDate and @EndDate and ach.idModAux is NULL and idDismantle is NULL
@@ -821,7 +832,8 @@ INTO PBI.[ScaDTools]
 from (
 select  
 DISTINCT
-YEAR(ds.dismantleDate) as 'Year',MONTH(ds.dismantleDate) as 'MONTHB',
+YEAR(ds.dismantleDate) as 'Year',
+DATENAME(MONTH,ds.dismantleDate) as 'MONTHD',
 SUM(ach.[build]) OVER (PARTITION BY YEAR(ds.dismantleDate),MONTH(ds.dismantleDate)) as 'DHWRKHRS',
 SUM(ach.[material]) OVER (PARTITION BY YEAR(ds.dismantleDate),MONTH(ds.dismantleDate)) as 'DHMTRLHRS',
 SUM(ach.[travel]) OVER (PARTITION BY YEAR(ds.dismantleDate),MONTH(ds.dismantleDate)) as 'DHTRVL',
@@ -830,10 +842,10 @@ SUM(ach.[alarm]) OVER (PARTITION BY YEAR(ds.dismantleDate),MONTH(ds.dismantleDat
 SUM(ach.[safety]) OVER (PARTITION BY YEAR(ds.dismantleDate),MONTH(ds.dismantleDate)) as 'DHSFTYHRS',
 SUM(ach.[stdBy]) OVER (PARTITION BY YEAR(ds.dismantleDate),MONTH(ds.dismantleDate)) as 'DHSTDBYHRS',
 SUM(ach.[other]) OVER (PARTITION BY YEAR(ds.dismantleDate),MONTH(ds.dismantleDate)) as 'OTHERHRS',
-'Dism' as 'Task',
 SUM(ach.[build]+ach.[material]+ach.[travel]+ach.[weather]+ach.[alarm]+ach.[safety]+ach.[stdBy]+ach.[other]) OVER (PARTITION BY YEAR(ds.dismantleDate),MONTH(ds.dismantleDate)) as 'DHRS',
+'Dism' as 'Task',
 SUM(ISNULL((select SUM(quantity) from productDismantle as pd where pd.tag = ds.tag and pd.idDismantle = ds.idDismantle),0)) OVER (PARTITION BY YEAR(ds.dismantleDate),MONTH(ds.dismantleDate)) as 'MTMBQY',
-DATENAME(MONTH,ds.dismantleDate) as 'Month'
+MONTH(ds.dismantleDate) as 'MONTH'
 from activityHours as ach 
 inner join dismantle as ds on ds.tag = ach.tag and ds.idDismantle = ach.idDismantle
 where ds.dismantleDate between @StartDate and @EndDate and ach.idModAux is NULL and ach.idDismantle is not NULL
@@ -852,13 +864,12 @@ BEGIN
 	drop table PBI.[ScaMTools]
 END
 
-
 select * , T1.[MTQTY]/T1.[MHWRKHRS] as 'Tools M Pieces'
 INTO PBI.[ScaMTools]
 from (
 select  
 DISTINCT
-YEAR(md.modificationDate) as 'Year',MONTH(md.modificationDate) as 'MONTHB',
+YEAR(md.modificationDate) as 'Year',MONTH(md.modificationDate) as 'MONTHM',
 SUM(ach.[build]) OVER (PARTITION BY YEAR(md.modificationDate),MONTH(md.modificationDate)) as 'MHWRKHRS',
 SUM(ach.[material]) OVER (PARTITION BY YEAR(md.modificationDate),MONTH(md.modificationDate)) as 'MHMTRLHRS',
 SUM(ach.[travel]) OVER (PARTITION BY YEAR(md.modificationDate),MONTH(md.modificationDate)) as 'MHTRVL',
@@ -867,10 +878,10 @@ SUM(ach.[alarm]) OVER (PARTITION BY YEAR(md.modificationDate),MONTH(md.modificat
 SUM(ach.[safety]) OVER (PARTITION BY YEAR(md.modificationDate),MONTH(md.modificationDate)) as 'MHSFTYHRS',
 SUM(ach.[stdBy]) OVER (PARTITION BY YEAR(md.modificationDate),MONTH(md.modificationDate)) as 'MHSTDBYHRS',
 SUM(ach.[other]) OVER (PARTITION BY YEAR(md.modificationDate),MONTH(md.modificationDate)) as 'OTHERHRS',
-'Mod' as 'Task',
 SUM(ach.[build]+ach.[material]+ach.[travel]+ach.[weather]+ach.[alarm]+ach.[safety]+ach.[stdBy]+ach.[other]) OVER (PARTITION BY YEAR(md.modificationDate),MONTH(md.modificationDate)) as 'MHRS',
+'Mod' as 'Task',
 SUM(ISNULL((select SUM(quantity) from productDismantle as pd where pd.tag = md.tag and pd.idDismantle = md.idModAux),0)) OVER (PARTITION BY YEAR(md.modificationDate),MONTH(md.modificationDate)) as 'MTQTY',
-DATENAME(MONTH,md.modificationDate) as 'Month'
+DATENAME(MONTH,md.modificationDate) as 'MONTH'
 from activityHours as ach 
 inner join modification as md on md.tag = ach.tag and md.idModAux = ach.idModAux
 where md.modificationDate between @StartDate and @EndDate and ach.idModAux is not NULL 
