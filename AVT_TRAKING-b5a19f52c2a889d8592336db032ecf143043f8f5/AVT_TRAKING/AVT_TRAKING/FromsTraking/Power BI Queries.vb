@@ -776,7 +776,7 @@ inner join task as tk on tk.idAux = sc.idAux
 inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO
 inner join projectOrder as po on po.idPO = wo.idPO and po.jobNo = wo.jobNo
 inner join job as jb on jb.jobNo = po.jobNo 
-where sc.buildDate between @StartDate and @EndDate"
+where sc.buildDate between @StartDate and @EndDate and sc.[status]='f' "
 			Return _Scaffold
 		End Get
 		Set(value As String)
