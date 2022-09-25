@@ -123,6 +123,29 @@ Public Class MetodosFactor
             desconectar()
         End Try
     End Function
+    Public Function DataTableLaporRate() As Data.DataTable
+        Try
+            conectar()
+            Dim cmd As New SqlCommand("select idLaborRate,insRate,abatRate,paintRate, scafRate from laborRate", conn)
+            Dim dt As New Data.DataTable
+            If cmd.ExecuteNonQuery Then
+                Dim da As New SqlDataAdapter(cmd)
+                da.Fill(dt)
+            Else
+                dt.Columns.Add("idLaborRate")
+                dt.Columns.Add("insRate")
+                dt.Columns.Add("abatRate")
+                dt.Columns.Add("paintRate")
+                dt.Columns.Add("scafRate")
+            End If
+            Return dt
+        Catch ex As Exception
+            MsgBox(ex.Message())
+            Return Nothing
+        Finally
+            desconectar()
+        End Try
+    End Function
     Public Function llenarComboLaporRate(ByVal cmb As ComboBox) As Data.DataTable
         Try
             conectar()
@@ -812,6 +835,29 @@ end"
             desconectar()
         End Try
     End Function
+    Public Function datatableEqPntUnitRate() As Data.DataTable
+        Try
+            conectar()
+            Dim cmd As New SqlCommand("select systemPntEq,pntOption,laborProd,matRate,eqRate from eqPaintUnitRate", conn)
+            Dim dt As New Data.DataTable
+            If cmd.ExecuteNonQuery Then
+                Dim da As New SqlDataAdapter(cmd)
+                da.Fill(dt)
+            Else
+                dt.Columns.Add("systemPntEq")
+                dt.Columns.Add("pntOption")
+                dt.Columns.Add("laborProd")
+                dt.Columns.Add("matRate")
+                dt.Columns.Add("eqRate")
+            End If
+            Return dt
+        Catch ex As Exception
+            MsgBox(ex.Message())
+            Return Nothing
+        Finally
+            desconectar()
+        End Try
+    End Function
     Public Function llenarComboEqPntUnitRate(ByVal cmb As ComboBox) As Data.DataTable
         Try
             conectar()
@@ -957,6 +1003,30 @@ end"
                 dt.Rows.Add(dr("systemPntPP"), dr("pntOption"), dr("size"), dr("laborProd"), dr("matRate"), dr("eqRate"))
             End While
             dr.Close()
+            Return dt
+        Catch ex As Exception
+            MsgBox(ex.Message())
+            Return Nothing
+        Finally
+            desconectar()
+        End Try
+    End Function
+    Public Function dataTablePpPntUnitRate() As Data.DataTable
+        Try
+            conectar()
+            Dim cmd As New SqlCommand("select systemPntPP, pntOption, size, laborProd, matRate, eqRate from ppPaintUnitRate", conn)
+            Dim dt As New Data.DataTable
+            If cmd.ExecuteNonQuery Then
+                Dim da As New SqlDataAdapter(cmd)
+                da.Fill(dt)
+            Else
+                dt.Columns.Add("systemPntPP")
+                dt.Columns.Add("pntOption")
+                dt.Columns.Add("size")
+                dt.Columns.Add("laborProd")
+                dt.Columns.Add("matRate")
+                dt.Columns.Add("eqRate")
+            End If
             Return dt
         Catch ex As Exception
             MsgBox(ex.Message())
@@ -1114,6 +1184,29 @@ end"
             desconectar()
         End Try
     End Function
+    Public Function dataTableEqJacketUnitRate() As Data.DataTable
+        Try
+            conectar()
+            Dim cmd As New SqlCommand("select idJacket,name,laborProd,matFactor,eqFactor from eqJktUnitRate", conn)
+            Dim dt As New Data.DataTable
+            If cmd.ExecuteNonQuery Then
+                Dim da As New SqlDataAdapter(cmd)
+                da.Fill(dt)
+            Else
+                dt.Columns.Add("idJacket")
+                dt.Columns.Add("name")
+                dt.Columns.Add("laborProd")
+                dt.Columns.Add("matFactor")
+                dt.Columns.Add("eqFactor")
+            End If
+            Return dt
+        Catch ex As Exception
+            MsgBox(ex.Message())
+            Return Nothing
+        Finally
+            desconectar()
+        End Try
+    End Function
     Public Function llenarComboEqJacketUnitRate(ByVal cmb As ComboBox) As Data.DataTable
         Try
             conectar()
@@ -1258,6 +1351,30 @@ end"
                 dt.Rows.Add(dr("idJacket"), dr("name"), dr("laborProd"), dr("matFactor"), dr("eqFactor"))
             End While
             dr.Close()
+            Return dt
+        Catch ex As Exception
+            MsgBox(ex.Message())
+            Return Nothing
+        Finally
+            desconectar()
+        End Try
+    End Function
+    Public Function dataTableJacketUnitRateByPiping() As Data.DataTable
+        Try
+            conectar()
+            Dim cmd As New SqlCommand("select CONCAT(idJacket,'|',name) as 'JacketName',idJacket,name,laborProd,matFactor,eqFactor from ppJktUnitRate", conn)
+            Dim dt As New Data.DataTable
+            If cmd.ExecuteNonQuery Then
+                Dim da As New SqlDataAdapter(cmd)
+                da.Fill(dt)
+            Else
+                dt.Columns.Add("JacketName")
+                dt.Columns.Add("idJacket")
+                dt.Columns.Add("name")
+                dt.Columns.Add("laborProd")
+                dt.Columns.Add("matFactor")
+                dt.Columns.Add("eqFactor")
+            End If
             Return dt
         Catch ex As Exception
             MsgBox(ex.Message())
@@ -1563,6 +1680,30 @@ end"
                 dt.Rows.Add(dr("size"), dr("type"), dr("thick"), dr("laborProd"), dr("matRate"), dr("eqRate"))
             End While
             dr.Close()
+            Return dt
+        Catch ex As Exception
+            MsgBox(ex.Message())
+            Return Nothing
+        Finally
+            desconectar()
+        End Try
+    End Function
+    Public Function dataTablePpInsUnitRate() As Data.DataTable
+        Try
+            conectar()
+            Dim cmd As New SqlCommand("select size,[type],thick,laborProd,matRate,eqRate from ppInsUnitRate", conn)
+            Dim dt As New Data.DataTable
+            If cmd.ExecuteNonQuery Then
+                Dim da As New SqlDataAdapter(cmd)
+                da.Fill(dt)
+            Else
+                dt.Columns.Add("size")
+                dt.Columns.Add("type")
+                dt.Columns.Add("thick")
+                dt.Columns.Add("laborProd")
+                dt.Columns.Add("matRate")
+                dt.Columns.Add("eqRate")
+            End If
             Return dt
         Catch ex As Exception
             MsgBox(ex.Message())
@@ -1966,6 +2107,29 @@ end"
                 dt.Rows.Add(dr("type"), dr("thickness"), dr("laborProd"), dr("matRate"), dr("eqRate"))
             End While
             dr.Close()
+            Return dt
+        Catch ex As Exception
+            MsgBox(ex.Message())
+            Return Nothing
+        Finally
+            desconectar()
+        End Try
+    End Function
+    Public Function dataTableEqIRHC() As Data.DataTable
+        Try
+            conectar()
+            Dim cmd As New SqlCommand("select [type],thickness,laborProd,matRate,eqRate from EqIRHC", conn)
+            Dim dt As New Data.DataTable
+            If cmd.ExecuteNonQuery Then
+                Dim da As New SqlDataAdapter(cmd)
+                da.Fill(dt)
+            Else
+                dt.Columns.Add("type")
+                dt.Columns.Add("thickness")
+                dt.Columns.Add("laborProd")
+                dt.Columns.Add("matRate")
+                dt.Columns.Add("eqRate")
+            End If
             Return dt
         Catch ex As Exception
             MsgBox(ex.Message())

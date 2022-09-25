@@ -497,7 +497,7 @@ Public Class Materials
         Try
             Dim ApExcel = New Microsoft.Office.Interop.Excel.Application
             Dim libro = ApExcel.Workbooks.Add
-            Dim colums() As String = {"id", "name", "resorseMaterial", "unitMeasurement", "description", "type", "price", "size", "idVendor", "Part #"}
+            Dim colums() As String = {"id", "name", "resorseMaterial", "unitMeasurement", "description", "type", "price", "size", "idVendor", "Part #", "Class"}
             For i As Int64 = 0 To colums.Length - 1
                 libro.Sheets(1).cells(1, i + 1) = colums(i)
             Next
@@ -555,6 +555,7 @@ Public Class Materials
                 listNewDatos.Add(Hoja.Cells(i, 8).Text)
                 listNewDatos.Add(Hoja.Cells(i, 9).Text)
                 listNewDatos.Add(Hoja.Cells(i, 10).Text)
+                listNewDatos.Add(Hoja.Cells(i, 11).Text)
                 If CInt(dato(0)) > maxnum Then
                     mtdMaterial.insertarMaterial(dato, listNewDatos, False, validar)
                     If validar = False Then

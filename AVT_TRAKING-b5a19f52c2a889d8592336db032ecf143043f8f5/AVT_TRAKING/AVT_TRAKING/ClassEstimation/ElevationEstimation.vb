@@ -185,6 +185,25 @@ Public Class ElevationEstimation
             desconectar()
         End Try
     End Function
+    Public Function dataTableElvSCF() As DataTable
+        Try
+            conectar()
+            Dim cmd As New SqlCommand("select elevation,[percent] from factorElevationSCF", conn)
+            Dim dt As New DataTable
+            If cmd.ExecuteNonQuery Then
+                Dim da As New SqlDataAdapter(cmd)
+                da.Fill(dt)
+            Else
+                dt.Columns.Add("elevation")
+                dt.Columns.Add("percent")
+            End If
+            Return dt
+        Catch ex As Exception
+            Return Nothing
+        Finally
+            desconectar()
+        End Try
+    End Function
     Public Function llenarComboElvSCF(ByVal cmb As ComboBox) As Data.DataTable
         Try
             conectar()

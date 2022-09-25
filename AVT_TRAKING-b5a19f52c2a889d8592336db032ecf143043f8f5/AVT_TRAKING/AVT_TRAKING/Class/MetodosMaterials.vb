@@ -131,6 +131,7 @@ Public Class MetodosMaterials
         cmd.Parameters.Add("@description", SqlDbType.VarChar, 100).Value = listdatosMaterial(2)
         cmd.Parameters.Add("@size", SqlDbType.Float).Value = If(listdatosMaterial(5) = "", 0.0, listdatosMaterial(5))
         cmd.Parameters.Add("@partNum", SqlDbType.VarChar, 15).Value = If(listdatosMaterial(6) = "", "", listdatosMaterial(6))
+        cmd.Parameters.Add("@code", SqlDbType.VarChar, 20).Value = If(listdatosMaterial(11) = "", "NULL", listdatosMaterial(11))
         If cmd.ExecuteNonQuery Then
             If message = True Then
                 MsgBox("Successful")

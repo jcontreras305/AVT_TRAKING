@@ -77,9 +77,9 @@
                 End If
             End If
             Dim rowsQuery() As Data.DataRow = tblAllSCFTags.Select("projectId='" + idProject + "' and numberClient=" + idClient + "")
-            If rowsQuery.Length > 0 Then
-                cargarDatosDrawing(idClient, idProject, rowsQuery(0).ItemArray(1))
-            Else
+            If rowsQuery.Length = 0 Then
+                '    cargarDatosDrawing(idClient, idProject, rowsQuery(0).ItemArray(1))
+                'Else
                 idDrawing = ""
                 tblSCFDrawing.Rows.Clear()
                 txtDrawingNum.Text = ""
@@ -123,9 +123,9 @@
                 End If
             End If
             Dim rowsQuery() As Data.DataRow = tblAllSCFTags.Select("projectId='" + idProject + "' and numberClient=" + idClient + "")
-            If rowsQuery.Length > 0 Then
-                cargarDatosDrawing(idClient, idProject, rowsQuery(0).ItemArray(1))
-            Else
+            If rowsQuery.Length = 0 Then
+                'cargarDatosDrawing(idClient, idProject, rowsQuery(0).ItemArray(1))
+                'Else
                 idDrawing = ""
                 tblSCFDrawing.Rows.Clear()
                 txtDrawingNum.Text = ""

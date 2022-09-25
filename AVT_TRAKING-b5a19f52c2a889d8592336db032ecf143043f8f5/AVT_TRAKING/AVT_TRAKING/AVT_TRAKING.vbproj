@@ -9,6 +9,9 @@
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>main.ico</ApplicationIcon>
+  </PropertyGroup>
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -17,7 +20,7 @@
     <OutputType>WinExe</OutputType>
     <StartupObject>AVT_TRAKING.My.MyApplication</StartupObject>
     <RootNamespace>AVT_TRAKING</RootNamespace>
-    <AssemblyName>AVT_TRAKING</AssemblyName>
+    <AssemblyName>AVR_TRAKING</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <MyType>WindowsForms</MyType>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
@@ -31,7 +34,7 @@
     <DefineDebug>true</DefineDebug>
     <DefineTrace>true</DefineTrace>
     <OutputPath>bin\Debug\</OutputPath>
-    <DocumentationFile>AVT_TRAKING.xml</DocumentationFile>
+    <DocumentationFile>AVR_TRAKING.xml</DocumentationFile>
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
@@ -41,7 +44,7 @@
     <DefineTrace>true</DefineTrace>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
-    <DocumentationFile>AVT_TRAKING.xml</DocumentationFile>
+    <DocumentationFile>AVR_TRAKING.xml</DocumentationFile>
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
   </PropertyGroup>
   <PropertyGroup>
@@ -461,11 +464,23 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="OwnItems\EqRow.Designer.vb">
+      <DependentUpon>EqRow.vb</DependentUpon>
+    </Compile>
+    <Compile Include="OwnItems\EqRow.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="OwnItems\MyComboBox.vb">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="OwnItems\MyTabControl.vb">
       <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="OwnItems\PpRow.Designer.vb">
+      <DependentUpon>PpRow.vb</DependentUpon>
+    </Compile>
+    <Compile Include="OwnItems\PpRow.vb">
+      <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Reports TimeSheet\ActiveAv.vb">
       <AutoGen>True</AutoGen>
@@ -1080,6 +1095,12 @@
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="OwnItems\EqRow.resx">
+      <DependentUpon>EqRow.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OwnItems\PpRow.resx">
+      <DependentUpon>PpRow.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reports TimeSheet\ActiveAv.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>ActiveAv.vb</LastGenOutput>
@@ -1384,6 +1405,7 @@
   <ItemGroup>
     <Content Include="Documents\SQLDoc\Consultas para POWERBI.sql" />
     <Content Include="Documents\SQLDoc\Creacion de DB y de la tabla de Usuarios.sql" />
+    <Content Include="main.ico" />
     <None Include="Images\users.png" />
     <None Include="Images\userlogin.png" />
     <None Include="Images\close.png" />
