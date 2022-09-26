@@ -849,6 +849,12 @@
     <Compile Include="RerportsScaffold\ScaffoldProduct.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="RerportsScaffold\ScaffoldProductIncoming.Designer.vb">
+      <DependentUpon>ScaffoldProductIncoming.vb</DependentUpon>
+    </Compile>
+    <Compile Include="RerportsScaffold\ScaffoldProductIncoming.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="RerportsScaffold\ScaffoldRentalDatails.Designer.vb">
       <DependentUpon>ScaffoldRentalDatails.vb</DependentUpon>
     </Compile>
@@ -913,6 +919,18 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>SCFProduct.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="RerportsScaffold\ScfProductComing.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ScfProductComing.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="RerportsScaffold\ScfProductOutgoing.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ScfProductOutgoing.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="RerportsScaffold\SCFRentalDetails.vb">
@@ -1313,6 +1331,9 @@
     <EmbeddedResource Include="RerportsScaffold\ScaffoldProduct.resx">
       <DependentUpon>ScaffoldProduct.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="RerportsScaffold\ScaffoldProductIncoming.resx">
+      <DependentUpon>ScaffoldProductIncoming.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="RerportsScaffold\ScaffoldRentalDatails.resx">
       <DependentUpon>ScaffoldRentalDatails.vb</DependentUpon>
     </EmbeddedResource>
@@ -1353,6 +1374,14 @@
     <EmbeddedResource Include="RerportsScaffold\SCFProduct.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>SCFProduct.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RerportsScaffold\ScfProductComing.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ScfProductComing.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RerportsScaffold\ScfProductOutgoing.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ScfProductOutgoing.vb</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="RerportsScaffold\SCFRentalDetails.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>

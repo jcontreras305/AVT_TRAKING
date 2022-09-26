@@ -187,4 +187,15 @@ Public Class ReportsMenu
         Dim matd As New MaterialDetails
         matd.ShowDialog()
     End Sub
+
+    Private Sub Button26_Click(sender As Object, e As EventArgs) Handles Button26.Click
+        Dim rptInc As New ScaffoldProductIncoming
+        rptInc.Incoming = True
+        rptInc.ShowDialog()
+    End Sub
+    Private Sub Button27_Click(sender As Object, e As EventArgs) Handles Button27.Click
+        Dim rptInc As New ScaffoldProductIncoming
+        rptInc.Incoming = False
+        rptInc.ShowDialog()
+    End Sub
 End Class

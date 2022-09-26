@@ -2086,7 +2086,25 @@ end", conn)
         End Try
     End Function
 
-    '========================================================= In Comming ===========================================================
+    Public Function llenarComboIncommingTicket(ByVal cmb As ComboBox, Optional ByVal jobNo As String = "") As Boolean
+        Try
+            conectar()
+            Dim cmd As New SqlCommand("select ticketNum from incoming" + If(jobNo = "", "", " where jobNo = '" + jobNo + "'"), conn)
+            Dim dr As SqlDataReader = cmd.ExecuteReader()
+            cmb.Items.Clear()
+            While dr.Read()
+                cmb.Items.Add(dr("ticketNum").ToString())
+            End While
+            dr.Close()
+            Return True
+        Catch ex As Exception
+            Return False
+        Finally
+            desconectar()
+        End Try
+    End Function
+
+    '========================================================= Out Going ===========================================================
 
     Public Function llenarProductosOutGoing(ByVal tblProductosOutGoing As DataGridView, ByVal ticketOutGoing As String) As Boolean
         Try
@@ -2315,7 +2333,23 @@ end", conn)
             desconectar()
         End Try
     End Function
-
+    Public Function llenarComboOutGoingTicket(ByVal cmb As ComboBox, Optional ByVal jobNo As String = "") As Boolean
+        Try
+            conectar()
+            Dim cmd As New SqlCommand("select ticketNum from outgoing" + If(jobNo = "", "", " where jobNo = '" + jobNo + "'"), conn)
+            Dim dr As SqlDataReader = cmd.ExecuteReader()
+            cmb.Items.Clear()
+            While dr.Read()
+                cmb.Items.Add(dr("ticketNum").ToString())
+            End While
+            dr.Close()
+            Return True
+        Catch ex As Exception
+            Return False
+        Finally
+            desconectar()
+        End Try
+    End Function
     '========================================= SCAFFOLD TRAKING ==============================================================
 
     Public Function llenarComboContact(ByVal cmb As ComboBox) As Boolean

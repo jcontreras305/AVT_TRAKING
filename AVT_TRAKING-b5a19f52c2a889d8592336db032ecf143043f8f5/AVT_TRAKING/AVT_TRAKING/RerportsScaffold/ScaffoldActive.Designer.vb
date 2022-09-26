@@ -26,7 +26,11 @@ Partial Class ScaffoldActive
         Me.Panel3 = New System.Windows.Forms.Panel()
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.TabPage1 = New System.Windows.Forms.TabPage()
+        Me.TableLayoutPanel3 = New System.Windows.Forms.TableLayoutPanel()
         Me.crvReport = New CrystalDecisions.Windows.Forms.CrystalReportViewer()
+        Me.Panel5 = New System.Windows.Forms.Panel()
+        Me.btnExcelAllScafActive = New System.Windows.Forms.Button()
+        Me.lblMessageAllActive = New System.Windows.Forms.Label()
         Me.TabPage2 = New System.Windows.Forms.TabPage()
         Me.TableLayoutPanel2 = New System.Windows.Forms.TableLayoutPanel()
         Me.Panel4 = New System.Windows.Forms.Panel()
@@ -53,14 +57,12 @@ Partial Class ScaffoldActive
         Me.btnMinimize = New System.Windows.Forms.PictureBox()
         Me.btnRestore = New System.Windows.Forms.PictureBox()
         Me.btnMaximize = New System.Windows.Forms.PictureBox()
-        Me.TableLayoutPanel3 = New System.Windows.Forms.TableLayoutPanel()
-        Me.Panel5 = New System.Windows.Forms.Panel()
-        Me.lblMessageAllActive = New System.Windows.Forms.Label()
-        Me.btnExcelAllScafActive = New System.Windows.Forms.Button()
         Me.TableLayoutPanel1.SuspendLayout()
         Me.Panel3.SuspendLayout()
         Me.TabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
+        Me.TableLayoutPanel3.SuspendLayout()
+        Me.Panel5.SuspendLayout()
         Me.TabPage2.SuspendLayout()
         Me.TableLayoutPanel2.SuspendLayout()
         Me.Panel4.SuspendLayout()
@@ -73,8 +75,6 @@ Partial Class ScaffoldActive
         CType(Me.btnMinimize, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.btnRestore, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.btnMaximize, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.TableLayoutPanel3.SuspendLayout()
-        Me.Panel5.SuspendLayout()
         Me.SuspendLayout()
         '
         'TableLayoutPanel1
@@ -126,6 +126,21 @@ Partial Class ScaffoldActive
         Me.TabPage1.TabIndex = 0
         Me.TabPage1.Text = "All Scaf Active"
         '
+        'TableLayoutPanel3
+        '
+        Me.TableLayoutPanel3.ColumnCount = 1
+        Me.TableLayoutPanel3.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
+        Me.TableLayoutPanel3.Controls.Add(Me.crvReport, 0, 0)
+        Me.TableLayoutPanel3.Controls.Add(Me.Panel5, 0, 1)
+        Me.TableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.TableLayoutPanel3.Location = New System.Drawing.Point(3, 3)
+        Me.TableLayoutPanel3.Name = "TableLayoutPanel3"
+        Me.TableLayoutPanel3.RowCount = 2
+        Me.TableLayoutPanel3.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
+        Me.TableLayoutPanel3.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 58.0!))
+        Me.TableLayoutPanel3.Size = New System.Drawing.Size(984, 402)
+        Me.TableLayoutPanel3.TabIndex = 0
+        '
         'crvReport
         '
         Me.crvReport.ActiveViewIndex = -1
@@ -136,6 +151,44 @@ Partial Class ScaffoldActive
         Me.crvReport.Name = "crvReport"
         Me.crvReport.Size = New System.Drawing.Size(978, 338)
         Me.crvReport.TabIndex = 0
+        '
+        'Panel5
+        '
+        Me.Panel5.Controls.Add(Me.btnExcelAllScafActive)
+        Me.Panel5.Controls.Add(Me.lblMessageAllActive)
+        Me.Panel5.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Panel5.Location = New System.Drawing.Point(3, 347)
+        Me.Panel5.Name = "Panel5"
+        Me.Panel5.Size = New System.Drawing.Size(978, 52)
+        Me.Panel5.TabIndex = 1
+        '
+        'btnExcelAllScafActive
+        '
+        Me.btnExcelAllScafActive.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnExcelAllScafActive.FlatAppearance.BorderSize = 0
+        Me.btnExcelAllScafActive.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(58, Byte), Integer), CType(CType(115, Byte), Integer))
+        Me.btnExcelAllScafActive.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnExcelAllScafActive.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnExcelAllScafActive.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.btnExcelAllScafActive.Image = Global.AVT_TRAKING.My.Resources.Resources.excel
+        Me.btnExcelAllScafActive.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnExcelAllScafActive.Location = New System.Drawing.Point(844, 7)
+        Me.btnExcelAllScafActive.Name = "btnExcelAllScafActive"
+        Me.btnExcelAllScafActive.Size = New System.Drawing.Size(131, 40)
+        Me.btnExcelAllScafActive.TabIndex = 17
+        Me.btnExcelAllScafActive.Text = "All Scaf Active"
+        Me.btnExcelAllScafActive.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.btnExcelAllScafActive.UseVisualStyleBackColor = True
+        '
+        'lblMessageAllActive
+        '
+        Me.lblMessageAllActive.AutoSize = True
+        Me.lblMessageAllActive.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.lblMessageAllActive.Location = New System.Drawing.Point(10, 21)
+        Me.lblMessageAllActive.Name = "lblMessageAllActive"
+        Me.lblMessageAllActive.Size = New System.Drawing.Size(53, 13)
+        Me.lblMessageAllActive.TabIndex = 0
+        Me.lblMessageAllActive.Text = "Message:"
         '
         'TabPage2
         '
@@ -397,59 +450,6 @@ Partial Class ScaffoldActive
         Me.btnMaximize.TabIndex = 7
         Me.btnMaximize.TabStop = False
         '
-        'TableLayoutPanel3
-        '
-        Me.TableLayoutPanel3.ColumnCount = 1
-        Me.TableLayoutPanel3.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-        Me.TableLayoutPanel3.Controls.Add(Me.crvReport, 0, 0)
-        Me.TableLayoutPanel3.Controls.Add(Me.Panel5, 0, 1)
-        Me.TableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.TableLayoutPanel3.Location = New System.Drawing.Point(3, 3)
-        Me.TableLayoutPanel3.Name = "TableLayoutPanel3"
-        Me.TableLayoutPanel3.RowCount = 2
-        Me.TableLayoutPanel3.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-        Me.TableLayoutPanel3.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 58.0!))
-        Me.TableLayoutPanel3.Size = New System.Drawing.Size(984, 402)
-        Me.TableLayoutPanel3.TabIndex = 0
-        '
-        'Panel5
-        '
-        Me.Panel5.Controls.Add(Me.btnExcelAllScafActive)
-        Me.Panel5.Controls.Add(Me.lblMessageAllActive)
-        Me.Panel5.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel5.Location = New System.Drawing.Point(3, 347)
-        Me.Panel5.Name = "Panel5"
-        Me.Panel5.Size = New System.Drawing.Size(978, 52)
-        Me.Panel5.TabIndex = 1
-        '
-        'lblMessageAllActive
-        '
-        Me.lblMessageAllActive.AutoSize = True
-        Me.lblMessageAllActive.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.lblMessageAllActive.Location = New System.Drawing.Point(10, 21)
-        Me.lblMessageAllActive.Name = "lblMessageAllActive"
-        Me.lblMessageAllActive.Size = New System.Drawing.Size(53, 13)
-        Me.lblMessageAllActive.TabIndex = 0
-        Me.lblMessageAllActive.Text = "Message:"
-        '
-        'btnExcelAllScafActive
-        '
-        Me.btnExcelAllScafActive.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnExcelAllScafActive.FlatAppearance.BorderSize = 0
-        Me.btnExcelAllScafActive.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(58, Byte), Integer), CType(CType(115, Byte), Integer))
-        Me.btnExcelAllScafActive.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnExcelAllScafActive.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnExcelAllScafActive.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.btnExcelAllScafActive.Image = Global.AVT_TRAKING.My.Resources.Resources.excel
-        Me.btnExcelAllScafActive.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnExcelAllScafActive.Location = New System.Drawing.Point(844, 7)
-        Me.btnExcelAllScafActive.Name = "btnExcelAllScafActive"
-        Me.btnExcelAllScafActive.Size = New System.Drawing.Size(131, 40)
-        Me.btnExcelAllScafActive.TabIndex = 17
-        Me.btnExcelAllScafActive.Text = "All Scaf Active"
-        Me.btnExcelAllScafActive.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.btnExcelAllScafActive.UseVisualStyleBackColor = True
-        '
         'ScaffoldActive
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -463,6 +463,9 @@ Partial Class ScaffoldActive
         Me.Panel3.ResumeLayout(False)
         Me.TabControl1.ResumeLayout(False)
         Me.TabPage1.ResumeLayout(False)
+        Me.TableLayoutPanel3.ResumeLayout(False)
+        Me.Panel5.ResumeLayout(False)
+        Me.Panel5.PerformLayout()
         Me.TabPage2.ResumeLayout(False)
         Me.TableLayoutPanel2.ResumeLayout(False)
         Me.Panel4.ResumeLayout(False)
@@ -478,9 +481,6 @@ Partial Class ScaffoldActive
         CType(Me.btnMinimize, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.btnRestore, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.btnMaximize, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.TableLayoutPanel3.ResumeLayout(False)
-        Me.Panel5.ResumeLayout(False)
-        Me.Panel5.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub

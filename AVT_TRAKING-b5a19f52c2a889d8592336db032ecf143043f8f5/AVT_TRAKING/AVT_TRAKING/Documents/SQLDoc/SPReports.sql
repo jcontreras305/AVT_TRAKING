@@ -4548,3 +4548,61 @@ begin
 	end
 end
 go
+--##############################################################################################
+--################## SP PRODUCT INCOMING #######################################################
+--##############################################################################################
+create proc sp_ProductIncoming
+@jobNo bigint,
+@ticket varchar(15),
+@all bit
+as
+begin 
+	select inc.jobNo as 'JobNo',inc.ticketNum,CONVERT(nvarchar, inc.dateRecived,101)as 'Date',inc.comment as 'Comment',
+	--product
+	pd.um as 'UNIT MSR',pic.quantity as 'QTY',pic.idProduct as 'PRODUCT ID',pd.QID as 'QUANTITY ID',pd.name as 'PRODUCT NAME',pd.class as 'CLASS',pd.[weight]*pic.quantity as 'WEIGTH',
+	--cliente
+	cl.companyName as 'Client',ha.number,ha.avenue,ha.providence,CONCAT(ha.city,', ',ha.providence,' ',ha.postalCode) as 'Address',CONCAT(cl.firstName,' ',cl.lastName) as 'Contact',ISNULL(ctc.phoneNumber1,'') as 'Phone',
+	--recived by
+	inc.recivedBy as 'RecivedBy',
+	ISNULL((select TOP 1 ctc1.phoneNumber1 from employees as emp 
+	inner join contact as ctc1 on ctc1.idContact= emp.idContact
+	where CONCAT(firstName,' ',middleName,' ',lastName) like inc.recivedBy),'') as 'EmployePhone'
+	from productComing as pic 
+	inner join product as pd on pd.idProduct = pic.idProduct
+	inner join incoming as inc on inc.ticketNum = pic.ticketNum
+	inner join job as jb on jb.jobNo = inc.jobNo
+	inner join clients as cl on cl.idClient = jb.idClient
+	left join contact as ctc on ctc.idContact = cl.idContact 
+	left join HomeAddress as ha on ha .idHomeAdress = cl.idHomeAddress
+	where inc.jobNo = @jobNo and inc.ticketNum like IIF(@all=1,'%%',@ticket)
+end
+go
+--##############################################################################################
+--################## SP PRODUCT OUTGOING #######################################################
+--##############################################################################################
+create proc sp_ProductOutgoing
+@jobNo bigint,
+@ticket varchar(15),
+@all bit
+as
+begin 
+	select otg.jobNo as 'JobNo',otg.ticketNum,CONVERT(nvarchar, otg.dateShipped,101)as 'Date',otg.comment as 'Comment',
+	--product
+	pd.um as 'UNIT MSR',pog.quantity as 'QTY',pog.idProduct as 'PRODUCT ID',pd.QID as 'QUANTITY ID',pd.name as 'PRODUCT NAME',pd.class as 'CLASS',pd.[weight]*pog.quantity as 'WEIGTH',
+	--cliente
+	cl.companyName as 'Client',ha.number,ha.avenue,ha.providence,CONCAT(ha.city,', ',ha.providence,' ',ha.postalCode) as 'Address',CONCAT(cl.firstName,' ',cl.lastName) as 'Contact',ISNULL(ctc.phoneNumber1,'') as 'Phone',
+	--recived by
+	otg.shippedby as 'ShippedBy', otg.superintendent as 'Intendent',
+	ISNULL((select TOP 1 ctc1.phoneNumber1 from employees as emp 
+	inner join contact as ctc1 on ctc1.idContact= emp.idContact
+	where CONCAT(firstName,' ',middleName,' ',lastName) like otg.shippedby),'') as 'EmployePhone'
+	from productOutGoing as pog 
+	inner join product as pd on pd.idProduct = pog.idProduct
+	inner join outgoing as otg on otg.ticketNum = pog.ticketNum
+	inner join job as jb on jb.jobNo = otg.jobNo
+	inner join clients as cl on cl.idClient = jb.idClient
+	left join contact as ctc on ctc.idContact = cl.idContact 
+	left join HomeAddress as ha on ha .idHomeAdress = cl.idHomeAddress
+	where otg.jobNo = @jobNo and otg.ticketNum like IIF(@all=1,'%%',@ticket)
+end
+go
