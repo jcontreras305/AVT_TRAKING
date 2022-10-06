@@ -6,7 +6,7 @@ Public Class Expences
     Dim idExpenceActualizar As String
 
     Private Sub Expences_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        mtdJobs.buscarExpences(tblExpences)
+        mtdJobs.buscarExpenses(tblExpenses)
         limpiarCampos()
         activarCampos(False)
         btnUbdate.Enabled = False
@@ -28,7 +28,7 @@ Public Class Expences
             mtdJobs.insertExpence(txtExpenceCode.Text, txtDescription.Text)
             limpiarCampos()
             activarCampos(False)
-            mtdJobs.buscarExpences(tblExpences)
+            mtdJobs.buscarExpenses(tblExpenses)
             btnSave.Text = "Add"
             btnUbdate.Enabled = False
             btnCancel.Enabled = False
@@ -79,24 +79,36 @@ Public Class Expences
         btnCancel.Enabled = False
         btnUbdate.Enabled = False
         limpiarCampos()
-        mtdJobs.buscarExpences(tblExpences)
+        mtdJobs.buscarExpenses(tblExpenses)
         activarCampos(False)
     End Sub
 
-    Private Sub tblExpences_CellMouseDoubleClick(sender As Object, e As DataGridViewCellMouseEventArgs) Handles tblExpences.CellMouseDoubleClick
-        If tblExpences.Rows.Count() > 0 Then
-            idExpenceActualizar = tblExpences.CurrentRow.Cells(0).Value.ToString
-            txtExpenceCode.Text = tblExpences.CurrentRow.Cells(1).Value.ToString
-            txtDescription.Text = tblExpences.CurrentRow.Cells(2).Value.ToString
-            btnUbdate.Enabled = True
-            btnCancel.Enabled = True
-            btnSave.Enabled = False
-            activarCampos(True)
-        End If
+    Private Sub tblExpences_CellMouseDoubleClick(sender As Object, e As DataGridViewCellMouseEventArgs) Handles tblExpenses.CellMouseDoubleClick
+        Try
+            If tblExpenses.SelectedRows.Count() > 0 Then
+                idExpenceActualizar = tblExpenses.CurrentRow.Cells(0).Value.ToString
+                txtExpenceCode.Text = tblExpenses.CurrentRow.Cells(1).Value.ToString
+                txtDescription.Text = tblExpenses.CurrentRow.Cells(2).Value.ToString
+                btnUbdate.Enabled = True
+                btnCancel.Enabled = True
+                btnSave.Enabled = False
+                activarCampos(True)
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message)
+        End Try
     End Sub
 
     Private Sub btnFind_Click(sender As Object, e As EventArgs) Handles btnFind.Click
+        Try
+            If txtFind.Text = "" Then
+                mtdJobs.buscarExpenses(tblExpenses)
+            Else
+                mtdJobs.buscarExpenses(tblExpenses, txtFind.Text)
+            End If
+        Catch ex As Exception
 
+        End Try
     End Sub
 
     Private Sub btnRestore_Click(sender As Object, e As EventArgs) Handles btnRestore.Click

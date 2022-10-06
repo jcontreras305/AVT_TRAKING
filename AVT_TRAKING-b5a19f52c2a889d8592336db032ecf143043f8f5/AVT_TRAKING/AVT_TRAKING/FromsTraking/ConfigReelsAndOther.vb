@@ -127,8 +127,8 @@ Public Class ConfigReelsAndOther
         If tvwAccess.Nodes IsNot Nothing Then
             tvwAccess.Nodes.Clear()
         End If
-        Dim arrayFormAccess() As String = {"Clients", "Employees", "Work Codes", "Material", "Others", "Reports", "Estimation", "Backup", "System"}
-        Dim arraySubFormWorkCode() As String = {"Projects", "Time Enter Sheet", "Scaffold Traking", "Setup"}
+        Dim arrayFormAccess() As String = {"Clients", "Employees", "Client Projects", "Material", "Others", "Reports", "Estimation", "Backup", "System"}
+        Dim arraySubFormWorkCode() As String = {"Projects", "Time Enter Sheet", "Scaffold Tracking", "Setup"}
         Dim arraySubFormSetup() As String = {"Expenses", "Company", "Material Code", "Work Code", "PBI"}
         Dim arraySubFormEstimation() As String = {"Setting", "Est. Projects", "Est. Reports"}
 
@@ -305,6 +305,10 @@ Public Class ConfigReelsAndOther
                 End If
             End If
         End If
+    End Sub
+
+    Private Sub TitleBar_Paint(sender As Object, e As PaintEventArgs) Handles TitleBar.Paint
+
     End Sub
 End Class
 Public Class MetodosUsers

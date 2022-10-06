@@ -77,10 +77,10 @@ Public Class MetodosJobs
     '############  METODOS PARA EXPENCES ####################################################################################
     '########################################################################################################################
 
-    Public Sub buscarExpences(ByVal tabla As DataGridView)
+    Public Sub buscarExpenses(ByVal tabla As DataGridView, Optional filter As String = "")
         Try
             conectar()
-            Dim cmd As New SqlCommand("select * from expenses", conn)
+            Dim cmd As New SqlCommand("select idExpenses ,expenseCode as 'Expense' , description as 'Description' from expenses" + If(filter = "", "", " where expenseCode like '%" + filter + "%' or [description] like '%" + filter + "%'"), conn)
             If cmd.ExecuteNonQuery Then
                 Dim dt As New DataTable
                 Dim da As New SqlDataAdapter(cmd)
@@ -90,36 +90,24 @@ Public Class MetodosJobs
             End If
         Catch ex As Exception
             MsgBox(ex.Message)
+        Finally
+            desconectar()
         End Try
-        desconectar()
-    End Sub
 
-    Public Sub buscarExpences(ByVal tabla As DataGridView, ByVal dato As String)
-        Try
-            conectar()
-            Dim cmd As New SqlCommand("select * from expenses where expenseCode like '%" + dato + "%' or description like '%" + dato + "%'", conn)
-            If cmd.ExecuteNonQuery Then
-                Dim dt As New DataTable
-                Dim da As New SqlDataAdapter(cmd)
-                da.Fill(dt)
-                tabla.DataSource = dt
-                tabla.Columns(0).Visible = False
-            End If
-        Catch ex As Exception
-            MsgBox(ex.Message)
-        End Try
-        desconectar()
     End Sub
 
     Public Sub insertExpence(ByVal code As String, ByVal description As String)
         Try
             conectar()
-            Dim cmd As New SqlCommand("insert into expenses values (NEWID(), '" + code + "','" + description + "')")
+            Dim cmd As New SqlCommand("if (select COUNT(*) from expenses where expenseCode = '" + code + "')=0
+begin 
+insert into expenses values (NEWID(), '" + code + "','" + description + "')
+end")
             cmd.Connection = conn
-            If cmd.ExecuteNonQuery Then
+            If cmd.ExecuteNonQuery > 0 Then
                 MsgBox("Succesfull")
             Else
-                MsgBox("Error")
+                MsgBox("Error:It is posible that the Expense Code was inserted")
             End If
         Catch ex As Exception
             MsgBox(ex.Message())

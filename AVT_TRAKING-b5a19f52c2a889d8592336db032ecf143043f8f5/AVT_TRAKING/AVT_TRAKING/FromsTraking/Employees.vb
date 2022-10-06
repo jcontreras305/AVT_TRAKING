@@ -449,7 +449,7 @@ Public Class Employees
                 dato(8) = Hoja1.Cells(i, 9).Text
                 If ExistIdEmployee(dato(0)) = False Then
                     Dim newID = System.Guid.NewGuid.ToString()
-                    tblEmployeesExcel.Rows.Add(newID, dato(0), dato(1), dato(2), dato(3), dato(4), dato(5), dato(6), If(dato(7) = "True" Or dato(7) = "Yes", True, False), dato(8))
+                    tblEmployeesExcel.Rows.Add(newID, dato(0), dato(1), dato(2), dato(3), dato(4), dato(5), dato(6), If(dato(7) = "TRUE" Or dato(7) = "YES", True, False), dato(8))
                 Else
                     txtMensajeProseso.Text = txtMensajeProseso.Text + vbCrLf + " The ID " + dato(0) + " is Inserted."
                 End If

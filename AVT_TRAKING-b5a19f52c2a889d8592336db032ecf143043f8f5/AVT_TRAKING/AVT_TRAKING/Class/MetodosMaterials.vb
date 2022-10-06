@@ -85,16 +85,23 @@ Public Class MetodosMaterials
         desconectar()
     End Sub
 
-    Public Function insertarMaterial(ByVal datos() As String) As Boolean
+    Public Function insertarMaterial(ByVal datos() As String, Optional tran As SqlTransaction = Nothing, Optional con As SqlConnection = Nothing) As Boolean
         Try
-            conectar()
-            Dim cmd As New SqlCommand("sp_insert_Material", conn)
+
+            Dim cmd As New SqlCommand("sp_insert_Material")
+            If tran IsNot Nothing And conn IsNot Nothing Then
+                cmd.Connection = con
+                cmd.Transaction = tran
+            Else
+                conectar()
+                cmd.Connection = conn
+            End If
             cmd.CommandType = CommandType.StoredProcedure
-            cmd.Parameters.Add("@nombre", SqlDbType.VarChar, 36).Value = datos(0)
-            cmd.Parameters.Add("@numero", SqlDbType.Int).Value = datos(1)
-            cmd.Parameters.Add("@idVendor", SqlDbType.VarChar, 50).Value = datos(2)
-            cmd.Parameters.Add("@status", SqlDbType.Char, 1).Value = datos(3)
-            cmd.Parameters.Add("@class", SqlDbType.VarChar, 20).Value = datos(4)
+            cmd.Parameters.Add("@nombre", SqlDbType.VarChar, 36).Value = datos(1)
+            cmd.Parameters.Add("@numero", SqlDbType.Int).Value = datos(0)
+            cmd.Parameters.Add("@idVendor", SqlDbType.VarChar, 50).Value = datos(3)
+            cmd.Parameters.Add("@status", SqlDbType.Char, 1).Value = datos(2)
+            cmd.Parameters.Add("@class", SqlDbType.VarChar, 20).Value = If(datos(4) = "NULL", "", datos(4))
             cmd.Parameters.Add("@msg", SqlDbType.VarChar, 100)
             cmd.Parameters("@msg").Direction = ParameterDirection.Output
             If cmd.ExecuteNonQuery Then
@@ -112,7 +119,9 @@ Public Class MetodosMaterials
             MsgBox(ex.Message())
             Return False
         Finally
-            desconectar()
+            If con IsNot Nothing Then
+                desconectar()
+            End If
         End Try
     End Function
 
@@ -269,18 +278,19 @@ or vd.name like concat('%','" + consulta + "','%')"
         cmd.Connection = conn
         Try
             If consulta.Length > 0 And Not nombreVendor = "All" Then
-                cmd.CommandText = "select  dm.idDM, mt.number as 'Material ID' , mt.name  as 'Material', vd.name as 'Vendor', dm.resourceMaterial as 'Resource Material' , dm.unitMeasurement  as 'Unit Measurement', dm.description as 'Description',dm.type as 'Type' , dm.price as 'Price', dm.size as 'Size', mt.idMaterial,  ex.quantity as 'Stocks' , dm.partNum as 'Part#'
+                cmd.CommandText = "select  dm.idDM, mt.number as 'Material ID' , mt.name  as 'Material', vd.name as 'Vendor', dm.resourceMaterial as 'Resource Material' , dm.unitMesurement as 'Unit Measurement', dm.description as 'Description',dm.type as 'Type' , dm.price as 'Price', dm.size as 'Size', mt.idMaterial,  ex.quantity as 'Stocks' , dm.partNum as 'Part#'
 from detalleMaterial as dm left join material as mt on dm.idMaterial = mt.idMaterial left join vendor as vd on dm.idVendor = vd.idVendor left join existences as ex on ex.idDM = dm.idDM
-where vd.name like CONCAT ('%', '" + consulta + "','%')
-OR mt.number like CONCAT ('%', '" + consulta + "','%')
-OR mt.name like CONCAT ('%', '" + nombreVendor + "','%')"
+where vd.name like '%" + nombreVendor + "%'
+and (mt.number like CONCAT ('%', '" + consulta + "','%')
+OR mt.name like '%" + consulta + "%')"
             ElseIf consulta.Length > 0 And nombreVendor = "All" Then
-                cmd.CommandText = "select  dm.idDM, mt.number as 'Material ID' , mt.name  as 'Material', vd.name as 'Vendor', dm.resourceMaterial as 'Resource Material' , dm.unitMeasurement  as 'Unit Measurement', dm.description as 'Description',dm.type as 'Type' , dm.price as 'Price', dm.size as 'Size', mt.idMaterial , ex.quantity as 'Stocks' , dm.partNum as 'Part#'
+                cmd.CommandText = "select  dm.idDM, mt.number as 'Material ID' , mt.name  as 'Material', vd.name as 'Vendor', dm.resourceMaterial as 'Resource Material' , dm.unitMesurement  as 'Unit Measurement', dm.description as 'Description',dm.type as 'Type' , dm.price as 'Price', dm.size as 'Size', mt.idMaterial , ex.quantity as 'Stocks' , dm.partNum as 'Part#'
 from detalleMaterial as dm left join material as mt on dm.idMaterial = mt.idMaterial left join vendor as vd on dm.idVendor = vd.idVendor left join existences as ex on ex.idDM = dm.idDM
-where vd.name like CONCAT ('%', '" + consulta + "','%')
+where 
+mt.name like '%" + consulta + "%'
 OR mt.number like CONCAT ('%', '" + consulta + "','%')"
             Else
-                cmd.CommandText = "select  dm.idDM, mt.number as 'Material ID' , mt.name  as 'Material', vd.name as 'Vendor', dm.resourceMaterial as 'Resource Material' , dm.unitMeasurement  as 'Unit Measurement', dm.description as 'Description',dm.type as 'Type' , dm.price as 'Price', dm.size as 'Size', mt.idMaterial , ex.quantity as 'Stocks' , dm.partNum as 'Part#'
+                cmd.CommandText = "select  dm.idDM, mt.number as 'Material ID' , mt.name  as 'Material', vd.name as 'Vendor', dm.resourceMaterial as 'Resource Material' , dm.unitMesurement as 'Unit Measurement', dm.description as 'Description',dm.type as 'Type' , dm.price as 'Price', dm.size as 'Size', mt.idMaterial , ex.quantity as 'Stocks' , dm.partNum as 'Part#'
 from detalleMaterial as dm left join material as mt on dm.idMaterial = mt.idMaterial left join vendor as vd on dm.idVendor = vd.idVendor"
             End If
             If cmd.ExecuteNonQuery Then
@@ -288,17 +298,16 @@ from detalleMaterial as dm left join material as mt on dm.idMaterial = mt.idMate
                 Dim da As New SqlDataAdapter(cmd)
                 da.Fill(dt)
                 tabla.DataSource = dt
-                tabla.Columns.Item(0).Visible = False
-                If mostrarTodo = False Then
-                    tabla.Columns.Item(4).Visible = False
-                    tabla.Columns.Item(5).Visible = False
-                    tabla.Columns.Item(6).Visible = False
-                    tabla.Columns.Item(7).Visible = False
-                    tabla.Columns.Item(8).Visible = False
-                    tabla.Columns.Item(9).Visible = False
-                    tabla.Columns.Item(10).Visible = False
-                    tabla.Columns.Item(11).Visible = False
-                End If
+                tabla.Columns.Item(0).Visible = mostrarTodo
+                tabla.Columns.Item(4).Visible = mostrarTodo
+                tabla.Columns.Item(5).Visible = mostrarTodo
+                tabla.Columns.Item(6).Visible = mostrarTodo
+                tabla.Columns.Item(7).Visible = mostrarTodo
+                tabla.Columns.Item(8).Visible = mostrarTodo
+                tabla.Columns.Item(9).Visible = mostrarTodo
+                tabla.Columns.Item(10).Visible = mostrarTodo
+                tabla.Columns.Item(11).Visible = mostrarTodo
+                tabla.Columns.Item(12).Visible = mostrarTodo
             End If
         Catch ex As Exception
 

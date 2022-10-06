@@ -140,6 +140,7 @@ Partial Class Materials
         Me.Panel21 = New System.Windows.Forms.Panel()
         Me.btnVendorDownloadExcel = New System.Windows.Forms.Button()
         Me.TitleBar = New System.Windows.Forms.Panel()
+        Me.PictureBox6 = New System.Windows.Forms.PictureBox()
         Me.PictureBox4 = New System.Windows.Forms.PictureBox()
         Me.PictureBox3 = New System.Windows.Forms.PictureBox()
         Me.Label22 = New System.Windows.Forms.Label()
@@ -205,6 +206,7 @@ Partial Class Materials
         Me.Panel22.SuspendLayout()
         Me.Panel21.SuspendLayout()
         Me.TitleBar.SuspendLayout()
+        CType(Me.PictureBox6, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox4, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox3, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.TableLayoutPanel1.SuspendLayout()
@@ -263,7 +265,7 @@ Partial Class Materials
         Me.TableLayoutPanel6.ColumnCount = 3
         Me.TableLayoutPanel6.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 54.76674!))
         Me.TableLayoutPanel6.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 45.23326!))
-        Me.TableLayoutPanel6.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 271.0!))
+        Me.TableLayoutPanel6.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 273.0!))
         Me.TableLayoutPanel6.Controls.Add(Me.Panel16, 2, 1)
         Me.TableLayoutPanel6.Controls.Add(Me.Panel15, 1, 1)
         Me.TableLayoutPanel6.Controls.Add(Me.Panel14, 0, 1)
@@ -274,25 +276,25 @@ Partial Class Materials
         Me.TableLayoutPanel6.Location = New System.Drawing.Point(0, 0)
         Me.TableLayoutPanel6.Name = "TableLayoutPanel6"
         Me.TableLayoutPanel6.RowCount = 2
-        Me.TableLayoutPanel6.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 78.1893!))
-        Me.TableLayoutPanel6.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 21.8107!))
+        Me.TableLayoutPanel6.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 81.42293!))
+        Me.TableLayoutPanel6.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 18.57708!))
         Me.TableLayoutPanel6.Size = New System.Drawing.Size(757, 253)
         Me.TableLayoutPanel6.TabIndex = 41
         '
         'Panel16
         '
         Me.Panel16.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel16.Location = New System.Drawing.Point(488, 200)
+        Me.Panel16.Location = New System.Drawing.Point(486, 209)
         Me.Panel16.Name = "Panel16"
-        Me.Panel16.Size = New System.Drawing.Size(266, 50)
+        Me.Panel16.Size = New System.Drawing.Size(268, 41)
         Me.Panel16.TabIndex = 5
         '
         'Panel15
         '
         Me.Panel15.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel15.Location = New System.Drawing.Point(269, 200)
+        Me.Panel15.Location = New System.Drawing.Point(268, 209)
         Me.Panel15.Name = "Panel15"
-        Me.Panel15.Size = New System.Drawing.Size(213, 50)
+        Me.Panel15.Size = New System.Drawing.Size(212, 41)
         Me.Panel15.TabIndex = 4
         '
         'Panel14
@@ -301,26 +303,26 @@ Partial Class Materials
         Me.Panel14.Controls.Add(Me.Label7)
         Me.Panel14.Controls.Add(Me.PictureBox5)
         Me.Panel14.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel14.Location = New System.Drawing.Point(3, 200)
+        Me.Panel14.Location = New System.Drawing.Point(3, 209)
         Me.Panel14.Name = "Panel14"
-        Me.Panel14.Size = New System.Drawing.Size(260, 50)
+        Me.Panel14.Size = New System.Drawing.Size(259, 41)
         Me.Panel14.TabIndex = 3
         '
         'txtSearch
         '
         Me.txtSearch.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.txtSearch.Location = New System.Drawing.Point(102, 17)
+        Me.txtSearch.Location = New System.Drawing.Point(49, 10)
         Me.txtSearch.Margin = New System.Windows.Forms.Padding(2)
         Me.txtSearch.Name = "txtSearch"
-        Me.txtSearch.Size = New System.Drawing.Size(159, 20)
+        Me.txtSearch.Size = New System.Drawing.Size(158, 20)
         Me.txtSearch.TabIndex = 14
         '
         'Label7
         '
         Me.Label7.AutoSize = True
         Me.Label7.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.Label7.Location = New System.Drawing.Point(5, 25)
+        Me.Label7.Location = New System.Drawing.Point(5, 13)
         Me.Label7.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label7.Name = "Label7"
         Me.Label7.Size = New System.Drawing.Size(41, 13)
@@ -330,7 +332,7 @@ Partial Class Materials
         'PictureBox5
         '
         Me.PictureBox5.Image = Global.AVT_TRAKING.My.Resources.Resources.loupe
-        Me.PictureBox5.Location = New System.Drawing.Point(63, 15)
+        Me.PictureBox5.Location = New System.Drawing.Point(212, 3)
         Me.PictureBox5.Name = "PictureBox5"
         Me.PictureBox5.Size = New System.Drawing.Size(25, 29)
         Me.PictureBox5.TabIndex = 40
@@ -349,16 +351,16 @@ Partial Class Materials
         Me.Panel13.Controls.Add(Me.Label20)
         Me.Panel13.Controls.Add(Me.sprPrice)
         Me.Panel13.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel13.Location = New System.Drawing.Point(269, 3)
+        Me.Panel13.Location = New System.Drawing.Point(268, 3)
         Me.Panel13.Name = "Panel13"
-        Me.Panel13.Size = New System.Drawing.Size(213, 191)
+        Me.Panel13.Size = New System.Drawing.Size(212, 200)
         Me.Panel13.TabIndex = 2
         '
         'Label17
         '
         Me.Label17.AutoSize = True
         Me.Label17.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.Label17.Location = New System.Drawing.Point(36, 11)
+        Me.Label17.Location = New System.Drawing.Point(45, 11)
         Me.Label17.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label17.Name = "Label17"
         Me.Label17.Size = New System.Drawing.Size(27, 13)
@@ -369,20 +371,20 @@ Partial Class Materials
         '
         Me.txtDescripcion.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.txtDescripcion.Location = New System.Drawing.Point(76, 107)
+        Me.txtDescripcion.Location = New System.Drawing.Point(75, 107)
         Me.txtDescripcion.Margin = New System.Windows.Forms.Padding(2)
         Me.txtDescripcion.Name = "txtDescripcion"
-        Me.txtDescripcion.Size = New System.Drawing.Size(134, 20)
+        Me.txtDescripcion.Size = New System.Drawing.Size(133, 20)
         Me.txtDescripcion.TabIndex = 7
         '
         'txtTipo
         '
         Me.txtTipo.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.txtTipo.Location = New System.Drawing.Point(77, 39)
+        Me.txtTipo.Location = New System.Drawing.Point(75, 39)
         Me.txtTipo.Margin = New System.Windows.Forms.Padding(2)
         Me.txtTipo.Name = "txtTipo"
-        Me.txtTipo.Size = New System.Drawing.Size(132, 20)
+        Me.txtTipo.Size = New System.Drawing.Size(133, 20)
         Me.txtTipo.TabIndex = 5
         '
         'txtPartNum
@@ -392,14 +394,14 @@ Partial Class Materials
         Me.txtPartNum.Location = New System.Drawing.Point(75, 143)
         Me.txtPartNum.Margin = New System.Windows.Forms.Padding(2)
         Me.txtPartNum.Name = "txtPartNum"
-        Me.txtPartNum.Size = New System.Drawing.Size(134, 20)
+        Me.txtPartNum.Size = New System.Drawing.Size(133, 20)
         Me.txtPartNum.TabIndex = 38
         '
         'Label5
         '
         Me.Label5.AutoSize = True
         Me.Label5.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.Label5.Location = New System.Drawing.Point(-5, 111)
+        Me.Label5.Location = New System.Drawing.Point(9, 110)
         Me.Label5.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(63, 13)
@@ -416,14 +418,14 @@ Partial Class Materials
         Me.sprTamanio.Location = New System.Drawing.Point(75, 7)
         Me.sprTamanio.Maximum = New Decimal(New Integer() {100000, 0, 0, 0})
         Me.sprTamanio.Name = "sprTamanio"
-        Me.sprTamanio.Size = New System.Drawing.Size(134, 20)
+        Me.sprTamanio.Size = New System.Drawing.Size(133, 20)
         Me.sprTamanio.TabIndex = 4
         '
         'Label21
         '
         Me.Label21.AutoSize = True
         Me.Label21.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.Label21.Location = New System.Drawing.Point(26, 147)
+        Me.Label21.Location = New System.Drawing.Point(39, 146)
         Me.Label21.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label21.Name = "Label21"
         Me.Label21.Size = New System.Drawing.Size(33, 13)
@@ -434,7 +436,7 @@ Partial Class Materials
         '
         Me.Label18.AutoSize = True
         Me.Label18.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.Label18.Location = New System.Drawing.Point(34, 41)
+        Me.Label18.Location = New System.Drawing.Point(41, 41)
         Me.Label18.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label18.Name = "Label18"
         Me.Label18.Size = New System.Drawing.Size(31, 13)
@@ -445,7 +447,7 @@ Partial Class Materials
         '
         Me.Label20.AutoSize = True
         Me.Label20.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.Label20.Location = New System.Drawing.Point(32, 78)
+        Me.Label20.Location = New System.Drawing.Point(41, 78)
         Me.Label20.Name = "Label20"
         Me.Label20.Size = New System.Drawing.Size(31, 13)
         Me.Label20.TabIndex = 37
@@ -457,7 +459,7 @@ Partial Class Materials
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.sprPrice.DecimalPlaces = 2
         Me.sprPrice.Increment = New Decimal(New Integer() {1, 0, 0, 65536})
-        Me.sprPrice.Location = New System.Drawing.Point(77, 75)
+        Me.sprPrice.Location = New System.Drawing.Point(75, 75)
         Me.sprPrice.Maximum = New Decimal(New Integer() {10000, 0, 0, 0})
         Me.sprPrice.Name = "sprPrice"
         Me.sprPrice.Size = New System.Drawing.Size(133, 20)
@@ -475,7 +477,7 @@ Partial Class Materials
         Me.Panel12.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel12.Location = New System.Drawing.Point(3, 3)
         Me.Panel12.Name = "Panel12"
-        Me.Panel12.Size = New System.Drawing.Size(260, 191)
+        Me.Panel12.Size = New System.Drawing.Size(259, 200)
         Me.Panel12.TabIndex = 1
         '
         'btnUpdateMareialData
@@ -499,7 +501,7 @@ Partial Class Materials
         '
         Me.Label14.AutoSize = True
         Me.Label14.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.Label14.Location = New System.Drawing.Point(89, 15)
+        Me.Label14.Location = New System.Drawing.Point(67, 14)
         Me.Label14.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label14.Name = "Label14"
         Me.Label14.Size = New System.Drawing.Size(44, 13)
@@ -510,27 +512,27 @@ Partial Class Materials
         '
         Me.txtRM.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.txtRM.Location = New System.Drawing.Point(150, 58)
+        Me.txtRM.Location = New System.Drawing.Point(125, 59)
         Me.txtRM.Margin = New System.Windows.Forms.Padding(2)
         Me.txtRM.Name = "txtRM"
-        Me.txtRM.Size = New System.Drawing.Size(108, 20)
+        Me.txtRM.Size = New System.Drawing.Size(131, 20)
         Me.txtRM.TabIndex = 2
         '
         'txtDMaterial
         '
         Me.txtDMaterial.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.txtDMaterial.Location = New System.Drawing.Point(152, 11)
+        Me.txtDMaterial.Location = New System.Drawing.Point(125, 11)
         Me.txtDMaterial.Margin = New System.Windows.Forms.Padding(2)
         Me.txtDMaterial.Name = "txtDMaterial"
-        Me.txtDMaterial.Size = New System.Drawing.Size(106, 20)
+        Me.txtDMaterial.Size = New System.Drawing.Size(131, 20)
         Me.txtDMaterial.TabIndex = 1
         '
         'Label15
         '
         Me.Label15.AutoSize = True
         Me.Label15.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.Label15.Location = New System.Drawing.Point(21, 62)
+        Me.Label15.Location = New System.Drawing.Point(18, 62)
         Me.Label15.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label15.Name = "Label15"
         Me.Label15.Size = New System.Drawing.Size(93, 13)
@@ -543,9 +545,9 @@ Partial Class Materials
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.cmbUnidadDeMedida.FormattingEnabled = True
         Me.cmbUnidadDeMedida.Items.AddRange(New Object() {"Each", "Foot", "Yard", "Galon", "Ounce", "LB", "Square foot"})
-        Me.cmbUnidadDeMedida.Location = New System.Drawing.Point(152, 108)
+        Me.cmbUnidadDeMedida.Location = New System.Drawing.Point(125, 107)
         Me.cmbUnidadDeMedida.Name = "cmbUnidadDeMedida"
-        Me.cmbUnidadDeMedida.Size = New System.Drawing.Size(106, 21)
+        Me.cmbUnidadDeMedida.Size = New System.Drawing.Size(131, 21)
         Me.cmbUnidadDeMedida.TabIndex = 3
         '
         'Label16
@@ -563,9 +565,9 @@ Partial Class Materials
         '
         Me.Panel11.Controls.Add(Me.GroupBox1)
         Me.Panel11.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel11.Location = New System.Drawing.Point(488, 3)
+        Me.Panel11.Location = New System.Drawing.Point(486, 3)
         Me.Panel11.Name = "Panel11"
-        Me.Panel11.Size = New System.Drawing.Size(266, 191)
+        Me.Panel11.Size = New System.Drawing.Size(268, 200)
         Me.Panel11.TabIndex = 0
         '
         'GroupBox1
@@ -584,7 +586,7 @@ Partial Class Materials
         Me.GroupBox1.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.GroupBox1.Location = New System.Drawing.Point(0, 0)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(266, 191)
+        Me.GroupBox1.Size = New System.Drawing.Size(268, 200)
         Me.GroupBox1.TabIndex = 36
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "New Order"
@@ -597,9 +599,9 @@ Partial Class Materials
         Me.btnOrderSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnOrderSave.Image = Global.AVT_TRAKING.My.Resources.Resources.add
         Me.btnOrderSave.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnOrderSave.Location = New System.Drawing.Point(89, 186)
+        Me.btnOrderSave.Location = New System.Drawing.Point(15, 141)
         Me.btnOrderSave.Name = "btnOrderSave"
-        Me.btnOrderSave.Size = New System.Drawing.Size(75, 33)
+        Me.btnOrderSave.Size = New System.Drawing.Size(65, 33)
         Me.btnOrderSave.TabIndex = 13
         Me.btnOrderSave.Text = "Add"
         Me.btnOrderSave.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -609,7 +611,7 @@ Partial Class Materials
         '
         Me.chbOrden.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.chbOrden.AutoSize = True
-        Me.chbOrden.Location = New System.Drawing.Point(204, 38)
+        Me.chbOrden.Location = New System.Drawing.Point(206, 38)
         Me.chbOrden.Name = "chbOrden"
         Me.chbOrden.Size = New System.Drawing.Size(48, 17)
         Me.chbOrden.TabIndex = 9
@@ -619,7 +621,7 @@ Partial Class Materials
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(34, 37)
+        Me.Label1.Location = New System.Drawing.Point(38, 37)
         Me.Label1.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(31, 13)
@@ -633,15 +635,15 @@ Partial Class Materials
         Me.dtpFechaOrden.CustomFormat = "yyyy-MM-dd"
         Me.dtpFechaOrden.Enabled = False
         Me.dtpFechaOrden.Format = System.Windows.Forms.DateTimePickerFormat.Custom
-        Me.dtpFechaOrden.Location = New System.Drawing.Point(78, 111)
+        Me.dtpFechaOrden.Location = New System.Drawing.Point(78, 91)
         Me.dtpFechaOrden.Name = "dtpFechaOrden"
-        Me.dtpFechaOrden.Size = New System.Drawing.Size(154, 20)
+        Me.dtpFechaOrden.Size = New System.Drawing.Size(156, 20)
         Me.dtpFechaOrden.TabIndex = 12
         '
         'Label6
         '
         Me.Label6.AutoSize = True
-        Me.Label6.Location = New System.Drawing.Point(11, 77)
+        Me.Label6.Location = New System.Drawing.Point(23, 67)
         Me.Label6.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(46, 13)
@@ -651,7 +653,7 @@ Partial Class Materials
         'Label9
         '
         Me.Label9.AutoSize = True
-        Me.Label9.Location = New System.Drawing.Point(37, 116)
+        Me.Label9.Location = New System.Drawing.Point(39, 96)
         Me.Label9.Name = "Label9"
         Me.Label9.Size = New System.Drawing.Size(30, 13)
         Me.Label9.TabIndex = 34
@@ -664,10 +666,10 @@ Partial Class Materials
         Me.sprCantidadOrden.DecimalPlaces = 2
         Me.sprCantidadOrden.Enabled = False
         Me.sprCantidadOrden.Increment = New Decimal(New Integer() {1, 0, 0, 65536})
-        Me.sprCantidadOrden.Location = New System.Drawing.Point(78, 73)
+        Me.sprCantidadOrden.Location = New System.Drawing.Point(78, 63)
         Me.sprCantidadOrden.Maximum = New Decimal(New Integer() {10000, 0, 0, 0})
         Me.sprCantidadOrden.Name = "sprCantidadOrden"
-        Me.sprCantidadOrden.Size = New System.Drawing.Size(112, 20)
+        Me.sprCantidadOrden.Size = New System.Drawing.Size(114, 20)
         Me.sprCantidadOrden.TabIndex = 11
         '
         'sprPricioOrden
@@ -680,17 +682,18 @@ Partial Class Materials
         Me.sprPricioOrden.Location = New System.Drawing.Point(78, 34)
         Me.sprPricioOrden.Maximum = New Decimal(New Integer() {10000, 0, 0, 0})
         Me.sprPricioOrden.Name = "sprPricioOrden"
-        Me.sprPricioOrden.Size = New System.Drawing.Size(112, 20)
+        Me.sprPricioOrden.Size = New System.Drawing.Size(114, 20)
         Me.sprPricioOrden.TabIndex = 10
         '
         'Label8
         '
         Me.Label8.AutoSize = True
-        Me.Label8.Location = New System.Drawing.Point(34, 145)
+        Me.Label8.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label8.Location = New System.Drawing.Point(102, 144)
         Me.Label8.Name = "Label8"
-        Me.Label8.Size = New System.Drawing.Size(31, 13)
+        Me.Label8.Size = New System.Drawing.Size(48, 16)
         Me.Label8.TabIndex = 31
-        Me.Label8.Text = "Total"
+        Me.Label8.Text = "Total:"
         '
         'lblTotal
         '
@@ -699,7 +702,7 @@ Partial Class Materials
         Me.lblTotal.AutoSize = True
         Me.lblTotal.Font = New System.Drawing.Font("Microsoft YaHei", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblTotal.ForeColor = System.Drawing.Color.DodgerBlue
-        Me.lblTotal.Location = New System.Drawing.Point(120, 140)
+        Me.lblTotal.Location = New System.Drawing.Point(205, 140)
         Me.lblTotal.Name = "lblTotal"
         Me.lblTotal.Size = New System.Drawing.Size(57, 28)
         Me.lblTotal.TabIndex = 32
@@ -766,7 +769,7 @@ Partial Class Materials
         Me.btnDeleteOrder.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.btnDeleteOrder.Image = Global.AVT_TRAKING.My.Resources.Resources.delete
         Me.btnDeleteOrder.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnDeleteOrder.Location = New System.Drawing.Point(6, 108)
+        Me.btnDeleteOrder.Location = New System.Drawing.Point(3, 100)
         Me.btnDeleteOrder.Name = "btnDeleteOrder"
         Me.btnDeleteOrder.Size = New System.Drawing.Size(85, 40)
         Me.btnDeleteOrder.TabIndex = 17
@@ -781,7 +784,7 @@ Partial Class Materials
         Me.btnCancelOrder.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(41, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(185, Byte), Integer))
         Me.btnCancelOrder.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnCancelOrder.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.btnCancelOrder.Image = Global.AVT_TRAKING.My.Resources.Resources.cancel
+        Me.btnCancelOrder.Image = Global.AVT_TRAKING.My.Resources.Resources.close2
         Me.btnCancelOrder.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.btnCancelOrder.Location = New System.Drawing.Point(6, 55)
         Me.btnCancelOrder.Name = "btnCancelOrder"
@@ -967,7 +970,7 @@ Partial Class Materials
         Me.btnCancelMaterial.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(41, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(185, Byte), Integer))
         Me.btnCancelMaterial.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnCancelMaterial.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.btnCancelMaterial.Image = Global.AVT_TRAKING.My.Resources.Resources.cancel
+        Me.btnCancelMaterial.Image = Global.AVT_TRAKING.My.Resources.Resources.close2
         Me.btnCancelMaterial.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.btnCancelMaterial.Location = New System.Drawing.Point(141, 331)
         Me.btnCancelMaterial.Margin = New System.Windows.Forms.Padding(2)
@@ -1133,7 +1136,7 @@ Partial Class Materials
         Me.Label12.AutoSize = True
         Me.Label12.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.Label12.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.Label12.Location = New System.Drawing.Point(17, 19)
+        Me.Label12.Location = New System.Drawing.Point(35, 19)
         Me.Label12.Name = "Label12"
         Me.Label12.Size = New System.Drawing.Size(41, 13)
         Me.Label12.TabIndex = 25
@@ -1155,9 +1158,9 @@ Partial Class Materials
         Me.PictureBox1.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.PictureBox1.Image = Global.AVT_TRAKING.My.Resources.Resources.loupe
-        Me.PictureBox1.Location = New System.Drawing.Point(78, 12)
+        Me.PictureBox1.Location = New System.Drawing.Point(82, 11)
         Me.PictureBox1.Name = "PictureBox1"
-        Me.PictureBox1.Size = New System.Drawing.Size(31, 31)
+        Me.PictureBox1.Size = New System.Drawing.Size(27, 32)
         Me.PictureBox1.TabIndex = 27
         Me.PictureBox1.TabStop = False
         '
@@ -1236,7 +1239,7 @@ Partial Class Materials
         Me.btnCancelVendor.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(41, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(185, Byte), Integer))
         Me.btnCancelVendor.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnCancelVendor.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.btnCancelVendor.Image = Global.AVT_TRAKING.My.Resources.Resources.cancel
+        Me.btnCancelVendor.Image = Global.AVT_TRAKING.My.Resources.Resources.close2
         Me.btnCancelVendor.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.btnCancelVendor.Location = New System.Drawing.Point(109, 235)
         Me.btnCancelVendor.Name = "btnCancelVendor"
@@ -1662,20 +1665,32 @@ Partial Class Materials
         'TitleBar
         '
         Me.TitleBar.BackColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(59, Byte), Integer), CType(CType(104, Byte), Integer))
-        Me.TitleBar.Controls.Add(Me.PictureBox4)
         Me.TitleBar.Controls.Add(Me.PictureBox3)
+        Me.TitleBar.Controls.Add(Me.PictureBox4)
         Me.TitleBar.Controls.Add(Me.Label22)
+        Me.TitleBar.Controls.Add(Me.PictureBox6)
         Me.TitleBar.Dock = System.Windows.Forms.DockStyle.Top
         Me.TitleBar.Location = New System.Drawing.Point(0, 0)
         Me.TitleBar.Name = "TitleBar"
         Me.TitleBar.Size = New System.Drawing.Size(783, 27)
         Me.TitleBar.TabIndex = 5
         '
+        'PictureBox6
+        '
+        Me.PictureBox6.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.PictureBox6.Image = Global.AVT_TRAKING.My.Resources.Resources.restore2
+        Me.PictureBox6.Location = New System.Drawing.Point(752, 4)
+        Me.PictureBox6.Name = "PictureBox6"
+        Me.PictureBox6.Size = New System.Drawing.Size(26, 23)
+        Me.PictureBox6.TabIndex = 3
+        Me.PictureBox6.TabStop = False
+        Me.PictureBox6.Visible = False
+        '
         'PictureBox4
         '
         Me.PictureBox4.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.PictureBox4.Image = Global.AVT_TRAKING.My.Resources.Resources.minimize2
-        Me.PictureBox4.Location = New System.Drawing.Point(719, 3)
+        Me.PictureBox4.Location = New System.Drawing.Point(720, 4)
         Me.PictureBox4.Name = "PictureBox4"
         Me.PictureBox4.Size = New System.Drawing.Size(28, 23)
         Me.PictureBox4.TabIndex = 2
@@ -1685,7 +1700,7 @@ Partial Class Materials
         '
         Me.PictureBox3.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.PictureBox3.Image = Global.AVT_TRAKING.My.Resources.Resources.maximize2
-        Me.PictureBox3.Location = New System.Drawing.Point(750, 4)
+        Me.PictureBox3.Location = New System.Drawing.Point(752, 4)
         Me.PictureBox3.Name = "PictureBox3"
         Me.PictureBox3.Size = New System.Drawing.Size(26, 23)
         Me.PictureBox3.TabIndex = 1
@@ -1718,6 +1733,7 @@ Partial Class Materials
         '
         'TableLayoutPanel1
         '
+        Me.TableLayoutPanel1.BackColor = System.Drawing.Color.FromArgb(CType(CType(83, Byte), Integer), CType(CType(93, Byte), Integer), CType(CType(102, Byte), Integer))
         Me.TableLayoutPanel1.ColumnCount = 1
         Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
         Me.TableLayoutPanel1.Controls.Add(Me.Panel1, 0, 0)
@@ -1891,6 +1907,7 @@ Partial Class Materials
         Me.Panel21.ResumeLayout(False)
         Me.TitleBar.ResumeLayout(False)
         Me.TitleBar.PerformLayout()
+        CType(Me.PictureBox6, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PictureBox4, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PictureBox3, System.ComponentModel.ISupportInitialize).EndInit()
         Me.TableLayoutPanel1.ResumeLayout(False)
@@ -2033,4 +2050,5 @@ Partial Class Materials
     Friend WithEvents btnUploadMaterial As Button
     Friend WithEvents Panel30 As Panel
     Friend WithEvents btnDownLoadExcelMaterial As Button
+    Friend WithEvents PictureBox6 As PictureBox
 End Class

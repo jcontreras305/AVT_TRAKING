@@ -151,8 +151,12 @@ Public Class Materials
         chbEnableMaterial.Checked = If(dataMaterial(4).Equals("Enable"), True, False)
         cmbVendedor.SelectedItem = cmbVendedor.Items(cmbVendedor.FindString(dataMaterial(5)))
         cmbVendedor.Text = dataMaterial(5)
-        cmbClassMaterial.SelectedItem = cmbClassMaterial.Items(cmbClassMaterial.FindString(dataMaterial(6)))
-        cmbClassMaterial.Text = dataMaterial(6)
+        If dataMaterial(6) IsNot DBNull.Value Then
+            cmbClassMaterial.SelectedItem = cmbClassMaterial.Items(cmbClassMaterial.FindString(dataMaterial(6)))
+            cmbClassMaterial.Text = dataMaterial(6)
+        Else
+            cmbClassMaterial.SelectedIndex = -1
+        End If
         btnSaveMaterial.Enabled = False
         btnCancelMaterial.Enabled = True
         btnUpdateMaterial.Enabled = True
@@ -170,6 +174,7 @@ Public Class Materials
         Dim SM As New SelectMaterial
         Dim listIdsVendor As New List(Of String)
         mtdMaterial.llenarVendorCombo(SM.cmbNombreVendorSM, listIdsVendor)
+        SM.cmbNombreVendorSM.Items.Add("All")
         mtdMaterial.selectMaterial(SM.tblMaterialSM, "%", "All", False)
         SM.cmbNombreVendorSM.Text = "All"
         AddOwnedForm(SM)
@@ -400,23 +405,32 @@ Public Class Materials
 
     Private Sub btnVendorDownloadExcel_Click(sender As Object, e As EventArgs) Handles btnVendorDownloadExcel.Click
         Try
-            Dim ApExcel = New Microsoft.Office.Interop.Excel.Application
-            Dim libro = ApExcel.Workbooks.Add
-            Dim colums() As String = {"id", "name", "description"}
-            For i As Int16 = 0 To colums.Length - 1
-                libro.Sheets(1).cells(1, i + 1) = colums(i)
-            Next
             Dim sd As New SaveFileDialog
             sd.DefaultExt = "*.xlsx"
             sd.FileName = "VendorList"
             sd.Filter = "Archivos de Excel (*.xlsx)|*.xlsx"
-            sd.ShowDialog()
-            libro.SaveAs(sd.FileName)
-            NAR(libro.Sheets(1))
-            libro.Close(False)
-            NAR(libro)
-            ApExcel.Quit()
-            NAR(ApExcel)
+            If DialogResult.OK = sd.ShowDialog() Then
+                Dim ApExcel = New Microsoft.Office.Interop.Excel.Application
+                Dim libro = ApExcel.Workbooks.Add
+                Dim colums() As String = {"id", "name", "description"}
+                For i As Int16 = 0 To colums.Length - 1
+                    libro.Sheets(1).cells(1, i + 1) = colums(i)
+                Next
+                With libro.Sheets(1).Range("A1:C1")
+                    .Font.Bold = True
+                    .Font.ColorIndex = 1
+                    With .Interior
+                        .ColorIndex = 15
+                    End With
+                    .BorderAround(Microsoft.Office.Interop.Excel.XlLineStyle.xlContinuous, Microsoft.Office.Interop.Excel.XlBorderWeight.xlThin, Microsoft.Office.Interop.Excel.XlColorIndex.xlColorIndexAutomatic, Color.Black)
+                End With
+                libro.SaveAs(sd.FileName)
+                NAR(libro.Sheets(1))
+                libro.Close(False)
+                NAR(libro)
+                ApExcel.Quit()
+                NAR(ApExcel)
+            End If
         Catch ex As Exception
             MsgBox(ex.Message)
         End Try
@@ -424,6 +438,13 @@ Public Class Materials
 
     Private Sub PictureBox3_Click(sender As Object, e As EventArgs) Handles PictureBox3.Click
         WindowState = FormWindowState.Maximized
+        PictureBox3.Visible = False
+        PictureBox6.Visible = True
+    End Sub
+    Private Sub PictureBox6_Click(sender As Object, e As EventArgs) Handles PictureBox6.Click
+        WindowState = FormWindowState.Normal
+        PictureBox6.Visible = False
+        PictureBox3.Visible = True
     End Sub
 
     Private Sub PictureBox4_Click(sender As Object, e As EventArgs) Handles PictureBox4.Click
@@ -495,23 +516,34 @@ Public Class Materials
 
     Private Sub btnMaterialDownloadExcel_Click(sender As Object, e As EventArgs) Handles btnMaterialSourceDownloadExcel.Click
         Try
-            Dim ApExcel = New Microsoft.Office.Interop.Excel.Application
-            Dim libro = ApExcel.Workbooks.Add
-            Dim colums() As String = {"id", "name", "resorseMaterial", "unitMeasurement", "description", "type", "price", "size", "idVendor", "Part #", "Class"}
-            For i As Int64 = 0 To colums.Length - 1
-                libro.Sheets(1).cells(1, i + 1) = colums(i)
-            Next
             Dim sd As New SaveFileDialog
             sd.DefaultExt = "*.xlsx"
             sd.FileName = "MaterialList"
             sd.Filter = "Archivos de Excel (*.xlsx)|*.xlsx"
-            sd.ShowDialog()
-            libro.SaveAs(sd.FileName)
-            NAR(libro.Sheets(1))
-            libro.Close(False)
-            NAR(libro)
-            ApExcel.Quit()
-            NAR(ApExcel)
+            If DialogResult.OK = sd.ShowDialog() Then
+                Dim ApExcel = New Microsoft.Office.Interop.Excel.Application
+                Dim libro = ApExcel.Workbooks.Add
+                Dim colums() As String = {"id", "name", "resorseMaterial", "unitMeasurement", "description", "type", "price", "size", "idVendor", "Part #", "Class"}
+                For i As Int64 = 0 To colums.Length - 1
+                    libro.Sheets(1).cells(1, i + 1) = colums(i)
+                Next
+                With libro.Sheets(1).Range("A1:K1")
+                    .Font.Bold = True
+                    .Font.ColorIndex = 1
+                    With .Interior
+                        .ColorIndex = 15
+                    End With
+                    .BorderAround(Microsoft.Office.Interop.Excel.XlLineStyle.xlContinuous, Microsoft.Office.Interop.Excel.XlBorderWeight.xlThin, Microsoft.Office.Interop.Excel.XlColorIndex.xlColorIndexAutomatic, Color.Black)
+                End With
+                libro.SaveAs(sd.FileName)
+                NAR(libro.Sheets(1))
+                libro.Close(False)
+                NAR(libro)
+                ApExcel.Quit()
+                NAR(ApExcel)
+            End If
+
+
         Catch ex As Exception
             MsgBox(ex.Message)
         End Try
@@ -599,94 +631,96 @@ Public Class Materials
     End Sub
 
     Private Sub btnDownLoadExcelMaterial_Click(sender As Object, e As EventArgs) Handles btnDownLoadExcelMaterial.Click
+        Dim sd As New SaveFileDialog
+        sd.DefaultExt = "*.xlsx"
+        sd.FileName = "MaterialList"
+        sd.Filter = "Archivos de Excel (*.xlsx)|*.xlsx"
+        If DialogResult.OK = sd.ShowDialog() Then
 
-        Dim ApExcel = New Microsoft.Office.Interop.Excel.Application
-        'Hoja de Material
-        Dim libro = ApExcel.Workbooks.Add()
-        Try
-            Dim Hoja1 = libro.Sheets.Add()
-            Dim Hoja2 = libro.Sheets.Add()
-            Dim Hoja3 = libro.Sheets.Add()
+            Dim ApExcel = New Microsoft.Office.Interop.Excel.Application
+            'Hoja de Material
+            Dim libro = ApExcel.Workbooks.Add()
+            Try
+                Dim Hoja1 = libro.Sheets.Add()
+                Dim Hoja2 = libro.Sheets.Add()
+                Dim Hoja3 = libro.Sheets.Add()
 
-            Dim count As Integer = 1
-            With Hoja1.Range("A1:E1")
-                .Font.Bold = True
-                .Font.ColorIndex = 1
-                With .Interior
-                    .ColorIndex = 15
+                Dim count As Integer = 1
+                With Hoja1.Range("A1:E1")
+                    .Font.Bold = True
+                    .Font.ColorIndex = 1
+                    With .Interior
+                        .ColorIndex = 15
+                    End With
+                    .BorderAround(Microsoft.Office.Interop.Excel.XlLineStyle.xlContinuous, Microsoft.Office.Interop.Excel.XlBorderWeight.xlThin, Microsoft.Office.Interop.Excel.XlColorIndex.xlColorIndexAutomatic, Color.Black)
                 End With
-                .BorderAround(Microsoft.Office.Interop.Excel.XlLineStyle.xlContinuous, Microsoft.Office.Interop.Excel.XlBorderWeight.xlThin, Microsoft.Office.Interop.Excel.XlColorIndex.xlColorIndexAutomatic, Color.Black)
-            End With
-            Dim columsMaterial() As String = {"ID Material", "Name", "Status", "Vendor", "Class"}
-            For i As Int64 = 0 To columsMaterial.Length - 1
-                Hoja1.cells(1, i + 1) = columsMaterial(i)
-            Next
-            Hoja1.Name = "Material"
-            'Hoja de Clases
-            With Hoja2.Range("A1:B1")
-                .Font.Bold = True
-                .Font.ColorIndex = 1
-                With .Interior
-                    .ColorIndex = 15
-                End With
-                .BorderAround(Microsoft.Office.Interop.Excel.XlLineStyle.xlContinuous, Microsoft.Office.Interop.Excel.XlBorderWeight.xlThin, Microsoft.Office.Interop.Excel.XlColorIndex.xlColorIndexAutomatic, Color.Black)
-            End With
-            Dim columsClass() As String = {"Code", "Description"}
-            For i As Int64 = 0 To columsClass.Length - 1
-                Hoja2.cells(1, i + 1) = columsClass(i)
-            Next
-            Dim tblClass As Data.DataTable = mtdOther.selectMaterialCodes()
-            If tblClass.Rows IsNot Nothing Then
-                Dim cont As Integer = 2
-                For Each row As Data.DataRow In tblClass.Rows()
-                    Hoja2.cells(cont, 1) = row.ItemArray(0)
-                    Hoja2.cells(cont, 2) = row.ItemArray(1)
-                    cont += 1
+                Dim columsMaterial() As String = {"ID Material", "Name", "Status", "Vendor", "Class"}
+                For i As Int64 = 0 To columsMaterial.Length - 1
+                    Hoja1.cells(1, i + 1) = columsMaterial(i)
                 Next
-            End If
-            Hoja2.Name = "Material Class"
-
-            'Hoja de Vendor
-
-            With Hoja3.Range("A1:B1")
-                .Font.Bold = True
-                .Font.ColorIndex = 1
-                With .Interior
-                    .ColorIndex = 15
+                Hoja1.Name = "Material"
+                'Hoja de Clases
+                With Hoja2.Range("A1:B1")
+                    .Font.Bold = True
+                    .Font.ColorIndex = 1
+                    With .Interior
+                        .ColorIndex = 15
+                    End With
+                    .BorderAround(Microsoft.Office.Interop.Excel.XlLineStyle.xlContinuous, Microsoft.Office.Interop.Excel.XlBorderWeight.xlThin, Microsoft.Office.Interop.Excel.XlColorIndex.xlColorIndexAutomatic, Color.Black)
                 End With
-                .BorderAround(Microsoft.Office.Interop.Excel.XlLineStyle.xlContinuous, Microsoft.Office.Interop.Excel.XlBorderWeight.xlThin, Microsoft.Office.Interop.Excel.XlColorIndex.xlColorIndexAutomatic, Color.Black)
-            End With
-            Dim columsVendor() As String = {"# Vendor", "Name"}
-            For i As Int64 = 0 To columsVendor.Length - 1
-                Hoja3.cells(1, i + 1) = columsVendor(i)
-            Next
-            Dim tblVendor As Data.DataTable = mtdMaterial.selectVendor()
-            If tblVendor.Rows IsNot Nothing Then
-                Dim cont As Integer = 2
-                For Each row As Data.DataRow In tblVendor.Rows()
-                    Hoja3.cells(cont, 1) = row.ItemArray(0)
-                    Hoja3.cells(cont, 2) = row.ItemArray(1)
-                    cont += 1
+                Dim columsClass() As String = {"Code", "Description"}
+                For i As Int64 = 0 To columsClass.Length - 1
+                    Hoja2.cells(1, i + 1) = columsClass(i)
                 Next
-            End If
-            Hoja3.name = "Vendor"
-            Dim sd As New SaveFileDialog
-            sd.DefaultExt = "*.xlsx"
-            sd.FileName = "MaterialList"
-            sd.Filter = "Archivos de Excel (*.xlsx)|*.xlsx"
-            sd.ShowDialog()
-            libro.SaveAs(sd.FileName)
-            NAR(Hoja1)
-            NAR(Hoja2)
-            NAR(Hoja3)
-        Catch ex As Exception
-            MsgBox(ex.Message)
-        Finally
-            libro.Close()
-            NAR(libro)
-            ApExcel.Quit()
-            NAR(ApExcel)
-        End Try
+                Dim tblClass As Data.DataTable = mtdOther.selectMaterialCodes()
+                If tblClass.Rows IsNot Nothing Then
+                    Dim cont As Integer = 2
+                    For Each row As Data.DataRow In tblClass.Rows()
+                        Hoja2.cells(cont, 1) = row.ItemArray(0)
+                        Hoja2.cells(cont, 2) = row.ItemArray(1)
+                        cont += 1
+                    Next
+                End If
+                Hoja2.Name = "Material Class"
+
+                'Hoja de Vendor
+
+                With Hoja3.Range("A1:B1")
+                    .Font.Bold = True
+                    .Font.ColorIndex = 1
+                    With .Interior
+                        .ColorIndex = 15
+                    End With
+                    .BorderAround(Microsoft.Office.Interop.Excel.XlLineStyle.xlContinuous, Microsoft.Office.Interop.Excel.XlBorderWeight.xlThin, Microsoft.Office.Interop.Excel.XlColorIndex.xlColorIndexAutomatic, Color.Black)
+                End With
+                Dim columsVendor() As String = {"# Vendor", "Name"}
+                For i As Int64 = 0 To columsVendor.Length - 1
+                    Hoja3.cells(1, i + 1) = columsVendor(i)
+                Next
+                Dim tblVendor As Data.DataTable = mtdMaterial.selectVendor()
+                If tblVendor.Rows IsNot Nothing Then
+                    Dim cont As Integer = 2
+                    For Each row As Data.DataRow In tblVendor.Rows()
+                        Hoja3.cells(cont, 1) = row.ItemArray(0)
+                        Hoja3.cells(cont, 2) = row.ItemArray(1)
+                        cont += 1
+                    Next
+                End If
+                Hoja3.name = "Vendor"
+
+                libro.SaveAs(sd.FileName)
+                NAR(Hoja1)
+                NAR(Hoja2)
+                NAR(Hoja3)
+            Catch ex As Exception
+                MsgBox(ex.Message)
+            Finally
+                libro.Close()
+                NAR(libro)
+                ApExcel.Quit()
+                NAR(ApExcel)
+            End Try
+        End If
     End Sub
     Private Sub btnUploadMaterial_Click(sender As Object, e As EventArgs) Handles btnUploadMaterial.Click
         Try
@@ -696,7 +730,7 @@ Public Class Materials
                 lblMessage.Visible = False
                 Dim pgbProgress As New System.Windows.Forms.ProgressBar
                 pgbProgress.Visible = False
-                Dim tbl = leerExcel(lblMessage, pgbProgress, sheetName)
+                Dim tbl = leerExcel(txtMensajeProseso, pgbProgress, sheetName)
                 If tbl IsNot Nothing Then
                     Dim tblVendorIds As Data.DataTable = mtdMaterial.selectVendor()
                     Dim tblClassIds As Data.DataTable = mtdOther.selectMaterialCodes()
@@ -717,19 +751,35 @@ Public Class Materials
                         If listRowClass.Length > 0 Then
                             newidClass = listRowClass(0).ItemArray(0)
                         End If
-                        tblNewMaterial.Rows.Add(row.ItemArray(1).ToString(), row.ItemArray(0).ToString(), NewIDVendor, If(row.ItemArray(2).ToString() = "Yes" Or row.ItemArray(2).ToString() = "YES", "E", "D"), newidClass)
+                        tblNewMaterial.Rows.Add(row.ItemArray(0).ToString(), row.ItemArray(1).ToString(), If(row.ItemArray(2).ToString() = "Yes" Or row.ItemArray(2).ToString() = "YES", "E", "D"), NewIDVendor, newidClass)
                     Next
+                    Dim con As New ConnectioDB
+                    con.conectar()
+                    Dim tran As SqlTransaction
+                    tran = con.conn.BeginTransaction
+                    Dim flag As Boolean = True
+                    txtMensajeProseso.Text = txtMensajeProseso.Text + vbCrLf + "Found " + tblNewMaterial.Rows.Count.ToString + " materials."
+                    txtMensajeProseso.Text = txtMensajeProseso.Text + vbCrLf + "The insertion process will start."
                     For Each row As Data.DataRow In tblNewMaterial.Rows
                         Dim datos() As String = {row.ItemArray(0), row.ItemArray(1), row.ItemArray(2), row.ItemArray(3), row.ItemArray(4)}
                         If Not mtdMaterial.insertarMaterial(datos) Then
                             If DialogResult.No = MessageBox.Show("Would you like to continue?", "Important", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) Then
+                                flag = False
                                 Exit For
                             End If
                         End If
                     Next
+                    If flag Then
+                        tran.Commit()
+                        txtMensajeProseso.Text = txtMensajeProseso.Text + vbCrLf + "Succesfull"
+                    Else
+                        tran.Rollback()
+                        txtMensajeProseso.Text = txtMensajeProseso.Text + vbCrLf + "Error: The procces can no end correctly."
+                    End If
                     llenarTablas()
                     pgbProgress.Value = 100
-                    lblMessage.Text = "Message: End."
+                    txtMensajeProseso.Text = txtMensajeProseso.Text + vbCrLf + "The File is Closed"
+                    txtMensajeProseso.Text = txtMensajeProseso.Text + vbCrLf + "Finish"
                     Exit While
                 Else
                     sheetName = InputBox("Please Write the name of the Sheet to Read." + "If do not wish to continue, leave the space blank.", "find Excel Sheet", "Sheet 1")

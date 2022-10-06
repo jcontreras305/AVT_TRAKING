@@ -25,6 +25,7 @@ Partial Class ProjectsClients
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.pnlButtonsPOCl = New System.Windows.Forms.Panel()
         Me.PnllSetup = New System.Windows.Forms.Panel()
+        Me.btnPBI = New System.Windows.Forms.Button()
         Me.btnWK = New System.Windows.Forms.Button()
         Me.btnMaterialCodes = New System.Windows.Forms.Button()
         Me.btnCompanyInformation = New System.Windows.Forms.Button()
@@ -113,7 +114,7 @@ Partial Class ProjectsClients
         Me.idAuxWO = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.idAux = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.photo = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.btnPBI = New System.Windows.Forms.Button()
+        Me.btnCancelSaveJob = New System.Windows.Forms.Button()
         Me.Panel1.SuspendLayout()
         Me.pnlButtonsPOCl.SuspendLayout()
         Me.PnllSetup.SuspendLayout()
@@ -177,6 +178,21 @@ Partial Class ProjectsClients
         Me.PnllSetup.Name = "PnllSetup"
         Me.PnllSetup.Size = New System.Drawing.Size(216, 205)
         Me.PnllSetup.TabIndex = 5
+        '
+        'btnPBI
+        '
+        Me.btnPBI.Dock = System.Windows.Forms.DockStyle.Top
+        Me.btnPBI.FlatAppearance.BorderSize = 0
+        Me.btnPBI.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnPBI.Font = New System.Drawing.Font("Nirmala UI", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnPBI.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.btnPBI.Location = New System.Drawing.Point(0, 172)
+        Me.btnPBI.Name = "btnPBI"
+        Me.btnPBI.Size = New System.Drawing.Size(216, 32)
+        Me.btnPBI.TabIndex = 11
+        Me.btnPBI.Text = "PBI"
+        Me.btnPBI.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.btnPBI.UseVisualStyleBackColor = True
         '
         'btnWK
         '
@@ -282,7 +298,7 @@ Partial Class ProjectsClients
         Me.btnUploadSchedule.Name = "btnUploadSchedule"
         Me.btnUploadSchedule.Size = New System.Drawing.Size(216, 58)
         Me.btnUploadSchedule.TabIndex = 3
-        Me.btnUploadSchedule.Text = "SCAFFOLD TRAKING"
+        Me.btnUploadSchedule.Text = "SCAFFOLD TRACKING"
         Me.btnUploadSchedule.UseVisualStyleBackColor = True
         '
         'btnTimeEnterSheets
@@ -757,9 +773,9 @@ Partial Class ProjectsClients
         Me.Label2.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.Label2.Location = New System.Drawing.Point(15, 4)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(144, 18)
+        Me.Label2.Size = New System.Drawing.Size(135, 18)
         Me.Label2.TabIndex = 3
-        Me.Label2.Text = "Projects Clients"
+        Me.Label2.Text = "Client Projects"
         '
         'PictureBox2
         '
@@ -831,6 +847,7 @@ Partial Class ProjectsClients
         '
         'Panel9
         '
+        Me.Panel9.Controls.Add(Me.btnCancelSaveJob)
         Me.Panel9.Controls.Add(Me.btnAdd)
         Me.Panel9.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel9.Location = New System.Drawing.Point(3, 128)
@@ -1131,20 +1148,22 @@ Partial Class ProjectsClients
         Me.photo.ReadOnly = True
         Me.photo.Visible = False
         '
-        'btnPBI
+        'btnCancelSaveJob
         '
-        Me.btnPBI.Dock = System.Windows.Forms.DockStyle.Top
-        Me.btnPBI.FlatAppearance.BorderSize = 0
-        Me.btnPBI.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnPBI.Font = New System.Drawing.Font("Nirmala UI", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnPBI.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.btnPBI.Location = New System.Drawing.Point(0, 172)
-        Me.btnPBI.Name = "btnPBI"
-        Me.btnPBI.Size = New System.Drawing.Size(216, 32)
-        Me.btnPBI.TabIndex = 11
-        Me.btnPBI.Text = "PBI"
-        Me.btnPBI.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.btnPBI.UseVisualStyleBackColor = True
+        Me.btnCancelSaveJob.FlatAppearance.BorderSize = 0
+        Me.btnCancelSaveJob.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(58, Byte), Integer), CType(CType(115, Byte), Integer))
+        Me.btnCancelSaveJob.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnCancelSaveJob.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.btnCancelSaveJob.Image = Global.AVT_TRAKING.My.Resources.Resources.close2
+        Me.btnCancelSaveJob.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnCancelSaveJob.Location = New System.Drawing.Point(98, 2)
+        Me.btnCancelSaveJob.Name = "btnCancelSaveJob"
+        Me.btnCancelSaveJob.Size = New System.Drawing.Size(75, 27)
+        Me.btnCancelSaveJob.TabIndex = 18
+        Me.btnCancelSaveJob.Text = "Cancel"
+        Me.btnCancelSaveJob.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.btnCancelSaveJob.UseVisualStyleBackColor = True
+        Me.btnCancelSaveJob.Visible = False
         '
         'ProjectsClients
         '
@@ -1283,4 +1302,5 @@ Partial Class ProjectsClients
     Friend WithEvents photo As DataGridViewTextBoxColumn
     Friend WithEvents pnlButtonsPOCl As Panel
     Friend WithEvents btnPBI As Button
+    Friend WithEvents btnCancelSaveJob As Button
 End Class

@@ -32,7 +32,7 @@ Partial Class Expences
         Me.TabPage1 = New System.Windows.Forms.TabPage()
         Me.TableLayoutPanel2 = New System.Windows.Forms.TableLayoutPanel()
         Me.Panel4 = New System.Windows.Forms.Panel()
-        Me.tblExpences = New System.Windows.Forms.DataGridView()
+        Me.tblExpenses = New System.Windows.Forms.DataGridView()
         Me.Panel3 = New System.Windows.Forms.Panel()
         Me.TableLayoutPanel3 = New System.Windows.Forms.TableLayoutPanel()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
@@ -45,7 +45,7 @@ Partial Class Expences
         Me.txtDescription = New System.Windows.Forms.TextBox()
         Me.Panel5 = New System.Windows.Forms.Panel()
         Me.btnFind = New System.Windows.Forms.Button()
-        Me.TextBox1 = New System.Windows.Forms.TextBox()
+        Me.txtFind = New System.Windows.Forms.TextBox()
         Me.PictureBox2 = New System.Windows.Forms.PictureBox()
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
         Me.Panel1 = New System.Windows.Forms.Panel()
@@ -58,7 +58,7 @@ Partial Class Expences
         Me.TabPage1.SuspendLayout()
         Me.TableLayoutPanel2.SuspendLayout()
         Me.Panel4.SuspendLayout()
-        CType(Me.tblExpences, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.tblExpenses, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel3.SuspendLayout()
         Me.TableLayoutPanel3.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
@@ -90,7 +90,7 @@ Partial Class Expences
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(92, 18)
         Me.Label3.TabIndex = 5
-        Me.Label3.Text = "Expences"
+        Me.Label3.Text = "Expenses"
         '
         'PictureBox1
         '
@@ -154,7 +154,7 @@ Partial Class Expences
         Me.TabPage1.Padding = New System.Windows.Forms.Padding(2)
         Me.TabPage1.Size = New System.Drawing.Size(599, 235)
         Me.TabPage1.TabIndex = 0
-        Me.TabPage1.Text = "Precio"
+        Me.TabPage1.Text = "Expenses"
         '
         'TableLayoutPanel2
         '
@@ -173,27 +173,29 @@ Partial Class Expences
         '
         'Panel4
         '
-        Me.Panel4.Controls.Add(Me.tblExpences)
+        Me.Panel4.Controls.Add(Me.tblExpenses)
         Me.Panel4.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel4.Location = New System.Drawing.Point(303, 3)
         Me.Panel4.Name = "Panel4"
         Me.Panel4.Size = New System.Drawing.Size(289, 225)
         Me.Panel4.TabIndex = 1
         '
-        'tblExpences
+        'tblExpenses
         '
-        Me.tblExpences.AllowUserToAddRows = False
-        Me.tblExpences.AllowUserToDeleteRows = False
-        Me.tblExpences.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
-        Me.tblExpences.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.tblExpences.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.tblExpences.Location = New System.Drawing.Point(0, 0)
-        Me.tblExpences.Margin = New System.Windows.Forms.Padding(2)
-        Me.tblExpences.Name = "tblExpences"
-        Me.tblExpences.RowHeadersWidth = 62
-        Me.tblExpences.RowTemplate.Height = 28
-        Me.tblExpences.Size = New System.Drawing.Size(289, 225)
-        Me.tblExpences.TabIndex = 0
+        Me.tblExpenses.AllowUserToAddRows = False
+        Me.tblExpenses.AllowUserToDeleteRows = False
+        Me.tblExpenses.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
+        Me.tblExpenses.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.tblExpenses.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.tblExpenses.Location = New System.Drawing.Point(0, 0)
+        Me.tblExpenses.Margin = New System.Windows.Forms.Padding(2)
+        Me.tblExpenses.Name = "tblExpenses"
+        Me.tblExpenses.ReadOnly = True
+        Me.tblExpenses.RowHeadersWidth = 62
+        Me.tblExpenses.RowTemplate.Height = 28
+        Me.tblExpenses.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
+        Me.tblExpenses.Size = New System.Drawing.Size(289, 225)
+        Me.tblExpenses.TabIndex = 0
         '
         'Panel3
         '
@@ -244,9 +246,9 @@ Partial Class Expences
         Me.Label1.Location = New System.Drawing.Point(6, 16)
         Me.Label1.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(85, 13)
+        Me.Label1.Size = New System.Drawing.Size(89, 13)
         Me.Label1.TabIndex = 1
-        Me.Label1.Text = "ExpenceCode"
+        Me.Label1.Text = "Expense Code"
         '
         'btnCancel
         '
@@ -254,14 +256,14 @@ Partial Class Expences
         Me.btnCancel.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(58, Byte), Integer), CType(CType(115, Byte), Integer))
         Me.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnCancel.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnCancel.Image = Global.AVT_TRAKING.My.Resources.Resources.cancel
+        Me.btnCancel.Image = Global.AVT_TRAKING.My.Resources.Resources.close2
         Me.btnCancel.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.btnCancel.Location = New System.Drawing.Point(182, 87)
         Me.btnCancel.Margin = New System.Windows.Forms.Padding(2)
         Me.btnCancel.Name = "btnCancel"
         Me.btnCancel.Size = New System.Drawing.Size(83, 25)
         Me.btnCancel.TabIndex = 9
-        Me.btnCancel.Text = "Cencel"
+        Me.btnCancel.Text = "Cancel"
         Me.btnCancel.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         Me.btnCancel.UseVisualStyleBackColor = True
         '
@@ -298,6 +300,7 @@ Partial Class Expences
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.txtExpenceCode.Location = New System.Drawing.Point(95, 13)
         Me.txtExpenceCode.Margin = New System.Windows.Forms.Padding(2)
+        Me.txtExpenceCode.MaxLength = 36
         Me.txtExpenceCode.Name = "txtExpenceCode"
         Me.txtExpenceCode.Size = New System.Drawing.Size(170, 21)
         Me.txtExpenceCode.TabIndex = 4
@@ -325,6 +328,7 @@ Partial Class Expences
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.txtDescription.Location = New System.Drawing.Point(95, 37)
         Me.txtDescription.Margin = New System.Windows.Forms.Padding(2)
+        Me.txtDescription.MaxLength = 36
         Me.txtDescription.Name = "txtDescription"
         Me.txtDescription.Size = New System.Drawing.Size(170, 21)
         Me.txtDescription.TabIndex = 5
@@ -332,7 +336,7 @@ Partial Class Expences
         'Panel5
         '
         Me.Panel5.Controls.Add(Me.btnFind)
-        Me.Panel5.Controls.Add(Me.TextBox1)
+        Me.Panel5.Controls.Add(Me.txtFind)
         Me.Panel5.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel5.Location = New System.Drawing.Point(3, 171)
         Me.Panel5.Name = "Panel5"
@@ -351,18 +355,17 @@ Partial Class Expences
         Me.btnFind.Location = New System.Drawing.Point(166, 16)
         Me.btnFind.Margin = New System.Windows.Forms.Padding(2)
         Me.btnFind.Name = "btnFind"
-        Me.btnFind.Size = New System.Drawing.Size(68, 28)
+        Me.btnFind.Size = New System.Drawing.Size(39, 28)
         Me.btnFind.TabIndex = 12
-        Me.btnFind.Text = "Find"
         Me.btnFind.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         Me.btnFind.UseVisualStyleBackColor = True
         '
-        'TextBox1
+        'txtFind
         '
-        Me.TextBox1.Location = New System.Drawing.Point(20, 23)
-        Me.TextBox1.Name = "TextBox1"
-        Me.TextBox1.Size = New System.Drawing.Size(131, 21)
-        Me.TextBox1.TabIndex = 11
+        Me.txtFind.Location = New System.Drawing.Point(30, 21)
+        Me.txtFind.Name = "txtFind"
+        Me.txtFind.Size = New System.Drawing.Size(131, 21)
+        Me.txtFind.TabIndex = 11
         '
         'PictureBox2
         '
@@ -421,7 +424,7 @@ Partial Class Expences
         Me.TabPage1.ResumeLayout(False)
         Me.TableLayoutPanel2.ResumeLayout(False)
         Me.Panel4.ResumeLayout(False)
-        CType(Me.tblExpences, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.tblExpenses, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel3.ResumeLayout(False)
         Me.TableLayoutPanel3.ResumeLayout(False)
         Me.GroupBox1.ResumeLayout(False)
@@ -445,9 +448,9 @@ Partial Class Expences
     Friend WithEvents txtExpenceCode As TextBox
     Friend WithEvents Label2 As Label
     Friend WithEvents Label1 As Label
-    Friend WithEvents tblExpences As DataGridView
+    Friend WithEvents tblExpenses As DataGridView
     Friend WithEvents btnFind As Button
-    Friend WithEvents TextBox1 As TextBox
+    Friend WithEvents txtFind As TextBox
     Friend WithEvents GroupBox1 As GroupBox
     Friend WithEvents btnRestore As PictureBox
     Friend WithEvents btnMaximize As PictureBox

@@ -368,6 +368,12 @@ cln.idClient Like '" + consulta + "'
 Or
 CONCAT(wo.idWO , ' ', tk.task) like '%" + consulta + "%'
 Or
+CONCAT(wo.idWO , '-', tk.task) like '%" + consulta + "%'
+Or 
+wo.idWO like '%" + consulta + "%'
+Or 
+tk.task like '%" + consulta + "%'
+Or
 jb.jobNo Like '" + consulta + "'
 Or
 cln.firstName Like '" + consulta + "'

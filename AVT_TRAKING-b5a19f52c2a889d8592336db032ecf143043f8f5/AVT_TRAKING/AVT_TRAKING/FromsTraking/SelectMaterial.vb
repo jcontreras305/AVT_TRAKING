@@ -17,9 +17,11 @@ Public Class SelectMaterial
     End Sub
 
     Private Sub txtNameMaterialSM_TextChanged(sender As Object, e As EventArgs) Handles txtNameMaterialSM.TextChanged
-        mtd.selectMaterial(tblMaterialSM, txtNameMaterialSM.Text)
+        mtd.selectMaterial(tblMaterialSM, txtNameMaterialSM.Text, cmbNombreVendorSM.Text, False)
     End Sub
-
+    Private Sub cmbNombreVendorSM_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbNombreVendorSM.SelectedIndexChanged
+        mtd.selectMaterial(tblMaterialSM, txtNameMaterialSM.Text, cmbNombreVendorSM.Items(cmbNombreVendorSM.SelectedIndex), False)
+    End Sub
     Private Sub tblMaterialSM_MouseDoubleClick(sender As Object, e As MouseEventArgs) Handles tblMaterialSM.MouseDoubleClick
         enviarDatos()
         Me.Close()
@@ -55,11 +57,13 @@ Public Class SelectMaterial
         SendMessage(Me.Handle, &H112&, &HF012&, 0)
     End Sub
 
-    Private Sub PictureBox1_Click(sender As Object, e As EventArgs) Handles PictureBox1.Click
+    Private Sub PictureBox1_Click(sender As Object, e As EventArgs)
         Me.Close()
     End Sub
 
     Private Sub PictureBox2_Click(sender As Object, e As EventArgs) Handles PictureBox2.Click
         Me.WindowState = FormWindowState.Minimized
     End Sub
+
+
 End Class

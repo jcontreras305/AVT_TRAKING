@@ -83,9 +83,9 @@ Partial Class MainFrom
         Me.Label1.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.Label1.Location = New System.Drawing.Point(10, 4)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(94, 18)
+        Me.Label1.Size = New System.Drawing.Size(102, 18)
         Me.Label1.TabIndex = 4
-        Me.Label1.Text = "MainFrom"
+        Me.Label1.Text = "Main Menu"
         '
         'Panel2
         '
@@ -324,7 +324,7 @@ Partial Class MainFrom
         Me.btnWorkCodes.Name = "btnWorkCodes"
         Me.btnWorkCodes.Size = New System.Drawing.Size(188, 58)
         Me.btnWorkCodes.TabIndex = 6
-        Me.btnWorkCodes.Text = "     Work Codes"
+        Me.btnWorkCodes.Text = "       Client Projects"
         Me.btnWorkCodes.UseVisualStyleBackColor = True
         '
         'Panel6

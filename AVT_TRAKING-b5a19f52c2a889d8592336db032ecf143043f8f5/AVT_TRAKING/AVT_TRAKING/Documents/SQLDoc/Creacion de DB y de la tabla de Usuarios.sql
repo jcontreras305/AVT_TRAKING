@@ -1,10 +1,10 @@
 use master
-Go
-
-create database AVT_TRAKING
 GO
 
-use AVT_TRAKING
+create database VRT_TRAKING
+GO
+
+use VRT_TRAKING
 GO
 --##########################################################################################
 --##################  TABLA DE USERS #######################################################
@@ -25,15 +25,15 @@ create table userAccess (
 	idUsers varchar(36) not null,
 	access varchar(30) not null
 )
-go
+GO
 
 ALTER TABLE userAccess WITH CHECK ADD CONSTRAINT pk_idUsers_access_userAccess
 PRIMARY KEY(idUsers,access)
-go
+GO
 
 ALTER TABLE userAccess WITH CHECK ADD CONSTRAINT fk_idUser_userAccess
 FOREIGN KEY (idUsers) REFERENCES users(idUsers)
-go
+GO
 
 declare @idAdminUser as varchar (36) = NEWID()
 insert into users values (@idAdminUser, 'admin' , 'admin')
@@ -111,7 +111,7 @@ create table TrackElements(
 	typeElement varchar(40),
 	element varchar(30)
 )
-go
+GO
 insert into TrackElements values
 ('Force or Reject',''),
 ('Source',''),
@@ -252,7 +252,7 @@ CREATE TABLE [dbo].[clients](
 	[photo] [image] NULL,
 	[payTerms] [varchar](30) NULL
 	)
-	go
+	GO
 
 --##########################################################################################
 --##################  TABLA DE CLIENTES ####################################################
@@ -267,7 +267,7 @@ create table clientsEst(
 	idContact varchar(36),
 	idHomeAdress varchar(36)
 )
-go
+GO
 
 --##########################################################################################
 --##################  TABLA DE COMPANY #####################################################
@@ -296,7 +296,22 @@ create table contact (
 	email varchar(50)
 )
 GO
+--##########################################################################################
+--##################  TABLA DE COST PROJECT EST ############################################
+--##########################################################################################
 
+CREATE TABLE [dbo].[costProjectEst](
+	projectId varchar(30) NOT NULL,
+	weekend date NOT NULL,
+	scfCost float ,
+	rmvCost float ,
+	iiCost float ,
+	pntCost float NULL,
+)
+GO
+ALTER TABLE costProjectEst WITH CHECK ADD CONSTRAINT pk_projectId_weekend_costProjectEst
+PRIMARY KEY (projectId,weekend)
+GO
 --##########################################################################################
 --##################  TABLA DE DETALLEMATERIAL #############################################
 --##########################################################################################
@@ -340,7 +355,7 @@ create table drawing(
 	[description] varchar(150),
 	projectId varchar(30)
 )
-go
+GO
 
 --##########################################################################################
 --##################  TABLA DE EIRHC #######################################################
@@ -353,11 +368,11 @@ create table EqIRHC(
 	matRate float,
 	eqRate float
 )
-go
+GO
 
 ALTER TABLE EqIRHC ADD CONSTRAINT pk_type_thickness_EqIRHC
 PRIMARY KEY ([type],thickness)
-go
+GO
 
 --##########################################################################################
 --##################  TABLA DE EMPLOYEES ###################################################
@@ -368,7 +383,7 @@ create table emails(
 	name varchar(50) ,
 	status bit
 )
-go
+GO
 
 --##########################################################################################
 --##################  TABLA DE EMPLOYEES ###################################################
@@ -424,7 +439,22 @@ create table equipmentEst(
 	acm bit,
 	idDrawingNum varchar(45) not null
 )
-go
+GO
+
+--##########################################################################################
+--##################  TABLA DE EQUIPMENT MATERIAL ##########################################
+--##########################################################################################
+CREATE TABLE equipmentMaterial(
+	[type] varchar(25) NOT NULL,
+	thick float NOT NULL,
+	price money ,
+	[description] [varchar](50) 
+)
+GO
+
+ALTER TABLE equipmentMaterial WITH CHECK ADD CONSTRAINT pk_type_thick_EquipmentMaterial
+PRIMARY KEY ([type],thick)
+GO
 
 --##########################################################################################
 --##################  TABLA DE EQUIPMENT PROGRESS ##########################################
@@ -454,8 +484,11 @@ create table eqInsUnitRate(
 	matRate float,
 	eqRate float
 )
-go
+GO
 
+ALTER TABLE eqInsUnitRate WITH CHECK ADD CONSTRAINT PK_type_think_eqinsUnitRate
+PRIMARY KEY([type],thick)
+GO
 --##########################################################################################
 --##################  TABLA DE EQJKTUNITRATE ###############################################
 --##########################################################################################
@@ -467,7 +500,7 @@ create table eqJktUnitRate(
 	matFactor float,
 	eqFactor float
 )
-go
+GO
 
 --##########################################################################################
 --##################  TABLA DE EQPAINTUNITRATE #############################################
@@ -480,9 +513,9 @@ create table eqPaintUnitRate(
 	matRate float,
 	eqRate float
 )
-go
-ALTER TABLE eqInsUnitRate WITH CHECK ADD CONSTRAINT PK_type_think_eqinsUnitRate
-PRIMARY KEY([type],thick)
+GO
+ALTER TABLE eqPaintUnitRate WITH CHECK ADD CONSTRAINT PK_systemPntEq_pntOption_eqPaintUnitRate
+PRIMARY KEY(systemPntEq,pntOption)
 GO
 
 --##########################################################################################
@@ -507,11 +540,11 @@ create table EstCostBuild(
 	SCOSTED float,
 	STCOST float
 )
-go
+GO
 
 ALTER TABLE EstCostBuild WITH CHECK ADD CONSTRAINT pk_idTag_idDrawingnum_projectId
 PRIMARY KEY (tag,idDrawingNum,projectId)
-go
+GO
 --##########################################################################################
 --##################  TABLA DE ESTCOSTDISM #################################################
 --##########################################################################################
@@ -531,11 +564,11 @@ create table EstCostDism(
 	BSCOSTEB float,
 	SCOSTEDD float
 )
-go
+GO
 
 ALTER TABLE EstCostDism WITH CHECK ADD CONSTRAINT pk_idTag_idDrawingnum_projectId_Dism
 PRIMARY KEY (tag,idDrawingNum,projectId)
-go
+GO
 --##########################################################################################
 --##################  TABLA DE ESTCOSTEQ ###################################################
 --##########################################################################################
@@ -566,11 +599,11 @@ CREATE TABLE EstCostEq(
 	EPCOSTE float,
 	EPTCOST float
 )
-go
+GO
 
 ALTER TABLE EstCostEq ADD CONSTRAINT pk_tag_idDrawingnum_projectId_EstCostEq
 PRIMARY KEY (tag,idDrawingNum,projectId)
-go
+GO
 
 --##########################################################################################
 --##################  TABLA DE ESTCOSTPP ###################################################
@@ -602,11 +635,11 @@ create table EstCostPp(
 	PPCOSTE float ,
 	PPTCOST float
 )
-go
+GO
 
 ALTER TABLE EstCostPp ADD CONSTRAINT pk_tag_idDrawingNum_projecId
 PRIMARY KEY (tag,idDrawingNum,projectId)
-go
+GO
 
 --##########################################################################################
 --##################  TABLA DE ESTCOSTSCF ##################################################
@@ -642,7 +675,7 @@ create table EstCostScf(
 	STCOSTB float,
 	STCOSTD float
 )
-go
+GO
 
 ALTER TABLE EstCostScf ADD CONSTRAINT pk_tag_idDrawingNum_projectId
 PRIMARY KEY (tag,idDrawingNum,projectId)
@@ -753,7 +786,7 @@ create table factorElevationSCF(
 	elevation int primary key not null,
 	[percent] int 
 )
-go
+GO
 --##########################################################################################
 --##################  TABLA DE HOMEADDRESS #################################################
 --##########################################################################################
@@ -767,6 +800,23 @@ create table HomeAddress (
 	postalCode int
 )
 GO
+
+--##########################################################################################
+--##################  TABLA DE HOURS PROJECTS EST ##########################################
+--##########################################################################################
+
+CREATE TABLE [dbo].[hoursProjectEst](
+	projectId varchar(30) NOT NULL,
+	weekend date NOT NULL,
+	scfHrs float NULL,
+	rmvHrs float NULL,
+	iiHrs float NULL,
+	pntHrs float NULL,
+)
+GO
+ALTER TABLE hoursProjectEst WITH CHECK ADD CONSTRAINT pk_projectId_weekend_hoursProjectEst
+PRIMARY KEY (projectId,weekend)
+go
 
 --##########################################################################################
 --##################  TABLA DE HOURSWORKED #################################################
@@ -793,7 +843,7 @@ create table imageClient(
 	img image,
 	imgDefault char(1)
 )
-go
+GO
 
 --##########################################################################################
 --##################  TABLA DE INCOMING ####################################################
@@ -828,7 +878,7 @@ create table insFitting(
 	bebel float,
 	cutOut float
 )
-go
+GO
 
 --##########################################################################################
 --##################  TABLA DE INVOICE #####################################################
@@ -843,11 +893,11 @@ create table invoice(
 	invoiceDate date NULL,
 	[status] bit NULL
 )
-go
+GO
 
 alter table invoice add constraint pk_idClient_idPO_invoice
 primary key (invoice,idPO)
-go
+GO
 
 --##########################################################################################
 --##################  TABLA DE JOB #########################################################
@@ -874,7 +924,7 @@ create table jobCat(
 	days int,
 	idClient varchar(36)
 )
-go
+GO
 
 --##########################################################################################
 --##################  TABLA DE KPI #########################################################
@@ -906,7 +956,7 @@ create table KPI(
 	hoursOT float,
 	install varchar(20)
 )
-go
+GO
 
 --##########################################################################################
 --##################  TABLA DE LEG #########################################################
@@ -930,7 +980,7 @@ create table laborRate(
 	paintRate money,
 	scafRate money
 )
-go
+GO
 --##########################################################################################
 --##################  TABLA DE LIST EMAIL REPORT ###########################################
 --##########################################################################################
@@ -968,7 +1018,7 @@ create table materialClass(
 	code varchar(20) primary key not null,
 	description varchar(50)
 )
-go
+GO
 
 --##########################################################################################
 --##################  TABLA DE MATERIAL HANDELING ##########################################
@@ -1076,7 +1126,7 @@ GO
 --##################  TABLA DE OUTGOING ####################################################
 --##########################################################################################
 
-create table outgoing(
+create table outGOing(
 	ticketNum varchar(15) primary key not null,
 	dateShipped date,
 	comment text,
@@ -1139,7 +1189,7 @@ create table pipingEst(
 	st bit,
 	idDrawingNum varchar(45)
 )
-go
+GO
 
 --##########################################################################################
 --##################  TABLA DE PIPINGMATERIAL ##############################################
@@ -1152,7 +1202,7 @@ create table pipingMaterial(
 	price money,
 	[description] varchar(50)
 )
-go
+GO
 
 --##########################################################################################
 --##################  TABLA DE PIPING PROGRESS #############################################
@@ -1184,7 +1234,25 @@ create table pntFitting(
 	controlVlv float,
 	weldedVlv float
 )
-go
+GO
+
+--##########################################################################################
+--##################  TABLA DE PP FITTING MATERIAL #########################################
+--##########################################################################################
+
+CREATE TABLE ppFittingMaterial(
+	size float NOT NULL,
+	[type] varchar(25) NOT NULL,
+	thick float NOT NULL,
+	fitting varchar(25) NOT NULL,
+	price money NULL,
+	description varchar(50) NULL,
+)
+GO
+
+ALTER TABLE ppFittingMaterial ADD CONSTRAINT pk_size_type_thick_fitting_ppFittingMaterial
+PRIMARY KEY (size ,[type],thick,fitting)
+GO
 
 --##########################################################################################
 --##################  TABLA DE PPINSUNITRATE ###############################################
@@ -1198,8 +1266,11 @@ create table ppInsUnitRate(
 	matRate float,
 	eqRate float
 )
-go
+GO
 
+ALTER TABLE ppInsUnitRate ADD CONSTRAINT PK_size_type_thick_PPInsUnitRate 
+PRIMARY KEY (size,[type] ,thick)
+GO
 --##########################################################################################
 --##################  TABLA DE PPIRHC ######################################################
 --##########################################################################################
@@ -1212,11 +1283,11 @@ create table PpIRHC(
 	matRate float,
 	eqRate float
 )
-go
+GO
 
 ALTER TABLE PpIRHC ADD CONSTRAINT pk_size_type_thickness_PpIRHC
 PRIMARY KEY (size,[type],thickness)
-go
+GO
 
 --##########################################################################################
 --##################  TABLA DE PPJKTUNITRATE ###############################################
@@ -1229,7 +1300,7 @@ create table ppJktUnitRate(
 	matFactor float,
 	eqFactor float 
 )
-go
+GO
 
 --##########################################################################################
 --##################  TABLA DE PNTFITTING ##################################################
@@ -1243,7 +1314,7 @@ create table ppPaintUnitRate(
 	matRate float,
 	eqRate float
 )
-go
+GO
 
 --##########################################################################################
 --##################  TABLA DE PRODUCT #####################################################
@@ -1304,7 +1375,7 @@ GO
 
 ALTER TABLE productJob WITH CHECK ADD CONSTRAINT pk_idProduct_jobNo
 PRIMARY KEY(idProduct,jobNo)
-go
+GO
 --##########################################################################################
 --##################  TABLA DE PRODUCT MODIFICATION ########################################
 --##########################################################################################
@@ -1322,8 +1393,8 @@ GO
 --##################  TABLA DE PRODUCT OUTGOING ############################################
 --##########################################################################################
 
-create table productOutGoing(
-	idProductOutGoing varchar(36) primary key not null,
+create table productOutGOing(
+	idProductOutGOing varchar(36) primary key not null,
 	ticketNum varchar(15),
 	idProduct int,
 	quantity float
@@ -1353,7 +1424,7 @@ create table projectClientEst(
 	releaseDate date,
 	idClientEst varchar(36)
 )
-go
+GO
 
 --##########################################################################################
 --##################  TABLA DE PROYECT ORDER ###############################################
@@ -1416,7 +1487,7 @@ create table ReportEmail(
 	subject text ,
 	body text 
 )
-go
+GO
 
 
 --##########################################################################################
@@ -1461,11 +1532,11 @@ create table RFIDiffEq(
 	nEPCOSTE float,
 	nEPTCOST float
 )
-go
+GO
 
 ALTER TABLE RFIDiffEq WITH CHECK ADD CONSTRAINT pk_idRFIEq_tag_idDrawingNum
 PRIMARY KEY(idRFIEq,tag,idDrawingNum)
-go
+GO
 
 --##########################################################################################
 --##################  TABLA DE RFI DIFF SCF ################################################
@@ -1515,7 +1586,7 @@ create table RFIDiffPp(
 	 nPPCOSTE  float, 
 	 nPPTCOST  float
 )
-go
+GO
 ALTER TABLE RFIDiffPp WITH CHECK ADD CONSTRAINT fk_idRFIPp_tag_idDrawingNum
 PRIMARY KEY (idRFIPp,tag,idDrawingNum) 
 GO
@@ -1559,11 +1630,11 @@ create table RFIDiffScf(
 	nSDTCOST float,
 	nSTCOST float
 )
-go
+GO
 
 ALTER TABLE RFIDiffScf WITH CHECK ADD CONSTRAINT pk_idRFI_tag_idDrawingNum
 PRIMARY KEY(idRFI,tag,idDrawingNum)
-go
+GO
 --##########################################################################################
 --##################  TABLA DE RFI EQUIPMENT ###############################################
 --##########################################################################################
@@ -1612,10 +1683,10 @@ create table RFIEquipment(
 	weDate date,
 	note text	
 )
-go
+GO
 ALTER TABLE RFIEquipment WITH CHECK ADD CONSTRAINT pk_idRFIEq_tag
 PRIMARY KEY (idRFIEq,tag)
-go
+GO
 --##########################################################################################
 --##################  TABLA DE RFI PIPING ##################################################
 --##########################################################################################
@@ -1698,10 +1769,10 @@ create table RFIPiping (
 	weDate date,
 	note text
 )
-go
+GO
 ALTER TABLE RFIPiping WITH CHECK ADD CONSTRAINT pk_idRFIPp_idTagPp_idDrawingNum
 PRIMARY KEY (idRFIPp,tag,idDrawingNum)
-go
+GO
 --##########################################################################################
 --##################  TABLA DE RFI SCAFFOLD ################################################
 --##########################################################################################
@@ -1736,10 +1807,10 @@ create table RFIScaffoldEst(
 	weDate date,
 	note text	
 )
-go
+GO
 ALTER TABLE RFIScaffoldEst WITH CHECK ADD CONSTRAINT pk_idRFI_Tag
 PRIMARY KEY (idRFI,Tag)
-go
+GO
 --##########################################################################################
 --##################  TABLA DE SCAFESTCOST #################################################
 --##########################################################################################
@@ -1778,7 +1849,7 @@ CREATE TABLE ScafEstCost(
 	BillingDays int NULL,
 	EDDAYS money NULL
 )
-go
+GO
 --##########################################################################################
 --##################  TABLA DE SCAFFOLDEST #################################################
 --##########################################################################################
@@ -1797,7 +1868,7 @@ create table scaffoldEst(
 	idEnviroment varchar(40) not null,
 	idDrawingNum varchar(45) not null
 )
-go
+GO
 
 --##########################################################################################
 --##################  TABLA DE SCAFFOLD INFORMATION ########################################
@@ -1919,7 +1990,7 @@ CREATE TABLE scfEstimation(
 	ccnum varchar(30) NULL,
 	idClient varchar(36) NULL
 )
-go
+GO
 
 --##########################################################################################
 --##################  TABLA DE SCFESTPROYECT #################################################
@@ -1930,7 +2001,7 @@ CREATE TABLE scfEstProyect(
 	ccnum varchar(30) NOT NULL primary key,
 	unit varchar(30) NOT NULL
 )
-go
+GO
 
 --##########################################################################################
 --##################  TABLA DE SCFTYPECOST #################################################
@@ -1966,7 +2037,7 @@ CREATE TABLE scfTypeCost(
 	SCSN float NULL,
 	BDRATE float NULL
 )
-go
+GO
 
 --##########################################################################################
 --##################  TABLA DE SUBJOBS #####################################################
@@ -2053,7 +2124,7 @@ create TABLE taxesPT(
 	QtyHelper int ,
 	jobNo bigint 
 )
-go
+GO
 
 --##########################################################################################
 --##################  TABLA DE TAXESST #####################################################
@@ -2104,11 +2175,11 @@ create table tempInvoice(
 	startDate date,
 	FinalDate date
 )
-go
+GO
 
 alter table tempInvoice add constraint pk_invoice_TempInvoice
 primary key (invoice, idPO)
-go
+GO
 
 --##########################################################################################
 --##################  TABLA DE TRACKDEFAULTELEMENTS ########################################
@@ -2152,49 +2223,49 @@ GO
 create table TrackFormatColums(
 	idTFE varchar(36) primary key not null,
 	idClient varchar(36),
-	[Record ID]varchar(31),
-	[Force or Reject]varchar(31),
-	[Source]varchar(31),
-	[Date]varchar(31),
-	[Order Type]varchar(31),
-	[Location ID]varchar(31),
-	[Company Code]varchar(31),
-	[Resource ID]varchar(31),
-	[Resource Name]varchar(31),
-	[Area]varchar(31),
-	[Group Name]varchar(31),
-	[Agreement]varchar(31),
-	[Skill Type]varchar(31),
-	[Shift]varchar(31),
-	[Level 1 ID]varchar(31),
-	[Level 2 ID]varchar(31),
-	[Level 3 ID]varchar(31),
-	[Level 4 ID]varchar(31),
-	[Hours Total]varchar(31),
-	[Hours Total Activity Code]varchar(31),
-	[S/T (Hrs)]varchar(31),
-	[S/T Hrs Activity Code]varchar(31),
-	[O/T (Hrs)]varchar(31),
-	[O/T Hrs Activity Code]varchar(31),
-	[D/T (Hrs)]varchar(31),
-	[D/T Hrs Activity Code]varchar(31),
-	[Extra Charges $]varchar(31),
-	[Extra Charges $ Activity Code]varchar(31),
-	[Extra]varchar(31),
-	[Extra 1]varchar(31),
-	[Extra 2]varchar(31),
-	[Add Time]varchar(31),
-	[Pay Type]varchar(31),
-	[R4 (Hrs)]varchar(31),
-	[R5 (Hrs)]varchar(31),
-	[R6 (Hrs)]varchar(31),
-	[GL Account]varchar(31),
-	[ST Adders]varchar(31),
-	[OT Adders]varchar(31),
-	[DT Adders]varchar(31),
-	[R4 Adders]varchar(31),
-	[R5 Adders]varchar(31),
-	[R6 Adders]varchar(31)
+	[Record ID]varchar(51),
+	[Force or Reject]varchar(51),
+	[Source]varchar(51),
+	[Date]varchar(51),
+	[Order Type]varchar(51),
+	[Location ID]varchar(51),
+	[Company Code]varchar(51),
+	[Resource ID]varchar(51),
+	[Resource Name]varchar(51),
+	[Area]varchar(51),
+	[Group Name]varchar(51),
+	[Agreement]varchar(51),
+	[Skill Type]varchar(51),
+	[Shift]varchar(51),
+	[Level 1 ID]varchar(51),
+	[Level 2 ID]varchar(51),
+	[Level 3 ID]varchar(51),
+	[Level 4 ID]varchar(51),
+	[Hours Total]varchar(51),
+	[Hours Total Activity Code]varchar(51),
+	[S/T (Hrs)]varchar(51),
+	[S/T Hrs Activity Code]varchar(51),
+	[O/T (Hrs)]varchar(51),
+	[O/T Hrs Activity Code]varchar(51),
+	[D/T (Hrs)]varchar(51),
+	[D/T Hrs Activity Code]varchar(51),
+	[Extra Charges $]varchar(51),
+	[Extra Charges $ Activity Code]varchar(51),
+	[Extra]varchar(51),
+	[Extra 1]varchar(51),
+	[Extra 2]varchar(51),
+	[Add Time]varchar(51),
+	[Pay Type]varchar(51),
+	[R4 (Hrs)]varchar(51),
+	[R5 (Hrs)]varchar(51),
+	[R6 (Hrs)]varchar(51),
+	[GL Account]varchar(51),
+	[ST Adders]varchar(51),
+	[OT Adders]varchar(51),
+	[DT Adders]varchar(51),
+	[R4 Adders]varchar(51),
+	[R5 Adders]varchar(51),
+	[R6 Adders]varchar(51)
 )
 GO
 --##########################################################################################
@@ -2330,6 +2401,14 @@ REFERENCES [dbo].[contact]([idContact])
 GO
 
 --##########################################################################################
+--##################  FOREIG KEYS COST PROJECT EST #########################################
+--##########################################################################################
+
+ALTER TABLE [dbo].[costProjectEst]  WITH CHECK ADD  CONSTRAINT [fk_projectId_costProjectEst] FOREIGN KEY([projectId])
+REFERENCES [dbo].[projectClientEst] ([projectId])
+GO
+
+--##########################################################################################
 --##################  FOREIG KEYS DETALLE MATERIAL #########################################
 --##########################################################################################
 
@@ -2357,7 +2436,7 @@ ALTER TABLE drawing WITH CHECK ADD CONSTRAINT fk_projectId_drawing
 FOREIGN KEY (projectId) REFERENCES projectClientEst(projectId)
 ON UPDATE CASCADE
 ON DELETE CASCADE
-go
+GO
 
 --##########################################################################################
 --##################  FOREIG KEYS EQIRHC ###################################################
@@ -2367,7 +2446,7 @@ ALTER TABLE EqIRHC WITH CHECK ADD CONSTRAINT fk_type_EqIRHC
 FOREIGN KEY ([type]) REFERENCES insFitting([type])
 ON UPDATE CASCADE
 ON DELETE CASCADE
-go
+GO
 
 --##########################################################################################
 --##################  FOREIG KEYS ESTCOSTBUILD #############################################
@@ -2376,34 +2455,34 @@ go
 ALTER TABLE EstCostBuild WITH CHECK ADD CONSTRAINT fk_tag_EstCostBuild
 FOREIGN KEY (tag) REFERENCES scaffoldEst(tag)
 	
-go
+GO
 
 ALTER TABLE EstCostBuild WITH CHECK ADD CONSTRAINT fk_idDrawingNum_EstCostBuild
 FOREIGN KEY (idDrawingNum) REFERENCES drawing(idDrawingNum)
 ON UPDATE CASCADE
 ON DELETE CASCADE
-go
+GO
 
 ALTER TABLE EstCostBuild WITH CHECK ADD CONSTRAINT fk_projectId_EstCostBuild
 FOREIGN KEY (projectId) REFERENCES projectClientEst(projectId)
-go
+GO
 --##########################################################################################
 --##################  FOREIG KEYS ESTCOSTDISM ##############################################
 --##########################################################################################
 
 ALTER TABLE EstCostDism WITH CHECK ADD CONSTRAINT fk_tag_EstCostDism
 FOREIGN KEY (tag) REFERENCES scaffoldEst(tag)
-go
+GO
 
 ALTER TABLE EstCostDism WITH CHECK ADD CONSTRAINT fk_idDrawingNum_EstCostDism
 FOREIGN KEY (idDrawingNum) REFERENCES drawing(idDrawingNum)
 ON UPDATE CASCADE
 ON DELETE CASCADE
-go
+GO
 
 ALTER TABLE EstCostDism WITH CHECK ADD CONSTRAINT fk_projectId_EstCostDism
 FOREIGN KEY (projectId) REFERENCES projectClientEst(projectId)
-go
+GO
 
 --##########################################################################################
 --##################  FOREIG KEYS ESTCOSTEQ ################################################
@@ -2411,16 +2490,16 @@ go
 
 --ALTER TABLE EstCostEq WITH CHECK ADD CONSTRAINT fk_idEquipmentEst_EstCosteq
 --FOREIGN KEY (tag) REFERENCES equipmentEst(idEquipmentEst)
---go 
+--GO 
 
 ALTER TABLE EstCostEq WITH CHECK ADD CONSTRAINT fk_idDrawingNum_EstCosteq
 FOREIGN KEY (idDrawingNum) REFERENCES drawing(idDrawingNum)
 ON UPDATE CASCADE
-go 
+GO 
 
 ALTER TABLE EstCostEq WITH CHECK ADD CONSTRAINT fk_idEquipmentEst_EstCosteq
 FOREIGN KEY (projectId) REFERENCES projectClientEst(projectId)
-go 
+GO 
 
 --##########################################################################################
 --##################  FOREIG KEYS ESTCOSTSCF ###############################################
@@ -2429,28 +2508,27 @@ go
 ALTER TABLE EstCostPp ADD CONSTRAINT fk_idDrawingNum_EstCostPp
 FOREIGN KEY (idDrawingNum) REFERENCES drawing(idDrawingNum)
 on update cascade
-go
+GO
 
 ALTER TABLE EstCostPp ADD CONSTRAINT fk_projectId_EstCostPp
 FOREIGN KEY (projectId) REFERENCES projectClientEst(projectId)
-go
+GO
 --##########################################################################################
 --##################  FOREIG KEYS ESTCOSTSCF ###############################################
 --##########################################################################################
 
 ALTER TABLE EstCostScf WITH CHECK ADD CONSTRAINT fk_tag_EstCosScf
 FOREIGN KEY (tag) REFERENCES scaffoldEst(tag)
-
-go
+GO
 
 ALTER TABLE EstCostScf WITH CHECK ADD CONSTRAINT fk_idDrawingNum_EstCostScf
 FOREIGN KEY (idDrawingNum) REFERENCES drawing(idDrawingNum)
 ON UPDATE CASCADE
-go
+GO
 
 ALTER TABLE EstCostScf WITH CHECK ADD CONSTRAINT fk_projectId_EstCostScf
 FOREIGN KEY (projectId) REFERENCES projectClientEst(projectId)
-go
+GO
 
 --##########################################################################################
 --##################  FOREIG KEYS EMPLOYEES ################################################
@@ -2527,15 +2605,19 @@ GO
 --##################  FOREIG KEYS EQPAINTUNITRATE ##########################################
 --##########################################################################################
 
-ALTER TABLE eqPaintUnitRate WITH CHECK ADD CONSTRAINT pk_systemPntEq_pntFitting
-PRIMARY KEY (systemPntEq,pntOption)
-go
-
 ALTER TABLE eqPaintUnitRate WITH CHECK ADD CONSTRAINT fk_pntFitting_eqPaintUnitRate
 FOREIGN KEY (pntOption) REFERENCES pntFitting(pntOption)
 on update cascade
 on delete cascade
-go
+GO
+
+--##########################################################################################
+--##################  FOREIG KEYS EQUIPMENT MATERIAL #######################################
+--##########################################################################################
+
+ALTER TABLE equipmentMaterial  WITH CHECK ADD  CONSTRAINT fk_type_EquipmentMaterial 
+FOREIGN KEY([type]) REFERENCES insFitting ([type])
+GO
 
 --##########################################################################################
 --##################  FOREIG KEYS EQUIPMENT PROGRESS #######################################
@@ -2545,7 +2627,7 @@ ALTER TABLE equipmentProgress WITH CHECK ADD CONSTRAINT fk_idTag_EquipmentProgre
 FOREIGN KEY (tag) REFERENCES equipmentEst(idEquimentEst)
 ON UPDATE CASCADE
 ON DELETE CASCADE
-go
+GO
 
 --##########################################################################################
 --##################  FOREIG KEYS EXISTENCES ###############################################
@@ -2571,7 +2653,14 @@ GO
 
 ALTER TABLE expensesUsed WITH CHECK ADD CONSTRAINT fk_idHoursWorked_expensesUsed FOREIGN KEY (idHorsWorked) 
 REFERENCES  hoursWorked (idHorsWorked)
-go
+GO
+--##########################################################################################
+--##################  FOREIG KEYS HOURS PROJECT EST ########################################
+--##########################################################################################
+
+ALTER TABLE hoursProjectEst  WITH CHECK ADD  CONSTRAINT fk_projectId_HoursProjectEst FOREIGN KEY(projectId)
+REFERENCES projectClientEst (projectId)
+GO
 
 --##########################################################################################
 --##################  FOREIG KEYS HOURS WORKED #############################################
@@ -2629,11 +2718,11 @@ GO
 
 ALTER TABLE KPI WITH CHECK ADD CONSTRAINT fk_idAux_KPI
 FOREIGN KEY (idAux) REFERENCES task(idAux)
-go
+GO
 
 ALTER TABLE KPI WITH CHECK ADD CONSTRAINT fk_jobNo_KPI
 FOREIGN KEY (jobNo) REFERENCES job(jobNo)
-go
+GO
 
 --##########################################################################################
 --##################  FOREIG KEYS LEG ######################################################
@@ -2716,7 +2805,7 @@ GO
 --##################  FOREIG KEYS OUTGOING #################################################
 --##########################################################################################
 
-ALTER TABLE outgoing ADD CONSTRAINT fk_jobNum_outgoing
+ALTER TABLE outGOing ADD CONSTRAINT fk_jobNum_outGOing
 FOREIGN KEY (jobNo) REFERENCES job (jobNo)
 GO
 
@@ -2769,13 +2858,13 @@ GO
 
 ALTER TABLE pipingMaterial WITH CHECK ADD CONSTRAINT pk_size_type_thick
 PRIMARY KEY (size, [type], thick)
-go
+GO
 
 ALTER TABLE pipingMaterial WITH CHECK ADD CONSTRAINT fk_type_pipingmaterial
 FOREIGN KEY ([type]) REFERENCES insFitting([type])
 ON UPDATE CASCADE
 ON DELETE CASCADE
-go
+GO
 --##########################################################################################
 --##################  FOREIG KEYS PIPING PROGRESS ##########################################
 --##########################################################################################
@@ -2787,11 +2876,20 @@ ON DELETE CASCADE
 GO
 
 --##########################################################################################
+--##################  FOREIG KEYS PP FITTING MATERIAL ######################################
+--##########################################################################################
+
+ALTER TABLE [dbo].[ppFittingMaterial]  WITH CHECK ADD  CONSTRAINT [fk_type_ppFittingMaterial] FOREIGN KEY([type])
+REFERENCES [dbo].[insFitting] ([type])
+GO
+--##########################################################################################
 --##################  FOREIG KEYS PPINSUNITRATE ############################################
 --##########################################################################################
 
-ALTER TABLE ppInsUnitRate WITH CHECK ADD CONSTRAINT PK_size_type_thick_PPInsUnitRate
-PRIMARY KEY (size,[type],thick)
+ALTER TABLE [dbo].[ppInsUnitRate]  WITH CHECK ADD  CONSTRAINT [fk_type_PPInsUnitRate] FOREIGN KEY([type])
+REFERENCES [dbo].[insFitting] ([type])
+ON UPDATE CASCADE
+ON DELETE CASCADE
 GO
 
 --##########################################################################################
@@ -2802,7 +2900,7 @@ ALTER TABLE PpIRHC WITH CHECK ADD CONSTRAINT fk_type_PpIRHC
 FOREIGN KEY ([type]) REFERENCES insFitting([type])
 ON UPDATE CASCADE
 ON DELETE CASCADE
-go
+GO
 
 --##########################################################################################
 --##################  FOREIG KEYS PPPAINTUNITRATE ##########################################
@@ -2810,13 +2908,13 @@ go
 
 ALTER TABLE ppPaintUnitRate WITH CHECK ADD CONSTRAINT pk_systemPntPP_pntOption_size
 PRIMARY KEY (systemPntPP,pntOption,size) 
-go
+GO
 
 ALTER TABLE ppPaintUnitRate WITH CHECK ADD CONSTRAINT Fk_pntOption_pntFitting
 FOREIGN KEY (pntOption) REFERENCES pntFitting(pntOption) 
 on update cascade
 on delete cascade
-go
+GO
 
 --##########################################################################################
 --##################  FOREIG KEYS PRODUCT ##################################################
@@ -2890,11 +2988,11 @@ GO
 --##################  FOREIG KEYS PRODUCT OUTGOING #########################################
 --##########################################################################################
 
-ALTER TABLE productOutGoing ADD CONSTRAINT fk_ticketNum_productOutGoing
-FOREIGN KEY (ticketNum) REFERENCES outgoing(ticketNum)
+ALTER TABLE productOutGOing ADD CONSTRAINT fk_ticketNum_productOutGOing
+FOREIGN KEY (ticketNum) REFERENCES outGOing(ticketNum)
 GO
 
-ALTER TABLE productOutGoing ADD CONSTRAINT fk_idProduct_productOutGoing
+ALTER TABLE productOutGOing ADD CONSTRAINT fk_idProduct_productOutGOing
 FOREIGN KEY (idProduct) REFERENCES product(idProduct)
 GO
 
@@ -2930,7 +3028,7 @@ ALTER TABLE projectClientEst WITH CHECK ADD CONSTRAINT fk_idClintEst_projectClie
 FOREIGN KEY (idClientEst) REFERENCES clientsEst(idClientEst)
 on update cascade
 on delete cascade
-go
+GO
 
 --##########################################################################################
 --##################  FOREIG KEYS PROJECT OREDER ###########################################
@@ -2945,9 +3043,14 @@ GO
 --##########################################################################################
 --##################  FOREIG KEYS RFI EQUIPMENT ############################################
 --##########################################################################################
+ALTER TABLE RFIEquipment WITH CHECK ADD CONSTRAINT fk_elevation_RFIEquipment 
+FOREIGN KEY(newElevation)REFERENCES factorElevationSCF (elevation)
+ON UPDATE CASCADE
+ON DELETE CASCADE
+GO
 ALTER TABLE RFIEquipment WITH CHECK ADD CONSTRAINT fk_idDrawingNum_RFIEquipment
 FOREIGN KEY (idDrawingNum) REFERENCES drawing(idDrawingNum)
-go
+GO
 ALTER TABLE RFIEquipment WITH CHECK ADD CONSTRAINT fk_newElevation_RFIEquipment
 FOREIGN KEY (newElevation) REFERENCES factorElevationScf(elevation)
 GO
@@ -3031,29 +3134,29 @@ GO
 --##########################################################################################
 ALTER TABLE RFIScaffoldEst WITH CHECK ADD CONSTRAINT fk_idDrawing_RFIScaffoldEst
 FOREIGN KEY (idDrawingNum) REFERENCES drawing(idDrawingNum)
-go
+GO
 
 ALTER TABLE RFIScaffoldEst WITH CHECK ADD CONSTRAINT fk_tag_RFIScaffoldEst
 FOREIGN KEY (tag) REFERENCES scaffoldEst(tag)
 on update cascade
 on delete cascade
-go
+GO
 
 ALTER TABLE RFIScaffoldEst WITH CHECK ADD CONSTRAINT fk_newIdLaborRate_RFIScaffoldEst
 FOREIGN KEY (newIdLaborRate) REFERENCES laborRate(idLaborRate)
-go
+GO
 
 ALTER TABLE RFIScaffoldEst WITH CHECK ADD CONSTRAINT fk_lastdLaborRate_RFIScaffoldEst
 FOREIGN KEY (lastIdLaborRate) REFERENCES laborRate(idLaborRate)
-go
+GO
 
 ALTER TABLE RFIScaffoldEst WITH CHECK ADD CONSTRAINT fk_newIdSCFUR_RFIScaffoldEst
 FOREIGN KEY (newIdSCFUR) REFERENCES scfUnitsRates(IdSCFUR)
-go
+GO
 
 ALTER TABLE RFIScaffoldEst WITH CHECK ADD CONSTRAINT fk_lastIdSCFUR_RFIScaffoldEst
 FOREIGN KEY (lastIdSCFUR) REFERENCES scfUnitsRates(IdSCFUR)
-go
+GO
 --##########################################################################################
 --##################  FOREIG KEYS SCAFFOLD INFORMATION #####################################
 --##########################################################################################
@@ -3078,7 +3181,7 @@ ALTER TABLE ScaffoldProgress WITH CHECK ADD CONSTRAINT fk_idTag_ScaffoldProgress
 FOREIGN KEY (tag) REFERENCES scaffoldEst(tag)
 ON UPDATE CASCADE
 ON DELETE CASCADE
-go
+GO
 
 --##########################################################################################
 --##################  FOREIG KEYS SCAFFOLD TRAKING #########################################
@@ -3119,28 +3222,28 @@ GO
 
 ALTER TABLE [dbo].[scfEstimation] WITH CHECK ADD CONSTRAINT [fk_idClient_scfEstimation] FOREIGN KEY ([idClient]) 
 REFERENCES [dbo].[clients]([idClient])
-go
+GO
 --##########################################################################################
 --##################  FOREIG KEYS SCFFOLDEST ###############################################
 --##########################################################################################
 
 ALTER TABLE scaffoldEst WITH CHECK ADD CONSTRAINT fk_idLaborRate_scaffoldEst
 FOREIGN KEY (idLaborRate) REFERENCES laborRate(idLaborRate)
-go
+GO
 
 ALTER TABLE scaffoldEst WITH CHECK ADD CONSTRAINT fk_idEnviroment_scaffoldEst
 FOREIGN KEY (idEnviroment) REFERENCES enviroment(idEnviroment)
-go
+GO
 
 ALTER TABLE scaffoldEst WITH CHECK ADD CONSTRAINT fk_idSCFUR_scaffoldEst
 FOREIGN KEY (idSCFUR) REFERENCES scfUnitsRates(idSCFUR)
-go
+GO
 
 ALTER TABLE scaffoldEst WITH CHECK ADD CONSTRAINT fk_idDrawingNum_scaffoldEst
 FOREIGN KEY (idDrawingNum) REFERENCES drawing(idDrawingNum)
 ON UPDATE CASCADE
 ON DELETE CASCADE
-go
+GO
 --##########################################################################################
 --##################  FOREIG KEYS SCFINFO ##################################################
 --##########################################################################################
@@ -3195,7 +3298,7 @@ ALTER TABLE TrackDefaultElements WITH CHECK ADD CONSTRAINT fk_idClient_TrackDefa
 FOREIGN KEY (idClient) REFERENCES clients(idClient)
 ON UPDATE CASCADE
 ON DELETE CASCADE
-go
+GO
 
 --##########################################################################################
 --##################  FOREIG KEYS TRAKFORMATCOLUMS #########################################
@@ -3205,7 +3308,7 @@ ALTER TABLE TrackFormatColums WITH CHECK ADD CONSTRAINT fk_idClient_TrackFormatC
 FOREIGN KEY (idClient) REFERENCES clients(idClient)
 ON UPDATE CASCADE
 ON DELETE CASCADE
-go
+GO
 
 --##########################################################################################
 --##################  FOREIG KEYS WORKORDER ################################################
@@ -3237,66 +3340,36 @@ BEGIN
 	RETURN @var
 END
 GO
-
---| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | 
---| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | 
---V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V
+--| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
+--| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
+--V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V
 --##############################################################################################
---###### PROCEDIMIENTOS PARA LOS REPORTES DE PRODUCT INCOMING ##################################
---################## SP PRODUCT INCOMING #######################################################
+--################## ACTUALIZACION DEL NOMBRE DE ALGUNOS BOTONES ###############################
 --##############################################################################################
-create proc sp_ProductIncoming
-@jobNo bigint,
-@ticket varchar(15),
-@all bit
-as
-begin 
-	select inc.jobNo as 'JobNo',inc.ticketNum,CONVERT(nvarchar, inc.dateRecived,101)as 'Date',inc.comment as 'Comment',
-	--product
-	pd.um as 'UNIT MSR',pic.quantity as 'QTY',pic.idProduct as 'PRODUCT ID',pd.QID as 'QUANTITY ID',pd.name as 'PRODUCT NAME',pd.class as 'CLASS',pd.[weight]*pic.quantity as 'WEIGTH',
-	--cliente
-	cl.companyName as 'Client',ha.number,ha.avenue,ha.providence,CONCAT(ha.city,', ',ha.providence,' ',ha.postalCode) as 'Address',CONCAT(cl.firstName,' ',cl.lastName) as 'Contact',ISNULL(ctc.phoneNumber1,'') as 'Phone',
-	--recived by
-	inc.recivedBy as 'RecivedBy',
-	ISNULL((select TOP 1 ctc1.phoneNumber1 from employees as emp 
-	inner join contact as ctc1 on ctc1.idContact= emp.idContact
-	where CONCAT(firstName,' ',middleName,' ',lastName) like inc.recivedBy),'') as 'EmployePhone'
-	from productComing as pic 
-	inner join product as pd on pd.idProduct = pic.idProduct
-	inner join incoming as inc on inc.ticketNum = pic.ticketNum
-	inner join job as jb on jb.jobNo = inc.jobNo
-	inner join clients as cl on cl.idClient = jb.idClient
-	left join contact as ctc on ctc.idContact = cl.idContact 
-	left join HomeAddress as ha on ha .idHomeAdress = cl.idHomeAddress
-	where inc.jobNo = @jobNo and inc.ticketNum like IIF(@all=1,'%%',@ticket)
-end
+update userAccess set access = 'Scaffold Tracking' where access = 'Scaffold Traking'
+go
+update userAccess set access = 'Client Projects' where access = 'Work Codes'
 go
 --##############################################################################################
---################## SP PRODUCT OUTGOING #######################################################
+--################## ACTUALIZACION DE METODO PARA SELECCIONAR LOS ##############################
+--################## DATOS DE LA COMPANIA EN LOS REPORTES         ##############################
 --##############################################################################################
-create proc sp_ProductOutgoing
-@jobNo bigint,
-@ticket varchar(15),
-@all bit
+ALTER proc [dbo].[sp_select_MyComapny_Info]
+@CompanyName varchar(30)
 as
-begin 
-	select otg.jobNo as 'JobNo',otg.ticketNum,CONVERT(nvarchar, otg.dateShipped,101)as 'Date',otg.comment as 'Comment',
-	--product
-	pd.um as 'UNIT MSR',pog.quantity as 'QTY',pog.idProduct as 'PRODUCT ID',pd.QID as 'QUANTITY ID',pd.name as 'PRODUCT NAME',pd.class as 'CLASS',pd.[weight]*pog.quantity as 'WEIGTH',
-	--cliente
-	cl.companyName as 'Client',ha.number,ha.avenue,ha.providence,CONCAT(ha.city,', ',ha.providence,' ',ha.postalCode) as 'Address',CONCAT(cl.firstName,' ',cl.lastName) as 'Contact',ISNULL(ctc.phoneNumber1,'') as 'Phone',
-	--recived by
-	otg.shippedby as 'ShippedBy', otg.superintendent as 'Intendent',
-	ISNULL((select TOP 1 ctc1.phoneNumber1 from employees as emp 
-	inner join contact as ctc1 on ctc1.idContact= emp.idContact
-	where CONCAT(firstName,' ',middleName,' ',lastName) like otg.shippedby),'') as 'EmployePhone'
-	from productOutGoing as pog 
-	inner join product as pd on pd.idProduct = pog.idProduct
-	inner join outgoing as otg on otg.ticketNum = pog.ticketNum
-	inner join job as jb on jb.jobNo = otg.jobNo
-	inner join clients as cl on cl.idClient = jb.idClient
-	left join contact as ctc on ctc.idContact = cl.idContact 
-	left join HomeAddress as ha on ha .idHomeAdress = cl.idHomeAddress
-	where otg.jobNo = @jobNo and otg.ticketNum like IIF(@all=1,'%%',@ticket)
+begin
+select cmp.name,
+	ha.city,
+	ha.providence,
+	CONCAT(ha.avenue , ' ',ha.number) as 'Address',
+	ha.postalCode,
+	cmp.idContact,
+	cmp.invoiceDescr,
+	ct.email,
+	ct.phoneNumber1 as 'PhoneNumber1',
+	ct.phoneNumber2 as 'PhoneNumber2',
+	cmp.img
+from company as cmp 
+left join HomeAddress as ha on ha.idHomeAdress	= cmp.idHomeAddress
+left join contact as ct on ct.idContact = cmp.idContact
 end
-go

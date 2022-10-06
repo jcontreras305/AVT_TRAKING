@@ -9,6 +9,7 @@ Public Class ProjectsClients
     Public idCliente, idPO, jobNum, workOrder, task, taskTaxes, idWOAuxTaxes As String
     Public clnfromclnFrom As Boolean = True
     Dim Find As Boolean = False
+    Dim defaultInfoJob As New List(Of String)
     Public totalHoursJob As Double
 
     Private Sub ocultarPaneles()
@@ -134,14 +135,16 @@ Public Class ProjectsClients
     End Sub
 
     Private Sub LimpriarCamposParaAgregar()
-        'txtAddres.Text = ""
-        'txtCity.Text = ""
-        'txtCompanyName.Text = ""
-        'txtFindClientProyects.Text = ""
-        'txtFirstName.Text = ""
-        'txtPC.Text = ""
-        'txtPhoneNumber.Text = ""
-        'txtStateProvidence.Text = ""
+        If defaultInfoJob.Count > 0 Then
+            defaultInfoJob.Clear()
+        End If
+        defaultInfoJob.Add(txtJobNumber.Text)
+        defaultInfoJob.Add(txtContractNo.Text)
+        defaultInfoJob.Add(txtCustomerNo.Text)
+        defaultInfoJob.Add(CStr(cmbCostCode.SelectedIndex))
+        defaultInfoJob.Add(CStr(cmbCostDistribution.SelectedIndex))
+        defaultInfoJob.Add(CStr(cmbWorkTMLumoSum.SelectedIndex))
+        defaultInfoJob.Add(idPO)
         txtContractNo.Text = ""
         txtCustomerNo.Text = ""
         txtJobNumber.Text = ""
@@ -150,7 +153,23 @@ Public Class ProjectsClients
         cmbWorkTMLumoSum.SelectedIndex = Nothing
     End Sub
 
+    Private Sub btnCancelSaveJob_Click(sender As Object, e As EventArgs) Handles btnCancelSaveJob.Click
+        Try
+            If defaultInfoJob.Count > 0 Then
+                txtJobNumber.Text = defaultInfoJob(0)
+                txtContractNo.Text = defaultInfoJob(1)
+                txtCustomerNo.Text = defaultInfoJob(2)
+                cmbCostCode.SelectedIndex = CInt(defaultInfoJob(3))
+                cmbCostCode.SelectedIndex = CInt(defaultInfoJob(4))
+                cmbCostCode.SelectedIndex = CInt(defaultInfoJob(5))
+                idPO = defaultInfoJob(6)
+                btnAdd.Text = "Add"
+                btnCancelSaveJob.Visible = False
+            End If
+        Catch ex As Exception
 
+        End Try
+    End Sub
 
     Private Sub btnAdd_Click(sender As Object, e As EventArgs) Handles btnAdd.Click
         If btnAdd.Text = "Save" Then
@@ -167,6 +186,7 @@ Public Class ProjectsClients
                 If idPO <> Nothing Or idPO <> "" Then
                     mtdClient.buscarProyectosDeClientePorProyeto(tblProjectClientsAll, idCliente)
                     btnAdd.Text = "Add"
+                    btnCancelSaveJob.Visible = False
                 Else
                     MessageBox.Show("Sommthig was wrong please try again or check the data.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
                     btnAdd.Text = "Save"
@@ -176,9 +196,11 @@ Public Class ProjectsClients
 
             End Try
         ElseIf btnAdd.Text = "Add" Then
+            btnCancelSaveJob.Visible = True
             If Not idCliente <> "" Or idCliente = Nothing Then
                 MessageBox.Show("Please choose a client to add new Job.", "Important", MessageBoxButtons.OK, MessageBoxIcon.Information)
             Else
+
                 LimpriarCamposParaAgregar()
                 btnAdd.Text = "Save"
             End If
@@ -410,7 +432,11 @@ Public Class ProjectsClients
             separaridWODeidTask(tblProjectClientsAll.CurrentRow.Cells("clmWorkOrder").Value)
             taskTaxes = tblProjectClientsAll.CurrentRow.Cells("idAux").Value
             llenarCampos(tblProjectClientsAll.CurrentRow)
-            pcbLogoPC.Image = BytetoImage(tblProjectClientsAll.CurrentRow.Cells("photo").Value)
+            If tblProjectClientsAll.CurrentRow.Cells("photo").Value IsNot Nothing Then
+                pcbLogoPC.Image = BytetoImage(tblProjectClientsAll.CurrentRow.Cells("photo").Value)
+            Else
+                pcbLogoPC.Image.Dispose()
+            End If
         End If
     End Sub
 
@@ -482,7 +508,4 @@ Public Class ProjectsClients
             FormPanel.BringToFront()
         End If
     End Sub
-
-
-
 End Class

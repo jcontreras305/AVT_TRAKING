@@ -3519,7 +3519,6 @@ select cmp.name,
 from company as cmp 
 left join HomeAddress as ha on ha.idHomeAdress	= cmp.idHomeAddress
 left join contact as ct on ct.idContact = cmp.idContact
-where cmp.name = @CompanyName
 end
 GO
 --##########################################################################################################################################################################################################################
