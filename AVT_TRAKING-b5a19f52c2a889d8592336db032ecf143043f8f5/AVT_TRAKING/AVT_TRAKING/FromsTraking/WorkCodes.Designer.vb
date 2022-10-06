@@ -197,7 +197,7 @@ Partial Class WorkCodes
         Me.GroupBox1.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.GroupBox1.Location = New System.Drawing.Point(0, 0)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(264, 359)
+        Me.GroupBox1.Size = New System.Drawing.Size(264, 355)
         Me.GroupBox1.TabIndex = 16
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "WorkCode"
@@ -234,10 +234,11 @@ Partial Class WorkCodes
         Me.btnCancelWC.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.btnCancelWC.Location = New System.Drawing.Point(83, 291)
         Me.btnCancelWC.Name = "btnCancelWC"
-        Me.btnCancelWC.Size = New System.Drawing.Size(75, 32)
+        Me.btnCancelWC.Size = New System.Drawing.Size(82, 32)
         Me.btnCancelWC.TabIndex = 10
         Me.btnCancelWC.Text = "Cancel"
         Me.btnCancelWC.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.btnCancelWC.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
         Me.btnCancelWC.UseVisualStyleBackColor = True
         '
         'sprBillingRateOT
@@ -283,12 +284,13 @@ Partial Class WorkCodes
         Me.btnUpdateWorkCode.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnUpdateWorkCode.Image = Global.AVT_TRAKING.My.Resources.Resources.update
         Me.btnUpdateWorkCode.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnUpdateWorkCode.Location = New System.Drawing.Point(161, 291)
+        Me.btnUpdateWorkCode.Location = New System.Drawing.Point(171, 291)
         Me.btnUpdateWorkCode.Name = "btnUpdateWorkCode"
         Me.btnUpdateWorkCode.Size = New System.Drawing.Size(87, 32)
         Me.btnUpdateWorkCode.TabIndex = 11
         Me.btnUpdateWorkCode.Text = "Update"
         Me.btnUpdateWorkCode.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.btnUpdateWorkCode.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
         Me.btnUpdateWorkCode.UseVisualStyleBackColor = True
         '
         'Label9
@@ -314,6 +316,7 @@ Partial Class WorkCodes
         Me.btnAddWorkCode.TabIndex = 9
         Me.btnAddWorkCode.Text = "Add"
         Me.btnAddWorkCode.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.btnAddWorkCode.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
         Me.btnAddWorkCode.UseVisualStyleBackColor = True
         '
         'tblWK
@@ -326,7 +329,7 @@ Partial Class WorkCodes
         Me.tblWK.Name = "tblWK"
         Me.tblWK.ReadOnly = True
         Me.tblWK.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.tblWK.Size = New System.Drawing.Size(460, 307)
+        Me.tblWK.Size = New System.Drawing.Size(460, 303)
         Me.tblWK.TabIndex = 17
         '
         'txtBucar
@@ -429,8 +432,8 @@ Partial Class WorkCodes
         Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
         Me.TableLayoutPanel1.RowCount = 3
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35.0!))
-        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10.0!))
-        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 90.0!))
+        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 45.0!))
+        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
         Me.TableLayoutPanel1.Size = New System.Drawing.Size(748, 447)
         Me.TableLayoutPanel1.TabIndex = 21
         '
@@ -440,16 +443,16 @@ Partial Class WorkCodes
         Me.Panel1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel1.Location = New System.Drawing.Point(3, 38)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(742, 35)
+        Me.Panel1.Size = New System.Drawing.Size(742, 39)
         Me.Panel1.TabIndex = 21
         '
         'Panel2
         '
         Me.Panel2.Controls.Add(Me.TableLayoutPanel2)
         Me.Panel2.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel2.Location = New System.Drawing.Point(3, 79)
+        Me.Panel2.Location = New System.Drawing.Point(3, 83)
         Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(742, 365)
+        Me.Panel2.Size = New System.Drawing.Size(742, 361)
         Me.Panel2.TabIndex = 22
         '
         'TableLayoutPanel2
@@ -464,7 +467,7 @@ Partial Class WorkCodes
         Me.TableLayoutPanel2.Name = "TableLayoutPanel2"
         Me.TableLayoutPanel2.RowCount = 1
         Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
-        Me.TableLayoutPanel2.Size = New System.Drawing.Size(742, 365)
+        Me.TableLayoutPanel2.Size = New System.Drawing.Size(742, 361)
         Me.TableLayoutPanel2.TabIndex = 0
         '
         'Panel3
@@ -473,7 +476,7 @@ Partial Class WorkCodes
         Me.Panel3.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel3.Location = New System.Drawing.Point(3, 3)
         Me.Panel3.Name = "Panel3"
-        Me.Panel3.Size = New System.Drawing.Size(264, 359)
+        Me.Panel3.Size = New System.Drawing.Size(264, 355)
         Me.Panel3.TabIndex = 0
         '
         'Panel4
@@ -482,7 +485,7 @@ Partial Class WorkCodes
         Me.Panel4.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel4.Location = New System.Drawing.Point(273, 3)
         Me.Panel4.Name = "Panel4"
-        Me.Panel4.Size = New System.Drawing.Size(466, 359)
+        Me.Panel4.Size = New System.Drawing.Size(466, 355)
         Me.Panel4.TabIndex = 1
         '
         'TableLayoutPanel3
@@ -497,7 +500,7 @@ Partial Class WorkCodes
         Me.TableLayoutPanel3.RowCount = 2
         Me.TableLayoutPanel3.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 13.09192!))
         Me.TableLayoutPanel3.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 86.90808!))
-        Me.TableLayoutPanel3.Size = New System.Drawing.Size(466, 359)
+        Me.TableLayoutPanel3.Size = New System.Drawing.Size(466, 355)
         Me.TableLayoutPanel3.TabIndex = 0
         '
         'Panel5
@@ -516,7 +519,7 @@ Partial Class WorkCodes
         Me.Panel6.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel6.Location = New System.Drawing.Point(3, 49)
         Me.Panel6.Name = "Panel6"
-        Me.Panel6.Size = New System.Drawing.Size(460, 307)
+        Me.Panel6.Size = New System.Drawing.Size(460, 303)
         Me.Panel6.TabIndex = 1
         '
         'WorkCodes
