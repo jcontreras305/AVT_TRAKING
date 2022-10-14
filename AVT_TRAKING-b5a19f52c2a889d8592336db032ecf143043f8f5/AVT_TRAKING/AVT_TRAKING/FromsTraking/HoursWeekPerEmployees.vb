@@ -220,6 +220,7 @@ Public Class HoursWeekPerEmployees
                     _dtpHoras.Value = validarFechaParaVB(If(tblRecordEmployee.CurrentCell.Value Is DBNull.Value, fecha, tblRecordEmployee.CurrentCell.Value))
                     flagPressCellDate = True
                     flagCellClickRecords = True
+                    _dtpHoras.Format = DateTimePickerFormat.Custom
                     _dtpHoras.CustomFormat = "MM/dd/yyyy"
                 Case "Project"
                     Try
@@ -241,14 +242,18 @@ Public Class HoursWeekPerEmployees
                 Case "Work Code"
                     Try
                         If tblRecordEmployee.CurrentCell.GetType.Name = "DataGridViewTextBoxCell" Then
-                            Dim lastValue As String = If(tblRecordEmployee.CurrentCell.Value IsNot DBNull.Value, tblRecordEmployee.CurrentCell.Value, "")
-                            Dim cmbWorkCode As New DataGridViewComboBoxCell
-                            With cmbWorkCode
-                                lastValue = mtdHPW.llenarComboCellWorkCode(cmbWorkCode, workCodeTable, lastValue)
-                                .DropDownWidth = 180
-                            End With
-                            tblRecordEmployee.CurrentRow.Cells("Work Code") = cmbWorkCode
-                            tblRecordEmployee.CurrentRow.Cells("Work Code").Value = lastValue
+                            If tblRecordEmployee.CurrentRow.Cells("JobNo").Value.ToString() = "" Then
+                                MessageBox.Show("Please select a Project to filter the costs.")
+                            Else
+                                Dim lastValue As String = If(tblRecordEmployee.CurrentCell.Value IsNot DBNull.Value, tblRecordEmployee.CurrentCell.Value, "")
+                                Dim cmbWorkCode As New DataGridViewComboBoxCell
+                                With cmbWorkCode
+                                    lastValue = mtdHPW.llenarComboCellWorkCode(cmbWorkCode, tblRecordEmployee.CurrentRow.Cells("JobNo").Value.ToString(), lastValue)
+                                    .DropDownWidth = 180
+                                End With
+                                tblRecordEmployee.CurrentRow.Cells("Work Code") = cmbWorkCode
+                                tblRecordEmployee.CurrentRow.Cells("Work Code").Value = lastValue
+                            End If
                         End If
                         flagFilaActual = "WorkCode"
                         flagCellClickRecords = True
@@ -280,34 +285,103 @@ Public Class HoursWeekPerEmployees
         Dim cmb As ComboBox = CType(sender, ComboBox)
         If flagCellClickRecords = True Then
             If tblRecordEmployee.CurrentCell.ColumnIndex = tblRecordEmployee.Columns("Project").Index Then
-                For Each row As DataRow In proyectTable.Rows
-                    If cmb.Text <> "" Then
-                        If cmb.Text = row.ItemArray(1) Then
-                            tblRecordEmployee.CurrentRow.Cells("Project Description").Value = row.ItemArray(2)
-                            Exit For
-                        End If
+                If cmb.Text <> "" Then
+                    Dim arrayPo() As String = cmb.Text.ToString().Split("   ")
+                    Dim arrayRows() As DataRow = proyectTable.Select("project = '" + arrayPo(0) + "' and jobNo = '" + arrayPo(arrayPo.Length - 1) + "'")
+                    If arrayRows.Length > 0 Then
+                        tblRecordEmployee.CurrentRow.Cells("Project Description").Value = arrayRows(0).ItemArray(2)
+                        tblRecordEmployee.CurrentRow.Cells("jobNo").Value = arrayRows(0).ItemArray(4)
                     End If
-                Next
+                End If
             ElseIf tblRecordEmployee.CurrentCell.ColumnIndex = tblRecordEmployee.Columns("Work Code").Index Then
                 tblRecordEmployee.CurrentRow.Cells("Work Code").Value = ""
-                For Each row As DataRow In workCodeTable.Rows
-                    If cmb.Text IsNot "" And tblRecordEmployee.CurrentRow.Cells("Work Code").Value <> row.ItemArray(1) Then
-                        If cmb.Text = row.ItemArray(1) Then
+                Dim arrayRows() As DataRow = workCodeTable.Select("name = '" + cmb.Text + "' and jobNo = " + tblRecordEmployee.CurrentRow.Cells("jobNo").Value.ToString())
+                If arrayRows.Length > 0 Then
+                    If cmb.Text = arrayRows(0).ItemArray(1) Then
+                        tblRecordEmployee.CurrentCell.Value = arrayRows(0).ItemArray(1)
+                        If tblRecordEmployee.CurrentRow.Cells(0).Value Is DBNull.Value Then
+                            tblRecordEmployee.CurrentRow.Cells("Hours ST").Value = "0"
+                            tblRecordEmployee.CurrentRow.Cells("Hours OT").Value = "0"
+                            tblRecordEmployee.CurrentRow.Cells("Hours 3").Value = "0"
+                        End If
+                        tblRecordEmployee.CurrentRow.Cells("Clasification").Value = arrayRows(0).ItemArray(2)
+                        tblRecordEmployee.CurrentRow.Cells("Billing Rate").Value = arrayRows(0).ItemArray(3)
+                        tblRecordEmployee.CurrentRow.Cells("Billing Rate OT").Value = arrayRows(0).ItemArray(4)
+                        tblRecordEmployee.CurrentRow.Cells("Billing Rate 3").Value = arrayRows(0).ItemArray(5)
+                        tblRecordEmployee.CurrentRow.Cells("Work Code").Value = arrayRows(0).ItemArray(1)
+                        tblRecordEmployee.CurrentRow.Cells("jobNo").Value = arrayRows(0).ItemArray(6)
+                    End If
+                End If
+            End If
+        Else
+            Select Case tblRecordEmployee.CurrentCell.ColumnIndex
+                Case tblRecordEmployee.Columns("Project").Index 'Aqui se tiene que volver a llenar el combo de workcode
+                    If cmb.Text <> "" Then
+                        Dim arrayPo() As String = cmb.Text.ToString().Split("   ")
+                        If arrayPo(arrayPo.Length - 1) <> tblRecordEmployee.CurrentRow.Cells("jobNo").Value.ToString() Then
+                            Dim arrayRows() As DataRow = proyectTable.Select("project = '" + arrayPo(0) + "' and jobNo = '" + arrayPo(arrayPo.Length - 1) + "'")
+                            If arrayRows.Length > 0 Then
+                                tblRecordEmployee.CurrentRow.Cells("Project Description").Value = arrayRows(0).ItemArray(2)
+                                tblRecordEmployee.CurrentRow.Cells("jobNo").Value = arrayRows(0).ItemArray(4)
+                            End If
+                            Dim cellType = tblRecordEmployee.CurrentRow.Cells("Work Code").GetType.Name
+                            If cellType = "DataGridViewComboBoxCell" Then
+                                Dim lastValue As String = tblRecordEmployee.CurrentRow.Cells("Work Code").Value
+                                lastValue = mtdHPW.llenarComboCellWorkCode(tblRecordEmployee.CurrentRow.Cells("Work Code"), tblRecordEmployee.CurrentRow.Cells("JobNo").Value.ToString(), lastValue)
+                                tblRecordEmployee.CurrentRow.Cells("Work Code").Value = lastValue
+                                If lastValue = "" Then
+                                    tblRecordEmployee.CurrentRow.Cells("Hours ST").Value = "0"
+                                    tblRecordEmployee.CurrentRow.Cells("Hours OT").Value = "0"
+                                    tblRecordEmployee.CurrentRow.Cells("Hours 3").Value = "0"
+                                    tblRecordEmployee.CurrentRow.Cells("Clasification").Value = ""
+                                    tblRecordEmployee.CurrentRow.Cells("Billing Rate").Value = "0.00"
+                                    tblRecordEmployee.CurrentRow.Cells("Billing Rate OT").Value = "0.00"
+                                    tblRecordEmployee.CurrentRow.Cells("Billing Rate 3").Value = "0.00"
+                                    tblRecordEmployee.CurrentRow.Cells("Work Code").Value = ""
+                                    tblRecordEmployee.CurrentRow.Cells("jobNo").Value = arrayRows(0).ItemArray(4)
+                                Else
+                                    Dim arrayRows1() As DataRow = workCodeTable.Select("name = '" + lastValue + "' and jobNo = " + tblRecordEmployee.CurrentRow.Cells("jobNo").Value.ToString())
+                                    If arrayRows1.Length > 0 Then
+                                        If tblRecordEmployee.CurrentRow.Cells("Work Code").Value = arrayRows1(0).ItemArray(1) Then
+                                            tblRecordEmployee.CurrentCell.Value = arrayRows1(0).ItemArray(1)
+                                            If tblRecordEmployee.CurrentRow.Cells(0).Value Is DBNull.Value Then
+                                                tblRecordEmployee.CurrentRow.Cells("Hours ST").Value = "0"
+                                                tblRecordEmployee.CurrentRow.Cells("Hours OT").Value = "0"
+                                                tblRecordEmployee.CurrentRow.Cells("Hours 3").Value = "0"
+                                            End If
+                                            tblRecordEmployee.CurrentRow.Cells("Clasification").Value = arrayRows1(0).ItemArray(2)
+                                            tblRecordEmployee.CurrentRow.Cells("Billing Rate").Value = arrayRows1(0).ItemArray(3)
+                                            tblRecordEmployee.CurrentRow.Cells("Billing Rate OT").Value = arrayRows1(0).ItemArray(4)
+                                            tblRecordEmployee.CurrentRow.Cells("Billing Rate 3").Value = arrayRows1(0).ItemArray(5)
+                                            tblRecordEmployee.CurrentRow.Cells("Work Code").Value = arrayRows1(0).ItemArray(1)
+                                            tblRecordEmployee.CurrentRow.Cells("jobNo").Value = arrayRows(0).ItemArray(6)
+                                        End If
+                                    End If
+                                End If
+                            End If
+                        End If
+                    End If
+                Case tblRecordEmployee.Columns("Work Code").Index '
+                    Dim arrayRows() As DataRow = workCodeTable.Select("name = '" + cmb.Text + "'and jobNo = " + tblRecordEmployee.CurrentRow.Cells("jobNo").Value.ToString())
+                    If arrayRows.Length > 0 Then
+                        If cmb.Text = arrayRows(0).ItemArray(1) Then
+                            tblRecordEmployee.CurrentCell.Value = arrayRows(0).ItemArray(1)
                             If tblRecordEmployee.CurrentRow.Cells(0).Value Is DBNull.Value Then
                                 tblRecordEmployee.CurrentRow.Cells("Hours ST").Value = "0"
                                 tblRecordEmployee.CurrentRow.Cells("Hours OT").Value = "0"
                                 tblRecordEmployee.CurrentRow.Cells("Hours 3").Value = "0"
                             End If
-                            tblRecordEmployee.CurrentRow.Cells("Clasification").Value = row.ItemArray(2)
-                            tblRecordEmployee.CurrentRow.Cells("Billing Rate").Value = row.ItemArray(3)
-                            tblRecordEmployee.CurrentRow.Cells("Billing Rate OT").Value = row.ItemArray(4)
-                            tblRecordEmployee.CurrentRow.Cells("Billing Rate 3").Value = row.ItemArray(5)
-                            tblRecordEmployee.CurrentRow.Cells("Work Code").Value = row.ItemArray(1)
-                            Exit For
+                            tblRecordEmployee.CurrentRow.Cells("Clasification").Value = arrayRows(0).ItemArray(2)
+                            tblRecordEmployee.CurrentRow.Cells("Billing Rate").Value = arrayRows(0).ItemArray(3)
+                            tblRecordEmployee.CurrentRow.Cells("Billing Rate OT").Value = arrayRows(0).ItemArray(4)
+                            tblRecordEmployee.CurrentRow.Cells("Billing Rate 3").Value = arrayRows(0).ItemArray(5)
+                            tblRecordEmployee.CurrentRow.Cells("Work Code").Value = arrayRows(0).ItemArray(1)
+                            tblRecordEmployee.CurrentRow.Cells("jobNo").Value = arrayRows(0).ItemArray(6)
                         End If
                     End If
-                Next
-            End If
+            End Select
+
+
         End If
         flagCellClickRecords = False
     End Sub
@@ -747,23 +821,25 @@ Public Class HoursWeekPerEmployees
         list.Add(idEmpleado)
 
         If tblRecordEmployee.Rows(index).Cells("Work Code").Value IsNot DBNull.Value Then
-            For Each row As DataRow In workCodeTable.Rows
-                If row.ItemArray(1) = tblRecordEmployee.Rows(index).Cells("Work Code").Value Then
-                    list.Add(row.ItemArray(0)) 'workCode
-                    Exit For
-                End If
-            Next
+            Dim arrayWC() As DataRow = workCodeTable.Select("name = '" + tblRecordEmployee.Rows(index).Cells("Work Code").Value + "' and jobNo = " + tblRecordEmployee.Rows(index).Cells("jobNo").Value.ToString())
+            If arrayWC.Length > 0 Then
+                list.Add(arrayWC(0).ItemArray(0)) 'workCode
+                list.Add(tblRecordEmployee.Rows(index).Cells("jobNo").Value.ToString())
+            Else
+                mensaje = If(mensaje = "", "Please choose a Work Code.", vbCrLf + " Please choose a Work Code")
+            End If
         Else
             mensaje = If(mensaje = "", "Please choose a Work Code.", vbCrLf + " Please choose a Work Code")
         End If
 
         If tblRecordEmployee.Rows(index).Cells("Project").Value IsNot DBNull.Value Then
-            For Each row As DataRow In proyectTable.Rows
-                If row.ItemArray(1) = tblRecordEmployee.Rows(index).Cells("Project").Value Then
-                    list.Add(row.ItemArray(0)) '
-                    Exit For
-                End If
-            Next
+            Dim arrayCell() As String = tblRecordEmployee.Rows(index).Cells("Project").Value.ToString.Split("   ")
+            Dim rowPO() As DataRow = proyectTable.Select("project = '" + arrayCell(0) + "' and jobNo = " + tblRecordEmployee.Rows(index).Cells("jobNo").Value.ToString)
+            If rowPO.Length > 0 Then
+                list.Add(rowPO(0).ItemArray(0))
+            Else
+                mensaje = If(mensaje = "", "Please choose a Proyect.", vbCrLf + " Please choose a Proyect")
+            End If
         Else
             mensaje = If(mensaje = "", "Please choose a Proyect.", vbCrLf + " Please choose a Proyect")
         End If
@@ -842,18 +918,12 @@ Public Class HoursWeekPerEmployees
         list.Add(idEmpleado)
 
         If tblRecordEmployee.Rows(index).Cells("Work Code").Value IsNot DBNull.Value Then
-            Dim arrayRowsWC() As DataRow = workCodeTable.Select("name = '" & tblRecordEmployee.Rows(index).Cells("Work Code").Value & "'")
+            Dim arrayRowsWC() As DataRow = workCodeTable.Select("name = '" & tblRecordEmployee.Rows(index).Cells("Work Code").Value & "' and jobNo = " + tblRecordEmployee.CurrentRow.Cells("jobNo").Value.ToString())
             If arrayRowsWC.Length > 0 Then
                 list.Add(arrayRowsWC(0).ItemArray(0))
             Else
                 mensaje = If(mensaje = "", "Please choose a Work Code.", vbCrLf + " Please choose a Work Code")
             End If
-            'For Each row As DataRow In workCodeTable.Rows
-            '    If row.ItemArray(1) = tblRecordEmployee.Rows(index).Cells("Work Code").Value Then
-            '        list.Add(row.ItemArray(0)) 'workCode
-            '        Exit For
-            '    End If
-            'Next
         Else
             mensaje = If(mensaje = "", "Please choose a Work Code.", vbCrLf + " Please choose a Work Code")
         End If

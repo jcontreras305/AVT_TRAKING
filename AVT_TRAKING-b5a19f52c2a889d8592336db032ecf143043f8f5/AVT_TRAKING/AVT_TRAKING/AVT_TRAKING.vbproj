@@ -243,6 +243,12 @@
     <Compile Include="FromsTraking\BackUp.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="FromsTraking\ChangueProject.Designer.vb">
+      <DependentUpon>ChangueProject.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FromsTraking\ChangueProject.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="FromsTraking\ConfigReelsAndOther.Designer.vb">
       <DependentUpon>ConfigReelsAndOther.vb</DependentUpon>
     </Compile>
@@ -1024,6 +1030,9 @@
     <EmbeddedResource Include="FromsTraking\BackUp.resx">
       <DependentUpon>BackUp.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FromsTraking\ChangueProject.resx">
+      <DependentUpon>ChangueProject.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FromsTraking\Clients.resx">
       <DependentUpon>Clients.vb</DependentUpon>
     </EmbeddedResource>
@@ -1460,6 +1469,7 @@
     <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Documents\SQLDoc\cambios para corregir reportes.sql" />
     <Content Include="Documents\SQLDoc\Consultas para POWERBI.sql" />
     <Content Include="Documents\SQLDoc\Creacion de DB y de la tabla de Usuarios.sql" />
     <Content Include="main.ico" />

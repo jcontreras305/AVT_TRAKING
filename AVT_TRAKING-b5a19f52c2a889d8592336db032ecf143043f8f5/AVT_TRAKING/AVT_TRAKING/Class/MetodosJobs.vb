@@ -7,11 +7,12 @@ Public Class MetodosJobs
     '########################################################################################################################
 
 
-    Public Sub selectWC(ByVal tabla As DataGridView)
+    Public Sub selectWC(ByVal tabla As DataGridView, Optional ByVal jobNo As String = "")
         conectar()
         Try
             Dim cmd As New SqlCommand
-            cmd.CommandText = "select idWorkCode as ID , name Name , description as Description, billingRate1 as BillingRT1, billingRateOT as BillingOT, billingRate3 as BillingRT3 , EQExp1,EQExp2 from workCode  "
+
+            cmd.CommandText = "select idWorkCode as ID , name Name , description as Description, billingRate1 as BillingRT1, billingRateOT as BillingOT, billingRate3 as BillingRT3 , EQExp1,EQExp2 , jobNo as 'JobNo' from workCode " + If(jobNo = "", "", " where jobNo = " & jobNo & "")
             cmd.Connection = conn
 
             If cmd.ExecuteNonQuery Then
@@ -26,35 +27,51 @@ Public Class MetodosJobs
         desconectar()
     End Sub
 
-    Public Sub nuevaWC(datos() As String)
+    Public Function nuevaWC(datos() As String, Optional showMessage As Boolean = True) As Boolean
         Try
             conectar()
-            Dim cmd As New SqlCommand("insert into workCode values (" + datos(0) + ",'" + datos(1) + "','" + datos(2) + "'," + datos(3) + "," + datos(4) + "," + datos(5) + ",'" + datos(6) + "','" + datos(7) + "')")
+            Dim cmd As New SqlCommand("if not EXISTS (select idWorkCode from workCode where name = '" + datos(1) + "' and jobNo = " + datos(8) + ")
+begin 
+    insert into workCode values (" + datos(0) + "," + datos(8) + ",'" + datos(1) + "','" + datos(2) + "'," + datos(3) + "," + datos(4) + "," + datos(5) + ",'" + datos(6) + "','" + datos(7) + "')
+end")
             cmd.Connection = conn
-            If cmd.ExecuteNonQuery Then
-                MsgBox("Succesfull")
+            If cmd.ExecuteNonQuery > 0 Then
+                If showMessage Then
+                    MsgBox("Succesfull")
+                End If
+                Return True
             Else
-                MsgBox("Error")
+                MsgBox("Is probably that the Work Code " + datos(1) + " was inserted in this job.")
+                Return False
             End If
         Catch ex As Exception
             MsgBox(ex.Message())
+            Return False
+        Finally
+            desconectar()
         End Try
-        desconectar()
-    End Sub
+    End Function
 
     Public Sub acualizarWC(datos() As String)
         Try
             conectar()
-            Dim cmd As New SqlCommand("update workCode set name='" + datos(1) + "',description ='" + datos(2) + "', billingRate1=" + datos(3) + ", billingRateOT=" + datos(4) + ", billingRate3= " + datos(5) + ",EQExp1='" + datos(6) + "',EQExp2='" + datos(7) + "' where idWorkCode =  " + datos(0), conn)
-            If cmd.ExecuteNonQuery Then
+            Dim cmd As New SqlCommand("if EXISTS (select idWorkCode from workCode where idWorkCode = " + datos(0) + " and jobNo = " + datos(8) + ")
+begin 
+    IF not EXISTS (select name from workCode where name = '" + datos(1) + "' and jobno = " + datos(8) + ")
+	begin
+        update workCode set name='" + datos(1) + "',description ='" + datos(2) + "', billingRate1=" + datos(3) + ", billingRateOT=" + datos(4) + ", billingRate3= " + datos(5) + ",EQExp1='" + datos(6) + "',EQExp2='" + datos(7) + "' where idWorkCode =  " + datos(0) + " and jobNo = " + datos(8) + "
+    end
+end", conn)
+            If cmd.ExecuteNonQuery > 0 Then
                 MsgBox("Succesfull")
             Else
-                MsgBox("Error")
+                MsgBox("Is not posible update the WorkCode, because " + datos(1) + " is inserted in this job.")
             End If
         Catch ex As Exception
             MsgBox(ex.Message())
+        Finally
+            desconectar()
         End Try
-        desconectar()
     End Sub
 
     Public Sub buscarWC(ByVal dato As String, ByVal tabla As DataGridView)
@@ -73,6 +90,53 @@ Public Class MetodosJobs
         desconectar()
     End Sub
 
+    Public Function insertWorkCodeTable(ByVal tbl As DataTable, ByVal jobNO As String) As Boolean
+        Try
+            conectar()
+            Dim tran As SqlTransaction
+            tran = conn.BeginTransaction
+            Dim flag As Boolean = True
+            Dim assignJob As Boolean = False
+            For Each row As DataRow In tbl.Rows
+                If row.ItemArray(8) = "" And assignJob = False Then
+                    Dim result As DialogResult = MessageBox.Show("You did not assign a job in the work code " + vbCrLf + "'" + row.ItemArray(1) + "'" + vbCrLf + "Would you like to use the job selected in the list?" + vbCrLf + "This job will be assigned for if another blanck appears.", "Important", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning)
+                    If result = DialogResult.OK Then
+                        assignJob = True
+                    Else
+                        flag = False
+                        Exit For
+                    End If
+                End If
+                Dim cmd As New SqlCommand("If Not EXISTS (select idWorkCode from workCode where name = '" + row.ItemArray(1) + "' and jobNo = " + If(row.ItemArray(8) = "" And assignJob, jobNO, row.ItemArray(8)) + ")
+                begin
+                    insert into workCode values (" + row.ItemArray(0) + "," + If(row.ItemArray(8) = "" And assignJob, jobNO, row.ItemArray(8)) + ",'" + row.ItemArray(1) + "','" + row.ItemArray(2) + "'," + row.ItemArray(3) + "," + row.ItemArray(4) + "," + row.ItemArray(5) + ",'" + row.ItemArray(6) + "','" + row.ItemArray(7) + "')
+                end")
+                cmd.Connection = conn
+                cmd.Transaction = tran
+                If cmd.ExecuteNonQuery = 0 Then
+                    If Not DialogResult.Yes = MessageBox.Show("Is probably that the work code " + row.ItemArray(1) + " was inserted in this JobNo," + vbCrLf + "Would you like to continue?", "Important", MessageBoxButtons.YesNo, MessageBoxIcon.Information) Then
+                        flag = False
+                        Exit For
+                    End If
+                End If
+            Next
+            If flag Then
+                tran.Commit()
+                MsgBox("Succesfull")
+                Return True
+            Else
+                tran.Rollback()
+                MessageBox.Show("The process could not be completed successfully.", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                Return False
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message)
+            Return False
+        Finally
+            desconectar()
+        End Try
+    End Function
+
     '########################################################################################################################
     '############  METODOS PARA EXPENCES ####################################################################################
     '########################################################################################################################
@@ -80,7 +144,7 @@ Public Class MetodosJobs
     Public Sub buscarExpenses(ByVal tabla As DataGridView, Optional filter As String = "")
         Try
             conectar()
-            Dim cmd As New SqlCommand("select idExpenses ,expenseCode as 'Expense' , description as 'Description' from expenses" + If(filter = "", "", " where expenseCode like '%" + filter + "%' or [description] like '%" + filter + "%'"), conn)
+            Dim cmd As New SqlCommand("Select idExpenses ,expenseCode As 'Expense' , description as 'Description' from expenses" + If(filter = "", "", " where expenseCode like '%" + filter + "%' or [description] like '%" + filter + "%'"), conn)
             If cmd.ExecuteNonQuery Then
                 Dim dt As New DataTable
                 Dim da As New SqlDataAdapter(cmd)
@@ -300,7 +364,7 @@ from workOrder
                             Return False
                         End If
                     End If
-                Else ' en este caso se debe insertar un nuevo PO un WO y el nuevo TASk
+                Else ' en este caso se debe insertar un nuevo PO un WO y el nuevo TASK
                     Dim cmdInsertNewPO As New SqlCommand("insert into projectOrder values (" + projectN.idPO + "," + CStr(projectN.jobNum) + ")", conn)
                     Dim newWO = System.Guid.NewGuid.ToString()
                     Dim cmdInsertNewWO As New SqlCommand("insert into workOrder values('" + newWO + "','" + projectN.idWorkOrder + "'," + CStr(projectN.idPO) + ", " + CStr(projectN.jobNum) + ")", conn)
@@ -347,7 +411,37 @@ from workOrder
             Return False
         End Try
     End Function
-
+    Public Function deleteProject(ByVal tbl As DataGridView) As Boolean
+        Try
+            conectar()
+            Dim tran As SqlTransaction
+            tran = conn.BeginTransaction
+            Dim flag As Boolean = True
+            For Each row As DataGridViewRow In tbl.SelectedRows
+                Dim cmd As New SqlCommand("sp_delete_project", conn)
+                cmd.CommandType = CommandType.StoredProcedure
+                cmd.Parameters.AddWithValue("@idAux", row.Cells("idAux").Value)
+                cmd.Parameters.AddWithValue("@idAuxWO", row.Cells("idAuxWO").Value)
+                cmd.Transaction = tran
+                If Not cmd.ExecuteNonQuery > 0 Then
+                    flag = False
+                    Exit For
+                End If
+            Next
+            If flag Then
+                tran.Commit()
+                Return True
+            Else
+                tran.Rollback()
+                Return False
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message)
+            Return False
+        Finally
+            desconectar()
+        End Try
+    End Function
 
     '########################################################################################################################
 

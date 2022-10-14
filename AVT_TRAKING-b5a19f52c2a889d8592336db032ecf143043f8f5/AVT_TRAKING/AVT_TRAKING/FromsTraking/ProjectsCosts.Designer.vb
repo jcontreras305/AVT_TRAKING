@@ -136,6 +136,7 @@ Partial Class ProjectsCosts
         Me.btnUpdateMaterialExcel = New System.Windows.Forms.Button()
         Me.btnUpdate = New System.Windows.Forms.Button()
         Me.pnlTablas = New System.Windows.Forms.Panel()
+        Me.btnChangeJobNo = New System.Windows.Forms.Button()
         Me.Panel1.SuspendLayout()
         Me.TableLayoutPanel2.SuspendLayout()
         Me.Panel5.SuspendLayout()
@@ -213,6 +214,7 @@ Partial Class ProjectsCosts
         'Panel5
         '
         Me.Panel5.BackColor = System.Drawing.Color.FromArgb(CType(CType(83, Byte), Integer), CType(CType(93, Byte), Integer), CType(CType(102, Byte), Integer))
+        Me.Panel5.Controls.Add(Me.btnChangeJobNo)
         Me.Panel5.Controls.Add(Me.Label1)
         Me.Panel5.Controls.Add(Me.Label2)
         Me.Panel5.Controls.Add(Me.Label3)
@@ -305,7 +307,7 @@ Partial Class ProjectsCosts
         Me.cmbJobNumber.FormattingEnabled = True
         Me.cmbJobNumber.Location = New System.Drawing.Point(96, 3)
         Me.cmbJobNumber.Name = "cmbJobNumber"
-        Me.cmbJobNumber.Size = New System.Drawing.Size(221, 21)
+        Me.cmbJobNumber.Size = New System.Drawing.Size(173, 21)
         Me.cmbJobNumber.TabIndex = 1
         '
         'cmbProjectManager
@@ -1542,6 +1544,19 @@ Partial Class ProjectsCosts
         Me.pnlTablas.Size = New System.Drawing.Size(1107, 234)
         Me.pnlTablas.TabIndex = 4
         '
+        'btnChangeJobNo
+        '
+        Me.btnChangeJobNo.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnChangeJobNo.FlatAppearance.BorderSize = 0
+        Me.btnChangeJobNo.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(58, Byte), Integer), CType(CType(115, Byte), Integer))
+        Me.btnChangeJobNo.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnChangeJobNo.Image = Global.AVT_TRAKING.My.Resources.Resources.after
+        Me.btnChangeJobNo.Location = New System.Drawing.Point(275, 1)
+        Me.btnChangeJobNo.Name = "btnChangeJobNo"
+        Me.btnChangeJobNo.Size = New System.Drawing.Size(42, 26)
+        Me.btnChangeJobNo.TabIndex = 35
+        Me.btnChangeJobNo.UseVisualStyleBackColor = True
+        '
         'ProjectsCosts
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1734,4 +1749,5 @@ Partial Class ProjectsCosts
     Friend WithEvents PictureBox3 As PictureBox
     Friend WithEvents Label28 As Label
     Friend WithEvents btnUpdateMaterialExcel As Button
+    Friend WithEvents btnChangeJobNo As Button
 End Class

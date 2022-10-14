@@ -59,6 +59,7 @@ Public Class ProjectsCosts
         _dtpMaterial.Format = DateTimePickerFormat.Custom
         _dtpMaterial.CustomFormat = "MM/dd/yyyy"
         AddHandler _dtpMaterial.ValueChanged, AddressOf _dtpMaterialValueChangue
+
     End Sub
 
     Private Sub _dtpMaterialValueChangue(sender As Object, e As EventArgs)
@@ -296,6 +297,7 @@ Public Class ProjectsCosts
             btnAddRecord.Text = "Save Record"
             limpiarCampos()
             activarCampos(True)
+            btnChangeJobNo.Enabled = False
             chbComplete.Checked = False
             flagAddRecord = True
             pjtNuevo.clear()
@@ -324,10 +326,12 @@ Public Class ProjectsCosts
                         activarCampos(False)
                     End If
                 End If
+                btnChangeJobNo.Enabled = True
             Else
                 MsgBox("Error, chek the Data or try again")
                 btnAddRecord.Text = "Save Record"
                 flagAddRecord = True
+                btnChangeJobNo.Enabled = False
             End If
         End If
     End Sub
@@ -420,8 +424,10 @@ Public Class ProjectsCosts
                     txtElementsRadar.Text = "1 of " + tablasDeTareas.Rows.Count.ToString()
                 End If
             End If
+            btnChangeJobNo.Enabled = False
         ElseIf flagBtnNextBackFind = True Then
             JobNumber = cmbJobNumber.SelectedItem
+            btnChangeJobNo.Enabled = True
         Else
             JobNumber = cmbJobNumber.SelectedItem
             If cargarDatosProjecto(JobNumber) Then
@@ -437,6 +443,7 @@ Public Class ProjectsCosts
             If tablasDeTareas.Rows IsNot Nothing Then
                 txtElementsRadar.Text = "1 of " + tablasDeTareas.Rows.Count.ToString()
             End If
+            btnChangeJobNo.Enabled = True
         End If
     End Sub
 
@@ -1357,6 +1364,7 @@ Public Class ProjectsCosts
         tblExpencesProjects.Enabled = activar
         tblMaterialProjects.Enabled = activar
         tblHoursWorkedProject.Enabled = activar
+        btnChangeJobNo.Enabled = activar
     End Sub
 
     Private Sub btnMaximize_Click(sender As Object, e As EventArgs) Handles btnMaximize.Click
@@ -1453,6 +1461,19 @@ Public Class ProjectsCosts
         UpExcel.ShowDialog()
         mtdJobs.buscarMaterialesPorProyecto(tblMaterialProjects, idAuxWO, task)
         calcularValores()
+    End Sub
+
+    Private Sub btnChangeJobNo_Click(sender As Object, e As EventArgs) Handles btnChangeJobNo.Click
+        Dim frmChanguePo As New ChangueProject
+        frmChanguePo.JobNo = pjt.jobNum.ToString()
+        frmChanguePo.PO = pjt.idPO
+        frmChanguePo.WO = pjt.idWorkOrder + "-" + pjt.idTask
+        frmChanguePo.idAux = pjt.idAux
+        frmChanguePo.IdWO = pjt.idAuxWO
+        frmChanguePo.ShowDialog()
+        If cmbJobNumber.Items IsNot Nothing Then
+            cmbJobNumber.SelectedIndex = 1
+        End If
     End Sub
 
     Private Sub btnFindProject_Click(sender As Object, e As EventArgs) Handles btnFindProject.Click

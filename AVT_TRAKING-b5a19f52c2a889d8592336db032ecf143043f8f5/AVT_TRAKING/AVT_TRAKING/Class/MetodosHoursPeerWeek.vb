@@ -43,10 +43,11 @@ hw.hours3 as 'Hours 3',
 hw.schedule as 'Shift',
 wc.billingRate1 as 'Billing Rate',
 wc.billingRateOT as 'Billing Rate OT',
-wc.billingRate3 as 'Billing Rate 3'
+wc.billingRate3 as 'Billing Rate 3',
+hw.jobNo
 from employees as emp 
 inner join hoursWorked as hw on emp.idEmployee = hw.idEmployee
-inner join workCode as wc on wc.idWorkCode = hw.idWorkCode
+inner join workCode as wc on wc.idWorkCode = hw.idWorkCode and hw.jobNo = wc.jobNo
 inner join task as tk on tk.idAux = hw.idAux 
 inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO "
     Public Function buscarHoras(ByRef tblHoras As DataGridView, ByVal idEmpleado As String) As Boolean
@@ -59,6 +60,7 @@ inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO "
                 da.Fill(dt)
                 tblHoras.DataSource = dt
                 tblHoras.Columns("idHorsWorked").Visible = False
+                tblHoras.Columns("jobNo").Visible = False
                 desconectar()
                 Return True
             Else
@@ -82,6 +84,7 @@ inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO "
                 da.Fill(dt)
                 tblHoras.DataSource = dt
                 tblHoras.Columns("idHorsWorked").Visible = False
+                tblHoras.Columns("jobNo").Visible = False
                 desconectar()
                 Return True
             Else
@@ -192,7 +195,7 @@ order by jb.jobNo,po.idPO , CONCAT(wo.idWO,'-',tk.task) asc
             If workCodeTable IsNot Nothing Then
                 workCodeTable.Clear()
             End If
-            Dim cmd As New SqlCommand("select idWorkCode ,name , description , billingRate1 , billingRateOT , billingRate3 from workCode ", conn)
+            Dim cmd As New SqlCommand("select idWorkCode ,name , description , billingRate1 , billingRateOT , billingRate3 ,jobNo from workCode ", conn)
             If cmd.ExecuteNonQuery Then
                 Dim da As New SqlDataAdapter(cmd)
                 da.Fill(workCodeTable)
@@ -207,16 +210,19 @@ order by jb.jobNo,po.idPO , CONCAT(wo.idWO,'-',tk.task) asc
             Return False
         End Try
     End Function
-    Public Function llenarComboCellWorkCode(ByVal cmbWorkCode As DataGridViewComboBoxCell, ByVal workCodeTable As DataTable, Optional lastValue As String = "") As String
+    Public Function llenarComboCellWorkCode(ByVal cmbWorkCode As DataGridViewComboBoxCell, ByVal jobNo As String, Optional lastValue As String = "") As String
         Try
             conectar()
             cmbWorkCode.Items.Clear()
-            workCodeTable.Clear()
-            Dim cmd As New SqlCommand("select idWorkCode ,name , description , billingRate1 , billingRateOT , billingRate3 from workCode ", conn)
+            Dim cmd As New SqlCommand("select idWorkCode ,name , description , billingRate1 , billingRateOT , billingRate3 from workCode where jobNo = " + jobNo, conn)
             If cmd.ExecuteNonQuery Then
                 Dim da As New SqlDataAdapter(cmd)
+                Dim workCodeTable As New DataTable
                 da.Fill(workCodeTable)
                 Dim cmbValue As String = ""
+                If cmbWorkCode.Items.Count > 0 Then
+                    cmbWorkCode.Items.Clear()
+                End If
                 For Each row As DataRow In workCodeTable.Rows
                     cmbWorkCode.Items.Add(row.ItemArray(1))
                     If lastValue = row.ItemArray(1) Then
@@ -286,9 +292,9 @@ order by jb.jobNo,po.idPO , CONCAT(wo.idWO,'-',tk.task) asc
     Public Function InsertarRecord(ByVal listDatos As List(Of String)) As Boolean
         Try
             conectar()
-            Dim cmd As New SqlCommand("if (select COUNT(*) from hoursWorked where idAux = '" + listDatos(7) + "' and idEmployee = '" + listDatos(5) + "' and dateWorked = '" + listDatos(4) + "' and idWorkCode = " + listDatos(6) + " )=0
+            Dim cmd As New SqlCommand("if (select COUNT(*) from hoursWorked where idAux = '" + listDatos(8) + "' and idEmployee = '" + listDatos(5) + "' and dateWorked = '" + listDatos(4) + "' and idWorkCode = " + listDatos(6) + " )=0
 begin
-insert into hoursWorked values(NEWID()," + listDatos(1) + "," + listDatos(2) + "," + listDatos(3) + ",'" + listDatos(4) + "','" + listDatos(5) + "'," + listDatos(6) + ",'" + listDatos(7) + "','" + listDatos(8) + "')
+insert into hoursWorked values(NEWID()," + listDatos(1) + "," + listDatos(2) + "," + listDatos(3) + ",'" + listDatos(4) + "','" + listDatos(5) + "'," + listDatos(6) + ",'" + listDatos(8) + "','" + listDatos(9) + "'," + listDatos(7) + ")
 end", conn)
             If cmd.ExecuteNonQuery > 0 Then
                 desconectar()
@@ -1049,7 +1055,7 @@ select * from projects", conn)
     Public Function lllenarTablaWorkCodes() As DataTable
         Try
             conectar()
-            Dim cmd As New SqlCommand("select idWorkCode , name , description from workCode", conn)
+            Dim cmd As New SqlCommand("select idWorkCode , name , description, jobNo from workCode", conn)
             Dim dt As New DataTable
             If cmd.ExecuteNonQuery Then
                 Dim da As New SqlDataAdapter(cmd)
@@ -1058,6 +1064,7 @@ select * from projects", conn)
                 dt.Columns.Add("idWorkCode")
                 dt.Columns.Add("name")
                 dt.Columns.Add("description")
+                dt.Columns.Add("jobnNo")
             End If
             Return dt
         Catch ex As Exception

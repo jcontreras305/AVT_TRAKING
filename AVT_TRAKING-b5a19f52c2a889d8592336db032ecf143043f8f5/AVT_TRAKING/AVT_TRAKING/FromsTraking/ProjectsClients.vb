@@ -417,6 +417,25 @@ Public Class ProjectsClients
         End Try
     End Sub
 
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+        Try
+            If tblProjectClientsAll.SelectedRows.Count > 0 Then
+                If DialogResult.Yes = MessageBox.Show("The Selected row(s) will be deleted. Are you sure to continue?", "Message", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) Then
+                    If mtdJobs.deleteProject(tblProjectClientsAll) Then
+                        MsgBox("Successful.")
+                        For Each row As DataGridViewRow In tblProjectClientsAll.SelectedRows
+                            tblProjectClientsAll.Rows.Remove(row)
+                        Next
+                    End If
+                End If
+            Else
+                MessageBox.Show("Please select a row to continue.", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information)
+            End If
+        Catch ex As Exception
+
+        End Try
+    End Sub
+
     Private Sub cmbCostCode_Leave(sender As Object, e As EventArgs) Handles cmbCostCode.Leave
         If btnAdd.Text = "Add" Then  'Se supone que no esta agregando si no que esta actualizando o visualizado unicamente
             mtdJobs.actualizarCostCode(cmbCostCode.Text, txtJobNumber.Text)

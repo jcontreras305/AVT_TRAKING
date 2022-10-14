@@ -79,6 +79,7 @@ Partial Class ProjectsClients
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
         Me.TableLayoutPanel2 = New System.Windows.Forms.TableLayoutPanel()
         Me.Panel9 = New System.Windows.Forms.Panel()
+        Me.btnCancelSaveJob = New System.Windows.Forms.Button()
         Me.btnAdd = New System.Windows.Forms.Button()
         Me.Panel8 = New System.Windows.Forms.Panel()
         Me.Panel7 = New System.Windows.Forms.Panel()
@@ -114,7 +115,7 @@ Partial Class ProjectsClients
         Me.idAuxWO = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.idAux = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.photo = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.btnCancelSaveJob = New System.Windows.Forms.Button()
+        Me.Button1 = New System.Windows.Forms.Button()
         Me.Panel1.SuspendLayout()
         Me.pnlButtonsPOCl.SuspendLayout()
         Me.PnllSetup.SuspendLayout()
@@ -674,6 +675,7 @@ Partial Class ProjectsClients
         '
         'Panel4
         '
+        Me.Panel4.Controls.Add(Me.Button1)
         Me.Panel4.Controls.Add(Me.btnKPI)
         Me.Panel4.Controls.Add(Me.btnTrack)
         Me.Panel4.Controls.Add(Me.btnTaxes)
@@ -854,6 +856,23 @@ Partial Class ProjectsClients
         Me.Panel9.Name = "Panel9"
         Me.Panel9.Size = New System.Drawing.Size(270, 30)
         Me.Panel9.TabIndex = 4
+        '
+        'btnCancelSaveJob
+        '
+        Me.btnCancelSaveJob.FlatAppearance.BorderSize = 0
+        Me.btnCancelSaveJob.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(58, Byte), Integer), CType(CType(115, Byte), Integer))
+        Me.btnCancelSaveJob.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnCancelSaveJob.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.btnCancelSaveJob.Image = Global.AVT_TRAKING.My.Resources.Resources.close2
+        Me.btnCancelSaveJob.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnCancelSaveJob.Location = New System.Drawing.Point(98, 2)
+        Me.btnCancelSaveJob.Name = "btnCancelSaveJob"
+        Me.btnCancelSaveJob.Size = New System.Drawing.Size(75, 27)
+        Me.btnCancelSaveJob.TabIndex = 18
+        Me.btnCancelSaveJob.Text = "Cancel"
+        Me.btnCancelSaveJob.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.btnCancelSaveJob.UseVisualStyleBackColor = True
+        Me.btnCancelSaveJob.Visible = False
         '
         'btnAdd
         '
@@ -1148,22 +1167,21 @@ Partial Class ProjectsClients
         Me.photo.ReadOnly = True
         Me.photo.Visible = False
         '
-        'btnCancelSaveJob
+        'Button1
         '
-        Me.btnCancelSaveJob.FlatAppearance.BorderSize = 0
-        Me.btnCancelSaveJob.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(58, Byte), Integer), CType(CType(115, Byte), Integer))
-        Me.btnCancelSaveJob.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnCancelSaveJob.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.btnCancelSaveJob.Image = Global.AVT_TRAKING.My.Resources.Resources.close2
-        Me.btnCancelSaveJob.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnCancelSaveJob.Location = New System.Drawing.Point(98, 2)
-        Me.btnCancelSaveJob.Name = "btnCancelSaveJob"
-        Me.btnCancelSaveJob.Size = New System.Drawing.Size(75, 27)
-        Me.btnCancelSaveJob.TabIndex = 18
-        Me.btnCancelSaveJob.Text = "Cancel"
-        Me.btnCancelSaveJob.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.btnCancelSaveJob.UseVisualStyleBackColor = True
-        Me.btnCancelSaveJob.Visible = False
+        Me.Button1.Dock = System.Windows.Forms.DockStyle.Bottom
+        Me.Button1.FlatAppearance.BorderSize = 0
+        Me.Button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.Button1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Button1.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.Button1.Image = Global.AVT_TRAKING.My.Resources.Resources.delete
+        Me.Button1.Location = New System.Drawing.Point(0, 369)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(124, 39)
+        Me.Button1.TabIndex = 11
+        Me.Button1.Text = "    Delete"
+        Me.Button1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
+        Me.Button1.UseVisualStyleBackColor = True
         '
         'ProjectsClients
         '
@@ -1303,4 +1321,5 @@ Partial Class ProjectsClients
     Friend WithEvents pnlButtonsPOCl As Panel
     Friend WithEvents btnPBI As Button
     Friend WithEvents btnCancelSaveJob As Button
+    Friend WithEvents Button1 As Button
 End Class

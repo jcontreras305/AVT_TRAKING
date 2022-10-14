@@ -248,7 +248,7 @@ Public Class TimeSheet
                         Dim mensaje As String = ""
                         Dim contwo As Integer = 2
                         Dim filasError As String = ""
-                        MsgSalida(txtSalidaCSV, "Verifying if exist new Workrders... ")
+                        MsgSalida(txtSalidaCSV, "Verifying if exist new Work Orders... ")
                         While workOrders.Cells(contwo, 2).Text <> ""
                             Dim wo = workOrders.Cells(contwo, 2).Text.ToString().Replace(" ", "-")
                             Dim workOrder() As String = wo.Split("-") 'workOrder y task
@@ -259,18 +259,22 @@ Public Class TimeSheet
                         Dim flagExistWO As Boolean = False
                         For Each row As DataRow In tablaWO.Rows()
                             flagExistWO = False
-                            For Each row1 As DataRow In tablaProject.Rows()
-                                Dim workOrder() As String = row1.ItemArray(1).ToString().Split("-")
-                                If row.ItemArray(3).ToString().Equals(row1.ItemArray(1).ToString()) And row.ItemArray(8).ToString.Equals(row1.ItemArray(3).ToString()) And row.ItemArray(9).ToString.Equals(row1.ItemArray(4).ToString()) Then
-                                    flagExistWO = True
-                                    Exit For
-                                Else
-                                    flagExistWO = False
-                                End If
-                            Next
-                            If Not flagExistWO Then
+                            Dim rowsWorkOrder() As DataRow = tablaProject.Select("project = '" + row.ItemArray(3).ToString + "' and idPO = " + row.ItemArray(8).ToString + " and jobNo = " + row.ItemArray(9).ToString + "")
+                            If rowsWorkOrder.Length = 0 Then
                                 listNewWorkOrders.Add(row)
                             End If
+                            'For Each row1 As DataRow In tablaProject.Rows()
+                            '    Dim workOrder() As String = row1.ItemArray(1).ToString().Split("-")
+                            '    If row.ItemArray(3).ToString().Equals(row1.ItemArray(1).ToString()) And row.ItemArray(8).ToString.Equals(row1.ItemArray(3).ToString()) And row.ItemArray(9).ToString.Equals(row1.ItemArray(4).ToString()) Then
+                            '        flagExistWO = True
+                            '        Exit For
+                            '    Else
+                            '        flagExistWO = False
+                            '    End If
+                            'Next
+                            'If Not flagExistWO Then
+                            '   listNewWorkOrders.Add(row)
+                            'End If
                         Next
                         If listNewWorkOrders.Count > 0 Then
                             txtSalidaCSV.Text = txtSalidaCSV.Text + vbCrLf + listNewWorkOrders.Count.ToString() + " New 'Work Codes', trying to insert the new 'Work Orders'."
@@ -287,7 +291,7 @@ Public Class TimeSheet
                                     newPO.idPO = item.ItemArray(8)
                                     newPO.jobNum = item.ItemArray(9)
                                     newPO.equipament = item.ItemArray(10)
-                                    Dim listRows() As DataRow = tablaProject.Select("idWO = '" + newPO.idWorkOrder + "' and idPO = " + newPO.idPO.ToString() + " and jobNo = "+newPO.jobNum.ToString()+" ")
+                                    Dim listRows() As DataRow = tablaProject.Select("idWO = '" + newPO.idWorkOrder + "' and idPO = " + newPO.idPO.ToString() + " and jobNo = " + newPO.jobNum.ToString() + " ")
                                     If listRows.Length > 0 Then
                                         newPO.idAuxWO = listRows(0).ItemArray(5)
                                     Else
@@ -343,7 +347,7 @@ Public Class TimeSheet
                             Dim tblWC As Data.DataTable = mtdHPW.lllenarTablaWorkCodes()
                             Dim tblEmp As Data.DataTable = mtdHPW.llenarTablaEmpleado()
                             Dim contRecord As Integer = 2
-                            Dim textDoc As String = "idHWTMP,hoursST,hoursOT,hours3T,dateWorked,idEmployee,idWorkCode,idAux,schedule" & vbCrLf
+                            Dim textDoc As String = "idHWTMP,hoursST,hoursOT,hours3T,dateWorked,idEmployee,idWorkCode,idAux,schedule,jobNo" & vbCrLf
                             Dim listErrors As New List(Of String)
                             Dim msgAux As String = txtSalidaCSV.Text + vbCrLf
                             While CStr(records.Cells(contRecord, 2).Value) <> ""
@@ -351,7 +355,7 @@ Public Class TimeSheet
                                 Dim rowE() As Data.DataRow = tblEmp.Select("numberEmploye = " + CStr(records.Cells(contRecord, 2).value) + "") 'Buscando idEmployee
                                 Dim dateRecord As String = validarFechaParaSQlDeExcel(records.Cells(contRecord, 3).Text)
                                 Dim rowP() As Data.DataRow = tblProjects.Select("worknum = '" + CStr(records.Cells(contRecord, 4).value) + "' AND idPO = " + CStr(records.Cells(contRecord, 5).value) + "") 'Buscado task 
-                                Dim rowWC() As Data.DataRow = tblWC.Select("name = '" + CStr(records.Cells(contRecord, 6).value) + "'") 'Buscando idWorkCode
+
                                 Dim newidRecord As Guid = Guid.NewGuid()
 
                                 Dim hst As String = If(CStr(records.Cells(contRecord, 7).value) = "", "0", CStr(records.Cells(contRecord, 7).value))
@@ -359,10 +363,41 @@ Public Class TimeSheet
                                 Dim schedule As String = If(records.Cells(contRecord, 9).value = "Day", "DAYS", If(records.Cells(contRecord, 9).value = "DAYS", "DAYS", "NIGTHS"))
                                 If rowP.Length > 0 Then
                                     If rowE.Length > 0 Then
+                                        'Buscando idWorkCode
+                                        Dim rowWC() As Data.DataRow = tblWC.Select("name = '" + CStr(records.Cells(contRecord, 6).value) + "' and jobNo = " + rowP(0).ItemArray(6).ToString() + "")
                                         If rowWC.Length > 0 Then
-                                            textDoc += newidRecord.ToString() & "," & hst & "," & hot & "," & "0" & "," & dateRecord & "," & CStr(rowE(0).ItemArray(2)) & "," & CStr(rowWC(0).ItemArray(0)) & "," & rowP(0).ItemArray(2) & "," & schedule & vbCrLf
+                                            textDoc += newidRecord.ToString() & "," & hst & "," & hot & "," & "0" & "," & dateRecord & "," & CStr(rowE(0).ItemArray(2)) & "," & CStr(rowWC(0).ItemArray(0)) & "," & rowP(0).ItemArray(2) & "," & schedule & "," & rowP(0).ItemArray(6).ToString() & vbCrLf
                                         Else
-                                            listErrors.Add("Row " + CStr(contRecord) + ": Work Code Error.")
+                                            'tratando de insertar el nuevo work code
+                                            listErrors.Add("Row " + CStr(contRecord) + ": Work Code Not found Error.")
+                                            If DialogResult.Yes = MessageBox.Show("The Work Code " + CStr(records.Cells(contRecord, 6).value) + " is not enabled, Would you like to add the WorkCode?", "Advertence", MessageBoxButtons.YesNo, MessageBoxIcon.Question) Then
+                                                rowWC = tblWC.Select("name = '" + CStr(records.Cells(contRecord, 6).value) + "'")
+                                                Dim wcDatos(8) As String
+                                                If rowWC.Length > 0 Then
+                                                    wcDatos(0) = rowWC(0).ItemArray(0)
+                                                    wcDatos(1) = rowWC(0).ItemArray(1)
+                                                    wcDatos(2) = rowWC(0).ItemArray(2)
+                                                    wcDatos(3) = "0.00"
+                                                    wcDatos(4) = "0.00"
+                                                    wcDatos(5) = "0.00"
+                                                    wcDatos(6) = rowWC(0).ItemArray(5)
+                                                    wcDatos(7) = rowWC(0).ItemArray(6)
+                                                    wcDatos(8) = rowP(0).ItemArray(6).ToString()
+                                                Else
+                                                    wcDatos = {If(rowWC.Length = 0, "(isnull((select MAX(idWorkCode)+1 from workCode where jobNo = " + rowP(0).ItemArray(6).ToString() + "),0))", rowWC(rowWC.Length - 1).ItemArray(0).ToString()), CStr(records.Cells(contRecord, 6).value), "", "0.00", "0.00", "0.00", "", "", rowP(0).ItemArray(6).ToString()}
+                                                End If
+                                                If mtdJobs.nuevaWC(wcDatos) Then
+                                                    tblWC = mtdHPW.lllenarTablaWorkCodes()
+                                                    rowWC = tblWC.Select("name = '" + CStr(records.Cells(contRecord, 6).value) + "' and jobNo = " + rowP(0).ItemArray(6).ToString() + "")
+                                                    If rowWC.Length > 0 Then
+                                                        textDoc += newidRecord.ToString() & "," & hst & "," & hot & "," & "0" & "," & dateRecord & "," & CStr(rowE(0).ItemArray(2)) & "," & CStr(rowWC(0).ItemArray(0)) & "," & rowP(0).ItemArray(2) & "," & schedule & "," & rowP(0).ItemArray(6).ToString() & vbCrLf
+                                                    Else
+                                                        MessageBox.Show("Was not posible to inseter the Work Code " + CStr(records.Cells(contRecord, 6).value) + ", Please try to insert it at another time.")
+                                                    End If
+                                                Else
+                                                    MessageBox.Show("Was not posible to inseter the Work Code " + CStr(records.Cells(contRecord, 6).value) + ", Please try to insert it at another time.")
+                                                End If
+                                            End If
                                         End If
                                     Else
                                         listErrors.Add("Row " + CStr(contRecord) + ": Number Employee Error.")

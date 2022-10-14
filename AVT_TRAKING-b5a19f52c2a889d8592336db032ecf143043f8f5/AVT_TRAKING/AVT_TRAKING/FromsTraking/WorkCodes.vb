@@ -4,10 +4,11 @@ Public Class WorkCodes
     Dim tablaWC As New DataTable 'esta tabla guarda los WC de cierto grupo
 
     Private Sub WorkCodes_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        llenarComboClientsReports(cmbClient)
         btnAddWorkCode.Enabled = True
         btnCancelWC.Enabled = False
         activarCamposWC(False)
-        mtdJobs.selectWC(tblWK)
+        'mtdJobs.selectWC(tblWK)
     End Sub
 
 
@@ -26,7 +27,7 @@ Public Class WorkCodes
             If CInt(txtWorkCodeID.Text) <= metodosGlobales.selecValorMaxColum(tblWK, 0) Or TxtWorkCode.Text Is "" Or sprBillingRate1.Value < 0 Or sprBillingRateOT.Value < 0 Then
                 MsgBox("Please choose a valid ID to continue or check the data.")
             Else
-                Dim datos(8) As String
+                Dim datos(9) As String
                 datos(0) = txtWorkCodeID.Text
                 datos(1) = TxtWorkCode.Text
                 datos(2) = txtDescription.Text
@@ -35,16 +36,20 @@ Public Class WorkCodes
                 datos(5) = sprBillingRate3.Value.ToString("N")
                 datos(6) = txtEQExq1.Text
                 datos(7) = txtEQExq2.Text
-                mtdJobs.nuevaWC(datos)
-                btnAddWorkCode.Text = "Add"
-                btnCancelWC.Visible = False
-                btnUpdateWorkCode.Enabled = False
-                limpiarcampos()
-                activarCamposWC(False)
-                mtdJobs.selectWC(tblWK)
+                If cmbJob.SelectedIndex > -1 Then
+                    datos(8) = cmbJob.Items(cmbJob.SelectedIndex).ToString
+                    mtdJobs.nuevaWC(datos)
+                    btnAddWorkCode.Text = "Add"
+                    btnCancelWC.Visible = False
+                    btnUpdateWorkCode.Enabled = False
+                    limpiarcampos()
+                    activarCamposWC(False)
+                    mtdJobs.selectWC(tblWK, cmbJob.Items(cmbJob.SelectedIndex).ToString)
+                Else
+                    MessageBox.Show("Please select a Job to continue.")
+                End If
             End If
         End If
-
     End Sub
 
 
@@ -94,7 +99,7 @@ Public Class WorkCodes
 
     Private Sub tbnUpdateWorkCode_Click(sender As Object, e As EventArgs) Handles btnUpdateWorkCode.Click
         If MessageBox.Show("Are you sure to Update the WorkCode", "Advertence", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) = DialogResult.OK Then
-            Dim datos(7) As String
+            Dim datos(8) As String
             datos(0) = txtWorkCodeID.Text
             datos(1) = TxtWorkCode.Text
             datos(2) = txtDescription.Text
@@ -103,11 +108,14 @@ Public Class WorkCodes
             datos(5) = sprBillingRate3.Value.ToString("N")
             datos(6) = txtEQExq1.Text
             datos(7) = txtEQExq2.Text
-            mtdJobs.acualizarWC(datos)
-            btnUpdateWorkCode.Enabled = True
-            btnAddWorkCode.Enabled = False
-            btnCancelWC.Enabled = True
-            mtdJobs.selectWC(tblWK)
+            If cmbJob.SelectedIndex > -1 Then
+                datos(8) = cmbJob.Items(cmbJob.SelectedIndex).ToString
+                mtdJobs.acualizarWC(datos)
+                btnUpdateWorkCode.Enabled = True
+                btnAddWorkCode.Enabled = False
+                btnCancelWC.Enabled = True
+                mtdJobs.selectWC(tblWK, cmbJob.Items(cmbJob.SelectedIndex).ToString)
+            End If
         End If
     End Sub
 
@@ -176,5 +184,86 @@ Public Class WorkCodes
         Me.Close()
     End Sub
 
+    Private Sub cmbClient_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbClient.SelectedIndexChanged
+        If cmbClient.SelectedIndex > -1 Then
+            Dim array() As String = cmbClient.Items(cmbClient.SelectedIndex).ToString.Split(" ")
+            llenarComboJobsReports(cmbJob, array(0))
+        End If
+    End Sub
 
+    Private Sub cmbJob_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbJob.SelectedIndexChanged
+        Try
+            If cmbJob.SelectedIndex > -1 Then
+                mtdJobs.selectWC(tblWK, cmbJob.Items(cmbJob.SelectedIndex).ToString)
+            End If
+        Catch ex As Exception
+
+        End Try
+    End Sub
+
+    Private Sub btnExcel_Click(sender As Object, e As EventArgs) Handles btnExcel.Click
+        If cmbJob.SelectedIndex > -1 Then
+            Dim lbl As New Label
+            Dim pgs As New ProgressBar
+            Dim flag As Boolean = False
+            Dim tbl As New DataTable
+            Dim hoja As String = "Workcodes"
+            While flag = False
+                tbl = leerExcel(lbl, pgs, hoja)
+                If tbl IsNot Nothing Then
+                    flag = True
+                    Exit While
+                Else
+                    hoja = InputBox("Please type the sheet name to continue or leave the field blank.", "Message")
+                    If hoja = "" Then
+                        flag = False
+                        Exit While
+                    End If
+                End If
+            End While
+            If flag Then
+                If tbl.Rows.Count > 0 Then
+                    If DialogResult.Yes = MessageBox.Show("In the excel exist " + tbl.Rows.Count.ToString + " Work Codes, Would you like to start the process to insert?", "Message", MessageBoxButtons.YesNo, MessageBoxIcon.Question) Then
+                        mtdJobs.insertWorkCodeTable(tbl, cmbJob.Items(cmbJob.SelectedIndex).ToString)
+                    End If
+                End If
+            End If
+        Else
+            MessageBox.Show("Please select a JobNo to continue.", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information)
+        End If
+    End Sub
+
+    Private Sub btnDownloadExcel_Click(sender As Object, e As EventArgs) Handles btnDownloadExcel.Click
+        Try
+            Dim sd As New SaveFileDialog
+            sd.DefaultExt = "*.xlsx"
+            sd.FileName = "Workcodes.xlsx"
+            sd.Filter = "Archivos de Excel (*.xlsx)|*.xlsx"
+            If DialogResult.OK = sd.ShowDialog() Then
+                Dim ApExcel = New Microsoft.Office.Interop.Excel.Application
+                Dim libro = ApExcel.Workbooks.Add
+                Dim colums() As String = {"idWorkCode", "Name", "Description", "Billing Rate ST", "Billing Rate OT", "Billing Rate 3", "EQExp1", "EQExp2", "Job No"}
+                For i As Int16 = 0 To colums.Length - 1
+                    libro.Sheets(1).cells(1, i + 1) = colums(i)
+                Next
+                With libro.Sheets(1).Range("A1:I1")
+                    .Font.Bold = True
+                    .Font.ColorIndex = 1
+                    With .Interior
+                        .ColorIndex = 15
+                    End With
+                    .BorderAround(Microsoft.Office.Interop.Excel.XlLineStyle.xlContinuous, Microsoft.Office.Interop.Excel.XlBorderWeight.xlThin, Microsoft.Office.Interop.Excel.XlColorIndex.xlColorIndexAutomatic, Color.Black)
+                End With
+                libro.Sheets(1).Name = "Workcodes"
+                libro.SaveAs(sd.FileName)
+                NAR(libro.Sheets(1))
+                libro.Close(False)
+                NAR(libro)
+                ApExcel.Quit()
+                NAR(ApExcel)
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message)
+        End Try
+    End Sub
 End Class

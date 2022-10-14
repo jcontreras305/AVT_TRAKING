@@ -37,7 +37,7 @@ T2.Complete,T2.[Es-Hrs],T2.[Total Expenses],T2.[Total Material],T2.[Total Spend]
 	
 	(select ISNULL(SUM(T2.Amount),0) as 'Billings ST' from 
 		(select SUM(T1.hoursST*T1.billingRate1) AS 'Amount' from 
-			(select hoursST, hw.idWorkCode , billingRate1  from hoursWorked as hw inner join workCode as wc on wc.idWorkCode = hw.idWorkCode inner join task as tk1 on tk1.idAux = hw.idAux inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO inner join projectOrder as po1 on po1.idPO = wo1.idPO and wo1.jobNo = po1.jobNo inner join job as jb1 on jb1.jobNo = po1.jobNo  
+			(select hoursST, hw.idWorkCode , billingRate1  from hoursWorked as hw inner join workCode as wc on wc.idWorkCode = hw.idWorkCode and wc.jobNo = hw.jobNo inner join task as tk1 on tk1.idAux = hw.idAux inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO inner join projectOrder as po1 on po1.idPO = wo1.idPO and wo1.jobNo = po1.jobNo inner join job as jb1 on jb1.jobNo = po1.jobNo  
 				where jb.jobNo = jb1.jobNo and po1.idPO = po.idPO and wo.idAuxWO = wo1.idAuxWO and hw.idAux=ts.idAux  and dateWorked between @startdate and @finaldate
 			)as T1    
 		group by T1.idWorkCode
@@ -48,7 +48,7 @@ T2.Complete,T2.[Es-Hrs],T2.[Total Expenses],T2.[Total Material],T2.[Total Spend]
 	
 	(select ISNULL( SUM(T2.Amount),0) as 'Billings OT' from 
 		(select SUM(T1.hoursOT*T1.billingRateOT) AS 'Amount' from 
-			(select hoursOT, hw.idWorkCode , billingRateOT  from hoursWorked as hw inner join workCode as wc on wc.idWorkCode = hw.idWorkCode inner join task as tk1 on tk1.idAux = hw.idAux inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO inner join projectOrder as po1 on po1.idPO = wo1.idPO and wo1.jobNo = po1.jobNo inner join job as jb1 on jb1.jobNo = po1.jobNo  
+			(select hoursOT, hw.idWorkCode , billingRateOT  from hoursWorked as hw inner join workCode as wc on wc.idWorkCode = hw.idWorkCode and wc.jobNo = hw.jobNo inner join task as tk1 on tk1.idAux = hw.idAux inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO inner join projectOrder as po1 on po1.idPO = wo1.idPO and wo1.jobNo = po1.jobNo inner join job as jb1 on jb1.jobNo = po1.jobNo  
 				where jb.jobNo = jb1.jobNo and po1.idPO = po.idPO and wo.idAuxWO = wo1.idAuxWO and hw.idAux=ts.idAux  and dateWorked between @startdate and @finaldate
 			)as T1    
 		group by T1.idWorkCode
@@ -69,13 +69,13 @@ T2.Complete,T2.[Es-Hrs],T2.[Total Expenses],T2.[Total Material],T2.[Total Spend]
 		
 			(select ISNULL(SUM(T2.Amount),0) as 'Billings ST' from 
 			(select SUM(T1.hoursST*T1.billingRate1) AS 'Amount'
-			from (select hoursST, hw.idWorkCode , billingRate1  from hoursWorked as hw inner join workCode as wc on wc.idWorkCode = hw.idWorkCode inner join task as tk1 on tk1.idAux = hw.idAux inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO inner join projectOrder as po1 on po1.idPO = wo1.idPO and wo1.jobNo = po1.jobNo inner join job as jb1 on jb1.jobNo = po1.jobNo  
+			from (select hoursST, hw.idWorkCode , billingRate1  from hoursWorked as hw inner join workCode as wc on wc.idWorkCode = hw.idWorkCode and wc.jobNo = hw.jobNo inner join task as tk1 on tk1.idAux = hw.idAux inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO inner join projectOrder as po1 on po1.idPO = wo1.idPO and wo1.jobNo = po1.jobNo inner join job as jb1 on jb1.jobNo = po1.jobNo  
 			where jb.jobNo = jb1.jobNo and po1.idPO = po.idPO and wo.idAuxWO = wo1.idAuxWO and hw.idAux=ts.idAux  and dateWorked between @startdate and @finaldate)as T1    
 			group by T1.idWorkCode) as T2)--Billing ST
 			+
 			(select  ISNULL( SUM(T2.Amount),0) as 'Billing OT' from 
 			(select SUM(T1.hoursOT*T1.billingRateOT) AS 'Amount'
-			from (select hoursOT, hw.idWorkCode , billingRateOT  from hoursWorked as hw inner join workCode as wc on wc.idWorkCode = hw.idWorkCode inner join task as tk1 on tk1.idAux = hw.idAux inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO inner join projectOrder as po1 on po1.idPO = wo1.idPO and wo1.jobNo = po1.jobNo inner join job as jb1 on jb1.jobNo = po1.jobNo  
+			from (select hoursOT, hw.idWorkCode , billingRateOT  from hoursWorked as hw inner join workCode as wc on wc.idWorkCode = hw.idWorkCode and wc.jobNo = hw.jobNo inner join task as tk1 on tk1.idAux = hw.idAux inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO inner join projectOrder as po1 on po1.idPO = wo1.idPO and wo1.jobNo = po1.jobNo inner join job as jb1 on jb1.jobNo = po1.jobNo  
 			where jb.jobNo = jb1.jobNo and po1.idPO = po.idPO and wo.idAuxWO = wo1.idAuxWO and hw.idAux=ts.idAux  and dateWorked between @startdate and @finaldate)as T1    
 			group by T1.idWorkCode) as T2) --Billing OT
 			+
@@ -125,8 +125,8 @@ begin
 		cl.numberClient,
 		jb.jobNo,
 		po.idPO,
-		(select sum(hw1.hoursST) from hoursWorked as hw1 inner join workCode as wc1 on wc1.idWorkCode = hw1.idWorkCode inner join task as tk1 on tk1.idAux = hw1.idAux inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO inner join projectOrder as po1 on po1.idPO = wo1.idPO and po1.jobNo = wo1.jobNo inner join job as jb1 on jb1.jobNo = po1.jobNo inner join clients as cl1 on cl1.idClient = jb1.idClient where cl1.idClient = cl.idClient and po1.idPO=po.idPO and jb.jobNo = jb1.jobNo and hw1.idEmployee = em.idEmployee and SUBSTRING( wc.name,1,iif(CHARINDEX('-',wc.name)=0, len(wc.name) ,(CHARINDEX('-',wc.name)-1)))=SUBSTRING( wc1.name,1,iif(CHARINDEX('-',wc1.name)=0, len(wc1.name) ,(CHARINDEX('-',wc1.name)-1))) and hw1.dateWorked between @IntialDate and @FinalDate) as 'hoursST',
-		(select sum(hw2.hoursOT) from hoursWorked as hw2 inner join workCode as wc2 on wc2.idWorkCode = hw2.idWorkCode inner join task as tk2 on tk2.idAux = hw2.idAux inner join workOrder as wo2 on wo2.idAuxWO = tk2.idAuxWO inner join projectOrder as po2 on po2.idPO = wo2.idPO and po2.jobNo = wo2.jobNo inner join job as jb2 on jb2.jobNo = po2.jobNo inner join clients as cl2 on cl2.idClient = jb2.idClient where cl2.idClient = cl.idClient and po2.idPO=po.idPO and jb.jobNo = jb2.jobNo and hw2.idEmployee = em.idEmployee and SUBSTRING( wc.name,1,iif(CHARINDEX('-',wc.name)=0, len(wc.name) ,(CHARINDEX('-',wc.name)-1)))=SUBSTRING( wc2.name,1,iif(CHARINDEX('-',wc2.name)=0, len(wc2.name) ,(CHARINDEX('-',wc2.name)-1))) and hw2.dateWorked between @IntialDate and @FinalDate) as 'hoursOT',
+		(select sum(hw1.hoursST) from hoursWorked as hw1 inner join workCode as wc1 on wc1.idWorkCode = hw1.idWorkCode and wc.jobNo = hw.jobNo inner join task as tk1 on tk1.idAux = hw1.idAux inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO inner join projectOrder as po1 on po1.idPO = wo1.idPO and po1.jobNo = wo1.jobNo inner join job as jb1 on jb1.jobNo = po1.jobNo inner join clients as cl1 on cl1.idClient = jb1.idClient where cl1.idClient = cl.idClient and po1.idPO=po.idPO and jb.jobNo = jb1.jobNo and hw1.idEmployee = em.idEmployee and SUBSTRING( wc.name,1,iif(CHARINDEX('-',wc.name)=0, len(wc.name) ,(CHARINDEX('-',wc.name)-1)))=SUBSTRING( wc1.name,1,iif(CHARINDEX('-',wc1.name)=0, len(wc1.name) ,(CHARINDEX('-',wc1.name)-1))) and hw1.dateWorked between @IntialDate and @FinalDate) as 'hoursST',
+		(select sum(hw2.hoursOT) from hoursWorked as hw2 inner join workCode as wc2 on wc2.idWorkCode = hw2.idWorkCode and wc.jobNo = hw.jobNo inner join task as tk2 on tk2.idAux = hw2.idAux inner join workOrder as wo2 on wo2.idAuxWO = tk2.idAuxWO inner join projectOrder as po2 on po2.idPO = wo2.idPO and po2.jobNo = wo2.jobNo inner join job as jb2 on jb2.jobNo = po2.jobNo inner join clients as cl2 on cl2.idClient = jb2.idClient where cl2.idClient = cl.idClient and po2.idPO=po.idPO and jb.jobNo = jb2.jobNo and hw2.idEmployee = em.idEmployee and SUBSTRING( wc.name,1,iif(CHARINDEX('-',wc.name)=0, len(wc.name) ,(CHARINDEX('-',wc.name)-1)))=SUBSTRING( wc2.name,1,iif(CHARINDEX('-',wc2.name)=0, len(wc2.name) ,(CHARINDEX('-',wc2.name)-1))) and hw2.dateWorked between @IntialDate and @FinalDate) as 'hoursOT',
 		SUBSTRING( wc.name,1,iif(CHARINDEX('-',wc.name)=0, len(wc.name) ,(CHARINDEX('-',wc.name)-1))) as 'Code',
 		hw.schedule as 'Shift',
 		CONCAT(em.lastName,' ',em.firstName,' ',em.middleName) as 'Employee',
@@ -134,7 +134,7 @@ begin
 		em.typeEmployee as 'class'
 		from hoursWorked as hw 
 					inner join employees as em on hw.idEmployee = em.idEmployee
-					inner join workCode as wc on wc.idWorkCode = hw.idWorkCode
+					inner join workCode as wc on wc.idWorkCode = hw.idWorkCode and wc.jobNo = hw.jobNo
 					inner join task as tk on tk.idAux = hw.idAux 
 					inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO 
 					inner join projectOrder as po on po.idPO = wo.idPO and wo.jobNo = po.jobNo 
@@ -171,9 +171,9 @@ begin
 			tk.equipament,
 			tk.description,
 			tk.accountNum,
-			(select iif(SUM(hw1.hoursST)is null,0,SUM(hw1.hoursST)) from hoursWorked as hw1 inner join workCode as wc1 on wc1.idWorkCode = hw.idWorkCode inner join task as tk1 on tk1.idAux = hw1.idAux inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO inner join projectOrder as po1 on po1.idPO = wo1.idPO and wo1.jobNo = po1.jobNo inner join job as jb1 on jb1.jobNo = po1.jobNo where hw1.dateWorked = hw.dateWorked and em.idEmployee = hw1.idEmployee and jb.jobNo = jb1.jobNo and po1.idPO = po.idPO and wo.idAuxWO = wo1.idAuxWO and tk1.idAux = tk.idAux and not wc1.name like '%6.4%' ) as 'hoursST',
-			(select iif(SUM(hw1.hoursOT)is null,0,SUM(hw1.hoursOT)) from hoursWorked as hw1 inner join workCode as wc1 on wc1.idWorkCode = hw.idWorkCode inner join task as tk1 on tk1.idAux = hw1.idAux inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO inner join projectOrder as po1 on po1.idPO = wo1.idPO and wo1.jobNo = po1.jobNo inner join job as jb1 on jb1.jobNo = po1.jobNo where hw1.dateWorked = hw.dateWorked and em.idEmployee = hw1.idEmployee and jb.jobNo = jb1.jobNo and po1.idPO = po.idPO and wo.idAuxWO = wo1.idAuxWO and tk1.idAux = tk.idAux and not wc1.name like '%6.4%' ) as 'hoursOT',
-			(select iif(SUM(hw1.hours3 )is null,0,SUM(hw1.hours3 )) from hoursWorked as hw1 inner join workCode as wc1 on wc1.idWorkCode = hw.idWorkCode inner join task as tk1 on tk1.idAux = hw1.idAux inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO inner join projectOrder as po1 on po1.idPO = wo1.idPO and wo1.jobNo = po1.jobNo inner join job as jb1 on jb1.jobNo = po1.jobNo where hw1.dateWorked = hw.dateWorked and em.idEmployee = hw1.idEmployee and jb.jobNo = jb1.jobNo and po1.idPO = po.idPO and wo.idAuxWO = wo1.idAuxWO and tk1.idAux = tk.idAux and not wc1.name like '%6.4%' ) as 'hours3',
+			(select iif(SUM(hw1.hoursST)is null,0,SUM(hw1.hoursST)) from hoursWorked as hw1 inner join workCode as wc1 on wc1.idWorkCode = hw.idWorkCode and wc1.jobNo = hw.jobNo inner join task as tk1 on tk1.idAux = hw1.idAux inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO inner join projectOrder as po1 on po1.idPO = wo1.idPO and wo1.jobNo = po1.jobNo inner join job as jb1 on jb1.jobNo = po1.jobNo where hw1.dateWorked = hw.dateWorked and em.idEmployee = hw1.idEmployee and jb.jobNo = jb1.jobNo and po1.idPO = po.idPO and wo.idAuxWO = wo1.idAuxWO and tk1.idAux = tk.idAux and not wc1.name like '%6.4%' ) as 'hoursST',
+			(select iif(SUM(hw1.hoursOT)is null,0,SUM(hw1.hoursOT)) from hoursWorked as hw1 inner join workCode as wc1 on wc1.idWorkCode = hw.idWorkCode and wc1.jobNo = hw.jobNo inner join task as tk1 on tk1.idAux = hw1.idAux inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO inner join projectOrder as po1 on po1.idPO = wo1.idPO and wo1.jobNo = po1.jobNo inner join job as jb1 on jb1.jobNo = po1.jobNo where hw1.dateWorked = hw.dateWorked and em.idEmployee = hw1.idEmployee and jb.jobNo = jb1.jobNo and po1.idPO = po.idPO and wo.idAuxWO = wo1.idAuxWO and tk1.idAux = tk.idAux and not wc1.name like '%6.4%' ) as 'hoursOT',
+			(select iif(SUM(hw1.hours3 )is null,0,SUM(hw1.hours3 )) from hoursWorked as hw1 inner join workCode as wc1 on wc1.idWorkCode = hw.idWorkCode and wc1.jobNo = hw.jobNo inner join task as tk1 on tk1.idAux = hw1.idAux inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO inner join projectOrder as po1 on po1.idPO = wo1.idPO and wo1.jobNo = po1.jobNo inner join job as jb1 on jb1.jobNo = po1.jobNo where hw1.dateWorked = hw.dateWorked and em.idEmployee = hw1.idEmployee and jb.jobNo = jb1.jobNo and po1.idPO = po.idPO and wo.idAuxWO = wo1.idAuxWO and tk1.idAux = tk.idAux and not wc1.name like '%6.4%' ) as 'hours3',
 			SUBSTRING( wc.name,1,iif(CHARINDEX('-',wc.name)=0, len(wc.name) ,(CHARINDEX('-',wc.name)-1))) as 'Code',
 			hw.schedule as 'Shift', 
 			tk.expCode,
@@ -184,7 +184,7 @@ begin
 			em.typeEmployee as 'class'
 			from hoursWorked as hw 
 			inner join employees as em on hw.idEmployee = em.idEmployee
-			inner join workCode as wc on wc.idWorkCode = hw.idWorkCode
+			inner join workCode as wc on wc.idWorkCode = hw.idWorkCode and wc.jobNo = hw.jobNo
 			inner join task as tk on tk.idAux = hw.idAux 
 			inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO 
 			inner join projectOrder as po on po.idPO = wo.idPO and wo.jobNo = po.jobNo 
@@ -214,7 +214,6 @@ begin
 		where estatus = 'E'	
 end
 go
-
 --##############################################################################################
 --################## SP ACTUALIZA MATERIAL #####################################################
 --##############################################################################################
@@ -297,7 +296,7 @@ select distinct
 	ISNULL(SUBSTRING( wc.name,1,iif(CHARINDEX('-',wc.name)=0, len(wc.name) ,(CHARINDEX('-',wc.name)-1))),'') as 'Code',
 
 	ISNULL(((select ISNULL(SUM(hw1.hoursST),0) from hoursWorked as hw1 
-	inner join workCode as wc1 on wc1.idWorkCode = hw1.idWorkCode 
+	inner join workCode as wc1 on wc1.idWorkCode = hw1.idWorkCode and wc1.jobNo = hw1.jobNo
 	inner join task as tk1 on tk1.idAux = hw1.idAux 
 	inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO 
 	inner join projectOrder as po1 on po1.idPO = wo1.idPO and wo1.jobNo = po1.jobNo 
@@ -307,7 +306,7 @@ select distinct
 	ISNULL(wc.billingRate1,0)AS 'billingRate1',
 
 	ISNULL(((select ISNULL(SUM(hw1.hoursOT),0) from hoursWorked as hw1 
-	inner join workCode as wc1 on wc1.idWorkCode = hw1.idWorkCode 
+	inner join workCode as wc1 on wc1.idWorkCode = hw1.idWorkCode and wc1.jobNo = hw1.jobNo
 	inner join task as tk1 on tk1.idAux = hw1.idAux 
 	inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO 
 	inner join projectOrder as po1 on po1.idPO = wo1.idPO and wo1.jobNo = po1.jobNo 
@@ -325,7 +324,7 @@ select distinct
 	 
 	from employees as em 
 		inner join hoursWorked as hw on hw.idEmployee = em.idEmployee
-		inner join workCode as wc on wc.idWorkCode = hw.idWorkCode
+		inner join workCode as wc on wc.idWorkCode = hw.idWorkCode and wc.jobNo = hw.jobNo
 		inner join task as tk on tk.idAux= hw.idAux
 		inner join workOrder wo on  wo.idAuxWO=tk.idAuxWO
 		inner join projectOrder as po on po.idPO = wo.idPO and po.jobNo = wo.jobNo
@@ -336,7 +335,7 @@ select distinct
 	concat(em.lastName,', ', em.firstName,' ' ,em.middleName),
 	hw.dateWorked
 end
-go
+GO
 
 --##############################################################################################
 --################## SP REPORT BY JOB NUMBER ###################################################
@@ -360,11 +359,12 @@ select distinct
 	datename(dw,hw.dateWorked) as 'DAY',
 	concat(em.lastName,', ', em.firstName,' ' ,em.middleName) as 'Employee Name',
 	hw.dateWorked,
-	ISNULL(SUBSTRING( wc.name,1,iif(CHARINDEX('-',wc.name)=0, len(wc.name) ,(CHARINDEX('-',wc.name)-1))),'') 
-	as 'Code',
+	ISNULL(SUBSTRING( wc.name,1,iif(CHARINDEX('-',wc.name)=0, len(wc.name) ,(CHARINDEX('-',wc.name)-1))),'') as 'Code',
+	
+	
 	ISNULL((select SUM(hw1.hoursST) from 
 	hoursWorked as hw1 
-	inner join workCode as wc1 on wc1.idWorkCode = hw1.idWorkCode 
+	inner join workCode as wc1 on wc1.idWorkCode = hw1.idWorkCode and wc1.jobNo = hw1.jobNo
 	inner join task as tk1 on tk1.idAux = hw1.idAux 
 	inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO 
 	inner join projectOrder as po1 on po1.idPO = wo1.idPO and wo1.jobNo = po1.jobNo 
@@ -381,7 +381,7 @@ select distinct
 
 	ISNULL((select ISNULL(SUM(hw1.hoursOT),0) from 
 	hoursWorked as hw1 
-	inner join workCode as wc1 on wc1.idWorkCode = hw1.idWorkCode 
+	inner join workCode as wc1 on wc1.idWorkCode = hw1.idWorkCode and wc1.jobNo = hw1.jobNo
 	inner join task as tk1 on tk1.idAux = hw1.idAux 
 	inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO 
 	inner join projectOrder as po1 on po1.idPO = wo1.idPO and wo1.jobNo = po1.jobNo 
@@ -395,21 +395,22 @@ select distinct
 			and (SUBSTRING( wc1.name,1,iif(CHARINDEX('-',wc1.name)=0, len(wc1.name) ,(CHARINDEX('-',wc1.name)-1))) =SUBSTRING( wc.name,1,iif(CHARINDEX('-',wc.name)=0, len(wc.name) ,(CHARINDEX('-',wc.name)-1)))  ) 
 			and not wc1.name like '%6.4%') ,0)
 	 as 'Hours OT',
+
 	ISNULL(wc.billingRateOT,0) as 'billingRateOT',
+	
 	ISNULL((select exu.amount from expensesUsed as exu 
 	inner join expenses as ex on ex.idExpenses = exu.idExpense 
 	inner join task as tk1 on tk1.idAux = exu.idAux 
 	inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO 
 	inner join projectOrder as po1 on po1.idPO = wo1.idPO and wo1.jobNo = po1.jobNo 
 	inner join job as jb1 on jb1.jobNo = po1.jobNo 
-	 where tk1.idAux = tk.idAux and wo1.idAuxWO = wo.idAuxWO and po.idPO = po1.idPO and jb.jobNo = jb1.jobNo and exu.dateExpense between @startdate and @finaldate and exu.idEmployee= em.idEmployee and ex.expenseCode like 'Per-Diem') ,0) 
-	 as 'PerDiem' ,
+	 where tk1.idAux = tk.idAux and wo1.idAuxWO = wo.idAuxWO and po.idPO = po1.idPO and jb.jobNo = jb1.jobNo and exu.dateExpense between @startdate and @finaldate and exu.idEmployee= em.idEmployee and ex.expenseCode like 'Per-Diem') ,0) as 'PerDiem' ,
+
 	ISNULL((select exu.amount from expensesUsed as exu inner join expenses as ex on ex.idExpenses = exu.idExpense inner join task as tk1 on tk1.idAux = exu.idAux inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO inner join projectOrder as po1 on po1.idPO = wo1.idPO and wo1.jobNo = po1.jobNo inner join job as jb1 on jb1.jobNo = po1.jobNo 
-	 where tk1.idAux = tk.idAux and wo1.idAuxWO = wo.idAuxWO and po.idPO = po1.idPO and jb.jobNo = jb1.jobNo and exu.dateExpense between @startdate and @finaldate and exu.idEmployee= em.idEmployee and ex.expenseCode like 'Travel') ,0) 
-	 as 'Travel' 
+	 where tk1.idAux = tk.idAux and wo1.idAuxWO = wo.idAuxWO and po.idPO = po1.idPO and jb.jobNo = jb1.jobNo and exu.dateExpense between @startdate and @finaldate and exu.idEmployee= em.idEmployee and ex.expenseCode like 'Travel') ,0) as 'Travel' 
 	from employees as em 
 		inner join hoursWorked as hw on hw.idEmployee = em.idEmployee
-		left join workCode as wc on wc.idWorkCode = hw.idWorkCode
+		left join workCode as wc on wc.idWorkCode = hw.idWorkCode and wc.jobNo = hw.jobNo
 		inner join task as tk on tk.idAux= hw.idAux
 		inner join workOrder wo on  wo.idAuxWO=tk.idAuxWO
 		inner join projectOrder as po on po.idPO = wo.idPO and po.jobNo = wo.jobNo
@@ -420,7 +421,7 @@ select distinct
 	concat(em.lastName,', ', em.firstName,' ' ,em.middleName),
 	hw.dateWorked
 end
-go
+GO
 
 --##############################################################################################
 --################## SP REPORT CATS EMPLOYEE BY PROJECT ########################################
@@ -433,7 +434,6 @@ CREATE proc [dbo].[sp_Cats_Employee_by_Porject]
 @all as bit
 as
 begin
-if @all = 0 begin
 	select concat(wo.idWO, ' ',ts.task) as 'W/PO Number',
 		em.numberEmploye as 'Emp: Number',
 		concat(em.lastName,', ', em.firstName,' ' ,em.middleName) as 'Employee Name',
@@ -443,33 +443,14 @@ if @all = 0 begin
 		hw.dateWorked as 'Date Worked'
 		from hoursWorked as hw
 		inner join employees as em on em.idEmployee= hw.idEmployee
-		inner join workCode as wc on wc.idWorkCode= hw.idWorkCode
+		inner join workCode as wc on wc.idWorkCode= hw.idWorkCode and wc.jobNo = hw.jobNo
 		inner join task as ts on ts.idAux= hw.idAux
 		inner join workOrder wo on wo.idAuxWO=ts.idAuxWO
-		where hw.dateWorked between @startdate and @finaldate and em.numberEmploye=@employeenumber
+		where hw.dateWorked between @startdate and @finaldate and em.numberEmploye like IIF(@all=1,'%',convert(nvarchar, @employeenumber))
 		group by concat(wo.idWO, ' ',ts.task),em.numberEmploye, concat(em.lastName,', ', em.firstName,' ' ,em.middleName),
 		 wc.description,hw.dateWorked
 end
-else
-begin
-	select concat(wo.idWO, ' ',ts.task) as 'W/PO Number',
-		em.numberEmploye as 'Emp: Number',
-		concat(em.lastName,', ', em.firstName,' ' ,em.middleName) as 'Employee Name',
-		wc.description,
-		sum(hw.hoursST) as 'ST Hours', 
-		sum(hw.hoursOT) as 'OT Hours', 
-		hw.dateWorked as 'Date Worked'
-		from hoursWorked as hw
-		inner join employees as em on em.idEmployee= hw.idEmployee
-		inner join workCode as wc on wc.idWorkCode= hw.idWorkCode
-		inner join task as ts on ts.idAux= hw.idAux
-		inner join workOrder wo on  wo.idAuxWO=ts.idAuxWO
-		where hw.dateWorked between @startdate and @finaldate
-		group by concat(wo.idWO, ' ',ts.task),em.numberEmploye, concat(em.lastName,', ', em.firstName,' ' ,em.middleName),
-		wc.description,hw.dateWorked
-end
-end
-go
+GO
 
 --##############################################################################################
 --################## SP REPORT CLIENT BILLINGS PROJECT #########################################
@@ -498,7 +479,7 @@ begin
 		
 			(select ISNULL(SUM(T2.Amount),0) as 'Billings ST' from 
 			(select SUM(T1.hoursST*T1.billingRate1) AS 'Amount'
-			from (select hoursST, hw.idWorkCode , billingRate1  from hoursWorked as hw inner join workCode as wc on wc.idWorkCode = hw.idWorkCode inner join task as tk1 on tk1.idAux = hw.idAux inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO inner join projectOrder as po1 on po1.idPO = wo1.idPO and wo1.jobNo = po1.jobNo inner join job as jb1 on jb1.jobNo = po1.jobNo  
+			from (select hoursST, hw.idWorkCode , billingRate1  from hoursWorked as hw inner join workCode as wc on wc.idWorkCode = hw.idWorkCode and wc.jobNo = hw.jobNo inner join task as tk1 on tk1.idAux = hw.idAux inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO inner join projectOrder as po1 on po1.idPO = wo1.idPO and wo1.jobNo = po1.jobNo inner join job as jb1 on jb1.jobNo = po1.jobNo  
 			where cl.idClient = jb1.idClient and jb.jobNo = jb1.jobNo and po1.idPO = po.idPO and wo.idAuxWO = wo1.idAuxWO and hw.idAux=ts.idAux  and dateWorked between @startdate and @finaldate)as T1    
 			group by T1.idWorkCode) as T2) as 'Billings ST',
 
@@ -507,7 +488,7 @@ begin
 		
 			(select  ISNULL( SUM(T2.Amount),0) as 'Billings OT' from 
 			(select SUM(T1.hoursOT*T1.billingRateOT) AS 'Amount'
-			from (select hoursOT, hw.idWorkCode , billingRateOT  from hoursWorked as hw inner join workCode as wc on wc.idWorkCode = hw.idWorkCode inner join task as tk1 on tk1.idAux = hw.idAux inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO inner join projectOrder as po1 on po1.idPO = wo1.idPO and wo1.jobNo = po1.jobNo inner join job as jb1 on jb1.jobNo = po1.jobNo  
+			from (select hoursOT, hw.idWorkCode , billingRateOT  from hoursWorked as hw inner join workCode as wc on wc.idWorkCode = hw.idWorkCode and wc.jobNo = hw.jobNo inner join task as tk1 on tk1.idAux = hw.idAux inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO inner join projectOrder as po1 on po1.idPO = wo1.idPO and wo1.jobNo = po1.jobNo inner join job as jb1 on jb1.jobNo = po1.jobNo  
 			where cl.idClient = jb1.idClient and jb.jobNo = jb1.jobNo and po1.idPO = po.idPO and wo.idAuxWO = wo1.idAuxWO and hw.idAux=ts.idAux  and dateWorked between @startdate and @finaldate)as T1    
 			group by T1.idWorkCode) as T2) as 'Billings OT',
 
@@ -521,13 +502,13 @@ begin
 	
 			((select ISNULL(SUM(T2.Amount),0) as 'Billings ST' from 
 			(select SUM(T1.hoursST*T1.billingRate1) AS 'Amount'
-			from (select hoursST, hw.idWorkCode , billingRate1  from hoursWorked as hw inner join workCode as wc on wc.idWorkCode = hw.idWorkCode inner join task as tk1 on tk1.idAux = hw.idAux inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO inner join projectOrder as po1 on po1.idPO = wo1.idPO and wo1.jobNo = po1.jobNo inner join job as jb1 on jb1.jobNo = po1.jobNo  
+			from (select hoursST, hw.idWorkCode , billingRate1  from hoursWorked as hw inner join workCode as wc on wc.idWorkCode = hw.idWorkCode and wc.jobNo = hw.jobNo inner join task as tk1 on tk1.idAux = hw.idAux inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO inner join projectOrder as po1 on po1.idPO = wo1.idPO and wo1.jobNo = po1.jobNo inner join job as jb1 on jb1.jobNo = po1.jobNo  
 			where cl.idClient = jb1.idClient and jb.jobNo = jb1.jobNo and po1.idPO = po.idPO and wo.idAuxWO = wo1.idAuxWO and hw.idAux=ts.idAux  and dateWorked between @startdate and @finaldate)as T1    
 			group by T1.idWorkCode) as T2)
 			+
 			(select  ISNULL( SUM(T2.Amount),0) from 
 			(select SUM(T1.hoursOT*T1.billingRateOT) AS 'Amount'
-			from (select hoursOT, hw.idWorkCode , billingRateOT  from hoursWorked as hw inner join workCode as wc on wc.idWorkCode = hw.idWorkCode inner join task as tk1 on tk1.idAux = hw.idAux inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO inner join projectOrder as po1 on po1.idPO = wo1.idPO and wo1.jobNo = po1.jobNo inner join job as jb1 on jb1.jobNo = po1.jobNo  
+			from (select hoursOT, hw.idWorkCode , billingRateOT  from hoursWorked as hw inner join workCode as wc on wc.idWorkCode = hw.idWorkCode and wc.jobNo = hw.jobNo inner join task as tk1 on tk1.idAux = hw.idAux inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO inner join projectOrder as po1 on po1.idPO = wo1.idPO and wo1.jobNo = po1.jobNo inner join job as jb1 on jb1.jobNo = po1.jobNo  
 			where cl.idClient = jb1.idClient and jb.jobNo = jb1.jobNo and po1.idPO = po.idPO and wo.idAuxWO = wo1.idAuxWO and hw.idAux=ts.idAux  and dateWorked between @startdate and @finaldate)as T1    
 			group by T1.idWorkCode) as T2)
 			+
@@ -552,7 +533,7 @@ begin
 			T2.[Total Hours],T2.[Hours ST],T2.[Billings ST], T2.[Hours OT],
 			T2.[Billings OT],T2.[Total Expenses],T2.[Total Material],T2.[Total Spend]
 end
-go
+GO
 
 --##############################################################################################
 --################## SP REPORT COMPLETE BY DATE RANGE ##########################################
@@ -636,6 +617,52 @@ begin
 		set @Error = 0
 		rollback tran
 	end catch
+end
+GO
+--##############################################################################################
+--################## SP DELETE SCAFFOLD ########################################################
+--##############################################################################################
+create proc sp_deleteScaffold
+@tag as varchar(20)
+as 
+declare @countProduct as int = (select COUNT(*) from productTotalScaffold where tag = @tag and status = 't' )	
+declare @qty as float = 0.0
+declare @idProduct as int
+begin
+while (@countProduct > 0) 
+begin
+	select  @qty = quantity ,@idProduct = idProduct from (select top 1  quantity,idProduct from productTotalScaffold where tag = @tag and status = 't') as t1
+	select quantity from product where idProduct = @idProduct
+	update product set quantity = quantity + @qty where idProduct = @idProduct
+	delete from productTotalScaffold where idProduct = @idProduct and tag = @tag
+	set @countProduct = (select COUNT(*) from productTotalScaffold where tag = @tag and status = 't')
+end
+if (select COUNT(*) from productTotalScaffold where tag = @tag and status = 't')=0
+begin
+	delete from leg where tag	= @tag
+	select *from materialHandeling where tag = @tag
+	delete from materialHandeling where tag = @tag
+	select * from activityHours where tag = @tag
+	delete from activityHours where tag = @tag
+	select * from scaffoldInformation where tag = @tag
+	delete from scaffoldInformation	where tag = @tag
+	select * from scfInfo where tag = @tag
+	delete from scfInfo where tag = @tag
+	select * from productDismantle where tag = @tag
+	delete from productDismantle where tag = @tag
+	select * from dismantle where tag = @tag
+	delete from dismantle where tag = @tag 
+	select * from productDismantle where tag = @tag
+	delete from productModification where tag = @tag
+	select * from modification where tag = @tag
+	delete from modification where tag= @tag
+	select * from productScaffold where tag = @tag
+	delete from productScaffold where tag =@tag
+    select * from productTotalScaffold where tag = @tag
+	delete from productTotalScaffold where tag = @tag
+	select * from scaffoldTraking where tag = @tag
+	delete from scaffoldTraking where tag = @tag
+end
 end
 GO
 --##############################################################################################
@@ -2418,7 +2445,7 @@ select
 	po.idPO,
 	
 	ISNULL((select sum(hw1.hoursST)+sum(hw1.hoursOT)+sum(hw1.hours3) as 'Total Hours' from hoursWorked as hw1 
-		inner join workCode as wc1 on wc1.idWorkCode = hw1.idWorkCode
+		inner join workCode as wc1 on wc1.idWorkCode = hw1.idWorkCode and wc1.jobNo = hw1.jobNo
 		inner join task as tk1 on tk1.idAux = hw1.idAux 
 		inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO
 		inner join projectOrder as po1 on po1.idPO = wo1.idPO and wo1.jobNo = po1.jobNo
@@ -2428,7 +2455,7 @@ select
 	as 'Total Hours PO',
 
 	ISNULL((select sum(hw1.hoursST)+sum(hw1.hoursOT)+sum(hw1.hours3) as 'Total Hours' from hoursWorked as hw1 
-		inner join workCode as wc1 on wc1.idWorkCode = hw1.idWorkCode
+		inner join workCode as wc1 on wc1.idWorkCode = hw1.idWorkCode and wc1.jobNo = hw1.jobNo
 		inner join task as tk1 on tk1.idAux = hw1.idAux 
 		inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO
 		inner join projectOrder as po1 on po1.idPO = wo1.idPO and wo1.jobNo = po1.jobNo
@@ -2438,7 +2465,7 @@ select
 	as 'Total Hours',
 
 	ISNULL((select sum(hw1.hoursST*wc1.billingRate1)+sum(hw1.hoursOT*wc1.billingRateOT)+sum(hw1.hours3*wc1.billingRate3) as 'Labor' from hoursWorked as hw1 
-		inner join workCode as wc1 on wc1.idWorkCode = hw1.idWorkCode
+		inner join workCode as wc1 on wc1.idWorkCode = hw1.idWorkCode and wc1.jobNo = hw1.jobNo
 		inner join task as tk1 on tk1.idAux = hw1.idAux 
 		inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO
 		inner join projectOrder as po1 on po1.idPO = wo1.idPO and wo1.jobNo = po1.jobNo
@@ -2570,7 +2597,7 @@ select
 	
 	,
 	ISNULL((select sum(hw1.hoursST*wc1.billingRate1)+sum(hw1.hoursOT*wc1.billingRateOT)+sum(hw1.hours3*wc1.billingRate3) as 'Labor' from hoursWorked as hw1 
-		inner join workCode as wc1 on wc1.idWorkCode = hw1.idWorkCode
+		inner join workCode as wc1 on wc1.idWorkCode = hw1.idWorkCode and wc1.jobNo = hw1.jobNo
 		inner join task as tk1 on tk1.idAux = hw1.idAux 
 		inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO
 		inner join projectOrder as po1 on po1.idPO = wo1.idPO and wo1.jobNo = po1.jobNo
@@ -2785,6 +2812,64 @@ else
 		inner join job as jb on jb.jobNo = po.jobNo
 		inner join clients as cl on cl.idClient = jb.idClient
 		where ts.status = '0' and cl.numberClient = @clientnum and jb.jobNo=@jobNum
+end
+GO
+--##############################################################################################
+--################## SP PRODUCT INCOMING #######################################################
+--##############################################################################################
+create proc sp_ProductIncoming
+@jobNo bigint,
+@ticket varchar(15),
+@all bit
+as
+begin 
+	select inc.jobNo as 'JobNo',inc.ticketNum,CONVERT(nvarchar, inc.dateRecived,101)as 'Date',inc.comment as 'Comment',
+	--product
+	pd.um as 'UNIT MSR',pic.quantity as 'QTY',pic.idProduct as 'PRODUCT ID',pd.QID as 'QUANTITY ID',pd.name as 'PRODUCT NAME',pd.class as 'CLASS',pd.[weight]*pic.quantity as 'WEIGTH',
+	--cliente
+	cl.companyName as 'Client',ha.number,ha.avenue,ha.providence,CONCAT(ha.city,', ',ha.providence,' ',ha.postalCode) as 'Address',CONCAT(cl.firstName,' ',cl.lastName) as 'Contact',ISNULL(ctc.phoneNumber1,'') as 'Phone',
+	--recived by
+	inc.recivedBy as 'RecivedBy',
+	ISNULL((select TOP 1 ctc1.phoneNumber1 from employees as emp 
+	inner join contact as ctc1 on ctc1.idContact= emp.idContact
+	where CONCAT(firstName,' ',middleName,' ',lastName) like inc.recivedBy),'') as 'EmployePhone'
+	from productComing as pic 
+	inner join product as pd on pd.idProduct = pic.idProduct
+	inner join incoming as inc on inc.ticketNum = pic.ticketNum
+	inner join job as jb on jb.jobNo = inc.jobNo
+	inner join clients as cl on cl.idClient = jb.idClient
+	left join contact as ctc on ctc.idContact = cl.idContact 
+	left join HomeAddress as ha on ha .idHomeAdress = cl.idHomeAddress
+	where inc.jobNo = @jobNo and inc.ticketNum like IIF(@all=1,'%%',@ticket)
+end
+go
+--##############################################################################################
+--################## SP PRODUCT OUTGOING #######################################################
+--##############################################################################################
+create proc sp_ProductOutgoing
+@jobNo bigint,
+@ticket varchar(15),
+@all bit
+as
+begin 
+	select otg.jobNo as 'JobNo',otg.ticketNum,CONVERT(nvarchar, otg.dateShipped,101)as 'Date',otg.comment as 'Comment',
+	--product
+	pd.um as 'UNIT MSR',pog.quantity as 'QTY',pog.idProduct as 'PRODUCT ID',pd.QID as 'QUANTITY ID',pd.name as 'PRODUCT NAME',pd.class as 'CLASS',pd.[weight]*pog.quantity as 'WEIGTH',
+	--cliente
+	cl.companyName as 'Client',ha.number,ha.avenue,ha.providence,CONCAT(ha.city,', ',ha.providence,' ',ha.postalCode) as 'Address',CONCAT(cl.firstName,' ',cl.lastName) as 'Contact',ISNULL(ctc.phoneNumber1,'') as 'Phone',
+	--recived by
+	otg.shippedby as 'ShippedBy', otg.superintendent as 'Intendent',
+	ISNULL((select TOP 1 ctc1.phoneNumber1 from employees as emp 
+	inner join contact as ctc1 on ctc1.idContact= emp.idContact
+	where CONCAT(firstName,' ',middleName,' ',lastName) like otg.shippedby),'') as 'EmployePhone'
+	from productOutGoing as pog 
+	inner join product as pd on pd.idProduct = pog.idProduct
+	inner join outgoing as otg on otg.ticketNum = pog.ticketNum
+	inner join job as jb on jb.jobNo = otg.jobNo
+	inner join clients as cl on cl.idClient = jb.idClient
+	left join contact as ctc on ctc.idContact = cl.idContact 
+	left join HomeAddress as ha on ha .idHomeAdress = cl.idHomeAddress
+	where otg.jobNo = @jobNo and otg.ticketNum like IIF(@all=1,'%%',@ticket)
 end
 GO
 ----#########################################################################################################################################################################################
@@ -3797,7 +3882,7 @@ select distinct jb.jobNo,
 		inner join job as jb1 on jb1.jobNo = po1.jobNo
 		where jb1.jobNo = jb.jobNo and hw1.dateWorked between @StartDate and @EndDate),0) as 'Total Hours',
 	ISNULL((select ROUND(SUM((hw1.hoursST*wc1.billingRate1)+(hw1.hoursOT*wc1.billingRateOT)+(hw1.hours3*wc1.billingRate3)),2) from hoursWorked as hw1 
-		left join workCode as wc1 on wc1.idWorkCode= hw1.idWorkCode
+		left join workCode as wc1 on wc1.idWorkCode= hw1.idWorkCode and wc1.jobNo = hw1.jobNo
 		inner join task as tk1 on tk1.idAux = hw1.idAux
 		inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO
 		inner join projectOrder as po1 on wo1.idPO = po1.idPO and wo1.jobNo = po1.jobNo
@@ -4053,7 +4138,7 @@ GO
 --##############################################################################################
 --################## SP UPDATE EMPLOYEE ########################################################
 --##############################################################################################
-ALTER proc [dbo].[sp_update_Employee]
+CREATE proc [dbo].[sp_update_Employee]
 	@idEmployee varchar(36),
 	@idAddress varchar(36),
 	@idContact varchar(36),
@@ -4232,12 +4317,12 @@ begin
 			concat(wo.idWO,'-',tk.task) as 'Project Name',
 			SUBSTRING( wc.name,1,iif(CHARINDEX('-',wc.name)=0, len(wc.name) ,(CHARINDEX('-',wc.name)-1))) as 'Work Description',
 			wc.billingRate1 as 'Rate ST',
-			(select iif(SUM(hw1.hoursST)  is null,0,SUM(hw1.hoursST)) from hoursWorked as hw1 inner join workCode as wc1 on wc1.idWorkCode = hw.idWorkCode inner join task as tk1 on tk1.idAux = hw1.idAux inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO inner join projectOrder as po1 on po1.idPO = wo1.idPO and wo1.jobNo = po1.jobNo inner join job as jb1 on jb1.jobNo = po1.jobNo where hw1.dateWorked = hw.dateWorked and em.idEmployee = hw1.idEmployee and jb.jobNo = jb1.jobNo and po1.idPO = po.idPO and  wc1.name like '%6.4%') as 'hoursST',
+			(select iif(SUM(hw1.hoursST)  is null,0,SUM(hw1.hoursST)) from hoursWorked as hw1 inner join workCode as wc1 on wc1.idWorkCode = hw.idWorkCode and wc1.jobNo = hw.jobNo inner join task as tk1 on tk1.idAux = hw1.idAux inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO inner join projectOrder as po1 on po1.idPO = wo1.idPO and wo1.jobNo = po1.jobNo inner join job as jb1 on jb1.jobNo = po1.jobNo where hw1.dateWorked = hw.dateWorked and em.idEmployee = hw1.idEmployee and jb.jobNo = jb1.jobNo and po1.idPO = po.idPO and  wc1.name like '%6.4%') as 'hoursST',
 			wc.billingRateOT as 'Rate OT',
-			(select iif(SUM(hw1.hoursOT)is null,0,SUM(hw1.hoursOT)) from hoursWorked as hw1 inner join workCode as wc1 on wc1.idWorkCode = hw.idWorkCode inner join task as tk1 on tk1.idAux = hw1.idAux inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO inner join projectOrder as po1 on po1.idPO = wo1.idPO and wo1.jobNo = po1.jobNo inner join job as jb1 on jb1.jobNo = po1.jobNo where hw1.dateWorked = hw.dateWorked and em.idEmployee = hw1.idEmployee and jb.jobNo = jb1.jobNo and po1.idPO = po.idPO and  wc1.name like '%6.4%') as 'hoursOT'
+			(select iif(SUM(hw1.hoursOT)is null,0,SUM(hw1.hoursOT)) from hoursWorked as hw1 inner join workCode as wc1 on wc1.idWorkCode = hw.idWorkCode and wc1.jobNo = hw.jobNo inner join task as tk1 on tk1.idAux = hw1.idAux inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO inner join projectOrder as po1 on po1.idPO = wo1.idPO and wo1.jobNo = po1.jobNo inner join job as jb1 on jb1.jobNo = po1.jobNo where hw1.dateWorked = hw.dateWorked and em.idEmployee = hw1.idEmployee and jb.jobNo = jb1.jobNo and po1.idPO = po.idPO and  wc1.name like '%6.4%') as 'hoursOT'
 			from hoursWorked as hw 
 			inner join employees as em on hw.idEmployee = em.idEmployee
-			inner join workCode as wc on wc.idWorkCode = hw.idWorkCode
+			inner join workCode as wc on wc.idWorkCode = hw.idWorkCode and wc.jobNo = hw.jobNo
 			inner join task as tk on tk.idAux = hw.idAux 
 			inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO 
 			inner join projectOrder as po on po.idPO = wo.idPO and wo.jobNo = po.jobNo 
@@ -4260,14 +4345,14 @@ select t1.[Employee],t1.[Emp: Number],t1.[Day],t1.[Project Name],t1.[Work Descri
 			concat(wo.idWO,'-',tk.task) as 'Project Name',
 			SUBSTRING( wc.name,1,iif(CHARINDEX('-',wc.name)=0, len(wc.name) ,(CHARINDEX('-',wc.name)-1))) as 'Work Description',
 			wc.billingRate1 as 'Rate ST',
-			(select iif(SUM(hw1.hoursST)  is null,0,SUM(hw1.hoursST)) from hoursWorked as hw1 inner join workCode as wc1 on wc1.idWorkCode = hw.idWorkCode inner join task as tk1 on tk1.idAux = hw1.idAux inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO inner join projectOrder as po1 on po1.idPO = wo1.idPO and wo1.jobNo = po1.jobNo inner join job as jb1 on jb1.jobNo = po1.jobNo where hw1.dateWorked = hw.dateWorked and em.idEmployee = hw1.idEmployee and jb.jobNo = jb1.jobNo and po1.idPO = po.idPO and  wc1.name like '%6.4%') as 'hoursST',
+			(select iif(SUM(hw1.hoursST)  is null,0,SUM(hw1.hoursST)) from hoursWorked as hw1 inner join workCode as wc1 on wc1.idWorkCode = hw.idWorkCode and wc1.jobNo = hw.jobNo inner join task as tk1 on tk1.idAux = hw1.idAux inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO inner join projectOrder as po1 on po1.idPO = wo1.idPO and wo1.jobNo = po1.jobNo inner join job as jb1 on jb1.jobNo = po1.jobNo where hw1.dateWorked = hw.dateWorked and em.idEmployee = hw1.idEmployee and jb.jobNo = jb1.jobNo and po1.idPO = po.idPO and  wc1.name like '%6.4%') as 'hoursST',
 			wc.billingRateOT as 'Rate OT',
-			(select iif(SUM(hw1.hoursOT)is null,0,SUM(hw1.hoursOT)) from hoursWorked as hw1 inner join workCode as wc1 on wc1.idWorkCode = hw.idWorkCode inner join task as tk1 on tk1.idAux = hw1.idAux inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO inner join projectOrder as po1 on po1.idPO = wo1.idPO and wo1.jobNo = po1.jobNo inner join job as jb1 on jb1.jobNo = po1.jobNo where hw1.dateWorked = hw.dateWorked and em.idEmployee = hw1.idEmployee and jb.jobNo = jb1.jobNo and po1.idPO = po.idPO and  wc1.name like '%6.4%') as 'hoursOT'
+			(select iif(SUM(hw1.hoursOT)is null,0,SUM(hw1.hoursOT)) from hoursWorked as hw1 inner join workCode as wc1 on wc1.idWorkCode = hw.idWorkCode and wc1.jobNo = hw.jobNo inner join task as tk1 on tk1.idAux = hw1.idAux inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO inner join projectOrder as po1 on po1.idPO = wo1.idPO and wo1.jobNo = po1.jobNo inner join job as jb1 on jb1.jobNo = po1.jobNo where hw1.dateWorked = hw.dateWorked and em.idEmployee = hw1.idEmployee and jb.jobNo = jb1.jobNo and po1.idPO = po.idPO and  wc1.name like '%6.4%') as 'hoursOT'
 			
 
 			from hoursWorked as hw 
 			inner join employees as em on hw.idEmployee = em.idEmployee
-			inner join workCode as wc on wc.idWorkCode = hw.idWorkCode
+			inner join workCode as wc on wc.idWorkCode = hw.idWorkCode and wc.jobNo = hw.jobNo
 			inner join task as tk on tk.idAux = hw.idAux 
 			inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO 
 			inner join projectOrder as po on po.idPO = wo.idPO and wo.jobNo = po.jobNo 
@@ -4293,30 +4378,18 @@ begin
 	from (
 	select 
 		wc.name,
-		case when (select SUM(hw.hoursST)+SUM(hw.hoursOT)+SUM(hw.hours3) from hoursWorked as hw where hw.idWorkCode = wc.idWorkCode and DATEPART(YEAR ,hw.dateWorked) = @year and DATENAME(MONTH, hw.dateWorked) = 'January') is null then 0
-			 else (select SUM(hw.hoursST)+SUM(hw.hoursOT)+SUM(hw.hours3) from hoursWorked as hw where hw.idWorkCode = wc.idWorkCode and DATEPART(YEAR ,hw.dateWorked) = @year and DATENAME(MONTH, hw.dateWorked) = 'January') end as 'January',
-		case when (select SUM(hw.hoursST)+SUM(hw.hoursOT)+SUM(hw.hours3) from hoursWorked as hw where hw.idWorkCode = wc.idWorkCode and DATEPART(YEAR ,hw.dateWorked) = @year and DATENAME(MONTH, hw.dateWorked) = 'February') is null then 0
-			 else (select SUM(hw.hoursST)+SUM(hw.hoursOT)+SUM(hw.hours3) from hoursWorked as hw where hw.idWorkCode = wc.idWorkCode and DATEPART(YEAR ,hw.dateWorked) = @year and DATENAME(MONTH, hw.dateWorked) = 'February') end as 'February',
-		case when (select SUM(hw.hoursST)+SUM(hw.hoursOT)+SUM(hw.hours3) from hoursWorked as hw where hw.idWorkCode = wc.idWorkCode and DATEPART(YEAR ,hw.dateWorked) = @year and DATENAME(MONTH, hw.dateWorked) = 'March') is null then 0
-			 else (select SUM(hw.hoursST)+SUM(hw.hoursOT)+SUM(hw.hours3) from hoursWorked as hw where hw.idWorkCode = wc.idWorkCode and DATEPART(YEAR ,hw.dateWorked) = @year and DATENAME(MONTH, hw.dateWorked) = 'March') end as 'March',
-		case when (select SUM(hw.hoursST)+SUM(hw.hoursOT)+SUM(hw.hours3) from hoursWorked as hw where hw.idWorkCode = wc.idWorkCode and DATEPART(YEAR ,hw.dateWorked) = @year and DATENAME(MONTH, hw.dateWorked) = 'April') is null then 0
-			 else (select SUM(hw.hoursST)+SUM(hw.hoursOT)+SUM(hw.hours3) from hoursWorked as hw where hw.idWorkCode = wc.idWorkCode and DATEPART(YEAR ,hw.dateWorked) = @year and DATENAME(MONTH, hw.dateWorked) = 'April') end as 'April',
-		case when (select SUM(hw.hoursST)+SUM(hw.hoursOT)+SUM(hw.hours3) from hoursWorked as hw where hw.idWorkCode = wc.idWorkCode and DATEPART(YEAR ,hw.dateWorked) = @year and DATENAME(MONTH, hw.dateWorked) = 'May') is null then 0
-			 else (select SUM(hw.hoursST)+SUM(hw.hoursOT)+SUM(hw.hours3) from hoursWorked as hw where hw.idWorkCode = wc.idWorkCode and DATEPART(YEAR ,hw.dateWorked) = @year and DATENAME(MONTH, hw.dateWorked) = 'May') end as 'May',
-		case when (select SUM(hw.hoursST)+SUM(hw.hoursOT)+SUM(hw.hours3) from hoursWorked as hw where hw.idWorkCode = wc.idWorkCode and DATEPART(YEAR ,hw.dateWorked) = @year and DATENAME(MONTH, hw.dateWorked) = 'June') is null then 0
-			 else (select SUM(hw.hoursST)+SUM(hw.hoursOT)+SUM(hw.hours3) from hoursWorked as hw where hw.idWorkCode = wc.idWorkCode and DATEPART(YEAR ,hw.dateWorked) = @year and DATENAME(MONTH, hw.dateWorked) = 'June') end as 'June',
-		case when (select SUM(hw.hoursST)+SUM(hw.hoursOT)+SUM(hw.hours3) from hoursWorked as hw where hw.idWorkCode = wc.idWorkCode and DATEPART(YEAR ,hw.dateWorked) = @year and DATENAME(MONTH, hw.dateWorked) = 'July') is null then 0
-			 else (select SUM(hw.hoursST)+SUM(hw.hoursOT)+SUM(hw.hours3) from hoursWorked as hw where hw.idWorkCode = wc.idWorkCode and DATEPART(YEAR ,hw.dateWorked) = @year and DATENAME(MONTH, hw.dateWorked) = 'July') end as 'July',
-		case when (select SUM(hw.hoursST)+SUM(hw.hoursOT)+SUM(hw.hours3) from hoursWorked as hw where hw.idWorkCode = wc.idWorkCode and DATEPART(YEAR ,hw.dateWorked) = @year and DATENAME(MONTH, hw.dateWorked) = 'August') is null then 0
-			 else (select SUM(hw.hoursST)+SUM(hw.hoursOT)+SUM(hw.hours3) from hoursWorked as hw where hw.idWorkCode = wc.idWorkCode and DATEPART(YEAR ,hw.dateWorked) = @year and DATENAME(MONTH, hw.dateWorked) = 'August') end as 'August',
-		case when (select SUM(hw.hoursST)+SUM(hw.hoursOT)+SUM(hw.hours3) from hoursWorked as hw where hw.idWorkCode = wc.idWorkCode and DATEPART(YEAR ,hw.dateWorked) = @year and DATENAME(MONTH, hw.dateWorked) = 'September') is null then 0
-			 else (select SUM(hw.hoursST)+SUM(hw.hoursOT)+SUM(hw.hours3) from hoursWorked as hw where hw.idWorkCode = wc.idWorkCode and DATEPART(YEAR ,hw.dateWorked) = @year and DATENAME(MONTH, hw.dateWorked) = 'September') end as 'September',
-		case when (select SUM(hw.hoursST)+SUM(hw.hoursOT)+SUM(hw.hours3) from hoursWorked as hw where hw.idWorkCode = wc.idWorkCode and DATEPART(YEAR ,hw.dateWorked) = @year and DATENAME(MONTH, hw.dateWorked) = 'October') is null then 0
-			 else (select SUM(hw.hoursST)+SUM(hw.hoursOT)+SUM(hw.hours3) from hoursWorked as hw where hw.idWorkCode = wc.idWorkCode and DATEPART(YEAR ,hw.dateWorked) = @year and DATENAME(MONTH, hw.dateWorked) = 'October') end as 'October',
-		case when (select SUM(hw.hoursST)+SUM(hw.hoursOT)+SUM(hw.hours3) from hoursWorked as hw where hw.idWorkCode = wc.idWorkCode and DATEPART(YEAR ,hw.dateWorked) = @year and DATENAME(MONTH, hw.dateWorked) = 'November') is null then 0
-			 else (select SUM(hw.hoursST)+SUM(hw.hoursOT)+SUM(hw.hours3) from hoursWorked as hw where hw.idWorkCode = wc.idWorkCode and DATEPART(YEAR ,hw.dateWorked) = @year and DATENAME(MONTH, hw.dateWorked) = 'November') end as 'Nomvember',
-		case when (select SUM(hw.hoursST)+SUM(hw.hoursOT)+SUM(hw.hours3) from hoursWorked as hw where hw.idWorkCode = wc.idWorkCode and DATEPART(YEAR ,hw.dateWorked) = @year and DATENAME(MONTH, hw.dateWorked) = 'Dicember') is null then 0
-			 else (select SUM(hw.hoursST)+SUM(hw.hoursOT)+SUM(hw.hours3) from hoursWorked as hw where hw.idWorkCode = wc.idWorkCode and DATEPART(YEAR ,hw.dateWorked) = @year and DATENAME(MONTH, hw.dateWorked) = 'Dicember') end as 'Dicember'
+		ISNULL( (select SUM(hw.hoursST)+SUM(hw.hoursOT)+SUM(hw.hours3) from hoursWorked as hw where hw.idWorkCode = wc.idWorkCode and hw.jobNo = wc.jobNo and DATEPART(YEAR ,hw.dateWorked) = @year and DATENAME(MONTH, hw.dateWorked) = 'January'),0) as 'January',
+		ISNULL( (select SUM(hw.hoursST)+SUM(hw.hoursOT)+SUM(hw.hours3) from hoursWorked as hw where hw.idWorkCode = wc.idWorkCode and hw.jobNo = wc.jobNo and DATEPART(YEAR ,hw.dateWorked) = @year and DATENAME(MONTH, hw.dateWorked) = 'February'),0) as 'February',
+		ISNULL( (select SUM(hw.hoursST)+SUM(hw.hoursOT)+SUM(hw.hours3) from hoursWorked as hw where hw.idWorkCode = wc.idWorkCode and hw.jobNo = wc.jobNo and DATEPART(YEAR ,hw.dateWorked) = @year and DATENAME(MONTH, hw.dateWorked) = 'March'),0) as 'March',
+		ISNULL( (select SUM(hw.hoursST)+SUM(hw.hoursOT)+SUM(hw.hours3) from hoursWorked as hw where hw.idWorkCode = wc.idWorkCode and hw.jobNo = wc.jobNo and DATEPART(YEAR ,hw.dateWorked) = @year and DATENAME(MONTH, hw.dateWorked) = 'April') ,0) as 'April',
+		ISNULL( (select SUM(hw.hoursST)+SUM(hw.hoursOT)+SUM(hw.hours3) from hoursWorked as hw where hw.idWorkCode = wc.idWorkCode and hw.jobNo = wc.jobNo and DATEPART(YEAR ,hw.dateWorked) = @year and DATENAME(MONTH, hw.dateWorked) = 'May') ,0) as 'May',
+		ISNULL( (select SUM(hw.hoursST)+SUM(hw.hoursOT)+SUM(hw.hours3) from hoursWorked as hw where hw.idWorkCode = wc.idWorkCode and hw.jobNo = wc.jobNo and DATEPART(YEAR ,hw.dateWorked) = @year and DATENAME(MONTH, hw.dateWorked) = 'June'),0) as 'June',
+		ISNULL( (select SUM(hw.hoursST)+SUM(hw.hoursOT)+SUM(hw.hours3) from hoursWorked as hw where hw.idWorkCode = wc.idWorkCode and hw.jobNo = wc.jobNo and DATEPART(YEAR ,hw.dateWorked) = @year and DATENAME(MONTH, hw.dateWorked) = 'July'),0) as 'July',
+		ISNULL( (select SUM(hw.hoursST)+SUM(hw.hoursOT)+SUM(hw.hours3) from hoursWorked as hw where hw.idWorkCode = wc.idWorkCode and hw.jobNo = wc.jobNo and DATEPART(YEAR ,hw.dateWorked) = @year and DATENAME(MONTH, hw.dateWorked) = 'August'),0) as 'August',
+		ISNULL( (select SUM(hw.hoursST)+SUM(hw.hoursOT)+SUM(hw.hours3) from hoursWorked as hw where hw.idWorkCode = wc.idWorkCode and hw.jobNo = wc.jobNo and DATEPART(YEAR ,hw.dateWorked) = @year and DATENAME(MONTH, hw.dateWorked) = 'September'),0) as 'September',
+		ISNULL( (select SUM(hw.hoursST)+SUM(hw.hoursOT)+SUM(hw.hours3) from hoursWorked as hw where hw.idWorkCode = wc.idWorkCode and hw.jobNo = wc.jobNo and DATEPART(YEAR ,hw.dateWorked) = @year and DATENAME(MONTH, hw.dateWorked) = 'October'),0) as 'October',
+		ISNULL( (select SUM(hw.hoursST)+SUM(hw.hoursOT)+SUM(hw.hours3) from hoursWorked as hw where hw.idWorkCode = wc.idWorkCode and hw.jobNo = wc.jobNo and DATEPART(YEAR ,hw.dateWorked) = @year and DATENAME(MONTH, hw.dateWorked) = 'November'),0) as 'Nomvember',
+		ISNULL( (select SUM(hw.hoursST)+SUM(hw.hoursOT)+SUM(hw.hours3) from hoursWorked as hw where hw.idWorkCode = wc.idWorkCode and hw.jobNo = wc.jobNo and DATEPART(YEAR ,hw.dateWorked) = @year and DATENAME(MONTH, hw.dateWorked) = 'Dicember'),0) as 'Dicember'
 	from workCode as wc ) as T1
 	where (T1.January+T1.February+T1.March+T1.April+T1.May+T1.June+T1.July+T1.August+T1.September+T1.October+T1.Nomvember+T1.Dicember) > 0
 end
@@ -4547,61 +4620,66 @@ begin
 	end
 end
 go
+
 --##############################################################################################
---################## SP PRODUCT INCOMING #######################################################
+--################## SP DELETE PROJECT #########################################################
 --##############################################################################################
-create proc sp_ProductIncoming
-@jobNo bigint,
-@ticket varchar(15),
-@all bit
+create proc sp_delete_project
+@idAux varchar(36),
+@idAuxWO varchar(36)
 as
+declare @error as bit = 0
+declare @taskAux as varchar(20)
+declare @countScaff as int
 begin 
-	select inc.jobNo as 'JobNo',inc.ticketNum,CONVERT(nvarchar, inc.dateRecived,101)as 'Date',inc.comment as 'Comment',
-	--product
-	pd.um as 'UNIT MSR',pic.quantity as 'QTY',pic.idProduct as 'PRODUCT ID',pd.QID as 'QUANTITY ID',pd.name as 'PRODUCT NAME',pd.class as 'CLASS',pd.[weight]*pic.quantity as 'WEIGTH',
-	--cliente
-	cl.companyName as 'Client',ha.number,ha.avenue,ha.providence,CONCAT(ha.city,', ',ha.providence,' ',ha.postalCode) as 'Address',CONCAT(cl.firstName,' ',cl.lastName) as 'Contact',ISNULL(ctc.phoneNumber1,'') as 'Phone',
-	--recived by
-	inc.recivedBy as 'RecivedBy',
-	ISNULL((select TOP 1 ctc1.phoneNumber1 from employees as emp 
-	inner join contact as ctc1 on ctc1.idContact= emp.idContact
-	where CONCAT(firstName,' ',middleName,' ',lastName) like inc.recivedBy),'') as 'EmployePhone'
-	from productComing as pic 
-	inner join product as pd on pd.idProduct = pic.idProduct
-	inner join incoming as inc on inc.ticketNum = pic.ticketNum
-	inner join job as jb on jb.jobNo = inc.jobNo
-	inner join clients as cl on cl.idClient = jb.idClient
-	left join contact as ctc on ctc.idContact = cl.idContact 
-	left join HomeAddress as ha on ha .idHomeAdress = cl.idHomeAddress
-	where inc.jobNo = @jobNo and inc.ticketNum like IIF(@all=1,'%%',@ticket)
-end
-go
---##############################################################################################
---################## SP PRODUCT OUTGOING #######################################################
---##############################################################################################
-create proc sp_ProductOutgoing
-@jobNo bigint,
-@ticket varchar(15),
-@all bit
-as
-begin 
-	select otg.jobNo as 'JobNo',otg.ticketNum,CONVERT(nvarchar, otg.dateShipped,101)as 'Date',otg.comment as 'Comment',
-	--product
-	pd.um as 'UNIT MSR',pog.quantity as 'QTY',pog.idProduct as 'PRODUCT ID',pd.QID as 'QUANTITY ID',pd.name as 'PRODUCT NAME',pd.class as 'CLASS',pd.[weight]*pog.quantity as 'WEIGTH',
-	--cliente
-	cl.companyName as 'Client',ha.number,ha.avenue,ha.providence,CONCAT(ha.city,', ',ha.providence,' ',ha.postalCode) as 'Address',CONCAT(cl.firstName,' ',cl.lastName) as 'Contact',ISNULL(ctc.phoneNumber1,'') as 'Phone',
-	--recived by
-	otg.shippedby as 'ShippedBy', otg.superintendent as 'Intendent',
-	ISNULL((select TOP 1 ctc1.phoneNumber1 from employees as emp 
-	inner join contact as ctc1 on ctc1.idContact= emp.idContact
-	where CONCAT(firstName,' ',middleName,' ',lastName) like otg.shippedby),'') as 'EmployePhone'
-	from productOutGoing as pog 
-	inner join product as pd on pd.idProduct = pog.idProduct
-	inner join outgoing as otg on otg.ticketNum = pog.ticketNum
-	inner join job as jb on jb.jobNo = otg.jobNo
-	inner join clients as cl on cl.idClient = jb.idClient
-	left join contact as ctc on ctc.idContact = cl.idContact 
-	left join HomeAddress as ha on ha .idHomeAdress = cl.idHomeAddress
-	where otg.jobNo = @jobNo and otg.ticketNum like IIF(@all=1,'%%',@ticket)
+	begin tran
+		begin try	
+		if @idAux <> '' 
+		begin 
+			if (select COUNT(*) from expensesUsed where idAux = @idAux)>0
+			begin 
+				delete from expensesUsed where idAux = @idAux 
+			end
+			if (select COUNT(*) from materialUsed where idAux = @idAux)>0
+			begin
+				delete from materialUsed where idAux = @idAux
+			end
+			if (select COUNT(*) from hoursWorked where idAux = @idAux)>0
+			begin
+				delete from hoursWorked where idAux = @idAux
+			end
+			if (select COUNT(*) from scaffoldTraking where idAux = @idAux)>0
+			begin
+				set @countScaff =( select COUNT(*) from scaffoldTraking where idAux = @idAux)
+				while (@countScaff>0)
+				begin
+					set @taskAux = (select top 1 tag from scaffoldTraking where idAux = @idAux)
+					exec sp_deleteScaffold @taskAux
+					set @countScaff =( select COUNT(*) from scaffoldTraking where idAux = @idAux)
+				end
+			end
+			if (select COUNT(*) from scfEstimation where idAux = @idAux)>0
+			begin
+				delete EstMeters from EstMeters as estM inner join scfEstimation as scfest on estM.EstNumber = scfest.EstNumber 
+				 where scfest.idAux = @idAux
+				delete from scfEstimation where idAux = @idAux
+			end
+			delete from task where idAux = @idAux
+		end
+		else if @idAuxWO <> '' 
+		begin 
+			delete from workOrder where idAuxWO = @idAuxWO
+		end
+	end try
+		begin catch
+			set @error = 1
+			goto solveProblem
+		end catch
+	commit tran
+	solveProblem:
+	if @error <> 0 
+	begin 
+		rollback tran
+	end  
 end
 go

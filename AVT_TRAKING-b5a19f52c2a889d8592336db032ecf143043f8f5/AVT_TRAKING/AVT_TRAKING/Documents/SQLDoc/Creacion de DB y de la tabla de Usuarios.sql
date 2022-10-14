@@ -831,7 +831,8 @@ create table hoursWorked (
 	idEmployee varchar(36),
 	idWorkCode int,
 	idAux varchar(36),
-	schedule varchar(10)
+	schedule varchar(10),
+	jobNo bigint
 )
 GO
 --##########################################################################################
@@ -2292,25 +2293,30 @@ GO
 --##################  TABLA DE WORKCODE ####################################################
 --##########################################################################################
 
-create table workCode(
-	idWorkCode int primary key not null,
-	name varchar(50),
-	description varchar(50),
+create table workCode (
+	idWorkCode int not null,
+	jobNo bigint not null,
+	name varchar(30),
+	[description] varchar(50),
 	billingRate1 float,
 	billingRateOT float,
 	billingRate3 float,
 	EQExp1 varchar(50),
 	EQExp2 varchar(50) 
 )
-GO
+go
 
-INSERT INTO workCode values
-(95,'LMP','LMP',0,0,0,'',''),
-(96,'LMI','LMI',0,0,0,'',''),
-(97,'LMS','LMS',0,0,0,'',''),
-(98,'LMA','LMA',0,0,0,'',''),
-(99,'LML','LML',0,0,0,'','')
-GO
+ALTER TABLE workCode WITH CHECK ADD CONSTRAINT PK_idWorkCode_jobNo_WorkCode
+PRIMARY KEY (idWorkCode, jobNo)
+go
+
+--INSERT INTO workCode values
+--(95,'LMP','LMP',0,0,0,'',''),
+--(96,'LMI','LMI',0,0,0,'',''),
+--(97,'LMS','LMS',0,0,0,'',''),
+--(98,'LMA','LMA',0,0,0,'',''),
+--(99,'LML','LML',0,0,0,'','')
+--GO
 
 --##########################################################################################
 --##################  TABLA DE WORKORDER ###################################################
@@ -2650,8 +2656,7 @@ GO
 ALTER TABLE    expensesUsed   WITH CHECK ADD  CONSTRAINT  fk_idEmployee_EU  FOREIGN KEY( idEmployee  )
 REFERENCES    employees ( idEmployee )
 GO
-
-ALTER TABLE expensesUsed WITH CHECK ADD CONSTRAINT fk_idHoursWorked_expensesUsed FOREIGN KEY (idHorsWorked) 
+ALTER TABLE expensesUsed WITH CHECK ADD CONSTRAINT fk_idHoursWorked_EU FOREIGN KEY (idHorsWorked) 
 REFERENCES  hoursWorked (idHorsWorked)
 GO
 --##########################################################################################
@@ -2669,9 +2674,9 @@ GO
 ALTER TABLE    hoursWorked   WITH CHECK ADD  CONSTRAINT  fk_idEmployee_hoursWorked  FOREIGN KEY( idEmployee )
 REFERENCES    employees  ( idEmployee )
 GO
-ALTER TABLE hoursWorked  WITH CHECK ADD  CONSTRAINT fk_idWorkCode_hoursWorked FOREIGN KEY(idWorkCode)
-REFERENCES workCode (idWorkCode)
-GO
+ALTER TABLE hoursWorked WITH CHECK ADD CONSTRAINT fk_idWorkCode_jobNo_hoursWorked  FOREIGN KEY (idWorkCode,jobNo) 
+REFERENCES workCode (idWorkCode,jobNo)
+go
 ALTER TABLE    hoursWorked   WITH CHECK ADD  CONSTRAINT  fk_idTask_hoursWork FOREIGN KEY ( idAux )
 REFERENCES    task  ( idAux )
 GO
@@ -3167,6 +3172,8 @@ GO
 
 ALTER TABLE scaffoldInformation WITH CHECK ADD CONSTRAINT fk_tag_scaffoldInformation
 FOREIGN KEY (tag) REFERENCES scaffoldTraking(tag)
+ON UPDATE CASCADE
+ON DELETE CASCADE
 GO
 
 ALTER TABLE scaffoldInformation  WITH CHECK ADD  CONSTRAINT fk_idModification_scaffoldInformation
@@ -3189,6 +3196,8 @@ GO
 
 ALTER TABLE scaffoldTraking WITH CHECK ADD CONSTRAINT fk_idAux_scaffoldTraking
 FOREIGN KEY (idAux) REFERENCES task(idAux)
+ON UPDATE CASCADE
+ON DELETE CASCADE
 GO
 ALTER TABLE scaffoldTraking WITH CHECK ADD CONSTRAINT fk_idJobCat_scaffoldTraking
 FOREIGN KEY (idJobCat) REFERENCES jobCat(idJobCat)
@@ -3311,6 +3320,14 @@ ON DELETE CASCADE
 GO
 
 --##########################################################################################
+--##################  FOREIG KEYS WORKCODE #################################################
+--##########################################################################################
+ALTER TABLE workCode WITH CHECK ADD CONSTRAINT fk_jobNo_WorkCode
+FOREIGN KEY (jobNo) REFERENCES job (jobNo)
+ON UPDATE CASCADE
+ON DELETE CASCADE
+go
+--##########################################################################################
 --##################  FOREIG KEYS WORKORDER ################################################
 --##########################################################################################
 
@@ -3340,36 +3357,211 @@ BEGIN
 	RETURN @var
 END
 GO
+--##############################################################################################
+--################## ACTUALIZACION DEL NOMBRE DE ALGUNOS BOTONES ###############################
+--##############################################################################################
+--update userAccess set access = 'Scaffold Tracking' where access = 'Scaffold Traking'
+--go
+--update userAccess set access = 'Client Projects' where access = 'Work Codes'
+--go
+----##############################################################################################
+----################## ACTUALIZACION DE METODO PARA SELECCIONAR LOS ##############################
+----################## DATOS DE LA COMPANIA EN LOS REPORTES         ##############################
+----##############################################################################################
+--ALTER proc [dbo].[sp_select_MyComapny_Info]
+--@CompanyName varchar(30)
+--as
+--begin
+--select cmp.name,
+--	ha.city,
+--	ha.providence,
+--	CONCAT(ha.avenue , ' ',ha.number) as 'Address',
+--	ha.postalCode,
+--	cmp.idContact,
+--	cmp.invoiceDescr,
+--	ct.email,
+--	ct.phoneNumber1 as 'PhoneNumber1',
+--	ct.phoneNumber2 as 'PhoneNumber2',
+--	cmp.img
+--from company as cmp 
+--left join HomeAddress as ha on ha.idHomeAdress	= cmp.idHomeAddress
+--left join contact as ct on ct.idContact = cmp.idContact
+--end
 --| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
 --| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
 --V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V
 --##############################################################################################
---################## ACTUALIZACION DEL NOMBRE DE ALGUNOS BOTONES ###############################
+--################## CAMBIOS PARA WORKCODE CON JOB NO ##########################################
 --##############################################################################################
-update userAccess set access = 'Scaffold Tracking' where access = 'Scaffold Traking'
+
+alter table expensesUsed drop constraint fk_idHoursWorked_expensesUsed
 go
-update userAccess set access = 'Client Projects' where access = 'Work Codes'
+delete from expensesUsed
+go
+drop table hoursWorked 
+go
+--la tabla hoursWorkedTMP puede que no este creada creo que la cree hace tiempo para hacer unos cambios 
+drop table hoursWorkedTMP
+go
+drop table workCode 
+go
+
+create table workCode (
+	idWorkCode int not null,
+	jobNo bigint not null,
+	name varchar(30),
+	[description] varchar(50),
+	billingRate1 float,
+	billingRateOT float,
+	billingRate3 float,
+	EQExp1 varchar(50),
+	EQExp2 varchar(50) 
+)
+go
+
+ALTER TABLE workCode WITH CHECK ADD CONSTRAINT PK_idWorkCode_jobNo_WorkCode
+PRIMARY KEY (idWorkCode, jobNo)
+go
+
+ALTER TABLE workCode WITH CHECK ADD CONSTRAINT fk_jobNo_WorkCode
+FOREIGN KEY (jobNo) REFERENCES job (jobNo)
+ON UPDATE CASCADE
+ON DELETE CASCADE
+go
+create TABLE hoursWorked(
+	idHorsWorked varchar(36) not null primary key,
+	hoursST float,
+	hoursOT float,
+	hours3 float,
+	dateWorked date,
+	idEmployee varchar(36), 
+	idWorkCode int,
+	idAux varchar(36),
+	jobNo bigint
+)
+go
+
+ALTER TABLE hoursWorked WITH CHECK ADD CONSTRAINT fk_idEmployee_hoursWorked
+FOREIGN KEY (idEmployee) REFERENCES employees (idEmployee)
+go
+
+ALTER TABLE hoursWorked WITH CHECK ADD CONSTRAINT fk_idTask_hoursWorked
+FOREIGN KEY (idAux) REFERENCES task (idAux)
+go
+
+ALTER TABLE hoursWorked WITH CHECK ADD CONSTRAINT fk_idWorkCode_jobNo_hoursWorked
+FOREIGN KEY (idWorkCode,jobNo) REFERENCES workCode (idWorkCode,jobNo)
+go
+
+ALTER TABLE expensesUsed WITH CHECK ADD CONSTRAINT fk_idHoursWorked_EU 
+FOREIGN KEY (idHorsWorked) REFERENCES  hoursWorked (idHorsWorked)
 go
 --##############################################################################################
---################## ACTUALIZACION DE METODO PARA SELECCIONAR LOS ##############################
---################## DATOS DE LA COMPANIA EN LOS REPORTES         ##############################
+--################## SP DELETE SCAFFOLD ########################################################
 --##############################################################################################
-ALTER proc [dbo].[sp_select_MyComapny_Info]
-@CompanyName varchar(30)
-as
+ALTER proc sp_deleteScaffold
+@tag as varchar(20)
+as 
+declare @countProduct as int = (select COUNT(*) from productTotalScaffold where tag = @tag and status = 't' )	
+declare @qty as float = 0.0
+declare @idProduct as int
 begin
-select cmp.name,
-	ha.city,
-	ha.providence,
-	CONCAT(ha.avenue , ' ',ha.number) as 'Address',
-	ha.postalCode,
-	cmp.idContact,
-	cmp.invoiceDescr,
-	ct.email,
-	ct.phoneNumber1 as 'PhoneNumber1',
-	ct.phoneNumber2 as 'PhoneNumber2',
-	cmp.img
-from company as cmp 
-left join HomeAddress as ha on ha.idHomeAdress	= cmp.idHomeAddress
-left join contact as ct on ct.idContact = cmp.idContact
+while (@countProduct > 0) 
+begin
+	select  @qty = quantity ,@idProduct = idProduct from (select top 1  quantity,idProduct from productTotalScaffold where tag = @tag and status = 't') as t1
+	select quantity from product where idProduct = @idProduct
+	update product set quantity = quantity + @qty where idProduct = @idProduct
+	delete from productTotalScaffold where idProduct = @idProduct and tag = @tag
+	set @countProduct = (select COUNT(*) from productTotalScaffold where tag = @tag and status = 't')
 end
+if (select COUNT(*) from productTotalScaffold where tag = @tag and status = 't')=0
+begin
+	delete from leg where tag	= @tag
+	select *from materialHandeling where tag = @tag
+	delete from materialHandeling where tag = @tag
+	select * from activityHours where tag = @tag
+	delete from activityHours where tag = @tag
+	select * from scaffoldInformation where tag = @tag
+	delete from scaffoldInformation	where tag = @tag
+	select * from scfInfo where tag = @tag
+	delete from scfInfo where tag = @tag
+	select * from productDismantle where tag = @tag
+	delete from productDismantle where tag = @tag
+	select * from dismantle where tag = @tag
+	delete from dismantle where tag = @tag 
+	select * from productDismantle where tag = @tag
+	delete from productModification where tag = @tag
+	select * from modification where tag = @tag
+	delete from modification where tag= @tag
+	select * from productScaffold where tag = @tag
+	delete from productScaffold where tag =@tag
+    select * from productTotalScaffold where tag = @tag
+	delete from productTotalScaffold where tag = @tag
+	select * from scaffoldTraking where tag = @tag
+	delete from scaffoldTraking where tag = @tag
+end
+end
+go
+--##############################################################################################
+--################## PROCEDIMIENTOS PARA ELIMINAR PROJECTOS ####################################
+--##############################################################################################
+alter proc sp_delete_project
+@idAux varchar(36),
+@idAuxWO varchar(36)
+as
+declare @error as bit = 0
+declare @taskAux as varchar(20)
+declare @countScaff as int
+begin 
+	begin tran
+		begin try	
+		if @idAux <> '' 
+		begin 
+			if (select COUNT(*) from expensesUsed where idAux = @idAux)>0
+			begin 
+				delete from expensesUsed where idAux = @idAux 
+			end
+			if (select COUNT(*) from materialUsed where idAux = @idAux)>0
+			begin
+				delete from materialUsed where idAux = @idAux
+			end
+			if (select COUNT(*) from hoursWorked where idAux = @idAux)>0
+			begin
+				delete from hoursWorked where idAux = @idAux
+			end
+			if (select COUNT(*) from scaffoldTraking where idAux = @idAux)>0
+			begin
+				set @countScaff =( select COUNT(*) from scaffoldTraking where idAux = @idAux)
+				while (@countScaff>0)
+				begin
+					set @taskAux = (select top 1 tag from scaffoldTraking where idAux = @idAux)
+					exec sp_deleteScaffold @taskAux
+					set @countScaff =( select COUNT(*) from scaffoldTraking where idAux = @idAux)
+				end
+			end
+			if (select COUNT(*) from scfEstimation where idAux = @idAux)>0
+			begin
+				delete EstMeters from EstMeters as estM inner join scfEstimation as scfest on estM.EstNumber = scfest.EstNumber 
+				 where scfest.idAux = @idAux
+				delete from scfEstimation where idAux = @idAux
+			end
+			delete from task where idAux = @idAux
+		end
+		else if @idAuxWO <> '' 
+		begin 
+			delete from workOrder where idAuxWO = @idAuxWO
+		end
+	end try
+		begin catch
+			set @error = 1
+			goto solveProblem
+		end catch
+	commit tran
+	solveProblem:
+	if @error <> 0 
+	begin 
+		rollback tran
+	end  
+end
+go
+

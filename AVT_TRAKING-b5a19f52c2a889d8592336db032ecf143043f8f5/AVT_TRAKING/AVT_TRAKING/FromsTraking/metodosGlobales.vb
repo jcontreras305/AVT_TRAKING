@@ -627,7 +627,7 @@ where cl.numberClient = " + numberClient + " and po.projectId = '" + project + "
         Try
             Dim openFile As New OpenFileDialog
             openFile.DefaultExt = "*.xlsm"
-            openFile.FileName = "FactorsEstimation"
+            openFile.FileName = sheetName
             openFile.ShowDialog()
             If DialogResult.OK = MessageBox.Show("Please verify that the Sheets name are '" + sheetName + "', if not do the changues and Close de Excel Application.", "Important", MessageBoxButtons.OKCancel, MessageBoxIcon.Information) Then
                 Dim ApExcel = New Microsoft.Office.Interop.Excel.Application

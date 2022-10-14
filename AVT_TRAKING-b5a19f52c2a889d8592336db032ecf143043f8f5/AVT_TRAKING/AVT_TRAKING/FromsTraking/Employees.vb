@@ -401,6 +401,14 @@ Public Class Employees
             For i As Int16 = 0 To colums.Length - 1
                 libro.Sheets(1).cells(1, i + 1) = colums(i)
             Next
+            With libro.Sheets(1).Range("A1:I1")
+                .Font.Bold = True
+                .Font.ColorIndex = 1
+                With .Interior
+                    .ColorIndex = 15
+                End With
+                .BorderAround(Microsoft.Office.Interop.Excel.XlLineStyle.xlContinuous, Microsoft.Office.Interop.Excel.XlBorderWeight.xlThin, Microsoft.Office.Interop.Excel.XlColorIndex.xlColorIndexAutomatic, Color.Black)
+            End With
             Dim sd As New SaveFileDialog
             sd.DefaultExt = "*.xlsx"
             sd.FileName = "EmployeeList"

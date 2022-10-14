@@ -53,6 +53,10 @@ Partial Class WorkCodes
         Me.PictureBox4 = New System.Windows.Forms.PictureBox()
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
         Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.cmbJob = New System.Windows.Forms.ComboBox()
+        Me.Label11 = New System.Windows.Forms.Label()
+        Me.cmbClient = New System.Windows.Forms.ComboBox()
+        Me.Label10 = New System.Windows.Forms.Label()
         Me.Panel2 = New System.Windows.Forms.Panel()
         Me.TableLayoutPanel2 = New System.Windows.Forms.TableLayoutPanel()
         Me.Panel3 = New System.Windows.Forms.Panel()
@@ -60,6 +64,8 @@ Partial Class WorkCodes
         Me.TableLayoutPanel3 = New System.Windows.Forms.TableLayoutPanel()
         Me.Panel5 = New System.Windows.Forms.Panel()
         Me.Panel6 = New System.Windows.Forms.Panel()
+        Me.btnExcel = New System.Windows.Forms.Button()
+        Me.btnDownloadExcel = New System.Windows.Forms.Button()
         Me.GroupBox1.SuspendLayout()
         CType(Me.sprBillingRate3, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.sprBillingRateOT, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -173,6 +179,8 @@ Partial Class WorkCodes
         '
         'GroupBox1
         '
+        Me.GroupBox1.Controls.Add(Me.btnDownloadExcel)
+        Me.GroupBox1.Controls.Add(Me.btnExcel)
         Me.GroupBox1.Controls.Add(Me.sprBillingRate3)
         Me.GroupBox1.Controls.Add(Me.Label3)
         Me.GroupBox1.Controls.Add(Me.btnCancelWC)
@@ -197,7 +205,7 @@ Partial Class WorkCodes
         Me.GroupBox1.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.GroupBox1.Location = New System.Drawing.Point(0, 0)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(264, 355)
+        Me.GroupBox1.Size = New System.Drawing.Size(264, 379)
         Me.GroupBox1.TabIndex = 16
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "WorkCode"
@@ -329,7 +337,7 @@ Partial Class WorkCodes
         Me.tblWK.Name = "tblWK"
         Me.tblWK.ReadOnly = True
         Me.tblWK.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.tblWK.Size = New System.Drawing.Size(460, 303)
+        Me.tblWK.Size = New System.Drawing.Size(460, 323)
         Me.tblWK.TabIndex = 17
         '
         'txtBucar
@@ -348,7 +356,7 @@ Partial Class WorkCodes
         Me.btnFindWK.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.btnFindWK.Image = Global.AVT_TRAKING.My.Resources.Resources.loupe
         Me.btnFindWK.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnFindWK.Location = New System.Drawing.Point(209, 9)
+        Me.btnFindWK.Location = New System.Drawing.Point(209, 8)
         Me.btnFindWK.Name = "btnFindWK"
         Me.btnFindWK.Size = New System.Drawing.Size(70, 23)
         Me.btnFindWK.TabIndex = 19
@@ -434,11 +442,15 @@ Partial Class WorkCodes
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35.0!))
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 45.0!))
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-        Me.TableLayoutPanel1.Size = New System.Drawing.Size(748, 447)
+        Me.TableLayoutPanel1.Size = New System.Drawing.Size(748, 471)
         Me.TableLayoutPanel1.TabIndex = 21
         '
         'Panel1
         '
+        Me.Panel1.Controls.Add(Me.cmbJob)
+        Me.Panel1.Controls.Add(Me.Label11)
+        Me.Panel1.Controls.Add(Me.cmbClient)
+        Me.Panel1.Controls.Add(Me.Label10)
         Me.Panel1.Controls.Add(Me.PictureBox4)
         Me.Panel1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel1.Location = New System.Drawing.Point(3, 38)
@@ -446,13 +458,49 @@ Partial Class WorkCodes
         Me.Panel1.Size = New System.Drawing.Size(742, 39)
         Me.Panel1.TabIndex = 21
         '
+        'cmbJob
+        '
+        Me.cmbJob.FormattingEnabled = True
+        Me.cmbJob.Location = New System.Drawing.Point(227, 10)
+        Me.cmbJob.Name = "cmbJob"
+        Me.cmbJob.Size = New System.Drawing.Size(121, 21)
+        Me.cmbJob.TabIndex = 7
+        '
+        'Label11
+        '
+        Me.Label11.AutoSize = True
+        Me.Label11.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.Label11.Location = New System.Drawing.Point(177, 13)
+        Me.Label11.Name = "Label11"
+        Me.Label11.Size = New System.Drawing.Size(44, 13)
+        Me.Label11.TabIndex = 6
+        Me.Label11.Text = "Job No."
+        '
+        'cmbClient
+        '
+        Me.cmbClient.FormattingEnabled = True
+        Me.cmbClient.Location = New System.Drawing.Point(52, 10)
+        Me.cmbClient.Name = "cmbClient"
+        Me.cmbClient.Size = New System.Drawing.Size(121, 21)
+        Me.cmbClient.TabIndex = 5
+        '
+        'Label10
+        '
+        Me.Label10.AutoSize = True
+        Me.Label10.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.Label10.Location = New System.Drawing.Point(17, 13)
+        Me.Label10.Name = "Label10"
+        Me.Label10.Size = New System.Drawing.Size(38, 13)
+        Me.Label10.TabIndex = 4
+        Me.Label10.Text = "Clients"
+        '
         'Panel2
         '
         Me.Panel2.Controls.Add(Me.TableLayoutPanel2)
         Me.Panel2.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel2.Location = New System.Drawing.Point(3, 83)
         Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(742, 361)
+        Me.Panel2.Size = New System.Drawing.Size(742, 385)
         Me.Panel2.TabIndex = 22
         '
         'TableLayoutPanel2
@@ -467,7 +515,7 @@ Partial Class WorkCodes
         Me.TableLayoutPanel2.Name = "TableLayoutPanel2"
         Me.TableLayoutPanel2.RowCount = 1
         Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
-        Me.TableLayoutPanel2.Size = New System.Drawing.Size(742, 361)
+        Me.TableLayoutPanel2.Size = New System.Drawing.Size(742, 385)
         Me.TableLayoutPanel2.TabIndex = 0
         '
         'Panel3
@@ -476,7 +524,7 @@ Partial Class WorkCodes
         Me.Panel3.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel3.Location = New System.Drawing.Point(3, 3)
         Me.Panel3.Name = "Panel3"
-        Me.Panel3.Size = New System.Drawing.Size(264, 355)
+        Me.Panel3.Size = New System.Drawing.Size(264, 379)
         Me.Panel3.TabIndex = 0
         '
         'Panel4
@@ -485,7 +533,7 @@ Partial Class WorkCodes
         Me.Panel4.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel4.Location = New System.Drawing.Point(273, 3)
         Me.Panel4.Name = "Panel4"
-        Me.Panel4.Size = New System.Drawing.Size(466, 355)
+        Me.Panel4.Size = New System.Drawing.Size(466, 379)
         Me.Panel4.TabIndex = 1
         '
         'TableLayoutPanel3
@@ -498,9 +546,9 @@ Partial Class WorkCodes
         Me.TableLayoutPanel3.Location = New System.Drawing.Point(0, 0)
         Me.TableLayoutPanel3.Name = "TableLayoutPanel3"
         Me.TableLayoutPanel3.RowCount = 2
-        Me.TableLayoutPanel3.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 13.09192!))
-        Me.TableLayoutPanel3.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 86.90808!))
-        Me.TableLayoutPanel3.Size = New System.Drawing.Size(466, 355)
+        Me.TableLayoutPanel3.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 13.23944!))
+        Me.TableLayoutPanel3.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 86.76057!))
+        Me.TableLayoutPanel3.Size = New System.Drawing.Size(466, 379)
         Me.TableLayoutPanel3.TabIndex = 0
         '
         'Panel5
@@ -510,24 +558,60 @@ Partial Class WorkCodes
         Me.Panel5.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel5.Location = New System.Drawing.Point(3, 3)
         Me.Panel5.Name = "Panel5"
-        Me.Panel5.Size = New System.Drawing.Size(460, 40)
+        Me.Panel5.Size = New System.Drawing.Size(460, 44)
         Me.Panel5.TabIndex = 0
         '
         'Panel6
         '
         Me.Panel6.Controls.Add(Me.tblWK)
         Me.Panel6.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel6.Location = New System.Drawing.Point(3, 49)
+        Me.Panel6.Location = New System.Drawing.Point(3, 53)
         Me.Panel6.Name = "Panel6"
-        Me.Panel6.Size = New System.Drawing.Size(460, 303)
+        Me.Panel6.Size = New System.Drawing.Size(460, 323)
         Me.Panel6.TabIndex = 1
+        '
+        'btnExcel
+        '
+        Me.btnExcel.FlatAppearance.BorderSize = 0
+        Me.btnExcel.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(58, Byte), Integer), CType(CType(115, Byte), Integer))
+        Me.btnExcel.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnExcel.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnExcel.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.btnExcel.Image = Global.AVT_TRAKING.My.Resources.Resources.excel
+        Me.btnExcel.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnExcel.Location = New System.Drawing.Point(137, 329)
+        Me.btnExcel.Name = "btnExcel"
+        Me.btnExcel.Size = New System.Drawing.Size(104, 39)
+        Me.btnExcel.TabIndex = 20
+        Me.btnExcel.Text = "Upload Excel"
+        Me.btnExcel.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.btnExcel.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
+        Me.btnExcel.UseVisualStyleBackColor = True
+        '
+        'btnDownloadExcel
+        '
+        Me.btnDownloadExcel.FlatAppearance.BorderSize = 0
+        Me.btnDownloadExcel.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(58, Byte), Integer), CType(CType(115, Byte), Integer))
+        Me.btnDownloadExcel.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnDownloadExcel.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnDownloadExcel.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.btnDownloadExcel.Image = Global.AVT_TRAKING.My.Resources.Resources.excel
+        Me.btnDownloadExcel.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnDownloadExcel.Location = New System.Drawing.Point(10, 329)
+        Me.btnDownloadExcel.Name = "btnDownloadExcel"
+        Me.btnDownloadExcel.Size = New System.Drawing.Size(121, 44)
+        Me.btnDownloadExcel.TabIndex = 21
+        Me.btnDownloadExcel.Text = "Download Excel"
+        Me.btnDownloadExcel.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.btnDownloadExcel.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
+        Me.btnDownloadExcel.UseVisualStyleBackColor = True
         '
         'WorkCodes
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(83, Byte), Integer), CType(CType(93, Byte), Integer), CType(CType(102, Byte), Integer))
-        Me.ClientSize = New System.Drawing.Size(748, 447)
+        Me.ClientSize = New System.Drawing.Size(748, 471)
         Me.Controls.Add(Me.TableLayoutPanel1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
         Me.Name = "WorkCodes"
@@ -546,6 +630,7 @@ Partial Class WorkCodes
         CType(Me.PictureBox4, System.ComponentModel.ISupportInitialize).EndInit()
         Me.TableLayoutPanel1.ResumeLayout(False)
         Me.Panel1.ResumeLayout(False)
+        Me.Panel1.PerformLayout()
         Me.Panel2.ResumeLayout(False)
         Me.TableLayoutPanel2.ResumeLayout(False)
         Me.Panel3.ResumeLayout(False)
@@ -596,4 +681,10 @@ Partial Class WorkCodes
     Friend WithEvents TableLayoutPanel3 As TableLayoutPanel
     Friend WithEvents Panel5 As Panel
     Friend WithEvents Panel6 As Panel
+    Friend WithEvents cmbJob As ComboBox
+    Friend WithEvents Label11 As Label
+    Friend WithEvents cmbClient As ComboBox
+    Friend WithEvents Label10 As Label
+    Friend WithEvents btnExcel As Button
+    Friend WithEvents btnDownloadExcel As Button
 End Class
