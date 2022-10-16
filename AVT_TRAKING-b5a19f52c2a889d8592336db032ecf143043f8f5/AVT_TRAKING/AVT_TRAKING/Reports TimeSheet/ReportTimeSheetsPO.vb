@@ -41,7 +41,7 @@ Public Class ReportTimeSheetsPO
             reportTS.SetParameterValue("@FinalDate", validaFechaParaSQl(dtpFinalDate.Value.Date))
             reportTS.SetParameterValue("@clientnum", idClient)
             reportTS.SetParameterValue("@job", If(cmbJob.SelectedItem IsNot Nothing, CInt(cmbJob.SelectedItem), 0))
-            reportTS.SetParameterValue("@all", If(chbAllJobs.CheckAlign, 1, 0))
+            reportTS.SetParameterValue("@all", If(chbAllJobs.Checked, 1, 0))
             reportTS.SetParameterValue("@CompanyName", "brock")
             crvTimeSheetPO.ReportSource = reportTS
         Else

@@ -3387,181 +3387,333 @@ GO
 --left join HomeAddress as ha on ha.idHomeAdress	= cmp.idHomeAddress
 --left join contact as ct on ct.idContact = cmp.idContact
 --end
---| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
---| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
---V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V
+
 --##############################################################################################
 --################## CAMBIOS PARA WORKCODE CON JOB NO ##########################################
 --##############################################################################################
 
-alter table expensesUsed drop constraint fk_idHoursWorked_expensesUsed
-go
-delete from expensesUsed
-go
-drop table hoursWorked 
-go
---la tabla hoursWorkedTMP puede que no este creada creo que la cree hace tiempo para hacer unos cambios 
-drop table hoursWorkedTMP
-go
-drop table workCode 
-go
+--alter table expensesUsed drop constraint fk_idHoursWorked_expensesUsed
+--go
+--delete from expensesUsed
+--go
+--drop table hoursWorked 
+--go
+----la tabla hoursWorkedTMP puede que no este creada creo que la cree hace tiempo para hacer unos cambios 
+--drop table hoursWorkedTMP
+--go
+--drop table workCode 
+--go
 
-create table workCode (
-	idWorkCode int not null,
-	jobNo bigint not null,
-	name varchar(30),
-	[description] varchar(50),
-	billingRate1 float,
-	billingRateOT float,
-	billingRate3 float,
-	EQExp1 varchar(50),
-	EQExp2 varchar(50) 
-)
-go
+--create table workCode (
+--	idWorkCode int not null,
+--	jobNo bigint not null,
+--	name varchar(30),
+--	[description] varchar(50),
+--	billingRate1 float,
+--	billingRateOT float,
+--	billingRate3 float,
+--	EQExp1 varchar(50),
+--	EQExp2 varchar(50) 
+--)
+--go
 
-ALTER TABLE workCode WITH CHECK ADD CONSTRAINT PK_idWorkCode_jobNo_WorkCode
-PRIMARY KEY (idWorkCode, jobNo)
-go
+--ALTER TABLE workCode WITH CHECK ADD CONSTRAINT PK_idWorkCode_jobNo_WorkCode
+--PRIMARY KEY (idWorkCode, jobNo)
+--go
 
-ALTER TABLE workCode WITH CHECK ADD CONSTRAINT fk_jobNo_WorkCode
-FOREIGN KEY (jobNo) REFERENCES job (jobNo)
-ON UPDATE CASCADE
-ON DELETE CASCADE
-go
-create TABLE hoursWorked(
-	idHorsWorked varchar(36) not null primary key,
-	hoursST float,
-	hoursOT float,
-	hours3 float,
-	dateWorked date,
-	idEmployee varchar(36), 
-	idWorkCode int,
-	idAux varchar(36),
-	jobNo bigint
-)
-go
+--ALTER TABLE workCode WITH CHECK ADD CONSTRAINT fk_jobNo_WorkCode
+--FOREIGN KEY (jobNo) REFERENCES job (jobNo)
+--ON UPDATE CASCADE
+--ON DELETE CASCADE
+--go
+--create TABLE hoursWorked(
+--	idHorsWorked varchar(36) not null primary key,
+--	hoursST float,
+--	hoursOT float,
+--	hours3 float,
+--	dateWorked date,
+--	idEmployee varchar(36), 
+--	idWorkCode int,
+--	idAux varchar(36),
+--	jobNo bigint
+--)
+--go
 
-ALTER TABLE hoursWorked WITH CHECK ADD CONSTRAINT fk_idEmployee_hoursWorked
-FOREIGN KEY (idEmployee) REFERENCES employees (idEmployee)
-go
+--ALTER TABLE hoursWorked WITH CHECK ADD CONSTRAINT fk_idEmployee_hoursWorked
+--FOREIGN KEY (idEmployee) REFERENCES employees (idEmployee)
+--go
 
-ALTER TABLE hoursWorked WITH CHECK ADD CONSTRAINT fk_idTask_hoursWorked
-FOREIGN KEY (idAux) REFERENCES task (idAux)
-go
+--ALTER TABLE hoursWorked WITH CHECK ADD CONSTRAINT fk_idTask_hoursWorked
+--FOREIGN KEY (idAux) REFERENCES task (idAux)
+--go
 
-ALTER TABLE hoursWorked WITH CHECK ADD CONSTRAINT fk_idWorkCode_jobNo_hoursWorked
-FOREIGN KEY (idWorkCode,jobNo) REFERENCES workCode (idWorkCode,jobNo)
-go
+--ALTER TABLE hoursWorked WITH CHECK ADD CONSTRAINT fk_idWorkCode_jobNo_hoursWorked
+--FOREIGN KEY (idWorkCode,jobNo) REFERENCES workCode (idWorkCode,jobNo)
+--go
 
-ALTER TABLE expensesUsed WITH CHECK ADD CONSTRAINT fk_idHoursWorked_EU 
-FOREIGN KEY (idHorsWorked) REFERENCES  hoursWorked (idHorsWorked)
-go
---##############################################################################################
---################## SP DELETE SCAFFOLD ########################################################
---##############################################################################################
-ALTER proc sp_deleteScaffold
-@tag as varchar(20)
+--ALTER TABLE expensesUsed WITH CHECK ADD CONSTRAINT fk_idHoursWorked_EU 
+--FOREIGN KEY (idHorsWorked) REFERENCES  hoursWorked (idHorsWorked)
+--go
+----##############################################################################################
+----################## SP DELETE SCAFFOLD ########################################################
+----##############################################################################################
+--ALTER proc sp_deleteScaffold
+--@tag as varchar(20)
+--as 
+--declare @countProduct as int = (select COUNT(*) from productTotalScaffold where tag = @tag and status = 't' )	
+--declare @qty as float = 0.0
+--declare @idProduct as int
+--begin
+--while (@countProduct > 0) 
+--begin
+--	select  @qty = quantity ,@idProduct = idProduct from (select top 1  quantity,idProduct from productTotalScaffold where tag = @tag and status = 't') as t1
+--	select quantity from product where idProduct = @idProduct
+--	update product set quantity = quantity + @qty where idProduct = @idProduct
+--	delete from productTotalScaffold where idProduct = @idProduct and tag = @tag
+--	set @countProduct = (select COUNT(*) from productTotalScaffold where tag = @tag and status = 't')
+--end
+--if (select COUNT(*) from productTotalScaffold where tag = @tag and status = 't')=0
+--begin
+--	delete from leg where tag	= @tag
+--	select *from materialHandeling where tag = @tag
+--	delete from materialHandeling where tag = @tag
+--	select * from activityHours where tag = @tag
+--	delete from activityHours where tag = @tag
+--	select * from scaffoldInformation where tag = @tag
+--	delete from scaffoldInformation	where tag = @tag
+--	select * from scfInfo where tag = @tag
+--	delete from scfInfo where tag = @tag
+--	select * from productDismantle where tag = @tag
+--	delete from productDismantle where tag = @tag
+--	select * from dismantle where tag = @tag
+--	delete from dismantle where tag = @tag 
+--	select * from productDismantle where tag = @tag
+--	delete from productModification where tag = @tag
+--	select * from modification where tag = @tag
+--	delete from modification where tag= @tag
+--	select * from productScaffold where tag = @tag
+--	delete from productScaffold where tag =@tag
+--    select * from productTotalScaffold where tag = @tag
+--	delete from productTotalScaffold where tag = @tag
+--	select * from scaffoldTraking where tag = @tag
+--	delete from scaffoldTraking where tag = @tag
+--end
+--end
+--go
+----##############################################################################################
+----################## PROCEDIMIENTOS PARA ELIMINAR PROJECTOS ####################################
+----##############################################################################################
+--alter proc sp_delete_project
+--@idAux varchar(36),
+--@idAuxWO varchar(36)
+--as
+--declare @error as bit = 0
+--declare @taskAux as varchar(20)
+--declare @countScaff as int
+--begin 
+--	begin tran
+--		begin try	
+--		if @idAux <> '' 
+--		begin 
+--			if (select COUNT(*) from expensesUsed where idAux = @idAux)>0
+--			begin 
+--				delete from expensesUsed where idAux = @idAux 
+--			end
+--			if (select COUNT(*) from materialUsed where idAux = @idAux)>0
+--			begin
+--				delete from materialUsed where idAux = @idAux
+--			end
+--			if (select COUNT(*) from hoursWorked where idAux = @idAux)>0
+--			begin
+--				delete from hoursWorked where idAux = @idAux
+--			end
+--			if (select COUNT(*) from scaffoldTraking where idAux = @idAux)>0
+--			begin
+--				set @countScaff =( select COUNT(*) from scaffoldTraking where idAux = @idAux)
+--				while (@countScaff>0)
+--				begin
+--					set @taskAux = (select top 1 tag from scaffoldTraking where idAux = @idAux)
+--					exec sp_deleteScaffold @taskAux
+--					set @countScaff =( select COUNT(*) from scaffoldTraking where idAux = @idAux)
+--				end
+--			end
+--			if (select COUNT(*) from scfEstimation where idAux = @idAux)>0
+--			begin
+--				delete EstMeters from EstMeters as estM inner join scfEstimation as scfest on estM.EstNumber = scfest.EstNumber 
+--				 where scfest.idAux = @idAux
+--				delete from scfEstimation where idAux = @idAux
+--			end
+--			delete from task where idAux = @idAux
+--		end
+--		else if @idAuxWO <> '' 
+--		begin 
+--			delete from workOrder where idAuxWO = @idAuxWO
+--		end
+--	end try
+--		begin catch
+--			set @error = 1
+--			goto solveProblem
+--		end catch
+--	commit tran
+--	solveProblem:
+--	if @error <> 0 
+--	begin 
+--		rollback tran
+--	end  
+--end
+--go
+
+--| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
+--| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
+--V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V
+--###############################################################################################
+--########### CAMBIOS PARA REPORTES DE TIMESHEETPO, TIMESHEET E INVOICE DETAILS #################
+--###############################################################################################
+alter proc [dbo].[select_Time_Sheet_PO]
+	@IntialDate date,
+	@FinalDate date,
+	@clientnum as int,
+	@job as bigint,
+	@all as bit
 as 
-declare @countProduct as int = (select COUNT(*) from productTotalScaffold where tag = @tag and status = 't' )	
-declare @qty as float = 0.0
-declare @idProduct as int
 begin
-while (@countProduct > 0) 
-begin
-	select  @qty = quantity ,@idProduct = idProduct from (select top 1  quantity,idProduct from productTotalScaffold where tag = @tag and status = 't') as t1
-	select quantity from product where idProduct = @idProduct
-	update product set quantity = quantity + @qty where idProduct = @idProduct
-	delete from productTotalScaffold where idProduct = @idProduct and tag = @tag
-	set @countProduct = (select COUNT(*) from productTotalScaffold where tag = @tag and status = 't')
-end
-if (select COUNT(*) from productTotalScaffold where tag = @tag and status = 't')=0
-begin
-	delete from leg where tag	= @tag
-	select *from materialHandeling where tag = @tag
-	delete from materialHandeling where tag = @tag
-	select * from activityHours where tag = @tag
-	delete from activityHours where tag = @tag
-	select * from scaffoldInformation where tag = @tag
-	delete from scaffoldInformation	where tag = @tag
-	select * from scfInfo where tag = @tag
-	delete from scfInfo where tag = @tag
-	select * from productDismantle where tag = @tag
-	delete from productDismantle where tag = @tag
-	select * from dismantle where tag = @tag
-	delete from dismantle where tag = @tag 
-	select * from productDismantle where tag = @tag
-	delete from productModification where tag = @tag
-	select * from modification where tag = @tag
-	delete from modification where tag= @tag
-	select * from productScaffold where tag = @tag
-	delete from productScaffold where tag =@tag
-    select * from productTotalScaffold where tag = @tag
-	delete from productTotalScaffold where tag = @tag
-	select * from scaffoldTraking where tag = @tag
-	delete from scaffoldTraking where tag = @tag
-end
-end
-go
---##############################################################################################
---################## PROCEDIMIENTOS PARA ELIMINAR PROJECTOS ####################################
---##############################################################################################
-alter proc sp_delete_project
-@idAux varchar(36),
-@idAuxWO varchar(36)
-as
-declare @error as bit = 0
-declare @taskAux as varchar(20)
-declare @countScaff as int
-begin 
-	begin tran
-		begin try	
-		if @idAux <> '' 
-		begin 
-			if (select COUNT(*) from expensesUsed where idAux = @idAux)>0
-			begin 
-				delete from expensesUsed where idAux = @idAux 
-			end
-			if (select COUNT(*) from materialUsed where idAux = @idAux)>0
-			begin
-				delete from materialUsed where idAux = @idAux
-			end
-			if (select COUNT(*) from hoursWorked where idAux = @idAux)>0
-			begin
-				delete from hoursWorked where idAux = @idAux
-			end
-			if (select COUNT(*) from scaffoldTraking where idAux = @idAux)>0
-			begin
-				set @countScaff =( select COUNT(*) from scaffoldTraking where idAux = @idAux)
-				while (@countScaff>0)
-				begin
-					set @taskAux = (select top 1 tag from scaffoldTraking where idAux = @idAux)
-					exec sp_deleteScaffold @taskAux
-					set @countScaff =( select COUNT(*) from scaffoldTraking where idAux = @idAux)
-				end
-			end
-			if (select COUNT(*) from scfEstimation where idAux = @idAux)>0
-			begin
-				delete EstMeters from EstMeters as estM inner join scfEstimation as scfest on estM.EstNumber = scfest.EstNumber 
-				 where scfest.idAux = @idAux
-				delete from scfEstimation where idAux = @idAux
-			end
-			delete from task where idAux = @idAux
-		end
-		else if @idAuxWO <> '' 
-		begin 
-			delete from workOrder where idAuxWO = @idAuxWO
-		end
-	end try
-		begin catch
-			set @error = 1
-			goto solveProblem
-		end catch
-	commit tran
-	solveProblem:
-	if @error <> 0 
-	begin 
-		rollback tran
-	end  
+	set @IntialDate = ISNULL(@IntialDate,GETDATE())
+	set @FinalDate = ISNULL(@FinalDate,GETDATE())
+	select * from (
+	select
+	distinct
+		cl.numberClient,
+		jb.jobNo,
+		po.idPO,
+		(select sum(hw1.hoursST) from hoursWorked as hw1 inner join workCode as wc1 on wc1.idWorkCode = hw1.idWorkCode and wc1.jobNo = hw1.jobNo inner join task as tk1 on tk1.idAux = hw1.idAux inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO inner join projectOrder as po1 on po1.idPO = wo1.idPO and po1.jobNo = wo1.jobNo inner join job as jb1 on jb1.jobNo = po1.jobNo inner join clients as cl1 on cl1.idClient = jb1.idClient where cl1.idClient = cl.idClient and po1.idPO=po.idPO and jb.jobNo = jb1.jobNo and hw1.idEmployee = em.idEmployee and SUBSTRING( wc.name,1,iif(CHARINDEX('-',wc.name)=0, len(wc.name) ,(CHARINDEX('-',wc.name)-1)))=SUBSTRING( wc1.name,1,iif(CHARINDEX('-',wc1.name)=0, len(wc1.name) ,(CHARINDEX('-',wc1.name)-1)))and wc.jobNo = wc1.jobNo and hw1.dateWorked between @IntialDate and @FinalDate) as 'hoursST',
+		(select sum(hw2.hoursOT) from hoursWorked as hw2 inner join workCode as wc2 on wc2.idWorkCode = hw2.idWorkCode and wc2.jobNo = hw2.jobNo inner join task as tk2 on tk2.idAux = hw2.idAux inner join workOrder as wo2 on wo2.idAuxWO = tk2.idAuxWO inner join projectOrder as po2 on po2.idPO = wo2.idPO and po2.jobNo = wo2.jobNo inner join job as jb2 on jb2.jobNo = po2.jobNo inner join clients as cl2 on cl2.idClient = jb2.idClient where cl2.idClient = cl.idClient and po2.idPO=po.idPO and jb.jobNo = jb2.jobNo and hw2.idEmployee = em.idEmployee and SUBSTRING( wc.name,1,iif(CHARINDEX('-',wc.name)=0, len(wc.name) ,(CHARINDEX('-',wc.name)-1)))=SUBSTRING( wc2.name,1,iif(CHARINDEX('-',wc2.name)=0, len(wc2.name) ,(CHARINDEX('-',wc2.name)-1)))and wc.jobNo = wc2.jobNo and hw2.dateWorked between @IntialDate and @FinalDate) as 'hoursOT',
+		SUBSTRING( wc.name,1,iif(CHARINDEX('-',wc.name)=0, len(wc.name) ,(CHARINDEX('-',wc.name)-1))) as 'Code',
+		hw.schedule as 'Shift',
+		CONCAT(em.lastName,' ',em.firstName,' ',em.middleName) as 'Employee',
+		em.numberEmploye as 'Emp: Number',
+		em.typeEmployee as 'class'
+		from hoursWorked as hw 
+					inner join employees as em on hw.idEmployee = em.idEmployee
+					inner join workCode as wc on wc.idWorkCode = hw.idWorkCode and wc.jobNo = hw.jobNo
+					inner join task as tk on tk.idAux = hw.idAux 
+					inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO 
+					inner join projectOrder as po on po.idPO = wo.idPO and wo.jobNo = po.jobNo 
+					inner join job as jb on jb.jobNo = po.jobNo
+					inner join clients  as cl on cl.idClient = jb.idClient
+		where hw.dateWorked between @IntialDate and @FinalDate and cl.numberClient = @clientnum and jb.jobNo like iif(@all=1,'%',convert(nvarchar,@job))
+		) as T1 where T1.hoursST > 0 or T1.hoursOT>0 order by T1.idPO 
 end
 go
 
+alter proc [dbo].[sp_Invoice_PO]
+@numberClient  int,
+@startDate date, 
+@FinalDate date, 
+@idPO bigint,
+@all bit 
+as 
+begin 
+select 
+	cl.numberClient,
+	cl.companyName,
+	cl.payTerms,
+	jb.jobNo,
+	po.idPO, 
+	SUBSTRING( wc.name,1,iif(CHARINDEX('-',wc.name)=0, len(wc.name) ,(CHARINDEX('-',wc.name)-1))) 'Class',
+	hw.hoursST,
+	(hw.hoursST*wc.billingRate1) as 'CostST',
+	hw.hoursOT,
+	(hw.hoursOT*wc.billingRateOT) as 'CostOT',
+	isnull((select sum(amount) from expensesUsed as exu where exu.idHorsWorked = hw.idHorsWorked and exu.dateExpense between @startDate and @FinalDate),0)as 'Perdiem'
+	into #TablaHorasClassPerdiem
+	from hoursWorked as hw 
+		inner join workCode as wc on wc.idWorkCode = hw.idWorkCode and wc.jobNo = hw.jobNo
+		inner join task as tk on tk.idAux = hw.idAux 
+		inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO
+		inner join projectOrder as po on po.idPO = wo.idPO and wo.jobNo = po.jobNo
+		inner join job as jb on po.jobNo = jb.jobNo
+		inner join clients as cl on cl.idClient = jb.idClient
+		where cl.numberClient = @numberClient and hw.dateWorked between @startDate and @FinalDate and po.idPO like iif(@all = 1 ,'%%%',convert(nvarchar, @idPO))
+
+select
+	distinct
+	t1.numberClient,
+	t1.companyName,
+	t1.payTerms,
+	t1.jobNo,
+	t1.idPO,
+	t1.Class,
+	(select
+	sum(hoursST)
+	from #TablaHorasClassPerdiem as t2 
+	where t2.numberClient = t2.numberClient and t2.jobNo = t1.jobNo and t2.idPO	= t1.idPO and t2.Class = t1.Class) as 'ST',
+	(select
+	sum(CostST)
+	from #TablaHorasClassPerdiem as t2 
+	where t2.numberClient = t2.numberClient and t2.jobNo = t1.jobNo and t2.idPO	= t1.idPO and t2.Class = t1.Class) as 'CostST',
+	(select
+	sum(hoursOT)
+	from #TablaHorasClassPerdiem as t2 
+	where t2.numberClient = t2.numberClient and t2.jobNo = t1.jobNo and t2.idPO	= t1.idPO and t2.Class = t1.Class) as 'OT',
+	(select
+	sum(CostOT)
+	from #TablaHorasClassPerdiem as t2 
+	where t2.numberClient = t2.numberClient and t2.jobNo = t1.jobNo and t2.idPO	= t1.idPO and t2.Class = t1.Class) as 'CostOT',
+	(select
+	sum(perdiem)
+	from #TablaHorasClassPerdiem as t2 
+	where t2.numberClient = t2.numberClient and t2.jobNo = t1.jobNo and t2.idPO	= t1.idPO and t2.Class = t1.Class) as 'Perdiem'
+from #TablaHorasClassPerdiem as t1 
+drop table #TablaHorasClassPerdiem
+end
+go
+
+ALTER proc [dbo].[select_TimeSheet_Report]
+	@IntialDate date,
+	@FinalDate date,
+	@numclient int,
+	@job bigint,
+	@all bit
+as 
+begin
+	if @IntialDate is not null and @FinalDate is not null
+	begin 
+			select  
+		T1.jobNo,t1.idPO,t1.task,t1.equipament as 'equipment',t1.description, t1.accountNum,
+		SUM(t1.hoursST) AS 'hoursST',SUM(t1.hoursOT)AS 'hoursOT',SUM(t1.hours3) AS 'hours3',t1.Code,t1.Shift,t1.expCode,t1.Complete,
+		t1.hrEst,t1.Employee,t1.[Emp: Number],t1.class,  clg.companyName
+		from (
+			select distinct
+			jb.jobNo,
+			po.idPO,
+			CONCAT(wo.idWO,'-',tk.task)AS 'task' ,
+			tk.equipament,
+			tk.description,
+			tk.accountNum,
+			(select iif(SUM(hw1.hoursST)is null,0,SUM(hw1.hoursST)) from hoursWorked as hw1 inner join workCode as wc1 on wc1.idWorkCode = hw.idWorkCode and wc1.jobNo = hw.jobNo inner join task as tk1 on tk1.idAux = hw1.idAux inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO inner join projectOrder as po1 on po1.idPO = wo1.idPO and wo1.jobNo = po1.jobNo inner join job as jb1 on jb1.jobNo = po1.jobNo where hw1.dateWorked = hw.dateWorked and em.idEmployee = hw1.idEmployee and jb.jobNo = jb1.jobNo and po1.idPO = po.idPO and wo.idAuxWO = wo1.idAuxWO and tk1.idAux = tk.idAux and wc1.jobNo = jb.jobNo and not wc1.name like '%6.4%' ) as 'hoursST',
+			(select iif(SUM(hw1.hoursOT)is null,0,SUM(hw1.hoursOT)) from hoursWorked as hw1 inner join workCode as wc1 on wc1.idWorkCode = hw.idWorkCode and wc1.jobNo = hw.jobNo inner join task as tk1 on tk1.idAux = hw1.idAux inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO inner join projectOrder as po1 on po1.idPO = wo1.idPO and wo1.jobNo = po1.jobNo inner join job as jb1 on jb1.jobNo = po1.jobNo where hw1.dateWorked = hw.dateWorked and em.idEmployee = hw1.idEmployee and jb.jobNo = jb1.jobNo and po1.idPO = po.idPO and wo.idAuxWO = wo1.idAuxWO and tk1.idAux = tk.idAux and wc1.jobNo = jb.jobNo and not wc1.name like '%6.4%' ) as 'hoursOT',
+			(select iif(SUM(hw1.hours3 )is null,0,SUM(hw1.hours3 )) from hoursWorked as hw1 inner join workCode as wc1 on wc1.idWorkCode = hw.idWorkCode and wc1.jobNo = hw.jobNo inner join task as tk1 on tk1.idAux = hw1.idAux inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO inner join projectOrder as po1 on po1.idPO = wo1.idPO and wo1.jobNo = po1.jobNo inner join job as jb1 on jb1.jobNo = po1.jobNo where hw1.dateWorked = hw.dateWorked and em.idEmployee = hw1.idEmployee and jb.jobNo = jb1.jobNo and po1.idPO = po.idPO and wo.idAuxWO = wo1.idAuxWO and tk1.idAux = tk.idAux and wc1.jobNo = jb.jobNo and not wc1.name like '%6.4%' ) as 'hours3',
+			SUBSTRING( wc.name,1,iif(CHARINDEX('-',wc.name)=0, len(wc.name) ,(CHARINDEX('-',wc.name)-1))) as 'Code',
+			hw.schedule as 'Shift', 
+			tk.expCode,
+			concat(tk.percentComplete,'%')  as 'Complete',
+			tk.estimateHours as 'hrEst',
+			CONCAT(em.lastName,' ',em.firstName,' ',em.middleName) as 'Employee', 
+			em.numberEmploye as 'Emp: Number' ,
+			em.typeEmployee as 'class'
+			from hoursWorked as hw 
+			inner join employees as em on hw.idEmployee = em.idEmployee
+			inner join workCode as wc on wc.idWorkCode = hw.idWorkCode and wc.jobNo = hw.jobNo
+			inner join task as tk on tk.idAux = hw.idAux 
+			inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO 
+			inner join projectOrder as po on po.idPO = wo.idPO and wo.jobNo = po.jobNo 
+			inner join job as jb on jb.jobNo = po.jobNo
+			inner join clients as cl on cl.idClient=jb.idClient
+			where hw.dateWorked between @IntialDate and @FinalDate and (hw.hoursST > 0 or hw.hoursOT>0 or hw.hours3>0) and cl.numberClient=@numclient and jb.jobNo like IIF(@all=1,'%%',convert(nvarchar,@job))--and em.numberEmploye = 16874
+		) as T1	inner join job as jbg on jbg.jobNo = T1.jobNo inner join clients as clg on clg.idClient = jbg.idClient
+		group by T1.jobNo,t1.idPO,t1.Task,t1.equipament,t1.description,t1.hoursST, t1.accountNum,t1.hoursOT,t1.hours3,t1.Code,t1.Shift,t1.expCode,t1.Complete,
+		t1.hrEst,t1.Employee,t1.[Emp: Number],t1.class, clg.companyName
+		order by t1.Task,t1.[Emp: Number]
+end
+end
+GO

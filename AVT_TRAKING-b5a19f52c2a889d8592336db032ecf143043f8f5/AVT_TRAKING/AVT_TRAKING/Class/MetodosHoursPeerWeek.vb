@@ -673,11 +673,11 @@ T1.Shifth,
 T1.[Level 1 ID],
 T1.[Level 2 ID],
 T1.[S/T Hrs],
-(iif(T1.[S/T Hrs] > 0 , 'NA','')) as 'S/T Hrs Activity Code',
+(iif(T1.[S/T Hrs] > 0 , 'N/A','')) as 'S/T Hrs Activity Code',
 T1.[O/T Hrs],
-(iif(T1.[O/T Hrs] > 0 , 'NA','')) as 'O/T Hrs Activity Code',
+(iif(T1.[O/T Hrs] > 0 , 'N/A','')) as 'O/T Hrs Activity Code',
 T1.[D/T Hrs],
-(iif(T1.[D/T Hrs] > 0 , 'NA','')) as 'D/T Hrs Activity Code',
+(iif(T1.[D/T Hrs] > 0 , 'N/A','')) as 'D/T Hrs Activity Code',
 '' as 'Extra Change'
  from (
 	
@@ -690,14 +690,14 @@ T1.[D/T Hrs],
 	hw.schedule as 'Shifth', 
 	iif((select CHARINDEX('6.4',wc.name))>0,'NB',concat(wo.idWO,'-', tk.task)) as 'Level 1 ID',
 	po.idPO as 'Level 2 ID',
-	(select SUM( hw1.hoursST) from hoursWorked as hw1 inner join workCode as wc1 on wc1.idworkcode = hw1.idWorkCode inner join task as tk1 on tk1.idAux = hw1.idAux inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO inner join projectOrder as po1 on po1.idPO =wo1.idPO and po1.jobNo = wo1.jobNo 
+	(select SUM( hw1.hoursST) from hoursWorked as hw1 inner join workCode as wc1 on wc1.idworkcode = hw1.idWorkCode and wc1.jobNo = hw1.jobNo inner join task as tk1 on tk1.idAux = hw1.idAux inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO inner join projectOrder as po1 on po1.idPO =wo1.idPO and po1.jobNo = wo1.jobNo 
 		where tk1.idAux = tk.idAux  and wo1.idAuxWO = wo.idAuxWO and po1.idPO =po.idPO and hw1.schedule = hw.schedule and hw1.idEmployee = hw.idEmployee and hw1.dateWorked = hw.dateWorked and  wc1.EQExp1 = wc.EQExp1)as 'S/T Hrs',
-	(select SUM( hw1.hoursOT) from hoursWorked as hw1 inner join workCode as wc1 on wc1.idworkcode = hw1.idWorkCode inner join task as tk1 on tk1.idAux = hw1.idAux inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO inner join projectOrder as po1 on po1.idPO =wo1.idPO and po1.jobNo = wo1.jobNo 
+	(select SUM( hw1.hoursOT) from hoursWorked as hw1 inner join workCode as wc1 on wc1.idworkcode = hw1.idWorkCode and wc1.jobNo = hw1.jobNo inner join task as tk1 on tk1.idAux = hw1.idAux inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO inner join projectOrder as po1 on po1.idPO =wo1.idPO and po1.jobNo = wo1.jobNo 
 		where tk1.idAux = tk.idAux  and wo1.idAuxWO = wo.idAuxWO and po1.idPO =po.idPO and hw1.schedule = hw.schedule and hw1.idEmployee = hw.idEmployee and hw1.dateWorked = hw.dateWorked and wc1.EQExp1 = wc.EQExp1)as 'O/T Hrs',
-	(select SUM( hw1.hours3) from hoursWorked as hw1 inner join workCode as wc1 on wc1.idworkcode = hw1.idWorkCode inner join task as tk1 on tk1.idAux = hw1.idAux inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO inner join projectOrder as po1 on po1.idPO =wo1.idPO and po1.jobNo = wo1.jobNo 
+	(select SUM( hw1.hours3) from hoursWorked as hw1 inner join workCode as wc1 on wc1.idworkcode = hw1.idWorkCode  and wc1.jobNo = hw1.jobNo inner join task as tk1 on tk1.idAux = hw1.idAux inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO inner join projectOrder as po1 on po1.idPO =wo1.idPO and po1.jobNo = wo1.jobNo 
 		where tk1.idAux = tk.idAux  and wo1.idAuxWO = wo.idAuxWO and po1.idPO =po.idPO and hw1.schedule = hw.schedule and hw1.idEmployee = hw.idEmployee and hw1.dateWorked = hw.dateWorked and wc1.EQExp1 = wc.EQExp1)as 'D/T Hrs'
 	from hoursWorked as hw 
-	inner join workCode as wc on wc.idWorkCode = hw.idWorkCode
+	inner join workCode as wc on wc.idWorkCode = hw.idWorkCode and wc.jobNo = hw.jobNo
 	inner join employees as em on hw.idEmployee = em.idEmployee
 	inner join task as tk on tk.idAux = hw.idAux
 	inner join workOrder as wo on tk.idAuxWO = wo.idAuxWO 
