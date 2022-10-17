@@ -537,7 +537,7 @@ end", conn)
         End Try
     End Function
 
-    Public Function selectPayroll(ByVal tbl As DataGridView, ByVal startDate As Date) As Boolean
+    Public Function selectPayroll(ByVal tbl As DataGridView, ByVal startDate As Date, Optional jobNo As String = "") As Boolean
         Try
             conectar()
             Dim cmd As New SqlCommand("select distinct 
@@ -548,9 +548,9 @@ end", conn)
 	SUBSTRING(CONVERT(nvarchar , po.jobNo),LEN( CONVERT(nvarchar , po.jobNo))-2,LEN( CONVERT(nvarchar , po.jobNo))+1) as 'Sub Job Number',
 	jb.costDistribution,
 	iif(DATEPART(dw,hw.dateWorked)='1',7,(convert (int ,DATEPART(dw,hw.dateWorked))-1)) as 'DayOfWeek',
-	(select iif(SUM(hw1.hoursST)is null,0,SUM(hw1.hoursST)) from hoursWorked as hw1 inner join workCode as wc1 on wc1.idWorkCode = hw1.idWorkCode inner join task as tk1 on tk1.idAux = hw1.idAux inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO inner join projectOrder as po1 on po1.idPO = wo1.idPO and wo1.jobNo = po1.jobNo inner join job as jb1 on jb1.jobNo = po1.jobNo where hw1.dateWorked = hw.dateWorked and em.idEmployee = hw1.idEmployee and jb.jobNo = jb1.jobNo and not wc1.name like '%6.4%' ) as 'RegularHours',
-	(select iif(SUM(hw1.hoursOT)is null,0,SUM(hw1.hoursOT)) from hoursWorked as hw1 inner join workCode as wc1 on wc1.idWorkCode = hw1.idWorkCode inner join task as tk1 on tk1.idAux = hw1.idAux inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO inner join projectOrder as po1 on po1.idPO = wo1.idPO and wo1.jobNo = po1.jobNo inner join job as jb1 on jb1.jobNo = po1.jobNo where hw1.dateWorked = hw.dateWorked and em.idEmployee = hw1.idEmployee and jb.jobNo = jb1.jobNo and not wc1.name like '%6.4%' ) as 'OvertimeHours',
-	(select iif(SUM(hw1.hours3) is null,0,SUM(hw1.hours3))  from hoursWorked as hw1 inner join workCode as wc1 on wc1.idWorkCode = hw1.idWorkCode inner join task as tk1 on tk1.idAux = hw1.idAux inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO inner join projectOrder as po1 on po1.idPO = wo1.idPO and wo1.jobNo = po1.jobNo inner join job as jb1 on jb1.jobNo = po1.jobNo where hw1.dateWorked = hw.dateWorked and em.idEmployee = hw1.idEmployee and jb.jobNo = jb1.jobNo and not wc1.name like '%6.4%' ) as 'OtherHours'
+	(select iif(SUM(hw1.hoursST)is null,0,SUM(hw1.hoursST)) from hoursWorked as hw1 inner join workCode as wc1 on wc1.idWorkCode = hw1.idWorkCode and wc1.jobNo = hw1.jobNo inner join task as tk1 on tk1.idAux = hw1.idAux inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO inner join projectOrder as po1 on po1.idPO = wo1.idPO and wo1.jobNo = po1.jobNo inner join job as jb1 on jb1.jobNo = po1.jobNo where hw1.dateWorked = hw.dateWorked and em.idEmployee = hw1.idEmployee and jb.jobNo = jb1.jobNo and wc1.jobNo = jb.jobNo and not wc1.name like '%6.4%' ) as 'RegularHours',
+	(select iif(SUM(hw1.hoursOT)is null,0,SUM(hw1.hoursOT)) from hoursWorked as hw1 inner join workCode as wc1 on wc1.idWorkCode = hw1.idWorkCode and wc1.jobNo = hw1.jobNo inner join task as tk1 on tk1.idAux = hw1.idAux inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO inner join projectOrder as po1 on po1.idPO = wo1.idPO and wo1.jobNo = po1.jobNo inner join job as jb1 on jb1.jobNo = po1.jobNo where hw1.dateWorked = hw.dateWorked and em.idEmployee = hw1.idEmployee and jb.jobNo = jb1.jobNo and wc1.jobNo = jb.jobNo and not wc1.name like '%6.4%' ) as 'OvertimeHours',
+	(select iif(SUM(hw1.hours3) is null,0,SUM(hw1.hours3))  from hoursWorked as hw1 inner join workCode as wc1 on wc1.idWorkCode = hw1.idWorkCode and wc1.jobNo = hw1.jobNo inner join task as tk1 on tk1.idAux = hw1.idAux inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO inner join projectOrder as po1 on po1.idPO = wo1.idPO and wo1.jobNo = po1.jobNo inner join job as jb1 on jb1.jobNo = po1.jobNo where hw1.dateWorked = hw.dateWorked and em.idEmployee = hw1.idEmployee and jb.jobNo = jb1.jobNo and wc1.jobNo = jb.jobNo and not wc1.name like '%6.4%' ) as 'OtherHours'
  from hoursWorked as hw
 inner join employees as em  on hw.idEmployee = em.idEmployee
 inner join workCode as wc on wc.idWorkCode = hw.idWorkCode
@@ -558,7 +558,7 @@ inner join task as tk on tk.idAux = hw.idAux
 inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO
 inner join projectOrder as po on po.idPO = wo.idPO and wo.jobNo = po.jobNo
 inner join job as jb on jb.jobNo = po.jobNo
-where (hw.dateWorked between '" + validaFechaParaSQl(startDate) + "' and DATEADD(day,6,'" + validaFechaParaSQl(startDate) + "') and not wc.name like '%6.4%') 
+where (hw.dateWorked between '" + validaFechaParaSQl(startDate) + "' and DATEADD(day,6,'" + validaFechaParaSQl(startDate) + "') and not wc.name like '%6.4%') " + If(jobNo = "", "", " and jb.jobNo = " + jobNo) + "
 order by em.numberEmploye", conn)
             If tbl.Rows IsNot Nothing Then
                 tbl.Rows.Clear()
@@ -577,7 +577,7 @@ order by em.numberEmploye", conn)
         End Try
     End Function
 
-    Public Function selectNONBILLABLE(ByVal tbl As DataGridView, ByVal startDate As Date) As Boolean
+    Public Function selectNONBILLABLE(ByVal tbl As DataGridView, ByVal startDate As Date, Optional jobNo As String = "") As Boolean
         Try
             conectar()
             Dim cmd As New SqlCommand("select 
@@ -591,13 +591,13 @@ hw.hoursOT,
 (select payRate1 from payRate where datePayRate = (select MAX(datePayRate) from payRate where idEmployee = em.idEmployee))as 'STRate',
 wc.name as 'description'
 from hoursWorked as hw 
-inner join workCode as wc on wc.idWorkCode = hw.idWorkCode
+inner join workCode as wc on wc.idWorkCode = hw.idWorkCode and wc.jobNo = hw.jobNo
 inner join employees as em on em.idEmployee = hw.idEmployee
 inner join task as tk on tk.idAux = hw.idAux
 inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO
 inner join projectOrder as po on po.idPO = wo.idPO and wo.jobNo = po.jobNo
 inner join job as jb on jb.jobNo = po.jobNo
-where (hw.dateWorked between '" + validaFechaParaSQl(startDate) + "' and DATEADD(day,6,'" + validaFechaParaSQl(startDate) + "')) and wc.name like '%6.4%'
+where (hw.dateWorked between '" + validaFechaParaSQl(startDate) + "' and DATEADD(day,6,'" + validaFechaParaSQl(startDate) + "')) and wc.name like '%6.4%' " + If(jobNo = "", "", " and jb.jobNo = " + jobNo + "") + "
 order by em.numberEmploye", conn)
             If tbl.Rows IsNot Nothing Then
                 tbl.Rows.Clear()

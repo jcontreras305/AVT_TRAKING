@@ -7,6 +7,8 @@ Public Class PayRoll
         mtdHPW.selectWeeks(tblWeeks)
         sprRowStartNBL.Enabled = False
         sprRowStartTSD.Enabled = True
+        llenarComboClientsReports(cmbClients)
+        chbALLJobs.Checked = True
     End Sub
     Private Sub PictureBox4_Click(sender As Object, e As EventArgs) Handles PictureBox4.Click
         Me.Close()
@@ -192,8 +194,17 @@ Public Class PayRoll
     End Sub
     Private Sub btnReFresh_Click(sender As Object, e As EventArgs) Handles btnReFresh.Click
         Try
-            mtdHPW.selectPayroll(tblTime, dtpStartTime.Value)
-            mtdHPW.selectNONBILLABLE(tblNonBillable, dtpStartTime.Value)
+            If chbALLJobs.Checked Then
+                mtdHPW.selectPayroll(tblTime, dtpStartTime.Value)
+                mtdHPW.selectNONBILLABLE(tblNonBillable, dtpStartTime.Value)
+            Else
+                If cmbJobs.SelectedIndex > -1 Then
+                    mtdHPW.selectPayroll(tblTime, dtpStartTime.Value, If(chbALLJobs.Checked, "", cmbJobs.SelectedItem))
+                    mtdHPW.selectNONBILLABLE(tblNonBillable, dtpStartTime.Value, If(chbALLJobs.Checked, "", cmbJobs.SelectedItem))
+                Else
+                    MessageBox.Show("Please select a JobNo. or Check for All Jobs.", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                End If
+            End If
         Catch ex As Exception
 
         End Try
@@ -375,5 +386,22 @@ Public Class PayRoll
     Private Sub TitleBar_MouseMove(sender As Object, e As MouseEventArgs) Handles TitleBar.MouseMove
         ReleaseCapture()
         SendMessage(Me.Handle, &H112&, &HF012&, 0)
+    End Sub
+
+    Private Sub cmbClients_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbClients.SelectedIndexChanged
+        Try
+            Dim array() As String = cmbClients.Items(cmbClients.SelectedIndex).ToString.Split(" ")
+            llenarComboJobsReports(cmbJobs, array(0))
+        Catch ex As Exception
+
+        End Try
+    End Sub
+
+    Private Sub chbALLJobs_CheckedChanged(sender As Object, e As EventArgs) Handles chbALLJobs.CheckedChanged
+        If chbALLJobs.Checked Then
+            cmbJobs.Enabled = False
+        Else
+            cmbJobs.Enabled = True
+        End If
     End Sub
 End Class

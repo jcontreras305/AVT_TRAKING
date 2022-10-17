@@ -3668,7 +3668,7 @@ drop table #TablaHorasClassPerdiem
 end
 go
 
-ALTER proc [dbo].[select_TimeSheet_Report]
+alter proc [dbo].[select_TimeSheet_Report]
 	@IntialDate date,
 	@FinalDate date,
 	@numclient int,
@@ -3678,21 +3678,33 @@ as
 begin
 	if @IntialDate is not null and @FinalDate is not null
 	begin 
-			select  
-		T1.jobNo,t1.idPO,t1.task,t1.equipament as 'equipment',t1.description, t1.accountNum,
-		SUM(t1.hoursST) AS 'hoursST',SUM(t1.hoursOT)AS 'hoursOT',SUM(t1.hours3) AS 'hours3',t1.Code,t1.Shift,t1.expCode,t1.Complete,
-		t1.hrEst,t1.Employee,t1.[Emp: Number],t1.class,  clg.companyName
-		from (
-			select distinct
+		select distinct
+			T1.[jobNo],T1.[idPO],T1.[task],T1.[equipment], 
+			T1.[description],
+			T1.[accountNum],
+			SUM(T1.[hoursST]) OVER (PARTITION BY T1.[jobNo],T1.[idPO],T1.[task],T1.[Code],T1.[Shift],T1.[Emp: Number]) as 'hoursST',
+			SUM(T1.[hoursOT]) OVER (PARTITION BY T1.[jobNo],T1.[idPO],T1.[task],T1.[Code],T1.[Shift],T1.[Emp: Number])as 'hoursOT',
+			SUM(T1.[hours3]) OVER (PARTITION BY T1.[jobNo],T1.[idPO],T1.[task],T1.[Code],T1.[Shift],T1.[Emp: Number]) as 'hours3',
+			T1.[Code],
+			T1.[Shift],
+			T1.[expCode],
+			T1.[Complete],
+			T1.[hrEst],
+			T1.[Employee],
+			T1.[Emp: Number],
+			T1.[class],
+			T1.[companyName]
+			from 
+			(select
 			jb.jobNo,
 			po.idPO,
 			CONCAT(wo.idWO,'-',tk.task)AS 'task' ,
-			tk.equipament,
-			tk.description,
+			tk.equipament as 'equipment',
+			tk.[description],
 			tk.accountNum,
-			(select iif(SUM(hw1.hoursST)is null,0,SUM(hw1.hoursST)) from hoursWorked as hw1 inner join workCode as wc1 on wc1.idWorkCode = hw.idWorkCode and wc1.jobNo = hw.jobNo inner join task as tk1 on tk1.idAux = hw1.idAux inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO inner join projectOrder as po1 on po1.idPO = wo1.idPO and wo1.jobNo = po1.jobNo inner join job as jb1 on jb1.jobNo = po1.jobNo where hw1.dateWorked = hw.dateWorked and em.idEmployee = hw1.idEmployee and jb.jobNo = jb1.jobNo and po1.idPO = po.idPO and wo.idAuxWO = wo1.idAuxWO and tk1.idAux = tk.idAux and wc1.jobNo = jb.jobNo and not wc1.name like '%6.4%' ) as 'hoursST',
-			(select iif(SUM(hw1.hoursOT)is null,0,SUM(hw1.hoursOT)) from hoursWorked as hw1 inner join workCode as wc1 on wc1.idWorkCode = hw.idWorkCode and wc1.jobNo = hw.jobNo inner join task as tk1 on tk1.idAux = hw1.idAux inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO inner join projectOrder as po1 on po1.idPO = wo1.idPO and wo1.jobNo = po1.jobNo inner join job as jb1 on jb1.jobNo = po1.jobNo where hw1.dateWorked = hw.dateWorked and em.idEmployee = hw1.idEmployee and jb.jobNo = jb1.jobNo and po1.idPO = po.idPO and wo.idAuxWO = wo1.idAuxWO and tk1.idAux = tk.idAux and wc1.jobNo = jb.jobNo and not wc1.name like '%6.4%' ) as 'hoursOT',
-			(select iif(SUM(hw1.hours3 )is null,0,SUM(hw1.hours3 )) from hoursWorked as hw1 inner join workCode as wc1 on wc1.idWorkCode = hw.idWorkCode and wc1.jobNo = hw.jobNo inner join task as tk1 on tk1.idAux = hw1.idAux inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO inner join projectOrder as po1 on po1.idPO = wo1.idPO and wo1.jobNo = po1.jobNo inner join job as jb1 on jb1.jobNo = po1.jobNo where hw1.dateWorked = hw.dateWorked and em.idEmployee = hw1.idEmployee and jb.jobNo = jb1.jobNo and po1.idPO = po.idPO and wo.idAuxWO = wo1.idAuxWO and tk1.idAux = tk.idAux and wc1.jobNo = jb.jobNo and not wc1.name like '%6.4%' ) as 'hours3',
+			hw.hoursST,
+			hw.hoursOT,
+			hw.hours3,
 			SUBSTRING( wc.name,1,iif(CHARINDEX('-',wc.name)=0, len(wc.name) ,(CHARINDEX('-',wc.name)-1))) as 'Code',
 			hw.schedule as 'Shift', 
 			tk.expCode,
@@ -3700,20 +3712,19 @@ begin
 			tk.estimateHours as 'hrEst',
 			CONCAT(em.lastName,' ',em.firstName,' ',em.middleName) as 'Employee', 
 			em.numberEmploye as 'Emp: Number' ,
-			em.typeEmployee as 'class'
+			em.typeEmployee as 'class',
+			cl.companyName
 			from hoursWorked as hw 
-			inner join employees as em on hw.idEmployee = em.idEmployee
-			inner join workCode as wc on wc.idWorkCode = hw.idWorkCode and wc.jobNo = hw.jobNo
-			inner join task as tk on tk.idAux = hw.idAux 
-			inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO 
-			inner join projectOrder as po on po.idPO = wo.idPO and wo.jobNo = po.jobNo 
+			inner join workCode as wc on wc.idWorkCode = hw.idworkCode and wc.jobNo = hw.jobNo
+			inner join employees em on hw.idEmployee  = em.idEmployee
+			inner join task as tk on tk.idAux = hw.idAux
+			inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO
+			inner join projectOrder as po on po.idPO = wo.idPO and wo.jobNo = po.jobNo
 			inner join job as jb on jb.jobNo = po.jobNo
-			inner join clients as cl on cl.idClient=jb.idClient
-			where hw.dateWorked between @IntialDate and @FinalDate and (hw.hoursST > 0 or hw.hoursOT>0 or hw.hours3>0) and cl.numberClient=@numclient and jb.jobNo like IIF(@all=1,'%%',convert(nvarchar,@job))--and em.numberEmploye = 16874
-		) as T1	inner join job as jbg on jbg.jobNo = T1.jobNo inner join clients as clg on clg.idClient = jbg.idClient
-		group by T1.jobNo,t1.idPO,t1.Task,t1.equipament,t1.description,t1.hoursST, t1.accountNum,t1.hoursOT,t1.hours3,t1.Code,t1.Shift,t1.expCode,t1.Complete,
-		t1.hrEst,t1.Employee,t1.[Emp: Number],t1.class, clg.companyName
-		order by t1.Task,t1.[Emp: Number]
-end
+			inner join clients as cl on cl.idClient = jb.idClient
+			where
+			hw.dateWorked between @IntialDate and @FinalDate and  wc.name not like '%6.4%' and not wc.name like '%COVID%'
+			) as T1
+	end
 end
 GO

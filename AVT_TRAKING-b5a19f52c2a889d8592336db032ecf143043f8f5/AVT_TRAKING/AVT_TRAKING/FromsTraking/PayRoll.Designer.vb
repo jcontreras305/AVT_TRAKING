@@ -88,6 +88,11 @@ Partial Class PayRoll
         Me.btnDeleteWeek = New System.Windows.Forms.Button()
         Me.btnUpdateWeek = New System.Windows.Forms.Button()
         Me.btnAddWeek = New System.Windows.Forms.Button()
+        Me.cmbClients = New System.Windows.Forms.ComboBox()
+        Me.cmbJobs = New System.Windows.Forms.ComboBox()
+        Me.chbALLJobs = New System.Windows.Forms.CheckBox()
+        Me.Label5 = New System.Windows.Forms.Label()
+        Me.Label6 = New System.Windows.Forms.Label()
         Me.TableLayoutPanel1.SuspendLayout()
         Me.Panel1.SuspendLayout()
         Me.TitleBar.SuspendLayout()
@@ -128,7 +133,7 @@ Partial Class PayRoll
         Me.TableLayoutPanel1.RowCount = 2
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 83.0!))
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-        Me.TableLayoutPanel1.Size = New System.Drawing.Size(800, 553)
+        Me.TableLayoutPanel1.Size = New System.Drawing.Size(928, 553)
         Me.TableLayoutPanel1.TabIndex = 0
         '
         'Panel1
@@ -137,7 +142,7 @@ Partial Class PayRoll
         Me.Panel1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel1.Location = New System.Drawing.Point(3, 3)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(794, 77)
+        Me.Panel1.Size = New System.Drawing.Size(922, 77)
         Me.Panel1.TabIndex = 0
         '
         'TitleBar
@@ -151,14 +156,14 @@ Partial Class PayRoll
         Me.TitleBar.Dock = System.Windows.Forms.DockStyle.Fill
         Me.TitleBar.Location = New System.Drawing.Point(0, 0)
         Me.TitleBar.Name = "TitleBar"
-        Me.TitleBar.Size = New System.Drawing.Size(794, 77)
+        Me.TitleBar.Size = New System.Drawing.Size(922, 77)
         Me.TitleBar.TabIndex = 15
         '
         'PictureBox2
         '
         Me.PictureBox2.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.PictureBox2.Image = Global.AVT_TRAKING.My.Resources.Resources.minimize2
-        Me.PictureBox2.Location = New System.Drawing.Point(730, 4)
+        Me.PictureBox2.Location = New System.Drawing.Point(858, 4)
         Me.PictureBox2.Name = "PictureBox2"
         Me.PictureBox2.Size = New System.Drawing.Size(26, 27)
         Me.PictureBox2.TabIndex = 42
@@ -168,7 +173,7 @@ Partial Class PayRoll
         '
         Me.btnRestore.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnRestore.Image = Global.AVT_TRAKING.My.Resources.Resources.restore2
-        Me.btnRestore.Location = New System.Drawing.Point(761, 3)
+        Me.btnRestore.Location = New System.Drawing.Point(889, 3)
         Me.btnRestore.Name = "btnRestore"
         Me.btnRestore.Size = New System.Drawing.Size(23, 27)
         Me.btnRestore.TabIndex = 41
@@ -178,7 +183,7 @@ Partial Class PayRoll
         '
         Me.btnMaximize.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnMaximize.Image = Global.AVT_TRAKING.My.Resources.Resources.maximize2
-        Me.btnMaximize.Location = New System.Drawing.Point(762, 3)
+        Me.btnMaximize.Location = New System.Drawing.Point(890, 3)
         Me.btnMaximize.Name = "btnMaximize"
         Me.btnMaximize.Size = New System.Drawing.Size(23, 25)
         Me.btnMaximize.TabIndex = 40
@@ -188,7 +193,7 @@ Partial Class PayRoll
         '
         Me.PictureBox4.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.PictureBox4.Image = Global.AVT_TRAKING.My.Resources.Resources._exit
-        Me.PictureBox4.Location = New System.Drawing.Point(754, 36)
+        Me.PictureBox4.Location = New System.Drawing.Point(882, 36)
         Me.PictureBox4.Name = "PictureBox4"
         Me.PictureBox4.Size = New System.Drawing.Size(34, 33)
         Me.PictureBox4.TabIndex = 14
@@ -211,7 +216,7 @@ Partial Class PayRoll
         Me.Panel2.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel2.Location = New System.Drawing.Point(3, 86)
         Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(794, 464)
+        Me.Panel2.Size = New System.Drawing.Size(922, 464)
         Me.Panel2.TabIndex = 1
         '
         'TabControl1
@@ -222,7 +227,7 @@ Partial Class PayRoll
         Me.TabControl1.Location = New System.Drawing.Point(0, 0)
         Me.TabControl1.Name = "TabControl1"
         Me.TabControl1.SelectedIndex = 0
-        Me.TabControl1.Size = New System.Drawing.Size(794, 464)
+        Me.TabControl1.Size = New System.Drawing.Size(922, 464)
         Me.TabControl1.TabIndex = 0
         '
         'TabPage1
@@ -231,7 +236,7 @@ Partial Class PayRoll
         Me.TabPage1.Location = New System.Drawing.Point(4, 22)
         Me.TabPage1.Name = "TabPage1"
         Me.TabPage1.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage1.Size = New System.Drawing.Size(786, 438)
+        Me.TabPage1.Size = New System.Drawing.Size(914, 438)
         Me.TabPage1.TabIndex = 0
         Me.TabPage1.Text = "Payroll"
         Me.TabPage1.UseVisualStyleBackColor = True
@@ -246,14 +251,19 @@ Partial Class PayRoll
         Me.TableLayoutPanel2.Location = New System.Drawing.Point(3, 3)
         Me.TableLayoutPanel2.Name = "TableLayoutPanel2"
         Me.TableLayoutPanel2.RowCount = 2
-        Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 15.50926!))
-        Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 84.49074!))
-        Me.TableLayoutPanel2.Size = New System.Drawing.Size(780, 432)
+        Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20.60185!))
+        Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 79.39815!))
+        Me.TableLayoutPanel2.Size = New System.Drawing.Size(908, 432)
         Me.TableLayoutPanel2.TabIndex = 0
         '
         'Panel3
         '
         Me.Panel3.BackColor = System.Drawing.Color.FromArgb(CType(CType(83, Byte), Integer), CType(CType(93, Byte), Integer), CType(CType(102, Byte), Integer))
+        Me.Panel3.Controls.Add(Me.Label6)
+        Me.Panel3.Controls.Add(Me.Label5)
+        Me.Panel3.Controls.Add(Me.chbALLJobs)
+        Me.Panel3.Controls.Add(Me.cmbJobs)
+        Me.Panel3.Controls.Add(Me.cmbClients)
         Me.Panel3.Controls.Add(Me.txtSalida)
         Me.Panel3.Controls.Add(Me.Label2)
         Me.Panel3.Controls.Add(Me.Label1)
@@ -265,7 +275,7 @@ Partial Class PayRoll
         Me.Panel3.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel3.Location = New System.Drawing.Point(3, 3)
         Me.Panel3.Name = "Panel3"
-        Me.Panel3.Size = New System.Drawing.Size(774, 61)
+        Me.Panel3.Size = New System.Drawing.Size(902, 83)
         Me.Panel3.TabIndex = 0
         '
         'txtSalida
@@ -273,7 +283,7 @@ Partial Class PayRoll
         Me.txtSalida.AutoSize = True
         Me.txtSalida.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtSalida.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.txtSalida.Location = New System.Drawing.Point(7, 40)
+        Me.txtSalida.Location = New System.Drawing.Point(7, 57)
         Me.txtSalida.Name = "txtSalida"
         Me.txtSalida.Size = New System.Drawing.Size(61, 13)
         Me.txtSalida.TabIndex = 7
@@ -284,7 +294,7 @@ Partial Class PayRoll
         Me.Label2.AutoSize = True
         Me.Label2.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label2.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.Label2.Location = New System.Drawing.Point(324, 13)
+        Me.Label2.Location = New System.Drawing.Point(647, 18)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(97, 13)
         Me.Label2.TabIndex = 6
@@ -310,9 +320,9 @@ Partial Class PayRoll
         Me.btnFindMasterPayroll.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.btnFindMasterPayroll.Image = Global.AVT_TRAKING.My.Resources.Resources.excel
         Me.btnFindMasterPayroll.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnFindMasterPayroll.Location = New System.Drawing.Point(568, 3)
+        Me.btnFindMasterPayroll.Location = New System.Drawing.Point(792, 42)
         Me.btnFindMasterPayroll.Name = "btnFindMasterPayroll"
-        Me.btnFindMasterPayroll.Size = New System.Drawing.Size(82, 45)
+        Me.btnFindMasterPayroll.Size = New System.Drawing.Size(82, 38)
         Me.btnFindMasterPayroll.TabIndex = 4
         Me.btnFindMasterPayroll.Text = "Find"
         Me.btnFindMasterPayroll.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -320,7 +330,7 @@ Partial Class PayRoll
         '
         'sprRowStartNBL
         '
-        Me.sprRowStartNBL.Location = New System.Drawing.Point(503, 11)
+        Me.sprRowStartNBL.Location = New System.Drawing.Point(826, 16)
         Me.sprRowStartNBL.Maximum = New Decimal(New Integer() {10000, 0, 0, 0})
         Me.sprRowStartNBL.Minimum = New Decimal(New Integer() {2, 0, 0, 0})
         Me.sprRowStartNBL.Name = "sprRowStartNBL"
@@ -330,7 +340,7 @@ Partial Class PayRoll
         '
         'sprRowStartTSD
         '
-        Me.sprRowStartTSD.Location = New System.Drawing.Point(427, 11)
+        Me.sprRowStartTSD.Location = New System.Drawing.Point(750, 16)
         Me.sprRowStartTSD.Maximum = New Decimal(New Integer() {10000, 0, 0, 0})
         Me.sprRowStartTSD.Minimum = New Decimal(New Integer() {2, 0, 0, 0})
         Me.sprRowStartTSD.Name = "sprRowStartTSD"
@@ -347,9 +357,9 @@ Partial Class PayRoll
         Me.btnReFresh.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.btnReFresh.Image = Global.AVT_TRAKING.My.Resources.Resources.refresh
         Me.btnReFresh.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnReFresh.Location = New System.Drawing.Point(231, 11)
+        Me.btnReFresh.Location = New System.Drawing.Point(687, 42)
         Me.btnReFresh.Name = "btnReFresh"
-        Me.btnReFresh.Size = New System.Drawing.Size(87, 23)
+        Me.btnReFresh.Size = New System.Drawing.Size(87, 38)
         Me.btnReFresh.TabIndex = 1
         Me.btnReFresh.Text = "Refresh"
         Me.btnReFresh.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -361,7 +371,7 @@ Partial Class PayRoll
         Me.dtpStartTime.Format = System.Windows.Forms.DateTimePickerFormat.Custom
         Me.dtpStartTime.Location = New System.Drawing.Point(76, 12)
         Me.dtpStartTime.Name = "dtpStartTime"
-        Me.dtpStartTime.Size = New System.Drawing.Size(139, 20)
+        Me.dtpStartTime.Size = New System.Drawing.Size(100, 20)
         Me.dtpStartTime.TabIndex = 0
         '
         'TabControl2
@@ -369,10 +379,10 @@ Partial Class PayRoll
         Me.TabControl2.Controls.Add(Me.TabPage3)
         Me.TabControl2.Controls.Add(Me.TabPage4)
         Me.TabControl2.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.TabControl2.Location = New System.Drawing.Point(3, 70)
+        Me.TabControl2.Location = New System.Drawing.Point(3, 92)
         Me.TabControl2.Name = "TabControl2"
         Me.TabControl2.SelectedIndex = 0
-        Me.TabControl2.Size = New System.Drawing.Size(774, 359)
+        Me.TabControl2.Size = New System.Drawing.Size(902, 337)
         Me.TabControl2.TabIndex = 1
         '
         'TabPage3
@@ -381,7 +391,7 @@ Partial Class PayRoll
         Me.TabPage3.Location = New System.Drawing.Point(4, 22)
         Me.TabPage3.Name = "TabPage3"
         Me.TabPage3.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage3.Size = New System.Drawing.Size(766, 333)
+        Me.TabPage3.Size = New System.Drawing.Size(894, 311)
         Me.TabPage3.TabIndex = 0
         Me.TabPage3.Text = "Time Sheet Data"
         Me.TabPage3.UseVisualStyleBackColor = True
@@ -396,7 +406,7 @@ Partial Class PayRoll
         Me.tblTime.Dock = System.Windows.Forms.DockStyle.Fill
         Me.tblTime.Location = New System.Drawing.Point(3, 3)
         Me.tblTime.Name = "tblTime"
-        Me.tblTime.Size = New System.Drawing.Size(760, 327)
+        Me.tblTime.Size = New System.Drawing.Size(888, 305)
         Me.tblTime.TabIndex = 1
         '
         'StatusCode
@@ -736,11 +746,60 @@ Partial Class PayRoll
         Me.btnAddWeek.Text = "Add"
         Me.btnAddWeek.UseVisualStyleBackColor = True
         '
+        'cmbClients
+        '
+        Me.cmbClients.FormattingEnabled = True
+        Me.cmbClients.Location = New System.Drawing.Point(244, 13)
+        Me.cmbClients.Name = "cmbClients"
+        Me.cmbClients.Size = New System.Drawing.Size(121, 21)
+        Me.cmbClients.TabIndex = 8
+        '
+        'cmbJobs
+        '
+        Me.cmbJobs.FormattingEnabled = True
+        Me.cmbJobs.Location = New System.Drawing.Point(409, 13)
+        Me.cmbJobs.Name = "cmbJobs"
+        Me.cmbJobs.Size = New System.Drawing.Size(121, 21)
+        Me.cmbJobs.TabIndex = 9
+        '
+        'chbALLJobs
+        '
+        Me.chbALLJobs.AutoSize = True
+        Me.chbALLJobs.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.chbALLJobs.Location = New System.Drawing.Point(536, 17)
+        Me.chbALLJobs.Name = "chbALLJobs"
+        Me.chbALLJobs.Size = New System.Drawing.Size(45, 17)
+        Me.chbALLJobs.TabIndex = 10
+        Me.chbALLJobs.Text = "ALL"
+        Me.chbALLJobs.UseVisualStyleBackColor = True
+        '
+        'Label5
+        '
+        Me.Label5.AutoSize = True
+        Me.Label5.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label5.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.Label5.Location = New System.Drawing.Point(192, 17)
+        Me.Label5.Name = "Label5"
+        Me.Label5.Size = New System.Drawing.Size(46, 13)
+        Me.Label5.TabIndex = 11
+        Me.Label5.Text = "Clients"
+        '
+        'Label6
+        '
+        Me.Label6.AutoSize = True
+        Me.Label6.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label6.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.Label6.Location = New System.Drawing.Point(371, 17)
+        Me.Label6.Name = "Label6"
+        Me.Label6.Size = New System.Drawing.Size(32, 13)
+        Me.Label6.TabIndex = 12
+        Me.Label6.Text = "Jobs"
+        '
         'PayRoll
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(800, 553)
+        Me.ClientSize = New System.Drawing.Size(928, 553)
         Me.Controls.Add(Me.TableLayoutPanel1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
         Me.Name = "PayRoll"
@@ -845,4 +904,9 @@ Partial Class PayRoll
     Friend WithEvents PictureBox2 As PictureBox
     Friend WithEvents btnRestore As PictureBox
     Friend WithEvents btnMaximize As PictureBox
+    Friend WithEvents Label6 As Label
+    Friend WithEvents Label5 As Label
+    Friend WithEvents chbALLJobs As CheckBox
+    Friend WithEvents cmbJobs As ComboBox
+    Friend WithEvents cmbClients As ComboBox
 End Class
