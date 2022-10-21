@@ -132,7 +132,7 @@ End Class
 Public Class metodosPBI
     Inherits ConnectioDB
 
-    Dim cmdSchemaPBI As String = "IF NOT EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = 'PBI')
+	Dim cmdSchemaPBI As String = "IF NOT EXISTS (select * from sys.schemas where name = 'PBI')
 BEGIN
 	PRINT 'THE SCHEMA PBI NOT EXIST.'
 	EXEC ('CREATE SCHEMA PBI;');

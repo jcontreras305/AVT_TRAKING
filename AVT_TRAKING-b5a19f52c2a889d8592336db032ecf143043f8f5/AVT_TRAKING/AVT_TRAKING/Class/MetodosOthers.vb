@@ -602,6 +602,40 @@ Public Class MetodosOthers
             desconectar()
         End Try
     End Function
+    Public Function addMatClass(ByVal tbl As DataTable) As Boolean
+        Try
+            conectar()
+            Dim tran As SqlTransaction
+            tran = conn.BeginTransaction
+            Dim flag As Boolean = True
+            For Each row As DataRow In tbl.Rows
+                Dim cmd As New SqlCommand("if not exists (select * from materialClass where code = '" + row.ItemArray(0).ToString() + "')
+begin 
+	insert into materialClass values ('" + row.ItemArray(0).ToString() + "','" + row.ItemArray(1) + "')
+end", conn)
+                cmd.Transaction = tran
+                If cmd.ExecuteNonQuery = 0 Then
+                    If DialogResult.No = MessageBox.Show("The MAterial Class '" + row.ItemArray(0) + "' was not inserted, it is likely that exist a Class with this Name exists. " + vbCrLf + "Wold you like to continue inserting the other Classes?", "Message", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) Then
+                        flag = False
+                        Exit For
+                    End If
+
+                End If
+            Next
+            If flag Then
+                tran.Commit()
+                Return True
+            Else
+                tran.Rollback()
+                Return False
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message())
+            Return False
+        Finally
+            desconectar()
+        End Try
+    End Function
     Public Function updateMatClass(ByVal matclass As String, ByVal matDesc As String, ByVal lastMatClass As String) As Boolean
         Try
             conectar()

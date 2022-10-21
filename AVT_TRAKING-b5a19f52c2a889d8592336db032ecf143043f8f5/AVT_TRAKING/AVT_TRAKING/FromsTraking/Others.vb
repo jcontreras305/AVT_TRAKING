@@ -525,4 +525,41 @@ Public Class Others
         txtNameEmail.Text = ""
         btnCancel.Visible = False
     End Sub
+
+    Private Sub btnExcel_Click(sender As Object, e As EventArgs) Handles btnExcel.Click
+        Try
+            Dim lbl As New Label
+            Dim pgs As New ProgressBar
+            Dim flag As Boolean = False
+            Dim tbl As New DataTable
+            Dim hoja As String = "Material Class"
+            While flag = False
+                tbl = leerExcel(lbl, pgs, hoja)
+                If tbl IsNot Nothing Then
+                    flag = True
+                    Exit While
+                Else
+                    hoja = InputBox("Please type the sheet name to continue or leave the field blank.", "Message")
+                    If hoja = "" Then
+                        flag = False
+                        Exit While
+                    End If
+                End If
+            End While
+            If flag Then
+                If tbl.Rows.Count > 0 Then
+                    If DialogResult.Yes = MessageBox.Show("In the excel exist " + tbl.Rows.Count.ToString + " Material Class, Would you like to start the process to insert?", "Message", MessageBoxButtons.YesNo, MessageBoxIcon.Question) Then
+                        If mtdOthers.addMatClass(tbl) Then
+                            MsgBox("Successful.")
+                            mtdOthers.llenarListMatClasss(lstMatClass)
+                        Else
+                            MsgBox("Error, try again.")
+                        End If
+                    End If
+                End If
+            End If
+        Catch ex As Exception
+
+        End Try
+    End Sub
 End Class

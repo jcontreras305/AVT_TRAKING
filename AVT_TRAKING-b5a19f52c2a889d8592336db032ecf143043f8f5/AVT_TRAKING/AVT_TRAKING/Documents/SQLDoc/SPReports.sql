@@ -206,12 +206,13 @@ go
 CREATE proc [dbo].[sp_Active_Employee_Average]
 as
 begin
-	select em.lastName as 'Last Name' , CONCAT(em.firstName,' ',substring( em.middleName,1,1)) as 'First Name',CONCAT( '$',pr.payRate1)as 'Pay Rate' , 
+	select em.lastName as 'Last Name' , 
+		CONCAT(em.firstName,' ',substring( em.middleName,1,1)) as 'First Name',
+		CONCAT('$',(select pr1.payRate1 from payRate as pr1 where idEmployee = em.idEmployee and datePayRate = (select MAX(datePayRate) from payRate as pr2 where idEmployee = em.idEmployee))) AS 'Pay Rate' , 
 		em.socialNumber as 'SS Number',em.numberEmploye as 'Brock Emp.',
-		case when em.estatus = 'E' then 'Yes'
-		else 'No' end as 'Active',
+		IIF(em.estatus = 'E','Yes','NO') as 'Active',
 		em.SAPNumber as 'Citigo Emp.'
-		from employees as em left join payRate as pr on pr.idEmployee = em.idEmployee  
+		from employees as em 
 		where estatus = 'E'	
 end
 go
@@ -1350,7 +1351,8 @@ CREATE procedure [dbo].[sp_insert_Material_Excel]
 @price float,
 @description varchar(100),
 @size float,
-@partNum varchar(15)
+@partNum varchar(15),
+@class varchar(20)
 as
 declare @idMaterial varchar(36)
 declare @idDM varchar(36)
@@ -1362,7 +1364,7 @@ begin
 			set @idDM = NEWID()
 			if not @nombre = '' and not @idVendor = '' and (select count(*) from material where number =@numero) =0
 			begin 
-				insert into material values (@idMaterial,@numero,@nombre,@status)
+				insert into material values (@idMaterial,@numero,@nombre,@status,@class)
 				insert into detalleMaterial values (@idDM,@resourceMaterial,@unitMesurement,@type,@price,@description,@size,@idMaterial, (select idVendor from vendor where numberVendor = @idVendor),@partNum)
 				insert into existences values (@idDM , 0.0)
 			end

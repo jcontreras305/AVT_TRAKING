@@ -663,50 +663,62 @@ order by em.numberEmploye", conn)
     Public Function selectHorasTrack(ByVal beginDate As Date, ByVal endDate As Date, ByVal numberClient As String, ByVal job As String) As DataTable
         Try
             conectar()
-            Dim cmd As New SqlCommand("select 
+            Dim cmd As New SqlCommand("SELECT 
+distinct
 ROW_NUMBER() OVER(order by (select 1)) as 'Record ID',
+T2.[Date],
+T2.[Resource ID],
+T2.[Resource Name],
+T2.[Skill Type],
+T2.[Shifth],
+T2.[Level 1 ID],
+T2.[Level 2 ID],
+T2.[S/T Hrs],
+IIF(T2.[S/T Hrs]>0,'N/A','') as 'S/T Hrs Activity Code',
+T2.[O/T Hrs],
+IIF(T2.[O/T Hrs]>0,'N/A','')as 'O/T Hrs Activity Code',
+T2.[D/T Hrs],
+IIF(T2.[D/T Hrs]>0,'N/A','') as 'D/T Hrs Activity Code',
+'' as 'Extra Change'
+FROM (
+select
+DISTINCT
 T1.[Date],
 T1.[Resource ID],
 T1.[Resource Name],
 T1.[Skill Type],
-T1.Shifth,
+T1.[Shifth],
 T1.[Level 1 ID],
 T1.[Level 2 ID],
-T1.[S/T Hrs],
-(iif(T1.[S/T Hrs] > 0 , 'N/A','')) as 'S/T Hrs Activity Code',
-T1.[O/T Hrs],
-(iif(T1.[O/T Hrs] > 0 , 'N/A','')) as 'O/T Hrs Activity Code',
-T1.[D/T Hrs],
-(iif(T1.[D/T Hrs] > 0 , 'N/A','')) as 'D/T Hrs Activity Code',
-'' as 'Extra Change'
- from (
-	
-	select    
-	distinct
-	REPLACE(CONVERT(nvarchar, hw.dateWorked),'-','') as 'Date', 
-	iif(em.SAPNumber is null,'',em.SAPNumber) as 'Resource ID' ,
-	CONCAT(em.lastName,', ',em.firstName,' ',em.middleName)as 'Resource Name', 
-	wc.EQExp1 as 'Skill Type',
-	hw.schedule as 'Shifth', 
-	iif((select CHARINDEX('6.4',wc.name))>0,'NB',concat(wo.idWO,'-', tk.task)) as 'Level 1 ID',
-	po.idPO as 'Level 2 ID',
-	(select SUM( hw1.hoursST) from hoursWorked as hw1 inner join workCode as wc1 on wc1.idworkcode = hw1.idWorkCode and wc1.jobNo = hw1.jobNo inner join task as tk1 on tk1.idAux = hw1.idAux inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO inner join projectOrder as po1 on po1.idPO =wo1.idPO and po1.jobNo = wo1.jobNo 
-		where tk1.idAux = tk.idAux  and wo1.idAuxWO = wo.idAuxWO and po1.idPO =po.idPO and hw1.schedule = hw.schedule and hw1.idEmployee = hw.idEmployee and hw1.dateWorked = hw.dateWorked and  wc1.EQExp1 = wc.EQExp1)as 'S/T Hrs',
-	(select SUM( hw1.hoursOT) from hoursWorked as hw1 inner join workCode as wc1 on wc1.idworkcode = hw1.idWorkCode and wc1.jobNo = hw1.jobNo inner join task as tk1 on tk1.idAux = hw1.idAux inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO inner join projectOrder as po1 on po1.idPO =wo1.idPO and po1.jobNo = wo1.jobNo 
-		where tk1.idAux = tk.idAux  and wo1.idAuxWO = wo.idAuxWO and po1.idPO =po.idPO and hw1.schedule = hw.schedule and hw1.idEmployee = hw.idEmployee and hw1.dateWorked = hw.dateWorked and wc1.EQExp1 = wc.EQExp1)as 'O/T Hrs',
-	(select SUM( hw1.hours3) from hoursWorked as hw1 inner join workCode as wc1 on wc1.idworkcode = hw1.idWorkCode  and wc1.jobNo = hw1.jobNo inner join task as tk1 on tk1.idAux = hw1.idAux inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO inner join projectOrder as po1 on po1.idPO =wo1.idPO and po1.jobNo = wo1.jobNo 
-		where tk1.idAux = tk.idAux  and wo1.idAuxWO = wo.idAuxWO and po1.idPO =po.idPO and hw1.schedule = hw.schedule and hw1.idEmployee = hw.idEmployee and hw1.dateWorked = hw.dateWorked and wc1.EQExp1 = wc.EQExp1)as 'D/T Hrs'
-	from hoursWorked as hw 
-	inner join workCode as wc on wc.idWorkCode = hw.idWorkCode and wc.jobNo = hw.jobNo
-	inner join employees as em on hw.idEmployee = em.idEmployee
-	inner join task as tk on tk.idAux = hw.idAux
-	inner join workOrder as wo on tk.idAuxWO = wo.idAuxWO 
-	inner join projectOrder as po on po.idPO = wo.idPO and po.jobNo = wo.jobNo 
-	inner join job as jb on jb.jobNo = po.jobNo
-	inner join clients as cl on cl.idClient = jb.idClient
-	where hw.dateWorked between '" + validaFechaParaSQl(beginDate) + "' and '" + validaFechaParaSQl(endDate) + "' 
+T1.[Level 3 ID],
+SUM(T1.[S/T Hrs]) OVER (PARTITION BY T1.[Date],T1.[Resource ID],T1.[Skill Type],T1.[Shifth],T1.[Level 3 ID],T1.[Level 2 ID],T1.[Level 1 ID]) as 'S/T Hrs',
+SUM(T1.[O/T Hrs]) OVER (PARTITION BY T1.[Date],T1.[Resource ID],T1.[Skill Type],T1.[Shifth],T1.[Level 3 ID],T1.[Level 2 ID],T1.[Level 1 ID]) AS 'O/T Hrs' ,
+SUM(T1.[D/T Hrs]) OVER (PARTITION BY T1.[Date],T1.[Resource ID],T1.[Skill Type],T1.[Shifth],T1.[Level 3 ID],T1.[Level 2 ID],T1.[Level 1 ID]) AS 'D/T Hrs'
+from (
+	select
+		REPLACE(CONVERT(nvarchar, hw.dateWorked),'-','') as 'Date', 
+		iif(em.SAPNumber is null,'',em.SAPNumber) as 'Resource ID' ,
+		CONCAT(em.lastName,', ',em.firstName,' ',em.middleName)as 'Resource Name', 
+		SUBSTRING( wc.name,1,iif(CHARINDEX('-',wc.name)=0, len(wc.name) ,(CHARINDEX('-',wc.name)-1))) as  'Skill Type',
+		hw.schedule as 'Shifth', 
+		iif((select CHARINDEX('6.4',wc.name))>0,'NB',concat(wo.idWO,'-', tk.task)) as 'Level 1 ID',
+		po.idPO as 'Level 2 ID',
+		jb.jobNo as 'Level 3 ID',
+		hw.hoursST as 'S/T Hrs',
+		hw.hoursOT as 'O/T Hrs',
+		hw.hours3  as 'D/T Hrs'
+		from hoursWorked as hw 
+		inner join task as tk on tk.idAux = hw.idAux
+		inner join workOrder as wo on tk.idAuxWO = wo.idAuxWO 
+		inner join projectOrder as po on po.idPO = wo.idPO and po.jobNo = wo.jobNo 
+		inner join job as jb on jb.jobNo = po.jobNo
+		inner join clients as cl on cl.idClient = jb.idClient
+		inner join workCode as wc on wc.idWorkCode = hw.idWorkCode and wc.jobNo = hw.jobNo
+		inner join employees as em on hw.idEmployee = em.idEmployee
+		where hw.dateWorked between '" + validaFechaParaSQl(beginDate) + "' and '" + validaFechaParaSQl(endDate) + "' 
         and cl.numberClient = " + numberClient + "  " + If(job <> "", " and jb.jobNo = " + job + " ", "") + "
-)as T1", conn)
+) AS T1
+) AS T2", conn)
             If cmd.ExecuteNonQuery Then
                 Dim da As New SqlDataAdapter(cmd)
                 Dim dt As New DataTable
