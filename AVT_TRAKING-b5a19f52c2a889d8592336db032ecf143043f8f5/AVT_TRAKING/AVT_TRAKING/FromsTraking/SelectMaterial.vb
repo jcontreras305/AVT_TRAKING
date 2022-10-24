@@ -36,7 +36,7 @@ Public Class SelectMaterial
         mt.txtDescripcion.Text = tblMaterialSM.CurrentRow.Cells(6).Value.ToString()
         mt.txtTipo.Text = tblMaterialSM.CurrentRow.Cells(7).Value.ToString()
         mt.sprPrice.Value = tblMaterialSM.CurrentRow.Cells(8).Value.ToString()
-        mt.sprPrice.Value = tblMaterialSM.CurrentRow.Cells(9).Value.ToString()
+        mt.sprTamanio.Value = tblMaterialSM.CurrentRow.Cells(9).Value.ToString()
         mt.idMaterial = tblMaterialSM.CurrentRow.Cells(10).Value.ToString()
         mt.txtPartNum.Text = tblMaterialSM.CurrentRow.Cells(12).Value.ToString()
         mt.idDM = tblMaterialSM.CurrentRow.Cells(0).Value.ToString()

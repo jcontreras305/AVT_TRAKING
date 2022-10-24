@@ -333,6 +333,8 @@ Public Class Materials
             idOrder = tblMaterialAndOrders.CurrentRow.Cells.Item(2).Value
             flagUpdateOrder = True
             btnOrderSave.Text = "Save"
+            activarCamposOrden(True)
+            btnOrderSave.Enabled = True
             btnUpdateOrder.Enabled = False
         End If
     End Sub
@@ -352,15 +354,19 @@ Public Class Materials
                 activarCamposOrden(False)
             Else
                 If sprCantidadOrden.Value > 0.0 Or sprPricioOrden.Value > 0.0 Then
-                    Dim dataOrderLits As New List(Of String)
-                    dataOrderLits.Add(idMaterial)
-                    dataOrderLits.Add(sprCantidadOrden.Value.ToString)
-                    dataOrderLits.Add(sprPricioOrden.Value.ToString)
-                    Dim date1 As Date = dtpFechaOrden.Value
-                    Dim fechaFomato As String = date1.Year.ToString() + "-" + date1.Month.ToString() + "-" + date1.Day.ToString
-                    dataOrderLits.Add(fechaFomato)
-                    dataOrderLits.Add(idDM)
-                    mtdMaterial.nuevaOrden(dataOrderLits)
+                    If idMaterial IsNot Nothing Then
+                        Dim dataOrderLits As New List(Of String)
+                        dataOrderLits.Add(idMaterial)
+                        dataOrderLits.Add(sprCantidadOrden.Value.ToString)
+                        dataOrderLits.Add(sprPricioOrden.Value.ToString)
+                        'Dim date1 As Date = dtpFechaOrden.Value
+                        'Dim fechaFomato As String = date1.Year.ToString() + "-" + date1.Month.ToString() + "-" + date1.Day.ToString
+                        dataOrderLits.Add(validaFechaParaSQl(dtpFechaOrden.Value))
+                        dataOrderLits.Add(idDM)
+                        mtdMaterial.nuevaOrden(dataOrderLits)
+                    Else
+                        MessageBox.Show("Please select a Material.", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                    End If
                 Else
                     MsgBox("Error. The sistem not permite a 0,0.")
                 End If

@@ -335,7 +335,7 @@ from detalleMaterial as dm left join material as mt on dm.idMaterial = mt.idMate
         conectar()
         Try
             Dim cmd As New SqlCommand
-            cmd.CommandText = "update detalleMaterial set resourceMaterial = '" + listDatosNuevos(1) + "', unitMeasurement = '" + listDatosNuevos(2) + "', description = '" + listDatosNuevos(6) + "' , type = '" + listDatosNuevos(4) + "' , price = " + listDatosNuevos(5) + " , size = " + listDatosNuevos(3) + " , partNum = '" + listDatosNuevos(7) + "'
+            cmd.CommandText = "update detalleMaterial set resourceMaterial = '" + listDatosNuevos(1) + "', unitMesurement = '" + listDatosNuevos(2) + "', description = '" + listDatosNuevos(6) + "' , type = '" + listDatosNuevos(4) + "' , price = " + listDatosNuevos(5) + " , size = " + listDatosNuevos(3) + " , partNum = '" + listDatosNuevos(7) + "'
 where idMaterial = '" + listDatosNuevos(0) + "'"
             cmd.Connection = conn
             If cmd.ExecuteNonQuery() Then
@@ -362,8 +362,8 @@ where idMaterial = '" + listDatosNuevos(0) + "'"
             cmd.Transaction = tran
             cmd1.Transaction = tran
             If MessageBox.Show("Are you sure to add this order, if you accept the stocks of this Material will change?", "Atention", MessageBoxButtons.YesNo, MessageBoxIcon.Question) = Windows.Forms.DialogResult.Yes Then
-                If cmd.ExecuteNonQuery() Then
-                    If cmd1.ExecuteNonQuery() Then
+                If cmd.ExecuteNonQuery() > 0 Then
+                    If cmd1.ExecuteNonQuery() > 0 Then
                         tran.Commit()
                     Else
                         tran.Rollback()

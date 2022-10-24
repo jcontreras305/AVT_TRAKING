@@ -314,7 +314,7 @@ select
 	(T2.[Billing ST]+T2.[Billing OT]+T2.[Expenses]+T2.[Total Material]) as 'PO Spent',
 	(((T2.[Billing ST]+T2.[Billing OT]+T2.[Expenses]+T2.[Total Material])*100)/IIF(T2.[ProjectTotalBillingEstimate]=0,1,T2.[ProjectTotalBillingEstimate])) as 'PO%Spent',
 	T2.[ProjectTotalBillingEstimate]-(T2.[Billing ST]+T2.[Billing OT]+T2.[Expenses]+T2.[Total Material]) as 'PO Left',
-	T2.[Comp],T2.[ProjectTotalBillingEstimate]
+	T2.[Comp],T2.[ProjectTotalBillingEstimate],T2.[PF]
 	INTO PBI.[ALL]
 from(
 	select 
@@ -327,7 +327,8 @@ from(
 	SUM(T1.[Expenses]) OVER (PARTITION BY T1.[MO#],T1.[PO],T1.[ClientID],T1.[Year],T1.[ProjectDescription]) as 'Expenses',
 	SUM(T1.[Total Material]) OVER (PARTITION BY T1.[MO#],T1.[PO],T1.[ClientID],T1.[Year],T1.[ProjectDescription]) as 'Total Material',
 	T1.[Comp],
-	T1.[ProjectTotalBillingEstimate]
+	T1.[ProjectTotalBillingEstimate],
+	IIF((SUM(T1.[ST]) OVER (PARTITION BY T1.[MO#],T1.[PO],T1.[ClientID],T1.[Year],T1.[ProjectDescription]) + SUM(T1.[OT]) OVER (PARTITION BY T1.[MO#],T1.[PO],T1.[ClientID],T1.[Year],T1.[ProjectDescription]))=0,0,T1.earned/(SUM(T1.[ST]) OVER (PARTITION BY T1.[MO#],T1.[PO],T1.[ClientID],T1.[Year],T1.[ProjectDescription]) + SUM(T1.[OT]) OVER (PARTITION BY T1.[MO#],T1.[PO],T1.[ClientID],T1.[Year],T1.[ProjectDescription]))) as 'PF'
 	from(
 		select 
 		DISTINCT
@@ -339,7 +340,8 @@ from(
 		0 as 'Expenses',
 		0 as 'Total Material',
 		tk.[percentComplete] as 'Comp',
-		tk.estTotalBilling as 'ProjectTotalBillingEstimate'
+		tk.estTotalBilling as 'ProjectTotalBillingEstimate',
+		(tk.estimateHours*tk.percentComplete)*0.01 as 'earned'
 		from hoursWorked as hw 
 		inner join workCode as wc on wc.idWorkCode = hw.idWorkCode 
 		inner join task as tk on tk.idAux = hw.idAux 
@@ -359,7 +361,8 @@ from(
 		SUM(exu.amount) OVER (PARTITION BY tk.idAux,wo.idWO,po.idPO,jb.jobNo) as 'Expenses',
 		0 as 'Total Material',
 		tk.[percentComplete] as 'Complete',
-		tk.estTotalBilling as 'ProjectTotalBillingEstimate'
+		tk.estTotalBilling as 'ProjectTotalBillingEstimate',
+		(tk.estimateHours*tk.percentComplete)*0.01 as 'earned'
 		from expensesUsed as exu
 		inner join expenses as ex on ex.idExpenses = exu.idExpense
 		inner join task as tk on tk.idAux = exu.idAux 
@@ -379,7 +382,8 @@ from(
 		0 as 'Expenses',
 		SUM(mau.amount) OVER (PARTITION BY tk.idAux,wo.idWO,po.idPO,jb.jobNo) as 'Total Material',
 		tk.[percentComplete] as 'Complete',
-		tk.estTotalBilling as 'ProjectTotalBillingEstimate'
+		tk.estTotalBilling as 'ProjectTotalBillingEstimate',
+		(tk.estimateHours*tk.percentComplete)*0.01 as 'earned'
 		from materialUsed as mau
 		inner join material as ma on ma.idMaterial = mau.idMaterial 
 		inner join task as tk on tk.idAux = mau.idAux 
