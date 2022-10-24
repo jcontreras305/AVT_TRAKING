@@ -3835,7 +3835,7 @@ CREATE proc [dbo].[sp_selectJobTaxesExcel]
 as
 begin
 select T1.jobNo ,T1.[ST Hours] ,T1.[OT Hours],T1.[Total Hours] ,T1.[Labor Cost] ,T1.[Scaffold-ADD] ,
-	T1.[3rd Party Cost],T1.[In House Vehicles],T1.[Company Equipment] ,T1.[Material Cost],T1.[Subcontract Cost] ,
+	T1.[3rd Party Cost],T1.[In House Vehicles],T1.[Scaffold],T1.[Company Equipment] ,T1.[Material Cost],T1.[Subcontract Cost] ,
 	T1.[Tools] ,T1.[Consumables] ,T1.[Other Cost] , T1.[Other Revanue],
 	ISNULL(txs.FICA,0) as 'FICA',
 	ISNULL(txs.FUI,0) as 'FUI',
@@ -3886,7 +3886,7 @@ select distinct jb.jobNo,
 		inner join job as jb1 on jb1.jobNo = po1.jobNo
 		where jb1.jobNo = jb.jobNo and hw1.dateWorked between @StartDate and @EndDate),0) as 'Total Hours',
 	ISNULL((select ROUND(SUM((hw1.hoursST*wc1.billingRate1)+(hw1.hoursOT*wc1.billingRateOT)+(hw1.hours3*wc1.billingRate3)),2) from hoursWorked as hw1 
-		left join workCode as wc1 on wc1.idWorkCode= hw1.idWorkCode and wc1.jobNo = hw1.jobNo
+		inner join workCode as wc1 on wc1.idWorkCode= hw1.idWorkCode and wc1.jobNo = hw1.jobNo
 		inner join task as tk1 on tk1.idAux = hw1.idAux
 		inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO
 		inner join projectOrder as po1 on wo1.idPO = po1.idPO and wo1.jobNo = po1.jobNo
@@ -3900,7 +3900,7 @@ select distinct jb.jobNo,
 		inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO
 		inner join projectOrder as po1 on po1.idPO = wo1.idPO and wo1.jobNo = po1.jobNo
 		inner join job as jb1 on jb1.jobNo = po1.jobNo
-		where jb1.jobNo = jb.jobNo and mu1.dateMaterial between @StartDate and @EndDate and SUBSTRING(mc1.code ,LEN(mc1.code),1)='D'),0) AS '3rd Party Cost',
+		where jb1.jobNo = jb.jobNo and mu1.dateMaterial between @StartDate and @EndDate and (SUBSTRING(mc1.code ,LEN(mc1.code),1)='D' and not mc1.[description] like '%scaf%')),0) AS '3rd Party Cost',
 	ISNULL((select SUM(amount) from materialUsed as mu1
 		inner join material as mt1 on mu1.idMaterial = mt1.idMaterial
 		left join materialClass as mc1 on mt1.code = mc1.code
@@ -3908,7 +3908,7 @@ select distinct jb.jobNo,
 		inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO
 		inner join projectOrder as po1 on po1.idPO = wo1.idPO and wo1.jobNo = po1.jobNo
 		inner join job as jb1 on jb1.jobNo = po1.jobNo
-		where jb1.jobNo = jb.jobNo and mu1.dateMaterial between @StartDate and @EndDate and SUBSTRING(mc1.code ,LEN(mc1.code),1)='E'),0) AS 'In House Vehicles',
+		where jb1.jobNo = jb.jobNo and mu1.dateMaterial between @StartDate and @EndDate and (SUBSTRING(mc1.code ,LEN(mc1.code),1)='E' and not mc1.[description] like '%scaf%')),0) AS 'In House Vehicles',
 	ISNULL((select SUM(amount) from materialUsed as mu1
 		inner join material as mt1 on mu1.idMaterial = mt1.idMaterial
 		left join materialClass as mc1 on mt1.code = mc1.code
@@ -3916,7 +3916,7 @@ select distinct jb.jobNo,
 		inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO
 		inner join projectOrder as po1 on po1.idPO = wo1.idPO and wo1.jobNo = po1.jobNo
 		inner join job as jb1 on jb1.jobNo = po1.jobNo
-		where jb1.jobNo = jb.jobNo and mu1.dateMaterial between @StartDate and @EndDate and SUBSTRING(mc1.code ,LEN(mc1.code),1)='F'),0) AS 'Company Equipment',
+		where jb1.jobNo = jb.jobNo and mu1.dateMaterial between @StartDate and @EndDate and mc1.[description] like '%scaf%'),0) AS 'Scaffold',
 	ISNULL((select SUM(amount) from materialUsed as mu1
 		inner join material as mt1 on mu1.idMaterial = mt1.idMaterial
 		left join materialClass as mc1 on mt1.code = mc1.code
@@ -3924,7 +3924,7 @@ select distinct jb.jobNo,
 		inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO
 		inner join projectOrder as po1 on po1.idPO = wo1.idPO and wo1.jobNo = po1.jobNo
 		inner join job as jb1 on jb1.jobNo = po1.jobNo
-		where jb1.jobNo = jb.jobNo and mu1.dateMaterial between @StartDate and @EndDate and SUBSTRING(mc1.code ,LEN(mc1.code),1)='M'),0) AS 'Material Cost',
+		where jb1.jobNo = jb.jobNo and mu1.dateMaterial between @StartDate and @EndDate and (SUBSTRING(mc1.code ,LEN(mc1.code),1)='F' and not mc1.[description] like '%scaf%')),0) AS 'Company Equipment',
 	ISNULL((select SUM(amount) from materialUsed as mu1
 		inner join material as mt1 on mu1.idMaterial = mt1.idMaterial
 		left join materialClass as mc1 on mt1.code = mc1.code
@@ -3932,7 +3932,7 @@ select distinct jb.jobNo,
 		inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO
 		inner join projectOrder as po1 on po1.idPO = wo1.idPO and wo1.jobNo = po1.jobNo
 		inner join job as jb1 on jb1.jobNo = po1.jobNo
-		where jb1.jobNo = jb.jobNo and mu1.dateMaterial between @StartDate and @EndDate and SUBSTRING(mc1.code ,LEN(mc1.code),1)='S'),0) AS 'Subcontract Cost',
+		where jb1.jobNo = jb.jobNo and mu1.dateMaterial between @StartDate and @EndDate and (SUBSTRING(mc1.code ,LEN(mc1.code),1)='M' and not mc1.[description] like '%scaf%')),0) AS 'Material Cost',
 	ISNULL((select SUM(amount) from materialUsed as mu1
 		inner join material as mt1 on mu1.idMaterial = mt1.idMaterial
 		left join materialClass as mc1 on mt1.code = mc1.code
@@ -3940,7 +3940,7 @@ select distinct jb.jobNo,
 		inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO
 		inner join projectOrder as po1 on po1.idPO = wo1.idPO and wo1.jobNo = po1.jobNo
 		inner join job as jb1 on jb1.jobNo = po1.jobNo
-		where jb1.jobNo = jb.jobNo and mu1.dateMaterial between @StartDate and @EndDate and SUBSTRING(mc1.code ,LEN(mc1.code),1)='T'),0) AS 'Tools',
+		where jb1.jobNo = jb.jobNo and mu1.dateMaterial between @StartDate and @EndDate and (SUBSTRING(mc1.code ,LEN(mc1.code),1)='S' and not mc1.[description] like '%scaf%')),0) AS 'Subcontract Cost',
 	ISNULL((select SUM(amount) from materialUsed as mu1
 		inner join material as mt1 on mu1.idMaterial = mt1.idMaterial
 		left join materialClass as mc1 on mt1.code = mc1.code
@@ -3948,7 +3948,7 @@ select distinct jb.jobNo,
 		inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO
 		inner join projectOrder as po1 on po1.idPO = wo1.idPO and wo1.jobNo = po1.jobNo
 		inner join job as jb1 on jb1.jobNo = po1.jobNo
-		where jb1.jobNo = jb.jobNo and mu1.dateMaterial between @StartDate and @EndDate and SUBSTRING(mc1.code ,LEN(mc1.code),1)='V'),0) AS 'Consumables',
+		where jb1.jobNo = jb.jobNo and mu1.dateMaterial between @StartDate and @EndDate and (SUBSTRING(mc1.code ,LEN(mc1.code),1)='T' and not mc1.[description] like '%scaf%')),0) AS 'Tools',
 	ISNULL((select SUM(amount) from materialUsed as mu1
 		inner join material as mt1 on mu1.idMaterial = mt1.idMaterial
 		left join materialClass as mc1 on mt1.code = mc1.code
@@ -3956,7 +3956,15 @@ select distinct jb.jobNo,
 		inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO
 		inner join projectOrder as po1 on po1.idPO = wo1.idPO and wo1.jobNo = po1.jobNo
 		inner join job as jb1 on jb1.jobNo = po1.jobNo
-		where jb1.jobNo = jb.jobNo and mu1.dateMaterial between @StartDate and @EndDate and SUBSTRING(mc1.code ,LEN(mc1.code),1)='Y'),0) AS 'Other Cost',
+		where jb1.jobNo = jb.jobNo and mu1.dateMaterial between @StartDate and @EndDate and (SUBSTRING(mc1.code ,LEN(mc1.code),1)='V' and not mc1.[description] like '%scaf%')),0) AS 'Consumables',
+	ISNULL((select SUM(amount) from materialUsed as mu1
+		inner join material as mt1 on mu1.idMaterial = mt1.idMaterial
+		left join materialClass as mc1 on mt1.code = mc1.code
+		inner join task as tk1 on tk1.idAux = mu1.idAux
+		inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO
+		inner join projectOrder as po1 on po1.idPO = wo1.idPO and wo1.jobNo = po1.jobNo
+		inner join job as jb1 on jb1.jobNo = po1.jobNo
+		where jb1.jobNo = jb.jobNo and mu1.dateMaterial between @StartDate and @EndDate and (SUBSTRING(mc1.code ,LEN(mc1.code),1)='Y' and not mc1.[description] like '%scaf%')),0) AS 'Other Cost',
 	(select ROUND(ISNULL(SUM(amount),0),2) 
 		from expensesUsed as exu1 
 		inner join task as tk1 on tk1.idAux = exu1.idAux
