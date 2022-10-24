@@ -310,11 +310,15 @@ BEGIN
 	drop table PBI.[ALL]
 END
 select 
-	T2.[Year],T2.[ClientID],T2.[PO],T2.[MO#],T2.[ProjectDescription],T2.[ST],T2.[OT],T2.[Billing ST],T2.[Billing OT],T2.[Expenses],T2.[Total Material],
-	(T2.[Billing ST]+T2.[Billing OT]+T2.[Expenses]+T2.[Total Material]) as 'PO Spent',
-	(((T2.[Billing ST]+T2.[Billing OT]+T2.[Expenses]+T2.[Total Material])*100)/IIF(T2.[ProjectTotalBillingEstimate]=0,1,T2.[ProjectTotalBillingEstimate])) as 'PO%Spent',
-	T2.[ProjectTotalBillingEstimate]-(T2.[Billing ST]+T2.[Billing OT]+T2.[Expenses]+T2.[Total Material]) as 'PO Left',
-	T2.[Comp],T2.[ProjectTotalBillingEstimate],T2.[PF]
+	T2.[Year],T2.[ClientID],T2.[PO],T2.[MO#],T2.[ProjectDescription],T2.[ST],T2.[OT],
+	T2.[Billing ST],
+	T2.[Billing OT],
+	T2.[Expenses],
+	T2.[Total Material],
+	CAST(ROUND((T2.[Billing ST]+T2.[Billing OT]+T2.[Expenses]+T2.[Total Material]),2,1) as decimal(20,2)) as 'PO Spent',
+	CAST(ROUND((((T2.[Billing ST]+T2.[Billing OT]+T2.[Expenses]+T2.[Total Material])*100)/IIF(T2.[ProjectTotalBillingEstimate]=0,1,T2.[ProjectTotalBillingEstimate])),2,1) as decimal (20,2))  as 'PO%Spent',
+	CAST(ROUND(T2.[ProjectTotalBillingEstimate]-(T2.[Billing ST]+T2.[Billing OT]+T2.[Expenses]+T2.[Total Material]),2,1) as decimal(20,2)) as 'PO Left',
+	T2.[Comp],T2.[ProjectTotalBillingEstimate],T2.[PF],T2.[Earned]
 	INTO PBI.[ALL]
 from(
 	select 
@@ -328,7 +332,8 @@ from(
 	SUM(T1.[Total Material]) OVER (PARTITION BY T1.[MO#],T1.[PO],T1.[ClientID],T1.[Year],T1.[ProjectDescription]) as 'Total Material',
 	T1.[Comp],
 	T1.[ProjectTotalBillingEstimate],
-	IIF((SUM(T1.[ST]) OVER (PARTITION BY T1.[MO#],T1.[PO],T1.[ClientID],T1.[Year],T1.[ProjectDescription]) + SUM(T1.[OT]) OVER (PARTITION BY T1.[MO#],T1.[PO],T1.[ClientID],T1.[Year],T1.[ProjectDescription]))=0,0,T1.earned/(SUM(T1.[ST]) OVER (PARTITION BY T1.[MO#],T1.[PO],T1.[ClientID],T1.[Year],T1.[ProjectDescription]) + SUM(T1.[OT]) OVER (PARTITION BY T1.[MO#],T1.[PO],T1.[ClientID],T1.[Year],T1.[ProjectDescription]))) as 'PF'
+	ROUND(IIF((SUM(T1.[ST]) OVER (PARTITION BY T1.[MO#],T1.[PO],T1.[ClientID],T1.[Year],T1.[ProjectDescription]) + SUM(T1.[OT]) OVER (PARTITION BY T1.[MO#],T1.[PO],T1.[ClientID],T1.[Year],T1.[ProjectDescription]))=0,0,T1.earned/(SUM(T1.[ST]) OVER (PARTITION BY T1.[MO#],T1.[PO],T1.[ClientID],T1.[Year],T1.[ProjectDescription]) + SUM(T1.[OT]) OVER (PARTITION BY T1.[MO#],T1.[PO],T1.[ClientID],T1.[Year],T1.[ProjectDescription]))),2) as 'PF',
+	ROUND(T1.[earned],2) as 'Earned'
 	from(
 		select 
 		DISTINCT
