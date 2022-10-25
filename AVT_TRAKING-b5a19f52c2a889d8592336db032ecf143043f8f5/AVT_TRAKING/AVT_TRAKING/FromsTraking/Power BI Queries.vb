@@ -316,9 +316,9 @@ select
 	T2.[Expenses],
 	T2.[Total Material],
 	CAST(ROUND((T2.[Billing ST]+T2.[Billing OT]+T2.[Expenses]+T2.[Total Material]),2,1) as decimal(20,2)) as 'PO Spent',
-	CAST(ROUND((((T2.[Billing ST]+T2.[Billing OT]+T2.[Expenses]+T2.[Total Material])*100)/IIF(T2.[ProjectTotalBillingEstimate]=0,1,T2.[ProjectTotalBillingEstimate])),2,1) as decimal (20,2))  as 'PO%Spent',
+	CONCAT(CAST(ROUND((((T2.[Billing ST]+T2.[Billing OT]+T2.[Expenses]+T2.[Total Material])*100)/IIF(T2.[ProjectTotalBillingEstimate]=0,1,T2.[ProjectTotalBillingEstimate])),2,1) as decimal (20,2)),'%')  as 'PO%Spent',
 	CAST(ROUND(T2.[ProjectTotalBillingEstimate]-(T2.[Billing ST]+T2.[Billing OT]+T2.[Expenses]+T2.[Total Material]),2,1) as decimal(20,2)) as 'PO Left',
-	T2.[Comp],T2.[ProjectTotalBillingEstimate],T2.[PF],T2.[Earned]
+	T2.[Comp],T2.[ProjectTotalBillingEstimate],T2.[PF],T2.[Earned],T2.[Begin Date],T2.[End Date],T2.[Estimate Hours]
 	INTO PBI.[ALL]
 from(
 	select 
@@ -333,7 +333,10 @@ from(
 	T1.[Comp],
 	T1.[ProjectTotalBillingEstimate],
 	ROUND(IIF((SUM(T1.[ST]) OVER (PARTITION BY T1.[MO#],T1.[PO],T1.[ClientID],T1.[Year],T1.[ProjectDescription]) + SUM(T1.[OT]) OVER (PARTITION BY T1.[MO#],T1.[PO],T1.[ClientID],T1.[Year],T1.[ProjectDescription]))=0,0,T1.earned/(SUM(T1.[ST]) OVER (PARTITION BY T1.[MO#],T1.[PO],T1.[ClientID],T1.[Year],T1.[ProjectDescription]) + SUM(T1.[OT]) OVER (PARTITION BY T1.[MO#],T1.[PO],T1.[ClientID],T1.[Year],T1.[ProjectDescription]))),2) as 'PF',
-	ROUND(T1.[earned],2) as 'Earned'
+	ROUND(T1.[earned],2) as 'Earned',
+	T1.[Begin Date],
+	T1.[End Date],
+	T1.[Estimate Hours]
 	from(
 		select 
 		DISTINCT
@@ -346,7 +349,10 @@ from(
 		0 as 'Total Material',
 		tk.[percentComplete] as 'Comp',
 		tk.estTotalBilling as 'ProjectTotalBillingEstimate',
-		(tk.estimateHours*tk.percentComplete)*0.01 as 'earned'
+		(tk.estimateHours*tk.percentComplete)*0.01 as 'earned',
+		CONVERT(nvarchar,tk.beginDate,101) as 'Begin Date',
+		CONVERT(nvarchar,tk.endDate,101) as 'End Date',
+		tk.estimateHours as 'Estimate Hours'
 		from hoursWorked as hw 
 		inner join workCode as wc on wc.idWorkCode = hw.idWorkCode 
 		inner join task as tk on tk.idAux = hw.idAux 
@@ -367,7 +373,10 @@ from(
 		0 as 'Total Material',
 		tk.[percentComplete] as 'Complete',
 		tk.estTotalBilling as 'ProjectTotalBillingEstimate',
-		(tk.estimateHours*tk.percentComplete)*0.01 as 'earned'
+		(tk.estimateHours*tk.percentComplete)*0.01 as 'earned',
+		CONVERT(nvarchar,tk.beginDate,101) as 'Begin Date',
+		CONVERT(nvarchar,tk.endDate,101) as 'End Date',
+		tk.estimateHours as 'Estimate Hours'
 		from expensesUsed as exu
 		inner join expenses as ex on ex.idExpenses = exu.idExpense
 		inner join task as tk on tk.idAux = exu.idAux 
@@ -388,7 +397,10 @@ from(
 		SUM(mau.amount) OVER (PARTITION BY tk.idAux,wo.idWO,po.idPO,jb.jobNo) as 'Total Material',
 		tk.[percentComplete] as 'Complete',
 		tk.estTotalBilling as 'ProjectTotalBillingEstimate',
-		(tk.estimateHours*tk.percentComplete)*0.01 as 'earned'
+		(tk.estimateHours*tk.percentComplete)*0.01 as 'earned',
+		CONVERT(nvarchar,tk.beginDate,101) as 'Begin Date',
+		CONVERT(nvarchar,tk.endDate,101) as 'End Date',
+		tk.estimateHours as 'Estimate Hours'
 		from materialUsed as mau
 		inner join material as ma on ma.idMaterial = mau.idMaterial 
 		inner join task as tk on tk.idAux = mau.idAux 

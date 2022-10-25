@@ -135,9 +135,9 @@ Partial Class Power_BI_Queries
         Me.Label1.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.Label1.Location = New System.Drawing.Point(46, 6)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(234, 18)
+        Me.Label1.Size = New System.Drawing.Size(138, 18)
         Me.Label1.TabIndex = 0
-        Me.Label1.Text = "Invoice Per Project Order"
+        Me.Label1.Text = "Power BI Data"
         '
         'Panel2
         '
@@ -284,6 +284,7 @@ Partial Class Power_BI_Queries
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.tblInfoPBI.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
+        Me.tblInfoPBI.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells
         Me.tblInfoPBI.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.tblInfoPBI.Location = New System.Drawing.Point(3, 3)
         Me.tblInfoPBI.Name = "tblInfoPBI"
