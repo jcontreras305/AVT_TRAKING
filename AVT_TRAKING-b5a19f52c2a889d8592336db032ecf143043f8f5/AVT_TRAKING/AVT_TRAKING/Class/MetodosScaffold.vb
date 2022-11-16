@@ -410,7 +410,7 @@ from job as jb
             desconectar()
         End Try
     End Function
-    Public Function llenarComboWO(ByVal combo As ComboBox, ByVal IdCliente As String) As DataTable
+    Public Function llenarComboWO(ByVal combo As ComboBox, ByVal IdCliente As String, Optional jobNo As String = "") As DataTable
         Dim tabla As New DataTable
         tabla.Columns.Add("wono")
         tabla.Columns.Add("wo")
@@ -424,7 +424,7 @@ from job as jb
 from job as jb 
 inner join projectOrder as po on po.jobNo = jb.jobNo
 inner join workOrder as wo on wo.idPO = po.idPO and wo.jobNo = po.jobNo
-inner join task as tk on tk.idAuxWO = wo.idAuxWO " + If(IdCliente = "", "", "where jb.idClient = '" + IdCliente + "' ") + " Order by 'WO No'", conn)
+inner join task as tk on tk.idAuxWO = wo.idAuxWO " + If(IdCliente = "", "", "where jb.idClient = '" + IdCliente + "' ") + If(jobNo = "", "", If(IdCliente = "", " where jb.jobNo = " + jobNo, " and jb.jobNo = " + jobNo)) + " Order by 'WO No'", conn)
             Dim dr As SqlDataReader = cmd.ExecuteReader()
             combo.Items.Clear()
             combo.Items.Add("")

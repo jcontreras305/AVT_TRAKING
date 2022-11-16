@@ -36,9 +36,6 @@ Partial Class EquipmentValidation
         Me.cmbInformation = New System.Windows.Forms.ComboBox()
         Me.Panel2 = New System.Windows.Forms.Panel()
         Me.tblEquipment = New System.Windows.Forms.DataGridView()
-        Me.Panel3 = New System.Windows.Forms.Panel()
-        Me.pgbComplete = New System.Windows.Forms.ProgressBar()
-        Me.lblMessage = New System.Windows.Forms.Label()
         Me.ErrorClm = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.DateEquip = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.ProjectEquip = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -48,6 +45,10 @@ Partial Class EquipmentValidation
         Me.Description = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.ClassEquip = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.STHrs = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Panel3 = New System.Windows.Forms.Panel()
+        Me.pgbComplete = New System.Windows.Forms.ProgressBar()
+        Me.lblMessage = New System.Windows.Forms.Label()
+        Me.lbljobNo = New System.Windows.Forms.Label()
         Me.TableLayoutPanel1.SuspendLayout()
         Me.Panel1.SuspendLayout()
         CType(Me.PictureBox4, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -80,6 +81,7 @@ Partial Class EquipmentValidation
         'Panel1
         '
         Me.Panel1.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(58, Byte), Integer), CType(CType(115, Byte), Integer))
+        Me.Panel1.Controls.Add(Me.lbljobNo)
         Me.Panel1.Controls.Add(Me.dtpInformation)
         Me.Panel1.Controls.Add(Me.btnSave)
         Me.Panel1.Controls.Add(Me.PictureBox4)
@@ -194,9 +196,9 @@ Partial Class EquipmentValidation
         Me.lblTitle.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.lblTitle.Location = New System.Drawing.Point(3, 6)
         Me.lblTitle.Name = "lblTitle"
-        Me.lblTitle.Size = New System.Drawing.Size(227, 18)
+        Me.lblTitle.Size = New System.Drawing.Size(206, 18)
         Me.lblTitle.TabIndex = 2
-        Me.lblTitle.Text = "Equipment Validation Excel"
+        Me.lblTitle.Text = "Material Validation Excel"
         '
         'cmbInformation
         '
@@ -227,35 +229,6 @@ Partial Class EquipmentValidation
         Me.tblEquipment.Name = "tblEquipment"
         Me.tblEquipment.Size = New System.Drawing.Size(794, 330)
         Me.tblEquipment.TabIndex = 0
-        '
-        'Panel3
-        '
-        Me.Panel3.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(58, Byte), Integer), CType(CType(115, Byte), Integer))
-        Me.Panel3.Controls.Add(Me.pgbComplete)
-        Me.Panel3.Controls.Add(Me.lblMessage)
-        Me.Panel3.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel3.Location = New System.Drawing.Point(3, 419)
-        Me.Panel3.Name = "Panel3"
-        Me.Panel3.Size = New System.Drawing.Size(794, 28)
-        Me.Panel3.TabIndex = 2
-        '
-        'pgbComplete
-        '
-        Me.pgbComplete.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.pgbComplete.Location = New System.Drawing.Point(588, 3)
-        Me.pgbComplete.Name = "pgbComplete"
-        Me.pgbComplete.Size = New System.Drawing.Size(197, 23)
-        Me.pgbComplete.TabIndex = 1
-        '
-        'lblMessage
-        '
-        Me.lblMessage.AutoSize = True
-        Me.lblMessage.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.lblMessage.Location = New System.Drawing.Point(21, 10)
-        Me.lblMessage.Name = "lblMessage"
-        Me.lblMessage.Size = New System.Drawing.Size(56, 13)
-        Me.lblMessage.TabIndex = 0
-        Me.lblMessage.Text = "Message: "
         '
         'ErrorClm
         '
@@ -305,6 +278,46 @@ Partial Class EquipmentValidation
         '
         Me.STHrs.HeaderText = "ST Hrs"
         Me.STHrs.Name = "STHrs"
+        '
+        'Panel3
+        '
+        Me.Panel3.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(58, Byte), Integer), CType(CType(115, Byte), Integer))
+        Me.Panel3.Controls.Add(Me.pgbComplete)
+        Me.Panel3.Controls.Add(Me.lblMessage)
+        Me.Panel3.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Panel3.Location = New System.Drawing.Point(3, 419)
+        Me.Panel3.Name = "Panel3"
+        Me.Panel3.Size = New System.Drawing.Size(794, 28)
+        Me.Panel3.TabIndex = 2
+        '
+        'pgbComplete
+        '
+        Me.pgbComplete.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.pgbComplete.Location = New System.Drawing.Point(588, 3)
+        Me.pgbComplete.Name = "pgbComplete"
+        Me.pgbComplete.Size = New System.Drawing.Size(197, 23)
+        Me.pgbComplete.TabIndex = 1
+        '
+        'lblMessage
+        '
+        Me.lblMessage.AutoSize = True
+        Me.lblMessage.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.lblMessage.Location = New System.Drawing.Point(21, 10)
+        Me.lblMessage.Name = "lblMessage"
+        Me.lblMessage.Size = New System.Drawing.Size(56, 13)
+        Me.lblMessage.TabIndex = 0
+        Me.lblMessage.Text = "Message: "
+        '
+        'lbljobNo
+        '
+        Me.lbljobNo.AutoSize = True
+        Me.lbljobNo.Font = New System.Drawing.Font("Verdana", 11.25!, System.Drawing.FontStyle.Bold)
+        Me.lbljobNo.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.lbljobNo.Location = New System.Drawing.Point(236, 45)
+        Me.lbljobNo.Name = "lbljobNo"
+        Me.lbljobNo.Size = New System.Drawing.Size(69, 18)
+        Me.lbljobNo.TabIndex = 46
+        Me.lbljobNo.Text = "Job No:"
         '
         'EquipmentValidation
         '
@@ -356,4 +369,5 @@ Partial Class EquipmentValidation
     Friend WithEvents Description As DataGridViewTextBoxColumn
     Friend WithEvents ClassEquip As DataGridViewTextBoxColumn
     Friend WithEvents STHrs As DataGridViewTextBoxColumn
+    Friend WithEvents lbljobNo As Label
 End Class

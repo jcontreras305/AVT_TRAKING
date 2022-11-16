@@ -201,7 +201,7 @@ Public Class Clients
     End Sub
 
     Private Sub tblClientes_DoubleClick(sender As Object, e As EventArgs) Handles tblClientes.DoubleClick
-        Dim result = MessageBox.Show("Would you like to load the data of this Employee?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
+        Dim result = MessageBox.Show("Would you like to load the data of this Client?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Question)
         If result = DialogResult.Yes Then
             limpiarcampos()
             btnSaveClient.Enabled = False

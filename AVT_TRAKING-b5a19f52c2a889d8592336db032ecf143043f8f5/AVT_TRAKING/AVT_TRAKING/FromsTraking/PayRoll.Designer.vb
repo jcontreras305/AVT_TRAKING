@@ -35,6 +35,11 @@ Partial Class PayRoll
         Me.TabPage1 = New System.Windows.Forms.TabPage()
         Me.TableLayoutPanel2 = New System.Windows.Forms.TableLayoutPanel()
         Me.Panel3 = New System.Windows.Forms.Panel()
+        Me.Label6 = New System.Windows.Forms.Label()
+        Me.Label5 = New System.Windows.Forms.Label()
+        Me.chbALLJobs = New System.Windows.Forms.CheckBox()
+        Me.cmbJobs = New System.Windows.Forms.ComboBox()
+        Me.cmbClients = New System.Windows.Forms.ComboBox()
         Me.txtSalida = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
@@ -88,11 +93,6 @@ Partial Class PayRoll
         Me.btnDeleteWeek = New System.Windows.Forms.Button()
         Me.btnUpdateWeek = New System.Windows.Forms.Button()
         Me.btnAddWeek = New System.Windows.Forms.Button()
-        Me.cmbClients = New System.Windows.Forms.ComboBox()
-        Me.cmbJobs = New System.Windows.Forms.ComboBox()
-        Me.chbALLJobs = New System.Windows.Forms.CheckBox()
-        Me.Label5 = New System.Windows.Forms.Label()
-        Me.Label6 = New System.Windows.Forms.Label()
         Me.TableLayoutPanel1.SuspendLayout()
         Me.Panel1.SuspendLayout()
         Me.TitleBar.SuspendLayout()
@@ -123,6 +123,7 @@ Partial Class PayRoll
         '
         'TableLayoutPanel1
         '
+        Me.TableLayoutPanel1.BackColor = System.Drawing.Color.FromArgb(CType(CType(83, Byte), Integer), CType(CType(93, Byte), Integer), CType(CType(102, Byte), Integer))
         Me.TableLayoutPanel1.ColumnCount = 1
         Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
         Me.TableLayoutPanel1.Controls.Add(Me.Panel1, 0, 0)
@@ -147,7 +148,7 @@ Partial Class PayRoll
         '
         'TitleBar
         '
-        Me.TitleBar.BackColor = System.Drawing.Color.FromArgb(CType(CType(46, Byte), Integer), CType(CType(59, Byte), Integer), CType(CType(104, Byte), Integer))
+        Me.TitleBar.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(58, Byte), Integer), CType(CType(115, Byte), Integer))
         Me.TitleBar.Controls.Add(Me.PictureBox2)
         Me.TitleBar.Controls.Add(Me.btnRestore)
         Me.TitleBar.Controls.Add(Me.btnMaximize)
@@ -175,7 +176,7 @@ Partial Class PayRoll
         Me.btnRestore.Image = Global.AVT_TRAKING.My.Resources.Resources.restore2
         Me.btnRestore.Location = New System.Drawing.Point(889, 3)
         Me.btnRestore.Name = "btnRestore"
-        Me.btnRestore.Size = New System.Drawing.Size(23, 27)
+        Me.btnRestore.Size = New System.Drawing.Size(27, 27)
         Me.btnRestore.TabIndex = 41
         Me.btnRestore.TabStop = False
         '
@@ -206,9 +207,9 @@ Partial Class PayRoll
         Me.Label7.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.Label7.Location = New System.Drawing.Point(4, 4)
         Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(73, 18)
+        Me.Label7.Size = New System.Drawing.Size(78, 18)
         Me.Label7.TabIndex = 0
-        Me.Label7.Text = "PayRoll"
+        Me.Label7.Text = "Pay Roll"
         '
         'Panel2
         '
@@ -275,8 +276,57 @@ Partial Class PayRoll
         Me.Panel3.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel3.Location = New System.Drawing.Point(3, 3)
         Me.Panel3.Name = "Panel3"
-        Me.Panel3.Size = New System.Drawing.Size(902, 83)
+        Me.Panel3.Size = New System.Drawing.Size(902, 82)
         Me.Panel3.TabIndex = 0
+        '
+        'Label6
+        '
+        Me.Label6.AutoSize = True
+        Me.Label6.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label6.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.Label6.Location = New System.Drawing.Point(371, 17)
+        Me.Label6.Name = "Label6"
+        Me.Label6.Size = New System.Drawing.Size(32, 13)
+        Me.Label6.TabIndex = 12
+        Me.Label6.Text = "Jobs"
+        '
+        'Label5
+        '
+        Me.Label5.AutoSize = True
+        Me.Label5.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label5.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.Label5.Location = New System.Drawing.Point(192, 17)
+        Me.Label5.Name = "Label5"
+        Me.Label5.Size = New System.Drawing.Size(46, 13)
+        Me.Label5.TabIndex = 11
+        Me.Label5.Text = "Clients"
+        '
+        'chbALLJobs
+        '
+        Me.chbALLJobs.AutoSize = True
+        Me.chbALLJobs.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.chbALLJobs.Location = New System.Drawing.Point(536, 17)
+        Me.chbALLJobs.Name = "chbALLJobs"
+        Me.chbALLJobs.Size = New System.Drawing.Size(45, 17)
+        Me.chbALLJobs.TabIndex = 10
+        Me.chbALLJobs.Text = "ALL"
+        Me.chbALLJobs.UseVisualStyleBackColor = True
+        '
+        'cmbJobs
+        '
+        Me.cmbJobs.FormattingEnabled = True
+        Me.cmbJobs.Location = New System.Drawing.Point(409, 13)
+        Me.cmbJobs.Name = "cmbJobs"
+        Me.cmbJobs.Size = New System.Drawing.Size(121, 21)
+        Me.cmbJobs.TabIndex = 9
+        '
+        'cmbClients
+        '
+        Me.cmbClients.FormattingEnabled = True
+        Me.cmbClients.Location = New System.Drawing.Point(244, 13)
+        Me.cmbClients.Name = "cmbClients"
+        Me.cmbClients.Size = New System.Drawing.Size(121, 21)
+        Me.cmbClients.TabIndex = 8
         '
         'txtSalida
         '
@@ -379,10 +429,10 @@ Partial Class PayRoll
         Me.TabControl2.Controls.Add(Me.TabPage3)
         Me.TabControl2.Controls.Add(Me.TabPage4)
         Me.TabControl2.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.TabControl2.Location = New System.Drawing.Point(3, 92)
+        Me.TabControl2.Location = New System.Drawing.Point(3, 91)
         Me.TabControl2.Name = "TabControl2"
         Me.TabControl2.SelectedIndex = 0
-        Me.TabControl2.Size = New System.Drawing.Size(902, 337)
+        Me.TabControl2.Size = New System.Drawing.Size(902, 338)
         Me.TabControl2.TabIndex = 1
         '
         'TabPage3
@@ -391,7 +441,7 @@ Partial Class PayRoll
         Me.TabPage3.Location = New System.Drawing.Point(4, 22)
         Me.TabPage3.Name = "TabPage3"
         Me.TabPage3.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage3.Size = New System.Drawing.Size(894, 311)
+        Me.TabPage3.Size = New System.Drawing.Size(894, 312)
         Me.TabPage3.TabIndex = 0
         Me.TabPage3.Text = "Time Sheet Data"
         Me.TabPage3.UseVisualStyleBackColor = True
@@ -406,7 +456,7 @@ Partial Class PayRoll
         Me.tblTime.Dock = System.Windows.Forms.DockStyle.Fill
         Me.tblTime.Location = New System.Drawing.Point(3, 3)
         Me.tblTime.Name = "tblTime"
-        Me.tblTime.Size = New System.Drawing.Size(888, 305)
+        Me.tblTime.Size = New System.Drawing.Size(888, 306)
         Me.tblTime.TabIndex = 1
         '
         'StatusCode
@@ -499,7 +549,7 @@ Partial Class PayRoll
         Me.TabPage4.Location = New System.Drawing.Point(4, 22)
         Me.TabPage4.Name = "TabPage4"
         Me.TabPage4.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage4.Size = New System.Drawing.Size(766, 333)
+        Me.TabPage4.Size = New System.Drawing.Size(894, 312)
         Me.TabPage4.TabIndex = 1
         Me.TabPage4.Text = "NON-BILLABLE"
         Me.TabPage4.UseVisualStyleBackColor = True
@@ -514,7 +564,7 @@ Partial Class PayRoll
         Me.tblNonBillable.Dock = System.Windows.Forms.DockStyle.Fill
         Me.tblNonBillable.Location = New System.Drawing.Point(3, 3)
         Me.tblNonBillable.Name = "tblNonBillable"
-        Me.tblNonBillable.Size = New System.Drawing.Size(760, 327)
+        Me.tblNonBillable.Size = New System.Drawing.Size(888, 306)
         Me.tblNonBillable.TabIndex = 0
         '
         'NameEmployee
@@ -577,7 +627,7 @@ Partial Class PayRoll
         Me.TabPage2.Location = New System.Drawing.Point(4, 22)
         Me.TabPage2.Name = "TabPage2"
         Me.TabPage2.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage2.Size = New System.Drawing.Size(786, 438)
+        Me.TabPage2.Size = New System.Drawing.Size(914, 438)
         Me.TabPage2.TabIndex = 1
         Me.TabPage2.Text = "Weeks"
         Me.TabPage2.UseVisualStyleBackColor = True
@@ -594,7 +644,7 @@ Partial Class PayRoll
         Me.TableLayoutPanel3.Name = "TableLayoutPanel3"
         Me.TableLayoutPanel3.RowCount = 1
         Me.TableLayoutPanel3.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
-        Me.TableLayoutPanel3.Size = New System.Drawing.Size(780, 432)
+        Me.TableLayoutPanel3.Size = New System.Drawing.Size(908, 432)
         Me.TableLayoutPanel3.TabIndex = 0
         '
         'tblWeeks
@@ -607,7 +657,7 @@ Partial Class PayRoll
         Me.tblWeeks.Dock = System.Windows.Forms.DockStyle.Fill
         Me.tblWeeks.Location = New System.Drawing.Point(3, 3)
         Me.tblWeeks.Name = "tblWeeks"
-        Me.tblWeeks.Size = New System.Drawing.Size(319, 426)
+        Me.tblWeeks.Size = New System.Drawing.Size(372, 426)
         Me.tblWeeks.TabIndex = 0
         '
         'Weekend
@@ -629,12 +679,12 @@ Partial Class PayRoll
         Me.TableLayoutPanel4.Controls.Add(Me.Panel4, 0, 0)
         Me.TableLayoutPanel4.Controls.Add(Me.Panel5, 0, 1)
         Me.TableLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.TableLayoutPanel4.Location = New System.Drawing.Point(328, 3)
+        Me.TableLayoutPanel4.Location = New System.Drawing.Point(381, 3)
         Me.TableLayoutPanel4.Name = "TableLayoutPanel4"
         Me.TableLayoutPanel4.RowCount = 2
         Me.TableLayoutPanel4.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 78.57143!))
         Me.TableLayoutPanel4.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 21.42857!))
-        Me.TableLayoutPanel4.Size = New System.Drawing.Size(449, 426)
+        Me.TableLayoutPanel4.Size = New System.Drawing.Size(524, 426)
         Me.TableLayoutPanel4.TabIndex = 1
         '
         'Panel4
@@ -646,7 +696,7 @@ Partial Class PayRoll
         Me.Panel4.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel4.Location = New System.Drawing.Point(3, 3)
         Me.Panel4.Name = "Panel4"
-        Me.Panel4.Size = New System.Drawing.Size(443, 328)
+        Me.Panel4.Size = New System.Drawing.Size(518, 328)
         Me.Panel4.TabIndex = 0
         '
         'Label4
@@ -697,7 +747,7 @@ Partial Class PayRoll
         Me.Panel5.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel5.Location = New System.Drawing.Point(3, 337)
         Me.Panel5.Name = "Panel5"
-        Me.Panel5.Size = New System.Drawing.Size(443, 86)
+        Me.Panel5.Size = New System.Drawing.Size(518, 86)
         Me.Panel5.TabIndex = 1
         '
         'txtMsgWk
@@ -745,55 +795,6 @@ Partial Class PayRoll
         Me.btnAddWeek.TabIndex = 0
         Me.btnAddWeek.Text = "Add"
         Me.btnAddWeek.UseVisualStyleBackColor = True
-        '
-        'cmbClients
-        '
-        Me.cmbClients.FormattingEnabled = True
-        Me.cmbClients.Location = New System.Drawing.Point(244, 13)
-        Me.cmbClients.Name = "cmbClients"
-        Me.cmbClients.Size = New System.Drawing.Size(121, 21)
-        Me.cmbClients.TabIndex = 8
-        '
-        'cmbJobs
-        '
-        Me.cmbJobs.FormattingEnabled = True
-        Me.cmbJobs.Location = New System.Drawing.Point(409, 13)
-        Me.cmbJobs.Name = "cmbJobs"
-        Me.cmbJobs.Size = New System.Drawing.Size(121, 21)
-        Me.cmbJobs.TabIndex = 9
-        '
-        'chbALLJobs
-        '
-        Me.chbALLJobs.AutoSize = True
-        Me.chbALLJobs.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.chbALLJobs.Location = New System.Drawing.Point(536, 17)
-        Me.chbALLJobs.Name = "chbALLJobs"
-        Me.chbALLJobs.Size = New System.Drawing.Size(45, 17)
-        Me.chbALLJobs.TabIndex = 10
-        Me.chbALLJobs.Text = "ALL"
-        Me.chbALLJobs.UseVisualStyleBackColor = True
-        '
-        'Label5
-        '
-        Me.Label5.AutoSize = True
-        Me.Label5.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label5.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.Label5.Location = New System.Drawing.Point(192, 17)
-        Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(46, 13)
-        Me.Label5.TabIndex = 11
-        Me.Label5.Text = "Clients"
-        '
-        'Label6
-        '
-        Me.Label6.AutoSize = True
-        Me.Label6.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label6.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.Label6.Location = New System.Drawing.Point(371, 17)
-        Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(32, 13)
-        Me.Label6.TabIndex = 12
-        Me.Label6.Text = "Jobs"
         '
         'PayRoll
         '

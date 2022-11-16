@@ -107,10 +107,11 @@ Partial Class ReportVacationEmployee
         'chbAllEmployees
         '
         Me.chbAllEmployees.AutoSize = True
+        Me.chbAllEmployees.Font = New System.Drawing.Font("Verdana", 9.0!)
         Me.chbAllEmployees.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.chbAllEmployees.Location = New System.Drawing.Point(209, 36)
         Me.chbAllEmployees.Name = "chbAllEmployees"
-        Me.chbAllEmployees.Size = New System.Drawing.Size(91, 17)
+        Me.chbAllEmployees.Size = New System.Drawing.Size(112, 18)
         Me.chbAllEmployees.TabIndex = 19
         Me.chbAllEmployees.Text = "All Employees"
         Me.chbAllEmployees.UseVisualStyleBackColor = True
@@ -141,9 +142,9 @@ Partial Class ReportVacationEmployee
         Me.Label1.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.Label1.Location = New System.Drawing.Point(34, 9)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(42, 14)
+        Me.Label1.Size = New System.Drawing.Size(39, 14)
         Me.Label1.TabIndex = 16
-        Me.Label1.Text = "Date:"
+        Me.Label1.Text = "Year:"
         '
         'cmbEmployee
         '
@@ -158,7 +159,7 @@ Partial Class ReportVacationEmployee
         Me.btnReport.FlatAppearance.BorderSize = 0
         Me.btnReport.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(58, Byte), Integer), CType(CType(115, Byte), Integer))
         Me.btnReport.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnReport.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnReport.Font = New System.Drawing.Font("Verdana", 9.0!)
         Me.btnReport.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.btnReport.Image = Global.AVT_TRAKING.My.Resources.Resources.reportshow
         Me.btnReport.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
@@ -203,7 +204,7 @@ Partial Class ReportVacationEmployee
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(233, 18)
         Me.Label3.TabIndex = 8
-        Me.Label3.Text = "Report Vacaion Employee"
+        Me.Label3.Text = "Employee Vacaion Report"
         '
         'PictureBox1
         '

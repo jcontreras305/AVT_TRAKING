@@ -52,7 +52,7 @@ Public Class ReportVacationEmployee
         Try
             conection.conectar()
             Dim cmd As New SqlCommand("select distinct DATEPART(year, dateWorked) as 'year' from  hoursWorked as hw inner join workCode as wc on wc.idWorkCode = hw.idWorkCode
-where wc.name like '%vacation%'", conection.conn)
+where wc.name like '%6.4%'", conection.conn)
             Dim dr As SqlDataReader = cmd.ExecuteReader()
             cmbYear.Items.Clear()
             While dr.Read()
@@ -71,7 +71,7 @@ where wc.name like '%vacation%'", conection.conn)
         Try
             Dim empNum As String = "0"
             Dim flag As Boolean = True
-            If cmbYear.SelectedItem IsNot Nothing Then
+            If cmbYear.SelectedItem IsNot Nothing Or cmbYear.Text.Length = 4 Then
                 If chbAllEmployees.Checked = False Then
                     Dim array() As String = If(cmbEmployee.SelectedItem IsNot Nothing, cmbEmployee.SelectedItem.ToString.Split(" "), "")
                     If (array.Length > 1) Then

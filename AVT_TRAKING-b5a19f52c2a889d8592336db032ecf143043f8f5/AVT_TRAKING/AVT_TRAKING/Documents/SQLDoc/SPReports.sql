@@ -4636,7 +4636,7 @@ go
 --##############################################################################################
 --################## SP DELETE PROJECT #########################################################
 --##############################################################################################
-create proc sp_delete_project
+create proc [dbo].[sp_delete_project]
 @idAux varchar(36),
 @idAuxWO varchar(36)
 as
@@ -4677,6 +4677,10 @@ begin
 				delete from scfEstimation where idAux = @idAux
 			end
 			delete from task where idAux = @idAux
+			if (select COUNT(*) from KPI where idAux = @idAux) >0
+			begin 
+				delete from KPI where idAux = @idAux
+			end
 		end
 		else if @idAuxWO <> '' 
 		begin 

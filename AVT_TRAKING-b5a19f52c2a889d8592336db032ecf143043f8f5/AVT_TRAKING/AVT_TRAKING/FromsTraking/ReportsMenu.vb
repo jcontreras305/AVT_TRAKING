@@ -1,4 +1,7 @@
 ﻿Imports System.Runtime.InteropServices
+Imports System.IO
+Imports System.Reflection
+
 Public Class ReportsMenu
     Private Sub btnTimeSheet_Click(sender As Object, e As EventArgs) Handles btnTimeSheet.Click
         Dim tse As New ReporteEmployees
@@ -198,4 +201,161 @@ Public Class ReportsMenu
         rptInc.Incoming = False
         rptInc.ShowDialog()
     End Sub
+
+    Private Sub Button28_Click(sender As Object, e As EventArgs) Handles Button28.Click
+        Try
+            Dim sd As New SaveFileDialog()
+            sd.FileName = "TimeSheet.xlsx"
+            sd.Filter = "*|xlsx"
+            If DialogResult.OK = sd.ShowDialog() Then
+                Dim path As String = sd.FileName
+                Dim doc = AppDomain.CurrentDomain.BaseDirectory + "Docs\TimeSheet.xlsx"
+                'MsgBox(doc)
+                saveDoc(path, doc)
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message)
+        End Try
+    End Sub
+
+    Private Sub Button29_Click(sender As Object, e As EventArgs) Handles Button29.Click
+        Try
+            Dim sd As New SaveFileDialog()
+            sd.FileName = "PBI.xlsx"
+            sd.Filter = "*|xlsx"
+            If DialogResult.OK = sd.ShowDialog() Then
+                Dim path As String = sd.FileName
+                Dim doc = AppDomain.CurrentDomain.BaseDirectory + "Docs\TableToPBI.xlsx"
+                'MsgBox(doc)
+                saveDoc(path, doc)
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message)
+        End Try
+    End Sub
+
+    Private Sub Button30_Click(sender As Object, e As EventArgs) Handles Button30.Click
+        Try
+            Dim sd As New SaveFileDialog()
+            sd.FileName = "InvocePieces.xlsx"
+            sd.Filter = "*|xlsx"
+            If DialogResult.OK = sd.ShowDialog() Then
+                Dim path As String = sd.FileName
+                Dim doc = AppDomain.CurrentDomain.BaseDirectory + "Docs\InvoicePieces.xlsx"
+                'MsgBox(doc)
+                saveDoc(path, doc)
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message)
+        End Try
+    End Sub
+
+    Private Sub Button31_Click(sender As Object, e As EventArgs) Handles Button31.Click
+        Try
+            Dim sd As New SaveFileDialog()
+            sd.FileName = "Scaffolds.xlsx"
+            sd.Filter = "*|xlsx"
+            If DialogResult.OK = sd.ShowDialog() Then
+                Dim path As String = sd.FileName
+                Dim doc = AppDomain.CurrentDomain.BaseDirectory + "Docs\tScaffolds.xlsx"
+                'MsgBox(doc)
+                saveDoc(path, doc)
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message)
+        End Try
+    End Sub
+
+    Private Sub Button32_Click(sender As Object, e As EventArgs) Handles Button32.Click
+        Try
+            Dim sd As New SaveFileDialog()
+            sd.FileName = "Working.xlsm"
+            sd.Filter = "*|xlsm"
+            If DialogResult.OK = sd.ShowDialog() Then
+                Dim path As String = sd.FileName
+                Dim doc = AppDomain.CurrentDomain.BaseDirectory + "Docs\Working.xlsm"
+                'MsgBox(doc)
+                saveDoc(path, doc)
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message)
+        End Try
+    End Sub
+
+    Private Sub Button33_Click(sender As Object, e As EventArgs) Handles Button33.Click
+        Try
+            Dim sd As New SaveFileDialog()
+            sd.FileName = "Factors.xlsx"
+            sd.Filter = "*|xlsx"
+            If DialogResult.OK = sd.ShowDialog() Then
+                Dim path As String = sd.FileName
+                Dim doc = AppDomain.CurrentDomain.BaseDirectory + "Docs\Factors.xlsx"
+                'MsgBox(doc)
+                saveDoc(path, doc)
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message)
+        End Try
+    End Sub
+
+    Private Sub Button34_Click(sender As Object, e As EventArgs) Handles Button34.Click
+        Try
+            Dim sd As New SaveFileDialog()
+            sd.FileName = "Incomming.xlsx"
+            sd.Filter = "*|xlsx"
+            If DialogResult.OK = sd.ShowDialog() Then
+                Dim path As String = sd.FileName
+                Dim doc = AppDomain.CurrentDomain.BaseDirectory + "Docs\Incoming.xlsx"
+                'MsgBox(doc)
+                saveDoc(path, doc)
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message)
+        End Try
+    End Sub
+
+    Private Sub Button35_Click(sender As Object, e As EventArgs) Handles Button35.Click
+        Try
+            Dim sd As New SaveFileDialog()
+            sd.FileName = "Incomming.xlsx"
+            sd.Filter = "*|xlsx"
+            If DialogResult.OK = sd.ShowDialog() Then
+                Dim path As String = sd.FileName
+                Dim doc = AppDomain.CurrentDomain.BaseDirectory + "Docs\Outgoing.xlsx"
+                'MsgBox(doc)
+                saveDoc(path, doc)
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message)
+        End Try
+    End Sub
+
+    Private Sub Button36_Click(sender As Object, e As EventArgs) Handles Button36.Click
+        Try
+            Dim sd As New SaveFileDialog()
+            sd.FileName = "MASTER Payroll.xlsm"
+            sd.Filter = "*|xlsm"
+            If DialogResult.OK = sd.ShowDialog() Then
+                Dim path As String = sd.FileName
+                Dim doc = AppDomain.CurrentDomain.BaseDirectory + "Docs\MASTER Payroll.xlsm"
+                'MsgBox(doc)
+                saveDoc(path, doc)
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message)
+        End Try
+    End Sub
+    Private Function saveDoc(ByVal path As String, docPath As String) As Boolean
+        Try
+            If File.Exists(path) Then
+                File.Delete(path)
+            End If
+            File.Copy(docPath, path, False)
+            Process.Start(path, OpenMode.Random)
+            Return True
+        Catch ex As Exception
+            MsgBox(ex.Message)
+            Return False
+        End Try
+    End Function
 End Class

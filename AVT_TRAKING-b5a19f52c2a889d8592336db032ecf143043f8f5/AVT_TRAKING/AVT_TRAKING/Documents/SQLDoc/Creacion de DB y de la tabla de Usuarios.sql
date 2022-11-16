@@ -3741,13 +3741,233 @@ GO
 --		where estatus = 'E'	
 --end 
 --go
+--###############################################################################################
+--########### CAMBIO PARA EL EXCEL DE WORKING ###################################################
+--###############################################################################################
+
+--ALTER proc [dbo].[sp_selectJobTaxesExcel] 
+--@StartDate as date, 
+--@EndDate as date 
+--as
+--begin
+--select T1.jobNo ,T1.[ST Hours] ,T1.[OT Hours],T1.[Total Hours] ,T1.[Labor Cost] ,T1.[Scaffold-ADD] ,
+--	T1.[3rd Party Cost],T1.[In House Vehicles],T1.[Scaffold],T1.[Company Equipment] ,T1.[Material Cost],T1.[Subcontract Cost] ,
+--	T1.[Tools] ,T1.[Consumables] ,T1.[Other Cost] , T1.[Other Revanue],
+--	ISNULL(txs.FICA,0) as 'FICA',
+--	ISNULL(txs.FUI,0) as 'FUI',
+--	ISNULL(txs.SUI,0) as 'SUI',
+--	ISNULL(txs.WC,0) as 'WC',
+--	ISNULL(txs.GenLiab,0) as 'Gen Liab',
+--	ISNULL(txs.Umbr,0) as 'Umbr',
+--	ISNULL(txs.Pollution,0) as 'Pollution',
+--	ISNULL(txs.Healt,0) as 'Healt',
+--	ISNULL(txs.Fringe,0) as 'Fringe',
+--	ISNULL(txs.Small,0) as 'Small',
+--	ISNULL(txs.PPE,0) as 'PPE',
+--	ISNULL(txs.Consumable,0) as 'Consumable',
+--	ISNULL(txs.Overhead,0) as 'Overhead',
+--	ISNULL(txs.Profit,0) as 'Profit',
+--	ISNULL(txP.FICA,0) as 'FICA P',
+--	ISNULL(txP.FUI,0) as 'FUI P',
+--	ISNULL(txP.SUI,0) as 'SUI P',
+--	ISNULL(txP.WC,0) as 'WC P',
+--	ISNULL(txP.GenLiab,0) as 'Gen Liab P',
+--	ISNULL(txP.Umbr,0) as 'Umbr P',
+--	ISNULL(txP.Pollution,0) as 'Pollution P',
+--	ISNULL(txP.Healt,0) as 'Healt P',
+--	ISNULL(txP.Fringe,0) as 'Fringe P',
+--	ISNULL(txP.Small,0) as 'Small P',
+--	ISNULL(txP.PPE,0) as 'PPE P',
+--	ISNULL(txP.Consumable,0) as 'Consumable P',
+--	ISNULL(txP.Overhead,0) as 'Overhead P',
+--	ISNULL(txP.Profit,0) as 'Profit P'
+--from(
+--select distinct jb.jobNo,
+--	ISNULL((select SUM(hw1.hoursST) from hoursWorked as hw1 
+--		inner join task as tk1 on tk1.idAux = hw1.idAux
+--		inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO
+--		inner join projectOrder as po1 on wo1.idPO = po1.idPO and wo1.jobNo = po1.jobNo
+--		inner join job as jb1 on jb1.jobNo = po1.jobNo
+--		where jb1.jobNo = jb.jobNo and hw1.dateWorked between @StartDate and @EndDate),0) as 'ST Hours',
+--	ISNULL((select SUM(hw1.hoursOT+hw1.hours3 ) from hoursWorked as hw1 
+--		inner join task as tk1 on tk1.idAux = hw1.idAux
+--		inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO
+--		inner join projectOrder as po1 on wo1.idPO = po1.idPO and wo1.jobNo = po1.jobNo
+--		inner join job as jb1 on jb1.jobNo = po1.jobNo
+--		where jb1.jobNo = jb.jobNo and hw1.dateWorked between @StartDate and @EndDate),0) as 'OT Hours',
+--	ISNULL((select SUM(hw1.hoursST+hw1.hoursOT+hw1.hours3) from hoursWorked as hw1 
+--		inner join task as tk1 on tk1.idAux = hw1.idAux
+--		inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO
+--		inner join projectOrder as po1 on wo1.idPO = po1.idPO and wo1.jobNo = po1.jobNo
+--		inner join job as jb1 on jb1.jobNo = po1.jobNo
+--		where jb1.jobNo = jb.jobNo and hw1.dateWorked between @StartDate and @EndDate),0) as 'Total Hours',
+--	ISNULL((select ROUND(SUM((hw1.hoursST*wc1.billingRate1)+(hw1.hoursOT*wc1.billingRateOT)+(hw1.hours3*wc1.billingRate3)),2) from hoursWorked as hw1 
+--		inner join workCode as wc1 on wc1.idWorkCode= hw1.idWorkCode and wc1.jobNo = hw1.jobNo
+--		inner join task as tk1 on tk1.idAux = hw1.idAux
+--		inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO
+--		inner join projectOrder as po1 on wo1.idPO = po1.idPO and wo1.jobNo = po1.jobNo
+--		inner join job as jb1 on jb1.jobNo = po1.jobNo
+--		where jb1.jobNo = jb.jobNo and hw1.dateWorked between @StartDate and @EndDate),0) as 'Labor Cost',
+--	ISNULL((select Scaffold from taxesST where jobNo = jb.jobNo),0) as 'Scaffold-ADD',
+--	ISNULL((select SUM(amount) from materialUsed as mu1
+--		inner join material as mt1 on mu1.idMaterial = mt1.idMaterial
+--		left join materialClass as mc1 on mt1.code = mc1.code
+--		inner join task as tk1 on tk1.idAux = mu1.idAux
+--		inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO
+--		inner join projectOrder as po1 on po1.idPO = wo1.idPO and wo1.jobNo = po1.jobNo
+--		inner join job as jb1 on jb1.jobNo = po1.jobNo
+--		where jb1.jobNo = jb.jobNo and mu1.dateMaterial between @StartDate and @EndDate and (SUBSTRING(mc1.code ,LEN(mc1.code),1)='D' and not mc1.[description] like '%scaf%')),0) AS '3rd Party Cost',
+--	ISNULL((select SUM(amount) from materialUsed as mu1
+--		inner join material as mt1 on mu1.idMaterial = mt1.idMaterial
+--		left join materialClass as mc1 on mt1.code = mc1.code
+--		inner join task as tk1 on tk1.idAux = mu1.idAux
+--		inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO
+--		inner join projectOrder as po1 on po1.idPO = wo1.idPO and wo1.jobNo = po1.jobNo
+--		inner join job as jb1 on jb1.jobNo = po1.jobNo
+--		where jb1.jobNo = jb.jobNo and mu1.dateMaterial between @StartDate and @EndDate and (SUBSTRING(mc1.code ,LEN(mc1.code),1)='E' and not mc1.[description] like '%scaf%')),0) AS 'In House Vehicles',
+--	ISNULL((select SUM(amount) from materialUsed as mu1
+--		inner join material as mt1 on mu1.idMaterial = mt1.idMaterial
+--		left join materialClass as mc1 on mt1.code = mc1.code
+--		inner join task as tk1 on tk1.idAux = mu1.idAux
+--		inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO
+--		inner join projectOrder as po1 on po1.idPO = wo1.idPO and wo1.jobNo = po1.jobNo
+--		inner join job as jb1 on jb1.jobNo = po1.jobNo
+--		where jb1.jobNo = jb.jobNo and mu1.dateMaterial between @StartDate and @EndDate and mc1.[description] like '%scaf%'),0) AS 'Scaffold',
+--	ISNULL((select SUM(amount) from materialUsed as mu1
+--		inner join material as mt1 on mu1.idMaterial = mt1.idMaterial
+--		left join materialClass as mc1 on mt1.code = mc1.code
+--		inner join task as tk1 on tk1.idAux = mu1.idAux
+--		inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO
+--		inner join projectOrder as po1 on po1.idPO = wo1.idPO and wo1.jobNo = po1.jobNo
+--		inner join job as jb1 on jb1.jobNo = po1.jobNo
+--		where jb1.jobNo = jb.jobNo and mu1.dateMaterial between @StartDate and @EndDate and (SUBSTRING(mc1.code ,LEN(mc1.code),1)='F' and not mc1.[description] like '%scaf%')),0) AS 'Company Equipment',
+--	ISNULL((select SUM(amount) from materialUsed as mu1
+--		inner join material as mt1 on mu1.idMaterial = mt1.idMaterial
+--		left join materialClass as mc1 on mt1.code = mc1.code
+--		inner join task as tk1 on tk1.idAux = mu1.idAux
+--		inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO
+--		inner join projectOrder as po1 on po1.idPO = wo1.idPO and wo1.jobNo = po1.jobNo
+--		inner join job as jb1 on jb1.jobNo = po1.jobNo
+--		where jb1.jobNo = jb.jobNo and mu1.dateMaterial between @StartDate and @EndDate and (SUBSTRING(mc1.code ,LEN(mc1.code),1)='M' and not mc1.[description] like '%scaf%')),0) AS 'Material Cost',
+--	ISNULL((select SUM(amount) from materialUsed as mu1
+--		inner join material as mt1 on mu1.idMaterial = mt1.idMaterial
+--		left join materialClass as mc1 on mt1.code = mc1.code
+--		inner join task as tk1 on tk1.idAux = mu1.idAux
+--		inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO
+--		inner join projectOrder as po1 on po1.idPO = wo1.idPO and wo1.jobNo = po1.jobNo
+--		inner join job as jb1 on jb1.jobNo = po1.jobNo
+--		where jb1.jobNo = jb.jobNo and mu1.dateMaterial between @StartDate and @EndDate and (SUBSTRING(mc1.code ,LEN(mc1.code),1)='S' and not mc1.[description] like '%scaf%')),0) AS 'Subcontract Cost',
+--	ISNULL((select SUM(amount) from materialUsed as mu1
+--		inner join material as mt1 on mu1.idMaterial = mt1.idMaterial
+--		left join materialClass as mc1 on mt1.code = mc1.code
+--		inner join task as tk1 on tk1.idAux = mu1.idAux
+--		inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO
+--		inner join projectOrder as po1 on po1.idPO = wo1.idPO and wo1.jobNo = po1.jobNo
+--		inner join job as jb1 on jb1.jobNo = po1.jobNo
+--		where jb1.jobNo = jb.jobNo and mu1.dateMaterial between @StartDate and @EndDate and (SUBSTRING(mc1.code ,LEN(mc1.code),1)='T' and not mc1.[description] like '%scaf%')),0) AS 'Tools',
+--	ISNULL((select SUM(amount) from materialUsed as mu1
+--		inner join material as mt1 on mu1.idMaterial = mt1.idMaterial
+--		left join materialClass as mc1 on mt1.code = mc1.code
+--		inner join task as tk1 on tk1.idAux = mu1.idAux
+--		inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO
+--		inner join projectOrder as po1 on po1.idPO = wo1.idPO and wo1.jobNo = po1.jobNo
+--		inner join job as jb1 on jb1.jobNo = po1.jobNo
+--		where jb1.jobNo = jb.jobNo and mu1.dateMaterial between @StartDate and @EndDate and (SUBSTRING(mc1.code ,LEN(mc1.code),1)='V' and not mc1.[description] like '%scaf%')),0) AS 'Consumables',
+--	ISNULL((select SUM(amount) from materialUsed as mu1
+--		inner join material as mt1 on mu1.idMaterial = mt1.idMaterial
+--		left join materialClass as mc1 on mt1.code = mc1.code
+--		inner join task as tk1 on tk1.idAux = mu1.idAux
+--		inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO
+--		inner join projectOrder as po1 on po1.idPO = wo1.idPO and wo1.jobNo = po1.jobNo
+--		inner join job as jb1 on jb1.jobNo = po1.jobNo
+--		where jb1.jobNo = jb.jobNo and mu1.dateMaterial between @StartDate and @EndDate and (SUBSTRING(mc1.code ,LEN(mc1.code),1)='Y' and not mc1.[description] like '%scaf%')),0) AS 'Other Cost',
+--	(select ROUND(ISNULL(SUM(amount),0),2) 
+--		from expensesUsed as exu1 
+--		inner join task as tk1 on tk1.idAux = exu1.idAux
+--		inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO
+--		inner join projectOrder as po1 on po1.idPO = wo1.idPO and po1.jobNo = wo1.jobNo
+--		inner join job as jb1 on jb1.jobNo = po1.jobNo
+--		where jb1.jobNo = jb.jobNo and exu1.dateExpense between @StartDate and @EndDate ) as 'Other Revanue'
+--from job as jb
+--left join projectOrder as po on po.jobNo = jb.jobNo
+--left join workOrder as wo on wo.idPO = po.idPO and wo.jobNo = po.idPO
+--left join task as tk on tk.idAuxWO = wo.idAuxWO 
+--left join hoursWorked as hw on hw.idAux = tk.idAux
+--) as T1 
+--left join taxesST as txs on txs.jobNo = T1.jobNo
+--left join taxesPT as txp on txp.jobNo = T1.jobNo
+--end
+--go
 
 --| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
 --| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
 --V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V
 --###############################################################################################
---########### CAMBIO PARA EL EXCEL DE WORKING ###################################################
+--########### CAMBIO PARA PODER ELIMINAR LOS PROJECTOS ##########################################
 --###############################################################################################
+ALTER proc [dbo].[sp_delete_project]
+@idAux varchar(36),
+@idAuxWO varchar(36)	
+as
+declare @error as bit = 0
+declare @taskAux as varchar(20)
+declare @countScaff as int
+begin 
+	begin tran
+		begin try	
+		if @idAux <> '' 
+		begin 
+			if (select COUNT(*) from expensesUsed where idAux = @idAux)>0
+			begin 
+				delete from expensesUsed where idAux = @idAux 
+			end
+			if (select COUNT(*) from materialUsed where idAux = @idAux)>0
+			begin
+				delete from materialUsed where idAux = @idAux
+			end
+			if (select COUNT(*) from hoursWorked where idAux = @idAux)>0
+			begin
+				delete from hoursWorked where idAux = @idAux
+			end
+			if (select COUNT(*) from scaffoldTraking where idAux = @idAux)>0
+			begin
+				set @countScaff =( select COUNT(*) from scaffoldTraking where idAux = @idAux)
+				while (@countScaff>0)
+				begin
+					set @taskAux = (select top 1 tag from scaffoldTraking where idAux = @idAux)
+					exec sp_deleteScaffold @taskAux
+					set @countScaff =( select COUNT(*) from scaffoldTraking where idAux = @idAux)
+				end
+			end
+			if (select COUNT(*) from scfEstimation where idAux = @idAux)>0
+			begin
+				delete EstMeters from EstMeters as estM inner join scfEstimation as scfest on estM.EstNumber = scfest.EstNumber 
+				 where scfest.idAux = @idAux
+				delete from scfEstimation where idAux = @idAux
+			end
+			delete from task where idAux = @idAux
+			if (select COUNT(*) from KPI where idAux = @idAux) >0
+			begin 
+				delete from KPI where idAux = @idAux
+			end
+		end
+		else if @idAuxWO <> '' 
+		begin 
+			delete from workOrder where idAuxWO = @idAuxWO
+		end
+	end try
+		begin catch
+			set @error = 1
+			goto solveProblem
+		end catch
+	commit tran
+	solveProblem:
+	if @error <> 0 
+	begin 
+		rollback tran
+	end  
+end
+go
 
 ALTER proc [dbo].[sp_selectJobTaxesExcel] 
 @StartDate as date, 
@@ -3901,3 +4121,24 @@ left join hoursWorked as hw on hw.idAux = tk.idAux
 left join taxesST as txs on txs.jobNo = T1.jobNo
 left join taxesPT as txp on txp.jobNo = T1.jobNo
 end
+go
+ALTER proc [dbo].[sp_select_MyComapny_Info]
+@CompanyName varchar(30)
+as
+begin
+select cmp.name,
+	ha.city,
+	ha.providence,
+	CONCAT(ha.avenue , ' ',ha.number) as 'Address',
+	ha.postalCode,
+	cmp.idContact,
+	cmp.invoiceDescr,
+	ct.email,
+	ct.phoneNumber1 as 'PhoneNumber1',
+	ct.phoneNumber2 as 'PhoneNumber2',
+	cmp.img
+from company as cmp 
+left join HomeAddress as ha on ha.idHomeAdress	= cmp.idHomeAddress
+left join contact as ct on ct.idContact = cmp.idContact
+end
+go

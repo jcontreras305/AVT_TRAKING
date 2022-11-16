@@ -973,6 +973,12 @@
       <DependentUpon>SCFRentalDetails.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="SeverConnecion.Designer.vb">
+      <DependentUpon>SeverConnecion.vb</DependentUpon>
+    </Compile>
+    <Compile Include="SeverConnecion.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="VRT_TRAKINGDataSet.Designer.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -1424,11 +1430,18 @@
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>SCFRentalDetails.vb</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="SeverConnecion.resx">
+      <DependentUpon>SeverConnecion.vb</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Documents\ExcelDoc\Consultas para PBI.xlsx" />
+    <EmbeddedResource Include="Documents\ExcelDoc\TablesToPBI.xlsx" />
+    <None Include="Documents\ExcelDoc\Factors.xlsx" />
+    <None Include="Documents\ExcelDoc\Incoming.xlsx" />
     <None Include="Documents\ExcelDoc\InvoicePieces.xlsx" />
-    <None Include="Documents\ExcelDoc\Time Sheet Prueba.xlsx" />
+    <EmbeddedResource Include="Documents\ExcelDoc\TimeSheet.xlsx" />
+    <None Include="Documents\ExcelDoc\MASTER Payroll.xlsm" />
+    <None Include="Documents\ExcelDoc\Outgoing.xlsx" />
     <None Include="Documents\ExcelDoc\tScaffolds.xlsx" />
     <None Include="Documents\ExcelDoc\Working.xlsm" />
     <None Include="My Project\Application.myapp">

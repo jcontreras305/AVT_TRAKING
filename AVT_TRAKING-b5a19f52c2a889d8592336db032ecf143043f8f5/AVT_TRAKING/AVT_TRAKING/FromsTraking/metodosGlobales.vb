@@ -338,7 +338,7 @@ where cl.numberClient = " + numberClient + " and po.projectId = '" + project + "
                     Dim fecha1 As String = array(1) + "/" + array(0) + "/" + array(2)
                     Try
                         Dim newfecha As Date = New Date(CInt(array(2)), CInt(array(1)), CInt(array(0)))
-                        Return CDate(fecha1)
+                        Return newfecha
                     Catch ex As Exception
                         fecha1 = array(0) + "/" + array(1) + "/" + array(2)
                         Return CDate(fecha1)

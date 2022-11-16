@@ -48,7 +48,7 @@ Partial Class FindEmployee
         '
         'txtAsk
         '
-        Me.txtAsk.Location = New System.Drawing.Point(3, 41)
+        Me.txtAsk.Location = New System.Drawing.Point(63, 36)
         Me.txtAsk.Name = "txtAsk"
         Me.txtAsk.Size = New System.Drawing.Size(152, 20)
         Me.txtAsk.TabIndex = 0
@@ -63,9 +63,9 @@ Partial Class FindEmployee
         Me.btnFindEmployee.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.btnFindEmployee.Image = Global.AVT_TRAKING.My.Resources.Resources.loupe
         Me.btnFindEmployee.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnFindEmployee.Location = New System.Drawing.Point(161, 38)
+        Me.btnFindEmployee.Location = New System.Drawing.Point(3, 29)
         Me.btnFindEmployee.Name = "btnFindEmployee"
-        Me.btnFindEmployee.Size = New System.Drawing.Size(63, 23)
+        Me.btnFindEmployee.Size = New System.Drawing.Size(63, 32)
         Me.btnFindEmployee.TabIndex = 1
         Me.btnFindEmployee.Text = "Find"
         Me.btnFindEmployee.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -81,7 +81,7 @@ Partial Class FindEmployee
         Me.btnSelect.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.btnSelect.Image = Global.AVT_TRAKING.My.Resources.Resources.click
         Me.btnSelect.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnSelect.Location = New System.Drawing.Point(232, 38)
+        Me.btnSelect.Location = New System.Drawing.Point(221, 33)
         Me.btnSelect.Name = "btnSelect"
         Me.btnSelect.Size = New System.Drawing.Size(87, 23)
         Me.btnSelect.TabIndex = 3
@@ -99,7 +99,7 @@ Partial Class FindEmployee
         Me.tblEmployees.Location = New System.Drawing.Point(0, 0)
         Me.tblEmployees.Name = "tblEmployees"
         Me.tblEmployees.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.tblEmployees.Size = New System.Drawing.Size(351, 304)
+        Me.tblEmployees.Size = New System.Drawing.Size(365, 304)
         Me.tblEmployees.TabIndex = 4
         '
         'Panel1
@@ -110,7 +110,7 @@ Partial Class FindEmployee
         Me.Panel1.Controls.Add(Me.tblEmployees)
         Me.Panel1.Location = New System.Drawing.Point(3, 108)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(351, 304)
+        Me.Panel1.Size = New System.Drawing.Size(365, 304)
         Me.Panel1.TabIndex = 5
         '
         'TitleBar
@@ -123,7 +123,7 @@ Partial Class FindEmployee
         Me.TitleBar.Dock = System.Windows.Forms.DockStyle.Fill
         Me.TitleBar.Location = New System.Drawing.Point(3, 3)
         Me.TitleBar.Name = "TitleBar"
-        Me.TitleBar.Size = New System.Drawing.Size(351, 29)
+        Me.TitleBar.Size = New System.Drawing.Size(365, 29)
         Me.TitleBar.TabIndex = 6
         '
         'Label1
@@ -133,15 +133,15 @@ Partial Class FindEmployee
         Me.Label1.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.Label1.Location = New System.Drawing.Point(4, 4)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(129, 18)
+        Me.Label1.Size = New System.Drawing.Size(134, 18)
         Me.Label1.TabIndex = 3
-        Me.Label1.Text = "FindEmployee"
+        Me.Label1.Text = "Find Employee"
         '
         'PictureBox3
         '
         Me.PictureBox3.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.PictureBox3.Image = Global.AVT_TRAKING.My.Resources.Resources.minimize2
-        Me.PictureBox3.Location = New System.Drawing.Point(292, 3)
+        Me.PictureBox3.Location = New System.Drawing.Point(306, 3)
         Me.PictureBox3.Name = "PictureBox3"
         Me.PictureBox3.Size = New System.Drawing.Size(27, 26)
         Me.PictureBox3.TabIndex = 2
@@ -151,9 +151,9 @@ Partial Class FindEmployee
         '
         Me.btnRestore.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnRestore.Image = Global.AVT_TRAKING.My.Resources.Resources.restore2
-        Me.btnRestore.Location = New System.Drawing.Point(322, 3)
+        Me.btnRestore.Location = New System.Drawing.Point(336, 2)
         Me.btnRestore.Name = "btnRestore"
-        Me.btnRestore.Size = New System.Drawing.Size(24, 26)
+        Me.btnRestore.Size = New System.Drawing.Size(26, 26)
         Me.btnRestore.TabIndex = 1
         Me.btnRestore.TabStop = False
         '
@@ -161,7 +161,7 @@ Partial Class FindEmployee
         '
         Me.btnMaximize.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnMaximize.Image = Global.AVT_TRAKING.My.Resources.Resources.maximize2
-        Me.btnMaximize.Location = New System.Drawing.Point(322, 2)
+        Me.btnMaximize.Location = New System.Drawing.Point(336, 2)
         Me.btnMaximize.Name = "btnMaximize"
         Me.btnMaximize.Size = New System.Drawing.Size(26, 26)
         Me.btnMaximize.TabIndex = 0
@@ -169,6 +169,7 @@ Partial Class FindEmployee
         '
         'TableLayoutPanel1
         '
+        Me.TableLayoutPanel1.BackColor = System.Drawing.Color.FromArgb(CType(CType(83, Byte), Integer), CType(CType(93, Byte), Integer), CType(CType(102, Byte), Integer))
         Me.TableLayoutPanel1.ColumnCount = 1
         Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
         Me.TableLayoutPanel1.Controls.Add(Me.TitleBar, 0, 0)
@@ -181,7 +182,7 @@ Partial Class FindEmployee
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35.0!))
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 70.0!))
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50.0!))
-        Me.TableLayoutPanel1.Size = New System.Drawing.Size(357, 415)
+        Me.TableLayoutPanel1.Size = New System.Drawing.Size(371, 415)
         Me.TableLayoutPanel1.TabIndex = 7
         '
         'Panel3
@@ -194,16 +195,16 @@ Partial Class FindEmployee
         Me.Panel3.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel3.Location = New System.Drawing.Point(3, 38)
         Me.Panel3.Name = "Panel3"
-        Me.Panel3.Size = New System.Drawing.Size(351, 64)
+        Me.Panel3.Size = New System.Drawing.Size(365, 64)
         Me.Panel3.TabIndex = 7
         '
         'PictureBox4
         '
         Me.PictureBox4.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.PictureBox4.Image = Global.AVT_TRAKING.My.Resources.Resources._exit
-        Me.PictureBox4.Location = New System.Drawing.Point(306, -1)
+        Me.PictureBox4.Location = New System.Drawing.Point(320, 3)
         Me.PictureBox4.Name = "PictureBox4"
-        Me.PictureBox4.Size = New System.Drawing.Size(36, 38)
+        Me.PictureBox4.Size = New System.Drawing.Size(36, 33)
         Me.PictureBox4.TabIndex = 3
         Me.PictureBox4.TabStop = False
         '
@@ -211,7 +212,7 @@ Partial Class FindEmployee
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(357, 415)
+        Me.ClientSize = New System.Drawing.Size(371, 415)
         Me.Controls.Add(Me.TableLayoutPanel1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
         Me.Name = "FindEmployee"

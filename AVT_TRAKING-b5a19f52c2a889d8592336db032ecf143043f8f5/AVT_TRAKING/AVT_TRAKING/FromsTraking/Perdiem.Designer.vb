@@ -88,8 +88,8 @@ Partial Class Perdiem
         Me.TableLayoutPanel1.Location = New System.Drawing.Point(0, 0)
         Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
         Me.TableLayoutPanel1.RowCount = 3
-        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 89.0!))
-        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 87.0!))
+        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 49.0!))
+        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 74.0!))
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
         Me.TableLayoutPanel1.Size = New System.Drawing.Size(737, 440)
         Me.TableLayoutPanel1.TabIndex = 0
@@ -100,14 +100,15 @@ Partial Class Perdiem
         Me.Panel1.Controls.Add(Me.txtSalida)
         Me.Panel1.Controls.Add(Me.Label2)
         Me.Panel1.Controls.Add(Me.Label1)
+        Me.Panel1.Controls.Add(Me.PictureBox1)
         Me.Panel1.Controls.Add(Me.btnFindExcel)
         Me.Panel1.Controls.Add(Me.sprExcelRow)
         Me.Panel1.Controls.Add(Me.btnRefreshPerdiem)
         Me.Panel1.Controls.Add(Me.dtpStartDate)
         Me.Panel1.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel1.Location = New System.Drawing.Point(3, 92)
+        Me.Panel1.Location = New System.Drawing.Point(3, 52)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(731, 81)
+        Me.Panel1.Size = New System.Drawing.Size(731, 68)
         Me.Panel1.TabIndex = 0
         '
         'txtSalida
@@ -126,9 +127,9 @@ Partial Class Perdiem
         Me.Label2.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.Label2.Location = New System.Drawing.Point(347, 16)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(83, 13)
+        Me.Label2.Size = New System.Drawing.Size(86, 13)
         Me.Label2.TabIndex = 5
-        Me.Label2.Text = "Start Row Excel"
+        Me.Label2.Text = "Start Row Excel:"
         '
         'Label1
         '
@@ -147,11 +148,13 @@ Partial Class Perdiem
         Me.btnFindExcel.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnFindExcel.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnFindExcel.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.btnFindExcel.Location = New System.Drawing.Point(535, 13)
+        Me.btnFindExcel.Image = Global.AVT_TRAKING.My.Resources.Resources.excel
+        Me.btnFindExcel.Location = New System.Drawing.Point(507, 2)
         Me.btnFindExcel.Name = "btnFindExcel"
-        Me.btnFindExcel.Size = New System.Drawing.Size(75, 23)
+        Me.btnFindExcel.Size = New System.Drawing.Size(116, 41)
         Me.btnFindExcel.TabIndex = 3
-        Me.btnFindExcel.Text = "..."
+        Me.btnFindExcel.Text = "Find Excel"
+        Me.btnFindExcel.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
         Me.btnFindExcel.UseVisualStyleBackColor = True
         '
         'sprExcelRow
@@ -173,9 +176,9 @@ Partial Class Perdiem
         Me.btnRefreshPerdiem.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.btnRefreshPerdiem.Image = Global.AVT_TRAKING.My.Resources.Resources.refresh
         Me.btnRefreshPerdiem.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnRefreshPerdiem.Location = New System.Drawing.Point(255, 10)
+        Me.btnRefreshPerdiem.Location = New System.Drawing.Point(250, 10)
         Me.btnRefreshPerdiem.Name = "btnRefreshPerdiem"
-        Me.btnRefreshPerdiem.Size = New System.Drawing.Size(86, 23)
+        Me.btnRefreshPerdiem.Size = New System.Drawing.Size(91, 31)
         Me.btnRefreshPerdiem.TabIndex = 1
         Me.btnRefreshPerdiem.Text = "Refresh"
         Me.btnRefreshPerdiem.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -194,9 +197,9 @@ Partial Class Perdiem
         '
         Me.Panel2.Controls.Add(Me.TabControl1)
         Me.Panel2.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel2.Location = New System.Drawing.Point(3, 179)
+        Me.Panel2.Location = New System.Drawing.Point(3, 126)
         Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(731, 258)
+        Me.Panel2.Size = New System.Drawing.Size(731, 311)
         Me.Panel2.TabIndex = 1
         '
         'TabControl1
@@ -206,7 +209,7 @@ Partial Class Perdiem
         Me.TabControl1.Location = New System.Drawing.Point(0, 0)
         Me.TabControl1.Name = "TabControl1"
         Me.TabControl1.SelectedIndex = 0
-        Me.TabControl1.Size = New System.Drawing.Size(731, 258)
+        Me.TabControl1.Size = New System.Drawing.Size(731, 311)
         Me.TabControl1.TabIndex = 0
         '
         'TabPage1
@@ -215,7 +218,7 @@ Partial Class Perdiem
         Me.TabPage1.Location = New System.Drawing.Point(4, 22)
         Me.TabPage1.Name = "TabPage1"
         Me.TabPage1.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage1.Size = New System.Drawing.Size(723, 232)
+        Me.TabPage1.Size = New System.Drawing.Size(723, 285)
         Me.TabPage1.TabIndex = 0
         Me.TabPage1.Text = "Per-Diem"
         Me.TabPage1.UseVisualStyleBackColor = True
@@ -231,7 +234,7 @@ Partial Class Perdiem
         Me.tblPerDiem.Location = New System.Drawing.Point(3, 3)
         Me.tblPerDiem.Name = "tblPerDiem"
         Me.tblPerDiem.ReadOnly = True
-        Me.tblPerDiem.Size = New System.Drawing.Size(717, 226)
+        Me.tblPerDiem.Size = New System.Drawing.Size(717, 279)
         Me.tblPerDiem.TabIndex = 0
         '
         'StatusCode
@@ -349,7 +352,7 @@ Partial Class Perdiem
         Me.Panel3.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel3.Location = New System.Drawing.Point(3, 3)
         Me.Panel3.Name = "Panel3"
-        Me.Panel3.Size = New System.Drawing.Size(731, 83)
+        Me.Panel3.Size = New System.Drawing.Size(731, 43)
         Me.Panel3.TabIndex = 2
         '
         'TitleBar
@@ -358,12 +361,11 @@ Partial Class Perdiem
         Me.TitleBar.Controls.Add(Me.PictureBox2)
         Me.TitleBar.Controls.Add(Me.btnRestore)
         Me.TitleBar.Controls.Add(Me.btnMaximize)
-        Me.TitleBar.Controls.Add(Me.PictureBox1)
         Me.TitleBar.Controls.Add(Me.Label7)
         Me.TitleBar.Dock = System.Windows.Forms.DockStyle.Fill
         Me.TitleBar.Location = New System.Drawing.Point(0, 0)
         Me.TitleBar.Name = "TitleBar"
-        Me.TitleBar.Size = New System.Drawing.Size(731, 83)
+        Me.TitleBar.Size = New System.Drawing.Size(731, 43)
         Me.TitleBar.TabIndex = 16
         '
         'PictureBox2
@@ -400,7 +402,7 @@ Partial Class Perdiem
         '
         Me.PictureBox1.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.PictureBox1.Image = Global.AVT_TRAKING.My.Resources.Resources._exit
-        Me.PictureBox1.Location = New System.Drawing.Point(693, 42)
+        Me.PictureBox1.Location = New System.Drawing.Point(690, 8)
         Me.PictureBox1.Name = "PictureBox1"
         Me.PictureBox1.Size = New System.Drawing.Size(34, 33)
         Me.PictureBox1.TabIndex = 14
@@ -411,11 +413,11 @@ Partial Class Perdiem
         Me.Label7.AutoSize = True
         Me.Label7.Font = New System.Drawing.Font("Verdana", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label7.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.Label7.Location = New System.Drawing.Point(4, 4)
+        Me.Label7.Location = New System.Drawing.Point(20, 12)
         Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(88, 18)
+        Me.Label7.Size = New System.Drawing.Size(138, 18)
         Me.Label7.TabIndex = 0
-        Me.Label7.Text = "Per Diem"
+        Me.Label7.Text = "Daily Per-Diem"
         '
         'PictureBox4
         '

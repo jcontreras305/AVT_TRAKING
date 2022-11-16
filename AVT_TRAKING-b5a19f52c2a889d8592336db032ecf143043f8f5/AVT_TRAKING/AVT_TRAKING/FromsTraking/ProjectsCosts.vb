@@ -291,10 +291,20 @@ Public Class ProjectsCosts
             End If
         End If
     End Sub
+    Private Sub btnCancel_Click(sender As Object, e As EventArgs) Handles btnCancel.Click
+        Try
+            cargarDatosProjecto(pjt.jobNum, pjt.idAuxWO, pjt.idTask)
+            btnCancel.Visible = False
+            btnAddRecord.Text = "Add Record"
+        Catch ex As Exception
+
+        End Try
+    End Sub
 
     Private Sub btnAddRecord_Click(sender As Object, e As EventArgs) Handles btnAddRecord.Click
         If btnAddRecord.Text = "Add Record" Then
             btnAddRecord.Text = "Save Record"
+            btnCancel.Visible = True
             limpiarCampos()
             activarCampos(True)
             btnChangeJobNo.Enabled = False
@@ -359,60 +369,62 @@ Public Class ProjectsCosts
         Return True
     End Function
     Private Function llenarCampos(ByVal lstDatosPO As List(Of String)) As Boolean
-        If lstDatosPO.Count > 0 And Not lstDatosPO Is Nothing Then
-            txtClientName.Text = lstDatosPO(0)
-            txtWokOrder.Text = lstDatosPO(1)
-            txtTask.Text = lstDatosPO(2)
-            WorkOrder = lstDatosPO(1)
-            task = lstDatosPO(2)
-            txtEquipament.Text = lstDatosPO(3)
-            cmbProjectManager.Text = lstDatosPO(4)
-            If lstDatosPO(4) <> "" Then
-                cmbProjectManager.SelectedIndex = cmbProjectManager.FindString(lstDatosPO(4))
-            Else
-                cmbProjectManager.SelectedIndex = -1
-            End If
-            txtClientPO.Text = lstDatosPO(5)
-            PO = lstDatosPO(5)
-            txtProjectDescription.Text = lstDatosPO(6)
-            sprTotalBilling.Value = lstDatosPO(7)
-            dtpBeginDate.Value = lstDatosPO(8)
-            dtpEndDate.Value = lstDatosPO(9)
+        If lstDatosPO IsNot Nothing Then
+            If lstDatosPO.Count > 0 Then
+                txtClientName.Text = lstDatosPO(0)
+                txtWokOrder.Text = lstDatosPO(1)
+                txtTask.Text = lstDatosPO(2)
+                WorkOrder = lstDatosPO(1)
+                task = lstDatosPO(2)
+                txtEquipament.Text = lstDatosPO(3)
+                cmbProjectManager.Text = lstDatosPO(4)
+                If lstDatosPO(4) <> "" Then
+                    cmbProjectManager.SelectedIndex = cmbProjectManager.FindString(lstDatosPO(4))
+                Else
+                    cmbProjectManager.SelectedIndex = -1
+                End If
+                txtClientPO.Text = lstDatosPO(5)
+                PO = lstDatosPO(5)
+                txtProjectDescription.Text = lstDatosPO(6)
+                sprTotalBilling.Value = lstDatosPO(7)
+                dtpBeginDate.Value = lstDatosPO(8)
+                dtpEndDate.Value = lstDatosPO(9)
 
-            sprHoursEstimate.Value = lstDatosPO(10)
-            'cmbExpCode.Text = lstDatosPO(10)
-            cmbExpCode.SelectedIndex = cmbExpCode.FindString(lstDatosPO(11))
-            txtAcountNo.Text = lstDatosPO(12)
+                sprHoursEstimate.Value = lstDatosPO(10)
+                'cmbExpCode.Text = lstDatosPO(10)
+                cmbExpCode.SelectedIndex = cmbExpCode.FindString(lstDatosPO(11))
+                txtAcountNo.Text = lstDatosPO(12)
 
-            If lstDatosPO(13) = "1" Then
-                chbComplete.Checked = True
+                If lstDatosPO(13) = "1" Then
+                    chbComplete.Checked = True
+                Else
+                    chbComplete.Checked = False
+                End If
+                'cmbJobNumber.SelectedIndex = cmbJobNumber.FindString(JobNumber.ToString())
+                'AQUI SE CARGARAN LOS DATOS A LA CLASE DE PROJECT 
+                pjt.idPO = txtClientPO.Text
+                pjt.equipament = txtEquipament.Text
+                pjt.manager = cmbProjectManager.Text
+                pjt.estimateHour = sprHoursEstimate.Value
+                pjt.beginDate = dtpBeginDate.Value
+                pjt.endDate = dtpEndDate.Value
+                Dim datos() As String = cmbExpCode.Text.Split(" ")
+                pjt.expCode = datos(0)
+                pjt.accountNum = txtAcountNo.Text
+                pjt.estimateHour = CInt(sprHoursEstimate.Value)
+                pjt.status = If(chbComplete.Checked, "1", "0")
+                pjt.jobNum = JobNumber
+                pjt.idTask = task
+                pjt.idWorkOrder = WorkOrder
+                pjt.idAux = lstDatosPO(14)
+                idAuxWO = lstDatosPO(15)
+                pjt.idAuxWO = idAuxWO
+                pjt.PercentComplete = CInt(lstDatosPO(16))
+                sprPercentComplete.Value = pjt.PercentComplete
+                Return True
             Else
-                chbComplete.Checked = False
+                Return False
             End If
-            'cmbJobNumber.SelectedIndex = cmbJobNumber.FindString(JobNumber.ToString())
-            'AQUI SE CARGARAN LOS DATOS A LA CLASE DE PROJECT 
-            pjt.idPO = txtClientPO.Text
-            pjt.equipament = txtEquipament.Text
-            pjt.manager = cmbProjectManager.Text
-            pjt.estimateHour = sprHoursEstimate.Value
-            pjt.beginDate = dtpBeginDate.Value
-            pjt.endDate = dtpEndDate.Value
-            Dim datos() As String = cmbExpCode.Text.Split(" ")
-            pjt.expCode = datos(0)
-            pjt.accountNum = txtAcountNo.Text
-            pjt.estimateHour = CInt(sprHoursEstimate.Value)
-            pjt.status = If(chbComplete.Checked, "1", "0")
-            pjt.jobNum = JobNumber
-            pjt.idTask = task
-            pjt.idWorkOrder = WorkOrder
-            pjt.idAux = lstDatosPO(14)
-            idAuxWO = lstDatosPO(15)
-            pjt.idAuxWO = idAuxWO
-            pjt.PercentComplete = CInt(lstDatosPO(16))
-            sprPercentComplete.Value = pjt.PercentComplete
-            Return True
-        Else
-            Return False
         End If
     End Function
     Private Sub cmbJobNumber_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbJobNumber.SelectedIndexChanged
@@ -547,10 +559,10 @@ Public Class ProjectsCosts
     End Sub
 
     Public Function validarTask() As Boolean
-        If txtTask.Text.Length >= 2 And txtTask.Text.Length <= 6 Then
+        If txtTask.Text.Length >= 2 And txtTask.Text.Length <= 7 Then
             Dim flagTask As Boolean = True
             For Each row As DataRow In tablasDeTareas.Rows
-                If txtTask.Text = row.ItemArray(3).ToString And txtWokOrder.Text = row.ItemArray(2) And cmbJobNumber.Text = row.ItemArray(0) And txtClientPO.Text = row.ItemArray(1) Then
+                If txtTask.Text = row.ItemArray(3).ToString And txtWokOrder.Text = row.ItemArray(2) And cmbJobNumber.Text = row.ItemArray(0).ToString() And txtClientPO.Text = row.ItemArray(1).ToString() Then
                     flagTask = False
                     Exit For
                 End If
@@ -558,10 +570,10 @@ Public Class ProjectsCosts
             Return flagTask
         Else
             If txtTask.Text.Length < 3 Then
-                MessageBox.Show("The 'Task' parameter admits a code whose length is between 3 and 7 characters..", "Error", MessageBoxButtons.YesNo, MessageBoxIcon.Error)
+                MessageBox.Show("The 'Task' parameter admits a code whose length is between 2 and 7 characters..", "Error", MessageBoxButtons.YesNo, MessageBoxIcon.Error)
                 Return False
             ElseIf txtTask.Text.Length > 6 Then
-                MessageBox.Show("The 'Task' parameter admits a code whose length is between 3 and 7 characters.", "Error", MessageBoxButtons.YesNo, MessageBoxIcon.Error)
+                MessageBox.Show("The 'Task' parameter admits a code whose length is between 2 and 7 characters.", "Error", MessageBoxButtons.YesNo, MessageBoxIcon.Error)
                 Return False
             Else
                 Return False
@@ -635,7 +647,7 @@ Public Class ProjectsCosts
                 Return False
             End If
         Else
-            MessageBox.Show("The parameter 'WorkOrder' accept like minium 4 numers.'", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            MessageBox.Show("The parameter 'WorkOrder' accept like minimum 4 numers.'", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
             Return False
         End If
     End Function
@@ -682,7 +694,7 @@ Public Class ProjectsCosts
                     Return True
                 End If
             Else
-                MessageBox.Show("The 'PO' needs like a minum 5 numbers.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                MessageBox.Show("The 'PO' needs like a minimum 5 numbers.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
                 Return False
             End If
         Else
@@ -700,7 +712,7 @@ Public Class ProjectsCosts
                     Return True
                 End If
             Else
-                MessageBox.Show("The 'PO' needs like a minum 8 numbers.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                MessageBox.Show("The 'PO' needs like a minimum 5 numbers.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
                 Return False
             End If
         End If
@@ -1458,6 +1470,7 @@ Public Class ProjectsCosts
     Private Sub btnUpdateMaterialExcel_Click(sender As Object, e As EventArgs) Handles btnUpdateMaterialExcel.Click
         Dim UpExcel As New EquipmentValidation
         UpExcel.idclient = idCliente
+        UpExcel.jobNo = JobNumber.ToString()
         UpExcel.ShowDialog()
         mtdJobs.buscarMaterialesPorProyecto(tblMaterialProjects, idAuxWO, task)
         calcularValores()

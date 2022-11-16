@@ -77,9 +77,9 @@ Public Class ProjectsClients
     Private Sub btnProyeccts_Click(sender As Object, e As EventArgs) Handles btnProyeccts.Click
         Dim pjc As New ProjectsCosts
         If tblProjectClientsAll.SelectedRows.Count() > 0 Then
-            pjc.JobNumber = tblProjectClientsAll.SelectedRows(0).Cells("jobNo").Value.ToString
-            pjc.idCliente = tblProjectClientsAll.SelectedRows(0).Cells("idClient").Value.ToString
-            pjc.PO = tblProjectClientsAll.SelectedRows(0).Cells("clmIdPO").Value.ToString
+            pjc.JobNumber = If(tblProjectClientsAll.SelectedRows(0).Cells("jobNo").Value IsNot Nothing, tblProjectClientsAll.SelectedRows(0).Cells("jobNo").Value.ToString, "")
+            pjc.idCliente = If(tblProjectClientsAll.SelectedRows(0).Cells("idClient").Value IsNot Nothing, tblProjectClientsAll.SelectedRows(0).Cells("idClient").Value.ToString, "")
+            pjc.PO = If(tblProjectClientsAll.SelectedRows(0).Cells("clmIdPO").Value IsNot Nothing, tblProjectClientsAll.SelectedRows(0).Cells("clmIdPO").Value.ToString, "")
             If workOrder = "" Or workOrder = Nothing Then
                 pjc.WorkOrder = ""
                 pjc.idAuxWO = ""

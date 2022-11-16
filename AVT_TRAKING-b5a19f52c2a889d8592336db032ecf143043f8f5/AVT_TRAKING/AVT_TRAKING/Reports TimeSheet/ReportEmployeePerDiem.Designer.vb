@@ -27,6 +27,10 @@ Partial Class ReportEmployeePerDiem
         Me.Panel4 = New System.Windows.Forms.Panel()
         Me.crvEmployeePerDiem = New CrystalDecisions.Windows.Forms.CrystalReportViewer()
         Me.Panel3 = New System.Windows.Forms.Panel()
+        Me.chbAllJobs = New System.Windows.Forms.CheckBox()
+        Me.Label5 = New System.Windows.Forms.Label()
+        Me.cmbJob = New System.Windows.Forms.ComboBox()
+        Me.Label4 = New System.Windows.Forms.Label()
         Me.cmbClients = New System.Windows.Forms.ComboBox()
         Me.Button1 = New System.Windows.Forms.Button()
         Me.PictureBox4 = New System.Windows.Forms.PictureBox()
@@ -40,10 +44,6 @@ Partial Class ReportEmployeePerDiem
         Me.PictureBox3 = New System.Windows.Forms.PictureBox()
         Me.btnRestore = New System.Windows.Forms.PictureBox()
         Me.btnMaximize = New System.Windows.Forms.PictureBox()
-        Me.chbAllJobs = New System.Windows.Forms.CheckBox()
-        Me.Label5 = New System.Windows.Forms.Label()
-        Me.cmbJob = New System.Windows.Forms.ComboBox()
-        Me.Label4 = New System.Windows.Forms.Label()
         Me.TableLayoutPanel1.SuspendLayout()
         Me.Panel4.SuspendLayout()
         Me.Panel3.SuspendLayout()
@@ -112,6 +112,48 @@ Partial Class ReportEmployeePerDiem
         Me.Panel3.Size = New System.Drawing.Size(728, 73)
         Me.Panel3.TabIndex = 1
         '
+        'chbAllJobs
+        '
+        Me.chbAllJobs.AutoSize = True
+        Me.chbAllJobs.Font = New System.Drawing.Font("Verdana", 9.0!)
+        Me.chbAllJobs.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.chbAllJobs.Location = New System.Drawing.Point(398, 44)
+        Me.chbAllJobs.Name = "chbAllJobs"
+        Me.chbAllJobs.Size = New System.Drawing.Size(72, 18)
+        Me.chbAllJobs.TabIndex = 29
+        Me.chbAllJobs.Text = "All Jobs"
+        Me.chbAllJobs.UseVisualStyleBackColor = True
+        '
+        'Label5
+        '
+        Me.Label5.AutoSize = True
+        Me.Label5.Font = New System.Drawing.Font("Verdana", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label5.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.Label5.Location = New System.Drawing.Point(208, 47)
+        Me.Label5.Name = "Label5"
+        Me.Label5.Size = New System.Drawing.Size(35, 14)
+        Me.Label5.TabIndex = 28
+        Me.Label5.Text = "Jobs"
+        '
+        'cmbJob
+        '
+        Me.cmbJob.FormattingEnabled = True
+        Me.cmbJob.Location = New System.Drawing.Point(257, 42)
+        Me.cmbJob.Name = "cmbJob"
+        Me.cmbJob.Size = New System.Drawing.Size(135, 21)
+        Me.cmbJob.TabIndex = 27
+        '
+        'Label4
+        '
+        Me.Label4.AutoSize = True
+        Me.Label4.Font = New System.Drawing.Font("Verdana", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label4.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.Label4.Location = New System.Drawing.Point(208, 18)
+        Me.Label4.Name = "Label4"
+        Me.Label4.Size = New System.Drawing.Size(43, 14)
+        Me.Label4.TabIndex = 26
+        Me.Label4.Text = "Client"
+        '
         'cmbClients
         '
         Me.cmbClients.FormattingEnabled = True
@@ -125,7 +167,7 @@ Partial Class ReportEmployeePerDiem
         Me.Button1.FlatAppearance.BorderSize = 0
         Me.Button1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(58, Byte), Integer), CType(CType(115, Byte), Integer))
         Me.Button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.Button1.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Button1.Font = New System.Drawing.Font("Verdana", 9.0!)
         Me.Button1.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.Button1.Image = Global.AVT_TRAKING.My.Resources.Resources.reportshow
         Me.Button1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
@@ -171,7 +213,7 @@ Partial Class ReportEmployeePerDiem
         '
         'dtpFinalDate
         '
-        Me.dtpFinalDate.CustomFormat = "yyyy/MM/dd"
+        Me.dtpFinalDate.CustomFormat = "MM/dd/yyyy"
         Me.dtpFinalDate.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.dtpFinalDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom
         Me.dtpFinalDate.Location = New System.Drawing.Point(104, 43)
@@ -181,7 +223,7 @@ Partial Class ReportEmployeePerDiem
         '
         'dtpInitialDate
         '
-        Me.dtpInitialDate.CustomFormat = "yyyy/MM/dd"
+        Me.dtpInitialDate.CustomFormat = "MM/dd/yyyy"
         Me.dtpInitialDate.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.dtpInitialDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom
         Me.dtpInitialDate.Location = New System.Drawing.Point(104, 12)
@@ -210,9 +252,9 @@ Partial Class ReportEmployeePerDiem
         Me.Label3.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.Label3.Location = New System.Drawing.Point(44, 6)
         Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(309, 18)
+        Me.Label3.Size = New System.Drawing.Size(303, 18)
         Me.Label3.TabIndex = 8
-        Me.Label3.Text = "Report Employee Per Diem Sheets"
+        Me.Label3.Text = "Employee Per-Diem Sheet Report"
         '
         'PictureBox1
         '
@@ -252,47 +294,6 @@ Partial Class ReportEmployeePerDiem
         Me.btnMaximize.Size = New System.Drawing.Size(31, 29)
         Me.btnMaximize.TabIndex = 4
         Me.btnMaximize.TabStop = False
-        '
-        'chbAllJobs
-        '
-        Me.chbAllJobs.AutoSize = True
-        Me.chbAllJobs.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.chbAllJobs.Location = New System.Drawing.Point(398, 44)
-        Me.chbAllJobs.Name = "chbAllJobs"
-        Me.chbAllJobs.Size = New System.Drawing.Size(62, 17)
-        Me.chbAllJobs.TabIndex = 29
-        Me.chbAllJobs.Text = "All Jobs"
-        Me.chbAllJobs.UseVisualStyleBackColor = True
-        '
-        'Label5
-        '
-        Me.Label5.AutoSize = True
-        Me.Label5.Font = New System.Drawing.Font("Verdana", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label5.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.Label5.Location = New System.Drawing.Point(208, 47)
-        Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(35, 14)
-        Me.Label5.TabIndex = 28
-        Me.Label5.Text = "Jobs"
-        '
-        'cmbJob
-        '
-        Me.cmbJob.FormattingEnabled = True
-        Me.cmbJob.Location = New System.Drawing.Point(257, 42)
-        Me.cmbJob.Name = "cmbJob"
-        Me.cmbJob.Size = New System.Drawing.Size(135, 21)
-        Me.cmbJob.TabIndex = 27
-        '
-        'Label4
-        '
-        Me.Label4.AutoSize = True
-        Me.Label4.Font = New System.Drawing.Font("Verdana", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label4.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.Label4.Location = New System.Drawing.Point(208, 18)
-        Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(43, 14)
-        Me.Label4.TabIndex = 26
-        Me.Label4.Text = "Client"
         '
         'ReportEmployeePerDiem
         '

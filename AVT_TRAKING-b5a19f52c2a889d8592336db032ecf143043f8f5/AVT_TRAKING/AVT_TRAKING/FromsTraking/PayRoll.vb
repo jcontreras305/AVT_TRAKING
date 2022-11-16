@@ -215,143 +215,144 @@ Public Class PayRoll
             Dim openFile As New OpenFileDialog
             openFile.DefaultExt = "*.xlsm"
             openFile.FileName = "MASTER Payroll"
-            openFile.ShowDialog()
-            txtSalida.Text = "Message:" + "Open file " + openFile.FileName
-            If DialogResult.OK = MessageBox.Show("Please verify that the Sheets name are 'Time Sheet Data', 'NON-BILLABLE', 'EMP MASTER DATA' and the Weekendings has been inserted, if not do the changues.", "Important", MessageBoxButtons.OKCancel, MessageBoxIcon.Information) Then
-                Dim ApExcel = New Microsoft.Office.Interop.Excel.Application
-                Dim libro = ApExcel.Workbooks.Open(openFile.FileName)
-                Dim flag As Boolean = False
-                Dim case1 As Integer = 0
-                For i = 1 To libro.Worksheets.Count
-                    If libro.Worksheets(i).Name = "Time Sheet Data" Then
-                        flag = True
-                        case1 = 1
-                        Exit For
-                    ElseIf libro.Worksheets(i).Name = "TimeSheetData" Then
-                        flag = True
-                        case1 = 2
-                        Exit For
-                    End If
-                Next
-                Dim sheetPR As New Worksheet
-                If flag = True Then
-                    If case1 = 1 Then
-                        sheetPR = libro.Worksheets("Time Sheet Data")
-                        txtSalida.Text = "Message:" + "Open sheet 'Time Sheet Data'."
-                    Else
-                        sheetPR = libro.Worksheets("TimeSheetData")
-                        txtSalida.Text = "Message:" + "Open sheet 'TimeSheetData'."
-                    End If
-                    limpiarSheet(sheetPR, sprRowStartTSD.Value)
-                    Dim cont As Integer = 2
-                    For Each row As DataGridViewRow In tblTime.Rows()
-                        sheetPR.Cells(cont, 1) = row.Cells("StatusCode").Value
-                        sheetPR.Cells(cont, 2) = row.Cells("Company").Value
-                        sheetPR.Cells(cont, 6) = row.Cells("EmployeeNumber").Value
-                        sheetPR.Cells(cont, 7) = row.Cells("WeekNumber").Value
-                        sheetPR.Cells(cont, 8) = row.Cells("JobNumber").Value
-                        sheetPR.Cells(cont, 9) = row.Cells("SubJobNumber").Value
-                        sheetPR.Cells(cont, 10) = row.Cells("CostDistribution").Value
-                        sheetPR.Cells(cont, 11) = row.Cells("CostType").Value
-                        sheetPR.Cells(cont, 13) = row.Cells("DayWeek").Value
-                        sheetPR.Cells(cont, 18) = row.Cells("RegularHours").Value
-                        sheetPR.Cells(cont, 19) = row.Cells("OvertimeHours").Value
-                        sheetPR.Cells(cont, 20) = row.Cells("OtherHours").Value
-                        sheetPR.Cells(cont, 33) = row.Cells("BatchNumber").Value
-                        sheetPR.Cells(cont, 35) = row.Cells("CheckType").Value
-                        cont += 1
-                        txtSalida.Text = "Message:" + "Inserting row " + CStr(cont)
+            If DialogResult.OK = openFile.ShowDialog() Then
+                txtSalida.Text = "Message:" + "Open file " + openFile.FileName
+                If DialogResult.OK = MessageBox.Show("Please verify that the Sheets name are 'Time Sheet Data', 'NON-BILLABLE', 'EMP MASTER DATA' and the Weekendings has been inserted, if not do the changues.", "Important", MessageBoxButtons.OKCancel, MessageBoxIcon.Information) Then
+                    Dim ApExcel = New Microsoft.Office.Interop.Excel.Application
+                    Dim libro = ApExcel.Workbooks.Open(openFile.FileName)
+                    Dim flag As Boolean = False
+                    Dim case1 As Integer = 0
+                    For i = 1 To libro.Worksheets.Count
+                        If libro.Worksheets(i).Name = "Time Sheet Data" Then
+                            flag = True
+                            case1 = 1
+                            Exit For
+                        ElseIf libro.Worksheets(i).Name = "TimeSheetData" Then
+                            flag = True
+                            case1 = 2
+                            Exit For
+                        End If
                     Next
-                Else
-                    MessageBox.Show("The sheet 'Time Sheet Data' is not found.", "Important", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
-                End If
-
-                For i = 1 To libro.Worksheets.Count
-                    If libro.Worksheets(i).Name = "NON-BILLABLE" Then
-                        flag = True
-                        case1 = 1
-                        Exit For
-                    ElseIf libro.Worksheets(i).Name = "NON BILLABLE" Then
-                        flag = True
-                        case1 = 2
-                        Exit For
-                    End If
-                Next
-                Dim sheetNon As New Worksheet
-                If flag = True Then
-                    If case1 = 1 Then
-                        sheetNon = libro.Worksheets("NON-BILLABLE")
-                        txtSalida.Text = "Message:" + "Open sheet 'NON-BILLABLE'."
+                    Dim sheetPR As New Worksheet
+                    If flag = True Then
+                        If case1 = 1 Then
+                            sheetPR = libro.Worksheets("Time Sheet Data")
+                            txtSalida.Text = "Message:" + "Open sheet 'Time Sheet Data'."
+                        Else
+                            sheetPR = libro.Worksheets("TimeSheetData")
+                            txtSalida.Text = "Message:" + "Open sheet 'TimeSheetData'."
+                        End If
+                        limpiarSheet(sheetPR, sprRowStartTSD.Value)
+                        Dim cont As Integer = 2
+                        For Each row As DataGridViewRow In tblTime.Rows()
+                            sheetPR.Cells(cont, 1) = row.Cells("StatusCode").Value
+                            sheetPR.Cells(cont, 2) = row.Cells("Company").Value
+                            sheetPR.Cells(cont, 6) = row.Cells("EmployeeNumber").Value
+                            sheetPR.Cells(cont, 7) = row.Cells("WeekNumber").Value
+                            sheetPR.Cells(cont, 8) = row.Cells("JobNumber").Value
+                            sheetPR.Cells(cont, 9) = row.Cells("SubJobNumber").Value
+                            sheetPR.Cells(cont, 10) = row.Cells("CostDistribution").Value
+                            sheetPR.Cells(cont, 11) = row.Cells("CostType").Value
+                            sheetPR.Cells(cont, 13) = row.Cells("DayWeek").Value
+                            sheetPR.Cells(cont, 18) = row.Cells("RegularHours").Value
+                            sheetPR.Cells(cont, 19) = row.Cells("OvertimeHours").Value
+                            sheetPR.Cells(cont, 20) = row.Cells("OtherHours").Value
+                            sheetPR.Cells(cont, 33) = row.Cells("BatchNumber").Value
+                            sheetPR.Cells(cont, 35) = row.Cells("CheckType").Value
+                            cont += 1
+                            txtSalida.Text = "Message:" + "Inserting row " + CStr(cont)
+                        Next
                     Else
-                        sheetNon = libro.Worksheets("NON BILLABLE")
-                        txtSalida.Text = "Message:" + "Open sheet 'NON BILLABLE'."
+                        MessageBox.Show("The sheet 'Time Sheet Data' is not found.", "Important", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
                     End If
-                    limpiarSheet(sheetNon, sprRowStartNBL.Value)
-                    Dim cont As Integer = 2
-                    For Each row As DataGridViewRow In tblNonBillable.Rows()
-                        sheetNon.Cells(cont, 1) = row.Cells(0).Value
-                        sheetNon.Cells(cont, 2) = row.Cells(1).Value
-                        sheetNon.Cells(cont, 3) = row.Cells(2).Value
-                        sheetNon.Cells(cont, 4) = row.Cells(3).Value
-                        sheetNon.Cells(cont, 5) = row.Cells(4).Value
-                        sheetNon.Cells(cont, 6) = row.Cells(5).Value
-                        sheetNon.Cells(cont, 7) = row.Cells(6).Value
-                        sheetNon.Cells(cont, 8) = row.Cells(7).Value
-                        sheetNon.Cells(cont, 9) = row.Cells(8).Value
-                        cont += 1
-                        txtSalida.Text = "Message:" + "Inserting row " + CStr(cont)
-                    Next
-                Else
-                    MessageBox.Show("The sheet 'NON-BILLABLE' is not found.", "Important", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
-                End If
 
-                For i = 1 To libro.Worksheets.Count
-                    If libro.Worksheets(i).Name = "EMP MASTER DATA" Then
-                        flag = True
-                        case1 = 1
-                        Exit For
-                    ElseIf libro.Worksheets(i).Name = "EMP-MASTER-DATA" Then
-                        flag = True
-                        case1 = 2
-                        Exit For
-                    End If
-                Next
-                Dim sheetEmp As New Worksheet
-                If flag = True Then
-                    If case1 = 1 Then
-                        sheetEmp = libro.Worksheets("EMP MASTER DATA")
-                        txtSalida.Text = "Message:" + "Open sheet 'EMP MASTER DATA'."
+                    For i = 1 To libro.Worksheets.Count
+                        If libro.Worksheets(i).Name = "NON-BILLABLE" Then
+                            flag = True
+                            case1 = 1
+                            Exit For
+                        ElseIf libro.Worksheets(i).Name = "NON BILLABLE" Then
+                            flag = True
+                            case1 = 2
+                            Exit For
+                        End If
+                    Next
+                    Dim sheetNon As New Worksheet
+                    If flag = True Then
+                        If case1 = 1 Then
+                            sheetNon = libro.Worksheets("NON-BILLABLE")
+                            txtSalida.Text = "Message:" + "Open sheet 'NON-BILLABLE'."
+                        Else
+                            sheetNon = libro.Worksheets("NON BILLABLE")
+                            txtSalida.Text = "Message:" + "Open sheet 'NON BILLABLE'."
+                        End If
+                        limpiarSheet(sheetNon, sprRowStartNBL.Value)
+                        Dim cont As Integer = 2
+                        For Each row As DataGridViewRow In tblNonBillable.Rows()
+                            sheetNon.Cells(cont, 1) = row.Cells(0).Value
+                            sheetNon.Cells(cont, 2) = row.Cells(1).Value
+                            sheetNon.Cells(cont, 3) = row.Cells(2).Value
+                            sheetNon.Cells(cont, 4) = row.Cells(3).Value
+                            sheetNon.Cells(cont, 5) = row.Cells(4).Value
+                            sheetNon.Cells(cont, 6) = row.Cells(5).Value
+                            sheetNon.Cells(cont, 7) = row.Cells(6).Value
+                            sheetNon.Cells(cont, 8) = row.Cells(7).Value
+                            sheetNon.Cells(cont, 9) = row.Cells(8).Value
+                            cont += 1
+                            txtSalida.Text = "Message:" + "Inserting row " + CStr(cont)
+                        Next
                     Else
-                        sheetEmp = libro.Worksheets("EMP-MASTER-DATA")
-                        txtSalida.Text = "Message:" + "Open sheet 'EMP-MASTER-DATA'."
+                        MessageBox.Show("The sheet 'NON-BILLABLE' is not found.", "Important", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
                     End If
-                    limpiarSheet(sheetEmp, 2)
-                    Dim mtdEmployees As New MetodosEmployees
-                    Dim tblEmp = mtdEmployees.selectActiveEmployees()
-                    Dim cont As Integer = 2
-                    For Each row As DataRow In tblEmp.Rows()
-                        sheetEmp.Cells(cont, 1) = row.Item(0)
-                        sheetEmp.Cells(cont, 2) = row.Item(1)
-                        sheetEmp.Cells(cont, 3) = row.Item(2)
-                        cont += 1
-                        txtSalida.Text = "Message:" + "Inserting row " + CStr(cont)
-                    Next
-                Else
-                    MessageBox.Show("The sheet 'EMP MASTER DATA' is not found.", "Important", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
-                End If
 
-                txtSalida.Text = "Saving file."
-                libro.Save()
-                NAR(sheetPR)
-                NAR(sheetNon)
-                NAR(sheetEmp)
-                libro.Close(True)
-                NAR(libro)
-                NAR(ApExcel.Workbooks)
-                ApExcel.Quit()
-                NAR(ApExcel)
-                txtSalida.Text = "Message:" + "Sleeping..."
-                txtSalida.Text = "Message:" + "End Excel."
+                    For i = 1 To libro.Worksheets.Count
+                        If libro.Worksheets(i).Name = "EMP MASTER DATA" Then
+                            flag = True
+                            case1 = 1
+                            Exit For
+                        ElseIf libro.Worksheets(i).Name = "EMP-MASTER-DATA" Then
+                            flag = True
+                            case1 = 2
+                            Exit For
+                        End If
+                    Next
+                    Dim sheetEmp As New Worksheet
+                    If flag = True Then
+                        If case1 = 1 Then
+                            sheetEmp = libro.Worksheets("EMP MASTER DATA")
+                            txtSalida.Text = "Message:" + "Open sheet 'EMP MASTER DATA'."
+                        Else
+                            sheetEmp = libro.Worksheets("EMP-MASTER-DATA")
+                            txtSalida.Text = "Message:" + "Open sheet 'EMP-MASTER-DATA'."
+                        End If
+                        limpiarSheet(sheetEmp, 2)
+                        Dim mtdEmployees As New MetodosEmployees
+                        Dim tblEmp = mtdEmployees.selectActiveEmployees()
+                        Dim cont As Integer = 2
+                        For Each row As DataRow In tblEmp.Rows()
+                            sheetEmp.Cells(cont, 1) = row.Item(0)
+                            sheetEmp.Cells(cont, 2) = row.Item(1)
+                            sheetEmp.Cells(cont, 3) = row.Item(2)
+                            cont += 1
+                            txtSalida.Text = "Message:" + "Inserting row " + CStr(cont)
+                        Next
+                    Else
+                        MessageBox.Show("The sheet 'EMP MASTER DATA' is not found.", "Important", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+                    End If
+
+                    txtSalida.Text = "Saving file."
+                    libro.Save()
+                    NAR(sheetPR)
+                    NAR(sheetNon)
+                    NAR(sheetEmp)
+                    libro.Close(True)
+                    NAR(libro)
+                    NAR(ApExcel.Workbooks)
+                    ApExcel.Quit()
+                    NAR(ApExcel)
+                    txtSalida.Text = "Message:" + "Sleeping..."
+                    txtSalida.Text = "Message:" + "End Excel."
+                End If
             End If
         Catch ex As Exception
             MsgBox(ex.Message())

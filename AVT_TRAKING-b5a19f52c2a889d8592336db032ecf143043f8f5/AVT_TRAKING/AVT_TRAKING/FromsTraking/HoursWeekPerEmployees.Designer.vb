@@ -22,9 +22,10 @@ Partial Class HoursWeekPerEmployees
     'No lo modifique con el editor de código.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(HoursWeekPerEmployees))
         Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.pcbCompany = New System.Windows.Forms.PictureBox()
         Me.chbPerDiem = New System.Windows.Forms.CheckBox()
         Me.PictureBox2 = New System.Windows.Forms.PictureBox()
         Me.btnRestore = New System.Windows.Forms.PictureBox()
@@ -92,8 +93,8 @@ Partial Class HoursWeekPerEmployees
         Me.btnDelete = New System.Windows.Forms.Button()
         Me.btnInsert = New System.Windows.Forms.Button()
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
-        Me.pcbCompany = New System.Windows.Forms.PictureBox()
         Me.Panel1.SuspendLayout()
+        CType(Me.pcbCompany, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.btnRestore, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.btnMaximize, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -109,7 +110,6 @@ Partial Class HoursWeekPerEmployees
         CType(Me.tblExpenses, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel4.SuspendLayout()
         Me.TableLayoutPanel1.SuspendLayout()
-        CType(Me.pcbCompany, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'Panel1
@@ -133,6 +133,16 @@ Partial Class HoursWeekPerEmployees
         Me.Panel1.Name = "Panel1"
         Me.Panel1.Size = New System.Drawing.Size(1194, 120)
         Me.Panel1.TabIndex = 0
+        '
+        'pcbCompany
+        '
+        Me.pcbCompany.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.pcbCompany.Location = New System.Drawing.Point(9, 21)
+        Me.pcbCompany.Name = "pcbCompany"
+        Me.pcbCompany.Size = New System.Drawing.Size(180, 93)
+        Me.pcbCompany.TabIndex = 13
+        Me.pcbCompany.TabStop = False
         '
         'chbPerDiem
         '
@@ -195,9 +205,9 @@ Partial Class HoursWeekPerEmployees
         Me.Label5.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.Label5.Location = New System.Drawing.Point(0, 0)
         Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(235, 18)
+        Me.Label5.Size = New System.Drawing.Size(264, 18)
         Me.Label5.TabIndex = 6
-        Me.Label5.Text = "HoursWeekPerEmployees"
+        Me.Label5.Text = "Weekly Hours Per Employees"
         '
         'Panel3
         '
@@ -274,14 +284,14 @@ Partial Class HoursWeekPerEmployees
         Me.tblHourPeerDay.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.tblHourPeerDay.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.tblHourPeerDay.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.clmWeekending, Me.clmEployeeName, Me.clmTotalST, Me.clmTotalOT, Me.clmTotalHours3, Me.clmMonST, Me.clmMonOT, Me.clmTueST, Me.clmTueOT, Me.clmWedST, Me.clmWedOT, Me.clmThuST, Me.clmThuOT, Me.clmFriST, Me.clmFriOT, Me.clmSatST, Me.clmSatOT, Me.clmSunST, Me.clmSunOT})
-        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.ControlDark
-        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.tblHourPeerDay.DefaultCellStyle = DataGridViewCellStyle1
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.ControlDark
+        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.tblHourPeerDay.DefaultCellStyle = DataGridViewCellStyle2
         Me.tblHourPeerDay.Dock = System.Windows.Forms.DockStyle.Fill
         Me.tblHourPeerDay.Location = New System.Drawing.Point(3, 129)
         Me.tblHourPeerDay.MultiSelect = False
@@ -479,7 +489,7 @@ Partial Class HoursWeekPerEmployees
         Me.Button12.Name = "Button12"
         Me.Button12.Size = New System.Drawing.Size(148, 29)
         Me.Button12.TabIndex = 19
-        Me.Button12.Text = "Dialv Per Diem"
+        Me.Button12.Text = "Daily Per Diem"
         Me.Button12.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         Me.Button12.UseVisualStyleBackColor = True
         '
@@ -853,16 +863,6 @@ Partial Class HoursWeekPerEmployees
         Me.TableLayoutPanel1.Size = New System.Drawing.Size(1200, 600)
         Me.TableLayoutPanel1.TabIndex = 3
         '
-        'pcbCompany
-        '
-        Me.pcbCompany.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.pcbCompany.Location = New System.Drawing.Point(9, 21)
-        Me.pcbCompany.Name = "pcbCompany"
-        Me.pcbCompany.Size = New System.Drawing.Size(180, 93)
-        Me.pcbCompany.TabIndex = 13
-        Me.pcbCompany.TabStop = False
-        '
         'HoursWeekPerEmployees
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -874,6 +874,7 @@ Partial Class HoursWeekPerEmployees
         Me.Text = "HoursWeekPeerEmployees"
         Me.Panel1.ResumeLayout(False)
         Me.Panel1.PerformLayout()
+        CType(Me.pcbCompany, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.btnRestore, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.btnMaximize, System.ComponentModel.ISupportInitialize).EndInit()
@@ -891,7 +892,6 @@ Partial Class HoursWeekPerEmployees
         Me.Panel4.ResumeLayout(False)
         Me.Panel4.PerformLayout()
         Me.TableLayoutPanel1.ResumeLayout(False)
-        CType(Me.pcbCompany, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub

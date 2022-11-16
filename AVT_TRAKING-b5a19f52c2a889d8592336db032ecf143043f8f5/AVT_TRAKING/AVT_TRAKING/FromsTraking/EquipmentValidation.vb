@@ -9,12 +9,14 @@ Public Class EquipmentValidation
     Dim mtdJobs As New MetodosJobs
     Dim tblProject As Data.DataTable
     Dim tblMaterial As Data.DataTable
+    Public jobNo As String = ""
     Private Sub EquipmentValidation_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         cmbInformation.Location = New System.Drawing.Point(31, 43)
         dtpInformation.Location = New System.Drawing.Point(31, 43)
         tblMaterial = mtdJobs.llenarComboCellMaterial(cmbInformation)
-        tblProject = mtdSC.llenarComboWO(cmbInformation, idclient)
+        tblProject = mtdSC.llenarComboWO(cmbInformation, idclient, jobNo)
         btnSave.Enabled = False
+        lbljobNo.Text = "Job No: " + jobNo
     End Sub
 
     Private Sub PictureBox4_Click(sender As Object, e As EventArgs) Handles PictureBox4.Click
@@ -111,12 +113,17 @@ Public Class EquipmentValidation
                 Case tblEquipment.Columns("ProjectEquip").Index
                     If cmbInformation.SelectedItem IsNot Nothing Then
                         Dim array() As String = cmbInformation.SelectedItem.ToString.Split(" ")
-                        For Each row As Data.DataRow In tblProject.Rows
-                            If array(0) = row.ItemArray(0) And array(1) = row.ItemArray(3) Then
-                                tblEquipment.CurrentCell.Value = row(0) + " " + row(3)
-                                tblEquipment.CurrentRow.Cells("idAux").Value = row(2)
-                            End If
-                        Next
+                        Dim arrayRows() As DataRow = tblProject.Select("wono like '" + array(0).Replace(" ", "-") + "' and job = " + jobNo)
+                        If arrayRows.Length > 0 Then
+                            tblEquipment.CurrentCell.Value = arrayRows(0).ItemArray(0) + " " + arrayRows(0).ItemArray(3)
+                            tblEquipment.CurrentRow.Cells("idAux").Value = arrayRows(0).ItemArray(2)
+                        End If
+                        'For Each row As Data.DataRow In tblProject.Rows
+                        '    If array(0) = row.ItemArray(0) And array(1) = row.ItemArray(3) Then
+                        '        tblEquipment.CurrentCell.Value = row(0) + " " + row(3)
+                        '        tblEquipment.CurrentRow.Cells("idAux").Value = row(2)
+                        '    End If
+                        'Next
                     End If
                 Case tblEquipment.Columns("MaterialCode").Index
                     If cmbInformation.SelectedItem IsNot Nothing Then
@@ -165,7 +172,7 @@ Public Class EquipmentValidation
                         tblEquipment.Rows.Clear()
                         Dim count As Integer = 2
                         Hoja1 = libro.Worksheets("Upload")
-                        Dim numFilas = CInt(nreg(Hoja1, 2, 8))
+                        Dim numFilas = CInt(nreg(Hoja1, 2, 1))
                         Dim increment As Integer = 0
                         Dim everyIncrement As Integer = 0
                         If numFilas <= 75 Then
@@ -176,10 +183,10 @@ Public Class EquipmentValidation
                             everyIncrement = If(numFilas / 75 < 2, 1, CInt(numFilas / 75))
                         End If
                         Dim countRowsInc As Integer = 0
-                        While Hoja1.Cells(count, 8).Text <> ""
-                            Dim arrayDate() As String = Hoja1.Cells(count, 8).Text.split("/")
+                        While Hoja1.Cells(count, 1).Text <> ""
+                            Dim arrayDate() As String = Hoja1.Cells(count, 1).Text.split("/")
                             Dim dateStr As DateTime = New DateTime(CInt(arrayDate(2)), CInt(arrayDate(0)), CInt(arrayDate(1)))
-                            tblEquipment.Rows.Add("", dateStr.ToString("MM/dd/yyyy"), Hoja1.Cells(count, 9).Text, "", Hoja1.Cells(count, 10).Text, Hoja1.Cells(count, 11).Text, Hoja1.Cells(count, 12).Text, "", Hoja1.Cells(count, 14).Text)
+                            tblEquipment.Rows.Add("", dateStr.ToString("MM/dd/yyyy"), Hoja1.Cells(count, 2).Text, "", Hoja1.Cells(count, 3).Text, Hoja1.Cells(count, 4).Text, Hoja1.Cells(count, 5).Text, "", Hoja1.Cells(count, 6).Text)
                             count += 1
                             lblMessage.Text = "Message: " + "Reading Row " + CStr(count)
                             countRowsInc += 1
@@ -224,7 +231,7 @@ Public Class EquipmentValidation
         For Each row As DataGridViewRow In tblEquipment.Rows()
             If Not row.IsNewRow Then
                 Dim array() As String = row.Cells("ProjectEquip").Value.ToString().Split(" ")
-                Dim rows() As DataRow = tblProject.Select("wono like '" + array(0).Replace(" ", "-") + "'")
+                Dim rows() As DataRow = tblProject.Select("wono like '" + array(0).Replace(" ", "-") + "' and job = " + jobNo)
                 If rows.Count > 0 Then
                     row.Cells("IdAux").Value = rows(0).ItemArray(2)
                 Else

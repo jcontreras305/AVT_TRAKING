@@ -25,6 +25,7 @@ Partial Class ProjectsCosts
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.TableLayoutPanel2 = New System.Windows.Forms.TableLayoutPanel()
         Me.Panel5 = New System.Windows.Forms.Panel()
+        Me.btnChangeJobNo = New System.Windows.Forms.Button()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label3 = New System.Windows.Forms.Label()
@@ -136,7 +137,7 @@ Partial Class ProjectsCosts
         Me.btnUpdateMaterialExcel = New System.Windows.Forms.Button()
         Me.btnUpdate = New System.Windows.Forms.Button()
         Me.pnlTablas = New System.Windows.Forms.Panel()
-        Me.btnChangeJobNo = New System.Windows.Forms.Button()
+        Me.btnCancel = New System.Windows.Forms.Button()
         Me.Panel1.SuspendLayout()
         Me.TableLayoutPanel2.SuspendLayout()
         Me.Panel5.SuspendLayout()
@@ -237,6 +238,19 @@ Partial Class ProjectsCosts
         Me.Panel5.Size = New System.Drawing.Size(326, 174)
         Me.Panel5.TabIndex = 41
         '
+        'btnChangeJobNo
+        '
+        Me.btnChangeJobNo.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnChangeJobNo.FlatAppearance.BorderSize = 0
+        Me.btnChangeJobNo.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(58, Byte), Integer), CType(CType(115, Byte), Integer))
+        Me.btnChangeJobNo.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnChangeJobNo.Image = Global.AVT_TRAKING.My.Resources.Resources.after
+        Me.btnChangeJobNo.Location = New System.Drawing.Point(275, 1)
+        Me.btnChangeJobNo.Name = "btnChangeJobNo"
+        Me.btnChangeJobNo.Size = New System.Drawing.Size(42, 26)
+        Me.btnChangeJobNo.TabIndex = 35
+        Me.btnChangeJobNo.UseVisualStyleBackColor = True
+        '
         'Label1
         '
         Me.Label1.AutoSize = True
@@ -332,6 +346,7 @@ Partial Class ProjectsCosts
         'txtWokOrder
         '
         Me.txtWokOrder.Location = New System.Drawing.Point(96, 56)
+        Me.txtWokOrder.MaxLength = 14
         Me.txtWokOrder.Name = "txtWokOrder"
         Me.txtWokOrder.Size = New System.Drawing.Size(116, 21)
         Me.txtWokOrder.TabIndex = 3
@@ -350,6 +365,7 @@ Partial Class ProjectsCosts
         Me.txtTask.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.txtTask.Location = New System.Drawing.Point(249, 55)
+        Me.txtTask.MaxLength = 7
         Me.txtTask.Name = "txtTask"
         Me.txtTask.Size = New System.Drawing.Size(68, 21)
         Me.txtTask.TabIndex = 4
@@ -772,6 +788,7 @@ Partial Class ProjectsCosts
         'Panel4
         '
         Me.Panel4.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(58, Byte), Integer), CType(CType(115, Byte), Integer))
+        Me.Panel4.Controls.Add(Me.btnCancel)
         Me.Panel4.Controls.Add(Me.Label28)
         Me.Panel4.Controls.Add(Me.PictureBox3)
         Me.Panel4.Controls.Add(Me.PictureBox2)
@@ -925,7 +942,7 @@ Partial Class ProjectsCosts
         Me.btnAddRecord.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.btnAddRecord.Image = Global.AVT_TRAKING.My.Resources.Resources.add
         Me.btnAddRecord.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnAddRecord.Location = New System.Drawing.Point(433, 21)
+        Me.btnAddRecord.Location = New System.Drawing.Point(414, 20)
         Me.btnAddRecord.Name = "btnAddRecord"
         Me.btnAddRecord.Size = New System.Drawing.Size(108, 36)
         Me.btnAddRecord.TabIndex = 18
@@ -1544,18 +1561,23 @@ Partial Class ProjectsCosts
         Me.pnlTablas.Size = New System.Drawing.Size(1107, 234)
         Me.pnlTablas.TabIndex = 4
         '
-        'btnChangeJobNo
+        'btnCancel
         '
-        Me.btnChangeJobNo.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnChangeJobNo.FlatAppearance.BorderSize = 0
-        Me.btnChangeJobNo.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(58, Byte), Integer), CType(CType(115, Byte), Integer))
-        Me.btnChangeJobNo.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnChangeJobNo.Image = Global.AVT_TRAKING.My.Resources.Resources.after
-        Me.btnChangeJobNo.Location = New System.Drawing.Point(275, 1)
-        Me.btnChangeJobNo.Name = "btnChangeJobNo"
-        Me.btnChangeJobNo.Size = New System.Drawing.Size(42, 26)
-        Me.btnChangeJobNo.TabIndex = 35
-        Me.btnChangeJobNo.UseVisualStyleBackColor = True
+        Me.btnCancel.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnCancel.FlatAppearance.BorderSize = 0
+        Me.btnCancel.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(83, Byte), Integer), CType(CType(93, Byte), Integer), CType(CType(102, Byte), Integer))
+        Me.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnCancel.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.btnCancel.Image = Global.AVT_TRAKING.My.Resources.Resources.close2
+        Me.btnCancel.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnCancel.Location = New System.Drawing.Point(528, 20)
+        Me.btnCancel.Name = "btnCancel"
+        Me.btnCancel.Size = New System.Drawing.Size(77, 36)
+        Me.btnCancel.TabIndex = 42
+        Me.btnCancel.Text = "Cancel"
+        Me.btnCancel.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.btnCancel.UseVisualStyleBackColor = True
+        Me.btnCancel.Visible = False
         '
         'ProjectsCosts
         '
@@ -1750,4 +1772,5 @@ Partial Class ProjectsCosts
     Friend WithEvents Label28 As Label
     Friend WithEvents btnUpdateMaterialExcel As Button
     Friend WithEvents btnChangeJobNo As Button
+    Friend WithEvents btnCancel As Button
 End Class

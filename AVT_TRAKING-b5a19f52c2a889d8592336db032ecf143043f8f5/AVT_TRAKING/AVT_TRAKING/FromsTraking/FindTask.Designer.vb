@@ -24,6 +24,7 @@ Partial Class FindTask
     Private Sub InitializeComponent()
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
         Me.TitleBar = New System.Windows.Forms.Panel()
+        Me.Label28 = New System.Windows.Forms.Label()
         Me.PictureBox3 = New System.Windows.Forms.PictureBox()
         Me.Panel2 = New System.Windows.Forms.Panel()
         Me.cmbElement = New System.Windows.Forms.ComboBox()
@@ -33,7 +34,6 @@ Partial Class FindTask
         Me.btnFind = New System.Windows.Forms.Button()
         Me.txtElement = New System.Windows.Forms.TextBox()
         Me.cmbFindElement = New System.Windows.Forms.ComboBox()
-        Me.Label28 = New System.Windows.Forms.Label()
         Me.TableLayoutPanel1.SuspendLayout()
         Me.TitleBar.SuspendLayout()
         CType(Me.PictureBox3, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -67,6 +67,17 @@ Partial Class FindTask
         Me.TitleBar.Name = "TitleBar"
         Me.TitleBar.Size = New System.Drawing.Size(470, 45)
         Me.TitleBar.TabIndex = 0
+        '
+        'Label28
+        '
+        Me.Label28.AutoSize = True
+        Me.Label28.Font = New System.Drawing.Font("Verdana", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label28.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.Label28.Location = New System.Drawing.Point(9, 9)
+        Me.Label28.Name = "Label28"
+        Me.Label28.Size = New System.Drawing.Size(113, 18)
+        Me.Label28.TabIndex = 45
+        Me.Label28.Text = "Find Project"
         '
         'PictureBox3
         '
@@ -129,11 +140,16 @@ Partial Class FindTask
         '
         'btnFind
         '
-        Me.btnFind.Location = New System.Drawing.Point(390, 14)
+        Me.btnFind.FlatAppearance.BorderSize = 0
+        Me.btnFind.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnFind.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.btnFind.Image = Global.AVT_TRAKING.My.Resources.Resources.loupe
+        Me.btnFind.Location = New System.Drawing.Point(390, 11)
         Me.btnFind.Name = "btnFind"
-        Me.btnFind.Size = New System.Drawing.Size(72, 22)
+        Me.btnFind.Size = New System.Drawing.Size(72, 34)
         Me.btnFind.TabIndex = 2
         Me.btnFind.Text = "Find"
+        Me.btnFind.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
         Me.btnFind.UseVisualStyleBackColor = True
         '
         'txtElement
@@ -151,17 +167,6 @@ Partial Class FindTask
         Me.cmbFindElement.Name = "cmbFindElement"
         Me.cmbFindElement.Size = New System.Drawing.Size(118, 21)
         Me.cmbFindElement.TabIndex = 0
-        '
-        'Label28
-        '
-        Me.Label28.AutoSize = True
-        Me.Label28.Font = New System.Drawing.Font("Verdana", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label28.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.Label28.Location = New System.Drawing.Point(9, 9)
-        Me.Label28.Name = "Label28"
-        Me.Label28.Size = New System.Drawing.Size(113, 18)
-        Me.Label28.TabIndex = 45
-        Me.Label28.Text = "Find Project"
         '
         'FindTask
         '
