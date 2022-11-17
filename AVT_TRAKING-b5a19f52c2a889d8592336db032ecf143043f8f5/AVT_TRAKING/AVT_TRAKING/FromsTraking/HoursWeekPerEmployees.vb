@@ -625,8 +625,8 @@ Public Class HoursWeekPerEmployees
             End If
         End If
 
-        If tblExpenses.Rows(index).Cells("Amount").Value IsNot DBNull.Value Then
-            list.Add(tblExpenses.Rows(index).Cells("Amount").Value)
+        If tblExpenses.Rows(index).Cells("Amount $").Value IsNot DBNull.Value Then
+            list.Add(tblExpenses.Rows(index).Cells("Amount $").Value)
         Else
             mensaje = If(mensaje = "", "The 'Amount' will be 0.", vbCrLf + " The 'Amount' will be 0.")
             list.Add("0")
@@ -651,16 +651,23 @@ Public Class HoursWeekPerEmployees
         End If
 
         If tblExpenses.Rows(index).Cells("Project").Value IsNot DBNull.Value Then
-            For Each row As DataRow In proyectTable.Rows
-                Dim array() As String = tblExpenses.Rows(index).Cells("Project").Value.ToString.Replace("    ", "/").Split("/")
-                Dim wono As String = array(0)
-                Dim po As String = array(1)
-                Dim job As String = array(2)
-                If wono = row.ItemArray(1).ToString() And po = row.ItemArray(3).ToString() And job = row.ItemArray(4).ToString() Then
-                    list.Add(row.ItemArray(0))
-                    Exit For
-                End If
-            Next
+            'For Each row As DataRow In proyectTable.Rows
+            '    Dim array() As String = tblExpenses.Rows(index).Cells("Project").Value.ToString.Replace("    ", "/").Split("/")
+            '    Dim wono As String = array(0)
+            '    Dim po As String = array(1)
+            '    Dim job As String = array(2)
+            '    If wono = row.ItemArray(1).ToString() And po = row.ItemArray(3).ToString() And job = row.ItemArray(4).ToString() Then
+            '        list.Add(row.ItemArray(0))
+            '        Exit For
+            '    End If
+            'Next
+            Dim arrayCell() As String = tblExpenses.Rows(index).Cells("Project").Value.ToString.Split("   ")
+            Dim rowPO() As DataRow = proyectTable.Select("project = '" + arrayCell(0) + "' and jobNo = " + arrayCell(arrayCell.Length - 1))
+            If rowPO.Length > 0 Then
+                list.Add(rowPO(0).ItemArray(0))
+            Else
+                mensaje = If(mensaje = "", "Please choose a Proyect.", vbCrLf + " Please choose a Proyect")
+            End If
         Else
             mensaje = If(mensaje = "", "Please choose a Proyect.", vbCrLf + " Please choose a Proyect")
         End If
@@ -714,8 +721,8 @@ Public Class HoursWeekPerEmployees
             End If
         End If
 
-        If tblExpenses.Rows(index).Cells("Amount").Value IsNot DBNull.Value Then
-            list.Add(tblExpenses.Rows(index).Cells("Amount").Value)
+        If tblExpenses.Rows(index).Cells("Amount $").Value IsNot DBNull.Value Then
+            list.Add(tblExpenses.Rows(index).Cells("Amount $").Value)
         Else
             mensaje = If(mensaje = "", "The 'Amount' will be 0.", vbCrLf + " The 'Amount' will be 0.")
             list.Add("0")
@@ -921,6 +928,7 @@ Public Class HoursWeekPerEmployees
             Dim arrayRowsWC() As DataRow = workCodeTable.Select("name = '" & tblRecordEmployee.Rows(index).Cells("Work Code").Value & "' and jobNo = " + tblRecordEmployee.CurrentRow.Cells("jobNo").Value.ToString())
             If arrayRowsWC.Length > 0 Then
                 list.Add(arrayRowsWC(0).ItemArray(0))
+                list.Add(tblRecordEmployee.Rows(index).Cells("jobNo").Value.ToString())
             Else
                 mensaje = If(mensaje = "", "Please choose a Work Code.", vbCrLf + " Please choose a Work Code")
             End If
@@ -929,24 +937,13 @@ Public Class HoursWeekPerEmployees
         End If
 
         If tblRecordEmployee.Rows(index).Cells("Project").Value IsNot DBNull.Value Then
-            Dim poAux As String = tblRecordEmployee.Rows(index).Cells("Project").Value.ToString.Replace("    ", "/")
-            Dim array() As String = poAux.Split("/")
-            If array.Length = 3 Then
-                Dim arrayRowsPO() As DataRow = proyectTable.Select("project = '" & array(0) & "' and idPO = " & array(1) & " and jobNo = " & array(2) & "")
-                If arrayRowsPO.Length > 0 Then
-                    list.Add(arrayRowsPO(0).ItemArray(0))
-                Else
-                    mensaje = If(mensaje = "", "Please choose a Proyect.", vbCrLf + " Please choose a Proyect")
-                End If
+            Dim arrayCell() As String = tblRecordEmployee.Rows(index).Cells("Project").Value.ToString.Split("   ")
+            Dim rowPO() As DataRow = proyectTable.Select("project = '" + arrayCell(0) + "' and jobNo = " + tblRecordEmployee.Rows(index).Cells("jobNo").Value.ToString)
+            If rowPO.Length > 0 Then
+                list.Add(rowPO(0).ItemArray(0))
             Else
                 mensaje = If(mensaje = "", "Please choose a Proyect.", vbCrLf + " Please choose a Proyect")
             End If
-            'For Each row As DataRow In proyectTable.Rows
-            '    If row.ItemArray(1) = tblRecordEmployee.Rows(index).Cells("Project").Value Then
-            '        list.Add(row.ItemArray(0)) '
-            '        Exit For
-            '    End If
-            'Next
         Else
             mensaje = If(mensaje = "", "Please choose a Proyect.", vbCrLf + " Please choose a Proyect")
         End If

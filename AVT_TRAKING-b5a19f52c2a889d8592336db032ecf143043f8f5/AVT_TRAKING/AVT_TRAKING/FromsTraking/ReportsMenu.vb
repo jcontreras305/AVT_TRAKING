@@ -345,6 +345,23 @@ Public Class ReportsMenu
             MsgBox(ex.Message)
         End Try
     End Sub
+
+    Private Sub Button37_Click(sender As Object, e As EventArgs) Handles Button37.Click
+        Try
+            Dim sd As New SaveFileDialog()
+            sd.FileName = "MASTER Per-Diem.xlsm"
+            sd.Filter = "*|xlsm"
+            If DialogResult.OK = sd.ShowDialog() Then
+                Dim path As String = sd.FileName
+                Dim doc = AppDomain.CurrentDomain.BaseDirectory + "Docs\MASTER Per-Diem.xlsm"
+                'MsgBox(doc)
+                saveDoc(path, doc)
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message)
+        End Try
+    End Sub
+
     Private Function saveDoc(ByVal path As String, docPath As String) As Boolean
         Try
             If File.Exists(path) Then

@@ -314,7 +314,7 @@ end", conn)
     Public Function updateRecord(ByVal listDatos As List(Of String)) As Boolean
         Try
             conectar()
-            Dim cmd As New SqlCommand("update hoursWorked set hoursST = " + listDatos(1) + ", hoursOT = " + listDatos(2) + ", hours3= " + listDatos(3) + ",dateWorked = '" + listDatos(4) + "', idWorkCode = " + listDatos(6) + " , idAux = '" + listDatos(7) + "' , schedule = '" + listDatos(8) + "' where idHorsWorked ='" + listDatos(0) + "'", conn)
+            Dim cmd As New SqlCommand("update hoursWorked set hoursST = " + listDatos(1) + ", hoursOT = " + listDatos(2) + ", hours3= " + listDatos(3) + ",dateWorked = '" + listDatos(4) + "', idWorkCode = " + listDatos(6) + " , idAux = '" + listDatos(8) + "' , schedule = '" + listDatos(9) + "' where idHorsWorked ='" + listDatos(0) + "'", conn)
             If cmd.ExecuteNonQuery > 0 Then
                 mtdJobs.UpdateTotalSpendTask(listDatos(7))
                 desconectar()
@@ -335,7 +335,7 @@ end", conn)
             Dim id As Guid = Guid.NewGuid()
             Dim cmd As New SqlCommand("if (select count(*) from hoursWorked where idAux = '" + datos(5) + "' and dateWorked = '" + datos(1) + "') = 0
 begin 
-	insert into hoursWorked values ('" + id.ToString() + "',0,0,0,'" + datos(1) + "','" + datos(6) + "',NUll,'" + datos(5) + "','DAYS')
+	insert into hoursWorked values ('" + id.ToString() + "',0,0,0,'" + datos(1) + "','" + datos(6) + "',NULL,'" + datos(5) + "','DAYS',NULL)
 	insert into expensesUsed values (NEWID(),'" + datos(1) + "'," + datos(2) + ",'" + datos(3).ToString().Replace("'", "''") + "','" + datos(4) + "','" + datos(5) + "','" + datos(6) + "','" + id.ToString() + "')
 end
 else
