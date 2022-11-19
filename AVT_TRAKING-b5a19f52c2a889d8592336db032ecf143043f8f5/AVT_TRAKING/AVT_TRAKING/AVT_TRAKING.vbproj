@@ -973,10 +973,10 @@
       <DependentUpon>SCFRentalDetails.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="SeverConnecion.Designer.vb">
-      <DependentUpon>SeverConnecion.vb</DependentUpon>
+    <Compile Include="ServerConn.Designer.vb">
+      <DependentUpon>ServerConn.vb</DependentUpon>
     </Compile>
-    <Compile Include="SeverConnecion.vb">
+    <Compile Include="ServerConn.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="VRT_TRAKINGDataSet.Designer.vb">
@@ -1430,8 +1430,8 @@
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>SCFRentalDetails.vb</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="SeverConnecion.resx">
-      <DependentUpon>SeverConnecion.vb</DependentUpon>
+    <EmbeddedResource Include="ServerConn.resx">
+      <DependentUpon>ServerConn.vb</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

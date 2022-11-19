@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
-Partial Class SeverConnecion
+Partial Class ServerConnection
     Inherits System.Windows.Forms.Form
 
     'Form reemplaza a Dispose para limpiar la lista de componentes.
@@ -24,19 +24,21 @@ Partial Class SeverConnecion
     Private Sub InitializeComponent()
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
         Me.Panel1 = New System.Windows.Forms.Panel()
-        Me.Panel2 = New System.Windows.Forms.Panel()
         Me.PictureBox4 = New System.Windows.Forms.PictureBox()
-        Me.Label1 = New System.Windows.Forms.Label()
-        Me.Label2 = New System.Windows.Forms.Label()
-        Me.Label3 = New System.Windows.Forms.Label()
-        Me.TextBox1 = New System.Windows.Forms.TextBox()
-        Me.TextBox2 = New System.Windows.Forms.TextBox()
-        Me.TextBox3 = New System.Windows.Forms.TextBox()
+        Me.Panel2 = New System.Windows.Forms.Panel()
         Me.btnConnect = New System.Windows.Forms.Button()
+        Me.txtPass = New System.Windows.Forms.TextBox()
+        Me.txtUser = New System.Windows.Forms.TextBox()
+        Me.txtServer = New System.Windows.Forms.TextBox()
+        Me.Label3 = New System.Windows.Forms.Label()
+        Me.Label2 = New System.Windows.Forms.Label()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.lblMessage = New System.Windows.Forms.Label()
+        Me.btnSave = New System.Windows.Forms.Button()
         Me.TableLayoutPanel1.SuspendLayout()
         Me.Panel1.SuspendLayout()
-        Me.Panel2.SuspendLayout()
         CType(Me.PictureBox4, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.Panel2.SuspendLayout()
         Me.SuspendLayout()
         '
         'TableLayoutPanel1
@@ -63,21 +65,6 @@ Partial Class SeverConnecion
         Me.Panel1.Size = New System.Drawing.Size(274, 42)
         Me.Panel1.TabIndex = 0
         '
-        'Panel2
-        '
-        Me.Panel2.Controls.Add(Me.btnConnect)
-        Me.Panel2.Controls.Add(Me.TextBox3)
-        Me.Panel2.Controls.Add(Me.TextBox2)
-        Me.Panel2.Controls.Add(Me.TextBox1)
-        Me.Panel2.Controls.Add(Me.Label3)
-        Me.Panel2.Controls.Add(Me.Label2)
-        Me.Panel2.Controls.Add(Me.Label1)
-        Me.Panel2.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel2.Location = New System.Drawing.Point(3, 51)
-        Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(274, 155)
-        Me.Panel2.TabIndex = 1
-        '
         'PictureBox4
         '
         Me.PictureBox4.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
@@ -88,23 +75,52 @@ Partial Class SeverConnecion
         Me.PictureBox4.TabIndex = 4
         Me.PictureBox4.TabStop = False
         '
-        'Label1
+        'Panel2
         '
-        Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(40, 15)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(41, 13)
-        Me.Label1.TabIndex = 0
-        Me.Label1.Text = "Server:"
+        Me.Panel2.Controls.Add(Me.btnSave)
+        Me.Panel2.Controls.Add(Me.lblMessage)
+        Me.Panel2.Controls.Add(Me.btnConnect)
+        Me.Panel2.Controls.Add(Me.txtPass)
+        Me.Panel2.Controls.Add(Me.txtUser)
+        Me.Panel2.Controls.Add(Me.txtServer)
+        Me.Panel2.Controls.Add(Me.Label3)
+        Me.Panel2.Controls.Add(Me.Label2)
+        Me.Panel2.Controls.Add(Me.Label1)
+        Me.Panel2.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Panel2.Location = New System.Drawing.Point(3, 51)
+        Me.Panel2.Name = "Panel2"
+        Me.Panel2.Size = New System.Drawing.Size(274, 155)
+        Me.Panel2.TabIndex = 1
         '
-        'Label2
+        'btnConnect
         '
-        Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(49, 41)
-        Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(32, 13)
-        Me.Label2.TabIndex = 1
-        Me.Label2.Text = "User:"
+        Me.btnConnect.Location = New System.Drawing.Point(94, 90)
+        Me.btnConnect.Name = "btnConnect"
+        Me.btnConnect.Size = New System.Drawing.Size(75, 23)
+        Me.btnConnect.TabIndex = 6
+        Me.btnConnect.Text = "Verify"
+        Me.btnConnect.UseVisualStyleBackColor = True
+        '
+        'txtPass
+        '
+        Me.txtPass.Location = New System.Drawing.Point(94, 64)
+        Me.txtPass.Name = "txtPass"
+        Me.txtPass.Size = New System.Drawing.Size(171, 20)
+        Me.txtPass.TabIndex = 5
+        '
+        'txtUser
+        '
+        Me.txtUser.Location = New System.Drawing.Point(94, 38)
+        Me.txtUser.Name = "txtUser"
+        Me.txtUser.Size = New System.Drawing.Size(171, 20)
+        Me.txtUser.TabIndex = 4
+        '
+        'txtServer
+        '
+        Me.txtServer.Location = New System.Drawing.Point(94, 12)
+        Me.txtServer.Name = "txtServer"
+        Me.txtServer.Size = New System.Drawing.Size(171, 20)
+        Me.txtServer.TabIndex = 3
         '
         'Label3
         '
@@ -115,35 +131,41 @@ Partial Class SeverConnecion
         Me.Label3.TabIndex = 2
         Me.Label3.Text = "Password:"
         '
-        'TextBox1
+        'Label2
         '
-        Me.TextBox1.Location = New System.Drawing.Point(94, 12)
-        Me.TextBox1.Name = "TextBox1"
-        Me.TextBox1.Size = New System.Drawing.Size(171, 20)
-        Me.TextBox1.TabIndex = 3
+        Me.Label2.AutoSize = True
+        Me.Label2.Location = New System.Drawing.Point(49, 41)
+        Me.Label2.Name = "Label2"
+        Me.Label2.Size = New System.Drawing.Size(32, 13)
+        Me.Label2.TabIndex = 1
+        Me.Label2.Text = "User:"
         '
-        'TextBox2
+        'Label1
         '
-        Me.TextBox2.Location = New System.Drawing.Point(94, 38)
-        Me.TextBox2.Name = "TextBox2"
-        Me.TextBox2.Size = New System.Drawing.Size(171, 20)
-        Me.TextBox2.TabIndex = 4
+        Me.Label1.AutoSize = True
+        Me.Label1.Location = New System.Drawing.Point(40, 15)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(41, 13)
+        Me.Label1.TabIndex = 0
+        Me.Label1.Text = "Server:"
         '
-        'TextBox3
+        'lblMessage
         '
-        Me.TextBox3.Location = New System.Drawing.Point(94, 64)
-        Me.TextBox3.Name = "TextBox3"
-        Me.TextBox3.Size = New System.Drawing.Size(171, 20)
-        Me.TextBox3.TabIndex = 5
+        Me.lblMessage.AutoSize = True
+        Me.lblMessage.Location = New System.Drawing.Point(9, 122)
+        Me.lblMessage.Name = "lblMessage"
+        Me.lblMessage.Size = New System.Drawing.Size(53, 13)
+        Me.lblMessage.TabIndex = 7
+        Me.lblMessage.Text = "Message:"
         '
-        'btnConnect
+        'btnSave
         '
-        Me.btnConnect.Location = New System.Drawing.Point(190, 90)
-        Me.btnConnect.Name = "btnConnect"
-        Me.btnConnect.Size = New System.Drawing.Size(75, 23)
-        Me.btnConnect.TabIndex = 6
-        Me.btnConnect.Text = "Button1"
-        Me.btnConnect.UseVisualStyleBackColor = True
+        Me.btnSave.Location = New System.Drawing.Point(190, 90)
+        Me.btnSave.Name = "btnSave"
+        Me.btnSave.Size = New System.Drawing.Size(75, 23)
+        Me.btnSave.TabIndex = 8
+        Me.btnSave.Text = "Save"
+        Me.btnSave.UseVisualStyleBackColor = True
         '
         'SeverConnecion
         '
@@ -155,9 +177,9 @@ Partial Class SeverConnecion
         Me.Text = "SeverConnecion"
         Me.TableLayoutPanel1.ResumeLayout(False)
         Me.Panel1.ResumeLayout(False)
+        CType(Me.PictureBox4, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel2.ResumeLayout(False)
         Me.Panel2.PerformLayout()
-        CType(Me.PictureBox4, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -167,10 +189,12 @@ Partial Class SeverConnecion
     Friend WithEvents Panel2 As Panel
     Friend WithEvents PictureBox4 As PictureBox
     Friend WithEvents btnConnect As Button
-    Friend WithEvents TextBox3 As TextBox
-    Friend WithEvents TextBox2 As TextBox
-    Friend WithEvents TextBox1 As TextBox
+    Friend WithEvents txtPass As TextBox
+    Friend WithEvents txtUser As TextBox
+    Friend WithEvents txtServer As TextBox
     Friend WithEvents Label3 As Label
     Friend WithEvents Label2 As Label
     Friend WithEvents Label1 As Label
+    Friend WithEvents btnSave As Button
+    Friend WithEvents lblMessage As Label
 End Class

@@ -15,11 +15,29 @@ Public Class Login
     Dim listImgReels As List(Of Byte())
     Private Sub Login_Load(sender As Object, e As EventArgs) Handles Me.Load
         Try
-            listImg = mtdOther.llenarComboImage(cmbImagenes)
-            mtdCompany.cargarDatos()
-            If listImg IsNot Nothing Then
-                cmbImagenes.SelectedIndex = 0
-                cmbImagenes.SelectedItem = cmbImagenes.Items(0)
+            Dim conn As New ConnectioDB
+            Dim flagConnected As Boolean = conn.conectar
+            While Not flagConnected = True
+                If DialogResult.Yes = MessageBox.Show("Please connect to the server to continue", "Error Connection", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) Then
+                    Dim serverConn As New ServerConn
+                    serverConn.ShowDialog()
+                    flagConnected = conn.conectar()
+                Else
+                    btnIniciar.Enabled = False
+                    flagConnected = False
+                    Exit While
+                End If
+            End While
+            If flagConnected Then
+                listImg = mtdOther.llenarComboImage(cmbImagenes)
+                If listImg.Count > 0 Then
+                    tmrReels.Enabled = True
+                End If
+                mtdCompany.cargarDatos()
+                If listImg IsNot Nothing Then
+                    cmbImagenes.SelectedIndex = 0
+                    cmbImagenes.SelectedItem = cmbImagenes.Items(0)
+                End If
             End If
         Catch ex As Exception
 
@@ -192,6 +210,24 @@ Public Class Login
             pcbReels.Visible = False
             tlyMain.Visible = True
             countTimeProtector = 0
+        End If
+    End Sub
+
+    Private Sub btnConnect_Click(sender As Object, e As EventArgs) Handles btnConnect.Click
+        Dim srvConn As New ServerConn
+        srvConn.ShowDialog()
+        Dim conn As New ConnectioDB
+        Dim flagConnected As Boolean = conn.conectar
+        If flagConnected Then
+            listImg = mtdOther.llenarComboImage(cmbImagenes)
+            If listImg.Count > 0 Then
+                tmrReels.Enabled = True
+            End If
+            mtdCompany.cargarDatos()
+            If listImg IsNot Nothing Then
+                cmbImagenes.SelectedIndex = 0
+                cmbImagenes.SelectedItem = cmbImagenes.Items(0)
+            End If
         End If
     End Sub
 End Class

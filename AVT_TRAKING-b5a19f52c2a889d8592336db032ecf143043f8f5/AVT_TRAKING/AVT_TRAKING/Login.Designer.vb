@@ -32,6 +32,7 @@ Partial Class Login
         Me.btnMinimize = New System.Windows.Forms.PictureBox()
         Me.btnClose = New System.Windows.Forms.PictureBox()
         Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.btnConnect = New System.Windows.Forms.Button()
         Me.cmbImagenes = New System.Windows.Forms.ComboBox()
         Me.tlyMain = New System.Windows.Forms.TableLayoutPanel()
         Me.Panel2 = New System.Windows.Forms.Panel()
@@ -150,12 +151,27 @@ Partial Class Login
         'Panel1
         '
         Me.Panel1.BackColor = System.Drawing.Color.FromArgb(CType(CType(30, Byte), Integer), CType(CType(38, Byte), Integer), CType(CType(70, Byte), Integer))
+        Me.Panel1.Controls.Add(Me.btnConnect)
         Me.Panel1.Controls.Add(Me.cmbImagenes)
         Me.Panel1.Dock = System.Windows.Forms.DockStyle.Bottom
         Me.Panel1.Location = New System.Drawing.Point(0, 421)
         Me.Panel1.Name = "Panel1"
         Me.Panel1.Size = New System.Drawing.Size(380, 20)
         Me.Panel1.TabIndex = 7
+        '
+        'btnConnect
+        '
+        Me.btnConnect.Dock = System.Windows.Forms.DockStyle.Left
+        Me.btnConnect.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnConnect.Font = New System.Drawing.Font("Verdana", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnConnect.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.btnConnect.Location = New System.Drawing.Point(0, 0)
+        Me.btnConnect.Name = "btnConnect"
+        Me.btnConnect.Size = New System.Drawing.Size(112, 20)
+        Me.btnConnect.TabIndex = 9
+        Me.btnConnect.Text = "Connect"
+        Me.btnConnect.TextAlign = System.Drawing.ContentAlignment.TopCenter
+        Me.btnConnect.UseVisualStyleBackColor = True
         '
         'cmbImagenes
         '
@@ -273,7 +289,6 @@ Partial Class Login
         '
         'tmrReels
         '
-        Me.tmrReels.Enabled = True
         Me.tmrReels.Interval = 1000
         '
         'pcbReels
@@ -343,4 +358,5 @@ Partial Class Login
     Friend WithEvents cmbImagenes As ComboBox
     Friend WithEvents pcbReels As PictureBox
     Friend WithEvents tmrReels As Timer
+    Friend WithEvents btnConnect As Button
 End Class
