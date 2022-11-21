@@ -135,7 +135,7 @@ Public Class TimeSheet
                 End If
                 listError.Clear()
                 If flagContinue Then
-                    txtSalidaPerdiem.Text = txtSalidaPerdiem.Text + "Stating process to insert..."
+                    txtSalidaPerdiem.Text = txtSalidaPerdiem.Text + vbCrLf + "Starting process to insert..."
                     Dim contRowsError As Integer = 2
                     For Each row As Data.DataRow In tblPerdiem.Rows()
                         Dim listEU As New List(Of String)

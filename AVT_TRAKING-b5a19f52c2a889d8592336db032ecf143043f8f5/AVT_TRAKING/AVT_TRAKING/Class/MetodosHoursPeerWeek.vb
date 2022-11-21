@@ -44,7 +44,8 @@ hw.schedule as 'Shift',
 wc.billingRate1 as 'Billing Rate',
 wc.billingRateOT as 'Billing Rate OT',
 wc.billingRate3 as 'Billing Rate 3',
-hw.jobNo
+hw.jobNo,
+wo.idPO
 from employees as emp 
 inner join hoursWorked as hw on emp.idEmployee = hw.idEmployee
 inner join workCode as wc on wc.idWorkCode = hw.idWorkCode and hw.jobNo = wc.jobNo
@@ -61,6 +62,7 @@ inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO "
                 tblHoras.DataSource = dt
                 tblHoras.Columns("idHorsWorked").Visible = False
                 tblHoras.Columns("jobNo").Visible = False
+                tblHoras.Columns("idPO").Visible = False
                 desconectar()
                 Return True
             Else
@@ -107,7 +109,8 @@ CONVERT(varchar,exu.dateExpense,101) as 'Date',
 CONCAT(wo.idWO,'-',tk.task) as 'Project',
 ex.expenseCode as 'Expense Code',
 exu.amount as 'Amount $',
-exu.description as 'Description'
+exu.description as 'Description',
+tk.idAux
 from expensesUsed as exu
 inner join expenses as ex on ex.idExpenses = exu.idExpense
 inner join task as tk on tk.idAux = exu.idAux
@@ -119,6 +122,7 @@ where exu.idEmployee = '" + idEmployee + "'", conn)
                 da.Fill(dt)
                 tabla.DataSource = dt
                 tabla.Columns("idExpenseUsed").Visible = False
+                tabla.Columns("idAux").Visible = False
                 desconectar()
                 Return True
             Else
@@ -154,7 +158,70 @@ inner join job as jb on jb.jobNo = po.jobNo", conn)
         End Try
     End Function
 
-
+    Public Function llenarComboCellProject(ByVal cmbProyect As DataGridViewComboBoxCell, ByVal proyectTable As DataTable, ByVal lastvalue As String, ByVal jobNo As String, ByVal idPO As String) As String
+        Try
+            conectar()
+            cmbProyect.Items.Clear()
+            proyectTable.Clear()
+            Dim cmd As New SqlCommand("select tk.idAux as 'task', CONCAT(wo.idWO,'-',tk.task) as 'project' , tk.description , po.idPO , jb.jobNo from workOrder as wo 
+inner join task as tk on wo.idAuxWO = tk.idAuxWO
+inner join projectOrder as po on po.idPO = wo.idPO and wo.jobNo = po.jobNo
+inner join job as jb on po.jobNo = jb.jobNo
+order by jb.jobNo,po.idPO , CONCAT(wo.idWO,'-',tk.task) asc
+", conn)
+            If cmd.ExecuteNonQuery Then
+                Dim da As New SqlDataAdapter(cmd)
+                da.Fill(proyectTable)
+                Dim cmbValue As String = ""
+                For Each row As DataRow In proyectTable.Rows
+                    cmbProyect.Items.Add(CStr(row.ItemArray(1)) + "    " + CStr(row.ItemArray(3)) + "    " + CStr(row.ItemArray(4)))
+                    If lastvalue = row.ItemArray(1) And idPO = row.ItemArray(3).ToString And jobNo = row.ItemArray(4).ToString Then
+                        cmbValue = CStr(row.ItemArray(1)) + "    " + CStr(row.ItemArray(3)) + "    " + CStr(row.ItemArray(4))
+                    End If
+                Next
+                desconectar()
+                Return cmbValue
+            Else
+                desconectar()
+                Return ""
+            End If
+        Catch ex As Exception
+            desconectar()
+            Return ""
+        End Try
+    End Function
+    Public Function llenarComboCellProject(ByVal cmbProyect As DataGridViewComboBoxCell, ByVal proyectTable As DataTable, ByVal lastvalue As String, ByVal idAux As String) As String
+        Try
+            conectar()
+            cmbProyect.Items.Clear()
+            proyectTable.Clear()
+            Dim cmd As New SqlCommand("select tk.idAux as 'task', CONCAT(wo.idWO,'-',tk.task) as 'project' , tk.description , po.idPO , jb.jobNo from workOrder as wo 
+inner join task as tk on wo.idAuxWO = tk.idAuxWO
+inner join projectOrder as po on po.idPO = wo.idPO and wo.jobNo = po.jobNo
+inner join job as jb on po.jobNo = jb.jobNo
+order by jb.jobNo,po.idPO , CONCAT(wo.idWO,'-',tk.task) asc
+", conn)
+            If cmd.ExecuteNonQuery Then
+                Dim da As New SqlDataAdapter(cmd)
+                da.Fill(proyectTable)
+                Dim cmbValue As String = ""
+                For Each row As DataRow In proyectTable.Rows
+                    cmbProyect.Items.Add(CStr(row.ItemArray(1)) + "    " + CStr(row.ItemArray(3)) + "    " + CStr(row.ItemArray(4)))
+                    If lastvalue = row.ItemArray(1) And idAux = row.ItemArray(0) Then
+                        cmbValue = CStr(row.ItemArray(1)) + "    " + CStr(row.ItemArray(3)) + "    " + CStr(row.ItemArray(4))
+                    End If
+                Next
+                desconectar()
+                Return cmbValue
+            Else
+                desconectar()
+                Return ""
+            End If
+        Catch ex As Exception
+            desconectar()
+            Return ""
+        End Try
+    End Function
 
     Public Function llenarComboCellProject(ByVal cmbProyect As DataGridViewComboBoxCell, ByVal proyectTable As DataTable, Optional lastValue As String = "") As String
         Try
@@ -336,11 +403,11 @@ end", conn)
             Dim cmd As New SqlCommand("if (select count(*) from hoursWorked where idAux = '" + datos(5) + "' and dateWorked = '" + datos(1) + "') = 0
 begin 
 	insert into hoursWorked values ('" + id.ToString() + "',0,0,0,'" + datos(1) + "','" + datos(6) + "',NULL,'" + datos(5) + "','DAYS',NULL)
-	insert into expensesUsed values (NEWID(),'" + datos(1) + "'," + datos(2) + ",'" + datos(3).ToString().Replace("'", "''") + "','" + datos(4) + "','" + datos(5) + "','" + datos(6) + "','" + id.ToString() + "')
+	insert into expensesUsed values (NEWID(),'" + validaFechaParaSQl(datos(1)) + "'," + datos(2) + ",'" + datos(3).ToString().Replace("'", "''") + "','" + datos(4) + "','" + datos(5) + "','" + datos(6) + "','" + id.ToString() + "')
 end
 else
 begin 
-	insert into expensesUsed values (NEWID(),'" + datos(1) + "'," + datos(2) + ",'" + datos(3) + "','" + datos(4) + "','" + datos(5) + "','" + datos(6) + "',(select top 1 idHorsWorked from hoursWorked where idAux = '" + datos(5) + "' and dateWorked = '" + datos(1) + "'))
+	insert into expensesUsed values (NEWID(),'" + validaFechaParaSQl(datos(1)) + "'," + datos(2) + ",'" + datos(3) + "','" + datos(4) + "','" + datos(5) + "','" + datos(6) + "',(select top 1 idHorsWorked from hoursWorked where idAux = '" + datos(5) + "' and dateWorked = '" + datos(1) + "'))
 end", conn)
             If cmd.ExecuteNonQuery >= 1 Then
                 mtdJobs.UpdateTotalSpendTask(datos(5))

@@ -157,8 +157,13 @@ Public Class HoursWeekPerEmployees
                             Dim lastValue As String = If(tblExpenses.CurrentCell.Value IsNot DBNull.Value, tblExpenses.CurrentCell.Value, "")
                             Dim cmbProyect As New DataGridViewComboBoxCell
                             With cmbProyect
-                                lastValue = mtdHPW.llenarComboCellProject(cmbProyect, proyectTable, lastValue)
-                                .DropDownWidth = 220
+                                If tblExpenses.CurrentRow.Cells("idAux").Value IsNot DBNull.Value Then
+                                    lastValue = mtdHPW.llenarComboCellProject(cmbProyect, proyectTable, lastValue, tblExpenses.CurrentRow.Cells("idAux").Value.ToString)
+                                Else
+                                    lastValue = mtdHPW.llenarComboCellProject(cmbProyect, proyectTable, lastValue)
+                                End If
+                                .DropDownWidth = 240
+                                'lastValue = mtdHPW.llenarComboCellProject(cmbProyect, proyectTable, lastValue)
                             End With
                             tblExpenses.CurrentRow.Cells("Project") = cmbProyect
                             tblExpenses.CurrentRow.Cells("Project").Value = lastValue
@@ -228,7 +233,11 @@ Public Class HoursWeekPerEmployees
                             Dim lastValue As String = If(tblRecordEmployee.CurrentCell.Value IsNot DBNull.Value, tblRecordEmployee.CurrentCell.Value, "")
                             Dim cmbProyect As New DataGridViewComboBoxCell
                             With cmbProyect
-                                lastValue = mtdHPW.llenarComboCellProject(cmbProyect, proyectTable, lastValue)
+                                If tblRecordEmployee.CurrentRow.Cells("jobNo").Value IsNot DBNull.Value And tblRecordEmployee.CurrentRow.Cells("idPO").Value IsNot DBNull.Value Then
+                                    lastValue = mtdHPW.llenarComboCellProject(cmbProyect, proyectTable, lastValue, tblRecordEmployee.CurrentRow.Cells("jobNo").Value.ToString, tblRecordEmployee.CurrentRow.Cells("idPO").Value.ToString)
+                                Else
+                                    lastValue = mtdHPW.llenarComboCellProject(cmbProyect, proyectTable, lastValue)
+                                End If
                                 .DropDownWidth = 240
                             End With
                             tblRecordEmployee.CurrentRow.Cells("Project") = cmbProyect
@@ -286,14 +295,25 @@ Public Class HoursWeekPerEmployees
         If flagCellClickRecords = True Then
             If tblRecordEmployee.CurrentCell.ColumnIndex = tblRecordEmployee.Columns("Project").Index Then
                 If cmb.Text <> "" Then
-                    Dim arrayPo() As String = cmb.Text.ToString().Split("   ")
-                    Dim arrayRows() As DataRow = proyectTable.Select("project = '" + arrayPo(0) + "' and jobNo = '" + arrayPo(arrayPo.Length - 1) + "'")
-                    If arrayRows.Length > 0 Then
-                        tblRecordEmployee.CurrentRow.Cells("Project Description").Value = arrayRows(0).ItemArray(2)
-                        tblRecordEmployee.CurrentRow.Cells("jobNo").Value = arrayRows(0).ItemArray(4)
+                    Dim arrayPo() As String = cmb.Text.ToString().Split(" ")
+                    Dim arrayPo1() As String = arrayPo.Distinct.ToArray
+                    If arrayPo1.Length = 4 Then
+                        Dim arrayRows() As DataRow = proyectTable.Select("project = '" + arrayPo1(0) + "' and idPO = '" + arrayPo1(2) + "' and jobNo = '" + arrayPo1(arrayPo1.Length - 1) + "'")
+                        If arrayRows.Length > 0 Then
+                            tblRecordEmployee.CurrentRow.Cells("Project Description").Value = arrayRows(0).ItemArray(2)
+                            tblRecordEmployee.CurrentRow.Cells("jobNo").Value = arrayRows(0).ItemArray(4)
+                            tblRecordEmployee.CurrentRow.Cells("idPO").Value = arrayRows(0).ItemArray(3)
+                        End If
+                    Else
+                        Dim arrayRows() As DataRow = proyectTable.Select("project = '" + arrayPo1(0) + "' and jobNo = '" + arrayPo(arrayPo1.Length - 1) + "'")
+                        If arrayRows.Length > 0 Then
+                            tblRecordEmployee.CurrentRow.Cells("Project Description").Value = arrayRows(0).ItemArray(2)
+                            tblRecordEmployee.CurrentRow.Cells("jobNo").Value = arrayRows(0).ItemArray(4)
+                            tblRecordEmployee.CurrentRow.Cells("idPO").Value = arrayRows(0).ItemArray(3)
+                        End If
                     End If
                 End If
-            ElseIf tblRecordEmployee.CurrentCell.ColumnIndex = tblRecordEmployee.Columns("Work Code").Index Then
+                ElseIf tblRecordEmployee.CurrentCell.ColumnIndex = tblRecordEmployee.Columns("Work Code").Index Then
                 tblRecordEmployee.CurrentRow.Cells("Work Code").Value = ""
                 Dim arrayRows() As DataRow = workCodeTable.Select("name = '" + cmb.Text + "' and jobNo = " + tblRecordEmployee.CurrentRow.Cells("jobNo").Value.ToString())
                 If arrayRows.Length > 0 Then
@@ -380,8 +400,6 @@ Public Class HoursWeekPerEmployees
                         End If
                     End If
             End Select
-
-
         End If
         flagCellClickRecords = False
     End Sub
@@ -756,7 +774,28 @@ Public Class HoursWeekPerEmployees
         Else
             mensaje = If(mensaje = "", "Please choose a Proyect.", vbCrLf + " Please choose a Proyect")
         End If
+        If tblExpenses.Rows(index).Cells("Project").Value IsNot DBNull.Value Then
 
+            Dim arrayCell() As String = tblExpenses.Rows(index).Cells("Project").Value.ToString.Split(" ")
+            Dim arrayCell1 = arrayCell.Distinct().ToArray()
+            If arrayCell1.Length = 4 Then
+                Dim rowPO() As DataRow = proyectTable.Select("project = '" + arrayCell1(0) + "' and idPO = " + arrayCell1(2) + " and jobNo = " + arrayCell(arrayCell.Length - 1))
+                If rowPO.Length > 0 Then
+                    list.Add(rowPO(0).ItemArray(0))
+                Else
+                    mensaje = If(mensaje = "", "Please choose a Proyect.", vbCrLf + " Please choose a Proyect")
+                End If
+            Else
+                Dim rowPO() As DataRow = proyectTable.Select("project = '" + arrayCell1(0) + "' and jobNo = " + arrayCell(arrayCell.Length - 1))
+                If rowPO.Length > 0 Then
+                    list.Add(rowPO(0).ItemArray(0))
+                Else
+                    mensaje = If(mensaje = "", "Please choose a Proyect.", vbCrLf + " Please choose a Proyect")
+                End If
+            End If
+        Else
+            mensaje = If(mensaje = "", "Please choose a Proyect.", vbCrLf + " Please choose a Proyect")
+        End If
         list.Add(idEmpleado)
 
         If mensaje = "" Then

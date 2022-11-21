@@ -45,7 +45,6 @@ Partial Class Login
         Me.PictureBox4 = New System.Windows.Forms.PictureBox()
         Me.tmrReels = New System.Windows.Forms.Timer(Me.components)
         Me.pcbReels = New System.Windows.Forms.PictureBox()
-        Me.pcbLogo = New System.Windows.Forms.PictureBox()
         Me.TitleBar.SuspendLayout()
         Me.TableLayoutPanel1.SuspendLayout()
         CType(Me.btnMinimize, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -61,7 +60,6 @@ Partial Class Login
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox4, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.pcbReels, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.pcbLogo, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'txtUser
@@ -197,7 +195,6 @@ Partial Class Login
         Me.tlyMain.Controls.Add(Me.Panel3, 1, 1)
         Me.tlyMain.Controls.Add(Me.Panel6, 1, 3)
         Me.tlyMain.Controls.Add(Me.Panel7, 1, 2)
-        Me.tlyMain.Controls.Add(Me.pcbLogo, 1, 4)
         Me.tlyMain.Dock = System.Windows.Forms.DockStyle.Fill
         Me.tlyMain.Location = New System.Drawing.Point(0, 32)
         Me.tlyMain.Name = "tlyMain"
@@ -303,16 +300,6 @@ Partial Class Login
         Me.pcbReels.TabIndex = 10
         Me.pcbReels.TabStop = False
         '
-        'pcbLogo
-        '
-        Me.pcbLogo.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.pcbLogo.Location = New System.Drawing.Point(85, 288)
-        Me.pcbLogo.Name = "pcbLogo"
-        Me.pcbLogo.Size = New System.Drawing.Size(209, 98)
-        Me.pcbLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage
-        Me.pcbLogo.TabIndex = 12
-        Me.pcbLogo.TabStop = False
-        '
         'Login
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -347,7 +334,6 @@ Partial Class Login
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PictureBox4, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.pcbReels, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.pcbLogo, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -373,5 +359,4 @@ Partial Class Login
     Friend WithEvents pcbReels As PictureBox
     Friend WithEvents tmrReels As Timer
     Friend WithEvents btnConnect As Button
-    Friend WithEvents pcbLogo As PictureBox
 End Class

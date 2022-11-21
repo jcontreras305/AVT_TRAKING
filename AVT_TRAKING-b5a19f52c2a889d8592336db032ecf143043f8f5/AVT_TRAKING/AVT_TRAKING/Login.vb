@@ -38,10 +38,6 @@ Public Class Login
                     cmbImagenes.SelectedIndex = 0
                     cmbImagenes.SelectedItem = cmbImagenes.Items(0)
                 End If
-                If mtdCompany.img IsNot Nothing Then
-                    pcbLogo.Image = mtdCompany.img
-                    pcbLogo.SizeMode = PictureBoxSizeMode.Zoom
-                End If
             End If
         Catch ex As Exception
 
