@@ -129,6 +129,7 @@ Partial Class Employees
         Me.txtMiddleName = New System.Windows.Forms.TextBox()
         Me.TabPage3 = New System.Windows.Forms.TabPage()
         Me.TabPage4 = New System.Windows.Forms.TabPage()
+        Me.btnDeleteEmployee = New System.Windows.Forms.Button()
         CType(Me.tblEmployees, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.TableLayoutPanel4.SuspendLayout()
         Me.Panel8.SuspendLayout()
@@ -986,7 +987,7 @@ Partial Class Employees
         Me.TableLayoutPanel3.ColumnCount = 3
         Me.TableLayoutPanel3.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.45593!))
         Me.TableLayoutPanel3.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 49.54407!))
-        Me.TableLayoutPanel3.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 140.0!))
+        Me.TableLayoutPanel3.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 141.0!))
         Me.TableLayoutPanel3.Controls.Add(Me.btnChooseImage, 2, 1)
         Me.TableLayoutPanel3.Controls.Add(Me.Panel6, 1, 1)
         Me.TableLayoutPanel3.Controls.Add(Me.Panel5, 0, 1)
@@ -1010,9 +1011,9 @@ Partial Class Employees
         Me.btnChooseImage.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnChooseImage.Font = New System.Drawing.Font("Broadway", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnChooseImage.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.btnChooseImage.Location = New System.Drawing.Point(660, 129)
+        Me.btnChooseImage.Location = New System.Drawing.Point(659, 129)
         Me.btnChooseImage.Name = "btnChooseImage"
-        Me.btnChooseImage.Size = New System.Drawing.Size(135, 38)
+        Me.btnChooseImage.Size = New System.Drawing.Size(136, 38)
         Me.btnChooseImage.TabIndex = 13
         Me.btnChooseImage.Text = "Choose Image"
         Me.btnChooseImage.UseVisualStyleBackColor = False
@@ -1023,7 +1024,7 @@ Partial Class Employees
         Me.Panel6.Controls.Add(Me.btnUpdate)
         Me.Panel6.Controls.Add(Me.btnCancel)
         Me.Panel6.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel6.Location = New System.Drawing.Point(335, 129)
+        Me.Panel6.Location = New System.Drawing.Point(334, 129)
         Me.Panel6.Name = "Panel6"
         Me.Panel6.Size = New System.Drawing.Size(319, 38)
         Me.Panel6.TabIndex = 4
@@ -1075,7 +1076,7 @@ Partial Class Employees
         Me.btnCancel.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.btnCancel.Location = New System.Drawing.Point(219, 3)
         Me.btnCancel.Name = "btnCancel"
-        Me.btnCancel.Size = New System.Drawing.Size(89, 34)
+        Me.btnCancel.Size = New System.Drawing.Size(97, 34)
         Me.btnCancel.TabIndex = 21
         Me.btnCancel.Text = "Cancel"
         Me.btnCancel.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -1083,20 +1084,21 @@ Partial Class Employees
         '
         'Panel5
         '
+        Me.Panel5.Controls.Add(Me.btnDeleteEmployee)
         Me.Panel5.Controls.Add(Me.Label18)
         Me.Panel5.Controls.Add(Me.PictureBox1)
         Me.Panel5.Controls.Add(Me.txtSearch)
         Me.Panel5.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel5.Location = New System.Drawing.Point(3, 129)
         Me.Panel5.Name = "Panel5"
-        Me.Panel5.Size = New System.Drawing.Size(326, 38)
+        Me.Panel5.Size = New System.Drawing.Size(325, 38)
         Me.Panel5.TabIndex = 3
         '
         'Label18
         '
         Me.Label18.AutoSize = True
         Me.Label18.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.Label18.Location = New System.Drawing.Point(16, 10)
+        Me.Label18.Location = New System.Drawing.Point(6, 12)
         Me.Label18.Name = "Label18"
         Me.Label18.Size = New System.Drawing.Size(41, 13)
         Me.Label18.TabIndex = 19
@@ -1105,9 +1107,9 @@ Partial Class Employees
         'PictureBox1
         '
         Me.PictureBox1.Image = Global.AVT_TRAKING.My.Resources.Resources.loupe
-        Me.PictureBox1.Location = New System.Drawing.Point(75, 7)
+        Me.PictureBox1.Location = New System.Drawing.Point(51, 8)
         Me.PictureBox1.Name = "PictureBox1"
-        Me.PictureBox1.Size = New System.Drawing.Size(25, 24)
+        Me.PictureBox1.Size = New System.Drawing.Size(29, 24)
         Me.PictureBox1.TabIndex = 24
         Me.PictureBox1.TabStop = False
         '
@@ -1115,18 +1117,18 @@ Partial Class Employees
         '
         Me.txtSearch.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.txtSearch.Location = New System.Drawing.Point(111, 8)
+        Me.txtSearch.Location = New System.Drawing.Point(86, 9)
         Me.txtSearch.Name = "txtSearch"
-        Me.txtSearch.Size = New System.Drawing.Size(213, 20)
+        Me.txtSearch.Size = New System.Drawing.Size(146, 20)
         Me.txtSearch.TabIndex = 18
         '
         'Panel4
         '
         Me.Panel4.Controls.Add(Me.imgPhoto)
         Me.Panel4.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel4.Location = New System.Drawing.Point(660, 3)
+        Me.Panel4.Location = New System.Drawing.Point(659, 3)
         Me.Panel4.Name = "Panel4"
-        Me.Panel4.Size = New System.Drawing.Size(135, 120)
+        Me.Panel4.Size = New System.Drawing.Size(136, 120)
         Me.Panel4.TabIndex = 2
         '
         'imgPhoto
@@ -1136,7 +1138,7 @@ Partial Class Employees
         Me.imgPhoto.Dock = System.Windows.Forms.DockStyle.Fill
         Me.imgPhoto.Location = New System.Drawing.Point(0, 0)
         Me.imgPhoto.Name = "imgPhoto"
-        Me.imgPhoto.Size = New System.Drawing.Size(135, 120)
+        Me.imgPhoto.Size = New System.Drawing.Size(136, 120)
         Me.imgPhoto.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
         Me.imgPhoto.TabIndex = 12
         Me.imgPhoto.TabStop = False
@@ -1152,7 +1154,7 @@ Partial Class Employees
         Me.Panel3.Controls.Add(Me.txtSapNumber)
         Me.Panel3.Controls.Add(Me.chbState)
         Me.Panel3.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel3.Location = New System.Drawing.Point(335, 3)
+        Me.Panel3.Location = New System.Drawing.Point(334, 3)
         Me.Panel3.Name = "Panel3"
         Me.Panel3.Size = New System.Drawing.Size(319, 120)
         Me.Panel3.TabIndex = 1
@@ -1253,7 +1255,7 @@ Partial Class Employees
         Me.Panel2.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel2.Location = New System.Drawing.Point(3, 3)
         Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(326, 120)
+        Me.Panel2.Size = New System.Drawing.Size(325, 120)
         Me.Panel2.TabIndex = 0
         '
         'Label1
@@ -1302,7 +1304,7 @@ Partial Class Employees
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.txtEmployeeNumber.Location = New System.Drawing.Point(125, -1)
         Me.txtEmployeeNumber.Name = "txtEmployeeNumber"
-        Me.txtEmployeeNumber.Size = New System.Drawing.Size(198, 20)
+        Me.txtEmployeeNumber.Size = New System.Drawing.Size(197, 20)
         Me.txtEmployeeNumber.TabIndex = 6
         '
         'txtFirsName
@@ -1311,7 +1313,7 @@ Partial Class Employees
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.txtFirsName.Location = New System.Drawing.Point(125, 28)
         Me.txtFirsName.Name = "txtFirsName"
-        Me.txtFirsName.Size = New System.Drawing.Size(198, 20)
+        Me.txtFirsName.Size = New System.Drawing.Size(197, 20)
         Me.txtFirsName.TabIndex = 7
         '
         'txtLastName
@@ -1320,7 +1322,7 @@ Partial Class Employees
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.txtLastName.Location = New System.Drawing.Point(125, 58)
         Me.txtLastName.Name = "txtLastName"
-        Me.txtLastName.Size = New System.Drawing.Size(198, 20)
+        Me.txtLastName.Size = New System.Drawing.Size(197, 20)
         Me.txtLastName.TabIndex = 8
         '
         'txtMiddleName
@@ -1329,7 +1331,7 @@ Partial Class Employees
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.txtMiddleName.Location = New System.Drawing.Point(125, 88)
         Me.txtMiddleName.Name = "txtMiddleName"
-        Me.txtMiddleName.Size = New System.Drawing.Size(198, 20)
+        Me.txtMiddleName.Size = New System.Drawing.Size(197, 20)
         Me.txtMiddleName.TabIndex = 9
         '
         'TabPage3
@@ -1353,6 +1355,24 @@ Partial Class Employees
         Me.TabPage4.Size = New System.Drawing.Size(810, 346)
         Me.TabPage4.TabIndex = 2
         Me.TabPage4.Text = "Update by Excel"
+        '
+        'btnDeleteEmployee
+        '
+        Me.btnDeleteEmployee.Dock = System.Windows.Forms.DockStyle.Right
+        Me.btnDeleteEmployee.FlatAppearance.BorderSize = 0
+        Me.btnDeleteEmployee.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(41, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(185, Byte), Integer))
+        Me.btnDeleteEmployee.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnDeleteEmployee.Font = New System.Drawing.Font("Verdana", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnDeleteEmployee.ForeColor = System.Drawing.Color.White
+        Me.btnDeleteEmployee.Image = Global.AVT_TRAKING.My.Resources.Resources.delete
+        Me.btnDeleteEmployee.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnDeleteEmployee.Location = New System.Drawing.Point(238, 0)
+        Me.btnDeleteEmployee.Name = "btnDeleteEmployee"
+        Me.btnDeleteEmployee.Size = New System.Drawing.Size(87, 38)
+        Me.btnDeleteEmployee.TabIndex = 25
+        Me.btnDeleteEmployee.Text = "Delete"
+        Me.btnDeleteEmployee.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.btnDeleteEmployee.UseVisualStyleBackColor = True
         '
         'Employees
         '
@@ -1529,4 +1549,5 @@ Partial Class Employees
     Friend WithEvents TabPage3 As TabPage
     Friend WithEvents TabPage4 As TabPage
     Friend WithEvents txtMensajeProseso As TextBox
+    Friend WithEvents btnDeleteEmployee As Button
 End Class

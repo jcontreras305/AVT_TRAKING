@@ -32,7 +32,7 @@ Public Class MetodosEmployees
             conectar()
             Dim cmd As New SqlCommand("select  em1.numberEmploye as Number, em1.firstName as 'FirstName' , em1.lastName as 'LastName' , em1.middleName as 'MiddleName' , 
 con.phoneNumber1 as 'PhoneNumber1', con.phoneNumber2 as 'PhoneNumber2' , con.email as 'Email' , 
-ads.city as 'City', ads.providence as 'State', T1.payRate1 as 'PayRate',T1.payRate2 as 'PayRateOT',T1.payRate3 as 'PayRate3',typeEmployee as 'Class', perdiem  from employees as em1 left join 
+ads.city as 'City', ads.providence as 'State', T1.payRate1 as 'PayRate',T1.payRate2 as 'PayRateOT',T1.payRate3 as 'PayRate3',typeEmployee as 'Class', perdiem , em1.idEmployee from employees as em1 left join 
 (select pr.payRate1,pr.payRate2,pr.payRate3,pr.idEmployee from payRate as pr inner join employees as em on em.idEmployee =  pr.idEmployee where datePayRate = (select MAX(datePayRate) from payRate where idEmployee = em.idEmployee)) 
 as T1
 on T1.idEmployee = em1.idEmployee 
@@ -48,6 +48,7 @@ where em1.numberEmploye like CONCAT('%','" + text + "','%') or
                 Dim dt As New DataTable
                 da.Fill(dt)
                 tblEmpledos.DataSource = dt
+                tblEmpledos.Columns("idEmployee").Visible = False
             Else
                 MsgBox("Error in the connection to Data Base check your sever.")
             End If
@@ -59,35 +60,41 @@ where em1.numberEmploye like CONCAT('%','" + text + "','%') or
     Public Function guardarEmpleado(ByVal datosGeneralesEmpleado() As String, ByVal arraybyte() As Byte) As Boolean
         Try
             conectar()
-            Dim cmd As New SqlCommand("sp_insert_Employee", conn)
-            cmd.CommandType = CommandType.StoredProcedure
-            cmd.Parameters.Add("@numberEmploye", SqlDbType.VarChar, 25).Value = datosGeneralesEmpleado(0)
-            cmd.Parameters.Add("@firstName", SqlDbType.VarChar, 30).Value = datosGeneralesEmpleado(1)
-            cmd.Parameters.Add("@lastName", SqlDbType.VarChar, 25).Value = datosGeneralesEmpleado(2)
-            cmd.Parameters.Add("@middleName", SqlDbType.VarChar, 25).Value = datosGeneralesEmpleado(3)
-            cmd.Parameters.Add("@socialNumber", SqlDbType.VarChar, 14).Value = datosGeneralesEmpleado(4)
-            cmd.Parameters.Add("@SAPNumber", SqlDbType.Int).Value = If(datosGeneralesEmpleado(5) = "", "0", datosGeneralesEmpleado(5))
-            cmd.Parameters.Add("@photo", SqlDbType.Image).Value = arraybyte
-            cmd.Parameters.Add("@estatus", SqlDbType.Char, 1).Value = datosGeneralesEmpleado(6)
-            'contacto
-            cmd.Parameters.Add("@phoneNumber1", SqlDbType.VarChar, 13).Value = datosGeneralesEmpleado(7)
-            cmd.Parameters.Add("@phoneNumber2", SqlDbType.VarChar, 13).Value = datosGeneralesEmpleado(8)
-            cmd.Parameters.Add("@email", SqlDbType.VarChar, 50).Value = datosGeneralesEmpleado(9)
-            'direccion
-            cmd.Parameters.Add("@avenue", SqlDbType.VarChar, 80).Value = datosGeneralesEmpleado(10)
-            cmd.Parameters.Add("@number", SqlDbType.Int).Value = datosGeneralesEmpleado(11)
-            cmd.Parameters.Add("@city", SqlDbType.VarChar, 20).Value = datosGeneralesEmpleado(12)
-            cmd.Parameters.Add("@providence", SqlDbType.VarChar, 20).Value = datosGeneralesEmpleado(13)
-            cmd.Parameters.Add("@postalCode", SqlDbType.Int).Value = datosGeneralesEmpleado(14)
-            'pay
-            cmd.Parameters.Add("@payRate1", SqlDbType.Float).Value = datosGeneralesEmpleado(15)
-            cmd.Parameters.Add("@payRate2", SqlDbType.Float).Value = datosGeneralesEmpleado(16)
-            cmd.Parameters.Add("@payRate3", SqlDbType.Float).Value = datosGeneralesEmpleado(17)
-            cmd.Parameters.Add("@type", SqlDbType.VarChar, 20).Value = datosGeneralesEmpleado(18)
-            cmd.Parameters.Add("@perdiem", SqlDbType.Bit).Value = If(datosGeneralesEmpleado(19) = "1", True, False)
-            If cmd.ExecuteNonQuery Then
-                Return True
+            If Not datosGeneralesEmpleado(0) = "" Then
+
+                Dim cmd As New SqlCommand("sp_insert_Employee", conn)
+                cmd.CommandType = CommandType.StoredProcedure
+                cmd.Parameters.Add("@numberEmploye", SqlDbType.Int).Value = CInt(datosGeneralesEmpleado(0))
+                cmd.Parameters.Add("@firstName", SqlDbType.VarChar, 30).Value = datosGeneralesEmpleado(1)
+                cmd.Parameters.Add("@lastName", SqlDbType.VarChar, 25).Value = datosGeneralesEmpleado(2)
+                cmd.Parameters.Add("@middleName", SqlDbType.VarChar, 25).Value = datosGeneralesEmpleado(3)
+                cmd.Parameters.Add("@socialNumber", SqlDbType.VarChar, 14).Value = datosGeneralesEmpleado(4)
+                cmd.Parameters.Add("@SAPNumber", SqlDbType.Int).Value = If(datosGeneralesEmpleado(5) = "", "0", CInt(datosGeneralesEmpleado(5)))
+                cmd.Parameters.Add("@photo", SqlDbType.Image).Value = arraybyte
+                cmd.Parameters.Add("@estatus", SqlDbType.Char, 1).Value = datosGeneralesEmpleado(6)
+                'contacto
+                cmd.Parameters.Add("@phoneNumber1", SqlDbType.VarChar, 13).Value = datosGeneralesEmpleado(7)
+                cmd.Parameters.Add("@phoneNumber2", SqlDbType.VarChar, 13).Value = datosGeneralesEmpleado(8)
+                cmd.Parameters.Add("@email", SqlDbType.VarChar, 50).Value = datosGeneralesEmpleado(9)
+                'direccion
+                cmd.Parameters.Add("@avenue", SqlDbType.VarChar, 80).Value = datosGeneralesEmpleado(10)
+                cmd.Parameters.Add("@number", SqlDbType.Int).Value = datosGeneralesEmpleado(11)
+                cmd.Parameters.Add("@city", SqlDbType.VarChar, 20).Value = datosGeneralesEmpleado(12)
+                cmd.Parameters.Add("@providence", SqlDbType.VarChar, 20).Value = datosGeneralesEmpleado(13)
+                cmd.Parameters.Add("@postalCode", SqlDbType.Int).Value = datosGeneralesEmpleado(14)
+                'pay
+                cmd.Parameters.Add("@payRate1", SqlDbType.Float).Value = datosGeneralesEmpleado(15)
+                cmd.Parameters.Add("@payRate2", SqlDbType.Float).Value = datosGeneralesEmpleado(16)
+                cmd.Parameters.Add("@payRate3", SqlDbType.Float).Value = datosGeneralesEmpleado(17)
+                cmd.Parameters.Add("@type", SqlDbType.VarChar, 20).Value = datosGeneralesEmpleado(18)
+                cmd.Parameters.Add("@perdiem", SqlDbType.Bit).Value = If(datosGeneralesEmpleado(19) = "1", True, False)
+                If cmd.ExecuteNonQuery Then
+                    Return True
+                Else
+                    Return False
+                End If
             Else
+                MessageBox.Show("Please fill the fields with correct values.")
                 Return False
             End If
         Catch ex As Exception
@@ -96,7 +103,44 @@ where em1.numberEmploye like CONCAT('%','" + text + "','%') or
         End Try
         desconectar()
     End Function
+    Public Function eliminarEmpleyee(ByVal table As DataGridView) As Boolean
+        Try
+            conectar()
+            Dim tran As SqlTransaction
+            tran = conn.BeginTransaction
+            Dim flag As Boolean = True
+            Dim employeeNum As String = ""
+            For Each row As DataGridViewRow In table.SelectedRows
+                Dim cmd As New SqlCommand("sp_Delete_Employee")
+                cmd.CommandType = CommandType.StoredProcedure
+                cmd.Connection = conn
+                cmd.Transaction = tran
+                cmd.Parameters.Add("@idEmployee", SqlDbType.VarChar, 36).Value = row.Cells("idEmployee").Value
 
+                If cmd.ExecuteNonQuery > 0 Then
+                    flag = True
+                Else
+                    flag = False
+                    employeeNum = row.Cells("Number").Value.ToString()
+                    Exit For
+                End If
+            Next
+            If flag Then
+                tran.Commit()
+                MsgBox("Successful.")
+                Return True
+            Else
+                MsgBox("Error with the Employee = " + employeeNum)
+                tran.Rollback()
+                Return False
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message())
+            Return False
+        Finally
+            desconectar()
+        End Try
+    End Function
     Public Function insertNewPayRateEmployee(ByVal idEmployee As String, ByVal pay1 As Decimal, ByVal pay2 As Decimal, ByVal pay3 As Decimal) As Boolean
         Try
             conectar()

@@ -474,6 +474,20 @@ Public Class Employees
             txtMensajeProseso.Text = txtMensajeProseso.Text + vbCrLf + "Error"
         End Try
     End Sub
+
+    Private Sub btnDeleteEmployee_Click(sender As Object, e As EventArgs) Handles btnDeleteEmployee.Click
+        Try
+            If tblEmployees.SelectedRows.Count > 0 Then
+                mtd.eliminarEmpleyee(tblEmployees)
+            Else
+                MessageBox.Show("Please select a row.")
+            End If
+
+        Catch ex As Exception
+
+        End Try
+    End Sub
+
     Private Function ExistIdEmployee(ByVal idEmployee As String) As Boolean
         Dim tblIdEmployees As Data.DataTable = mtd.selectEmployeeIDd
         Dim flag As Boolean = False

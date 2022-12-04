@@ -4717,3 +4717,33 @@ begin
 	end  
 end
 go
+----###############################################################################################
+----########### SP_DELETE_EMPLOYEE ################################################################
+----###############################################################################################
+create proc sp_delete_Employee
+@idEmployee varchar(36)
+as
+declare @Error as int
+begin 
+		begin try 
+			if (select count(*) from hoursWorked where idEmployee = @idEmployee)=0
+			begin
+				delete from payRate where idEmployee = @idEmployee
+				delete from employees where idEmployee = @idEmployee
+				delete from HomeAddress where idHomeAdress = (select top 1 idHomeAdress from employees where idEmployee = @idEmployee)
+				delete from contact where idContact = (select top 1 idContact from employees where idEmployee = @idEmployee)
+				if (select count(*) from employees where idEmployee = @idEmployee)=0
+				begin 
+					set @Error = 0
+				end
+				else
+				begin
+					set @Error = 1
+				end
+			end
+		end try	
+		begin catch
+			print 'Error'
+		end catch
+end
+go
