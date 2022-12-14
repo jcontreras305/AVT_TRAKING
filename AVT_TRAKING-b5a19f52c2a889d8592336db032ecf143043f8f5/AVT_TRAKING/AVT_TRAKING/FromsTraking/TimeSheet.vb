@@ -420,9 +420,9 @@ Public Class TimeSheet
                                 For Each item As String In listErrors
                                     MsgSalida(txtSalidaCSV, item)
                                 Next
-                                If DialogResult.Yes = MessageBox.Show("Errors were founff, Are you sure to continue?", "Important", MessageBoxButtons.YesNo, MessageBoxIcon.Question) Then
-                                    flagConitnue = False
-                                End If
+
+                                MessageBox.Show("Erros was found, is not posible to continue.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                                flagConitnue = False
                             End If
                             If flagConitnue Then
                                 If mtdHPW.execBulkInsertRecords() Then

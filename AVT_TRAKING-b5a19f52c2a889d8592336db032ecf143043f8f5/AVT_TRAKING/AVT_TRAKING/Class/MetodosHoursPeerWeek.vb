@@ -1184,7 +1184,7 @@ WITH(
 	FIELDTERMINATOR =',',
 	ROWTERMINATOR = '\n',
 	FIRSTROW = 2,
-	MAXERRORS = 3 --NORMALMENTE SE ENCUENTRA EN 10 
+	MAXERRORS = 1 --NORMALMENTE SE ENCUENTRA EN 10 
 )", conn)
             If cmd.ExecuteNonQuery Then
                 Return True
