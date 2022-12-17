@@ -451,6 +451,12 @@
     <Compile Include="FromsTraking\Track.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="FromsTraking\ValidarTimeSheet.Designer.vb">
+      <DependentUpon>ValidarTimeSheet.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FromsTraking\ValidarTimeSheet.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="FromsTraking\Vendor.Designer.vb">
       <DependentUpon>Vendor.vb</DependentUpon>
     </Compile>
@@ -1134,6 +1140,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FromsTraking\Track.resx">
       <DependentUpon>Track.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FromsTraking\ValidarTimeSheet.resx">
+      <DependentUpon>ValidarTimeSheet.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FromsTraking\Vendor.resx">
       <DependentUpon>Vendor.vb</DependentUpon>

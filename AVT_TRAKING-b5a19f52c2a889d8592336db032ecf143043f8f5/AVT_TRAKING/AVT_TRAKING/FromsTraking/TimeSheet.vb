@@ -10,10 +10,13 @@ Public Class TimeSheet
     Public tablaProject As New Data.DataTable
     Public tablaEmpleadosId As New Data.DataTable
     Public tablaExpeseCode As New Data.DataTable
+    Public flagErrorContinue As Boolean
+    Public correctionString As String
     Private Sub TimeSheet_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         mtdHPW.llenarTablaWorkCode(tablaWorkCodes)
         mtdHPW.llenarTablaProyecto(tablaProject)
         mtdHPW.llenarTablaExpenses(tablaExpeseCode)
+        flagErrorContinue = False
     End Sub
 
     Private Sub btnDownloadExcel_Click(sender As Object, e As EventArgs)
@@ -350,6 +353,11 @@ Public Class TimeSheet
                             Dim textDoc As String = "idHWTMP,hoursST,hoursOT,hours3T,dateWorked,idEmployee,idWorkCode,idAux,schedule,jobNo" & vbCrLf
                             Dim listErrors As New List(Of String)
                             Dim msgAux As String = txtSalidaCSV.Text + vbCrLf
+                            Dim tblErrors As New Data.DataTable
+                            Dim clms() As String = {"EmployeeName", "EmployeeNum", "DateWork", "WorkOrder", "PO", "Code", "HST", "HOT", "Shift", "Description"}
+                            For Each clm As String In clms
+                                tblErrors.Columns.Add(clm)
+                            Next
                             While CStr(records.Cells(contRecord, 2).Value) <> ""
                                 'Dim rowP As Data.DataRow = tblProjects.Rows.Cast(Of Data.DataRow).FirstOrDefault(Function(x) CStr(x.ItemArray(0)) = records.Cells(contRecord, 4).value)
                                 Dim rowE() As Data.DataRow = tblEmp.Select("numberEmploye = " + CStr(records.Cells(contRecord, 2).value) + "") 'Buscando idEmployee
@@ -360,7 +368,7 @@ Public Class TimeSheet
 
                                 Dim hst As String = If(CStr(records.Cells(contRecord, 7).value) = "", "0", CStr(records.Cells(contRecord, 7).value))
                                 Dim hot As String = If(CStr(records.Cells(contRecord, 8).value) = "", "0", CStr(records.Cells(contRecord, 8).value))
-                                Dim schedule As String = If(records.Cells(contRecord, 9).value = "Day", "DAYS", If(records.Cells(contRecord, 9).value = "DAYS", "DAYS", "NIGTHS"))
+                                Dim schedule As String = If(records.Cells(contRecord, 9).value = "Day" Or records.Cells(contRecord, 9).value = "DAYS", "DAYS", "NIGTHS")
                                 If rowP.Length > 0 Then
                                     If rowE.Length > 0 Then
                                         'Buscando idWorkCode
@@ -393,37 +401,61 @@ Public Class TimeSheet
                                                         textDoc += newidRecord.ToString() & "," & hst & "," & hot & "," & "0" & "," & dateRecord & "," & CStr(rowE(0).ItemArray(2)) & "," & CStr(rowWC(0).ItemArray(0)) & "," & rowP(0).ItemArray(2) & "," & schedule & "," & rowP(0).ItemArray(6).ToString() & vbCrLf
                                                     Else
                                                         MessageBox.Show("Was not posible to inseter the Work Code " + CStr(records.Cells(contRecord, 6).value) + ", Please try to insert it at another time.")
+                                                        'tblErrors.Rows.Add("The Error is on the Work Code", newidRecord, rowE(0), rowE(1), dateRecord, rowP(0).ItemArray(3).ToString(), rowP(0).ItemArray(1).ToString(), rowP(0).ItemArray(4).ToString(), records.Cells(contRecord, 6).value, hst, hst, schedule, rowP(0).ItemArray(5).ToString())
+                                                        tblErrors.Rows.Add(records.Cells(contRecord, 1).value, records.Cells(contRecord, 2).value, records.Cells(contRecord, 3).value, records.Cells(contRecord, 4).value, records.Cells(contRecord, 5).value, records.Cells(contRecord, 6).value, records.Cells(contRecord, 7).value, records.Cells(contRecord, 8).value, records.Cells(contRecord, 9).value, records.Cells(contRecord, 10).value)
                                                     End If
                                                 Else
                                                     MessageBox.Show("Was not posible to inseter the Work Code " + CStr(records.Cells(contRecord, 6).value) + ", Please try to insert it at another time.")
+                                                    'tblErrors.Rows.Add("The Error is on the Work Code", newidRecord, rowE(0), rowE(1), dateRecord, rowP(0).ItemArray(3).ToString(), rowP(0).ItemArray(1).ToString(), rowP(0).ItemArray(4).ToString(), records.Cells(contRecord, 6).value, hst, hst, schedule, rowP(0).ItemArray(5).ToString())
+                                                    tblErrors.Rows.Add(records.Cells(contRecord, 1).value, records.Cells(contRecord, 2).value, records.Cells(contRecord, 3).value, records.Cells(contRecord, 4).value, records.Cells(contRecord, 5).value, records.Cells(contRecord, 6).value, records.Cells(contRecord, 7).value, records.Cells(contRecord, 8).value, records.Cells(contRecord, 9).value, records.Cells(contRecord, 10).value)
                                                 End If
+                                            Else
+                                                tblErrors.Rows.Add(records.Cells(contRecord, 1).value, records.Cells(contRecord, 2).value, records.Cells(contRecord, 3).value, records.Cells(contRecord, 4).value, records.Cells(contRecord, 5).value, records.Cells(contRecord, 6).value, records.Cells(contRecord, 7).value, records.Cells(contRecord, 8).value, records.Cells(contRecord, 9).value, records.Cells(contRecord, 10).value)
                                             End If
                                         End If
                                     Else
                                         listErrors.Add("Row " + CStr(contRecord) + ": Number Employee Error.")
+                                        'tblErrors.Rows.Add("The Employee was not found", newidRecord, records.Cells(contRecord, 0).value, records.Cells(contRecord, 1).value, dateRecord, rowP(0).ItemArray(3).ToString(), rowP(0).ItemArray(1).ToString(), rowP(0).ItemArray(4).ToString(), records.Cells(contRecord, 6).value, hst, hst, schedule, rowP(0).ItemArray(5).ToString())
+                                        tblErrors.Rows.Add(records.Cells(contRecord, 1).value, records.Cells(contRecord, 2).value, records.Cells(contRecord, 3).value, records.Cells(contRecord, 4).value, records.Cells(contRecord, 5).value, records.Cells(contRecord, 6).value, records.Cells(contRecord, 7).value, records.Cells(contRecord, 8).value, records.Cells(contRecord, 9).value, records.Cells(contRecord, 10).value)
                                     End If
                                 Else
                                     listErrors.Add("Row " + CStr(contRecord) + ": Work Order Error.")
+                                    Dim po() As String = records.Cells(contRecord, 4).value.ToString.Split("-")
+                                    'tblErrors.Rows.Add("The Employee was not found", newidRecord, records.Cells(contRecord, 0).value, records.Cells(contRecord, 1).value, dateRecord, If(po.Length = 2, po(0), ""), If(po.Length = 2, po(1), ""), records.Cells(contRecord, 5).value, records.Cells(contRecord, 6).value, hst, hst, schedule, "")
+                                    tblErrors.Rows.Add(records.Cells(contRecord, 1).value, records.Cells(contRecord, 2).value, records.Cells(contRecord, 3).value, records.Cells(contRecord, 4).value, records.Cells(contRecord, 5).value, records.Cells(contRecord, 6).value, records.Cells(contRecord, 7).value, records.Cells(contRecord, 8).value, records.Cells(contRecord, 9).value, records.Cells(contRecord, 10).value)
                                 End If
                                 txtSalidaCSV.Text = msgAux + "Reading Excel Row: " + contRecord.ToString()
                                 txtSalidaCSV.Select(txtSalidaCSV.Text.Length, 0)
                                 txtSalidaCSV.ScrollToCaret()
                                 contRecord += 1
                             End While
-                            If Not IO.Directory.Exists("C:\TMP") Then
-                                My.Computer.FileSystem.CreateDirectory("C:\TMP")
-                            End If
-                            My.Computer.FileSystem.WriteAllText("C:\TMP\TimeSheetTemp.csv", textDoc, False)
                             Dim flagConitnue As Boolean = True
                             If listErrors.Count > 0 Then
                                 MsgSalida(txtSalidaCSV, "List Error :")
                                 For Each item As String In listErrors
                                     MsgSalida(txtSalidaCSV, item)
                                 Next
-
-                                MessageBox.Show("Erros was found, is not posible to continue.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-                                flagConitnue = False
+                                If DialogResult.Yes = MessageBox.Show("Erros was found, would you like to correct the mistakes?, if you deny, just the correct records will goin to insert.", "Error", MessageBoxButtons.YesNo, MessageBoxIcon.Error) Then
+                                    flagConitnue = True
+                                Else
+                                    flagConitnue = False
+                                End If
+                                If flagConitnue Then
+                                    If tblErrors.Rows.Count > 0 Then
+                                        Dim vts As New ValidarTimeSheet
+                                        AddOwnedForm(vts)
+                                        vts.Errors = tblErrors
+                                        vts.ShowDialog()
+                                        If flagErrorContinue Then
+                                            textDoc = textDoc & correctionString
+                                        End If
+                                    End If
+                                End If
                             End If
+                            If Not IO.Directory.Exists("C:\TMP") Then
+                                My.Computer.FileSystem.CreateDirectory("C:\TMP")
+                            End If
+                            My.Computer.FileSystem.WriteAllText("C:\TMP\TimeSheetTemp.csv", textDoc, False)
                             If flagConitnue Then
                                 If mtdHPW.execBulkInsertRecords() Then
                                     MsgSalida(txtSalidaCSV, "The Process Records Insertion is over.")

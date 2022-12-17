@@ -3,10 +3,10 @@ Public Class MetodosHoursPeerWeek
     Inherits ConnectioDB
     Dim mtdJobs As New MetodosJobs
     Public idEmpleadoFind As String
-    Public Function llenarEmpleadosCombo(ByVal combo As ComboBox, ByVal tabla As DataTable) As Boolean
+    Public Function llenarEmpleadosCombo(ByRef combo As ComboBox, ByVal tabla As DataTable) As Boolean
         Try
             conectar()
-            Dim cmd As New SqlCommand("select idEmployee, CONCAT(firstName,' ',middleName,' ',lastName) , photo as 'Photo', SAPNumber, numberEmploye , perdiem from employees where estatus = 'E' ", conn)
+            Dim cmd As New SqlCommand("select idEmployee, CONCAT(firstName,' ',middleName,' ',lastName) as name, photo as 'Photo', SAPNumber, numberEmploye , perdiem from employees where estatus = 'E' ", conn)
             tabla.Rows.Clear()
             If cmd.ExecuteNonQuery Then
                 Dim da As New SqlDataAdapter(cmd)
@@ -256,6 +256,39 @@ order by jb.jobNo,po.idPO , CONCAT(wo.idWO,'-',tk.task) asc
         End Try
     End Function
 
+    Public Function llenarComboProject(ByVal cmbProyect As ComboBox, Optional lastValue As String = "") As String
+        Try
+            conectar()
+            cmbProyect.Items.Clear()
+            Dim projectTable As New DataTable
+            Dim cmd As New SqlCommand("select tk.idAux as 'task', CONCAT(wo.idWO,'-',tk.task) as 'project' , tk.description , po.idPO , jb.jobNo from workOrder as wo 
+inner join task as tk on wo.idAuxWO = tk.idAuxWO
+inner join projectOrder as po on po.idPO = wo.idPO and wo.jobNo = po.jobNo
+inner join job as jb on po.jobNo = jb.jobNo
+order by jb.jobNo,po.idPO , CONCAT(wo.idWO,'-',tk.task) asc
+", conn)
+            If cmd.ExecuteNonQuery Then
+                Dim da As New SqlDataAdapter(cmd)
+                da.Fill(projectTable)
+                Dim cmbValue As String = ""
+                For Each row As DataRow In projectTable.Rows
+                    cmbProyect.Items.Add(CStr(row.ItemArray(1)) + "    " + CStr(row.ItemArray(3)) + "    " + CStr(row.ItemArray(4)))
+                    If lastValue = row.ItemArray(1) Then
+                        cmbValue = CStr(row.ItemArray(1)) + "    " + CStr(row.ItemArray(3)) + "    " + CStr(row.ItemArray(4))
+                    End If
+                Next
+                desconectar()
+                Return cmbValue
+            Else
+                desconectar()
+                Return ""
+            End If
+        Catch ex As Exception
+            desconectar()
+            Return ""
+        End Try
+    End Function
+
     Public Function llenarTablaWorkCode(ByVal workCodeTable As DataTable) As Boolean
         Try
             conectar()
@@ -277,11 +310,49 @@ order by jb.jobNo,po.idPO , CONCAT(wo.idWO,'-',tk.task) asc
             Return False
         End Try
     End Function
-    Public Function llenarComboCellWorkCode(ByVal cmbWorkCode As DataGridViewComboBoxCell, ByVal jobNo As String, Optional lastValue As String = "") As String
+    Public Function llenarComboWorkCode(ByVal cmbWorkCode As ComboBox, ByVal jobNo As String, Optional lastValue As String = "") As String
         Try
             conectar()
             cmbWorkCode.Items.Clear()
-            Dim cmd As New SqlCommand("select idWorkCode ,name , description , billingRate1 , billingRateOT , billingRate3 from workCode where jobNo = " + jobNo, conn)
+            Dim cmd As New SqlCommand("select idWorkCode ,name , description , billingRate1 , billingRateOT , billingRate3, jobNo from workCode " + If(jobNo = "", "", " where jobNo = " + jobNo), conn)
+            If cmd.ExecuteNonQuery Then
+                Dim da As New SqlDataAdapter(cmd)
+                Dim workCodeTable As New DataTable
+                da.Fill(workCodeTable)
+                Dim cmbValue As String = ""
+                If cmbWorkCode.Items.Count > 0 Then
+                    cmbWorkCode.Items.Clear()
+                End If
+                For Each row As DataRow In workCodeTable.Rows
+                    cmbWorkCode.Items.Add(row.ItemArray(1))
+                    If lastValue = row.ItemArray(1) Then
+                        If jobNo <> "" Then
+                            If jobNo = row.ItemArray(6) Then
+                                cmbValue = row.ItemArray(1).ToString()
+                                cmbWorkCode.Text = row.ItemArray(1).ToString()
+                            End If
+                        Else
+                            cmbValue = row.ItemArray(1).ToString()
+                            cmbWorkCode.Text = row.ItemArray(1).ToString()
+                        End If
+                    End If
+                Next
+                desconectar()
+                Return cmbValue
+            Else
+                desconectar()
+                Return ""
+            End If
+        Catch ex As Exception
+            desconectar()
+            Return ""
+        End Try
+    End Function
+    Public Function llenarComboCellWorkCode(ByVal cmbWorkCode As DataGridViewComboBoxCell, Optional jobNo As String = "", Optional lastValue As String = "") As String
+        Try
+            conectar()
+            cmbWorkCode.Items.Clear()
+            Dim cmd As New SqlCommand("select idWorkCode ,name , description , billingRate1 , billingRateOT , billingRate3 from workCode " + If(jobNo = "", "", " where jobNo = " + jobNo), conn)
             If cmd.ExecuteNonQuery Then
                 Dim da As New SqlDataAdapter(cmd)
                 Dim workCodeTable As New DataTable

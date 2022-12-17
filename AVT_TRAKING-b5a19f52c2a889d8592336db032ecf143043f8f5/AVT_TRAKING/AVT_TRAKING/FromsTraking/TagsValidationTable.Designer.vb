@@ -42,12 +42,6 @@ Partial Class TagsValidationTable
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.tbpTags = New System.Windows.Forms.TabPage()
         Me.tblTagsScaffold = New System.Windows.Forms.DataGridView()
-        Me.tbpProducts = New System.Windows.Forms.TabPage()
-        Me.tblProductSheet = New System.Windows.Forms.DataGridView()
-        Me.clmErrorP = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.clmTagID = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.clmProductID = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.clmQuantity = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.clmError = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.TagNum = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.jobCat = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -92,6 +86,12 @@ Partial Class TagsValidationTable
         Me.Comment = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Latitude = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Longitude = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.tbpProducts = New System.Windows.Forms.TabPage()
+        Me.tblProductSheet = New System.Windows.Forms.DataGridView()
+        Me.clmErrorP = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.clmTagID = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.clmProductID = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.clmQuantity = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Panel1.SuspendLayout()
         Me.TableLayoutPanel1.SuspendLayout()
         Me.Panel3.SuspendLayout()
@@ -329,63 +329,6 @@ Partial Class TagsValidationTable
         Me.tblTagsScaffold.RowHeadersDefaultCellStyle = DataGridViewCellStyle1
         Me.tblTagsScaffold.Size = New System.Drawing.Size(780, 317)
         Me.tblTagsScaffold.TabIndex = 3
-        '
-        'tbpProducts
-        '
-        Me.tbpProducts.Controls.Add(Me.tblProductSheet)
-        Me.tbpProducts.Location = New System.Drawing.Point(4, 22)
-        Me.tbpProducts.Name = "tbpProducts"
-        Me.tbpProducts.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbpProducts.Size = New System.Drawing.Size(786, 323)
-        Me.tbpProducts.TabIndex = 1
-        Me.tbpProducts.Text = "List Product"
-        Me.tbpProducts.UseVisualStyleBackColor = True
-        '
-        'tblProductSheet
-        '
-        Me.tblProductSheet.AllowUserToAddRows = False
-        Me.tblProductSheet.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.tblProductSheet.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.clmErrorP, Me.clmTagID, Me.clmProductID, Me.clmQuantity})
-        Me.tblProductSheet.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.tblProductSheet.Location = New System.Drawing.Point(3, 3)
-        Me.tblProductSheet.Name = "tblProductSheet"
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
-        DataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle2.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.tblProductSheet.RowHeadersDefaultCellStyle = DataGridViewCellStyle2
-        Me.tblProductSheet.Size = New System.Drawing.Size(780, 317)
-        Me.tblProductSheet.TabIndex = 0
-        '
-        'clmErrorP
-        '
-        Me.clmErrorP.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
-        Me.clmErrorP.Frozen = True
-        Me.clmErrorP.HeaderText = "Error"
-        Me.clmErrorP.Name = "clmErrorP"
-        Me.clmErrorP.ReadOnly = True
-        Me.clmErrorP.Visible = False
-        '
-        'clmTagID
-        '
-        Me.clmTagID.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
-        Me.clmTagID.HeaderText = "TagID"
-        Me.clmTagID.Name = "clmTagID"
-        '
-        'clmProductID
-        '
-        Me.clmProductID.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
-        Me.clmProductID.HeaderText = "ProductID"
-        Me.clmProductID.Name = "clmProductID"
-        '
-        'clmQuantity
-        '
-        Me.clmQuantity.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
-        Me.clmQuantity.HeaderText = "Quantity"
-        Me.clmQuantity.Name = "clmQuantity"
         '
         'clmError
         '
@@ -668,6 +611,63 @@ Partial Class TagsValidationTable
         Me.Longitude.HeaderText = "Longitude"
         Me.Longitude.Name = "Longitude"
         Me.Longitude.Width = 87
+        '
+        'tbpProducts
+        '
+        Me.tbpProducts.Controls.Add(Me.tblProductSheet)
+        Me.tbpProducts.Location = New System.Drawing.Point(4, 22)
+        Me.tbpProducts.Name = "tbpProducts"
+        Me.tbpProducts.Padding = New System.Windows.Forms.Padding(3)
+        Me.tbpProducts.Size = New System.Drawing.Size(786, 323)
+        Me.tbpProducts.TabIndex = 1
+        Me.tbpProducts.Text = "List Product"
+        Me.tbpProducts.UseVisualStyleBackColor = True
+        '
+        'tblProductSheet
+        '
+        Me.tblProductSheet.AllowUserToAddRows = False
+        Me.tblProductSheet.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.tblProductSheet.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.clmErrorP, Me.clmTagID, Me.clmProductID, Me.clmQuantity})
+        Me.tblProductSheet.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.tblProductSheet.Location = New System.Drawing.Point(3, 3)
+        Me.tblProductSheet.Name = "tblProductSheet"
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
+        DataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle2.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.tblProductSheet.RowHeadersDefaultCellStyle = DataGridViewCellStyle2
+        Me.tblProductSheet.Size = New System.Drawing.Size(780, 317)
+        Me.tblProductSheet.TabIndex = 0
+        '
+        'clmErrorP
+        '
+        Me.clmErrorP.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
+        Me.clmErrorP.Frozen = True
+        Me.clmErrorP.HeaderText = "Error"
+        Me.clmErrorP.Name = "clmErrorP"
+        Me.clmErrorP.ReadOnly = True
+        Me.clmErrorP.Visible = False
+        '
+        'clmTagID
+        '
+        Me.clmTagID.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
+        Me.clmTagID.HeaderText = "TagID"
+        Me.clmTagID.Name = "clmTagID"
+        '
+        'clmProductID
+        '
+        Me.clmProductID.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
+        Me.clmProductID.HeaderText = "ProductID"
+        Me.clmProductID.Name = "clmProductID"
+        '
+        'clmQuantity
+        '
+        Me.clmQuantity.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
+        Me.clmQuantity.HeaderText = "Quantity"
+        Me.clmQuantity.Name = "clmQuantity"
         '
         'TagsValidationTable
         '

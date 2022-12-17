@@ -410,7 +410,7 @@ from job as jb
             desconectar()
         End Try
     End Function
-    Public Function llenarComboWO(ByVal combo As ComboBox, ByVal IdCliente As String, Optional jobNo As String = "") As DataTable
+    Public Function llenarComboWO(ByVal combo As ComboBox, Optional IdCliente As String = "", Optional jobNo As String = "") As DataTable
         Dim tabla As New DataTable
         tabla.Columns.Add("wono")
         tabla.Columns.Add("wo")
@@ -441,7 +441,7 @@ inner join task as tk on tk.idAuxWO = wo.idAuxWO " + If(IdCliente = "", "", "whe
         End Try
     End Function
 
-    Public Function llenarWO(ByVal tabla As DataGridView, ByVal IdCliente As String) As Boolean
+    Public Function llenarWO(ByVal tabla As DataGridView, Optional IdCliente As String = "") As Boolean
         Try
             conectar()
             Dim cmd As New SqlCommand("select jb.jobNo as 'Job No', CONCAT(wo.idWO,'-',tk.task) as 'WO No', tk.description as 'Description'
