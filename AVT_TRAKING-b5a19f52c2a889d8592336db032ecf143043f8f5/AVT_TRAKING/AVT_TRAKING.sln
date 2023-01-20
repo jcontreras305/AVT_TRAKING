@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.30309.148
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "AVT_TRAKING", "AVT_TRAKING\AVT_TRAKING.vbproj", "{7A2324C7-B9CA-4F1D-9129-D1840C081F8B}"
 EndProject
-Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "AVT_Tracking_Setup", "AVT_Tracking_Setup\AVT_Tracking_Setup.vdproj", "{FB4E075F-9C3B-44DF-B386-11FCE9C73764}"
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "AVR_Tracking_Setup", "AVR_Tracking_Setup\AVR_Tracking_Setup.vdproj", "{77E1228F-0065-4386-A8A9-076B6DEA05F7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,8 +17,9 @@ Global
 		{7A2324C7-B9CA-4F1D-9129-D1840C081F8B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7A2324C7-B9CA-4F1D-9129-D1840C081F8B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7A2324C7-B9CA-4F1D-9129-D1840C081F8B}.Release|Any CPU.Build.0 = Release|Any CPU
-		{FB4E075F-9C3B-44DF-B386-11FCE9C73764}.Debug|Any CPU.ActiveCfg = Release
-		{FB4E075F-9C3B-44DF-B386-11FCE9C73764}.Release|Any CPU.ActiveCfg = Release
+		{77E1228F-0065-4386-A8A9-076B6DEA05F7}.Debug|Any CPU.ActiveCfg = Release
+		{77E1228F-0065-4386-A8A9-076B6DEA05F7}.Debug|Any CPU.Build.0 = Release
+		{77E1228F-0065-4386-A8A9-076B6DEA05F7}.Release|Any CPU.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

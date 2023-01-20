@@ -1583,6 +1583,16 @@ Public Class ProjectsCosts
             If (totalHoursST + totalHoursOT + totalHours3) > 0 Then
                 lblPF.Text = Format(Val(CDec(If(lblEarned.Text = "", "0", lblEarned.Text)) / CDec(If(lblTotalHours.Text = "", "0", lblTotalHours.Text))), "0#.##")
             End If
+            If (totalHoursST + totalHoursOT + totalHours3) < sprHoursEstimate.Value Then
+                Dim pf As Double = Val(CDec(If(lblEarned.Text = "", "0", lblEarned.Text)) / CDec(If(lblTotalHours.Text = "", "0", lblTotalHours.Text)))
+                Dim ETC As Double = pf * (sprHoursEstimate.Value - totalHoursST + totalHoursOT + totalHours3)
+                lblETC.Text = Format(ETC, "#.#")
+            Else
+                Dim ETC As Double = ((totalHoursST + totalHoursOT + totalHours3) / (sprPercentComplete.Value / 100)) - (totalHoursST + totalHoursOT + totalHours3)
+                lblETC.Text = Format(ETC, "0#.#")
+            End If
+        ElseIf sprPercentComplete.Value = 100 Then
+            lblETC.Text = "0"
         End If
 
         If Not mensaje.Equals("") Then

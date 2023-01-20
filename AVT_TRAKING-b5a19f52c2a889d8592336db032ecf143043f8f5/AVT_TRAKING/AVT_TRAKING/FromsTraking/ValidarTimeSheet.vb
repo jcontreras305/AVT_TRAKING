@@ -100,7 +100,7 @@ Public Class ValidarTimeSheet
                 ElseIf rowsWC.Length = 0 Then
                     errorDescription = If(errorDescription = "", "Error: The Work Code not exist", errorDescription + ", The Work Code not exist")
                 End If
-                tblData.Rows.Add("", errorDescription + ".", row.ItemArray(1).ToString, row.ItemArray(0), dateCell, If(rowsWO.Length > 0, rowsWO(0).ItemArray(0), ""), row.ItemArray(4), workCodeName, row.ItemArray(6), row.ItemArray(7), row.ItemArray(8), row.ItemArray(9))
+                tblData.Rows.Add("", errorDescription + ".", row.ItemArray(1).ToString, row.ItemArray(0), dateCell, If(rowsWO.Length > 0, rowsWO(0).ItemArray(0), ""), row.ItemArray(4), workCodeName, row.ItemArray(6), row.ItemArray(7), row.ItemArray(8), row.ItemArray(9), "", "", "", If(idEmployee = "", "", idEmployee))
             Next
             Return True
         Catch ex As Exception

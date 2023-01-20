@@ -77,6 +77,7 @@ Partial Class ProjectsCosts
         Me.cmbExpCode = New System.Windows.Forms.ComboBox()
         Me.Label13 = New System.Windows.Forms.Label()
         Me.Panel4 = New System.Windows.Forms.Panel()
+        Me.btnCancel = New System.Windows.Forms.Button()
         Me.Label28 = New System.Windows.Forms.Label()
         Me.PictureBox3 = New System.Windows.Forms.PictureBox()
         Me.PictureBox2 = New System.Windows.Forms.PictureBox()
@@ -137,7 +138,8 @@ Partial Class ProjectsCosts
         Me.btnUpdateMaterialExcel = New System.Windows.Forms.Button()
         Me.btnUpdate = New System.Windows.Forms.Button()
         Me.pnlTablas = New System.Windows.Forms.Panel()
-        Me.btnCancel = New System.Windows.Forms.Button()
+        Me.Label30 = New System.Windows.Forms.Label()
+        Me.lblETC = New System.Windows.Forms.Label()
         Me.Panel1.SuspendLayout()
         Me.TableLayoutPanel2.SuspendLayout()
         Me.Panel5.SuspendLayout()
@@ -542,6 +544,8 @@ Partial Class ProjectsCosts
         'Panel13
         '
         Me.Panel13.BackColor = System.Drawing.Color.FromArgb(CType(CType(83, Byte), Integer), CType(CType(93, Byte), Integer), CType(CType(102, Byte), Integer))
+        Me.Panel13.Controls.Add(Me.Label30)
+        Me.Panel13.Controls.Add(Me.lblETC)
         Me.Panel13.Controls.Add(Me.label29)
         Me.Panel13.Controls.Add(Me.lblPF)
         Me.Panel13.Dock = System.Windows.Forms.DockStyle.Fill
@@ -556,7 +560,7 @@ Partial Class ProjectsCosts
         '
         Me.label29.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.label29.AutoSize = True
-        Me.label29.Location = New System.Drawing.Point(10, 16)
+        Me.label29.Location = New System.Drawing.Point(10, 9)
         Me.label29.Name = "label29"
         Me.label29.Size = New System.Drawing.Size(20, 13)
         Me.label29.TabIndex = 45
@@ -568,7 +572,7 @@ Partial Class ProjectsCosts
         Me.lblPF.AutoSize = True
         Me.lblPF.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblPF.ForeColor = System.Drawing.Color.White
-        Me.lblPF.Location = New System.Drawing.Point(52, 11)
+        Me.lblPF.Location = New System.Drawing.Point(52, 5)
         Me.lblPF.Name = "lblPF"
         Me.lblPF.Size = New System.Drawing.Size(29, 20)
         Me.lblPF.TabIndex = 46
@@ -594,7 +598,7 @@ Partial Class ProjectsCosts
         Me.Label15.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Label15.AutoSize = True
-        Me.Label15.Location = New System.Drawing.Point(8, 6)
+        Me.Label15.Location = New System.Drawing.Point(8, 9)
         Me.Label15.Name = "Label15"
         Me.Label15.Size = New System.Drawing.Size(71, 13)
         Me.Label15.TabIndex = 41
@@ -605,7 +609,7 @@ Partial Class ProjectsCosts
         Me.label50.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.label50.AutoSize = True
-        Me.label50.Location = New System.Drawing.Point(10, 33)
+        Me.label50.Location = New System.Drawing.Point(10, 32)
         Me.label50.Name = "label50"
         Me.label50.Size = New System.Drawing.Size(47, 13)
         Me.label50.TabIndex = 43
@@ -618,7 +622,7 @@ Partial Class ProjectsCosts
         Me.lblTotalHours.AutoSize = True
         Me.lblTotalHours.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblTotalHours.ForeColor = System.Drawing.Color.White
-        Me.lblTotalHours.Location = New System.Drawing.Point(76, 1)
+        Me.lblTotalHours.Location = New System.Drawing.Point(76, 5)
         Me.lblTotalHours.Name = "lblTotalHours"
         Me.lblTotalHours.Size = New System.Drawing.Size(24, 20)
         Me.lblTotalHours.TabIndex = 42
@@ -808,6 +812,24 @@ Partial Class ProjectsCosts
         Me.Panel4.Name = "Panel4"
         Me.Panel4.Size = New System.Drawing.Size(1107, 62)
         Me.Panel4.TabIndex = 29
+        '
+        'btnCancel
+        '
+        Me.btnCancel.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnCancel.FlatAppearance.BorderSize = 0
+        Me.btnCancel.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(83, Byte), Integer), CType(CType(93, Byte), Integer), CType(CType(102, Byte), Integer))
+        Me.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnCancel.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.btnCancel.Image = Global.AVT_TRAKING.My.Resources.Resources.close2
+        Me.btnCancel.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnCancel.Location = New System.Drawing.Point(528, 20)
+        Me.btnCancel.Name = "btnCancel"
+        Me.btnCancel.Size = New System.Drawing.Size(77, 36)
+        Me.btnCancel.TabIndex = 42
+        Me.btnCancel.Text = "Cancel"
+        Me.btnCancel.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.btnCancel.UseVisualStyleBackColor = True
+        Me.btnCancel.Visible = False
         '
         'Label28
         '
@@ -1561,23 +1583,27 @@ Partial Class ProjectsCosts
         Me.pnlTablas.Size = New System.Drawing.Size(1107, 234)
         Me.pnlTablas.TabIndex = 4
         '
-        'btnCancel
+        'Label30
         '
-        Me.btnCancel.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnCancel.FlatAppearance.BorderSize = 0
-        Me.btnCancel.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(83, Byte), Integer), CType(CType(93, Byte), Integer), CType(CType(102, Byte), Integer))
-        Me.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnCancel.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.btnCancel.Image = Global.AVT_TRAKING.My.Resources.Resources.close2
-        Me.btnCancel.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnCancel.Location = New System.Drawing.Point(528, 20)
-        Me.btnCancel.Name = "btnCancel"
-        Me.btnCancel.Size = New System.Drawing.Size(77, 36)
-        Me.btnCancel.TabIndex = 42
-        Me.btnCancel.Text = "Cancel"
-        Me.btnCancel.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.btnCancel.UseVisualStyleBackColor = True
-        Me.btnCancel.Visible = False
+        Me.Label30.Anchor = System.Windows.Forms.AnchorStyles.None
+        Me.Label30.AutoSize = True
+        Me.Label30.Location = New System.Drawing.Point(10, 32)
+        Me.Label30.Name = "Label30"
+        Me.Label30.Size = New System.Drawing.Size(30, 13)
+        Me.Label30.TabIndex = 47
+        Me.Label30.Text = "ETC"
+        '
+        'lblETC
+        '
+        Me.lblETC.Anchor = System.Windows.Forms.AnchorStyles.None
+        Me.lblETC.AutoSize = True
+        Me.lblETC.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblETC.ForeColor = System.Drawing.Color.White
+        Me.lblETC.Location = New System.Drawing.Point(52, 28)
+        Me.lblETC.Name = "lblETC"
+        Me.lblETC.Size = New System.Drawing.Size(29, 20)
+        Me.lblETC.TabIndex = 48
+        Me.lblETC.Text = "0  "
         '
         'ProjectsCosts
         '
@@ -1773,4 +1799,6 @@ Partial Class ProjectsCosts
     Friend WithEvents btnUpdateMaterialExcel As Button
     Friend WithEvents btnChangeJobNo As Button
     Friend WithEvents btnCancel As Button
+    Friend WithEvents Label30 As Label
+    Friend WithEvents lblETC As Label
 End Class

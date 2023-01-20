@@ -1496,6 +1496,7 @@
     <Content Include="Documents\SQLDoc\Consultas para POWERBI.sql" />
     <Content Include="Documents\SQLDoc\Creacion de DB y de la tabla de Usuarios.sql" />
     <Content Include="main.ico" />
+    <None Include="Resources\LogoStart.png" />
     <None Include="Images\users.png" />
     <None Include="Images\userlogin.png" />
     <None Include="Images\close.png" />

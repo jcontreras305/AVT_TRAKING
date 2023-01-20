@@ -29,36 +29,36 @@ Partial Class Login
         Me.btnIniciar = New System.Windows.Forms.Button()
         Me.TitleBar = New System.Windows.Forms.Panel()
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
-        Me.btnMinimize = New System.Windows.Forms.PictureBox()
-        Me.btnClose = New System.Windows.Forms.PictureBox()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.btnConnect = New System.Windows.Forms.Button()
         Me.cmbImagenes = New System.Windows.Forms.ComboBox()
         Me.tlyMain = New System.Windows.Forms.TableLayoutPanel()
         Me.Panel2 = New System.Windows.Forms.Panel()
-        Me.PictureBox2 = New System.Windows.Forms.PictureBox()
         Me.Panel3 = New System.Windows.Forms.Panel()
-        Me.PictureBox3 = New System.Windows.Forms.PictureBox()
         Me.Panel6 = New System.Windows.Forms.Panel()
         Me.Panel7 = New System.Windows.Forms.Panel()
+        Me.tmrReels = New System.Windows.Forms.Timer(Me.components)
+        Me.PictureBox2 = New System.Windows.Forms.PictureBox()
+        Me.PictureBox3 = New System.Windows.Forms.PictureBox()
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.PictureBox4 = New System.Windows.Forms.PictureBox()
-        Me.tmrReels = New System.Windows.Forms.Timer(Me.components)
+        Me.btnMinimize = New System.Windows.Forms.PictureBox()
+        Me.btnClose = New System.Windows.Forms.PictureBox()
         Me.pcbReels = New System.Windows.Forms.PictureBox()
         Me.TitleBar.SuspendLayout()
         Me.TableLayoutPanel1.SuspendLayout()
-        CType(Me.btnMinimize, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.btnClose, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel1.SuspendLayout()
         Me.tlyMain.SuspendLayout()
         Me.Panel2.SuspendLayout()
-        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel3.SuspendLayout()
-        CType(Me.PictureBox3, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel6.SuspendLayout()
         Me.Panel7.SuspendLayout()
+        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.PictureBox3, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox4, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.btnMinimize, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.btnClose, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.pcbReels, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -125,28 +125,6 @@ Partial Class Login
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
         Me.TableLayoutPanel1.Size = New System.Drawing.Size(101, 32)
         Me.TableLayoutPanel1.TabIndex = 11
-        '
-        'btnMinimize
-        '
-        Me.btnMinimize.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.btnMinimize.Image = Global.AVT_TRAKING.My.Resources.Resources.minimize2
-        Me.btnMinimize.Location = New System.Drawing.Point(37, 3)
-        Me.btnMinimize.Name = "btnMinimize"
-        Me.btnMinimize.Size = New System.Drawing.Size(23, 23)
-        Me.btnMinimize.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize
-        Me.btnMinimize.TabIndex = 1
-        Me.btnMinimize.TabStop = False
-        '
-        'btnClose
-        '
-        Me.btnClose.Cursor = System.Windows.Forms.Cursors.Hand
-        Me.btnClose.Image = Global.AVT_TRAKING.My.Resources.Resources.close2
-        Me.btnClose.Location = New System.Drawing.Point(70, 3)
-        Me.btnClose.Name = "btnClose"
-        Me.btnClose.Size = New System.Drawing.Size(23, 23)
-        Me.btnClose.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize
-        Me.btnClose.TabIndex = 0
-        Me.btnClose.TabStop = False
         '
         'Panel1
         '
@@ -216,17 +194,6 @@ Partial Class Login
         Me.Panel2.Size = New System.Drawing.Size(209, 148)
         Me.Panel2.TabIndex = 11
         '
-        'PictureBox2
-        '
-        Me.PictureBox2.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.PictureBox2.Image = Global.AVT_TRAKING.My.Resources.Resources.userlogin
-        Me.PictureBox2.Location = New System.Drawing.Point(0, 0)
-        Me.PictureBox2.Name = "PictureBox2"
-        Me.PictureBox2.Size = New System.Drawing.Size(209, 148)
-        Me.PictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage
-        Me.PictureBox2.TabIndex = 10
-        Me.PictureBox2.TabStop = False
-        '
         'Panel3
         '
         Me.Panel3.Controls.Add(Me.txtUser)
@@ -236,16 +203,6 @@ Partial Class Login
         Me.Panel3.Name = "Panel3"
         Me.Panel3.Size = New System.Drawing.Size(209, 32)
         Me.Panel3.TabIndex = 2
-        '
-        'PictureBox3
-        '
-        Me.PictureBox3.Dock = System.Windows.Forms.DockStyle.Left
-        Me.PictureBox3.Image = Global.AVT_TRAKING.My.Resources.Resources.users
-        Me.PictureBox3.Location = New System.Drawing.Point(0, 0)
-        Me.PictureBox3.Name = "PictureBox3"
-        Me.PictureBox3.Size = New System.Drawing.Size(27, 32)
-        Me.PictureBox3.TabIndex = 0
-        Me.PictureBox3.TabStop = False
         '
         'Panel6
         '
@@ -267,6 +224,31 @@ Partial Class Login
         Me.Panel7.Size = New System.Drawing.Size(209, 32)
         Me.Panel7.TabIndex = 4
         '
+        'tmrReels
+        '
+        Me.tmrReels.Interval = 1000
+        '
+        'PictureBox2
+        '
+        Me.PictureBox2.Dock = System.Windows.Forms.DockStyle.Bottom
+        Me.PictureBox2.Image = Global.AVT_TRAKING.My.Resources.Resources.LogoStart
+        Me.PictureBox2.Location = New System.Drawing.Point(0, 0)
+        Me.PictureBox2.Name = "PictureBox2"
+        Me.PictureBox2.Size = New System.Drawing.Size(209, 148)
+        Me.PictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
+        Me.PictureBox2.TabIndex = 10
+        Me.PictureBox2.TabStop = False
+        '
+        'PictureBox3
+        '
+        Me.PictureBox3.Dock = System.Windows.Forms.DockStyle.Left
+        Me.PictureBox3.Image = Global.AVT_TRAKING.My.Resources.Resources.users
+        Me.PictureBox3.Location = New System.Drawing.Point(0, 0)
+        Me.PictureBox3.Name = "PictureBox3"
+        Me.PictureBox3.Size = New System.Drawing.Size(27, 32)
+        Me.PictureBox3.TabIndex = 0
+        Me.PictureBox3.TabStop = False
+        '
         'PictureBox1
         '
         Me.PictureBox1.Image = Global.AVT_TRAKING.My.Resources.Resources.show
@@ -287,9 +269,27 @@ Partial Class Login
         Me.PictureBox4.TabIndex = 0
         Me.PictureBox4.TabStop = False
         '
-        'tmrReels
+        'btnMinimize
         '
-        Me.tmrReels.Interval = 1000
+        Me.btnMinimize.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.btnMinimize.Image = Global.AVT_TRAKING.My.Resources.Resources.minimize2
+        Me.btnMinimize.Location = New System.Drawing.Point(37, 3)
+        Me.btnMinimize.Name = "btnMinimize"
+        Me.btnMinimize.Size = New System.Drawing.Size(23, 23)
+        Me.btnMinimize.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize
+        Me.btnMinimize.TabIndex = 1
+        Me.btnMinimize.TabStop = False
+        '
+        'btnClose
+        '
+        Me.btnClose.Cursor = System.Windows.Forms.Cursors.Hand
+        Me.btnClose.Image = Global.AVT_TRAKING.My.Resources.Resources.close2
+        Me.btnClose.Location = New System.Drawing.Point(70, 3)
+        Me.btnClose.Name = "btnClose"
+        Me.btnClose.Size = New System.Drawing.Size(23, 23)
+        Me.btnClose.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize
+        Me.btnClose.TabIndex = 0
+        Me.btnClose.TabStop = False
         '
         'pcbReels
         '
@@ -319,20 +319,20 @@ Partial Class Login
         Me.TitleBar.ResumeLayout(False)
         Me.TableLayoutPanel1.ResumeLayout(False)
         Me.TableLayoutPanel1.PerformLayout()
-        CType(Me.btnMinimize, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.btnClose, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel1.ResumeLayout(False)
         Me.tlyMain.ResumeLayout(False)
         Me.Panel2.ResumeLayout(False)
-        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel3.ResumeLayout(False)
         Me.Panel3.PerformLayout()
-        CType(Me.PictureBox3, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel6.ResumeLayout(False)
         Me.Panel7.ResumeLayout(False)
         Me.Panel7.PerformLayout()
+        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.PictureBox3, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PictureBox4, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.btnMinimize, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.btnClose, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.pcbReels, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
