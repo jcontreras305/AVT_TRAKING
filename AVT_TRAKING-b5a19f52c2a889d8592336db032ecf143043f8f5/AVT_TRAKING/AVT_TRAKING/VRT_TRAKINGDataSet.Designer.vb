@@ -787,8 +787,8 @@ Namespace VRT_TRAKINGDataSetTableAdapters
             Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_name", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "name", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
             Me._adapter.InsertCommand = New Global.System.Data.SqlClient.SqlCommand()
             Me._adapter.InsertCommand.Connection = Me.Connection
-            Me._adapter.InsertCommand.CommandText = "INSERT INTO [dbo].[classification] ([class], [name]) VALUES (@class, @name);"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"SEL"& _ 
-                "ECT class, name FROM classification WHERE (class = @class)"
+            Me._adapter.InsertCommand.CommandText = "INSERT INTO [dbo].[classification] ([class], [name]) VALUES (@class, @name);"&Global.Microsoft.VisualBasic.ChrW(10)&"SELE"& _ 
+                "CT class, name FROM classification WHERE (class = @class)"
             Me._adapter.InsertCommand.CommandType = Global.System.Data.CommandType.Text
             Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@class", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "class", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@name", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "name", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
@@ -796,7 +796,7 @@ Namespace VRT_TRAKINGDataSetTableAdapters
             Me._adapter.UpdateCommand.Connection = Me.Connection
             Me._adapter.UpdateCommand.CommandText = "UPDATE [dbo].[classification] SET [class] = @class, [name] = @name WHERE (([class"& _ 
                 "] = @Original_class) AND ((@IsNull_name = 1 AND [name] IS NULL) OR ([name] = @Or"& _ 
-                "iginal_name)));"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"SELECT class, name FROM classification WHERE (class = @class)"
+                "iginal_name)));"&Global.Microsoft.VisualBasic.ChrW(10)&"SELECT class, name FROM classification WHERE (class = @class)"
             Me._adapter.UpdateCommand.CommandType = Global.System.Data.CommandType.Text
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@class", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "class", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@name", Global.System.Data.SqlDbType.VarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "name", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))

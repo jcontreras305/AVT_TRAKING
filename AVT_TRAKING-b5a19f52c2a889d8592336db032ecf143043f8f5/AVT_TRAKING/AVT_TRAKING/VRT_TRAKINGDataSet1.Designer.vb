@@ -3549,15 +3549,15 @@ Namespace VRT_TRAKINGDataSet1TableAdapters
                 "@MA3EQDP, @MA2LABORBP, @MA2MATBP, @MA2EQBP, @MA2LABORDP, @MA2MATDP, @MA2EQDP, @M"& _ 
                 "3LBI, @M3MBI, @M3EBI, @M3LDI, @M3MDI, @M3EDI, @M2LBI, @M2MBI, @M2EBI, @M2LDI, @M"& _ 
                 "2MDI, @M2EDI, @MA3LBI, @MA3MBI, @MA3EBI, @MA3LDI, @MA3MDI, @MA3EDI, @MA2LBI, @MA"& _ 
-                "2MBI, @MA2EBI, @MA2LDI, @MA2MDI, @MA2ED);"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"SELECT idEstCost, DECKS, ACHT, SCTP, "& _ 
-                "BDRATE, M3, M2, MA3, MA2, BILLINGDAYS, EDDAYS, M3EDCHARGES, M2EDCHARGES, MA3EDCH"& _ 
-                "ARGES, MA2EDCHARGES, M3LABORBP, M3MATBP, M3EQBP, M3LABORDP, M3MATDP, M3EQDP, M2L"& _ 
-                "ABORBP, M2MATBP, M2EQBP, M2LABORDP, M2MATDP, M2EQDP, MA3LABORBP, MA3MATBP, MA3EQ"& _ 
-                "BP, MA3LaborDP, MA3MATDP, MA3EQDP, MA2LABORBP, MA2MATBP, MA2EQBP, MA2LABORDP, MA"& _ 
-                "2MATDP, MA2EQDP, M3LBI, M3MBI, M3EBI, M3LDI, M3MDI, M3EDI, M2LBI, M2MBI, M2EBI, "& _ 
-                "M2LDI, M2MDI, M2EDI, MA3LBI, MA3MBI, MA3EBI, MA3LDI, MA3MDI, MA3EDI, MA2LBI, MA2"& _ 
-                "MBI, MA2EBI, MA2LDI, MA2MDI, MA2ED FROM ScafEstCost WHERE (idEstCost = @idEstCos"& _ 
-                "t)"
+                "2MBI, @MA2EBI, @MA2LDI, @MA2MDI, @MA2ED);"&Global.Microsoft.VisualBasic.ChrW(10)&"SELECT idEstCost, DECKS, ACHT, SCTP, B"& _ 
+                "DRATE, M3, M2, MA3, MA2, BILLINGDAYS, EDDAYS, M3EDCHARGES, M2EDCHARGES, MA3EDCHA"& _ 
+                "RGES, MA2EDCHARGES, M3LABORBP, M3MATBP, M3EQBP, M3LABORDP, M3MATDP, M3EQDP, M2LA"& _ 
+                "BORBP, M2MATBP, M2EQBP, M2LABORDP, M2MATDP, M2EQDP, MA3LABORBP, MA3MATBP, MA3EQB"& _ 
+                "P, MA3LaborDP, MA3MATDP, MA3EQDP, MA2LABORBP, MA2MATBP, MA2EQBP, MA2LABORDP, MA2"& _ 
+                "MATDP, MA2EQDP, M3LBI, M3MBI, M3EBI, M3LDI, M3MDI, M3EDI, M2LBI, M2MBI, M2EBI, M"& _ 
+                "2LDI, M2MDI, M2EDI, MA3LBI, MA3MBI, MA3EBI, MA3LDI, MA3MDI, MA3EDI, MA2LBI, MA2M"& _ 
+                "BI, MA2EBI, MA2LDI, MA2MDI, MA2ED FROM ScafEstCost WHERE (idEstCost = @idEstCost"& _ 
+                ")"
             Me._adapter.InsertCommand.CommandType = Global.System.Data.CommandType.Text
             Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@idEstCost", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "idEstCost", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@DECKS", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "DECKS", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
@@ -3706,14 +3706,14 @@ Namespace VRT_TRAKINGDataSet1TableAdapters
                 " OR ([MA2EBI] = @Original_MA2EBI)) AND ((@IsNull_MA2LDI = 1 AND [MA2LDI] IS NULL"& _ 
                 ") OR ([MA2LDI] = @Original_MA2LDI)) AND ((@IsNull_MA2MDI = 1 AND [MA2MDI] IS NUL"& _ 
                 "L) OR ([MA2MDI] = @Original_MA2MDI)) AND ((@IsNull_MA2ED = 1 AND [MA2ED] IS NULL"& _ 
-                ") OR ([MA2ED] = @Original_MA2ED)));"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"SELECT idEstCost, DECKS, ACHT, SCTP, BDRATE"& _ 
-                ", M3, M2, MA3, MA2, BILLINGDAYS, EDDAYS, M3EDCHARGES, M2EDCHARGES, MA3EDCHARGES,"& _ 
-                " MA2EDCHARGES, M3LABORBP, M3MATBP, M3EQBP, M3LABORDP, M3MATDP, M3EQDP, M2LABORBP"& _ 
-                ", M2MATBP, M2EQBP, M2LABORDP, M2MATDP, M2EQDP, MA3LABORBP, MA3MATBP, MA3EQBP, MA"& _ 
-                "3LaborDP, MA3MATDP, MA3EQDP, MA2LABORBP, MA2MATBP, MA2EQBP, MA2LABORDP, MA2MATDP"& _ 
-                ", MA2EQDP, M3LBI, M3MBI, M3EBI, M3LDI, M3MDI, M3EDI, M2LBI, M2MBI, M2EBI, M2LDI,"& _ 
-                " M2MDI, M2EDI, MA3LBI, MA3MBI, MA3EBI, MA3LDI, MA3MDI, MA3EDI, MA2LBI, MA2MBI, M"& _ 
-                "A2EBI, MA2LDI, MA2MDI, MA2ED FROM ScafEstCost WHERE (idEstCost = @idEstCost)"
+                ") OR ([MA2ED] = @Original_MA2ED)));"&Global.Microsoft.VisualBasic.ChrW(10)&"SELECT idEstCost, DECKS, ACHT, SCTP, BDRATE,"& _ 
+                " M3, M2, MA3, MA2, BILLINGDAYS, EDDAYS, M3EDCHARGES, M2EDCHARGES, MA3EDCHARGES, "& _ 
+                "MA2EDCHARGES, M3LABORBP, M3MATBP, M3EQBP, M3LABORDP, M3MATDP, M3EQDP, M2LABORBP,"& _ 
+                " M2MATBP, M2EQBP, M2LABORDP, M2MATDP, M2EQDP, MA3LABORBP, MA3MATBP, MA3EQBP, MA3"& _ 
+                "LaborDP, MA3MATDP, MA3EQDP, MA2LABORBP, MA2MATBP, MA2EQBP, MA2LABORDP, MA2MATDP,"& _ 
+                " MA2EQDP, M3LBI, M3MBI, M3EBI, M3LDI, M3MDI, M3EDI, M2LBI, M2MBI, M2EBI, M2LDI, "& _ 
+                "M2MDI, M2EDI, MA3LBI, MA3MBI, MA3EBI, MA3LDI, MA3MDI, MA3EDI, MA2LBI, MA2MBI, MA"& _ 
+                "2EBI, MA2LDI, MA2MDI, MA2ED FROM ScafEstCost WHERE (idEstCost = @idEstCost)"
             Me._adapter.UpdateCommand.CommandType = Global.System.Data.CommandType.Text
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@idEstCost", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "idEstCost", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@DECKS", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "DECKS", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))

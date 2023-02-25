@@ -81,7 +81,7 @@ Public Class scafoldTarking
             Case "Area/WO/Sub-Job"
             Case "UM/Class/Status"
             Case "Supervisor"
-            Case "ScaffoldTraking"
+            Case "ScaffoldTracking"
                 selectedTable = "tag"
             Case "Modification"
                 selectedTable = "Mod"

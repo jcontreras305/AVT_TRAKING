@@ -1422,19 +1422,19 @@ Public Class ProjectsCosts
         ElseIf txtClientName.Focused Then
             FindElement = "Client Name"
             Element = txtClientName.Text
-        ElseIf txtWokOrder.focused Then
+        ElseIf txtWokOrder.Focused Then
             FindElement = "Work Order"
             Element = txtWokOrder.Text
-        ElseIf txtTask.focused Then
+        ElseIf txtTask.Focused Then
             FindElement = "Task"
             Element = txtTask.Text
-        ElseIf txtEquipament.focused Then
+        ElseIf txtEquipament.Focused Then
             FindElement = "Equipament"
             Element = txtEquipament.Text
         ElseIf cmbProjectManager.Focused Then
             FindElement = "Project Manager"
             Element = cmbProjectManager.Text
-        ElseIf txtClientPO.focused Then
+        ElseIf txtClientPO.Focused Then
             FindElement = "Client PO"
             Element = txtClientPO.Text
         ElseIf txtProjectDescription.Focused Then
@@ -1443,10 +1443,10 @@ Public Class ProjectsCosts
         ElseIf sprTotalBilling.Focused Then
             FindElement = "Est. Total Billing"
             Element = sprTotalBilling.Value.ToString()
-        ElseIf dtpBeginDate.focused Then
+        ElseIf dtpBeginDate.Focused Then
             FindElement = "Begin Date"
             Element = dtpBeginDate.Value.ToString()
-        ElseIf dtpEndDate.focused Then
+        ElseIf dtpEndDate.Focused Then
             FindElement = "End Date"
             Element = dtpEndDate.Value.ToString()
         ElseIf sprHoursEstimate.Focused Then
@@ -1576,23 +1576,29 @@ Public Class ProjectsCosts
         If sprHoursEstimate.Value < (totalHoursST + totalHoursOT + totalHours3) Then
             mensaje = If(mensaje.Equals(""), "Total estimated hours were exceded.", ", Total estimated hours were exceded.")
         End If
-
-        lblTotalHours.Text = CStr(totalHoursST + totalHoursOT + totalHours3)
-        If sprPercentComplete.Value > 0 Then
-            lblEarned.Text = (sprHoursEstimate.Value * sprPercentComplete.Value) / 100
-            If (totalHoursST + totalHoursOT + totalHours3) > 0 Then
+        Dim THrs As Double = totalHoursST + totalHoursOT + totalHours3
+        lblTotalHours.Text = CStr(THrs)
+        If sprPercentComplete.Value > 0 And sprPercentComplete.Value < 100 Then
+            lblEarned.Text = (sprHoursEstimate.Value * (sprPercentComplete.Value * 0.01))
+            If (THrs) > 0 Then
                 lblPF.Text = Format(Val(CDec(If(lblEarned.Text = "", "0", lblEarned.Text)) / CDec(If(lblTotalHours.Text = "", "0", lblTotalHours.Text))), "0#.##")
             End If
-            If (totalHoursST + totalHoursOT + totalHours3) < sprHoursEstimate.Value Then
+            If (THrs) < sprHoursEstimate.Value And THrs > 0 Then
                 Dim pf As Double = Val(CDec(If(lblEarned.Text = "", "0", lblEarned.Text)) / CDec(If(lblTotalHours.Text = "", "0", lblTotalHours.Text)))
-                Dim ETC As Double = pf * (sprHoursEstimate.Value - totalHoursST + totalHoursOT + totalHours3)
+                Dim ETC As Double = pf * (sprHoursEstimate.Value - THrs)
                 lblETC.Text = Format(ETC, "#.#")
             Else
-                Dim ETC As Double = ((totalHoursST + totalHoursOT + totalHours3) / (sprPercentComplete.Value / 100)) - (totalHoursST + totalHoursOT + totalHours3)
+                Dim ETC As Double
+                If THrs > 0 Then
+                    ETC = ((THrs) / (sprPercentComplete.Value * 0.01)) - (THrs)
+                Else
+                    ETC = 0
+                End If
                 lblETC.Text = Format(ETC, "0#.#")
             End If
         ElseIf sprPercentComplete.Value = 100 Then
             lblETC.Text = "0"
+            lblEarned.Text = sprHoursEstimate.Value * (sprPercentComplete.Value * 0.01)
         End If
 
         If Not mensaje.Equals("") Then
