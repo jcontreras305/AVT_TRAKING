@@ -113,7 +113,7 @@ Module metodosGlobales
     ''' <param name="combo"></param>
     ''' <param name="numberClient"></param>
     ''' <returns>Retorna un True si no hubo problemas con la consulta</returns>
-    Public Function llenarComoboPOByClient(ByVal combo As ComboBox, ByVal numberClient As String) As Boolean
+    Public Function llenarComoboPOByClient(ByVal combo As ComboBox, ByVal numberClient As String, Optional jobNo As String = "") As Boolean
         Try
             con.conectar()
             Dim cmd As New SqlCommand("select distinct 
@@ -121,7 +121,7 @@ po.idPO
 from projectOrder as po 
 inner join job as jb on jb.jobNo = po.jobNo
 inner join clients as cl on cl.idClient = jb.idClient 
-where cl.numberClient = '" + numberClient + "'", con.conn)
+where cl.numberClient = '" + numberClient + "' " + If(jobNo = "", "", " and jb.jobNo = " + jobNo + ""), con.conn)
             Dim dr As SqlDataReader = cmd.ExecuteReader()
             combo.Items.Clear()
             While dr.Read()

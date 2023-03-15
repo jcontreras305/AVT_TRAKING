@@ -313,7 +313,7 @@ Public Class HoursWeekPerEmployees
                         End If
                     End If
                 End If
-                ElseIf tblRecordEmployee.CurrentCell.ColumnIndex = tblRecordEmployee.Columns("Work Code").Index Then
+            ElseIf tblRecordEmployee.CurrentCell.ColumnIndex = tblRecordEmployee.Columns("Work Code").Index Then
                 tblRecordEmployee.CurrentRow.Cells("Work Code").Value = ""
                 Dim arrayRows() As DataRow = workCodeTable.Select("name = '" + cmb.Text + "' and jobNo = " + tblRecordEmployee.CurrentRow.Cells("jobNo").Value.ToString())
                 If arrayRows.Length > 0 Then

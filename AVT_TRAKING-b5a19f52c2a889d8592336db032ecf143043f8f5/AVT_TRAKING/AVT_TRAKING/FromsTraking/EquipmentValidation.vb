@@ -383,7 +383,7 @@ Public Class EquipmentValidation
                 End If
                 Dim countRowsInc As Integer = 0
                 lblMessage.Text = "Message: Starting..."
-                For Each row As DataGridViewRow In tblEquipment.Rows()
+                For Each row As DataGridViewRow In tblEquipment.SelectedRows()
                     If Not row.IsNewRow Then
                         datosMaterial.Add("")
                         If row.Cells("DateEquip").Value <> "" Then
@@ -403,7 +403,8 @@ Public Class EquipmentValidation
                         End If
                         If row.Cells("MaterialCode").Value <> "" Then
                             Dim array() As String = row.Cells("MaterialCode").Value.ToString.Split(" ")
-                            Dim arrayRow() As Data.DataRow = tblMaterial.Select("Class like '" + array(0) + "' and Name like '" + array(1) + "'")
+                            'Dim arrayRow() As Data.DataRow = tblMaterial.Select("Class like '" + array(0) + "' and Name like '" + array(1) + "'")
+                            Dim arrayRow() As Data.DataRow = tblMaterial.Select("Number = " + array(0) + "")
                             datosMaterial.Add(arrayRow(0).ItemArray(0))
                         Else
                             errorRow = True

@@ -135,7 +135,7 @@ Partial Class DismantleValidationTable
         '
         Me.PictureBox4.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.PictureBox4.Image = Global.AVT_TRAKING.My.Resources.Resources.minimize2
-        Me.PictureBox4.Location = New System.Drawing.Point(700, 3)
+        Me.PictureBox4.Location = New System.Drawing.Point(731, 3)
         Me.PictureBox4.Name = "PictureBox4"
         Me.PictureBox4.Size = New System.Drawing.Size(28, 31)
         Me.PictureBox4.TabIndex = 15

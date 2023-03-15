@@ -436,6 +436,15 @@ Public Class ProjectsClients
         End Try
     End Sub
 
+    Private Sub btnUpdateProject_Click(sender As Object, e As EventArgs) Handles btnUpdateProject.Click
+        Try
+            Dim poPercent As New Project_Porcentage
+            poPercent.Show()
+        Catch ex As Exception
+            MsgBox(ex.Message())
+        End Try
+    End Sub
+
     Private Sub cmbCostCode_Leave(sender As Object, e As EventArgs) Handles cmbCostCode.Leave
         If btnAdd.Text = "Add" Then  'Se supone que no esta agregando si no que esta actualizando o visualizado unicamente
             mtdJobs.actualizarCostCode(cmbCostCode.Text, txtJobNumber.Text)

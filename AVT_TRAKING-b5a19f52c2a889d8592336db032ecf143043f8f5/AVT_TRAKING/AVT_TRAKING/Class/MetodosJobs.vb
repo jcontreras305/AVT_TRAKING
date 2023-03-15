@@ -1434,8 +1434,7 @@ where tk.idAux = '" + idAux + "' and wo.idAuxWO = '" + WO + "'", conn)
     Public Function insertMaterialUsed(ByVal datos As List(Of String), Optional tran As SqlTransaction = Nothing, Optional connection As SqlConnection = Nothing) As Boolean
         Try
 
-            Dim cmd As New SqlCommand("
-                insert into materialUsed values(NEWID(),'" + datos(1) + "',1," + datos(3) + ",'" + datos(6) + "','" + datos(2) + "','" + datos(4) + "'," + datos(5) + ")")
+            Dim cmd As New SqlCommand("insert into materialUsed values(NEWID(),'" + datos(1) + "',1," + datos(3) + ",'" + datos(6) + "','" + datos(2) + "','" + datos(4) + "'," + datos(5) + ")")
             If tran IsNot Nothing Then
                 cmd.Connection = connection
                 cmd.Transaction = tran
