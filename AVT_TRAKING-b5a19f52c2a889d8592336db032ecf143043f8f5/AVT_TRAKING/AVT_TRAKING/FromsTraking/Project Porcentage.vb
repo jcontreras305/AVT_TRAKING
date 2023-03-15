@@ -3,6 +3,7 @@ Public Class Project_Porcentage
     Dim mtdPoPercent As New MetodosProjectPorcentage
     Dim mtdHPW As New MetodosHoursPeerWeek
     Dim tblProjectClient As DataTable
+
     Private Sub PictureBox4_Click(sender As Object, e As EventArgs) Handles PictureBox2.Click
         Me.Close()
     End Sub
