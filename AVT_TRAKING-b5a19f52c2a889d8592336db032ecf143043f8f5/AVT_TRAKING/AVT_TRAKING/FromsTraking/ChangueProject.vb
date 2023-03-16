@@ -34,7 +34,9 @@ Public Class ChangueProject
         If cmbClients.SelectedIndex > -1 Then
             Dim array() As String = cmbClients.Items(cmbClients.SelectedIndex).ToString.Split(" ")
             llenarComboJobsReports(cmbJobs, array(0))
-            cmbJobs.Items.RemoveAt(cmbJobs.FindString(JobNo))
+            If cmbJobs.FindString(JobNo) > -1 Then
+                cmbJobs.Items.RemoveAt(cmbJobs.FindString(JobNo))
+            End If
         End If
     End Sub
 
@@ -76,9 +78,10 @@ Public Class ChangueProject
                         Dim listNewWc As New List(Of String())
                         Dim flagError As Boolean = False
                         For Each rowHrs As DataRow In dtHrsWC.Rows
-                            Dim arrayWC() As DataRow = dtWCJob.Select("idWorkCode = " + rowHrs.ItemArray(0) + "")
+                            Dim arrayWC() As DataRow = dtWCJob.Select("idWorkCode = " + rowHrs.ItemArray(0).ToString + "")
                             If arrayWC.Length = 0 Then
-                                Dim datos() As String = {rowHrs.ItemArray(0).ToString(), rowHrs.ItemArray(1).ToString(), "", "0.00", "0.00", "0.00", "", "", rowHrs.ItemArray(2).ToString()}
+                                'Dim datos() As String = {rowHrs.ItemArray(0).ToString(), rowHrs.ItemArray(1).ToString(), "", "0.00", "0.00", "0.00", "", "", rowHrs.ItemArray(2).ToString()}
+                                Dim datos() As String = {rowHrs.ItemArray(0).ToString(), rowHrs.ItemArray(1).ToString(), "", "0.00", "0.00", "0.00", "", "", newJobNo}
                                 If mtdJob.nuevaWC(datos, False) Then
                                     listNewWc.Add({rowHrs.ItemArray(0).ToString(), rowHrs.ItemArray(2).ToString()})
                                 Else
@@ -112,11 +115,11 @@ end", con.conn)
                                     MsgBox("Successful.")
                                 Else
                                     tran.Rollback()
-                                    MsgBox("Error: It was not possible to make the changue.")
+                                    MsgBox("Error: It was not possible to make the change.")
                                 End If
                             Else
                                 tran.Rollback()
-                                MsgBox("Error: The error was while copying the records. It was not possible to make the changue.")
+                                MsgBox("Error: The error was while copying the records. It was not possible to make the change.")
                             End If
                         End If
                     End If
@@ -136,7 +139,7 @@ end", con.conn)
                         MsgBox("Successful.")
                     Else
                         tran.Rollback()
-                        MsgBox("Error: It was not possible to make the changue.")
+                        MsgBox("Error: It was not possible to make the change.")
                     End If
                 End If
             End If

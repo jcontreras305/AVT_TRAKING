@@ -460,10 +460,13 @@ wc.billingRate3 as 'Billing Rate 3',
 hw.hours3 as 'Billable Hrs. 3',
 convert (varchar,hw.dateWorked,101 )as 'Date Worked',
 wc.description as 'Description'
-from 
-employees em inner join hoursWorked as hw on em.idEmployee = hw.idEmployee
-inner join task  as tk on tk.idAux = hw.idAux
-inner join workCode as wc on wc.idWorkCode = hw.idWorkCode
+from hoursWorked as hw 
+inner join employees as em on em.idEmployee = hw.idEmployee
+inner join workCode as wc on wc.idWorkCode = hw.idWorkCode 
+inner join task as tk on tk.idAux = hw.idAux 
+inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO
+inner join projectOrder as po on po.idPO = wo.idPO and wo.jobNo = po.jobNo
+inner join job as jb on jb.jobNo= po.jobNo and jb.jobNo = wc.jobNo
 where  tk.task = '" + idTask + "' and tk.idAuxWO = '" + idWO + "'", conn)
             If cmd.ExecuteNonQuery Then
                 Dim da As New SqlDataAdapter(cmd)
