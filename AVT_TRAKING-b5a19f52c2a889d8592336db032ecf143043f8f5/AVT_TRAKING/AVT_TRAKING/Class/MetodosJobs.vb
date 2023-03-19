@@ -12,7 +12,7 @@ Public Class MetodosJobs
         Try
             Dim cmd As New SqlCommand
 
-            cmd.CommandText = "select idWorkCode as ID , name Name , description as Description, billingRate1 as BillingRT1, billingRateOT as BillingOT, billingRate3 as BillingRT3 , EQExp1,EQExp2 , jobNo as 'JobNo' from workCode " + If(jobNo = "", "", " where jobNo = " & jobNo & "")
+            cmd.CommandText = "select idWorkCode as ID , jobNo as 'JobNo' , name as Name , description as Description, billingRate1 as BillingRT1, billingRateOT as BillingOT, billingRate3 as BillingRT3 , EQExp1,EQExp2 from workCode " + If(jobNo = "", "", " where jobNo = " & jobNo & "")
             cmd.Connection = conn
 
             If cmd.ExecuteNonQuery Then
@@ -77,7 +77,7 @@ end", conn)
     Public Sub buscarWC(ByVal dato As String, ByVal tabla As DataGridView)
         Try
             conectar()
-            Dim cmd As New SqlCommand("select * from workCode where idWorkCode like '" + dato + "' or  name like '%" + dato + "%' or description like '%" + dato + "%' ", conn)
+            Dim cmd As New SqlCommand("select idWorkCode as ID , jobNo as 'JobNo' , name as Name , description as Description, billingRate1 as BillingRT1, billingRateOT as BillingOT, billingRate3 as BillingRT3 , EQExp1,EQExp2 from workCode where idWorkCode like '" + dato + "' or  name like '%" + dato + "%' or description like '%" + dato + "%' ", conn)
             If cmd.ExecuteNonQuery Then
                 Dim dt As New DataTable
                 Dim da As New SqlDataAdapter(cmd)

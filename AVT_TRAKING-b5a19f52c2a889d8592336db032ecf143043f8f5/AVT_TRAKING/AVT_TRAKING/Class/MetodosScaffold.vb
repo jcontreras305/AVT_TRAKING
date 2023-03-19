@@ -2511,7 +2511,7 @@ inner join task as tk on wo.idAuxWO = tk.idAuxWO where tk.idAux = '" + sc.task +
             Dim cmdTraking As New SqlCommand("
 if (select count(*) from scaffoldTraking where tag = '" + sc.tag + "') = 0
 begin 
-	insert into scaffoldTraking values('" + sc.tag + "','" + validaFechaParaSQl(sc.dateBild) + "','" + sc.location + "','" + sc.purpose + "','" + sc.comments + "','" + validaFechaParaSQl(sc.dateRecComp) + "','" + sc.contact + "','" + sc.foreman + "','" + sc.erector + "','" + sc.task + "','" + sc.jobcat + "'," + sc.areaID + "," + sc.idsubJob + ",'" + If(sc.status = True, "t", "f") + "'," + CStr(sc.days) + "," + sc.longitude.ToString() + "," + sc.longitude.ToString() + ")
+	insert into scaffoldTraking values('" + sc.tag + "','" + validaFechaParaSQl(sc.dateBild) + "','" + sc.location + "','" + sc.purpose + "','" + sc.comments + "','" + validaFechaParaSQl(sc.dateRecComp) + "','" + sc.contact + "','" + sc.foreman + "','" + sc.erector + "','" + sc.task + "','" + sc.jobcat + "'," + sc.areaID + "," + sc.idsubJob + ",'" + If(sc.status = True, "t", "f") + "'," + CStr(sc.days) + "," + sc.longitude.ToString() + "," + sc.latitude.ToString() + ")
 end
 else if (select count(*) from scaffoldTraking where tag = '" + sc.tag + "') = 1
 begin 

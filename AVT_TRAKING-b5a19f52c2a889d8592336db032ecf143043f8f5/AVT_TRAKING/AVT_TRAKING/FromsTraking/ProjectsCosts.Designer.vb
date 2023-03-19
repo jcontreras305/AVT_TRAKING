@@ -55,6 +55,8 @@ Partial Class ProjectsCosts
         Me.TableLayoutPanel3 = New System.Windows.Forms.TableLayoutPanel()
         Me.TableLayoutPanel4 = New System.Windows.Forms.TableLayoutPanel()
         Me.Panel13 = New System.Windows.Forms.Panel()
+        Me.Label30 = New System.Windows.Forms.Label()
+        Me.lblETC = New System.Windows.Forms.Label()
         Me.label29 = New System.Windows.Forms.Label()
         Me.lblPF = New System.Windows.Forms.Label()
         Me.Panel12 = New System.Windows.Forms.Panel()
@@ -138,8 +140,6 @@ Partial Class ProjectsCosts
         Me.btnUpdateMaterialExcel = New System.Windows.Forms.Button()
         Me.btnUpdate = New System.Windows.Forms.Button()
         Me.pnlTablas = New System.Windows.Forms.Panel()
-        Me.Label30 = New System.Windows.Forms.Label()
-        Me.lblETC = New System.Windows.Forms.Label()
         Me.Panel1.SuspendLayout()
         Me.TableLayoutPanel2.SuspendLayout()
         Me.Panel5.SuspendLayout()
@@ -461,6 +461,8 @@ Partial Class ProjectsCosts
         '
         Me.sprTotalBilling.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.sprTotalBilling.DecimalPlaces = 2
+        Me.sprTotalBilling.Increment = New Decimal(New Integer() {5, 0, 0, 65536})
         Me.sprTotalBilling.Location = New System.Drawing.Point(124, 54)
         Me.sprTotalBilling.Maximum = New Decimal(New Integer() {1410065408, 2, 0, 0})
         Me.sprTotalBilling.Name = "sprTotalBilling"
@@ -555,6 +557,28 @@ Partial Class ProjectsCosts
         Me.Panel13.Name = "Panel13"
         Me.Panel13.Size = New System.Drawing.Size(179, 49)
         Me.Panel13.TabIndex = 3
+        '
+        'Label30
+        '
+        Me.Label30.Anchor = System.Windows.Forms.AnchorStyles.None
+        Me.Label30.AutoSize = True
+        Me.Label30.Location = New System.Drawing.Point(10, 32)
+        Me.Label30.Name = "Label30"
+        Me.Label30.Size = New System.Drawing.Size(30, 13)
+        Me.Label30.TabIndex = 47
+        Me.Label30.Text = "ETC"
+        '
+        'lblETC
+        '
+        Me.lblETC.Anchor = System.Windows.Forms.AnchorStyles.None
+        Me.lblETC.AutoSize = True
+        Me.lblETC.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblETC.ForeColor = System.Drawing.Color.White
+        Me.lblETC.Location = New System.Drawing.Point(52, 28)
+        Me.lblETC.Name = "lblETC"
+        Me.lblETC.Size = New System.Drawing.Size(29, 20)
+        Me.lblETC.TabIndex = 48
+        Me.lblETC.Text = "0  "
         '
         'label29
         '
@@ -1582,28 +1606,6 @@ Partial Class ProjectsCosts
         Me.pnlTablas.Name = "pnlTablas"
         Me.pnlTablas.Size = New System.Drawing.Size(1107, 234)
         Me.pnlTablas.TabIndex = 4
-        '
-        'Label30
-        '
-        Me.Label30.Anchor = System.Windows.Forms.AnchorStyles.None
-        Me.Label30.AutoSize = True
-        Me.Label30.Location = New System.Drawing.Point(10, 32)
-        Me.Label30.Name = "Label30"
-        Me.Label30.Size = New System.Drawing.Size(30, 13)
-        Me.Label30.TabIndex = 47
-        Me.Label30.Text = "ETC"
-        '
-        'lblETC
-        '
-        Me.lblETC.Anchor = System.Windows.Forms.AnchorStyles.None
-        Me.lblETC.AutoSize = True
-        Me.lblETC.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblETC.ForeColor = System.Drawing.Color.White
-        Me.lblETC.Location = New System.Drawing.Point(52, 28)
-        Me.lblETC.Name = "lblETC"
-        Me.lblETC.Size = New System.Drawing.Size(29, 20)
-        Me.lblETC.TabIndex = 48
-        Me.lblETC.Text = "0  "
         '
         'ProjectsCosts
         '

@@ -41,40 +41,40 @@ Public Class TagsValidationTable
             openFile.DefaultExt = "*.xlsm"
             openFile.FileName = "tScaffolds"
             openFile.ShowDialog()
-
-            Dim libro = ApExcel.Workbooks.Open(openFile.FileName)
-            Dim scaffoldSheet As Worksheet = New Worksheet
-            Dim productSheet As Worksheet = New Worksheet
-            Dim flagStatus As Boolean = True
-            If DialogResult.OK = MessageBox.Show("The process to read the Excel will be start." + vbCr + "Please vierifi that the name of the scaffold sheet is 'tScaffolds'.", "Important", MessageBoxButtons.OK, MessageBoxIcon.Information) Then
-                Try
-
-                    scaffoldSheet = libro.Worksheets("tScaffolds")
-                    lblMessage.Text = "Message: Open sheet 'Scaffolds'."
-                    pgbComplete.Value = 5
-                Catch ex As Exception
-                    scaffoldSheet = libro.Worksheets(1)
-                    lblMessage.Text = "Message: Open sheet 'tScaffolds'."
-                    pgbComplete.Value = 5
-                End Try
-                validarSheetScaffold(scaffoldSheet)
-                Try
-                    productSheet = libro.Worksheets("tMatBuilds")
-                    lblMessage.Text = "Message: Open sheet 'tMatBuilds'."
-                    pgbComplete.Value = pgbComplete.Value + 5
-                Catch ex As Exception
-                    productSheet = libro.Worksheets(2)
-                    lblMessage.Text = "Message: Open sheet 'tMatBuilds'."
-                    pgbComplete.Value = pgbComplete.Value + 5
-                End Try
-                validarProductTags(productSheet)
-                If Not ExistError(tblTagsScaffold) Then
-                    If Not ExistError(tblProductSheet) Then
-                        btnSave.Enabled = True
+            If openFile.FileName IsNot Nothing Then
+                Dim libro = ApExcel.Workbooks.Open(openFile.FileName)
+                Dim scaffoldSheet As Worksheet = New Worksheet
+                Dim productSheet As Worksheet = New Worksheet
+                Dim flagStatus As Boolean = True
+                If DialogResult.OK = MessageBox.Show("The process to read the Excel will be start." + vbCr + "Please verify that the name of the scaffold sheet is 'tScaffolds'.", "Important", MessageBoxButtons.OK, MessageBoxIcon.Information) Then
+                    Try
+                        scaffoldSheet = libro.Worksheets("tScaffolds")
+                        lblMessage.Text = "Message: Open sheet 'Scaffolds'."
+                        pgbComplete.Value = 5
+                    Catch ex As Exception
+                        scaffoldSheet = libro.Worksheets(1)
+                        lblMessage.Text = "Message: Open sheet 'tScaffolds'."
+                        pgbComplete.Value = 5
+                    End Try
+                    validarSheetScaffold(scaffoldSheet)
+                    Try
+                        productSheet = libro.Worksheets("tMatBuilds")
+                        lblMessage.Text = "Message: Open sheet 'tMatBuilds'."
+                        pgbComplete.Value = pgbComplete.Value + 5
+                    Catch ex As Exception
+                        productSheet = libro.Worksheets(2)
+                        lblMessage.Text = "Message: Open sheet 'tMatBuilds'."
+                        pgbComplete.Value = pgbComplete.Value + 5
+                    End Try
+                    validarProductTags(productSheet)
+                    If Not ExistError(tblTagsScaffold) Then
+                        If Not ExistError(tblProductSheet) Then
+                            btnSave.Enabled = True
+                        End If
                     End If
+                    lblMessage.Text = "Message: Finish."
+                    pgbComplete.Value = 100
                 End If
-                lblMessage.Text = "Message: Finish."
-                pgbComplete.Value = 100
             End If
         Catch ex As Exception
             MsgBox(ex.Message())
@@ -155,7 +155,7 @@ Public Class TagsValidationTable
                 End If
                 contSC += 1
                 contIncrement += increment
-                If contIncrement > 1 And pgbComplete.Value <= 45 Then
+                If contIncrement > 1 And pgbComplete.Value <= 46 Then
                     pgbComplete.Value = pgbComplete.Value + If(increment > 1, CInt(increment), 1)
                     contIncrement = 0
                 End If

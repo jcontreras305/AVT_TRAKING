@@ -123,13 +123,13 @@ Public Class WorkCodes
         activarCamposWC(True)
 
         txtWorkCodeID.Text = tblWK.CurrentRow.Cells.Item(0).Value.ToString
-        TxtWorkCode.Text = tblWK.CurrentRow.Cells.Item(1).Value.ToString
-        txtDescription.Text = tblWK.CurrentRow.Cells.Item(2).Value.ToString
-        sprBillingRate1.Value = tblWK.CurrentRow.Cells.Item(3).Value
-        sprBillingRateOT.Value = tblWK.CurrentRow.Cells.Item(4).Value
-        sprBillingRate3.Value = tblWK.CurrentRow.Cells.Item(5).Value
-        txtEQExq1.Text = tblWK.CurrentRow.Cells.Item(6).Value.ToString()
-        txtEQExq2.Text = tblWK.CurrentRow.Cells.Item(7).Value.ToString()
+        TxtWorkCode.Text = tblWK.CurrentRow.Cells.Item(2).Value.ToString
+        txtDescription.Text = tblWK.CurrentRow.Cells.Item(3).Value.ToString
+        sprBillingRate1.Value = tblWK.CurrentRow.Cells.Item(4).Value
+        sprBillingRateOT.Value = tblWK.CurrentRow.Cells.Item(5).Value
+        sprBillingRate3.Value = tblWK.CurrentRow.Cells.Item(6).Value
+        txtEQExq1.Text = tblWK.CurrentRow.Cells.Item(7).Value.ToString()
+        txtEQExq2.Text = tblWK.CurrentRow.Cells.Item(8).Value.ToString()
 
 
         btnAddWorkCode.Enabled = False
