@@ -964,7 +964,7 @@ Public Class ProjectsCosts
                 sprTotalBilling.Value = pjt.totalBilling
             End If
         End If
-        'calcularValores()
+        calcularValores()
     End Sub
 
     Private Function validarTotalBilling() As Boolean
@@ -980,30 +980,30 @@ Public Class ProjectsCosts
     End Function
 
     Private Sub sprTotalBilling_KeyPress(sender As Object, e As KeyPressEventArgs) Handles sprTotalBilling.KeyPress
-        If Asc(e.KeyChar) = Keys.Enter Or Asc(e.KeyChar) = Keys.Tab Then
-            If flagAddRecord Then
-                If validarTotalBilling() Then
-                    pjtNuevo.totalBilling = sprTotalBilling.Value
-                Else
-                    sprTotalBilling.Value = pjtNuevo.totalBilling
-                End If
-            Else
-                If validarTotalBilling() Then
-                    If mtdJobs.updateTotalBilling(sprTotalBilling.Value, pjt.idAux, pjt.idAuxWO) Then
-                        pjt.totalBilling = sprTotalBilling.Value
-                    Else
-                        sprTotalBilling.Value = pjt.totalBilling
-                    End If
-                Else
-                    sprTotalBilling.Value = pjt.totalBilling
-                End If
-            End If
-        End If
-        calcularValores()
+        'If Asc(e.KeyChar) = Keys.Enter Or Asc(e.KeyChar) = Keys.Tab Then
+        '    If flagAddRecord Then
+        '        If validarTotalBilling() Then
+        '            pjtNuevo.totalBilling = sprTotalBilling.Value
+        '        Else
+        '            sprTotalBilling.Value = pjtNuevo.totalBilling
+        '        End If
+        '    Else
+        '        If validarTotalBilling() Then
+        '            If mtdJobs.updateTotalBilling(sprTotalBilling.Value, pjt.idAux, pjt.idAuxWO) Then
+        '                pjt.totalBilling = sprTotalBilling.Value
+        '            Else
+        '                sprTotalBilling.Value = pjt.totalBilling
+        '            End If
+        '        Else
+        '            sprTotalBilling.Value = pjt.totalBilling
+        '        End If
+        '    End If
+        'End If
+        'calcularValores()
     End Sub
 
     Private Sub sprTotalBilling_ValueChanged(sender As Object, e As EventArgs) Handles sprTotalBilling.ValueChanged
-        calcularValores()
+        'calcularValores()
     End Sub
 
     '================ HOURS ESTIMATE =========================================================================================

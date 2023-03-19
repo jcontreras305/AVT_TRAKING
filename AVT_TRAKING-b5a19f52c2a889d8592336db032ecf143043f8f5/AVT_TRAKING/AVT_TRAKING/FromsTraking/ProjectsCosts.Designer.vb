@@ -462,7 +462,7 @@ Partial Class ProjectsCosts
         Me.sprTotalBilling.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.sprTotalBilling.DecimalPlaces = 2
-        Me.sprTotalBilling.Increment = New Decimal(New Integer() {5, 0, 0, 65536})
+        Me.sprTotalBilling.Increment = New Decimal(New Integer() {5, 0, 0, 131072})
         Me.sprTotalBilling.Location = New System.Drawing.Point(124, 54)
         Me.sprTotalBilling.Maximum = New Decimal(New Integer() {1410065408, 2, 0, 0})
         Me.sprTotalBilling.Name = "sprTotalBilling"
