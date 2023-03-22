@@ -354,12 +354,12 @@ from(
 		CONVERT(nvarchar,tk.endDate,101) as 'End Date',
 		tk.estimateHours as 'Estimate Hours'
 		from hoursWorked as hw 
-		inner join workCode as wc on wc.idWorkCode = hw.idWorkCode 
 		inner join task as tk on tk.idAux = hw.idAux 
 		inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO
 		inner join projectOrder as po on po.idPO = wo.idPO and po.jobNo = wo.jobNo
 		inner join job as jb on jb.jobNo = po.jobNo 
 		inner join clients as cl on cl.idClient = jb.idClient
+		inner join workCode as wc on wc.idWorkCode = hw.idWorkCode and wc.jobNo = jb.jobNo
 		where hw.dateWorked between @StartDate and @EndDate
 		UNION ALL
 		select
@@ -437,11 +437,11 @@ SUM(hw.hoursOT+ hw.hours3) OVER (PARTITION BY YEAR(hw.dateWorked),wc.name,MONTH(
 SUM(hw.hoursST*wc.billingRate1) OVER (PARTITION BY YEAR(hw.dateWorked),wc.name,MONTH(hw.dateWorked),jb.jobNo) as 'ST Cost',
 SUM((hw.hoursOT*wc.billingRateOT) + (hw.hours3*wc.billingRate3)) OVER (PARTITION BY YEAR(hw.dateWorked),wc.name,MONTH(hw.dateWorked),jb.jobNo) as 'OT Cost'
 from hoursWorked as hw 
-inner join workCode as wc on wc.idWorkCode = hw.idWorkCode
 inner join task as tk on tk.idAux = hw.idAux
 inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO
 inner join projectOrder as po on po.idPO = wo.idPO and po.jobNo = wo.jobNo
 inner join job as jb on jb.jobNo = po.jobNo 
+inner join workCode as wc on wc.idWorkCode = hw.idWorkCode and wc.jobNo = jb.jobNo
 where wc.name like '%-%' and hw.dateWorked between @startDate and @EndDate and wc.name not like '%covid%') 
 AS T1 ORDER BY T1.ClientID,T1.[Month]"
 			Return _ALL_Barries
@@ -575,11 +575,11 @@ SUM(hw.hoursST+hw.hoursOT+ hw.hours3) OVER (PARTITION BY YEAR(hw.dateWorked),MON
 SUM(hw.hoursST) OVER (PARTITION BY YEAR(hw.dateWorked),MONTH(hw.dateWorked),jb.jobNo) as 'ST',
 SUM(hw.hoursOT+ hw.hours3) OVER (PARTITION BY YEAR(hw.dateWorked),MONTH(hw.dateWorked),jb.jobNo) as 'OT'
 from hoursWorked as hw 
-inner join workCode as wc on wc.idWorkCode = hw.idWorkCode
 inner join task as tk on tk.idAux = hw.idAux
 inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO
 inner join projectOrder as po on po.idPO = wo.idPO and po.jobNo = wo.jobNo
 inner join job as jb on jb.jobNo = po.jobNo 
+inner join workCode as wc on wc.idWorkCode = hw.idWorkCode and wc.jobNo = jb.jobNo
 where hw.dateWorked between @StartDate and @EndDate and wc.name not like '%6.4%' and wc.name like 'LM%'
 ) AS T1 "
 			Return _All_Hours_1
@@ -611,12 +611,12 @@ YEAR(hw.dateWorked) as 'Year',jb.jobNo as 'ClientID', MONTH(hw.dateWorked) as 'M
 SUM(hw.hoursST+hw.hoursOT+ hw.hours3) OVER (PARTITION BY YEAR(hw.dateWorked),MONTH(hw.dateWorked),jb.jobNo) as 'Total Hours',
 SUM(hw.hoursST) OVER (PARTITION BY YEAR(hw.dateWorked),MONTH(hw.dateWorked),jb.jobNo) as 'ST',
 SUM(hw.hoursOT+ hw.hours3) OVER (PARTITION BY YEAR(hw.dateWorked),MONTH(hw.dateWorked),jb.jobNo) as 'OT'
-from hoursWorked as hw 
-inner join workCode as wc on wc.idWorkCode = hw.idWorkCode
+from hoursWorked as hw
 inner join task as tk on tk.idAux = hw.idAux
 inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO
 inner join projectOrder as po on po.idPO = wo.idPO and po.jobNo = wo.jobNo
 inner join job as jb on jb.jobNo = po.jobNo 
+inner join workCode as wc on wc.idWorkCode = hw.idWorkCode and wc.jobNo = jb.jobNo
 where hw.dateWorked between @StartDate and @EndDate and wc.name not like '%6.4%' and wc.name not like '%covid%'
 ) AS T1 "
 			Return _All_Hours_2
@@ -704,11 +704,11 @@ ROUND(SUM(hw.hoursST*wc.billingRate1) OVER (PARTITION BY YEAR(hw.dateWorked),DAT
 0 as 'Total Exp',
 0 as 'Total Mat'
 from hoursWorked as hw 
-inner join workCode as wc on wc.idWorkCode = hw.idWorkCode
 inner join task as tk on tk.idAux = hw.idAux
 inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO
 inner join projectOrder as po on po.idPO = wo.idPO and po.jobNo = wo.jobNo
 inner join job as jb on jb.jobNo = po.jobNo 
+inner join workCode as wc on wc.idWorkCode = hw.idWorkCode and wc.jobNo = jb.jobNo
 where hw.dateWorked between @StartDate and @EndDate 
 UNION ALL
 
