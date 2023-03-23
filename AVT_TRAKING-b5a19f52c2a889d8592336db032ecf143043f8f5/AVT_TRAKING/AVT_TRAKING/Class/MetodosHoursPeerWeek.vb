@@ -449,6 +449,25 @@ end", conn)
         End Try
     End Function
 
+    Public Function InsertarRecord(ByVal listDatos As List(Of String), ByRef tran As SqlTransaction) As Boolean
+        Try
+            Dim cmd As New SqlCommand("if (select COUNT(*) from hoursWorked where idAux = '" + listDatos(8) + "' and idEmployee = '" + listDatos(5) + "' and dateWorked = '" + listDatos(4) + "' and idWorkCode = " + listDatos(6) + " )=0
+begin
+insert into hoursWorked values(NEWID()," + listDatos(1) + "," + listDatos(2) + "," + listDatos(3) + ",'" + listDatos(4) + "','" + listDatos(5) + "'," + listDatos(6) + ",'" + listDatos(8) + "','" + listDatos(9) + "'," + listDatos(7) + ")
+end", tran.Connection)
+            cmd.Transaction = tran
+            If cmd.ExecuteNonQuery > 0 Then
+                Return True
+            Else
+                Return False
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message)
+            'desconectar()
+            Return False
+        End Try
+    End Function
+
     Public Function updateRecord(ByVal listDatos As List(Of String)) As Boolean
         Try
             conectar()
@@ -1269,4 +1288,23 @@ WITH(
             desconectar()
         End Try
     End Function
+
+    '##################################### METODOS PARA DUPLICAR RECORDS ###################################################################
+
+    Public Function selectEmpleadosWithout(ByVal tbl As DataGridView, ByVal idEmpleado As String) As Boolean
+        Try
+            conectar()
+            Dim cmd As New SqlCommand("select idEmployee ,numberEmploye as 'Employee No', CONCAT (lastName, ' ',firstName,' ',middleName) as 'Name' from employees where idEmployee <> '" + idEmpleado + "'", conn)
+            tbl.Rows.Clear()
+            Dim dr = cmd.ExecuteReader()
+            While dr.Read()
+                tbl.Rows.Add(dr("idEmployee"), dr("Employee No"), dr("Name"))
+            End While
+            Return True
+        Catch ex As Exception
+            MsgBox(ex.Message())
+            Return False
+        End Try
+    End Function
+
 End Class

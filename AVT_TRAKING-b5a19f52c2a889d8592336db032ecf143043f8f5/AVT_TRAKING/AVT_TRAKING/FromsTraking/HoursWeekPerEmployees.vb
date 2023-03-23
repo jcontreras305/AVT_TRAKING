@@ -1326,4 +1326,45 @@ Public Class HoursWeekPerEmployees
         cargarDatos(cmbEmpleados.SelectedItem)
     End Sub
 
+    Private Sub btnDuplicateHour_Click(sender As Object, e As EventArgs) Handles btnDuplicateHour.Click
+        If tblRecordEmployee.SelectedRows.Count > 0 Then
+            mtdHPW.llenarTablaProyecto(proyectTable)
+            Dim dpH As New DuplicateHours
+            dpH.idEmpleado = idEmpleado
+            Dim tblRecordsCopy As New DataTable
+            tblRecordsCopy.Columns.Add("idTask")
+            tblRecordsCopy.Columns.Add("idWorkCode")
+            tblRecordsCopy.Columns.Add("dateWorked")
+            tblRecordsCopy.Columns.Add("hrST")
+            tblRecordsCopy.Columns.Add("hrOT")
+            tblRecordsCopy.Columns.Add("hrEX")
+            tblRecordsCopy.Columns.Add("schedule")
+            tblRecordsCopy.Columns.Add("jobNo")
+            Dim flag As Boolean = False
+            For Each row As DataGridViewRow In tblRecordEmployee.SelectedRows
+                Dim idTask As String = ""
+                Dim idWC As String = ""
+                Dim arrayListPo() As DataRow = proyectTable.Select("project = '" + row.Cells("Project").Value + "' and jobNo = " + row.Cells("jobNo").Value.ToString() + " and idPO = " + row.Cells("idPO").Value.ToString())
+                If arrayListPo.Length > 0 Then
+                    idTask = arrayListPo(0).ItemArray(0)
+                End If
+                Dim arrayListWC() As DataRow = workCodeTable.Select("name = '" + row.Cells("Work Code").Value + "' and jobNo = " + row.Cells("jobNo").Value.ToString())
+                If arrayListWC.Length > 0 Then
+                    idWC = arrayListWC(0).ItemArray(0)
+                End If
+                If Not (idTask = "" And idWC = "") Then
+                    tblRecordsCopy.Rows.Add(idTask, idWC, row.Cells("Date").Value, row.Cells("Hours ST").Value, row.Cells("Hours OT").Value, row.Cells("Hours 3").Value, row.Cells("Shift").Value, row.Cells("jobNo").Value.ToString())
+                    flag = True
+                End If
+            Next
+            dpH.tblRecordsCopy = tblRecordsCopy
+            If flag Then
+                dpH.Show()
+            Else
+                MessageBox.Show("Verify the information to be duplicate, it is not posible to find the Work Code or the project of some reocord select.", "Important", MessageBoxButtons.OK, MessageBoxIcon.Information)
+            End If
+        Else
+            MessageBox.Show("Please select the records to duplicate.", "Important", MessageBoxButtons.OK, MessageBoxIcon.Information)
+        End If
+    End Sub
 End Class
