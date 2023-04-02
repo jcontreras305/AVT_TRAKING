@@ -1324,6 +1324,20 @@ Public Class ProjectsCosts
 
     End Sub
 
+    Private Sub sprPercentComplete_KeyUp(sender As Object, e As KeyEventArgs) Handles sprPercentComplete.KeyUp
+        Try
+            If flagAddRecord Then
+                pjtNuevo.PercentComplete = If(sprPercentComplete.Value <> Nothing, sprPercentComplete.Value, 0)
+            Else
+                pjt.PercentComplete = If(sprPercentComplete.Value <> Nothing, sprPercentComplete.Value, 0)
+                mtdJobs.updateCompleteProgress(pjt.PercentComplete, pjt.idAux, pjt.idAuxWO)
+                calcularValores()
+            End If
+        Catch ex As Exception
+
+        End Try
+    End Sub
+
     '================ COMPLETE CHECK =========================================================================================
     '=========================================================================================================================
 
@@ -1488,7 +1502,6 @@ Public Class ProjectsCosts
             cmbJobNumber.SelectedIndex = 1
         End If
     End Sub
-
     Private Sub btnFindProject_Click(sender As Object, e As EventArgs) Handles btnFindProject.Click
         Dim FT As New FindTask
         FT.FindElement = FindElement

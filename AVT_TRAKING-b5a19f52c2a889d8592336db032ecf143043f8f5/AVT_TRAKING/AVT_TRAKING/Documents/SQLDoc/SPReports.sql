@@ -2439,8 +2439,8 @@ go
 --##############################################################################################
 --################## SP INVOICE PO RESUME ######################################################
 --##############################################################################################
---ALTER proc [dbo].[sp_Invoice_PO_Resume]
-CREATE proc [dbo].[sp_Invoice_PO_Resume]
+ALTER proc [dbo].[sp_Invoice_PO_Resume]
+--CREATE proc [dbo].[sp_Invoice_PO_Resume]
 @numberClient  int,
 @startDate date,
 @FinalDate date,
@@ -2467,32 +2467,32 @@ select
 	po.idPO,
 	
 	ISNULL((select sum(hw1.hoursST)+sum(hw1.hoursOT)+sum(hw1.hours3) as 'Total Hours' from hoursWorked as hw1 
-		inner join workCode as wc1 on wc1.idWorkCode = hw1.idWorkCode
 		inner join task as tk1 on tk1.idAux = hw1.idAux 
 		inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO
 		inner join projectOrder as po1 on po1.idPO = wo1.idPO and wo1.jobNo = po1.jobNo
 		inner join job as jb1 on po1.jobNo = jb1.jobNo
 		inner join clients as cl1 on cl1.idClient = jb1.idClient
+		inner join workCode as wc1 on wc1.idWorkCode = hw1.idWorkCode and wc1.jobNo = jb1.jobNo
 		where po1.idPO = po.idPO and jb1.jobNo = jb.jobNo and cl1.numberClient = @numberClient and hw1.dateWorked between @startDate and @FinalDate),0) 
 	as 'Total Hours PO',
 
 	ISNULL((select sum(hw1.hoursST)+sum(hw1.hoursOT)+sum(hw1.hours3) as 'Total Hours' from hoursWorked as hw1 
-		inner join workCode as wc1 on wc1.idWorkCode = hw1.idWorkCode
 		inner join task as tk1 on tk1.idAux = hw1.idAux 
 		inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO
 		inner join projectOrder as po1 on po1.idPO = wo1.idPO and wo1.jobNo = po1.jobNo
 		inner join job as jb1 on po1.jobNo = jb1.jobNo
 		inner join clients as cl1 on cl1.idClient = jb1.idClient
+		inner join workCode as wc1 on wc1.idWorkCode = hw1.idWorkCode and wc1.jobNo = jb1.jobNo
 		where po1.idPO = po.idPO and jb1.jobNo = jb.jobNo and cl1.numberClient = @numberClient and hw1.dateWorked between @startDate and @FinalDate),0) 
 	as 'Total Hours',
 
 	ISNULL((select sum(hw1.hoursST*wc1.billingRate1)+sum(hw1.hoursOT*wc1.billingRateOT)+sum(hw1.hours3*wc1.billingRate3) as 'Labor' from hoursWorked as hw1 
-		inner join workCode as wc1 on wc1.idWorkCode = hw1.idWorkCode
 		inner join task as tk1 on tk1.idAux = hw1.idAux 
 		inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO
 		inner join projectOrder as po1 on po1.idPO = wo1.idPO and wo1.jobNo = po1.jobNo
 		inner join job as jb1 on po1.jobNo = jb1.jobNo
 		inner join clients as cl1 on cl1.idClient = jb1.idClient
+		inner join workCode as wc1 on wc1.idWorkCode = hw1.idWorkCode and wc1.jobNo = jb1.jobNo
 		where po1.idPO = po.idPO and jb1.jobNo = jb.jobNo and cl1.numberClient = @numberClient and hw1.dateWorked between @startDate and @FinalDate),0) 
 	as 'Total Labor',
 
@@ -2619,12 +2619,12 @@ select
 	
 	,
 	ISNULL((select sum(hw1.hoursST*wc1.billingRate1)+sum(hw1.hoursOT*wc1.billingRateOT)+sum(hw1.hours3*wc1.billingRate3) as 'Labor' from hoursWorked as hw1 
-		inner join workCode as wc1 on wc1.idWorkCode = hw1.idWorkCode
 		inner join task as tk1 on tk1.idAux = hw1.idAux 
 		inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO
 		inner join projectOrder as po1 on po1.idPO = wo1.idPO and wo1.jobNo = po1.jobNo
 		inner join job as jb1 on po1.jobNo = jb1.jobNo
 		inner join clients as cl1 on cl1.idClient = jb1.idClient
+		inner join workCode as wc1 on wc1.idWorkCode = hw1.idWorkCode and wc1.jobNo = jb1.jobNo
 		where po1.idPO = po.idPO and jb1.jobNo = jb.jobNo and cl1.numberClient = @numberClient and hw1.dateWorked between @startDate and @FinalDate),0)
 	+
 	ISNULL((select sum(exu1.amount) from expensesUsed as exu1
