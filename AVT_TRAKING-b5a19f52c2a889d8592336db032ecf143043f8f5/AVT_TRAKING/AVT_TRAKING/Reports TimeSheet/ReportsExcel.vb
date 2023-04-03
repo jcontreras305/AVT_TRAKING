@@ -145,10 +145,10 @@ declare @numClient as int = " + clNumber + "
 select 
 distinct
 t1.[Month],
-SUM(T1.[WO ST])OVER (PARTITION BY T1.[jobNo],T1.[idPO],T1.[idWO],T1.[task],T1.[Month]) as 'WO ST',
-SUM(T1.[WO OT])OVER (PARTITION BY T1.[jobNo],T1.[idPO],T1.[idWO],T1.[task],T1.[Month]) as 'WO OT',
-SUM(T1.[WO XT])OVER (PARTITION BY T1.[jobNo],T1.[idPO],T1.[idWO],T1.[task],T1.[Month]) as 'WO XT',
-SUM(T1.[WO XT]+T1.[WO OT]+T1.[WO ST])OVER (PARTITION BY T1.[jobNo],T1.[idPO],T1.[idWO],T1.[task],T1.[Month]) as 'Total',
+SUM(T1.[WO ST])OVER (PARTITION BY T1.[idPO],T1.[Month]) as 'WO ST',
+SUM(T1.[WO OT])OVER (PARTITION BY T1.[idPO],T1.[Month]) as 'WO OT',
+SUM(T1.[WO XT])OVER (PARTITION BY T1.[idPO],T1.[Month]) as 'WO XT',
+SUM(T1.[WO XT]+T1.[WO OT]+T1.[WO ST])OVER (PARTITION BY T1.[idPO],T1.[Month]) as 'Total',
 T1.MO ,
 T1.idPO
 from (
@@ -168,7 +168,6 @@ inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO
 inner join projectOrder as po on po.idPO = wo.idPO and wo.jobNo = po.jobNo
 inner join job as jb on jb.jobNo = po.jobNo
 inner join clients as cl on cl.idClient = jb.idClient
-
 where hw.dateWorked between @StarDate and @FinalDate and cl.numberClient = @numClient " + If(JobNo IsNot Nothing, "and  jb.jobNo = " + JobNo + "", "") + " 
 ) as T1 where (T1.[WO ST] + T1.[WO OT] + T1.[WO XT] )>0", conn)
             If cmd.ExecuteNonQuery Then
