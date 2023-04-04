@@ -225,7 +225,7 @@ Public Class ReportsMenu
             sd.Filter = "*|xlsx"
             If DialogResult.OK = sd.ShowDialog() Then
                 Dim path As String = sd.FileName
-                Dim doc = AppDomain.CurrentDomain.BaseDirectory + "Docs\TableToPBI.xlsx"
+                Dim doc = AppDomain.CurrentDomain.BaseDirectory + "Docs\TablesToPBI.xlsx"
                 'MsgBox(doc)
                 saveDoc(path, doc)
             End If
