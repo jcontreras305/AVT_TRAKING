@@ -1594,12 +1594,14 @@ Public Class ProjectsCosts
         If sprPercentComplete.Value > 0 And sprPercentComplete.Value < 100 Then
             lblEarned.Text = (sprHoursEstimate.Value * (sprPercentComplete.Value * 0.01))
             If (THrs) > 0 Then
-                lblPF.Text = Format(Val(CDec(If(lblEarned.Text = "", "0", lblEarned.Text)) / CDec(If(lblTotalHours.Text = "", "0", lblTotalHours.Text))), "0#.##")
+                lblPF.Text = Format(Val(CDec(If(lblEarned.Text = "", "0", lblEarned.Text)) / CDec(If(lblTotalHours.Text = "", "0", lblTotalHours.Text))), "0.##")
+            Else
+                lblPF.Text = "0"
             End If
             If (THrs) < sprHoursEstimate.Value And THrs > 0 Then
                 Dim pf As Double = Val(CDec(If(lblEarned.Text = "", "0", lblEarned.Text)) / CDec(If(lblTotalHours.Text = "", "0", lblTotalHours.Text)))
                 Dim ETC As Double = pf * (sprHoursEstimate.Value - THrs)
-                lblETC.Text = Format(ETC, "#.#")
+                lblETC.Text = Format(ETC, "0.#")
             Else
                 Dim ETC As Double
                 If THrs > 0 Then
@@ -1607,7 +1609,7 @@ Public Class ProjectsCosts
                 Else
                     ETC = 0
                 End If
-                lblETC.Text = Format(ETC, "0#.#")
+                lblETC.Text = Format(ETC, "0.#")
             End If
         ElseIf sprPercentComplete.Value = 100 Then
             lblETC.Text = "0"
