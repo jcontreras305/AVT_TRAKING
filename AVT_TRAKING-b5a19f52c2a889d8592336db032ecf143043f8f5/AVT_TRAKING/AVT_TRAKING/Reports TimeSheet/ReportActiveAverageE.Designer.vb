@@ -35,6 +35,13 @@ Partial Class ReportActiveAverageE
         Me.Panel2 = New System.Windows.Forms.Panel()
         Me.Button1 = New System.Windows.Forms.Button()
         Me.PictureBox4 = New System.Windows.Forms.PictureBox()
+        Me.cmbClients = New System.Windows.Forms.ComboBox()
+        Me.Label2 = New System.Windows.Forms.Label()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.dtpFinalDate = New System.Windows.Forms.DateTimePicker()
+        Me.dtpInitialDate = New System.Windows.Forms.DateTimePicker()
+        Me.chbAll = New System.Windows.Forms.CheckBox()
+        Me.Label4 = New System.Windows.Forms.Label()
         Me.TableLayoutPanel1.SuspendLayout()
         Me.Panel3.SuspendLayout()
         Me.TitleBar.SuspendLayout()
@@ -58,7 +65,7 @@ Partial Class ReportActiveAverageE
         Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
         Me.TableLayoutPanel1.RowCount = 3
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40.0!))
-        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 45.0!))
+        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 81.0!))
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
         Me.TableLayoutPanel1.Size = New System.Drawing.Size(734, 509)
         Me.TableLayoutPanel1.TabIndex = 0
@@ -68,9 +75,9 @@ Partial Class ReportActiveAverageE
         Me.Panel3.BackColor = System.Drawing.Color.FromArgb(CType(CType(83, Byte), Integer), CType(CType(93, Byte), Integer), CType(CType(102, Byte), Integer))
         Me.Panel3.Controls.Add(Me.crvActiveAverageE)
         Me.Panel3.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel3.Location = New System.Drawing.Point(3, 88)
+        Me.Panel3.Location = New System.Drawing.Point(3, 124)
         Me.Panel3.Name = "Panel3"
-        Me.Panel3.Size = New System.Drawing.Size(728, 418)
+        Me.Panel3.Size = New System.Drawing.Size(728, 382)
         Me.Panel3.TabIndex = 2
         '
         'crvActiveAverageE
@@ -81,7 +88,7 @@ Partial Class ReportActiveAverageE
         Me.crvActiveAverageE.Dock = System.Windows.Forms.DockStyle.Fill
         Me.crvActiveAverageE.Location = New System.Drawing.Point(0, 0)
         Me.crvActiveAverageE.Name = "crvActiveAverageE"
-        Me.crvActiveAverageE.Size = New System.Drawing.Size(728, 418)
+        Me.crvActiveAverageE.Size = New System.Drawing.Size(728, 382)
         Me.crvActiveAverageE.TabIndex = 0
         '
         'TitleBar
@@ -151,12 +158,19 @@ Partial Class ReportActiveAverageE
         'Panel2
         '
         Me.Panel2.BackColor = System.Drawing.Color.FromArgb(CType(CType(83, Byte), Integer), CType(CType(93, Byte), Integer), CType(CType(102, Byte), Integer))
+        Me.Panel2.Controls.Add(Me.Label4)
+        Me.Panel2.Controls.Add(Me.chbAll)
+        Me.Panel2.Controls.Add(Me.cmbClients)
+        Me.Panel2.Controls.Add(Me.Label2)
+        Me.Panel2.Controls.Add(Me.Label1)
+        Me.Panel2.Controls.Add(Me.dtpFinalDate)
+        Me.Panel2.Controls.Add(Me.dtpInitialDate)
         Me.Panel2.Controls.Add(Me.Button1)
         Me.Panel2.Controls.Add(Me.PictureBox4)
         Me.Panel2.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel2.Location = New System.Drawing.Point(3, 43)
         Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(728, 39)
+        Me.Panel2.Size = New System.Drawing.Size(728, 75)
         Me.Panel2.TabIndex = 1
         '
         'Button1
@@ -168,7 +182,7 @@ Partial Class ReportActiveAverageE
         Me.Button1.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.Button1.Image = Global.AVT_TRAKING.My.Resources.Resources.reportshow
         Me.Button1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.Button1.Location = New System.Drawing.Point(20, 3)
+        Me.Button1.Location = New System.Drawing.Point(382, 37)
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(83, 33)
         Me.Button1.TabIndex = 9
@@ -185,6 +199,79 @@ Partial Class ReportActiveAverageE
         Me.PictureBox4.Size = New System.Drawing.Size(37, 29)
         Me.PictureBox4.TabIndex = 8
         Me.PictureBox4.TabStop = False
+        '
+        'cmbClients
+        '
+        Me.cmbClients.FormattingEnabled = True
+        Me.cmbClients.Location = New System.Drawing.Point(241, 11)
+        Me.cmbClients.Name = "cmbClients"
+        Me.cmbClients.Size = New System.Drawing.Size(135, 21)
+        Me.cmbClients.TabIndex = 21
+        '
+        'Label2
+        '
+        Me.Label2.AutoSize = True
+        Me.Label2.Font = New System.Drawing.Font("Verdana", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label2.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.Label2.Location = New System.Drawing.Point(5, 47)
+        Me.Label2.Name = "Label2"
+        Me.Label2.Size = New System.Drawing.Size(70, 14)
+        Me.Label2.TabIndex = 20
+        Me.Label2.Text = "Final Date"
+        '
+        'Label1
+        '
+        Me.Label1.AutoSize = True
+        Me.Label1.Font = New System.Drawing.Font("Verdana", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label1.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.Label1.Location = New System.Drawing.Point(5, 11)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(76, 14)
+        Me.Label1.TabIndex = 19
+        Me.Label1.Text = "Initial Date"
+        '
+        'dtpFinalDate
+        '
+        Me.dtpFinalDate.CustomFormat = "yyyy/MM/dd"
+        Me.dtpFinalDate.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.dtpFinalDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom
+        Me.dtpFinalDate.Location = New System.Drawing.Point(87, 42)
+        Me.dtpFinalDate.Name = "dtpFinalDate"
+        Me.dtpFinalDate.Size = New System.Drawing.Size(99, 21)
+        Me.dtpFinalDate.TabIndex = 18
+        '
+        'dtpInitialDate
+        '
+        Me.dtpInitialDate.CustomFormat = "yyyy/MM/dd"
+        Me.dtpInitialDate.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.dtpInitialDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom
+        Me.dtpInitialDate.Location = New System.Drawing.Point(87, 11)
+        Me.dtpInitialDate.Name = "dtpInitialDate"
+        Me.dtpInitialDate.Size = New System.Drawing.Size(99, 21)
+        Me.dtpInitialDate.TabIndex = 17
+        '
+        'chbAll
+        '
+        Me.chbAll.AutoSize = True
+        Me.chbAll.Font = New System.Drawing.Font("Verdana", 9.0!)
+        Me.chbAll.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.chbAll.Location = New System.Drawing.Point(382, 13)
+        Me.chbAll.Name = "chbAll"
+        Me.chbAll.Size = New System.Drawing.Size(40, 18)
+        Me.chbAll.TabIndex = 22
+        Me.chbAll.Text = "All"
+        Me.chbAll.UseVisualStyleBackColor = True
+        '
+        'Label4
+        '
+        Me.Label4.AutoSize = True
+        Me.Label4.Font = New System.Drawing.Font("Verdana", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label4.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.Label4.Location = New System.Drawing.Point(192, 13)
+        Me.Label4.Name = "Label4"
+        Me.Label4.Size = New System.Drawing.Size(43, 14)
+        Me.Label4.TabIndex = 23
+        Me.Label4.Text = "Client"
         '
         'ReportActiveAverageE
         '
@@ -206,6 +293,7 @@ Partial Class ReportActiveAverageE
         CType(Me.btnRestore, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.btnMaximize, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel2.ResumeLayout(False)
+        Me.Panel2.PerformLayout()
         CType(Me.PictureBox4, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
@@ -223,4 +311,11 @@ Partial Class ReportActiveAverageE
     Friend WithEvents PictureBox1 As PictureBox
     Friend WithEvents crvActiveAverageE As CrystalDecisions.Windows.Forms.CrystalReportViewer
     Friend WithEvents Button1 As Button
+    Friend WithEvents Label4 As Label
+    Friend WithEvents chbAll As CheckBox
+    Friend WithEvents cmbClients As ComboBox
+    Friend WithEvents Label2 As Label
+    Friend WithEvents Label1 As Label
+    Friend WithEvents dtpFinalDate As DateTimePicker
+    Friend WithEvents dtpInitialDate As DateTimePicker
 End Class
