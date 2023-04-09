@@ -8,7 +8,7 @@ Public Class PayRoll
         sprRowStartNBL.Enabled = False
         sprRowStartTSD.Enabled = True
         llenarComboClientsReports(cmbClients)
-        chbALLJobs.Checked = True
+        chbALLClient.Checked = True
     End Sub
     Private Sub PictureBox4_Click(sender As Object, e As EventArgs) Handles PictureBox4.Click
         Me.Close()
@@ -194,15 +194,29 @@ Public Class PayRoll
     End Sub
     Private Sub btnReFresh_Click(sender As Object, e As EventArgs) Handles btnReFresh.Click
         Try
-            If chbALLJobs.Checked Then
+            If chbALLClient.Checked Then
                 mtdHPW.selectPayroll(tblTime, dtpStartTime.Value)
                 mtdHPW.selectNONBILLABLE(tblNonBillable, dtpStartTime.Value)
             Else
-                If cmbJobs.SelectedIndex > -1 Then
-                    mtdHPW.selectPayroll(tblTime, dtpStartTime.Value, If(chbALLJobs.Checked, "", cmbJobs.SelectedItem))
-                    mtdHPW.selectNONBILLABLE(tblNonBillable, dtpStartTime.Value, If(chbALLJobs.Checked, "", cmbJobs.SelectedItem))
+                If cmbClients.SelectedIndex > -1 Then
+                    If chbAllJob.Checked Then
+                        Dim array() As String = cmbClients.SelectedItem.ToString.Split(" ")
+                        Dim clNum As String = array(0)
+                        mtdHPW.selectPayroll(tblTime, dtpStartTime.Value, If(chbALLClient.Checked, "", clNum))
+                        mtdHPW.selectNONBILLABLE(tblNonBillable, dtpStartTime.Value, If(chbALLClient.Checked, "", clNum))
+
+                    Else
+                        If cmbJobs.SelectedIndex > -1 Then
+                            Dim array() As String = cmbClients.SelectedItem.ToString.Split(" ")
+                            Dim clNum As String = array(0)
+                            mtdHPW.selectPayroll(tblTime, dtpStartTime.Value, If(chbALLClient.Checked, "", clNum), cmbJobs.Items(cmbJobs.SelectedIndex))
+                            mtdHPW.selectNONBILLABLE(tblNonBillable, dtpStartTime.Value, If(chbALLClient.Checked, "", clNum), cmbJobs.Items(cmbJobs.SelectedIndex))
+                        Else
+                            MessageBox.Show("Please select a JobNo or check All Jobs", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                        End If
+                    End If
                 Else
-                    MessageBox.Show("Please select a JobNo. or Check for All Jobs.", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                    MessageBox.Show("Please select a Client or check All Clients ", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information)
                 End If
             End If
         Catch ex As Exception
@@ -398,11 +412,18 @@ Public Class PayRoll
         End Try
     End Sub
 
-    Private Sub chbALLJobs_CheckedChanged(sender As Object, e As EventArgs) Handles chbALLJobs.CheckedChanged
-        If chbALLJobs.Checked Then
-            cmbJobs.Enabled = False
+    Private Sub chbALLJobs_CheckedChanged(sender As Object, e As EventArgs) Handles chbALLClient.CheckedChanged
+        If chbALLClient.Checked Then
+            cmbClients.Enabled = False
+            chbAllJob.Checked = True
+            chbAllJob.Enabled = False
         Else
-            cmbJobs.Enabled = True
+            cmbClients.Enabled = True
+            chbAllJob.Enabled = True
         End If
+    End Sub
+
+    Private Sub chbAllJob_CheckedChanged(sender As Object, e As EventArgs) Handles chbAllJob.CheckedChanged
+        cmbJobs.Enabled = If(chbAllJob.Checked, False, True)
     End Sub
 End Class

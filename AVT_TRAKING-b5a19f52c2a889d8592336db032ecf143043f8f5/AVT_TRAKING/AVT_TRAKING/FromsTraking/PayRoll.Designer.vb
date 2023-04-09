@@ -35,9 +35,10 @@ Partial Class PayRoll
         Me.TabPage1 = New System.Windows.Forms.TabPage()
         Me.TableLayoutPanel2 = New System.Windows.Forms.TableLayoutPanel()
         Me.Panel3 = New System.Windows.Forms.Panel()
+        Me.chbAllJob = New System.Windows.Forms.CheckBox()
         Me.Label6 = New System.Windows.Forms.Label()
         Me.Label5 = New System.Windows.Forms.Label()
-        Me.chbALLJobs = New System.Windows.Forms.CheckBox()
+        Me.chbALLClient = New System.Windows.Forms.CheckBox()
         Me.cmbJobs = New System.Windows.Forms.ComboBox()
         Me.cmbClients = New System.Windows.Forms.ComboBox()
         Me.txtSalida = New System.Windows.Forms.Label()
@@ -260,9 +261,10 @@ Partial Class PayRoll
         'Panel3
         '
         Me.Panel3.BackColor = System.Drawing.Color.FromArgb(CType(CType(83, Byte), Integer), CType(CType(93, Byte), Integer), CType(CType(102, Byte), Integer))
+        Me.Panel3.Controls.Add(Me.chbAllJob)
         Me.Panel3.Controls.Add(Me.Label6)
         Me.Panel3.Controls.Add(Me.Label5)
-        Me.Panel3.Controls.Add(Me.chbALLJobs)
+        Me.Panel3.Controls.Add(Me.chbALLClient)
         Me.Panel3.Controls.Add(Me.cmbJobs)
         Me.Panel3.Controls.Add(Me.cmbClients)
         Me.Panel3.Controls.Add(Me.txtSalida)
@@ -279,12 +281,24 @@ Partial Class PayRoll
         Me.Panel3.Size = New System.Drawing.Size(902, 82)
         Me.Panel3.TabIndex = 0
         '
+        'chbAllJob
+        '
+        Me.chbAllJob.AutoSize = True
+        Me.chbAllJob.Font = New System.Drawing.Font("Verdana", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.chbAllJob.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.chbAllJob.Location = New System.Drawing.Point(394, 40)
+        Me.chbAllJob.Name = "chbAllJob"
+        Me.chbAllJob.Size = New System.Drawing.Size(65, 18)
+        Me.chbAllJob.TabIndex = 13
+        Me.chbAllJob.Text = "All Job"
+        Me.chbAllJob.UseVisualStyleBackColor = True
+        '
         'Label6
         '
         Me.Label6.AutoSize = True
         Me.Label6.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label6.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.Label6.Location = New System.Drawing.Point(371, 17)
+        Me.Label6.Location = New System.Drawing.Point(206, 42)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(32, 13)
         Me.Label6.TabIndex = 12
@@ -301,21 +315,22 @@ Partial Class PayRoll
         Me.Label5.TabIndex = 11
         Me.Label5.Text = "Clients"
         '
-        'chbALLJobs
+        'chbALLClient
         '
-        Me.chbALLJobs.AutoSize = True
-        Me.chbALLJobs.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.chbALLJobs.Location = New System.Drawing.Point(536, 17)
-        Me.chbALLJobs.Name = "chbALLJobs"
-        Me.chbALLJobs.Size = New System.Drawing.Size(45, 17)
-        Me.chbALLJobs.TabIndex = 10
-        Me.chbALLJobs.Text = "ALL"
-        Me.chbALLJobs.UseVisualStyleBackColor = True
+        Me.chbALLClient.AutoSize = True
+        Me.chbALLClient.Font = New System.Drawing.Font("Verdana", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.chbALLClient.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.chbALLClient.Location = New System.Drawing.Point(394, 15)
+        Me.chbALLClient.Name = "chbALLClient"
+        Me.chbALLClient.Size = New System.Drawing.Size(87, 18)
+        Me.chbALLClient.TabIndex = 10
+        Me.chbALLClient.Text = "All Clients"
+        Me.chbALLClient.UseVisualStyleBackColor = True
         '
         'cmbJobs
         '
         Me.cmbJobs.FormattingEnabled = True
-        Me.cmbJobs.Location = New System.Drawing.Point(409, 13)
+        Me.cmbJobs.Location = New System.Drawing.Point(244, 38)
         Me.cmbJobs.Name = "cmbJobs"
         Me.cmbJobs.Size = New System.Drawing.Size(121, 21)
         Me.cmbJobs.TabIndex = 9
@@ -907,7 +922,8 @@ Partial Class PayRoll
     Friend WithEvents btnMaximize As PictureBox
     Friend WithEvents Label6 As Label
     Friend WithEvents Label5 As Label
-    Friend WithEvents chbALLJobs As CheckBox
+    Friend WithEvents chbALLClient As CheckBox
     Friend WithEvents cmbJobs As ComboBox
     Friend WithEvents cmbClients As ComboBox
+    Friend WithEvents chbAllJob As CheckBox
 End Class
