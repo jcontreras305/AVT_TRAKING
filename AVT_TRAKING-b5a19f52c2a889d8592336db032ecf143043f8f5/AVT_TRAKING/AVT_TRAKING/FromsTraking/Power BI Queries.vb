@@ -788,7 +788,8 @@ ROUND(ISNULL((select SUM(pt.quantity*pd.dailyRentalRate) from productTotalScaffo
 inner join product as pd on pd.idProduct = pt.idProduct
 where pt.tag = sc.tag ) ,0),2) as 'M-Rent',
 sc.latitude as 'Lat', 
-sc.longitude as 'Long'
+sc.longitude as 'Long',
+jb.jobNo as 'ClientID'
 INTO PBI.Scaffold
 from scaffoldTraking as sc
 left join subJobs as sj on sj.idSubJob = sc.idSubJob
@@ -812,26 +813,33 @@ BEGIN
 	drop table PBI.[ScaBTools]
 END
 
-select * , T1.[MTMBQY]/T1.[STWRKHRS] as 'Tools B Pieces'
+select T1.[Year],T1.[MONTHB],T1.[STWRKHRS],T1.[STMTRLHRS],T1.[STTRVL],T1.[STWTRHRS],T1.[STALRMHRS],
+ T1.[STSFTYHRS],T1.[STSTDBYHRS],T1.[OTHERHRS],T1.[STHRS],T1.[Task],T1.[MTMBQY],T1.[MONTH] ,
+ T1.[MTMBQY]/T1.[STWRKHRS] as 'Tools B Pieces',T1.[jobNo] as 'ClientID'
 INTO PBI.[ScaBTools]
 from (
 select  
-DISTINCT
+distinct
 YEAR(sc.buildDate) as 'Year',DATENAME(MONTH,sc.buildDate) as 'MONTHB',
-SUM(ach.[build]) OVER (PARTITION BY YEAR(sc.buildDate),MONTH(sc.buildDate)) as 'STWRKHRS',
-SUM(ach.[material]) OVER (PARTITION BY YEAR(sc.buildDate),MONTH(sc.buildDate)) as 'STMTRLHRS',
-SUM(ach.[travel]) OVER (PARTITION BY YEAR(sc.buildDate),MONTH(sc.buildDate)) as 'STTRVL',
-SUM(ach.[weather]) OVER (PARTITION BY YEAR(sc.buildDate),MONTH(sc.buildDate)) as 'STWTRHRS',
-SUM(ach.[alarm]) OVER (PARTITION BY YEAR(sc.buildDate),MONTH(sc.buildDate)) as 'STALRMHRS',
-SUM(ach.[safety]) OVER (PARTITION BY YEAR(sc.buildDate),MONTH(sc.buildDate)) as 'STSFTYHRS',
-SUM(ach.[stdBy]) OVER (PARTITION BY YEAR(sc.buildDate),MONTH(sc.buildDate)) as 'STSTDBYHRS',
-SUM(ach.[other]) OVER (PARTITION BY YEAR(sc.buildDate),MONTH(sc.buildDate)) as 'OTHERHRS',
-SUM(ach.[build]+ach.[material]+ach.[travel]+ach.[weather]+ach.[alarm]+ach.[safety]+ach.[stdBy]+ach.[other]) OVER (PARTITION BY YEAR(sc.buildDate),MONTH(sc.buildDate)) as 'STHRS',
+SUM(ach.[build]) OVER (PARTITION BY YEAR(sc.buildDate),MONTH(sc.buildDate),jb.jobNo) as 'STWRKHRS',
+SUM(ach.[material]) OVER (PARTITION BY YEAR(sc.buildDate),MONTH(sc.buildDate),jb.jobNo) as 'STMTRLHRS',
+SUM(ach.[travel]) OVER (PARTITION BY YEAR(sc.buildDate),MONTH(sc.buildDate),jb.jobNo) as 'STTRVL',
+SUM(ach.[weather]) OVER (PARTITION BY YEAR(sc.buildDate),MONTH(sc.buildDate),jb.jobNo) as 'STWTRHRS',
+SUM(ach.[alarm]) OVER (PARTITION BY YEAR(sc.buildDate),MONTH(sc.buildDate),jb.jobNo) as 'STALRMHRS',
+SUM(ach.[safety]) OVER (PARTITION BY YEAR(sc.buildDate),MONTH(sc.buildDate),jb.jobNo) as 'STSFTYHRS',
+SUM(ach.[stdBy]) OVER (PARTITION BY YEAR(sc.buildDate),MONTH(sc.buildDate),jb.jobNo) as 'STSTDBYHRS',
+SUM(ach.[other]) OVER (PARTITION BY YEAR(sc.buildDate),MONTH(sc.buildDate),jb.jobNo) as 'OTHERHRS',
+SUM(ach.[build]+ach.[material]+ach.[travel]+ach.[weather]+ach.[alarm]+ach.[safety]+ach.[stdBy]+ach.[other]) OVER (PARTITION BY YEAR(sc.buildDate),MONTH(sc.buildDate),jb.jobNo) as 'STHRS',
 'Build' AS 'Task',
-SUM(ISNULL((select SUM(quantity) from productScaffold as ps where ps.tag = sc.tag),0)) OVER (PARTITION BY YEAR(sc.buildDate),MONTH(sc.buildDate)) as 'MTMBQY',
+SUM(ISNULL((select SUM(quantity) from productScaffold as ps where ps.tag = sc.tag),0)) OVER (PARTITION BY YEAR(sc.buildDate),MONTH(sc.buildDate),jb.jobNo) as 'MTMBQY',
 MONTH(sc.buildDate) as 'MONTH'
+,jb.jobNo
 from activityHours as ach 
-inner join scaffoldTraking as sc on sc.tag = ach.tag
+left join scaffoldTraking as sc on sc.tag = ach.tag
+inner join task as tk on tk.idAux = sc.idAux
+inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO
+inner join projectOrder as po on po.idPO = wo.idPO and po.jobNo = wo.jobNo
+inner join job as jb on jb.jobNo = po.jobNo
 where sc.buildDate between @StartDate and @EndDate and ach.idModAux is NULL and idDismantle is NULL
 ) as T1"
 			Return _ScaBTools
@@ -848,27 +856,34 @@ BEGIN
 	drop table PBI.[ScaDTools]
 END
 
-select * , T1.[MTMBQY]/T1.[DHWRKHRS] as 'Tools D Pieces'
-INTO PBI.[ScaDTools]
+select T1.[Year],T1.[MONTHD],T1.[DHWRKHRS],T1.[DHMTRLHRS],T1.[DHTRVL],T1.[DHWTRHRS],T1.[DHALRMHRS],T1.[DHSFTYHRS],T1.[DHSTDBYHRS],T1.[OTHERHRS],
+T1.[DHRS],T1.[Task],T1.[MTMBQY],T1.[MONTH], T1.[MTMBQY]/T1.[DHWRKHRS] as 'Tools D Pieces',T1.[ClientID]
+INTO PBI.[ScaDTools]	
 from (
 select  
 DISTINCT
 YEAR(ds.dismantleDate) as 'Year',
 DATENAME(MONTH,ds.dismantleDate) as 'MONTHD',
-SUM(ach.[build]) OVER (PARTITION BY YEAR(ds.dismantleDate),MONTH(ds.dismantleDate)) as 'DHWRKHRS',
-SUM(ach.[material]) OVER (PARTITION BY YEAR(ds.dismantleDate),MONTH(ds.dismantleDate)) as 'DHMTRLHRS',
-SUM(ach.[travel]) OVER (PARTITION BY YEAR(ds.dismantleDate),MONTH(ds.dismantleDate)) as 'DHTRVL',
-SUM(ach.[weather]) OVER (PARTITION BY YEAR(ds.dismantleDate),MONTH(ds.dismantleDate)) as 'DHWTRHRS',
-SUM(ach.[alarm]) OVER (PARTITION BY YEAR(ds.dismantleDate),MONTH(ds.dismantleDate)) as 'DHALRMHRS',
-SUM(ach.[safety]) OVER (PARTITION BY YEAR(ds.dismantleDate),MONTH(ds.dismantleDate)) as 'DHSFTYHRS',
-SUM(ach.[stdBy]) OVER (PARTITION BY YEAR(ds.dismantleDate),MONTH(ds.dismantleDate)) as 'DHSTDBYHRS',
-SUM(ach.[other]) OVER (PARTITION BY YEAR(ds.dismantleDate),MONTH(ds.dismantleDate)) as 'OTHERHRS',
-SUM(ach.[build]+ach.[material]+ach.[travel]+ach.[weather]+ach.[alarm]+ach.[safety]+ach.[stdBy]+ach.[other]) OVER (PARTITION BY YEAR(ds.dismantleDate),MONTH(ds.dismantleDate)) as 'DHRS',
+SUM(ach.[build]) OVER (PARTITION BY YEAR(ds.dismantleDate),MONTH(ds.dismantleDate),jb.jobNo) as 'DHWRKHRS',
+SUM(ach.[material]) OVER (PARTITION BY YEAR(ds.dismantleDate),MONTH(ds.dismantleDate),jb.jobNo) as 'DHMTRLHRS',
+SUM(ach.[travel]) OVER (PARTITION BY YEAR(ds.dismantleDate),MONTH(ds.dismantleDate),jb.jobNo) as 'DHTRVL',
+SUM(ach.[weather]) OVER (PARTITION BY YEAR(ds.dismantleDate),MONTH(ds.dismantleDate),jb.jobNo) as 'DHWTRHRS',
+SUM(ach.[alarm]) OVER (PARTITION BY YEAR(ds.dismantleDate),MONTH(ds.dismantleDate),jb.jobNo) as 'DHALRMHRS',
+SUM(ach.[safety]) OVER (PARTITION BY YEAR(ds.dismantleDate),MONTH(ds.dismantleDate),jb.jobNo) as 'DHSFTYHRS',
+SUM(ach.[stdBy]) OVER (PARTITION BY YEAR(ds.dismantleDate),MONTH(ds.dismantleDate),jb.jobNo) as 'DHSTDBYHRS',
+SUM(ach.[other]) OVER (PARTITION BY YEAR(ds.dismantleDate),MONTH(ds.dismantleDate),jb.jobNo) as 'OTHERHRS',
+SUM(ach.[build]+ach.[material]+ach.[travel]+ach.[weather]+ach.[alarm]+ach.[safety]+ach.[stdBy]+ach.[other]) OVER (PARTITION BY YEAR(ds.dismantleDate),MONTH(ds.dismantleDate),jb.jobNo) as 'DHRS',
 'Dism' as 'Task',
-SUM(ISNULL((select SUM(quantity) from productDismantle as pd where pd.tag = ds.tag and pd.idDismantle = ds.idDismantle),0)) OVER (PARTITION BY YEAR(ds.dismantleDate),MONTH(ds.dismantleDate)) as 'MTMBQY',
+SUM(ISNULL((select SUM(quantity) from productDismantle as pd where pd.tag = ds.tag and pd.idDismantle = ds.idDismantle),0)) OVER (PARTITION BY YEAR(ds.dismantleDate),MONTH(ds.dismantleDate),jb.jobNo) as 'MTMBQY',
 MONTH(ds.dismantleDate) as 'MONTH'
+,jb.jobNo as 'ClientID'
 from activityHours as ach 
 inner join dismantle as ds on ds.tag = ach.tag and ds.idDismantle = ach.idDismantle
+left join scaffoldTraking as sc on sc.tag = ds.tag
+inner join task as tk on tk.idAux = sc.idAux
+inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO
+inner join projectOrder as po on po.idPO = wo.idPO and po.jobNo = wo.jobNo
+inner join job as jb on jb.jobNo = po.jobNo
 where ds.dismantleDate between @StartDate and @EndDate and ach.idModAux is NULL and ach.idDismantle is not NULL
 ) as T1"
 			Return _ScaDTools
@@ -885,26 +900,34 @@ BEGIN
 	drop table PBI.[ScaMTools]
 END
 
-select * , T1.[MTQTY]/T1.[MHWRKHRS] as 'Tools M Pieces'
+select T1.[Year],T1.[MONTHM],T1.[MHWRKHRS],T1.[MHMTRLHRS],T1.[MHTRVL],T1.[MHWTRHRS],T1.[MHALRMHRS],
+T1.[MHSFTYHRS],T1.[MHSTDBYHRS],T1.[OTHERHRS],T1.[MHRS],T1.[Task],T1.[MTQTY],T1.[MONTH],
+T1.[MTQTY]/T1.[MHWRKHRS] as 'Tools M Pieces',T1.[ClientID]
 INTO PBI.[ScaMTools]
 from (
 select  
 DISTINCT
 YEAR(md.modificationDate) as 'Year',MONTH(md.modificationDate) as 'MONTHM',
-SUM(ach.[build]) OVER (PARTITION BY YEAR(md.modificationDate),MONTH(md.modificationDate)) as 'MHWRKHRS',
-SUM(ach.[material]) OVER (PARTITION BY YEAR(md.modificationDate),MONTH(md.modificationDate)) as 'MHMTRLHRS',
-SUM(ach.[travel]) OVER (PARTITION BY YEAR(md.modificationDate),MONTH(md.modificationDate)) as 'MHTRVL',
-SUM(ach.[weather]) OVER (PARTITION BY YEAR(md.modificationDate),MONTH(md.modificationDate)) as 'MHWTRHRS',
-SUM(ach.[alarm]) OVER (PARTITION BY YEAR(md.modificationDate),MONTH(md.modificationDate)) as 'MHALRMHRS',
-SUM(ach.[safety]) OVER (PARTITION BY YEAR(md.modificationDate),MONTH(md.modificationDate)) as 'MHSFTYHRS',
-SUM(ach.[stdBy]) OVER (PARTITION BY YEAR(md.modificationDate),MONTH(md.modificationDate)) as 'MHSTDBYHRS',
-SUM(ach.[other]) OVER (PARTITION BY YEAR(md.modificationDate),MONTH(md.modificationDate)) as 'OTHERHRS',
-SUM(ach.[build]+ach.[material]+ach.[travel]+ach.[weather]+ach.[alarm]+ach.[safety]+ach.[stdBy]+ach.[other]) OVER (PARTITION BY YEAR(md.modificationDate),MONTH(md.modificationDate)) as 'MHRS',
+SUM(ach.[build]) OVER (PARTITION BY YEAR(md.modificationDate),MONTH(md.modificationDate),jb.jobNo) as 'MHWRKHRS',
+SUM(ach.[material]) OVER (PARTITION BY YEAR(md.modificationDate),MONTH(md.modificationDate),jb.jobNo) as 'MHMTRLHRS',
+SUM(ach.[travel]) OVER (PARTITION BY YEAR(md.modificationDate),MONTH(md.modificationDate),jb.jobNo) as 'MHTRVL',
+SUM(ach.[weather]) OVER (PARTITION BY YEAR(md.modificationDate),MONTH(md.modificationDate),jb.jobNo) as 'MHWTRHRS',
+SUM(ach.[alarm]) OVER (PARTITION BY YEAR(md.modificationDate),MONTH(md.modificationDate),jb.jobNo) as 'MHALRMHRS',
+SUM(ach.[safety]) OVER (PARTITION BY YEAR(md.modificationDate),MONTH(md.modificationDate),jb.jobNo) as 'MHSFTYHRS',
+SUM(ach.[stdBy]) OVER (PARTITION BY YEAR(md.modificationDate),MONTH(md.modificationDate),jb.jobNo) as 'MHSTDBYHRS',
+SUM(ach.[other]) OVER (PARTITION BY YEAR(md.modificationDate),MONTH(md.modificationDate),jb.jobNo) as 'OTHERHRS',
+SUM(ach.[build]+ach.[material]+ach.[travel]+ach.[weather]+ach.[alarm]+ach.[safety]+ach.[stdBy]+ach.[other]) OVER (PARTITION BY YEAR(md.modificationDate),MONTH(md.modificationDate),jb.jobNo) as 'MHRS',
 'Mod' as 'Task',
-SUM(ISNULL((select SUM(quantity) from productDismantle as pd where pd.tag = md.tag and pd.idDismantle = md.idModAux),0)) OVER (PARTITION BY YEAR(md.modificationDate),MONTH(md.modificationDate)) as 'MTQTY',
-DATENAME(MONTH,md.modificationDate) as 'MONTH'
+SUM(ISNULL((select SUM(quantity) from productDismantle as pd where pd.tag = md.tag and pd.idDismantle = md.idModAux),0)) OVER (PARTITION BY YEAR(md.modificationDate),MONTH(md.modificationDate),jb.jobNo) as 'MTQTY',
+DATENAME(MONTH,md.modificationDate) as 'MONTH',
+jb.jobNo as 'ClientID'
 from activityHours as ach 
 inner join modification as md on md.tag = ach.tag and md.idModAux = ach.idModAux
+inner join scaffoldTraking as sc on sc.tag = md.tag 
+inner join task as tk on tk.idAux = sc.idAux
+inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO
+inner join projectOrder as po on po.idPO = wo.idPO and po.jobNo = wo.jobNo
+inner join job as jb on jb.jobNo = po.jobNo
 where md.modificationDate between @StartDate and @EndDate and ach.idModAux is not NULL 
 ) as T1"
 			Return _ScaMTools

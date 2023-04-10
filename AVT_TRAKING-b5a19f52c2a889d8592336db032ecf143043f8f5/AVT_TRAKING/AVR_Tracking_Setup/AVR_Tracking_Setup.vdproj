@@ -93,6 +93,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_35DB7968940B41CB8A678B65F3D49655"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_377A66C978067BE5A016C5D71401F919"
         "OwnerKey" = "8:_1F4840585BFEFF08AEE7328337B2FE8D"
         "MsmSig" = "8:_UNDEFINED"
@@ -195,12 +201,6 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_6A27C4F9CF4441CDB3D44CF4C4711301"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_71DF8BF1C946443BAAF617C2D6FD8C9C"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -227,6 +227,24 @@
         {
         "MsmKey" = "8:_7407AB1E8B7241D67FAAD611AD22F06C"
         "OwnerKey" = "8:_5C8A6C9C5E39B94C3F7B3AF10FF56774"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_7407AB1E8B7241D67FAAD611AD22F06C"
+        "OwnerKey" = "8:_DA66E626999C0F7CB26219930CB2CD29"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_7407AB1E8B7241D67FAAD611AD22F06C"
+        "OwnerKey" = "8:_BE3E7145ED9379041C02E5255B9B797F"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_7407AB1E8B7241D67FAAD611AD22F06C"
+        "OwnerKey" = "8:_95F424A80061BF8A74E329D5E7030270"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -562,6 +580,12 @@
         "Entry"
         {
         "MsmKey" = "8:_EFC435EF2210A6B37788DBDAE2680282"
+        "OwnerKey" = "8:_BE3E7145ED9379041C02E5255B9B797F"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_EFC435EF2210A6B37788DBDAE2680282"
         "OwnerKey" = "8:_FFFA802D624242008098A3C025EE90E9"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -683,12 +707,6 @@
         {
         "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_73E5E9C4C37BEA5C162C596543A8010B"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_BE3E7145ED9379041C02E5255B9B797F"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -1095,6 +1113,26 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_35DB7968940B41CB8A678B65F3D49655"
+            {
+            "SourcePath" = "8:..\\..\\..\\..\\..\\..\\Desktop\\TableToPBI.xlsx"
+            "TargetName" = "8:TableToPBI.xlsx"
+            "Tag" = "8:"
+            "Folder" = "8:_5DC6EB9471034BC1BB287FB7F27996C3"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_377A66C978067BE5A016C5D71401F919"
             {
             "AssemblyRegister" = "3:1"
@@ -1350,26 +1388,6 @@
             "Register" = "3:1"
             "Exclude" = "11:FALSE"
             "IsDependency" = "11:TRUE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_6A27C4F9CF4441CDB3D44CF4C4711301"
-            {
-            "SourcePath" = "8:..\\AVT_TRAKING\\Documents\\ExcelDoc\\TablesToPBI.xlsx"
-            "TargetName" = "8:TablesToPBI.xlsx"
-            "Tag" = "8:"
-            "Folder" = "8:_5DC6EB9471034BC1BB287FB7F27996C3"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_71DF8BF1C946443BAAF617C2D6FD8C9C"
@@ -2233,7 +2251,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:AVR_Tracking_Setup"
         "ProductCode" = "8:{BDFC423B-23B3-4915-9AA2-46E6B9F5A4B5}"
-        "PackageCode" = "8:{F01B97C9-1FC2-4D64-BBAD-C8DA8C045BF1}"
+        "PackageCode" = "8:{FFDD04FE-EFF0-4A79-9D96-433659485B2F}"
         "UpgradeCode" = "8:{424F8640-F7CD-4869-B073-2D7504EDE436}"
         "AspNetVersion" = "8:2.0.50727.0"
         "RestartWWWService" = "11:FALSE"
