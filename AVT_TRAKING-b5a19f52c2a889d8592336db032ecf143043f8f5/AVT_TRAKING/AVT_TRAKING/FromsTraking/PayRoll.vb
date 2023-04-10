@@ -195,22 +195,22 @@ Public Class PayRoll
     Private Sub btnReFresh_Click(sender As Object, e As EventArgs) Handles btnReFresh.Click
         Try
             If chbALLClient.Checked Then
-                mtdHPW.selectPayroll(tblTime, dtpStartTime.Value)
-                mtdHPW.selectNONBILLABLE(tblNonBillable, dtpStartTime.Value)
+                mtdHPW.selectPayroll(tblTime, dtpStartTime.Value, dtpFinalTime.Value)
+                mtdHPW.selectNONBILLABLE(tblNonBillable, dtpStartTime.Value, dtpFinalTime.Value)
             Else
                 If cmbClients.SelectedIndex > -1 Then
                     If chbAllJob.Checked Then
                         Dim array() As String = cmbClients.SelectedItem.ToString.Split(" ")
                         Dim clNum As String = array(0)
-                        mtdHPW.selectPayroll(tblTime, dtpStartTime.Value, If(chbALLClient.Checked, "", clNum))
-                        mtdHPW.selectNONBILLABLE(tblNonBillable, dtpStartTime.Value, If(chbALLClient.Checked, "", clNum))
+                        mtdHPW.selectPayroll(tblTime, dtpStartTime.Value, dtpFinalTime.Value, If(chbALLClient.Checked, "", clNum))
+                        mtdHPW.selectNONBILLABLE(tblNonBillable, dtpStartTime.Value, dtpFinalTime.Value, If(chbALLClient.Checked, "", clNum))
 
                     Else
                         If cmbJobs.SelectedIndex > -1 Then
                             Dim array() As String = cmbClients.SelectedItem.ToString.Split(" ")
                             Dim clNum As String = array(0)
-                            mtdHPW.selectPayroll(tblTime, dtpStartTime.Value, If(chbALLClient.Checked, "", clNum), cmbJobs.Items(cmbJobs.SelectedIndex))
-                            mtdHPW.selectNONBILLABLE(tblNonBillable, dtpStartTime.Value, If(chbALLClient.Checked, "", clNum), cmbJobs.Items(cmbJobs.SelectedIndex))
+                            mtdHPW.selectPayroll(tblTime, dtpStartTime.Value, dtpFinalTime.Value, If(chbALLClient.Checked, "", clNum), cmbJobs.Items(cmbJobs.SelectedIndex))
+                            mtdHPW.selectNONBILLABLE(tblNonBillable, dtpStartTime.Value, dtpFinalTime.Value, If(chbALLClient.Checked, "", clNum), cmbJobs.Items(cmbJobs.SelectedIndex))
                         Else
                             MessageBox.Show("Please select a JobNo or check All Jobs", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information)
                         End If

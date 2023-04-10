@@ -694,7 +694,7 @@ end", conn)
         End Try
     End Function
 
-    Public Function selectPayroll(ByVal tbl As DataGridView, ByVal startDate As Date, Optional clientNum As String = "", Optional jobNo As String = "") As Boolean
+    Public Function selectPayroll(ByVal tbl As DataGridView, ByVal startDate As Date, ByVal finalDate As Date, Optional clientNum As String = "", Optional jobNo As String = "") As Boolean
         Try
             conectar()
             Dim cmd As New SqlCommand("select distinct 
@@ -717,7 +717,7 @@ inner join projectOrder as po on po.idPO = wo.idPO and wo.jobNo = po.jobNo
 inner join job as jb on jb.jobNo = po.jobNo
 inner join workCode as wc on wc.idWorkCode = hw.idWorkCode and wc.jobNo = jb.jobNo
 inner join clients as cl on cl.idClient = jb.idClient
-where (hw.dateWorked between '" + validaFechaParaSQl(startDate) + "' and DATEADD(day,6,'" + validaFechaParaSQl(startDate) + "') and not wc.name like '%6.4%') " + If(clientNum = "", "", " and cl.numberClient = " + clientNum + If(jobNo = "", "", " and jb.jobNo = " + jobNo)) + "
+where (hw.dateWorked between '" + validaFechaParaSQl(startDate) + "' and '" + validaFechaParaSQl(finalDate) + "') and not wc.name like '%6.4%' " + If(clientNum = "", "", " and cl.numberClient = " + clientNum + If(jobNo = "", "", " and jb.jobNo = " + jobNo)) + "
 order by em.numberEmploye", conn)
             If tbl.Rows IsNot Nothing Then
                 tbl.Rows.Clear()
@@ -736,7 +736,7 @@ order by em.numberEmploye", conn)
         End Try
     End Function
 
-    Public Function selectNONBILLABLE(ByVal tbl As DataGridView, ByVal startDate As Date, Optional clientNum As String = "", Optional jobNo As String = "") As Boolean
+    Public Function selectNONBILLABLE(ByVal tbl As DataGridView, ByVal startDate As Date, ByVal finalDate As Date, Optional clientNum As String = "", Optional jobNo As String = "") As Boolean
         Try
             conectar()
             Dim cmd As New SqlCommand("select 
@@ -757,7 +757,7 @@ inner join projectOrder as po on po.idPO = wo.idPO and wo.jobNo = po.jobNo
 inner join job as jb on jb.jobNo = po.jobNo
 inner join workCode as wc on wc.idWorkCode = hw.idWorkCode and wc.jobNo = jb.jobNo
 inner join clients as cl on cl.idClient = jb.idClient
-where (hw.dateWorked between '" + validaFechaParaSQl(startDate) + "' and DATEADD(day,6,'" + validaFechaParaSQl(startDate) + "')) and wc.name like '%6.4%' " + If(clientNum = "", "", " and cl.numberClient = " + clientNum + If(jobNo = "", "", " and jb.jobNo = " + jobNo + "")) + "
+where (hw.dateWorked between '" + validaFechaParaSQl(startDate) + "' and '" + validaFechaParaSQl(finalDate) + "') and wc.name like '%6.4%' " + If(clientNum = "", "", " and cl.numberClient = " + clientNum + If(jobNo = "", "", " and jb.jobNo = " + jobNo + "")) + "
 order by em.numberEmploye", conn)
             If tbl.Rows IsNot Nothing Then
                 tbl.Rows.Clear()

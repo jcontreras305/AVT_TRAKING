@@ -204,18 +204,34 @@ go
 --##############################################################################################
 --ALTER proc [dbo].[sp_Active_Employee_Average]
 CREATE proc [dbo].[sp_Active_Employee_Average]
+@StartDate as date,
+@EndDate as date,
+@ClientName as int,
+@all as bit
 as
 begin
-	select em.lastName as 'Last Name' , 
+	select
+		distinct
+		em.lastName as 'Last Name' , 
 		CONCAT(em.firstName,' ',substring( em.middleName,1,1)) as 'First Name',
 		CONCAT('$',(select pr1.payRate1 from payRate as pr1 where idEmployee = em.idEmployee and datePayRate = (select MAX(datePayRate) from payRate as pr2 where idEmployee = em.idEmployee))) AS 'Pay Rate' , 
 		em.socialNumber as 'SS Number',em.numberEmploye as 'Brock Emp.',
 		IIF(em.estatus = 'E','Yes','NO') as 'Active',
-		em.SAPNumber as 'Citigo Emp.'
+		em.SAPNumber as 'Citigo Emp.',
+		jb.jobNo as 'JobNo',
+		cl.companyName
 		from employees as em 
-		where estatus = 'E'	
-end
-go
+		inner join hoursWorked as hw on hw.idEmployee = em.idEmployee
+		inner join task as tk on tk.idAux = hw.idAux
+		inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO
+		inner join projectOrder as po on po.idPO = wo.idPO and po.jobNo = wo.jobNo
+		inner join job as jb on jb.jobNo = po.jobNo 
+		inner join clients as cl on cl.idClient = jb.idClient
+		where em.estatus = 'E'
+		 and hw.dateWorked between @StartDate and @EndDate 
+			and convert(nvarchar,	 cl.numberClient) like IIF(@all = 1 ,'%', convert(nvarchar, @ClientName))	
+end 
+GO
 --##############################################################################################
 --################## SP ACTUALIZA MATERIAL #####################################################
 --##############################################################################################

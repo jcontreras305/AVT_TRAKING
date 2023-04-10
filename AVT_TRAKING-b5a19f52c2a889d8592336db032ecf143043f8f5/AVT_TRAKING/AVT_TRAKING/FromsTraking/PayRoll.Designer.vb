@@ -94,6 +94,8 @@ Partial Class PayRoll
         Me.btnDeleteWeek = New System.Windows.Forms.Button()
         Me.btnUpdateWeek = New System.Windows.Forms.Button()
         Me.btnAddWeek = New System.Windows.Forms.Button()
+        Me.Label8 = New System.Windows.Forms.Label()
+        Me.dtpFinalTime = New System.Windows.Forms.DateTimePicker()
         Me.TableLayoutPanel1.SuspendLayout()
         Me.Panel1.SuspendLayout()
         Me.TitleBar.SuspendLayout()
@@ -261,6 +263,8 @@ Partial Class PayRoll
         'Panel3
         '
         Me.Panel3.BackColor = System.Drawing.Color.FromArgb(CType(CType(83, Byte), Integer), CType(CType(93, Byte), Integer), CType(CType(102, Byte), Integer))
+        Me.Panel3.Controls.Add(Me.Label8)
+        Me.Panel3.Controls.Add(Me.dtpFinalTime)
         Me.Panel3.Controls.Add(Me.chbAllJob)
         Me.Panel3.Controls.Add(Me.Label6)
         Me.Panel3.Controls.Add(Me.Label5)
@@ -811,6 +815,26 @@ Partial Class PayRoll
         Me.btnAddWeek.Text = "Add"
         Me.btnAddWeek.UseVisualStyleBackColor = True
         '
+        'Label8
+        '
+        Me.Label8.AutoSize = True
+        Me.Label8.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label8.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.Label8.Location = New System.Drawing.Point(7, 40)
+        Me.Label8.Name = "Label8"
+        Me.Label8.Size = New System.Drawing.Size(64, 13)
+        Me.Label8.TabIndex = 15
+        Me.Label8.Text = "Final Date"
+        '
+        'dtpFinalTime
+        '
+        Me.dtpFinalTime.CustomFormat = "MM/dd/yyyy"
+        Me.dtpFinalTime.Format = System.Windows.Forms.DateTimePickerFormat.Custom
+        Me.dtpFinalTime.Location = New System.Drawing.Point(76, 36)
+        Me.dtpFinalTime.Name = "dtpFinalTime"
+        Me.dtpFinalTime.Size = New System.Drawing.Size(100, 20)
+        Me.dtpFinalTime.TabIndex = 14
+        '
         'PayRoll
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -926,4 +950,6 @@ Partial Class PayRoll
     Friend WithEvents cmbJobs As ComboBox
     Friend WithEvents cmbClients As ComboBox
     Friend WithEvents chbAllJob As CheckBox
+    Friend WithEvents Label8 As Label
+    Friend WithEvents dtpFinalTime As DateTimePicker
 End Class
