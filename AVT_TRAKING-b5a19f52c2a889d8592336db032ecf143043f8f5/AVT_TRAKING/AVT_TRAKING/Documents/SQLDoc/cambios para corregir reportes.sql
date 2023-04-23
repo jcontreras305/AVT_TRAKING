@@ -1319,50 +1319,89 @@
 --end
 --go
 
-----| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-----| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-----V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V
 ----###############################################################################################
 ----########### CAMBIO PARA LOS REPORTES DE ESTIMACION ############################################
 ----###############################################################################################
 
-ALTER proc [dbo].[sp_SelectScaffoldBudgetEstimate]
-	@projectId as varchar(30)
+--ALTER proc [dbo].[sp_SelectScaffoldBudgetEstimate]
+--	@projectId as varchar(30)
+--as
+--begin
+--select 
+--cl.numberClient, cl.contactName, cl.companyName, cl.plant, ha.avenue, ha.city, ha.providence,
+--po.projectId as 'Project' ,po.[description] as 'Description',estCScf.tag , dr.idDrawingNum , scf.location as 'Location', CONCAT(scf.width,'x',scf.[length],'x',scf.heigth) as 'Dimention',scf.build as 'Elevation',
+--scf.[days] as 'Days Active',scf.idSCFUR as 'Scaf.Type', FORMAT ((((scf.width)*(scf.[length])*(scf.heigth))/35.31),'###.00') as 'M3',estCScf.M2 as 'M2', scf.idLaborRate as 'Work Week' ,
+----MAN HRS SCF
+----estCScf.SBHR as 'Man Hrs B' ,estCScf.SHRD as 'Man Hrs D',
+--estCScf.SHR as 'Man Hrs B' ,estCScf.SDHR as 'Man Hrs D',
+----MAN HRS DECKS
+--ISNULL(ROUND((select top 1 estB.SBHR from EstCostBuild as estB where estB.idDrawingNum = estCScf.idDrawingNum and estB.projectId = estCScf.projectId and estB.tag = estCScf.tag),0),0) as 'Man Hrs Deck B',
+--ISNULL(ROUND((select top 1 estD.SHRD from EstCostDism as estD where estD.idDrawingNum = estCScf.idDrawingNum and estD.projectId = estCScf.projectId and estD.tag = estCScf.tag),0),0) as 'Man Hrs Deck D',
+--scf.decks as 'Decks',
+----DESCKS LABOR
+--ISNULL((select estB.SCOSTLB from EstCostBuild as estB where estB.idDrawingNum = estCScf.idDrawingNum and estB.projectId = estCScf.projectId and estB.tag = estCScf.tag),0) as 'Decks Labor B',
+--ISNULL((select estD.DSCOSTL from EstCostDism as estD where estD.idDrawingNum = estCScf.idDrawingNum and estD.projectId = estCScf.projectId and estD.tag = estCScf.tag),0) as 'Decks Labor D',
+----SCAF LABOR 
+--ISNULL((select estB.SCOSTL from EstCostScf as estB where estB.idDrawingNum = estCScf.idDrawingNum and estB.projectId = estCScf.projectId and estB.tag = estCScf.tag),0) as 'SCF Labor B',
+--ISNULL((select estB.SCOSTLD from EstCostScf as estB where estB.idDrawingNum = estCScf.idDrawingNum and estB.projectId = estCScf.projectId and estB.tag = estCScf.tag),0) as 'SCF Labor D',
+----MATERIAL
+--ISNULL((select estB.SCOSTM from EstCostScf as estB where estB.idDrawingNum = estCScf.idDrawingNum and estB.projectId = estCScf.projectId and estB.tag = estCScf.tag),0) as 'SCF Material B',
+--ISNULL((select estD.SCOSTMD from EstCostScf as estD where estD.idDrawingNum = estCScf.idDrawingNum and estD.projectId = estCScf.projectId and estD.tag = estCScf.tag),0) as 'SCF Material D',
+--ISNULL((select estB.SCOSTMB from EstCostBuild as estB where estB.idDrawingNum = estCScf.idDrawingNum and estB.projectId = estCScf.projectId and estB.tag = estCScf.tag),0) as 'DECK Material B',
+--ISNULL((select estD.DSCOSTM from EstCostDism as estD where estD.idDrawingNum = estCScf.idDrawingNum and estD.projectId = estCScf.projectId and estD.tag = estCScf.tag),0) as 'DECK Material D',
+----EQUIPMENT
+--ISNULL((select estB.SCOSTE from EstCostScf as estB where estB.idDrawingNum = estCScf.idDrawingNum and estB.projectId = estCScf.projectId and estB.tag = estCScf.tag),0) as 'SCF Equipment B',
+--ISNULL((select estD.SCOSTED from EstCostScf as estD where estD.idDrawingNum = estCScf.idDrawingNum and estD.projectId = estCScf.projectId and estD.tag = estCScf.tag),0) as 'SCF Equipment D',
+--ISNULL((select estB.SCOSTEB from EstCostBuild as estB where estB.idDrawingNum = estCScf.idDrawingNum and estB.projectId = estCScf.projectId and estB.tag = estCScf.tag),0) as 'DECK Equipment B',
+--ISNULL((select estD.SCOSTEDD from EstCostDism as estD where estD.idDrawingNum = estCScf.idDrawingNum and estD.projectId = estCScf.projectId and estD.tag = estCScf.tag),0) as 'DECK Equipment D'
+
+--from EstCostScf as estCScf
+--inner join scaffoldEst as scf on scf.idDrawingNum = estCScf.idDrawingNum and scf.tag = estCScf.tag
+--inner join drawing as dr on dr.idDrawingNum = estCScf.idDrawingNum
+--inner join projectClientEst as po on po.projectId = estCScf.projectId
+--inner join clientsEst as cl on cl.idClientEst = po.idClientEst
+--inner join HomeAddress as ha on ha.idHomeAdress = cl.idHomeAdress
+--where estCScf.projectId  = @projectId
+--end
+
+----| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
+----| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
+----V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V
+----###############################################################################################
+----########### CAMBIO PARA EL REPORTE DE YEAR FINAL HOURS ########################################
+----###############################################################################################
+
+ALTER proc [dbo].[sp_Year_Final_Hours]
+@year nVarchar(4),
+@numberClient int,
+@jobNo bigint
 as
 begin
-select 
-cl.numberClient, cl.contactName, cl.companyName, cl.plant, ha.avenue, ha.city, ha.providence,
-po.projectId as 'Project' ,po.[description] as 'Description',estCScf.tag , dr.idDrawingNum , scf.location as 'Location', CONCAT(scf.width,'x',scf.[length],'x',scf.heigth) as 'Dimention',scf.build as 'Elevation',
-scf.[days] as 'Days Active',scf.idSCFUR as 'Scaf.Type', FORMAT ((((scf.width)*(scf.[length])*(scf.heigth))/35.31),'###.00') as 'M3',estCScf.M2 as 'M2', scf.idLaborRate as 'Work Week' ,
---MAN HRS SCF
---estCScf.SBHR as 'Man Hrs B' ,estCScf.SHRD as 'Man Hrs D',
-estCScf.SHR as 'Man Hrs B' ,estCScf.SDHR as 'Man Hrs D',
---MAN HRS DECKS
-ISNULL(ROUND((select top 1 estB.SBHR from EstCostBuild as estB where estB.idDrawingNum = estCScf.idDrawingNum and estB.projectId = estCScf.projectId and estB.tag = estCScf.tag),0),0) as 'Man Hrs Deck B',
-ISNULL(ROUND((select top 1 estD.SHRD from EstCostDism as estD where estD.idDrawingNum = estCScf.idDrawingNum and estD.projectId = estCScf.projectId and estD.tag = estCScf.tag),0),0) as 'Man Hrs Deck D',
-scf.decks as 'Decks',
---DESCKS LABOR
-ISNULL((select estB.SCOSTLB from EstCostBuild as estB where estB.idDrawingNum = estCScf.idDrawingNum and estB.projectId = estCScf.projectId and estB.tag = estCScf.tag),0) as 'Decks Labor B',
-ISNULL((select estD.DSCOSTL from EstCostDism as estD where estD.idDrawingNum = estCScf.idDrawingNum and estD.projectId = estCScf.projectId and estD.tag = estCScf.tag),0) as 'Decks Labor D',
---SCAF LABOR 
-ISNULL((select estB.SCOSTL from EstCostScf as estB where estB.idDrawingNum = estCScf.idDrawingNum and estB.projectId = estCScf.projectId and estB.tag = estCScf.tag),0) as 'SCF Labor B',
-ISNULL((select estB.SCOSTLD from EstCostScf as estB where estB.idDrawingNum = estCScf.idDrawingNum and estB.projectId = estCScf.projectId and estB.tag = estCScf.tag),0) as 'SCF Labor D',
---MATERIAL
-ISNULL((select estB.SCOSTM from EstCostScf as estB where estB.idDrawingNum = estCScf.idDrawingNum and estB.projectId = estCScf.projectId and estB.tag = estCScf.tag),0) as 'SCF Material B',
-ISNULL((select estD.SCOSTMD from EstCostScf as estD where estD.idDrawingNum = estCScf.idDrawingNum and estD.projectId = estCScf.projectId and estD.tag = estCScf.tag),0) as 'SCF Material D',
-ISNULL((select estB.SCOSTMB from EstCostBuild as estB where estB.idDrawingNum = estCScf.idDrawingNum and estB.projectId = estCScf.projectId and estB.tag = estCScf.tag),0) as 'DECK Material B',
-ISNULL((select estD.DSCOSTM from EstCostDism as estD where estD.idDrawingNum = estCScf.idDrawingNum and estD.projectId = estCScf.projectId and estD.tag = estCScf.tag),0) as 'DECK Material D',
---EQUIPMENT
-ISNULL((select estB.SCOSTE from EstCostScf as estB where estB.idDrawingNum = estCScf.idDrawingNum and estB.projectId = estCScf.projectId and estB.tag = estCScf.tag),0) as 'SCF Equipment B',
-ISNULL((select estD.SCOSTED from EstCostScf as estD where estD.idDrawingNum = estCScf.idDrawingNum and estD.projectId = estCScf.projectId and estD.tag = estCScf.tag),0) as 'SCF Equipment D',
-ISNULL((select estB.SCOSTEB from EstCostBuild as estB where estB.idDrawingNum = estCScf.idDrawingNum and estB.projectId = estCScf.projectId and estB.tag = estCScf.tag),0) as 'DECK Equipment B',
-ISNULL((select estD.SCOSTEDD from EstCostDism as estD where estD.idDrawingNum = estCScf.idDrawingNum and estD.projectId = estCScf.projectId and estD.tag = estCScf.tag),0) as 'DECK Equipment D'
-
-from EstCostScf as estCScf
-inner join scaffoldEst as scf on scf.idDrawingNum = estCScf.idDrawingNum and scf.tag = estCScf.tag
-inner join drawing as dr on dr.idDrawingNum = estCScf.idDrawingNum
-inner join projectClientEst as po on po.projectId = estCScf.projectId
-inner join clientsEst as cl on cl.idClientEst = po.idClientEst
-inner join HomeAddress as ha on ha.idHomeAdress = cl.idHomeAdress
-where estCScf.projectId  = @projectId
+    set @year = isnull(@year, DATENAME(YEAR,GETDATE()))
+	
+	select *, T1.January+T1.February+T1.March+T1.April+T1.May+T1.June+T1.July+T1.August+T1.September+T1.October+T1.Nomvember+T1.Dicember as 'Total' 
+	from (
+	select 
+		cl.companyName,
+		jb.jobNo,
+		wc.name,
+		ISNULL( (select SUM(hw.hoursST)+SUM(hw.hoursOT)+SUM(hw.hours3) from hoursWorked as hw where hw.idWorkCode = wc.idWorkCode and hw.jobNo = wc.jobNo and DATEPART(YEAR ,hw.dateWorked) = @year and DATENAME(MONTH, hw.dateWorked) = 'January'),0) as 'January',
+		ISNULL( (select SUM(hw.hoursST)+SUM(hw.hoursOT)+SUM(hw.hours3) from hoursWorked as hw where hw.idWorkCode = wc.idWorkCode and hw.jobNo = wc.jobNo and DATEPART(YEAR ,hw.dateWorked) = @year and DATENAME(MONTH, hw.dateWorked) = 'February'),0) as 'February',
+		ISNULL( (select SUM(hw.hoursST)+SUM(hw.hoursOT)+SUM(hw.hours3) from hoursWorked as hw where hw.idWorkCode = wc.idWorkCode and hw.jobNo = wc.jobNo and DATEPART(YEAR ,hw.dateWorked) = @year and DATENAME(MONTH, hw.dateWorked) = 'March'),0) as 'March',
+		ISNULL( (select SUM(hw.hoursST)+SUM(hw.hoursOT)+SUM(hw.hours3) from hoursWorked as hw where hw.idWorkCode = wc.idWorkCode and hw.jobNo = wc.jobNo and DATEPART(YEAR ,hw.dateWorked) = @year and DATENAME(MONTH, hw.dateWorked) = 'April') ,0) as 'April',
+		ISNULL( (select SUM(hw.hoursST)+SUM(hw.hoursOT)+SUM(hw.hours3) from hoursWorked as hw where hw.idWorkCode = wc.idWorkCode and hw.jobNo = wc.jobNo and DATEPART(YEAR ,hw.dateWorked) = @year and DATENAME(MONTH, hw.dateWorked) = 'May') ,0) as 'May',
+		ISNULL( (select SUM(hw.hoursST)+SUM(hw.hoursOT)+SUM(hw.hours3) from hoursWorked as hw where hw.idWorkCode = wc.idWorkCode and hw.jobNo = wc.jobNo and DATEPART(YEAR ,hw.dateWorked) = @year and DATENAME(MONTH, hw.dateWorked) = 'June'),0) as 'June',
+		ISNULL( (select SUM(hw.hoursST)+SUM(hw.hoursOT)+SUM(hw.hours3) from hoursWorked as hw where hw.idWorkCode = wc.idWorkCode and hw.jobNo = wc.jobNo and DATEPART(YEAR ,hw.dateWorked) = @year and DATENAME(MONTH, hw.dateWorked) = 'July'),0) as 'July',
+		ISNULL( (select SUM(hw.hoursST)+SUM(hw.hoursOT)+SUM(hw.hours3) from hoursWorked as hw where hw.idWorkCode = wc.idWorkCode and hw.jobNo = wc.jobNo and DATEPART(YEAR ,hw.dateWorked) = @year and DATENAME(MONTH, hw.dateWorked) = 'August'),0) as 'August',
+		ISNULL( (select SUM(hw.hoursST)+SUM(hw.hoursOT)+SUM(hw.hours3) from hoursWorked as hw where hw.idWorkCode = wc.idWorkCode and hw.jobNo = wc.jobNo and DATEPART(YEAR ,hw.dateWorked) = @year and DATENAME(MONTH, hw.dateWorked) = 'September'),0) as 'September',
+		ISNULL( (select SUM(hw.hoursST)+SUM(hw.hoursOT)+SUM(hw.hours3) from hoursWorked as hw where hw.idWorkCode = wc.idWorkCode and hw.jobNo = wc.jobNo and DATEPART(YEAR ,hw.dateWorked) = @year and DATENAME(MONTH, hw.dateWorked) = 'October'),0) as 'October',
+		ISNULL( (select SUM(hw.hoursST)+SUM(hw.hoursOT)+SUM(hw.hours3) from hoursWorked as hw where hw.idWorkCode = wc.idWorkCode and hw.jobNo = wc.jobNo and DATEPART(YEAR ,hw.dateWorked) = @year and DATENAME(MONTH, hw.dateWorked) = 'November'),0) as 'Nomvember',
+		ISNULL( (select SUM(hw.hoursST)+SUM(hw.hoursOT)+SUM(hw.hours3) from hoursWorked as hw where hw.idWorkCode = wc.idWorkCode and hw.jobNo = wc.jobNo and DATEPART(YEAR ,hw.dateWorked) = @year and DATENAME(MONTH, hw.dateWorked) = 'Dicember'),0) as 'Dicember'
+	from workCode as wc 
+	inner join job as jb on jb.jobNo = wc.jobNo 
+	inner join clients as cl on cl.idClient = jb.idClient
+	where CONVERT(nvarchar, cl.numberClient) like iif(@numberClient = 0 ,'%%',convert( nvarchar,@numberClient)) and convert(nvarchar,jb.jobNo) like IIF( @jobNo = 0,'%%',convert(nvarchar,@jobNo))    
+	) as T1
+	where (T1.January+T1.February+T1.March+T1.April+T1.May+T1.June+T1.July+T1.August+T1.September+T1.October+T1.Nomvember+T1.Dicember) > 0
 end
+go

@@ -4415,7 +4415,9 @@ GO
 --##############################################################################################
 --ALTER proc [dbo].[sp_Year_Final_Hours]
 CREATE proc [dbo].[sp_Year_Final_Hours]
-@year nVarchar(4)
+@year nVarchar(4),
+@numberClient int,
+@jobNo bigint
 as
 begin
     set @year = isnull(@year, DATENAME(YEAR,GETDATE()))
@@ -4423,6 +4425,8 @@ begin
 	select *, T1.January+T1.February+T1.March+T1.April+T1.May+T1.June+T1.July+T1.August+T1.September+T1.October+T1.Nomvember+T1.Dicember as 'Total' 
 	from (
 	select 
+		cl.companyName,
+		jb.jobNo,
 		wc.name,
 		ISNULL( (select SUM(hw.hoursST)+SUM(hw.hoursOT)+SUM(hw.hours3) from hoursWorked as hw where hw.idWorkCode = wc.idWorkCode and hw.jobNo = wc.jobNo and DATEPART(YEAR ,hw.dateWorked) = @year and DATENAME(MONTH, hw.dateWorked) = 'January'),0) as 'January',
 		ISNULL( (select SUM(hw.hoursST)+SUM(hw.hoursOT)+SUM(hw.hours3) from hoursWorked as hw where hw.idWorkCode = wc.idWorkCode and hw.jobNo = wc.jobNo and DATEPART(YEAR ,hw.dateWorked) = @year and DATENAME(MONTH, hw.dateWorked) = 'February'),0) as 'February',
@@ -4436,7 +4440,11 @@ begin
 		ISNULL( (select SUM(hw.hoursST)+SUM(hw.hoursOT)+SUM(hw.hours3) from hoursWorked as hw where hw.idWorkCode = wc.idWorkCode and hw.jobNo = wc.jobNo and DATEPART(YEAR ,hw.dateWorked) = @year and DATENAME(MONTH, hw.dateWorked) = 'October'),0) as 'October',
 		ISNULL( (select SUM(hw.hoursST)+SUM(hw.hoursOT)+SUM(hw.hours3) from hoursWorked as hw where hw.idWorkCode = wc.idWorkCode and hw.jobNo = wc.jobNo and DATEPART(YEAR ,hw.dateWorked) = @year and DATENAME(MONTH, hw.dateWorked) = 'November'),0) as 'Nomvember',
 		ISNULL( (select SUM(hw.hoursST)+SUM(hw.hoursOT)+SUM(hw.hours3) from hoursWorked as hw where hw.idWorkCode = wc.idWorkCode and hw.jobNo = wc.jobNo and DATEPART(YEAR ,hw.dateWorked) = @year and DATENAME(MONTH, hw.dateWorked) = 'Dicember'),0) as 'Dicember'
-	from workCode as wc ) as T1
+	from workCode as wc 
+	inner join job as jb on jb.jobNo = wc.jobNo 
+	inner join clients as cl on cl.idClient = jb.idClient
+	where CONVERT(nvarchar, cl.numberClient) like iif(@numberClient = 0 ,'%%',convert( nvarchar,@numberClient)) and convert(nvarchar,jb.jobNo) like IIF( @jobNo = 0,'%%',convert(nvarchar,@jobNo))    
+	) as T1
 	where (T1.January+T1.February+T1.March+T1.April+T1.May+T1.June+T1.July+T1.August+T1.September+T1.October+T1.Nomvember+T1.Dicember) > 0
 end
 GO
