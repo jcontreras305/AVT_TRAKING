@@ -1371,37 +1371,78 @@
 ----########### CAMBIO PARA EL REPORTE DE YEAR FINAL HOURS ########################################
 ----###############################################################################################
 
-ALTER proc [dbo].[sp_Year_Final_Hours]
-@year nVarchar(4),
-@numberClient int,
-@jobNo bigint
+--ALTER proc [dbo].[sp_Year_Final_Hours]
+--@year nVarchar(4),
+--@numberClient int,
+--@jobNo bigint
+--as
+--begin
+--    set @year = isnull(@year, DATENAME(YEAR,GETDATE()))
+	
+--	select *, T1.January+T1.February+T1.March+T1.April+T1.May+T1.June+T1.July+T1.August+T1.September+T1.October+T1.Nomvember+T1.Dicember as 'Total' 
+--	from (
+--	select 
+--		cl.companyName,
+--		jb.jobNo,
+--		wc.name,
+--		ISNULL( (select SUM(hw.hoursST)+SUM(hw.hoursOT)+SUM(hw.hours3) from hoursWorked as hw where hw.idWorkCode = wc.idWorkCode and hw.jobNo = wc.jobNo and DATEPART(YEAR ,hw.dateWorked) = @year and DATENAME(MONTH, hw.dateWorked) = 'January'),0) as 'January',
+--		ISNULL( (select SUM(hw.hoursST)+SUM(hw.hoursOT)+SUM(hw.hours3) from hoursWorked as hw where hw.idWorkCode = wc.idWorkCode and hw.jobNo = wc.jobNo and DATEPART(YEAR ,hw.dateWorked) = @year and DATENAME(MONTH, hw.dateWorked) = 'February'),0) as 'February',
+--		ISNULL( (select SUM(hw.hoursST)+SUM(hw.hoursOT)+SUM(hw.hours3) from hoursWorked as hw where hw.idWorkCode = wc.idWorkCode and hw.jobNo = wc.jobNo and DATEPART(YEAR ,hw.dateWorked) = @year and DATENAME(MONTH, hw.dateWorked) = 'March'),0) as 'March',
+--		ISNULL( (select SUM(hw.hoursST)+SUM(hw.hoursOT)+SUM(hw.hours3) from hoursWorked as hw where hw.idWorkCode = wc.idWorkCode and hw.jobNo = wc.jobNo and DATEPART(YEAR ,hw.dateWorked) = @year and DATENAME(MONTH, hw.dateWorked) = 'April') ,0) as 'April',
+--		ISNULL( (select SUM(hw.hoursST)+SUM(hw.hoursOT)+SUM(hw.hours3) from hoursWorked as hw where hw.idWorkCode = wc.idWorkCode and hw.jobNo = wc.jobNo and DATEPART(YEAR ,hw.dateWorked) = @year and DATENAME(MONTH, hw.dateWorked) = 'May') ,0) as 'May',
+--		ISNULL( (select SUM(hw.hoursST)+SUM(hw.hoursOT)+SUM(hw.hours3) from hoursWorked as hw where hw.idWorkCode = wc.idWorkCode and hw.jobNo = wc.jobNo and DATEPART(YEAR ,hw.dateWorked) = @year and DATENAME(MONTH, hw.dateWorked) = 'June'),0) as 'June',
+--		ISNULL( (select SUM(hw.hoursST)+SUM(hw.hoursOT)+SUM(hw.hours3) from hoursWorked as hw where hw.idWorkCode = wc.idWorkCode and hw.jobNo = wc.jobNo and DATEPART(YEAR ,hw.dateWorked) = @year and DATENAME(MONTH, hw.dateWorked) = 'July'),0) as 'July',
+--		ISNULL( (select SUM(hw.hoursST)+SUM(hw.hoursOT)+SUM(hw.hours3) from hoursWorked as hw where hw.idWorkCode = wc.idWorkCode and hw.jobNo = wc.jobNo and DATEPART(YEAR ,hw.dateWorked) = @year and DATENAME(MONTH, hw.dateWorked) = 'August'),0) as 'August',
+--		ISNULL( (select SUM(hw.hoursST)+SUM(hw.hoursOT)+SUM(hw.hours3) from hoursWorked as hw where hw.idWorkCode = wc.idWorkCode and hw.jobNo = wc.jobNo and DATEPART(YEAR ,hw.dateWorked) = @year and DATENAME(MONTH, hw.dateWorked) = 'September'),0) as 'September',
+--		ISNULL( (select SUM(hw.hoursST)+SUM(hw.hoursOT)+SUM(hw.hours3) from hoursWorked as hw where hw.idWorkCode = wc.idWorkCode and hw.jobNo = wc.jobNo and DATEPART(YEAR ,hw.dateWorked) = @year and DATENAME(MONTH, hw.dateWorked) = 'October'),0) as 'October',
+--		ISNULL( (select SUM(hw.hoursST)+SUM(hw.hoursOT)+SUM(hw.hours3) from hoursWorked as hw where hw.idWorkCode = wc.idWorkCode and hw.jobNo = wc.jobNo and DATEPART(YEAR ,hw.dateWorked) = @year and DATENAME(MONTH, hw.dateWorked) = 'November'),0) as 'Nomvember',
+--		ISNULL( (select SUM(hw.hoursST)+SUM(hw.hoursOT)+SUM(hw.hours3) from hoursWorked as hw where hw.idWorkCode = wc.idWorkCode and hw.jobNo = wc.jobNo and DATEPART(YEAR ,hw.dateWorked) = @year and DATENAME(MONTH, hw.dateWorked) = 'Dicember'),0) as 'Dicember'
+--	from workCode as wc 
+--	inner join job as jb on jb.jobNo = wc.jobNo 
+--	inner join clients as cl on cl.idClient = jb.idClient
+--	where CONVERT(nvarchar, cl.numberClient) like iif(@numberClient = 0 ,'%%',convert( nvarchar,@numberClient)) and convert(nvarchar,jb.jobNo) like IIF( @jobNo = 0,'%%',convert(nvarchar,@jobNo))    
+--	) as T1
+--	where (T1.January+T1.February+T1.March+T1.April+T1.May+T1.June+T1.July+T1.August+T1.September+T1.October+T1.Nomvember+T1.Dicember) > 0
+--end
+--go
+
+----| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
+----| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
+----V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V
+----###############################################################################################
+----########### CAMBIO PARA EL REPORTE DE EMPLOYEE PER DIEM SHEET #################################
+----###############################################################################################
+alter proc [dbo].[Sp_Employee_Per_Diem_Sheets]
+@startdate as date, 
+@finaldate as date,
+@clientnum as int,
+@job as bigInt,
+@all as bit
 as
 begin
-    set @year = isnull(@year, DATENAME(YEAR,GETDATE()))
-	
-	select *, T1.January+T1.February+T1.March+T1.April+T1.May+T1.June+T1.July+T1.August+T1.September+T1.October+T1.Nomvember+T1.Dicember as 'Total' 
-	from (
-	select 
-		cl.companyName,
-		jb.jobNo,
-		wc.name,
-		ISNULL( (select SUM(hw.hoursST)+SUM(hw.hoursOT)+SUM(hw.hours3) from hoursWorked as hw where hw.idWorkCode = wc.idWorkCode and hw.jobNo = wc.jobNo and DATEPART(YEAR ,hw.dateWorked) = @year and DATENAME(MONTH, hw.dateWorked) = 'January'),0) as 'January',
-		ISNULL( (select SUM(hw.hoursST)+SUM(hw.hoursOT)+SUM(hw.hours3) from hoursWorked as hw where hw.idWorkCode = wc.idWorkCode and hw.jobNo = wc.jobNo and DATEPART(YEAR ,hw.dateWorked) = @year and DATENAME(MONTH, hw.dateWorked) = 'February'),0) as 'February',
-		ISNULL( (select SUM(hw.hoursST)+SUM(hw.hoursOT)+SUM(hw.hours3) from hoursWorked as hw where hw.idWorkCode = wc.idWorkCode and hw.jobNo = wc.jobNo and DATEPART(YEAR ,hw.dateWorked) = @year and DATENAME(MONTH, hw.dateWorked) = 'March'),0) as 'March',
-		ISNULL( (select SUM(hw.hoursST)+SUM(hw.hoursOT)+SUM(hw.hours3) from hoursWorked as hw where hw.idWorkCode = wc.idWorkCode and hw.jobNo = wc.jobNo and DATEPART(YEAR ,hw.dateWorked) = @year and DATENAME(MONTH, hw.dateWorked) = 'April') ,0) as 'April',
-		ISNULL( (select SUM(hw.hoursST)+SUM(hw.hoursOT)+SUM(hw.hours3) from hoursWorked as hw where hw.idWorkCode = wc.idWorkCode and hw.jobNo = wc.jobNo and DATEPART(YEAR ,hw.dateWorked) = @year and DATENAME(MONTH, hw.dateWorked) = 'May') ,0) as 'May',
-		ISNULL( (select SUM(hw.hoursST)+SUM(hw.hoursOT)+SUM(hw.hours3) from hoursWorked as hw where hw.idWorkCode = wc.idWorkCode and hw.jobNo = wc.jobNo and DATEPART(YEAR ,hw.dateWorked) = @year and DATENAME(MONTH, hw.dateWorked) = 'June'),0) as 'June',
-		ISNULL( (select SUM(hw.hoursST)+SUM(hw.hoursOT)+SUM(hw.hours3) from hoursWorked as hw where hw.idWorkCode = wc.idWorkCode and hw.jobNo = wc.jobNo and DATEPART(YEAR ,hw.dateWorked) = @year and DATENAME(MONTH, hw.dateWorked) = 'July'),0) as 'July',
-		ISNULL( (select SUM(hw.hoursST)+SUM(hw.hoursOT)+SUM(hw.hours3) from hoursWorked as hw where hw.idWorkCode = wc.idWorkCode and hw.jobNo = wc.jobNo and DATEPART(YEAR ,hw.dateWorked) = @year and DATENAME(MONTH, hw.dateWorked) = 'August'),0) as 'August',
-		ISNULL( (select SUM(hw.hoursST)+SUM(hw.hoursOT)+SUM(hw.hours3) from hoursWorked as hw where hw.idWorkCode = wc.idWorkCode and hw.jobNo = wc.jobNo and DATEPART(YEAR ,hw.dateWorked) = @year and DATENAME(MONTH, hw.dateWorked) = 'September'),0) as 'September',
-		ISNULL( (select SUM(hw.hoursST)+SUM(hw.hoursOT)+SUM(hw.hours3) from hoursWorked as hw where hw.idWorkCode = wc.idWorkCode and hw.jobNo = wc.jobNo and DATEPART(YEAR ,hw.dateWorked) = @year and DATENAME(MONTH, hw.dateWorked) = 'October'),0) as 'October',
-		ISNULL( (select SUM(hw.hoursST)+SUM(hw.hoursOT)+SUM(hw.hours3) from hoursWorked as hw where hw.idWorkCode = wc.idWorkCode and hw.jobNo = wc.jobNo and DATEPART(YEAR ,hw.dateWorked) = @year and DATENAME(MONTH, hw.dateWorked) = 'November'),0) as 'Nomvember',
-		ISNULL( (select SUM(hw.hoursST)+SUM(hw.hoursOT)+SUM(hw.hours3) from hoursWorked as hw where hw.idWorkCode = wc.idWorkCode and hw.jobNo = wc.jobNo and DATEPART(YEAR ,hw.dateWorked) = @year and DATENAME(MONTH, hw.dateWorked) = 'Dicember'),0) as 'Dicember'
-	from workCode as wc 
-	inner join job as jb on jb.jobNo = wc.jobNo 
-	inner join clients as cl on cl.idClient = jb.idClient
-	where CONVERT(nvarchar, cl.numberClient) like iif(@numberClient = 0 ,'%%',convert( nvarchar,@numberClient)) and convert(nvarchar,jb.jobNo) like IIF( @jobNo = 0,'%%',convert(nvarchar,@jobNo))    
-	) as T1
-	where (T1.January+T1.February+T1.March+T1.April+T1.May+T1.June+T1.July+T1.August+T1.September+T1.October+T1.Nomvember+T1.Dicember) > 0
+	SELECT 
+	DISTINCT
+	T1.[Weekending],T1.[Job Num],T1.[PO],T1.[Project Name],T1.[Project Description],T1.[Company Name],T1.[Employee Name],
+	T1.[Emp: Number],T1.[Class],
+	SUM	(T1.[Amount]) OVER (PARTITION BY T1.[Weekending],T1.[Job Num],T1.[PO],T1.[Emp: Number],T1.[Project Description],T1.[Company Name]) as 'Amount'
+FROM 
+(select CONVERT(date, DATEADD(DAY, IIF(DATEPART(dw, xp.dateExpense) = 1,0,  8-(DATEPART(dw, xp.dateExpense))) ,xp.dateExpense)) as 'Weekending',
+	jb.jobNo 'Job Num', po.idPO as 'PO', concat(wo.idWO,' ',tk.task) as 'Project Name',
+	ex.expenseCode as 'Project Description', cl.companyName as 'Company Name',
+	CONCAT(em.lastName,',',em.firstName,' ',em.middleName) as 'Employee Name',
+	em.numberEmploye as 'Emp: Number',
+	em.typeEmployee as 'Class', 
+	xp.amount as 'Amount'
+from expensesUsed as xp 
+			inner join expenses as ex on xp.idExpense = ex.idExpenses
+			inner join employees as em on em.idEmployee = xp.idEmployee 
+			inner join task as tk on tk.idAux = xp.idAux
+			inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO
+			inner join projectOrder as po on po.idPO = wo.idPO and po.jobNo = wo.jobNo
+			inner join job as jb on jb.jobNo = wo.jobNo 
+			inner join clients as cl on cl.idClient = jb.idClient
+			where xp.dateExpense between @startdate and @finaldate
+				and cl.numberClient = @clientnum and jb.jobNo like iif(@all=1,'%%',CONCAT('',@job,''))
+) AS T1
 end
 go

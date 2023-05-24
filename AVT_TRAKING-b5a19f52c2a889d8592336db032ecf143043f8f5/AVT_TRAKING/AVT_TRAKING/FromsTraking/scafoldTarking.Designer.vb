@@ -621,213 +621,213 @@ Partial Class scafoldTarking
         Me.Panel4.SuspendLayout
         Me.Panel6.SuspendLayout
         Me.Panel93.SuspendLayout
-        CType(Me.tblInComing, System.ComponentModel.ISupportInitialize).BeginInit
-        Me.Panel5.SuspendLayout
-        Me.tbpOutGoing.SuspendLayout
-        Me.Panel7.SuspendLayout
-        Me.Panel9.SuspendLayout
-        CType(Me.tblOutGoing, System.ComponentModel.ISupportInitialize).BeginInit
-        Me.Panel8.SuspendLayout
-        Me.tbpScaffoldTraking.SuspendLayout
-        Me.Panel41.SuspendLayout
-        Me.TableLayoutPanel8.SuspendLayout
-        Me.Panel42.SuspendLayout
-        Me.Panel52.SuspendLayout
-        CType(Me.tblProductosScaffold, System.ComponentModel.ISupportInitialize).BeginInit
-        Me.Panel51.SuspendLayout
-        Me.TableLayoutPanel9.SuspendLayout
-        Me.Panel72.SuspendLayout
-        Me.TableLayoutPanel10.SuspendLayout
-        Me.Panel73.SuspendLayout
-        Me.TableLayoutPanel11.SuspendLayout
-        Me.Panel69.SuspendLayout
-        Me.Panel71.SuspendLayout
-        CType(Me.sprDays, System.ComponentModel.ISupportInitialize).BeginInit
-        Me.Panel70.SuspendLayout
-        Me.Panel74.SuspendLayout
-        Me.Panel75.SuspendLayout
-        Me.TableLayoutPanel12.SuspendLayout
-        Me.Panel46.SuspendLayout
-        Me.GroupBox3.SuspendLayout
-        Me.Panel92.SuspendLayout
-        CType(Me.tblLeg, System.ComponentModel.ISupportInitialize).BeginInit
-        Me.Panel48.SuspendLayout
-        Me.Panel50.SuspendLayout
-        CType(Me.sprDecks, System.ComponentModel.ISupportInitialize).BeginInit
-        Me.Panel47.SuspendLayout
-        Me.TableLayoutPanel13.SuspendLayout
-        Me.TableLayoutPanel14.SuspendLayout
-        Me.Panel44.SuspendLayout
-        CType(Me.tblScaffoldInformation, System.ComponentModel.ISupportInitialize).BeginInit
-        Me.Panel45.SuspendLayout
-        CType(Me.tblActivityHours, System.ComponentModel.ISupportInitialize).BeginInit
-        Me.Panel76.SuspendLayout
-        Me.TableLayoutPanel15.SuspendLayout
-        Me.Panel77.SuspendLayout
-        Me.GroupBox1.SuspendLayout
-        Me.TableLayoutPanel17.SuspendLayout
-        Me.Panel78.SuspendLayout
-        Me.GroupBox2.SuspendLayout
-        Me.TableLayoutPanel16.SuspendLayout
-        Me.Panel79.SuspendLayout
-        Me.Panel43.SuspendLayout
-        Me.Panel80.SuspendLayout
-        Me.tbpModification.SuspendLayout
-        Me.Panel55.SuspendLayout
-        Me.TableLayoutPanel3.SuspendLayout
-        Me.Panel64.SuspendLayout
-        Me.TableLayoutPanel5.SuspendLayout
-        CType(Me.tblModificationProductMS, System.ComponentModel.ISupportInitialize).BeginInit
-        Me.Panel65.SuspendLayout
-        Me.TableLayoutPanel6.SuspendLayout
-        CType(Me.tblScaffoldTotalProductMS, System.ComponentModel.ISupportInitialize).BeginInit
-        Me.Panel66.SuspendLayout
-        Me.TableLayoutPanel4.SuspendLayout
-        Me.GroupBox4.SuspendLayout
-        Me.TableLayoutPanel7.SuspendLayout
-        Me.GroupBox5.SuspendLayout
-        Me.Panel86.SuspendLayout
-        CType(Me.tblLegMS, System.ComponentModel.ISupportInitialize).BeginInit
-        Me.Panel63.SuspendLayout
-        Me.Panel68.SuspendLayout
-        Me.Panel67.SuspendLayout
-        Me.Panel56.SuspendLayout
-        Me.panel58TablesInfoModification.SuspendLayout
-        Me.TableLayoutPanel1.SuspendLayout
-        CType(Me.tblActivityHoursSM, System.ComponentModel.ISupportInitialize).BeginInit
-        Me.Panel59.SuspendLayout
-        CType(Me.tblScaffoldInformationSM, System.ComponentModel.ISupportInitialize).BeginInit
-        Me.Panel57.SuspendLayout
-        Me.TableLayoutPanel2.SuspendLayout
-        Me.Panel58.SuspendLayout
-        Me.Panel61.SuspendLayout
-        Me.Panel62.SuspendLayout
-        Me.tbpDismantle.SuspendLayout
-        Me.Panel81.SuspendLayout
-        Me.TableLayoutPanel18.SuspendLayout
-        Me.Panel82.SuspendLayout
-        Me.TableLayoutPanel21.SuspendLayout
-        CType(Me.tblActivityHoursDismantle, System.ComponentModel.ISupportInitialize).BeginInit
-        Me.GroupBox6.SuspendLayout
-        Me.TableLayoutPanel22.SuspendLayout
-        Me.TableLayoutPanel19.SuspendLayout
-        Me.Panel83.SuspendLayout
-        Me.TableLayoutPanel25.SuspendLayout
-        Me.Panel90.SuspendLayout
-        Me.Panel91.SuspendLayout
-        Me.Panel84.SuspendLayout
-        Me.Panel85.SuspendLayout
-        Me.TableLayoutPanel20.SuspendLayout
-        Me.TableLayoutPanel24.SuspendLayout
-        Me.Panel89.SuspendLayout
-        CType(Me.tblTotalScaffoldProductDS, System.ComponentModel.ISupportInitialize).BeginInit
-        Me.TableLayoutPanel23.SuspendLayout
-        CType(Me.tblDismantleProduct, System.ComponentModel.ISupportInitialize).BeginInit
-        Me.Panel87.SuspendLayout
-        Me.Panel88.SuspendLayout
-        Me.tbpProducts.SuspendLayout
-        Me.Panel11.SuspendLayout
-        Me.TabControl2.SuspendLayout
-        Me.TabPage1.SuspendLayout
-        CType(Me.tblProduct, System.ComponentModel.ISupportInitialize).BeginInit
-        Me.TabPage2.SuspendLayout
-        Me.TableLayoutPanel36.SuspendLayout
-        Me.Panel94.SuspendLayout
-        CType(Me.PictureBox3, System.ComponentModel.ISupportInitialize).BeginInit
-        Me.Panel95.SuspendLayout
-        CType(Me.tblProductByJobNo, System.ComponentModel.ISupportInitialize).BeginInit
-        Me.TabPage3.SuspendLayout
-        Me.TableLayoutPanel37.SuspendLayout
-        Me.GroupBox11.SuspendLayout
-        Me.Panel100.SuspendLayout
-        CType(Me.tblOutBoundMaterial, System.ComponentModel.ISupportInitialize).BeginInit
-        Me.GroupBox10.SuspendLayout
-        Me.Panel98.SuspendLayout
-        CType(Me.tblInBoundMaterial, System.ComponentModel.ISupportInitialize).BeginInit
-        Me.GroupBox9.SuspendLayout
-        Me.Panel101.SuspendLayout
-        CType(Me.tblDismantleMaterial, System.ComponentModel.ISupportInitialize).BeginInit
-        Me.Panel96.SuspendLayout
-        CType(Me.PictureBox4, System.ComponentModel.ISupportInitialize).BeginInit
-        Me.GroupBox7.SuspendLayout
-        Me.Panel97.SuspendLayout
-        CType(Me.tblBuildsMaterial, System.ComponentModel.ISupportInitialize).BeginInit
-        Me.GroupBox8.SuspendLayout
-        Me.Panel99.SuspendLayout
-        CType(Me.tblModificationMaterial, System.ComponentModel.ISupportInitialize).BeginInit
-        Me.Panel10.SuspendLayout
-        Me.tbpAreaWOJob.SuspendLayout
-        Me.Panel14.SuspendLayout
-        Me.TableLayoutPanel26.SuspendLayout
-        Me.TableLayoutPanel27.SuspendLayout
-        Me.Panel17.SuspendLayout
-        Me.Panel16.SuspendLayout
-        Me.Panel19.SuspendLayout
-        CType(Me.tblAreas, System.ComponentModel.ISupportInitialize).BeginInit
-        Me.Panel53.SuspendLayout
-        CType(Me.tblJobCat, System.ComponentModel.ISupportInitialize).BeginInit
-        Me.Panel29.SuspendLayout
-        CType(Me.tblSubJobs, System.ComponentModel.ISupportInitialize).BeginInit
-        Me.Panel15.SuspendLayout
-        Me.TableLayoutPanel28.SuspendLayout
-        Me.Panel18.SuspendLayout
-        Me.Panel27.SuspendLayout
-        CType(Me.tblWO, System.ComponentModel.ISupportInitialize).BeginInit
-        Me.tbpUMClassStatus.SuspendLayout
-        Me.Panel21.SuspendLayout
-        Me.Panel22.SuspendLayout
-        Me.TableLayoutPanel29.SuspendLayout
-        Me.TableLayoutPanel31.SuspendLayout
-        Me.Panel25.SuspendLayout
-        Me.Panel37.SuspendLayout
-        CType(Me.tblRentTable, System.ComponentModel.ISupportInitialize).BeginInit
-        Me.TableLayoutPanel30.SuspendLayout
-        Me.Panel24.SuspendLayout
-        Me.Panel23.SuspendLayout
-        Me.Panel35.SuspendLayout
-        CType(Me.tblMaterialStatus, System.ComponentModel.ISupportInitialize).BeginInit
-        Me.Panel31.SuspendLayout
-        CType(Me.tblUnitMeassurement, System.ComponentModel.ISupportInitialize).BeginInit
-        Me.Panel33.SuspendLayout
-        CType(Me.tblClassification, System.ComponentModel.ISupportInitialize).BeginInit
-        Me.Panel20.SuspendLayout
-        Me.tbpSupervisor.SuspendLayout
-        Me.Panel38.SuspendLayout
-        Me.Panel40.SuspendLayout
-        CType(Me.tblSupervisor, System.ComponentModel.ISupportInitialize).BeginInit
-        Me.Panel39.SuspendLayout
-        Me.tbpCostJobsN.SuspendLayout
-        Me.Panel13.SuspendLayout
-        CType(Me.tblCostumersJobs, System.ComponentModel.ISupportInitialize).BeginInit
-        Me.Panel12.SuspendLayout
-        Me.tbpEstimating.SuspendLayout
-        Me.TableLayoutPanel32.SuspendLayout
-        Me.Panel28.SuspendLayout
-        Me.TableLayoutPanel34.SuspendLayout
-        CType(Me.sprOperationalDays, System.ComponentModel.ISupportInitialize).BeginInit
-        Me.TableLayoutPanel33.SuspendLayout
-        Me.Panel30.SuspendLayout
-        Me.Panel26.SuspendLayout
-        Me.TableLayoutPanel35.SuspendLayout
-        Me.Panel36.SuspendLayout
-        CType(Me.sprDecksEst, System.ComponentModel.ISupportInitialize).BeginInit
-        Me.Panel32.SuspendLayout
-        CType(Me.sprHeigthEst, System.ComponentModel.ISupportInitialize).BeginInit
-        Me.Panel34.SuspendLayout
-        CType(Me.sprWidthEst, System.ComponentModel.ISupportInitialize).BeginInit
-        Me.Panel49.SuspendLayout
-        CType(Me.sprLengthEst, System.ComponentModel.ISupportInitialize).BeginInit
-        Me.Panel54.SuspendLayout
-        CType(Me.sprGroudHeigthEst, System.ComponentModel.ISupportInitialize).BeginInit
-        Me.Panel60.SuspendLayout
-        CType(Me.sprElevatorEst, System.ComponentModel.ISupportInitialize).BeginInit
-        Me.Panel2.SuspendLayout
-        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit
-        Me.TitleBar.SuspendLayout
-        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit
-        CType(Me.btnRestore, System.ComponentModel.ISupportInitialize).BeginInit
-        CType(Me.btnMaximize, System.ComponentModel.ISupportInitialize).BeginInit
-        Me.SuspendLayout
+        CType(Me.tblInComing, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.Panel5.SuspendLayout()
+        Me.tbpOutGoing.SuspendLayout()
+        Me.Panel7.SuspendLayout()
+        Me.Panel9.SuspendLayout()
+        CType(Me.tblOutGoing, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.Panel8.SuspendLayout()
+        Me.tbpScaffoldTraking.SuspendLayout()
+        Me.Panel41.SuspendLayout()
+        Me.TableLayoutPanel8.SuspendLayout()
+        Me.Panel42.SuspendLayout()
+        Me.Panel52.SuspendLayout()
+        CType(Me.tblProductosScaffold, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.Panel51.SuspendLayout()
+        Me.TableLayoutPanel9.SuspendLayout()
+        Me.Panel72.SuspendLayout()
+        Me.TableLayoutPanel10.SuspendLayout()
+        Me.Panel73.SuspendLayout()
+        Me.TableLayoutPanel11.SuspendLayout()
+        Me.Panel69.SuspendLayout()
+        Me.Panel71.SuspendLayout()
+        CType(Me.sprDays, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.Panel70.SuspendLayout()
+        Me.Panel74.SuspendLayout()
+        Me.Panel75.SuspendLayout()
+        Me.TableLayoutPanel12.SuspendLayout()
+        Me.Panel46.SuspendLayout()
+        Me.GroupBox3.SuspendLayout()
+        Me.Panel92.SuspendLayout()
+        CType(Me.tblLeg, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.Panel48.SuspendLayout()
+        Me.Panel50.SuspendLayout()
+        CType(Me.sprDecks, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.Panel47.SuspendLayout()
+        Me.TableLayoutPanel13.SuspendLayout()
+        Me.TableLayoutPanel14.SuspendLayout()
+        Me.Panel44.SuspendLayout()
+        CType(Me.tblScaffoldInformation, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.Panel45.SuspendLayout()
+        CType(Me.tblActivityHours, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.Panel76.SuspendLayout()
+        Me.TableLayoutPanel15.SuspendLayout()
+        Me.Panel77.SuspendLayout()
+        Me.GroupBox1.SuspendLayout()
+        Me.TableLayoutPanel17.SuspendLayout()
+        Me.Panel78.SuspendLayout()
+        Me.GroupBox2.SuspendLayout()
+        Me.TableLayoutPanel16.SuspendLayout()
+        Me.Panel79.SuspendLayout()
+        Me.Panel43.SuspendLayout()
+        Me.Panel80.SuspendLayout()
+        Me.tbpModification.SuspendLayout()
+        Me.Panel55.SuspendLayout()
+        Me.TableLayoutPanel3.SuspendLayout()
+        Me.Panel64.SuspendLayout()
+        Me.TableLayoutPanel5.SuspendLayout()
+        CType(Me.tblModificationProductMS, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.Panel65.SuspendLayout()
+        Me.TableLayoutPanel6.SuspendLayout()
+        CType(Me.tblScaffoldTotalProductMS, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.Panel66.SuspendLayout()
+        Me.TableLayoutPanel4.SuspendLayout()
+        Me.GroupBox4.SuspendLayout()
+        Me.TableLayoutPanel7.SuspendLayout()
+        Me.GroupBox5.SuspendLayout()
+        Me.Panel86.SuspendLayout()
+        CType(Me.tblLegMS, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.Panel63.SuspendLayout()
+        Me.Panel68.SuspendLayout()
+        Me.Panel67.SuspendLayout()
+        Me.Panel56.SuspendLayout()
+        Me.panel58TablesInfoModification.SuspendLayout()
+        Me.TableLayoutPanel1.SuspendLayout()
+        CType(Me.tblActivityHoursSM, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.Panel59.SuspendLayout()
+        CType(Me.tblScaffoldInformationSM, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.Panel57.SuspendLayout()
+        Me.TableLayoutPanel2.SuspendLayout()
+        Me.Panel58.SuspendLayout()
+        Me.Panel61.SuspendLayout()
+        Me.Panel62.SuspendLayout()
+        Me.tbpDismantle.SuspendLayout()
+        Me.Panel81.SuspendLayout()
+        Me.TableLayoutPanel18.SuspendLayout()
+        Me.Panel82.SuspendLayout()
+        Me.TableLayoutPanel21.SuspendLayout()
+        CType(Me.tblActivityHoursDismantle, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.GroupBox6.SuspendLayout()
+        Me.TableLayoutPanel22.SuspendLayout()
+        Me.TableLayoutPanel19.SuspendLayout()
+        Me.Panel83.SuspendLayout()
+        Me.TableLayoutPanel25.SuspendLayout()
+        Me.Panel90.SuspendLayout()
+        Me.Panel91.SuspendLayout()
+        Me.Panel84.SuspendLayout()
+        Me.Panel85.SuspendLayout()
+        Me.TableLayoutPanel20.SuspendLayout()
+        Me.TableLayoutPanel24.SuspendLayout()
+        Me.Panel89.SuspendLayout()
+        CType(Me.tblTotalScaffoldProductDS, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.TableLayoutPanel23.SuspendLayout()
+        CType(Me.tblDismantleProduct, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.Panel87.SuspendLayout()
+        Me.Panel88.SuspendLayout()
+        Me.tbpProducts.SuspendLayout()
+        Me.Panel11.SuspendLayout()
+        Me.TabControl2.SuspendLayout()
+        Me.TabPage1.SuspendLayout()
+        CType(Me.tblProduct, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.TabPage2.SuspendLayout()
+        Me.TableLayoutPanel36.SuspendLayout()
+        Me.Panel94.SuspendLayout()
+        CType(Me.PictureBox3, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.Panel95.SuspendLayout()
+        CType(Me.tblProductByJobNo, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.TabPage3.SuspendLayout()
+        Me.TableLayoutPanel37.SuspendLayout()
+        Me.GroupBox11.SuspendLayout()
+        Me.Panel100.SuspendLayout()
+        CType(Me.tblOutBoundMaterial, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.GroupBox10.SuspendLayout()
+        Me.Panel98.SuspendLayout()
+        CType(Me.tblInBoundMaterial, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.GroupBox9.SuspendLayout()
+        Me.Panel101.SuspendLayout()
+        CType(Me.tblDismantleMaterial, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.Panel96.SuspendLayout()
+        CType(Me.PictureBox4, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.GroupBox7.SuspendLayout()
+        Me.Panel97.SuspendLayout()
+        CType(Me.tblBuildsMaterial, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.GroupBox8.SuspendLayout()
+        Me.Panel99.SuspendLayout()
+        CType(Me.tblModificationMaterial, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.Panel10.SuspendLayout()
+        Me.tbpAreaWOJob.SuspendLayout()
+        Me.Panel14.SuspendLayout()
+        Me.TableLayoutPanel26.SuspendLayout()
+        Me.TableLayoutPanel27.SuspendLayout()
+        Me.Panel17.SuspendLayout()
+        Me.Panel16.SuspendLayout()
+        Me.Panel19.SuspendLayout()
+        CType(Me.tblAreas, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.Panel53.SuspendLayout()
+        CType(Me.tblJobCat, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.Panel29.SuspendLayout()
+        CType(Me.tblSubJobs, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.Panel15.SuspendLayout()
+        Me.TableLayoutPanel28.SuspendLayout()
+        Me.Panel18.SuspendLayout()
+        Me.Panel27.SuspendLayout()
+        CType(Me.tblWO, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.tbpUMClassStatus.SuspendLayout()
+        Me.Panel21.SuspendLayout()
+        Me.Panel22.SuspendLayout()
+        Me.TableLayoutPanel29.SuspendLayout()
+        Me.TableLayoutPanel31.SuspendLayout()
+        Me.Panel25.SuspendLayout()
+        Me.Panel37.SuspendLayout()
+        CType(Me.tblRentTable, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.TableLayoutPanel30.SuspendLayout()
+        Me.Panel24.SuspendLayout()
+        Me.Panel23.SuspendLayout()
+        Me.Panel35.SuspendLayout()
+        CType(Me.tblMaterialStatus, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.Panel31.SuspendLayout()
+        CType(Me.tblUnitMeassurement, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.Panel33.SuspendLayout()
+        CType(Me.tblClassification, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.Panel20.SuspendLayout()
+        Me.tbpSupervisor.SuspendLayout()
+        Me.Panel38.SuspendLayout()
+        Me.Panel40.SuspendLayout()
+        CType(Me.tblSupervisor, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.Panel39.SuspendLayout()
+        Me.tbpCostJobsN.SuspendLayout()
+        Me.Panel13.SuspendLayout()
+        CType(Me.tblCostumersJobs, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.Panel12.SuspendLayout()
+        Me.tbpEstimating.SuspendLayout()
+        Me.TableLayoutPanel32.SuspendLayout()
+        Me.Panel28.SuspendLayout()
+        Me.TableLayoutPanel34.SuspendLayout()
+        CType(Me.sprOperationalDays, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.TableLayoutPanel33.SuspendLayout()
+        Me.Panel30.SuspendLayout()
+        Me.Panel26.SuspendLayout()
+        Me.TableLayoutPanel35.SuspendLayout()
+        Me.Panel36.SuspendLayout()
+        CType(Me.sprDecksEst, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.Panel32.SuspendLayout()
+        CType(Me.sprHeigthEst, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.Panel34.SuspendLayout()
+        CType(Me.sprWidthEst, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.Panel49.SuspendLayout()
+        CType(Me.sprLengthEst, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.Panel54.SuspendLayout()
+        CType(Me.sprGroudHeigthEst, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.Panel60.SuspendLayout()
+        CType(Me.sprElevatorEst, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.Panel2.SuspendLayout()
+        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.TitleBar.SuspendLayout()
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.btnRestore, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.btnMaximize, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.SuspendLayout()
         '
         'Panel1
         '
@@ -1002,13 +1002,15 @@ Partial Class scafoldTarking
         Me.btnUpdateExcelInConming.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnUpdateExcelInConming.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnUpdateExcelInConming.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.btnUpdateExcelInConming.Image = Global.AVT_TRAKING.My.Resources.Resources.excel
         Me.btnUpdateExcelInConming.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.btnUpdateExcelInConming.Location = New System.Drawing.Point(6, 300)
         Me.btnUpdateExcelInConming.Name = "btnUpdateExcelInConming"
-        Me.btnUpdateExcelInConming.Size = New System.Drawing.Size(125, 36)
+        Me.btnUpdateExcelInConming.Size = New System.Drawing.Size(148, 43)
         Me.btnUpdateExcelInConming.TabIndex = 15
         Me.btnUpdateExcelInConming.Text = "Update Excel"
         Me.btnUpdateExcelInConming.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.btnUpdateExcelInConming.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
         Me.btnUpdateExcelInConming.UseVisualStyleBackColor = True
         '
         'btnDeleteRowInComing
@@ -1305,13 +1307,15 @@ Partial Class scafoldTarking
         Me.btnUpdateExcelOutgoing.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(58, Byte), Integer), CType(CType(115, Byte), Integer))
         Me.btnUpdateExcelOutgoing.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnUpdateExcelOutgoing.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnUpdateExcelOutgoing.Image = Global.AVT_TRAKING.My.Resources.Resources.excel
         Me.btnUpdateExcelOutgoing.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.btnUpdateExcelOutgoing.Location = New System.Drawing.Point(6, 374)
         Me.btnUpdateExcelOutgoing.Name = "btnUpdateExcelOutgoing"
-        Me.btnUpdateExcelOutgoing.Size = New System.Drawing.Size(125, 36)
+        Me.btnUpdateExcelOutgoing.Size = New System.Drawing.Size(148, 38)
         Me.btnUpdateExcelOutgoing.TabIndex = 22
         Me.btnUpdateExcelOutgoing.Text = "Update Excel"
         Me.btnUpdateExcelOutgoing.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.btnUpdateExcelOutgoing.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
         Me.btnUpdateExcelOutgoing.UseVisualStyleBackColor = True
         '
         'btnNextTicketOutGoing
@@ -1322,11 +1326,11 @@ Partial Class scafoldTarking
         Me.btnNextTicketOutGoing.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(58, Byte), Integer), CType(CType(115, Byte), Integer))
         Me.btnNextTicketOutGoing.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnNextTicketOutGoing.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnNextTicketOutGoing.Image = Global.AVT_TRAKING.My.Resources.Resources._next
         Me.btnNextTicketOutGoing.Location = New System.Drawing.Point(137, 332)
         Me.btnNextTicketOutGoing.Name = "btnNextTicketOutGoing"
         Me.btnNextTicketOutGoing.Size = New System.Drawing.Size(126, 36)
         Me.btnNextTicketOutGoing.TabIndex = 21
-        Me.btnNextTicketOutGoing.Text = "-->"
         Me.btnNextTicketOutGoing.UseVisualStyleBackColor = True
         '
         'btnBackTicketOutGoing
@@ -1337,11 +1341,11 @@ Partial Class scafoldTarking
         Me.btnBackTicketOutGoing.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(58, Byte), Integer), CType(CType(115, Byte), Integer))
         Me.btnBackTicketOutGoing.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnBackTicketOutGoing.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnBackTicketOutGoing.Image = Global.AVT_TRAKING.My.Resources.Resources.after1
         Me.btnBackTicketOutGoing.Location = New System.Drawing.Point(5, 332)
         Me.btnBackTicketOutGoing.Name = "btnBackTicketOutGoing"
         Me.btnBackTicketOutGoing.Size = New System.Drawing.Size(126, 36)
         Me.btnBackTicketOutGoing.TabIndex = 20
-        Me.btnBackTicketOutGoing.Text = "<--"
         Me.btnBackTicketOutGoing.UseVisualStyleBackColor = True
         '
         'btnDeleteRowOutGoing
@@ -7220,261 +7224,261 @@ Partial Class scafoldTarking
         Me.Panel4.ResumeLayout(False)
         Me.Panel6.ResumeLayout(False)
         Me.Panel93.ResumeLayout(False)
-        CType(Me.tblInComing, System.ComponentModel.ISupportInitialize).EndInit
+        CType(Me.tblInComing, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel5.ResumeLayout(False)
-        Me.Panel5.PerformLayout
+        Me.Panel5.PerformLayout()
         Me.tbpOutGoing.ResumeLayout(False)
         Me.Panel7.ResumeLayout(False)
         Me.Panel9.ResumeLayout(False)
-        CType(Me.tblOutGoing, System.ComponentModel.ISupportInitialize).EndInit
+        CType(Me.tblOutGoing, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel8.ResumeLayout(False)
-        Me.Panel8.PerformLayout
+        Me.Panel8.PerformLayout()
         Me.tbpScaffoldTraking.ResumeLayout(False)
         Me.Panel41.ResumeLayout(False)
         Me.TableLayoutPanel8.ResumeLayout(False)
         Me.Panel42.ResumeLayout(False)
         Me.Panel52.ResumeLayout(False)
-        CType(Me.tblProductosScaffold, System.ComponentModel.ISupportInitialize).EndInit
+        CType(Me.tblProductosScaffold, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel51.ResumeLayout(False)
-        Me.Panel51.PerformLayout
+        Me.Panel51.PerformLayout()
         Me.TableLayoutPanel9.ResumeLayout(False)
         Me.Panel72.ResumeLayout(False)
         Me.TableLayoutPanel10.ResumeLayout(False)
         Me.Panel73.ResumeLayout(False)
         Me.TableLayoutPanel11.ResumeLayout(False)
         Me.Panel69.ResumeLayout(False)
-        Me.Panel69.PerformLayout
+        Me.Panel69.PerformLayout()
         Me.Panel71.ResumeLayout(False)
-        Me.Panel71.PerformLayout
-        CType(Me.sprDays, System.ComponentModel.ISupportInitialize).EndInit
+        Me.Panel71.PerformLayout()
+        CType(Me.sprDays, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel70.ResumeLayout(False)
-        Me.Panel70.PerformLayout
+        Me.Panel70.PerformLayout()
         Me.Panel74.ResumeLayout(False)
-        Me.Panel74.PerformLayout
+        Me.Panel74.PerformLayout()
         Me.Panel75.ResumeLayout(False)
         Me.TableLayoutPanel12.ResumeLayout(False)
         Me.Panel46.ResumeLayout(False)
         Me.GroupBox3.ResumeLayout(False)
         Me.Panel92.ResumeLayout(False)
-        CType(Me.tblLeg, System.ComponentModel.ISupportInitialize).EndInit
+        CType(Me.tblLeg, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel48.ResumeLayout(False)
-        Me.Panel48.PerformLayout
+        Me.Panel48.PerformLayout()
         Me.Panel50.ResumeLayout(False)
-        Me.Panel50.PerformLayout
-        CType(Me.sprDecks, System.ComponentModel.ISupportInitialize).EndInit
+        Me.Panel50.PerformLayout()
+        CType(Me.sprDecks, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel47.ResumeLayout(False)
         Me.TableLayoutPanel13.ResumeLayout(False)
         Me.TableLayoutPanel14.ResumeLayout(False)
         Me.Panel44.ResumeLayout(False)
-        CType(Me.tblScaffoldInformation, System.ComponentModel.ISupportInitialize).EndInit
+        CType(Me.tblScaffoldInformation, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel45.ResumeLayout(False)
-        CType(Me.tblActivityHours, System.ComponentModel.ISupportInitialize).EndInit
+        CType(Me.tblActivityHours, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel76.ResumeLayout(False)
         Me.TableLayoutPanel15.ResumeLayout(False)
         Me.Panel77.ResumeLayout(False)
         Me.GroupBox1.ResumeLayout(False)
         Me.TableLayoutPanel17.ResumeLayout(False)
-        Me.TableLayoutPanel17.PerformLayout
+        Me.TableLayoutPanel17.PerformLayout()
         Me.Panel78.ResumeLayout(False)
         Me.GroupBox2.ResumeLayout(False)
         Me.TableLayoutPanel16.ResumeLayout(False)
-        Me.TableLayoutPanel16.PerformLayout
+        Me.TableLayoutPanel16.PerformLayout()
         Me.Panel79.ResumeLayout(False)
-        Me.Panel79.PerformLayout
+        Me.Panel79.PerformLayout()
         Me.Panel43.ResumeLayout(False)
-        Me.Panel43.PerformLayout
+        Me.Panel43.PerformLayout()
         Me.Panel80.ResumeLayout(False)
         Me.tbpModification.ResumeLayout(False)
         Me.Panel55.ResumeLayout(False)
         Me.TableLayoutPanel3.ResumeLayout(False)
         Me.Panel64.ResumeLayout(False)
         Me.TableLayoutPanel5.ResumeLayout(False)
-        Me.TableLayoutPanel5.PerformLayout
-        CType(Me.tblModificationProductMS, System.ComponentModel.ISupportInitialize).EndInit
+        Me.TableLayoutPanel5.PerformLayout()
+        CType(Me.tblModificationProductMS, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel65.ResumeLayout(False)
         Me.TableLayoutPanel6.ResumeLayout(False)
-        Me.TableLayoutPanel6.PerformLayout
-        CType(Me.tblScaffoldTotalProductMS, System.ComponentModel.ISupportInitialize).EndInit
+        Me.TableLayoutPanel6.PerformLayout()
+        CType(Me.tblScaffoldTotalProductMS, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel66.ResumeLayout(False)
         Me.TableLayoutPanel4.ResumeLayout(False)
         Me.GroupBox4.ResumeLayout(False)
         Me.TableLayoutPanel7.ResumeLayout(False)
-        Me.TableLayoutPanel7.PerformLayout
+        Me.TableLayoutPanel7.PerformLayout()
         Me.GroupBox5.ResumeLayout(False)
         Me.Panel86.ResumeLayout(False)
-        CType(Me.tblLegMS, System.ComponentModel.ISupportInitialize).EndInit
+        CType(Me.tblLegMS, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel63.ResumeLayout(False)
         Me.Panel68.ResumeLayout(False)
-        Me.Panel68.PerformLayout
+        Me.Panel68.PerformLayout()
         Me.Panel67.ResumeLayout(False)
-        Me.Panel67.PerformLayout
+        Me.Panel67.PerformLayout()
         Me.Panel56.ResumeLayout(False)
         Me.panel58TablesInfoModification.ResumeLayout(False)
         Me.TableLayoutPanel1.ResumeLayout(False)
-        CType(Me.tblActivityHoursSM, System.ComponentModel.ISupportInitialize).EndInit
+        CType(Me.tblActivityHoursSM, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel59.ResumeLayout(False)
-        CType(Me.tblScaffoldInformationSM, System.ComponentModel.ISupportInitialize).EndInit
+        CType(Me.tblScaffoldInformationSM, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel57.ResumeLayout(False)
         Me.TableLayoutPanel2.ResumeLayout(False)
         Me.Panel58.ResumeLayout(False)
-        Me.Panel58.PerformLayout
+        Me.Panel58.PerformLayout()
         Me.Panel61.ResumeLayout(False)
-        Me.Panel61.PerformLayout
+        Me.Panel61.PerformLayout()
         Me.Panel62.ResumeLayout(False)
-        Me.Panel62.PerformLayout
+        Me.Panel62.PerformLayout()
         Me.tbpDismantle.ResumeLayout(False)
         Me.Panel81.ResumeLayout(False)
         Me.TableLayoutPanel18.ResumeLayout(False)
         Me.Panel82.ResumeLayout(False)
         Me.TableLayoutPanel21.ResumeLayout(False)
-        CType(Me.tblActivityHoursDismantle, System.ComponentModel.ISupportInitialize).EndInit
+        CType(Me.tblActivityHoursDismantle, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupBox6.ResumeLayout(False)
         Me.TableLayoutPanel22.ResumeLayout(False)
-        Me.TableLayoutPanel22.PerformLayout
+        Me.TableLayoutPanel22.PerformLayout()
         Me.TableLayoutPanel19.ResumeLayout(False)
         Me.Panel83.ResumeLayout(False)
         Me.TableLayoutPanel25.ResumeLayout(False)
         Me.Panel90.ResumeLayout(False)
-        Me.Panel90.PerformLayout
+        Me.Panel90.PerformLayout()
         Me.Panel91.ResumeLayout(False)
-        Me.Panel91.PerformLayout
+        Me.Panel91.PerformLayout()
         Me.Panel84.ResumeLayout(False)
-        Me.Panel84.PerformLayout
+        Me.Panel84.PerformLayout()
         Me.Panel85.ResumeLayout(False)
-        Me.Panel85.PerformLayout
+        Me.Panel85.PerformLayout()
         Me.TableLayoutPanel20.ResumeLayout(False)
         Me.TableLayoutPanel24.ResumeLayout(False)
         Me.Panel89.ResumeLayout(False)
-        Me.Panel89.PerformLayout
-        CType(Me.tblTotalScaffoldProductDS, System.ComponentModel.ISupportInitialize).EndInit
+        Me.Panel89.PerformLayout()
+        CType(Me.tblTotalScaffoldProductDS, System.ComponentModel.ISupportInitialize).EndInit()
         Me.TableLayoutPanel23.ResumeLayout(False)
-        CType(Me.tblDismantleProduct, System.ComponentModel.ISupportInitialize).EndInit
+        CType(Me.tblDismantleProduct, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel87.ResumeLayout(False)
-        Me.Panel87.PerformLayout
+        Me.Panel87.PerformLayout()
         Me.Panel88.ResumeLayout(False)
         Me.tbpProducts.ResumeLayout(False)
         Me.Panel11.ResumeLayout(False)
         Me.TabControl2.ResumeLayout(False)
         Me.TabPage1.ResumeLayout(False)
-        CType(Me.tblProduct, System.ComponentModel.ISupportInitialize).EndInit
+        CType(Me.tblProduct, System.ComponentModel.ISupportInitialize).EndInit()
         Me.TabPage2.ResumeLayout(False)
         Me.TableLayoutPanel36.ResumeLayout(False)
         Me.Panel94.ResumeLayout(False)
-        Me.Panel94.PerformLayout
-        CType(Me.PictureBox3, System.ComponentModel.ISupportInitialize).EndInit
+        Me.Panel94.PerformLayout()
+        CType(Me.PictureBox3, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel95.ResumeLayout(False)
-        CType(Me.tblProductByJobNo, System.ComponentModel.ISupportInitialize).EndInit
+        CType(Me.tblProductByJobNo, System.ComponentModel.ISupportInitialize).EndInit()
         Me.TabPage3.ResumeLayout(False)
         Me.TableLayoutPanel37.ResumeLayout(False)
         Me.GroupBox11.ResumeLayout(False)
         Me.Panel100.ResumeLayout(False)
-        CType(Me.tblOutBoundMaterial, System.ComponentModel.ISupportInitialize).EndInit
+        CType(Me.tblOutBoundMaterial, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupBox10.ResumeLayout(False)
         Me.Panel98.ResumeLayout(False)
-        CType(Me.tblInBoundMaterial, System.ComponentModel.ISupportInitialize).EndInit
+        CType(Me.tblInBoundMaterial, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupBox9.ResumeLayout(False)
         Me.Panel101.ResumeLayout(False)
-        CType(Me.tblDismantleMaterial, System.ComponentModel.ISupportInitialize).EndInit
+        CType(Me.tblDismantleMaterial, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel96.ResumeLayout(False)
-        CType(Me.PictureBox4, System.ComponentModel.ISupportInitialize).EndInit
+        CType(Me.PictureBox4, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupBox7.ResumeLayout(False)
         Me.Panel97.ResumeLayout(False)
-        CType(Me.tblBuildsMaterial, System.ComponentModel.ISupportInitialize).EndInit
+        CType(Me.tblBuildsMaterial, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupBox8.ResumeLayout(False)
         Me.Panel99.ResumeLayout(False)
-        CType(Me.tblModificationMaterial, System.ComponentModel.ISupportInitialize).EndInit
+        CType(Me.tblModificationMaterial, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel10.ResumeLayout(False)
-        Me.Panel10.PerformLayout
+        Me.Panel10.PerformLayout()
         Me.tbpAreaWOJob.ResumeLayout(False)
         Me.Panel14.ResumeLayout(False)
         Me.TableLayoutPanel26.ResumeLayout(False)
         Me.TableLayoutPanel27.ResumeLayout(False)
         Me.Panel17.ResumeLayout(False)
-        Me.Panel17.PerformLayout
+        Me.Panel17.PerformLayout()
         Me.Panel16.ResumeLayout(False)
-        Me.Panel16.PerformLayout
+        Me.Panel16.PerformLayout()
         Me.Panel19.ResumeLayout(False)
-        CType(Me.tblAreas, System.ComponentModel.ISupportInitialize).EndInit
+        CType(Me.tblAreas, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel53.ResumeLayout(False)
-        CType(Me.tblJobCat, System.ComponentModel.ISupportInitialize).EndInit
+        CType(Me.tblJobCat, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel29.ResumeLayout(False)
-        CType(Me.tblSubJobs, System.ComponentModel.ISupportInitialize).EndInit
+        CType(Me.tblSubJobs, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel15.ResumeLayout(False)
-        Me.Panel15.PerformLayout
+        Me.Panel15.PerformLayout()
         Me.TableLayoutPanel28.ResumeLayout(False)
         Me.Panel18.ResumeLayout(False)
-        Me.Panel18.PerformLayout
+        Me.Panel18.PerformLayout()
         Me.Panel27.ResumeLayout(False)
-        CType(Me.tblWO, System.ComponentModel.ISupportInitialize).EndInit
+        CType(Me.tblWO, System.ComponentModel.ISupportInitialize).EndInit()
         Me.tbpUMClassStatus.ResumeLayout(False)
         Me.Panel21.ResumeLayout(False)
         Me.Panel22.ResumeLayout(False)
         Me.TableLayoutPanel29.ResumeLayout(False)
         Me.TableLayoutPanel31.ResumeLayout(False)
         Me.Panel25.ResumeLayout(False)
-        Me.Panel25.PerformLayout
+        Me.Panel25.PerformLayout()
         Me.Panel37.ResumeLayout(False)
-        CType(Me.tblRentTable, System.ComponentModel.ISupportInitialize).EndInit
+        CType(Me.tblRentTable, System.ComponentModel.ISupportInitialize).EndInit()
         Me.TableLayoutPanel30.ResumeLayout(False)
         Me.Panel24.ResumeLayout(False)
-        Me.Panel24.PerformLayout
+        Me.Panel24.PerformLayout()
         Me.Panel23.ResumeLayout(False)
-        Me.Panel23.PerformLayout
+        Me.Panel23.PerformLayout()
         Me.Panel35.ResumeLayout(False)
-        CType(Me.tblMaterialStatus, System.ComponentModel.ISupportInitialize).EndInit
+        CType(Me.tblMaterialStatus, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel31.ResumeLayout(False)
-        CType(Me.tblUnitMeassurement, System.ComponentModel.ISupportInitialize).EndInit
+        CType(Me.tblUnitMeassurement, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel33.ResumeLayout(False)
-        CType(Me.tblClassification, System.ComponentModel.ISupportInitialize).EndInit
+        CType(Me.tblClassification, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel20.ResumeLayout(False)
-        Me.Panel20.PerformLayout
+        Me.Panel20.PerformLayout()
         Me.tbpSupervisor.ResumeLayout(False)
         Me.Panel38.ResumeLayout(False)
         Me.Panel40.ResumeLayout(False)
-        CType(Me.tblSupervisor, System.ComponentModel.ISupportInitialize).EndInit
+        CType(Me.tblSupervisor, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel39.ResumeLayout(False)
-        Me.Panel39.PerformLayout
+        Me.Panel39.PerformLayout()
         Me.tbpCostJobsN.ResumeLayout(False)
         Me.Panel13.ResumeLayout(False)
-        CType(Me.tblCostumersJobs, System.ComponentModel.ISupportInitialize).EndInit
+        CType(Me.tblCostumersJobs, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel12.ResumeLayout(False)
-        Me.Panel12.PerformLayout
+        Me.Panel12.PerformLayout()
         Me.tbpEstimating.ResumeLayout(False)
         Me.TableLayoutPanel32.ResumeLayout(False)
         Me.Panel28.ResumeLayout(False)
         Me.TableLayoutPanel34.ResumeLayout(False)
-        Me.TableLayoutPanel34.PerformLayout
-        CType(Me.sprOperationalDays, System.ComponentModel.ISupportInitialize).EndInit
+        Me.TableLayoutPanel34.PerformLayout()
+        CType(Me.sprOperationalDays, System.ComponentModel.ISupportInitialize).EndInit()
         Me.TableLayoutPanel33.ResumeLayout(False)
         Me.Panel30.ResumeLayout(False)
         Me.Panel26.ResumeLayout(False)
         Me.TableLayoutPanel35.ResumeLayout(False)
         Me.Panel36.ResumeLayout(False)
-        Me.Panel36.PerformLayout
-        CType(Me.sprDecksEst, System.ComponentModel.ISupportInitialize).EndInit
+        Me.Panel36.PerformLayout()
+        CType(Me.sprDecksEst, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel32.ResumeLayout(False)
-        Me.Panel32.PerformLayout
-        CType(Me.sprHeigthEst, System.ComponentModel.ISupportInitialize).EndInit
+        Me.Panel32.PerformLayout()
+        CType(Me.sprHeigthEst, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel34.ResumeLayout(False)
-        Me.Panel34.PerformLayout
-        CType(Me.sprWidthEst, System.ComponentModel.ISupportInitialize).EndInit
+        Me.Panel34.PerformLayout()
+        CType(Me.sprWidthEst, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel49.ResumeLayout(False)
-        Me.Panel49.PerformLayout
-        CType(Me.sprLengthEst, System.ComponentModel.ISupportInitialize).EndInit
+        Me.Panel49.PerformLayout()
+        CType(Me.sprLengthEst, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel54.ResumeLayout(False)
-        Me.Panel54.PerformLayout
-        CType(Me.sprGroudHeigthEst, System.ComponentModel.ISupportInitialize).EndInit
+        Me.Panel54.PerformLayout()
+        CType(Me.sprGroudHeigthEst, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel60.ResumeLayout(False)
-        Me.Panel60.PerformLayout
-        CType(Me.sprElevatorEst, System.ComponentModel.ISupportInitialize).EndInit
+        Me.Panel60.PerformLayout()
+        CType(Me.sprElevatorEst, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel2.ResumeLayout(False)
-        Me.Panel2.PerformLayout
-        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).EndInit
+        Me.Panel2.PerformLayout()
+        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).EndInit()
         Me.TitleBar.ResumeLayout(False)
-        Me.TitleBar.PerformLayout
-        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.btnRestore, System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.btnMaximize, System.ComponentModel.ISupportInitialize).EndInit
+        Me.TitleBar.PerformLayout()
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.btnRestore, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.btnMaximize, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub

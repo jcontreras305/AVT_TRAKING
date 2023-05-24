@@ -1007,18 +1007,20 @@ CREATE proc [dbo].[Sp_Employee_Per_Diem_Sheets]
 @all as bit
 as
 begin
-	select 
-	CONVERT(date, DATEADD(DAY,  8-(DATEPART(dw, xp.dateExpense)) ,xp.dateExpense)) as 'Weekending',
-			po.jobNo as 'Job Num',
-			po.idPO as 'PO',
-			CONCAT(wo.idWO,' ', tk.task) as 'Project Name',
-			ex.expenseCode as 'Project Description' ,
-			cl.companyName as 'Company Name',  
-			CONCAT(em.lastName,',',em.firstName,' ',em.middleName) as 'Employee Name',
-			em.numberEmploye as 'Emp: Number',
-			em.typeEmployee as 'Class', 
-			sum(xp.amount) as 'Amount'
-			from expensesUsed as xp 
+	SELECT 
+	DISTINCT
+	T1.[Weekending],T1.[Job Num],T1.[PO],T1.[Project Name],T1.[Project Description],T1.[Company Name],T1.[Employee Name],
+	T1.[Emp: Number],T1.[Class],
+	SUM	(T1.[Amount]) OVER (PARTITION BY T1.[Weekending],T1.[Job Num],T1.[PO],T1.[Emp: Number],T1.[Project Description],T1.[Company Name]) as 'Amount'
+FROM 
+(select CONVERT(date, DATEADD(DAY, IIF(DATEPART(dw, xp.dateExpense) = 1,0,  8-(DATEPART(dw, xp.dateExpense))) ,xp.dateExpense)) as 'Weekending',
+	jb.jobNo 'Job Num', po.idPO as 'PO', concat(wo.idWO,' ',tk.task) as 'Project Name',
+	ex.expenseCode as 'Project Description', cl.companyName as 'Company Name',
+	CONCAT(em.lastName,',',em.firstName,' ',em.middleName) as 'Employee Name',
+	em.numberEmploye as 'Emp: Number',
+	em.typeEmployee as 'Class', 
+	xp.amount as 'Amount'
+from expensesUsed as xp 
 			inner join expenses as ex on xp.idExpense = ex.idExpenses
 			inner join employees as em on em.idEmployee = xp.idEmployee 
 			inner join task as tk on tk.idAux = xp.idAux
@@ -1026,9 +1028,9 @@ begin
 			inner join projectOrder as po on po.idPO = wo.idPO and po.jobNo = wo.jobNo
 			inner join job as jb on jb.jobNo = wo.jobNo 
 			inner join clients as cl on cl.idClient = jb.idClient
-			where xp.dateExpense  between @startdate and @finaldate and cl.numberClient = @clientnum and jb.jobNo like iif(@all=1,'%%',CONCAT('',@job,''))
-			group by CONVERT(date, DATEADD(DAY,  8-(DATEPART(dw, xp.dateExpense)) ,xp.dateExpense)),po.jobNo,po.idPO, wo.idWO, tk.task,cl.companyName, ex.expenseCode,
-			CONCAT(em.lastName,',',em.firstName,' ',em.middleName),em.numberEmploye,em.typeEmployee
+			where xp.dateExpense between @startdate and @finaldate
+				and cl.numberClient = @clientnum and jb.jobNo like iif(@all=1,'%%',CONCAT('',@job,''))
+) AS T1
 end
 go
 --##############################################################################################
