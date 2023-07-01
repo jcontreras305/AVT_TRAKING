@@ -135,6 +135,11 @@ Public Class ReportsMenu
         Dim tse As New ScaffoldActive
         tse.ShowDialog()
     End Sub
+
+    Private Sub Button38_Click(sender As Object, e As EventArgs) Handles Button38.Click
+        Dim tse As New ReportFieldForce
+        tse.ShowDialog()
+    End Sub
     Public datos As New List(Of String)
     Public cancelProcess As Boolean
     Private Sub Button23_Click(sender As Object, e As EventArgs) Handles Button23.Click

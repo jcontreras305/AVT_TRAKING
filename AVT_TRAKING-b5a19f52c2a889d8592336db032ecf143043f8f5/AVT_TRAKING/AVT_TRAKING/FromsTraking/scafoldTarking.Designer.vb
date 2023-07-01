@@ -1145,9 +1145,9 @@ Partial Class scafoldTarking
         Me.Label4.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.Label4.Location = New System.Drawing.Point(20, 111)
         Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(62, 13)
+        Me.Label4.Size = New System.Drawing.Size(68, 13)
         Me.Label4.TabIndex = 3
-        Me.Label4.Text = "Recibed By"
+        Me.Label4.Text = "Received By"
         '
         'dtpDateInComing
         '

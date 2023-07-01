@@ -68,6 +68,7 @@ Public Class MetodosClients
             cmd.Parameters.AddWithValue("@providence", datos(15))
             cmd.Parameters.AddWithValue("@postalcode", datos(16))
             cmd.Parameters.AddWithValue("@payTerms", datos(17))
+            cmd.Parameters.AddWithValue("@PostingProject", If(datos(18) = "0", datos(1), datos(18)))
             'image
             cmd.Parameters.Add("@img", SqlDbType.Image).Value = img
             If cmd.ExecuteNonQuery Then
@@ -91,7 +92,7 @@ left join HomeAddress as ha on cl.idHomeAddress = ha.idHomeAdress"
             Dim cmd As New SqlCommand("
 select cl.idClient,cl.numberClient,cl.firstName,cl.middleName,cl.lastName,cl.companyName,cl.estatus,
 ct.idContact,ct.phoneNumber1, ct.phoneNumber2,ct.email,
-ha.idHomeAdress, ha.avenue ,ha.number, ha.city ,ha.providence,ha.postalCode from
+ha.idHomeAdress, ha.avenue ,ha.number, ha.city ,ha.providence,ha.postalCode,cl.postingProject from
 " + consultaInner + "
 where cl.numberClient like " + text + " 
 or cl.firstName like  concat('%','" + text + "','%')
@@ -117,7 +118,7 @@ or ha.city like concat('%','" + text + "','%')", conn)
             Dim cmd As New SqlCommand("
 select cl.idClient as 'ID Client',cl.numberClient as '# Client',cl.firstName as 'First Name',cl.middleName as 'Middlename',cl.lastName as 'Lastname',cl.companyName as 'Comapny Name',cl.estatus as 'Status',
 ct.idContact ,ct.phoneNumber1, ct.phoneNumber2,ct.email,
-ha.idHomeAdress, ha.avenue ,ha.number, ha.city ,ha.providence,ha.postalCode,photo,cl.payTerms from
+ha.idHomeAdress, ha.avenue ,ha.number, ha.city ,ha.providence,ha.postalCode,photo,cl.payTerms,cl.postingProject from
 " + consultaInner, conn)
 
             If cmd.ExecuteNonQuery Then
@@ -161,6 +162,7 @@ ha.idHomeAdress, ha.avenue ,ha.number, ha.city ,ha.providence,ha.postalCode,phot
             cmd.Parameters.AddWithValue("@providence", dataList(15))
             cmd.Parameters.AddWithValue("@postalcode", dataList(16))
             cmd.Parameters.AddWithValue("@payTerms", dataList(17))
+            cmd.Parameters.AddWithValue("@postingProject", If(dataList(18) = "0", dataList(1), dataList(18)))
             cmd.Parameters.Add("@img", SqlDbType.Image).Value = img
             If cmd.ExecuteNonQuery Then
                 MsgBox("Successfull")
@@ -214,7 +216,7 @@ ha.idHomeAdress, ha.avenue ,ha.number, ha.city ,ha.providence,ha.postalCode,phot
             Dim dr As SqlDataReader = cmd.ExecuteReader()
             tabla.Rows.Clear()
             While dr.Read()
-                tabla.Rows.Add(dr("Work Order"), dr("Project Description"), If(dr("Cmp") = "0", False, True), dr("Total Spend"), dr("Total Hours ST"), dr("Total Amount ST"), dr("Total Hours OT"), dr("Total Amount OT"), dr("Total Hours 3"), dr("Total Amount 3"), dr("Total Expenses Spend"), dr("Total Material Spend"), dr("jobNo"), dr("workTMLumpSum"), dr("costDistribution"), dr("custumerNo"), dr("contractNo"), dr("costCode"), dr("idClient"), dr("idPO"), dr("idTask"), dr("idAuxWO"), dr("idAux"), dr("photo"))
+                tabla.Rows.Add(dr("Work Order"), dr("Project Description"), If(dr("Cmp") = "0", False, True), dr("Total Spend"), dr("Total Hours ST"), dr("Total Amount ST"), dr("Total Hours OT"), dr("Total Amount OT"), dr("Total Hours 3"), dr("Total Amount 3"), dr("Total Expenses Spend"), dr("Total Material Spend"), dr("jobNo"), dr("workTMLumpSum"), dr("costDistribution"), dr("custumerNo"), dr("contractNo"), dr("costCode"), dr("idClient"), dr("idPO"), dr("idTask"), dr("idAuxWO"), dr("idAux"), dr("photo"), dr("postingProject"))
             End While
             dr.Close()
         Catch ex As Exception
@@ -305,7 +307,8 @@ ha.idHomeAdress, ha.avenue ,ha.number, ha.city ,ha.providence,ha.postalCode,phot
 	ISNULL(tk.task ,'') AS 'idTask',
     ISNULL(wo.idAuxWO,'') AS 'idAuxWO',
 	ISNULL(tk.idAux,'') AS 'idAux',
-	cln.photo
+	cln.photo,
+    cln.postingProject
 from
 clients as cln left join job as jb on jb.idClient = cln.idClient
 inner join projectOrder as po on po.jobNo = jb.jobNo

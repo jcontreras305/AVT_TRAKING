@@ -662,6 +662,12 @@
     <Compile Include="Reports TimeSheet\ReportEmployeesTime.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Reports TimeSheet\ReportFieldForce.Designer.vb">
+      <DependentUpon>ReportFieldForce.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Reports TimeSheet\ReportFieldForce.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Reports TimeSheet\ReportHoursPerWeek.Designer.vb">
       <DependentUpon>ReportHoursPerWeek.vb</DependentUpon>
     </Compile>
@@ -1267,6 +1273,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Reports TimeSheet\ReportEmployeesTime.resx">
       <DependentUpon>ReportEmployeesTime.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports TimeSheet\ReportFieldForce.resx">
+      <DependentUpon>ReportFieldForce.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports TimeSheet\ReportHoursPerWeek.resx">
       <DependentUpon>ReportHoursPerWeek.vb</DependentUpon>

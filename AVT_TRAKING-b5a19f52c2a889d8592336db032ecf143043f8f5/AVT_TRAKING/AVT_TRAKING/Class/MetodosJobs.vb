@@ -12,7 +12,7 @@ Public Class MetodosJobs
         Try
             Dim cmd As New SqlCommand
 
-            cmd.CommandText = "select idWorkCode as ID , jobNo as 'JobNo' , name as Name , description as Description, billingRate1 as BillingRT1, billingRateOT as BillingOT, billingRate3 as BillingRT3 , EQExp1,EQExp2 from workCode " + If(jobNo = "", "", " where jobNo = " & jobNo & "")
+            cmd.CommandText = "select idWorkCode as ID , jobNo as 'JobNo' , name as Name , description as Description, billingRate1 as BillingRT1, billingRateOT as BillingOT, billingRate3 as BillingRT3 , EQExp1, EQExp2, Category, PayItemType as 'Pay Item Type', WorkType as 'Work Type', CostCode as 'Cost Code', CustomerPositionID as 'Customer Position ID', CustomerJobPositionDescription as 'Customer Job Position Description', CBSFullNumber as 'CBS Full Number' from workCode " + If(jobNo = "", "", " where jobNo = " & jobNo & "")
             cmd.Connection = conn
 
             If cmd.ExecuteNonQuery Then
@@ -32,7 +32,7 @@ Public Class MetodosJobs
             conectar()
             Dim cmd As New SqlCommand("if not EXISTS (select idWorkCode from workCode where name = '" + datos(1) + "' and jobNo = " + datos(8) + ")
 begin 
-    insert into workCode values (" + datos(0) + "," + datos(8) + ",'" + datos(1) + "','" + datos(2) + "'," + datos(3) + "," + datos(4) + "," + datos(5) + ",'" + datos(6) + "','" + datos(7) + "')
+    insert into workCode values (" + datos(0) + "," + datos(8) + ",'" + datos(1) + "','" + datos(2) + "'," + datos(3) + "," + datos(4) + "," + datos(5) + ",'" + datos(6) + "','" + datos(7) + "','" + datos(9) + "','" + datos(10) + "','" + datos(11) + "','" + datos(12) + "','" + datos(13) + "','" + datos(14) + "','" + datos(15) + "')
 end")
             cmd.Connection = conn
             If cmd.ExecuteNonQuery > 0 Then
@@ -57,9 +57,13 @@ end")
             conectar()
             Dim cmd As New SqlCommand("if EXISTS (select idWorkCode from workCode where idWorkCode = " + datos(0) + " and jobNo = " + datos(8) + ")
 begin 
-    IF not EXISTS (select name from workCode where name = '" + datos(1) + "' and jobno = " + datos(8) + ")
+    IF '" + datos(1) + "' = (select name from workCode where idWorkCode = " + datos(0) + " and jobNo = " + datos(8) + ")
+    BEGIN 
+        update workCode set description ='" + datos(2) + "', billingRate1=" + datos(3) + ", billingRateOT=" + datos(4) + ", billingRate3= " + datos(5) + ",EQExp1='" + datos(6) + "',EQExp2='" + datos(7) + "' , Category= '" + datos(9) + "',PayItemType = '" + datos(10) + "',WorkType= '" + datos(11) + "',CostCode= '" + datos(12) + "',CustomerPositionID= '" + datos(13) + "',CustomerJobPositionDescription= '" + datos(14) + "',CBSFullNumber= '" + datos(15) + "' where idWorkCode =  " + datos(0) + " and jobNo = " + datos(8) + "
+    END
+    ELSE IF not EXISTS (select name from workCode where name = '" + datos(1) + "' and jobno = " + datos(8) + ")
 	begin
-        update workCode set name='" + datos(1) + "',description ='" + datos(2) + "', billingRate1=" + datos(3) + ", billingRateOT=" + datos(4) + ", billingRate3= " + datos(5) + ",EQExp1='" + datos(6) + "',EQExp2='" + datos(7) + "' where idWorkCode =  " + datos(0) + " and jobNo = " + datos(8) + "
+        update workCode set name='" + datos(1) + "',description ='" + datos(2) + "', billingRate1=" + datos(3) + ", billingRateOT=" + datos(4) + ", billingRate3= " + datos(5) + ",EQExp1='" + datos(6) + "',EQExp2='" + datos(7) + "' , Category= '" + datos(9) + "',PayItemType = '" + datos(10) + "',WorkType= '" + datos(11) + "',CostCode= '" + datos(12) + "',CustomerPositionID= '" + datos(13) + "',CustomerJobPositionDescription= '" + datos(14) + "',CBSFullNumber= '" + datos(15) + "' where idWorkCode =  " + datos(0) + " and jobNo = " + datos(8) + "
     end
 end", conn)
             If cmd.ExecuteNonQuery > 0 Then
@@ -77,7 +81,8 @@ end", conn)
     Public Sub buscarWC(ByVal dato As String, ByVal tabla As DataGridView)
         Try
             conectar()
-            Dim cmd As New SqlCommand("select idWorkCode as ID , jobNo as 'JobNo' , name as Name , description as Description, billingRate1 as BillingRT1, billingRateOT as BillingOT, billingRate3 as BillingRT3 , EQExp1,EQExp2 from workCode where idWorkCode like '" + dato + "' or  name like '%" + dato + "%' or description like '%" + dato + "%' ", conn)
+            Dim cmd As New SqlCommand("select idWorkCode as ID , jobNo as 'JobNo' , name as Name , description as Description, billingRate1 as BillingRT1, billingRateOT as BillingOT, billingRate3 as BillingRT3 , EQExp1, EQExp2, Category, PayItemType as 'Pay Item Type',WorkType as 'Work Type', CostCode as 'Cost Code', CustomerPositionID as 'Customer Position ID', CustomerJobPositionDescription as 'Customer Job Position Description', CBSFullNumber as 'CBS Full Number' from workCode where idWorkCode like '" + dato + "' or  name like '%" + dato + "%' or description like '%" + dato + "%' ", conn)
+            'Dim cmd As New SqlCommand("select idWorkCode as ID , jobNo as 'JobNo' , name as Name , description as Description, billingRate1 as BillingRT1, billingRateOT as BillingOT, billingRate3 as BillingRT3 , EQExp1,EQExp2 from workCode where idWorkCode like '" + dato + "' or  name like '%" + dato + "%' or description like '%" + dato + "%' ", conn)
             If cmd.ExecuteNonQuery Then
                 Dim dt As New DataTable
                 Dim da As New SqlDataAdapter(cmd)
@@ -109,7 +114,7 @@ end", conn)
                 End If
                 Dim cmd As New SqlCommand("If Not EXISTS (select idWorkCode from workCode where name = '" + row.ItemArray(1) + "' and jobNo = " + If(row.ItemArray(8) = "" And assignJob, jobNO, row.ItemArray(8)) + ")
                 begin
-                    insert into workCode values (" + row.ItemArray(0) + "," + If(row.ItemArray(8) = "" And assignJob, jobNO, row.ItemArray(8)) + ",'" + row.ItemArray(1) + "','" + row.ItemArray(2) + "'," + row.ItemArray(3) + "," + row.ItemArray(4) + "," + row.ItemArray(5) + ",'" + row.ItemArray(6) + "','" + row.ItemArray(7) + "')
+                    insert into workCode values (" + row.ItemArray(0) + "," + If(row.ItemArray(8) = "" And assignJob, jobNO, row.ItemArray(8)) + ",'" + row.ItemArray(1) + "','" + row.ItemArray(2) + "'," + row.ItemArray(3) + "," + row.ItemArray(4) + "," + row.ItemArray(5) + ",'" + row.ItemArray(6) + "','" + row.ItemArray(7) + "'," + row.ItemArray(9) + "," + row.ItemArray(10) + "," + row.ItemArray(11) + "," + row.ItemArray(12) + "," + row.ItemArray(13) + "," + row.ItemArray(14) + "," + row.ItemArray(15) + ")
                 end")
                 cmd.Connection = conn
                 cmd.Transaction = tran
@@ -802,7 +807,9 @@ po.idPO,
 wo.idWO, 
 tk.task,
 tk.idAux,
-wo.idAuxWO
+wo.idAuxWO,
+po.line,
+po.WBS
 from job as jb 
 inner join projectOrder as po on po.jobNo = jb.jobNo
 inner join workOrder as wo on wo.idPO = po.idPO and wo.jobNo = po.jobNo
@@ -971,7 +978,9 @@ tk.accountNum,
 tk.status,
 tk.idAux,
 tk.idAuxWO,
-tk.percentComplete
+tk.percentComplete,
+po.Line,
+po.WBS
 from 
 job as jb 
 inner join clients as cl on jb.idClient = cl.idClient
@@ -999,6 +1008,8 @@ where jb.jobNo = " + If(idJob = "", "0", idJob).ToString() + " order by wo.idWO 
                 lstDatosPO.Add(If(reader("idAux") Is DBNull.Value, "", reader("idAux")))
                 lstDatosPO.Add(If(reader("idAuxWO") Is DBNull.Value, "", reader("idAuxWO")))
                 lstDatosPO.Add(If(reader("percentComplete") Is DBNull.Value, 0, reader("percentComplete")))
+                lstDatosPO.Add(If(reader("Line") Is DBNull.Value, "", reader("Line")))
+                lstDatosPO.Add(If(reader("WBS") Is DBNull.Value, "", reader("WBS")))
                 Exit While
             End While
             desconectar()
@@ -1030,7 +1041,9 @@ tk.accountNum,
 tk.status,
 tk.idAux,
 tk.idAuxWO,
-tk.percentComplete
+tk.percentComplete,
+po.line,
+po.WBS
 from 
 job as jb 
 inner join clients as cl on jb.idClient = cl.idClient
@@ -1058,6 +1071,8 @@ where jb.jobNo = " + If(idJob = "", "0", idJob).ToString() + " and tk.task = '" 
                 lstDatosPO.Add(reader("idAux"))
                 lstDatosPO.Add(reader("idAuxWO"))
                 lstDatosPO.Add(reader("percentComplete"))
+                lstDatosPO.Add(reader("Line"))
+                lstDatosPO.Add(reader("WBS"))
                 Exit While
             End While
             desconectar()
@@ -1089,6 +1104,86 @@ where jb.jobNo = " + If(idJob = "", "0", idJob).ToString() + " and tk.task = '" 
         End Try
     End Function
 
+    Public Function updateWBS(ByVal WBSN As String, ByVal WBSV As String, ByVal idJobNum As String, ByVal idPO As String) As Boolean
+        Dim tran As SqlTransaction
+        Try
+            conectar()
+            Dim cmd1 As New SqlCommand("
+if (select COUNT(idPO) from projectOrder where idPO = " + idPO + " and jobNo = " + idJobNum + " and WBS = '" + WBSV + "') = 1 
+		and (select COUNT(idPO) from projectOrder where idPO = " + idPO + " and jobNo = " + idJobNum + " and WBS ='" + WBSN + "') = 0   
+begin 
+   	update po set  po.WBS = '" + WBSN + "' from projectOrder as po 
+	inner join job as jb on po.jobNo = jb.jobNo 
+	inner join workOrder as wo on wo.idPO = po.idPO and wo.jobNo = jb.jobNo
+	where po.idPO = " + idPO + " and po.jobNo =  " + idJobNum + " and WBS = '" + WBSV + "' 
+end  ", conn)
+            ' Dim cmd2 As New SqlCommand("update wo set wo.idPO = " + idPON + " from workOrder as wo inner join projectOrder as po on wo.idPO = po.idPO where po.jobNo = " + idJobNum + " and po.idPO = " + idPON, conn)
+
+            tran = conn.BeginTransaction()
+            cmd1.Transaction = tran
+            'cmd2.Transaction = tran
+            If cmd1.ExecuteNonQuery = 1 Then
+                'If cmd2.ExecuteNonQuery > 0 Then
+                tran.Commit()
+                desconectar()
+                Return True
+                'Else
+                '    tran.Rollback()
+                '    Return False
+                'End If
+            Else
+                tran.Rollback()
+                desconectar()
+                Return False
+            End If
+            desconectar()
+        Catch ex As Exception
+            MsgBox(ex.Message())
+            tran.Rollback()
+            tran.Dispose()
+            Return False
+        End Try
+    End Function
+    Public Function updateLine(ByVal LineN As String, ByVal lineV As String, ByVal idJobNum As String, ByVal idPO As String) As Boolean
+        Dim tran As SqlTransaction
+        Try
+            conectar()
+            Dim cmd1 As New SqlCommand("
+if (select COUNT(idPO) from projectOrder where idPO = " + idPO + " and jobNo = " + idJobNum + " and Line = '" + lineV + "') = 1 
+		and (select COUNT(idPO) from projectOrder where idPO = " + idPO + " and jobNo = " + idJobNum + " and Line ='" + LineN + "') = 0   
+begin 
+   	update po set  po.Line = '" + LineN + "' from projectOrder as po 
+	inner join job as jb on po.jobNo = jb.jobNo 
+	inner join workOrder as wo on wo.idPO = po.idPO and wo.jobNo = jb.jobNo
+	where po.idPO = " + idPO + " and po.jobNo =  " + idJobNum + " and Line = '" + lineV + "' 
+end  ", conn)
+            ' Dim cmd2 As New SqlCommand("update wo set wo.idPO = " + idPON + " from workOrder as wo inner join projectOrder as po on wo.idPO = po.idPO where po.jobNo = " + idJobNum + " and po.idPO = " + idPON, conn)
+
+            tran = conn.BeginTransaction()
+            cmd1.Transaction = tran
+            'cmd2.Transaction = tran
+            If cmd1.ExecuteNonQuery = 1 Then
+                'If cmd2.ExecuteNonQuery > 0 Then
+                tran.Commit()
+                desconectar()
+                Return True
+                'Else
+                '    tran.Rollback()
+                '    Return False
+                'End If
+            Else
+                tran.Rollback()
+                desconectar()
+                Return False
+            End If
+            desconectar()
+        Catch ex As Exception
+            MsgBox(ex.Message())
+            tran.Rollback()
+            tran.Dispose()
+            Return False
+        End Try
+    End Function
     Public Function updatePO(ByVal idPON As String, ByVal idPOV As String, ByVal idJobNum As String) As Boolean
         Dim tran As SqlTransaction
         Try

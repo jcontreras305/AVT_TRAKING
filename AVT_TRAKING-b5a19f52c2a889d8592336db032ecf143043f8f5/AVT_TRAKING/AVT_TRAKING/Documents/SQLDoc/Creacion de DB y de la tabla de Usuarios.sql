@@ -250,7 +250,8 @@ CREATE TABLE [dbo].[clients](
 	[idHomeAddress] [varchar](36) NULL,
 	[estatus] [char](1) NULL,
 	[photo] [image] NULL,
-	[payTerms] [varchar](30) NULL
+	[payTerms] [varchar](30) NULL,
+	[postingProject] [varchar](12) NULL,
 	)
 	GO
 
@@ -1433,7 +1434,9 @@ GO
 
 create table projectOrder(
 	idPO bigint not null ,
-	jobNo bigint not null 
+	jobNo bigint not null ,
+	Line varchar (10),
+	WBS varchar(10)
 )
 GO
 ALTER TABLE projectOrder
@@ -2302,7 +2305,14 @@ create table workCode (
 	billingRateOT float,
 	billingRate3 float,
 	EQExp1 varchar(50),
-	EQExp2 varchar(50) 
+	EQExp2 varchar(50),
+	Category varchar(12),
+	PayItemType varchar(20), 
+	WorkType varchar(20),
+	CostCode varchar(20),
+	CustomerPositionID varchar(5), 
+	CustomerJobPositionDescription varchar(15),
+	CBSFullNumber varchar(11)
 )
 go
 

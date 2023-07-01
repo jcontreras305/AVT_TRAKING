@@ -258,7 +258,7 @@ Public Class HoursWeekPerEmployees
                                 Dim cmbWorkCode As New DataGridViewComboBoxCell
                                 With cmbWorkCode
                                     lastValue = mtdHPW.llenarComboCellWorkCode(cmbWorkCode, tblRecordEmployee.CurrentRow.Cells("JobNo").Value.ToString(), lastValue)
-                                    .DropDownWidth = 180
+                                    .DropDownWidth = 200
                                 End With
                                 tblRecordEmployee.CurrentRow.Cells("Work Code") = cmbWorkCode
                                 tblRecordEmployee.CurrentRow.Cells("Work Code").Value = lastValue
@@ -273,8 +273,8 @@ Public Class HoursWeekPerEmployees
                     Try
                         If tblRecordEmployee.CurrentCell.GetType.Name = "DataGridViewTextBoxCell" Then
                             Dim cmbShift As New DataGridViewComboBoxCell
-                            cmbShift.Items.Add("DAYS")
-                            cmbShift.Items.Add("NIGHTS")
+                            cmbShift.Items.Add("Day")
+                            cmbShift.Items.Add("Night")
                             tblRecordEmployee.CurrentRow.Cells("Shift") = cmbShift
                         End If
                         flagFilaActual = "Shift"

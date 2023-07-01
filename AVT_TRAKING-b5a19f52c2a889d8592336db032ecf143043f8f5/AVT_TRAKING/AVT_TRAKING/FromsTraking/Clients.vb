@@ -40,7 +40,7 @@ Public Class Clients
 
     Private Function recolectar()
         Try
-            Dim datosClientes(18) As String
+            Dim datosClientes(19) As String
             datosClientes(0) = IdCliente
             datosClientes(1) = txtIdClient.Text
             datosClientes(2) = txtFirstName.Text
@@ -91,6 +91,7 @@ Public Class Clients
                 datosClientes(16) = "0"
             End If
             datosClientes(17) = txtPayTerms.Text
+            datosClientes(18) = If(txtPostingProject.Text = "", "0", txtPostingProject.Text)
             Return datosClientes
         Catch ex As Exception
             Return Nothing
@@ -246,6 +247,7 @@ Public Class Clients
                 chbAddress.Checked = False
             End If
             txtPayTerms.Text = dataClient(17)
+            txtPostingProject.Text = dataClient(18)
         End If
 
     End Sub
@@ -293,6 +295,7 @@ Public Class Clients
         txtNumerStreat.Text = ""
         txtProvince.Text = ""
         txtPC.Text = ""
+        txtPostingProject.Text = "0"
     End Sub
 
     Private Sub lblN3_Click(sender As Object, e As EventArgs)
@@ -335,6 +338,9 @@ Public Class Clients
         End Try
     End Sub
 
+    Private Sub txtPostingProject_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtPostingProject.KeyPress
+        e.Handled = Not IsNumeric(e.KeyChar) And Not Char.IsControl(e.KeyChar)
+    End Sub
 
     Private Function validar_Correo(ByVal mail As String) As Boolean
         Return Regex.IsMatch(mail, "^[a-zA-Z][\w\.-]*[a-zA-Z0-9]@[a-zA-Z0-9][\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]{2,4}$") '"^[_a-zA-B0-9]+(\._a-zA-B0-9+)*@[a-zA-B0-9-]+(\.[a-zA-B0-9-]+)*(\.[a-z]{2,4})$")

@@ -33,6 +33,8 @@ Partial Class WorkCodes
         Me.txtEQExq1 = New System.Windows.Forms.TextBox()
         Me.txtEQExq2 = New System.Windows.Forms.TextBox()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.btnDownloadExcel = New System.Windows.Forms.Button()
+        Me.btnExcel = New System.Windows.Forms.Button()
         Me.sprBillingRate3 = New System.Windows.Forms.NumericUpDown()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.btnCancelWC = New System.Windows.Forms.Button()
@@ -64,8 +66,20 @@ Partial Class WorkCodes
         Me.TableLayoutPanel3 = New System.Windows.Forms.TableLayoutPanel()
         Me.Panel5 = New System.Windows.Forms.Panel()
         Me.Panel6 = New System.Windows.Forms.Panel()
-        Me.btnExcel = New System.Windows.Forms.Button()
-        Me.btnDownloadExcel = New System.Windows.Forms.Button()
+        Me.txtCategory = New System.Windows.Forms.TextBox()
+        Me.Label12 = New System.Windows.Forms.Label()
+        Me.txtPayItemType = New System.Windows.Forms.TextBox()
+        Me.Label13 = New System.Windows.Forms.Label()
+        Me.txtWorkType = New System.Windows.Forms.TextBox()
+        Me.Label14 = New System.Windows.Forms.Label()
+        Me.txtCostCode = New System.Windows.Forms.TextBox()
+        Me.Label15 = New System.Windows.Forms.Label()
+        Me.txtCustomerPositionID = New System.Windows.Forms.TextBox()
+        Me.Label16 = New System.Windows.Forms.Label()
+        Me.txtCustomerJobPositionDescription = New System.Windows.Forms.TextBox()
+        Me.Label17 = New System.Windows.Forms.Label()
+        Me.txtCBSFullNumber = New System.Windows.Forms.TextBox()
+        Me.Label18 = New System.Windows.Forms.Label()
         Me.GroupBox1.SuspendLayout()
         CType(Me.sprBillingRate3, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.sprBillingRateOT, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -90,7 +104,7 @@ Partial Class WorkCodes
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(12, 24)
+        Me.Label1.Location = New System.Drawing.Point(43, 24)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(88, 13)
         Me.Label1.TabIndex = 0
@@ -99,7 +113,7 @@ Partial Class WorkCodes
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(27, 59)
+        Me.Label2.Location = New System.Drawing.Point(58, 47)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(70, 13)
         Me.Label2.TabIndex = 1
@@ -108,7 +122,7 @@ Partial Class WorkCodes
         'Label4
         '
         Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(26, 130)
+        Me.Label4.Location = New System.Drawing.Point(57, 93)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(71, 13)
         Me.Label4.TabIndex = 3
@@ -117,7 +131,7 @@ Partial Class WorkCodes
         'Label5
         '
         Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(7, 166)
+        Me.Label5.Location = New System.Drawing.Point(38, 116)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(91, 13)
         Me.Label5.TabIndex = 4
@@ -126,7 +140,7 @@ Partial Class WorkCodes
         'Label6
         '
         Me.Label6.AutoSize = True
-        Me.Label6.Location = New System.Drawing.Point(43, 230)
+        Me.Label6.Location = New System.Drawing.Point(73, 162)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(55, 13)
         Me.Label6.TabIndex = 5
@@ -135,7 +149,7 @@ Partial Class WorkCodes
         'Label7
         '
         Me.Label7.AutoSize = True
-        Me.Label7.Location = New System.Drawing.Point(43, 268)
+        Me.Label7.Location = New System.Drawing.Point(73, 185)
         Me.Label7.Name = "Label7"
         Me.Label7.Size = New System.Drawing.Size(55, 13)
         Me.Label7.TabIndex = 6
@@ -145,40 +159,54 @@ Partial Class WorkCodes
         '
         Me.txtWorkCodeID.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.txtWorkCodeID.Location = New System.Drawing.Point(98, 21)
+        Me.txtWorkCodeID.Location = New System.Drawing.Point(137, 22)
         Me.txtWorkCodeID.Name = "txtWorkCodeID"
-        Me.txtWorkCodeID.Size = New System.Drawing.Size(130, 21)
+        Me.txtWorkCodeID.Size = New System.Drawing.Size(151, 21)
         Me.txtWorkCodeID.TabIndex = 2
         '
         'TxtWorkCode
         '
         Me.TxtWorkCode.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.TxtWorkCode.Location = New System.Drawing.Point(98, 55)
+        Me.TxtWorkCode.Location = New System.Drawing.Point(138, 45)
         Me.TxtWorkCode.Name = "TxtWorkCode"
-        Me.TxtWorkCode.Size = New System.Drawing.Size(130, 21)
+        Me.TxtWorkCode.Size = New System.Drawing.Size(151, 21)
         Me.TxtWorkCode.TabIndex = 3
         '
         'txtEQExq1
         '
         Me.txtEQExq1.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.txtEQExq1.Location = New System.Drawing.Point(98, 230)
+        Me.txtEQExq1.Location = New System.Drawing.Point(137, 160)
         Me.txtEQExq1.Name = "txtEQExq1"
-        Me.txtEQExq1.Size = New System.Drawing.Size(130, 21)
+        Me.txtEQExq1.Size = New System.Drawing.Size(151, 21)
         Me.txtEQExq1.TabIndex = 7
         '
         'txtEQExq2
         '
         Me.txtEQExq2.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.txtEQExq2.Location = New System.Drawing.Point(98, 265)
+        Me.txtEQExq2.Location = New System.Drawing.Point(137, 183)
         Me.txtEQExq2.Name = "txtEQExq2"
-        Me.txtEQExq2.Size = New System.Drawing.Size(130, 21)
+        Me.txtEQExq2.Size = New System.Drawing.Size(151, 21)
         Me.txtEQExq2.TabIndex = 8
         '
         'GroupBox1
         '
+        Me.GroupBox1.Controls.Add(Me.txtCBSFullNumber)
+        Me.GroupBox1.Controls.Add(Me.Label18)
+        Me.GroupBox1.Controls.Add(Me.txtCustomerJobPositionDescription)
+        Me.GroupBox1.Controls.Add(Me.Label17)
+        Me.GroupBox1.Controls.Add(Me.txtCustomerPositionID)
+        Me.GroupBox1.Controls.Add(Me.Label16)
+        Me.GroupBox1.Controls.Add(Me.txtCostCode)
+        Me.GroupBox1.Controls.Add(Me.Label15)
+        Me.GroupBox1.Controls.Add(Me.txtWorkType)
+        Me.GroupBox1.Controls.Add(Me.Label14)
+        Me.GroupBox1.Controls.Add(Me.txtPayItemType)
+        Me.GroupBox1.Controls.Add(Me.Label13)
+        Me.GroupBox1.Controls.Add(Me.txtCategory)
+        Me.GroupBox1.Controls.Add(Me.Label12)
         Me.GroupBox1.Controls.Add(Me.btnDownloadExcel)
         Me.GroupBox1.Controls.Add(Me.btnExcel)
         Me.GroupBox1.Controls.Add(Me.sprBillingRate3)
@@ -205,10 +233,46 @@ Partial Class WorkCodes
         Me.GroupBox1.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.GroupBox1.Location = New System.Drawing.Point(0, 0)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(264, 379)
+        Me.GroupBox1.Size = New System.Drawing.Size(295, 460)
         Me.GroupBox1.TabIndex = 16
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "WorkCode"
+        '
+        'btnDownloadExcel
+        '
+        Me.btnDownloadExcel.FlatAppearance.BorderSize = 0
+        Me.btnDownloadExcel.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(58, Byte), Integer), CType(CType(115, Byte), Integer))
+        Me.btnDownloadExcel.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnDownloadExcel.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnDownloadExcel.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.btnDownloadExcel.Image = Global.AVT_TRAKING.My.Resources.Resources.excel
+        Me.btnDownloadExcel.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnDownloadExcel.Location = New System.Drawing.Point(15, 413)
+        Me.btnDownloadExcel.Name = "btnDownloadExcel"
+        Me.btnDownloadExcel.Size = New System.Drawing.Size(121, 44)
+        Me.btnDownloadExcel.TabIndex = 21
+        Me.btnDownloadExcel.Text = "Download Excel"
+        Me.btnDownloadExcel.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.btnDownloadExcel.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
+        Me.btnDownloadExcel.UseVisualStyleBackColor = True
+        '
+        'btnExcel
+        '
+        Me.btnExcel.FlatAppearance.BorderSize = 0
+        Me.btnExcel.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(58, Byte), Integer), CType(CType(115, Byte), Integer))
+        Me.btnExcel.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnExcel.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnExcel.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.btnExcel.Image = Global.AVT_TRAKING.My.Resources.Resources.excel
+        Me.btnExcel.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnExcel.Location = New System.Drawing.Point(143, 413)
+        Me.btnExcel.Name = "btnExcel"
+        Me.btnExcel.Size = New System.Drawing.Size(104, 39)
+        Me.btnExcel.TabIndex = 20
+        Me.btnExcel.Text = "Upload Excel"
+        Me.btnExcel.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.btnExcel.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
+        Me.btnExcel.UseVisualStyleBackColor = True
         '
         'sprBillingRate3
         '
@@ -216,17 +280,17 @@ Partial Class WorkCodes
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.sprBillingRate3.DecimalPlaces = 2
         Me.sprBillingRate3.Increment = New Decimal(New Integer() {1, 0, 0, 65536})
-        Me.sprBillingRate3.Location = New System.Drawing.Point(97, 196)
+        Me.sprBillingRate3.Location = New System.Drawing.Point(137, 137)
         Me.sprBillingRate3.Maximum = New Decimal(New Integer() {1000000000, 0, 0, 0})
         Me.sprBillingRate3.Name = "sprBillingRate3"
-        Me.sprBillingRate3.Size = New System.Drawing.Size(130, 21)
+        Me.sprBillingRate3.Size = New System.Drawing.Size(151, 21)
         Me.sprBillingRate3.TabIndex = 13
         Me.sprBillingRate3.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'Label3
         '
         Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(14, 198)
+        Me.Label3.Location = New System.Drawing.Point(45, 139)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(82, 13)
         Me.Label3.TabIndex = 12
@@ -240,7 +304,7 @@ Partial Class WorkCodes
         Me.btnCancelWC.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnCancelWC.Image = Global.AVT_TRAKING.My.Resources.Resources.cancel
         Me.btnCancelWC.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnCancelWC.Location = New System.Drawing.Point(83, 291)
+        Me.btnCancelWC.Location = New System.Drawing.Point(88, 375)
         Me.btnCancelWC.Name = "btnCancelWC"
         Me.btnCancelWC.Size = New System.Drawing.Size(82, 32)
         Me.btnCancelWC.TabIndex = 10
@@ -255,10 +319,10 @@ Partial Class WorkCodes
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.sprBillingRateOT.DecimalPlaces = 2
         Me.sprBillingRateOT.Increment = New Decimal(New Integer() {1, 0, 0, 65536})
-        Me.sprBillingRateOT.Location = New System.Drawing.Point(96, 164)
+        Me.sprBillingRateOT.Location = New System.Drawing.Point(138, 114)
         Me.sprBillingRateOT.Maximum = New Decimal(New Integer() {1000000000, 0, 0, 0})
         Me.sprBillingRateOT.Name = "sprBillingRateOT"
-        Me.sprBillingRateOT.Size = New System.Drawing.Size(130, 21)
+        Me.sprBillingRateOT.Size = New System.Drawing.Size(151, 21)
         Me.sprBillingRateOT.TabIndex = 6
         Me.sprBillingRateOT.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
@@ -268,10 +332,10 @@ Partial Class WorkCodes
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.sprBillingRate1.DecimalPlaces = 2
         Me.sprBillingRate1.Increment = New Decimal(New Integer() {1, 0, 0, 65536})
-        Me.sprBillingRate1.Location = New System.Drawing.Point(98, 128)
+        Me.sprBillingRate1.Location = New System.Drawing.Point(138, 91)
         Me.sprBillingRate1.Maximum = New Decimal(New Integer() {100000000, 0, 0, 0})
         Me.sprBillingRate1.Name = "sprBillingRate1"
-        Me.sprBillingRate1.Size = New System.Drawing.Size(130, 21)
+        Me.sprBillingRate1.Size = New System.Drawing.Size(151, 21)
         Me.sprBillingRate1.TabIndex = 5
         Me.sprBillingRate1.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
@@ -279,9 +343,9 @@ Partial Class WorkCodes
         '
         Me.txtDescription.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.txtDescription.Location = New System.Drawing.Point(98, 93)
+        Me.txtDescription.Location = New System.Drawing.Point(138, 68)
         Me.txtDescription.Name = "txtDescription"
-        Me.txtDescription.Size = New System.Drawing.Size(131, 21)
+        Me.txtDescription.Size = New System.Drawing.Size(151, 21)
         Me.txtDescription.TabIndex = 4
         '
         'btnUpdateWorkCode
@@ -292,9 +356,9 @@ Partial Class WorkCodes
         Me.btnUpdateWorkCode.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnUpdateWorkCode.Image = Global.AVT_TRAKING.My.Resources.Resources.update
         Me.btnUpdateWorkCode.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnUpdateWorkCode.Location = New System.Drawing.Point(171, 291)
+        Me.btnUpdateWorkCode.Location = New System.Drawing.Point(176, 375)
         Me.btnUpdateWorkCode.Name = "btnUpdateWorkCode"
-        Me.btnUpdateWorkCode.Size = New System.Drawing.Size(87, 32)
+        Me.btnUpdateWorkCode.Size = New System.Drawing.Size(85, 32)
         Me.btnUpdateWorkCode.TabIndex = 11
         Me.btnUpdateWorkCode.Text = "Update"
         Me.btnUpdateWorkCode.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -304,7 +368,7 @@ Partial Class WorkCodes
         'Label9
         '
         Me.Label9.AutoSize = True
-        Me.Label9.Location = New System.Drawing.Point(27, 93)
+        Me.Label9.Location = New System.Drawing.Point(58, 70)
         Me.Label9.Name = "Label9"
         Me.Label9.Size = New System.Drawing.Size(71, 13)
         Me.Label9.TabIndex = 1
@@ -318,7 +382,7 @@ Partial Class WorkCodes
         Me.btnAddWorkCode.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnAddWorkCode.Image = Global.AVT_TRAKING.My.Resources.Resources.add
         Me.btnAddWorkCode.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnAddWorkCode.Location = New System.Drawing.Point(4, 291)
+        Me.btnAddWorkCode.Location = New System.Drawing.Point(9, 375)
         Me.btnAddWorkCode.Name = "btnAddWorkCode"
         Me.btnAddWorkCode.Size = New System.Drawing.Size(75, 32)
         Me.btnAddWorkCode.TabIndex = 9
@@ -337,7 +401,7 @@ Partial Class WorkCodes
         Me.tblWK.Name = "tblWK"
         Me.tblWK.ReadOnly = True
         Me.tblWK.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.tblWK.Size = New System.Drawing.Size(460, 323)
+        Me.tblWK.Size = New System.Drawing.Size(516, 394)
         Me.tblWK.TabIndex = 17
         '
         'txtBucar
@@ -374,7 +438,7 @@ Partial Class WorkCodes
         Me.TitleBar.Dock = System.Windows.Forms.DockStyle.Fill
         Me.TitleBar.Location = New System.Drawing.Point(3, 3)
         Me.TitleBar.Name = "TitleBar"
-        Me.TitleBar.Size = New System.Drawing.Size(742, 29)
+        Me.TitleBar.Size = New System.Drawing.Size(829, 29)
         Me.TitleBar.TabIndex = 20
         '
         'Label8
@@ -392,7 +456,7 @@ Partial Class WorkCodes
         '
         Me.PictureBox3.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.PictureBox3.Image = Global.AVT_TRAKING.My.Resources.Resources.minimize2
-        Me.PictureBox3.Location = New System.Drawing.Point(674, 3)
+        Me.PictureBox3.Location = New System.Drawing.Point(761, 3)
         Me.PictureBox3.Name = "PictureBox3"
         Me.PictureBox3.Size = New System.Drawing.Size(26, 29)
         Me.PictureBox3.TabIndex = 2
@@ -402,7 +466,7 @@ Partial Class WorkCodes
         '
         Me.btnRestore.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnRestore.Image = Global.AVT_TRAKING.My.Resources.Resources.restore2
-        Me.btnRestore.Location = New System.Drawing.Point(703, 3)
+        Me.btnRestore.Location = New System.Drawing.Point(790, 3)
         Me.btnRestore.Name = "btnRestore"
         Me.btnRestore.Size = New System.Drawing.Size(25, 29)
         Me.btnRestore.TabIndex = 1
@@ -412,7 +476,7 @@ Partial Class WorkCodes
         '
         Me.btnMaximize.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnMaximize.Image = Global.AVT_TRAKING.My.Resources.Resources.maximize2
-        Me.btnMaximize.Location = New System.Drawing.Point(703, 3)
+        Me.btnMaximize.Location = New System.Drawing.Point(790, 3)
         Me.btnMaximize.Name = "btnMaximize"
         Me.btnMaximize.Size = New System.Drawing.Size(28, 29)
         Me.btnMaximize.TabIndex = 0
@@ -422,7 +486,7 @@ Partial Class WorkCodes
         '
         Me.PictureBox4.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.PictureBox4.Image = Global.AVT_TRAKING.My.Resources.Resources._exit
-        Me.PictureBox4.Location = New System.Drawing.Point(703, 3)
+        Me.PictureBox4.Location = New System.Drawing.Point(790, 3)
         Me.PictureBox4.Name = "PictureBox4"
         Me.PictureBox4.Size = New System.Drawing.Size(28, 29)
         Me.PictureBox4.TabIndex = 3
@@ -442,7 +506,7 @@ Partial Class WorkCodes
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35.0!))
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 45.0!))
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-        Me.TableLayoutPanel1.Size = New System.Drawing.Size(748, 471)
+        Me.TableLayoutPanel1.Size = New System.Drawing.Size(835, 552)
         Me.TableLayoutPanel1.TabIndex = 21
         '
         'Panel1
@@ -455,7 +519,7 @@ Partial Class WorkCodes
         Me.Panel1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel1.Location = New System.Drawing.Point(3, 38)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(742, 39)
+        Me.Panel1.Size = New System.Drawing.Size(829, 39)
         Me.Panel1.TabIndex = 21
         '
         'cmbJob
@@ -500,22 +564,22 @@ Partial Class WorkCodes
         Me.Panel2.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel2.Location = New System.Drawing.Point(3, 83)
         Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(742, 385)
+        Me.Panel2.Size = New System.Drawing.Size(829, 466)
         Me.Panel2.TabIndex = 22
         '
         'TableLayoutPanel2
         '
         Me.TableLayoutPanel2.ColumnCount = 2
-        Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 36.38814!))
-        Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 63.61186!))
+        Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 301.0!))
+        Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
         Me.TableLayoutPanel2.Controls.Add(Me.Panel3, 0, 0)
         Me.TableLayoutPanel2.Controls.Add(Me.Panel4, 1, 0)
         Me.TableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill
         Me.TableLayoutPanel2.Location = New System.Drawing.Point(0, 0)
         Me.TableLayoutPanel2.Name = "TableLayoutPanel2"
         Me.TableLayoutPanel2.RowCount = 1
-        Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
-        Me.TableLayoutPanel2.Size = New System.Drawing.Size(742, 385)
+        Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
+        Me.TableLayoutPanel2.Size = New System.Drawing.Size(829, 466)
         Me.TableLayoutPanel2.TabIndex = 0
         '
         'Panel3
@@ -524,16 +588,16 @@ Partial Class WorkCodes
         Me.Panel3.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel3.Location = New System.Drawing.Point(3, 3)
         Me.Panel3.Name = "Panel3"
-        Me.Panel3.Size = New System.Drawing.Size(264, 379)
+        Me.Panel3.Size = New System.Drawing.Size(295, 460)
         Me.Panel3.TabIndex = 0
         '
         'Panel4
         '
         Me.Panel4.Controls.Add(Me.TableLayoutPanel3)
         Me.Panel4.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel4.Location = New System.Drawing.Point(273, 3)
+        Me.Panel4.Location = New System.Drawing.Point(304, 3)
         Me.Panel4.Name = "Panel4"
-        Me.Panel4.Size = New System.Drawing.Size(466, 379)
+        Me.Panel4.Size = New System.Drawing.Size(522, 460)
         Me.Panel4.TabIndex = 1
         '
         'TableLayoutPanel3
@@ -548,7 +612,7 @@ Partial Class WorkCodes
         Me.TableLayoutPanel3.RowCount = 2
         Me.TableLayoutPanel3.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 13.23944!))
         Me.TableLayoutPanel3.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 86.76057!))
-        Me.TableLayoutPanel3.Size = New System.Drawing.Size(466, 379)
+        Me.TableLayoutPanel3.Size = New System.Drawing.Size(522, 460)
         Me.TableLayoutPanel3.TabIndex = 0
         '
         'Panel5
@@ -558,60 +622,151 @@ Partial Class WorkCodes
         Me.Panel5.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel5.Location = New System.Drawing.Point(3, 3)
         Me.Panel5.Name = "Panel5"
-        Me.Panel5.Size = New System.Drawing.Size(460, 44)
+        Me.Panel5.Size = New System.Drawing.Size(516, 54)
         Me.Panel5.TabIndex = 0
         '
         'Panel6
         '
         Me.Panel6.Controls.Add(Me.tblWK)
         Me.Panel6.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel6.Location = New System.Drawing.Point(3, 53)
+        Me.Panel6.Location = New System.Drawing.Point(3, 63)
         Me.Panel6.Name = "Panel6"
-        Me.Panel6.Size = New System.Drawing.Size(460, 323)
+        Me.Panel6.Size = New System.Drawing.Size(516, 394)
         Me.Panel6.TabIndex = 1
         '
-        'btnExcel
+        'txtCategory
         '
-        Me.btnExcel.FlatAppearance.BorderSize = 0
-        Me.btnExcel.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(58, Byte), Integer), CType(CType(115, Byte), Integer))
-        Me.btnExcel.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnExcel.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnExcel.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.btnExcel.Image = Global.AVT_TRAKING.My.Resources.Resources.excel
-        Me.btnExcel.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnExcel.Location = New System.Drawing.Point(137, 329)
-        Me.btnExcel.Name = "btnExcel"
-        Me.btnExcel.Size = New System.Drawing.Size(104, 39)
-        Me.btnExcel.TabIndex = 20
-        Me.btnExcel.Text = "Upload Excel"
-        Me.btnExcel.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.btnExcel.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
-        Me.btnExcel.UseVisualStyleBackColor = True
+        Me.txtCategory.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.txtCategory.Location = New System.Drawing.Point(137, 206)
+        Me.txtCategory.Name = "txtCategory"
+        Me.txtCategory.Size = New System.Drawing.Size(151, 21)
+        Me.txtCategory.TabIndex = 23
         '
-        'btnDownloadExcel
+        'Label12
         '
-        Me.btnDownloadExcel.FlatAppearance.BorderSize = 0
-        Me.btnDownloadExcel.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(58, Byte), Integer), CType(CType(115, Byte), Integer))
-        Me.btnDownloadExcel.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnDownloadExcel.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnDownloadExcel.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.btnDownloadExcel.Image = Global.AVT_TRAKING.My.Resources.Resources.excel
-        Me.btnDownloadExcel.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnDownloadExcel.Location = New System.Drawing.Point(10, 329)
-        Me.btnDownloadExcel.Name = "btnDownloadExcel"
-        Me.btnDownloadExcel.Size = New System.Drawing.Size(121, 44)
-        Me.btnDownloadExcel.TabIndex = 21
-        Me.btnDownloadExcel.Text = "Download Excel"
-        Me.btnDownloadExcel.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.btnDownloadExcel.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
-        Me.btnDownloadExcel.UseVisualStyleBackColor = True
+        Me.Label12.AutoSize = True
+        Me.Label12.Location = New System.Drawing.Point(72, 208)
+        Me.Label12.Name = "Label12"
+        Me.Label12.Size = New System.Drawing.Size(60, 13)
+        Me.Label12.TabIndex = 22
+        Me.Label12.Text = "Category"
+        '
+        'txtPayItemType
+        '
+        Me.txtPayItemType.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.txtPayItemType.Location = New System.Drawing.Point(137, 229)
+        Me.txtPayItemType.Name = "txtPayItemType"
+        Me.txtPayItemType.Size = New System.Drawing.Size(151, 21)
+        Me.txtPayItemType.TabIndex = 25
+        '
+        'Label13
+        '
+        Me.Label13.AutoSize = True
+        Me.Label13.Location = New System.Drawing.Point(37, 231)
+        Me.Label13.Name = "Label13"
+        Me.Label13.Size = New System.Drawing.Size(90, 13)
+        Me.Label13.TabIndex = 24
+        Me.Label13.Text = "Pay Item Type"
+        '
+        'txtWorkType
+        '
+        Me.txtWorkType.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.txtWorkType.Location = New System.Drawing.Point(137, 252)
+        Me.txtWorkType.Name = "txtWorkType"
+        Me.txtWorkType.Size = New System.Drawing.Size(151, 21)
+        Me.txtWorkType.TabIndex = 27
+        '
+        'Label14
+        '
+        Me.Label14.AutoSize = True
+        Me.Label14.Location = New System.Drawing.Point(61, 254)
+        Me.Label14.Name = "Label14"
+        Me.Label14.Size = New System.Drawing.Size(67, 13)
+        Me.Label14.TabIndex = 26
+        Me.Label14.Text = "Work Type"
+        '
+        'txtCostCode
+        '
+        Me.txtCostCode.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.txtCostCode.Location = New System.Drawing.Point(137, 275)
+        Me.txtCostCode.MaxLength = 15
+        Me.txtCostCode.Name = "txtCostCode"
+        Me.txtCostCode.Size = New System.Drawing.Size(151, 21)
+        Me.txtCostCode.TabIndex = 29
+        '
+        'Label15
+        '
+        Me.Label15.AutoSize = True
+        Me.Label15.Location = New System.Drawing.Point(63, 277)
+        Me.Label15.Name = "Label15"
+        Me.Label15.Size = New System.Drawing.Size(67, 13)
+        Me.Label15.TabIndex = 28
+        Me.Label15.Text = "Cost Code"
+        '
+        'txtCustomerPositionID
+        '
+        Me.txtCustomerPositionID.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.txtCustomerPositionID.Location = New System.Drawing.Point(137, 298)
+        Me.txtCustomerPositionID.Name = "txtCustomerPositionID"
+        Me.txtCustomerPositionID.Size = New System.Drawing.Size(151, 21)
+        Me.txtCustomerPositionID.TabIndex = 31
+        '
+        'Label16
+        '
+        Me.Label16.AutoSize = True
+        Me.Label16.Location = New System.Drawing.Point(6, 300)
+        Me.Label16.Name = "Label16"
+        Me.Label16.Size = New System.Drawing.Size(129, 13)
+        Me.Label16.TabIndex = 30
+        Me.Label16.Text = "Customer Position ID"
+        '
+        'txtCustomerJobPositionDescription
+        '
+        Me.txtCustomerJobPositionDescription.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.txtCustomerJobPositionDescription.Location = New System.Drawing.Point(136, 344)
+        Me.txtCustomerJobPositionDescription.Name = "txtCustomerJobPositionDescription"
+        Me.txtCustomerJobPositionDescription.Size = New System.Drawing.Size(151, 21)
+        Me.txtCustomerJobPositionDescription.TabIndex = 33
+        '
+        'Label17
+        '
+        Me.Label17.Location = New System.Drawing.Point(14, 343)
+        Me.Label17.Name = "Label17"
+        Me.Label17.Size = New System.Drawing.Size(121, 29)
+        Me.Label17.TabIndex = 32
+        Me.Label17.Text = "Customer Job Position Description"
+        '
+        'txtCBSFullNumber
+        '
+        Me.txtCBSFullNumber.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.txtCBSFullNumber.Location = New System.Drawing.Point(136, 321)
+        Me.txtCBSFullNumber.MaxLength = 11
+        Me.txtCBSFullNumber.Name = "txtCBSFullNumber"
+        Me.txtCBSFullNumber.Size = New System.Drawing.Size(151, 21)
+        Me.txtCBSFullNumber.TabIndex = 35
+        '
+        'Label18
+        '
+        Me.Label18.AutoSize = True
+        Me.Label18.Location = New System.Drawing.Point(30, 323)
+        Me.Label18.Name = "Label18"
+        Me.Label18.Size = New System.Drawing.Size(104, 13)
+        Me.Label18.TabIndex = 34
+        Me.Label18.Text = "CBS Full Number"
         '
         'WorkCodes
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(83, Byte), Integer), CType(CType(93, Byte), Integer), CType(CType(102, Byte), Integer))
-        Me.ClientSize = New System.Drawing.Size(748, 471)
+        Me.ClientSize = New System.Drawing.Size(835, 552)
         Me.Controls.Add(Me.TableLayoutPanel1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
         Me.Name = "WorkCodes"
@@ -687,4 +842,18 @@ Partial Class WorkCodes
     Friend WithEvents Label10 As Label
     Friend WithEvents btnExcel As Button
     Friend WithEvents btnDownloadExcel As Button
+    Friend WithEvents txtCBSFullNumber As TextBox
+    Friend WithEvents Label18 As Label
+    Friend WithEvents txtCustomerJobPositionDescription As TextBox
+    Friend WithEvents Label17 As Label
+    Friend WithEvents txtCustomerPositionID As TextBox
+    Friend WithEvents Label16 As Label
+    Friend WithEvents txtCostCode As TextBox
+    Friend WithEvents Label15 As Label
+    Friend WithEvents txtWorkType As TextBox
+    Friend WithEvents Label14 As Label
+    Friend WithEvents txtPayItemType As TextBox
+    Friend WithEvents Label13 As Label
+    Friend WithEvents txtCategory As TextBox
+    Friend WithEvents Label12 As Label
 End Class

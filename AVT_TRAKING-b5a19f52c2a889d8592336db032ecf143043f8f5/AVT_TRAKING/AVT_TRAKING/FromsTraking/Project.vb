@@ -1,6 +1,6 @@
 ﻿Public Class Project
     Private _jobNum As Integer
-    Private _accountNum, _equipament, _manager, _description, _expCode, _idWO, _idAuxWO, _idPO, _idAux, _idTask As String
+    Private _accountNum, _equipament, _manager, _description, _expCode, _idWO, _idAuxWO, _idPO, _idAux, _idTask, _Line, _WBS As String
     Private _beginDate, _endDate As Date
     Private _estimateHours, _totalBilling, _PercentComplete As Double
     Private _status As Char
@@ -85,6 +85,23 @@
         End Set
     End Property
 
+    Public Property Line() As String
+        Get
+            Return _Line
+        End Get
+        Set(ByVal value As String)
+            _Line = value
+        End Set
+    End Property
+
+    Public Property WBS() As String
+        Get
+            Return _WBS
+        End Get
+        Set(ByVal value As String)
+            _WBS = value
+        End Set
+    End Property
     Public Property beginDate As Date
         Get
             Return _beginDate

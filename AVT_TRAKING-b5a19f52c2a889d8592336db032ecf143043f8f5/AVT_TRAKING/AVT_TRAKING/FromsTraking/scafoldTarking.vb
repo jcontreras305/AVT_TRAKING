@@ -1091,11 +1091,13 @@ Public Class scafoldTarking
         Dim flag As Boolean = True
         For Each row As DataGridViewRow In tblInComing.Rows()
             If row.Index <> tblInComing.CurrentCell.RowIndex And row.Index < tblInComing.Rows.Count - 1 Then
-                Dim idproducto() = row.Cells(1).Value.ToString().Split("   ")
-                Dim idproductoCmb() = cmb.SelectedItem.ToString().Split("   ")
-                If idproductoCmb(0).Equals(idproducto(0)) Then
-                    flag = False
-                    Exit For
+                If row.Cells(1).Value IsNot Nothing Then
+                    Dim idproducto() = row.Cells(1).Value.ToString().Split("   ")
+                    Dim idproductoCmb() = cmb.SelectedItem.ToString().Split("   ")
+                    If idproductoCmb(0).Equals(idproducto(0)) Then
+                        flag = False
+                        Exit For
+                    End If
                 End If
             End If
         Next
@@ -1416,12 +1418,16 @@ Public Class scafoldTarking
         End If
     End Sub
     Private Sub TabControl2_SelectedIndexChanged(sender As Object, e As EventArgs) Handles TabControl2.SelectedIndexChanged
-        If TabControl2.SelectedTab.Text = "Inventory By Job No." Then
+        If TabControl2.SelectedTab.Text = "Inventory By Job No." Or TabControl2.SelectedTab.Text = "Utilization" Then
+            btnSaveRowProduct.Enabled = False
             btnDeleteProduct.Enabled = False
             btnUploadProducts.Enabled = False
+            btnDownloadExcel.Enabled = False
         Else
+            btnSaveRowProduct.Enabled = True
             btnDeleteProduct.Enabled = True
             btnUploadProducts.Enabled = True
+            btnDownloadExcel.Enabled = True
         End If
     End Sub
     Private Sub cmbJobProduct_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbJobProduct.SelectedIndexChanged

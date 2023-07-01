@@ -365,7 +365,8 @@ Public Class ProjectsCosts
         txtTotalExpenses.Text = ""
         txtTotalMaterial.Text = ""
         txtLeftSpend.Text = ""
-
+        txtLine.Text = ""
+        txtWBS.Text = ""
         Return True
     End Function
     Private Function llenarCampos(ByVal lstDatosPO As List(Of String)) As Boolean
@@ -400,6 +401,8 @@ Public Class ProjectsCosts
                 Else
                     chbComplete.Checked = False
                 End If
+                txtLine.Text = lstDatosPO(17)
+                txtWBS.Text = lstDatosPO(18)
                 'cmbJobNumber.SelectedIndex = cmbJobNumber.FindString(JobNumber.ToString())
                 'AQUI SE CARGARAN LOS DATOS A LA CLASE DE PROJECT 
                 pjt.idPO = txtClientPO.Text
@@ -421,10 +424,14 @@ Public Class ProjectsCosts
                 pjt.idAuxWO = idAuxWO
                 pjt.PercentComplete = CInt(lstDatosPO(16))
                 sprPercentComplete.Value = pjt.PercentComplete
+                pjt.Line = lstDatosPO(17)
+                pjt.WBS = lstDatosPO(18)
                 Return True
             Else
                 Return False
             End If
+        Else
+            Return False
         End If
     End Function
     Private Sub cmbJobNumber_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbJobNumber.SelectedIndexChanged
@@ -665,6 +672,7 @@ Public Class ProjectsCosts
             Else
                 txtClientPO.Text = pjtNuevo.idPO
             End If
+            FindPOVal()
         Else
             If validarClientPO() Then
                 If pjt.idPO <> txtClientPO.Text Then
@@ -681,11 +689,24 @@ Public Class ProjectsCosts
             End If
         End If
     End Sub
+    Function FindPOVal() As Boolean
+        Dim arrayListPo() As DataRow = tablasDeTareas.Select("jobNo= " + cmbJobNumber.Text + " and idPO = " + txtClientPO.Text)
+        If arrayListPo.Length > 0 Then
+            txtLine.Text = arrayListPo(0).ItemArray(6)
+            txtWBS.Text = arrayListPo(0).ItemArray(7)
+            Return True
+        Else
+            txtLine.Text = ""
+            txtWBS.Text = ""
+            Return False
+        End If
+    End Function
     Function validarClientPO() As Boolean
         If flagAddRecord Then
             If txtClientPO.Text.Length >= 5 And soloNumero(txtClientPO.Text) Then
                 If mtdJobs.existPO(txtClientPO.Text, cmbJobNumber.SelectedItem) = True Then
                     If DialogResult.Yes = MessageBox.Show("Are you sure to use this PO.", "important", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) Then
+                        FindPOVal()
                         Return True
                     Else
                         Return False
@@ -699,9 +720,10 @@ Public Class ProjectsCosts
             End If
         Else
             If txtClientPO.Text.Length >= 5 And soloNumero(txtClientPO.Text) Then
-                If mtdJobs.existPO(txtClientPO.Text, pjt.idPO) = True Then
+                If mtdJobs.existPO(txtClientPO.Text, pjt.jobNum) = True Then
                     If txtClientPO.Text <> pjt.idPO Then
                         MessageBox.Show("Is probably that the PO exist, try with other number.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                        FindPOVal()
                         Return False
                     Else
                         Return True
@@ -831,8 +853,7 @@ Public Class ProjectsCosts
                     End If
                 End If
             End If
-        End If '
-
+        End If
     End Sub
 
     Private Function validarManager() As Boolean
@@ -893,6 +914,96 @@ Public Class ProjectsCosts
         End If
     End Sub
 
+    '================ LINE ===================================================================================================
+    '=========================================================================================================================
+    Private Sub txtLine_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtLine.KeyPress
+        If Asc(e.KeyChar) = Keys.Enter Or Asc(e.KeyChar) = Keys.Tab Then
+            If flagAddRecord Then
+                If txtLine.Text <> pjtNuevo.Line Then
+                    pjtNuevo.Line = txtLine.Text
+                End If
+            Else
+                If txtLine.Text <> pjt.Line Then
+                    If pjt.jobNum <> Nothing And pjt.idPO <> "" Then
+                        If mtdJobs.updateLine(txtLine.Text, pjt.Line, pjt.jobNum, pjt.idPO) Then
+                            pjt.Line = txtLine.Text
+                        Else
+                            txtLine.Text = pjt.Line
+                        End If
+                    Else
+                        txtLine.Text = pjt.Line
+                    End If
+                End If
+            End If
+        ElseIf Not Char.IsControl(e.KeyChar) Then
+            e.Handled = False
+        End If
+    End Sub
+
+    Private Sub txtLine_Leave(sender As Object, e As EventArgs) Handles txtLine.Leave
+        If flagAddRecord Then
+            If txtLine.Text <> pjtNuevo.Line Then
+                pjtNuevo.Line = txtLine.Text
+            End If
+        Else
+            If txtLine.Text <> pjt.Line Then
+                If pjt.jobNum <> Nothing And pjt.idPO <> "" Then
+                    If mtdJobs.updateLine(txtLine.Text, pjt.Line, pjt.jobNum, pjt.idPO) Then
+                        pjt.Line = txtLine.Text
+                    Else
+                        txtLine.Text = pjt.Line
+                    End If
+                Else
+                    txtLine.Text = pjt.Line
+                End If
+            End If
+        End If
+    End Sub
+    '================ WBS ====================================================================================================
+    '=========================================================================================================================
+    Private Sub txtWBS_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtWBS.KeyPress
+        If Asc(e.KeyChar) = Keys.Enter Or Asc(e.KeyChar) = Keys.Tab Then
+            If flagAddRecord Then
+                If txtWBS.Text <> pjtNuevo.WBS Then
+                    pjtNuevo.WBS = txtWBS.Text
+                End If
+            Else
+                If txtWBS.Text <> pjt.WBS Then
+                    If pjt.jobNum <> Nothing And pjt.idPO <> "" Then
+                        If mtdJobs.updateWBS(txtWBS.Text, pjt.WBS, pjt.jobNum, pjt.idPO) Then
+                            pjt.WBS = txtWBS.Text
+                        Else
+                            txtWBS.Text = pjt.WBS
+                        End If
+                    Else
+                        txtWBS.Text = pjt.WBS
+                    End If
+                End If
+            End If
+        ElseIf Not Char.IsControl(e.KeyChar) Then
+            e.Handled = False
+        End If
+    End Sub
+
+    Private Sub txtWBS_Leave(sender As Object, e As EventArgs) Handles txtWBS.Leave
+        If flagAddRecord Then
+            If txtWBS.Text <> pjtNuevo.WBS Then
+                pjtNuevo.WBS = txtWBS.Text
+            End If
+        Else
+            If txtWBS.Text <> pjt.WBS Then
+                If pjt.jobNum <> Nothing And pjt.idPO <> "" Then
+                    If mtdJobs.updateWBS(txtWBS.Text, pjt.WBS, pjt.jobNum, pjt.idPO) Then
+                        pjt.WBS = txtWBS.Text
+                    Else
+                        txtWBS.Text = pjt.WBS
+                    End If
+                Else
+                    txtWBS.Text = pjt.WBS
+                End If
+            End If
+        End If
+    End Sub
     '================ DESCRIPTION ============================================================================================
     '=========================================================================================================================
 
@@ -1286,7 +1397,7 @@ Public Class ProjectsCosts
     Private Sub txtAccount_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtAcountNo.KeyPress
         If Asc(e.KeyChar) = Keys.Enter Or Asc(e.KeyChar) = Keys.Tab Then
             If flagAddRecord Then
-                If txtAcountNo.Text <> pjt.accountNum Then
+                If txtAcountNo.Text <> pjtNuevo.accountNum Then
                     If validarAccountNO() Then
                         pjtNuevo.accountNum = txtAcountNo.Text
                     Else
@@ -1391,6 +1502,8 @@ Public Class ProjectsCosts
         tblMaterialProjects.Enabled = activar
         tblHoursWorkedProject.Enabled = activar
         btnChangeJobNo.Enabled = activar
+        txtLine.Enabled = activar
+        txtWBS.Enabled = activar
     End Sub
 
     Private Sub btnMaximize_Click(sender As Object, e As EventArgs) Handles btnMaximize.Click
@@ -1478,6 +1591,12 @@ Public Class ProjectsCosts
         ElseIf chbComplete.Focused Then
             FindElement = "Complete"
             Element = If(chbComplete.Checked, "True", "False")
+        ElseIf txtLine.Focused Then
+            FindElement = "Line"
+            Element = txtLine.Text
+        ElseIf txtWBS.Focused Then
+            FindElement = "WBS"
+            Element = txtWBS.Text
         End If
     End Sub
 
@@ -1502,6 +1621,11 @@ Public Class ProjectsCosts
             cmbJobNumber.SelectedIndex = 1
         End If
     End Sub
+
+    Private Sub sprHoursEstimate_ValueChanged(sender As Object, e As EventArgs) Handles sprHoursEstimate.ValueChanged
+
+    End Sub
+
     Private Sub btnFindProject_Click(sender As Object, e As EventArgs) Handles btnFindProject.Click
         Dim FT As New FindTask
         FT.FindElement = FindElement
@@ -1790,6 +1914,8 @@ Public Class ProjectsCosts
             End If
         End If
     End Sub
+
+
 
     'Private Sub tblExpencesProjects_CellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles tblExpencesProjects.CellEndEdit
     '    If tblExpencesProjects.Rows.Count > 0 Then
