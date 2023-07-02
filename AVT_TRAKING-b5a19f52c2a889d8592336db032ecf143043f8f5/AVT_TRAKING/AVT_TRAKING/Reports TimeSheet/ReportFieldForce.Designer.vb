@@ -45,6 +45,9 @@ Partial Class ReportFieldForce
         Me.dtpEndDate = New System.Windows.Forms.DateTimePicker()
         Me.dtpStartDate = New System.Windows.Forms.DateTimePicker()
         Me.btnExcelReport = New System.Windows.Forms.Button()
+        Me.TableLayoutPanel2 = New System.Windows.Forms.TableLayoutPanel()
+        Me.lblMesage = New System.Windows.Forms.Label()
+        Me.Panel4 = New System.Windows.Forms.Panel()
         Me.TableLayoutPanel1.SuspendLayout()
         Me.Panel3.SuspendLayout()
         CType(Me.tblFieldForce, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -56,6 +59,8 @@ Partial Class ReportFieldForce
         CType(Me.btnMinimize, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.btnRestore, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.btnMaximize, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.TableLayoutPanel2.SuspendLayout()
+        Me.Panel4.SuspendLayout()
         Me.SuspendLayout()
         '
         'TableLayoutPanel1
@@ -77,7 +82,7 @@ Partial Class ReportFieldForce
         '
         'Panel3
         '
-        Me.Panel3.Controls.Add(Me.tblFieldForce)
+        Me.Panel3.Controls.Add(Me.TableLayoutPanel2)
         Me.Panel3.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel3.Location = New System.Drawing.Point(3, 113)
         Me.Panel3.Name = "Panel3"
@@ -89,9 +94,9 @@ Partial Class ReportFieldForce
         Me.tblFieldForce.AllowUserToAddRows = False
         Me.tblFieldForce.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.tblFieldForce.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.tblFieldForce.Location = New System.Drawing.Point(0, 0)
+        Me.tblFieldForce.Location = New System.Drawing.Point(3, 3)
         Me.tblFieldForce.Name = "tblFieldForce"
-        Me.tblFieldForce.Size = New System.Drawing.Size(794, 334)
+        Me.tblFieldForce.Size = New System.Drawing.Size(788, 298)
         Me.tblFieldForce.TabIndex = 0
         '
         'Panel2
@@ -325,6 +330,40 @@ Partial Class ReportFieldForce
         Me.btnExcelReport.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         Me.btnExcelReport.UseVisualStyleBackColor = True
         '
+        'TableLayoutPanel2
+        '
+        Me.TableLayoutPanel2.ColumnCount = 1
+        Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
+        Me.TableLayoutPanel2.Controls.Add(Me.tblFieldForce, 0, 0)
+        Me.TableLayoutPanel2.Controls.Add(Me.Panel4, 0, 1)
+        Me.TableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.TableLayoutPanel2.Location = New System.Drawing.Point(0, 0)
+        Me.TableLayoutPanel2.Name = "TableLayoutPanel2"
+        Me.TableLayoutPanel2.RowCount = 2
+        Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
+        Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30.0!))
+        Me.TableLayoutPanel2.Size = New System.Drawing.Size(794, 334)
+        Me.TableLayoutPanel2.TabIndex = 0
+        '
+        'lblMesage
+        '
+        Me.lblMesage.AutoSize = True
+        Me.lblMesage.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.lblMesage.Location = New System.Drawing.Point(4, 7)
+        Me.lblMesage.Name = "lblMesage"
+        Me.lblMesage.Size = New System.Drawing.Size(53, 13)
+        Me.lblMesage.TabIndex = 0
+        Me.lblMesage.Text = "Message:"
+        '
+        'Panel4
+        '
+        Me.Panel4.Controls.Add(Me.lblMesage)
+        Me.Panel4.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Panel4.Location = New System.Drawing.Point(3, 307)
+        Me.Panel4.Name = "Panel4"
+        Me.Panel4.Size = New System.Drawing.Size(788, 24)
+        Me.Panel4.TabIndex = 1
+        '
         'ReportFieldForce
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -348,6 +387,9 @@ Partial Class ReportFieldForce
         CType(Me.btnMinimize, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.btnRestore, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.btnMaximize, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.TableLayoutPanel2.ResumeLayout(False)
+        Me.Panel4.ResumeLayout(False)
+        Me.Panel4.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -375,4 +417,7 @@ Partial Class ReportFieldForce
     Friend WithEvents dtpEndDate As DateTimePicker
     Friend WithEvents dtpStartDate As DateTimePicker
     Friend WithEvents btnExcelReport As Button
+    Friend WithEvents TableLayoutPanel2 As TableLayoutPanel
+    Friend WithEvents Panel4 As Panel
+    Friend WithEvents lblMesage As Label
 End Class

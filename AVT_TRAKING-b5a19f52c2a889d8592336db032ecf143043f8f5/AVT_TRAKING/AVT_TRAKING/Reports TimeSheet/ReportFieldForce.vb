@@ -57,7 +57,9 @@ Public Class ReportFieldForce
             If cmbClients.SelectedIndex >= 0 Then
                 Dim arrayCl() As String = cmbClients.Items(cmbClients.SelectedIndex).ToString.Split(" ")
                 If (chbAllJobs.Checked Or cmbJobs.Text <> "") And arrayCl.Length > 0 Then
+                    lblMesage.Text = "Message: " + "Searching..."
                     mtd.selectInfo(tblFieldForce, dtpStartDate.Value, dtpEndDate.Value, arrayCl(0), If(chbAllJobs.Checked, "", cmbJobs.Items(cmbJobs.SelectedIndex).ToString()))
+                    lblMesage.Text = "Message: " + "End."
                 Else
                     MessageBox.Show("Please select a Job Number or select All Jobs", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information)
                 End If
@@ -74,6 +76,7 @@ Public Class ReportFieldForce
         Dim ruta As String = ""
         Dim ApExcel = New Microsoft.Office.Interop.Excel.Application
         Dim libro = ApExcel.Workbooks.Add()
+        lblMesage.Text = "Message: " + "Preparing excel field..."
         Try
             Dim Hoja1 = libro.Worksheets(1)
             Dim count As Integer = 1
@@ -93,8 +96,10 @@ Public Class ReportFieldForce
             For Each row As DataGridViewRow In tblFieldForce.Rows
                 For Each cell As DataGridViewCell In row.Cells
                     Hoja1.Cells(row.Index + 2, cell.ColumnIndex + 1) = cell.Value.ToString()
+                    lblMesage.Text = "Message: " + "Writing row (" + row.Index.ToString() + ")..."
                 Next
             Next
+            lblMesage.Text = "Message: " + "Preparing excel to save..."
             Hoja1.Name = "TS_Upload"
             Dim opFile As New SaveFileDialog
             opFile.DefaultExt = "xlsx"
@@ -115,6 +120,7 @@ Public Class ReportFieldForce
             NAR(libro)
             ApExcel.Quit()
             NAR(ApExcel)
+            lblMesage.Text = "Message: "
             If flagOpen Then
                 System.Diagnostics.Process.Start(ruta)
             End If
@@ -212,7 +218,7 @@ select
 	0 as 'Allocation ST',
 	0 as 'Allocation OT',
 	'' as 'Allocation DT',
-	concat (iif (exu.amount=0,'',exu.amount),'') as 'IsSubsistence',
+	IIF (exu.amount>0,'TRUE','')  as 'IsSubsistence',
 	'' as 'Equipment ID',
 	'' as 'Customer Equipment ID',
 	'' as 'Customer Equipment Description',
