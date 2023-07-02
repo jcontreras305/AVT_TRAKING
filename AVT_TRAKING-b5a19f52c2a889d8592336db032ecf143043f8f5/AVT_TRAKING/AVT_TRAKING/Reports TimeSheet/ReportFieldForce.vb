@@ -154,7 +154,7 @@ select
 	DISTINCT
 	cl.postingProject as 'Posting Project',
 	po.idPO as 'Purchase Order',
-	po.Line as 'Line',
+	po.Line as 'Line .',
 	wo.idWO as 'Work Order',
 	tk.task as 'Task',
 	'' as 'Sub Task',
@@ -171,9 +171,8 @@ select
 	wc.CBSFullNumber as 'CBS Full Number',
 	SUM (hw.hoursST) OVER(PARTITION BY cl.postingProject , po.IdPO , wo.idWO , tk.task, hw.dateWorked,hw.schedule,em.numberEmploye)  as 'Allocation ST',
 	SUM (hw.hoursOT) OVER(PARTITION BY cl.postingProject , po.IdPO , wo.idWO , tk.task, hw.dateWorked,hw.schedule,em.numberEmploye)  as 'Allocation OT',
-	SUM (hw.hours3) OVER(PARTITION BY cl.postingProject , po.IdPO , wo.idWO , tk.task, hw.dateWorked,hw.schedule,em.numberEmploye) as 'Allocation DT',
-	SUM (ISNULL((select sum(amount) from expensesUsed as exu where exu.idEmployee = em.idEmployee and exu.idHorsWorked = hw.idHorsWorked),'')) 
-		OVER(PARTITION BY cl.postingProject , po.IdPO , wo.idWO , tk.task, hw.dateWorked,hw.schedule,em.numberEmploye) as 'Is Subsistence',
+	IIF (SUM (hw.hours3) OVER(PARTITION BY cl.postingProject , po.IdPO , wo.idWO , tk.task, hw.dateWorked,hw.schedule,em.numberEmploye)=0,'',CONCAT('',SUM (hw.hours3) OVER(PARTITION BY cl.postingProject , po.IdPO , wo.idWO , tk.task, hw.dateWorked,hw.schedule,em.numberEmploye))) as 'Allocation DT',
+	'' as 'IsSubsistence',
     '' as 'Equipment ID',
 	'' as 'Customer Equipment ID',
 	'' as 'Customer Equipment Description',
@@ -190,6 +189,46 @@ inner join workCode as wc on wc.idWorkCode = hw.idWorkCode and hw.jobNo = wc.job
 where hw.dateWorked between @startDate and @endDate 
 	  and cl.numberClient  = @numclient 
 	  and jb.jobNo like iif(@jobNo= '','%', convert(nvarchar,@jobNo))
+UNION 
+
+select 
+	cl.postingProject as 'Posting Project',
+	po.idPO as 'Purchase Order',
+	po.Line as 'Line .',
+	wo.idWO as 'Work Order',
+	tk.task as 'Task',
+	'' as 'Sub Task',
+	'' as 'Category',
+	exu.dateExpense as 'Time Sheet Date',
+	'Day' as 'Shift',
+	po.WBS as 'WBS',
+	'' as 'Pay Item Type',
+	'' as 'Work Type',
+	em.numberEmploye as 'Brock ID',
+	'' as 'Cost Code',
+	'' as 'Customer Position ID',
+	'' as 'Customer Job Position Description',
+	'' as 'CBS Full Number'	,
+	0 as 'Allocation ST',
+	0 as 'Allocation OT',
+	'' as 'Allocation DT',
+	concat (iif (exu.amount=0,'',exu.amount),'') as 'IsSubsistence',
+	'' as 'Equipment ID',
+	'' as 'Customer Equipment ID',
+	'' as 'Customer Equipment Description',
+	'' as 'In Use',
+	'' as 'Idle'
+from expensesUsed as exu
+inner join task as tk on exu.idAux = tk.idAux
+inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO 
+inner join projectOrder as po on po.idPO = wo.idPO and po.jobNo = wo.jobNo 
+inner join job as jb on jb.jobNo = po.jobNo
+inner join clients as cl on cl.idClient = jb.idClient
+inner join employees as em on em.idEmployee = exu.idEmployee
+where exu.dateExpense between @startDate and @endDate 
+	  and cl.numberClient  = @numclient 
+	  and jb.jobNo like iif(@jobNo= '','%', convert(nvarchar,@jobNo)) 
+
 )as T1
 order by [TS Gruping] asc
 ", conn)

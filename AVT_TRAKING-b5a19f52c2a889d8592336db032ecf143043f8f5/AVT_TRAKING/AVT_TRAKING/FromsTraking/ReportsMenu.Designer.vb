@@ -420,9 +420,9 @@ Partial Class ReportsMenu
         Me.Panel5.Controls.Add(Me.Button29)
         Me.Panel5.Controls.Add(Me.Button28)
         Me.Panel5.Dock = System.Windows.Forms.DockStyle.Left
-        Me.Panel5.Location = New System.Drawing.Point(452, 0)
+        Me.Panel5.Location = New System.Drawing.Point(485, 0)
         Me.Panel5.Name = "Panel5"
-        Me.Panel5.Size = New System.Drawing.Size(171, 582)
+        Me.Panel5.Size = New System.Drawing.Size(180, 582)
         Me.Panel5.TabIndex = 6
         '
         'Button37
@@ -437,7 +437,7 @@ Partial Class ReportsMenu
         Me.Button37.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.Button37.Location = New System.Drawing.Point(0, 378)
         Me.Button37.Name = "Button37"
-        Me.Button37.Size = New System.Drawing.Size(171, 42)
+        Me.Button37.Size = New System.Drawing.Size(180, 42)
         Me.Button37.TabIndex = 18
         Me.Button37.Text = "Master Per-Diem"
         Me.Button37.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -456,7 +456,7 @@ Partial Class ReportsMenu
         Me.Button36.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.Button36.Location = New System.Drawing.Point(0, 336)
         Me.Button36.Name = "Button36"
-        Me.Button36.Size = New System.Drawing.Size(171, 42)
+        Me.Button36.Size = New System.Drawing.Size(180, 42)
         Me.Button36.TabIndex = 17
         Me.Button36.Text = "Master Payroll"
         Me.Button36.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -475,7 +475,7 @@ Partial Class ReportsMenu
         Me.Button35.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.Button35.Location = New System.Drawing.Point(0, 294)
         Me.Button35.Name = "Button35"
-        Me.Button35.Size = New System.Drawing.Size(171, 42)
+        Me.Button35.Size = New System.Drawing.Size(180, 42)
         Me.Button35.TabIndex = 16
         Me.Button35.Text = "Outcoming"
         Me.Button35.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -494,7 +494,7 @@ Partial Class ReportsMenu
         Me.Button34.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.Button34.Location = New System.Drawing.Point(0, 252)
         Me.Button34.Name = "Button34"
-        Me.Button34.Size = New System.Drawing.Size(171, 42)
+        Me.Button34.Size = New System.Drawing.Size(180, 42)
         Me.Button34.TabIndex = 15
         Me.Button34.Text = "Incoming"
         Me.Button34.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -513,7 +513,7 @@ Partial Class ReportsMenu
         Me.Button33.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.Button33.Location = New System.Drawing.Point(0, 210)
         Me.Button33.Name = "Button33"
-        Me.Button33.Size = New System.Drawing.Size(171, 42)
+        Me.Button33.Size = New System.Drawing.Size(180, 42)
         Me.Button33.TabIndex = 14
         Me.Button33.Text = "Factors"
         Me.Button33.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -532,7 +532,7 @@ Partial Class ReportsMenu
         Me.Button32.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.Button32.Location = New System.Drawing.Point(0, 168)
         Me.Button32.Name = "Button32"
-        Me.Button32.Size = New System.Drawing.Size(171, 42)
+        Me.Button32.Size = New System.Drawing.Size(180, 42)
         Me.Button32.TabIndex = 13
         Me.Button32.Text = "Working"
         Me.Button32.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -551,7 +551,7 @@ Partial Class ReportsMenu
         Me.Button31.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.Button31.Location = New System.Drawing.Point(0, 126)
         Me.Button31.Name = "Button31"
-        Me.Button31.Size = New System.Drawing.Size(171, 42)
+        Me.Button31.Size = New System.Drawing.Size(180, 42)
         Me.Button31.TabIndex = 12
         Me.Button31.Text = "Scaffold"
         Me.Button31.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -570,7 +570,7 @@ Partial Class ReportsMenu
         Me.Button30.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.Button30.Location = New System.Drawing.Point(0, 84)
         Me.Button30.Name = "Button30"
-        Me.Button30.Size = New System.Drawing.Size(171, 42)
+        Me.Button30.Size = New System.Drawing.Size(180, 42)
         Me.Button30.TabIndex = 11
         Me.Button30.Text = "Invoice Pieces"
         Me.Button30.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -589,7 +589,7 @@ Partial Class ReportsMenu
         Me.Button29.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.Button29.Location = New System.Drawing.Point(0, 42)
         Me.Button29.Name = "Button29"
-        Me.Button29.Size = New System.Drawing.Size(171, 42)
+        Me.Button29.Size = New System.Drawing.Size(180, 42)
         Me.Button29.TabIndex = 10
         Me.Button29.Text = "PBI"
         Me.Button29.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -608,7 +608,7 @@ Partial Class ReportsMenu
         Me.Button28.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.Button28.Location = New System.Drawing.Point(0, 0)
         Me.Button28.Name = "Button28"
-        Me.Button28.Size = New System.Drawing.Size(171, 42)
+        Me.Button28.Size = New System.Drawing.Size(180, 42)
         Me.Button28.TabIndex = 9
         Me.Button28.Text = "Time Sheet"
         Me.Button28.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -630,9 +630,9 @@ Partial Class ReportsMenu
         Me.Panel4.Controls.Add(Me.Button16)
         Me.Panel4.Controls.Add(Me.Button17)
         Me.Panel4.Dock = System.Windows.Forms.DockStyle.Left
-        Me.Panel4.Location = New System.Drawing.Point(206, 0)
+        Me.Panel4.Location = New System.Drawing.Point(224, 0)
         Me.Panel4.Name = "Panel4"
-        Me.Panel4.Size = New System.Drawing.Size(246, 582)
+        Me.Panel4.Size = New System.Drawing.Size(261, 582)
         Me.Panel4.TabIndex = 5
         '
         'Button27
@@ -647,7 +647,7 @@ Partial Class ReportsMenu
         Me.Button27.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.Button27.Location = New System.Drawing.Point(0, 513)
         Me.Button27.Name = "Button27"
-        Me.Button27.Size = New System.Drawing.Size(246, 57)
+        Me.Button27.Size = New System.Drawing.Size(261, 57)
         Me.Button27.TabIndex = 30
         Me.Button27.Text = "SCF Product Out."
         Me.Button27.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -666,7 +666,7 @@ Partial Class ReportsMenu
         Me.Button26.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.Button26.Location = New System.Drawing.Point(0, 456)
         Me.Button26.Name = "Button26"
-        Me.Button26.Size = New System.Drawing.Size(246, 57)
+        Me.Button26.Size = New System.Drawing.Size(261, 57)
         Me.Button26.TabIndex = 29
         Me.Button26.Text = "SCF Product Inc."
         Me.Button26.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -685,7 +685,7 @@ Partial Class ReportsMenu
         Me.Button22.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.Button22.Location = New System.Drawing.Point(0, 399)
         Me.Button22.Name = "Button22"
-        Me.Button22.Size = New System.Drawing.Size(246, 57)
+        Me.Button22.Size = New System.Drawing.Size(261, 57)
         Me.Button22.TabIndex = 28
         Me.Button22.Text = "SCF Active"
         Me.Button22.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -704,7 +704,7 @@ Partial Class ReportsMenu
         Me.Button20.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.Button20.Location = New System.Drawing.Point(0, 342)
         Me.Button20.Name = "Button20"
-        Me.Button20.Size = New System.Drawing.Size(246, 57)
+        Me.Button20.Size = New System.Drawing.Size(261, 57)
         Me.Button20.TabIndex = 27
         Me.Button20.Text = "SCF Material Inventory"
         Me.Button20.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -723,7 +723,7 @@ Partial Class ReportsMenu
         Me.Button18.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.Button18.Location = New System.Drawing.Point(0, 285)
         Me.Button18.Name = "Button18"
-        Me.Button18.Size = New System.Drawing.Size(246, 57)
+        Me.Button18.Size = New System.Drawing.Size(261, 57)
         Me.Button18.TabIndex = 26
         Me.Button18.Text = "SCF Rental Details"
         Me.Button18.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -742,7 +742,7 @@ Partial Class ReportsMenu
         Me.Button13.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.Button13.Location = New System.Drawing.Point(0, 228)
         Me.Button13.Name = "Button13"
-        Me.Button13.Size = New System.Drawing.Size(246, 57)
+        Me.Button13.Size = New System.Drawing.Size(261, 57)
         Me.Button13.TabIndex = 25
         Me.Button13.Text = "SCF History By Job"
         Me.Button13.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -761,7 +761,7 @@ Partial Class ReportsMenu
         Me.Button14.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.Button14.Location = New System.Drawing.Point(0, 171)
         Me.Button14.Name = "Button14"
-        Me.Button14.Size = New System.Drawing.Size(246, 57)
+        Me.Button14.Size = New System.Drawing.Size(261, 57)
         Me.Button14.TabIndex = 24
         Me.Button14.Text = "SCF Histoty Dismantled"
         Me.Button14.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -780,7 +780,7 @@ Partial Class ReportsMenu
         Me.Button15.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.Button15.Location = New System.Drawing.Point(0, 114)
         Me.Button15.Name = "Button15"
-        Me.Button15.Size = New System.Drawing.Size(246, 57)
+        Me.Button15.Size = New System.Drawing.Size(261, 57)
         Me.Button15.TabIndex = 23
         Me.Button15.Text = "SCF History By Job And Unit"
         Me.Button15.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -799,7 +799,7 @@ Partial Class ReportsMenu
         Me.Button16.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.Button16.Location = New System.Drawing.Point(0, 57)
         Me.Button16.Name = "Button16"
-        Me.Button16.Size = New System.Drawing.Size(246, 57)
+        Me.Button16.Size = New System.Drawing.Size(261, 57)
         Me.Button16.TabIndex = 22
         Me.Button16.Text = "SCF History By Job And WO"
         Me.Button16.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -818,7 +818,7 @@ Partial Class ReportsMenu
         Me.Button17.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.Button17.Location = New System.Drawing.Point(0, 0)
         Me.Button17.Name = "Button17"
-        Me.Button17.Size = New System.Drawing.Size(246, 57)
+        Me.Button17.Size = New System.Drawing.Size(261, 57)
         Me.Button17.TabIndex = 21
         Me.Button17.Text = "SCF History By Job No"
         Me.Button17.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -843,7 +843,7 @@ Partial Class ReportsMenu
         Me.Panel1.Dock = System.Windows.Forms.DockStyle.Left
         Me.Panel1.Location = New System.Drawing.Point(0, 0)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(206, 582)
+        Me.Panel1.Size = New System.Drawing.Size(224, 582)
         Me.Panel1.TabIndex = 4
         '
         'Button38
