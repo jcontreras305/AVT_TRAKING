@@ -1607,9 +1607,125 @@
 ----| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
 ----V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V
 ----###############################################################################################
-----########### CAMBIO PARA EL CAMPO DE LINE EN PROJECT ORDER #####################################
+----########### CAMBIO PARA EL CAMPO DE POSTING PROJECCT EN LA TABLA DE JOB #######################
 ----###############################################################################################
 
-update projectOrder  set Line = (select top 1 SUBSTRING(convert(nvarchar,idPO),len(convert(nvarchar,idPO)),1) 
-from projectOrder as po1 where po1.idPO = idPO and jobNo = po1.jobNo)
+alter table clients 
+drop column postingProject
+go
+
+alter table job
+add postingProject bigint
+go
+
+update job set postingProject = 0 
+go
+
+ALTER proc [dbo].[sp_Update_Client]
+	@idCL varchar(36),
+	@ClientID int,
+	@FirstName varchar (30),
+	@MiddleName varchar (30),
+	@LastName varchar (30),
+	@CompanyName varchar (50),
+	@Status char(1),
+	--Contact
+	@idContact varchar(36),
+	@phoneNumer1 varchar(13),
+	@phoneNumer2 varchar(13),
+	@email varchar(50),
+	--Addres
+	@idAddres varchar(36),
+	@avenue varchar(80),
+	@number int,
+	@city varchar (20),
+	@providence varchar (20),
+	@postalcode int,
+	@img image,
+	@payTerms varchar(30)
+as
+declare @error int  -- declaro variables para los ID que son nuevos y una variable de error
+begin 
+	begin tran 
+		begin try
+			--se inserta un contacto
+
+				update contact set phoneNumber1= @phoneNumer1 , phoneNumber2=@phoneNumer2 ,email = @email where idContact = @idContact
+				if @@ERROR <> 0 begin set @error = @@ERROR goto solveproblem end
+				update HomeAddress set avenue= @avenue, number = @number , city=@city , providence =@providence, postalCode = @postalcode where idHomeAdress = @idAddres
+				if @@ERROR <> 0 begin set @error = @@ERROR goto solveproblem end
+				update  clients set firstName= @FirstName,middleName= @MiddleName,lastName= @LastName ,companyName=@CompanyName,estatus = @Status, photo = @img ,payTerms = @payTerms where idClient = @idCL
+				if @@ERROR <> 0 begin set @error = @@ERROR goto solveproblem end 
+		end try
+		begin catch
+			goto solveproblem
+		end catch
+	commit tran
+	solveproblem:
+	if @error <> 0
+	begin 
+		rollback tran 
+	end
+end
+go
+
+ALTER proc [dbo].[sp_Insert_Cient] 
+	@ClientID int,
+	@FirstName varchar (30),
+	@MiddleName varchar (30),
+	@LastName varchar (30),
+	@CompanyName varchar (50),
+	@Status char(1),
+	--Contact
+	@phoneNumer1 varchar(13),
+	@phoneNumer2 varchar(13),
+	@email varchar(50),
+	--Addres
+	@avenue varchar(80),
+	@number int,
+	@city varchar (20),
+	@providence varchar (20),
+	@postalcode int,
+	--Photo
+	@img image,
+	@payTerms varchar(30)
+as
+declare @error int  -- declaro variables para los ID que son nuevos y una variable de error
+declare @idClient varchar(36) 
+declare @idContact varchar(36)
+declare @idHomeAdress varchar(36)
+begin 
+	begin tran 
+		begin try
+			--se inserta un contacto
+			
+				set @idContact = NEWID() 
+				insert into contact values(@idContact,@phoneNumer1,@phoneNumer2,@email)
+				if @@ERROR <> 0 begin set @error = @@ERROR goto solveproblem end
+			
+				set @idHomeAdress = NEWID()
+				insert into HomeAddress values (@idHomeAdress , @avenue , @number , @city , @providence , @postalCode)
+				if @@ERROR <> 0 begin set @error = @@ERROR goto solveproblem end 
+			
+				set @idClient = NEWID()
+				insert into clients values (@idClient , @ClientID, @FirstName, @MiddleName, @LastName , @CompanyName, @idContact , @idHomeAdress ,@Status,@img,@payTerms)
+				if @@ERROR <> 0 begin set @error = @@ERROR goto solveproblem end 
+
+				insert into TrackDefaultElements values(NEWID(),@idClient,'','','','','','','','','','','','','','','','','','','','','','','','','','','','')
+				if @@ERROR <> 0 begin set @error = @@ERROR goto solveproblem end
+				
+				insert into TrackFormatColums values(NEWID(),@idClient,'Record ID1','Force or Reject1','Source1','Date1','Order Type1','Location ID1','Company Code1','Resource ID1','Resource Name1','Area1','Group Name1','Agreement1','Skill Type1','Shift1','Level 1 ID1','Level 2 ID1','Level 3 ID1','Level 4 ID1','Hours Total1','Hours Total Activity Code1','S/T (Hrs)1','S/T Hrs Activity Code1','O/T (Hrs)1','O/T Hrs Activity Code1','D/T (Hrs)1','D/T Hrs Activity Code1','Extra Charges $1','Extra Charges $ Activity Code1','Extra1','Extra 11','Extra 21','Add Time1','Pay Type1','R4 (Hrs)1','R5 (Hrs)1','R6 (Hrs)1','GL Account1','ST Adders1','OT Adders1','DT Adders1','R4 Adders1','R5 Adders1','R6 Adders1')
+				if @@ERROR <> 0 begin set @error = @@ERROR goto solveproblem end
+		end try
+		begin catch
+			goto solveproblem
+		end catch
+	commit tran
+	solveproblem:
+	if @error <> 0
+	begin 
+		rollback tran 
+	end
+end
 GO
+

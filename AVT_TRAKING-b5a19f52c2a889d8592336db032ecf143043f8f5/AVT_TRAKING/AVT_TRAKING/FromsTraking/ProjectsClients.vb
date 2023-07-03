@@ -6,7 +6,7 @@ Public Class ProjectsClients
     Dim mtdClient As New MetodosClients
     Dim mtdOthers As New MetodosOthers
     Public datosClientesPO As New List(Of String)
-    Public idCliente, idPO, jobNum, workOrder, task, taskTaxes, idWOAuxTaxes As String
+    Public idCliente, idPO, jobNum, workOrder, task, taskTaxes, idWOAuxTaxes, posting_Project As String
     Public clnfromclnFrom As Boolean = True
     Dim Find As Boolean = False
     Dim defaultInfoJob As New List(Of String)
@@ -145,6 +145,7 @@ Public Class ProjectsClients
         defaultInfoJob.Add(CStr(cmbCostDistribution.SelectedIndex))
         defaultInfoJob.Add(CStr(cmbWorkTMLumoSum.SelectedIndex))
         defaultInfoJob.Add(idPO)
+        defaultInfoJob.Add(txtPostingProject.Text)
         txtContractNo.Text = ""
         txtCustomerNo.Text = ""
         txtJobNumber.Text = ""
@@ -163,6 +164,7 @@ Public Class ProjectsClients
                 cmbCostCode.SelectedIndex = CInt(defaultInfoJob(4))
                 cmbCostCode.SelectedIndex = CInt(defaultInfoJob(5))
                 idPO = defaultInfoJob(6)
+                txtPostingProject.Text = defaultInfoJob(7)
                 btnAdd.Text = "Add"
                 btnCancelSaveJob.Visible = False
             End If
@@ -175,23 +177,27 @@ Public Class ProjectsClients
         If btnAdd.Text = "Save" Then
             Try
                 idPO = Nothing
-                Dim listPO As New List(Of String)
-                listPO.Add(txtJobNumber.Text)
-                listPO.Add(cmbWorkTMLumoSum.Text) ' este valor string
-                listPO.Add(cmbCostDistribution.Text) ' string  
-                listPO.Add(txtCustomerNo.Text) ' int 
-                listPO.Add(txtContractNo.Text) ' int 
-                listPO.Add(cmbCostCode.Text) ' int
-                idPO = mtdJobs.insertarNuevoProyecto(idCliente, listPO)
-                If idPO <> Nothing Or idPO <> "" Then
-                    mtdClient.buscarProyectosDeClientePorProyeto(tblProjectClientsAll, idCliente)
-                    btnAdd.Text = "Add"
-                    btnCancelSaveJob.Visible = False
+                If Not (txtJobNumber.Text = "" Or txtPostingProject.Text = "") Then
+                    Dim listPO As New List(Of String)
+                    listPO.Add(txtJobNumber.Text)
+                    listPO.Add(cmbWorkTMLumoSum.Text) ' este valor string
+                    listPO.Add(cmbCostDistribution.Text) ' string  
+                    listPO.Add(txtCustomerNo.Text) ' int 
+                    listPO.Add(txtContractNo.Text) ' int 
+                    listPO.Add(cmbCostCode.Text) ' int
+                    listPO.Add(txtPostingProject.Text) ' bigint
+                    idPO = mtdJobs.insertarNuevoProyecto(idCliente, listPO)
+                    If idPO <> Nothing Or idPO <> "" Then
+                        mtdClient.buscarProyectosDeClientePorProyeto(tblProjectClientsAll, idCliente)
+                        btnAdd.Text = "Add"
+                        btnCancelSaveJob.Visible = False
+                    Else
+                        MessageBox.Show("Sommthig was wrong please try again or check the data.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                        btnAdd.Text = "Save"
+                    End If
                 Else
-                    MessageBox.Show("Sommthig was wrong please try again or check the data.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-                    btnAdd.Text = "Save"
+                    MessageBox.Show("Please Insert a " + If(txtJobNumber.Text = "", "Job Number", "Posting Project") + ".", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
                 End If
-
             Catch ex As Exception
 
             End Try
@@ -269,6 +275,7 @@ Public Class ProjectsClients
                 txtCustomerNo.Text = fila.Cells("custumerNo").Value
                 txtContractNo.Text = fila.Cells("contractNo").Value
                 txtJobNumber.Text = fila.Cells("jobNo").Value
+                txtPostingProject.Text = fila.Cells("PostingProject").Value
             End If
         End If
     End Sub
@@ -445,6 +452,41 @@ Public Class ProjectsClients
         End Try
     End Sub
 
+    Private Sub txtPostingProject_Leave(sender As Object, e As EventArgs) Handles txtPostingProject.Leave, txtJobNumber.Leave
+        If btnAdd.Text = "Save" Then
+            Dim tbljobs As New DataTable
+            mtdJobs.consultaJobs(tbljobs)
+            If sender.Name = "txtJobNumber" Then
+                Dim arrayJobs() As DataRow = tbljobs.Select("jobNo = " + txtJobNumber.Text)
+                If arrayJobs.Length > 0 Then
+                    MsgBox("This JobNumber already exist.")
+                    txtJobNumber.Focus()
+                    txtJobNumber.SelectAll()
+                End If
+            Else
+                Dim arrayJobs() As DataRow = tbljobs.Select("postingProject = " + txtPostingProject.Text)
+                If arrayJobs.Length > 0 Then
+                    MsgBox("This Posting Project already exist.")
+                    txtJobNumber.Focus()
+                    txtJobNumber.SelectAll()
+                End If
+            End If
+
+        End If
+
+
+    End Sub
+
+    Private Sub txtPostingProject_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtPostingProject.KeyPress
+        Try
+            If Not (IsNumeric(e.KeyChar) Or Char.IsControl(e.KeyChar)) Then
+                e.Handled = True
+            End If
+        Catch ex As Exception
+
+        End Try
+    End Sub
+
     Private Sub cmbCostCode_Leave(sender As Object, e As EventArgs) Handles cmbCostCode.Leave
         If btnAdd.Text = "Add" Then  'Se supone que no esta agregando si no que esta actualizando o visualizado unicamente
             mtdJobs.actualizarCostCode(cmbCostCode.Text, txtJobNumber.Text)
@@ -455,6 +497,7 @@ Public Class ProjectsClients
         If tblProjectClientsAll.CurrentRow IsNot Nothing And Find = False Then
             idPO = tblProjectClientsAll.CurrentRow.Cells("clmIdPO").Value
             jobNum = tblProjectClientsAll.CurrentRow.Cells("jobNo").Value
+            posting_Project = tblProjectClientsAll.CurrentRow.Cells("PostingProject").Value
             idCliente = tblProjectClientsAll.CurrentRow.Cells("idClient").Value
             idWOAuxTaxes = tblProjectClientsAll.CurrentRow.Cells("idAuxWO").Value
             separaridWODeidTask(tblProjectClientsAll.CurrentRow.Cells("clmWorkOrder").Value)

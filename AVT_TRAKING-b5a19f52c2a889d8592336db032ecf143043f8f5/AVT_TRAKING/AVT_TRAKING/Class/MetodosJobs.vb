@@ -244,8 +244,8 @@ from workOrder
             End While
             reader3.Close()
 
-            Dim cmdJob As New SqlCommand("insert into job values (" + datosPO(0) + ",'" + datosPO(1) + "', '" + datosPO(2) + "'," + If(datosPO(3) = "", "NULL", datosPO(3)) + ", " + If(datosPO(4) = "", "NULL", datosPO(4)) + "," + datosPO(5) + ",'" + idClient + "')", conn)
-            Dim cmdProyect As New SqlCommand("insert into projectOrder values (" + idPOMax + "," + datosPO(0) + ")", conn)
+            Dim cmdJob As New SqlCommand("insert into job values (" + datosPO(0) + ",'" + datosPO(1) + "', '" + datosPO(2) + "'," + If(datosPO(3) = "", "NULL", datosPO(3)) + ", " + If(datosPO(4) = "", "NULL", datosPO(4)) + "," + datosPO(5) + ",'" + idClient + "'," + datosPO(6) + ")", conn)
+            Dim cmdProyect As New SqlCommand("insert into projectOrder values (" + idPOMax + "," + datosPO(0) + ",0,'')", conn)
             Dim cmdWO As New SqlCommand("insert into workOrder values ('" + idAuxWO + "','" + idWOMax + "'," + idPOMax + ", " + datosPO(0) + " )", conn)
             Dim cmdTask As New SqlCommand("insert into task values (NEWID(),'','" + idAuxWO + "',0.0,'','','',0.0,GETDATE(),DATEADD(MM,1,GETDATE()),'','',0.0,'0',0)", conn)
             Dim tran As SqlTransaction
@@ -798,6 +798,36 @@ where cl.numberClient =" + numClient.ToString() + "", conn)
             MsgBox(ex.Message())
         End Try
     End Sub
+    Public Sub consultaJobs(ByVal tabla As DataTable, Optional idClient As String = "")
+        Try
+            conectar()
+            Dim cmd As New SqlCommand("select 
+jb.jobNo,
+jb.postingProject,
+po.idPO,
+wo.idWO, 
+tk.task,
+tk.idAux,
+wo.idAuxWO,
+po.line,
+po.WBS
+from clients as cl inner join job as jb  on jb.idClient = cl.idClient
+inner join projectOrder as po on po.jobNo = jb.jobNo
+inner join workOrder as wo on wo.idPO = po.idPO and wo.jobNo = po.jobNo
+inner join task as tk on tk.idAuxWO = wo.idAuxWO" + If(idClient <> "", "where cl.numberClient = " + idClient, ""), conn)
+            If cmd.ExecuteNonQuery Then
+                tabla.Clear()
+                Dim da As New SqlDataAdapter(cmd)
+                da.Fill(tabla)
+                desconectar()
+            Else
+                desconectar()
+            End If
+        Catch ex As Exception
+
+        End Try
+    End Sub
+
     Public Sub consultaWO(ByVal jobNumber As String, ByVal tabla As DataTable)
         Try
             conectar()
@@ -809,7 +839,8 @@ tk.task,
 tk.idAux,
 wo.idAuxWO,
 po.line,
-po.WBS
+po.WBS,
+jb.postingProject
 from job as jb 
 inner join projectOrder as po on po.jobNo = jb.jobNo
 inner join workOrder as wo on wo.idPO = po.idPO and wo.jobNo = po.jobNo

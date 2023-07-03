@@ -250,8 +250,7 @@ CREATE TABLE [dbo].[clients](
 	[idHomeAddress] [varchar](36) NULL,
 	[estatus] [char](1) NULL,
 	[photo] [image] NULL,
-	[payTerms] [varchar](30) NULL,
-	[postingProject] [varchar](12) NULL,
+	[payTerms] [varchar](30) NULL
 	)
 	GO
 
@@ -912,7 +911,8 @@ create table job (
 	custumerNo int,
 	contractNo int,
 	costCode bigInt,
-	idClient varchar(36)
+	idClient varchar(36),
+	postingProject bigint
 )
 GO
 

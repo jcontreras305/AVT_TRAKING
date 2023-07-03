@@ -372,6 +372,7 @@ Public Class ProjectsCosts
     Private Function llenarCampos(ByVal lstDatosPO As List(Of String)) As Boolean
         If lstDatosPO IsNot Nothing Then
             If lstDatosPO.Count > 0 Then
+
                 txtClientName.Text = lstDatosPO(0)
                 txtWokOrder.Text = lstDatosPO(1)
                 txtTask.Text = lstDatosPO(2)
@@ -426,6 +427,13 @@ Public Class ProjectsCosts
                 sprPercentComplete.Value = pjt.PercentComplete
                 pjt.Line = lstDatosPO(17)
                 pjt.WBS = lstDatosPO(18)
+
+                Dim tbl As New DataTable
+                mtdJobs.consultaJobs(tbl)
+                Dim arrayJob() As DataRow = tbl.Select("jobNo =" + pjt.jobNum.ToString)
+                If arrayJob.Length > 0 Then
+                    txtPostingProject.Text = arrayJob(0).ItemArray(1).ToString
+                End If
                 Return True
             Else
                 Return False
@@ -438,7 +446,12 @@ Public Class ProjectsCosts
         If flagAddRecord Then
             If cmbJobNumber.SelectedItem.ToString() <> "" Then
                 pjtNuevo.jobNum = cmbJobNumber.Text
-                mtdJobs.consultaWO(pjtNuevo.jobNum, tablasDeTareas)
+                Dim tbl As New DataTable
+                mtdJobs.consultaJobs(tbl)
+                Dim arrayJob() As DataRow = tablasDeTareas.Select("jobNo =" + cmbJobNumber.Text)
+                If arrayJob.Length > 0 Then
+                    txtPostingProject.Text = arrayJob(0).ItemArray(8).ToString
+                End If
                 If tablasDeTareas.Rows IsNot Nothing Then
                     txtElementsRadar.Text = "1 of " + tablasDeTareas.Rows.Count.ToString()
                 End If
@@ -677,7 +690,9 @@ Public Class ProjectsCosts
             If validarClientPO() Then
                 If pjt.idPO <> txtClientPO.Text Then
                     If mtdJobs.updatePO(txtClientPO.Text, pjt.idPO, pjt.jobNum) Then
+                        mtdJobs.consultaWO(JobNumber, tablasDeTareas)
                         pjt.idPO = txtClientPO.Text
+                        FindPOVal()
                     Else
                         txtClientPO.Text = pjt.idPO
                     End If
@@ -689,10 +704,11 @@ Public Class ProjectsCosts
             End If
         End If
     End Sub
+
     Function FindPOVal() As Boolean
         Dim arrayListPo() As DataRow = tablasDeTareas.Select("jobNo= " + cmbJobNumber.Text + " and idPO = " + txtClientPO.Text)
         If arrayListPo.Length > 0 Then
-            txtLine.Text = arrayListPo(0).ItemArray(6)
+            txtLine.Text = txtClientPO.Text.Substring(txtClientPO.Text.Length - 1, 1)
             txtWBS.Text = arrayListPo(0).ItemArray(7)
             Return True
         Else

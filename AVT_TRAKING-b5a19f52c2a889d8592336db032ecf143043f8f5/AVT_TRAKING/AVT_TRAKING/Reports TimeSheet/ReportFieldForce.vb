@@ -158,7 +158,7 @@ select
 * from (
 select 
 	DISTINCT
-	cl.postingProject as 'Posting Project',
+	jb.postingProject as 'Posting Project',
 	po.idPO as 'Purchase Order',
 	po.Line as 'Line .',
 	wo.idWO as 'Work Order',
@@ -175,9 +175,9 @@ select
 	wc.CustomerPositionID as 'Customer Position ID',
 	wc.CustomerJobPositionDescription as 'Customer Job Position Description',
 	wc.CBSFullNumber as 'CBS Full Number',
-	SUM (hw.hoursST) OVER(PARTITION BY cl.postingProject , po.IdPO , wo.idWO , tk.task, hw.dateWorked,hw.schedule,em.numberEmploye)  as 'Allocation ST',
-	SUM (hw.hoursOT) OVER(PARTITION BY cl.postingProject , po.IdPO , wo.idWO , tk.task, hw.dateWorked,hw.schedule,em.numberEmploye)  as 'Allocation OT',
-	IIF (SUM (hw.hours3) OVER(PARTITION BY cl.postingProject , po.IdPO , wo.idWO , tk.task, hw.dateWorked,hw.schedule,em.numberEmploye)=0,'',CONCAT('',SUM (hw.hours3) OVER(PARTITION BY cl.postingProject , po.IdPO , wo.idWO , tk.task, hw.dateWorked,hw.schedule,em.numberEmploye))) as 'Allocation DT',
+	SUM (hw.hoursST) OVER(PARTITION BY jb.postingProject , po.IdPO , wo.idWO , tk.task, hw.dateWorked,hw.schedule,em.numberEmploye)  as 'Allocation ST',
+	SUM (hw.hoursOT) OVER(PARTITION BY jb.postingProject , po.IdPO , wo.idWO , tk.task, hw.dateWorked,hw.schedule,em.numberEmploye)  as 'Allocation OT',
+	IIF (SUM (hw.hours3) OVER(PARTITION BY jb.postingProject , po.IdPO , wo.idWO , tk.task, hw.dateWorked,hw.schedule,em.numberEmploye)=0,'',CONCAT('',SUM (hw.hours3) OVER(PARTITION BY jb.postingProject , po.IdPO , wo.idWO , tk.task, hw.dateWorked,hw.schedule,em.numberEmploye))) as 'Allocation DT',
 	'' as 'IsSubsistence',
     '' as 'Equipment ID',
 	'' as 'Customer Equipment ID',
@@ -198,7 +198,7 @@ where hw.dateWorked between @startDate and @endDate
 UNION 
 
 select 
-	cl.postingProject as 'Posting Project',
+	jb.postingProject as 'Posting Project',
 	po.idPO as 'Purchase Order',
 	po.Line as 'Line .',
 	wo.idWO as 'Work Order',
