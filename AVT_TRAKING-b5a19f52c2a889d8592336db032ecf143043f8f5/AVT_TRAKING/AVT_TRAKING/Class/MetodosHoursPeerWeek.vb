@@ -157,6 +157,59 @@ inner join job as jb on jb.jobNo = po.jobNo", conn)
             Return False
         End Try
     End Function
+    ''' <summary>
+    ''' This method is to select the hours by employee a you can send a date to made a filter 
+    ''' </summary>
+    ''' <param name="idEmployee"></param>
+    ''' <param name="dateWorked"></param>
+    ''' <returns></returns>
+    Public Function llenarTablaHWPM(ByVal idEmployee As String, Optional dateWorked As String = "") As DataTable
+        Try
+            conectar()
+            Dim tbl As New DataTable
+            Dim cmd As New SqlCommand("select hw.idHorsWorked  from hoursWorked as hw inner join employees as emp on emp.idEmployee = hw.idEmployee 
+where emp.idEmployee = '" + idEmployee + "' " + If(dateWorked = "", "", " and hw.dateWorked  = '" + dateWorked + "'"), conn)
+            If cmd.ExecuteNonQuery Then
+                Dim da As New SqlDataAdapter(cmd)
+                da.Fill(tbl)
+                desconectar()
+                Return tbl
+            Else
+                desconectar()
+                tbl.Columns.Add("idHorsWorked")
+                Return tbl
+            End If
+        Catch ex As Exception
+            Dim tbl2 As New DataTable
+            tbl2.Columns.Add("idHorsWorked")
+            Return tbl2
+        Finally
+            desconectar()
+        End Try
+    End Function
+
+    Public Function insertarRecordToPerdiem(ByVal datos() As String) As String
+        Try
+            conectar()
+            Dim id As Guid = Guid.NewGuid()
+            Dim cmd As New SqlCommand("if (select count(*) from hoursWorked where idAux = '" + datos(2) + "' and dateWorked = '" + datos(0) + "' and idEmployee = '" + datos(1) + "') = 0
+begin 
+	insert into hoursWorked values ('" + id.ToString() + "',0,0,0,'" + datos(0) + "','" + datos(1) + "',NULL,'" + datos(2) + "','DAYS',NULL)
+end", conn)
+            If cmd.ExecuteNonQuery >= 1 Then
+                'mtdJobs.UpdateTotalSpendTask(datos(5))
+                desconectar()
+                Return id.ToString()
+            Else
+                desconectar()
+                Return ""
+            End If
+        Catch ex As Exception
+            desconectar()
+            MsgBox(ex.Message)
+            Return Nothing
+        End Try
+    End Function
 
     Public Function llenarComboCellProject(ByVal cmbProyect As DataGridViewComboBoxCell, ByVal proyectTable As DataTable, ByVal lastvalue As String, ByVal jobNo As String, ByVal idPO As String) As String
         Try
@@ -1273,6 +1326,31 @@ select * from projects", conn)
 	hoursWorked
 FROM 
 	'C:\TMP\TimeSheetTemp.csv'
+WITH(
+	FIELDTERMINATOR =',',
+	ROWTERMINATOR = '\n',
+	FIRSTROW = 2,
+	MAXERRORS = 1 --NORMALMENTE SE ENCUENTRA EN 10 
+)", conn)
+            If cmd.ExecuteNonQuery Then
+                Return True
+            Else
+                Return False
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message())
+            Return False
+        Finally
+            desconectar()
+        End Try
+    End Function
+    Public Function execBulkInsertRecordsPerdiem() As Boolean
+        Try
+            conectar()
+            Dim cmd As New SqlCommand("Bulk INSERT 
+	expensesUsed
+FROM 
+	'C:\TMP\Perdiem.csv'
 WITH(
 	FIELDTERMINATOR =',',
 	ROWTERMINATOR = '\n',

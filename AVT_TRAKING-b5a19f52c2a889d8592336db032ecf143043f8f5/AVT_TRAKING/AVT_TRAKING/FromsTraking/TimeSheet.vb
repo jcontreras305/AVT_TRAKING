@@ -6,6 +6,7 @@ Public Class TimeSheet
     Dim mtdEmployees As New MetodosEmployees
     Dim mtdHPW As New MetodosHoursPeerWeek
     Dim mtdJobs As New MetodosJobs
+    Public tablaHour As New Data.DataTable
     Public tablaWorkCodes As New Data.DataTable
     Public tablaProject As New Data.DataTable
     Public tablaEmpleadosId As New Data.DataTable
@@ -66,61 +67,99 @@ Public Class TimeSheet
                 txtSalidaPerdiem.Text = txtSalidaPerdiem.Text + vbCrLf + "Reding Data..." + vbCrLf + "reading row "
                 Dim msgSalida = txtSalidaPerdiem.Text
                 Dim listError As New List(Of String)
+                Dim textInsertExpUsed As String = "idExpenseUsed,dateExpense,amount,description,idExpense,idAux,idEmployee,idHoursWorked" & vbCrLf
                 While perdiemSheet.Cells(cont, 2).Text <> ""
                     Dim idAux As String = ""
                     Dim idExpense As String = ""
                     Dim idEmployee As String = ""
+                    Dim idHrsW As String = ""
                     Dim flag2 As Boolean = False
-
-                    For Each row As DataRow In tablaExpeseCode.Rows
-                        If row.ItemArray(1) = perdiemSheet.Cells(cont, 6).Text Then
-                            idExpense = row.ItemArray(0) 'ExpenseCode
-                            flag2 = True
-                            Exit For
-                        Else
-                            flag2 = False
-                        End If
-                    Next
+                    Dim arrayExpense() As DataRow = tablaExpeseCode.Select("expenseCode = '" + If(perdiemSheet.Cells(cont, 6).text = "Per-Diem" Or perdiemSheet.Cells(cont, 6).text = "Per Diem", "Per-Diem", "Travel") + "'")
+                    If arrayExpense.Length > 0 Then
+                        idExpense = arrayExpense(0).ItemArray(0).ToString()
+                        flag2 = True
+                    End If
+                    'For Each row As DataRow In tablaExpeseCode.Rows
+                    '    If row.ItemArray(1) = perdiemSheet.Cells(cont, 6).Text Then
+                    '        idExpense = row.ItemArray(0) 'ExpenseCode
+                    '        flag2 = True
+                    '        Exit For
+                    '    Else
+                    '        flag2 = False
+                    '    End If
+                    'Next
                     Dim flag3 As Boolean = False
-                    For Each row As DataRow In tablaProject.Rows
-                        If row.ItemArray(1) = perdiemSheet.Cells(cont, 4).Text And row.ItemArray(3) = perdiemSheet.Cells(cont, 5).Text Then
-                            idAux = row.ItemArray(0).ToString() 'idAux
-                            flag3 = True
-                            Exit For
-                        Else
-                            flag3 = True
-                        End If
-                    Next
+                    Dim arrayProject() As DataRow = tablaProject.Select("project = '" + perdiemSheet.Cells(cont, 4).text + "' and idPO = " + perdiemSheet.Cells(cont, 5).Text)
+                    If arrayProject.Length > 0 Then
+                        idAux = arrayProject(0).ItemArray(0).ToString() 'idAux
+                        flag3 = True
+                    End If
+                    'For Each row As DataRow In tablaProject.Rows
+                    '    If row.ItemArray(1) = perdiemSheet.Cells(cont, 4).Text And row.ItemArray(3) = perdiemSheet.Cells(cont, 5).Text Then
+                    '        idAux = row.ItemArray(0).ToString() 'idAux
+                    '        flag3 = True
+                    '        Exit For
+                    '    Else
+                    '        flag3 = True
+                    '    End If
+                    'Next
                     Dim flag4 As Boolean = False
-                    For Each row As DataRow In tablaEmpleadosId.Rows
-                        If row.ItemArray(4) = perdiemSheet.Cells(cont, 2).Text Then 'idEmpleado
-                            idEmployee = row.ItemArray(0)
-                            flag4 = True
-                            Exit For
+                    Dim arrayEmp() As DataRow = tablaEmpleadosId.Select("numberEmploye = " + perdiemSheet.Cells(cont, 2).text)
+                    If arrayEmp.Length > 0 Then
+                        idEmployee = arrayEmp(0).ItemArray(0).ToString() 'idemployee
+                        flag4 = True
+                    End If
+
+                    Dim flag5 As Boolean = False
+                    If flag4 And flag3 And flag2 Then
+                        tablaHour = mtdHPW.llenarTablaHWPM(idEmployee, validarFechaParaSQlDeExcel(perdiemSheet.Cells(cont, 3).text))
+                        If tablaHour.Rows.Count > 0 Then
+                            idHrsW = tablaHour.Rows(0).ItemArray(0)
+                            flag5 = True
                         Else
-                            flag4 = False
+                            Dim datosHW(6) As String
+                            datosHW(0) = validarFechaParaSQlDeExcel(perdiemSheet.Cells(cont, 3).text)
+                            datosHW(1) = idEmployee
+                            datosHW(2) = idAux
+                            idHrsW = mtdHPW.insertarRecordToPerdiem(datosHW)
+                            flag5 = True
                         End If
-                    Next
+                    Else
+                        flag5 = False
+                    End If
+
+
+                    'For Each row As DataRow In tablaEmpleadosId.Rows
+                    '    If row.ItemArray(4) = perdiemSheet.Cells(cont, 2).Text Then 'idEmpleado
+                    '        idEmployee = row.ItemArray(0)
+                    '        flag4 = True
+                    '        Exit For
+                    '    Else
+                    '        flag4 = False
+                    '    End If
+                    'Next
 
                     If flag2 = False Then 'Expense code
                         If flag3 = False Then 'Project
                             If flag4 = False Then 'IdEmployee
-                                listError.Add("Row " + cont.ToString + ": the ExpenseCode, Employee Number and Project were not select.")
+                                listError.Add("Row " + cont.ToString + ": the ExpenseCode, Employee Number and Project were not found.")
                             End If
                         Else
-                            listError.Add("Row " + cont.ToString + ": the ExpenseCode and Project were not select.")
+                            listError.Add("Row " + cont.ToString + ": the ExpenseCode and Project were not found.")
                         End If
-                        listError.Add("Row " + cont.ToString + ": the ExpenseCode was not select.")
+                        listError.Add("Row " + cont.ToString + ": the ExpenseCode was not Found.")
                     ElseIf flag3 = False Then 'Project
                         If flag4 = False Then 'idEmployee
                             listError.Add("Row " + cont.ToString + ": the ExpenseCode and Employee Number were not select.")
                         Else
-                            listError.Add("Row " + cont.ToString + ": the Project was not select.")
+                            listError.Add("Row " + cont.ToString + ": the Project was not Found.")
                         End If
                     ElseIf flag4 = False Then 'idEmplloyee
-                        listError.Add("Row " + cont.ToString + ": the Employee Number was not select.")
+                        listError.Add("Row " + cont.ToString + ": the Employee Number was not Found.")
                     ElseIf flag2 And flag3 And flag4 Then
-                        tblPerdiem.Rows.Add("", perdiemSheet.Cells(cont, 3).Text, perdiemSheet.Cells(cont, 7).Text, perdiemSheet.Cells(cont, 8).Text, idExpense, idAux, idEmployee)
+                        Dim newId As Guid = Guid.NewGuid
+                        textInsertExpUsed = textInsertExpUsed & newId.ToString & "," & validarFechaParaSQlDeExcel(perdiemSheet.Cells(cont, 3).text) & "," & perdiemSheet.Cells(cont, 7).text & "," & perdiemSheet.Cells(cont, 8).text & "," & idExpense & "," & idAux & "," & idEmployee & "," & idHrsW & vbCrLf
+                        'tblPerdiem.Rows.Add("", perdiemSheet.Cells(cont, 3).Text, perdiemSheet.Cells(cont, 7).Text, perdiemSheet.Cells(cont, 8).Text, idExpense, idAux, idEmployee)
                     End If
                     txtSalidaPerdiem.Text = msgSalida + CStr(cont)
                     cont += 1
@@ -139,21 +178,32 @@ Public Class TimeSheet
                 listError.Clear()
                 If flagContinue Then
                     txtSalidaPerdiem.Text = txtSalidaPerdiem.Text + vbCrLf + "Starting process to insert..."
-                    Dim contRowsError As Integer = 2
-                    For Each row As Data.DataRow In tblPerdiem.Rows()
-                        Dim listEU As New List(Of String)
-                        listEU.Add(row.ItemArray(0).ToString)
-                        listEU.Add(row.ItemArray(1).ToString)
-                        listEU.Add(row.ItemArray(2).ToString)
-                        listEU.Add(row.ItemArray(3).ToString)
-                        listEU.Add(row.ItemArray(4).ToString)
-                        listEU.Add(row.ItemArray(5).ToString)
-                        listEU.Add(row.ItemArray(6).ToString)
-                        If Not mtdHPW.insertExpensesUsed(listEU) Then
-                            listError.Add("Excel Row " + contRowsError.ToString() + ".")
+                    If Not IO.Directory.Exists("C:\TMP") Then
+                        My.Computer.FileSystem.CreateDirectory("C:\TMP")
+                    End If
+                    My.Computer.FileSystem.WriteAllText("C:\TMP\Perdiem.csv", textInsertExpUsed, False)
+                    If flagContinue Then
+                        If mtdHPW.execBulkInsertRecordsPerdiem() Then
+                            txtSalidaPerdiem.Text = txtSalidaPerdiem.Text & vbCrLf & "The Process Records Insertion is over."
+                        Else
+                            txtSalidaPerdiem.Text = txtSalidaPerdiem.Text & vbCrLf & "The Process Records Insertion has a problem."
                         End If
-                        contRowsError += 1
-                    Next
+                    End If
+                    'Dim contRowsError As Integer = 2
+                    'For Each row As Data.DataRow In tblPerdiem.Rows()
+                    '    Dim listEU As New List(Of String)
+                    '    listEU.Add(row.ItemArray(0).ToString)
+                    '    listEU.Add(row.ItemArray(1).ToString)
+                    '    listEU.Add(row.ItemArray(2).ToString)
+                    '    listEU.Add(row.ItemArray(3).ToString)
+                    '    listEU.Add(row.ItemArray(4).ToString)
+                    '    listEU.Add(row.ItemArray(5).ToString)
+                    '    listEU.Add(row.ItemArray(6).ToString)
+                    '    If Not mtdHPW.insertExpensesUsed(listEU) Then
+                    '        listError.Add("Excel Row " + contRowsError.ToString() + ".")
+                    '    End If
+                    '    contRowsError += 1
+                    'Next
                 End If
                 If listError.Count > 0 Then
                     txtSalidaPerdiem.Text = txtSalidaPerdiem.Text + vbCrLf + "Error in the next rows:"
