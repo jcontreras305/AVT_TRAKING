@@ -81,13 +81,16 @@ Partial Class ProjectsClients
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
         Me.TableLayoutPanel2 = New System.Windows.Forms.TableLayoutPanel()
         Me.Panel9 = New System.Windows.Forms.Panel()
-        Me.btnCancelSaveJob = New System.Windows.Forms.Button()
-        Me.btnAdd = New System.Windows.Forms.Button()
         Me.Panel8 = New System.Windows.Forms.Panel()
         Me.Panel7 = New System.Windows.Forms.Panel()
+        Me.Label9 = New System.Windows.Forms.Label()
+        Me.txtPostingProject = New System.Windows.Forms.TextBox()
         Me.Panel6 = New System.Windows.Forms.Panel()
         Me.Panel5 = New System.Windows.Forms.Panel()
         Me.btnFindClintProyects = New System.Windows.Forms.Button()
+        Me.Panel10 = New System.Windows.Forms.Panel()
+        Me.btnAdd = New System.Windows.Forms.Button()
+        Me.btnCancelSaveJob = New System.Windows.Forms.Button()
         Me.Button2 = New System.Windows.Forms.Button()
         Me.PanelChildForm = New System.Windows.Forms.Panel()
         Me.TableLayoutPanel4 = New System.Windows.Forms.TableLayoutPanel()
@@ -118,9 +121,6 @@ Partial Class ProjectsClients
         Me.idAux = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.photo = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.PostingProject = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Label9 = New System.Windows.Forms.Label()
-        Me.txtPostingProject = New System.Windows.Forms.TextBox()
-        Me.Panel10 = New System.Windows.Forms.Panel()
         Me.Panel1.SuspendLayout()
         Me.pnlButtonsPOCl.SuspendLayout()
         Me.PnllSetup.SuspendLayout()
@@ -140,11 +140,11 @@ Partial Class ProjectsClients
         Me.Panel7.SuspendLayout()
         Me.Panel6.SuspendLayout()
         Me.Panel5.SuspendLayout()
+        Me.Panel10.SuspendLayout()
         Me.PanelChildForm.SuspendLayout()
         Me.TableLayoutPanel4.SuspendLayout()
         Me.Panel3.SuspendLayout()
         CType(Me.tblProjectClientsAll, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.Panel10.SuspendLayout()
         Me.SuspendLayout()
         '
         'Panel1
@@ -902,39 +902,6 @@ Partial Class ProjectsClients
         Me.Panel9.Size = New System.Drawing.Size(270, 22)
         Me.Panel9.TabIndex = 4
         '
-        'btnCancelSaveJob
-        '
-        Me.btnCancelSaveJob.FlatAppearance.BorderSize = 0
-        Me.btnCancelSaveJob.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(58, Byte), Integer), CType(CType(115, Byte), Integer))
-        Me.btnCancelSaveJob.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnCancelSaveJob.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.btnCancelSaveJob.Image = Global.AVT_TRAKING.My.Resources.Resources.close2
-        Me.btnCancelSaveJob.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnCancelSaveJob.Location = New System.Drawing.Point(97, 2)
-        Me.btnCancelSaveJob.Name = "btnCancelSaveJob"
-        Me.btnCancelSaveJob.Size = New System.Drawing.Size(75, 29)
-        Me.btnCancelSaveJob.TabIndex = 27
-        Me.btnCancelSaveJob.Text = "Cancel"
-        Me.btnCancelSaveJob.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.btnCancelSaveJob.UseVisualStyleBackColor = True
-        Me.btnCancelSaveJob.Visible = False
-        '
-        'btnAdd
-        '
-        Me.btnAdd.FlatAppearance.BorderSize = 0
-        Me.btnAdd.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(58, Byte), Integer), CType(CType(115, Byte), Integer))
-        Me.btnAdd.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnAdd.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.btnAdd.Image = Global.AVT_TRAKING.My.Resources.Resources.add
-        Me.btnAdd.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnAdd.Location = New System.Drawing.Point(12, 2)
-        Me.btnAdd.Name = "btnAdd"
-        Me.btnAdd.Size = New System.Drawing.Size(75, 27)
-        Me.btnAdd.TabIndex = 26
-        Me.btnAdd.Text = "Add"
-        Me.btnAdd.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.btnAdd.UseVisualStyleBackColor = True
-        '
         'Panel8
         '
         Me.Panel8.Controls.Add(Me.txtCompanyName)
@@ -954,6 +921,27 @@ Partial Class ProjectsClients
         Me.Panel7.Name = "Panel7"
         Me.Panel7.Size = New System.Drawing.Size(270, 22)
         Me.Panel7.TabIndex = 2
+        '
+        'Label9
+        '
+        Me.Label9.AutoSize = True
+        Me.Label9.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.Label9.Location = New System.Drawing.Point(8, 5)
+        Me.Label9.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
+        Me.Label9.Name = "Label9"
+        Me.Label9.Size = New System.Drawing.Size(78, 13)
+        Me.Label9.TabIndex = 45
+        Me.Label9.Text = "Posting Project"
+        '
+        'txtPostingProject
+        '
+        Me.txtPostingProject.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.txtPostingProject.Location = New System.Drawing.Point(94, 0)
+        Me.txtPostingProject.Margin = New System.Windows.Forms.Padding(2)
+        Me.txtPostingProject.MaxLength = 11
+        Me.txtPostingProject.Name = "txtPostingProject"
+        Me.txtPostingProject.Size = New System.Drawing.Size(177, 20)
+        Me.txtPostingProject.TabIndex = 13
         '
         'Panel6
         '
@@ -991,6 +979,49 @@ Partial Class ProjectsClients
         Me.btnFindClintProyects.Text = "Find"
         Me.btnFindClintProyects.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         Me.btnFindClintProyects.UseVisualStyleBackColor = True
+        '
+        'Panel10
+        '
+        Me.Panel10.Controls.Add(Me.btnAdd)
+        Me.Panel10.Controls.Add(Me.btnCancelSaveJob)
+        Me.Panel10.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Panel10.Location = New System.Drawing.Point(3, 150)
+        Me.Panel10.Name = "Panel10"
+        Me.Panel10.Size = New System.Drawing.Size(270, 31)
+        Me.Panel10.TabIndex = 5
+        '
+        'btnAdd
+        '
+        Me.btnAdd.FlatAppearance.BorderSize = 0
+        Me.btnAdd.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(58, Byte), Integer), CType(CType(115, Byte), Integer))
+        Me.btnAdd.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnAdd.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.btnAdd.Image = Global.AVT_TRAKING.My.Resources.Resources.add
+        Me.btnAdd.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnAdd.Location = New System.Drawing.Point(12, 2)
+        Me.btnAdd.Name = "btnAdd"
+        Me.btnAdd.Size = New System.Drawing.Size(75, 27)
+        Me.btnAdd.TabIndex = 26
+        Me.btnAdd.Text = "Add"
+        Me.btnAdd.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.btnAdd.UseVisualStyleBackColor = True
+        '
+        'btnCancelSaveJob
+        '
+        Me.btnCancelSaveJob.FlatAppearance.BorderSize = 0
+        Me.btnCancelSaveJob.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(58, Byte), Integer), CType(CType(115, Byte), Integer))
+        Me.btnCancelSaveJob.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnCancelSaveJob.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.btnCancelSaveJob.Image = Global.AVT_TRAKING.My.Resources.Resources.close2
+        Me.btnCancelSaveJob.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnCancelSaveJob.Location = New System.Drawing.Point(97, 2)
+        Me.btnCancelSaveJob.Name = "btnCancelSaveJob"
+        Me.btnCancelSaveJob.Size = New System.Drawing.Size(75, 29)
+        Me.btnCancelSaveJob.TabIndex = 27
+        Me.btnCancelSaveJob.Text = "Cancel"
+        Me.btnCancelSaveJob.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.btnCancelSaveJob.UseVisualStyleBackColor = True
+        Me.btnCancelSaveJob.Visible = False
         '
         'Button2
         '
@@ -1218,37 +1249,6 @@ Partial Class ProjectsClients
         Me.PostingProject.Name = "PostingProject"
         Me.PostingProject.ReadOnly = True
         '
-        'Label9
-        '
-        Me.Label9.AutoSize = True
-        Me.Label9.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.Label9.Location = New System.Drawing.Point(8, 5)
-        Me.Label9.Margin = New System.Windows.Forms.Padding(2, 0, 2, 0)
-        Me.Label9.Name = "Label9"
-        Me.Label9.Size = New System.Drawing.Size(78, 13)
-        Me.Label9.TabIndex = 45
-        Me.Label9.Text = "Posting Project"
-        '
-        'txtPostingProject
-        '
-        Me.txtPostingProject.Anchor = CType((System.Windows.Forms.AnchorStyles.Left Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.txtPostingProject.Location = New System.Drawing.Point(94, 0)
-        Me.txtPostingProject.Margin = New System.Windows.Forms.Padding(2)
-        Me.txtPostingProject.MaxLength = 11
-        Me.txtPostingProject.Name = "txtPostingProject"
-        Me.txtPostingProject.Size = New System.Drawing.Size(177, 20)
-        Me.txtPostingProject.TabIndex = 13
-        '
-        'Panel10
-        '
-        Me.Panel10.Controls.Add(Me.btnAdd)
-        Me.Panel10.Controls.Add(Me.btnCancelSaveJob)
-        Me.Panel10.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel10.Location = New System.Drawing.Point(3, 150)
-        Me.Panel10.Name = "Panel10"
-        Me.Panel10.Size = New System.Drawing.Size(270, 31)
-        Me.Panel10.TabIndex = 5
-        '
         'ProjectsClients
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1288,11 +1288,11 @@ Partial Class ProjectsClients
         Me.Panel6.PerformLayout()
         Me.Panel5.ResumeLayout(False)
         Me.Panel5.PerformLayout()
+        Me.Panel10.ResumeLayout(False)
         Me.PanelChildForm.ResumeLayout(False)
         Me.TableLayoutPanel4.ResumeLayout(False)
         Me.Panel3.ResumeLayout(False)
         CType(Me.tblProjectClientsAll, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.Panel10.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub

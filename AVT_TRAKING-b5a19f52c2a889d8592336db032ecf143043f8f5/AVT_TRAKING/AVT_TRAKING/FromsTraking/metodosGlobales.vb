@@ -271,7 +271,7 @@ where cl.numberClient = " + numberClient + " and po.projectId = '" + project + "
         Dim zona As TimeZone = TimeZone.CurrentTimeZone
         If zona.DaylightName = "Hora de verano central (México)" Then
             Dim array() = fecha.Split("/")
-            Dim fecha1 As String = array(2) + "-" + array(1) + "-" + array(0)
+            Dim fecha1 As String = array(2) + "-" + array(0) + "-" + array(1)
             Return fecha1
         Else
             Dim array() As String = CStr(fecha).Split("/")

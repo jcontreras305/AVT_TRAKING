@@ -114,7 +114,7 @@ end", conn)
                 End If
                 Dim cmd As New SqlCommand("If Not EXISTS (select idWorkCode from workCode where name = '" + row.ItemArray(1) + "' and jobNo = " + If(row.ItemArray(8) = "" And assignJob, jobNO, row.ItemArray(8)) + ")
                 begin
-                    insert into workCode values (" + row.ItemArray(0) + "," + If(row.ItemArray(8) = "" And assignJob, jobNO, row.ItemArray(8)) + ",'" + row.ItemArray(1) + "','" + row.ItemArray(2) + "'," + row.ItemArray(3) + "," + row.ItemArray(4) + "," + row.ItemArray(5) + ",'" + row.ItemArray(6) + "','" + row.ItemArray(7) + "'," + row.ItemArray(9) + "," + row.ItemArray(10) + "," + row.ItemArray(11) + "," + row.ItemArray(12) + "," + row.ItemArray(13) + "," + row.ItemArray(14) + "," + row.ItemArray(15) + ")
+                    insert into workCode values (" + row.ItemArray(0) + "," + If(row.ItemArray(8) = "" And assignJob, jobNO, row.ItemArray(8)) + ",'" + row.ItemArray(1) + "','" + row.ItemArray(2) + "'," + row.ItemArray(3) + "," + row.ItemArray(4) + "," + row.ItemArray(5) + ",'" + row.ItemArray(6) + "','" + row.ItemArray(7) + "'," + If(row.ItemArray(9) = "", "'0'", row.ItemArray(9)) + "," + If(row.ItemArray(10) = "", "'0'", row.ItemArray(10)) + "," + If(row.ItemArray(11) = "", "'0'", row.ItemArray(11)) + "," + If(row.ItemArray(12) = "", "'0'", row.ItemArray(12)) + "," + If(row.ItemArray(13) = "", "'0'", row.ItemArray(13)) + "," + If(row.ItemArray(14) = "", "'0'", row.ItemArray(14)) + "," + If(row.ItemArray(15) = "", "'0'", row.ItemArray(15)) + ")
                 end")
                 cmd.Connection = conn
                 cmd.Transaction = tran
@@ -370,7 +370,7 @@ from workOrder
                         End If
                     End If
                 Else ' en este caso se debe insertar un nuevo PO un WO y el nuevo TASK
-                    Dim cmdInsertNewPO As New SqlCommand("insert into projectOrder values (" + projectN.idPO + "," + CStr(projectN.jobNum) + ")", conn)
+                    Dim cmdInsertNewPO As New SqlCommand("insert into projectOrder values (" + projectN.idPO + "," + CStr(projectN.jobNum) + ",0,'')", conn)
                     Dim newWO = System.Guid.NewGuid.ToString()
                     Dim cmdInsertNewWO As New SqlCommand("insert into workOrder values('" + newWO + "','" + projectN.idWorkOrder + "'," + CStr(projectN.idPO) + ", " + CStr(projectN.jobNum) + ")", conn)
                     Dim cmdInsertTask2 As New SqlCommand("insert into task 
