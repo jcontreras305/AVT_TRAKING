@@ -453,28 +453,30 @@ Public Class ProjectsClients
     End Sub
 
     Private Sub txtPostingProject_Leave(sender As Object, e As EventArgs) Handles txtPostingProject.Leave, txtJobNumber.Leave
-        If btnAdd.Text = "Save" Then
-            Dim tbljobs As New DataTable
-            mtdJobs.consultaJobs(tbljobs)
-            If sender.Name = "txtJobNumber" Then
-                Dim arrayJobs() As DataRow = tbljobs.Select("jobNo = " + txtJobNumber.Text)
-                If arrayJobs.Length > 0 Then
-                    MsgBox("This JobNumber already exist.")
-                    txtJobNumber.Focus()
-                    txtJobNumber.SelectAll()
+        Try
+            If btnAdd.Text = "Save" Then
+                Dim tbljobs As New DataTable
+                mtdJobs.consultaJobs(tbljobs)
+                If sender.Name = "txtJobNumber" Then
+                    Dim arrayJobs() As DataRow = tbljobs.Select("jobNo = " + txtJobNumber.Text)
+                    If arrayJobs.Length > 0 Then
+                        MsgBox("This JobNumber already exist.")
+                        txtJobNumber.Focus()
+                        txtJobNumber.SelectAll()
+                    End If
+                Else
+                    Dim arrayJobs() As DataRow = tbljobs.Select("postingProject = " + txtPostingProject.Text)
+                    If arrayJobs.Length > 0 Then
+                        MsgBox("This Posting Project already exist.")
+                        txtJobNumber.Focus()
+                        txtJobNumber.SelectAll()
+                    End If
                 End If
-            Else
-                Dim arrayJobs() As DataRow = tbljobs.Select("postingProject = " + txtPostingProject.Text)
-                If arrayJobs.Length > 0 Then
-                    MsgBox("This Posting Project already exist.")
-                    txtJobNumber.Focus()
-                    txtJobNumber.SelectAll()
-                End If
+
             End If
+        Catch ex As Exception
 
-        End If
-
-
+        End Try
     End Sub
 
     Private Sub txtPostingProject_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtPostingProject.KeyPress

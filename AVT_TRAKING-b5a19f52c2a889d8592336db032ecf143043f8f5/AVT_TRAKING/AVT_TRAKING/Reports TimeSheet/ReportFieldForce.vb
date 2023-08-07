@@ -145,7 +145,7 @@ select
 			(select distinct wo1.idWO from hoursWorked as hw1 
 				inner join task as tk1 on tk1.idAux = hw1.idAux
 				inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO
-				inner join projectOrder as po1 on po1.idPO = wo1.idPO and wo1.jobNo = po1.jobNo 
+				inner join projectOrder as po1 on po1.idPO = wo1.idPO and wo1.jobNo = po1.jobNo and hw1.jobNo = po1.jobNo
 				inner join job as jb1 on jb1.jobNo = po1.jobNo 
 				inner join clients as cl1 on cl1.idClient= jb1.idClient
 				where 
@@ -175,9 +175,9 @@ select
 	wc.CustomerPositionID as 'Customer Position ID',
 	wc.CustomerJobPositionDescription as 'Customer Job Position Description',
 	wc.CBSFullNumber as 'CBS Full Number',
-	SUM (hw.hoursST) OVER(PARTITION BY jb.postingProject , po.IdPO , wo.idWO , tk.task, hw.dateWorked,hw.schedule,em.numberEmploye)  as 'Allocation ST',
-	SUM (hw.hoursOT) OVER(PARTITION BY jb.postingProject , po.IdPO , wo.idWO , tk.task, hw.dateWorked,hw.schedule,em.numberEmploye)  as 'Allocation OT',
-	IIF (SUM (hw.hours3) OVER(PARTITION BY jb.postingProject , po.IdPO , wo.idWO , tk.task, hw.dateWorked,hw.schedule,em.numberEmploye)=0,'',CONCAT('',SUM (hw.hours3) OVER(PARTITION BY jb.postingProject , po.IdPO , wo.idWO , tk.task, hw.dateWorked,hw.schedule,em.numberEmploye))) as 'Allocation DT',
+	SUM (hw.hoursST) OVER(PARTITION BY jb.postingProject , po.IdPO , wo.idWO , tk.task, hw.dateWorked,hw.schedule,em.numberEmploye,wc.CBSFullNumber)  as 'Allocation ST',
+	SUM (hw.hoursOT) OVER(PARTITION BY jb.postingProject , po.IdPO , wo.idWO , tk.task, hw.dateWorked,hw.schedule,em.numberEmploye,wc.CBSFullNumber)  as 'Allocation OT',
+	IIF (SUM (hw.hours3) OVER(PARTITION BY jb.postingProject , po.IdPO , wo.idWO , tk.task, hw.dateWorked,hw.schedule,em.numberEmploye,wc.CBSFullNumber)=0,'',CONCAT('',SUM (hw.hours3) OVER(PARTITION BY jb.postingProject , po.IdPO , wo.idWO , tk.task, hw.dateWorked,hw.schedule,em.numberEmploye,wc.CBSFullNumber))) as 'Allocation DT',
 	'' as 'IsSubsistence',
     '' as 'Equipment ID',
 	'' as 'Customer Equipment ID',
@@ -191,7 +191,7 @@ inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO
 inner join projectOrder as po on po.idPO = wo.idPO and wo.jobNo = po.jobNo 
 inner join job as jb on jb.jobNo = po.jobNo 
 inner join clients as cl on cl.idClient= jb.idClient
-inner join workCode as wc on wc.idWorkCode = hw.idWorkCode and hw.jobNo = wc.jobNo
+inner join workCode as wc on wc.idWorkCode = hw.idWorkCode and hw.jobNo = wc.jobNo and hw.jobNo = po.jobNo
 where hw.dateWorked between @startDate and @endDate 
 	  and cl.numberClient  = @numclient 
 	  and jb.jobNo like iif(@jobNo= '','%', convert(nvarchar,@jobNo))

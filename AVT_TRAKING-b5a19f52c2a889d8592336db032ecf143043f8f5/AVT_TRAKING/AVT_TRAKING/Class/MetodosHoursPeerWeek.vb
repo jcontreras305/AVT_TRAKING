@@ -3,6 +3,39 @@ Public Class MetodosHoursPeerWeek
     Inherits ConnectioDB
     Dim mtdJobs As New MetodosJobs
     Public idEmpleadoFind As String
+
+    Public Function selectIdProject(ByVal datePerdiem As String, ByVal idPO As String, ByVal project As String, ByVal employeeNum As String) As DataTable
+        Try
+            conectar()
+
+            Dim cmd As New SqlCommand("select hw.idHorsWorked ,tk.idAux ,wo.idWO,tk.task,wo.idWO, po.idPO,wo.jobNo from hoursWorked as hw 
+inner join employees as emp on emp.idEmployee = hw.idEmployee 
+inner join task as tk on tk.idAux  = hw.idAux 
+inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO
+inner join projectOrder as po on po.idPO = wo.idPO and po.jobNo = wo.jobNo
+where hw.dateWorked = '" + datePerdiem + "' and po.idPO = " + idPO + " and CONCAT (idWO, '-',tk.task) = '" + project + "' and emp.numberEmploye = " + employeeNum, conn)
+
+            If cmd.ExecuteNonQuery Then
+                Dim dt As New DataTable
+                Dim da As New SqlDataAdapter(cmd)
+                da.Fill(dt)
+                Return dt
+            Else
+                Return Nothing
+            End If
+        Catch ex As Exception
+            Dim dtEx As New DataTable
+            dtEx.Columns.Add("idHorsWorked")
+            dtEx.Columns.Add("tk.idAux")
+            dtEx.Columns.Add("wo.idWO")
+            dtEx.Columns.Add("po.idPO")
+            dtEx.Columns.Add("wo.jobNo ")
+            Return dtEx
+        Finally
+            desconectar()
+        End Try
+    End Function
+
     Public Function llenarEmpleadosCombo(ByRef combo As ComboBox, ByVal tabla As DataTable) As Boolean
         Try
             conectar()
