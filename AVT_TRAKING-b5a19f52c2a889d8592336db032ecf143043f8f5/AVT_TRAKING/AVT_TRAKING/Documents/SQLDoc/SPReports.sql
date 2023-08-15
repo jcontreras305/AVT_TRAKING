@@ -343,7 +343,7 @@ select
 	isnull((select sum(amount) from expensesUsed as exu1 
 		inner join employees as em1 on em1.idEmployee = exu1.idEmployee
 		inner join expenses as ex1 on ex1.idExpenses= exu1.idExpense 
-		inner join hoursWorked as hw1 on hw1.idHorsWorked  = exu1.idHorsWorked 
+		inner join hoursWorked as hw1 on hw1.idHorsWorked  = exu1.idHorsWorked and hw1.idAux = exu1.idAux
 		inner join task as tk1 on tk1.idAux = exu1.idAux and tk1.idAux = hw1.idAux
 		inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO
 		inner join projectOrder as po1 on po1.idPO = wo1.idPO and wo1.jobNo = po1.jobNo 
@@ -353,7 +353,7 @@ select
 	isnull((select sum(amount) from expensesUsed as exu1 
 		inner join employees as em1 on em1.idEmployee = exu1.idEmployee
 		inner join expenses as ex1 on ex1.idExpenses= exu1.idExpense 
-		inner join hoursWorked as hw1 on hw1.idHorsWorked  = exu1.idHorsWorked 
+		inner join hoursWorked as hw1 on hw1.idHorsWorked  = exu1.idHorsWorked and hw1.idAux = exu1.idAux
 		inner join task as tk1 on tk1.idAux = exu1.idAux and tk1.idAux = hw1.idAux
 		inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO
 		inner join projectOrder as po1 on po1.idPO = wo1.idPO and wo1.jobNo = po1.jobNo 
@@ -434,6 +434,7 @@ select jb.jobNo,
 		inner join job as jb1 on jb1.jobNo = po1.jobNo 
 		inner join clients as cl1 on cl1.idClient = jb1.idClient
 		where hw1.dateWorked between @startdate and @finaldate and hw1.idHorsWorked = hw.idHorsWorked and tk1.idAux = tk.idAux and wo.idAuxWO = wo.idAuxWO and po1.idPO = po.idPO and jb1.jobNo = jb.jobNo and (ex1.expenseCode like '%per-diem%' or ex1.expenseCode like '%per diem%')),0) as 'PerDiem',
+	
 	isnull((select sum(amount) from expensesUsed as exu1 
 		inner join employees as em1 on em1.idEmployee = exu1.idEmployee
 		inner join expenses as ex1 on ex1.idExpenses= exu1.idExpense 
@@ -446,7 +447,7 @@ select jb.jobNo,
 		where hw1.dateWorked between @startdate and @finaldate 
 			and hw1.idHorsWorked = hw.idHorsWorked and tk1.idAux = tk.idAux	and wo.idAuxWO = wo.idAuxWO and po1.idPO = po.idPO and jb1.jobNo = jb.jobNo and (ex1.expenseCode like '%Travel%')),0) as 'Travel'
 from hoursWorked as hw 
-left join workCode as wc on wc.idWorkCode = hw.idWorkCode and wc.jobNo = hw.jobNo
+inner join workCode as wc on wc.idWorkCode = hw.idWorkCode and wc.jobNo = hw.jobNo
 inner join employees as em on em.idEmployee = hw.idEmployee
 inner join task as tk on tk.idAux = hw.idAux 
 inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO
@@ -454,7 +455,7 @@ inner join projectOrder as po on po.idPO = wo.idPO and wo.jobNo = po.jobNo
 inner join job as jb on jb.jobNo = po.jobNo 
 inner join clients as cl on cl.idClient = jb.idClient
 where hw.dateWorked between @startdate and @finaldate and cl.numberClient = @clientnum and jb.jobNo like iif(@all=1,'%%',CONCAT('',@job,'')) and not wc.name like '%6.4%' 
-)as T1
+)as T1 order by T1.dateWorked asc
 end
 GO
 

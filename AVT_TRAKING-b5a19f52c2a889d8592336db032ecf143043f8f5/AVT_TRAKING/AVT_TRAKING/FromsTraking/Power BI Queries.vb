@@ -472,11 +472,11 @@ ROUND(SUM(((hw.hoursST*wc.billingRate1) + (hw.hoursOT*wc.billingRateOT) + (hours
 jb.jobNo as 'ClientID'
 
 from hoursWorked as hw 
+left join workCode as wc on wc.idWorkCode = hw.idWorkCode and hw.jobNo = wc.jobNo
 inner join task as tk on tk.idAux = hw.idAux 
-inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO 
-inner join projectOrder as po on po.idPO = wo.idPO and po.jobNo = wo.jobNo 
-inner join job as jb on jb.jobNo = po.jobNo
-left join workCode as wc on wc.idWorkCode = hw.idWorkCode and wc.jobNo = jb.jobNo
+inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO
+inner join projectOrder as po on po.idPO = wo.idPO and wo.jobNo = po.jobNo 
+inner join job as jb on jb.jobNo = po.jobNo 
 where hw.dateWorked between @StartDate and @EndDate and wc.name not like '%6.4%' and wc.name not like '%covid%'
 ) as T1"
 			Return _All_CHP_1
