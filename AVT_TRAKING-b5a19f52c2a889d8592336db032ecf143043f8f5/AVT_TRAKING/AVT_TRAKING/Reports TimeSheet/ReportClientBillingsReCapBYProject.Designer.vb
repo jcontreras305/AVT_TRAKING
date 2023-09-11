@@ -27,6 +27,10 @@ Partial Class ReportClientBillingsReCapBYProject
         Me.Panel3 = New System.Windows.Forms.Panel()
         Me.crvClientBillingsReCapBYProject = New CrystalDecisions.Windows.Forms.CrystalReportViewer()
         Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.chbAllJobs = New System.Windows.Forms.CheckBox()
+        Me.Label5 = New System.Windows.Forms.Label()
+        Me.cmbJob = New System.Windows.Forms.ComboBox()
+        Me.Label4 = New System.Windows.Forms.Label()
         Me.cmbClients = New System.Windows.Forms.ComboBox()
         Me.Button1 = New System.Windows.Forms.Button()
         Me.Label2 = New System.Windows.Forms.Label()
@@ -41,10 +45,6 @@ Partial Class ReportClientBillingsReCapBYProject
         Me.PictureBox3 = New System.Windows.Forms.PictureBox()
         Me.btnRestore = New System.Windows.Forms.PictureBox()
         Me.btnMaximize = New System.Windows.Forms.PictureBox()
-        Me.Label4 = New System.Windows.Forms.Label()
-        Me.Label5 = New System.Windows.Forms.Label()
-        Me.cmbJob = New System.Windows.Forms.ComboBox()
-        Me.chbAllJobs = New System.Windows.Forms.CheckBox()
         Me.TableLayoutPanel1.SuspendLayout()
         Me.Panel3.SuspendLayout()
         Me.Panel2.SuspendLayout()
@@ -59,6 +59,7 @@ Partial Class ReportClientBillingsReCapBYProject
         '
         'TableLayoutPanel1
         '
+        Me.TableLayoutPanel1.BackColor = System.Drawing.Color.FromArgb(CType(CType(83, Byte), Integer), CType(CType(93, Byte), Integer), CType(CType(102, Byte), Integer))
         Me.TableLayoutPanel1.ColumnCount = 1
         Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
         Me.TableLayoutPanel1.Controls.Add(Me.Panel3, 0, 2)
@@ -113,6 +114,47 @@ Partial Class ReportClientBillingsReCapBYProject
         Me.Panel2.Name = "Panel2"
         Me.Panel2.Size = New System.Drawing.Size(696, 64)
         Me.Panel2.TabIndex = 1
+        '
+        'chbAllJobs
+        '
+        Me.chbAllJobs.AutoSize = True
+        Me.chbAllJobs.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.chbAllJobs.Location = New System.Drawing.Point(386, 34)
+        Me.chbAllJobs.Name = "chbAllJobs"
+        Me.chbAllJobs.Size = New System.Drawing.Size(62, 17)
+        Me.chbAllJobs.TabIndex = 20
+        Me.chbAllJobs.Text = "All Jobs"
+        Me.chbAllJobs.UseVisualStyleBackColor = True
+        '
+        'Label5
+        '
+        Me.Label5.AutoSize = True
+        Me.Label5.Font = New System.Drawing.Font("Verdana", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label5.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.Label5.Location = New System.Drawing.Point(196, 37)
+        Me.Label5.Name = "Label5"
+        Me.Label5.Size = New System.Drawing.Size(35, 14)
+        Me.Label5.TabIndex = 19
+        Me.Label5.Text = "Jobs"
+        '
+        'cmbJob
+        '
+        Me.cmbJob.FormattingEnabled = True
+        Me.cmbJob.Location = New System.Drawing.Point(245, 32)
+        Me.cmbJob.Name = "cmbJob"
+        Me.cmbJob.Size = New System.Drawing.Size(135, 21)
+        Me.cmbJob.TabIndex = 18
+        '
+        'Label4
+        '
+        Me.Label4.AutoSize = True
+        Me.Label4.Font = New System.Drawing.Font("Verdana", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label4.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.Label4.Location = New System.Drawing.Point(196, 8)
+        Me.Label4.Name = "Label4"
+        Me.Label4.Size = New System.Drawing.Size(43, 14)
+        Me.Label4.TabIndex = 17
+        Me.Label4.Text = "Client"
         '
         'cmbClients
         '
@@ -264,47 +306,6 @@ Partial Class ReportClientBillingsReCapBYProject
         Me.btnMaximize.Size = New System.Drawing.Size(31, 29)
         Me.btnMaximize.TabIndex = 7
         Me.btnMaximize.TabStop = False
-        '
-        'Label4
-        '
-        Me.Label4.AutoSize = True
-        Me.Label4.Font = New System.Drawing.Font("Verdana", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label4.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.Label4.Location = New System.Drawing.Point(196, 8)
-        Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(43, 14)
-        Me.Label4.TabIndex = 17
-        Me.Label4.Text = "Client"
-        '
-        'Label5
-        '
-        Me.Label5.AutoSize = True
-        Me.Label5.Font = New System.Drawing.Font("Verdana", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label5.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.Label5.Location = New System.Drawing.Point(196, 37)
-        Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(35, 14)
-        Me.Label5.TabIndex = 19
-        Me.Label5.Text = "Jobs"
-        '
-        'cmbJob
-        '
-        Me.cmbJob.FormattingEnabled = True
-        Me.cmbJob.Location = New System.Drawing.Point(245, 32)
-        Me.cmbJob.Name = "cmbJob"
-        Me.cmbJob.Size = New System.Drawing.Size(135, 21)
-        Me.cmbJob.TabIndex = 18
-        '
-        'chbAllJobs
-        '
-        Me.chbAllJobs.AutoSize = True
-        Me.chbAllJobs.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.chbAllJobs.Location = New System.Drawing.Point(386, 34)
-        Me.chbAllJobs.Name = "chbAllJobs"
-        Me.chbAllJobs.Size = New System.Drawing.Size(62, 17)
-        Me.chbAllJobs.TabIndex = 20
-        Me.chbAllJobs.Text = "All Jobs"
-        Me.chbAllJobs.UseVisualStyleBackColor = True
         '
         'ReportClientBillingsReCapBYProject
         '

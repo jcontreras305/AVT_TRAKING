@@ -67,7 +67,7 @@ Module metodosGlobales
     Public Function llenarComboEmployeeReports(ByVal combo As ComboBox) As Boolean
         Try
             con.conectar()
-            Dim cmd As New SqlCommand("select numberEmploye, CONCAT(em.lastName,' ',em.firstName,' ',em.middleName) as 'name' from employees as em", con.conn) '
+            Dim cmd As New SqlCommand("select numberEmploye, CONCAT(em.lastName,' ',em.firstName,' ',em.middleName) as 'name' from employees as em order by CONCAT(em.lastName,' ',em.firstName,' ',em.middleName) asc ", con.conn) '
             Dim dr As SqlDataReader = cmd.ExecuteReader()
             combo.Items.Clear()
             While dr.Read()

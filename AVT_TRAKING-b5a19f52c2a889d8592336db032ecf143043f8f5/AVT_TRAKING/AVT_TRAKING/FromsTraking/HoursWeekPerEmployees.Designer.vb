@@ -73,6 +73,7 @@ Partial Class HoursWeekPerEmployees
         Me.Label8 = New System.Windows.Forms.Label()
         Me.Panel4 = New System.Windows.Forms.Panel()
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
+        Me.btnWornHours = New System.Windows.Forms.Button()
         Me.btnDuplicateHour = New System.Windows.Forms.Button()
         Me.btnProyect = New System.Windows.Forms.Button()
         Me.Button12 = New System.Windows.Forms.Button()
@@ -356,6 +357,7 @@ Partial Class HoursWeekPerEmployees
         'GroupBox1
         '
         Me.GroupBox1.BackColor = System.Drawing.Color.FromArgb(CType(CType(83, Byte), Integer), CType(CType(93, Byte), Integer), CType(CType(102, Byte), Integer))
+        Me.GroupBox1.Controls.Add(Me.btnWornHours)
         Me.GroupBox1.Controls.Add(Me.btnDuplicateHour)
         Me.GroupBox1.Controls.Add(Me.txtFindFecha)
         Me.GroupBox1.Controls.Add(Me.btnSAP)
@@ -588,6 +590,22 @@ Partial Class HoursWeekPerEmployees
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 56.0!))
         Me.TableLayoutPanel1.Size = New System.Drawing.Size(1200, 600)
         Me.TableLayoutPanel1.TabIndex = 3
+        '
+        'btnWornHours
+        '
+        Me.btnWornHours.FlatAppearance.BorderSize = 0
+        Me.btnWornHours.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(58, Byte), Integer), CType(CType(115, Byte), Integer))
+        Me.btnWornHours.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnWornHours.Image = Global.AVT_TRAKING.My.Resources.Resources.allTables
+        Me.btnWornHours.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnWornHours.Location = New System.Drawing.Point(1034, 22)
+        Me.btnWornHours.Name = "btnWornHours"
+        Me.btnWornHours.Size = New System.Drawing.Size(141, 29)
+        Me.btnWornHours.TabIndex = 26
+        Me.btnWornHours.Text = "Wrong Hours"
+        Me.btnWornHours.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.btnWornHours.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
+        Me.btnWornHours.UseVisualStyleBackColor = True
         '
         'btnDuplicateHour
         '
@@ -984,4 +1002,5 @@ Partial Class HoursWeekPerEmployees
     Friend WithEvents chbPerDiem As CheckBox
     Friend WithEvents pcbCompany As PictureBox
     Friend WithEvents btnDuplicateHour As Button
+    Friend WithEvents btnWornHours As Button
 End Class

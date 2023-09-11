@@ -489,6 +489,12 @@
     <Compile Include="FromsTraking\WorkCodes.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="FromsTraking\WrongHours.Designer.vb">
+      <DependentUpon>WrongHours.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FromsTraking\WrongHours.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Login.vb">
       <SubType>Form</SubType>
     </Compile>
@@ -1178,6 +1184,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FromsTraking\WorkCodes.resx">
       <DependentUpon>WorkCodes.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FromsTraking\WrongHours.resx">
+      <DependentUpon>WrongHours.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Login.resx">
       <DependentUpon>Login.vb</DependentUpon>

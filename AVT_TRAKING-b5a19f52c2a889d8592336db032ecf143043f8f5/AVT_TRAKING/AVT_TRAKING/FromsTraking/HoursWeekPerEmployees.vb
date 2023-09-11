@@ -797,7 +797,7 @@ Public Class HoursWeekPerEmployees
             mensaje = If(mensaje = "", "Please choose a Proyect.", vbCrLf + " Please choose a Proyect")
         End If
         list.Add(idEmpleado)
-
+        list.Add(validaFechaParaSQl(Date.Today))
         If mensaje = "" Then
             If list(0) = "" Then
                 If DialogResult.OK = MessageBox.Show("If you accept the new expense will be inserted.", "Important", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) Then
@@ -1320,6 +1320,11 @@ Public Class HoursWeekPerEmployees
         timeSheet.tablaWorkCodes = workCodeTable
         timeSheet.ShowDialog()
         cargarDatos(cmbEmpleados.SelectedItem)
+    End Sub
+
+    Private Sub btnWornHours_Click(sender As Object, e As EventArgs) Handles btnWornHours.Click
+        Dim wrongHours As New WrongHours
+        wrongHours.ShowDialog()
     End Sub
 
     Private Sub btnRefresh_Click(sender As Object, e As EventArgs) Handles btnRefresh.Click

@@ -766,7 +766,8 @@ create  table expensesUsed(
 	idExpense varchar(36),
 	idAux varchar(36),
 	idEmployee varchar(36),
-	idHorsWorked varchar(36)
+	idHorsWorked varchar(36),
+	dayInserted Date
 )
 GO
 
@@ -832,7 +833,8 @@ create table hoursWorked (
 	idWorkCode int,
 	idAux varchar(36),
 	schedule varchar(10),
-	jobNo bigint
+	jobNo bigint,
+	dayinsert date
 )
 GO
 --##########################################################################################
@@ -4559,36 +4561,54 @@ GO
 --			CONCAT(em.lastName,',',em.firstName,' ',em.middleName),em.numberEmploye,em.typeEmployee
 --end
 --go
+----###############################################################################################
+----########### CREACION DE METODO PARA ELIMINAR EMPLOYEES ########################################
+----###############################################################################################
+--create proc sp_delete_Employee
+--@idEmployee varchar(36)
+--as
+--declare @Error as int
+--begin 
+--		begin try 
+--			if (select count(*) from hoursWorked where idEmployee = @idEmployee)=0
+--			begin
+--				delete from payRate where idEmployee = @idEmployee
+--				delete from employees where idEmployee = @idEmployee
+--				delete from HomeAddress where idHomeAdress = (select top 1 idHomeAdress from employees where idEmployee = @idEmployee)
+--				delete from contact where idContact = (select top 1 idContact from employees where idEmployee = @idEmployee)
+--				if (select count(*) from employees where idEmployee = @idEmployee)=0
+--				begin 
+--					set @Error = 0
+--				end
+--				else
+--				begin
+--					set @Error = 1
+--				end
+--			end
+--		end try	
+--		begin catch
+--			print 'Error'
+--		end catch
+--end
+--go
+
 ----| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
 ----| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
 ----V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V
 ----###############################################################################################
-----########### CREACION DE METODO PARA ELIMINAR EMPLOYEES ########################################
+----########### CAMBIOS PARA AGREGAR FECHAS EN HOURSWORKED Y EXPENSESUSED #########################
 ----###############################################################################################
-create proc sp_delete_Employee
-@idEmployee varchar(36)
-as
-declare @Error as int
-begin 
-		begin try 
-			if (select count(*) from hoursWorked where idEmployee = @idEmployee)=0
-			begin
-				delete from payRate where idEmployee = @idEmployee
-				delete from employees where idEmployee = @idEmployee
-				delete from HomeAddress where idHomeAdress = (select top 1 idHomeAdress from employees where idEmployee = @idEmployee)
-				delete from contact where idContact = (select top 1 idContact from employees where idEmployee = @idEmployee)
-				if (select count(*) from employees where idEmployee = @idEmployee)=0
-				begin 
-					set @Error = 0
-				end
-				else
-				begin
-					set @Error = 1
-				end
-			end
-		end try	
-		begin catch
-			print 'Error'
-		end catch
-end
+
+alter table hoursWorked 
+add dayInserted  date
 go
+
+update hoursWorked set dayInserted = DATEADD (dd,iif(DATEPART (dw, dateWorked)=1,0,8-(DATEPART (dw, dateWorked))),dateWorked)
+go
+
+  
+alter table expensesUsed 
+add dayInserted Date
+go
+
+update expensesUsed set dayInserted = DATEADD (dd,iif(DATEPART (dw, dateExpense)=1,0,8-(DATEPART (dw, dateExpense))),dateExpense) 

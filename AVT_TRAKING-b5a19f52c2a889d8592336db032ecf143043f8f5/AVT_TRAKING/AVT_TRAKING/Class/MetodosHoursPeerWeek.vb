@@ -518,7 +518,7 @@ order by jb.jobNo,po.idPO , CONCAT(wo.idWO,'-',tk.task) asc
             conectar()
             Dim cmd As New SqlCommand("if (select COUNT(*) from hoursWorked where idAux = '" + listDatos(8) + "' and idEmployee = '" + listDatos(5) + "' and dateWorked = '" + listDatos(4) + "' and idWorkCode = " + listDatos(6) + " )=0
 begin
-insert into hoursWorked values(NEWID()," + listDatos(1) + "," + listDatos(2) + "," + listDatos(3) + ",'" + listDatos(4) + "','" + listDatos(5) + "'," + listDatos(6) + ",'" + listDatos(8) + "','" + listDatos(9) + "'," + listDatos(7) + ")
+insert into hoursWorked values(NEWID()," + listDatos(1) + "," + listDatos(2) + "," + listDatos(3) + ",'" + listDatos(4) + "','" + listDatos(5) + "'," + listDatos(6) + ",'" + listDatos(8) + "','" + listDatos(9) + "'," + listDatos(7) + ",'" + validaFechaParaSQl(Date.Today) + "')
 end", conn)
             If cmd.ExecuteNonQuery > 0 Then
                 desconectar()
@@ -578,12 +578,12 @@ end", tran.Connection)
             Dim id As Guid = Guid.NewGuid()
             Dim cmd As New SqlCommand("if (select count(*) from hoursWorked where idAux = '" + datos(5) + "' and dateWorked = '" + datos(1) + "' and idEmployee = '" + datos(6) + "') = 0
 begin 
-	insert into hoursWorked values ('" + id.ToString() + "',0,0,0,'" + datos(1) + "','" + datos(6) + "',NULL,'" + datos(5) + "','DAYS',NULL)
-	insert into expensesUsed values (NEWID(),'" + validaFechaParaSQl(datos(1)) + "'," + datos(2) + ",'" + datos(3).ToString().Replace("'", "''") + "','" + datos(4) + "','" + datos(5) + "','" + datos(6) + "','" + id.ToString() + "')
+	insert into hoursWorked values ('" + id.ToString() + "',0,0,0,'" + datos(1) + "','" + datos(6) + "',NULL,'" + datos(5) + "','DAYS',NULL,'" + datos(7) + "')
+	insert into expensesUsed values (NEWID(),'" + datos(1) + "'," + datos(2) + ",'" + datos(3).ToString().Replace("'", "''") + "','" + datos(4) + "','" + datos(5) + "','" + datos(6) + "','" + id.ToString() + "','" + datos(7) + "')
 end
 else
 begin 
-	insert into expensesUsed values (NEWID(),'" + validaFechaParaSQl(datos(1)) + "'," + datos(2) + ",'" + datos(3) + "','" + datos(4) + "','" + datos(5) + "','" + datos(6) + "',(select top 1 idHorsWorked from hoursWorked where idAux = '" + datos(5) + "' and dateWorked = '" + datos(1) + "' and idEmployee = '" + datos(6) + "'))
+	insert into expensesUsed values (NEWID(),'" + datos(1) + "'," + datos(2) + ",'" + datos(3) + "','" + datos(4) + "','" + datos(5) + "','" + datos(6) + "',(select top 1 idHorsWorked from hoursWorked where idAux = '" + datos(5) + "' and dateWorked = '" + datos(1) + "' and idEmployee = '" + datos(6) + "'),'" + datos(7) + "')
 end", conn)
             If cmd.ExecuteNonQuery >= 1 Then
                 mtdJobs.UpdateTotalSpendTask(datos(5))

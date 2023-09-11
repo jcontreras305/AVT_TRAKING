@@ -413,10 +413,11 @@ Public Class TimeSheet
                             Dim tblWC As Data.DataTable = mtdHPW.lllenarTablaWorkCodes()
                             Dim tblEmp As Data.DataTable = mtdHPW.llenarTablaEmpleado()
                             Dim contRecord As Integer = 2
-                            Dim textDoc As String = "idHWTMP,hoursST,hoursOT,hours3T,dateWorked,idEmployee,idWorkCode,idAux,schedule,jobNo" & vbCrLf
+                            Dim textDoc As String = "idHWTMP,hoursST,hoursOT,hours3T,dateWorked,idEmployee,idWorkCode,idAux,schedule,jobNo,dayInserted" & vbCrLf
                             Dim listErrors As New List(Of String)
                             Dim msgAux As String = txtSalidaCSV.Text + vbCrLf
                             Dim tblErrors As New Data.DataTable
+                            Dim dateInserted As String = validaFechaParaSQl(Date.Today)
                             Dim clms() As String = {"EmployeeName", "EmployeeNum", "DateWork", "WorkOrder", "PO", "Code", "HST", "HOT", "Shift", "Description"}
                             For Each clm As String In clms
                                 tblErrors.Columns.Add(clm)
@@ -461,7 +462,7 @@ Public Class TimeSheet
                                                     tblWC = mtdHPW.lllenarTablaWorkCodes()
                                                     rowWC = tblWC.Select("name = '" + CStr(records.Cells(contRecord, 6).value) + "' and jobNo = " + rowP(0).ItemArray(6).ToString() + "")
                                                     If rowWC.Length > 0 Then
-                                                        textDoc += newidRecord.ToString() & "," & hst & "," & hot & "," & "0" & "," & dateRecord & "," & CStr(rowE(0).ItemArray(2)) & "," & CStr(rowWC(0).ItemArray(0)) & "," & rowP(0).ItemArray(2) & "," & schedule & "," & rowP(0).ItemArray(6).ToString() & vbCrLf
+                                                        textDoc += newidRecord.ToString() & "," & hst & "," & hot & "," & "0" & "," & dateRecord & "," & CStr(rowE(0).ItemArray(2)) & "," & CStr(rowWC(0).ItemArray(0)) & "," & rowP(0).ItemArray(2) & "," & schedule & "," & rowP(0).ItemArray(6).ToString() & dateInserted & "," & vbCrLf
                                                     Else
                                                         MessageBox.Show("Was not posible to inseter the Work Code " + CStr(records.Cells(contRecord, 6).value) + ", Please try to insert it at another time.")
                                                         'tblErrors.Rows.Add("The Error is on the Work Code", newidRecord, rowE(0), rowE(1), dateRecord, rowP(0).ItemArray(3).ToString(), rowP(0).ItemArray(1).ToString(), rowP(0).ItemArray(4).ToString(), records.Cells(contRecord, 6).value, hst, hst, schedule, rowP(0).ItemArray(5).ToString())
