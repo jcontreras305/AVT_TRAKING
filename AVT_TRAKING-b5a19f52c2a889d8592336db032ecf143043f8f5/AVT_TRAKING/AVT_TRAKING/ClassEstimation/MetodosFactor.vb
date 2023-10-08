@@ -917,7 +917,7 @@ end"
             Dim flag As Boolean = True
             For Each row As DataGridViewRow In tbl.SelectedRows()
                 Dim cmd As New SqlCommand
-                If (row.Cells("systemPPId").Value.ToString() Is Nothing) And (row.Cells("optionPPId").Value.ToString() Is Nothing) And (row.Cells("sizePPId").Value.ToString() Is Nothing) Then
+                If (row.Cells("systemPPId").Value Is Nothing) And (row.Cells("optionPPId").Value Is Nothing) And (row.Cells("sizePPId").Value Is Nothing) Then
                     cmd.CommandText = "if(select COUNT(*) from ppPaintUnitRate where systemPntPP='" + row.Cells("SystemPP").Value.ToString + "' and pntOption = '" + row.Cells("optionPP").Value.ToString + "' and size = " + row.Cells("sizePP").Value.ToString + ")=0
                         begin
 	                        insert into ppPaintUnitRate values('" + row.Cells("SystemPP").Value.ToString() + "','" + row.Cells("optionPP").Value.ToString() + "'," + row.Cells("sizePP").Value.ToString() + "," + row.Cells("laborProdPP").Value.ToString() + "," + row.Cells("matRatePP").Value.ToString() + "," + row.Cells("eqRatePP").Value.ToString() + ")

@@ -67,7 +67,7 @@ Public Class TimeSheet
                 txtSalidaPerdiem.Text = txtSalidaPerdiem.Text + vbCrLf + "Reding Data..." + vbCrLf + "reading row "
                 Dim msgSalida = txtSalidaPerdiem.Text
                 Dim listError As New List(Of String)
-                Dim textInsertExpUsed As String = "idExpenseUsed,dateExpense,amount,description,idExpense,idAux,idEmployee,idHoursWorked" & vbCrLf
+                Dim textInsertExpUsed As String = "idExpenseUsed,dateExpense,amount,description,idExpense,idAux,idEmployee,idHoursWorked,dayInserted" & vbCrLf
                 While perdiemSheet.Cells(cont, 2).Text <> ""
                     Dim idAux As String = ""
                     Dim idExpense As String = ""
@@ -152,6 +152,7 @@ Public Class TimeSheet
                     'If cont >= 200 Then
                     '    MsgBox("error")
                     'End If
+                    Dim dayInserted As String = validaFechaParaSQl(Date.Today)
                     If flag2 = False Then 'Expense code
                         If flag3 = False Then 'employee
                             If flag4 = False Then 'Project
@@ -171,7 +172,7 @@ Public Class TimeSheet
                         listError.Add("Row " + cont.ToString + ": the Project Number was not Found.")
                     ElseIf flag2 And flag3 And flag4 Then
                         Dim newId As Guid = Guid.NewGuid
-                        textInsertExpUsed = textInsertExpUsed & newId.ToString & "," & validarFechaParaSQlDeExcel(perdiemSheet.Cells(cont, 3).text) & "," & perdiemSheet.Cells(cont, 7).text & "," & perdiemSheet.Cells(cont, 8).text & "," & idExpense & "," & idAux & "," & idEmployee & "," & idHrsW & vbCrLf
+                        textInsertExpUsed = textInsertExpUsed & newId.ToString & "," & validarFechaParaSQlDeExcel(perdiemSheet.Cells(cont, 3).text) & "," & perdiemSheet.Cells(cont, 7).text & "," & perdiemSheet.Cells(cont, 8).text & "," & idExpense & "," & idAux & "," & idEmployee & "," & idHrsW & "," & dayInserted & vbCrLf
                         'tblPerdiem.Rows.Add("", perdiemSheet.Cells(cont, 3).Text, perdiemSheet.Cells(cont, 7).Text, perdiemSheet.Cells(cont, 8).Text, idExpense, idAux, idEmployee)
                     End If
                     txtSalidaPerdiem.Text = msgSalida + CStr(cont)
@@ -438,7 +439,7 @@ Public Class TimeSheet
                                         'Buscando idWorkCode
                                         Dim rowWC() As Data.DataRow = tblWC.Select("name = '" + CStr(records.Cells(contRecord, 6).value) + "' and jobNo = " + rowP(0).ItemArray(6).ToString() + "")
                                         If rowWC.Length > 0 Then
-                                            textDoc += newidRecord.ToString() & "," & hst & "," & hot & "," & "0" & "," & dateRecord & "," & CStr(rowE(0).ItemArray(2)) & "," & CStr(rowWC(0).ItemArray(0)) & "," & rowP(0).ItemArray(2) & "," & schedule & "," & rowP(0).ItemArray(6).ToString() & vbCrLf
+                                            textDoc += newidRecord.ToString() & "," & hst & "," & hot & "," & "0" & "," & dateRecord & "," & CStr(rowE(0).ItemArray(2)) & "," & CStr(rowWC(0).ItemArray(0)) & "," & rowP(0).ItemArray(2) & "," & schedule & "," & rowP(0).ItemArray(6).ToString() & "," & dateInserted & vbCrLf
                                         Else
                                             'tratando de insertar el nuevo work code
                                             listErrors.Add("Row " + CStr(contRecord) + ": Work Code Not found Error.")
@@ -462,7 +463,7 @@ Public Class TimeSheet
                                                     tblWC = mtdHPW.lllenarTablaWorkCodes()
                                                     rowWC = tblWC.Select("name = '" + CStr(records.Cells(contRecord, 6).value) + "' and jobNo = " + rowP(0).ItemArray(6).ToString() + "")
                                                     If rowWC.Length > 0 Then
-                                                        textDoc += newidRecord.ToString() & "," & hst & "," & hot & "," & "0" & "," & dateRecord & "," & CStr(rowE(0).ItemArray(2)) & "," & CStr(rowWC(0).ItemArray(0)) & "," & rowP(0).ItemArray(2) & "," & schedule & "," & rowP(0).ItemArray(6).ToString() & dateInserted & "," & vbCrLf
+                                                        textDoc += newidRecord.ToString() & "," & hst & "," & hot & "," & "0" & "," & dateRecord & "," & CStr(rowE(0).ItemArray(2)) & "," & CStr(rowWC(0).ItemArray(0)) & "," & rowP(0).ItemArray(2) & "," & schedule & "," & rowP(0).ItemArray(6).ToString() & "," & dateInserted & vbCrLf
                                                     Else
                                                         MessageBox.Show("Was not posible to inseter the Work Code " + CStr(records.Cells(contRecord, 6).value) + ", Please try to insert it at another time.")
                                                         'tblErrors.Rows.Add("The Error is on the Work Code", newidRecord, rowE(0), rowE(1), dateRecord, rowP(0).ItemArray(3).ToString(), rowP(0).ItemArray(1).ToString(), rowP(0).ItemArray(4).ToString(), records.Cells(contRecord, 6).value, hst, hst, schedule, rowP(0).ItemArray(5).ToString())
@@ -519,7 +520,9 @@ Public Class TimeSheet
                             If Not IO.Directory.Exists("C:\TMP") Then
                                 My.Computer.FileSystem.CreateDirectory("C:\TMP")
                             End If
-                            My.Computer.FileSystem.WriteAllText("C:\TMP\TimeSheetTemp.csv", textDoc, False)
+                            Dim Write As New System.IO.StreamWriter("C:\TMP\TimeSheetTemp.csv")
+                            Write.WriteLine(textDoc)
+                            Write.Close()
                             If flagConitnue Then
                                 If mtdHPW.execBulkInsertRecords() Then
                                     MsgSalida(txtSalidaCSV, "The Process Records Insertion is over.")

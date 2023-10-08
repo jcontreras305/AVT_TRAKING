@@ -30,7 +30,7 @@
     <ApplicationIcon>main.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestCertificateThumbprint>FB68FE28FCD85937AA83604D9AB5DF00FDA493F9</ManifestCertificateThumbprint>
+    <ManifestCertificateThumbprint>152EC6001550EB8351D76F15C92AAD263BE6428C</ManifestCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup>
     <ManifestKeyFile>AVT_TRAKING_TemporaryKey.pfx</ManifestKeyFile>
@@ -1483,6 +1483,7 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Documents\ExcelDoc\TablesToPBI.xlsx" />
+    <None Include="AVT_TRAKING_TemporaryKey.pfx" />
     <None Include="Documents\ExcelDoc\Factors.xlsx" />
     <None Include="Documents\ExcelDoc\Incoming.xlsx" />
     <None Include="Documents\ExcelDoc\InvoicePieces.xlsx" />
