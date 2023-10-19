@@ -101,25 +101,24 @@ end", conn)
             Dim tran As SqlTransaction
             tran = conn.BeginTransaction
             Dim flag As Boolean = True
-            Dim assignJob As Boolean = False
             For Each row As DataRow In tbl.Rows
-                If row.ItemArray(8) = "" And assignJob = False Then
-                    Dim result As DialogResult = MessageBox.Show("You did not assign a job in the work code " + vbCrLf + "'" + row.ItemArray(1) + "'" + vbCrLf + "Would you like to use the job selected in the list?" + vbCrLf + "This job will be assigned for if another blanck appears.", "Important", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning)
-                    If result = DialogResult.OK Then
-                        assignJob = True
-                    Else
-                        flag = False
-                        Exit For
-                    End If
-                End If
-                Dim cmd As New SqlCommand("If EXISTS (select idWorkCode from workCode where idWorkCode = '" + row.ItemArray(0) + "' and jobNo = " + If(row.ItemArray(8) = "" And assignJob, jobNO, row.ItemArray(8)) + ")
+                'If row.ItemArray(8) = "" And assignJob = False Then
+                '    Dim result As DialogResult = MessageBox.Show("You did not assign a job in the work code " + vbCrLf + "'" + row.ItemArray(1) + "'" + vbCrLf + "Would you like to use the job selected in the list?" + vbCrLf + "This job will be assigned for if another blanck appears.", "Important", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning)
+                '    If result = DialogResult.OK Then
+                '        assignJob = True
+                '    Else
+                '        flag = False
+                '        Exit For
+                '    End If
+                'End If
+                Dim cmd As New SqlCommand("If EXISTS (select idWorkCode from workCode where idWorkCode = '" + row.ItemArray(0) + "' and jobNo = " + If(jobNO = "", row.ItemArray(8), jobNO) + ")
                 begin 
                     update workCode set  [name] = '" + row.ItemArray(1) + "' , [description] = '" + row.ItemArray(2) + "' ,[billingRate1]=" + row.ItemArray(3) + ",[billingRateOT]=" + row.ItemArray(4) + ",[billingRate3]=" + row.ItemArray(5) + ",[EQExp1]='" + row.ItemArray(6) + "',[EQExp2]='" + row.ItemArray(7) + "',[Category]='" + row.ItemArray(9) + "',[PayItemType] ='" + row.ItemArray(10) + "',[WorkType]='" + row.ItemArray(11) + "',[CostCode]='" + row.ItemArray(12) + "',[CustomerPositionID]='" + row.ItemArray(13) + "',[CustomerJobPositionDescription]='" + row.ItemArray(14) + "',[CBSFullNumber]='" + row.ItemArray(15) + "' ,[skillType]='" + row.ItemArray(16) + "'
-	                where [idWorkCode] = '" + row.ItemArray(0) + "' and [jobNo] = " + If(row.ItemArray(8) = "" And assignJob, jobNO, row.ItemArray(8)) + " 
+	                where [idWorkCode] = '" + row.ItemArray(0) + "' and [jobNo] = " + If(jobNO = "", row.ItemArray(8), jobNO) + " 
                 end
                 else
                 begin
-                    insert into workCode values (" + row.ItemArray(0) + "," + If(row.ItemArray(8) = "" And assignJob, jobNO, row.ItemArray(8)) + ",'" + row.ItemArray(1) + "','" + row.ItemArray(2) + "'," + row.ItemArray(3) + "," + row.ItemArray(4) + "," + row.ItemArray(5) + ",'" + row.ItemArray(6) + "','" + row.ItemArray(7) + "','" + If(row.ItemArray(9) = "", "0", row.ItemArray(9)) + "','" + If(row.ItemArray(10) = "", "0", row.ItemArray(10)) + "','" + If(row.ItemArray(11) = "", "0", row.ItemArray(11)) + "','" + If(row.ItemArray(12) = "", "0", row.ItemArray(12)) + "','" + If(row.ItemArray(13) = "", "0", row.ItemArray(13)) + "','" + If(row.ItemArray(14) = "", "0", row.ItemArray(14)) + "','" + If(row.ItemArray(15) = "", "'0'", row.ItemArray(15)) + "', '" + If(row.ItemArray(16) = "", "0", row.ItemArray(16)) + "')
+                    insert into workCode values (" + row.ItemArray(0) + "," + If(jobNO = "", row.ItemArray(8), jobNO) + ",'" + row.ItemArray(1) + "','" + row.ItemArray(2) + "'," + row.ItemArray(3) + "," + row.ItemArray(4) + "," + row.ItemArray(5) + ",'" + row.ItemArray(6) + "','" + row.ItemArray(7) + "','" + If(row.ItemArray(9) = "", "0", row.ItemArray(9)) + "','" + If(row.ItemArray(10) = "", "0", row.ItemArray(10)) + "','" + If(row.ItemArray(11) = "", "0", row.ItemArray(11)) + "','" + If(row.ItemArray(12) = "", "0", row.ItemArray(12)) + "','" + If(row.ItemArray(13) = "", "0", row.ItemArray(13)) + "','" + If(row.ItemArray(14) = "", "0", row.ItemArray(14)) + "','" + If(row.ItemArray(15) = "", "'0'", row.ItemArray(15)) + "', '" + If(row.ItemArray(16) = "", "0", row.ItemArray(16)) + "')
                 end")
                 cmd.Connection = conn
                 cmd.Transaction = tran

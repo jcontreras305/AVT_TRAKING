@@ -2310,12 +2310,12 @@ create table workCode (
 	EQExp1 varchar(50),
 	EQExp2 varchar(50),
 	Category varchar(12),
-	PayItemType varchar(20), 
-	WorkType varchar(20),
-	CostCode varchar(20),
-	CustomerPositionID varchar(5), 
-	CustomerJobPositionDescription varchar(15),
-	CBSFullNumber varchar(11),
+	PayItemType varchar(30), 
+	WorkType varchar(30),
+	CostCode varchar(30),
+	CustomerPositionID varchar(30), 
+	CustomerJobPositionDescription varchar(30),
+	CBSFullNumber varchar(30),
 	skillType varchar(100)
 )
 go
