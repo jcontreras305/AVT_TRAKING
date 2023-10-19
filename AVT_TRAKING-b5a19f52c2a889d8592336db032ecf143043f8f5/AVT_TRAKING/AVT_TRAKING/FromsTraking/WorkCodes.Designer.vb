@@ -247,7 +247,7 @@ Partial Class WorkCodes
         Me.txtCBSFullNumber.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.txtCBSFullNumber.Location = New System.Drawing.Point(136, 321)
-        Me.txtCBSFullNumber.MaxLength = 11
+        Me.txtCBSFullNumber.MaxLength = 30
         Me.txtCBSFullNumber.Name = "txtCBSFullNumber"
         Me.txtCBSFullNumber.Size = New System.Drawing.Size(151, 21)
         Me.txtCBSFullNumber.TabIndex = 35
@@ -266,7 +266,7 @@ Partial Class WorkCodes
         Me.txtCustomerJobPositionDescription.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.txtCustomerJobPositionDescription.Location = New System.Drawing.Point(136, 344)
-        Me.txtCustomerJobPositionDescription.MaxLength = 15
+        Me.txtCustomerJobPositionDescription.MaxLength = 30
         Me.txtCustomerJobPositionDescription.Name = "txtCustomerJobPositionDescription"
         Me.txtCustomerJobPositionDescription.Size = New System.Drawing.Size(151, 21)
         Me.txtCustomerJobPositionDescription.TabIndex = 33
@@ -284,6 +284,7 @@ Partial Class WorkCodes
         Me.txtCustomerPositionID.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.txtCustomerPositionID.Location = New System.Drawing.Point(137, 298)
+        Me.txtCustomerPositionID.MaxLength = 30
         Me.txtCustomerPositionID.Name = "txtCustomerPositionID"
         Me.txtCustomerPositionID.Size = New System.Drawing.Size(151, 21)
         Me.txtCustomerPositionID.TabIndex = 31
@@ -302,7 +303,7 @@ Partial Class WorkCodes
         Me.txtCostCode.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.txtCostCode.Location = New System.Drawing.Point(137, 275)
-        Me.txtCostCode.MaxLength = 15
+        Me.txtCostCode.MaxLength = 30
         Me.txtCostCode.Name = "txtCostCode"
         Me.txtCostCode.Size = New System.Drawing.Size(151, 21)
         Me.txtCostCode.TabIndex = 29
@@ -321,6 +322,7 @@ Partial Class WorkCodes
         Me.txtWorkType.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.txtWorkType.Location = New System.Drawing.Point(137, 252)
+        Me.txtWorkType.MaxLength = 30
         Me.txtWorkType.Name = "txtWorkType"
         Me.txtWorkType.Size = New System.Drawing.Size(151, 21)
         Me.txtWorkType.TabIndex = 27
@@ -339,6 +341,7 @@ Partial Class WorkCodes
         Me.txtPayItemType.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.txtPayItemType.Location = New System.Drawing.Point(137, 229)
+        Me.txtPayItemType.MaxLength = 30
         Me.txtPayItemType.Name = "txtPayItemType"
         Me.txtPayItemType.Size = New System.Drawing.Size(151, 21)
         Me.txtPayItemType.TabIndex = 25
