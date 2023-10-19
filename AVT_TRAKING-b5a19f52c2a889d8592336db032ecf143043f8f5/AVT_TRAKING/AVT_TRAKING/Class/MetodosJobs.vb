@@ -12,7 +12,7 @@ Public Class MetodosJobs
         Try
             Dim cmd As New SqlCommand
 
-            cmd.CommandText = "select idWorkCode as ID , jobNo as 'JobNo' , name as Name , description as Description, billingRate1 as BillingRT1, billingRateOT as BillingOT, billingRate3 as BillingRT3 , EQExp1, EQExp2, Category, PayItemType as 'Pay Item Type', WorkType as 'Work Type', CostCode as 'Cost Code', CustomerPositionID as 'Customer Position ID', CustomerJobPositionDescription as 'Customer Job Position Description', CBSFullNumber as 'CBS Full Number' from workCode " + If(jobNo = "", "", " where jobNo = " & jobNo & "")
+            cmd.CommandText = "select idWorkCode as ID , jobNo as 'JobNo' , name as Name , description as Description, billingRate1 as BillingRT1, billingRateOT as BillingOT, billingRate3 as BillingRT3 , EQExp1, EQExp2, Category, PayItemType as 'Pay Item Type', WorkType as 'Work Type', CostCode as 'Cost Code', CustomerPositionID as 'Customer Position ID', CustomerJobPositionDescription as 'Customer Job Position Description', CBSFullNumber as 'CBS Full Number',skillType as 'Skill Type' from workCode " + If(jobNo = "", "", " where jobNo = " & jobNo & "")
             cmd.Connection = conn
 
             If cmd.ExecuteNonQuery Then
@@ -32,7 +32,7 @@ Public Class MetodosJobs
             conectar()
             Dim cmd As New SqlCommand("if not EXISTS (select idWorkCode from workCode where name = '" + datos(1) + "' and jobNo = " + datos(8) + ")
 begin 
-    insert into workCode values (" + datos(0) + "," + datos(8) + ",'" + datos(1) + "','" + datos(2) + "'," + datos(3) + "," + datos(4) + "," + datos(5) + ",'" + datos(6) + "','" + datos(7) + "','" + datos(9) + "','" + datos(10) + "','" + datos(11) + "','" + datos(12) + "','" + datos(13) + "','" + datos(14) + "','" + datos(15) + "')
+    insert into workCode values (" + datos(0) + "," + datos(8) + ",'" + datos(1) + "','" + datos(2) + "'," + datos(3) + "," + datos(4) + "," + datos(5) + ",'" + datos(6) + "','" + datos(7) + "','" + datos(9) + "','" + datos(10) + "','" + datos(11) + "','" + datos(12) + "','" + datos(13) + "','" + datos(14) + "','" + datos(15) + "','" + datos(16) + "'
 end")
             cmd.Connection = conn
             If cmd.ExecuteNonQuery > 0 Then
@@ -59,11 +59,11 @@ end")
 begin 
     IF '" + datos(1) + "' = (select name from workCode where idWorkCode = " + datos(0) + " and jobNo = " + datos(8) + ")
     BEGIN 
-        update workCode set description ='" + datos(2) + "', billingRate1=" + datos(3) + ", billingRateOT=" + datos(4) + ", billingRate3= " + datos(5) + ",EQExp1='" + datos(6) + "',EQExp2='" + datos(7) + "' , Category= '" + datos(9) + "',PayItemType = '" + datos(10) + "',WorkType= '" + datos(11) + "',CostCode= '" + datos(12) + "',CustomerPositionID= '" + datos(13) + "',CustomerJobPositionDescription= '" + datos(14) + "',CBSFullNumber= '" + datos(15) + "' where idWorkCode =  " + datos(0) + " and jobNo = " + datos(8) + "
+        update workCode set description ='" + datos(2) + "', billingRate1=" + datos(3) + ", billingRateOT=" + datos(4) + ", billingRate3= " + datos(5) + ",EQExp1='" + datos(6) + "',EQExp2='" + datos(7) + "' , Category= '" + datos(9) + "',PayItemType = '" + datos(10) + "',WorkType= '" + datos(11) + "',CostCode= '" + datos(12) + "',CustomerPositionID= '" + datos(13) + "',CustomerJobPositionDescription= '" + datos(14) + "',CBSFullNumber= '" + datos(15) + "',skillType= '" + datos(16) + "' where idWorkCode =  " + datos(0) + " and jobNo = " + datos(8) + "
     END
     ELSE IF not EXISTS (select name from workCode where name = '" + datos(1) + "' and jobno = " + datos(8) + ")
 	begin
-        update workCode set name='" + datos(1) + "',description ='" + datos(2) + "', billingRate1=" + datos(3) + ", billingRateOT=" + datos(4) + ", billingRate3= " + datos(5) + ",EQExp1='" + datos(6) + "',EQExp2='" + datos(7) + "' , Category= '" + datos(9) + "',PayItemType = '" + datos(10) + "',WorkType= '" + datos(11) + "',CostCode= '" + datos(12) + "',CustomerPositionID= '" + datos(13) + "',CustomerJobPositionDescription= '" + datos(14) + "',CBSFullNumber= '" + datos(15) + "' where idWorkCode =  " + datos(0) + " and jobNo = " + datos(8) + "
+        update workCode set name='" + datos(1) + "',description ='" + datos(2) + "', billingRate1=" + datos(3) + ", billingRateOT=" + datos(4) + ", billingRate3= " + datos(5) + ",EQExp1='" + datos(6) + "',EQExp2='" + datos(7) + "' , Category= '" + datos(9) + "',PayItemType = '" + datos(10) + "',WorkType= '" + datos(11) + "',CostCode= '" + datos(12) + "',CustomerPositionID= '" + datos(13) + "',CustomerJobPositionDescription= '" + datos(14) + "',CBSFullNumber= '" + datos(15) + "', skillType= '" + datos(16) + "' where idWorkCode =  " + datos(0) + " and jobNo = " + datos(8) + "
     end
 end", conn)
             If cmd.ExecuteNonQuery > 0 Then
@@ -81,7 +81,7 @@ end", conn)
     Public Sub buscarWC(ByVal dato As String, ByVal tabla As DataGridView)
         Try
             conectar()
-            Dim cmd As New SqlCommand("select idWorkCode as ID , jobNo as 'JobNo' , name as Name , description as Description, billingRate1 as BillingRT1, billingRateOT as BillingOT, billingRate3 as BillingRT3 , EQExp1, EQExp2, Category, PayItemType as 'Pay Item Type',WorkType as 'Work Type', CostCode as 'Cost Code', CustomerPositionID as 'Customer Position ID', CustomerJobPositionDescription as 'Customer Job Position Description', CBSFullNumber as 'CBS Full Number' from workCode where idWorkCode like '" + dato + "' or  name like '%" + dato + "%' or description like '%" + dato + "%' ", conn)
+            Dim cmd As New SqlCommand("select idWorkCode as ID , jobNo as 'JobNo' , name as Name , description as Description, billingRate1 as BillingRT1, billingRateOT as BillingOT, billingRate3 as BillingRT3 , EQExp1, EQExp2, Category, PayItemType as 'Pay Item Type',WorkType as 'Work Type', CostCode as 'Cost Code', CustomerPositionID as 'Customer Position ID', CustomerJobPositionDescription as 'Customer Job Position Description', CBSFullNumber as 'CBS Full Number',skillType as 'Skill Type' from workCode where idWorkCode like '" + dato + "' or  name like '%" + dato + "%' or description like '%" + dato + "%' ", conn)
             'Dim cmd As New SqlCommand("select idWorkCode as ID , jobNo as 'JobNo' , name as Name , description as Description, billingRate1 as BillingRT1, billingRateOT as BillingOT, billingRate3 as BillingRT3 , EQExp1,EQExp2 from workCode where idWorkCode like '" + dato + "' or  name like '%" + dato + "%' or description like '%" + dato + "%' ", conn)
             If cmd.ExecuteNonQuery Then
                 Dim dt As New DataTable
@@ -112,9 +112,14 @@ end", conn)
                         Exit For
                     End If
                 End If
-                Dim cmd As New SqlCommand("If Not EXISTS (select idWorkCode from workCode where name = '" + row.ItemArray(1) + "' and jobNo = " + If(row.ItemArray(8) = "" And assignJob, jobNO, row.ItemArray(8)) + ")
+                Dim cmd As New SqlCommand("If EXISTS (select idWorkCode from workCode where idWorkCode = '" + row.ItemArray(0) + "' and jobNo = " + If(row.ItemArray(8) = "" And assignJob, jobNO, row.ItemArray(8)) + ")
+                begin 
+                    update workCode set  [name] = '" + row.ItemArray(1) + "' , [description] = '" + row.ItemArray(2) + "' ,[billingRate1]=" + row.ItemArray(3) + ",[billingRateOT]=" + row.ItemArray(4) + ",[billingRate3]=" + row.ItemArray(5) + ",[EQExp1]='" + row.ItemArray(6) + "',[EQExp2]='" + row.ItemArray(7) + "',[Category]='" + row.ItemArray(9) + "',[PayItemType] ='" + row.ItemArray(10) + "',[WorkType]='" + row.ItemArray(11) + "',[CostCode]='" + row.ItemArray(12) + "',[CustomerPositionID]='" + row.ItemArray(13) + "',[CustomerJobPositionDescription]='" + row.ItemArray(14) + "',[CBSFullNumber]='" + row.ItemArray(15) + "' ,[skillType]='" + row.ItemArray(16) + "'
+	                where [idWorkCode] = '" + row.ItemArray(0) + "' and [jobNo] = " + If(row.ItemArray(8) = "" And assignJob, jobNO, row.ItemArray(8)) + " 
+                end
+                else
                 begin
-                    insert into workCode values (" + row.ItemArray(0) + "," + If(row.ItemArray(8) = "" And assignJob, jobNO, row.ItemArray(8)) + ",'" + row.ItemArray(1) + "','" + row.ItemArray(2) + "'," + row.ItemArray(3) + "," + row.ItemArray(4) + "," + row.ItemArray(5) + ",'" + row.ItemArray(6) + "','" + row.ItemArray(7) + "'," + If(row.ItemArray(9) = "", "'0'", row.ItemArray(9)) + "," + If(row.ItemArray(10) = "", "'0'", row.ItemArray(10)) + "," + If(row.ItemArray(11) = "", "'0'", row.ItemArray(11)) + "," + If(row.ItemArray(12) = "", "'0'", row.ItemArray(12)) + "," + If(row.ItemArray(13) = "", "'0'", row.ItemArray(13)) + "," + If(row.ItemArray(14) = "", "'0'", row.ItemArray(14)) + "," + If(row.ItemArray(15) = "", "'0'", row.ItemArray(15)) + ")
+                    insert into workCode values (" + row.ItemArray(0) + "," + If(row.ItemArray(8) = "" And assignJob, jobNO, row.ItemArray(8)) + ",'" + row.ItemArray(1) + "','" + row.ItemArray(2) + "'," + row.ItemArray(3) + "," + row.ItemArray(4) + "," + row.ItemArray(5) + ",'" + row.ItemArray(6) + "','" + row.ItemArray(7) + "','" + If(row.ItemArray(9) = "", "0", row.ItemArray(9)) + "','" + If(row.ItemArray(10) = "", "0", row.ItemArray(10)) + "','" + If(row.ItemArray(11) = "", "0", row.ItemArray(11)) + "','" + If(row.ItemArray(12) = "", "0", row.ItemArray(12)) + "','" + If(row.ItemArray(13) = "", "0", row.ItemArray(13)) + "','" + If(row.ItemArray(14) = "", "0", row.ItemArray(14)) + "','" + If(row.ItemArray(15) = "", "'0'", row.ItemArray(15)) + "', '" + If(row.ItemArray(16) = "", "0", row.ItemArray(16)) + "')
                 end")
                 cmd.Connection = conn
                 cmd.Transaction = tran

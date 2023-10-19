@@ -27,7 +27,7 @@ Public Class WorkCodes
             If CInt(txtWorkCodeID.Text) <= metodosGlobales.selecValorMaxColum(tblWK, 0) Or TxtWorkCode.Text Is "" Or sprBillingRate1.Value < 0 Or sprBillingRateOT.Value < 0 Then
                 MsgBox("Please choose a valid ID to continue or check the data.")
             Else
-                Dim datos(16) As String
+                Dim datos(17) As String
                 datos(0) = txtWorkCodeID.Text
                 datos(1) = TxtWorkCode.Text
                 datos(2) = txtDescription.Text
@@ -43,6 +43,7 @@ Public Class WorkCodes
                 datos(13) = txtCustomerPositionID.Text
                 datos(14) = txtCustomerJobPositionDescription.Text
                 datos(15) = txtCBSFullNumber.Text
+                datos(16) = txtSkillType.Text
                 If cmbJob.SelectedIndex > -1 Then
                     datos(8) = cmbJob.Items(cmbJob.SelectedIndex).ToString
                     mtdJobs.nuevaWC(datos)
@@ -81,6 +82,7 @@ Public Class WorkCodes
         txtCustomerPositionID.Enabled = flag
         txtCustomerJobPositionDescription.Enabled = flag
         txtCBSFullNumber.Enabled = flag
+        txtSkillType.Enabled = flag
         Return True
     End Function
 
@@ -101,11 +103,12 @@ Public Class WorkCodes
         txtCustomerPositionID.Text = ""
         txtCustomerJobPositionDescription.Text = ""
         txtCBSFullNumber.Text = ""
+        txtSkillType.Text = ""
     End Sub
 
     Private Sub tbnUpdateWorkCode_Click(sender As Object, e As EventArgs) Handles btnUpdateWorkCode.Click
         If MessageBox.Show("Are you sure to Update the WorkCode", "Advertence", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) = DialogResult.OK Then
-            Dim datos(15) As String
+            Dim datos(16) As String
             datos(0) = txtWorkCodeID.Text
             datos(1) = TxtWorkCode.Text
             datos(2) = txtDescription.Text
@@ -121,6 +124,7 @@ Public Class WorkCodes
             datos(13) = txtCustomerPositionID.Text
             datos(14) = txtCustomerJobPositionDescription.Text
             datos(15) = txtCBSFullNumber.Text
+            datos(16) = txtSkillType.Text
             If cmbJob.SelectedIndex > -1 Then
                 datos(8) = cmbJob.Items(cmbJob.SelectedIndex).ToString
                 mtdJobs.acualizarWC(datos)
@@ -150,6 +154,7 @@ Public Class WorkCodes
         txtCustomerPositionID.Text = tblWK.CurrentRow.Cells.Item(13).Value.ToString()
         txtCustomerJobPositionDescription.Text = tblWK.CurrentRow.Cells.Item(14).Value.ToString()
         txtCBSFullNumber.Text = tblWK.CurrentRow.Cells.Item(15).Value.ToString()
+        txtSkillType.Text = tblWK.CurrentRow.Cells.Item(16).Value.ToString()
 
         btnAddWorkCode.Enabled = False
         btnCancelWC.Enabled = True
@@ -261,11 +266,11 @@ Public Class WorkCodes
             If DialogResult.OK = sd.ShowDialog() Then
                 Dim ApExcel = New Microsoft.Office.Interop.Excel.Application
                 Dim libro = ApExcel.Workbooks.Add
-                Dim colums() As String = {"idWorkCode", "Name", "Description", "Billing Rate ST", "Billing Rate OT", "Billing Rate 3", "EQExp1", "EQExp2", "Job No", "Category", "Pay Item Type", "Work Type", "Cost Code", "Customer Position ID", "Customer Job Position Description", "CBS Full Number"}
+                Dim colums() As String = {"idWorkCode", "Name", "Description", "Billing Rate ST", "Billing Rate OT", "Billing Rate 3", "EQExp1", "EQExp2", "Job No", "Category", "Pay Item Type", "Work Type", "Cost Code", "Customer Position ID", "Customer Job Position Description", "CBS Full Number", "Skill Type"}
                 For i As Int16 = 0 To colums.Length - 1
                     libro.Sheets(1).cells(1, i + 1) = colums(i)
                 Next
-                With libro.Sheets(1).Range("A1:P1")
+                With libro.Sheets(1).Range("A1:O1")
                     .Font.Bold = True
                     .Font.ColorIndex = 1
                     With .Interior

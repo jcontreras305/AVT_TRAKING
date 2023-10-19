@@ -2220,7 +2220,8 @@ idClient varchar(36),
 [DT Adders] varchar(15),
 [R4 Adders] varchar(15),
 [R5 Adders] varchar(15),
-[R6 Adders] varchar(15)
+[R6 Adders] varchar(15),
+[Level 2 ID] varchar(15)
 )
 GO
 --##########################################################################################
@@ -2314,7 +2315,8 @@ create table workCode (
 	CostCode varchar(20),
 	CustomerPositionID varchar(5), 
 	CustomerJobPositionDescription varchar(15),
-	CBSFullNumber varchar(11)
+	CBSFullNumber varchar(11),
+	skillType varchar(100)
 )
 go
 

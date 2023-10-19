@@ -917,6 +917,7 @@ T2.[Resource ID],
 T2.[Resource Name],
 T2.[Skill Type],
 T2.[Shifth],
+T2.[lvl 1 ID],
 T2.[Level 1 ID],
 T2.[Level 2 ID],
 T2.[S/T Hrs],
@@ -925,7 +926,9 @@ T2.[O/T Hrs],
 IIF(T2.[O/T Hrs]>0,'N/A','')as 'O/T Hrs Activity Code',
 T2.[D/T Hrs],
 IIF(T2.[D/T Hrs]>0,'N/A','') as 'D/T Hrs Activity Code',
-'' as 'Extra Change'
+T2.[S/T Hrs] + T2.[O/T Hrs] + T2.[D/T Hrs] as 'Total Hours',
+IIF((T2.[S/T Hrs] + T2.[O/T Hrs] + T2.[D/T Hrs])>0,'N/A','') as 'TOTAL Hrs Activity Code',
+T2.[Extra Change] as 'Extra Change'
 FROM (
 select
 DISTINCT
@@ -934,25 +937,31 @@ T1.[Resource ID],
 T1.[Resource Name],
 T1.[Skill Type],
 T1.[Shifth],
+T1.[lvl 1 ID],
 T1.[Level 1 ID],
 T1.[Level 2 ID],
 T1.[Level 3 ID],
-SUM(T1.[S/T Hrs]) OVER (PARTITION BY T1.[Date],T1.[Resource ID],T1.[Skill Type],T1.[Shifth],T1.[Level 3 ID],T1.[Level 2 ID],T1.[Level 1 ID]) as 'S/T Hrs',
-SUM(T1.[O/T Hrs]) OVER (PARTITION BY T1.[Date],T1.[Resource ID],T1.[Skill Type],T1.[Shifth],T1.[Level 3 ID],T1.[Level 2 ID],T1.[Level 1 ID]) AS 'O/T Hrs' ,
-SUM(T1.[D/T Hrs]) OVER (PARTITION BY T1.[Date],T1.[Resource ID],T1.[Skill Type],T1.[Shifth],T1.[Level 3 ID],T1.[Level 2 ID],T1.[Level 1 ID]) AS 'D/T Hrs'
+SUM(T1.[S/T Hrs]) OVER (PARTITION BY T1.[Date],T1.[Resource Name],T1.[Skill Type],T1.[Shifth],T1.[Level 3 ID],T1.[Level 2 ID],T1.[Level 1 ID]) as 'S/T Hrs',
+SUM(T1.[O/T Hrs]) OVER (PARTITION BY T1.[Date],T1.[Resource Name],T1.[Skill Type],T1.[Shifth],T1.[Level 3 ID],T1.[Level 2 ID],T1.[Level 1 ID]) AS 'O/T Hrs' ,
+SUM(T1.[D/T Hrs]) OVER (PARTITION BY T1.[Date],T1.[Resource Name],T1.[Skill Type],T1.[Shifth],T1.[Level 3 ID],T1.[Level 2 ID],T1.[Level 1 ID]) AS 'D/T Hrs',
+SUM(T1.[Extra Change]) OVER (PARTITION BY T1.[Date],T1.[Resource Name],T1.[Skill Type],T1.[Shifth],T1.[Level 3 ID],T1.[Level 2 ID],T1.[Level 1 ID]) AS 'Extra Change'
 from (
 	select
 		REPLACE(CONVERT(nvarchar, hw.dateWorked),'-','') as 'Date', 
-		iif(em.SAPNumber is null,'',em.SAPNumber) as 'Resource ID' ,
+		iif(em.SAPNumber is null,'',iif(Len(Convert(nvarchar,em.SAPNumber))>3,Concat(SUBSTRING(Convert (nvarchar,em.SAPNumber),1,3),'-',SUBSTRING(CONVERT(nvarchar,em.SAPNumber),4,LEN(CONVERT(nvarchar,em.SAPNumber))-3)),'')) as 'Resource ID',
 		CONCAT(em.lastName,', ',em.firstName,' ',em.middleName)as 'Resource Name', 
-		SUBSTRING( wc.name,1,iif(CHARINDEX('-',wc.name)=0, len(wc.name) ,(CHARINDEX('-',wc.name)-1))) as  'Skill Type',
+		--SUBSTRING( wc.name,1,iif(CHARINDEX('-',wc.name)=0, len(wc.name) ,(CHARINDEX('-',wc.name)-1))) as  'Skill Type',
+		wc.skillType as 'Skill Type',
 		hw.schedule as 'Shifth', 
-		iif((select CHARINDEX('6.4',wc.name))>0,'NB',concat(wo.idWO,'-', tk.task)) as 'Level 1 ID',
+		--iif((select CHARINDEX('6.4',wc.name))>0,'NB',concat(wo.idWO,'-', tk.task)) as 'Level 1 ID',
+		CONCAT(po.idPO,po.Line) as 'lvl 1 ID',
+		CONCAT(wo.idWO,'-',tk.task)  as 'Level 1 ID',
 		po.idPO as 'Level 2 ID',
 		jb.jobNo as 'Level 3 ID',
 		hw.hoursST as 'S/T Hrs',
 		hw.hoursOT as 'O/T Hrs',
-		hw.hours3  as 'D/T Hrs'
+		hw.hours3  as 'D/T Hrs',
+		ISNULL(exu.amount,0) as 'Extra Change'
 		from hoursWorked as hw 
 		inner join task as tk on tk.idAux = hw.idAux
 		inner join workOrder as wo on tk.idAuxWO = wo.idAuxWO 
@@ -961,6 +970,7 @@ from (
 		inner join clients as cl on cl.idClient = jb.idClient
 		inner join workCode as wc on wc.idWorkCode = hw.idWorkCode and wc.jobNo = hw.jobNo
 		inner join employees as em on hw.idEmployee = em.idEmployee
+		left join expensesUsed as exu on exu.idHorsWorked = hw.idHorsWorked and exu.idEmployee = em.idEmployee and exu.idAux = tk.idAux
 		where hw.dateWorked between '" + validaFechaParaSQl(beginDate) + "' and '" + validaFechaParaSQl(endDate) + "' 
         and cl.numberClient = " + numberClient + "  " + If(job <> "", " and jb.jobNo = " + job + " ", "") + "
 ) AS T1
@@ -1033,6 +1043,7 @@ from expensesUsed as exu
                 tbl.Rows.Add("Area", dr("Area"))
                 tbl.Rows.Add("Group Name", dr("Group Name"))
                 tbl.Rows.Add("Agreement", dr("Agreement"))
+                tbl.Rows.Add("Level 2 ID", dr("Level 2 ID"))
                 tbl.Rows.Add("Level 3 ID", dr("Level 3 ID"))
                 tbl.Rows.Add("Level 4 ID", dr("Level 4 ID"))
                 tbl.Rows.Add("Hours Total", dr("Hours Total"))

@@ -433,7 +433,7 @@ Public Class TimeSheet
 
                                 Dim hst As String = If(CStr(records.Cells(contRecord, 7).value) = "", "0", CStr(records.Cells(contRecord, 7).value))
                                 Dim hot As String = If(CStr(records.Cells(contRecord, 8).value) = "", "0", CStr(records.Cells(contRecord, 8).value))
-                                Dim schedule As String = If(records.Cells(contRecord, 9).value = "Day" Or records.Cells(contRecord, 9).value = "DAYS", "DAYS", "NIGTHS")
+                                Dim schedule As String = If(records.Cells(contRecord, 9).value = "Day" Or records.Cells(contRecord, 9).value = "DAYS", "DAY", "NIGTHS")
                                 If rowP.Length > 0 Then
                                     If rowE.Length > 0 Then
                                         'Buscando idWorkCode
