@@ -787,8 +787,8 @@ end", conn)
 	em.numberEmploye, 
 	case when (select top 1 weekN from weeks where dateWeek >=	hw.dateWorked order by dateWeek asc) is null then 0 
 		else (select top 1 weekN from weeks where dateWeek >= hw.dateWorked order by dateWeek asc) end as 'WeekNumber',
-	SUBSTRING(CONVERT(nvarchar , po.jobNo),0,LEN( CONVERT(nvarchar , po.jobNo))-2) as 'Job Number',
-	SUBSTRING(CONVERT(nvarchar , po.jobNo),LEN( CONVERT(nvarchar , po.jobNo))-2,LEN( CONVERT(nvarchar , po.jobNo))+1) as 'Sub Job Number',
+	IIF( LEN( CONVERT(nvarchar , po.jobNo))>8,jb.jobNo, SUBSTRING(CONVERT(nvarchar , po.jobNo),0,LEN( CONVERT(nvarchar , po.jobNo))-2)) as 'Job Number',
+	IIF( LEN( CONVERT(nvarchar , po.jobNo))>8,'',SUBSTRING(CONVERT(nvarchar , po.jobNo),LEN( CONVERT(nvarchar , po.jobNo))-2,LEN( CONVERT(nvarchar , po.jobNo))+1))as 'Sub Job Number',
 	jb.costDistribution,
 	iif(DATEPART(dw,hw.dateWorked)='1',7,(convert (int ,DATEPART(dw,hw.dateWorked))-1)) as 'DayOfWeek',
 	(select iif(SUM(hw1.hoursST)is null,0,SUM(hw1.hoursST)) from hoursWorked as hw1 inner join workCode as wc1 on wc1.idWorkCode = hw1.idWorkCode and wc1.jobNo = hw1.jobNo inner join task as tk1 on tk1.idAux = hw1.idAux inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO inner join projectOrder as po1 on po1.idPO = wo1.idPO and wo1.jobNo = po1.jobNo inner join job as jb1 on jb1.jobNo = po1.jobNo where hw1.dateWorked = hw.dateWorked and em.idEmployee = hw1.idEmployee and jb.jobNo = jb1.jobNo and wc1.jobNo = jb.jobNo and not wc1.name like '%6.4%' ) as 'RegularHours',
@@ -872,8 +872,8 @@ distinct
 em.numberEmploye,
 case when (select top 1 weekN from weeks where dateWeek >=	exu.dateExpense order by dateWeek asc) is null then 0 
 	else (select top 1 weekN from weeks where dateWeek >= exu.dateExpense order by dateWeek asc) end as 'WeekNumber',
-	SUBSTRING(CONVERT(nvarchar , po.jobNo),0,LEN( CONVERT(nvarchar , po.jobNo))-2) as 'Job Number',
-    SUBSTRING(CONVERT(nvarchar , po.jobNo),LEN( CONVERT(nvarchar , po.jobNo))-2,LEN( CONVERT(nvarchar , po.jobNo))+1) as 'Sub Job Number',
+	IIF( LEN( CONVERT(nvarchar , po.jobNo))>8,jb.jobNo, SUBSTRING(CONVERT(nvarchar , po.jobNo),0,LEN( CONVERT(nvarchar , po.jobNo))-2)) as 'Job Number',
+    IIF( LEN( CONVERT(nvarchar , po.jobNo))>8,'',SUBSTRING(CONVERT(nvarchar , po.jobNo),LEN( CONVERT(nvarchar , po.jobNo))-2,LEN( CONVERT(nvarchar , po.jobNo))+1)) as 'Sub Job Number',
 	jb.costDistribution,
 	iif(DATEPART(dw,exu.dateExpense)='1',7,(convert (int ,DATEPART(dw,exu.dateExpense))-1)) as 'DayOfWeek',
 	(select iif(SUM(exu1.amount)is null,0,SUM(exu1.amount)) from expensesUsed as exu1 inner join expenses as ex1 on ex1.idExpenses = exu.idExpense inner join task as tk1 on tk1.idAux = exu1.idAux inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO inner join projectOrder as po1 on po1.idPO = wo1.idPO and wo1.jobNo = po1.jobNo inner join job as jb1 on jb1.jobNo = po1.jobNo where exu1.dateExpense = exu.dateExpense and em.idEmployee = exu1.idEmployee and jb.jobNo = jb1.jobNo ) as 'Adjustment Amount'

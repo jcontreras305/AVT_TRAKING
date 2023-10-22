@@ -32,7 +32,7 @@ Public Class MetodosJobs
             conectar()
             Dim cmd As New SqlCommand("if not EXISTS (select idWorkCode from workCode where name = '" + datos(1) + "' and jobNo = " + datos(8) + ")
 begin 
-    insert into workCode values (" + datos(0) + "," + datos(8) + ",'" + datos(1) + "','" + datos(2) + "'," + datos(3) + "," + datos(4) + "," + datos(5) + ",'" + datos(6) + "','" + datos(7) + "','" + datos(9) + "','" + datos(10) + "','" + datos(11) + "','" + datos(12) + "','" + datos(13) + "','" + datos(14) + "','" + datos(15) + "','" + datos(16) + "'
+    insert into workCode values (" + datos(0) + "," + datos(8) + ",'" + datos(1) + "','" + datos(2) + "'," + datos(3) + "," + datos(4) + "," + datos(5) + ",'" + datos(6) + "','" + datos(7) + "','" + datos(9) + "','" + datos(10) + "','" + datos(11) + "','" + datos(12) + "','" + datos(13) + "','" + datos(14) + "','" + datos(15) + "','" + datos(16) + "')
 end")
             cmd.Connection = conn
             If cmd.ExecuteNonQuery > 0 Then

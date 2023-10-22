@@ -1,5 +1,5 @@
 ﻿Public Class Project
-    Private _jobNum As Integer
+    Private _jobNum As Long
     Private _accountNum, _equipament, _manager, _description, _expCode, _idWO, _idAuxWO, _idPO, _idAux, _idTask, _Line, _WBS As String
     Private _beginDate, _endDate As Date
     Private _estimateHours, _totalBilling, _PercentComplete As Double
@@ -40,11 +40,11 @@
         End Set
     End Property
 
-    Public Property jobNum As Integer
+    Public Property jobNum As Long
         Get
             Return _jobNum
         End Get
-        Set(value As Integer)
+        Set(value As Long)
             _jobNum = value
         End Set
     End Property
