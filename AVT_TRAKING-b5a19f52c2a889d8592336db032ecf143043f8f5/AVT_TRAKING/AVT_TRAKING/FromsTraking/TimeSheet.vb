@@ -70,6 +70,7 @@ Public Class TimeSheet
                 Dim textInsertExpUsed As String = "idExpenseUsed,dateExpense,amount,description,idExpense,idAux,idEmployee,idHoursWorked,dayInserted" & vbCrLf
                 While perdiemSheet.Cells(cont, 2).Text <> ""
                     Dim idAux As String = ""
+                    Dim jobNo As String = ""
                     Dim idExpense As String = ""
                     Dim idEmployee As String = ""
                     Dim idHrsW As String = ""
@@ -120,6 +121,7 @@ Public Class TimeSheet
                         If tblProjectsEnabled IsNot Nothing And tblProjectsEnabled.Rows.Count > 0 Then 'SI encontro horas trabajadas ese dia con ese projecto
                             idHrsW = tblProjectsEnabled.Rows(0).ItemArray(0)
                             idAux = tblProjectsEnabled.Rows(0).ItemArray(1)
+                            jobNo = tblProjectsEnabled.Rows(0).ItemArray(6)
                             flag4 = True
                         Else 'NO encontro horas trabajadas ese dia con ese projecto
                             Dim datosHW(6) As String
@@ -128,7 +130,9 @@ Public Class TimeSheet
                             Dim arrayProject() As DataRow = tablaProject.Select("project = '" + perdiemSheet.Cells(cont, 4).text + "' and idPO = " + perdiemSheet.Cells(cont, 5).Text)
                             If arrayProject.Length > 0 Then
                                 idAux = arrayProject(0).ItemArray(0).ToString() 'idAux
+                                jobNo = arrayProject(0).ItemArray(0).ToString() ' jobNo
                                 datosHW(2) = idAux
+                                datosHW(3) = jobNo
                                 idHrsW = mtdHPW.insertarRecordToPerdiem(datosHW)
                                 flag4 = True
                             Else

@@ -134,7 +134,7 @@ TO DISK = '" & path & "'
 
                 If cmd.ExecuteNonQuery() Then
                     txtMessage.Text = txtMessage.Text & vbCrLf & "Inserting the Backup..."
-                    Dim command As String = "RESTORE DATABASE [VRT_TRAKING] FROM  DISK = '" & path & "' WITH  FILE = 1,  NOUNLOAD"
+                    Dim command As String = "RESTORE DATABASE [VRT_TRAKING] FROM  DISK = '" & path & "' WITH REPLACE"
                     Dim cmd1 As SqlCommand = New SqlCommand(command, conn)
                     If cmd1.ExecuteNonQuery() Then
                         MsgBox("The Data Base was Restored.")

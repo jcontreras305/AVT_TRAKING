@@ -33,7 +33,8 @@
     <ManifestCertificateThumbprint>152EC6001550EB8351D76F15C92AAD263BE6428C</ManifestCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestKeyFile>AVT_TRAKING_TemporaryKey.pfx</ManifestKeyFile>
+    <ManifestKeyFile>
+    </ManifestKeyFile>
   </PropertyGroup>
   <PropertyGroup>
     <GenerateManifests>true</GenerateManifests>

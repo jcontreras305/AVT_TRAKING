@@ -227,7 +227,7 @@ where emp.idEmployee = '" + idEmployee + "' " + If(dateWorked = "", "", " and hw
             Dim id As Guid = Guid.NewGuid()
             Dim cmd As New SqlCommand("if (select count(*) from hoursWorked where idAux = '" + datos(2) + "' and dateWorked = '" + datos(0) + "' and idEmployee = '" + datos(1) + "') = 0
 begin 
-	insert into hoursWorked values ('" + id.ToString() + "',0,0,0,'" + datos(0) + "','" + datos(1) + "',NULL,'" + datos(2) + "','DAYS',NULL)
+	insert into hoursWorked values ('" + id.ToString() + "',0,0,0,'" + datos(0) + "','" + datos(1) + "',NULL,'" + datos(2) + "','DAYS'," + datos(3) + ",'" + validaFechaParaSQl(Date.Today) + "')
 end", conn)
             If cmd.ExecuteNonQuery >= 1 Then
                 'mtdJobs.UpdateTotalSpendTask(datos(5))
@@ -576,14 +576,14 @@ end", tran.Connection)
         Try
             conectar()
             Dim id As Guid = Guid.NewGuid()
-            Dim cmd As New SqlCommand("if (select count(*) from hoursWorked where idAux = '" + datos(5) + "' and dateWorked = '" + datos(1) + "' and idEmployee = '" + datos(6) + "') = 0
+            Dim cmd As New SqlCommand("if (select count(*) from hoursWorked where idAux = '" + datos(5) + "' and dateWorked = '" + datos(1) + "' and idEmployee = '" + datos(7) + "') = 0
 begin 
-	insert into hoursWorked values ('" + id.ToString() + "',0,0,0,'" + datos(1) + "','" + datos(6) + "',NULL,'" + datos(5) + "','DAYS',NULL,'" + datos(7) + "')
-	insert into expensesUsed values (NEWID(),'" + datos(1) + "'," + datos(2) + ",'" + datos(3).ToString().Replace("'", "''") + "','" + datos(4) + "','" + datos(5) + "','" + datos(6) + "','" + id.ToString() + "','" + datos(7) + "')
+	insert into hoursWorked values ('" + id.ToString() + "',0,0,0,'" + datos(1) + "','" + datos(7) + "',NULL,'" + datos(5) + "','DAYS'," + datos(6) + ",'" + datos(8) + "')
+	insert into expensesUsed values (NEWID(),'" + datos(1) + "'," + datos(2) + ",'" + datos(3).ToString().Replace("'", "''") + "','" + datos(4) + "','" + datos(5) + "','" + datos(7) + "','" + id.ToString() + "','" + datos(8) + "')
 end
 else
 begin 
-	insert into expensesUsed values (NEWID(),'" + datos(1) + "'," + datos(2) + ",'" + datos(3) + "','" + datos(4) + "','" + datos(5) + "','" + datos(6) + "',(select top 1 idHorsWorked from hoursWorked where idAux = '" + datos(5) + "' and dateWorked = '" + datos(1) + "' and idEmployee = '" + datos(6) + "'),'" + datos(7) + "')
+	insert into expensesUsed values (NEWID(),'" + datos(1) + "'," + datos(2) + ",'" + datos(3) + "','" + datos(4) + "','" + datos(5) + "','" + datos(7) + "',(select top 1 idHorsWorked from hoursWorked where idAux = '" + datos(5) + "' and dateWorked = '" + datos(1) + "' and idEmployee = '" + datos(7) + "'),'" + datos(8) + "')
 end", conn)
             If cmd.ExecuteNonQuery >= 1 Then
                 mtdJobs.UpdateTotalSpendTask(datos(5))

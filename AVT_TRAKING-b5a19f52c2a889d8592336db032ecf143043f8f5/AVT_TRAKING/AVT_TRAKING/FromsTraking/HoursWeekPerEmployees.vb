@@ -781,14 +781,16 @@ Public Class HoursWeekPerEmployees
             If arrayCell1.Length = 4 Then
                 Dim rowPO() As DataRow = proyectTable.Select("project = '" + arrayCell1(0) + "' and idPO = " + arrayCell1(2) + " and jobNo = " + arrayCell(arrayCell.Length - 1))
                 If rowPO.Length > 0 Then
-                    list.Add(rowPO(0).ItemArray(0))
+                    list.Add(rowPO(0).ItemArray(0)) 'idAux
+                    list.Add(rowPO(0).ItemArray(4)) 'jobNo
                 Else
                     mensaje = If(mensaje = "", "Please choose a Proyect.", vbCrLf + " Please choose a Proyect")
                 End If
             Else
                 Dim rowPO() As DataRow = proyectTable.Select("project = '" + arrayCell1(0) + "' and jobNo = " + arrayCell(arrayCell.Length - 1))
                 If rowPO.Length > 0 Then
-                    list.Add(rowPO(0).ItemArray(0))
+                    list.Add(rowPO(0).ItemArray(0)) ' idAux
+                    list.Add(rowPO(0).ItemArray(4).ToString) 'jobNo
                 Else
                     mensaje = If(mensaje = "", "Please choose a Proyect.", vbCrLf + " Please choose a Proyect")
                 End If

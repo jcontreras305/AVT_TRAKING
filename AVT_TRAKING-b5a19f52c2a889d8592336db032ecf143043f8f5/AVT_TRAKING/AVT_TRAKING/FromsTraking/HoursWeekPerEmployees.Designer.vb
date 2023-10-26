@@ -25,9 +25,15 @@ Partial Class HoursWeekPerEmployees
         Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(HoursWeekPerEmployees))
         Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.pcbCompany = New System.Windows.Forms.PictureBox()
         Me.chbPerDiem = New System.Windows.Forms.CheckBox()
+        Me.PictureBox2 = New System.Windows.Forms.PictureBox()
+        Me.btnRestore = New System.Windows.Forms.PictureBox()
+        Me.btnMaximize = New System.Windows.Forms.PictureBox()
+        Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.Label5 = New System.Windows.Forms.Label()
         Me.Panel3 = New System.Windows.Forms.Panel()
+        Me.pcbPhoto = New System.Windows.Forms.PictureBox()
         Me.lblEmployeeNumber = New System.Windows.Forms.Label()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.lblNombreEmployee = New System.Windows.Forms.Label()
@@ -53,8 +59,21 @@ Partial Class HoursWeekPerEmployees
         Me.clmSunST = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.clmSunOT = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.btnWornHours = New System.Windows.Forms.Button()
+        Me.btnDuplicateHour = New System.Windows.Forms.Button()
         Me.txtFindFecha = New System.Windows.Forms.TextBox()
         Me.btnSAP = New System.Windows.Forms.Button()
+        Me.btnProyect = New System.Windows.Forms.Button()
+        Me.Button12 = New System.Windows.Forms.Button()
+        Me.btnNextEmploye = New System.Windows.Forms.Button()
+        Me.btnLatsEmploye = New System.Windows.Forms.Button()
+        Me.btnTime = New System.Windows.Forms.Button()
+        Me.btnExpenses = New System.Windows.Forms.Button()
+        Me.Button6 = New System.Windows.Forms.Button()
+        Me.Button4 = New System.Windows.Forms.Button()
+        Me.btnEmpleados = New System.Windows.Forms.Button()
+        Me.Button1 = New System.Windows.Forms.Button()
+        Me.btnFindEmployee = New System.Windows.Forms.Button()
         Me.cmbEmpleados = New System.Windows.Forms.ComboBox()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
@@ -72,31 +91,18 @@ Partial Class HoursWeekPerEmployees
         Me.Label9 = New System.Windows.Forms.Label()
         Me.Label8 = New System.Windows.Forms.Label()
         Me.Panel4 = New System.Windows.Forms.Panel()
-        Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
-        Me.btnWornHours = New System.Windows.Forms.Button()
-        Me.btnDuplicateHour = New System.Windows.Forms.Button()
-        Me.btnProyect = New System.Windows.Forms.Button()
-        Me.Button12 = New System.Windows.Forms.Button()
-        Me.btnNextEmploye = New System.Windows.Forms.Button()
-        Me.btnLatsEmploye = New System.Windows.Forms.Button()
-        Me.btnTime = New System.Windows.Forms.Button()
-        Me.btnExpenses = New System.Windows.Forms.Button()
-        Me.Button6 = New System.Windows.Forms.Button()
-        Me.Button4 = New System.Windows.Forms.Button()
-        Me.btnEmpleados = New System.Windows.Forms.Button()
-        Me.Button1 = New System.Windows.Forms.Button()
-        Me.btnFindEmployee = New System.Windows.Forms.Button()
-        Me.pcbCompany = New System.Windows.Forms.PictureBox()
-        Me.PictureBox2 = New System.Windows.Forms.PictureBox()
-        Me.btnRestore = New System.Windows.Forms.PictureBox()
-        Me.btnMaximize = New System.Windows.Forms.PictureBox()
-        Me.PictureBox1 = New System.Windows.Forms.PictureBox()
-        Me.pcbPhoto = New System.Windows.Forms.PictureBox()
         Me.btnRefresh = New System.Windows.Forms.Button()
         Me.btnDelete = New System.Windows.Forms.Button()
         Me.btnInsert = New System.Windows.Forms.Button()
+        Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
         Me.Panel1.SuspendLayout()
+        CType(Me.pcbCompany, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.btnRestore, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.btnMaximize, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel3.SuspendLayout()
+        CType(Me.pcbPhoto, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.tblHourPeerDay, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox1.SuspendLayout()
         Me.TabControl1.SuspendLayout()
@@ -106,12 +112,6 @@ Partial Class HoursWeekPerEmployees
         CType(Me.tblExpenses, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel4.SuspendLayout()
         Me.TableLayoutPanel1.SuspendLayout()
-        CType(Me.pcbCompany, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.btnRestore, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.btnMaximize, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.pcbPhoto, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'Panel1
@@ -131,10 +131,22 @@ Partial Class HoursWeekPerEmployees
         Me.Panel1.Controls.Add(Me.lblName)
         Me.Panel1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel1.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Panel1.Location = New System.Drawing.Point(3, 3)
+        Me.Panel1.Location = New System.Drawing.Point(4, 4)
+        Me.Panel1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(1194, 120)
+        Me.Panel1.Size = New System.Drawing.Size(1592, 147)
         Me.Panel1.TabIndex = 0
+        '
+        'pcbCompany
+        '
+        Me.pcbCompany.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.pcbCompany.Location = New System.Drawing.Point(12, 26)
+        Me.pcbCompany.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.pcbCompany.Name = "pcbCompany"
+        Me.pcbCompany.Size = New System.Drawing.Size(240, 113)
+        Me.pcbCompany.TabIndex = 13
+        Me.pcbCompany.TabStop = False
         '
         'chbPerDiem
         '
@@ -142,13 +154,58 @@ Partial Class HoursWeekPerEmployees
         Me.chbPerDiem.CheckAlign = System.Drawing.ContentAlignment.BottomCenter
         Me.chbPerDiem.Font = New System.Drawing.Font("Verdana", 9.75!, System.Drawing.FontStyle.Bold)
         Me.chbPerDiem.ForeColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.chbPerDiem.Location = New System.Drawing.Point(670, 50)
+        Me.chbPerDiem.Location = New System.Drawing.Point(893, 62)
+        Me.chbPerDiem.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.chbPerDiem.Name = "chbPerDiem"
-        Me.chbPerDiem.Size = New System.Drawing.Size(80, 34)
+        Me.chbPerDiem.Size = New System.Drawing.Size(101, 41)
         Me.chbPerDiem.TabIndex = 12
         Me.chbPerDiem.Text = "Per-Diem"
         Me.chbPerDiem.TextAlign = System.Drawing.ContentAlignment.TopCenter
         Me.chbPerDiem.UseVisualStyleBackColor = True
+        '
+        'PictureBox2
+        '
+        Me.PictureBox2.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.PictureBox2.Image = Global.AVT_TRAKING.My.Resources.Resources.minimize2
+        Me.PictureBox2.Location = New System.Drawing.Point(1449, 16)
+        Me.PictureBox2.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.PictureBox2.Name = "PictureBox2"
+        Me.PictureBox2.Size = New System.Drawing.Size(37, 34)
+        Me.PictureBox2.TabIndex = 10
+        Me.PictureBox2.TabStop = False
+        '
+        'btnRestore
+        '
+        Me.btnRestore.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnRestore.Image = Global.AVT_TRAKING.My.Resources.Resources.restore2
+        Me.btnRestore.Location = New System.Drawing.Point(1495, 15)
+        Me.btnRestore.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btnRestore.Name = "btnRestore"
+        Me.btnRestore.Size = New System.Drawing.Size(35, 34)
+        Me.btnRestore.TabIndex = 9
+        Me.btnRestore.TabStop = False
+        '
+        'btnMaximize
+        '
+        Me.btnMaximize.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnMaximize.Image = Global.AVT_TRAKING.My.Resources.Resources.maximize2
+        Me.btnMaximize.Location = New System.Drawing.Point(1495, 15)
+        Me.btnMaximize.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btnMaximize.Name = "btnMaximize"
+        Me.btnMaximize.Size = New System.Drawing.Size(35, 36)
+        Me.btnMaximize.TabIndex = 8
+        Me.btnMaximize.TabStop = False
+        '
+        'PictureBox1
+        '
+        Me.PictureBox1.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.PictureBox1.Image = Global.AVT_TRAKING.My.Resources.Resources.close2
+        Me.PictureBox1.Location = New System.Drawing.Point(1537, 15)
+        Me.PictureBox1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.PictureBox1.Name = "PictureBox1"
+        Me.PictureBox1.Size = New System.Drawing.Size(35, 36)
+        Me.PictureBox1.TabIndex = 7
+        Me.PictureBox1.TabStop = False
         '
         'Label5
         '
@@ -156,8 +213,9 @@ Partial Class HoursWeekPerEmployees
         Me.Label5.Font = New System.Drawing.Font("Verdana", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label5.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.Label5.Location = New System.Drawing.Point(0, 0)
+        Me.Label5.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(264, 18)
+        Me.Label5.Size = New System.Drawing.Size(341, 25)
         Me.Label5.TabIndex = 6
         Me.Label5.Text = "Weekly Hours Per Employees"
         '
@@ -165,19 +223,35 @@ Partial Class HoursWeekPerEmployees
         '
         Me.Panel3.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Panel3.Controls.Add(Me.pcbPhoto)
-        Me.Panel3.Location = New System.Drawing.Point(877, 3)
+        Me.Panel3.Location = New System.Drawing.Point(1169, 4)
+        Me.Panel3.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.Panel3.Name = "Panel3"
-        Me.Panel3.Size = New System.Drawing.Size(115, 112)
+        Me.Panel3.Size = New System.Drawing.Size(153, 138)
         Me.Panel3.TabIndex = 5
+        '
+        'pcbPhoto
+        '
+        Me.pcbPhoto.BackColor = System.Drawing.Color.White
+        Me.pcbPhoto.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.pcbPhoto.Image = Global.AVT_TRAKING.My.Resources.Resources.user
+        Me.pcbPhoto.InitialImage = Global.AVT_TRAKING.My.Resources.Resources.user
+        Me.pcbPhoto.Location = New System.Drawing.Point(0, 0)
+        Me.pcbPhoto.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.pcbPhoto.Name = "pcbPhoto"
+        Me.pcbPhoto.Size = New System.Drawing.Size(153, 138)
+        Me.pcbPhoto.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
+        Me.pcbPhoto.TabIndex = 0
+        Me.pcbPhoto.TabStop = False
         '
         'lblEmployeeNumber
         '
         Me.lblEmployeeNumber.AutoSize = True
         Me.lblEmployeeNumber.Font = New System.Drawing.Font("Verdana", 9.75!, CType((System.Drawing.FontStyle.Bold Or System.Drawing.FontStyle.Underline), System.Drawing.FontStyle), System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblEmployeeNumber.ForeColor = System.Drawing.Color.FromArgb(CType(CType(128, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.lblEmployeeNumber.Location = New System.Drawing.Point(470, 80)
+        Me.lblEmployeeNumber.Location = New System.Drawing.Point(627, 98)
+        Me.lblEmployeeNumber.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblEmployeeNumber.Name = "lblEmployeeNumber"
-        Me.lblEmployeeNumber.Size = New System.Drawing.Size(65, 16)
+        Me.lblEmployeeNumber.Size = New System.Drawing.Size(84, 20)
         Me.lblEmployeeNumber.TabIndex = 4
         Me.lblEmployeeNumber.Text = "Number"
         '
@@ -186,9 +260,10 @@ Partial Class HoursWeekPerEmployees
         Me.Label3.AutoSize = True
         Me.Label3.Font = New System.Drawing.Font("Verdana", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label3.ForeColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.Label3.Location = New System.Drawing.Point(471, 49)
+        Me.Label3.Location = New System.Drawing.Point(628, 60)
+        Me.Label3.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(141, 16)
+        Me.Label3.Size = New System.Drawing.Size(183, 20)
         Me.Label3.TabIndex = 3
         Me.Label3.Text = "Employee Number"
         '
@@ -197,9 +272,10 @@ Partial Class HoursWeekPerEmployees
         Me.lblNombreEmployee.AutoSize = True
         Me.lblNombreEmployee.Font = New System.Drawing.Font("Verdana", 9.75!, CType((System.Drawing.FontStyle.Bold Or System.Drawing.FontStyle.Underline), System.Drawing.FontStyle), System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblNombreEmployee.ForeColor = System.Drawing.Color.FromArgb(CType(CType(128, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.lblNombreEmployee.Location = New System.Drawing.Point(222, 80)
+        Me.lblNombreEmployee.Location = New System.Drawing.Point(296, 98)
+        Me.lblNombreEmployee.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblNombreEmployee.Name = "lblNombreEmployee"
-        Me.lblNombreEmployee.Size = New System.Drawing.Size(65, 16)
+        Me.lblNombreEmployee.Size = New System.Drawing.Size(84, 20)
         Me.lblNombreEmployee.TabIndex = 2
         Me.lblNombreEmployee.Text = "Nombre"
         Me.lblNombreEmployee.TextAlign = System.Drawing.ContentAlignment.TopCenter
@@ -209,9 +285,10 @@ Partial Class HoursWeekPerEmployees
         Me.lblName.AutoSize = True
         Me.lblName.Font = New System.Drawing.Font("Verdana", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblName.ForeColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(192, Byte), Integer), CType(CType(255, Byte), Integer))
-        Me.lblName.Location = New System.Drawing.Point(223, 49)
+        Me.lblName.Location = New System.Drawing.Point(297, 60)
+        Me.lblName.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblName.Name = "lblName"
-        Me.lblName.Size = New System.Drawing.Size(130, 16)
+        Me.lblName.Size = New System.Drawing.Size(168, 20)
         Me.lblName.TabIndex = 1
         Me.lblName.Text = "Employee Name "
         '
@@ -232,125 +309,146 @@ Partial Class HoursWeekPerEmployees
         DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
         Me.tblHourPeerDay.DefaultCellStyle = DataGridViewCellStyle1
         Me.tblHourPeerDay.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.tblHourPeerDay.Location = New System.Drawing.Point(3, 129)
+        Me.tblHourPeerDay.Location = New System.Drawing.Point(4, 159)
+        Me.tblHourPeerDay.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.tblHourPeerDay.MultiSelect = False
         Me.tblHourPeerDay.Name = "tblHourPeerDay"
         Me.tblHourPeerDay.ReadOnly = True
+        Me.tblHourPeerDay.RowHeadersWidth = 51
         Me.tblHourPeerDay.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.tblHourPeerDay.Size = New System.Drawing.Size(1194, 55)
+        Me.tblHourPeerDay.Size = New System.Drawing.Size(1592, 67)
         Me.tblHourPeerDay.TabIndex = 0
         '
         'clmWeekending
         '
         Me.clmWeekending.HeaderText = "Weekending"
+        Me.clmWeekending.MinimumWidth = 6
         Me.clmWeekending.Name = "clmWeekending"
         Me.clmWeekending.ReadOnly = True
         '
         'clmEployeeName
         '
         Me.clmEployeeName.HeaderText = "Eployee Name"
+        Me.clmEployeeName.MinimumWidth = 6
         Me.clmEployeeName.Name = "clmEployeeName"
         Me.clmEployeeName.ReadOnly = True
         '
         'clmTotalST
         '
         Me.clmTotalST.HeaderText = "Total ST"
+        Me.clmTotalST.MinimumWidth = 6
         Me.clmTotalST.Name = "clmTotalST"
         Me.clmTotalST.ReadOnly = True
         '
         'clmTotalOT
         '
         Me.clmTotalOT.HeaderText = "Total OT"
+        Me.clmTotalOT.MinimumWidth = 6
         Me.clmTotalOT.Name = "clmTotalOT"
         Me.clmTotalOT.ReadOnly = True
         '
         'clmTotalHours3
         '
         Me.clmTotalHours3.HeaderText = "Total 3"
+        Me.clmTotalHours3.MinimumWidth = 6
         Me.clmTotalHours3.Name = "clmTotalHours3"
         Me.clmTotalHours3.ReadOnly = True
         '
         'clmMonST
         '
         Me.clmMonST.HeaderText = "Mon ST"
+        Me.clmMonST.MinimumWidth = 6
         Me.clmMonST.Name = "clmMonST"
         Me.clmMonST.ReadOnly = True
         '
         'clmMonOT
         '
         Me.clmMonOT.HeaderText = "Mon OT"
+        Me.clmMonOT.MinimumWidth = 6
         Me.clmMonOT.Name = "clmMonOT"
         Me.clmMonOT.ReadOnly = True
         '
         'clmTueST
         '
         Me.clmTueST.HeaderText = "Tue ST"
+        Me.clmTueST.MinimumWidth = 6
         Me.clmTueST.Name = "clmTueST"
         Me.clmTueST.ReadOnly = True
         '
         'clmTueOT
         '
         Me.clmTueOT.HeaderText = "Tue OT"
+        Me.clmTueOT.MinimumWidth = 6
         Me.clmTueOT.Name = "clmTueOT"
         Me.clmTueOT.ReadOnly = True
         '
         'clmWedST
         '
         Me.clmWedST.HeaderText = "Wed ST"
+        Me.clmWedST.MinimumWidth = 6
         Me.clmWedST.Name = "clmWedST"
         Me.clmWedST.ReadOnly = True
         '
         'clmWedOT
         '
         Me.clmWedOT.HeaderText = "Wed OT"
+        Me.clmWedOT.MinimumWidth = 6
         Me.clmWedOT.Name = "clmWedOT"
         Me.clmWedOT.ReadOnly = True
         '
         'clmThuST
         '
         Me.clmThuST.HeaderText = "Thu ST"
+        Me.clmThuST.MinimumWidth = 6
         Me.clmThuST.Name = "clmThuST"
         Me.clmThuST.ReadOnly = True
         '
         'clmThuOT
         '
         Me.clmThuOT.HeaderText = "Thu OT"
+        Me.clmThuOT.MinimumWidth = 6
         Me.clmThuOT.Name = "clmThuOT"
         Me.clmThuOT.ReadOnly = True
         '
         'clmFriST
         '
         Me.clmFriST.HeaderText = "Fri ST"
+        Me.clmFriST.MinimumWidth = 6
         Me.clmFriST.Name = "clmFriST"
         Me.clmFriST.ReadOnly = True
         '
         'clmFriOT
         '
         Me.clmFriOT.HeaderText = "Fri OT"
+        Me.clmFriOT.MinimumWidth = 6
         Me.clmFriOT.Name = "clmFriOT"
         Me.clmFriOT.ReadOnly = True
         '
         'clmSatST
         '
         Me.clmSatST.HeaderText = "Sat ST"
+        Me.clmSatST.MinimumWidth = 6
         Me.clmSatST.Name = "clmSatST"
         Me.clmSatST.ReadOnly = True
         '
         'clmSatOT
         '
         Me.clmSatOT.HeaderText = "Sat OT"
+        Me.clmSatOT.MinimumWidth = 6
         Me.clmSatOT.Name = "clmSatOT"
         Me.clmSatOT.ReadOnly = True
         '
         'clmSunST
         '
         Me.clmSunST.HeaderText = "Sun ST"
+        Me.clmSunST.MinimumWidth = 6
         Me.clmSunST.Name = "clmSunST"
         Me.clmSunST.ReadOnly = True
         '
         'clmSunOT
         '
         Me.clmSunOT.HeaderText = "Sun OT"
+        Me.clmSunOT.MinimumWidth = 6
         Me.clmSunOT.Name = "clmSunOT"
         Me.clmSunOT.ReadOnly = True
         '
@@ -378,18 +476,55 @@ Partial Class HoursWeekPerEmployees
         Me.GroupBox1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.GroupBox1.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.GroupBox1.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.GroupBox1.Location = New System.Drawing.Point(3, 190)
+        Me.GroupBox1.Location = New System.Drawing.Point(4, 234)
+        Me.GroupBox1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(1194, 99)
+        Me.GroupBox1.Padding = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.GroupBox1.Size = New System.Drawing.Size(1592, 121)
         Me.GroupBox1.TabIndex = 0
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Control"
         '
+        'btnWornHours
+        '
+        Me.btnWornHours.FlatAppearance.BorderSize = 0
+        Me.btnWornHours.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(58, Byte), Integer), CType(CType(115, Byte), Integer))
+        Me.btnWornHours.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnWornHours.Image = Global.AVT_TRAKING.My.Resources.Resources.allTables
+        Me.btnWornHours.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnWornHours.Location = New System.Drawing.Point(1379, 27)
+        Me.btnWornHours.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btnWornHours.Name = "btnWornHours"
+        Me.btnWornHours.Size = New System.Drawing.Size(188, 36)
+        Me.btnWornHours.TabIndex = 26
+        Me.btnWornHours.Text = "Wrong Hours"
+        Me.btnWornHours.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.btnWornHours.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
+        Me.btnWornHours.UseVisualStyleBackColor = True
+        '
+        'btnDuplicateHour
+        '
+        Me.btnDuplicateHour.FlatAppearance.BorderSize = 0
+        Me.btnDuplicateHour.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(58, Byte), Integer), CType(CType(115, Byte), Integer))
+        Me.btnDuplicateHour.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnDuplicateHour.Image = Global.AVT_TRAKING.My.Resources.Resources.after
+        Me.btnDuplicateHour.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnDuplicateHour.Location = New System.Drawing.Point(1279, 74)
+        Me.btnDuplicateHour.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btnDuplicateHour.Name = "btnDuplicateHour"
+        Me.btnDuplicateHour.Size = New System.Drawing.Size(188, 36)
+        Me.btnDuplicateHour.TabIndex = 25
+        Me.btnDuplicateHour.Text = "Duplicate Hour"
+        Me.btnDuplicateHour.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.btnDuplicateHour.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
+        Me.btnDuplicateHour.UseVisualStyleBackColor = True
+        '
         'txtFindFecha
         '
-        Me.txtFindFecha.Location = New System.Drawing.Point(96, 68)
+        Me.txtFindFecha.Location = New System.Drawing.Point(128, 84)
+        Me.txtFindFecha.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.txtFindFecha.Name = "txtFindFecha"
-        Me.txtFindFecha.Size = New System.Drawing.Size(192, 21)
+        Me.txtFindFecha.Size = New System.Drawing.Size(255, 24)
         Me.txtFindFecha.TabIndex = 24
         '
         'btnSAP
@@ -397,36 +532,216 @@ Partial Class HoursWeekPerEmployees
         Me.btnSAP.FlatAppearance.BorderSize = 0
         Me.btnSAP.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(58, Byte), Integer), CType(CType(115, Byte), Integer))
         Me.btnSAP.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnSAP.Location = New System.Drawing.Point(294, 67)
+        Me.btnSAP.Location = New System.Drawing.Point(392, 82)
+        Me.btnSAP.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.btnSAP.Name = "btnSAP"
-        Me.btnSAP.Size = New System.Drawing.Size(75, 23)
+        Me.btnSAP.Size = New System.Drawing.Size(100, 28)
         Me.btnSAP.TabIndex = 22
         Me.btnSAP.Text = "0"
         Me.btnSAP.UseVisualStyleBackColor = True
         '
+        'btnProyect
+        '
+        Me.btnProyect.FlatAppearance.BorderSize = 0
+        Me.btnProyect.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(58, Byte), Integer), CType(CType(115, Byte), Integer))
+        Me.btnProyect.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnProyect.Image = Global.AVT_TRAKING.My.Resources.Resources.estimation
+        Me.btnProyect.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnProyect.Location = New System.Drawing.Point(1205, 27)
+        Me.btnProyect.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btnProyect.Name = "btnProyect"
+        Me.btnProyect.Size = New System.Drawing.Size(165, 32)
+        Me.btnProyect.TabIndex = 20
+        Me.btnProyect.Text = "Open Project"
+        Me.btnProyect.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.btnProyect.UseVisualStyleBackColor = True
+        '
+        'Button12
+        '
+        Me.Button12.FlatAppearance.BorderSize = 0
+        Me.Button12.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(58, Byte), Integer), CType(CType(115, Byte), Integer))
+        Me.Button12.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.Button12.Image = Global.AVT_TRAKING.My.Resources.Resources.peerdiem
+        Me.Button12.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.Button12.Location = New System.Drawing.Point(1073, 78)
+        Me.Button12.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.Button12.Name = "Button12"
+        Me.Button12.Size = New System.Drawing.Size(197, 36)
+        Me.Button12.TabIndex = 19
+        Me.Button12.Text = "Daily Per Diem"
+        Me.Button12.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.Button12.UseVisualStyleBackColor = True
+        '
+        'btnNextEmploye
+        '
+        Me.btnNextEmploye.FlatAppearance.BorderSize = 0
+        Me.btnNextEmploye.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(58, Byte), Integer), CType(CType(115, Byte), Integer))
+        Me.btnNextEmploye.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnNextEmploye.Image = Global.AVT_TRAKING.My.Resources.Resources._next
+        Me.btnNextEmploye.ImageAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.btnNextEmploye.Location = New System.Drawing.Point(957, 75)
+        Me.btnNextEmploye.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btnNextEmploye.Name = "btnNextEmploye"
+        Me.btnNextEmploye.Size = New System.Drawing.Size(108, 39)
+        Me.btnNextEmploye.TabIndex = 18
+        Me.btnNextEmploye.Text = "Record"
+        Me.btnNextEmploye.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnNextEmploye.UseVisualStyleBackColor = True
+        '
+        'btnLatsEmploye
+        '
+        Me.btnLatsEmploye.FlatAppearance.BorderSize = 0
+        Me.btnLatsEmploye.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(58, Byte), Integer), CType(CType(115, Byte), Integer))
+        Me.btnLatsEmploye.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnLatsEmploye.Image = Global.AVT_TRAKING.My.Resources.Resources.after1
+        Me.btnLatsEmploye.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnLatsEmploye.Location = New System.Drawing.Point(832, 76)
+        Me.btnLatsEmploye.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btnLatsEmploye.Name = "btnLatsEmploye"
+        Me.btnLatsEmploye.Size = New System.Drawing.Size(117, 39)
+        Me.btnLatsEmploye.TabIndex = 17
+        Me.btnLatsEmploye.Text = "Record"
+        Me.btnLatsEmploye.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.btnLatsEmploye.UseVisualStyleBackColor = True
+        '
+        'btnTime
+        '
+        Me.btnTime.FlatAppearance.BorderSize = 0
+        Me.btnTime.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(58, Byte), Integer), CType(CType(115, Byte), Integer))
+        Me.btnTime.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnTime.Image = Global.AVT_TRAKING.My.Resources.Resources.upload2
+        Me.btnTime.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnTime.Location = New System.Drawing.Point(893, 27)
+        Me.btnTime.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btnTime.Name = "btnTime"
+        Me.btnTime.Size = New System.Drawing.Size(124, 32)
+        Me.btnTime.TabIndex = 15
+        Me.btnTime.Text = "Upload Time"
+        Me.btnTime.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.btnTime.UseVisualStyleBackColor = True
+        '
+        'btnExpenses
+        '
+        Me.btnExpenses.FlatAppearance.BorderSize = 0
+        Me.btnExpenses.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(58, Byte), Integer), CType(CType(115, Byte), Integer))
+        Me.btnExpenses.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnExpenses.Image = Global.AVT_TRAKING.My.Resources.Resources.payroll
+        Me.btnExpenses.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnExpenses.Location = New System.Drawing.Point(1025, 23)
+        Me.btnExpenses.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btnExpenses.Name = "btnExpenses"
+        Me.btnExpenses.Size = New System.Drawing.Size(155, 39)
+        Me.btnExpenses.TabIndex = 14
+        Me.btnExpenses.Text = "Upload Exp"
+        Me.btnExpenses.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.btnExpenses.UseVisualStyleBackColor = True
+        '
+        'Button6
+        '
+        Me.Button6.FlatAppearance.BorderSize = 0
+        Me.Button6.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(58, Byte), Integer), CType(CType(115, Byte), Integer))
+        Me.Button6.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.Button6.Image = Global.AVT_TRAKING.My.Resources.Resources.payroll
+        Me.Button6.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.Button6.Location = New System.Drawing.Point(739, 23)
+        Me.Button6.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.Button6.Name = "Button6"
+        Me.Button6.Size = New System.Drawing.Size(124, 39)
+        Me.Button6.TabIndex = 13
+        Me.Button6.Text = "Pay Roll"
+        Me.Button6.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.Button6.UseVisualStyleBackColor = True
+        '
+        'Button4
+        '
+        Me.Button4.FlatAppearance.BorderSize = 0
+        Me.Button4.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(58, Byte), Integer), CType(CType(115, Byte), Integer))
+        Me.Button4.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.Button4.Image = Global.AVT_TRAKING.My.Resources.Resources.peerdiem
+        Me.Button4.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.Button4.Location = New System.Drawing.Point(679, 75)
+        Me.Button4.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.Button4.Name = "Button4"
+        Me.Button4.Size = New System.Drawing.Size(149, 39)
+        Me.Button4.TabIndex = 11
+        Me.Button4.Text = "Per-Diem"
+        Me.Button4.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.Button4.UseVisualStyleBackColor = True
+        '
+        'btnEmpleados
+        '
+        Me.btnEmpleados.FlatAppearance.BorderSize = 0
+        Me.btnEmpleados.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(58, Byte), Integer), CType(CType(115, Byte), Integer))
+        Me.btnEmpleados.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnEmpleados.Image = Global.AVT_TRAKING.My.Resources.Resources.add
+        Me.btnEmpleados.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnEmpleados.Location = New System.Drawing.Point(500, 75)
+        Me.btnEmpleados.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btnEmpleados.Name = "btnEmpleados"
+        Me.btnEmpleados.Size = New System.Drawing.Size(175, 39)
+        Me.btnEmpleados.TabIndex = 9
+        Me.btnEmpleados.Text = "Add Employee"
+        Me.btnEmpleados.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.btnEmpleados.UseVisualStyleBackColor = True
+        '
+        'Button1
+        '
+        Me.Button1.FlatAppearance.BorderSize = 0
+        Me.Button1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(58, Byte), Integer), CType(CType(115, Byte), Integer))
+        Me.Button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.Button1.Image = Global.AVT_TRAKING.My.Resources.Resources.holiday
+        Me.Button1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.Button1.Location = New System.Drawing.Point(529, 23)
+        Me.Button1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(201, 39)
+        Me.Button1.TabIndex = 8
+        Me.Button1.Text = "Vacation/History"
+        Me.Button1.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.Button1.UseVisualStyleBackColor = True
+        '
+        'btnFindEmployee
+        '
+        Me.btnFindEmployee.FlatAppearance.BorderSize = 0
+        Me.btnFindEmployee.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(58, Byte), Integer), CType(CType(115, Byte), Integer))
+        Me.btnFindEmployee.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnFindEmployee.Image = Global.AVT_TRAKING.My.Resources.Resources.loupe
+        Me.btnFindEmployee.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnFindEmployee.Location = New System.Drawing.Point(441, 27)
+        Me.btnFindEmployee.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btnFindEmployee.Name = "btnFindEmployee"
+        Me.btnFindEmployee.Size = New System.Drawing.Size(84, 32)
+        Me.btnFindEmployee.TabIndex = 7
+        Me.btnFindEmployee.Text = "Find"
+        Me.btnFindEmployee.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.btnFindEmployee.UseVisualStyleBackColor = True
+        '
         'cmbEmpleados
         '
         Me.cmbEmpleados.FormattingEnabled = True
-        Me.cmbEmpleados.Location = New System.Drawing.Point(95, 22)
+        Me.cmbEmpleados.Location = New System.Drawing.Point(127, 27)
+        Me.cmbEmpleados.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.cmbEmpleados.Name = "cmbEmpleados"
-        Me.cmbEmpleados.Size = New System.Drawing.Size(230, 21)
+        Me.cmbEmpleados.Size = New System.Drawing.Size(305, 25)
         Me.cmbEmpleados.TabIndex = 5
         '
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(5, 69)
+        Me.Label2.Location = New System.Drawing.Point(7, 85)
+        Me.Label2.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(92, 13)
+        Me.Label2.Size = New System.Drawing.Size(109, 17)
         Me.Label2.TabIndex = 1
         Me.Label2.Text = "Date Entered"
         '
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(25, 25)
+        Me.Label1.Location = New System.Drawing.Point(33, 31)
+        Me.Label1.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(71, 13)
+        Me.Label1.Size = New System.Drawing.Size(83, 17)
         Me.Label1.TabIndex = 0
         Me.Label1.Text = "Employee"
         '
@@ -435,19 +750,21 @@ Partial Class HoursWeekPerEmployees
         Me.TabControl1.Controls.Add(Me.tbpTimeWorked)
         Me.TabControl1.Controls.Add(Me.tbpExpenses)
         Me.TabControl1.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.TabControl1.Location = New System.Drawing.Point(3, 295)
+        Me.TabControl1.Location = New System.Drawing.Point(4, 363)
+        Me.TabControl1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.TabControl1.Name = "TabControl1"
         Me.TabControl1.SelectedIndex = 0
-        Me.TabControl1.Size = New System.Drawing.Size(1194, 246)
+        Me.TabControl1.Size = New System.Drawing.Size(1592, 302)
         Me.TabControl1.TabIndex = 0
         '
         'tbpTimeWorked
         '
         Me.tbpTimeWorked.Controls.Add(Me.tblRecordEmployee)
-        Me.tbpTimeWorked.Location = New System.Drawing.Point(4, 22)
+        Me.tbpTimeWorked.Location = New System.Drawing.Point(4, 25)
+        Me.tbpTimeWorked.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.tbpTimeWorked.Name = "tbpTimeWorked"
-        Me.tbpTimeWorked.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbpTimeWorked.Size = New System.Drawing.Size(1186, 220)
+        Me.tbpTimeWorked.Padding = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.tbpTimeWorked.Size = New System.Drawing.Size(1584, 273)
         Me.tbpTimeWorked.TabIndex = 0
         Me.tbpTimeWorked.Text = "Time Worked"
         Me.tbpTimeWorked.UseVisualStyleBackColor = True
@@ -458,18 +775,21 @@ Partial Class HoursWeekPerEmployees
         Me.tblRecordEmployee.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.tblRecordEmployee.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.tblRecordEmployee.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.tblRecordEmployee.Location = New System.Drawing.Point(3, 3)
+        Me.tblRecordEmployee.Location = New System.Drawing.Point(4, 4)
+        Me.tblRecordEmployee.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.tblRecordEmployee.Name = "tblRecordEmployee"
-        Me.tblRecordEmployee.Size = New System.Drawing.Size(1180, 214)
+        Me.tblRecordEmployee.RowHeadersWidth = 51
+        Me.tblRecordEmployee.Size = New System.Drawing.Size(1576, 265)
         Me.tblRecordEmployee.TabIndex = 0
         '
         'tbpExpenses
         '
         Me.tbpExpenses.Controls.Add(Me.tblExpenses)
-        Me.tbpExpenses.Location = New System.Drawing.Point(4, 22)
+        Me.tbpExpenses.Location = New System.Drawing.Point(4, 25)
+        Me.tbpExpenses.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.tbpExpenses.Name = "tbpExpenses"
-        Me.tbpExpenses.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbpExpenses.Size = New System.Drawing.Size(1186, 220)
+        Me.tbpExpenses.Padding = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.tbpExpenses.Size = New System.Drawing.Size(1584, 273)
         Me.tbpExpenses.TabIndex = 1
         Me.tbpExpenses.Text = "Expenses"
         Me.tbpExpenses.UseVisualStyleBackColor = True
@@ -479,72 +799,82 @@ Partial Class HoursWeekPerEmployees
         Me.tblExpenses.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.tblExpenses.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.tblExpenses.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.tblExpenses.Location = New System.Drawing.Point(3, 3)
+        Me.tblExpenses.Location = New System.Drawing.Point(4, 4)
+        Me.tblExpenses.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.tblExpenses.Name = "tblExpenses"
-        Me.tblExpenses.Size = New System.Drawing.Size(1180, 214)
+        Me.tblExpenses.RowHeadersWidth = 51
+        Me.tblExpenses.Size = New System.Drawing.Size(1576, 265)
         Me.tblExpenses.TabIndex = 0
         '
         'txtHours3
         '
-        Me.txtHours3.Location = New System.Drawing.Point(683, 14)
+        Me.txtHours3.Location = New System.Drawing.Point(911, 17)
+        Me.txtHours3.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.txtHours3.Name = "txtHours3"
-        Me.txtHours3.Size = New System.Drawing.Size(100, 21)
+        Me.txtHours3.Size = New System.Drawing.Size(132, 24)
         Me.txtHours3.TabIndex = 7
         '
         'Label4
         '
         Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(602, 17)
+        Me.Label4.Location = New System.Drawing.Point(803, 21)
+        Me.Label4.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(82, 13)
+        Me.Label4.Size = New System.Drawing.Size(102, 17)
         Me.Label4.TabIndex = 6
         Me.Label4.Text = "Total Hours 3"
         '
         'txtTotalOT
         '
-        Me.txtTotalOT.Location = New System.Drawing.Point(500, 14)
+        Me.txtTotalOT.Location = New System.Drawing.Point(667, 17)
+        Me.txtTotalOT.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.txtTotalOT.Name = "txtTotalOT"
-        Me.txtTotalOT.Size = New System.Drawing.Size(100, 21)
+        Me.txtTotalOT.Size = New System.Drawing.Size(132, 24)
         Me.txtTotalOT.TabIndex = 5
         '
         'txtTotalHours
         '
-        Me.txtTotalHours.Location = New System.Drawing.Point(135, 14)
+        Me.txtTotalHours.Location = New System.Drawing.Point(180, 17)
+        Me.txtTotalHours.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.txtTotalHours.Name = "txtTotalHours"
-        Me.txtTotalHours.Size = New System.Drawing.Size(100, 21)
+        Me.txtTotalHours.Size = New System.Drawing.Size(132, 24)
         Me.txtTotalHours.TabIndex = 4
         '
         'txtTotalST
         '
-        Me.txtTotalST.Location = New System.Drawing.Point(303, 13)
+        Me.txtTotalST.Location = New System.Drawing.Point(404, 16)
+        Me.txtTotalST.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.txtTotalST.Name = "txtTotalST"
-        Me.txtTotalST.Size = New System.Drawing.Size(100, 21)
+        Me.txtTotalST.Size = New System.Drawing.Size(132, 24)
         Me.txtTotalST.TabIndex = 3
         '
         'Label10
         '
         Me.Label10.AutoSize = True
-        Me.Label10.Location = New System.Drawing.Point(65, 17)
+        Me.Label10.Location = New System.Drawing.Point(87, 21)
+        Me.Label10.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label10.Name = "Label10"
-        Me.Label10.Size = New System.Drawing.Size(71, 13)
+        Me.Label10.Size = New System.Drawing.Size(88, 17)
         Me.Label10.TabIndex = 2
         Me.Label10.Text = "Total Hours"
         '
         'Label9
         '
         Me.Label9.AutoSize = True
-        Me.Label9.Location = New System.Drawing.Point(407, 17)
+        Me.Label9.Location = New System.Drawing.Point(543, 21)
+        Me.Label9.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label9.Name = "Label9"
-        Me.Label9.Size = New System.Drawing.Size(91, 13)
+        Me.Label9.Size = New System.Drawing.Size(113, 17)
         Me.Label9.TabIndex = 1
         Me.Label9.Text = "Total Hours OT"
         '
         'Label8
         '
         Me.Label8.AutoSize = True
-        Me.Label8.Location = New System.Drawing.Point(239, 17)
+        Me.Label8.Location = New System.Drawing.Point(319, 21)
+        Me.Label8.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label8.Name = "Label8"
-        Me.Label8.Size = New System.Drawing.Size(59, 13)
+        Me.Label8.Size = New System.Drawing.Size(74, 17)
         Me.Label8.TabIndex = 0
         Me.Label8.Text = "Hours ST"
         '
@@ -565,291 +895,11 @@ Partial Class HoursWeekPerEmployees
         Me.Panel4.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel4.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Panel4.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.Panel4.Location = New System.Drawing.Point(3, 547)
+        Me.Panel4.Location = New System.Drawing.Point(4, 673)
+        Me.Panel4.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.Panel4.Name = "Panel4"
-        Me.Panel4.Size = New System.Drawing.Size(1194, 50)
+        Me.Panel4.Size = New System.Drawing.Size(1592, 61)
         Me.Panel4.TabIndex = 2
-        '
-        'TableLayoutPanel1
-        '
-        Me.TableLayoutPanel1.ColumnCount = 1
-        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-        Me.TableLayoutPanel1.Controls.Add(Me.TabControl1, 0, 3)
-        Me.TableLayoutPanel1.Controls.Add(Me.GroupBox1, 0, 2)
-        Me.TableLayoutPanel1.Controls.Add(Me.tblHourPeerDay, 0, 1)
-        Me.TableLayoutPanel1.Controls.Add(Me.Panel1, 0, 0)
-        Me.TableLayoutPanel1.Controls.Add(Me.Panel4, 0, 4)
-        Me.TableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.TableLayoutPanel1.Location = New System.Drawing.Point(0, 0)
-        Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
-        Me.TableLayoutPanel1.RowCount = 5
-        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 126.0!))
-        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 61.0!))
-        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 105.0!))
-        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 56.0!))
-        Me.TableLayoutPanel1.Size = New System.Drawing.Size(1200, 600)
-        Me.TableLayoutPanel1.TabIndex = 3
-        '
-        'btnWornHours
-        '
-        Me.btnWornHours.FlatAppearance.BorderSize = 0
-        Me.btnWornHours.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(58, Byte), Integer), CType(CType(115, Byte), Integer))
-        Me.btnWornHours.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnWornHours.Image = Global.AVT_TRAKING.My.Resources.Resources.allTables
-        Me.btnWornHours.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnWornHours.Location = New System.Drawing.Point(1034, 22)
-        Me.btnWornHours.Name = "btnWornHours"
-        Me.btnWornHours.Size = New System.Drawing.Size(141, 29)
-        Me.btnWornHours.TabIndex = 26
-        Me.btnWornHours.Text = "Wrong Hours"
-        Me.btnWornHours.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.btnWornHours.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
-        Me.btnWornHours.UseVisualStyleBackColor = True
-        '
-        'btnDuplicateHour
-        '
-        Me.btnDuplicateHour.FlatAppearance.BorderSize = 0
-        Me.btnDuplicateHour.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(58, Byte), Integer), CType(CType(115, Byte), Integer))
-        Me.btnDuplicateHour.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnDuplicateHour.Image = Global.AVT_TRAKING.My.Resources.Resources.after
-        Me.btnDuplicateHour.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnDuplicateHour.Location = New System.Drawing.Point(959, 60)
-        Me.btnDuplicateHour.Name = "btnDuplicateHour"
-        Me.btnDuplicateHour.Size = New System.Drawing.Size(141, 29)
-        Me.btnDuplicateHour.TabIndex = 25
-        Me.btnDuplicateHour.Text = "Duplicate Hour"
-        Me.btnDuplicateHour.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.btnDuplicateHour.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
-        Me.btnDuplicateHour.UseVisualStyleBackColor = True
-        '
-        'btnProyect
-        '
-        Me.btnProyect.FlatAppearance.BorderSize = 0
-        Me.btnProyect.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(58, Byte), Integer), CType(CType(115, Byte), Integer))
-        Me.btnProyect.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnProyect.Image = Global.AVT_TRAKING.My.Resources.Resources.estimation
-        Me.btnProyect.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnProyect.Location = New System.Drawing.Point(904, 22)
-        Me.btnProyect.Name = "btnProyect"
-        Me.btnProyect.Size = New System.Drawing.Size(124, 26)
-        Me.btnProyect.TabIndex = 20
-        Me.btnProyect.Text = "Open Project"
-        Me.btnProyect.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.btnProyect.UseVisualStyleBackColor = True
-        '
-        'Button12
-        '
-        Me.Button12.FlatAppearance.BorderSize = 0
-        Me.Button12.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(58, Byte), Integer), CType(CType(115, Byte), Integer))
-        Me.Button12.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.Button12.Image = Global.AVT_TRAKING.My.Resources.Resources.peerdiem
-        Me.Button12.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.Button12.Location = New System.Drawing.Point(805, 63)
-        Me.Button12.Name = "Button12"
-        Me.Button12.Size = New System.Drawing.Size(148, 29)
-        Me.Button12.TabIndex = 19
-        Me.Button12.Text = "Daily Per Diem"
-        Me.Button12.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.Button12.UseVisualStyleBackColor = True
-        '
-        'btnNextEmploye
-        '
-        Me.btnNextEmploye.FlatAppearance.BorderSize = 0
-        Me.btnNextEmploye.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(58, Byte), Integer), CType(CType(115, Byte), Integer))
-        Me.btnNextEmploye.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnNextEmploye.Image = Global.AVT_TRAKING.My.Resources.Resources._next
-        Me.btnNextEmploye.ImageAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.btnNextEmploye.Location = New System.Drawing.Point(718, 61)
-        Me.btnNextEmploye.Name = "btnNextEmploye"
-        Me.btnNextEmploye.Size = New System.Drawing.Size(81, 32)
-        Me.btnNextEmploye.TabIndex = 18
-        Me.btnNextEmploye.Text = "Record"
-        Me.btnNextEmploye.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnNextEmploye.UseVisualStyleBackColor = True
-        '
-        'btnLatsEmploye
-        '
-        Me.btnLatsEmploye.FlatAppearance.BorderSize = 0
-        Me.btnLatsEmploye.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(58, Byte), Integer), CType(CType(115, Byte), Integer))
-        Me.btnLatsEmploye.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnLatsEmploye.Image = Global.AVT_TRAKING.My.Resources.Resources.after1
-        Me.btnLatsEmploye.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnLatsEmploye.Location = New System.Drawing.Point(624, 62)
-        Me.btnLatsEmploye.Name = "btnLatsEmploye"
-        Me.btnLatsEmploye.Size = New System.Drawing.Size(88, 32)
-        Me.btnLatsEmploye.TabIndex = 17
-        Me.btnLatsEmploye.Text = "Record"
-        Me.btnLatsEmploye.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.btnLatsEmploye.UseVisualStyleBackColor = True
-        '
-        'btnTime
-        '
-        Me.btnTime.FlatAppearance.BorderSize = 0
-        Me.btnTime.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(58, Byte), Integer), CType(CType(115, Byte), Integer))
-        Me.btnTime.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnTime.Image = Global.AVT_TRAKING.My.Resources.Resources.upload2
-        Me.btnTime.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnTime.Location = New System.Drawing.Point(670, 22)
-        Me.btnTime.Name = "btnTime"
-        Me.btnTime.Size = New System.Drawing.Size(93, 26)
-        Me.btnTime.TabIndex = 15
-        Me.btnTime.Text = "Upload Time"
-        Me.btnTime.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.btnTime.UseVisualStyleBackColor = True
-        '
-        'btnExpenses
-        '
-        Me.btnExpenses.FlatAppearance.BorderSize = 0
-        Me.btnExpenses.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(58, Byte), Integer), CType(CType(115, Byte), Integer))
-        Me.btnExpenses.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnExpenses.Image = Global.AVT_TRAKING.My.Resources.Resources.payroll
-        Me.btnExpenses.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnExpenses.Location = New System.Drawing.Point(769, 19)
-        Me.btnExpenses.Name = "btnExpenses"
-        Me.btnExpenses.Size = New System.Drawing.Size(116, 32)
-        Me.btnExpenses.TabIndex = 14
-        Me.btnExpenses.Text = "Upload Exp"
-        Me.btnExpenses.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.btnExpenses.UseVisualStyleBackColor = True
-        '
-        'Button6
-        '
-        Me.Button6.FlatAppearance.BorderSize = 0
-        Me.Button6.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(58, Byte), Integer), CType(CType(115, Byte), Integer))
-        Me.Button6.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.Button6.Image = Global.AVT_TRAKING.My.Resources.Resources.payroll
-        Me.Button6.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.Button6.Location = New System.Drawing.Point(554, 19)
-        Me.Button6.Name = "Button6"
-        Me.Button6.Size = New System.Drawing.Size(93, 32)
-        Me.Button6.TabIndex = 13
-        Me.Button6.Text = "Pay Roll"
-        Me.Button6.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.Button6.UseVisualStyleBackColor = True
-        '
-        'Button4
-        '
-        Me.Button4.FlatAppearance.BorderSize = 0
-        Me.Button4.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(58, Byte), Integer), CType(CType(115, Byte), Integer))
-        Me.Button4.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.Button4.Image = Global.AVT_TRAKING.My.Resources.Resources.peerdiem
-        Me.Button4.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.Button4.Location = New System.Drawing.Point(509, 61)
-        Me.Button4.Name = "Button4"
-        Me.Button4.Size = New System.Drawing.Size(112, 32)
-        Me.Button4.TabIndex = 11
-        Me.Button4.Text = "Per-Diem"
-        Me.Button4.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.Button4.UseVisualStyleBackColor = True
-        '
-        'btnEmpleados
-        '
-        Me.btnEmpleados.FlatAppearance.BorderSize = 0
-        Me.btnEmpleados.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(58, Byte), Integer), CType(CType(115, Byte), Integer))
-        Me.btnEmpleados.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnEmpleados.Image = Global.AVT_TRAKING.My.Resources.Resources.add
-        Me.btnEmpleados.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnEmpleados.Location = New System.Drawing.Point(375, 61)
-        Me.btnEmpleados.Name = "btnEmpleados"
-        Me.btnEmpleados.Size = New System.Drawing.Size(131, 32)
-        Me.btnEmpleados.TabIndex = 9
-        Me.btnEmpleados.Text = "Add Employee"
-        Me.btnEmpleados.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.btnEmpleados.UseVisualStyleBackColor = True
-        '
-        'Button1
-        '
-        Me.Button1.FlatAppearance.BorderSize = 0
-        Me.Button1.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(58, Byte), Integer), CType(CType(115, Byte), Integer))
-        Me.Button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.Button1.Image = Global.AVT_TRAKING.My.Resources.Resources.holiday
-        Me.Button1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.Button1.Location = New System.Drawing.Point(397, 19)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(151, 32)
-        Me.Button1.TabIndex = 8
-        Me.Button1.Text = "Vacation/History"
-        Me.Button1.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.Button1.UseVisualStyleBackColor = True
-        '
-        'btnFindEmployee
-        '
-        Me.btnFindEmployee.FlatAppearance.BorderSize = 0
-        Me.btnFindEmployee.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(58, Byte), Integer), CType(CType(115, Byte), Integer))
-        Me.btnFindEmployee.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnFindEmployee.Image = Global.AVT_TRAKING.My.Resources.Resources.loupe
-        Me.btnFindEmployee.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnFindEmployee.Location = New System.Drawing.Point(331, 22)
-        Me.btnFindEmployee.Name = "btnFindEmployee"
-        Me.btnFindEmployee.Size = New System.Drawing.Size(63, 26)
-        Me.btnFindEmployee.TabIndex = 7
-        Me.btnFindEmployee.Text = "Find"
-        Me.btnFindEmployee.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.btnFindEmployee.UseVisualStyleBackColor = True
-        '
-        'pcbCompany
-        '
-        Me.pcbCompany.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.pcbCompany.Location = New System.Drawing.Point(9, 21)
-        Me.pcbCompany.Name = "pcbCompany"
-        Me.pcbCompany.Size = New System.Drawing.Size(180, 93)
-        Me.pcbCompany.TabIndex = 13
-        Me.pcbCompany.TabStop = False
-        '
-        'PictureBox2
-        '
-        Me.PictureBox2.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.PictureBox2.Image = Global.AVT_TRAKING.My.Resources.Resources.minimize2
-        Me.PictureBox2.Location = New System.Drawing.Point(1087, 13)
-        Me.PictureBox2.Name = "PictureBox2"
-        Me.PictureBox2.Size = New System.Drawing.Size(28, 28)
-        Me.PictureBox2.TabIndex = 10
-        Me.PictureBox2.TabStop = False
-        '
-        'btnRestore
-        '
-        Me.btnRestore.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnRestore.Image = Global.AVT_TRAKING.My.Resources.Resources.restore2
-        Me.btnRestore.Location = New System.Drawing.Point(1121, 12)
-        Me.btnRestore.Name = "btnRestore"
-        Me.btnRestore.Size = New System.Drawing.Size(26, 28)
-        Me.btnRestore.TabIndex = 9
-        Me.btnRestore.TabStop = False
-        '
-        'btnMaximize
-        '
-        Me.btnMaximize.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnMaximize.Image = Global.AVT_TRAKING.My.Resources.Resources.maximize2
-        Me.btnMaximize.Location = New System.Drawing.Point(1121, 12)
-        Me.btnMaximize.Name = "btnMaximize"
-        Me.btnMaximize.Size = New System.Drawing.Size(26, 29)
-        Me.btnMaximize.TabIndex = 8
-        Me.btnMaximize.TabStop = False
-        '
-        'PictureBox1
-        '
-        Me.PictureBox1.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.PictureBox1.Image = Global.AVT_TRAKING.My.Resources.Resources.close2
-        Me.PictureBox1.Location = New System.Drawing.Point(1153, 12)
-        Me.PictureBox1.Name = "PictureBox1"
-        Me.PictureBox1.Size = New System.Drawing.Size(26, 29)
-        Me.PictureBox1.TabIndex = 7
-        Me.PictureBox1.TabStop = False
-        '
-        'pcbPhoto
-        '
-        Me.pcbPhoto.BackColor = System.Drawing.Color.White
-        Me.pcbPhoto.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.pcbPhoto.Image = Global.AVT_TRAKING.My.Resources.Resources.user
-        Me.pcbPhoto.InitialImage = Global.AVT_TRAKING.My.Resources.Resources.user
-        Me.pcbPhoto.Location = New System.Drawing.Point(0, 0)
-        Me.pcbPhoto.Name = "pcbPhoto"
-        Me.pcbPhoto.Size = New System.Drawing.Size(115, 112)
-        Me.pcbPhoto.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage
-        Me.pcbPhoto.TabIndex = 0
-        Me.pcbPhoto.TabStop = False
         '
         'btnRefresh
         '
@@ -859,9 +909,10 @@ Partial Class HoursWeekPerEmployees
         Me.btnRefresh.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnRefresh.Image = Global.AVT_TRAKING.My.Resources.Resources.refresh
         Me.btnRefresh.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnRefresh.Location = New System.Drawing.Point(1011, 10)
+        Me.btnRefresh.Location = New System.Drawing.Point(1348, 12)
+        Me.btnRefresh.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.btnRefresh.Name = "btnRefresh"
-        Me.btnRefresh.Size = New System.Drawing.Size(98, 33)
+        Me.btnRefresh.Size = New System.Drawing.Size(131, 41)
         Me.btnRefresh.TabIndex = 26
         Me.btnRefresh.Text = "Refresh"
         Me.btnRefresh.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -875,9 +926,10 @@ Partial Class HoursWeekPerEmployees
         Me.btnDelete.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnDelete.Image = Global.AVT_TRAKING.My.Resources.Resources.delete
         Me.btnDelete.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnDelete.Location = New System.Drawing.Point(911, 10)
+        Me.btnDelete.Location = New System.Drawing.Point(1215, 12)
+        Me.btnDelete.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.btnDelete.Name = "btnDelete"
-        Me.btnDelete.Size = New System.Drawing.Size(85, 33)
+        Me.btnDelete.Size = New System.Drawing.Size(113, 41)
         Me.btnDelete.TabIndex = 25
         Me.btnDelete.Text = "Delete"
         Me.btnDelete.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -891,26 +943,56 @@ Partial Class HoursWeekPerEmployees
         Me.btnInsert.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnInsert.Image = CType(resources.GetObject("btnInsert.Image"), System.Drawing.Image)
         Me.btnInsert.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnInsert.Location = New System.Drawing.Point(812, 10)
+        Me.btnInsert.Location = New System.Drawing.Point(1083, 12)
+        Me.btnInsert.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.btnInsert.Name = "btnInsert"
-        Me.btnInsert.Size = New System.Drawing.Size(88, 33)
+        Me.btnInsert.Size = New System.Drawing.Size(117, 41)
         Me.btnInsert.TabIndex = 8
         Me.btnInsert.Text = "Insert"
         Me.btnInsert.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         Me.btnInsert.UseVisualStyleBackColor = True
         '
+        'TableLayoutPanel1
+        '
+        Me.TableLayoutPanel1.ColumnCount = 1
+        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
+        Me.TableLayoutPanel1.Controls.Add(Me.TabControl1, 0, 3)
+        Me.TableLayoutPanel1.Controls.Add(Me.GroupBox1, 0, 2)
+        Me.TableLayoutPanel1.Controls.Add(Me.tblHourPeerDay, 0, 1)
+        Me.TableLayoutPanel1.Controls.Add(Me.Panel1, 0, 0)
+        Me.TableLayoutPanel1.Controls.Add(Me.Panel4, 0, 4)
+        Me.TableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.TableLayoutPanel1.Location = New System.Drawing.Point(0, 0)
+        Me.TableLayoutPanel1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
+        Me.TableLayoutPanel1.RowCount = 5
+        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 155.0!))
+        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 75.0!))
+        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 129.0!))
+        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
+        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 69.0!))
+        Me.TableLayoutPanel1.Size = New System.Drawing.Size(1600, 738)
+        Me.TableLayoutPanel1.TabIndex = 3
+        '
         'HoursWeekPerEmployees
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1200, 600)
+        Me.ClientSize = New System.Drawing.Size(1600, 738)
         Me.Controls.Add(Me.TableLayoutPanel1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
+        Me.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.Name = "HoursWeekPerEmployees"
         Me.Text = "HoursWeekPeerEmployees"
         Me.Panel1.ResumeLayout(False)
         Me.Panel1.PerformLayout()
+        CType(Me.pcbCompany, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.btnRestore, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.btnMaximize, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel3.ResumeLayout(False)
+        CType(Me.pcbPhoto, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.tblHourPeerDay, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()
@@ -922,12 +1004,6 @@ Partial Class HoursWeekPerEmployees
         Me.Panel4.ResumeLayout(False)
         Me.Panel4.PerformLayout()
         Me.TableLayoutPanel1.ResumeLayout(False)
-        CType(Me.pcbCompany, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.btnRestore, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.btnMaximize, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.pcbPhoto, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
