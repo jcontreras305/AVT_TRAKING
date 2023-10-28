@@ -369,9 +369,9 @@ select
 		inner join projectOrder as po on po.idPO = wo.idPO and wo.jobNo = po.jobNo 
 		inner join job as jb on jb.jobNo = po.jobNo 
 		inner join clients as cl on cl.idClient = jb.idClient
-		where hw.dateWorked between @startdate and @finaldate and cl.numberClient = @clientnum and not wc.name like '%6.4%' and hw.idWorkCode = NULL
+		where hw.dateWorked between @startdate and @finaldate and cl.numberClient = @clientnum and not wc.name like '%6.4%' 
 
-		UNION 
+		UNION ALL
 
 	select
 	jb.jobNo,
@@ -425,6 +425,7 @@ select
 
 )as T1
 end
+GO
 GO
 
 --##############################################################################################
@@ -508,7 +509,7 @@ inner join job as jb on jb.jobNo = po.jobNo
 inner join clients as cl on cl.idClient = jb.idClient
 where hw.dateWorked between @startdate and @finaldate and cl.numberClient = @clientnum and jb.jobNo like iif(@all=1,'%%',CONCAT('',@job,'')) and not wc.name like '%6.4%' 
 
-UNION 
+UNION ALL
 
 select jb.jobNo,
 	po.idPO,
@@ -2507,7 +2508,9 @@ CREATE proc [dbo].[sp_Invoice_PO]
 @all bit 
 as 
 begin 
-select 
+select * into #TablaHorasClassPerdiem  from (
+
+(select 
 	cl.numberClient,
 	cl.companyName,
 	cl.payTerms,
@@ -2518,8 +2521,9 @@ select
 	(hw.hoursST*wc.billingRate1) as 'CostST',
 	hw.hoursOT,
 	(hw.hoursOT*wc.billingRateOT) as 'CostOT',
-	isnull((select sum(amount) from expensesUsed as exu where exu.idHorsWorked = hw.idHorsWorked and exu.dateExpense between @startDate and @FinalDate),0)as 'Perdiem'
-	into #TablaHorasClassPerdiem
+	isnull((select sum(amount) from expensesUsed as exu where exu.idHorsWorked = hw.idHorsWorked and exu.dateExpense between @startDate and @FinalDate and (exu.[description] like '%Perdiem%' or exu.[description] like '%per-diem%')),0)as 'Perdiem',
+	isnull((select sum(amount) from expensesUsed as exu where exu.idHorsWorked = hw.idHorsWorked and exu.dateExpense between @startDate and @FinalDate and (exu.[description] like '%Travel%') ),0)as 'Travel'
+	
 	from hoursWorked as hw 
 		inner join workCode as wc on wc.idWorkCode = hw.idWorkCode and wc.jobNo = hw.jobNo
 		inner join task as tk on tk.idAux = hw.idAux 
@@ -2527,7 +2531,31 @@ select
 		inner join projectOrder as po on po.idPO = wo.idPO and wo.jobNo = po.jobNo
 		inner join job as jb on po.jobNo = jb.jobNo
 		inner join clients as cl on cl.idClient = jb.idClient
-		where cl.numberClient = @numberClient and hw.dateWorked between @startDate and @FinalDate and po.idPO like iif(@all = 1 ,'%%%',convert(nvarchar, @idPO))
+		where cl.numberClient = @numberClient and hw.dateWorked between @startDate and @FinalDate and po.idPO like iif(@all = 1 ,'%%%',convert(nvarchar, @idPO)))
+union ALL
+
+(select 
+	cl.numberClient,
+	cl.companyName,
+	cl.payTerms,
+	jb.jobNo,
+	po.idPO, 
+	'' as 'Class',
+	0 as 'hoursST',
+	0 as 'CostST',
+	0 as 'hoursOT',
+	0 as 'CostOT',
+	isnull((select sum(amount) from expensesUsed as exu where exu.idHorsWorked = hw.idHorsWorked and exu.dateExpense between @startDate and @FinalDate and (exu.[description] like '%Perdiem%' or exu.[description] like '%per-diem%')),0)as 'Perdiem',
+	isnull((select sum(amount) from expensesUsed as exu where exu.idHorsWorked = hw.idHorsWorked and exu.dateExpense between @startDate and @FinalDate and (exu.[description] like '%Travel%') ),0)as 'Travel'
+	
+	from hoursWorked as hw
+		inner join task as tk on tk.idAux = hw.idAux 
+		inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO
+		inner join projectOrder as po on po.idPO = wo.idPO and wo.jobNo = po.jobNo
+		inner join job as jb on po.jobNo = jb.jobNo
+		inner join clients as cl on cl.idClient = jb.idClient
+		where cl.numberClient = @numberClient and hw.dateWorked between @startDate and @FinalDate and hw.idWorkCode is null and po.idPO like iif(@all = 1 ,'%%%',convert(nvarchar, @idPO)))
+) AS T1
 
 select
 	distinct
@@ -2556,7 +2584,11 @@ select
 	(select
 	sum(perdiem)
 	from #TablaHorasClassPerdiem as t2 
-	where t2.numberClient = t2.numberClient and t2.jobNo = t1.jobNo and t2.idPO	= t1.idPO and t2.Class = t1.Class) as 'Perdiem'
+	where t2.numberClient = t2.numberClient and t2.jobNo = t1.jobNo and t2.idPO	= t1.idPO and t2.Class = t1.Class) as 'Perdiem',
+	(select
+	sum(Travel)
+	from #TablaHorasClassPerdiem as t2 
+	where t2.numberClient = t2.numberClient and t2.jobNo = t1.jobNo and t2.idPO	= t1.idPO and t2.Class = t1.Class) as 'Travel'
 from #TablaHorasClassPerdiem as t1 
 drop table #TablaHorasClassPerdiem
 end
