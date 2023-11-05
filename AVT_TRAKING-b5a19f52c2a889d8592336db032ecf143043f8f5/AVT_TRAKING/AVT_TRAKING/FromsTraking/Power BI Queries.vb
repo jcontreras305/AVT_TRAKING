@@ -687,7 +687,14 @@ SUM(T1.[OT Hours]) OVER (PARTITION BY T1.[Year],T1.[Weekly],T1.[PO],T1.[ClientID
 SUM(T1.[OT Cost]) OVER (PARTITION BY T1.[Year],T1.[Weekly],T1.[PO],T1.[ClientID]) as 'OT Cost',
 SUM(T1.[ST Cost]) OVER (PARTITION BY T1.[Year],T1.[Weekly],T1.[PO],T1.[ClientID]) as 'ST Cost',
 SUM(T1.[Total Exp]) OVER (PARTITION BY T1.[Year],T1.[Weekly],T1.[PO],T1.[ClientID]) as 'Total Exp',
-SUM(T1.[Total Mat]) OVER (PARTITION BY T1.[Year],T1.[Weekly],T1.[PO],T1.[ClientID]) as 'Total Mat'
+SUM(T1.[Total Mat]) OVER (PARTITION BY T1.[Year],T1.[Weekly],T1.[PO],T1.[ClientID]) as 'Total Mat',
+SUM(T1.[Total Rental 3rd Party]) OVER (PARTITION BY T1.[Year],T1.[Weekly],T1.[PO],T1.[ClientID]) as 'Total Rental 3rd party',
+SUM(T1.[Total In House]) OVER (PARTITION BY T1.[Year],T1.[Weekly],T1.[PO],T1.[ClientID]) as 'Total In House',
+SUM(T1.[Total Company Equipment]) OVER (PARTITION BY T1.[Year],T1.[Weekly],T1.[PO],T1.[ClientID]) as 'Total Company Equipment',
+SUM(T1.[Total Subcontract]) OVER (PARTITION BY T1.[Year],T1.[Weekly],T1.[PO],T1.[ClientID]) as 'Total Subcontract',
+SUM(T1.[Total Tools]) OVER (PARTITION BY T1.[Year],T1.[Weekly],T1.[PO],T1.[ClientID]) as 'Total Tools',
+SUM(T1.[Total Consumables]) OVER (PARTITION BY T1.[Year],T1.[Weekly],T1.[PO],T1.[ClientID]) as 'Total Consumable',
+SUM(T1.[Total Other]) OVER (PARTITION BY T1.[Year],T1.[Weekly],T1.[PO],T1.[ClientID]) as 'Total Other'
 INTO PBI.CostHPTAS
 from(
 
@@ -702,7 +709,14 @@ SUM(hw.hoursOT+ hw.hours3) OVER (PARTITION BY YEAR(hw.dateWorked),DATEADD(DAY,II
 ROUND(SUM((hw.hoursOT*wc.billingRateOT) + (hw.hours3*wc.billingRate3)) OVER (PARTITION BY YEAR(hw.dateWorked),DATEADD(DAY,IIF( DATEPART(DW,hw.dateWorked)=1,0, 7-(DATEPART(DW,hw.dateWorked)-1)),hw.dateWorked),po.idPO,jb.jobNo),2) 'OT Cost',
 ROUND(SUM(hw.hoursST*wc.billingRate1) OVER (PARTITION BY YEAR(hw.dateWorked),DATEADD(DAY,IIF( DATEPART(DW,hw.dateWorked)=1,0, 7-(DATEPART(DW,hw.dateWorked)-1)),hw.dateWorked),po.idPO,jb.jobNo),2) as 'ST Cost',
 0 as 'Total Exp',
-0 as 'Total Mat'
+0 as 'Total Mat',
+0 as 'Total Rental 3rd Party',
+0 as 'Total In House',
+0 as 'Total Company Equipment',
+0 as 'Total Subcontract',
+0 as 'Total Tools',
+0 as 'Total Consumables',
+0 as 'Total Other'
 from hoursWorked as hw 
 inner join task as tk on tk.idAux = hw.idAux
 inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO
@@ -722,7 +736,14 @@ jb.jobNo as 'ClientID',
 0 as 'OT Cost',
 0 as 'ST Cost',
 exu.amount as 'Total Exp',
-0 as 'Total Mat'
+0 as 'Total Mat',
+0 as 'Total Rental 3rd Party',
+0 as 'Total In House',
+0 as 'Total Company Equipment',
+0 as 'Total Subcontract',
+0 as 'Total Tools',
+0 as 'Total Consumables',
+0 as 'Total Other'
 from expensesUsed as exu 
 inner join expenses as ex on ex.idExpenses = exu.idExpense
 left join task as tk on tk.idAux = exu.idAux
@@ -730,6 +751,7 @@ left join workOrder as wo on wo.idAuxWO = tk.idAuxWO
 left join projectOrder as po on po.idPO = wo.idPO and po.jobNo = wo.jobNo
 left join job as jb on jb.jobNo = po.jobNo 
 where exu.dateExpense between @StartDate and @EndDate 
+
 UNION ALL
 
 select
@@ -742,7 +764,14 @@ jb.jobNo as 'ClientID',
 0 as 'OT Cost',
 0 as 'ST Cost',
 0 as 'Total Exu',
-mau.amount as 'Total Mat'
+IIF(subString(code,LEN(code),1) = 'M' , mau.amount,0) as 'Total Mat',
+IIF(subString(code,LEN(code),1) = 'D' , mau.amount,0) as 'Total Rental 3rd Party',
+IIF(subString(code,LEN(code),1) = 'E' , mau.amount,0) as 'Total In House',
+IIF(subString(code,LEN(code),1) = 'F' , mau.amount,0) as 'Total Company Equipment',
+IIF(subString(code,LEN(code),1) = 'S' , mau.amount,0) as 'Total Subcontract',
+IIF(subString(code,LEN(code),1) = 'T' , mau.amount,0) as 'Total Tools',
+IIF(subString(code,LEN(code),1) = 'V' , mau.amount,0) as 'Total Consumables',
+IIF(subString(code,LEN(code),1) = 'Y' , mau.amount,0) as 'Total Other'
 from materialUsed as mau 
 inner join material as ma on ma.idMaterial = mau.idMaterial
 left join task as tk on tk.idAux = mau.idAux
@@ -750,7 +779,7 @@ left join workOrder as wo on wo.idAuxWO = tk.idAuxWO
 left join projectOrder as po on po.idPO = wo.idPO and po.jobNo = wo.jobNo
 left join job as jb on jb.jobNo = po.jobNo 
 where mau.dateMaterial between @StartDate and @EndDate 
-) AS T1 
+) AS T1
  ORDER BY T1.[Weekly],T1.[PO],T1.[ClientID]"
 			Return _CostHPTAS
 		End Get
@@ -1028,29 +1057,29 @@ BEGIN
 	drop table PBI.[Invoices]
 END
 
-select 
+select * INTO PBI.[Invoices] from (select 
 jb.jobNo as 'ClientID',
 IIF(cl.payTerms='',0,cl.payTerms) as 'Pay Terms',
 po.idPO as 'PO',
 inv.invoice as 'Invoice',
 CONVERT(nvarchar, inv.invoiceDate,101) as 'Invoice Date',
 ISNULL((select sum(hw1.hoursST)+sum(hw1.hoursOT)+sum(hw1.hours3) as 'Total Hours' from hoursWorked as hw1 
-	inner join workCode as wc1 on wc1.idWorkCode = hw1.idWorkCode
 	inner join task as tk1 on tk1.idAux = hw1.idAux 
 	inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO
 	inner join projectOrder as po1 on po1.idPO = wo1.idPO and wo1.jobNo = po1.jobNo
 	inner join job as jb1 on po1.jobNo = jb1.jobNo
 	inner join clients as cl1 on cl1.idClient = jb1.idClient
+	inner join workCode as wc1 on wc1.idWorkCode = hw1.idWorkCode and wc1.jobNo = jb1.jobNo 
 	where po1.idPO = po.idPO and jb1.jobNo = jb.jobNo and cl1.idClient = inv.idClient and hw1.dateWorked between inv.startDate and inv.FinalDate),0) 
 as 'Total Hours PO',
 
 ISNULL((select sum(hw1.hoursST*wc1.billingRate1)+sum(hw1.hoursOT*wc1.billingRateOT)+sum(hw1.hours3*wc1.billingRate3) as 'Labor' from hoursWorked as hw1 
-	inner join workCode as wc1 on wc1.idWorkCode = hw1.idWorkCode
 	inner join task as tk1 on tk1.idAux = hw1.idAux 
 	inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO
 	inner join projectOrder as po1 on po1.idPO = wo1.idPO and wo1.jobNo = po1.jobNo
 	inner join job as jb1 on po1.jobNo = jb1.jobNo
 	inner join clients as cl1 on cl1.idClient = jb1.idClient
+	inner join workCode as wc1 on wc1.idWorkCode = hw1.idWorkCode and wc1.jobNo = jb1.jobNo
 	where po1.idPO = po.idPO and jb1.jobNo = jb.jobNo and cl1.idClient = inv.idClient and hw1.dateWorked between inv.startDate and inv.FinalDate),0) 
 as 'Total Labor',
 
@@ -1175,13 +1204,15 @@ ISNULL((select sum(mtu1.amount) from materialUsed as mtu1
 	where po1.idPO = po.idPO and jb1.jobNo = jb.jobNo and cl1.idClient = inv.idClient and mtu1.dateMaterial between inv.startDate and inv.FinalDate ),0) 
 as 'Total Material'
 ,
+ROUND(
 ISNULL((select sum(hw1.hoursST*wc1.billingRate1)+sum(hw1.hoursOT*wc1.billingRateOT)+sum(hw1.hours3*wc1.billingRate3) as 'Labor' from hoursWorked as hw1 
-	inner join workCode as wc1 on wc1.idWorkCode = hw1.idWorkCode
+	
 	inner join task as tk1 on tk1.idAux = hw1.idAux 
 	inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO
 	inner join projectOrder as po1 on po1.idPO = wo1.idPO and wo1.jobNo = po1.jobNo
 	inner join job as jb1 on po1.jobNo = jb1.jobNo
 	inner join clients as cl1 on cl1.idClient = jb1.idClient
+	inner join workCode as wc1 on wc1.idWorkCode = hw1.idWorkCode and wc1.jobNo = jb1.jobNo
 where po1.idPO = po.idPO and jb1.jobNo = jb.jobNo and cl1.idClient = inv.idClient and hw1.dateWorked between inv.startDate and inv.FinalDate ),0)
 +
 ISNULL((select sum(exu1.amount) from expensesUsed as exu1
@@ -1200,14 +1231,13 @@ ISNULL((select sum(mtu1.amount) from materialUsed as mtu1
 	inner join projectOrder as po1 on po1.idPO = wo1.idPO and wo1.jobNo = po1.jobNo
 	inner join job as jb1 on po1.jobNo = jb1.jobNo
 	inner join clients  as cl1 on cl1.idClient = jb1.idClient
-where po1.idPO = po.idPO and jb1.jobNo = jb.jobNo and cl1.idClient = inv.idClient and mtu1.dateMaterial between inv.startDate and inv.FinalDate ),0 )
+where po1.idPO = po.idPO and jb1.jobNo = jb.jobNo and cl1.idClient = inv.idClient and mtu1.dateMaterial between inv.startDate and inv.FinalDate ),0 ),2)
 as 'Total Cost'
-INTO PBI.[Invoices]
 from invoice as inv
 inner join projectOrder as po on po.idPO = inv.idPO
 inner join job as jb on jb.jobNo = po.jobNo
 inner join clients as cl on cl.idClient = inv.idClient and jb.idClient = cl.idClient
-where inv.invoiceDate between @StartDate and @EndDate and inv.[status] = 0 "
+where inv.invoiceDate between @StartDate and @EndDate and inv.[status] = 0 ) as T1 where T1.[Total Cost] > 0 "
 			Return _Invoices
 		End Get
 		Set(value As String)

@@ -4821,13 +4821,14 @@ go
 --##############################################################################################
 create proc [dbo].[sp_delete_project]
 @idAux varchar(36),
-@idAuxWO varchar(36)	
+@idAuxWO varchar(36),
+@idPO bigInt ,
+@jobNo bigInt
 as
 declare @error as bit = 0
 declare @taskAux as varchar(20)
 declare @countScaff as int
 begin 
-	begin tran
 		begin try	
 		if @idAux <> '' 
 		begin 
@@ -4867,19 +4868,28 @@ begin
 		end
 		else if @idAuxWO <> '' 
 		begin 
-			delete from workOrder where idAuxWO = @idAuxWO
+			if (select COUNT(*) from workOrder as wo inner join projectOrder as po on po.jobNo = wo.jobNo and wo.idPO = po.idPO inner join job as jb on jb.jobNo = po.jobNo where idAuxWO = @idAuxWO )=1
+			begin
+				delete from workOrder where idAuxWO = @idAuxWO
+				delete from projectOrder where idPO = @idpo and jobNo = @jobNo
+				delete from job where jobNo = @jobNo 
+			end
+			else
+			begin 
+				delete from workOrder where idAuxWO = @idAuxWO
+			end
+		end
+		else if @idAuxWO = '' 
+		begin 
+			delete from projectOrder where idPO = @idpo and jobNo = @jobNo
+			delete from job where jobNo = @jobNo 
 		end
 	end try
 		begin catch
 			set @error = 1
 			goto solveProblem
 		end catch
-	commit tran
 	solveProblem:
-	if @error <> 0 
-	begin 
-		rollback tran
-	end  
 end
 go
 ----###############################################################################################

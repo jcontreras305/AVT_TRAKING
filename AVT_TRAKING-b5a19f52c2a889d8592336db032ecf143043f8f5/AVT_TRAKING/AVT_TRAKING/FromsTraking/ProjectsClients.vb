@@ -188,7 +188,7 @@ Public Class ProjectsClients
                     listPO.Add(txtPostingProject.Text) ' bigint
                     idPO = mtdJobs.insertarNuevoProyecto(idCliente, listPO)
                     If idPO <> Nothing Or idPO <> "" Then
-                        mtdClient.buscarProyectosDeClientePorProyeto(tblProjectClientsAll, idCliente)
+                        'mtdClient.buscarProyectosDeClientePorProyeto(tblProjectClientsAll, idCliente)
                         btnAdd.Text = "Add"
                         btnCancelSaveJob.Visible = False
                     Else

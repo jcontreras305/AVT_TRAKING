@@ -431,6 +431,8 @@ from workOrder
                 cmd.CommandType = CommandType.StoredProcedure
                 cmd.Parameters.AddWithValue("@idAux", row.Cells("idAux").Value)
                 cmd.Parameters.AddWithValue("@idAuxWO", row.Cells("idAuxWO").Value)
+                cmd.Parameters.AddWithValue("@idPO", row.Cells("clmIdPO").Value)
+                cmd.Parameters.AddWithValue("@JobNo", row.Cells("jobNo").Value)
                 cmd.Transaction = tran
                 If Not cmd.ExecuteNonQuery > 0 Then
                     flag = False
