@@ -130,7 +130,7 @@ Public Class TimeSheet
                             Dim arrayProject() As DataRow = tablaProject.Select("project = '" + perdiemSheet.Cells(cont, 4).text + "' and idPO = " + perdiemSheet.Cells(cont, 5).Text)
                             If arrayProject.Length > 0 Then
                                 idAux = arrayProject(0).ItemArray(0).ToString() 'idAux
-                                jobNo = arrayProject(4).ItemArray(0).ToString() ' jobNo
+                                jobNo = arrayProject(0).ItemArray(4).ToString() ' jobNo
                                 datosHW(2) = idAux
                                 datosHW(3) = jobNo
                                 idHrsW = mtdHPW.insertarRecordToPerdiem(datosHW)

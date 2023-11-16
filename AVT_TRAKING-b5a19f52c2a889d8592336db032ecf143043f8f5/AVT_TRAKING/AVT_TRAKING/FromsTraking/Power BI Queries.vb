@@ -41,7 +41,7 @@ Public Class Power_BI_Queries
 		If tvwTablePBI.Nodes IsNot Nothing Then
 			tvwTablePBI.Nodes.Clear()
 		End If
-		Dim arraySheets() As String = {"ALL", "ALL Barriers", "ALLCPH", "ALLHOURS", "CostHPTAS", "Scaffold", "ScaBTools", "ScaDTools", "ScaMTools", "ACM", "AR Invoices", "Invoices"}
+		Dim arraySheets() As String = {"ALL", "ALL Barriers", "ALLCPH", "ALLHOURS", "CostHPTAS", "CostMth", "Scaffold", "ScaBTools", "ScaDTools", "ScaMTools", "ACM", "AR Invoices", "Invoices"}
 		Dim arrayALLCPH() As String = {"All CHP 1", "All CHP 2", "All CHP 3"}
 		Dim arrayALLHours() As String = {"All Hours 1", "All Hours 2", "Travelers", "Absents"}
 
@@ -199,6 +199,8 @@ END "
 							cmd1.CommandText = StartDate + vbCrLf + FinalDate + vbCrLf + Absents
 						Case "CostHPTAS"
 							cmd1.CommandText = StartDate + vbCrLf + FinalDate + vbCrLf + CostHPTAS
+						Case "CostMth"
+							cmd1.CommandText = StartDate + vbCrLf + FinalDate + vbCrLf + CostMth
 						Case "Scaffold"
 							cmd1.CommandText = StartDate + vbCrLf + FinalDate + vbCrLf + Scaffold
 						Case "ScaBTools"
@@ -266,6 +268,8 @@ END "
 					cmd.CommandText = "select * from PBI.[EmpAbsents]"
 				Case "CostHPTAS"
 					cmd.CommandText = "select * from PBI.[CostHPTAS]"
+				Case "CostMth"
+					cmd.CommandText = "select * from PBI.[CostMth]"
 				Case "Scaffold"
 					cmd.CommandText = "select * from PBI.[Scaffold]"
 				Case "ScaBTools"
@@ -299,7 +303,7 @@ END "
 		End Try
 	End Function
 
-	Dim _All, _ALL_Barries, _CostHPTAS, _Scaffold, _ScaBTools, _ScaDTools, _ScaMTools, _ACM, _AR_Inovices, _Invoices,
+	Dim _All, _ALL_Barries, _CostHPTAS, _CostMth, _Scaffold, _ScaBTools, _ScaDTools, _ScaMTools, _ACM, _AR_Inovices, _Invoices,
 _All_CHP_1, _All_CHP_2, _All_CHP_3,
 _All_Hours_1, _All_Hours_2, _Travelers, _Absents As String
 
@@ -788,6 +792,123 @@ where mau.dateMaterial between @StartDate and @EndDate
 		End Set
 	End Property
 
+	Public Property CostMth() As String
+		Get
+			_CostMth = "IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES where TABLE_SCHEMA = 'PBI' and TABLE_NAME = 'CostMth')
+BEGIN 
+	drop table PBI.[CostMth]
+END
+
+select DISTINCT
+T1.[Year],
+T1.[PO],
+T1.[Month],
+T1.[ClientID],
+SUM(T1.[ST Hours]) OVER (PARTITION BY T1.[Year],T1.[Month],T1.[PO],T1.[ClientID]) as 'ST Hours',
+SUM(T1.[OT Hours]) OVER (PARTITION BY T1.[Year],T1.[Month],T1.[PO],T1.[ClientID]) as 'OT Hours',
+SUM(T1.[OT Cost]) OVER (PARTITION BY T1.[Year],T1.[Month],T1.[PO],T1.[ClientID]) as 'OT Cost',
+SUM(T1.[ST Cost]) OVER (PARTITION BY T1.[Year],T1.[Month],T1.[PO],T1.[ClientID]) as 'ST Cost',
+SUM(T1.[Total Exp]) OVER (PARTITION BY T1.[Year],T1.[Month],T1.[PO],T1.[ClientID]) as 'Total Exp',
+SUM(T1.[Total Mat]) OVER (PARTITION BY T1.[Year],T1.[Month],T1.[PO],T1.[ClientID]) as 'Total Mat',
+SUM(T1.[Total Rental 3rd Party]) OVER (PARTITION BY T1.[Year],T1.[Month],T1.[PO],T1.[ClientID]) as 'Total Rental 3rd party',
+SUM(T1.[Total In House]) OVER (PARTITION BY T1.[Year],T1.[Month],T1.[PO],T1.[ClientID]) as 'Total In House',
+SUM(T1.[Total Company Equipment]) OVER (PARTITION BY T1.[Year],T1.[Month],T1.[PO],T1.[ClientID]) as 'Total Company Equipment',
+SUM(T1.[Total Subcontract]) OVER (PARTITION BY T1.[Year],T1.[Month],T1.[PO],T1.[ClientID]) as 'Total Subcontract',
+SUM(T1.[Total Tools]) OVER (PARTITION BY T1.[Year],T1.[Month],T1.[PO],T1.[ClientID]) as 'Total Tools',
+SUM(T1.[Total Consumables]) OVER (PARTITION BY T1.[Year],T1.[Month],T1.[PO],T1.[ClientID]) as 'Total Consumable',
+SUM(T1.[Total Other]) OVER (PARTITION BY T1.[Year],T1.[Month],T1.[PO],T1.[ClientID]) as 'Total Other'
+INTO PBI.CostMth
+from(
+
+select 
+distinct
+YEAR(hw.dateWorked) as 'Year',
+po.idPO	as 'PO',
+MONTH(hw.dateWorked) as 'Month',
+jb.jobNo as 'ClientID',
+SUM(hw.hoursST) OVER (PARTITION BY YEAR(hw.dateWorked),DATEADD(DAY,IIF( DATEPART(DW,hw.dateWorked)=1,0, 7-(DATEPART(DW,hw.dateWorked)-1)),hw.dateWorked),po.idPO,jb.jobNo) as 'ST Hours',
+SUM(hw.hoursOT+ hw.hours3) OVER (PARTITION BY YEAR(hw.dateWorked),DATEADD(DAY,IIF( DATEPART(DW,hw.dateWorked)=1,0, 7-(DATEPART(DW,hw.dateWorked)-1)),hw.dateWorked),po.idPO,jb.jobNo) as 'OT Hours',
+ROUND(SUM((hw.hoursOT*wc.billingRateOT) + (hw.hours3*wc.billingRate3)) OVER (PARTITION BY YEAR(hw.dateWorked),DATEADD(DAY,IIF( DATEPART(DW,hw.dateWorked)=1,0, 7-(DATEPART(DW,hw.dateWorked)-1)),hw.dateWorked),po.idPO,jb.jobNo),2) 'OT Cost',
+ROUND(SUM(hw.hoursST*wc.billingRate1) OVER (PARTITION BY YEAR(hw.dateWorked),DATEADD(DAY,IIF( DATEPART(DW,hw.dateWorked)=1,0, 7-(DATEPART(DW,hw.dateWorked)-1)),hw.dateWorked),po.idPO,jb.jobNo),2) as 'ST Cost',
+0 as 'Total Exp',
+0 as 'Total Mat',
+0 as 'Total Rental 3rd Party',
+0 as 'Total In House',
+0 as 'Total Company Equipment',
+0 as 'Total Subcontract',
+0 as 'Total Tools',
+0 as 'Total Consumables',
+0 as 'Total Other'
+from hoursWorked as hw 
+inner join task as tk on tk.idAux = hw.idAux
+inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO
+inner join projectOrder as po on po.idPO = wo.idPO and po.jobNo = wo.jobNo
+inner join job as jb on jb.jobNo = po.jobNo 
+inner join workCode as wc on wc.idWorkCode = hw.idWorkCode and wc.jobNo = jb.jobNo
+where hw.dateWorked between @StartDate and @EndDate 
+UNION ALL
+
+select
+YEAR (exu.dateExpense) as 'Year',
+po.idPO	as 'PO',
+MONTH(exu.dateExpense) as 'Month',
+jb.jobNo as 'ClientID',
+0 as 'ST Hours',
+0 as 'OT Hours',
+0 as 'OT Cost',
+0 as 'ST Cost',
+exu.amount as 'Total Exp',
+0 as 'Total Mat',
+0 as 'Total Rental 3rd Party',
+0 as 'Total In House',
+0 as 'Total Company Equipment',
+0 as 'Total Subcontract',
+0 as 'Total Tools',
+0 as 'Total Consumables',
+0 as 'Total Other'
+from expensesUsed as exu 
+inner join expenses as ex on ex.idExpenses = exu.idExpense
+left join task as tk on tk.idAux = exu.idAux
+left join workOrder as wo on wo.idAuxWO = tk.idAuxWO
+left join projectOrder as po on po.idPO = wo.idPO and po.jobNo = wo.jobNo
+left join job as jb on jb.jobNo = po.jobNo 
+where exu.dateExpense between @StartDate and @EndDate 
+
+UNION ALL
+
+select
+YEAR (mau.dateMaterial) as 'Year',
+po.idPO	as 'PO',
+MONTH(mau.dateMaterial) as 'Month',
+jb.jobNo as 'ClientID',
+0 as 'ST Hours',
+0 as 'OT Hours',
+0 as 'OT Cost',
+0 as 'ST Cost',
+0 as 'Total Exu',
+IIF(subString(code,LEN(code),1) = 'M' , mau.amount,0) as 'Total Mat',
+IIF(subString(code,LEN(code),1) = 'D' , mau.amount,0) as 'Total Rental 3rd Party',
+IIF(subString(code,LEN(code),1) = 'E' , mau.amount,0) as 'Total In House',
+IIF(subString(code,LEN(code),1) = 'F' , mau.amount,0) as 'Total Company Equipment',
+IIF(subString(code,LEN(code),1) = 'S' , mau.amount,0) as 'Total Subcontract',
+IIF(subString(code,LEN(code),1) = 'T' , mau.amount,0) as 'Total Tools',
+IIF(subString(code,LEN(code),1) = 'V' , mau.amount,0) as 'Total Consumables',
+IIF(subString(code,LEN(code),1) = 'Y' , mau.amount,0) as 'Total Other'
+from materialUsed as mau 
+inner join material as ma on ma.idMaterial = mau.idMaterial
+left join task as tk on tk.idAux = mau.idAux
+left join workOrder as wo on wo.idAuxWO = tk.idAuxWO
+left join projectOrder as po on po.idPO = wo.idPO and po.jobNo = wo.jobNo
+left join job as jb on jb.jobNo = po.jobNo 
+where mau.dateMaterial between @StartDate and @EndDate 
+) AS T1
+ ORDER BY T1.[Month],T1.[PO],T1.[ClientID]"
+			Return _CostMth
+		End Get
+		Set(ByVal value As String)
+		End Set
+	End Property
+
 	Public Property Scaffold As String
 		Get
 			_Scaffold = "IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES where TABLE_SCHEMA = 'PBI' and TABLE_NAME = 'Scaffold')
@@ -1003,16 +1124,21 @@ BEGIN
 	drop table PBI.[ARInvoices]
 END
 
+IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES where TABLE_SCHEMA = 'PBI' and TABLE_NAME = 'ARInvoices')
+BEGIN 
+	drop table PBI.[ARInvoices]
+END
+select * INTO PBI.[ARInvoices] from (
 select
 jb.jobNo as 'ClientID' ,
 po.idPO as 'PO',
 inv.invoice as 'Invoice#',
 ISNULL((select sum(hw1.hoursST*wc1.billingRate1)+sum(hw1.hoursOT*wc1.billingRateOT)+sum(hw1.hours3*wc1.billingRate3) as 'Labor' from hoursWorked as hw1 
-	inner join workCode as wc1 on wc1.idWorkCode = hw1.idWorkCode
 	inner join task as tk1 on tk1.idAux = hw1.idAux 
 	inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO
 	inner join projectOrder as po1 on po1.idPO = wo1.idPO and wo1.jobNo = po1.jobNo
 	inner join job as jb1 on po1.jobNo = jb1.jobNo
+	inner join workCode as wc1 on wc1.idWorkCode = hw1.idWorkCode and jb1.jobNo = wc1.jobNo
 	inner join clients as cl1 on cl1.idClient = jb1.idClient
 where po1.idPO = po.idPO and jb1.jobNo = jb.jobNo and cl1.idClient = inv.idClient and hw1.dateWorked between inv.startDate and inv.FinalDate ),0)
 +
@@ -1037,12 +1163,13 @@ as 'Amount',
 CONVERT(nvarchar, inv.invoiceDate, 101) as 'Invoice Date',
 CONVERT(nvarchar, DATEADD(DAY, IIF(cl.payTerms='',0,CONVERT(INT, cl.payterms)), inv.invoiceDate),101)  as 'Due Date',
 DATEDIFF(DAY,DATEADD(DAY, IIF(cl.payTerms='',0,CONVERT(INT, cl.payterms)), inv.invoiceDate),GETDATE()) as 'Past Due Days'
-INTO PBI.[ARInvoices]
+
 from invoice as inv
 inner join projectOrder as po on po.idPO = inv.idPO
 inner join job as jb on jb.jobNo = po.jobNo
 inner join clients as cl on cl.idClient = inv.idClient and jb.idClient = cl.idClient
-where inv.invoiceDate between @StartDate and @EndDate and inv.[status] = 0 "
+where (inv.startDate between @StartDate and @EndDate or inv.FinalDate between @StartDate and @EndDate) and inv.[status] = 0
+ ) as T1 where T1.Amount > 0 "
 			Return _AR_Inovices
 		End Get
 		Set(value As String)

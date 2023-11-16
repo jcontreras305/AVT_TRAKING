@@ -227,7 +227,7 @@ where emp.idEmployee = '" + idEmployee + "' " + If(dateWorked = "", "", " and hw
             Dim id As Guid = Guid.NewGuid()
             Dim cmd As New SqlCommand("if (select count(*) from hoursWorked where idAux = '" + datos(2) + "' and dateWorked = '" + datos(0) + "' and idEmployee = '" + datos(1) + "') = 0
 begin 
-	insert into hoursWorked values ('" + id.ToString() + "',0,0,0,'" + datos(0) + "','" + datos(1) + "',NULL,'" + datos(2) + "','DAYS'," + datos(3) + ",'" + validaFechaParaSQl(Date.Today) + "')
+	insert into hoursWorked values ('" + id.ToString() + "',0,0,0,'" + datos(0) + "','" + datos(1) + "',NULL,'" + datos(2) + "','DAY'," + datos(3) + ",'" + validaFechaParaSQl(Date.Today) + "')
 end", conn)
             If cmd.ExecuteNonQuery >= 1 Then
                 'mtdJobs.UpdateTotalSpendTask(datos(5))
