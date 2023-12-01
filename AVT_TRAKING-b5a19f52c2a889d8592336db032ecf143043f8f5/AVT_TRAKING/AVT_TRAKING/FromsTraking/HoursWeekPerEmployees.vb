@@ -1347,6 +1347,7 @@ Public Class HoursWeekPerEmployees
             tblRecordsCopy.Columns.Add("hrEX")
             tblRecordsCopy.Columns.Add("schedule")
             tblRecordsCopy.Columns.Add("jobNo")
+            tblRecordsCopy.Columns.Add("dateAdd")
             Dim flag As Boolean = False
             For Each row As DataGridViewRow In tblRecordEmployee.SelectedRows
                 Dim idTask As String = ""
@@ -1360,7 +1361,7 @@ Public Class HoursWeekPerEmployees
                     idWC = arrayListWC(0).ItemArray(0)
                 End If
                 If Not (idTask = "" And idWC = "") Then
-                    tblRecordsCopy.Rows.Add(idTask, idWC, row.Cells("Date").Value, row.Cells("Hours ST").Value, row.Cells("Hours OT").Value, row.Cells("Hours 3").Value, row.Cells("Shift").Value, row.Cells("jobNo").Value.ToString())
+                    tblRecordsCopy.Rows.Add(idTask, idWC, row.Cells("Date").Value, row.Cells("Hours ST").Value, row.Cells("Hours OT").Value, row.Cells("Hours 3").Value, row.Cells("Shift").Value, row.Cells("jobNo").Value.ToString(), validaFechaParaSQl(Date.Today))
                     flag = True
                 End If
             Next

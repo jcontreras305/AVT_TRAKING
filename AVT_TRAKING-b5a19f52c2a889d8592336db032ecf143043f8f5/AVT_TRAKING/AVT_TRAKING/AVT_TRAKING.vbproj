@@ -284,12 +284,6 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="FromsTraking\EstMeters.vb" />
-    <Compile Include="FromsTraking\FindTagDismantle.Designer.vb">
-      <DependentUpon>FindTagDismantle.vb</DependentUpon>
-    </Compile>
-    <Compile Include="FromsTraking\FindTagDismantle.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="FromsTraking\FindEmployee.Designer.vb">
       <DependentUpon>FindEmployee.vb</DependentUpon>
     </Compile>
@@ -439,6 +433,12 @@
       <DependentUpon>SelectMaterial.vb</DependentUpon>
     </Compile>
     <Compile Include="FromsTraking\SelectMaterial.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FromsTraking\SelectProject.Designer.vb">
+      <DependentUpon>SelectProject.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FromsTraking\SelectProject.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="FromsTraking\TagsValidationTable.Designer.vb">
@@ -1096,9 +1096,6 @@
     <EmbeddedResource Include="FromsTraking\FindEmployee.resx">
       <DependentUpon>FindEmployee.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FromsTraking\FindTagDismantle.resx">
-      <DependentUpon>FindTagDismantle.vb</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="FromsTraking\FindTagScaffold.resx">
       <DependentUpon>FindTagScaffold.vb</DependentUpon>
     </EmbeddedResource>
@@ -1161,6 +1158,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FromsTraking\SelectMaterial.resx">
       <DependentUpon>SelectMaterial.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FromsTraking\SelectProject.resx">
+      <DependentUpon>SelectProject.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FromsTraking\TagsValidationTable.resx">
       <DependentUpon>TagsValidationTable.vb</DependentUpon>
