@@ -30,6 +30,10 @@ Partial Class SelectProject
         Me.PictureBox4 = New System.Windows.Forms.PictureBox()
         Me.txtFilterForAll = New System.Windows.Forms.TextBox()
         Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.Label4 = New System.Windows.Forms.Label()
+        Me.cmbProjects = New System.Windows.Forms.ComboBox()
+        Me.Label3 = New System.Windows.Forms.Label()
+        Me.cmbJobs = New System.Windows.Forms.ComboBox()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.cmbClients = New System.Windows.Forms.ComboBox()
         Me.TitleBar = New System.Windows.Forms.Panel()
@@ -39,10 +43,8 @@ Partial Class SelectProject
         Me.btnMaximize = New System.Windows.Forms.PictureBox()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.tblProject = New System.Windows.Forms.DataGridView()
-        Me.Label3 = New System.Windows.Forms.Label()
-        Me.cmbJobs = New System.Windows.Forms.ComboBox()
-        Me.Label4 = New System.Windows.Forms.Label()
-        Me.cmbProjects = New System.Windows.Forms.ComboBox()
+        Me.Panel4 = New System.Windows.Forms.Panel()
+        Me.btnSelectProject = New System.Windows.Forms.Button()
         Me.TableLayoutPanel1.SuspendLayout()
         Me.TableLayoutPanel2.SuspendLayout()
         Me.Panel3.SuspendLayout()
@@ -54,6 +56,7 @@ Partial Class SelectProject
         CType(Me.btnMaximize, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel1.SuspendLayout()
         CType(Me.tblProject, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.Panel4.SuspendLayout()
         Me.SuspendLayout()
         '
         'TableLayoutPanel1
@@ -64,6 +67,7 @@ Partial Class SelectProject
         Me.TableLayoutPanel1.Controls.Add(Me.TableLayoutPanel2, 0, 1)
         Me.TableLayoutPanel1.Controls.Add(Me.TitleBar, 0, 0)
         Me.TableLayoutPanel1.Controls.Add(Me.Panel1, 0, 2)
+        Me.TableLayoutPanel1.Controls.Add(Me.Panel4, 0, 3)
         Me.TableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.TableLayoutPanel1.Location = New System.Drawing.Point(0, 0)
         Me.TableLayoutPanel1.Margin = New System.Windows.Forms.Padding(4)
@@ -73,7 +77,7 @@ Partial Class SelectProject
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 111.0!))
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 55.0!))
-        Me.TableLayoutPanel1.Size = New System.Drawing.Size(577, 476)
+        Me.TableLayoutPanel1.Size = New System.Drawing.Size(593, 476)
         Me.TableLayoutPanel1.TabIndex = 8
         '
         'TableLayoutPanel2
@@ -88,7 +92,7 @@ Partial Class SelectProject
         Me.TableLayoutPanel2.RowCount = 2
         Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 58.09524!))
         Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 41.90476!))
-        Me.TableLayoutPanel2.Size = New System.Drawing.Size(571, 105)
+        Me.TableLayoutPanel2.Size = New System.Drawing.Size(587, 105)
         Me.TableLayoutPanel2.TabIndex = 6
         '
         'Panel3
@@ -102,15 +106,17 @@ Partial Class SelectProject
         Me.Panel3.Location = New System.Drawing.Point(4, 4)
         Me.Panel3.Margin = New System.Windows.Forms.Padding(4)
         Me.Panel3.Name = "Panel3"
-        Me.Panel3.Size = New System.Drawing.Size(563, 52)
+        Me.Panel3.Size = New System.Drawing.Size(579, 53)
         Me.Panel3.TabIndex = 7
         '
         'chbAll
         '
         Me.chbAll.AutoSize = True
+        Me.chbAll.Font = New System.Drawing.Font("Verdana", 7.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.chbAll.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.chbAll.Location = New System.Drawing.Point(7, 18)
         Me.chbAll.Name = "chbAll"
-        Me.chbAll.Size = New System.Drawing.Size(76, 21)
+        Me.chbAll.Size = New System.Drawing.Size(80, 21)
         Me.chbAll.TabIndex = 5
         Me.chbAll.Text = "Find All"
         Me.chbAll.UseVisualStyleBackColor = True
@@ -120,7 +126,7 @@ Partial Class SelectProject
         Me.lblFilterAll.AutoSize = True
         Me.lblFilterAll.Font = New System.Drawing.Font("Verdana", 7.8!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblFilterAll.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.lblFilterAll.Location = New System.Drawing.Point(126, 22)
+        Me.lblFilterAll.Location = New System.Drawing.Point(102, 21)
         Me.lblFilterAll.Name = "lblFilterAll"
         Me.lblFilterAll.Size = New System.Drawing.Size(91, 17)
         Me.lblFilterAll.TabIndex = 4
@@ -130,7 +136,7 @@ Partial Class SelectProject
         '
         Me.PictureBox4.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.PictureBox4.Image = Global.AVT_TRAKING.My.Resources.Resources._exit
-        Me.PictureBox4.Location = New System.Drawing.Point(503, 4)
+        Me.PictureBox4.Location = New System.Drawing.Point(519, 4)
         Me.PictureBox4.Margin = New System.Windows.Forms.Padding(4)
         Me.PictureBox4.Name = "PictureBox4"
         Me.PictureBox4.Size = New System.Drawing.Size(48, 41)
@@ -139,7 +145,7 @@ Partial Class SelectProject
         '
         'txtFilterForAll
         '
-        Me.txtFilterForAll.Location = New System.Drawing.Point(224, 20)
+        Me.txtFilterForAll.Location = New System.Drawing.Point(202, 19)
         Me.txtFilterForAll.Margin = New System.Windows.Forms.Padding(4)
         Me.txtFilterForAll.Name = "txtFilterForAll"
         Me.txtFilterForAll.Size = New System.Drawing.Size(201, 22)
@@ -154,10 +160,48 @@ Partial Class SelectProject
         Me.Panel2.Controls.Add(Me.Label2)
         Me.Panel2.Controls.Add(Me.cmbClients)
         Me.Panel2.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel2.Location = New System.Drawing.Point(3, 63)
+        Me.Panel2.Location = New System.Drawing.Point(3, 64)
         Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(565, 39)
+        Me.Panel2.Size = New System.Drawing.Size(581, 38)
         Me.Panel2.TabIndex = 8
+        '
+        'Label4
+        '
+        Me.Label4.AutoSize = True
+        Me.Label4.Font = New System.Drawing.Font("Verdana", 7.8!)
+        Me.Label4.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.Label4.Location = New System.Drawing.Point(380, 13)
+        Me.Label4.Name = "Label4"
+        Me.Label4.Size = New System.Drawing.Size(57, 17)
+        Me.Label4.TabIndex = 5
+        Me.Label4.Text = "Project"
+        '
+        'cmbProjects
+        '
+        Me.cmbProjects.FormattingEnabled = True
+        Me.cmbProjects.Location = New System.Drawing.Point(449, 9)
+        Me.cmbProjects.Name = "cmbProjects"
+        Me.cmbProjects.Size = New System.Drawing.Size(121, 24)
+        Me.cmbProjects.TabIndex = 4
+        '
+        'Label3
+        '
+        Me.Label3.AutoSize = True
+        Me.Label3.Font = New System.Drawing.Font("Verdana", 7.8!)
+        Me.Label3.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.Label3.Location = New System.Drawing.Point(192, 13)
+        Me.Label3.Name = "Label3"
+        Me.Label3.Size = New System.Drawing.Size(56, 17)
+        Me.Label3.TabIndex = 3
+        Me.Label3.Text = "Job No"
+        '
+        'cmbJobs
+        '
+        Me.cmbJobs.FormattingEnabled = True
+        Me.cmbJobs.Location = New System.Drawing.Point(252, 9)
+        Me.cmbJobs.Name = "cmbJobs"
+        Me.cmbJobs.Size = New System.Drawing.Size(121, 24)
+        Me.cmbJobs.TabIndex = 2
         '
         'Label2
         '
@@ -173,7 +217,7 @@ Partial Class SelectProject
         'cmbClients
         '
         Me.cmbClients.FormattingEnabled = True
-        Me.cmbClients.Location = New System.Drawing.Point(65, 10)
+        Me.cmbClients.Location = New System.Drawing.Point(64, 10)
         Me.cmbClients.Name = "cmbClients"
         Me.cmbClients.Size = New System.Drawing.Size(121, 24)
         Me.cmbClients.TabIndex = 0
@@ -189,7 +233,7 @@ Partial Class SelectProject
         Me.TitleBar.Location = New System.Drawing.Point(4, 4)
         Me.TitleBar.Margin = New System.Windows.Forms.Padding(4)
         Me.TitleBar.Name = "TitleBar"
-        Me.TitleBar.Size = New System.Drawing.Size(569, 47)
+        Me.TitleBar.Size = New System.Drawing.Size(585, 47)
         Me.TitleBar.TabIndex = 6
         '
         'Label1
@@ -208,7 +252,7 @@ Partial Class SelectProject
         '
         Me.PictureBox3.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.PictureBox3.Image = Global.AVT_TRAKING.My.Resources.Resources.minimize2
-        Me.PictureBox3.Location = New System.Drawing.Point(490, 4)
+        Me.PictureBox3.Location = New System.Drawing.Point(506, 4)
         Me.PictureBox3.Margin = New System.Windows.Forms.Padding(4)
         Me.PictureBox3.Name = "PictureBox3"
         Me.PictureBox3.Size = New System.Drawing.Size(36, 32)
@@ -219,7 +263,7 @@ Partial Class SelectProject
         '
         Me.btnRestore.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnRestore.Image = Global.AVT_TRAKING.My.Resources.Resources.restore2
-        Me.btnRestore.Location = New System.Drawing.Point(530, 2)
+        Me.btnRestore.Location = New System.Drawing.Point(546, 2)
         Me.btnRestore.Margin = New System.Windows.Forms.Padding(4)
         Me.btnRestore.Name = "btnRestore"
         Me.btnRestore.Size = New System.Drawing.Size(35, 32)
@@ -230,7 +274,7 @@ Partial Class SelectProject
         '
         Me.btnMaximize.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnMaximize.Image = Global.AVT_TRAKING.My.Resources.Resources.maximize2
-        Me.btnMaximize.Location = New System.Drawing.Point(530, 2)
+        Me.btnMaximize.Location = New System.Drawing.Point(546, 2)
         Me.btnMaximize.Margin = New System.Windows.Forms.Padding(4)
         Me.btnMaximize.Name = "btnMaximize"
         Me.btnMaximize.Size = New System.Drawing.Size(35, 32)
@@ -246,7 +290,7 @@ Partial Class SelectProject
         Me.Panel1.Location = New System.Drawing.Point(4, 170)
         Me.Panel1.Margin = New System.Windows.Forms.Padding(4)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(569, 247)
+        Me.Panel1.Size = New System.Drawing.Size(585, 247)
         Me.Panel1.TabIndex = 5
         '
         'tblProject
@@ -259,55 +303,43 @@ Partial Class SelectProject
         Me.tblProject.Location = New System.Drawing.Point(0, 0)
         Me.tblProject.Margin = New System.Windows.Forms.Padding(4)
         Me.tblProject.Name = "tblProject"
+        Me.tblProject.ReadOnly = True
         Me.tblProject.RowHeadersWidth = 51
         Me.tblProject.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.tblProject.Size = New System.Drawing.Size(569, 247)
+        Me.tblProject.Size = New System.Drawing.Size(585, 247)
         Me.tblProject.TabIndex = 4
         '
-        'Label3
+        'Panel4
         '
-        Me.Label3.AutoSize = True
-        Me.Label3.Font = New System.Drawing.Font("Verdana", 7.8!)
-        Me.Label3.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.Label3.Location = New System.Drawing.Point(192, 13)
-        Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(56, 17)
-        Me.Label3.TabIndex = 3
-        Me.Label3.Text = "Job No"
+        Me.Panel4.Controls.Add(Me.btnSelectProject)
+        Me.Panel4.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Panel4.Location = New System.Drawing.Point(3, 424)
+        Me.Panel4.Name = "Panel4"
+        Me.Panel4.Size = New System.Drawing.Size(587, 49)
+        Me.Panel4.TabIndex = 7
         '
-        'cmbJobs
+        'btnSelectProject
         '
-        Me.cmbJobs.FormattingEnabled = True
-        Me.cmbJobs.Location = New System.Drawing.Point(251, 9)
-        Me.cmbJobs.Name = "cmbJobs"
-        Me.cmbJobs.Size = New System.Drawing.Size(121, 24)
-        Me.cmbJobs.TabIndex = 2
-        '
-        'Label4
-        '
-        Me.Label4.AutoSize = True
-        Me.Label4.Font = New System.Drawing.Font("Verdana", 7.8!)
-        Me.Label4.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.Label4.Location = New System.Drawing.Point(378, 13)
-        Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(57, 17)
-        Me.Label4.TabIndex = 5
-        Me.Label4.Text = "Project"
-        '
-        'cmbProjects
-        '
-        Me.cmbProjects.FormattingEnabled = True
-        Me.cmbProjects.Location = New System.Drawing.Point(437, 9)
-        Me.cmbProjects.Name = "cmbProjects"
-        Me.cmbProjects.Size = New System.Drawing.Size(121, 24)
-        Me.cmbProjects.TabIndex = 4
+        Me.btnSelectProject.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnSelectProject.FlatAppearance.BorderSize = 0
+        Me.btnSelectProject.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnSelectProject.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.btnSelectProject.Image = Global.AVT_TRAKING.My.Resources.Resources._new
+        Me.btnSelectProject.Location = New System.Drawing.Point(447, 11)
+        Me.btnSelectProject.Name = "btnSelectProject"
+        Me.btnSelectProject.Size = New System.Drawing.Size(130, 32)
+        Me.btnSelectProject.TabIndex = 0
+        Me.btnSelectProject.Text = "Select Project"
+        Me.btnSelectProject.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
+        Me.btnSelectProject.UseVisualStyleBackColor = True
         '
         'SelectProject
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(577, 476)
+        Me.ClientSize = New System.Drawing.Size(593, 476)
         Me.Controls.Add(Me.TableLayoutPanel1)
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
         Me.Name = "SelectProject"
         Me.Text = "Find Project"
         Me.TableLayoutPanel1.ResumeLayout(False)
@@ -324,6 +356,7 @@ Partial Class SelectProject
         CType(Me.btnMaximize, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel1.ResumeLayout(False)
         CType(Me.tblProject, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.Panel4.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
@@ -349,4 +382,6 @@ Partial Class SelectProject
     Friend WithEvents cmbProjects As ComboBox
     Friend WithEvents Label3 As Label
     Friend WithEvents cmbJobs As ComboBox
+    Friend WithEvents Panel4 As Panel
+    Friend WithEvents btnSelectProject As Button
 End Class

@@ -64,7 +64,7 @@ Public Class Project_Porcentage
                 Dim arrayCL() As String = cmbClient.SelectedItem.ToString.Split(" ")
                 idClient = arrayCL(0)
                 jobNo = cmbJobNo.Items(cmbJobNo.SelectedIndex)
-                llenarComoboPOByClient(cmbProjectOrder, idClient, jobNo)
+                llenarComboPOByClient(cmbProjectOrder, idClient, jobNo)
                 cmbProjectOrder.SelectedIndex = -1
                 mtdPoPercent.selectProject(tblProjects, idClient, jobNo)
             Else

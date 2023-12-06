@@ -113,7 +113,7 @@ Module metodosGlobales
     ''' <param name="combo"></param>
     ''' <param name="numberClient"></param>
     ''' <returns>Retorna un True si no hubo problemas con la consulta</returns>
-    Public Function llenarComoboPOByClient(ByVal combo As ComboBox, ByVal numberClient As String, Optional jobNo As String = "") As Boolean
+    Public Function llenarComboPOByClient(ByVal combo As ComboBox, ByVal numberClient As String, Optional jobNo As String = "") As Boolean
         Try
             con.conectar()
             Dim cmd As New SqlCommand("select distinct 

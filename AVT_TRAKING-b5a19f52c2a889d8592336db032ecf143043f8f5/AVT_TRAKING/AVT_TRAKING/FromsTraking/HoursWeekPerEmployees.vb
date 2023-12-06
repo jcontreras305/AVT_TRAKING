@@ -42,6 +42,7 @@ Public Class HoursWeekPerEmployees
                 End If
             End While
         End If
+        btnPasteProject.Enabled = False
         txtFindFecha.Text = System.DateTime.Today.ToShortDateString()
         ''dtpFecha.Value = System.DateTime.Today
         'clnFindFecha.Visible = False
@@ -288,7 +289,17 @@ Public Class HoursWeekPerEmployees
 
     Dim flagFilaActual As String
 
-
+    Public Sub cmb_SelectedIndexChanguedExpenses(sender As Object, e As EventArgs)
+        Dim cmb As ComboBox = CType(sender, ComboBox)
+        If cmb.SelectedIndex >= 0 Then
+            Dim arrayPo() As String = cmb.Text.Split(" ")
+            Dim arrayRows() As DataRow = proyectTable.Select("project = '" + arrayPo(0) + "' and jobNo = '" + arrayPo(arrayPo.Length - 1) + "'")
+            If arrayRows.Length > 0 Then
+                tblExpenses.CurrentRow.Cells("Project").Value = cmb.Text
+                tblExpenses.CurrentRow.Cells("idAux").Value = arrayRows(0).ItemArray(0)
+            End If
+        End If
+    End Sub
     'evento para los combo declarados en cada celda
     Public Sub cmb_SelectedIndexChangued(sender As Object, e As EventArgs)
         Dim cmb As ComboBox = CType(sender, ComboBox)
@@ -564,8 +575,8 @@ Public Class HoursWeekPerEmployees
             If Not typecell = "System.Windows.Forms.DataGridViewTextBoxCell" Then
                 Dim cb As ComboBox = CType(e.Control, ComboBox)
                 If e.Control IsNot Nothing Then
-                    RemoveHandler cb.SelectedIndexChanged, AddressOf cmb_SelectedIndexChangued
-                    AddHandler cb.SelectedIndexChanged, AddressOf cmb_SelectedIndexChangued
+                    RemoveHandler cb.SelectedIndexChanged, AddressOf cmb_SelectedIndexChanguedExpenses
+                    AddHandler cb.SelectedIndexChanged, AddressOf cmb_SelectedIndexChanguedExpenses
                 End If
             End If
         End If
@@ -603,7 +614,7 @@ Public Class HoursWeekPerEmployees
     Private Sub tblExpenses_KeyPress(sender As Object, e As KeyPressEventArgs) Handles tblExpenses.KeyPress
         Try
             If Asc(e.KeyChar) = Keys.Enter Then
-                If recolectarDatosExpenses() Then
+                If recolectarDatosExpenses(tblExpenses.CurrentCell.RowIndex - 1) Then
                     cargarDatos(idEmpleado)
                     flagPressCellDateExpense = False
                 End If
@@ -679,17 +690,21 @@ Public Class HoursWeekPerEmployees
             '        Exit For
             '    End If
             'Next
-            Dim arrayCell() As String = tblExpenses.Rows(index).Cells("Project").Value.ToString.Split("   ")
-            Dim rowPO() As DataRow = proyectTable.Select("project = '" + arrayCell(0) + "' and jobNo = " + arrayCell(arrayCell.Length - 1))
-            If rowPO.Length > 0 Then
-                list.Add(rowPO(0).ItemArray(0))
+            If tblExpenses.Rows(index).Cells("idAux").Value Is DBNull.Value Then
+                Dim arrayCell() As String = tblExpenses.Rows(index).Cells("Project").Value.ToString.Split("   ")
+                Dim rowPO() As DataRow = proyectTable.Select("project = '" + arrayCell(0) + "' and jobNo = " + arrayCell(arrayCell.Length - 1))
+
+                If rowPO.Length > 0 Then
+                    list.Add(rowPO(0).ItemArray(0))
+                Else
+                    mensaje = If(mensaje = "", "Please choose a Proyect.", vbCrLf + " Please choose a Proyect")
+                End If
             Else
-                mensaje = If(mensaje = "", "Please choose a Proyect.", vbCrLf + " Please choose a Proyect")
+                list.Add(tblExpenses.Rows(index).Cells("idAux").Value)
             End If
         Else
             mensaje = If(mensaje = "", "Please choose a Proyect.", vbCrLf + " Please choose a Proyect")
         End If
-
         list.Add(idEmpleado)
 
         If mensaje = "" Then
@@ -1327,6 +1342,49 @@ Public Class HoursWeekPerEmployees
     Private Sub btnWornHours_Click(sender As Object, e As EventArgs) Handles btnWornHours.Click
         Dim wrongHours As New WrongHours
         wrongHours.ShowDialog()
+    End Sub
+
+    Private Sub tblRecordEmployee_KeyDown(sender As Object, e As KeyEventArgs) Handles tblRecordEmployee.KeyDown
+        If e.KeyCode = Keys.F1 And tblRecordEmployee.CurrentCell.ColumnIndex = 2 Then
+            Dim sp As New SelectProject
+            sp.ShowDialog()
+            tblRecordEmployee.CurrentRow.Cells("Project Description").Value = ProjectFind.ProjectDescription
+            tblRecordEmployee.CurrentRow.Cells("jobNo").Value = ProjectFind.JobNo
+            tblRecordEmployee.CurrentRow.Cells("idPO").Value = ProjectFind.PO
+            tblRecordEmployee.CurrentRow.Cells("Project").Value = ProjectFind.Project
+            btnPasteProject.Enabled = True
+            lblProjectPaste.Text = ProjectFind.JobNo & " " & ProjectFind.PO & " " & ProjectFind.Project
+            'MsgBox(ProjectFind.Project + " " + ProjectFind.JobNo + " " + ProjectFind.PO + " " + ProjectFind.clientName)
+        End If
+    End Sub
+
+
+    Private Sub tblExpenses_KeyDown(sender As Object, e As KeyEventArgs) Handles tblExpenses.KeyDown
+        If e.KeyCode = Keys.F1 And tblExpenses.CurrentCell.ColumnIndex = 2 Then
+            Dim sp As New SelectProject
+            sp.ShowDialog()
+            tblExpenses.CurrentRow.Cells("Project").Value = ProjectFind.JobNo & " " & ProjectFind.PO & " " & ProjectFind.Project
+            tblExpenses.CurrentRow.Cells("idAux").Value = ProjectFind.idAux
+            btnPasteProject.Enabled = True
+            lblProjectPaste.Text = ProjectFind.JobNo & " " & ProjectFind.PO & " " & ProjectFind.Project
+            'MsgBox(ProjectFind.Project + " " + ProjectFind.JobNo + " " + ProjectFind.PO + " " + ProjectFind.clientName)
+        End If
+    End Sub
+
+    Private Sub btnPasteProject_Click(sender As Object, e As EventArgs) Handles btnPasteProject.Click
+        If TabControl1.SelectedTab.Text = "Time Worked" And tblRecordEmployee.CurrentCell.ColumnIndex = 2 Then
+            tblRecordEmployee.CurrentRow.Cells("Project Description").Value = ProjectFind.ProjectDescription
+            tblRecordEmployee.CurrentRow.Cells("jobNo").Value = ProjectFind.JobNo
+            tblRecordEmployee.CurrentRow.Cells("idPO").Value = ProjectFind.PO
+            tblRecordEmployee.CurrentRow.Cells("Project").Value = ProjectFind.Project
+        ElseIf TabControl1.SelectedTab.Text = "Expenses" And tblExpenses.CurrentCell.ColumnIndex = 2 Then
+            tblExpenses.CurrentRow.Cells("Project").Value = ProjectFind.JobNo & " " & ProjectFind.PO & " " & ProjectFind.Project
+            tblExpenses.CurrentRow.Cells("idAux").Value = ProjectFind.idAux
+        End If
+    End Sub
+
+    Private Sub Panel4_Paint(sender As Object, e As PaintEventArgs) Handles Panel4.Paint
+
     End Sub
 
     Private Sub btnRefresh_Click(sender As Object, e As EventArgs) Handles btnRefresh.Click

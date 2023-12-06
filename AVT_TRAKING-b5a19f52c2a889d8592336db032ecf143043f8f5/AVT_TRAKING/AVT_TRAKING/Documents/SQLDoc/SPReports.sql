@@ -14,7 +14,9 @@ CREATE proc [dbo].[Client_Billings_Re_Cap_By_Project]
 @finaldate as date,
 @clientnum as int,
 @job as bigint,
-@all as bit
+@idPO as bigint,
+@allJob as bit,
+@allPO as bit
 as 
 begin
 
@@ -98,7 +100,8 @@ T2.Complete,T2.[Es-Hrs],T2.[Total Expenses],T2.[Total Material],T2.[Total Spend]
 		 from hoursWorked where idAux = ts.idAux)> 0 or (select sum(amount) 
 		 from expensesUsed where idAux=ts.idAux)> 0 or (select sum(amount)
 		 from materialUsed where idAux=ts.idAux)>0)
-		 and jb.jobNo like iif(@all=1,'%%',CONCAT('',@job,''))
+		 and jb.jobNo like iif(@allJob=1,'%%',CONCAT('',@job,''))
+		 and po.jobNo like iif(@allPO = 1 ,'%%',CONCAT('',@idPO,''))
 		)as T2
 		where T2.[Billings ST]<>0 OR T2.[Billings OT]<>0 OR T2.[Total Expenses]<>0 OR T2.[Total Material]<>0
 		order by t2.jobNo asc
@@ -3595,10 +3598,19 @@ pd.name ,
 ISNULL((select sum(pinc.quantity) from productComing as pinc 
 inner join incoming as inc on inc.ticketNum = pinc.ticketNum
 where inc.jobNo = jb.jobNo and pinc.idProduct = pj.idProduct),0) as 'Incoming', 
+
 ISNULL((select sum(pout.quantity) from productOutGoing as pout 
 inner join outgoing as outg on outg.ticketNum = outg.ticketNum
 where outg.jobNo = jb.jobNo and pout.idProduct = pj.idProduct),0) as 'Outgoing',
-ISNULL(pj.qty,0) as 'Inventory',
+
+ISNULL((select sum(pinc.quantity) from productComing as pinc 
+inner join incoming as inc on inc.ticketNum = pinc.ticketNum
+where inc.jobNo = jb.jobNo and pinc.idProduct = pj.idProduct),0)
+-
+ISNULL((select sum(pout.quantity) from productOutGoing as pout 
+inner join outgoing as outg on outg.ticketNum = outg.ticketNum
+where outg.jobNo = jb.jobNo and pout.idProduct = pj.idProduct),0)as 'Inventory',
+--ISNULL(pj.qty,0) as 'Inventory',
 ISNULL((select sum(pts.quantity) from productTotalScaffold as pts
 inner join scaffoldTraking as sc on sc.tag = pts.tag
 inner join task as tk on tk.idAux = sc.idAux 
@@ -3606,8 +3618,25 @@ inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO
 inner join projectOrder as po on po.idPO = wo.idPO and po.jobNo = wo.jobNo 
 inner join job as jb1 on jb1.jobNo = po.jobNo
 where jb1.jobNo = jb.jobNo and pts.idProduct = pj.idProduct),0) as 'OnRent',
-ISNULL(pd.quantity,0) as 'InYard',
+
+(ISNULL((select sum(pinc.quantity) from productComing as pinc 
+inner join incoming as inc on inc.ticketNum = pinc.ticketNum
+where inc.jobNo = jb.jobNo and pinc.idProduct = pj.idProduct),0)
+-
+ISNULL((select sum(pout.quantity) from productOutGoing as pout 
+inner join outgoing as outg on outg.ticketNum = outg.ticketNum
+where outg.jobNo = jb.jobNo and pout.idProduct = pj.idProduct),0))
+-
+ISNULL((select sum(pts.quantity) from productTotalScaffold as pts
+inner join scaffoldTraking as sc on sc.tag = pts.tag
+inner join task as tk on tk.idAux = sc.idAux 
+inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO
+inner join projectOrder as po on po.idPO = wo.idPO and po.jobNo = wo.jobNo 
+inner join job as jb1 on jb1.jobNo = po.jobNo
+where jb1.jobNo = jb.jobNo and pts.idProduct = pj.idProduct),0) as 'InYard',
+--ISNULL(pd.quantity,0) as 'InYard'
 pd.[weight] as 'Weight'
+
 from  productJob as pj  
 inner join product as pd on pd.idProduct = pj.idProduct 
 left join job as jb on jb.jobNo = pj.jobNo

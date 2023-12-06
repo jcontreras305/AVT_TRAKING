@@ -6,7 +6,7 @@ Public Class ReportInvoiceDetails
     Private Sub cmbClient_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbClient.SelectedIndexChanged
         Try
             Dim clientNum As String() = cmbClient.SelectedItem.ToString.Split(" ")
-            llenarComoboPOByClient(cmbPO, clientNum(0))
+            llenarComboPOByClient(cmbPO, clientNum(0))
         Catch ex As Exception
 
         End Try

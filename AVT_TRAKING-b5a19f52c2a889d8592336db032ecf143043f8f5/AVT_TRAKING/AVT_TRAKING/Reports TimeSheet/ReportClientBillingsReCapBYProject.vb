@@ -3,6 +3,7 @@ Imports System.Data.SqlClient
 
 Public Class ReportClientBillingsReCapBYProject
     Dim conection As New ConnectioDB
+    Dim clientId, JobNo, PO As String
     Private Sub PictureBox3_Click(sender As Object, e As EventArgs) Handles PictureBox3.Click
         Me.WindowState = FormWindowState.Minimized
     End Sub
@@ -44,7 +45,9 @@ Public Class ReportClientBillingsReCapBYProject
             reportTS.SetParameterValue("@finaldate", validaFechaParaSQl(dtpFinalDate.Value.Date))
             reportTS.SetParameterValue("@clientnum", idClient)
             reportTS.SetParameterValue("@job", If(cmbJob.SelectedItem IsNot Nothing, cmbJob.SelectedItem, 0))
-            reportTS.SetParameterValue("@all", If(chbAllJobs.Checked, 1, 0))
+            reportTS.SetParameterValue("@idPO", If(cmbPO.SelectedItem IsNot Nothing, cmbPO.SelectedItem, 0))
+            reportTS.SetParameterValue("@allJob", If(chbAllJobs.Checked, 1, 0))
+            reportTS.SetParameterValue("@allPO", If(chbAllPO.Checked, 1, 0))
             reportTS.SetParameterValue("@CompanyName", "brock")
             crvClientBillingsReCapBYProject.ReportSource = reportTS
         Else
@@ -59,6 +62,7 @@ Public Class ReportClientBillingsReCapBYProject
     Private Sub cmbClients_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbClients.SelectedIndexChanged
         If cmbClients.SelectedItem IsNot Nothing Then
             Dim array() As String = cmbClients.SelectedItem.ToString.Split(" ")
+            clientId = array(0)
             llenarComboJobsReports(cmbJob, array(0))
         End If
     End Sub
@@ -66,8 +70,27 @@ Public Class ReportClientBillingsReCapBYProject
     Private Sub chbAllJobs_CheckedChanged(sender As Object, e As EventArgs) Handles chbAllJobs.CheckedChanged
         If chbAllJobs.Checked Then
             cmbJob.Enabled = False
+            chbAllPO.Checked = True
         Else
             cmbJob.Enabled = True
         End If
     End Sub
+
+    Private Sub chbAllPO_CheckedChanged_1(sender As Object, e As EventArgs) Handles chbAllPO.CheckedChanged
+        If chbAllPO.Checked Then
+            cmbPO.Enabled = False
+        Else
+            cmbPO.Enabled = True
+        End If
+    End Sub
+
+    Private Sub cmbJob_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbJob.SelectedIndexChanged
+        If cmbJob.SelectedItem IsNot Nothing Then
+            JobNo = cmbJob.Items(cmbJob.SelectedIndex)
+            llenarComboPOByClient(cmbPO, clientId, JobNo)
+            cmbPO.Text = ""
+        End If
+    End Sub
+
+
 End Class
