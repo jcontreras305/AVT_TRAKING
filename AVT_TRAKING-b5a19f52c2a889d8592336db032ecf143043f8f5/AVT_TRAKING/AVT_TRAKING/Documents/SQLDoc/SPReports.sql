@@ -100,8 +100,8 @@ T2.Complete,T2.[Es-Hrs],T2.[Total Expenses],T2.[Total Material],T2.[Total Spend]
 		 from hoursWorked where idAux = ts.idAux)> 0 or (select sum(amount) 
 		 from expensesUsed where idAux=ts.idAux)> 0 or (select sum(amount)
 		 from materialUsed where idAux=ts.idAux)>0)
-		 and jb.jobNo like iif(@allJob=1,'%%',CONCAT('',@job,''))
-		 and po.jobNo like iif(@allPO = 1 ,'%%',CONCAT('',@idPO,''))
+		 and jb.jobNo like iif(@allJob=1,'%%',CONCAT('%',@job,'%'))
+		 and po.idPO like iif(@allPO = 1 ,'%%',CONCAT('%',@idPO,'%'))
 		)as T2
 		where T2.[Billings ST]<>0 OR T2.[Billings OT]<>0 OR T2.[Total Expenses]<>0 OR T2.[Total Material]<>0
 		order by t2.jobNo asc

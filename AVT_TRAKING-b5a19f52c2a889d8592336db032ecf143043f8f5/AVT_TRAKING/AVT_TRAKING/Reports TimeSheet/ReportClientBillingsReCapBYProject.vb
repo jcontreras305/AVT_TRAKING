@@ -44,8 +44,12 @@ Public Class ReportClientBillingsReCapBYProject
             reportTS.SetParameterValue("@startdate", validaFechaParaSQl(dtpInitialDate.Value.Date))
             reportTS.SetParameterValue("@finaldate", validaFechaParaSQl(dtpFinalDate.Value.Date))
             reportTS.SetParameterValue("@clientnum", idClient)
-            reportTS.SetParameterValue("@job", If(cmbJob.SelectedItem IsNot Nothing, cmbJob.SelectedItem, 0))
-            reportTS.SetParameterValue("@idPO", If(cmbPO.SelectedItem IsNot Nothing, cmbPO.SelectedItem, 0))
+            reportTS.SetParameterValue("@job", If(cmbJob.SelectedIndex >= 0, cmbJob.Items(cmbJob.SelectedIndex), 0))
+            If cmbPO.Items Is Nothing Then
+                reportTS.SetParameterValue("@idPO", 0)
+            Else
+                reportTS.SetParameterValue("@idPO", If(cmbPO.SelectedIndex >= 0, cmbPO.Items(cmbPO.SelectedIndex), 0))
+            End If
             reportTS.SetParameterValue("@allJob", If(chbAllJobs.Checked, 1, 0))
             reportTS.SetParameterValue("@allPO", If(chbAllPO.Checked, 1, 0))
             reportTS.SetParameterValue("@CompanyName", "brock")
@@ -64,13 +68,14 @@ Public Class ReportClientBillingsReCapBYProject
             Dim array() As String = cmbClients.SelectedItem.ToString.Split(" ")
             clientId = array(0)
             llenarComboJobsReports(cmbJob, array(0))
+            llenarComboPOByClient(cmbPO, array(0))
         End If
     End Sub
 
     Private Sub chbAllJobs_CheckedChanged(sender As Object, e As EventArgs) Handles chbAllJobs.CheckedChanged
         If chbAllJobs.Checked Then
             cmbJob.Enabled = False
-            chbAllPO.Checked = True
+            'chbAllPO.Checked = True
         Else
             cmbJob.Enabled = True
         End If

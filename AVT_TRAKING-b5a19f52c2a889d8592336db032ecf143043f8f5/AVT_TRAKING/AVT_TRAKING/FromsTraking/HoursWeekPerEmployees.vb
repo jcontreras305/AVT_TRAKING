@@ -16,6 +16,10 @@ Public Class HoursWeekPerEmployees
     Dim _dtpSemanal As New DateTimePicker
     Dim _rectangulo As New Rectangle
     Private Sub HoursWeekPeerEmployees_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        'Me.ToolTip1.IsBalloon = True
+        'Me.ToolTip1.InitialDelay = 5000
+        'Me.ToolTip1.SetToolTip(btnPasteProject, "Press F1 select the Project")
+
         selectMyCompanyImage(pcbCompany)
         pcbCompany.SizeMode = PictureBoxSizeMode.StretchImage
         mtdHPW.llenarEmpleadosCombo(cmbEmpleados, idsEmployees)
@@ -1385,6 +1389,16 @@ Public Class HoursWeekPerEmployees
 
     Private Sub Panel4_Paint(sender As Object, e As PaintEventArgs) Handles Panel4.Paint
 
+    End Sub
+
+    Private Sub btnPasteProject_MouseHover(sender As Object, e As EventArgs) Handles btnPasteProject.MouseHover
+        ToolTip1.InitialDelay = 5000
+        ToolTip1.SetToolTip(btnPasteProject, "Press F1 to select a new Project")
+    End Sub
+
+    Private Sub lblProjectPaste_MouseHover(sender As Object, e As EventArgs) Handles lblProjectPaste.MouseHover
+        ToolTip1.InitialDelay = 5000
+        ToolTip1.SetToolTip(btnPasteProject, "Press F1 to select a new Project")
     End Sub
 
     Private Sub btnRefresh_Click(sender As Object, e As EventArgs) Handles btnRefresh.Click

@@ -22,7 +22,8 @@ Partial Class HoursWeekPerEmployees
     'No lo modifique con el editor de código.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Me.components = New System.ComponentModel.Container()
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(HoursWeekPerEmployees))
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.pcbCompany = New System.Windows.Forms.PictureBox()
@@ -91,12 +92,13 @@ Partial Class HoursWeekPerEmployees
         Me.Label9 = New System.Windows.Forms.Label()
         Me.Label8 = New System.Windows.Forms.Label()
         Me.Panel4 = New System.Windows.Forms.Panel()
+        Me.lblProjectPaste = New System.Windows.Forms.Label()
+        Me.btnPasteProject = New System.Windows.Forms.Button()
         Me.btnRefresh = New System.Windows.Forms.Button()
         Me.btnDelete = New System.Windows.Forms.Button()
         Me.btnInsert = New System.Windows.Forms.Button()
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
-        Me.btnPasteProject = New System.Windows.Forms.Button()
-        Me.lblProjectPaste = New System.Windows.Forms.Label()
+        Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         Me.Panel1.SuspendLayout()
         CType(Me.pcbCompany, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -302,14 +304,14 @@ Partial Class HoursWeekPerEmployees
         Me.tblHourPeerDay.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.tblHourPeerDay.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.tblHourPeerDay.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.clmWeekending, Me.clmEployeeName, Me.clmTotalST, Me.clmTotalOT, Me.clmTotalHours3, Me.clmMonST, Me.clmMonOT, Me.clmTueST, Me.clmTueOT, Me.clmWedST, Me.clmWedOT, Me.clmThuST, Me.clmThuOT, Me.clmFriST, Me.clmFriOT, Me.clmSatST, Me.clmSatOT, Me.clmSunST, Me.clmSunOT})
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.ControlDark
-        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.tblHourPeerDay.DefaultCellStyle = DataGridViewCellStyle2
+        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.ControlDark
+        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.tblHourPeerDay.DefaultCellStyle = DataGridViewCellStyle1
         Me.tblHourPeerDay.Dock = System.Windows.Forms.DockStyle.Fill
         Me.tblHourPeerDay.Location = New System.Drawing.Point(4, 159)
         Me.tblHourPeerDay.Margin = New System.Windows.Forms.Padding(4)
@@ -913,6 +915,34 @@ Partial Class HoursWeekPerEmployees
         Me.Panel4.Size = New System.Drawing.Size(1592, 61)
         Me.Panel4.TabIndex = 2
         '
+        'lblProjectPaste
+        '
+        Me.lblProjectPaste.AutoSize = True
+        Me.lblProjectPaste.Location = New System.Drawing.Point(100, 22)
+        Me.lblProjectPaste.MaximumSize = New System.Drawing.Size(400, 17)
+        Me.lblProjectPaste.Name = "lblProjectPaste"
+        Me.lblProjectPaste.Size = New System.Drawing.Size(17, 17)
+        Me.lblProjectPaste.TabIndex = 28
+        Me.lblProjectPaste.Text = "0"
+        '
+        'btnPasteProject
+        '
+        Me.btnPasteProject.FlatAppearance.BorderSize = 0
+        Me.btnPasteProject.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(58, Byte), Integer), CType(CType(115, Byte), Integer))
+        Me.btnPasteProject.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnPasteProject.Font = New System.Drawing.Font("Verdana", 7.0!, System.Drawing.FontStyle.Bold)
+        Me.btnPasteProject.Image = Global.AVT_TRAKING.My.Resources.Resources.click
+        Me.btnPasteProject.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnPasteProject.Location = New System.Drawing.Point(8, 6)
+        Me.btnPasteProject.Margin = New System.Windows.Forms.Padding(4)
+        Me.btnPasteProject.Name = "btnPasteProject"
+        Me.btnPasteProject.Size = New System.Drawing.Size(85, 49)
+        Me.btnPasteProject.TabIndex = 27
+        Me.btnPasteProject.Text = "WO:"
+        Me.btnPasteProject.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.btnPasteProject.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
+        Me.btnPasteProject.UseVisualStyleBackColor = True
+        '
         'btnRefresh
         '
         Me.btnRefresh.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
@@ -989,34 +1019,6 @@ Partial Class HoursWeekPerEmployees
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 69.0!))
         Me.TableLayoutPanel1.Size = New System.Drawing.Size(1600, 738)
         Me.TableLayoutPanel1.TabIndex = 3
-        '
-        'btnPasteProject
-        '
-        Me.btnPasteProject.FlatAppearance.BorderSize = 0
-        Me.btnPasteProject.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(58, Byte), Integer), CType(CType(115, Byte), Integer))
-        Me.btnPasteProject.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnPasteProject.Font = New System.Drawing.Font("Verdana", 7.0!, System.Drawing.FontStyle.Bold)
-        Me.btnPasteProject.Image = Global.AVT_TRAKING.My.Resources.Resources.click
-        Me.btnPasteProject.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnPasteProject.Location = New System.Drawing.Point(8, 6)
-        Me.btnPasteProject.Margin = New System.Windows.Forms.Padding(4)
-        Me.btnPasteProject.Name = "btnPasteProject"
-        Me.btnPasteProject.Size = New System.Drawing.Size(85, 49)
-        Me.btnPasteProject.TabIndex = 27
-        Me.btnPasteProject.Text = "WO:"
-        Me.btnPasteProject.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.btnPasteProject.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
-        Me.btnPasteProject.UseVisualStyleBackColor = True
-        '
-        'lblProjectPaste
-        '
-        Me.lblProjectPaste.AutoSize = True
-        Me.lblProjectPaste.Location = New System.Drawing.Point(100, 22)
-        Me.lblProjectPaste.MaximumSize = New System.Drawing.Size(400, 17)
-        Me.lblProjectPaste.Name = "lblProjectPaste"
-        Me.lblProjectPaste.Size = New System.Drawing.Size(17, 17)
-        Me.lblProjectPaste.TabIndex = 28
-        Me.lblProjectPaste.Text = "0"
         '
         'HoursWeekPerEmployees
         '
@@ -1125,4 +1127,5 @@ Partial Class HoursWeekPerEmployees
     Friend WithEvents btnWornHours As Button
     Friend WithEvents btnPasteProject As Button
     Friend WithEvents lblProjectPaste As Label
+    Friend WithEvents ToolTip1 As ToolTip
 End Class
