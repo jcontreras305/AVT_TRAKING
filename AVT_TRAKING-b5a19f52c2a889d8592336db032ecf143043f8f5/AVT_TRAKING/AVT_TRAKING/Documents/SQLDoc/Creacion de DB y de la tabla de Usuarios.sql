@@ -747,6 +747,24 @@ GO
 --##################  TABLA DE EXPENSES ####################################################
 --##########################################################################################
 
+create table expensesJobs (
+	idExpenses varchar(36) not null,
+	jobNo  bigint not null,
+	Category varchar(12),
+	PayItemType varchar(30),
+	WorkType varchar(30),
+	CostCode varchar(30),
+	CustomerPositionID varchar(30),
+	CustomerJobPositionDescription varchar(30),
+	CBSFullNumber varchar(30),
+	skillType varchar(100)
+ )
+go
+
+--##########################################################################################
+--##################  TABLA DE EXPENSES ####################################################
+--##########################################################################################
+
 create table expenses (
 	idExpenses varchar(36) primary key not null,
 	expenseCode varchar(36) not null,
@@ -2656,6 +2674,18 @@ GO
 ALTER TABLE [dbo].[existences]  WITH CHECK ADD  CONSTRAINT [fk_idDM_existenece] FOREIGN KEY([idDM])
 REFERENCES [dbo].[detalleMaterial] ([idDM])
 GO
+
+--##########################################################################################
+--##################  FOREIG KEYS EXPENSES USED ############################################
+--##########################################################################################
+
+ALTER TABLE expensesJobs WITH CHECK ADD CONSTRAINT PK_idExpenses_jobNo_expensesJObs
+PRIMARY KEY (idExpenses,jobNo)
+go
+
+ALTER TABLE expensesJobs WITH CHECK ADD CONSTRAINT fk_idExpenses_jobNo_expenesesJobs
+FOREIGN KEY (idExpenses,jobNo) REFERENCES expensesJobs(idExpenses,jobNo)
+go
 
 --##########################################################################################
 --##################  FOREIG KEYS EXPENSES USED ############################################
@@ -4594,23 +4624,48 @@ GO
 --end
 --go
 
-----| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-----| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-----V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V
 ----###############################################################################################
 ----########### CAMBIOS PARA AGREGAR FECHAS EN HOURSWORKED Y EXPENSESUSED #########################
 ----###############################################################################################
 
-alter table hoursWorked 
-add dayInserted  date
-go
+--alter table hoursWorked 
+--add dayInserted  date
+--go
 
-update hoursWorked set dayInserted = DATEADD (dd,iif(DATEPART (dw, dateWorked)=1,0,8-(DATEPART (dw, dateWorked))),dateWorked)
-go
+--update hoursWorked set dayInserted = DATEADD (dd,iif(DATEPART (dw, dateWorked)=1,0,8-(DATEPART (dw, dateWorked))),dateWorked)
+--go
 
   
-alter table expensesUsed 
-add dayInserted Date
+--alter table expensesUsed 
+--add dayInserted Date
+--go
+
+--update expensesUsed set dayInserted = DATEADD (dd,iif(DATEPART (dw, dateExpense)=1,0,8-(DATEPART (dw, dateExpense))),dateExpense) 
+----| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
+----| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
+----V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V
+----###############################################################################################
+----########### CAMBIOS PARA AGREGAR LA TABLA DE EXPENSES CON JOBS ################################
+----###############################################################################################
+
+create table expensesJobs (
+	idExpenses varchar(36) not null,
+	jobNo  bigint not null,
+	Category varchar(12),
+	PayItemType varchar(30),
+	WorkType varchar(30),
+	CostCode varchar(30),
+	CustomerPositionID varchar(30),
+	CustomerJobPositionDescription varchar(30),
+	CBSFullNumber varchar(30),
+	skillType varchar(100)
+ )
 go
 
-update expensesUsed set dayInserted = DATEADD (dd,iif(DATEPART (dw, dateExpense)=1,0,8-(DATEPART (dw, dateExpense))),dateExpense) 
+ALTER TABLE expensesJobs WITH CHECK ADD CONSTRAINT PK_idExpenses_jobNo_expensesJObs
+PRIMARY KEY (idExpenses,jobNo)
+go
+
+ALTER TABLE expensesJobs WITH CHECK ADD CONSTRAINT fk_idExpenses_jobNo_expenesesJobs
+FOREIGN KEY (idExpenses,jobNo) REFERENCES expensesJobs(idExpenses,jobNo)
+go

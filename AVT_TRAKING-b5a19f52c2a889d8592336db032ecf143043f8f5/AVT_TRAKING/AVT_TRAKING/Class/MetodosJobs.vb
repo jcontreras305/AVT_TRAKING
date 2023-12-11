@@ -202,8 +202,145 @@ end")
         End Try
         desconectar()
     End Sub
+    '########################################################################################################################
+    '############  METODOS PARA EXPENCES JOBS ###############################################################################
+    '########################################################################################################################
+    Public Function llenarComboExpenses(ByVal combo As ComboBox) As Boolean
+        Try
+            conectar()
+            Dim cmd As New SqlCommand("select [idExpenses],[expenseCode],[description] from expenses", conn) '
+            Dim dr As SqlDataReader = cmd.ExecuteReader()
+            combo.Items.Clear()
+            While dr.Read()
+                combo.Items.Add(CStr(dr("expenseCode")))
+            End While
+            dr.Close()
+            Return True
+        Catch ex As Exception
+            MsgBox(ex.Message)
+            Return False
+        Finally
+            desconectar()
+        End Try
+    End Function
 
+    Public Function selectExpensesByClient(ByVal tbl As DataGridView, Optional clientNum As String = "") As Boolean
+        Try
+            conectar()
+            Dim cmd As New SqlCommand("
+select cl.numberClient, jb.jobNo ,ex.[expenseCode] as  'Expense',expj.[Category],expj.[PayItemType] as 'Pay Item Type',expj.[WorkType] as 'Work Type',expj.[CostCode] as 'Cost Code',expj.[CustomerPositionID] as 'Customer Postion ID',expj.[CustomerJobPositionDescription] as 'Customer Job Position Description',expj.[CBSFullNumber] as 'CBS Full Number',expj.[skillType]  as 'Skill Type'from expensesJobs as expj inner join expenses as ex on expj.idExpenses = ex.idExpenses
+inner join job as jb on expj.jobNo=  jb.jobNo
+inner join clients as cl on cl.idClient = jb.idClient" + If(clientNum = "", "", " where cl.numberClient = " + clientNum), conn)
+            If cmd.ExecuteNonQuery Then
+                Dim da As New SqlDataAdapter(cmd)
+                Dim dt As New DataTable
+                da.Fill(dt)
+                tbl.DataSource = dt
+                tbl.Columns(0).Visible = False
+                Return True
+            Else
+                Return False
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message)
+            Return False
+        Finally
+            desconectar()
+        End Try
+    End Function
 
+    Public Function insertarExpenseJob(ByVal expCode As String, ByVal jobNo As String, ByVal datos() As String, Optional tran As SqlTransaction = Nothing, Optional connection As SqlConnection = Nothing)
+        Try
+            conectar()
+            Dim cmd As New SqlCommand("if (select COUNT(*) from expensesJobs where jobNo = " + jobNo + " and idExpenses = (select top 1 idExpenses from expenses where expenseCode = '" + expCode + "')) =0 
+begin
+	insert into expensesJobs values ((select top 1 idExpenses from expenses where expenseCode = '" + expCode + "')" + "," + jobNo + ",'" + datos(0) + "','" + datos(1) + "','" + datos(2) + "','" + datos(3) + "','" + datos(4) + "','" + datos(5) + "','" + datos(6) + "','" + datos(7) + "')
+end")
+            'cmd.Connection = conn
+            If tran IsNot Nothing Then 'son varios 
+                cmd.Connection = connection
+                cmd.Transaction = tran
+            Else
+                cmd.Connection = conn
+            End If
+            If cmd.ExecuteNonQuery > 0 Then
+                If tran Is Nothing Then 'solo es uno 
+                    MsgBox("Succesfull")
+                End If
+                Return True
+            Else
+                MsgBox("Error:Is posible that the Expense Code was inserted with this Job No")
+                Return False
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message())
+            Return False
+        Finally
+            desconectar()
+        End Try
+    End Function
+    Public Function updateExpenseJob(ByVal expCode As String, ByVal jobNo As String, ByVal datos() As String, Optional tran As SqlTransaction = Nothing, Optional connection As SqlConnection = Nothing)
+        Try
+            conectar()
+            Dim cmd As New SqlCommand("if (select COUNT(*) from expensesJobs where jobNo = " + jobNo + " and idExpenses = (select top 1 idExpenses from expenses where expenseCode = '" + expCode + "')) =1 
+begin
+	update expensesJobs set Category = '" + datos(0) + "',PayItemType='" + datos(0) + "',WorkType='" + datos(0) + "',CostCode='" + datos(0) + "',CustomerPositionID='" + datos(0) + "',CustomerJobPositionDescription='" + datos(0) + "',CBSFullNumber='" + datos(0) + "',skillType='" + datos(0) + "'
+	 where jobNo = " + jobNo + " and idExpenses = (select top 1 idExpenses from expenses where expenseCode = '" + expCode + "')
+end")
+            cmd.Connection = conn
+            If tran IsNot Nothing Then 'son varios 
+                cmd.Connection = connection
+                cmd.Transaction = tran
+            Else
+                cmd.Connection = conn
+            End If
+            If cmd.ExecuteNonQuery > 0 Then
+                If tran Is Nothing Then 'solo es uno 
+                    MsgBox("Succesfull")
+                End If
+                Return True
+            Else
+                MsgBox("Error:Is not posible to update the Expense.")
+                Return False
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message())
+            Return False
+        Finally
+            desconectar()
+        End Try
+    End Function
+    Public Function deleteExpenseJob(ByVal expCode As String, ByVal jobNo As String, Optional tran As SqlTransaction = Nothing, Optional connection As SqlConnection = Nothing)
+        Try
+            conectar()
+            Dim cmd As New SqlCommand("if (select COUNT(*) from expensesJobs where jobNo = " + jobNo + " and idExpenses = (select top 1 idExpenses from expenses where expenseCode = '" + expCode + "')) =1 
+begin
+	delete from expensesJobs where jobNo = " + jobNo + " and idExpenses = (select top 1 idExpenses from expenses where expenseCode = '" + expCode + "')
+end")
+
+            If tran IsNot Nothing Then 'son varios 
+                cmd.Connection = connection
+                cmd.Transaction = tran
+            Else
+                cmd.Connection = conn
+            End If
+            If cmd.ExecuteNonQuery > 0 Then
+                If tran Is Nothing Then 'solo es uno 
+                    MsgBox("Successful")
+                End If
+
+                Return True
+            Else
+                MsgBox("Error:Is not posible to delete the Expense.")
+                Return False
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message())
+            Return False
+        Finally
+            desconectar()
+        End Try
+    End Function
     '########################################################################################################################
     '############  METODOS PARA PROYECTOS ###################################################################################
     '########################################################################################################################

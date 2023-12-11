@@ -76,6 +76,7 @@ Public Class ReportFieldForce
         Dim ruta As String = ""
         Dim ApExcel = New Microsoft.Office.Interop.Excel.Application
         Dim libro = ApExcel.Workbooks.Add()
+        Dim lastRow As Integer = 1
         lblMesage.Text = "Message: " + "Preparing excel field..."
         Try
             Dim Hoja1 = libro.Worksheets(1)
@@ -88,18 +89,29 @@ Public Class ReportFieldForce
                 End With
                 .BorderAround(Microsoft.Office.Interop.Excel.XlLineStyle.xlContinuous, Microsoft.Office.Interop.Excel.XlBorderWeight.xlThin, Microsoft.Office.Interop.Excel.XlColorIndex.xlColorIndexAutomatic, Color.Green) ' Formato de borde de celda
             End With
+
             Dim countColum As Integer = 1
             For Each colm As DataGridViewColumn In tblFieldForce.Columns
                 Hoja1.Cells(1, countColum) = colm.Name.ToString()
                 countColum += 1
             Next
             For Each row As DataGridViewRow In tblFieldForce.Rows
+                lastRow += 1
                 For Each cell As DataGridViewCell In row.Cells
                     Hoja1.Cells(row.Index + 2, cell.ColumnIndex + 1) = cell.Value.ToString()
+                    'If cell.ColumnIndex = 2 Or cell.ColumnIndex = 4 Then
+                    '    Hoja1.Cells(row.Index + 2, cell.ColumnIndex + 1).Style.NumberFormat = "#####"
+                    'ElseIf cell.ColumnIndex = 8 Then
+                    '    Hoja1.Cells(row.Index + 2, cell.ColumnIndex + 1).Style.NumberFormat = "mm/dd/yyyy"
+                    'Else
+                    '    Hoja1.Cells(row.Index + 2, cell.ColumnIndex + 1).Style.NumberFormat = "0"
+                    'End If
                     lblMesage.Text = "Message: " + "Writing row (" + row.Index.ToString() + ")..."
                 Next
             Next
             lblMesage.Text = "Message: " + "Preparing excel to save..."
+            Hoja1.Range("A1:AA1").EntireColumn.AutoFit()
+            'Hoja1.Range("C2:C" + lastRow).Style.NumberFormat = "0"
             Hoja1.Name = "TS_Upload"
             Dim opFile As New SaveFileDialog
             opFile.DefaultExt = "xlsx"
@@ -115,6 +127,7 @@ Public Class ReportFieldForce
                 End If
             End If
         Catch ex As Exception
+            MsgBox(ex.Message)
         Finally
             libro.Close()
             NAR(libro)
@@ -138,7 +151,6 @@ Public Class mtdReportFieldForce
 declare @endDate as date = '" + validaFechaParaSQl(endDate) + "'
 declare @numclient as int = " + clientNum + "
 declare @jobNo as bigint = " + If(jobNo = "", "''", jobNo) + "
-
 select 
 (select T3.[Row] from 
 		(select ROW_NUMBER() OVER(ORDER BY idWO) as 'Row', *  from 
@@ -165,7 +177,7 @@ select
 	tk.task as 'Task',
 	'' as 'Sub Task',
 	wc.Category as 'Category',
-	hw.dateWorked as 'Time Sheet Date',
+	CONVERT(varchar, hw.dateWorked,101) as 'Time Sheet Date',
 	hw.schedule as 'Shift',
 	po.WBS as 'WBS',
 	wc.PayItemType as 'Pay Item Type',
@@ -175,9 +187,9 @@ select
 	wc.CustomerPositionID as 'Customer Position ID',
 	wc.CustomerJobPositionDescription as 'Customer Job Position Description',
 	wc.CBSFullNumber as 'CBS Full Number',
-	SUM (hw.hoursST) OVER(PARTITION BY jb.postingProject , po.IdPO , wo.idWO , tk.task, hw.dateWorked,hw.schedule,em.numberEmploye,wc.CBSFullNumber)  as 'Allocation ST',
-	SUM (hw.hoursOT) OVER(PARTITION BY jb.postingProject , po.IdPO , wo.idWO , tk.task, hw.dateWorked,hw.schedule,em.numberEmploye,wc.CBSFullNumber)  as 'Allocation OT',
-	IIF (SUM (hw.hours3) OVER(PARTITION BY jb.postingProject , po.IdPO , wo.idWO , tk.task, hw.dateWorked,hw.schedule,em.numberEmploye,wc.CBSFullNumber)=0,'',CONCAT('',SUM (hw.hours3) OVER(PARTITION BY jb.postingProject , po.IdPO , wo.idWO , tk.task, hw.dateWorked,hw.schedule,em.numberEmploye,wc.CBSFullNumber))) as 'Allocation DT',
+	SUM (hw.hoursST) OVER(PARTITION BY jb.postingProject , po.IdPO , wo.idWO , tk.task, CONVERT(varchar, hw.dateWorked,101),hw.schedule,em.numberEmploye,wc.CBSFullNumber)  as 'Allocation ST',
+	SUM (hw.hoursOT) OVER(PARTITION BY jb.postingProject , po.IdPO , wo.idWO , tk.task, CONVERT(varchar, hw.dateWorked,101),hw.schedule,em.numberEmploye,wc.CBSFullNumber)  as 'Allocation OT',
+	IIF (SUM (hw.hours3) OVER(PARTITION BY jb.postingProject , po.IdPO , wo.idWO , tk.task, CONVERT(varchar, hw.dateWorked,101),hw.schedule,em.numberEmploye,wc.CBSFullNumber)=0,'',CONCAT('',SUM (hw.hours3) OVER(PARTITION BY jb.postingProject , po.IdPO , wo.idWO , tk.task, hw.dateWorked,hw.schedule,em.numberEmploye,wc.CBSFullNumber))) as 'Allocation DT',
 	'' as 'IsSubsistence',
     '' as 'Equipment ID',
 	'' as 'Customer Equipment ID',
@@ -204,17 +216,17 @@ select
 	wo.idWO as 'Work Order',
 	tk.task as 'Task',
 	'' as 'Sub Task',
-	'' as 'Category',
-	exu.dateExpense as 'Time Sheet Date',
+	isnull((select [Category] from expensesJobs as exj where exj.idExpenses = exu.idExpense and exj.jobNo= jb.jobNo),'') as 'Category',
+	CONVERT(varchar,exu.dateExpense,101) as 'Time Sheet Date',
 	'Day' as 'Shift',
 	po.WBS as 'WBS',
-	'' as 'Pay Item Type',
-	'' as 'Work Type',
+	isnull((select [PayItemType] from expensesJobs as exj where exj.idExpenses = exu.idExpense and exj.jobNo= jb.jobNo),'') as 'Pay Item Type',
+	isnull((select [WorkType] from expensesJobs as exj where exj.idExpenses = exu.idExpense and exj.jobNo= jb.jobNo),'') as 'Work Type',
 	em.numberEmploye as 'Brock ID',
-	'' as 'Cost Code',
-	'' as 'Customer Position ID',
-	'' as 'Customer Job Position Description',
-	'' as 'CBS Full Number'	,
+	isnull((select [CostCode] from expensesJobs as exj where exj.idExpenses = exu.idExpense and exj.jobNo= jb.jobNo),'') as 'Cost Code',
+	isnull((select [CustomerPositionID] from expensesJobs as exj where exj.idExpenses = exu.idExpense and exj.jobNo= jb.jobNo),'') as 'Customer Position ID',
+	isnull((select [CustomerJobPositionDescription] from expensesJobs as exj where exj.idExpenses = exu.idExpense and exj.jobNo= jb.jobNo),'') as 'Customer Job Position Description',
+	isnull((select [CBSFullNumber] from expensesJobs as exj where exj.idExpenses = exu.idExpense and exj.jobNo= jb.jobNo),'') as 'CBS Full Number'	,
 	0 as 'Allocation ST',
 	0 as 'Allocation OT',
 	'' as 'Allocation DT',
@@ -237,6 +249,7 @@ where exu.dateExpense between @startDate and @endDate
 
 )as T1
 order by [TS Gruping] asc
+
 ", conn)
             If cmd.ExecuteNonQuery Then
                 Dim da As New SqlDataAdapter(cmd)
