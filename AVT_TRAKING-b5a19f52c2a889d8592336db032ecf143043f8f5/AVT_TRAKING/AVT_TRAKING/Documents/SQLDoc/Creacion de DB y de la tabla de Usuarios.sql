@@ -396,7 +396,7 @@ create table employees(
 	lastName varchar(25),
 	middleName varchar(25),
 	socialNumber varchar(14),
-	SAPNumber int,
+	SAPNumber varchar(13),
 	photo image,
 	idHomeAdress varchar(36),
 	idContact varchar(36),
@@ -4648,24 +4648,3 @@ GO
 ----########### CAMBIOS PARA AGREGAR LA TABLA DE EXPENSES CON JOBS ################################
 ----###############################################################################################
 
-create table expensesJobs (
-	idExpenses varchar(36) not null,
-	jobNo  bigint not null,
-	Category varchar(12),
-	PayItemType varchar(30),
-	WorkType varchar(30),
-	CostCode varchar(30),
-	CustomerPositionID varchar(30),
-	CustomerJobPositionDescription varchar(30),
-	CBSFullNumber varchar(30),
-	skillType varchar(100)
- )
-go
-
-ALTER TABLE expensesJobs WITH CHECK ADD CONSTRAINT PK_idExpenses_jobNo_expensesJObs
-PRIMARY KEY (idExpenses,jobNo)
-go
-
-ALTER TABLE expensesJobs WITH CHECK ADD CONSTRAINT fk_idExpenses_jobNo_expenesesJobs
-FOREIGN KEY (idExpenses,jobNo) REFERENCES expensesJobs(idExpenses,jobNo)
-go

@@ -139,7 +139,7 @@ TO DISK = '" & path & "'
                     If cmd1.ExecuteNonQuery() Then
                         MsgBox("The Data Base was Restored.")
                         txtMessage.Text = txtMessage.Text & vbCrLf & "Enabling the VRT_TRAKING Data Base."
-                        Dim cmd3 As New SqlCommand("alter database [PapaSC] set online", conn)
+                        Dim cmd3 As New SqlCommand("alter database [VRT_TRAKING] set online", conn)
                         cmd3.ExecuteNonQuery()
                         Return True
                     Else

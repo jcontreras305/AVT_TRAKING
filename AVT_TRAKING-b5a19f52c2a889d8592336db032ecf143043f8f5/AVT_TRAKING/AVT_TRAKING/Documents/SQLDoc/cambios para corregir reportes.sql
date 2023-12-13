@@ -2093,174 +2093,324 @@
 --)as T1 order by T1.dateWorked asc
 --end
 --GO
-----| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-----| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-----V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V
+
 ----###############################################################################################
 ----########### CAMBIOS PARA CORREGIR LOS REPORTES DE CLIENT BILLING RE CAP BY PROJECT ############
 ----########### Y PUEDA BUSCAR USANDO EL PROJECT ORDER ############################################
 ----###############################################################################################
 
-ALTER proc [dbo].[Client_Billings_Re_Cap_By_Project]
-@startdate as date, 
-@finaldate as date,
-@clientnum as int,
-@job as bigint,
-@idPO as bigint,
-@allJob as bit,
-@allPO as bit
-as 
-begin
+--ALTER proc [dbo].[Client_Billings_Re_Cap_By_Project]
+--@startdate as date, 
+--@finaldate as date,
+--@clientnum as int,
+--@job as bigint,
+--@idPO as bigint,
+--@allJob as bit,
+--@allPO as bit
+--as 
+--begin
 
-set @startdate = ISNULL(@startDate,GETDATE())
-set @finaldate = ISNULL(@finaldate,GETDATE())
-set @clientnum = ISNULL(@clientnum,(select top 1 numberClient from clients)) 
+--set @startdate = ISNULL(@startDate,GETDATE())
+--set @finaldate = ISNULL(@finaldate,GETDATE())
+--set @clientnum = ISNULL(@clientnum,(select top 1 numberClient from clients)) 
 
-select T2.companyName,T2.[Work Order],T2.jobNo,T2.PO,T2.[Project Desription],
-T2.[Hours Ext],T2.[Total Hours],T2.[Hours ST],T2.[Billings ST],T2.[Hours OT],T2.[Billings OT],
-T2.Complete,T2.[Es-Hrs],T2.[Total Expenses],T2.[Total Material],T2.[Total Spend],T2.Estimate from
-(
-	select cl.companyName,concat(wo.idWO,' ',ts.task) as 'Work Order', jb.jobNo,po.idPO as 'PO',ts.description as 'Project Desription',
+--select T2.companyName,T2.[Work Order],T2.jobNo,T2.PO,T2.[Project Desription],
+--T2.[Hours Ext],T2.[Total Hours],T2.[Hours ST],T2.[Billings ST],T2.[Hours OT],T2.[Billings OT],
+--T2.Complete,T2.[Es-Hrs],T2.[Total Expenses],T2.[Total Material],T2.[Total Spend],T2.Estimate from
+--(
+--	select cl.companyName,concat(wo.idWO,' ',ts.task) as 'Work Order', jb.jobNo,po.idPO as 'PO',ts.description as 'Project Desription',
     	
-	ISNULL((select T1.EX from  (select sum(hours3) as 'EX' from hoursWorked as hw1 inner join task as tk1 on tk1.idAux = hw1.idAux inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO inner join projectOrder as po1 on po1.idPO = wo1.idPO and wo1.jobNo = po1.jobNo inner join job as jb1 on jb1.jobNo = po1.jobNo where jb.jobNo = jb1.jobNo and po1.idPO = po.idPO and wo.idAuxWO = wo1.idAuxWO and tk1.idAux = ts.idAux and dateWorked between @startdate and @finaldate) as T1) ,0) as 'Hours Ext',
+--	ISNULL((select T1.EX from  (select sum(hours3) as 'EX' from hoursWorked as hw1 inner join task as tk1 on tk1.idAux = hw1.idAux inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO inner join projectOrder as po1 on po1.idPO = wo1.idPO and wo1.jobNo = po1.jobNo inner join job as jb1 on jb1.jobNo = po1.jobNo where jb.jobNo = jb1.jobNo and po1.idPO = po.idPO and wo.idAuxWO = wo1.idAuxWO and tk1.idAux = ts.idAux and dateWorked between @startdate and @finaldate) as T1) ,0) as 'Hours Ext',
 
-	(select isnull(T1.ST,0.0) from  (select sum(hoursST) as 'ST' from hoursWorked  as hw1 inner join task as tk1 on tk1.idAux = hw1.idAux inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO inner join projectOrder as po1 on po1.idPO = wo1.idPO and wo1.jobNo = po1.jobNo inner join job as jb1 on jb1.jobNo = po1.jobNo where jb.jobNo = jb1.jobNo and po1.idPO = po.idPO and wo.idAuxWO = wo1.idAuxWO and tk1.idAux = ts.idAux and dateWorked between @startdate and @finaldate) as T1)+
-	(select isnull(T1.OT,0.0) from  (select sum(hoursOT) as 'OT' from hoursWorked  as hw1 inner join task as tk1 on tk1.idAux = hw1.idAux inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO inner join projectOrder as po1 on po1.idPO = wo1.idPO and wo1.jobNo = po1.jobNo inner join job as jb1 on jb1.jobNo = po1.jobNo where jb.jobNo = jb1.jobNo and po1.idPO = po.idPO and wo.idAuxWO = wo1.idAuxWO and tk1.idAux = ts.idAux and dateWorked between @startdate and @finaldate) as T1) as 'Total Hours',
+--	(select isnull(T1.ST,0.0) from  (select sum(hoursST) as 'ST' from hoursWorked  as hw1 inner join task as tk1 on tk1.idAux = hw1.idAux inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO inner join projectOrder as po1 on po1.idPO = wo1.idPO and wo1.jobNo = po1.jobNo inner join job as jb1 on jb1.jobNo = po1.jobNo where jb.jobNo = jb1.jobNo and po1.idPO = po.idPO and wo.idAuxWO = wo1.idAuxWO and tk1.idAux = ts.idAux and dateWorked between @startdate and @finaldate) as T1)+
+--	(select isnull(T1.OT,0.0) from  (select sum(hoursOT) as 'OT' from hoursWorked  as hw1 inner join task as tk1 on tk1.idAux = hw1.idAux inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO inner join projectOrder as po1 on po1.idPO = wo1.idPO and wo1.jobNo = po1.jobNo inner join job as jb1 on jb1.jobNo = po1.jobNo where jb.jobNo = jb1.jobNo and po1.idPO = po.idPO and wo.idAuxWO = wo1.idAuxWO and tk1.idAux = ts.idAux and dateWorked between @startdate and @finaldate) as T1) as 'Total Hours',
 
-	(select isnull(T1.ST,0.0) from  (select sum(hoursST) as 'ST' from hoursWorked  as hw1 inner join task as tk1 on tk1.idAux = hw1.idAux inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO inner join projectOrder as po1 on po1.idPO = wo1.idPO and wo1.jobNo = po1.jobNo inner join job as jb1 on jb1.jobNo = po1.jobNo where jb.jobNo = jb1.jobNo and po1.idPO = po.idPO and wo.idAuxWO = wo1.idAuxWO and tk1.idAux = ts.idAux and dateWorked between @startdate and @finaldate) as T1) as 'Hours ST',
+--	(select isnull(T1.ST,0.0) from  (select sum(hoursST) as 'ST' from hoursWorked  as hw1 inner join task as tk1 on tk1.idAux = hw1.idAux inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO inner join projectOrder as po1 on po1.idPO = wo1.idPO and wo1.jobNo = po1.jobNo inner join job as jb1 on jb1.jobNo = po1.jobNo where jb.jobNo = jb1.jobNo and po1.idPO = po.idPO and wo.idAuxWO = wo1.idAuxWO and tk1.idAux = ts.idAux and dateWorked between @startdate and @finaldate) as T1) as 'Hours ST',
 	
-	(select ISNULL(SUM(T2.Amount),0) as 'Billings ST' from 
-		(select SUM(T1.hoursST*T1.billingRate1) AS 'Amount' from 
-			(select hoursST, hw.idWorkCode , billingRate1  from hoursWorked as hw inner join workCode as wc on wc.idWorkCode = hw.idWorkCode and wc.jobNo = hw.jobNo inner join task as tk1 on tk1.idAux = hw.idAux inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO inner join projectOrder as po1 on po1.idPO = wo1.idPO and wo1.jobNo = po1.jobNo inner join job as jb1 on jb1.jobNo = po1.jobNo  
-				where jb.jobNo = jb1.jobNo and po1.idPO = po.idPO and wo.idAuxWO = wo1.idAuxWO and hw.idAux=ts.idAux  and dateWorked between @startdate and @finaldate
-			)as T1    
-		group by T1.idWorkCode
-		)as T2
-	) as 'Billings ST',
+--	(select ISNULL(SUM(T2.Amount),0) as 'Billings ST' from 
+--		(select SUM(T1.hoursST*T1.billingRate1) AS 'Amount' from 
+--			(select hoursST, hw.idWorkCode , billingRate1  from hoursWorked as hw inner join workCode as wc on wc.idWorkCode = hw.idWorkCode and wc.jobNo = hw.jobNo inner join task as tk1 on tk1.idAux = hw.idAux inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO inner join projectOrder as po1 on po1.idPO = wo1.idPO and wo1.jobNo = po1.jobNo inner join job as jb1 on jb1.jobNo = po1.jobNo  
+--				where jb.jobNo = jb1.jobNo and po1.idPO = po.idPO and wo.idAuxWO = wo1.idAuxWO and hw.idAux=ts.idAux  and dateWorked between @startdate and @finaldate
+--			)as T1    
+--		group by T1.idWorkCode
+--		)as T2
+--	) as 'Billings ST',
 
-	(select isnull(T1.OT,0.0) from  (select sum(hoursOT) as 'OT' from hoursWorked  as hw1 inner join task as tk1 on tk1.idAux = hw1.idAux inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO inner join projectOrder as po1 on po1.idPO = wo1.idPO and wo1.jobNo = po1.jobNo inner join job as jb1 on jb1.jobNo = po1.jobNo where jb.jobNo = jb1.jobNo and po1.idPO = po.idPO and wo.idAuxWO = wo1.idAuxWO and tk1.idAux = ts.idAux and dateWorked between @startdate and @finaldate) as T1) as 'Hours OT',
+--	(select isnull(T1.OT,0.0) from  (select sum(hoursOT) as 'OT' from hoursWorked  as hw1 inner join task as tk1 on tk1.idAux = hw1.idAux inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO inner join projectOrder as po1 on po1.idPO = wo1.idPO and wo1.jobNo = po1.jobNo inner join job as jb1 on jb1.jobNo = po1.jobNo where jb.jobNo = jb1.jobNo and po1.idPO = po.idPO and wo.idAuxWO = wo1.idAuxWO and tk1.idAux = ts.idAux and dateWorked between @startdate and @finaldate) as T1) as 'Hours OT',
 	
-	(select ISNULL( SUM(T2.Amount),0) as 'Billings OT' from 
-		(select SUM(T1.hoursOT*T1.billingRateOT) AS 'Amount' from 
-			(select hoursOT, hw.idWorkCode , billingRateOT  from hoursWorked as hw inner join workCode as wc on wc.idWorkCode = hw.idWorkCode and wc.jobNo = hw.jobNo inner join task as tk1 on tk1.idAux = hw.idAux inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO inner join projectOrder as po1 on po1.idPO = wo1.idPO and wo1.jobNo = po1.jobNo inner join job as jb1 on jb1.jobNo = po1.jobNo  
-				where jb.jobNo = jb1.jobNo and po1.idPO = po.idPO and wo.idAuxWO = wo1.idAuxWO and hw.idAux=ts.idAux  and dateWorked between @startdate and @finaldate
-			)as T1    
-		group by T1.idWorkCode
-		)as T2
-	) as 'Billings OT',
+--	(select ISNULL( SUM(T2.Amount),0) as 'Billings OT' from 
+--		(select SUM(T1.hoursOT*T1.billingRateOT) AS 'Amount' from 
+--			(select hoursOT, hw.idWorkCode , billingRateOT  from hoursWorked as hw inner join workCode as wc on wc.idWorkCode = hw.idWorkCode and wc.jobNo = hw.jobNo inner join task as tk1 on tk1.idAux = hw.idAux inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO inner join projectOrder as po1 on po1.idPO = wo1.idPO and wo1.jobNo = po1.jobNo inner join job as jb1 on jb1.jobNo = po1.jobNo  
+--				where jb.jobNo = jb1.jobNo and po1.idPO = po.idPO and wo.idAuxWO = wo1.idAuxWO and hw.idAux=ts.idAux  and dateWorked between @startdate and @finaldate
+--			)as T1    
+--		group by T1.idWorkCode
+--		)as T2
+--	) as 'Billings OT',
 
-	ts.percentComplete as 'Complete',
+--	ts.percentComplete as 'Complete',
 
-	ts.estimateHours as 'Es-Hrs',
+--	ts.estimateHours as 'Es-Hrs',
 
-	ISNULL((select sum(amount) from expensesUsed as exu inner join task as tk1 on tk1.idAux = exu.idAux inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO inner join projectOrder as po1 on po1.idPO = wo1.idPO and wo1.jobNo = po1.jobNo inner join job as jb1 on jb1.jobNo = po1.jobNo
-	where  jb.jobNo = jb1.jobNo and po1.idPO = po.idPO and wo.idAuxWO = wo1.idAuxWO and exu.idAux=ts.idAux and exu.dateExpense between @startdate and @finaldate),  0) as 'Total Expenses',
+--	ISNULL((select sum(amount) from expensesUsed as exu inner join task as tk1 on tk1.idAux = exu.idAux inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO inner join projectOrder as po1 on po1.idPO = wo1.idPO and wo1.jobNo = po1.jobNo inner join job as jb1 on jb1.jobNo = po1.jobNo
+--	where  jb.jobNo = jb1.jobNo and po1.idPO = po.idPO and wo.idAuxWO = wo1.idAuxWO and exu.idAux=ts.idAux and exu.dateExpense between @startdate and @finaldate),  0) as 'Total Expenses',
 	
-	ISNULL((select sum(amount) from materialUsed as mau inner join task as tk1 on tk1.idAux = mau.idAux inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO inner join projectOrder as po1 on po1.idPO = wo1.idPO and wo1.jobNo = po1.jobNo inner join job as jb1 on jb1.jobNo = po1.jobNo
-			where  jb.jobNo = jb1.jobNo and po1.idPO = po.idPO and wo.idAuxWO = wo1.idAuxWO and mau.idAux=ts.idAux and mau.dateMaterial between @startdate and @finaldate), 0) as 'Total Material',
+--	ISNULL((select sum(amount) from materialUsed as mau inner join task as tk1 on tk1.idAux = mau.idAux inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO inner join projectOrder as po1 on po1.idPO = wo1.idPO and wo1.jobNo = po1.jobNo inner join job as jb1 on jb1.jobNo = po1.jobNo
+--			where  jb.jobNo = jb1.jobNo and po1.idPO = po.idPO and wo.idAuxWO = wo1.idAuxWO and mau.idAux=ts.idAux and mau.dateMaterial between @startdate and @finaldate), 0) as 'Total Material',
 	
-	(
+--	(
 		
-			(select ISNULL(SUM(T2.Amount),0) as 'Billings ST' from 
-			(select SUM(T1.hoursST*T1.billingRate1) AS 'Amount'
-			from (select hoursST, hw.idWorkCode , billingRate1  from hoursWorked as hw inner join workCode as wc on wc.idWorkCode = hw.idWorkCode and wc.jobNo = hw.jobNo inner join task as tk1 on tk1.idAux = hw.idAux inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO inner join projectOrder as po1 on po1.idPO = wo1.idPO and wo1.jobNo = po1.jobNo inner join job as jb1 on jb1.jobNo = po1.jobNo  
-			where jb.jobNo = jb1.jobNo and po1.idPO = po.idPO and wo.idAuxWO = wo1.idAuxWO and hw.idAux=ts.idAux  and dateWorked between @startdate and @finaldate)as T1    
-			group by T1.idWorkCode) as T2)--Billing ST
-			+
-			(select  ISNULL( SUM(T2.Amount),0) as 'Billing OT' from 
-			(select SUM(T1.hoursOT*T1.billingRateOT) AS 'Amount'
-			from (select hoursOT, hw.idWorkCode , billingRateOT  from hoursWorked as hw inner join workCode as wc on wc.idWorkCode = hw.idWorkCode and wc.jobNo = hw.jobNo inner join task as tk1 on tk1.idAux = hw.idAux inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO inner join projectOrder as po1 on po1.idPO = wo1.idPO and wo1.jobNo = po1.jobNo inner join job as jb1 on jb1.jobNo = po1.jobNo  
-			where jb.jobNo = jb1.jobNo and po1.idPO = po.idPO and wo.idAuxWO = wo1.idAuxWO and hw.idAux=ts.idAux  and dateWorked between @startdate and @finaldate)as T1    
-			group by T1.idWorkCode) as T2) --Billing OT
-			+
-			ISNULL((select sum(amount) from expensesUsed as exu inner join task as tk1 on tk1.idAux = exu.idAux inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO inner join projectOrder as po1 on po1.idPO = wo1.idPO and wo1.jobNo = po1.jobNo inner join job as jb1 on jb1.jobNo = po1.jobNo
-			where  jb.jobNo = jb1.jobNo and po1.idPO = po.idPO and wo.idAuxWO = wo1.idAuxWO and exu.idAux=ts.idAux and exu.dateExpense between @startdate and @finaldate),  0)--Expenses Used
-			+
-			ISNULL((select sum(amount) from materialUsed as mau inner join task as tk1 on tk1.idAux = mau.idAux inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO inner join projectOrder as po1 on po1.idPO = wo1.idPO and wo1.jobNo = po1.jobNo inner join job as jb1 on jb1.jobNo = po1.jobNo
-			where  jb.jobNo = jb1.jobNo and po1.idPO = po.idPO and wo.idAuxWO = wo1.idAuxWO and mau.idAux=ts.idAux and mau.dateMaterial between @startdate and @finaldate), 0)-- Material Used
-			)
-		 as 'Total Spend',
+--			(select ISNULL(SUM(T2.Amount),0) as 'Billings ST' from 
+--			(select SUM(T1.hoursST*T1.billingRate1) AS 'Amount'
+--			from (select hoursST, hw.idWorkCode , billingRate1  from hoursWorked as hw inner join workCode as wc on wc.idWorkCode = hw.idWorkCode and wc.jobNo = hw.jobNo inner join task as tk1 on tk1.idAux = hw.idAux inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO inner join projectOrder as po1 on po1.idPO = wo1.idPO and wo1.jobNo = po1.jobNo inner join job as jb1 on jb1.jobNo = po1.jobNo  
+--			where jb.jobNo = jb1.jobNo and po1.idPO = po.idPO and wo.idAuxWO = wo1.idAuxWO and hw.idAux=ts.idAux  and dateWorked between @startdate and @finaldate)as T1    
+--			group by T1.idWorkCode) as T2)--Billing ST
+--			+
+--			(select  ISNULL( SUM(T2.Amount),0) as 'Billing OT' from 
+--			(select SUM(T1.hoursOT*T1.billingRateOT) AS 'Amount'
+--			from (select hoursOT, hw.idWorkCode , billingRateOT  from hoursWorked as hw inner join workCode as wc on wc.idWorkCode = hw.idWorkCode and wc.jobNo = hw.jobNo inner join task as tk1 on tk1.idAux = hw.idAux inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO inner join projectOrder as po1 on po1.idPO = wo1.idPO and wo1.jobNo = po1.jobNo inner join job as jb1 on jb1.jobNo = po1.jobNo  
+--			where jb.jobNo = jb1.jobNo and po1.idPO = po.idPO and wo.idAuxWO = wo1.idAuxWO and hw.idAux=ts.idAux  and dateWorked between @startdate and @finaldate)as T1    
+--			group by T1.idWorkCode) as T2) --Billing OT
+--			+
+--			ISNULL((select sum(amount) from expensesUsed as exu inner join task as tk1 on tk1.idAux = exu.idAux inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO inner join projectOrder as po1 on po1.idPO = wo1.idPO and wo1.jobNo = po1.jobNo inner join job as jb1 on jb1.jobNo = po1.jobNo
+--			where  jb.jobNo = jb1.jobNo and po1.idPO = po.idPO and wo.idAuxWO = wo1.idAuxWO and exu.idAux=ts.idAux and exu.dateExpense between @startdate and @finaldate),  0)--Expenses Used
+--			+
+--			ISNULL((select sum(amount) from materialUsed as mau inner join task as tk1 on tk1.idAux = mau.idAux inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO inner join projectOrder as po1 on po1.idPO = wo1.idPO and wo1.jobNo = po1.jobNo inner join job as jb1 on jb1.jobNo = po1.jobNo
+--			where  jb.jobNo = jb1.jobNo and po1.idPO = po.idPO and wo.idAuxWO = wo1.idAuxWO and mau.idAux=ts.idAux and mau.dateMaterial between @startdate and @finaldate), 0)-- Material Used
+--			)
+--		 as 'Total Spend',
 
-	ts.estTotalBilling as 'Estimate'
-	from task as ts
-	inner join workOrder as wo on wo.idAuxWO=ts.idAuxWO
-	inner join projectOrder as po on po.idPO=wo.idPO and po.jobNo = wo.jobNo
-	inner join job as jb on jb.jobNo=po.jobNo
-	inner join clients cl on cl.idClient=jb.idClient
-	where cl.numberClient=@clientnum and ((select sum(hoursST) from hoursWorked where idAux = ts.idAux)> 0 or (select sum(hoursOT)
-		 from hoursWorked where idAux = ts.idAux)> 0 or (select sum(hours3)
-		 from hoursWorked where idAux = ts.idAux)> 0 or (select sum(amount) 
-		 from expensesUsed where idAux=ts.idAux)> 0 or (select sum(amount)
-		 from materialUsed where idAux=ts.idAux)>0)
-		 and jb.jobNo like iif(@allJob=1,'%%',CONCAT('',@job,''))
-		 and po.jobNo like iif(@allPO = 1 ,'%%',CONCAT('',@idPO,''))
-		)as T2
-		where T2.[Billings ST]<>0 OR T2.[Billings OT]<>0 OR T2.[Total Expenses]<>0 OR T2.[Total Material]<>0
-		order by t2.jobNo asc
-end
-GO
+--	ts.estTotalBilling as 'Estimate'
+--	from task as ts
+--	inner join workOrder as wo on wo.idAuxWO=ts.idAuxWO
+--	inner join projectOrder as po on po.idPO=wo.idPO and po.jobNo = wo.jobNo
+--	inner join job as jb on jb.jobNo=po.jobNo
+--	inner join clients cl on cl.idClient=jb.idClient
+--	where cl.numberClient=@clientnum and ((select sum(hoursST) from hoursWorked where idAux = ts.idAux)> 0 or (select sum(hoursOT)
+--		 from hoursWorked where idAux = ts.idAux)> 0 or (select sum(hours3)
+--		 from hoursWorked where idAux = ts.idAux)> 0 or (select sum(amount) 
+--		 from expensesUsed where idAux=ts.idAux)> 0 or (select sum(amount)
+--		 from materialUsed where idAux=ts.idAux)>0)
+--		 and jb.jobNo like iif(@allJob=1,'%%',CONCAT('',@job,''))
+--		 and po.jobNo like iif(@allPO = 1 ,'%%',CONCAT('',@idPO,''))
+--		)as T2
+--		where T2.[Billings ST]<>0 OR T2.[Billings OT]<>0 OR T2.[Total Expenses]<>0 OR T2.[Total Material]<>0
+--		order by t2.jobNo asc
+--end
+--GO
+------###############################################################################################
+------########### CAMBIOS PARA CORREGIR EL REPORTE DE PRODUCTOS EN EL REPORTE DE MATERIAL ###########
+------########### INVENTORY Y SFFOLD TRAKING (TAB:PRODUCTS) #########################################
+------###############################################################################################
+
+--ALTER proc [dbo].[sp_SCF_Material_Inventory]
+--@numberClient as int,
+--@all as bit
+--as
+--begin
+--select 
+--jb.jobNo,
+--pd.QID,
+--pd.idProduct ,
+--pd.name ,
+--ISNULL((select sum(pinc.quantity) from productComing as pinc 
+--inner join incoming as inc on inc.ticketNum = pinc.ticketNum
+--where inc.jobNo = jb.jobNo and pinc.idProduct = pj.idProduct),0) as 'Incoming', 
+
+--ISNULL((select sum(pout.quantity) from productOutGoing as pout 
+--inner join outgoing as outg on outg.ticketNum = outg.ticketNum
+--where outg.jobNo = jb.jobNo and pout.idProduct = pj.idProduct),0) as 'Outgoing',
+
+--ISNULL((select sum(pinc.quantity) from productComing as pinc 
+--inner join incoming as inc on inc.ticketNum = pinc.ticketNum
+--where inc.jobNo = jb.jobNo and pinc.idProduct = pj.idProduct),0)
+---
+--ISNULL((select sum(pout.quantity) from productOutGoing as pout 
+--inner join outgoing as outg on outg.ticketNum = outg.ticketNum
+--where outg.jobNo = jb.jobNo and pout.idProduct = pj.idProduct),0)as 'Inventory',
+----ISNULL(pj.qty,0) as 'Inventory',
+--ISNULL((select sum(pts.quantity) from productTotalScaffold as pts
+--inner join scaffoldTraking as sc on sc.tag = pts.tag
+--inner join task as tk on tk.idAux = sc.idAux 
+--inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO
+--inner join projectOrder as po on po.idPO = wo.idPO and po.jobNo = wo.jobNo 
+--inner join job as jb1 on jb1.jobNo = po.jobNo
+--where jb1.jobNo = jb.jobNo and pts.idProduct = pj.idProduct),0) as 'OnRent',
+
+--(ISNULL((select sum(pinc.quantity) from productComing as pinc 
+--inner join incoming as inc on inc.ticketNum = pinc.ticketNum
+--where inc.jobNo = jb.jobNo and pinc.idProduct = pj.idProduct),0)
+---
+--ISNULL((select sum(pout.quantity) from productOutGoing as pout 
+--inner join outgoing as outg on outg.ticketNum = outg.ticketNum
+--where outg.jobNo = jb.jobNo and pout.idProduct = pj.idProduct),0))
+---
+--ISNULL((select sum(pts.quantity) from productTotalScaffold as pts
+--inner join scaffoldTraking as sc on sc.tag = pts.tag
+--inner join task as tk on tk.idAux = sc.idAux 
+--inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO
+--inner join projectOrder as po on po.idPO = wo.idPO and po.jobNo = wo.jobNo 
+--inner join job as jb1 on jb1.jobNo = po.jobNo
+--where jb1.jobNo = jb.jobNo and pts.idProduct = pj.idProduct),0) as 'InYard',
+----ISNULL(pd.quantity,0) as 'InYard'
+--pd.[weight] as 'Weight'
+
+--from  productJob as pj  
+--inner join product as pd on pd.idProduct = pj.idProduct 
+--left join job as jb on jb.jobNo = pj.jobNo
+--inner join clients as cl on cl.idClient = jb.idClient 
+--where cl.numberClient like iif(@all = 1, '%%', concat('%',@numberClient,'%'))
+--ORDER BY pd.idProduct
+--end
+--go
+----| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
+----| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
+----V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V
 ----###############################################################################################
-----########### CAMBIOS PARA CORREGIR EL REPORTE DE PRODUCTOS EN EL REPORTE DE MATERIAL ###########
-----########### INVENTORY Y SFFOLD TRAKING (TAB:PRODUCTS) #########################################
+----########### CAMBIOS PARA CORREGIR EL SAP NUMBER DE LOS EMPLEADOS ##############################
 ----###############################################################################################
 
-ALTER proc [dbo].[sp_SCF_Material_Inventory]
-@numberClient as int,
-@all as bit
-as
+alter table employees alter column SAPNumber varchar(13)
+go
+
+ALTER proc [dbo].[sp_insert_Employee]
+	--general
+	@numberEmploye int, 
+	@firstName varchar(30),
+	@lastName varchar(25),
+	@middleName varchar(25),
+	@socialNumber varchar(14),
+	@SAPNumber varchar(13),
+	@photo image,
+	@estatus char(1),
+	--contact
+	@phoneNumber1 varchar(13),
+	@phoneNumber2 varchar(13),
+	@email varchar(50),
+	--address
+	@avenue varchar(80),
+	@number int,
+	@city varchar(20), 
+	@providence varchar(20),
+	@postalCode int,
+	--pay
+	@payRate1 float,
+	@payRate2 float, 
+	@payRate3 float,
+	--type 
+	@type varchar(20),
+	--perdiem
+	@perdiem bit
+as 
+declare @error int  -- declaro variables para los ID que son nuevos y una variable de error
+declare @idEmployee varchar(36) 
+declare @idContact varchar(36)
+declare @idHomeAdress varchar(36)
+declare @idPayRate varchar(36)
 begin
-select 
-jb.jobNo,
-pd.QID,
-pd.idProduct ,
-pd.name ,
-ISNULL((select sum(pinc.quantity) from productComing as pinc 
-inner join incoming as inc on inc.ticketNum = pinc.ticketNum
-where inc.jobNo = jb.jobNo and pinc.idProduct = pj.idProduct),0) as 'Incoming', 
-
-ISNULL((select sum(pout.quantity) from productOutGoing as pout 
-inner join outgoing as outg on outg.ticketNum = outg.ticketNum
-where outg.jobNo = jb.jobNo and pout.idProduct = pj.idProduct),0) as 'Outgoing',
-
-ISNULL((select sum(pinc.quantity) from productComing as pinc 
-inner join incoming as inc on inc.ticketNum = pinc.ticketNum
-where inc.jobNo = jb.jobNo and pinc.idProduct = pj.idProduct),0)
--
-ISNULL((select sum(pout.quantity) from productOutGoing as pout 
-inner join outgoing as outg on outg.ticketNum = outg.ticketNum
-where outg.jobNo = jb.jobNo and pout.idProduct = pj.idProduct),0)as 'Inventory',
---ISNULL(pj.qty,0) as 'Inventory',
-ISNULL((select sum(pts.quantity) from productTotalScaffold as pts
-inner join scaffoldTraking as sc on sc.tag = pts.tag
-inner join task as tk on tk.idAux = sc.idAux 
-inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO
-inner join projectOrder as po on po.idPO = wo.idPO and po.jobNo = wo.jobNo 
-inner join job as jb1 on jb1.jobNo = po.jobNo
-where jb1.jobNo = jb.jobNo and pts.idProduct = pj.idProduct),0) as 'OnRent',
-
-(ISNULL((select sum(pinc.quantity) from productComing as pinc 
-inner join incoming as inc on inc.ticketNum = pinc.ticketNum
-where inc.jobNo = jb.jobNo and pinc.idProduct = pj.idProduct),0)
--
-ISNULL((select sum(pout.quantity) from productOutGoing as pout 
-inner join outgoing as outg on outg.ticketNum = outg.ticketNum
-where outg.jobNo = jb.jobNo and pout.idProduct = pj.idProduct),0))
--
-ISNULL((select sum(pts.quantity) from productTotalScaffold as pts
-inner join scaffoldTraking as sc on sc.tag = pts.tag
-inner join task as tk on tk.idAux = sc.idAux 
-inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO
-inner join projectOrder as po on po.idPO = wo.idPO and po.jobNo = wo.jobNo 
-inner join job as jb1 on jb1.jobNo = po.jobNo
-where jb1.jobNo = jb.jobNo and pts.idProduct = pj.idProduct),0) as 'InYard',
---ISNULL(pd.quantity,0) as 'InYard'
-pd.[weight] as 'Weight'
-
-from  productJob as pj  
-inner join product as pd on pd.idProduct = pj.idProduct 
-left join job as jb on jb.jobNo = pj.jobNo
-inner join clients as cl on cl.idClient = jb.idClient 
-where cl.numberClient like iif(@all = 1, '%%', concat('%',@numberClient,'%'))
-ORDER BY pd.idProduct
+	begin tran --inicio tran
+		begin try --inicio try
+			--if @phoneNumber1 <> '' or @email<> '' begin -- si existe un telefono o un correo entra 
+				set @idContact = NEWID() 
+				insert into contact values(@idContact,@phoneNumber1,@phoneNumber2,@email)
+				if @@ERROR <> 0 begin set @error = @@ERROR goto solveproblem end  -- si existe un error en al insertar solo vamos a solveproblem y nos evitamos lo demas
+			--end
+			--if @avenue <> '' begin -- solo se necesita saber si la calle tiene algo 
+				set @idHomeAdress = NEWID()
+				insert into HomeAddress values (@idHomeAdress , @avenue , @number , @city , @providence , @postalCode)
+				if @@ERROR <> 0 begin set @error = @@ERROR goto solveproblem end 
+				
+			--end
+			--if @firstName <> '' or @numberEmploye > 0 begin	
+				set @idEmployee = NEWID()
+				insert into employees values (@idEmployee , @numberEmploye , @firstName , @lastName , @middleName, @socialNumber , @SAPNumber, @photo , @idHomeAdress , @idContact ,@estatus,@type,@perdiem)
+				if @@ERROR <> 0 begin set @error = @@ERROR goto solveproblem end 
+			--end
+			--if @payRate1 <> '' begin
+				set @idPayRate = NEWID()
+				insert into payRate values (@idPayRate,@payRate1,@payRate2 ,@payRate3,@idEmployee,GETDATE())
+				if @@ERROR <> 0 begin set @error = @@ERROR goto solveproblem end 
+			--end
+		end try	
+		begin catch
+			goto solveproblem -- en caso de error capturado en el catch no vamos a solveproblem y evitamos en commit
+		end catch
+	commit tran 
+	solveproblem:
+	if @error <> 0
+	begin 
+		rollback tran -- el rollback es para deshacer todos lo cambios hechos anteriormente
+	end
 end
+go
+
+
+ALTER proc [dbo].[sp_update_Employee]
+	@idEmployee varchar(36),
+	@idAddress varchar(36),
+	@idContact varchar(36),
+	--general
+	@numberEmploye int, 
+	@firstName varchar(30),
+	@lastName varchar(25),
+	@middleName varchar(25),
+	@socialNumber varchar(14),
+	@SAPNumber varchar(13),
+	@photo image,
+	@estatus char(1),
+	--contact
+	@phoneNumber1 varchar(13),
+	@phoneNumber2 varchar(13),
+	@email varchar(50),
+	--address
+	@avenue varchar(80),
+	@number int,
+	@city varchar(20), 
+	@providence varchar(20),
+	@postalCode int,
+	----pay
+	--@payRate1 float,
+	--@payRate2 float, 
+	--@payRate3 float,
+	--type 
+	@type varchar(20),
+	@perdiem bit,
+	@msg varchar(50) output
+as 
+declare @error int  -- declaro variables para los ID que son nuevos y una variable de error
+begin
+	begin tran --inicio tran
+		begin try --inicio try
+			--if @avenue <> '' begin -- solo se necesita saber si la calle tiene algo 
+				set @msg = 'Error at moment to save Address data'
+				update HomeAddress set avenue = @avenue ,number =@number ,city =@city ,providence =@providence ,postalcode = @postalCode where idHomeAdress = @idAddress
+				if @@ERROR <> 0 begin set @error = @@ERROR goto solveproblem end 
+				
+				set @msg = 'Error at moment to save Contact data'
+				update contact set phoneNumber1 =@phoneNumber1 , phoneNumber2 =@phoneNumber2 , email = @email where idContact = @idContact
+				if @@ERROR <> 0 begin set @error = @@ERROR goto solveproblem end 
+			--end
+			----if @payRate1 <> '' begin
+			--	set @msg = 'Error at moment to save Pay Rate data'
+			--	update payRate set payRate1 = @payRate1,payRate2= @payRate2 , payRate3 = @payRate3 where idPayRate = @idPay and idEmployee = @idEmployee
+			--	if @@ERROR <> 0 begin set @error = @@ERROR goto solveproblem end 
+			----end
+			--if @firstName <> '' or @numberEmploye > 0 begin
+				set @msg = 'Error at moment to save Employee data'	
+				update employees set  numberEmploye = @numberEmploye ,firstName = @firstName , lastName = @lastName ,middleName = @middleName,socialNumber = @socialNumber ,SAPNumber = @SAPNumber,photo = @photo , estatus = @estatus,typeEmployee = @type, perdiem = @perdiem where idEmployee = @idEmployee
+				if @@ERROR <> 0 begin set @error = @@ERROR goto solveproblem end 
+			--end
+			set @msg = 'Succesfull'
+		end try	
+		begin catch
+			goto solveproblem -- en caso de error capturado en el catch no vamos a solveproblem y evitamos en commit
+		end catch
+	commit tran 
+	solveproblem:
+	if @error <> 0
+	begin 
+		rollback tran -- el rollback es para deshacer todos lo cambios hechos anteriormente
+		return @msg
+	end
+end
+
 go

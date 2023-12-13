@@ -284,7 +284,7 @@ end")
             conectar()
             Dim cmd As New SqlCommand("if (select COUNT(*) from expensesJobs where jobNo = " + jobNo + " and idExpenses = (select top 1 idExpenses from expenses where expenseCode = '" + expCode + "')) =1 
 begin
-	update expensesJobs set Category = '" + datos(0) + "',PayItemType='" + datos(0) + "',WorkType='" + datos(0) + "',CostCode='" + datos(0) + "',CustomerPositionID='" + datos(0) + "',CustomerJobPositionDescription='" + datos(0) + "',CBSFullNumber='" + datos(0) + "',skillType='" + datos(0) + "'
+		update expensesJobs set Category = '" + datos(0) + "',PayItemType='" + datos(1) + "',WorkType='" + datos(2) + "',CostCode='" + datos(3) + "',CustomerPositionID='" + datos(4) + "',CustomerJobPositionDescription='" + datos(5) + "',CBSFullNumber='" + datos(6) + "',skillType='" + datos(7) + "'
 	 where jobNo = " + jobNo + " and idExpenses = (select top 1 idExpenses from expenses where expenseCode = '" + expCode + "')
 end")
             cmd.Connection = conn

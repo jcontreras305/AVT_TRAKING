@@ -178,7 +178,7 @@ select
 	'' as 'Sub Task',
 	wc.Category as 'Category',
 	CONVERT(varchar, hw.dateWorked,101) as 'Time Sheet Date',
-	hw.schedule as 'Shift',
+	iif(hw.schedule = 'DAY','Day','Night') as 'Shift',
 	po.WBS as 'WBS',
 	wc.PayItemType as 'Pay Item Type',
 	wc.WorkType as 'Work Type',

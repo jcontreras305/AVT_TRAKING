@@ -71,7 +71,7 @@ Partial Class Backup
         Me.TableLayoutPanel1.Controls.Add(Me.Panel2, 0, 1)
         Me.TableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.TableLayoutPanel1.Location = New System.Drawing.Point(0, 0)
-        Me.TableLayoutPanel1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.TableLayoutPanel1.Margin = New System.Windows.Forms.Padding(4)
         Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
         Me.TableLayoutPanel1.RowCount = 3
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 49.0!))
@@ -86,7 +86,7 @@ Partial Class Backup
         Me.Panel3.Controls.Add(Me.TableLayoutPanel2)
         Me.Panel3.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel3.Location = New System.Drawing.Point(4, 108)
-        Me.Panel3.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.Panel3.Margin = New System.Windows.Forms.Padding(4)
         Me.Panel3.Name = "Panel3"
         Me.Panel3.Size = New System.Drawing.Size(1059, 313)
         Me.Panel3.TabIndex = 2
@@ -102,7 +102,7 @@ Partial Class Backup
         Me.TableLayoutPanel2.Controls.Add(Me.Panel1, 0, 1)
         Me.TableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill
         Me.TableLayoutPanel2.Location = New System.Drawing.Point(0, 0)
-        Me.TableLayoutPanel2.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.TableLayoutPanel2.Margin = New System.Windows.Forms.Padding(4)
         Me.TableLayoutPanel2.Name = "TableLayoutPanel2"
         Me.TableLayoutPanel2.RowCount = 2
         Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
@@ -116,7 +116,7 @@ Partial Class Backup
         Me.Panel4.Controls.Add(Me.txtIndications)
         Me.Panel4.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel4.Location = New System.Drawing.Point(533, 140)
-        Me.Panel4.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.Panel4.Margin = New System.Windows.Forms.Padding(4)
         Me.Panel4.Name = "Panel4"
         Me.Panel4.Size = New System.Drawing.Size(522, 169)
         Me.Panel4.TabIndex = 5
@@ -137,7 +137,7 @@ Partial Class Backup
         '
         Me.txtIndications.Dock = System.Windows.Forms.DockStyle.Bottom
         Me.txtIndications.Location = New System.Drawing.Point(0, 20)
-        Me.txtIndications.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.txtIndications.Margin = New System.Windows.Forms.Padding(4)
         Me.txtIndications.Multiline = True
         Me.txtIndications.Name = "txtIndications"
         Me.txtIndications.ReadOnly = True
@@ -154,9 +154,9 @@ Partial Class Backup
         Me.GroupBox2.Dock = System.Windows.Forms.DockStyle.Fill
         Me.GroupBox2.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.GroupBox2.Location = New System.Drawing.Point(533, 4)
-        Me.GroupBox2.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.GroupBox2.Margin = New System.Windows.Forms.Padding(4)
         Me.GroupBox2.Name = "GroupBox2"
-        Me.GroupBox2.Padding = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.GroupBox2.Padding = New System.Windows.Forms.Padding(4)
         Me.GroupBox2.Size = New System.Drawing.Size(522, 128)
         Me.GroupBox2.TabIndex = 1
         Me.GroupBox2.TabStop = False
@@ -179,7 +179,7 @@ Partial Class Backup
         Me.btnRestore.Image = Global.AVT_TRAKING.My.Resources.Resources.upload2
         Me.btnRestore.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.btnRestore.Location = New System.Drawing.Point(392, 71)
-        Me.btnRestore.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btnRestore.Margin = New System.Windows.Forms.Padding(4)
         Me.btnRestore.Name = "btnRestore"
         Me.btnRestore.Size = New System.Drawing.Size(121, 46)
         Me.btnRestore.TabIndex = 6
@@ -192,7 +192,7 @@ Partial Class Backup
         Me.btnPathRestore.FlatAppearance.BorderSize = 0
         Me.btnPathRestore.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnPathRestore.Location = New System.Drawing.Point(443, 37)
-        Me.btnPathRestore.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btnPathRestore.Margin = New System.Windows.Forms.Padding(4)
         Me.btnPathRestore.Name = "btnPathRestore"
         Me.btnPathRestore.Size = New System.Drawing.Size(71, 27)
         Me.btnPathRestore.TabIndex = 5
@@ -202,7 +202,7 @@ Partial Class Backup
         'txtPathRestore
         '
         Me.txtPathRestore.Location = New System.Drawing.Point(59, 37)
-        Me.txtPathRestore.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.txtPathRestore.Margin = New System.Windows.Forms.Padding(4)
         Me.txtPathRestore.Name = "txtPathRestore"
         Me.txtPathRestore.Size = New System.Drawing.Size(375, 22)
         Me.txtPathRestore.TabIndex = 4
@@ -216,9 +216,9 @@ Partial Class Backup
         Me.GroupBox1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.GroupBox1.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.GroupBox1.Location = New System.Drawing.Point(4, 4)
-        Me.GroupBox1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.GroupBox1.Margin = New System.Windows.Forms.Padding(4)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Padding = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.GroupBox1.Padding = New System.Windows.Forms.Padding(4)
         Me.GroupBox1.Size = New System.Drawing.Size(521, 128)
         Me.GroupBox1.TabIndex = 0
         Me.GroupBox1.TabStop = False
@@ -241,7 +241,7 @@ Partial Class Backup
         Me.btnBackup.Image = Global.AVT_TRAKING.My.Resources.Resources.download
         Me.btnBackup.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.btnBackup.Location = New System.Drawing.Point(392, 71)
-        Me.btnBackup.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btnBackup.Margin = New System.Windows.Forms.Padding(4)
         Me.btnBackup.Name = "btnBackup"
         Me.btnBackup.Size = New System.Drawing.Size(121, 46)
         Me.btnBackup.TabIndex = 2
@@ -254,7 +254,7 @@ Partial Class Backup
         Me.btnPathBackup.FlatAppearance.BorderSize = 0
         Me.btnPathBackup.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnPathBackup.Location = New System.Drawing.Point(443, 37)
-        Me.btnPathBackup.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btnPathBackup.Margin = New System.Windows.Forms.Padding(4)
         Me.btnPathBackup.Name = "btnPathBackup"
         Me.btnPathBackup.Size = New System.Drawing.Size(71, 27)
         Me.btnPathBackup.TabIndex = 1
@@ -264,7 +264,7 @@ Partial Class Backup
         'txtPathBackup
         '
         Me.txtPathBackup.Location = New System.Drawing.Point(67, 37)
-        Me.txtPathBackup.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.txtPathBackup.Margin = New System.Windows.Forms.Padding(4)
         Me.txtPathBackup.Name = "txtPathBackup"
         Me.txtPathBackup.Size = New System.Drawing.Size(367, 22)
         Me.txtPathBackup.TabIndex = 0
@@ -275,7 +275,7 @@ Partial Class Backup
         Me.Panel1.Controls.Add(Me.txtMessage)
         Me.Panel1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel1.Location = New System.Drawing.Point(4, 140)
-        Me.Panel1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.Panel1.Margin = New System.Windows.Forms.Padding(4)
         Me.Panel1.Name = "Panel1"
         Me.Panel1.Size = New System.Drawing.Size(521, 169)
         Me.Panel1.TabIndex = 4
@@ -296,7 +296,7 @@ Partial Class Backup
         '
         Me.txtMessage.Dock = System.Windows.Forms.DockStyle.Bottom
         Me.txtMessage.Location = New System.Drawing.Point(0, 20)
-        Me.txtMessage.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.txtMessage.Margin = New System.Windows.Forms.Padding(4)
         Me.txtMessage.Multiline = True
         Me.txtMessage.Name = "txtMessage"
         Me.txtMessage.ReadOnly = True
@@ -311,7 +311,7 @@ Partial Class Backup
         Me.TitleBar.Controls.Add(Me.PictureBox3)
         Me.TitleBar.Dock = System.Windows.Forms.DockStyle.Fill
         Me.TitleBar.Location = New System.Drawing.Point(4, 4)
-        Me.TitleBar.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.TitleBar.Margin = New System.Windows.Forms.Padding(4)
         Me.TitleBar.Name = "TitleBar"
         Me.TitleBar.Size = New System.Drawing.Size(1059, 41)
         Me.TitleBar.TabIndex = 0
@@ -332,7 +332,7 @@ Partial Class Backup
         '
         Me.PictureBox1.Image = Global.AVT_TRAKING.My.Resources.Resources.report
         Me.PictureBox1.Location = New System.Drawing.Point(8, 2)
-        Me.PictureBox1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.PictureBox1.Margin = New System.Windows.Forms.Padding(4)
         Me.PictureBox1.Name = "PictureBox1"
         Me.PictureBox1.Size = New System.Drawing.Size(37, 34)
         Me.PictureBox1.TabIndex = 10
@@ -343,7 +343,7 @@ Partial Class Backup
         Me.PictureBox3.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.PictureBox3.Image = Global.AVT_TRAKING.My.Resources.Resources.minimize2
         Me.PictureBox3.Location = New System.Drawing.Point(1019, 1)
-        Me.PictureBox3.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.PictureBox3.Margin = New System.Windows.Forms.Padding(4)
         Me.PictureBox3.Name = "PictureBox3"
         Me.PictureBox3.Size = New System.Drawing.Size(36, 36)
         Me.PictureBox3.TabIndex = 9
@@ -355,7 +355,7 @@ Partial Class Backup
         Me.Panel2.Controls.Add(Me.PictureBox4)
         Me.Panel2.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel2.Location = New System.Drawing.Point(4, 53)
-        Me.Panel2.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.Panel2.Margin = New System.Windows.Forms.Padding(4)
         Me.Panel2.Name = "Panel2"
         Me.Panel2.Size = New System.Drawing.Size(1059, 47)
         Me.Panel2.TabIndex = 1
@@ -365,7 +365,7 @@ Partial Class Backup
         Me.PictureBox4.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.PictureBox4.Image = Global.AVT_TRAKING.My.Resources.Resources._exit
         Me.PictureBox4.Location = New System.Drawing.Point(1005, 4)
-        Me.PictureBox4.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.PictureBox4.Margin = New System.Windows.Forms.Padding(4)
         Me.PictureBox4.Name = "PictureBox4"
         Me.PictureBox4.Size = New System.Drawing.Size(49, 36)
         Me.PictureBox4.TabIndex = 8
@@ -378,7 +378,7 @@ Partial Class Backup
         Me.ClientSize = New System.Drawing.Size(1067, 425)
         Me.Controls.Add(Me.TableLayoutPanel1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
-        Me.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.Margin = New System.Windows.Forms.Padding(4)
         Me.Name = "Backup"
         Me.Text = "Backup"
         Me.TableLayoutPanel1.ResumeLayout(False)

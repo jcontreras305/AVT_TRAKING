@@ -1368,7 +1368,7 @@ CREATE proc [dbo].[sp_insert_Employee]
 	@lastName varchar(25),
 	@middleName varchar(25),
 	@socialNumber varchar(14),
-	@SAPNumber int,
+	@SAPNumber varchar(13),
 	@photo image,
 	@estatus char(1),
 	--contact
@@ -4364,7 +4364,7 @@ CREATE proc [dbo].[sp_update_Employee]
 	@lastName varchar(25),
 	@middleName varchar(25),
 	@socialNumber varchar(14),
-	@SAPNumber int,
+	@SAPNumber varchar(13),
 	@photo image,
 	@estatus char(1),
 	--contact

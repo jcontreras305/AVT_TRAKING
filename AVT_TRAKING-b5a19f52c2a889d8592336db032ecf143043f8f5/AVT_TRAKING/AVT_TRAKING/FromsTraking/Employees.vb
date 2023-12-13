@@ -145,6 +145,9 @@ Public Class Employees
             Dim result = MessageBox.Show("Are you sure to cancel the chaged made?", "Warning", MessageBoxButtons.OKCancel, MessageBoxIcon.Question)
             If result = DialogResult.OK Then
                 limpiarCampos()
+                btnUpdate.Enabled = False
+                btnSave.Enabled = True
+                btnCancel.Enabled = False
             End If
         Catch ex As Exception
 

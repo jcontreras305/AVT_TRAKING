@@ -69,7 +69,7 @@ where em1.numberEmploye like CONCAT('%','" + text + "','%') or
                 cmd.Parameters.Add("@lastName", SqlDbType.VarChar, 25).Value = datosGeneralesEmpleado(2)
                 cmd.Parameters.Add("@middleName", SqlDbType.VarChar, 25).Value = datosGeneralesEmpleado(3)
                 cmd.Parameters.Add("@socialNumber", SqlDbType.VarChar, 14).Value = datosGeneralesEmpleado(4)
-                cmd.Parameters.Add("@SAPNumber", SqlDbType.Int).Value = If(datosGeneralesEmpleado(5) = "", "0", CInt(datosGeneralesEmpleado(5)))
+                cmd.Parameters.Add("@SAPNumber", SqlDbType.VarChar, 13).Value = If(datosGeneralesEmpleado(5) = "", "0", datosGeneralesEmpleado(5))
                 cmd.Parameters.Add("@photo", SqlDbType.Image).Value = arraybyte
                 cmd.Parameters.Add("@estatus", SqlDbType.Char, 1).Value = datosGeneralesEmpleado(6)
                 'contacto
@@ -228,7 +228,7 @@ where em1.numberEmploye like CONCAT('%','" + text + "','%') or
             cmd.Parameters.Add("@lastName", SqlDbType.VarChar, 25).Value = datosNuevos(2)
             cmd.Parameters.Add("@middleName", SqlDbType.VarChar, 25).Value = datosNuevos(3)
             cmd.Parameters.Add("@socialNumber", SqlDbType.VarChar, 14).Value = datosNuevos(4)
-            cmd.Parameters.Add("@SAPNumber", SqlDbType.Int).Value = datosNuevos(5)
+            cmd.Parameters.Add("@SAPNumber", SqlDbType.VarChar, 13).Value = datosNuevos(5)
             cmd.Parameters.Add("@photo", SqlDbType.Image).Value = arraybyte
             cmd.Parameters.Add("@estatus", SqlDbType.Char, 1).Value = datosNuevos(6)
             'contacto 3

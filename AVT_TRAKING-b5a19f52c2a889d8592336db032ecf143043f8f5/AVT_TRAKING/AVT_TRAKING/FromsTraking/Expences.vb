@@ -281,12 +281,20 @@ Public Class Expences
     End Sub
 
     Private Sub btnUpdateExpJob_Click(sender As Object, e As EventArgs) Handles btnUpdateExpJob.Click
-        mtdJobs.actualizarExpence(idExpenceActualizar, txtExpenceCode.Text, txtDescription.Text)
-        btnSave.Enabled = True
-        btnCancel.Enabled = False
-        btnUbdate.Enabled = False
-        limpiarCampos()
-        mtdJobs.buscarExpenses(tblExpenses)
+        Dim datos() As String = recoletarDatosExpJob()
+        mtdJobs.updateExpenseJob(cmbExpense.Text, cmbJobNo.Text, datos)
+        btnAddExpJob.Enabled = True
+        btnCancelExpJob.Enabled = False
+        btnUpdateExpJob.Enabled = False
+        limpiarCamposExpJob()
+        If cmbFindExpJob.SelectedIndex > -1 Then
+            Dim array() As String = cmbFindExpJob.Items(cmbFindExpJob.SelectedIndex).ToString.Split(" ")
+            If array.Length > 0 Then
+                mtdJobs.selectExpensesByClient(tblExpensesJobs, array(0))
+            Else
+                mtdJobs.selectExpensesByClient(tblExpensesJobs)
+            End If
+        End If
         activarCampos(False)
     End Sub
 
