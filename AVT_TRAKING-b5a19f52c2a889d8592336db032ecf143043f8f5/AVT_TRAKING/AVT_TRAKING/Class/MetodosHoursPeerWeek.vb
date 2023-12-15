@@ -917,16 +917,21 @@ T2.[Resource ID],
 T2.[Resource Name],
 T2.[Skill Type],
 T2.[Shifth],
-T2.[lvl 1 ID],
+T2.[Level 1 ID],
 T2.[Level 2 ID],
+T2.[Level 3 ID],
 T2.[S/T Hrs],
-IIF(T2.[S/T Hrs]>0,'N/A','') as 'S/T Hrs Activity Code',
+IIF(T2.[S/T Hrs]>0,Convert(nvarchar,T2.[S/t Hrs]),'') as 'S/T Hrs Activity Code',
+--IIF(T2.[S/T Hrs]>0,'N/A','') as 'S/T Hrs Activity Code',
 T2.[O/T Hrs],
-IIF(T2.[O/T Hrs]>0,'N/A','')as 'O/T Hrs Activity Code',
+IIF(T2.[O/T Hrs]>0,Convert(nvarchar,T2.[S/t Hrs]),'')as 'O/T Hrs Activity Code',
+--IIF(T2.[O/T Hrs]>0,'N/A','')as 'O/T Hrs Activity Code',
 T2.[D/T Hrs],
-IIF(T2.[D/T Hrs]>0,'N/A','') as 'D/T Hrs Activity Code',
+IIF(T2.[D/T Hrs]>0,Convert(nvarchar,T2.[S/t Hrs]),'') as 'D/T Hrs Activity Code',
+--IIF(T2.[D/T Hrs]>0,'N/A','') as 'D/T Hrs Activity Code',
 T2.[S/T Hrs] + T2.[O/T Hrs] + T2.[D/T Hrs] as 'Total Hours',
-IIF((T2.[S/T Hrs] + T2.[O/T Hrs] + T2.[D/T Hrs])>0,'N/A','') as 'TOTAL Hrs Activity Code',
+IIF((T2.[S/T Hrs] + T2.[O/T Hrs] + T2.[D/T Hrs])>0,Convert(nvarchar,T2.[S/T Hrs] + T2.[O/T Hrs] + T2.[D/T Hrs]),'') as 'TOTAL Hrs Activity Code',
+--IIF((T2.[S/T Hrs] + T2.[O/T Hrs] + T2.[D/T Hrs])>0,'N/A','') as 'TOTAL Hrs Activity Code',
 T2.[Extra Change] as 'Extra Change'
 FROM (
 select
@@ -936,12 +941,13 @@ T1.[Resource ID],
 T1.[Resource Name],
 T1.[Skill Type],
 T1.[Shifth],
-T1.[lvl 1 ID],
+T1.[Level 1 ID],
 T1.[Level 2 ID],
-SUM(T1.[S/T Hrs]) OVER (PARTITION BY T1.[Date],T1.[EmployeeID],T1.[Skill Type],T1.[Shifth],T1.[Level 2 ID],T1.[lvl 1 ID]) as 'S/T Hrs',
-SUM(T1.[O/T Hrs]) OVER (PARTITION BY T1.[Date],T1.[EmployeeID],T1.[Skill Type],T1.[Shifth],T1.[Level 2 ID],T1.[lvl 1 ID]) AS 'O/T Hrs' ,
-SUM(T1.[D/T Hrs]) OVER (PARTITION BY T1.[Date],T1.[EmployeeID],T1.[Skill Type],T1.[Shifth],T1.[Level 2 ID],T1.[lvl 1 ID]) AS 'D/T Hrs',
-SUM(T1.[Extra Change]) OVER (PARTITION BY T1.[Date],T1.[EmployeeID],T1.[Skill Type],T1.[Shifth],T1.[Level 2 ID],T1.[lvl 1 ID]) AS 'Extra Change'
+T1.[Level 3 ID],
+SUM(T1.[S/T Hrs]) OVER (PARTITION BY T1.[Date],T1.[EmployeeID],T1.[Skill Type],T1.[Shifth],T1.[Level 1 ID],T1.[Level 2 ID],T1.[Level 3 ID]) as 'S/T Hrs',
+SUM(T1.[O/T Hrs]) OVER (PARTITION BY T1.[Date],T1.[EmployeeID],T1.[Skill Type],T1.[Shifth],T1.[Level 1 ID],T1.[Level 2 ID],T1.[Level 3 ID]) AS 'O/T Hrs' ,
+SUM(T1.[D/T Hrs]) OVER (PARTITION BY T1.[Date],T1.[EmployeeID],T1.[Skill Type],T1.[Shifth],T1.[Level 1 ID],T1.[Level 2 ID],T1.[Level 3 ID]) AS 'D/T Hrs',
+SUM(T1.[Extra Change]) OVER (PARTITION BY T1.[Date],T1.[EmployeeID],T1.[Skill Type],T1.[Shifth],T1.[Level 1 ID],T1.[Level 2 ID],T1.[Level 3 ID]) AS 'Extra Change'
 from (
 	select
 		REPLACE(CONVERT(nvarchar, hw.dateWorked),'-','') as 'Date', 
@@ -950,11 +956,14 @@ from (
 		CONCAT(em.lastName,', ',em.firstName,' ',em.middleName)as 'Resource Name', 
 		--SUBSTRING( wc.name,1,iif(CHARINDEX('-',wc.name)=0, len(wc.name) ,(CHARINDEX('-',wc.name)-1))) as  'Skill Type',
 		wc.skillType as 'Skill Type',
-		hw.schedule as 'Shifth', 
+		iif(schedule like 'day','Day','Nigth') as 'Shifth', 
 		--iif((select CHARINDEX('6.4',wc.name))>0,'NB',concat(wo.idWO,'-', tk.task)) as 'Level 1 ID',
-		CONCAT(po.idPO,po.Line) as 'lvl 1 ID',
-		CONCAT(wo.idWO,'-',tk.task)  as 'Level 1 ID',
-		po.idPO as 'Level 2 ID',
+		--CONCAT(po.idPO,po.Line) as 'lvl 1 ID',
+		--CONCAT(wo.idWO,'-',tk.task)  as 'Level 1 ID',
+		--po.idPO as 'Level 2 ID'
+		po.idPO as 'Level 1 ID',
+		wo.idWO as 'Level 2 ID',
+		tk.task as 'Level 3 ID',
 		hw.hoursST as 'S/T Hrs',
 		hw.hoursOT as 'O/T Hrs',
 		hw.hours3  as 'D/T Hrs',
@@ -1037,29 +1046,29 @@ from expensesUsed as exu
                 tbl.Rows.Add("Order Type", dr("Order Type"))
                 tbl.Rows.Add("Location ID", dr("Location ID"))
                 tbl.Rows.Add("Company Code", dr("Company Code"))
-                tbl.Rows.Add("Area", dr("Area"))
+                tbl.Rows.Add("Area", dr("Area")) '5
                 tbl.Rows.Add("Group Name", dr("Group Name"))
                 tbl.Rows.Add("Agreement", dr("Agreement"))
-                tbl.Rows.Add("Level 2 ID", dr("Level 2 ID"))
-                tbl.Rows.Add("Level 3 ID", dr("Level 3 ID"))
+                'tbl.Rows.Add("Level 2 ID", dr("Level 2 ID"))
+                'tbl.Rows.Add("Level 3 ID", dr("Level 3 ID"))
                 tbl.Rows.Add("Level 4 ID", dr("Level 4 ID"))
                 tbl.Rows.Add("Hours Total", dr("Hours Total"))
-                tbl.Rows.Add("Hours Total Activity Code", dr("Hours Total Activity Code"))
-                tbl.Rows.Add("Extra Charges $ Activity Code", dr("Extra Charges $ Activity Code"))
+                tbl.Rows.Add("Hours Total Activity Code", dr("Hours Total Activity Code")) '10
+                tbl.Rows.Add("Extra Charges $ Activity Code", dr("Extra Charges $ Activity Code")) '11
                 tbl.Rows.Add("Extra", dr("Extra"))
                 tbl.Rows.Add("Extra 1", dr("Extra 1"))
                 tbl.Rows.Add("Extra 2", dr("Extra 2"))
-                tbl.Rows.Add("Add Time", dr("Add Time"))
+                tbl.Rows.Add("Add Time", dr("Add Time")) '15
                 tbl.Rows.Add("Pay Type", dr("Pay Type"))
                 tbl.Rows.Add("R4 (Hrs)", dr(20))
                 tbl.Rows.Add("R5 (Hrs)", dr(21))
                 tbl.Rows.Add("R6 (Hrs)", dr(22))
-                tbl.Rows.Add("GL Account", dr("GL Account"))
+                tbl.Rows.Add("GL Account", dr("GL Account")) '20
                 tbl.Rows.Add("ST Adders", dr("ST Adders"))
                 tbl.Rows.Add("OT Adders", dr("OT Adders"))
                 tbl.Rows.Add("DT Adders", dr("DT Adders"))
                 tbl.Rows.Add("R4 Adders", dr("R4 Adders"))
-                tbl.Rows.Add("R5 Adders", dr("R5 Adders"))
+                tbl.Rows.Add("R5 Adders", dr("R5 Adders")) '25
                 tbl.Rows.Add("R6 Adders", dr("R6 Adders"))
             End While
             dr.Close()
