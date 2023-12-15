@@ -2108,7 +2108,8 @@ create table task (
 	accountNum varchar(12) ,
 	estimateHours float,
 	status char(1),
-	percentComplete int
+	percentComplete int,
+	Area varchar(20)
 )
 GO
 
@@ -4645,6 +4646,13 @@ GO
 ----| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
 ----V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V
 ----###############################################################################################
-----########### CAMBIOS PARA AGREGAR LA TABLA DE EXPENSES CON JOBS ################################
+----########### CAMBIOS PARA AGREGAR AREA EN LA TABLA DE TASK #####################################
 ----###############################################################################################
+
+alter table task 
+add Area varchar(20)
+go
+
+update task set Area = ''
+go
 

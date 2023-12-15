@@ -932,7 +932,8 @@ IIF(T2.[D/T Hrs]>0,Convert(nvarchar,T2.[S/t Hrs]),'') as 'D/T Hrs Activity Code'
 T2.[S/T Hrs] + T2.[O/T Hrs] + T2.[D/T Hrs] as 'Total Hours',
 IIF((T2.[S/T Hrs] + T2.[O/T Hrs] + T2.[D/T Hrs])>0,Convert(nvarchar,T2.[S/T Hrs] + T2.[O/T Hrs] + T2.[D/T Hrs]),'') as 'TOTAL Hrs Activity Code',
 --IIF((T2.[S/T Hrs] + T2.[O/T Hrs] + T2.[D/T Hrs])>0,'N/A','') as 'TOTAL Hrs Activity Code',
-T2.[Extra Change] as 'Extra Change'
+T2.[Extra Change] as 'Extra Change',
+T2.[Area]
 FROM (
 select
 DISTINCT
@@ -947,7 +948,8 @@ T1.[Level 3 ID],
 SUM(T1.[S/T Hrs]) OVER (PARTITION BY T1.[Date],T1.[EmployeeID],T1.[Skill Type],T1.[Shifth],T1.[Level 1 ID],T1.[Level 2 ID],T1.[Level 3 ID]) as 'S/T Hrs',
 SUM(T1.[O/T Hrs]) OVER (PARTITION BY T1.[Date],T1.[EmployeeID],T1.[Skill Type],T1.[Shifth],T1.[Level 1 ID],T1.[Level 2 ID],T1.[Level 3 ID]) AS 'O/T Hrs' ,
 SUM(T1.[D/T Hrs]) OVER (PARTITION BY T1.[Date],T1.[EmployeeID],T1.[Skill Type],T1.[Shifth],T1.[Level 1 ID],T1.[Level 2 ID],T1.[Level 3 ID]) AS 'D/T Hrs',
-SUM(T1.[Extra Change]) OVER (PARTITION BY T1.[Date],T1.[EmployeeID],T1.[Skill Type],T1.[Shifth],T1.[Level 1 ID],T1.[Level 2 ID],T1.[Level 3 ID]) AS 'Extra Change'
+SUM(T1.[Extra Change]) OVER (PARTITION BY T1.[Date],T1.[EmployeeID],T1.[Skill Type],T1.[Shifth],T1.[Level 1 ID],T1.[Level 2 ID],T1.[Level 3 ID]) AS 'Extra Change',
+T1.[Area]
 from (
 	select
 		REPLACE(CONVERT(nvarchar, hw.dateWorked),'-','') as 'Date', 
@@ -967,7 +969,8 @@ from (
 		hw.hoursST as 'S/T Hrs',
 		hw.hoursOT as 'O/T Hrs',
 		hw.hours3  as 'D/T Hrs',
-		ISNULL(exu.amount,0) as 'Extra Change'
+		ISNULL(exu.amount,0) as 'Extra Change',
+		tk.Area
 		from hoursWorked as hw 
 		inner join task as tk on tk.idAux = hw.idAux
 		inner join workOrder as wo on tk.idAuxWO = wo.idAuxWO 

@@ -977,6 +977,53 @@ Public Class ProjectsCosts
     End Sub
     '================ WBS ====================================================================================================
     '=========================================================================================================================
+
+    Private Sub txtArea_Leave(sender As Object, e As EventArgs) Handles txtArea.Leave
+        If flagAddRecord Then
+            If txtArea.Text <> pjtNuevo.Area Then
+                pjtNuevo.Area = txtArea.Text
+            End If
+        Else
+            If txtArea.Text <> pjt.Area Then
+                If pjt.jobNum <> Nothing And pjt.idPO <> "" Then
+                    If mtdJobs.updateArea(txtArea.Text, pjt.Area, pjt.idAux, pjt.idAuxWO) Then
+                        pjt.Area = txtArea.Text
+                    Else
+                        txtArea.Text = pjt.Area
+                    End If
+                Else
+                    txtArea.Text = pjt.Area
+                End If
+            End If
+        End If
+    End Sub
+
+    Private Sub txtArea_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtArea.KeyPress
+        If Asc(e.KeyChar) = Keys.Enter Or Asc(e.KeyChar) = Keys.Tab Then
+            If flagAddRecord Then
+                If txtArea.Text <> pjtNuevo.Area Then
+                    pjtNuevo.Area = txtArea.Text
+                End If
+            Else
+                If txtArea.Text <> pjt.Area Then
+                    If pjt.jobNum <> Nothing And pjt.idPO <> "" Then
+                        If mtdJobs.updateArea(txtArea.Text, pjt.Area, pjt.idAux, pjt.idAuxWO) Then
+                            pjt.Area = txtArea.Text
+                        Else
+                            txtArea.Text = pjt.Area
+                        End If
+                    Else
+                        txtArea.Text = pjt.Area
+                    End If
+                End If
+            End If
+        ElseIf Not Char.IsControl(e.KeyChar) Then
+            e.Handled = False
+        End If
+    End Sub
+
+    '================ WBS ====================================================================================================
+    '=========================================================================================================================
     Private Sub txtWBS_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtWBS.KeyPress
         If Asc(e.KeyChar) = Keys.Enter Or Asc(e.KeyChar) = Keys.Tab Then
             If flagAddRecord Then
@@ -1020,6 +1067,8 @@ Public Class ProjectsCosts
             End If
         End If
     End Sub
+
+
     '================ DESCRIPTION ============================================================================================
     '=========================================================================================================================
 
