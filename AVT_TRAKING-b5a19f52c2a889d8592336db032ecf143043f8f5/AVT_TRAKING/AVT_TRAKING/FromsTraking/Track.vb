@@ -47,8 +47,8 @@ Public Class Track
                             txtMessage.Text = "Message: Writing data of hours worked...Row number(" + cont.ToString + " of " + tblhrs.Rows.Count.ToString() + ")."
                             '                  RECORD ID                  , FORCE OR REJECT, SOURCE       ,       DATE                  , ORDER TYPE    , LOCATION ID   , COMPANY CODE  ,        ROSOURSE ID          ,     RESOURSE NAME           ,     AREA      ,  GROUP NAME   ,  AGREEMENT    ,          SKILL TYPE         ,               SHIFT         ,          LEVEL 1 ID         , LEVEL 2 ID    ,   LEVEL 3 ID  ,  LEVEL 4 ID    ,        HOURS TOTAL           , HRS TOTAL ACTCODE ,         S/T  (HRS)          ,   S/T  HRS ACTI CODE        ,           O/T HRS            ,           O/T HRS ACT CODE   ,            D/T HRS             ,         D/T HRS ACT CODE     ,        EXTRA CHANGUES      ,EXT CHARG ACT CODE,      EXTRA    ,    EXTRA 1     ,    EXTRA 2     ,     ADD TIME   ,      PAY TYPE  ,      R4        ,        R5      ,       R6       ,     GL ACCOUNT ,   ST ADDRESS   ,    OT ADDRESS  ,  DT ADDRESS    ,   R4 ADDRESS   ,  R5 ADDRESS    ,  R6 ADDRESS                                                                                                                                              
                             'tblTrack.Rows.Add(row1.ItemArray(0).ToString(), listDefault(0), listDefault(1), row1.ItemArray(1).ToString(), listDefault(2), listDefault(3), listDefault(4), row1.ItemArray(2).ToString(), row1.ItemArray(3).ToString(), listDefault(5), listDefault(6), listDefault(7), row1.ItemArray(4).ToString(), row1.ItemArray(5).ToString(), row1.ItemArray(6).ToString(), listDefault(8), listDefault(9), listDefault(10), row1.ItemArray(14).ToString(), row1.ItemArray(15), row1.ItemArray(8).ToString(), row1.ItemArray(9).ToString(), row1.ItemArray(10).ToString(), row1.ItemArray(11).ToString(), row1.ItemArray(12).ToString(), row1.ItemArray(13).ToString(), row1.ItemArray(16).ToString(), listDefault(13), listDefault(14), listDefault(15), listDefault(16), listDefault(17), listDefault(18), listDefault(19), listDefault(20), listDefault(21), listDefault(22), listDefault(23), listDefault(24), listDefault(25), listDefault(26), listDefault(27), listDefault(28))
-                            '                  RECORD ID                  , FORCE OR REJECT, SOURCE       ,       DATE                  , ORDER TYPE    , LOCATION ID   , COMPANY CODE  ,        ROSOURSE ID          ,     RESOURSE NAME           ,            AREA            ,  GROUP NAME   ,  AGREEMENT    ,          SKILL TYPE         ,               SHIFT         ,          LEVEL 1 ID         ,           LEVEL 2 ID        ,          LEVEL 3 ID         ,  LEVEL 4 ID   ,        HOURS TOTAL           , HRS TOTAL ACTCODE ,         S/T  (HRS)          ,   S/T  HRS ACTI CODE        ,           O/T HRS            ,           O/T HRS ACT CODE   ,            D/T HRS             ,         D/T HRS ACT CODE    ,        EXTRA CHANGUES      ,EXT CHARG ACT CODE,      EXTRA    ,    EXTRA 1     ,    EXTRA 2     ,     ADD TIME   ,      PAY TYPE  ,      R4        ,        R5      ,       R6       ,     GL ACCOUNT ,   ST ADDRESS   ,    OT ADDRESS  ,  DT ADDRESS    ,   R4 ADDRESS   ,  R5 ADDRESS    ,  R6 ADDRESS                                                                                                                                              
-                            tblTrack.Rows.Add(row1.ItemArray(0).ToString(), listDefault(0), listDefault(1), row1.ItemArray(1).ToString(), listDefault(2), listDefault(3), listDefault(4), row1.ItemArray(2).ToString(), row1.ItemArray(3).ToString(), row1.ItemArray(18).ToString(), listDefault(6), listDefault(7), row1.ItemArray(4).ToString(), row1.ItemArray(5).ToString(), row1.ItemArray(6).ToString(), row1.ItemArray(7).ToString(), row1.ItemArray(8).ToString(), listDefault(8), row1.ItemArray(15).ToString(), row1.ItemArray(16), row1.ItemArray(9).ToString(), row1.ItemArray(10).ToString(), row1.ItemArray(11).ToString(), row1.ItemArray(12).ToString(), row1.ItemArray(13).ToString(), row1.ItemArray(14).ToString(), row1.ItemArray(17).ToString(), listDefault(11), listDefault(12), listDefault(13), listDefault(14), listDefault(15), listDefault(16), listDefault(17), listDefault(18), listDefault(19), listDefault(20), listDefault(21), listDefault(22), listDefault(23), listDefault(24), listDefault(25), listDefault(26))
+                            '                  RECORD ID                  , FORCE OR REJECT, SOURCE       ,       DATE                  , ORDER TYPE    , LOCATION ID   , COMPANY CODE  ,        ROSOURSE ID          ,     RESOURSE NAME           ,            AREA            ,  GROUP NAME   ,  AGREEMENT    ,          SKILL TYPE         ,               SHIFT         ,          LEVEL 1 ID         ,           LEVEL 2 ID        ,          LEVEL 3 ID         ,  LEVEL 4 ID   ,        HOURS TOTAL           , HRS TOTAL ACTCODE ,         S/T  (HRS)     , S/T  HRS ACTI CODE,           O/T HRS          ,O/T HRS ACT CODE,            D/T HRS             ,         D/T HRS ACT CODE      ,        EXTRA CHANGUES       ,EXT CHARG ACT CODE,      EXTRA    ,    EXTRA 1     ,    EXTRA 2     ,     ADD TIME   ,      PAY TYPE  ,      R4        ,        R5      ,       R6       ,     GL ACCOUNT ,   ST ADDRESS   ,    OT ADDRESS  ,  DT ADDRESS    ,   R4 ADDRESS   ,  R5 ADDRESS    ,  R6 ADDRESS    ,Override Comment, Override Reason,Attachment Name,Expetion Heandler (Area ID)                                                        
+                            tblTrack.Rows.Add(row1.ItemArray(0).ToString(), listDefault(0), listDefault(1), row1.ItemArray(1).ToString(), listDefault(2), listDefault(3), listDefault(4), row1.ItemArray(2).ToString(), row1.ItemArray(3).ToString(), row1.ItemArray(18).ToString(), listDefault(6), listDefault(7), row1.ItemArray(4).ToString(), row1.ItemArray(5).ToString(), row1.ItemArray(6).ToString(), row1.ItemArray(7).ToString(), row1.ItemArray(8).ToString(), listDefault(8), row1.ItemArray(15).ToString(), listDefault(9), row1.ItemArray(9).ToString(), listDefault(9), row1.ItemArray(11).ToString(), listDefault(9), row1.ItemArray(13).ToString(), row1.ItemArray(14).ToString(), row1.ItemArray(17).ToString(), listDefault(11), listDefault(12), listDefault(13), listDefault(14), listDefault(15), listDefault(16), listDefault(17), listDefault(18), listDefault(19), listDefault(20), listDefault(21), listDefault(22), listDefault(23), listDefault(24), listDefault(25), listDefault(26), listDefault(27), listDefault(28), listDefault(29), listDefault(30))
                         Next
                         pdbPercent.Value = pdbPercent.Value + 30
                         'cont = 0
@@ -87,7 +87,7 @@ Public Class Track
             Dim libro = ApExcel.Workbooks.Add()
             libro.Sheets(1).Name = "Track"
             Try
-
+                Dim hoja1 = libro.Worksheets(1)
                 txtMessage.Text = "Message: Inserting columns headres..."
                 Dim listColumnsV As New List(Of String)
                 For Each columnT As DataGridViewColumn In tblTrack.Columns
@@ -98,8 +98,8 @@ Public Class Track
                 'Dim colums() As String = {tblTrack.Columns(0).HeaderText, tblTrack.Columns(1).HeaderText, tblTrack.Columns(2).HeaderText, tblTrack.Columns(3).HeaderText, tblTrack.Columns(4).HeaderText, tblTrack.Columns(5).HeaderText, tblTrack.Columns(6).HeaderText, tblTrack.Columns(7).HeaderText, tblTrack.Columns(8).HeaderText, tblTrack.Columns(9).HeaderText, tblTrack.Columns(10).HeaderText, tblTrack.Columns(11).HeaderText, tblTrack.Columns(12).HeaderText, tblTrack.Columns(13).HeaderText, tblTrack.Columns(14).HeaderText, tblTrack.Columns(15).HeaderText, tblTrack.Columns(16).HeaderText, tblTrack.Columns(17).HeaderText, tblTrack.Columns(18).HeaderText, tblTrack.Columns(19).HeaderText, tblTrack.Columns(20).HeaderText, tblTrack.Columns(21).HeaderText, tblTrack.Columns(22).HeaderText, tblTrack.Columns(23).HeaderText, tblTrack.Columns(24).HeaderText, tblTrack.Columns(25).HeaderText, tblTrack.Columns(26).HeaderText, tblTrack.Columns(27).HeaderText, tblTrack.Columns(28).HeaderText, tblTrack.Columns(29).HeaderText, tblTrack.Columns(30).HeaderText, tblTrack.Columns(31).HeaderText, tblTrack.Columns(32).HeaderText, tblTrack.Columns(33).HeaderText, tblTrack.Columns(34).HeaderText, tblTrack.Columns(35).HeaderText, tblTrack.Columns(36).HeaderText, tblTrack.Columns(37).HeaderText, tblTrack.Columns(38).HeaderText, tblTrack.Columns(39).HeaderText, tblTrack.Columns(40).HeaderText, tblTrack.Columns(41).HeaderText, tblTrack.Columns(42).HeaderText}
                 Dim countColumns As Integer = 1
                 For Each item As String In listColumnsV
-                    libro.Sheets(1).cells(1, countColumns) = item
-                    libro.Sheets(1).cells(1, countColumns).Interior.Color = RGB(255, 255, 0)
+                    hoja1.cells(1, countColumns) = item
+                    hoja1.cells(1, countColumns).Interior.Color = RGB(255, 255, 0)
                     countColumns += 1
                 Next
                 txtMessage.Text = "Message: Inserting data..."
@@ -110,14 +110,24 @@ Public Class Track
                 Dim countIncrement As Integer = 0
 
                 For Each row As DataGridViewRow In tblTrack.Rows()
-                    Dim contCell As Integer = 0
-                    Dim countVisibleColumn As Integer = 1
+                    'Dim contCell As Integer = 0
+                    'Dim countVisibleColumn As Integer = 1
                     For Each cell As DataGridViewCell In row.Cells
                         If cell.Visible = True Then
-                            libro.Sheets(1).cells(count, countVisibleColumn) = row.Cells(contCell).Value.ToString()
-                            countVisibleColumn += 1
+                            Dim arrayTextColmns() = {3, 5, 6, 11, 15, 16, 19, 28}
+                            Dim arrayFormatNumber() = {20, 22, 24, 26, 33, 34, 35}
+                            If Array.IndexOf(arrayTextColmns, cell.ColumnIndex) > -1 Then
+                                hoja1.cells(row.Index + 2, cell.ColumnIndex + 1) = cell.Value.ToString()
+                                hoja1.cells(row.Index + 2, cell.ColumnIndex + 1).NumberFormat = "@"
+                            ElseIf Array.IndexOf(arrayFormatNumber, cell.ColumnIndex) > -1 Then
+                                hoja1.cells(row.Index + 2, cell.ColumnIndex + 1) = cell.Value.ToString()
+                                hoja1.cells(row.Index + 2, cell.ColumnIndex + 1).NumberFormat = "#,##0.00"
+                            Else
+                                hoja1.cells(row.Index + 2, cell.ColumnIndex + 1) = cell.Value.ToString()
+                            End If
+                            'libro.Sheets(1).cells(count, countVisibleColumn) = row.Cells(contCell).Value.ToString()
+
                         End If
-                        contCell += 1
                     Next
                     count += 1
                     countIncrement += 1

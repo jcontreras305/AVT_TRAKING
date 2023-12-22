@@ -1287,7 +1287,7 @@ where jb.jobNo = " + If(idJob = "", "0", idJob).ToString() + " and tk.task = '" 
         Try
             conectar()
             Dim cmd1 As New SqlCommand("
-update task set equipament = '" + AreaN + "' 
+update task set Area = '" + AreaN + "' 
 from task as tk 
 inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO
 inner join projectOrder as po on po.idPO = wo.idPO

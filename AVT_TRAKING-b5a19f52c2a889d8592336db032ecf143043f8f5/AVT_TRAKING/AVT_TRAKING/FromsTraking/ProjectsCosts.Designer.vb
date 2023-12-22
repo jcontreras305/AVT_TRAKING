@@ -45,6 +45,8 @@ Partial Class ProjectsCosts
         Me.txtTask = New System.Windows.Forms.TextBox()
         Me.txtClientPO = New System.Windows.Forms.TextBox()
         Me.Panel6 = New System.Windows.Forms.Panel()
+        Me.Label35 = New System.Windows.Forms.Label()
+        Me.txtArea = New System.Windows.Forms.TextBox()
         Me.Label33 = New System.Windows.Forms.Label()
         Me.txtWBS = New System.Windows.Forms.TextBox()
         Me.Label7 = New System.Windows.Forms.Label()
@@ -146,8 +148,6 @@ Partial Class ProjectsCosts
         Me.btnUpdateMaterialExcel = New System.Windows.Forms.Button()
         Me.btnUpdate = New System.Windows.Forms.Button()
         Me.pnlTablas = New System.Windows.Forms.Panel()
-        Me.Label35 = New System.Windows.Forms.Label()
-        Me.txtArea = New System.Windows.Forms.TextBox()
         Me.Panel1.SuspendLayout()
         Me.TableLayoutPanel2.SuspendLayout()
         Me.Panel5.SuspendLayout()
@@ -278,7 +278,7 @@ Partial Class ProjectsCosts
         'Label32
         '
         Me.Label32.AutoSize = True
-        Me.Label32.Location = New System.Drawing.Point(304, 197)
+        Me.Label32.Location = New System.Drawing.Point(292, 197)
         Me.Label32.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label32.Name = "Label32"
         Me.Label32.Size = New System.Drawing.Size(52, 17)
@@ -289,11 +289,11 @@ Partial Class ProjectsCosts
         '
         Me.txtLine.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.txtLine.Location = New System.Drawing.Point(371, 193)
+        Me.txtLine.Location = New System.Drawing.Point(366, 193)
         Me.txtLine.Margin = New System.Windows.Forms.Padding(4)
-        Me.txtLine.MaxLength = 1
+        Me.txtLine.MaxLength = 5
         Me.txtLine.Name = "txtLine"
-        Me.txtLine.Size = New System.Drawing.Size(50, 24)
+        Me.txtLine.Size = New System.Drawing.Size(55, 24)
         Me.txtLine.TabIndex = 37
         '
         'btnChangeJobNo
@@ -444,8 +444,6 @@ Partial Class ProjectsCosts
         '
         'txtClientPO
         '
-        Me.txtClientPO.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.txtClientPO.Location = New System.Drawing.Point(128, 193)
         Me.txtClientPO.Margin = New System.Windows.Forms.Padding(4)
         Me.txtClientPO.Name = "txtClientPO"
@@ -477,6 +475,27 @@ Partial Class ProjectsCosts
         Me.Panel6.Name = "Panel6"
         Me.Panel6.Size = New System.Drawing.Size(517, 231)
         Me.Panel6.TabIndex = 42
+        '
+        'Label35
+        '
+        Me.Label35.AutoSize = True
+        Me.Label35.Location = New System.Drawing.Point(99, 203)
+        Me.Label35.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.Label35.Name = "Label35"
+        Me.Label35.Size = New System.Drawing.Size(40, 17)
+        Me.Label35.TabIndex = 40
+        Me.Label35.Text = "Area"
+        '
+        'txtArea
+        '
+        Me.txtArea.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.txtArea.Location = New System.Drawing.Point(165, 199)
+        Me.txtArea.Margin = New System.Windows.Forms.Padding(4)
+        Me.txtArea.MaxLength = 10
+        Me.txtArea.Name = "txtArea"
+        Me.txtArea.Size = New System.Drawing.Size(209, 24)
+        Me.txtArea.TabIndex = 41
         '
         'Label33
         '
@@ -1805,27 +1824,6 @@ Partial Class ProjectsCosts
         Me.pnlTablas.Name = "pnlTablas"
         Me.pnlTablas.Size = New System.Drawing.Size(1476, 274)
         Me.pnlTablas.TabIndex = 4
-        '
-        'Label35
-        '
-        Me.Label35.AutoSize = True
-        Me.Label35.Location = New System.Drawing.Point(99, 203)
-        Me.Label35.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.Label35.Name = "Label35"
-        Me.Label35.Size = New System.Drawing.Size(40, 17)
-        Me.Label35.TabIndex = 40
-        Me.Label35.Text = "Area"
-        '
-        'txtArea
-        '
-        Me.txtArea.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.txtArea.Location = New System.Drawing.Point(165, 199)
-        Me.txtArea.Margin = New System.Windows.Forms.Padding(4)
-        Me.txtArea.MaxLength = 10
-        Me.txtArea.Name = "txtArea"
-        Me.txtArea.Size = New System.Drawing.Size(209, 24)
-        Me.txtArea.TabIndex = 41
         '
         'ProjectsCosts
         '

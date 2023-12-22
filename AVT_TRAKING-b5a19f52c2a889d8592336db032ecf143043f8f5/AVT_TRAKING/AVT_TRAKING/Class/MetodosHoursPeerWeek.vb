@@ -1073,6 +1073,10 @@ from expensesUsed as exu
                 tbl.Rows.Add("R4 Adders", dr("R4 Adders"))
                 tbl.Rows.Add("R5 Adders", dr("R5 Adders")) '25
                 tbl.Rows.Add("R6 Adders", dr("R6 Adders"))
+                tbl.Rows.Add("Override Reason", dr("Override Reason"))
+                tbl.Rows.Add("Override Comment", dr("Override Comment"))
+                tbl.Rows.Add("Attachment Name", dr("Attachment Name"))
+                tbl.Rows.Add("Exception Handler (Area ID)", dr("Exception Handler (Area ID)"))
             End While
             dr.Close()
             Return True
@@ -1220,6 +1224,18 @@ from expensesUsed as exu
 
                 values = seperarDatosFormatColumnsTable(dr("R6 Adders"))
                 tbl.Rows.Add("R6 Adders", If(values(1) = "1", True, False), values(0))
+
+                values = seperarDatosFormatColumnsTable(dr("Override Reason"))
+                tbl.Rows.Add("Override Reason", If(values(1) = "1", True, False), values(0))
+
+                values = seperarDatosFormatColumnsTable(dr("Override Comment"))
+                tbl.Rows.Add("Override Comment", If(values(1) = "1", True, False), values(0))
+
+                values = seperarDatosFormatColumnsTable(dr("Attachment Name"))
+                tbl.Rows.Add("Attachment Name", If(values(1) = "1", True, False), values(0))
+
+                values = seperarDatosFormatColumnsTable(dr("Exception Handler (Area ID)"))
+                tbl.Rows.Add("Exception Handler (Area ID)", If(values(1) = "1", True, False), values(0))
                 Exit While
             End While
             dr.Close()

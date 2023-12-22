@@ -95,10 +95,20 @@ Public Class ReportFieldForce
                 Hoja1.Cells(1, countColum) = colm.Name.ToString()
                 countColum += 1
             Next
+            Hoja1.Range("A:I").EntireColumn.AutoFit
             For Each row As DataGridViewRow In tblFieldForce.Rows
                 lastRow += 1
                 For Each cell As DataGridViewCell In row.Cells
-                    Hoja1.Cells(row.Index + 2, cell.ColumnIndex + 1) = cell.Value.ToString()
+                    If cell.ColumnIndex = 2 Or cell.ColumnIndex = 4 Or cell.ColumnIndex = 5 Or cell.ColumnIndex = 8 Then 'se pone un espacio al incio
+                        Hoja1.Cells(row.Index + 2, cell.ColumnIndex + 1) = cell.Value.ToString()
+                        Hoja1.cells(row.Index + 2, cell.ColumnIndex + 1).NumberFormat = "@"
+                    ElseIf cell.ColumnIndex = 18 Or cell.ColumnIndex = 19 Then
+                        Hoja1.Cells(row.Index + 2, cell.ColumnIndex + 1) = FormatNumber(cell.Value, 2)
+                        Hoja1.cells(row.Index + 2, cell.ColumnIndex + 1).NumberFormat = "#,##0.00"
+                    Else
+                        Hoja1.Cells(row.Index + 2, cell.ColumnIndex + 1) = cell.Value
+                    End If
+
                     'If cell.ColumnIndex = 2 Or cell.ColumnIndex = 4 Then
                     '    Hoja1.Cells(row.Index + 2, cell.ColumnIndex + 1).Style.NumberFormat = "#####"
                     'ElseIf cell.ColumnIndex = 8 Then
@@ -170,7 +180,7 @@ select
 * from (
 select 
 	DISTINCT
-	jb.postingProject as 'Posting Project',
+	SUBSTRING(CAST(jb.[postingProject] AS varchar),1,IIF(LEN(CAST(jb.[postingProject] AS VARCHAR))<=10,LEN(CAST(jb.[postingProject] AS VARCHAR)),10) ) as 'Posting Project',
 	po.idPO as 'Purchase Order',
 	po.Line as 'Line .',
 	wo.idWO as 'Work Order',
@@ -187,9 +197,9 @@ select
 	wc.CustomerPositionID as 'Customer Position ID',
 	wc.CustomerJobPositionDescription as 'Customer Job Position Description',
 	wc.CBSFullNumber as 'CBS Full Number',
-	SUM (hw.hoursST) OVER(PARTITION BY jb.postingProject , po.IdPO , wo.idWO , tk.task, CONVERT(varchar, hw.dateWorked,101),hw.schedule,em.numberEmploye,wc.CBSFullNumber)  as 'Allocation ST',
-	SUM (hw.hoursOT) OVER(PARTITION BY jb.postingProject , po.IdPO , wo.idWO , tk.task, CONVERT(varchar, hw.dateWorked,101),hw.schedule,em.numberEmploye,wc.CBSFullNumber)  as 'Allocation OT',
-	IIF (SUM (hw.hours3) OVER(PARTITION BY jb.postingProject , po.IdPO , wo.idWO , tk.task, CONVERT(varchar, hw.dateWorked,101),hw.schedule,em.numberEmploye,wc.CBSFullNumber)=0,'',CONCAT('',SUM (hw.hours3) OVER(PARTITION BY jb.postingProject , po.IdPO , wo.idWO , tk.task, hw.dateWorked,hw.schedule,em.numberEmploye,wc.CBSFullNumber))) as 'Allocation DT',
+	SUM (hw.hoursST) OVER(PARTITION BY SUBSTRING(CAST(jb.[postingProject] AS varchar),1,IIF(LEN(CAST(jb.[postingProject] AS VARCHAR))<=10,LEN(CAST(jb.[postingProject] AS VARCHAR)),10) ) , po.IdPO , wo.idWO , tk.task, CONVERT(varchar, hw.dateWorked,101),hw.schedule,em.numberEmploye,wc.CBSFullNumber)  as 'Allocation ST',
+	SUM (hw.hoursOT) OVER(PARTITION BY SUBSTRING(CAST(jb.[postingProject] AS varchar),1,IIF(LEN(CAST(jb.[postingProject] AS VARCHAR))<=10,LEN(CAST(jb.[postingProject] AS VARCHAR)),10) ) , po.IdPO , wo.idWO , tk.task, CONVERT(varchar, hw.dateWorked,101),hw.schedule,em.numberEmploye,wc.CBSFullNumber)  as 'Allocation OT',
+	IIF (SUM (hw.hours3) OVER(PARTITION BY SUBSTRING(CAST(jb.[postingProject] AS varchar),1,IIF(LEN(CAST(jb.[postingProject] AS VARCHAR))<=10,LEN(CAST(jb.[postingProject] AS VARCHAR)),10) ) , po.IdPO , wo.idWO , tk.task, CONVERT(varchar, hw.dateWorked,101),hw.schedule,em.numberEmploye,wc.CBSFullNumber)=0,'',CONCAT('',SUM (hw.hours3) OVER(PARTITION BY jb.postingProject , po.IdPO , wo.idWO , tk.task, hw.dateWorked,hw.schedule,em.numberEmploye,wc.CBSFullNumber))) as 'Allocation DT',
 	'' as 'IsSubsistence',
     '' as 'Equipment ID',
 	'' as 'Customer Equipment ID',
@@ -210,7 +220,7 @@ where hw.dateWorked between @startDate and @endDate
 UNION 
 
 select 
-	jb.postingProject as 'Posting Project',
+	SUBSTRING(CAST(jb.[postingProject] AS varchar),1,IIF(LEN(CAST(jb.[postingProject] AS VARCHAR))<=10,LEN(CAST(jb.[postingProject] AS VARCHAR)),10) ) as 'Posting Project',
 	po.idPO as 'Purchase Order',
 	po.Line as 'Line .',
 	wo.idWO as 'Work Order',

@@ -104,7 +104,7 @@ GO
 insert into typeEmployee values ('Manager'),('Normal')
 GO
 --##########################################################################################
---##################  TABLA DE UNITMEASSUREMENTS ###########################################
+--##################  TABLA DE TRACK ELEMENTS ##############################################
 --##########################################################################################
 create table TrackElements(
 	id int identity (1,1),
@@ -140,7 +140,12 @@ insert into TrackElements values
 ('DT Adders	',''),
 ('R4 Adders	',''),
 ('R5 Adders	',''),
-('R6 Adders','')
+('R6 Adders',''),
+('Override Reason' ,''),
+('Override Comment' ,''),
+('Attachment Name' , ''),
+('Exception Handler (Area ID)' , '')
+
 --##########################################################################################
 --##################  TABLA DE workTMLumpSum ###############################################
 --##########################################################################################
@@ -2240,7 +2245,11 @@ idClient varchar(36),
 [R4 Adders] varchar(15),
 [R5 Adders] varchar(15),
 [R6 Adders] varchar(15),
-[Level 2 ID] varchar(15)
+[Level 2 ID] varchar(15),
+[Override Reason] varchar(15),
+[Override Comment] varchar(15),
+[Attachment Name] varchar(15),
+[Exception Handler (Area ID)] varchar(15)
 )
 GO
 --##########################################################################################
@@ -2291,7 +2300,11 @@ create table TrackFormatColums(
 	[DT Adders]varchar(51),
 	[R4 Adders]varchar(51),
 	[R5 Adders]varchar(51),
-	[R6 Adders]varchar(51)
+	[R6 Adders]varchar(51),
+	[Override Reason] varchar(51),
+	[Override Comment] varchar(51),
+	[Attachment Name] varchar(51),
+	[Exception Handler (Area ID)] varchar(51)
 )
 GO
 --##########################################################################################
@@ -4642,17 +4655,59 @@ GO
 --go
 
 --update expensesUsed set dayInserted = DATEADD (dd,iif(DATEPART (dw, dateExpense)=1,0,8-(DATEPART (dw, dateExpense))),dateExpense) 
-----| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-----| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-----V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V
+
 ----###############################################################################################
 ----########### CAMBIOS PARA AGREGAR AREA EN LA TABLA DE TASK #####################################
 ----###############################################################################################
 
-alter table task 
-add Area varchar(20)
+--alter table task 
+--add Area varchar(20)
+--go
+
+--update task set Area = ''
+--go
+----| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
+----| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
+----V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V
+----###############################################################################################
+----########### CAMBIOS PARA EL REPORTE DE TRAK AGREGAR COLUMNAS ##################################
+----###############################################################################################
+alter table TrackDefaultElements 
+add [Override Reason] varchar(15),
+[Override Comment] varchar(15),
+[Attachment Name] varchar(15),
+[Exception Handler (Area ID)] varchar(15)
+GO
+
+update TrackDefaultElements set [Override Reason] ='',
+[Override Comment] ='',
+[Attachment Name] ='',
+[Exception Handler (Area ID)] =''
+GO
+
+alter table TrackFormatColums
+add [Override Reason] varchar(51),
+[Override Comment] varchar(51),
+[Attachment Name] varchar(51),
+[Exception Handler (Area ID)] varchar(51)
+go 
+
+update TrackFormatColums set [Override Reason] ='Override Reason',
+[Override Comment] ='Override Comment',
+[Attachment Name] = 'Attachment Name',
+[Exception Handler (Area ID)] = 'Expetion Heandler (Area ID)'
 go
 
-update task set Area = ''
+update TrackElements set 
+[Override Reason] ='Override Reason',
+[Override Comment] ='Override Comment',
+[Attachment Name] = 'Attachment Name',
+[Exception Handler (Area ID)] = 'Expetion Heandler (Area ID)'
 go
 
+
+insert into TrackElements values ('Override Reason' ,''),
+('Override Comment' ,''),
+('Attachment Name' , ''),
+('Exception Handler (Area ID)' , '')
+go

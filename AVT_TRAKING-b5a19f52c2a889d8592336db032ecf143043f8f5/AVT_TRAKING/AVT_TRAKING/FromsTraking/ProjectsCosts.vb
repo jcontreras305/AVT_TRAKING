@@ -404,6 +404,8 @@ Public Class ProjectsCosts
                 End If
                 txtLine.Text = lstDatosPO(17)
                 txtWBS.Text = lstDatosPO(18)
+                txtArea.Text = lstDatosPO(19)
+
                 'cmbJobNumber.SelectedIndex = cmbJobNumber.FindString(JobNumber.ToString())
                 'AQUI SE CARGARAN LOS DATOS A LA CLASE DE PROJECT 
                 pjt.idPO = txtClientPO.Text
@@ -427,6 +429,7 @@ Public Class ProjectsCosts
                 sprPercentComplete.Value = pjt.PercentComplete
                 pjt.Line = lstDatosPO(17)
                 pjt.WBS = lstDatosPO(18)
+                pjt.Area = lstDatosPO(19)
 
                 Dim tbl As New DataTable
                 mtdJobs.consultaJobs(tbl)
