@@ -954,8 +954,9 @@ from (
 	select
 		REPLACE(CONVERT(nvarchar, hw.dateWorked),'-','') as 'Date', 
 		em.numberEmploye as 'EmployeeID',
-		iif(em.SAPNumber is null,'',iif(Len(Convert(nvarchar,em.SAPNumber))>3,Concat(SUBSTRING(Convert (nvarchar,em.SAPNumber),1,3),'-',SUBSTRING(CONVERT(nvarchar,em.SAPNumber),4,LEN(CONVERT(nvarchar,em.SAPNumber))-3)),'')) as 'Resource ID',
-		CONCAT(em.lastName,', ',em.firstName,' ',em.middleName)as 'Resource Name', 
+		--iif(em.SAPNumber is null,'',iif(Len(Convert(nvarchar,em.SAPNumber))>3,Concat(SUBSTRING(Convert (nvarchar,em.SAPNumber),1,3),'-',SUBSTRING(CONVERT(nvarchar,em.SAPNumber),4,LEN(CONVERT(nvarchar,em.SAPNumber))-3)),'')) as 'Resource ID',
+		ISNULL(em.SAPNumber, '') as 'Resource ID',
+        CONCAT(em.lastName,', ',em.firstName,' ',em.middleName)as 'Resource Name', 
 		--SUBSTRING( wc.name,1,iif(CHARINDEX('-',wc.name)=0, len(wc.name) ,(CHARINDEX('-',wc.name)-1))) as  'Skill Type',
 		wc.skillType as 'Skill Type',
 		iif(schedule like 'day','Day','Nigth') as 'Shifth', 

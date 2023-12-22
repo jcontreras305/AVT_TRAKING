@@ -161,7 +161,7 @@ Public Class Employees
             btnUpdate.Enabled = True
             emplyeeDataList.Clear()
             For Each cell As DataGridViewCell In tblEmployees.CurrentRow.Cells
-                emplyeeDataList.Add(cell.Value)
+                emplyeeDataList.Add(If(cell.Value Is DBNull.Value, "", cell.Value.ToString()))
             Next
             Dim arrayImage As Byte() = mtd.cargar_Imagen_De_Employee(emplyeeDataList(1), emplyeeDataList(0))
             imgPhoto.Image = BytetoImage(arrayImage)

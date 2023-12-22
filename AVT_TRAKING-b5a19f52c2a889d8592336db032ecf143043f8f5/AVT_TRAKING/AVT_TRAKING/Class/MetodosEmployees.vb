@@ -199,7 +199,7 @@ where em1.numberEmploye like CONCAT('%','" + text + "','%') or
                 Dim cont As Int16 = 0
                 Do
                     If cont <> 7 Then 'NO se agrega la imagen del empleado
-                        list.Add(CStr(rd(cont)))
+                        list.Add(CStr(If(rd(cont) Is DBNull.Value, "", rd(cont))))
                     End If
                     cont += 1
                 Loop While cont < 27
