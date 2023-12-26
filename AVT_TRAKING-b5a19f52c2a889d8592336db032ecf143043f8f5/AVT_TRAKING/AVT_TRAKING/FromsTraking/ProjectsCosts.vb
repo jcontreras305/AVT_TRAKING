@@ -582,7 +582,7 @@ Public Class ProjectsCosts
     End Sub
 
     Public Function validarTask() As Boolean
-        If txtTask.Text.Length >= 2 And txtTask.Text.Length <= 7 Then
+        If txtTask.Text.Length >= 2 And txtTask.Text.Length <= 10 Then
             Dim flagTask As Boolean = True
             For Each row As DataRow In tablasDeTareas.Rows
                 If txtTask.Text = row.ItemArray(3).ToString And txtWokOrder.Text = row.ItemArray(2) And cmbJobNumber.Text = row.ItemArray(0).ToString() And txtClientPO.Text = row.ItemArray(1).ToString() Then
@@ -593,10 +593,10 @@ Public Class ProjectsCosts
             Return flagTask
         Else
             If txtTask.Text.Length < 3 Then
-                MessageBox.Show("The 'Task' parameter admits a code whose length is between 2 and 7 characters..", "Error", MessageBoxButtons.YesNo, MessageBoxIcon.Error)
+                MessageBox.Show("The 'Task' parameter admits a code whose length is between 2 and 10 characters..", "Error", MessageBoxButtons.YesNo, MessageBoxIcon.Error)
                 Return False
             ElseIf txtTask.Text.Length > 6 Then
-                MessageBox.Show("The 'Task' parameter admits a code whose length is between 2 and 7 characters.", "Error", MessageBoxButtons.YesNo, MessageBoxIcon.Error)
+                MessageBox.Show("The 'Task' parameter admits a code whose length is between 2 and 10 characters.", "Error", MessageBoxButtons.YesNo, MessageBoxIcon.Error)
                 Return False
             Else
                 Return False

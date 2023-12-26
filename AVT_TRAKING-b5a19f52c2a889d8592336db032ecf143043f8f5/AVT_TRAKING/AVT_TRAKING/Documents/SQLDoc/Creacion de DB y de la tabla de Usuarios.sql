@@ -2100,7 +2100,7 @@ GO
 
 create table task (
 	idAux varchar(36) primary key not null,
-	task varchar(7),
+	task varchar(10),
 	idAuxWO varchar(36),
 	totalSpend float,
 	equipament varchar(30),

@@ -437,7 +437,7 @@ Partial Class ProjectsCosts
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.txtTask.Location = New System.Drawing.Point(332, 96)
         Me.txtTask.Margin = New System.Windows.Forms.Padding(4)
-        Me.txtTask.MaxLength = 7
+        Me.txtTask.MaxLength = 10
         Me.txtTask.Name = "txtTask"
         Me.txtTask.Size = New System.Drawing.Size(88, 24)
         Me.txtTask.TabIndex = 4

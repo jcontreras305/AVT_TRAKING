@@ -324,7 +324,7 @@ Public Class TimeSheet
                         While workOrders.Cells(contwo, 2).Text <> ""
                             Dim wo = workOrders.Cells(contwo, 2).Text.ToString().Replace(" ", "-")
                             Dim workOrder() As String = wo.Split("-") 'workOrder y task
-                            tablaWO.Rows.Add(CStr(contwo - 1), workOrder(0), If(workOrder.Length = 1, "", workOrder(1)), workOrders.Cells(contwo, 2).Text, workOrders.Cells(contwo, 3).Text, workOrders.Cells(contwo, 5).Text, workOrders.Cells(contwo, 6).Text, workOrders.Cells(contwo, 7).Text, workOrders.Cells(contwo, 8).Text, workOrders.Cells(contwo, 9).Text, workOrders.Cells(contwo, 1).Text, workOrders.Cells(contwo, 4).Text)
+                            tablaWO.Rows.Add(CStr(contwo - 1), workOrder(0), If(workOrder.Length = 1, "", If(workOrder.Length = 3, workOrder(1) & "-" & workOrder(2), workOrder(1))), workOrders.Cells(contwo, 2).Text, workOrders.Cells(contwo, 3).Text, workOrders.Cells(contwo, 5).Text, workOrders.Cells(contwo, 6).Text, workOrders.Cells(contwo, 7).Text, workOrders.Cells(contwo, 8).Text, workOrders.Cells(contwo, 9).Text, workOrders.Cells(contwo, 1).Text, workOrders.Cells(contwo, 4).Text)
                             contwo += 1
                         End While
                         Dim listNewWorkOrders As New List(Of Data.DataRow)
@@ -451,7 +451,7 @@ Public Class TimeSheet
                                             listErrors.Add("Row " + CStr(contRecord) + ": Work Code Not found Error.")
                                             If DialogResult.Yes = MessageBox.Show("The Work Code " + CStr(records.Cells(contRecord, 6).value) + " is not enabled, Would you like to add the WorkCode?", "Advertence", MessageBoxButtons.YesNo, MessageBoxIcon.Question) Then
                                                 rowWC = tblWC.Select("name = '" + CStr(records.Cells(contRecord, 6).value) + "'")
-                                                Dim wcDatos(8) As String
+                                                Dim wcDatos(16) As String
                                                 If rowWC.Length > 0 Then
                                                     wcDatos(0) = rowWC(0).ItemArray(0)
                                                     wcDatos(1) = rowWC(0).ItemArray(1)
@@ -459,11 +459,19 @@ Public Class TimeSheet
                                                     wcDatos(3) = "0.00"
                                                     wcDatos(4) = "0.00"
                                                     wcDatos(5) = "0.00"
-                                                    wcDatos(6) = rowWC(0).ItemArray(5)
-                                                    wcDatos(7) = rowWC(0).ItemArray(6)
+                                                    wcDatos(6) = ""
+                                                    wcDatos(7) = ""
                                                     wcDatos(8) = rowP(0).ItemArray(6).ToString()
+                                                    wcDatos(9) = ""
+                                                    wcDatos(10) = ""
+                                                    wcDatos(11) = ""
+                                                    wcDatos(12) = ""
+                                                    wcDatos(13) = ""
+                                                    wcDatos(14) = ""
+                                                    wcDatos(15) = ""
+                                                    wcDatos(16) = ""
                                                 Else
-                                                    wcDatos = {If(rowWC.Length = 0, "(isnull((select MAX(idWorkCode)+1 from workCode where jobNo = " + rowP(0).ItemArray(6).ToString() + "),0))", rowWC(rowWC.Length - 1).ItemArray(0).ToString()), CStr(records.Cells(contRecord, 6).value), "", "0.00", "0.00", "0.00", "", "", rowP(0).ItemArray(6).ToString()}
+                                                    wcDatos = {If(rowWC.Length = 0, "(isnull((select MAX(idWorkCode)+1 from workCode where jobNo = " + rowP(0).ItemArray(6).ToString() + "),0))", rowWC(rowWC.Length - 1).ItemArray(0).ToString()), CStr(records.Cells(contRecord, 6).value), "", "0.00", "0.00", "0.00", "", "", rowP(0).ItemArray(6).ToString(), "", "", "", "", "", "", "", ""}
                                                 End If
                                                 If mtdJobs.nuevaWC(wcDatos) Then
                                                     tblWC = mtdHPW.lllenarTablaWorkCodes()
