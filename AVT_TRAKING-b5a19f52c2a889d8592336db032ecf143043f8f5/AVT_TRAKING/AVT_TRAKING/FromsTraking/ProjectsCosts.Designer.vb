@@ -1071,7 +1071,7 @@ Partial Class ProjectsCosts
         Me.lblWorkOrder.AutoSize = True
         Me.lblWorkOrder.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblWorkOrder.ForeColor = System.Drawing.Color.White
-        Me.lblWorkOrder.Location = New System.Drawing.Point(368, 33)
+        Me.lblWorkOrder.Location = New System.Drawing.Point(241, 34)
         Me.lblWorkOrder.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblWorkOrder.Name = "lblWorkOrder"
         Me.lblWorkOrder.Size = New System.Drawing.Size(174, 31)
@@ -1083,7 +1083,7 @@ Partial Class ProjectsCosts
         Me.Label24.AutoSize = True
         Me.Label24.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label24.ForeColor = System.Drawing.Color.White
-        Me.Label24.Location = New System.Drawing.Point(288, 33)
+        Me.Label24.Location = New System.Drawing.Point(173, 34)
         Me.Label24.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label24.Name = "Label24"
         Me.Label24.Size = New System.Drawing.Size(68, 31)

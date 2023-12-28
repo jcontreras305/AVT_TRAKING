@@ -40,40 +40,6 @@ Partial Class Track
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.TabPage1 = New System.Windows.Forms.TabPage()
         Me.tblTrack = New System.Windows.Forms.DataGridView()
-        Me.TabPage2 = New System.Windows.Forms.TabPage()
-        Me.Panel2 = New System.Windows.Forms.Panel()
-        Me.TableLayoutPanel3 = New System.Windows.Forms.TableLayoutPanel()
-        Me.tblDefaultElements = New System.Windows.Forms.DataGridView()
-        Me.Column = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.DefaultValue = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Panel3 = New System.Windows.Forms.Panel()
-        Me.chbVisibleHeaderText = New System.Windows.Forms.CheckBox()
-        Me.lblColumnNameHeader = New System.Windows.Forms.Label()
-        Me.Label7 = New System.Windows.Forms.Label()
-        Me.btnSaveHeaderText = New System.Windows.Forms.Button()
-        Me.btnUpdateCancelHeaderText = New System.Windows.Forms.Button()
-        Me.txtHeaderText = New System.Windows.Forms.TextBox()
-        Me.lblColumnName = New System.Windows.Forms.Label()
-        Me.Label3 = New System.Windows.Forms.Label()
-        Me.btnSave = New System.Windows.Forms.Button()
-        Me.btnUpdateCancel = New System.Windows.Forms.Button()
-        Me.txtDefaultElement = New System.Windows.Forms.TextBox()
-        Me.tblFormatColumns = New System.Windows.Forms.DataGridView()
-        Me.clmName = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Visible = New System.Windows.Forms.DataGridViewCheckBoxColumn()
-        Me.ExcelHearderText = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Panel4 = New System.Windows.Forms.Panel()
-        Me.chbAllJobs = New System.Windows.Forms.CheckBox()
-        Me.Label5 = New System.Windows.Forms.Label()
-        Me.Label4 = New System.Windows.Forms.Label()
-        Me.cmbJobs = New System.Windows.Forms.ComboBox()
-        Me.cmbClient = New System.Windows.Forms.ComboBox()
-        Me.btnFindDoc = New System.Windows.Forms.Button()
-        Me.btnSearch = New System.Windows.Forms.Button()
-        Me.dtpBeginDate = New System.Windows.Forms.DateTimePicker()
-        Me.dtpEndDate = New System.Windows.Forms.DateTimePicker()
-        Me.Label2 = New System.Windows.Forms.Label()
-        Me.Label1 = New System.Windows.Forms.Label()
         Me.RecordID = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.ForceOrReject = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Source = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -121,6 +87,40 @@ Partial Class Track
         Me.OverrideComment = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.AttachmentName = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.ExceptionHandlerAreaID = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.TabPage2 = New System.Windows.Forms.TabPage()
+        Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.TableLayoutPanel3 = New System.Windows.Forms.TableLayoutPanel()
+        Me.tblDefaultElements = New System.Windows.Forms.DataGridView()
+        Me.Column = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.DefaultValue = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Panel3 = New System.Windows.Forms.Panel()
+        Me.chbVisibleHeaderText = New System.Windows.Forms.CheckBox()
+        Me.lblColumnNameHeader = New System.Windows.Forms.Label()
+        Me.Label7 = New System.Windows.Forms.Label()
+        Me.btnSaveHeaderText = New System.Windows.Forms.Button()
+        Me.btnUpdateCancelHeaderText = New System.Windows.Forms.Button()
+        Me.txtHeaderText = New System.Windows.Forms.TextBox()
+        Me.lblColumnName = New System.Windows.Forms.Label()
+        Me.Label3 = New System.Windows.Forms.Label()
+        Me.btnSave = New System.Windows.Forms.Button()
+        Me.btnUpdateCancel = New System.Windows.Forms.Button()
+        Me.txtDefaultElement = New System.Windows.Forms.TextBox()
+        Me.tblFormatColumns = New System.Windows.Forms.DataGridView()
+        Me.clmName = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Visible = New System.Windows.Forms.DataGridViewCheckBoxColumn()
+        Me.ExcelHearderText = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Panel4 = New System.Windows.Forms.Panel()
+        Me.chbAllJobs = New System.Windows.Forms.CheckBox()
+        Me.Label5 = New System.Windows.Forms.Label()
+        Me.Label4 = New System.Windows.Forms.Label()
+        Me.cmbJobs = New System.Windows.Forms.ComboBox()
+        Me.cmbClient = New System.Windows.Forms.ComboBox()
+        Me.btnFindDoc = New System.Windows.Forms.Button()
+        Me.btnSearch = New System.Windows.Forms.Button()
+        Me.dtpBeginDate = New System.Windows.Forms.DateTimePicker()
+        Me.dtpEndDate = New System.Windows.Forms.DateTimePicker()
+        Me.Label2 = New System.Windows.Forms.Label()
+        Me.Label1 = New System.Windows.Forms.Label()
         Me.TableLayoutPanel1.SuspendLayout()
         Me.TitleBar.SuspendLayout()
         CType(Me.PictureBox4, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -354,6 +354,335 @@ Partial Class Track
         Me.tblTrack.RowHeadersWidth = 51
         Me.tblTrack.Size = New System.Drawing.Size(1227, 313)
         Me.tblTrack.TabIndex = 0
+        '
+        'RecordID
+        '
+        Me.RecordID.HeaderText = "Record ID"
+        Me.RecordID.MinimumWidth = 6
+        Me.RecordID.Name = "RecordID"
+        Me.RecordID.Width = 125
+        '
+        'ForceOrReject
+        '
+        Me.ForceOrReject.HeaderText = "Force Or Reject"
+        Me.ForceOrReject.MinimumWidth = 6
+        Me.ForceOrReject.Name = "ForceOrReject"
+        Me.ForceOrReject.Width = 125
+        '
+        'Source
+        '
+        Me.Source.HeaderText = "Source"
+        Me.Source.MinimumWidth = 6
+        Me.Source.Name = "Source"
+        Me.Source.Width = 125
+        '
+        'Date1
+        '
+        Me.Date1.HeaderText = "Date"
+        Me.Date1.MinimumWidth = 6
+        Me.Date1.Name = "Date1"
+        Me.Date1.Width = 125
+        '
+        'OrderType
+        '
+        Me.OrderType.HeaderText = "Order Type"
+        Me.OrderType.MinimumWidth = 6
+        Me.OrderType.Name = "OrderType"
+        Me.OrderType.Width = 125
+        '
+        'LocationID
+        '
+        Me.LocationID.HeaderText = "LocationID"
+        Me.LocationID.MinimumWidth = 6
+        Me.LocationID.Name = "LocationID"
+        Me.LocationID.Width = 125
+        '
+        'CompanyCode
+        '
+        Me.CompanyCode.HeaderText = "Company Code"
+        Me.CompanyCode.MinimumWidth = 6
+        Me.CompanyCode.Name = "CompanyCode"
+        Me.CompanyCode.Width = 125
+        '
+        'ResourceID
+        '
+        Me.ResourceID.HeaderText = "Resource ID"
+        Me.ResourceID.MinimumWidth = 6
+        Me.ResourceID.Name = "ResourceID"
+        Me.ResourceID.Width = 125
+        '
+        'ResourceName
+        '
+        Me.ResourceName.HeaderText = "Resource Name"
+        Me.ResourceName.MinimumWidth = 6
+        Me.ResourceName.Name = "ResourceName"
+        Me.ResourceName.Width = 125
+        '
+        'Area
+        '
+        Me.Area.HeaderText = "Area"
+        Me.Area.MinimumWidth = 6
+        Me.Area.Name = "Area"
+        Me.Area.Width = 125
+        '
+        'GroupName
+        '
+        Me.GroupName.HeaderText = "Group Name"
+        Me.GroupName.MinimumWidth = 6
+        Me.GroupName.Name = "GroupName"
+        Me.GroupName.Width = 125
+        '
+        'Agreement
+        '
+        Me.Agreement.HeaderText = "Agreement"
+        Me.Agreement.MinimumWidth = 6
+        Me.Agreement.Name = "Agreement"
+        Me.Agreement.Width = 125
+        '
+        'SkillType
+        '
+        Me.SkillType.HeaderText = "Skill Type"
+        Me.SkillType.MinimumWidth = 6
+        Me.SkillType.Name = "SkillType"
+        Me.SkillType.Width = 125
+        '
+        'Shift
+        '
+        Me.Shift.HeaderText = "Shift"
+        Me.Shift.MinimumWidth = 6
+        Me.Shift.Name = "Shift"
+        Me.Shift.Width = 125
+        '
+        'Level1ID
+        '
+        Me.Level1ID.HeaderText = "Level 1 ID"
+        Me.Level1ID.MinimumWidth = 6
+        Me.Level1ID.Name = "Level1ID"
+        Me.Level1ID.Width = 125
+        '
+        'Level2ID
+        '
+        Me.Level2ID.HeaderText = "Level 2 ID"
+        Me.Level2ID.MinimumWidth = 6
+        Me.Level2ID.Name = "Level2ID"
+        Me.Level2ID.Width = 125
+        '
+        'Level3ID
+        '
+        Me.Level3ID.HeaderText = "Level 3 ID"
+        Me.Level3ID.MinimumWidth = 6
+        Me.Level3ID.Name = "Level3ID"
+        Me.Level3ID.Width = 125
+        '
+        'Level4ID
+        '
+        Me.Level4ID.HeaderText = "Level 4 ID"
+        Me.Level4ID.MinimumWidth = 6
+        Me.Level4ID.Name = "Level4ID"
+        Me.Level4ID.Width = 125
+        '
+        'HoursTotal
+        '
+        Me.HoursTotal.HeaderText = "Hours Total"
+        Me.HoursTotal.MinimumWidth = 6
+        Me.HoursTotal.Name = "HoursTotal"
+        Me.HoursTotal.Width = 125
+        '
+        'HoursTotalActivityCode
+        '
+        Me.HoursTotalActivityCode.HeaderText = "Hours Total Activity Code"
+        Me.HoursTotalActivityCode.MinimumWidth = 6
+        Me.HoursTotalActivityCode.Name = "HoursTotalActivityCode"
+        Me.HoursTotalActivityCode.Width = 125
+        '
+        'STHrs
+        '
+        Me.STHrs.HeaderText = "S/T (Hrs)"
+        Me.STHrs.MinimumWidth = 6
+        Me.STHrs.Name = "STHrs"
+        Me.STHrs.Width = 125
+        '
+        'STHrsActivityCode
+        '
+        Me.STHrsActivityCode.HeaderText = "S/T Hrs Activity Code"
+        Me.STHrsActivityCode.MinimumWidth = 6
+        Me.STHrsActivityCode.Name = "STHrsActivityCode"
+        Me.STHrsActivityCode.Width = 125
+        '
+        'OTHrs
+        '
+        Me.OTHrs.HeaderText = "O/T (Hrs)"
+        Me.OTHrs.MinimumWidth = 6
+        Me.OTHrs.Name = "OTHrs"
+        Me.OTHrs.Width = 125
+        '
+        'OTHrsActivityCode
+        '
+        Me.OTHrsActivityCode.HeaderText = "O/T Hrs Activity Code"
+        Me.OTHrsActivityCode.MinimumWidth = 6
+        Me.OTHrsActivityCode.Name = "OTHrsActivityCode"
+        Me.OTHrsActivityCode.Width = 125
+        '
+        'DTHrs
+        '
+        Me.DTHrs.HeaderText = "D/T (Hrs)"
+        Me.DTHrs.MinimumWidth = 6
+        Me.DTHrs.Name = "DTHrs"
+        Me.DTHrs.Width = 125
+        '
+        'DTHrsActivityCode
+        '
+        Me.DTHrsActivityCode.HeaderText = "D/T Hrs Activity Code"
+        Me.DTHrsActivityCode.MinimumWidth = 6
+        Me.DTHrsActivityCode.Name = "DTHrsActivityCode"
+        Me.DTHrsActivityCode.Width = 125
+        '
+        'ExtraCharges
+        '
+        Me.ExtraCharges.HeaderText = "Extra Charges $"
+        Me.ExtraCharges.MinimumWidth = 6
+        Me.ExtraCharges.Name = "ExtraCharges"
+        Me.ExtraCharges.Width = 125
+        '
+        'ExtraChargesActivityCode
+        '
+        Me.ExtraChargesActivityCode.HeaderText = "Extra Charges $ Activity Code"
+        Me.ExtraChargesActivityCode.MinimumWidth = 6
+        Me.ExtraChargesActivityCode.Name = "ExtraChargesActivityCode"
+        Me.ExtraChargesActivityCode.Width = 125
+        '
+        'Extra
+        '
+        Me.Extra.HeaderText = "Extra"
+        Me.Extra.MinimumWidth = 6
+        Me.Extra.Name = "Extra"
+        Me.Extra.Width = 125
+        '
+        'Extra1
+        '
+        Me.Extra1.HeaderText = "Extra 1"
+        Me.Extra1.MinimumWidth = 6
+        Me.Extra1.Name = "Extra1"
+        Me.Extra1.Width = 125
+        '
+        'Extra2
+        '
+        Me.Extra2.HeaderText = "Extra 2"
+        Me.Extra2.MinimumWidth = 6
+        Me.Extra2.Name = "Extra2"
+        Me.Extra2.Width = 125
+        '
+        'AddTime
+        '
+        Me.AddTime.HeaderText = "Add Time"
+        Me.AddTime.MinimumWidth = 6
+        Me.AddTime.Name = "AddTime"
+        Me.AddTime.Width = 125
+        '
+        'PayType
+        '
+        Me.PayType.HeaderText = "Pay Type"
+        Me.PayType.MinimumWidth = 6
+        Me.PayType.Name = "PayType"
+        Me.PayType.Width = 125
+        '
+        'R4Hrs
+        '
+        Me.R4Hrs.HeaderText = "R4 (Hrs)"
+        Me.R4Hrs.MinimumWidth = 6
+        Me.R4Hrs.Name = "R4Hrs"
+        Me.R4Hrs.Width = 125
+        '
+        'R5Hrs
+        '
+        Me.R5Hrs.HeaderText = "R5 (Hrs)"
+        Me.R5Hrs.MinimumWidth = 6
+        Me.R5Hrs.Name = "R5Hrs"
+        Me.R5Hrs.Width = 125
+        '
+        'R6Hrs
+        '
+        Me.R6Hrs.HeaderText = "R6 (Hrs)"
+        Me.R6Hrs.MinimumWidth = 6
+        Me.R6Hrs.Name = "R6Hrs"
+        Me.R6Hrs.Width = 125
+        '
+        'GLAccount
+        '
+        Me.GLAccount.HeaderText = "GL Account"
+        Me.GLAccount.MinimumWidth = 6
+        Me.GLAccount.Name = "GLAccount"
+        Me.GLAccount.Width = 125
+        '
+        'STAdders
+        '
+        Me.STAdders.HeaderText = "ST Adders"
+        Me.STAdders.MinimumWidth = 6
+        Me.STAdders.Name = "STAdders"
+        Me.STAdders.Width = 125
+        '
+        'OTAdders
+        '
+        Me.OTAdders.HeaderText = "OT Adders"
+        Me.OTAdders.MinimumWidth = 6
+        Me.OTAdders.Name = "OTAdders"
+        Me.OTAdders.Width = 125
+        '
+        'DTAdders
+        '
+        Me.DTAdders.HeaderText = "DT Adders"
+        Me.DTAdders.MinimumWidth = 6
+        Me.DTAdders.Name = "DTAdders"
+        Me.DTAdders.Width = 125
+        '
+        'R4Adders
+        '
+        Me.R4Adders.HeaderText = "R4 Adders"
+        Me.R4Adders.MinimumWidth = 6
+        Me.R4Adders.Name = "R4Adders"
+        Me.R4Adders.Width = 125
+        '
+        'R5Adders
+        '
+        Me.R5Adders.HeaderText = "R5 Adders"
+        Me.R5Adders.MinimumWidth = 6
+        Me.R5Adders.Name = "R5Adders"
+        Me.R5Adders.Width = 125
+        '
+        'R6Adders
+        '
+        Me.R6Adders.HeaderText = "R6 Adders"
+        Me.R6Adders.MinimumWidth = 6
+        Me.R6Adders.Name = "R6Adders"
+        Me.R6Adders.Width = 125
+        '
+        'OverrideReason
+        '
+        Me.OverrideReason.HeaderText = "Override Reason"
+        Me.OverrideReason.MinimumWidth = 6
+        Me.OverrideReason.Name = "OverrideReason"
+        Me.OverrideReason.Width = 125
+        '
+        'OverrideComment
+        '
+        Me.OverrideComment.HeaderText = "Override Comment"
+        Me.OverrideComment.MinimumWidth = 6
+        Me.OverrideComment.Name = "OverrideComment"
+        Me.OverrideComment.Width = 125
+        '
+        'AttachmentName
+        '
+        Me.AttachmentName.HeaderText = "AttachmentName"
+        Me.AttachmentName.MinimumWidth = 6
+        Me.AttachmentName.Name = "AttachmentName"
+        Me.AttachmentName.Width = 125
+        '
+        'ExceptionHandlerAreaID
+        '
+        Me.ExceptionHandlerAreaID.HeaderText = "Exception Handler (AreaID)"
+        Me.ExceptionHandlerAreaID.MinimumWidth = 6
+        Me.ExceptionHandlerAreaID.Name = "ExceptionHandlerAreaID"
+        Me.ExceptionHandlerAreaID.Width = 125
         '
         'TabPage2
         '
@@ -750,335 +1079,6 @@ Partial Class Track
         Me.Label1.Size = New System.Drawing.Size(93, 20)
         Me.Label1.TabIndex = 2
         Me.Label1.Text = "Begin Date"
-        '
-        'RecordID
-        '
-        Me.RecordID.HeaderText = "Record ID"
-        Me.RecordID.MinimumWidth = 6
-        Me.RecordID.Name = "RecordID"
-        Me.RecordID.Width = 125
-        '
-        'ForceOrReject
-        '
-        Me.ForceOrReject.HeaderText = "Force Or Reject"
-        Me.ForceOrReject.MinimumWidth = 6
-        Me.ForceOrReject.Name = "ForceOrReject"
-        Me.ForceOrReject.Width = 125
-        '
-        'Source
-        '
-        Me.Source.HeaderText = "Source"
-        Me.Source.MinimumWidth = 6
-        Me.Source.Name = "Source"
-        Me.Source.Width = 125
-        '
-        'Date1
-        '
-        Me.Date1.HeaderText = "Date"
-        Me.Date1.MinimumWidth = 6
-        Me.Date1.Name = "Date1"
-        Me.Date1.Width = 125
-        '
-        'OrderType
-        '
-        Me.OrderType.HeaderText = "Order Type"
-        Me.OrderType.MinimumWidth = 6
-        Me.OrderType.Name = "OrderType"
-        Me.OrderType.Width = 125
-        '
-        'LocationID
-        '
-        Me.LocationID.HeaderText = "LocationID"
-        Me.LocationID.MinimumWidth = 6
-        Me.LocationID.Name = "LocationID"
-        Me.LocationID.Width = 125
-        '
-        'CompanyCode
-        '
-        Me.CompanyCode.HeaderText = "Company Code"
-        Me.CompanyCode.MinimumWidth = 6
-        Me.CompanyCode.Name = "CompanyCode"
-        Me.CompanyCode.Width = 125
-        '
-        'ResourceID
-        '
-        Me.ResourceID.HeaderText = "Resource ID"
-        Me.ResourceID.MinimumWidth = 6
-        Me.ResourceID.Name = "ResourceID"
-        Me.ResourceID.Width = 125
-        '
-        'ResourceName
-        '
-        Me.ResourceName.HeaderText = "Resource Name"
-        Me.ResourceName.MinimumWidth = 6
-        Me.ResourceName.Name = "ResourceName"
-        Me.ResourceName.Width = 125
-        '
-        'Area
-        '
-        Me.Area.HeaderText = "Area"
-        Me.Area.MinimumWidth = 6
-        Me.Area.Name = "Area"
-        Me.Area.Width = 125
-        '
-        'GroupName
-        '
-        Me.GroupName.HeaderText = "Group Name"
-        Me.GroupName.MinimumWidth = 6
-        Me.GroupName.Name = "GroupName"
-        Me.GroupName.Width = 125
-        '
-        'Agreement
-        '
-        Me.Agreement.HeaderText = "Agreement"
-        Me.Agreement.MinimumWidth = 6
-        Me.Agreement.Name = "Agreement"
-        Me.Agreement.Width = 125
-        '
-        'SkillType
-        '
-        Me.SkillType.HeaderText = "Skill Type"
-        Me.SkillType.MinimumWidth = 6
-        Me.SkillType.Name = "SkillType"
-        Me.SkillType.Width = 125
-        '
-        'Shift
-        '
-        Me.Shift.HeaderText = "Shift"
-        Me.Shift.MinimumWidth = 6
-        Me.Shift.Name = "Shift"
-        Me.Shift.Width = 125
-        '
-        'Level1ID
-        '
-        Me.Level1ID.HeaderText = "Level 1 ID"
-        Me.Level1ID.MinimumWidth = 6
-        Me.Level1ID.Name = "Level1ID"
-        Me.Level1ID.Width = 125
-        '
-        'Level2ID
-        '
-        Me.Level2ID.HeaderText = "Level 2 ID"
-        Me.Level2ID.MinimumWidth = 6
-        Me.Level2ID.Name = "Level2ID"
-        Me.Level2ID.Width = 125
-        '
-        'Level3ID
-        '
-        Me.Level3ID.HeaderText = "Level 3 ID"
-        Me.Level3ID.MinimumWidth = 6
-        Me.Level3ID.Name = "Level3ID"
-        Me.Level3ID.Width = 125
-        '
-        'Level4ID
-        '
-        Me.Level4ID.HeaderText = "Level 4 ID"
-        Me.Level4ID.MinimumWidth = 6
-        Me.Level4ID.Name = "Level4ID"
-        Me.Level4ID.Width = 125
-        '
-        'HoursTotal
-        '
-        Me.HoursTotal.HeaderText = "Hours Total"
-        Me.HoursTotal.MinimumWidth = 6
-        Me.HoursTotal.Name = "HoursTotal"
-        Me.HoursTotal.Width = 125
-        '
-        'HoursTotalActivityCode
-        '
-        Me.HoursTotalActivityCode.HeaderText = "Hours Total Activity Code"
-        Me.HoursTotalActivityCode.MinimumWidth = 6
-        Me.HoursTotalActivityCode.Name = "HoursTotalActivityCode"
-        Me.HoursTotalActivityCode.Width = 125
-        '
-        'STHrs
-        '
-        Me.STHrs.HeaderText = "S/T (Hrs)"
-        Me.STHrs.MinimumWidth = 6
-        Me.STHrs.Name = "STHrs"
-        Me.STHrs.Width = 125
-        '
-        'STHrsActivityCode
-        '
-        Me.STHrsActivityCode.HeaderText = "S/T Hrs Activity Code"
-        Me.STHrsActivityCode.MinimumWidth = 6
-        Me.STHrsActivityCode.Name = "STHrsActivityCode"
-        Me.STHrsActivityCode.Width = 125
-        '
-        'OTHrs
-        '
-        Me.OTHrs.HeaderText = "O/T (Hrs)"
-        Me.OTHrs.MinimumWidth = 6
-        Me.OTHrs.Name = "OTHrs"
-        Me.OTHrs.Width = 125
-        '
-        'OTHrsActivityCode
-        '
-        Me.OTHrsActivityCode.HeaderText = "O/T Hrs Activity Code"
-        Me.OTHrsActivityCode.MinimumWidth = 6
-        Me.OTHrsActivityCode.Name = "OTHrsActivityCode"
-        Me.OTHrsActivityCode.Width = 125
-        '
-        'DTHrs
-        '
-        Me.DTHrs.HeaderText = "D/T (Hrs)"
-        Me.DTHrs.MinimumWidth = 6
-        Me.DTHrs.Name = "DTHrs"
-        Me.DTHrs.Width = 125
-        '
-        'DTHrsActivityCode
-        '
-        Me.DTHrsActivityCode.HeaderText = "D/T Hrs Activity Code"
-        Me.DTHrsActivityCode.MinimumWidth = 6
-        Me.DTHrsActivityCode.Name = "DTHrsActivityCode"
-        Me.DTHrsActivityCode.Width = 125
-        '
-        'ExtraCharges
-        '
-        Me.ExtraCharges.HeaderText = "Extra Charges $"
-        Me.ExtraCharges.MinimumWidth = 6
-        Me.ExtraCharges.Name = "ExtraCharges"
-        Me.ExtraCharges.Width = 125
-        '
-        'ExtraChargesActivityCode
-        '
-        Me.ExtraChargesActivityCode.HeaderText = "Extra Charges $ Activity Code"
-        Me.ExtraChargesActivityCode.MinimumWidth = 6
-        Me.ExtraChargesActivityCode.Name = "ExtraChargesActivityCode"
-        Me.ExtraChargesActivityCode.Width = 125
-        '
-        'Extra
-        '
-        Me.Extra.HeaderText = "Extra"
-        Me.Extra.MinimumWidth = 6
-        Me.Extra.Name = "Extra"
-        Me.Extra.Width = 125
-        '
-        'Extra1
-        '
-        Me.Extra1.HeaderText = "Extra 1"
-        Me.Extra1.MinimumWidth = 6
-        Me.Extra1.Name = "Extra1"
-        Me.Extra1.Width = 125
-        '
-        'Extra2
-        '
-        Me.Extra2.HeaderText = "Extra 2"
-        Me.Extra2.MinimumWidth = 6
-        Me.Extra2.Name = "Extra2"
-        Me.Extra2.Width = 125
-        '
-        'AddTime
-        '
-        Me.AddTime.HeaderText = "Add Time"
-        Me.AddTime.MinimumWidth = 6
-        Me.AddTime.Name = "AddTime"
-        Me.AddTime.Width = 125
-        '
-        'PayType
-        '
-        Me.PayType.HeaderText = "Pay Type"
-        Me.PayType.MinimumWidth = 6
-        Me.PayType.Name = "PayType"
-        Me.PayType.Width = 125
-        '
-        'R4Hrs
-        '
-        Me.R4Hrs.HeaderText = "R4 (Hrs)"
-        Me.R4Hrs.MinimumWidth = 6
-        Me.R4Hrs.Name = "R4Hrs"
-        Me.R4Hrs.Width = 125
-        '
-        'R5Hrs
-        '
-        Me.R5Hrs.HeaderText = "R5 (Hrs)"
-        Me.R5Hrs.MinimumWidth = 6
-        Me.R5Hrs.Name = "R5Hrs"
-        Me.R5Hrs.Width = 125
-        '
-        'R6Hrs
-        '
-        Me.R6Hrs.HeaderText = "R6 (Hrs)"
-        Me.R6Hrs.MinimumWidth = 6
-        Me.R6Hrs.Name = "R6Hrs"
-        Me.R6Hrs.Width = 125
-        '
-        'GLAccount
-        '
-        Me.GLAccount.HeaderText = "GL Account"
-        Me.GLAccount.MinimumWidth = 6
-        Me.GLAccount.Name = "GLAccount"
-        Me.GLAccount.Width = 125
-        '
-        'STAdders
-        '
-        Me.STAdders.HeaderText = "ST Adders"
-        Me.STAdders.MinimumWidth = 6
-        Me.STAdders.Name = "STAdders"
-        Me.STAdders.Width = 125
-        '
-        'OTAdders
-        '
-        Me.OTAdders.HeaderText = "OT Adders"
-        Me.OTAdders.MinimumWidth = 6
-        Me.OTAdders.Name = "OTAdders"
-        Me.OTAdders.Width = 125
-        '
-        'DTAdders
-        '
-        Me.DTAdders.HeaderText = "DT Adders"
-        Me.DTAdders.MinimumWidth = 6
-        Me.DTAdders.Name = "DTAdders"
-        Me.DTAdders.Width = 125
-        '
-        'R4Adders
-        '
-        Me.R4Adders.HeaderText = "R4 Adders"
-        Me.R4Adders.MinimumWidth = 6
-        Me.R4Adders.Name = "R4Adders"
-        Me.R4Adders.Width = 125
-        '
-        'R5Adders
-        '
-        Me.R5Adders.HeaderText = "R5 Adders"
-        Me.R5Adders.MinimumWidth = 6
-        Me.R5Adders.Name = "R5Adders"
-        Me.R5Adders.Width = 125
-        '
-        'R6Adders
-        '
-        Me.R6Adders.HeaderText = "R6 Adders"
-        Me.R6Adders.MinimumWidth = 6
-        Me.R6Adders.Name = "R6Adders"
-        Me.R6Adders.Width = 125
-        '
-        'OverrideReason
-        '
-        Me.OverrideReason.HeaderText = "Override Reason"
-        Me.OverrideReason.MinimumWidth = 6
-        Me.OverrideReason.Name = "OverrideReason"
-        Me.OverrideReason.Width = 125
-        '
-        'OverrideComment
-        '
-        Me.OverrideComment.HeaderText = "Override Comment"
-        Me.OverrideComment.MinimumWidth = 6
-        Me.OverrideComment.Name = "OverrideComment"
-        Me.OverrideComment.Width = 125
-        '
-        'AttachmentName
-        '
-        Me.AttachmentName.HeaderText = "AttachmentName"
-        Me.AttachmentName.MinimumWidth = 6
-        Me.AttachmentName.Name = "AttachmentName"
-        Me.AttachmentName.Width = 125
-        '
-        'ExceptionHandlerAreaID
-        '
-        Me.ExceptionHandlerAreaID.HeaderText = "Exception Handler (AreaID)"
-        Me.ExceptionHandlerAreaID.MinimumWidth = 6
-        Me.ExceptionHandlerAreaID.Name = "ExceptionHandlerAreaID"
-        Me.ExceptionHandlerAreaID.Width = 125
         '
         'Track
         '
