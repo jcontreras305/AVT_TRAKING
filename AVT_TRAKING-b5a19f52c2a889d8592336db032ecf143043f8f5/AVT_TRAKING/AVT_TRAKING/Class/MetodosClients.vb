@@ -178,7 +178,7 @@ ha.idHomeAdress, ha.avenue ,ha.number, ha.city ,ha.providence,ha.postalCode,phot
     Public Sub buscarProyectosDeCliente(ByVal tabla As DataGridView, ByVal idCliente As String)
         Try
             conectar()
-            Dim cmd As New SqlCommand(consultaProyetosClientes + " cln.idClient = '" + idCliente + "'", conn)
+            Dim cmd As New SqlCommand(consultaProyetosClientes + " cln.idClient = '" + idCliente + "' ) as T1", conn)
             If cmd.ExecuteNonQuery Then
                 Dim da As New SqlDataAdapter(cmd)
                 Dim dt As New DataTable
@@ -210,7 +210,8 @@ ha.idHomeAdress, ha.avenue ,ha.number, ha.city ,ha.providence,ha.postalCode,phot
     Public Sub buscarProyectosDeClienteAll(ByVal tabla As DataGridView, ByVal idCliente As String)
         Try
             conectar()
-            Dim cmd As New SqlCommand(consultaProyetosClientes + " cln.idClient = '" + idCliente + "'", conn)
+            Dim cmd As New SqlCommand(consultaProyetosClientes + " cln.idClient = '" + idCliente + "' ) as T1", conn)
+            cmd.CommandTimeout = 120
             Dim dr As SqlDataReader = cmd.ExecuteReader()
             tabla.Rows.Clear()
             While dr.Read()
@@ -224,75 +225,48 @@ ha.idHomeAdress, ha.avenue ,ha.number, ha.city ,ha.providence,ha.postalCode,phot
         End Try
     End Sub
 
-    Dim consultaProyetosClientes As String = "select 
+    Dim consultaProyetosClientes As String = "select T1.[Work Order] , T1.[Project Description] , T1.[Cmp] 
+	, CONCAT('$',(T1.[Total Amount ST] + T1.[Total Amount OT] + T1.[Total Amount 3] + T1.[Total Expenses Spend] +  T1.[Total Material Spend])) as 'Total Spend'
+	, T1.[Total Hours ST] , CONCAT('$',T1.[Total Amount ST]) as 'Total Amount St' , T1.[Total Hours OT], CONCAT('$',T1.[Total Amount OT]) as 'Total Amount OT' , T1.[Total Hours 3] , CONCAT('$',T1.[Total Amount 3]) as 'Total Amount 3' 
+	, CONCAT('$',T1.[Total Expenses Spend]) as 'Total Expenses Spend', CONCAT('$',T1.[Total Material Spend]) as 'Total Material Spend' , 
+T1.[jobNo], T1.[workTMLumpSum], T1.[costDistribution], T1.[custumerNo] , T1.[contractNo], T1.[costCode] , T1.[idClient], T1.[idPO], T1.[idTask] , T1.[idAuxWO], T1.[idAux], T1.[photo], T1.[postingProject]
+from(
+select 
 	(select CONCAT(wo.idWO,' ',tk.task)) as 'Work Order' , 
 	
 	ISNULL( tk.description ,'') as 'Project Description', 
 	
 	ISNULL( tk.status, 0 ) as 'Cmp',
-	
-	concat('$', (
-		
-			(select ISNULL(SUM(T2.Amount),0) as 'Billings ST' from 
-			(select SUM(T1.hoursST*T1.billingRate1) AS 'Amount'
-			from (select hoursST, hw.idWorkCode , billingRate1  from hoursWorked as hw inner join workCode as wc on wc.idWorkCode = hw.idWorkCode and hw.jobNo = wc.jobNo inner join task as tk1 on tk1.idAux = hw.idAux inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO inner join projectOrder as po1 on po1.idPO = wo1.idPO and wo1.jobNo = po1.jobNo inner join job as jb1 on jb1.jobNo = po1.jobNo  inner join clients as cl1 on cl1.idClient = jb1.idClient
-			where cl1.idClient = cln.idClient and jb.jobNo = jb1.jobNo and po1.idPO = po.idPO and wo.idAuxWO = wo1.idAuxWO and hw.idAux=tk.idAux  )as T1    
-			group by T1.idWorkCode) as T2)--Billing ST
-			+
-			(select  ISNULL( SUM(T2.Amount),0) as 'Billing OT' from 
-			(select SUM(T1.hoursOT*T1.billingRateOT) AS 'Amount'
-			from (select hoursOT, hw.idWorkCode , billingRateOT  from hoursWorked as hw inner join workCode as wc on wc.idWorkCode = hw.idWorkCode and hw.jobNo = wc.jobNo inner join task as tk1 on tk1.idAux = hw.idAux inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO inner join projectOrder as po1 on po1.idPO = wo1.idPO and wo1.jobNo = po1.jobNo inner join job as jb1 on jb1.jobNo = po1.jobNo inner join clients as cl1 on cl1.idClient = jb1.idClient 
-			where cl1.idClient = cln.idClient and jb.jobNo = jb1.jobNo and po1.idPO = po.idPO and wo.idAuxWO = wo1.idAuxWO and hw.idAux=tk.idAux)as T1    
-			group by T1.idWorkCode) as T2) --Billing OT
-			+
-			(select  ISNULL( SUM(T2.Amount),0) as 'Billing 3T' from 
-			(select SUM(T1.hours3*T1.billingRate3) AS 'Amount'
-			from (select hours3, hw.idWorkCode , billingRate3  from hoursWorked as hw inner join workCode as wc on wc.idWorkCode = hw.idWorkCode and hw.jobNo = wc.jobNo inner join task as tk1 on tk1.idAux = hw.idAux inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO inner join projectOrder as po1 on po1.idPO = wo1.idPO and wo1.jobNo = po1.jobNo inner join job as jb1 on jb1.jobNo = po1.jobNo inner join clients as cl1 on cl1.idClient = jb1.idClient 
-			where cl1.idClient = cln.idClient and jb.jobNo = jb1.jobNo and po1.idPO = po.idPO and wo.idAuxWO = wo1.idAuxWO and hw.idAux=tk.idAux)as T1    
-			group by T1.idWorkCode) as T2) --Billing 3T
-			+
-			ISNULL((select sum(amount) from expensesUsed as exu inner join task as tk1 on tk1.idAux = exu.idAux inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO inner join projectOrder as po1 on po1.idPO = wo1.idPO and wo1.jobNo = po1.jobNo inner join job as jb1 on jb1.jobNo = po1.jobNo inner join clients as cl1 on cl1.idClient = jb1.idClient 
-			where cl1.idClient = cln.idClient and jb.jobNo = jb1.jobNo and po1.idPO = po.idPO and wo.idAuxWO = wo1.idAuxWO and exu.idAux=tk.idAux ),  0)--Expenses Used
-			+
-			ISNULL((select sum(amount) from materialUsed as mau inner join task as tk1 on tk1.idAux = mau.idAux inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO inner join projectOrder as po1 on po1.idPO = wo1.idPO and wo1.jobNo = po1.jobNo inner join job as jb1 on jb1.jobNo = po1.jobNo inner join clients as cl1 on cl1.idClient = jb1.idClient 
-			where cl1.idClient = cln.idClient and jb.jobNo = jb1.jobNo and po1.idPO = po.idPO and wo.idAuxWO = wo1.idAuxWO and mau.idAux=tk.idAux), 0)-- Material Used
-			)
-		) as 'Total Spend',
 
 	ISNULL( (select SUM(hoursST) from hoursWorked as hw where hw.idAux = tk.idAux) ,0)
 	as 'Total Hours ST',
 
-	(select CONCAT('$' ,ISNULL(SUM(T2.Amount),0)) as 'Total Amount ST' from 
-	(select SUM(T1.hoursST*T1.billingRate1) AS 'Amount'
-	from (select idHorsWorked,hoursST, hw.idWorkCode , billingRate1  from hoursWorked as hw inner join workCode as wc on wc.idWorkCode = hw.idWorkCode and hw.jobNo = wc.jobNo
-	where idAux=tk.idAux)as T1    
-	group by T1.idWorkCode) as T2)
+	ISNULL((select SUM(T1.hoursST*T1.billingRate1) AS 'Amount'
+	from (select hoursST, billingRate1  from hoursWorked as hw inner join workCode as wc on wc.idWorkCode = hw.idWorkCode and hw.jobNo = wc.jobNo
+	where idAux=tk.idAux)as T1),0)
 	as 'Total Amount ST',
 
 	ISNULL( (select SUM(hoursOT) from hoursWorked as hw where hw.idAux = tk.idAux),0)
 	as 'Total Hours OT',
 
-	(select CONCAT('$' ,ISNULL(SUM(T2.Amount),0)) from 
+	ISNULL(
 	(select SUM(T1.hoursOT*T1.billingRateOT) AS 'Amount'
-	from (select idHorsWorked,hoursOT, hw.idWorkCode , billingRateOT  from hoursWorked as hw inner join workCode as wc on wc.idWorkCode = hw.idWorkCode and hw.jobNo = wc.jobNo
-	where idAux=tk.idAux)as T1 
-	group by T1.idWorkCode) as T2)
+	from (select hoursOT, billingRateOT  from hoursWorked as hw inner join workCode as wc on wc.idWorkCode = hw.idWorkCode and hw.jobNo = wc.jobNo
+	where idAux=tk.idAux)as T1),0)
 	as 'Total Amount OT',
 
     ISNULL( (select SUM(hours3) from hoursWorked as hw where hw.idAux = tk.idAux),0)
 	as 'Total Hours 3',
 		
-	(select CONCAT('$' ,ISNULL(SUM(T2.Amount),0)) from 
+	ISNULL(
 	(select SUM(T1.hours3*T1.billingRate3) AS 'Amount'
-	from (select idHorsWorked,hours3, hw.idWorkCode , billingRate3  from hoursWorked as hw inner join workCode as wc on wc.idWorkCode = hw.idWorkCode and hw.jobNo = wc.jobNo
-	where idAux=tk.idAux)as T1 
-	group by T1.idWorkCode) as T2
-	)
+	from (select hours3, billingRate3  from hoursWorked as hw inner join workCode as wc on wc.idWorkCode = hw.idWorkCode and hw.jobNo = wc.jobNo
+	where idAux=tk.idAux)as T1),0)
 	as 'Total Amount 3',
 
-	CONCAT('$' ,ISNULL((select SUM( amount) from expensesUsed where idAux = tk.idAux),'0')) AS 'Total Expenses Spend', 
+	ISNULL((select SUM( amount) from expensesUsed where idAux = tk.idAux),'0') AS 'Total Expenses Spend', 
 	
-	CONCAT('$' ,ISNULL((select sum (amount) from materialUsed where idAux = tk.idAux),'0')) AS 'Total Material Spend',
+	ISNULL((select sum (amount) from materialUsed where idAux = tk.idAux),'0') AS 'Total Material Spend',
     
 	jb.jobNo,
    	jb.workTMLumpSum,
@@ -312,7 +286,7 @@ clients as cln left join job as jb on jb.idClient = cln.idClient
 inner join projectOrder as po on po.jobNo = jb.jobNo
 left join workOrder as wo on wo.idPO = po.idPO and wo.jobNo = jb.jobNo
 left join task as tk on tk.idAuxWO = wo.idAuxWO
-where "
+where  "
 
 
     Public Sub buscarProyectosDeClientePorProyeto(ByVal tabla As DataGridView, ByVal consulta As String)
@@ -329,7 +303,7 @@ cln.firstName Like '" + consulta + "'
 Or
 cln.middleName Like '" + consulta + "'
 Or
-cln.lastName Like '" + consulta + "'", conn)
+cln.lastName Like '" + consulta + "' ) as T1", conn)
             If cmd.ExecuteNonQuery Then
                 Dim da As New SqlDataAdapter(cmd)
                 Dim dt As New DataTable
@@ -382,7 +356,7 @@ cln.firstName Like '" + consulta + "'
 Or
 cln.middleName Like '" + consulta + "'
 Or
-cln.lastName Like '" + consulta + "'", conn)
+cln.lastName Like '" + consulta + "'" + ") as T1", conn)
             Dim dr As SqlDataReader = cmd.ExecuteReader
             tabla.Rows.Clear()
             While dr.Read()

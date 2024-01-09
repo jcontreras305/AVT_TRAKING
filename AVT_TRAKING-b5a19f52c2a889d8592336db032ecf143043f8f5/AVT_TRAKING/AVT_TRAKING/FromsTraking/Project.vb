@@ -1,6 +1,6 @@
 ﻿Public Class Project
     Private _jobNum As Long
-    Private _accountNum, _equipament, _manager, _description, _expCode, _idWO, _idAuxWO, _idPO, _idAux, _idTask, _Line, _WBS, _Area As String
+    Private _accountNum, _equipament, _manager, _description, _expCode, _idWO, _idAuxWO, _idPO, _idAux, _idTask, _Line, _WBS, _Area, _postingProject As String
     Private _beginDate, _endDate As Date
     Private _estimateHours, _totalBilling, _PercentComplete As Double
     Private _status As Char
@@ -186,6 +186,15 @@
         End Set
     End Property
 
+    Public Property postingProject() As String
+        Get
+            Return _postingProject
+        End Get
+        Set(ByVal value As String)
+            _postingProject = value
+        End Set
+    End Property
+
     Public Sub clear()
         _accountNum = 0
         _beginDate = System.DateTime.Today
@@ -204,5 +213,6 @@
         _idAuxWO = ""
         _WBS = ""
         _Area = ""
+        _postingProject = ""
     End Sub
 End Class

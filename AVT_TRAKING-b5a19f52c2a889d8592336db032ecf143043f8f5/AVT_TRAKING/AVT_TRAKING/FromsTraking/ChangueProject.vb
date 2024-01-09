@@ -63,6 +63,7 @@ Public Class ChangueProject
             Dim cmdHrsWC As New SqlCommand("select distinct hw.idWorkCode,wc.name,hw.jobNo from hoursWorked  as hw 
                 inner join workCode as wc on wc.idWorkCode = hw.idWorkCode and wc.jobNo = hw.jobNo
                 where idAux = '" + idAux + "'", con.conn)
+            cmdHrsWC.CommandTimeout = 120
             cmdHrsWC.Transaction = tran
             If cmdHrsWC.ExecuteNonQuery Then 'consulto las horas que se van a cambiar para verificar si es necesario agregar los workCodes en el new JobNo
                 Dim da As New SqlDataAdapter(cmdHrsWC)
@@ -81,7 +82,7 @@ Public Class ChangueProject
                             Dim arrayWC() As DataRow = dtWCJob.Select("idWorkCode = " + rowHrs.ItemArray(0).ToString + "")
                             If arrayWC.Length = 0 Then
                                 'Dim datos() As String = {rowHrs.ItemArray(0).ToString(), rowHrs.ItemArray(1).ToString(), "", "0.00", "0.00", "0.00", "", "", rowHrs.ItemArray(2).ToString()}
-                                Dim datos() As String = {rowHrs.ItemArray(0).ToString(), rowHrs.ItemArray(1).ToString(), "", "0.00", "0.00", "0.00", "", "", newJobNo}
+                                Dim datos() As String = {rowHrs.ItemArray(0).ToString(), rowHrs.ItemArray(1).ToString(), "", "0.00", "0.00", "0.00", "", "", newJobNo, "", "", "", "", "", "", "", ""}
                                 If mtdJob.nuevaWC(datos, False) Then
                                     listNewWc.Add({rowHrs.ItemArray(0).ToString(), rowHrs.ItemArray(2).ToString()})
                                 Else
@@ -102,7 +103,7 @@ Public Class ChangueProject
                             If cmdUpdateHW.ExecuteNonQuery() Then
                                 Dim cmdUpdateProject As New SqlCommand("if not exists(select * from projectOrder where jobNo = " + newJobNo + " and idPO = " + PO + " )
 begin 
-	insert into projectOrder values (" + PO + " ," + newJobNo + ")
+	insert into projectOrder values (" + PO + " ," + newJobNo + ",'','')
 	update workOrder set idPO =" + PO + " , jobNo = " + newJobNo + " where idWO = '" + IdWO + "'
 end
 else if exists(select * from projectOrder where jobNo = " + newJobNo + " and idPO = " + PO + " )
@@ -126,7 +127,7 @@ end", con.conn)
                 Else
                     Dim cmdUpdateProject As New SqlCommand("if not exists(select * from projectOrder where jobNo = " + newJobNo + " and idPO = " + PO + " )
 begin 
-	insert into projectOrder values (" + PO + " ," + newJobNo + ")
+	insert into projectOrder values (" + PO + " ," + newJobNo + ",'','')
 	update workOrder set idPO =" + PO + " , jobNo = " + newJobNo + " where idWO = '" + IdWO + "'
 end
 else if exists(select * from projectOrder where jobNo = " + newJobNo + " and idPO = " + PO + " )

@@ -367,6 +367,7 @@ Public Class ProjectsCosts
         txtLeftSpend.Text = ""
         txtLine.Text = ""
         txtWBS.Text = ""
+        txtPostingProject.Text = ""
         Return True
     End Function
     Private Function llenarCampos(ByVal lstDatosPO As List(Of String)) As Boolean
@@ -405,7 +406,7 @@ Public Class ProjectsCosts
                 txtLine.Text = lstDatosPO(17)
                 txtWBS.Text = lstDatosPO(18)
                 txtArea.Text = lstDatosPO(19)
-
+                txtPostingProject.Text = lstDatosPO(20)
                 'cmbJobNumber.SelectedIndex = cmbJobNumber.FindString(JobNumber.ToString())
                 'AQUI SE CARGARAN LOS DATOS A LA CLASE DE PROJECT 
                 pjt.idPO = txtClientPO.Text
@@ -430,13 +431,13 @@ Public Class ProjectsCosts
                 pjt.Line = lstDatosPO(17)
                 pjt.WBS = lstDatosPO(18)
                 pjt.Area = lstDatosPO(19)
-
+                pjt.postingProject = lstDatosPO(20)
                 Dim tbl As New DataTable
                 mtdJobs.consultaJobs(tbl)
                 Dim arrayJob() As DataRow = tbl.Select("jobNo =" + pjt.jobNum.ToString)
-                If arrayJob.Length > 0 Then
-                    txtPostingProject.Text = arrayJob(0).ItemArray(1).ToString
-                End If
+                'If arrayJob.Length > 0 Then
+                '    txtPostingProject.Text = arrayJob(0).ItemArray(1).ToString
+                'End If
                 Return True
             Else
                 Return False
@@ -1553,6 +1554,44 @@ Public Class ProjectsCosts
         End If
     End Sub
 
+    '================ posting project ========================================================================================
+    '=========================================================================================================================
+
+    Private Sub txtPostingProject_Leave(sender As Object, e As EventArgs) Handles txtPostingProject.Leave
+        If flagAddRecord Then
+            If validarPostingProject() And pjtNuevo.postingProject <> txtPostingProject.Text Then
+                pjtNuevo.postingProject = txtPostingProject.Text
+            Else
+                txtPostingProject.Text = pjtNuevo.postingProject
+            End If
+        Else
+            If validarEquipament() And pjt.postingProject <> txtPostingProject.Text Then
+                If mtdJobs.updatePostingProject(txtPostingProject.Text, pjt.jobNum.ToString) Then
+                    pjt.postingProject = txtPostingProject.Text
+                Else
+                    txtPostingProject.Text = pjt.postingProject
+                End If
+            End If
+        End If
+    End Sub
+    Private Function validarPostingProject() As Boolean
+        If flagAddRecord Then
+            If txtPostingProject.Text.Length <= 20 Then
+                Return True
+            Else
+                MessageBox.Show("The parameter 'Posting Project' only permit a maximum of 20 characters.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                Return False
+            End If
+        Else
+            If txtEquipament.Text.Length <= 20 Then
+                Return True
+            Else
+                MessageBox.Show("The parameter 'Posting Project' only permit a maximum of 20 characters.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                Return False
+            End If
+        End If
+    End Function
+
     Private Sub activarCampos(ByVal activar As Boolean)
         txtWokOrder.Enabled = activar
         txtTask.Enabled = activar
@@ -1610,7 +1649,7 @@ Public Class ProjectsCosts
 
     End Sub
 
-    Private Sub cmbJobNumber_Enter(sender As Object, e As EventArgs) Handles cmbJobNumber.Enter, txtClientName.Enter, txtWokOrder.Enter, txtTask.Enter, txtEquipament.Enter, cmbProjectManager.Enter, txtClientPO.Enter, txtProjectDescription.Enter, sprTotalBilling.Enter, dtpBeginDate.Enter, dtpEndDate.Enter, sprHoursEstimate.Enter, cmbExpCode.Enter, txtAcountNo.Enter, sprPercentComplete.Enter, chbComplete.Enter
+    Private Sub cmbJobNumber_Enter(sender As Object, e As EventArgs) Handles cmbJobNumber.Enter, txtClientName.Enter, txtWokOrder.Enter, txtTask.Enter, txtEquipament.Enter, cmbProjectManager.Enter, txtClientPO.Enter, txtProjectDescription.Enter, sprTotalBilling.Enter, dtpBeginDate.Enter, dtpEndDate.Enter, sprHoursEstimate.Enter, cmbExpCode.Enter, txtAcountNo.Enter, sprPercentComplete.Enter, chbComplete.Enter, txtPostingProject.Enter
         If cmbJobNumber.Focused Then
             FindElement = "Job No"
             Element = cmbJobNumber.Text
@@ -1665,6 +1704,9 @@ Public Class ProjectsCosts
         ElseIf txtWBS.Focused Then
             FindElement = "WBS"
             Element = txtWBS.Text
+        ElseIf txtPostingProject.Focused Then
+            FindElement = "postingProject"
+            Element = txtPostingProject.Text
         End If
     End Sub
 

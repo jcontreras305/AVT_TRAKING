@@ -497,22 +497,24 @@ BEGIN
 	drop table PBI.[ALLCPH2]
 END
 
+select T1.[Year],T1.[Month],T1.[MonthN],T1.[IT],T1.[II SQFT],T1.[Hours],T1.[Total SQF],T1.[ClientID],Round((T1.[Total SQF] / T1.[Hours]),2)  as 'SQFPH'
+INTO PBI.ALLCPH2
+from (
 select 
 distinct
 YEAR(kpi.dateWorked) as 'Year', MONTH(kpi.dateWorked) as 'Month',DATENAME(MONTH,kpi.dateWorked) as 'MonthN',
 kpi.install as 'IT',
 SUM(((((kpi.[size]+2*kpi.[thinck])*PI())/12)*kpi.[LF])) OVER (PARTITION BY YEAR(kpi.dateWorked),MONTH(kpi.dateWorked),kpi.install,jb.jobNo) as 'II SQFT',
-SUM((kpi.hoursST + kpi.hoursOT)) OVER (PARTITION BY YEAR(kpi.dateWorked),MONTH(kpi.dateWorked),kpi.install,jb.jobNo) as 'Hours',
-SUM(((((kpi.[size]+2*kpi.[thinck])*PI())/12)*kpi.[LF]) + kpi.SQF) OVER (PARTITION BY YEAR(kpi.dateWorked),MONTH(kpi.dateWorked),kpi.install,jb.jobNo) as 'Total SQF',
-jb.jobNo AS 'ClientID',
-SUM(ROUND((((((kpi.[size]+2*kpi.[thinck])*PI())/12)*kpi.[LF]) + kpi.SQF) / (kpi.hoursST + kpi.hoursOT),2)) OVER (PARTITION BY YEAR(kpi.dateWorked),MONTH(kpi.dateWorked),kpi.install,jb.jobNo) as 'SQFPH'
-INTO PBI.ALLCPH2
+SUM((kpi.hoursST + kpi.hoursOT)) OVER (PARTITION BY YEAR(kpi.dateWorked),MONTH(kpi.dateWorked),kpi.install,jb.jobNo) as 'Hours',--
+SUM(((((kpi.[size]+2*kpi.[thinck])*PI())/12)*kpi.[LF]) + kpi.SQF) OVER (PARTITION BY YEAR(kpi.dateWorked),MONTH(kpi.dateWorked),kpi.install,jb.jobNo) as 'Total SQF',--
+jb.jobNo AS 'ClientID'
 from KPI as kpi
 inner join task as tk on tk.idAux = kpi.idAux
 inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO
 inner join projectOrder as po on po.idPO = wo.idPO and po.jobNo = wo.jobNo
 inner join job as jb on jb.jobNo = po.jobNo
 where kpi.dateWorked between @StartDate and @EndDate and kpi.install not like 'Asbestos'
+) as T1
 "
 			Return _All_CHP_2
 		End Get
@@ -1113,7 +1115,7 @@ inner join task as tk on tk.idAux = kpi.idAux
 inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO
 inner join projectOrder as po on po.idPO = wo.idPO and po.jobNo = wo.jobNo
 inner join job as jb on jb.jobNo = po.jobNo
-where kpi.dateWorked between @StartDate and @EndDate and kpi.install like 'Asbestos'"
+where kpi.dateWorked between @StartDate and @EndDate and kpi.install like 'ACM' or kpi.install like 'Asbestos'"
 			Return _ACM
 		End Get
 		Set(value As String)

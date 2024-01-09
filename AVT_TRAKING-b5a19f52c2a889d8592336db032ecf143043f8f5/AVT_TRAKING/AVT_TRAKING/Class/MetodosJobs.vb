@@ -1155,7 +1155,8 @@ tk.idAuxWO,
 tk.percentComplete,
 po.Line,
 po.WBS,
-tk.Area
+tk.Area,
+jb.postingProject
 from 
 job as jb 
 inner join clients as cl on jb.idClient = cl.idClient
@@ -1186,6 +1187,7 @@ where jb.jobNo = " + If(idJob = "", "0", idJob).ToString() + " order by wo.idWO 
                 lstDatosPO.Add(If(reader("Line") Is DBNull.Value, "", reader("Line")))
                 lstDatosPO.Add(If(reader("WBS") Is DBNull.Value, "", reader("WBS")))
                 lstDatosPO.Add(If(reader("Area") Is DBNull.Value, "", reader("Area")))
+                lstDatosPO.Add(If(reader("postingProject") Is DBNull.Value, "", reader("postingProject")))
                 Exit While
             End While
             desconectar()
@@ -1220,7 +1222,8 @@ tk.idAuxWO,
 tk.percentComplete,
 po.line,
 po.WBS,
-tk.Area
+tk.Area,
+jb.postingProject
 from 
 job as jb 
 inner join clients as cl on jb.idClient = cl.idClient
@@ -1251,6 +1254,7 @@ where jb.jobNo = " + If(idJob = "", "0", idJob).ToString() + " and tk.task = '" 
                 lstDatosPO.Add(reader("Line"))
                 lstDatosPO.Add(reader("WBS"))
                 lstDatosPO.Add(reader("Area"))
+                lstDatosPO.Add(reader("postingProject"))
                 Exit While
             End While
             desconectar()
@@ -1442,6 +1446,26 @@ inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO
 inner join projectOrder as po on po.idPO = wo.idPO
 inner join job as jb on jb.jobNo = po.jobNo 
 where tk.idAux = '" + idAux + "' and wo.idAuxWO = '" + WO + "'", conn)
+            If cmd.ExecuteNonQuery > 0 Then
+                desconectar()
+                Return True
+            Else
+                desconectar()
+                Return False
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message)
+            Return False
+        End Try
+    End Function
+
+    Public Function updatePostingProject(ByVal postingProject As String, ByVal jobNo As String) As Boolean
+        Try
+            conectar()
+            Dim cmd As New SqlCommand("
+update job set postingProject = '" + postingProject + "' 
+from job as jb
+where jb.jobNo = '" + jobNo + "'", conn)
             If cmd.ExecuteNonQuery > 0 Then
                 desconectar()
                 Return True

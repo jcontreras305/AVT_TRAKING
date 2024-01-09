@@ -51,11 +51,12 @@ Partial Class FindTask
         Me.TableLayoutPanel1.Controls.Add(Me.Panel2, 0, 1)
         Me.TableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.TableLayoutPanel1.Location = New System.Drawing.Point(0, 0)
+        Me.TableLayoutPanel1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
         Me.TableLayoutPanel1.RowCount = 2
-        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 51.0!))
+        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 63.0!))
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-        Me.TableLayoutPanel1.Size = New System.Drawing.Size(478, 144)
+        Me.TableLayoutPanel1.Size = New System.Drawing.Size(637, 177)
         Me.TableLayoutPanel1.TabIndex = 0
         '
         'TitleBar
@@ -63,9 +64,10 @@ Partial Class FindTask
         Me.TitleBar.Controls.Add(Me.Label28)
         Me.TitleBar.Controls.Add(Me.PictureBox3)
         Me.TitleBar.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.TitleBar.Location = New System.Drawing.Point(4, 4)
+        Me.TitleBar.Location = New System.Drawing.Point(5, 5)
+        Me.TitleBar.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.TitleBar.Name = "TitleBar"
-        Me.TitleBar.Size = New System.Drawing.Size(470, 45)
+        Me.TitleBar.Size = New System.Drawing.Size(627, 55)
         Me.TitleBar.TabIndex = 0
         '
         'Label28
@@ -73,9 +75,10 @@ Partial Class FindTask
         Me.Label28.AutoSize = True
         Me.Label28.Font = New System.Drawing.Font("Verdana", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label28.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.Label28.Location = New System.Drawing.Point(9, 9)
+        Me.Label28.Location = New System.Drawing.Point(12, 11)
+        Me.Label28.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label28.Name = "Label28"
-        Me.Label28.Size = New System.Drawing.Size(113, 18)
+        Me.Label28.Size = New System.Drawing.Size(148, 25)
         Me.Label28.TabIndex = 45
         Me.Label28.Text = "Find Project"
         '
@@ -83,9 +86,10 @@ Partial Class FindTask
         '
         Me.PictureBox3.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.PictureBox3.Image = Global.AVT_TRAKING.My.Resources.Resources._exit
-        Me.PictureBox3.Location = New System.Drawing.Point(433, 9)
+        Me.PictureBox3.Location = New System.Drawing.Point(577, 11)
+        Me.PictureBox3.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.PictureBox3.Name = "PictureBox3"
-        Me.PictureBox3.Size = New System.Drawing.Size(34, 31)
+        Me.PictureBox3.Size = New System.Drawing.Size(45, 38)
         Me.PictureBox3.TabIndex = 43
         Me.PictureBox3.TabStop = False
         '
@@ -100,31 +104,35 @@ Partial Class FindTask
         Me.Panel2.Controls.Add(Me.txtElement)
         Me.Panel2.Controls.Add(Me.cmbFindElement)
         Me.Panel2.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel2.Location = New System.Drawing.Point(4, 56)
+        Me.Panel2.Location = New System.Drawing.Point(5, 69)
+        Me.Panel2.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(470, 84)
+        Me.Panel2.Size = New System.Drawing.Size(627, 103)
         Me.Panel2.TabIndex = 1
         '
         'cmbElement
         '
         Me.cmbElement.DropDownWidth = 200
         Me.cmbElement.FormattingEnabled = True
-        Me.cmbElement.Location = New System.Drawing.Point(105, 44)
+        Me.cmbElement.Location = New System.Drawing.Point(140, 54)
+        Me.cmbElement.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.cmbElement.MaxDropDownItems = 10
         Me.cmbElement.Name = "cmbElement"
-        Me.cmbElement.Size = New System.Drawing.Size(248, 21)
+        Me.cmbElement.Size = New System.Drawing.Size(329, 24)
         Me.cmbElement.TabIndex = 6
         '
         'sprElement
         '
-        Me.sprElement.Location = New System.Drawing.Point(155, 42)
+        Me.sprElement.Location = New System.Drawing.Point(207, 52)
+        Me.sprElement.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.sprElement.Name = "sprElement"
-        Me.sprElement.Size = New System.Drawing.Size(248, 20)
+        Me.sprElement.Size = New System.Drawing.Size(331, 22)
         Me.sprElement.TabIndex = 5
         '
         'mtpElement
         '
-        Me.mtpElement.Location = New System.Drawing.Point(227, 39)
+        Me.mtpElement.Location = New System.Drawing.Point(303, 48)
+        Me.mtpElement.Margin = New System.Windows.Forms.Padding(12, 11, 12, 11)
         Me.mtpElement.Name = "mtpElement"
         Me.mtpElement.TabIndex = 7
         '
@@ -132,9 +140,10 @@ Partial Class FindTask
         '
         Me.lblMessage.AutoSize = True
         Me.lblMessage.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.lblMessage.Location = New System.Drawing.Point(9, 44)
+        Me.lblMessage.Location = New System.Drawing.Point(12, 54)
+        Me.lblMessage.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblMessage.Name = "lblMessage"
-        Me.lblMessage.Size = New System.Drawing.Size(53, 13)
+        Me.lblMessage.Size = New System.Drawing.Size(69, 17)
         Me.lblMessage.TabIndex = 3
         Me.lblMessage.Text = "Message:"
         '
@@ -144,9 +153,10 @@ Partial Class FindTask
         Me.btnFind.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnFind.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.btnFind.Image = Global.AVT_TRAKING.My.Resources.Resources.loupe
-        Me.btnFind.Location = New System.Drawing.Point(390, 11)
+        Me.btnFind.Location = New System.Drawing.Point(520, 14)
+        Me.btnFind.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.btnFind.Name = "btnFind"
-        Me.btnFind.Size = New System.Drawing.Size(72, 34)
+        Me.btnFind.Size = New System.Drawing.Size(96, 42)
         Me.btnFind.TabIndex = 2
         Me.btnFind.Text = "Find"
         Me.btnFind.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
@@ -154,27 +164,30 @@ Partial Class FindTask
         '
         'txtElement
         '
-        Me.txtElement.Location = New System.Drawing.Point(136, 14)
+        Me.txtElement.Location = New System.Drawing.Point(181, 17)
+        Me.txtElement.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.txtElement.Name = "txtElement"
-        Me.txtElement.Size = New System.Drawing.Size(248, 20)
+        Me.txtElement.Size = New System.Drawing.Size(329, 22)
         Me.txtElement.TabIndex = 1
         '
         'cmbFindElement
         '
         Me.cmbFindElement.FormattingEnabled = True
-        Me.cmbFindElement.Items.AddRange(New Object() {"Job No", "Client", "Work Order", "Task", "Equipament", "Project Manager", "Client PO", "Project Description", "Est. Total Billing", "Begin Date", "End Date", "Hrs Estamate", "Exp Code", "Account No.", "Complete", "%Complete"})
-        Me.cmbFindElement.Location = New System.Drawing.Point(12, 14)
+        Me.cmbFindElement.Items.AddRange(New Object() {"Job No", "Client", "Work Order", "Task", "Equipament", "Project Manager", "Client PO", "Project Description", "Est. Total Billing", "Begin Date", "End Date", "Hrs Estamate", "Exp Code", "Account No.", "Complete", "%Complete", "postingProject"})
+        Me.cmbFindElement.Location = New System.Drawing.Point(16, 17)
+        Me.cmbFindElement.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.cmbFindElement.Name = "cmbFindElement"
-        Me.cmbFindElement.Size = New System.Drawing.Size(118, 21)
+        Me.cmbFindElement.Size = New System.Drawing.Size(156, 24)
         Me.cmbFindElement.TabIndex = 0
         '
         'FindTask
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(478, 144)
+        Me.ClientSize = New System.Drawing.Size(637, 177)
         Me.Controls.Add(Me.TableLayoutPanel1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
+        Me.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.Name = "FindTask"
         Me.Text = "FindTask"
         Me.TableLayoutPanel1.ResumeLayout(False)

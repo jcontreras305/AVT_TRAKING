@@ -80,6 +80,8 @@ Public Class FindTask
                 ocultarElementos(sprElement)
                 sprElement.DecimalPlaces = 0
                 sprElement.Maximum = 100
+            Case "postingProject"
+                ocultarElementos(txtElement)
             Case Else
                 'txtElement.Visible = False
                 cmbElement.Visible = False
@@ -138,9 +140,9 @@ Public Class FindTask
                     If cmbElement.Text <> cmbElement.SelectedItem Then
                         Dim array() As String = cmbElement.Text.Split(" ")
                         If array.Length = 2 Then
-                            consulta = "(cl.companyName like '%" + array(0) + "%' or CONVERT(nvarchar, cl.numberClient) like '%" + array(0) + "%') or (cl.companyName like '%" + array(2) + "%' or CONVERT(nvarchar, cl.numberClient) like '%" + array(2) + "%')"
+                            consulta = "where (cl.companyName like '%" + array(0) + "%' or CONVERT(nvarchar, cl.numberClient) like '%" + array(0) + "%') or (cl.companyName like '%" + array(2) + "%' or CONVERT(nvarchar, cl.numberClient) like '%" + array(2) + "%')"
                         ElseIf array.Length = 1 Then
-                            consulta = "(cl.companyName like '%" + array(0) + "%' or CONVERT(nvarchar, cl.numberClient) like '%" + array(0) + "%')"
+                            consulta = "where (cl.companyName like '%" + array(0) + "%' or CONVERT(nvarchar, cl.numberClient) like '%" + array(0) + "%')"
                         ElseIf array.Length > 2 Then
                             MessageBox.Show("More than two Elements was found. Check the information" + vbCrLf + "(You should write the 'Work Order' 'space' or '-' and optionally the Task Code)", "Important", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
                             Exit Select
@@ -169,6 +171,8 @@ Public Class FindTask
                     ElseIf array.Length = 1 Then
                         consulta = "where (wo.idWO like '%" + array(0) + "%')"
                     ElseIf array.Length > 2 Then
+                        consulta = "where (wo.idWO like '%" + array(0) + "%' and tk.task like '%" + array(1) + "-" + array(2) + "%')"
+                    Else
                         MessageBox.Show("More than two Elements was found. Check the information" + vbCrLf + "(You should write the 'Work Order' 'space' or '-' and optionally the Task Code)", "Important", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
                         Exit Select
                     End If
@@ -243,6 +247,9 @@ Public Class FindTask
                     mtdJobs.consultaWOFind(consulta, tblProjects, IdClient)
                 Case "%Complete"
                     consulta = "where tk.percentComplete = " + sprElement.Value.ToString() + ""
+                    mtdJobs.consultaWOFind(consulta, tblProjects, IdClient)
+                Case "postingProject"
+                    consulta = "where jb.postingProject = " + txtElement.Text.ToString() + ""
                     mtdJobs.consultaWOFind(consulta, tblProjects, IdClient)
             End Select
             If tblProjects.Rows.Count > 0 Then

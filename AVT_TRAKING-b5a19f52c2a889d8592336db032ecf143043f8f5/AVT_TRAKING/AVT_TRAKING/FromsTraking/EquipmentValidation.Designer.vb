@@ -24,6 +24,7 @@ Partial Class EquipmentValidation
     Private Sub InitializeComponent()
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
         Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.lbljobNo = New System.Windows.Forms.Label()
         Me.dtpInformation = New System.Windows.Forms.DateTimePicker()
         Me.btnSave = New System.Windows.Forms.Button()
         Me.PictureBox4 = New System.Windows.Forms.PictureBox()
@@ -36,6 +37,9 @@ Partial Class EquipmentValidation
         Me.cmbInformation = New System.Windows.Forms.ComboBox()
         Me.Panel2 = New System.Windows.Forms.Panel()
         Me.tblEquipment = New System.Windows.Forms.DataGridView()
+        Me.Panel3 = New System.Windows.Forms.Panel()
+        Me.pgbComplete = New System.Windows.Forms.ProgressBar()
+        Me.lblMessage = New System.Windows.Forms.Label()
         Me.ErrorClm = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.DateEquip = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.ProjectEquip = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -45,10 +49,7 @@ Partial Class EquipmentValidation
         Me.Description = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.ClassEquip = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.STHrs = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Panel3 = New System.Windows.Forms.Panel()
-        Me.pgbComplete = New System.Windows.Forms.ProgressBar()
-        Me.lblMessage = New System.Windows.Forms.Label()
-        Me.lbljobNo = New System.Windows.Forms.Label()
+        Me.clmJobNo = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.TableLayoutPanel1.SuspendLayout()
         Me.Panel1.SuspendLayout()
         CType(Me.PictureBox4, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -70,12 +71,13 @@ Partial Class EquipmentValidation
         Me.TableLayoutPanel1.Controls.Add(Me.Panel3, 0, 2)
         Me.TableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.TableLayoutPanel1.Location = New System.Drawing.Point(0, 0)
+        Me.TableLayoutPanel1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
         Me.TableLayoutPanel1.RowCount = 3
-        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 80.0!))
+        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 98.0!))
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 34.0!))
-        Me.TableLayoutPanel1.Size = New System.Drawing.Size(800, 450)
+        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 42.0!))
+        Me.TableLayoutPanel1.Size = New System.Drawing.Size(1067, 554)
         Me.TableLayoutPanel1.TabIndex = 0
         '
         'Panel1
@@ -93,18 +95,32 @@ Partial Class EquipmentValidation
         Me.Panel1.Controls.Add(Me.lblTitle)
         Me.Panel1.Controls.Add(Me.cmbInformation)
         Me.Panel1.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel1.Location = New System.Drawing.Point(3, 3)
+        Me.Panel1.Location = New System.Drawing.Point(4, 4)
+        Me.Panel1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(794, 74)
+        Me.Panel1.Size = New System.Drawing.Size(1059, 90)
         Me.Panel1.TabIndex = 0
+        '
+        'lbljobNo
+        '
+        Me.lbljobNo.AutoSize = True
+        Me.lbljobNo.Font = New System.Drawing.Font("Verdana", 11.25!, System.Drawing.FontStyle.Bold)
+        Me.lbljobNo.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.lbljobNo.Location = New System.Drawing.Point(315, 55)
+        Me.lbljobNo.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lbljobNo.Name = "lbljobNo"
+        Me.lbljobNo.Size = New System.Drawing.Size(91, 23)
+        Me.lbljobNo.TabIndex = 46
+        Me.lbljobNo.Text = "Job No:"
         '
         'dtpInformation
         '
         Me.dtpInformation.CustomFormat = "MM/dd/yyyy"
         Me.dtpInformation.Format = System.Windows.Forms.DateTimePickerFormat.Custom
-        Me.dtpInformation.Location = New System.Drawing.Point(9, 43)
+        Me.dtpInformation.Location = New System.Drawing.Point(12, 53)
+        Me.dtpInformation.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.dtpInformation.Name = "dtpInformation"
-        Me.dtpInformation.Size = New System.Drawing.Size(136, 20)
+        Me.dtpInformation.Size = New System.Drawing.Size(180, 22)
         Me.dtpInformation.TabIndex = 4
         Me.dtpInformation.Visible = False
         '
@@ -117,9 +133,10 @@ Partial Class EquipmentValidation
         Me.btnSave.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.btnSave.Image = Global.AVT_TRAKING.My.Resources.Resources.save1
         Me.btnSave.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnSave.Location = New System.Drawing.Point(562, 33)
+        Me.btnSave.Location = New System.Drawing.Point(749, 41)
+        Me.btnSave.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.btnSave.Name = "btnSave"
-        Me.btnSave.Size = New System.Drawing.Size(69, 38)
+        Me.btnSave.Size = New System.Drawing.Size(92, 47)
         Me.btnSave.TabIndex = 45
         Me.btnSave.Text = "Save"
         Me.btnSave.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -129,9 +146,10 @@ Partial Class EquipmentValidation
         '
         Me.PictureBox4.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.PictureBox4.Image = Global.AVT_TRAKING.My.Resources.Resources._exit
-        Me.PictureBox4.Location = New System.Drawing.Point(757, 35)
+        Me.PictureBox4.Location = New System.Drawing.Point(1009, 43)
+        Me.PictureBox4.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.PictureBox4.Name = "PictureBox4"
-        Me.PictureBox4.Size = New System.Drawing.Size(34, 31)
+        Me.PictureBox4.Size = New System.Drawing.Size(45, 38)
         Me.PictureBox4.TabIndex = 44
         Me.PictureBox4.TabStop = False
         '
@@ -139,9 +157,10 @@ Partial Class EquipmentValidation
         '
         Me.btnMinimize.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnMinimize.Image = Global.AVT_TRAKING.My.Resources.Resources.minimize2
-        Me.btnMinimize.Location = New System.Drawing.Point(736, 3)
+        Me.btnMinimize.Location = New System.Drawing.Point(981, 4)
+        Me.btnMinimize.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.btnMinimize.Name = "btnMinimize"
-        Me.btnMinimize.Size = New System.Drawing.Size(26, 27)
+        Me.btnMinimize.Size = New System.Drawing.Size(35, 33)
         Me.btnMinimize.TabIndex = 43
         Me.btnMinimize.TabStop = False
         '
@@ -149,9 +168,10 @@ Partial Class EquipmentValidation
         '
         Me.btnRestore.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnRestore.Image = Global.AVT_TRAKING.My.Resources.Resources.restore2
-        Me.btnRestore.Location = New System.Drawing.Point(766, 4)
+        Me.btnRestore.Location = New System.Drawing.Point(1021, 5)
+        Me.btnRestore.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.btnRestore.Name = "btnRestore"
-        Me.btnRestore.Size = New System.Drawing.Size(23, 27)
+        Me.btnRestore.Size = New System.Drawing.Size(31, 33)
         Me.btnRestore.TabIndex = 42
         Me.btnRestore.TabStop = False
         '
@@ -159,9 +179,10 @@ Partial Class EquipmentValidation
         '
         Me.btnMaximize.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnMaximize.Image = Global.AVT_TRAKING.My.Resources.Resources.maximize2
-        Me.btnMaximize.Location = New System.Drawing.Point(766, 6)
+        Me.btnMaximize.Location = New System.Drawing.Point(1021, 7)
+        Me.btnMaximize.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.btnMaximize.Name = "btnMaximize"
-        Me.btnMaximize.Size = New System.Drawing.Size(23, 25)
+        Me.btnMaximize.Size = New System.Drawing.Size(31, 31)
         Me.btnMaximize.TabIndex = 41
         Me.btnMaximize.TabStop = False
         '
@@ -174,9 +195,10 @@ Partial Class EquipmentValidation
         Me.btnUpdateMaterialExcel.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.btnUpdateMaterialExcel.Image = Global.AVT_TRAKING.My.Resources.Resources.excel
         Me.btnUpdateMaterialExcel.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnUpdateMaterialExcel.Location = New System.Drawing.Point(455, 33)
+        Me.btnUpdateMaterialExcel.Location = New System.Drawing.Point(607, 41)
+        Me.btnUpdateMaterialExcel.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.btnUpdateMaterialExcel.Name = "btnUpdateMaterialExcel"
-        Me.btnUpdateMaterialExcel.Size = New System.Drawing.Size(101, 38)
+        Me.btnUpdateMaterialExcel.Size = New System.Drawing.Size(135, 47)
         Me.btnUpdateMaterialExcel.TabIndex = 40
         Me.btnUpdateMaterialExcel.Text = "Find Excel"
         Me.btnUpdateMaterialExcel.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -184,9 +206,10 @@ Partial Class EquipmentValidation
         '
         'txtInformation
         '
-        Me.txtInformation.Location = New System.Drawing.Point(31, 43)
+        Me.txtInformation.Location = New System.Drawing.Point(41, 53)
+        Me.txtInformation.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.txtInformation.Name = "txtInformation"
-        Me.txtInformation.Size = New System.Drawing.Size(136, 20)
+        Me.txtInformation.Size = New System.Drawing.Size(180, 22)
         Me.txtInformation.TabIndex = 5
         '
         'lblTitle
@@ -194,18 +217,20 @@ Partial Class EquipmentValidation
         Me.lblTitle.AutoSize = True
         Me.lblTitle.Font = New System.Drawing.Font("Verdana", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblTitle.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.lblTitle.Location = New System.Drawing.Point(3, 6)
+        Me.lblTitle.Location = New System.Drawing.Point(4, 7)
+        Me.lblTitle.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblTitle.Name = "lblTitle"
-        Me.lblTitle.Size = New System.Drawing.Size(206, 18)
+        Me.lblTitle.Size = New System.Drawing.Size(281, 23)
         Me.lblTitle.TabIndex = 2
         Me.lblTitle.Text = "Material Validation Excel"
         '
         'cmbInformation
         '
         Me.cmbInformation.FormattingEnabled = True
-        Me.cmbInformation.Location = New System.Drawing.Point(94, 43)
+        Me.cmbInformation.Location = New System.Drawing.Point(125, 53)
+        Me.cmbInformation.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.cmbInformation.Name = "cmbInformation"
-        Me.cmbInformation.Size = New System.Drawing.Size(136, 21)
+        Me.cmbInformation.Size = New System.Drawing.Size(180, 24)
         Me.cmbInformation.TabIndex = 3
         Me.cmbInformation.Visible = False
         '
@@ -214,70 +239,24 @@ Partial Class EquipmentValidation
         Me.Panel2.BackColor = System.Drawing.Color.FromArgb(CType(CType(83, Byte), Integer), CType(CType(93, Byte), Integer), CType(CType(102, Byte), Integer))
         Me.Panel2.Controls.Add(Me.tblEquipment)
         Me.Panel2.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel2.Location = New System.Drawing.Point(3, 83)
+        Me.Panel2.Location = New System.Drawing.Point(4, 102)
+        Me.Panel2.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(794, 330)
+        Me.Panel2.Size = New System.Drawing.Size(1059, 406)
         Me.Panel2.TabIndex = 1
         '
         'tblEquipment
         '
         Me.tblEquipment.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.tblEquipment.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.tblEquipment.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.ErrorClm, Me.DateEquip, Me.ProjectEquip, Me.idAux, Me.MaterialCode, Me.Amount, Me.Description, Me.ClassEquip, Me.STHrs})
+        Me.tblEquipment.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.ErrorClm, Me.DateEquip, Me.ProjectEquip, Me.idAux, Me.MaterialCode, Me.Amount, Me.Description, Me.ClassEquip, Me.STHrs, Me.clmJobNo})
         Me.tblEquipment.Dock = System.Windows.Forms.DockStyle.Fill
         Me.tblEquipment.Location = New System.Drawing.Point(0, 0)
+        Me.tblEquipment.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.tblEquipment.Name = "tblEquipment"
-        Me.tblEquipment.Size = New System.Drawing.Size(794, 330)
+        Me.tblEquipment.RowHeadersWidth = 51
+        Me.tblEquipment.Size = New System.Drawing.Size(1059, 406)
         Me.tblEquipment.TabIndex = 0
-        '
-        'ErrorClm
-        '
-        Me.ErrorClm.HeaderText = "Error"
-        Me.ErrorClm.Name = "ErrorClm"
-        Me.ErrorClm.ReadOnly = True
-        Me.ErrorClm.Visible = False
-        '
-        'DateEquip
-        '
-        Me.DateEquip.HeaderText = "Date"
-        Me.DateEquip.Name = "DateEquip"
-        '
-        'ProjectEquip
-        '
-        Me.ProjectEquip.HeaderText = "Project"
-        Me.ProjectEquip.Name = "ProjectEquip"
-        '
-        'idAux
-        '
-        Me.idAux.HeaderText = "idAux"
-        Me.idAux.Name = "idAux"
-        Me.idAux.Visible = False
-        '
-        'MaterialCode
-        '
-        Me.MaterialCode.HeaderText = "MaterialCode"
-        Me.MaterialCode.Name = "MaterialCode"
-        '
-        'Amount
-        '
-        Me.Amount.HeaderText = "Amount"
-        Me.Amount.Name = "Amount"
-        '
-        'Description
-        '
-        Me.Description.HeaderText = "Description"
-        Me.Description.Name = "Description"
-        '
-        'ClassEquip
-        '
-        Me.ClassEquip.HeaderText = "Class"
-        Me.ClassEquip.Name = "ClassEquip"
-        Me.ClassEquip.ReadOnly = True
-        '
-        'STHrs
-        '
-        Me.STHrs.HeaderText = "ST Hrs"
-        Me.STHrs.Name = "STHrs"
         '
         'Panel3
         '
@@ -285,47 +264,105 @@ Partial Class EquipmentValidation
         Me.Panel3.Controls.Add(Me.pgbComplete)
         Me.Panel3.Controls.Add(Me.lblMessage)
         Me.Panel3.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel3.Location = New System.Drawing.Point(3, 419)
+        Me.Panel3.Location = New System.Drawing.Point(4, 516)
+        Me.Panel3.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.Panel3.Name = "Panel3"
-        Me.Panel3.Size = New System.Drawing.Size(794, 28)
+        Me.Panel3.Size = New System.Drawing.Size(1059, 34)
         Me.Panel3.TabIndex = 2
         '
         'pgbComplete
         '
         Me.pgbComplete.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.pgbComplete.Location = New System.Drawing.Point(588, 3)
+        Me.pgbComplete.Location = New System.Drawing.Point(784, 4)
+        Me.pgbComplete.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.pgbComplete.Name = "pgbComplete"
-        Me.pgbComplete.Size = New System.Drawing.Size(197, 23)
+        Me.pgbComplete.Size = New System.Drawing.Size(263, 28)
         Me.pgbComplete.TabIndex = 1
         '
         'lblMessage
         '
         Me.lblMessage.AutoSize = True
         Me.lblMessage.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.lblMessage.Location = New System.Drawing.Point(21, 10)
+        Me.lblMessage.Location = New System.Drawing.Point(28, 12)
+        Me.lblMessage.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblMessage.Name = "lblMessage"
-        Me.lblMessage.Size = New System.Drawing.Size(56, 13)
+        Me.lblMessage.Size = New System.Drawing.Size(73, 17)
         Me.lblMessage.TabIndex = 0
         Me.lblMessage.Text = "Message: "
         '
-        'lbljobNo
+        'ErrorClm
         '
-        Me.lbljobNo.AutoSize = True
-        Me.lbljobNo.Font = New System.Drawing.Font("Verdana", 11.25!, System.Drawing.FontStyle.Bold)
-        Me.lbljobNo.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.lbljobNo.Location = New System.Drawing.Point(236, 45)
-        Me.lbljobNo.Name = "lbljobNo"
-        Me.lbljobNo.Size = New System.Drawing.Size(69, 18)
-        Me.lbljobNo.TabIndex = 46
-        Me.lbljobNo.Text = "Job No:"
+        Me.ErrorClm.HeaderText = "Error"
+        Me.ErrorClm.MinimumWidth = 6
+        Me.ErrorClm.Name = "ErrorClm"
+        Me.ErrorClm.ReadOnly = True
+        Me.ErrorClm.Visible = False
+        '
+        'DateEquip
+        '
+        Me.DateEquip.HeaderText = "Date"
+        Me.DateEquip.MinimumWidth = 6
+        Me.DateEquip.Name = "DateEquip"
+        '
+        'ProjectEquip
+        '
+        Me.ProjectEquip.HeaderText = "Project"
+        Me.ProjectEquip.MinimumWidth = 6
+        Me.ProjectEquip.Name = "ProjectEquip"
+        '
+        'idAux
+        '
+        Me.idAux.HeaderText = "idAux"
+        Me.idAux.MinimumWidth = 6
+        Me.idAux.Name = "idAux"
+        Me.idAux.Visible = False
+        '
+        'MaterialCode
+        '
+        Me.MaterialCode.HeaderText = "MaterialCode"
+        Me.MaterialCode.MinimumWidth = 6
+        Me.MaterialCode.Name = "MaterialCode"
+        '
+        'Amount
+        '
+        Me.Amount.HeaderText = "Amount"
+        Me.Amount.MinimumWidth = 6
+        Me.Amount.Name = "Amount"
+        '
+        'Description
+        '
+        Me.Description.HeaderText = "Description"
+        Me.Description.MinimumWidth = 6
+        Me.Description.Name = "Description"
+        '
+        'ClassEquip
+        '
+        Me.ClassEquip.HeaderText = "Class"
+        Me.ClassEquip.MinimumWidth = 6
+        Me.ClassEquip.Name = "ClassEquip"
+        Me.ClassEquip.ReadOnly = True
+        '
+        'STHrs
+        '
+        Me.STHrs.HeaderText = "ST Hrs"
+        Me.STHrs.MinimumWidth = 6
+        Me.STHrs.Name = "STHrs"
+        '
+        'clmJobNo
+        '
+        Me.clmJobNo.HeaderText = "JobNo"
+        Me.clmJobNo.MinimumWidth = 6
+        Me.clmJobNo.Name = "clmJobNo"
+        Me.clmJobNo.Visible = False
         '
         'EquipmentValidation
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(800, 450)
+        Me.ClientSize = New System.Drawing.Size(1067, 554)
         Me.Controls.Add(Me.TableLayoutPanel1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
+        Me.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.Name = "EquipmentValidation"
         Me.Text = "EquipmentValidation"
         Me.TableLayoutPanel1.ResumeLayout(False)
@@ -360,6 +397,7 @@ Partial Class EquipmentValidation
     Friend WithEvents btnRestore As PictureBox
     Friend WithEvents btnMaximize As PictureBox
     Friend WithEvents btnSave As Button
+    Friend WithEvents lbljobNo As Label
     Friend WithEvents ErrorClm As DataGridViewTextBoxColumn
     Friend WithEvents DateEquip As DataGridViewTextBoxColumn
     Friend WithEvents ProjectEquip As DataGridViewTextBoxColumn
@@ -369,5 +407,5 @@ Partial Class EquipmentValidation
     Friend WithEvents Description As DataGridViewTextBoxColumn
     Friend WithEvents ClassEquip As DataGridViewTextBoxColumn
     Friend WithEvents STHrs As DataGridViewTextBoxColumn
-    Friend WithEvents lbljobNo As Label
+    Friend WithEvents clmJobNo As DataGridViewTextBoxColumn
 End Class

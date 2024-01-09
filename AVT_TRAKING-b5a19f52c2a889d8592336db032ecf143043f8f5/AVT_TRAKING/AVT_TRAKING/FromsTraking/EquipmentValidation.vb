@@ -8,6 +8,7 @@ Public Class EquipmentValidation
     Dim mtdSC As New MetodosScaffold
     Dim mtdJobs As New MetodosJobs
     Dim tblProject As Data.DataTable
+    Dim tblAllProject As New Data.DataTable
     Dim tblMaterial As Data.DataTable
     Public jobNo As String = ""
     Private Sub EquipmentValidation_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -15,6 +16,7 @@ Public Class EquipmentValidation
         dtpInformation.Location = New System.Drawing.Point(31, 43)
         tblMaterial = mtdJobs.llenarComboCellMaterial(cmbInformation)
         tblProject = mtdSC.llenarComboWO(cmbInformation, idclient, jobNo)
+        mtdJobs.consultaJobs(tblAllProject)
         btnSave.Enabled = False
         lbljobNo.Text = "Job No: " + jobNo
     End Sub
@@ -113,10 +115,15 @@ Public Class EquipmentValidation
                 Case tblEquipment.Columns("ProjectEquip").Index
                     If cmbInformation.SelectedItem IsNot Nothing Then
                         Dim array() As String = cmbInformation.SelectedItem.ToString.Split(" ")
-                        Dim arrayRows() As DataRow = tblProject.Select("wono like '" + array(0).Replace(" ", "-") + "' and job = " + jobNo)
+                        Dim arrayWO() As String = array(0).ToString.Split("-")
+                        Dim arrayRows() As DataRow = tblAllProject.Select("idWO like '" + arrayWO(0) + "' and task like '" + If(arrayWO.Length > 2, arrayWO(1) + "-" + arrayWO(2), arrayWO(1)) + "' and jobNo = " + array(1))
                         If arrayRows.Length > 0 Then
-                            tblEquipment.CurrentCell.Value = arrayRows(0).ItemArray(0) + " " + arrayRows(0).ItemArray(3)
-                            tblEquipment.CurrentRow.Cells("idAux").Value = arrayRows(0).ItemArray(2)
+                            tblEquipment.CurrentCell.Value = arrayRows(0).ItemArray(3) + " " + arrayRows(0).ItemArray(4)
+                            tblEquipment.CurrentRow.Cells("idAux").Value = arrayRows(0).ItemArray(5)
+                            tblEquipment.CurrentRow.Cells("clmJobNo").Value = arrayRows(0).ItemArray(0).ToString()
+                            tblEquipment.CurrentRow.DefaultCellStyle.BackColor = Color.White
+                            tblEquipment.CurrentRow.Cells("ErrorClm").Value = ""
+                            tblEquipment.Columns("ErrorClm").Visible = True
                         End If
                         'For Each row As Data.DataRow In tblProject.Rows
                         '    If array(0) = row.ItemArray(0) And array(1) = row.ItemArray(3) Then
@@ -186,7 +193,7 @@ Public Class EquipmentValidation
                         While Hoja1.Cells(count, 1).Text <> ""
                             Dim arrayDate() As String = Hoja1.Cells(count, 1).Text.split("/")
                             Dim dateStr As DateTime = New DateTime(CInt(arrayDate(2)), CInt(arrayDate(0)), CInt(arrayDate(1)))
-                            tblEquipment.Rows.Add("", dateStr.ToString("MM/dd/yyyy"), Hoja1.Cells(count, 2).Text, "", Hoja1.Cells(count, 3).Text, Hoja1.Cells(count, 4).Text, Hoja1.Cells(count, 5).Text, "", Hoja1.Cells(count, 6).Text)
+                            tblEquipment.Rows.Add("", dateStr.ToString("MM/dd/yyyy"), Hoja1.Cells(count, 2).Text, "", Hoja1.Cells(count, 3).Text, Hoja1.Cells(count, 4).Text, Hoja1.Cells(count, 5).Text, Hoja1.Cells(count, 6).Text, Hoja1.Cells(count, 7).Text, Hoja1.Cells(count, 8).Text)
                             count += 1
                             lblMessage.Text = "Message: " + "Reading Row " + CStr(count)
                             countRowsInc += 1
@@ -198,7 +205,7 @@ Public Class EquipmentValidation
                         lblMessage.Text = "Message: " + " Data Validation..."
                         buscarIdAuxTable()
                         pgbComplete.Value = 94
-                        validarRepetidos()
+                        'validarRepetidos()
                         pgbComplete.Value = 98
                         enumerarFilas()
                         If existError() Then
@@ -230,10 +237,11 @@ Public Class EquipmentValidation
     Private Sub buscarIdAuxTable()
         For Each row As DataGridViewRow In tblEquipment.Rows()
             If Not row.IsNewRow Then
-                Dim array() As String = row.Cells("ProjectEquip").Value.ToString().Split(" ")
-                Dim rows() As DataRow = tblProject.Select("wono like '" + array(0).Replace(" ", "-") + "' and job = " + jobNo)
+                Dim jobRow As String = row.Cells("clmJobNo").Value.ToString()
+                Dim array() As String = row.Cells("ProjectEquip").Value.ToString().Split("-")
+                Dim rows() As DataRow = tblAllProject.Select("idWO like '" + array(0) + "' " + If(array.Length > 2, " and task like '" + array(1) + "-" + array(2) + "'", " and task like '" + array(1) + "' ") + "  and jobNo = " + jobRow)
                 If rows.Count > 0 Then
-                    row.Cells("IdAux").Value = rows(0).ItemArray(2)
+                    row.Cells("IdAux").Value = rows(0).ItemArray(5)
                 Else
                     row.DefaultCellStyle.BackColor = Color.Yellow
                     row.Cells("ErrorClm").Value = "Project Not Found"
@@ -279,10 +287,10 @@ Public Class EquipmentValidation
                 row.Cells("ErrorClm").Value = "Project Not Found"
             End If
             'VALIDAMOS QUE NO EXISTAN REPETIDOS
-            If validarRepetidos(row) Then
-                row.Cells("ErrorClm").Value = If(row.Cells("ErrorClm").Value = "", "Repeat", row.Cells("ErrorClm").Value + ", Repeat")
+            'If validarRepetidos(row) Then
+            '    row.Cells("ErrorClm").Value = If(row.Cells("ErrorClm").Value = "", "Repeat", row.Cells("ErrorClm").Value + ", Repeat")
 
-            End If
+            'End If
 
             If row.Cells("ErrorClm").Value <> "" Then
                 row.DefaultCellStyle.BackColor = Color.Yellow
@@ -314,8 +322,16 @@ Public Class EquipmentValidation
     Private Function existProjec(ByVal row As DataGridViewRow) As Boolean
         Try
             If row.Cells("ProjectEquip").Value IsNot Nothing Or row.Cells("ProjectEquip").Value <> "" Then
-                Dim array() As String = row.Cells("ProjectEquip").Value.ToString().Split(" ")
-                Dim rows() As DataRow = tblProject.Select("wono like '" + array(0).Replace(" ", "-") + "'")
+                Dim array() As String = row.Cells("ProjectEquip").Value.ToString().Split("-")
+                Dim rows() As DataRow = tblAllProject.Select("idWO like '" + array(0) + "' " + If(array.Length > 2, " and task like '" + array(1) + "-" + array(2) + "'", " and task like '" + array(1) + "' ") + "  and jobNo = " + row.Cells("clmJobNo").Value)
+                If rows.Count > 0 Then
+                    row.Cells("IdAux").Value = rows(0).ItemArray(5)
+                Else
+                    row.DefaultCellStyle.BackColor = Color.Yellow
+                    row.Cells("ErrorClm").Value = "Project Not Found"
+                    tblEquipment.Columns("ErrorClm").Visible = True
+                End If
+
                 If rows.Count > 0 Then
                     row.Cells("IdAux").Value = rows(0).ItemArray(2)
                     Return True
@@ -476,5 +492,19 @@ Public Class EquipmentValidation
 
     Private Sub tblEquipment_RowsAdded(sender As Object, e As DataGridViewRowsAddedEventArgs) Handles tblEquipment.RowsAdded
         enumerarFilas()
+    End Sub
+
+    Private Sub tblEquipment_Enter(sender As Object, e As EventArgs) Handles tblEquipment.Enter
+        Try
+            If tblEquipment.CurrentRow IsNot Nothing Then
+                If tblEquipment.CurrentRow.Cells("clmJobNo").Value IsNot DBNull.Value Then
+                    lbljobNo.Text = tblEquipment.CurrentRow.Cells("clmJobNo").Value
+                Else
+                    lbljobNo.Text = ""
+                End If
+            End If
+        Catch ex As Exception
+
+        End Try
     End Sub
 End Class
