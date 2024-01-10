@@ -109,6 +109,10 @@ Public Class WrongHours
     Private Sub chbAllJobs_CheckedChanged(sender As Object, e As EventArgs) Handles chbAllJobs.CheckedChanged
         If chbAllJobs.Checked Then
             cmbJob.Enabled = False
+            chbAllPO.Checked = True
+            chbAllWO.Checked = True
+            cmbPO.Enabled = False
+            cmbWO.Enabled = False
         Else
             cmbJob.Enabled = True
             If cmbJob.Items.Count > 0 Then
@@ -179,6 +183,14 @@ Public Class WrongHours
         Catch ex As Exception
 
         End Try
+    End Sub
+
+    Private Sub chbAllPO_CheckedChanged(sender As Object, e As EventArgs) Handles chbAllPO.CheckedChanged
+        If chbAllPO.Checked Then
+            cmbPO.Enabled = False
+            chbAllWO.Checked = True
+        Else
+        End If
     End Sub
 End Class
 

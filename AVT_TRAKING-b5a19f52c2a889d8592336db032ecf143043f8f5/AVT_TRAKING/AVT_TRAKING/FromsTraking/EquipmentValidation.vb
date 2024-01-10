@@ -333,7 +333,7 @@ Public Class EquipmentValidation
                 End If
 
                 If rows.Count > 0 Then
-                    row.Cells("IdAux").Value = rows(0).ItemArray(2)
+                    row.Cells("IdAux").Value = rows(0).ItemArray(5)
                     Return True
                 Else
                     row.Cells("IdAux").Value = ""
@@ -382,9 +382,9 @@ Public Class EquipmentValidation
                 Dim datosMaterial As New List(Of String)
                 Dim message As String = ""
                 Dim errorRow As Boolean = False
-                Dim tran As SqlTransaction
-                con.conectar()
-                tran = con.conn.BeginTransaction
+                'Dim tran As SqlTransaction
+                'con.conectar()
+                'tran = con.conn.BeginTransaction
                 Dim flagContine As Boolean = False
                 Dim flagCommit As Boolean = True
                 Dim numFilas = tblEquipment.Rows.Count - 1
@@ -399,9 +399,14 @@ Public Class EquipmentValidation
                 End If
                 Dim countRowsInc As Integer = 0
                 lblMessage.Text = "Message: Starting..."
+                Dim txtDoc As String = "idMaterialUsed,dateMaterial,quantity,amount,description,IdAux,idMaterial,hoursST"
+                Dim contRow As Integer = 1
                 For Each row As DataGridViewRow In tblEquipment.SelectedRows()
+                    lblMessage.Text = "Message: Reading Row (" & contRow & ")..."
+                    contRow += 1
                     If Not row.IsNewRow Then
-                        datosMaterial.Add("")
+                        Dim newId As Guid = Guid.NewGuid
+                        datosMaterial.Add(newId.ToString.ToUpper)
                         If row.Cells("DateEquip").Value <> "" Then
                             datosMaterial.Add(row.Cells("DateEquip").Value)
                         Else
@@ -436,18 +441,10 @@ Public Class EquipmentValidation
                             errorRow = True
                         End If
                         If Not errorRow Then
-                            mtdJobs.insertMaterialUsed(datosMaterial, tran, con.conn)
+                            txtDoc = txtDoc & vbCrLf & datosMaterial(0) & "," & datosMaterial(1) & "," & "1" & "," & datosMaterial(3) & "," & datosMaterial(6) & "," & datosMaterial(2) & "," & datosMaterial(4) & "," & datosMaterial(5)
+                            'insert into materialUsed values(NEWID(),'" + datos(1) + "',1," + datos(3) + ",'" + datos(6) + "','" + datos(2) + "','" + datos(4) + "'," + datos(5) + ")"
+                            'mtdJobs.insertMaterialUsed(datosMaterial, tran, con.conn)
                         Else
-                            If flagContine = False Then
-                                If DialogResult.Yes = MessageBox.Show("Is a Error in the row " + CStr(row.Index) + "." + vbCrLf + "Would you like to continue?", "Messague", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) Then
-                                    flagContine = True
-                                Else
-                                    flagCommit = False
-                                    Exit For
-                                End If
-                            Else
-                                flagContine = True
-                            End If
                             message = message + If(message = "", CStr(row.Index), " ," + CInt(row.Index))
                         End If
                         countRowsInc += 1
@@ -457,26 +454,38 @@ Public Class EquipmentValidation
                         End If
                     End If
                     datosMaterial.Clear()
-                    lblMessage.Text = "Message: Reading row " + CStr(row.HeaderCell.Value)
+                    'lblMessage.Text = "Message: Reading row " + CStr(row.HeaderCell.Value)
                 Next
                 If message <> "" Then
-                    MessageBox.Show("Error at line: " + message + ". Theese rows was not inserted please verifi the information.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-                End If
-                If flagCommit Then
-                    tran.Commit()
-                    MsgBox("Sucessfull")
+                    MessageBox.Show("Error at line: " + message + ". These rows are not Correct, please verify the information.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
                     pgbComplete.Value = 100
-                    lblMessage.Text = "Message: End."
+                    lblMessage.Text = "Message: The Process Records Insertion has a problem."
                 Else
-                    tran.Rollback()
-                    pgbComplete.Value = 100
-                    lblMessage.Text = "Message: End."
+                    pgbComplete.Value = 90
+                    lblMessage.Text = "Message: Creating Doc Temp..."
+                    If Not IO.Directory.Exists("C:\TMP") Then
+                        My.Computer.FileSystem.CreateDirectory("C:\TMP")
+                    End If
+                    Dim Write As New System.IO.StreamWriter("C:\TMP\MaterialUsed.csv")
+                    Write.WriteLine(txtDoc)
+                    Write.Close()
+                    pgbComplete.Value = 95
+                    If Not errorRow Then
+                        lblMessage.Text = "Message: Saving..."
+                        If mtdJobs.execBulkInsertMaterialUsed() Then
+                            lblMessage.Text = "Message: The Process Records Insertion is over."
+                            MsgBox("Sucessfull")
+                        Else
+                            lblMessage.Text = "Message: The Process Records Insertion has a problem."
+                        End If
+                        pgbComplete.Value = 100
+                    End If
                 End If
-
             End If
         Catch ex As Exception
+            MsgBox(ex.Message())
         Finally
-            con.desconectar()
+            'con.desconectar()
         End Try
     End Sub
 

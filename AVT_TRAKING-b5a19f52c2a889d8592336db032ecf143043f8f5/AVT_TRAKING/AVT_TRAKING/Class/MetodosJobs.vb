@@ -1760,6 +1760,32 @@ where tk.idAux = '" + idAux + "' and wo.idAuxWO = '" + WO + "'", conn)
         End Try
     End Function
 
+    Public Function execBulkInsertMaterialUsed() As Boolean
+        Try
+            conectar()
+            Dim cmd As New SqlCommand("Bulk INSERT 
+	materialUsed 
+FROM 
+	'C:\TMP\MaterialUsed.csv'
+WITH(
+	FIELDTERMINATOR =',',
+	ROWTERMINATOR = '\n',
+	FIRSTROW = 2,
+	MAXERRORS = 1 --NORMALMENTE SE ENCUENTRA EN 10 
+)", conn)
+            If cmd.ExecuteNonQuery Then
+                Return True
+            Else
+                Return False
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message())
+            Return False
+        Finally
+            desconectar()
+        End Try
+    End Function
+
     Public Function insertMaterialUsed(ByVal datos As List(Of String), Optional tran As SqlTransaction = Nothing, Optional connection As SqlConnection = Nothing) As Boolean
         Try
 

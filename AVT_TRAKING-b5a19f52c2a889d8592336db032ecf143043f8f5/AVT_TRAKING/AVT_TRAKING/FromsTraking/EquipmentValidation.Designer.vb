@@ -71,7 +71,7 @@ Partial Class EquipmentValidation
         Me.TableLayoutPanel1.Controls.Add(Me.Panel3, 0, 2)
         Me.TableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.TableLayoutPanel1.Location = New System.Drawing.Point(0, 0)
-        Me.TableLayoutPanel1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.TableLayoutPanel1.Margin = New System.Windows.Forms.Padding(4)
         Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
         Me.TableLayoutPanel1.RowCount = 3
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 98.0!))
@@ -96,7 +96,7 @@ Partial Class EquipmentValidation
         Me.Panel1.Controls.Add(Me.cmbInformation)
         Me.Panel1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel1.Location = New System.Drawing.Point(4, 4)
-        Me.Panel1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.Panel1.Margin = New System.Windows.Forms.Padding(4)
         Me.Panel1.Name = "Panel1"
         Me.Panel1.Size = New System.Drawing.Size(1059, 90)
         Me.Panel1.TabIndex = 0
@@ -118,7 +118,7 @@ Partial Class EquipmentValidation
         Me.dtpInformation.CustomFormat = "MM/dd/yyyy"
         Me.dtpInformation.Format = System.Windows.Forms.DateTimePickerFormat.Custom
         Me.dtpInformation.Location = New System.Drawing.Point(12, 53)
-        Me.dtpInformation.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.dtpInformation.Margin = New System.Windows.Forms.Padding(4)
         Me.dtpInformation.Name = "dtpInformation"
         Me.dtpInformation.Size = New System.Drawing.Size(180, 22)
         Me.dtpInformation.TabIndex = 4
@@ -134,7 +134,7 @@ Partial Class EquipmentValidation
         Me.btnSave.Image = Global.AVT_TRAKING.My.Resources.Resources.save1
         Me.btnSave.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.btnSave.Location = New System.Drawing.Point(749, 41)
-        Me.btnSave.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btnSave.Margin = New System.Windows.Forms.Padding(4)
         Me.btnSave.Name = "btnSave"
         Me.btnSave.Size = New System.Drawing.Size(92, 47)
         Me.btnSave.TabIndex = 45
@@ -147,7 +147,7 @@ Partial Class EquipmentValidation
         Me.PictureBox4.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.PictureBox4.Image = Global.AVT_TRAKING.My.Resources.Resources._exit
         Me.PictureBox4.Location = New System.Drawing.Point(1009, 43)
-        Me.PictureBox4.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.PictureBox4.Margin = New System.Windows.Forms.Padding(4)
         Me.PictureBox4.Name = "PictureBox4"
         Me.PictureBox4.Size = New System.Drawing.Size(45, 38)
         Me.PictureBox4.TabIndex = 44
@@ -158,7 +158,7 @@ Partial Class EquipmentValidation
         Me.btnMinimize.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnMinimize.Image = Global.AVT_TRAKING.My.Resources.Resources.minimize2
         Me.btnMinimize.Location = New System.Drawing.Point(981, 4)
-        Me.btnMinimize.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btnMinimize.Margin = New System.Windows.Forms.Padding(4)
         Me.btnMinimize.Name = "btnMinimize"
         Me.btnMinimize.Size = New System.Drawing.Size(35, 33)
         Me.btnMinimize.TabIndex = 43
@@ -169,7 +169,7 @@ Partial Class EquipmentValidation
         Me.btnRestore.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnRestore.Image = Global.AVT_TRAKING.My.Resources.Resources.restore2
         Me.btnRestore.Location = New System.Drawing.Point(1021, 5)
-        Me.btnRestore.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btnRestore.Margin = New System.Windows.Forms.Padding(4)
         Me.btnRestore.Name = "btnRestore"
         Me.btnRestore.Size = New System.Drawing.Size(31, 33)
         Me.btnRestore.TabIndex = 42
@@ -180,7 +180,7 @@ Partial Class EquipmentValidation
         Me.btnMaximize.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnMaximize.Image = Global.AVT_TRAKING.My.Resources.Resources.maximize2
         Me.btnMaximize.Location = New System.Drawing.Point(1021, 7)
-        Me.btnMaximize.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btnMaximize.Margin = New System.Windows.Forms.Padding(4)
         Me.btnMaximize.Name = "btnMaximize"
         Me.btnMaximize.Size = New System.Drawing.Size(31, 31)
         Me.btnMaximize.TabIndex = 41
@@ -196,7 +196,7 @@ Partial Class EquipmentValidation
         Me.btnUpdateMaterialExcel.Image = Global.AVT_TRAKING.My.Resources.Resources.excel
         Me.btnUpdateMaterialExcel.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.btnUpdateMaterialExcel.Location = New System.Drawing.Point(607, 41)
-        Me.btnUpdateMaterialExcel.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btnUpdateMaterialExcel.Margin = New System.Windows.Forms.Padding(4)
         Me.btnUpdateMaterialExcel.Name = "btnUpdateMaterialExcel"
         Me.btnUpdateMaterialExcel.Size = New System.Drawing.Size(135, 47)
         Me.btnUpdateMaterialExcel.TabIndex = 40
@@ -207,7 +207,7 @@ Partial Class EquipmentValidation
         'txtInformation
         '
         Me.txtInformation.Location = New System.Drawing.Point(41, 53)
-        Me.txtInformation.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.txtInformation.Margin = New System.Windows.Forms.Padding(4)
         Me.txtInformation.Name = "txtInformation"
         Me.txtInformation.Size = New System.Drawing.Size(180, 22)
         Me.txtInformation.TabIndex = 5
@@ -228,7 +228,7 @@ Partial Class EquipmentValidation
         '
         Me.cmbInformation.FormattingEnabled = True
         Me.cmbInformation.Location = New System.Drawing.Point(125, 53)
-        Me.cmbInformation.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.cmbInformation.Margin = New System.Windows.Forms.Padding(4)
         Me.cmbInformation.Name = "cmbInformation"
         Me.cmbInformation.Size = New System.Drawing.Size(180, 24)
         Me.cmbInformation.TabIndex = 3
@@ -240,7 +240,7 @@ Partial Class EquipmentValidation
         Me.Panel2.Controls.Add(Me.tblEquipment)
         Me.Panel2.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel2.Location = New System.Drawing.Point(4, 102)
-        Me.Panel2.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.Panel2.Margin = New System.Windows.Forms.Padding(4)
         Me.Panel2.Name = "Panel2"
         Me.Panel2.Size = New System.Drawing.Size(1059, 406)
         Me.Panel2.TabIndex = 1
@@ -252,7 +252,7 @@ Partial Class EquipmentValidation
         Me.tblEquipment.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.ErrorClm, Me.DateEquip, Me.ProjectEquip, Me.idAux, Me.MaterialCode, Me.Amount, Me.Description, Me.ClassEquip, Me.STHrs, Me.clmJobNo})
         Me.tblEquipment.Dock = System.Windows.Forms.DockStyle.Fill
         Me.tblEquipment.Location = New System.Drawing.Point(0, 0)
-        Me.tblEquipment.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.tblEquipment.Margin = New System.Windows.Forms.Padding(4)
         Me.tblEquipment.Name = "tblEquipment"
         Me.tblEquipment.RowHeadersWidth = 51
         Me.tblEquipment.Size = New System.Drawing.Size(1059, 406)
@@ -265,7 +265,7 @@ Partial Class EquipmentValidation
         Me.Panel3.Controls.Add(Me.lblMessage)
         Me.Panel3.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel3.Location = New System.Drawing.Point(4, 516)
-        Me.Panel3.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.Panel3.Margin = New System.Windows.Forms.Padding(4)
         Me.Panel3.Name = "Panel3"
         Me.Panel3.Size = New System.Drawing.Size(1059, 34)
         Me.Panel3.TabIndex = 2
@@ -274,7 +274,7 @@ Partial Class EquipmentValidation
         '
         Me.pgbComplete.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.pgbComplete.Location = New System.Drawing.Point(784, 4)
-        Me.pgbComplete.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.pgbComplete.Margin = New System.Windows.Forms.Padding(4)
         Me.pgbComplete.Name = "pgbComplete"
         Me.pgbComplete.Size = New System.Drawing.Size(263, 28)
         Me.pgbComplete.TabIndex = 1
@@ -315,7 +315,6 @@ Partial Class EquipmentValidation
         Me.idAux.HeaderText = "idAux"
         Me.idAux.MinimumWidth = 6
         Me.idAux.Name = "idAux"
-        Me.idAux.Visible = False
         '
         'MaterialCode
         '
@@ -362,7 +361,7 @@ Partial Class EquipmentValidation
         Me.ClientSize = New System.Drawing.Size(1067, 554)
         Me.Controls.Add(Me.TableLayoutPanel1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
-        Me.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.Margin = New System.Windows.Forms.Padding(4)
         Me.Name = "EquipmentValidation"
         Me.Text = "EquipmentValidation"
         Me.TableLayoutPanel1.ResumeLayout(False)
