@@ -30,12 +30,7 @@ Partial Class WrongHours
         Me.Label7 = New System.Windows.Forms.Label()
         Me.TableLayoutPanel2 = New System.Windows.Forms.TableLayoutPanel()
         Me.Panel2 = New System.Windows.Forms.Panel()
-        Me.chbAllWO = New System.Windows.Forms.CheckBox()
         Me.Label9 = New System.Windows.Forms.Label()
-        Me.cmbWO = New System.Windows.Forms.ComboBox()
-        Me.chbAllPO = New System.Windows.Forms.CheckBox()
-        Me.PO = New System.Windows.Forms.Label()
-        Me.cmbPO = New System.Windows.Forms.ComboBox()
         Me.chbAllEmployees = New System.Windows.Forms.CheckBox()
         Me.Label6 = New System.Windows.Forms.Label()
         Me.cmbEmployees = New System.Windows.Forms.ComboBox()
@@ -61,6 +56,8 @@ Partial Class WrongHours
         Me.tblHours = New System.Windows.Forms.DataGridView()
         Me.tbpPerdiem = New System.Windows.Forms.TabPage()
         Me.tblPerdiem = New System.Windows.Forms.DataGridView()
+        Me.txtWO = New System.Windows.Forms.TextBox()
+        Me.chbAllWO = New System.Windows.Forms.CheckBox()
         Me.TableLayoutPanel1.SuspendLayout()
         Me.TitleBar.SuspendLayout()
         CType(Me.btnMinimize, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -176,11 +173,8 @@ Partial Class WrongHours
         'Panel2
         '
         Me.Panel2.Controls.Add(Me.chbAllWO)
+        Me.Panel2.Controls.Add(Me.txtWO)
         Me.Panel2.Controls.Add(Me.Label9)
-        Me.Panel2.Controls.Add(Me.cmbWO)
-        Me.Panel2.Controls.Add(Me.chbAllPO)
-        Me.Panel2.Controls.Add(Me.PO)
-        Me.Panel2.Controls.Add(Me.cmbPO)
         Me.Panel2.Controls.Add(Me.chbAllEmployees)
         Me.Panel2.Controls.Add(Me.Label6)
         Me.Panel2.Controls.Add(Me.cmbEmployees)
@@ -205,73 +199,17 @@ Partial Class WrongHours
         Me.Panel2.Size = New System.Drawing.Size(1127, 99)
         Me.Panel2.TabIndex = 2
         '
-        'chbAllWO
-        '
-        Me.chbAllWO.AutoSize = True
-        Me.chbAllWO.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!)
-        Me.chbAllWO.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.chbAllWO.Location = New System.Drawing.Point(860, 40)
-        Me.chbAllWO.Margin = New System.Windows.Forms.Padding(4)
-        Me.chbAllWO.Name = "chbAllWO"
-        Me.chbAllWO.Size = New System.Drawing.Size(76, 22)
-        Me.chbAllWO.TabIndex = 37
-        Me.chbAllWO.Text = "All WO"
-        Me.chbAllWO.UseVisualStyleBackColor = True
-        '
         'Label9
         '
         Me.Label9.AutoSize = True
         Me.Label9.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!)
         Me.Label9.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.Label9.Location = New System.Drawing.Point(627, 40)
+        Me.Label9.Location = New System.Drawing.Point(642, 11)
         Me.Label9.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label9.Name = "Label9"
         Me.Label9.Size = New System.Drawing.Size(35, 18)
         Me.Label9.TabIndex = 36
         Me.Label9.Text = "WO"
-        '
-        'cmbWO
-        '
-        Me.cmbWO.FormattingEnabled = True
-        Me.cmbWO.Location = New System.Drawing.Point(676, 39)
-        Me.cmbWO.Margin = New System.Windows.Forms.Padding(4)
-        Me.cmbWO.Name = "cmbWO"
-        Me.cmbWO.Size = New System.Drawing.Size(179, 24)
-        Me.cmbWO.TabIndex = 35
-        '
-        'chbAllPO
-        '
-        Me.chbAllPO.AutoSize = True
-        Me.chbAllPO.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!)
-        Me.chbAllPO.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.chbAllPO.Location = New System.Drawing.Point(860, 10)
-        Me.chbAllPO.Margin = New System.Windows.Forms.Padding(4)
-        Me.chbAllPO.Name = "chbAllPO"
-        Me.chbAllPO.Size = New System.Drawing.Size(71, 22)
-        Me.chbAllPO.TabIndex = 34
-        Me.chbAllPO.Text = "All PO"
-        Me.chbAllPO.UseVisualStyleBackColor = True
-        '
-        'PO
-        '
-        Me.PO.AutoSize = True
-        Me.PO.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!)
-        Me.PO.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.PO.Location = New System.Drawing.Point(627, 11)
-        Me.PO.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.PO.Name = "PO"
-        Me.PO.Size = New System.Drawing.Size(30, 18)
-        Me.PO.TabIndex = 33
-        Me.PO.Text = "PO"
-        '
-        'cmbPO
-        '
-        Me.cmbPO.FormattingEnabled = True
-        Me.cmbPO.Location = New System.Drawing.Point(676, 9)
-        Me.cmbPO.Margin = New System.Windows.Forms.Padding(4)
-        Me.cmbPO.Name = "cmbPO"
-        Me.cmbPO.Size = New System.Drawing.Size(179, 24)
-        Me.cmbPO.TabIndex = 32
         '
         'chbAllEmployees
         '
@@ -583,6 +521,26 @@ Partial Class WrongHours
         Me.tblPerdiem.Size = New System.Drawing.Size(1111, 286)
         Me.tblPerdiem.TabIndex = 2
         '
+        'txtWO
+        '
+        Me.txtWO.Location = New System.Drawing.Point(684, 11)
+        Me.txtWO.Name = "txtWO"
+        Me.txtWO.Size = New System.Drawing.Size(165, 22)
+        Me.txtWO.TabIndex = 37
+        '
+        'chbAllWO
+        '
+        Me.chbAllWO.AutoSize = True
+        Me.chbAllWO.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!)
+        Me.chbAllWO.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.chbAllWO.Location = New System.Drawing.Point(856, 11)
+        Me.chbAllWO.Margin = New System.Windows.Forms.Padding(4)
+        Me.chbAllWO.Name = "chbAllWO"
+        Me.chbAllWO.Size = New System.Drawing.Size(76, 22)
+        Me.chbAllWO.TabIndex = 38
+        Me.chbAllWO.Text = "All WO"
+        Me.chbAllWO.UseVisualStyleBackColor = True
+        '
         'WrongHours
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
@@ -646,10 +604,7 @@ Partial Class WrongHours
     Friend WithEvents cmbEmployees As ComboBox
     Friend WithEvents tblPerdiem As DataGridView
     Friend WithEvents btnSelectAll As Button
-    Friend WithEvents chbAllWO As CheckBox
     Friend WithEvents Label9 As Label
-    Friend WithEvents cmbWO As ComboBox
-    Friend WithEvents chbAllPO As CheckBox
-    Friend WithEvents PO As Label
-    Friend WithEvents cmbPO As ComboBox
+    Friend WithEvents txtWO As TextBox
+    Friend WithEvents chbAllWO As CheckBox
 End Class
