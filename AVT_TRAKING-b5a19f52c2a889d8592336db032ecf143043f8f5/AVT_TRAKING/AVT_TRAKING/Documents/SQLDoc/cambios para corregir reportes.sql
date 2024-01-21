@@ -2262,155 +2262,425 @@
 --ORDER BY pd.idProduct
 --end
 --go
-----| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-----| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-----V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V
+
 ----###############################################################################################
 ----########### CAMBIOS PARA CORREGIR EL SAP NUMBER DE LOS EMPLEADOS ##############################
 ----###############################################################################################
 
-alter table employees alter column SAPNumber varchar(13)
-go
+--alter table employees alter column SAPNumber varchar(13)
+--go
 
-ALTER proc [dbo].[sp_insert_Employee]
-	--general
-	@numberEmploye int, 
-	@firstName varchar(30),
-	@lastName varchar(25),
-	@middleName varchar(25),
-	@socialNumber varchar(14),
-	@SAPNumber varchar(13),
-	@photo image,
-	@estatus char(1),
-	--contact
-	@phoneNumber1 varchar(13),
-	@phoneNumber2 varchar(13),
-	@email varchar(50),
-	--address
-	@avenue varchar(80),
-	@number int,
-	@city varchar(20), 
-	@providence varchar(20),
-	@postalCode int,
-	--pay
-	@payRate1 float,
-	@payRate2 float, 
-	@payRate3 float,
-	--type 
-	@type varchar(20),
-	--perdiem
-	@perdiem bit
-as 
-declare @error int  -- declaro variables para los ID que son nuevos y una variable de error
-declare @idEmployee varchar(36) 
-declare @idContact varchar(36)
-declare @idHomeAdress varchar(36)
-declare @idPayRate varchar(36)
-begin
-	begin tran --inicio tran
-		begin try --inicio try
-			--if @phoneNumber1 <> '' or @email<> '' begin -- si existe un telefono o un correo entra 
-				set @idContact = NEWID() 
-				insert into contact values(@idContact,@phoneNumber1,@phoneNumber2,@email)
-				if @@ERROR <> 0 begin set @error = @@ERROR goto solveproblem end  -- si existe un error en al insertar solo vamos a solveproblem y nos evitamos lo demas
-			--end
-			--if @avenue <> '' begin -- solo se necesita saber si la calle tiene algo 
-				set @idHomeAdress = NEWID()
-				insert into HomeAddress values (@idHomeAdress , @avenue , @number , @city , @providence , @postalCode)
-				if @@ERROR <> 0 begin set @error = @@ERROR goto solveproblem end 
+--ALTER proc [dbo].[sp_insert_Employee]
+--	--general
+--	@numberEmploye int, 
+--	@firstName varchar(30),
+--	@lastName varchar(25),
+--	@middleName varchar(25),
+--	@socialNumber varchar(14),
+--	@SAPNumber varchar(13),
+--	@photo image,
+--	@estatus char(1),
+--	--contact
+--	@phoneNumber1 varchar(13),
+--	@phoneNumber2 varchar(13),
+--	@email varchar(50),
+--	--address
+--	@avenue varchar(80),
+--	@number int,
+--	@city varchar(20), 
+--	@providence varchar(20),
+--	@postalCode int,
+--	--pay
+--	@payRate1 float,
+--	@payRate2 float, 
+--	@payRate3 float,
+--	--type 
+--	@type varchar(20),
+--	--perdiem
+--	@perdiem bit
+--as 
+--declare @error int  -- declaro variables para los ID que son nuevos y una variable de error
+--declare @idEmployee varchar(36) 
+--declare @idContact varchar(36)
+--declare @idHomeAdress varchar(36)
+--declare @idPayRate varchar(36)
+--begin
+--	begin tran --inicio tran
+--		begin try --inicio try
+--			--if @phoneNumber1 <> '' or @email<> '' begin -- si existe un telefono o un correo entra 
+--				set @idContact = NEWID() 
+--				insert into contact values(@idContact,@phoneNumber1,@phoneNumber2,@email)
+--				if @@ERROR <> 0 begin set @error = @@ERROR goto solveproblem end  -- si existe un error en al insertar solo vamos a solveproblem y nos evitamos lo demas
+--			--end
+--			--if @avenue <> '' begin -- solo se necesita saber si la calle tiene algo 
+--				set @idHomeAdress = NEWID()
+--				insert into HomeAddress values (@idHomeAdress , @avenue , @number , @city , @providence , @postalCode)
+--				if @@ERROR <> 0 begin set @error = @@ERROR goto solveproblem end 
 				
-			--end
-			--if @firstName <> '' or @numberEmploye > 0 begin	
-				set @idEmployee = NEWID()
-				insert into employees values (@idEmployee , @numberEmploye , @firstName , @lastName , @middleName, @socialNumber , @SAPNumber, @photo , @idHomeAdress , @idContact ,@estatus,@type,@perdiem)
-				if @@ERROR <> 0 begin set @error = @@ERROR goto solveproblem end 
-			--end
-			--if @payRate1 <> '' begin
-				set @idPayRate = NEWID()
-				insert into payRate values (@idPayRate,@payRate1,@payRate2 ,@payRate3,@idEmployee,GETDATE())
-				if @@ERROR <> 0 begin set @error = @@ERROR goto solveproblem end 
-			--end
-		end try	
-		begin catch
-			goto solveproblem -- en caso de error capturado en el catch no vamos a solveproblem y evitamos en commit
-		end catch
-	commit tran 
-	solveproblem:
-	if @error <> 0
-	begin 
-		rollback tran -- el rollback es para deshacer todos lo cambios hechos anteriormente
-	end
-end
-go
+--			--end
+--			--if @firstName <> '' or @numberEmploye > 0 begin	
+--				set @idEmployee = NEWID()
+--				insert into employees values (@idEmployee , @numberEmploye , @firstName , @lastName , @middleName, @socialNumber , @SAPNumber, @photo , @idHomeAdress , @idContact ,@estatus,@type,@perdiem)
+--				if @@ERROR <> 0 begin set @error = @@ERROR goto solveproblem end 
+--			--end
+--			--if @payRate1 <> '' begin
+--				set @idPayRate = NEWID()
+--				insert into payRate values (@idPayRate,@payRate1,@payRate2 ,@payRate3,@idEmployee,GETDATE())
+--				if @@ERROR <> 0 begin set @error = @@ERROR goto solveproblem end 
+--			--end
+--		end try	
+--		begin catch
+--			goto solveproblem -- en caso de error capturado en el catch no vamos a solveproblem y evitamos en commit
+--		end catch
+--	commit tran 
+--	solveproblem:
+--	if @error <> 0
+--	begin 
+--		rollback tran -- el rollback es para deshacer todos lo cambios hechos anteriormente
+--	end
+--end
+--go
 
 
-ALTER proc [dbo].[sp_update_Employee]
-	@idEmployee varchar(36),
-	@idAddress varchar(36),
-	@idContact varchar(36),
-	--general
-	@numberEmploye int, 
-	@firstName varchar(30),
-	@lastName varchar(25),
-	@middleName varchar(25),
-	@socialNumber varchar(14),
-	@SAPNumber varchar(13),
-	@photo image,
-	@estatus char(1),
-	--contact
-	@phoneNumber1 varchar(13),
-	@phoneNumber2 varchar(13),
-	@email varchar(50),
-	--address
-	@avenue varchar(80),
-	@number int,
-	@city varchar(20), 
-	@providence varchar(20),
-	@postalCode int,
-	----pay
-	--@payRate1 float,
-	--@payRate2 float, 
-	--@payRate3 float,
-	--type 
-	@type varchar(20),
-	@perdiem bit,
-	@msg varchar(50) output
-as 
-declare @error int  -- declaro variables para los ID que son nuevos y una variable de error
-begin
-	begin tran --inicio tran
-		begin try --inicio try
-			--if @avenue <> '' begin -- solo se necesita saber si la calle tiene algo 
-				set @msg = 'Error at moment to save Address data'
-				update HomeAddress set avenue = @avenue ,number =@number ,city =@city ,providence =@providence ,postalcode = @postalCode where idHomeAdress = @idAddress
-				if @@ERROR <> 0 begin set @error = @@ERROR goto solveproblem end 
+--ALTER proc [dbo].[sp_update_Employee]
+--	@idEmployee varchar(36),
+--	@idAddress varchar(36),
+--	@idContact varchar(36),
+--	--general
+--	@numberEmploye int, 
+--	@firstName varchar(30),
+--	@lastName varchar(25),
+--	@middleName varchar(25),
+--	@socialNumber varchar(14),
+--	@SAPNumber varchar(13),
+--	@photo image,
+--	@estatus char(1),
+--	--contact
+--	@phoneNumber1 varchar(13),
+--	@phoneNumber2 varchar(13),
+--	@email varchar(50),
+--	--address
+--	@avenue varchar(80),
+--	@number int,
+--	@city varchar(20), 
+--	@providence varchar(20),
+--	@postalCode int,
+--	----pay
+--	--@payRate1 float,
+--	--@payRate2 float, 
+--	--@payRate3 float,
+--	--type 
+--	@type varchar(20),
+--	@perdiem bit,
+--	@msg varchar(50) output
+--as 
+--declare @error int  -- declaro variables para los ID que son nuevos y una variable de error
+--begin
+--	begin tran --inicio tran
+--		begin try --inicio try
+--			--if @avenue <> '' begin -- solo se necesita saber si la calle tiene algo 
+--				set @msg = 'Error at moment to save Address data'
+--				update HomeAddress set avenue = @avenue ,number =@number ,city =@city ,providence =@providence ,postalcode = @postalCode where idHomeAdress = @idAddress
+--				if @@ERROR <> 0 begin set @error = @@ERROR goto solveproblem end 
 				
-				set @msg = 'Error at moment to save Contact data'
-				update contact set phoneNumber1 =@phoneNumber1 , phoneNumber2 =@phoneNumber2 , email = @email where idContact = @idContact
-				if @@ERROR <> 0 begin set @error = @@ERROR goto solveproblem end 
-			--end
-			----if @payRate1 <> '' begin
-			--	set @msg = 'Error at moment to save Pay Rate data'
-			--	update payRate set payRate1 = @payRate1,payRate2= @payRate2 , payRate3 = @payRate3 where idPayRate = @idPay and idEmployee = @idEmployee
-			--	if @@ERROR <> 0 begin set @error = @@ERROR goto solveproblem end 
-			----end
-			--if @firstName <> '' or @numberEmploye > 0 begin
-				set @msg = 'Error at moment to save Employee data'	
-				update employees set  numberEmploye = @numberEmploye ,firstName = @firstName , lastName = @lastName ,middleName = @middleName,socialNumber = @socialNumber ,SAPNumber = @SAPNumber,photo = @photo , estatus = @estatus,typeEmployee = @type, perdiem = @perdiem where idEmployee = @idEmployee
-				if @@ERROR <> 0 begin set @error = @@ERROR goto solveproblem end 
-			--end
-			set @msg = 'Succesfull'
-		end try	
-		begin catch
-			goto solveproblem -- en caso de error capturado en el catch no vamos a solveproblem y evitamos en commit
-		end catch
-	commit tran 
-	solveproblem:
-	if @error <> 0
-	begin 
-		rollback tran -- el rollback es para deshacer todos lo cambios hechos anteriormente
-		return @msg
-	end
-end
+--				set @msg = 'Error at moment to save Contact data'
+--				update contact set phoneNumber1 =@phoneNumber1 , phoneNumber2 =@phoneNumber2 , email = @email where idContact = @idContact
+--				if @@ERROR <> 0 begin set @error = @@ERROR goto solveproblem end 
+--			--end
+--			----if @payRate1 <> '' begin
+--			--	set @msg = 'Error at moment to save Pay Rate data'
+--			--	update payRate set payRate1 = @payRate1,payRate2= @payRate2 , payRate3 = @payRate3 where idPayRate = @idPay and idEmployee = @idEmployee
+--			--	if @@ERROR <> 0 begin set @error = @@ERROR goto solveproblem end 
+--			----end
+--			--if @firstName <> '' or @numberEmploye > 0 begin
+--				set @msg = 'Error at moment to save Employee data'	
+--				update employees set  numberEmploye = @numberEmploye ,firstName = @firstName , lastName = @lastName ,middleName = @middleName,socialNumber = @socialNumber ,SAPNumber = @SAPNumber,photo = @photo , estatus = @estatus,typeEmployee = @type, perdiem = @perdiem where idEmployee = @idEmployee
+--				if @@ERROR <> 0 begin set @error = @@ERROR goto solveproblem end 
+--			--end
+--			set @msg = 'Succesfull'
+--		end try	
+--		begin catch
+--			goto solveproblem -- en caso de error capturado en el catch no vamos a solveproblem y evitamos en commit
+--		end catch
+--	commit tran 
+--	solveproblem:
+--	if @error <> 0
+--	begin 
+--		rollback tran -- el rollback es para deshacer todos lo cambios hechos anteriormente
+--		return @msg
+--	end
+--end
+--go
+----| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
+----| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
+----V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V
+----###############################################################################################
+----########### CAMBIOS PARA REPORTES CON REOCRODS EN CEROS #######################################
+----###############################################################################################
 
-go
+ALTER proc [dbo].[Sp_All_Jobs]
+@startdate as date, 
+@finaldate as date,
+@clientnum as int
+as
+begin
+select distinct
+T1.[jobNo],
+T1.[idPO],
+T1.[idWO],
+T1.[task],
+T1.[SAPNumber],
+T1.[numberEmploye],
+T1.[DAY],
+T1.[Employee Name],
+T1.[dateWorked],
+T1.[Code],
+SUM(T1.[Hours ST])OVER (PARTITION BY T1.[jobNo],T1.[idPO],T1.[idWO],T1.[task],T1.[numberEmploye],T1.[DAY],T1.[Code],T1.[dateWorked]) as 'Hours ST',
+T1.[billingRate1],
+SUM(T1.[Hours OT])OVER (PARTITION BY T1.[jobNo],T1.[idPO],T1.[idWO],T1.[task],T1.[numberEmploye],T1.[DAY],T1.[Code],T1.[dateWorked]) as 'Hours OT',
+T1.[billingRateOT],
+SUM(T1.[PerDiem])OVER (PARTITION BY T1.[jobNo],T1.[idPO],T1.[idWO],T1.[task],T1.[numberEmploye],T1.[DAY],T1.[Code],T1.[dateWorked]) as 'PerDiem',
+SUM(T1.[Travel])OVER (PARTITION BY T1.[jobNo],T1.[idPO],T1.[idWO],T1.[task],T1.[numberEmploye],T1.[DAY],T1.[Code],T1.[dateWorked]) as 'Travel'
+from(
+select
+	jb.jobNo,
+	po.idPO,
+	wo.idWO,
+	tk.task,
+	em.SAPNumber,
+	em.numberEmploye, 
+	datename(dw,hw.dateWorked) as 'DAY',
+	concat(em.lastName,', ', em.firstName,' ' ,em.middleName) as 'Employee Name',
+	hw.dateWorked,
+	ISNULL(SUBSTRING( wc.name,1,iif(CHARINDEX('-',wc.name)=0, len(wc.name) ,(CHARINDEX('-',wc.name)-1))),'') as 'Code',
+
+	hw.hoursST as 'Hours ST',
+	
+	ISNULL(wc.billingRate1,0)AS 'billingRate1',
+
+	hw.hoursOT as 'Hours OT',
+	
+	ISNULL(wc.billingRateOT,0)as 'billingRateOT',
+
+
+	isnull((select sum(amount) from expensesUsed as exu1 
+		inner join employees as em1 on em1.idEmployee = exu1.idEmployee
+		inner join expenses as ex1 on ex1.idExpenses= exu1.idExpense 
+		inner join hoursWorked as hw1 on hw1.idHorsWorked  = exu1.idHorsWorked and hw1.idAux = exu1.idAux
+		inner join task as tk1 on tk1.idAux = exu1.idAux and tk1.idAux = hw1.idAux
+		inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO
+		inner join projectOrder as po1 on po1.idPO = wo1.idPO and wo1.jobNo = po1.jobNo 
+		inner join job as jb1 on jb1.jobNo = po1.jobNo 
+		inner join clients as cl1 on cl1.idClient = jb1.idClient
+		where hw1.dateWorked between @startdate and @finaldate and hw1.idHorsWorked = hw.idHorsWorked and tk1.idAux = tk.idAux and wo.idAuxWO = wo.idAuxWO and po1.idPO = po.idPO and jb1.jobNo = jb.jobNo and (ex1.expenseCode like '%per-diem%' or ex1.expenseCode like '%per diem%')),0) as 'PerDiem' ,
+	isnull((select sum(amount) from expensesUsed as exu1 
+		inner join employees as em1 on em1.idEmployee = exu1.idEmployee
+		inner join expenses as ex1 on ex1.idExpenses= exu1.idExpense 
+		inner join hoursWorked as hw1 on hw1.idHorsWorked  = exu1.idHorsWorked and hw1.idAux = exu1.idAux
+		inner join task as tk1 on tk1.idAux = exu1.idAux and tk1.idAux = hw1.idAux
+		inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO
+		inner join projectOrder as po1 on po1.idPO = wo1.idPO and wo1.jobNo = po1.jobNo 
+		inner join job as jb1 on jb1.jobNo = po1.jobNo 
+		inner join clients as cl1 on cl1.idClient = jb1.idClient
+		where hw1.dateWorked between @startdate and @finaldate and hw1.idHorsWorked = hw.idHorsWorked and tk1.idAux = tk.idAux and wo.idAuxWO = wo.idAuxWO and po1.idPO = po.idPO and jb1.jobNo = jb.jobNo and (ex1.expenseCode like '%Travel%')),0) as 'Travel'
+	
+	from hoursWorked as hw 
+		left join workCode as wc on wc.idWorkCode = hw.idWorkCode and wc.jobNo = hw.jobNo
+		inner join employees as em on em.idEmployee = hw.idEmployee
+		inner join task as tk on tk.idAux = hw.idAux 
+		inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO
+		inner join projectOrder as po on po.idPO = wo.idPO and wo.jobNo = po.jobNo 
+		inner join job as jb on jb.jobNo = po.jobNo 
+		inner join clients as cl on cl.idClient = jb.idClient
+		where hw.dateWorked between @startdate and @finaldate and cl.numberClient = @clientnum and not wc.name like '%6.4%' 
+
+		UNION ALL
+
+	select
+	jb.jobNo,
+	po.idPO,
+	wo.idWO,
+	tk.task,
+	em.SAPNumber,
+	em.numberEmploye, 
+	datename(dw,hw.dateWorked) as 'DAY',
+	concat(em.lastName,', ', em.firstName,' ' ,em.middleName) as 'Employee Name',
+	hw.dateWorked,
+	'' as 'Code',
+	hw.hoursST as 'Hours ST',
+	
+	ISNULL(wc.billingRate1,0)AS 'billingRate1',
+
+	hw.hoursOT as 'Hours OT',
+	
+	ISNULL(wc.billingRateOT,0)as 'billingRateOT',
+
+
+	isnull((select sum(amount) from expensesUsed as exu1 
+		inner join employees as em1 on em1.idEmployee = exu1.idEmployee
+		inner join expenses as ex1 on ex1.idExpenses= exu1.idExpense 
+		inner join hoursWorked as hw1 on hw1.idHorsWorked  = exu1.idHorsWorked and hw1.idAux = exu1.idAux
+		inner join task as tk1 on tk1.idAux = exu1.idAux and tk1.idAux = hw1.idAux
+		inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO
+		inner join projectOrder as po1 on po1.idPO = wo1.idPO and wo1.jobNo = po1.jobNo 
+		inner join job as jb1 on jb1.jobNo = po1.jobNo 
+		inner join clients as cl1 on cl1.idClient = jb1.idClient
+		where hw1.dateWorked between @startdate and @finaldate and hw1.idHorsWorked = hw.idHorsWorked and tk1.idAux = tk.idAux and wo.idAuxWO = wo.idAuxWO and po1.idPO = po.idPO and jb1.jobNo = jb.jobNo and (ex1.expenseCode like '%per-diem%' or ex1.expenseCode like '%per diem%')),0) as 'PerDiem' ,
+	isnull((select sum(amount) from expensesUsed as exu1 
+		inner join employees as em1 on em1.idEmployee = exu1.idEmployee
+		inner join expenses as ex1 on ex1.idExpenses= exu1.idExpense 
+		inner join hoursWorked as hw1 on hw1.idHorsWorked  = exu1.idHorsWorked and hw1.idAux = exu1.idAux
+		inner join task as tk1 on tk1.idAux = exu1.idAux and tk1.idAux = hw1.idAux
+		inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO
+		inner join projectOrder as po1 on po1.idPO = wo1.idPO and wo1.jobNo = po1.jobNo 
+		inner join job as jb1 on jb1.jobNo = po1.jobNo 
+		inner join clients as cl1 on cl1.idClient = jb1.idClient
+		where hw1.dateWorked between @startdate and @finaldate and hw1.idHorsWorked = hw.idHorsWorked and tk1.idAux = tk.idAux and wo.idAuxWO = wo.idAuxWO and po1.idPO = po.idPO and jb1.jobNo = jb.jobNo and (ex1.expenseCode like '%Travel%')),0) as 'Travel'
+	from hoursWorked as hw 
+	left join workCode as wc on wc.idWorkCode = hw.idWorkCode and wc.jobNo = hw.jobNo
+	inner join employees as em on em.idEmployee = hw.idEmployee
+	inner join task as tk on tk.idAux = hw.idAux 
+	inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO
+	inner join projectOrder as po on po.idPO = wo.idPO and wo.jobNo = po.jobNo 
+	inner join job as jb on jb.jobNo = po.jobNo 
+	inner join clients as cl on cl.idClient = jb.idClient
+	where hw.dateWorked between @startdate and @finaldate and cl.numberClient = @clientnum and (hw.hoursST + hw.hoursOT + hw.hours3) = 0 
+
+)as T1 where (T1.billingRate1 + T1.billingRateOT + T1.PerDiem + T1.Travel) > 0 
+end
+GO
+
+ALTER proc [dbo].[Sp_By_JobNumber]
+@startdate as date, 
+@finaldate as date,
+@clientnum as int,
+@job as bigint,
+@all as bit
+as
+begin
+select distinct
+T1.[jobNo],
+T1.[idPO],
+T1.[idWO],
+T1.[task],
+T1.[SAPNumber],
+T1.[numberEmploye],
+T1.[DAY],
+T1.[Employee Name],
+T1.[dateWorked],
+T1.[Code],
+SUM(T1.[Hours ST])     OVER (PARTITION BY T1.[jobNo],T1.[idPO],T1.[idWO],T1.[task],T1.[dateWorked],T1.[numberEmploye],T1.[DAY],T1.[Code]) AS 'Hours ST',
+T1.[billingRate1],
+SUM(T1.[Hours OT])     OVER (PARTITION BY T1.[jobNo],T1.[idPO],T1.[idWO],T1.[task],T1.[dateWorked],T1.[numberEmploye],T1.[DAY],T1.[Code]) AS 'Hours OT',
+T1.[billingRateOT],
+SUM(T1.[PerDiem])      OVER (PARTITION BY T1.[jobNo],T1.[idPO],T1.[idWO],T1.[task],T1.[dateWorked],T1.[numberEmploye],T1.[DAY],T1.[Code]) AS 'PerDiem',
+SUM(T1.[Travel])       OVER (PARTITION BY T1.[jobNo],T1.[idPO],T1.[idWO],T1.[task],T1.[dateWorked],T1.[numberEmploye],T1.[DAY],T1.[Code]) AS 'Travel'
+from(
+select jb.jobNo,
+	po.idPO,
+	wo.idWO,
+	tk.task,
+	em.SAPNumber,
+	em.numberEmploye, 
+	datename(dw,hw.dateWorked) as 'DAY',
+	concat(em.lastName,', ', em.firstName,' ' ,em.middleName) as 'Employee Name',
+	hw.dateWorked,
+	ISNULL(SUBSTRING( wc.name,1,iif(CHARINDEX('-',wc.name)=0, len(wc.name) ,(CHARINDEX('-',wc.name)-1))),'') as 'Code',
+	
+	hw.hoursST
+	as 'Hours ST',
+		
+	ISNULL(wc.billingRate1,0)as 'billingRate1',
+
+	hw.hoursOT
+	as 'Hours OT',
+
+	ISNULL(wc.billingRateOT,0) as 'billingRateOT',
+	isnull((select sum(amount) from expensesUsed as exu1 
+		inner join employees as em1 on em1.idEmployee = exu1.idEmployee
+		inner join expenses as ex1 on ex1.idExpenses= exu1.idExpense 
+		inner join hoursWorked as hw1 on hw1.idHorsWorked  = exu1.idHorsWorked 
+		inner join task as tk1 on tk1.idAux = exu1.idAux and tk1.idAux = hw1.idAux
+		inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO
+		inner join projectOrder as po1 on po1.idPO = wo1.idPO and wo1.jobNo = po1.jobNo and hw1.jobNo = po1.jobNo 
+		inner join job as jb1 on jb1.jobNo = po1.jobNo 
+		inner join clients as cl1 on cl1.idClient = jb1.idClient
+		where hw1.dateWorked between @startdate and @finaldate and hw1.idHorsWorked = hw.idHorsWorked and tk1.idAux = tk.idAux and wo.idAuxWO = wo.idAuxWO and po1.idPO = po.idPO and jb1.jobNo = jb.jobNo and (ex1.expenseCode like '%per-diem%' or ex1.expenseCode like '%per diem%')),0) as 'PerDiem',
+	isnull((select sum(amount) from expensesUsed as exu1 
+		inner join employees as em1 on em1.idEmployee = exu1.idEmployee
+		inner join expenses as ex1 on ex1.idExpenses= exu1.idExpense 
+		inner join hoursWorked as hw1 on hw1.idHorsWorked  = exu1.idHorsWorked 
+		inner join task as tk1 on tk1.idAux = exu1.idAux and tk1.idAux = hw1.idAux
+		inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO
+		inner join projectOrder as po1 on po1.idPO = wo1.idPO and wo1.jobNo = po1.jobNo 
+		inner join job as jb1 on jb1.jobNo = po1.jobNo 
+		inner join clients as cl1 on cl1.idClient = jb1.idClient
+		where hw1.dateWorked between @startdate and @finaldate 
+			and hw1.idHorsWorked = hw.idHorsWorked and tk1.idAux = tk.idAux	and wo.idAuxWO = wo.idAuxWO and po1.idPO = po.idPO and jb1.jobNo = jb.jobNo and (ex1.expenseCode like '%Travel%')),0) as 'Travel'
+from hoursWorked as hw 
+left join workCode as wc on wc.idWorkCode = hw.idWorkCode and wc.jobNo = hw.jobNo
+inner join employees as em on em.idEmployee = hw.idEmployee
+inner join task as tk on tk.idAux = hw.idAux 
+inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO
+inner join projectOrder as po on po.idPO = wo.idPO and wo.jobNo = po.jobNo and hw.jobNo = po.jobNo
+inner join job as jb on jb.jobNo = po.jobNo 
+inner join clients as cl on cl.idClient = jb.idClient
+where hw.dateWorked between @startdate and @finaldate and cl.numberClient = @clientnum and jb.jobNo like iif(@all=1,'%%',CONCAT('',@job,'')) and not wc.name like '%6.4%' 
+
+UNION ALL
+
+select jb.jobNo,
+	po.idPO,
+	wo.idWO,
+	tk.task,
+	em.SAPNumber,
+	em.numberEmploye, 
+	datename(dw,hw.dateWorked) as 'DAY',
+	concat(em.lastName,', ', em.firstName,' ' ,em.middleName) as 'Employee Name',
+	hw.dateWorked,
+	ISNULL(SUBSTRING( wc.name,1,iif(CHARINDEX('-',wc.name)=0, len(wc.name) ,(CHARINDEX('-',wc.name)-1))),'') as 'Code',
+	
+	hw.hoursST
+	as 'Hours ST',
+		
+	ISNULL(wc.billingRate1,0)as 'billingRate1',
+
+	hw.hoursOT
+	as 'Hours OT',
+
+	ISNULL(wc.billingRateOT,0) as 'billingRateOT',
+	isnull((select sum(amount) from expensesUsed as exu1 
+		inner join employees as em1 on em1.idEmployee = exu1.idEmployee
+		inner join expenses as ex1 on ex1.idExpenses= exu1.idExpense 
+		inner join hoursWorked as hw1 on hw1.idHorsWorked  = exu1.idHorsWorked 
+		inner join task as tk1 on tk1.idAux = exu1.idAux and tk1.idAux = hw1.idAux
+		inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO
+		inner join projectOrder as po1 on po1.idPO = wo1.idPO and wo1.jobNo = po1.jobNo and hw1.jobNo = po1.jobNo 
+		inner join job as jb1 on jb1.jobNo = po1.jobNo 
+		inner join clients as cl1 on cl1.idClient = jb1.idClient
+		where hw1.dateWorked between @startdate and @finaldate and hw1.idHorsWorked = hw.idHorsWorked and tk1.idAux = tk.idAux and wo.idAuxWO = wo.idAuxWO and po1.idPO = po.idPO and jb1.jobNo = jb.jobNo and (ex1.expenseCode like '%per-diem%' or ex1.expenseCode like '%per diem%')),0) as 'PerDiem',
+	isnull((select sum(amount) from expensesUsed as exu1 
+		inner join employees as em1 on em1.idEmployee = exu1.idEmployee
+		inner join expenses as ex1 on ex1.idExpenses= exu1.idExpense 
+		inner join hoursWorked as hw1 on hw1.idHorsWorked  = exu1.idHorsWorked 
+		inner join task as tk1 on tk1.idAux = exu1.idAux and tk1.idAux = hw1.idAux
+		inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO
+		inner join projectOrder as po1 on po1.idPO = wo1.idPO and wo1.jobNo = po1.jobNo 
+		inner join job as jb1 on jb1.jobNo = po1.jobNo 
+		inner join clients as cl1 on cl1.idClient = jb1.idClient
+		where hw1.dateWorked between @startdate and @finaldate 
+			and hw1.idHorsWorked = hw.idHorsWorked and tk1.idAux = tk.idAux	and wo.idAuxWO = wo.idAuxWO and po1.idPO = po.idPO and jb1.jobNo = jb.jobNo and (ex1.expenseCode like '%Travel%')),0) as 'Travel'
+from hoursWorked as hw 
+left join workCode as wc on wc.idWorkCode = hw.idWorkCode and wc.jobNo = hw.jobNo
+inner join employees as em on em.idEmployee = hw.idEmployee
+inner join task as tk on tk.idAux = hw.idAux 
+inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO
+inner join projectOrder as po on po.idPO = wo.idPO and wo.jobNo = po.jobNo and hw.jobNo = po.jobNo
+inner join job as jb on jb.jobNo = po.jobNo 
+inner join clients as cl on cl.idClient = jb.idClient
+where hw.dateWorked between @startdate and @finaldate and cl.numberClient = @clientnum and jb.jobNo like iif(@all=1,'%%',CONCAT('',@job,'')) and (hw.hoursST + hw.hoursOT + hw.hours3)= 0 
+
+)as T1 where (T1.[Hours OT] + T1.[billingRate1] + T1.[PerDiem] + T1.[Travel]) >0 
+ order by T1.dateWorked asc
+end
+GO

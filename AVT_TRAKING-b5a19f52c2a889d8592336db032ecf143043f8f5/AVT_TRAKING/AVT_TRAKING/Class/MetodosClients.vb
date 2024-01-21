@@ -211,11 +211,18 @@ ha.idHomeAdress, ha.avenue ,ha.number, ha.city ,ha.providence,ha.postalCode,phot
         Try
             conectar()
             Dim cmd As New SqlCommand(consultaProyetosClientes + " cln.idClient = '" + idCliente + "' ) as T1", conn)
-            cmd.CommandTimeout = 120
+            cmd.CommandTimeout = 150
+            'If cmd.ExecuteNonQuery Then
+            '    Dim dt As New DataTable
+            '    Dim da As New SqlDataAdapter(cmd)
+            '    tabla.DataSource = dt
+            'Else
+            '    MsgBox("Error")
+            'End If
             Dim dr As SqlDataReader = cmd.ExecuteReader()
             tabla.Rows.Clear()
             While dr.Read()
-                tabla.Rows.Add(dr("Work Order"), dr("Project Description"), If(dr("Cmp") = "0", False, True), dr("Total Spend"), dr("Total Hours ST"), dr("Total Amount ST"), dr("Total Hours OT"), dr("Total Amount OT"), dr("Total Hours 3"), dr("Total Amount 3"), dr("Total Expenses Spend"), dr("Total Material Spend"), dr("jobNo"), dr("workTMLumpSum"), dr("costDistribution"), dr("custumerNo"), dr("contractNo"), dr("costCode"), dr("idClient"), dr("idPO"), dr("idTask"), dr("idAuxWO"), dr("idAux"), dr("photo"), dr("postingProject"))
+                tabla.Rows.Add(dr("Work Order"), dr("Project Description"), dr("Cmp"), dr("Total Spend"), dr("Total Hours ST"), dr("Total Amount ST"), dr("Total Hours OT"), dr("Total Amount OT"), dr("Total Hours 3"), dr("Total Amount 3"), dr("Total Expenses Spend"), dr("Total Material Spend"), dr("jobNo"), dr("workTMLumpSum"), dr("costDistribution"), dr("custumerNo"), dr("contractNo"), dr("costCode"), dr("idClient"), dr("idPO"), dr("idTask"), dr("idAuxWO"), dr("idAux"), dr("photo"), dr("postingProject"))
             End While
             dr.Close()
         Catch ex As Exception
@@ -232,6 +239,7 @@ ha.idHomeAdress, ha.avenue ,ha.number, ha.city ,ha.providence,ha.postalCode,phot
 T1.[jobNo], T1.[workTMLumpSum], T1.[costDistribution], T1.[custumerNo] , T1.[contractNo], T1.[costCode] , T1.[idClient], T1.[idPO], T1.[idTask] , T1.[idAuxWO], T1.[idAux], T1.[photo], T1.[postingProject]
 from(
 select 
+    top 50
 	(select CONCAT(wo.idWO,' ',tk.task)) as 'Work Order' , 
 	
 	ISNULL( tk.description ,'') as 'Project Description', 

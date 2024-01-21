@@ -426,9 +426,8 @@ select
 	inner join clients as cl on cl.idClient = jb.idClient
 	where hw.dateWorked between @startdate and @finaldate and cl.numberClient = @clientnum and (hw.hoursST + hw.hoursOT + hw.hours3) = 0 
 
-)as T1
+)as T1 where (T1.billingRate1 + T1.billingRateOT + T1.PerDiem + T1.Travel) > 0 
 end
-GO
 GO
 
 --##############################################################################################
@@ -563,9 +562,10 @@ inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO
 inner join projectOrder as po on po.idPO = wo.idPO and wo.jobNo = po.jobNo and hw.jobNo = po.jobNo
 inner join job as jb on jb.jobNo = po.jobNo 
 inner join clients as cl on cl.idClient = jb.idClient
-where hw.dateWorked between @startdate and @finaldate and cl.numberClient = @clientnum and jb.jobNo like iif(@all=1,'%%',CONCAT('',@job,'')) and (hw.hoursST + hw.hoursOT + hw.hours3 )= 0 
+where hw.dateWorked between @startdate and @finaldate and cl.numberClient = @clientnum and jb.jobNo like iif(@all=1,'%%',CONCAT('',@job,'')) and (hw.hoursST + hw.hoursOT + hw.hours3)= 0 
 
-)as T1 order by T1.dateWorked asc
+)as T1 where (T1.[Hours OT] + T1.[billingRate1] + T1.[PerDiem] + T1.[Travel]) >0 
+ order by T1.dateWorked asc
 end
 GO
 

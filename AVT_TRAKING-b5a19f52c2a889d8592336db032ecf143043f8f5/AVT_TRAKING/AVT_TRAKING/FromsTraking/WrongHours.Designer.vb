@@ -30,6 +30,8 @@ Partial Class WrongHours
         Me.Label7 = New System.Windows.Forms.Label()
         Me.TableLayoutPanel2 = New System.Windows.Forms.TableLayoutPanel()
         Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.chbAllWO = New System.Windows.Forms.CheckBox()
+        Me.txtWO = New System.Windows.Forms.TextBox()
         Me.Label9 = New System.Windows.Forms.Label()
         Me.chbAllEmployees = New System.Windows.Forms.CheckBox()
         Me.Label6 = New System.Windows.Forms.Label()
@@ -56,8 +58,8 @@ Partial Class WrongHours
         Me.tblHours = New System.Windows.Forms.DataGridView()
         Me.tbpPerdiem = New System.Windows.Forms.TabPage()
         Me.tblPerdiem = New System.Windows.Forms.DataGridView()
-        Me.txtWO = New System.Windows.Forms.TextBox()
-        Me.chbAllWO = New System.Windows.Forms.CheckBox()
+        Me.TabPage1 = New System.Windows.Forms.TabPage()
+        Me.tblFakeHours = New System.Windows.Forms.DataGridView()
         Me.TableLayoutPanel1.SuspendLayout()
         Me.TitleBar.SuspendLayout()
         CType(Me.btnMinimize, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -72,6 +74,8 @@ Partial Class WrongHours
         CType(Me.tblHours, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.tbpPerdiem.SuspendLayout()
         CType(Me.tblPerdiem, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.TabPage1.SuspendLayout()
+        CType(Me.tblFakeHours, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'TableLayoutPanel1
@@ -198,6 +202,26 @@ Partial Class WrongHours
         Me.Panel2.Name = "Panel2"
         Me.Panel2.Size = New System.Drawing.Size(1127, 99)
         Me.Panel2.TabIndex = 2
+        '
+        'chbAllWO
+        '
+        Me.chbAllWO.AutoSize = True
+        Me.chbAllWO.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!)
+        Me.chbAllWO.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.chbAllWO.Location = New System.Drawing.Point(856, 11)
+        Me.chbAllWO.Margin = New System.Windows.Forms.Padding(4)
+        Me.chbAllWO.Name = "chbAllWO"
+        Me.chbAllWO.Size = New System.Drawing.Size(76, 22)
+        Me.chbAllWO.TabIndex = 38
+        Me.chbAllWO.Text = "All WO"
+        Me.chbAllWO.UseVisualStyleBackColor = True
+        '
+        'txtWO
+        '
+        Me.txtWO.Location = New System.Drawing.Point(684, 11)
+        Me.txtWO.Name = "txtWO"
+        Me.txtWO.Size = New System.Drawing.Size(165, 22)
+        Me.txtWO.TabIndex = 37
         '
         'Label9
         '
@@ -455,6 +479,7 @@ Partial Class WrongHours
         '
         Me.tbcControl.Controls.Add(Me.tbpHours)
         Me.tbcControl.Controls.Add(Me.tbpPerdiem)
+        Me.tbcControl.Controls.Add(Me.TabPage1)
         Me.tbcControl.Dock = System.Windows.Forms.DockStyle.Fill
         Me.tbcControl.Location = New System.Drawing.Point(4, 111)
         Me.tbcControl.Margin = New System.Windows.Forms.Padding(4)
@@ -521,25 +546,32 @@ Partial Class WrongHours
         Me.tblPerdiem.Size = New System.Drawing.Size(1111, 286)
         Me.tblPerdiem.TabIndex = 2
         '
-        'txtWO
+        'TabPage1
         '
-        Me.txtWO.Location = New System.Drawing.Point(684, 11)
-        Me.txtWO.Name = "txtWO"
-        Me.txtWO.Size = New System.Drawing.Size(165, 22)
-        Me.txtWO.TabIndex = 37
+        Me.TabPage1.BackColor = System.Drawing.Color.FromArgb(CType(CType(83, Byte), Integer), CType(CType(93, Byte), Integer), CType(CType(102, Byte), Integer))
+        Me.TabPage1.Controls.Add(Me.tblFakeHours)
+        Me.TabPage1.Location = New System.Drawing.Point(4, 25)
+        Me.TabPage1.Name = "TabPage1"
+        Me.TabPage1.Size = New System.Drawing.Size(1119, 294)
+        Me.TabPage1.TabIndex = 2
+        Me.TabPage1.Text = "Fake Hours"
         '
-        'chbAllWO
+        'tblFakeHours
         '
-        Me.chbAllWO.AutoSize = True
-        Me.chbAllWO.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!)
-        Me.chbAllWO.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.chbAllWO.Location = New System.Drawing.Point(856, 11)
-        Me.chbAllWO.Margin = New System.Windows.Forms.Padding(4)
-        Me.chbAllWO.Name = "chbAllWO"
-        Me.chbAllWO.Size = New System.Drawing.Size(76, 22)
-        Me.chbAllWO.TabIndex = 38
-        Me.chbAllWO.Text = "All WO"
-        Me.chbAllWO.UseVisualStyleBackColor = True
+        Me.tblFakeHours.AllowUserToAddRows = False
+        Me.tblFakeHours.AllowUserToDeleteRows = False
+        Me.tblFakeHours.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
+        Me.tblFakeHours.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.tblFakeHours.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.tblFakeHours.Location = New System.Drawing.Point(0, 0)
+        Me.tblFakeHours.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.tblFakeHours.Name = "tblFakeHours"
+        Me.tblFakeHours.ReadOnly = True
+        Me.tblFakeHours.RowHeadersWidth = 62
+        Me.tblFakeHours.RowTemplate.Height = 28
+        Me.tblFakeHours.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
+        Me.tblFakeHours.Size = New System.Drawing.Size(1119, 294)
+        Me.tblFakeHours.TabIndex = 3
         '
         'WrongHours
         '
@@ -567,6 +599,8 @@ Partial Class WrongHours
         CType(Me.tblHours, System.ComponentModel.ISupportInitialize).EndInit()
         Me.tbpPerdiem.ResumeLayout(False)
         CType(Me.tblPerdiem, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.TabPage1.ResumeLayout(False)
+        CType(Me.tblFakeHours, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -607,4 +641,6 @@ Partial Class WrongHours
     Friend WithEvents Label9 As Label
     Friend WithEvents txtWO As TextBox
     Friend WithEvents chbAllWO As CheckBox
+    Friend WithEvents TabPage1 As TabPage
+    Friend WithEvents tblFakeHours As DataGridView
 End Class

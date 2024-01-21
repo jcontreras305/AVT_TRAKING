@@ -479,6 +479,10 @@ Public Class ProjectsClients
         End Try
     End Sub
 
+    Private Sub tblProjectClientsAll_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles tblProjectClientsAll.CellContentClick
+
+    End Sub
+
     Private Sub txtPostingProject_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtPostingProject.KeyPress
         Try
             If Not (IsNumeric(e.KeyChar) Or Char.IsControl(e.KeyChar)) Then

@@ -41,17 +41,19 @@ Public Class WrongHours
                         Dim arrayCl() As String = cmbClients.Items(cmbClients.SelectedIndex).ToString.Split(" ")
                         clientId = arrayCl(0)
                         jobNo = cmbJob.Items(cmbJob.SelectedIndex).ToString
-                        Dim arrayEmp() As String = cmbEmployees.Items(cmbEmployees.SelectedIndex).ToString.Split(" ")
                         If chbAllEmployees.Checked Then 'look for a employee
                             If cmbEmployees.SelectedIndex >= 0 Then 'verify if is selected a employee
+                                Dim arrayEmp() As String = cmbEmployees.Items(cmbEmployees.SelectedIndex).ToString.Split(" ")
                                 employeeNum = arrayEmp(0)
                                 If Not chbAllWO.Checked Then
                                     If txtWO.Text <> "" Then
                                         'look for all 
                                         If tbcControl.SelectedTab.TabIndex = tbpHours.TabIndex Then 'hours
                                             mtd.selectHours(tblHours, validaFechaParaSQl(dtpStartDate.Value), validaFechaParaSQl(dtpEndDate.Value), clientId, cmbFindDate.SelectedIndex, jobNo, employeeNum, txtWO.Text, True, True, True, True)
-                                        Else 'perdiem
+                                        ElseIf tbcControl.SelectedTab.TabIndex = tbpPerdiem.TabIndex Then 'perdiem
                                             mtd.selectPerdiem(tblPerdiem, validaFechaParaSQl(dtpStartDate.Value), validaFechaParaSQl(dtpEndDate.Value), clientId, cmbFindDate.SelectedIndex, jobNo, employeeNum, txtWO.Text, True, True, True, True)
+                                        Else
+                                            mtd.selectFakeHours(tblFakeHours, validaFechaParaSQl(dtpStartDate.Value), validaFechaParaSQl(dtpEndDate.Value), clientId, cmbFindDate.SelectedIndex, jobNo, employeeNum, txtWO.Text, True, True, True, True)
                                         End If
                                     Else 'Don't exist a WO to find
                                         MessageBox.Show("Please assig a Work Order to Find or check the option All WO.")
@@ -60,8 +62,10 @@ Public Class WrongHours
                                     'look for all but not look for WO 
                                     If tbcControl.SelectedTab.TabIndex = tbpHours.TabIndex Then 'hours
                                         mtd.selectHours(tblHours, validaFechaParaSQl(dtpStartDate.Value), validaFechaParaSQl(dtpEndDate.Value), clientId, cmbFindDate.SelectedIndex, jobNo, employeeNum, "", True, True, True, False)
-                                    Else 'perdiem
+                                    ElseIf tbcControl.SelectedTab.TabIndex = tbpPerdiem.TabIndex Then  'perdiem
                                         mtd.selectPerdiem(tblPerdiem, validaFechaParaSQl(dtpStartDate.Value), validaFechaParaSQl(dtpEndDate.Value), clientId, cmbFindDate.SelectedIndex, jobNo, employeeNum, "", True, True, True, False)
+                                    Else
+                                        mtd.selectFakeHours(tblFakeHours, validaFechaParaSQl(dtpStartDate.Value), validaFechaParaSQl(dtpEndDate.Value), clientId, cmbFindDate.SelectedIndex, jobNo, employeeNum, "", True, True, True, False)
                                     End If
                                 End If
                             Else
@@ -72,8 +76,10 @@ Public Class WrongHours
                                 If txtWO.Text <> "" Then 'witout employee but with wo,client and job 
                                     If tbcControl.SelectedTab.TabIndex = tbpHours.TabIndex Then 'hours
                                         mtd.selectHours(tblHours, validaFechaParaSQl(dtpStartDate.Value), validaFechaParaSQl(dtpEndDate.Value), clientId, cmbFindDate.SelectedIndex, jobNo, "", txtWO.Text, True, True, False, True)
-                                    Else 'perdiem
+                                    ElseIf tbcControl.SelectedTab.TabIndex = tbpPerdiem.TabIndex Then 'perdiem
                                         mtd.selectPerdiem(tblPerdiem, validaFechaParaSQl(dtpStartDate.Value), validaFechaParaSQl(dtpEndDate.Value), clientId, cmbFindDate.SelectedIndex, jobNo, "", txtWO.Text, True, True, False, True)
+                                    Else
+                                        mtd.selectFakeHours(tblFakeHours, validaFechaParaSQl(dtpStartDate.Value), validaFechaParaSQl(dtpEndDate.Value), clientId, cmbFindDate.SelectedIndex, jobNo, "", txtWO.Text, True, True, False, True)
                                     End If
                                 Else 'without employee and WO but using client and job
                                     MessageBox.Show("Please assig a Work Order to Find or check the option All WO.")
@@ -81,8 +87,10 @@ Public Class WrongHours
                             Else 'without employee and WO but using client and job
                                 If tbcControl.SelectedTab.TabIndex = tbpHours.TabIndex Then 'hours
                                     mtd.selectHours(tblHours, validaFechaParaSQl(dtpStartDate.Value), validaFechaParaSQl(dtpEndDate.Value), clientId, cmbFindDate.SelectedIndex, jobNo, "", "", True, True, False, False)
-                                Else 'perdiem
+                                ElseIf tbcControl.SelectedTab.TabIndex = tbpPerdiem.TabIndex Then 'perdiem
                                     mtd.selectPerdiem(tblPerdiem, validaFechaParaSQl(dtpStartDate.Value), validaFechaParaSQl(dtpEndDate.Value), clientId, cmbFindDate.SelectedIndex, jobNo, "", "", True, True, False, False)
+                                Else
+                                    mtd.selectFakeHours(tblFakeHours, validaFechaParaSQl(dtpStartDate.Value), validaFechaParaSQl(dtpEndDate.Value), clientId, cmbFindDate.SelectedIndex, jobNo, "", "", True, True, False, False)
                                 End If
                             End If
                         End If
@@ -93,24 +101,59 @@ Public Class WrongHours
                     ''buscar solo por cliente y fecha
                     Dim arrayCl() As String = cmbClients.Items(cmbClients.SelectedIndex).ToString.Split(" ")
                     clientId = arrayCl(0)
-
-                    If Not chbAllWO.Checked Then
-                        If txtWO.Text <> "" Then 'look for client and wo 
-                            If tbcControl.SelectedTab.TabIndex = tbpHours.TabIndex Then 'hours
-                                mtd.selectHours(tblHours, validaFechaParaSQl(dtpStartDate.Value), validaFechaParaSQl(dtpEndDate.Value), clientId, cmbFindDate.SelectedIndex, "", "", txtWO.Text, True, False, False, True)
-                            Else 'perdiem
-                                mtd.selectPerdiem(tblPerdiem, validaFechaParaSQl(dtpStartDate.Value), validaFechaParaSQl(dtpEndDate.Value), clientId, cmbFindDate.SelectedIndex, "", "", txtWO.Text, True, False, False, True)
+                    If Not chbAllEmployees.Checked Then
+                        If cmbEmployees.SelectedIndex > 0 Then 'with employee
+                            Dim arrayEmp() As String = cmbEmployees.Items(cmbEmployees.SelectedIndex).ToString.Split(" ")
+                            employeeNum = arrayEmp(0)
+                            If Not chbAllWO.Checked Then
+                                If txtWO.Text <> "" Then 'look for client, wo and employee
+                                    If tbcControl.SelectedTab.TabIndex = tbpHours.TabIndex Then 'hours
+                                        mtd.selectHours(tblHours, validaFechaParaSQl(dtpStartDate.Value), validaFechaParaSQl(dtpEndDate.Value), clientId, cmbFindDate.SelectedIndex, "", employeeNum, txtWO.Text, True, False, True, True)
+                                    ElseIf tbcControl.SelectedTab.TabIndex = tbpPerdiem.TabIndex Then 'perdiem
+                                        mtd.selectPerdiem(tblPerdiem, validaFechaParaSQl(dtpStartDate.Value), validaFechaParaSQl(dtpEndDate.Value), clientId, cmbFindDate.SelectedIndex, "", employeeNum, txtWO.Text, True, False, True, True)
+                                    Else
+                                        mtd.selectFakeHours(tblFakeHours, validaFechaParaSQl(dtpStartDate.Value), validaFechaParaSQl(dtpEndDate.Value), clientId, cmbFindDate.SelectedIndex, "", employeeNum, txtWO.Text, True, False, True, True)
+                                    End If
+                                Else 'only look for client 
+                                    MessageBox.Show("Please assig a Work Order to Find or check the option All WO.")
+                                End If
+                            Else 'only look for client and with employee
+                                If tbcControl.SelectedTab.TabIndex = tbpHours.TabIndex Then 'hours
+                                    mtd.selectHours(tblHours, validaFechaParaSQl(dtpStartDate.Value), validaFechaParaSQl(dtpEndDate.Value), clientId, cmbFindDate.SelectedIndex, "", employeeNum, "", True, False, True, False)
+                                ElseIf tbcControl.SelectedTab.TabIndex = tbpPerdiem.TabIndex Then 'perdiem
+                                    mtd.selectPerdiem(tblPerdiem, validaFechaParaSQl(dtpStartDate.Value), validaFechaParaSQl(dtpEndDate.Value), clientId, cmbFindDate.SelectedIndex, "", employeeNum, "", True, False, True, False)
+                                Else
+                                    mtd.selectFakeHours(tblFakeHours, validaFechaParaSQl(dtpStartDate.Value), validaFechaParaSQl(dtpEndDate.Value), clientId, cmbFindDate.SelectedIndex, "", employeeNum, "", True, False, True, False)
+                                End If
+                            End If
+                        Else
+                            MessageBox.Show("Please assig a Employee to Find or check the option All Employees.")
+                        End If
+                    Else 'without employee
+                        If Not chbAllWO.Checked Then
+                            If txtWO.Text <> "" Then 'look for client and wo 
+                                If tbcControl.SelectedTab.TabIndex = tbpHours.TabIndex Then 'hours
+                                    mtd.selectHours(tblHours, validaFechaParaSQl(dtpStartDate.Value), validaFechaParaSQl(dtpEndDate.Value), clientId, cmbFindDate.SelectedIndex, "", "", txtWO.Text, True, False, False, True)
+                                ElseIf tbcControl.SelectedTab.TabIndex = tbpPerdiem.TabIndex Then 'perdiem
+                                    mtd.selectPerdiem(tblPerdiem, validaFechaParaSQl(dtpStartDate.Value), validaFechaParaSQl(dtpEndDate.Value), clientId, cmbFindDate.SelectedIndex, "", "", txtWO.Text, True, False, False, True)
+                                Else
+                                    mtd.selectFakeHours(tblFakeHours, validaFechaParaSQl(dtpStartDate.Value), validaFechaParaSQl(dtpEndDate.Value), clientId, cmbFindDate.SelectedIndex, "", "", txtWO.Text, True, False, False, True)
+                                End If
+                            Else 'only look for client 
+                                MessageBox.Show("Please assig a Work Order to Find or check the option All WO.")
                             End If
                         Else 'only look for client 
-                            MessageBox.Show("Please assig a Work Order to Find or check the option All WO.")
-                        End If
-                    Else 'only look for client 
-                        If tbcControl.SelectedTab.TabIndex = tbpHours.TabIndex Then 'hours
-                            mtd.selectHours(tblHours, validaFechaParaSQl(dtpStartDate.Value), validaFechaParaSQl(dtpEndDate.Value), clientId, cmbFindDate.SelectedIndex, "", "", "", True, False, False, False)
-                        Else 'perdiem
-                            mtd.selectPerdiem(tblPerdiem, validaFechaParaSQl(dtpStartDate.Value), validaFechaParaSQl(dtpEndDate.Value), clientId, cmbFindDate.SelectedIndex, "", "", "", True, False, False, False)
+                            If tbcControl.SelectedTab.TabIndex = tbpHours.TabIndex Then 'hours
+                                mtd.selectHours(tblHours, validaFechaParaSQl(dtpStartDate.Value), validaFechaParaSQl(dtpEndDate.Value), clientId, cmbFindDate.SelectedIndex, "", "", "", True, False, False, False)
+                            ElseIf tbcControl.SelectedTab.TabIndex = tbpPerdiem.TabIndex Then 'perdiem
+                                mtd.selectPerdiem(tblPerdiem, validaFechaParaSQl(dtpStartDate.Value), validaFechaParaSQl(dtpEndDate.Value), clientId, cmbFindDate.SelectedIndex, "", "", "", True, False, False, False)
+                            Else
+                                mtd.selectFakeHours(tblFakeHours, validaFechaParaSQl(dtpStartDate.Value), validaFechaParaSQl(dtpEndDate.Value), clientId, cmbFindDate.SelectedIndex, "", "", "", True, False, False, False)
+                            End If
                         End If
                     End If
+
+
 
                     'If tbcControl.SelectedTab.TabIndex = tbpHours.TabIndex Then
                     '    mtd.selectHours(tblHours, validaFechaParaSQl(dtpStartDate.Value), validaFechaParaSQl(dtpEndDate.Value), clientId, cmbFindDate.SelectedIndex, 0, "", True, False, False)
@@ -132,9 +175,10 @@ Public Class WrongHours
                         If txtWO.Text <> "" Then
                             If tbcControl.SelectedTab.TabIndex = tbpHours.TabIndex Then
                                 mtd.selectHours(tblHours, validaFechaParaSQl(dtpStartDate.Value), validaFechaParaSQl(dtpEndDate.Value), "", cmbFindDate.SelectedIndex, "", employeeNum, txtWO.Text, False, False, True, True)
-                            Else
-                                'Perdiem
+                            ElseIf tbcControl.SelectedTab.TabIndex = tbpPerdiem.TabIndex Then 'Perdiem
                                 mtd.selectPerdiem(tblPerdiem, validaFechaParaSQl(dtpStartDate.Value), validaFechaParaSQl(dtpEndDate.Value), "", cmbFindDate.SelectedIndex, "", employeeNum, txtWO.Text, False, False, True, True)
+                            Else
+                                mtd.selectFakeHours(tblFakeHours, validaFechaParaSQl(dtpStartDate.Value), validaFechaParaSQl(dtpEndDate.Value), "", cmbFindDate.SelectedIndex, "", employeeNum, txtWO.Text, False, False, True, True)
                             End If
                         Else
                             MessageBox.Show("Please assig a Work Order to Find or check the option All WO.")
@@ -142,9 +186,10 @@ Public Class WrongHours
                     Else
                         If tbcControl.SelectedTab.TabIndex = tbpHours.TabIndex Then
                             mtd.selectHours(tblHours, validaFechaParaSQl(dtpStartDate.Value), validaFechaParaSQl(dtpEndDate.Value), "", cmbFindDate.SelectedIndex, "", employeeNum, "", False, False, True, False)
-                        Else
-                            'Perdiem
+                        ElseIf tbcControl.SelectedTab.TabIndex = tbpPerdiem.TabIndex Then 'Perdiem
                             mtd.selectPerdiem(tblPerdiem, validaFechaParaSQl(dtpStartDate.Value), validaFechaParaSQl(dtpEndDate.Value), "", cmbFindDate.SelectedIndex, "", employeeNum, "", False, False, True, False)
+                        Else
+                            mtd.selectFakeHours(tblFakeHours, validaFechaParaSQl(dtpStartDate.Value), validaFechaParaSQl(dtpEndDate.Value), "", cmbFindDate.SelectedIndex, "", employeeNum, "", False, False, True, False)
                         End If
                     End If
                 Else
@@ -155,9 +200,10 @@ Public Class WrongHours
                     If txtWO.Text <> "" Then
                         If tbcControl.SelectedTab.TabIndex = tbpHours.TabIndex Then
                             mtd.selectHours(tblHours, validaFechaParaSQl(dtpStartDate.Value), validaFechaParaSQl(dtpEndDate.Value), "", cmbFindDate.SelectedIndex, "", "", txtWO.Text, False, False, False, True)
-                        Else
-                            'Perdiem
+                        ElseIf tbcControl.SelectedTab.TabIndex = tbpPerdiem.TabIndex Then 'Perdiem
                             mtd.selectPerdiem(tblPerdiem, validaFechaParaSQl(dtpStartDate.Value), validaFechaParaSQl(dtpEndDate.Value), "", cmbFindDate.SelectedIndex, "", "", txtWO.Text, False, False, False, True)
+                        Else
+                            mtd.selectFakeHours(tblFakeHours, validaFechaParaSQl(dtpStartDate.Value), validaFechaParaSQl(dtpEndDate.Value), "", cmbFindDate.SelectedIndex, "", "", txtWO.Text, False, False, False, True)
                         End If
                     Else
                         MessageBox.Show("Please assig a Work Order to Find or check the option All WO.")
@@ -165,9 +211,10 @@ Public Class WrongHours
                 Else
                     If tbcControl.SelectedTab.TabIndex = tbpHours.TabIndex Then
                         mtd.selectHours(tblHours, validaFechaParaSQl(dtpStartDate.Value), validaFechaParaSQl(dtpEndDate.Value), "", cmbFindDate.SelectedIndex, "", "", "", False, False, False, False)
-                    Else
-                        'perdiem  
+                    ElseIf tbcControl.SelectedTab.TabIndex = tbpPerdiem.TabIndex Then 'perdiem  
                         mtd.selectPerdiem(tblPerdiem, validaFechaParaSQl(dtpStartDate.Value), validaFechaParaSQl(dtpEndDate.Value), "", cmbFindDate.SelectedIndex, "", "", "", False, False, False, False)
+                    Else
+                        mtd.selectFakeHours(tblFakeHours, validaFechaParaSQl(dtpStartDate.Value), validaFechaParaSQl(dtpEndDate.Value), "", cmbFindDate.SelectedIndex, "", "", "", False, False, False, False)
                     End If
                 End If
             End If
@@ -243,6 +290,12 @@ Public Class WrongHours
                         Else
                             MsgBox("Error please check the Data")
                         End If
+                    Case 2
+                        If mtd.deleteFakeHours(tblFakeHours) Then
+                            MsgBox("Successful")
+                        Else
+                            MsgBox("Error please check the Data")
+                        End If
                 End Select
             End If
         Catch ex As Exception
@@ -289,6 +342,49 @@ Public Class wrongHoursMetodos
             End If
         Catch ex As Exception
             Return True
+        Finally
+            desconectar()
+        End Try
+    End Function
+
+    Public Function selectFakeHours(ByVal tbl As DataGridView, ByVal startDate As Date, ByVal endDate As Date, Optional idClient As String = "", Optional dateOption As Integer = 0, Optional job As String = "", Optional Employee As String = "", Optional WO As String = "", Optional allClient As Boolean = False, Optional allJobs As Boolean = False, Optional allEmployee As Boolean = False, Optional allWO As Boolean = False) As Boolean
+        Try
+            conectar()
+            Dim cmd As New SqlCommand("select 
+hw.dateWorked as 'Date Worked',
+emp.numberEmploye as 'Employee No',
+CONCAT(emp.lastName,', ',emp.firstName, ' ', emp.middleName) as 'Employee',
+jb.jobNo as 'JobNo',
+po.idPO as 'Project', 
+CONCAT(wo.idWO , '-',tk.task) as 'Work',
+isnull(wc.name,'') as 'Work Code',
+hw.hoursST ,
+hw.hoursOT,
+hw.hours3,
+hw.schedule ,
+(select COUNT(*) from expensesUsed as exu where exu.idHorsWorked = hw.idHorsWorked) as 'Expenses Match',
+hw.idHorsWorked
+from hoursWorked as hw 
+left join workCode as wc on wc.idWorkCode = hw.idWorkCode
+inner join employees as emp on emp.idEmployee = hw.idEmployee
+inner join task as tk on tk.idAux = hw.idAux
+inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO
+inner join projectOrder as po on po.idPO = wo.idPO and po.jobNo = wo.idWO
+inner join job as jb on jb.jobNo = po.jobNo
+inner join clients as cl on cl.idClient = jb.idClient
+where (hw.hoursST + hw.hoursOT + hw.hours3) = 0 " + If(allClient, "and cl.numberClient = " + idClient + If(allJobs, " and jb.jobNo = " + job + If(allWO, " and Concat(wo.idWO , ' ', tk.task) like '" + WO + "' ", "") + " ", If(allWO, " and Concat(wo.idWO , ' ', tk.task) like '" + WO + "' ", "")), "") + If(dateOption = 1, If(allClient, " and ", "") + "and hw.dateWorked between '" + validaFechaParaSQl(startDate) + "' and '" + validaFechaParaSQl(endDate) + "'", If(allClient, " and ", "") + "and hw.dayInserted between '" + validaFechaParaSQl(startDate) + "' and '" + validaFechaParaSQl(endDate) + "'") + If(allEmployee, " and  emp.numberEmploye = " + Employee, ""), conn)
+            If cmd.ExecuteNonQuery Then
+                Dim dt As New DataTable
+                Dim da As New SqlDataAdapter(cmd)
+                da.Fill(dt)
+                tbl.DataSource = dt
+                tbl.Columns(12).Visible = False
+                Return True
+            Else
+                Return False
+            End If
+        Catch ex As Exception
+            Return False
         Finally
             desconectar()
         End Try
@@ -363,6 +459,52 @@ end", conn)
             Return False
         Finally
             desconectar()
+        End Try
+    End Function
+    Public Function deleteFakeHours(ByVal tbl As DataGridView) As Boolean
+        Dim tran As SqlTransaction
+        Try
+            conectar()
+            tran = conn.BeginTransaction
+            Dim flag As Boolean = True
+            For Each row As DataGridViewRow In tbl.SelectedRows
+                Dim cmd As New SqlCommand("if ( " + row.Cells(11).Value.ToString() + " = 1 ) 
+begin 
+	if (select COUNT (*) from expensesUsed where idHorsWorked = '" + row.Cells(12).Value + "')> 1 
+	begin
+        delete from expensesUsed where idHorsWorked = '" + row.Cells(12).Value + "'
+		delete from hoursWorked where idHorsWorked = '" + row.Cells(12).Value + "'
+	end
+	else 
+	begin 
+		delete from expensesUsed where idHorsWorked = '" + row.Cells(12).Value + "'
+	end 
+end
+else 
+begin
+	delete from hoursWorked where idHorsWorked = '" + row.Cells(12).Value + "'
+end", conn)
+                cmd.Transaction = tran
+                If cmd.ExecuteNonQuery Then
+                    flag = True
+                Else
+                    flag = False
+                End If
+            Next
+            If flag Then
+                tran.Commit()
+                Return True
+            Else
+                tran.Rollback()
+                Return False
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message)
+
+            Return False
+        Finally
+            desconectar()
+            tran.Dispose()
         End Try
     End Function
     Public Function deletePerdiem(ByVal tbl As DataGridView) As Boolean
