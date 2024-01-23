@@ -132,6 +132,7 @@ Public Class ProjectsClients
         cmbCostCode.SelectedIndex = Nothing
         cmbCostDistribution.SelectedIndex = Nothing
         cmbWorkTMLumoSum.SelectedIndex = Nothing
+        pcbLogoPC.Image = Nothing
     End Sub
 
     Private Sub LimpriarCamposParaAgregar()
