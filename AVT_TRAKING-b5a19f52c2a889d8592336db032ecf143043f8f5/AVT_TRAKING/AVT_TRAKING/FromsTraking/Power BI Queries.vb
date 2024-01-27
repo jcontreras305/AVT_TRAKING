@@ -806,6 +806,13 @@ BEGIN
 	drop table PBI.[CostMth]
 END
 
+select * ,
+	(T2.[OT Cost]+T2.[ST Cost]+T2.[Total Exp]+T2.[Total Mat]+T2.[Total Rental 3rd party]+T2.[Total In House]+T2.[Total Scaffold]+T2.[Total Company Equipment]+T2.[Total Subcontract]+T2.[Total Tools]+T2.[Total Consumable]+T2.[Total Other])as 'T Cost',
+	(T2.[ST Hours]+T2.[OT Hours]) as 'T Hrs',
+	iif((T2.[ST Hours]+T2.[OT Hours])=0,(T2.[OT Cost]+T2.[ST Cost]+T2.[Total Exp]+T2.[Total Mat]+T2.[Total Rental 3rd party]+T2.[Total In House]+T2.[Total Scaffold]+T2.[Total Company Equipment]+T2.[Total Subcontract]+T2.[Total Tools]+T2.[Total Consumable]+T2.[Total Other])/1,
+	(T2.[OT Cost]+T2.[ST Cost]+T2.[Total Exp]+T2.[Total Mat]+T2.[Total Rental 3rd party]+T2.[Total In House]+T2.[Total Scaffold]+T2.[Total Company Equipment]+T2.[Total Subcontract]+T2.[Total Tools]+T2.[Total Consumable]+T2.[Total Other])/(T2.[ST Hours]+T2.[OT Hours])) as 'Cost PH'
+	INTO PBI.CostMth
+from (
 select DISTINCT
 T1.[Year],
 T1.[PO],
@@ -825,7 +832,6 @@ SUM(T1.[Total Subcontract]) OVER (PARTITION BY T1.[Year],T1.[Month],T1.[PO],T1.[
 SUM(T1.[Total Tools]) OVER (PARTITION BY T1.[Year],T1.[Month],T1.[PO],T1.[ClientID]) as 'Total Tools',
 SUM(T1.[Total Consumables]) OVER (PARTITION BY T1.[Year],T1.[Month],T1.[PO],T1.[ClientID]) as 'Total Consumable',
 SUM(T1.[Total Other]) OVER (PARTITION BY T1.[Year],T1.[Month],T1.[PO],T1.[ClientID]) as 'Total Other'
-INTO PBI.CostMth
 from(
 
 select 
@@ -878,10 +884,10 @@ exu.amount as 'Total Exp',
 0 as 'Total Other'
 from expensesUsed as exu 
 inner join expenses as ex on ex.idExpenses = exu.idExpense
-left join task as tk on tk.idAux = exu.idAux
-left join workOrder as wo on wo.idAuxWO = tk.idAuxWO
-left join projectOrder as po on po.idPO = wo.idPO and po.jobNo = wo.jobNo
-left join job as jb on jb.jobNo = po.jobNo 
+inner join task as tk on tk.idAux = exu.idAux
+inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO
+inner join projectOrder as po on po.idPO = wo.idPO and po.jobNo = wo.jobNo
+inner join job as jb on jb.jobNo = po.jobNo 
 where exu.dateExpense between @StartDate and @EndDate 
 
 UNION ALL
@@ -907,13 +913,13 @@ IIF(subString(code,LEN(code),1) = 'V' and (not code like ('%scaffold%') or name 
 IIF(subString(code,LEN(code),1) = 'Y' and (not code like ('%scaffold%') or name like '%scaffold%'), mau.amount,0) as 'Total Other'
 from materialUsed as mau 
 inner join material as ma on ma.idMaterial = mau.idMaterial
-left join task as tk on tk.idAux = mau.idAux
-left join workOrder as wo on wo.idAuxWO = tk.idAuxWO
-left join projectOrder as po on po.idPO = wo.idPO and po.jobNo = wo.jobNo
-left join job as jb on jb.jobNo = po.jobNo 
+inner join task as tk on tk.idAux = mau.idAux
+inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO
+inner join projectOrder as po on po.idPO = wo.idPO and po.jobNo = wo.jobNo
+inner join job as jb on jb.jobNo = po.jobNo 
 where mau.dateMaterial between @StartDate and @EndDate 
-) AS T1
- ORDER BY T1.[Month],T1.[PO],T1.[ClientID]"
+) AS T1)as T2
+ ORDER BY T2.[Month],T2.[PO],T2.[ClientID]"
 			Return _CostMth
 		End Get
 		Set(ByVal value As String)
