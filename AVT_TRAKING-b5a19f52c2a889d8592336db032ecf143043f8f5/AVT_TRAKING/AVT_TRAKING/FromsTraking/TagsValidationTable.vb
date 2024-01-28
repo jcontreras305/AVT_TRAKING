@@ -625,14 +625,14 @@ Public Class TagsValidationTable
                     sc.foreman = row.Cells("Foreman").Value
                     sc.erector = row.Cells("Erector").Value
                     sc.ahrBuild = CDbl(row.Cells("Build").Value)
-                    sc.ahrBuild = CDbl(row.Cells("Material").Value)
+                    sc.ahrMaterial = CDbl(row.Cells("Material").Value)
                     sc.ahrTravel = CDbl(row.Cells("Travel").Value)
                     sc.ahrWeather = CDbl(row.Cells("Weather").Value)
                     sc.ahrAlarm = CDbl(row.Cells("Alarm").Value)
                     sc.ahrSafety = CDbl(row.Cells("Safety").Value)
                     sc.ahrStdBy = CDbl(row.Cells("stdBy").Value)
                     sc.ahrOther = CDbl(row.Cells("Other").Value)
-                    sc.ahrTotal = CDbl(sc.ahrBuild + sc.ahrBuild + sc.ahrTravel + sc.ahrWeather + sc.ahrAlarm + sc.ahrSafety + sc.ahrStdBy + sc.ahrOther)
+                    sc.ahrTotal = CDbl(sc.ahrBuild + sc.ahrMaterial + sc.ahrTravel + sc.ahrWeather + sc.ahrAlarm + sc.ahrSafety + sc.ahrStdBy + sc.ahrOther)
                     sc.comments = row.Cells("Comment").Value
                     sc.latitude = CDbl(row.Cells("Latitude").Value)
                     sc.longitude = CDbl(row.Cells("Longitude").Value)
