@@ -1122,7 +1122,7 @@ begin
 	DISTINCT
 	T1.[Weekending],T1.[Job Num],T1.[PO],T1.[Project Name],T1.[Project Description],T1.[Company Name],T1.[Employee Name],
 	T1.[Emp: Number],T1.[Class],
-	SUM	(T1.[Amount]) OVER (PARTITION BY T1.[Weekending],T1.[Job Num],T1.[PO],T1.[Emp: Number],T1.[Project Description],T1.[Company Name]) as 'Amount'
+	SUM	(T1.[Amount]) OVER (PARTITION BY T1.[Weekending],T1.[Job Num],T1.[PO],T1.[Emp: Number],T1.[Project Name],T1.[Company Name]) as 'Amount'
 FROM 
 (select CONVERT(date, DATEADD(DAY, IIF(DATEPART(dw, xp.dateExpense) = 1,0,  8-(DATEPART(dw, xp.dateExpense))) ,xp.dateExpense)) as 'Weekending',
 	jb.jobNo 'Job Num', po.idPO as 'PO', concat(wo.idWO,' ',tk.task) as 'Project Name',

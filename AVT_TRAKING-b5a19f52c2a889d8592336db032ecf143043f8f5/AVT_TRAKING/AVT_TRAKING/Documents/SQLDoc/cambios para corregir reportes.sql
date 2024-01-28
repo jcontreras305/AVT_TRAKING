@@ -2411,276 +2411,313 @@
 --	end
 --end
 --go
-----| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-----| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-----V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V
+
 ----###############################################################################################
 ----########### CAMBIOS PARA REPORTES CON REOCRODS EN CEROS #######################################
 ----###############################################################################################
 
-ALTER proc [dbo].[Sp_All_Jobs]
-@startdate as date, 
-@finaldate as date,
-@clientnum as int
-as
-begin
-select distinct
-T1.[jobNo],
-T1.[idPO],
-T1.[idWO],
-T1.[task],
-T1.[SAPNumber],
-T1.[numberEmploye],
-T1.[DAY],
-T1.[Employee Name],
-T1.[dateWorked],
-T1.[Code],
-SUM(T1.[Hours ST])OVER (PARTITION BY T1.[jobNo],T1.[idPO],T1.[idWO],T1.[task],T1.[numberEmploye],T1.[DAY],T1.[Code],T1.[dateWorked]) as 'Hours ST',
-T1.[billingRate1],
-SUM(T1.[Hours OT])OVER (PARTITION BY T1.[jobNo],T1.[idPO],T1.[idWO],T1.[task],T1.[numberEmploye],T1.[DAY],T1.[Code],T1.[dateWorked]) as 'Hours OT',
-T1.[billingRateOT],
-SUM(T1.[PerDiem])OVER (PARTITION BY T1.[jobNo],T1.[idPO],T1.[idWO],T1.[task],T1.[numberEmploye],T1.[DAY],T1.[Code],T1.[dateWorked]) as 'PerDiem',
-SUM(T1.[Travel])OVER (PARTITION BY T1.[jobNo],T1.[idPO],T1.[idWO],T1.[task],T1.[numberEmploye],T1.[DAY],T1.[Code],T1.[dateWorked]) as 'Travel'
-from(
-select
-	jb.jobNo,
-	po.idPO,
-	wo.idWO,
-	tk.task,
-	em.SAPNumber,
-	em.numberEmploye, 
-	datename(dw,hw.dateWorked) as 'DAY',
-	concat(em.lastName,', ', em.firstName,' ' ,em.middleName) as 'Employee Name',
-	hw.dateWorked,
-	ISNULL(SUBSTRING( wc.name,1,iif(CHARINDEX('-',wc.name)=0, len(wc.name) ,(CHARINDEX('-',wc.name)-1))),'') as 'Code',
+--ALTER proc [dbo].[Sp_All_Jobs]
+--@startdate as date, 
+--@finaldate as date,
+--@clientnum as int
+--as
+--begin
+--select distinct
+--T1.[jobNo],
+--T1.[idPO],
+--T1.[idWO],
+--T1.[task],
+--T1.[SAPNumber],
+--T1.[numberEmploye],
+--T1.[DAY],
+--T1.[Employee Name],
+--T1.[dateWorked],
+--T1.[Code],
+--SUM(T1.[Hours ST])OVER (PARTITION BY T1.[jobNo],T1.[idPO],T1.[idWO],T1.[task],T1.[numberEmploye],T1.[DAY],T1.[Code],T1.[dateWorked]) as 'Hours ST',
+--T1.[billingRate1],
+--SUM(T1.[Hours OT])OVER (PARTITION BY T1.[jobNo],T1.[idPO],T1.[idWO],T1.[task],T1.[numberEmploye],T1.[DAY],T1.[Code],T1.[dateWorked]) as 'Hours OT',
+--T1.[billingRateOT],
+--SUM(T1.[PerDiem])OVER (PARTITION BY T1.[jobNo],T1.[idPO],T1.[idWO],T1.[task],T1.[numberEmploye],T1.[DAY],T1.[Code],T1.[dateWorked]) as 'PerDiem',
+--SUM(T1.[Travel])OVER (PARTITION BY T1.[jobNo],T1.[idPO],T1.[idWO],T1.[task],T1.[numberEmploye],T1.[DAY],T1.[Code],T1.[dateWorked]) as 'Travel'
+--from(
+--select
+--	jb.jobNo,
+--	po.idPO,
+--	wo.idWO,
+--	tk.task,
+--	em.SAPNumber,
+--	em.numberEmploye, 
+--	datename(dw,hw.dateWorked) as 'DAY',
+--	concat(em.lastName,', ', em.firstName,' ' ,em.middleName) as 'Employee Name',
+--	hw.dateWorked,
+--	ISNULL(SUBSTRING( wc.name,1,iif(CHARINDEX('-',wc.name)=0, len(wc.name) ,(CHARINDEX('-',wc.name)-1))),'') as 'Code',
 
-	hw.hoursST as 'Hours ST',
+--	hw.hoursST as 'Hours ST',
 	
-	ISNULL(wc.billingRate1,0)AS 'billingRate1',
+--	ISNULL(wc.billingRate1,0)AS 'billingRate1',
 
-	hw.hoursOT as 'Hours OT',
+--	hw.hoursOT as 'Hours OT',
 	
-	ISNULL(wc.billingRateOT,0)as 'billingRateOT',
+--	ISNULL(wc.billingRateOT,0)as 'billingRateOT',
 
 
-	isnull((select sum(amount) from expensesUsed as exu1 
-		inner join employees as em1 on em1.idEmployee = exu1.idEmployee
-		inner join expenses as ex1 on ex1.idExpenses= exu1.idExpense 
-		inner join hoursWorked as hw1 on hw1.idHorsWorked  = exu1.idHorsWorked and hw1.idAux = exu1.idAux
-		inner join task as tk1 on tk1.idAux = exu1.idAux and tk1.idAux = hw1.idAux
-		inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO
-		inner join projectOrder as po1 on po1.idPO = wo1.idPO and wo1.jobNo = po1.jobNo 
-		inner join job as jb1 on jb1.jobNo = po1.jobNo 
-		inner join clients as cl1 on cl1.idClient = jb1.idClient
-		where hw1.dateWorked between @startdate and @finaldate and hw1.idHorsWorked = hw.idHorsWorked and tk1.idAux = tk.idAux and wo.idAuxWO = wo.idAuxWO and po1.idPO = po.idPO and jb1.jobNo = jb.jobNo and (ex1.expenseCode like '%per-diem%' or ex1.expenseCode like '%per diem%')),0) as 'PerDiem' ,
-	isnull((select sum(amount) from expensesUsed as exu1 
-		inner join employees as em1 on em1.idEmployee = exu1.idEmployee
-		inner join expenses as ex1 on ex1.idExpenses= exu1.idExpense 
-		inner join hoursWorked as hw1 on hw1.idHorsWorked  = exu1.idHorsWorked and hw1.idAux = exu1.idAux
-		inner join task as tk1 on tk1.idAux = exu1.idAux and tk1.idAux = hw1.idAux
-		inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO
-		inner join projectOrder as po1 on po1.idPO = wo1.idPO and wo1.jobNo = po1.jobNo 
-		inner join job as jb1 on jb1.jobNo = po1.jobNo 
-		inner join clients as cl1 on cl1.idClient = jb1.idClient
-		where hw1.dateWorked between @startdate and @finaldate and hw1.idHorsWorked = hw.idHorsWorked and tk1.idAux = tk.idAux and wo.idAuxWO = wo.idAuxWO and po1.idPO = po.idPO and jb1.jobNo = jb.jobNo and (ex1.expenseCode like '%Travel%')),0) as 'Travel'
+--	isnull((select sum(amount) from expensesUsed as exu1 
+--		inner join employees as em1 on em1.idEmployee = exu1.idEmployee
+--		inner join expenses as ex1 on ex1.idExpenses= exu1.idExpense 
+--		inner join hoursWorked as hw1 on hw1.idHorsWorked  = exu1.idHorsWorked and hw1.idAux = exu1.idAux
+--		inner join task as tk1 on tk1.idAux = exu1.idAux and tk1.idAux = hw1.idAux
+--		inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO
+--		inner join projectOrder as po1 on po1.idPO = wo1.idPO and wo1.jobNo = po1.jobNo 
+--		inner join job as jb1 on jb1.jobNo = po1.jobNo 
+--		inner join clients as cl1 on cl1.idClient = jb1.idClient
+--		where hw1.dateWorked between @startdate and @finaldate and hw1.idHorsWorked = hw.idHorsWorked and tk1.idAux = tk.idAux and wo.idAuxWO = wo.idAuxWO and po1.idPO = po.idPO and jb1.jobNo = jb.jobNo and (ex1.expenseCode like '%per-diem%' or ex1.expenseCode like '%per diem%')),0) as 'PerDiem' ,
+--	isnull((select sum(amount) from expensesUsed as exu1 
+--		inner join employees as em1 on em1.idEmployee = exu1.idEmployee
+--		inner join expenses as ex1 on ex1.idExpenses= exu1.idExpense 
+--		inner join hoursWorked as hw1 on hw1.idHorsWorked  = exu1.idHorsWorked and hw1.idAux = exu1.idAux
+--		inner join task as tk1 on tk1.idAux = exu1.idAux and tk1.idAux = hw1.idAux
+--		inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO
+--		inner join projectOrder as po1 on po1.idPO = wo1.idPO and wo1.jobNo = po1.jobNo 
+--		inner join job as jb1 on jb1.jobNo = po1.jobNo 
+--		inner join clients as cl1 on cl1.idClient = jb1.idClient
+--		where hw1.dateWorked between @startdate and @finaldate and hw1.idHorsWorked = hw.idHorsWorked and tk1.idAux = tk.idAux and wo.idAuxWO = wo.idAuxWO and po1.idPO = po.idPO and jb1.jobNo = jb.jobNo and (ex1.expenseCode like '%Travel%')),0) as 'Travel'
 	
-	from hoursWorked as hw 
-		left join workCode as wc on wc.idWorkCode = hw.idWorkCode and wc.jobNo = hw.jobNo
-		inner join employees as em on em.idEmployee = hw.idEmployee
-		inner join task as tk on tk.idAux = hw.idAux 
-		inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO
-		inner join projectOrder as po on po.idPO = wo.idPO and wo.jobNo = po.jobNo 
-		inner join job as jb on jb.jobNo = po.jobNo 
-		inner join clients as cl on cl.idClient = jb.idClient
-		where hw.dateWorked between @startdate and @finaldate and cl.numberClient = @clientnum and not wc.name like '%6.4%' 
+--	from hoursWorked as hw 
+--		left join workCode as wc on wc.idWorkCode = hw.idWorkCode and wc.jobNo = hw.jobNo
+--		inner join employees as em on em.idEmployee = hw.idEmployee
+--		inner join task as tk on tk.idAux = hw.idAux 
+--		inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO
+--		inner join projectOrder as po on po.idPO = wo.idPO and wo.jobNo = po.jobNo 
+--		inner join job as jb on jb.jobNo = po.jobNo 
+--		inner join clients as cl on cl.idClient = jb.idClient
+--		where hw.dateWorked between @startdate and @finaldate and cl.numberClient = @clientnum and not wc.name like '%6.4%' 
 
-		UNION ALL
+--		UNION ALL
 
-	select
-	jb.jobNo,
-	po.idPO,
-	wo.idWO,
-	tk.task,
-	em.SAPNumber,
-	em.numberEmploye, 
-	datename(dw,hw.dateWorked) as 'DAY',
-	concat(em.lastName,', ', em.firstName,' ' ,em.middleName) as 'Employee Name',
-	hw.dateWorked,
-	'' as 'Code',
-	hw.hoursST as 'Hours ST',
+--	select
+--	jb.jobNo,
+--	po.idPO,
+--	wo.idWO,
+--	tk.task,
+--	em.SAPNumber,
+--	em.numberEmploye, 
+--	datename(dw,hw.dateWorked) as 'DAY',
+--	concat(em.lastName,', ', em.firstName,' ' ,em.middleName) as 'Employee Name',
+--	hw.dateWorked,
+--	'' as 'Code',
+--	hw.hoursST as 'Hours ST',
 	
-	ISNULL(wc.billingRate1,0)AS 'billingRate1',
+--	ISNULL(wc.billingRate1,0)AS 'billingRate1',
 
-	hw.hoursOT as 'Hours OT',
+--	hw.hoursOT as 'Hours OT',
 	
-	ISNULL(wc.billingRateOT,0)as 'billingRateOT',
+--	ISNULL(wc.billingRateOT,0)as 'billingRateOT',
 
 
-	isnull((select sum(amount) from expensesUsed as exu1 
-		inner join employees as em1 on em1.idEmployee = exu1.idEmployee
-		inner join expenses as ex1 on ex1.idExpenses= exu1.idExpense 
-		inner join hoursWorked as hw1 on hw1.idHorsWorked  = exu1.idHorsWorked and hw1.idAux = exu1.idAux
-		inner join task as tk1 on tk1.idAux = exu1.idAux and tk1.idAux = hw1.idAux
-		inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO
-		inner join projectOrder as po1 on po1.idPO = wo1.idPO and wo1.jobNo = po1.jobNo 
-		inner join job as jb1 on jb1.jobNo = po1.jobNo 
-		inner join clients as cl1 on cl1.idClient = jb1.idClient
-		where hw1.dateWorked between @startdate and @finaldate and hw1.idHorsWorked = hw.idHorsWorked and tk1.idAux = tk.idAux and wo.idAuxWO = wo.idAuxWO and po1.idPO = po.idPO and jb1.jobNo = jb.jobNo and (ex1.expenseCode like '%per-diem%' or ex1.expenseCode like '%per diem%')),0) as 'PerDiem' ,
-	isnull((select sum(amount) from expensesUsed as exu1 
-		inner join employees as em1 on em1.idEmployee = exu1.idEmployee
-		inner join expenses as ex1 on ex1.idExpenses= exu1.idExpense 
-		inner join hoursWorked as hw1 on hw1.idHorsWorked  = exu1.idHorsWorked and hw1.idAux = exu1.idAux
-		inner join task as tk1 on tk1.idAux = exu1.idAux and tk1.idAux = hw1.idAux
-		inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO
-		inner join projectOrder as po1 on po1.idPO = wo1.idPO and wo1.jobNo = po1.jobNo 
-		inner join job as jb1 on jb1.jobNo = po1.jobNo 
-		inner join clients as cl1 on cl1.idClient = jb1.idClient
-		where hw1.dateWorked between @startdate and @finaldate and hw1.idHorsWorked = hw.idHorsWorked and tk1.idAux = tk.idAux and wo.idAuxWO = wo.idAuxWO and po1.idPO = po.idPO and jb1.jobNo = jb.jobNo and (ex1.expenseCode like '%Travel%')),0) as 'Travel'
-	from hoursWorked as hw 
-	left join workCode as wc on wc.idWorkCode = hw.idWorkCode and wc.jobNo = hw.jobNo
-	inner join employees as em on em.idEmployee = hw.idEmployee
-	inner join task as tk on tk.idAux = hw.idAux 
-	inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO
-	inner join projectOrder as po on po.idPO = wo.idPO and wo.jobNo = po.jobNo 
-	inner join job as jb on jb.jobNo = po.jobNo 
-	inner join clients as cl on cl.idClient = jb.idClient
-	where hw.dateWorked between @startdate and @finaldate and cl.numberClient = @clientnum and (hw.hoursST + hw.hoursOT + hw.hours3) = 0 
+--	isnull((select sum(amount) from expensesUsed as exu1 
+--		inner join employees as em1 on em1.idEmployee = exu1.idEmployee
+--		inner join expenses as ex1 on ex1.idExpenses= exu1.idExpense 
+--		inner join hoursWorked as hw1 on hw1.idHorsWorked  = exu1.idHorsWorked and hw1.idAux = exu1.idAux
+--		inner join task as tk1 on tk1.idAux = exu1.idAux and tk1.idAux = hw1.idAux
+--		inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO
+--		inner join projectOrder as po1 on po1.idPO = wo1.idPO and wo1.jobNo = po1.jobNo 
+--		inner join job as jb1 on jb1.jobNo = po1.jobNo 
+--		inner join clients as cl1 on cl1.idClient = jb1.idClient
+--		where hw1.dateWorked between @startdate and @finaldate and hw1.idHorsWorked = hw.idHorsWorked and tk1.idAux = tk.idAux and wo.idAuxWO = wo.idAuxWO and po1.idPO = po.idPO and jb1.jobNo = jb.jobNo and (ex1.expenseCode like '%per-diem%' or ex1.expenseCode like '%per diem%')),0) as 'PerDiem' ,
+--	isnull((select sum(amount) from expensesUsed as exu1 
+--		inner join employees as em1 on em1.idEmployee = exu1.idEmployee
+--		inner join expenses as ex1 on ex1.idExpenses= exu1.idExpense 
+--		inner join hoursWorked as hw1 on hw1.idHorsWorked  = exu1.idHorsWorked and hw1.idAux = exu1.idAux
+--		inner join task as tk1 on tk1.idAux = exu1.idAux and tk1.idAux = hw1.idAux
+--		inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO
+--		inner join projectOrder as po1 on po1.idPO = wo1.idPO and wo1.jobNo = po1.jobNo 
+--		inner join job as jb1 on jb1.jobNo = po1.jobNo 
+--		inner join clients as cl1 on cl1.idClient = jb1.idClient
+--		where hw1.dateWorked between @startdate and @finaldate and hw1.idHorsWorked = hw.idHorsWorked and tk1.idAux = tk.idAux and wo.idAuxWO = wo.idAuxWO and po1.idPO = po.idPO and jb1.jobNo = jb.jobNo and (ex1.expenseCode like '%Travel%')),0) as 'Travel'
+--	from hoursWorked as hw 
+--	left join workCode as wc on wc.idWorkCode = hw.idWorkCode and wc.jobNo = hw.jobNo
+--	inner join employees as em on em.idEmployee = hw.idEmployee
+--	inner join task as tk on tk.idAux = hw.idAux 
+--	inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO
+--	inner join projectOrder as po on po.idPO = wo.idPO and wo.jobNo = po.jobNo 
+--	inner join job as jb on jb.jobNo = po.jobNo 
+--	inner join clients as cl on cl.idClient = jb.idClient
+--	where hw.dateWorked between @startdate and @finaldate and cl.numberClient = @clientnum and (hw.hoursST + hw.hoursOT + hw.hours3) = 0 
 
-)as T1 where (T1.billingRate1 + T1.billingRateOT + T1.PerDiem + T1.Travel) > 0 
-end
-GO
+--)as T1 where (T1.billingRate1 + T1.billingRateOT + T1.PerDiem + T1.Travel) > 0 
+--end
+--GO
 
-ALTER proc [dbo].[Sp_By_JobNumber]
+--ALTER proc [dbo].[Sp_By_JobNumber]
+--@startdate as date, 
+--@finaldate as date,
+--@clientnum as int,
+--@job as bigint,
+--@all as bit
+--as
+--begin
+--select distinct
+--T1.[jobNo],
+--T1.[idPO],
+--T1.[idWO],
+--T1.[task],
+--T1.[SAPNumber],
+--T1.[numberEmploye],
+--T1.[DAY],
+--T1.[Employee Name],
+--T1.[dateWorked],
+--T1.[Code],
+--SUM(T1.[Hours ST])     OVER (PARTITION BY T1.[jobNo],T1.[idPO],T1.[idWO],T1.[task],T1.[dateWorked],T1.[numberEmploye],T1.[DAY],T1.[Code]) AS 'Hours ST',
+--T1.[billingRate1],
+--SUM(T1.[Hours OT])     OVER (PARTITION BY T1.[jobNo],T1.[idPO],T1.[idWO],T1.[task],T1.[dateWorked],T1.[numberEmploye],T1.[DAY],T1.[Code]) AS 'Hours OT',
+--T1.[billingRateOT],
+--SUM(T1.[PerDiem])      OVER (PARTITION BY T1.[jobNo],T1.[idPO],T1.[idWO],T1.[task],T1.[dateWorked],T1.[numberEmploye],T1.[DAY],T1.[Code]) AS 'PerDiem',
+--SUM(T1.[Travel])       OVER (PARTITION BY T1.[jobNo],T1.[idPO],T1.[idWO],T1.[task],T1.[dateWorked],T1.[numberEmploye],T1.[DAY],T1.[Code]) AS 'Travel'
+--from(
+--select jb.jobNo,
+--	po.idPO,
+--	wo.idWO,
+--	tk.task,
+--	em.SAPNumber,
+--	em.numberEmploye, 
+--	datename(dw,hw.dateWorked) as 'DAY',
+--	concat(em.lastName,', ', em.firstName,' ' ,em.middleName) as 'Employee Name',
+--	hw.dateWorked,
+--	ISNULL(SUBSTRING( wc.name,1,iif(CHARINDEX('-',wc.name)=0, len(wc.name) ,(CHARINDEX('-',wc.name)-1))),'') as 'Code',
+	
+--	hw.hoursST
+--	as 'Hours ST',
+		
+--	ISNULL(wc.billingRate1,0)as 'billingRate1',
+
+--	hw.hoursOT
+--	as 'Hours OT',
+
+--	ISNULL(wc.billingRateOT,0) as 'billingRateOT',
+--	isnull((select sum(amount) from expensesUsed as exu1 
+--		inner join employees as em1 on em1.idEmployee = exu1.idEmployee
+--		inner join expenses as ex1 on ex1.idExpenses= exu1.idExpense 
+--		inner join hoursWorked as hw1 on hw1.idHorsWorked  = exu1.idHorsWorked 
+--		inner join task as tk1 on tk1.idAux = exu1.idAux and tk1.idAux = hw1.idAux
+--		inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO
+--		inner join projectOrder as po1 on po1.idPO = wo1.idPO and wo1.jobNo = po1.jobNo and hw1.jobNo = po1.jobNo 
+--		inner join job as jb1 on jb1.jobNo = po1.jobNo 
+--		inner join clients as cl1 on cl1.idClient = jb1.idClient
+--		where hw1.dateWorked between @startdate and @finaldate and hw1.idHorsWorked = hw.idHorsWorked and tk1.idAux = tk.idAux and wo.idAuxWO = wo.idAuxWO and po1.idPO = po.idPO and jb1.jobNo = jb.jobNo and (ex1.expenseCode like '%per-diem%' or ex1.expenseCode like '%per diem%')),0) as 'PerDiem',
+--	isnull((select sum(amount) from expensesUsed as exu1 
+--		inner join employees as em1 on em1.idEmployee = exu1.idEmployee
+--		inner join expenses as ex1 on ex1.idExpenses= exu1.idExpense 
+--		inner join hoursWorked as hw1 on hw1.idHorsWorked  = exu1.idHorsWorked 
+--		inner join task as tk1 on tk1.idAux = exu1.idAux and tk1.idAux = hw1.idAux
+--		inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO
+--		inner join projectOrder as po1 on po1.idPO = wo1.idPO and wo1.jobNo = po1.jobNo 
+--		inner join job as jb1 on jb1.jobNo = po1.jobNo 
+--		inner join clients as cl1 on cl1.idClient = jb1.idClient
+--		where hw1.dateWorked between @startdate and @finaldate 
+--			and hw1.idHorsWorked = hw.idHorsWorked and tk1.idAux = tk.idAux	and wo.idAuxWO = wo.idAuxWO and po1.idPO = po.idPO and jb1.jobNo = jb.jobNo and (ex1.expenseCode like '%Travel%')),0) as 'Travel'
+--from hoursWorked as hw 
+--left join workCode as wc on wc.idWorkCode = hw.idWorkCode and wc.jobNo = hw.jobNo
+--inner join employees as em on em.idEmployee = hw.idEmployee
+--inner join task as tk on tk.idAux = hw.idAux 
+--inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO
+--inner join projectOrder as po on po.idPO = wo.idPO and wo.jobNo = po.jobNo and hw.jobNo = po.jobNo
+--inner join job as jb on jb.jobNo = po.jobNo 
+--inner join clients as cl on cl.idClient = jb.idClient
+--where hw.dateWorked between @startdate and @finaldate and cl.numberClient = @clientnum and jb.jobNo like iif(@all=1,'%%',CONCAT('',@job,'')) and not wc.name like '%6.4%' 
+
+--UNION ALL
+
+--select jb.jobNo,
+--	po.idPO,
+--	wo.idWO,
+--	tk.task,
+--	em.SAPNumber,
+--	em.numberEmploye, 
+--	datename(dw,hw.dateWorked) as 'DAY',
+--	concat(em.lastName,', ', em.firstName,' ' ,em.middleName) as 'Employee Name',
+--	hw.dateWorked,
+--	ISNULL(SUBSTRING( wc.name,1,iif(CHARINDEX('-',wc.name)=0, len(wc.name) ,(CHARINDEX('-',wc.name)-1))),'') as 'Code',
+	
+--	hw.hoursST
+--	as 'Hours ST',
+		
+--	ISNULL(wc.billingRate1,0)as 'billingRate1',
+
+--	hw.hoursOT
+--	as 'Hours OT',
+
+--	ISNULL(wc.billingRateOT,0) as 'billingRateOT',
+--	isnull((select sum(amount) from expensesUsed as exu1 
+--		inner join employees as em1 on em1.idEmployee = exu1.idEmployee
+--		inner join expenses as ex1 on ex1.idExpenses= exu1.idExpense 
+--		inner join hoursWorked as hw1 on hw1.idHorsWorked  = exu1.idHorsWorked 
+--		inner join task as tk1 on tk1.idAux = exu1.idAux and tk1.idAux = hw1.idAux
+--		inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO
+--		inner join projectOrder as po1 on po1.idPO = wo1.idPO and wo1.jobNo = po1.jobNo and hw1.jobNo = po1.jobNo 
+--		inner join job as jb1 on jb1.jobNo = po1.jobNo 
+--		inner join clients as cl1 on cl1.idClient = jb1.idClient
+--		where hw1.dateWorked between @startdate and @finaldate and hw1.idHorsWorked = hw.idHorsWorked and tk1.idAux = tk.idAux and wo.idAuxWO = wo.idAuxWO and po1.idPO = po.idPO and jb1.jobNo = jb.jobNo and (ex1.expenseCode like '%per-diem%' or ex1.expenseCode like '%per diem%')),0) as 'PerDiem',
+--	isnull((select sum(amount) from expensesUsed as exu1 
+--		inner join employees as em1 on em1.idEmployee = exu1.idEmployee
+--		inner join expenses as ex1 on ex1.idExpenses= exu1.idExpense 
+--		inner join hoursWorked as hw1 on hw1.idHorsWorked  = exu1.idHorsWorked 
+--		inner join task as tk1 on tk1.idAux = exu1.idAux and tk1.idAux = hw1.idAux
+--		inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO
+--		inner join projectOrder as po1 on po1.idPO = wo1.idPO and wo1.jobNo = po1.jobNo 
+--		inner join job as jb1 on jb1.jobNo = po1.jobNo 
+--		inner join clients as cl1 on cl1.idClient = jb1.idClient
+--		where hw1.dateWorked between @startdate and @finaldate 
+--			and hw1.idHorsWorked = hw.idHorsWorked and tk1.idAux = tk.idAux	and wo.idAuxWO = wo.idAuxWO and po1.idPO = po.idPO and jb1.jobNo = jb.jobNo and (ex1.expenseCode like '%Travel%')),0) as 'Travel'
+--from hoursWorked as hw 
+--left join workCode as wc on wc.idWorkCode = hw.idWorkCode and wc.jobNo = hw.jobNo
+--inner join employees as em on em.idEmployee = hw.idEmployee
+--inner join task as tk on tk.idAux = hw.idAux 
+--inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO
+--inner join projectOrder as po on po.idPO = wo.idPO and wo.jobNo = po.jobNo and hw.jobNo = po.jobNo
+--inner join job as jb on jb.jobNo = po.jobNo 
+--inner join clients as cl on cl.idClient = jb.idClient
+--where hw.dateWorked between @startdate and @finaldate and cl.numberClient = @clientnum and jb.jobNo like iif(@all=1,'%%',CONCAT('',@job,'')) and (hw.hoursST + hw.hoursOT + hw.hours3)= 0 
+
+--)as T1 where (T1.[Hours OT] + T1.[billingRate1] + T1.[PerDiem] + T1.[Travel]) >0 
+-- order by T1.dateWorked asc
+--end
+--GO
+----| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
+----| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
+----V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V
+----###############################################################################################
+----########### CAMBIOS PARA REPORTES EMPLOYEE PER DIEM SHEET #####################################
+----###############################################################################################
+alter proc [dbo].[Sp_Employee_Per_Diem_Sheets]
 @startdate as date, 
 @finaldate as date,
 @clientnum as int,
-@job as bigint,
+@job as bigInt,
 @all as bit
 as
 begin
-select distinct
-T1.[jobNo],
-T1.[idPO],
-T1.[idWO],
-T1.[task],
-T1.[SAPNumber],
-T1.[numberEmploye],
-T1.[DAY],
-T1.[Employee Name],
-T1.[dateWorked],
-T1.[Code],
-SUM(T1.[Hours ST])     OVER (PARTITION BY T1.[jobNo],T1.[idPO],T1.[idWO],T1.[task],T1.[dateWorked],T1.[numberEmploye],T1.[DAY],T1.[Code]) AS 'Hours ST',
-T1.[billingRate1],
-SUM(T1.[Hours OT])     OVER (PARTITION BY T1.[jobNo],T1.[idPO],T1.[idWO],T1.[task],T1.[dateWorked],T1.[numberEmploye],T1.[DAY],T1.[Code]) AS 'Hours OT',
-T1.[billingRateOT],
-SUM(T1.[PerDiem])      OVER (PARTITION BY T1.[jobNo],T1.[idPO],T1.[idWO],T1.[task],T1.[dateWorked],T1.[numberEmploye],T1.[DAY],T1.[Code]) AS 'PerDiem',
-SUM(T1.[Travel])       OVER (PARTITION BY T1.[jobNo],T1.[idPO],T1.[idWO],T1.[task],T1.[dateWorked],T1.[numberEmploye],T1.[DAY],T1.[Code]) AS 'Travel'
-from(
-select jb.jobNo,
-	po.idPO,
-	wo.idWO,
-	tk.task,
-	em.SAPNumber,
-	em.numberEmploye, 
-	datename(dw,hw.dateWorked) as 'DAY',
-	concat(em.lastName,', ', em.firstName,' ' ,em.middleName) as 'Employee Name',
-	hw.dateWorked,
-	ISNULL(SUBSTRING( wc.name,1,iif(CHARINDEX('-',wc.name)=0, len(wc.name) ,(CHARINDEX('-',wc.name)-1))),'') as 'Code',
-	
-	hw.hoursST
-	as 'Hours ST',
-		
-	ISNULL(wc.billingRate1,0)as 'billingRate1',
-
-	hw.hoursOT
-	as 'Hours OT',
-
-	ISNULL(wc.billingRateOT,0) as 'billingRateOT',
-	isnull((select sum(amount) from expensesUsed as exu1 
-		inner join employees as em1 on em1.idEmployee = exu1.idEmployee
-		inner join expenses as ex1 on ex1.idExpenses= exu1.idExpense 
-		inner join hoursWorked as hw1 on hw1.idHorsWorked  = exu1.idHorsWorked 
-		inner join task as tk1 on tk1.idAux = exu1.idAux and tk1.idAux = hw1.idAux
-		inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO
-		inner join projectOrder as po1 on po1.idPO = wo1.idPO and wo1.jobNo = po1.jobNo and hw1.jobNo = po1.jobNo 
-		inner join job as jb1 on jb1.jobNo = po1.jobNo 
-		inner join clients as cl1 on cl1.idClient = jb1.idClient
-		where hw1.dateWorked between @startdate and @finaldate and hw1.idHorsWorked = hw.idHorsWorked and tk1.idAux = tk.idAux and wo.idAuxWO = wo.idAuxWO and po1.idPO = po.idPO and jb1.jobNo = jb.jobNo and (ex1.expenseCode like '%per-diem%' or ex1.expenseCode like '%per diem%')),0) as 'PerDiem',
-	isnull((select sum(amount) from expensesUsed as exu1 
-		inner join employees as em1 on em1.idEmployee = exu1.idEmployee
-		inner join expenses as ex1 on ex1.idExpenses= exu1.idExpense 
-		inner join hoursWorked as hw1 on hw1.idHorsWorked  = exu1.idHorsWorked 
-		inner join task as tk1 on tk1.idAux = exu1.idAux and tk1.idAux = hw1.idAux
-		inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO
-		inner join projectOrder as po1 on po1.idPO = wo1.idPO and wo1.jobNo = po1.jobNo 
-		inner join job as jb1 on jb1.jobNo = po1.jobNo 
-		inner join clients as cl1 on cl1.idClient = jb1.idClient
-		where hw1.dateWorked between @startdate and @finaldate 
-			and hw1.idHorsWorked = hw.idHorsWorked and tk1.idAux = tk.idAux	and wo.idAuxWO = wo.idAuxWO and po1.idPO = po.idPO and jb1.jobNo = jb.jobNo and (ex1.expenseCode like '%Travel%')),0) as 'Travel'
-from hoursWorked as hw 
-left join workCode as wc on wc.idWorkCode = hw.idWorkCode and wc.jobNo = hw.jobNo
-inner join employees as em on em.idEmployee = hw.idEmployee
-inner join task as tk on tk.idAux = hw.idAux 
-inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO
-inner join projectOrder as po on po.idPO = wo.idPO and wo.jobNo = po.jobNo and hw.jobNo = po.jobNo
-inner join job as jb on jb.jobNo = po.jobNo 
-inner join clients as cl on cl.idClient = jb.idClient
-where hw.dateWorked between @startdate and @finaldate and cl.numberClient = @clientnum and jb.jobNo like iif(@all=1,'%%',CONCAT('',@job,'')) and not wc.name like '%6.4%' 
-
-UNION ALL
-
-select jb.jobNo,
-	po.idPO,
-	wo.idWO,
-	tk.task,
-	em.SAPNumber,
-	em.numberEmploye, 
-	datename(dw,hw.dateWorked) as 'DAY',
-	concat(em.lastName,', ', em.firstName,' ' ,em.middleName) as 'Employee Name',
-	hw.dateWorked,
-	ISNULL(SUBSTRING( wc.name,1,iif(CHARINDEX('-',wc.name)=0, len(wc.name) ,(CHARINDEX('-',wc.name)-1))),'') as 'Code',
-	
-	hw.hoursST
-	as 'Hours ST',
-		
-	ISNULL(wc.billingRate1,0)as 'billingRate1',
-
-	hw.hoursOT
-	as 'Hours OT',
-
-	ISNULL(wc.billingRateOT,0) as 'billingRateOT',
-	isnull((select sum(amount) from expensesUsed as exu1 
-		inner join employees as em1 on em1.idEmployee = exu1.idEmployee
-		inner join expenses as ex1 on ex1.idExpenses= exu1.idExpense 
-		inner join hoursWorked as hw1 on hw1.idHorsWorked  = exu1.idHorsWorked 
-		inner join task as tk1 on tk1.idAux = exu1.idAux and tk1.idAux = hw1.idAux
-		inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO
-		inner join projectOrder as po1 on po1.idPO = wo1.idPO and wo1.jobNo = po1.jobNo and hw1.jobNo = po1.jobNo 
-		inner join job as jb1 on jb1.jobNo = po1.jobNo 
-		inner join clients as cl1 on cl1.idClient = jb1.idClient
-		where hw1.dateWorked between @startdate and @finaldate and hw1.idHorsWorked = hw.idHorsWorked and tk1.idAux = tk.idAux and wo.idAuxWO = wo.idAuxWO and po1.idPO = po.idPO and jb1.jobNo = jb.jobNo and (ex1.expenseCode like '%per-diem%' or ex1.expenseCode like '%per diem%')),0) as 'PerDiem',
-	isnull((select sum(amount) from expensesUsed as exu1 
-		inner join employees as em1 on em1.idEmployee = exu1.idEmployee
-		inner join expenses as ex1 on ex1.idExpenses= exu1.idExpense 
-		inner join hoursWorked as hw1 on hw1.idHorsWorked  = exu1.idHorsWorked 
-		inner join task as tk1 on tk1.idAux = exu1.idAux and tk1.idAux = hw1.idAux
-		inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO
-		inner join projectOrder as po1 on po1.idPO = wo1.idPO and wo1.jobNo = po1.jobNo 
-		inner join job as jb1 on jb1.jobNo = po1.jobNo 
-		inner join clients as cl1 on cl1.idClient = jb1.idClient
-		where hw1.dateWorked between @startdate and @finaldate 
-			and hw1.idHorsWorked = hw.idHorsWorked and tk1.idAux = tk.idAux	and wo.idAuxWO = wo.idAuxWO and po1.idPO = po.idPO and jb1.jobNo = jb.jobNo and (ex1.expenseCode like '%Travel%')),0) as 'Travel'
-from hoursWorked as hw 
-left join workCode as wc on wc.idWorkCode = hw.idWorkCode and wc.jobNo = hw.jobNo
-inner join employees as em on em.idEmployee = hw.idEmployee
-inner join task as tk on tk.idAux = hw.idAux 
-inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO
-inner join projectOrder as po on po.idPO = wo.idPO and wo.jobNo = po.jobNo and hw.jobNo = po.jobNo
-inner join job as jb on jb.jobNo = po.jobNo 
-inner join clients as cl on cl.idClient = jb.idClient
-where hw.dateWorked between @startdate and @finaldate and cl.numberClient = @clientnum and jb.jobNo like iif(@all=1,'%%',CONCAT('',@job,'')) and (hw.hoursST + hw.hoursOT + hw.hours3)= 0 
-
-)as T1 where (T1.[Hours OT] + T1.[billingRate1] + T1.[PerDiem] + T1.[Travel]) >0 
- order by T1.dateWorked asc
+	SELECT 
+	DISTINCT
+	T1.[Weekending],T1.[Job Num],T1.[PO],T1.[Project Name],T1.[Project Description],T1.[Company Name],T1.[Employee Name],
+	T1.[Emp: Number],T1.[Class],
+	SUM	(T1.[Amount]) OVER (PARTITION BY T1.[Weekending],T1.[Job Num],T1.[PO],T1.[Emp: Number],T1.[Project Name],T1.[Company Name]) as 'Amount'
+FROM 
+(select CONVERT(date, DATEADD(DAY, IIF(DATEPART(dw, xp.dateExpense) = 1,0,  8-(DATEPART(dw, xp.dateExpense))) ,xp.dateExpense)) as 'Weekending',
+	jb.jobNo 'Job Num', po.idPO as 'PO', concat(wo.idWO,' ',tk.task) as 'Project Name',
+	ex.expenseCode as 'Project Description', cl.companyName as 'Company Name',
+	CONCAT(em.lastName,',',em.firstName,' ',em.middleName) as 'Employee Name',
+	em.numberEmploye as 'Emp: Number',
+	em.typeEmployee as 'Class', 
+	xp.amount as 'Amount'
+from expensesUsed as xp 
+			inner join expenses as ex on xp.idExpense = ex.idExpenses
+			inner join employees as em on em.idEmployee = xp.idEmployee 
+			inner join task as tk on tk.idAux = xp.idAux
+			inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO
+			inner join projectOrder as po on po.idPO = wo.idPO and po.jobNo = wo.jobNo
+			inner join job as jb on jb.jobNo = wo.jobNo 
+			inner join clients as cl on cl.idClient = jb.idClient
+			where xp.dateExpense between @startdate and @finaldate
+				and cl.numberClient = @clientnum and jb.jobNo like iif(@all=1,'%%',CONCAT('',@job,''))
+) AS T1
 end
-GO
