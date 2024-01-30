@@ -466,10 +466,28 @@ AS T1 ORDER BY T1.ClientID,T1.[Month]"
 BEGIN 
 	drop table PBI.[ALLCPH1]
 END
-
+SELECT *,ROUND(SUM((T3.[MaterialCost]+T3.[Cost])/IIF(T3.[Total Hours]=0,1,T3.[Total Hours]))OVER (PARTITION BY T3.[Year],T3.[MonthN],T3.[ClientID])
+,2,1) as 'CostPHMaterial' 
+INTO PBI.ALLCPH1 FROM (
+select distinct
+T2.[Year],
+T2.[Month],
+T2.[MonthN],
+SUM(T2.[ST Hours]) OVER (PARTITION BY T2.[Year],T2.[MonthN],T2.[ClientID]) as 'ST Hours',
+SUM(T2.[OT Hours]) OVER (PARTITION BY T2.[Year],T2.[MonthN],T2.[ClientID]) as 'OT Hours',
+SUM(T2.[TotalHours]) OVER (PARTITION BY T2.[Year],T2.[MonthN],T2.[ClientID]) as 'Total Hours',
+ROUND(SUM(T2.[Cost]) OVER (PARTITION BY T2.[Year],T2.[MonthN],T2.[ClientID]),2,1) as 'Cost' ,
+ROUND(SUM(T2.[Cost]/IIF(T2.[TotalHours]=0,1,T2.[TotalHours])) OVER (PARTITION BY T2.[Year],T2.[MonthN],T2.[ClientID]),2,1) as 'CostPH' ,
+T2.[ClientID],
+ROUND(SUM(T2.[MaterialCost]) OVER (PARTITION BY T2.[Year],T2.[MonthN],T2.[ClientID]),2,1) as 'MaterialCost'
+--INTO PBI.ALLCPH1 
+from (
 select 
-T1.[Year],T1.[Month],T1.[MonthN],T1.[ST Hours],T1.[OT Hours],T1.[TotalHours],T1.[Cost],T1.[Cost]/IIF(T1.[TotalHours]=0,1,T1.[TotalHours]) as 'CostPH',T1.ClientID
-INTO PBI.ALLCPH1
+T1.[Year],T1.[Month],T1.[MonthN],T1.[ST Hours],T1.[OT Hours],T1.[TotalHours],T1.[Cost],
+--T1.[Cost]/IIF(T1.[TotalHours]=0,1,T1.[TotalHours]) as 'CostPH',
+T1.ClientID,
+T1.[MaterialCost]--,Round(((T1.[MaterialCost]+T1.[Cost])/(IIF(T1.[TotalHours]=0,1,T1.[TotalHours]))),2,1) as 'CostPHMat'
+--INTO PBI.ALLCPH1
 from(
 select 
 DISTINCT
@@ -478,8 +496,8 @@ SUM(hw.hoursST) OVER (PARTITION BY YEAR(hw.dateWorked),MONTH(hw.dateWorked),jb.j
 SUM(hw.hoursOT+hw.hours3) OVER (PARTITION BY YEAR(hw.dateWorked),MONTH(hw.dateWorked),jb.jobNo) as 'OT Hours',
 SUM(hw.hoursST + hw.hoursOT + hours3) OVER (PARTITION BY YEAR(hw.dateWorked),MONTH(hw.dateWorked),jb.jobNo) as 'TotalHours',
 ROUND(SUM(((hw.hoursST*wc.billingRate1) + (hw.hoursOT*wc.billingRateOT) + (hours3*wc.billingRate3))) OVER (PARTITION BY YEAR(hw.dateWorked),MONTH(hw.dateWorked),jb.jobNo),2) as 'Cost',
-jb.jobNo as 'ClientID'
-
+jb.jobNo as 'ClientID',
+0 as  'MaterialCost'
 from hoursWorked as hw 
 left join workCode as wc on wc.idWorkCode = hw.idWorkCode and hw.jobNo = wc.jobNo
 inner join task as tk on tk.idAux = hw.idAux 
@@ -487,7 +505,24 @@ inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO
 inner join projectOrder as po on po.idPO = wo.idPO and wo.jobNo = po.jobNo 
 inner join job as jb on jb.jobNo = po.jobNo 
 where hw.dateWorked between @StartDate and @EndDate and wc.name not like '%6.4%' and wc.name not like '%covid%'
-) as T1"
+
+union all 
+
+select distinct YEAR(mtu.dateMaterial) as 'Year',MONTH(mtu.dateMaterial) as 'Month',DATENAME(MONTH,mtu.dateMaterial) as 'MonthN',
+0 as 'ST Hours',
+0 as 'OT Hours',
+0 as 'TotalHours',
+0 as 'Cost',
+jb.jobNo as 'ClientID',
+sum(mtu.amount) OVER (PARTITION BY YEAR(mtu.dateMaterial),MONTH(mtu.dateMaterial),jb.jobNo) as 'MaterialCost'
+ from materialUsed as mtu 
+inner join material as mt on mt.idMaterial = mtu.idMaterial
+inner join task as tk on tk.idAux = mtu.idAux
+inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO
+inner join projectOrder as po on po.idPO = wo.idPO and po.jobNo = wo.jobNo
+inner join job as jb on jb.jobNo = po.jobNo
+where  mtu.dateMaterial between @StartDate and @EndDate 
+) as T1 ) as T2 ) AS T3"
 			Return _All_CHP_1
 		End Get
 		Set(value As String)
