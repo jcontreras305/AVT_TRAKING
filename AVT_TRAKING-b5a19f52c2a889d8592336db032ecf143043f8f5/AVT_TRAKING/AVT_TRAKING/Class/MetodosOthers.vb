@@ -1086,15 +1086,16 @@ end", conn)
         Try
             Dim domain As String() = Trim(ownEmail).Split("@")
             If domain(1) = "outlook.com" Or domain(1) = "brockgroup.com .com" Then
-                Dim app As Outlook.Application
-                If Process.GetProcessesByName("OUTLOOK").Count() > 0 Then 'si es > 0 la apliaccion ya esta abierta de lo contrario incializa una nueva
-                    app = DirectCast(Marshal.GetActiveObject("Outlook.Application"), Outlook.Application)
-                Else 'si no esta la aplicacion abierta o enlazada con el correo pasamos el correo y la contrasenia para abrirlo 
-                    app = New Outlook.Application()
-                    Dim ns As Outlook.NameSpace = app.GetNamespace("MAPI")
-                    ns.Logon(ownEmail, pswrdOwnEmail, Missing.Value, Missing.Value)
-                    ns = Nothing
-                End If
+                'Dim app As Outlook.Application
+                'If Process.GetProcessesByName("OUTLOOK").Count() > 0 Then 'si es > 0 la apliaccion ya esta abierta de lo contrario incializa una nueva
+                'app = DirectCast(Marshal.GetActiveObject("Outlook.Application"), Outlook.Application)
+                'app = DirectCast(Marshal.GetActiveObject("Outlook.Application"), Outlook.Application)
+                'Else 'si no esta la aplicacion abierta o enlazada con el correo pasamos el correo y la contrasenia para abrirlo 
+                Dim app = New Outlook.Application()
+                Dim ns As Outlook.NameSpace = app.GetNamespace("MAPI")
+                ns.Logon(ownEmail, pswrdOwnEmail, Missing.Value, Missing.Value)
+                'ns = Nothing
+                'End If
                 Dim OutlookMessage As Outlook.MailItem
                 Try
                     OutlookMessage = app.CreateItem(Outlook.OlItemType.olMailItem) 'creamos un email nuevo 
@@ -1118,6 +1119,7 @@ end", conn)
                 End Try
             Else
                 Try
+                    mail = New MailMessage
                     mail.To.Clear() ' limpiamos los valores por si es que aun tiene
                     mail.Body = ""
                     mail.Subject = ""
@@ -1136,7 +1138,8 @@ end", conn)
 
                     If domain(1) = "gmail.com" Then ' virificamos cual es el dominio del correo emisor 
                         sender.Host = "smtp." & domain(1) ' asignamos el dominio del cual sera enviado el email
-                        sender.EnableSsl = True 'activamos la seguridad del mensaje 
+                        sender.EnableSsl = True 'activamos la seguridad del mensaje --wwed ynhd xbgy zpac PASWORD DE APLICACION
+                        'sender.Credentials 
                         sender.Port = 587 ' asignamos el puerto de salida
                     ElseIf domain(1) = "outlook.com" Then
                         sender.Host = "smtp-mail." & domain(1)

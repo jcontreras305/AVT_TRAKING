@@ -596,3 +596,29 @@ inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO
 inner join projectOrder as po on po.idPO = wo.idPO and po.jobNo = wo.jobNo
 inner join job as jb on jb.jobNo = po.jobNo
 where kpi.dateWorked between @StartDate and @EndDate and kpi.install like 'Asbestos'
+
+
+insert into trackElemnts values
+(1,'Record ID','Record ID',1,1,''),
+(2,'Force or Reject','Force or Reject',0,'F',1,''),
+(3,'Date','Date',1,'',1,''),
+(4,'Order Type','Order Type',0,'POWO',1,''),
+(5,'Location ID','Location ID',0,'1',1,''),
+(6,'Company Code','Company Code',0,'0',1,''),
+(7,'Agreement','Agreement',0,'0',1,''),
+(8,'Group','Group',0,'',1,''),
+(9,'Type','Type',0,'',1,''),
+(10,'Equip Unique ID','Equip Unique ID',1,'',1,''),
+(11,'Area','Area',1,'',1,''),
+(12,'Level 1 ID','Level 1 ID',1,'',1,''),
+(13,'Level 2 ID','Level 2 ID',1,'',1,''),
+(14,'Level 3 ID','Level 3 ID',1,'',1,''),
+(15,'Level 4 ID','Level 4 ID',0,'',1,''),
+(16,'Base Hrs','Base Hrs',0,'1',1,''),
+(17,'Over Hrs','Over Hrs',1,'',1,''),
+(18,'Idle Hrs','Idle Hrs',0,'0.00',1,''),
+(19,'Other Costs','Other Costs',0,'0',1,''),
+(20,'Other Costs Name','Other Costs Name',0,'',1,''),
+(21,'Extra','Extra',1,'',1,''),
+(22,'GL Account','GL Account',0,'',1,'')
+
