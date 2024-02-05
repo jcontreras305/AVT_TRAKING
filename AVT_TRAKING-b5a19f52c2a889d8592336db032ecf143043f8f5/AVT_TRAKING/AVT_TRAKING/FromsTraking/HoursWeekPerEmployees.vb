@@ -67,6 +67,8 @@ Public Class HoursWeekPerEmployees
         _dtpExpenses.CustomFormat = "MM/dd/yyyy"
         AddHandler _dtpExpenses.ValueChanged, AddressOf _dtpExpenses_ValuesChangue
 
+        'Dim unused = tblHourPeerDay.RowsDefaultCellStyle.Font(Bold)
+
         tblHourPeerDay.Controls.Add(_dtpSemanal)
         _dtpSemanal.Visible = False
         _dtpSemanal.Format = DateTimePickerFormat.Custom

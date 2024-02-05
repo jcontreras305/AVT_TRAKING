@@ -41,6 +41,8 @@ Public Class ReportAllJob
             reportTS.SetParameterValue("@finaldate", validaFechaParaSQl(dtpFinalDate.Value.Date))
             reportTS.SetParameterValue("@clientnum", idclient)
             reportTS.SetParameterValue("@CompanyName", "brock")
+            reportTS.SetParameterValue("@excludeIdpo", If(chbExclude.Checked, 1, 0))
+            reportTS.SetParameterValue("@exclude", If(chbExclude.Checked, txtPOExclude.Text, "0"))
             crvAllJobs.ReportSource = reportTS
         Else
             MsgBox("Please select a Client.")
@@ -49,5 +51,14 @@ Public Class ReportAllJob
 
     Private Sub ReportAllJob_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         llenarComboClientsReports(cmbClients)
+        txtPOExclude.Enabled = False
+    End Sub
+
+    Private Sub chbExclude_CheckedChanged(sender As Object, e As EventArgs) Handles chbExclude.CheckedChanged
+        If chbExclude.Checked Then
+            txtPOExclude.Enabled = True
+        Else
+            txtPOExclude.Enabled = False
+        End If
     End Sub
 End Class

@@ -1085,7 +1085,7 @@ end", conn)
     Public Function sendEmail(ByVal ownEmail As String, ByVal pswrdOwnEmail As String, ByVal subject As String, ByVal body As String, ByVal emails As List(Of String), ByVal route As String) As Boolean
         Try
             Dim domain As String() = Trim(ownEmail).Split("@")
-            If domain(1) = "outlook.com" Or domain(1) = "brockgroup.com .com" Then
+            If domain(1) = "outlook.com" Or domain(1) = "brockgroup.com" Then
                 'Dim app As Outlook.Application
                 'If Process.GetProcessesByName("OUTLOOK").Count() > 0 Then 'si es > 0 la apliaccion ya esta abierta de lo contrario incializa una nueva
                 'app = DirectCast(Marshal.GetActiveObject("Outlook.Application"), Outlook.Application)
@@ -1099,9 +1099,10 @@ end", conn)
                 Dim OutlookMessage As Outlook.MailItem
                 Try
                     OutlookMessage = app.CreateItem(Outlook.OlItemType.olMailItem) 'creamos un email nuevo 
-                    Dim Recipents As Outlook.Recipients = OutlookMessage.Recipients 'creamos la lista de correos a enviar 
+                    'Dim Recipents As Outlook.Recipients = OutlookMessage.Recipients 'creamos la lista de correos a enviar 
                     For Each email As String In emails
-                        Recipents.Add(Trim(email)) ' los agregamos
+                        'Recipents.Add(Trim(email)) ' los agregamos
+                        OutlookMessage.Recipients.Add(Trim(email))
                     Next
                     OutlookMessage.Attachments.Add(route) ' adjuntamos el archivo
                     OutlookMessage.Subject = subject ' pegamos el asunto del email
@@ -1123,7 +1124,7 @@ end", conn)
                     mail.To.Clear() ' limpiamos los valores por si es que aun tiene
                     mail.Body = ""
                     mail.Subject = ""
-                    mail.Body = body ' asignamos el asunto del email
+                    mail.Body = body ' asignamos el asunto del email 
                     mail.Subject = subject ' asignamos el cuerpo del email
                     mail.IsBodyHtml = True ' le asignamos un formato para ser leido en el navegador
                     For Each email As String In emails 'insertamos los correos que seran los remitentes

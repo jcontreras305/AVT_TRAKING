@@ -301,7 +301,9 @@ GO
 CREATE proc [dbo].[Sp_All_Jobs]
 @startdate as date, 
 @finaldate as date,
-@clientnum as int
+@clientnum as int,
+@excludeIdpo as bit,
+@exclude as varchar(30)
 as
 begin
 select distinct
@@ -352,7 +354,7 @@ select
 		inner join projectOrder as po1 on po1.idPO = wo1.idPO and wo1.jobNo = po1.jobNo 
 		inner join job as jb1 on jb1.jobNo = po1.jobNo 
 		inner join clients as cl1 on cl1.idClient = jb1.idClient
-		where hw1.dateWorked between @startdate and @finaldate and hw1.idHorsWorked = hw.idHorsWorked and tk1.idAux = tk.idAux and wo.idAuxWO = wo.idAuxWO and po1.idPO = po.idPO and jb1.jobNo = jb.jobNo and (ex1.expenseCode like '%per-diem%' or ex1.expenseCode like '%per diem%')),0) as 'PerDiem' ,
+		where hw1.dateWorked between @startdate and @finaldate and hw1.idHorsWorked = hw.idHorsWorked and tk1.idAux = tk.idAux and wo.idAuxWO = wo.idAuxWO and po1.idPO = po.idPO and jb1.jobNo = jb.jobNo and (ex1.expenseCode like '%per-diem%' or ex1.expenseCode like '%per diem%')and po.idPO not like iif(@excludeIdpo = 1 ,concat( '%',@exclude ,'%'),'')),0) as 'PerDiem' ,
 	isnull((select sum(amount) from expensesUsed as exu1 
 		inner join employees as em1 on em1.idEmployee = exu1.idEmployee
 		inner join expenses as ex1 on ex1.idExpenses= exu1.idExpense 
@@ -362,7 +364,7 @@ select
 		inner join projectOrder as po1 on po1.idPO = wo1.idPO and wo1.jobNo = po1.jobNo 
 		inner join job as jb1 on jb1.jobNo = po1.jobNo 
 		inner join clients as cl1 on cl1.idClient = jb1.idClient
-		where hw1.dateWorked between @startdate and @finaldate and hw1.idHorsWorked = hw.idHorsWorked and tk1.idAux = tk.idAux and wo.idAuxWO = wo.idAuxWO and po1.idPO = po.idPO and jb1.jobNo = jb.jobNo and (ex1.expenseCode like '%Travel%')),0) as 'Travel'
+		where hw1.dateWorked between @startdate and @finaldate and hw1.idHorsWorked = hw.idHorsWorked and tk1.idAux = tk.idAux and wo.idAuxWO = wo.idAuxWO and po1.idPO = po.idPO and jb1.jobNo = jb.jobNo and (ex1.expenseCode like '%Travel%') and po.idPO not like iif(@excludeIdpo = 1 ,concat( '%',@exclude ,'%'),'')),0) as 'Travel'
 	
 	from hoursWorked as hw 
 		left join workCode as wc on wc.idWorkCode = hw.idWorkCode and wc.jobNo = hw.jobNo
@@ -405,7 +407,7 @@ select
 		inner join projectOrder as po1 on po1.idPO = wo1.idPO and wo1.jobNo = po1.jobNo 
 		inner join job as jb1 on jb1.jobNo = po1.jobNo 
 		inner join clients as cl1 on cl1.idClient = jb1.idClient
-		where hw1.dateWorked between @startdate and @finaldate and hw1.idHorsWorked = hw.idHorsWorked and tk1.idAux = tk.idAux and wo.idAuxWO = wo.idAuxWO and po1.idPO = po.idPO and jb1.jobNo = jb.jobNo and (ex1.expenseCode like '%per-diem%' or ex1.expenseCode like '%per diem%')),0) as 'PerDiem' ,
+		where hw1.dateWorked between @startdate and @finaldate and hw1.idHorsWorked = hw.idHorsWorked and tk1.idAux = tk.idAux and wo.idAuxWO = wo.idAuxWO and po1.idPO = po.idPO and jb1.jobNo = jb.jobNo and (ex1.expenseCode like '%per-diem%' or ex1.expenseCode like '%per diem%') and po.idPO not like iif(@excludeIdpo = 1 ,concat( '%',@exclude ,'%'),'')),0)  as 'PerDiem' ,
 	isnull((select sum(amount) from expensesUsed as exu1 
 		inner join employees as em1 on em1.idEmployee = exu1.idEmployee
 		inner join expenses as ex1 on ex1.idExpenses= exu1.idExpense 
@@ -415,7 +417,7 @@ select
 		inner join projectOrder as po1 on po1.idPO = wo1.idPO and wo1.jobNo = po1.jobNo 
 		inner join job as jb1 on jb1.jobNo = po1.jobNo 
 		inner join clients as cl1 on cl1.idClient = jb1.idClient
-		where hw1.dateWorked between @startdate and @finaldate and hw1.idHorsWorked = hw.idHorsWorked and tk1.idAux = tk.idAux and wo.idAuxWO = wo.idAuxWO and po1.idPO = po.idPO and jb1.jobNo = jb.jobNo and (ex1.expenseCode like '%Travel%')),0) as 'Travel'
+		where hw1.dateWorked between @startdate and @finaldate and hw1.idHorsWorked = hw.idHorsWorked and tk1.idAux = tk.idAux and wo.idAuxWO = wo.idAuxWO and po1.idPO = po.idPO and jb1.jobNo = jb.jobNo and (ex1.expenseCode like '%Travel%')and po.idPO not like iif(@excludeIdpo = 1 ,concat( '%',@exclude ,'%'),'')),0) as 'Travel'
 	from hoursWorked as hw 
 	left join workCode as wc on wc.idWorkCode = hw.idWorkCode and wc.jobNo = hw.jobNo
 	inner join employees as em on em.idEmployee = hw.idEmployee
