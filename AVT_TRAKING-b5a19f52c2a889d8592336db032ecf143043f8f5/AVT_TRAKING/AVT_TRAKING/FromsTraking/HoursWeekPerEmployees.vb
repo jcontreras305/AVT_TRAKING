@@ -1237,12 +1237,18 @@ Public Class HoursWeekPerEmployees
         Me.WindowState = FormWindowState.Maximized
         btnMaximize.Visible = False
         btnRestore.Visible = True
+        tblHourPeerDay.AutoSizeColumnsMode = DataGridViewAutoSizeColumnMode.Fill
+        tblHourPeerDay.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.None
+        TableLayoutPanel1.RowStyles(1).Height = 70
     End Sub
 
     Private Sub btnRestore_Click(sender As Object, e As EventArgs) Handles btnRestore.Click
         WindowState = FormWindowState.Normal
         btnRestore.Visible = False
         btnMaximize.Visible = True
+        tblHourPeerDay.AutoSizeColumnsMode = DataGridViewAutoSizeColumnMode.AllCells
+        tblHourPeerDay.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells
+        TableLayoutPanel1.RowStyles(1).Height = 85
     End Sub
 
     Private Sub Button6_Click(sender As Object, e As EventArgs) Handles Button6.Click
