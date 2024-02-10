@@ -3,7 +3,7 @@ Public Class scaffold
     Inherits ConnectioDB
 
     'scaffoldTraking
-    Private _tag, _location, _purpose, _comments, _contact, _foreman, _erector, _task, _wo, _job, _descriptionWO, _jobcat, _category, _areaID, _area, _idsubJob, _subjob As String
+    Private _tag, _location, _purpose, _comments, _contact, _foreman, _erector, _task, _wo, _job, _descriptionWO, _jobcat, _category, _areaID, _area, _idsubJob, _subjob, _idClient As String
     Private _dateBild, _dateRecComp As Date
     Private _status As Boolean
     Private _latitude, _longitude As Double
@@ -220,6 +220,17 @@ Public Class scaffold
         End Get
         Set(ByVal areaID As String)
             _areaID = areaID
+        End Set
+    End Property
+    Public Property IDClient() As String
+        Get
+            If _idClient Is Nothing Then
+                _idClient = ""
+            End If
+            Return _idClient
+        End Get
+        Set(ByVal idClient As String)
+            _idClient = idClient
         End Set
     End Property
     Public Property jobcat() As String

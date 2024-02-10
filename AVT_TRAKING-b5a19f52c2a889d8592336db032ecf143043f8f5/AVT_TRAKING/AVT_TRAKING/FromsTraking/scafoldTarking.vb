@@ -2493,26 +2493,26 @@ Public Class scafoldTarking
     Private Sub btnBackTag_Click(sender As Object, e As EventArgs) Handles btnBackTag.Click
         Try
             If tblProductScaffoldAux.Rows IsNot Nothing Then
-                If DialogResult.Yes = MessageBox.Show("If you made any changes it will not be saved, are you sure to continue?", "Important", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) Then
-                    mtdScaffold.llenarScaffold(tblScaffoldTags, If(lblCompanyName.Text = "Client: All", "", IdCliente))
-                    Dim count = 1
-                    For Each row As Data.DataRow In tblScaffoldTags.Rows()
-                        If sc.tag = row("tag") Then
-                            Exit For
-                        Else
-                            count += 1
-                        End If
-                    Next
-                    If count = 1 Then
-                        count = tblScaffoldTags.Rows.Count() - 1
-                        cargarDatosScaffold(tblScaffoldTags.Rows(count).ItemArray(0))
+                'If DialogResult.Yes = MessageBox.Show("If you made any changes it will not be saved, are you sure to continue?", "Important", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) Then
+                mtdScaffold.llenarScaffold(tblScaffoldTags, If(lblCompanyName.Text = "Client: All", "", IdCliente))
+                Dim count = 1
+                For Each row As Data.DataRow In tblScaffoldTags.Rows()
+                    If sc.tag = row("tag") Then
+                        Exit For
                     Else
-                        If sc.tag = "" Then
-                            count -= 1
-                        End If
-                        cargarDatosScaffold(tblScaffoldTags.Rows(count - 2).ItemArray(0))
+                        count += 1
                     End If
+                Next
+                If count = 1 Then
+                    count = tblScaffoldTags.Rows.Count() - 1
+                    cargarDatosScaffold(tblScaffoldTags.Rows(count).ItemArray(0))
+                Else
+                    If sc.tag = "" Then
+                        count -= 1
+                    End If
+                    cargarDatosScaffold(tblScaffoldTags.Rows(count - 2).ItemArray(0))
                 End If
+                'End If
             End If
             selectedTable = "tag"
         Catch ex As Exception
@@ -2537,35 +2537,35 @@ Public Class scafoldTarking
     Private Sub btnNextTag_Click(sender As Object, e As EventArgs) Handles btnNextTag.Click
         Try
             If tblProductScaffoldAux.Rows IsNot Nothing Then
-                If DialogResult.Yes = MessageBox.Show("If you made any changes it will not be saved, are you sure to continue?", "Important", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) Then
-                    mtdScaffold.llenarScaffold(tblScaffoldTags, If(lblCompanyName.Text = "Client: All", "", IdCliente))
-                    Dim count = 0
-                    For Each row As Data.DataRow In tblScaffoldTags.Rows()
-                        If sc.tag = row("tag") Then
-                            Exit For
-                        Else
-                            count += 1
-                        End If
-                    Next
-                    If count = tblScaffoldTags.Rows.Count() Then
-                        count = 0
-                        cargarDatosScaffold(tblScaffoldTags.Rows(count).ItemArray(0))
+                'If DialogResult.Yes = MessageBox.Show("If you made any changes it will not be saved, are you sure to continue?", "Important", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) Then
+                mtdScaffold.llenarScaffold(tblScaffoldTags, If(lblCompanyName.Text = "Client: All", "", IdCliente))
+                Dim count = 0
+                For Each row As Data.DataRow In tblScaffoldTags.Rows()
+                    If sc.tag = row("tag") Then
+                        Exit For
                     Else
-                        If sc.tag = "" Then
-                            count -= 1
-                        ElseIf (count + 1) = tblScaffoldTags.Rows.Count() Then
-                            cargarDatosScaffold(tblScaffoldTags.Rows(0).ItemArray(0))
-                        Else
-                            cargarDatosScaffold(tblScaffoldTags.Rows(count + 1).ItemArray(0))
-                        End If
-                        'If tblScaffoldTags.Rows.Count < count Then
-                        '    cargarDatosScaffold(tblScaffoldTags.Rows(count).ItemArray(0))
-                        'Else
-                        '    cargarDatosScaffold(tblScaffoldTags.Rows(count - 1).ItemArray(0))
-                        'End If
-
+                        count += 1
                     End If
+                Next
+                If count = tblScaffoldTags.Rows.Count() Then
+                    count = 0
+                    cargarDatosScaffold(tblScaffoldTags.Rows(count).ItemArray(0))
+                Else
+                    If sc.tag = "" Then
+                        count -= 1
+                    ElseIf (count + 1) = tblScaffoldTags.Rows.Count() Then
+                        cargarDatosScaffold(tblScaffoldTags.Rows(0).ItemArray(0))
+                    Else
+                        cargarDatosScaffold(tblScaffoldTags.Rows(count + 1).ItemArray(0))
+                    End If
+                    'If tblScaffoldTags.Rows.Count < count Then
+                    '    cargarDatosScaffold(tblScaffoldTags.Rows(count).ItemArray(0))
+                    'Else
+                    '    cargarDatosScaffold(tblScaffoldTags.Rows(count - 1).ItemArray(0))
+                    'End If
+
                 End If
+                'End If
             End If
             selectedTable = "tag"
         Catch ex As Exception

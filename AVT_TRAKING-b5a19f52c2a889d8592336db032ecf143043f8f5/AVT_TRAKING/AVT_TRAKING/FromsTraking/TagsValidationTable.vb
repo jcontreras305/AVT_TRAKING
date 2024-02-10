@@ -595,13 +595,14 @@ Public Class TagsValidationTable
                             sc.wo = rowtask.ItemArray(3)
                             sc.task = rowtask.ItemArray(2)
                             sc.job = rowtask.ItemArray(4)
+                            sc.IDClient = rowtask.ItemArray(6)
                             Exit For
                         End If
                     Next
                     sc.idsubJob = row.Cells("SubJob").Value
                     sc.dateBild = validarFechaParaVB(row.Cells("DateBuild").Value)
-                    sc.location = row.Cells("Location").Value
-                    sc.purpose = row.Cells("Porpuse").Value
+                    sc.location = row.Cells("Location").Value.ToString.Replace("'", "''")
+                    sc.purpose = row.Cells("Porpuse").Value.ToString.Replace("'", "''")
                     sc.sciType = row.Cells("Type").Value
                     sc.sciWidth = If(row.Cells("Width").Value = "", 0, CDbl(row.Cells("Width").Value))
                     sc.sciLength = If(row.Cells("Length").Value = "", 0, CDbl(row.Cells("Length").Value))
@@ -633,7 +634,7 @@ Public Class TagsValidationTable
                     sc.ahrStdBy = CDbl(row.Cells("stdBy").Value)
                     sc.ahrOther = CDbl(row.Cells("Other").Value)
                     sc.ahrTotal = CDbl(sc.ahrBuild + sc.ahrMaterial + sc.ahrTravel + sc.ahrWeather + sc.ahrAlarm + sc.ahrSafety + sc.ahrStdBy + sc.ahrOther)
-                    sc.comments = row.Cells("Comment").Value
+                    sc.comments = row.Cells("Comment").Value.ToString.Replace("'", "''")
                     sc.latitude = CDbl(row.Cells("Latitude").Value)
                     sc.longitude = CDbl(row.Cells("Longitude").Value)
                     For Each rowp As DataGridViewRow In tblProductSheet.Rows()

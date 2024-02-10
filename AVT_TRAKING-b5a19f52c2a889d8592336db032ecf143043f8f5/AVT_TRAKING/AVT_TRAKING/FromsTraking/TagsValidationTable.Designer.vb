@@ -112,7 +112,7 @@ Partial Class TagsValidationTable
         Me.Panel1.Controls.Add(Me.TableLayoutPanel1)
         Me.Panel1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel1.Location = New System.Drawing.Point(0, 0)
-        Me.Panel1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.Panel1.Margin = New System.Windows.Forms.Padding(4)
         Me.Panel1.Name = "Panel1"
         Me.Panel1.Size = New System.Drawing.Size(1067, 578)
         Me.Panel1.TabIndex = 0
@@ -127,7 +127,7 @@ Partial Class TagsValidationTable
         Me.TableLayoutPanel1.Controls.Add(Me.TabControl1, 0, 1)
         Me.TableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.TableLayoutPanel1.Location = New System.Drawing.Point(0, 0)
-        Me.TableLayoutPanel1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.TableLayoutPanel1.Margin = New System.Windows.Forms.Padding(4)
         Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
         Me.TableLayoutPanel1.RowCount = 3
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 111.0!))
@@ -143,7 +143,7 @@ Partial Class TagsValidationTable
         Me.Panel3.Controls.Add(Me.lblMessage)
         Me.Panel3.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel3.Location = New System.Drawing.Point(4, 551)
-        Me.Panel3.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.Panel3.Margin = New System.Windows.Forms.Padding(4)
         Me.Panel3.Name = "Panel3"
         Me.Panel3.Size = New System.Drawing.Size(1059, 23)
         Me.Panel3.TabIndex = 3
@@ -152,7 +152,7 @@ Partial Class TagsValidationTable
         '
         Me.pgbComplete.Dock = System.Windows.Forms.DockStyle.Right
         Me.pgbComplete.Location = New System.Drawing.Point(678, 0)
-        Me.pgbComplete.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.pgbComplete.Margin = New System.Windows.Forms.Padding(4)
         Me.pgbComplete.Name = "pgbComplete"
         Me.pgbComplete.Size = New System.Drawing.Size(381, 23)
         Me.pgbComplete.TabIndex = 3
@@ -184,7 +184,7 @@ Partial Class TagsValidationTable
         Me.TitleBar.Controls.Add(Me.btnSubirExcel)
         Me.TitleBar.Dock = System.Windows.Forms.DockStyle.Fill
         Me.TitleBar.Location = New System.Drawing.Point(4, 4)
-        Me.TitleBar.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.TitleBar.Margin = New System.Windows.Forms.Padding(4)
         Me.TitleBar.Name = "TitleBar"
         Me.TitleBar.Size = New System.Drawing.Size(1059, 103)
         Me.TitleBar.TabIndex = 1
@@ -194,7 +194,7 @@ Partial Class TagsValidationTable
         Me.PictureBox4.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.PictureBox4.Image = Global.AVT_TRAKING.My.Resources.Resources._exit
         Me.PictureBox4.Location = New System.Drawing.Point(1005, 55)
-        Me.PictureBox4.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.PictureBox4.Margin = New System.Windows.Forms.Padding(4)
         Me.PictureBox4.Name = "PictureBox4"
         Me.PictureBox4.Size = New System.Drawing.Size(49, 44)
         Me.PictureBox4.TabIndex = 8
@@ -205,7 +205,7 @@ Partial Class TagsValidationTable
         Me.PictureBox3.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.PictureBox3.Image = Global.AVT_TRAKING.My.Resources.Resources.minimize2
         Me.PictureBox3.Location = New System.Drawing.Point(975, 4)
-        Me.PictureBox3.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.PictureBox3.Margin = New System.Windows.Forms.Padding(4)
         Me.PictureBox3.Name = "PictureBox3"
         Me.PictureBox3.Size = New System.Drawing.Size(35, 31)
         Me.PictureBox3.TabIndex = 7
@@ -216,7 +216,7 @@ Partial Class TagsValidationTable
         Me.btnRestore.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnRestore.Image = Global.AVT_TRAKING.My.Resources.Resources.restore2
         Me.btnRestore.Location = New System.Drawing.Point(1012, 4)
-        Me.btnRestore.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btnRestore.Margin = New System.Windows.Forms.Padding(4)
         Me.btnRestore.Name = "btnRestore"
         Me.btnRestore.Size = New System.Drawing.Size(35, 31)
         Me.btnRestore.TabIndex = 6
@@ -227,7 +227,7 @@ Partial Class TagsValidationTable
         Me.btnMaximize.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnMaximize.Image = Global.AVT_TRAKING.My.Resources.Resources.maximize2
         Me.btnMaximize.Location = New System.Drawing.Point(1013, 4)
-        Me.btnMaximize.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btnMaximize.Margin = New System.Windows.Forms.Padding(4)
         Me.btnMaximize.Name = "btnMaximize"
         Me.btnMaximize.Size = New System.Drawing.Size(41, 31)
         Me.btnMaximize.TabIndex = 5
@@ -248,7 +248,7 @@ Partial Class TagsValidationTable
         'txtFecha
         '
         Me.txtFecha.Location = New System.Drawing.Point(245, 62)
-        Me.txtFecha.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.txtFecha.Margin = New System.Windows.Forms.Padding(4)
         Me.txtFecha.Name = "txtFecha"
         Me.txtFecha.Size = New System.Drawing.Size(221, 22)
         Me.txtFecha.TabIndex = 4
@@ -259,7 +259,7 @@ Partial Class TagsValidationTable
         Me.cmbDatos.FormattingEnabled = True
         Me.cmbDatos.IntegralHeight = False
         Me.cmbDatos.Location = New System.Drawing.Point(8, 62)
-        Me.cmbDatos.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.cmbDatos.Margin = New System.Windows.Forms.Padding(4)
         Me.cmbDatos.Name = "cmbDatos"
         Me.cmbDatos.Size = New System.Drawing.Size(221, 24)
         Me.cmbDatos.TabIndex = 3
@@ -275,7 +275,7 @@ Partial Class TagsValidationTable
         Me.btnSave.Image = Global.AVT_TRAKING.My.Resources.Resources.save1
         Me.btnSave.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.btnSave.Location = New System.Drawing.Point(801, 62)
-        Me.btnSave.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btnSave.Margin = New System.Windows.Forms.Padding(4)
         Me.btnSave.Name = "btnSave"
         Me.btnSave.Size = New System.Drawing.Size(93, 38)
         Me.btnSave.TabIndex = 2
@@ -294,7 +294,7 @@ Partial Class TagsValidationTable
         Me.btnSubirExcel.Image = Global.AVT_TRAKING.My.Resources.Resources.upload2
         Me.btnSubirExcel.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.btnSubirExcel.Location = New System.Drawing.Point(601, 62)
-        Me.btnSubirExcel.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btnSubirExcel.Margin = New System.Windows.Forms.Padding(4)
         Me.btnSubirExcel.Name = "btnSubirExcel"
         Me.btnSubirExcel.Size = New System.Drawing.Size(177, 38)
         Me.btnSubirExcel.TabIndex = 1
@@ -309,7 +309,7 @@ Partial Class TagsValidationTable
         Me.TabControl1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.TabControl1.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TabControl1.Location = New System.Drawing.Point(4, 115)
-        Me.TabControl1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.TabControl1.Margin = New System.Windows.Forms.Padding(4)
         Me.TabControl1.Name = "TabControl1"
         Me.TabControl1.SelectedIndex = 0
         Me.TabControl1.Size = New System.Drawing.Size(1059, 428)
@@ -319,9 +319,9 @@ Partial Class TagsValidationTable
         '
         Me.tbpTags.Controls.Add(Me.tblTagsScaffold)
         Me.tbpTags.Location = New System.Drawing.Point(4, 26)
-        Me.tbpTags.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.tbpTags.Margin = New System.Windows.Forms.Padding(4)
         Me.tbpTags.Name = "tbpTags"
-        Me.tbpTags.Padding = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.tbpTags.Padding = New System.Windows.Forms.Padding(4)
         Me.tbpTags.Size = New System.Drawing.Size(1051, 398)
         Me.tbpTags.TabIndex = 0
         Me.tbpTags.Text = "Tags"
@@ -335,7 +335,7 @@ Partial Class TagsValidationTable
         Me.tblTagsScaffold.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.clmError, Me.TagNum, Me.jobCat, Me.AreaID, Me.WorkNum, Me.JobNum, Me.SubJob, Me.DateBuild, Me.Location, Me.Porpuse, Me.Type, Me.Width, Me.Length, Me.Heigth, Me.Decks, Me.KO, Me.Base, Me.CSAP, Me.Rolling, Me.Internal, Me.Hanging, Me.Truck, Me.Forklift, Me.Trailer, Me.Crane, Me.Rope, Me.Passed, Me.Elevator, Me.ReqComp, Me.RequestBy, Me.Foreman, Me.Erector, Me.Build, Me.Material, Me.Travel, Me.Weather, Me.Alarm, Me.Safety, Me.stdBy, Me.Other, Me.TotalHours, Me.Comment, Me.Latitude, Me.Longitude})
         Me.tblTagsScaffold.Dock = System.Windows.Forms.DockStyle.Fill
         Me.tblTagsScaffold.Location = New System.Drawing.Point(4, 4)
-        Me.tblTagsScaffold.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.tblTagsScaffold.Margin = New System.Windows.Forms.Padding(4)
         Me.tblTagsScaffold.Name = "tblTagsScaffold"
         DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
         DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.ActiveBorder
@@ -679,10 +679,10 @@ Partial Class TagsValidationTable
         '
         Me.tbpProducts.Controls.Add(Me.tblProductSheet)
         Me.tbpProducts.Location = New System.Drawing.Point(4, 26)
-        Me.tbpProducts.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.tbpProducts.Margin = New System.Windows.Forms.Padding(4)
         Me.tbpProducts.Name = "tbpProducts"
-        Me.tbpProducts.Padding = New System.Windows.Forms.Padding(4, 4, 4, 4)
-        Me.tbpProducts.Size = New System.Drawing.Size(1051, 400)
+        Me.tbpProducts.Padding = New System.Windows.Forms.Padding(4)
+        Me.tbpProducts.Size = New System.Drawing.Size(1051, 398)
         Me.tbpProducts.TabIndex = 1
         Me.tbpProducts.Text = "List Product"
         Me.tbpProducts.UseVisualStyleBackColor = True
@@ -694,7 +694,7 @@ Partial Class TagsValidationTable
         Me.tblProductSheet.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.clmErrorP, Me.clmTagID, Me.clmProductID, Me.clmQuantity})
         Me.tblProductSheet.Dock = System.Windows.Forms.DockStyle.Fill
         Me.tblProductSheet.Location = New System.Drawing.Point(4, 4)
-        Me.tblProductSheet.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.tblProductSheet.Margin = New System.Windows.Forms.Padding(4)
         Me.tblProductSheet.Name = "tblProductSheet"
         DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
         DataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control
@@ -705,7 +705,7 @@ Partial Class TagsValidationTable
         DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
         Me.tblProductSheet.RowHeadersDefaultCellStyle = DataGridViewCellStyle2
         Me.tblProductSheet.RowHeadersWidth = 51
-        Me.tblProductSheet.Size = New System.Drawing.Size(1043, 392)
+        Me.tblProductSheet.Size = New System.Drawing.Size(1043, 390)
         Me.tblProductSheet.TabIndex = 0
         '
         'clmErrorP
@@ -746,7 +746,7 @@ Partial Class TagsValidationTable
         Me.ClientSize = New System.Drawing.Size(1067, 578)
         Me.Controls.Add(Me.Panel1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
-        Me.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.Margin = New System.Windows.Forms.Padding(4)
         Me.Name = "TagsValidationTable"
         Me.Text = "TagsValidationTable"
         Me.Panel1.ResumeLayout(False)
