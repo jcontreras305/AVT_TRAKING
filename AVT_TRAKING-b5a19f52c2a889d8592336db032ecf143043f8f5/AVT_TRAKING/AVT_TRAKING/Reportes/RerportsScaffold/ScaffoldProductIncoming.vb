@@ -91,14 +91,16 @@ Public Class ScaffoldProductIncoming
                     If cmbTickets.SelectedIndex > -1 Or chbAll.Checked Then
                         If Incoming Then
                             Dim reportTs As New ScfProductComing
-                            reportTs.SetParameterValue("@jobNo", CInt(cmbJobNo.Items(cmbJobNo.SelectedIndex)))
+                            Dim jb As Long = cmbJobNo.Items(cmbJobNo.SelectedIndex)
+                            reportTs.SetParameterValue("@jobNo", jb)
                             reportTs.SetParameterValue("@ticket", If(chbAll.Checked, "", cmbTickets.Items(cmbTickets.SelectedIndex).ToString()))
                             reportTs.SetParameterValue("@all", If(chbAll.Checked, 1, 0))
                             reportTs.SetParameterValue("@CompanyName", "Brock")
                             crvReport.ReportSource = reportTs
                         Else
                             Dim reportTs As New ScfProductOutgoing
-                            reportTs.SetParameterValue("@jobNo", CInt(cmbJobNo.Items(cmbJobNo.SelectedIndex)))
+                            Dim jb As Long = cmbJobNo.Items(cmbJobNo.SelectedIndex)
+                            reportTs.SetParameterValue("@jobNo", jb)
                             reportTs.SetParameterValue("@ticket", If(chbAll.Checked, "", cmbTickets.Items(cmbTickets.SelectedIndex).ToString()))
                             reportTs.SetParameterValue("@all", If(chbAll.Checked, 1, 0))
                             reportTs.SetParameterValue("@CompanyName", "Brock")

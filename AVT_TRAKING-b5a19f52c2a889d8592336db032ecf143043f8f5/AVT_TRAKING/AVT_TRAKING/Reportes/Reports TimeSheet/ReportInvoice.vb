@@ -11,7 +11,7 @@ Public Class ReportInvoice
         loadInfo = False
         If cmbClient.Text <> "" Then
             Dim array() As String = cmbClient.Text.ToString.Split(" ")
-            llenarComoboPOByClient(cmbPO, array(0))
+            llenarComboPOByClient(cmbPO, array(0))
             cmbPO.Enabled = True
         Else
             cmbPO.Enabled = False
@@ -19,7 +19,7 @@ Public Class ReportInvoice
         End If
         If cmbClientFilter.Text <> "" Then
             Dim array() As String = cmbClientFilter.Text.ToString.Split(" ")
-            llenarComoboPOByClient(cmbPOFilter, array(0))
+            llenarComboPOByClient(cmbPOFilter, array(0))
             cmbPOFilter.Enabled = True
         Else
             cmbPOFilter.Enabled = False
@@ -56,7 +56,7 @@ Public Class ReportInvoice
     Private Sub cmbClient_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbClient.SelectedIndexChanged
         Try
             Dim array() As String = If(cmbClient.SelectedItem IsNot Nothing, cmbClient.SelectedItem.ToString().Split(" "), "")
-            llenarComoboPOByClient(cmbPO, array(0))
+            llenarComboPOByClient(cmbPO, array(0))
             cmbPO.Enabled = True
             chbAllPO.Checked = False
         Catch ex As Exception
@@ -65,7 +65,7 @@ Public Class ReportInvoice
     Private Sub cmbClientFilter_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbClientFilter.SelectedIndexChanged
         Try
             Dim array() As String = If(cmbClientFilter.SelectedItem IsNot Nothing, cmbClientFilter.SelectedItem.ToString().Split(" "), "")
-            llenarComoboPOByClient(cmbPOFilter, array(0))
+            llenarComboPOByClient(cmbPOFilter, array(0))
             cmbPOFilter.Enabled = True
             chbAllPOFilter.Checked = False
         Catch ex As Exception
@@ -163,7 +163,7 @@ Public Class ReportInvoice
     Private Sub btnSaveInvoiceNumbers_Click(sender As Object, e As EventArgs) Handles btnSaveInvoiceNumbers.Click
         If tblInvoiceCodes.Rows.Count > 0 Then
             If cmbClient.SelectedItem IsNot Nothing Then
-                If DialogResult.OK = MessageBox.Show("Are you sure to Save the list of Invoice?", "Message", MessageBoxButtons.YesNo, MessageBoxIcon.Information) Then
+                If DialogResult.Yes = MessageBox.Show("Are you sure to Save the list of Invoice?", "Message", MessageBoxButtons.YesNo, MessageBoxIcon.Information) Then
                     Dim array() As String = cmbClient.SelectedItem.ToString.Split(" ")
                     If mtdInvoice.guardarInvoicePO(tblInvoiceCodes, dtpStartDate.Value, dtpEndDate.Value, array(0)) Then
                         MsgBox("Successful")

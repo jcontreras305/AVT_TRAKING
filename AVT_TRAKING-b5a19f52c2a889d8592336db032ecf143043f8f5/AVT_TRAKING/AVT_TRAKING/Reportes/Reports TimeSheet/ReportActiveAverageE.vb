@@ -38,9 +38,35 @@ Public Class ReportActiveAverageE
 
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
-        Dim reportAE As New ActiveAv
-        crvActiveAverageE.ReportSource = reportAE
+        Try
+            Dim idClient As String
+            If cmbClients.SelectedIndex > -1 Then
+                Dim array() = cmbClients.SelectedItem.ToString().Split(" ")
+                idClient = array(0)
+            Else
+                idClient = "0"
+            End If
+            If (idClient <> "" Or idClient IsNot Nothing) Or chbAll.Checked Then
+                Dim reportAE As New ActiveAv
+                reportAE.SetParameterValue("@StartDate", validaFechaParaSQl(dtpInitialDate.Value.Date))
+                reportAE.SetParameterValue("@EndDate", validaFechaParaSQl(dtpFinalDate.Value.Date))
+                reportAE.SetParameterValue("@ClientName", If(chbAll.Checked, 0, CInt(idClient)))
+                reportAE.SetParameterValue("@all", If(chbAll.Checked, 1, 0))
+                reportAE.SetParameterValue("@CompanyName", "brock")
+                crvActiveAverageE.ReportSource = reportAE
+            Else
+                MsgBox("Please select a Client.")
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message())
+        End Try
     End Sub
 
+    Private Sub ReportActiveAverageE_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        llenarComboClientsReports(cmbClients)
+    End Sub
 
+    Private Sub chbAll_CheckedChanged(sender As Object, e As EventArgs) Handles chbAll.CheckedChanged
+        cmbClients.Enabled = If(chbAll.Checked, False, True)
+    End Sub
 End Class

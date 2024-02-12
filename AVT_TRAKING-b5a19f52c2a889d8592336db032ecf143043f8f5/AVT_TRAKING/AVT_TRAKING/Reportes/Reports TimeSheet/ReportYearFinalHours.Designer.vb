@@ -27,6 +27,12 @@ Partial Class ReportYearFinalHours
         Me.Panel3 = New System.Windows.Forms.Panel()
         Me.crvYearFinalHours = New CrystalDecisions.Windows.Forms.CrystalReportViewer()
         Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.chbAllJobs = New System.Windows.Forms.CheckBox()
+        Me.cmbJobNo = New System.Windows.Forms.ComboBox()
+        Me.Label4 = New System.Windows.Forms.Label()
+        Me.chbAllClients = New System.Windows.Forms.CheckBox()
+        Me.cmbClient = New System.Windows.Forms.ComboBox()
+        Me.Label2 = New System.Windows.Forms.Label()
         Me.cmbYear = New System.Windows.Forms.ComboBox()
         Me.Button1 = New System.Windows.Forms.Button()
         Me.Label1 = New System.Windows.Forms.Label()
@@ -52,6 +58,7 @@ Partial Class ReportYearFinalHours
         '
         'TableLayoutPanel1
         '
+        Me.TableLayoutPanel1.BackColor = System.Drawing.Color.FromArgb(CType(CType(83, Byte), Integer), CType(CType(93, Byte), Integer), CType(CType(102, Byte), Integer))
         Me.TableLayoutPanel1.ColumnCount = 1
         Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
         Me.TableLayoutPanel1.Controls.Add(Me.Panel3, 0, 2)
@@ -90,6 +97,12 @@ Partial Class ReportYearFinalHours
         'Panel2
         '
         Me.Panel2.BackColor = System.Drawing.Color.FromArgb(CType(CType(83, Byte), Integer), CType(CType(93, Byte), Integer), CType(CType(102, Byte), Integer))
+        Me.Panel2.Controls.Add(Me.chbAllJobs)
+        Me.Panel2.Controls.Add(Me.cmbJobNo)
+        Me.Panel2.Controls.Add(Me.Label4)
+        Me.Panel2.Controls.Add(Me.chbAllClients)
+        Me.Panel2.Controls.Add(Me.cmbClient)
+        Me.Panel2.Controls.Add(Me.Label2)
         Me.Panel2.Controls.Add(Me.cmbYear)
         Me.Panel2.Controls.Add(Me.Button1)
         Me.Panel2.Controls.Add(Me.Label1)
@@ -100,10 +113,72 @@ Partial Class ReportYearFinalHours
         Me.Panel2.Size = New System.Drawing.Size(664, 64)
         Me.Panel2.TabIndex = 1
         '
+        'chbAllJobs
+        '
+        Me.chbAllJobs.AutoSize = True
+        Me.chbAllJobs.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.chbAllJobs.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.chbAllJobs.Location = New System.Drawing.Point(297, 39)
+        Me.chbAllJobs.Name = "chbAllJobs"
+        Me.chbAllJobs.Size = New System.Drawing.Size(69, 17)
+        Me.chbAllJobs.TabIndex = 21
+        Me.chbAllJobs.Text = "All Jobs"
+        Me.chbAllJobs.UseVisualStyleBackColor = True
+        '
+        'cmbJobNo
+        '
+        Me.cmbJobNo.FormattingEnabled = True
+        Me.cmbJobNo.Location = New System.Drawing.Point(204, 35)
+        Me.cmbJobNo.Name = "cmbJobNo"
+        Me.cmbJobNo.Size = New System.Drawing.Size(87, 21)
+        Me.cmbJobNo.TabIndex = 20
+        '
+        'Label4
+        '
+        Me.Label4.AutoSize = True
+        Me.Label4.Font = New System.Drawing.Font("Verdana", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label4.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.Label4.Location = New System.Drawing.Point(153, 37)
+        Me.Label4.Name = "Label4"
+        Me.Label4.Size = New System.Drawing.Size(54, 14)
+        Me.Label4.TabIndex = 19
+        Me.Label4.Text = "Job No:"
+        '
+        'chbAllClients
+        '
+        Me.chbAllClients.AutoSize = True
+        Me.chbAllClients.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.chbAllClients.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.chbAllClients.Location = New System.Drawing.Point(297, 9)
+        Me.chbAllClients.Name = "chbAllClients"
+        Me.chbAllClients.Size = New System.Drawing.Size(83, 17)
+        Me.chbAllClients.TabIndex = 18
+        Me.chbAllClients.Text = "All Clients"
+        Me.chbAllClients.UseVisualStyleBackColor = True
+        '
+        'cmbClient
+        '
+        Me.cmbClient.FormattingEnabled = True
+        Me.cmbClient.Location = New System.Drawing.Point(204, 5)
+        Me.cmbClient.Name = "cmbClient"
+        Me.cmbClient.Size = New System.Drawing.Size(87, 21)
+        Me.cmbClient.TabIndex = 17
+        '
+        'Label2
+        '
+        Me.Label2.AutoSize = True
+        Me.Label2.Font = New System.Drawing.Font("Verdana", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label2.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.Label2.Location = New System.Drawing.Point(153, 7)
+        Me.Label2.Name = "Label2"
+        Me.Label2.Size = New System.Drawing.Size(48, 14)
+        Me.Label2.TabIndex = 16
+        Me.Label2.Text = "Client:"
+        '
         'cmbYear
         '
         Me.cmbYear.FormattingEnabled = True
-        Me.cmbYear.Location = New System.Drawing.Point(43, 6)
+        Me.cmbYear.Location = New System.Drawing.Point(60, 5)
         Me.cmbYear.Name = "cmbYear"
         Me.cmbYear.Size = New System.Drawing.Size(87, 21)
         Me.cmbYear.TabIndex = 15
@@ -117,7 +192,7 @@ Partial Class ReportYearFinalHours
         Me.Button1.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.Button1.Image = Global.AVT_TRAKING.My.Resources.Resources.reportshow
         Me.Button1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.Button1.Location = New System.Drawing.Point(136, 0)
+        Me.Button1.Location = New System.Drawing.Point(405, 18)
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(83, 33)
         Me.Button1.TabIndex = 14
@@ -130,7 +205,7 @@ Partial Class ReportYearFinalHours
         Me.Label1.AutoSize = True
         Me.Label1.Font = New System.Drawing.Font("Verdana", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label1.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.Label1.Location = New System.Drawing.Point(9, 8)
+        Me.Label1.Location = New System.Drawing.Point(9, 7)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(42, 14)
         Me.Label1.TabIndex = 12
@@ -261,4 +336,10 @@ Partial Class ReportYearFinalHours
     Friend WithEvents btnRestore As PictureBox
     Friend WithEvents btnMaximize As PictureBox
     Friend WithEvents cmbYear As ComboBox
+    Friend WithEvents chbAllJobs As CheckBox
+    Friend WithEvents cmbJobNo As ComboBox
+    Friend WithEvents Label4 As Label
+    Friend WithEvents chbAllClients As CheckBox
+    Friend WithEvents cmbClient As ComboBox
+    Friend WithEvents Label2 As Label
 End Class
