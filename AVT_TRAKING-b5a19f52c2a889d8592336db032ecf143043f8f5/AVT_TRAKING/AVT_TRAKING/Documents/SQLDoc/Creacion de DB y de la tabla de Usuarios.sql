@@ -2308,6 +2308,19 @@ create table TrackFormatColums(
 )
 GO
 --##########################################################################################
+--##################  TABLA DE TRACKVEHICLEELEMENT #########################################
+--##########################################################################################
+create table trackVehicleElement(
+	idTrackElement int not null,
+	columnName varchar(30),
+	columnHeader varchar(30),
+	queryValue varchar(30),
+	defaultValue varchar(50),
+	visible bit,
+	idClient varchar(36) not null
+)
+go
+--##########################################################################################
 --##################  TABLA DE UNITMEASSUREMENTS ###########################################
 --##########################################################################################
 
@@ -3376,6 +3389,18 @@ FOREIGN KEY (idClient) REFERENCES clients(idClient)
 ON UPDATE CASCADE
 ON DELETE CASCADE
 GO
+
+--##########################################################################################
+--##################  FOREIG KEYS WORKCODE #################################################
+--##########################################################################################
+
+ALTER TABLE trackVehicleElement ADD CONSTRAINT pk_idTrackVehicleElement_idClient
+PRIMARY KEY (idClient,idTrackElement)
+go
+
+ALTER TABLE trackVehicleElement WITH CHECK ADD CONSTRAINT fk_idClient_TrackVehicleElement
+FOREIGN KEY (idClient) REFERENCES clients(idClient)
+go 
 
 --##########################################################################################
 --##################  FOREIG KEYS WORKCODE #################################################
@@ -4708,71 +4733,95 @@ GO
 --('Attachment Name' , ''),
 --('Exception Handler (Area ID)' , '')
 --go
+
+----###############################################################################################
+----########### SOLUCION AL PROBLEMA DE INSERTAR UN CLIENTE NUEVO #################################
+----###############################################################################################
+--ALTER proc [dbo].[sp_Insert_Cient] 
+--	@ClientID int,
+--	@FirstName varchar (30),
+--	@MiddleName varchar (30),
+--	@LastName varchar (30),
+--	@CompanyName varchar (50),
+--	@Status char(1),
+--	--Contact
+--	@phoneNumer1 varchar(13),
+--	@phoneNumer2 varchar(13),
+--	@email varchar(50),
+--	--Addres
+--	@avenue varchar(80),
+--	@number int,
+--	@city varchar (20),
+--	@providence varchar (20),
+--	@postalcode int,
+--	--Photo
+--	@img image,
+--	@payTerms varchar(30)
+--as
+--declare @error int  -- declaro variables para los ID que son nuevos y una variable de error
+--declare @idClient varchar(36) 
+--declare @idContact varchar(36)
+--declare @idHomeAdress varchar(36)
+--begin 
+--	begin tran 
+--		begin try
+--			--se inserta un contacto
+			
+--				set @idContact = NEWID() 
+--				insert into contact values(@idContact,@phoneNumer1,@phoneNumer2,@email)
+--				if @@ERROR <> 0 begin set @error = @@ERROR goto solveproblem end
+			
+--				set @idHomeAdress = NEWID()
+--				insert into HomeAddress values (@idHomeAdress , @avenue , @number , @city , @providence , @postalCode)
+--				if @@ERROR <> 0 begin set @error = @@ERROR goto solveproblem end 
+			
+--				set @idClient = NEWID()
+--				insert into clients values (@idClient , @ClientID, @FirstName, @MiddleName, @LastName , @CompanyName, @idContact , @idHomeAdress ,@Status,@img,@payTerms)
+--				if @@ERROR <> 0 begin set @error = @@ERROR goto solveproblem end 
+
+--				insert into TrackDefaultElements values(NEWID(),@idClient,'','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','')
+--				if @@ERROR <> 0 begin set @error = @@ERROR goto solveproblem end
+				
+--				insert into TrackFormatColums values(NEWID(),@idClient,'Record ID1','Force or Reject1','Source1','Date1','Order Type1','Location ID1','Company Code1','Resource ID1','Resource Name1','Area1','Group Name1','Agreement1','Skill Type1','Shift1','Level 1 ID1','Level 2 ID1','Level 3 ID1','Level 4 ID1','Hours Total1','Hours Total Activity Code1','S/T (Hrs)1','S/T Hrs Activity Code1','O/T (Hrs)1','O/T Hrs Activity Code1',
+--				'D/T (Hrs)1','D/T Hrs Activity Code1','Extra Charges $1','Extra Charges $ Activity Code1','Extra1','Extra 11','Extra 21',
+--				'Add Time1','Pay Type1','R4 (Hrs)1','R5 (Hrs)1','R6 (Hrs)1','GL Account1',
+--				'ST Adders1','OT Adders1','DT Adders1','R4 Adders1','R5 Adders1','R6 Adders1','Override Reason1','Override Comment1','Attachment Name1','Exception Handler (Area ID)1')
+--				if @@ERROR <> 0 begin set @error = @@ERROR goto solveproblem end
+--		end try
+--		begin catch
+--			goto solveproblem
+--		end catch
+--	commit tran
+--	solveproblem:
+--	if @error <> 0
+--	begin 
+--		rollback tran 
+--	end
+--end
+--go
+
 ----| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
 ----| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
 ----V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V
 ----###############################################################################################
 ----########### SOLUCION AL PROBLEMA DE INSERTAR UN CLIENTE NUEVO #################################
 ----###############################################################################################
-ALTER proc [dbo].[sp_Insert_Cient] 
-	@ClientID int,
-	@FirstName varchar (30),
-	@MiddleName varchar (30),
-	@LastName varchar (30),
-	@CompanyName varchar (50),
-	@Status char(1),
-	--Contact
-	@phoneNumer1 varchar(13),
-	@phoneNumer2 varchar(13),
-	@email varchar(50),
-	--Addres
-	@avenue varchar(80),
-	@number int,
-	@city varchar (20),
-	@providence varchar (20),
-	@postalcode int,
-	--Photo
-	@img image,
-	@payTerms varchar(30)
-as
-declare @error int  -- declaro variables para los ID que son nuevos y una variable de error
-declare @idClient varchar(36) 
-declare @idContact varchar(36)
-declare @idHomeAdress varchar(36)
-begin 
-	begin tran 
-		begin try
-			--se inserta un contacto
-			
-				set @idContact = NEWID() 
-				insert into contact values(@idContact,@phoneNumer1,@phoneNumer2,@email)
-				if @@ERROR <> 0 begin set @error = @@ERROR goto solveproblem end
-			
-				set @idHomeAdress = NEWID()
-				insert into HomeAddress values (@idHomeAdress , @avenue , @number , @city , @providence , @postalCode)
-				if @@ERROR <> 0 begin set @error = @@ERROR goto solveproblem end 
-			
-				set @idClient = NEWID()
-				insert into clients values (@idClient , @ClientID, @FirstName, @MiddleName, @LastName , @CompanyName, @idContact , @idHomeAdress ,@Status,@img,@payTerms)
-				if @@ERROR <> 0 begin set @error = @@ERROR goto solveproblem end 
 
-				insert into TrackDefaultElements values(NEWID(),@idClient,'','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','')
-				if @@ERROR <> 0 begin set @error = @@ERROR goto solveproblem end
-				
-				insert into TrackFormatColums values(NEWID(),@idClient,'Record ID1','Force or Reject1','Source1','Date1','Order Type1','Location ID1','Company Code1','Resource ID1','Resource Name1','Area1','Group Name1','Agreement1','Skill Type1','Shift1','Level 1 ID1','Level 2 ID1','Level 3 ID1','Level 4 ID1','Hours Total1','Hours Total Activity Code1','S/T (Hrs)1','S/T Hrs Activity Code1','O/T (Hrs)1','O/T Hrs Activity Code1',
-				'D/T (Hrs)1','D/T Hrs Activity Code1','Extra Charges $1','Extra Charges $ Activity Code1','Extra1','Extra 11','Extra 21',
-				'Add Time1','Pay Type1','R4 (Hrs)1','R5 (Hrs)1','R6 (Hrs)1','GL Account1',
-				'ST Adders1','OT Adders1','DT Adders1','R4 Adders1','R5 Adders1','R6 Adders1','Override Reason1','Override Comment1','Attachment Name1','Exception Handler (Area ID)1')
-				if @@ERROR <> 0 begin set @error = @@ERROR goto solveproblem end
-		end try
-		begin catch
-			goto solveproblem
-		end catch
-	commit tran
-	solveproblem:
-	if @error <> 0
-	begin 
-		rollback tran 
-	end
-end
+create table trackVehicleElement(
+	idTrackElement int not null,
+	columnName varchar(30),
+	columnHeader varchar(30),
+	queryValue varchar(30),
+	defaultValue varchar(50),
+	visible bit,
+	idClient varchar(36) not null
+)
 go
+
+alter table trackVehicleElement add Constraint pk_idTrackVehicleElement_idClient
+primary key (idClient,idTrackElement)
+go
+
+alter table trackVehicleElement with check add constraint fk_idClient_TrackVehicleElement
+foreign key (idClient) references clients(idClient)
+go 

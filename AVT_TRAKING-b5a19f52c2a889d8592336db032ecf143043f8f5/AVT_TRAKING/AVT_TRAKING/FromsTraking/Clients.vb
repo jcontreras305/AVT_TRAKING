@@ -358,6 +358,7 @@ Public Class Clients
             pc.datosClientesPO.Add(dataClient(15))
             pc.datosClientesPO.Add(dataClient(16))
             pc.datosClientesPO.Add(dataClient(8))
+            pc.numberClient = dataClient(1)
             'mtd.buscarProyectosDeCliente(pc.tblProjectClients, IdCliente)
             mtd.buscarProyectosDeClienteAll(pc.tblProjectClientsAll, IdCliente)
             pc.idCliente = IdCliente

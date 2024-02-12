@@ -67,6 +67,7 @@ Partial Class ProjectsClients
         Me.Label4 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Panel4 = New System.Windows.Forms.Panel()
+        Me.btnTrackVehicle = New System.Windows.Forms.Button()
         Me.btnUpdateProject = New System.Windows.Forms.Button()
         Me.Button1 = New System.Windows.Forms.Button()
         Me.btnKPI = New System.Windows.Forms.Button()
@@ -154,7 +155,7 @@ Partial Class ProjectsClients
         Me.Panel1.Controls.Add(Me.Panel2)
         Me.Panel1.Dock = System.Windows.Forms.DockStyle.Left
         Me.Panel1.Location = New System.Drawing.Point(0, 0)
-        Me.Panel1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.Panel1.Margin = New System.Windows.Forms.Padding(4)
         Me.Panel1.Name = "Panel1"
         Me.Panel1.Size = New System.Drawing.Size(288, 793)
         Me.Panel1.TabIndex = 4
@@ -168,7 +169,7 @@ Partial Class ProjectsClients
         Me.pnlButtonsPOCl.Controls.Add(Me.btnProyeccts)
         Me.pnlButtonsPOCl.Dock = System.Windows.Forms.DockStyle.Top
         Me.pnlButtonsPOCl.Location = New System.Drawing.Point(0, 119)
-        Me.pnlButtonsPOCl.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.pnlButtonsPOCl.Margin = New System.Windows.Forms.Padding(4)
         Me.pnlButtonsPOCl.Name = "pnlButtonsPOCl"
         Me.pnlButtonsPOCl.Size = New System.Drawing.Size(288, 519)
         Me.pnlButtonsPOCl.TabIndex = 6
@@ -184,7 +185,7 @@ Partial Class ProjectsClients
         Me.PnllSetup.Controls.Add(Me.btnEmployees)
         Me.PnllSetup.Dock = System.Windows.Forms.DockStyle.Top
         Me.PnllSetup.Location = New System.Drawing.Point(0, 268)
-        Me.PnllSetup.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.PnllSetup.Margin = New System.Windows.Forms.Padding(4)
         Me.PnllSetup.Name = "PnllSetup"
         Me.PnllSetup.Size = New System.Drawing.Size(288, 252)
         Me.PnllSetup.TabIndex = 5
@@ -197,7 +198,7 @@ Partial Class ProjectsClients
         Me.btnPBI.Font = New System.Drawing.Font("Nirmala UI", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnPBI.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.btnPBI.Location = New System.Drawing.Point(0, 211)
-        Me.btnPBI.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btnPBI.Margin = New System.Windows.Forms.Padding(4)
         Me.btnPBI.Name = "btnPBI"
         Me.btnPBI.Size = New System.Drawing.Size(288, 39)
         Me.btnPBI.TabIndex = 11
@@ -213,7 +214,7 @@ Partial Class ProjectsClients
         Me.btnWK.Font = New System.Drawing.Font("Nirmala UI", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnWK.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.btnWK.Location = New System.Drawing.Point(0, 172)
-        Me.btnWK.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btnWK.Margin = New System.Windows.Forms.Padding(4)
         Me.btnWK.Name = "btnWK"
         Me.btnWK.Size = New System.Drawing.Size(288, 39)
         Me.btnWK.TabIndex = 10
@@ -229,7 +230,7 @@ Partial Class ProjectsClients
         Me.btnMaterialCodes.Font = New System.Drawing.Font("Nirmala UI", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnMaterialCodes.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.btnMaterialCodes.Location = New System.Drawing.Point(0, 129)
-        Me.btnMaterialCodes.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btnMaterialCodes.Margin = New System.Windows.Forms.Padding(4)
         Me.btnMaterialCodes.Name = "btnMaterialCodes"
         Me.btnMaterialCodes.Size = New System.Drawing.Size(288, 43)
         Me.btnMaterialCodes.TabIndex = 9
@@ -245,7 +246,7 @@ Partial Class ProjectsClients
         Me.btnCompanyInformation.Font = New System.Drawing.Font("Nirmala UI", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnCompanyInformation.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.btnCompanyInformation.Location = New System.Drawing.Point(0, 86)
-        Me.btnCompanyInformation.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btnCompanyInformation.Margin = New System.Windows.Forms.Padding(4)
         Me.btnCompanyInformation.Name = "btnCompanyInformation"
         Me.btnCompanyInformation.Size = New System.Drawing.Size(288, 43)
         Me.btnCompanyInformation.TabIndex = 8
@@ -261,7 +262,7 @@ Partial Class ProjectsClients
         Me.btnExpences.Font = New System.Drawing.Font("Nirmala UI", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnExpences.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.btnExpences.Location = New System.Drawing.Point(0, 43)
-        Me.btnExpences.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btnExpences.Margin = New System.Windows.Forms.Padding(4)
         Me.btnExpences.Name = "btnExpences"
         Me.btnExpences.Size = New System.Drawing.Size(288, 43)
         Me.btnExpences.TabIndex = 7
@@ -277,7 +278,7 @@ Partial Class ProjectsClients
         Me.btnEmployees.Font = New System.Drawing.Font("Nirmala UI", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnEmployees.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.btnEmployees.Location = New System.Drawing.Point(0, 0)
-        Me.btnEmployees.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btnEmployees.Margin = New System.Windows.Forms.Padding(4)
         Me.btnEmployees.Name = "btnEmployees"
         Me.btnEmployees.Size = New System.Drawing.Size(288, 43)
         Me.btnEmployees.TabIndex = 6
@@ -296,7 +297,7 @@ Partial Class ProjectsClients
         Me.btnSetup.Image = Global.AVT_TRAKING.My.Resources.Resources.setup
         Me.btnSetup.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.btnSetup.Location = New System.Drawing.Point(0, 205)
-        Me.btnSetup.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btnSetup.Margin = New System.Windows.Forms.Padding(4)
         Me.btnSetup.Name = "btnSetup"
         Me.btnSetup.Size = New System.Drawing.Size(288, 63)
         Me.btnSetup.TabIndex = 4
@@ -312,7 +313,7 @@ Partial Class ProjectsClients
         Me.btnUploadSchedule.Font = New System.Drawing.Font("Nirmala UI", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnUploadSchedule.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.btnUploadSchedule.Location = New System.Drawing.Point(0, 134)
-        Me.btnUploadSchedule.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btnUploadSchedule.Margin = New System.Windows.Forms.Padding(4)
         Me.btnUploadSchedule.Name = "btnUploadSchedule"
         Me.btnUploadSchedule.Size = New System.Drawing.Size(288, 71)
         Me.btnUploadSchedule.TabIndex = 3
@@ -330,7 +331,7 @@ Partial Class ProjectsClients
         Me.btnTimeEnterSheets.Image = Global.AVT_TRAKING.My.Resources.Resources.time
         Me.btnTimeEnterSheets.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.btnTimeEnterSheets.Location = New System.Drawing.Point(0, 68)
-        Me.btnTimeEnterSheets.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btnTimeEnterSheets.Margin = New System.Windows.Forms.Padding(4)
         Me.btnTimeEnterSheets.Name = "btnTimeEnterSheets"
         Me.btnTimeEnterSheets.Size = New System.Drawing.Size(288, 66)
         Me.btnTimeEnterSheets.TabIndex = 2
@@ -349,7 +350,7 @@ Partial Class ProjectsClients
         Me.btnProyeccts.Image = Global.AVT_TRAKING.My.Resources.Resources.project
         Me.btnProyeccts.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.btnProyeccts.Location = New System.Drawing.Point(0, 0)
-        Me.btnProyeccts.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btnProyeccts.Margin = New System.Windows.Forms.Padding(4)
         Me.btnProyeccts.Name = "btnProyeccts"
         Me.btnProyeccts.Size = New System.Drawing.Size(288, 68)
         Me.btnProyeccts.TabIndex = 1
@@ -361,7 +362,7 @@ Partial Class ProjectsClients
         Me.Panel2.Controls.Add(Me.pcbLogoPC)
         Me.Panel2.Dock = System.Windows.Forms.DockStyle.Top
         Me.Panel2.Location = New System.Drawing.Point(0, 0)
-        Me.Panel2.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.Panel2.Margin = New System.Windows.Forms.Padding(4)
         Me.Panel2.Name = "Panel2"
         Me.Panel2.Size = New System.Drawing.Size(288, 119)
         Me.Panel2.TabIndex = 0
@@ -370,7 +371,7 @@ Partial Class ProjectsClients
         '
         Me.pcbLogoPC.Dock = System.Windows.Forms.DockStyle.Fill
         Me.pcbLogoPC.Location = New System.Drawing.Point(0, 0)
-        Me.pcbLogoPC.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.pcbLogoPC.Margin = New System.Windows.Forms.Padding(4)
         Me.pcbLogoPC.Name = "pcbLogoPC"
         Me.pcbLogoPC.Size = New System.Drawing.Size(288, 119)
         Me.pcbLogoPC.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
@@ -382,7 +383,7 @@ Partial Class ProjectsClients
         Me.txtFindClientProyects.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.txtFindClientProyects.Location = New System.Drawing.Point(4, 7)
-        Me.txtFindClientProyects.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.txtFindClientProyects.Margin = New System.Windows.Forms.Padding(4)
         Me.txtFindClientProyects.Name = "txtFindClientProyects"
         Me.txtFindClientProyects.Size = New System.Drawing.Size(245, 22)
         Me.txtFindClientProyects.TabIndex = 15
@@ -393,9 +394,9 @@ Partial Class ProjectsClients
         Me.GroupBox1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.GroupBox1.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.GroupBox1.Location = New System.Drawing.Point(382, 47)
-        Me.GroupBox1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.GroupBox1.Margin = New System.Windows.Forms.Padding(4)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Padding = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.GroupBox1.Padding = New System.Windows.Forms.Padding(4)
         Me.GroupBox1.Size = New System.Drawing.Size(1001, 226)
         Me.GroupBox1.TabIndex = 14
         Me.GroupBox1.TabStop = False
@@ -430,7 +431,7 @@ Partial Class ProjectsClients
         Me.TableLayoutPanel3.Controls.Add(Me.txtStateProvidence, 1, 2)
         Me.TableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill
         Me.TableLayoutPanel3.Location = New System.Drawing.Point(4, 19)
-        Me.TableLayoutPanel3.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.TableLayoutPanel3.Margin = New System.Windows.Forms.Padding(4)
         Me.TableLayoutPanel3.Name = "TableLayoutPanel3"
         Me.TableLayoutPanel3.RowCount = 5
         Me.TableLayoutPanel3.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20.0!))
@@ -459,7 +460,7 @@ Partial Class ProjectsClients
         Me.cmbCostCode.FormattingEnabled = True
         Me.cmbCostCode.Items.AddRange(New Object() {"240000000000000", "140000000000000"})
         Me.cmbCostCode.Location = New System.Drawing.Point(644, 164)
-        Me.cmbCostCode.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.cmbCostCode.Margin = New System.Windows.Forms.Padding(4)
         Me.cmbCostCode.Name = "cmbCostCode"
         Me.cmbCostCode.Size = New System.Drawing.Size(345, 24)
         Me.cmbCostCode.TabIndex = 25
@@ -469,7 +470,7 @@ Partial Class ProjectsClients
         Me.txtContractNo.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.txtContractNo.Location = New System.Drawing.Point(644, 124)
-        Me.txtContractNo.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.txtContractNo.Margin = New System.Windows.Forms.Padding(4)
         Me.txtContractNo.Name = "txtContractNo"
         Me.txtContractNo.Size = New System.Drawing.Size(345, 22)
         Me.txtContractNo.TabIndex = 24
@@ -490,7 +491,7 @@ Partial Class ProjectsClients
         Me.txtCustomerNo.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.txtCustomerNo.Location = New System.Drawing.Point(644, 84)
-        Me.txtCustomerNo.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.txtCustomerNo.Margin = New System.Windows.Forms.Padding(4)
         Me.txtCustomerNo.Name = "txtCustomerNo"
         Me.txtCustomerNo.Size = New System.Drawing.Size(345, 22)
         Me.txtCustomerNo.TabIndex = 23
@@ -511,7 +512,7 @@ Partial Class ProjectsClients
         Me.txtPhoneNumber.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.txtPhoneNumber.Location = New System.Drawing.Point(137, 164)
-        Me.txtPhoneNumber.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.txtPhoneNumber.Margin = New System.Windows.Forms.Padding(4)
         Me.txtPhoneNumber.Name = "txtPhoneNumber"
         Me.txtPhoneNumber.Size = New System.Drawing.Size(346, 22)
         Me.txtPhoneNumber.TabIndex = 20
@@ -523,7 +524,7 @@ Partial Class ProjectsClients
         Me.cmbWorkTMLumoSum.FormattingEnabled = True
         Me.cmbWorkTMLumoSum.Items.AddRange(New Object() {"Lump-Sum", "T&M", "Unire Rate"})
         Me.cmbWorkTMLumoSum.Location = New System.Drawing.Point(644, 44)
-        Me.cmbWorkTMLumoSum.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.cmbWorkTMLumoSum.Margin = New System.Windows.Forms.Padding(4)
         Me.cmbWorkTMLumoSum.Name = "cmbWorkTMLumoSum"
         Me.cmbWorkTMLumoSum.Size = New System.Drawing.Size(345, 24)
         Me.cmbWorkTMLumoSum.TabIndex = 22
@@ -535,7 +536,7 @@ Partial Class ProjectsClients
         Me.cmbCostDistribution.FormattingEnabled = True
         Me.cmbCostDistribution.Items.AddRange(New Object() {"190100000000000", "290100000000000"})
         Me.cmbCostDistribution.Location = New System.Drawing.Point(644, 4)
-        Me.cmbCostDistribution.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.cmbCostDistribution.Margin = New System.Windows.Forms.Padding(4)
         Me.cmbCostDistribution.Name = "cmbCostDistribution"
         Me.cmbCostDistribution.Size = New System.Drawing.Size(345, 24)
         Me.cmbCostDistribution.TabIndex = 21
@@ -545,7 +546,7 @@ Partial Class ProjectsClients
         Me.txtAddres.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.txtAddres.Location = New System.Drawing.Point(137, 4)
-        Me.txtAddres.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.txtAddres.Margin = New System.Windows.Forms.Padding(4)
         Me.txtAddres.Name = "txtAddres"
         Me.txtAddres.Size = New System.Drawing.Size(346, 22)
         Me.txtAddres.TabIndex = 16
@@ -602,7 +603,7 @@ Partial Class ProjectsClients
         Me.txtPC.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.txtPC.Location = New System.Drawing.Point(137, 124)
-        Me.txtPC.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.txtPC.Margin = New System.Windows.Forms.Padding(4)
         Me.txtPC.Name = "txtPC"
         Me.txtPC.Size = New System.Drawing.Size(346, 22)
         Me.txtPC.TabIndex = 19
@@ -624,7 +625,7 @@ Partial Class ProjectsClients
         Me.txtCity.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.txtCity.Location = New System.Drawing.Point(137, 44)
-        Me.txtCity.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.txtCity.Margin = New System.Windows.Forms.Padding(4)
         Me.txtCity.Name = "txtCity"
         Me.txtCity.Size = New System.Drawing.Size(346, 22)
         Me.txtCity.TabIndex = 17
@@ -656,7 +657,7 @@ Partial Class ProjectsClients
         Me.txtStateProvidence.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.txtStateProvidence.Location = New System.Drawing.Point(137, 84)
-        Me.txtStateProvidence.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.txtStateProvidence.Margin = New System.Windows.Forms.Padding(4)
         Me.txtStateProvidence.Name = "txtStateProvidence"
         Me.txtStateProvidence.Size = New System.Drawing.Size(346, 22)
         Me.txtStateProvidence.TabIndex = 18
@@ -666,7 +667,7 @@ Partial Class ProjectsClients
         Me.txtCompanyName.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.txtCompanyName.Location = New System.Drawing.Point(125, 0)
-        Me.txtCompanyName.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.txtCompanyName.Margin = New System.Windows.Forms.Padding(4)
         Me.txtCompanyName.Name = "txtCompanyName"
         Me.txtCompanyName.Size = New System.Drawing.Size(237, 22)
         Me.txtCompanyName.TabIndex = 14
@@ -676,7 +677,7 @@ Partial Class ProjectsClients
         Me.txtJobNumber.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.txtJobNumber.Location = New System.Drawing.Point(124, 2)
-        Me.txtJobNumber.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.txtJobNumber.Margin = New System.Windows.Forms.Padding(4)
         Me.txtJobNumber.Name = "txtJobNumber"
         Me.txtJobNumber.Size = New System.Drawing.Size(237, 22)
         Me.txtJobNumber.TabIndex = 12
@@ -686,7 +687,7 @@ Partial Class ProjectsClients
         Me.txtFirstName.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.txtFirstName.Location = New System.Drawing.Point(125, 1)
-        Me.txtFirstName.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.txtFirstName.Margin = New System.Windows.Forms.Padding(4)
         Me.txtFirstName.Name = "txtFirstName"
         Me.txtFirstName.Size = New System.Drawing.Size(237, 22)
         Me.txtFirstName.TabIndex = 15
@@ -726,6 +727,7 @@ Partial Class ProjectsClients
         '
         'Panel4
         '
+        Me.Panel4.Controls.Add(Me.btnTrackVehicle)
         Me.Panel4.Controls.Add(Me.btnUpdateProject)
         Me.Panel4.Controls.Add(Me.Button1)
         Me.Panel4.Controls.Add(Me.btnKPI)
@@ -734,10 +736,30 @@ Partial Class ProjectsClients
         Me.Panel4.Controls.Add(Me.btnAddClient)
         Me.Panel4.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel4.Location = New System.Drawing.Point(1218, 4)
-        Me.Panel4.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.Panel4.Margin = New System.Windows.Forms.Padding(4)
         Me.Panel4.Name = "Panel4"
         Me.Panel4.Size = New System.Drawing.Size(165, 470)
         Me.Panel4.TabIndex = 8
+        '
+        'btnTrackVehicle
+        '
+        Me.btnTrackVehicle.Dock = System.Windows.Forms.DockStyle.Top
+        Me.btnTrackVehicle.FlatAppearance.BorderSize = 0
+        Me.btnTrackVehicle.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(58, Byte), Integer), CType(CType(115, Byte), Integer))
+        Me.btnTrackVehicle.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnTrackVehicle.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnTrackVehicle.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.btnTrackVehicle.Image = Global.AVT_TRAKING.My.Resources.Resources.reportshow
+        Me.btnTrackVehicle.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnTrackVehicle.Location = New System.Drawing.Point(0, 250)
+        Me.btnTrackVehicle.Margin = New System.Windows.Forms.Padding(4)
+        Me.btnTrackVehicle.Name = "btnTrackVehicle"
+        Me.btnTrackVehicle.Size = New System.Drawing.Size(165, 50)
+        Me.btnTrackVehicle.TabIndex = 13
+        Me.btnTrackVehicle.Text = "Track Vehicle"
+        Me.btnTrackVehicle.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.btnTrackVehicle.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
+        Me.btnTrackVehicle.UseVisualStyleBackColor = True
         '
         'btnUpdateProject
         '
@@ -750,7 +772,7 @@ Partial Class ProjectsClients
         Me.btnUpdateProject.Image = Global.AVT_TRAKING.My.Resources.Resources.update
         Me.btnUpdateProject.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.btnUpdateProject.Location = New System.Drawing.Point(0, 200)
-        Me.btnUpdateProject.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btnUpdateProject.Margin = New System.Windows.Forms.Padding(4)
         Me.btnUpdateProject.Name = "btnUpdateProject"
         Me.btnUpdateProject.Size = New System.Drawing.Size(165, 50)
         Me.btnUpdateProject.TabIndex = 12
@@ -767,7 +789,7 @@ Partial Class ProjectsClients
         Me.Button1.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.Button1.Image = Global.AVT_TRAKING.My.Resources.Resources.delete
         Me.Button1.Location = New System.Drawing.Point(0, 422)
-        Me.Button1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.Button1.Margin = New System.Windows.Forms.Padding(4)
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(165, 48)
         Me.Button1.TabIndex = 11
@@ -786,7 +808,7 @@ Partial Class ProjectsClients
         Me.btnKPI.Image = Global.AVT_TRAKING.My.Resources.Resources.material
         Me.btnKPI.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.btnKPI.Location = New System.Drawing.Point(0, 150)
-        Me.btnKPI.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btnKPI.Margin = New System.Windows.Forms.Padding(4)
         Me.btnKPI.Name = "btnKPI"
         Me.btnKPI.Size = New System.Drawing.Size(165, 50)
         Me.btnKPI.TabIndex = 10
@@ -804,7 +826,7 @@ Partial Class ProjectsClients
         Me.btnTrack.Image = Global.AVT_TRAKING.My.Resources.Resources.reportshow
         Me.btnTrack.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.btnTrack.Location = New System.Drawing.Point(0, 100)
-        Me.btnTrack.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btnTrack.Margin = New System.Windows.Forms.Padding(4)
         Me.btnTrack.Name = "btnTrack"
         Me.btnTrack.Size = New System.Drawing.Size(165, 50)
         Me.btnTrack.TabIndex = 9
@@ -824,7 +846,7 @@ Partial Class ProjectsClients
         Me.btnTaxes.Image = Global.AVT_TRAKING.My.Resources.Resources.payroll
         Me.btnTaxes.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.btnTaxes.Location = New System.Drawing.Point(0, 50)
-        Me.btnTaxes.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btnTaxes.Margin = New System.Windows.Forms.Padding(4)
         Me.btnTaxes.Name = "btnTaxes"
         Me.btnTaxes.Size = New System.Drawing.Size(165, 50)
         Me.btnTaxes.TabIndex = 8
@@ -842,7 +864,7 @@ Partial Class ProjectsClients
         Me.btnAddClient.Image = Global.AVT_TRAKING.My.Resources.Resources.add
         Me.btnAddClient.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.btnAddClient.Location = New System.Drawing.Point(0, 0)
-        Me.btnAddClient.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btnAddClient.Margin = New System.Windows.Forms.Padding(4)
         Me.btnAddClient.Name = "btnAddClient"
         Me.btnAddClient.Size = New System.Drawing.Size(165, 50)
         Me.btnAddClient.TabIndex = 7
@@ -858,7 +880,7 @@ Partial Class ProjectsClients
         Me.TitleBar.Controls.Add(Me.btnMaximize)
         Me.TitleBar.Dock = System.Windows.Forms.DockStyle.Top
         Me.TitleBar.Location = New System.Drawing.Point(288, 0)
-        Me.TitleBar.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.TitleBar.Margin = New System.Windows.Forms.Padding(4)
         Me.TitleBar.Name = "TitleBar"
         Me.TitleBar.Size = New System.Drawing.Size(1387, 38)
         Me.TitleBar.TabIndex = 9
@@ -880,7 +902,7 @@ Partial Class ProjectsClients
         Me.PictureBox2.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.PictureBox2.Image = Global.AVT_TRAKING.My.Resources.Resources.minimize2
         Me.PictureBox2.Location = New System.Drawing.Point(1305, 4)
-        Me.PictureBox2.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.PictureBox2.Margin = New System.Windows.Forms.Padding(4)
         Me.PictureBox2.Name = "PictureBox2"
         Me.PictureBox2.Size = New System.Drawing.Size(32, 31)
         Me.PictureBox2.TabIndex = 2
@@ -891,7 +913,7 @@ Partial Class ProjectsClients
         Me.btnRestore.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnRestore.Image = Global.AVT_TRAKING.My.Resources.Resources.restore2
         Me.btnRestore.Location = New System.Drawing.Point(1345, 5)
-        Me.btnRestore.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btnRestore.Margin = New System.Windows.Forms.Padding(4)
         Me.btnRestore.Name = "btnRestore"
         Me.btnRestore.Size = New System.Drawing.Size(37, 30)
         Me.btnRestore.TabIndex = 1
@@ -902,7 +924,7 @@ Partial Class ProjectsClients
         Me.btnMaximize.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnMaximize.Image = Global.AVT_TRAKING.My.Resources.Resources.maximize2
         Me.btnMaximize.Location = New System.Drawing.Point(1349, 5)
-        Me.btnMaximize.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btnMaximize.Margin = New System.Windows.Forms.Padding(4)
         Me.btnMaximize.Name = "btnMaximize"
         Me.btnMaximize.Size = New System.Drawing.Size(31, 31)
         Me.btnMaximize.TabIndex = 0
@@ -918,7 +940,7 @@ Partial Class ProjectsClients
         Me.TableLayoutPanel1.Controls.Add(Me.Button2, 1, 0)
         Me.TableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Top
         Me.TableLayoutPanel1.Location = New System.Drawing.Point(0, 0)
-        Me.TableLayoutPanel1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.TableLayoutPanel1.Margin = New System.Windows.Forms.Padding(4)
         Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
         Me.TableLayoutPanel1.RowCount = 2
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
@@ -938,7 +960,7 @@ Partial Class ProjectsClients
         Me.TableLayoutPanel2.Controls.Add(Me.Panel10, 0, 5)
         Me.TableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill
         Me.TableLayoutPanel2.Location = New System.Drawing.Point(4, 47)
-        Me.TableLayoutPanel2.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.TableLayoutPanel2.Margin = New System.Windows.Forms.Padding(4)
         Me.TableLayoutPanel2.Name = "TableLayoutPanel2"
         Me.TableLayoutPanel2.RowCount = 6
         Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 43.0!))
@@ -957,7 +979,7 @@ Partial Class ProjectsClients
         Me.Panel9.Controls.Add(Me.Label1)
         Me.Panel9.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel9.Location = New System.Drawing.Point(4, 149)
-        Me.Panel9.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.Panel9.Margin = New System.Windows.Forms.Padding(4)
         Me.Panel9.Name = "Panel9"
         Me.Panel9.Size = New System.Drawing.Size(362, 26)
         Me.Panel9.TabIndex = 4
@@ -968,7 +990,7 @@ Partial Class ProjectsClients
         Me.Panel8.Controls.Add(Me.Label5)
         Me.Panel8.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel8.Location = New System.Drawing.Point(4, 115)
-        Me.Panel8.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.Panel8.Margin = New System.Windows.Forms.Padding(4)
         Me.Panel8.Name = "Panel8"
         Me.Panel8.Size = New System.Drawing.Size(362, 26)
         Me.Panel8.TabIndex = 3
@@ -979,7 +1001,7 @@ Partial Class ProjectsClients
         Me.Panel7.Controls.Add(Me.txtPostingProject)
         Me.Panel7.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel7.Location = New System.Drawing.Point(4, 81)
-        Me.Panel7.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.Panel7.Margin = New System.Windows.Forms.Padding(4)
         Me.Panel7.Name = "Panel7"
         Me.Panel7.Size = New System.Drawing.Size(362, 26)
         Me.Panel7.TabIndex = 2
@@ -1010,7 +1032,7 @@ Partial Class ProjectsClients
         Me.Panel6.Controls.Add(Me.Label4)
         Me.Panel6.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel6.Location = New System.Drawing.Point(4, 47)
-        Me.Panel6.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.Panel6.Margin = New System.Windows.Forms.Padding(4)
         Me.Panel6.Name = "Panel6"
         Me.Panel6.Size = New System.Drawing.Size(362, 26)
         Me.Panel6.TabIndex = 1
@@ -1021,7 +1043,7 @@ Partial Class ProjectsClients
         Me.Panel5.Controls.Add(Me.txtFindClientProyects)
         Me.Panel5.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel5.Location = New System.Drawing.Point(4, 4)
-        Me.Panel5.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.Panel5.Margin = New System.Windows.Forms.Padding(4)
         Me.Panel5.Name = "Panel5"
         Me.Panel5.Size = New System.Drawing.Size(362, 35)
         Me.Panel5.TabIndex = 0
@@ -1036,7 +1058,7 @@ Partial Class ProjectsClients
         Me.btnFindClintProyects.Image = Global.AVT_TRAKING.My.Resources.Resources.loupe
         Me.btnFindClintProyects.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.btnFindClintProyects.Location = New System.Drawing.Point(258, 4)
-        Me.btnFindClintProyects.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btnFindClintProyects.Margin = New System.Windows.Forms.Padding(4)
         Me.btnFindClintProyects.Name = "btnFindClintProyects"
         Me.btnFindClintProyects.Size = New System.Drawing.Size(100, 34)
         Me.btnFindClintProyects.TabIndex = 16
@@ -1050,7 +1072,7 @@ Partial Class ProjectsClients
         Me.Panel10.Controls.Add(Me.btnCancelSaveJob)
         Me.Panel10.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel10.Location = New System.Drawing.Point(4, 183)
-        Me.Panel10.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.Panel10.Margin = New System.Windows.Forms.Padding(4)
         Me.Panel10.Name = "Panel10"
         Me.Panel10.Size = New System.Drawing.Size(362, 39)
         Me.Panel10.TabIndex = 5
@@ -1064,7 +1086,7 @@ Partial Class ProjectsClients
         Me.btnAdd.Image = Global.AVT_TRAKING.My.Resources.Resources.add
         Me.btnAdd.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.btnAdd.Location = New System.Drawing.Point(16, 2)
-        Me.btnAdd.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btnAdd.Margin = New System.Windows.Forms.Padding(4)
         Me.btnAdd.Name = "btnAdd"
         Me.btnAdd.Size = New System.Drawing.Size(100, 33)
         Me.btnAdd.TabIndex = 26
@@ -1081,7 +1103,7 @@ Partial Class ProjectsClients
         Me.btnCancelSaveJob.Image = Global.AVT_TRAKING.My.Resources.Resources.close2
         Me.btnCancelSaveJob.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.btnCancelSaveJob.Location = New System.Drawing.Point(129, 2)
-        Me.btnCancelSaveJob.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btnCancelSaveJob.Margin = New System.Windows.Forms.Padding(4)
         Me.btnCancelSaveJob.Name = "btnCancelSaveJob"
         Me.btnCancelSaveJob.Size = New System.Drawing.Size(100, 36)
         Me.btnCancelSaveJob.TabIndex = 27
@@ -1111,7 +1133,7 @@ Partial Class ProjectsClients
         Me.PanelChildForm.Controls.Add(Me.TableLayoutPanel1)
         Me.PanelChildForm.Dock = System.Windows.Forms.DockStyle.Fill
         Me.PanelChildForm.Location = New System.Drawing.Point(288, 38)
-        Me.PanelChildForm.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.PanelChildForm.Margin = New System.Windows.Forms.Padding(4)
         Me.PanelChildForm.Name = "PanelChildForm"
         Me.PanelChildForm.Size = New System.Drawing.Size(1387, 755)
         Me.PanelChildForm.TabIndex = 11
@@ -1125,7 +1147,7 @@ Partial Class ProjectsClients
         Me.TableLayoutPanel4.Controls.Add(Me.Panel4, 1, 0)
         Me.TableLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Fill
         Me.TableLayoutPanel4.Location = New System.Drawing.Point(0, 277)
-        Me.TableLayoutPanel4.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.TableLayoutPanel4.Margin = New System.Windows.Forms.Padding(4)
         Me.TableLayoutPanel4.Name = "TableLayoutPanel4"
         Me.TableLayoutPanel4.RowCount = 1
         Me.TableLayoutPanel4.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
@@ -1137,7 +1159,7 @@ Partial Class ProjectsClients
         Me.Panel3.Controls.Add(Me.tblProjectClientsAll)
         Me.Panel3.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel3.Location = New System.Drawing.Point(4, 4)
-        Me.Panel3.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.Panel3.Margin = New System.Windows.Forms.Padding(4)
         Me.Panel3.Name = "Panel3"
         Me.Panel3.Size = New System.Drawing.Size(1206, 470)
         Me.Panel3.TabIndex = 0
@@ -1151,7 +1173,7 @@ Partial Class ProjectsClients
         Me.tblProjectClientsAll.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.clmWorkOrder, Me.clmProjectDescription, Me.clmCoplete, Me.clmTotalSpend, Me.clmTotalHoursST, Me.clmTotalAmountST, Me.clmTotalHoursOT, Me.clmTotalAmountOT, Me.clmTotalHours3, Me.clmTotalAmount3, Me.clmTotalExpensesSpend, Me.clmTotalMaterialSpend, Me.jobNo, Me.workTMLumpSum, Me.costDistribution, Me.custumerNo, Me.contractNo, Me.costCode, Me.idClient, Me.clmIdPO, Me.idTask, Me.idAuxWO, Me.idAux, Me.photo, Me.PostingProject})
         Me.tblProjectClientsAll.Dock = System.Windows.Forms.DockStyle.Fill
         Me.tblProjectClientsAll.Location = New System.Drawing.Point(0, 0)
-        Me.tblProjectClientsAll.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.tblProjectClientsAll.Margin = New System.Windows.Forms.Padding(4)
         Me.tblProjectClientsAll.Name = "tblProjectClientsAll"
         Me.tblProjectClientsAll.ReadOnly = True
         Me.tblProjectClientsAll.RowHeadersWidth = 51
@@ -1515,4 +1537,5 @@ Partial Class ProjectsClients
     Friend WithEvents Label9 As Label
     Friend WithEvents txtPostingProject As TextBox
     Friend WithEvents Panel10 As Panel
+    Friend WithEvents btnTrackVehicle As Button
 End Class

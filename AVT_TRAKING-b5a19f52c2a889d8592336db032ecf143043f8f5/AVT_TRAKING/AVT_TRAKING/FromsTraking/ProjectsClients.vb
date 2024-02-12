@@ -6,7 +6,7 @@ Public Class ProjectsClients
     Dim mtdClient As New MetodosClients
     Dim mtdOthers As New MetodosOthers
     Public datosClientesPO As New List(Of String)
-    Public idCliente, idPO, jobNum, workOrder, task, taskTaxes, idWOAuxTaxes, posting_Project As String
+    Public idCliente, idPO, jobNum, workOrder, task, taskTaxes, idWOAuxTaxes, posting_Project, numberClient As String
     Public clnfromclnFrom As Boolean = True
     Dim Find As Boolean = False
     Dim defaultInfoJob As New List(Of String)
@@ -482,6 +482,15 @@ Public Class ProjectsClients
 
     Private Sub tblProjectClientsAll_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles tblProjectClientsAll.CellContentClick
 
+    End Sub
+
+    Private Sub btnTrackVehicle_Click(sender As Object, e As EventArgs) Handles btnTrackVehicle.Click
+        Dim VT As New VehicleTrack
+        If numberClient IsNot Nothing Then
+            VT.numClient = numberClient
+            VT.jobNo = jobNum
+        End If
+        VT.ShowDialog()
     End Sub
 
     Private Sub txtPostingProject_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtPostingProject.KeyPress
