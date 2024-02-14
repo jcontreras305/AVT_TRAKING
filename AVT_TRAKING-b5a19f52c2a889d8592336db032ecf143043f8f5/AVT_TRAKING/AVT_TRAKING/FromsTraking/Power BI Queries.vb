@@ -1120,7 +1120,7 @@ SUM(ach.[stdBy]) OVER (PARTITION BY YEAR(md.modificationDate),MONTH(md.modificat
 SUM(ach.[other]) OVER (PARTITION BY YEAR(md.modificationDate),MONTH(md.modificationDate),jb.jobNo) as 'OTHERHRS',
 SUM(ach.[build]+ach.[material]+ach.[travel]+ach.[weather]+ach.[alarm]+ach.[safety]+ach.[stdBy]+ach.[other]) OVER (PARTITION BY YEAR(md.modificationDate),MONTH(md.modificationDate),jb.jobNo) as 'MHRS',
 'Mod' as 'Task',
-SUM(ISNULL((select SUM(quantity) from productDismantle as pd where pd.tag = md.tag and pd.idDismantle = md.idModAux),0)) OVER (PARTITION BY YEAR(md.modificationDate),MONTH(md.modificationDate),jb.jobNo) as 'MTQTY',
+SUM(ISNULL((select SUM(quantity) from productModification as pd where pd.tag = sc.tag and pd.idModAux = md.idModAux),0)) OVER (PARTITION BY YEAR(md.modificationDate),MONTH(md.modificationDate),jb.jobNo) as 'MTQTY',
 DATENAME(MONTH,md.modificationDate) as 'MONTH',
 jb.jobNo as 'ClientID'
 from activityHours as ach 

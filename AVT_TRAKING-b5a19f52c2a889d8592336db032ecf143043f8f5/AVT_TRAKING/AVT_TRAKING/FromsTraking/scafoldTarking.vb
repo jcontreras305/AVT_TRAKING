@@ -4356,6 +4356,7 @@ Public Class scafoldTarking
             'mtdScaffold.llenar
             'Out Going
             mtdScaffold.llenarJobCombo(cmbJobNumOutGoing, IdCliente)
+            'ClonarCombo(cmbShippedBY, cmbEmployeesInComing)
             mtdScaffold.llenarEmpleadosCombo(cmbShippedBY, tablaEmpleados)
             mtdScaffold.llenarEmpleadosCombo(cmbSuperintendent, tablaEmpleados)
             dtpDateOutGoing.Format = DateTimePickerFormat.Custom
@@ -4505,6 +4506,22 @@ Public Class scafoldTarking
         Catch ex As Exception
             MsgBox(ex.Message())
             Return False
+        End Try
+    End Function
+
+    Private Function ClonarCombo(ByVal cmbClone As ComboBox, ByVal cmbOriginal As ComboBox) As Boolean
+        Try
+            If cmbOriginal.Items IsNot Nothing Then
+                cmbClone.DataSource = cmbOriginal.DataSource
+                cmbClone.DisplayMember = cmbOriginal.DisplayMember
+                cmbClone.ValueMember = cmbOriginal.ValueMember
+            Else
+                For Each row As Data.DataRow In tablaEmpleados.Rows
+                    cmbClone.Items.Add(row.ItemArray(1))
+                Next
+            End If
+        Catch ex As Exception
+
         End Try
     End Function
 
