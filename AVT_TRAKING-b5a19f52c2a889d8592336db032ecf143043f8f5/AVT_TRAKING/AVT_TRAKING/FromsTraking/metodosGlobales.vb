@@ -64,10 +64,10 @@ Module metodosGlobales
     ''' <returns> 
     ''' Retorna el combo lleno con los empleados en contrados en la BD.
     ''' </returns>
-    Public Function llenarComboEmployeeReports(ByVal combo As ComboBox) As Boolean
+    Public Function llenarComboEmployeeReports(ByVal combo As ComboBox, Optional onlyEnable As Boolean = False) As Boolean
         Try
             con.conectar()
-            Dim cmd As New SqlCommand("select numberEmploye, CONCAT(em.lastName,' ',em.firstName,' ',em.middleName) as 'name' from employees as em order by CONCAT(em.lastName,' ',em.firstName,' ',em.middleName) asc ", con.conn) '
+            Dim cmd As New SqlCommand("select numberEmploye, CONCAT(em.lastName,' ',em.firstName,' ',em.middleName) as 'name' from employees as em " + If(onlyEnable, " where em.estatus = 'E' ", "") + " order by CONCAT(em.lastName,' ',em.firstName,' ',em.middleName) asc ", con.conn) '
             Dim dr As SqlDataReader = cmd.ExecuteReader()
             combo.Items.Clear()
             While dr.Read()
@@ -105,6 +105,33 @@ Module metodosGlobales
             Return False
         Finally
             con.desconectar()
+        End Try
+    End Function
+    ''' <summary>
+    ''' Hace una consulta a la BD, retornando los WorkOrder 'WO-TK' de un cliente o trabajo
+    ''' </summary>
+    ''' <param name="combo"></param>
+    ''' <param name="numberClient"></param>
+    ''' <param name="jobNo"></param>
+    ''' <param name="PO"></param>
+    ''' <returns>Retorna un True si no hubo problemas con la consulta</returns>
+    Public Function llenarComboWOByClient(ByVal combo As ComboBox, ByVal numberClient As String, Optional jobNo As String = "", Optional PO As String = "") As Boolean
+        Try
+            con.conectar()
+            Dim cmd As New SqlCommand("select CONCAT( wo.idWO,'-',tk.task)as WO from task as tk inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO 
+inner join projectOrder as po on po.idPO = wo.idPO and wo.jobNo = po.jobNo 
+inner join job as jb on jb.jobNo = po .jobNo 
+inner join clients as cl on cl.idClient = jb.idClient 
+where cl.numberClient = " + numberClient + If(jobNo = "", "", " and jb.jobNo = " + jobNo + " ") + If(PO = "", "", " and po.idPO = " + PO), con.conn)
+            Dim dr As SqlDataReader = cmd.ExecuteReader()
+            combo.Items.Clear()
+            While dr.Read()
+                combo.Items.Add(dr("WO"))
+            End While
+            dr.Close()
+            Return True
+        Catch ex As Exception
+            Return False
         End Try
     End Function
     ''' <summary>

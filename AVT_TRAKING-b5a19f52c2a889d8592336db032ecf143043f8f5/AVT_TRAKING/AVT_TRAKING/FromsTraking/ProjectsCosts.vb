@@ -1736,6 +1736,11 @@ Public Class ProjectsCosts
 
     End Sub
 
+    Private Sub btnMoveHours_Click(sender As Object, e As EventArgs) Handles btnMoveHours.Click
+        Dim mvh As New MoveHours
+        mvh.ShowDialog()
+    End Sub
+
     Private Sub btnFindProject_Click(sender As Object, e As EventArgs) Handles btnFindProject.Click
         Dim FT As New FindTask
         FT.FindElement = FindElement

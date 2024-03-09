@@ -355,6 +355,12 @@
     <Compile Include="FromsTraking\ModificationValidationTable.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="FromsTraking\MoveHours.Designer.vb">
+      <DependentUpon>MoveHours.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FromsTraking\MoveHours.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="FromsTraking\myCompany.Designer.vb">
       <DependentUpon>myCompany.vb</DependentUpon>
     </Compile>
@@ -1126,6 +1132,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FromsTraking\ModificationValidationTable.resx">
       <DependentUpon>ModificationValidationTable.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FromsTraking\MoveHours.resx">
+      <DependentUpon>MoveHours.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FromsTraking\myCompany.resx">
       <DependentUpon>myCompany.vb</DependentUpon>

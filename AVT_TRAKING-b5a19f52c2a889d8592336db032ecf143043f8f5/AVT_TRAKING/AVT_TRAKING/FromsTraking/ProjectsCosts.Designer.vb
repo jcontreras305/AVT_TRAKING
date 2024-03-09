@@ -87,6 +87,7 @@ Partial Class ProjectsCosts
         Me.cmbExpCode = New System.Windows.Forms.ComboBox()
         Me.Label13 = New System.Windows.Forms.Label()
         Me.Panel4 = New System.Windows.Forms.Panel()
+        Me.btnMoveHours = New System.Windows.Forms.Button()
         Me.btnCancel = New System.Windows.Forms.Button()
         Me.Label28 = New System.Windows.Forms.Label()
         Me.PictureBox3 = New System.Windows.Forms.PictureBox()
@@ -969,6 +970,7 @@ Partial Class ProjectsCosts
         'Panel4
         '
         Me.Panel4.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(58, Byte), Integer), CType(CType(115, Byte), Integer))
+        Me.Panel4.Controls.Add(Me.btnMoveHours)
         Me.Panel4.Controls.Add(Me.btnCancel)
         Me.Panel4.Controls.Add(Me.Label28)
         Me.Panel4.Controls.Add(Me.PictureBox3)
@@ -991,6 +993,24 @@ Partial Class ProjectsCosts
         Me.Panel4.Size = New System.Drawing.Size(1476, 76)
         Me.Panel4.TabIndex = 29
         '
+        'btnMoveHours
+        '
+        Me.btnMoveHours.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnMoveHours.FlatAppearance.BorderSize = 0
+        Me.btnMoveHours.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(83, Byte), Integer), CType(CType(93, Byte), Integer), CType(CType(102, Byte), Integer))
+        Me.btnMoveHours.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnMoveHours.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.btnMoveHours.Image = Global.AVT_TRAKING.My.Resources.Resources.extend
+        Me.btnMoveHours.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnMoveHours.Location = New System.Drawing.Point(469, 25)
+        Me.btnMoveHours.Margin = New System.Windows.Forms.Padding(4)
+        Me.btnMoveHours.Name = "btnMoveHours"
+        Me.btnMoveHours.Size = New System.Drawing.Size(125, 44)
+        Me.btnMoveHours.TabIndex = 43
+        Me.btnMoveHours.Text = "Move Hours"
+        Me.btnMoveHours.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.btnMoveHours.UseVisualStyleBackColor = True
+        '
         'btnCancel
         '
         Me.btnCancel.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
@@ -1000,10 +1020,10 @@ Partial Class ProjectsCosts
         Me.btnCancel.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.btnCancel.Image = Global.AVT_TRAKING.My.Resources.Resources.close2
         Me.btnCancel.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnCancel.Location = New System.Drawing.Point(735, 25)
+        Me.btnCancel.Location = New System.Drawing.Point(767, 25)
         Me.btnCancel.Margin = New System.Windows.Forms.Padding(4)
         Me.btnCancel.Name = "btnCancel"
-        Me.btnCancel.Size = New System.Drawing.Size(103, 44)
+        Me.btnCancel.Size = New System.Drawing.Size(95, 44)
         Me.btnCancel.TabIndex = 42
         Me.btnCancel.Text = "Cancel"
         Me.btnCancel.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -1108,7 +1128,7 @@ Partial Class ProjectsCosts
         Me.btnNextTask.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.btnNextTask.Image = Global.AVT_TRAKING.My.Resources.Resources._next
         Me.btnNextTask.ImageAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.btnNextTask.Location = New System.Drawing.Point(1195, 33)
+        Me.btnNextTask.Location = New System.Drawing.Point(1227, 33)
         Me.btnNextTask.Margin = New System.Windows.Forms.Padding(4)
         Me.btnNextTask.Name = "btnNextTask"
         Me.btnNextTask.Size = New System.Drawing.Size(95, 28)
@@ -1126,7 +1146,7 @@ Partial Class ProjectsCosts
         Me.btnAfterTask.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.btnAfterTask.Image = Global.AVT_TRAKING.My.Resources.Resources.after1
         Me.btnAfterTask.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnAfterTask.Location = New System.Drawing.Point(944, 34)
+        Me.btnAfterTask.Location = New System.Drawing.Point(976, 34)
         Me.btnAfterTask.Margin = New System.Windows.Forms.Padding(4)
         Me.btnAfterTask.Name = "btnAfterTask"
         Me.btnAfterTask.Size = New System.Drawing.Size(100, 28)
@@ -1138,7 +1158,7 @@ Partial Class ProjectsCosts
         'txtElementsRadar
         '
         Me.txtElementsRadar.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.txtElementsRadar.Location = New System.Drawing.Point(1052, 37)
+        Me.txtElementsRadar.Location = New System.Drawing.Point(1084, 37)
         Me.txtElementsRadar.Margin = New System.Windows.Forms.Padding(4)
         Me.txtElementsRadar.Name = "txtElementsRadar"
         Me.txtElementsRadar.ReadOnly = True
@@ -1154,10 +1174,10 @@ Partial Class ProjectsCosts
         Me.btnAddRecord.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.btnAddRecord.Image = Global.AVT_TRAKING.My.Resources.Resources.add
         Me.btnAddRecord.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnAddRecord.Location = New System.Drawing.Point(583, 25)
+        Me.btnAddRecord.Location = New System.Drawing.Point(615, 25)
         Me.btnAddRecord.Margin = New System.Windows.Forms.Padding(4)
         Me.btnAddRecord.Name = "btnAddRecord"
-        Me.btnAddRecord.Size = New System.Drawing.Size(144, 44)
+        Me.btnAddRecord.Size = New System.Drawing.Size(131, 44)
         Me.btnAddRecord.TabIndex = 18
         Me.btnAddRecord.Text = "Add Record"
         Me.btnAddRecord.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -1172,7 +1192,7 @@ Partial Class ProjectsCosts
         Me.btnFindProject.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.btnFindProject.Image = Global.AVT_TRAKING.My.Resources.Resources.loupe
         Me.btnFindProject.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnFindProject.Location = New System.Drawing.Point(860, 34)
+        Me.btnFindProject.Location = New System.Drawing.Point(892, 34)
         Me.btnFindProject.Margin = New System.Windows.Forms.Padding(4)
         Me.btnFindProject.Name = "btnFindProject"
         Me.btnFindProject.Size = New System.Drawing.Size(76, 28)
@@ -2030,4 +2050,5 @@ Partial Class ProjectsCosts
     Public WithEvents txtPostingProject As TextBox
     Friend WithEvents Label35 As Label
     Public WithEvents txtArea As TextBox
+    Friend WithEvents btnMoveHours As Button
 End Class
