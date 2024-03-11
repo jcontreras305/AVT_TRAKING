@@ -702,7 +702,7 @@ BEGIN
 	drop table PBI.[EmpAbsents]
 END
 
-select YEAR(ab.dateAbsents) as'Year',DATENAME( MONTH,ab.dateAbsents) as 'Month',
+select distinct YEAR(ab.dateAbsents) as'Year',DATENAME( MONTH,ab.dateAbsents) as 'Month',
 SUM(ab.hoursPaid) OVER (PARTITION BY YEAR(ab.dateAbsents),MONTH(ab.dateAbsents)) as 'Hours',
 SUM(ab.hoursPaid) OVER (PARTITION BY YEAR(ab.dateAbsents),MONTH(ab.dateAbsents))/8 as 'Days' ,
 MONTH(ab.dateAbsents) as 'MonthN' 

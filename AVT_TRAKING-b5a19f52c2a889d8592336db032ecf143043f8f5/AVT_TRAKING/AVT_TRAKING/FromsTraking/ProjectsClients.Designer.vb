@@ -122,7 +122,6 @@ Partial Class ProjectsClients
         Me.idAux = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.photo = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.PostingProject = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.tblProjectsCLAll = New System.Windows.Forms.DataGridView()
         Me.Panel1.SuspendLayout()
         Me.pnlButtonsPOCl.SuspendLayout()
         Me.PnllSetup.SuspendLayout()
@@ -147,7 +146,6 @@ Partial Class ProjectsClients
         Me.TableLayoutPanel4.SuspendLayout()
         Me.Panel3.SuspendLayout()
         CType(Me.tblProjectClientsAll, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.tblProjectsCLAll, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'Panel1
@@ -1158,7 +1156,6 @@ Partial Class ProjectsClients
         '
         'Panel3
         '
-        Me.Panel3.Controls.Add(Me.tblProjectsCLAll)
         Me.Panel3.Controls.Add(Me.tblProjectClientsAll)
         Me.Panel3.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel3.Location = New System.Drawing.Point(4, 4)
@@ -1174,13 +1171,14 @@ Partial Class ProjectsClients
         Me.tblProjectClientsAll.BackgroundColor = System.Drawing.SystemColors.ControlLight
         Me.tblProjectClientsAll.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.tblProjectClientsAll.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.clmWorkOrder, Me.clmProjectDescription, Me.clmCoplete, Me.clmTotalSpend, Me.clmTotalHoursST, Me.clmTotalAmountST, Me.clmTotalHoursOT, Me.clmTotalAmountOT, Me.clmTotalHours3, Me.clmTotalAmount3, Me.clmTotalExpensesSpend, Me.clmTotalMaterialSpend, Me.jobNo, Me.workTMLumpSum, Me.costDistribution, Me.custumerNo, Me.contractNo, Me.costCode, Me.idClient, Me.clmIdPO, Me.idTask, Me.idAuxWO, Me.idAux, Me.photo, Me.PostingProject})
+        Me.tblProjectClientsAll.Dock = System.Windows.Forms.DockStyle.Fill
         Me.tblProjectClientsAll.Location = New System.Drawing.Point(0, 0)
         Me.tblProjectClientsAll.Margin = New System.Windows.Forms.Padding(4)
         Me.tblProjectClientsAll.Name = "tblProjectClientsAll"
         Me.tblProjectClientsAll.ReadOnly = True
         Me.tblProjectClientsAll.RowHeadersWidth = 51
         Me.tblProjectClientsAll.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.tblProjectClientsAll.Size = New System.Drawing.Size(644, 470)
+        Me.tblProjectClientsAll.Size = New System.Drawing.Size(1206, 470)
         Me.tblProjectClientsAll.TabIndex = 7
         '
         'clmWorkOrder
@@ -1393,16 +1391,6 @@ Partial Class ProjectsClients
         Me.PostingProject.ReadOnly = True
         Me.PostingProject.Width = 125
         '
-        'tblProjectsCLAll
-        '
-        Me.tblProjectsCLAll.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.tblProjectsCLAll.Location = New System.Drawing.Point(651, 5)
-        Me.tblProjectsCLAll.Name = "tblProjectsCLAll"
-        Me.tblProjectsCLAll.RowHeadersWidth = 51
-        Me.tblProjectsCLAll.RowTemplate.Height = 24
-        Me.tblProjectsCLAll.Size = New System.Drawing.Size(556, 466)
-        Me.tblProjectsCLAll.TabIndex = 8
-        '
         'ProjectsClients
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
@@ -1447,7 +1435,6 @@ Partial Class ProjectsClients
         Me.TableLayoutPanel4.ResumeLayout(False)
         Me.Panel3.ResumeLayout(False)
         CType(Me.tblProjectClientsAll, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.tblProjectsCLAll, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -1551,5 +1538,4 @@ Partial Class ProjectsClients
     Friend WithEvents txtPostingProject As TextBox
     Friend WithEvents Panel10 As Panel
     Friend WithEvents btnTrackVehicle As Button
-    Friend WithEvents tblProjectsCLAll As DataGridView
 End Class
