@@ -43,7 +43,7 @@ Public Class Power_BI_Queries
 		End If
 		Dim arraySheets() As String = {"ALL", "ALL Barriers", "ALLCPH", "ALLHOURS", "CostHPTAS", "CostMth", "Scaffold", "ScaBTools", "ScaDTools", "ScaMTools", "ACM", "AR Invoices", "Invoices"}
 		Dim arrayALLCPH() As String = {"All CHP 1", "All CHP 2", "All CHP 3"}
-		Dim arrayALLHours() As String = {"All Hours 1", "All Hours 2", "Travelers", "Absents"}
+		Dim arrayALLHours() As String = {"All Hours 1", "All Hours 2", "Travelers", "Absents", "Count Work Code"}
 
 
 		For Each item As String In arraySheets
@@ -96,7 +96,7 @@ Public Class Power_BI_Queries
 			End If
 		Next
 		If listRefresh.Count > 0 Then
-			If mtdPBI.tableRefresh(listRefresh) Then
+			If mtdPBI.tableRefresh(listRefresh, lblMessage) Then
 				MsgBox("Successful.")
 			End If
 		Else
@@ -168,7 +168,7 @@ END "
 			_finalDate = value
 		End Set
 	End Property
-	Public Function tableRefresh(ByVal tblName As List(Of String)) As Boolean
+	Public Function tableRefresh(ByVal tblName As List(Of String), ByVal lbl As Label) As Boolean
 		Try
 			conectar()
 			Dim flag As Boolean = True
@@ -178,6 +178,7 @@ END "
 				tran = conn.BeginTransaction
 				For Each name As String In tblName
 					Dim cmd1 As New SqlCommand()
+					lbl.Text = "Message : Updating info from table " + name
 					Select Case name
 						Case "ALL"
 							cmd1.CommandText = StartDate + vbCrLf + FinalDate + vbCrLf + All
@@ -197,6 +198,8 @@ END "
 							cmd1.CommandText = StartDate + vbCrLf + FinalDate + vbCrLf + Travelers
 						Case "Absents"
 							cmd1.CommandText = StartDate + vbCrLf + FinalDate + vbCrLf + Absents
+						Case "Count Work Code"
+							cmd1.CommandText = StartDate + vbCrLf + FinalDate + vbCrLf + CountWCEmp
 						Case "CostHPTAS"
 							cmd1.CommandText = StartDate + vbCrLf + FinalDate + vbCrLf + CostHPTAS
 						Case "CostMth"
@@ -218,7 +221,7 @@ END "
 					End Select
 					cmd1.Connection = conn
 					cmd1.Transaction = tran
-					cmd1.CommandTimeout = 120
+					cmd1.CommandTimeout = 130
 					If cmd1.ExecuteNonQuery() >= 0 Then
 						flag = True
 					Else
@@ -228,9 +231,11 @@ END "
 				Next
 				If flag Then
 					tran.Commit()
+					lbl.Text = "Message : End."
 					Return True
 				Else
 					tran.Rollback()
+					lbl.Text = "Message : Error."
 					Return False
 				End If
 			Else
@@ -239,6 +244,7 @@ END "
 
 		Catch ex As Exception
 			MsgBox(ex.Message())
+			lbl.Text = "Message : Error" + ex.Message
 			Return False
 		Finally
 			desconectar()
@@ -306,7 +312,7 @@ END "
 
 	Dim _All, _ALL_Barries, _CostHPTAS, _CostMth, _Scaffold, _ScaBTools, _ScaDTools, _ScaMTools, _ACM, _AR_Inovices, _Invoices,
 _All_CHP_1, _All_CHP_2, _All_CHP_3,
-_All_Hours_1, _All_Hours_2, _Travelers, _Absents As String
+_All_Hours_1, _All_Hours_2, _Travelers, _Absents, _countWCEMP As String
 
 	Public Property All As String
 		Get
@@ -695,6 +701,53 @@ select 0 as 'Travelers',count(*) as 'Locals' FROM employees where perdiem = 0
 		End Set
 	End Property
 
+	Public Property CountWCEmp() As String
+		Get
+			_countWCEMP = "IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES where TABLE_SCHEMA = 'PBI' and TABLE_NAME = 'COUNTWCEMP')
+BEGIN 
+	drop table PBI.[COUNTWCEMP]
+END
+
+select distinct t1.[Year],t1.[Client],t1.[Month],t1.[MonthN],t1.[Work Code],
+count(t1.[numberEmploye]) OVER (PARTITION BY t1.[Year],t1.[Client],t1.[Month],t1.[Work Code]) as 'Count Employees'  
+into PBI.COUNTWCEMP
+from (
+select YEAR(hw.dateWorked)as 'Year',wc.jobNo as 'Client',MONTH(hw.dateWorked) as 'Month',DATENAME(MONTH,hw.dateWorked)as 'MonthN'
+,case 
+	when subString(wc.name,1,2) Like 'CK%' then 'Secretary'
+	when subString(wc.name,1,3) Like 'FM%' then 'Foreman'
+	when subString(wc.name,1,3) Like 'GF%' then 'General Foreman'
+	when wc.name Like 'LMICM' or wc.name Like 'LMSCM' or wc.name Like 'LMPCM'or wc.name Like 'LMACM'or wc.name Like 'LMLCM' THEN 'Construction Manger'
+	when wc.name Like 'LMIG' or wc.name Like 'LMSG' or wc.name Like 'LMPG'or wc.name Like 'LMAG'or wc.name Like 'LMLG' then 'General Foreman'
+	when wc.name Like 'LMISUP' or wc.name Like 'LMSSUP' or wc.name Like 'LMPSUP'or wc.name Like 'LMASUP'or wc.name Like 'LMLSUP' then 'Supervisor'
+	when wc.name Like 'LMIPM' or wc.name Like 'LMSPM' or wc.name Like 'LMPPM'or wc.name Like 'LMAPM'or wc.name Like 'LMLPM' then 'Project Manager'
+	when subString(wc.name,1,4) like 'LMA' or subString(wc.name,1,4) like 'LMA-' or SUBSTRING(wc.name ,1,4) = 'LMAB' then 'Asbestos'
+	when subString(wc.name,1,4) like 'LMI' or subString(wc.name,1,4) like 'LMI-' or subString(wc.name,1,4) like 'LMB1' or subString(wc.name,1,4) like 'LMB2' or subString(wc.name,1,4) like 'LMB3' or SUBSTRING(wc.name ,1,4) = 'LMIB' then 'Insulation'
+	when subString(wc.name,1,4) like 'LMP' or subString(wc.name,1,4) like 'LMP-' or subString(wc.name,1,4) like 'LMP1' or subString(wc.name,1,4) like 'LMP2' or subString(wc.name,1,4) like 'LMP3' or SUBSTRING(wc.name ,1,4) = 'LMPB' then 'Paint'
+	when subString(wc.name,1,4) like 'LMS' or subString(wc.name,1,4) like 'LMS-' or subString(wc.name,1,4) like 'LMS1' or subString(wc.name,1,4) like 'LMS2' or subString(wc.name,1,4) like 'LMS3' or SUBSTRING(wc.name ,1,4) = 'LMSB' then 'Scaffold'
+	when subString(wc.name,1,4) like 'LML' or subString(wc.name,1,4) like 'LML-' or subString(wc.name,1,4) like 'LMLB' then 'Lead'
+	when subString(wc.name,1,3) like 'PLN%' then 'Planner'
+	when subString(wc.name,1,3) like 'QAQ%' then 'Quality Control'
+	when subString(wc.name,1,3) like 'SCH%' then 'Scheleder'
+	when subString(wc.name,1,3) like 'SM%' then 'Safety'
+	when subString(wc.name,1,4) like 'FRKO%' then 'Forklift Operator'
+	when subString(wc.name,1,4) like 'SUP%' then 'Supervisor'
+	else wc.name 
+	end as 'Work Code',
+	emp.numberEmploye
+from hoursWorked as hw inner join workCode as wc on hw.idWorkCode = wc.idWorkCode
+inner join employees as emp on emp.idEmployee = hw.idEmployee
+where hw.dateWorked between @StartDate and @EndDate and not(wc.name like '%Bereavement%' or wc.name like '%Holiday%'or wc.name like '%Safety%'or wc.name like '%Drugtest%'or wc.name like '%Vacation%'or wc.name like '%Travel%'or wc.name like '%Craft%')
+) as t1
+"
+			Return _countWCEMP
+		End Get
+		Set(ByVal value As String)
+			_countWCEMP = value
+		End Set
+	End Property
+
+
 	Public Property Absents As String
 		Get
 			_Absents = "IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES where TABLE_SCHEMA = 'PBI' and TABLE_NAME = 'EmpAbsents')
@@ -703,9 +756,10 @@ BEGIN
 END
 
 select distinct YEAR(ab.dateAbsents) as'Year',DATENAME( MONTH,ab.dateAbsents) as 'Month',
-SUM(ab.hoursPaid) OVER (PARTITION BY YEAR(ab.dateAbsents),MONTH(ab.dateAbsents)) as 'Hours',
-SUM(ab.hoursPaid) OVER (PARTITION BY YEAR(ab.dateAbsents),MONTH(ab.dateAbsents))/8 as 'Days' ,
-MONTH(ab.dateAbsents) as 'MonthN' 
+SUM(ab.hoursPaid) OVER (PARTITION BY YEAR(ab.dateAbsents),MONTH(ab.dateAbsents),ab.explanation) as 'Hours',
+SUM(ab.hoursPaid) OVER (PARTITION BY YEAR(ab.dateAbsents),MONTH(ab.dateAbsents),ab.explanation)/8 as 'Days' ,
+MONTH(ab.dateAbsents) as 'MonthN' ,
+ab.explanation
 into PBI.EmpAbsents
 from absents as ab
 where ab.dateAbsents between @StartDate and @EndDate"

@@ -42,6 +42,7 @@ Partial Class Power_BI_Queries
         Me.tvwTablePBI = New System.Windows.Forms.TreeView()
         Me.Panel4 = New System.Windows.Forms.Panel()
         Me.tblInfoPBI = New System.Windows.Forms.DataGridView()
+        Me.lblMessage = New System.Windows.Forms.Label()
         Me.TableLayoutPanel1.SuspendLayout()
         Me.Panel1.SuspendLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -66,12 +67,13 @@ Partial Class Power_BI_Queries
         Me.TableLayoutPanel1.Controls.Add(Me.TableLayoutPanel2, 0, 2)
         Me.TableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.TableLayoutPanel1.Location = New System.Drawing.Point(0, 0)
+        Me.TableLayoutPanel1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
         Me.TableLayoutPanel1.RowCount = 3
-        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40.0!))
-        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 44.0!))
+        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 49.0!))
+        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 54.0!))
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-        Me.TableLayoutPanel1.Size = New System.Drawing.Size(863, 440)
+        Me.TableLayoutPanel1.Size = New System.Drawing.Size(1151, 542)
         Me.TableLayoutPanel1.TabIndex = 1
         '
         'Panel1
@@ -84,17 +86,19 @@ Partial Class Power_BI_Queries
         Me.Panel1.Controls.Add(Me.Label1)
         Me.Panel1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel1.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.Panel1.Location = New System.Drawing.Point(3, 3)
+        Me.Panel1.Location = New System.Drawing.Point(4, 4)
+        Me.Panel1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(857, 34)
+        Me.Panel1.Size = New System.Drawing.Size(1143, 41)
         Me.Panel1.TabIndex = 0
         '
         'PictureBox1
         '
         Me.PictureBox1.Image = Global.AVT_TRAKING.My.Resources.Resources.report
-        Me.PictureBox1.Location = New System.Drawing.Point(3, 4)
+        Me.PictureBox1.Location = New System.Drawing.Point(4, 5)
+        Me.PictureBox1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.PictureBox1.Name = "PictureBox1"
-        Me.PictureBox1.Size = New System.Drawing.Size(28, 28)
+        Me.PictureBox1.Size = New System.Drawing.Size(37, 34)
         Me.PictureBox1.TabIndex = 13
         Me.PictureBox1.TabStop = False
         '
@@ -102,9 +106,10 @@ Partial Class Power_BI_Queries
         '
         Me.btnMinimize.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnMinimize.Image = Global.AVT_TRAKING.My.Resources.Resources.minimize2
-        Me.btnMinimize.Location = New System.Drawing.Point(790, 0)
+        Me.btnMinimize.Location = New System.Drawing.Point(1053, 0)
+        Me.btnMinimize.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.btnMinimize.Name = "btnMinimize"
-        Me.btnMinimize.Size = New System.Drawing.Size(27, 29)
+        Me.btnMinimize.Size = New System.Drawing.Size(36, 36)
         Me.btnMinimize.TabIndex = 12
         Me.btnMinimize.TabStop = False
         '
@@ -112,9 +117,10 @@ Partial Class Power_BI_Queries
         '
         Me.btnRestore.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnRestore.Image = Global.AVT_TRAKING.My.Resources.Resources.restore2
-        Me.btnRestore.Location = New System.Drawing.Point(823, 0)
+        Me.btnRestore.Location = New System.Drawing.Point(1097, 0)
+        Me.btnRestore.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.btnRestore.Name = "btnRestore"
-        Me.btnRestore.Size = New System.Drawing.Size(31, 29)
+        Me.btnRestore.Size = New System.Drawing.Size(41, 36)
         Me.btnRestore.TabIndex = 11
         Me.btnRestore.TabStop = False
         '
@@ -122,9 +128,10 @@ Partial Class Power_BI_Queries
         '
         Me.btnMaximize.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnMaximize.Image = Global.AVT_TRAKING.My.Resources.Resources.maximize2
-        Me.btnMaximize.Location = New System.Drawing.Point(823, 0)
+        Me.btnMaximize.Location = New System.Drawing.Point(1097, 0)
+        Me.btnMaximize.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.btnMaximize.Name = "btnMaximize"
-        Me.btnMaximize.Size = New System.Drawing.Size(31, 29)
+        Me.btnMaximize.Size = New System.Drawing.Size(41, 36)
         Me.btnMaximize.TabIndex = 10
         Me.btnMaximize.TabStop = False
         '
@@ -133,9 +140,10 @@ Partial Class Power_BI_Queries
         Me.Label1.AutoSize = True
         Me.Label1.Font = New System.Drawing.Font("Verdana", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label1.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.Label1.Location = New System.Drawing.Point(46, 6)
+        Me.Label1.Location = New System.Drawing.Point(61, 7)
+        Me.Label1.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(138, 18)
+        Me.Label1.Size = New System.Drawing.Size(176, 25)
         Me.Label1.TabIndex = 0
         Me.Label1.Text = "Power BI Data"
         '
@@ -149,26 +157,29 @@ Partial Class Power_BI_Queries
         Me.Panel2.Controls.Add(Me.PictureBox4)
         Me.Panel2.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel2.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.Panel2.Location = New System.Drawing.Point(3, 43)
+        Me.Panel2.Location = New System.Drawing.Point(4, 53)
+        Me.Panel2.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(857, 38)
+        Me.Panel2.Size = New System.Drawing.Size(1143, 46)
         Me.Panel2.TabIndex = 1
         '
         'Label3
         '
         Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(193, 13)
+        Me.Label3.Location = New System.Drawing.Point(257, 16)
+        Me.Label3.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(55, 13)
+        Me.Label3.Size = New System.Drawing.Size(72, 17)
         Me.Label3.TabIndex = 13
         Me.Label3.Text = "Final Date"
         '
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(10, 13)
+        Me.Label2.Location = New System.Drawing.Point(13, 16)
+        Me.Label2.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(55, 13)
+        Me.Label2.Size = New System.Drawing.Size(72, 17)
         Me.Label2.TabIndex = 12
         Me.Label2.Text = "Start Date"
         '
@@ -176,27 +187,30 @@ Partial Class Power_BI_Queries
         '
         Me.dtpFinalDate.CustomFormat = "MM/dd/yyyy"
         Me.dtpFinalDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom
-        Me.dtpFinalDate.Location = New System.Drawing.Point(257, 9)
+        Me.dtpFinalDate.Location = New System.Drawing.Point(343, 11)
+        Me.dtpFinalDate.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.dtpFinalDate.Name = "dtpFinalDate"
-        Me.dtpFinalDate.Size = New System.Drawing.Size(109, 20)
+        Me.dtpFinalDate.Size = New System.Drawing.Size(144, 22)
         Me.dtpFinalDate.TabIndex = 11
         '
         'dtpStartDate
         '
         Me.dtpStartDate.CustomFormat = "MM/dd/yyyy"
         Me.dtpStartDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom
-        Me.dtpStartDate.Location = New System.Drawing.Point(65, 9)
+        Me.dtpStartDate.Location = New System.Drawing.Point(87, 11)
+        Me.dtpStartDate.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.dtpStartDate.Name = "dtpStartDate"
-        Me.dtpStartDate.Size = New System.Drawing.Size(109, 20)
+        Me.dtpStartDate.Size = New System.Drawing.Size(144, 22)
         Me.dtpStartDate.TabIndex = 10
         '
         'PictureBox4
         '
         Me.PictureBox4.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.PictureBox4.Image = Global.AVT_TRAKING.My.Resources.Resources._exit
-        Me.PictureBox4.Location = New System.Drawing.Point(817, 5)
+        Me.PictureBox4.Location = New System.Drawing.Point(1089, 6)
+        Me.PictureBox4.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.PictureBox4.Name = "PictureBox4"
-        Me.PictureBox4.Size = New System.Drawing.Size(37, 29)
+        Me.PictureBox4.Size = New System.Drawing.Size(49, 36)
         Me.PictureBox4.TabIndex = 9
         Me.PictureBox4.TabStop = False
         '
@@ -208,11 +222,12 @@ Partial Class Power_BI_Queries
         Me.TableLayoutPanel2.Controls.Add(Me.Panel3, 0, 0)
         Me.TableLayoutPanel2.Controls.Add(Me.Panel4, 1, 0)
         Me.TableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.TableLayoutPanel2.Location = New System.Drawing.Point(3, 87)
+        Me.TableLayoutPanel2.Location = New System.Drawing.Point(4, 107)
+        Me.TableLayoutPanel2.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.TableLayoutPanel2.Name = "TableLayoutPanel2"
         Me.TableLayoutPanel2.RowCount = 1
         Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
-        Me.TableLayoutPanel2.Size = New System.Drawing.Size(857, 350)
+        Me.TableLayoutPanel2.Size = New System.Drawing.Size(1143, 431)
         Me.TableLayoutPanel2.TabIndex = 2
         '
         'Panel3
@@ -221,9 +236,10 @@ Partial Class Power_BI_Queries
         Me.Panel3.Controls.Add(Me.btnRefresh)
         Me.Panel3.Controls.Add(Me.tvwTablePBI)
         Me.Panel3.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel3.Location = New System.Drawing.Point(3, 3)
+        Me.Panel3.Location = New System.Drawing.Point(4, 4)
+        Me.Panel3.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.Panel3.Name = "Panel3"
-        Me.Panel3.Size = New System.Drawing.Size(196, 344)
+        Me.Panel3.Size = New System.Drawing.Size(262, 423)
         Me.Panel3.TabIndex = 2
         '
         'btnCheckAll
@@ -233,9 +249,10 @@ Partial Class Power_BI_Queries
         Me.btnCheckAll.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnCheckAll.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.btnCheckAll.Image = Global.AVT_TRAKING.My.Resources.Resources.allTables
-        Me.btnCheckAll.Location = New System.Drawing.Point(6, 309)
+        Me.btnCheckAll.Location = New System.Drawing.Point(9, 380)
+        Me.btnCheckAll.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.btnCheckAll.Name = "btnCheckAll"
-        Me.btnCheckAll.Size = New System.Drawing.Size(90, 29)
+        Me.btnCheckAll.Size = New System.Drawing.Size(120, 36)
         Me.btnCheckAll.TabIndex = 3
         Me.btnCheckAll.Text = "Select All"
         Me.btnCheckAll.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
@@ -248,9 +265,10 @@ Partial Class Power_BI_Queries
         Me.btnRefresh.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnRefresh.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.btnRefresh.Image = Global.AVT_TRAKING.My.Resources.Resources.refresh
-        Me.btnRefresh.Location = New System.Drawing.Point(102, 309)
+        Me.btnRefresh.Location = New System.Drawing.Point(137, 380)
+        Me.btnRefresh.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.btnRefresh.Name = "btnRefresh"
-        Me.btnRefresh.Size = New System.Drawing.Size(91, 29)
+        Me.btnRefresh.Size = New System.Drawing.Size(121, 36)
         Me.btnRefresh.TabIndex = 2
         Me.btnRefresh.Text = "Refresh"
         Me.btnRefresh.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
@@ -262,18 +280,21 @@ Partial Class Power_BI_Queries
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.tvwTablePBI.CheckBoxes = True
-        Me.tvwTablePBI.Location = New System.Drawing.Point(0, 3)
+        Me.tvwTablePBI.Location = New System.Drawing.Point(0, 4)
+        Me.tvwTablePBI.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.tvwTablePBI.Name = "tvwTablePBI"
-        Me.tvwTablePBI.Size = New System.Drawing.Size(196, 302)
+        Me.tvwTablePBI.Size = New System.Drawing.Size(261, 371)
         Me.tvwTablePBI.TabIndex = 1
         '
         'Panel4
         '
+        Me.Panel4.Controls.Add(Me.lblMessage)
         Me.Panel4.Controls.Add(Me.tblInfoPBI)
         Me.Panel4.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel4.Location = New System.Drawing.Point(205, 3)
+        Me.Panel4.Location = New System.Drawing.Point(274, 4)
+        Me.Panel4.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.Panel4.Name = "Panel4"
-        Me.Panel4.Size = New System.Drawing.Size(649, 344)
+        Me.Panel4.Size = New System.Drawing.Size(865, 423)
         Me.Panel4.TabIndex = 3
         '
         'tblInfoPBI
@@ -286,20 +307,33 @@ Partial Class Power_BI_Queries
         Me.tblInfoPBI.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.tblInfoPBI.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells
         Me.tblInfoPBI.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.tblInfoPBI.Location = New System.Drawing.Point(3, 3)
+        Me.tblInfoPBI.Location = New System.Drawing.Point(4, 4)
+        Me.tblInfoPBI.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.tblInfoPBI.Name = "tblInfoPBI"
         Me.tblInfoPBI.ReadOnly = True
-        Me.tblInfoPBI.Size = New System.Drawing.Size(643, 302)
+        Me.tblInfoPBI.RowHeadersWidth = 51
+        Me.tblInfoPBI.Size = New System.Drawing.Size(857, 372)
         Me.tblInfoPBI.TabIndex = 0
+        '
+        'lblMessage
+        '
+        Me.lblMessage.AutoSize = True
+        Me.lblMessage.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.lblMessage.Location = New System.Drawing.Point(18, 390)
+        Me.lblMessage.Name = "lblMessage"
+        Me.lblMessage.Size = New System.Drawing.Size(70, 17)
+        Me.lblMessage.TabIndex = 1
+        Me.lblMessage.Text = "Mensage:"
         '
         'Power_BI_Queries
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(83, Byte), Integer), CType(CType(93, Byte), Integer), CType(CType(102, Byte), Integer))
-        Me.ClientSize = New System.Drawing.Size(863, 440)
+        Me.ClientSize = New System.Drawing.Size(1151, 542)
         Me.Controls.Add(Me.TableLayoutPanel1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
+        Me.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.Name = "Power_BI_Queries"
         Me.Text = "Power_BI_Queries"
         Me.TableLayoutPanel1.ResumeLayout(False)
@@ -315,6 +349,7 @@ Partial Class Power_BI_Queries
         Me.TableLayoutPanel2.ResumeLayout(False)
         Me.Panel3.ResumeLayout(False)
         Me.Panel4.ResumeLayout(False)
+        Me.Panel4.PerformLayout()
         CType(Me.tblInfoPBI, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
@@ -340,4 +375,5 @@ Partial Class Power_BI_Queries
     Friend WithEvents Label2 As Label
     Friend WithEvents dtpFinalDate As DateTimePicker
     Friend WithEvents dtpStartDate As DateTimePicker
+    Friend WithEvents lblMessage As Label
 End Class
