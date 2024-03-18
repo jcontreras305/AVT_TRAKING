@@ -273,6 +273,8 @@ END "
 					cmd.CommandText = "select * from PBI.[EmpTravAndLocals]"
 				Case "Absents"
 					cmd.CommandText = "select * from PBI.[EmpAbsents]"
+				Case "Count Work Code"
+					cmd.CommandText = "select * from PBI.[COUNTWCEMP]"
 				Case "CostHPTAS"
 					cmd.CommandText = "select * from PBI.[CostHPTAS]"
 				Case "CostMth"
@@ -709,10 +711,10 @@ BEGIN
 END
 
 select distinct t1.[Year],t1.[Client],t1.[Month],t1.[MonthN],t1.[Work Code],
-count(t1.[numberEmploye]) OVER (PARTITION BY t1.[Year],t1.[Client],t1.[Month],t1.[Work Code]) as 'Count Employees'  
+count(*) OVER (PARTITION BY t1.[Year],t1.[Client],t1.[Month],t1.[Work Code]) as 'Count Employees'  
 into PBI.COUNTWCEMP
 from (
-select YEAR(hw.dateWorked)as 'Year',wc.jobNo as 'Client',MONTH(hw.dateWorked) as 'Month',DATENAME(MONTH,hw.dateWorked)as 'MonthN'
+select distinct YEAR(hw.dateWorked)as 'Year',jb.jobNo as 'Client',MONTH(hw.dateWorked) as 'Month',DATENAME(MONTH,hw.dateWorked)as 'MonthN'
 ,case 
 	when subString(wc.name,1,2) Like 'CK%' then 'Secretary'
 	when subString(wc.name,1,3) Like 'FM%' then 'Foreman'
@@ -729,14 +731,18 @@ select YEAR(hw.dateWorked)as 'Year',wc.jobNo as 'Client',MONTH(hw.dateWorked) as
 	when subString(wc.name,1,3) like 'PLN%' then 'Planner'
 	when subString(wc.name,1,3) like 'QAQ%' then 'Quality Control'
 	when subString(wc.name,1,3) like 'SCH%' then 'Scheleder'
-	when subString(wc.name,1,3) like 'SM%' then 'Safety'
+	when subString(wc.name,1,3) like 'SM%' then 'Safety-Supervisor'
 	when subString(wc.name,1,4) like 'FRKO%' then 'Forklift Operator'
 	when subString(wc.name,1,4) like 'SUP%' then 'Supervisor'
 	else wc.name 
 	end as 'Work Code',
 	emp.numberEmploye
-from hoursWorked as hw inner join workCode as wc on hw.idWorkCode = wc.idWorkCode
-inner join employees as emp on emp.idEmployee = hw.idEmployee
+from hoursWorked as hw inner join workCode as wc on hw.idWorkCode = wc.idWorkCode and hw.jobNo = wc.jobNo
+inner join task as tk on tk.idAux = hw.idAux 
+inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO 
+inner join projectOrder as po on po.idPO = wo.idPO and wo.jobNo = po.jobNo 
+inner join job as jb on jb.jobNo = po.jobNo
+left join employees as emp on emp.idEmployee = hw.idEmployee
 where hw.dateWorked between @StartDate and @EndDate and not(wc.name like '%Bereavement%' or wc.name like '%Holiday%'or wc.name like '%Safety%'or wc.name like '%Drugtest%'or wc.name like '%Vacation%'or wc.name like '%Travel%'or wc.name like '%Craft%')
 ) as t1
 "
