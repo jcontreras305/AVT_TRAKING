@@ -42,12 +42,15 @@ Public Class Power_BI_Queries
 			tvwTablePBI.Nodes.Clear()
 		End If
 		Dim arraySheets() As String = {"ALL", "ALL Barriers", "ALLCPH", "ALLHOURS", "CostHPTAS", "CostMth", "Scaffold", "ScaBTools", "ScaDTools", "ScaMTools", "ACM", "AR Invoices", "Invoices"}
+		Dim arrayAllBerries() As String = {"ALL Barriers 1", "ALL Barriers 2"}
 		Dim arrayALLCPH() As String = {"All CHP 1", "All CHP 2", "All CHP 3"}
 		Dim arrayALLHours() As String = {"All Hours 1", "All Hours 2", "Travelers", "Absents", "Count Work Code"}
 
-
 		For Each item As String In arraySheets
 			tvwTablePBI.Nodes.Add(item)
+		Next
+		For Each item As String In arrayAllBerries
+			tvwTablePBI.Nodes(1).Nodes.Add(item)
 		Next
 		For Each item As String In arrayALLCPH
 			tvwTablePBI.Nodes(2).Nodes.Add(item)
@@ -122,11 +125,12 @@ Public Class Power_BI_Queries
 
 	Private Sub tvwTablePBI_NodeMouseDoubleClick(sender As Object, e As TreeNodeMouseClickEventArgs) Handles tvwTablePBI.NodeMouseDoubleClick
 		If e.Node.Nodes.Count = 0 Then
-			If Not mtdPBI.selectTable(e.Node.Text, tblInfoPBI) Then
+			If Not mtdPBI.selectTable(e.Node.Text, tblInfoPBI, lblMessage) Then
 				tblInfoPBI.DataSource = Nothing
 			End If
 		End If
 	End Sub
+
 End Class
 
 Public Class metodosPBI
@@ -182,8 +186,10 @@ END "
 					Select Case name
 						Case "ALL"
 							cmd1.CommandText = StartDate + vbCrLf + FinalDate + vbCrLf + All
-						Case "ALL Barriers"
-							cmd1.CommandText = StartDate + vbCrLf + FinalDate + vbCrLf + ALL_Barries
+						Case "ALL Barriers 1"
+							cmd1.CommandText = StartDate + vbCrLf + FinalDate + vbCrLf + ALL_Barries1
+						Case "ALL Barriers 2"
+							cmd1.CommandText = StartDate + vbCrLf + FinalDate + vbCrLf + ALL_Barries2
 						Case "All CHP 1"
 							cmd1.CommandText = StartDate + vbCrLf + FinalDate + vbCrLf + All_CHP_1
 						Case "All CHP 2"
@@ -250,15 +256,17 @@ END "
 			desconectar()
 		End Try
 	End Function
-	Public Function selectTable(ByVal tblName As String, ByVal tbl As DataGridView) As Boolean
+	Public Function selectTable(ByVal tblName As String, ByVal tbl As DataGridView, ByVal lbl As Label) As Boolean
 		Try
 			conectar()
 			Dim cmd As New SqlCommand()
 			Select Case tblName
 				Case "ALL"
 					cmd.CommandText = "select * from PBI.[ALL]"
-				Case "ALL Barriers"
+				Case "ALL Barriers 1"
 					cmd.CommandText = "select * from PBI.[ALLBarriers]"
+				Case "ALL Barriers 2"
+					cmd.CommandText = "select * from PBI.[ALLBarriers2]"
 				Case "All CHP 1"
 					cmd.CommandText = "select * from PBI.[ALLCPH1]"
 				Case "All CHP 2"
@@ -295,6 +303,7 @@ END "
 					cmd.CommandText = "select * from PBI.[Invoices]"
 			End Select
 			cmd.Connection = conn
+			lbl.Text = "Message : Table " + tblName + " info."
 			If cmd.ExecuteNonQuery Then
 				Dim da As New SqlDataAdapter(cmd)
 				Dim dt As New DataTable
@@ -312,7 +321,7 @@ END "
 		End Try
 	End Function
 
-	Dim _All, _ALL_Barries, _CostHPTAS, _CostMth, _Scaffold, _ScaBTools, _ScaDTools, _ScaMTools, _ACM, _AR_Inovices, _Invoices,
+	Dim _All, _ALL_Barries1, _ALL_Barries2, _CostHPTAS, _CostMth, _Scaffold, _ScaBTools, _ScaDTools, _ScaMTools, _ACM, _AR_Inovices, _Invoices,
 _All_CHP_1, _All_CHP_2, _All_CHP_3,
 _All_Hours_1, _All_Hours_2, _Travelers, _Absents, _countWCEMP As String
 
@@ -435,9 +444,9 @@ from(
 		End Set
 	End Property
 
-	Public Property ALL_Barries As String
+	Public Property ALL_Barries1 As String
 		Get
-			_ALL_Barries = "IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES where TABLE_SCHEMA = 'PBI' and TABLE_NAME = 'ALLBarriers')
+			_ALL_Barries1 = "IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES where TABLE_SCHEMA = 'PBI' and TABLE_NAME = 'ALLBarriers')
 BEGIN 
 	drop table PBI.[ALLBarriers]
 END
@@ -461,7 +470,39 @@ inner join job as jb on jb.jobNo = po.jobNo
 inner join workCode as wc on wc.idWorkCode = hw.idWorkCode and wc.jobNo = jb.jobNo
 where wc.name like '%-%' and hw.dateWorked between @startDate and @EndDate and wc.name not like '%covid%') 
 AS T1 ORDER BY T1.ClientID,T1.[Month]"
-			Return _ALL_Barries
+			Return _ALL_Barries1
+		End Get
+		Set(value As String)
+
+		End Set
+	End Property
+	Public Property ALL_Barries2 As String
+		Get
+			_ALL_Barries2 = "IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES where TABLE_SCHEMA = 'PBI' and TABLE_NAME = 'ALLBarriers2')
+BEGIN 
+	drop table PBI.[ALLBarriers2]
+END
+
+select T1.[Year],T1.[ClientID],T1.[Month],T1.[MonthN],T1.[name] AS 'CLASS',T1.[ST Hours],T1.[OT Hours], T1.[ST Hours] + T1.[OT Hours] AS 'TotalHours', T1.[ST Cost],T1.[OT Cost]
+into PBI.ALLBarriers2
+from (
+select 
+distinct
+YEAR(hw.dateWorked) as 'Year',
+jb.jobNo as 'ClientID', MONTH(hw.dateWorked) as 'Month' , DATENAME(MONTH,hw.dateWorked) as 'MonthN',wc.name , 
+SUM(hw.hoursST) OVER (PARTITION BY YEAR(hw.dateWorked),wc.name,MONTH(hw.dateWorked),jb.jobNo) as 'ST Hours',
+SUM(hw.hoursOT+ hw.hours3) OVER (PARTITION BY YEAR(hw.dateWorked),wc.name,MONTH(hw.dateWorked),jb.jobNo) as 'OT Hours',
+SUM(hw.hoursST*wc.billingRate1) OVER (PARTITION BY YEAR(hw.dateWorked),wc.name,MONTH(hw.dateWorked),jb.jobNo) as 'ST Cost',
+SUM((hw.hoursOT*wc.billingRateOT) + (hw.hours3*wc.billingRate3)) OVER (PARTITION BY YEAR(hw.dateWorked),wc.name,MONTH(hw.dateWorked),jb.jobNo) as 'OT Cost'
+from hoursWorked as hw 
+inner join task as tk on tk.idAux = hw.idAux
+inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO
+inner join projectOrder as po on po.idPO = wo.idPO and po.jobNo = wo.jobNo
+inner join job as jb on jb.jobNo = po.jobNo 
+inner join workCode as wc on wc.idWorkCode = hw.idWorkCode and wc.jobNo = jb.jobNo
+where hw.dateWorked between @startDate and @EndDate) 
+AS T1 ORDER BY T1.ClientID,T1.[Month]"
+			Return _ALL_Barries2
 		End Get
 		Set(value As String)
 
