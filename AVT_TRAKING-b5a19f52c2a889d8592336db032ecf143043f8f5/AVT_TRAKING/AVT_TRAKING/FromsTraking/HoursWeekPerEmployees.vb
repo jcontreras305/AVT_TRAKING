@@ -1128,40 +1128,47 @@ Public Class HoursWeekPerEmployees
     Private Sub btnDelete_Click(sender As Object, e As EventArgs) Handles btnDelete.Click
         If TabControl1.SelectedTab.Text = "Time Worked" Then
             If tblRecordEmployee.SelectedRows.Count > 0 Then
-                For Each row As DataGridViewRow In tblRecordEmployee.SelectedRows
-                    Dim idTask As String = ""
-                    For Each fila As DataRow In proyectTable.Rows
-                        If fila.ItemArray(1) = tblRecordEmployee.Rows(row.Index).Cells("Project").Value Then
-                            idTask = fila.ItemArray(0)
-                            Exit For
-                        End If
-                    Next
-                    If row.Cells("idHorsWorked").Value IsNot DBNull.Value Then
-                        mtdHPW.deleteRecordEmployee(row.Cells("idHorsWorked").Value, idTask)
-                    End If
-                Next
-            End If
-            mtdHPW.buscarHoras(tblRecordEmployee, idEmpleado)
-            cargarDatos(idEmpleado)
-        ElseIf TabControl1.SelectedTab.Text = "Expenses" Then
-            If tblExpenses.SelectedRows.Count > 0 Then
-                For Each row As DataGridViewRow In tblExpenses.SelectedRows
-                    Dim idTask As String = ""
-                    If row.Cells(0).Value = "" Then
-                        tblExpenses.Rows.Remove(row)
-                    Else
+                If DialogResult.Yes = MessageBox.Show("Warning", "Are you sure to DELETE the selected records?", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) Then
+                    For Each row As DataGridViewRow In tblRecordEmployee.SelectedRows
+                        Dim idTask As String = ""
                         For Each fila As DataRow In proyectTable.Rows
-                            If fila.ItemArray(1) = tblExpenses.Rows(row.Index).Cells("Project").Value Then
+                            If fila.ItemArray(1) = tblRecordEmployee.Rows(row.Index).Cells("Project").Value Then
                                 idTask = fila.ItemArray(0)
                                 Exit For
                             End If
                         Next
-                        mtdHPW.deleteExpense(row.Cells("idExpenseUsed").Value, idTask)
-                    End If
-                Next
+
+                        If row.Cells("idHorsWorked").Value IsNot DBNull.Value Then
+                            mtdHPW.deleteRecordEmployee(row.Cells("idHorsWorked").Value, idTask)
+                        End If
+                    Next
+                    mtdHPW.buscarHoras(tblRecordEmployee, idEmpleado)
+                    cargarDatos(idEmpleado)
+                End If
             End If
-            mtdHPW.bucarExpensesEmpleado(tblExpenses, idEmpleado)
-            cargarDatos(idEmpleado)
+
+        ElseIf TabControl1.SelectedTab.Text = "Expenses" Then
+            If tblExpenses.SelectedRows.Count > 0 Then
+                If DialogResult.Yes = MessageBox.Show("Warning", "Are you sure to DELETE the selected Expenses?", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) Then
+                    For Each row As DataGridViewRow In tblExpenses.SelectedRows
+                        Dim idTask As String = ""
+                        If row.Cells(0).Value = "" Then
+                            tblExpenses.Rows.Remove(row)
+                        Else
+                            For Each fila As DataRow In proyectTable.Rows
+                                If fila.ItemArray(1) = tblExpenses.Rows(row.Index).Cells("Project").Value Then
+                                    idTask = fila.ItemArray(0)
+                                    Exit For
+                                End If
+                            Next
+                            mtdHPW.deleteExpense(row.Cells("idExpenseUsed").Value, idTask)
+                        End If
+                    Next
+                    mtdHPW.bucarExpensesEmpleado(tblExpenses, idEmpleado)
+                    cargarDatos(idEmpleado)
+                End If
+            End If
+
         End If
     End Sub
     Private Sub btnInsert_Click(sender As Object, e As EventArgs) Handles btnInsert.Click
@@ -1351,7 +1358,7 @@ Public Class HoursWeekPerEmployees
         cargarDatos(cmbEmpleados.SelectedItem)
     End Sub
 
-    Private Sub btnWornHours_Click(sender As Object, e As EventArgs) Handles btnWornHours.Click
+    Private Sub btnWornHours_Click(sender As Object, e As EventArgs) Handles btnWornHoursMatetial.Click
         Dim wrongHours As New WrongHours
         wrongHours.ShowDialog()
     End Sub

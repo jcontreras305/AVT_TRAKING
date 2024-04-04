@@ -1002,10 +1002,10 @@ Partial Class ProjectsCosts
         Me.btnMoveHours.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.btnMoveHours.Image = Global.AVT_TRAKING.My.Resources.Resources.extend
         Me.btnMoveHours.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnMoveHours.Location = New System.Drawing.Point(469, 25)
+        Me.btnMoveHours.Location = New System.Drawing.Point(458, 25)
         Me.btnMoveHours.Margin = New System.Windows.Forms.Padding(4)
         Me.btnMoveHours.Name = "btnMoveHours"
-        Me.btnMoveHours.Size = New System.Drawing.Size(125, 44)
+        Me.btnMoveHours.Size = New System.Drawing.Size(136, 44)
         Me.btnMoveHours.TabIndex = 43
         Me.btnMoveHours.Text = "Move Hours"
         Me.btnMoveHours.TextAlign = System.Drawing.ContentAlignment.MiddleRight

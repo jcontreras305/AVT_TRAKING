@@ -62,7 +62,7 @@ Partial Class HoursWeekPerEmployees
         Me.clmSunST = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.clmSunOT = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
-        Me.btnWornHours = New System.Windows.Forms.Button()
+        Me.btnWornHoursMatetial = New System.Windows.Forms.Button()
         Me.btnDuplicateHour = New System.Windows.Forms.Button()
         Me.txtFindFecha = New System.Windows.Forms.TextBox()
         Me.btnSAP = New System.Windows.Forms.Button()
@@ -495,7 +495,7 @@ Partial Class HoursWeekPerEmployees
         'GroupBox1
         '
         Me.GroupBox1.BackColor = System.Drawing.Color.FromArgb(CType(CType(83, Byte), Integer), CType(CType(93, Byte), Integer), CType(CType(102, Byte), Integer))
-        Me.GroupBox1.Controls.Add(Me.btnWornHours)
+        Me.GroupBox1.Controls.Add(Me.btnWornHoursMatetial)
         Me.GroupBox1.Controls.Add(Me.btnDuplicateHour)
         Me.GroupBox1.Controls.Add(Me.txtFindFecha)
         Me.GroupBox1.Controls.Add(Me.btnSAP)
@@ -525,22 +525,22 @@ Partial Class HoursWeekPerEmployees
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Control"
         '
-        'btnWornHours
+        'btnWornHoursMatetial
         '
-        Me.btnWornHours.FlatAppearance.BorderSize = 0
-        Me.btnWornHours.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(58, Byte), Integer), CType(CType(115, Byte), Integer))
-        Me.btnWornHours.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnWornHours.Image = Global.AVT_TRAKING.My.Resources.Resources.allTables
-        Me.btnWornHours.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnWornHours.Location = New System.Drawing.Point(1360, 21)
-        Me.btnWornHours.Margin = New System.Windows.Forms.Padding(4)
-        Me.btnWornHours.Name = "btnWornHours"
-        Me.btnWornHours.Size = New System.Drawing.Size(188, 36)
-        Me.btnWornHours.TabIndex = 26
-        Me.btnWornHours.Text = "Wrong Hours"
-        Me.btnWornHours.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.btnWornHours.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
-        Me.btnWornHours.UseVisualStyleBackColor = True
+        Me.btnWornHoursMatetial.FlatAppearance.BorderSize = 0
+        Me.btnWornHoursMatetial.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(58, Byte), Integer), CType(CType(115, Byte), Integer))
+        Me.btnWornHoursMatetial.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnWornHoursMatetial.Image = Global.AVT_TRAKING.My.Resources.Resources.allTables
+        Me.btnWornHoursMatetial.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnWornHoursMatetial.Location = New System.Drawing.Point(1360, 21)
+        Me.btnWornHoursMatetial.Margin = New System.Windows.Forms.Padding(4)
+        Me.btnWornHoursMatetial.Name = "btnWornHoursMatetial"
+        Me.btnWornHoursMatetial.Size = New System.Drawing.Size(188, 36)
+        Me.btnWornHoursMatetial.TabIndex = 26
+        Me.btnWornHoursMatetial.Text = "Wrong Hrs/Mat"
+        Me.btnWornHoursMatetial.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.btnWornHoursMatetial.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
+        Me.btnWornHoursMatetial.UseVisualStyleBackColor = True
         '
         'btnDuplicateHour
         '
@@ -829,7 +829,7 @@ Partial Class HoursWeekPerEmployees
         Me.tbpExpenses.Margin = New System.Windows.Forms.Padding(4)
         Me.tbpExpenses.Name = "tbpExpenses"
         Me.tbpExpenses.Padding = New System.Windows.Forms.Padding(4)
-        Me.tbpExpenses.Size = New System.Drawing.Size(1584, 273)
+        Me.tbpExpenses.Size = New System.Drawing.Size(1584, 272)
         Me.tbpExpenses.TabIndex = 1
         Me.tbpExpenses.Text = "Expenses"
         Me.tbpExpenses.UseVisualStyleBackColor = True
@@ -843,7 +843,7 @@ Partial Class HoursWeekPerEmployees
         Me.tblExpenses.Margin = New System.Windows.Forms.Padding(4)
         Me.tblExpenses.Name = "tblExpenses"
         Me.tblExpenses.RowHeadersWidth = 51
-        Me.tblExpenses.Size = New System.Drawing.Size(1576, 265)
+        Me.tblExpenses.Size = New System.Drawing.Size(1576, 264)
         Me.tblExpenses.TabIndex = 0
         '
         'txtHours3
@@ -1160,7 +1160,7 @@ Partial Class HoursWeekPerEmployees
     Friend WithEvents chbPerDiem As CheckBox
     Friend WithEvents pcbCompany As PictureBox
     Friend WithEvents btnDuplicateHour As Button
-    Friend WithEvents btnWornHours As Button
+    Friend WithEvents btnWornHoursMatetial As Button
     Friend WithEvents btnPasteProject As Button
     Friend WithEvents lblProjectPaste As Label
     Friend WithEvents ToolTip1 As ToolTip

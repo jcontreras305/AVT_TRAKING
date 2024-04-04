@@ -33,9 +33,9 @@ Partial Class WrongHours
         Me.chbAllWO = New System.Windows.Forms.CheckBox()
         Me.txtWO = New System.Windows.Forms.TextBox()
         Me.Label9 = New System.Windows.Forms.Label()
-        Me.chbAllEmployees = New System.Windows.Forms.CheckBox()
-        Me.Label6 = New System.Windows.Forms.Label()
-        Me.cmbEmployees = New System.Windows.Forms.ComboBox()
+        Me.chbAllEmployees_Material = New System.Windows.Forms.CheckBox()
+        Me.lblEmployee = New System.Windows.Forms.Label()
+        Me.cmbEmployees_Material = New System.Windows.Forms.ComboBox()
         Me.chbAllClient = New System.Windows.Forms.CheckBox()
         Me.btnFind = New System.Windows.Forms.Button()
         Me.cmbFindDate = New System.Windows.Forms.ComboBox()
@@ -58,8 +58,10 @@ Partial Class WrongHours
         Me.tblHours = New System.Windows.Forms.DataGridView()
         Me.tbpPerdiem = New System.Windows.Forms.TabPage()
         Me.tblPerdiem = New System.Windows.Forms.DataGridView()
-        Me.TabPage1 = New System.Windows.Forms.TabPage()
+        Me.tbpFakeHours = New System.Windows.Forms.TabPage()
         Me.tblFakeHours = New System.Windows.Forms.DataGridView()
+        Me.tbpMaterials = New System.Windows.Forms.TabPage()
+        Me.tblMaterials = New System.Windows.Forms.DataGridView()
         Me.TableLayoutPanel1.SuspendLayout()
         Me.TitleBar.SuspendLayout()
         CType(Me.btnMinimize, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -74,8 +76,10 @@ Partial Class WrongHours
         CType(Me.tblHours, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.tbpPerdiem.SuspendLayout()
         CType(Me.tblPerdiem, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.TabPage1.SuspendLayout()
+        Me.tbpFakeHours.SuspendLayout()
         CType(Me.tblFakeHours, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.tbpMaterials.SuspendLayout()
+        CType(Me.tblMaterials, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'TableLayoutPanel1
@@ -179,9 +183,9 @@ Partial Class WrongHours
         Me.Panel2.Controls.Add(Me.chbAllWO)
         Me.Panel2.Controls.Add(Me.txtWO)
         Me.Panel2.Controls.Add(Me.Label9)
-        Me.Panel2.Controls.Add(Me.chbAllEmployees)
-        Me.Panel2.Controls.Add(Me.Label6)
-        Me.Panel2.Controls.Add(Me.cmbEmployees)
+        Me.Panel2.Controls.Add(Me.chbAllEmployees_Material)
+        Me.Panel2.Controls.Add(Me.lblEmployee)
+        Me.Panel2.Controls.Add(Me.cmbEmployees_Material)
         Me.Panel2.Controls.Add(Me.chbAllClient)
         Me.Panel2.Controls.Add(Me.btnFind)
         Me.Panel2.Controls.Add(Me.cmbFindDate)
@@ -208,7 +212,7 @@ Partial Class WrongHours
         Me.chbAllWO.AutoSize = True
         Me.chbAllWO.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!)
         Me.chbAllWO.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.chbAllWO.Location = New System.Drawing.Point(856, 11)
+        Me.chbAllWO.Location = New System.Drawing.Point(519, 71)
         Me.chbAllWO.Margin = New System.Windows.Forms.Padding(4)
         Me.chbAllWO.Name = "chbAllWO"
         Me.chbAllWO.Size = New System.Drawing.Size(76, 22)
@@ -218,9 +222,9 @@ Partial Class WrongHours
         '
         'txtWO
         '
-        Me.txtWO.Location = New System.Drawing.Point(684, 11)
+        Me.txtWO.Location = New System.Drawing.Point(335, 73)
         Me.txtWO.Name = "txtWO"
-        Me.txtWO.Size = New System.Drawing.Size(165, 22)
+        Me.txtWO.Size = New System.Drawing.Size(179, 22)
         Me.txtWO.TabIndex = 37
         '
         'Label9
@@ -228,47 +232,47 @@ Partial Class WrongHours
         Me.Label9.AutoSize = True
         Me.Label9.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!)
         Me.Label9.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.Label9.Location = New System.Drawing.Point(642, 11)
+        Me.Label9.Location = New System.Drawing.Point(293, 73)
         Me.Label9.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label9.Name = "Label9"
         Me.Label9.Size = New System.Drawing.Size(35, 18)
         Me.Label9.TabIndex = 36
         Me.Label9.Text = "WO"
         '
-        'chbAllEmployees
+        'chbAllEmployees_Material
         '
-        Me.chbAllEmployees.AutoSize = True
-        Me.chbAllEmployees.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!)
-        Me.chbAllEmployees.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.chbAllEmployees.Location = New System.Drawing.Point(519, 71)
-        Me.chbAllEmployees.Margin = New System.Windows.Forms.Padding(4)
-        Me.chbAllEmployees.Name = "chbAllEmployees"
-        Me.chbAllEmployees.Size = New System.Drawing.Size(123, 22)
-        Me.chbAllEmployees.TabIndex = 31
-        Me.chbAllEmployees.Text = "All Employees"
-        Me.chbAllEmployees.UseVisualStyleBackColor = True
+        Me.chbAllEmployees_Material.AutoSize = True
+        Me.chbAllEmployees_Material.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!)
+        Me.chbAllEmployees_Material.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.chbAllEmployees_Material.Location = New System.Drawing.Point(850, 6)
+        Me.chbAllEmployees_Material.Margin = New System.Windows.Forms.Padding(4)
+        Me.chbAllEmployees_Material.Name = "chbAllEmployees_Material"
+        Me.chbAllEmployees_Material.Size = New System.Drawing.Size(123, 22)
+        Me.chbAllEmployees_Material.TabIndex = 31
+        Me.chbAllEmployees_Material.Text = "All Employees"
+        Me.chbAllEmployees_Material.UseVisualStyleBackColor = True
         '
-        'Label6
+        'lblEmployee
         '
-        Me.Label6.AutoSize = True
-        Me.Label6.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!)
-        Me.Label6.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.Label6.Location = New System.Drawing.Point(249, 74)
-        Me.Label6.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(74, 18)
-        Me.Label6.TabIndex = 30
-        Me.Label6.Text = "Employee"
+        Me.lblEmployee.AutoSize = True
+        Me.lblEmployee.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!)
+        Me.lblEmployee.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.lblEmployee.Location = New System.Drawing.Point(617, 8)
+        Me.lblEmployee.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lblEmployee.Name = "lblEmployee"
+        Me.lblEmployee.Size = New System.Drawing.Size(74, 18)
+        Me.lblEmployee.TabIndex = 30
+        Me.lblEmployee.Text = "Employee"
         '
-        'cmbEmployees
+        'cmbEmployees_Material
         '
-        Me.cmbEmployees.DropDownWidth = 280
-        Me.cmbEmployees.FormattingEnabled = True
-        Me.cmbEmployees.Location = New System.Drawing.Point(335, 70)
-        Me.cmbEmployees.Margin = New System.Windows.Forms.Padding(4)
-        Me.cmbEmployees.Name = "cmbEmployees"
-        Me.cmbEmployees.Size = New System.Drawing.Size(179, 24)
-        Me.cmbEmployees.TabIndex = 29
+        Me.cmbEmployees_Material.DropDownWidth = 280
+        Me.cmbEmployees_Material.FormattingEnabled = True
+        Me.cmbEmployees_Material.Location = New System.Drawing.Point(703, 5)
+        Me.cmbEmployees_Material.Margin = New System.Windows.Forms.Padding(4)
+        Me.cmbEmployees_Material.Name = "cmbEmployees_Material"
+        Me.cmbEmployees_Material.Size = New System.Drawing.Size(139, 24)
+        Me.cmbEmployees_Material.TabIndex = 29
         '
         'chbAllClient
         '
@@ -290,7 +294,7 @@ Partial Class WrongHours
         Me.btnFind.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!)
         Me.btnFind.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.btnFind.Image = Global.AVT_TRAKING.My.Resources.Resources.loupe
-        Me.btnFind.Location = New System.Drawing.Point(950, 38)
+        Me.btnFind.Location = New System.Drawing.Point(885, 46)
         Me.btnFind.Margin = New System.Windows.Forms.Padding(4)
         Me.btnFind.Name = "btnFind"
         Me.btnFind.Size = New System.Drawing.Size(88, 47)
@@ -479,7 +483,8 @@ Partial Class WrongHours
         '
         Me.tbcControl.Controls.Add(Me.tbpHours)
         Me.tbcControl.Controls.Add(Me.tbpPerdiem)
-        Me.tbcControl.Controls.Add(Me.TabPage1)
+        Me.tbcControl.Controls.Add(Me.tbpFakeHours)
+        Me.tbcControl.Controls.Add(Me.tbpMaterials)
         Me.tbcControl.Dock = System.Windows.Forms.DockStyle.Fill
         Me.tbcControl.Location = New System.Drawing.Point(4, 111)
         Me.tbcControl.Margin = New System.Windows.Forms.Padding(4)
@@ -546,15 +551,15 @@ Partial Class WrongHours
         Me.tblPerdiem.Size = New System.Drawing.Size(1111, 286)
         Me.tblPerdiem.TabIndex = 2
         '
-        'TabPage1
+        'tbpFakeHours
         '
-        Me.TabPage1.BackColor = System.Drawing.Color.FromArgb(CType(CType(83, Byte), Integer), CType(CType(93, Byte), Integer), CType(CType(102, Byte), Integer))
-        Me.TabPage1.Controls.Add(Me.tblFakeHours)
-        Me.TabPage1.Location = New System.Drawing.Point(4, 25)
-        Me.TabPage1.Name = "TabPage1"
-        Me.TabPage1.Size = New System.Drawing.Size(1119, 294)
-        Me.TabPage1.TabIndex = 2
-        Me.TabPage1.Text = "Fake Hours"
+        Me.tbpFakeHours.BackColor = System.Drawing.Color.FromArgb(CType(CType(83, Byte), Integer), CType(CType(93, Byte), Integer), CType(CType(102, Byte), Integer))
+        Me.tbpFakeHours.Controls.Add(Me.tblFakeHours)
+        Me.tbpFakeHours.Location = New System.Drawing.Point(4, 25)
+        Me.tbpFakeHours.Name = "tbpFakeHours"
+        Me.tbpFakeHours.Size = New System.Drawing.Size(1119, 294)
+        Me.tbpFakeHours.TabIndex = 2
+        Me.tbpFakeHours.Text = "Fake Hours"
         '
         'tblFakeHours
         '
@@ -572,6 +577,34 @@ Partial Class WrongHours
         Me.tblFakeHours.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
         Me.tblFakeHours.Size = New System.Drawing.Size(1119, 294)
         Me.tblFakeHours.TabIndex = 3
+        '
+        'tbpMaterials
+        '
+        Me.tbpMaterials.BackColor = System.Drawing.Color.FromArgb(CType(CType(83, Byte), Integer), CType(CType(93, Byte), Integer), CType(CType(102, Byte), Integer))
+        Me.tbpMaterials.Controls.Add(Me.tblMaterials)
+        Me.tbpMaterials.Location = New System.Drawing.Point(4, 25)
+        Me.tbpMaterials.Name = "tbpMaterials"
+        Me.tbpMaterials.Padding = New System.Windows.Forms.Padding(3)
+        Me.tbpMaterials.Size = New System.Drawing.Size(1119, 294)
+        Me.tbpMaterials.TabIndex = 3
+        Me.tbpMaterials.Text = "Materials"
+        '
+        'tblMaterials
+        '
+        Me.tblMaterials.AllowUserToAddRows = False
+        Me.tblMaterials.AllowUserToDeleteRows = False
+        Me.tblMaterials.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
+        Me.tblMaterials.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.tblMaterials.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.tblMaterials.Location = New System.Drawing.Point(3, 3)
+        Me.tblMaterials.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.tblMaterials.Name = "tblMaterials"
+        Me.tblMaterials.ReadOnly = True
+        Me.tblMaterials.RowHeadersWidth = 62
+        Me.tblMaterials.RowTemplate.Height = 28
+        Me.tblMaterials.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
+        Me.tblMaterials.Size = New System.Drawing.Size(1113, 288)
+        Me.tblMaterials.TabIndex = 4
         '
         'WrongHours
         '
@@ -599,8 +632,10 @@ Partial Class WrongHours
         CType(Me.tblHours, System.ComponentModel.ISupportInitialize).EndInit()
         Me.tbpPerdiem.ResumeLayout(False)
         CType(Me.tblPerdiem, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.TabPage1.ResumeLayout(False)
+        Me.tbpFakeHours.ResumeLayout(False)
         CType(Me.tblFakeHours, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.tbpMaterials.ResumeLayout(False)
+        CType(Me.tblMaterials, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -633,14 +668,16 @@ Partial Class WrongHours
     Friend WithEvents tbcControl As TabControl
     Friend WithEvents tbpHours As TabPage
     Friend WithEvents tbpPerdiem As TabPage
-    Friend WithEvents chbAllEmployees As CheckBox
-    Friend WithEvents Label6 As Label
-    Friend WithEvents cmbEmployees As ComboBox
+    Friend WithEvents chbAllEmployees_Material As CheckBox
+    Friend WithEvents lblEmployee As Label
+    Friend WithEvents cmbEmployees_Material As ComboBox
     Friend WithEvents tblPerdiem As DataGridView
     Friend WithEvents btnSelectAll As Button
     Friend WithEvents Label9 As Label
     Friend WithEvents txtWO As TextBox
     Friend WithEvents chbAllWO As CheckBox
-    Friend WithEvents TabPage1 As TabPage
+    Friend WithEvents tbpFakeHours As TabPage
     Friend WithEvents tblFakeHours As DataGridView
+    Friend WithEvents tbpMaterials As TabPage
+    Friend WithEvents tblMaterials As DataGridView
 End Class

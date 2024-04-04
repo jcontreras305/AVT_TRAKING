@@ -17,6 +17,7 @@ Public Class TimeSheet
         mtdHPW.llenarTablaWorkCode(tablaWorkCodes)
         mtdHPW.llenarTablaProyecto(tablaProject)
         mtdHPW.llenarTablaExpenses(tablaExpeseCode)
+        tablaEmpleadosId = mtdHPW.llenarTablaEmpleado()
         flagErrorContinue = False
     End Sub
 
@@ -112,75 +113,80 @@ Public Class TimeSheet
                     '        flag3 = True
                     '    End If
                     'Next
-
-
-                    Dim flag4 As Boolean = False
-
-                    If flag2 And flag3 Then 'encontro empleado y expense
-                        Dim tblProjectsEnabled As Data.DataTable = mtdHPW.selectIdProject(validarFechaParaSQlDeExcel(perdiemSheet.Cells(cont, 3).text), perdiemSheet.Cells(cont, 5).text, perdiemSheet.Cells(cont, 4).text, perdiemSheet.Cells(cont, 2).text)
-                        If tblProjectsEnabled IsNot Nothing And tblProjectsEnabled.Rows.Count > 0 Then 'SI encontro horas trabajadas ese dia con ese projecto
-                            idHrsW = tblProjectsEnabled.Rows(0).ItemArray(0)
-                            idAux = tblProjectsEnabled.Rows(0).ItemArray(1)
-                            jobNo = tblProjectsEnabled.Rows(0).ItemArray(6)
-                            flag4 = True
-                        Else 'NO encontro horas trabajadas ese dia con ese projecto
-                            Dim datosHW(6) As String
-                            datosHW(0) = validarFechaParaSQlDeExcel(perdiemSheet.Cells(cont, 3).text)
-                            datosHW(1) = idEmployee
-                            Dim arrayProject() As DataRow = tablaProject.Select("project = '" + perdiemSheet.Cells(cont, 4).text + "' and idPO = " + perdiemSheet.Cells(cont, 5).Text)
-                            If arrayProject.Length > 0 Then
-                                idAux = arrayProject(0).ItemArray(0).ToString() 'idAux
-                                jobNo = arrayProject(0).ItemArray(4).ToString() ' jobNo
-                                datosHW(2) = idAux
-                                datosHW(3) = jobNo
-                                idHrsW = mtdHPW.insertarRecordToPerdiem(datosHW)
-                                flag4 = True
-                            Else
-                                flag4 = False
-                            End If
-                        End If
+                    If perdiemSheet.Cells(cont, 4).text = "#N/A" Or perdiemSheet.Cells(cont, 4).text = "" Then
+                        txtSalidaPerdiem.Text = msgSalida + "(Error exist a vlaue #N/A)..."
+                        cont += 1
                     Else
-                        flag4 = False
-                    End If
+                        Dim flag4 As Boolean = False
 
+                        If flag2 And flag3 Then 'encontro empleado y expense
 
-                    'For Each row As DataRow In tablaEmpleadosId.Rows
-                    '    If row.ItemArray(4) = perdiemSheet.Cells(cont, 2).Text Then 'idEmpleado
-                    '        idEmployee = row.ItemArray(0)
-                    '        flag4 = True
-                    '        Exit For
-                    '    Else
-                    '        flag4 = False
-                    '    End If
-                    'Next
-                    'If cont >= 200 Then
-                    '    MsgBox("error")
-                    'End If
-                    Dim dayInserted As String = validaFechaParaSQl(Date.Today)
-                    If flag2 = False Then 'Expense code
-                        If flag3 = False Then 'employee
-                            If flag4 = False Then 'Project
-                                listError.Add("Row " + cont.ToString + ": the ExpenseCode, Employee Number and Project were not found.")
+                            Dim tblProjectsEnabled As Data.DataTable = mtdHPW.selectIdProject(validarFechaParaSQlDeExcel(perdiemSheet.Cells(cont, 3).text), perdiemSheet.Cells(cont, 5).text, perdiemSheet.Cells(cont, 4).text, perdiemSheet.Cells(cont, 2).text)
+                            If tblProjectsEnabled IsNot Nothing And tblProjectsEnabled.Rows.Count > 0 Then 'SI encontro horas trabajadas ese dia con ese projecto
+                                idHrsW = tblProjectsEnabled.Rows(0).ItemArray(0)
+                                idAux = tblProjectsEnabled.Rows(0).ItemArray(1)
+                                jobNo = tblProjectsEnabled.Rows(0).ItemArray(6)
+                                flag4 = True
+                            Else 'NO encontro horas trabajadas ese dia con ese projecto
+                                Dim datosHW(6) As String
+                                datosHW(0) = validarFechaParaSQlDeExcel(perdiemSheet.Cells(cont, 3).text)
+                                datosHW(1) = idEmployee
+                                Dim arrayProject() As DataRow = tablaProject.Select("project = '" + perdiemSheet.Cells(cont, 4).text + "' and idPO = " + perdiemSheet.Cells(cont, 5).Text)
+                                If arrayProject.Length > 0 Then
+                                    idAux = arrayProject(0).ItemArray(0).ToString() 'idAux
+                                    jobNo = arrayProject(0).ItemArray(4).ToString() ' jobNo
+                                    datosHW(2) = idAux
+                                    datosHW(3) = jobNo
+                                    idHrsW = mtdHPW.insertarRecordToPerdiem(datosHW)
+                                    flag4 = True
+                                Else
+                                    flag4 = False
+                                End If
                             End If
                         Else
-                            listError.Add("Row " + cont.ToString + ": the Employee and Expense Code were not found.")
+                            flag4 = False
                         End If
-                        listError.Add("Row " + cont.ToString + ": the ExpenseCode was not Found.")
-                    ElseIf flag3 = False Then 'Employee
-                        If flag4 = False Then 'Project
-                            listError.Add("Row " + cont.ToString + ": the Employee and Employee Number were not select.")
-                        Else
-                            listError.Add("Row " + cont.ToString + ": the Employee was not Found.")
+
+
+                        'For Each row As DataRow In tablaEmpleadosId.Rows
+                        '    If row.ItemArray(4) = perdiemSheet.Cells(cont, 2).Text Then 'idEmpleado
+                        '        idEmployee = row.ItemArray(0)
+                        '        flag4 = True
+                        '        Exit For
+                        '    Else
+                        '        flag4 = False
+                        '    End If
+                        'Next
+                        'If cont >= 200 Then
+                        '    MsgBox("error")
+                        'End If
+                        Dim dayInserted As String = validaFechaParaSQl(Date.Today)
+                        If flag2 = False Then 'Expense code
+                            If flag3 = False Then 'employee
+                                If flag4 = False Then 'Project
+                                    listError.Add("Row " + cont.ToString + ": the ExpenseCode, Employee Number and Project were not found.")
+                                End If
+                            Else
+                                listError.Add("Row " + cont.ToString + ": the Employee and Expense Code were not found.")
+                            End If
+                            listError.Add("Row " + cont.ToString + ": the ExpenseCode was not Found.")
+                        ElseIf flag3 = False Then 'Employee
+                            If flag4 = False Then 'Project
+                                listError.Add("Row " + cont.ToString + ": the Employee and Employee Number were not select.")
+                            Else
+                                listError.Add("Row " + cont.ToString + ": the Employee was not Found.")
+                            End If
+                        ElseIf flag4 = False Then 'Project
+                            listError.Add("Row " + cont.ToString + ": the Project Number was not Found.")
+                        ElseIf flag2 And flag3 And flag4 Then
+                            Dim newId As Guid = Guid.NewGuid
+                            textInsertExpUsed = textInsertExpUsed & newId.ToString & "," & validarFechaParaSQlDeExcel(perdiemSheet.Cells(cont, 3).text) & "," & perdiemSheet.Cells(cont, 7).text & "," & perdiemSheet.Cells(cont, 8).text & "," & idExpense & "," & idAux & "," & idEmployee & "," & idHrsW & "," & dayInserted & vbCrLf
+                            'tblPerdiem.Rows.Add("", perdiemSheet.Cells(cont, 3).Text, perdiemSheet.Cells(cont, 7).Text, perdiemSheet.Cells(cont, 8).Text, idExpense, idAux, idEmployee)
                         End If
-                    ElseIf flag4 = False Then 'Project
-                        listError.Add("Row " + cont.ToString + ": the Project Number was not Found.")
-                    ElseIf flag2 And flag3 And flag4 Then
-                        Dim newId As Guid = Guid.NewGuid
-                        textInsertExpUsed = textInsertExpUsed & newId.ToString & "," & validarFechaParaSQlDeExcel(perdiemSheet.Cells(cont, 3).text) & "," & perdiemSheet.Cells(cont, 7).text & "," & perdiemSheet.Cells(cont, 8).text & "," & idExpense & "," & idAux & "," & idEmployee & "," & idHrsW & "," & dayInserted & vbCrLf
-                        'tblPerdiem.Rows.Add("", perdiemSheet.Cells(cont, 3).Text, perdiemSheet.Cells(cont, 7).Text, perdiemSheet.Cells(cont, 8).Text, idExpense, idAux, idEmployee)
+                        txtSalidaPerdiem.Text = msgSalida + CStr(cont)
+                        cont += 1
+
                     End If
-                    txtSalidaPerdiem.Text = msgSalida + CStr(cont)
-                    cont += 1
                 End While
                 Dim flagContinue As Boolean = True
                 If listError.Count > 0 Then

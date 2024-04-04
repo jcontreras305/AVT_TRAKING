@@ -4825,3 +4825,17 @@ go
 alter table trackVehicleElement with check add constraint fk_idClient_TrackVehicleElement
 foreign key (idClient) references clients(idClient)
 go 
+
+----| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
+----| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
+----V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V
+----###################################################################################################
+----########### AGREGAR DAY INSERTED EN MATERIALES PARA PODER BORRAR LOS MAL INSERTADOS ###############
+----###################################################################################################
+
+alter table materialUsed
+add dayInserted date 
+go
+
+update materialUsed set dayInserted = dateMaterial
+GO

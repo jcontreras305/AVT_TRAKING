@@ -64,6 +64,32 @@ Module metodosGlobales
     ''' <returns> 
     ''' Retorna el combo lleno con los empleados en contrados en la BD.
     ''' </returns>
+    Public Function llenarComboMaterialReports(ByVal combo As ComboBox) As Boolean
+        Try
+            con.conectar()
+            Dim cmd As New SqlCommand("select number , name from material order by number asc", con.conn) '
+            Dim dr As SqlDataReader = cmd.ExecuteReader()
+            combo.Items.Clear()
+            While dr.Read()
+                combo.Items.Add(CStr(dr("number")) + " " + dr("name"))
+            End While
+            dr.Close()
+            Return True
+        Catch ex As Exception
+            MsgBox(ex.Message)
+            Return False
+        Finally
+            con.desconectar()
+        End Try
+    End Function
+    ''' <summary>
+    ''' Hace una consulta a la BD, retornando los empleados con su numero de empleado
+    ''' y su nombre (lastname, firstname y middlename).
+    ''' </summary>
+    ''' <param name="combo"></param>
+    ''' <returns> 
+    ''' Retorna el combo lleno con los empleados en contrados en la BD.
+    ''' </returns>
     Public Function llenarComboEmployeeReports(ByVal combo As ComboBox, Optional onlyEnable As Boolean = False) As Boolean
         Try
             con.conectar()
