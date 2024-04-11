@@ -31,9 +31,9 @@ Public Class WorkCodes
                 datos(0) = txtWorkCodeID.Text
                 datos(1) = TxtWorkCode.Text
                 datos(2) = txtDescription.Text
-                datos(3) = sprBillingRate1.Value.ToString("N")
-                datos(4) = sprBillingRateOT.Value.ToString("N")
-                datos(5) = sprBillingRate3.Value.ToString("N")
+                datos(3) = sprBillingRate1.Value.ToString()
+                datos(4) = sprBillingRateOT.Value.ToString()
+                datos(5) = sprBillingRate3.Value.ToString()
                 datos(6) = txtEQExq1.Text
                 datos(7) = txtEQExq2.Text
                 datos(9) = txtCategory.Text
@@ -112,9 +112,9 @@ Public Class WorkCodes
             datos(0) = txtWorkCodeID.Text
             datos(1) = TxtWorkCode.Text
             datos(2) = txtDescription.Text
-            datos(3) = sprBillingRate1.Value.ToString("N")
-            datos(4) = sprBillingRateOT.Value.ToString("N")
-            datos(5) = sprBillingRate3.Value.ToString("N")
+            datos(3) = sprBillingRate1.Value.ToString()
+            datos(4) = sprBillingRateOT.Value.ToString()
+            datos(5) = sprBillingRate3.Value.ToString()
             datos(6) = txtEQExq1.Text
             datos(7) = txtEQExq2.Text
             datos(9) = txtCategory.Text

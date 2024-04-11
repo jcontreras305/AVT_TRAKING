@@ -363,6 +363,7 @@ as idPOMax from projectOrder", conn)
             Dim cmdidMaxWO As New SqlCommand("
 select
 case 
+when ISNUMERIC(Max(idWO)) = 0 then '5000'
 when max(idWO)+1 is null then '5000'
 else  max(idWO)+1 end
 as idWOMax
@@ -555,6 +556,28 @@ from workOrder
         Catch ex As Exception
             MsgBox(ex.Message())
             Return False
+        End Try
+    End Function
+    Public Function deleteProject(ByVal idAux As String, ByVal idAuxWO As String, ByVal idPO As String, ByVal jobNo As String) As Boolean
+        Try
+            conectar()
+            Dim cmd As New SqlCommand("sp_delete_project", conn)
+            cmd.CommandType = CommandType.StoredProcedure
+            cmd.Parameters.AddWithValue("@idAux", idAux)
+            cmd.Parameters.AddWithValue("@idAuxWO", idAuxWO)
+            cmd.Parameters.AddWithValue("@idPO", idPO)
+            cmd.Parameters.AddWithValue("@JobNo", jobNo)
+            'cmd.Transaction = Trace
+            If Not cmd.ExecuteNonQuery > 0 Then
+                Return False
+            Else
+                Return True
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message)
+            Return False
+        Finally
+            desconectar()
         End Try
     End Function
     Public Function deleteProject(ByVal tbl As DataGridView) As Boolean
@@ -1151,7 +1174,7 @@ tk.expCode,
 tk.accountNum,
 tk.status,
 tk.idAux,
-tk.idAuxWO,
+wo.idAuxWO,
 tk.percentComplete,
 po.Line,
 po.WBS,

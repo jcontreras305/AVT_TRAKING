@@ -23,7 +23,7 @@ Namespace My
         
         <Global.System.Diagnostics.DebuggerStepThroughAttribute()>  _
         Public Sub New()
-            MyBase.New(Global.Microsoft.VisualBasic.ApplicationServices.AuthenticationMode.Windows)
+            MyBase.New(Global.Microsoft.VisualBasic.ApplicationServices.AuthenticationMode.ApplicationDefined)
             Me.IsSingleInstance = false
             Me.EnableVisualStyles = true
             Me.SaveMySettingsOnExit = true
@@ -32,7 +32,7 @@ Namespace My
         
         <Global.System.Diagnostics.DebuggerStepThroughAttribute()>  _
         Protected Overrides Sub OnCreateMainForm()
-            Me.MainForm = Global.AVT_TRAKING.TimeSheet
+            Me.MainForm = Global.AVT_TRAKING.Login
         End Sub
     End Class
 End Namespace

@@ -1128,7 +1128,7 @@ Public Class HoursWeekPerEmployees
     Private Sub btnDelete_Click(sender As Object, e As EventArgs) Handles btnDelete.Click
         If TabControl1.SelectedTab.Text = "Time Worked" Then
             If tblRecordEmployee.SelectedRows.Count > 0 Then
-                If DialogResult.Yes = MessageBox.Show("Warning", "Are you sure to DELETE the selected records?", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) Then
+                If DialogResult.Yes = MessageBox.Show("Are you sure to DELETE the selected records?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) Then
                     For Each row As DataGridViewRow In tblRecordEmployee.SelectedRows
                         Dim idTask As String = ""
                         For Each fila As DataRow In proyectTable.Rows
@@ -1149,7 +1149,7 @@ Public Class HoursWeekPerEmployees
 
         ElseIf TabControl1.SelectedTab.Text = "Expenses" Then
             If tblExpenses.SelectedRows.Count > 0 Then
-                If DialogResult.Yes = MessageBox.Show("Warning", "Are you sure to DELETE the selected Expenses?", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) Then
+                If DialogResult.Yes = MessageBox.Show("Are you sure to DELETE the selected Expenses?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) Then
                     For Each row As DataGridViewRow In tblExpenses.SelectedRows
                         Dim idTask As String = ""
                         If row.Cells(0).Value = "" Then

@@ -1402,6 +1402,7 @@ WITH(
 	FIRSTROW = 2,
 	MAXERRORS = 1 --NORMALMENTE SE ENCUENTRA EN 10 
 )", conn)
+            cmd.CommandTimeout = 120
             If cmd.ExecuteNonQuery Then
                 Return True
             Else

@@ -73,6 +73,7 @@ Public Class TimeSheet
                     Dim idAux As String = ""
                     Dim jobNo As String = ""
                     Dim idExpense As String = ""
+                    Dim numEmployee As String = ""
                     Dim idEmployee As String = ""
                     Dim idHrsW As String = ""
                     Dim flag2 As Boolean = False
@@ -84,7 +85,8 @@ Public Class TimeSheet
                     Dim flag3 As Boolean = False
                     Dim arrayEmp() As DataRow = tablaEmpleadosId.Select("numberEmploye = " + perdiemSheet.Cells(cont, 2).text)
                     If arrayEmp.Length > 0 Then
-                        idEmployee = arrayEmp(0).ItemArray(0).ToString() 'idemployee
+                        idEmployee = arrayEmp(0).ItemArray(2).ToString() 'idemployee
+                        numEmployee = arrayEmp(0).ItemArray(0).ToString() 'numemployee
                         flag3 = True
                     End If
 

@@ -346,6 +346,63 @@ Public Class ProjectsCosts
         End If
     End Sub
 
+    Private Sub btnDeleteProject_Click(sender As Object, e As EventArgs) Handles btnDeleteProject.Click
+        Try
+            If existRecords(tblHoursWorkedProject) Or existRecords(tblMaterialProjects) Or existRecords(tblExpencesProjects) Then
+                MessageBox.Show("Is not Posible to delete Project, The project contain some records try to drop it and then try to Delete.", "Important", MessageBoxButtons.OK, MessageBoxIcon.Error)
+            Else
+                If DialogResult.Yes = MessageBox.Show("Are you sure to Delete this Project." & vbCrLf & vbCrLf & "Remember that you can delete any scaffolding or estimates that you may have attached to this project and these will delete to. ", "Important", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) Then
+                    If mtdJobs.deleteProject(pjt.idAux, pjt.idAuxWO, pjt.idPO, pjt.jobNum.ToString) Then
+                        MsgBox("Successful")
+                        mtdJobs.consultaWO(JobNumber, tablasDeTareas)
+                        If tablasDeTareas.Rows IsNot Nothing Then
+                            txtElementsRadar.Text = "1 of " + tablasDeTareas.Rows.Count.ToString()
+                        End If
+                        If tablasDeTareas.Rows.Count > 0 Then
+                            idAuxWO = tablasDeTareas.Rows(0).ItemArray(5)
+                            JobNumber = tablasDeTareas.Rows(0).ItemArray(0)
+                            PO = tablasDeTareas.Rows(0).ItemArray(1)
+                        End If
+                        If Not cargarDatosProjecto(JobNumber) Then
+                            If chbComplete.Checked = True Then
+                                activarCampos(True)
+                            Else
+                                activarCampos(False)
+                            End If
+                        Else
+                            activarCampos(False)
+                        End If
+                        'Dim matchs = From row In tablasDeTareas
+                        '             Let IdAuxM = row.Field(Of String)("idAux")
+                        '             Where IdAuxM = pjt.idAux
+                        'If matchs.Any() Then
+
+                        'End If
+
+                    End If
+                End If
+            End If
+        Catch ex As Exception
+
+        End Try
+    End Sub
+
+    Private Function existRecords(ByVal tbl As DataGridView) As Boolean
+        Try
+            If tblHoursWorkedProject.Rows IsNot Nothing Then
+                If tblHoursWorkedProject.Rows.Count > 0 Then
+                    Return True
+                Else
+                    Return False
+                End If
+            Else
+                Return False
+            End If
+        Catch ex As Exception
+            Return False
+        End Try
+    End Function
+
     Private Function limpiarCampos() As Boolean
         'txtWokOrder.Text = ""
         txtTask.Text = ""
