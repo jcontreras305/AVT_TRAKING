@@ -41,7 +41,7 @@ Public Class Power_BI_Queries
 		If tvwTablePBI.Nodes IsNot Nothing Then
 			tvwTablePBI.Nodes.Clear()
 		End If
-		Dim arraySheets() As String = {"ALL", "ALL Barriers", "ALLCPH", "ALLHOURS", "CostHPTAS", "CostMth", "Scaffold", "ScaBTools", "ScaDTools", "ScaMTools", "ACM", "AR Invoices", "Invoices"}
+		Dim arraySheets() As String = {"ALL", "ALL Barriers", "ALLCPH", "ALLHOURS", "CostHPTAS", "CostMth", "Scaffold", "ScaBTools", "ScaDTools", "ScaMTools", "ACM", "AR Invoices", "Invoices", "Invoices Cost"}
 		Dim arrayAllBerries() As String = {"ALL Barriers 1", "ALL Barriers 2"}
 		Dim arrayALLCPH() As String = {"All CHP 1", "All CHP 2", "All CHP 3"}
 		Dim arrayALLHours() As String = {"All Hours 1", "All Hours 2", "Travelers", "Absents", "Count Work Code"}
@@ -224,6 +224,8 @@ END "
 							cmd1.CommandText = StartDate + vbCrLf + FinalDate + vbCrLf + AR_Inovices
 						Case "Invoices"
 							cmd1.CommandText = StartDate + vbCrLf + FinalDate + vbCrLf + Invoices
+						Case "Invoices Cost"
+							cmd1.CommandText = StartDate + vbCrLf + FinalDate + vbCrLf + InvoicesCost
 					End Select
 					cmd1.Connection = conn
 					cmd1.Transaction = tran
@@ -301,6 +303,8 @@ END "
 					cmd.CommandText = "select * from PBI.[ARInvoices]"
 				Case "Invoices"
 					cmd.CommandText = "select * from PBI.[Invoices]"
+				Case "Invoices Cost"
+					cmd.CommandText = "select * from PBI.[InvoicesCost]"
 			End Select
 			cmd.Connection = conn
 			lbl.Text = "Message : Table " + tblName + " info."
@@ -323,7 +327,7 @@ END "
 
 	Dim _All, _ALL_Barries1, _ALL_Barries2, _CostHPTAS, _CostMth, _Scaffold, _ScaBTools, _ScaDTools, _ScaMTools, _ACM, _AR_Inovices, _Invoices,
 _All_CHP_1, _All_CHP_2, _All_CHP_3,
-_All_Hours_1, _All_Hours_2, _Travelers, _Absents, _countWCEMP As String
+_All_Hours_1, _All_Hours_2, _Travelers, _Absents, _countWCEMP, _InvoicesCost As String
 
 	Public Property All As String
 		Get
@@ -1526,4 +1530,200 @@ where inv.invoiceDate between @StartDate and @EndDate and inv.[status] = 0 ) as 
 	End Property
 
 
+	Public Property InvoicesCost() As String
+		Get
+			_InvoicesCost = "IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES where TABLE_SCHEMA = 'PBI' and TABLE_NAME = 'InvoicesCost')
+BEGIN 
+	drop table PBI.[InvoicesCost]
+END
+
+select * INTO PBI.[InvoicesCost] 
+from 
+(select 
+jb.jobNo as 'ClientID',
+YEAR(inv.invoiceDate)as 'Year',
+MONTH(inv.invoiceDate) as 'Month',
+inv.invoice as 'Invoice',
+CONVERT(nvarchar, inv.invoiceDate,101) as 'Invoice Date',
+ISNULL((select sum(hw1.hoursST)+sum(hw1.hoursOT)+sum(hw1.hours3) as 'Total Hours' from hoursWorked as hw1 
+	inner join task as tk1 on tk1.idAux = hw1.idAux 
+	inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO
+	inner join projectOrder as po1 on po1.idPO = wo1.idPO and wo1.jobNo = po1.jobNo
+	inner join job as jb1 on po1.jobNo = jb1.jobNo
+	inner join clients as cl1 on cl1.idClient = jb1.idClient
+	inner join workCode as wc1 on wc1.idWorkCode = hw1.idWorkCode and wc1.jobNo = jb1.jobNo 
+	where po1.idPO = po.idPO and jb1.jobNo = jb.jobNo and cl1.idClient = inv.idClient and hw1.dateWorked between inv.startDate and inv.FinalDate),0) 
+as 'Total Hours',
+
+ISNULL((select sum(hw1.hoursST*wc1.billingRate1)+sum(hw1.hoursOT*wc1.billingRateOT)+sum(hw1.hours3*wc1.billingRate3) as 'Labor' from hoursWorked as hw1 
+	inner join task as tk1 on tk1.idAux = hw1.idAux 
+	inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO
+	inner join projectOrder as po1 on po1.idPO = wo1.idPO and wo1.jobNo = po1.jobNo
+	inner join job as jb1 on po1.jobNo = jb1.jobNo
+	inner join clients as cl1 on cl1.idClient = jb1.idClient
+	inner join workCode as wc1 on wc1.idWorkCode = hw1.idWorkCode and wc1.jobNo = jb1.jobNo
+	where po1.idPO = po.idPO and jb1.jobNo = jb.jobNo and cl1.idClient = inv.idClient and hw1.dateWorked between inv.startDate and inv.FinalDate),0) 
+as 'Total Labor',
+
+ISNULL((select sum(exu1.amount) from expensesUsed as exu1
+	inner join expenses as ex1 on exu1.idExpense = ex1.idExpenses
+	inner join task as tk1 on tk1.idAux = exu1.idAux 
+	inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO
+	inner join projectOrder as po1 on po1.idPO = wo1.idPO and wo1.jobNo = po1.jobNo
+	inner join job as jb1 on po1.jobNo = jb1.jobNo
+	inner join clients  as cl1 on cl1.idClient = jb1.idClient
+	where po1.idPO = po.idPO and jb1.jobNo = jb.jobNo and cl1.idClient = inv.idClient and exu1.dateExpense between inv.startDate and inv.FinalDate and ex1.expenseCode like '%travel%'),0)
+as 'Total Expenses',
+
+ISNULL((select sum(exu1.amount) from expensesUsed as exu1
+	inner join expenses as ex1 on exu1.idExpense = ex1.idExpenses
+	inner join task as tk1 on tk1.idAux = exu1.idAux 
+	inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO
+	inner join projectOrder as po1 on po1.idPO = wo1.idPO and wo1.jobNo = po1.jobNo
+	inner join job as jb1 on po1.jobNo = jb1.jobNo
+	inner join clients  as cl1 on cl1.idClient = jb1.idClient
+	where po1.idPO = po.idPO and jb1.jobNo = jb.jobNo and cl1.idClient = inv.idClient and exu1.dateExpense between inv.startDate and inv.FinalDate and ex1.expenseCode like '%per-diem%'),0)
+as 'Total PerDiem',
+
+ISNULL((select sum(mtu1.amount) from materialUsed as mtu1
+	inner join material as mt1 on mtu1.idMaterial = mt1.idMaterial
+	left join materialClass as mtc1 on mtc1.code = mt1.code
+	inner join task as tk1 on tk1.idAux = mtu1.idAux 
+	inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO
+	inner join projectOrder as po1 on po1.idPO = wo1.idPO and wo1.jobNo = po1.jobNo
+	inner join job as jb1 on po1.jobNo = jb1.jobNo
+	inner join clients  as cl1 on cl1.idClient = jb1.idClient
+	where po1.idPO = po.idPO and jb1.jobNo = jb.jobNo and cl1.idClient = inv.idClient and mtu1.dateMaterial between inv.startDate and inv.FinalDate 
+	and (mtc1.code = '2.201-D' or mtc1.code = '2.255-D' or mtc1.code = '2.256-D' or mtc1.code = '2.202-D'or mtc1.code = '2.203-D'or mtc1.code = '2.303-F'or mtc1.code = '2.304-F' )),0) 
+as '3rdParty',
+
+ISNULL((select sum(mtu1.amount) from materialUsed as mtu1
+	inner join material as mt1 on mtu1.idMaterial = mt1.idMaterial
+	left join materialClass as mtc1 on mtc1.code = mt1.code
+	inner join task as tk1 on tk1.idAux = mtu1.idAux 
+	inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO
+	inner join projectOrder as po1 on po1.idPO = wo1.idPO and wo1.jobNo = po1.jobNo
+	inner join job as jb1 on po1.jobNo = jb1.jobNo
+	inner join clients  as cl1 on cl1.idClient = jb1.idClient
+	where po1.idPO = po.idPO and jb1.jobNo = jb.jobNo and cl1.idClient = inv.idClient and mtu1.dateMaterial between inv.startDate and inv.FinalDate 
+	and (mtc1.code = '2.204-D' or mtc1.code = '2.207-D' or mtc1.code = '2.254-E' or mtc1.code = '2.257-E')),0) 
+as 'ScRent',
+
+ISNULL((select sum(mtu1.amount) from materialUsed as mtu1
+	inner join material as mt1 on mtu1.idMaterial = mt1.idMaterial
+	left join materialClass as mtc1 on mtc1.code = mt1.code
+	inner join task as tk1 on tk1.idAux = mtu1.idAux 
+	inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO
+	inner join projectOrder as po1 on po1.idPO = wo1.idPO and wo1.jobNo = po1.jobNo
+	inner join job as jb1 on po1.jobNo = jb1.jobNo
+	inner join clients  as cl1 on cl1.idClient = jb1.idClient
+	where po1.idPO = po.idPO and jb1.jobNo = jb.jobNo and cl1.idClient = inv.idClient and mtu1.dateMaterial between inv.startDate and inv.FinalDate 
+	and (mtc1.code = '2.251-E' or mtc1.code = '2.252-D' or mtc1.code = '2.253-E' or mtc1.code = '2.301-F' or mtc1.code = '2.302-F'or mtc1.code = '2.907-Y')),0) 
+as 'CoEQ',
+
+ISNULL((select sum(mtu1.amount) from materialUsed as mtu1
+	inner join material as mt1 on mtu1.idMaterial = mt1.idMaterial
+	left join materialClass as mtc1 on mtc1.code = mt1.code
+	inner join task as tk1 on tk1.idAux = mtu1.idAux 
+	inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO
+	inner join projectOrder as po1 on po1.idPO = wo1.idPO and wo1.jobNo = po1.jobNo
+	inner join job as jb1 on po1.jobNo = jb1.jobNo
+	inner join clients  as cl1 on cl1.idClient = jb1.idClient
+	where po1.idPO = po.idPO and jb1.jobNo = jb.jobNo and cl1.idClient = inv.idClient and mtu1.dateMaterial between inv.startDate and inv.FinalDate  
+	and (mtc1.code = '2.500-M' or mtc1.code = '2.515-M')),0) 
+as 'Material',
+
+ISNULL((select sum(mtu1.amount) from materialUsed as mtu1
+	inner join material as mt1 on mtu1.idMaterial = mt1.idMaterial
+	left join materialClass as mtc1 on mtc1.code = mt1.code
+	inner join task as tk1 on tk1.idAux = mtu1.idAux 
+	inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO
+	inner join projectOrder as po1 on po1.idPO = wo1.idPO and wo1.jobNo = po1.jobNo
+	inner join job as jb1 on po1.jobNo = jb1.jobNo
+	inner join clients  as cl1 on cl1.idClient = jb1.idClient
+	where po1.idPO = po.idPO and jb1.jobNo = jb.jobNo and cl1.idClient = inv.idClient and mtu1.dateMaterial between inv.startDate and inv.FinalDate  
+	and (mtc1.code = '2.600-S')),0) 
+as 'Subcontractors',
+
+ISNULL((select sum(mtu1.amount) from materialUsed as mtu1
+	inner join material as mt1 on mtu1.idMaterial = mt1.idMaterial
+	left join materialClass as mtc1 on mtc1.code = mt1.code
+	inner join task as tk1 on tk1.idAux = mtu1.idAux 
+	inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO
+	inner join projectOrder as po1 on po1.idPO = wo1.idPO and wo1.jobNo = po1.jobNo
+	inner join job as jb1 on po1.jobNo = jb1.jobNo
+	inner join clients  as cl1 on cl1.idClient = jb1.idClient
+	where po1.idPO = po.idPO and jb1.jobNo = jb.jobNo and cl1.idClient =inv.idClient and mtu1.dateMaterial between inv.startDate and inv.FinalDate  
+	and (mtc1.code = '2.900-Y' or mtc1.code = '2.911-Y')),0) 
+as 'Other',
+
+ISNULL((select sum(mtu1.amount) from materialUsed as mtu1
+	inner join material as mt1 on mtu1.idMaterial = mt1.idMaterial
+	left join materialClass as mtc1 on mtc1.code = mt1.code
+	inner join task as tk1 on tk1.idAux = mtu1.idAux 
+	inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO
+	inner join projectOrder as po1 on po1.idPO = wo1.idPO and wo1.jobNo = po1.jobNo
+	inner join job as jb1 on po1.jobNo = jb1.jobNo
+	inner join clients  as cl1 on cl1.idClient = jb1.idClient
+	where po1.idPO = po.idPO and jb1.jobNo = jb.jobNo and cl1.idClient = inv.idClient and mtu1.dateMaterial between inv.startDate and inv.FinalDate 
+	and not (
+		mtc1.code = '2.201-D' or mtc1.code = '2.202-D' or mtc1.code = '2.203-D' or mtc1.code = '2.255-D' or mtc1.code = '2.256-D' or mtc1.code = '2.303-F' or mtc1.code = '2.304-F'
+	or mtc1.code = '2.204-D' or mtc1.code = '2.207-D' or mtc1.code = '2.254-E' or mtc1.code = '2.257-E' 
+	or mtc1.code = '2.252-D' or mtc1.code = '2.253-E' or mtc1.code = '2.301-F' or mtc1.code = '2.302-F' or mtc1.code = '2.251-E' or mtc1.code = '2.907-Y'
+	or mtc1.code = '2.500-M' or mtc1.code = '2.515-M' 
+	or mtc1.code = '2.600-S' 
+	or mtc1.code = '2.900-Y' or mtc1.code = '2.911-Y')),0) 
+as 'ExtraCostMaterial',
+
+ISNULL((select sum(mtu1.amount) from materialUsed as mtu1
+	inner join material as mt1 on mtu1.idMaterial = mt1.idMaterial
+	left join materialClass as mtc1 on mtc1.code = mt1.code
+	inner join task as tk1 on tk1.idAux = mtu1.idAux 
+	inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO
+	inner join projectOrder as po1 on po1.idPO = wo1.idPO and wo1.jobNo = po1.jobNo
+	inner join job as jb1 on po1.jobNo = jb1.jobNo
+	inner join clients  as cl1 on cl1.idClient = jb1.idClient
+	where po1.idPO = po.idPO and jb1.jobNo = jb.jobNo and cl1.idClient = inv.idClient and mtu1.dateMaterial between inv.startDate and inv.FinalDate ),0) 
+as 'Total Material'
+,
+ROUND(
+ISNULL((select sum(hw1.hoursST*wc1.billingRate1)+sum(hw1.hoursOT*wc1.billingRateOT)+sum(hw1.hours3*wc1.billingRate3) as 'Labor' from hoursWorked as hw1 
+	
+	inner join task as tk1 on tk1.idAux = hw1.idAux 
+	inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO
+	inner join projectOrder as po1 on po1.idPO = wo1.idPO and wo1.jobNo = po1.jobNo
+	inner join job as jb1 on po1.jobNo = jb1.jobNo
+	inner join clients as cl1 on cl1.idClient = jb1.idClient
+	inner join workCode as wc1 on wc1.idWorkCode = hw1.idWorkCode and wc1.jobNo = jb1.jobNo
+where po1.idPO = po.idPO and jb1.jobNo = jb.jobNo and cl1.idClient = inv.idClient and hw1.dateWorked between inv.startDate and inv.FinalDate ),0)
++
+ISNULL((select sum(exu1.amount) from expensesUsed as exu1
+	inner join expenses as ex1 on exu1.idExpense = ex1.idExpenses
+	inner join task as tk1 on tk1.idAux = exu1.idAux 
+	inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO
+	inner join projectOrder as po1 on po1.idPO = wo1.idPO and wo1.jobNo = po1.jobNo
+	inner join job as jb1 on po1.jobNo = jb1.jobNo
+	inner join clients  as cl1 on cl1.idClient = jb1.idClient
+where po1.idPO = po.idPO and jb1.jobNo = jb.jobNo and cl1.idClient = inv.idClient and exu1.dateExpense between inv.startDate and inv.FinalDate ),0)
++
+ISNULL((select sum(mtu1.amount) from materialUsed as mtu1
+	inner join material as mt1 on mtu1.idMaterial = mt1.idMaterial
+	inner join task as tk1 on tk1.idAux = mtu1.idAux 
+	inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO
+	inner join projectOrder as po1 on po1.idPO = wo1.idPO and wo1.jobNo = po1.jobNo
+	inner join job as jb1 on po1.jobNo = jb1.jobNo
+	inner join clients  as cl1 on cl1.idClient = jb1.idClient
+where po1.idPO = po.idPO and jb1.jobNo = jb.jobNo and cl1.idClient = inv.idClient and mtu1.dateMaterial between inv.startDate and inv.FinalDate ),0 ),2)
+as 'Total Cost'
+from invoice as inv
+inner join projectOrder as po on po.idPO = inv.idPO
+inner join job as jb on jb.jobNo = po.jobNo
+inner join clients as cl on cl.idClient = inv.idClient and jb.idClient = cl.idClient
+where inv.invoiceDate between @StartDate and @EndDate and inv.[status] = 0 ) as T1 where T1.[Total Cost] > 0"
+			Return _InvoicesCost
+		End Get
+		Set(ByVal value As String)
+			_InvoicesCost = value
+		End Set
+	End Property
 End Class

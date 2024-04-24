@@ -54,5 +54,38 @@ Public Class ReportClientBillingProject
 
     End Sub
 
+    Private Sub cmbClients_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbClients.SelectedIndexChanged
+        Dim arrayStr() As String = cmbClients.Items(cmbClients.SelectedIndex).ToString.Split(" ")
+        If arrayStr.Length > 0 Then
+            Dim idClient As String = arrayStr(0)
+            selectPOByClient(tblPOs, "ClientBillingProject", idClient)
+        Else
+            tblPOs.Rows.Clear()
+        End If
 
+    End Sub
+
+    Private Sub btnSelectAll_Click(sender As Object, e As EventArgs) Handles btnSelectAll.Click
+        If tblPOs.Rows IsNot Nothing Then
+            For Each row As DataGridViewRow In tblPOs.Rows
+                row.Cells(3).Value = True
+            Next
+        Else
+            MsgBox("Please select a client to continue.")
+        End If
+    End Sub
+
+    Private Sub Save_Click(sender As Object, e As EventArgs) Handles Save.Click
+        If tblPOs.Rows IsNot Nothing Then
+            If tblPOs.Rows.GetRowCount(DataGridViewElementStates.Selected) > 0 Then
+                If DialogResult.Yes = MessageBox.Show("Are you sure to make these changues?" + vbCrLf + "The Projects unselected will not appear in these report.", "Message", MessageBoxButtons.YesNo, MessageBoxIcon.Question) Then
+                    savePOreport(tblPOs, "ClientBillingProject")
+                End If
+            Else
+                MsgBox("Please select a Row")
+            End If
+        Else
+            MsgBox("Please select a client to continue.")
+        End If
+    End Sub
 End Class

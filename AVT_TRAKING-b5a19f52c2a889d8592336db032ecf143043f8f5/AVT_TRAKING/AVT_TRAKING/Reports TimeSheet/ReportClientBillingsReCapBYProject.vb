@@ -67,11 +67,35 @@ Public Class ReportClientBillingsReCapBYProject
         If cmbClients.SelectedItem IsNot Nothing Then
             Dim array() As String = cmbClients.SelectedItem.ToString.Split(" ")
             clientId = array(0)
-            llenarComboJobsReports(cmbJob, array(0))
-            llenarComboPOByClient(cmbPO, array(0))
+            llenarComboJobsReports(cmbJob, clientId)
+            llenarComboPOByClient(cmbPO, clientId)
+            selectPOByClient(tblPOs, "ClientBillingReCapByProject", clientId)
         End If
     End Sub
 
+    Private Sub btnSelectAll_Click(sender As Object, e As EventArgs) Handles btnSelectAll.Click
+        If tblPOs.Rows IsNot Nothing Then
+            For Each row As DataGridViewRow In tblPOs.Rows
+                row.Cells(3).Value = True
+            Next
+        Else
+            MsgBox("Please select a client to continue.")
+        End If
+    End Sub
+
+    Private Sub Save_Click(sender As Object, e As EventArgs) Handles Save.Click
+        If tblPOs.Rows IsNot Nothing Then
+            If tblPOs.Rows.GetRowCount(DataGridViewElementStates.Selected) > 0 Then
+                If DialogResult.Yes = MessageBox.Show("Are you sure to make these changues?" + vbCrLf + "The Projects unselected will not appear in these report.", "Message", MessageBoxButtons.YesNo, MessageBoxIcon.Question) Then
+                    savePOreport(tblPOs, "ClientBillingReCapByProject")
+                End If
+            Else
+                MsgBox("Please select a Row")
+            End If
+        Else
+            MsgBox("Please select a client to continue.")
+        End If
+    End Sub
     Private Sub chbAllJobs_CheckedChanged(sender As Object, e As EventArgs) Handles chbAllJobs.CheckedChanged
         If chbAllJobs.Checked Then
             cmbJob.Enabled = False
@@ -94,6 +118,7 @@ Public Class ReportClientBillingsReCapBYProject
             JobNo = cmbJob.Items(cmbJob.SelectedIndex)
             llenarComboPOByClient(cmbPO, clientId, JobNo)
             cmbPO.Text = ""
+            selectPOByClient(tblPOs, "ClientBillingReCapByProject", clientId, JobNo)
         End If
     End Sub
 

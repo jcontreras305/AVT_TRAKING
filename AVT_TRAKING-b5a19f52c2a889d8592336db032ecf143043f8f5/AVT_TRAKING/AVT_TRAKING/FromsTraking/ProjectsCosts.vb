@@ -173,8 +173,8 @@ Public Class ProjectsCosts
         Return flag
     End Function
 
-    Private Function cargarDatosProjecto(ByVal jobNum As String, ByVal WO As String, ByVal tk As String) As Boolean
-        Dim flag As Boolean = llenarCampos(mtdJobs.cargarDatosProjectOrder(jobNum, tk, WO)) 'aqui puedo tomar los datos de idCliente , WO y PO
+    Private Function cargarDatosProjecto(ByVal jobNum As String, ByVal WO As String, ByVal tk As String, Optional idPO As String = "") As Boolean
+        Dim flag As Boolean = llenarCampos(mtdJobs.cargarDatosProjectOrder(jobNum, tk, WO, idPO)) 'aqui puedo tomar los datos de idCliente , WO y PO
         mtdJobs.buscarHorasPorProjecto(tblHoursWorkedProject, WO, tk)
         mtdJobs.buscarExpencesPorProyecto(tblExpencesProjects, WO, tk)
         mtdJobs.buscarMaterialesPorProyecto(tblMaterialProjects, WO, tk)
@@ -211,7 +211,7 @@ Public Class ProjectsCosts
             If index = contRow - 1 Then
                 index = 0
                 flagBtnNextBackFind = True
-                If cargarDatosProjecto(tablasDeTareas.Rows(index).ItemArray(0), tablasDeTareas.Rows(index).ItemArray(5), tablasDeTareas.Rows(index).ItemArray(3)) Then
+                If cargarDatosProjecto(tablasDeTareas.Rows(index).ItemArray(0), tablasDeTareas.Rows(index).ItemArray(5), tablasDeTareas.Rows(index).ItemArray(3), tablasDeTareas.Rows(index).ItemArray(1)) Then
                     If chbComplete.Checked() = False Then
                         activarCampos(True)
                     Else
@@ -227,7 +227,7 @@ Public Class ProjectsCosts
             Else
                 index += 1
                 flagBtnNextBackFind = True
-                If cargarDatosProjecto(tablasDeTareas.Rows(index).ItemArray(0), tablasDeTareas.Rows(index).ItemArray(5), tablasDeTareas.Rows(index).ItemArray(3)) Then
+                If cargarDatosProjecto(tablasDeTareas.Rows(index).ItemArray(0), tablasDeTareas.Rows(index).ItemArray(5), tablasDeTareas.Rows(index).ItemArray(3), tablasDeTareas.Rows(index).ItemArray(1)) Then
                     If chbComplete.Checked() = False Then
                         activarCampos(True)
                     Else
@@ -249,7 +249,7 @@ Public Class ProjectsCosts
             Dim contRow As Integer = tablasDeTareas.Rows.Count
             Dim index As Integer = 0
             For Each row As DataRow In tablasDeTareas.Rows
-                If row.ItemArray(3) = task And row.ItemArray(2) = WorkOrder And row.ItemArray(0) = JobNumber Then
+                If row.ItemArray(3) = task And row.ItemArray(2) = WorkOrder And row.ItemArray(0) = JobNumber And row.ItemArray(1) = PO Then
                     Exit For
                 Else
                     index = index + 1
@@ -258,7 +258,7 @@ Public Class ProjectsCosts
             If index = 0 Then
                 index = contRow - 1
                 flagBtnNextBackFind = True
-                If cargarDatosProjecto(tablasDeTareas.Rows(index).ItemArray(0), tablasDeTareas.Rows(index).ItemArray(5), tablasDeTareas.Rows(index).ItemArray(3)) Then
+                If cargarDatosProjecto(tablasDeTareas.Rows(index).ItemArray(0), tablasDeTareas.Rows(index).ItemArray(5), tablasDeTareas.Rows(index).ItemArray(3), tablasDeTareas.Rows(index).ItemArray(1)) Then
                     If chbComplete.Checked() = False Then
                         activarCampos(True)
                     Else
@@ -275,7 +275,7 @@ Public Class ProjectsCosts
             Else
                 index -= 1
                 flagBtnNextBackFind = True
-                If cargarDatosProjecto(tablasDeTareas.Rows(index).ItemArray(0), tablasDeTareas.Rows(index).ItemArray(5), tablasDeTareas.Rows(index).ItemArray(3)) Then
+                If cargarDatosProjecto(tablasDeTareas.Rows(index).ItemArray(0), tablasDeTareas.Rows(index).ItemArray(5), tablasDeTareas.Rows(index).ItemArray(3), tablasDeTareas.Rows(index).ItemArray(1)) Then
                     If chbComplete.Checked() = False Then
                         activarCampos(True)
                     Else
@@ -302,7 +302,7 @@ Public Class ProjectsCosts
     End Sub
 
     Private Sub btnAddRecord_Click(sender As Object, e As EventArgs) Handles btnAddRecord.Click
-        If btnAddRecord.Text = "Add Record" Then
+        If btnAddRecord.Text = "Add" Then
             btnAddRecord.Text = "Save Record"
             btnCancel.Visible = True
             limpiarCampos()
@@ -321,7 +321,7 @@ Public Class ProjectsCosts
         Else
             If mtdJobs.insertarNuevaTarea(pjtNuevo) Then
                 MsgBox("Successful")
-                btnAddRecord.Text = "Add Record"
+                btnAddRecord.Text = "Add"
                 flagAddRecord = False
                 mtdJobs.consultaWO(JobNumber, tablasDeTareas)
                 If tablasDeTareas.Rows IsNot Nothing Then
@@ -339,7 +339,7 @@ Public Class ProjectsCosts
                 btnChangeJobNo.Enabled = True
             Else
                 MsgBox("Error, chek the Data or try again")
-                btnAddRecord.Text = "Save Record"
+                btnAddRecord.Text = "Save"
                 flagAddRecord = True
                 btnChangeJobNo.Enabled = False
             End If

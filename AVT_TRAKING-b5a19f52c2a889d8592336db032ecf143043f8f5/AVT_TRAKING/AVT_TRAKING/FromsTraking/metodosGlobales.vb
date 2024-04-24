@@ -781,4 +781,86 @@ where cl.numberClient = " + numberClient + " and po.projectId = '" + project + "
             conDB.desconectar()
         End Try
     End Function
+    ''' <summary>
+    ''' Hace una consulta a la BD, retornando los Projects de un Cliente en union con la tabla de Proyectos omitidos para reportes
+    ''' </summary>
+    ''' <param name="DataGridView"></param>
+    ''' <param name="numberClient"></param>
+    ''' <param name="jobNo"></param>
+    ''' <returns>Retorna True si se hizo la consulta  o un False si hubo problemas con la consulta</returns>
+    Public Function selectPOByClient(ByVal tbl As DataGridView, ByVal reportName As String, ByVal numberClient As String, Optional jobNo As String = "") As Boolean
+        Try
+            Dim conDB As New ConnectioDB
+            conDB.conectar()
+            Dim cmd As New SqlCommand("select  
+ISNULL((select top 1 ex.[reportname] from exceptPO as ex where ex.[idPO] = po.[idPO] and ex.[jobNo] = jb.[jobNo] and ex.reportname = '" + reportName + "' ),'" + reportName + "')as 'ReportName',
+jb.jobNo as 'JobNO',
+po.idPO as 'PO',
+ISNULL((select top 1 ex.[status] from exceptPO as ex where ex.[idPO] = po.[idPO] and ex.[jobNo] = jb.[jobNo] and ex.reportname = '" + reportName + "'),1) as 'Status'
+from projectOrder as po
+inner join job as jb on po.jobNo = jb.jobNo 
+inner join clients as cl on cl.idClient = jb.idClient 
+where cl.numberClient = " + numberClient + " 
+" + If(jobNo = "", "", "and jb.jobNo = " + jobNo), conDB.conn)
+            If cmd.ExecuteNonQuery Then
+                Dim da As New SqlDataAdapter(cmd)
+                Dim dt As New Data.DataTable
+                da.Fill(dt)
+                tbl.DataSource() = dt
+                tbl.Columns(0).Visible = False
+                tbl.Columns(1).ReadOnly = True
+                tbl.Columns(2).ReadOnly = True
+                Return True
+            Else
+                Return False
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message())
+            Return False
+        End Try
+    End Function
+
+    ''' <summary>
+    ''' Hace el proceso de insercion de la filas seleccionadas en la tabla de PO denegados 
+    ''' </summary>
+    ''' <param name="datagridView"></param>
+    ''' <param name="reportName"></param>
+    ''' <returns>Retorna un True si no hubo problemas al insertar los cambios</returns>
+    Public Function savePOreport(ByVal tbl As DataGridView, ByVal reportName As String) As Boolean
+        Try
+            Dim conDB As New ConnectioDB
+            conDB.conectar()
+            Dim tran As SqlTransaction
+            tran = conDB.conn.BeginTransaction
+            Dim flag As Boolean = False
+            For Each row As DataGridViewRow In tbl.SelectedRows
+                Dim cmd As New SqlCommand("if (select COUNT(*) from exceptPO where idPO = " + row.Cells("PO").Value.ToString() + " and jobNo = " + row.Cells("JobNo").Value.ToString() + " and reportname = '" + reportName + "') = 0 
+begin 
+    insert into exceptPO values ('" + reportName + "'," + row.Cells("JobNo").Value.ToString() + "," + row.Cells("PO").Value.ToString() + "," + If(row.Cells("Status").Value = True, "1", "0") + ")
+end 
+else 
+begin 
+	update exceptPO set [status] = " + If(row.Cells("Status").Value = True, "1", "0") + " where idPO = " + row.Cells("PO").Value.ToString() + " and jobNo = " + row.Cells("JobNo").Value.ToString() + " and reportname = '" + reportName + "'
+end", conDB.conn)
+                cmd.Transaction = tran
+                If cmd.ExecuteNonQuery > 0 Then
+                    flag = True
+                Else
+                    flag = False
+                End If
+            Next
+            If flag Then
+                tran.Commit()
+                MsgBox("Successful")
+                Return True
+            Else
+                tran.Rollback()
+                MsgBox("Error, check the Data.")
+                Return False
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message())
+            Return False
+        End Try
+    End Function
 End Module

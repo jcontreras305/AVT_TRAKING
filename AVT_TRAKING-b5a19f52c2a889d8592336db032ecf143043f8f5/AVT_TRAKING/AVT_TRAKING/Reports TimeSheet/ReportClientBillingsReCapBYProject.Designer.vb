@@ -25,7 +25,15 @@ Partial Class ReportClientBillingsReCapBYProject
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(ReportClientBillingsReCapBYProject))
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
         Me.Panel3 = New System.Windows.Forms.Panel()
+        Me.TabControl1 = New System.Windows.Forms.TabControl()
+        Me.tbpReport = New System.Windows.Forms.TabPage()
         Me.crvClientBillingsReCapBYProject = New CrystalDecisions.Windows.Forms.CrystalReportViewer()
+        Me.tbpFilterPOs = New System.Windows.Forms.TabPage()
+        Me.TableLayoutPanel2 = New System.Windows.Forms.TableLayoutPanel()
+        Me.tblPOs = New System.Windows.Forms.DataGridView()
+        Me.Panel4 = New System.Windows.Forms.Panel()
+        Me.Save = New System.Windows.Forms.Button()
+        Me.btnSelectAll = New System.Windows.Forms.Button()
         Me.Panel2 = New System.Windows.Forms.Panel()
         Me.chbAllPO = New System.Windows.Forms.CheckBox()
         Me.Label6 = New System.Windows.Forms.Label()
@@ -50,6 +58,12 @@ Partial Class ReportClientBillingsReCapBYProject
         Me.btnMaximize = New System.Windows.Forms.PictureBox()
         Me.TableLayoutPanel1.SuspendLayout()
         Me.Panel3.SuspendLayout()
+        Me.TabControl1.SuspendLayout()
+        Me.tbpReport.SuspendLayout()
+        Me.tbpFilterPOs.SuspendLayout()
+        Me.TableLayoutPanel2.SuspendLayout()
+        CType(Me.tblPOs, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.Panel4.SuspendLayout()
         Me.Panel2.SuspendLayout()
         CType(Me.PictureBox4, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel1.SuspendLayout()
@@ -81,7 +95,7 @@ Partial Class ReportClientBillingsReCapBYProject
         '
         'Panel3
         '
-        Me.Panel3.Controls.Add(Me.crvClientBillingsReCapBYProject)
+        Me.Panel3.Controls.Add(Me.TabControl1)
         Me.Panel3.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel3.Location = New System.Drawing.Point(4, 167)
         Me.Panel3.Margin = New System.Windows.Forms.Padding(4)
@@ -89,18 +103,132 @@ Partial Class ReportClientBillingsReCapBYProject
         Me.Panel3.Size = New System.Drawing.Size(842, 432)
         Me.Panel3.TabIndex = 2
         '
+        'TabControl1
+        '
+        Me.TabControl1.Controls.Add(Me.tbpReport)
+        Me.TabControl1.Controls.Add(Me.tbpFilterPOs)
+        Me.TabControl1.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.TabControl1.Location = New System.Drawing.Point(0, 0)
+        Me.TabControl1.Name = "TabControl1"
+        Me.TabControl1.SelectedIndex = 0
+        Me.TabControl1.Size = New System.Drawing.Size(842, 432)
+        Me.TabControl1.TabIndex = 0
+        '
+        'tbpReport
+        '
+        Me.tbpReport.BackColor = System.Drawing.Color.FromArgb(CType(CType(83, Byte), Integer), CType(CType(93, Byte), Integer), CType(CType(102, Byte), Integer))
+        Me.tbpReport.Controls.Add(Me.crvClientBillingsReCapBYProject)
+        Me.tbpReport.Location = New System.Drawing.Point(4, 25)
+        Me.tbpReport.Name = "tbpReport"
+        Me.tbpReport.Padding = New System.Windows.Forms.Padding(3)
+        Me.tbpReport.Size = New System.Drawing.Size(834, 403)
+        Me.tbpReport.TabIndex = 0
+        Me.tbpReport.Text = "Report"
+        '
         'crvClientBillingsReCapBYProject
         '
         Me.crvClientBillingsReCapBYProject.ActiveViewIndex = -1
         Me.crvClientBillingsReCapBYProject.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.crvClientBillingsReCapBYProject.Cursor = System.Windows.Forms.Cursors.Default
         Me.crvClientBillingsReCapBYProject.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.crvClientBillingsReCapBYProject.Location = New System.Drawing.Point(0, 0)
+        Me.crvClientBillingsReCapBYProject.Location = New System.Drawing.Point(3, 3)
         Me.crvClientBillingsReCapBYProject.Margin = New System.Windows.Forms.Padding(4)
         Me.crvClientBillingsReCapBYProject.Name = "crvClientBillingsReCapBYProject"
-        Me.crvClientBillingsReCapBYProject.Size = New System.Drawing.Size(842, 432)
+        Me.crvClientBillingsReCapBYProject.Size = New System.Drawing.Size(828, 397)
         Me.crvClientBillingsReCapBYProject.TabIndex = 0
         Me.crvClientBillingsReCapBYProject.ToolPanelWidth = 267
+        '
+        'tbpFilterPOs
+        '
+        Me.tbpFilterPOs.BackColor = System.Drawing.Color.FromArgb(CType(CType(83, Byte), Integer), CType(CType(93, Byte), Integer), CType(CType(102, Byte), Integer))
+        Me.tbpFilterPOs.Controls.Add(Me.TableLayoutPanel2)
+        Me.tbpFilterPOs.Location = New System.Drawing.Point(4, 25)
+        Me.tbpFilterPOs.Name = "tbpFilterPOs"
+        Me.tbpFilterPOs.Padding = New System.Windows.Forms.Padding(3)
+        Me.tbpFilterPOs.Size = New System.Drawing.Size(834, 403)
+        Me.tbpFilterPOs.TabIndex = 1
+        Me.tbpFilterPOs.Text = "Filter POs"
+        '
+        'TableLayoutPanel2
+        '
+        Me.TableLayoutPanel2.ColumnCount = 2
+        Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
+        Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 194.0!))
+        Me.TableLayoutPanel2.Controls.Add(Me.tblPOs, 0, 0)
+        Me.TableLayoutPanel2.Controls.Add(Me.Panel4, 1, 0)
+        Me.TableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.TableLayoutPanel2.Location = New System.Drawing.Point(3, 3)
+        Me.TableLayoutPanel2.Name = "TableLayoutPanel2"
+        Me.TableLayoutPanel2.RowCount = 1
+        Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
+        Me.TableLayoutPanel2.Size = New System.Drawing.Size(828, 397)
+        Me.TableLayoutPanel2.TabIndex = 1
+        '
+        'tblPOs
+        '
+        Me.tblPOs.AllowUserToAddRows = False
+        Me.tblPOs.AllowUserToOrderColumns = True
+        Me.tblPOs.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
+        Me.tblPOs.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.tblPOs.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.tblPOs.Location = New System.Drawing.Point(3, 3)
+        Me.tblPOs.Name = "tblPOs"
+        Me.tblPOs.RowHeadersWidth = 51
+        Me.tblPOs.RowTemplate.Height = 24
+        Me.tblPOs.Size = New System.Drawing.Size(628, 391)
+        Me.tblPOs.TabIndex = 0
+        '
+        'Panel4
+        '
+        Me.Panel4.Controls.Add(Me.Save)
+        Me.Panel4.Controls.Add(Me.btnSelectAll)
+        Me.Panel4.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Panel4.Location = New System.Drawing.Point(637, 3)
+        Me.Panel4.Name = "Panel4"
+        Me.Panel4.Size = New System.Drawing.Size(188, 391)
+        Me.Panel4.TabIndex = 1
+        '
+        'Save
+        '
+        Me.Save.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Save.FlatAppearance.BorderSize = 0
+        Me.Save.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(58, Byte), Integer), CType(CType(115, Byte), Integer))
+        Me.Save.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.Save.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Save.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.Save.Image = Global.AVT_TRAKING.My.Resources.Resources.save
+        Me.Save.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.Save.Location = New System.Drawing.Point(42, 21)
+        Me.Save.Margin = New System.Windows.Forms.Padding(4)
+        Me.Save.Name = "Save"
+        Me.Save.Size = New System.Drawing.Size(103, 41)
+        Me.Save.TabIndex = 16
+        Me.Save.Text = "Save"
+        Me.Save.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.Save.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
+        Me.Save.UseVisualStyleBackColor = True
+        '
+        'btnSelectAll
+        '
+        Me.btnSelectAll.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnSelectAll.FlatAppearance.BorderSize = 0
+        Me.btnSelectAll.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(58, Byte), Integer), CType(CType(115, Byte), Integer))
+        Me.btnSelectAll.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnSelectAll.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnSelectAll.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.btnSelectAll.Image = Global.AVT_TRAKING.My.Resources.Resources.ok
+        Me.btnSelectAll.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnSelectAll.Location = New System.Drawing.Point(42, 320)
+        Me.btnSelectAll.Margin = New System.Windows.Forms.Padding(4)
+        Me.btnSelectAll.Name = "btnSelectAll"
+        Me.btnSelectAll.Size = New System.Drawing.Size(103, 46)
+        Me.btnSelectAll.TabIndex = 15
+        Me.btnSelectAll.Text = "Select All"
+        Me.btnSelectAll.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.btnSelectAll.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
+        Me.btnSelectAll.UseVisualStyleBackColor = True
         '
         'Panel2
         '
@@ -225,10 +353,11 @@ Partial Class ReportClientBillingsReCapBYProject
         Me.Button1.Location = New System.Drawing.Point(630, 46)
         Me.Button1.Margin = New System.Windows.Forms.Padding(4)
         Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(111, 41)
+        Me.Button1.Size = New System.Drawing.Size(93, 41)
         Me.Button1.TabIndex = 14
         Me.Button1.Text = "Report"
         Me.Button1.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.Button1.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
         Me.Button1.UseVisualStyleBackColor = True
         '
         'Label2
@@ -382,6 +511,12 @@ Partial Class ReportClientBillingsReCapBYProject
         Me.Text = "ReportClientBillingsReCapBYProject"
         Me.TableLayoutPanel1.ResumeLayout(False)
         Me.Panel3.ResumeLayout(False)
+        Me.TabControl1.ResumeLayout(False)
+        Me.tbpReport.ResumeLayout(False)
+        Me.tbpFilterPOs.ResumeLayout(False)
+        Me.TableLayoutPanel2.ResumeLayout(False)
+        CType(Me.tblPOs, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.Panel4.ResumeLayout(False)
         Me.Panel2.ResumeLayout(False)
         Me.Panel2.PerformLayout()
         CType(Me.PictureBox4, System.ComponentModel.ISupportInitialize).EndInit()
@@ -421,4 +556,12 @@ Partial Class ReportClientBillingsReCapBYProject
     Friend WithEvents chbAllPO As CheckBox
     Friend WithEvents Label6 As Label
     Friend WithEvents cmbPO As ComboBox
+    Friend WithEvents TabControl1 As TabControl
+    Friend WithEvents tbpReport As TabPage
+    Friend WithEvents tbpFilterPOs As TabPage
+    Friend WithEvents TableLayoutPanel2 As TableLayoutPanel
+    Friend WithEvents tblPOs As DataGridView
+    Friend WithEvents Panel4 As Panel
+    Friend WithEvents Save As Button
+    Friend WithEvents btnSelectAll As Button
 End Class

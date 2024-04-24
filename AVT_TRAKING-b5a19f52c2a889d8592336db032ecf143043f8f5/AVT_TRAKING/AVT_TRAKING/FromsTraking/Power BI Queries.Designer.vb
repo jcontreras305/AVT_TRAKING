@@ -217,8 +217,8 @@ Partial Class Power_BI_Queries
         'TableLayoutPanel2
         '
         Me.TableLayoutPanel2.ColumnCount = 2
-        Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 23.68728!))
-        Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 76.31272!))
+        Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 265.0!))
+        Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
         Me.TableLayoutPanel2.Controls.Add(Me.Panel3, 0, 0)
         Me.TableLayoutPanel2.Controls.Add(Me.Panel4, 1, 0)
         Me.TableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill
@@ -226,7 +226,7 @@ Partial Class Power_BI_Queries
         Me.TableLayoutPanel2.Margin = New System.Windows.Forms.Padding(4)
         Me.TableLayoutPanel2.Name = "TableLayoutPanel2"
         Me.TableLayoutPanel2.RowCount = 1
-        Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
+        Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
         Me.TableLayoutPanel2.Size = New System.Drawing.Size(1143, 431)
         Me.TableLayoutPanel2.TabIndex = 2
         '
@@ -239,7 +239,7 @@ Partial Class Power_BI_Queries
         Me.Panel3.Location = New System.Drawing.Point(4, 4)
         Me.Panel3.Margin = New System.Windows.Forms.Padding(4)
         Me.Panel3.Name = "Panel3"
-        Me.Panel3.Size = New System.Drawing.Size(262, 423)
+        Me.Panel3.Size = New System.Drawing.Size(257, 423)
         Me.Panel3.TabIndex = 2
         '
         'btnCheckAll
@@ -249,7 +249,7 @@ Partial Class Power_BI_Queries
         Me.btnCheckAll.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnCheckAll.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.btnCheckAll.Image = Global.AVT_TRAKING.My.Resources.Resources.allTables
-        Me.btnCheckAll.Location = New System.Drawing.Point(9, 380)
+        Me.btnCheckAll.Location = New System.Drawing.Point(4, 380)
         Me.btnCheckAll.Margin = New System.Windows.Forms.Padding(4)
         Me.btnCheckAll.Name = "btnCheckAll"
         Me.btnCheckAll.Size = New System.Drawing.Size(120, 36)
@@ -265,7 +265,7 @@ Partial Class Power_BI_Queries
         Me.btnRefresh.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnRefresh.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.btnRefresh.Image = Global.AVT_TRAKING.My.Resources.Resources.refresh
-        Me.btnRefresh.Location = New System.Drawing.Point(137, 380)
+        Me.btnRefresh.Location = New System.Drawing.Point(132, 380)
         Me.btnRefresh.Margin = New System.Windows.Forms.Padding(4)
         Me.btnRefresh.Name = "btnRefresh"
         Me.btnRefresh.Size = New System.Drawing.Size(121, 36)
@@ -283,7 +283,7 @@ Partial Class Power_BI_Queries
         Me.tvwTablePBI.Location = New System.Drawing.Point(0, 4)
         Me.tvwTablePBI.Margin = New System.Windows.Forms.Padding(4)
         Me.tvwTablePBI.Name = "tvwTablePBI"
-        Me.tvwTablePBI.Size = New System.Drawing.Size(261, 371)
+        Me.tvwTablePBI.Size = New System.Drawing.Size(256, 371)
         Me.tvwTablePBI.TabIndex = 1
         '
         'Panel4
@@ -291,10 +291,10 @@ Partial Class Power_BI_Queries
         Me.Panel4.Controls.Add(Me.lblMessage)
         Me.Panel4.Controls.Add(Me.tblInfoPBI)
         Me.Panel4.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel4.Location = New System.Drawing.Point(274, 4)
+        Me.Panel4.Location = New System.Drawing.Point(269, 4)
         Me.Panel4.Margin = New System.Windows.Forms.Padding(4)
         Me.Panel4.Name = "Panel4"
-        Me.Panel4.Size = New System.Drawing.Size(865, 423)
+        Me.Panel4.Size = New System.Drawing.Size(870, 423)
         Me.Panel4.TabIndex = 3
         '
         'lblMessage
@@ -323,7 +323,7 @@ Partial Class Power_BI_Queries
         Me.tblInfoPBI.Name = "tblInfoPBI"
         Me.tblInfoPBI.ReadOnly = True
         Me.tblInfoPBI.RowHeadersWidth = 51
-        Me.tblInfoPBI.Size = New System.Drawing.Size(857, 381)
+        Me.tblInfoPBI.Size = New System.Drawing.Size(862, 381)
         Me.tblInfoPBI.TabIndex = 0
         '
         'Power_BI_Queries

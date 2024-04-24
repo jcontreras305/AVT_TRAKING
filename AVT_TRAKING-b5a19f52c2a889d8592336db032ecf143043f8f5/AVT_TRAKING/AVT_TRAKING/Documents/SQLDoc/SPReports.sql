@@ -1,5 +1,6 @@
 --==============================================================================================
 --==============================================================================================
+--==============================================================================================
 --===== LOS PROCEDIMIENTO SI YA ESTA INSERTADOS EN LA BASE DE DATOS SOLO DESCOMENTAR ===========
 --===== EL ALTER QUE ESTA ARRIBA DE CADA PROCEDIMIENTO Y COMENTAR EL CREATE USANDO   ===========
 --===== (CTRL+K)(CTRL+C) PARA COMENTAR Y (CTRL+K)(CTRL+U)                            ===========
@@ -95,6 +96,7 @@ T2.Complete,T2.[Es-Hrs],T2.[Total Expenses],T2.[Total Material],T2.[Total Spend]
 	inner join projectOrder as po on po.idPO=wo.idPO and po.jobNo = wo.jobNo
 	inner join job as jb on jb.jobNo=po.jobNo
 	inner join clients cl on cl.idClient=jb.idClient
+	left join exceptPO as ex on ex.jobNo = jb.jobNo and ex.idPO = po.idPO
 	where cl.numberClient=@clientnum and ((select sum(hoursST) from hoursWorked where idAux = ts.idAux)> 0 or (select sum(hoursOT)
 		 from hoursWorked where idAux = ts.idAux)> 0 or (select sum(hours3)
 		 from hoursWorked where idAux = ts.idAux)> 0 or (select sum(amount) 
@@ -102,6 +104,7 @@ T2.Complete,T2.[Es-Hrs],T2.[Total Expenses],T2.[Total Material],T2.[Total Spend]
 		 from materialUsed where idAux=ts.idAux)>0)
 		 and jb.jobNo like iif(@allJob=1,'%%',CONCAT('%',@job,'%'))
 		 and po.idPO like iif(@allPO = 1 ,'%%',CONCAT('%',@idPO,'%'))
+		 and (not( ex.[status] like 0) or ex.[status] is null)
 		)as T2
 		where T2.[Billings ST]<>0 OR T2.[Billings OT]<>0 OR T2.[Total Expenses]<>0 OR T2.[Total Material]<>0
 		order by t2.jobNo asc
@@ -672,8 +675,8 @@ begin
 			inner join projectOrder as po on po.jobNo= jb.jobNo 
 			inner join workOrder as wo on wo.idPO=po.idPO and po.jobNo = wo.jobNo
 			inner join task as ts on ts.idAuxWO=wo.idAuxWO
-	 
-			where cl.numberClient=@clientnum 
+			left join exceptPO as ex on ex.jobNo = jb.jobNo and ex.idPO = po.idPO
+			where cl.numberClient=@clientnum and (not( ex.[status] like 0) or ex.[status] is null)
 			)as T2 
 			where
 			T2.[Billings ST]>0 OR T2.[Billings OT]>0 OR T2.[Total Expenses]>0 OR T2.[Total Material]>0 or T2.[Total Expenses] > 0

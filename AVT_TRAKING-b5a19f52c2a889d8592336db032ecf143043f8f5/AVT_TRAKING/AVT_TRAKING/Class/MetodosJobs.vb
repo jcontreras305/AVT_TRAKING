@@ -1221,7 +1221,7 @@ where jb.jobNo = " + If(idJob = "", "0", idJob).ToString() + " order by wo.idWO 
         End Try
     End Function
 
-    Public Function cargarDatosProjectOrder(ByVal idJob As String, ByVal task As String, ByVal idAuxWO As String) As List(Of String)
+    Public Function cargarDatosProjectOrder(ByVal idJob As String, ByVal task As String, ByVal idAuxWO As String, Optional idPO As String = "") As List(Of String)
         Try
             conectar()
             Dim cmd As New SqlCommand("
@@ -1253,7 +1253,7 @@ inner join clients as cl on jb.idClient = cl.idClient
 inner join projectOrder as po on jb.jobNo = po.jobNo 
 inner join workOrder as wo on po.idPO = wo.idPO and wo.jobNo = po.jobNo
 left join task as tk on tk.idAuxWO = wo.idAuxWO
-where jb.jobNo = " + If(idJob = "", "0", idJob).ToString() + " and tk.task = '" + task + "' and wo.idAuxWO ='" + idAuxWO + "'", conn)
+where jb.jobNo = " + If(idJob = "", "0", idJob).ToString() + " and tk.task = '" + task + "' and wo.idAuxWO ='" + idAuxWO + If(idPO = "", "", "' and po.idPO = " + idPO), conn)
             Dim lstDatosPO As New List(Of String)
             Dim reader As SqlDataReader = cmd.ExecuteReader()
             While reader.Read()
