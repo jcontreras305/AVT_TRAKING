@@ -2,6 +2,7 @@
 Imports System.Data.SqlClient
 Public Class ReportClientBillingProject
     Dim conection As New ConnectioDB
+    Dim idClient As String = ""
     Private Sub ReportClientBillingProject_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         llenarComboClientsReports(cmbClients)
     End Sub
@@ -40,7 +41,7 @@ Public Class ReportClientBillingProject
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         Dim array() = cmbClients.SelectedItem.ToString().Split("    ")
-        Dim idClient As String = array(0)
+        idClient = array(0)
         If idClient <> "" Or idClient IsNot Nothing Then
             Dim reportTS As New ClientBillingProject
             reportTS.SetParameterValue("@startdate", validaFechaParaSQl(dtpInitialDate.Value.Date))
@@ -57,7 +58,7 @@ Public Class ReportClientBillingProject
     Private Sub cmbClients_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbClients.SelectedIndexChanged
         Dim arrayStr() As String = cmbClients.Items(cmbClients.SelectedIndex).ToString.Split(" ")
         If arrayStr.Length > 0 Then
-            Dim idClient As String = arrayStr(0)
+            idClient = arrayStr(0)
             selectPOByClient(tblPOs, "ClientBillingProject", idClient)
         Else
             tblPOs.Rows.Clear()
@@ -86,6 +87,14 @@ Public Class ReportClientBillingProject
             End If
         Else
             MsgBox("Please select a client to continue.")
+        End If
+    End Sub
+
+    Private Sub TextBox1_TextChanged(sender As Object, e As EventArgs) Handles txtIdPO.TextChanged
+        If idClient = "" Then
+            MsgBox("Please select a client.")
+        Else
+            selectPOByClient(tblPOs, "ClientBillingProject", idClient, "", txtIdPO.Text)
         End If
     End Sub
 End Class

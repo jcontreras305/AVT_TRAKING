@@ -788,7 +788,7 @@ where cl.numberClient = " + numberClient + " and po.projectId = '" + project + "
     ''' <param name="numberClient"></param>
     ''' <param name="jobNo"></param>
     ''' <returns>Retorna True si se hizo la consulta  o un False si hubo problemas con la consulta</returns>
-    Public Function selectPOByClient(ByVal tbl As DataGridView, ByVal reportName As String, ByVal numberClient As String, Optional jobNo As String = "") As Boolean
+    Public Function selectPOByClient(ByVal tbl As DataGridView, ByVal reportName As String, ByVal numberClient As String, Optional jobNo As String = "", Optional idpo As String = "") As Boolean
         Try
             Dim conDB As New ConnectioDB
             conDB.conectar()
@@ -801,7 +801,7 @@ from projectOrder as po
 inner join job as jb on po.jobNo = jb.jobNo 
 inner join clients as cl on cl.idClient = jb.idClient 
 where cl.numberClient = " + numberClient + " 
-" + If(jobNo = "", "", "and jb.jobNo = " + jobNo), conDB.conn)
+" + If(jobNo = "", "", "and jb.jobNo = " + jobNo) + If(idpo = "", "", " and po.idPO like CONCAT('%',CONVERT(NVARCHAR," + idpo + "),'%')"), conDB.conn)
             If cmd.ExecuteNonQuery Then
                 Dim da As New SqlDataAdapter(cmd)
                 Dim dt As New Data.DataTable

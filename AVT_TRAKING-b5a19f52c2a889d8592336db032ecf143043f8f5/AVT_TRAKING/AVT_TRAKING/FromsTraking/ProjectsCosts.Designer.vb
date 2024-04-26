@@ -1148,10 +1148,10 @@ Partial Class ProjectsCosts
         Me.btnNextTask.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.btnNextTask.Image = Global.AVT_TRAKING.My.Resources.Resources._next
         Me.btnNextTask.ImageAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.btnNextTask.Location = New System.Drawing.Point(1321, 31)
+        Me.btnNextTask.Location = New System.Drawing.Point(1312, 31)
         Me.btnNextTask.Margin = New System.Windows.Forms.Padding(4)
         Me.btnNextTask.Name = "btnNextTask"
-        Me.btnNextTask.Size = New System.Drawing.Size(25, 28)
+        Me.btnNextTask.Size = New System.Drawing.Size(41, 28)
         Me.btnNextTask.TabIndex = 17
         Me.btnNextTask.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.btnNextTask.UseVisualStyleBackColor = True

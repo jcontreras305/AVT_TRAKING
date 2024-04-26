@@ -183,6 +183,9 @@ Public Class ProjectsCosts
             If flagBtnNextBackFind = True Then
                 cmbJobNumber.SelectedItem = cmbJobNumber.Items(cmbJobNumber.FindString(jobNum))
                 JobNumber = jobNum
+                If tablasDeTareas.Rows IsNot Nothing Then
+                    txtElementsRadar.Text = "1 of " + tablasDeTareas.Rows.Count.ToString
+                End If
             Else
                 If tablasDeTareas.Rows.Count <> 0 Then
                     tablasDeTareas.Rows.Clear()
@@ -1809,7 +1812,7 @@ Public Class ProjectsCosts
         If flagFindElement Then
             Dim index As Integer = 0
             flagBtnNextBackFind = True
-            If cargarDatosProjecto(tablasDeTareas.Rows(index).ItemArray(0), tablasDeTareas.Rows(index).ItemArray(5), tablasDeTareas.Rows(index).ItemArray(3)) Then
+            If cargarDatosProjecto(tablasDeTareas.Rows(index).ItemArray(0), tablasDeTareas.Rows(index).ItemArray(5), tablasDeTareas.Rows(index).ItemArray(3), tablasDeTareas.Rows(index).ItemArray(1)) Then
                 If chbComplete.Checked() = False Then
                     activarCampos(True)
                 Else

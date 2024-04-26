@@ -50,6 +50,8 @@ Partial Class ReportClientBillingProject
         Me.PictureBox3 = New System.Windows.Forms.PictureBox()
         Me.btnRestore = New System.Windows.Forms.PictureBox()
         Me.btnMaximize = New System.Windows.Forms.PictureBox()
+        Me.txtIdPO = New System.Windows.Forms.TextBox()
+        Me.Label5 = New System.Windows.Forms.Label()
         Me.TableLayoutPanel1.SuspendLayout()
         Me.Panel3.SuspendLayout()
         Me.TabControl1.SuspendLayout()
@@ -173,6 +175,8 @@ Partial Class ReportClientBillingProject
         '
         'Panel4
         '
+        Me.Panel4.Controls.Add(Me.Label5)
+        Me.Panel4.Controls.Add(Me.txtIdPO)
         Me.Panel4.Controls.Add(Me.Save)
         Me.Panel4.Controls.Add(Me.btnSelectAll)
         Me.Panel4.Dock = System.Windows.Forms.DockStyle.Fill
@@ -418,6 +422,25 @@ Partial Class ReportClientBillingProject
         Me.btnMaximize.TabIndex = 7
         Me.btnMaximize.TabStop = False
         '
+        'txtIdPO
+        '
+        Me.txtIdPO.Location = New System.Drawing.Point(58, 96)
+        Me.txtIdPO.Name = "txtIdPO"
+        Me.txtIdPO.Size = New System.Drawing.Size(133, 22)
+        Me.txtIdPO.TabIndex = 17
+        '
+        'Label5
+        '
+        Me.Label5.AutoSize = True
+        Me.Label5.Font = New System.Drawing.Font("Verdana", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label5.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.Label5.Location = New System.Drawing.Point(4, 97)
+        Me.Label5.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.Label5.Name = "Label5"
+        Me.Label5.Size = New System.Drawing.Size(29, 18)
+        Me.Label5.TabIndex = 18
+        Me.Label5.Text = "PO"
+        '
         'ReportClientBillingProject
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
@@ -437,6 +460,7 @@ Partial Class ReportClientBillingProject
         Me.TableLayoutPanel2.ResumeLayout(False)
         CType(Me.tblPOs, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel4.ResumeLayout(False)
+        Me.Panel4.PerformLayout()
         Me.Panel2.ResumeLayout(False)
         Me.Panel2.PerformLayout()
         CType(Me.PictureBox4, System.ComponentModel.ISupportInitialize).EndInit()
@@ -478,4 +502,6 @@ Partial Class ReportClientBillingProject
     Friend WithEvents btnSelectAll As Button
     Friend WithEvents Label4 As Label
     Friend WithEvents Save As Button
+    Friend WithEvents txtIdPO As TextBox
+    Friend WithEvents Label5 As Label
 End Class
