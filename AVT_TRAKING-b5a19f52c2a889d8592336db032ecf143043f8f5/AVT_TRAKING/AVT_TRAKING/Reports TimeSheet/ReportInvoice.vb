@@ -222,7 +222,7 @@ Public Class ReportInvoice
     Private Sub tblInvoices_CellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles tblInvoices.CellEndEdit
         If e.ColumnIndex = tblInvoices.Columns("clmStatus").Index Then
             If tblInvoices.CurrentRow.Cells("clmStatus").Value <> tblInvoices.CurrentRow.Cells("clmStatusAux").Value Then
-                If DialogResult.Yes = MessageBox.Show("If you accept, delcare that the inovice has " + If(tblInvoices.CurrentRow.Cells("clmStatus").Value, "", "not") + " been paid.", "Message", MessageBoxButtons.YesNo, MessageBoxIcon.Question) Then
+                If DialogResult.Yes = MessageBox.Show("If you accept, declare that the inovice has " + If(tblInvoices.CurrentRow.Cells("clmStatus").Value, "", "not") + " been paid.", "Message", MessageBoxButtons.YesNo, MessageBoxIcon.Question) Then
                     If mtdInvoice.updateStatusInvoice(tblInvoices.CurrentRow, tblInvoices.CurrentRow.Cells("clmStatus").Value) Then
                         tblInvoices.CurrentRow.Cells("clmStatusAux").Value = tblInvoices.CurrentRow.Cells("clmStatus").Value
                     Else
@@ -231,6 +231,34 @@ Public Class ReportInvoice
                 Else
                     tblInvoices.CurrentRow.Cells("clmStatus").Value = tblInvoices.CurrentRow.Cells("clmStatusAuc").Value
                 End If
+            End If
+        End If
+    End Sub
+
+    Private Sub tblInvoices_SelectionChanged(sender As Object, e As EventArgs) Handles tblInvoices.SelectionChanged
+        If tblInvoices.Columns IsNot Nothing Then
+            Dim auxDate As String = CStr(tblInvoices.SelectedRows(0).Cells("clmInvoiceDate").Value)
+            Dim arrayDate() As String = auxDate.Split("/")
+            Dim dateRow As Date = New Date(arrayDate(2), arrayDate(0), arrayDate(1))
+            loadInfo = False
+            dtpInvoiceDate.Value = dateRow
+            loadInfo = True
+        End If
+
+    End Sub
+
+    Private Sub dtpInvoiceDate_ValueChanged(sender As Object, e As EventArgs) Handles dtpInvoiceDate.ValueChanged
+        If loadInfo Then
+            If tblInvoices.SelectedRows.Count > 0 Then
+                If DialogResult.Yes = MessageBox.Show("Are you sure to Update the InvoiceDate?", "Mesaage", MessageBoxButtons.YesNo, MessageBoxIcon.Question) Then
+                    If mtdInvoice.UpdateInvoiceDate(tblInvoices, dtpInvoiceDate.Value) Then
+                        For Each row1 As DataGridViewRow In tblInvoices.SelectedRows
+                            row1.Cells("clmInvoiceDate").Value = dtpInvoiceDate.Value.ToString("MM/dd/yyyy")
+                        Next
+                    End If
+                End If
+            Else
+                MsgBox("Please select a row.")
             End If
         End If
     End Sub
@@ -449,4 +477,36 @@ end", conn)
         End Try
     End Function
 
+    Public Function UpdateInvoiceDate(ByVal tbl As DataGridView, ByVal newDate As Date) As Boolean
+        Try
+            conectar()
+            Dim tran As SqlTransaction = conn.BeginTransaction
+            Dim flag As Boolean = True
+            For Each row As DataGridViewRow In tbl.SelectedRows
+                Dim cmd As New SqlCommand("update invoice set invoiceDate = '" + validaFechaParaSQl(newDate) + "' where invoice = '" + row.Cells("clmInvoiceAux").Value + "' and idPO = " + row.Cells("clmPOAux").Value.ToString() + " and idClient =(select idClient from clients where companyName = '" + row.Cells("clmClient").Value + "') ", conn)
+                cmd.Transaction = tran
+                If cmd.ExecuteNonQuery > 0 Then
+                    flag = True
+                Else
+                    flag = False
+                    Exit For
+                End If
+
+            Next
+            If flag Then
+
+                tran.Commit()
+                MsgBox("Successful.")
+                Return True
+            Else
+                tran.Rollback()
+                Return False
+            End If
+        Catch ex As Exception
+            Return False
+            MsgBox(ex.Message())
+        Finally
+            desconectar()
+        End Try
+    End Function
 End Class
