@@ -344,7 +344,12 @@ select
 	CAST(ROUND((T2.[Billing ST]+T2.[Billing OT]+T2.[Expenses]+T2.[Total Material]),2,1) as decimal(20,2)) as 'PO Spent',
 	CONCAT(CAST(ROUND((((T2.[Billing ST]+T2.[Billing OT]+T2.[Expenses]+T2.[Total Material])*100)/IIF(T2.[ProjectTotalBillingEstimate]=0,1,T2.[ProjectTotalBillingEstimate])),2,1) as decimal (20,2)),'%')  as 'PO%Spent',
 	CAST(ROUND(T2.[ProjectTotalBillingEstimate]-(T2.[Billing ST]+T2.[Billing OT]+T2.[Expenses]+T2.[Total Material]),2,1) as decimal(20,2)) as 'PO Left',
-	T2.[Comp],T2.[ProjectTotalBillingEstimate],T2.[PF],T2.[Earned],T2.[Begin Date],T2.[End Date],T2.[Estimate Hours]
+	T2.[Comp],T2.[ProjectTotalBillingEstimate],T2.[PF],T2.[Earned],T2.[Begin Date],T2.[End Date],T2.[Estimate Hours],
+	(IIF(T2.[Comp]>0 and t2.[Comp]<100,IIF((T2.[ST] + T2.[OT])>T2.[Estimate Hours],
+			((T2.[Estimate Hours]-(T2.[ST] + T2.[OT]))*T2.[PF]) ,-- Caso 1 de ETC
+			iif((T2.[ST] + T2.[OT])>0,iif(T2.[Comp]>0,((T2.[ST] + T2.[OT])/(T2.[Comp]*0.01))-(T2.[ST] + T2.[OT]),0), -- Caso 2 de ETC
+			0	--Caso 3 de ETC
+			)),0) ) as 'ETC'
 	INTO PBI.[ALL]
 from(
 	select 
