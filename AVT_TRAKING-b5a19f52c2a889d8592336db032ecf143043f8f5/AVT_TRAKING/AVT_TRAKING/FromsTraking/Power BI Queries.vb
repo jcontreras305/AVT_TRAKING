@@ -349,7 +349,8 @@ select
 			((T2.[Estimate Hours]-(T2.[ST] + T2.[OT]))*T2.[PF]) ,-- Caso 1 de ETC
 			iif((T2.[ST] + T2.[OT])>0,iif(T2.[Comp]>0,((T2.[ST] + T2.[OT])/(T2.[Comp]*0.01))-(T2.[ST] + T2.[OT]),0), -- Caso 2 de ETC
 			0	--Caso 3 de ETC
-			)),0) ) as 'ETC'
+			)),0) ) as 'ETC',
+	T2.[Phase] as 'Phase'
 	INTO PBI.[ALL]
 from(
 	select 
@@ -367,7 +368,8 @@ from(
 	ROUND(T1.[earned],2) as 'Earned',
 	T1.[Begin Date],
 	T1.[End Date],
-	T1.[Estimate Hours]
+	T1.[Estimate Hours],
+	T1.[Phase]
 	from(
 		select 
 		DISTINCT
@@ -383,7 +385,8 @@ from(
 		(tk.estimateHours*tk.percentComplete)*0.01 as 'earned',
 		CONVERT(nvarchar,tk.beginDate,101) as 'Begin Date',
 		CONVERT(nvarchar,tk.endDate,101) as 'End Date',
-		tk.estimateHours as 'Estimate Hours'
+		tk.estimateHours as 'Estimate Hours',
+		tk.phase as 'Phase'
 		from hoursWorked as hw 
 		inner join task as tk on tk.idAux = hw.idAux 
 		inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO
@@ -409,7 +412,8 @@ from(
 		(tk.estimateHours*tk.percentComplete)*0.01 as 'earned',
 		CONVERT(nvarchar,tk.beginDate,101) as 'Begin Date',
 		CONVERT(nvarchar,tk.endDate,101) as 'End Date',
-		tk.estimateHours as 'Estimate Hours'
+		tk.estimateHours as 'Estimate Hours',
+		tk.phase as 'Phase'
 		from expensesUsed as exu
 		inner join expenses as ex on ex.idExpenses = exu.idExpense
 		inner join task as tk on tk.idAux = exu.idAux 
@@ -435,7 +439,8 @@ from(
 		(tk.estimateHours*tk.percentComplete)*0.01 as 'earned',
 		CONVERT(nvarchar,tk.beginDate,101) as 'Begin Date',
 		CONVERT(nvarchar,tk.endDate,101) as 'End Date',
-		tk.estimateHours as 'Estimate Hours'
+		tk.estimateHours as 'Estimate Hours',
+		tk.phase as 'Phase'
 		from materialUsed as mau
 		inner join material as ma on ma.idMaterial = mau.idMaterial 
 		inner join task as tk on tk.idAux = mau.idAux 

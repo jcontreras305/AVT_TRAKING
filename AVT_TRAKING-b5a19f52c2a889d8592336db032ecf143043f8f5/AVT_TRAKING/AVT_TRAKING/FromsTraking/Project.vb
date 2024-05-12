@@ -1,10 +1,21 @@
 ﻿Public Class Project
     Private _jobNum As Long
-    Private _accountNum, _equipament, _manager, _description, _expCode, _idWO, _idAuxWO, _idPO, _idAux, _idTask, _Line, _WBS, _Area, _postingProject As String
+    Private _accountNum, _equipament, _manager, _description, _expCode, _idWO, _idAuxWO, _idPO, _idAux, _idTask, _Line, _WBS, _Area, _postingProject, _phase As String
     Private _beginDate, _endDate As Date
     Private _estimateHours, _totalBilling, _PercentComplete As Double
     Private _status As Char
 
+    Public Property Phase() As String
+        Get
+            If _phase Is Nothing Then
+                _phase = ""
+            End If
+            Return _phase
+        End Get
+        Set(ByVal value As String)
+            _phase = value
+        End Set
+    End Property
     Public Property idAux() As String
         Get
             Return _idAux
@@ -214,5 +225,6 @@
         _WBS = ""
         _Area = ""
         _postingProject = ""
+        _phase = ""
     End Sub
 End Class

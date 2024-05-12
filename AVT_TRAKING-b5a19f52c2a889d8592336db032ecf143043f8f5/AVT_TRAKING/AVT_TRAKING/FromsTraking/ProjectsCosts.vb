@@ -428,6 +428,7 @@ Public Class ProjectsCosts
         txtLine.Text = ""
         txtWBS.Text = ""
         txtPostingProject.Text = ""
+        txtPhase.Text = ""
         Return True
     End Function
     Private Function llenarCampos(ByVal lstDatosPO As List(Of String)) As Boolean
@@ -467,6 +468,7 @@ Public Class ProjectsCosts
                 txtWBS.Text = lstDatosPO(18)
                 txtArea.Text = lstDatosPO(19)
                 txtPostingProject.Text = lstDatosPO(20)
+                txtPhase.Text = lstDatosPO(21)
                 'cmbJobNumber.SelectedIndex = cmbJobNumber.FindString(JobNumber.ToString())
                 'AQUI SE CARGARAN LOS DATOS A LA CLASE DE PROJECT 
                 pjt.idPO = txtClientPO.Text
@@ -492,6 +494,7 @@ Public Class ProjectsCosts
                 pjt.WBS = lstDatosPO(18)
                 pjt.Area = lstDatosPO(19)
                 pjt.postingProject = lstDatosPO(20)
+                pjt.Phase = lstDatosPO(21)
                 Dim tbl As New DataTable
                 mtdJobs.consultaJobs(tbl)
                 Dim arrayJob() As DataRow = tbl.Select("jobNo =" + pjt.jobNum.ToString)
@@ -1551,6 +1554,71 @@ Public Class ProjectsCosts
         End If
     End Sub
 
+    '================ PHASE ==================================================================================================
+    '=========================================================================================================================
+    Private Function validarPhase() As Boolean
+        If txtPhase.Text.Length = 0 Then
+            If DialogResult.Yes = MessageBox.Show("The parameter 'Phase' don't detected enyone value, Do you want to save a 'Null' value?", "Important", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) Then
+                Return True
+            Else
+                Return False
+            End If
+        Else
+            Return True
+        End If
+    End Function
+
+    Private Sub txtPhase_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtPhase.KeyPress
+        If Asc(e.KeyChar) = Keys.Enter Or Asc(e.KeyChar) = Keys.Tab Then
+            If flagAddRecord Then
+                If txtPhase.Text <> pjtNuevo.Phase Then
+                    If validarPhase() Then
+                        pjtNuevo.Phase = txtPhase.Text
+                    Else
+                        txtPhase.Text = pjtNuevo.Phase
+                    End If
+                End If
+            Else
+                If txtPhase.Text <> pjt.Phase Then
+                    If validarPhase() Then
+                        If mtdJobs.updatePhase(txtPhase.Text, pjt.idAux, pjt.idAuxWO) Then
+                            pjt.Phase = txtPhase.Text
+                        Else
+                            txtPhase.Text = pjt.Phase
+                        End If
+                    Else
+                        txtPhase.Text = pjt.Phase
+                    End If
+                End If
+            End If
+        ElseIf Not IsNumeric(Asc(e.KeyChar)) Then
+            e.Handled = False
+        End If
+    End Sub
+
+    Private Sub txtPhase_Leave(sender As Object, e As EventArgs) Handles txtPhase.Leave, txtAcountNo.Leave
+        If flagAddRecord Then
+            If txtPhase.Text <> pjt.Phase Then
+                If validarPhase() Then
+                    pjtNuevo.Phase = txtPhase.Text
+                Else
+                    txtAcountNo.Text = pjtNuevo.Phase
+                End If
+            End If
+        Else
+            If txtPhase.Text <> pjt.Phase Then
+                If validarPhase() Then
+                    If mtdJobs.updatePhase(txtPhase.Text, pjt.idAux, pjt.idAuxWO) Then
+                        pjt.Phase = txtPhase.Text
+                    Else
+                        txtPhase.Text = pjt.Phase
+                    End If
+                Else
+                    txtPhase.Text = pjt.Phase
+                End If
+            End If
+        End If
+    End Sub
     '================ COMPLETE PORCENT =======================================================================================
     '=========================================================================================================================
     Private Sub sprPorcentComplete_ValueChanged(sender As Object, e As EventArgs) Handles sprPercentComplete.ValueChanged
@@ -1671,6 +1739,7 @@ Public Class ProjectsCosts
         btnChangeJobNo.Enabled = activar
         txtLine.Enabled = activar
         txtWBS.Enabled = activar
+        txtPhase.Enabled = activar
     End Sub
 
     Private Sub btnMaximize_Click(sender As Object, e As EventArgs) Handles btnMaximize.Click
@@ -1709,7 +1778,7 @@ Public Class ProjectsCosts
 
     End Sub
 
-    Private Sub cmbJobNumber_Enter(sender As Object, e As EventArgs) Handles cmbJobNumber.Enter, txtClientName.Enter, txtWokOrder.Enter, txtTask.Enter, txtEquipament.Enter, cmbProjectManager.Enter, txtClientPO.Enter, txtProjectDescription.Enter, sprTotalBilling.Enter, dtpBeginDate.Enter, dtpEndDate.Enter, sprHoursEstimate.Enter, cmbExpCode.Enter, txtAcountNo.Enter, sprPercentComplete.Enter, chbComplete.Enter, txtPostingProject.Enter
+    Private Sub cmbJobNumber_Enter(sender As Object, e As EventArgs) Handles cmbJobNumber.Enter, txtClientName.Enter, txtWokOrder.Enter, txtTask.Enter, txtEquipament.Enter, cmbProjectManager.Enter, txtClientPO.Enter, txtProjectDescription.Enter, sprTotalBilling.Enter, dtpBeginDate.Enter, dtpEndDate.Enter, sprHoursEstimate.Enter, cmbExpCode.Enter, txtAcountNo.Enter, sprPercentComplete.Enter, chbComplete.Enter, txtPostingProject.Enter, txtPhase.Enter
         If cmbJobNumber.Focused Then
             FindElement = "Job No"
             Element = cmbJobNumber.Text
@@ -1893,14 +1962,15 @@ Public Class ProjectsCosts
         If sprPercentComplete.Value > 0 And sprPercentComplete.Value < 100 Then
             lblEarned.Text = (sprHoursEstimate.Value * (sprPercentComplete.Value * 0.01))
             If (THrs) > 0 Then
-                lblPF.Text = Format(Val(CDec(If(lblEarned.Text = "", "0", lblEarned.Text)) / CDec(If(lblTotalHours.Text = "", "0", lblTotalHours.Text))), "0.##")
+                Dim pfAux = Val(CDec(If(lblEarned.Text = "", "0", lblEarned.Text)) / CDec(If(lblTotalHours.Text = "", "0", lblTotalHours.Text)))
+                lblPF.Text = If(pfAux > 1, Format(pfAux, "#.##"), Format(pfAux, "0.##"))
             Else
                 lblPF.Text = "0"
             End If
             If (THrs) < sprHoursEstimate.Value And THrs > 0 Then
                 Dim pf As Double = Val(CDec(If(lblEarned.Text = "", "0", lblEarned.Text)) / CDec(If(lblTotalHours.Text = "", "0", lblTotalHours.Text)))
                 Dim ETC As Double = pf * (sprHoursEstimate.Value - THrs)
-                lblETC.Text = Format(ETC, "0.#")
+                lblETC.Text = Format(ETC, "#.#")
             Else
                 Dim ETC As Double
                 If THrs > 0 Then
@@ -1913,8 +1983,12 @@ Public Class ProjectsCosts
         ElseIf sprPercentComplete.Value = 100 Then
             lblETC.Text = "0"
             lblEarned.Text = sprHoursEstimate.Value * (sprPercentComplete.Value * 0.01)
+            Dim pfAux As Decimal = 0
+            If Not (lblTotalHours.Text = "" Or lblTotalHours.Text = "0") Then
+                pfAux = Val(CDec(If(lblEarned.Text = "", "0", lblEarned.Text)) / CDec(lblTotalHours.Text))
+            End If
+            lblPF.Text = If(pfAux >= 1, Format(pfAux, "#.##"), Format(pfAux, "0.##"))
         End If
-
         If Not mensaje.Equals("") Then
             txtMensaje.Text = mensaje
         Else

@@ -81,6 +81,8 @@ Partial Class ProjectsCosts
         Me.lblPorcentBilled = New System.Windows.Forms.Label()
         Me.Label14 = New System.Windows.Forms.Label()
         Me.Panel9 = New System.Windows.Forms.Panel()
+        Me.txtPhase = New System.Windows.Forms.TextBox()
+        Me.Label36 = New System.Windows.Forms.Label()
         Me.Label12 = New System.Windows.Forms.Label()
         Me.chbComplete = New System.Windows.Forms.CheckBox()
         Me.txtAcountNo = New System.Windows.Forms.TextBox()
@@ -198,7 +200,7 @@ Partial Class ProjectsCosts
         '
         'Panel1
         '
-        Me.Panel1.BackColor = System.Drawing.Color.FromArgb(CType(CType(190, Byte), Integer), CType(CType(190, Byte), Integer), CType(CType(190, Byte), Integer))
+        Me.Panel1.BackColor = System.Drawing.Color.FromArgb(CType(CType(83, Byte), Integer), CType(CType(93, Byte), Integer), CType(CType(102, Byte), Integer))
         Me.Panel1.Controls.Add(Me.TableLayoutPanel2)
         Me.Panel1.Controls.Add(Me.Panel4)
         Me.Panel1.Dock = System.Windows.Forms.DockStyle.Top
@@ -904,6 +906,8 @@ Partial Class ProjectsCosts
         'Panel9
         '
         Me.Panel9.BackColor = System.Drawing.Color.FromArgb(CType(CType(83, Byte), Integer), CType(CType(93, Byte), Integer), CType(CType(102, Byte), Integer))
+        Me.Panel9.Controls.Add(Me.txtPhase)
+        Me.Panel9.Controls.Add(Me.Label36)
         Me.Panel9.Controls.Add(Me.Label12)
         Me.Panel9.Controls.Add(Me.chbComplete)
         Me.Panel9.Controls.Add(Me.txtAcountNo)
@@ -917,6 +921,26 @@ Partial Class ProjectsCosts
         Me.Panel9.Name = "Panel9"
         Me.Panel9.Size = New System.Drawing.Size(508, 69)
         Me.Panel9.TabIndex = 1
+        '
+        'txtPhase
+        '
+        Me.txtPhase.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.txtPhase.Location = New System.Drawing.Point(336, 33)
+        Me.txtPhase.Margin = New System.Windows.Forms.Padding(4)
+        Me.txtPhase.Name = "txtPhase"
+        Me.txtPhase.Size = New System.Drawing.Size(159, 24)
+        Me.txtPhase.TabIndex = 17
+        '
+        'Label36
+        '
+        Me.Label36.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Label36.AutoSize = True
+        Me.Label36.Location = New System.Drawing.Point(271, 37)
+        Me.Label36.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.Label36.Name = "Label36"
+        Me.Label36.Size = New System.Drawing.Size(49, 17)
+        Me.Label36.TabIndex = 16
+        Me.Label36.Text = "Phase"
         '
         'Label12
         '
@@ -945,7 +969,7 @@ Partial Class ProjectsCosts
         Me.txtAcountNo.Location = New System.Drawing.Point(100, 32)
         Me.txtAcountNo.Margin = New System.Windows.Forms.Padding(4)
         Me.txtAcountNo.Name = "txtAcountNo"
-        Me.txtAcountNo.Size = New System.Drawing.Size(220, 24)
+        Me.txtAcountNo.Size = New System.Drawing.Size(159, 24)
         Me.txtAcountNo.TabIndex = 14
         '
         'cmbExpCode
@@ -955,7 +979,7 @@ Partial Class ProjectsCosts
         Me.cmbExpCode.Location = New System.Drawing.Point(100, 4)
         Me.cmbExpCode.Margin = New System.Windows.Forms.Padding(4)
         Me.cmbExpCode.Name = "cmbExpCode"
-        Me.cmbExpCode.Size = New System.Drawing.Size(220, 25)
+        Me.cmbExpCode.Size = New System.Drawing.Size(159, 25)
         Me.cmbExpCode.TabIndex = 13
         '
         'Label13
@@ -1148,7 +1172,7 @@ Partial Class ProjectsCosts
         Me.btnNextTask.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.btnNextTask.Image = Global.AVT_TRAKING.My.Resources.Resources._next
         Me.btnNextTask.ImageAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.btnNextTask.Location = New System.Drawing.Point(1312, 31)
+        Me.btnNextTask.Location = New System.Drawing.Point(1314, 31)
         Me.btnNextTask.Margin = New System.Windows.Forms.Padding(4)
         Me.btnNextTask.Name = "btnNextTask"
         Me.btnNextTask.Size = New System.Drawing.Size(41, 28)
@@ -1176,7 +1200,7 @@ Partial Class ProjectsCosts
         'txtElementsRadar
         '
         Me.txtElementsRadar.Anchor = System.Windows.Forms.AnchorStyles.Right
-        Me.txtElementsRadar.Location = New System.Drawing.Point(1171, 33)
+        Me.txtElementsRadar.Location = New System.Drawing.Point(1173, 33)
         Me.txtElementsRadar.Margin = New System.Windows.Forms.Padding(4)
         Me.txtElementsRadar.Name = "txtElementsRadar"
         Me.txtElementsRadar.ReadOnly = True
@@ -1249,7 +1273,7 @@ Partial Class ProjectsCosts
         '
         'Panel3
         '
-        Me.Panel3.BackColor = System.Drawing.Color.FromArgb(CType(CType(190, Byte), Integer), CType(CType(190, Byte), Integer), CType(CType(190, Byte), Integer))
+        Me.Panel3.BackColor = System.Drawing.Color.FromArgb(CType(CType(83, Byte), Integer), CType(CType(93, Byte), Integer), CType(CType(102, Byte), Integer))
         Me.Panel3.Controls.Add(Me.TableLayoutPanel5)
         Me.Panel3.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel3.Location = New System.Drawing.Point(0, 26)
@@ -1707,6 +1731,7 @@ Partial Class ProjectsCosts
         '
         'tbpHoursWorked
         '
+        Me.tbpHoursWorked.BackColor = System.Drawing.Color.FromArgb(CType(CType(83, Byte), Integer), CType(CType(93, Byte), Integer), CType(CType(102, Byte), Integer))
         Me.tbpHoursWorked.Controls.Add(Me.tblHoursWorkedProject)
         Me.tbpHoursWorked.Location = New System.Drawing.Point(4, 26)
         Me.tbpHoursWorked.Margin = New System.Windows.Forms.Padding(4)
@@ -1716,7 +1741,6 @@ Partial Class ProjectsCosts
         Me.tbpHoursWorked.Size = New System.Drawing.Size(1505, 238)
         Me.tbpHoursWorked.TabIndex = 0
         Me.tbpHoursWorked.Text = "Hours Worked"
-        Me.tbpHoursWorked.UseVisualStyleBackColor = True
         '
         'tblHoursWorkedProject
         '
@@ -2070,4 +2094,6 @@ Partial Class ProjectsCosts
     Public WithEvents txtArea As TextBox
     Friend WithEvents btnMoveHours As Button
     Friend WithEvents btnDeleteProject As Button
+    Public WithEvents txtPhase As TextBox
+    Friend WithEvents Label36 As Label
 End Class

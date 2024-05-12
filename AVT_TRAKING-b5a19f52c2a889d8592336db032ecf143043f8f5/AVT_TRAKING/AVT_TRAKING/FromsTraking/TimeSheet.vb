@@ -325,6 +325,7 @@ Public Class TimeSheet
                         tablaWO.Columns.Add("job")
                         tablaWO.Columns.Add("idAuxWO")
                         tablaWO.Columns.Add("Area")
+                        tablaWO.Columns.Add("Phase")
                         Dim mensaje As String = ""
                         Dim contwo As Integer = 2
                         Dim filasError As String = ""
@@ -332,7 +333,7 @@ Public Class TimeSheet
                         While workOrders.Cells(contwo, 2).Text <> ""
                             Dim wo = workOrders.Cells(contwo, 2).Text.ToString().Replace(" ", "-")
                             Dim workOrder() As String = wo.Split("-") 'workOrder y task
-                            tablaWO.Rows.Add(CStr(contwo - 1), workOrder(0), If(workOrder.Length = 1, "", If(workOrder.Length = 3, workOrder(1) & "-" & workOrder(2), workOrder(1))), workOrders.Cells(contwo, 2).Text, workOrders.Cells(contwo, 3).Text, workOrders.Cells(contwo, 5).Text, workOrders.Cells(contwo, 6).Text, workOrders.Cells(contwo, 7).Text, workOrders.Cells(contwo, 8).Text, workOrders.Cells(contwo, 9).Text, workOrders.Cells(contwo, 1).Text, workOrders.Cells(contwo, 4).Text)
+                            tablaWO.Rows.Add(CStr(contwo - 1), workOrder(0), If(workOrder.Length = 1, "", If(workOrder.Length = 3, workOrder(1) & "-" & workOrder(2), workOrder(1))), workOrders.Cells(contwo, 2).Text, workOrders.Cells(contwo, 3).Text, workOrders.Cells(contwo, 5).Text, workOrders.Cells(contwo, 6).Text, workOrders.Cells(contwo, 7).Text, workOrders.Cells(contwo, 8).Text, workOrders.Cells(contwo, 9).Text, workOrders.Cells(contwo, 1).Text, workOrders.Cells(contwo, 4).Text, workOrders.Cells(contwo, 10).Text)
                             contwo += 1
                         End While
                         Dim listNewWorkOrders As New List(Of Data.DataRow)
@@ -372,6 +373,7 @@ Public Class TimeSheet
                                     newPO.jobNum = item.ItemArray(9)
                                     newPO.equipament = item.ItemArray(10)
                                     newPO.Area = item.ItemArray(11)
+                                    newPO.Phase = item.ItemArray(12)
                                     Dim ListRows() As DataRow = tablaProject.Select("idWO = '" + newPO.idWorkOrder + "' and idPO = " + newPO.idPO.ToString() + " and jobNo = " + newPO.jobNum.ToString() + " ")
                                     If listRows.Length > 0 Then
                                         newPO.idAuxWO = listRows(0).ItemArray(5)

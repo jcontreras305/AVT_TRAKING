@@ -478,7 +478,7 @@ from workOrder
                             Dim cmdInsertTask1 As New SqlCommand("insert into task 
                         values (NEWID(),'" + CStr(projectN.idTask) + "','" + projectN.idAuxWO + "',0.0,'" + projectN.equipament + "','" + projectN.manager + "'
                         ,'" + projectN.description.ToString.Replace("'", "''") + "'," + CStr(projectN.totalBilling) + ",'" + validaFechaParaSQl(projectN.beginDate) + "','" + validaFechaParaSQl(projectN.endDate) + "'
-                        ,'" + projectN.expCode + "','" + projectN.accountNum + "'," + CStr(projectN.estimateHour) + ",'" + CStr(projectN.status) + "'," + CStr(projectN.PercentComplete) + ",'" + projectN.Area + "')", conn)
+                        ,'" + projectN.expCode + "','" + projectN.accountNum + "'," + CStr(projectN.estimateHour) + ",'" + CStr(projectN.status) + "'," + CStr(projectN.PercentComplete) + ",'" + projectN.Area + "','" + projectN.Phase + "')", conn)
                             If cmdInsertTask1.ExecuteNonQuery = 1 Then
                                 desconectar()
                                 Return True
@@ -493,7 +493,7 @@ from workOrder
                         Dim cmdInsertTask2 As New SqlCommand("insert into task 
                         values (NEWID(),'" + CStr(projectN.idTask) + "','" + newWO + "',0.0,'" + projectN.equipament + "','" + projectN.manager + "'
                         ,'" + projectN.description.ToString.Replace("'", "''") + "'," + CStr(projectN.totalBilling) + ",'" + validaFechaParaSQl(projectN.beginDate) + "','" + validaFechaParaSQl(projectN.endDate) + "'
-                        ,'" + projectN.expCode + "','" + projectN.accountNum + "'," + CStr(projectN.estimateHour) + ",'" + CStr(projectN.status) + "'," + CStr(projectN.PercentComplete) + ",'" + projectN.Area + "')", conn)
+                        ,'" + projectN.expCode + "','" + projectN.accountNum + "'," + CStr(projectN.estimateHour) + ",'" + CStr(projectN.status) + "'," + CStr(projectN.PercentComplete) + ",'" + projectN.Area + "','" + projectN.Phase + "')", conn)
                         Dim tranWO As SqlTransaction
                         tranWO = conn.BeginTransaction
                         cmdInsertNewWO.Transaction = tranWO
@@ -518,7 +518,7 @@ from workOrder
                     Dim cmdInsertTask2 As New SqlCommand("insert into task 
                         values (NEWID(),'" + CStr(projectN.idTask) + "','" + newWO + "',0.0,'" + projectN.equipament + "','" + projectN.manager + "'
                         ,'" + projectN.description.ToString.Replace("'", "''") + "'," + CStr(projectN.totalBilling) + ",'" + validaFechaParaSQl(projectN.beginDate) + "','" + validaFechaParaSQl(projectN.endDate) + "'
-                        ,'" + projectN.expCode + "','" + projectN.accountNum + "'," + CStr(projectN.estimateHour) + ",'" + CStr(projectN.status) + "'," + CStr(projectN.PercentComplete) + ",'" + projectN.Area + "')", conn)
+                        ,'" + projectN.expCode + "','" + projectN.accountNum + "'," + CStr(projectN.estimateHour) + ",'" + CStr(projectN.status) + "'," + CStr(projectN.PercentComplete) + ",'" + projectN.Area + "','" + projectN.Phase + "')", conn)
                     Dim tranPO As SqlTransaction
                     tranPO = conn.BeginTransaction
                     cmdInsertNewPO.Transaction = tranPO
@@ -1179,7 +1179,8 @@ tk.percentComplete,
 po.Line,
 po.WBS,
 tk.Area,
-jb.postingProject
+jb.postingProject,
+tk.phase
 from 
 job as jb 
 inner join clients as cl on jb.idClient = cl.idClient
@@ -1211,6 +1212,7 @@ where jb.jobNo = " + If(idJob = "", "0", idJob).ToString() + " order by wo.idWO 
                 lstDatosPO.Add(If(reader("WBS") Is DBNull.Value, "", reader("WBS")))
                 lstDatosPO.Add(If(reader("Area") Is DBNull.Value, "", reader("Area")))
                 lstDatosPO.Add(If(reader("postingProject") Is DBNull.Value, "", reader("postingProject")))
+                lstDatosPO.Add(If(reader("phase") Is DBNull.Value, "", reader("phase")))
                 Exit While
             End While
             desconectar()
@@ -1246,7 +1248,8 @@ tk.percentComplete,
 po.line,
 po.WBS,
 tk.Area,
-jb.postingProject
+jb.postingProject,
+tk.phase
 from 
 job as jb 
 inner join clients as cl on jb.idClient = cl.idClient
@@ -1278,6 +1281,7 @@ where jb.jobNo = " + If(idJob = "", "0", idJob).ToString() + " and tk.task = '" 
                 lstDatosPO.Add(reader("WBS"))
                 lstDatosPO.Add(reader("Area"))
                 lstDatosPO.Add(reader("postingProject"))
+                lstDatosPO.Add(reader("phase"))
                 Exit While
             End While
             desconectar()
@@ -1639,6 +1643,27 @@ where tk.idAux = '" + idAux + "' and wo.idAuxWO = '" + WO + "'", conn)
         Try
             conectar()
             Dim cmd As New SqlCommand("update task set accountNum = '" + accountN + "'
+from task as tk 
+inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO
+inner join projectOrder as po on po.idPO = wo.idPO
+inner join job as jb on jb.jobNo = po.jobNo 
+where tk.idAux = '" + idAux + "' and wo.idAuxWO = '" + WO + "'", conn)
+            If cmd.ExecuteNonQuery > 0 Then
+                desconectar()
+                Return True
+            Else
+                desconectar()
+                Return False
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message)
+            Return False
+        End Try
+    End Function
+    Public Function updatePhase(ByRef phaseN As String, ByVal idAux As String, ByVal WO As String) As Boolean
+        Try
+            conectar()
+            Dim cmd As New SqlCommand("update task set phase = '" + phaseN + "'
 from task as tk 
 inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO
 inner join projectOrder as po on po.idPO = wo.idPO
