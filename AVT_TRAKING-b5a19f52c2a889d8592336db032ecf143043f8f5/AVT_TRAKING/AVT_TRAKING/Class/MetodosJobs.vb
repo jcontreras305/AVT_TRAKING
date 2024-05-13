@@ -1422,25 +1422,29 @@ end  ", conn)
             Return False
         End Try
     End Function
-    Public Function updatePO(ByVal idPON As String, ByVal idPOV As String, ByVal idJobNum As String) As Boolean
+    Public Function updatePO(ByVal idPON As String, ByVal idPOV As String, ByVal idJobNum As String, ByVal idWO As String, ByVal idtask As String, Optional line As String = "", Optional wbs As String = "") As Boolean
         Dim tran As SqlTransaction
         Try
             conectar()
-            Dim cmd1 As New SqlCommand("
-if (select COUNT(idPO) from projectOrder where idPO = " + idPOV + " and jobNo = " + idJobNum + ") = 1 
-		and (select COUNT(idPO) from projectOrder where idPO = " + idPON + " and jobNo = " + idJobNum + ") = 0   
+            Dim cmd1 As New SqlCommand("if (select COUNT(*) from projectOrder where idPO = " + idPON + " and jobNo = " + idJobNum + ") = 1  -- existe el PO 
+begin
+	if (select COUNT(*) from task as tk inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO 
+	where wo.idWO = '" + idWO + "' and tk.task = '" + idtask + "' and wo.idPO = " + idPON + " and wo.jobNo = " + idJobNum + ") = 0
+	begin --no existe el WO en el PO ya insertado 
+		update workOrder set idPO = " + idPON + " where idPO = " + idPOV + " and jobNo = " + idJobNum + "
+	end 
+end 
+else -- aqui no existe el po nuevo 
 begin 
-   	update po set  po.idPO = " + idPON + " from projectOrder as po 
-	inner join job as jb on po.jobNo = jb.jobNo 
-	inner join workOrder as wo on wo.idPO = po.idPO and wo.jobNo = jb.jobNo
-	where po.idPO = " + idPOV + " and po.jobNo =  " + idJobNum + " 
-end  ", conn)
+	insert into projectOrder values (" + idPON + "," + idJobNum + "," + If(line = "", "", "'" + line + "'") + "," + If(wbs = "", "''", "'" + wbs + "'") + ")
+	update workOrder set idPO = " + idPON + "  where idPO = " + idPOV + " and jobNo = " + idJobNum + "
+end", conn)
             ' Dim cmd2 As New SqlCommand("update wo set wo.idPO = " + idPON + " from workOrder as wo inner join projectOrder as po on wo.idPO = po.idPO where po.jobNo = " + idJobNum + " and po.idPO = " + idPON, conn)
 
             tran = conn.BeginTransaction()
             cmd1.Transaction = tran
             'cmd2.Transaction = tran
-            If cmd1.ExecuteNonQuery = 1 Then
+            If cmd1.ExecuteNonQuery >= 1 Then
                 'If cmd2.ExecuteNonQuery > 0 Then
                 tran.Commit()
                 desconectar()
@@ -1452,6 +1456,7 @@ end  ", conn)
             Else
                 tran.Rollback()
                 desconectar()
+                MsgBox("Is probably that exist a diplicated WO.")
                 Return False
             End If
             desconectar()

@@ -756,7 +756,7 @@ Public Class ProjectsCosts
         Else
             If validarClientPO() Then
                 If pjt.idPO <> txtClientPO.Text Then
-                    If mtdJobs.updatePO(txtClientPO.Text, pjt.idPO, pjt.jobNum) Then
+                    If mtdJobs.updatePO(txtClientPO.Text, pjt.idPO, pjt.jobNum, pjt.idWorkOrder, pjt.idTask, pjt.Line, pjt.WBS) Then
                         mtdJobs.consultaWO(JobNumber, tablasDeTareas)
                         pjt.idPO = txtClientPO.Text
                         FindPOVal()
@@ -788,12 +788,12 @@ Public Class ProjectsCosts
         If flagAddRecord Then
             If txtClientPO.Text.Length >= 5 And soloNumero(txtClientPO.Text) Then
                 If mtdJobs.existPO(txtClientPO.Text, cmbJobNumber.SelectedItem) = True Then
-                    If DialogResult.Yes = MessageBox.Show("Are you sure to use this PO.", "important", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) Then
-                        FindPOVal()
+                    'If DialogResult.Yes = MessageBox.Show("Are you sure to use this PO.", "important", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) Then
+                    FindPOVal()
                         Return True
-                    Else
-                        Return False
-                    End If
+                    'Else
+                    '    Return False
+                    'End If
                 Else
                     Return True
                 End If
@@ -805,9 +805,9 @@ Public Class ProjectsCosts
             If txtClientPO.Text.Length >= 5 And soloNumero(txtClientPO.Text) Then
                 If mtdJobs.existPO(txtClientPO.Text, pjt.jobNum) = True Then
                     If txtClientPO.Text <> pjt.idPO Then
-                        MessageBox.Show("Is probably that the PO exist, try with other number.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                        'MessageBox.Show("Are you sure to use this PO.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
                         FindPOVal()
-                        Return False
+                        Return True
                     Else
                         Return True
                     End If
@@ -829,7 +829,7 @@ Public Class ProjectsCosts
                     pjtNuevo.idPO = txtClientPO.Text
                     txtProjectDescription.Focus()
                 Else
-                    If mtdJobs.updatePO(txtClientPO.Text, pjt.idPO, pjt.jobNum) Then
+                    If mtdJobs.updatePO(txtClientPO.Text, pjt.idPO, pjt.jobNum, pjt.idWorkOrder, pjt.idTask, pjt.Line, pjt.WBS) Then
                         pjt.idPO = txtClientPO.Text
                     Else
                         txtClientPO.Text = pjt.idPO
