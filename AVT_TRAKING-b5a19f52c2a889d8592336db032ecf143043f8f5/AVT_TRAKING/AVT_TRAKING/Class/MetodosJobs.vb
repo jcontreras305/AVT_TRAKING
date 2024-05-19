@@ -1431,13 +1431,21 @@ begin
 	if (select COUNT(*) from task as tk inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO 
 	where wo.idWO = '" + idWO + "' and tk.task = '" + idtask + "' and wo.idPO = " + idPON + " and wo.jobNo = " + idJobNum + ") = 0
 	begin --no existe el WO en el PO ya insertado 
-		update workOrder set idPO = " + idPON + " where idPO = " + idPOV + " and jobNo = " + idJobNum + "
+		update workOrder set idPO = " + idPON + "  where idAuxWO =  (select top 1 wo.idAuxWO from workOrder as wo 
+                                                                    inner join task as tk on tk.idAuxWO =wo.idAuxWO 
+                                                                    inner join projectOrder as po on po.idPO = wo.idPO and po.jobNo = wo.jobNo 
+                                                                    inner join job as jb on jb.jobNo = po.jobNo 
+                                                                    where wo.idWO = '" + idWO + "' and task = '" + idtask + "' and po.idPO = " + idPOV + " and jb.jobNo = " + idJobNum + ")
 	end 
 end 
 else -- aqui no existe el po nuevo 
 begin 
 	insert into projectOrder values (" + idPON + "," + idJobNum + "," + If(line = "", "", "'" + line + "'") + "," + If(wbs = "", "''", "'" + wbs + "'") + ")
-	update workOrder set idPO = " + idPON + "  where idPO = " + idPOV + " and jobNo = " + idJobNum + "
+	update workOrder set idPO = " + idPON + "  where idAuxWO =  (select top 1 wo.idAuxWO from workOrder as wo 
+                                                                    inner join task as tk on tk.idAuxWO =wo.idAuxWO 
+                                                                    inner join projectOrder as po on po.idPO = wo.idPO and po.jobNo = wo.jobNo 
+                                                                    inner join job as jb on jb.jobNo = po.jobNo 
+                                                                    where wo.idWO = '" + idWO + "' and task = '" + idtask + "' and po.idPO = " + idPOV + " and jb.jobNo = " + idJobNum + ")
 end", conn)
             ' Dim cmd2 As New SqlCommand("update wo set wo.idPO = " + idPON + " from workOrder as wo inner join projectOrder as po on wo.idPO = po.idPO where po.jobNo = " + idJobNum + " and po.idPO = " + idPON, conn)
 
