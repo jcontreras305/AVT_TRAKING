@@ -37,6 +37,8 @@ Partial Class MoveHours
         Me.tblMaterial = New System.Windows.Forms.DataGridView()
         Me.TabPage1 = New System.Windows.Forms.TabPage()
         Me.tblPerdiem = New System.Windows.Forms.DataGridView()
+        Me.TabPage4 = New System.Windows.Forms.TabPage()
+        Me.tblScaffold = New System.Windows.Forms.DataGridView()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.chbAllEmployees = New System.Windows.Forms.CheckBox()
         Me.cmbEmployee = New System.Windows.Forms.ComboBox()
@@ -80,6 +82,8 @@ Partial Class MoveHours
         CType(Me.tblMaterial, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.TabPage1.SuspendLayout()
         CType(Me.tblPerdiem, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.TabPage4.SuspendLayout()
+        CType(Me.tblScaffold, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
@@ -172,6 +176,7 @@ Partial Class MoveHours
         Me.tbcMain.Controls.Add(Me.TabPage3)
         Me.tbcMain.Controls.Add(Me.TabPage2)
         Me.tbcMain.Controls.Add(Me.TabPage1)
+        Me.tbcMain.Controls.Add(Me.TabPage4)
         Me.tbcMain.Dock = System.Windows.Forms.DockStyle.Fill
         Me.tbcMain.Location = New System.Drawing.Point(4, 210)
         Me.tbcMain.Margin = New System.Windows.Forms.Padding(4)
@@ -283,6 +288,30 @@ Partial Class MoveHours
         Me.tblPerdiem.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
         Me.tblPerdiem.Size = New System.Drawing.Size(1069, 266)
         Me.tblPerdiem.TabIndex = 0
+        '
+        'TabPage4
+        '
+        Me.TabPage4.BackColor = System.Drawing.Color.FromArgb(CType(CType(83, Byte), Integer), CType(CType(93, Byte), Integer), CType(CType(102, Byte), Integer))
+        Me.TabPage4.Controls.Add(Me.tblScaffold)
+        Me.TabPage4.Location = New System.Drawing.Point(4, 25)
+        Me.TabPage4.Name = "TabPage4"
+        Me.TabPage4.Size = New System.Drawing.Size(1069, 266)
+        Me.TabPage4.TabIndex = 4
+        Me.TabPage4.Text = "Scaffolds "
+        '
+        'tblScaffold
+        '
+        Me.tblScaffold.AllowUserToAddRows = False
+        Me.tblScaffold.AllowUserToDeleteRows = False
+        Me.tblScaffold.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.tblScaffold.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.tblScaffold.Location = New System.Drawing.Point(0, 0)
+        Me.tblScaffold.Name = "tblScaffold"
+        Me.tblScaffold.ReadOnly = True
+        Me.tblScaffold.RowHeadersWidth = 51
+        Me.tblScaffold.RowTemplate.Height = 24
+        Me.tblScaffold.Size = New System.Drawing.Size(1069, 266)
+        Me.tblScaffold.TabIndex = 0
         '
         'Panel1
         '
@@ -607,6 +636,7 @@ Partial Class MoveHours
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1085, 559)
         Me.Controls.Add(Me.TableLayoutPanel1)
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
         Me.Name = "MoveHours"
         Me.Text = "MoveHours"
         Me.TableLayoutPanel1.ResumeLayout(False)
@@ -624,6 +654,8 @@ Partial Class MoveHours
         CType(Me.tblMaterial, System.ComponentModel.ISupportInitialize).EndInit()
         Me.TabPage1.ResumeLayout(False)
         CType(Me.tblPerdiem, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.TabPage4.ResumeLayout(False)
+        CType(Me.tblScaffold, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel1.ResumeLayout(False)
         Me.Panel1.PerformLayout()
         Me.GroupBox2.ResumeLayout(False)
@@ -681,4 +713,6 @@ Partial Class MoveHours
     Friend WithEvents Panel2 As Panel
     Friend WithEvents lblMessage As Label
     Friend WithEvents btnMove As Button
+    Friend WithEvents TabPage4 As TabPage
+    Friend WithEvents tblScaffold As DataGridView
 End Class

@@ -13,6 +13,7 @@ Public Class MoveHours
     Dim IdAuxSeter = ""
     Dim mtdMoveHrs As New MetodosMoveHours
     Dim tblProject As DataTable
+
     Private Sub btnMaximize_Click(sender As Object, e As EventArgs) Handles btnMaximize.Click
         MaximizedBounds = Screen.FromHandle(Me.Handle).WorkingArea
         WindowState = FormWindowState.Maximized
@@ -197,6 +198,19 @@ Public Class MoveHours
                 End If
                 activeButtonMove(tblPerdiem)
                 lblMessage.Text = "Message: " + "End"
+            Case 3
+                If idClSender <> "" Or cmbClientSender.SelectedIndex > -1 Then
+                    lblMessage.Text = "Message: " + "Looking for the Scaffolds ..."
+                    If mtdMoveHrs.selectScaffoldTag(tblScaffold, dtpStartDate.Value, dtpEndDate.Value, idClSender, idJobNoSender, idPOSender, idWOSender, If(chbAllEmployees.Checked, "", idEmployee)) Then
+                        MsgBox("Successful")
+                    Else
+                        MsgBox("Error")
+                    End If
+                Else
+                    MsgBox("Please select a Client or Project into the Sender Area.")
+                End If
+                activeButtonMove(tblScaffold)
+                lblMessage.Text = "Message: " + "End"
         End Select
     End Sub
 
@@ -273,6 +287,30 @@ Public Class MoveHours
                     Else
                         MsgBox("Plese select a row to continue.")
                     End If
+                Case 3
+                    If tblScaffold.Rows IsNot Nothing Then
+                        If tblScaffold.SelectedRows.Count > 0 Then
+                            If cmbJobGetter.SelectedIndex > -1 And cmbJobSender.SelectedIndex > -1 Then
+                                If validarJobNo(cmbJobSender.Items(cmbJobSender.SelectedIndex), cmbJobGetter.Items(cmbJobGetter.SelectedIndex)) Then
+                                    Dim arrayRow() As DataRow = tblProject.Select("numberClient = " + idClSender.ToString + " and jobNo = " + idJobNoGetter.ToString + " and idPO = " + idPOGetter.ToString + " and  Project = '" + idWOGetter + "'")
+                                    If arrayRow.Length > 0 Then
+                                        If mtdMoveHrs.moveScaffold(tblScaffold, arrayRow(0).ItemArray(6), lblMessage) Then
+                                            MsgBox("Successful")
+                                        Else
+                                            MsgBox("Error")
+                                        End If
+                                    End If
+                                Else
+                                    MessageBox.Show("The reason that is not possible to Change the ScaffoldTag is because is synchronize the products records installed or returned to the warehouse will not be consistent with the inventory of other products jobs.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                                End If
+                            Else
+                                MessageBox.Show("Please select both JobNo.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                            End If
+                        Else
+                            MessageBox.Show("Please select a row to continue.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                        End If
+                    Else
+                    End If
             End Select
         Else
             MsgBox("Please Fill the Gruop Area of Getter.")
@@ -280,6 +318,17 @@ Public Class MoveHours
         lblMessage.Text = "Message: " + "End."
     End Sub
 
+    Private Function validarJobNo(ByVal jobSender As String, ByVal jobGetter As String) As Boolean
+        If jobGetter <> "" And jobSender <> "" Then
+            If jobGetter.Equals(jobSender) Then
+                Return True
+            Else
+                Return False
+            End If
+        Else
+            Return 0
+        End If
+    End Function
     Private Sub tbcMain_SelectedIndexChanged(sender As Object, e As EventArgs) Handles tbcMain.SelectedIndexChanged
         Select Case tbcMain.SelectedIndex
             Case 0
@@ -294,6 +343,10 @@ Public Class MoveHours
                 chbAllEmployees.Enabled = True
                 cmbEmployee.Enabled = True
                 activeButtonMove(tblPerdiem)
+            Case 3
+                chbAllEmployees.Enabled = False
+                cmbEmployee.Enabled = False
+                activeButtonMove(tblScaffold)
         End Select
     End Sub
 End Class
@@ -398,6 +451,35 @@ order by jb.jobNo , po.idPO,CONCAT(emp.lastName , ' ',emp.firstName , ' ',emp.mi
         End Try
     End Function
 
+    Public Function selectScaffoldTag(ByVal tblScaffold As DataGridView, ByVal StartDate As Date, ByVal EndDate As Date, ByVal numClient As String, Optional jobNO As String = "", Optional PO As String = "", Optional WO As String = "", Optional emp As String = "") As Boolean
+        Try
+            conectar()
+            Dim cmd As New SqlCommand("select sc.idAux, jb.jobNo as 'JobNo',sc.tag as 'Tag',cl.companyName as 'Client' ,CONCAT(wo.idWO , '-',tk.task ) as WO ,IIF(sc.status= 't','Complete','Not Complete')as 'Status', sc.buildDate as 'Build Date',sc.location  as 'Location',sc.comments as 'Comment', sc.foreman as 'Foreman',sc.erector as 'Erector' from scaffoldTraking as sc
+inner join task as tk on tk.idAux =sc.idAux
+inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO
+inner join projectOrder as po on po.idPO = wo.idPO and po.jobNo = wo.jobNo 
+inner join job as jb on jb.jobNo = po.jobNo 
+inner join clients as cl on cl.idClient = jb.idClient
+where sc.buildDate between '" + validaFechaParaSQl(StartDate) + "' and '" + validaFechaParaSQl(EndDate) + "' and cl.numberClient = " + numClient + If(jobNO = "", "", " and jb.jobNo = " + jobNO) + If(PO = "", "", " and po.idPO = " + PO) + If(WO = "", "", " and CONCAT( wo.idWO,'-',tk.task) = '" + WO + "'") + " 
+order by jb.jobNo , po.idPO,sc.tag desc", conn)
+            If cmd.ExecuteNonQuery Then
+                Dim da As New SqlDataAdapter(cmd)
+                Dim dt As New DataTable
+                da.Fill(dt)
+                tblScaffold.DataSource = dt
+                tblScaffold.Columns("idAux").Visible = False
+                Return True
+            Else
+                Return False
+            End If
+        Catch ex As Exception
+            Return False
+        Finally
+            desconectar()
+        End Try
+        Return 0
+    End Function
+
     Public Function moveHours(ByVal tblHours As DataGridView, ByVal idAuxGetter As String, ByVal lblMessage As Label) As Boolean
         Try
             conectar()
@@ -496,6 +578,37 @@ begin
 		update expensesUsed set idAux = '" + idAuxGetter + "', idHorsWorked = @newId1  where idExpenseUsed = '" + row.Cells("idExpenseUsed").Value + "'
 	end
 end ", conn)
+                cmd.Transaction = tran
+                If Not cmd.ExecuteNonQuery > 0 Then
+                    flag = False
+                    Exit For
+                End If
+            Next
+            If flag Then
+                tran.Commit()
+                Return True
+            Else
+                tran.Rollback()
+                Return False
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message())
+            Return False
+        Finally
+            desconectar()
+        End Try
+    End Function
+    Public Function moveScaffold(ByVal tblScaffold As DataGridView, ByVal idAuxGetter As String, ByVal lblMessage As Label) As Boolean
+        Try
+            conectar()
+            Dim tran As SqlTransaction
+            tran = conn.BeginTransaction
+            Dim flag As Boolean = True
+            Dim count As Integer = 1
+            For Each row As DataGridViewRow In tblScaffold.SelectedRows
+                lblMessage.Text = "Message: " + "Moving the selected row number (" + count.ToString() + ")"
+                count += 1
+                Dim cmd As New SqlCommand("Update scaffoldTraking set idAux = '" + idAuxGetter + "' where tag = '" + row.Cells("Tag").Value.ToString + "' and idAux = '" + row.Cells("idAux").Value + "'", conn)
                 cmd.Transaction = tran
                 If Not cmd.ExecuteNonQuery > 0 Then
                     flag = False

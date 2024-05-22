@@ -4532,6 +4532,8 @@ Public Class scafoldTarking
             End If
         End If
     End Sub
+
+
     Private Sub txtLongitude_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtLongitude.KeyPress
         If Not (IsNumeric(e.KeyChar()) Or Asc(e.KeyChar) = Asc(Keys.Enter) Or Asc(e.KeyChar) = 8 Or Asc(e.KeyChar) = 45) Then
             If Not (e.KeyChar = ChrW(22) Or e.KeyChar = ChrW(3)) Then
