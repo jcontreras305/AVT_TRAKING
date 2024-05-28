@@ -25,6 +25,10 @@ Public Class ProductSCFExcel
             End If
         End If
     End Sub
+
+    Private Sub cmbJobNo_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbJobNo.SelectedIndexChanged
+        mtdScaffold.llenarProductByJob(tblProductV, cmbJobNo.Items(cmbJobNo.SelectedIndex))
+    End Sub
     Private Sub PictureBox4_Click(sender As Object, e As EventArgs) Handles PictureBox4.Click
         Me.Close()
     End Sub
@@ -125,7 +129,7 @@ Public Class ProductSCFExcel
                         lblMessage.Text = "Message: Closing Excel..."
                         NAR(products)
                         libro.Close(False)
-                        lblMessage.Text = "Message: End Excel." + If(countErrors > 0, CStr(countErrors) + " Products are not inserted check the Product ID.", "") + If(flagRepeat = True, " Some Products are repeat.", "")
+                        lblMessage.Text = "Message: End Excel." + If(countErrors > 0, CStr(countErrors) + " Products are not inserted check the Product ID.", "") + If(flagRepeat = True, " Some Products are repeat or exceed the Products to extract.", "")
                         NAR(libro)
                         ApExcel.Quit()
                         NAR(ApExcel)
@@ -140,9 +144,13 @@ Public Class ProductSCFExcel
         End Try
     End Sub
 
-    Private Function validarDatos(ByVal idProduct As String) As String()
+    Private Function validarDatos(ByVal idProduct As String, Optional qty As String = "0") As String()
         Dim flag = False
         Dim datos() As String = {"", "", "", "False", ""}
+        Dim arrayRow() As DataRow = tblProductV.Select("idProduct=" + idProduct)
+        If arrayRow.Length > 0 Then
+            datos = {arrayRow(0).ItemArray(1).ToString(), arrayRow(0).ItemArray(2).ToString(), arrayRow(0).ItemArray(3).ToString(), CStr(True), CStr(arrayRow(0).ItemArray(4).ToString())}
+        End If
         For Each row As Data.DataRow In tblProductV.Rows
             If CStr(row.ItemArray(0)) = idProduct Then
                 datos = {row.ItemArray(1).ToString(), row.ItemArray(2).ToString, row.ItemArray(3).ToString, CStr(True), CStr(row.ItemArray(4))}
@@ -211,4 +219,6 @@ Public Class ProductSCFExcel
             ValCellQty = If(tblProducts.CurrentRow.Cells(0).Value IsNot DBNull.Value, tblProducts.CurrentRow.Cells(0).Value, "0")
         End If
     End Sub
+
+
 End Class

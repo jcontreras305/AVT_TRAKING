@@ -19,7 +19,7 @@ Public Class ModificationValidationTable
         mtdScaffold.llenarModification(tblMod, IdCliente)
         mtdScaffold.llenarTags(tblTags, If(IdCliente = "", "ALL", IdCliente))
         mtdScaffold.llenarRental(tblType)
-        mtdScaffold.llenarProduct(tblProducts)
+        mtdScaffold.llenarProductByJobNo(tblProducts)
         mtdScaffold.llenarTableWO(tblWO, If(IdCliente = "", "ALL", IdCliente))
         For Each row As Data.DataRow In tblProducts.Rows
             listProduct.Add(row("ID").ToString())
@@ -130,7 +130,7 @@ Public Class ModificationValidationTable
                 row.Cells("clmErrorP").Value = "The tag does not exist."
                 tblProductSheet.Columns("clmErrorP").Visible = True
             Else
-                If Not existTagExcel(row.Cells("clmTagID").Value) Then 'valdamos que este en la lista a insetar
+                If Not existTagExcel(row.Cells("clmTagID").Value) Then 'valdamos que este en la lista a insertar
                     If Not existTag(row.Cells("clmTagID").Value) Then ' o que este ya insertado
                         row.Cells("clmTagID").Style.BackColor = Color.Red
                         tagAfter(0) = row.Cells("clmTagID").Value
@@ -148,7 +148,7 @@ Public Class ModificationValidationTable
             End If
             'validar las existencias 
             If CDec(row.Cells("clmQuantity").Value) > 0 Then
-                If Not existQuantityPositivo(row.Cells("clmQuantity").Value, row.Cells("clmProductID").Value) Then
+                If Not existQuantityPositivo(row.Cells("clmQuantity").Value, row.Cells("clmProductID").Value, row.Cells("clmTagID").Value) Then
                     row.Cells("clmQuantity").Style.BackColor = Color.Red
                     row.Cells("clmErrorP").Value = If(row.Cells("clmErrorP").Value <> "", row.Cells("clmErrorP").Value & ", The Quantity is not enougth", "The Quantity is not enougth.")
                     tblProductSheet.Columns("clmErrorP").Visible = True
@@ -202,23 +202,28 @@ Public Class ModificationValidationTable
         End If
         Return exist
     End Function
-    Private Function existQuantityPositivo(ByVal QTY As String, ByVal idProduct As String) As Boolean
+    Private Function existQuantityPositivo(ByVal QTY As String, ByVal idProduct As String, ByVal tagRow As String) As Boolean
         Dim exist As Boolean = False
         Dim TQP As Double = 0.0
-        For Each row1 As DataGridViewRow In tblProductSheet.Rows()
-            If row1.Cells("clmProductID").Value = idProduct And CDbl(row1.Cells("clmQuantity").Value) > 0 Then
-                TQP = TQP + CDbl(row1.Cells("clmQuantity").Value)
-            End If
-        Next
-
-        For Each row As Data.DataRow In tblProducts.Rows()
-            If idProduct = row("ID").ToString() And CStr(row("QTY")) <> "" Then
-                If row("QTY") >= CDec(QTY) And row("QTY") >= TQP Then
-                    exist = True
-                    Exit For
+        Dim idjob As String = mtdScaffold.selectJobBytag(tagRow)
+        If Not idjob = "" Then
+            For Each row1 As DataGridViewRow In tblProductSheet.Rows()
+                If row1.Cells("clmProductID").Value = idProduct And CDbl(row1.Cells("clmQuantity").Value) > 0 Then
+                    TQP = TQP + CDbl(row1.Cells("clmQuantity").Value)
                 End If
-            End If
-        Next
+            Next
+
+            For Each row As Data.DataRow In tblProducts.Rows()
+                If idProduct = row("ID").ToString() And CStr(row("QTY")) <> "" Then
+                    If idjob = row("jobNo").ToString() Then
+                        If row("QTY") >= CDec(QTY) And row("QTY") >= TQP Then
+                            exist = True
+                            Exit For
+                        End If
+                    End If
+                End If
+            Next
+        End If
         Return exist
     End Function
 

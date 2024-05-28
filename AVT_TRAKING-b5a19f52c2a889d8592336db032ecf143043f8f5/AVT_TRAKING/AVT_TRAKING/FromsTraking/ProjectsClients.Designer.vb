@@ -317,7 +317,7 @@ Partial Class ProjectsClients
         Me.btnUploadSchedule.Name = "btnUploadSchedule"
         Me.btnUploadSchedule.Size = New System.Drawing.Size(288, 71)
         Me.btnUploadSchedule.TabIndex = 3
-        Me.btnUploadSchedule.Text = "SCAFFOLD TRACKING"
+        Me.btnUploadSchedule.Text = "Scaffold Tracking"
         Me.btnUploadSchedule.UseVisualStyleBackColor = True
         '
         'btnTimeEnterSheets

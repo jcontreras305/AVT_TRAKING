@@ -1524,7 +1524,30 @@ order by pd.idProduct", conn)
             desconectar()
         End Try
     End Function
-
+    Public Function llenarProductByJobNo(ByVal tabla As DataTable, Optional jobNo As String = "") As Boolean
+        Try
+            conectar()
+            Dim cmd As New SqlCommand("select pd.idProduct as 'ID', pd.name as 'Product Name', pd.um as 'UM',pd.class as 'Class', pd.weight as 'Weigth', pd.weightMeasure as 'Weigth Measure',pd.price as '$UM',pd.dailyRentalRate as 'Daily Rental Rate' ,pd.weeklyRentalRate as 'Weekly Rental Rate', pd.monthlyRentalRate as 'Monthly Rental Rate' ,
+pj.qty as 'QTY' , pd.QID, PLF, PSQF , pj.jobNo
+from productJob as pj 
+inner join product as pd on pd.idProduct = pj.idProduct
+inner join unitMeassurements as um on pd.um = um.um
+inner join classification as cl on cl.class = pd.class
+" + If(jobNo = "", "", " where pj.jobNo = " + jobNo), conn)
+            If cmd.ExecuteNonQuery Then
+                Dim da As New SqlDataAdapter(cmd)
+                da.Fill(tabla)
+                Return True
+            Else
+                Return False
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message())
+            Return False
+        Finally
+            desconectar()
+        End Try
+    End Function
     Public Function saveProduct(ByVal tabla As DataTable) As List(Of Integer)
         Dim cont = 0
         conectar()
@@ -1649,6 +1672,27 @@ order by pd.idProduct", conn)
                 Dim tablaAux As New DataTable
                 da.Fill(tablaAux)
                 tabla.DataSource = tablaAux
+                Return True
+            Else
+                Return False
+            End If
+        Catch ex As Exception
+            Return False
+        Finally
+            desconectar()
+        End Try
+    End Function
+    Public Function llenarProductByJob(ByVal tabla As DataTable, ByVal jobNo As String) As Boolean
+        Try
+            conectar()
+            Dim cmd As New SqlCommand("select pd.idProduct, price, um,pd.name, pdj.qty as 'quantity',PLF, PSQF from productJob as pdj
+inner join product as pd on pd.idProduct = pdj.idProduct
+inner join classification as cl on cl.class = pd.class 
+where pdj.JobNo = " + jobNo + "
+order by pd.idProduct", conn)
+            If cmd.ExecuteNonQuery Then
+                Dim da As New SqlDataAdapter(cmd)
+                da.Fill(tabla)
                 Return True
             Else
                 Return False
@@ -1907,10 +1951,38 @@ where pout.idProduct = " + idproduct + "", conn)
         End Try
 
     End Function
-    Public Function llenarCellComboIDProduct(ByVal cmb As DataGridViewComboBoxCell, ByVal tablaPoductoIncoming As DataTable) As Boolean
+    Public Function selectJobBytag(ByVal tag As String) As String
         Try
             conectar()
-            Dim cmd As New SqlCommand("select concat(idProduct,'    ',name)as product , idProduct, price, um,name,quantity,PLF,PSQF from product", conn)
+            Dim cmd As New SqlCommand("select jb.jobNo from  scaffoldTraking as sc
+inner join task as tk on tk.idAux = sc.idAux
+inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO
+inner join projectOrder as po on po.idPO = wo.idPO and po.jobNo = wo.jobNo
+inner join job as jb on jb.jobNo = po.jobNo 
+where tag like '" + tag + "'", conn)
+            Dim dr As SqlDataReader = cmd.ExecuteReader()
+            Dim job As String = ""
+            While dr.Read()
+                job = dr("jobNo")
+            End While
+            dr.Close()
+            If job <> "" Then
+                Return job
+            Else
+                Return ""
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message)
+            Return ""
+        Finally
+            desconectar()
+        End Try
+    End Function
+    Public Function llenarCellComboIDProduct(ByVal cmb As DataGridViewComboBoxCell, ByVal tablaPoductoIncoming As DataTable, Optional jobNo As String = "0") As Boolean
+        Try
+            conectar()
+            Dim cmd As New SqlCommand(If(jobNo = "", "select concat(idProduct,'    ',name)as product , idProduct, price, um,name,quantity,PLF,PSQF from product","select concat(pd.idProduct,'    ',pd.name)as product , pd.idProduct, pd.price, pd.um,pd.name,pj.qty,pd.PLF,pd.PSQF from productJob as pj inner join product as pd on pd.idProduct = pj.idProduct
+where pj.jobNo = " + jobNo + ""), conn)
             Dim dr As SqlDataReader = cmd.ExecuteReader()
             While dr.Read()
                 cmb.Items.Add(dr("product"))

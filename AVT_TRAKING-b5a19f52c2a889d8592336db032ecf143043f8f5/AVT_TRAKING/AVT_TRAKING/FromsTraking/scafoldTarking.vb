@@ -2960,19 +2960,24 @@ Public Class scafoldTarking
         If e.ColumnIndex = 1 Then
             Try
                 If tblModificationProductMS.CurrentCell.GetType.Name = "DataGridViewTextBoxCell" Then
-                    Dim cmbPd As New DataGridViewComboBoxCell
-                    With cmbPd
-                        mtdScaffold.llenarCellComboIDProduct(cmbPd, tblProductScaffoldAux)
-                        cmbPd.DropDownWidth = 260
-                    End With
-                    If tblModificationProductMS.CurrentRow.Cells(1).Value IsNot Nothing Then
-                        For Each row As Data.DataRow In tblProductScaffoldAux.Rows()
-                            If row.ItemArray(1) = tblModificationProductMS.CurrentRow.Cells(1).Value Then
-                                cmbPd.Value = row.ItemArray(0)
-                            End If
-                        Next
+                    If cmbTagScaffold.SelectedIndex > -1 Then
+
+                        Dim cmbPd As New DataGridViewComboBoxCell
+                        With cmbPd
+                            mtdScaffold.llenarCellComboIDProduct(cmbPd, tblProductScaffoldAux, mtdScaffold.selectJobBytag(cmbTagScaffold.Items(cmbTagScaffold.SelectedIndex)))
+                            cmbPd.DropDownWidth = 260
+                        End With
+                        If tblModificationProductMS.CurrentRow.Cells(1).Value IsNot Nothing Then
+                            For Each row As Data.DataRow In tblProductScaffoldAux.Rows()
+                                If row.ItemArray(1) = tblModificationProductMS.CurrentRow.Cells(1).Value Then
+                                    cmbPd.Value = row.ItemArray(0)
+                                End If
+                            Next
+                        End If
+                        tblModificationProductMS.CurrentRow.Cells(1) = cmbPd
+                    Else
+                        MessageBox.Show("Please select a tag.", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information)
                     End If
-                    tblModificationProductMS.CurrentRow.Cells(1) = cmbPd
                 End If
             Catch ex As Exception
 
@@ -3003,7 +3008,7 @@ Public Class scafoldTarking
             Dim stock = If(tblModificationProductMS.Rows(e.RowIndex).Cells("clmStockProductM").Value IsNot Nothing, tblModificationProductMS.Rows(e.RowIndex).Cells("clmStockProductM").Value, "")
             Dim newMP = If(tblModificationProductMS.Rows(e.RowIndex).Cells("idProductM").Value IsNot Nothing Or tblModificationProductMS.Rows(e.RowIndex).Cells("idProductM").Value <> "", False, True)
             If stock <> "" Then
-                Dim lastQty = ""
+                Dim lastQty = "0"
                 Dim array() = tblModificationProductMS.Rows(e.RowIndex).Cells(1).Value.ToString.Split(" ")
                 Dim idPD = array(0)
                 For Each row As DataRow In md.productsAdds.Rows()
@@ -3016,7 +3021,7 @@ Public Class scafoldTarking
                 If qty IsNot Nothing And soloNumero(qty.ToString()) Then
                     If CDbl(qty) > 0 Then 'validar que no exeda el stock
                         If CDbl(qty) > stock Then
-                            MessageBox.Show("It probably exceeds the Product Stock.", "Important", MessageBoxButtons.OK, MessageBoxIcon.Information)
+                            MessageBox.Show("You only have " + stock.ToString + " in sotck.", "Important", MessageBoxButtons.OK, MessageBoxIcon.Information)
                             tblModificationProductMS.Rows(e.RowIndex).Cells("clmQTYM").Value = lastQty
                         End If
                     ElseIf CDbl(qty) < 0 Then 'validar que no exeda la cantidad ya insertada

@@ -70,13 +70,14 @@ Partial Class ProductSCFExcel
         Me.TableLayoutPanel1.Controls.Add(Me.Panel4, 0, 3)
         Me.TableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.TableLayoutPanel1.Location = New System.Drawing.Point(0, 0)
+        Me.TableLayoutPanel1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
         Me.TableLayoutPanel1.RowCount = 4
-        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 80.0!))
-        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 60.0!))
+        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 98.0!))
+        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 74.0!))
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 49.0!))
-        Me.TableLayoutPanel1.Size = New System.Drawing.Size(805, 445)
+        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 60.0!))
+        Me.TableLayoutPanel1.Size = New System.Drawing.Size(1073, 548)
         Me.TableLayoutPanel1.TabIndex = 0
         Me.TableLayoutPanel1.UseWaitCursor = True
         '
@@ -89,9 +90,10 @@ Partial Class ProductSCFExcel
         Me.Panel1.Controls.Add(Me.PictureBox4)
         Me.Panel1.Controls.Add(Me.lblTitle)
         Me.Panel1.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel1.Location = New System.Drawing.Point(5, 5)
+        Me.Panel1.Location = New System.Drawing.Point(6, 6)
+        Me.Panel1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(795, 74)
+        Me.Panel1.Size = New System.Drawing.Size(1061, 90)
         Me.Panel1.TabIndex = 0
         Me.Panel1.UseWaitCursor = True
         '
@@ -99,9 +101,10 @@ Partial Class ProductSCFExcel
         '
         Me.PictureBox3.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.PictureBox3.Image = Global.AVT_TRAKING.My.Resources.Resources.minimize2
-        Me.PictureBox3.Location = New System.Drawing.Point(734, 3)
+        Me.PictureBox3.Location = New System.Drawing.Point(980, 4)
+        Me.PictureBox3.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.PictureBox3.Name = "PictureBox3"
-        Me.PictureBox3.Size = New System.Drawing.Size(27, 29)
+        Me.PictureBox3.Size = New System.Drawing.Size(36, 36)
         Me.PictureBox3.TabIndex = 15
         Me.PictureBox3.TabStop = False
         Me.PictureBox3.UseWaitCursor = True
@@ -110,9 +113,10 @@ Partial Class ProductSCFExcel
         '
         Me.btnRestore.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnRestore.Image = Global.AVT_TRAKING.My.Resources.Resources.restore2
-        Me.btnRestore.Location = New System.Drawing.Point(764, 0)
+        Me.btnRestore.Location = New System.Drawing.Point(1020, 0)
+        Me.btnRestore.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.btnRestore.Name = "btnRestore"
-        Me.btnRestore.Size = New System.Drawing.Size(26, 29)
+        Me.btnRestore.Size = New System.Drawing.Size(35, 36)
         Me.btnRestore.TabIndex = 13
         Me.btnRestore.TabStop = False
         Me.btnRestore.UseWaitCursor = True
@@ -121,9 +125,10 @@ Partial Class ProductSCFExcel
         '
         Me.btnMaximize.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnMaximize.Image = Global.AVT_TRAKING.My.Resources.Resources.maximize2
-        Me.btnMaximize.Location = New System.Drawing.Point(764, 3)
+        Me.btnMaximize.Location = New System.Drawing.Point(1020, 4)
+        Me.btnMaximize.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.btnMaximize.Name = "btnMaximize"
-        Me.btnMaximize.Size = New System.Drawing.Size(31, 29)
+        Me.btnMaximize.Size = New System.Drawing.Size(41, 36)
         Me.btnMaximize.TabIndex = 12
         Me.btnMaximize.TabStop = False
         Me.btnMaximize.UseWaitCursor = True
@@ -132,9 +137,10 @@ Partial Class ProductSCFExcel
         '
         Me.PictureBox4.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.PictureBox4.Image = Global.AVT_TRAKING.My.Resources.Resources._exit
-        Me.PictureBox4.Location = New System.Drawing.Point(757, 40)
+        Me.PictureBox4.Location = New System.Drawing.Point(1010, 49)
+        Me.PictureBox4.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.PictureBox4.Name = "PictureBox4"
-        Me.PictureBox4.Size = New System.Drawing.Size(37, 29)
+        Me.PictureBox4.Size = New System.Drawing.Size(49, 36)
         Me.PictureBox4.TabIndex = 14
         Me.PictureBox4.TabStop = False
         Me.PictureBox4.UseWaitCursor = True
@@ -144,9 +150,10 @@ Partial Class ProductSCFExcel
         Me.lblTitle.AutoSize = True
         Me.lblTitle.Font = New System.Drawing.Font("Verdana", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblTitle.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.lblTitle.Location = New System.Drawing.Point(18, 14)
+        Me.lblTitle.Location = New System.Drawing.Point(24, 17)
+        Me.lblTitle.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblTitle.Name = "lblTitle"
-        Me.lblTitle.Size = New System.Drawing.Size(285, 18)
+        Me.lblTitle.Size = New System.Drawing.Size(371, 25)
         Me.lblTitle.TabIndex = 16
         Me.lblTitle.Text = "Product Inconming or OutGoing"
         Me.lblTitle.UseWaitCursor = True
@@ -156,9 +163,10 @@ Partial Class ProductSCFExcel
         Me.Panel2.BackColor = System.Drawing.Color.FromArgb(CType(CType(83, Byte), Integer), CType(CType(93, Byte), Integer), CType(CType(102, Byte), Integer))
         Me.Panel2.Controls.Add(Me.tblProducts)
         Me.Panel2.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel2.Location = New System.Drawing.Point(5, 149)
+        Me.Panel2.Location = New System.Drawing.Point(6, 182)
+        Me.Panel2.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(795, 240)
+        Me.Panel2.Size = New System.Drawing.Size(1061, 298)
         Me.Panel2.TabIndex = 1
         Me.Panel2.UseWaitCursor = True
         '
@@ -170,43 +178,51 @@ Partial Class ProductSCFExcel
         Me.tblProducts.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.QTY, Me.ProductID, Me.CostUM, Me.UM, Me.ProductDescription, Me.QTYMax})
         Me.tblProducts.Dock = System.Windows.Forms.DockStyle.Fill
         Me.tblProducts.Location = New System.Drawing.Point(0, 0)
+        Me.tblProducts.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.tblProducts.Name = "tblProducts"
-        Me.tblProducts.Size = New System.Drawing.Size(795, 240)
+        Me.tblProducts.RowHeadersWidth = 51
+        Me.tblProducts.Size = New System.Drawing.Size(1061, 298)
         Me.tblProducts.TabIndex = 0
         Me.tblProducts.UseWaitCursor = True
         '
         'QTY
         '
         Me.QTY.HeaderText = "QTY"
+        Me.QTY.MinimumWidth = 6
         Me.QTY.Name = "QTY"
         '
         'ProductID
         '
         Me.ProductID.HeaderText = "Product ID"
+        Me.ProductID.MinimumWidth = 6
         Me.ProductID.Name = "ProductID"
         Me.ProductID.ReadOnly = True
         '
         'CostUM
         '
         Me.CostUM.HeaderText = "$/UM"
+        Me.CostUM.MinimumWidth = 6
         Me.CostUM.Name = "CostUM"
         Me.CostUM.ReadOnly = True
         '
         'UM
         '
         Me.UM.HeaderText = "UM"
+        Me.UM.MinimumWidth = 6
         Me.UM.Name = "UM"
         Me.UM.ReadOnly = True
         '
         'ProductDescription
         '
         Me.ProductDescription.HeaderText = "Product Description"
+        Me.ProductDescription.MinimumWidth = 6
         Me.ProductDescription.Name = "ProductDescription"
         Me.ProductDescription.ReadOnly = True
         '
         'QTYMax
         '
         Me.QTYMax.HeaderText = "QTYMax"
+        Me.QTYMax.MinimumWidth = 6
         Me.QTYMax.Name = "QTYMax"
         Me.QTYMax.ReadOnly = True
         Me.QTYMax.Visible = False
@@ -220,9 +236,10 @@ Partial Class ProductSCFExcel
         Me.Panel3.Controls.Add(Me.btnUpdateTableSCF)
         Me.Panel3.Controls.Add(Me.btnUpdateExcel)
         Me.Panel3.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel3.Location = New System.Drawing.Point(5, 87)
+        Me.Panel3.Location = New System.Drawing.Point(6, 106)
+        Me.Panel3.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.Panel3.Name = "Panel3"
-        Me.Panel3.Size = New System.Drawing.Size(795, 54)
+        Me.Panel3.Size = New System.Drawing.Size(1061, 66)
         Me.Panel3.TabIndex = 2
         Me.Panel3.UseWaitCursor = True
         '
@@ -231,9 +248,10 @@ Partial Class ProductSCFExcel
         Me.Label1.AutoSize = True
         Me.Label1.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label1.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.Label1.Location = New System.Drawing.Point(23, 33)
+        Me.Label1.Location = New System.Drawing.Point(31, 41)
+        Me.Label1.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(50, 13)
+        Me.Label1.Size = New System.Drawing.Size(62, 17)
         Me.Label1.TabIndex = 24
         Me.Label1.Text = "Job No:"
         Me.Label1.UseWaitCursor = True
@@ -241,9 +259,10 @@ Partial Class ProductSCFExcel
         'cmbJobNo
         '
         Me.cmbJobNo.FormattingEnabled = True
-        Me.cmbJobNo.Location = New System.Drawing.Point(79, 30)
+        Me.cmbJobNo.Location = New System.Drawing.Point(105, 37)
+        Me.cmbJobNo.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.cmbJobNo.Name = "cmbJobNo"
-        Me.cmbJobNo.Size = New System.Drawing.Size(152, 21)
+        Me.cmbJobNo.Size = New System.Drawing.Size(201, 24)
         Me.cmbJobNo.TabIndex = 23
         Me.cmbJobNo.UseWaitCursor = True
         '
@@ -252,9 +271,10 @@ Partial Class ProductSCFExcel
         Me.lblClient.AutoSize = True
         Me.lblClient.Font = New System.Drawing.Font("Verdana", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblClient.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.lblClient.Location = New System.Drawing.Point(18, 10)
+        Me.lblClient.Location = New System.Drawing.Point(24, 12)
+        Me.lblClient.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblClient.Name = "lblClient"
-        Me.lblClient.Size = New System.Drawing.Size(55, 16)
+        Me.lblClient.Size = New System.Drawing.Size(71, 20)
         Me.lblClient.TabIndex = 22
         Me.lblClient.Text = "Client:"
         Me.lblClient.UseWaitCursor = True
@@ -269,9 +289,10 @@ Partial Class ProductSCFExcel
         Me.btnUpdateTableSCF.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.btnUpdateTableSCF.Image = Global.AVT_TRAKING.My.Resources.Resources.save1
         Me.btnUpdateTableSCF.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnUpdateTableSCF.Location = New System.Drawing.Point(695, 12)
+        Me.btnUpdateTableSCF.Location = New System.Drawing.Point(928, 15)
+        Me.btnUpdateTableSCF.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.btnUpdateTableSCF.Name = "btnUpdateTableSCF"
-        Me.btnUpdateTableSCF.Size = New System.Drawing.Size(79, 32)
+        Me.btnUpdateTableSCF.Size = New System.Drawing.Size(105, 39)
         Me.btnUpdateTableSCF.TabIndex = 21
         Me.btnUpdateTableSCF.Text = "Save"
         Me.btnUpdateTableSCF.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -288,9 +309,10 @@ Partial Class ProductSCFExcel
         Me.btnUpdateExcel.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.btnUpdateExcel.Image = Global.AVT_TRAKING.My.Resources.Resources.excel
         Me.btnUpdateExcel.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnUpdateExcel.Location = New System.Drawing.Point(591, 12)
+        Me.btnUpdateExcel.Location = New System.Drawing.Point(789, 15)
+        Me.btnUpdateExcel.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.btnUpdateExcel.Name = "btnUpdateExcel"
-        Me.btnUpdateExcel.Size = New System.Drawing.Size(81, 36)
+        Me.btnUpdateExcel.Size = New System.Drawing.Size(108, 44)
         Me.btnUpdateExcel.TabIndex = 20
         Me.btnUpdateExcel.Text = "Find"
         Me.btnUpdateExcel.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -303,9 +325,10 @@ Partial Class ProductSCFExcel
         Me.Panel4.Controls.Add(Me.lblMessage)
         Me.Panel4.Controls.Add(Me.pgbComplete)
         Me.Panel4.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel4.Location = New System.Drawing.Point(5, 397)
+        Me.Panel4.Location = New System.Drawing.Point(6, 490)
+        Me.Panel4.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.Panel4.Name = "Panel4"
-        Me.Panel4.Size = New System.Drawing.Size(795, 43)
+        Me.Panel4.Size = New System.Drawing.Size(1061, 52)
         Me.Panel4.TabIndex = 3
         Me.Panel4.UseWaitCursor = True
         '
@@ -313,28 +336,31 @@ Partial Class ProductSCFExcel
         '
         Me.lblMessage.AutoSize = True
         Me.lblMessage.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.lblMessage.Location = New System.Drawing.Point(9, 11)
+        Me.lblMessage.Location = New System.Drawing.Point(12, 14)
+        Me.lblMessage.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblMessage.Name = "lblMessage"
-        Me.lblMessage.Size = New System.Drawing.Size(53, 13)
+        Me.lblMessage.Size = New System.Drawing.Size(69, 17)
         Me.lblMessage.TabIndex = 4
         Me.lblMessage.Text = "Message:"
         Me.lblMessage.UseWaitCursor = True
         '
         'pgbComplete
         '
-        Me.pgbComplete.Location = New System.Drawing.Point(561, 11)
+        Me.pgbComplete.Location = New System.Drawing.Point(748, 14)
+        Me.pgbComplete.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.pgbComplete.Name = "pgbComplete"
-        Me.pgbComplete.Size = New System.Drawing.Size(229, 23)
+        Me.pgbComplete.Size = New System.Drawing.Size(305, 28)
         Me.pgbComplete.TabIndex = 3
         Me.pgbComplete.UseWaitCursor = True
         '
         'ProductSCFExcel
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(805, 445)
+        Me.ClientSize = New System.Drawing.Size(1073, 548)
         Me.Controls.Add(Me.TableLayoutPanel1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
+        Me.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.Name = "ProductSCFExcel"
         Me.Text = "ProductSCExcel"
         Me.TableLayoutPanel1.ResumeLayout(False)

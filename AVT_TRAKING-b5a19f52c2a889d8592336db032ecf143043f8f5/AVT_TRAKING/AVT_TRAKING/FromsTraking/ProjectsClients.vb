@@ -29,6 +29,8 @@ Public Class ProjectsClients
                 nameBtn = nameBtn.TrimEnd
                 If lUser.ListAccess.Exists(Function(val) val = nameBtn) Then
                     item.Visible = True
+                Else
+                    item.Visible = False
                 End If
             ElseIf typeItem = "System.Windows.Forms.Panel" And item.name = "PnllSetup" Then
                 If lUser.ListAccess.Exists(Function(val) val = "Setup") Then
