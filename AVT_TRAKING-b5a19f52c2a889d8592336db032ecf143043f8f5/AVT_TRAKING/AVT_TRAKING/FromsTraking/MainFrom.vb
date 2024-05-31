@@ -120,6 +120,11 @@ Public Class MainFrom
                 newPC.pcbLogoPC.Image = imageClientLogin
                 newPC.validAccess(loginUser)
             End If
+            llenarComboClientsReports(newPC.cmbClient)
+            If newPC.cmbClient.Items IsNot Nothing Then
+                Dim index = newPC.cmbClient.FindString(Client.NumberClient)
+                newPC.cmbClient.SelectedIndex = index
+            End If
             FormPanel = newPC
             FormPanel.TopLevel = False
             FormPanel.Dock = DockStyle.Fill

@@ -102,12 +102,13 @@ Partial Class ModificationValidationTable
         Me.TableLayoutPanel1.Controls.Add(Me.TabControl1, 0, 1)
         Me.TableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.TableLayoutPanel1.Location = New System.Drawing.Point(0, 0)
+        Me.TableLayoutPanel1.Margin = New System.Windows.Forms.Padding(4)
         Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
         Me.TableLayoutPanel1.RowCount = 3
-        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 90.0!))
+        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 111.0!))
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25.0!))
-        Me.TableLayoutPanel1.Size = New System.Drawing.Size(898, 450)
+        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 31.0!))
+        Me.TableLayoutPanel1.Size = New System.Drawing.Size(1197, 554)
         Me.TableLayoutPanel1.TabIndex = 1
         '
         'Panel3
@@ -116,17 +117,19 @@ Partial Class ModificationValidationTable
         Me.Panel3.Controls.Add(Me.pgbComplete)
         Me.Panel3.Controls.Add(Me.lblMessage)
         Me.Panel3.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel3.Location = New System.Drawing.Point(3, 428)
+        Me.Panel3.Location = New System.Drawing.Point(4, 527)
+        Me.Panel3.Margin = New System.Windows.Forms.Padding(4)
         Me.Panel3.Name = "Panel3"
-        Me.Panel3.Size = New System.Drawing.Size(892, 19)
+        Me.Panel3.Size = New System.Drawing.Size(1189, 23)
         Me.Panel3.TabIndex = 3
         '
         'pgbComplete
         '
         Me.pgbComplete.Dock = System.Windows.Forms.DockStyle.Right
-        Me.pgbComplete.Location = New System.Drawing.Point(606, 0)
+        Me.pgbComplete.Location = New System.Drawing.Point(808, 0)
+        Me.pgbComplete.Margin = New System.Windows.Forms.Padding(4)
         Me.pgbComplete.Name = "pgbComplete"
-        Me.pgbComplete.Size = New System.Drawing.Size(286, 19)
+        Me.pgbComplete.Size = New System.Drawing.Size(381, 23)
         Me.pgbComplete.TabIndex = 3
         '
         'lblMessage
@@ -136,8 +139,9 @@ Partial Class ModificationValidationTable
         Me.lblMessage.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblMessage.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.lblMessage.Location = New System.Drawing.Point(0, 0)
+        Me.lblMessage.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblMessage.Name = "lblMessage"
-        Me.lblMessage.Size = New System.Drawing.Size(61, 13)
+        Me.lblMessage.Size = New System.Drawing.Size(74, 17)
         Me.lblMessage.TabIndex = 2
         Me.lblMessage.Text = "Message:"
         '
@@ -159,19 +163,21 @@ Partial Class ModificationValidationTable
         Me.TitleBar.Dock = System.Windows.Forms.DockStyle.Fill
         Me.TitleBar.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TitleBar.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.TitleBar.Location = New System.Drawing.Point(3, 3)
+        Me.TitleBar.Location = New System.Drawing.Point(4, 4)
+        Me.TitleBar.Margin = New System.Windows.Forms.Padding(4)
         Me.TitleBar.Name = "TitleBar"
         Me.TitleBar.RightToLeft = System.Windows.Forms.RightToLeft.No
-        Me.TitleBar.Size = New System.Drawing.Size(892, 84)
+        Me.TitleBar.Size = New System.Drawing.Size(1189, 103)
         Me.TitleBar.TabIndex = 1
         '
         'PictureBox4
         '
         Me.PictureBox4.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.PictureBox4.Image = Global.AVT_TRAKING.My.Resources.Resources._exit
-        Me.PictureBox4.Location = New System.Drawing.Point(855, 48)
+        Me.PictureBox4.Location = New System.Drawing.Point(1140, 59)
+        Me.PictureBox4.Margin = New System.Windows.Forms.Padding(4)
         Me.PictureBox4.Name = "PictureBox4"
-        Me.PictureBox4.Size = New System.Drawing.Size(34, 33)
+        Me.PictureBox4.Size = New System.Drawing.Size(45, 41)
         Me.PictureBox4.TabIndex = 13
         Me.PictureBox4.TabStop = False
         '
@@ -179,9 +185,10 @@ Partial Class ModificationValidationTable
         '
         Me.PictureBox3.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.PictureBox3.Image = Global.AVT_TRAKING.My.Resources.Resources.minimize2
-        Me.PictureBox3.Location = New System.Drawing.Point(826, 3)
+        Me.PictureBox3.Location = New System.Drawing.Point(1101, 4)
+        Me.PictureBox3.Margin = New System.Windows.Forms.Padding(4)
         Me.PictureBox3.Name = "PictureBox3"
-        Me.PictureBox3.Size = New System.Drawing.Size(28, 26)
+        Me.PictureBox3.Size = New System.Drawing.Size(37, 32)
         Me.PictureBox3.TabIndex = 12
         Me.PictureBox3.TabStop = False
         '
@@ -189,9 +196,10 @@ Partial Class ModificationValidationTable
         '
         Me.btnRestore.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnRestore.Image = Global.AVT_TRAKING.My.Resources.Resources.restore2
-        Me.btnRestore.Location = New System.Drawing.Point(857, 3)
+        Me.btnRestore.Location = New System.Drawing.Point(1143, 4)
+        Me.btnRestore.Margin = New System.Windows.Forms.Padding(4)
         Me.btnRestore.Name = "btnRestore"
-        Me.btnRestore.Size = New System.Drawing.Size(28, 26)
+        Me.btnRestore.Size = New System.Drawing.Size(37, 32)
         Me.btnRestore.TabIndex = 11
         Me.btnRestore.TabStop = False
         '
@@ -199,9 +207,10 @@ Partial Class ModificationValidationTable
         '
         Me.btnMaximize.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnMaximize.Image = Global.AVT_TRAKING.My.Resources.Resources.maximize2
-        Me.btnMaximize.Location = New System.Drawing.Point(860, 3)
+        Me.btnMaximize.Location = New System.Drawing.Point(1147, 4)
+        Me.btnMaximize.Margin = New System.Windows.Forms.Padding(4)
         Me.btnMaximize.Name = "btnMaximize"
-        Me.btnMaximize.Size = New System.Drawing.Size(28, 26)
+        Me.btnMaximize.Size = New System.Drawing.Size(37, 32)
         Me.btnMaximize.TabIndex = 10
         Me.btnMaximize.TabStop = False
         '
@@ -210,18 +219,20 @@ Partial Class ModificationValidationTable
         Me.Label2.AutoSize = True
         Me.Label2.Font = New System.Drawing.Font("Verdana", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label2.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.Label2.Location = New System.Drawing.Point(3, 6)
+        Me.Label2.Location = New System.Drawing.Point(4, 7)
+        Me.Label2.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(248, 18)
+        Me.Label2.Size = New System.Drawing.Size(324, 25)
         Me.Label2.TabIndex = 9
         Me.Label2.Text = "ModificationValidationTable"
         '
         'chbEditModID
         '
         Me.chbEditModID.AutoSize = True
-        Me.chbEditModID.Location = New System.Drawing.Point(512, 58)
+        Me.chbEditModID.Location = New System.Drawing.Point(683, 71)
+        Me.chbEditModID.Margin = New System.Windows.Forms.Padding(4)
         Me.chbEditModID.Name = "chbEditModID"
-        Me.chbEditModID.Size = New System.Drawing.Size(92, 17)
+        Me.chbEditModID.Size = New System.Drawing.Size(112, 21)
         Me.chbEditModID.TabIndex = 8
         Me.chbEditModID.Text = "Edit Mod ID"
         Me.chbEditModID.UseVisualStyleBackColor = True
@@ -229,28 +240,31 @@ Partial Class ModificationValidationTable
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(328, 63)
+        Me.Label1.Location = New System.Drawing.Point(437, 78)
+        Me.Label1.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(109, 13)
+        Me.Label1.Size = New System.Drawing.Size(135, 17)
         Me.Label1.TabIndex = 7
         Me.Label1.Text = "First Row To Read"
         '
         'sprFirstRow
         '
-        Me.sprFirstRow.Location = New System.Drawing.Point(440, 58)
+        Me.sprFirstRow.Location = New System.Drawing.Point(587, 71)
+        Me.sprFirstRow.Margin = New System.Windows.Forms.Padding(4)
         Me.sprFirstRow.Maximum = New Decimal(New Integer() {500, 0, 0, 0})
         Me.sprFirstRow.Minimum = New Decimal(New Integer() {2, 0, 0, 0})
         Me.sprFirstRow.Name = "sprFirstRow"
-        Me.sprFirstRow.Size = New System.Drawing.Size(63, 21)
+        Me.sprFirstRow.Size = New System.Drawing.Size(84, 24)
         Me.sprFirstRow.TabIndex = 5
         Me.sprFirstRow.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         Me.sprFirstRow.Value = New Decimal(New Integer() {2, 0, 0, 0})
         '
         'txtFecha
         '
-        Me.txtFecha.Location = New System.Drawing.Point(184, 58)
+        Me.txtFecha.Location = New System.Drawing.Point(245, 71)
+        Me.txtFecha.Margin = New System.Windows.Forms.Padding(4)
         Me.txtFecha.Name = "txtFecha"
-        Me.txtFecha.Size = New System.Drawing.Size(136, 21)
+        Me.txtFecha.Size = New System.Drawing.Size(180, 24)
         Me.txtFecha.TabIndex = 4
         '
         'cmbDatos
@@ -258,9 +272,10 @@ Partial Class ModificationValidationTable
         Me.cmbDatos.DropDownHeight = 260
         Me.cmbDatos.FormattingEnabled = True
         Me.cmbDatos.IntegralHeight = False
-        Me.cmbDatos.Location = New System.Drawing.Point(6, 58)
+        Me.cmbDatos.Location = New System.Drawing.Point(8, 71)
+        Me.cmbDatos.Margin = New System.Windows.Forms.Padding(4)
         Me.cmbDatos.Name = "cmbDatos"
-        Me.cmbDatos.Size = New System.Drawing.Size(167, 21)
+        Me.cmbDatos.Size = New System.Drawing.Size(221, 25)
         Me.cmbDatos.TabIndex = 3
         '
         'btnSave
@@ -272,9 +287,10 @@ Partial Class ModificationValidationTable
         Me.btnSave.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnSave.Image = Global.AVT_TRAKING.My.Resources.Resources.save1
         Me.btnSave.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnSave.Location = New System.Drawing.Point(735, 51)
+        Me.btnSave.Location = New System.Drawing.Point(980, 63)
+        Me.btnSave.Margin = New System.Windows.Forms.Padding(4)
         Me.btnSave.Name = "btnSave"
-        Me.btnSave.Size = New System.Drawing.Size(75, 31)
+        Me.btnSave.Size = New System.Drawing.Size(100, 38)
         Me.btnSave.TabIndex = 2
         Me.btnSave.Text = "Save"
         Me.btnSave.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -289,9 +305,10 @@ Partial Class ModificationValidationTable
         Me.btnSubirExcel.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnSubirExcel.Image = Global.AVT_TRAKING.My.Resources.Resources.upload2
         Me.btnSubirExcel.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnSubirExcel.Location = New System.Drawing.Point(606, 52)
+        Me.btnSubirExcel.Location = New System.Drawing.Point(808, 64)
+        Me.btnSubirExcel.Margin = New System.Windows.Forms.Padding(4)
         Me.btnSubirExcel.Name = "btnSubirExcel"
-        Me.btnSubirExcel.Size = New System.Drawing.Size(121, 31)
+        Me.btnSubirExcel.Size = New System.Drawing.Size(161, 38)
         Me.btnSubirExcel.TabIndex = 1
         Me.btnSubirExcel.Text = "Update Excel"
         Me.btnSubirExcel.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -302,19 +319,21 @@ Partial Class ModificationValidationTable
         Me.TabControl1.Controls.Add(Me.tbpTags)
         Me.TabControl1.Controls.Add(Me.tbpProducts)
         Me.TabControl1.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.TabControl1.Location = New System.Drawing.Point(3, 93)
+        Me.TabControl1.Location = New System.Drawing.Point(4, 115)
+        Me.TabControl1.Margin = New System.Windows.Forms.Padding(4)
         Me.TabControl1.Name = "TabControl1"
         Me.TabControl1.SelectedIndex = 0
-        Me.TabControl1.Size = New System.Drawing.Size(892, 329)
+        Me.TabControl1.Size = New System.Drawing.Size(1189, 404)
         Me.TabControl1.TabIndex = 3
         '
         'tbpTags
         '
         Me.tbpTags.Controls.Add(Me.tblModificationScaffold)
-        Me.tbpTags.Location = New System.Drawing.Point(4, 22)
+        Me.tbpTags.Location = New System.Drawing.Point(4, 25)
+        Me.tbpTags.Margin = New System.Windows.Forms.Padding(4)
         Me.tbpTags.Name = "tbpTags"
-        Me.tbpTags.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbpTags.Size = New System.Drawing.Size(884, 303)
+        Me.tbpTags.Padding = New System.Windows.Forms.Padding(4)
+        Me.tbpTags.Size = New System.Drawing.Size(1181, 375)
         Me.tbpTags.TabIndex = 0
         Me.tbpTags.Text = "Tags"
         Me.tbpTags.UseVisualStyleBackColor = True
@@ -326,7 +345,8 @@ Partial Class ModificationValidationTable
         Me.tblModificationScaffold.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.tblModificationScaffold.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.clmError, Me.ModID, Me.TagNum, Me.WorkNum, Me.ReqComp, Me.RequestBy, Me.Foreman, Me.Erector, Me.DateModification, Me.Truck, Me.Forklift, Me.Trailer, Me.Crane, Me.Rope, Me.Passed, Me.Elevator, Me.Build, Me.Material, Me.Travel, Me.Weather, Me.Alarm, Me.Safety, Me.stdBy, Me.Other, Me.TotalHours, Me.Type, Me.Comment})
         Me.tblModificationScaffold.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.tblModificationScaffold.Location = New System.Drawing.Point(3, 3)
+        Me.tblModificationScaffold.Location = New System.Drawing.Point(4, 4)
+        Me.tblModificationScaffold.Margin = New System.Windows.Forms.Padding(4)
         Me.tblModificationScaffold.Name = "tblModificationScaffold"
         DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
         DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.ActiveBorder
@@ -336,13 +356,15 @@ Partial Class ModificationValidationTable
         DataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText
         DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
         Me.tblModificationScaffold.RowHeadersDefaultCellStyle = DataGridViewCellStyle1
-        Me.tblModificationScaffold.Size = New System.Drawing.Size(878, 297)
+        Me.tblModificationScaffold.RowHeadersWidth = 51
+        Me.tblModificationScaffold.Size = New System.Drawing.Size(1173, 367)
         Me.tblModificationScaffold.TabIndex = 3
         '
         'clmError
         '
         Me.clmError.Frozen = True
         Me.clmError.HeaderText = "Error"
+        Me.clmError.MinimumWidth = 6
         Me.clmError.Name = "clmError"
         Me.clmError.ReadOnly = True
         Me.clmError.Visible = False
@@ -352,181 +374,208 @@ Partial Class ModificationValidationTable
         '
         Me.ModID.Frozen = True
         Me.ModID.HeaderText = "ModID"
+        Me.ModID.MinimumWidth = 6
         Me.ModID.Name = "ModID"
-        Me.ModID.Width = 64
+        Me.ModID.Width = 77
         '
         'TagNum
         '
         Me.TagNum.Frozen = True
         Me.TagNum.HeaderText = "TagNum"
+        Me.TagNum.MinimumWidth = 6
         Me.TagNum.Name = "TagNum"
-        Me.TagNum.Width = 73
+        Me.TagNum.Width = 91
         '
         'WorkNum
         '
         Me.WorkNum.HeaderText = "WorkNum"
+        Me.WorkNum.MinimumWidth = 6
         Me.WorkNum.Name = "WorkNum"
-        Me.WorkNum.Width = 80
+        Me.WorkNum.Width = 99
         '
         'ReqComp
         '
         Me.ReqComp.HeaderText = "ReqComp"
+        Me.ReqComp.MinimumWidth = 6
         Me.ReqComp.Name = "ReqComp"
-        Me.ReqComp.Width = 79
+        Me.ReqComp.Width = 99
         '
         'RequestBy
         '
         Me.RequestBy.HeaderText = "RequestBy"
+        Me.RequestBy.MinimumWidth = 6
         Me.RequestBy.Name = "RequestBy"
-        Me.RequestBy.Width = 84
+        Me.RequestBy.Width = 106
         '
         'Foreman
         '
         Me.Foreman.HeaderText = "Foreman"
+        Me.Foreman.MinimumWidth = 6
         Me.Foreman.Name = "Foreman"
-        Me.Foreman.Width = 73
+        Me.Foreman.Width = 93
         '
         'Erector
         '
         Me.Erector.HeaderText = "Erector"
+        Me.Erector.MinimumWidth = 6
         Me.Erector.Name = "Erector"
-        Me.Erector.Width = 66
+        Me.Erector.Width = 83
         '
         'DateModification
         '
         Me.DateModification.HeaderText = "DateModification"
+        Me.DateModification.MinimumWidth = 6
         Me.DateModification.Name = "DateModification"
-        Me.DateModification.Width = 112
+        Me.DateModification.Width = 142
         '
         'Truck
         '
         Me.Truck.HeaderText = "Truck"
+        Me.Truck.MinimumWidth = 6
         Me.Truck.Name = "Truck"
         Me.Truck.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
         Me.Truck.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
-        Me.Truck.Width = 60
+        Me.Truck.Width = 73
         '
         'Forklift
         '
         Me.Forklift.HeaderText = "Forklift"
+        Me.Forklift.MinimumWidth = 6
         Me.Forklift.Name = "Forklift"
         Me.Forklift.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
         Me.Forklift.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
-        Me.Forklift.Width = 63
+        Me.Forklift.Width = 79
         '
         'Trailer
         '
         Me.Trailer.HeaderText = "Trailer"
+        Me.Trailer.MinimumWidth = 6
         Me.Trailer.Name = "Trailer"
         Me.Trailer.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
         Me.Trailer.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
-        Me.Trailer.Width = 61
+        Me.Trailer.Width = 78
         '
         'Crane
         '
         Me.Crane.HeaderText = "Crane"
+        Me.Crane.MinimumWidth = 6
         Me.Crane.Name = "Crane"
         Me.Crane.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
         Me.Crane.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
-        Me.Crane.Width = 60
+        Me.Crane.Width = 75
         '
         'Rope
         '
         Me.Rope.HeaderText = "Rope"
+        Me.Rope.MinimumWidth = 6
         Me.Rope.Name = "Rope"
         Me.Rope.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
         Me.Rope.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
-        Me.Rope.Width = 58
+        Me.Rope.Width = 71
         '
         'Passed
         '
         Me.Passed.HeaderText = "Passed"
+        Me.Passed.MinimumWidth = 6
         Me.Passed.Name = "Passed"
         Me.Passed.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
         Me.Passed.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
-        Me.Passed.Width = 67
+        Me.Passed.Width = 84
         '
         'Elevator
         '
         Me.Elevator.HeaderText = "Elevator"
+        Me.Elevator.MinimumWidth = 6
         Me.Elevator.Name = "Elevator"
         Me.Elevator.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
         Me.Elevator.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
-        Me.Elevator.Width = 71
+        Me.Elevator.Width = 89
         '
         'Build
         '
         Me.Build.HeaderText = "Build"
+        Me.Build.MinimumWidth = 6
         Me.Build.Name = "Build"
-        Me.Build.Width = 55
+        Me.Build.Width = 68
         '
         'Material
         '
         Me.Material.HeaderText = "Material"
+        Me.Material.MinimumWidth = 6
         Me.Material.Name = "Material"
-        Me.Material.Width = 69
+        Me.Material.Width = 87
         '
         'Travel
         '
         Me.Travel.HeaderText = "Travel"
+        Me.Travel.MinimumWidth = 6
         Me.Travel.Name = "Travel"
-        Me.Travel.Width = 62
+        Me.Travel.Width = 77
         '
         'Weather
         '
         Me.Weather.HeaderText = "Weather"
+        Me.Weather.MinimumWidth = 6
         Me.Weather.Name = "Weather"
-        Me.Weather.Width = 73
+        Me.Weather.Width = 91
         '
         'Alarm
         '
         Me.Alarm.HeaderText = "Alarm"
+        Me.Alarm.MinimumWidth = 6
         Me.Alarm.Name = "Alarm"
-        Me.Alarm.Width = 58
+        Me.Alarm.Width = 73
         '
         'Safety
         '
         Me.Safety.HeaderText = "Safety"
+        Me.Safety.MinimumWidth = 6
         Me.Safety.Name = "Safety"
-        Me.Safety.Width = 62
+        Me.Safety.Width = 77
         '
         'stdBy
         '
         Me.stdBy.HeaderText = "stdBy"
+        Me.stdBy.MinimumWidth = 6
         Me.stdBy.Name = "stdBy"
-        Me.stdBy.Width = 58
+        Me.stdBy.Width = 72
         '
         'Other
         '
         Me.Other.HeaderText = "Other"
+        Me.Other.MinimumWidth = 6
         Me.Other.Name = "Other"
-        Me.Other.Width = 58
+        Me.Other.Width = 73
         '
         'TotalHours
         '
         Me.TotalHours.HeaderText = "Total Hours"
+        Me.TotalHours.MinimumWidth = 6
         Me.TotalHours.Name = "TotalHours"
-        Me.TotalHours.Width = 87
+        Me.TotalHours.Width = 111
         '
         'Type
         '
         Me.Type.HeaderText = "Type"
+        Me.Type.MinimumWidth = 6
         Me.Type.Name = "Type"
-        Me.Type.Width = 56
+        Me.Type.Width = 69
         '
         'Comment
         '
         Me.Comment.HeaderText = "Comment"
+        Me.Comment.MinimumWidth = 6
         Me.Comment.Name = "Comment"
-        Me.Comment.Width = 76
+        Me.Comment.Width = 96
         '
         'tbpProducts
         '
         Me.tbpProducts.Controls.Add(Me.tblProductSheet)
-        Me.tbpProducts.Location = New System.Drawing.Point(4, 22)
+        Me.tbpProducts.Location = New System.Drawing.Point(4, 25)
+        Me.tbpProducts.Margin = New System.Windows.Forms.Padding(4)
         Me.tbpProducts.Name = "tbpProducts"
-        Me.tbpProducts.Padding = New System.Windows.Forms.Padding(3)
-        Me.tbpProducts.Size = New System.Drawing.Size(884, 303)
+        Me.tbpProducts.Padding = New System.Windows.Forms.Padding(4)
+        Me.tbpProducts.Size = New System.Drawing.Size(1181, 375)
         Me.tbpProducts.TabIndex = 1
         Me.tbpProducts.Text = "List Product"
         Me.tbpProducts.UseVisualStyleBackColor = True
@@ -537,7 +586,8 @@ Partial Class ModificationValidationTable
         Me.tblProductSheet.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.tblProductSheet.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.clmErrorP, Me.clmTagID, Me.clmProductID, Me.clmQuantity, Me.clmModID})
         Me.tblProductSheet.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.tblProductSheet.Location = New System.Drawing.Point(3, 3)
+        Me.tblProductSheet.Location = New System.Drawing.Point(4, 4)
+        Me.tblProductSheet.Margin = New System.Windows.Forms.Padding(4)
         Me.tblProductSheet.Name = "tblProductSheet"
         DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter
         DataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Control
@@ -547,7 +597,8 @@ Partial Class ModificationValidationTable
         DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText
         DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
         Me.tblProductSheet.RowHeadersDefaultCellStyle = DataGridViewCellStyle2
-        Me.tblProductSheet.Size = New System.Drawing.Size(878, 297)
+        Me.tblProductSheet.RowHeadersWidth = 51
+        Me.tblProductSheet.Size = New System.Drawing.Size(1173, 367)
         Me.tblProductSheet.TabIndex = 0
         '
         'clmErrorP
@@ -555,42 +606,49 @@ Partial Class ModificationValidationTable
         Me.clmErrorP.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
         Me.clmErrorP.Frozen = True
         Me.clmErrorP.HeaderText = "Error"
+        Me.clmErrorP.MinimumWidth = 6
         Me.clmErrorP.Name = "clmErrorP"
         Me.clmErrorP.ReadOnly = True
         Me.clmErrorP.Visible = False
+        Me.clmErrorP.Width = 125
         '
         'clmTagID
         '
         Me.clmTagID.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
         Me.clmTagID.HeaderText = "TagID"
+        Me.clmTagID.MinimumWidth = 6
         Me.clmTagID.Name = "clmTagID"
         '
         'clmProductID
         '
         Me.clmProductID.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
         Me.clmProductID.HeaderText = "ProductID"
+        Me.clmProductID.MinimumWidth = 6
         Me.clmProductID.Name = "clmProductID"
         '
         'clmQuantity
         '
         Me.clmQuantity.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
         Me.clmQuantity.HeaderText = "Quantity"
+        Me.clmQuantity.MinimumWidth = 6
         Me.clmQuantity.Name = "clmQuantity"
         '
         'clmModID
         '
         Me.clmModID.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill
         Me.clmModID.HeaderText = "ModID"
+        Me.clmModID.MinimumWidth = 6
         Me.clmModID.Name = "clmModID"
         Me.clmModID.Visible = False
         '
         'ModificationValidationTable
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(898, 450)
+        Me.ClientSize = New System.Drawing.Size(1197, 554)
         Me.Controls.Add(Me.TableLayoutPanel1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
+        Me.Margin = New System.Windows.Forms.Padding(4)
         Me.Name = "ModificationValidationTable"
         Me.Text = "ModificationValidationTable"
         Me.TableLayoutPanel1.ResumeLayout(False)

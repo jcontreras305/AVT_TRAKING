@@ -1394,8 +1394,29 @@ Public Class scafoldTarking
     Private Sub cmbProductUtilization_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbProductUtilization.SelectedIndexChanged
         Try
             If cmbProductUtilization.SelectedItem IsNot Nothing Then
+                Dim jobNoUtilization As String = "All"
+                If cmbJobNoUtilization.SelectedIndex > -1 Then
+                    jobNoUtilization = cmbJobNoUtilization.Items(cmbJobNoUtilization.SelectedIndex)
+                End If
                 Dim idProduct() As String = cmbProductUtilization.SelectedItem.ToString.Split(" ")
-                mtdScaffold.cargarDatosProductUtlization(tblBuildsMaterial, tblModificationMaterial, tblDismantleMaterial, tblInBoundMaterial, tblOutBoundMaterial, idProduct(0))
+                mtdScaffold.cargarDatosProductUtlization(tblBuildsMaterial, tblModificationMaterial, tblDismantleMaterial, tblInBoundMaterial, tblOutBoundMaterial, idProduct(0), If(jobNoUtilization = "All", "", jobNoUtilization))
+            Else
+                MessageBox.Show("Please choose a product to continue", "Important", MessageBoxButtons.OK, MessageBoxIcon.Information)
+            End If
+        Catch ex As Exception
+
+        End Try
+    End Sub
+
+    Private Sub cmbJobNoUtilization_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbJobNoUtilization.SelectedIndexChanged
+        Try
+            If cmbProductUtilization.SelectedItem IsNot Nothing Then
+                Dim jobNoUtilization As String = "All"
+                If cmbJobNoUtilization.SelectedIndex > -1 Then
+                    jobNoUtilization = cmbJobNoUtilization.Items(cmbJobNoUtilization.SelectedIndex)
+                End If
+                Dim idProduct() As String = cmbProductUtilization.SelectedItem.ToString.Split(" ")
+                mtdScaffold.cargarDatosProductUtlization(tblBuildsMaterial, tblModificationMaterial, tblDismantleMaterial, tblInBoundMaterial, tblOutBoundMaterial, idProduct(0), If(jobNoUtilization = "All", "", jobNoUtilization))
             Else
                 MessageBox.Show("Please choose a product to continue", "Important", MessageBoxButtons.OK, MessageBoxIcon.Information)
             End If
@@ -1739,7 +1760,7 @@ Public Class scafoldTarking
         If e.ColumnIndex = 0 Then
             If Not soloNumero(If(tblOutGoing.CurrentCell.Value IsNot Nothing, tblOutGoing.CurrentCell.Value.ToString(), "")) Then
                 tblOutGoing.CurrentCell.Value = "0"
-            ElseIf tblOutGoing.CurrentCell.Value.ToString() IsNot "" Then
+            ElseIf tblOutGoing.CurrentCell.Value IsNot Nothing Then
                 If CInt(tblOutGoing.CurrentCell.Value) < 0 Then
                     tblOutGoing.CurrentCell.Value = CInt(tblOutGoing.CurrentCell.Value) * -1
                 End If
@@ -4351,6 +4372,7 @@ Public Class scafoldTarking
             mtdScaffold.llenarProduct(tblProduct)
             mtdScaffold.llenarProduct(tblProductosAux)
             llenarComboJobsReportsIDclient(cmbJobProduct, IdCliente)
+            llenarComboJobsReportsIDclient(cmbJobNoUtilization, IdCliente, True)
             If cmbJobProduct.Items IsNot Nothing Then
                 cmbJobProduct.SelectedItem = cmbJobProduct.Items(0)
                 mtdScaffold.llenarTablaProductosByJobNo(tblProductByJobNo, cmbJobProduct.Items(0).ToString())
@@ -4520,13 +4542,15 @@ Public Class scafoldTarking
                 cmbClone.DataSource = cmbOriginal.DataSource
                 cmbClone.DisplayMember = cmbOriginal.DisplayMember
                 cmbClone.ValueMember = cmbOriginal.ValueMember
+                Return True
             Else
                 For Each row As Data.DataRow In tablaEmpleados.Rows
                     cmbClone.Items.Add(row.ItemArray(1))
                 Next
+                Return True
             End If
         Catch ex As Exception
-
+            Return False
         End Try
     End Function
 
@@ -4537,8 +4561,6 @@ Public Class scafoldTarking
             End If
         End If
     End Sub
-
-
     Private Sub txtLongitude_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtLongitude.KeyPress
         If Not (IsNumeric(e.KeyChar()) Or Asc(e.KeyChar) = Asc(Keys.Enter) Or Asc(e.KeyChar) = 8 Or Asc(e.KeyChar) = 45) Then
             If Not (e.KeyChar = ChrW(22) Or e.KeyChar = ChrW(3)) Then

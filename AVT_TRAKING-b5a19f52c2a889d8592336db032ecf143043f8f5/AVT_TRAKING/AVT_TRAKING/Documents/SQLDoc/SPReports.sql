@@ -3604,8 +3604,8 @@ ISNULL((select sum(pinc.quantity) from productComing as pinc
 inner join incoming as inc on inc.ticketNum = pinc.ticketNum
 where inc.jobNo = jb.jobNo and pinc.idProduct = pj.idProduct),0) as 'Incoming', 
 
-ISNULL((select sum(pout.quantity) from productOutGoing as pout 
-inner join outgoing as outg on outg.ticketNum = outg.ticketNum
+ISNULL((select sum(pout.quantity) from productOutGOing as pout 
+inner join outgoing as outg on outg.ticketNum = pout.ticketNum
 where outg.jobNo = jb.jobNo and pout.idProduct = pj.idProduct),0) as 'Outgoing',
 
 ISNULL((select sum(pinc.quantity) from productComing as pinc 
@@ -3613,7 +3613,7 @@ inner join incoming as inc on inc.ticketNum = pinc.ticketNum
 where inc.jobNo = jb.jobNo and pinc.idProduct = pj.idProduct),0)
 -
 ISNULL((select sum(pout.quantity) from productOutGoing as pout 
-inner join outgoing as outg on outg.ticketNum = outg.ticketNum
+inner join outgoing as outg on outg.ticketNum = pout.ticketNum
 where outg.jobNo = jb.jobNo and pout.idProduct = pj.idProduct),0)as 'Inventory',
 --ISNULL(pj.qty,0) as 'Inventory',
 ISNULL((select sum(pts.quantity) from productTotalScaffold as pts
@@ -3629,7 +3629,7 @@ inner join incoming as inc on inc.ticketNum = pinc.ticketNum
 where inc.jobNo = jb.jobNo and pinc.idProduct = pj.idProduct),0)
 -
 ISNULL((select sum(pout.quantity) from productOutGoing as pout 
-inner join outgoing as outg on outg.ticketNum = outg.ticketNum
+inner join outgoing as outg on outg.ticketNum = pout.ticketNum
 where outg.jobNo = jb.jobNo and pout.idProduct = pj.idProduct),0))
 -
 ISNULL((select sum(pts.quantity) from productTotalScaffold as pts

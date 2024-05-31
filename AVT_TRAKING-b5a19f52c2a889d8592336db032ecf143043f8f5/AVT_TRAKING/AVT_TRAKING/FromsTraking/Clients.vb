@@ -32,6 +32,7 @@ Public Class Clients
             txtIdClient.Text = MaxID
             limpiarcampos()
             mtd.buscarClienteTodos(tblClientes)
+            Client.selectFillClientTable()
             'Else
             '    'lblN5.Visible = True
             'lblN6.Visible = True
@@ -196,6 +197,7 @@ Public Class Clients
                 aux.Add(a)
             Next
             mtd.actualizaCliente(aux, imageToByte(imgPhoto.Image))
+            Client.selectFillClientTable()
             mtd.buscarClienteTodos(tblClientes)
         End If
     End Sub
@@ -359,8 +361,17 @@ Public Class Clients
             pc.datosClientesPO.Add(dataClient(16))
             pc.datosClientesPO.Add(dataClient(8))
             pc.numberClient = dataClient(1)
+
+            Client.idClient = dataClient(0)
+            Client.NumberClient = dataClient(1)
+            Client.FirstName = dataClient(2)
+            Client.MiddleName = dataClient(3)
+            Client.LastName = dataClient(4)
+            Client.CompanyName = dataClient(5)
+
             'mtd.buscarProyectosDeCliente(pc.tblProjectClients, IdCliente)
-            mtd.buscarProyectosDeClienteAll(pc.tblProjectClientsAll, IdCliente)
+            mtd.buscarProyectosDeClienteAll(pc.tblAllProjects, IdCliente)
+            'mtd.buscarProyectosDeClienteAll(pc.tblProjectClientsAll, IdCliente)
             pc.idCliente = IdCliente
             Me.Close()
         End If

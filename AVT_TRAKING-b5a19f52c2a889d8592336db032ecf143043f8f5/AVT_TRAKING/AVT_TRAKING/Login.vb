@@ -71,6 +71,8 @@ Public Class Login
                         If listImg IsNot Nothing And listImg.Count > 0 Then
                             Dim arrayByte As Byte() = listImg(cmbImagenes.SelectedIndex)
                             a.imageClientLogin = BytetoImage(arrayByte)
+                            Client.selectClient(cmbImagenes.Items(cmbImagenes.SelectedIndex))
+                            Client.selectFillClientTable()
                         End If
                         If nUser.ListAccess IsNot Nothing Then
                             a.validAccess(nUser)
@@ -229,5 +231,9 @@ Public Class Login
                 cmbImagenes.SelectedItem = cmbImagenes.Items(0)
             End If
         End If
+    End Sub
+
+    Private Sub cmbImagenes_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbImagenes.SelectedIndexChanged
+
     End Sub
 End Class

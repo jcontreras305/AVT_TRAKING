@@ -93,35 +93,13 @@ Partial Class ProjectsClients
         Me.btnAdd = New System.Windows.Forms.Button()
         Me.btnCancelSaveJob = New System.Windows.Forms.Button()
         Me.Button2 = New System.Windows.Forms.Button()
+        Me.Panel11 = New System.Windows.Forms.Panel()
+        Me.Label12 = New System.Windows.Forms.Label()
+        Me.cmbClient = New System.Windows.Forms.ComboBox()
         Me.PanelChildForm = New System.Windows.Forms.Panel()
         Me.TableLayoutPanel4 = New System.Windows.Forms.TableLayoutPanel()
         Me.Panel3 = New System.Windows.Forms.Panel()
-        Me.tblProjectClientsAll = New System.Windows.Forms.DataGridView()
-        Me.clmWorkOrder = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.clmProjectDescription = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.clmCoplete = New System.Windows.Forms.DataGridViewCheckBoxColumn()
-        Me.clmTotalSpend = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.clmTotalHoursST = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.clmTotalAmountST = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.clmTotalHoursOT = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.clmTotalAmountOT = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.clmTotalHours3 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.clmTotalAmount3 = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.clmTotalExpensesSpend = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.clmTotalMaterialSpend = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.jobNo = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.workTMLumpSum = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.costDistribution = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.custumerNo = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.contractNo = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.costCode = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.idClient = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.clmIdPO = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.idTask = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.idAuxWO = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.idAux = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.photo = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.PostingProject = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.tblAllProjects = New System.Windows.Forms.DataGridView()
         Me.Panel1.SuspendLayout()
         Me.pnlButtonsPOCl.SuspendLayout()
         Me.PnllSetup.SuspendLayout()
@@ -142,10 +120,11 @@ Partial Class ProjectsClients
         Me.Panel6.SuspendLayout()
         Me.Panel5.SuspendLayout()
         Me.Panel10.SuspendLayout()
+        Me.Panel11.SuspendLayout()
         Me.PanelChildForm.SuspendLayout()
         Me.TableLayoutPanel4.SuspendLayout()
         Me.Panel3.SuspendLayout()
-        CType(Me.tblProjectClientsAll, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.tblAllProjects, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'Panel1
@@ -938,6 +917,7 @@ Partial Class ProjectsClients
         Me.TableLayoutPanel1.Controls.Add(Me.GroupBox1, 1, 1)
         Me.TableLayoutPanel1.Controls.Add(Me.TableLayoutPanel2, 0, 1)
         Me.TableLayoutPanel1.Controls.Add(Me.Button2, 1, 0)
+        Me.TableLayoutPanel1.Controls.Add(Me.Panel11, 0, 0)
         Me.TableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Top
         Me.TableLayoutPanel1.Location = New System.Drawing.Point(0, 0)
         Me.TableLayoutPanel1.Margin = New System.Windows.Forms.Padding(4)
@@ -1126,6 +1106,35 @@ Partial Class ProjectsClients
         Me.Button2.TabIndex = 3
         Me.Button2.UseVisualStyleBackColor = True
         '
+        'Panel11
+        '
+        Me.Panel11.Controls.Add(Me.Label12)
+        Me.Panel11.Controls.Add(Me.cmbClient)
+        Me.Panel11.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Panel11.Location = New System.Drawing.Point(3, 3)
+        Me.Panel11.Name = "Panel11"
+        Me.Panel11.Size = New System.Drawing.Size(372, 37)
+        Me.Panel11.TabIndex = 16
+        '
+        'Label12
+        '
+        Me.Label12.AutoSize = True
+        Me.Label12.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.Label12.Location = New System.Drawing.Point(13, 8)
+        Me.Label12.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.Label12.Name = "Label12"
+        Me.Label12.Size = New System.Drawing.Size(43, 17)
+        Me.Label12.TabIndex = 8
+        Me.Label12.Text = "Client"
+        '
+        'cmbClient
+        '
+        Me.cmbClient.FormattingEnabled = True
+        Me.cmbClient.Location = New System.Drawing.Point(63, 5)
+        Me.cmbClient.Name = "cmbClient"
+        Me.cmbClient.Size = New System.Drawing.Size(303, 24)
+        Me.cmbClient.TabIndex = 16
+        '
         'PanelChildForm
         '
         Me.PanelChildForm.BackColor = System.Drawing.Color.FromArgb(CType(CType(81, Byte), Integer), CType(CType(93, Byte), Integer), CType(CType(102, Byte), Integer))
@@ -1156,7 +1165,7 @@ Partial Class ProjectsClients
         '
         'Panel3
         '
-        Me.Panel3.Controls.Add(Me.tblProjectClientsAll)
+        Me.Panel3.Controls.Add(Me.tblAllProjects)
         Me.Panel3.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel3.Location = New System.Drawing.Point(4, 4)
         Me.Panel3.Margin = New System.Windows.Forms.Padding(4)
@@ -1164,232 +1173,20 @@ Partial Class ProjectsClients
         Me.Panel3.Size = New System.Drawing.Size(1206, 470)
         Me.Panel3.TabIndex = 0
         '
-        'tblProjectClientsAll
+        'tblAllProjects
         '
-        Me.tblProjectClientsAll.AllowUserToAddRows = False
-        Me.tblProjectClientsAll.AllowUserToDeleteRows = False
-        Me.tblProjectClientsAll.BackgroundColor = System.Drawing.SystemColors.ControlLight
-        Me.tblProjectClientsAll.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.tblProjectClientsAll.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.clmWorkOrder, Me.clmProjectDescription, Me.clmCoplete, Me.clmTotalSpend, Me.clmTotalHoursST, Me.clmTotalAmountST, Me.clmTotalHoursOT, Me.clmTotalAmountOT, Me.clmTotalHours3, Me.clmTotalAmount3, Me.clmTotalExpensesSpend, Me.clmTotalMaterialSpend, Me.jobNo, Me.workTMLumpSum, Me.costDistribution, Me.custumerNo, Me.contractNo, Me.costCode, Me.idClient, Me.clmIdPO, Me.idTask, Me.idAuxWO, Me.idAux, Me.photo, Me.PostingProject})
-        Me.tblProjectClientsAll.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.tblProjectClientsAll.Location = New System.Drawing.Point(0, 0)
-        Me.tblProjectClientsAll.Margin = New System.Windows.Forms.Padding(4)
-        Me.tblProjectClientsAll.Name = "tblProjectClientsAll"
-        Me.tblProjectClientsAll.ReadOnly = True
-        Me.tblProjectClientsAll.RowHeadersWidth = 51
-        Me.tblProjectClientsAll.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.tblProjectClientsAll.Size = New System.Drawing.Size(1206, 470)
-        Me.tblProjectClientsAll.TabIndex = 7
-        '
-        'clmWorkOrder
-        '
-        Me.clmWorkOrder.HeaderText = "Work Order"
-        Me.clmWorkOrder.MinimumWidth = 6
-        Me.clmWorkOrder.Name = "clmWorkOrder"
-        Me.clmWorkOrder.ReadOnly = True
-        Me.clmWorkOrder.Width = 125
-        '
-        'clmProjectDescription
-        '
-        Me.clmProjectDescription.HeaderText = "Project Description"
-        Me.clmProjectDescription.MinimumWidth = 6
-        Me.clmProjectDescription.Name = "clmProjectDescription"
-        Me.clmProjectDescription.ReadOnly = True
-        Me.clmProjectDescription.Width = 125
-        '
-        'clmCoplete
-        '
-        Me.clmCoplete.HeaderText = "Complete"
-        Me.clmCoplete.MinimumWidth = 6
-        Me.clmCoplete.Name = "clmCoplete"
-        Me.clmCoplete.ReadOnly = True
-        Me.clmCoplete.Width = 125
-        '
-        'clmTotalSpend
-        '
-        Me.clmTotalSpend.HeaderText = "Total Spend"
-        Me.clmTotalSpend.MinimumWidth = 6
-        Me.clmTotalSpend.Name = "clmTotalSpend"
-        Me.clmTotalSpend.ReadOnly = True
-        Me.clmTotalSpend.Width = 125
-        '
-        'clmTotalHoursST
-        '
-        Me.clmTotalHoursST.HeaderText = "Total Hours ST"
-        Me.clmTotalHoursST.MinimumWidth = 6
-        Me.clmTotalHoursST.Name = "clmTotalHoursST"
-        Me.clmTotalHoursST.ReadOnly = True
-        Me.clmTotalHoursST.Width = 125
-        '
-        'clmTotalAmountST
-        '
-        Me.clmTotalAmountST.HeaderText = "Total Amount ST"
-        Me.clmTotalAmountST.MinimumWidth = 6
-        Me.clmTotalAmountST.Name = "clmTotalAmountST"
-        Me.clmTotalAmountST.ReadOnly = True
-        Me.clmTotalAmountST.Width = 125
-        '
-        'clmTotalHoursOT
-        '
-        Me.clmTotalHoursOT.HeaderText = "Total Hours OT"
-        Me.clmTotalHoursOT.MinimumWidth = 6
-        Me.clmTotalHoursOT.Name = "clmTotalHoursOT"
-        Me.clmTotalHoursOT.ReadOnly = True
-        Me.clmTotalHoursOT.Width = 125
-        '
-        'clmTotalAmountOT
-        '
-        Me.clmTotalAmountOT.HeaderText = "Total Amount OT"
-        Me.clmTotalAmountOT.MinimumWidth = 6
-        Me.clmTotalAmountOT.Name = "clmTotalAmountOT"
-        Me.clmTotalAmountOT.ReadOnly = True
-        Me.clmTotalAmountOT.Width = 125
-        '
-        'clmTotalHours3
-        '
-        Me.clmTotalHours3.HeaderText = "Total Hours 3"
-        Me.clmTotalHours3.MinimumWidth = 6
-        Me.clmTotalHours3.Name = "clmTotalHours3"
-        Me.clmTotalHours3.ReadOnly = True
-        Me.clmTotalHours3.Width = 125
-        '
-        'clmTotalAmount3
-        '
-        Me.clmTotalAmount3.HeaderText = "Total Amount 3"
-        Me.clmTotalAmount3.MinimumWidth = 6
-        Me.clmTotalAmount3.Name = "clmTotalAmount3"
-        Me.clmTotalAmount3.ReadOnly = True
-        Me.clmTotalAmount3.Width = 125
-        '
-        'clmTotalExpensesSpend
-        '
-        Me.clmTotalExpensesSpend.HeaderText = "Total Expenses Spend"
-        Me.clmTotalExpensesSpend.MinimumWidth = 6
-        Me.clmTotalExpensesSpend.Name = "clmTotalExpensesSpend"
-        Me.clmTotalExpensesSpend.ReadOnly = True
-        Me.clmTotalExpensesSpend.Width = 125
-        '
-        'clmTotalMaterialSpend
-        '
-        Me.clmTotalMaterialSpend.HeaderText = "Total Material Spend"
-        Me.clmTotalMaterialSpend.MinimumWidth = 6
-        Me.clmTotalMaterialSpend.Name = "clmTotalMaterialSpend"
-        Me.clmTotalMaterialSpend.ReadOnly = True
-        Me.clmTotalMaterialSpend.Width = 125
-        '
-        'jobNo
-        '
-        Me.jobNo.HeaderText = "Job No"
-        Me.jobNo.MinimumWidth = 6
-        Me.jobNo.Name = "jobNo"
-        Me.jobNo.ReadOnly = True
-        Me.jobNo.Width = 125
-        '
-        'workTMLumpSum
-        '
-        Me.workTMLumpSum.HeaderText = "Work TM Lump Sum"
-        Me.workTMLumpSum.MinimumWidth = 6
-        Me.workTMLumpSum.Name = "workTMLumpSum"
-        Me.workTMLumpSum.ReadOnly = True
-        Me.workTMLumpSum.Visible = False
-        Me.workTMLumpSum.Width = 125
-        '
-        'costDistribution
-        '
-        Me.costDistribution.HeaderText = "costDistribution"
-        Me.costDistribution.MinimumWidth = 6
-        Me.costDistribution.Name = "costDistribution"
-        Me.costDistribution.ReadOnly = True
-        Me.costDistribution.Visible = False
-        Me.costDistribution.Width = 125
-        '
-        'custumerNo
-        '
-        Me.custumerNo.HeaderText = "custumerNo"
-        Me.custumerNo.MinimumWidth = 6
-        Me.custumerNo.Name = "custumerNo"
-        Me.custumerNo.ReadOnly = True
-        Me.custumerNo.Visible = False
-        Me.custumerNo.Width = 125
-        '
-        'contractNo
-        '
-        Me.contractNo.HeaderText = "contractNo"
-        Me.contractNo.MinimumWidth = 6
-        Me.contractNo.Name = "contractNo"
-        Me.contractNo.ReadOnly = True
-        Me.contractNo.Visible = False
-        Me.contractNo.Width = 125
-        '
-        'costCode
-        '
-        Me.costCode.HeaderText = "costCode"
-        Me.costCode.MinimumWidth = 6
-        Me.costCode.Name = "costCode"
-        Me.costCode.ReadOnly = True
-        Me.costCode.Visible = False
-        Me.costCode.Width = 125
-        '
-        'idClient
-        '
-        Me.idClient.HeaderText = "idClient"
-        Me.idClient.MinimumWidth = 6
-        Me.idClient.Name = "idClient"
-        Me.idClient.ReadOnly = True
-        Me.idClient.Visible = False
-        Me.idClient.Width = 125
-        '
-        'clmIdPO
-        '
-        Me.clmIdPO.HeaderText = "idPO"
-        Me.clmIdPO.MinimumWidth = 6
-        Me.clmIdPO.Name = "clmIdPO"
-        Me.clmIdPO.ReadOnly = True
-        Me.clmIdPO.Width = 125
-        '
-        'idTask
-        '
-        Me.idTask.HeaderText = "idTask"
-        Me.idTask.MinimumWidth = 6
-        Me.idTask.Name = "idTask"
-        Me.idTask.ReadOnly = True
-        Me.idTask.Visible = False
-        Me.idTask.Width = 125
-        '
-        'idAuxWO
-        '
-        Me.idAuxWO.HeaderText = "idAuxWO"
-        Me.idAuxWO.MinimumWidth = 6
-        Me.idAuxWO.Name = "idAuxWO"
-        Me.idAuxWO.ReadOnly = True
-        Me.idAuxWO.Visible = False
-        Me.idAuxWO.Width = 125
-        '
-        'idAux
-        '
-        Me.idAux.HeaderText = "idAux"
-        Me.idAux.MinimumWidth = 6
-        Me.idAux.Name = "idAux"
-        Me.idAux.ReadOnly = True
-        Me.idAux.Visible = False
-        Me.idAux.Width = 125
-        '
-        'photo
-        '
-        Me.photo.HeaderText = "photo"
-        Me.photo.MinimumWidth = 6
-        Me.photo.Name = "photo"
-        Me.photo.ReadOnly = True
-        Me.photo.Visible = False
-        Me.photo.Width = 125
-        '
-        'PostingProject
-        '
-        Me.PostingProject.HeaderText = "Posting Project"
-        Me.PostingProject.MinimumWidth = 6
-        Me.PostingProject.Name = "PostingProject"
-        Me.PostingProject.ReadOnly = True
-        Me.PostingProject.Width = 125
+        Me.tblAllProjects.AllowUserToAddRows = False
+        Me.tblAllProjects.AllowUserToDeleteRows = False
+        Me.tblAllProjects.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.tblAllProjects.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.tblAllProjects.Location = New System.Drawing.Point(0, 0)
+        Me.tblAllProjects.Name = "tblAllProjects"
+        Me.tblAllProjects.ReadOnly = True
+        Me.tblAllProjects.RowHeadersWidth = 51
+        Me.tblAllProjects.RowTemplate.Height = 24
+        Me.tblAllProjects.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
+        Me.tblAllProjects.Size = New System.Drawing.Size(1206, 470)
+        Me.tblAllProjects.TabIndex = 8
         '
         'ProjectsClients
         '
@@ -1431,10 +1228,12 @@ Partial Class ProjectsClients
         Me.Panel5.ResumeLayout(False)
         Me.Panel5.PerformLayout()
         Me.Panel10.ResumeLayout(False)
+        Me.Panel11.ResumeLayout(False)
+        Me.Panel11.PerformLayout()
         Me.PanelChildForm.ResumeLayout(False)
         Me.TableLayoutPanel4.ResumeLayout(False)
         Me.Panel3.ResumeLayout(False)
-        CType(Me.tblProjectClientsAll, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.tblAllProjects, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -1503,39 +1302,17 @@ Partial Class ProjectsClients
     Friend WithEvents Panel3 As Panel
     Friend WithEvents btnTrack As Button
     Friend WithEvents btnKPI As Button
-    Public WithEvents tblProjectClientsAll As DataGridView
     Friend WithEvents pnlButtonsPOCl As Panel
     Friend WithEvents btnPBI As Button
     Friend WithEvents btnCancelSaveJob As Button
     Friend WithEvents Button1 As Button
     Friend WithEvents btnUpdateProject As Button
-    Friend WithEvents clmWorkOrder As DataGridViewTextBoxColumn
-    Friend WithEvents clmProjectDescription As DataGridViewTextBoxColumn
-    Friend WithEvents clmCoplete As DataGridViewCheckBoxColumn
-    Friend WithEvents clmTotalSpend As DataGridViewTextBoxColumn
-    Friend WithEvents clmTotalHoursST As DataGridViewTextBoxColumn
-    Friend WithEvents clmTotalAmountST As DataGridViewTextBoxColumn
-    Friend WithEvents clmTotalHoursOT As DataGridViewTextBoxColumn
-    Friend WithEvents clmTotalAmountOT As DataGridViewTextBoxColumn
-    Friend WithEvents clmTotalHours3 As DataGridViewTextBoxColumn
-    Friend WithEvents clmTotalAmount3 As DataGridViewTextBoxColumn
-    Friend WithEvents clmTotalExpensesSpend As DataGridViewTextBoxColumn
-    Friend WithEvents clmTotalMaterialSpend As DataGridViewTextBoxColumn
-    Friend WithEvents jobNo As DataGridViewTextBoxColumn
-    Friend WithEvents workTMLumpSum As DataGridViewTextBoxColumn
-    Friend WithEvents costDistribution As DataGridViewTextBoxColumn
-    Friend WithEvents custumerNo As DataGridViewTextBoxColumn
-    Friend WithEvents contractNo As DataGridViewTextBoxColumn
-    Friend WithEvents costCode As DataGridViewTextBoxColumn
-    Friend WithEvents idClient As DataGridViewTextBoxColumn
-    Friend WithEvents clmIdPO As DataGridViewTextBoxColumn
-    Friend WithEvents idTask As DataGridViewTextBoxColumn
-    Friend WithEvents idAuxWO As DataGridViewTextBoxColumn
-    Friend WithEvents idAux As DataGridViewTextBoxColumn
-    Friend WithEvents photo As DataGridViewTextBoxColumn
-    Friend WithEvents PostingProject As DataGridViewTextBoxColumn
     Friend WithEvents Label9 As Label
     Friend WithEvents txtPostingProject As TextBox
     Friend WithEvents Panel10 As Panel
     Friend WithEvents btnTrackVehicle As Button
+    Friend WithEvents Panel11 As Panel
+    Friend WithEvents Label12 As Label
+    Friend WithEvents cmbClient As ComboBox
+    Public WithEvents tblAllProjects As DataGridView
 End Class

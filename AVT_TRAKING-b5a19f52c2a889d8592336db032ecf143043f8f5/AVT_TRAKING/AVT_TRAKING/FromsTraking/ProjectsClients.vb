@@ -78,16 +78,34 @@ Public Class ProjectsClients
 
     Private Sub btnProyeccts_Click(sender As Object, e As EventArgs) Handles btnProyeccts.Click
         Dim pjc As New ProjectsCosts
-        If tblProjectClientsAll.SelectedRows.Count() > 0 Then
-            pjc.JobNumber = If(tblProjectClientsAll.SelectedRows(0).Cells("jobNo").Value IsNot Nothing, tblProjectClientsAll.SelectedRows(0).Cells("jobNo").Value.ToString, "")
-            pjc.idCliente = If(tblProjectClientsAll.SelectedRows(0).Cells("idClient").Value IsNot Nothing, tblProjectClientsAll.SelectedRows(0).Cells("idClient").Value.ToString, "")
-            pjc.PO = If(tblProjectClientsAll.SelectedRows(0).Cells("clmIdPO").Value IsNot Nothing, tblProjectClientsAll.SelectedRows(0).Cells("clmIdPO").Value.ToString, "")
+        If tblAllProjects.SelectedRows.Count > 0 Then
+            pjc.JobNumber = If(tblAllProjects.SelectedRows(0).Cells("jobNo").Value IsNot Nothing, tblAllProjects.SelectedRows(0).Cells("jobNo").Value.ToString, "")
+            pjc.idCliente = If(tblAllProjects.SelectedRows(0).Cells("idClient").Value IsNot Nothing, tblAllProjects.SelectedRows(0).Cells("idClient").Value.ToString, "")
+            pjc.PO = If(tblAllProjects.SelectedRows(0).Cells("IdPO").Value IsNot Nothing, tblAllProjects.SelectedRows(0).Cells("IdPO").Value.ToString, "")
             If workOrder = "" Or workOrder = Nothing Then
                 pjc.WorkOrder = ""
                 pjc.idAuxWO = ""
             Else
-                pjc.idAuxWO = tblProjectClientsAll.CurrentRow().Cells("idAuxWO").Value
+                pjc.idAuxWO = tblAllProjects.CurrentRow().Cells("idAuxWO").Value
                 pjc.WorkOrder = workOrder
+            End If
+        ElseIf tblAllProjects.Rows IsNot Nothing Then
+            If tblAllProjects.Rows.Count > 0 Then
+                pjc.JobNumber = If(tblAllProjects.Rows(0).Cells("jobNo").Value IsNot Nothing, tblAllProjects.Rows(0).Cells("jobNo").Value.ToString, "")
+                pjc.idCliente = If(tblAllProjects.Rows(0).Cells("idClient").Value IsNot Nothing, tblAllProjects.Rows(0).Cells("idClient").Value.ToString, "")
+                pjc.PO = If(tblAllProjects.Rows(0).Cells("IdPO").Value IsNot Nothing, tblAllProjects.Rows(0).Cells("IdPO").Value.ToString, "")
+                If workOrder = "" Or workOrder = Nothing Then
+                    pjc.WorkOrder = ""
+                    pjc.idAuxWO = ""
+                Else
+                    pjc.idAuxWO = tblAllProjects.CurrentRow().Cells("idAuxWO").Value
+                    pjc.WorkOrder = workOrder
+                End If
+            Else
+                pjc.idAuxWO = ""
+                pjc.WorkOrder = ""
+                pjc.JobNumber = ""
+                pjc.idCliente = ""
             End If
         Else
             pjc.idAuxWO = ""
@@ -98,7 +116,7 @@ Public Class ProjectsClients
         Me.Visible = False
         pjc.ShowDialog()
         Me.Visible = True
-        mtdClient.buscarProyectosDeClienteAll(tblProjectClientsAll, idCliente)
+        mtdClient.buscarProyectosDeClienteAll(tblAllProjects, idCliente)
     End Sub
 
 
@@ -112,11 +130,51 @@ Public Class ProjectsClients
         Dim cln As New Clients
         AddOwnedForm(cln)
         cln.btnSelectClient.Visible = True
+        Find = True
         cln.ShowDialog()
+        Find = False
         If idAux <> idCliente Then
             LimpriarCampos()
             llenarCampos()
         End If
+    End Sub
+
+    Private Sub cmbClient_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbClient.SelectedIndexChanged
+        Try
+
+            Dim idAux = idCliente
+            Find = True
+            If cmbClient.Items IsNot Nothing Then
+
+                Dim numberCl() As String = cmbClient.Items(cmbClient.SelectedIndex).ToString.Split(" ")
+
+                Client.selectClient(CInt(numberCl(0)))
+
+                datosClientesPO.Clear()
+                datosClientesPO.Add(Client.idClient)
+                datosClientesPO.Add(Client.FirstName + " " + Client.MiddleName + " " + Client.LastName)
+                datosClientesPO.Add(Client.CompanyName)
+                datosClientesPO.Add(Client.Avenue)
+                datosClientesPO.Add(Client.City)
+                datosClientesPO.Add(Client.Providence)
+                datosClientesPO.Add(Client.PostalCode)
+                datosClientesPO.Add(Client.PhoneNumber)
+                numberClient = Client.NumberClient
+
+                'mtd.buscarProyectosDeCliente(pc.tblProjectClients, IdCliente)
+                mtdClient.buscarProyectosDeClienteAll(tblAllProjects, Client.idClient)
+                'mtd.buscarProyectosDeClienteAll(pc.tblProjectClientsAll, IdCliente)
+                idCliente = Client.idClient
+            End If
+            Find = False
+            If idAux <> idCliente Then
+                LimpriarCampos()
+                llenarCampos()
+                pcbLogoPC.Image = Client.ImageClient
+            End If
+        Catch ex As Exception
+
+        End Try
     End Sub
 
     Private Sub LimpriarCampos()
@@ -219,9 +277,9 @@ Public Class ProjectsClients
     Private Sub btnFindClintProyects_Click(sender As Object, e As EventArgs) Handles btnFindClintProyects.Click
         Dim idAux = idCliente
         Find = True
-        mtdClient.buscarProyectosDeClientePorProyetoAll(tblProjectClientsAll, txtFindClientProyects.Text)
-        If tblProjectClientsAll.Rows.Count() > 0 Then
-            idCliente = tblProjectClientsAll.Rows(0).Cells("idClient").Value
+        mtdClient.buscarProyectosDeClientePorProyetoAll(tblAllProjects, txtFindClientProyects.Text)
+        If tblAllProjects.Rows.Count() > 0 Then
+            idCliente = tblAllProjects.Rows(0).Cells("idClient").Value
             If idAux <> idCliente Then
                 LimpriarCampos()
             End If
@@ -248,7 +306,7 @@ Public Class ProjectsClients
         txtPC.Text = datosClientesPO(6)
         txtPhoneNumber.Text = datosClientesPO(7)
         If Not Find Then
-            mtdClient.buscarProyectosDeClientePorProyetoAll(tblProjectClientsAll, idCliente)
+            'mtdClient.buscarProyectosDeClientePorProyetoAll(tblProjectClientsAll, idCliente)
         End If
         'For Each row As DataGridViewRow In tblProjectClients.Rows
         '    If row.Cells("cmp").Value = 0 Then
@@ -260,9 +318,23 @@ Public Class ProjectsClients
 
         'buscar los datos del proyecto 
 
-        If tblProjectClientsAll.Rows IsNot Nothing Then
-            If tblProjectClientsAll.Rows.Count() > 0 Then
-                llenarCampos(tblProjectClientsAll.Rows(0))
+        'If tblProjectClientsAll.Rows IsNot Nothing Then
+        '    If tblProjectClientsAll.Rows.Count() > 0 Then
+        '        llenarCampos(tblProjectClientsAll.Rows(0))
+        '    End If
+        'End If
+
+        If tblAllProjects.Rows IsNot Nothing Then
+            If tblAllProjects.Rows.Count > 0 Then
+                llenarCampos(tblAllProjects.Rows(0))
+            Else
+                idPO = Nothing
+                jobNum = Nothing
+                posting_Project = Nothing
+                idWOAuxTaxes = Nothing
+                workOrder = Nothing
+                task = Nothing
+                taskTaxes = Nothing
             End If
         End If
     End Sub
@@ -270,8 +342,8 @@ Public Class ProjectsClients
 
     Public Sub llenarCampos(ByVal fila As DataGridViewRow)
         'buscar los datos del proyecto 
-        If tblProjectClientsAll.Rows IsNot Nothing Then
-            If tblProjectClientsAll.Rows.Count > 0 Then
+        If tblAllProjects.Rows IsNot Nothing Then
+            If tblAllProjects.Rows.Count > 0 Then
                 cmbWorkTMLumoSum.SelectedIndex = If(fila.Cells("workTMLumpSum").Value <> "", cmbWorkTMLumoSum.FindString(fila.Cells("workTMLumpSum").Value), Nothing)
                 cmbCostDistribution.SelectedIndex = If(fila.Cells("costDistribution").Value <> "", cmbCostDistribution.FindString(fila.Cells("costDistribution").Value), Nothing)
                 cmbCostCode.SelectedIndex = If(fila.Cells("costCode").Value, cmbCostCode.FindString(fila.Cells("costCode").Value), Nothing)
@@ -279,6 +351,15 @@ Public Class ProjectsClients
                 txtContractNo.Text = fila.Cells("contractNo").Value
                 txtJobNumber.Text = fila.Cells("jobNo").Value
                 txtPostingProject.Text = fila.Cells("PostingProject").Value
+
+                idPO = fila.Cells("IdPO").Value
+                jobNum = fila.Cells("jobNo").Value
+                posting_Project = fila.Cells("PostingProject").Value
+                idCliente = fila.Cells("idClient").Value
+                idWOAuxTaxes = fila.Cells("idAuxWO").Value
+                separaridWODeidTask(fila.Cells("Work Order").Value)
+                taskTaxes = fila.Cells("idAux").Value
+
             End If
         End If
     End Sub
@@ -353,7 +434,6 @@ Public Class ProjectsClients
     End Sub
 
     Private Sub btnTimeEnterSheets_Click(sender As Object, e As EventArgs) Handles btnTimeEnterSheets.Click
-
         Dim hpe As New HoursWeekPerEmployees
         hpe.ShowDialog()
     End Sub
@@ -429,12 +509,12 @@ Public Class ProjectsClients
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         Try
-            If tblProjectClientsAll.SelectedRows.Count > 0 Then
+            If tblAllProjects.Rows.Count > 0 Then
                 If DialogResult.Yes = MessageBox.Show("The Selected row(s) will be deleted. Are you sure to continue?", "Message", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) Then
-                    If mtdJobs.deleteProject(tblProjectClientsAll) Then
+                    If mtdJobs.deleteProject(tblAllProjects) Then
                         MsgBox("Successful.")
-                        For Each row As DataGridViewRow In tblProjectClientsAll.SelectedRows
-                            tblProjectClientsAll.Rows.Remove(row)
+                        For Each row As DataGridViewRow In tblAllProjects.Rows
+                            tblAllProjects.Rows.Remove(row)
                         Next
                     End If
                 End If
@@ -482,14 +562,12 @@ Public Class ProjectsClients
         End Try
     End Sub
 
-    Private Sub tblProjectClientsAll_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles tblProjectClientsAll.CellContentClick
 
-    End Sub
 
     Private Sub btnTrackVehicle_Click(sender As Object, e As EventArgs) Handles btnTrackVehicle.Click
         Dim VT As New VehicleTrack
         If numberClient IsNot Nothing Then
-            VT.numClient = numberClient
+            VT.numClient = Client.NumberClient
             VT.jobNo = jobNum
         End If
         VT.ShowDialog()
@@ -511,23 +589,40 @@ Public Class ProjectsClients
         End If
     End Sub
 
-    Private Sub tblProjectClientsAll_SelectionChangued(sender As Object, e As EventArgs) Handles tblProjectClientsAll.SelectionChanged
-        If tblProjectClientsAll.CurrentRow IsNot Nothing And Find = False Then
-            idPO = tblProjectClientsAll.CurrentRow.Cells("clmIdPO").Value
-            jobNum = tblProjectClientsAll.CurrentRow.Cells("jobNo").Value
-            posting_Project = tblProjectClientsAll.CurrentRow.Cells("PostingProject").Value
-            idCliente = tblProjectClientsAll.CurrentRow.Cells("idClient").Value
-            idWOAuxTaxes = tblProjectClientsAll.CurrentRow.Cells("idAuxWO").Value
-            separaridWODeidTask(tblProjectClientsAll.CurrentRow.Cells("clmWorkOrder").Value)
-            taskTaxes = tblProjectClientsAll.CurrentRow.Cells("idAux").Value
-            llenarCampos(tblProjectClientsAll.CurrentRow)
-            If tblProjectClientsAll.CurrentRow.Cells("photo").Value IsNot Nothing Then
-                pcbLogoPC.Image = BytetoImage(tblProjectClientsAll.CurrentRow.Cells("photo").Value)
+    Private Sub tblAllProjects_SelectionChangued(sender As Object, e As EventArgs) Handles tblAllProjects.SelectionChanged
+        If tblAllProjects.CurrentRow IsNot Nothing And Find = False Then
+            idPO = tblAllProjects.CurrentRow.Cells("IdPO").Value
+            jobNum = tblAllProjects.CurrentRow.Cells("jobNo").Value
+            posting_Project = tblAllProjects.CurrentRow.Cells("PostingProject").Value
+            idCliente = tblAllProjects.CurrentRow.Cells("idClient").Value
+            idWOAuxTaxes = tblAllProjects.CurrentRow.Cells("idAuxWO").Value
+            separaridWODeidTask(tblAllProjects.CurrentRow.Cells("Work Order").Value)
+            taskTaxes = tblAllProjects.CurrentRow.Cells("idAux").Value
+            llenarCampos(tblAllProjects.CurrentRow)
+            If tblAllProjects.CurrentRow.Cells("photo").Value IsNot Nothing Then
+                pcbLogoPC.Image = BytetoImage(tblAllProjects.CurrentRow.Cells("photo").Value)
             Else
                 pcbLogoPC.Image.Dispose()
             End If
         End If
     End Sub
+    'Private Sub tblProjectClientsAll_SelectionChangued(sender As Object, e As EventArgs) Handles tblProjectClientsAll.SelectionChanged
+    '    If tblProjectClientsAll.CurrentRow IsNot Nothing And Find = False Then
+    '        idPO = tblProjectClientsAll.CurrentRow.Cells("clmIdPO").Value
+    '        jobNum = tblProjectClientsAll.CurrentRow.Cells("jobNo").Value
+    '        posting_Project = tblProjectClientsAll.CurrentRow.Cells("PostingProject").Value
+    '        idCliente = tblProjectClientsAll.CurrentRow.Cells("idClient").Value
+    '        idWOAuxTaxes = tblProjectClientsAll.CurrentRow.Cells("idAuxWO").Value
+    '        separaridWODeidTask(tblProjectClientsAll.CurrentRow.Cells("clmWorkOrder").Value)
+    '        taskTaxes = tblProjectClientsAll.CurrentRow.Cells("idAux").Value
+    '        llenarCampos(tblProjectClientsAll.CurrentRow)
+    '        If tblProjectClientsAll.CurrentRow.Cells("photo").Value IsNot Nothing Then
+    '            pcbLogoPC.Image = BytetoImage(tblProjectClientsAll.CurrentRow.Cells("photo").Value)
+    '        Else
+    '            pcbLogoPC.Image.Dispose()
+    '        End If
+    '    End If
+    'End Sub
 
     Function separaridWODeidTask(ByVal workOrderCompuesta As String) As Boolean
         If workOrderCompuesta <> "" Or workOrderCompuesta <> Nothing Then

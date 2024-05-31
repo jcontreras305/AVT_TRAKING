@@ -38,12 +38,15 @@ Module metodosGlobales
     ''' <returns>
     ''' etorna el combo lleno con los empleados en contrados en la BD
     ''' </returns>
-    Public Function llenarComboJobsReportsIDclient(ByVal combo As ComboBox, ByVal idClient As String) As Boolean
+    Public Function llenarComboJobsReportsIDclient(ByVal combo As ComboBox, ByVal idClient As String, Optional All As Boolean = False) As Boolean
         Try
             con.conectar()
             Dim cmd As New SqlCommand("select jb.jobNo from job as jb inner join clients as cl on cl.idClient = jb.idClient where cl.idClient like '" + If(idClient = "", "%%", idClient) + "'", con.conn) '
             Dim dr As SqlDataReader = cmd.ExecuteReader()
             combo.Items.Clear()
+            If All Then
+                combo.Items.Add("All")
+            End If
             While dr.Read()
                 combo.Items.Add(dr("jobNo"))
             End While

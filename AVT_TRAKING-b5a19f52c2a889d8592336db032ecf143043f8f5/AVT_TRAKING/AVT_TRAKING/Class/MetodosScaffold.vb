@@ -1851,7 +1851,7 @@ inner join incoming as inc on inc.ticketNum = pinc.ticketNum
 where inc.jobNo = pdj.jobNo and pinc.idProduct = pdj.idProduct),0)
 -
 ISNULL((select sum(pout.quantity) from productOutGoing as pout 
-inner join outgoing as outg on outg.ticketNum = outg.ticketNum
+inner join outgoing as outg on outg.ticketNum = pout.ticketNum
 where outg.jobNo = pdj.jobNo and pout.idProduct = pdj.idProduct),0) as 'quantity',
 PLF, PSQF,QID from productJob as pdj
 inner join product as pd on pd.idProduct = pdj.idProduct
@@ -1872,12 +1872,16 @@ where jobNo =" + jobno
             Return False
         End Try
     End Function
-    Public Function cargarDatosProductUtlization(ByVal tblSc As DataGridView, ByVal tblMd As DataGridView, ByVal tblDs As DataGridView, ByVal tblIn As DataGridView, ByVal tblOg As DataGridView, ByVal idproduct As String) As Boolean
+    Public Function cargarDatosProductUtlization(ByVal tblSc As DataGridView, ByVal tblMd As DataGridView, ByVal tblDs As DataGridView, ByVal tblIn As DataGridView, ByVal tblOg As DataGridView, ByVal idproduct As String, Optional jobNO As String = "") As Boolean
         Try
             conectar()
             Dim cmdSC As New SqlCommand("select sc.tag, psc.idProduct,psc.quantity,CONVERT(varchar,sc.buildDate,101) as buildDate from productScaffold as psc 
 inner join scaffoldTraking as sc on sc.tag = psc.tag
-where idProduct = " + idproduct + "", conn)
+inner join task as tk on tk.idAux = sc.idAux 
+inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO 
+inner join projectOrder as po on po.idPO = wo.idPO and po.jobNo = wo.jobNo 
+inner join job as jb on jb .jobNo = po.jobNo
+where idProduct = " + idproduct + If(jobNO = "", "", " and jb.jobNo=" + jobNO + ""), conn)
             Dim dr1 As SqlDataReader = cmdSC.ExecuteReader()
             tblSc.Rows.Clear()
             While dr1.Read()
@@ -1887,7 +1891,12 @@ where idProduct = " + idproduct + "", conn)
 
             Dim cmdMd As New SqlCommand("select md.tag, md.idModification, pmd.idProduct ,pmd.quantity,CONVERT(varchar,md.modificationDate,101) as modificationDate from productModification as pmd
 inner join modification as md on md.idModAux = pmd.idModAux
-where idProduct = " + idproduct + "", conn)
+inner join scaffoldTraking as sc on sc.tag = md.tag 
+inner join task as tk on tk.idAux = sc.idAux 
+inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO 
+inner join projectOrder as po on po.idPO = wo.idPO  and po.jobNo = wo.jobNo 
+inner join job as jb on jb .jobNo = po.jobNo
+where idProduct = " + idproduct + If(jobNO = "", "", " and jb.jobNo=" + jobNO + ""), conn)
             Dim dr2 As SqlDataReader = cmdMd.ExecuteReader()
             tblMd.Rows.Clear()
             While dr2.Read()
@@ -1897,7 +1906,12 @@ where idProduct = " + idproduct + "", conn)
 
             Dim cmdDs As New SqlCommand("select ds.tag , pds.idProduct,pds.quantity,CONVERT(varchar,ds.dismantleDate,101)as dismantleDate from productDismantle as pds 
 inner join dismantle as ds on ds.idDismantle = pds.idDismantle
-where idProduct = " + idproduct + "", conn)
+inner join scaffoldTraking as sc on sc.tag = ds.tag 
+inner join task as tk on tk.idAux = sc.idAux 
+inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO 
+inner join projectOrder as po on po.idPO = wo.idPO and po.jobNo = wo.jobNo 
+inner join job as jb on jb .jobNo = po.jobNo
+where idProduct = " + idproduct + If(jobNO = "", "", " and jb.jobNo=" + jobNO + ""), conn)
             Dim dr3 As SqlDataReader = cmdDs.ExecuteReader()
             tblDs.Rows.Clear()
             While dr3.Read()
@@ -1907,7 +1921,7 @@ where idProduct = " + idproduct + "", conn)
 
             Dim cmdIn As New SqlCommand("select inc.ticketNum , CONVERT(varchar,inc.dateRecived,101) as dateRecived,pin.idProduct,pin.quantity from productComing as pin 
 inner join incoming  as inc on inc.ticketNum = pin.ticketNum
-where pin.idProduct = " + idproduct + "", conn)
+where pin.idProduct = " + idproduct + If(jobNO = "", "", " and inc.jobNo=" + jobNO + ""), conn)
             Dim dr4 As SqlDataReader = cmdIn.ExecuteReader()
             tblIn.Rows.Clear()
             While dr4.Read()
@@ -1917,7 +1931,7 @@ where pin.idProduct = " + idproduct + "", conn)
 
             Dim cmdOg As New SqlCommand("select outg.ticketNum , CONVERT(varchar,outg.dateShipped,101) as dateShipped,pout.idProduct,pout.quantity from productOutGoing as pout 
 inner join outgoing as outg on outg.ticketNum = pout.ticketNum
-where pout.idProduct = " + idproduct + "", conn)
+where pout.idProduct = " + idproduct + If(jobNO = "", "", " and outg.jobNo=" + jobNO + ""), conn)
             Dim dr5 As SqlDataReader = cmdOg.ExecuteReader()
             tblOg.Rows.Clear()
             While dr5.Read()

@@ -211,20 +211,34 @@ ha.idHomeAdress, ha.avenue ,ha.number, ha.city ,ha.providence,ha.postalCode,phot
         Try
             conectar()
             Dim cmd As New SqlCommand(consultaProyectos(" cln.idClient = '" + idCliente + "'"), conn)
-            cmd.CommandTimeout = 200
-            'If cmd.ExecuteNonQuery Then
-            '    Dim dt As New DataTable
-            '    Dim da As New SqlDataAdapter(cmd)
-            '    tabla.DataSource = dt
-            'Else
-            '    MsgBox("Error")
-            'End If
-            Dim dr As SqlDataReader = cmd.ExecuteReader()
-            tabla.Rows.Clear()
-            While dr.Read()
-                tabla.Rows.Add(dr("Work Order"), dr("Project Description"), If(dr("Cmp") = 0, False, True), dr("Total Spend"), dr("Total Hours ST"), dr("Total Amount ST"), dr("Total Hours OT"), dr("Total Amount OT"), dr("Total Hours 3"), dr("Total Amount 3"), dr("Total Expenses Spend"), dr("Total Material Spend"), dr("jobNo"), dr("workTMLumpSum"), dr("costDistribution"), dr("custumerNo"), dr("contractNo"), dr("costCode"), dr("idClient"), dr("idPO"), dr("idTask"), dr("idAuxWO"), dr("idAux"), dr("photo"), dr("postingProject"))
-            End While
-            dr.Close()
+            cmd.CommandTimeout = 250
+            If cmd.ExecuteNonQuery Then
+                Dim dt As New DataTable
+                Dim da As New SqlDataAdapter(cmd)
+                da.Fill(dt)
+                tabla.DataSource = dt
+            Else
+                MsgBox("Error")
+            End If
+            tabla.Columns("jobNo").Visible = False
+            tabla.Columns("workTMLumpSum").Visible = False
+            tabla.Columns("costDistribution").Visible = False
+            tabla.Columns("custumerNo").Visible = False
+            tabla.Columns("contractNo").Visible = False
+            tabla.Columns("costCode").Visible = False
+            tabla.Columns("idClient").Visible = False
+            tabla.Columns("idPO").Visible = False
+            tabla.Columns("idTask").Visible = False
+            tabla.Columns("idAuxWO").Visible = False
+            tabla.Columns("idAux").Visible = False
+            tabla.Columns("photo").Visible = False
+            tabla.Columns("postingProject").Visible = False
+            'Dim dr As SqlDataReader = cmd.ExecuteReader()
+            'tabla.Rows.Clear()
+            'While dr.Read()
+            '    tabla.Rows.Add(dr("Work Order"), dr("Project Description"), If(dr("Cmp") = 0, False, True), dr("Total Spend"), dr("Total Hours ST"), dr("Total Amount ST"), dr("Total Hours OT"), dr("Total Amount OT"), dr("Total Hours 3"), dr("Total Amount 3"), dr("Total Expenses Spend"), dr("Total Material Spend"), dr("jobNo"), dr("workTMLumpSum"), dr("costDistribution"), dr("custumerNo"), dr("contractNo"), dr("costCode"), dr("idClient"), dr("idPO"), dr("idTask"), dr("idAuxWO"), dr("idAux"), dr("photo"), dr("postingProject"))
+            'End While
+            'dr.Close()
         Catch ex As Exception
             MsgBox(ex.Message())
         Finally
@@ -232,7 +246,7 @@ ha.idHomeAdress, ha.avenue ,ha.number, ha.city ,ha.providence,ha.postalCode,phot
         End Try
     End Sub
     Private Function consultaProyectos(ByVal queryFilter As String) As String
-        Dim consultaProyetosClients As String = "select T2.[Work Order],T2.[Project Description],T2.[Cmp],CONCAT('$',(T2.[Total Amount ST]+T2.[Total Amount OT]+T2.[Total Amount 3]+T2.[Total Expenses Spend]+T2.[Total Material Spend])) as 'Total Spend', 
+        Dim consultaProyetosClients As String = "select T2.[Work Order],T2.[Project Description],T2.[Complete],CONCAT('$',(T2.[Total Amount ST]+T2.[Total Amount OT]+T2.[Total Amount 3]+T2.[Total Expenses Spend]+T2.[Total Material Spend])) as 'Total Spend', 
 T2.[Total Hours ST],
 CONCAT('$',T2.[Total Amount ST])as 'Total Amount ST',T2.[Total Hours OT],
 CONCAT('$',T2.[Total Amount OT])as 'Total Amount OT',T2.[Total Hours 3],
@@ -243,7 +257,7 @@ T2.[jobNo],T2.[workTMLumpSum],T2.[costDistribution],T2.[custumerNo],T2.[contract
 select DISTINCT 
 T1.[Work Order],
 T1.[Project Description],
-T1.[Cmp],
+T1.[Complete],
 SUM(T1.[Total Hours ST]) OVER (PARTITION BY T1.[idClient],T1.[jobNo],T1.[idPO],T1.[idAuxWO],T1.[idAux]) as 'Total Hours ST',
 SUM(T1.[Amount ST]) OVER (PARTITION BY T1.[idClient],T1.[jobNo],T1.[idPO],T1.[idAuxWO],T1.[idAux]) as 'Total Amount ST',
 SUM(T1.[Total Hours OT]) OVER (PARTITION BY T1.[idClient],T1.[jobNo],T1.[idPO],T1.[idAuxWO],T1.[idAux]) as 'Total Hours OT',
@@ -269,7 +283,7 @@ select CONCAT(wo.idWO,' ',tk.task) as 'Work Order' ,
 	
 	ISNULL( tk.description ,'') as 'Project Description', 
 	
-	ISNULL( tk.status, 0 ) as 'Cmp',
+	convert(bit,tk.status) as 'Complete',
 
 	ISNULL( hw.hoursST , 0)	as 'Total Hours ST',
 
@@ -312,7 +326,7 @@ union all
 
 select CONCAT(wo.idWO,' ',tk.task) as 'Work Order' , 
 	ISNULL( tk.description ,'') as 'Project Description', 
-	ISNULL( tk.status, 0 ) as 'Cmp',
+	convert(bit,tk.status) as 'Complete',
 	0 as 'Total Hours ST',
 	0 as 'Amount ST',
 	0 as 'Total Hours OT',
@@ -348,7 +362,7 @@ union all
 
 select CONCAT(wo.idWO,' ',tk.task) as 'Work Order' , 
 	ISNULL( tk.description ,'') as 'Project Description', 
-	ISNULL( tk.status, 0 ) as 'Cmp',
+	convert(bit,tk.status) as 'Complete',
 	0 as 'Total Hours ST',
 	0 as 'Amount ST',
 	0 as 'Total Hours OT',
