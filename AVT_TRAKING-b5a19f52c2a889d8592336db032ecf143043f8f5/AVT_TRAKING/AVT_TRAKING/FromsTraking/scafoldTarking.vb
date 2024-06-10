@@ -662,7 +662,10 @@ Public Class scafoldTarking
                     End If
                 End If
             Case "Dis"
+                ''
+                If DialogResult.Yes = MessageBox.Show("The dismantling will be cancelled." + vbCrLf + "If you accept the products of this scaffold will be add again on a list of products used, are you sure to continue?", "Important", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) Then
 
+                End If
             Case "Est"
                 If mtdEstimation.ccnum <> "" And DialogResult.OK = MessageBox.Show("The Estimation will be delete, Are you sure to continue?", "Important", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) Then
                     If mtdEstimation.deleteEstimation(mtdEstimation.idEstnumber) Then
