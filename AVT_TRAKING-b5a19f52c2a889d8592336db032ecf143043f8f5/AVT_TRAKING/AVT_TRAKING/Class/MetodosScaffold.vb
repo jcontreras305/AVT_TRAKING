@@ -3487,6 +3487,79 @@ end", conn)
             Return False
         End Try
     End Function
+    Public Function deleteDismantle(ByVal tag As String, ByVal idDismantle As String) As Boolean
+        Try
+            conectar()
+            Dim cmd As New SqlCommand("declare @tag as varchar(20) = '" + tag + "' 
+	declare @idDismantle as varchar(36) = '" + idDismantle + "'
+	declare @countProduct as int = (select COUNT (*) from productTotalScaffold where tag = @tag and status = 'f')
+	declare @qty as float
+	declare @idProduct as int
+    declare @error as int = 0
+    declare @jobNo as bigint = (select top 1 jb.jobNo from scaffoldTraking as sc
+    inner join task as tk on tk.idAux = sc.idAux 
+    inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO
+    inner join projectOrder as po on po.idPO = wo.idPO and po.jobNo = wo.jobNo
+    inner join job as jb on jb.jobNo = po.jobNo
+    where sc.tag = @tag )
+    begin tran
+	begin try 
+		if (select COUNT(*) from dismantle where tag = @tag or idDismantle = @idDismantle)=1
+		begin 
+			delete from activityHours where idDismantle = @idDismantle and tag = @tag 
+			delete from materialHandeling where idDismantle = @idDismantle and tag = @tag 
+			if @@ERROR <> 0 begin set @error = @@ERROR goto solveproblem end 
+			if exists(select idDismantle from dismantle where idDismantle = @idDismantle)
+			begin
+				while (@countProduct > 0) 
+				begin
+	    			select  @qty = quantity ,@idProduct = idProduct from (select top 1  quantity,idProduct from productTotalScaffold where tag = @tag and status = 'f') as t1
+	    			--select quantity from product where idProduct = @idProduct
+	    			if (select quantity from product where  idProduct = @idProduct) >=  @qty
+					begin
+						update product set quantity = quantity - @qty where idProduct = @idProduct
+					end
+					if @@ERROR <> 0 begin set @error = @@ERROR goto solveproblem end 
+	    			--select quantity from productTotalScaffold where idProduct = @idProduct and tag = @tag
+					if (select qty from productJob where  idProduct = @idProduct and jobNo = @jobNo) >=  @qty
+					begin
+						update productJob set qty = qty - @qty where idProduct = @idProduct and jobNo = @jobNo
+	    			end
+					if @@ERROR <> 0 begin set @error = @@ERROR goto solveproblem end 
+					update productTotalScaffold set status = 't'  where tag = @tag and idProduct = @idProduct
+					if @@ERROR <> 0 begin set @error = @@ERROR goto solveproblem end 
+					delete from productDismantle where idProduct = @idProduct and idDismantle= @idDismantle 
+	    			if @@ERROR <> 0 begin set @error = @@ERROR goto solveproblem end 
+					set @countProduct = @countProduct-1
+				end
+				update scaffoldTraking set status = 'f' where tag = @tag
+				if @@ERROR <> 0 begin set @error = @@ERROR goto solveproblem end 
+				update modification set status = 'f' where tag = @tag
+				if @@ERROR <> 0 begin set @error = @@ERROR goto solveproblem end 
+				delete from dismantle where idDismantle = @idDismantle and tag = @tag 
+				if @@ERROR <> 0 begin set @error = @@ERROR goto solveproblem end 
+			end
+		end
+end try	
+	begin catch
+		goto solveproblem -- en caso de error capturado en el catch no vamos a solveproblem y evitamos en commit
+	end catch
+commit tran 
+solveproblem:
+if @error <> 0
+begin 
+	rollback tran -- el rollback es para deshacer todos lo cambios hechos anteriormente
+end", conn)
+            If cmd.ExecuteNonQuery > 0 Then
+                Return True
+            Else
+                Return False
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message())
+            Return False
+        End Try
+    End Function
 
     Public Function llenarDismantleData(ByVal tag As String) As dismantle
         Dim ds As New dismantle

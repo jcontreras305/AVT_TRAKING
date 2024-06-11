@@ -34,6 +34,8 @@ Public Class scafoldTarking
     Dim cmbProyect As New DataGridViewComboBoxCell
     Dim cmbProyect1 As New DataGridViewComboBoxCell
     Private Sub scafoldTarking_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        idClient = "45225E40-D752-470E-B38E-AA93E8D548F9"
+        Company = "Lima Refining Company"
         cargarDatosByClient(IdCliente, Company)
     End Sub
     Private Function llenarComboTag(ByVal cmb As ComboBox, ByVal tblTags As Data.DataTable) As Integer
@@ -662,9 +664,34 @@ Public Class scafoldTarking
                     End If
                 End If
             Case "Dis"
-                ''
-                If DialogResult.Yes = MessageBox.Show("The dismantling will be cancelled." + vbCrLf + "If you accept the products of this scaffold will be add again on a list of products used, are you sure to continue?", "Important", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) Then
-
+                If DialogResult.Yes = MessageBox.Show("The dismantling will be cancelled." + vbCrLf + "If you accept the products of this scaffold will be add again on a list of products used," + vbCrLf + "Are you sure to continue?", "Important", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) Then
+                    If ds.idDismantle <> "" Then
+                        If mtdScaffold.deleteDismantle(ds.tag, ds.idDismantle) Then
+                            MsgBox("Successful.")
+                            tblScaffoldTags.Rows.Clear()
+                            If mtdScaffold.llenarScaffold(tblScaffoldTags, If(lblCompanyName.Text = "Client: All", "", IdCliente)) Then
+                                If ds.tag = "" Then
+                                    cargarDatosDismantle(tblScaffoldTags.Rows(0).ItemArray(0))
+                                Else
+                                    Dim cont As Integer = 1
+                                    For Each rowTag As DataRow In tblScaffoldTags.Rows
+                                        If ds.tag = rowTag.ItemArray(0) Then
+                                            If cont = tblScaffoldTags.Rows.Count() Then 'es la ultima fila 
+                                                cargarDatosDismantle(tblScaffoldTags.Rows(0).ItemArray(0))
+                                                Exit For
+                                            Else 'no es la ultima fila
+                                                cargarDatosDismantle(tblScaffoldTags.Rows(cont).ItemArray(0))
+                                                Exit For
+                                            End If
+                                        End If
+                                        cont += 1
+                                    Next
+                                End If
+                            End If
+                        End If
+                    Else
+                        MsgBox("This tag has not been dismantled. Please dismantle it so it can be delete.")
+                    End If
                 End If
             Case "Est"
                 If mtdEstimation.ccnum <> "" And DialogResult.OK = MessageBox.Show("The Estimation will be delete, Are you sure to continue?", "Important", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) Then
@@ -1491,16 +1518,20 @@ Public Class scafoldTarking
             Select Case tblInComing.Columns(e.ColumnIndex).Name
                 Case "ID"
                     Try
-                        If tblInComing.CurrentCell.GetType.Name = "DataGridViewTextBoxCell" Then
-                            Dim cmbIdProduct As New DataGridViewComboBoxCell
-                            With cmbIdProduct
-                                mtdScaffold.llenarCellComboIDProduct(cmbIdProduct, tblProductInComing)
-                                cmbIdProduct.DropDownWidth = 240
-                            End With
-                            If tblInComing.CurrentRow.Cells("ID").Value IsNot Nothing Then
-                                cmbIdProduct.Value = tblInComing.CurrentRow.Cells("ID").Value
+                        If cmbJobNumInComing.Text <> "" Then
+                            If tblInComing.CurrentCell.GetType.Name = "DataGridViewTextBoxCell" Then
+                                Dim cmbIdProduct As New DataGridViewComboBoxCell
+                                With cmbIdProduct
+                                    mtdScaffold.llenarCellComboIDProduct(cmbIdProduct, tblProductInComing)
+                                    cmbIdProduct.DropDownWidth = 240
+                                End With
+                                If tblInComing.CurrentRow.Cells("ID").Value IsNot Nothing Then
+                                    cmbIdProduct.Value = tblInComing.CurrentRow.Cells("ID").Value
+                                End If
+                                tblInComing.CurrentRow.Cells("ID") = cmbIdProduct
                             End If
-                            tblInComing.CurrentRow.Cells("ID") = cmbIdProduct
+                        Else
+                            MessageBox.Show("Please select a Job No to charge the list of the product.", "Messague", MessageBoxButtons.OK, MessageBoxIcon.Warning)
                         End If
                     Catch ex As Exception
 
@@ -1603,7 +1634,6 @@ Public Class scafoldTarking
         Catch ex As Exception
             MsgBox(ex.Message())
         End Try
-
     End Sub
 
     Private Sub btnBackInComing_Click(sender As Object, e As EventArgs) Handles btnBackInComing.Click
@@ -1723,7 +1753,7 @@ Public Class scafoldTarking
         If e.ColumnIndex > 0 Then
             Select Case tblOutGoing.Columns(e.ColumnIndex).Name
                 Case "IDOut"
-                    If cmbJobNumOutGoing.Text IsNot Nothing Then
+                    If cmbJobNumOutGoing.Text <> "" Then
                         Try
                             If tblOutGoing.CurrentCell.GetType.Name = "DataGridViewTextBoxCell" Then
                                 Dim cmbIdProduct As New DataGridViewComboBoxCell
@@ -1815,38 +1845,43 @@ Public Class scafoldTarking
     End Sub
 
     Private Sub btnBackTicketOutGoing_Click(sender As Object, e As EventArgs) Handles btnBackTicketOutGoing.Click
-        If tblTicketOutGoing.Rows.Count > 1 Then
-            Dim cont = 0
-            For Each row As DataRow In tblTicketOutGoing.Rows()
-                If txtTicketNumOutGoing.Text = row.ItemArray(0).ToString() Then
-                    If cont > 0 Then
-                        cont -= 1
-                        txtTicketNumOutGoing.Text = tblTicketOutGoing.Rows(cont).ItemArray(0)
-                        dtpDateOutGoing.Value = validarFechaParaVB(tblTicketOutGoing.Rows(cont).ItemArray(1))
-                        txtCommentOut.Text = tblTicketOutGoing.Rows(cont).ItemArray(2)
-                        cmbShippedBY.Text = tblTicketOutGoing.Rows(cont).ItemArray(3)
-                        cmbSuperintendent.Text = tblTicketOutGoing.Rows(cont).ItemArray(4)
-                        Dim index = cmbJobNumOutGoing.FindString(CStr(tblTicketOutGoing.Rows(cont).ItemArray(5)))
-                        cmbJobNumOutGoing.SelectedItem = cmbJobNumOutGoing.Items(index)
-                        txtTicketNumInComing.Enabled = False
-                        Exit For
-                    Else
-                        cont = (tblTicketInComing.Rows.Count - 1)
-                        txtTicketNumOutGoing.Text = tblTicketOutGoing.Rows(cont).ItemArray(0)
-                        dtpDateOutGoing.Value = validarFechaParaVB(tblTicketOutGoing.Rows(cont).ItemArray(1))
-                        txtCommentOut.Text = tblTicketOutGoing.Rows(cont).ItemArray(2)
-                        cmbShippedBY.Text = tblTicketOutGoing.Rows(cont).ItemArray(3)
-                        cmbSuperintendent.Text = tblTicketOutGoing.Rows(cont).ItemArray(4)
-                        Dim index = cmbJobNumOutGoing.FindString(CStr(tblTicketOutGoing.Rows(cont).ItemArray(5)))
-                        cmbJobNumOutGoing.SelectedItem = cmbJobNumOutGoing.Items(index)
-                        txtTicketNumInComing.Enabled = False
-                        Exit For
+        Try
+
+            If tblTicketOutGoing.Rows.Count > 1 Then
+                Dim cont = 0
+                For Each row As DataRow In tblTicketOutGoing.Rows()
+                    If txtTicketNumOutGoing.Text = row.ItemArray(0).ToString() Then
+                        If cont > 0 Then
+                            cont -= 1
+                            txtTicketNumOutGoing.Text = tblTicketOutGoing.Rows(cont).ItemArray(0)
+                            dtpDateOutGoing.Value = validarFechaParaVB(tblTicketOutGoing.Rows(cont).ItemArray(1))
+                            txtCommentOut.Text = tblTicketOutGoing.Rows(cont).ItemArray(2)
+                            cmbShippedBY.Text = tblTicketOutGoing.Rows(cont).ItemArray(3)
+                            cmbSuperintendent.Text = tblTicketOutGoing.Rows(cont).ItemArray(4)
+                            Dim index = cmbJobNumOutGoing.FindString(CStr(tblTicketOutGoing.Rows(cont).ItemArray(5)))
+                            cmbJobNumOutGoing.SelectedItem = cmbJobNumOutGoing.Items(index)
+                            txtTicketNumOutGoing.Enabled = False
+                            Exit For
+                        Else
+                            cont = (tblTicketOutGoing.Rows.Count - 1)
+                            txtTicketNumOutGoing.Text = tblTicketOutGoing.Rows(cont).ItemArray(0)
+                            dtpDateOutGoing.Value = validarFechaParaVB(tblTicketOutGoing.Rows(cont).ItemArray(1))
+                            txtCommentOut.Text = tblTicketOutGoing.Rows(cont).ItemArray(2)
+                            cmbShippedBY.Text = tblTicketOutGoing.Rows(cont).ItemArray(3)
+                            cmbSuperintendent.Text = tblTicketOutGoing.Rows(cont).ItemArray(4)
+                            Dim index = cmbJobNumOutGoing.FindString(CStr(tblTicketOutGoing.Rows(cont).ItemArray(5)))
+                            cmbJobNumOutGoing.SelectedItem = cmbJobNumOutGoing.Items(index)
+                            txtTicketNumOutGoing.Enabled = False
+                            Exit For
+                        End If
                     End If
-                End If
-                cont += 1
-            Next
-            mtdScaffold.llenarProductosOutGoing(tblOutGoing, txtTicketNumOutGoing.Text)
-        End If
+                    cont += 1
+                Next
+                mtdScaffold.llenarProductosOutGoing(tblOutGoing, txtTicketNumOutGoing.Text)
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message)
+        End Try
     End Sub
 
     Private Sub btnNextTicketOutGoing_Click(sender As Object, e As EventArgs) Handles btnNextTicketOutGoing.Click
@@ -1863,7 +1898,7 @@ Public Class scafoldTarking
                         cmbSuperintendent.Text = tblTicketOutGoing.Rows(cont).ItemArray(4)
                         Dim index = cmbJobNumOutGoing.FindString(CStr(tblTicketOutGoing.Rows(cont).ItemArray(5)))
                         cmbJobNumOutGoing.SelectedItem = cmbJobNumOutGoing.Items(index)
-                        txtTicketNumInComing.Enabled = False
+                        txtTicketNumOutGoing.Enabled = False
                         Exit For
                     Else
                         cont = 0
@@ -1874,7 +1909,7 @@ Public Class scafoldTarking
                         cmbSuperintendent.Text = tblTicketOutGoing.Rows(cont).ItemArray(4)
                         Dim index = cmbJobNumOutGoing.FindString(CStr(tblTicketOutGoing.Rows(cont).ItemArray(5)))
                         cmbJobNumOutGoing.SelectedItem = cmbJobNumOutGoing.Items(index)
-                        txtTicketNumInComing.Enabled = False
+                        txtTicketNumOutGoing.Enabled = False
                         Exit For
                     End If
                 End If

@@ -211,7 +211,7 @@ ha.idHomeAdress, ha.avenue ,ha.number, ha.city ,ha.providence,ha.postalCode,phot
         Try
             conectar()
             Dim cmd As New SqlCommand(consultaProyectos(" cln.idClient = '" + idCliente + "'"), conn)
-            cmd.CommandTimeout = 250
+            cmd.CommandTimeout = 350
             If cmd.ExecuteNonQuery Then
                 Dim dt As New DataTable
                 Dim da As New SqlDataAdapter(cmd)
