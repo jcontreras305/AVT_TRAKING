@@ -200,6 +200,7 @@ ha.idHomeAdress, ha.avenue ,ha.number, ha.city ,ha.providence,ha.postalCode,phot
                 tabla.Columns("costCode").Visible = False
                 tabla.Columns("idTask").Visible = False
                 tabla.Columns("idAuxWO").Visible = False
+                tabla.Columns("Taxes").Visible = False
             End If
         Catch ex As Exception
             MsgBox(ex.Message())
@@ -233,6 +234,7 @@ ha.idHomeAdress, ha.avenue ,ha.number, ha.city ,ha.providence,ha.postalCode,phot
             tabla.Columns("idAux").Visible = False
             tabla.Columns("photo").Visible = False
             tabla.Columns("postingProject").Visible = False
+            tabla.Columns("Taxes").Visible = False
             'Dim dr As SqlDataReader = cmd.ExecuteReader()
             'tabla.Rows.Clear()
             'While dr.Read()
@@ -253,7 +255,7 @@ CONCAT('$',T2.[Total Amount OT])as 'Total Amount OT',T2.[Total Hours 3],
 CONCAT('$',T2.[Total Amount 3]) as 'Total Amount 3',
 CONCAT('$',T2.[Total Expenses Spend]) as 'Total Expenses Spend',
 CONCAT('$',T2.[Total Material Spend]) as 'Total Material Spend',
-T2.[jobNo],T2.[workTMLumpSum],T2.[costDistribution],T2.[custumerNo],T2.[contractNo],T2.[costCode],T2.[idClient],T2.[idPO],T2.[idTask],T2.[idAuxWO],T2.[idAux],(select [photo] from clients where T2.idClient = idClient)as 'photo',T2.postingProject from (
+T2.[jobNo],T2.[workTMLumpSum],T2.[costDistribution],T2.[custumerNo],T2.[contractNo],T2.[costCode],T2.[idClient],T2.[idPO],T2.[idTask],T2.[idAuxWO],T2.[idAux],(select [photo] from clients where T2.idClient = idClient)as 'photo',T2.postingProject,T2.[Taxes] from (
 select DISTINCT 
 T1.[Work Order],
 T1.[Project Description],
@@ -277,7 +279,8 @@ T1.[idPO],
 T1.[idTask],
 T1.[idAux],
 T1.[idAuxWO],
-T1.[postingProject]
+T1.[postingProject],
+T1.[Taxes]
  from (
 select CONCAT(wo.idWO,' ',tk.task) as 'Work Order' , 
 	
@@ -311,8 +314,8 @@ select CONCAT(wo.idWO,' ',tk.task) as 'Work Order' ,
 	ISNULL(tk.task ,'') AS 'idTask',
     ISNULL(wo.idAuxWO,'') AS 'idAuxWO',
 	ISNULL(tk.idAux,'') AS 'idAux',
-    jb.postingProject
-
+    jb.postingProject,
+    jb.Taxes as 'Taxes'
  from hoursWorked as hw
 inner join task as tk on tk.idAux = hw.idAux 
 inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO
@@ -348,7 +351,8 @@ select CONCAT(wo.idWO,' ',tk.task) as 'Work Order' ,
 	ISNULL(tk.task ,'') AS 'idTask',
     ISNULL(wo.idAuxWO,'') AS 'idAuxWO',
 	ISNULL(tk.idAux,'') AS 'idAux',
-    jb.postingProject
+    jb.postingProject,
+    jb.Taxes as 'Taxes'
  from expensesUsed as exu
 inner join task as tk on tk.idAux = exu.idAux 
 inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO
@@ -384,7 +388,8 @@ select CONCAT(wo.idWO,' ',tk.task) as 'Work Order' ,
 	ISNULL(tk.task ,'') AS 'idTask',
     ISNULL(wo.idAuxWO,'') AS 'idAuxWO',
 	ISNULL(tk.idAux,'') AS 'idAux',
-    jb.postingProject
+    jb.postingProject,
+    jb.Taxes as 'Taxes'
  from materialUsed as mtu
 inner join task as tk on tk.idAux = mtu.idAux 
 inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO
@@ -651,6 +656,7 @@ cln.lastName Like '" + consulta + "'"), conn)
                 tabla.Columns("idAux").Visible = False
                 tabla.Columns("photo").Visible = False
                 tabla.Columns("postingProject").Visible = True
+                tabla.Columns("Taxes").Visible = False
             End If
         Catch ex As Exception
             MsgBox(ex.Message())

@@ -100,6 +100,9 @@ Partial Class ProjectsClients
         Me.TableLayoutPanel4 = New System.Windows.Forms.TableLayoutPanel()
         Me.Panel3 = New System.Windows.Forms.Panel()
         Me.tblAllProjects = New System.Windows.Forms.DataGridView()
+        Me.Label17 = New System.Windows.Forms.Label()
+        Me.Panel12 = New System.Windows.Forms.Panel()
+        Me.sprTaxes = New System.Windows.Forms.NumericUpDown()
         Me.Panel1.SuspendLayout()
         Me.pnlButtonsPOCl.SuspendLayout()
         Me.PnllSetup.SuspendLayout()
@@ -125,6 +128,8 @@ Partial Class ProjectsClients
         Me.TableLayoutPanel4.SuspendLayout()
         Me.Panel3.SuspendLayout()
         CType(Me.tblAllProjects, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.Panel12.SuspendLayout()
+        CType(Me.sprTaxes, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'Panel1
@@ -643,9 +648,7 @@ Partial Class ProjectsClients
         '
         'txtCompanyName
         '
-        Me.txtCompanyName.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.txtCompanyName.Location = New System.Drawing.Point(125, 0)
+        Me.txtCompanyName.Location = New System.Drawing.Point(123, 6)
         Me.txtCompanyName.Margin = New System.Windows.Forms.Padding(4)
         Me.txtCompanyName.Name = "txtCompanyName"
         Me.txtCompanyName.Size = New System.Drawing.Size(237, 22)
@@ -665,17 +668,17 @@ Partial Class ProjectsClients
         '
         Me.txtFirstName.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.txtFirstName.Location = New System.Drawing.Point(125, 1)
+        Me.txtFirstName.Location = New System.Drawing.Point(124, 0)
         Me.txtFirstName.Margin = New System.Windows.Forms.Padding(4)
         Me.txtFirstName.Name = "txtFirstName"
-        Me.txtFirstName.Size = New System.Drawing.Size(237, 22)
+        Me.txtFirstName.Size = New System.Drawing.Size(233, 22)
         Me.txtFirstName.TabIndex = 15
         '
         'Label5
         '
         Me.Label5.AutoSize = True
         Me.Label5.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.Label5.Location = New System.Drawing.Point(8, 4)
+        Me.Label5.Location = New System.Drawing.Point(6, 9)
         Me.Label5.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(108, 17)
@@ -697,7 +700,7 @@ Partial Class ProjectsClients
         '
         Me.Label1.AutoSize = True
         Me.Label1.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.Label1.Location = New System.Drawing.Point(71, 7)
+        Me.Label1.Location = New System.Drawing.Point(65, 5)
         Me.Label1.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(49, 17)
@@ -916,8 +919,8 @@ Partial Class ProjectsClients
         Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 72.73682!))
         Me.TableLayoutPanel1.Controls.Add(Me.GroupBox1, 1, 1)
         Me.TableLayoutPanel1.Controls.Add(Me.TableLayoutPanel2, 0, 1)
-        Me.TableLayoutPanel1.Controls.Add(Me.Button2, 1, 0)
         Me.TableLayoutPanel1.Controls.Add(Me.Panel11, 0, 0)
+        Me.TableLayoutPanel1.Controls.Add(Me.Panel12, 1, 0)
         Me.TableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Top
         Me.TableLayoutPanel1.Location = New System.Drawing.Point(0, 0)
         Me.TableLayoutPanel1.Margin = New System.Windows.Forms.Padding(4)
@@ -955,8 +958,8 @@ Partial Class ProjectsClients
         '
         'Panel9
         '
-        Me.Panel9.Controls.Add(Me.txtFirstName)
-        Me.Panel9.Controls.Add(Me.Label1)
+        Me.Panel9.Controls.Add(Me.sprTaxes)
+        Me.Panel9.Controls.Add(Me.Label17)
         Me.Panel9.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel9.Location = New System.Drawing.Point(4, 149)
         Me.Panel9.Margin = New System.Windows.Forms.Padding(4)
@@ -966,8 +969,8 @@ Partial Class ProjectsClients
         '
         'Panel8
         '
-        Me.Panel8.Controls.Add(Me.txtCompanyName)
-        Me.Panel8.Controls.Add(Me.Label5)
+        Me.Panel8.Controls.Add(Me.txtFirstName)
+        Me.Panel8.Controls.Add(Me.Label1)
         Me.Panel8.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel8.Location = New System.Drawing.Point(4, 115)
         Me.Panel8.Margin = New System.Windows.Forms.Padding(4)
@@ -1099,7 +1102,7 @@ Partial Class ProjectsClients
         Me.Button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.Button2.ForeColor = System.Drawing.Color.Red
         Me.Button2.Image = Global.AVT_TRAKING.My.Resources.Resources._exit
-        Me.Button2.Location = New System.Drawing.Point(1327, 2)
+        Me.Button2.Location = New System.Drawing.Point(943, 3)
         Me.Button2.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.Button2.Name = "Button2"
         Me.Button2.Size = New System.Drawing.Size(57, 34)
@@ -1188,6 +1191,37 @@ Partial Class ProjectsClients
         Me.tblAllProjects.Size = New System.Drawing.Size(1206, 470)
         Me.tblAllProjects.TabIndex = 8
         '
+        'Label17
+        '
+        Me.Label17.AutoSize = True
+        Me.Label17.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.Label17.Location = New System.Drawing.Point(67, 4)
+        Me.Label17.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.Label17.Name = "Label17"
+        Me.Label17.Size = New System.Drawing.Size(46, 17)
+        Me.Label17.TabIndex = 28
+        Me.Label17.Text = "Taxes"
+        '
+        'Panel12
+        '
+        Me.Panel12.Controls.Add(Me.txtCompanyName)
+        Me.Panel12.Controls.Add(Me.Label5)
+        Me.Panel12.Controls.Add(Me.Button2)
+        Me.Panel12.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Panel12.Location = New System.Drawing.Point(381, 3)
+        Me.Panel12.Name = "Panel12"
+        Me.Panel12.Size = New System.Drawing.Size(1003, 37)
+        Me.Panel12.TabIndex = 17
+        '
+        'sprTaxes
+        '
+        Me.sprTaxes.DecimalPlaces = 2
+        Me.sprTaxes.Location = New System.Drawing.Point(124, -1)
+        Me.sprTaxes.Name = "sprTaxes"
+        Me.sprTaxes.Size = New System.Drawing.Size(82, 22)
+        Me.sprTaxes.TabIndex = 29
+        Me.sprTaxes.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
         'ProjectsClients
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
@@ -1234,6 +1268,9 @@ Partial Class ProjectsClients
         Me.TableLayoutPanel4.ResumeLayout(False)
         Me.Panel3.ResumeLayout(False)
         CType(Me.tblAllProjects, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.Panel12.ResumeLayout(False)
+        Me.Panel12.PerformLayout()
+        CType(Me.sprTaxes, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -1315,4 +1352,7 @@ Partial Class ProjectsClients
     Friend WithEvents Label12 As Label
     Friend WithEvents cmbClient As ComboBox
     Public WithEvents tblAllProjects As DataGridView
+    Friend WithEvents sprTaxes As NumericUpDown
+    Friend WithEvents Label17 As Label
+    Friend WithEvents Panel12 As Panel
 End Class

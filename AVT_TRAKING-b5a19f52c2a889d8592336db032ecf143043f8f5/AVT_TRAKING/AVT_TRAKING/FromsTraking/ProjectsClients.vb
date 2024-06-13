@@ -193,6 +193,7 @@ Public Class ProjectsClients
         cmbCostDistribution.SelectedIndex = Nothing
         cmbWorkTMLumoSum.SelectedIndex = Nothing
         pcbLogoPC.Image = Nothing
+        sprTaxes.Value = 0.00
     End Sub
 
     Private Sub LimpriarCamposParaAgregar()
@@ -207,12 +208,14 @@ Public Class ProjectsClients
         defaultInfoJob.Add(CStr(cmbWorkTMLumoSum.SelectedIndex))
         defaultInfoJob.Add(idPO)
         defaultInfoJob.Add(txtPostingProject.Text)
+        defaultInfoJob.Add(sprTaxes.Value)
         txtContractNo.Text = ""
         txtCustomerNo.Text = ""
         txtJobNumber.Text = ""
         cmbCostCode.SelectedIndex = Nothing
         cmbCostDistribution.SelectedIndex = Nothing
         cmbWorkTMLumoSum.SelectedIndex = Nothing
+        sprTaxes.Value = 0.00
     End Sub
 
     Private Sub btnCancelSaveJob_Click(sender As Object, e As EventArgs) Handles btnCancelSaveJob.Click
@@ -228,6 +231,7 @@ Public Class ProjectsClients
                 txtPostingProject.Text = defaultInfoJob(7)
                 btnAdd.Text = "Add"
                 btnCancelSaveJob.Visible = False
+                sprTaxes.Value = defaultInfoJob(8)
             End If
         Catch ex As Exception
 
@@ -247,6 +251,7 @@ Public Class ProjectsClients
                     listPO.Add(txtContractNo.Text) ' int 
                     listPO.Add(cmbCostCode.Text) ' int
                     listPO.Add(txtPostingProject.Text) ' bigint
+                    listPO.Add(sprTaxes.Value) 'float
                     idPO = mtdJobs.insertarNuevoProyecto(idCliente, listPO)
                     If idPO <> Nothing Or idPO <> "" Then
                         'mtdClient.buscarProyectosDeClientePorProyeto(tblProjectClientsAll, idCliente)
@@ -351,7 +356,7 @@ Public Class ProjectsClients
                 txtContractNo.Text = fila.Cells("contractNo").Value
                 txtJobNumber.Text = fila.Cells("jobNo").Value
                 txtPostingProject.Text = fila.Cells("PostingProject").Value
-
+                sprTaxes.Value = fila.Cells("Taxes").Value
                 idPO = fila.Cells("IdPO").Value
                 jobNum = fila.Cells("jobNo").Value
                 posting_Project = fila.Cells("PostingProject").Value
@@ -365,7 +370,7 @@ Public Class ProjectsClients
     End Sub
 
     '==============================================================================================================================================
-    '======================= ACTUALIZAR LOS CAMPOS AUTOMATICAMENTE DAOS DEL CLIENTE AL QUITAR EL FOCO =============================================
+    '======================= ACTUALIZAR LOS CAMPOS AUTOMATICAMENTE DATOS DEL CLIENTE AL QUITAR EL FOCO =============================================
     '==============================================================================================================================================
 
     Private Sub txtAddres_Leave(sender As Object, e As EventArgs) Handles txtAddres.Leave
@@ -416,6 +421,11 @@ Public Class ProjectsClients
     Private Sub txtCustomerNo_Leave(sender As Object, e As EventArgs) Handles txtCustomerNo.Leave
         If btnAdd.Text = "Add" Then  'Se supone que no esta agregando si no que esta actualizando o visualizado unicamente
             mtdJobs.actualizarCustumerNo(txtCustomerNo.Text, txtJobNumber.Text)
+        End If
+    End Sub
+    Private Sub sprTaxes_Leave(sender As Object, e As EventArgs) Handles sprTaxes.Leave
+        If btnAdd.Text = "Add" Then  'Se supone que no esta agregando si no que esta actualizando o visualizado unicamente
+            mtdJobs.actualizarTaxes(sprTaxes.Value, txtJobNumber.Text)
         End If
     End Sub
 
