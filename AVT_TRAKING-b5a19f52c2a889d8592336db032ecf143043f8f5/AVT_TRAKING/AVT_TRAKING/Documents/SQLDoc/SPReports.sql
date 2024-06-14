@@ -2530,8 +2530,8 @@ select * into #TablaHorasClassPerdiem  from (
 	hw.hoursOT,
 	(hw.hoursOT*wc.billingRateOT) as 'CostOT',
 	isnull((select sum(amount) from expensesUsed as exu where exu.idHorsWorked = hw.idHorsWorked and exu.dateExpense between @startDate and @FinalDate and (exu.[description] like '%Perdiem%' or exu.[description] like '%per-diem%')),0)as 'Perdiem',
-	isnull((select sum(amount) from expensesUsed as exu where exu.idHorsWorked = hw.idHorsWorked and exu.dateExpense between @startDate and @FinalDate and (exu.[description] like '%Travel%') ),0)as 'Travel'
-	
+	isnull((select sum(amount) from expensesUsed as exu where exu.idHorsWorked = hw.idHorsWorked and exu.dateExpense between @startDate and @FinalDate and (exu.[description] like '%Travel%') ),0)as 'Travel',
+	jb.Taxes
 	from hoursWorked as hw 
 		inner join workCode as wc on wc.idWorkCode = hw.idWorkCode and wc.jobNo = hw.jobNo
 		inner join task as tk on tk.idAux = hw.idAux 
@@ -2554,8 +2554,8 @@ union ALL
 	0 as 'hoursOT',
 	0 as 'CostOT',
 	isnull((select sum(amount) from expensesUsed as exu where exu.idHorsWorked = hw.idHorsWorked and exu.dateExpense between @startDate and @FinalDate and (exu.[description] like '%Perdiem%' or exu.[description] like '%per-diem%')),0)as 'Perdiem',
-	isnull((select sum(amount) from expensesUsed as exu where exu.idHorsWorked = hw.idHorsWorked and exu.dateExpense between @startDate and @FinalDate and (exu.[description] like '%Travel%') ),0)as 'Travel'
-	
+	isnull((select sum(amount) from expensesUsed as exu where exu.idHorsWorked = hw.idHorsWorked and exu.dateExpense between @startDate and @FinalDate and (exu.[description] like '%Travel%') ),0)as 'Travel',
+	jb.Taxes
 	from hoursWorked as hw
 		inner join task as tk on tk.idAux = hw.idAux 
 		inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO
@@ -2573,6 +2573,7 @@ select
 	t1.jobNo,
 	t1.idPO,
 	t1.Class,
+	t1.Taxes,
 	(select
 	sum(hoursST)
 	from #TablaHorasClassPerdiem as t2 
@@ -2618,6 +2619,7 @@ T1.[Total Hours PO],T1.[Total Hours],T1.[Total Labor],
 T1.[Total Expenses],T1.[Total PerDiem],T1.[3rdParty],T1.[ScRent],T1.[CoEQ],T1.[Material],T1.[Subcontractors],T1.[Other],T1.[ExtraCostMaterial]
 ,T1.[Total Material]
 ,T1.[Total Cost]
+,T1.[Taxes]
  from (
 select 
 	cl.companyName,
@@ -2809,7 +2811,8 @@ select
 		inner join job as jb1 on po1.jobNo = jb1.jobNo
 		inner join clients  as cl1 on cl1.idClient = jb1.idClient
 		where po1.idPO = po.idPO and jb1.jobNo = jb.jobNo and cl1.numberClient = @numberClient and mtu1.dateMaterial between @startDate and @FinalDate),0 )
-	as 'Total Cost'
+	as 'Total Cost',
+	jb.[Taxes]
 from job as jb 
 inner join clients as cl on cl.idClient = jb.idClient 
 left join HomeAddress as ha on ha.idHomeAdress = cl.idHomeAddress
@@ -2820,6 +2823,7 @@ T1.[Total Expenses]>0 or T1.[Total PerDiem]>0 or T1.[3rdParty]>0 or T1.[ScRent]>
 >0 or T1.[Other]>0 or t1.[ExtraCostMaterial]
 >0 or T1.[Total Material] >0
 end
+
 GO
 ----#########################################################################################################################################################################################
 ----############## PROCEDIMINETO PARA SUBREPORTE DE MATERIALES EN ESTIMACION ################################################################################################################

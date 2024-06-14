@@ -304,7 +304,7 @@ Partial Class Clients
         Me.TableLayoutPanel2.ColumnCount = 3
         Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 47.45763!))
         Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 52.54237!))
-        Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 236.0!))
+        Me.TableLayoutPanel2.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 237.0!))
         Me.TableLayoutPanel2.Controls.Add(Me.Panel10, 2, 1)
         Me.TableLayoutPanel2.Controls.Add(Me.Panel9, 1, 1)
         Me.TableLayoutPanel2.Controls.Add(Me.Panel8, 0, 1)
@@ -325,10 +325,10 @@ Partial Class Clients
         '
         Me.Panel10.Controls.Add(Me.btnSelectClient)
         Me.Panel10.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel10.Location = New System.Drawing.Point(712, 186)
+        Me.Panel10.Location = New System.Drawing.Point(711, 186)
         Me.Panel10.Margin = New System.Windows.Forms.Padding(4)
         Me.Panel10.Name = "Panel10"
-        Me.Panel10.Size = New System.Drawing.Size(229, 43)
+        Me.Panel10.Size = New System.Drawing.Size(230, 43)
         Me.Panel10.TabIndex = 5
         '
         'btnSelectClient
@@ -343,7 +343,7 @@ Partial Class Clients
         Me.btnSelectClient.Location = New System.Drawing.Point(0, 0)
         Me.btnSelectClient.Margin = New System.Windows.Forms.Padding(4)
         Me.btnSelectClient.Name = "btnSelectClient"
-        Me.btnSelectClient.Size = New System.Drawing.Size(229, 43)
+        Me.btnSelectClient.Size = New System.Drawing.Size(230, 43)
         Me.btnSelectClient.TabIndex = 50
         Me.btnSelectClient.Text = "Select Client"
         Me.btnSelectClient.UseVisualStyleBackColor = True
@@ -357,7 +357,7 @@ Partial Class Clients
         Me.Panel9.Location = New System.Drawing.Point(340, 186)
         Me.Panel9.Margin = New System.Windows.Forms.Padding(4)
         Me.Panel9.Name = "Panel9"
-        Me.Panel9.Size = New System.Drawing.Size(364, 43)
+        Me.Panel9.Size = New System.Drawing.Size(363, 43)
         Me.Panel9.TabIndex = 4
         '
         'btnShowAll1
@@ -447,10 +447,10 @@ Partial Class Clients
         '
         Me.Panel6.Controls.Add(Me.TableLayoutPanel4)
         Me.Panel6.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel6.Location = New System.Drawing.Point(712, 4)
+        Me.Panel6.Location = New System.Drawing.Point(711, 4)
         Me.Panel6.Margin = New System.Windows.Forms.Padding(4)
         Me.Panel6.Name = "Panel6"
-        Me.Panel6.Size = New System.Drawing.Size(229, 174)
+        Me.Panel6.Size = New System.Drawing.Size(230, 174)
         Me.Panel6.TabIndex = 2
         '
         'TableLayoutPanel4
@@ -466,7 +466,7 @@ Partial Class Clients
         Me.TableLayoutPanel4.RowCount = 2
         Me.TableLayoutPanel4.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 81.16883!))
         Me.TableLayoutPanel4.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 18.83117!))
-        Me.TableLayoutPanel4.Size = New System.Drawing.Size(229, 174)
+        Me.TableLayoutPanel4.Size = New System.Drawing.Size(230, 174)
         Me.TableLayoutPanel4.TabIndex = 1
         '
         'btnChooseImage
@@ -480,7 +480,7 @@ Partial Class Clients
         Me.btnChooseImage.Location = New System.Drawing.Point(4, 145)
         Me.btnChooseImage.Margin = New System.Windows.Forms.Padding(4)
         Me.btnChooseImage.Name = "btnChooseImage"
-        Me.btnChooseImage.Size = New System.Drawing.Size(221, 25)
+        Me.btnChooseImage.Size = New System.Drawing.Size(222, 25)
         Me.btnChooseImage.TabIndex = 12
         Me.btnChooseImage.Text = "Choose Image ..."
         Me.btnChooseImage.UseVisualStyleBackColor = False
@@ -493,7 +493,7 @@ Partial Class Clients
         Me.imgPhoto.Location = New System.Drawing.Point(4, 4)
         Me.imgPhoto.Margin = New System.Windows.Forms.Padding(4)
         Me.imgPhoto.Name = "imgPhoto"
-        Me.imgPhoto.Size = New System.Drawing.Size(221, 133)
+        Me.imgPhoto.Size = New System.Drawing.Size(222, 133)
         Me.imgPhoto.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
         Me.imgPhoto.TabIndex = 0
         Me.imgPhoto.TabStop = False
@@ -510,7 +510,7 @@ Partial Class Clients
         Me.Panel7.Location = New System.Drawing.Point(340, 4)
         Me.Panel7.Margin = New System.Windows.Forms.Padding(4)
         Me.Panel7.Name = "Panel7"
-        Me.Panel7.Size = New System.Drawing.Size(364, 174)
+        Me.Panel7.Size = New System.Drawing.Size(363, 174)
         Me.Panel7.TabIndex = 1
         '
         'Label13
@@ -529,7 +529,7 @@ Partial Class Clients
         Me.txtPayTerms.Location = New System.Drawing.Point(135, 59)
         Me.txtPayTerms.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.txtPayTerms.Name = "txtPayTerms"
-        Me.txtPayTerms.Size = New System.Drawing.Size(224, 22)
+        Me.txtPayTerms.Size = New System.Drawing.Size(223, 22)
         Me.txtPayTerms.TabIndex = 42
         '
         'Label2
@@ -548,7 +548,7 @@ Partial Class Clients
         Me.txtCompanyName.Location = New System.Drawing.Point(135, 11)
         Me.txtCompanyName.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.txtCompanyName.Name = "txtCompanyName"
-        Me.txtCompanyName.Size = New System.Drawing.Size(224, 22)
+        Me.txtCompanyName.Size = New System.Drawing.Size(223, 22)
         Me.txtCompanyName.TabIndex = 6
         '
         'chbStatus

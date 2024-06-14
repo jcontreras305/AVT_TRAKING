@@ -350,7 +350,8 @@ select
 			iif((T2.[ST] + T2.[OT])>0,iif(T2.[Comp]>0,((T2.[ST] + T2.[OT])/(T2.[Comp]*0.01))-(T2.[ST] + T2.[OT]),0), -- Caso 2 de ETC
 			0	--Caso 3 de ETC
 			)),0) ) as 'ETC',
-	T2.[Phase] as 'Phase'
+	T2.[Phase] as 'Phase',
+	Round((T2.[Billing ST]+ T2.[Billing OT]+T2.[Expenses]+T2.[Total Material])*(IIF( T2.[Taxes]>0,T2.[Taxes]/100,0)),2) as 'Taxes'
 	INTO PBI.[ALL]
 from(
 	select 
@@ -369,7 +370,8 @@ from(
 	T1.[Begin Date],
 	T1.[End Date],
 	T1.[Estimate Hours],
-	T1.[Phase]
+	T1.[Phase],
+	T1.[Taxes]
 	from(
 		select 
 		DISTINCT
@@ -386,7 +388,8 @@ from(
 		CONVERT(nvarchar,tk.beginDate,101) as 'Begin Date',
 		CONVERT(nvarchar,tk.endDate,101) as 'End Date',
 		tk.estimateHours as 'Estimate Hours',
-		tk.phase as 'Phase'
+		tk.phase as 'Phase',
+		jb.Taxes
 		from hoursWorked as hw 
 		inner join task as tk on tk.idAux = hw.idAux 
 		inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO
@@ -413,7 +416,8 @@ from(
 		CONVERT(nvarchar,tk.beginDate,101) as 'Begin Date',
 		CONVERT(nvarchar,tk.endDate,101) as 'End Date',
 		tk.estimateHours as 'Estimate Hours',
-		tk.phase as 'Phase'
+		tk.phase as 'Phase',
+		jb.Taxes
 		from expensesUsed as exu
 		inner join expenses as ex on ex.idExpenses = exu.idExpense
 		inner join task as tk on tk.idAux = exu.idAux 
@@ -440,7 +444,8 @@ from(
 		CONVERT(nvarchar,tk.beginDate,101) as 'Begin Date',
 		CONVERT(nvarchar,tk.endDate,101) as 'End Date',
 		tk.estimateHours as 'Estimate Hours',
-		tk.phase as 'Phase'
+		tk.phase as 'Phase',
+		jb.Taxes
 		from materialUsed as mau
 		inner join material as ma on ma.idMaterial = mau.idMaterial 
 		inner join task as tk on tk.idAux = mau.idAux 
@@ -465,7 +470,7 @@ BEGIN
 	drop table PBI.[ALLBarriers]
 END
 
-select T1.[Year],T1.[ClientID],T1.[Month],T1.[MonthN],T1.[name] AS 'CLASS',T1.[ST Hours],T1.[OT Hours], T1.[ST Hours] + T1.[OT Hours] AS 'TotalHours', T1.[ST Cost],T1.[OT Cost]
+select T1.[Year],T1.[ClientID],T1.[Month],T1.[MonthN],T1.[name] AS 'CLASS',T1.[ST Hours],T1.[OT Hours], T1.[ST Hours] + T1.[OT Hours] AS 'TotalHours', T1.[ST Cost],T1.[OT Cost],Round(iif(T1.[Taxes]>0,(T1.[ST Cost]+T1.[OT Cost])*(T1.[Taxes]/100),0),2) AS 'Taxes'
 into PBI.ALLBarriers
 from (
 select 
@@ -475,7 +480,8 @@ jb.jobNo as 'ClientID', MONTH(hw.dateWorked) as 'Month' , DATENAME(MONTH,hw.date
 SUM(hw.hoursST) OVER (PARTITION BY YEAR(hw.dateWorked),wc.name,MONTH(hw.dateWorked),jb.jobNo) as 'ST Hours',
 SUM(hw.hoursOT+ hw.hours3) OVER (PARTITION BY YEAR(hw.dateWorked),wc.name,MONTH(hw.dateWorked),jb.jobNo) as 'OT Hours',
 SUM(hw.hoursST*wc.billingRate1) OVER (PARTITION BY YEAR(hw.dateWorked),wc.name,MONTH(hw.dateWorked),jb.jobNo) as 'ST Cost',
-SUM((hw.hoursOT*wc.billingRateOT) + (hw.hours3*wc.billingRate3)) OVER (PARTITION BY YEAR(hw.dateWorked),wc.name,MONTH(hw.dateWorked),jb.jobNo) as 'OT Cost'
+SUM((hw.hoursOT*wc.billingRateOT) + (hw.hours3*wc.billingRate3)) OVER (PARTITION BY YEAR(hw.dateWorked),wc.name,MONTH(hw.dateWorked),jb.jobNo) as 'OT Cost',
+jb.Taxes
 from hoursWorked as hw 
 inner join task as tk on tk.idAux = hw.idAux
 inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO
@@ -497,7 +503,7 @@ BEGIN
 	drop table PBI.[ALLBarriers2]
 END
 
-select T1.[Year],T1.[ClientID],T1.[Month],T1.[MonthN],T1.[name] AS 'CLASS',T1.[ST Hours],T1.[OT Hours], T1.[ST Hours] + T1.[OT Hours] AS 'TotalHours', T1.[ST Cost],T1.[OT Cost]
+select T1.[Year],T1.[ClientID],T1.[Month],T1.[MonthN],T1.[name] AS 'CLASS',T1.[ST Hours],T1.[OT Hours], T1.[ST Hours] + T1.[OT Hours] AS 'TotalHours', T1.[ST Cost],T1.[OT Cost],Round(iif(T1.[Taxes]>0,(T1.[ST Cost]+T1.[OT Cost])*(T1.[Taxes]/100),0),2) AS 'Taxes'
 into PBI.ALLBarriers2
 from (
 select 
@@ -507,7 +513,8 @@ jb.jobNo as 'ClientID', MONTH(hw.dateWorked) as 'Month' , DATENAME(MONTH,hw.date
 SUM(hw.hoursST) OVER (PARTITION BY YEAR(hw.dateWorked),wc.name,MONTH(hw.dateWorked),jb.jobNo) as 'ST Hours',
 SUM(hw.hoursOT+ hw.hours3) OVER (PARTITION BY YEAR(hw.dateWorked),wc.name,MONTH(hw.dateWorked),jb.jobNo) as 'OT Hours',
 SUM(hw.hoursST*wc.billingRate1) OVER (PARTITION BY YEAR(hw.dateWorked),wc.name,MONTH(hw.dateWorked),jb.jobNo) as 'ST Cost',
-SUM((hw.hoursOT*wc.billingRateOT) + (hw.hours3*wc.billingRate3)) OVER (PARTITION BY YEAR(hw.dateWorked),wc.name,MONTH(hw.dateWorked),jb.jobNo) as 'OT Cost'
+SUM((hw.hoursOT*wc.billingRateOT) + (hw.hours3*wc.billingRate3)) OVER (PARTITION BY YEAR(hw.dateWorked),wc.name,MONTH(hw.dateWorked),jb.jobNo) as 'OT Cost',
+jb.Taxes
 from hoursWorked as hw 
 inner join task as tk on tk.idAux = hw.idAux
 inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO
@@ -529,8 +536,8 @@ AS T1 ORDER BY T1.ClientID,T1.[Month]"
 BEGIN 
 	drop table PBI.[ALLCPH1]
 END
-SELECT *,ROUND(SUM((T3.[MaterialCost]+T3.[Cost])/IIF(T3.[Total Hours]=0,1,T3.[Total Hours]))OVER (PARTITION BY T3.[Year],T3.[MonthN],T3.[ClientID])
-,2,1) as 'CostPHMaterial' 
+SELECT distinct T3.[Year],T3.[Month],T3.[MonthN],T3.[ST Hours],T3.[OT Hours],T3.[Total Hours],T3.[Cost],T3.[CostPH],T3.[ClientID],T3.[MaterialCost],ROUND(SUM((T3.[MaterialCost]+T3.[Cost])/IIF(T3.[Total Hours]=0,1,T3.[Total Hours]))OVER (PARTITION BY T3.[Year],T3.[MonthN],T3.[ClientID])
+,2,1) as 'CostPHMaterial',Round(iif(T3.[Taxes]>0,(T3.[Cost]+T3.[MaterialCost])*(T3.[Taxes]/100),0),2) AS 'Taxes'
 INTO PBI.ALLCPH1 FROM (
 select distinct
 T2.[Year],
@@ -542,14 +549,17 @@ SUM(T2.[TotalHours]) OVER (PARTITION BY T2.[Year],T2.[MonthN],T2.[ClientID]) as 
 ROUND(SUM(T2.[Cost]) OVER (PARTITION BY T2.[Year],T2.[MonthN],T2.[ClientID]),2,1) as 'Cost' ,
 ROUND(SUM(T2.[Cost]/IIF(T2.[TotalHours]=0,1,T2.[TotalHours])) OVER (PARTITION BY T2.[Year],T2.[MonthN],T2.[ClientID]),2,1) as 'CostPH' ,
 T2.[ClientID],
-ROUND(SUM(T2.[MaterialCost]) OVER (PARTITION BY T2.[Year],T2.[MonthN],T2.[ClientID]),2,1) as 'MaterialCost'
+ROUND(SUM(T2.[MaterialCost]) OVER (PARTITION BY T2.[Year],T2.[MonthN],T2.[ClientID]),2,1) as 'MaterialCost',
+T2.[Taxes]
+
 --INTO PBI.ALLCPH1 
 from (
 select 
 T1.[Year],T1.[Month],T1.[MonthN],T1.[ST Hours],T1.[OT Hours],T1.[TotalHours],T1.[Cost],
 --T1.[Cost]/IIF(T1.[TotalHours]=0,1,T1.[TotalHours]) as 'CostPH',
 T1.ClientID,
-T1.[MaterialCost]--,Round(((T1.[MaterialCost]+T1.[Cost])/(IIF(T1.[TotalHours]=0,1,T1.[TotalHours]))),2,1) as 'CostPHMat'
+T1.[MaterialCost],--,Round(((T1.[MaterialCost]+T1.[Cost])/(IIF(T1.[TotalHours]=0,1,T1.[TotalHours]))),2,1) as 'CostPHMat'
+T1.[Taxes]
 --INTO PBI.ALLCPH1
 from(
 select 
@@ -560,7 +570,8 @@ SUM(hw.hoursOT+hw.hours3) OVER (PARTITION BY YEAR(hw.dateWorked),MONTH(hw.dateWo
 SUM(hw.hoursST + hw.hoursOT + hours3) OVER (PARTITION BY YEAR(hw.dateWorked),MONTH(hw.dateWorked),jb.jobNo) as 'TotalHours',
 ROUND(SUM(((hw.hoursST*wc.billingRate1) + (hw.hoursOT*wc.billingRateOT) + (hours3*wc.billingRate3))) OVER (PARTITION BY YEAR(hw.dateWorked),MONTH(hw.dateWorked),jb.jobNo),2) as 'Cost',
 jb.jobNo as 'ClientID',
-0 as  'MaterialCost'
+0 as  'MaterialCost',
+jb.Taxes
 from hoursWorked as hw 
 left join workCode as wc on wc.idWorkCode = hw.idWorkCode and hw.jobNo = wc.jobNo
 inner join task as tk on tk.idAux = hw.idAux 
@@ -577,7 +588,8 @@ select distinct YEAR(mtu.dateMaterial) as 'Year',MONTH(mtu.dateMaterial) as 'Mon
 0 as 'TotalHours',
 0 as 'Cost',
 jb.jobNo as 'ClientID',
-sum(mtu.amount) OVER (PARTITION BY YEAR(mtu.dateMaterial),MONTH(mtu.dateMaterial),jb.jobNo) as 'MaterialCost'
+sum(mtu.amount) OVER (PARTITION BY YEAR(mtu.dateMaterial),MONTH(mtu.dateMaterial),jb.jobNo) as 'MaterialCost',
+jb.Taxes
  from materialUsed as mtu 
 inner join material as mt on mt.idMaterial = mtu.idMaterial
 inner join task as tk on tk.idAux = mtu.idAux
@@ -634,7 +646,8 @@ BEGIN
 END
 --todos las horas de time sheet sin supervisor y sin holidays 
 select 
-T1.[Year],T1.[Month],T1.[MonthN],T1.[ST Hours],T1.[OT Hours],T1.[TotalHours],T1.[Cost],T1.[Cost]/T1.[TotalHours] as 'CostPH',T1.[ClientID]
+T1.[Year],T1.[Month],T1.[MonthN],T1.[ST Hours],T1.[OT Hours],T1.[TotalHours],T1.[Cost],T1.[Cost]/T1.[TotalHours] as 'CostPH',T1.[ClientID],
+Round(iif(T1.[Taxes]>0,(T1.[Cost])*(T1.[Taxes]/100),0),2) AS 'Taxes'
 INTO PBI.ALLCPH3
 from(
 select 
@@ -644,8 +657,8 @@ SUM(hw.hoursST) OVER (PARTITION BY YEAR(hw.dateWorked),MONTH(hw.dateWorked),jb.j
 SUM(hw.hoursOT+hw.hours3) OVER (PARTITION BY YEAR(hw.dateWorked),MONTH(hw.dateWorked),jb.jobNo) as 'OT Hours',
 SUM(hw.hoursST + hw.hoursOT + hours3) OVER (PARTITION BY YEAR(hw.dateWorked),MONTH(hw.dateWorked),jb.jobNo) as 'TotalHours',
 ROUND(SUM(((hw.hoursST*wc.billingRate1) + (hw.hoursOT*wc.billingRateOT) + (hours3*wc.billingRate3))) OVER (PARTITION BY YEAR(hw.dateWorked),MONTH(hw.dateWorked),jb.jobNo),2) as 'Cost',
-jb.jobNo as 'ClientID'
-
+jb.jobNo as 'ClientID',
+jb.Taxes
 from hoursWorked as hw 
 inner join task as tk on tk.idAux = hw.idAux 
 inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO 
@@ -838,6 +851,9 @@ BEGIN
 	drop table PBI.[CostHPTAS]
 END
 
+select T2.[Year],T2.[PO],T2.[Weekly],T2.[ClientID],T2.[ST Hours],T2.[OT Hours],T2.[ST Cost],T2.[OT Cost],T2.[Total Mat],T2.[Total Exp],T2.[Total Rental 3rd party],T2.[Total In House],T2.[Total Company Equipment],T2.[Total Subcontract],T2.[Total Tools],T2.[Total Consumable],T2.[Total Other]
+,Round(iif(T2.[Taxes]>0,(T2.[ST Cost]+T2.[OT Cost]+T2.[Total Mat]+T2.[Total Exp]+T2.[Total Rental 3rd party]+T2.[Total In House]+T2.[Total Company Equipment]+T2.[Total Subcontract]+T2.[Total Tools]+T2.[Total Consumable]+T2.[Total Other])*(T2.[Taxes]/100),0),2) AS 'Taxes'
+INTO PBI.CostHPTAS from (
 select DISTINCT
 T1.[Year],
 T1.[PO],
@@ -855,8 +871,9 @@ SUM(T1.[Total Company Equipment]) OVER (PARTITION BY T1.[Year],T1.[Weekly],T1.[P
 SUM(T1.[Total Subcontract]) OVER (PARTITION BY T1.[Year],T1.[Weekly],T1.[PO],T1.[ClientID]) as 'Total Subcontract',
 SUM(T1.[Total Tools]) OVER (PARTITION BY T1.[Year],T1.[Weekly],T1.[PO],T1.[ClientID]) as 'Total Tools',
 SUM(T1.[Total Consumables]) OVER (PARTITION BY T1.[Year],T1.[Weekly],T1.[PO],T1.[ClientID]) as 'Total Consumable',
-SUM(T1.[Total Other]) OVER (PARTITION BY T1.[Year],T1.[Weekly],T1.[PO],T1.[ClientID]) as 'Total Other'
-INTO PBI.CostHPTAS
+SUM(T1.[Total Other]) OVER (PARTITION BY T1.[Year],T1.[Weekly],T1.[PO],T1.[ClientID]) as 'Total Other',
+T1.[Taxes]
+
 from(
 
 select 
@@ -877,7 +894,8 @@ ROUND(SUM(hw.hoursST*wc.billingRate1) OVER (PARTITION BY YEAR(hw.dateWorked),DAT
 0 as 'Total Subcontract',
 0 as 'Total Tools',
 0 as 'Total Consumables',
-0 as 'Total Other'
+0 as 'Total Other',
+jb.Taxes
 from hoursWorked as hw 
 inner join task as tk on tk.idAux = hw.idAux
 inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO
@@ -904,7 +922,8 @@ exu.amount as 'Total Exp',
 0 as 'Total Subcontract',
 0 as 'Total Tools',
 0 as 'Total Consumables',
-0 as 'Total Other'
+0 as 'Total Other',
+jb.Taxes
 from expensesUsed as exu 
 inner join expenses as ex on ex.idExpenses = exu.idExpense
 left join task as tk on tk.idAux = exu.idAux
@@ -932,7 +951,8 @@ IIF(subString(code,LEN(code),1) = 'F' , mau.amount,0) as 'Total Company Equipmen
 IIF(subString(code,LEN(code),1) = 'S' , mau.amount,0) as 'Total Subcontract',
 IIF(subString(code,LEN(code),1) = 'T' , mau.amount,0) as 'Total Tools',
 IIF(subString(code,LEN(code),1) = 'V' , mau.amount,0) as 'Total Consumables',
-IIF(subString(code,LEN(code),1) = 'Y' , mau.amount,0) as 'Total Other'
+IIF(subString(code,LEN(code),1) = 'Y' , mau.amount,0) as 'Total Other',
+jb.Taxes
 from materialUsed as mau 
 inner join material as ma on ma.idMaterial = mau.idMaterial
 left join task as tk on tk.idAux = mau.idAux
@@ -941,7 +961,8 @@ left join projectOrder as po on po.idPO = wo.idPO and po.jobNo = wo.jobNo
 left join job as jb on jb.jobNo = po.jobNo 
 where mau.dateMaterial between @StartDate and @EndDate 
 ) AS T1
- ORDER BY T1.[Weekly],T1.[PO],T1.[ClientID]"
+) AS T2
+ ORDER BY T2.[Weekly],T2.[PO],T2.[ClientID]"
 			Return _CostHPTAS
 		End Get
 		Set(value As String)
@@ -956,11 +977,12 @@ BEGIN
 	drop table PBI.[CostMth]
 END
 
-select * ,
+select T2.[Year],T2.[PO],T2.[Month],T2.[ClientID],T2.[ST Hours],T2.[OT Hours],T2.[ST Cost],T2.[OT Cost],T2.[Total Exp],T2.[Total Mat],T2.[Total Rental 3rd party],T2.[Total In House],T2.[Total Scaffold],T2.[Total Company Equipment],T2.[Total Subcontract],T2.[Total Tools],T2.[Total Consumable],T2.[Total Other],
 	(T2.[OT Cost]+T2.[ST Cost]+T2.[Total Exp]+T2.[Total Mat]+T2.[Total Rental 3rd party]+T2.[Total In House]+T2.[Total Scaffold]+T2.[Total Company Equipment]+T2.[Total Subcontract]+T2.[Total Tools]+T2.[Total Consumable]+T2.[Total Other])as 'T Cost',
 	(T2.[ST Hours]+T2.[OT Hours]) as 'T Hrs',
 	iif((T2.[ST Hours]+T2.[OT Hours])=0,(T2.[OT Cost]+T2.[ST Cost]+T2.[Total Exp]+T2.[Total Mat]+T2.[Total Rental 3rd party]+T2.[Total In House]+T2.[Total Scaffold]+T2.[Total Company Equipment]+T2.[Total Subcontract]+T2.[Total Tools]+T2.[Total Consumable]+T2.[Total Other])/1,
-	(T2.[OT Cost]+T2.[ST Cost]+T2.[Total Exp]+T2.[Total Mat]+T2.[Total Rental 3rd party]+T2.[Total In House]+T2.[Total Scaffold]+T2.[Total Company Equipment]+T2.[Total Subcontract]+T2.[Total Tools]+T2.[Total Consumable]+T2.[Total Other])/(T2.[ST Hours]+T2.[OT Hours])) as 'Cost PH'
+	(T2.[OT Cost]+T2.[ST Cost]+T2.[Total Exp]+T2.[Total Mat]+T2.[Total Rental 3rd party]+T2.[Total In House]+T2.[Total Scaffold]+T2.[Total Company Equipment]+T2.[Total Subcontract]+T2.[Total Tools]+T2.[Total Consumable]+T2.[Total Other])/(T2.[ST Hours]+T2.[OT Hours])) as 'Cost PH',
+	Round(iif(T2.[Taxes]>0,(T2.[OT Cost]+T2.[ST Cost]+T2.[Total Exp]+T2.[Total Mat]+T2.[Total Rental 3rd party]+T2.[Total In House]+T2.[Total Scaffold]+T2.[Total Company Equipment]+T2.[Total Subcontract]+T2.[Total Tools]+T2.[Total Consumable]+T2.[Total Other])*(T2.[Taxes]/100),0),2) AS 'Taxes'
 	INTO PBI.CostMth
 from (
 select DISTINCT
@@ -981,7 +1003,8 @@ SUM(T1.[Total Company Equipment]) OVER (PARTITION BY T1.[Year],T1.[Month],T1.[PO
 SUM(T1.[Total Subcontract]) OVER (PARTITION BY T1.[Year],T1.[Month],T1.[PO],T1.[ClientID]) as 'Total Subcontract',
 SUM(T1.[Total Tools]) OVER (PARTITION BY T1.[Year],T1.[Month],T1.[PO],T1.[ClientID]) as 'Total Tools',
 SUM(T1.[Total Consumables]) OVER (PARTITION BY T1.[Year],T1.[Month],T1.[PO],T1.[ClientID]) as 'Total Consumable',
-SUM(T1.[Total Other]) OVER (PARTITION BY T1.[Year],T1.[Month],T1.[PO],T1.[ClientID]) as 'Total Other'
+SUM(T1.[Total Other]) OVER (PARTITION BY T1.[Year],T1.[Month],T1.[PO],T1.[ClientID]) as 'Total Other',
+T1.[Taxes]
 from(
 
 select 
@@ -1003,7 +1026,8 @@ ROUND(SUM(hw.hoursST*wc.billingRate1) OVER (PARTITION BY YEAR(hw.dateWorked),Mon
 0 as 'Total Subcontract',
 0 as 'Total Tools',
 0 as 'Total Consumables',
-0 as 'Total Other'
+0 as 'Total Other',
+jb.Taxes
 from hoursWorked as hw 
 inner join task as tk on tk.idAux = hw.idAux
 inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO
@@ -1031,7 +1055,8 @@ exu.amount as 'Total Exp',
 0 as 'Total Subcontract',
 0 as 'Total Tools',
 0 as 'Total Consumables',
-0 as 'Total Other'
+0 as 'Total Other',
+jb.Taxes
 from expensesUsed as exu 
 inner join expenses as ex on ex.idExpenses = exu.idExpense
 inner join task as tk on tk.idAux = exu.idAux
@@ -1060,7 +1085,8 @@ IIF(subString(code,LEN(code),1) = 'F' and (not code like ('%scaffold%') or name 
 IIF(subString(code,LEN(code),1) = 'S' and (not code like ('%scaffold%') or name like '%scaffold%'), mau.amount,0) as 'Total Subcontract',
 IIF(subString(code,LEN(code),1) = 'T' and (not code like ('%scaffold%') or name like '%scaffold%'), mau.amount,0) as 'Total Tools',
 IIF(subString(code,LEN(code),1) = 'V' and (not code like ('%scaffold%') or name like '%scaffold%'), mau.amount,0) as 'Total Consumables',
-IIF(subString(code,LEN(code),1) = 'Y' and (not code like ('%scaffold%') or name like '%scaffold%'), mau.amount,0) as 'Total Other'
+IIF(subString(code,LEN(code),1) = 'Y' and (not code like ('%scaffold%') or name like '%scaffold%'), mau.amount,0) as 'Total Other',
+jb.Taxes
 from materialUsed as mau 
 inner join material as ma on ma.idMaterial = mau.idMaterial
 inner join task as tk on tk.idAux = mau.idAux
@@ -1290,12 +1316,8 @@ where kpi.dateWorked between @StartDate and @EndDate and kpi.install like 'ACM' 
 BEGIN 
 	drop table PBI.[ARInvoices]
 END
-
-IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES where TABLE_SCHEMA = 'PBI' and TABLE_NAME = 'ARInvoices')
-BEGIN 
-	drop table PBI.[ARInvoices]
-END
-select * INTO PBI.[ARInvoices] from (
+select T1.[ClientID],T1.[PO],T1.[Invoice#],T1.[Amount],T1.[Invoice Date],T1.[Due Date],T1.[Past Due Days], Round(iif(T1.[Taxes]>0,(T1.[Amount])*(T1.[Taxes]/100),0),2) AS 'Taxes' 
+INTO PBI.[ARInvoices] from (
 select
 jb.jobNo as 'ClientID' ,
 po.idPO as 'PO',
@@ -1329,14 +1351,14 @@ where po1.idPO = po.idPO and jb1.jobNo = jb.jobNo and cl1.idClient = inv.idClien
 as 'Amount',
 CONVERT(nvarchar, inv.invoiceDate, 101) as 'Invoice Date',
 CONVERT(nvarchar, DATEADD(DAY, IIF(cl.payTerms='',0,CONVERT(INT, cl.payterms)), inv.invoiceDate),101)  as 'Due Date',
-DATEDIFF(DAY,DATEADD(DAY, IIF(cl.payTerms='',0,CONVERT(INT, cl.payterms)), inv.invoiceDate),GETDATE()) as 'Past Due Days'
-
+DATEDIFF(DAY,DATEADD(DAY, IIF(cl.payTerms='',0,CONVERT(INT, cl.payterms)), inv.invoiceDate),GETDATE()) as 'Past Due Days',
+jb.Taxes
 from invoice as inv
 inner join projectOrder as po on po.idPO = inv.idPO
 inner join job as jb on jb.jobNo = po.jobNo
 inner join clients as cl on cl.idClient = inv.idClient and jb.idClient = cl.idClient
 where (inv.startDate between @StartDate and @EndDate or inv.FinalDate between @StartDate and @EndDate) and inv.[status] = 0
- ) as T1 where T1.Amount > 0 "
+ ) as T1 where T1.Amount > 0"
 			Return _AR_Inovices
 		End Get
 		Set(value As String)
@@ -1351,7 +1373,7 @@ BEGIN
 	drop table PBI.[Invoices]
 END
 
-select * INTO PBI.[Invoices] from (select 
+select T1.[ClientID],T1.[Pay Terms],T1.[PO],T1.[Invoice],T1.[Invoice Date],T1.[Total Hours PO],T1.[Total Labor],T1.[Total Expenses],T1.[Total PerDiem],T1.[3rdParty],T1.[ScRent],T1.[CoEQ],T1.[Material],T1.[Subcontractors],T1.[Other],T1.[ExtraCostMaterial],T1.[Total Material],T1.[Total Cost], Round(iif(T1.[TX]>0,(T1.[Total Cost])*(T1.[TX]/100),0),2) AS 'Taxes' INTO PBI.[Invoices] from (select 
 jb.jobNo as 'ClientID',
 IIF(cl.payTerms='',0,cl.payTerms) as 'Pay Terms',
 po.idPO as 'PO',
@@ -1526,12 +1548,13 @@ ISNULL((select sum(mtu1.amount) from materialUsed as mtu1
 	inner join job as jb1 on po1.jobNo = jb1.jobNo
 	inner join clients  as cl1 on cl1.idClient = jb1.idClient
 where po1.idPO = po.idPO and jb1.jobNo = jb.jobNo and cl1.idClient = inv.idClient and mtu1.dateMaterial between inv.startDate and inv.FinalDate ),0 ),2)
-as 'Total Cost'
+as 'Total Cost',
+jb.Taxes as 'TX'
 from invoice as inv
 inner join projectOrder as po on po.idPO = inv.idPO
 inner join job as jb on jb.jobNo = po.jobNo
 inner join clients as cl on cl.idClient = inv.idClient and jb.idClient = cl.idClient
-where inv.invoiceDate between @StartDate and @EndDate and inv.[status] = 0 ) as T1 where T1.[Total Cost] > 0 "
+where inv.invoiceDate between @StartDate and @EndDate and inv.[status] = 0 ) as T1 where T1.[Total Cost] > 0"
 			Return _Invoices
 		End Get
 		Set(value As String)
@@ -1547,7 +1570,7 @@ BEGIN
 	drop table PBI.[InvoicesCost]
 END
 
-select * INTO PBI.[InvoicesCost] 
+select T1.[ClientID],T1.[Year],T1.[Month],T1.[Invoice],T1.[Invoice Date],T1.[Total Hours],T1.[Total Labor],T1.[Total Expenses],T1.[Total PerDiem],T1.[3rdParty],T1.[ScRent],T1.[CoEQ],T1.[Material],T1.[Subcontractors],T1.[Other],T1.[ExtraCostMaterial],T1.[Total Material],T1.[Total Cost],Round(iif(T1.[Taxes]>0,(T1.[Total Cost])*(T1.[Taxes]/100),0),2) AS 'Taxes' INTO PBI.[InvoicesCost] 
 from 
 (select 
 jb.jobNo as 'ClientID',
@@ -1724,7 +1747,8 @@ ISNULL((select sum(mtu1.amount) from materialUsed as mtu1
 	inner join job as jb1 on po1.jobNo = jb1.jobNo
 	inner join clients  as cl1 on cl1.idClient = jb1.idClient
 where po1.idPO = po.idPO and jb1.jobNo = jb.jobNo and cl1.idClient = inv.idClient and mtu1.dateMaterial between inv.startDate and inv.FinalDate ),0 ),2)
-as 'Total Cost'
+as 'Total Cost',
+jb.Taxes
 from invoice as inv
 inner join projectOrder as po on po.idPO = inv.idPO
 inner join job as jb on jb.jobNo = po.jobNo
