@@ -307,6 +307,7 @@ where (hw.dateWorked between '" + startDate + "' and '" + endDate + "'
 	or mtu.dateMaterial between '" + startDate + "' and '" + endDate + "') 
 	and cl.numberClient = " + clientNumber + " and po.idPO like " + If(all, "'%%'", "'" + idPO + "' 
 order by po.idPO asc"), conn)
+            cmd.CommandTimeout = 200
             Dim dr As SqlDataReader = cmd.ExecuteReader()
             tbl.Rows.Clear()
             While dr.Read()
