@@ -1,10 +1,21 @@
 ﻿Public Class Project
     Private _jobNum As Long
-    Private _accountNum, _equipament, _manager, _description, _expCode, _idWO, _idAuxWO, _idPO, _idAux, _idTask, _Line, _WBS, _Area, _postingProject, _phase As String
+    Private _accountNum, _equipament, _manager, _description, _expCode, _idWO, _idAuxWO, _idPO, _idAux, _idTask, _Line, _WBS, _Area, _postingProject, _phase, _Taxes As String
     Private _beginDate, _endDate As Date
     Private _estimateHours, _totalBilling, _PercentComplete As Double
     Private _status As Char
 
+    Public Property Taxes() As String
+        Get
+            If _Taxes Is Nothing Then
+                _Taxes = "0"
+            End If
+            Return _Taxes
+        End Get
+        Set(ByVal value As String)
+            _Taxes = value
+        End Set
+    End Property
     Public Property Phase() As String
         Get
             If _phase Is Nothing Then

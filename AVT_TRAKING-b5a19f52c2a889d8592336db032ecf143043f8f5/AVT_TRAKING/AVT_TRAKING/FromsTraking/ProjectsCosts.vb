@@ -495,6 +495,7 @@ Public Class ProjectsCosts
                 pjt.Area = lstDatosPO(19)
                 pjt.postingProject = lstDatosPO(20)
                 pjt.Phase = lstDatosPO(21)
+                pjt.Taxes = lstDatosPO(22)
                 Dim tbl As New DataTable
                 mtdJobs.consultaJobs(tbl)
                 Dim arrayJob() As DataRow = tbl.Select("jobNo =" + pjt.jobNum.ToString)
@@ -1903,7 +1904,7 @@ Public Class ProjectsCosts
 
         Dim totalExpences As Double = 0.0
         Dim totalMaterial As Double = 0.0
-
+        Dim totalTaxes As Double = 0.0
         If tblHoursWorkedProject.Rows.Count > 0 Then
 
             For Each row As DataGridViewRow In tblHoursWorkedProject.Rows
@@ -1939,7 +1940,9 @@ Public Class ProjectsCosts
         txtTotalHours3Billing.Text = "$" + totalCostHours3.ToString("N")
         txtTotalExpenses.Text = "$" + totalExpences.ToString("N")
         txtTotalMaterial.Text = "$" + totalMaterial.ToString("N")
-        txtProjectBilled.Text = "$" + (totalCostHoursST + totalCostHoursOT + totalCostHours3 + totalExpences + totalMaterial).ToString("N")
+        totalTaxes = (totalCostHoursST + totalCostHoursOT + totalCostHours3 + totalExpences + totalMaterial) * If(CDbl(pjt.Taxes) > 0, CDbl(pjt.Taxes) / 100, 0)
+        txtTotalTaxes.Text = "$" + (totalTaxes).ToString("N")
+        txtProjectBilled.Text = "$" + ((totalCostHoursST + totalCostHoursOT + totalCostHours3 + totalExpences + totalMaterial) + totalTaxes).ToString("N")
         txtLeftSpend.Text = (sprTotalBilling.Value - (totalCostHoursST + totalCostHoursOT + totalCostHours3 + totalExpences + totalMaterial)).ToString("N")
         txtLeftSpend.Text = "$" + txtLeftSpend.Text
         Dim mensaje As String = ""
@@ -2163,65 +2166,4 @@ Public Class ProjectsCosts
             End If
         End If
     End Sub
-
-
-
-    'Private Sub tblExpencesProjects_CellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles tblExpencesProjects.CellEndEdit
-    '    If tblExpencesProjects.Rows.Count > 0 Then
-    '        Select Case tblExpencesProjects.Columns(e.ColumnIndex).Name
-    '            Case "Description"
-    '                Dim mensaje As String = ""
-    '                Dim datosExpenses As New List(Of String)
-    '                If Not tblExpencesProjects.CurrentRow.Cells("idExpenseUsed").Value Is DBNull.Value Then
-    '                    datosExpenses.Add(tblExpencesProjects.CurrentRow.Cells("idExpenseUsed").Value)
-    '                Else
-    '                    datosExpenses.Add("")
-    '                End If
-    '                If tblExpencesProjects.CurrentRow.Cells("Date").Value IsNot DBNull.Value Then
-    '                    datosExpenses.Add(validaFechaParaSQl(tblExpencesProjects.CurrentRow.Cells("Date").Value))
-    '                Else
-    '                    mensaje = If(mensaje = "", "Please choose a Date.", vbCrLf + "Please choose a Date")
-    '                End If
-    '                If tblExpencesProjects.CurrentRow.Cells("Expense Code").Value IsNot DBNull.Value Then
-    '                    For Each row As DataRow In listIdsExpCodes.Rows
-    '                        If row.Item(1) = tblExpencesProjects.CurrentRow.Cells("Expense Code").Value Then
-    '                            datosExpenses.Add(row.Item(0))
-    '                            Exit For
-    '                        End If
-    '                    Next
-    '                Else
-    '                    mensaje = If(mensaje = "", "Check the 'Expense Code' Cell.", vbCrLf + "Check the 'Expense Code' Cell.")
-    '                End If
-
-    '                If Not tblExpencesProjects.CurrentRow.Cells("Amount").Value Is DBNull.Value Then
-    '                    If soloNumero(tblExpencesProjects.CurrentRow.Cells("Amount").Value) Then
-    '                        datosExpenses.Add(tblExpencesProjects.CurrentRow.Cells("Amount").Value)
-    '                    Else
-    '                        mensaje = If(mensaje = "", "Check the 'Amount' Cell, it only permit numbers.", vbCrLf + "Check the 'Amount' Cell, it only permit numbers.")
-    '                    End If
-    '                Else
-    '                    mensaje = If(mensaje = "", "Check the 'Amount' Cell.", vbCrLf + "Check the 'Amount' Cell.")
-    '                End If
-    '                If tblExpencesProjects.CurrentRow.Cells("Description").Value IsNot DBNull.Value Then
-    '                    datosExpenses.Add(tblExpencesProjects.CurrentRow.Cells("Description").Value)
-    '                Else
-    '                    datosExpenses.Add("")
-    '                End If
-    '                datosExpenses.Add(pjt.idAux)
-    '                If mensaje = "" Then
-    '                    If datosExpenses(0) = "" Then 'Insert
-    '                        mtdJobs.insertExpensesUsed(datosExpenses)
-    '                        mtdJobs.buscarExpencesPorProyecto(tblExpencesProjects, idAuxWO, task)
-    '                        calcularValores()
-    '                    Else ' Update
-    '                        mtdJobs.updateExpensesUsed(datosExpenses)
-    '                        mtdJobs.buscarExpencesPorProyecto(tblExpencesProjects, idAuxWO, task)
-    '                        calcularValores()
-    '                    End If
-    '                Else
-    '                    MessageBox.Show(mensaje, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
-    '                End If
-    '        End Select
-    '    End If
-    'End Sub
 End Class

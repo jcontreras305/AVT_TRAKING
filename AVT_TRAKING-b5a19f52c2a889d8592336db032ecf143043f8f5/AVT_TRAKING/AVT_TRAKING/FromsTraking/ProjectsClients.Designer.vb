@@ -82,6 +82,8 @@ Partial Class ProjectsClients
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
         Me.TableLayoutPanel2 = New System.Windows.Forms.TableLayoutPanel()
         Me.Panel9 = New System.Windows.Forms.Panel()
+        Me.sprTaxes = New System.Windows.Forms.NumericUpDown()
+        Me.Label17 = New System.Windows.Forms.Label()
         Me.Panel8 = New System.Windows.Forms.Panel()
         Me.Panel7 = New System.Windows.Forms.Panel()
         Me.Label9 = New System.Windows.Forms.Label()
@@ -92,17 +94,15 @@ Partial Class ProjectsClients
         Me.Panel10 = New System.Windows.Forms.Panel()
         Me.btnAdd = New System.Windows.Forms.Button()
         Me.btnCancelSaveJob = New System.Windows.Forms.Button()
-        Me.Button2 = New System.Windows.Forms.Button()
         Me.Panel11 = New System.Windows.Forms.Panel()
         Me.Label12 = New System.Windows.Forms.Label()
         Me.cmbClient = New System.Windows.Forms.ComboBox()
+        Me.Panel12 = New System.Windows.Forms.Panel()
+        Me.Button2 = New System.Windows.Forms.Button()
         Me.PanelChildForm = New System.Windows.Forms.Panel()
         Me.TableLayoutPanel4 = New System.Windows.Forms.TableLayoutPanel()
         Me.Panel3 = New System.Windows.Forms.Panel()
         Me.tblAllProjects = New System.Windows.Forms.DataGridView()
-        Me.Label17 = New System.Windows.Forms.Label()
-        Me.Panel12 = New System.Windows.Forms.Panel()
-        Me.sprTaxes = New System.Windows.Forms.NumericUpDown()
         Me.Panel1.SuspendLayout()
         Me.pnlButtonsPOCl.SuspendLayout()
         Me.PnllSetup.SuspendLayout()
@@ -118,18 +118,18 @@ Partial Class ProjectsClients
         Me.TableLayoutPanel1.SuspendLayout()
         Me.TableLayoutPanel2.SuspendLayout()
         Me.Panel9.SuspendLayout()
+        CType(Me.sprTaxes, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel8.SuspendLayout()
         Me.Panel7.SuspendLayout()
         Me.Panel6.SuspendLayout()
         Me.Panel5.SuspendLayout()
         Me.Panel10.SuspendLayout()
         Me.Panel11.SuspendLayout()
+        Me.Panel12.SuspendLayout()
         Me.PanelChildForm.SuspendLayout()
         Me.TableLayoutPanel4.SuspendLayout()
         Me.Panel3.SuspendLayout()
         CType(Me.tblAllProjects, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.Panel12.SuspendLayout()
-        CType(Me.sprTaxes, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'Panel1
@@ -967,6 +967,26 @@ Partial Class ProjectsClients
         Me.Panel9.Size = New System.Drawing.Size(362, 26)
         Me.Panel9.TabIndex = 4
         '
+        'sprTaxes
+        '
+        Me.sprTaxes.DecimalPlaces = 2
+        Me.sprTaxes.Location = New System.Drawing.Point(124, -1)
+        Me.sprTaxes.Name = "sprTaxes"
+        Me.sprTaxes.Size = New System.Drawing.Size(82, 22)
+        Me.sprTaxes.TabIndex = 29
+        Me.sprTaxes.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
+        '
+        'Label17
+        '
+        Me.Label17.AutoSize = True
+        Me.Label17.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.Label17.Location = New System.Drawing.Point(67, 4)
+        Me.Label17.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.Label17.Name = "Label17"
+        Me.Label17.Size = New System.Drawing.Size(46, 17)
+        Me.Label17.TabIndex = 28
+        Me.Label17.Text = "Taxes"
+        '
         'Panel8
         '
         Me.Panel8.Controls.Add(Me.txtFirstName)
@@ -1095,20 +1115,6 @@ Partial Class ProjectsClients
         Me.btnCancelSaveJob.UseVisualStyleBackColor = True
         Me.btnCancelSaveJob.Visible = False
         '
-        'Button2
-        '
-        Me.Button2.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.Button2.FlatAppearance.BorderSize = 0
-        Me.Button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.Button2.ForeColor = System.Drawing.Color.Red
-        Me.Button2.Image = Global.AVT_TRAKING.My.Resources.Resources._exit
-        Me.Button2.Location = New System.Drawing.Point(943, 3)
-        Me.Button2.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
-        Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(57, 34)
-        Me.Button2.TabIndex = 3
-        Me.Button2.UseVisualStyleBackColor = True
-        '
         'Panel11
         '
         Me.Panel11.Controls.Add(Me.Label12)
@@ -1137,6 +1143,31 @@ Partial Class ProjectsClients
         Me.cmbClient.Name = "cmbClient"
         Me.cmbClient.Size = New System.Drawing.Size(303, 24)
         Me.cmbClient.TabIndex = 16
+        '
+        'Panel12
+        '
+        Me.Panel12.Controls.Add(Me.txtCompanyName)
+        Me.Panel12.Controls.Add(Me.Label5)
+        Me.Panel12.Controls.Add(Me.Button2)
+        Me.Panel12.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Panel12.Location = New System.Drawing.Point(381, 3)
+        Me.Panel12.Name = "Panel12"
+        Me.Panel12.Size = New System.Drawing.Size(1003, 37)
+        Me.Panel12.TabIndex = 17
+        '
+        'Button2
+        '
+        Me.Button2.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.Button2.FlatAppearance.BorderSize = 0
+        Me.Button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.Button2.ForeColor = System.Drawing.Color.Red
+        Me.Button2.Image = Global.AVT_TRAKING.My.Resources.Resources._exit
+        Me.Button2.Location = New System.Drawing.Point(943, 3)
+        Me.Button2.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.Button2.Name = "Button2"
+        Me.Button2.Size = New System.Drawing.Size(57, 34)
+        Me.Button2.TabIndex = 3
+        Me.Button2.UseVisualStyleBackColor = True
         '
         'PanelChildForm
         '
@@ -1191,37 +1222,6 @@ Partial Class ProjectsClients
         Me.tblAllProjects.Size = New System.Drawing.Size(1206, 470)
         Me.tblAllProjects.TabIndex = 8
         '
-        'Label17
-        '
-        Me.Label17.AutoSize = True
-        Me.Label17.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.Label17.Location = New System.Drawing.Point(67, 4)
-        Me.Label17.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.Label17.Name = "Label17"
-        Me.Label17.Size = New System.Drawing.Size(46, 17)
-        Me.Label17.TabIndex = 28
-        Me.Label17.Text = "Taxes"
-        '
-        'Panel12
-        '
-        Me.Panel12.Controls.Add(Me.txtCompanyName)
-        Me.Panel12.Controls.Add(Me.Label5)
-        Me.Panel12.Controls.Add(Me.Button2)
-        Me.Panel12.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel12.Location = New System.Drawing.Point(381, 3)
-        Me.Panel12.Name = "Panel12"
-        Me.Panel12.Size = New System.Drawing.Size(1003, 37)
-        Me.Panel12.TabIndex = 17
-        '
-        'sprTaxes
-        '
-        Me.sprTaxes.DecimalPlaces = 2
-        Me.sprTaxes.Location = New System.Drawing.Point(124, -1)
-        Me.sprTaxes.Name = "sprTaxes"
-        Me.sprTaxes.Size = New System.Drawing.Size(82, 22)
-        Me.sprTaxes.TabIndex = 29
-        Me.sprTaxes.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
-        '
         'ProjectsClients
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
@@ -1253,6 +1253,7 @@ Partial Class ProjectsClients
         Me.TableLayoutPanel2.ResumeLayout(False)
         Me.Panel9.ResumeLayout(False)
         Me.Panel9.PerformLayout()
+        CType(Me.sprTaxes, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel8.ResumeLayout(False)
         Me.Panel8.PerformLayout()
         Me.Panel7.ResumeLayout(False)
@@ -1264,13 +1265,12 @@ Partial Class ProjectsClients
         Me.Panel10.ResumeLayout(False)
         Me.Panel11.ResumeLayout(False)
         Me.Panel11.PerformLayout()
+        Me.Panel12.ResumeLayout(False)
+        Me.Panel12.PerformLayout()
         Me.PanelChildForm.ResumeLayout(False)
         Me.TableLayoutPanel4.ResumeLayout(False)
         Me.Panel3.ResumeLayout(False)
         CType(Me.tblAllProjects, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.Panel12.ResumeLayout(False)
-        Me.Panel12.PerformLayout()
-        CType(Me.sprTaxes, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub

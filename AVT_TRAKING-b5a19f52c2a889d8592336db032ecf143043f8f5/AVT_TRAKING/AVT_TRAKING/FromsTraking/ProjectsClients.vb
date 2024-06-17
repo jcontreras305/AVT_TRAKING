@@ -572,8 +572,6 @@ Public Class ProjectsClients
         End Try
     End Sub
 
-
-
     Private Sub btnTrackVehicle_Click(sender As Object, e As EventArgs) Handles btnTrackVehicle.Click
         Dim VT As New VehicleTrack
         If numberClient IsNot Nothing Then

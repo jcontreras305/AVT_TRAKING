@@ -976,7 +976,8 @@ tk.task,
 tk.idAux,
 wo.idAuxWO,
 po.line,
-po.WBS
+po.WBS,
+jb.Taxes
 from clients as cl inner join job as jb  on jb.idClient = cl.idClient
 inner join projectOrder as po on po.jobNo = jb.jobNo
 inner join workOrder as wo on wo.idPO = po.idPO and wo.jobNo = po.jobNo
@@ -1194,7 +1195,8 @@ po.Line,
 po.WBS,
 tk.Area,
 jb.postingProject,
-tk.phase
+tk.phase,
+jb.Taxes
 from 
 job as jb 
 inner join clients as cl on jb.idClient = cl.idClient
@@ -1227,6 +1229,7 @@ where jb.jobNo = " + If(idJob = "", "0", idJob).ToString() + " order by wo.idWO 
                 lstDatosPO.Add(If(reader("Area") Is DBNull.Value, "", reader("Area")))
                 lstDatosPO.Add(If(reader("postingProject") Is DBNull.Value, "", reader("postingProject")))
                 lstDatosPO.Add(If(reader("phase") Is DBNull.Value, "", reader("phase")))
+                lstDatosPO.Add(If(reader("Taxes") Is DBNull.Value, "", reader("Taxes")))
                 Exit While
             End While
             desconectar()
@@ -1263,7 +1266,8 @@ po.line,
 po.WBS,
 tk.Area,
 jb.postingProject,
-tk.phase
+tk.phase,
+jb.Taxes
 from 
 job as jb 
 inner join clients as cl on jb.idClient = cl.idClient
@@ -1296,6 +1300,7 @@ where jb.jobNo = " + If(idJob = "", "0", idJob).ToString() + " and tk.task = '" 
                 lstDatosPO.Add(reader("Area"))
                 lstDatosPO.Add(reader("postingProject"))
                 lstDatosPO.Add(reader("phase"))
+                lstDatosPO.Add(reader("Taxes"))
                 Exit While
             End While
             desconectar()
