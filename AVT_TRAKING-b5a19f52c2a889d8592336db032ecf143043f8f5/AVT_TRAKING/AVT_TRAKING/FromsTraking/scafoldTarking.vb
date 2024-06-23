@@ -34,6 +34,8 @@ Public Class scafoldTarking
     Dim cmbProyect As New DataGridViewComboBoxCell
     Dim cmbProyect1 As New DataGridViewComboBoxCell
     Private Sub scafoldTarking_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        IdCliente = "FA341EFA-3B42-42DE-89A1-C96FFCA0D128"
+        Company = "Cenovus Energy"
         cargarDatosByClient(IdCliente, Company)
     End Sub
     Private Function llenarComboTag(ByVal cmb As ComboBox, ByVal tblTags As Data.DataTable) As Integer
@@ -1131,15 +1133,17 @@ Public Class scafoldTarking
         Next
         If flag Then
             Dim index As Integer = tblInComing.CurrentCell.RowIndex()
-            tblInComing.Rows(index).Cells(1).Value = cmb.SelectedItem.ToString()
-            For Each row As DataRow In tblProductInComing.Rows()
-                If row.ItemArray(0) = cmb.SelectedItem() Then
-                    tblInComing.Rows(index).Cells(2).Value = row.ItemArray(2)
-                    tblInComing.Rows(index).Cells(3).Value = row.ItemArray(3)
-                    tblInComing.Rows(index).Cells(4).Value = row.ItemArray(4)
-                    Exit For
-                End If
-            Next
+            If tblInComing.Rows(index).Cells(1).Value IsNot Nothing Then
+                tblInComing.Rows(index).Cells(1).Value = cmb.SelectedItem.ToString()
+                For Each row As DataRow In tblProductInComing.Rows()
+                    If row.ItemArray(0) = cmb.SelectedItem() Then
+                        tblInComing.Rows(index).Cells(2).Value = row.ItemArray(2)
+                        tblInComing.Rows(index).Cells(3).Value = row.ItemArray(3)
+                        tblInComing.Rows(index).Cells(4).Value = row.ItemArray(4)
+                        Exit For
+                    End If
+                Next
+            End If
         Else
             MessageBox.Show("This Product is the list.", "Important", MessageBoxButtons.OK, MessageBoxIcon.Information)
             Dim index1 = tblInComing.CurrentCell.RowIndex()
@@ -1520,7 +1524,7 @@ Public Class scafoldTarking
                             If tblInComing.CurrentCell.GetType.Name = "DataGridViewTextBoxCell" Then
                                 Dim cmbIdProduct As New DataGridViewComboBoxCell
                                 With cmbIdProduct
-                                    mtdScaffold.llenarCellComboIDProduct(cmbIdProduct, tblProductInComing)
+                                    mtdScaffold.llenarCellComboIDProduct(cmbIdProduct, tblProductInComing, cmbJobNumInComing.Text)
                                     cmbIdProduct.DropDownWidth = 240
                                 End With
                                 If tblInComing.CurrentRow.Cells("ID").Value IsNot Nothing Then

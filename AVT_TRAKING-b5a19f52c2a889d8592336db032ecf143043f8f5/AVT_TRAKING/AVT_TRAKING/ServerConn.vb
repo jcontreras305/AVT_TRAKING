@@ -23,7 +23,11 @@ Public Class ServerConn
             Dim con As New ConnectioDB
             Dim info As String
             If txtServer.Text = "localhost" Then
-                info = "Server=" + txtServer.Text + ";Database=VRT_TRAKING;Trusted_Connection=True;"
+                If txtUser.Text = "" Then
+                    info = "Server=" + txtServer.Text + ";Database=VRT_TRAKING;Trusted_Connection=True;"
+                Else
+                    info = "Server=localhost;Database=VRT_TRAKING;User Id=" + txtUser.Text + ";Password=" + txtPassword.Text + ";"
+                End If
             Else
                 info = "Server=" + txtServer.Text + ";Database=VRT_TRAKING;User Id=" + txtUser.Text + ";Password=" + txtPassword.Text + ";"
             End If
@@ -52,7 +56,11 @@ Public Class ServerConn
             End If
             Dim info As Byte()
             If txtServer.Text = "localhost" Then
-                info = New UTF8Encoding(True).GetBytes("Server=" + txtServer.Text + ";Database=VRT_TRAKING;Trusted_Connection=True;")
+                If txtUser.Text = "" Then
+                    info = New UTF8Encoding(True).GetBytes("Server=" + txtServer.Text + ";Database=VRT_TRAKING;Trusted_Connection=True;")
+                Else
+                    info = New UTF8Encoding(True).GetBytes("Server=" + txtServer.Text + ";Database=VRT_TRAKING;User Id=" + txtUser.Text + ";Password=" + txtPassword.Text + ";")
+                End If
             Else
                 info = New UTF8Encoding(True).GetBytes("Server=" + txtServer.Text + ";Database=VRT_TRAKING;User Id=" + txtUser.Text + ";Password=" + txtPassword.Text + ";")
             End If

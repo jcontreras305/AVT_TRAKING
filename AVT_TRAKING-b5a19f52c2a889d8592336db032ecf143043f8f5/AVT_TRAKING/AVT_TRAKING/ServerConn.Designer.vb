@@ -24,8 +24,11 @@ Partial Class ServerConn
     Private Sub InitializeComponent()
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
         Me.Panel1 = New System.Windows.Forms.Panel()
+        Me.Label4 = New System.Windows.Forms.Label()
         Me.PictureBox4 = New System.Windows.Forms.PictureBox()
         Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.lblMessage = New System.Windows.Forms.Label()
+        Me.btnSave = New System.Windows.Forms.Button()
         Me.btnVerify = New System.Windows.Forms.Button()
         Me.txtPassword = New System.Windows.Forms.TextBox()
         Me.txtUser = New System.Windows.Forms.TextBox()
@@ -33,9 +36,6 @@ Partial Class ServerConn
         Me.Label3 = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
-        Me.btnSave = New System.Windows.Forms.Button()
-        Me.lblMessage = New System.Windows.Forms.Label()
-        Me.Label4 = New System.Windows.Forms.Label()
         Me.TableLayoutPanel1.SuspendLayout()
         Me.Panel1.SuspendLayout()
         CType(Me.PictureBox4, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -51,11 +51,12 @@ Partial Class ServerConn
         Me.TableLayoutPanel1.Controls.Add(Me.Panel2, 0, 1)
         Me.TableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.TableLayoutPanel1.Location = New System.Drawing.Point(0, 0)
+        Me.TableLayoutPanel1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
         Me.TableLayoutPanel1.RowCount = 2
-        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 48.0!))
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 59.0!))
-        Me.TableLayoutPanel1.Size = New System.Drawing.Size(280, 209)
+        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 73.0!))
+        Me.TableLayoutPanel1.Size = New System.Drawing.Size(373, 257)
         Me.TableLayoutPanel1.TabIndex = 0
         '
         'Panel1
@@ -64,18 +65,32 @@ Partial Class ServerConn
         Me.Panel1.Controls.Add(Me.Label4)
         Me.Panel1.Controls.Add(Me.PictureBox4)
         Me.Panel1.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel1.Location = New System.Drawing.Point(3, 3)
+        Me.Panel1.Location = New System.Drawing.Point(4, 4)
+        Me.Panel1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(274, 42)
+        Me.Panel1.Size = New System.Drawing.Size(365, 51)
         Me.Panel1.TabIndex = 0
+        '
+        'Label4
+        '
+        Me.Label4.AutoSize = True
+        Me.Label4.Font = New System.Drawing.Font("Verdana", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label4.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.Label4.Location = New System.Drawing.Point(25, 18)
+        Me.Label4.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.Label4.Name = "Label4"
+        Me.Label4.Size = New System.Drawing.Size(209, 23)
+        Me.Label4.TabIndex = 5
+        Me.Label4.Text = "Server Connection"
         '
         'PictureBox4
         '
         Me.PictureBox4.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.PictureBox4.Image = Global.AVT_TRAKING.My.Resources.Resources._exit
-        Me.PictureBox4.Location = New System.Drawing.Point(234, 3)
+        Me.PictureBox4.Location = New System.Drawing.Point(312, 4)
+        Me.PictureBox4.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.PictureBox4.Name = "PictureBox4"
-        Me.PictureBox4.Size = New System.Drawing.Size(37, 34)
+        Me.PictureBox4.Size = New System.Drawing.Size(49, 42)
         Me.PictureBox4.TabIndex = 4
         Me.PictureBox4.TabStop = False
         '
@@ -91,76 +106,22 @@ Partial Class ServerConn
         Me.Panel2.Controls.Add(Me.Label2)
         Me.Panel2.Controls.Add(Me.Label1)
         Me.Panel2.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel2.Location = New System.Drawing.Point(3, 51)
+        Me.Panel2.Location = New System.Drawing.Point(4, 63)
+        Me.Panel2.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(274, 155)
+        Me.Panel2.Size = New System.Drawing.Size(365, 190)
         Me.Panel2.TabIndex = 1
         '
-        'btnVerify
+        'lblMessage
         '
-        Me.btnVerify.FlatAppearance.BorderSize = 0
-        Me.btnVerify.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(58, Byte), Integer), CType(CType(115, Byte), Integer))
-        Me.btnVerify.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnVerify.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.btnVerify.Image = Global.AVT_TRAKING.My.Resources.Resources.query
-        Me.btnVerify.Location = New System.Drawing.Point(105, 90)
-        Me.btnVerify.Name = "btnVerify"
-        Me.btnVerify.Size = New System.Drawing.Size(75, 33)
-        Me.btnVerify.TabIndex = 6
-        Me.btnVerify.Text = "Verify"
-        Me.btnVerify.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
-        Me.btnVerify.UseVisualStyleBackColor = True
-        '
-        'txtPassword
-        '
-        Me.txtPassword.Location = New System.Drawing.Point(72, 64)
-        Me.txtPassword.Name = "txtPassword"
-        Me.txtPassword.Size = New System.Drawing.Size(193, 20)
-        Me.txtPassword.TabIndex = 5
-        '
-        'txtUser
-        '
-        Me.txtUser.Location = New System.Drawing.Point(72, 38)
-        Me.txtUser.Name = "txtUser"
-        Me.txtUser.Size = New System.Drawing.Size(193, 20)
-        Me.txtUser.TabIndex = 4
-        '
-        'txtServer
-        '
-        Me.txtServer.Location = New System.Drawing.Point(72, 12)
-        Me.txtServer.Name = "txtServer"
-        Me.txtServer.Size = New System.Drawing.Size(193, 20)
-        Me.txtServer.TabIndex = 3
-        '
-        'Label3
-        '
-        Me.Label3.AutoSize = True
-        Me.Label3.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.Label3.Location = New System.Drawing.Point(10, 67)
-        Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(56, 13)
-        Me.Label3.TabIndex = 2
-        Me.Label3.Text = "Password:"
-        '
-        'Label2
-        '
-        Me.Label2.AutoSize = True
-        Me.Label2.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.Label2.Location = New System.Drawing.Point(34, 41)
-        Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(32, 13)
-        Me.Label2.TabIndex = 1
-        Me.Label2.Text = "User:"
-        '
-        'Label1
-        '
-        Me.Label1.AutoSize = True
-        Me.Label1.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.Label1.Location = New System.Drawing.Point(25, 15)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(41, 13)
-        Me.Label1.TabIndex = 0
-        Me.Label1.Text = "Server:"
+        Me.lblMessage.AutoSize = True
+        Me.lblMessage.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.lblMessage.Location = New System.Drawing.Point(12, 156)
+        Me.lblMessage.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lblMessage.Name = "lblMessage"
+        Me.lblMessage.Size = New System.Drawing.Size(64, 17)
+        Me.lblMessage.TabIndex = 8
+        Me.lblMessage.Text = "Messaje:"
         '
         'btnSave
         '
@@ -169,42 +130,97 @@ Partial Class ServerConn
         Me.btnSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnSave.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.btnSave.Image = Global.AVT_TRAKING.My.Resources.Resources.save1
-        Me.btnSave.Location = New System.Drawing.Point(190, 90)
+        Me.btnSave.Location = New System.Drawing.Point(253, 111)
+        Me.btnSave.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.btnSave.Name = "btnSave"
-        Me.btnSave.Size = New System.Drawing.Size(75, 33)
+        Me.btnSave.Size = New System.Drawing.Size(100, 41)
         Me.btnSave.TabIndex = 7
         Me.btnSave.Text = "Save"
         Me.btnSave.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
         Me.btnSave.UseVisualStyleBackColor = True
         '
-        'lblMessage
+        'btnVerify
         '
-        Me.lblMessage.AutoSize = True
-        Me.lblMessage.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.lblMessage.Location = New System.Drawing.Point(9, 127)
-        Me.lblMessage.Name = "lblMessage"
-        Me.lblMessage.Size = New System.Drawing.Size(49, 13)
-        Me.lblMessage.TabIndex = 8
-        Me.lblMessage.Text = "Messaje:"
+        Me.btnVerify.FlatAppearance.BorderSize = 0
+        Me.btnVerify.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(58, Byte), Integer), CType(CType(115, Byte), Integer))
+        Me.btnVerify.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnVerify.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.btnVerify.Image = Global.AVT_TRAKING.My.Resources.Resources.query
+        Me.btnVerify.Location = New System.Drawing.Point(140, 111)
+        Me.btnVerify.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btnVerify.Name = "btnVerify"
+        Me.btnVerify.Size = New System.Drawing.Size(100, 41)
+        Me.btnVerify.TabIndex = 6
+        Me.btnVerify.Text = "Verify"
+        Me.btnVerify.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
+        Me.btnVerify.UseVisualStyleBackColor = True
         '
-        'Label4
+        'txtPassword
         '
-        Me.Label4.AutoSize = True
-        Me.Label4.Font = New System.Drawing.Font("Verdana", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label4.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.Label4.Location = New System.Drawing.Point(19, 15)
-        Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(158, 18)
-        Me.Label4.TabIndex = 5
-        Me.Label4.Text = "Server Connection"
+        Me.txtPassword.Location = New System.Drawing.Point(96, 79)
+        Me.txtPassword.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.txtPassword.Name = "txtPassword"
+        Me.txtPassword.Size = New System.Drawing.Size(256, 22)
+        Me.txtPassword.TabIndex = 5
+        Me.txtPassword.UseSystemPasswordChar = True
+        '
+        'txtUser
+        '
+        Me.txtUser.Location = New System.Drawing.Point(96, 47)
+        Me.txtUser.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.txtUser.Name = "txtUser"
+        Me.txtUser.Size = New System.Drawing.Size(256, 22)
+        Me.txtUser.TabIndex = 4
+        '
+        'txtServer
+        '
+        Me.txtServer.Location = New System.Drawing.Point(96, 15)
+        Me.txtServer.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.txtServer.Name = "txtServer"
+        Me.txtServer.Size = New System.Drawing.Size(256, 22)
+        Me.txtServer.TabIndex = 3
+        '
+        'Label3
+        '
+        Me.Label3.AutoSize = True
+        Me.Label3.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.Label3.Location = New System.Drawing.Point(13, 82)
+        Me.Label3.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.Label3.Name = "Label3"
+        Me.Label3.Size = New System.Drawing.Size(73, 17)
+        Me.Label3.TabIndex = 2
+        Me.Label3.Text = "Password:"
+        '
+        'Label2
+        '
+        Me.Label2.AutoSize = True
+        Me.Label2.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.Label2.Location = New System.Drawing.Point(45, 50)
+        Me.Label2.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.Label2.Name = "Label2"
+        Me.Label2.Size = New System.Drawing.Size(42, 17)
+        Me.Label2.TabIndex = 1
+        Me.Label2.Text = "User:"
+        '
+        'Label1
+        '
+        Me.Label1.AutoSize = True
+        Me.Label1.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.Label1.Location = New System.Drawing.Point(33, 18)
+        Me.Label1.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(54, 17)
+        Me.Label1.TabIndex = 0
+        Me.Label1.Text = "Server:"
         '
         'ServerConn
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(280, 209)
+        Me.ClientSize = New System.Drawing.Size(373, 257)
         Me.Controls.Add(Me.TableLayoutPanel1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
+        Me.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.Name = "ServerConn"
         Me.Text = "SeverConnecion"
         Me.TableLayoutPanel1.ResumeLayout(False)
