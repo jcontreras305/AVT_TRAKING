@@ -34,8 +34,8 @@ Public Class scafoldTarking
     Dim cmbProyect As New DataGridViewComboBoxCell
     Dim cmbProyect1 As New DataGridViewComboBoxCell
     Private Sub scafoldTarking_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        IdCliente = "FA341EFA-3B42-42DE-89A1-C96FFCA0D128"
-        Company = "Cenovus Energy"
+        'IdCliente = "FA341EFA-3B42-42DE-89A1-C96FFCA0D128"
+        'Company = "Cenovus Energy"
         cargarDatosByClient(IdCliente, Company)
     End Sub
     Private Function llenarComboTag(ByVal cmb As ComboBox, ByVal tblTags As Data.DataTable) As Integer
