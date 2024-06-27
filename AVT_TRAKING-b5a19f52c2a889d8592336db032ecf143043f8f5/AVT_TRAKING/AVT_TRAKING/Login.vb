@@ -63,6 +63,7 @@ Public Class Login
             If (txtUser.Text <> String.Empty And txtUser.Text.Length > 0) And (txtPassword.Text <> String.Empty And txtPassword.Text.Length > 0) Then
                 If mtdLogin.StartLogin(txtUser.Text, txtPassword.Text) Then
                     nUser.selectUser(txtUser.Text, txtPassword.Text)
+                    UserName = txtUser.Text
                     Dim a As New MainFrom
                     Try
                         If mtdCompany.img IsNot Nothing Then

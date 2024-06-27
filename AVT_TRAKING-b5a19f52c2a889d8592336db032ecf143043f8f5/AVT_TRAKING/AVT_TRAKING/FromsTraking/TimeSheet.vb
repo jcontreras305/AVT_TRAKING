@@ -204,32 +204,28 @@ Public Class TimeSheet
                 listError.Clear()
                 If flagContinue Then
                     txtSalidaPerdiem.Text = txtSalidaPerdiem.Text + vbCrLf + "Starting process to insert..."
-                    If Not IO.Directory.Exists("C:\TMP") Then
-                        My.Computer.FileSystem.CreateDirectory("C:\TMP")
+                    Dim path As String = ""
+                    If ServerName = "localhost" Then
+                        path = LocalFolderDiretory
+                    Else
+                        path = ServerFolderDirectory
                     End If
-                    My.Computer.FileSystem.WriteAllText("C:\TMP\Perdiem.csv", textInsertExpUsed, False)
+                    If Not IO.Directory.Exists(path) Then
+                        My.Computer.FileSystem.CreateDirectory(path)
+                    End If
+                    If IO.Directory.Exists(path & "\Perdiem.csv") Then
+                        IO.File.Delete(path & "\Perdiem.csv")
+                    End If
+                    Dim Write As New System.IO.StreamWriter(path & "\Perdiem.csv")
+                    Write.WriteLine(textInsertExpUsed)
+                    Write.Close()
                     If flagContinue Then
-                        If mtdHPW.execBulkInsertRecordsPerdiem() Then
+                        If mtdHPW.execBulkInsertRecordsPerdiem(path & "\Perdiem.csv") Then
                             txtSalidaPerdiem.Text = txtSalidaPerdiem.Text & vbCrLf & "The Process Records Insertion is over."
                         Else
                             txtSalidaPerdiem.Text = txtSalidaPerdiem.Text & vbCrLf & "The Process Records Insertion has a problem."
                         End If
                     End If
-                    'Dim contRowsError As Integer = 2
-                    'For Each row As Data.DataRow In tblPerdiem.Rows()
-                    '    Dim listEU As New List(Of String)
-                    '    listEU.Add(row.ItemArray(0).ToString)
-                    '    listEU.Add(row.ItemArray(1).ToString)
-                    '    listEU.Add(row.ItemArray(2).ToString)
-                    '    listEU.Add(row.ItemArray(3).ToString)
-                    '    listEU.Add(row.ItemArray(4).ToString)
-                    '    listEU.Add(row.ItemArray(5).ToString)
-                    '    listEU.Add(row.ItemArray(6).ToString)
-                    '    If Not mtdHPW.insertExpensesUsed(listEU) Then
-                    '        listError.Add("Excel Row " + contRowsError.ToString() + ".")
-                    '    End If
-                    '    contRowsError += 1
-                    'Next
                 End If
                 If listError.Count > 0 Then
                     txtSalidaPerdiem.Text = txtSalidaPerdiem.Text + vbCrLf + "Error in the next rows:"
@@ -541,14 +537,23 @@ Public Class TimeSheet
                                     End If
                                 End If
                             End If
-                            If Not IO.Directory.Exists("C:\TMP") Then
-                                My.Computer.FileSystem.CreateDirectory("C:\TMP")
+                            Dim path As String = ""
+                            If ServerName = "localhost" Then
+                                path = LocalFolderDiretory
+                            Else
+                                path = ServerFolderDirectory
                             End If
-                            Dim Write As New System.IO.StreamWriter("C:\TMP\TimeSheetTemp.csv")
+                            If Not IO.Directory.Exists(path) Then
+                                My.Computer.FileSystem.CreateDirectory(path)
+                            End If
+                            If IO.Directory.Exists(path & "\TimeSheetTemp.csv") Then
+                                IO.File.Delete(path & "\TimeSheetTemp.csv")
+                            End If
+                            Dim Write As New System.IO.StreamWriter(path & "\TimeSheetTemp.csv")
                             Write.WriteLine(textDoc)
                             Write.Close()
                             If flagConitnue Then
-                                If mtdHPW.execBulkInsertRecords() Then
+                                If mtdHPW.execBulkInsertRecords(path & "\TimeSheetTemp.csv") Then
                                     MsgSalida(txtSalidaCSV, "The Process Records Insertion is over.")
                                 Else
                                     MsgSalida(txtSalidaCSV, "The Process Records Insertion has a problem.")

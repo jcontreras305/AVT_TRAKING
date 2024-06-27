@@ -2,6 +2,8 @@
 Imports System.IO
 Public Class ConnectioDB
     Public sqlConn As String = ""
+    'Public DirectoryServer As String = "\\Desktop-s806jiq"
+    'Public DirectoryFolderServer As String = "\\Desktop-s806jiq\tmp\"
     Public conn As SqlConnection 'conn es un atributo de esta clase que podra se llamada de otras clases y obtener la conexion de la BD
     ''' <summary>
     ''' Esta funcion permite conectar al servidor con la base de datos "VRT_TRAKING"
@@ -81,12 +83,13 @@ Public Class ConnectioDB
                 Dim array As String() = sqlConn.Split(";")
                 If array.Length = 3 Then
                     connectioninfo = array(0) + ";" + "Database=master;" + array(2)
-                ElseIf array.Length = 4 Then
+                ElseIf array.Length >= 4 Then
                     connectioninfo = array(0) + ";" + "Database=master;" + array(2) + ";" + array(3)
                 End If
                 conn = New SqlConnection(connectioninfo)
                 conn.Open() 'se abre la conexion
                 If conn.State Then 'comprueba si la conexion esta habilitada 
+                    findServer(connectioninfo)
                     Return True
                 Else
                     Return False
@@ -114,9 +117,13 @@ Public Class ConnectioDB
 
     Private Function readFileConn() As Boolean
         Try
-            If File.Exists(AppDomain.CurrentDomain.BaseDirectory + "connTemp.txt") Then
-                Dim read As TextReader = New StreamReader(AppDomain.CurrentDomain.BaseDirectory + "connTemp.txt")
+            'If File.Exists(AppDomain.CurrentDomain.BaseDirectory + "connTemp.txt") Then
+            '    Dim read As TextReader = New StreamReader(AppDomain.CurrentDomain.BaseDirectory + "connTemp.txt"
+            If File.Exists(LocalFolderDiretory + "connTemp.txt") Then
+                Dim read As TextReader = New StreamReader(LocalFolderDiretory + "connTemp.txt")
                 sqlConn = read.ReadLine
+                findServer(sqlConn)
+                read.Close()
                 Return True
             Else
                 Return False

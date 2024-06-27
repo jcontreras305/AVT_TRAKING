@@ -1389,13 +1389,13 @@ select * from projects", conn)
         End Try
     End Function
 
-    Public Function execBulkInsertRecords() As Boolean
+    Public Function execBulkInsertRecords(ByVal path As String) As Boolean
         Try
             conectar()
             Dim cmd As New SqlCommand("Bulk INSERT 
 	hoursWorked
 FROM 
-	'C:\TMP\TimeSheetTemp.csv'
+	'" & path & "'
 WITH(
 	FIELDTERMINATOR =',',
 	ROWTERMINATOR = '\n',
@@ -1415,13 +1415,13 @@ WITH(
             desconectar()
         End Try
     End Function
-    Public Function execBulkInsertRecordsPerdiem() As Boolean
+    Public Function execBulkInsertRecordsPerdiem(ByVal path As String) As Boolean
         Try
             conectar()
             Dim cmd As New SqlCommand("Bulk INSERT 
 	expensesUsed
 FROM 
-	'C:\TMP\Perdiem.csv'
+	'" + path + "'
 WITH(
 	FIELDTERMINATOR =',',
 	ROWTERMINATOR = '\n',

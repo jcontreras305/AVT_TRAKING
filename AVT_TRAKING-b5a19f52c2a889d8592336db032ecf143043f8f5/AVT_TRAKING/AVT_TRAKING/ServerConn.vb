@@ -1,6 +1,7 @@
 ﻿Imports System.Runtime.InteropServices
 Imports System.IO
 Imports System.Text
+Imports Microsoft.Office.Interop.Excel
 Public Class ServerConn
     <DllImport("user32.DLL", EntryPoint:="ReleaseCapture")>
     Private Shared Sub ReleaseCapture()
@@ -46,7 +47,8 @@ Public Class ServerConn
     Private Sub btnSave_Click(sender As Object, e As EventArgs) Handles btnSave.Click
         Try
             Dim con As New ConnectioDB
-            Dim path As String = AppDomain.CurrentDomain.BaseDirectory + "connTemp.txt"
+            ''Dim path As String = AppDomain.CurrentDomain.BaseDirectory + "connTemp.txt"
+            Dim path As String = LocalFolderDiretory & "connTemp.txt"
             Dim fs As FileStream
             If Not File.Exists(path) Then
                 fs = File.Create(path)

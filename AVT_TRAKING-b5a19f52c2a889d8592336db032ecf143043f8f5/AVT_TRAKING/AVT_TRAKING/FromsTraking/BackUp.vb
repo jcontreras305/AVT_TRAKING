@@ -95,20 +95,42 @@ Public Class metodosBackUp
             For i = 0 To drAux.Length - 2
                 pathAux = pathAux & drAux(i) & "\"
             Next
-            If Directory.Exists(pathAux) Then
-                Dim command As String = "BACKUP DATABASE [VRT_TRAKING]
+            If ServerName = "localhost" Then
+                If Directory.Exists(pathAux) Then
+                    Dim command As String = "BACKUP DATABASE [VRT_TRAKING]
 TO DISK = '" & path & "' 
 	WITH FORMAT,
 	MEDIANAME = 'SQLServerBackups', 
 		NAME = N'VRT_TRAKING-Full Database Backup'"
-                Dim cmd As SqlCommand = New SqlCommand(command, conn)
-                If cmd.ExecuteNonQuery() Then
-                    txtMessage.Text = txtMessage.Text & vbCrLf & " The Backup is done."
+                    Dim cmd As SqlCommand = New SqlCommand(command, conn)
+                    If cmd.ExecuteNonQuery() Then
+                        txtMessage.Text = txtMessage.Text & vbCrLf & " The Backup is done."
+                    End If
+                Else
+                    txtMessage.Text = txtMessage.Text & vbCrLf & " The specified Rute does not exist."
                 End If
+                Return True
             Else
-                txtMessage.Text = txtMessage.Text & vbCrLf & " The specified Rute does not exist."
+                If Directory.Exists(ServerFolderDirectory) Then
+                    Dim command As String = "BACKUP DATABASE [VRT_TRAKING]
+TO DISK = '" & ServerFolderDirectory & "\" & drAux(drAux.Length - 1) & "' 
+	WITH FORMAT,
+	MEDIANAME = 'SQLServerBackups', 
+		NAME = N'VRT_TRAKING-Full Database Backup'"
+                    Dim cmd As SqlCommand = New SqlCommand(command, conn)
+                    If cmd.ExecuteNonQuery() Then
+                        If File.Exists(path) Then
+                            File.Delete(path)
+                        Else
+                            File.Copy(ServerFolderDirectory & "\" & drAux(drAux.Length - 1), path)
+                        End If
+                        txtMessage.Text = txtMessage.Text & vbCrLf & " The Backup is done."
+                        End If
+                    Else
+                    txtMessage.Text = txtMessage.Text & vbCrLf & " The specified Rute does not exist."
+                End If
+                Return True
             End If
-            Return True
         Catch ex As Exception
             MsgBox(ex.Message)
             txtMessage.Text = txtMessage.Text & vbCrLf & ex.Message
@@ -134,6 +156,17 @@ TO DISK = '" & path & "'
 
                 If cmd.ExecuteNonQuery() Then
                     txtMessage.Text = txtMessage.Text & vbCrLf & "Inserting the Backup..."
+                    If Not ServerName = "localhost" Then 'si el servidor no es local pegamos el archivo de backup en el folder compatido  de lo contrario solo pasamos el path del archivo backup
+                        txtMessage.Text = txtMessage.Text & vbCrLf & "Inserting the Backup..."
+                        Dim serverPath = ServerFolderDirectory & "\" & drAux(drAux.Length - 1)
+                        If File.Exists(path) Then
+                            If File.Exists(serverPath) Then 'si existe un archivo con el mismo nombre lo borramos 
+                                File.Delete(serverPath) 'borramos el archivo con el mismo nombre de destino 
+                            End If
+                            File.Copy(path, serverPath) 'solo pegamos el archivo en la carpetacompartida del servidor 
+                        End If
+                        path = serverPath 'cambiamos el path local de origen por el del servidor 
+                    End If
                     Dim command As String = "RESTORE DATABASE [VRT_TRAKING] FROM  DISK = '" & path & "' WITH REPLACE"
                     Dim cmd1 As SqlCommand = New SqlCommand(command, conn)
                     If cmd1.ExecuteNonQuery() Then
