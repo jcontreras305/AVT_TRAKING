@@ -463,16 +463,25 @@ Public Class EquipmentValidation
                 Else
                     pgbComplete.Value = 90
                     lblMessage.Text = "Message: Creating Doc Temp..."
-                    If Not IO.Directory.Exists("C:\TMP") Then
-                        My.Computer.FileSystem.CreateDirectory("C:\TMP")
+                    Dim path As String = ""
+                    If ServerName = "localhost" Then
+                        path = "C:\TMP"
+                    Else
+                        path = ServerFolderDirectory
                     End If
-                    Dim Write As New System.IO.StreamWriter("C:\TMP\MaterialUsed.csv")
+                    If Not IO.Directory.Exists(path) Then
+                        My.Computer.FileSystem.CreateDirectory(path)
+                    End If
+                    If IO.Directory.Exists(path & "\MaterialUsed.csv") Then
+                        My.Computer.FileSystem.DeleteFile(path & "\MaterialUsed.csv")
+                    End If
+                    Dim Write As New System.IO.StreamWriter(path & "\MaterialUsed.csv")
                     Write.WriteLine(txtDoc)
                     Write.Close()
                     pgbComplete.Value = 95
                     If Not errorRow Then
                         lblMessage.Text = "Message: Saving..."
-                        If mtdJobs.execBulkInsertMaterialUsed() Then
+                        If mtdJobs.execBulkInsertMaterialUsed(path & "\MaterialUsed.csv") Then
                             lblMessage.Text = "Message: The Process Records Insertion is over."
                             MsgBox("Sucessfull")
                         Else

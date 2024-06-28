@@ -1840,13 +1840,13 @@ where tk.idAux = '" + idAux + "' and wo.idAuxWO = '" + WO + "'", conn)
         End Try
     End Function
 
-    Public Function execBulkInsertMaterialUsed() As Boolean
+    Public Function execBulkInsertMaterialUsed(ByVal path As String) As Boolean
         Try
             conectar()
             Dim cmd As New SqlCommand("Bulk INSERT 
 	materialUsed 
 FROM 
-	'C:\TMP\MaterialUsed.csv'
+	'" + path + "'
 WITH(
 	FIELDTERMINATOR =',',
 	ROWTERMINATOR = '\n',
