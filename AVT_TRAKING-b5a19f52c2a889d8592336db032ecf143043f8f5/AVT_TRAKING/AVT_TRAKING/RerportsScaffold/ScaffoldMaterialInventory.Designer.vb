@@ -59,21 +59,23 @@ Partial Class ScaffoldMaterialInventory
         Me.TableLayoutPanel1.Controls.Add(Me.Panel1, 0, 0)
         Me.TableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.TableLayoutPanel1.Location = New System.Drawing.Point(0, 0)
+        Me.TableLayoutPanel1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
         Me.TableLayoutPanel1.RowCount = 3
-        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 58.0!))
-        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 52.0!))
+        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 71.0!))
+        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 64.0!))
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-        Me.TableLayoutPanel1.Size = New System.Drawing.Size(871, 490)
+        Me.TableLayoutPanel1.Size = New System.Drawing.Size(1161, 603)
         Me.TableLayoutPanel1.TabIndex = 4
         '
         'Panel3
         '
         Me.Panel3.Controls.Add(Me.crvReport)
         Me.Panel3.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel3.Location = New System.Drawing.Point(3, 113)
+        Me.Panel3.Location = New System.Drawing.Point(4, 139)
+        Me.Panel3.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.Panel3.Name = "Panel3"
-        Me.Panel3.Size = New System.Drawing.Size(865, 374)
+        Me.Panel3.Size = New System.Drawing.Size(1153, 460)
         Me.Panel3.TabIndex = 2
         '
         'crvReport
@@ -83,9 +85,11 @@ Partial Class ScaffoldMaterialInventory
         Me.crvReport.Cursor = System.Windows.Forms.Cursors.Default
         Me.crvReport.Dock = System.Windows.Forms.DockStyle.Fill
         Me.crvReport.Location = New System.Drawing.Point(0, 0)
+        Me.crvReport.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.crvReport.Name = "crvReport"
-        Me.crvReport.Size = New System.Drawing.Size(865, 374)
+        Me.crvReport.Size = New System.Drawing.Size(1153, 460)
         Me.crvReport.TabIndex = 0
+        Me.crvReport.ToolPanelWidth = 267
         '
         'Panel2
         '
@@ -96,18 +100,20 @@ Partial Class ScaffoldMaterialInventory
         Me.Panel2.Controls.Add(Me.Label1)
         Me.Panel2.Controls.Add(Me.PictureBox4)
         Me.Panel2.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel2.Location = New System.Drawing.Point(3, 61)
+        Me.Panel2.Location = New System.Drawing.Point(4, 75)
+        Me.Panel2.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(865, 46)
+        Me.Panel2.Size = New System.Drawing.Size(1153, 56)
         Me.Panel2.TabIndex = 1
         '
         'chbAll
         '
         Me.chbAll.AutoSize = True
         Me.chbAll.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.chbAll.Location = New System.Drawing.Point(156, 12)
+        Me.chbAll.Location = New System.Drawing.Point(208, 15)
+        Me.chbAll.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.chbAll.Name = "chbAll"
-        Me.chbAll.Size = New System.Drawing.Size(37, 17)
+        Me.chbAll.Size = New System.Drawing.Size(44, 20)
         Me.chbAll.TabIndex = 16
         Me.chbAll.Text = "All"
         Me.chbAll.UseVisualStyleBackColor = True
@@ -115,9 +121,10 @@ Partial Class ScaffoldMaterialInventory
         'cmbClients
         '
         Me.cmbClients.FormattingEnabled = True
-        Me.cmbClients.Location = New System.Drawing.Point(63, 9)
+        Me.cmbClients.Location = New System.Drawing.Point(84, 11)
+        Me.cmbClients.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.cmbClients.Name = "cmbClients"
-        Me.cmbClients.Size = New System.Drawing.Size(87, 21)
+        Me.cmbClients.Size = New System.Drawing.Size(115, 24)
         Me.cmbClients.TabIndex = 15
         '
         'Button1
@@ -129,9 +136,10 @@ Partial Class ScaffoldMaterialInventory
         Me.Button1.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.Button1.Image = Global.AVT_TRAKING.My.Resources.Resources.reportshow
         Me.Button1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.Button1.Location = New System.Drawing.Point(238, 3)
+        Me.Button1.Location = New System.Drawing.Point(317, 4)
+        Me.Button1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(83, 33)
+        Me.Button1.Size = New System.Drawing.Size(111, 41)
         Me.Button1.TabIndex = 14
         Me.Button1.Text = "Report"
         Me.Button1.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -142,9 +150,10 @@ Partial Class ScaffoldMaterialInventory
         Me.Label1.AutoSize = True
         Me.Label1.Font = New System.Drawing.Font("Verdana", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label1.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.Label1.Location = New System.Drawing.Point(11, 12)
+        Me.Label1.Location = New System.Drawing.Point(15, 15)
+        Me.Label1.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(48, 14)
+        Me.Label1.Size = New System.Drawing.Size(56, 18)
         Me.Label1.TabIndex = 12
         Me.Label1.Text = "Client:"
         '
@@ -152,9 +161,10 @@ Partial Class ScaffoldMaterialInventory
         '
         Me.PictureBox4.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.PictureBox4.Image = Global.AVT_TRAKING.My.Resources.Resources._exit
-        Me.PictureBox4.Location = New System.Drawing.Point(825, 3)
+        Me.PictureBox4.Location = New System.Drawing.Point(1100, 4)
+        Me.PictureBox4.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.PictureBox4.Name = "PictureBox4"
-        Me.PictureBox4.Size = New System.Drawing.Size(37, 29)
+        Me.PictureBox4.Size = New System.Drawing.Size(49, 36)
         Me.PictureBox4.TabIndex = 9
         Me.PictureBox4.TabStop = False
         '
@@ -163,9 +173,10 @@ Partial Class ScaffoldMaterialInventory
         Me.Panel1.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(58, Byte), Integer), CType(CType(115, Byte), Integer))
         Me.Panel1.Controls.Add(Me.TitleBar)
         Me.Panel1.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel1.Location = New System.Drawing.Point(3, 3)
+        Me.Panel1.Location = New System.Drawing.Point(4, 4)
+        Me.Panel1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(865, 52)
+        Me.Panel1.Size = New System.Drawing.Size(1153, 63)
         Me.Panel1.TabIndex = 0
         '
         'TitleBar
@@ -178,16 +189,18 @@ Partial Class ScaffoldMaterialInventory
         Me.TitleBar.Controls.Add(Me.btnMaximize)
         Me.TitleBar.Dock = System.Windows.Forms.DockStyle.Fill
         Me.TitleBar.Location = New System.Drawing.Point(0, 0)
+        Me.TitleBar.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.TitleBar.Name = "TitleBar"
-        Me.TitleBar.Size = New System.Drawing.Size(865, 52)
+        Me.TitleBar.Size = New System.Drawing.Size(1153, 63)
         Me.TitleBar.TabIndex = 1
         '
         'PictureBox1
         '
         Me.PictureBox1.Image = Global.AVT_TRAKING.My.Resources.Resources.project
-        Me.PictureBox1.Location = New System.Drawing.Point(4, 5)
+        Me.PictureBox1.Location = New System.Drawing.Point(5, 6)
+        Me.PictureBox1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.PictureBox1.Name = "PictureBox1"
-        Me.PictureBox1.Size = New System.Drawing.Size(45, 42)
+        Me.PictureBox1.Size = New System.Drawing.Size(60, 52)
         Me.PictureBox1.TabIndex = 18
         Me.PictureBox1.TabStop = False
         '
@@ -196,9 +209,10 @@ Partial Class ScaffoldMaterialInventory
         Me.Label3.AutoSize = True
         Me.Label3.Font = New System.Drawing.Font("Verdana", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label3.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.Label3.Location = New System.Drawing.Point(60, 16)
+        Me.Label3.Location = New System.Drawing.Point(80, 20)
+        Me.Label3.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(237, 18)
+        Me.Label3.Size = New System.Drawing.Size(304, 25)
         Me.Label3.TabIndex = 11
         Me.Label3.Text = "Report Material Inventory"
         '
@@ -206,9 +220,10 @@ Partial Class ScaffoldMaterialInventory
         '
         Me.PictureBox3.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.PictureBox3.Image = Global.AVT_TRAKING.My.Resources.Resources.minimize2
-        Me.PictureBox3.Location = New System.Drawing.Point(798, 5)
+        Me.PictureBox3.Location = New System.Drawing.Point(1064, 6)
+        Me.PictureBox3.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.PictureBox3.Name = "PictureBox3"
-        Me.PictureBox3.Size = New System.Drawing.Size(27, 29)
+        Me.PictureBox3.Size = New System.Drawing.Size(36, 36)
         Me.PictureBox3.TabIndex = 9
         Me.PictureBox3.TabStop = False
         '
@@ -216,9 +231,10 @@ Partial Class ScaffoldMaterialInventory
         '
         Me.btnMinimaize.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnMinimaize.Image = Global.AVT_TRAKING.My.Resources.Resources.restore2
-        Me.btnMinimaize.Location = New System.Drawing.Point(830, 0)
+        Me.btnMinimaize.Location = New System.Drawing.Point(1107, 0)
+        Me.btnMinimaize.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.btnMinimaize.Name = "btnMinimaize"
-        Me.btnMinimaize.Size = New System.Drawing.Size(26, 29)
+        Me.btnMinimaize.Size = New System.Drawing.Size(35, 36)
         Me.btnMinimaize.TabIndex = 8
         Me.btnMinimaize.TabStop = False
         '
@@ -226,19 +242,22 @@ Partial Class ScaffoldMaterialInventory
         '
         Me.btnMaximize.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnMaximize.Image = Global.AVT_TRAKING.My.Resources.Resources.maximize2
-        Me.btnMaximize.Location = New System.Drawing.Point(831, 2)
+        Me.btnMaximize.Location = New System.Drawing.Point(1108, 2)
+        Me.btnMaximize.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.btnMaximize.Name = "btnMaximize"
-        Me.btnMaximize.Size = New System.Drawing.Size(31, 29)
+        Me.btnMaximize.Size = New System.Drawing.Size(41, 36)
         Me.btnMaximize.TabIndex = 7
         Me.btnMaximize.TabStop = False
         '
         'ScaffoldMaterialInventory
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(871, 490)
+        Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(83, Byte), Integer), CType(CType(93, Byte), Integer), CType(CType(102, Byte), Integer))
+        Me.ClientSize = New System.Drawing.Size(1161, 603)
         Me.Controls.Add(Me.TableLayoutPanel1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
+        Me.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.Name = "ScaffoldMaterialInventory"
         Me.Text = "ScaffoldMaterialInventory"
         Me.TableLayoutPanel1.ResumeLayout(False)

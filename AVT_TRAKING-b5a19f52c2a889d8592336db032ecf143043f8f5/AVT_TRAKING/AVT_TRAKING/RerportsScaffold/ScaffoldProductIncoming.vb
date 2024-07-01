@@ -96,6 +96,7 @@ Public Class ScaffoldProductIncoming
                             reportTs.SetParameterValue("@ticket", If(chbAll.Checked, "", cmbTickets.Items(cmbTickets.SelectedIndex).ToString()))
                             reportTs.SetParameterValue("@all", If(chbAll.Checked, 1, 0))
                             reportTs.SetParameterValue("@CompanyName", "Brock")
+                            reportTs.SetDatabaseLogon(UserDB, Pass, ServerName, DBName)
                             crvReport.ReportSource = reportTs
                         Else
                             Dim reportTs As New ScfProductOutgoing
@@ -104,6 +105,7 @@ Public Class ScaffoldProductIncoming
                             reportTs.SetParameterValue("@ticket", If(chbAll.Checked, "", cmbTickets.Items(cmbTickets.SelectedIndex).ToString()))
                             reportTs.SetParameterValue("@all", If(chbAll.Checked, 1, 0))
                             reportTs.SetParameterValue("@CompanyName", "Brock")
+                            reportTs.SetDatabaseLogon(UserDB, Pass, ServerName, DBName)
                             crvReport.ReportSource = reportTs
                         End If
                     Else

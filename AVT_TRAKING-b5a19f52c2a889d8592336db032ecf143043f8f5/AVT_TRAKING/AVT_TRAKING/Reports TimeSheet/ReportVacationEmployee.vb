@@ -1,5 +1,6 @@
 ﻿Imports System.Runtime.InteropServices
 Imports System.Data.SqlClient
+Imports CrystalDecisions.ReportAppServer
 
 Public Class ReportVacationEmployee
     Dim conection As New ConnectioDB
@@ -91,6 +92,7 @@ where wc.name like '%6.4%'", conection.conn)
                 rtp.SetParameterValue("@NoEmployee", empNum)
                 rtp.SetParameterValue("@all", If(chbAllEmployees.Checked, True, False))
                 rtp.SetParameterValue("@CompanyName", "brock")
+                rtp.SetDatabaseLogon(UserDB, Pass, ServerName, DBName)
                 crvVacationEmployee.ReportSource = rtp
             End If
         Catch ex As Exception

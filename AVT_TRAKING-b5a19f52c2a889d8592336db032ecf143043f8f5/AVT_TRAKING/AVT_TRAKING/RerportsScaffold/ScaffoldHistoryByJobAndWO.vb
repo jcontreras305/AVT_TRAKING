@@ -42,6 +42,7 @@ Public Class ScaffoldHistoryByJobAndWO
                 reportTS.SetParameterValue("@FinalDate", validaFechaParaSQl(dtpFinalDate.Value.Date))
                 reportTS.SetParameterValue("@numberClient", CInt(clNum))
                 reportTS.SetParameterValue("@CompanyName", "Brock")
+                reportTS.SetDatabaseLogon(UserDB, Pass, ServerName, DBName)
                 crvReport.ReportSource = reportTS
             Else
                 MsgBox("Please select a Client.")

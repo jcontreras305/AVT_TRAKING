@@ -105,9 +105,9 @@ Public Class ScaffoldProductReport
                     End If
                     mtdOther.sendEmail(ownEmail(0), ownEmail(1), txtSubject.Text, txtBodyEmail.Text, listEmail, sd.FileName)
                 ElseIf dar = DialogResult.No Then
-                    reportTs.ExportToDisk(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat, "c:\TMP\" + tagNum + If(ModNum <> "", "_" + ModNum, "") + ".pdf")
-                    mtdOther.sendEmail(ownEmail(0), ownEmail(1), txtSubject.Text, txtBodyEmail.Text, listEmail, "c:\TMP\" + tagNum + If(ModNum <> "", "_" + ModNum, "") + ".pdf")
-                    System.IO.File.Delete("c:\TMP\" + tagNum + If(ModNum <> "", "_" + ModNum, "") + ".pdf")
+                    reportTs.ExportToDisk(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat, LocalFolderDiretory + "\" + tagNum + If(ModNum <> "", "_" + ModNum, "") + ".pdf")
+                    mtdOther.sendEmail(ownEmail(0), ownEmail(1), txtSubject.Text, txtBodyEmail.Text, listEmail, LocalFolderDiretory + "\" + tagNum + If(ModNum <> "", "_" + ModNum, "") + ".pdf")
+                    System.IO.File.Delete(LocalFolderDiretory + "\" + tagNum + If(ModNum <> "", "_" + ModNum, "") + ".pdf")
                 End If
             Else
                 MessageBox.Show("Please, assign the emails to send the Report.")
@@ -139,6 +139,7 @@ Public Class ScaffoldProductReport
             reportTs.SetParameterValue("@mod", If(modi, 1, 0))
             reportTs.SetParameterValue("@dis", If(dis, 1, 0))
             reportTs.SetParameterValue("@CompanyName", "Brock")
+            reportTs.SetDatabaseLogon(UserDB, Pass, ServerName, DBName)
             crvReport.ReportSource = reportTs
             btnSend.Enabled = True
         Catch ex As Exception

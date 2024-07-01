@@ -115,7 +115,7 @@ Public Class ConnectioDB
         Return False
     End Function
 
-    Private Function readFileConn() As Boolean
+    Public Function readFileConn() As Boolean
         Try
             'If File.Exists(AppDomain.CurrentDomain.BaseDirectory + "connTemp.txt") Then
             '    Dim read As TextReader = New StreamReader(AppDomain.CurrentDomain.BaseDirectory + "connTemp.txt"

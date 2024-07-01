@@ -56,12 +56,13 @@ Partial Class ReportScaffoldEstimate
         Me.TableLayoutPanel1.Controls.Add(Me.crvReportScaffoldEstimate, 0, 2)
         Me.TableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.TableLayoutPanel1.Location = New System.Drawing.Point(0, 0)
+        Me.TableLayoutPanel1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
         Me.TableLayoutPanel1.RowCount = 3
-        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40.0!))
-        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 62.0!))
+        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 49.0!))
+        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 76.0!))
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-        Me.TableLayoutPanel1.Size = New System.Drawing.Size(686, 490)
+        Me.TableLayoutPanel1.Size = New System.Drawing.Size(915, 603)
         Me.TableLayoutPanel1.TabIndex = 0
         '
         'TitleBar
@@ -73,9 +74,10 @@ Partial Class ReportScaffoldEstimate
         Me.TitleBar.Controls.Add(Me.btnRestore)
         Me.TitleBar.Controls.Add(Me.btnMaximize)
         Me.TitleBar.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.TitleBar.Location = New System.Drawing.Point(3, 3)
+        Me.TitleBar.Location = New System.Drawing.Point(4, 4)
+        Me.TitleBar.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.TitleBar.Name = "TitleBar"
-        Me.TitleBar.Size = New System.Drawing.Size(680, 34)
+        Me.TitleBar.Size = New System.Drawing.Size(907, 41)
         Me.TitleBar.TabIndex = 3
         '
         'Label3
@@ -83,18 +85,20 @@ Partial Class ReportScaffoldEstimate
         Me.Label3.AutoSize = True
         Me.Label3.Font = New System.Drawing.Font("Verdana", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label3.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.Label3.Location = New System.Drawing.Point(40, 6)
+        Me.Label3.Location = New System.Drawing.Point(53, 7)
+        Me.Label3.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(226, 18)
+        Me.Label3.Size = New System.Drawing.Size(290, 25)
         Me.Label3.TabIndex = 11
         Me.Label3.Text = "Report Scaffold Estimate"
         '
         'PictureBox1
         '
         Me.PictureBox1.Image = Global.AVT_TRAKING.My.Resources.Resources.report
-        Me.PictureBox1.Location = New System.Drawing.Point(6, 2)
+        Me.PictureBox1.Location = New System.Drawing.Point(8, 2)
+        Me.PictureBox1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.PictureBox1.Name = "PictureBox1"
-        Me.PictureBox1.Size = New System.Drawing.Size(28, 28)
+        Me.PictureBox1.Size = New System.Drawing.Size(37, 34)
         Me.PictureBox1.TabIndex = 10
         Me.PictureBox1.TabStop = False
         '
@@ -102,9 +106,10 @@ Partial Class ReportScaffoldEstimate
         '
         Me.PictureBox3.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.PictureBox3.Image = Global.AVT_TRAKING.My.Resources.Resources.minimize2
-        Me.PictureBox3.Location = New System.Drawing.Point(613, 5)
+        Me.PictureBox3.Location = New System.Drawing.Point(817, 6)
+        Me.PictureBox3.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.PictureBox3.Name = "PictureBox3"
-        Me.PictureBox3.Size = New System.Drawing.Size(27, 29)
+        Me.PictureBox3.Size = New System.Drawing.Size(36, 36)
         Me.PictureBox3.TabIndex = 9
         Me.PictureBox3.TabStop = False
         '
@@ -112,9 +117,10 @@ Partial Class ReportScaffoldEstimate
         '
         Me.btnRestore.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnRestore.Image = Global.AVT_TRAKING.My.Resources.Resources.restore2
-        Me.btnRestore.Location = New System.Drawing.Point(645, 0)
+        Me.btnRestore.Location = New System.Drawing.Point(860, 0)
+        Me.btnRestore.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.btnRestore.Name = "btnRestore"
-        Me.btnRestore.Size = New System.Drawing.Size(26, 29)
+        Me.btnRestore.Size = New System.Drawing.Size(35, 36)
         Me.btnRestore.TabIndex = 8
         Me.btnRestore.TabStop = False
         '
@@ -122,9 +128,10 @@ Partial Class ReportScaffoldEstimate
         '
         Me.btnMaximize.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnMaximize.Image = Global.AVT_TRAKING.My.Resources.Resources.maximize2
-        Me.btnMaximize.Location = New System.Drawing.Point(646, 2)
+        Me.btnMaximize.Location = New System.Drawing.Point(861, 2)
+        Me.btnMaximize.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.btnMaximize.Name = "btnMaximize"
-        Me.btnMaximize.Size = New System.Drawing.Size(31, 29)
+        Me.btnMaximize.Size = New System.Drawing.Size(41, 36)
         Me.btnMaximize.TabIndex = 7
         Me.btnMaximize.TabStop = False
         '
@@ -137,18 +144,20 @@ Partial Class ReportScaffoldEstimate
         Me.Panel1.Controls.Add(Me.cmbUnit)
         Me.Panel1.Controls.Add(Me.PictureBox4)
         Me.Panel1.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel1.Location = New System.Drawing.Point(3, 43)
+        Me.Panel1.Location = New System.Drawing.Point(4, 53)
+        Me.Panel1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(680, 56)
+        Me.Panel1.Size = New System.Drawing.Size(907, 68)
         Me.Panel1.TabIndex = 4
         '
         'chbAllUnit
         '
         Me.chbAllUnit.AutoSize = True
         Me.chbAllUnit.ForeColor = System.Drawing.SystemColors.HighlightText
-        Me.chbAllUnit.Location = New System.Drawing.Point(185, 15)
+        Me.chbAllUnit.Location = New System.Drawing.Point(247, 18)
+        Me.chbAllUnit.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.chbAllUnit.Name = "chbAllUnit"
-        Me.chbAllUnit.Size = New System.Drawing.Size(40, 17)
+        Me.chbAllUnit.Size = New System.Drawing.Size(47, 20)
         Me.chbAllUnit.TabIndex = 14
         Me.chbAllUnit.Text = "All "
         Me.chbAllUnit.UseVisualStyleBackColor = True
@@ -157,9 +166,10 @@ Partial Class ReportScaffoldEstimate
         '
         Me.Label1.AutoSize = True
         Me.Label1.ForeColor = System.Drawing.SystemColors.HighlightText
-        Me.Label1.Location = New System.Drawing.Point(9, 14)
+        Me.Label1.Location = New System.Drawing.Point(12, 17)
+        Me.Label1.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(26, 13)
+        Me.Label1.Size = New System.Drawing.Size(30, 16)
         Me.Label1.TabIndex = 13
         Me.Label1.Text = "Unit"
         '
@@ -172,9 +182,10 @@ Partial Class ReportScaffoldEstimate
         Me.btnReport.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.btnReport.Image = Global.AVT_TRAKING.My.Resources.Resources.reportshow
         Me.btnReport.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnReport.Location = New System.Drawing.Point(262, 6)
+        Me.btnReport.Location = New System.Drawing.Point(349, 7)
+        Me.btnReport.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.btnReport.Name = "btnReport"
-        Me.btnReport.Size = New System.Drawing.Size(83, 33)
+        Me.btnReport.Size = New System.Drawing.Size(111, 41)
         Me.btnReport.TabIndex = 12
         Me.btnReport.Text = "Report"
         Me.btnReport.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -183,18 +194,20 @@ Partial Class ReportScaffoldEstimate
         'cmbUnit
         '
         Me.cmbUnit.FormattingEnabled = True
-        Me.cmbUnit.Location = New System.Drawing.Point(46, 11)
+        Me.cmbUnit.Location = New System.Drawing.Point(61, 14)
+        Me.cmbUnit.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.cmbUnit.Name = "cmbUnit"
-        Me.cmbUnit.Size = New System.Drawing.Size(132, 21)
+        Me.cmbUnit.Size = New System.Drawing.Size(175, 24)
         Me.cmbUnit.TabIndex = 11
         '
         'PictureBox4
         '
         Me.PictureBox4.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.PictureBox4.Image = Global.AVT_TRAKING.My.Resources.Resources._exit
-        Me.PictureBox4.Location = New System.Drawing.Point(640, 3)
+        Me.PictureBox4.Location = New System.Drawing.Point(853, 4)
+        Me.PictureBox4.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.PictureBox4.Name = "PictureBox4"
-        Me.PictureBox4.Size = New System.Drawing.Size(37, 29)
+        Me.PictureBox4.Size = New System.Drawing.Size(49, 36)
         Me.PictureBox4.TabIndex = 10
         Me.PictureBox4.TabStop = False
         '
@@ -204,19 +217,23 @@ Partial Class ReportScaffoldEstimate
         Me.crvReportScaffoldEstimate.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.crvReportScaffoldEstimate.Cursor = System.Windows.Forms.Cursors.Default
         Me.crvReportScaffoldEstimate.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.crvReportScaffoldEstimate.Location = New System.Drawing.Point(3, 105)
+        Me.crvReportScaffoldEstimate.Location = New System.Drawing.Point(4, 129)
+        Me.crvReportScaffoldEstimate.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.crvReportScaffoldEstimate.Name = "crvReportScaffoldEstimate"
-        Me.crvReportScaffoldEstimate.Size = New System.Drawing.Size(680, 382)
+        Me.crvReportScaffoldEstimate.Size = New System.Drawing.Size(907, 470)
         Me.crvReportScaffoldEstimate.TabIndex = 5
+        Me.crvReportScaffoldEstimate.ToolPanelWidth = 267
         '
         'ReportScaffoldEstimate
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(686, 490)
+        Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(83, Byte), Integer), CType(CType(93, Byte), Integer), CType(CType(102, Byte), Integer))
+        Me.ClientSize = New System.Drawing.Size(915, 603)
         Me.Controls.Add(Me.TableLayoutPanel1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
+        Me.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.Name = "ReportScaffoldEstimate"
         Me.Text = "ScaffoldEstimate"
         Me.TableLayoutPanel1.ResumeLayout(False)

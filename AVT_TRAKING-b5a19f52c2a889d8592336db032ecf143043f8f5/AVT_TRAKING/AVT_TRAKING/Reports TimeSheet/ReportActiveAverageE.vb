@@ -53,6 +53,11 @@ Public Class ReportActiveAverageE
                 reportAE.SetParameterValue("@ClientName", If(chbAll.Checked, 0, CInt(idClient)))
                 reportAE.SetParameterValue("@all", If(chbAll.Checked, 1, 0))
                 reportAE.SetParameterValue("@CompanyName", "brock")
+                If Not UserDB = "True" Then
+                    reportAE.SetDatabaseLogon(UserDB, Pass, ServerName, DBName)
+                Else
+                    reportAE.SetDatabaseLogon("", "", ServerName, DBName)
+                End If
                 crvActiveAverageE.ReportSource = reportAE
             Else
                 MsgBox("Please select a Client.")

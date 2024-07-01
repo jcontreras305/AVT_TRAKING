@@ -100,16 +100,18 @@ Partial Class ReportsMenu
         Me.TitleBar.Controls.Add(Me.btnMaximize)
         Me.TitleBar.Dock = System.Windows.Forms.DockStyle.Top
         Me.TitleBar.Location = New System.Drawing.Point(0, 0)
+        Me.TitleBar.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.TitleBar.Name = "TitleBar"
-        Me.TitleBar.Size = New System.Drawing.Size(917, 85)
+        Me.TitleBar.Size = New System.Drawing.Size(1223, 105)
         Me.TitleBar.TabIndex = 1
         '
         'PictureBox1
         '
         Me.PictureBox1.Image = Global.AVT_TRAKING.My.Resources.Resources.repormen
-        Me.PictureBox1.Location = New System.Drawing.Point(240, 4)
+        Me.PictureBox1.Location = New System.Drawing.Point(320, 5)
+        Me.PictureBox1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.PictureBox1.Name = "PictureBox1"
-        Me.PictureBox1.Size = New System.Drawing.Size(49, 44)
+        Me.PictureBox1.Size = New System.Drawing.Size(65, 54)
         Me.PictureBox1.TabIndex = 4
         Me.PictureBox1.TabStop = False
         '
@@ -118,9 +120,10 @@ Partial Class ReportsMenu
         Me.Label1.AutoSize = True
         Me.Label1.Font = New System.Drawing.Font("Verdana", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label1.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.Label1.Location = New System.Drawing.Point(295, 14)
+        Me.Label1.Location = New System.Drawing.Point(393, 17)
+        Me.Label1.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(93, 23)
+        Me.Label1.Size = New System.Drawing.Size(118, 29)
         Me.Label1.TabIndex = 3
         Me.Label1.Text = "Reports"
         '
@@ -128,9 +131,10 @@ Partial Class ReportsMenu
         '
         Me.btnRestore.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnRestore.Image = Global.AVT_TRAKING.My.Resources.Resources.restore2
-        Me.btnRestore.Location = New System.Drawing.Point(877, 6)
+        Me.btnRestore.Location = New System.Drawing.Point(1169, 7)
+        Me.btnRestore.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.btnRestore.Name = "btnRestore"
-        Me.btnRestore.Size = New System.Drawing.Size(24, 23)
+        Me.btnRestore.Size = New System.Drawing.Size(32, 28)
         Me.btnRestore.TabIndex = 2
         Me.btnRestore.TabStop = False
         '
@@ -138,9 +142,10 @@ Partial Class ReportsMenu
         '
         Me.PictureBox4.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.PictureBox4.Image = Global.AVT_TRAKING.My.Resources.Resources._exit
-        Me.PictureBox4.Location = New System.Drawing.Point(877, 45)
+        Me.PictureBox4.Location = New System.Drawing.Point(1169, 55)
+        Me.PictureBox4.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.PictureBox4.Name = "PictureBox4"
-        Me.PictureBox4.Size = New System.Drawing.Size(37, 34)
+        Me.PictureBox4.Size = New System.Drawing.Size(49, 42)
         Me.PictureBox4.TabIndex = 3
         Me.PictureBox4.TabStop = False
         '
@@ -148,9 +153,10 @@ Partial Class ReportsMenu
         '
         Me.PictureBox2.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.PictureBox2.Image = Global.AVT_TRAKING.My.Resources.Resources.minimize2
-        Me.PictureBox2.Location = New System.Drawing.Point(847, 6)
+        Me.PictureBox2.Location = New System.Drawing.Point(1129, 7)
+        Me.PictureBox2.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.PictureBox2.Name = "PictureBox2"
-        Me.PictureBox2.Size = New System.Drawing.Size(24, 26)
+        Me.PictureBox2.Size = New System.Drawing.Size(32, 32)
         Me.PictureBox2.TabIndex = 1
         Me.PictureBox2.TabStop = False
         '
@@ -158,9 +164,10 @@ Partial Class ReportsMenu
         '
         Me.btnMaximize.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnMaximize.Image = Global.AVT_TRAKING.My.Resources.Resources.maximize2
-        Me.btnMaximize.Location = New System.Drawing.Point(877, 6)
+        Me.btnMaximize.Location = New System.Drawing.Point(1169, 7)
+        Me.btnMaximize.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.btnMaximize.Name = "btnMaximize"
-        Me.btnMaximize.Size = New System.Drawing.Size(28, 31)
+        Me.btnMaximize.Size = New System.Drawing.Size(37, 38)
         Me.btnMaximize.TabIndex = 0
         Me.btnMaximize.TabStop = False
         '
@@ -180,9 +187,10 @@ Partial Class ReportsMenu
         Me.Panel2.Controls.Add(Me.btnActAverage)
         Me.Panel2.Controls.Add(Me.btnTimeSheet)
         Me.Panel2.Dock = System.Windows.Forms.DockStyle.Left
-        Me.Panel2.Location = New System.Drawing.Point(0, 85)
+        Me.Panel2.Location = New System.Drawing.Point(0, 105)
+        Me.Panel2.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(206, 582)
+        Me.Panel2.Size = New System.Drawing.Size(275, 716)
         Me.Panel2.TabIndex = 2
         '
         'Button25
@@ -195,9 +203,10 @@ Partial Class ReportsMenu
         Me.Button25.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.Button25.Image = Global.AVT_TRAKING.My.Resources.Resources.billing
         Me.Button25.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.Button25.Location = New System.Drawing.Point(0, 500)
+        Me.Button25.Location = New System.Drawing.Point(0, 620)
+        Me.Button25.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.Button25.Name = "Button25"
-        Me.Button25.Size = New System.Drawing.Size(206, 50)
+        Me.Button25.Size = New System.Drawing.Size(275, 62)
         Me.Button25.TabIndex = 10
         Me.Button25.Text = "Material Details"
         Me.Button25.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -214,9 +223,10 @@ Partial Class ReportsMenu
         Me.Button24.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.Button24.Image = Global.AVT_TRAKING.My.Resources.Resources.excel
         Me.Button24.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.Button24.Location = New System.Drawing.Point(0, 450)
+        Me.Button24.Location = New System.Drawing.Point(0, 558)
+        Me.Button24.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.Button24.Name = "Button24"
-        Me.Button24.Size = New System.Drawing.Size(206, 50)
+        Me.Button24.Size = New System.Drawing.Size(275, 62)
         Me.Button24.TabIndex = 9
         Me.Button24.Text = "Mhrs By Date Range"
         Me.Button24.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -233,9 +243,10 @@ Partial Class ReportsMenu
         Me.Button23.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.Button23.Image = Global.AVT_TRAKING.My.Resources.Resources.excel
         Me.Button23.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.Button23.Location = New System.Drawing.Point(0, 400)
+        Me.Button23.Location = New System.Drawing.Point(0, 496)
+        Me.Button23.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.Button23.Name = "Button23"
-        Me.Button23.Size = New System.Drawing.Size(206, 50)
+        Me.Button23.Size = New System.Drawing.Size(275, 62)
         Me.Button23.TabIndex = 8
         Me.Button23.Text = "Under Fourty"
         Me.Button23.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -252,9 +263,10 @@ Partial Class ReportsMenu
         Me.Button21.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.Button21.Image = Global.AVT_TRAKING.My.Resources.Resources.scaffoldestimate
         Me.Button21.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.Button21.Location = New System.Drawing.Point(0, 350)
+        Me.Button21.Location = New System.Drawing.Point(0, 434)
+        Me.Button21.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.Button21.Name = "Button21"
-        Me.Button21.Size = New System.Drawing.Size(206, 50)
+        Me.Button21.Size = New System.Drawing.Size(275, 62)
         Me.Button21.TabIndex = 7
         Me.Button21.Text = "Daily Equipment Time Sheet"
         Me.Button21.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
@@ -271,9 +283,10 @@ Partial Class ReportsMenu
         Me.Button2.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.Button2.Image = Global.AVT_TRAKING.My.Resources.Resources.scaffoldestimate
         Me.Button2.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.Button2.Location = New System.Drawing.Point(0, 300)
+        Me.Button2.Location = New System.Drawing.Point(0, 372)
+        Me.Button2.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(206, 50)
+        Me.Button2.Size = New System.Drawing.Size(275, 62)
         Me.Button2.TabIndex = 6
         Me.Button2.Text = "Time Sheets PO"
         Me.Button2.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -290,9 +303,10 @@ Partial Class ReportsMenu
         Me.Button4.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.Button4.Image = Global.AVT_TRAKING.My.Resources.Resources.ComplteByRange
         Me.Button4.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.Button4.Location = New System.Drawing.Point(0, 250)
+        Me.Button4.Location = New System.Drawing.Point(0, 310)
+        Me.Button4.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.Button4.Name = "Button4"
-        Me.Button4.Size = New System.Drawing.Size(206, 50)
+        Me.Button4.Size = New System.Drawing.Size(275, 62)
         Me.Button4.TabIndex = 5
         Me.Button4.Text = "Comp By Date Range"
         Me.Button4.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -309,9 +323,10 @@ Partial Class ReportsMenu
         Me.Button3.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.Button3.Image = Global.AVT_TRAKING.My.Resources.Resources.ReCap
         Me.Button3.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.Button3.Location = New System.Drawing.Point(0, 200)
+        Me.Button3.Location = New System.Drawing.Point(0, 248)
+        Me.Button3.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.Button3.Name = "Button3"
-        Me.Button3.Size = New System.Drawing.Size(206, 50)
+        Me.Button3.Size = New System.Drawing.Size(275, 62)
         Me.Button3.TabIndex = 4
         Me.Button3.Text = "Client Billings Re-Cap"
         Me.Button3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
@@ -328,9 +343,10 @@ Partial Class ReportsMenu
         Me.Button1.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.Button1.Image = Global.AVT_TRAKING.My.Resources.Resources.catsemployee
         Me.Button1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.Button1.Location = New System.Drawing.Point(0, 150)
+        Me.Button1.Location = New System.Drawing.Point(0, 186)
+        Me.Button1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(206, 50)
+        Me.Button1.Size = New System.Drawing.Size(275, 62)
         Me.Button1.TabIndex = 3
         Me.Button1.Text = "Cats Employee"
         Me.Button1.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -347,9 +363,10 @@ Partial Class ReportsMenu
         Me.btnClientBilling.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.btnClientBilling.Image = Global.AVT_TRAKING.My.Resources.Resources.billing
         Me.btnClientBilling.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnClientBilling.Location = New System.Drawing.Point(0, 100)
+        Me.btnClientBilling.Location = New System.Drawing.Point(0, 124)
+        Me.btnClientBilling.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.btnClientBilling.Name = "btnClientBilling"
-        Me.btnClientBilling.Size = New System.Drawing.Size(206, 50)
+        Me.btnClientBilling.Size = New System.Drawing.Size(275, 62)
         Me.btnClientBilling.TabIndex = 2
         Me.btnClientBilling.Text = "Client Billings"
         Me.btnClientBilling.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -366,9 +383,10 @@ Partial Class ReportsMenu
         Me.btnActAverage.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.btnActAverage.Image = Global.AVT_TRAKING.My.Resources.Resources.average
         Me.btnActAverage.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnActAverage.Location = New System.Drawing.Point(0, 50)
+        Me.btnActAverage.Location = New System.Drawing.Point(0, 62)
+        Me.btnActAverage.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.btnActAverage.Name = "btnActAverage"
-        Me.btnActAverage.Size = New System.Drawing.Size(206, 50)
+        Me.btnActAverage.Size = New System.Drawing.Size(275, 62)
         Me.btnActAverage.TabIndex = 1
         Me.btnActAverage.Text = "Active Average"
         Me.btnActAverage.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -386,8 +404,9 @@ Partial Class ReportsMenu
         Me.btnTimeSheet.Image = Global.AVT_TRAKING.My.Resources.Resources.timesheetreport
         Me.btnTimeSheet.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.btnTimeSheet.Location = New System.Drawing.Point(0, 0)
+        Me.btnTimeSheet.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.btnTimeSheet.Name = "btnTimeSheet"
-        Me.btnTimeSheet.Size = New System.Drawing.Size(206, 50)
+        Me.btnTimeSheet.Size = New System.Drawing.Size(275, 62)
         Me.btnTimeSheet.TabIndex = 0
         Me.btnTimeSheet.Text = "Time Sheets"
         Me.btnTimeSheet.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -397,13 +416,15 @@ Partial Class ReportsMenu
         'Panel3
         '
         Me.Panel3.AutoScroll = True
+        Me.Panel3.BackColor = System.Drawing.Color.FromArgb(CType(CType(83, Byte), Integer), CType(CType(93, Byte), Integer), CType(CType(102, Byte), Integer))
         Me.Panel3.Controls.Add(Me.Panel5)
         Me.Panel3.Controls.Add(Me.Panel4)
         Me.Panel3.Controls.Add(Me.Panel1)
         Me.Panel3.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel3.Location = New System.Drawing.Point(206, 85)
+        Me.Panel3.Location = New System.Drawing.Point(275, 105)
+        Me.Panel3.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.Panel3.Name = "Panel3"
-        Me.Panel3.Size = New System.Drawing.Size(711, 582)
+        Me.Panel3.Size = New System.Drawing.Size(948, 716)
         Me.Panel3.TabIndex = 3
         '
         'Panel5
@@ -420,9 +441,10 @@ Partial Class ReportsMenu
         Me.Panel5.Controls.Add(Me.Button29)
         Me.Panel5.Controls.Add(Me.Button28)
         Me.Panel5.Dock = System.Windows.Forms.DockStyle.Left
-        Me.Panel5.Location = New System.Drawing.Point(485, 0)
+        Me.Panel5.Location = New System.Drawing.Point(647, 0)
+        Me.Panel5.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.Panel5.Name = "Panel5"
-        Me.Panel5.Size = New System.Drawing.Size(180, 582)
+        Me.Panel5.Size = New System.Drawing.Size(240, 716)
         Me.Panel5.TabIndex = 6
         '
         'Button37
@@ -435,9 +457,10 @@ Partial Class ReportsMenu
         Me.Button37.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.Button37.Image = Global.AVT_TRAKING.My.Resources.Resources.excel
         Me.Button37.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.Button37.Location = New System.Drawing.Point(0, 378)
+        Me.Button37.Location = New System.Drawing.Point(0, 468)
+        Me.Button37.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.Button37.Name = "Button37"
-        Me.Button37.Size = New System.Drawing.Size(180, 42)
+        Me.Button37.Size = New System.Drawing.Size(240, 52)
         Me.Button37.TabIndex = 18
         Me.Button37.Text = "Master Per-Diem"
         Me.Button37.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -454,9 +477,10 @@ Partial Class ReportsMenu
         Me.Button36.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.Button36.Image = Global.AVT_TRAKING.My.Resources.Resources.excel
         Me.Button36.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.Button36.Location = New System.Drawing.Point(0, 336)
+        Me.Button36.Location = New System.Drawing.Point(0, 416)
+        Me.Button36.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.Button36.Name = "Button36"
-        Me.Button36.Size = New System.Drawing.Size(180, 42)
+        Me.Button36.Size = New System.Drawing.Size(240, 52)
         Me.Button36.TabIndex = 17
         Me.Button36.Text = "Master Payroll"
         Me.Button36.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -473,9 +497,10 @@ Partial Class ReportsMenu
         Me.Button35.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.Button35.Image = Global.AVT_TRAKING.My.Resources.Resources.excel
         Me.Button35.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.Button35.Location = New System.Drawing.Point(0, 294)
+        Me.Button35.Location = New System.Drawing.Point(0, 364)
+        Me.Button35.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.Button35.Name = "Button35"
-        Me.Button35.Size = New System.Drawing.Size(180, 42)
+        Me.Button35.Size = New System.Drawing.Size(240, 52)
         Me.Button35.TabIndex = 16
         Me.Button35.Text = "Outcoming"
         Me.Button35.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -492,9 +517,10 @@ Partial Class ReportsMenu
         Me.Button34.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.Button34.Image = Global.AVT_TRAKING.My.Resources.Resources.excel
         Me.Button34.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.Button34.Location = New System.Drawing.Point(0, 252)
+        Me.Button34.Location = New System.Drawing.Point(0, 312)
+        Me.Button34.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.Button34.Name = "Button34"
-        Me.Button34.Size = New System.Drawing.Size(180, 42)
+        Me.Button34.Size = New System.Drawing.Size(240, 52)
         Me.Button34.TabIndex = 15
         Me.Button34.Text = "Incoming"
         Me.Button34.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -511,9 +537,10 @@ Partial Class ReportsMenu
         Me.Button33.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.Button33.Image = Global.AVT_TRAKING.My.Resources.Resources.excel
         Me.Button33.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.Button33.Location = New System.Drawing.Point(0, 210)
+        Me.Button33.Location = New System.Drawing.Point(0, 260)
+        Me.Button33.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.Button33.Name = "Button33"
-        Me.Button33.Size = New System.Drawing.Size(180, 42)
+        Me.Button33.Size = New System.Drawing.Size(240, 52)
         Me.Button33.TabIndex = 14
         Me.Button33.Text = "Factors"
         Me.Button33.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -530,9 +557,10 @@ Partial Class ReportsMenu
         Me.Button32.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.Button32.Image = Global.AVT_TRAKING.My.Resources.Resources.excel
         Me.Button32.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.Button32.Location = New System.Drawing.Point(0, 168)
+        Me.Button32.Location = New System.Drawing.Point(0, 208)
+        Me.Button32.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.Button32.Name = "Button32"
-        Me.Button32.Size = New System.Drawing.Size(180, 42)
+        Me.Button32.Size = New System.Drawing.Size(240, 52)
         Me.Button32.TabIndex = 13
         Me.Button32.Text = "Working"
         Me.Button32.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -549,9 +577,10 @@ Partial Class ReportsMenu
         Me.Button31.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.Button31.Image = Global.AVT_TRAKING.My.Resources.Resources.excel
         Me.Button31.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.Button31.Location = New System.Drawing.Point(0, 126)
+        Me.Button31.Location = New System.Drawing.Point(0, 156)
+        Me.Button31.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.Button31.Name = "Button31"
-        Me.Button31.Size = New System.Drawing.Size(180, 42)
+        Me.Button31.Size = New System.Drawing.Size(240, 52)
         Me.Button31.TabIndex = 12
         Me.Button31.Text = "Scaffold"
         Me.Button31.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -568,9 +597,10 @@ Partial Class ReportsMenu
         Me.Button30.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.Button30.Image = Global.AVT_TRAKING.My.Resources.Resources.excel
         Me.Button30.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.Button30.Location = New System.Drawing.Point(0, 84)
+        Me.Button30.Location = New System.Drawing.Point(0, 104)
+        Me.Button30.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.Button30.Name = "Button30"
-        Me.Button30.Size = New System.Drawing.Size(180, 42)
+        Me.Button30.Size = New System.Drawing.Size(240, 52)
         Me.Button30.TabIndex = 11
         Me.Button30.Text = "Invoice Pieces"
         Me.Button30.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -587,9 +617,10 @@ Partial Class ReportsMenu
         Me.Button29.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.Button29.Image = Global.AVT_TRAKING.My.Resources.Resources.excel
         Me.Button29.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.Button29.Location = New System.Drawing.Point(0, 42)
+        Me.Button29.Location = New System.Drawing.Point(0, 52)
+        Me.Button29.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.Button29.Name = "Button29"
-        Me.Button29.Size = New System.Drawing.Size(180, 42)
+        Me.Button29.Size = New System.Drawing.Size(240, 52)
         Me.Button29.TabIndex = 10
         Me.Button29.Text = "PBI"
         Me.Button29.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -607,8 +638,9 @@ Partial Class ReportsMenu
         Me.Button28.Image = Global.AVT_TRAKING.My.Resources.Resources.excel
         Me.Button28.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.Button28.Location = New System.Drawing.Point(0, 0)
+        Me.Button28.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.Button28.Name = "Button28"
-        Me.Button28.Size = New System.Drawing.Size(180, 42)
+        Me.Button28.Size = New System.Drawing.Size(240, 52)
         Me.Button28.TabIndex = 9
         Me.Button28.Text = "Time Sheet"
         Me.Button28.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -630,9 +662,10 @@ Partial Class ReportsMenu
         Me.Panel4.Controls.Add(Me.Button16)
         Me.Panel4.Controls.Add(Me.Button17)
         Me.Panel4.Dock = System.Windows.Forms.DockStyle.Left
-        Me.Panel4.Location = New System.Drawing.Point(224, 0)
+        Me.Panel4.Location = New System.Drawing.Point(299, 0)
+        Me.Panel4.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.Panel4.Name = "Panel4"
-        Me.Panel4.Size = New System.Drawing.Size(261, 582)
+        Me.Panel4.Size = New System.Drawing.Size(348, 716)
         Me.Panel4.TabIndex = 5
         '
         'Button27
@@ -645,9 +678,10 @@ Partial Class ReportsMenu
         Me.Button27.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.Button27.Image = Global.AVT_TRAKING.My.Resources.Resources.project
         Me.Button27.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.Button27.Location = New System.Drawing.Point(0, 513)
+        Me.Button27.Location = New System.Drawing.Point(0, 630)
+        Me.Button27.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.Button27.Name = "Button27"
-        Me.Button27.Size = New System.Drawing.Size(261, 57)
+        Me.Button27.Size = New System.Drawing.Size(348, 70)
         Me.Button27.TabIndex = 30
         Me.Button27.Text = "SCF Product Out."
         Me.Button27.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -664,9 +698,10 @@ Partial Class ReportsMenu
         Me.Button26.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.Button26.Image = Global.AVT_TRAKING.My.Resources.Resources.project
         Me.Button26.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.Button26.Location = New System.Drawing.Point(0, 456)
+        Me.Button26.Location = New System.Drawing.Point(0, 560)
+        Me.Button26.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.Button26.Name = "Button26"
-        Me.Button26.Size = New System.Drawing.Size(261, 57)
+        Me.Button26.Size = New System.Drawing.Size(348, 70)
         Me.Button26.TabIndex = 29
         Me.Button26.Text = "SCF Product Inc."
         Me.Button26.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -683,9 +718,10 @@ Partial Class ReportsMenu
         Me.Button22.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.Button22.Image = Global.AVT_TRAKING.My.Resources.Resources.project
         Me.Button22.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.Button22.Location = New System.Drawing.Point(0, 399)
+        Me.Button22.Location = New System.Drawing.Point(0, 490)
+        Me.Button22.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.Button22.Name = "Button22"
-        Me.Button22.Size = New System.Drawing.Size(261, 57)
+        Me.Button22.Size = New System.Drawing.Size(348, 70)
         Me.Button22.TabIndex = 28
         Me.Button22.Text = "SCF Active"
         Me.Button22.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -702,9 +738,10 @@ Partial Class ReportsMenu
         Me.Button20.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.Button20.Image = Global.AVT_TRAKING.My.Resources.Resources.project
         Me.Button20.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.Button20.Location = New System.Drawing.Point(0, 342)
+        Me.Button20.Location = New System.Drawing.Point(0, 420)
+        Me.Button20.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.Button20.Name = "Button20"
-        Me.Button20.Size = New System.Drawing.Size(261, 57)
+        Me.Button20.Size = New System.Drawing.Size(348, 70)
         Me.Button20.TabIndex = 27
         Me.Button20.Text = "SCF Material Inventory"
         Me.Button20.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -721,9 +758,10 @@ Partial Class ReportsMenu
         Me.Button18.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.Button18.Image = Global.AVT_TRAKING.My.Resources.Resources.project
         Me.Button18.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.Button18.Location = New System.Drawing.Point(0, 285)
+        Me.Button18.Location = New System.Drawing.Point(0, 350)
+        Me.Button18.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.Button18.Name = "Button18"
-        Me.Button18.Size = New System.Drawing.Size(261, 57)
+        Me.Button18.Size = New System.Drawing.Size(348, 70)
         Me.Button18.TabIndex = 26
         Me.Button18.Text = "SCF Rental Details"
         Me.Button18.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -740,9 +778,10 @@ Partial Class ReportsMenu
         Me.Button13.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.Button13.Image = Global.AVT_TRAKING.My.Resources.Resources.project
         Me.Button13.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.Button13.Location = New System.Drawing.Point(0, 228)
+        Me.Button13.Location = New System.Drawing.Point(0, 280)
+        Me.Button13.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.Button13.Name = "Button13"
-        Me.Button13.Size = New System.Drawing.Size(261, 57)
+        Me.Button13.Size = New System.Drawing.Size(348, 70)
         Me.Button13.TabIndex = 25
         Me.Button13.Text = "SCF History By Job"
         Me.Button13.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -759,9 +798,10 @@ Partial Class ReportsMenu
         Me.Button14.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.Button14.Image = Global.AVT_TRAKING.My.Resources.Resources.project
         Me.Button14.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.Button14.Location = New System.Drawing.Point(0, 171)
+        Me.Button14.Location = New System.Drawing.Point(0, 210)
+        Me.Button14.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.Button14.Name = "Button14"
-        Me.Button14.Size = New System.Drawing.Size(261, 57)
+        Me.Button14.Size = New System.Drawing.Size(348, 70)
         Me.Button14.TabIndex = 24
         Me.Button14.Text = "SCF Histoty Dismantled"
         Me.Button14.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -778,9 +818,10 @@ Partial Class ReportsMenu
         Me.Button15.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.Button15.Image = Global.AVT_TRAKING.My.Resources.Resources.project
         Me.Button15.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.Button15.Location = New System.Drawing.Point(0, 114)
+        Me.Button15.Location = New System.Drawing.Point(0, 140)
+        Me.Button15.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.Button15.Name = "Button15"
-        Me.Button15.Size = New System.Drawing.Size(261, 57)
+        Me.Button15.Size = New System.Drawing.Size(348, 70)
         Me.Button15.TabIndex = 23
         Me.Button15.Text = "SCF History By Job And Unit"
         Me.Button15.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -797,9 +838,10 @@ Partial Class ReportsMenu
         Me.Button16.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.Button16.Image = Global.AVT_TRAKING.My.Resources.Resources.project
         Me.Button16.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.Button16.Location = New System.Drawing.Point(0, 57)
+        Me.Button16.Location = New System.Drawing.Point(0, 70)
+        Me.Button16.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.Button16.Name = "Button16"
-        Me.Button16.Size = New System.Drawing.Size(261, 57)
+        Me.Button16.Size = New System.Drawing.Size(348, 70)
         Me.Button16.TabIndex = 22
         Me.Button16.Text = "SCF History By Job And WO"
         Me.Button16.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -817,8 +859,9 @@ Partial Class ReportsMenu
         Me.Button17.Image = Global.AVT_TRAKING.My.Resources.Resources.project
         Me.Button17.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.Button17.Location = New System.Drawing.Point(0, 0)
+        Me.Button17.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.Button17.Name = "Button17"
-        Me.Button17.Size = New System.Drawing.Size(261, 57)
+        Me.Button17.Size = New System.Drawing.Size(348, 70)
         Me.Button17.TabIndex = 21
         Me.Button17.Text = "SCF History By Job No"
         Me.Button17.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -842,8 +885,9 @@ Partial Class ReportsMenu
         Me.Panel1.Controls.Add(Me.Button5)
         Me.Panel1.Dock = System.Windows.Forms.DockStyle.Left
         Me.Panel1.Location = New System.Drawing.Point(0, 0)
+        Me.Panel1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(224, 582)
+        Me.Panel1.Size = New System.Drawing.Size(299, 716)
         Me.Panel1.TabIndex = 4
         '
         'Button38
@@ -855,9 +899,10 @@ Partial Class ReportsMenu
         Me.Button38.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.Button38.Image = Global.AVT_TRAKING.My.Resources.Resources.excel
         Me.Button38.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.Button38.Location = New System.Drawing.Point(3, 506)
+        Me.Button38.Location = New System.Drawing.Point(4, 623)
+        Me.Button38.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.Button38.Name = "Button38"
-        Me.Button38.Size = New System.Drawing.Size(200, 48)
+        Me.Button38.Size = New System.Drawing.Size(267, 59)
         Me.Button38.TabIndex = 21
         Me.Button38.Text = "Field Force"
         Me.Button38.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -873,9 +918,10 @@ Partial Class ReportsMenu
         Me.Button19.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.Button19.Image = Global.AVT_TRAKING.My.Resources.Resources.billing
         Me.Button19.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.Button19.Location = New System.Drawing.Point(3, 456)
+        Me.Button19.Location = New System.Drawing.Point(4, 561)
+        Me.Button19.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.Button19.Name = "Button19"
-        Me.Button19.Size = New System.Drawing.Size(200, 48)
+        Me.Button19.Size = New System.Drawing.Size(267, 59)
         Me.Button19.TabIndex = 20
         Me.Button19.Text = "Invoice Details"
         Me.Button19.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -891,9 +937,10 @@ Partial Class ReportsMenu
         Me.Button12.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.Button12.Image = Global.AVT_TRAKING.My.Resources.Resources.billing
         Me.Button12.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.Button12.Location = New System.Drawing.Point(3, 406)
+        Me.Button12.Location = New System.Drawing.Point(4, 500)
+        Me.Button12.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.Button12.Name = "Button12"
-        Me.Button12.Size = New System.Drawing.Size(200, 48)
+        Me.Button12.Size = New System.Drawing.Size(267, 59)
         Me.Button12.TabIndex = 19
         Me.Button12.Text = "Invoice"
         Me.Button12.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -909,9 +956,10 @@ Partial Class ReportsMenu
         Me.btnVacationE.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.btnVacationE.Image = Global.AVT_TRAKING.My.Resources.Resources.billing
         Me.btnVacationE.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnVacationE.Location = New System.Drawing.Point(6, 356)
+        Me.btnVacationE.Location = New System.Drawing.Point(8, 438)
+        Me.btnVacationE.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.btnVacationE.Name = "btnVacationE"
-        Me.btnVacationE.Size = New System.Drawing.Size(200, 48)
+        Me.btnVacationE.Size = New System.Drawing.Size(267, 59)
         Me.btnVacationE.TabIndex = 18
         Me.btnVacationE.Text = "Vacation Employee"
         Me.btnVacationE.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -927,9 +975,10 @@ Partial Class ReportsMenu
         Me.Button11.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.Button11.Image = Global.AVT_TRAKING.My.Resources.Resources.billing
         Me.Button11.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.Button11.Location = New System.Drawing.Point(6, 306)
+        Me.Button11.Location = New System.Drawing.Point(8, 377)
+        Me.Button11.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.Button11.Name = "Button11"
-        Me.Button11.Size = New System.Drawing.Size(200, 48)
+        Me.Button11.Size = New System.Drawing.Size(267, 59)
         Me.Button11.TabIndex = 17
         Me.Button11.Text = "WO Not Complete"
         Me.Button11.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -945,9 +994,10 @@ Partial Class ReportsMenu
         Me.Button10.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.Button10.Image = Global.AVT_TRAKING.My.Resources.Resources.billing
         Me.Button10.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.Button10.Location = New System.Drawing.Point(6, 256)
+        Me.Button10.Location = New System.Drawing.Point(8, 315)
+        Me.Button10.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.Button10.Name = "Button10"
-        Me.Button10.Size = New System.Drawing.Size(200, 48)
+        Me.Button10.Size = New System.Drawing.Size(267, 59)
         Me.Button10.TabIndex = 16
         Me.Button10.Text = "Year Final Hours"
         Me.Button10.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -963,9 +1013,10 @@ Partial Class ReportsMenu
         Me.Button9.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.Button9.Image = Global.AVT_TRAKING.My.Resources.Resources.billing
         Me.Button9.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.Button9.Location = New System.Drawing.Point(3, 206)
+        Me.Button9.Location = New System.Drawing.Point(4, 254)
+        Me.Button9.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.Button9.Name = "Button9"
-        Me.Button9.Size = New System.Drawing.Size(200, 48)
+        Me.Button9.Size = New System.Drawing.Size(267, 59)
         Me.Button9.TabIndex = 15
         Me.Button9.Text = "Hours Per Week"
         Me.Button9.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -981,9 +1032,10 @@ Partial Class ReportsMenu
         Me.Button8.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.Button8.Image = Global.AVT_TRAKING.My.Resources.Resources.billing
         Me.Button8.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.Button8.Location = New System.Drawing.Point(3, 156)
+        Me.Button8.Location = New System.Drawing.Point(4, 192)
+        Me.Button8.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.Button8.Name = "Button8"
-        Me.Button8.Size = New System.Drawing.Size(200, 48)
+        Me.Button8.Size = New System.Drawing.Size(267, 59)
         Me.Button8.TabIndex = 14
         Me.Button8.Text = "All Jobs"
         Me.Button8.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -999,9 +1051,10 @@ Partial Class ReportsMenu
         Me.Button7.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.Button7.Image = Global.AVT_TRAKING.My.Resources.Resources.byjobnumt
         Me.Button7.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.Button7.Location = New System.Drawing.Point(6, 106)
+        Me.Button7.Location = New System.Drawing.Point(8, 130)
+        Me.Button7.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.Button7.Name = "Button7"
-        Me.Button7.Size = New System.Drawing.Size(200, 48)
+        Me.Button7.Size = New System.Drawing.Size(267, 59)
         Me.Button7.TabIndex = 13
         Me.Button7.Text = "By Job Number"
         Me.Button7.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -1017,9 +1070,10 @@ Partial Class ReportsMenu
         Me.Button6.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.Button6.Image = Global.AVT_TRAKING.My.Resources.Resources.scaffoldestimate
         Me.Button6.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.Button6.Location = New System.Drawing.Point(6, 56)
+        Me.Button6.Location = New System.Drawing.Point(8, 69)
+        Me.Button6.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.Button6.Name = "Button6"
-        Me.Button6.Size = New System.Drawing.Size(200, 48)
+        Me.Button6.Size = New System.Drawing.Size(267, 59)
         Me.Button6.TabIndex = 12
         Me.Button6.Text = "Employees Time"
         Me.Button6.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -1035,9 +1089,10 @@ Partial Class ReportsMenu
         Me.Button5.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.Button5.Image = Global.AVT_TRAKING.My.Resources.Resources.scaffoldestimate
         Me.Button5.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.Button5.Location = New System.Drawing.Point(3, 6)
+        Me.Button5.Location = New System.Drawing.Point(4, 7)
+        Me.Button5.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.Button5.Name = "Button5"
-        Me.Button5.Size = New System.Drawing.Size(200, 48)
+        Me.Button5.Size = New System.Drawing.Size(267, 59)
         Me.Button5.TabIndex = 11
         Me.Button5.Text = "Employee Per Diem"
         Me.Button5.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -1046,13 +1101,14 @@ Partial Class ReportsMenu
         '
         'ReportsMenu
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(917, 667)
+        Me.ClientSize = New System.Drawing.Size(1223, 821)
         Me.Controls.Add(Me.Panel3)
         Me.Controls.Add(Me.Panel2)
         Me.Controls.Add(Me.TitleBar)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
+        Me.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.Name = "ReportsMenu"
         Me.Text = "ReportsMenu"
         Me.TitleBar.ResumeLayout(False)

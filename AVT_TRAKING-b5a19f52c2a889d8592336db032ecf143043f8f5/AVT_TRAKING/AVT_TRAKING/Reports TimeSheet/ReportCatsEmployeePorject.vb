@@ -1,5 +1,6 @@
 ﻿Imports System.Runtime.InteropServices
 Imports System.Data.SqlClient
+Imports CrystalDecisions.ReportAppServer
 Public Class ReportCatsEmployeePorject
     Dim conection As New ConnectioDB
     Private Sub ReportCatsEmployeePorject_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -57,6 +58,7 @@ Public Class ReportCatsEmployeePorject
             reportTS.SetParameterValue("@employeenumber", DBNull.Value)
             reportTS.SetParameterValue("@all", 1)
             reportTS.SetParameterValue("@CompanyName", "brock")
+            reportTS.SetDatabaseLogon(UserDB, Pass, ServerName, DBName)
             crvCatsEmployeebyProject.ReportSource = reportTS
         ElseIf cmbEmployees.SelectedItem IsNot Nothing Then
             Dim array() = cmbEmployees.SelectedItem.ToString().Split("    ")
@@ -67,6 +69,7 @@ Public Class ReportCatsEmployeePorject
                 reportTS.SetParameterValue("@finaldate", validaFechaParaSQl(dtpFinalDate.Value.Date))
                 reportTS.SetParameterValue("@employeenumber", idEmploye)
                 reportTS.SetParameterValue("@all", 0)
+                reportTS.SetDatabaseLogon(UserDB, Pass, ServerName, DBName)
                 crvCatsEmployeebyProject.ReportSource = reportTS
             Else
                 MsgBox("Please choose a Employee.")

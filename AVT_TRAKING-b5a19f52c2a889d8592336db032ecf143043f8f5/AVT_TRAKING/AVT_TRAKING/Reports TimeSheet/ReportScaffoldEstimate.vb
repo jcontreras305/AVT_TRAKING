@@ -1,4 +1,5 @@
 ﻿Imports System.Runtime.InteropServices
+Imports CrystalDecisions.ReportAppServer
 
 Public Class ReportScaffoldEstimate
     Public mtdEstimation As EstMeters
@@ -65,6 +66,7 @@ Public Class ReportScaffoldEstimate
                 reportSE.SetParameterValue("@IdClient", idClient)
                 reportSE.SetParameterValue("@all", False)
                 reportSE.SetParameterValue("@CompanyName", "brock")
+                reportSE.SetDatabaseLogon(UserDB, Pass, ServerName, DBName)
                 crvReportScaffoldEstimate.ReportSource = reportSE
             Else
                 If cmbUnit.SelectedItem IsNot Nothing Then
@@ -79,6 +81,7 @@ Public Class ReportScaffoldEstimate
                     reportSE.SetParameterValue("@EstNumber", EstNumber)
                     reportSE.SetParameterValue("@IdClient", idClient)
                     reportSE.SetParameterValue("@all", If(chbAllUnit.Checked, True, False))
+                    reportSE.SetDatabaseLogon(UserDB, Pass, ServerName, DBName)
                     crvReportScaffoldEstimate.ReportSource = reportSE
                 Else
                     MsgBox("Please select a Estimation.")

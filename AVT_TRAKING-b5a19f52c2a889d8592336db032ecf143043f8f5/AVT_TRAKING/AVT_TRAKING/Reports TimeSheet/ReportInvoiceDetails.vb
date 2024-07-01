@@ -62,6 +62,7 @@ Public Class ReportInvoiceDetails
                     reportTs.SetParameterValue("@idPO", If(chbAllPO.Checked, "0", idpo))
                     reportTs.SetParameterValue("@all", If(chbAllPO.Checked, "1", "0"))
                     reportTs.SetParameterValue("@CompanyName", "Brock")
+                    reportTs.SetDatabaseLogon(UserDB, Pass, ServerName, DBName)
                     crvIvoice.ReportSource = reportTs
                 Else
                     MsgBox("Please select a PO.")

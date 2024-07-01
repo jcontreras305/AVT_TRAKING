@@ -44,6 +44,7 @@ Public Class ScaffoldHistoryDismantled
                 reportTs.SetParameterValue("@numberClient", CInt(clNum))
                 reportTs.SetParameterValue("@CompanyName", "Brock")
                 reportTs.SetParameterValue("@all", If(chbAllClients.Checked, 1, 0))
+                reportTs.SetDatabaseLogon(UserDB, Pass, ServerName, DBName)
                 crvReport.ReportSource = reportTs
             Else
                 MsgBox("Please select a Client.")

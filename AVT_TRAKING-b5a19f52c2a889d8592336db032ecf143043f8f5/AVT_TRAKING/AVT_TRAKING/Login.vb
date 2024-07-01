@@ -21,6 +21,7 @@ Public Class Login
                 If DialogResult.Yes = MessageBox.Show("Please connect to the server to continue", "Error Connection", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) Then
                     Dim serverConn As New ServerConn
                     serverConn.ShowDialog()
+                    conn.readFileConn()
                     flagConnected = conn.conectar()
                 Else
                     btnIniciar.Enabled = False

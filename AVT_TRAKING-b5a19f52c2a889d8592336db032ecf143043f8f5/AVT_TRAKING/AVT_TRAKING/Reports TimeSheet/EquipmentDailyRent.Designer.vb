@@ -60,7 +60,7 @@ Partial Class DailyEquipmentRent
         Me.TableLayoutPanel1.Controls.Add(Me.Panel3, 0, 2)
         Me.TableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.TableLayoutPanel1.Location = New System.Drawing.Point(0, 0)
-        Me.TableLayoutPanel1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.TableLayoutPanel1.Margin = New System.Windows.Forms.Padding(4)
         Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
         Me.TableLayoutPanel1.RowCount = 3
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 66.0!))
@@ -79,7 +79,7 @@ Partial Class DailyEquipmentRent
         Me.Panel1.Controls.Add(Me.btnMaximize)
         Me.Panel1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel1.Location = New System.Drawing.Point(4, 4)
-        Me.Panel1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.Panel1.Margin = New System.Windows.Forms.Padding(4)
         Me.Panel1.Name = "Panel1"
         Me.Panel1.Size = New System.Drawing.Size(1232, 58)
         Me.Panel1.TabIndex = 0
@@ -88,7 +88,7 @@ Partial Class DailyEquipmentRent
         '
         Me.PictureBox1.Image = Global.AVT_TRAKING.My.Resources.Resources.scaffoldestimate
         Me.PictureBox1.Location = New System.Drawing.Point(4, 4)
-        Me.PictureBox1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.PictureBox1.Margin = New System.Windows.Forms.Padding(4)
         Me.PictureBox1.Name = "PictureBox1"
         Me.PictureBox1.Size = New System.Drawing.Size(60, 52)
         Me.PictureBox1.TabIndex = 17
@@ -112,7 +112,7 @@ Partial Class DailyEquipmentRent
         Me.btnMinimize.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnMinimize.Image = Global.AVT_TRAKING.My.Resources.Resources.minimize2
         Me.btnMinimize.Location = New System.Drawing.Point(1141, 4)
-        Me.btnMinimize.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btnMinimize.Margin = New System.Windows.Forms.Padding(4)
         Me.btnMinimize.Name = "btnMinimize"
         Me.btnMinimize.Size = New System.Drawing.Size(36, 36)
         Me.btnMinimize.TabIndex = 15
@@ -123,7 +123,7 @@ Partial Class DailyEquipmentRent
         Me.btnRestore.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnRestore.Image = Global.AVT_TRAKING.My.Resources.Resources.restore2
         Me.btnRestore.Location = New System.Drawing.Point(1185, 4)
-        Me.btnRestore.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btnRestore.Margin = New System.Windows.Forms.Padding(4)
         Me.btnRestore.Name = "btnRestore"
         Me.btnRestore.Size = New System.Drawing.Size(41, 36)
         Me.btnRestore.TabIndex = 14
@@ -134,7 +134,7 @@ Partial Class DailyEquipmentRent
         Me.btnMaximize.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnMaximize.Image = Global.AVT_TRAKING.My.Resources.Resources.maximize2
         Me.btnMaximize.Location = New System.Drawing.Point(1185, 4)
-        Me.btnMaximize.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btnMaximize.Margin = New System.Windows.Forms.Padding(4)
         Me.btnMaximize.Name = "btnMaximize"
         Me.btnMaximize.Size = New System.Drawing.Size(41, 36)
         Me.btnMaximize.TabIndex = 13
@@ -153,7 +153,7 @@ Partial Class DailyEquipmentRent
         Me.Panel2.Controls.Add(Me.dtpStartDate)
         Me.Panel2.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel2.Location = New System.Drawing.Point(4, 70)
-        Me.Panel2.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.Panel2.Margin = New System.Windows.Forms.Padding(4)
         Me.Panel2.Name = "Panel2"
         Me.Panel2.Size = New System.Drawing.Size(1232, 97)
         Me.Panel2.TabIndex = 1
@@ -196,7 +196,7 @@ Partial Class DailyEquipmentRent
         Me.PictureBox4.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.PictureBox4.Image = Global.AVT_TRAKING.My.Resources.Resources._exit
         Me.PictureBox4.Location = New System.Drawing.Point(1177, 4)
-        Me.PictureBox4.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.PictureBox4.Margin = New System.Windows.Forms.Padding(4)
         Me.PictureBox4.Name = "PictureBox4"
         Me.PictureBox4.Size = New System.Drawing.Size(49, 36)
         Me.PictureBox4.TabIndex = 12
@@ -212,7 +212,7 @@ Partial Class DailyEquipmentRent
         Me.btnReport.Image = Global.AVT_TRAKING.My.Resources.Resources.reportshow
         Me.btnReport.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.btnReport.Location = New System.Drawing.Point(575, 6)
-        Me.btnReport.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btnReport.Margin = New System.Windows.Forms.Padding(4)
         Me.btnReport.Name = "btnReport"
         Me.btnReport.Size = New System.Drawing.Size(111, 41)
         Me.btnReport.TabIndex = 11
@@ -224,7 +224,7 @@ Partial Class DailyEquipmentRent
         '
         Me.cmbClient.FormattingEnabled = True
         Me.cmbClient.Location = New System.Drawing.Point(361, 15)
-        Me.cmbClient.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.cmbClient.Margin = New System.Windows.Forms.Padding(4)
         Me.cmbClient.Name = "cmbClient"
         Me.cmbClient.Size = New System.Drawing.Size(185, 24)
         Me.cmbClient.TabIndex = 2
@@ -234,7 +234,7 @@ Partial Class DailyEquipmentRent
         Me.dtpFinalDate.CustomFormat = "MM/dd/yyyy"
         Me.dtpFinalDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom
         Me.dtpFinalDate.Location = New System.Drawing.Point(92, 54)
-        Me.dtpFinalDate.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.dtpFinalDate.Margin = New System.Windows.Forms.Padding(4)
         Me.dtpFinalDate.Name = "dtpFinalDate"
         Me.dtpFinalDate.Size = New System.Drawing.Size(196, 22)
         Me.dtpFinalDate.TabIndex = 1
@@ -244,7 +244,7 @@ Partial Class DailyEquipmentRent
         Me.dtpStartDate.CustomFormat = "MM/dd/yyyy"
         Me.dtpStartDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom
         Me.dtpStartDate.Location = New System.Drawing.Point(92, 15)
-        Me.dtpStartDate.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.dtpStartDate.Margin = New System.Windows.Forms.Padding(4)
         Me.dtpStartDate.Name = "dtpStartDate"
         Me.dtpStartDate.Size = New System.Drawing.Size(196, 22)
         Me.dtpStartDate.TabIndex = 0
@@ -255,7 +255,7 @@ Partial Class DailyEquipmentRent
         Me.Panel3.Controls.Add(Me.crvReport)
         Me.Panel3.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel3.Location = New System.Drawing.Point(4, 175)
-        Me.Panel3.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.Panel3.Margin = New System.Windows.Forms.Padding(4)
         Me.Panel3.Name = "Panel3"
         Me.Panel3.Size = New System.Drawing.Size(1232, 413)
         Me.Panel3.TabIndex = 2
@@ -267,7 +267,7 @@ Partial Class DailyEquipmentRent
         Me.crvReport.Cursor = System.Windows.Forms.Cursors.Default
         Me.crvReport.Dock = System.Windows.Forms.DockStyle.Fill
         Me.crvReport.Location = New System.Drawing.Point(0, 0)
-        Me.crvReport.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.crvReport.Margin = New System.Windows.Forms.Padding(4)
         Me.crvReport.Name = "crvReport"
         Me.crvReport.Size = New System.Drawing.Size(1232, 413)
         Me.crvReport.TabIndex = 0
@@ -277,10 +277,11 @@ Partial Class DailyEquipmentRent
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(83, Byte), Integer), CType(CType(93, Byte), Integer), CType(CType(102, Byte), Integer))
         Me.ClientSize = New System.Drawing.Size(1240, 592)
         Me.Controls.Add(Me.TableLayoutPanel1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
-        Me.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.Margin = New System.Windows.Forms.Padding(4)
         Me.Name = "DailyEquipmentRent"
         Me.Text = "DailyEquipmentRent"
         Me.TableLayoutPanel1.ResumeLayout(False)

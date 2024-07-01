@@ -43,6 +43,7 @@ Public Class ScaffoldActive
                     Dim reportTs As New SCFActive
                     reportTs.SetParameterValue("@numberClient", CInt(clNum))
                     reportTs.SetParameterValue("@CompanyName", "Brock")
+                    reportTs.SetDatabaseLogon(UserDB, Pass, ServerName, DBName)
                     crvReport.ReportSource = reportTs
                     mtd.llenarTablaActiveScaffold(tblScaffoldActive, clNum)
                 Else

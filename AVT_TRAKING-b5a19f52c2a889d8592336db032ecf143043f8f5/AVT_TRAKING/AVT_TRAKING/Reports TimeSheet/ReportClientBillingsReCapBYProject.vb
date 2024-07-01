@@ -1,5 +1,6 @@
 ﻿Imports System.Runtime.InteropServices
 Imports System.Data.SqlClient
+Imports CrystalDecisions.ReportAppServer
 
 Public Class ReportClientBillingsReCapBYProject
     Dim conection As New ConnectioDB
@@ -53,6 +54,7 @@ Public Class ReportClientBillingsReCapBYProject
             reportTS.SetParameterValue("@allJob", If(chbAllJobs.Checked, 1, 0))
             reportTS.SetParameterValue("@allPO", If(chbAllPO.Checked, 1, 0))
             reportTS.SetParameterValue("@CompanyName", "brock")
+            reportTS.SetDatabaseLogon(UserDB, Pass, ServerName, DBName)
             crvClientBillingsReCapBYProject.ReportSource = reportTS
         Else
             MsgBox("Please select a Client.")

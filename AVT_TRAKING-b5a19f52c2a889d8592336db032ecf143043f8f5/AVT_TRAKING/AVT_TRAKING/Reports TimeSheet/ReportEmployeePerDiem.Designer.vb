@@ -64,21 +64,23 @@ Partial Class ReportEmployeePerDiem
         Me.TableLayoutPanel1.Controls.Add(Me.TitleBar, 0, 0)
         Me.TableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.TableLayoutPanel1.Location = New System.Drawing.Point(0, 0)
+        Me.TableLayoutPanel1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
         Me.TableLayoutPanel1.RowCount = 3
-        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40.0!))
-        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 79.0!))
+        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 49.0!))
+        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 97.0!))
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-        Me.TableLayoutPanel1.Size = New System.Drawing.Size(734, 509)
+        Me.TableLayoutPanel1.Size = New System.Drawing.Size(979, 626)
         Me.TableLayoutPanel1.TabIndex = 1
         '
         'Panel4
         '
         Me.Panel4.Controls.Add(Me.crvEmployeePerDiem)
         Me.Panel4.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel4.Location = New System.Drawing.Point(3, 122)
+        Me.Panel4.Location = New System.Drawing.Point(4, 150)
+        Me.Panel4.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.Panel4.Name = "Panel4"
-        Me.Panel4.Size = New System.Drawing.Size(728, 384)
+        Me.Panel4.Size = New System.Drawing.Size(971, 472)
         Me.Panel4.TabIndex = 2
         '
         'crvEmployeePerDiem
@@ -88,9 +90,11 @@ Partial Class ReportEmployeePerDiem
         Me.crvEmployeePerDiem.Cursor = System.Windows.Forms.Cursors.Default
         Me.crvEmployeePerDiem.Dock = System.Windows.Forms.DockStyle.Fill
         Me.crvEmployeePerDiem.Location = New System.Drawing.Point(0, 0)
+        Me.crvEmployeePerDiem.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.crvEmployeePerDiem.Name = "crvEmployeePerDiem"
-        Me.crvEmployeePerDiem.Size = New System.Drawing.Size(728, 384)
+        Me.crvEmployeePerDiem.Size = New System.Drawing.Size(971, 472)
         Me.crvEmployeePerDiem.TabIndex = 0
+        Me.crvEmployeePerDiem.ToolPanelWidth = 267
         '
         'Panel3
         '
@@ -107,9 +111,10 @@ Partial Class ReportEmployeePerDiem
         Me.Panel3.Controls.Add(Me.dtpFinalDate)
         Me.Panel3.Controls.Add(Me.dtpInitialDate)
         Me.Panel3.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel3.Location = New System.Drawing.Point(3, 43)
+        Me.Panel3.Location = New System.Drawing.Point(4, 53)
+        Me.Panel3.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.Panel3.Name = "Panel3"
-        Me.Panel3.Size = New System.Drawing.Size(728, 73)
+        Me.Panel3.Size = New System.Drawing.Size(971, 89)
         Me.Panel3.TabIndex = 1
         '
         'chbAllJobs
@@ -117,9 +122,10 @@ Partial Class ReportEmployeePerDiem
         Me.chbAllJobs.AutoSize = True
         Me.chbAllJobs.Font = New System.Drawing.Font("Verdana", 9.0!)
         Me.chbAllJobs.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.chbAllJobs.Location = New System.Drawing.Point(398, 44)
+        Me.chbAllJobs.Location = New System.Drawing.Point(531, 54)
+        Me.chbAllJobs.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.chbAllJobs.Name = "chbAllJobs"
-        Me.chbAllJobs.Size = New System.Drawing.Size(72, 18)
+        Me.chbAllJobs.Size = New System.Drawing.Size(85, 22)
         Me.chbAllJobs.TabIndex = 29
         Me.chbAllJobs.Text = "All Jobs"
         Me.chbAllJobs.UseVisualStyleBackColor = True
@@ -129,18 +135,20 @@ Partial Class ReportEmployeePerDiem
         Me.Label5.AutoSize = True
         Me.Label5.Font = New System.Drawing.Font("Verdana", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label5.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.Label5.Location = New System.Drawing.Point(208, 47)
+        Me.Label5.Location = New System.Drawing.Point(277, 58)
+        Me.Label5.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(35, 14)
+        Me.Label5.Size = New System.Drawing.Size(42, 18)
         Me.Label5.TabIndex = 28
         Me.Label5.Text = "Jobs"
         '
         'cmbJob
         '
         Me.cmbJob.FormattingEnabled = True
-        Me.cmbJob.Location = New System.Drawing.Point(257, 42)
+        Me.cmbJob.Location = New System.Drawing.Point(343, 52)
+        Me.cmbJob.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.cmbJob.Name = "cmbJob"
-        Me.cmbJob.Size = New System.Drawing.Size(135, 21)
+        Me.cmbJob.Size = New System.Drawing.Size(179, 24)
         Me.cmbJob.TabIndex = 27
         '
         'Label4
@@ -148,18 +156,20 @@ Partial Class ReportEmployeePerDiem
         Me.Label4.AutoSize = True
         Me.Label4.Font = New System.Drawing.Font("Verdana", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label4.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.Label4.Location = New System.Drawing.Point(208, 18)
+        Me.Label4.Location = New System.Drawing.Point(277, 22)
+        Me.Label4.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(43, 14)
+        Me.Label4.Size = New System.Drawing.Size(49, 18)
         Me.Label4.TabIndex = 26
         Me.Label4.Text = "Client"
         '
         'cmbClients
         '
         Me.cmbClients.FormattingEnabled = True
-        Me.cmbClients.Location = New System.Drawing.Point(257, 10)
+        Me.cmbClients.Location = New System.Drawing.Point(343, 12)
+        Me.cmbClients.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.cmbClients.Name = "cmbClients"
-        Me.cmbClients.Size = New System.Drawing.Size(135, 21)
+        Me.cmbClients.Size = New System.Drawing.Size(179, 24)
         Me.cmbClients.TabIndex = 17
         '
         'Button1
@@ -171,9 +181,10 @@ Partial Class ReportEmployeePerDiem
         Me.Button1.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.Button1.Image = Global.AVT_TRAKING.My.Resources.Resources.reportshow
         Me.Button1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.Button1.Location = New System.Drawing.Point(493, 8)
+        Me.Button1.Location = New System.Drawing.Point(657, 10)
+        Me.Button1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(83, 33)
+        Me.Button1.Size = New System.Drawing.Size(111, 41)
         Me.Button1.TabIndex = 8
         Me.Button1.Text = "Report"
         Me.Button1.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -183,9 +194,10 @@ Partial Class ReportEmployeePerDiem
         '
         Me.PictureBox4.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.PictureBox4.Image = Global.AVT_TRAKING.My.Resources.Resources._exit
-        Me.PictureBox4.Location = New System.Drawing.Point(688, 3)
+        Me.PictureBox4.Location = New System.Drawing.Point(917, 4)
+        Me.PictureBox4.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.PictureBox4.Name = "PictureBox4"
-        Me.PictureBox4.Size = New System.Drawing.Size(37, 29)
+        Me.PictureBox4.Size = New System.Drawing.Size(49, 36)
         Me.PictureBox4.TabIndex = 7
         Me.PictureBox4.TabStop = False
         '
@@ -194,9 +206,10 @@ Partial Class ReportEmployeePerDiem
         Me.Label2.AutoSize = True
         Me.Label2.Font = New System.Drawing.Font("Verdana", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label2.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.Label2.Location = New System.Drawing.Point(22, 48)
+        Me.Label2.Location = New System.Drawing.Point(29, 59)
+        Me.Label2.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(70, 14)
+        Me.Label2.Size = New System.Drawing.Size(81, 18)
         Me.Label2.TabIndex = 3
         Me.Label2.Text = "Final Date"
         '
@@ -205,9 +218,10 @@ Partial Class ReportEmployeePerDiem
         Me.Label1.AutoSize = True
         Me.Label1.Font = New System.Drawing.Font("Verdana", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label1.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.Label1.Location = New System.Drawing.Point(22, 12)
+        Me.Label1.Location = New System.Drawing.Point(29, 15)
+        Me.Label1.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(76, 14)
+        Me.Label1.Size = New System.Drawing.Size(86, 18)
         Me.Label1.TabIndex = 2
         Me.Label1.Text = "Initial Date"
         '
@@ -216,9 +230,10 @@ Partial Class ReportEmployeePerDiem
         Me.dtpFinalDate.CustomFormat = "MM/dd/yyyy"
         Me.dtpFinalDate.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.dtpFinalDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom
-        Me.dtpFinalDate.Location = New System.Drawing.Point(104, 43)
+        Me.dtpFinalDate.Location = New System.Drawing.Point(139, 53)
+        Me.dtpFinalDate.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.dtpFinalDate.Name = "dtpFinalDate"
-        Me.dtpFinalDate.Size = New System.Drawing.Size(99, 21)
+        Me.dtpFinalDate.Size = New System.Drawing.Size(131, 24)
         Me.dtpFinalDate.TabIndex = 1
         '
         'dtpInitialDate
@@ -226,9 +241,10 @@ Partial Class ReportEmployeePerDiem
         Me.dtpInitialDate.CustomFormat = "MM/dd/yyyy"
         Me.dtpInitialDate.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.dtpInitialDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom
-        Me.dtpInitialDate.Location = New System.Drawing.Point(104, 12)
+        Me.dtpInitialDate.Location = New System.Drawing.Point(139, 15)
+        Me.dtpInitialDate.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.dtpInitialDate.Name = "dtpInitialDate"
-        Me.dtpInitialDate.Size = New System.Drawing.Size(99, 21)
+        Me.dtpInitialDate.Size = New System.Drawing.Size(131, 24)
         Me.dtpInitialDate.TabIndex = 0
         '
         'TitleBar
@@ -240,9 +256,10 @@ Partial Class ReportEmployeePerDiem
         Me.TitleBar.Controls.Add(Me.btnRestore)
         Me.TitleBar.Controls.Add(Me.btnMaximize)
         Me.TitleBar.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.TitleBar.Location = New System.Drawing.Point(3, 3)
+        Me.TitleBar.Location = New System.Drawing.Point(4, 4)
+        Me.TitleBar.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.TitleBar.Name = "TitleBar"
-        Me.TitleBar.Size = New System.Drawing.Size(728, 34)
+        Me.TitleBar.Size = New System.Drawing.Size(971, 41)
         Me.TitleBar.TabIndex = 0
         '
         'Label3
@@ -250,18 +267,20 @@ Partial Class ReportEmployeePerDiem
         Me.Label3.AutoSize = True
         Me.Label3.Font = New System.Drawing.Font("Verdana", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label3.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.Label3.Location = New System.Drawing.Point(44, 6)
+        Me.Label3.Location = New System.Drawing.Point(59, 7)
+        Me.Label3.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(303, 18)
+        Me.Label3.Size = New System.Drawing.Size(387, 25)
         Me.Label3.TabIndex = 8
         Me.Label3.Text = "Employee Per-Diem Sheet Report"
         '
         'PictureBox1
         '
         Me.PictureBox1.Image = Global.AVT_TRAKING.My.Resources.Resources.report
-        Me.PictureBox1.Location = New System.Drawing.Point(10, 2)
+        Me.PictureBox1.Location = New System.Drawing.Point(13, 2)
+        Me.PictureBox1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.PictureBox1.Name = "PictureBox1"
-        Me.PictureBox1.Size = New System.Drawing.Size(28, 28)
+        Me.PictureBox1.Size = New System.Drawing.Size(37, 34)
         Me.PictureBox1.TabIndex = 7
         Me.PictureBox1.TabStop = False
         '
@@ -269,9 +288,10 @@ Partial Class ReportEmployeePerDiem
         '
         Me.PictureBox3.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.PictureBox3.Image = Global.AVT_TRAKING.My.Resources.Resources.minimize2
-        Me.PictureBox3.Location = New System.Drawing.Point(661, 3)
+        Me.PictureBox3.Location = New System.Drawing.Point(881, 4)
+        Me.PictureBox3.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.PictureBox3.Name = "PictureBox3"
-        Me.PictureBox3.Size = New System.Drawing.Size(27, 29)
+        Me.PictureBox3.Size = New System.Drawing.Size(36, 36)
         Me.PictureBox3.TabIndex = 6
         Me.PictureBox3.TabStop = False
         '
@@ -279,9 +299,10 @@ Partial Class ReportEmployeePerDiem
         '
         Me.btnRestore.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnRestore.Image = Global.AVT_TRAKING.My.Resources.Resources.restore2
-        Me.btnRestore.Location = New System.Drawing.Point(693, 2)
+        Me.btnRestore.Location = New System.Drawing.Point(924, 2)
+        Me.btnRestore.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.btnRestore.Name = "btnRestore"
-        Me.btnRestore.Size = New System.Drawing.Size(26, 29)
+        Me.btnRestore.Size = New System.Drawing.Size(35, 36)
         Me.btnRestore.TabIndex = 5
         Me.btnRestore.TabStop = False
         '
@@ -289,20 +310,23 @@ Partial Class ReportEmployeePerDiem
         '
         Me.btnMaximize.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnMaximize.Image = Global.AVT_TRAKING.My.Resources.Resources.maximize2
-        Me.btnMaximize.Location = New System.Drawing.Point(694, 3)
+        Me.btnMaximize.Location = New System.Drawing.Point(925, 4)
+        Me.btnMaximize.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.btnMaximize.Name = "btnMaximize"
-        Me.btnMaximize.Size = New System.Drawing.Size(31, 29)
+        Me.btnMaximize.Size = New System.Drawing.Size(41, 36)
         Me.btnMaximize.TabIndex = 4
         Me.btnMaximize.TabStop = False
         '
         'ReportEmployeePerDiem
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(734, 509)
+        Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(83, Byte), Integer), CType(CType(93, Byte), Integer), CType(CType(102, Byte), Integer))
+        Me.ClientSize = New System.Drawing.Size(979, 626)
         Me.Controls.Add(Me.TableLayoutPanel1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
+        Me.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.Name = "ReportEmployeePerDiem"
         Me.Text = "ReportEmployeePerDiem"
         Me.TableLayoutPanel1.ResumeLayout(False)

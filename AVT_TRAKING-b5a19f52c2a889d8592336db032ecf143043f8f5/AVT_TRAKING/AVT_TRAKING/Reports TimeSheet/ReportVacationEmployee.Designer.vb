@@ -60,21 +60,23 @@ Partial Class ReportVacationEmployee
         Me.TableLayoutPanel1.Controls.Add(Me.TitleBar, 0, 0)
         Me.TableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.TableLayoutPanel1.Location = New System.Drawing.Point(0, 0)
+        Me.TableLayoutPanel1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
         Me.TableLayoutPanel1.RowCount = 3
-        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40.0!))
-        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 79.0!))
+        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 49.0!))
+        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 97.0!))
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-        Me.TableLayoutPanel1.Size = New System.Drawing.Size(734, 509)
+        Me.TableLayoutPanel1.Size = New System.Drawing.Size(979, 626)
         Me.TableLayoutPanel1.TabIndex = 1
         '
         'Panel4
         '
         Me.Panel4.Controls.Add(Me.crvVacationEmployee)
         Me.Panel4.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel4.Location = New System.Drawing.Point(3, 122)
+        Me.Panel4.Location = New System.Drawing.Point(4, 150)
+        Me.Panel4.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.Panel4.Name = "Panel4"
-        Me.Panel4.Size = New System.Drawing.Size(728, 384)
+        Me.Panel4.Size = New System.Drawing.Size(971, 472)
         Me.Panel4.TabIndex = 2
         '
         'crvVacationEmployee
@@ -84,9 +86,11 @@ Partial Class ReportVacationEmployee
         Me.crvVacationEmployee.Cursor = System.Windows.Forms.Cursors.Default
         Me.crvVacationEmployee.Dock = System.Windows.Forms.DockStyle.Fill
         Me.crvVacationEmployee.Location = New System.Drawing.Point(0, 0)
+        Me.crvVacationEmployee.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.crvVacationEmployee.Name = "crvVacationEmployee"
-        Me.crvVacationEmployee.Size = New System.Drawing.Size(728, 384)
+        Me.crvVacationEmployee.Size = New System.Drawing.Size(971, 472)
         Me.crvVacationEmployee.TabIndex = 0
+        Me.crvVacationEmployee.ToolPanelWidth = 267
         '
         'Panel3
         '
@@ -99,9 +103,10 @@ Partial Class ReportVacationEmployee
         Me.Panel3.Controls.Add(Me.btnReport)
         Me.Panel3.Controls.Add(Me.PictureBox4)
         Me.Panel3.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel3.Location = New System.Drawing.Point(3, 43)
+        Me.Panel3.Location = New System.Drawing.Point(4, 53)
+        Me.Panel3.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.Panel3.Name = "Panel3"
-        Me.Panel3.Size = New System.Drawing.Size(728, 73)
+        Me.Panel3.Size = New System.Drawing.Size(971, 89)
         Me.Panel3.TabIndex = 1
         '
         'chbAllEmployees
@@ -109,9 +114,10 @@ Partial Class ReportVacationEmployee
         Me.chbAllEmployees.AutoSize = True
         Me.chbAllEmployees.Font = New System.Drawing.Font("Verdana", 9.0!)
         Me.chbAllEmployees.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.chbAllEmployees.Location = New System.Drawing.Point(209, 36)
+        Me.chbAllEmployees.Location = New System.Drawing.Point(279, 44)
+        Me.chbAllEmployees.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.chbAllEmployees.Name = "chbAllEmployees"
-        Me.chbAllEmployees.Size = New System.Drawing.Size(112, 18)
+        Me.chbAllEmployees.Size = New System.Drawing.Size(132, 22)
         Me.chbAllEmployees.TabIndex = 19
         Me.chbAllEmployees.Text = "All Employees"
         Me.chbAllEmployees.UseVisualStyleBackColor = True
@@ -121,18 +127,20 @@ Partial Class ReportVacationEmployee
         Me.Label2.AutoSize = True
         Me.Label2.Font = New System.Drawing.Font("Verdana", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label2.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.Label2.Location = New System.Drawing.Point(5, 36)
+        Me.Label2.Location = New System.Drawing.Point(7, 44)
+        Me.Label2.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(73, 14)
+        Me.Label2.Size = New System.Drawing.Size(88, 18)
         Me.Label2.TabIndex = 18
         Me.Label2.Text = "Employee:"
         '
         'cmbYear
         '
         Me.cmbYear.FormattingEnabled = True
-        Me.cmbYear.Location = New System.Drawing.Point(82, 7)
+        Me.cmbYear.Location = New System.Drawing.Point(109, 9)
+        Me.cmbYear.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.cmbYear.Name = "cmbYear"
-        Me.cmbYear.Size = New System.Drawing.Size(79, 21)
+        Me.cmbYear.Size = New System.Drawing.Size(104, 24)
         Me.cmbYear.TabIndex = 17
         '
         'Label1
@@ -140,18 +148,20 @@ Partial Class ReportVacationEmployee
         Me.Label1.AutoSize = True
         Me.Label1.Font = New System.Drawing.Font("Verdana", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label1.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.Label1.Location = New System.Drawing.Point(34, 9)
+        Me.Label1.Location = New System.Drawing.Point(45, 11)
+        Me.Label1.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(39, 14)
+        Me.Label1.Size = New System.Drawing.Size(47, 18)
         Me.Label1.TabIndex = 16
         Me.Label1.Text = "Year:"
         '
         'cmbEmployee
         '
         Me.cmbEmployee.FormattingEnabled = True
-        Me.cmbEmployee.Location = New System.Drawing.Point(82, 34)
+        Me.cmbEmployee.Location = New System.Drawing.Point(109, 42)
+        Me.cmbEmployee.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.cmbEmployee.Name = "cmbEmployee"
-        Me.cmbEmployee.Size = New System.Drawing.Size(121, 21)
+        Me.cmbEmployee.Size = New System.Drawing.Size(160, 24)
         Me.cmbEmployee.TabIndex = 9
         '
         'btnReport
@@ -163,9 +173,10 @@ Partial Class ReportVacationEmployee
         Me.btnReport.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.btnReport.Image = Global.AVT_TRAKING.My.Resources.Resources.reportshow
         Me.btnReport.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnReport.Location = New System.Drawing.Point(329, 3)
+        Me.btnReport.Location = New System.Drawing.Point(439, 4)
+        Me.btnReport.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.btnReport.Name = "btnReport"
-        Me.btnReport.Size = New System.Drawing.Size(83, 33)
+        Me.btnReport.Size = New System.Drawing.Size(111, 41)
         Me.btnReport.TabIndex = 8
         Me.btnReport.Text = "Report"
         Me.btnReport.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -175,9 +186,10 @@ Partial Class ReportVacationEmployee
         '
         Me.PictureBox4.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.PictureBox4.Image = Global.AVT_TRAKING.My.Resources.Resources._exit
-        Me.PictureBox4.Location = New System.Drawing.Point(688, 3)
+        Me.PictureBox4.Location = New System.Drawing.Point(917, 4)
+        Me.PictureBox4.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.PictureBox4.Name = "PictureBox4"
-        Me.PictureBox4.Size = New System.Drawing.Size(37, 29)
+        Me.PictureBox4.Size = New System.Drawing.Size(49, 36)
         Me.PictureBox4.TabIndex = 7
         Me.PictureBox4.TabStop = False
         '
@@ -190,9 +202,10 @@ Partial Class ReportVacationEmployee
         Me.TitleBar.Controls.Add(Me.btnRestore)
         Me.TitleBar.Controls.Add(Me.btnMaximize)
         Me.TitleBar.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.TitleBar.Location = New System.Drawing.Point(3, 3)
+        Me.TitleBar.Location = New System.Drawing.Point(4, 4)
+        Me.TitleBar.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.TitleBar.Name = "TitleBar"
-        Me.TitleBar.Size = New System.Drawing.Size(728, 34)
+        Me.TitleBar.Size = New System.Drawing.Size(971, 41)
         Me.TitleBar.TabIndex = 0
         '
         'Label3
@@ -200,18 +213,20 @@ Partial Class ReportVacationEmployee
         Me.Label3.AutoSize = True
         Me.Label3.Font = New System.Drawing.Font("Verdana", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label3.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.Label3.Location = New System.Drawing.Point(44, 6)
+        Me.Label3.Location = New System.Drawing.Point(59, 7)
+        Me.Label3.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(233, 18)
+        Me.Label3.Size = New System.Drawing.Size(299, 25)
         Me.Label3.TabIndex = 8
         Me.Label3.Text = "Employee Vacaion Report"
         '
         'PictureBox1
         '
         Me.PictureBox1.Image = Global.AVT_TRAKING.My.Resources.Resources.report
-        Me.PictureBox1.Location = New System.Drawing.Point(10, 2)
+        Me.PictureBox1.Location = New System.Drawing.Point(13, 2)
+        Me.PictureBox1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.PictureBox1.Name = "PictureBox1"
-        Me.PictureBox1.Size = New System.Drawing.Size(28, 28)
+        Me.PictureBox1.Size = New System.Drawing.Size(37, 34)
         Me.PictureBox1.TabIndex = 7
         Me.PictureBox1.TabStop = False
         '
@@ -219,9 +234,10 @@ Partial Class ReportVacationEmployee
         '
         Me.PictureBox3.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.PictureBox3.Image = Global.AVT_TRAKING.My.Resources.Resources.minimize2
-        Me.PictureBox3.Location = New System.Drawing.Point(661, 3)
+        Me.PictureBox3.Location = New System.Drawing.Point(881, 4)
+        Me.PictureBox3.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.PictureBox3.Name = "PictureBox3"
-        Me.PictureBox3.Size = New System.Drawing.Size(27, 29)
+        Me.PictureBox3.Size = New System.Drawing.Size(36, 36)
         Me.PictureBox3.TabIndex = 6
         Me.PictureBox3.TabStop = False
         '
@@ -229,9 +245,10 @@ Partial Class ReportVacationEmployee
         '
         Me.btnRestore.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnRestore.Image = Global.AVT_TRAKING.My.Resources.Resources.restore2
-        Me.btnRestore.Location = New System.Drawing.Point(693, 2)
+        Me.btnRestore.Location = New System.Drawing.Point(924, 2)
+        Me.btnRestore.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.btnRestore.Name = "btnRestore"
-        Me.btnRestore.Size = New System.Drawing.Size(26, 29)
+        Me.btnRestore.Size = New System.Drawing.Size(35, 36)
         Me.btnRestore.TabIndex = 5
         Me.btnRestore.TabStop = False
         '
@@ -239,20 +256,23 @@ Partial Class ReportVacationEmployee
         '
         Me.btnMaximize.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnMaximize.Image = Global.AVT_TRAKING.My.Resources.Resources.maximize2
-        Me.btnMaximize.Location = New System.Drawing.Point(694, 3)
+        Me.btnMaximize.Location = New System.Drawing.Point(925, 4)
+        Me.btnMaximize.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.btnMaximize.Name = "btnMaximize"
-        Me.btnMaximize.Size = New System.Drawing.Size(31, 29)
+        Me.btnMaximize.Size = New System.Drawing.Size(41, 36)
         Me.btnMaximize.TabIndex = 4
         Me.btnMaximize.TabStop = False
         '
         'ReportVacationEmployee
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(734, 509)
+        Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(83, Byte), Integer), CType(CType(93, Byte), Integer), CType(CType(102, Byte), Integer))
+        Me.ClientSize = New System.Drawing.Size(979, 626)
         Me.Controls.Add(Me.TableLayoutPanel1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
+        Me.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.Name = "ReportVacationEmployee"
         Me.Text = "ReportVacationEmployee"
         Me.TableLayoutPanel1.ResumeLayout(False)

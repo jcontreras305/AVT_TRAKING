@@ -60,12 +60,13 @@ Partial Class ScaffoldHistoryByJobAndWO
         Me.TableLayoutPanel1.Controls.Add(Me.Panel3, 0, 2)
         Me.TableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.TableLayoutPanel1.Location = New System.Drawing.Point(0, 0)
+        Me.TableLayoutPanel1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
         Me.TableLayoutPanel1.RowCount = 3
-        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 54.0!))
-        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 85.0!))
+        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 66.0!))
+        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 105.0!))
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-        Me.TableLayoutPanel1.Size = New System.Drawing.Size(800, 450)
+        Me.TableLayoutPanel1.Size = New System.Drawing.Size(1067, 554)
         Me.TableLayoutPanel1.TabIndex = 1
         '
         'Panel1
@@ -77,17 +78,19 @@ Partial Class ScaffoldHistoryByJobAndWO
         Me.Panel1.Controls.Add(Me.btnRestore)
         Me.Panel1.Controls.Add(Me.btnMaximize)
         Me.Panel1.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel1.Location = New System.Drawing.Point(3, 3)
+        Me.Panel1.Location = New System.Drawing.Point(4, 4)
+        Me.Panel1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(794, 48)
+        Me.Panel1.Size = New System.Drawing.Size(1059, 58)
         Me.Panel1.TabIndex = 0
         '
         'PictureBox1
         '
         Me.PictureBox1.Image = Global.AVT_TRAKING.My.Resources.Resources.project
-        Me.PictureBox1.Location = New System.Drawing.Point(3, 3)
+        Me.PictureBox1.Location = New System.Drawing.Point(4, 4)
+        Me.PictureBox1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.PictureBox1.Name = "PictureBox1"
-        Me.PictureBox1.Size = New System.Drawing.Size(45, 42)
+        Me.PictureBox1.Size = New System.Drawing.Size(60, 52)
         Me.PictureBox1.TabIndex = 17
         Me.PictureBox1.TabStop = False
         '
@@ -97,9 +100,10 @@ Partial Class ScaffoldHistoryByJobAndWO
         Me.Label1.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(58, Byte), Integer), CType(CType(115, Byte), Integer))
         Me.Label1.Font = New System.Drawing.Font("Verdana", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label1.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.Label1.Location = New System.Drawing.Point(56, 14)
+        Me.Label1.Location = New System.Drawing.Point(75, 17)
+        Me.Label1.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(314, 18)
+        Me.Label1.Size = New System.Drawing.Size(408, 25)
         Me.Label1.TabIndex = 16
         Me.Label1.Text = "Scaffold History By Job No And WO"
         '
@@ -107,9 +111,10 @@ Partial Class ScaffoldHistoryByJobAndWO
         '
         Me.btnMinimize.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnMinimize.Image = Global.AVT_TRAKING.My.Resources.Resources.minimize2
-        Me.btnMinimize.Location = New System.Drawing.Point(726, 3)
+        Me.btnMinimize.Location = New System.Drawing.Point(968, 4)
+        Me.btnMinimize.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.btnMinimize.Name = "btnMinimize"
-        Me.btnMinimize.Size = New System.Drawing.Size(27, 29)
+        Me.btnMinimize.Size = New System.Drawing.Size(36, 36)
         Me.btnMinimize.TabIndex = 15
         Me.btnMinimize.TabStop = False
         '
@@ -117,9 +122,10 @@ Partial Class ScaffoldHistoryByJobAndWO
         '
         Me.btnRestore.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnRestore.Image = Global.AVT_TRAKING.My.Resources.Resources.restore2
-        Me.btnRestore.Location = New System.Drawing.Point(759, 3)
+        Me.btnRestore.Location = New System.Drawing.Point(1012, 4)
+        Me.btnRestore.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.btnRestore.Name = "btnRestore"
-        Me.btnRestore.Size = New System.Drawing.Size(26, 29)
+        Me.btnRestore.Size = New System.Drawing.Size(35, 36)
         Me.btnRestore.TabIndex = 14
         Me.btnRestore.TabStop = False
         '
@@ -127,9 +133,10 @@ Partial Class ScaffoldHistoryByJobAndWO
         '
         Me.btnMaximize.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnMaximize.Image = Global.AVT_TRAKING.My.Resources.Resources.maximize2
-        Me.btnMaximize.Location = New System.Drawing.Point(759, 3)
+        Me.btnMaximize.Location = New System.Drawing.Point(1012, 4)
+        Me.btnMaximize.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.btnMaximize.Name = "btnMaximize"
-        Me.btnMaximize.Size = New System.Drawing.Size(31, 29)
+        Me.btnMaximize.Size = New System.Drawing.Size(41, 36)
         Me.btnMaximize.TabIndex = 13
         Me.btnMaximize.TabStop = False
         '
@@ -145,18 +152,20 @@ Partial Class ScaffoldHistoryByJobAndWO
         Me.Panel2.Controls.Add(Me.dtpFinalDate)
         Me.Panel2.Controls.Add(Me.dtpStartDate)
         Me.Panel2.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel2.Location = New System.Drawing.Point(3, 57)
+        Me.Panel2.Location = New System.Drawing.Point(4, 70)
+        Me.Panel2.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(794, 79)
+        Me.Panel2.Size = New System.Drawing.Size(1059, 97)
         Me.Panel2.TabIndex = 1
         '
         'Label4
         '
         Me.Label4.AutoSize = True
         Me.Label4.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.Label4.Location = New System.Drawing.Point(277, 18)
+        Me.Label4.Location = New System.Drawing.Point(369, 22)
+        Me.Label4.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(33, 13)
+        Me.Label4.Size = New System.Drawing.Size(40, 16)
         Me.Label4.TabIndex = 15
         Me.Label4.Text = "Client"
         '
@@ -164,9 +173,10 @@ Partial Class ScaffoldHistoryByJobAndWO
         '
         Me.Label3.AutoSize = True
         Me.Label3.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.Label3.Location = New System.Drawing.Point(9, 50)
+        Me.Label3.Location = New System.Drawing.Point(12, 62)
+        Me.Label3.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(55, 13)
+        Me.Label3.Size = New System.Drawing.Size(68, 16)
         Me.Label3.TabIndex = 14
         Me.Label3.Text = "Final Date"
         '
@@ -174,9 +184,10 @@ Partial Class ScaffoldHistoryByJobAndWO
         '
         Me.Label2.AutoSize = True
         Me.Label2.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.Label2.Location = New System.Drawing.Point(9, 18)
+        Me.Label2.Location = New System.Drawing.Point(12, 22)
+        Me.Label2.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(55, 13)
+        Me.Label2.Size = New System.Drawing.Size(66, 16)
         Me.Label2.TabIndex = 13
         Me.Label2.Text = "Start Date"
         '
@@ -184,9 +195,10 @@ Partial Class ScaffoldHistoryByJobAndWO
         '
         Me.PictureBox4.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.PictureBox4.Image = Global.AVT_TRAKING.My.Resources.Resources._exit
-        Me.PictureBox4.Location = New System.Drawing.Point(753, 3)
+        Me.PictureBox4.Location = New System.Drawing.Point(1004, 4)
+        Me.PictureBox4.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.PictureBox4.Name = "PictureBox4"
-        Me.PictureBox4.Size = New System.Drawing.Size(37, 29)
+        Me.PictureBox4.Size = New System.Drawing.Size(49, 36)
         Me.PictureBox4.TabIndex = 12
         Me.PictureBox4.TabStop = False
         '
@@ -199,9 +211,10 @@ Partial Class ScaffoldHistoryByJobAndWO
         Me.btnReport.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.btnReport.Image = Global.AVT_TRAKING.My.Resources.Resources.reportshow
         Me.btnReport.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnReport.Location = New System.Drawing.Point(484, 30)
+        Me.btnReport.Location = New System.Drawing.Point(645, 37)
+        Me.btnReport.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.btnReport.Name = "btnReport"
-        Me.btnReport.Size = New System.Drawing.Size(83, 33)
+        Me.btnReport.Size = New System.Drawing.Size(111, 41)
         Me.btnReport.TabIndex = 11
         Me.btnReport.Text = "Report"
         Me.btnReport.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -210,27 +223,30 @@ Partial Class ScaffoldHistoryByJobAndWO
         'cmbClient
         '
         Me.cmbClient.FormattingEnabled = True
-        Me.cmbClient.Location = New System.Drawing.Point(316, 11)
+        Me.cmbClient.Location = New System.Drawing.Point(421, 14)
+        Me.cmbClient.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.cmbClient.Name = "cmbClient"
-        Me.cmbClient.Size = New System.Drawing.Size(140, 21)
+        Me.cmbClient.Size = New System.Drawing.Size(185, 24)
         Me.cmbClient.TabIndex = 2
         '
         'dtpFinalDate
         '
         Me.dtpFinalDate.CustomFormat = "MM/dd/yyyy"
         Me.dtpFinalDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom
-        Me.dtpFinalDate.Location = New System.Drawing.Point(69, 44)
+        Me.dtpFinalDate.Location = New System.Drawing.Point(92, 54)
+        Me.dtpFinalDate.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.dtpFinalDate.Name = "dtpFinalDate"
-        Me.dtpFinalDate.Size = New System.Drawing.Size(200, 20)
+        Me.dtpFinalDate.Size = New System.Drawing.Size(265, 22)
         Me.dtpFinalDate.TabIndex = 1
         '
         'dtpStartDate
         '
         Me.dtpStartDate.CustomFormat = "MM/dd/yyyy"
         Me.dtpStartDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom
-        Me.dtpStartDate.Location = New System.Drawing.Point(69, 12)
+        Me.dtpStartDate.Location = New System.Drawing.Point(92, 15)
+        Me.dtpStartDate.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.dtpStartDate.Name = "dtpStartDate"
-        Me.dtpStartDate.Size = New System.Drawing.Size(200, 20)
+        Me.dtpStartDate.Size = New System.Drawing.Size(265, 22)
         Me.dtpStartDate.TabIndex = 0
         '
         'Panel3
@@ -238,9 +254,10 @@ Partial Class ScaffoldHistoryByJobAndWO
         Me.Panel3.BackColor = System.Drawing.Color.FromArgb(CType(CType(83, Byte), Integer), CType(CType(93, Byte), Integer), CType(CType(102, Byte), Integer))
         Me.Panel3.Controls.Add(Me.crvReport)
         Me.Panel3.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel3.Location = New System.Drawing.Point(3, 142)
+        Me.Panel3.Location = New System.Drawing.Point(4, 175)
+        Me.Panel3.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.Panel3.Name = "Panel3"
-        Me.Panel3.Size = New System.Drawing.Size(794, 305)
+        Me.Panel3.Size = New System.Drawing.Size(1059, 375)
         Me.Panel3.TabIndex = 2
         '
         'crvReport
@@ -250,17 +267,21 @@ Partial Class ScaffoldHistoryByJobAndWO
         Me.crvReport.Cursor = System.Windows.Forms.Cursors.Default
         Me.crvReport.Dock = System.Windows.Forms.DockStyle.Fill
         Me.crvReport.Location = New System.Drawing.Point(0, 0)
+        Me.crvReport.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.crvReport.Name = "crvReport"
-        Me.crvReport.Size = New System.Drawing.Size(794, 305)
+        Me.crvReport.Size = New System.Drawing.Size(1059, 375)
         Me.crvReport.TabIndex = 0
+        Me.crvReport.ToolPanelWidth = 267
         '
         'ScaffoldHistoryByJobAndWO
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(800, 450)
+        Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(83, Byte), Integer), CType(CType(93, Byte), Integer), CType(CType(102, Byte), Integer))
+        Me.ClientSize = New System.Drawing.Size(1067, 554)
         Me.Controls.Add(Me.TableLayoutPanel1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
+        Me.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.Name = "ScaffoldHistoryByJobAndWO"
         Me.Text = "ScaffoldHistoryByJobAndWO"
         Me.TableLayoutPanel1.ResumeLayout(False)

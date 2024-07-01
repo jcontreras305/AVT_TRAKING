@@ -1,4 +1,5 @@
 ﻿Imports System.Runtime.InteropServices
+Imports CrystalDecisions.ReportAppServer
 Public Class ReportAllJob
     Private Sub PictureBox3_Click(sender As Object, e As EventArgs) Handles PictureBox3.Click
         Me.WindowState = FormWindowState.Minimized
@@ -43,6 +44,7 @@ Public Class ReportAllJob
             reportTS.SetParameterValue("@CompanyName", "brock")
             reportTS.SetParameterValue("@excludeIdpo", If(chbExclude.Checked, 1, 0))
             reportTS.SetParameterValue("@exclude", If(chbExclude.Checked, txtPOExclude.Text, "0"))
+            reportTS.SetDatabaseLogon(UserDB, Pass, ServerName, DBName)
             crvAllJobs.ReportSource = reportTS
         Else
             MsgBox("Please select a Client.")

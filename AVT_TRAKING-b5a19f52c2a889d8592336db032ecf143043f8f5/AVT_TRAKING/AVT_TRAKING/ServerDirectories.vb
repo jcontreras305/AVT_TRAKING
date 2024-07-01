@@ -5,6 +5,38 @@ Module ServerDirectories
     Private _ServerName As String = "Admin"
     Private _UserName As String = ""
     Private _LocalFolderDirectory As String = "C:\TMP\"
+    Private _Pass As String = ""
+    Private _DB As String = ""
+    Private _UserDB As String = ""
+    Public Property UserDB() As String
+        Get
+            Return _UserDB
+        End Get
+        Set(ByVal value As String)
+            _UserDB = value
+        End Set
+    End Property
+
+    Public Property DBName() As String
+        Get
+            If _DB = "" Then
+                _DB = "VRT_TRAKING"
+            End If
+            Return _DB
+        End Get
+        Set(ByVal value As String)
+            _DB = value
+        End Set
+    End Property
+    Public Property Pass() As String
+        Get
+
+            Return _Pass
+        End Get
+        Set(ByVal value As String)
+            _Pass = value
+        End Set
+    End Property
 
     Public Property LocalFolderDiretory() As String
         Get
@@ -67,10 +99,26 @@ Module ServerDirectories
                             ServerName = "localhost"
                             ServerDirectory = "C:"
                             ServerFolderDirectory = "C:\TMP\"
+                            Dim db() As String = arrayText(1).Split("=")
+                            DBName = db(1)
+                            If arrayText.Length >= 4 Then
+                                Dim us() As String = arrayText(2).Split("=")
+                                UserDB = us(1)
+                                Dim ps() As String = arrayText(3).Split("=")
+                                Pass = ps(1)
+                            End If
                         Else
                             ServerName = serverName1(1)
                             ServerDirectory = "\\" & serverName1(1)
                             ServerFolderDirectory = "\\" & serverName1(1) & "\tmp\@userName"
+                            Dim db() As String = arrayText(1).Split("=")
+                            DBName = db(1)
+                            If arrayText.Length >= 4 Then
+                                Dim us() As String = arrayText(2).Split("=")
+                                UserDB = us(1)
+                                Dim ps() As String = arrayText(3).Split("=")
+                                Pass = ps(1)
+                            End If
                         End If
                     Else
                         Return False

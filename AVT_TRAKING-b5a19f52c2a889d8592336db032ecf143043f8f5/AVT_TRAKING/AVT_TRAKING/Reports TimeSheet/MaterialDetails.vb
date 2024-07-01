@@ -73,6 +73,7 @@ Public Class MaterialDetails
             reportTS.SetParameterValue("@job", If(cmbJob.SelectedItem IsNot Nothing, cmbJob.SelectedItem, 0))
             reportTS.SetParameterValue("@all", If(chbAllJobs.Checked, 1, 0))
             reportTS.SetParameterValue("@CompanyName", "brock")
+            reportTS.SetDatabaseLogon(UserDB, Pass, ServerName, DBName)
             crvMaterialReportByPO.ReportSource = reportTS
         Else
             MsgBox("Please select a Client.")

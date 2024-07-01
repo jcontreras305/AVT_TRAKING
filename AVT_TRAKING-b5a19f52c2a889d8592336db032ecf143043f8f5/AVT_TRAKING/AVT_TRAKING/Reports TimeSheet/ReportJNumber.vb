@@ -40,7 +40,7 @@ Public Class ReportJNumber
         Dim array() = cmbClients.SelectedItem.ToString().Split("    ")
         Dim idClient As String = array(0)
         If idClient <> "" Or idClient IsNot Nothing Then
-            Dim reportTS As New ByJobNumber
+            Dim reportTS As New ReportByJobNo
             reportTS.SetParameterValue("@startdate", validaFechaParaSQl(dtpInitialDate.Value.Date))
             reportTS.SetParameterValue("@finaldate", validaFechaParaSQl(dtpFinalDate.Value.Date))
             reportTS.SetParameterValue("@clientnum", idClient)

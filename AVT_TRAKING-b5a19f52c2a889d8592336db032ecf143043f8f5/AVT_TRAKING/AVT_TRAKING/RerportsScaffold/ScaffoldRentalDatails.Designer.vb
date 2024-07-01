@@ -88,7 +88,7 @@ Partial Class ScaffoldRentalDatails
         Me.TableLayoutPanel1.Controls.Add(Me.Panel3, 0, 2)
         Me.TableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.TableLayoutPanel1.Location = New System.Drawing.Point(0, 0)
-        Me.TableLayoutPanel1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.TableLayoutPanel1.Margin = New System.Windows.Forms.Padding(4)
         Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
         Me.TableLayoutPanel1.RowCount = 3
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 66.0!))
@@ -107,7 +107,7 @@ Partial Class ScaffoldRentalDatails
         Me.Panel1.Controls.Add(Me.btnMaximize)
         Me.Panel1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel1.Location = New System.Drawing.Point(4, 4)
-        Me.Panel1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.Panel1.Margin = New System.Windows.Forms.Padding(4)
         Me.Panel1.Name = "Panel1"
         Me.Panel1.Size = New System.Drawing.Size(1213, 58)
         Me.Panel1.TabIndex = 0
@@ -116,7 +116,7 @@ Partial Class ScaffoldRentalDatails
         '
         Me.PictureBox1.Image = Global.AVT_TRAKING.My.Resources.Resources.project
         Me.PictureBox1.Location = New System.Drawing.Point(4, 4)
-        Me.PictureBox1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.PictureBox1.Margin = New System.Windows.Forms.Padding(4)
         Me.PictureBox1.Name = "PictureBox1"
         Me.PictureBox1.Size = New System.Drawing.Size(60, 52)
         Me.PictureBox1.TabIndex = 17
@@ -140,7 +140,7 @@ Partial Class ScaffoldRentalDatails
         Me.btnMinimize.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnMinimize.Image = Global.AVT_TRAKING.My.Resources.Resources.minimize2
         Me.btnMinimize.Location = New System.Drawing.Point(1123, 4)
-        Me.btnMinimize.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btnMinimize.Margin = New System.Windows.Forms.Padding(4)
         Me.btnMinimize.Name = "btnMinimize"
         Me.btnMinimize.Size = New System.Drawing.Size(36, 36)
         Me.btnMinimize.TabIndex = 15
@@ -151,7 +151,7 @@ Partial Class ScaffoldRentalDatails
         Me.btnRestore.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnRestore.Image = Global.AVT_TRAKING.My.Resources.Resources.restore2
         Me.btnRestore.Location = New System.Drawing.Point(1167, 4)
-        Me.btnRestore.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btnRestore.Margin = New System.Windows.Forms.Padding(4)
         Me.btnRestore.Name = "btnRestore"
         Me.btnRestore.Size = New System.Drawing.Size(35, 36)
         Me.btnRestore.TabIndex = 14
@@ -162,7 +162,7 @@ Partial Class ScaffoldRentalDatails
         Me.btnMaximize.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnMaximize.Image = Global.AVT_TRAKING.My.Resources.Resources.maximize2
         Me.btnMaximize.Location = New System.Drawing.Point(1167, 4)
-        Me.btnMaximize.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btnMaximize.Margin = New System.Windows.Forms.Padding(4)
         Me.btnMaximize.Name = "btnMaximize"
         Me.btnMaximize.Size = New System.Drawing.Size(41, 36)
         Me.btnMaximize.TabIndex = 13
@@ -183,7 +183,7 @@ Partial Class ScaffoldRentalDatails
         Me.Panel2.Controls.Add(Me.dtpStartDate)
         Me.Panel2.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel2.Location = New System.Drawing.Point(4, 70)
-        Me.Panel2.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.Panel2.Margin = New System.Windows.Forms.Padding(4)
         Me.Panel2.Name = "Panel2"
         Me.Panel2.Size = New System.Drawing.Size(1213, 97)
         Me.Panel2.TabIndex = 1
@@ -198,7 +198,7 @@ Partial Class ScaffoldRentalDatails
         Me.btnDownloadExcel.Image = Global.AVT_TRAKING.My.Resources.Resources.excel
         Me.btnDownloadExcel.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.btnDownloadExcel.Location = New System.Drawing.Point(915, 37)
-        Me.btnDownloadExcel.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btnDownloadExcel.Margin = New System.Windows.Forms.Padding(4)
         Me.btnDownloadExcel.Name = "btnDownloadExcel"
         Me.btnDownloadExcel.Size = New System.Drawing.Size(143, 42)
         Me.btnDownloadExcel.TabIndex = 17
@@ -216,7 +216,7 @@ Partial Class ScaffoldRentalDatails
         Me.btnSend.Image = Global.AVT_TRAKING.My.Resources.Resources.Send1
         Me.btnSend.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.btnSend.Location = New System.Drawing.Point(783, 38)
-        Me.btnSend.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btnSend.Margin = New System.Windows.Forms.Padding(4)
         Me.btnSend.Name = "btnSend"
         Me.btnSend.Size = New System.Drawing.Size(124, 41)
         Me.btnSend.TabIndex = 16
@@ -231,7 +231,7 @@ Partial Class ScaffoldRentalDatails
         Me.Label4.Location = New System.Drawing.Point(369, 22)
         Me.Label4.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(43, 17)
+        Me.Label4.Size = New System.Drawing.Size(40, 16)
         Me.Label4.TabIndex = 15
         Me.Label4.Text = "Client"
         '
@@ -242,7 +242,7 @@ Partial Class ScaffoldRentalDatails
         Me.Label3.Location = New System.Drawing.Point(12, 62)
         Me.Label3.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(72, 17)
+        Me.Label3.Size = New System.Drawing.Size(68, 16)
         Me.Label3.TabIndex = 14
         Me.Label3.Text = "Final Date"
         '
@@ -253,7 +253,7 @@ Partial Class ScaffoldRentalDatails
         Me.Label2.Location = New System.Drawing.Point(12, 22)
         Me.Label2.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(72, 17)
+        Me.Label2.Size = New System.Drawing.Size(66, 16)
         Me.Label2.TabIndex = 13
         Me.Label2.Text = "Start Date"
         '
@@ -262,7 +262,7 @@ Partial Class ScaffoldRentalDatails
         Me.PictureBox4.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.PictureBox4.Image = Global.AVT_TRAKING.My.Resources.Resources._exit
         Me.PictureBox4.Location = New System.Drawing.Point(1159, 4)
-        Me.PictureBox4.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.PictureBox4.Margin = New System.Windows.Forms.Padding(4)
         Me.PictureBox4.Name = "PictureBox4"
         Me.PictureBox4.Size = New System.Drawing.Size(49, 36)
         Me.PictureBox4.TabIndex = 12
@@ -278,7 +278,7 @@ Partial Class ScaffoldRentalDatails
         Me.btnReport.Image = Global.AVT_TRAKING.My.Resources.Resources.reportshow
         Me.btnReport.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.btnReport.Location = New System.Drawing.Point(645, 37)
-        Me.btnReport.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btnReport.Margin = New System.Windows.Forms.Padding(4)
         Me.btnReport.Name = "btnReport"
         Me.btnReport.Size = New System.Drawing.Size(111, 41)
         Me.btnReport.TabIndex = 11
@@ -290,7 +290,7 @@ Partial Class ScaffoldRentalDatails
         '
         Me.cmbClient.FormattingEnabled = True
         Me.cmbClient.Location = New System.Drawing.Point(421, 14)
-        Me.cmbClient.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.cmbClient.Margin = New System.Windows.Forms.Padding(4)
         Me.cmbClient.Name = "cmbClient"
         Me.cmbClient.Size = New System.Drawing.Size(185, 24)
         Me.cmbClient.TabIndex = 2
@@ -300,7 +300,7 @@ Partial Class ScaffoldRentalDatails
         Me.dtpFinalDate.CustomFormat = "MM/dd/yyyy"
         Me.dtpFinalDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom
         Me.dtpFinalDate.Location = New System.Drawing.Point(92, 54)
-        Me.dtpFinalDate.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.dtpFinalDate.Margin = New System.Windows.Forms.Padding(4)
         Me.dtpFinalDate.Name = "dtpFinalDate"
         Me.dtpFinalDate.Size = New System.Drawing.Size(265, 22)
         Me.dtpFinalDate.TabIndex = 1
@@ -310,7 +310,7 @@ Partial Class ScaffoldRentalDatails
         Me.dtpStartDate.CustomFormat = "MM/dd/yyyy"
         Me.dtpStartDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom
         Me.dtpStartDate.Location = New System.Drawing.Point(92, 15)
-        Me.dtpStartDate.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.dtpStartDate.Margin = New System.Windows.Forms.Padding(4)
         Me.dtpStartDate.Name = "dtpStartDate"
         Me.dtpStartDate.Size = New System.Drawing.Size(265, 22)
         Me.dtpStartDate.TabIndex = 0
@@ -321,7 +321,7 @@ Partial Class ScaffoldRentalDatails
         Me.Panel3.Controls.Add(Me.TabControl1)
         Me.Panel3.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel3.Location = New System.Drawing.Point(4, 175)
-        Me.Panel3.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.Panel3.Margin = New System.Windows.Forms.Padding(4)
         Me.Panel3.Name = "Panel3"
         Me.Panel3.Size = New System.Drawing.Size(1213, 521)
         Me.Panel3.TabIndex = 2
@@ -332,7 +332,7 @@ Partial Class ScaffoldRentalDatails
         Me.TabControl1.Controls.Add(Me.TabPage2)
         Me.TabControl1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.TabControl1.Location = New System.Drawing.Point(0, 0)
-        Me.TabControl1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.TabControl1.Margin = New System.Windows.Forms.Padding(4)
         Me.TabControl1.Name = "TabControl1"
         Me.TabControl1.SelectedIndex = 0
         Me.TabControl1.Size = New System.Drawing.Size(1213, 521)
@@ -340,15 +340,15 @@ Partial Class ScaffoldRentalDatails
         '
         'TabPage1
         '
+        Me.TabPage1.BackColor = System.Drawing.Color.FromArgb(CType(CType(83, Byte), Integer), CType(CType(93, Byte), Integer), CType(CType(102, Byte), Integer))
         Me.TabPage1.Controls.Add(Me.crvReport)
         Me.TabPage1.Location = New System.Drawing.Point(4, 25)
-        Me.TabPage1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.TabPage1.Margin = New System.Windows.Forms.Padding(4)
         Me.TabPage1.Name = "TabPage1"
-        Me.TabPage1.Padding = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.TabPage1.Padding = New System.Windows.Forms.Padding(4)
         Me.TabPage1.Size = New System.Drawing.Size(1205, 492)
         Me.TabPage1.TabIndex = 0
         Me.TabPage1.Text = "Report"
-        Me.TabPage1.UseVisualStyleBackColor = True
         '
         'crvReport
         '
@@ -357,22 +357,22 @@ Partial Class ScaffoldRentalDatails
         Me.crvReport.Cursor = System.Windows.Forms.Cursors.Default
         Me.crvReport.Dock = System.Windows.Forms.DockStyle.Fill
         Me.crvReport.Location = New System.Drawing.Point(4, 4)
-        Me.crvReport.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.crvReport.Margin = New System.Windows.Forms.Padding(4)
         Me.crvReport.Name = "crvReport"
         Me.crvReport.Size = New System.Drawing.Size(1197, 484)
         Me.crvReport.TabIndex = 0
         '
         'TabPage2
         '
+        Me.TabPage2.BackColor = System.Drawing.Color.FromArgb(CType(CType(83, Byte), Integer), CType(CType(93, Byte), Integer), CType(CType(102, Byte), Integer))
         Me.TabPage2.Controls.Add(Me.TableLayoutPanel2)
         Me.TabPage2.Location = New System.Drawing.Point(4, 25)
-        Me.TabPage2.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.TabPage2.Margin = New System.Windows.Forms.Padding(4)
         Me.TabPage2.Name = "TabPage2"
-        Me.TabPage2.Padding = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.TabPage2.Padding = New System.Windows.Forms.Padding(4)
         Me.TabPage2.Size = New System.Drawing.Size(1205, 492)
         Me.TabPage2.TabIndex = 1
         Me.TabPage2.Text = "Email"
-        Me.TabPage2.UseVisualStyleBackColor = True
         '
         'TableLayoutPanel2
         '
@@ -384,7 +384,7 @@ Partial Class ScaffoldRentalDatails
         Me.TableLayoutPanel2.Controls.Add(Me.tblEmailsReports, 0, 0)
         Me.TableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill
         Me.TableLayoutPanel2.Location = New System.Drawing.Point(4, 4)
-        Me.TableLayoutPanel2.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.TableLayoutPanel2.Margin = New System.Windows.Forms.Padding(4)
         Me.TableLayoutPanel2.Name = "TableLayoutPanel2"
         Me.TableLayoutPanel2.RowCount = 1
         Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
@@ -398,7 +398,7 @@ Partial Class ScaffoldRentalDatails
         Me.Panel4.Controls.Add(Me.tbnAddEmailList)
         Me.Panel4.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel4.Location = New System.Drawing.Point(893, 4)
-        Me.Panel4.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.Panel4.Margin = New System.Windows.Forms.Padding(4)
         Me.Panel4.Name = "Panel4"
         Me.Panel4.Size = New System.Drawing.Size(300, 476)
         Me.Panel4.TabIndex = 1
@@ -410,9 +410,9 @@ Partial Class ScaffoldRentalDatails
         Me.gruopSubjectEmail.Controls.Add(Me.TableLayoutPanel3)
         Me.gruopSubjectEmail.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.gruopSubjectEmail.Location = New System.Drawing.Point(4, 130)
-        Me.gruopSubjectEmail.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.gruopSubjectEmail.Margin = New System.Windows.Forms.Padding(4)
         Me.gruopSubjectEmail.Name = "gruopSubjectEmail"
-        Me.gruopSubjectEmail.Padding = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.gruopSubjectEmail.Padding = New System.Windows.Forms.Padding(4)
         Me.gruopSubjectEmail.Size = New System.Drawing.Size(292, 342)
         Me.gruopSubjectEmail.TabIndex = 15
         Me.gruopSubjectEmail.TabStop = False
@@ -429,7 +429,7 @@ Partial Class ScaffoldRentalDatails
         Me.TableLayoutPanel3.Controls.Add(Me.Label6, 0, 0)
         Me.TableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill
         Me.TableLayoutPanel3.Location = New System.Drawing.Point(4, 19)
-        Me.TableLayoutPanel3.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.TableLayoutPanel3.Margin = New System.Windows.Forms.Padding(4)
         Me.TableLayoutPanel3.Name = "TableLayoutPanel3"
         Me.TableLayoutPanel3.RowCount = 5
         Me.TableLayoutPanel3.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25.0!))
@@ -446,7 +446,7 @@ Partial Class ScaffoldRentalDatails
         Me.Label5.Location = New System.Drawing.Point(4, 91)
         Me.Label5.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(40, 17)
+        Me.Label5.Size = New System.Drawing.Size(39, 16)
         Me.Label5.TabIndex = 18
         Me.Label5.Text = "Body"
         '
@@ -454,7 +454,7 @@ Partial Class ScaffoldRentalDatails
         '
         Me.txtSubject.Dock = System.Windows.Forms.DockStyle.Fill
         Me.txtSubject.Location = New System.Drawing.Point(4, 29)
-        Me.txtSubject.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.txtSubject.Margin = New System.Windows.Forms.Padding(4)
         Me.txtSubject.Multiline = True
         Me.txtSubject.Name = "txtSubject"
         Me.txtSubject.Size = New System.Drawing.Size(276, 58)
@@ -471,7 +471,7 @@ Partial Class ScaffoldRentalDatails
         Me.btnSubjectEmail.Image = Global.AVT_TRAKING.My.Resources.Resources.save1
         Me.btnSubjectEmail.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.btnSubjectEmail.Location = New System.Drawing.Point(4, 273)
-        Me.btnSubjectEmail.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btnSubjectEmail.Margin = New System.Windows.Forms.Padding(4)
         Me.btnSubjectEmail.Name = "btnSubjectEmail"
         Me.btnSubjectEmail.Size = New System.Drawing.Size(276, 42)
         Me.btnSubjectEmail.TabIndex = 15
@@ -482,7 +482,7 @@ Partial Class ScaffoldRentalDatails
         '
         Me.txtBodyEmail.Dock = System.Windows.Forms.DockStyle.Fill
         Me.txtBodyEmail.Location = New System.Drawing.Point(4, 118)
-        Me.txtBodyEmail.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.txtBodyEmail.Margin = New System.Windows.Forms.Padding(4)
         Me.txtBodyEmail.Multiline = True
         Me.txtBodyEmail.Name = "txtBodyEmail"
         Me.txtBodyEmail.Size = New System.Drawing.Size(276, 147)
@@ -494,7 +494,7 @@ Partial Class ScaffoldRentalDatails
         Me.Label6.Location = New System.Drawing.Point(4, 0)
         Me.Label6.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(55, 17)
+        Me.Label6.Size = New System.Drawing.Size(52, 16)
         Me.Label6.TabIndex = 17
         Me.Label6.Text = "Subject"
         '
@@ -509,7 +509,7 @@ Partial Class ScaffoldRentalDatails
         Me.btnDropEmailList.Image = Global.AVT_TRAKING.My.Resources.Resources.close2
         Me.btnDropEmailList.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.btnDropEmailList.Location = New System.Drawing.Point(0, 41)
-        Me.btnDropEmailList.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btnDropEmailList.Margin = New System.Windows.Forms.Padding(4)
         Me.btnDropEmailList.Name = "btnDropEmailList"
         Me.btnDropEmailList.Size = New System.Drawing.Size(300, 41)
         Me.btnDropEmailList.TabIndex = 13
@@ -527,7 +527,7 @@ Partial Class ScaffoldRentalDatails
         Me.tbnAddEmailList.Image = Global.AVT_TRAKING.My.Resources.Resources.add
         Me.tbnAddEmailList.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.tbnAddEmailList.Location = New System.Drawing.Point(0, 0)
-        Me.tbnAddEmailList.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.tbnAddEmailList.Margin = New System.Windows.Forms.Padding(4)
         Me.tbnAddEmailList.Name = "tbnAddEmailList"
         Me.tbnAddEmailList.Size = New System.Drawing.Size(300, 41)
         Me.tbnAddEmailList.TabIndex = 12
@@ -542,7 +542,7 @@ Partial Class ScaffoldRentalDatails
         Me.tblEmailsReports.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.Email, Me.SendName, Me.Send})
         Me.tblEmailsReports.Dock = System.Windows.Forms.DockStyle.Fill
         Me.tblEmailsReports.Location = New System.Drawing.Point(4, 4)
-        Me.tblEmailsReports.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.tblEmailsReports.Margin = New System.Windows.Forms.Padding(4)
         Me.tblEmailsReports.Name = "tblEmailsReports"
         Me.tblEmailsReports.RowHeadersWidth = 51
         Me.tblEmailsReports.Size = New System.Drawing.Size(881, 476)
@@ -572,10 +572,11 @@ Partial Class ScaffoldRentalDatails
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(83, Byte), Integer), CType(CType(93, Byte), Integer), CType(CType(102, Byte), Integer))
         Me.ClientSize = New System.Drawing.Size(1221, 700)
         Me.Controls.Add(Me.TableLayoutPanel1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
-        Me.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.Margin = New System.Windows.Forms.Padding(4)
         Me.Name = "ScaffoldRentalDatails"
         Me.Text = "ScaffoldRentalDatails"
         Me.TableLayoutPanel1.ResumeLayout(False)

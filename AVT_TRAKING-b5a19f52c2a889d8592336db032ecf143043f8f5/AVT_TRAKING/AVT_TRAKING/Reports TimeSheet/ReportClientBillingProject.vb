@@ -1,5 +1,6 @@
 ﻿Imports System.Runtime.InteropServices
 Imports System.Data.SqlClient
+Imports CrystalDecisions.ReportAppServer
 Public Class ReportClientBillingProject
     Dim conection As New ConnectioDB
     Dim idClient As String = ""
@@ -48,6 +49,7 @@ Public Class ReportClientBillingProject
             reportTS.SetParameterValue("@finaldate", validaFechaParaSQl(dtpFinalDate.Value.Date))
             reportTS.SetParameterValue("@clientnum", idClient)
             reportTS.SetParameterValue("@CompanyName", "brock")
+            reportTS.SetDatabaseLogon(UserDB, Pass, ServerName, DBName)
             crvClientBillingsProject.ReportSource = reportTS
         Else
             MsgBox("Please select a Client.")

@@ -51,6 +51,7 @@ Public Class ScaffoldRentalDatails
                 reportTs.SetParameterValue("@FinalDate", validaFechaParaSQl(dtpFinalDate.Value.Date))
                 reportTs.SetParameterValue("@numberClient", CInt(clNum))
                 reportTs.SetParameterValue("@CompanyName", "Brock")
+                reportTs.SetDatabaseLogon(UserDB, Pass, ServerName, DBName)
                 crvReport.ReportSource = reportTs
                 btnSend.Enabled = True
             Else
@@ -116,9 +117,9 @@ Public Class ScaffoldRentalDatails
                         End If
                         mtdOther.sendEmail(ownEmail(0), ownEmail(1), txtSubject.Text, txtBodyEmail.Text, listEmail, sd.FileName)
                     ElseIf dar = DialogResult.No Then
-                        reportTs.ExportToDisk(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat, "c:\TMP\" + reportName)
-                        mtdOther.sendEmail(ownEmail(0), ownEmail(1), txtSubject.Text, txtBodyEmail.Text, listEmail, "c:\TMP\" + reportName)
-                        System.IO.File.Delete("c:\TMP\" + reportName)
+                        reportTs.ExportToDisk(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat, LocalFolderDiretory + "\" + reportName)
+                        mtdOther.sendEmail(ownEmail(0), ownEmail(1), txtSubject.Text, txtBodyEmail.Text, listEmail, LocalFolderDiretory + "\" + reportName)
+                        System.IO.File.Delete(LocalFolderDiretory + "\" + reportName)
                     End If
                 Else
                     MessageBox.Show("Please, assign the emails to send the Report.")

@@ -1,5 +1,6 @@
 ﻿Imports System.Runtime.InteropServices
 Imports System.Data.SqlClient
+Imports CrystalDecisions.ReportAppServer
 Public Class ReportInvoice
     Dim mtdInvoice As New MetodosInvoice
     Dim loadInfo As Boolean = True
@@ -107,6 +108,7 @@ Public Class ReportInvoice
                             reportInvoice.SetParameterValue("@idPO", If(cmbPO.SelectedItem IsNot Nothing, cmbPO.SelectedItem, "0"))
                             reportInvoice.SetParameterValue("@all", If(chbAllPO.Checked, 1, 0))
                             reportInvoice.SetParameterValue("@CompanyName", "Brock")
+                            reportInvoice.SetDatabaseLogon(UserDB, Pass, ServerName, DBName)
                             crvIvoice.ReportSource = reportInvoice
                         Else
                             MsgBox("Please select a Client.")

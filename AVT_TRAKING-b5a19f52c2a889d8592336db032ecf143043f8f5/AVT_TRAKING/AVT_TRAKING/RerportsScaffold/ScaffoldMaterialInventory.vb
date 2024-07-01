@@ -46,6 +46,7 @@ Public Class ScaffoldMaterialInventory
                 reportTs.SetParameterValue("@numberClient", CInt(clNum))
                 reportTs.SetParameterValue("@all", If(chbAll.Checked, 1, 0))
                 reportTs.SetParameterValue("@CompanyName", "Brock")
+                reportTs.SetDatabaseLogon(UserDB, Pass, ServerName, DBName)
                 crvReport.ReportSource = reportTs
             Else
                 MsgBox("Please select a Client.")

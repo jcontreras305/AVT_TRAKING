@@ -608,12 +608,6 @@
       <DependentUpon>AllJobs.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Reports TimeSheet\ByJobNumber.vb">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ByJobNumber.rpt</DependentUpon>
-      <SubType>Component</SubType>
-    </Compile>
     <Compile Include="Reports TimeSheet\CatsEmployeebyProject.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -691,6 +685,12 @@
     </Compile>
     <Compile Include="Reports TimeSheet\ReportAllJob.vb">
       <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Reports TimeSheet\ReportByJobNo.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ReportByJobNo.rpt</DependentUpon>
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="Reports TimeSheet\ReportClientBillingsReCapBYProject.Designer.vb">
       <DependentUpon>ReportClientBillingsReCapBYProject.vb</DependentUpon>
@@ -855,13 +855,13 @@
       <DependentUpon>EstSummary.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="ReportsEstimation\MaterialDetails.Designer.vb">
+    <Compile Include="Reports TimeSheet\MaterialDetails.Designer.vb">
       <DependentUpon>MaterialDetails.vb</DependentUpon>
     </Compile>
-    <Compile Include="ReportsEstimation\MaterialDetails.vb">
+    <Compile Include="Reports TimeSheet\MaterialDetails.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="RerportsScaffold\EstSummaryMaterial.vb">
+    <Compile Include="ReportsEstimation\EstSummaryMaterial.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>EstSummaryMaterial.rpt</DependentUpon>
@@ -1275,10 +1275,6 @@
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>AllJobs.vb</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Reports TimeSheet\ByJobNumber.rpt">
-      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
-      <LastGenOutput>ByJobNumber.vb</LastGenOutput>
-    </EmbeddedResource>
     <EmbeddedResource Include="Reports TimeSheet\CatsEmployeebyProject.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>CatsEmployeebyProject.vb</LastGenOutput>
@@ -1328,6 +1324,10 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Reports TimeSheet\ReportAllJob.resx">
       <DependentUpon>ReportAllJob.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports TimeSheet\ReportByJobNo.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>ReportByJobNo.vb</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports TimeSheet\ReportClientBillingsReCapBYProject.resx">
       <DependentUpon>ReportClientBillingsReCapBYProject.vb</DependentUpon>
@@ -1417,10 +1417,10 @@
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>EstSummary.vb</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="ReportsEstimation\MaterialDetails.resx">
+    <EmbeddedResource Include="Reports TimeSheet\MaterialDetails.resx">
       <DependentUpon>MaterialDetails.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="RerportsScaffold\EstSummaryMaterial.rpt">
+    <EmbeddedResource Include="ReportsEstimation\EstSummaryMaterial.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>EstSummaryMaterial.vb</LastGenOutput>
     </EmbeddedResource>
