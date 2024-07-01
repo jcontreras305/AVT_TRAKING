@@ -376,7 +376,7 @@ Partial Class ModificationValidationTable
         Me.ModID.HeaderText = "ModID"
         Me.ModID.MinimumWidth = 6
         Me.ModID.Name = "ModID"
-        Me.ModID.Width = 77
+        Me.ModID.Width = 76
         '
         'TagNum
         '
@@ -384,49 +384,49 @@ Partial Class ModificationValidationTable
         Me.TagNum.HeaderText = "TagNum"
         Me.TagNum.MinimumWidth = 6
         Me.TagNum.Name = "TagNum"
-        Me.TagNum.Width = 91
+        Me.TagNum.Width = 89
         '
         'WorkNum
         '
         Me.WorkNum.HeaderText = "WorkNum"
         Me.WorkNum.MinimumWidth = 6
         Me.WorkNum.Name = "WorkNum"
-        Me.WorkNum.Width = 99
+        Me.WorkNum.Width = 96
         '
         'ReqComp
         '
         Me.ReqComp.HeaderText = "ReqComp"
         Me.ReqComp.MinimumWidth = 6
         Me.ReqComp.Name = "ReqComp"
-        Me.ReqComp.Width = 99
+        Me.ReqComp.Width = 98
         '
         'RequestBy
         '
         Me.RequestBy.HeaderText = "RequestBy"
         Me.RequestBy.MinimumWidth = 6
         Me.RequestBy.Name = "RequestBy"
-        Me.RequestBy.Width = 106
+        Me.RequestBy.Width = 103
         '
         'Foreman
         '
         Me.Foreman.HeaderText = "Foreman"
         Me.Foreman.MinimumWidth = 6
         Me.Foreman.Name = "Foreman"
-        Me.Foreman.Width = 93
+        Me.Foreman.Width = 90
         '
         'Erector
         '
         Me.Erector.HeaderText = "Erector"
         Me.Erector.MinimumWidth = 6
         Me.Erector.Name = "Erector"
-        Me.Erector.Width = 83
+        Me.Erector.Width = 79
         '
         'DateModification
         '
         Me.DateModification.HeaderText = "DateModification"
         Me.DateModification.MinimumWidth = 6
         Me.DateModification.Name = "DateModification"
-        Me.DateModification.Width = 142
+        Me.DateModification.Width = 137
         '
         'Truck
         '
@@ -435,7 +435,7 @@ Partial Class ModificationValidationTable
         Me.Truck.Name = "Truck"
         Me.Truck.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
         Me.Truck.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
-        Me.Truck.Width = 73
+        Me.Truck.Width = 70
         '
         'Forklift
         '
@@ -444,7 +444,7 @@ Partial Class ModificationValidationTable
         Me.Forklift.Name = "Forklift"
         Me.Forklift.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
         Me.Forklift.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
-        Me.Forklift.Width = 79
+        Me.Forklift.Width = 75
         '
         'Trailer
         '
@@ -453,7 +453,7 @@ Partial Class ModificationValidationTable
         Me.Trailer.Name = "Trailer"
         Me.Trailer.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
         Me.Trailer.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
-        Me.Trailer.Width = 78
+        Me.Trailer.Width = 75
         '
         'Crane
         '
@@ -462,7 +462,7 @@ Partial Class ModificationValidationTable
         Me.Crane.Name = "Crane"
         Me.Crane.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
         Me.Crane.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
-        Me.Crane.Width = 75
+        Me.Crane.Width = 72
         '
         'Rope
         '
@@ -471,7 +471,7 @@ Partial Class ModificationValidationTable
         Me.Rope.Name = "Rope"
         Me.Rope.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
         Me.Rope.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
-        Me.Rope.Width = 71
+        Me.Rope.Width = 70
         '
         'Passed
         '
@@ -480,7 +480,7 @@ Partial Class ModificationValidationTable
         Me.Passed.Name = "Passed"
         Me.Passed.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
         Me.Passed.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
-        Me.Passed.Width = 84
+        Me.Passed.Width = 83
         '
         'Elevator
         '
@@ -489,84 +489,84 @@ Partial Class ModificationValidationTable
         Me.Elevator.Name = "Elevator"
         Me.Elevator.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
         Me.Elevator.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
-        Me.Elevator.Width = 89
+        Me.Elevator.Width = 86
         '
         'Build
         '
         Me.Build.HeaderText = "Build"
         Me.Build.MinimumWidth = 6
         Me.Build.Name = "Build"
-        Me.Build.Width = 68
+        Me.Build.Width = 66
         '
         'Material
         '
         Me.Material.HeaderText = "Material"
         Me.Material.MinimumWidth = 6
         Me.Material.Name = "Material"
-        Me.Material.Width = 87
+        Me.Material.Width = 84
         '
         'Travel
         '
         Me.Travel.HeaderText = "Travel"
         Me.Travel.MinimumWidth = 6
         Me.Travel.Name = "Travel"
-        Me.Travel.Width = 77
+        Me.Travel.Width = 75
         '
         'Weather
         '
         Me.Weather.HeaderText = "Weather"
         Me.Weather.MinimumWidth = 6
         Me.Weather.Name = "Weather"
-        Me.Weather.Width = 91
+        Me.Weather.Width = 87
         '
         'Alarm
         '
         Me.Alarm.HeaderText = "Alarm"
         Me.Alarm.MinimumWidth = 6
         Me.Alarm.Name = "Alarm"
-        Me.Alarm.Width = 73
+        Me.Alarm.Width = 71
         '
         'Safety
         '
         Me.Safety.HeaderText = "Safety"
         Me.Safety.MinimumWidth = 6
         Me.Safety.Name = "Safety"
-        Me.Safety.Width = 77
+        Me.Safety.Width = 74
         '
         'stdBy
         '
         Me.stdBy.HeaderText = "stdBy"
         Me.stdBy.MinimumWidth = 6
         Me.stdBy.Name = "stdBy"
-        Me.stdBy.Width = 72
+        Me.stdBy.Width = 70
         '
         'Other
         '
         Me.Other.HeaderText = "Other"
         Me.Other.MinimumWidth = 6
         Me.Other.Name = "Other"
-        Me.Other.Width = 73
+        Me.Other.Width = 68
         '
         'TotalHours
         '
         Me.TotalHours.HeaderText = "Total Hours"
         Me.TotalHours.MinimumWidth = 6
         Me.TotalHours.Name = "TotalHours"
-        Me.TotalHours.Width = 111
+        Me.TotalHours.Width = 106
         '
         'Type
         '
         Me.Type.HeaderText = "Type"
         Me.Type.MinimumWidth = 6
         Me.Type.Name = "Type"
-        Me.Type.Width = 69
+        Me.Type.Width = 68
         '
         'Comment
         '
         Me.Comment.HeaderText = "Comment"
         Me.Comment.MinimumWidth = 6
         Me.Comment.Name = "Comment"
-        Me.Comment.Width = 96
+        Me.Comment.Width = 93
         '
         'tbpProducts
         '
@@ -645,6 +645,7 @@ Partial Class ModificationValidationTable
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(83, Byte), Integer), CType(CType(93, Byte), Integer), CType(CType(102, Byte), Integer))
         Me.ClientSize = New System.Drawing.Size(1197, 554)
         Me.Controls.Add(Me.TableLayoutPanel1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None

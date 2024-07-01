@@ -187,6 +187,8 @@ Public Class DismantleValidationTable
             pgbComplete.Value = 10
             lblMessage.Text = "Message: Proccessing Data."
             Dim porcent = CInt(100 / tblDismantleSC.Rows.Count)
+            Dim rowError As Integer = 0
+            Dim rowInserted As Integer = 0
             For Each row As DataGridViewRow In tblDismantleSC.Rows
                 Dim dis As New dismantle
                 dis.tag = row.Cells("clmTagID").Value
@@ -213,16 +215,21 @@ Public Class DismantleValidationTable
                 dis.ahrTotal = CDec(row.Cells("Dismantle").Value) + CDec(row.Cells("Material").Value) + CDec(row.Cells("Travel").Value) + CDec(row.Cells("Weather").Value) + CDec(row.Cells("Alarm").Value) + CDec(row.Cells("Safety").Value) + CDec(row.Cells("stdBY").Value)
                 dis.comments = row.Cells("Comments").Value
                 If mtdScaffold.saveDismantle(dis, False) Then
-                    'pgbComplete.Value += If(pgbComplete.Value + porcent > 100, porcent, 99)
+                    rowInserted += 1
                 Else
                     row.Cells("clmErrorD").Value = "Error, check the data."
                     If ExistError() Then
                         tblDismantleSC.Columns("clmErrorD").Visible = True
                     End If
+                    rowError += 1
+                End If
+                If pgbComplete.Value <= 95 Then
+                    pgbComplete.Value += 1
                 End If
             Next
             lblMessage.Text = "Message: Complete."
             pgbComplete.Value = 100
+            MessageBox.Show("Finish: " + If(rowError > 0, CStr(rowError) & " dismantles have not been done, check the colmun error.", CStr(rowInserted) & " tags have been inserted."), "Message", MessageBoxButtons.OK, MessageBoxIcon.Information)
         Catch ex As Exception
             MsgBox(ex.Message())
         End Try

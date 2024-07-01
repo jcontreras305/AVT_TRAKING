@@ -704,6 +704,9 @@ Public Class ModificationValidationTable
             pgbComplete.Value = 0
             Dim porcentFilas = 100 / tblModificationScaffold.Rows.Count
             lblMessage.Text = "Message: Processing data."
+            Dim rowInserted As Integer = 0
+            Dim rowError As Integer = 0
+
             For Each rowModification As DataGridViewRow In tblModificationScaffold.Rows()
                 Dim mod1 As New ModificationSC
                 mod1.ModID = rowModification.Cells("ModID").Value
@@ -738,8 +741,10 @@ Public Class ModificationValidationTable
                 Next
                 If mtdScaffold.saveModification(mod1) Then
                     pgbComplete.Value = pgbComplete.Value + porcentFilas
+                    rowInserted += 1
                 Else
                     rowModification.Cells("clmError").Value = "Error"
+                    rowError += 1
                 End If
             Next
             For Each rowProducts As DataGridViewRow In tblProductSheet.Rows()
@@ -754,6 +759,7 @@ Public Class ModificationValidationTable
             Next
             lblMessage.Text = "Message: The Process is ended."
             MessageBox.Show("Sucessful")
+            MessageBox.Show("Finish: " + If(rowError > 0, CStr(rowInserted) & " modification have not been inserted check the colmun error.", CStr(rowInserted) & " tags have been inserted."), "Message", MessageBoxButtons.OK, MessageBoxIcon.Information)
         Catch ex As Exception
             MsgBox(ex.Message())
         End Try

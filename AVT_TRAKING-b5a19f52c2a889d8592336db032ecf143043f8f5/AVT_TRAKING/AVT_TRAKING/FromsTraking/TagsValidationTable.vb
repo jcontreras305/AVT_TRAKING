@@ -583,6 +583,9 @@ Public Class TagsValidationTable
         Try
             If ExistError(tblTagsScaffold) = False And ExistError(tblProductSheet) = False Then
                 Dim listTags As New List(Of scaffold)
+                Dim flagError As Boolean = False
+                Dim countError As Integer = 0
+                Dim countInserted As Integer = 0
                 For Each row As DataGridViewRow In tblTagsScaffold.Rows()
                     Dim sc As New scaffold
                     sc.tag = row.Cells("TagNum").Value
@@ -645,10 +648,18 @@ Public Class TagsValidationTable
                     If Not mtdScaffold.saveScaffoldTraking(sc) Then
                         row.Cells("clmError").Value = "Error"
                         tblTagsScaffold.Columns("clmError").Visible = True
+                        countError += 1
+                    Else
+                        countInserted += 1
+                    End If
+                    If pgbComplete.Value <= 95 Then
+                        pgbComplete.Value = pgbComplete.Value + 1
                     End If
                     lblMessage.Text = "Message: Inserting tag number: " + row.Cells("TagNum").Value.ToString()
                 Next
                 lblMessage.Text = "Message: Finish."
+                pgbComplete.Value = 100
+                MessageBox.Show("Finish: " + If(countError > 0, CStr(countError) & " tags have not been inserted check the colmun error.", CStr(countInserted) & " tags have been inserted."), "Message", MessageBoxButtons.OK, MessageBoxIcon.Information)
             Else
                 MessageBox.Show("Exist error, tray reload the document or changue the data.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
             End If
