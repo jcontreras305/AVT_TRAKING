@@ -77,12 +77,16 @@ Public Class EstimateSummary
                         Dim reportTs As New EstSummary
                         reportTs.SetParameterValue("@projectId", Project)
                         reportTs.SetParameterValue("@CompanyName", "Brock")
-                        crvReport.ReportSource = reportTs
+                        If connecReport(reportTs) Then
+                            crvReport.ReportSource = reportTs
+                        End If
                     Else
                         Dim reportTs As New EstSummaryMaterial
                         reportTs.SetParameterValue("@projectId", Project)
                         reportTs.SetParameterValue("@CompanyName", "Brock")
-                        crvReport.ReportSource = reportTs
+                        If connecReport(reportTs) Then
+                            crvReport.ReportSource = reportTs
+                        End If
                     End If
                     calculadora = Process.Start("calc.Exe")
                 Else

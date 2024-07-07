@@ -37,8 +37,9 @@ Public Class ReportHoursPerWeek
         Dim reportTS As New HoursPerWeek
         reportTS.SetParameterValue("@date", validaFechaParaSQl(dtpDate.Value.Date))
         reportTS.SetParameterValue("@CompanyName", "brock")
-        reportTS.SetDatabaseLogon(UserDB, Pass, ServerName, DBName)
-        crvHoursPerWeek.ReportSource = reportTS
+        If connecReport(reportTS) Then
+            crvHoursPerWeek.ReportSource = reportTS
+        End If
     End Sub
 
 

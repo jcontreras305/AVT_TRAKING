@@ -44,8 +44,9 @@ Public Class ReportAllJob
             reportTS.SetParameterValue("@CompanyName", "brock")
             reportTS.SetParameterValue("@excludeIdpo", If(chbExclude.Checked, 1, 0))
             reportTS.SetParameterValue("@exclude", If(chbExclude.Checked, txtPOExclude.Text, "0"))
-            reportTS.SetDatabaseLogon(UserDB, Pass, ServerName, DBName)
-            crvAllJobs.ReportSource = reportTS
+            If connecReport(reportTS) Then
+                crvAllJobs.ReportSource = reportTS
+            End If
         Else
             MsgBox("Please select a Client.")
         End If

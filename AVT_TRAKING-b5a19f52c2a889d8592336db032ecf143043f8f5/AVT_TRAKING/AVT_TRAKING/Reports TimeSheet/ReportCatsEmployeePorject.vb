@@ -58,8 +58,9 @@ Public Class ReportCatsEmployeePorject
             reportTS.SetParameterValue("@employeenumber", DBNull.Value)
             reportTS.SetParameterValue("@all", 1)
             reportTS.SetParameterValue("@CompanyName", "brock")
-            reportTS.SetDatabaseLogon(UserDB, Pass, ServerName, DBName)
-            crvCatsEmployeebyProject.ReportSource = reportTS
+            If connecReport(reportTS) Then
+                crvCatsEmployeebyProject.ReportSource = reportTS
+            End If
         ElseIf cmbEmployees.SelectedItem IsNot Nothing Then
             Dim array() = cmbEmployees.SelectedItem.ToString().Split("    ")
             Dim idEmploye As String = array(0)
@@ -69,8 +70,9 @@ Public Class ReportCatsEmployeePorject
                 reportTS.SetParameterValue("@finaldate", validaFechaParaSQl(dtpFinalDate.Value.Date))
                 reportTS.SetParameterValue("@employeenumber", idEmploye)
                 reportTS.SetParameterValue("@all", 0)
-                reportTS.SetDatabaseLogon(UserDB, Pass, ServerName, DBName)
-                crvCatsEmployeebyProject.ReportSource = reportTS
+                If connecReport(reportTS) Then
+                    crvCatsEmployeebyProject.ReportSource = reportTS
+                End If
             Else
                 MsgBox("Please choose a Employee.")
             End If

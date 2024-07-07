@@ -52,8 +52,9 @@ Public Class ReportEmployeePerDiem
             reportTS.SetParameterValue("@job", If(cmbJob.SelectedItem IsNot Nothing, CInt(cmbJob.SelectedItem), 0))
             reportTS.SetParameterValue("@all", If(chbAllJobs.Checked, 1, 0))
             reportTS.SetParameterValue("@CompanyName", "brock")
-            reportTS.SetDatabaseLogon(UserDB, Pass, ServerName, DBName)
-            crvEmployeePerDiem.ReportSource = reportTS
+            If connecReport(reportTS) Then
+                crvEmployeePerDiem.ReportSource = reportTS
+            End If
         Else
             MsgBox("Please select a Client.")
         End If

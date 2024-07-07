@@ -1,4 +1,5 @@
 ﻿Imports System.Runtime.InteropServices
+Imports CrystalDecisions.ReportAppServer
 Public Class RFIReports
     Dim mtdRFISCF As New MetodosRFIScaffold
     Dim mtdRFIEquip As New MetodosRFIEquipment
@@ -173,29 +174,29 @@ Public Class RFIReports
     Private Sub btnReport_Click(sender As Object, e As EventArgs) Handles btnReport.Click
         Try
             If idDrawingNum <> "" And idTag <> "" And idRFI <> "" Then
+                Dim reportTs As Object
                 Select Case TypeRFI
                     Case "Scaffold"
-                        Dim reportTs As New RFIReportSCF
+                        reportTs = New RFIReportSCF
                         reportTs.SetParameterValue("@idRFI", idRFI)
                         reportTs.SetParameterValue("@tag", idTag)
                         reportTs.SetParameterValue("@idDrawingNum", idDrawingNum)
-                        'reportTs.SetParameterValue("@CompanyName", "Brock")
-                        crvReport.ReportSource = reportTs
                     Case "Equipment"
-                        Dim reportTs As New RFIReportEQ
+                        reportTs = New RFIReportEQ
                         reportTs.SetParameterValue("@idRFIEq", idRFI)
                         reportTs.SetParameterValue("@tag", idTag)
                         reportTs.SetParameterValue("@idDrawingNum", idDrawingNum)
-                        'reportTs.SetParameterValue("@CompanyName", "Brock")
-                        crvReport.ReportSource = reportTs
                     Case "Piping"
-                        Dim reportTs As New RFIReportPp
+                        reportTs = New RFIReportPp
                         reportTs.SetParameterValue("@idRFIPp", idRFI)
                         reportTs.SetParameterValue("@tag", idTag)
                         reportTs.SetParameterValue("@idDrawingNum", idDrawingNum)
-                        'reportTs.SetParameterValue("@CompanyName", "Brock")
-                        crvReport.ReportSource = reportTs
                 End Select
+                If reportTs IsNot Nothing Then
+                    If connecReport(reportTs) Then
+                        crvReport.ReportSource = reportTs
+                    End If
+                End If
             Else
                 MessageBox.Show("Please especifi the de Scaffold RFI.", "Impotant", MessageBoxButtons.OK, MessageBoxIcon.Asterisk)
             End If

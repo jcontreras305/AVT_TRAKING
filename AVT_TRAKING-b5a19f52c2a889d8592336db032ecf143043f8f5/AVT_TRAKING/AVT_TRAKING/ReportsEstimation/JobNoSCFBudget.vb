@@ -54,7 +54,9 @@ Public Class JobNoSCFBudget
                 Dim reportTs As New JobNoSCFBudgetReport
                 reportTs.SetParameterValue("@projectId", projectId)
                 reportTs.SetParameterValue("@CompanyName", "Brock")
-                crvReport.ReportSource = reportTs
+                If connecReport(reportTs) Then
+                    crvReport.ReportSource = reportTs
+                End If
             Else
                 MessageBox.Show("Please select a Project.", "Impotant", MessageBoxButtons.OK, MessageBoxIcon.Asterisk)
             End If

@@ -66,8 +66,9 @@ Public Class ReportYearFinalHours
                 reportTS.SetParameterValue("@numberClient", clientNum)
                 reportTS.SetParameterValue("@jobNo", jobNo)
                 reportTS.SetParameterValue("@CompanyName", "brock")
-                reportTS.SetDatabaseLogon(UserDB, Pass, ServerName, DBName)
-                crvYearFinalHours.ReportSource = reportTS
+                If connecReport(reportTS) Then
+                    crvYearFinalHours.ReportSource = reportTS
+                End If
             End If
         Catch ex As Exception
             MsgBox(ex.Message)

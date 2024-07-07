@@ -139,8 +139,9 @@ Public Class ScaffoldProductReport
             reportTs.SetParameterValue("@mod", If(modi, 1, 0))
             reportTs.SetParameterValue("@dis", If(dis, 1, 0))
             reportTs.SetParameterValue("@CompanyName", "Brock")
-            reportTs.SetDatabaseLogon(UserDB, Pass, ServerName, DBName)
-            crvReport.ReportSource = reportTs
+            If connecReport(reportTs) Then
+                crvReport.ReportSource = reportTs
+            End If
             btnSend.Enabled = True
         Catch ex As Exception
             MsgBox(ex.Message())

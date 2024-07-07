@@ -49,8 +49,9 @@ Public Class ReportClientBillingProject
             reportTS.SetParameterValue("@finaldate", validaFechaParaSQl(dtpFinalDate.Value.Date))
             reportTS.SetParameterValue("@clientnum", idClient)
             reportTS.SetParameterValue("@CompanyName", "brock")
-            reportTS.SetDatabaseLogon(UserDB, Pass, ServerName, DBName)
-            crvClientBillingsProject.ReportSource = reportTS
+            If connecReport(reportTS) Then
+                crvClientBillingsProject.ReportSource = reportTS
+            End If
         Else
             MsgBox("Please select a Client.")
         End If

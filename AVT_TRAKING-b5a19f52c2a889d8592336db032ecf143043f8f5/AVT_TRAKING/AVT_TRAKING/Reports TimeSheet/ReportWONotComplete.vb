@@ -74,8 +74,10 @@ Public Class ReportWONotComplete
                 reportTS.SetParameterValue("@jobNum", If(chbAllJobs.Checked, 0, cmbJobs.SelectedItem))
                 reportTS.SetParameterValue("@all", If(chbAllJobs.Checked, True, False))
                 reportTS.SetParameterValue("@CompanyName", "brock")
-                reportTS.SetDatabaseLogon(UserDB, Pass, ServerName, DBName)
-                crvWONotComplete.ReportSource = reportTS
+                If connecReport(reportTS) Then
+                    crvWONotComplete.ReportSource = reportTS
+                End If
+
             Else
                 MsgBox("Please select a Client.")
             End If

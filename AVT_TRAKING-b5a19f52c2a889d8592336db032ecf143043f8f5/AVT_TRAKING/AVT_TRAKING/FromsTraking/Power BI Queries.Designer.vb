@@ -169,7 +169,7 @@ Partial Class Power_BI_Queries
         Me.Label3.Location = New System.Drawing.Point(257, 16)
         Me.Label3.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(72, 17)
+        Me.Label3.Size = New System.Drawing.Size(68, 16)
         Me.Label3.TabIndex = 13
         Me.Label3.Text = "Final Date"
         '
@@ -179,7 +179,7 @@ Partial Class Power_BI_Queries
         Me.Label2.Location = New System.Drawing.Point(13, 16)
         Me.Label2.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(72, 17)
+        Me.Label2.Size = New System.Drawing.Size(66, 16)
         Me.Label2.TabIndex = 12
         Me.Label2.Text = "Start Date"
         '
@@ -302,9 +302,9 @@ Partial Class Power_BI_Queries
         Me.lblMessage.AutoSize = True
         Me.lblMessage.Dock = System.Windows.Forms.DockStyle.Bottom
         Me.lblMessage.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.lblMessage.Location = New System.Drawing.Point(0, 406)
+        Me.lblMessage.Location = New System.Drawing.Point(0, 407)
         Me.lblMessage.Name = "lblMessage"
-        Me.lblMessage.Size = New System.Drawing.Size(70, 17)
+        Me.lblMessage.Size = New System.Drawing.Size(67, 16)
         Me.lblMessage.TabIndex = 1
         Me.lblMessage.Text = "Mensage:"
         '

@@ -54,8 +54,9 @@ Public Class ReportClientBillingsReCapBYProject
             reportTS.SetParameterValue("@allJob", If(chbAllJobs.Checked, 1, 0))
             reportTS.SetParameterValue("@allPO", If(chbAllPO.Checked, 1, 0))
             reportTS.SetParameterValue("@CompanyName", "brock")
-            reportTS.SetDatabaseLogon(UserDB, Pass, ServerName, DBName)
-            crvClientBillingsReCapBYProject.ReportSource = reportTS
+            If connecReport(reportTS) Then
+                crvClientBillingsReCapBYProject.ReportSource = reportTS
+            End If
         Else
             MsgBox("Please select a Client.")
         End If

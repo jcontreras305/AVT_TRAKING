@@ -1,4 +1,5 @@
 ﻿Imports System.Runtime.InteropServices
+Imports CrystalDecisions.ReportAppServer
 
 Public Class ReportActiveAverageE
 
@@ -53,12 +54,9 @@ Public Class ReportActiveAverageE
                 reportAE.SetParameterValue("@ClientName", If(chbAll.Checked, 0, CInt(idClient)))
                 reportAE.SetParameterValue("@all", If(chbAll.Checked, 1, 0))
                 reportAE.SetParameterValue("@CompanyName", "brock")
-                If Not UserDB = "True" Then
-                    reportAE.SetDatabaseLogon(UserDB, Pass, ServerName, DBName)
-                Else
-                    reportAE.SetDatabaseLogon("", "", ServerName, DBName)
+                If connecReport(reportAE) Then
+                    crvActiveAverageE.ReportSource = reportAE
                 End If
-                crvActiveAverageE.ReportSource = reportAE
             Else
                 MsgBox("Please select a Client.")
             End If

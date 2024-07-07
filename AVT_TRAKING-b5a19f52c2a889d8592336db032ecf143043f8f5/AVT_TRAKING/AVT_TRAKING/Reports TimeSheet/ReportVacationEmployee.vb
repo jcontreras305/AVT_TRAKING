@@ -92,8 +92,9 @@ where wc.name like '%6.4%'", conection.conn)
                 rtp.SetParameterValue("@NoEmployee", empNum)
                 rtp.SetParameterValue("@all", If(chbAllEmployees.Checked, True, False))
                 rtp.SetParameterValue("@CompanyName", "brock")
-                rtp.SetDatabaseLogon(UserDB, Pass, ServerName, DBName)
-                crvVacationEmployee.ReportSource = rtp
+                If connecReport(rtp) Then
+                    crvVacationEmployee.ReportSource = rtp
+                End If
             End If
         Catch ex As Exception
             MsgBox(ex.Message())

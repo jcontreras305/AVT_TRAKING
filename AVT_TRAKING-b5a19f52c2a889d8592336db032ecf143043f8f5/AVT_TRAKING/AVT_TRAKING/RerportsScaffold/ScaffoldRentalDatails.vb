@@ -51,8 +51,9 @@ Public Class ScaffoldRentalDatails
                 reportTs.SetParameterValue("@FinalDate", validaFechaParaSQl(dtpFinalDate.Value.Date))
                 reportTs.SetParameterValue("@numberClient", CInt(clNum))
                 reportTs.SetParameterValue("@CompanyName", "Brock")
-                reportTs.SetDatabaseLogon(UserDB, Pass, ServerName, DBName)
-                crvReport.ReportSource = reportTs
+                If connecReport(reportTs) Then
+                    crvReport.ReportSource = reportTs
+                End If
                 btnSend.Enabled = True
             Else
                 MsgBox("Please select a Client.")

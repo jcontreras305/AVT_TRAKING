@@ -43,8 +43,9 @@ Public Class ScaffoldActive
                     Dim reportTs As New SCFActive
                     reportTs.SetParameterValue("@numberClient", CInt(clNum))
                     reportTs.SetParameterValue("@CompanyName", "Brock")
-                    reportTs.SetDatabaseLogon(UserDB, Pass, ServerName, DBName)
-                    crvReport.ReportSource = reportTs
+                    If connecReport(reportTs) Then
+                        crvReport.ReportSource = reportTs
+                    End If
                     mtd.llenarTablaActiveScaffold(tblScaffoldActive, clNum)
                 Else
                     MsgBox("Please select a Client.")

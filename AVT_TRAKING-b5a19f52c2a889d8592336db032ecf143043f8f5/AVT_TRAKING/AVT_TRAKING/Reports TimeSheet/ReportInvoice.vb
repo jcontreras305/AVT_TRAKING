@@ -108,8 +108,10 @@ Public Class ReportInvoice
                             reportInvoice.SetParameterValue("@idPO", If(cmbPO.SelectedItem IsNot Nothing, cmbPO.SelectedItem, "0"))
                             reportInvoice.SetParameterValue("@all", If(chbAllPO.Checked, 1, 0))
                             reportInvoice.SetParameterValue("@CompanyName", "Brock")
-                            reportInvoice.SetDatabaseLogon(UserDB, Pass, ServerName, DBName)
-                            crvIvoice.ReportSource = reportInvoice
+                            If connecReport(reportInvoice) Then
+                                crvIvoice.ReportSource = reportInvoice
+                            End If
+
                         Else
                             MsgBox("Please select a Client.")
                         End If

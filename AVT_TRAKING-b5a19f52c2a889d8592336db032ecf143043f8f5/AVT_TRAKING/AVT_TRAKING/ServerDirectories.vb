@@ -1,4 +1,5 @@
 ﻿Imports System.IO
+Imports CrystalDecisions.ReportAppServer
 Module ServerDirectories
     Private _ServerDirectory As String = "\\Desktop-s806jiq\"
     Private _ServerFolderDirectory As String = "\\Desktop-s806jiq\@userName"
@@ -131,6 +132,36 @@ Module ServerDirectories
             End If
             Return True
         Catch ex As Exception
+            Return False
+        End Try
+    End Function
+
+    Public Function connecReport(ByVal reportTs As CrystalDecisions.CrystalReports.Engine.ReportDocument) As Boolean
+        Try
+            If Not reportTs Is Nothing Then
+                Dim crTables As CrystalDecisions.CrystalReports.Engine.Tables
+                Dim crTable As CrystalDecisions.CrystalReports.Engine.Table
+                Dim crConnInfo As New CrystalDecisions.Shared.ConnectionInfo
+                Dim crLogOnInfo As CrystalDecisions.Shared.TableLogOnInfo
+
+                reportTs.SetDatabaseLogon(UserDB, Pass, ServerName, DBName)
+
+                For Each crTable In reportTs.Database.Tables
+                    crConnInfo.ServerName = ServerName
+                    crConnInfo.DatabaseName = DBName
+                    crConnInfo.UserID = UserDB
+                    crConnInfo.Password = Pass
+                    crLogOnInfo = crTable.LogOnInfo
+                    crLogOnInfo.ConnectionInfo = crConnInfo
+                    crTable.ApplyLogOnInfo(crLogOnInfo)
+                    crTable.LogOnInfo.ConnectionInfo.Password = Pass
+                    crTable.Location = DBName & ".dbo." & crTable.Name
+                Next
+                'crvReport.ReportSource = reportTs 'Este es el control que muestra el reporte
+                Return True
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message())
             Return False
         End Try
     End Function

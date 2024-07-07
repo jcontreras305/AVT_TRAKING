@@ -96,8 +96,9 @@ Public Class ScaffoldProductIncoming
                             reportTs.SetParameterValue("@ticket", If(chbAll.Checked, "", cmbTickets.Items(cmbTickets.SelectedIndex).ToString()))
                             reportTs.SetParameterValue("@all", If(chbAll.Checked, 1, 0))
                             reportTs.SetParameterValue("@CompanyName", "Brock")
-                            reportTs.SetDatabaseLogon(UserDB, Pass, ServerName, DBName)
-                            crvReport.ReportSource = reportTs
+                            If connecReport(reportTs) Then
+                                crvReport.ReportSource = reportTs
+                            End If
                         Else
                             Dim reportTs As New ScfProductOutgoing
                             Dim jb As Long = cmbJobNo.Items(cmbJobNo.SelectedIndex)
@@ -105,8 +106,9 @@ Public Class ScaffoldProductIncoming
                             reportTs.SetParameterValue("@ticket", If(chbAll.Checked, "", cmbTickets.Items(cmbTickets.SelectedIndex).ToString()))
                             reportTs.SetParameterValue("@all", If(chbAll.Checked, 1, 0))
                             reportTs.SetParameterValue("@CompanyName", "Brock")
-                            reportTs.SetDatabaseLogon(UserDB, Pass, ServerName, DBName)
-                            crvReport.ReportSource = reportTs
+                            If connecReport(reportTs) Then
+                                crvReport.ReportSource = reportTs
+                            End If
                         End If
                     Else
                         MsgBox("Please specify if you want to see just one Ticket or all of them.")

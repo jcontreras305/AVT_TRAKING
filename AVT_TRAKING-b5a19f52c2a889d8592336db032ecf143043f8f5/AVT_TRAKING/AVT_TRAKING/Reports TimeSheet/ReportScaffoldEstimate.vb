@@ -66,8 +66,10 @@ Public Class ReportScaffoldEstimate
                 reportSE.SetParameterValue("@IdClient", idClient)
                 reportSE.SetParameterValue("@all", False)
                 reportSE.SetParameterValue("@CompanyName", "brock")
-                reportSE.SetDatabaseLogon(UserDB, Pass, ServerName, DBName)
-                crvReportScaffoldEstimate.ReportSource = reportSE
+                If connecReport(reportSE) Then
+                    crvReportScaffoldEstimate.ReportSource = reportSE
+                End If
+
             Else
                 If cmbUnit.SelectedItem IsNot Nothing Then
                     Dim array() As String = cmbUnit.SelectedItem.ToString.Split(" ")
@@ -81,8 +83,9 @@ Public Class ReportScaffoldEstimate
                     reportSE.SetParameterValue("@EstNumber", EstNumber)
                     reportSE.SetParameterValue("@IdClient", idClient)
                     reportSE.SetParameterValue("@all", If(chbAllUnit.Checked, True, False))
-                    reportSE.SetDatabaseLogon(UserDB, Pass, ServerName, DBName)
-                    crvReportScaffoldEstimate.ReportSource = reportSE
+                    If connecReport(reportSE) Then
+                        crvReportScaffoldEstimate.ReportSource = reportSE
+                    End If
                 Else
                     MsgBox("Please select a Estimation.")
                 End If
