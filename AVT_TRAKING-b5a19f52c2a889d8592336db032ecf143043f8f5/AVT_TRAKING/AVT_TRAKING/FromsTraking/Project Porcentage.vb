@@ -101,11 +101,11 @@ Public Class Project_Porcentage
             lblMessage.Text = "Message: " + "Creating a new excel file..."
             pgbComplete.Value = 10
 
-            Dim colums() As String = {"Client No", "Job No", "PO", "WorkOrder", "Porcentage", "Phase", "Project Manager"}
+            Dim colums() As String = {"Client No", "Job No", "PO", "WorkOrder", "Porcentage", "Phase", "Project Manager", "Est Total Billings"}
             For i As Int16 = 0 To colums.Length - 1
                 libro.Sheets(1).cells(1, i + 1) = colums(i)
             Next
-            With libro.Sheets(1).Range("A1:G1")
+            With libro.Sheets(1).Range("A1:H1")
                 .Font.Bold = True
                 .Font.ColorIndex = 1
                 With .Interior
@@ -177,7 +177,7 @@ Public Class Project_Porcentage
             Dim cont As Int64 = 0
             tblProjects.Rows.Clear()
             For i As Integer = 2 To countFilas(Hoja1) + 1
-                Dim dato(8) As String
+                Dim dato(9) As String
                 dato(0) = Hoja1.Cells(i, 1).Text 'client num
                 dato(1) = Hoja1.Cells(i, 2).Text 'jobno
                 dato(2) = Hoja1.Cells(i, 3).Text 'po
@@ -200,9 +200,10 @@ Public Class Project_Porcentage
                         dato(6) = ""
                     End If
                 End If
-                dato(7) = Hoja1.Cells(i, 7).Text 'Phase
-                dato(8) = Hoja1.Cells(i, 8).Text ' Project Manager  
-                tblProjects.Rows.Add(dato(5), dato(6), dato(0), dato(1), dato(2), dato(3), dato(4), dato(7), dato(8))
+                dato(7) = Hoja1.Cells(i, 6).Text 'Phase
+                dato(8) = Hoja1.Cells(i, 7).Text ' Project Manager  
+                dato(9) = Hoja1.Cells(i, 8).Text ' Est Total Billing
+                tblProjects.Rows.Add(dato(5), dato(6), dato(0), dato(1), dato(2), dato(3), dato(4), dato(6), dato(7), dato(8))
                 If dato(6) <> "" Then
                     tblProjects.Rows(tblProjects.Rows.Count - 1).DefaultCellStyle.BackColor = Color.Yellow
                 End If
@@ -229,8 +230,9 @@ Public Class Project_Porcentage
                 tblDataSelected.Columns.Add("Percent")
                 tblDataSelected.Columns.Add("Phase")
                 tblDataSelected.Columns.Add("ProjectManager")
+                tblDataSelected.Columns.Add("EstTotalBilling")
                 For Each row As DataGridViewRow In tblProjects.SelectedRows
-                    tblDataSelected.Rows.Add(row.Cells("idAux").Value, row.Cells("Porcentage").Value, row.Cells("clmPhase").Value, row.Cells("clmProjectManager").Value)
+                    tblDataSelected.Rows.Add(row.Cells("idAux").Value, row.Cells("Porcentage").Value, row.Cells("clmPhase").Value, row.Cells("clmProjectManager").Value, row.Cells("clmEstTotalBilling").Value)
                 Next
                 lblMessage.Text = "Message: " + " Saving the changues..."
                 If mtdPoPercent.updateProjectPercent(tblDataSelected, pgbComplete) Then

@@ -5,7 +5,7 @@ Public Class MetodosProjectPorcentage
     Public Function selectProject(ByVal tbl As DataGridView, ByVal idClient As String, Optional jobNo As String = "", Optional po As String = "") As Boolean
         Try
             conectar()
-            Dim cmd As New SqlCommand("select tk.idAux,'' as 'Error',cl.numberClient as 'Client No' ,jb.jobNo as 'Job No' , po.idPO as 'Project Order' , CONCAT (wo.idWO ,'-',tk.task) as 'Project', tk.percentComplete as 'Complete', tk.phase as 'Phase', tk.manager as 'Project Manager'   
+            Dim cmd As New SqlCommand("select tk.idAux,'' as 'Error',cl.numberClient as 'Client No' ,jb.jobNo as 'Job No' , po.idPO as 'Project Order' , CONCAT (wo.idWO ,'-',tk.task) as 'Project', tk.percentComplete as 'Complete', tk.phase as 'Phase', tk.manager as 'Project Manager', tk.estTotalBilling as 'Est Total Billing'   
 from task as tk inner join workOrder as wo on tk.idAuxWO = wo.idAuxWO 
 inner join projectOrder as po on po.idPO = wo.idPO and po.jobNo = wo.jobNo
 inner join job as jb on jb.jobNo = po.jobNo
@@ -14,7 +14,7 @@ where cl.numberClient like " + idClient + " " + If(jobNo = "", "", " and jb.jobN
             Dim dr As SqlDataReader = cmd.ExecuteReader
             tbl.Rows.Clear()
             While dr.Read
-                tbl.Rows.Add(dr("idAux"), dr("Error"), dr("Client No"), dr("Job No"), dr("Project Order"), dr("Project"), dr("Complete"), dr("Phase"), dr("Project Manager"))
+                tbl.Rows.Add(dr("idAux"), dr("Error"), dr("Client No"), dr("Job No"), dr("Project Order"), dr("Project"), dr("Complete"), dr("Phase"), dr("Project Manager"), dr("Est Total Billing"))
             End While
             Return True
         Catch ex As Exception
@@ -32,7 +32,7 @@ where cl.numberClient like " + idClient + " " + If(jobNo = "", "", " and jb.jobN
             tran = conn.BeginTransaction
             Dim flag As Boolean = False
             For Each row As DataRow In tbl.Rows
-                Dim cmd As New SqlCommand("update task set percentComplete = " + row.ItemArray(1) + ", phase = '" + row.ItemArray(2) + "' , manager = '" + row.ItemArray(3) + "' where idAux = '" + row.ItemArray(0) + "'", conn)
+                Dim cmd As New SqlCommand("update task set percentComplete = " + row.ItemArray(1) + ", phase = '" + row.ItemArray(2) + "' , manager = '" + row.ItemArray(3) + "', estTotalBilling = " + row.ItemArray(4) + " where idAux = '" + row.ItemArray(0) + "'", conn)
                 cmd.Transaction = tran
                 If cmd.ExecuteNonQuery > 0 Then
                     If pgbPercent.Value < 90 Then

@@ -52,6 +52,7 @@ Partial Class Project_Porcentage
         Me.Porcentage = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.clmPhase = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.clmProjectManager = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.clmEstTotalBilling = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.TableLayoutPanel1.SuspendLayout()
         Me.TitleBar.SuspendLayout()
         CType(Me.btnMaximize, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -277,7 +278,7 @@ Partial Class Project_Porcentage
         Me.tblProjects.AllowUserToAddRows = False
         Me.tblProjects.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.tblProjects.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.tblProjects.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.idAux, Me.Errors, Me.ClientNo, Me.JobNo, Me.ProjectNo, Me.WorkOrder, Me.Porcentage, Me.clmPhase, Me.clmProjectManager})
+        Me.tblProjects.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.idAux, Me.Errors, Me.ClientNo, Me.JobNo, Me.ProjectNo, Me.WorkOrder, Me.Porcentage, Me.clmPhase, Me.clmProjectManager, Me.clmEstTotalBilling})
         Me.tblProjects.Dock = System.Windows.Forms.DockStyle.Fill
         Me.tblProjects.Location = New System.Drawing.Point(0, 0)
         Me.tblProjects.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
@@ -376,6 +377,12 @@ Partial Class Project_Porcentage
         Me.clmProjectManager.MinimumWidth = 6
         Me.clmProjectManager.Name = "clmProjectManager"
         '
+        'clmEstTotalBilling
+        '
+        Me.clmEstTotalBilling.HeaderText = "Est Total Billing"
+        Me.clmEstTotalBilling.MinimumWidth = 6
+        Me.clmEstTotalBilling.Name = "clmEstTotalBilling"
+        '
         'Project_Porcentage
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
@@ -431,4 +438,5 @@ Partial Class Project_Porcentage
     Friend WithEvents Porcentage As DataGridViewTextBoxColumn
     Friend WithEvents clmPhase As DataGridViewTextBoxColumn
     Friend WithEvents clmProjectManager As DataGridViewTextBoxColumn
+    Friend WithEvents clmEstTotalBilling As DataGridViewTextBoxColumn
 End Class
