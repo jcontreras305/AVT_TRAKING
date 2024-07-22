@@ -479,6 +479,7 @@ from workOrder
                         values (NEWID(),'" + CStr(projectN.idTask) + "','" + projectN.idAuxWO + "',0.0,'" + projectN.equipament + "','" + projectN.manager + "'
                         ,'" + projectN.description.ToString.Replace("'", "''") + "'," + CStr(projectN.totalBilling) + ",'" + validaFechaParaSQl(projectN.beginDate) + "','" + validaFechaParaSQl(projectN.endDate) + "'
                         ,'" + projectN.expCode + "','" + projectN.accountNum + "'," + CStr(projectN.estimateHour) + ",'" + CStr(projectN.status) + "'," + CStr(projectN.PercentComplete) + ",'" + projectN.Area + "','" + projectN.Phase + "')", conn)
+                            cmdInsertTask1.CommandTimeout = 120
                             If cmdInsertTask1.ExecuteNonQuery = 1 Then
                                 desconectar()
                                 Return True
@@ -497,7 +498,9 @@ from workOrder
                         Dim tranWO As SqlTransaction
                         tranWO = conn.BeginTransaction
                         cmdInsertNewWO.Transaction = tranWO
+                        cmdInsertNewWO.CommandTimeout = 120
                         cmdInsertTask2.Transaction = tranWO
+                        cmdInsertTask2.CommandTimeout = 120
                         If cmdInsertNewWO.ExecuteNonQuery > 0 Then
                             If cmdInsertTask2.ExecuteNonQuery > 0 Then
                                 tranWO.Commit()
@@ -521,8 +524,11 @@ from workOrder
                         ,'" + projectN.expCode + "','" + projectN.accountNum + "'," + CStr(projectN.estimateHour) + ",'" + CStr(projectN.status) + "'," + CStr(projectN.PercentComplete) + ",'" + projectN.Area + "','" + projectN.Phase + "')", conn)
                     Dim tranPO As SqlTransaction
                     tranPO = conn.BeginTransaction
+                    cmdInsertNewPO.CommandTimeout = 120
                     cmdInsertNewPO.Transaction = tranPO
+                    cmdInsertNewWO.CommandTimeout = 120
                     cmdInsertNewWO.Transaction = tranPO
+                    cmdInsertTask2.CommandTimeout = 120
                     cmdInsertTask2.Transaction = tranPO
                     Try
                         If cmdInsertNewPO.ExecuteNonQuery > 0 Then

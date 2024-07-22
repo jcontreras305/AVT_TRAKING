@@ -1781,13 +1781,12 @@ T1.[ClientID],
 T1.[PO],
 T1.[MO#],
 T1.[Weekending],
-SUM(T1.[ST Hours]) OVER (PARTITION BY T1.[Year],T1.[Weekending],T1.[PO],T1.[ClientID],T1.[Class]) as 'ST Hours',
-SUM(T1.[OT Hours]) OVER (PARTITION BY T1.[Year],T1.[Weekending],T1.[PO],T1.[ClientID],T1.[Class]) as 'OT Hours',
-SUM(T1.[OT Cost]) OVER (PARTITION BY T1.[Year],T1.[Weekending],T1.[PO],T1.[ClientID],T1.[Class]) as 'OT Cost',
-SUM(T1.[ST Cost]) OVER (PARTITION BY T1.[Year],T1.[Weekending],T1.[PO],T1.[ClientID],T1.[Class]) as 'ST Cost',
+SUM(T1.[ST Hours]) OVER (PARTITION BY T1.[Year],T1.[PO],T1.[ClientID],T1.[MO#],T1.[Weekending],T1.[Class]) as 'ST Hours',
+SUM(T1.[OT Hours]) OVER (PARTITION BY T1.[Year],T1.[PO],T1.[ClientID],T1.[MO#],T1.[Weekending],T1.[Class]) as 'OT Hours',
+SUM(T1.[OT Cost]) OVER (PARTITION BY T1.[Year],T1.[PO],T1.[ClientID],T1.[MO#],T1.[Weekending],T1.[Class]) as 'OT Cost',
+SUM(T1.[ST Cost]) OVER (PARTITION BY T1.[Year],T1.[PO],T1.[ClientID],T1.[MO#],T1.[Weekending],T1.[Class]) as 'ST Cost',
 T1.[Class]
 from(
-
 select 
 distinct
 YEAR(hw.dateWorked) as 'Year',
@@ -1796,16 +1795,16 @@ po.idPO	as 'PO',
 CONCAT(wo.idWO,'-',tk.task) as 'MO#',
 DATEADD(DAY,IIF( DATEPART(DW,hw.dateWorked)=1,0, 7-(DATEPART(DW,hw.dateWorked)-1)),hw.dateWorked) as 'Weekending',
 wc.name as 'Class',
-SUM(hw.hoursST) OVER (PARTITION BY YEAR(hw.dateWorked),DATEADD(DAY,IIF( DATEPART(DW,hw.dateWorked)=1,0, 7-(DATEPART(DW,hw.dateWorked)-1)),hw.dateWorked),po.idPO,jb.jobNo,wc.name) as 'ST Hours',
-SUM(hw.hoursOT+ hw.hours3) OVER (PARTITION BY YEAR(hw.dateWorked),DATEADD(DAY,IIF( DATEPART(DW,hw.dateWorked)=1,0, 7-(DATEPART(DW,hw.dateWorked)-1)),hw.dateWorked),po.idPO,jb.jobNo,wc.name) as 'OT Hours',
-ROUND(SUM((hw.hoursOT*wc.billingRateOT) + (hw.hours3*wc.billingRate3)) OVER (PARTITION BY YEAR(hw.dateWorked),DATEADD(DAY,IIF( DATEPART(DW,hw.dateWorked)=1,0, 7-(DATEPART(DW,hw.dateWorked)-1)),hw.dateWorked),po.idPO,jb.jobNo,wc.name),2) 'OT Cost',
-ROUND(SUM(hw.hoursST*wc.billingRate1) OVER (PARTITION BY YEAR(hw.dateWorked),DATEADD(DAY,IIF( DATEPART(DW,hw.dateWorked)=1,0, 7-(DATEPART(DW,hw.dateWorked)-1)),hw.dateWorked),po.idPO,jb.jobNo,wc.name),2) as 'ST Cost'
+SUM(hw.hoursST) OVER (PARTITION BY YEAR(hw.dateWorked),DATEADD(DAY,IIF( DATEPART(DW,hw.dateWorked)=1,0, 7-(DATEPART(DW,hw.dateWorked)-1)),hw.dateWorked),CONCAT(wo.idWO,'-',tk.task),po.idPO,jb.jobNo,wc.name) as 'ST Hours',
+SUM(hw.hoursOT+ hw.hours3) OVER (PARTITION BY YEAR(hw.dateWorked),DATEADD(DAY,IIF( DATEPART(DW,hw.dateWorked)=1,0, 7-(DATEPART(DW,hw.dateWorked)-1)),hw.dateWorked),CONCAT(wo.idWO,'-',tk.task),po.idPO,jb.jobNo,wc.name) as 'OT Hours',
+ROUND(SUM((hw.hoursOT*wc.billingRateOT) + (hw.hours3*wc.billingRate3)) OVER (PARTITION BY YEAR(hw.dateWorked),DATEADD(DAY,IIF( DATEPART(DW,hw.dateWorked)=1,0, 7-(DATEPART(DW,hw.dateWorked)-1)),hw.dateWorked),CONCAT(wo.idWO,'-',tk.task),po.idPO,jb.jobNo,wc.name),2) 'OT Cost',
+ROUND(SUM(hw.hoursST*wc.billingRate1)  OVER (PARTITION BY YEAR(hw.dateWorked),DATEADD(DAY,IIF( DATEPART(DW,hw.dateWorked)=1,0, 7-(DATEPART(DW,hw.dateWorked)-1)),hw.dateWorked),CONCAT(wo.idWO,'-',tk.task),po.idPO,jb.jobNo,wc.name),2) as 'ST Cost'
 from hoursWorked as hw 
 inner join task as tk on tk.idAux = hw.idAux
 inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO
 inner join projectOrder as po on po.idPO = wo.idPO and po.jobNo = wo.jobNo
 inner join job as jb on jb.jobNo = po.jobNo 
-inner join workCode as wc on wc.idWorkCode = hw.idWorkCode and wc.jobNo = jb.jobNo
+left join workCode as wc on wc.idWorkCode = hw.idWorkCode and wc.jobNo = jb.jobNo
 where hw.dateWorked between @StartDate and @EndDate and not wc.name like '%6.4%'
 ) AS T1
 ) AS T2

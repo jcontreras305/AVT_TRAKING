@@ -2115,7 +2115,7 @@ create table task (
 	totalSpend float,
 	equipament varchar(30),
 	manager varchar(50),
-	description varchar(100),
+	description varchar(200),
 	estTotalBilling float,
 	beginDate date,
 	endDate date,
