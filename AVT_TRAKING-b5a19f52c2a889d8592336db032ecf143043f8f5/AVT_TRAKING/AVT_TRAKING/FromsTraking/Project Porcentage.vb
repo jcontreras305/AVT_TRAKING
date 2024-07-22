@@ -101,7 +101,7 @@ Public Class Project_Porcentage
             lblMessage.Text = "Message: " + "Creating a new excel file..."
             pgbComplete.Value = 10
 
-            Dim colums() As String = {"Client No", "Job No", "PO", "WorkOrder", "Porcentage", "Phase", "Project Manager", "Est Total Billings"}
+            Dim colums() As String = {"Client No", "Job No", "PO", "WorkOrder", "Percentage", "Phase", "Project Manager", "Est Total Billings"}
             For i As Int16 = 0 To colums.Length - 1
                 libro.Sheets(1).cells(1, i + 1) = colums(i)
             Next
@@ -200,7 +200,7 @@ Public Class Project_Porcentage
                         dato(6) = ""
                     End If
                 End If
-                dato(7) = Hoja1.Cells(i, 6).Text 'Phase
+                dato(7) = Hoja1.Cells(i, 6).Text ' Phase
                 dato(8) = Hoja1.Cells(i, 7).Text ' Project Manager  
                 dato(9) = Hoja1.Cells(i, 8).Text ' Est Total Billing
                 tblProjects.Rows.Add(dato(5), dato(6), dato(0), dato(1), dato(2), dato(3), dato(4), dato(6), dato(7), dato(8))
@@ -255,7 +255,7 @@ Public Class Project_Porcentage
     Private Sub tblProjects_CellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles tblProjects.CellEndEdit
         Try
             Select Case tblProjects.CurrentCell.ColumnIndex
-                Case tblProjects.Columns("Porcentage").Index
+                Case tblProjects.Columns("Percentage").Index
                     If soloNumero(tblProjects.CurrentCell.Value.ToString()) Then
                         If CInt(tblProjects.CurrentCell.Value) >= 100 Then
                             tblProjects.CurrentCell.Value = 100
@@ -266,7 +266,7 @@ Public Class Project_Porcentage
                         tblProjects.CurrentCell.Value = 0
                     End If
                 Case Else
-                    Dim arrayrow() As DataRow = tblProjectClient.Select("numberClient = " + tblProjects.CurrentRow.Cells(2).Value + " and jobNo = " + tblProjects.CurrentRow.Cells(3).Value + " and idPO = " + tblProjects.CurrentRow.Cells(4).Value + " and worknum = '" + tblProjects.CurrentRow.Cells(5).Value + "'")
+                    Dim arrayrow() As DataRow = tblProjectClient.Select("numberClient = " + tblProjects.CurrentRow.Cells(2).Value.ToString + " and jobNo = " + tblProjects.CurrentRow.Cells(3).Value.ToString + " and idPO = " + tblProjects.CurrentRow.Cells(4).Value.ToString + " and worknum = '" + tblProjects.CurrentRow.Cells(5).Value + "'")
                     If arrayrow.Length > 0 Then
                         tblProjects.CurrentRow.Cells(0).Value = arrayrow(0).ItemArray(2)
                         tblProjects.CurrentRow.Cells(1).Value = ""

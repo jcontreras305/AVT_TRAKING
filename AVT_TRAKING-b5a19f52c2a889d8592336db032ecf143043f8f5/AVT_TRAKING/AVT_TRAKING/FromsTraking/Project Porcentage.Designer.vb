@@ -49,7 +49,7 @@ Partial Class Project_Porcentage
         Me.JobNo = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.ProjectNo = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.WorkOrder = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.Porcentage = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Percentage = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.clmPhase = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.clmProjectManager = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.clmEstTotalBilling = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -226,9 +226,9 @@ Partial Class Project_Porcentage
         Me.Label2.Location = New System.Drawing.Point(3, 5)
         Me.Label2.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(227, 25)
+        Me.Label2.Size = New System.Drawing.Size(226, 25)
         Me.Label2.TabIndex = 16
-        Me.Label2.Text = "Porject Porcentage"
+        Me.Label2.Text = "Porject Percentage"
         '
         'PictureBox4
         '
@@ -278,7 +278,7 @@ Partial Class Project_Porcentage
         Me.tblProjects.AllowUserToAddRows = False
         Me.tblProjects.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.tblProjects.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.tblProjects.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.idAux, Me.Errors, Me.ClientNo, Me.JobNo, Me.ProjectNo, Me.WorkOrder, Me.Porcentage, Me.clmPhase, Me.clmProjectManager, Me.clmEstTotalBilling})
+        Me.tblProjects.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.idAux, Me.Errors, Me.ClientNo, Me.JobNo, Me.ProjectNo, Me.WorkOrder, Me.Percentage, Me.clmPhase, Me.clmProjectManager, Me.clmEstTotalBilling})
         Me.tblProjects.Dock = System.Windows.Forms.DockStyle.Fill
         Me.tblProjects.Location = New System.Drawing.Point(0, 0)
         Me.tblProjects.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
@@ -359,11 +359,11 @@ Partial Class Project_Porcentage
         Me.WorkOrder.MinimumWidth = 6
         Me.WorkOrder.Name = "WorkOrder"
         '
-        'Porcentage
+        'Percentage
         '
-        Me.Porcentage.HeaderText = "Porcentage"
-        Me.Porcentage.MinimumWidth = 6
-        Me.Porcentage.Name = "Porcentage"
+        Me.Percentage.HeaderText = "Percentage"
+        Me.Percentage.MinimumWidth = 6
+        Me.Percentage.Name = "Percentage"
         '
         'clmPhase
         '
@@ -435,7 +435,7 @@ Partial Class Project_Porcentage
     Friend WithEvents JobNo As DataGridViewTextBoxColumn
     Friend WithEvents ProjectNo As DataGridViewTextBoxColumn
     Friend WithEvents WorkOrder As DataGridViewTextBoxColumn
-    Friend WithEvents Porcentage As DataGridViewTextBoxColumn
+    Friend WithEvents Percentage As DataGridViewTextBoxColumn
     Friend WithEvents clmPhase As DataGridViewTextBoxColumn
     Friend WithEvents clmProjectManager As DataGridViewTextBoxColumn
     Friend WithEvents clmEstTotalBilling As DataGridViewTextBoxColumn
