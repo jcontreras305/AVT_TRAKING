@@ -203,7 +203,7 @@ Public Class Project_Porcentage
                 dato(7) = Hoja1.Cells(i, 6).Text ' Phase
                 dato(8) = Hoja1.Cells(i, 7).Text ' Project Manager  
                 dato(9) = Hoja1.Cells(i, 8).Text ' Est Total Billing
-                tblProjects.Rows.Add(dato(5), dato(6), dato(0), dato(1), dato(2), dato(3), dato(4), dato(6), dato(7), dato(8))
+                tblProjects.Rows.Add(dato(5), dato(6), dato(0), dato(1), dato(2), dato(3), dato(4), dato(7), dato(8), dato(9))
                 If dato(6) <> "" Then
                     tblProjects.Rows(tblProjects.Rows.Count - 1).DefaultCellStyle.BackColor = Color.Yellow
                 End If
