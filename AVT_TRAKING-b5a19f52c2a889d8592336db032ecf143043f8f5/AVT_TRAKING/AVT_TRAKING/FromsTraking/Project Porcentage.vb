@@ -232,7 +232,7 @@ Public Class Project_Porcentage
                 tblDataSelected.Columns.Add("ProjectManager")
                 tblDataSelected.Columns.Add("EstTotalBilling")
                 For Each row As DataGridViewRow In tblProjects.SelectedRows
-                    tblDataSelected.Rows.Add(row.Cells("idAux").Value, row.Cells("Porcentage").Value, row.Cells("clmPhase").Value, row.Cells("clmProjectManager").Value, row.Cells("clmEstTotalBilling").Value)
+                    tblDataSelected.Rows.Add(row.Cells("idAux").Value, row.Cells("Percentage").Value, row.Cells("clmPhase").Value, row.Cells("clmProjectManager").Value, row.Cells("clmEstTotalBilling").Value)
                 Next
                 lblMessage.Text = "Message: " + " Saving the changues..."
                 If mtdPoPercent.updateProjectPercent(tblDataSelected, pgbComplete) Then
