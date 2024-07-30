@@ -2602,6 +2602,7 @@ inner join task as tk on wo.idAuxWO = tk.idAuxWO where tk.idAux = '" + sc.task +
         conectar()
         Dim tran As SqlTransaction
         tran = conn.BeginTransaction
+        sc.IDClient = idClient
         Dim flagComplete As Boolean = True
         Try
             Dim falgTag As Boolean = True
