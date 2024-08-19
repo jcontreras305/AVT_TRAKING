@@ -250,7 +250,7 @@ ha.idHomeAdress, ha.avenue ,ha.number, ha.city ,ha.providence,ha.postalCode,phot
     Private Function consultaProyectos(ByVal queryFilter As String) As String
         Dim consultaProyetosClients As String = "select T2.[Work Order],T2.[Project Description],T2.[Complete],
 CONCAT('$',(T2.[Total Amount ST]+T2.[Total Amount OT]+T2.[Total Amount 3]+T2.[Total Expenses Spend]+T2.[Total Material Spend])*(iif( T2.[Taxes]>0,T2.[Taxes]/100,0))) as 'Total Taxes',
-CONCAT('$',(T2.[Total Amount ST]+T2.[Total Amount OT]+T2.[Total Amount 3]+T2.[Total Expenses Spend]+T2.[Total Material Spend])+(T2.[Total Amount ST]+T2.[Total Amount OT]+T2.[Total Amount 3]+T2.[Total Expenses Spend]+T2.[Total Material Spend])*(iif( T2.[Taxes]>0,T2.[Taxes]/100,0))) as 'Total Spend', 
+CONCAT('$',CONVERT(DECIMAL(38, 2),(T2.[Total Amount ST]+T2.[Total Amount OT]+T2.[Total Amount 3]+T2.[Total Expenses Spend]+T2.[Total Material Spend])+(T2.[Total Amount ST]+T2.[Total Amount OT]+T2.[Total Amount 3]+T2.[Total Expenses Spend]+T2.[Total Material Spend])*(iif( T2.[Taxes]>0,T2.[Taxes]/100,0)))) as 'Total Spend',
 T2.[Total Hours ST],
 CONCAT('$',T2.[Total Amount ST])as 'Total Amount ST',T2.[Total Hours OT],
 CONCAT('$',T2.[Total Amount OT])as 'Total Amount OT',T2.[Total Hours 3],
