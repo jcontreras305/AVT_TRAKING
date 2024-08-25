@@ -133,7 +133,7 @@ left join clients as cl on cl.idClient = jc.idClient " + If(idClient <> "", "whe
             desconectar()
         End Try
     End Function
-    Public Function SaveJobCat(ByVal tabla As DataGridView) As Boolean
+    Public Function SaveJobCat(ByVal tabla As DataGridView, Optional numberClient As String = "") As Boolean
         Try
             conectar()
             Dim tran As SqlTransaction
@@ -145,8 +145,8 @@ left join clients as cl on cl.idClient = jc.idClient " + If(idClient <> "", "whe
                     Dim array() As String = row.Cells(3).Value().ToString().Split(" ")
                     Dim cmd As New SqlCommand("
 declare @JobCat as varchar(25) = '" + row.Cells(0).Value().ToString() + "'
-declare @numberClientN as int = " + If(array(0) = "", "0", array(0)) + "
-declare @numberClientL as int = " + If(row.Cells(4).Value().ToString() = "", "0", row.Cells(4).Value().ToString()) + "
+declare @numberClientN as int = " + If(numberClient = "", If(array(0) = "", "0", array(0)), numberClient) + "
+declare @numberClientL as int = " + If(numberClient = "", If(row.Cells(4).Value().ToString() = "", "0", row.Cells(4).Value().ToString()), numberClient) + "
 
 if (select COUNT(*) from jobCat as jc left join clients as cl on cl.idClient = jc.idClient where jc.idJobCat = @JobCat and (cl.numberClient = @numberClientN or cl.numberClient is Null))=0
 begin 
@@ -291,7 +291,7 @@ left join clients as cl on cl.idClient = ar.idClient " + If(idCliente <> "", "wh
             desconectar()
         End Try
     End Function
-    Public Function SaveAreas(ByVal tabla As DataGridView) As Boolean
+    Public Function SaveAreas(ByVal tabla As DataGridView, Optional numberClient As String = "") As Boolean
         Try
             conectar()
             Dim tran As SqlTransaction
@@ -302,8 +302,8 @@ left join clients as cl on cl.idClient = ar.idClient " + If(idCliente <> "", "wh
                 If row.Cells(0).Value() IsNot Nothing Then
                     Dim array() As String = row.Cells(3).Value().ToString().Split(" ")
                     Dim cmd As New SqlCommand("
-declare @numberClientL as int = " + If(row.Cells(4).Value().ToString() = "", "0", row.Cells(4).Value().ToString()) + "
-declare @numberClientN as int = " + If(array(0) = "", "0", array(0)) + "
+declare @numberClientL as int = " + If(numberClient = "", If(row.Cells(4).Value().ToString() = "", "0", row.Cells(4).Value().ToString()), numberClient) + "
+declare @numberClientN as int = " + If(numberClient = "", If(array(0) = "", "0", array(0)), numberClient) + "
 declare @idArea as int = " + row.Cells(0).Value().ToString() + "
 
 if (select count(*) from areas as ar left join clients as cl on cl.idClient = ar.idClient where ar.idArea = @idArea and (cl.numberClient = @numberClientN or cl.numberClient is Null)) = 0
@@ -550,7 +550,7 @@ left join clients as cl on cl.idClient = sj.idClient " + If(idClient <> "", " wh
         End Try
     End Function
 
-    Public Function SaveSubJobs(ByVal tabla As DataGridView) As Boolean
+    Public Function SaveSubJobs(ByVal tabla As DataGridView, Optional numberClient As String = "") As Boolean
         Try
             conectar()
             Dim tran As SqlTransaction
@@ -562,8 +562,8 @@ left join clients as cl on cl.idClient = sj.idClient " + If(idClient <> "", " wh
                     Dim array() As String = row.Cells(2).Value().ToString().Split(" ")
                     Dim cmd As New SqlCommand("
 declare @SubJob as int = " + row.Cells(0).Value().ToString() + "
-declare @numberClientN as int = " + If(array(0) = "", "0", array(0)) + "
-declare @numberClientL as int = " + If(row.Cells(3).Value().ToString() = "", "0", row.Cells(3).Value().ToString()) + "
+declare @numberClientN as int = " + If(numberClient = "", If(array(0) = "", "0", array(0)), numberClient) + "
+declare @numberClientL as int = " + If(numberClient = "", If(row.Cells(3).Value().ToString() = "", "0", row.Cells(3).Value().ToString()), numberClient) + "
 
 if (select COUNT(*) from subJobs as sj left join clients as cl on cl.idClient = sj.idClient where sj.idSubJob = @SubJob and (cl.numberClient = @numberClientN or cl.numberClient is Null))=0
 begin 

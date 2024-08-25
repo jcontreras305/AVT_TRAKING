@@ -41,7 +41,7 @@ Public Class Power_BI_Queries
 		If tvwTablePBI.Nodes IsNot Nothing Then
 			tvwTablePBI.Nodes.Clear()
 		End If
-		Dim arraySheets() As String = {"ALL", "ALL Barriers", "ALLCPH", "ALLHOURS", "CostHPTAS", "CostMth", "Scaffold", "ScaBTools", "ScaDTools", "ScaMTools", "ACM", "AR Invoices", "Invoices", "Invoices Cost", "Craft"}
+		Dim arraySheets() As String = {"ALL", "ALL Barriers", "ALLCPH", "ALLHOURS", "CostHPTAS", "CostMth", "Scaffold", "ScaBTools", "ScaDTools", "ScaMTools", "ACM", "ACMLF", "AR Invoices", "Invoices", "Invoices Cost", "Craft"}
 		Dim arrayAllBerries() As String = {"ALL Barriers 1", "ALL Barriers 2"}
 		Dim arrayALLCPH() As String = {"All CHP 1", "All CHP 2", "All CHP 3"}
 		Dim arrayALLHours() As String = {"All Hours 1", "All Hours 2", "Travelers", "Absents", "Count Work Code"}
@@ -220,6 +220,8 @@ END "
 							cmd1.CommandText = StartDate + vbCrLf + FinalDate + vbCrLf + ScaMTools
 						Case "ACM"
 							cmd1.CommandText = StartDate + vbCrLf + FinalDate + vbCrLf + ACM
+						Case "ACMLF"
+							cmd1.CommandText = StartDate + vbCrLf + FinalDate + vbCrLf + ACMLF
 						Case "AR Invoices"
 							cmd1.CommandText = StartDate + vbCrLf + FinalDate + vbCrLf + AR_Inovices
 						Case "Invoices"
@@ -301,6 +303,8 @@ END "
 					cmd.CommandText = "select * from PBI.[ScaMTools]"
 				Case "ACM"
 					cmd.CommandText = "select * from PBI.[ACM]"
+				Case "ACMLF"
+					cmd.CommandText = "select * from PBI.[ACMLF]"
 				Case "AR Invoices"
 					cmd.CommandText = "select * from PBI.[ARInvoices]"
 				Case "Invoices"
@@ -329,7 +333,7 @@ END "
 		End Try
 	End Function
 
-	Dim _All, _ALL_Barries1, _ALL_Barries2, _CostHPTAS, _CostMth, _Scaffold, _ScaBTools, _ScaDTools, _ScaMTools, _ACM, _AR_Inovices, _Invoices,
+	Dim _All, _ALL_Barries1, _ALL_Barries2, _CostHPTAS, _CostMth, _Scaffold, _ScaBTools, _ScaDTools, _ScaMTools, _ACM, _ACMLF, _AR_Inovices, _Invoices,
 _All_CHP_1, _All_CHP_2, _All_CHP_3,
 _All_Hours_1, _All_Hours_2, _Travelers, _Absents, _countWCEMP, _InvoicesCost, _craft As String
 
@@ -1310,8 +1314,42 @@ inner join job as jb on jb.jobNo = po.jobNo
 where kpi.dateWorked between @StartDate and @EndDate and kpi.install like 'ACM' or kpi.install like 'Asbestos'"
 			Return _ACM
 		End Get
-		Set(value As String)
+		Set(ByVal value As String)
+			_ACM = value
+		End Set
+	End Property
+	Public Property ACMLF() As String
+		Get
+			_ACMLF = "IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES where TABLE_SCHEMA = 'PBI' and TABLE_NAME = 'ACMLF')
+BEGIN 
+	drop table PBI.[ACMLF]
+END
+select 
+YEAR(kpi.dateWorked) as 'Year', MONTH(kpi.dateWorked) as 'Month',DATENAME(MONTH,kpi.dateWorked) as 'MonthN',
+kpi.install as 'IT',
+jb.jobNo as 'ClientID',
 
+kpi.dateWorked,
+CONCAT(wo.idWO,'-',tk.task) as 'idWO',
+po.idPO as 'Project Order',
+kpi.size,
+kpi.LF,
+SUM(kpi.hoursST + kpi.hoursOT) OVER (PARTITION BY YEAR(kpi.dateWorked),MONTH(kpi.dateWorked),kpi.dateWorked,kpi.install,jb.jobNo,CONCAT(wo.idWO,'-',tk.task),kpi.size,kpi.LF) as 'Hours',
+SUM(((((kpi.[size]+2*kpi.[thinck])*PI())/12)*kpi.[LF])) OVER (PARTITION BY YEAR(kpi.dateWorked),MONTH(kpi.dateWorked),kpi.dateWorked,kpi.install,jb.jobNo,CONCAT(wo.idWO,'-',tk.task),kpi.size,kpi.LF) as 'II SQFT',
+SUM(((((kpi.[size]+2*kpi.[thinck])*PI())/12)*kpi.[LF]) + kpi.SQF) OVER (PARTITION BY YEAR(kpi.dateWorked),MONTH(kpi.dateWorked),kpi.dateWorked,kpi.install,jb.jobNo,CONCAT(wo.idWO,'-',tk.task),kpi.size,kpi.LF) as 'Total SQF',
+SUM(ROUND((((((kpi.[size]+2*kpi.[thinck])*PI())/12)*kpi.[LF]) + kpi.SQF) / (kpi.hoursST + kpi.hoursOT),2)) OVER (PARTITION BY YEAR(kpi.dateWorked),MONTH(kpi.dateWorked),kpi.dateWorked,kpi.install,jb.jobNo,CONCAT(wo.idWO,'-',tk.task),kpi.size,kpi.LF) as 'SQF PH'
+INTO PBI.ACMLF
+from KPI as kpi
+inner join task as tk on tk.idAux = kpi.idAux
+inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO
+inner join projectOrder as po on po.idPO = wo.idPO and po.jobNo = wo.jobNo
+inner join job as jb on jb.jobNo = po.jobNo
+where kpi.dateWorked between @StartDate and @EndDate and kpi.install like 'Asbestos' or kpi.install like 'ACM'
+"
+			Return _ACMLF
+		End Get
+		Set(ByVal value As String)
+			_ACMLF = value
 		End Set
 	End Property
 

@@ -3604,7 +3604,7 @@ CREATE proc [dbo].[sp_SCF_Material_Inventory]
 @all as bit
 as
 begin
-select 
+select * from (select 
 jb.jobNo,
 pd.QID,
 pd.idProduct ,
@@ -3631,7 +3631,7 @@ inner join task as tk on tk.idAux = sc.idAux
 inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO
 inner join projectOrder as po on po.idPO = wo.idPO and po.jobNo = wo.jobNo 
 inner join job as jb1 on jb1.jobNo = po.jobNo
-where jb1.jobNo = jb.jobNo and pts.idProduct = pj.idProduct),0) as 'OnRent',
+where jb1.jobNo = jb.jobNo and pts.idProduct = pj.idProduct and pts.[status] = 't'),0) as 'OnRent',
 
 (ISNULL((select sum(pinc.quantity) from productComing as pinc 
 inner join incoming as inc on inc.ticketNum = pinc.ticketNum
@@ -3647,16 +3647,17 @@ inner join task as tk on tk.idAux = sc.idAux
 inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO
 inner join projectOrder as po on po.idPO = wo.idPO and po.jobNo = wo.jobNo 
 inner join job as jb1 on jb1.jobNo = po.jobNo
-where jb1.jobNo = jb.jobNo and pts.idProduct = pj.idProduct),0) as 'InYard',
+where jb1.jobNo = jb.jobNo and pts.idProduct = pj.idProduct and pts.[status] = 't' ),0) as 'InYard',
 --ISNULL(pd.quantity,0) as 'InYard'
 pd.[weight] as 'Weight'
 
 from  productJob as pj  
 inner join product as pd on pd.idProduct = pj.idProduct 
-left join job as jb on jb.jobNo = pj.jobNo
+inner join job as jb on jb.jobNo = pj.jobNo
 inner join clients as cl on cl.idClient = jb.idClient 
-where cl.numberClient like iif(@all = 1, '%%', concat('%',@numberClient,'%'))
-ORDER BY pd.idProduct
+where pj.qty > 0 and  cl.numberClient like iif(@all = 1, '%%', concat('%',@numberClient,'%'))
+) as T1 where T1.Incoming > 0 or T1.Outgoing > 0 or T1.Inventory > 0 or T1.OnRent > 0 or T1.InYard > 0 
+ORDER BY T1.idProduct
 end
 GO
 --##############################################################################################

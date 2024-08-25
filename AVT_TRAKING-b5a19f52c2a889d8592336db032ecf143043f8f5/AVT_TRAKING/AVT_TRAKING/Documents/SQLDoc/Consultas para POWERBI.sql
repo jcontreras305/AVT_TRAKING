@@ -776,6 +776,34 @@ insert into trackElemnts values
 (20,'Other Costs Name','Other Costs Name',0,'',1,''),
 (21,'Extra','Extra',1,'',1,''),
 (22,'GL Account','GL Account',0,'',1,'')
+--===============================================================================================================================================
+--====== ACMLF ==================================================================================================================================
+--===============================================================================================================================================
+IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES where TABLE_SCHEMA = 'PBI' and TABLE_NAME = 'ACMLF')
+BEGIN 
+	drop table PBI.[ACMLF]
+END
+select 
+YEAR(kpi.dateWorked) as 'Year', MONTH(kpi.dateWorked) as 'Month',DATENAME(MONTH,kpi.dateWorked) as 'MonthN',
+kpi.install as 'IT',
+jb.jobNo as 'ClientID',
+
+kpi.dateWorked,
+CONCAT(wo.idWO,'-',tk.task) as 'idWO',
+po.idPO as 'Project Order',
+kpi.size,
+kpi.LF,
+SUM(kpi.hoursST + kpi.hoursOT) OVER (PARTITION BY YEAR(kpi.dateWorked),MONTH(kpi.dateWorked),kpi.dateWorked,kpi.install,jb.jobNo,CONCAT(wo.idWO,'-',tk.task),kpi.size,kpi.LF) as 'Hours',
+SUM(((((kpi.[size]+2*kpi.[thinck])*PI())/12)*kpi.[LF])) OVER (PARTITION BY YEAR(kpi.dateWorked),MONTH(kpi.dateWorked),kpi.dateWorked,kpi.install,jb.jobNo,CONCAT(wo.idWO,'-',tk.task),kpi.size,kpi.LF) as 'II SQFT',
+SUM(((((kpi.[size]+2*kpi.[thinck])*PI())/12)*kpi.[LF]) + kpi.SQF) OVER (PARTITION BY YEAR(kpi.dateWorked),MONTH(kpi.dateWorked),kpi.dateWorked,kpi.install,jb.jobNo,CONCAT(wo.idWO,'-',tk.task),kpi.size,kpi.LF) as 'Total SQF',
+SUM(ROUND((((((kpi.[size]+2*kpi.[thinck])*PI())/12)*kpi.[LF]) + kpi.SQF) / (kpi.hoursST + kpi.hoursOT),2)) OVER (PARTITION BY YEAR(kpi.dateWorked),MONTH(kpi.dateWorked),kpi.dateWorked,kpi.install,jb.jobNo,CONCAT(wo.idWO,'-',tk.task),kpi.size,kpi.LF) as 'SQF PH'
+INTO PBI.ACMLF
+from KPI as kpi
+inner join task as tk on tk.idAux = kpi.idAux
+inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO
+inner join projectOrder as po on po.idPO = wo.idPO and po.jobNo = wo.jobNo
+inner join job as jb on jb.jobNo = po.jobNo
+where kpi.dateWorked between @StartDate and @EndDate and kpi.install like 'Asbestos' or kpi.install like 'ACM'
 
 --==============================================================================================================================================
 --====== CONT MTH =============================================================================================================================

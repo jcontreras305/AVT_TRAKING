@@ -436,6 +436,7 @@ Public Class ProjectsClients
             st.IdCliente = idCliente
             If txtCompanyName.Text <> "" Then
                 st.Company = txtCompanyName.Text
+                st.NumberClient = numberClient
             End If
         End If
         'Me.Visible = False

@@ -1,7 +1,7 @@
 ﻿Imports Microsoft.Office.Interop.Excel
 Imports System.Runtime.InteropServices
 Public Class scafoldTarking
-    Public IdCliente, Company As String
+    Public IdCliente, Company, NumberClient As String
 
     Dim tablaEmpleados As New Data.DataTable
     Dim tblProductInComing As New Data.DataTable
@@ -36,7 +36,8 @@ Public Class scafoldTarking
     Private Sub scafoldTarking_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         'IdCliente = "FA341EFA-3B42-42DE-89A1-C96FFCA0D128"
         'Company = "Cenovus Energy"
-        cargarDatosByClient(IdCliente, Company)
+        'NumberClient = 105
+        cargarDatosByClient(IdCliente, Company, NumberClient)
     End Sub
     Private Function llenarComboTag(ByVal cmb As ComboBox, ByVal tblTags As Data.DataTable) As Integer
         If tblTags.Rows.Count > 0 Then
@@ -96,12 +97,12 @@ Public Class scafoldTarking
     Private Sub btnSaveTable_Click(sender As Object, e As EventArgs) Handles btnSaveTable.Click
         Select Case selectedTable
             Case tblAreas.Name
-                If mtdScaffold.SaveAreas(tblAreas) Then
+                If mtdScaffold.SaveAreas(tblAreas, If(CompanyName = "", "", NumberClient)) Then
                     tblArea = mtdScaffold.llenarComboArea(cmbAreaID, If(IdCliente <> "", IdCliente, ""))
                     MsgBox("Sucessfull")
                 End If
             Case tblSubJobs.Name
-                If mtdScaffold.SaveSubJobs(tblSubJobs) Then
+                If mtdScaffold.SaveSubJobs(tblSubJobs, If(CompanyName = "", "", NumberClient)) Then
                     tblSubJob = mtdScaffold.llenarComboSubJob(cmbSubJob, If(IdCliente <> "", IdCliente, ""))
                     MsgBox("Sucessfull")
                 End If
@@ -115,7 +116,7 @@ Public Class scafoldTarking
                     Next
                 End If
             Case tblJobCat.Name
-                If mtdScaffold.SaveJobCat(tblJobCat) Then
+                If mtdScaffold.SaveJobCat(tblJobCat, If(CompanyName = "", "", NumberClient)) Then
                     tblCat = mtdScaffold.llenarComboJobCat(cmbJobCAT, If(IdCliente <> "", IdCliente, ""))
                     MsgBox("Sucessfull")
                 End If
@@ -4324,7 +4325,7 @@ Public Class scafoldTarking
     End Sub
     Private Sub btnReloadCostumer_Click(sender As Object, e As EventArgs) Handles btnReloadCostumer.Click
         If idClientAuxCostumer <> "" Then
-            cargarDatosByClient(idClientAuxCostumer, txtCompanyName.Text)
+            cargarDatosByClient(idClientAuxCostumer, txtCompanyName.Text, NumberClient)
         End If
     End Sub
 
@@ -4380,10 +4381,11 @@ Public Class scafoldTarking
 
 
 
-    Public Function cargarDatosByClient(ByVal idClientF As String, ByVal companyNameF As String) As Boolean
+    Public Function cargarDatosByClient(ByVal idClientF As String, ByVal companyNameF As String, ByVal numClient As String) As Boolean
         Try
             IdCliente = idClientF
             Company = companyNameF
+            NumberClient = numClient
             If IdCliente <> "" Then
                 lblCompanyName.Text = "Client: " + Company
             Else
@@ -4607,5 +4609,9 @@ Public Class scafoldTarking
                 e.Handled = True
             End If
         End If
+    End Sub
+
+    Private Sub tblAreas_CellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles tblAreas.CellEndEdit
+
     End Sub
 End Class
