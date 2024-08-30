@@ -1845,7 +1845,8 @@ where jobNo = " + jobno + ""
                 '                cmd.CommandText = "select pd.idProduct, price, um,name, pdj.qty as 'quantity',PLF, PSQF,QID from productJob as pdj
                 'inner join product as pd on pd.idProduct = pdj.idProduct
                 'where jobNo = " + jobno + ""
-                cmd.CommandText = "select pd.idProduct, price, um,name, 
+                cmd.CommandText = "select * from(
+select pd.idProduct, price, um,name, 
 ISNULL((select sum(pinc.quantity) from productComing as pinc 
 inner join incoming as inc on inc.ticketNum = pinc.ticketNum
 where inc.jobNo = pdj.jobNo and pinc.idProduct = pdj.idProduct),0)
@@ -1855,7 +1856,7 @@ inner join outgoing as outg on outg.ticketNum = pout.ticketNum
 where outg.jobNo = pdj.jobNo and pout.idProduct = pdj.idProduct),0) as 'quantity',
 PLF, PSQF,QID from productJob as pdj
 inner join product as pd on pd.idProduct = pdj.idProduct
-where jobNo =" + jobno
+where  jobNo = " + jobno + ") as T1 where T1.quantity > 0 "
             Else
                 cmd.CommandText = "select idProduct, price, um,name,quantity,PLF,PSQF,QID from product"
             End If
