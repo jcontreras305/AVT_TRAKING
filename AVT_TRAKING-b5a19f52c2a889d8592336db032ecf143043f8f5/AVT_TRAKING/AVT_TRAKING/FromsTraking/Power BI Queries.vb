@@ -1334,10 +1334,11 @@ CONCAT(wo.idWO,'-',tk.task) as 'idWO',
 po.idPO as 'Project Order',
 kpi.size,
 kpi.LF,
-SUM(kpi.hoursST + kpi.hoursOT) OVER (PARTITION BY YEAR(kpi.dateWorked),MONTH(kpi.dateWorked),kpi.dateWorked,kpi.install,jb.jobNo,CONCAT(wo.idWO,'-',tk.task),kpi.size,kpi.LF) as 'Hours',
-SUM(((((kpi.[size]+2*kpi.[thinck])*PI())/12)*kpi.[LF])) OVER (PARTITION BY YEAR(kpi.dateWorked),MONTH(kpi.dateWorked),kpi.dateWorked,kpi.install,jb.jobNo,CONCAT(wo.idWO,'-',tk.task),kpi.size,kpi.LF) as 'II SQFT',
-SUM(((((kpi.[size]+2*kpi.[thinck])*PI())/12)*kpi.[LF]) + kpi.SQF) OVER (PARTITION BY YEAR(kpi.dateWorked),MONTH(kpi.dateWorked),kpi.dateWorked,kpi.install,jb.jobNo,CONCAT(wo.idWO,'-',tk.task),kpi.size,kpi.LF) as 'Total SQF',
-SUM(ROUND((((((kpi.[size]+2*kpi.[thinck])*PI())/12)*kpi.[LF]) + kpi.SQF) / (kpi.hoursST + kpi.hoursOT),2)) OVER (PARTITION BY YEAR(kpi.dateWorked),MONTH(kpi.dateWorked),kpi.dateWorked,kpi.install,jb.jobNo,CONCAT(wo.idWO,'-',tk.task),kpi.size,kpi.LF) as 'SQF PH'
+SUM(kpi.hoursST + kpi.hoursOT) OVER (PARTITION BY YEAR(kpi.dateWorked),MONTH(kpi.dateWorked),kpi.dateWorked,kpi.install,jb.jobNo,CONCAT(wo.idWO,'-',tk.task),kpi.size,kpi.LF,kpi.description) as 'Hours',
+SUM(((((kpi.[size]+2*kpi.[thinck])*PI())/12)*kpi.[LF])) OVER (PARTITION BY YEAR(kpi.dateWorked),MONTH(kpi.dateWorked),kpi.dateWorked,kpi.install,jb.jobNo,CONCAT(wo.idWO,'-',tk.task),kpi.size,kpi.LF,kpi.description) as 'II SQFT',
+SUM(((((kpi.[size]+2*kpi.[thinck])*PI())/12)*kpi.[LF]) + kpi.SQF) OVER (PARTITION BY YEAR(kpi.dateWorked),MONTH(kpi.dateWorked),kpi.dateWorked,kpi.install,jb.jobNo,CONCAT(wo.idWO,'-',tk.task),kpi.size,kpi.LF,kpi.description) as 'Total SQF',
+SUM(ROUND((((((kpi.[size]+2*kpi.[thinck])*PI())/12)*kpi.[LF]) + kpi.SQF) / (kpi.hoursST + kpi.hoursOT),2)) OVER (PARTITION BY YEAR(kpi.dateWorked),MONTH(kpi.dateWorked),kpi.dateWorked,kpi.install,jb.jobNo,CONCAT(wo.idWO,'-',tk.task),kpi.size,kpi.LF,kpi.description) as 'SQF PH',
+kpi.[description] as 'Description'
 INTO PBI.ACMLF
 from KPI as kpi
 inner join task as tk on tk.idAux = kpi.idAux
