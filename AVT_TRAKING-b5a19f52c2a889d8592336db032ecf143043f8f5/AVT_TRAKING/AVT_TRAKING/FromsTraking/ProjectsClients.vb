@@ -573,6 +573,14 @@ Public Class ProjectsClients
         End Try
     End Sub
 
+    Private Sub btnWithoutWorking_Click(sender As Object, e As EventArgs) Handles btnWithoutWorking.Click
+        Dim ww As New WithoutWorking
+        If numberClient IsNot Nothing Then
+            ww.clientId = Client.NumberClient
+        End If
+        ww.ShowDialog()
+    End Sub
+
     Private Sub btnTrackVehicle_Click(sender As Object, e As EventArgs) Handles btnTrackVehicle.Click
         Dim VT As New VehicleTrack
         If numberClient IsNot Nothing Then

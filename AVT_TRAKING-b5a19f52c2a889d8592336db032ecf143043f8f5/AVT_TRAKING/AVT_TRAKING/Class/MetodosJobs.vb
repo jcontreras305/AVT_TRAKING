@@ -594,6 +594,7 @@ from workOrder
             Dim flag As Boolean = True
             For Each row As DataGridViewRow In tbl.SelectedRows
                 Dim cmd As New SqlCommand("sp_delete_project", conn)
+                cmd.CommandTimeout = 250
                 cmd.CommandType = CommandType.StoredProcedure
                 cmd.Parameters.AddWithValue("@idAux", row.Cells("idAux").Value)
                 cmd.Parameters.AddWithValue("@idAuxWO", row.Cells("idAuxWO").Value)
