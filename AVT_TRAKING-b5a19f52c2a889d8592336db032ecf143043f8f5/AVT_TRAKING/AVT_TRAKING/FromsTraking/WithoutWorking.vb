@@ -23,6 +23,10 @@ Public Class WithoutWorking
         btnMaximize.Visible = False
         btnRestore.Visible = True
     End Sub
+    Private Sub TitleBar_MouseMove(sender As Object, e As MouseEventArgs) Handles TitleBar.MouseMove
+        ReleaseCapture()
+        SendMessage(Me.Handle, &H112&, &HF012&, 0)
+    End Sub
     <DllImport("user32.DLL", EntryPoint:="ReleaseCapture")>
     Private Shared Sub ReleaseCapture()
     End Sub

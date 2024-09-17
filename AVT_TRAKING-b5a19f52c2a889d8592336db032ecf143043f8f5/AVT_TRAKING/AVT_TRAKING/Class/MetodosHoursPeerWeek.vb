@@ -1326,7 +1326,7 @@ BEGIN
 END
 select * from projects", conn)
             Dim dt As New DataTable
-
+            cmd.CommandTimeout = 250
             If cmd.ExecuteNonQuery Then
                 Dim da As New SqlDataAdapter(cmd)
                 da.Fill(dt)

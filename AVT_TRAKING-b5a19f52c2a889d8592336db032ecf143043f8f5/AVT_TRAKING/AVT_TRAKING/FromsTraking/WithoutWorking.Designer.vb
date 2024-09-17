@@ -24,6 +24,8 @@ Partial Class WithoutWorking
     Private Sub InitializeComponent()
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
         Me.TitleBar = New System.Windows.Forms.Panel()
+        Me.Label5 = New System.Windows.Forms.Label()
+        Me.cmbShow = New System.Windows.Forms.ComboBox()
         Me.chbAllPOs = New System.Windows.Forms.CheckBox()
         Me.chbAllJobs = New System.Windows.Forms.CheckBox()
         Me.btnMaximize = New System.Windows.Forms.PictureBox()
@@ -42,8 +44,6 @@ Partial Class WithoutWorking
         Me.tblProjects = New System.Windows.Forms.DataGridView()
         Me.Panel3 = New System.Windows.Forms.Panel()
         Me.btnDelete = New System.Windows.Forms.Button()
-        Me.cmbShow = New System.Windows.Forms.ComboBox()
-        Me.Label5 = New System.Windows.Forms.Label()
         Me.TableLayoutPanel1.SuspendLayout()
         Me.TitleBar.SuspendLayout()
         CType(Me.btnMaximize, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -101,6 +101,26 @@ Partial Class WithoutWorking
         Me.TitleBar.Name = "TitleBar"
         Me.TitleBar.Size = New System.Drawing.Size(1064, 118)
         Me.TitleBar.TabIndex = 0
+        '
+        'Label5
+        '
+        Me.Label5.AutoSize = True
+        Me.Label5.Location = New System.Drawing.Point(25, 86)
+        Me.Label5.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.Label5.Name = "Label5"
+        Me.Label5.Size = New System.Drawing.Size(47, 17)
+        Me.Label5.TabIndex = 29
+        Me.Label5.Text = "Show"
+        '
+        'cmbShow
+        '
+        Me.cmbShow.FormattingEnabled = True
+        Me.cmbShow.Items.AddRange(New Object() {"All", "Wihtout Working"})
+        Me.cmbShow.Location = New System.Drawing.Point(80, 83)
+        Me.cmbShow.Margin = New System.Windows.Forms.Padding(4)
+        Me.cmbShow.Name = "cmbShow"
+        Me.cmbShow.Size = New System.Drawing.Size(160, 25)
+        Me.cmbShow.TabIndex = 28
         '
         'chbAllPOs
         '
@@ -293,31 +313,12 @@ Partial Class WithoutWorking
         Me.btnDelete.Location = New System.Drawing.Point(4, 0)
         Me.btnDelete.Margin = New System.Windows.Forms.Padding(4)
         Me.btnDelete.Name = "btnDelete"
-        Me.btnDelete.Size = New System.Drawing.Size(94, 40)
+        Me.btnDelete.Size = New System.Drawing.Size(122, 40)
         Me.btnDelete.TabIndex = 26
         Me.btnDelete.Text = "Delete"
+        Me.btnDelete.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.btnDelete.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
         Me.btnDelete.UseVisualStyleBackColor = True
-        '
-        'cmbShow
-        '
-        Me.cmbShow.FormattingEnabled = True
-        Me.cmbShow.Items.AddRange(New Object() {"All", "Wihtout Working"})
-        Me.cmbShow.Location = New System.Drawing.Point(80, 83)
-        Me.cmbShow.Margin = New System.Windows.Forms.Padding(4)
-        Me.cmbShow.Name = "cmbShow"
-        Me.cmbShow.Size = New System.Drawing.Size(160, 25)
-        Me.cmbShow.TabIndex = 28
-        '
-        'Label5
-        '
-        Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(25, 86)
-        Me.Label5.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(47, 17)
-        Me.Label5.TabIndex = 29
-        Me.Label5.Text = "Show"
         '
         'WithoutWorking
         '

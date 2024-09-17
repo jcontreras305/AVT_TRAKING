@@ -459,6 +459,16 @@ from workOrder
                     Exit While
                 End While
                 reader1.Close()
+                If projectN.idAuxWO = "" Then
+                    Dim cmdCosultaidAuxWO As New SqlCommand("select idAuxWO  from workOrder where idWO = '" + projectN.idWorkOrder + "' and idPO = '" + projectN.idPO + "' and jobNo = " + CStr(projectN.jobNum), conn)
+                    Dim readerWO As SqlDataReader = cmdCosultaidAuxWO.ExecuteReader()
+                    While readerWO.Read()
+                        projectN.idAuxWO = readerWO("idAuxWO")
+                        Exit While
+                    End While
+                    readerWO.Close()
+                End If
+                reader1.Close()
                 Dim cmdCosultaTask As New SqlCommand("select count(task) as 'cantidadTask' from task where idAuxWO= '" + projectN.idAuxWO + "' and task = '" + CStr(projectN.idTask) + "'", conn)
                 Dim reader2 As SqlDataReader = cmdCosultaTask.ExecuteReader()
                 Dim flagTask As String = ""
