@@ -155,9 +155,6 @@ Module ServerDirectories
                     crConnInfo.Password = Pass
                     crLogOnInfo = crTable.LogOnInfo
                     crLogOnInfo.ConnectionInfo = crConnInfo
-                    If timeOut > 0 Then
-                        crLogOnInfo.ConnectionInfo. = timeOut
-                    End If
                     crTable.ApplyLogOnInfo(crLogOnInfo)
                     crTable.LogOnInfo.ConnectionInfo.Password = Pass
                     crTable.Location = DBName & ".dbo." & crTable.Name

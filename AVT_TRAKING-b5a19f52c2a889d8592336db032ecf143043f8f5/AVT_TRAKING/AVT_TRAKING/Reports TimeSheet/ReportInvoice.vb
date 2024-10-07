@@ -306,7 +306,7 @@ inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO
 inner join projectOrder as po on po.idPO = wo.idPO and wo.jobNo = po.jobNo
 inner join job as jb on po.jobNo = jb.jobNo
 inner join clients as cl on cl.idClient = jb.idClient
-where hw.dateWorked between @initialDate and @finalDate and cl.numberClient = @numberClient " + If(all, "", " and po.idPO = " + idPO) + "
+where hw.dateWorked between @initialDate and @finalDate and cl.numberClient = @numberClient " + If(all, "", If(idPO <> "", " and po.idPO = " + idPO, "")) + "
 union all
 select distinct po.idPO  from expensesUsed as exu
 inner join task as tk on tk.idAux = exu.idAux
@@ -314,7 +314,7 @@ inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO
 inner join projectOrder as po on po.idPO = wo.idPO and wo.jobNo = po.jobNo
 inner join job as jb on po.jobNo = jb.jobNo
 inner join clients as cl on cl.idClient = jb.idClient
-where exu.dateExpense between @initialDate and @finalDate  and cl.numberClient = @numberClient  " + If(all, "", " and po.idPO = " + idPO) + "
+where exu.dateExpense between @initialDate and @finalDate  and cl.numberClient = @numberClient  " + If(all, "", If(idPO <> "", " and po.idPO = " + idPO, "")) + "
 union all
 select distinct po.idPO  from materialUsed as mu 
 inner join task as tk on tk.idAux = mu.idAux
@@ -322,7 +322,7 @@ inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO
 inner join projectOrder as po on po.idPO = wo.idPO and wo.jobNo = po.jobNo
 inner join job as jb on po.jobNo = jb.jobNo
 inner join clients as cl on cl.idClient = jb.idClient
-where mu.dateMaterial between @initialDate and @finalDate  and cl.numberClient = @numberClient " + If(all, "", " and po.idPO = " + idPO) + ")as t1   
+where mu.dateMaterial between @initialDate and @finalDate  and cl.numberClient = @numberClient " + If(all, "", If(idPO <> "", " and po.idPO = " + idPO, "")) + ")as t1   
 order by t1.idPO asc", conn)
             cmd.CommandTimeout = 350
             Dim dr As SqlDataReader = cmd.ExecuteReader()
