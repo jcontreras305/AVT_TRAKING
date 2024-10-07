@@ -251,7 +251,7 @@ Partial Class ReportInvoice
         Me.Label5.Location = New System.Drawing.Point(263, 49)
         Me.Label5.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(101, 17)
+        Me.Label5.Size = New System.Drawing.Size(94, 16)
         Me.Label5.TabIndex = 8
         Me.Label5.Text = "Project Oreder"
         '
@@ -261,7 +261,7 @@ Partial Class ReportInvoice
         Me.Label4.Location = New System.Drawing.Point(263, 20)
         Me.Label4.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(43, 17)
+        Me.Label4.Size = New System.Drawing.Size(40, 16)
         Me.Label4.TabIndex = 7
         Me.Label4.Text = "Client"
         '
@@ -271,7 +271,7 @@ Partial Class ReportInvoice
         Me.chbAllPO.Location = New System.Drawing.Point(535, 50)
         Me.chbAllPO.Margin = New System.Windows.Forms.Padding(4)
         Me.chbAllPO.Name = "chbAllPO"
-        Me.chbAllPO.Size = New System.Drawing.Size(69, 21)
+        Me.chbAllPO.Size = New System.Drawing.Size(66, 20)
         Me.chbAllPO.TabIndex = 6
         Me.chbAllPO.Text = "All PO"
         Me.chbAllPO.UseVisualStyleBackColor = True
@@ -300,7 +300,7 @@ Partial Class ReportInvoice
         Me.Label3.Location = New System.Drawing.Point(8, 54)
         Me.Label3.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(67, 17)
+        Me.Label3.Size = New System.Drawing.Size(63, 16)
         Me.Label3.TabIndex = 3
         Me.Label3.Text = "End Date"
         '
@@ -310,7 +310,7 @@ Partial Class ReportInvoice
         Me.Label2.Location = New System.Drawing.Point(8, 20)
         Me.Label2.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(72, 17)
+        Me.Label2.Size = New System.Drawing.Size(66, 16)
         Me.Label2.TabIndex = 2
         Me.Label2.Text = "Start Date"
         '
@@ -653,7 +653,7 @@ Partial Class ReportInvoice
         Me.Label8.Location = New System.Drawing.Point(4, 219)
         Me.Label8.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label8.Name = "Label8"
-        Me.Label8.Size = New System.Drawing.Size(72, 17)
+        Me.Label8.Size = New System.Drawing.Size(66, 16)
         Me.Label8.TabIndex = 15
         Me.Label8.Text = "Start Date"
         '
@@ -673,7 +673,7 @@ Partial Class ReportInvoice
         Me.chbAllPOFilter.Location = New System.Drawing.Point(185, 79)
         Me.chbAllPOFilter.Margin = New System.Windows.Forms.Padding(4)
         Me.chbAllPOFilter.Name = "chbAllPOFilter"
-        Me.chbAllPOFilter.Size = New System.Drawing.Size(69, 21)
+        Me.chbAllPOFilter.Size = New System.Drawing.Size(66, 20)
         Me.chbAllPOFilter.TabIndex = 13
         Me.chbAllPOFilter.Text = "All PO"
         Me.chbAllPOFilter.UseVisualStyleBackColor = True
@@ -685,7 +685,7 @@ Partial Class ReportInvoice
         Me.Label6.Location = New System.Drawing.Point(0, 48)
         Me.Label6.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(101, 17)
+        Me.Label6.Size = New System.Drawing.Size(94, 16)
         Me.Label6.TabIndex = 12
         Me.Label6.Text = "Project Oreder"
         '
@@ -696,7 +696,7 @@ Partial Class ReportInvoice
         Me.Label7.Location = New System.Drawing.Point(0, 18)
         Me.Label7.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(43, 17)
+        Me.Label7.Size = New System.Drawing.Size(40, 16)
         Me.Label7.TabIndex = 11
         Me.Label7.Text = "Client"
         '

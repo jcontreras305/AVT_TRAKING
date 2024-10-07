@@ -201,50 +201,54 @@ Public Class ProjectsCosts
     End Function
 
     Private Sub btnNextTask_Click(sender As Object, e As EventArgs) Handles btnNextTask.Click
-        If tablasDeTareas.Rows.Count > 1 Then
-            Dim contRow As Integer = tablasDeTareas.Rows.Count
-            Dim index As Integer = 0
-            For Each row As DataRow In tablasDeTareas.Rows
-                If row.ItemArray(3) = task And row.ItemArray(2) = WorkOrder And row.ItemArray(0) = JobNumber Then
-                    Exit For
-                Else
-                    index = index + 1
-                End If
-            Next
-            If index = contRow - 1 Then
-                index = 0
-                flagBtnNextBackFind = True
-                If cargarDatosProjecto(tablasDeTareas.Rows(index).ItemArray(0), tablasDeTareas.Rows(index).ItemArray(5), tablasDeTareas.Rows(index).ItemArray(3), tablasDeTareas.Rows(index).ItemArray(1)) Then
-                    If chbComplete.Checked() = False Then
-                        activarCampos(True)
+        Try
+            If tablasDeTareas.Rows.Count > 1 Then
+                Dim contRow As Integer = tablasDeTareas.Rows.Count
+                Dim index As Integer = 0
+                For Each row As DataRow In tablasDeTareas.Rows
+                    If row.ItemArray(3) = task And row.ItemArray(2) = WorkOrder And row.ItemArray(0) = JobNumber Then
+                        Exit For
+                    Else
+                        index = index + 1
+                    End If
+                Next
+                If index = contRow - 1 Then
+                    index = 0
+                    flagBtnNextBackFind = True
+                    If cargarDatosProjecto(tablasDeTareas.Rows(index).ItemArray(0), tablasDeTareas.Rows(index).ItemArray(5), tablasDeTareas.Rows(index).ItemArray(3), tablasDeTareas.Rows(index).ItemArray(1)) Then
+                        If chbComplete.Checked() = False Then
+                            activarCampos(True)
+                        Else
+                            activarCampos(False)
+                        End If
                     Else
                         activarCampos(False)
                     End If
+                    If tablasDeTareas.Rows IsNot Nothing Then
+                        txtElementsRadar.Text = CStr(index + 1) + " of " + tablasDeTareas.Rows.Count.ToString()
+                    End If
+                    flagBtnNextBackFind = False
                 Else
-                    activarCampos(False)
-                End If
-                If tablasDeTareas.Rows IsNot Nothing Then
-                    txtElementsRadar.Text = CStr(index + 1) + " of " + tablasDeTareas.Rows.Count.ToString()
-                End If
-                flagBtnNextBackFind = False
-            Else
-                index += 1
-                flagBtnNextBackFind = True
-                If cargarDatosProjecto(tablasDeTareas.Rows(index).ItemArray(0), tablasDeTareas.Rows(index).ItemArray(5), tablasDeTareas.Rows(index).ItemArray(3), tablasDeTareas.Rows(index).ItemArray(1)) Then
-                    If chbComplete.Checked() = False Then
-                        activarCampos(True)
+                    index += 1
+                    flagBtnNextBackFind = True
+                    If cargarDatosProjecto(tablasDeTareas.Rows(index).ItemArray(0), tablasDeTareas.Rows(index).ItemArray(5), tablasDeTareas.Rows(index).ItemArray(3), tablasDeTareas.Rows(index).ItemArray(1)) Then
+                        If chbComplete.Checked() = False Then
+                            activarCampos(True)
+                        Else
+                            activarCampos(False)
+                        End If
                     Else
                         activarCampos(False)
                     End If
-                Else
-                    activarCampos(False)
+                    If tablasDeTareas.Rows IsNot Nothing Then
+                        txtElementsRadar.Text = CStr(index + 1) + " of " + tablasDeTareas.Rows.Count.ToString()
+                    End If
+                    flagBtnNextBackFind = False
                 End If
-                If tablasDeTareas.Rows IsNot Nothing Then
-                    txtElementsRadar.Text = CStr(index + 1) + " of " + tablasDeTareas.Rows.Count.ToString()
-                End If
-                flagBtnNextBackFind = False
             End If
-        End If
+        Catch ex As Exception
+            MsgBox(ex.Message)
+        End Try
     End Sub
 
     Private Sub btnAfterTask_Click(sender As Object, e As EventArgs) Handles btnAfterTask.Click

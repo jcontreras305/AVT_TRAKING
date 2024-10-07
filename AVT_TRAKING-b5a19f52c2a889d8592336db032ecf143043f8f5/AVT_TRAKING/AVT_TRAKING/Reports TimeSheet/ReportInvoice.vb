@@ -296,22 +296,35 @@ order by inv.invoice", conn)
     Public Function llenarTableInvoicePO(ByVal clientNumber As String, ByVal startDate As String, ByVal endDate As String, ByVal idPO As String, ByVal all As Boolean, ByVal tbl As DataGridView) As Boolean
         Try
             conectar()
-            Dim cmd As New SqlCommand("select distinct
-po.idPO , ISNULL((select top 1 invoice from invoice as inv where (inv.startDate between '" + startDate + "' and '" + endDate + "' or inv.FinalDate between '" + startDate + "' and '" + endDate + "') and inv.idPO = po.idPO),'') as 'Invoice'
-from clients as cl 
-inner join job as jb on cl.idClient = jb.idClient
-inner join projectOrder as po on po.jobNo = jb.jobNo
-inner join workOrder as wo on wo.idPO = po.idPO and wo.jobNo = po.jobNo
-inner join task as tk on tk.idAuxWO = wo.idAuxWO
-left join hoursWorked as hw on hw.idAux = tk.idAux
-left join materialUsed as mtu on mtu.idAux = tk.idAux
-left join expensesUsed as exu on exu.idAux = tk.idAux
-where (hw.dateWorked between '" + startDate + "' and '" + endDate + "' 
-	or exu.dateExpense between '" + startDate + "' and '" + endDate + "'
-	or mtu.dateMaterial between '" + startDate + "' and '" + endDate + "') 
-	and cl.numberClient = " + clientNumber + " and po.idPO like " + If(all, "'%%'", "'" + idPO + "' 
-order by po.idPO asc"), conn)
-            cmd.CommandTimeout = 200
+            Dim cmd As New SqlCommand("declare @initialDate as date = '" + startDate + "'
+declare @finalDate as date = '" + endDate + "' 
+declare @numberClient as int = " & clientNumber & "
+select distinct t1.idPO ,ISNULL((select top 1 invoice from invoice as inv where (inv.startDate between @initialDate and @finalDate or inv.FinalDate between @initialDate and @finalDate) and inv.idPO = t1.idPO),'') as 'Invoice' from(
+select distinct po.idPO  from hoursWorked as hw 
+inner join task as tk on tk.idAux = hw.idAux
+inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO 
+inner join projectOrder as po on po.idPO = wo.idPO and wo.jobNo = po.jobNo
+inner join job as jb on po.jobNo = jb.jobNo
+inner join clients as cl on cl.idClient = jb.idClient
+where hw.dateWorked between @initialDate and @finalDate and cl.numberClient = @numberClient " + If(all, "", " and po.idPO = " + idPO) + "
+union all
+select distinct po.idPO  from expensesUsed as exu
+inner join task as tk on tk.idAux = exu.idAux
+inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO 
+inner join projectOrder as po on po.idPO = wo.idPO and wo.jobNo = po.jobNo
+inner join job as jb on po.jobNo = jb.jobNo
+inner join clients as cl on cl.idClient = jb.idClient
+where exu.dateExpense between @initialDate and @finalDate  and cl.numberClient = @numberClient  " + If(all, "", " and po.idPO = " + idPO) + "
+union all
+select distinct po.idPO  from materialUsed as mu 
+inner join task as tk on tk.idAux = mu.idAux
+inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO 
+inner join projectOrder as po on po.idPO = wo.idPO and wo.jobNo = po.jobNo
+inner join job as jb on po.jobNo = jb.jobNo
+inner join clients as cl on cl.idClient = jb.idClient
+where mu.dateMaterial between @initialDate and @finalDate  and cl.numberClient = @numberClient " + If(all, "", " and po.idPO = " + idPO) + ")as t1   
+order by t1.idPO asc", conn)
+            cmd.CommandTimeout = 350
             Dim dr As SqlDataReader = cmd.ExecuteReader()
             tbl.Rows.Clear()
             While dr.Read()
@@ -373,6 +386,7 @@ end", conn)
                 Dim cmd As New SqlCommand("
 	                insert into tempInvoice values ('" + row.Cells(1).Value.ToString() + "'," + row.Cells(0).Value.ToString() + ",(select top 1 idClient from clients where numberClient = " + clientNumber + "),'" + startDate + "','" + Finaldate + "')", conn)
                 cmd.Transaction = tran
+                cmd.CommandTimeout = 200
                 If cmd.ExecuteNonQuery > 0 Then
                     flag = True
                 Else
