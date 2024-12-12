@@ -431,4 +431,28 @@ where pds.idDismantle = '" + DisID + "' and tag = '" + tag + "'", conn)
             desconectar()
         End Try
     End Function
+    Public Function findJobNoByTag(ByVal idTag) As String
+        Try
+            Dim JobNo = ""
+            conectar()
+            Dim cmd As New SqlCommand("select jb.jobNo from dismantle  as ds
+inner join scaffoldTraking as sc on sc.tag = ds.tag 
+inner join task  as tk on tk.idAux = sc.idAux
+inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO 
+inner join projectOrder as po on po.idPO= wo.idPO and po.jobNo = wo.jobNo 
+inner join job as jb on jb.jobNo = po.jobNo 
+inner join clients as cl on cl.idClient = jb.idClient
+where ds.tag = '" + idTag + "'", conn)
+            Dim dr As SqlDataReader = cmd.ExecuteReader()
+            While dr.Read()
+                JobNo = CStr(dr("jobNo"))
+            End While
+            dr.Close()
+            Return JobNo
+        Catch ex As Exception
+            Return ""
+        Finally
+            desconectar()
+        End Try
+    End Function
 End Class

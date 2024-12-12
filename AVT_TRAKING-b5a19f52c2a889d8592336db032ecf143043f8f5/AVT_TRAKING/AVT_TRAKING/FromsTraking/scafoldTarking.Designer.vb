@@ -410,6 +410,7 @@ Partial Class scafoldTarking
         Me.Panel87 = New System.Windows.Forms.Panel()
         Me.Label70 = New System.Windows.Forms.Label()
         Me.Panel88 = New System.Windows.Forms.Panel()
+        Me.btnRPTAllDismanlte = New System.Windows.Forms.Button()
         Me.btnReportDismantled = New System.Windows.Forms.Button()
         Me.btnFindDismantle = New System.Windows.Forms.Button()
         Me.btnUploadExcelDismantle = New System.Windows.Forms.Button()
@@ -5371,6 +5372,7 @@ Partial Class scafoldTarking
         'Panel88
         '
         Me.Panel88.BackColor = System.Drawing.Color.FromArgb(CType(CType(83, Byte), Integer), CType(CType(93, Byte), Integer), CType(CType(102, Byte), Integer))
+        Me.Panel88.Controls.Add(Me.btnRPTAllDismanlte)
         Me.Panel88.Controls.Add(Me.btnReportDismantled)
         Me.Panel88.Controls.Add(Me.btnFindDismantle)
         Me.Panel88.Controls.Add(Me.btnUploadExcelDismantle)
@@ -5383,6 +5385,25 @@ Partial Class scafoldTarking
         Me.Panel88.Size = New System.Drawing.Size(818, 59)
         Me.Panel88.TabIndex = 5
         '
+        'btnRPTAllDismanlte
+        '
+        Me.btnRPTAllDismanlte.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnRPTAllDismanlte.FlatAppearance.BorderSize = 0
+        Me.btnRPTAllDismanlte.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(58, Byte), Integer), CType(CType(115, Byte), Integer))
+        Me.btnRPTAllDismanlte.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnRPTAllDismanlte.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnRPTAllDismanlte.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.btnRPTAllDismanlte.Image = Global.AVT_TRAKING.My.Resources.Resources.report
+        Me.btnRPTAllDismanlte.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnRPTAllDismanlte.Location = New System.Drawing.Point(17, 11)
+        Me.btnRPTAllDismanlte.Margin = New System.Windows.Forms.Padding(4)
+        Me.btnRPTAllDismanlte.Name = "btnRPTAllDismanlte"
+        Me.btnRPTAllDismanlte.Size = New System.Drawing.Size(173, 36)
+        Me.btnRPTAllDismanlte.TabIndex = 35
+        Me.btnRPTAllDismanlte.Text = "RPT All Dismantle"
+        Me.btnRPTAllDismanlte.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.btnRPTAllDismanlte.UseVisualStyleBackColor = True
+        '
         'btnReportDismantled
         '
         Me.btnReportDismantled.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
@@ -5393,7 +5414,7 @@ Partial Class scafoldTarking
         Me.btnReportDismantled.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.btnReportDismantled.Image = Global.AVT_TRAKING.My.Resources.Resources.report
         Me.btnReportDismantled.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnReportDismantled.Location = New System.Drawing.Point(153, 14)
+        Me.btnReportDismantled.Location = New System.Drawing.Point(198, 12)
         Me.btnReportDismantled.Margin = New System.Windows.Forms.Padding(4)
         Me.btnReportDismantled.Name = "btnReportDismantled"
         Me.btnReportDismantled.Size = New System.Drawing.Size(113, 36)
@@ -5427,7 +5448,7 @@ Partial Class scafoldTarking
         Me.btnUploadExcelDismantle.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.btnUploadExcelDismantle.Image = Global.AVT_TRAKING.My.Resources.Resources.upload2
         Me.btnUploadExcelDismantle.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnUploadExcelDismantle.Location = New System.Drawing.Point(299, 16)
+        Me.btnUploadExcelDismantle.Location = New System.Drawing.Point(344, 14)
         Me.btnUploadExcelDismantle.Margin = New System.Windows.Forms.Padding(4)
         Me.btnUploadExcelDismantle.Name = "btnUploadExcelDismantle"
         Me.btnUploadExcelDismantle.Size = New System.Drawing.Size(164, 28)
@@ -8713,4 +8734,5 @@ Partial Class scafoldTarking
     Friend WithEvents ProductDescription As DataGridViewTextBoxColumn
     Friend WithEvents idProductInComing As DataGridViewTextBoxColumn
     Friend WithEvents cmbJobNoUtilization As ComboBox
+    Friend WithEvents btnRPTAllDismanlte As Button
 End Class

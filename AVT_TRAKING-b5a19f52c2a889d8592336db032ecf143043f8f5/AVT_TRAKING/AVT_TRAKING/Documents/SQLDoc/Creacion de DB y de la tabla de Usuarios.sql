@@ -1850,6 +1850,15 @@ GO
 ALTER TABLE RFIScaffoldEst WITH CHECK ADD CONSTRAINT pk_idRFI_Tag
 PRIMARY KEY (idRFI,Tag)
 GO
+
+--##########################################################################################
+--##################  TABLA DE RPTDISMANTLE PRODUCT ########################################
+--##########################################################################################
+
+create table RPTDismantleProduct (
+	Tag varchar(20)
+)
+go
 --##########################################################################################
 --##################  TABLA DE SCAFESTCOST #################################################
 --##########################################################################################
@@ -5376,63 +5385,74 @@ GO
 ----###############################################################################################
 ----########### CAMBIOS PARA REPORTES SCAFFOLD MATERIAL INVENTORY #################################
 ----###############################################################################################
-ALTER proc [dbo].[sp_SCF_Material_Inventory]
-@numberClient as int,
-@all as bit
-as
-begin
-select * from (select 
-jb.jobNo,
-pd.QID,
-pd.idProduct ,
-pd.name ,
-ISNULL((select sum(pinc.quantity) from productComing as pinc 
-inner join incoming as inc on inc.ticketNum = pinc.ticketNum
-where inc.jobNo = jb.jobNo and pinc.idProduct = pj.idProduct),0) as 'Incoming', 
+--ALTER proc [dbo].[sp_SCF_Material_Inventory]
+--@numberClient as int,
+--@all as bit
+--as
+--begin
+--select * from (select 
+--jb.jobNo,
+--pd.QID,
+--pd.idProduct ,
+--pd.name ,
+--ISNULL((select sum(pinc.quantity) from productComing as pinc 
+--inner join incoming as inc on inc.ticketNum = pinc.ticketNum
+--where inc.jobNo = jb.jobNo and pinc.idProduct = pj.idProduct),0) as 'Incoming', 
 
-ISNULL((select sum(pout.quantity) from productOutGOing as pout 
-inner join outgoing as outg on outg.ticketNum = pout.ticketNum
-where outg.jobNo = jb.jobNo and pout.idProduct = pj.idProduct),0) as 'Outgoing',
+--ISNULL((select sum(pout.quantity) from productOutGOing as pout 
+--inner join outgoing as outg on outg.ticketNum = pout.ticketNum
+--where outg.jobNo = jb.jobNo and pout.idProduct = pj.idProduct),0) as 'Outgoing',
 
-ISNULL((select sum(pinc.quantity) from productComing as pinc 
-inner join incoming as inc on inc.ticketNum = pinc.ticketNum
-where inc.jobNo = jb.jobNo and pinc.idProduct = pj.idProduct),0)
--
-ISNULL((select sum(pout.quantity) from productOutGoing as pout 
-inner join outgoing as outg on outg.ticketNum = pout.ticketNum
-where outg.jobNo = jb.jobNo and pout.idProduct = pj.idProduct),0)as 'Inventory',
---ISNULL(pj.qty,0) as 'Inventory',
-ISNULL((select sum(pts.quantity) from productTotalScaffold as pts
-inner join scaffoldTraking as sc on sc.tag = pts.tag
-inner join task as tk on tk.idAux = sc.idAux 
-inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO
-inner join projectOrder as po on po.idPO = wo.idPO and po.jobNo = wo.jobNo 
-inner join job as jb1 on jb1.jobNo = po.jobNo
-where jb1.jobNo = jb.jobNo and pts.idProduct = pj.idProduct and pts.[status] = 't'),0) as 'OnRent',
+--ISNULL((select sum(pinc.quantity) from productComing as pinc 
+--inner join incoming as inc on inc.ticketNum = pinc.ticketNum
+--where inc.jobNo = jb.jobNo and pinc.idProduct = pj.idProduct),0)
+---
+--ISNULL((select sum(pout.quantity) from productOutGoing as pout 
+--inner join outgoing as outg on outg.ticketNum = pout.ticketNum
+--where outg.jobNo = jb.jobNo and pout.idProduct = pj.idProduct),0)as 'Inventory',
+----ISNULL(pj.qty,0) as 'Inventory',
+--ISNULL((select sum(pts.quantity) from productTotalScaffold as pts
+--inner join scaffoldTraking as sc on sc.tag = pts.tag
+--inner join task as tk on tk.idAux = sc.idAux 
+--inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO
+--inner join projectOrder as po on po.idPO = wo.idPO and po.jobNo = wo.jobNo 
+--inner join job as jb1 on jb1.jobNo = po.jobNo
+--where jb1.jobNo = jb.jobNo and pts.idProduct = pj.idProduct and pts.[status] = 't'),0) as 'OnRent',
 
-(ISNULL((select sum(pinc.quantity) from productComing as pinc 
-inner join incoming as inc on inc.ticketNum = pinc.ticketNum
-where inc.jobNo = jb.jobNo and pinc.idProduct = pj.idProduct),0)
--
-ISNULL((select sum(pout.quantity) from productOutGoing as pout 
-inner join outgoing as outg on outg.ticketNum = pout.ticketNum
-where outg.jobNo = jb.jobNo and pout.idProduct = pj.idProduct),0))
--
-ISNULL((select sum(pts.quantity) from productTotalScaffold as pts
-inner join scaffoldTraking as sc on sc.tag = pts.tag
-inner join task as tk on tk.idAux = sc.idAux 
-inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO
-inner join projectOrder as po on po.idPO = wo.idPO and po.jobNo = wo.jobNo 
-inner join job as jb1 on jb1.jobNo = po.jobNo
-where jb1.jobNo = jb.jobNo and pts.idProduct = pj.idProduct and pts.[status] = 't' ),0) as 'InYard',
---ISNULL(pd.quantity,0) as 'InYard'
-pd.[weight] as 'Weight'
+--(ISNULL((select sum(pinc.quantity) from productComing as pinc 
+--inner join incoming as inc on inc.ticketNum = pinc.ticketNum
+--where inc.jobNo = jb.jobNo and pinc.idProduct = pj.idProduct),0)
+---
+--ISNULL((select sum(pout.quantity) from productOutGoing as pout 
+--inner join outgoing as outg on outg.ticketNum = pout.ticketNum
+--where outg.jobNo = jb.jobNo and pout.idProduct = pj.idProduct),0))
+---
+--ISNULL((select sum(pts.quantity) from productTotalScaffold as pts
+--inner join scaffoldTraking as sc on sc.tag = pts.tag
+--inner join task as tk on tk.idAux = sc.idAux 
+--inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO
+--inner join projectOrder as po on po.idPO = wo.idPO and po.jobNo = wo.jobNo 
+--inner join job as jb1 on jb1.jobNo = po.jobNo
+--where jb1.jobNo = jb.jobNo and pts.idProduct = pj.idProduct and pts.[status] = 't' ),0) as 'InYard',
+----ISNULL(pd.quantity,0) as 'InYard'
+--pd.[weight] as 'Weight'
 
-from  productJob as pj  
-inner join product as pd on pd.idProduct = pj.idProduct 
-inner join job as jb on jb.jobNo = pj.jobNo
-inner join clients as cl on cl.idClient = jb.idClient 
-where pj.qty > 0 and  cl.numberClient like iif(@all = 1, '%%', concat('%',@numberClient,'%'))
-) as T1 where T1.Incoming > 0 or T1.Outgoing > 0 or T1.Inventory > 0 or T1.OnRent > 0 or T1.InYard > 0 
-ORDER BY T1.idProduct
-end
+--from  productJob as pj  
+--inner join product as pd on pd.idProduct = pj.idProduct 
+--inner join job as jb on jb.jobNo = pj.jobNo
+--inner join clients as cl on cl.idClient = jb.idClient 
+--where pj.qty > 0 and  cl.numberClient like iif(@all = 1, '%%', concat('%',@numberClient,'%'))
+--) as T1 where T1.Incoming > 0 or T1.Outgoing > 0 or T1.Inventory > 0 or T1.OnRent > 0 or T1.InYard > 0 
+--ORDER BY T1.idProduct
+--end
+
+----| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
+----| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
+----V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V
+--##########################################################################################
+--##### ESTA TABLA ES PARA GUARDAR TEMPORALMENTE LOS DISMANTLE A MOSTRAR EN EL REPORTE #####
+--##########################################################################################
+create table RPTDismantleProduct (
+	Tag varchar(20)
+)
+go

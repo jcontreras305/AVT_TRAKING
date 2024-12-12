@@ -1082,7 +1082,7 @@ end", conn)
     End Function
     Dim mail As New MailMessage
     Dim sender As New SmtpClient
-    Public Function sendEmail(ByVal ownEmail As String, ByVal pswrdOwnEmail As String, ByVal subject As String, ByVal body As String, ByVal emails As List(Of String), ByVal route As String) As Boolean
+    Public Function sendEmail(ByVal ownEmail As String, ByVal pswrdOwnEmail As String, ByVal subject As String, ByVal body As String, ByVal emails As List(Of String), ByVal route As String, Optional messajeSucessful As Boolean = False) As Boolean
         Try
             Dim domain As String() = Trim(ownEmail).Split("@")
             If domain(1) = "outlook.com" Or domain(1) = "brockgroup.com" Then
@@ -1109,7 +1109,9 @@ end", conn)
                     OutlookMessage.Body = body ' pegamos el cuerpo del email
                     OutlookMessage.BodyFormat = Outlook.OlBodyFormat.olFormatHTML ' le asignamos un formato para ser leido en el navegador
                     OutlookMessage.Send() ' lo enviamos 
-                    MsgBox("Successful") ' de no haber problemas muestra mensaje de que se a enviado
+                    If messajeSucessful Then
+                        MsgBox("Successful") ' de no haber problemas muestra mensaje de que se a enviado
+                    End If
                     Return True
                 Catch ex As Exception
                     MessageBox.Show("The mail could not be sent." + vbCrLf + ex.Message) 'si hay un error lo mostrara en pantalla
@@ -1153,7 +1155,9 @@ end", conn)
                         sender.Port = 587 ' 25 o 265 
                     End If
                     sender.Send(mail) ' enviamos el correo
-                    MsgBox("Successful") ' de ser enviado mostrara este mensaje 
+                    If messajeSucessful Then
+                        MsgBox("Successful") ' de ser enviado mostrara este mensaje 
+                    End If
                     Return True
                 Catch ex As Exception
                     MsgBox("The mail could not be sent.")

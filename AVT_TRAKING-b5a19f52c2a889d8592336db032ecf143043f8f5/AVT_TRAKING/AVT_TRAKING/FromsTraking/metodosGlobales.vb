@@ -60,6 +60,42 @@ Module metodosGlobales
         End Try
     End Function
     ''' <summary>
+    ''' Hace una consulta a la BD filtrando por el numberClient, retornando los jobs asignados a ese cliente.
+    ''' </summary>
+    ''' <param name="combo"></param>
+    ''' <param name="idclientClient"></param>
+    ''' <returns>
+    ''' etorna el combo lleno con los empleados en contrados en la BD
+    ''' </returns>
+    Public Function llenarComboTagByJobNoReportsIDclient(ByVal combo As ComboBox, ByVal NumberClient As String, ByVal JobNo As String, Optional All As Boolean = False) As Boolean
+        Try
+            con.conectar()
+            Dim cmd As New SqlCommand("select distinct ds.tag  from dismantle  as ds
+inner join scaffoldTraking as sc on sc.tag = ds.tag 
+inner join task  as tk on tk.idAux = sc.idAux
+inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO 
+inner join projectOrder as po on po.idPO= wo.idPO and po.jobNo = wo.jobNo 
+inner join job as jb on jb.jobNo = po.jobNo 
+inner join clients as cl on cl.idClient = jb.idClient
+where cl.numberClient=  " + NumberClient + If(JobNo = "", "", " and jb.jobNo = " + JobNo), con.conn)
+            Dim dr As SqlDataReader = cmd.ExecuteReader()
+            combo.Items.Clear()
+            If All Then
+                combo.Items.Add("All")
+            End If
+            While dr.Read()
+                combo.Items.Add(dr("tag"))
+            End While
+            dr.Close()
+            Return True
+        Catch ex As Exception
+            MsgBox(ex.Message)
+            Return False
+        Finally
+            con.desconectar()
+        End Try
+    End Function
+    ''' <summary>
     ''' Hace una consulta a la BD, retornando los empleados con su numero de empleado
     ''' y su nombre (lastname, firstname y middlename).
     ''' </summary>

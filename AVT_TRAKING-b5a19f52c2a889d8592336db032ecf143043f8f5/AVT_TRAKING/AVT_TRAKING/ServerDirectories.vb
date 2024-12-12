@@ -162,6 +162,8 @@ Module ServerDirectories
                 Next
                 'crvReport.ReportSource = reportTs 'Este es el control que muestra el reporte
                 Return True
+            Else
+                Return False
             End If
         Catch ex As Exception
             MsgBox(ex.Message())

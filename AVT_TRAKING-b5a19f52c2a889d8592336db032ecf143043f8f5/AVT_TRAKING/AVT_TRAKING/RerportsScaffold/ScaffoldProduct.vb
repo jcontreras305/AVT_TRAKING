@@ -130,6 +130,7 @@ Public Class ScaffoldProductReport
         End Try
     End Sub
 
+
     Dim reportTs As New SCFProduct
     Private Sub btnReport_Click(sender As Object, e As EventArgs) Handles btnReport.Click
         Try

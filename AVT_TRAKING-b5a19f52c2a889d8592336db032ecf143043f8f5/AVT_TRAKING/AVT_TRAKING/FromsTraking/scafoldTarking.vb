@@ -4375,6 +4375,25 @@ Public Class scafoldTarking
         End Try
     End Sub
 
+    Private Sub btnRPTAllDismanlte_Click(sender As Object, e As EventArgs) Handles btnRPTAllDismanlte.Click
+        Try
+            If ds.tag <> "" Or ds.idDismantle <> "" Then
+                Dim frp As New ScaffoldDismantle
+                frp.Tag = ds.tag
+                frp.idClient = Company
+                frp.jobNumber = ds.findJobNoByTag(ds.tag)
+                frp.Tag = ds.tag
+                frp.numberClient = NumberClient
+                frp.ShowDialog()
+            Else
+                MsgBox("Please select a Sacaffold.")
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message)
+        End Try
+    End Sub
+
+
     Private Sub tblModificationMaterial_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles tblModificationMaterial.CellContentClick
 
     End Sub
@@ -4603,6 +4622,11 @@ Public Class scafoldTarking
             End If
         End If
     End Sub
+
+    Private Sub tblDismantleProduct_CellContentClick(sender As Object, e As DataGridViewCellEventArgs) Handles tblDismantleProduct.CellContentClick
+
+    End Sub
+
     Private Sub txtLongitude_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtLongitude.KeyPress
         If Not (IsNumeric(e.KeyChar()) Or Asc(e.KeyChar) = Asc(Keys.Enter) Or Asc(e.KeyChar) = 8 Or Asc(e.KeyChar) = 45) Then
             If Not (e.KeyChar = ChrW(22) Or e.KeyChar = ChrW(3)) Then
