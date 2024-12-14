@@ -4,11 +4,12 @@ Imports System.Windows
 Imports CrystalDecisions.ReportAppServer
 
 Public Class ScaffoldDismantle
+    Public windowOpened As String = "Scaffold"
     Dim dtScDm As DataTable
-    Public idClient As String = ""
-    Public jobNumber As String = ""
-    Public idtag As String = ""
-    Public numberClient As String = ""
+    Public idClient As String = "Lima Refining Company"
+    Public jobNumber As String = "2428180010"
+    Public idtag As String = "00088"
+    Public numberClient As String = "109"
     Dim mtd As New ScaffioldDismantleMetods
     Dim mtdOther As New MetodosOthers
     Private Sub PictureBox4_Click(sender As Object, e As EventArgs) Handles PictureBox4.Click
@@ -57,8 +58,9 @@ Public Class ScaffoldDismantle
         End Try
     End Sub
     Private Sub ScaffoldDismantle_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        lblTitle.Text = "Scaffold Product " & If(windowOpened = "Scaffold", "Scaffold", If(windowOpened = "Modification", "Modification", "Dismantle"))
         llenarComboJobsReports(cmbJobNo, numberClient)
-        llenarComboTagByJobNoReportsIDclient(cmbTag, numberClient, If(jobNumber = "", "", jobNumber), False)
+        llenarComboTagByJobNoReportsIDclient(cmbTag, numberClient, If(jobNumber = "", "", jobNumber), False, windowOpened)
         If jobNumber <> "" Then
             cmbJobNo.SelectedItem = cmbJobNo.Items(cmbJobNo.FindString(jobNumber))
             If idtag <> "" Then
@@ -67,14 +69,14 @@ Public Class ScaffoldDismantle
         End If
         lblClient.Text = idClient
         If idClient <> "" Or JobNo <> "" Or idtag <> "" Then
-            dtScDm = mtd.selectDismantles(tblDismantles, idClient, JobNo, idtag)
+            dtScDm = mtd.selectScaffolds(tblDismantles, idClient, windowOpened, JobNo, idtag)
             'tblDismantles.DataSource = dtScDm
         Else
             MsgBox("Not exist a client or dismantles.")
         End If
 
-        mtdOther.llenarTablaEmailReports(tblEmailsReports, "dis")
-        Dim datosReport = mtdOther.selectSubjectEmail("dis")
+        mtdOther.llenarTablaEmailReports(tblEmailsReports, If(windowOpened = "Scaffold", "scf", If(windowOpened = "Dismantle", "dis", "mod")))
+        Dim datosReport = mtdOther.selectSubjectEmail(If(windowOpened = "Scaffold", "scf", If(windowOpened = "Dismantle", "dis", "mod")))
         txtSubject.Text = datosReport(0)
         txtBodyEmail.Text = datosReport(1)
         btnSend.Enabled = False
@@ -84,8 +86,8 @@ Public Class ScaffoldDismantle
         Try
             JobNo = cmbJobNo.Items(cmbJobNo.SelectedIndex)
             idtag = ""
-            llenarComboTagByJobNoReportsIDclient(cmbTag, numberClient, JobNo, False)
-            dtScDm = mtd.selectDismantles(tblDismantles, idClient, JobNo, "")
+            llenarComboTagByJobNoReportsIDclient(cmbTag, numberClient, JobNo, False, windowOpened)
+            dtScDm = mtd.selectScaffolds(tblDismantles, idClient, windowOpened, JobNo, "")
         Catch ex As Exception
             MsgBox(ex.Message)
         End Try
@@ -94,19 +96,19 @@ Public Class ScaffoldDismantle
     Private Sub cmbTag_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbTag.SelectedIndexChanged
         Try
             idtag = cmbTag.Items(cmbTag.SelectedIndex)
-            dtScDm = mtd.selectDismantles(tblDismantles, idClient, JobNo, idtag)
+            dtScDm = mtd.selectScaffolds(tblDismantles, idClient, windowOpened, JobNo, idtag)
         Catch ex As Exception
             MsgBox(ex.Message)
         End Try
     End Sub
     Private Sub chbAllJobs_CheckedChanged(sender As Object, e As EventArgs) Handles chbAllJobs.CheckedChanged
         If (chbAllJobs.Checked) Then
-            dtScDm = mtd.selectDismantles(tblDismantles, idClient, "", "")
+            dtScDm = mtd.selectScaffolds(tblDismantles, idClient, windowOpened, "", "")
             cmbJobNo.Enabled = False
             cmbTag.Enabled = False
             chbAllTag.Checked = True
         Else
-            dtScDm = mtd.selectDismantles(tblDismantles, idClient, "", "")
+            dtScDm = mtd.selectScaffolds(tblDismantles, idClient, windowOpened, "", "")
             cmbJobNo.Enabled = False
             cmbTag.Enabled = True
         End If
@@ -115,7 +117,7 @@ Public Class ScaffoldDismantle
 
     Private Sub chbAllTag_CheckedChanged(sender As Object, e As EventArgs) Handles chbAllTag.CheckedChanged
         If chbAllTag.Checked Then
-            dtScDm = mtd.selectDismantles(tblDismantles, idClient, If(chbAllJobs.Checked, "", JobNo), "")
+            dtScDm = mtd.selectScaffolds(tblDismantles, idClient, windowOpened, If(chbAllJobs.Checked, "", JobNo), "")
             cmbTag.Enabled = False
             cmbTag.Text = ""
         Else
@@ -129,9 +131,9 @@ Public Class ScaffoldDismantle
                 Dim tagAux = tblDismantles.SelectedRows(0).Cells(1).Value
                 scfProduct1.SetParameterValue("@tagID", tagAux)
                 scfProduct1.SetParameterValue("@modID", "")
-                scfProduct1.SetParameterValue("@scf", If(False, 1, 0))
-                scfProduct1.SetParameterValue("@mod", If(False, 1, 0))
-                scfProduct1.SetParameterValue("@dis", If(True, 1, 0))
+                scfProduct1.SetParameterValue("@scf", If(windowOpened = "Scaffold", 1, 0))
+                scfProduct1.SetParameterValue("@mod", If(windowOpened = "Modification", 1, 0))
+                scfProduct1.SetParameterValue("@dis", If(windowOpened = "Dismantle", 1, 0))
                 scfProduct1.SetParameterValue("@CompanyName", "Brock")
                 If connecReport(scfProduct1) Then
                     crvReport.ReportSource = scfProduct1
@@ -197,14 +199,14 @@ Public Class ScaffoldDismantle
                             lblMessage.Text = "Message:" & " Working in the report of tag :" & item
                             scfProduct1.SetParameterValue("@tagID", item)
                             scfProduct1.SetParameterValue("@modID", "")
-                            scfProduct1.SetParameterValue("@scf", If(False, 1, 0))
-                            scfProduct1.SetParameterValue("@mod", If(False, 1, 0))
-                            scfProduct1.SetParameterValue("@dis", If(True, 1, 0))
+                            scfProduct1.SetParameterValue("@scf", If(windowOpened = "Scaffold", 1, 0))
+                            scfProduct1.SetParameterValue("@mod", If(windowOpened = "Modification", 1, 0))
+                            scfProduct1.SetParameterValue("@dis", If(windowOpened = "Dismantle", 1, 0))
                             scfProduct1.SetParameterValue("@CompanyName", "Brock")
                             If connecReport(scfProduct1) Then
                                 'crvReport.ReportSource = scfProduct1
                             End If
-                            Dim TotalPath As String = path & "\" & "DimantleProduct" & item & ".pdf"
+                            Dim TotalPath As String = path & "\" & windowOpened & "Product" & item & ".pdf"
                             scfProduct1.ExportToDisk(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat, TotalPath)
                             If listEmail.Count > 0 And flagEmail Then
                                 lblMessage.Text = "Message:" & " Sending Email of report of tag :" & item
@@ -212,13 +214,13 @@ Public Class ScaffoldDismantle
                             End If
                         Next
                         lblMessage.Text = "Message:" & " End."
-                        MsgBox("Finished.")
+                        MsgBox("Successful.")
                     End If
                 End If
             End If
 
         Catch ex As Exception
-
+            MsgBox(ex.Message())
         End Try
     End Sub
 
@@ -244,10 +246,10 @@ Public Class ScaffioldDismantleMetods
     Inherits ConnectioDB
     Dim tbl As New DataTable
 
-    Public Function selectDismantles(ByVal tblDismantle As DataGridView, ByVal ClientName As String, Optional jobNo As String = "", Optional idTag As String = "") As DataTable
+    Public Function selectScaffolds(ByVal tblDismantle As DataGridView, ByVal ClientName As String, Optional jobNo As String = "", Optional idTag As String = "") As DataTable
         Try
             conectar()
-            Dim cmd As New SqlCommand("select sc.status , ds.tag as 'Tag',ds.dismantleDate as 'Dismantle Date', sc.buildDate as 'Build Date', jb.jobNo as 'JobNo' , CONCAT(wo.idWO , '-',tk.task)as 'WorkOrder', cl.companyName as 'Client',sc.contact  as 'Contact' from dismantle  as ds
+            Dim cmd As New SqlCommand("select sc.status , ds.tag as 'Tag',CONVERT(NVARCHAR,ds.dismantleDate,101) as 'Dismantle Date',CONVERT(NVARCHAR, sc.buildDate,101) as 'Build Date', jb.jobNo as 'JobNo' , CONCAT(wo.idWO , '-',tk.task)as 'WorkOrder', cl.companyName as 'Client',sc.contact  as 'Contact' from dismantle  as ds
 inner join scaffoldTraking as sc on sc.tag = ds.tag 
 inner join task  as tk on tk.idAux = sc.idAux
 inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO 
@@ -255,6 +257,53 @@ inner join projectOrder as po on po.idPO= wo.idPO and po.jobNo = wo.jobNo
 inner join job as jb on jb.jobNo = po.jobNo 
 inner join clients as cl on cl.idClient = jb.idClient
 where cl.companyName = '" + ClientName + "' " + If(jobNo = "", "", " and jb.jobNo = " + jobNo) + If(idTag = "", "", " and ds.tag = " + idTag), conn)
+            Dim dr As SqlDataReader = cmd.ExecuteReader()
+            If tbl.Rows IsNot Nothing Then
+                tbl.Rows.Clear()
+            End If
+            If tbl.Columns.Count = 0 Then
+                creaColumnas()
+            End If
+            tblDismantle.Rows.Clear()
+            While dr.Read()
+                tbl.Rows.Add(False, dr("Tag"), dr("Dismantle Date"), dr("Build Date"), dr("JobNo"), dr("WorkOrder"), dr("Client"), dr("Contact"))
+                tblDismantle.Rows.Add(False, dr("Tag"), dr("Dismantle Date"), dr("Build Date"), dr("JobNo"), dr("WorkOrder"), dr("Client"), dr("Contact"))
+            End While
+            dr.Close()
+            Return tbl
+        Catch ex As Exception
+            MsgBox(ex.Message)
+            Return Nothing
+        End Try
+    End Function
+    Public Function selectScaffolds(ByVal tblDismantle As DataGridView, ByVal ClientName As String, ByVal winOpened As String, Optional jobNo As String = "", Optional idTag As String = "") As DataTable
+        Try
+            conectar()
+            Dim cmd As New SqlCommand
+            cmd.Connection = conn
+            Select Case winOpened
+                Case "Scaffold"
+                    cmd.CommandText = "select sc.status , sc.tag as 'Tag', ISNULL(CONVERT(nvarchar, ds.dismantleDate,101),'') as 'Dismantle Date', CONVERT(nvarchar, sc.buildDate,101) as 'Build Date', jb.jobNo as 'JobNo' , CONCAT(wo.idWO , '-',tk.task)as 'WorkOrder', cl.companyName as 'Client',sc.contact  as 'Contact'
+from scaffoldTraking as sc 
+left join dismantle as ds on ds.tag = sc.tag 
+inner join task  as tk on tk.idAux = sc.idAux
+inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO 
+inner join projectOrder as po on po.idPO= wo.idPO and po.jobNo = wo.jobNo 
+inner join job as jb on jb.jobNo = po.jobNo 
+inner join clients as cl on cl.idClient = jb.idClient
+where cl.companyName = '" + ClientName + "' " + If(jobNo = "", "", " and jb.jobNo = " + jobNo) + If(idTag = "", "", " and sc.tag = " + idTag)
+                Case "Dismantle"
+                    cmd.CommandText = "select sc.status , ds.tag as 'Tag',ds.dismantleDate as 'Dismantle Date', sc.buildDate as 'Build Date', jb.jobNo as 'JobNo' , CONCAT(wo.idWO , '-',tk.task)as 'WorkOrder', cl.companyName as 'Client',sc.contact  as 'Contact' from dismantle  as ds
+inner join scaffoldTraking as sc on sc.tag = ds.tag 
+inner join task  as tk on tk.idAux = sc.idAux
+inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO 
+inner join projectOrder as po on po.idPO= wo.idPO and po.jobNo = wo.jobNo 
+inner join job as jb on jb.jobNo = po.jobNo 
+inner join clients as cl on cl.idClient = jb.idClient
+where cl.companyName = '" + ClientName + "' " + If(jobNo = "", "", " and jb.jobNo = " + jobNo) + If(idTag = "", "", " and ds.tag = " + idTag)
+                Case Else
+
+            End Select
             Dim dr As SqlDataReader = cmd.ExecuteReader()
             If tbl.Rows IsNot Nothing Then
                 tbl.Rows.Clear()

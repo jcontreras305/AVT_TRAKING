@@ -4375,10 +4375,31 @@ Public Class scafoldTarking
         End Try
     End Sub
 
+    Private Sub btnAllReportScfTrk_Click(sender As Object, e As EventArgs) Handles btnAllReportScfTrk.Click
+        Try
+            If ds.tag <> "" Or ds.idDismantle <> "" Then
+                Dim frp As New ScaffoldDismantle
+                frp.windowOpened = "Scaffold"
+                frp.Tag = sc.tag
+                frp.idClient = Company
+                frp.jobNumber = sc.job
+                frp.Tag = sc.tag
+                frp.numberClient = NumberClient
+                frp.ShowDialog()
+            Else
+                MsgBox("Please select a Sacaffold.")
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message)
+        End Try
+
+    End Sub
+
     Private Sub btnRPTAllDismanlte_Click(sender As Object, e As EventArgs) Handles btnRPTAllDismanlte.Click
         Try
             If ds.tag <> "" Or ds.idDismantle <> "" Then
                 Dim frp As New ScaffoldDismantle
+                frp.windowOpened = "Dismantle"
                 frp.Tag = ds.tag
                 frp.idClient = Company
                 frp.jobNumber = ds.findJobNoByTag(ds.tag)
@@ -4386,7 +4407,7 @@ Public Class scafoldTarking
                 frp.numberClient = NumberClient
                 frp.ShowDialog()
             Else
-                MsgBox("Please select a Sacaffold.")
+                MsgBox("Please select a Dismantle.")
             End If
         Catch ex As Exception
             MsgBox(ex.Message)

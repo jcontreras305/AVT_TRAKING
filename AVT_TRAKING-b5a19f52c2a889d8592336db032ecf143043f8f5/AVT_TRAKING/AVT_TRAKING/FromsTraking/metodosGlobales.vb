@@ -67,17 +67,40 @@ Module metodosGlobales
     ''' <returns>
     ''' etorna el combo lleno con los empleados en contrados en la BD
     ''' </returns>
-    Public Function llenarComboTagByJobNoReportsIDclient(ByVal combo As ComboBox, ByVal NumberClient As String, ByVal JobNo As String, Optional All As Boolean = False) As Boolean
+    Public Function llenarComboTagByJobNoReportsIDclient(ByVal combo As ComboBox, ByVal NumberClient As String, ByVal JobNo As String, Optional All As Boolean = False, Optional windowOpened As String = "") As Boolean
         Try
             con.conectar()
-            Dim cmd As New SqlCommand("select distinct ds.tag  from dismantle  as ds
+            Dim cmd As New SqlCommand
+            cmd.Connection = con.conn
+
+            Select Case windowOpened
+                Case "Scaffold"
+                    cmd.CommandText = "select distinct sc.tag from scaffoldTraking as sc
+inner join task  as tk on tk.idAux = sc.idAux
+inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO 
+inner join projectOrder as po on po.idPO= wo.idPO and po.jobNo = wo.jobNo 
+inner join job as jb on jb.jobNo = po.jobNo 
+inner join clients as cl on cl.idClient = jb.idClient
+where cl.numberClient=  " + NumberClient + If(JobNo = "", "", " and jb.jobNo = " + JobNo)
+                Case "Dismantle"
+                    cmd.CommandText = "select distinct ds.tag  from dismantle  as ds
 inner join scaffoldTraking as sc on sc.tag = ds.tag 
 inner join task  as tk on tk.idAux = sc.idAux
 inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO 
 inner join projectOrder as po on po.idPO= wo.idPO and po.jobNo = wo.jobNo 
 inner join job as jb on jb.jobNo = po.jobNo 
 inner join clients as cl on cl.idClient = jb.idClient
-where cl.numberClient=  " + NumberClient + If(JobNo = "", "", " and jb.jobNo = " + JobNo), con.conn)
+where cl.numberClient=  " + NumberClient + If(JobNo = "", "", " and jb.jobNo = " + JobNo)
+                Case "Modification"
+                    cmd.CommandText = "select distinct md.tag  from modification as md
+inner join scaffoldTraking as sc on sc.tag = md.tag 
+inner join task  as tk on tk.idAux = sc.idAux
+inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO 
+inner join projectOrder as po on po.idPO= wo.idPO and po.jobNo = wo.jobNo 
+inner join job as jb on jb.jobNo = po.jobNo 
+inner join clients as cl on cl.idClient = jb.idClient
+where cl.numberClient=  " + NumberClient + If(JobNo = "", "", " and jb.jobNo = " + JobNo)
+            End Select
             Dim dr As SqlDataReader = cmd.ExecuteReader()
             combo.Items.Clear()
             If All Then

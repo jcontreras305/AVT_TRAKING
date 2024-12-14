@@ -34,17 +34,6 @@ Partial Class scafoldTarking
         Dim DataGridViewCellStyle10 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.Panel3 = New System.Windows.Forms.Panel()
-        Me.Panel2 = New System.Windows.Forms.Panel()
-        Me.lblCompanyName = New System.Windows.Forms.Label()
-        Me.PictureBox2 = New System.Windows.Forms.PictureBox()
-        Me.TitleBar = New System.Windows.Forms.Panel()
-        Me.PictureBox1 = New System.Windows.Forms.PictureBox()
-        Me.btnRestore = New System.Windows.Forms.PictureBox()
-        Me.btnMaximize = New System.Windows.Forms.PictureBox()
-        Me.label83 = New System.Windows.Forms.Label()
-        Me.btnSaveTable = New System.Windows.Forms.Button()
-        Me.btnDeleteRows = New System.Windows.Forms.Button()
-        Me.btnSaveAll = New System.Windows.Forms.Button()
         Me.MyTabControl1 = New AVT_TRAKING.MyTabControl()
         Me.tbpInComing = New System.Windows.Forms.TabPage()
         Me.Panel4 = New System.Windows.Forms.Panel()
@@ -616,14 +605,20 @@ Partial Class scafoldTarking
         Me.Panel60 = New System.Windows.Forms.Panel()
         Me.sprElevatorEst = New System.Windows.Forms.NumericUpDown()
         Me.Label95 = New System.Windows.Forms.Label()
+        Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.lblCompanyName = New System.Windows.Forms.Label()
+        Me.PictureBox2 = New System.Windows.Forms.PictureBox()
+        Me.TitleBar = New System.Windows.Forms.Panel()
+        Me.PictureBox1 = New System.Windows.Forms.PictureBox()
+        Me.btnRestore = New System.Windows.Forms.PictureBox()
+        Me.btnMaximize = New System.Windows.Forms.PictureBox()
+        Me.label83 = New System.Windows.Forms.Label()
+        Me.btnSaveTable = New System.Windows.Forms.Button()
+        Me.btnDeleteRows = New System.Windows.Forms.Button()
+        Me.btnSaveAll = New System.Windows.Forms.Button()
+        Me.btnAllReportScfTrk = New System.Windows.Forms.Button()
         Me.Panel1.SuspendLayout
         Me.Panel3.SuspendLayout
-        Me.Panel2.SuspendLayout
-        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit
-        Me.TitleBar.SuspendLayout
-        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit
-        CType(Me.btnRestore, System.ComponentModel.ISupportInitialize).BeginInit
-        CType(Me.btnMaximize, System.ComponentModel.ISupportInitialize).BeginInit
         Me.MyTabControl1.SuspendLayout
         Me.tbpInComing.SuspendLayout
         Me.Panel4.SuspendLayout
@@ -829,6 +824,12 @@ Partial Class scafoldTarking
         CType(Me.sprGroudHeigthEst, System.ComponentModel.ISupportInitialize).BeginInit
         Me.Panel60.SuspendLayout
         CType(Me.sprElevatorEst, System.ComponentModel.ISupportInitialize).BeginInit
+        Me.Panel2.SuspendLayout
+        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit
+        Me.TitleBar.SuspendLayout
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit
+        CType(Me.btnRestore, System.ComponentModel.ISupportInitialize).BeginInit
+        CType(Me.btnMaximize, System.ComponentModel.ISupportInitialize).BeginInit
         Me.SuspendLayout
         '
         'Panel1
@@ -851,158 +852,6 @@ Partial Class scafoldTarking
         Me.Panel3.Name = "Panel3"
         Me.Panel3.Size = New System.Drawing.Size(1296, 613)
         Me.Panel3.TabIndex = 2
-        '
-        'Panel2
-        '
-        Me.Panel2.BackColor = System.Drawing.Color.FromArgb(CType(CType(83, Byte), Integer), CType(CType(93, Byte), Integer), CType(CType(102, Byte), Integer))
-        Me.Panel2.Controls.Add(Me.lblCompanyName)
-        Me.Panel2.Controls.Add(Me.PictureBox2)
-        Me.Panel2.Controls.Add(Me.TitleBar)
-        Me.Panel2.Controls.Add(Me.btnSaveTable)
-        Me.Panel2.Controls.Add(Me.btnDeleteRows)
-        Me.Panel2.Controls.Add(Me.btnSaveAll)
-        Me.Panel2.Dock = System.Windows.Forms.DockStyle.Top
-        Me.Panel2.Location = New System.Drawing.Point(0, 0)
-        Me.Panel2.Margin = New System.Windows.Forms.Padding(4)
-        Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(1296, 113)
-        Me.Panel2.TabIndex = 1
-        '
-        'lblCompanyName
-        '
-        Me.lblCompanyName.AutoSize = True
-        Me.lblCompanyName.Font = New System.Drawing.Font("Microsoft Sans Serif", 17.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblCompanyName.ForeColor = System.Drawing.SystemColors.ButtonHighlight
-        Me.lblCompanyName.Location = New System.Drawing.Point(469, 69)
-        Me.lblCompanyName.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.lblCompanyName.Name = "lblCompanyName"
-        Me.lblCompanyName.Size = New System.Drawing.Size(150, 33)
-        Me.lblCompanyName.TabIndex = 5
-        Me.lblCompanyName.Text = "Client: All"
-        '
-        'PictureBox2
-        '
-        Me.PictureBox2.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.PictureBox2.Image = Global.AVT_TRAKING.My.Resources.Resources.exit2
-        Me.PictureBox2.Location = New System.Drawing.Point(1229, 53)
-        Me.PictureBox2.Margin = New System.Windows.Forms.Padding(4)
-        Me.PictureBox2.Name = "PictureBox2"
-        Me.PictureBox2.Size = New System.Drawing.Size(51, 34)
-        Me.PictureBox2.TabIndex = 4
-        Me.PictureBox2.TabStop = False
-        '
-        'TitleBar
-        '
-        Me.TitleBar.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(58, Byte), Integer), CType(CType(115, Byte), Integer))
-        Me.TitleBar.Controls.Add(Me.PictureBox1)
-        Me.TitleBar.Controls.Add(Me.btnRestore)
-        Me.TitleBar.Controls.Add(Me.btnMaximize)
-        Me.TitleBar.Controls.Add(Me.label83)
-        Me.TitleBar.Dock = System.Windows.Forms.DockStyle.Top
-        Me.TitleBar.Location = New System.Drawing.Point(0, 0)
-        Me.TitleBar.Margin = New System.Windows.Forms.Padding(4)
-        Me.TitleBar.Name = "TitleBar"
-        Me.TitleBar.Size = New System.Drawing.Size(1296, 46)
-        Me.TitleBar.TabIndex = 3
-        '
-        'PictureBox1
-        '
-        Me.PictureBox1.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.PictureBox1.Image = Global.AVT_TRAKING.My.Resources.Resources.minimize2
-        Me.PictureBox1.Location = New System.Drawing.Point(1204, 9)
-        Me.PictureBox1.Margin = New System.Windows.Forms.Padding(4)
-        Me.PictureBox1.Name = "PictureBox1"
-        Me.PictureBox1.Size = New System.Drawing.Size(33, 30)
-        Me.PictureBox1.TabIndex = 3
-        Me.PictureBox1.TabStop = False
-        '
-        'btnRestore
-        '
-        Me.btnRestore.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnRestore.Image = Global.AVT_TRAKING.My.Resources.Resources.restore2
-        Me.btnRestore.Location = New System.Drawing.Point(1245, 9)
-        Me.btnRestore.Margin = New System.Windows.Forms.Padding(4)
-        Me.btnRestore.Name = "btnRestore"
-        Me.btnRestore.Size = New System.Drawing.Size(35, 33)
-        Me.btnRestore.TabIndex = 2
-        Me.btnRestore.TabStop = False
-        '
-        'btnMaximize
-        '
-        Me.btnMaximize.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnMaximize.Image = Global.AVT_TRAKING.My.Resources.Resources.maximize2
-        Me.btnMaximize.Location = New System.Drawing.Point(1245, 9)
-        Me.btnMaximize.Margin = New System.Windows.Forms.Padding(4)
-        Me.btnMaximize.Name = "btnMaximize"
-        Me.btnMaximize.Size = New System.Drawing.Size(35, 33)
-        Me.btnMaximize.TabIndex = 1
-        Me.btnMaximize.TabStop = False
-        '
-        'label83
-        '
-        Me.label83.AutoSize = True
-        Me.label83.Font = New System.Drawing.Font("Verdana", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.label83.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.label83.Location = New System.Drawing.Point(1, 0)
-        Me.label83.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.label83.Name = "label83"
-        Me.label83.Size = New System.Drawing.Size(206, 25)
-        Me.label83.TabIndex = 0
-        Me.label83.Text = "Scaffold Tracking"
-        '
-        'btnSaveTable
-        '
-        Me.btnSaveTable.FlatAppearance.BorderSize = 0
-        Me.btnSaveTable.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(58, Byte), Integer), CType(CType(115, Byte), Integer))
-        Me.btnSaveTable.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnSaveTable.Font = New System.Drawing.Font("Verdana", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnSaveTable.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.btnSaveTable.Image = Global.AVT_TRAKING.My.Resources.Resources.save1
-        Me.btnSaveTable.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnSaveTable.Location = New System.Drawing.Point(169, 68)
-        Me.btnSaveTable.Margin = New System.Windows.Forms.Padding(4)
-        Me.btnSaveTable.Name = "btnSaveTable"
-        Me.btnSaveTable.Size = New System.Drawing.Size(96, 38)
-        Me.btnSaveTable.TabIndex = 2
-        Me.btnSaveTable.Text = "Save"
-        Me.btnSaveTable.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.btnSaveTable.UseVisualStyleBackColor = True
-        '
-        'btnDeleteRows
-        '
-        Me.btnDeleteRows.FlatAppearance.BorderSize = 0
-        Me.btnDeleteRows.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(58, Byte), Integer), CType(CType(115, Byte), Integer))
-        Me.btnDeleteRows.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnDeleteRows.Font = New System.Drawing.Font("Verdana", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnDeleteRows.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.btnDeleteRows.Image = Global.AVT_TRAKING.My.Resources.Resources.delete
-        Me.btnDeleteRows.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnDeleteRows.Location = New System.Drawing.Point(289, 68)
-        Me.btnDeleteRows.Margin = New System.Windows.Forms.Padding(4)
-        Me.btnDeleteRows.Name = "btnDeleteRows"
-        Me.btnDeleteRows.Size = New System.Drawing.Size(107, 38)
-        Me.btnDeleteRows.TabIndex = 1
-        Me.btnDeleteRows.Text = "Delete"
-        Me.btnDeleteRows.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.btnDeleteRows.UseVisualStyleBackColor = True
-        '
-        'btnSaveAll
-        '
-        Me.btnSaveAll.FlatAppearance.BorderSize = 0
-        Me.btnSaveAll.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(58, Byte), Integer), CType(CType(115, Byte), Integer))
-        Me.btnSaveAll.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnSaveAll.Font = New System.Drawing.Font("Verdana", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnSaveAll.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.btnSaveAll.Image = Global.AVT_TRAKING.My.Resources.Resources.saveall
-        Me.btnSaveAll.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnSaveAll.Location = New System.Drawing.Point(23, 69)
-        Me.btnSaveAll.Margin = New System.Windows.Forms.Padding(4)
-        Me.btnSaveAll.Name = "btnSaveAll"
-        Me.btnSaveAll.Size = New System.Drawing.Size(123, 38)
-        Me.btnSaveAll.TabIndex = 0
-        Me.btnSaveAll.Text = "Save All"
-        Me.btnSaveAll.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.btnSaveAll.UseVisualStyleBackColor = True
         '
         'MyTabControl1
         '
@@ -3169,6 +3018,7 @@ Partial Class scafoldTarking
         'Panel43
         '
         Me.Panel43.BackColor = System.Drawing.Color.FromArgb(CType(CType(83, Byte), Integer), CType(CType(93, Byte), Integer), CType(CType(102, Byte), Integer))
+        Me.Panel43.Controls.Add(Me.btnAllReportScfTrk)
         Me.Panel43.Controls.Add(Me.btnReport)
         Me.Panel43.Controls.Add(Me.btnFindTagScaffold)
         Me.Panel43.Controls.Add(Me.lblTagQTY)
@@ -3198,13 +3048,14 @@ Partial Class scafoldTarking
         Me.btnReport.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.btnReport.Image = Global.AVT_TRAKING.My.Resources.Resources.report
         Me.btnReport.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnReport.Location = New System.Drawing.Point(380, 9)
+        Me.btnReport.Location = New System.Drawing.Point(421, 9)
         Me.btnReport.Margin = New System.Windows.Forms.Padding(4)
         Me.btnReport.Name = "btnReport"
-        Me.btnReport.Size = New System.Drawing.Size(113, 36)
+        Me.btnReport.Size = New System.Drawing.Size(94, 36)
         Me.btnReport.TabIndex = 12
         Me.btnReport.Text = "Report"
         Me.btnReport.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.btnReport.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
         Me.btnReport.UseVisualStyleBackColor = True
         '
         'btnFindTagScaffold
@@ -3226,7 +3077,7 @@ Partial Class scafoldTarking
         'lblTagQTY
         '
         Me.lblTagQTY.AutoSize = True
-        Me.lblTagQTY.Location = New System.Drawing.Point(183, 20)
+        Me.lblTagQTY.Location = New System.Drawing.Point(140, 22)
         Me.lblTagQTY.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lblTagQTY.Name = "lblTagQTY"
         Me.lblTagQTY.Size = New System.Drawing.Size(66, 16)
@@ -3241,13 +3092,14 @@ Partial Class scafoldTarking
         Me.btnExcelScaffold.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnExcelScaffold.Image = Global.AVT_TRAKING.My.Resources.Resources.upload2
         Me.btnExcelScaffold.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnExcelScaffold.Location = New System.Drawing.Point(511, 12)
+        Me.btnExcelScaffold.Location = New System.Drawing.Point(543, 10)
         Me.btnExcelScaffold.Margin = New System.Windows.Forms.Padding(4)
         Me.btnExcelScaffold.Name = "btnExcelScaffold"
-        Me.btnExcelScaffold.Size = New System.Drawing.Size(176, 28)
+        Me.btnExcelScaffold.Size = New System.Drawing.Size(143, 28)
         Me.btnExcelScaffold.TabIndex = 9
         Me.btnExcelScaffold.Text = "Upload Excel"
         Me.btnExcelScaffold.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.btnExcelScaffold.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
         Me.btnExcelScaffold.UseVisualStyleBackColor = True
         '
         'lblPSQF
@@ -7875,6 +7727,177 @@ Partial Class scafoldTarking
         Me.Label95.TabIndex = 5
         Me.Label95.Text = "Elevation"
         '
+        'Panel2
+        '
+        Me.Panel2.BackColor = System.Drawing.Color.FromArgb(CType(CType(83, Byte), Integer), CType(CType(93, Byte), Integer), CType(CType(102, Byte), Integer))
+        Me.Panel2.Controls.Add(Me.lblCompanyName)
+        Me.Panel2.Controls.Add(Me.PictureBox2)
+        Me.Panel2.Controls.Add(Me.TitleBar)
+        Me.Panel2.Controls.Add(Me.btnSaveTable)
+        Me.Panel2.Controls.Add(Me.btnDeleteRows)
+        Me.Panel2.Controls.Add(Me.btnSaveAll)
+        Me.Panel2.Dock = System.Windows.Forms.DockStyle.Top
+        Me.Panel2.Location = New System.Drawing.Point(0, 0)
+        Me.Panel2.Margin = New System.Windows.Forms.Padding(4)
+        Me.Panel2.Name = "Panel2"
+        Me.Panel2.Size = New System.Drawing.Size(1296, 113)
+        Me.Panel2.TabIndex = 1
+        '
+        'lblCompanyName
+        '
+        Me.lblCompanyName.AutoSize = True
+        Me.lblCompanyName.Font = New System.Drawing.Font("Microsoft Sans Serif", 17.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblCompanyName.ForeColor = System.Drawing.SystemColors.ButtonHighlight
+        Me.lblCompanyName.Location = New System.Drawing.Point(469, 69)
+        Me.lblCompanyName.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lblCompanyName.Name = "lblCompanyName"
+        Me.lblCompanyName.Size = New System.Drawing.Size(150, 33)
+        Me.lblCompanyName.TabIndex = 5
+        Me.lblCompanyName.Text = "Client: All"
+        '
+        'PictureBox2
+        '
+        Me.PictureBox2.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.PictureBox2.Image = Global.AVT_TRAKING.My.Resources.Resources.exit2
+        Me.PictureBox2.Location = New System.Drawing.Point(1229, 53)
+        Me.PictureBox2.Margin = New System.Windows.Forms.Padding(4)
+        Me.PictureBox2.Name = "PictureBox2"
+        Me.PictureBox2.Size = New System.Drawing.Size(51, 34)
+        Me.PictureBox2.TabIndex = 4
+        Me.PictureBox2.TabStop = False
+        '
+        'TitleBar
+        '
+        Me.TitleBar.BackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(58, Byte), Integer), CType(CType(115, Byte), Integer))
+        Me.TitleBar.Controls.Add(Me.PictureBox1)
+        Me.TitleBar.Controls.Add(Me.btnRestore)
+        Me.TitleBar.Controls.Add(Me.btnMaximize)
+        Me.TitleBar.Controls.Add(Me.label83)
+        Me.TitleBar.Dock = System.Windows.Forms.DockStyle.Top
+        Me.TitleBar.Location = New System.Drawing.Point(0, 0)
+        Me.TitleBar.Margin = New System.Windows.Forms.Padding(4)
+        Me.TitleBar.Name = "TitleBar"
+        Me.TitleBar.Size = New System.Drawing.Size(1296, 46)
+        Me.TitleBar.TabIndex = 3
+        '
+        'PictureBox1
+        '
+        Me.PictureBox1.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.PictureBox1.Image = Global.AVT_TRAKING.My.Resources.Resources.minimize2
+        Me.PictureBox1.Location = New System.Drawing.Point(1204, 9)
+        Me.PictureBox1.Margin = New System.Windows.Forms.Padding(4)
+        Me.PictureBox1.Name = "PictureBox1"
+        Me.PictureBox1.Size = New System.Drawing.Size(33, 30)
+        Me.PictureBox1.TabIndex = 3
+        Me.PictureBox1.TabStop = False
+        '
+        'btnRestore
+        '
+        Me.btnRestore.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnRestore.Image = Global.AVT_TRAKING.My.Resources.Resources.restore2
+        Me.btnRestore.Location = New System.Drawing.Point(1245, 9)
+        Me.btnRestore.Margin = New System.Windows.Forms.Padding(4)
+        Me.btnRestore.Name = "btnRestore"
+        Me.btnRestore.Size = New System.Drawing.Size(35, 33)
+        Me.btnRestore.TabIndex = 2
+        Me.btnRestore.TabStop = False
+        '
+        'btnMaximize
+        '
+        Me.btnMaximize.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnMaximize.Image = Global.AVT_TRAKING.My.Resources.Resources.maximize2
+        Me.btnMaximize.Location = New System.Drawing.Point(1245, 9)
+        Me.btnMaximize.Margin = New System.Windows.Forms.Padding(4)
+        Me.btnMaximize.Name = "btnMaximize"
+        Me.btnMaximize.Size = New System.Drawing.Size(35, 33)
+        Me.btnMaximize.TabIndex = 1
+        Me.btnMaximize.TabStop = False
+        '
+        'label83
+        '
+        Me.label83.AutoSize = True
+        Me.label83.Font = New System.Drawing.Font("Verdana", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.label83.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.label83.Location = New System.Drawing.Point(1, 0)
+        Me.label83.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.label83.Name = "label83"
+        Me.label83.Size = New System.Drawing.Size(206, 25)
+        Me.label83.TabIndex = 0
+        Me.label83.Text = "Scaffold Tracking"
+        '
+        'btnSaveTable
+        '
+        Me.btnSaveTable.FlatAppearance.BorderSize = 0
+        Me.btnSaveTable.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(58, Byte), Integer), CType(CType(115, Byte), Integer))
+        Me.btnSaveTable.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnSaveTable.Font = New System.Drawing.Font("Verdana", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnSaveTable.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.btnSaveTable.Image = Global.AVT_TRAKING.My.Resources.Resources.save1
+        Me.btnSaveTable.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnSaveTable.Location = New System.Drawing.Point(169, 68)
+        Me.btnSaveTable.Margin = New System.Windows.Forms.Padding(4)
+        Me.btnSaveTable.Name = "btnSaveTable"
+        Me.btnSaveTable.Size = New System.Drawing.Size(96, 38)
+        Me.btnSaveTable.TabIndex = 2
+        Me.btnSaveTable.Text = "Save"
+        Me.btnSaveTable.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.btnSaveTable.UseVisualStyleBackColor = True
+        '
+        'btnDeleteRows
+        '
+        Me.btnDeleteRows.FlatAppearance.BorderSize = 0
+        Me.btnDeleteRows.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(58, Byte), Integer), CType(CType(115, Byte), Integer))
+        Me.btnDeleteRows.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnDeleteRows.Font = New System.Drawing.Font("Verdana", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnDeleteRows.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.btnDeleteRows.Image = Global.AVT_TRAKING.My.Resources.Resources.delete
+        Me.btnDeleteRows.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnDeleteRows.Location = New System.Drawing.Point(289, 68)
+        Me.btnDeleteRows.Margin = New System.Windows.Forms.Padding(4)
+        Me.btnDeleteRows.Name = "btnDeleteRows"
+        Me.btnDeleteRows.Size = New System.Drawing.Size(107, 38)
+        Me.btnDeleteRows.TabIndex = 1
+        Me.btnDeleteRows.Text = "Delete"
+        Me.btnDeleteRows.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.btnDeleteRows.UseVisualStyleBackColor = True
+        '
+        'btnSaveAll
+        '
+        Me.btnSaveAll.FlatAppearance.BorderSize = 0
+        Me.btnSaveAll.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(58, Byte), Integer), CType(CType(115, Byte), Integer))
+        Me.btnSaveAll.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnSaveAll.Font = New System.Drawing.Font("Verdana", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnSaveAll.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.btnSaveAll.Image = Global.AVT_TRAKING.My.Resources.Resources.saveall
+        Me.btnSaveAll.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnSaveAll.Location = New System.Drawing.Point(23, 69)
+        Me.btnSaveAll.Margin = New System.Windows.Forms.Padding(4)
+        Me.btnSaveAll.Name = "btnSaveAll"
+        Me.btnSaveAll.Size = New System.Drawing.Size(123, 38)
+        Me.btnSaveAll.TabIndex = 0
+        Me.btnSaveAll.Text = "Save All"
+        Me.btnSaveAll.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.btnSaveAll.UseVisualStyleBackColor = True
+        '
+        'btnAllReportScfTrk
+        '
+        Me.btnAllReportScfTrk.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnAllReportScfTrk.FlatAppearance.BorderSize = 0
+        Me.btnAllReportScfTrk.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(58, Byte), Integer), CType(CType(115, Byte), Integer))
+        Me.btnAllReportScfTrk.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnAllReportScfTrk.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnAllReportScfTrk.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.btnAllReportScfTrk.Image = Global.AVT_TRAKING.My.Resources.Resources.report
+        Me.btnAllReportScfTrk.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnAllReportScfTrk.Location = New System.Drawing.Point(267, 6)
+        Me.btnAllReportScfTrk.Margin = New System.Windows.Forms.Padding(4)
+        Me.btnAllReportScfTrk.Name = "btnAllReportScfTrk"
+        Me.btnAllReportScfTrk.Size = New System.Drawing.Size(117, 43)
+        Me.btnAllReportScfTrk.TabIndex = 36
+        Me.btnAllReportScfTrk.Text = "RPT All Dismantle"
+        Me.btnAllReportScfTrk.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.btnAllReportScfTrk.UseVisualStyleBackColor = True
+        '
         'scafoldTarking
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
@@ -7887,14 +7910,6 @@ Partial Class scafoldTarking
         Me.Text = "scafoldTarking"
         Me.Panel1.ResumeLayout(False)
         Me.Panel3.ResumeLayout(False)
-        Me.Panel2.ResumeLayout(False)
-        Me.Panel2.PerformLayout
-        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).EndInit
-        Me.TitleBar.ResumeLayout(False)
-        Me.TitleBar.PerformLayout
-        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.btnRestore, System.ComponentModel.ISupportInitialize).EndInit
-        CType(Me.btnMaximize, System.ComponentModel.ISupportInitialize).EndInit
         Me.MyTabControl1.ResumeLayout(False)
         Me.tbpInComing.ResumeLayout(False)
         Me.Panel4.ResumeLayout(False)
@@ -8147,6 +8162,14 @@ Partial Class scafoldTarking
         Me.Panel60.ResumeLayout(False)
         Me.Panel60.PerformLayout
         CType(Me.sprElevatorEst, System.ComponentModel.ISupportInitialize).EndInit
+        Me.Panel2.ResumeLayout(False)
+        Me.Panel2.PerformLayout
+        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).EndInit
+        Me.TitleBar.ResumeLayout(False)
+        Me.TitleBar.PerformLayout
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit
+        CType(Me.btnRestore, System.ComponentModel.ISupportInitialize).EndInit
+        CType(Me.btnMaximize, System.ComponentModel.ISupportInitialize).EndInit
         Me.ResumeLayout(False)
 
     End Sub
@@ -8735,4 +8758,5 @@ Partial Class scafoldTarking
     Friend WithEvents idProductInComing As DataGridViewTextBoxColumn
     Friend WithEvents cmbJobNoUtilization As ComboBox
     Friend WithEvents btnRPTAllDismanlte As Button
+    Friend WithEvents btnAllReportScfTrk As Button
 End Class
