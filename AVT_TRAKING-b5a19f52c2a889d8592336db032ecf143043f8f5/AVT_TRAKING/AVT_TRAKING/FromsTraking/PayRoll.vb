@@ -7,7 +7,8 @@ Public Class PayRoll
         mtdHPW.selectWeeks(tblWeeks)
         sprRowStartNBL.Enabled = False
         sprRowStartTSD.Enabled = True
-        llenarComboClientsReports(cmbClients)
+        llenarComboClientByUser(cmbClients)
+        'llenarComboClientsReports(cmbClients)
         chbALLClient.Checked = True
     End Sub
     Private Sub PictureBox4_Click(sender As Object, e As EventArgs) Handles PictureBox4.Click

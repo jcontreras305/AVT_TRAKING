@@ -1,4 +1,5 @@
-﻿Imports System.Runtime.InteropServices
+﻿Imports System.Net
+Imports System.Runtime.InteropServices
 Public Class FindTask
     Public FindElement, Element, IdClient As String
     Dim tblProjects As New DataTable
@@ -34,7 +35,8 @@ Public Class FindTask
                 cmbElement.DropDownWidth = 200
             Case "Client"
                 ocultarElementos(cmbElement)
-                llenarComboClientsReports(cmbElement)
+                'llenarComboClientsReports(cmbElement)
+                llenarComboClientByUser(cmbElement)
                 cmbElement.DropDownWidth = 200
             Case "Work Order"
                 ocultarElementos(txtElement)

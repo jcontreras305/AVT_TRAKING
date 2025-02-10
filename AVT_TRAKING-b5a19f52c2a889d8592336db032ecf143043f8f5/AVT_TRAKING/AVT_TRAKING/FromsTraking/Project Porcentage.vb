@@ -33,7 +33,8 @@ Public Class Project_Porcentage
     End Sub
 
     Private Sub Project_Porcentage_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        llenarComboClientsReports(cmbClient)
+        llenarComboClientByUser(cmbClient)
+        'llenarComboClientsReports(cmbClient)
         mtdPoPercent.selectProject(tblProjects, "'%'")
         tblProjectClient = mtdHPW.llenarTablaProjects()
     End Sub

@@ -67,8 +67,12 @@ Partial Class ConfigReelsAndOther
         Me.txtUserName = New System.Windows.Forms.TextBox()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
+        Me.TabControl1 = New System.Windows.Forms.TabControl()
+        Me.TabPage3 = New System.Windows.Forms.TabPage()
         Me.Panel9 = New System.Windows.Forms.Panel()
         Me.tvwAccess = New System.Windows.Forms.TreeView()
+        Me.TabPage4 = New System.Windows.Forms.TabPage()
+        Me.chlListClientAccess = New System.Windows.Forms.CheckedListBox()
         Me.TitleBar = New System.Windows.Forms.Panel()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
@@ -99,7 +103,10 @@ Partial Class ConfigReelsAndOther
         Me.GroupBox3.SuspendLayout()
         Me.TableLayoutPanel7.SuspendLayout()
         Me.Panel8.SuspendLayout()
+        Me.TabControl1.SuspendLayout()
+        Me.TabPage3.SuspendLayout()
         Me.Panel9.SuspendLayout()
+        Me.TabPage4.SuspendLayout()
         Me.TitleBar.SuspendLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox3, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -117,12 +124,13 @@ Partial Class ConfigReelsAndOther
         Me.TableLayoutPanel1.Controls.Add(Me.Panel2, 0, 1)
         Me.TableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.TableLayoutPanel1.Location = New System.Drawing.Point(0, 0)
+        Me.TableLayoutPanel1.Margin = New System.Windows.Forms.Padding(4)
         Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
         Me.TableLayoutPanel1.RowCount = 3
-        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40.0!))
-        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 45.0!))
+        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 49.0!))
+        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 55.0!))
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-        Me.TableLayoutPanel1.Size = New System.Drawing.Size(800, 450)
+        Me.TableLayoutPanel1.Size = New System.Drawing.Size(1067, 554)
         Me.TableLayoutPanel1.TabIndex = 2
         '
         'Panel3
@@ -130,9 +138,10 @@ Partial Class ConfigReelsAndOther
         Me.Panel3.BackColor = System.Drawing.Color.FromArgb(CType(CType(83, Byte), Integer), CType(CType(93, Byte), Integer), CType(CType(102, Byte), Integer))
         Me.Panel3.Controls.Add(Me.tbpControl)
         Me.Panel3.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel3.Location = New System.Drawing.Point(3, 88)
+        Me.Panel3.Location = New System.Drawing.Point(4, 108)
+        Me.Panel3.Margin = New System.Windows.Forms.Padding(4)
         Me.Panel3.Name = "Panel3"
-        Me.Panel3.Size = New System.Drawing.Size(794, 359)
+        Me.Panel3.Size = New System.Drawing.Size(1059, 442)
         Me.Panel3.TabIndex = 2
         '
         'tbpControl
@@ -141,19 +150,21 @@ Partial Class ConfigReelsAndOther
         Me.tbpControl.Controls.Add(Me.TabPage2)
         Me.tbpControl.Dock = System.Windows.Forms.DockStyle.Fill
         Me.tbpControl.Location = New System.Drawing.Point(0, 0)
+        Me.tbpControl.Margin = New System.Windows.Forms.Padding(4)
         Me.tbpControl.Name = "tbpControl"
         Me.tbpControl.SelectedIndex = 0
-        Me.tbpControl.Size = New System.Drawing.Size(794, 359)
+        Me.tbpControl.Size = New System.Drawing.Size(1059, 442)
         Me.tbpControl.TabIndex = 0
         '
         'TabPage1
         '
         Me.TabPage1.BackColor = System.Drawing.Color.FromArgb(CType(CType(83, Byte), Integer), CType(CType(93, Byte), Integer), CType(CType(102, Byte), Integer))
         Me.TabPage1.Controls.Add(Me.TableLayoutPanel2)
-        Me.TabPage1.Location = New System.Drawing.Point(4, 22)
+        Me.TabPage1.Location = New System.Drawing.Point(4, 25)
+        Me.TabPage1.Margin = New System.Windows.Forms.Padding(4)
         Me.TabPage1.Name = "TabPage1"
-        Me.TabPage1.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage1.Size = New System.Drawing.Size(786, 333)
+        Me.TabPage1.Padding = New System.Windows.Forms.Padding(4)
+        Me.TabPage1.Size = New System.Drawing.Size(1051, 413)
         Me.TabPage1.TabIndex = 0
         Me.TabPage1.Text = "Reels"
         '
@@ -165,20 +176,22 @@ Partial Class ConfigReelsAndOther
         Me.TableLayoutPanel2.Controls.Add(Me.Panel1, 0, 0)
         Me.TableLayoutPanel2.Controls.Add(Me.Panel4, 1, 0)
         Me.TableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.TableLayoutPanel2.Location = New System.Drawing.Point(3, 3)
+        Me.TableLayoutPanel2.Location = New System.Drawing.Point(4, 4)
+        Me.TableLayoutPanel2.Margin = New System.Windows.Forms.Padding(4)
         Me.TableLayoutPanel2.Name = "TableLayoutPanel2"
         Me.TableLayoutPanel2.RowCount = 1
         Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
-        Me.TableLayoutPanel2.Size = New System.Drawing.Size(780, 327)
+        Me.TableLayoutPanel2.Size = New System.Drawing.Size(1043, 405)
         Me.TableLayoutPanel2.TabIndex = 0
         '
         'Panel1
         '
         Me.Panel1.Controls.Add(Me.GroupBox1)
         Me.Panel1.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel1.Location = New System.Drawing.Point(3, 3)
+        Me.Panel1.Location = New System.Drawing.Point(4, 4)
+        Me.Panel1.Margin = New System.Windows.Forms.Padding(4)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(306, 321)
+        Me.Panel1.Size = New System.Drawing.Size(410, 397)
         Me.Panel1.TabIndex = 0
         '
         'GroupBox1
@@ -187,8 +200,10 @@ Partial Class ConfigReelsAndOther
         Me.GroupBox1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.GroupBox1.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.GroupBox1.Location = New System.Drawing.Point(0, 0)
+        Me.GroupBox1.Margin = New System.Windows.Forms.Padding(4)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(306, 321)
+        Me.GroupBox1.Padding = New System.Windows.Forms.Padding(4)
+        Me.GroupBox1.Size = New System.Drawing.Size(410, 397)
         Me.GroupBox1.TabIndex = 1
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Image List"
@@ -200,12 +215,13 @@ Partial Class ConfigReelsAndOther
         Me.TableLayoutPanel4.Controls.Add(Me.Panel5, 0, 0)
         Me.TableLayoutPanel4.Controls.Add(Me.Panel7, 0, 1)
         Me.TableLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.TableLayoutPanel4.Location = New System.Drawing.Point(3, 16)
+        Me.TableLayoutPanel4.Location = New System.Drawing.Point(4, 19)
+        Me.TableLayoutPanel4.Margin = New System.Windows.Forms.Padding(4)
         Me.TableLayoutPanel4.Name = "TableLayoutPanel4"
         Me.TableLayoutPanel4.RowCount = 2
         Me.TableLayoutPanel4.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-        Me.TableLayoutPanel4.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50.0!))
-        Me.TableLayoutPanel4.Size = New System.Drawing.Size(300, 302)
+        Me.TableLayoutPanel4.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 62.0!))
+        Me.TableLayoutPanel4.Size = New System.Drawing.Size(402, 374)
         Me.TableLayoutPanel4.TabIndex = 4
         '
         'Panel5
@@ -213,9 +229,10 @@ Partial Class ConfigReelsAndOther
         Me.Panel5.Controls.Add(Me.tblImages)
         Me.Panel5.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel5.ForeColor = System.Drawing.SystemColors.ControlText
-        Me.Panel5.Location = New System.Drawing.Point(3, 3)
+        Me.Panel5.Location = New System.Drawing.Point(4, 4)
+        Me.Panel5.Margin = New System.Windows.Forms.Padding(4)
         Me.Panel5.Name = "Panel5"
-        Me.Panel5.Size = New System.Drawing.Size(294, 246)
+        Me.Panel5.Size = New System.Drawing.Size(394, 304)
         Me.Panel5.TabIndex = 1
         '
         'tblImages
@@ -226,30 +243,36 @@ Partial Class ConfigReelsAndOther
         Me.tblImages.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.indexImage, Me.indexImageAux, Me.ImageName, Me.ImageReels})
         Me.tblImages.Dock = System.Windows.Forms.DockStyle.Fill
         Me.tblImages.Location = New System.Drawing.Point(0, 0)
+        Me.tblImages.Margin = New System.Windows.Forms.Padding(4)
         Me.tblImages.Name = "tblImages"
+        Me.tblImages.RowHeadersWidth = 51
         Me.tblImages.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.tblImages.Size = New System.Drawing.Size(294, 246)
+        Me.tblImages.Size = New System.Drawing.Size(394, 304)
         Me.tblImages.TabIndex = 0
         '
         'indexImage
         '
         Me.indexImage.HeaderText = "indexImage"
+        Me.indexImage.MinimumWidth = 6
         Me.indexImage.Name = "indexImage"
         Me.indexImage.Visible = False
         '
         'indexImageAux
         '
         Me.indexImageAux.HeaderText = "Index"
+        Me.indexImageAux.MinimumWidth = 6
         Me.indexImageAux.Name = "indexImageAux"
         '
         'ImageName
         '
         Me.ImageName.HeaderText = "Name"
+        Me.ImageName.MinimumWidth = 6
         Me.ImageName.Name = "ImageName"
         '
         'ImageReels
         '
         Me.ImageReels.HeaderText = "ImageReels"
+        Me.ImageReels.MinimumWidth = 6
         Me.ImageReels.Name = "ImageReels"
         Me.ImageReels.Visible = False
         '
@@ -258,9 +281,10 @@ Partial Class ConfigReelsAndOther
         Me.Panel7.Controls.Add(Me.btnSave)
         Me.Panel7.Controls.Add(Me.btnDelete)
         Me.Panel7.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel7.Location = New System.Drawing.Point(3, 255)
+        Me.Panel7.Location = New System.Drawing.Point(4, 316)
+        Me.Panel7.Margin = New System.Windows.Forms.Padding(4)
         Me.Panel7.Name = "Panel7"
-        Me.Panel7.Size = New System.Drawing.Size(294, 44)
+        Me.Panel7.Size = New System.Drawing.Size(394, 54)
         Me.Panel7.TabIndex = 2
         '
         'btnSave
@@ -269,9 +293,10 @@ Partial Class ConfigReelsAndOther
         Me.btnSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnSave.Image = Global.AVT_TRAKING.My.Resources.Resources.save
         Me.btnSave.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnSave.Location = New System.Drawing.Point(-3, 3)
+        Me.btnSave.Location = New System.Drawing.Point(-4, 4)
+        Me.btnSave.Margin = New System.Windows.Forms.Padding(4)
         Me.btnSave.Name = "btnSave"
-        Me.btnSave.Size = New System.Drawing.Size(78, 36)
+        Me.btnSave.Size = New System.Drawing.Size(104, 44)
         Me.btnSave.TabIndex = 2
         Me.btnSave.Text = "Update"
         Me.btnSave.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -283,9 +308,10 @@ Partial Class ConfigReelsAndOther
         Me.btnDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnDelete.Image = Global.AVT_TRAKING.My.Resources.Resources.delete
         Me.btnDelete.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnDelete.Location = New System.Drawing.Point(81, 3)
+        Me.btnDelete.Location = New System.Drawing.Point(108, 4)
+        Me.btnDelete.Margin = New System.Windows.Forms.Padding(4)
         Me.btnDelete.Name = "btnDelete"
-        Me.btnDelete.Size = New System.Drawing.Size(71, 36)
+        Me.btnDelete.Size = New System.Drawing.Size(95, 44)
         Me.btnDelete.TabIndex = 3
         Me.btnDelete.Text = "Delete"
         Me.btnDelete.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -295,9 +321,10 @@ Partial Class ConfigReelsAndOther
         '
         Me.Panel4.Controls.Add(Me.TableLayoutPanel3)
         Me.Panel4.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel4.Location = New System.Drawing.Point(315, 3)
+        Me.Panel4.Location = New System.Drawing.Point(422, 4)
+        Me.Panel4.Margin = New System.Windows.Forms.Padding(4)
         Me.Panel4.Name = "Panel4"
-        Me.Panel4.Size = New System.Drawing.Size(462, 321)
+        Me.Panel4.Size = New System.Drawing.Size(617, 397)
         Me.Panel4.TabIndex = 1
         '
         'TableLayoutPanel3
@@ -309,19 +336,21 @@ Partial Class ConfigReelsAndOther
         Me.TableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill
         Me.TableLayoutPanel3.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.TableLayoutPanel3.Location = New System.Drawing.Point(0, 0)
+        Me.TableLayoutPanel3.Margin = New System.Windows.Forms.Padding(4)
         Me.TableLayoutPanel3.Name = "TableLayoutPanel3"
         Me.TableLayoutPanel3.RowCount = 2
         Me.TableLayoutPanel3.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-        Me.TableLayoutPanel3.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50.0!))
-        Me.TableLayoutPanel3.Size = New System.Drawing.Size(462, 321)
+        Me.TableLayoutPanel3.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 62.0!))
+        Me.TableLayoutPanel3.Size = New System.Drawing.Size(617, 397)
         Me.TableLayoutPanel3.TabIndex = 1
         '
         'pcbImage
         '
         Me.pcbImage.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.pcbImage.Location = New System.Drawing.Point(3, 3)
+        Me.pcbImage.Location = New System.Drawing.Point(4, 4)
+        Me.pcbImage.Margin = New System.Windows.Forms.Padding(4)
         Me.pcbImage.Name = "pcbImage"
-        Me.pcbImage.Size = New System.Drawing.Size(456, 265)
+        Me.pcbImage.Size = New System.Drawing.Size(609, 327)
         Me.pcbImage.TabIndex = 0
         Me.pcbImage.TabStop = False
         '
@@ -332,26 +361,29 @@ Partial Class ConfigReelsAndOther
         Me.Panel6.Controls.Add(Me.btnAdd)
         Me.Panel6.Controls.Add(Me.btnNew)
         Me.Panel6.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel6.Location = New System.Drawing.Point(3, 274)
+        Me.Panel6.Location = New System.Drawing.Point(4, 339)
+        Me.Panel6.Margin = New System.Windows.Forms.Padding(4)
         Me.Panel6.Name = "Panel6"
-        Me.Panel6.Size = New System.Drawing.Size(456, 44)
+        Me.Panel6.Size = New System.Drawing.Size(609, 54)
         Me.Panel6.TabIndex = 1
         '
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(3, 15)
+        Me.Label1.Location = New System.Drawing.Point(4, 18)
+        Me.Label1.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(35, 13)
+        Me.Label1.Size = New System.Drawing.Size(44, 16)
         Me.Label1.TabIndex = 7
         Me.Label1.Text = "Name"
         '
         'txtName
         '
-        Me.txtName.Location = New System.Drawing.Point(44, 12)
+        Me.txtName.Location = New System.Drawing.Point(59, 15)
+        Me.txtName.Margin = New System.Windows.Forms.Padding(4)
         Me.txtName.MaxLength = 100
         Me.txtName.Name = "txtName"
-        Me.txtName.Size = New System.Drawing.Size(178, 20)
+        Me.txtName.Size = New System.Drawing.Size(236, 22)
         Me.txtName.TabIndex = 6
         '
         'btnAdd
@@ -360,9 +392,10 @@ Partial Class ConfigReelsAndOther
         Me.btnAdd.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnAdd.Image = Global.AVT_TRAKING.My.Resources.Resources.add
         Me.btnAdd.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnAdd.Location = New System.Drawing.Point(228, 5)
+        Me.btnAdd.Location = New System.Drawing.Point(304, 6)
+        Me.btnAdd.Margin = New System.Windows.Forms.Padding(4)
         Me.btnAdd.Name = "btnAdd"
-        Me.btnAdd.Size = New System.Drawing.Size(61, 36)
+        Me.btnAdd.Size = New System.Drawing.Size(81, 44)
         Me.btnAdd.TabIndex = 5
         Me.btnAdd.Text = "Add"
         Me.btnAdd.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -375,9 +408,10 @@ Partial Class ConfigReelsAndOther
         Me.btnNew.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnNew.Image = Global.AVT_TRAKING.My.Resources.Resources._new
         Me.btnNew.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnNew.Location = New System.Drawing.Point(382, 3)
+        Me.btnNew.Location = New System.Drawing.Point(510, 4)
+        Me.btnNew.Margin = New System.Windows.Forms.Padding(4)
         Me.btnNew.Name = "btnNew"
-        Me.btnNew.Size = New System.Drawing.Size(71, 36)
+        Me.btnNew.Size = New System.Drawing.Size(95, 44)
         Me.btnNew.TabIndex = 4
         Me.btnNew.Text = "New"
         Me.btnNew.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -387,10 +421,11 @@ Partial Class ConfigReelsAndOther
         '
         Me.TabPage2.BackColor = System.Drawing.Color.FromArgb(CType(CType(83, Byte), Integer), CType(CType(93, Byte), Integer), CType(CType(102, Byte), Integer))
         Me.TabPage2.Controls.Add(Me.TableLayoutPanel5)
-        Me.TabPage2.Location = New System.Drawing.Point(4, 22)
+        Me.TabPage2.Location = New System.Drawing.Point(4, 25)
+        Me.TabPage2.Margin = New System.Windows.Forms.Padding(4)
         Me.TabPage2.Name = "TabPage2"
-        Me.TabPage2.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage2.Size = New System.Drawing.Size(786, 333)
+        Me.TabPage2.Padding = New System.Windows.Forms.Padding(4)
+        Me.TabPage2.Size = New System.Drawing.Size(1051, 413)
         Me.TabPage2.TabIndex = 1
         Me.TabPage2.Text = "Users"
         '
@@ -402,11 +437,12 @@ Partial Class ConfigReelsAndOther
         Me.TableLayoutPanel5.Controls.Add(Me.GroupBox2, 0, 0)
         Me.TableLayoutPanel5.Controls.Add(Me.GroupBox3, 1, 0)
         Me.TableLayoutPanel5.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.TableLayoutPanel5.Location = New System.Drawing.Point(3, 3)
+        Me.TableLayoutPanel5.Location = New System.Drawing.Point(4, 4)
+        Me.TableLayoutPanel5.Margin = New System.Windows.Forms.Padding(4)
         Me.TableLayoutPanel5.Name = "TableLayoutPanel5"
         Me.TableLayoutPanel5.RowCount = 1
         Me.TableLayoutPanel5.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
-        Me.TableLayoutPanel5.Size = New System.Drawing.Size(780, 327)
+        Me.TableLayoutPanel5.Size = New System.Drawing.Size(1043, 405)
         Me.TableLayoutPanel5.TabIndex = 0
         '
         'GroupBox2
@@ -414,9 +450,11 @@ Partial Class ConfigReelsAndOther
         Me.GroupBox2.Controls.Add(Me.TableLayoutPanel6)
         Me.GroupBox2.Dock = System.Windows.Forms.DockStyle.Fill
         Me.GroupBox2.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.GroupBox2.Location = New System.Drawing.Point(3, 3)
+        Me.GroupBox2.Location = New System.Drawing.Point(4, 4)
+        Me.GroupBox2.Margin = New System.Windows.Forms.Padding(4)
         Me.GroupBox2.Name = "GroupBox2"
-        Me.GroupBox2.Size = New System.Drawing.Size(333, 321)
+        Me.GroupBox2.Padding = New System.Windows.Forms.Padding(4)
+        Me.GroupBox2.Size = New System.Drawing.Size(445, 397)
         Me.GroupBox2.TabIndex = 0
         Me.GroupBox2.TabStop = False
         Me.GroupBox2.Text = "Users"
@@ -429,12 +467,13 @@ Partial Class ConfigReelsAndOther
         Me.TableLayoutPanel6.Controls.Add(Me.Panel10, 0, 1)
         Me.TableLayoutPanel6.Dock = System.Windows.Forms.DockStyle.Fill
         Me.TableLayoutPanel6.ForeColor = System.Drawing.SystemColors.ControlText
-        Me.TableLayoutPanel6.Location = New System.Drawing.Point(3, 16)
+        Me.TableLayoutPanel6.Location = New System.Drawing.Point(4, 19)
+        Me.TableLayoutPanel6.Margin = New System.Windows.Forms.Padding(4)
         Me.TableLayoutPanel6.Name = "TableLayoutPanel6"
         Me.TableLayoutPanel6.RowCount = 2
         Me.TableLayoutPanel6.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 80.46358!))
         Me.TableLayoutPanel6.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 19.53642!))
-        Me.TableLayoutPanel6.Size = New System.Drawing.Size(327, 302)
+        Me.TableLayoutPanel6.Size = New System.Drawing.Size(437, 374)
         Me.TableLayoutPanel6.TabIndex = 0
         '
         'tblUsers
@@ -445,16 +484,19 @@ Partial Class ConfigReelsAndOther
         Me.tblUsers.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.tblUsers.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.idUsers, Me.UserName, Me.userPass})
         Me.tblUsers.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.tblUsers.Location = New System.Drawing.Point(3, 3)
+        Me.tblUsers.Location = New System.Drawing.Point(4, 4)
+        Me.tblUsers.Margin = New System.Windows.Forms.Padding(4)
         Me.tblUsers.Name = "tblUsers"
         Me.tblUsers.ReadOnly = True
+        Me.tblUsers.RowHeadersWidth = 51
         Me.tblUsers.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.tblUsers.Size = New System.Drawing.Size(321, 237)
+        Me.tblUsers.Size = New System.Drawing.Size(429, 292)
         Me.tblUsers.TabIndex = 0
         '
         'idUsers
         '
         Me.idUsers.HeaderText = "idUsers"
+        Me.idUsers.MinimumWidth = 6
         Me.idUsers.Name = "idUsers"
         Me.idUsers.ReadOnly = True
         Me.idUsers.Visible = False
@@ -462,12 +504,14 @@ Partial Class ConfigReelsAndOther
         'UserName
         '
         Me.UserName.HeaderText = "User Name"
+        Me.UserName.MinimumWidth = 6
         Me.UserName.Name = "UserName"
         Me.UserName.ReadOnly = True
         '
         'userPass
         '
         Me.userPass.HeaderText = "userPass"
+        Me.userPass.MinimumWidth = 6
         Me.userPass.Name = "userPass"
         Me.userPass.ReadOnly = True
         Me.userPass.Visible = False
@@ -477,9 +521,10 @@ Partial Class ConfigReelsAndOther
         Me.Panel10.Controls.Add(Me.btnDeleteUser)
         Me.Panel10.Controls.Add(Me.btnSaveUser)
         Me.Panel10.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel10.Location = New System.Drawing.Point(3, 246)
+        Me.Panel10.Location = New System.Drawing.Point(4, 304)
+        Me.Panel10.Margin = New System.Windows.Forms.Padding(4)
         Me.Panel10.Name = "Panel10"
-        Me.Panel10.Size = New System.Drawing.Size(321, 53)
+        Me.Panel10.Size = New System.Drawing.Size(429, 66)
         Me.Panel10.TabIndex = 1
         '
         'btnDeleteUser
@@ -489,9 +534,10 @@ Partial Class ConfigReelsAndOther
         Me.btnDeleteUser.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.btnDeleteUser.Image = Global.AVT_TRAKING.My.Resources.Resources.delete
         Me.btnDeleteUser.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnDeleteUser.Location = New System.Drawing.Point(95, 15)
+        Me.btnDeleteUser.Location = New System.Drawing.Point(127, 18)
+        Me.btnDeleteUser.Margin = New System.Windows.Forms.Padding(4)
         Me.btnDeleteUser.Name = "btnDeleteUser"
-        Me.btnDeleteUser.Size = New System.Drawing.Size(75, 35)
+        Me.btnDeleteUser.Size = New System.Drawing.Size(100, 43)
         Me.btnDeleteUser.TabIndex = 2
         Me.btnDeleteUser.Text = "Delete"
         Me.btnDeleteUser.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -504,9 +550,10 @@ Partial Class ConfigReelsAndOther
         Me.btnSaveUser.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.btnSaveUser.Image = Global.AVT_TRAKING.My.Resources.Resources.save
         Me.btnSaveUser.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnSaveUser.Location = New System.Drawing.Point(14, 15)
+        Me.btnSaveUser.Location = New System.Drawing.Point(19, 18)
+        Me.btnSaveUser.Margin = New System.Windows.Forms.Padding(4)
         Me.btnSaveUser.Name = "btnSaveUser"
-        Me.btnSaveUser.Size = New System.Drawing.Size(75, 35)
+        Me.btnSaveUser.Size = New System.Drawing.Size(100, 43)
         Me.btnSaveUser.TabIndex = 1
         Me.btnSaveUser.Text = "Save"
         Me.btnSaveUser.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -517,9 +564,11 @@ Partial Class ConfigReelsAndOther
         Me.GroupBox3.Controls.Add(Me.TableLayoutPanel7)
         Me.GroupBox3.Dock = System.Windows.Forms.DockStyle.Fill
         Me.GroupBox3.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.GroupBox3.Location = New System.Drawing.Point(342, 3)
+        Me.GroupBox3.Location = New System.Drawing.Point(457, 4)
+        Me.GroupBox3.Margin = New System.Windows.Forms.Padding(4)
         Me.GroupBox3.Name = "GroupBox3"
-        Me.GroupBox3.Size = New System.Drawing.Size(435, 321)
+        Me.GroupBox3.Padding = New System.Windows.Forms.Padding(4)
+        Me.GroupBox3.Size = New System.Drawing.Size(582, 397)
         Me.GroupBox3.TabIndex = 0
         Me.GroupBox3.TabStop = False
         Me.GroupBox3.Text = "Access"
@@ -528,15 +577,16 @@ Partial Class ConfigReelsAndOther
         '
         Me.TableLayoutPanel7.ColumnCount = 2
         Me.TableLayoutPanel7.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
-        Me.TableLayoutPanel7.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 231.0!))
+        Me.TableLayoutPanel7.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 308.0!))
         Me.TableLayoutPanel7.Controls.Add(Me.Panel8, 0, 0)
-        Me.TableLayoutPanel7.Controls.Add(Me.Panel9, 1, 0)
+        Me.TableLayoutPanel7.Controls.Add(Me.TabControl1, 1, 0)
         Me.TableLayoutPanel7.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.TableLayoutPanel7.Location = New System.Drawing.Point(3, 16)
+        Me.TableLayoutPanel7.Location = New System.Drawing.Point(4, 19)
+        Me.TableLayoutPanel7.Margin = New System.Windows.Forms.Padding(4)
         Me.TableLayoutPanel7.Name = "TableLayoutPanel7"
         Me.TableLayoutPanel7.RowCount = 1
         Me.TableLayoutPanel7.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 27.15232!))
-        Me.TableLayoutPanel7.Size = New System.Drawing.Size(429, 302)
+        Me.TableLayoutPanel7.Size = New System.Drawing.Size(574, 374)
         Me.TableLayoutPanel7.TabIndex = 0
         '
         'Panel8
@@ -549,9 +599,10 @@ Partial Class ConfigReelsAndOther
         Me.Panel8.Controls.Add(Me.Label2)
         Me.Panel8.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel8.ForeColor = System.Drawing.SystemColors.ControlText
-        Me.Panel8.Location = New System.Drawing.Point(3, 3)
+        Me.Panel8.Location = New System.Drawing.Point(4, 4)
+        Me.Panel8.Margin = New System.Windows.Forms.Padding(4)
         Me.Panel8.Name = "Panel8"
-        Me.Panel8.Size = New System.Drawing.Size(192, 296)
+        Me.Panel8.Size = New System.Drawing.Size(258, 366)
         Me.Panel8.TabIndex = 1
         '
         'btnNewUser
@@ -561,9 +612,10 @@ Partial Class ConfigReelsAndOther
         Me.btnNewUser.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.btnNewUser.Image = Global.AVT_TRAKING.My.Resources.Resources._new
         Me.btnNewUser.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnNewUser.Location = New System.Drawing.Point(117, 258)
+        Me.btnNewUser.Location = New System.Drawing.Point(156, 318)
+        Me.btnNewUser.Margin = New System.Windows.Forms.Padding(4)
         Me.btnNewUser.Name = "btnNewUser"
-        Me.btnNewUser.Size = New System.Drawing.Size(72, 35)
+        Me.btnNewUser.Size = New System.Drawing.Size(96, 43)
         Me.btnNewUser.TabIndex = 5
         Me.btnNewUser.Text = "New"
         Me.btnNewUser.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -573,34 +625,38 @@ Partial Class ConfigReelsAndOther
         '
         Me.chbSee.AutoSize = True
         Me.chbSee.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.chbSee.Location = New System.Drawing.Point(164, 88)
+        Me.chbSee.Location = New System.Drawing.Point(219, 108)
+        Me.chbSee.Margin = New System.Windows.Forms.Padding(4)
         Me.chbSee.Name = "chbSee"
-        Me.chbSee.Size = New System.Drawing.Size(15, 14)
+        Me.chbSee.Size = New System.Drawing.Size(18, 17)
         Me.chbSee.TabIndex = 4
         Me.chbSee.UseVisualStyleBackColor = True
         '
         'txtPassword
         '
-        Me.txtPassword.Location = New System.Drawing.Point(18, 85)
+        Me.txtPassword.Location = New System.Drawing.Point(24, 105)
+        Me.txtPassword.Margin = New System.Windows.Forms.Padding(4)
         Me.txtPassword.Name = "txtPassword"
-        Me.txtPassword.Size = New System.Drawing.Size(137, 20)
+        Me.txtPassword.Size = New System.Drawing.Size(181, 22)
         Me.txtPassword.TabIndex = 3
         Me.txtPassword.UseSystemPasswordChar = True
         '
         'txtUserName
         '
-        Me.txtUserName.Location = New System.Drawing.Point(18, 34)
+        Me.txtUserName.Location = New System.Drawing.Point(24, 42)
+        Me.txtUserName.Margin = New System.Windows.Forms.Padding(4)
         Me.txtUserName.Name = "txtUserName"
-        Me.txtUserName.Size = New System.Drawing.Size(161, 20)
+        Me.txtUserName.Size = New System.Drawing.Size(213, 22)
         Me.txtUserName.TabIndex = 2
         '
         'Label4
         '
         Me.Label4.AutoSize = True
         Me.Label4.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.Label4.Location = New System.Drawing.Point(15, 69)
+        Me.Label4.Location = New System.Drawing.Point(20, 85)
+        Me.Label4.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(53, 13)
+        Me.Label4.Size = New System.Drawing.Size(67, 16)
         Me.Label4.TabIndex = 1
         Me.Label4.Text = "Password"
         '
@@ -608,20 +664,44 @@ Partial Class ConfigReelsAndOther
         '
         Me.Label2.AutoSize = True
         Me.Label2.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.Label2.Location = New System.Drawing.Point(15, 18)
+        Me.Label2.Location = New System.Drawing.Point(20, 22)
+        Me.Label2.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(63, 13)
+        Me.Label2.Size = New System.Drawing.Size(79, 16)
         Me.Label2.TabIndex = 0
         Me.Label2.Text = "User Name:"
+        '
+        'TabControl1
+        '
+        Me.TabControl1.Controls.Add(Me.TabPage3)
+        Me.TabControl1.Controls.Add(Me.TabPage4)
+        Me.TabControl1.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.TabControl1.Location = New System.Drawing.Point(269, 3)
+        Me.TabControl1.Name = "TabControl1"
+        Me.TabControl1.SelectedIndex = 0
+        Me.TabControl1.Size = New System.Drawing.Size(302, 368)
+        Me.TabControl1.TabIndex = 2
+        '
+        'TabPage3
+        '
+        Me.TabPage3.BackColor = System.Drawing.Color.FromArgb(CType(CType(83, Byte), Integer), CType(CType(93, Byte), Integer), CType(CType(102, Byte), Integer))
+        Me.TabPage3.Controls.Add(Me.Panel9)
+        Me.TabPage3.Location = New System.Drawing.Point(4, 25)
+        Me.TabPage3.Name = "TabPage3"
+        Me.TabPage3.Padding = New System.Windows.Forms.Padding(3)
+        Me.TabPage3.Size = New System.Drawing.Size(294, 339)
+        Me.TabPage3.TabIndex = 0
+        Me.TabPage3.Text = "Tools Access"
         '
         'Panel9
         '
         Me.Panel9.Controls.Add(Me.tvwAccess)
         Me.Panel9.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel9.ForeColor = System.Drawing.SystemColors.ControlText
-        Me.Panel9.Location = New System.Drawing.Point(201, 3)
+        Me.Panel9.Location = New System.Drawing.Point(3, 3)
+        Me.Panel9.Margin = New System.Windows.Forms.Padding(4)
         Me.Panel9.Name = "Panel9"
-        Me.Panel9.Size = New System.Drawing.Size(225, 296)
+        Me.Panel9.Size = New System.Drawing.Size(288, 333)
         Me.Panel9.TabIndex = 2
         '
         'tvwAccess
@@ -629,9 +709,30 @@ Partial Class ConfigReelsAndOther
         Me.tvwAccess.CheckBoxes = True
         Me.tvwAccess.Dock = System.Windows.Forms.DockStyle.Fill
         Me.tvwAccess.Location = New System.Drawing.Point(0, 0)
+        Me.tvwAccess.Margin = New System.Windows.Forms.Padding(4)
         Me.tvwAccess.Name = "tvwAccess"
-        Me.tvwAccess.Size = New System.Drawing.Size(225, 296)
+        Me.tvwAccess.Size = New System.Drawing.Size(288, 333)
         Me.tvwAccess.TabIndex = 0
+        '
+        'TabPage4
+        '
+        Me.TabPage4.Controls.Add(Me.chlListClientAccess)
+        Me.TabPage4.Location = New System.Drawing.Point(4, 25)
+        Me.TabPage4.Name = "TabPage4"
+        Me.TabPage4.Padding = New System.Windows.Forms.Padding(3)
+        Me.TabPage4.Size = New System.Drawing.Size(294, 339)
+        Me.TabPage4.TabIndex = 1
+        Me.TabPage4.Text = "Client Access"
+        Me.TabPage4.UseVisualStyleBackColor = True
+        '
+        'chlListClientAccess
+        '
+        Me.chlListClientAccess.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.chlListClientAccess.FormattingEnabled = True
+        Me.chlListClientAccess.Location = New System.Drawing.Point(3, 3)
+        Me.chlListClientAccess.Name = "chlListClientAccess"
+        Me.chlListClientAccess.Size = New System.Drawing.Size(288, 333)
+        Me.chlListClientAccess.TabIndex = 0
         '
         'TitleBar
         '
@@ -640,9 +741,10 @@ Partial Class ConfigReelsAndOther
         Me.TitleBar.Controls.Add(Me.PictureBox1)
         Me.TitleBar.Controls.Add(Me.PictureBox3)
         Me.TitleBar.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.TitleBar.Location = New System.Drawing.Point(3, 3)
+        Me.TitleBar.Location = New System.Drawing.Point(4, 4)
+        Me.TitleBar.Margin = New System.Windows.Forms.Padding(4)
         Me.TitleBar.Name = "TitleBar"
-        Me.TitleBar.Size = New System.Drawing.Size(794, 34)
+        Me.TitleBar.Size = New System.Drawing.Size(1059, 41)
         Me.TitleBar.TabIndex = 0
         '
         'Label3
@@ -650,18 +752,20 @@ Partial Class ConfigReelsAndOther
         Me.Label3.AutoSize = True
         Me.Label3.Font = New System.Drawing.Font("Verdana", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label3.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.Label3.Location = New System.Drawing.Point(40, 6)
+        Me.Label3.Location = New System.Drawing.Point(53, 7)
+        Me.Label3.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(212, 18)
+        Me.Label3.Size = New System.Drawing.Size(272, 25)
         Me.Label3.TabIndex = 11
         Me.Label3.Text = "Config Reels And Other"
         '
         'PictureBox1
         '
         Me.PictureBox1.Image = Global.AVT_TRAKING.My.Resources.Resources.report
-        Me.PictureBox1.Location = New System.Drawing.Point(6, 2)
+        Me.PictureBox1.Location = New System.Drawing.Point(8, 2)
+        Me.PictureBox1.Margin = New System.Windows.Forms.Padding(4)
         Me.PictureBox1.Name = "PictureBox1"
-        Me.PictureBox1.Size = New System.Drawing.Size(28, 28)
+        Me.PictureBox1.Size = New System.Drawing.Size(37, 34)
         Me.PictureBox1.TabIndex = 10
         Me.PictureBox1.TabStop = False
         '
@@ -669,9 +773,10 @@ Partial Class ConfigReelsAndOther
         '
         Me.PictureBox3.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.PictureBox3.Image = Global.AVT_TRAKING.My.Resources.Resources.minimize2
-        Me.PictureBox3.Location = New System.Drawing.Point(764, 1)
+        Me.PictureBox3.Location = New System.Drawing.Point(1019, 1)
+        Me.PictureBox3.Margin = New System.Windows.Forms.Padding(4)
         Me.PictureBox3.Name = "PictureBox3"
-        Me.PictureBox3.Size = New System.Drawing.Size(27, 29)
+        Me.PictureBox3.Size = New System.Drawing.Size(36, 36)
         Me.PictureBox3.TabIndex = 9
         Me.PictureBox3.TabStop = False
         '
@@ -680,28 +785,31 @@ Partial Class ConfigReelsAndOther
         Me.Panel2.BackColor = System.Drawing.Color.FromArgb(CType(CType(83, Byte), Integer), CType(CType(93, Byte), Integer), CType(CType(102, Byte), Integer))
         Me.Panel2.Controls.Add(Me.PictureBox4)
         Me.Panel2.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel2.Location = New System.Drawing.Point(3, 43)
+        Me.Panel2.Location = New System.Drawing.Point(4, 53)
+        Me.Panel2.Margin = New System.Windows.Forms.Padding(4)
         Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(794, 39)
+        Me.Panel2.Size = New System.Drawing.Size(1059, 47)
         Me.Panel2.TabIndex = 1
         '
         'PictureBox4
         '
         Me.PictureBox4.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.PictureBox4.Image = Global.AVT_TRAKING.My.Resources.Resources._exit
-        Me.PictureBox4.Location = New System.Drawing.Point(754, 3)
+        Me.PictureBox4.Location = New System.Drawing.Point(1005, 4)
+        Me.PictureBox4.Margin = New System.Windows.Forms.Padding(4)
         Me.PictureBox4.Name = "PictureBox4"
-        Me.PictureBox4.Size = New System.Drawing.Size(37, 29)
+        Me.PictureBox4.Size = New System.Drawing.Size(49, 36)
         Me.PictureBox4.TabIndex = 8
         Me.PictureBox4.TabStop = False
         '
         'ConfigReelsAndOther
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(800, 450)
+        Me.ClientSize = New System.Drawing.Size(1067, 554)
         Me.Controls.Add(Me.TableLayoutPanel1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
+        Me.Margin = New System.Windows.Forms.Padding(4)
         Me.Name = "ConfigReelsAndOther"
         Me.Text = "ConfigReelsAndOther"
         Me.TableLayoutPanel1.ResumeLayout(False)
@@ -730,7 +838,10 @@ Partial Class ConfigReelsAndOther
         Me.TableLayoutPanel7.ResumeLayout(False)
         Me.Panel8.ResumeLayout(False)
         Me.Panel8.PerformLayout()
+        Me.TabControl1.ResumeLayout(False)
+        Me.TabPage3.ResumeLayout(False)
         Me.Panel9.ResumeLayout(False)
+        Me.TabPage4.ResumeLayout(False)
         Me.TitleBar.ResumeLayout(False)
         Me.TitleBar.PerformLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
@@ -794,4 +905,8 @@ Partial Class ConfigReelsAndOther
     Friend WithEvents btnSaveUser As Button
     Friend WithEvents btnNewUser As Button
     Friend WithEvents tvwAccess As TreeView
+    Friend WithEvents TabControl1 As TabControl
+    Friend WithEvents TabPage3 As TabPage
+    Friend WithEvents TabPage4 As TabPage
+    Friend WithEvents chlListClientAccess As CheckedListBox
 End Class

@@ -1,11 +1,13 @@
 ﻿Imports System.Runtime.InteropServices
 Imports System.Data.SqlClient
 Imports CrystalDecisions.ReportAppServer
+Imports System.Net
 Public Class ReportClientBillingProject
     Dim conection As New ConnectioDB
     Dim idClient As String = ""
     Private Sub ReportClientBillingProject_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        llenarComboClientsReports(cmbClients)
+        'llenarComboClientsReports(cmbClients)
+        llenarComboClientByUser(cmbClients)
     End Sub
     Private Sub PictureBox3_Click(sender As Object, e As EventArgs) Handles PictureBox3.Click
         Me.WindowState = FormWindowState.Minimized

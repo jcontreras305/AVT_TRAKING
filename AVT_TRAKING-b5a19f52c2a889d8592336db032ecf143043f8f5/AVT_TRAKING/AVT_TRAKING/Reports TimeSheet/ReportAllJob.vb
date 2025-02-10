@@ -1,4 +1,5 @@
-﻿Imports System.Runtime.InteropServices
+﻿Imports System.Net
+Imports System.Runtime.InteropServices
 Imports CrystalDecisions.ReportAppServer
 Public Class ReportAllJob
     Private Sub PictureBox3_Click(sender As Object, e As EventArgs) Handles PictureBox3.Click
@@ -53,7 +54,8 @@ Public Class ReportAllJob
     End Sub
 
     Private Sub ReportAllJob_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        llenarComboClientsReports(cmbClients)
+        'llenarComboClientsReports(cmbClients)
+        llenarComboClientByUser(cmbClients)
         txtPOExclude.Enabled = False
     End Sub
 

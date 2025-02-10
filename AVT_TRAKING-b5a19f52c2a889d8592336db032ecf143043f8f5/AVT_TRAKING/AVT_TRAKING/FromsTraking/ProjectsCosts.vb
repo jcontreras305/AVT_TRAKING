@@ -28,6 +28,7 @@ Public Class ProjectsCosts
         lblWorkOrder.Text = WorkOrder '
         txtWokOrder.Text = WorkOrder
         mtdJobs.llenarComboJob(cmbJobNumber, idCliente)
+        'llenarComboJobByUserIDClient(cmbJobNumber, idClient)
         'aqui se consulta y se cargan los datos en la interfaz
         mtdJobs.consultaWO(JobNumber, tablasDeTareas)
         If tablasDeTareas.Rows IsNot Nothing Then
@@ -651,7 +652,7 @@ Public Class ProjectsCosts
     End Sub
 
     Public Function validarTask() As Boolean
-        If txtTask.Text.Length >= 1 And txtTask.Text.Length <= 10 Then
+        If txtTask.Text.Length >= 1 And txtTask.Text.Length <= 17 Then
             Dim flagTask As Boolean = True
             For Each row As DataRow In tablasDeTareas.Rows
                 If txtTask.Text = row.ItemArray(3).ToString And txtWokOrder.Text = row.ItemArray(2) And cmbJobNumber.Text = row.ItemArray(0).ToString() And txtClientPO.Text = row.ItemArray(1).ToString() Then
@@ -664,8 +665,8 @@ Public Class ProjectsCosts
             If txtTask.Text.Length < 1 Then
                 MessageBox.Show("The 'Task' parameter admits a code whose length is greater or equals than 1 character.", "Error", MessageBoxButtons.YesNo, MessageBoxIcon.Error)
                 Return False
-            ElseIf txtTask.Text.Length > 10 Then
-                MessageBox.Show("The 'Task' parameter admits a code whose length is less or equals than 10 characters.", "Error", MessageBoxButtons.YesNo, MessageBoxIcon.Error)
+            ElseIf txtTask.Text.Length > 17 Then
+                MessageBox.Show("The 'Task' parameter admits a code whose length is less or equals than 17 characters.", "Error", MessageBoxButtons.YesNo, MessageBoxIcon.Error)
                 Return False
             Else
                 Return False
@@ -795,7 +796,7 @@ Public Class ProjectsCosts
                 If mtdJobs.existPO(txtClientPO.Text, cmbJobNumber.SelectedItem) = True Then
                     'If DialogResult.Yes = MessageBox.Show("Are you sure to use this PO.", "important", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) Then
                     FindPOVal()
-                        Return True
+                    Return True
                     'Else
                     '    Return False
                     'End If
@@ -1873,6 +1874,14 @@ Public Class ProjectsCosts
     Private Sub btnMoveHours_Click(sender As Object, e As EventArgs) Handles btnMoveHours.Click
         Dim mvh As New MoveHours
         mvh.ShowDialog()
+    End Sub
+
+    Private Sub txtEquipament_TextChanged(sender As Object, e As EventArgs) Handles txtEquipament.TextChanged
+
+    End Sub
+
+    Private Sub Label4_Click(sender As Object, e As EventArgs) Handles Label4.Click
+
     End Sub
 
     Private Sub btnFindProject_Click(sender As Object, e As EventArgs) Handles btnFindProject.Click

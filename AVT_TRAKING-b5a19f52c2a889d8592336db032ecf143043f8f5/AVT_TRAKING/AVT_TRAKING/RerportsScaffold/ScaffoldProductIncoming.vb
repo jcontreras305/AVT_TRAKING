@@ -1,4 +1,5 @@
-﻿Imports System.Runtime.InteropServices
+﻿Imports System.Net
+Imports System.Runtime.InteropServices
 Public Class ScaffoldProductIncoming
     Public Incoming As Boolean = True
     Dim mtdScf As New MetodosScaffold
@@ -37,7 +38,8 @@ Public Class ScaffoldProductIncoming
         Else
             lblTitle.Text = "Report Scaffold Product Outgoing"
         End If
-        llenarComboClientsReports(cmbClients)
+        'llenarComboClientsReports(cmbClients)
+        llenarComboClientByUser(cmbClients)
         cmbJobNo.Enabled = False
         cmbTickets.Enabled = False
     End Sub

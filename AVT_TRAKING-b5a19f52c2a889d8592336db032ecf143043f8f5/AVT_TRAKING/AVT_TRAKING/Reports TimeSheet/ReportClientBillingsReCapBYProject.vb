@@ -1,6 +1,7 @@
 ﻿Imports System.Runtime.InteropServices
 Imports System.Data.SqlClient
 Imports CrystalDecisions.ReportAppServer
+Imports System.Net
 
 Public Class ReportClientBillingsReCapBYProject
     Dim conection As New ConnectioDB
@@ -34,7 +35,8 @@ Public Class ReportClientBillingsReCapBYProject
     End Sub
 
     Private Sub ReportClientBillingsReCapBYProject_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        llenarComboClientsReports(cmbClients)
+        'llenarComboClientsReports(cmbClients)
+        llenarComboClientByUser(cmbClients)
     End Sub
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click

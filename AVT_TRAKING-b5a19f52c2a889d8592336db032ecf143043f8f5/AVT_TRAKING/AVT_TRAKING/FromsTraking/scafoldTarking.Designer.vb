@@ -19,7 +19,7 @@ Partial Class scafoldTarking
 
     'NOTA: el Diseñador de Windows Forms necesita el siguiente procedimiento
     'Se puede modificar usando el Diseñador de Windows Forms.  
-    'No lo modifique con el editor de código.
+    'No lo modifique connSQL el editor de código.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
@@ -218,6 +218,7 @@ Partial Class scafoldTarking
         Me.Label51 = New System.Windows.Forms.Label()
         Me.dtpReqCompScaffold = New System.Windows.Forms.DateTimePicker()
         Me.Panel43 = New System.Windows.Forms.Panel()
+        Me.btnAllReportScfTrk = New System.Windows.Forms.Button()
         Me.btnReport = New System.Windows.Forms.Button()
         Me.btnFindTagScaffold = New System.Windows.Forms.Button()
         Me.lblTagQTY = New System.Windows.Forms.Label()
@@ -616,7 +617,6 @@ Partial Class scafoldTarking
         Me.btnSaveTable = New System.Windows.Forms.Button()
         Me.btnDeleteRows = New System.Windows.Forms.Button()
         Me.btnSaveAll = New System.Windows.Forms.Button()
-        Me.btnAllReportScfTrk = New System.Windows.Forms.Button()
         Me.Panel1.SuspendLayout
         Me.Panel3.SuspendLayout
         Me.MyTabControl1.SuspendLayout
@@ -3037,6 +3037,25 @@ Partial Class scafoldTarking
         Me.Panel43.Name = "Panel43"
         Me.Panel43.Size = New System.Drawing.Size(952, 50)
         Me.Panel43.TabIndex = 1
+        '
+        'btnAllReportScfTrk
+        '
+        Me.btnAllReportScfTrk.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnAllReportScfTrk.FlatAppearance.BorderSize = 0
+        Me.btnAllReportScfTrk.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(58, Byte), Integer), CType(CType(115, Byte), Integer))
+        Me.btnAllReportScfTrk.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnAllReportScfTrk.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnAllReportScfTrk.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.btnAllReportScfTrk.Image = Global.AVT_TRAKING.My.Resources.Resources.report
+        Me.btnAllReportScfTrk.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnAllReportScfTrk.Location = New System.Drawing.Point(267, 6)
+        Me.btnAllReportScfTrk.Margin = New System.Windows.Forms.Padding(4)
+        Me.btnAllReportScfTrk.Name = "btnAllReportScfTrk"
+        Me.btnAllReportScfTrk.Size = New System.Drawing.Size(117, 43)
+        Me.btnAllReportScfTrk.TabIndex = 36
+        Me.btnAllReportScfTrk.Text = "RPT All Dismantle"
+        Me.btnAllReportScfTrk.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.btnAllReportScfTrk.UseVisualStyleBackColor = True
         '
         'btnReport
         '
@@ -6897,7 +6916,7 @@ Partial Class scafoldTarking
         Me.btnNextCostumer.Location = New System.Drawing.Point(151, 412)
         Me.btnNextCostumer.Margin = New System.Windows.Forms.Padding(4)
         Me.btnNextCostumer.Name = "btnNextCostumer"
-        Me.btnNextCostumer.Size = New System.Drawing.Size(132, 41)
+        Me.btnNextCostumer.Size = New System.Drawing.Size(116, 41)
         Me.btnNextCostumer.TabIndex = 22
         Me.btnNextCostumer.UseVisualStyleBackColor = True
         '
@@ -6911,7 +6930,7 @@ Partial Class scafoldTarking
         Me.btnBackCostumer.Location = New System.Drawing.Point(32, 412)
         Me.btnBackCostumer.Margin = New System.Windows.Forms.Padding(4)
         Me.btnBackCostumer.Name = "btnBackCostumer"
-        Me.btnBackCostumer.Size = New System.Drawing.Size(132, 41)
+        Me.btnBackCostumer.Size = New System.Drawing.Size(111, 41)
         Me.btnBackCostumer.TabIndex = 21
         Me.btnBackCostumer.UseVisualStyleBackColor = True
         '
@@ -7034,7 +7053,7 @@ Partial Class scafoldTarking
         'Label25
         '
         Me.Label25.AutoSize = True
-        Me.Label25.Location = New System.Drawing.Point(81, 313)
+        Me.Label25.Location = New System.Drawing.Point(75, 313)
         Me.Label25.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label25.Name = "Label25"
         Me.Label25.Size = New System.Drawing.Size(41, 16)
@@ -7044,7 +7063,7 @@ Partial Class scafoldTarking
         'Label24
         '
         Me.Label24.AutoSize = True
-        Me.Label24.Location = New System.Drawing.Point(-5, 281)
+        Me.Label24.Location = New System.Drawing.Point(9, 281)
         Me.Label24.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label24.Name = "Label24"
         Me.Label24.Size = New System.Drawing.Size(107, 16)
@@ -7054,7 +7073,7 @@ Partial Class scafoldTarking
         'Label23
         '
         Me.Label23.AutoSize = True
-        Me.Label23.Location = New System.Drawing.Point(-5, 249)
+        Me.Label23.Location = New System.Drawing.Point(9, 249)
         Me.Label23.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label23.Name = "Label23"
         Me.Label23.Size = New System.Drawing.Size(107, 16)
@@ -7064,7 +7083,7 @@ Partial Class scafoldTarking
         'Label22
         '
         Me.Label22.AutoSize = True
-        Me.Label22.Location = New System.Drawing.Point(28, 217)
+        Me.Label22.Location = New System.Drawing.Point(35, 217)
         Me.Label22.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label22.Name = "Label22"
         Me.Label22.Size = New System.Drawing.Size(81, 16)
@@ -7074,7 +7093,7 @@ Partial Class scafoldTarking
         'Label21
         '
         Me.Label21.AutoSize = True
-        Me.Label21.Location = New System.Drawing.Point(32, 185)
+        Me.Label21.Location = New System.Drawing.Point(40, 185)
         Me.Label21.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label21.Name = "Label21"
         Me.Label21.Size = New System.Drawing.Size(76, 16)
@@ -7094,7 +7113,7 @@ Partial Class scafoldTarking
         'Label19
         '
         Me.Label19.AutoSize = True
-        Me.Label19.Location = New System.Drawing.Point(9, 121)
+        Me.Label19.Location = New System.Drawing.Point(24, 121)
         Me.Label19.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label19.Name = "Label19"
         Me.Label19.Size = New System.Drawing.Size(92, 16)
@@ -7104,7 +7123,7 @@ Partial Class scafoldTarking
         'Label18
         '
         Me.Label18.AutoSize = True
-        Me.Label18.Location = New System.Drawing.Point(5, 89)
+        Me.Label18.Location = New System.Drawing.Point(19, 89)
         Me.Label18.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label18.Name = "Label18"
         Me.Label18.Size = New System.Drawing.Size(97, 16)
@@ -7114,7 +7133,7 @@ Partial Class scafoldTarking
         'Label17
         '
         Me.Label17.AutoSize = True
-        Me.Label17.Location = New System.Drawing.Point(-4, 57)
+        Me.Label17.Location = New System.Drawing.Point(11, 57)
         Me.Label17.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label17.Name = "Label17"
         Me.Label17.Size = New System.Drawing.Size(105, 16)
@@ -7124,7 +7143,7 @@ Partial Class scafoldTarking
         'Label16
         '
         Me.Label16.AutoSize = True
-        Me.Label16.Location = New System.Drawing.Point(20, 25)
+        Me.Label16.Location = New System.Drawing.Point(35, 25)
         Me.Label16.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label16.Name = "Label16"
         Me.Label16.Size = New System.Drawing.Size(81, 16)
@@ -7215,12 +7234,12 @@ Partial Class scafoldTarking
         Me.btnBackEst.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnBackEst.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnBackEst.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.btnBackEst.Image = Global.AVT_TRAKING.My.Resources.Resources.after1
         Me.btnBackEst.Location = New System.Drawing.Point(4, 337)
         Me.btnBackEst.Margin = New System.Windows.Forms.Padding(4)
         Me.btnBackEst.Name = "btnBackEst"
         Me.btnBackEst.Size = New System.Drawing.Size(100, 28)
         Me.btnBackEst.TabIndex = 16
-        Me.btnBackEst.Text = "<--"
         Me.btnBackEst.UseVisualStyleBackColor = True
         '
         'Label89
@@ -7324,12 +7343,12 @@ Partial Class scafoldTarking
         Me.btnNextEst.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnNextEst.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnNextEst.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.btnNextEst.Image = Global.AVT_TRAKING.My.Resources.Resources._next
         Me.btnNextEst.Location = New System.Drawing.Point(154, 337)
         Me.btnNextEst.Margin = New System.Windows.Forms.Padding(4)
         Me.btnNextEst.Name = "btnNextEst"
         Me.btnNextEst.Size = New System.Drawing.Size(100, 28)
         Me.btnNextEst.TabIndex = 17
-        Me.btnNextEst.Text = "-->"
         Me.btnNextEst.UseVisualStyleBackColor = True
         '
         'Label96
@@ -7878,25 +7897,6 @@ Partial Class scafoldTarking
         Me.btnSaveAll.Text = "Save All"
         Me.btnSaveAll.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         Me.btnSaveAll.UseVisualStyleBackColor = True
-        '
-        'btnAllReportScfTrk
-        '
-        Me.btnAllReportScfTrk.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnAllReportScfTrk.FlatAppearance.BorderSize = 0
-        Me.btnAllReportScfTrk.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(58, Byte), Integer), CType(CType(115, Byte), Integer))
-        Me.btnAllReportScfTrk.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnAllReportScfTrk.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnAllReportScfTrk.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.btnAllReportScfTrk.Image = Global.AVT_TRAKING.My.Resources.Resources.report
-        Me.btnAllReportScfTrk.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnAllReportScfTrk.Location = New System.Drawing.Point(267, 6)
-        Me.btnAllReportScfTrk.Margin = New System.Windows.Forms.Padding(4)
-        Me.btnAllReportScfTrk.Name = "btnAllReportScfTrk"
-        Me.btnAllReportScfTrk.Size = New System.Drawing.Size(117, 43)
-        Me.btnAllReportScfTrk.TabIndex = 36
-        Me.btnAllReportScfTrk.Text = "RPT All Dismantle"
-        Me.btnAllReportScfTrk.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.btnAllReportScfTrk.UseVisualStyleBackColor = True
         '
         'scafoldTarking
         '

@@ -1,7 +1,8 @@
 ﻿Imports System.Runtime.InteropServices
 Public Class ScaffoldHistoryByJobAndWO
     Private Sub ScaffoldHistoryByJobAndWO_Load(sender As Object, e As EventArgs) Handles Me.Load
-        llenarComboClientsReports(cmbClient)
+        'llenarComboClientsReports(cmbClient)
+        llenarComboClientByUser(cmbClient)
     End Sub
     Private Sub PictureBox4_Click(sender As Object, e As EventArgs) Handles PictureBox4.Click
         Me.Close()

@@ -21,7 +21,8 @@ Public Class VehicleTrack
     Public numClient, jobNo, idVehicleTrack As String
     Dim mtdClmTV As New columnsTrackVehicle
     Private Sub VehicleTrack_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        llenarComboClientsReports(cmbClient)
+        llenarComboClientByUser(cmbClient)
+        'llenarComboClientsReports(cmbClient)
         If numClient IsNot Nothing Then
             cmbClient.SelectedIndex = cmbClient.FindString(numClient)
             If jobNo IsNot Nothing Then

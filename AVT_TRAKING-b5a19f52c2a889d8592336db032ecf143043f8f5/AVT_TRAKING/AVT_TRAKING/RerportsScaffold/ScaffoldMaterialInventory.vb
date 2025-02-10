@@ -1,7 +1,9 @@
-﻿Imports System.Runtime.InteropServices
+﻿Imports System.Net
+Imports System.Runtime.InteropServices
 Public Class ScaffoldMaterialInventory
     Private Sub ScaffoldMaterialInventory_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        llenarComboClientsReports(cmbClients)
+        'llenarComboClientsReports(cmbClients)
+        llenarComboClientByUser(cmbClients)
     End Sub
     Private Sub PictureBox4_Click(sender As Object, e As EventArgs) Handles PictureBox4.Click
         Me.Close()

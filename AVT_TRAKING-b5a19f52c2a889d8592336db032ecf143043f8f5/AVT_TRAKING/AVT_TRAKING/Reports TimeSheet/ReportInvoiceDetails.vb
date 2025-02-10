@@ -1,7 +1,8 @@
 ﻿Imports System.Runtime.InteropServices
 Public Class ReportInvoiceDetails
     Private Sub ReportInvoiceDetails_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        llenarComboClientsReports(cmbClient)
+        'llenarComboClientsReports(cmbClient)
+        llenarComboClientByUser(cmbClient)
     End Sub
     Private Sub cmbClient_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbClient.SelectedIndexChanged
         Try

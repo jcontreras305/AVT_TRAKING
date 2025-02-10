@@ -31,13 +31,15 @@ Public Class Login
             End While
             If flagConnected Then
                 listImg = mtdOther.llenarComboImage(cmbImagenes)
+
                 If listImg.Count > 0 Then
                     tmrReels.Enabled = True
                 End If
                 mtdCompany.cargarDatos()
                 If listImg IsNot Nothing Then
                     cmbImagenes.SelectedIndex = 0
-                    cmbImagenes.SelectedItem = cmbImagenes.Items(0)
+                    'cmbImagenes.SelectedItem = cmbImagenes.Items(-1)
+                    cmbImagenes.Text = ""
                 End If
             End If
         Catch ex As Exception
@@ -65,6 +67,7 @@ Public Class Login
                 If mtdLogin.StartLogin(txtUser.Text, txtPassword.Text) Then
                     nUser.selectUser(txtUser.Text, txtPassword.Text)
                     UserName = txtUser.Text
+                    userNameMTG = txtUser.Text
                     Dim a As New MainFrom
                     Try
                         If mtdCompany.img IsNot Nothing Then
@@ -237,5 +240,11 @@ Public Class Login
 
     Private Sub cmbImagenes_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbImagenes.SelectedIndexChanged
 
+    End Sub
+
+    Private Sub txtUser_Leave(sender As Object, e As EventArgs) Handles txtUser.Leave
+        If txtUser.Text <> "" Then
+            listImg = llenarComboClientByUser(cmbImagenes, txtUser.Text)
+        End If
     End Sub
 End Class

@@ -12,9 +12,10 @@ Public Class Expences
         activarCampos(False)
         btnUbdate.Enabled = False
         btnCancel.Enabled = False
-
-        llenarComboClientsReports(cmbClient)
-        llenarComboClientsReports(cmbFindExpJob)
+        llenarComboClientByUser(cmbClient)
+        llenarComboClientByUser(cmbFindExpJob)
+        'llenarComboClientsReports(cmbClient)
+        'llenarComboClientsReports(cmbFindExpJob)
         activarCamposExpJob(False)
         btnUpdateExpJob.Enabled = False
         btnCancelExpJob.Enabled = False

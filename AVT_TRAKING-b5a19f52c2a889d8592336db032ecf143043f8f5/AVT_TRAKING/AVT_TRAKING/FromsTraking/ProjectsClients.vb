@@ -518,6 +518,24 @@ Public Class ProjectsClients
         End Try
     End Sub
 
+
+    Private Sub Button3_Click(sender As Object, e As EventArgs) Handles btnMaterialValidation.Click
+        Try
+            If idClient IsNot Nothing Then
+                Dim UpExcel As New EquipmentValidation
+                UpExcel.idclient = idCliente
+                If jobNum = Nothing Then
+                    MessageBox.Show("Please select a project.")
+                Else
+                    UpExcel.jobNo = jobNum
+                    UpExcel.ShowDialog()
+                End If
+
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message)
+        End Try
+    End Sub
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         Try
             If tblAllProjects.Rows.Count > 0 Then

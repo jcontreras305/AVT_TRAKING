@@ -266,7 +266,8 @@ Public Class WrongHours
     End Sub
 
     Private Sub WrongHours_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        llenarComboClientsReports(cmbClients)
+        llenarComboClientByUser(cmbClients)
+        'llenarComboClientsReports(cmbClients)
         cmbFindDate.SelectedIndex = 0
         llenarComboEmployeeReports(cmbEmployees_Material)
 
@@ -370,8 +371,7 @@ Public Class wrongHoursMetodos
             conectar()
             Dim cmd As New SqlCommand("select hw.dateWorked as DateWorked, emp.numberEmploye as 'Emlpoyee No',CONCAT( emp.lastName , ', ' , emp.firstName , ' ',emp.middleName) as Employee,
                 jb.jobNo 'JobNo', po.idPO as 'Project' , CONCAT(wo.idWO , '-' ,tk.task) as 'Work',
-                wc.name as 'WorkCode' , hw.hoursST , hw.hoursOT , hw.hours3 , hw.schedule 
-,hw.idHorsWorked  from hoursWorked as hw 
+                wc.name as 'WorkCode' , hw.hoursST , hw.hoursOT , hw.hours3 , hw.schedule ,hw.idHorsWorked  from hoursWorked as hw 
                 inner join task as tk on tk.idAux = hw.idAux 
                 inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO	
                 inner join projectOrder as po on po.idPO = wo.idPO and po.jobNo = wo.jobNo
@@ -379,7 +379,9 @@ Public Class wrongHoursMetodos
                 inner join clients as cl on cl.idClient = jb.idClient 
                 inner join workCode as wc on wc.idWorkCode  = hw.idWorkCode and wc.jobNo = jb.jobNo
                 inner join employees as emp on emp.idEmployee= hw.idEmployee
-                where " + If(allClient, " cl.numberClient = " + idClient + If(allJobs, " and jb.jobNo = " + job, ""), "") + If(dateOption = 1, If(allClient, " and ", "") + " hw.dateWorked between '" + validaFechaParaSQl(startDate) + "' and '" + validaFechaParaSQl(endDate) + "'", If(allClient, " and ", "") + " hw.dayInserted between '" + validaFechaParaSQl(startDate) + "' and '" + validaFechaParaSQl(endDate) + "'") + If(allEmployee, " and  emp.numberEmploye = " + Employee, "") + If(allWO, " and (CONCAT(wo.idWO , '-' ,tk.task) like '" + WO + "' or CONCAT(wo.idWO , ' ' ,tk.task)like '" + WO + "' ) ", ""), conn)
+                inner join userClientAccess as ua on ua.idClient = cl.idClient
+				inner join users as us on us.idUsers = ua.idUsers
+                where us.nameUser = '" + userNameMTG + "' and ua.access = 1" + If(allClient, " cl.numberClient = " + idClient + If(allJobs, " and jb.jobNo = " + job, ""), "") + If(dateOption = 1, If(allClient, " and ", "") + " hw.dateWorked between '" + validaFechaParaSQl(startDate) + "' and '" + validaFechaParaSQl(endDate) + "'", If(allClient, " and ", "") + " hw.dayInserted between '" + validaFechaParaSQl(startDate) + "' and '" + validaFechaParaSQl(endDate) + "'") + If(allEmployee, " and  emp.numberEmploye = " + Employee, "") + If(allWO, " and (CONCAT(wo.idWO , '-' ,tk.task) like '" + WO + "' or CONCAT(wo.idWO , ' ' ,tk.task)like '" + WO + "' ) ", ""), conn)
             If cmd.ExecuteNonQuery Then
                 Dim dt As New DataTable
                 Dim da As New SqlDataAdapter(cmd)
@@ -416,7 +418,9 @@ inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO
 inner join projectOrder as po on po.idPO = wo.idPO and po.jobNo = wo.jobNo
 inner join job as jb on jb.jobNo = po.jobNo
 inner join clients as cl on cl.idClient = jb.idClient
-where " + If(allClient, " cl.numberClient = " + idClient + If(allJobs, " and jb.jobNo = " + job, ""), "") + If(dateOption = 1, If(allClient, " and ", "") + " mu.dateMaterial between '" + validaFechaParaSQl(startDate) + "' and '" + validaFechaParaSQl(endDate) + "'", If(allClient, " and ", "") + " mu.dayInserted between '" + validaFechaParaSQl(startDate) + "' and '" + validaFechaParaSQl(endDate) + "'") + If(allMaterial, " and ma.number = " + Material, "") + If(allWO, " and (CONCAT(wo.idWO , '-' ,tk.task) like '" + WO + "' or CONCAT(wo.idWO , ' ' ,tk.task)like '" + WO + "' ) ", ""), conn)
+inner join userClientAccess as ua on ua.idClient = cl.idClient
+inner join users as us on us.idUsers = ua.idUsers
+where us.nameUser = '" + userNameMTG + "' and ua.access = 1 and " + If(allClient, " cl.numberClient = " + idClient + If(allJobs, " and jb.jobNo = " + job, ""), "") + If(dateOption = 1, If(allClient, " and ", "") + " mu.dateMaterial between '" + validaFechaParaSQl(startDate) + "' and '" + validaFechaParaSQl(endDate) + "'", If(allClient, " and ", "") + " mu.dayInserted between '" + validaFechaParaSQl(startDate) + "' and '" + validaFechaParaSQl(endDate) + "'") + If(allMaterial, " and ma.number = " + Material, "") + If(allWO, " and (CONCAT(wo.idWO , '-' ,tk.task) like '" + WO + "' or CONCAT(wo.idWO , ' ' ,tk.task)like '" + WO + "' ) ", ""), conn)
             If cmd.ExecuteNonQuery Then
                 Dim dt As New DataTable
                 Dim da As New SqlDataAdapter(cmd)
@@ -458,7 +462,9 @@ inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO
 inner join projectOrder as po on po.idPO = wo.idPO and po.jobNo = wo.jobNo
 inner join job as jb on jb.jobNo = po.jobNo
 inner join clients as cl on cl.idClient = jb.idClient
-where (hw.hoursST + hw.hoursOT + hw.hours3) = 0 " + If(allClient, "and cl.numberClient = " + idClient + If(allJobs, " and jb.jobNo = " + job + If(allWO, " and Concat(wo.idWO , ' ', tk.task) like '" + WO + "' ", "") + " ", If(allWO, " and Concat(wo.idWO , ' ', tk.task) like '" + WO + "' ", "")), "") + If(dateOption = 1, If(allClient, " and ", "") + "and hw.dateWorked between '" + validaFechaParaSQl(startDate) + "' and '" + validaFechaParaSQl(endDate) + "'", If(allClient, " and ", "") + "and hw.dayInserted between '" + validaFechaParaSQl(startDate) + "' and '" + validaFechaParaSQl(endDate) + "'") + If(allEmployee, " and  emp.numberEmploye = " + Employee, ""), conn)
+inner join userClientAccess as ua on ua.idClient = cl.idClient
+inner join users as us on us.idUsers = ua.idUsers
+where us.nameUser = '" + userNameMTG + "' and ua.access = 1 and  (hw.hoursST + hw.hoursOT + hw.hours3) = 0 " + If(allClient, "and cl.numberClient = " + idClient + If(allJobs, " and jb.jobNo = " + job + If(allWO, " and Concat(wo.idWO , ' ', tk.task) like '" + WO + "' ", "") + " ", If(allWO, " and Concat(wo.idWO , ' ', tk.task) like '" + WO + "' ", "")), "") + If(dateOption = 1, If(allClient, " and ", "") + "and hw.dateWorked between '" + validaFechaParaSQl(startDate) + "' and '" + validaFechaParaSQl(endDate) + "'", If(allClient, " and ", "") + "and hw.dayInserted between '" + validaFechaParaSQl(startDate) + "' and '" + validaFechaParaSQl(endDate) + "'") + If(allEmployee, " and  emp.numberEmploye = " + Employee, ""), conn)
             If cmd.ExecuteNonQuery Then
                 Dim dt As New DataTable
                 Dim da As New SqlDataAdapter(cmd)
@@ -490,7 +496,9 @@ inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO
 inner join projectOrder as po on po.idPO = wo.idPO and po.jobNo = wo.jobNo
 inner join job as jb on jb.jobNo = po.jobNo
 inner join clients as cl on cl.idClient = jb.idClient
-where" + If(allClient, " cl.numberClient = " + idClient + If(allJobs, " and jb.jobNo = " + job + If(allWO, " and Concat(wo.idWO , ' ', tk.task) like '" + WO + "' ", "") + " ", If(allWO, " and Concat(wo.idWO , ' ', tk.task) like '" + WO + "' ", "")), "") + If(dateOption = 1, If(allClient, " and ", "") + " hw.dateWorked between '" + validaFechaParaSQl(startDate) + "' and '" + validaFechaParaSQl(endDate) + "'", If(allClient, " and ", "") + " hw.dayInserted between '" + validaFechaParaSQl(startDate) + "' and '" + validaFechaParaSQl(endDate) + "'") + If(allEmployee, " and  emp.numberEmploye = " + Employee, ""), conn)
+inner join userClientAccess as ua on ua.idClient = cl.idClient
+inner join users as us on us.idUsers = ua.idUsers
+where us.nameUser = '" + userNameMTG + "' and ua.access = 1 and " + If(allClient, " cl.numberClient = " + idClient + If(allJobs, " and jb.jobNo = " + job + If(allWO, " and Concat(wo.idWO , ' ', tk.task) like '" + WO + "' ", "") + " ", If(allWO, " and Concat(wo.idWO , ' ', tk.task) like '" + WO + "' ", "")), "") + If(dateOption = 1, If(allClient, " and ", "") + " hw.dateWorked between '" + validaFechaParaSQl(startDate) + "' and '" + validaFechaParaSQl(endDate) + "'", If(allClient, " and ", "") + " hw.dayInserted between '" + validaFechaParaSQl(startDate) + "' and '" + validaFechaParaSQl(endDate) + "'") + If(allEmployee, " and  emp.numberEmploye = " + Employee, ""), conn)
             If cmd.ExecuteNonQuery Then
                 Dim dt As New DataTable
                 Dim da As New SqlDataAdapter(cmd)

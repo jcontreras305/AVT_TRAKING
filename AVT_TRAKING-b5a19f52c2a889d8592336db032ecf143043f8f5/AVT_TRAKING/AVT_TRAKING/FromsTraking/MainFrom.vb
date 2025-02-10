@@ -120,7 +120,8 @@ Public Class MainFrom
                 newPC.pcbLogoPC.Image = imageClientLogin
                 newPC.validAccess(loginUser)
             End If
-            llenarComboClientsReports(newPC.cmbClient)
+            'llenarComboClientsReports(newPC.cmbClient)
+            llenarComboClientByUser(newPC.cmbClient)
             If newPC.cmbClient.Items IsNot Nothing Then
                 Dim index = newPC.cmbClient.FindString(Client.NumberClient)
                 newPC.cmbClient.SelectedIndex = index

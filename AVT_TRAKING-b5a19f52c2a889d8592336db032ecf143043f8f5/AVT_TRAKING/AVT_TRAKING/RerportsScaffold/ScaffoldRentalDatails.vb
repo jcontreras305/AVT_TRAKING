@@ -7,7 +7,8 @@ Public Class ScaffoldRentalDatails
     Dim reportTs As New SCFRentalDetails
     Dim mtdSc As New MetodosScaffold
     Private Sub ScaffoldRentalDatails_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        llenarComboClientsReports(cmbClient)
+        'llenarComboClientsReports(cmbClient)
+        llenarComboClientByUser(cmbClient)
         btnSend.Enabled = False
         mtdOther.llenarTablaEmailReports(tblEmailsReports, "SCFRentalDetails")
         Dim list() = mtdOther.selectSubjectEmail(windowStart)

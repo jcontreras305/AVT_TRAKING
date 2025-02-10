@@ -34,7 +34,8 @@ Public Class WithoutWorking
     Private Shared Sub SendMessage(hWnd As IntPtr, wMsg As Integer, wParam As Integer, lParam As Integer)
     End Sub
     Private Sub WithoutWorking_Load(sender As Object, e As EventArgs) Handles Me.Load
-        llenarComboClientsReports(cmbClient)
+        llenarComboClientByUser(cmbClient)
+        'llenarComboClientsReports(cmbClient)
     End Sub
     Private Sub cmbClient_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbClient.SelectedIndexChanged
         If cmbClient.SelectedItem IsNot Nothing Then

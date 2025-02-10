@@ -1,5 +1,6 @@
 ﻿Imports System.Runtime.InteropServices
 Imports System.Data.SqlClient
+Imports System.Net
 
 Public Class ReportWONotComplete
     Dim conection As New ConnectioDB
@@ -37,14 +38,7 @@ Public Class ReportWONotComplete
 
     Private Sub ReportWONotComplete_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Try
-            conection.conectar()
-            Dim cmd As New SqlCommand("select numberClient , companyName as 'Name' from clients ", conection.conn)
-            Dim dr As SqlDataReader = cmd.ExecuteReader()
-
-            While dr.Read()
-                cmbClients.Items.Add(CStr(dr("numberClient")) + "   " + dr("Name"))
-            End While
-            dr.Close()
+            llenarComboClientByUser(cmbClients)
 
             If cmbClients.SelectedItem IsNot Nothing Then
                 Dim arraycl() As String = cmbClients.SelectedItem.ToString.Split(" ")
@@ -91,22 +85,14 @@ Public Class ReportWONotComplete
             cmbJobs.Enabled = False
         Else
             cmbJobs.Enabled = True
-
         End If
     End Sub
 
     Private Sub cmbClients_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbClients.SelectedIndexChanged
         Try
             If cmbClients.SelectedItem IsNot Nothing Then
-                conection.conectar()
-                Dim arraycl() As String = cmbClients.SelectedItem.ToString.Split(" ")
-                Dim cmd2 As New SqlCommand("select jb.jobNo from job as jb inner join clients as cl on jb.idClient=cl.idClient where cl.numberClient=" + arraycl(0) + "", conection.conn)
-                Dim dr2 As SqlDataReader = cmd2.ExecuteReader()
-                cmbJobs.Items.Clear()
-                While dr2.Read()
-                    cmbJobs.Items.Add(dr2("jobNo"))
-                End While
-                dr2.Close()
+                Dim array() As String = cmbClients.SelectedItem.ToString.Split(" ")
+                llenarComboJobsReports(cmbJobs, array(0))
             End If
         Catch ex As Exception
             MsgBox(ex.Message)

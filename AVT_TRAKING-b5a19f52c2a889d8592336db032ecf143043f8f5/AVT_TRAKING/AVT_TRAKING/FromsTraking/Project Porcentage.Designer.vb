@@ -19,7 +19,7 @@ Partial Class Project_Porcentage
 
     'NOTA: el Diseñador de Windows Forms necesita el siguiente procedimiento
     'Se puede modificar usando el Diseñador de Windows Forms.  
-    'No lo modifique con el editor de código.
+    'No lo modifique connSQL el editor de código.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
@@ -40,9 +40,6 @@ Partial Class Project_Porcentage
         Me.PictureBox2 = New System.Windows.Forms.PictureBox()
         Me.Panel2 = New System.Windows.Forms.Panel()
         Me.tblProjects = New System.Windows.Forms.DataGridView()
-        Me.Panel3 = New System.Windows.Forms.Panel()
-        Me.pgbComplete = New System.Windows.Forms.ProgressBar()
-        Me.lblMessage = New System.Windows.Forms.Label()
         Me.idAux = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Errors = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.ClientNo = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -53,6 +50,9 @@ Partial Class Project_Porcentage
         Me.clmPhase = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.clmProjectManager = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.clmEstTotalBilling = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Panel3 = New System.Windows.Forms.Panel()
+        Me.pgbComplete = New System.Windows.Forms.ProgressBar()
+        Me.lblMessage = New System.Windows.Forms.Label()
         Me.TableLayoutPanel1.SuspendLayout()
         Me.TitleBar.SuspendLayout()
         CType(Me.btnMaximize, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -74,7 +74,7 @@ Partial Class Project_Porcentage
         Me.TableLayoutPanel1.Controls.Add(Me.Panel3, 0, 2)
         Me.TableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.TableLayoutPanel1.Location = New System.Drawing.Point(0, 0)
-        Me.TableLayoutPanel1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.TableLayoutPanel1.Margin = New System.Windows.Forms.Padding(4)
         Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
         Me.TableLayoutPanel1.RowCount = 3
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 126.0!))
@@ -104,7 +104,7 @@ Partial Class Project_Porcentage
         Me.TitleBar.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TitleBar.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.TitleBar.Location = New System.Drawing.Point(4, 4)
-        Me.TitleBar.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.TitleBar.Margin = New System.Windows.Forms.Padding(4)
         Me.TitleBar.Name = "TitleBar"
         Me.TitleBar.Size = New System.Drawing.Size(1119, 118)
         Me.TitleBar.TabIndex = 0
@@ -114,7 +114,7 @@ Partial Class Project_Porcentage
         Me.btnMaximize.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnMaximize.Image = Global.AVT_TRAKING.My.Resources.Resources.maximize2
         Me.btnMaximize.Location = New System.Drawing.Point(1081, 0)
-        Me.btnMaximize.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btnMaximize.Margin = New System.Windows.Forms.Padding(4)
         Me.btnMaximize.Name = "btnMaximize"
         Me.btnMaximize.Size = New System.Drawing.Size(35, 38)
         Me.btnMaximize.TabIndex = 1
@@ -126,7 +126,7 @@ Partial Class Project_Porcentage
         Me.btnSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnSave.Image = Global.AVT_TRAKING.My.Resources.Resources.save
         Me.btnSave.Location = New System.Drawing.Point(831, 48)
-        Me.btnSave.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btnSave.Margin = New System.Windows.Forms.Padding(4)
         Me.btnSave.Name = "btnSave"
         Me.btnSave.Size = New System.Drawing.Size(96, 55)
         Me.btnSave.TabIndex = 25
@@ -170,7 +170,7 @@ Partial Class Project_Porcentage
         Me.btnUploadExcel.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnUploadExcel.Image = Global.AVT_TRAKING.My.Resources.Resources.excel
         Me.btnUploadExcel.Location = New System.Drawing.Point(692, 41)
-        Me.btnUploadExcel.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btnUploadExcel.Margin = New System.Windows.Forms.Padding(4)
         Me.btnUploadExcel.Name = "btnUploadExcel"
         Me.btnUploadExcel.Size = New System.Drawing.Size(131, 63)
         Me.btnUploadExcel.TabIndex = 21
@@ -184,7 +184,7 @@ Partial Class Project_Porcentage
         Me.btnDownloadExcel.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnDownloadExcel.Image = Global.AVT_TRAKING.My.Resources.Resources.excel
         Me.btnDownloadExcel.Location = New System.Drawing.Point(540, 41)
-        Me.btnDownloadExcel.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btnDownloadExcel.Margin = New System.Windows.Forms.Padding(4)
         Me.btnDownloadExcel.Name = "btnDownloadExcel"
         Me.btnDownloadExcel.Size = New System.Drawing.Size(144, 63)
         Me.btnDownloadExcel.TabIndex = 20
@@ -196,7 +196,7 @@ Partial Class Project_Porcentage
         '
         Me.cmbProjectOrder.FormattingEnabled = True
         Me.cmbProjectOrder.Location = New System.Drawing.Point(363, 44)
-        Me.cmbProjectOrder.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.cmbProjectOrder.Margin = New System.Windows.Forms.Padding(4)
         Me.cmbProjectOrder.Name = "cmbProjectOrder"
         Me.cmbProjectOrder.Size = New System.Drawing.Size(160, 25)
         Me.cmbProjectOrder.TabIndex = 19
@@ -205,7 +205,7 @@ Partial Class Project_Porcentage
         '
         Me.cmbJobNo.FormattingEnabled = True
         Me.cmbJobNo.Location = New System.Drawing.Point(80, 78)
-        Me.cmbJobNo.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.cmbJobNo.Margin = New System.Windows.Forms.Padding(4)
         Me.cmbJobNo.Name = "cmbJobNo"
         Me.cmbJobNo.Size = New System.Drawing.Size(160, 25)
         Me.cmbJobNo.TabIndex = 18
@@ -214,7 +214,7 @@ Partial Class Project_Porcentage
         '
         Me.cmbClient.FormattingEnabled = True
         Me.cmbClient.Location = New System.Drawing.Point(80, 44)
-        Me.cmbClient.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.cmbClient.Margin = New System.Windows.Forms.Padding(4)
         Me.cmbClient.Name = "cmbClient"
         Me.cmbClient.Size = New System.Drawing.Size(160, 25)
         Me.cmbClient.TabIndex = 17
@@ -235,7 +235,7 @@ Partial Class Project_Porcentage
         Me.PictureBox4.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.PictureBox4.Image = Global.AVT_TRAKING.My.Resources.Resources.minimize2
         Me.PictureBox4.Location = New System.Drawing.Point(1036, 0)
-        Me.PictureBox4.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.PictureBox4.Margin = New System.Windows.Forms.Padding(4)
         Me.PictureBox4.Name = "PictureBox4"
         Me.PictureBox4.Size = New System.Drawing.Size(37, 38)
         Me.PictureBox4.TabIndex = 15
@@ -246,7 +246,7 @@ Partial Class Project_Porcentage
         Me.btnRestore.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnRestore.Image = Global.AVT_TRAKING.My.Resources.Resources.restore2
         Me.btnRestore.Location = New System.Drawing.Point(1081, 0)
-        Me.btnRestore.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btnRestore.Margin = New System.Windows.Forms.Padding(4)
         Me.btnRestore.Name = "btnRestore"
         Me.btnRestore.Size = New System.Drawing.Size(33, 30)
         Me.btnRestore.TabIndex = 14
@@ -257,7 +257,7 @@ Partial Class Project_Porcentage
         Me.PictureBox2.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.PictureBox2.Image = Global.AVT_TRAKING.My.Resources.Resources._exit
         Me.PictureBox2.Location = New System.Drawing.Point(1061, 44)
-        Me.PictureBox2.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.PictureBox2.Margin = New System.Windows.Forms.Padding(4)
         Me.PictureBox2.Name = "PictureBox2"
         Me.PictureBox2.Size = New System.Drawing.Size(53, 38)
         Me.PictureBox2.TabIndex = 13
@@ -268,7 +268,7 @@ Partial Class Project_Porcentage
         Me.Panel2.Controls.Add(Me.tblProjects)
         Me.Panel2.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel2.Location = New System.Drawing.Point(4, 130)
-        Me.Panel2.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.Panel2.Margin = New System.Windows.Forms.Padding(4)
         Me.Panel2.Name = "Panel2"
         Me.Panel2.Size = New System.Drawing.Size(1119, 256)
         Me.Panel2.TabIndex = 1
@@ -281,45 +281,11 @@ Partial Class Project_Porcentage
         Me.tblProjects.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.idAux, Me.Errors, Me.ClientNo, Me.JobNo, Me.ProjectNo, Me.WorkOrder, Me.Percentage, Me.clmPhase, Me.clmProjectManager, Me.clmEstTotalBilling})
         Me.tblProjects.Dock = System.Windows.Forms.DockStyle.Fill
         Me.tblProjects.Location = New System.Drawing.Point(0, 0)
-        Me.tblProjects.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.tblProjects.Margin = New System.Windows.Forms.Padding(4)
         Me.tblProjects.Name = "tblProjects"
         Me.tblProjects.RowHeadersWidth = 51
         Me.tblProjects.Size = New System.Drawing.Size(1119, 256)
         Me.tblProjects.TabIndex = 0
-        '
-        'Panel3
-        '
-        Me.Panel3.BackColor = System.Drawing.Color.FromArgb(CType(CType(83, Byte), Integer), CType(CType(93, Byte), Integer), CType(CType(102, Byte), Integer))
-        Me.Panel3.Controls.Add(Me.pgbComplete)
-        Me.Panel3.Controls.Add(Me.lblMessage)
-        Me.Panel3.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel3.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Panel3.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.Panel3.Location = New System.Drawing.Point(4, 394)
-        Me.Panel3.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
-        Me.Panel3.Name = "Panel3"
-        Me.Panel3.Size = New System.Drawing.Size(1119, 29)
-        Me.Panel3.TabIndex = 2
-        '
-        'pgbComplete
-        '
-        Me.pgbComplete.Dock = System.Windows.Forms.DockStyle.Right
-        Me.pgbComplete.Location = New System.Drawing.Point(783, 0)
-        Me.pgbComplete.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
-        Me.pgbComplete.Name = "pgbComplete"
-        Me.pgbComplete.Size = New System.Drawing.Size(336, 29)
-        Me.pgbComplete.TabIndex = 1
-        '
-        'lblMessage
-        '
-        Me.lblMessage.AutoSize = True
-        Me.lblMessage.Dock = System.Windows.Forms.DockStyle.Left
-        Me.lblMessage.Location = New System.Drawing.Point(0, 0)
-        Me.lblMessage.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.lblMessage.Name = "lblMessage"
-        Me.lblMessage.Size = New System.Drawing.Size(74, 17)
-        Me.lblMessage.TabIndex = 0
-        Me.lblMessage.Text = "Message:"
         '
         'idAux
         '
@@ -383,6 +349,40 @@ Partial Class Project_Porcentage
         Me.clmEstTotalBilling.MinimumWidth = 6
         Me.clmEstTotalBilling.Name = "clmEstTotalBilling"
         '
+        'Panel3
+        '
+        Me.Panel3.BackColor = System.Drawing.Color.FromArgb(CType(CType(83, Byte), Integer), CType(CType(93, Byte), Integer), CType(CType(102, Byte), Integer))
+        Me.Panel3.Controls.Add(Me.pgbComplete)
+        Me.Panel3.Controls.Add(Me.lblMessage)
+        Me.Panel3.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Panel3.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Panel3.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.Panel3.Location = New System.Drawing.Point(4, 394)
+        Me.Panel3.Margin = New System.Windows.Forms.Padding(4)
+        Me.Panel3.Name = "Panel3"
+        Me.Panel3.Size = New System.Drawing.Size(1119, 29)
+        Me.Panel3.TabIndex = 2
+        '
+        'pgbComplete
+        '
+        Me.pgbComplete.Dock = System.Windows.Forms.DockStyle.Right
+        Me.pgbComplete.Location = New System.Drawing.Point(783, 0)
+        Me.pgbComplete.Margin = New System.Windows.Forms.Padding(4)
+        Me.pgbComplete.Name = "pgbComplete"
+        Me.pgbComplete.Size = New System.Drawing.Size(336, 29)
+        Me.pgbComplete.TabIndex = 1
+        '
+        'lblMessage
+        '
+        Me.lblMessage.AutoSize = True
+        Me.lblMessage.Dock = System.Windows.Forms.DockStyle.Left
+        Me.lblMessage.Location = New System.Drawing.Point(0, 0)
+        Me.lblMessage.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lblMessage.Name = "lblMessage"
+        Me.lblMessage.Size = New System.Drawing.Size(74, 17)
+        Me.lblMessage.TabIndex = 0
+        Me.lblMessage.Text = "Message:"
+        '
         'Project_Porcentage
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
@@ -390,7 +390,7 @@ Partial Class Project_Porcentage
         Me.ClientSize = New System.Drawing.Size(1127, 427)
         Me.Controls.Add(Me.TableLayoutPanel1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
-        Me.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.Margin = New System.Windows.Forms.Padding(4)
         Me.Name = "Project_Porcentage"
         Me.Text = "Project_Porcentage"
         Me.TableLayoutPanel1.ResumeLayout(False)

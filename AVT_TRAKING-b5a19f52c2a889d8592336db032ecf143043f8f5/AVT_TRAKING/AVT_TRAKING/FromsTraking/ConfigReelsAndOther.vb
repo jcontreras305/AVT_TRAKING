@@ -4,6 +4,7 @@ Public Class ConfigReelsAndOther
     Dim mtd As New MetodosReels
     Dim mtdUsers As New MetodosUsers
     Dim listAccess As New List(Of String)
+    Dim listClientAcces As New List(Of String)
     Dim NewImage As Boolean = False
     Dim loadindAccess As Boolean = False
     Public closeMainForm As Boolean = False
@@ -24,6 +25,7 @@ Public Class ConfigReelsAndOther
         pcbImage.SizeMode = PictureBoxSizeMode.Zoom
         fillListView()
         mtdUsers.selectAllUser(tblUsers)
+        llenarListClients(chlListClientAccess)
     End Sub
 
     Private Sub btnNew_Click(sender As Object, e As EventArgs) Handles btnNew.Click
@@ -123,12 +125,21 @@ Public Class ConfigReelsAndOther
         End Try
     End Sub
 
+    Private Sub fillClientAccss(ByVal UserName As String)
+        Try
+
+        Catch ex As Exception
+
+        End Try
+    End Sub
+
+
     Private Sub fillListView()
         If tvwAccess.Nodes IsNot Nothing Then
             tvwAccess.Nodes.Clear()
         End If
         Dim arrayFormAccess() As String = {"Clients", "Employees", "Client Projects", "Material", "Others", "Reports", "Estimation", "Backup", "System"}
-        Dim arraySubFormWorkCode() As String = {"Projects", "Time Enter Sheet", "Scaffold Tracking", "Setup"}
+        Dim arraySubFormWorkCode() As String = {"Projects", "Time Enter Sheet", "Scaffold Tracking", "Setup", "Material Validation"}
         Dim arraySubFormSetup() As String = {"Expenses", "Company", "Material Code", "Work Code", "PBI"}
         Dim arraySubFormEstimation() As String = {"Setting", "Est. Projects", "Est. Reports"}
 
@@ -154,6 +165,7 @@ Public Class ConfigReelsAndOther
             txtPassword.Text = tblUsers.CurrentRow.Cells("userPass").Value
             fillListView()
             cargarUserAccess()
+            llenarListClients(chlListClientAccess, tblUsers.CurrentRow.Cells("UserName").Value)
             loadindAccess = False
         Catch ex As Exception
 
@@ -177,6 +189,8 @@ Public Class ConfigReelsAndOther
                     checkAccess(node, access)
                 Next
             Next
+        Else
+            chlListClientAccess.Items.Clear()
         End If
     End Sub
 
@@ -196,14 +210,18 @@ Public Class ConfigReelsAndOther
                 'Dim arrayNodes As New List(Of String)
                 loadindAccess = True
                 listAccess.Clear()
+                listClientAcces.Clear()
                 For Each node As TreeNode In tvwAccess.Nodes
                     findSubNodes(node, listAccess)
+                Next
+                For Each item As String In chlListClientAccess.Items
+                    listClientAcces.Add(item)
                 Next
                 If tblUsers.Rows.Count = 1 And idUser = tblUsers.Rows(0).Cells("idUsers").Value And listAccess.Count < 20 Then
                     MessageBox.Show("Exist only one User and it needs to have total access. Then the user " + tblUsers.Rows(0).Cells("UserName").Value + " will have full access.", "Important", MessageBoxButtons.OK, MessageBoxIcon.Warning)
                     asignUserFullAccess(tblUsers.Rows(0).Cells("idUsers").Value)
                 Else
-                    If mtdUsers.saveUpdateUser(idUser, txtUserName.Text, txtPassword.Text, listAccess) Then
+                    If mtdUsers.saveUpdateUser(idUser, txtUserName.Text, txtPassword.Text, listAccess, chlListClientAccess) Then
                         mtdUsers.selectAllUser(tblUsers)
                         txtUserName.Text = ""
                         txtPassword.Text = ""
@@ -267,7 +285,7 @@ Public Class ConfigReelsAndOther
             For Each node As TreeNode In tvwAccess.Nodes
                 findSubNodes(node, listAccess)
             Next
-            If mtdUsers.saveUpdateUser(id, tblUsers.Rows(0).Cells("UserName").Value, tblUsers.Rows(0).Cells("userPass").Value, listAccess) Then
+            If mtdUsers.saveUpdateUser(id, tblUsers.Rows(0).Cells("UserName").Value, tblUsers.Rows(0).Cells("userPass").Value, listAccess, chlListClientAccess) Then
                 mtdUsers.selectAllUser(tblUsers)
                 txtUserName.Text = ""
                 txtPassword.Text = ""
@@ -310,6 +328,7 @@ Public Class ConfigReelsAndOther
     Private Sub TitleBar_Paint(sender As Object, e As PaintEventArgs) Handles TitleBar.Paint
 
     End Sub
+
 End Class
 Public Class MetodosUsers
     Inherits ConnectioDB
@@ -331,7 +350,7 @@ Public Class MetodosUsers
             desconectar()
         End Try
     End Function
-    Public Function saveUpdateUser(ByVal id As String, ByVal name As String, ByVal pass As String, ByVal arrayAccess As List(Of String)) As Boolean
+    Public Function saveUpdateUser(ByVal id As String, ByVal name As String, ByVal pass As String, ByVal arrayAccess As List(Of String), ByVal arrayClientAccess As CheckedListBox) As Boolean
         Dim tran As SqlTransaction
         Try
             conectar()
@@ -374,6 +393,29 @@ end"
                         Exit For
                     End If
                 Next
+                If flagNotError Then
+                    For Each itemJobAccess As String In arrayClientAccess.Items
+                        Dim arraycompanyName() As String = itemJobAccess.Split("-")
+                        Dim companyNumber As String = arraycompanyName(0)
+                        Dim cmdAccess As New SqlCommand
+                        cmdAccess.CommandText = "if (select COUNT(*) from userClientAccess where  idUsers = '" + id + "' and idClient = (select top 1 idClient from clients where numberClient = '" + companyNumber + "')) = 1
+begin 
+	update userClientAccess set access = " + If(arrayClientAccess.CheckedItems.Contains(itemJobAccess), "1", "0") + " where idUsers = '" + id + "' and idClient = (select top 1 idClient from clients where numberClient = " + companyNumber + ")
+end 
+else 
+begin 
+	insert into userClientAccess values ('" + id + "',(select top 1 idClient from clients where numberClient = " + companyNumber + ")," + If(arrayClientAccess.CheckedItems.Contains(itemJobAccess), "1", "0") + ")
+end"
+
+                        cmdAccess.Connection = conn
+                        cmdAccess.Transaction = tran
+                        If Not cmdAccess.ExecuteNonQuery > 0 Then
+                            flagNotError = False
+                            Exit For
+                        End If
+                    Next
+
+                End If
                 If flagNotError Then
                     tran.Commit()
                     MsgBox("Successful.")
@@ -546,6 +588,7 @@ Public Class MetodosReels
     End Function
 
 End Class
+
 Public Class Users
     Inherits ConnectioDB
     Private _userName, _password, _idUser As String

@@ -1,4 +1,5 @@
-﻿Imports System.Runtime.InteropServices
+﻿Imports System.Net
+Imports System.Runtime.InteropServices
 Public Class MaterialDetails
     Dim idClient As String = ""
     Dim jobNo As String = ""
@@ -32,7 +33,8 @@ Public Class MaterialDetails
         SendMessage(Me.Handle, &H112&, &HF012&, 0)
     End Sub
     Private Sub MaterialDetails_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        llenarComboClientsReports(cmbClients)
+        'llenarComboClientsReports(cmbClients)
+        llenarComboClientByUser(cmbClients)
     End Sub
 
     Private Sub cmbClients_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbClients.SelectedIndexChanged

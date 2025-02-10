@@ -19,7 +19,7 @@ Partial Class Others
 
     'NOTA: el Diseñador de Windows Forms necesita el siguiente procedimiento
     'Se puede modificar usando el Diseñador de Windows Forms.  
-    'No lo modifique con el editor de código.
+    'No lo modifique connSQL el editor de código.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Dim btnDeleteTypeEmployee As System.Windows.Forms.Button
@@ -38,6 +38,7 @@ Partial Class Others
         Me.ColumnHeader4 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.ColumnHeader5 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.Panel26 = New System.Windows.Forms.Panel()
+        Me.btnExcel = New System.Windows.Forms.Button()
         Me.txtMatClass = New System.Windows.Forms.TextBox()
         Me.txtMatDesc = New System.Windows.Forms.TextBox()
         Me.btnUpdateMatClass = New System.Windows.Forms.Button()
@@ -150,7 +151,6 @@ Partial Class Others
         Me.PictureBox2 = New System.Windows.Forms.PictureBox()
         Me.PictureBox1 = New System.Windows.Forms.PictureBox()
         Me.Label7 = New System.Windows.Forms.Label()
-        Me.btnExcel = New System.Windows.Forms.Button()
         btnDeleteTypeEmployee = New System.Windows.Forms.Button()
         Me.Panel1.SuspendLayout()
         Me.TableLayoutPanel10.SuspendLayout()
@@ -221,9 +221,10 @@ Partial Class Others
         btnDeleteTypeEmployee.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         btnDeleteTypeEmployee.Image = Global.AVT_TRAKING.My.Resources.Resources.delete
         btnDeleteTypeEmployee.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        btnDeleteTypeEmployee.Location = New System.Drawing.Point(35, 167)
+        btnDeleteTypeEmployee.Location = New System.Drawing.Point(47, 204)
+        btnDeleteTypeEmployee.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         btnDeleteTypeEmployee.Name = "btnDeleteTypeEmployee"
-        btnDeleteTypeEmployee.Size = New System.Drawing.Size(97, 32)
+        btnDeleteTypeEmployee.Size = New System.Drawing.Size(129, 39)
         btnDeleteTypeEmployee.TabIndex = 2
         btnDeleteTypeEmployee.Text = "Delete"
         btnDeleteTypeEmployee.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -236,32 +237,36 @@ Partial Class Others
         Me.Panel1.Controls.Add(Me.TitleBar)
         Me.Panel1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel1.Location = New System.Drawing.Point(0, 0)
+        Me.Panel1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(964, 592)
+        Me.Panel1.Size = New System.Drawing.Size(1285, 729)
         Me.Panel1.TabIndex = 0
         '
         'TableLayoutPanel10
         '
+        Me.TableLayoutPanel10.BackColor = System.Drawing.Color.FromArgb(CType(CType(83, Byte), Integer), CType(CType(93, Byte), Integer), CType(CType(102, Byte), Integer))
         Me.TableLayoutPanel10.ColumnCount = 1
         Me.TableLayoutPanel10.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
         Me.TableLayoutPanel10.Controls.Add(Me.Panel18, 0, 0)
         Me.TableLayoutPanel10.Controls.Add(Me.Panel19, 0, 1)
         Me.TableLayoutPanel10.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.TableLayoutPanel10.Location = New System.Drawing.Point(0, 31)
+        Me.TableLayoutPanel10.Location = New System.Drawing.Point(0, 38)
+        Me.TableLayoutPanel10.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.TableLayoutPanel10.Name = "TableLayoutPanel10"
         Me.TableLayoutPanel10.RowCount = 2
-        Me.TableLayoutPanel10.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50.0!))
+        Me.TableLayoutPanel10.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 62.0!))
         Me.TableLayoutPanel10.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-        Me.TableLayoutPanel10.Size = New System.Drawing.Size(964, 561)
+        Me.TableLayoutPanel10.Size = New System.Drawing.Size(1285, 691)
         Me.TableLayoutPanel10.TabIndex = 3
         '
         'Panel18
         '
         Me.Panel18.Controls.Add(Me.Button1)
         Me.Panel18.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel18.Location = New System.Drawing.Point(3, 3)
+        Me.Panel18.Location = New System.Drawing.Point(4, 4)
+        Me.Panel18.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.Panel18.Name = "Panel18"
-        Me.Panel18.Size = New System.Drawing.Size(958, 44)
+        Me.Panel18.Size = New System.Drawing.Size(1277, 54)
         Me.Panel18.TabIndex = 0
         '
         'Button1
@@ -269,9 +274,10 @@ Partial Class Others
         Me.Button1.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.Button1.Image = Global.AVT_TRAKING.My.Resources.Resources._exit
-        Me.Button1.Location = New System.Drawing.Point(912, 3)
+        Me.Button1.Location = New System.Drawing.Point(1216, 4)
+        Me.Button1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(37, 45)
+        Me.Button1.Size = New System.Drawing.Size(49, 55)
         Me.Button1.TabIndex = 2
         Me.Button1.UseVisualStyleBackColor = True
         '
@@ -279,9 +285,10 @@ Partial Class Others
         '
         Me.Panel19.Controls.Add(Me.TabControl1)
         Me.Panel19.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel19.Location = New System.Drawing.Point(3, 53)
+        Me.Panel19.Location = New System.Drawing.Point(4, 66)
+        Me.Panel19.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.Panel19.Name = "Panel19"
-        Me.Panel19.Size = New System.Drawing.Size(958, 505)
+        Me.Panel19.Size = New System.Drawing.Size(1277, 621)
         Me.Panel19.TabIndex = 1
         '
         'TabControl1
@@ -292,9 +299,10 @@ Partial Class Others
         Me.TabControl1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.TabControl1.Font = New System.Drawing.Font("Verdana", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TabControl1.Location = New System.Drawing.Point(0, 0)
+        Me.TabControl1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.TabControl1.Name = "TabControl1"
         Me.TabControl1.SelectedIndex = 0
-        Me.TabControl1.Size = New System.Drawing.Size(958, 505)
+        Me.TabControl1.Size = New System.Drawing.Size(1277, 621)
         Me.TabControl1.TabIndex = 0
         '
         'TabPage1
@@ -303,10 +311,11 @@ Partial Class Others
         Me.TabPage1.Controls.Add(Me.TableLayoutPanel9)
         Me.TabPage1.Font = New System.Drawing.Font("Verdana", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TabPage1.ForeColor = System.Drawing.SystemColors.ControlText
-        Me.TabPage1.Location = New System.Drawing.Point(4, 27)
+        Me.TabPage1.Location = New System.Drawing.Point(4, 32)
+        Me.TabPage1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.TabPage1.Name = "TabPage1"
-        Me.TabPage1.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage1.Size = New System.Drawing.Size(950, 474)
+        Me.TabPage1.Padding = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.TabPage1.Size = New System.Drawing.Size(1269, 585)
         Me.TabPage1.TabIndex = 0
         Me.TabPage1.Text = "Proyect Items"
         '
@@ -323,21 +332,23 @@ Partial Class Others
         Me.TableLayoutPanel9.Controls.Add(Me.Panel13, 1, 0)
         Me.TableLayoutPanel9.Controls.Add(Me.Panel12, 0, 0)
         Me.TableLayoutPanel9.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.TableLayoutPanel9.Location = New System.Drawing.Point(3, 3)
+        Me.TableLayoutPanel9.Location = New System.Drawing.Point(4, 4)
+        Me.TableLayoutPanel9.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.TableLayoutPanel9.Name = "TableLayoutPanel9"
         Me.TableLayoutPanel9.RowCount = 2
         Me.TableLayoutPanel9.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
         Me.TableLayoutPanel9.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
-        Me.TableLayoutPanel9.Size = New System.Drawing.Size(944, 468)
+        Me.TableLayoutPanel9.Size = New System.Drawing.Size(1261, 577)
         Me.TableLayoutPanel9.TabIndex = 7
         '
         'Panel17
         '
         Me.Panel17.Controls.Add(Me.GroupBox7)
         Me.Panel17.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel17.Location = New System.Drawing.Point(631, 237)
+        Me.Panel17.Location = New System.Drawing.Point(844, 292)
+        Me.Panel17.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.Panel17.Name = "Panel17"
-        Me.Panel17.Size = New System.Drawing.Size(310, 228)
+        Me.Panel17.Size = New System.Drawing.Size(413, 281)
         Me.Panel17.TabIndex = 5
         '
         'GroupBox7
@@ -347,8 +358,10 @@ Partial Class Others
         Me.GroupBox7.Dock = System.Windows.Forms.DockStyle.Fill
         Me.GroupBox7.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.GroupBox7.Location = New System.Drawing.Point(0, 0)
+        Me.GroupBox7.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.GroupBox7.Name = "GroupBox7"
-        Me.GroupBox7.Size = New System.Drawing.Size(310, 228)
+        Me.GroupBox7.Padding = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.GroupBox7.Size = New System.Drawing.Size(413, 281)
         Me.GroupBox7.TabIndex = 4
         Me.GroupBox7.TabStop = False
         Me.GroupBox7.Text = "Material Class"
@@ -357,15 +370,16 @@ Partial Class Others
         '
         Me.TableLayoutPanel16.ColumnCount = 2
         Me.TableLayoutPanel16.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-        Me.TableLayoutPanel16.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 140.0!))
+        Me.TableLayoutPanel16.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 187.0!))
         Me.TableLayoutPanel16.Controls.Add(Me.lstMatClass, 0, 0)
         Me.TableLayoutPanel16.Controls.Add(Me.Panel26, 1, 0)
         Me.TableLayoutPanel16.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.TableLayoutPanel16.Location = New System.Drawing.Point(3, 19)
+        Me.TableLayoutPanel16.Location = New System.Drawing.Point(4, 24)
+        Me.TableLayoutPanel16.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.TableLayoutPanel16.Name = "TableLayoutPanel16"
         Me.TableLayoutPanel16.RowCount = 1
         Me.TableLayoutPanel16.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-        Me.TableLayoutPanel16.Size = New System.Drawing.Size(304, 206)
+        Me.TableLayoutPanel16.Size = New System.Drawing.Size(405, 253)
         Me.TableLayoutPanel16.TabIndex = 8
         '
         'lstMatClass
@@ -374,10 +388,11 @@ Partial Class Others
         Me.lstMatClass.Dock = System.Windows.Forms.DockStyle.Fill
         Me.lstMatClass.FullRowSelect = True
         Me.lstMatClass.HideSelection = False
-        Me.lstMatClass.Location = New System.Drawing.Point(3, 3)
+        Me.lstMatClass.Location = New System.Drawing.Point(4, 4)
+        Me.lstMatClass.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.lstMatClass.MultiSelect = False
         Me.lstMatClass.Name = "lstMatClass"
-        Me.lstMatClass.Size = New System.Drawing.Size(158, 200)
+        Me.lstMatClass.Size = New System.Drawing.Size(210, 245)
         Me.lstMatClass.TabIndex = 3
         Me.lstMatClass.UseCompatibleStateImageBehavior = False
         Me.lstMatClass.View = System.Windows.Forms.View.Details
@@ -401,27 +416,47 @@ Partial Class Others
         Me.Panel26.Controls.Add(Me.btnAddMatClass)
         Me.Panel26.Controls.Add(Me.btnDeleteMatClass)
         Me.Panel26.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel26.Location = New System.Drawing.Point(167, 3)
+        Me.Panel26.Location = New System.Drawing.Point(222, 4)
+        Me.Panel26.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.Panel26.Name = "Panel26"
-        Me.Panel26.Size = New System.Drawing.Size(134, 200)
+        Me.Panel26.Size = New System.Drawing.Size(179, 245)
         Me.Panel26.TabIndex = 4
+        '
+        'btnExcel
+        '
+        Me.btnExcel.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnExcel.FlatAppearance.BorderSize = 0
+        Me.btnExcel.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(41, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(185, Byte), Integer))
+        Me.btnExcel.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnExcel.Image = Global.AVT_TRAKING.My.Resources.Resources.excel
+        Me.btnExcel.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnExcel.Location = New System.Drawing.Point(67, 117)
+        Me.btnExcel.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btnExcel.Name = "btnExcel"
+        Me.btnExcel.Size = New System.Drawing.Size(117, 43)
+        Me.btnExcel.TabIndex = 8
+        Me.btnExcel.Text = "Excel"
+        Me.btnExcel.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.btnExcel.UseVisualStyleBackColor = True
         '
         'txtMatClass
         '
         Me.txtMatClass.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.txtMatClass.Location = New System.Drawing.Point(3, 3)
+        Me.txtMatClass.Location = New System.Drawing.Point(4, 4)
+        Me.txtMatClass.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.txtMatClass.Name = "txtMatClass"
-        Me.txtMatClass.Size = New System.Drawing.Size(134, 23)
+        Me.txtMatClass.Size = New System.Drawing.Size(177, 27)
         Me.txtMatClass.TabIndex = 5
         '
         'txtMatDesc
         '
         Me.txtMatDesc.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.txtMatDesc.Location = New System.Drawing.Point(3, 32)
+        Me.txtMatDesc.Location = New System.Drawing.Point(4, 39)
+        Me.txtMatDesc.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.txtMatDesc.Name = "txtMatDesc"
-        Me.txtMatDesc.Size = New System.Drawing.Size(134, 23)
+        Me.txtMatDesc.Size = New System.Drawing.Size(177, 27)
         Me.txtMatDesc.TabIndex = 7
         '
         'btnUpdateMatClass
@@ -432,9 +467,10 @@ Partial Class Others
         Me.btnUpdateMatClass.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnUpdateMatClass.Image = Global.AVT_TRAKING.My.Resources.Resources.update
         Me.btnUpdateMatClass.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnUpdateMatClass.Location = New System.Drawing.Point(41, 131)
+        Me.btnUpdateMatClass.Location = New System.Drawing.Point(55, 160)
+        Me.btnUpdateMatClass.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.btnUpdateMatClass.Name = "btnUpdateMatClass"
-        Me.btnUpdateMatClass.Size = New System.Drawing.Size(97, 32)
+        Me.btnUpdateMatClass.Size = New System.Drawing.Size(129, 39)
         Me.btnUpdateMatClass.TabIndex = 1
         Me.btnUpdateMatClass.Text = "Update"
         Me.btnUpdateMatClass.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -448,9 +484,10 @@ Partial Class Others
         Me.btnAddMatClass.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnAddMatClass.Image = Global.AVT_TRAKING.My.Resources.Resources.add
         Me.btnAddMatClass.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnAddMatClass.Location = New System.Drawing.Point(66, 59)
+        Me.btnAddMatClass.Location = New System.Drawing.Point(88, 73)
+        Me.btnAddMatClass.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.btnAddMatClass.Name = "btnAddMatClass"
-        Me.btnAddMatClass.Size = New System.Drawing.Size(72, 34)
+        Me.btnAddMatClass.Size = New System.Drawing.Size(96, 42)
         Me.btnAddMatClass.TabIndex = 6
         Me.btnAddMatClass.Text = "Add"
         Me.btnAddMatClass.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -464,9 +501,10 @@ Partial Class Others
         Me.btnDeleteMatClass.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnDeleteMatClass.Image = Global.AVT_TRAKING.My.Resources.Resources.delete
         Me.btnDeleteMatClass.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnDeleteMatClass.Location = New System.Drawing.Point(41, 165)
+        Me.btnDeleteMatClass.Location = New System.Drawing.Point(55, 202)
+        Me.btnDeleteMatClass.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.btnDeleteMatClass.Name = "btnDeleteMatClass"
-        Me.btnDeleteMatClass.Size = New System.Drawing.Size(97, 32)
+        Me.btnDeleteMatClass.Size = New System.Drawing.Size(129, 39)
         Me.btnDeleteMatClass.TabIndex = 2
         Me.btnDeleteMatClass.Text = "Delete"
         Me.btnDeleteMatClass.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -476,9 +514,10 @@ Partial Class Others
         '
         Me.Panel16.Controls.Add(Me.GroupBox4)
         Me.Panel16.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel16.Location = New System.Drawing.Point(317, 237)
+        Me.Panel16.Location = New System.Drawing.Point(424, 292)
+        Me.Panel16.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.Panel16.Name = "Panel16"
-        Me.Panel16.Size = New System.Drawing.Size(308, 228)
+        Me.Panel16.Size = New System.Drawing.Size(412, 281)
         Me.Panel16.TabIndex = 4
         '
         'GroupBox4
@@ -488,8 +527,10 @@ Partial Class Others
         Me.GroupBox4.Dock = System.Windows.Forms.DockStyle.Fill
         Me.GroupBox4.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.GroupBox4.Location = New System.Drawing.Point(0, 0)
+        Me.GroupBox4.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.GroupBox4.Name = "GroupBox4"
-        Me.GroupBox4.Size = New System.Drawing.Size(308, 228)
+        Me.GroupBox4.Padding = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.GroupBox4.Size = New System.Drawing.Size(412, 281)
         Me.GroupBox4.TabIndex = 4
         Me.GroupBox4.TabStop = False
         Me.GroupBox4.Text = "Cost Distribution"
@@ -498,15 +539,16 @@ Partial Class Others
         '
         Me.TableLayoutPanel15.ColumnCount = 2
         Me.TableLayoutPanel15.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-        Me.TableLayoutPanel15.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 140.0!))
+        Me.TableLayoutPanel15.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 187.0!))
         Me.TableLayoutPanel15.Controls.Add(Me.lstCostDistribution, 0, 0)
         Me.TableLayoutPanel15.Controls.Add(Me.Panel25, 1, 0)
         Me.TableLayoutPanel15.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.TableLayoutPanel15.Location = New System.Drawing.Point(3, 19)
+        Me.TableLayoutPanel15.Location = New System.Drawing.Point(4, 24)
+        Me.TableLayoutPanel15.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.TableLayoutPanel15.Name = "TableLayoutPanel15"
         Me.TableLayoutPanel15.RowCount = 1
         Me.TableLayoutPanel15.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-        Me.TableLayoutPanel15.Size = New System.Drawing.Size(302, 206)
+        Me.TableLayoutPanel15.Size = New System.Drawing.Size(404, 253)
         Me.TableLayoutPanel15.TabIndex = 12
         '
         'lstCostDistribution
@@ -515,10 +557,11 @@ Partial Class Others
         Me.lstCostDistribution.Dock = System.Windows.Forms.DockStyle.Fill
         Me.lstCostDistribution.FullRowSelect = True
         Me.lstCostDistribution.HideSelection = False
-        Me.lstCostDistribution.Location = New System.Drawing.Point(3, 3)
+        Me.lstCostDistribution.Location = New System.Drawing.Point(4, 4)
+        Me.lstCostDistribution.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.lstCostDistribution.MultiSelect = False
         Me.lstCostDistribution.Name = "lstCostDistribution"
-        Me.lstCostDistribution.Size = New System.Drawing.Size(156, 200)
+        Me.lstCostDistribution.Size = New System.Drawing.Size(209, 245)
         Me.lstCostDistribution.TabIndex = 9
         Me.lstCostDistribution.UseCompatibleStateImageBehavior = False
         Me.lstCostDistribution.View = System.Windows.Forms.View.Details
@@ -535,18 +578,20 @@ Partial Class Others
         Me.Panel25.Controls.Add(Me.btnUpdateCostDristribution)
         Me.Panel25.Controls.Add(Me.btnDeleteCostDistribution)
         Me.Panel25.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel25.Location = New System.Drawing.Point(165, 3)
+        Me.Panel25.Location = New System.Drawing.Point(221, 4)
+        Me.Panel25.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.Panel25.Name = "Panel25"
-        Me.Panel25.Size = New System.Drawing.Size(134, 200)
+        Me.Panel25.Size = New System.Drawing.Size(179, 245)
         Me.Panel25.TabIndex = 10
         '
         'txtCostDistribution
         '
         Me.txtCostDistribution.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.txtCostDistribution.Location = New System.Drawing.Point(3, 3)
+        Me.txtCostDistribution.Location = New System.Drawing.Point(4, 4)
+        Me.txtCostDistribution.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.txtCostDistribution.Name = "txtCostDistribution"
-        Me.txtCostDistribution.Size = New System.Drawing.Size(131, 23)
+        Me.txtCostDistribution.Size = New System.Drawing.Size(173, 27)
         Me.txtCostDistribution.TabIndex = 10
         '
         'btnAddCostDristribution
@@ -556,9 +601,10 @@ Partial Class Others
         Me.btnAddCostDristribution.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnAddCostDristribution.Image = Global.AVT_TRAKING.My.Resources.Resources.add
         Me.btnAddCostDristribution.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnAddCostDristribution.Location = New System.Drawing.Point(62, 26)
+        Me.btnAddCostDristribution.Location = New System.Drawing.Point(83, 32)
+        Me.btnAddCostDristribution.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.btnAddCostDristribution.Name = "btnAddCostDristribution"
-        Me.btnAddCostDristribution.Size = New System.Drawing.Size(72, 34)
+        Me.btnAddCostDristribution.Size = New System.Drawing.Size(96, 42)
         Me.btnAddCostDristribution.TabIndex = 11
         Me.btnAddCostDristribution.Text = "Add"
         Me.btnAddCostDristribution.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -572,9 +618,10 @@ Partial Class Others
         Me.btnUpdateCostDristribution.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnUpdateCostDristribution.Image = Global.AVT_TRAKING.My.Resources.Resources.update
         Me.btnUpdateCostDristribution.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnUpdateCostDristribution.Location = New System.Drawing.Point(37, 129)
+        Me.btnUpdateCostDristribution.Location = New System.Drawing.Point(49, 158)
+        Me.btnUpdateCostDristribution.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.btnUpdateCostDristribution.Name = "btnUpdateCostDristribution"
-        Me.btnUpdateCostDristribution.Size = New System.Drawing.Size(97, 32)
+        Me.btnUpdateCostDristribution.Size = New System.Drawing.Size(129, 39)
         Me.btnUpdateCostDristribution.TabIndex = 1
         Me.btnUpdateCostDristribution.Text = "Update"
         Me.btnUpdateCostDristribution.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -588,9 +635,10 @@ Partial Class Others
         Me.btnDeleteCostDistribution.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnDeleteCostDistribution.Image = Global.AVT_TRAKING.My.Resources.Resources.delete
         Me.btnDeleteCostDistribution.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnDeleteCostDistribution.Location = New System.Drawing.Point(37, 167)
+        Me.btnDeleteCostDistribution.Location = New System.Drawing.Point(49, 205)
+        Me.btnDeleteCostDistribution.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.btnDeleteCostDistribution.Name = "btnDeleteCostDistribution"
-        Me.btnDeleteCostDistribution.Size = New System.Drawing.Size(97, 32)
+        Me.btnDeleteCostDistribution.Size = New System.Drawing.Size(129, 39)
         Me.btnDeleteCostDistribution.TabIndex = 2
         Me.btnDeleteCostDistribution.Text = "Delete"
         Me.btnDeleteCostDistribution.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -600,9 +648,10 @@ Partial Class Others
         '
         Me.Panel15.Controls.Add(Me.GroupBox3)
         Me.Panel15.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel15.Location = New System.Drawing.Point(3, 237)
+        Me.Panel15.Location = New System.Drawing.Point(4, 292)
+        Me.Panel15.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.Panel15.Name = "Panel15"
-        Me.Panel15.Size = New System.Drawing.Size(308, 228)
+        Me.Panel15.Size = New System.Drawing.Size(412, 281)
         Me.Panel15.TabIndex = 3
         '
         'GroupBox3
@@ -612,8 +661,10 @@ Partial Class Others
         Me.GroupBox3.Dock = System.Windows.Forms.DockStyle.Fill
         Me.GroupBox3.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.GroupBox3.Location = New System.Drawing.Point(0, 0)
+        Me.GroupBox3.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.GroupBox3.Name = "GroupBox3"
-        Me.GroupBox3.Size = New System.Drawing.Size(308, 228)
+        Me.GroupBox3.Padding = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.GroupBox3.Size = New System.Drawing.Size(412, 281)
         Me.GroupBox3.TabIndex = 1
         Me.GroupBox3.TabStop = False
         Me.GroupBox3.Text = "Work TM Lump Sum"
@@ -622,15 +673,16 @@ Partial Class Others
         '
         Me.TableLayoutPanel14.ColumnCount = 2
         Me.TableLayoutPanel14.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-        Me.TableLayoutPanel14.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 140.0!))
+        Me.TableLayoutPanel14.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 187.0!))
         Me.TableLayoutPanel14.Controls.Add(Me.lstWTMLS, 0, 0)
         Me.TableLayoutPanel14.Controls.Add(Me.Panel24, 1, 0)
         Me.TableLayoutPanel14.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.TableLayoutPanel14.Location = New System.Drawing.Point(3, 19)
+        Me.TableLayoutPanel14.Location = New System.Drawing.Point(4, 24)
+        Me.TableLayoutPanel14.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.TableLayoutPanel14.Name = "TableLayoutPanel14"
         Me.TableLayoutPanel14.RowCount = 1
         Me.TableLayoutPanel14.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-        Me.TableLayoutPanel14.Size = New System.Drawing.Size(302, 206)
+        Me.TableLayoutPanel14.Size = New System.Drawing.Size(404, 253)
         Me.TableLayoutPanel14.TabIndex = 9
         '
         'lstWTMLS
@@ -639,10 +691,11 @@ Partial Class Others
         Me.lstWTMLS.Dock = System.Windows.Forms.DockStyle.Fill
         Me.lstWTMLS.FullRowSelect = True
         Me.lstWTMLS.HideSelection = False
-        Me.lstWTMLS.Location = New System.Drawing.Point(3, 3)
+        Me.lstWTMLS.Location = New System.Drawing.Point(4, 4)
+        Me.lstWTMLS.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.lstWTMLS.MultiSelect = False
         Me.lstWTMLS.Name = "lstWTMLS"
-        Me.lstWTMLS.Size = New System.Drawing.Size(156, 200)
+        Me.lstWTMLS.Size = New System.Drawing.Size(209, 245)
         Me.lstWTMLS.TabIndex = 4
         Me.lstWTMLS.UseCompatibleStateImageBehavior = False
         Me.lstWTMLS.View = System.Windows.Forms.View.Details
@@ -659,18 +712,20 @@ Partial Class Others
         Me.Panel24.Controls.Add(Me.btnUpdateWTMLS)
         Me.Panel24.Controls.Add(Me.btnDeleteWTMLS)
         Me.Panel24.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel24.Location = New System.Drawing.Point(165, 3)
+        Me.Panel24.Location = New System.Drawing.Point(221, 4)
+        Me.Panel24.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.Panel24.Name = "Panel24"
-        Me.Panel24.Size = New System.Drawing.Size(134, 200)
+        Me.Panel24.Size = New System.Drawing.Size(179, 245)
         Me.Panel24.TabIndex = 5
         '
         'txtWTMLS
         '
         Me.txtWTMLS.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.txtWTMLS.Location = New System.Drawing.Point(3, 3)
+        Me.txtWTMLS.Location = New System.Drawing.Point(4, 4)
+        Me.txtWTMLS.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.txtWTMLS.Name = "txtWTMLS"
-        Me.txtWTMLS.Size = New System.Drawing.Size(134, 23)
+        Me.txtWTMLS.Size = New System.Drawing.Size(177, 27)
         Me.txtWTMLS.TabIndex = 7
         '
         'btnAddWTMLS
@@ -680,9 +735,10 @@ Partial Class Others
         Me.btnAddWTMLS.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnAddWTMLS.Image = Global.AVT_TRAKING.My.Resources.Resources.add
         Me.btnAddWTMLS.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnAddWTMLS.Location = New System.Drawing.Point(62, 26)
+        Me.btnAddWTMLS.Location = New System.Drawing.Point(83, 32)
+        Me.btnAddWTMLS.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.btnAddWTMLS.Name = "btnAddWTMLS"
-        Me.btnAddWTMLS.Size = New System.Drawing.Size(72, 34)
+        Me.btnAddWTMLS.Size = New System.Drawing.Size(96, 42)
         Me.btnAddWTMLS.TabIndex = 8
         Me.btnAddWTMLS.Text = "Add"
         Me.btnAddWTMLS.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -696,9 +752,10 @@ Partial Class Others
         Me.btnUpdateWTMLS.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnUpdateWTMLS.Image = Global.AVT_TRAKING.My.Resources.Resources.update
         Me.btnUpdateWTMLS.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnUpdateWTMLS.Location = New System.Drawing.Point(34, 129)
+        Me.btnUpdateWTMLS.Location = New System.Drawing.Point(45, 158)
+        Me.btnUpdateWTMLS.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.btnUpdateWTMLS.Name = "btnUpdateWTMLS"
-        Me.btnUpdateWTMLS.Size = New System.Drawing.Size(97, 32)
+        Me.btnUpdateWTMLS.Size = New System.Drawing.Size(129, 39)
         Me.btnUpdateWTMLS.TabIndex = 1
         Me.btnUpdateWTMLS.Text = "Update"
         Me.btnUpdateWTMLS.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -712,9 +769,10 @@ Partial Class Others
         Me.btnDeleteWTMLS.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnDeleteWTMLS.Image = Global.AVT_TRAKING.My.Resources.Resources.delete
         Me.btnDeleteWTMLS.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnDeleteWTMLS.Location = New System.Drawing.Point(31, 167)
+        Me.btnDeleteWTMLS.Location = New System.Drawing.Point(41, 205)
+        Me.btnDeleteWTMLS.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.btnDeleteWTMLS.Name = "btnDeleteWTMLS"
-        Me.btnDeleteWTMLS.Size = New System.Drawing.Size(97, 32)
+        Me.btnDeleteWTMLS.Size = New System.Drawing.Size(129, 39)
         Me.btnDeleteWTMLS.TabIndex = 2
         Me.btnDeleteWTMLS.Text = "Delete"
         Me.btnDeleteWTMLS.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -724,9 +782,10 @@ Partial Class Others
         '
         Me.Panel14.Controls.Add(Me.GroupBox5)
         Me.Panel14.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel14.Location = New System.Drawing.Point(631, 3)
+        Me.Panel14.Location = New System.Drawing.Point(844, 4)
+        Me.Panel14.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.Panel14.Name = "Panel14"
-        Me.Panel14.Size = New System.Drawing.Size(310, 228)
+        Me.Panel14.Size = New System.Drawing.Size(413, 280)
         Me.Panel14.TabIndex = 2
         '
         'GroupBox5
@@ -736,8 +795,10 @@ Partial Class Others
         Me.GroupBox5.Dock = System.Windows.Forms.DockStyle.Fill
         Me.GroupBox5.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.GroupBox5.Location = New System.Drawing.Point(0, 0)
+        Me.GroupBox5.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.GroupBox5.Name = "GroupBox5"
-        Me.GroupBox5.Size = New System.Drawing.Size(310, 228)
+        Me.GroupBox5.Padding = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.GroupBox5.Size = New System.Drawing.Size(413, 280)
         Me.GroupBox5.TabIndex = 6
         Me.GroupBox5.TabStop = False
         Me.GroupBox5.Text = "Cost Code"
@@ -746,15 +807,16 @@ Partial Class Others
         '
         Me.TableLayoutPanel13.ColumnCount = 2
         Me.TableLayoutPanel13.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-        Me.TableLayoutPanel13.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 140.0!))
+        Me.TableLayoutPanel13.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 187.0!))
         Me.TableLayoutPanel13.Controls.Add(Me.lstCostCode, 0, 0)
         Me.TableLayoutPanel13.Controls.Add(Me.Panel23, 1, 0)
         Me.TableLayoutPanel13.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.TableLayoutPanel13.Location = New System.Drawing.Point(3, 19)
+        Me.TableLayoutPanel13.Location = New System.Drawing.Point(4, 24)
+        Me.TableLayoutPanel13.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.TableLayoutPanel13.Name = "TableLayoutPanel13"
         Me.TableLayoutPanel13.RowCount = 1
         Me.TableLayoutPanel13.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-        Me.TableLayoutPanel13.Size = New System.Drawing.Size(304, 206)
+        Me.TableLayoutPanel13.Size = New System.Drawing.Size(405, 252)
         Me.TableLayoutPanel13.TabIndex = 15
         '
         'lstCostCode
@@ -763,10 +825,11 @@ Partial Class Others
         Me.lstCostCode.Dock = System.Windows.Forms.DockStyle.Fill
         Me.lstCostCode.FullRowSelect = True
         Me.lstCostCode.HideSelection = False
-        Me.lstCostCode.Location = New System.Drawing.Point(3, 3)
+        Me.lstCostCode.Location = New System.Drawing.Point(4, 4)
+        Me.lstCostCode.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.lstCostCode.MultiSelect = False
         Me.lstCostCode.Name = "lstCostCode"
-        Me.lstCostCode.Size = New System.Drawing.Size(158, 200)
+        Me.lstCostCode.Size = New System.Drawing.Size(210, 244)
         Me.lstCostCode.TabIndex = 12
         Me.lstCostCode.UseCompatibleStateImageBehavior = False
         Me.lstCostCode.View = System.Windows.Forms.View.Details
@@ -783,18 +846,20 @@ Partial Class Others
         Me.Panel23.Controls.Add(Me.btnUpdateCostCode)
         Me.Panel23.Controls.Add(Me.btnDeleteCostCode)
         Me.Panel23.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel23.Location = New System.Drawing.Point(167, 3)
+        Me.Panel23.Location = New System.Drawing.Point(222, 4)
+        Me.Panel23.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.Panel23.Name = "Panel23"
-        Me.Panel23.Size = New System.Drawing.Size(134, 200)
+        Me.Panel23.Size = New System.Drawing.Size(179, 244)
         Me.Panel23.TabIndex = 13
         '
         'txtCostCode
         '
         Me.txtCostCode.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.txtCostCode.Location = New System.Drawing.Point(3, 3)
+        Me.txtCostCode.Location = New System.Drawing.Point(4, 4)
+        Me.txtCostCode.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.txtCostCode.Name = "txtCostCode"
-        Me.txtCostCode.Size = New System.Drawing.Size(128, 23)
+        Me.txtCostCode.Size = New System.Drawing.Size(169, 27)
         Me.txtCostCode.TabIndex = 13
         '
         'btnAddCostCode
@@ -805,9 +870,10 @@ Partial Class Others
         Me.btnAddCostCode.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnAddCostCode.Image = Global.AVT_TRAKING.My.Resources.Resources.add
         Me.btnAddCostCode.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnAddCostCode.Location = New System.Drawing.Point(62, 32)
+        Me.btnAddCostCode.Location = New System.Drawing.Point(83, 39)
+        Me.btnAddCostCode.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.btnAddCostCode.Name = "btnAddCostCode"
-        Me.btnAddCostCode.Size = New System.Drawing.Size(72, 34)
+        Me.btnAddCostCode.Size = New System.Drawing.Size(96, 42)
         Me.btnAddCostCode.TabIndex = 14
         Me.btnAddCostCode.Text = "Add"
         Me.btnAddCostCode.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -821,9 +887,10 @@ Partial Class Others
         Me.btnUpdateCostCode.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnUpdateCostCode.Image = Global.AVT_TRAKING.My.Resources.Resources.update
         Me.btnUpdateCostCode.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnUpdateCostCode.Location = New System.Drawing.Point(43, 129)
+        Me.btnUpdateCostCode.Location = New System.Drawing.Point(57, 157)
+        Me.btnUpdateCostCode.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.btnUpdateCostCode.Name = "btnUpdateCostCode"
-        Me.btnUpdateCostCode.Size = New System.Drawing.Size(97, 32)
+        Me.btnUpdateCostCode.Size = New System.Drawing.Size(129, 39)
         Me.btnUpdateCostCode.TabIndex = 1
         Me.btnUpdateCostCode.Text = "Update"
         Me.btnUpdateCostCode.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -837,9 +904,10 @@ Partial Class Others
         Me.btnDeleteCostCode.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnDeleteCostCode.Image = Global.AVT_TRAKING.My.Resources.Resources.delete
         Me.btnDeleteCostCode.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnDeleteCostCode.Location = New System.Drawing.Point(43, 164)
+        Me.btnDeleteCostCode.Location = New System.Drawing.Point(57, 200)
+        Me.btnDeleteCostCode.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.btnDeleteCostCode.Name = "btnDeleteCostCode"
-        Me.btnDeleteCostCode.Size = New System.Drawing.Size(97, 32)
+        Me.btnDeleteCostCode.Size = New System.Drawing.Size(129, 39)
         Me.btnDeleteCostCode.TabIndex = 2
         Me.btnDeleteCostCode.Text = "Delete"
         Me.btnDeleteCostCode.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -849,9 +917,10 @@ Partial Class Others
         '
         Me.Panel13.Controls.Add(Me.GroupBox2)
         Me.Panel13.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel13.Location = New System.Drawing.Point(317, 3)
+        Me.Panel13.Location = New System.Drawing.Point(424, 4)
+        Me.Panel13.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.Panel13.Name = "Panel13"
-        Me.Panel13.Size = New System.Drawing.Size(308, 228)
+        Me.Panel13.Size = New System.Drawing.Size(412, 280)
         Me.Panel13.TabIndex = 1
         '
         'GroupBox2
@@ -861,8 +930,10 @@ Partial Class Others
         Me.GroupBox2.Dock = System.Windows.Forms.DockStyle.Fill
         Me.GroupBox2.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.GroupBox2.Location = New System.Drawing.Point(0, 0)
+        Me.GroupBox2.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.GroupBox2.Name = "GroupBox2"
-        Me.GroupBox2.Size = New System.Drawing.Size(308, 228)
+        Me.GroupBox2.Padding = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.GroupBox2.Size = New System.Drawing.Size(412, 280)
         Me.GroupBox2.TabIndex = 3
         Me.GroupBox2.TabStop = False
         Me.GroupBox2.Text = "ExpCode"
@@ -871,15 +942,16 @@ Partial Class Others
         '
         Me.TableLayoutPanel11.ColumnCount = 2
         Me.TableLayoutPanel11.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-        Me.TableLayoutPanel11.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 140.0!))
+        Me.TableLayoutPanel11.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 187.0!))
         Me.TableLayoutPanel11.Controls.Add(Me.lstExpCode, 0, 0)
         Me.TableLayoutPanel11.Controls.Add(Me.Panel21, 1, 0)
         Me.TableLayoutPanel11.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.TableLayoutPanel11.Location = New System.Drawing.Point(3, 19)
+        Me.TableLayoutPanel11.Location = New System.Drawing.Point(4, 24)
+        Me.TableLayoutPanel11.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.TableLayoutPanel11.Name = "TableLayoutPanel11"
         Me.TableLayoutPanel11.RowCount = 1
         Me.TableLayoutPanel11.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-        Me.TableLayoutPanel11.Size = New System.Drawing.Size(302, 206)
+        Me.TableLayoutPanel11.Size = New System.Drawing.Size(404, 252)
         Me.TableLayoutPanel11.TabIndex = 7
         '
         'lstExpCode
@@ -890,10 +962,11 @@ Partial Class Others
         Me.lstExpCode.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.clmNumerExpCode, Me.clmNameExpCode})
         Me.lstExpCode.FullRowSelect = True
         Me.lstExpCode.HideSelection = False
-        Me.lstExpCode.Location = New System.Drawing.Point(3, 3)
+        Me.lstExpCode.Location = New System.Drawing.Point(4, 4)
+        Me.lstExpCode.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.lstExpCode.MultiSelect = False
         Me.lstExpCode.Name = "lstExpCode"
-        Me.lstExpCode.Size = New System.Drawing.Size(156, 200)
+        Me.lstExpCode.Size = New System.Drawing.Size(209, 244)
         Me.lstExpCode.TabIndex = 3
         Me.lstExpCode.UseCompatibleStateImageBehavior = False
         Me.lstExpCode.View = System.Windows.Forms.View.Details
@@ -915,18 +988,20 @@ Partial Class Others
         Me.Panel21.Controls.Add(Me.btnAddExpCode)
         Me.Panel21.Controls.Add(Me.btnUpdateExpCode)
         Me.Panel21.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel21.Location = New System.Drawing.Point(165, 3)
+        Me.Panel21.Location = New System.Drawing.Point(221, 4)
+        Me.Panel21.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.Panel21.Name = "Panel21"
-        Me.Panel21.Size = New System.Drawing.Size(134, 200)
+        Me.Panel21.Size = New System.Drawing.Size(179, 244)
         Me.Panel21.TabIndex = 4
         '
         'txtExpCode
         '
         Me.txtExpCode.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.txtExpCode.Location = New System.Drawing.Point(3, 3)
+        Me.txtExpCode.Location = New System.Drawing.Point(4, 4)
+        Me.txtExpCode.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.txtExpCode.Name = "txtExpCode"
-        Me.txtExpCode.Size = New System.Drawing.Size(134, 23)
+        Me.txtExpCode.Size = New System.Drawing.Size(177, 27)
         Me.txtExpCode.TabIndex = 5
         '
         'btnDeleteExpCode
@@ -937,9 +1012,10 @@ Partial Class Others
         Me.btnDeleteExpCode.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnDeleteExpCode.Image = Global.AVT_TRAKING.My.Resources.Resources.delete
         Me.btnDeleteExpCode.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnDeleteExpCode.Location = New System.Drawing.Point(34, 164)
+        Me.btnDeleteExpCode.Location = New System.Drawing.Point(45, 200)
+        Me.btnDeleteExpCode.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.btnDeleteExpCode.Name = "btnDeleteExpCode"
-        Me.btnDeleteExpCode.Size = New System.Drawing.Size(97, 32)
+        Me.btnDeleteExpCode.Size = New System.Drawing.Size(129, 39)
         Me.btnDeleteExpCode.TabIndex = 2
         Me.btnDeleteExpCode.Text = "Delete"
         Me.btnDeleteExpCode.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -953,9 +1029,10 @@ Partial Class Others
         Me.btnAddExpCode.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnAddExpCode.Image = Global.AVT_TRAKING.My.Resources.Resources.add
         Me.btnAddExpCode.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnAddExpCode.Location = New System.Drawing.Point(53, 32)
+        Me.btnAddExpCode.Location = New System.Drawing.Point(71, 39)
+        Me.btnAddExpCode.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.btnAddExpCode.Name = "btnAddExpCode"
-        Me.btnAddExpCode.Size = New System.Drawing.Size(72, 34)
+        Me.btnAddExpCode.Size = New System.Drawing.Size(96, 42)
         Me.btnAddExpCode.TabIndex = 6
         Me.btnAddExpCode.Text = "Add"
         Me.btnAddExpCode.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -969,9 +1046,10 @@ Partial Class Others
         Me.btnUpdateExpCode.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnUpdateExpCode.Image = Global.AVT_TRAKING.My.Resources.Resources.update
         Me.btnUpdateExpCode.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnUpdateExpCode.Location = New System.Drawing.Point(34, 129)
+        Me.btnUpdateExpCode.Location = New System.Drawing.Point(45, 157)
+        Me.btnUpdateExpCode.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.btnUpdateExpCode.Name = "btnUpdateExpCode"
-        Me.btnUpdateExpCode.Size = New System.Drawing.Size(97, 32)
+        Me.btnUpdateExpCode.Size = New System.Drawing.Size(129, 39)
         Me.btnUpdateExpCode.TabIndex = 1
         Me.btnUpdateExpCode.Text = "Update"
         Me.btnUpdateExpCode.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -981,9 +1059,10 @@ Partial Class Others
         '
         Me.Panel12.Controls.Add(Me.GroupBox1)
         Me.Panel12.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel12.Location = New System.Drawing.Point(3, 3)
+        Me.Panel12.Location = New System.Drawing.Point(4, 4)
+        Me.Panel12.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.Panel12.Name = "Panel12"
-        Me.Panel12.Size = New System.Drawing.Size(308, 228)
+        Me.Panel12.Size = New System.Drawing.Size(412, 280)
         Me.Panel12.TabIndex = 0
         '
         'GroupBox1
@@ -993,8 +1072,10 @@ Partial Class Others
         Me.GroupBox1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.GroupBox1.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.GroupBox1.Location = New System.Drawing.Point(0, 0)
+        Me.GroupBox1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(308, 228)
+        Me.GroupBox1.Padding = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.GroupBox1.Size = New System.Drawing.Size(412, 280)
         Me.GroupBox1.TabIndex = 0
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Type Employees"
@@ -1003,15 +1084,16 @@ Partial Class Others
         '
         Me.TableLayoutPanel12.ColumnCount = 2
         Me.TableLayoutPanel12.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-        Me.TableLayoutPanel12.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 140.0!))
+        Me.TableLayoutPanel12.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 187.0!))
         Me.TableLayoutPanel12.Controls.Add(Me.lstTypeEmployee, 0, 0)
         Me.TableLayoutPanel12.Controls.Add(Me.Panel22, 1, 0)
         Me.TableLayoutPanel12.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.TableLayoutPanel12.Location = New System.Drawing.Point(3, 19)
+        Me.TableLayoutPanel12.Location = New System.Drawing.Point(4, 24)
+        Me.TableLayoutPanel12.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.TableLayoutPanel12.Name = "TableLayoutPanel12"
         Me.TableLayoutPanel12.RowCount = 1
         Me.TableLayoutPanel12.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-        Me.TableLayoutPanel12.Size = New System.Drawing.Size(302, 206)
+        Me.TableLayoutPanel12.Size = New System.Drawing.Size(404, 252)
         Me.TableLayoutPanel12.TabIndex = 5
         '
         'lstTypeEmployee
@@ -1020,10 +1102,11 @@ Partial Class Others
         Me.lstTypeEmployee.Dock = System.Windows.Forms.DockStyle.Fill
         Me.lstTypeEmployee.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lstTypeEmployee.FormattingEnabled = True
-        Me.lstTypeEmployee.ItemHeight = 16
-        Me.lstTypeEmployee.Location = New System.Drawing.Point(3, 3)
+        Me.lstTypeEmployee.ItemHeight = 20
+        Me.lstTypeEmployee.Location = New System.Drawing.Point(4, 4)
+        Me.lstTypeEmployee.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.lstTypeEmployee.Name = "lstTypeEmployee"
-        Me.lstTypeEmployee.Size = New System.Drawing.Size(156, 200)
+        Me.lstTypeEmployee.Size = New System.Drawing.Size(209, 244)
         Me.lstTypeEmployee.TabIndex = 0
         '
         'Panel22
@@ -1033,18 +1116,20 @@ Partial Class Others
         Me.Panel22.Controls.Add(Me.btnUpdateTypeEmploye)
         Me.Panel22.Controls.Add(btnDeleteTypeEmployee)
         Me.Panel22.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel22.Location = New System.Drawing.Point(165, 3)
+        Me.Panel22.Location = New System.Drawing.Point(221, 4)
+        Me.Panel22.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.Panel22.Name = "Panel22"
-        Me.Panel22.Size = New System.Drawing.Size(134, 200)
+        Me.Panel22.Size = New System.Drawing.Size(179, 244)
         Me.Panel22.TabIndex = 1
         '
         'txtTypeEmployee
         '
         Me.txtTypeEmployee.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.txtTypeEmployee.Location = New System.Drawing.Point(0, 4)
+        Me.txtTypeEmployee.Location = New System.Drawing.Point(0, 5)
+        Me.txtTypeEmployee.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.txtTypeEmployee.Name = "txtTypeEmployee"
-        Me.txtTypeEmployee.Size = New System.Drawing.Size(131, 23)
+        Me.txtTypeEmployee.Size = New System.Drawing.Size(173, 27)
         Me.txtTypeEmployee.TabIndex = 3
         '
         'btnAdd
@@ -1055,9 +1140,10 @@ Partial Class Others
         Me.btnAdd.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnAdd.Image = Global.AVT_TRAKING.My.Resources.Resources.add
         Me.btnAdd.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnAdd.Location = New System.Drawing.Point(59, 32)
+        Me.btnAdd.Location = New System.Drawing.Point(79, 39)
+        Me.btnAdd.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.btnAdd.Name = "btnAdd"
-        Me.btnAdd.Size = New System.Drawing.Size(72, 34)
+        Me.btnAdd.Size = New System.Drawing.Size(96, 42)
         Me.btnAdd.TabIndex = 4
         Me.btnAdd.Text = "Add"
         Me.btnAdd.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -1071,9 +1157,10 @@ Partial Class Others
         Me.btnUpdateTypeEmploye.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnUpdateTypeEmploye.Image = Global.AVT_TRAKING.My.Resources.Resources.update
         Me.btnUpdateTypeEmploye.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnUpdateTypeEmploye.Location = New System.Drawing.Point(34, 133)
+        Me.btnUpdateTypeEmploye.Location = New System.Drawing.Point(45, 162)
+        Me.btnUpdateTypeEmploye.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.btnUpdateTypeEmploye.Name = "btnUpdateTypeEmploye"
-        Me.btnUpdateTypeEmploye.Size = New System.Drawing.Size(97, 32)
+        Me.btnUpdateTypeEmploye.Size = New System.Drawing.Size(129, 39)
         Me.btnUpdateTypeEmploye.TabIndex = 1
         Me.btnUpdateTypeEmploye.Text = "Update"
         Me.btnUpdateTypeEmploye.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -1082,9 +1169,10 @@ Partial Class Others
         'TabPage2
         '
         Me.TabPage2.Controls.Add(Me.TableLayoutPanel1)
-        Me.TabPage2.Location = New System.Drawing.Point(4, 27)
+        Me.TabPage2.Location = New System.Drawing.Point(4, 32)
+        Me.TabPage2.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.TabPage2.Name = "TabPage2"
-        Me.TabPage2.Size = New System.Drawing.Size(950, 452)
+        Me.TabPage2.Size = New System.Drawing.Size(1269, 586)
         Me.TabPage2.TabIndex = 1
         Me.TabPage2.Text = "Email Configuration"
         Me.TabPage2.UseVisualStyleBackColor = True
@@ -1100,20 +1188,22 @@ Partial Class Others
         Me.TableLayoutPanel1.Font = New System.Drawing.Font("Verdana", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.TableLayoutPanel1.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.TableLayoutPanel1.Location = New System.Drawing.Point(0, 0)
+        Me.TableLayoutPanel1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
         Me.TableLayoutPanel1.RowCount = 2
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20.0!))
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 80.0!))
-        Me.TableLayoutPanel1.Size = New System.Drawing.Size(950, 452)
+        Me.TableLayoutPanel1.Size = New System.Drawing.Size(1269, 586)
         Me.TableLayoutPanel1.TabIndex = 0
         '
         'Panel2
         '
         Me.Panel2.Controls.Add(Me.GroupBox6)
         Me.Panel2.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel2.Location = New System.Drawing.Point(3, 3)
+        Me.Panel2.Location = New System.Drawing.Point(4, 4)
+        Me.Panel2.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(944, 84)
+        Me.Panel2.Size = New System.Drawing.Size(1261, 109)
         Me.Panel2.TabIndex = 0
         '
         'GroupBox6
@@ -1123,8 +1213,10 @@ Partial Class Others
         Me.GroupBox6.Font = New System.Drawing.Font("Verdana", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.GroupBox6.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.GroupBox6.Location = New System.Drawing.Point(0, 0)
+        Me.GroupBox6.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.GroupBox6.Name = "GroupBox6"
-        Me.GroupBox6.Size = New System.Drawing.Size(944, 84)
+        Me.GroupBox6.Padding = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.GroupBox6.Size = New System.Drawing.Size(1261, 109)
         Me.GroupBox6.TabIndex = 1
         Me.GroupBox6.TabStop = False
         Me.GroupBox6.Text = "Own Email"
@@ -1139,11 +1231,12 @@ Partial Class Others
         Me.TableLayoutPanel2.Controls.Add(Me.Panel5, 1, 0)
         Me.TableLayoutPanel2.Controls.Add(Me.Panel6, 2, 0)
         Me.TableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.TableLayoutPanel2.Location = New System.Drawing.Point(3, 18)
+        Me.TableLayoutPanel2.Location = New System.Drawing.Point(4, 23)
+        Me.TableLayoutPanel2.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.TableLayoutPanel2.Name = "TableLayoutPanel2"
         Me.TableLayoutPanel2.RowCount = 1
         Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-        Me.TableLayoutPanel2.Size = New System.Drawing.Size(938, 63)
+        Me.TableLayoutPanel2.Size = New System.Drawing.Size(1253, 82)
         Me.TableLayoutPanel2.TabIndex = 0
         '
         'Panel4
@@ -1152,17 +1245,19 @@ Partial Class Others
         Me.Panel4.Controls.Add(Me.txtOwnEmail)
         Me.Panel4.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel4.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.Panel4.Location = New System.Drawing.Point(3, 3)
+        Me.Panel4.Location = New System.Drawing.Point(4, 4)
+        Me.Panel4.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.Panel4.Name = "Panel4"
-        Me.Panel4.Size = New System.Drawing.Size(369, 57)
+        Me.Panel4.Size = New System.Drawing.Size(493, 74)
         Me.Panel4.TabIndex = 0
         '
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(7, 21)
+        Me.Label1.Location = New System.Drawing.Point(9, 26)
+        Me.Label1.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(43, 14)
+        Me.Label1.Size = New System.Drawing.Size(52, 18)
         Me.Label1.TabIndex = 1
         Me.Label1.Text = "Email"
         '
@@ -1170,10 +1265,11 @@ Partial Class Others
         '
         Me.txtOwnEmail.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.txtOwnEmail.Location = New System.Drawing.Point(73, 18)
+        Me.txtOwnEmail.Location = New System.Drawing.Point(97, 22)
+        Me.txtOwnEmail.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.txtOwnEmail.MaxLength = 70
         Me.txtOwnEmail.Name = "txtOwnEmail"
-        Me.txtOwnEmail.Size = New System.Drawing.Size(273, 22)
+        Me.txtOwnEmail.Size = New System.Drawing.Size(364, 26)
         Me.txtOwnEmail.TabIndex = 0
         '
         'Panel5
@@ -1182,9 +1278,10 @@ Partial Class Others
         Me.Panel5.Controls.Add(Me.label2)
         Me.Panel5.Controls.Add(Me.txtPassOwnEmail)
         Me.Panel5.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel5.Location = New System.Drawing.Point(378, 3)
+        Me.Panel5.Location = New System.Drawing.Point(505, 4)
+        Me.Panel5.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.Panel5.Name = "Panel5"
-        Me.Panel5.Size = New System.Drawing.Size(369, 57)
+        Me.Panel5.Size = New System.Drawing.Size(493, 74)
         Me.Panel5.TabIndex = 1
         '
         'btnVerPass
@@ -1194,9 +1291,10 @@ Partial Class Others
         Me.btnVerPass.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(41, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(185, Byte), Integer))
         Me.btnVerPass.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnVerPass.Image = Global.AVT_TRAKING.My.Resources.Resources.show
-        Me.btnVerPass.Location = New System.Drawing.Point(305, 17)
+        Me.btnVerPass.Location = New System.Drawing.Point(408, 23)
+        Me.btnVerPass.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.btnVerPass.Name = "btnVerPass"
-        Me.btnVerPass.Size = New System.Drawing.Size(47, 24)
+        Me.btnVerPass.Size = New System.Drawing.Size(63, 30)
         Me.btnVerPass.TabIndex = 3
         Me.btnVerPass.UseVisualStyleBackColor = True
         '
@@ -1204,9 +1302,10 @@ Partial Class Others
         '
         Me.label2.AutoSize = True
         Me.label2.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.label2.Location = New System.Drawing.Point(1, 20)
+        Me.label2.Location = New System.Drawing.Point(1, 25)
+        Me.label2.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.label2.Name = "label2"
-        Me.label2.Size = New System.Drawing.Size(72, 14)
+        Me.label2.Size = New System.Drawing.Size(88, 18)
         Me.label2.TabIndex = 2
         Me.label2.Text = "Password"
         '
@@ -1214,10 +1313,11 @@ Partial Class Others
         '
         Me.txtPassOwnEmail.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.txtPassOwnEmail.Location = New System.Drawing.Point(76, 16)
+        Me.txtPassOwnEmail.Location = New System.Drawing.Point(101, 20)
+        Me.txtPassOwnEmail.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.txtPassOwnEmail.MaxLength = 50
         Me.txtPassOwnEmail.Name = "txtPassOwnEmail"
-        Me.txtPassOwnEmail.Size = New System.Drawing.Size(223, 22)
+        Me.txtPassOwnEmail.Size = New System.Drawing.Size(297, 26)
         Me.txtPassOwnEmail.TabIndex = 1
         Me.txtPassOwnEmail.UseSystemPasswordChar = True
         '
@@ -1226,9 +1326,10 @@ Partial Class Others
         Me.Panel6.Controls.Add(Me.btnDeleteOwnEmail)
         Me.Panel6.Controls.Add(Me.btnSaveOwnEmail)
         Me.Panel6.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel6.Location = New System.Drawing.Point(753, 3)
+        Me.Panel6.Location = New System.Drawing.Point(1006, 4)
+        Me.Panel6.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.Panel6.Name = "Panel6"
-        Me.Panel6.Size = New System.Drawing.Size(182, 57)
+        Me.Panel6.Size = New System.Drawing.Size(243, 74)
         Me.Panel6.TabIndex = 2
         '
         'btnDeleteOwnEmail
@@ -1240,9 +1341,10 @@ Partial Class Others
         Me.btnDeleteOwnEmail.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.btnDeleteOwnEmail.Image = Global.AVT_TRAKING.My.Resources.Resources.delete
         Me.btnDeleteOwnEmail.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnDeleteOwnEmail.Location = New System.Drawing.Point(94, 17)
+        Me.btnDeleteOwnEmail.Location = New System.Drawing.Point(125, 21)
+        Me.btnDeleteOwnEmail.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.btnDeleteOwnEmail.Name = "btnDeleteOwnEmail"
-        Me.btnDeleteOwnEmail.Size = New System.Drawing.Size(82, 23)
+        Me.btnDeleteOwnEmail.Size = New System.Drawing.Size(109, 28)
         Me.btnDeleteOwnEmail.TabIndex = 1
         Me.btnDeleteOwnEmail.Text = "Delete"
         Me.btnDeleteOwnEmail.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -1257,9 +1359,10 @@ Partial Class Others
         Me.btnSaveOwnEmail.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.btnSaveOwnEmail.Image = Global.AVT_TRAKING.My.Resources.Resources.save
         Me.btnSaveOwnEmail.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnSaveOwnEmail.Location = New System.Drawing.Point(13, 17)
+        Me.btnSaveOwnEmail.Location = New System.Drawing.Point(17, 21)
+        Me.btnSaveOwnEmail.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.btnSaveOwnEmail.Name = "btnSaveOwnEmail"
-        Me.btnSaveOwnEmail.Size = New System.Drawing.Size(75, 24)
+        Me.btnSaveOwnEmail.Size = New System.Drawing.Size(100, 30)
         Me.btnSaveOwnEmail.TabIndex = 0
         Me.btnSaveOwnEmail.Text = "Save"
         Me.btnSaveOwnEmail.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -1276,12 +1379,13 @@ Partial Class Others
         Me.TableLayoutPanel3.Controls.Add(Me.Panel20, 1, 1)
         Me.TableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill
         Me.TableLayoutPanel3.ForeColor = System.Drawing.SystemColors.ControlText
-        Me.TableLayoutPanel3.Location = New System.Drawing.Point(3, 93)
+        Me.TableLayoutPanel3.Location = New System.Drawing.Point(4, 121)
+        Me.TableLayoutPanel3.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.TableLayoutPanel3.Name = "TableLayoutPanel3"
         Me.TableLayoutPanel3.RowCount = 2
         Me.TableLayoutPanel3.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.80912!))
         Me.TableLayoutPanel3.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 83.19088!))
-        Me.TableLayoutPanel3.Size = New System.Drawing.Size(944, 356)
+        Me.TableLayoutPanel3.Size = New System.Drawing.Size(1261, 461)
         Me.TableLayoutPanel3.TabIndex = 1
         '
         'tblEmails
@@ -1291,28 +1395,33 @@ Partial Class Others
         Me.tblEmails.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.tblEmails.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.clmEmail, Me.clmName, Me.clmStatus})
         Me.tblEmails.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.tblEmails.Location = New System.Drawing.Point(3, 62)
+        Me.tblEmails.Location = New System.Drawing.Point(4, 81)
+        Me.tblEmails.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.tblEmails.Name = "tblEmails"
         Me.tblEmails.RowHeadersVisible = False
+        Me.tblEmails.RowHeadersWidth = 51
         Me.tblEmails.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.tblEmails.Size = New System.Drawing.Size(749, 291)
+        Me.tblEmails.Size = New System.Drawing.Size(1000, 376)
         Me.tblEmails.TabIndex = 0
         '
         'clmEmail
         '
         Me.clmEmail.HeaderText = "Email"
+        Me.clmEmail.MinimumWidth = 6
         Me.clmEmail.Name = "clmEmail"
         Me.clmEmail.ReadOnly = True
         '
         'clmName
         '
         Me.clmName.HeaderText = "Name"
+        Me.clmName.MinimumWidth = 6
         Me.clmName.Name = "clmName"
         Me.clmName.ReadOnly = True
         '
         'clmStatus
         '
         Me.clmStatus.HeaderText = "Status"
+        Me.clmStatus.MinimumWidth = 6
         Me.clmStatus.Name = "clmStatus"
         Me.clmStatus.ReadOnly = True
         '
@@ -1320,9 +1429,10 @@ Partial Class Others
         '
         Me.Panel7.Controls.Add(Me.btnDeleteOtherEmail)
         Me.Panel7.Controls.Add(Me.btnSaveOtherEmail)
-        Me.Panel7.Location = New System.Drawing.Point(758, 3)
+        Me.Panel7.Location = New System.Drawing.Point(1012, 4)
+        Me.Panel7.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.Panel7.Name = "Panel7"
-        Me.Panel7.Size = New System.Drawing.Size(183, 50)
+        Me.Panel7.Size = New System.Drawing.Size(244, 62)
         Me.Panel7.TabIndex = 2
         '
         'btnDeleteOtherEmail
@@ -1334,9 +1444,10 @@ Partial Class Others
         Me.btnDeleteOtherEmail.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.btnDeleteOtherEmail.Image = Global.AVT_TRAKING.My.Resources.Resources.delete
         Me.btnDeleteOtherEmail.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnDeleteOtherEmail.Location = New System.Drawing.Point(92, 15)
+        Me.btnDeleteOtherEmail.Location = New System.Drawing.Point(123, 18)
+        Me.btnDeleteOtherEmail.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.btnDeleteOtherEmail.Name = "btnDeleteOtherEmail"
-        Me.btnDeleteOtherEmail.Size = New System.Drawing.Size(82, 28)
+        Me.btnDeleteOtherEmail.Size = New System.Drawing.Size(109, 34)
         Me.btnDeleteOtherEmail.TabIndex = 3
         Me.btnDeleteOtherEmail.Text = "Delete"
         Me.btnDeleteOtherEmail.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -1351,9 +1462,10 @@ Partial Class Others
         Me.btnSaveOtherEmail.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.btnSaveOtherEmail.Image = Global.AVT_TRAKING.My.Resources.Resources.save1
         Me.btnSaveOtherEmail.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnSaveOtherEmail.Location = New System.Drawing.Point(11, 15)
+        Me.btnSaveOtherEmail.Location = New System.Drawing.Point(15, 18)
+        Me.btnSaveOtherEmail.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.btnSaveOtherEmail.Name = "btnSaveOtherEmail"
-        Me.btnSaveOtherEmail.Size = New System.Drawing.Size(75, 28)
+        Me.btnSaveOtherEmail.Size = New System.Drawing.Size(100, 34)
         Me.btnSaveOtherEmail.TabIndex = 2
         Me.btnSaveOtherEmail.Text = "Save"
         Me.btnSaveOtherEmail.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -1367,11 +1479,12 @@ Partial Class Others
         Me.TableLayoutPanel4.Controls.Add(Me.Panel3, 0, 0)
         Me.TableLayoutPanel4.Controls.Add(Me.Panel8, 1, 0)
         Me.TableLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.TableLayoutPanel4.Location = New System.Drawing.Point(3, 3)
+        Me.TableLayoutPanel4.Location = New System.Drawing.Point(4, 4)
+        Me.TableLayoutPanel4.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.TableLayoutPanel4.Name = "TableLayoutPanel4"
         Me.TableLayoutPanel4.RowCount = 1
         Me.TableLayoutPanel4.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
-        Me.TableLayoutPanel4.Size = New System.Drawing.Size(749, 53)
+        Me.TableLayoutPanel4.Size = New System.Drawing.Size(1000, 69)
         Me.TableLayoutPanel4.TabIndex = 3
         '
         'Panel3
@@ -1379,18 +1492,20 @@ Partial Class Others
         Me.Panel3.Controls.Add(Me.Label3)
         Me.Panel3.Controls.Add(Me.txtEmailOther)
         Me.Panel3.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel3.Location = New System.Drawing.Point(3, 3)
+        Me.Panel3.Location = New System.Drawing.Point(4, 4)
+        Me.Panel3.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.Panel3.Name = "Panel3"
-        Me.Panel3.Size = New System.Drawing.Size(368, 47)
+        Me.Panel3.Size = New System.Drawing.Size(492, 61)
         Me.Panel3.TabIndex = 0
         '
         'Label3
         '
         Me.Label3.AutoSize = True
         Me.Label3.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.Label3.Location = New System.Drawing.Point(7, 14)
+        Me.Label3.Location = New System.Drawing.Point(9, 17)
+        Me.Label3.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(43, 14)
+        Me.Label3.Size = New System.Drawing.Size(52, 18)
         Me.Label3.TabIndex = 3
         Me.Label3.Text = "Email"
         '
@@ -1398,10 +1513,11 @@ Partial Class Others
         '
         Me.txtEmailOther.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.txtEmailOther.Location = New System.Drawing.Point(73, 11)
+        Me.txtEmailOther.Location = New System.Drawing.Point(97, 14)
+        Me.txtEmailOther.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.txtEmailOther.MaxLength = 70
         Me.txtEmailOther.Name = "txtEmailOther"
-        Me.txtEmailOther.Size = New System.Drawing.Size(272, 22)
+        Me.txtEmailOther.Size = New System.Drawing.Size(362, 26)
         Me.txtEmailOther.TabIndex = 2
         '
         'Panel8
@@ -1410,9 +1526,10 @@ Partial Class Others
         Me.Panel8.Controls.Add(Me.Label4)
         Me.Panel8.Controls.Add(Me.txtNameEmail)
         Me.Panel8.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel8.Location = New System.Drawing.Point(377, 3)
+        Me.Panel8.Location = New System.Drawing.Point(504, 4)
+        Me.Panel8.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.Panel8.Name = "Panel8"
-        Me.Panel8.Size = New System.Drawing.Size(369, 47)
+        Me.Panel8.Size = New System.Drawing.Size(492, 61)
         Me.Panel8.TabIndex = 1
         '
         'chbStatusEmail
@@ -1421,9 +1538,10 @@ Partial Class Others
         Me.chbStatusEmail.AutoSize = True
         Me.chbStatusEmail.CheckAlign = System.Drawing.ContentAlignment.BottomCenter
         Me.chbStatusEmail.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.chbStatusEmail.Location = New System.Drawing.Point(311, 8)
+        Me.chbStatusEmail.Location = New System.Drawing.Point(419, 10)
+        Me.chbStatusEmail.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.chbStatusEmail.Name = "chbStatusEmail"
-        Me.chbStatusEmail.Size = New System.Drawing.Size(53, 32)
+        Me.chbStatusEmail.Size = New System.Drawing.Size(66, 39)
         Me.chbStatusEmail.TabIndex = 5
         Me.chbStatusEmail.Text = "Status"
         Me.chbStatusEmail.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
@@ -1433,9 +1551,10 @@ Partial Class Others
         '
         Me.Label4.AutoSize = True
         Me.Label4.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.Label4.Location = New System.Drawing.Point(13, 16)
+        Me.Label4.Location = New System.Drawing.Point(17, 20)
+        Me.Label4.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(45, 14)
+        Me.Label4.Size = New System.Drawing.Size(56, 18)
         Me.Label4.TabIndex = 4
         Me.Label4.Text = "Name"
         '
@@ -1443,19 +1562,21 @@ Partial Class Others
         '
         Me.txtNameEmail.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.txtNameEmail.Location = New System.Drawing.Point(68, 13)
+        Me.txtNameEmail.Location = New System.Drawing.Point(91, 16)
+        Me.txtNameEmail.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.txtNameEmail.MaxLength = 50
         Me.txtNameEmail.Name = "txtNameEmail"
-        Me.txtNameEmail.Size = New System.Drawing.Size(232, 22)
+        Me.txtNameEmail.Size = New System.Drawing.Size(308, 26)
         Me.txtNameEmail.TabIndex = 3
         '
         'Panel20
         '
         Me.Panel20.Controls.Add(Me.btnCancel)
         Me.Panel20.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel20.Location = New System.Drawing.Point(758, 62)
+        Me.Panel20.Location = New System.Drawing.Point(1012, 81)
+        Me.Panel20.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.Panel20.Name = "Panel20"
-        Me.Panel20.Size = New System.Drawing.Size(183, 291)
+        Me.Panel20.Size = New System.Drawing.Size(245, 376)
         Me.Panel20.TabIndex = 4
         '
         'btnCancel
@@ -1467,9 +1588,10 @@ Partial Class Others
         Me.btnCancel.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.btnCancel.Image = Global.AVT_TRAKING.My.Resources.Resources.close2
         Me.btnCancel.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnCancel.Location = New System.Drawing.Point(11, 3)
+        Me.btnCancel.Location = New System.Drawing.Point(15, 4)
+        Me.btnCancel.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.btnCancel.Name = "btnCancel"
-        Me.btnCancel.Size = New System.Drawing.Size(88, 28)
+        Me.btnCancel.Size = New System.Drawing.Size(117, 34)
         Me.btnCancel.TabIndex = 3
         Me.btnCancel.Text = "Cancel"
         Me.btnCancel.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -1479,9 +1601,10 @@ Partial Class Others
         'TabPage3
         '
         Me.TabPage3.Controls.Add(Me.Panel9)
-        Me.TabPage3.Location = New System.Drawing.Point(4, 27)
+        Me.TabPage3.Location = New System.Drawing.Point(4, 32)
+        Me.TabPage3.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.TabPage3.Name = "TabPage3"
-        Me.TabPage3.Size = New System.Drawing.Size(950, 452)
+        Me.TabPage3.Size = New System.Drawing.Size(1269, 585)
         Me.TabPage3.TabIndex = 2
         Me.TabPage3.Text = "Images"
         Me.TabPage3.UseVisualStyleBackColor = True
@@ -1491,8 +1614,9 @@ Partial Class Others
         Me.Panel9.Controls.Add(Me.TableLayoutPanel5)
         Me.Panel9.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel9.Location = New System.Drawing.Point(0, 0)
+        Me.Panel9.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.Panel9.Name = "Panel9"
-        Me.Panel9.Size = New System.Drawing.Size(950, 452)
+        Me.Panel9.Size = New System.Drawing.Size(1269, 585)
         Me.Panel9.TabIndex = 0
         '
         'TableLayoutPanel5
@@ -1504,11 +1628,12 @@ Partial Class Others
         Me.TableLayoutPanel5.Controls.Add(Me.TableLayoutPanel7, 0, 0)
         Me.TableLayoutPanel5.Dock = System.Windows.Forms.DockStyle.Fill
         Me.TableLayoutPanel5.Location = New System.Drawing.Point(0, 0)
+        Me.TableLayoutPanel5.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.TableLayoutPanel5.Name = "TableLayoutPanel5"
         Me.TableLayoutPanel5.RowCount = 2
-        Me.TableLayoutPanel5.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 60.0!))
+        Me.TableLayoutPanel5.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 74.0!))
         Me.TableLayoutPanel5.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-        Me.TableLayoutPanel5.Size = New System.Drawing.Size(950, 452)
+        Me.TableLayoutPanel5.Size = New System.Drawing.Size(1269, 585)
         Me.TableLayoutPanel5.TabIndex = 0
         '
         'TableLayoutPanel6
@@ -1519,11 +1644,12 @@ Partial Class Others
         Me.TableLayoutPanel6.Controls.Add(Me.TableLayoutPanel8, 1, 0)
         Me.TableLayoutPanel6.Controls.Add(Me.tblImage, 0, 0)
         Me.TableLayoutPanel6.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.TableLayoutPanel6.Location = New System.Drawing.Point(3, 63)
+        Me.TableLayoutPanel6.Location = New System.Drawing.Point(4, 78)
+        Me.TableLayoutPanel6.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.TableLayoutPanel6.Name = "TableLayoutPanel6"
         Me.TableLayoutPanel6.RowCount = 1
         Me.TableLayoutPanel6.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-        Me.TableLayoutPanel6.Size = New System.Drawing.Size(944, 386)
+        Me.TableLayoutPanel6.Size = New System.Drawing.Size(1261, 503)
         Me.TableLayoutPanel6.TabIndex = 0
         '
         'TableLayoutPanel8
@@ -1535,14 +1661,15 @@ Partial Class Others
         Me.TableLayoutPanel8.Controls.Add(Me.imgPhoto, 0, 2)
         Me.TableLayoutPanel8.Controls.Add(Me.btnAddImg, 0, 0)
         Me.TableLayoutPanel8.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.TableLayoutPanel8.Location = New System.Drawing.Point(758, 3)
+        Me.TableLayoutPanel8.Location = New System.Drawing.Point(1012, 4)
+        Me.TableLayoutPanel8.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.TableLayoutPanel8.Name = "TableLayoutPanel8"
         Me.TableLayoutPanel8.RowCount = 3
-        Me.TableLayoutPanel8.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 45.0!))
-        Me.TableLayoutPanel8.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 45.0!))
-        Me.TableLayoutPanel8.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 45.0!))
+        Me.TableLayoutPanel8.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 55.0!))
+        Me.TableLayoutPanel8.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 55.0!))
+        Me.TableLayoutPanel8.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 55.0!))
         Me.TableLayoutPanel8.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-        Me.TableLayoutPanel8.Size = New System.Drawing.Size(183, 380)
+        Me.TableLayoutPanel8.Size = New System.Drawing.Size(245, 495)
         Me.TableLayoutPanel8.TabIndex = 1
         '
         'btnDeleteImg
@@ -1553,9 +1680,10 @@ Partial Class Others
         Me.btnDeleteImg.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnDeleteImg.Image = Global.AVT_TRAKING.My.Resources.Resources.delete
         Me.btnDeleteImg.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnDeleteImg.Location = New System.Drawing.Point(3, 93)
+        Me.btnDeleteImg.Location = New System.Drawing.Point(4, 114)
+        Me.btnDeleteImg.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.btnDeleteImg.Name = "btnDeleteImg"
-        Me.btnDeleteImg.Size = New System.Drawing.Size(177, 39)
+        Me.btnDeleteImg.Size = New System.Drawing.Size(237, 47)
         Me.btnDeleteImg.TabIndex = 4
         Me.btnDeleteImg.Text = "Delete"
         Me.btnDeleteImg.UseVisualStyleBackColor = True
@@ -1568,9 +1696,10 @@ Partial Class Others
         Me.btnUpdateImg.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnUpdateImg.Image = Global.AVT_TRAKING.My.Resources.Resources.update
         Me.btnUpdateImg.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnUpdateImg.Location = New System.Drawing.Point(3, 48)
+        Me.btnUpdateImg.Location = New System.Drawing.Point(4, 59)
+        Me.btnUpdateImg.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.btnUpdateImg.Name = "btnUpdateImg"
-        Me.btnUpdateImg.Size = New System.Drawing.Size(177, 39)
+        Me.btnUpdateImg.Size = New System.Drawing.Size(237, 47)
         Me.btnUpdateImg.TabIndex = 3
         Me.btnUpdateImg.Text = "Update"
         Me.btnUpdateImg.UseVisualStyleBackColor = True
@@ -1579,9 +1708,10 @@ Partial Class Others
         '
         Me.imgPhoto.Dock = System.Windows.Forms.DockStyle.Fill
         Me.imgPhoto.Image = Global.AVT_TRAKING.My.Resources.Resources.user
-        Me.imgPhoto.Location = New System.Drawing.Point(3, 138)
+        Me.imgPhoto.Location = New System.Drawing.Point(4, 169)
+        Me.imgPhoto.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.imgPhoto.Name = "imgPhoto"
-        Me.imgPhoto.Size = New System.Drawing.Size(177, 239)
+        Me.imgPhoto.Size = New System.Drawing.Size(237, 322)
         Me.imgPhoto.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
         Me.imgPhoto.TabIndex = 1
         Me.imgPhoto.TabStop = False
@@ -1594,9 +1724,10 @@ Partial Class Others
         Me.btnAddImg.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnAddImg.Image = Global.AVT_TRAKING.My.Resources.Resources.add
         Me.btnAddImg.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnAddImg.Location = New System.Drawing.Point(3, 3)
+        Me.btnAddImg.Location = New System.Drawing.Point(4, 4)
+        Me.btnAddImg.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.btnAddImg.Name = "btnAddImg"
-        Me.btnAddImg.Size = New System.Drawing.Size(177, 39)
+        Me.btnAddImg.Size = New System.Drawing.Size(237, 47)
         Me.btnAddImg.TabIndex = 2
         Me.btnAddImg.Text = "Add"
         Me.btnAddImg.UseVisualStyleBackColor = True
@@ -1608,20 +1739,24 @@ Partial Class Others
         Me.tblImage.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.tblImage.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.clmNameImage, Me.clmImage, Me.clmDefault})
         Me.tblImage.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.tblImage.Location = New System.Drawing.Point(3, 3)
+        Me.tblImage.Location = New System.Drawing.Point(4, 4)
+        Me.tblImage.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.tblImage.Name = "tblImage"
-        Me.tblImage.Size = New System.Drawing.Size(749, 380)
+        Me.tblImage.RowHeadersWidth = 51
+        Me.tblImage.Size = New System.Drawing.Size(1000, 495)
         Me.tblImage.TabIndex = 2
         '
         'clmNameImage
         '
         Me.clmNameImage.HeaderText = "Name"
+        Me.clmNameImage.MinimumWidth = 6
         Me.clmNameImage.Name = "clmNameImage"
         Me.clmNameImage.ReadOnly = True
         '
         'clmImage
         '
         Me.clmImage.HeaderText = "Image"
+        Me.clmImage.MinimumWidth = 6
         Me.clmImage.Name = "clmImage"
         Me.clmImage.Visible = False
         '
@@ -1629,25 +1764,27 @@ Partial Class Others
         '
         Me.clmDefault.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.DisplayedCells
         Me.clmDefault.HeaderText = "Default"
+        Me.clmDefault.MinimumWidth = 6
         Me.clmDefault.Name = "clmDefault"
         Me.clmDefault.Resizable = System.Windows.Forms.DataGridViewTriState.[True]
         Me.clmDefault.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic
-        Me.clmDefault.Width = 92
+        Me.clmDefault.Width = 119
         '
         'TableLayoutPanel7
         '
         Me.TableLayoutPanel7.ColumnCount = 3
         Me.TableLayoutPanel7.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 35.26316!))
         Me.TableLayoutPanel7.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 64.73684!))
-        Me.TableLayoutPanel7.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 204.0!))
+        Me.TableLayoutPanel7.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 273.0!))
         Me.TableLayoutPanel7.Controls.Add(Me.Panel10, 0, 0)
         Me.TableLayoutPanel7.Controls.Add(Me.Panel11, 1, 0)
         Me.TableLayoutPanel7.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.TableLayoutPanel7.Location = New System.Drawing.Point(3, 3)
+        Me.TableLayoutPanel7.Location = New System.Drawing.Point(4, 4)
+        Me.TableLayoutPanel7.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.TableLayoutPanel7.Name = "TableLayoutPanel7"
         Me.TableLayoutPanel7.RowCount = 1
         Me.TableLayoutPanel7.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-        Me.TableLayoutPanel7.Size = New System.Drawing.Size(944, 54)
+        Me.TableLayoutPanel7.Size = New System.Drawing.Size(1261, 66)
         Me.TableLayoutPanel7.TabIndex = 1
         '
         'Panel10
@@ -1655,26 +1792,29 @@ Partial Class Others
         Me.Panel10.Controls.Add(Me.Label5)
         Me.Panel10.Controls.Add(Me.txtNameImage)
         Me.Panel10.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel10.Location = New System.Drawing.Point(3, 3)
+        Me.Panel10.Location = New System.Drawing.Point(4, 4)
+        Me.Panel10.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.Panel10.Name = "Panel10"
-        Me.Panel10.Size = New System.Drawing.Size(254, 48)
+        Me.Panel10.Size = New System.Drawing.Size(340, 58)
         Me.Panel10.TabIndex = 0
         '
         'Label5
         '
         Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(8, 17)
+        Me.Label5.Location = New System.Drawing.Point(11, 21)
+        Me.Label5.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(56, 18)
+        Me.Label5.Size = New System.Drawing.Size(72, 23)
         Me.Label5.TabIndex = 1
         Me.Label5.Text = "Name"
         '
         'txtNameImage
         '
-        Me.txtNameImage.Location = New System.Drawing.Point(65, 14)
+        Me.txtNameImage.Location = New System.Drawing.Point(87, 17)
+        Me.txtNameImage.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.txtNameImage.MaxLength = 30
         Me.txtNameImage.Name = "txtNameImage"
-        Me.txtNameImage.Size = New System.Drawing.Size(173, 26)
+        Me.txtNameImage.Size = New System.Drawing.Size(229, 30)
         Me.txtNameImage.TabIndex = 0
         '
         'Panel11
@@ -1683,9 +1823,10 @@ Partial Class Others
         Me.Panel11.Controls.Add(Me.Label6)
         Me.Panel11.Controls.Add(Me.txtPathFile)
         Me.Panel11.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel11.Location = New System.Drawing.Point(263, 3)
+        Me.Panel11.Location = New System.Drawing.Point(352, 4)
+        Me.Panel11.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.Panel11.Name = "Panel11"
-        Me.Panel11.Size = New System.Drawing.Size(473, 48)
+        Me.Panel11.Size = New System.Drawing.Size(631, 58)
         Me.Panel11.TabIndex = 1
         '
         'btnFindImage
@@ -1694,9 +1835,10 @@ Partial Class Others
         Me.btnFindImage.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(41, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(185, Byte), Integer))
         Me.btnFindImage.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnFindImage.Font = New System.Drawing.Font("Verdana", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnFindImage.Location = New System.Drawing.Point(313, 17)
+        Me.btnFindImage.Location = New System.Drawing.Point(417, 21)
+        Me.btnFindImage.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.btnFindImage.Name = "btnFindImage"
-        Me.btnFindImage.Size = New System.Drawing.Size(41, 25)
+        Me.btnFindImage.Size = New System.Drawing.Size(55, 31)
         Me.btnFindImage.TabIndex = 3
         Me.btnFindImage.Text = "..."
         Me.btnFindImage.UseVisualStyleBackColor = True
@@ -1704,18 +1846,20 @@ Partial Class Others
         'Label6
         '
         Me.Label6.AutoSize = True
-        Me.Label6.Location = New System.Drawing.Point(4, 17)
+        Me.Label6.Location = New System.Drawing.Point(5, 21)
+        Me.Label6.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(46, 18)
+        Me.Label6.Size = New System.Drawing.Size(60, 23)
         Me.Label6.TabIndex = 2
         Me.Label6.Text = "Path"
         '
         'txtPathFile
         '
-        Me.txtPathFile.Location = New System.Drawing.Point(51, 14)
+        Me.txtPathFile.Location = New System.Drawing.Point(68, 17)
+        Me.txtPathFile.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.txtPathFile.Name = "txtPathFile"
         Me.txtPathFile.ReadOnly = True
-        Me.txtPathFile.Size = New System.Drawing.Size(245, 26)
+        Me.txtPathFile.Size = New System.Drawing.Size(325, 30)
         Me.txtPathFile.TabIndex = 1
         '
         'TitleBar
@@ -1726,17 +1870,19 @@ Partial Class Others
         Me.TitleBar.Controls.Add(Me.Label7)
         Me.TitleBar.Dock = System.Windows.Forms.DockStyle.Top
         Me.TitleBar.Location = New System.Drawing.Point(0, 0)
+        Me.TitleBar.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.TitleBar.Name = "TitleBar"
-        Me.TitleBar.Size = New System.Drawing.Size(964, 31)
+        Me.TitleBar.Size = New System.Drawing.Size(1285, 38)
         Me.TitleBar.TabIndex = 1
         '
         'PictureBox2
         '
         Me.PictureBox2.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.PictureBox2.Image = Global.AVT_TRAKING.My.Resources.Resources.minimize2
-        Me.PictureBox2.Location = New System.Drawing.Point(907, 4)
+        Me.PictureBox2.Location = New System.Drawing.Point(1209, 5)
+        Me.PictureBox2.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.PictureBox2.Name = "PictureBox2"
-        Me.PictureBox2.Size = New System.Drawing.Size(23, 27)
+        Me.PictureBox2.Size = New System.Drawing.Size(31, 33)
         Me.PictureBox2.TabIndex = 2
         Me.PictureBox2.TabStop = False
         '
@@ -1744,9 +1890,10 @@ Partial Class Others
         '
         Me.PictureBox1.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.PictureBox1.Image = Global.AVT_TRAKING.My.Resources.Resources.maximize2
-        Me.PictureBox1.Location = New System.Drawing.Point(936, 4)
+        Me.PictureBox1.Location = New System.Drawing.Point(1248, 5)
+        Me.PictureBox1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.PictureBox1.Name = "PictureBox1"
-        Me.PictureBox1.Size = New System.Drawing.Size(28, 27)
+        Me.PictureBox1.Size = New System.Drawing.Size(37, 33)
         Me.PictureBox1.TabIndex = 1
         Me.PictureBox1.TabStop = False
         '
@@ -1754,36 +1901,22 @@ Partial Class Others
         '
         Me.Label7.AutoSize = True
         Me.Label7.Font = New System.Drawing.Font("Verdana", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label7.Location = New System.Drawing.Point(4, 4)
+        Me.Label7.Location = New System.Drawing.Point(5, 5)
+        Me.Label7.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(68, 18)
+        Me.Label7.Size = New System.Drawing.Size(87, 25)
         Me.Label7.TabIndex = 0
         Me.Label7.Text = "Others"
         '
-        'btnExcel
-        '
-        Me.btnExcel.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnExcel.FlatAppearance.BorderSize = 0
-        Me.btnExcel.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(41, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(185, Byte), Integer))
-        Me.btnExcel.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnExcel.Image = Global.AVT_TRAKING.My.Resources.Resources.excel
-        Me.btnExcel.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnExcel.Location = New System.Drawing.Point(50, 95)
-        Me.btnExcel.Name = "btnExcel"
-        Me.btnExcel.Size = New System.Drawing.Size(88, 35)
-        Me.btnExcel.TabIndex = 8
-        Me.btnExcel.Text = "Excel"
-        Me.btnExcel.TextAlign = System.Drawing.ContentAlignment.MiddleRight
-        Me.btnExcel.UseVisualStyleBackColor = True
-        '
         'Others
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(964, 592)
+        Me.ClientSize = New System.Drawing.Size(1285, 729)
         Me.Controls.Add(Me.Panel1)
         Me.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
+        Me.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.Name = "Others"
         Me.Text = "Others"
         Me.Panel1.ResumeLayout(False)

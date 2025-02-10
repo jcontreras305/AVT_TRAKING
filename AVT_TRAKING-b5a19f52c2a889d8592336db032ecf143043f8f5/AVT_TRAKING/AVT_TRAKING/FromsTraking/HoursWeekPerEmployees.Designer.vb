@@ -19,7 +19,7 @@ Partial Class HoursWeekPerEmployees
 
     'NOTA: el Diseñador de Windows Forms necesita el siguiente procedimiento
     'Se puede modificar usando el Diseñador de Windows Forms.  
-    'No lo modifique con el editor de código.
+    'No lo modifique connSQL el editor de código.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
@@ -346,7 +346,7 @@ Partial Class HoursWeekPerEmployees
         Me.clmWeekending.MinimumWidth = 6
         Me.clmWeekending.Name = "clmWeekending"
         Me.clmWeekending.ReadOnly = True
-        Me.clmWeekending.Width = 116
+        Me.clmWeekending.Width = 113
         '
         'clmEployeeName
         '
@@ -354,7 +354,7 @@ Partial Class HoursWeekPerEmployees
         Me.clmEployeeName.MinimumWidth = 6
         Me.clmEployeeName.Name = "clmEployeeName"
         Me.clmEployeeName.ReadOnly = True
-        Me.clmEployeeName.Width = 129
+        Me.clmEployeeName.Width = 117
         '
         'clmTotalST
         '
@@ -362,7 +362,7 @@ Partial Class HoursWeekPerEmployees
         Me.clmTotalST.MinimumWidth = 6
         Me.clmTotalST.Name = "clmTotalST"
         Me.clmTotalST.ReadOnly = True
-        Me.clmTotalST.Width = 91
+        Me.clmTotalST.Width = 82
         '
         'clmTotalOT
         '
@@ -370,7 +370,7 @@ Partial Class HoursWeekPerEmployees
         Me.clmTotalOT.MinimumWidth = 6
         Me.clmTotalOT.Name = "clmTotalOT"
         Me.clmTotalOT.ReadOnly = True
-        Me.clmTotalOT.Width = 93
+        Me.clmTotalOT.Width = 83
         '
         'clmTotalHours3
         '
@@ -378,7 +378,7 @@ Partial Class HoursWeekPerEmployees
         Me.clmTotalHours3.MinimumWidth = 6
         Me.clmTotalHours3.Name = "clmTotalHours3"
         Me.clmTotalHours3.ReadOnly = True
-        Me.clmTotalHours3.Width = 81
+        Me.clmTotalHours3.Width = 72
         '
         'clmMonST
         '
@@ -386,7 +386,7 @@ Partial Class HoursWeekPerEmployees
         Me.clmMonST.MinimumWidth = 6
         Me.clmMonST.Name = "clmMonST"
         Me.clmMonST.ReadOnly = True
-        Me.clmMonST.Width = 86
+        Me.clmMonST.Width = 77
         '
         'clmMonOT
         '
@@ -394,7 +394,7 @@ Partial Class HoursWeekPerEmployees
         Me.clmMonOT.MinimumWidth = 6
         Me.clmMonOT.Name = "clmMonOT"
         Me.clmMonOT.ReadOnly = True
-        Me.clmMonOT.Width = 88
+        Me.clmMonOT.Width = 78
         '
         'clmTueST
         '
@@ -402,7 +402,7 @@ Partial Class HoursWeekPerEmployees
         Me.clmTueST.MinimumWidth = 6
         Me.clmTueST.Name = "clmTueST"
         Me.clmTueST.ReadOnly = True
-        Me.clmTueST.Width = 84
+        Me.clmTueST.Width = 75
         '
         'clmTueOT
         '
@@ -410,7 +410,7 @@ Partial Class HoursWeekPerEmployees
         Me.clmTueOT.MinimumWidth = 6
         Me.clmTueOT.Name = "clmTueOT"
         Me.clmTueOT.ReadOnly = True
-        Me.clmTueOT.Width = 86
+        Me.clmTueOT.Width = 76
         '
         'clmWedST
         '
@@ -418,7 +418,7 @@ Partial Class HoursWeekPerEmployees
         Me.clmWedST.MinimumWidth = 6
         Me.clmWedST.Name = "clmWedST"
         Me.clmWedST.ReadOnly = True
-        Me.clmWedST.Width = 88
+        Me.clmWedST.Width = 80
         '
         'clmWedOT
         '
@@ -426,7 +426,7 @@ Partial Class HoursWeekPerEmployees
         Me.clmWedOT.MinimumWidth = 6
         Me.clmWedOT.Name = "clmWedOT"
         Me.clmWedOT.ReadOnly = True
-        Me.clmWedOT.Width = 90
+        Me.clmWedOT.Width = 81
         '
         'clmThuST
         '
@@ -434,7 +434,7 @@ Partial Class HoursWeekPerEmployees
         Me.clmThuST.MinimumWidth = 6
         Me.clmThuST.Name = "clmThuST"
         Me.clmThuST.ReadOnly = True
-        Me.clmThuST.Width = 84
+        Me.clmThuST.Width = 74
         '
         'clmThuOT
         '
@@ -442,7 +442,7 @@ Partial Class HoursWeekPerEmployees
         Me.clmThuOT.MinimumWidth = 6
         Me.clmThuOT.Name = "clmThuOT"
         Me.clmThuOT.ReadOnly = True
-        Me.clmThuOT.Width = 86
+        Me.clmThuOT.Width = 75
         '
         'clmFriST
         '
@@ -450,7 +450,7 @@ Partial Class HoursWeekPerEmployees
         Me.clmFriST.MinimumWidth = 6
         Me.clmFriST.Name = "clmFriST"
         Me.clmFriST.ReadOnly = True
-        Me.clmFriST.Width = 75
+        Me.clmFriST.Width = 67
         '
         'clmFriOT
         '
@@ -458,7 +458,7 @@ Partial Class HoursWeekPerEmployees
         Me.clmFriOT.MinimumWidth = 6
         Me.clmFriOT.Name = "clmFriOT"
         Me.clmFriOT.ReadOnly = True
-        Me.clmFriOT.Width = 77
+        Me.clmFriOT.Width = 68
         '
         'clmSatST
         '
@@ -466,7 +466,7 @@ Partial Class HoursWeekPerEmployees
         Me.clmSatST.MinimumWidth = 6
         Me.clmSatST.Name = "clmSatST"
         Me.clmSatST.ReadOnly = True
-        Me.clmSatST.Width = 80
+        Me.clmSatST.Width = 56
         '
         'clmSatOT
         '
@@ -474,7 +474,7 @@ Partial Class HoursWeekPerEmployees
         Me.clmSatOT.MinimumWidth = 6
         Me.clmSatOT.Name = "clmSatOT"
         Me.clmSatOT.ReadOnly = True
-        Me.clmSatOT.Width = 82
+        Me.clmSatOT.Width = 56
         '
         'clmSunST
         '
@@ -482,7 +482,7 @@ Partial Class HoursWeekPerEmployees
         Me.clmSunST.MinimumWidth = 6
         Me.clmSunST.Name = "clmSunST"
         Me.clmSunST.ReadOnly = True
-        Me.clmSunST.Width = 84
+        Me.clmSunST.Width = 74
         '
         'clmSunOT
         '
@@ -490,7 +490,7 @@ Partial Class HoursWeekPerEmployees
         Me.clmSunOT.MinimumWidth = 6
         Me.clmSunOT.Name = "clmSunOT"
         Me.clmSunOT.ReadOnly = True
-        Me.clmSunOT.Width = 86
+        Me.clmSunOT.Width = 75
         '
         'GroupBox1
         '

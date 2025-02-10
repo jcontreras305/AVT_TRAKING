@@ -1,7 +1,8 @@
 ﻿Imports System.Runtime.InteropServices
 Public Class ScaffoldHistoryDismantled
     Private Sub ScaffoldHistoryDismantled_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        llenarComboClientsReports(cmbClient)
+        'llenarComboClientsReports(cmbClient)
+        llenarComboClientByUser(cmbClient)
     End Sub
     Private Sub PictureBox4_Click(sender As Object, e As EventArgs) Handles PictureBox4.Click
         Me.Close()

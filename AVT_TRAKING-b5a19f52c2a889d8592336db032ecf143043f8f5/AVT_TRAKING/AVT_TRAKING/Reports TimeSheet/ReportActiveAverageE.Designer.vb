@@ -19,7 +19,7 @@ Partial Class ReportActiveAverageE
 
     'NOTA: el Diseñador de Windows Forms necesita el siguiente procedimiento
     'Se puede modificar usando el Diseñador de Windows Forms.  
-    'No lo modifique con el editor de código.
+    'No lo modifique connSQL el editor de código.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(ReportActiveAverageE))
@@ -62,7 +62,7 @@ Partial Class ReportActiveAverageE
         Me.TableLayoutPanel1.Controls.Add(Me.Panel2, 0, 1)
         Me.TableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.TableLayoutPanel1.Location = New System.Drawing.Point(0, 0)
-        Me.TableLayoutPanel1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.TableLayoutPanel1.Margin = New System.Windows.Forms.Padding(4)
         Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
         Me.TableLayoutPanel1.RowCount = 3
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 49.0!))
@@ -77,7 +77,7 @@ Partial Class ReportActiveAverageE
         Me.Panel3.Controls.Add(Me.crvActiveAverageE)
         Me.Panel3.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel3.Location = New System.Drawing.Point(4, 153)
-        Me.Panel3.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.Panel3.Margin = New System.Windows.Forms.Padding(4)
         Me.Panel3.Name = "Panel3"
         Me.Panel3.Size = New System.Drawing.Size(971, 469)
         Me.Panel3.TabIndex = 2
@@ -89,7 +89,7 @@ Partial Class ReportActiveAverageE
         Me.crvActiveAverageE.Cursor = System.Windows.Forms.Cursors.Default
         Me.crvActiveAverageE.Dock = System.Windows.Forms.DockStyle.Fill
         Me.crvActiveAverageE.Location = New System.Drawing.Point(0, 0)
-        Me.crvActiveAverageE.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.crvActiveAverageE.Margin = New System.Windows.Forms.Padding(4)
         Me.crvActiveAverageE.Name = "crvActiveAverageE"
         Me.crvActiveAverageE.Size = New System.Drawing.Size(971, 469)
         Me.crvActiveAverageE.TabIndex = 0
@@ -105,7 +105,7 @@ Partial Class ReportActiveAverageE
         Me.TitleBar.Controls.Add(Me.btnMaximize)
         Me.TitleBar.Dock = System.Windows.Forms.DockStyle.Fill
         Me.TitleBar.Location = New System.Drawing.Point(4, 4)
-        Me.TitleBar.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.TitleBar.Margin = New System.Windows.Forms.Padding(4)
         Me.TitleBar.Name = "TitleBar"
         Me.TitleBar.Size = New System.Drawing.Size(971, 41)
         Me.TitleBar.TabIndex = 0
@@ -126,7 +126,7 @@ Partial Class ReportActiveAverageE
         '
         Me.PictureBox1.Image = Global.AVT_TRAKING.My.Resources.Resources.report
         Me.PictureBox1.Location = New System.Drawing.Point(8, 2)
-        Me.PictureBox1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.PictureBox1.Margin = New System.Windows.Forms.Padding(4)
         Me.PictureBox1.Name = "PictureBox1"
         Me.PictureBox1.Size = New System.Drawing.Size(37, 34)
         Me.PictureBox1.TabIndex = 10
@@ -137,7 +137,7 @@ Partial Class ReportActiveAverageE
         Me.PictureBox3.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.PictureBox3.Image = Global.AVT_TRAKING.My.Resources.Resources.minimize2
         Me.PictureBox3.Location = New System.Drawing.Point(881, 6)
-        Me.PictureBox3.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.PictureBox3.Margin = New System.Windows.Forms.Padding(4)
         Me.PictureBox3.Name = "PictureBox3"
         Me.PictureBox3.Size = New System.Drawing.Size(36, 36)
         Me.PictureBox3.TabIndex = 9
@@ -148,7 +148,7 @@ Partial Class ReportActiveAverageE
         Me.btnRestore.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnRestore.Image = Global.AVT_TRAKING.My.Resources.Resources.restore2
         Me.btnRestore.Location = New System.Drawing.Point(925, 2)
-        Me.btnRestore.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btnRestore.Margin = New System.Windows.Forms.Padding(4)
         Me.btnRestore.Name = "btnRestore"
         Me.btnRestore.Size = New System.Drawing.Size(35, 36)
         Me.btnRestore.TabIndex = 8
@@ -159,7 +159,7 @@ Partial Class ReportActiveAverageE
         Me.btnMaximize.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnMaximize.Image = Global.AVT_TRAKING.My.Resources.Resources.maximize2
         Me.btnMaximize.Location = New System.Drawing.Point(925, 2)
-        Me.btnMaximize.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btnMaximize.Margin = New System.Windows.Forms.Padding(4)
         Me.btnMaximize.Name = "btnMaximize"
         Me.btnMaximize.Size = New System.Drawing.Size(41, 36)
         Me.btnMaximize.TabIndex = 7
@@ -179,7 +179,7 @@ Partial Class ReportActiveAverageE
         Me.Panel2.Controls.Add(Me.PictureBox4)
         Me.Panel2.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel2.Location = New System.Drawing.Point(4, 53)
-        Me.Panel2.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.Panel2.Margin = New System.Windows.Forms.Padding(4)
         Me.Panel2.Name = "Panel2"
         Me.Panel2.Size = New System.Drawing.Size(971, 92)
         Me.Panel2.TabIndex = 1
@@ -202,7 +202,7 @@ Partial Class ReportActiveAverageE
         Me.chbAll.Font = New System.Drawing.Font("Verdana", 9.0!)
         Me.chbAll.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.chbAll.Location = New System.Drawing.Point(509, 16)
-        Me.chbAll.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.chbAll.Margin = New System.Windows.Forms.Padding(4)
         Me.chbAll.Name = "chbAll"
         Me.chbAll.Size = New System.Drawing.Size(46, 22)
         Me.chbAll.TabIndex = 22
@@ -213,7 +213,7 @@ Partial Class ReportActiveAverageE
         '
         Me.cmbClients.FormattingEnabled = True
         Me.cmbClients.Location = New System.Drawing.Point(321, 14)
-        Me.cmbClients.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.cmbClients.Margin = New System.Windows.Forms.Padding(4)
         Me.cmbClients.Name = "cmbClients"
         Me.cmbClients.Size = New System.Drawing.Size(179, 24)
         Me.cmbClients.TabIndex = 21
@@ -248,7 +248,7 @@ Partial Class ReportActiveAverageE
         Me.dtpFinalDate.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.dtpFinalDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom
         Me.dtpFinalDate.Location = New System.Drawing.Point(116, 52)
-        Me.dtpFinalDate.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.dtpFinalDate.Margin = New System.Windows.Forms.Padding(4)
         Me.dtpFinalDate.Name = "dtpFinalDate"
         Me.dtpFinalDate.Size = New System.Drawing.Size(131, 24)
         Me.dtpFinalDate.TabIndex = 18
@@ -259,7 +259,7 @@ Partial Class ReportActiveAverageE
         Me.dtpInitialDate.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.dtpInitialDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom
         Me.dtpInitialDate.Location = New System.Drawing.Point(116, 14)
-        Me.dtpInitialDate.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.dtpInitialDate.Margin = New System.Windows.Forms.Padding(4)
         Me.dtpInitialDate.Name = "dtpInitialDate"
         Me.dtpInitialDate.Size = New System.Drawing.Size(131, 24)
         Me.dtpInitialDate.TabIndex = 17
@@ -274,7 +274,7 @@ Partial Class ReportActiveAverageE
         Me.Button1.Image = Global.AVT_TRAKING.My.Resources.Resources.reportshow
         Me.Button1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.Button1.Location = New System.Drawing.Point(509, 46)
-        Me.Button1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.Button1.Margin = New System.Windows.Forms.Padding(4)
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(111, 41)
         Me.Button1.TabIndex = 9
@@ -287,7 +287,7 @@ Partial Class ReportActiveAverageE
         Me.PictureBox4.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.PictureBox4.Image = Global.AVT_TRAKING.My.Resources.Resources._exit
         Me.PictureBox4.Location = New System.Drawing.Point(917, 4)
-        Me.PictureBox4.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.PictureBox4.Margin = New System.Windows.Forms.Padding(4)
         Me.PictureBox4.Name = "PictureBox4"
         Me.PictureBox4.Size = New System.Drawing.Size(49, 36)
         Me.PictureBox4.TabIndex = 8
@@ -302,7 +302,7 @@ Partial Class ReportActiveAverageE
         Me.Controls.Add(Me.TableLayoutPanel1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
-        Me.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.Margin = New System.Windows.Forms.Padding(4)
         Me.Name = "ReportActiveAverageE"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "ReportActiveAverageE"

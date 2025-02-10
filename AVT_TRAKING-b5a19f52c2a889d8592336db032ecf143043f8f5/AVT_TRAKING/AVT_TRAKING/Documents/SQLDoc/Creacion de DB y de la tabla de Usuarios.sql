@@ -2351,6 +2351,17 @@ create table unitMeassurements(
 GO
 
 --##########################################################################################
+--##################  TABLA DE USER CLIENT ACCESS ##########################################
+--##########################################################################################
+
+create table userClientAccess (
+	idUsers varchar(36) not null,
+	idClient varchar(36) not null,
+	access bit 
+)
+go
+
+--##########################################################################################
 --##################  TABLA DE WORKCODE ####################################################
 --##########################################################################################
 
@@ -3411,7 +3422,7 @@ ON DELETE CASCADE
 GO
 
 --##########################################################################################
---##################  FOREIG KEYS WORKCODE #################################################
+--##################  FOREIG KEYS TRACKELEMENT #############################################
 --##########################################################################################
 
 ALTER TABLE trackVehicleElement ADD CONSTRAINT pk_idTrackVehicleElement_idClient
@@ -3422,6 +3433,18 @@ ALTER TABLE trackVehicleElement WITH CHECK ADD CONSTRAINT fk_idClient_TrackVehic
 FOREIGN KEY (idClient) REFERENCES clients(idClient)
 go 
 
+--##########################################################################################
+--##################  FOREIG KEYS USER CLIENT ACCESS #######################################
+--##########################################################################################
+ALTER TABLE userClientAccess ADD CONSTRAINT pk_idUser_idClient
+PRIMARY KEY (idUsers,idClient)
+go
+ALTER TABLE userClientAccess ADD CONSTRAINT fk_idUser_userClientAccess
+FOREIGN KEY (idUsers) REFERENCES users (idUsers)
+go
+ALTER TABLE userClientAccess ADD CONSTRAINT fk_idClient_userClientAccess
+FOREIGN KEY (idClient) REFERENCES clients (idClient)
+go
 --##########################################################################################
 --##################  FOREIG KEYS WORKCODE #################################################
 --##########################################################################################
@@ -5446,13 +5469,60 @@ GO
 --ORDER BY T1.idProduct
 --end
 
+--##########################################################################################
+--##### ESTA TABLA ES PARA GUARDAR TEMPORALMENTE LOS DISMANTLE A MOSTRAR EN EL REPORTE #####
+--##########################################################################################
+--create table RPTDismantleProduct (
+--	Tag varchar(20)
+--)
+--go
+
 ----| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
 ----| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
 ----V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V
 --##########################################################################################
 --##### ESTA TABLA ES PARA GUARDAR TEMPORALMENTE LOS DISMANTLE A MOSTRAR EN EL REPORTE #####
 --##########################################################################################
-create table RPTDismantleProduct (
-	Tag varchar(20)
+
+create table userClientAccess (
+	idUsers varchar(36) not null,
+	idClient varchar(36) not null,
+	access bit 
 )
 go
+--#############################################################################################
+--########## CON ESTE CODIGO SE LES DA ACCESO DE TODOS LOS CLIENTES A USUARIO ADMIN ###########
+--#############################################################################################
+alter table userClientAccess add constraint pk_idUser_idClient
+primary key (idUsers,idClient)
+go
+alter table userClientAccess add constraint fk_idUser_userClientAccess
+foreign key (idUsers) references users (idUsers)
+go
+alter table userClientAccess add constraint fk_idClient_userClientAccess
+foreign key (idClient) references clients (idClient)
+go
+
+DECLARE @idClient varchar(36), @idUsuario varchar(36)
+Select top 1 @idUsuario = idUsers from users where nameUser = 'Admin'
+DECLARE cursor_1 CURSOR FOR
+SELECT idClient
+FROM clients
+
+
+OPEN cursor_1
+
+FETCH NEXT FROM cursor_1 INTO @idClient
+
+WHILE @@FETCH_STATUS = 0
+BEGIN
+	if (select COUNT (*) from userClientAccess where idClient = @idClient and idUsers =@idUsuario) = 0 
+	begin
+    INSERT INTO userClientAccess(idClient, idUsers,access)
+    VALUES (@idClient, @idUsuario,1)
+	end
+    FETCH NEXT FROM cursor_1 INTO @idClient
+END
+
+CLOSE cursor_1
+DEALLOCATE cursor_1

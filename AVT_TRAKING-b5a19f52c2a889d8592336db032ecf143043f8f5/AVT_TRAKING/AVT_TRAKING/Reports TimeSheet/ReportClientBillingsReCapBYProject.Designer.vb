@@ -19,7 +19,7 @@ Partial Class ReportClientBillingsReCapBYProject
 
     'NOTA: el Diseñador de Windows Forms necesita el siguiente procedimiento
     'Se puede modificar usando el Diseñador de Windows Forms.  
-    'No lo modifique con el editor de código.
+    'No lo modifique connSQL el editor de código.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(ReportClientBillingsReCapBYProject))
@@ -261,7 +261,7 @@ Partial Class ReportClientBillingsReCapBYProject
         Me.chbAllPO.Location = New System.Drawing.Point(491, 76)
         Me.chbAllPO.Margin = New System.Windows.Forms.Padding(4)
         Me.chbAllPO.Name = "chbAllPO"
-        Me.chbAllPO.Size = New System.Drawing.Size(69, 21)
+        Me.chbAllPO.Size = New System.Drawing.Size(66, 20)
         Me.chbAllPO.TabIndex = 23
         Me.chbAllPO.Text = "All PO"
         Me.chbAllPO.UseVisualStyleBackColor = True
@@ -294,7 +294,7 @@ Partial Class ReportClientBillingsReCapBYProject
         Me.chbAllJobs.Location = New System.Drawing.Point(491, 42)
         Me.chbAllJobs.Margin = New System.Windows.Forms.Padding(4)
         Me.chbAllJobs.Name = "chbAllJobs"
-        Me.chbAllJobs.Size = New System.Drawing.Size(79, 21)
+        Me.chbAllJobs.Size = New System.Drawing.Size(77, 20)
         Me.chbAllJobs.TabIndex = 20
         Me.chbAllJobs.Text = "All Jobs"
         Me.chbAllJobs.UseVisualStyleBackColor = True

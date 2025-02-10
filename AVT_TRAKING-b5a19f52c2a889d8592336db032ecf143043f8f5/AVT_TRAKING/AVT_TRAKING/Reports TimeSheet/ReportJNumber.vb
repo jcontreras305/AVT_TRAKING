@@ -1,5 +1,6 @@
 ﻿Imports System.Runtime.InteropServices
 Imports System.Data.SqlClient
+Imports System.Net
 
 Public Class ReportJNumber
     Dim conection As New ConnectioDB
@@ -57,7 +58,8 @@ Public Class ReportJNumber
     End Sub
 
     Private Sub ReportJNumber_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        llenarComboClientsReports(cmbClients)
+        'llenarComboClientsReports(cmbClients)
+        llenarComboClientByUser(cmbClients)
     End Sub
 
     Private Sub TitleBar_Paint(sender As Object, e As PaintEventArgs) Handles TitleBar.Paint

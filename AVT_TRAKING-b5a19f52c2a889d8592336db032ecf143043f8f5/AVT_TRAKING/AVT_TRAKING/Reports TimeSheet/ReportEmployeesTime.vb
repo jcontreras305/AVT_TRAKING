@@ -38,23 +38,7 @@ Public Class ReportEmployeesTime
 
     Private Sub ReportEmployeesTime_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Try
-            conection.conectar()
-            Dim cmd As New SqlCommand("select CONCAT(numberClient , ' ', companyName) as 'Clients' from clients", conection.conn)
-            Dim dr As SqlDataReader = cmd.ExecuteReader()
-            While dr.Read
-                cmbClient.Items.Add(CStr(dr("Clients")))
-            End While
-            dr.Close()
-            If cmbClient.Items IsNot Nothing Then
-                Dim idClient As String() = cmbClient.Items(0).ToString.Split(" ")
-                Dim cmd1 As New SqlCommand(" select * from job where idClient = (select idClient from clients where numberClient = " + idClient(0) + ")", conection.conn)
-                Dim dr1 As SqlDataReader = cmd1.ExecuteReader()
-                While dr1.Read()
-                    cmbJobs.Items.Add(CStr(dr1("jobNo")))
-                End While
-                dr1.Close()
-            End If
-
+            llenarComboClientByUser(cmbClient)
         Catch ex As Exception
             MsgBox(ex.Message())
         Finally
@@ -100,18 +84,8 @@ Public Class ReportEmployeesTime
     End Sub
 
     Private Sub cmbClient_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbClient.SelectedIndexChanged
-        If cmbClient.Items IsNot Nothing Then
-            conection.conectar()
-            Dim idClient As String() = cmbClient.SelectedItem.ToString.Split(" ")
-            Dim cmd1 As New SqlCommand(" select * from job where idClient = (select idClient from clients where numberClient = " + idClient(0) + ")", conection.conn)
-            Dim dr1 As SqlDataReader = cmd1.ExecuteReader()
-            cmbJobs.Items.Clear()
-            cmbJobs.Text = ""
-            While dr1.Read()
-                cmbJobs.Items.Add(CStr(dr1("jobNo")))
-            End While
-            dr1.Close()
-        End If
+        Dim idClient As String() = cmbClient.SelectedItem.ToString.Split(" ")
+        llenarComboJobsReports(cmbJobs, idClient(0))
     End Sub
 
     Private Sub chbAllJobs_CheckedChanged(sender As Object, e As EventArgs) Handles chbAllJobs.CheckedChanged

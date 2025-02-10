@@ -1,4 +1,5 @@
 ﻿Imports System.Data.SqlClient
+Imports System.Net
 Imports System.Runtime.InteropServices
 Public Class ChangueProject
     Dim con As New ConnectioDB
@@ -26,7 +27,8 @@ Public Class ChangueProject
         lblProject.Text = WO
         lblPO.Text = PO
         lblJobNo.Text = JobNo
-        llenarComboClientsReports(cmbClients)
+        'llenarComboClientsReports(cmbClients)
+        llenarComboClientByUser(cmbClients)
         mtdHPW.llenarTablaProyecto(tblProject)
     End Sub
 

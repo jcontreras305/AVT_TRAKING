@@ -1,5 +1,6 @@
 ﻿Imports System.Runtime.InteropServices
 Imports System.Data.SqlClient
+Imports System.Net
 
 
 Public Class ReportCompleteByDateRange
@@ -34,7 +35,8 @@ Public Class ReportCompleteByDateRange
 
     Private Sub ReportCompleteByDateRange_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         Try
-            llenarComboClientsReports(cmbClients)
+            'llenarComboClientsReports(cmbClients)
+            llenarComboClientByUser(cmbClients)
             conection.conectar()
             If cmbClients.SelectedItem IsNot Nothing Then
                 Dim arraycl() As String = cmbClients.SelectedItem.ToString.Split(" ")

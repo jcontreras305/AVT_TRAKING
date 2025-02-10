@@ -5,8 +5,11 @@ Public Class ReportInvoice
     Dim mtdInvoice As New MetodosInvoice
     Dim loadInfo As Boolean = True
     Private Sub ReportInvoice_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        llenarComboClientsReports(cmbClient)
-        llenarComboClientsReports(cmbClientFilter)
+        'llenarComboClientsReports(cmbClient)
+        'llenarComboClientsReports(cmbClientFilter)
+        llenarComboClientByUser(cmbClient)
+        llenarComboClientByUser(cmbClientFilter)
+
         loadInfo = True
         mtdInvoice.llenarTableAllInvoicePO(tblInvoices)
         loadInfo = False

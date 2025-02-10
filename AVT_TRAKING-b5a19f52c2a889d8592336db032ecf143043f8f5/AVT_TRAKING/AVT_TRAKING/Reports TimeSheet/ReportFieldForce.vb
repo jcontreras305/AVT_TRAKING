@@ -1,5 +1,6 @@
 ﻿Imports System.Runtime.InteropServices
 Imports System.Data.SqlClient
+Imports System.Net
 Public Class ReportFieldForce
     Dim mtd As New mtdReportFieldForce
     Private Sub PictureBox4_Click(sender As Object, e As EventArgs) Handles PictureBox4.Click
@@ -31,7 +32,8 @@ Public Class ReportFieldForce
     End Sub
 
     Private Sub ReportFieldForce_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        llenarComboClientsReports(cmbClients)
+        'llenarComboClientsReports(cmbClients)
+        llenarComboClientByUser(cmbClients)
     End Sub
 
     Private Sub cmbClients_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbClients.SelectedIndexChanged

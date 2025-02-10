@@ -169,7 +169,8 @@ Public Class Track
     End Sub
 
     Private Sub Track_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        llenarComboClientsReports(cmbClient)
+        llenarComboClientByUser(cmbClient)
+        'llenarComboClientsReports(cmbClient)
         If cmbClient.SelectedItem IsNot Nothing Then
             Dim array() As String = cmbClient.SelectedItem.ToString.Split(" ")
             mtdHPW.llenarTablaDefaultElemtTrack(tblDefaultElements, array(0))
@@ -177,7 +178,8 @@ Public Class Track
         actualizarListDefault()
         btnSave.Enabled = False
         btnSaveHeaderText.Enabled = False
-        llenarComboClientsReports(cmbClient)
+        'llenarComboClientsReports(cmbClient)
+        llenarComboClientByUser(cmbClient)
     End Sub
     Dim selectColumnTblDeault As String = ""
     Private Sub tblDefaultElements_CellMouseDoubleClick(sender As Object, e As DataGridViewCellMouseEventArgs) Handles tblDefaultElements.CellMouseDoubleClick

@@ -19,12 +19,12 @@ Partial Class VehicleTrack
 
     'NOTA: el Diseñador de Windows Forms necesita el siguiente procedimiento
     'Se puede modificar usando el Diseñador de Windows Forms.  
-    'No lo modifique con el editor de código.
+    'No lo modifique connSQL el editor de código.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle16 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle17 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
-        Dim DataGridViewCellStyle18 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
         Me.TitleBar = New System.Windows.Forms.Panel()
         Me.PictureBox4 = New System.Windows.Forms.PictureBox()
@@ -45,6 +45,10 @@ Partial Class VehicleTrack
         Me.TableLayoutPanel3 = New System.Windows.Forms.TableLayoutPanel()
         Me.tblDefaultElements = New System.Windows.Forms.DataGridView()
         Me.Panel3 = New System.Windows.Forms.Panel()
+        Me.Label8 = New System.Windows.Forms.Label()
+        Me.txtColumnName = New System.Windows.Forms.TextBox()
+        Me.Label6 = New System.Windows.Forms.Label()
+        Me.cmbQueryValue = New System.Windows.Forms.ComboBox()
         Me.chbVisibleHeaderText = New System.Windows.Forms.CheckBox()
         Me.Label7 = New System.Windows.Forms.Label()
         Me.btnSaveHeaderText = New System.Windows.Forms.Button()
@@ -65,10 +69,6 @@ Partial Class VehicleTrack
         Me.dtpEndDate = New System.Windows.Forms.DateTimePicker()
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Label1 = New System.Windows.Forms.Label()
-        Me.cmbQueryValue = New System.Windows.Forms.ComboBox()
-        Me.Label6 = New System.Windows.Forms.Label()
-        Me.Label8 = New System.Windows.Forms.Label()
-        Me.txtColumnName = New System.Windows.Forms.TextBox()
         Me.TableLayoutPanel1.SuspendLayout()
         Me.TitleBar.SuspendLayout()
         CType(Me.PictureBox4, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -221,7 +221,7 @@ Partial Class VehicleTrack
         Me.txtMessage.Location = New System.Drawing.Point(9, 10)
         Me.txtMessage.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.txtMessage.Name = "txtMessage"
-        Me.txtMessage.Size = New System.Drawing.Size(69, 17)
+        Me.txtMessage.Size = New System.Drawing.Size(67, 16)
         Me.txtMessage.TabIndex = 0
         Me.txtMessage.Text = "Message:"
         '
@@ -268,35 +268,35 @@ Partial Class VehicleTrack
         'tblTrack
         '
         Me.tblTrack.AllowUserToAddRows = False
-        DataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle16.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle16.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle16.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle16.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle16.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle16.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.tblTrack.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle16
+        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle1.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.tblTrack.ColumnHeadersDefaultCellStyle = DataGridViewCellStyle1
         Me.tblTrack.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        DataGridViewCellStyle17.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle17.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle17.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle17.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle17.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle17.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle17.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.tblTrack.DefaultCellStyle = DataGridViewCellStyle17
+        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.tblTrack.DefaultCellStyle = DataGridViewCellStyle2
         Me.tblTrack.Dock = System.Windows.Forms.DockStyle.Fill
         Me.tblTrack.Location = New System.Drawing.Point(4, 4)
         Me.tblTrack.Margin = New System.Windows.Forms.Padding(4)
         Me.tblTrack.Name = "tblTrack"
-        DataGridViewCellStyle18.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle18.BackColor = System.Drawing.SystemColors.Control
-        DataGridViewCellStyle18.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle18.ForeColor = System.Drawing.SystemColors.WindowText
-        DataGridViewCellStyle18.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle18.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle18.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
-        Me.tblTrack.RowHeadersDefaultCellStyle = DataGridViewCellStyle18
+        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control
+        DataGridViewCellStyle3.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText
+        DataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.[True]
+        Me.tblTrack.RowHeadersDefaultCellStyle = DataGridViewCellStyle3
         Me.tblTrack.RowHeadersWidth = 51
         Me.tblTrack.Size = New System.Drawing.Size(1285, 388)
         Me.tblTrack.TabIndex = 0
@@ -377,6 +377,44 @@ Partial Class VehicleTrack
         Me.Panel3.Size = New System.Drawing.Size(446, 380)
         Me.Panel3.TabIndex = 1
         '
+        'Label8
+        '
+        Me.Label8.AutoSize = True
+        Me.Label8.Location = New System.Drawing.Point(33, 105)
+        Me.Label8.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.Label8.Name = "Label8"
+        Me.Label8.Size = New System.Drawing.Size(92, 16)
+        Me.Label8.TabIndex = 69
+        Me.Label8.Text = "Column Name"
+        '
+        'txtColumnName
+        '
+        Me.txtColumnName.Location = New System.Drawing.Point(135, 104)
+        Me.txtColumnName.Margin = New System.Windows.Forms.Padding(4)
+        Me.txtColumnName.MaxLength = 50
+        Me.txtColumnName.Name = "txtColumnName"
+        Me.txtColumnName.Size = New System.Drawing.Size(189, 22)
+        Me.txtColumnName.TabIndex = 70
+        '
+        'Label6
+        '
+        Me.Label6.AutoSize = True
+        Me.Label6.Location = New System.Drawing.Point(42, 169)
+        Me.Label6.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.Label6.Name = "Label6"
+        Me.Label6.Size = New System.Drawing.Size(81, 16)
+        Me.Label6.TabIndex = 68
+        Me.Label6.Text = "Query Value"
+        '
+        'cmbQueryValue
+        '
+        Me.cmbQueryValue.FormattingEnabled = True
+        Me.cmbQueryValue.Items.AddRange(New Object() {"", "Record ID", "Date", "Equipment Unit ID", "Area", "Level 1", "Level 2", "Level 3", "Over Hrs", "Extra"})
+        Me.cmbQueryValue.Location = New System.Drawing.Point(135, 166)
+        Me.cmbQueryValue.Name = "cmbQueryValue"
+        Me.cmbQueryValue.Size = New System.Drawing.Size(121, 24)
+        Me.cmbQueryValue.TabIndex = 67
+        '
         'chbVisibleHeaderText
         '
         Me.chbVisibleHeaderText.AutoSize = True
@@ -384,7 +422,7 @@ Partial Class VehicleTrack
         Me.chbVisibleHeaderText.Location = New System.Drawing.Point(85, 235)
         Me.chbVisibleHeaderText.Margin = New System.Windows.Forms.Padding(4)
         Me.chbVisibleHeaderText.Name = "chbVisibleHeaderText"
-        Me.chbVisibleHeaderText.Size = New System.Drawing.Size(71, 21)
+        Me.chbVisibleHeaderText.Size = New System.Drawing.Size(70, 20)
         Me.chbVisibleHeaderText.TabIndex = 64
         Me.chbVisibleHeaderText.Text = "Visible"
         Me.chbVisibleHeaderText.UseVisualStyleBackColor = True
@@ -395,7 +433,7 @@ Partial Class VehicleTrack
         Me.Label7.Location = New System.Drawing.Point(6, 137)
         Me.Label7.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(123, 17)
+        Me.Label7.Size = New System.Drawing.Size(118, 16)
         Me.Label7.TabIndex = 8
         Me.Label7.Text = "Excel Header Text"
         '
@@ -445,7 +483,7 @@ Partial Class VehicleTrack
         Me.Label3.Location = New System.Drawing.Point(36, 201)
         Me.Label3.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(93, 17)
+        Me.Label3.Size = New System.Drawing.Size(87, 16)
         Me.Label3.TabIndex = 3
         Me.Label3.Text = "Default Value"
         '
@@ -616,50 +654,13 @@ Partial Class VehicleTrack
         Me.Label1.TabIndex = 2
         Me.Label1.Text = "Begin Date"
         '
-        'cmbQueryValue
-        '
-        Me.cmbQueryValue.FormattingEnabled = True
-        Me.cmbQueryValue.Items.AddRange(New Object() {"", "Record ID", "Date", "Equipment Unit ID", "Area", "Level 1", "Level 2", "Level 3", "Over Hrs", "Extra"})
-        Me.cmbQueryValue.Location = New System.Drawing.Point(135, 166)
-        Me.cmbQueryValue.Name = "cmbQueryValue"
-        Me.cmbQueryValue.Size = New System.Drawing.Size(121, 24)
-        Me.cmbQueryValue.TabIndex = 67
-        '
-        'Label6
-        '
-        Me.Label6.AutoSize = True
-        Me.Label6.Location = New System.Drawing.Point(42, 169)
-        Me.Label6.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(87, 17)
-        Me.Label6.TabIndex = 68
-        Me.Label6.Text = "Query Value"
-        '
-        'Label8
-        '
-        Me.Label8.AutoSize = True
-        Me.Label8.Location = New System.Drawing.Point(33, 105)
-        Me.Label8.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.Label8.Name = "Label8"
-        Me.Label8.Size = New System.Drawing.Size(96, 17)
-        Me.Label8.TabIndex = 69
-        Me.Label8.Text = "Column Name"
-        '
-        'txtColumnName
-        '
-        Me.txtColumnName.Location = New System.Drawing.Point(135, 104)
-        Me.txtColumnName.Margin = New System.Windows.Forms.Padding(4)
-        Me.txtColumnName.MaxLength = 50
-        Me.txtColumnName.Name = "txtColumnName"
-        Me.txtColumnName.Size = New System.Drawing.Size(189, 22)
-        Me.txtColumnName.TabIndex = 70
-        '
         'VehicleTrack
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1327, 666)
         Me.Controls.Add(Me.TableLayoutPanel1)
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
         Me.Name = "VehicleTrack"
         Me.Text = "VehicleTrack"
         Me.TableLayoutPanel1.ResumeLayout(False)

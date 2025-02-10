@@ -38,7 +38,8 @@ Public Class ReportEmployeePerDiem
     End Sub
 
     Private Sub ReportEmployeePerDiem_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        llenarComboClientsReports(cmbClients)
+        'llenarComboClientsReports(cmbClients)
+        llenarComboClientByUser(cmbClients)
     End Sub
 
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click

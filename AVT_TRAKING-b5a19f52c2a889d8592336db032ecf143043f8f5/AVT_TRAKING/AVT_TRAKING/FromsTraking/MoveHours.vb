@@ -1,5 +1,6 @@
 ﻿Imports System.Runtime.InteropServices
 Imports System.Data.SqlClient
+Imports System.Net
 Public Class MoveHours
     Dim idClSender = ""
     Dim idPOGetter = ""
@@ -42,7 +43,8 @@ Public Class MoveHours
     Private Shared Sub SendMessage(hWnd As IntPtr, wMsg As Integer, wParam As Integer, lParam As Integer)
     End Sub
     Private Sub MoveHours_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        llenarComboClientsReports(cmbClientSender)
+        'llenarComboClientsReports(cmbClientSender)
+        llenarComboClientByUser(cmbClientSender)
         llenarComboEmployeeReports(cmbEmployee, True)
         btnMove.Enabled = False
     End Sub

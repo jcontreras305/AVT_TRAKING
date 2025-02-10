@@ -1,12 +1,14 @@
 ﻿Imports System.Runtime.InteropServices
 Imports System.Data.SqlClient
+Imports System.Net
 Public Class SelectProject '
     Dim mtdQSP As New QuerySelectProject
     Dim tblP As DataTable
     Public clientName, ClientNum, jobNo, PO, idAux, idWO, ProjecNum, ProjectDescription As String
     Private Sub SelectProject_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         chbAll_CheckedChanged(chbAll, New EventArgs)
-        llenarComboClientsReports(cmbClients)
+        'llenarComboClientsReports(cmbClients)
+        llenarComboClientByUser(cmbClients)
         If ProjectFind.idAux IsNot Nothing Then
             txtFilterForAll.Text = ProjectFind.Project
         End If

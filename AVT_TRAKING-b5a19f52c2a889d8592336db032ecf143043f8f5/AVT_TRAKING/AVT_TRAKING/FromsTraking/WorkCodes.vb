@@ -4,7 +4,8 @@ Public Class WorkCodes
     Dim tablaWC As New DataTable 'esta tabla guarda los WC de cierto grupo
 
     Private Sub WorkCodes_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        llenarComboClientsReports(cmbClient)
+        'llenarComboClientsReports(cmbClient)
+        llenarComboClientByUser(cmbClient)
         btnAddWorkCode.Enabled = True
         btnCancelWC.Enabled = False
         activarCamposWC(False)

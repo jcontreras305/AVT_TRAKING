@@ -1,10 +1,12 @@
-﻿Imports System.Runtime.InteropServices
+﻿Imports System.Net
+Imports System.Runtime.InteropServices
 Imports Microsoft.Office.Core
 Imports Microsoft.Office.Interop.Excel
 Public Class ScaffoldActive
     Dim mtd As New MetodosScaffold
     Private Sub ScaffoldActive_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        llenarComboClientsReports(cmbClients)
+        'llenarComboClientsReports(cmbClients)
+        llenarComboClientByUser(cmbClients)
     End Sub
     Private Sub PictureBox4_Click(sender As Object, e As EventArgs) Handles PictureBox4.Click
         Me.Close()

@@ -87,10 +87,8 @@ Public Class ReportYearFinalHours
                 cmbYear.Items.Add(dr("Year"))
             End While
             dr.Close()
-            llenarComboClientsReports(cmbClient)
+            llenarComboClientByUser(cmbClient)
         Catch ex As Exception
-        Finally
-            conection.desconectar()
         End Try
     End Sub
 

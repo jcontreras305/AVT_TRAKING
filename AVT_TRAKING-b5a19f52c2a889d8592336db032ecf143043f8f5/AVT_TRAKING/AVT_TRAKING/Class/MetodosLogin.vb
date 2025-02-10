@@ -23,12 +23,6 @@ Public Class MetodosLogin
                     End If
                 Next
                 Return flag
-                'If dataTable.Rows.Count >= 1 Then 'si encontro por lo menos 1 usuario da la bien
-                '    MsgBox("Welcome")
-                '    Return True
-                'Else ' si se pudo ejecutar pero no encontro como minimo 1 usuario regresa false
-                '    Return False
-                'End If
             Else 'Si no se pudo ejecutar regresa falso
                 Return False
             End If

@@ -8,7 +8,8 @@ Public Class KPI
     Dim tblClients As New Data.DataTable
     Dim tblWono As New Data.DataTable
     Private Sub KPI_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        llenarComboClientsReports(cmbClient)
+        llenarComboClientByUser(cmbClient)
+        'llenarComboClientsReports(cmbClient)
         btnSave.Enabled = False
         txtData.Visible = True
         cmbData.Visible = False

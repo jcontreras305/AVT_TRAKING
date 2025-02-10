@@ -1,16 +1,209 @@
 ﻿Imports System.Data.SqlClient
 Imports System.Text.RegularExpressions
+Imports System.Windows.Documents
 Imports Microsoft.Office.Core
 Imports Microsoft.Office.Interop.Excel
 Module metodosGlobales
     Dim con As New ConnectioDB
+    Public userNameMTG As String
+    Dim listClient As New List(Of String)
+    Dim listJobs As New List(Of String)
+
+    ''' <summary>
+    ''' Llena un combobox mostrando los clientes habilitados para el usuario en uso.
+    ''' </summary>
+    ''' <param name="cmbJobNo"></param>
+    ''' <returns></returns>
+    Public Function llenarComboClientByUser(ByVal cmbClient As ComboBox) As Boolean
+        Try
+            If cmbClient IsNot Nothing Then
+                cmbClient.Items.Clear()
+            End If
+            If listClient.Count > 0 Then
+                For Each item In listClient
+                    cmbClient.Items.Add(item)
+                Next
+            Else
+                con.conectar()
+                Dim cmd As New SqlCommand("select 
+CONCAT( numberClient,' ',
+ companyName) as 'Clients'
+from Clients as cl 
+left join userClientAccess as uca on cl.idClient = uca.idClient
+left join users as us on us.idUsers = uca.idUsers and cl.idClient = uca.idClient 
+where
+uca.access = 1  and us.nameUser = '" + userNameMTG + "' 
+order by CONCAT( numberClient,' ',companyName) asc", con.conn)
+                Dim dr As SqlDataReader = cmd.ExecuteReader()
+                While dr.Read()
+                    cmbClient.Items.Add(dr("Clients"))
+                    listClient.Add(dr("Clients"))
+                End While
+                dr.Close()
+                Return True
+            End If
+        Catch ex As Exception
+            Return False
+
+        End Try
+    End Function
+    ''' <summary>
+    ''' Llena un combobox mostrando los clientes habilitados para el usuario en uso.
+    ''' </summary>
+    ''' <param name="cmbJobNo"></param>
+    ''' <returns></returns>
+    Public Function llenarComboClientByUser(ByVal cmbClient As ComboBox, ByVal username As String) As List(Of Byte())
+        Try
+            Dim listImg As New List(Of Byte())
+            If cmbClient IsNot Nothing Then
+                cmbClient.Items.Clear()
+                listClient.Clear()
+            End If
+
+
+            con.conectar()
+            Dim cmd As New SqlCommand("select 
+CONCAT( numberClient,' ',
+ companyName) as 'Clients',
+ cl.photo as img
+from Clients as cl 
+left join userClientAccess as uca on cl.idClient = uca.idClient
+left join users as us on us.idUsers = uca.idUsers and cl.idClient = uca.idClient 
+where
+uca.access = 1  and us.nameUser = '" + username + "' 
+order by CONCAT( numberClient,' ',companyName) asc", con.conn)
+            Dim dr As SqlDataReader = cmd.ExecuteReader()
+            While dr.Read()
+                cmbClient.Items.Add(dr("Clients"))
+                listClient.Add(dr("Clients"))
+                listImg.Add(dr("img"))
+            End While
+            dr.Close()
+            Return listImg
+        Catch ex As Exception
+            Return Nothing
+
+        End Try
+    End Function
+
+    ''' <summary>
+    ''' Llena un combo box con la informacion de jobs solo de los clientes habilitados para el usuario usando de forma opcional el numberClient
+    ''' </summary>
+    ''' <param name="cmbJobNo"></param>
+    ''' <param name="numberClient"></param>
+    ''' <returns></returns>
+    Public Function llenarComboJobByUser(ByVal cmbJobNo As ComboBox, Optional numberClient As String = "") As Boolean
+        Try
+            If cmbJobNo.Items IsNot Nothing Then
+                cmbJobNo.Items.Clear()
+            End If
+            If listClient.Count > 0 Then
+                For Each item In listClient
+                    cmbJobNo.Items.Add(item)
+                Next
+                Return True
+            Else
+                con.conectar()
+                Dim cmd As New SqlCommand("select distinct
+ numberClient,
+ companyName , 
+ jb.jobNo
+from Clients as cl 
+left join userClientAccess as uca on cl.idClient = uca.idClient
+left join users as us on us.idUsers = uca.idUsers and cl.idClient = uca.idClient 
+inner join job as jb on jb.idClient = cl.idClient
+where uca.access = 1  and us.nameUser = '" + UserName + "' " + If(numberClient = "", "", " and cl.numberClient = " + numberClient + ""), con.conn)
+                Dim dr As SqlDataReader = cmd.ExecuteReader()
+                While dr.Read()
+                    cmbJobNo.Items.Add(dr("jobNo"))
+                    listClient.Add(dr("jobNo"))
+                End While
+                dr.Close()
+                Return True
+            End If
+            Return True
+        Catch ex As Exception
+            MsgBox(ex.Message)
+            Return False
+        End Try
+    End Function
+    ''' <summary>
+    ''' Llena un combo box con la informacion de jobs solo de los clientes habilitados para el usuario usando de forma opcional el ID Client
+    ''' </summary>
+    ''' <param name="cmbJobNo"></param>
+    ''' <param name="numberClient"></param>
+    ''' <returns></returns>
+    Public Function llenarComboJobByUserIDClient(ByVal cmbJobNo As ComboBox, Optional idClientClient As String = "") As Boolean
+        Try
+            If cmbJobNo.Items IsNot Nothing Then
+                cmbJobNo.Items.Clear()
+            End If
+            If listClient.Count > 0 Then
+                For Each item In listClient
+                    cmbJobNo.Items.Add(item)
+                Next
+                Return True
+            Else
+                con.conectar()
+                Dim cmd As New SqlCommand("select distinct
+ numberClient,
+ companyName , 
+ jb.jobNo
+from Clients as cl 
+left join userClientAccess as uca on cl.idClient = uca.idClient
+left join users as us on us.idUsers = uca.idUsers and cl.idClient = uca.idClient 
+inner join job as jb on jb.idClient = cl.idClient
+where uca.access = 1  and us.nameUser = '" + UserName + "' " + If(NumberClient = "", "", " and cl.idClient = '" + idClient + "'"), con.conn)
+                Dim dr As SqlDataReader = cmd.ExecuteReader()
+                While dr.Read()
+                    cmbJobNo.Items.Add(dr("jobNo"))
+                    listClient.Add(dr("jobNo"))
+                End While
+                dr.Close()
+                Return True
+            End If
+            Return True
+        Catch ex As Exception
+            MsgBox(ex.Message)
+            Return False
+        End Try
+    End Function
+    ''' <summary>
+    ''' Hace una consulta a la BD llenando un TreeView con los Clientes existenes y activando solo los que estan activos para ese usuario.
+    ''' </summary>
+    ''' <param name="listV"></param>
+    ''' <param name="UserName"></param>
+    ''' <returns>
+    ''' Retorna los Clientes existentes y selecciona solo los que tiene permitidos el Usuario seleccionado.
+    ''' </returns>
+    Public Function llenarListClients(ByVal listV As CheckedListBox, Optional ByVal UserName As String = "") As Boolean
+        Try
+            con.conectar()
+            Dim cmd As New SqlCommand("select distinct numberClient,companyName ,isnull( (select IIF( access=1,'True','False') from userClientAccess as uca1 left join users as us on us.idUsers = uca1.idUsers
+where us.nameUser like '" & UserName & "' and cl.idClient = uca1.idClient 
+ ),'False') as 'Access' 
+from Clients as cl 
+left join userClientAccess as uca on cl.idClient = uca.idClient", con.conn)
+            Dim dr As SqlDataReader = cmd.ExecuteReader()
+            If listV.Items IsNot Nothing Then
+                listV.Items.Clear()
+            End If
+            While dr.Read()
+                listV.Items.Add(dr("numberClient") & "-" & dr("companyName"), If(dr("Access") = "True", True, False))
+            End While
+            dr.Close()
+            Return True
+        Catch ex As Exception
+            Return False
+        End Try
+    End Function
     ''' <summary>
     ''' Hace una consulta a la BD filtrando por el numberClient, retornando los jobs asignados a ese cliente.
     ''' </summary>
     ''' <param name="combo"></param>
     ''' <param name="numberClient"></param>
     ''' <returns>
-    ''' etorna el combo lleno con los empleados en contrados en la BD
+    ''' Retorna el combo lleno con los empleados en contrados en la BD
     ''' </returns>
     Public Function llenarComboJobsReports(ByVal combo As ComboBox, ByVal numberClient As String) As Boolean
         Try
@@ -34,7 +227,8 @@ Module metodosGlobales
     ''' Hace una consulta a la BD filtrando por el numberClient, retornando los jobs asignados a ese cliente.
     ''' </summary>
     ''' <param name="combo"></param>
-    ''' <param name="idclientClient"></param>
+    ''' <param name="idClient"></param>
+    ''' <param name="All"></param>
     ''' <returns>
     ''' etorna el combo lleno con los empleados en contrados en la BD
     ''' </returns>

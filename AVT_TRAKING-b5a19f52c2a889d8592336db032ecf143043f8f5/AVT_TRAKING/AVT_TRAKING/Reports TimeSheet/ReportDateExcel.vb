@@ -1,4 +1,6 @@
-﻿Public Class ReportDateExcel
+﻿Imports System.Net
+
+Public Class ReportDateExcel
 
     Public startDate = False, finalDate = False, clients = False, jobs = False, cancel = False
     Public windowStart As String
@@ -52,7 +54,8 @@
         Label2.Visible = finalDate
         cmbClients.Visible = clients
         Label3.Visible = clients
-        llenarComboClientsReports(cmbClients)
+        'llenarComboClientsReports(cmbClients)
+        llenarComboClientByUser(cmbClients)
         cmbJobs.Visible = jobs
         Label4.Visible = jobs
         If jobs Then

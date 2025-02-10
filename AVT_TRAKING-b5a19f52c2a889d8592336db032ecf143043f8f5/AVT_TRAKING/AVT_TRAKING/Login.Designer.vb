@@ -68,7 +68,7 @@ Partial Class Login
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.txtUser.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtUser.Location = New System.Drawing.Point(44, 4)
-        Me.txtUser.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.txtUser.Margin = New System.Windows.Forms.Padding(4)
         Me.txtUser.Name = "txtUser"
         Me.txtUser.Size = New System.Drawing.Size(192, 30)
         Me.txtUser.TabIndex = 3
@@ -80,7 +80,7 @@ Partial Class Login
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.txtPassword.Font = New System.Drawing.Font("Arial", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtPassword.Location = New System.Drawing.Point(44, 4)
-        Me.txtPassword.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.txtPassword.Margin = New System.Windows.Forms.Padding(4)
         Me.txtPassword.Name = "txtPassword"
         Me.txtPassword.Size = New System.Drawing.Size(192, 30)
         Me.txtPassword.TabIndex = 5
@@ -96,7 +96,7 @@ Partial Class Login
         Me.btnIniciar.Font = New System.Drawing.Font("Baskerville Old Face", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnIniciar.ForeColor = System.Drawing.SystemColors.ButtonHighlight
         Me.btnIniciar.Location = New System.Drawing.Point(25, 4)
-        Me.btnIniciar.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btnIniciar.Margin = New System.Windows.Forms.Padding(4)
         Me.btnIniciar.Name = "btnIniciar"
         Me.btnIniciar.Size = New System.Drawing.Size(212, 53)
         Me.btnIniciar.TabIndex = 6
@@ -109,7 +109,7 @@ Partial Class Login
         Me.TitleBar.Controls.Add(Me.TableLayoutPanel1)
         Me.TitleBar.Dock = System.Windows.Forms.DockStyle.Top
         Me.TitleBar.Location = New System.Drawing.Point(0, 0)
-        Me.TitleBar.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.TitleBar.Margin = New System.Windows.Forms.Padding(4)
         Me.TitleBar.Name = "TitleBar"
         Me.TitleBar.Size = New System.Drawing.Size(507, 39)
         Me.TitleBar.TabIndex = 9
@@ -124,7 +124,7 @@ Partial Class Login
         Me.TableLayoutPanel1.Controls.Add(Me.btnClose, 2, 0)
         Me.TableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Right
         Me.TableLayoutPanel1.Location = New System.Drawing.Point(372, 0)
-        Me.TableLayoutPanel1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.TableLayoutPanel1.Margin = New System.Windows.Forms.Padding(4)
         Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
         Me.TableLayoutPanel1.RowCount = 1
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
@@ -136,7 +136,7 @@ Partial Class Login
         Me.btnMinimize.Cursor = System.Windows.Forms.Cursors.Hand
         Me.btnMinimize.Image = Global.AVT_TRAKING.My.Resources.Resources.minimize2
         Me.btnMinimize.Location = New System.Drawing.Point(50, 4)
-        Me.btnMinimize.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btnMinimize.Margin = New System.Windows.Forms.Padding(4)
         Me.btnMinimize.Name = "btnMinimize"
         Me.btnMinimize.Size = New System.Drawing.Size(23, 23)
         Me.btnMinimize.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize
@@ -148,7 +148,7 @@ Partial Class Login
         Me.btnClose.Cursor = System.Windows.Forms.Cursors.Hand
         Me.btnClose.Image = Global.AVT_TRAKING.My.Resources.Resources.close2
         Me.btnClose.Location = New System.Drawing.Point(94, 4)
-        Me.btnClose.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btnClose.Margin = New System.Windows.Forms.Padding(4)
         Me.btnClose.Name = "btnClose"
         Me.btnClose.Size = New System.Drawing.Size(23, 23)
         Me.btnClose.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize
@@ -162,7 +162,7 @@ Partial Class Login
         Me.Panel1.Controls.Add(Me.cmbImagenes)
         Me.Panel1.Dock = System.Windows.Forms.DockStyle.Bottom
         Me.Panel1.Location = New System.Drawing.Point(0, 518)
-        Me.Panel1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.Panel1.Margin = New System.Windows.Forms.Padding(4)
         Me.Panel1.Name = "Panel1"
         Me.Panel1.Size = New System.Drawing.Size(507, 25)
         Me.Panel1.TabIndex = 7
@@ -174,7 +174,7 @@ Partial Class Login
         Me.btnConnect.Font = New System.Drawing.Font("Verdana", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.btnConnect.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.btnConnect.Location = New System.Drawing.Point(0, 0)
-        Me.btnConnect.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btnConnect.Margin = New System.Windows.Forms.Padding(4)
         Me.btnConnect.Name = "btnConnect"
         Me.btnConnect.Size = New System.Drawing.Size(149, 25)
         Me.btnConnect.TabIndex = 9
@@ -190,7 +190,7 @@ Partial Class Login
         Me.cmbImagenes.ForeColor = System.Drawing.SystemColors.Window
         Me.cmbImagenes.FormattingEnabled = True
         Me.cmbImagenes.Location = New System.Drawing.Point(253, -2)
-        Me.cmbImagenes.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.cmbImagenes.Margin = New System.Windows.Forms.Padding(4)
         Me.cmbImagenes.Name = "cmbImagenes"
         Me.cmbImagenes.Size = New System.Drawing.Size(243, 24)
         Me.cmbImagenes.TabIndex = 8
@@ -207,7 +207,7 @@ Partial Class Login
         Me.tlyMain.Controls.Add(Me.Panel7, 1, 2)
         Me.tlyMain.Dock = System.Windows.Forms.DockStyle.Fill
         Me.tlyMain.Location = New System.Drawing.Point(0, 39)
-        Me.tlyMain.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.tlyMain.Margin = New System.Windows.Forms.Padding(4)
         Me.tlyMain.Name = "tlyMain"
         Me.tlyMain.RowCount = 5
         Me.tlyMain.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 39.73766!))
@@ -223,7 +223,7 @@ Partial Class Login
         Me.Panel2.Controls.Add(Me.PictureBox2)
         Me.Panel2.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel2.Location = New System.Drawing.Point(114, 4)
-        Me.Panel2.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.Panel2.Margin = New System.Windows.Forms.Padding(4)
         Me.Panel2.Name = "Panel2"
         Me.Panel2.Size = New System.Drawing.Size(279, 182)
         Me.Panel2.TabIndex = 11
@@ -233,7 +233,7 @@ Partial Class Login
         Me.PictureBox2.Dock = System.Windows.Forms.DockStyle.Bottom
         Me.PictureBox2.Image = Global.AVT_TRAKING.My.Resources.Resources.LogoStart
         Me.PictureBox2.Location = New System.Drawing.Point(0, 0)
-        Me.PictureBox2.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.PictureBox2.Margin = New System.Windows.Forms.Padding(4)
         Me.PictureBox2.Name = "PictureBox2"
         Me.PictureBox2.Size = New System.Drawing.Size(279, 182)
         Me.PictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
@@ -246,7 +246,7 @@ Partial Class Login
         Me.Panel3.Controls.Add(Me.PictureBox3)
         Me.Panel3.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel3.Location = New System.Drawing.Point(114, 194)
-        Me.Panel3.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.Panel3.Margin = New System.Windows.Forms.Padding(4)
         Me.Panel3.Name = "Panel3"
         Me.Panel3.Size = New System.Drawing.Size(279, 39)
         Me.Panel3.TabIndex = 2
@@ -256,7 +256,7 @@ Partial Class Login
         Me.PictureBox3.Dock = System.Windows.Forms.DockStyle.Left
         Me.PictureBox3.Image = Global.AVT_TRAKING.My.Resources.Resources.users
         Me.PictureBox3.Location = New System.Drawing.Point(0, 0)
-        Me.PictureBox3.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.PictureBox3.Margin = New System.Windows.Forms.Padding(4)
         Me.PictureBox3.Name = "PictureBox3"
         Me.PictureBox3.Size = New System.Drawing.Size(36, 39)
         Me.PictureBox3.TabIndex = 0
@@ -267,7 +267,7 @@ Partial Class Login
         Me.Panel6.Controls.Add(Me.btnIniciar)
         Me.Panel6.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel6.Location = New System.Drawing.Point(114, 288)
-        Me.Panel6.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.Panel6.Margin = New System.Windows.Forms.Padding(4)
         Me.Panel6.Name = "Panel6"
         Me.Panel6.Size = New System.Drawing.Size(279, 60)
         Me.Panel6.TabIndex = 5
@@ -279,7 +279,7 @@ Partial Class Login
         Me.Panel7.Controls.Add(Me.PictureBox4)
         Me.Panel7.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel7.Location = New System.Drawing.Point(114, 241)
-        Me.Panel7.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.Panel7.Margin = New System.Windows.Forms.Padding(4)
         Me.Panel7.Name = "Panel7"
         Me.Panel7.Size = New System.Drawing.Size(279, 39)
         Me.Panel7.TabIndex = 4
@@ -288,7 +288,7 @@ Partial Class Login
         '
         Me.PictureBox1.Image = Global.AVT_TRAKING.My.Resources.Resources.show
         Me.PictureBox1.Location = New System.Drawing.Point(239, 2)
-        Me.PictureBox1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.PictureBox1.Margin = New System.Windows.Forms.Padding(4)
         Me.PictureBox1.Name = "PictureBox1"
         Me.PictureBox1.Size = New System.Drawing.Size(30, 30)
         Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize
@@ -300,7 +300,7 @@ Partial Class Login
         Me.PictureBox4.Dock = System.Windows.Forms.DockStyle.Left
         Me.PictureBox4.Image = Global.AVT_TRAKING.My.Resources.Resources.lock
         Me.PictureBox4.Location = New System.Drawing.Point(0, 0)
-        Me.PictureBox4.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.PictureBox4.Margin = New System.Windows.Forms.Padding(4)
         Me.PictureBox4.Name = "PictureBox4"
         Me.PictureBox4.Size = New System.Drawing.Size(36, 39)
         Me.PictureBox4.TabIndex = 0
@@ -314,7 +314,7 @@ Partial Class Login
         '
         Me.pcbReels.Dock = System.Windows.Forms.DockStyle.Fill
         Me.pcbReels.Location = New System.Drawing.Point(0, 0)
-        Me.pcbReels.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.pcbReels.Margin = New System.Windows.Forms.Padding(4)
         Me.pcbReels.Name = "pcbReels"
         Me.pcbReels.Size = New System.Drawing.Size(507, 543)
         Me.pcbReels.TabIndex = 10
@@ -332,7 +332,7 @@ Partial Class Login
         Me.Controls.Add(Me.pcbReels)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
-        Me.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.Margin = New System.Windows.Forms.Padding(4)
         Me.Name = "Login"
         Me.Opacity = 0.9R
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen

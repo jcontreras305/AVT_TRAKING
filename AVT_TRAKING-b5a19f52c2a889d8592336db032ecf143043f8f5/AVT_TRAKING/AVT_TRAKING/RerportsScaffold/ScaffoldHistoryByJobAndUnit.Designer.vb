@@ -19,7 +19,7 @@ Partial Class ScaffoldHistoryByJobAndUnit
 
     'NOTA: el Diseñador de Windows Forms necesita el siguiente procedimiento
     'Se puede modificar usando el Diseñador de Windows Forms.  
-    'No lo modifique con el editor de código.
+    'No lo modifique connSQL el editor de código.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
@@ -60,7 +60,7 @@ Partial Class ScaffoldHistoryByJobAndUnit
         Me.TableLayoutPanel1.Controls.Add(Me.Panel3, 0, 2)
         Me.TableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.TableLayoutPanel1.Location = New System.Drawing.Point(0, 0)
-        Me.TableLayoutPanel1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.TableLayoutPanel1.Margin = New System.Windows.Forms.Padding(4)
         Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
         Me.TableLayoutPanel1.RowCount = 3
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 66.0!))
@@ -79,7 +79,7 @@ Partial Class ScaffoldHistoryByJobAndUnit
         Me.Panel1.Controls.Add(Me.btnMaximize)
         Me.Panel1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel1.Location = New System.Drawing.Point(4, 4)
-        Me.Panel1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.Panel1.Margin = New System.Windows.Forms.Padding(4)
         Me.Panel1.Name = "Panel1"
         Me.Panel1.Size = New System.Drawing.Size(1224, 58)
         Me.Panel1.TabIndex = 0
@@ -88,7 +88,7 @@ Partial Class ScaffoldHistoryByJobAndUnit
         '
         Me.PictureBox1.Image = Global.AVT_TRAKING.My.Resources.Resources.project
         Me.PictureBox1.Location = New System.Drawing.Point(4, 4)
-        Me.PictureBox1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.PictureBox1.Margin = New System.Windows.Forms.Padding(4)
         Me.PictureBox1.Name = "PictureBox1"
         Me.PictureBox1.Size = New System.Drawing.Size(60, 52)
         Me.PictureBox1.TabIndex = 17
@@ -112,7 +112,7 @@ Partial Class ScaffoldHistoryByJobAndUnit
         Me.btnMinimize.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnMinimize.Image = Global.AVT_TRAKING.My.Resources.Resources.minimize2
         Me.btnMinimize.Location = New System.Drawing.Point(1133, 4)
-        Me.btnMinimize.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btnMinimize.Margin = New System.Windows.Forms.Padding(4)
         Me.btnMinimize.Name = "btnMinimize"
         Me.btnMinimize.Size = New System.Drawing.Size(36, 36)
         Me.btnMinimize.TabIndex = 15
@@ -123,7 +123,7 @@ Partial Class ScaffoldHistoryByJobAndUnit
         Me.btnRestore.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnRestore.Image = Global.AVT_TRAKING.My.Resources.Resources.restore2
         Me.btnRestore.Location = New System.Drawing.Point(1177, 4)
-        Me.btnRestore.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btnRestore.Margin = New System.Windows.Forms.Padding(4)
         Me.btnRestore.Name = "btnRestore"
         Me.btnRestore.Size = New System.Drawing.Size(35, 36)
         Me.btnRestore.TabIndex = 14
@@ -134,7 +134,7 @@ Partial Class ScaffoldHistoryByJobAndUnit
         Me.btnMaximize.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnMaximize.Image = Global.AVT_TRAKING.My.Resources.Resources.maximize2
         Me.btnMaximize.Location = New System.Drawing.Point(1177, 4)
-        Me.btnMaximize.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btnMaximize.Margin = New System.Windows.Forms.Padding(4)
         Me.btnMaximize.Name = "btnMaximize"
         Me.btnMaximize.Size = New System.Drawing.Size(41, 36)
         Me.btnMaximize.TabIndex = 13
@@ -153,7 +153,7 @@ Partial Class ScaffoldHistoryByJobAndUnit
         Me.Panel2.Controls.Add(Me.dtpStartDate)
         Me.Panel2.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel2.Location = New System.Drawing.Point(4, 70)
-        Me.Panel2.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.Panel2.Margin = New System.Windows.Forms.Padding(4)
         Me.Panel2.Name = "Panel2"
         Me.Panel2.Size = New System.Drawing.Size(1224, 97)
         Me.Panel2.TabIndex = 1
@@ -161,33 +161,36 @@ Partial Class ScaffoldHistoryByJobAndUnit
         'Label4
         '
         Me.Label4.AutoSize = True
+        Me.Label4.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label4.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.Label4.Location = New System.Drawing.Point(369, 22)
+        Me.Label4.Location = New System.Drawing.Point(275, 24)
         Me.Label4.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(40, 16)
+        Me.Label4.Size = New System.Drawing.Size(52, 20)
         Me.Label4.TabIndex = 15
         Me.Label4.Text = "Client"
         '
         'Label3
         '
         Me.Label3.AutoSize = True
+        Me.Label3.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label3.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.Label3.Location = New System.Drawing.Point(12, 62)
         Me.Label3.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(68, 16)
+        Me.Label3.Size = New System.Drawing.Size(86, 20)
         Me.Label3.TabIndex = 14
         Me.Label3.Text = "Final Date"
         '
         'Label2
         '
         Me.Label2.AutoSize = True
+        Me.Label2.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label2.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.Label2.Location = New System.Drawing.Point(12, 22)
         Me.Label2.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(66, 16)
+        Me.Label2.Size = New System.Drawing.Size(86, 20)
         Me.Label2.TabIndex = 13
         Me.Label2.Text = "Start Date"
         '
@@ -196,7 +199,7 @@ Partial Class ScaffoldHistoryByJobAndUnit
         Me.PictureBox4.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.PictureBox4.Image = Global.AVT_TRAKING.My.Resources.Resources._exit
         Me.PictureBox4.Location = New System.Drawing.Point(1169, 4)
-        Me.PictureBox4.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.PictureBox4.Margin = New System.Windows.Forms.Padding(4)
         Me.PictureBox4.Name = "PictureBox4"
         Me.PictureBox4.Size = New System.Drawing.Size(49, 36)
         Me.PictureBox4.TabIndex = 12
@@ -207,12 +210,12 @@ Partial Class ScaffoldHistoryByJobAndUnit
         Me.btnReport.FlatAppearance.BorderSize = 0
         Me.btnReport.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(58, Byte), Integer), CType(CType(115, Byte), Integer))
         Me.btnReport.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnReport.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnReport.Font = New System.Drawing.Font("Verdana", 10.0!)
         Me.btnReport.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.btnReport.Image = Global.AVT_TRAKING.My.Resources.Resources.reportshow
         Me.btnReport.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.btnReport.Location = New System.Drawing.Point(631, 49)
-        Me.btnReport.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btnReport.Margin = New System.Windows.Forms.Padding(4)
         Me.btnReport.Name = "btnReport"
         Me.btnReport.Size = New System.Drawing.Size(111, 41)
         Me.btnReport.TabIndex = 11
@@ -222,31 +225,32 @@ Partial Class ScaffoldHistoryByJobAndUnit
         '
         'cmbClient
         '
+        Me.cmbClient.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.2!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.cmbClient.FormattingEnabled = True
-        Me.cmbClient.Location = New System.Drawing.Point(421, 14)
-        Me.cmbClient.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.cmbClient.Location = New System.Drawing.Point(335, 19)
+        Me.cmbClient.Margin = New System.Windows.Forms.Padding(4)
         Me.cmbClient.Name = "cmbClient"
-        Me.cmbClient.Size = New System.Drawing.Size(185, 24)
+        Me.cmbClient.Size = New System.Drawing.Size(185, 28)
         Me.cmbClient.TabIndex = 2
         '
         'dtpFinalDate
         '
         Me.dtpFinalDate.CustomFormat = "MM/dd/yyyy"
         Me.dtpFinalDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom
-        Me.dtpFinalDate.Location = New System.Drawing.Point(92, 54)
-        Me.dtpFinalDate.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.dtpFinalDate.Location = New System.Drawing.Point(107, 61)
+        Me.dtpFinalDate.Margin = New System.Windows.Forms.Padding(4)
         Me.dtpFinalDate.Name = "dtpFinalDate"
-        Me.dtpFinalDate.Size = New System.Drawing.Size(265, 22)
+        Me.dtpFinalDate.Size = New System.Drawing.Size(154, 22)
         Me.dtpFinalDate.TabIndex = 1
         '
         'dtpStartDate
         '
         Me.dtpStartDate.CustomFormat = "MM/dd/yyyy"
         Me.dtpStartDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom
-        Me.dtpStartDate.Location = New System.Drawing.Point(92, 15)
-        Me.dtpStartDate.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.dtpStartDate.Location = New System.Drawing.Point(107, 22)
+        Me.dtpStartDate.Margin = New System.Windows.Forms.Padding(4)
         Me.dtpStartDate.Name = "dtpStartDate"
-        Me.dtpStartDate.Size = New System.Drawing.Size(265, 22)
+        Me.dtpStartDate.Size = New System.Drawing.Size(154, 22)
         Me.dtpStartDate.TabIndex = 0
         '
         'Panel3
@@ -255,7 +259,7 @@ Partial Class ScaffoldHistoryByJobAndUnit
         Me.Panel3.Controls.Add(Me.crvReport)
         Me.Panel3.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel3.Location = New System.Drawing.Point(4, 175)
-        Me.Panel3.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.Panel3.Margin = New System.Windows.Forms.Padding(4)
         Me.Panel3.Name = "Panel3"
         Me.Panel3.Size = New System.Drawing.Size(1224, 438)
         Me.Panel3.TabIndex = 2
@@ -267,7 +271,7 @@ Partial Class ScaffoldHistoryByJobAndUnit
         Me.crvReport.Cursor = System.Windows.Forms.Cursors.Default
         Me.crvReport.Dock = System.Windows.Forms.DockStyle.Fill
         Me.crvReport.Location = New System.Drawing.Point(0, 0)
-        Me.crvReport.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.crvReport.Margin = New System.Windows.Forms.Padding(4)
         Me.crvReport.Name = "crvReport"
         Me.crvReport.Size = New System.Drawing.Size(1224, 438)
         Me.crvReport.TabIndex = 0
@@ -281,7 +285,7 @@ Partial Class ScaffoldHistoryByJobAndUnit
         Me.ClientSize = New System.Drawing.Size(1232, 617)
         Me.Controls.Add(Me.TableLayoutPanel1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
-        Me.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.Margin = New System.Windows.Forms.Padding(4)
         Me.Name = "ScaffoldHistoryByJobAndUnit"
         Me.Text = "ScaffoldHistoryByJobAndUnit"
         Me.TableLayoutPanel1.ResumeLayout(False)
