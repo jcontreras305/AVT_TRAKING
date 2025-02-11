@@ -7,7 +7,7 @@ Public Class MainFrom
     Public closeMainForm As Boolean = False
     Public arrayButtons() As String = {"Clients", "Employees", "Work Codes", "Material", "Others", "Reports", "Estimation", "Backup", "System"}
     Private Sub MainFrom_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-
+        validAccess(loginUser)
     End Sub
     Public Function validAccess(ByVal lUser As Users) As Boolean
         Dim showNextPanel As Boolean = False

@@ -31,14 +31,13 @@ Public Class Login
             End While
             If flagConnected Then
                 listImg = mtdOther.llenarComboImage(cmbImagenes)
-
+                cmbImagenes.Text = ""
                 If listImg.Count > 0 Then
                     tmrReels.Enabled = True
                 End If
                 mtdCompany.cargarDatos()
                 If listImg IsNot Nothing Then
                     cmbImagenes.SelectedIndex = 0
-                    'cmbImagenes.SelectedItem = cmbImagenes.Items(-1)
                     cmbImagenes.Text = ""
                 End If
             End If
@@ -74,9 +73,10 @@ Public Class Login
                             a.pcbLogoMain.Image = mtdCompany.img
                         End If
                         If listImg IsNot Nothing And listImg.Count > 0 Then
-                            Dim arrayByte As Byte() = listImg(cmbImagenes.SelectedIndex)
+                            Dim arrayByte As Byte() = listImg(If(cmbImagenes.SelectedIndex = -1, 0, cmbImagenes.SelectedIndex))
                             a.imageClientLogin = BytetoImage(arrayByte)
-                            Client.selectClient(cmbImagenes.Items(cmbImagenes.SelectedIndex))
+                            a.loginUser = nUser
+                            Client.selectClient(If(cmbImagenes.SelectedIndex = -1, cmbImagenes.Items(0), cmbImagenes.Items(cmbImagenes.SelectedIndex)))
                             Client.selectFillClientTable()
                         End If
                         If nUser.ListAccess IsNot Nothing Then

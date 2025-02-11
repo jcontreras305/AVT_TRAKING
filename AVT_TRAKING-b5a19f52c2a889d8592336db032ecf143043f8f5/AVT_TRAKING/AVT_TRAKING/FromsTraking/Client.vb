@@ -139,7 +139,8 @@ Module Client
     Public Sub selectClient(ByVal Name As String)
         Try
             con.conectar()
-            Dim cmd As New SqlCommand("Select idClient, numberClient, companyName , firstName , middleName , lastName , photo, ha.avenue , ha.city ,ha.providence,ha.postalCode ,ct.phoneNumber1 from clients as cl left join HomeAddress as ha on cl.idHomeAddress = ha.idHomeAdress left join contact as ct on cl.idContact = ct.idContact where cl.companyName like '" + Name + "'", con.conn)
+            Dim arraycl As String() = Name.Split(" ")
+            Dim cmd As New SqlCommand("Select idClient, numberClient, companyName , firstName , middleName , lastName , photo, ha.avenue , ha.city ,ha.providence,ha.postalCode ,ct.phoneNumber1 from clients as cl left join HomeAddress as ha on cl.idHomeAddress = ha.idHomeAdress left join contact as ct on cl.idContact = ct.idContact where cl.numberClient =" + arraycl(0), con.conn)
             Dim dr As SqlDataReader = cmd.ExecuteReader()
             While dr.Read()
                 idClient = dr("idClient")
