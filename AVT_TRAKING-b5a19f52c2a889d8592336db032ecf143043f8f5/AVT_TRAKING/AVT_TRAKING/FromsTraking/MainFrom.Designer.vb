@@ -72,8 +72,9 @@ Partial Class MainFrom
         Me.TitleBar.Controls.Add(Me.Label1)
         Me.TitleBar.Dock = System.Windows.Forms.DockStyle.Top
         Me.TitleBar.Location = New System.Drawing.Point(0, 0)
+        Me.TitleBar.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.TitleBar.Name = "TitleBar"
-        Me.TitleBar.Size = New System.Drawing.Size(1028, 25)
+        Me.TitleBar.Size = New System.Drawing.Size(1371, 31)
         Me.TitleBar.TabIndex = 6
         '
         'Label1
@@ -81,9 +82,10 @@ Partial Class MainFrom
         Me.Label1.AutoSize = True
         Me.Label1.Font = New System.Drawing.Font("Verdana", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label1.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.Label1.Location = New System.Drawing.Point(10, 4)
+        Me.Label1.Location = New System.Drawing.Point(13, 5)
+        Me.Label1.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(102, 18)
+        Me.Label1.Size = New System.Drawing.Size(132, 25)
         Me.Label1.TabIndex = 4
         Me.Label1.Text = "Main Menu"
         '
@@ -92,9 +94,10 @@ Partial Class MainFrom
         Me.Panel2.BackColor = System.Drawing.Color.FromArgb(CType(CType(49, Byte), Integer), CType(CType(62, Byte), Integer), CType(CType(86, Byte), Integer))
         Me.Panel2.Controls.Add(Me.TableLayoutPanel2)
         Me.Panel2.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel2.Location = New System.Drawing.Point(3, 3)
+        Me.Panel2.Location = New System.Drawing.Point(4, 4)
+        Me.Panel2.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(194, 632)
+        Me.Panel2.Size = New System.Drawing.Size(259, 777)
         Me.Panel2.TabIndex = 6
         '
         'TableLayoutPanel2
@@ -106,12 +109,13 @@ Partial Class MainFrom
         Me.TableLayoutPanel2.Controls.Add(Me.Panel16, 0, 1)
         Me.TableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill
         Me.TableLayoutPanel2.Location = New System.Drawing.Point(0, 0)
+        Me.TableLayoutPanel2.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.TableLayoutPanel2.Name = "TableLayoutPanel2"
         Me.TableLayoutPanel2.RowCount = 3
-        Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 98.0!))
-        Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 37.0!))
+        Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 121.0!))
+        Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 46.0!))
         Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-        Me.TableLayoutPanel2.Size = New System.Drawing.Size(194, 632)
+        Me.TableLayoutPanel2.Size = New System.Drawing.Size(259, 777)
         Me.TableLayoutPanel2.TabIndex = 11
         '
         'pnlButtons
@@ -135,9 +139,10 @@ Partial Class MainFrom
         Me.pnlButtons.Controls.Add(Me.Panel5)
         Me.pnlButtons.Controls.Add(Me.btnClients)
         Me.pnlButtons.Controls.Add(Me.Panel10)
-        Me.pnlButtons.Location = New System.Drawing.Point(3, 138)
+        Me.pnlButtons.Location = New System.Drawing.Point(4, 171)
+        Me.pnlButtons.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.pnlButtons.Name = "pnlButtons"
-        Me.pnlButtons.Size = New System.Drawing.Size(188, 491)
+        Me.pnlButtons.Size = New System.Drawing.Size(251, 602)
         Me.pnlButtons.TabIndex = 11
         '
         'Button3
@@ -151,10 +156,10 @@ Partial Class MainFrom
         Me.Button3.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.Button3.Image = Global.AVT_TRAKING.My.Resources.Resources.setup
         Me.Button3.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.Button3.Location = New System.Drawing.Point(0, 433)
-        Me.Button3.Margin = New System.Windows.Forms.Padding(2)
+        Me.Button3.Location = New System.Drawing.Point(0, 529)
+        Me.Button3.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.Button3.Name = "Button3"
-        Me.Button3.Size = New System.Drawing.Size(188, 45)
+        Me.Button3.Size = New System.Drawing.Size(251, 55)
         Me.Button3.TabIndex = 18
         Me.Button3.Text = "System"
         Me.Button3.UseVisualStyleBackColor = True
@@ -163,9 +168,10 @@ Partial Class MainFrom
         '
         Me.Panel15.BackColor = System.Drawing.Color.RoyalBlue
         Me.Panel15.Dock = System.Windows.Forms.DockStyle.Top
-        Me.Panel15.Location = New System.Drawing.Point(0, 428)
+        Me.Panel15.Location = New System.Drawing.Point(0, 523)
+        Me.Panel15.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.Panel15.Name = "Panel15"
-        Me.Panel15.Size = New System.Drawing.Size(188, 5)
+        Me.Panel15.Size = New System.Drawing.Size(251, 6)
         Me.Panel15.TabIndex = 17
         '
         'Button1
@@ -179,10 +185,10 @@ Partial Class MainFrom
         Me.Button1.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.Button1.Image = Global.AVT_TRAKING.My.Resources.Resources.time
         Me.Button1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.Button1.Location = New System.Drawing.Point(0, 383)
-        Me.Button1.Margin = New System.Windows.Forms.Padding(2)
+        Me.Button1.Location = New System.Drawing.Point(0, 468)
+        Me.Button1.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(188, 45)
+        Me.Button1.Size = New System.Drawing.Size(251, 55)
         Me.Button1.TabIndex = 16
         Me.Button1.Text = " Backup"
         Me.Button1.UseVisualStyleBackColor = True
@@ -191,9 +197,10 @@ Partial Class MainFrom
         '
         Me.Panel14.BackColor = System.Drawing.Color.RoyalBlue
         Me.Panel14.Dock = System.Windows.Forms.DockStyle.Top
-        Me.Panel14.Location = New System.Drawing.Point(0, 378)
+        Me.Panel14.Location = New System.Drawing.Point(0, 462)
+        Me.Panel14.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.Panel14.Name = "Panel14"
-        Me.Panel14.Size = New System.Drawing.Size(188, 5)
+        Me.Panel14.Size = New System.Drawing.Size(251, 6)
         Me.Panel14.TabIndex = 15
         '
         'btnEstimation
@@ -207,10 +214,10 @@ Partial Class MainFrom
         Me.btnEstimation.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.btnEstimation.Image = Global.AVT_TRAKING.My.Resources.Resources.catsemployee
         Me.btnEstimation.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnEstimation.Location = New System.Drawing.Point(0, 333)
-        Me.btnEstimation.Margin = New System.Windows.Forms.Padding(2)
+        Me.btnEstimation.Location = New System.Drawing.Point(0, 407)
+        Me.btnEstimation.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.btnEstimation.Name = "btnEstimation"
-        Me.btnEstimation.Size = New System.Drawing.Size(188, 45)
+        Me.btnEstimation.Size = New System.Drawing.Size(251, 55)
         Me.btnEstimation.TabIndex = 14
         Me.btnEstimation.Text = "    Estimation"
         Me.btnEstimation.UseVisualStyleBackColor = True
@@ -219,9 +226,10 @@ Partial Class MainFrom
         '
         Me.Panel13.BackColor = System.Drawing.Color.RoyalBlue
         Me.Panel13.Dock = System.Windows.Forms.DockStyle.Top
-        Me.Panel13.Location = New System.Drawing.Point(0, 328)
+        Me.Panel13.Location = New System.Drawing.Point(0, 401)
+        Me.Panel13.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.Panel13.Name = "Panel13"
-        Me.Panel13.Size = New System.Drawing.Size(188, 5)
+        Me.Panel13.Size = New System.Drawing.Size(251, 6)
         Me.Panel13.TabIndex = 13
         '
         'btnReports
@@ -235,10 +243,10 @@ Partial Class MainFrom
         Me.btnReports.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.btnReports.Image = Global.AVT_TRAKING.My.Resources.Resources.reportMenu
         Me.btnReports.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnReports.Location = New System.Drawing.Point(0, 283)
-        Me.btnReports.Margin = New System.Windows.Forms.Padding(2)
+        Me.btnReports.Location = New System.Drawing.Point(0, 346)
+        Me.btnReports.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.btnReports.Name = "btnReports"
-        Me.btnReports.Size = New System.Drawing.Size(188, 45)
+        Me.btnReports.Size = New System.Drawing.Size(251, 55)
         Me.btnReports.TabIndex = 12
         Me.btnReports.Text = "   Reports"
         Me.btnReports.UseVisualStyleBackColor = True
@@ -247,9 +255,10 @@ Partial Class MainFrom
         '
         Me.Panel11.BackColor = System.Drawing.Color.RoyalBlue
         Me.Panel11.Dock = System.Windows.Forms.DockStyle.Top
-        Me.Panel11.Location = New System.Drawing.Point(0, 278)
+        Me.Panel11.Location = New System.Drawing.Point(0, 340)
+        Me.Panel11.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.Panel11.Name = "Panel11"
-        Me.Panel11.Size = New System.Drawing.Size(188, 5)
+        Me.Panel11.Size = New System.Drawing.Size(251, 6)
         Me.Panel11.TabIndex = 11
         '
         'tbnoOthers
@@ -263,10 +272,10 @@ Partial Class MainFrom
         Me.tbnoOthers.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.tbnoOthers.Image = Global.AVT_TRAKING.My.Resources.Resources.options
         Me.tbnoOthers.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.tbnoOthers.Location = New System.Drawing.Point(0, 233)
-        Me.tbnoOthers.Margin = New System.Windows.Forms.Padding(2)
+        Me.tbnoOthers.Location = New System.Drawing.Point(0, 285)
+        Me.tbnoOthers.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.tbnoOthers.Name = "tbnoOthers"
-        Me.tbnoOthers.Size = New System.Drawing.Size(188, 45)
+        Me.tbnoOthers.Size = New System.Drawing.Size(251, 55)
         Me.tbnoOthers.TabIndex = 10
         Me.tbnoOthers.Text = "Others"
         Me.tbnoOthers.UseVisualStyleBackColor = True
@@ -275,9 +284,10 @@ Partial Class MainFrom
         '
         Me.Panel8.BackColor = System.Drawing.Color.RoyalBlue
         Me.Panel8.Dock = System.Windows.Forms.DockStyle.Top
-        Me.Panel8.Location = New System.Drawing.Point(0, 228)
+        Me.Panel8.Location = New System.Drawing.Point(0, 279)
+        Me.Panel8.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.Panel8.Name = "Panel8"
-        Me.Panel8.Size = New System.Drawing.Size(188, 5)
+        Me.Panel8.Size = New System.Drawing.Size(251, 6)
         Me.Panel8.TabIndex = 9
         '
         'btnMaterials
@@ -291,10 +301,10 @@ Partial Class MainFrom
         Me.btnMaterials.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.btnMaterials.Image = Global.AVT_TRAKING.My.Resources.Resources.materials
         Me.btnMaterials.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnMaterials.Location = New System.Drawing.Point(0, 176)
-        Me.btnMaterials.Margin = New System.Windows.Forms.Padding(2)
+        Me.btnMaterials.Location = New System.Drawing.Point(0, 215)
+        Me.btnMaterials.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.btnMaterials.Name = "btnMaterials"
-        Me.btnMaterials.Size = New System.Drawing.Size(188, 52)
+        Me.btnMaterials.Size = New System.Drawing.Size(251, 64)
         Me.btnMaterials.TabIndex = 8
         Me.btnMaterials.Text = "   Material"
         Me.btnMaterials.UseVisualStyleBackColor = True
@@ -303,9 +313,10 @@ Partial Class MainFrom
         '
         Me.Panel7.BackColor = System.Drawing.Color.RoyalBlue
         Me.Panel7.Dock = System.Windows.Forms.DockStyle.Top
-        Me.Panel7.Location = New System.Drawing.Point(0, 171)
+        Me.Panel7.Location = New System.Drawing.Point(0, 209)
+        Me.Panel7.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.Panel7.Name = "Panel7"
-        Me.Panel7.Size = New System.Drawing.Size(188, 5)
+        Me.Panel7.Size = New System.Drawing.Size(251, 6)
         Me.Panel7.TabIndex = 7
         '
         'btnWorkCodes
@@ -319,10 +330,10 @@ Partial Class MainFrom
         Me.btnWorkCodes.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.btnWorkCodes.Image = Global.AVT_TRAKING.My.Resources.Resources.code
         Me.btnWorkCodes.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnWorkCodes.Location = New System.Drawing.Point(0, 113)
-        Me.btnWorkCodes.Margin = New System.Windows.Forms.Padding(2)
+        Me.btnWorkCodes.Location = New System.Drawing.Point(0, 138)
+        Me.btnWorkCodes.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.btnWorkCodes.Name = "btnWorkCodes"
-        Me.btnWorkCodes.Size = New System.Drawing.Size(188, 58)
+        Me.btnWorkCodes.Size = New System.Drawing.Size(251, 71)
         Me.btnWorkCodes.TabIndex = 6
         Me.btnWorkCodes.Text = "       Client Projects"
         Me.btnWorkCodes.UseVisualStyleBackColor = True
@@ -331,9 +342,10 @@ Partial Class MainFrom
         '
         Me.Panel6.BackColor = System.Drawing.Color.RoyalBlue
         Me.Panel6.Dock = System.Windows.Forms.DockStyle.Top
-        Me.Panel6.Location = New System.Drawing.Point(0, 108)
+        Me.Panel6.Location = New System.Drawing.Point(0, 132)
+        Me.Panel6.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.Panel6.Name = "Panel6"
-        Me.Panel6.Size = New System.Drawing.Size(188, 5)
+        Me.Panel6.Size = New System.Drawing.Size(251, 6)
         Me.Panel6.TabIndex = 5
         '
         'btnEmployees
@@ -347,10 +359,10 @@ Partial Class MainFrom
         Me.btnEmployees.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.btnEmployees.Image = Global.AVT_TRAKING.My.Resources.Resources.employee
         Me.btnEmployees.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnEmployees.Location = New System.Drawing.Point(0, 63)
-        Me.btnEmployees.Margin = New System.Windows.Forms.Padding(2)
+        Me.btnEmployees.Location = New System.Drawing.Point(0, 77)
+        Me.btnEmployees.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.btnEmployees.Name = "btnEmployees"
-        Me.btnEmployees.Size = New System.Drawing.Size(188, 45)
+        Me.btnEmployees.Size = New System.Drawing.Size(251, 55)
         Me.btnEmployees.TabIndex = 4
         Me.btnEmployees.Text = "Employees"
         Me.btnEmployees.UseVisualStyleBackColor = True
@@ -359,9 +371,10 @@ Partial Class MainFrom
         '
         Me.Panel5.BackColor = System.Drawing.Color.RoyalBlue
         Me.Panel5.Dock = System.Windows.Forms.DockStyle.Top
-        Me.Panel5.Location = New System.Drawing.Point(0, 58)
+        Me.Panel5.Location = New System.Drawing.Point(0, 71)
+        Me.Panel5.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.Panel5.Name = "Panel5"
-        Me.Panel5.Size = New System.Drawing.Size(188, 5)
+        Me.Panel5.Size = New System.Drawing.Size(251, 6)
         Me.Panel5.TabIndex = 3
         '
         'btnClients
@@ -375,10 +388,10 @@ Partial Class MainFrom
         Me.btnClients.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.btnClients.Image = Global.AVT_TRAKING.My.Resources.Resources.crm
         Me.btnClients.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnClients.Location = New System.Drawing.Point(0, 5)
-        Me.btnClients.Margin = New System.Windows.Forms.Padding(2)
+        Me.btnClients.Location = New System.Drawing.Point(0, 6)
+        Me.btnClients.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.btnClients.Name = "btnClients"
-        Me.btnClients.Size = New System.Drawing.Size(188, 53)
+        Me.btnClients.Size = New System.Drawing.Size(251, 65)
         Me.btnClients.TabIndex = 2
         Me.btnClients.Text = "Clients"
         Me.btnClients.UseVisualStyleBackColor = True
@@ -388,16 +401,18 @@ Partial Class MainFrom
         Me.Panel10.BackColor = System.Drawing.Color.RoyalBlue
         Me.Panel10.Dock = System.Windows.Forms.DockStyle.Top
         Me.Panel10.Location = New System.Drawing.Point(0, 0)
+        Me.Panel10.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.Panel10.Name = "Panel10"
-        Me.Panel10.Size = New System.Drawing.Size(188, 5)
+        Me.Panel10.Size = New System.Drawing.Size(251, 6)
         Me.Panel10.TabIndex = 1
         '
         'pcbLogoMain
         '
         Me.pcbLogoMain.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.pcbLogoMain.Location = New System.Drawing.Point(3, 3)
+        Me.pcbLogoMain.Location = New System.Drawing.Point(4, 4)
+        Me.pcbLogoMain.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.pcbLogoMain.Name = "pcbLogoMain"
-        Me.pcbLogoMain.Size = New System.Drawing.Size(188, 92)
+        Me.pcbLogoMain.Size = New System.Drawing.Size(251, 113)
         Me.pcbLogoMain.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
         Me.pcbLogoMain.TabIndex = 10
         Me.pcbLogoMain.TabStop = False
@@ -408,33 +423,37 @@ Partial Class MainFrom
         Me.Panel16.Controls.Add(Me.Panel9)
         Me.Panel16.Controls.Add(Me.Panel3)
         Me.Panel16.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel16.Location = New System.Drawing.Point(3, 101)
+        Me.Panel16.Location = New System.Drawing.Point(4, 125)
+        Me.Panel16.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.Panel16.Name = "Panel16"
-        Me.Panel16.Size = New System.Drawing.Size(188, 31)
+        Me.Panel16.Size = New System.Drawing.Size(251, 38)
         Me.Panel16.TabIndex = 11
         '
         'Panel4
         '
         Me.Panel4.BackColor = System.Drawing.Color.RoyalBlue
-        Me.Panel4.Location = New System.Drawing.Point(87, 23)
+        Me.Panel4.Location = New System.Drawing.Point(116, 28)
+        Me.Panel4.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.Panel4.Name = "Panel4"
-        Me.Panel4.Size = New System.Drawing.Size(104, 5)
+        Me.Panel4.Size = New System.Drawing.Size(139, 6)
         Me.Panel4.TabIndex = 5
         '
         'Panel9
         '
         Me.Panel9.BackColor = System.Drawing.Color.RoyalBlue
-        Me.Panel9.Location = New System.Drawing.Point(165, 3)
+        Me.Panel9.Location = New System.Drawing.Point(220, 4)
+        Me.Panel9.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.Panel9.Name = "Panel9"
-        Me.Panel9.Size = New System.Drawing.Size(26, 5)
+        Me.Panel9.Size = New System.Drawing.Size(35, 6)
         Me.Panel9.TabIndex = 7
         '
         'Panel3
         '
         Me.Panel3.BackColor = System.Drawing.Color.RoyalBlue
-        Me.Panel3.Location = New System.Drawing.Point(136, 12)
+        Me.Panel3.Location = New System.Drawing.Point(181, 15)
+        Me.Panel3.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.Panel3.Name = "Panel3"
-        Me.Panel3.Size = New System.Drawing.Size(52, 5)
+        Me.Panel3.Size = New System.Drawing.Size(69, 6)
         Me.Panel3.TabIndex = 6
         '
         'Panel1
@@ -443,24 +462,26 @@ Partial Class MainFrom
         Me.Panel1.Controls.Add(Me.TitleBar)
         Me.Panel1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel1.Location = New System.Drawing.Point(0, 0)
+        Me.Panel1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(1028, 663)
+        Me.Panel1.Size = New System.Drawing.Size(1371, 816)
         Me.Panel1.TabIndex = 5
         '
         'TableLayoutPanel1
         '
         Me.TableLayoutPanel1.BackColor = System.Drawing.Color.FromArgb(CType(CType(49, Byte), Integer), CType(CType(62, Byte), Integer), CType(CType(86, Byte), Integer))
         Me.TableLayoutPanel1.ColumnCount = 2
-        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 200.0!))
+        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 267.0!))
         Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
         Me.TableLayoutPanel1.Controls.Add(Me.Panel2, 0, 0)
         Me.TableLayoutPanel1.Controls.Add(Me.PanelChildForm, 1, 0)
         Me.TableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.TableLayoutPanel1.Location = New System.Drawing.Point(0, 25)
+        Me.TableLayoutPanel1.Location = New System.Drawing.Point(0, 31)
+        Me.TableLayoutPanel1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
         Me.TableLayoutPanel1.RowCount = 1
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
-        Me.TableLayoutPanel1.Size = New System.Drawing.Size(1028, 638)
+        Me.TableLayoutPanel1.Size = New System.Drawing.Size(1371, 785)
         Me.TableLayoutPanel1.TabIndex = 11
         '
         'PanelChildForm
@@ -468,9 +489,10 @@ Partial Class MainFrom
         Me.PanelChildForm.BackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
         Me.PanelChildForm.Controls.Add(Me.Button2)
         Me.PanelChildForm.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.PanelChildForm.Location = New System.Drawing.Point(203, 3)
+        Me.PanelChildForm.Location = New System.Drawing.Point(271, 4)
+        Me.PanelChildForm.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.PanelChildForm.Name = "PanelChildForm"
-        Me.PanelChildForm.Size = New System.Drawing.Size(822, 632)
+        Me.PanelChildForm.Size = New System.Drawing.Size(1096, 777)
         Me.PanelChildForm.TabIndex = 7
         '
         'Button2
@@ -478,23 +500,23 @@ Partial Class MainFrom
         Me.Button2.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.Button2.ForeColor = System.Drawing.Color.Red
         Me.Button2.Image = Global.AVT_TRAKING.My.Resources.Resources._exit
-        Me.Button2.Location = New System.Drawing.Point(780, 2)
-        Me.Button2.Margin = New System.Windows.Forms.Padding(2)
+        Me.Button2.Location = New System.Drawing.Point(1040, 2)
+        Me.Button2.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.Button2.Name = "Button2"
-        Me.Button2.Size = New System.Drawing.Size(39, 46)
+        Me.Button2.Size = New System.Drawing.Size(52, 57)
         Me.Button2.TabIndex = 4
         Me.Button2.UseVisualStyleBackColor = True
         '
         'MainFrom
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer), CType(CType(224, Byte), Integer))
-        Me.ClientSize = New System.Drawing.Size(1028, 663)
+        Me.ClientSize = New System.Drawing.Size(1371, 816)
         Me.Controls.Add(Me.Panel1)
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.IsMdiContainer = True
-        Me.Margin = New System.Windows.Forms.Padding(2)
+        Me.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.Name = "MainFrom"
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.TitleBar.ResumeLayout(False)

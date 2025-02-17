@@ -12,7 +12,7 @@ Module metodosGlobales
     ''' <summary>
     ''' Llena un combobox mostrando los clientes habilitados para el usuario en uso.
     ''' </summary>
-    ''' <param name="cmbJobNo"></param>
+    ''' <param name="cmbClient"></param>
     ''' <returns></returns>
     Public Function llenarComboClientByUser(ByVal cmbClient As ComboBox) As Boolean
         Try
@@ -50,7 +50,8 @@ order by CONCAT( numberClient,' ',companyName) asc", con.conn)
     ''' <summary>
     ''' Llena un combobox mostrando los clientes habilitados para el usuario en uso.
     ''' </summary>
-    ''' <param name="cmbJobNo"></param>
+    ''' <param name="cmbClient"></param>
+    ''' <param name="username"></param>
     ''' <returns></returns>
     Public Function llenarComboClientByUser(ByVal cmbClient As ComboBox, ByVal username As String) As List(Of Byte())
         Try
