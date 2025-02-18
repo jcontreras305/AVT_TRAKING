@@ -381,7 +381,7 @@ Public Class wrongHoursMetodos
                 inner join employees as emp on emp.idEmployee= hw.idEmployee
                 inner join userClientAccess as ua on ua.idClient = cl.idClient
 				inner join users as us on us.idUsers = ua.idUsers
-                where us.nameUser = '" + userNameMTG + "' and ua.access = 1" + If(allClient, " cl.numberClient = " + idClient + If(allJobs, " and jb.jobNo = " + job, ""), "") + If(dateOption = 1, If(allClient, " and ", "") + " and hw.dateWorked between '" + validaFechaParaSQl(startDate) + "' and '" + validaFechaParaSQl(endDate) + "'", If(allClient, " and ", "") + " hw.dayInserted between '" + validaFechaParaSQl(startDate) + "' and '" + validaFechaParaSQl(endDate) + "'") + If(allEmployee, " and  emp.numberEmploye = " + Employee, "") + If(allWO, " and (CONCAT(wo.idWO , '-' ,tk.task) like '" + WO + "' or CONCAT(wo.idWO , ' ' ,tk.task)like '" + WO + "' ) ", ""), conn)
+                where us.nameUser = '" + userNameMTG + "' and ua.access = 1" + If(allClient, " and cl.numberClient = " + idClient + If(allJobs, " and jb.jobNo = " + job, ""), "") + If(dateOption = 1, " and hw.dateWorked between '" + validaFechaParaSQl(startDate) + "' and '" + validaFechaParaSQl(endDate) + "'", " and hw.dayInserted between '" + validaFechaParaSQl(startDate) + "' and '" + validaFechaParaSQl(endDate) + "'") + If(allEmployee, " and  emp.numberEmploye = " + Employee, "") + If(allWO, " and (CONCAT(wo.idWO , '-' ,tk.task) like '" + WO + "' or CONCAT(wo.idWO , ' ' ,tk.task)like '" + WO + "' ) ", ""), conn)
             If cmd.ExecuteNonQuery Then
                 Dim dt As New DataTable
                 Dim da As New SqlDataAdapter(cmd)

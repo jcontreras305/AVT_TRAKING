@@ -106,8 +106,10 @@ Public Class ConnectioDB
     ''' <returns></returns>
     Public Function desconectar() 'Esta funcion cierra la conexion (es por seguridad no tenerla siempres abierta solo en los casos necesarios)
         Try
-            If (conn.State = ConnectionState.Open) Then
-                conn.Close()
+            If conn IsNot Nothing Then
+                If (conn.State = ConnectionState.Open) Then
+                    conn.Close()
+                End If
             End If
         Catch ex As Exception
             MsgBox(ex.Message)
