@@ -571,7 +571,7 @@ BEGIN
 	drop table PBI.[Scaffold]
 END
 
-select wo.idWO as 'Labor WO / Network #',
+select CONCAT(wo.idWO,'-',tk.task) as 'Labor WO / Network #',
 case sj.[description] 
 	when 'Maintenance' then 'M'
 	when 'T/A' then 'T'
