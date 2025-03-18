@@ -1504,9 +1504,10 @@ order by pd.idProduct", conn)
     Public Function llenarProduct(ByVal tabla As DataTable) As Boolean
         Try
             conectar()
-            Dim cmd As New SqlCommand("select pd.idProduct  as 'ID', pd.name as 'Product Name', pd.um as 'UM',pd.class as 'Class', pd.weight as 'Weigth', pd.weightMeasure as 'Weigth Measure',pd.price as '$UM',pd.dailyRentalRate as 'Daily Rental Rate' ,pd.weeklyRentalRate as 'Weekly Rental Rate', pd.monthlyRentalRate as 'Monthly Rental Rate' ,
-quantity as 'QTY' , pd.QID, PLF, PSQF
-from product as pd 
+            Dim cmd As New SqlCommand("select pd.idProduct  as 'ID',pd.name as 'Product Name', pd.um as 'UM',pd.class as 'Class', pd.weight as 'Weigth', pd.weightMeasure as 'Weigth Measure',pd.price as '$UM',pd.dailyRentalRate as 'Daily Rental Rate' ,pd.weeklyRentalRate as 'Weekly Rental Rate', pd.monthlyRentalRate as 'Monthly Rental Rate' ,
+quantity as 'QTY' , pd.QID, PLF, PSQF, pdj.jobNo as 'JobNo'
+from productJob as pdj
+inner join product as pd on pd.idProduct = pdj.idProduct 
 inner join unitMeassurements as um on pd.um = um.um
 inner join classification as cl on cl.class = pd.class
 order by pd.idProduct", conn)
@@ -2471,7 +2472,7 @@ end", conn)
     Public Function llenarScaffold(ByVal tabla As DataTable, ByVal idCliente As String) As Boolean
         Try
             conectar()
-            Dim cmd As New SqlCommand("select tag, st.idAux,idJobCat,idArea,idSubJob, CONCAT(wo.idWO,'-',tk.task)as 'WO',st.status from scaffoldTraking as st
+            Dim cmd As New SqlCommand("select tag, st.idAux,idJobCat,idArea,idSubJob, CONCAT(wo.idWO,'-',tk.task)as 'WO',st.status,jb.jobNo from scaffoldTraking as st
 inner join task as tk on tk.idAux = st.idAux
 inner join workOrder as wo on tk.idAuxWO = wo.idAuxWO inner join projectOrder as po on po.idPO = wo.idPO and wo.jobNo = po.jobNo inner join job as jb on jb.jobNo = po.jobNo" +
 If(idCliente = "", "", " where jb.idClient='" + idCliente + "'"), conn)

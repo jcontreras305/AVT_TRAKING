@@ -2,7 +2,7 @@
 Imports System.Globalization
 Imports System.Runtime.InteropServices
 Public Class TagsValidationTable
-    Public IdCliente As String
+    Public IdCliente As String ' = "FA341EFA-3B42-42DE-89A1-C96FFCA0D128"
     Dim mtdScaffold As New MetodosScaffold
     Dim tblClassification As New Data.DataTable
     Dim tblTags As New Data.DataTable
@@ -18,6 +18,7 @@ Public Class TagsValidationTable
     Public fechaStart As Date
     Private flagClick As Boolean
     Private Sub TagsValidationTable_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
         flagClick = False
         cmbDatos.Enabled = False
         txtFecha.Enabled = False
@@ -117,6 +118,22 @@ Public Class TagsValidationTable
             Return False
         End Try
     End Function
+    Private Function existPrudcutJob(ByVal idProduct As String, ByVal tag As String) As Boolean
+        Dim exist As Boolean = False
+        Dim listProjectsRows() As Data.DataRow = tblTags.Select("tag = " + CStr(tag))
+        If listProjectsRows.Length > 0 Then
+            Dim listProductRows() As Data.DataRow = tblProducts.Select("ID = " + CStr(idProduct) + " and JobNo = " + CStr(listProjectsRows(0).ItemArray(7)))
+            If listProductRows.Length > 0 Then
+                exist = True
+            Else
+                exist = False
+            End If
+        Else
+            exist = False
+        End If
+        Return exist
+    End Function
+
     Private Function existQuantity(ByVal idProduct As String) As Boolean
         Dim exist As Boolean = False
         Dim listRows() As Data.DataRow = tblProducts.Select("ID = " + CStr(idProduct))
@@ -538,7 +555,7 @@ Public Class TagsValidationTable
                 row.Cells("clmErrorP").Value = "The tag does not exist."
                 tblProductSheet.Columns("clmErrorP").Visible = True
             Else
-                If Not existTagExcel(row.Cells("clmTagID").Value) Then 'valdamos que este en la lista a insetar
+                If Not existTagExcel(row.Cells("clmTagID").Value) Then 'validamos que este en la lista a insetar
                     If Not existTag(row.Cells("clmTagID").Value) Then ' o que este ya insertado
                         row.Cells("clmTagID").Style.BackColor = Color.Red
                         tagAfter(0) = row.Cells("clmTagID").Value
@@ -552,6 +569,12 @@ Public Class TagsValidationTable
             If Not existProduct(row.Cells("clmProductID").Value) Then
                 row.Cells("clmProductID").Style.BackColor = Color.Red
                 row.Cells("clmErrorP").Value = If(row.Cells("clmErrorP").Value <> "", row.Cells("clmErrorP").Value & ", The Product does not exist", "The Product does not exist.")
+                tblProductSheet.Columns("clmErrorP").Visible = True
+            End If
+            'validar existencias para el job Seleccionado 
+            If Not existPrudcutJob(row.Cells("clmProductID").Value, row.Cells("clmTagID").Value) Then
+                row.Cells("clmProductID").Style.BackColor = Color.Red
+                row.Cells("clmErrorP").Value = If(row.Cells("clmErrorP").Value <> "", row.Cells("clmErrorP").Value & ", The Product does not available to this Project.", "The Product does not available to this Project.")
                 tblProductSheet.Columns("clmErrorP").Visible = True
             End If
             'validar las existencias 
