@@ -129,11 +129,37 @@ Public Class TagsValidationTable
                 exist = False
             End If
         Else
-            exist = False
+            Dim jobNoToFind As String = buscarJobTag(tag)
+            If Not jobNoToFind = "" Then
+                Dim listProductRows() As Data.DataRow = tblProducts.Select("ID = " + CStr(idProduct) + " and JobNo = " + jobNoToFind)
+                If listProductRows.Length > 0 Then
+                    exist = True
+                Else
+                    exist = False
+                End If
+            End If
         End If
         Return exist
     End Function
-
+    Private Function buscarJobTag(ByVal IdTag As String) As String
+        Dim flag As Boolean = False
+        Dim JobNoFind As String = ""
+        For Each row As DataGridViewRow In tblTagsScaffold.Rows
+            If Not row.IsNewRow Then ' Evitar la fila nueva vacía al final del DataGridView
+                If row.Cells("TagNum").Value IsNot Nothing AndAlso row.Cells("TagNum").Value.ToString() = IdTag Then
+                    If row.Cells("JobNum").Value IsNot Nothing Then
+                        JobNoFind = row.Cells("JobNum").Value
+                        flag = True
+                    Else
+                        JobNoFind = ""
+                        flag = False
+                    End If
+                    Exit For
+                End If
+            End If
+        Next
+        Return JobNoFind
+    End Function
     Private Function existQuantity(ByVal idProduct As String) As Boolean
         Dim exist As Boolean = False
         Dim listRows() As Data.DataRow = tblProducts.Select("ID = " + CStr(idProduct))
