@@ -673,14 +673,14 @@ Public Class Midwest
         Try
             Dim dr As DialogResult = MessageBox.Show("Would you like to create a new file select Yes." + vbCrLf + "If you prefer overwrite am existing file select No.", "Message", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question)
             If dr = DialogResult.Yes Then
-                createExcel("Midwest " & cmbClients.Items(cmbClients.SelectedIndex).ToString.Remove(0, 4) & " " & cmbYear.Items(cmbYear.SelectedIndex))
+                createExcel(cmbClients.Items(cmbClients.SelectedIndex).ToString.Remove(0, 4) & " " & cmbYear.Items(cmbYear.SelectedIndex))
             ElseIf dr = DialogResult.No Then
                 Dim opFile As New OpenFileDialog
                 Dim flag As Boolean = False
                 While flag = False
                     opFile.ShowDialog()
                     If opFile.CheckFileExists Then
-                        If overWriteExcel(opFile.FileName, "Midwest " & cmbClients.Items(cmbClients.SelectedIndex).ToString.Remove(0, 4) & " " & cmbYear.Items(cmbYear.SelectedIndex)) Then
+                        If overWriteExcel(opFile.FileName, cmbClients.Items(cmbClients.SelectedIndex).ToString.Remove(0, 4) & " " & cmbYear.Items(cmbYear.SelectedIndex)) Then
                             flag = True
                         End If
                     End If
