@@ -892,17 +892,18 @@ OPTION (MAXRECURSION 0)", conn)
             conectar()
             Dim cmd As New SqlCommand("SELECT Client, " + dateWeekendWorked + "
 FROM (
-    select distinct
+    select 
 	cl.companyName as 'Client',
 	CONVERT(nvarchar, iif(DATEPART(DW, hw.dateworked)=1, hw.dateworked, DATEADD(DAY,8-DATEPART(DW, hw.dateworked),hw.dateWorked)),110) as 'Weekend',
-	sum(hw.hoursOT + hoursOT) over (partition by hw.dateWorked,CONVERT(nvarchar, iif(DATEPART(DW, hw.dateworked)=1, hw.dateworked, DATEADD(DAY,8-DATEPART(DW, hw.dateworked),hw.dateWorked)),110) ) as 'Total'
+	sum(hw.hourssT + hoursOT) as 'Total'
 from hoursWorked  as hw
 inner join task as tk on tk.idAux = hw.idAux
 inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO
 inner join projectOrder as po on po.idPO = wo.idPO and po.jobNo = wo.jobNo
 inner join job  as jb on jb.jobNo = po .jobNo
 inner join clients as cl on cl.idClient = jb.idClient
-where cl.numberClient = " + numberClient + " and hw.dateWorked >= '01-01-" + Year + "'
+where cl.numberClient = " + numberClient + " and Year(hw.dateWorked) = " + Year + "
+group by cl.companyName ,  CONVERT(nvarchar, iif(DATEPART(DW, hw.dateworked)=1, hw.dateworked, DATEADD(DAY,8-DATEPART(DW, hw.dateworked),hw.dateWorked)),110)
 ) AS SourceTable
 PIVOT (
     SUM(Total)
@@ -940,14 +941,15 @@ FROM (
 	distinct
 	cl.companyName as 'Client',
 	CONVERT(nvarchar, iif(DATEPART(DW, exu.dateExpense)=1, exu.dateExpense, DATEADD(DAY,8-DATEPART(DW, exu.dateExpense),exu.dateExpense)),110) as 'Weekend',
-	sum(exu.amount) over (partition by exu.dateExpense,CONVERT(nvarchar, iif(DATEPART(DW, exu.dateExpense)=1, exu.dateExpense, DATEADD(DAY,8-DATEPART(DW, exu.dateExpense),exu.dateExpense)),110) ) as 'TotalEXP'
+	sum(exu.amount) as 'TotalEXP'
 from expensesUsed as exu
 inner join task as tk on tk.idAux = exu.idAux
 inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO
 inner join projectOrder as po on po.idPO = wo.idPO and po.jobNo = wo.jobNo
 inner join job as jb on jb.jobNo = po .jobNo
 inner join clients as cl on cl.idClient = jb.idClient
-where cl.numberClient = " + numberClient + " and exu.dateExpense >= '01-01-" + Year + "'
+where cl.numberClient = " + numberClient + " and year(exu.dateExpense) = " + Year + "
+group by cl.companyName , CONVERT(nvarchar, iif(DATEPART(DW, exu.dateExpense)=1, exu.dateExpense, DATEADD(DAY,8-DATEPART(DW, exu.dateExpense),exu.dateExpense)),110)
 ) AS SourceTable
 PIVOT (
     SUM(TotalEXP)
