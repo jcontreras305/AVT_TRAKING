@@ -380,4 +380,9 @@ Public Class ReportsMenu
             Return False
         End Try
     End Function
+
+    Private Sub Button39_Click(sender As Object, e As EventArgs) Handles Button39.Click
+        Dim tse As New Midwest
+        tse.ShowDialog()
+    End Sub
 End Class

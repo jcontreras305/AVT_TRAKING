@@ -691,6 +691,12 @@
       <DependentUpon>MaterialReportByPO.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Reports TimeSheet\Midwest.Designer.vb">
+      <DependentUpon>Midwest.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Reports TimeSheet\Midwest.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Reports TimeSheet\ReportAllJob.Designer.vb">
       <DependentUpon>ReportAllJob.vb</DependentUpon>
     </Compile>
@@ -1341,6 +1347,9 @@
     <EmbeddedResource Include="Reports TimeSheet\MaterialReportByPO.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>MaterialReportByPO.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports TimeSheet\Midwest.resx">
+      <DependentUpon>Midwest.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports TimeSheet\ReportAllJob.resx">
       <DependentUpon>ReportAllJob.vb</DependentUpon>
