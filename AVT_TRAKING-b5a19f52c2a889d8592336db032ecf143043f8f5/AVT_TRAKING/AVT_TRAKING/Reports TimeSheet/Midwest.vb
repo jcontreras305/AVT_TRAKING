@@ -29,7 +29,7 @@ Public Class Midwest
     <DllImport("user32.DLL", EntryPoint:="SendMessage")>
     Private Shared Sub SendMessage(hWnd As IntPtr, wMsg As Integer, wParam As Integer, lParam As Integer)
     End Sub
-    Private Sub Panel1_MouseMove(sender As Object, e As MouseEventArgs) Handles Panel1.MouseMove
+    Private Sub Panel1_MouseMove(sender As Object, e As MouseEventArgs) Handles TitleBar.MouseMove
         ReleaseCapture()
         SendMessage(Me.Handle, &H112&, &HF012&, 0)
     End Sub
@@ -49,9 +49,9 @@ Public Class Midwest
         lblMsg.Text = "Message: Obteining all hours..."
         pgbBarraDeEstado.Value = 20
         Dim dtHRS As Data.DataTable = mtdMW.selectHoursMWByClientID(cl(0), cmbYear.Items(cmbYear.SelectedIndex))
-        pgbBarraDeEstado.Value = 30
-        lblMsg.Text = "Message: Obteining all expenses..."
-        Dim dtEXP As Data.DataTable = mtdMW.selectEXPMWByClientID(cl(0), cmbYear.Items(cmbYear.SelectedIndex))
+        'pgbBarraDeEstado.Value = 30
+        'lblMsg.Text = "Message: Obteining all expenses..."
+        'Dim dtEXP As Data.DataTable = mtdMW.selectEXPMWByClientID(cl(0), cmbYear.Items(cmbYear.SelectedIndex))
         pgbBarraDeEstado.Value = 45
         lblMsg.Text = "Message: Claculating the data Hrs..."
         For Each clmDT As Data.DataColumn In dtHRS.Columns
@@ -64,28 +64,29 @@ Public Class Midwest
             lastColum = clmDT.ColumnName
         Next
         pgbBarraDeEstado.Value = 60
-        lblMsg.Text = "Message: Claculating the data exp..."
-        If dtEXP.Rows.Count > 0 Then
-            For Each clmDT As Data.DataColumn In dtEXP.Columns
-                If clmDT.ColumnName.Contains("-") Or clmDT.ColumnName.Contains("/") Then
-                    Dim indexClmTblDW As Integer = existColumn(clmDT.ColumnName) 'este es el numero de la columna de la tabla en el formulario
-                    If indexClmTblDW >= 0 Then
-                        If Not IsDBNull(dtEXP.Rows(0).Item(clmDT.ColumnName)) Then
-                            tblMW.Rows(4).Cells(indexClmTblDW).Value = dtEXP.Rows(0).Item(clmDT.ColumnName)
-                        End If
-                    End If
-                End If
-            Next
-        Else
-            For Each clmDT As Data.DataColumn In dtEXP.Columns
-                If clmDT.ColumnName.Contains("-") Or clmDT.ColumnName.Contains("/") Then
-                    Dim indexClmTblDW As Integer = existColumn(clmDT.ColumnName) 'este es el numero de la columna de la tabla en el formulario
-                    If indexClmTblDW >= 0 Then
-                        tblMW.Rows(4).Cells(indexClmTblDW).Value = 0
-                    End If
-                End If
-            Next
-        End If
+        'lblMsg.Text = "Message: Claculating the data exp..."
+        'If dtEXP.Rows.Count > 0 Then
+        'For Each clmDT As Data.DataColumn In dtEXP.Columns
+        '    If clmDT.ColumnName.Contains("-") Or clmDT.ColumnName.Contains("/") Then
+        '        Dim indexClmTblDW As Integer = existColumn(clmDT.ColumnName) 'este es el numero de la columna de la tabla en el formulario
+        '        If indexClmTblDW >= 0 Then
+        '            If Not IsDBNull(dtEXP.Rows(0).Item(clmDT.ColumnName)) Then
+        '                tblMW.Rows(4).Cells(indexClmTblDW).Value = dtEXP.Rows(0).Item(clmDT.ColumnName)
+        '            End If
+        '        End If
+        '    End If
+        'Next
+
+        'Else
+        '    For Each clmDT As Data.DataColumn In dtEXP.Columns
+        '        If clmDT.ColumnName.Contains("-") Or clmDT.ColumnName.Contains("/") Then
+        '            Dim indexClmTblDW As Integer = existColumn(clmDT.ColumnName) 'este es el numero de la columna de la tabla en el formulario
+        '            If indexClmTblDW >= 0 Then
+        '                tblMW.Rows(4).Cells(indexClmTblDW).Value = 0
+        '            End If
+        '        End If
+        '    Next
+        'End If
         pgbBarraDeEstado.Value = 70
         calculateAllF()
         calculateAllQ()
@@ -353,14 +354,25 @@ Public Class Midwest
                             Dim value As Decimal = 0
                             If tblMW.Rows(3).Cells(cell.ColumnIndex).Value IsNot Nothing And Not tblMW.Rows(3).Cells(cell.ColumnIndex).Value = 0 And Not tblMW.Rows(6).Cells(cell.ColumnIndex).Value Is Nothing Then
                                 value = Decimal.Parse(tblMW.Rows(6).Cells(cell.ColumnIndex).Value.ToString.Replace("%", "")) / 100
-                                tblMW.Rows(5).Cells(cell.ColumnIndex).Value = (tblMW.Rows(3).Cells(cell.ColumnIndex).Value * value) 'Calculamos MARGIN
+                                tblMW.Rows(5).Cells(cell.ColumnIndex).Value = Math.Round((tblMW.Rows(3).Cells(cell.ColumnIndex).Value * value), 2) 'Calculamos MARGIN
+                                tblMW.Rows(4).Cells(cell.ColumnIndex).Value = Math.Round(tblMW.Rows(3).Cells(cell.ColumnIndex).Value - tblMW.Rows(5).Cells(cell.ColumnIndex).Value, 2) 'calcualmos Expense
                             Else
                                 tblMW.Rows(5).Cells(cell.ColumnIndex).Value = value 'Calculamos MARGIN
+                                tblMW.Rows(4).Cells(cell.ColumnIndex).Value = value 'calcualmos Expense
                             End If
                         Case 4 'Expeneses (Viaticos) 
 
                         Case 5 'Margin (Margen)
-
+                            If (tblMW.Rows(3).Cells(cell.ColumnIndex).Value Is Nothing Or (tblMW.Rows(3).Cells(cell.ColumnIndex).Value = 0)) Or tblMW.Rows(5).Cells(cell.ColumnIndex).Value Is Nothing Or (tblMW.Rows(5).Cells(cell.ColumnIndex).Value = 0) Then  'calcualmos Expense
+                                tblMW.Rows(4).Cells(cell.ColumnIndex).Value = Math.Round(tblMW.Rows(3).Cells(cell.ColumnIndex).Value - tblMW.Rows(5).Cells(cell.ColumnIndex).Value)
+                            Else
+                                tblMW.Rows(4).Cells(cell.ColumnIndex).Value = Math.Round(tblMW.Rows(3).Cells(cell.ColumnIndex).Value - tblMW.Rows(5).Cells(cell.ColumnIndex).Value)
+                            End If
+                            If tblMW.Rows(2).Cells(cell.ColumnIndex).Value IsNot Nothing And Not tblMW.Rows(2).Cells(cell.ColumnIndex).Value = 0 And tblMW.Rows(5).Cells(cell.ColumnIndex).Value IsNot Nothing And Not tblMW.Rows(5).Cells(cell.ColumnIndex).Value = 0 Then 'Calculamos GM/PerHour
+                                tblMW.Rows(8).Cells(cell.ColumnIndex).Value = Math.Round((tblMW.Rows(2).Cells(cell.ColumnIndex).Value / tblMW.Rows(5).Cells(cell.ColumnIndex).Value), 2)
+                            Else
+                                tblMW.Rows(8).Cells(cell.ColumnIndex).Value = 0
+                            End If
                         Case 6 'GP%
 
                         Case 7 'REV/ Per Hour
@@ -665,8 +677,69 @@ Public Class Midwest
         If cell.RowIndex = 6 And Not cell.Value.ToString.Contains("%") Then
             cell.Value = cell.Value & "%"
         End If
+        calculaColumna(cell)
         calcularFCellChangued(cell)
         calcularQCellChangued(cell)
+
+    End Sub
+
+    Private Sub calculaColumna(ByVal cell As DataGridViewCell)
+        Try
+            Dim flag As Boolean = True
+            Dim countCell As Integer = 0
+            Dim sum As Integer = 0
+            Dim average As Decimal = 0
+            Select Case cell.RowIndex
+                Case 0
+
+                Case 1
+
+                Case 2 'Work Hours (horas trabajadas)
+                    tblMW.Rows(3).Cells(cell.ColumnIndex).Value = cell.Value * tblMW.Rows(7).Cells(cell.ColumnIndex).Value 'calculamos REVENUE
+                    If tblMW.Rows(2).Cells(cell.ColumnIndex).Value IsNot Nothing And Not tblMW.Rows(2).Cells(cell.ColumnIndex).Value = 0 Then
+                        tblMW.Rows(8).Cells(cell.ColumnIndex).Value = Math.Round((cell.Value / tblMW.Rows(3).Cells(cell.ColumnIndex).Value), 2) 'Calculamos GM/PerHour
+                    Else
+                        tblMW.Rows(8).Cells(cell.ColumnIndex).Value = 0
+                    End If
+                Case 3 'Revenue (Promedio)
+                    Dim value As Decimal = 0
+                    If tblMW.Rows(3).Cells(cell.ColumnIndex).Value IsNot Nothing And Not tblMW.Rows(3).Cells(cell.ColumnIndex).Value = 0 And Not tblMW.Rows(6).Cells(cell.ColumnIndex).Value Is Nothing Then
+                        value = Decimal.Parse(tblMW.Rows(6).Cells(cell.ColumnIndex).Value.ToString.Replace("%", "")) / 100
+                        tblMW.Rows(5).Cells(cell.ColumnIndex).Value = Math.Round((tblMW.Rows(3).Cells(cell.ColumnIndex).Value * value), 2) 'Calculamos MARGIN
+                        tblMW.Rows(4).Cells(cell.ColumnIndex).Value = Math.Round(tblMW.Rows(3).Cells(cell.ColumnIndex).Value - tblMW.Rows(5).Cells(cell.ColumnIndex).Value, 2) 'calcualmos Expense
+                    Else
+                        tblMW.Rows(5).Cells(cell.ColumnIndex).Value = value 'Calculamos MARGIN
+                        tblMW.Rows(4).Cells(cell.ColumnIndex).Value = value 'calcualmos Expense
+                    End If
+                Case 4 'Expeneses (Viaticos) 
+
+                Case 5 'Margin (Margen)
+                    If (tblMW.Rows(3).Cells(cell.ColumnIndex).Value Is Nothing Or (tblMW.Rows(3).Cells(cell.ColumnIndex).Value = 0)) Or tblMW.Rows(5).Cells(cell.ColumnIndex).Value Is Nothing Or (tblMW.Rows(5).Cells(cell.ColumnIndex).Value = 0) Then  'calcualmos Expense
+                        tblMW.Rows(4).Cells(cell.ColumnIndex).Value = Math.Round(tblMW.Rows(3).Cells(cell.ColumnIndex).Value - tblMW.Rows(5).Cells(cell.ColumnIndex).Value)
+                    Else
+                        tblMW.Rows(4).Cells(cell.ColumnIndex).Value = Math.Round(tblMW.Rows(3).Cells(cell.ColumnIndex).Value - tblMW.Rows(5).Cells(cell.ColumnIndex).Value)
+                    End If
+                    If tblMW.Rows(2).Cells(cell.ColumnIndex).Value IsNot Nothing And Not tblMW.Rows(2).Cells(cell.ColumnIndex).Value = 0 And tblMW.Rows(5).Cells(cell.ColumnIndex).Value IsNot Nothing And Not tblMW.Rows(5).Cells(cell.ColumnIndex).Value = 0 Then 'Calculamos GM/PerHour
+                        tblMW.Rows(8).Cells(cell.ColumnIndex).Value = Math.Round((tblMW.Rows(2).Cells(cell.ColumnIndex).Value / tblMW.Rows(5).Cells(cell.ColumnIndex).Value), 2)
+                    Else
+                        tblMW.Rows(8).Cells(cell.ColumnIndex).Value = 0
+                    End If
+                Case 6 'GP%
+                    Dim value As Decimal = 0
+                    If (tblMW.Rows(3).Cells(cell.ColumnIndex).Value IsNot Nothing And Not (tblMW.Rows(3).Cells(cell.ColumnIndex).Value = 0)) And tblMW.Rows(6).Cells(cell.ColumnIndex).Value IsNot Nothing And Not (tblMW.Rows(6).Cells(cell.ColumnIndex).Value = "0%") Then  'calcualmos Expense
+                        value = Decimal.Parse(tblMW.Rows(6).Cells(cell.ColumnIndex).Value.ToString.Replace("%", "")) / 100
+                        tblMW.Rows(4).Cells(cell.ColumnIndex).Value = Math.Round((tblMW.Rows(3).Cells(cell.ColumnIndex).Value * value), 2)
+                    Else
+                        tblMW.Rows(4).Cells(cell.ColumnIndex).Value = 0
+                    End If
+                Case 7 'REV/ Per Hour
+                    tblMW.Rows(3).Cells(cell.ColumnIndex).Value = Math.Round(tblMW.Rows(2).Cells(cell.ColumnIndex).Value * tblMW.Rows(7).Cells(cell.ColumnIndex).Value, 2) 'calculamos REVENUE
+                Case 8 'GM/ Per Hour
+
+            End Select
+        Catch ex As Exception
+
+        End Try
     End Sub
 
     Private Sub btnExport_Click(sender As Object, e As EventArgs) Handles btnExport.Click
@@ -842,6 +915,17 @@ Public Class Midwest
             End If
         End Try
     End Function
+
+    Private Sub tblMW_CellBeginEdit(sender As Object, e As DataGridViewCellCancelEventArgs) Handles tblMW.CellBeginEdit
+        ' Cancelar la edición para la celda en la primera fila y segunda columna
+        Select Case e.RowIndex
+            Case 2, 3, 4, 5, 8
+                e.Cancel = True
+        End Select
+        If e.ColumnIndex = 1 And e.ColumnIndex = 2 Or (tblMW.Columns(e.ColumnIndex).HeaderText.Contains("F")) Then
+            e.Cancel = True
+        End If
+    End Sub
 
 
 End Class
