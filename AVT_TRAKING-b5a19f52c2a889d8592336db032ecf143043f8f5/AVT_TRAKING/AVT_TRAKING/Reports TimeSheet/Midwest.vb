@@ -346,7 +346,7 @@ Public Class Midwest
                         Case 2 'Work Hours (horas trabajadas)
                             tblMW.Rows(3).Cells(cell.ColumnIndex).Value = cell.Value * tblMW.Rows(7).Cells(cell.ColumnIndex).Value 'calculamos REVENUE
                             If tblMW.Rows(2).Cells(cell.ColumnIndex).Value IsNot Nothing And Not tblMW.Rows(2).Cells(cell.ColumnIndex).Value = 0 Then
-                                tblMW.Rows(8).Cells(cell.ColumnIndex).Value = Math.Round((cell.Value / tblMW.Rows(3).Cells(cell.ColumnIndex).Value), 2) 'Calculamos GM/PerHour
+                                tblMW.Rows(8).Cells(cell.ColumnIndex).Value = Math.Round((tblMW.Rows(5).Cells(cell.ColumnIndex).Value / tblMW.Rows(2).Cells(cell.ColumnIndex).Value), 3) 'Calculamos GM/PerHour
                             Else
                                 tblMW.Rows(8).Cells(cell.ColumnIndex).Value = 0
                             End If
@@ -369,7 +369,7 @@ Public Class Midwest
                                 tblMW.Rows(4).Cells(cell.ColumnIndex).Value = Math.Round(tblMW.Rows(3).Cells(cell.ColumnIndex).Value - tblMW.Rows(5).Cells(cell.ColumnIndex).Value)
                             End If
                             If tblMW.Rows(2).Cells(cell.ColumnIndex).Value IsNot Nothing And Not tblMW.Rows(2).Cells(cell.ColumnIndex).Value = 0 And tblMW.Rows(5).Cells(cell.ColumnIndex).Value IsNot Nothing And Not tblMW.Rows(5).Cells(cell.ColumnIndex).Value = 0 Then 'Calculamos GM/PerHour
-                                tblMW.Rows(8).Cells(cell.ColumnIndex).Value = Math.Round((tblMW.Rows(2).Cells(cell.ColumnIndex).Value / tblMW.Rows(5).Cells(cell.ColumnIndex).Value), 2)
+                                tblMW.Rows(8).Cells(cell.ColumnIndex).Value = Math.Round((tblMW.Rows(5).Cells(cell.ColumnIndex).Value / tblMW.Rows(2).Cells(cell.ColumnIndex).Value), 3)
                             Else
                                 tblMW.Rows(8).Cells(cell.ColumnIndex).Value = 0
                             End If
@@ -720,7 +720,7 @@ Public Class Midwest
                         tblMW.Rows(4).Cells(cell.ColumnIndex).Value = Math.Round(tblMW.Rows(3).Cells(cell.ColumnIndex).Value - tblMW.Rows(5).Cells(cell.ColumnIndex).Value)
                     End If
                     If tblMW.Rows(2).Cells(cell.ColumnIndex).Value IsNot Nothing And Not tblMW.Rows(2).Cells(cell.ColumnIndex).Value = 0 And tblMW.Rows(5).Cells(cell.ColumnIndex).Value IsNot Nothing And Not tblMW.Rows(5).Cells(cell.ColumnIndex).Value = 0 Then 'Calculamos GM/PerHour
-                        tblMW.Rows(8).Cells(cell.ColumnIndex).Value = Math.Round((tblMW.Rows(2).Cells(cell.ColumnIndex).Value / tblMW.Rows(5).Cells(cell.ColumnIndex).Value), 2)
+                        tblMW.Rows(8).Cells(cell.ColumnIndex).Value = Math.Round((tblMW.Rows(5).Cells(cell.ColumnIndex).Value / tblMW.Rows(2).Cells(cell.ColumnIndex).Value), 3)
                     Else
                         tblMW.Rows(8).Cells(cell.ColumnIndex).Value = 0
                     End If
