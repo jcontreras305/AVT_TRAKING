@@ -37,62 +37,65 @@ Public Class Midwest
     Private Sub Midwest_Load(sender As Object, e As EventArgs) Handles Me.Load
         llenarComboClientByUser(cmbClients)
         btnExport.Enabled = False
+        btnReport.Enabled = False
+        btnSaveMidwest.Enabled = False
     End Sub
 
     Private Sub btnReport_Click(sender As Object, e As EventArgs) Handles btnReport.Click
-        pgbBarraDeEstado.Value = 0
+        Try
+
+            pgbBarraDeEstado.Value = 0
         addColummns()
         pgbBarraDeEstado.Value = 10
         addRows()
         pgbBarraDeEstado.Value = 15
         Dim cl As String() = cmbClients.Items(cmbClients.SelectedIndex).ToString.Split(" ")
-        lblMsg.Text = "Message: Obteining all hours..."
+        lblMsg.Text = "Message: Obteining the data..."
         pgbBarraDeEstado.Value = 20
-        Dim dtHRS As Data.DataTable = mtdMW.selectHoursMWByClientID(cl(0), cmbYear.Items(cmbYear.SelectedIndex))
-        'pgbBarraDeEstado.Value = 30
-        'lblMsg.Text = "Message: Obteining all expenses..."
-        'Dim dtEXP As Data.DataTable = mtdMW.selectEXPMWByClientID(cl(0), cmbYear.Items(cmbYear.SelectedIndex))
-        pgbBarraDeEstado.Value = 45
-        lblMsg.Text = "Message: Claculating the data Hrs..."
-        For Each clmDT As Data.DataColumn In dtHRS.Columns
-            If clmDT.ColumnName.Contains("-") Or clmDT.ColumnName.Contains("/") Then
-                Dim indexClmTblDW As Integer = existColumn(clmDT.ColumnName) 'este es el numero de la columna de la tabla en el formulario
-                If indexClmTblDW >= 0 Then
-                    tblMW.Rows(2).Cells(indexClmTblDW).Value = dtHRS.Rows(0).Item(clmDT.ColumnName)
+            Dim dtHRS As New Data.DataTable
+            If mtdMW.selectMidWest(cl(0), cmbYear.Items(cmbYear.SelectedIndex), dtHRS) Then
+                If DialogResult.Yes = MessageBox.Show("Do you want to work with the existing midwest information?", "Important", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) Then
+                    'este caso pegaremos los datos que ya se guardaron en la BD 
+                    pgbBarraDeEstado.Value = 45
+                    lblMsg.Text = "Message: Claculating the data Hrs..."
+                    For Each row As Data.DataRow In dtHRS.Rows
+                        Dim countCell As Integer = 2
+                        Dim columnIndex As Integer = tblMW.Columns(("clmDate" & row.Item(1).ToString())).Index
+                        For i = 0 To tblMW.RowCount - 1
+                            If i = 6 Then
+                                tblMW.Rows(i).Cells(columnIndex).Value = row.Item(countCell) & "%"
+                            Else
+                                tblMW.Rows(i).Cells(columnIndex).Value = row.Item(countCell).ToString()
+                            End If
+                            countCell += 1
+                        Next
+                    Next
+                Else
+                    'este caso pegaremos el pivot ya que es un caso nuevo de midwest 
+                    dtHRS = mtdMW.selectHoursMWByClientID(cl(0), cmbYear.Items(cmbYear.SelectedIndex))
+                    pgbBarraDeEstado.Value = 45
+                    lblMsg.Text = "Message: Claculating the data Hrs..."
+                    For Each clmDT As Data.DataColumn In dtHRS.Columns
+                        If clmDT.ColumnName.Contains("-") Or clmDT.ColumnName.Contains("/") Then
+                            Dim indexClmTblDW As Integer = existColumn(clmDT.ColumnName) 'este es el numero de la columna de la tabla en el formulario
+                            If indexClmTblDW >= 0 Then
+                                tblMW.Rows(2).Cells(indexClmTblDW).Value = dtHRS.Rows(0).Item(clmDT.ColumnName)
+                            End If
+                        End If
+                        lastColum = clmDT.ColumnName
+                    Next
                 End If
             End If
-            lastColum = clmDT.ColumnName
-        Next
-        pgbBarraDeEstado.Value = 60
-        'lblMsg.Text = "Message: Claculating the data exp..."
-        'If dtEXP.Rows.Count > 0 Then
-        'For Each clmDT As Data.DataColumn In dtEXP.Columns
-        '    If clmDT.ColumnName.Contains("-") Or clmDT.ColumnName.Contains("/") Then
-        '        Dim indexClmTblDW As Integer = existColumn(clmDT.ColumnName) 'este es el numero de la columna de la tabla en el formulario
-        '        If indexClmTblDW >= 0 Then
-        '            If Not IsDBNull(dtEXP.Rows(0).Item(clmDT.ColumnName)) Then
-        '                tblMW.Rows(4).Cells(indexClmTblDW).Value = dtEXP.Rows(0).Item(clmDT.ColumnName)
-        '            End If
-        '        End If
-        '    End If
-        'Next
-
-        'Else
-        '    For Each clmDT As Data.DataColumn In dtEXP.Columns
-        '        If clmDT.ColumnName.Contains("-") Or clmDT.ColumnName.Contains("/") Then
-        '            Dim indexClmTblDW As Integer = existColumn(clmDT.ColumnName) 'este es el numero de la columna de la tabla en el formulario
-        '            If indexClmTblDW >= 0 Then
-        '                tblMW.Rows(4).Cells(indexClmTblDW).Value = 0
-        '            End If
-        '        End If
-        '    Next
-        'End If
-        pgbBarraDeEstado.Value = 70
-        calculateAllF()
-        calculateAllQ()
-        fillZero()
-        pgbBarraDeEstado.Value = 100
-        btnExport.Enabled = True
+            pgbBarraDeEstado.Value = 70
+            calculateAllF()
+            calculateAllQ()
+            fillZero()
+            pgbBarraDeEstado.Value = 100
+            btnExport.Enabled = True
+            btnSaveMidwest.Enabled = True
+        Catch ex As Exception
+            MsgBox(ex.Message)
+        End Try
     End Sub
 
     Private Function fillZero()
@@ -668,9 +671,9 @@ Public Class Midwest
         Return FechasString
     End Function
     Private Sub cmbClients_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbClients.SelectedIndexChanged
-        Dim cl As String() = cmbClients.Items(cmbClients.SelectedIndex).ToString.Split(" ")
-        mtdMW.fillCmdYearHours(cmbYear, cl(0))
-        'cmbYear.Items.Add(2025)
+        'Dim cl As String() = cmbClients.Items(cmbClients.SelectedIndex).ToString.Split(" ")
+        'mtdMW.fillCmdYearHours(cmbYear, cl(0))
+        cmbYear.Items.Add(2025)
     End Sub
     Private Sub tblMW_CellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles tblMW.CellEndEdit
         Dim cell As DataGridViewCell = tblMW.Rows(e.RowIndex).Cells(e.ColumnIndex)
@@ -927,7 +930,52 @@ Public Class Midwest
         End If
     End Sub
 
+    Private Sub SaveMidwest_Click(sender As Object, e As EventArgs) Handles btnSaveMidwest.Click
+        Try
+            Dim cl() As String = cmbClients.Items(cmbClients.SelectedIndex).ToString.Split(" ")
+            mtdMW.saveMidwest(tblMW, cl(0), cmbYear.Items(cmbYear.SelectedIndex))
+        Catch ex As Exception
+            MsgBox(ex.Message)
+        End Try
+    End Sub
 
+    Private Sub cmbYear_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbYear.SelectedIndexChanged
+        If cmbClients.SelectedIndex > -1 Then
+            btnReport.Enabled = True
+        Else
+            btnReport.Enabled = False
+        End If
+    End Sub
+
+    Private Sub btnRefresh_Click(sender As Object, e As EventArgs) Handles btnRefresh.Click
+        If DialogResult.Yes = MessageBox.Show("If in the process new dates are found, will use to paste the data of 'Head count', 'Average Hours', 'GP% and 'Rev/Per Hour'." & vbCrLf & "Wold you like to continue?", "Important", MessageBoxButtons.YesNo, MessageBoxIcon.Question) Then
+            pgbBarraDeEstado.Value = 10
+            lblMsg.Text = "Message: Finding new hours..."
+            Dim dtHRS As Data.DataTable
+            Dim cl() As String = cmbClients.Items(cmbClients.SelectedIndex).ToString.Split(" ")
+            dtHRS = mtdMW.selectHoursMWByClientID(cl(0), cmbYear.Items(cmbYear.SelectedIndex))
+            pgbBarraDeEstado.Value = 45
+            lblMsg.Text = "Message: Claculating the data Hrs..."
+            For Each clmDT As Data.DataColumn In dtHRS.Columns
+                If clmDT.ColumnName.Contains("-") Or clmDT.ColumnName.Contains("/") Then
+                    Dim indexClmTblDW As Integer = existColumn(clmDT.ColumnName) 'este es el numero de la columna de la tabla en el formulario
+                    If indexClmTblDW >= 0 Then
+                        If tblMW.Rows(2).Cells(indexClmTblDW).Value = 0 Then
+                            tblMW.Rows(0).Cells(indexClmTblDW).Value = sprHCPW.Value
+                            tblMW.Rows(1).Cells(indexClmTblDW).Value = sprAHPW.Value
+                            tblMW.Rows(6).Cells(indexClmTblDW).Value = sprGP.Value & "%"
+                            tblMW.Rows(7).Cells(indexClmTblDW).Value = sprRPH.Value
+                        End If
+                        tblMW.Rows(2).Cells(indexClmTblDW).Value = dtHRS.Rows(0).Item(clmDT.ColumnName)
+                        calculaColumna(tblMW.Rows(2).Cells(indexClmTblDW))
+                    End If
+                End If
+                lastColum = clmDT.ColumnName
+            Next
+            pgbBarraDeEstado.Value = 100
+            lblMsg.Text = "Message: Finish."
+        End If
+    End Sub
 End Class
 
 Public Class midwestmtdMetodos
@@ -1115,6 +1163,101 @@ where cl.numberClient = " + numberClient + ""), conn)
             Return True
         Catch ex As Exception
             MsgBox(ex.Message)
+            Return False
+        Finally
+            desconectar()
+        End Try
+    End Function
+    Public Function saveMidwest(ByVal tbl As DataGridView, ByVal numberClient As String, ByVal year As String) As Boolean
+        Try
+            Dim textDoc As String = ""
+            Dim path As String = ""
+            Dim falg As Boolean = False
+            Dim idClient As String = selectIdClientByNumberClient(numberClient)
+            textDoc = "idClient,weekend,HeadcountPerWeek,AverageHoursPerWeek,Workhours,Revenue,Expense,Margin,Revenue,GP,RevPerHour,GMPerHour" & vbCrLf
+            For Each column As DataGridViewColumn In tbl.Columns
+                If Not column.HeaderText.Contains("F") And column.Index > 1 Then
+                    If tbl.Rows(2).Cells(column.Index).Value > 0 Then
+                        textDoc = textDoc & idClient & "," & validaFechaParaSQl(column.HeaderText.Replace("-", "/"))
+                        For i = 0 To tbl.RowCount - 1
+                            textDoc = textDoc & "," & tbl.Rows(i).Cells(column.Index).Value.ToString.Replace("%", "")
+                        Next
+                        textDoc = textDoc & vbCrLf
+                    End If
+                End If
+            Next
+            If ServerName = "localhost" Then
+                path = LocalFolderDiretory
+            Else
+                path = ServerFolderDirectory
+            End If
+            If Not IO.Directory.Exists(path) Then
+                My.Computer.FileSystem.CreateDirectory(path)
+            End If
+            If IO.Directory.Exists(path & "\midwest.csv") Then
+                IO.File.Delete(path & "\midwest.csv")
+            End If
+            Dim Write As New System.IO.StreamWriter(path & "\midwest.csv")
+            Write.WriteLine(textDoc)
+            Write.Close()
+            conectar()
+            Dim cmd As New SqlCommand("delete from midwest where idClient = '" + idClient + "' and YEAR(weekend) = 2025
+Bulk INSERT 
+	midwest
+FROM 
+	'" & path & "\midwest.csv" & "'
+WITH(
+	FIELDTERMINATOR =',',
+	ROWTERMINATOR = '\n',
+	FIRSTROW = 2,
+	MAXERRORS = 1 --NORMALMENTE SE ENCUENTRA EN 10 
+)", conn)
+            cmd.CommandTimeout = 120
+            If cmd.ExecuteNonQuery Then
+                falg = True
+                MsgBox("Sucessfull: The Process Midwest Insertion is over.")
+                Return True
+            Else
+                falg = False
+                MsgBox("Error: The Process Midwest insertion has a problem.")
+                Return False
+            End If
+
+        Catch ex As Exception
+            MsgBox(ex.Message())
+            Return False
+        Finally
+            desconectar()
+        End Try
+
+    End Function
+
+    ''' <summary>
+    ''' Este metodo hace la consulta a la base de datos para guardar el midwest de un cliente, retorna falso si no existe 
+    ''' el midwest del periodo seleccionado
+    ''' </summary>
+    ''' <param name="numberCl">Es el numero de client</param>
+    ''' <param name="year">Es para buscar el periodo</param>
+    ''' <returns>Retorna True y el dt lleno con la informacion si existe algun record guardado de lo contrario retorna false 
+    ''' y la tabla vacia</returns>
+    Public Function selectMidWest(ByVal numberCl As String, ByVal year As Integer, ByVal dt As Data.DataTable) As Boolean
+        Try
+            conectar()
+            Dim cmd As New SqlCommand(" select cl.companyName as 'Client',convert(nvarchar,mw.weekend,110) as 'weekend' , mw.HeadcountPerWeek , mw.AverageHoursPerWeek , mw.Workhours , mw.Revenue , mw.Expense , mw.Margin , mw.GP , mw.RevPerHour , mw.GMPerHour  
+ from midwest as mw 
+ inner join clients as cl on cl.idClient = mw.idClient
+ where cl.numberClient = " + numberCl + " and year (mw.weekend) = " + CStr(year) + "", conn)
+            If dt.Columns IsNot Nothing Then
+                dt.Clear()
+            End If
+            If cmd.ExecuteNonQuery Then
+                Dim da As New SqlDataAdapter(cmd)
+                da.Fill(dt)
+                Return True
+            Else
+                Return False
+            End If
+        Catch ex As Exception
             Return False
         Finally
             desconectar()

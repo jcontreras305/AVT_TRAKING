@@ -1,4 +1,5 @@
 ﻿Imports System.Data.SqlClient
+Imports System.Net
 Imports System.Text.RegularExpressions
 Imports System.Windows.Documents
 Imports Microsoft.Office.Core
@@ -8,6 +9,26 @@ Module metodosGlobales
     Public userNameMTG As String
     Dim listClient As New List(Of String)
     Dim listJobs As New List(Of String)
+    ''' <summary>
+    ''' Esta funcion es para encontrar en la base de datos el idClient buscando por su numero de Cliente o el nombre de compania
+    ''' </summary>
+    ''' <param name="numberOrName">Es el numero o el numbre de su compania</param>
+    ''' <returns>Retorna el idClient.</returns>
+    Public Function selectIdClientByNumberClient(ByVal numberOrName As String) As String
+        Try
+            con.conectar()
+            Dim cmd As New SqlCommand("select idClient , numberClient, companyName from clients where numberClient like '" + numberOrName + "' or companyName = '" + numberOrName + "'", con.conn)
+            Dim idCl As String = ""
+            Dim dr As SqlDataReader = cmd.ExecuteReader()
+            While dr.Read()
+                idCl = dr("idClient")
+            End While
+            dr.Close()
+            Return idCl
+        Catch ex As Exception
+            Return ""
+        End Try
+    End Function
 
     ''' <summary>
     ''' Llena un combobox mostrando los clientes habilitados para el usuario en uso.

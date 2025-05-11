@@ -28,6 +28,7 @@ Partial Class Midwest
         Me.Panel4 = New System.Windows.Forms.Panel()
         Me.tblMW = New System.Windows.Forms.DataGridView()
         Me.Panel5 = New System.Windows.Forms.Panel()
+        Me.btnSaveMidwest = New System.Windows.Forms.Button()
         Me.btnExport = New System.Windows.Forms.Button()
         Me.sprRPH = New System.Windows.Forms.NumericUpDown()
         Me.sprGP = New System.Windows.Forms.NumericUpDown()
@@ -54,6 +55,7 @@ Partial Class Midwest
         Me.Panel6 = New System.Windows.Forms.Panel()
         Me.pgbBarraDeEstado = New System.Windows.Forms.ProgressBar()
         Me.lblMsg = New System.Windows.Forms.Label()
+        Me.btnRefresh = New System.Windows.Forms.Button()
         Me.TableLayoutPanel1.SuspendLayout()
         Me.Panel3.SuspendLayout()
         Me.TableLayoutPanel2.SuspendLayout()
@@ -145,7 +147,6 @@ Partial Class Midwest
         '
         'Panel5
         '
-        Me.Panel5.Controls.Add(Me.btnExport)
         Me.Panel5.Controls.Add(Me.sprRPH)
         Me.Panel5.Controls.Add(Me.sprGP)
         Me.Panel5.Controls.Add(Me.sprAHPW)
@@ -160,6 +161,25 @@ Partial Class Midwest
         Me.Panel5.Size = New System.Drawing.Size(969, 69)
         Me.Panel5.TabIndex = 1
         '
+        'btnSaveMidwest
+        '
+        Me.btnSaveMidwest.FlatAppearance.BorderSize = 0
+        Me.btnSaveMidwest.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(58, Byte), Integer), CType(CType(115, Byte), Integer))
+        Me.btnSaveMidwest.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnSaveMidwest.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnSaveMidwest.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.btnSaveMidwest.Image = Global.AVT_TRAKING.My.Resources.Resources.save1
+        Me.btnSaveMidwest.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnSaveMidwest.Location = New System.Drawing.Point(589, 16)
+        Me.btnSaveMidwest.Margin = New System.Windows.Forms.Padding(4)
+        Me.btnSaveMidwest.Name = "btnSaveMidwest"
+        Me.btnSaveMidwest.Size = New System.Drawing.Size(91, 41)
+        Me.btnSaveMidwest.TabIndex = 19
+        Me.btnSaveMidwest.Text = "Save"
+        Me.btnSaveMidwest.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.btnSaveMidwest.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
+        Me.btnSaveMidwest.UseVisualStyleBackColor = True
+        '
         'btnExport
         '
         Me.btnExport.FlatAppearance.BorderSize = 0
@@ -169,13 +189,14 @@ Partial Class Midwest
         Me.btnExport.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.btnExport.Image = Global.AVT_TRAKING.My.Resources.Resources.excel
         Me.btnExport.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnExport.Location = New System.Drawing.Point(808, 16)
+        Me.btnExport.Location = New System.Drawing.Point(721, 16)
         Me.btnExport.Margin = New System.Windows.Forms.Padding(4)
         Me.btnExport.Name = "btnExport"
         Me.btnExport.Size = New System.Drawing.Size(111, 41)
         Me.btnExport.TabIndex = 19
         Me.btnExport.Text = "Export"
         Me.btnExport.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.btnExport.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
         Me.btnExport.UseVisualStyleBackColor = True
         '
         'sprRPH
@@ -183,7 +204,7 @@ Partial Class Midwest
         Me.sprRPH.DecimalPlaces = 2
         Me.sprRPH.Location = New System.Drawing.Point(320, 39)
         Me.sprRPH.Name = "sprRPH"
-        Me.sprRPH.Size = New System.Drawing.Size(84, 22)
+        Me.sprRPH.Size = New System.Drawing.Size(84, 26)
         Me.sprRPH.TabIndex = 7
         '
         'sprGP
@@ -191,7 +212,7 @@ Partial Class Midwest
         Me.sprGP.DecimalPlaces = 2
         Me.sprGP.Location = New System.Drawing.Point(71, 39)
         Me.sprGP.Name = "sprGP"
-        Me.sprGP.Size = New System.Drawing.Size(120, 22)
+        Me.sprGP.Size = New System.Drawing.Size(120, 26)
         Me.sprGP.TabIndex = 6
         '
         'sprAHPW
@@ -199,14 +220,14 @@ Partial Class Midwest
         Me.sprAHPW.Location = New System.Drawing.Point(534, 6)
         Me.sprAHPW.Maximum = New Decimal(New Integer() {1000, 0, 0, 0})
         Me.sprAHPW.Name = "sprAHPW"
-        Me.sprAHPW.Size = New System.Drawing.Size(74, 22)
+        Me.sprAHPW.Size = New System.Drawing.Size(74, 26)
         Me.sprAHPW.TabIndex = 5
         '
         'sprHCPW
         '
         Me.sprHCPW.Location = New System.Drawing.Point(184, 6)
         Me.sprHCPW.Name = "sprHCPW"
-        Me.sprHCPW.Size = New System.Drawing.Size(120, 22)
+        Me.sprHCPW.Size = New System.Drawing.Size(120, 26)
         Me.sprHCPW.TabIndex = 4
         '
         'Label8
@@ -256,6 +277,9 @@ Partial Class Midwest
         'Panel2
         '
         Me.Panel2.BackColor = System.Drawing.Color.FromArgb(CType(CType(83, Byte), Integer), CType(CType(93, Byte), Integer), CType(CType(102, Byte), Integer))
+        Me.Panel2.Controls.Add(Me.btnRefresh)
+        Me.Panel2.Controls.Add(Me.btnSaveMidwest)
+        Me.Panel2.Controls.Add(Me.btnExport)
         Me.Panel2.Controls.Add(Me.Label9)
         Me.Panel2.Controls.Add(Me.cmbYear)
         Me.Panel2.Controls.Add(Me.Label4)
@@ -320,13 +344,14 @@ Partial Class Midwest
         Me.btnReport.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.btnReport.Image = Global.AVT_TRAKING.My.Resources.Resources.reportshow
         Me.btnReport.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnReport.Location = New System.Drawing.Point(454, 7)
+        Me.btnReport.Location = New System.Drawing.Point(289, 16)
         Me.btnReport.Margin = New System.Windows.Forms.Padding(4)
         Me.btnReport.Name = "btnReport"
-        Me.btnReport.Size = New System.Drawing.Size(111, 41)
+        Me.btnReport.Size = New System.Drawing.Size(109, 41)
         Me.btnReport.TabIndex = 14
         Me.btnReport.Text = "Report"
         Me.btnReport.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.btnReport.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
         Me.btnReport.UseVisualStyleBackColor = True
         '
         'PictureBox4
@@ -449,6 +474,25 @@ Partial Class Midwest
         Me.lblMsg.TabIndex = 0
         Me.lblMsg.Text = "Message:"
         '
+        'btnRefresh
+        '
+        Me.btnRefresh.FlatAppearance.BorderSize = 0
+        Me.btnRefresh.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(58, Byte), Integer), CType(CType(115, Byte), Integer))
+        Me.btnRefresh.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnRefresh.Font = New System.Drawing.Font("Verdana", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btnRefresh.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.btnRefresh.Image = Global.AVT_TRAKING.My.Resources.Resources.refresh
+        Me.btnRefresh.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnRefresh.Location = New System.Drawing.Point(439, 16)
+        Me.btnRefresh.Margin = New System.Windows.Forms.Padding(4)
+        Me.btnRefresh.Name = "btnRefresh"
+        Me.btnRefresh.Size = New System.Drawing.Size(109, 41)
+        Me.btnRefresh.TabIndex = 20
+        Me.btnRefresh.Text = "Refresh"
+        Me.btnRefresh.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.btnRefresh.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
+        Me.btnRefresh.UseVisualStyleBackColor = True
+        '
         'Midwest
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
@@ -517,4 +561,6 @@ Partial Class Midwest
     Friend WithEvents lblMsg As Label
     Friend WithEvents pgbBarraDeEstado As ProgressBar
     Friend WithEvents btnExport As Button
+    Friend WithEvents btnSaveMidwest As Button
+    Friend WithEvents btnRefresh As Button
 End Class

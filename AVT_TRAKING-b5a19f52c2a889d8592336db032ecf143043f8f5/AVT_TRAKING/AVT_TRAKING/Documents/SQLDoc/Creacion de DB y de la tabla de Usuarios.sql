@@ -1142,6 +1142,26 @@ create table vendor (
 GO
 
 --##########################################################################################
+--##################  TABLA DE MIDWEST #####################################################
+--##########################################################################################
+
+
+CREATE TABLE midwest(
+	idClient varchar(36) not null,
+	weekend date not null,
+	HeadcountPerWeek float ,
+	AverageHoursPerWeek float,
+	Workhours float,
+	Revenue float,
+	Expense float,
+	Margin float,
+	GP float,
+	RevPerHour float,
+	GMPerHour float
+	)
+go
+
+--##########################################################################################
 --##################  TABLA DE MODIFICATION SCAFFOLD #######################################
 --##########################################################################################
 
@@ -2906,6 +2926,19 @@ GO
 
 ALTER TABLE modification WITH CHECK ADD CONSTRAINT fk_tag_modification
 FOREIGN KEY (tag) REFERENCES scaffoldTraking (tag)
+GO
+
+--##########################################################################################
+--##################  FOREIG KEYS OUTGOING #################################################
+--##########################################################################################
+
+
+ALTER TABLE midwest WITH CHECK ADD CONSTRAINT pk_idClient_weekend
+PRIMARY KEY  (idClient , weekend)
+GO 
+
+ALTER TABLE midwest WITH CHECK ADD CONSTRAINT fk_idClient_midwest
+FOREIGN KEY (idClient) REFERENCES clients (idClient)
 GO
 
 --##########################################################################################
@@ -5477,52 +5510,82 @@ GO
 --)
 --go
 
-----| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-----| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-----V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V
 --##########################################################################################
 --##### ESTA TABLA ES PARA GUARDAR TEMPORALMENTE LOS DISMANTLE A MOSTRAR EN EL REPORTE #####
 --##########################################################################################
 
-create table userClientAccess (
-	idUsers varchar(36) not null,
-	idClient varchar(36) not null,
-	access bit 
-)
-go
+--create table userClientAccess (
+--	idUsers varchar(36) not null,
+--	idClient varchar(36) not null,
+--	access bit 
+--)
+--go
 --#############################################################################################
 --########## CON ESTE CODIGO SE LES DA ACCESO DE TODOS LOS CLIENTES A USUARIO ADMIN ###########
 --#############################################################################################
-alter table userClientAccess add constraint pk_idUser_idClient
-primary key (idUsers,idClient)
+--alter table userClientAccess add constraint pk_idUser_idClient
+--primary key (idUsers,idClient)
+--go
+--alter table userClientAccess add constraint fk_idUser_userClientAccess
+--foreign key (idUsers) references users (idUsers)
+--go
+--alter table userClientAccess add constraint fk_idClient_userClientAccess
+--foreign key (idClient) references clients (idClient)
+--go
+
+--DECLARE @idClient varchar(36), @idUsuario varchar(36)
+--Select top 1 @idUsuario = idUsers from users where nameUser = 'Admin'
+--DECLARE cursor_1 CURSOR FOR
+--SELECT idClient
+--FROM clients
+
+
+--OPEN cursor_1
+
+--FETCH NEXT FROM cursor_1 INTO @idClient
+
+--WHILE @@FETCH_STATUS = 0
+--BEGIN
+--	if (select COUNT (*) from userClientAccess where idClient = @idClient and idUsers =@idUsuario) = 0 
+--	begin
+--    INSERT INTO userClientAccess(idClient, idUsers,access)
+--    VALUES (@idClient, @idUsuario,1)
+--	end
+--    FETCH NEXT FROM cursor_1 INTO @idClient
+--END
+
+--CLOSE cursor_1
+--DEALLOCATE cursor_1
+
+
+----| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
+----| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
+----V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V
+--#############################################################################################
+--########## CON ESTE CODIGO CREAMOS LA TABLA DE MISWEDT Y SU RELACION CON CLIENTES ###########
+--#############################################################################################
+
+CREATE TABLE midwest(
+	idClient varchar(36) not null,
+	weekend date not null,
+	HeadcountPerWeek float ,
+	AverageHoursPerWeek float,
+	Workhours float,
+	Revenue float,
+	Expense float,
+	Margin float,
+	GP float,
+	RevPerHour float,
+	GMPerHour float
+	)
 go
-alter table userClientAccess add constraint fk_idUser_userClientAccess
-foreign key (idUsers) references users (idUsers)
-go
-alter table userClientAccess add constraint fk_idClient_userClientAccess
-foreign key (idClient) references clients (idClient)
-go
 
-DECLARE @idClient varchar(36), @idUsuario varchar(36)
-Select top 1 @idUsuario = idUsers from users where nameUser = 'Admin'
-DECLARE cursor_1 CURSOR FOR
-SELECT idClient
-FROM clients
+alter table midwest with check add constraint pk_idClient_weekend
+ primary key (idClient , weekend)
+ go
+
+ alter table midwest with check add constraint fk_idClient_midwest
+ foreign key (idClient) references clients (idClient)
+ go
 
 
-OPEN cursor_1
-
-FETCH NEXT FROM cursor_1 INTO @idClient
-
-WHILE @@FETCH_STATUS = 0
-BEGIN
-	if (select COUNT (*) from userClientAccess where idClient = @idClient and idUsers =@idUsuario) = 0 
-	begin
-    INSERT INTO userClientAccess(idClient, idUsers,access)
-    VALUES (@idClient, @idUsuario,1)
-	end
-    FETCH NEXT FROM cursor_1 INTO @idClient
-END
-
-CLOSE cursor_1
-DEALLOCATE cursor_1
