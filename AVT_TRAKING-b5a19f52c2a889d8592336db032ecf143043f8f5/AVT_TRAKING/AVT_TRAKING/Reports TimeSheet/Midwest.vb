@@ -348,7 +348,7 @@ Public Class Midwest
 
                         Case 2 'Work Hours (horas trabajadas)
                             tblMW.Rows(3).Cells(cell.ColumnIndex).Value = cell.Value * tblMW.Rows(7).Cells(cell.ColumnIndex).Value 'calculamos REVENUE
-                            If tblMW.Rows(2).Cells(cell.ColumnIndex).Value IsNot Nothing And Not tblMW.Rows(2).Cells(cell.ColumnIndex).Value = 0 Then
+                            If tblMW.Rows(2).Cells(cell.ColumnIndex).Value IsNot Nothing And Not tblMW.Rows(2).Cells(cell.ColumnIndex).Value = 0 And Not tblMW.Rows(5).Cells(cell.ColumnIndex).Value = 0 Then
                                 tblMW.Rows(8).Cells(cell.ColumnIndex).Value = Math.Round((tblMW.Rows(5).Cells(cell.ColumnIndex).Value / tblMW.Rows(2).Cells(cell.ColumnIndex).Value), 3) 'Calculamos GM/PerHour
                             Else
                                 tblMW.Rows(8).Cells(cell.ColumnIndex).Value = 0
@@ -671,9 +671,9 @@ Public Class Midwest
         Return FechasString
     End Function
     Private Sub cmbClients_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbClients.SelectedIndexChanged
-        'Dim cl As String() = cmbClients.Items(cmbClients.SelectedIndex).ToString.Split(" ")
-        'mtdMW.fillCmdYearHours(cmbYear, cl(0))
-        cmbYear.Items.Add(2025)
+        Dim cl As String() = cmbClients.Items(cmbClients.SelectedIndex).ToString.Split(" ")
+        mtdMW.fillCmdYearHours(cmbYear, cl(0))
+        'cmbYear.Items.Add(2025)
     End Sub
     Private Sub tblMW_CellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles tblMW.CellEndEdit
         Dim cell As DataGridViewCell = tblMW.Rows(e.RowIndex).Cells(e.ColumnIndex)
@@ -700,7 +700,7 @@ Public Class Midwest
                 Case 2 'Work Hours (horas trabajadas)
                     tblMW.Rows(3).Cells(cell.ColumnIndex).Value = cell.Value * tblMW.Rows(7).Cells(cell.ColumnIndex).Value 'calculamos REVENUE
                     If tblMW.Rows(2).Cells(cell.ColumnIndex).Value IsNot Nothing And Not tblMW.Rows(2).Cells(cell.ColumnIndex).Value = 0 Then
-                        tblMW.Rows(8).Cells(cell.ColumnIndex).Value = Math.Round((cell.Value / tblMW.Rows(3).Cells(cell.ColumnIndex).Value), 2) 'Calculamos GM/PerHour
+                        tblMW.Rows(8).Cells(cell.ColumnIndex).Value = Math.Round((tblMW.Rows(5).Cells(cell.ColumnIndex).Value / tblMW.Rows(2).Cells(cell.ColumnIndex).Value), 2) 'Calculamos GM/PerHour
                     Else
                         tblMW.Rows(8).Cells(cell.ColumnIndex).Value = 0
                     End If
@@ -797,15 +797,6 @@ Public Class Midwest
             For Each row As DataGridViewRow In tblMW.Rows
                 lastRow += 1
                 For Each cell As DataGridViewCell In row.Cells
-                    'If cell.ColumnIndex = 2 Or cell.ColumnIndex = 4 Or cell.ColumnIndex = 5 Or cell.ColumnIndex = 8 Then 'se pone un espacio al incio
-                    '    Hoja1.Cells(row.Index + 2, cell.ColumnIndex + 1) = cell.Value.ToString()
-                    '    Hoja1.cells(row.Index + 2, cell.ColumnIndex + 1).NumberFormat = "@"
-                    'ElseIf cell.ColumnIndex = 18 Or cell.ColumnIndex = 19 Then
-                    '    Hoja1.Cells(row.Index + 2, cell.ColumnIndex + 1) = FormatNumber(cell.Value, 2)
-                    '    Hoja1.cells(row.Index + 2, cell.ColumnIndex + 1).NumberFormat = "#,##0.00"
-                    'Else
-                    '    Hoja1.Cells(row.Index + 2, cell.ColumnIndex + 1) = cell.Value
-                    'End If
                     Hoja1.Cells(row.Index + 2, cell.ColumnIndex + 1) = cell.Value
                     lblMsg.Text = "Message: " + "Writing row (" + row.Index.ToString() + ")..."
                 Next
