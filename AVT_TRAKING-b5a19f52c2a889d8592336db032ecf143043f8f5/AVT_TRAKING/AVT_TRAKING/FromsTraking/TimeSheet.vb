@@ -238,7 +238,7 @@ Public Class TimeSheet
                 txtSalidaPerdiem.Text = txtSalidaPerdiem.Text + vbCrLf + "Closing Excel."
                 txtSalidaPerdiem.Text = txtSalidaPerdiem.Text + vbCrLf + "Sleeping..."
                 NAR(perdiemSheet)
-                libro.Close(True)
+                libro.Close(False)
                 NAR(libro)
                 NAR(ApExcel.Workbooks)
                 ApExcel.Quit()
