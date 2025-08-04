@@ -1581,10 +1581,10 @@
     <None Include="Documents\ExcelDoc\Factors.xlsx" />
     <None Include="Documents\ExcelDoc\Incoming.xlsx" />
     <None Include="Documents\ExcelDoc\InvoicePieces.xlsx" />
-    <EmbeddedResource Include="Documents\ExcelDoc\TimeSheet.xlsx" />
     <None Include="Documents\ExcelDoc\MASTER Payroll.xlsm" />
     <None Include="Documents\ExcelDoc\MASTER Per-Diem.xlsm" />
     <None Include="Documents\ExcelDoc\Outgoing.xlsx" />
+    <None Include="Documents\ExcelDoc\TimeSheet.xlsm" />
     <None Include="Documents\ExcelDoc\tScaffolds.xlsx" />
     <None Include="Documents\ExcelDoc\Working.xlsm" />
     <None Include="My Project\app.manifest" />

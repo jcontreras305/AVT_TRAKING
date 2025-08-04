@@ -210,11 +210,11 @@ Public Class ReportsMenu
     Private Sub Button28_Click(sender As Object, e As EventArgs) Handles Button28.Click
         Try
             Dim sd As New SaveFileDialog()
-            sd.FileName = "TimeSheet.xlsx"
+            sd.FileName = "TimeSheet.xlsm"
             sd.Filter = "*|xlsx"
             If DialogResult.OK = sd.ShowDialog() Then
                 Dim path As String = sd.FileName
-                Dim doc = AppDomain.CurrentDomain.BaseDirectory + "Docs\TimeSheet.xlsx"
+                Dim doc = AppDomain.CurrentDomain.BaseDirectory + "Docs\TimeSheet.xlsm"
                 'MsgBox(doc)
                 saveDoc(path, doc)
             End If
