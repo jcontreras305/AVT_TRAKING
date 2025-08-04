@@ -26,10 +26,10 @@ Public Class MetodosLogin
                     End If
                 Next
                 If flag Then
-                    Dim cmdValidActiveEmployees As New SqlCommand("if DATEPART(DW, GETDATE()) =0
-begin
-update employees  set estatus = 'D' where 15 <= DATEDIFF(DAY, getdate() , Convert( datetime, (select MAX(dateWorked) from hoursWorked where idEmployee  = idEmployee)))
-end", conn)
+                    Dim cmdValidActiveEmployees As New SqlCommand("if DATEPART(DW, GETDATE()) = 1 
+begin 
+	update employees  set estatus = 'D' where 15 <= DATEDIFF(DAY, Convert( datetime, (select MAX(dateWorked) from hoursWorked as  hw where hw.idEmployee  = employees.idEmployee)), getdate() )
+end ", conn)
                     cmdValidActiveEmployees.ExecuteNonQuery()
                 End If
                 Return flag
