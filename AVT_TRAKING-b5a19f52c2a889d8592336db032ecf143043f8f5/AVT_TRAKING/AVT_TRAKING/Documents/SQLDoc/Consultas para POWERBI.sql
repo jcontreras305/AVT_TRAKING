@@ -424,6 +424,59 @@ select 0 as 'Travelers',count(*) as 'Locals' FROM employees where perdiem = 0
 ) as T1
 
 --===============================================================================================================================================
+--====== COUNT WORK CODE EMPLOYEE ===============================================================================================================
+--===============================================================================================================================================
+IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES where TABLE_SCHEMA = 'PBI' and TABLE_NAME = 'COUNTWCEMP')
+BEGIN 
+	drop table PBI.[COUNTWCEMP]
+END
+
+select distinct t1.[Year],t1.[Client],t1.[Month],t1.[MonthN],t1.[Work Code],
+
+count(distinct t1.numberEmploye)  as 'Count Employees'  
+,
+sum(t1.hoursST + t1.hoursot)  as 'Total Hours' ,
+t1.[phase]
+into PBI.COUNTWCEMP
+from (
+
+
+select distinct YEAR(hw.dateWorked)as 'Year',jb.jobNo as 'Client',MONTH(hw.dateWorked) as 'Month',DATENAME(MONTH,hw.dateWorked)as 'MonthN'
+,case 
+	when subString(wc.name,1,2) Like 'CK%' then 'Secretary'
+	when subString(wc.name,1,3) Like 'FM%' then 'Foreman'
+	when subString(wc.name,1,3) Like 'GF%' then 'General Foreman'
+	when wc.name Like 'LMICM' or wc.name Like 'LMSCM' or wc.name Like 'LMPCM'or wc.name Like 'LMACM'or wc.name Like 'LMLCM' THEN 'Construction Manger'
+	when wc.name Like 'LMIG' or wc.name Like 'LMSG' or wc.name Like 'LMPG'or wc.name Like 'LMAG'or wc.name Like 'LMLG' then 'General Foreman'
+	when wc.name Like 'LMISUP' or wc.name Like 'LMSSUP' or wc.name Like 'LMPSUP'or wc.name Like 'LMASUP'or wc.name Like 'LMLSUP' then 'Supervisor'
+	when wc.name Like 'LMIPM' or wc.name Like 'LMSPM' or wc.name Like 'LMPPM'or wc.name Like 'LMAPM'or wc.name Like 'LMLPM' then 'Project Manager'
+	when subString(wc.name,1,4) like 'LMA' or subString(wc.name,1,4) like 'LMA-' or SUBSTRING(wc.name ,1,4) = 'LMAB' then 'Asbestos'
+	when subString(wc.name,1,4) like 'LMI' or subString(wc.name,1,4) like 'LMI-' or subString(wc.name,1,4) like 'LMB1' or subString(wc.name,1,4) like 'LMB2' or subString(wc.name,1,4) like 'LMB3' or SUBSTRING(wc.name ,1,4) = 'LMIB' or SUBSTRING(wc.name ,1,4) = 'LMI4' or SUBSTRING(wc.name ,1,4) = 'LMII' or SUBSTRING(wc.name ,1,4) = 'CKII' then 'Insulation'
+	when subString(wc.name,1,4) like 'LMP' or subString(wc.name,1,4) like 'LMP-' or subString(wc.name,1,4) like 'LMP1' or subString(wc.name,1,4) like 'LMP2' or subString(wc.name,1,4) like 'LMP3' or subString(wc.name,1,4) like 'LMP4' or SUBSTRING(wc.name ,1,4) = 'LMPB' or subString(wc.name,1,4) like 'LMPP' or subString(wc.name,1,4) like 'CKPP' then 'Paint'
+	when subString(wc.name,1,4) like 'LMS' or subString(wc.name,1,4) like 'LMS-' or subString(wc.name,1,4) like 'LMS1' or subString(wc.name,1,4) like 'LMS2' or subString(wc.name,1,4) like 'LMS3' or subString(wc.name,1,4) like 'LMS4' or subString(wc.name,1,4) like 'LMSS' or subString(wc.name,1,4) like 'CKSS' or SUBSTRING(wc.name ,1,4) = 'LMSB' then 'Scaffold'
+	when subString(wc.name,1,4) like 'LML' or subString(wc.name,1,4) like 'LML-' or subString(wc.name,1,4) like 'LMLB' then 'Lead'
+	when subString(wc.name,1,3) like 'PLN%' then 'Planner'
+	when subString(wc.name,1,3) like 'QAQ%' then 'Quality Control'
+	when subString(wc.name,1,3) like 'SCH%' then 'Scheleder'
+	when subString(wc.name,1,3) like 'SM%' then 'Safety-Supervisor'
+	when subString(wc.name,1,4) like 'FRKO%' then 'Forklift Operator'
+	when subString(wc.name,1,4) like 'SUP%' then 'Supervisor'
+	else wc.name 
+	end as 'Work Code',
+	emp.numberEmploye,
+	hw.hoursST,
+	hw.hoursOT,
+	tk.phase
+from hoursWorked as hw inner join workCode as wc on hw.idWorkCode = wc.idWorkCode and hw.jobNo = wc.jobNo
+inner join task as tk on tk.idAux = hw.idAux 
+inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO 
+inner join projectOrder as po on po.idPO = wo.idPO and wo.jobNo = po.jobNo 
+inner join job as jb on jb.jobNo = po.jobNo
+left join employees as emp on emp.idEmployee = hw.idEmployee
+where hw.dateWorked between @StartDate and @EndDate and not(wc.name like '%Bereavement%' or wc.name like '%Holiday%'or wc.name like '%Safety%'or wc.name like '%Drugtest%'or wc.name like '%Vacation%'or wc.name like '%Travel%'or wc.name like '%Craft%')
+) as t1 GROUP BY  t1.[Year],t1.[Client],t1.[Month],t1.[MonthN],t1.[Work Code],t1.[phase]
+
+--===============================================================================================================================================
 --====== ABSENTS ================================================================================================================================
 --===============================================================================================================================================
 
