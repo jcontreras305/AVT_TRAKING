@@ -283,7 +283,7 @@ Public Class Expences
 
     Private Sub btnUpdateExpJob_Click(sender As Object, e As EventArgs) Handles btnUpdateExpJob.Click
         Dim datos() As String = recoletarDatosExpJob()
-        mtdJobs.updateExpenseJob(cmbExpense.Text, cmbJobNo.Text, datos)
+        mtdJobs.updateExpenseJob(cmbExpense.Text, cmbJobNo.Text, datos, tblExpensesJobs.CurrentRow.Cells("Cost Code").Value, tblExpensesJobs.CurrentRow.Cells("CBS Full Number").Value,)
         btnAddExpJob.Enabled = True
         btnCancelExpJob.Enabled = False
         btnUpdateExpJob.Enabled = False

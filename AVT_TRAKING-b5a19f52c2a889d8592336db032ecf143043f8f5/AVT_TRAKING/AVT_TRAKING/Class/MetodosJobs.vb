@@ -252,7 +252,7 @@ inner join clients as cl on cl.idClient = jb.idClient" + If(clientNum = "", "", 
     Public Function insertarExpenseJob(ByVal expCode As String, ByVal jobNo As String, ByVal datos() As String, Optional tran As SqlTransaction = Nothing, Optional connection As SqlConnection = Nothing)
         Try
             conectar()
-            Dim cmd As New SqlCommand("if (select COUNT(*) from expensesJobs where jobNo = " + jobNo + " and idExpenses = (select top 1 idExpenses from expenses where expenseCode = '" + expCode + "')) =0 
+            Dim cmd As New SqlCommand("if (select COUNT(*) from expensesJobs where jobNo = " + jobNo + " and CostCode = '" + datos(3) + "' and CBSFullNumber = '" + datos(6) + "' and idExpenses = (select top 1 idExpenses from expenses where expenseCode = '" + expCode + "')) =0 
 begin
 	insert into expensesJobs values ((select top 1 idExpenses from expenses where expenseCode = '" + expCode + "')" + "," + jobNo + ",'" + datos(0) + "','" + datos(1) + "','" + datos(2) + "','" + datos(3) + "','" + datos(4) + "','" + datos(5) + "','" + datos(6) + "','" + datos(7) + "')
 end")
@@ -279,13 +279,13 @@ end")
             desconectar()
         End Try
     End Function
-    Public Function updateExpenseJob(ByVal expCode As String, ByVal jobNo As String, ByVal datos() As String, Optional tran As SqlTransaction = Nothing, Optional connection As SqlConnection = Nothing)
+    Public Function updateExpenseJob(ByVal expCode As String, ByVal jobNo As String, ByVal datos() As String, ByVal lastCC As String, ByVal lastCBS As String, Optional tran As SqlTransaction = Nothing, Optional connection As SqlConnection = Nothing)
         Try
             conectar()
-            Dim cmd As New SqlCommand("if (select COUNT(*) from expensesJobs where jobNo = " + jobNo + " and idExpenses = (select top 1 idExpenses from expenses where expenseCode = '" + expCode + "')) =1 
+            Dim cmd As New SqlCommand("if (select COUNT(*) from expensesJobs where jobNo = " + jobNo + " and CostCode = '" + lastCC + "' and CBSFullNumber = '" + lastCBS + "' and idExpenses = (select top 1 idExpenses from expenses where expenseCode = '" + expCode + "')) =1 
 begin
 		update expensesJobs set Category = '" + datos(0) + "',PayItemType='" + datos(1) + "',WorkType='" + datos(2) + "',CostCode='" + datos(3) + "',CustomerPositionID='" + datos(4) + "',CustomerJobPositionDescription='" + datos(5) + "',CBSFullNumber='" + datos(6) + "',skillType='" + datos(7) + "'
-	 where jobNo = " + jobNo + " and idExpenses = (select top 1 idExpenses from expenses where expenseCode = '" + expCode + "')
+	 where jobNo = " + jobNo + " and CostCode='" + lastCC + "' and CBSFullNumber='" + lastCBS + "' and  idExpenses = (select top 1 idExpenses from expenses where expenseCode = '" + expCode + "')
 end")
             cmd.Connection = conn
             If tran IsNot Nothing Then 'son varios 

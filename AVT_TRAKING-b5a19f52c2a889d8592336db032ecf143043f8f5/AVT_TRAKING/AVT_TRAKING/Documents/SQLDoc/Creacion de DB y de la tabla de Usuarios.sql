@@ -767,10 +767,10 @@ create table expensesJobs (
 	Category varchar(12),
 	PayItemType varchar(30),
 	WorkType varchar(30),
-	CostCode varchar(30),
+	CostCode varchar(30) not null,
 	CustomerPositionID varchar(30),
 	CustomerJobPositionDescription varchar(30),
-	CBSFullNumber varchar(30),
+	CBSFullNumber varchar(30) not null,
 	skillType varchar(100)
  )
 go
@@ -5565,27 +5565,83 @@ GO
 --########## CON ESTE CODIGO CREAMOS LA TABLA DE MISWEDT Y SU RELACION CON CLIENTES ###########
 --#############################################################################################
 
-CREATE TABLE midwest(
-	idClient varchar(36) not null,
-	weekend date not null,
-	HeadcountPerWeek float ,
-	AverageHoursPerWeek float,
-	Workhours float,
-	Revenue float,
-	Expense float,
-	Margin float,
-	GP float,
-	RevPerHour float,
-	GMPerHour float
-	)
+--CREATE TABLE midwest(
+--	idClient varchar(36) not null,
+--	weekend date not null,
+--	HeadcountPerWeek float ,
+--	AverageHoursPerWeek float,
+--	Workhours float,
+--	Revenue float,
+--	Expense float,
+--	Margin float,
+--	GP float,
+--	RevPerHour float,
+--	GMPerHour float
+--	)
+--go
+
+--alter table midwest with check add constraint pk_idClient_weekend
+-- primary key (idClient , weekend)
+-- go
+
+-- alter table midwest with check add constraint fk_idClient_midwest
+-- foreign key (idClient) references clients (idClient)
+-- go
+
+----| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
+----| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
+----V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V
+--#############################################################################################
+--########## ESTE ES COFIGO PARA CORREGIR LO DE PROJECT JOB ###################################
+--#############################################################################################
+create table expensesJob
+(
+	idExpenses varchar(36) not null,
+	jobNo  bigint not null,
+    Category varchar(12),
+    PayItemType varchar(30),
+    WorkType varchar(30),
+    CostCode varchar(30) not null,
+    CustomerPositionID varchar(30),
+    CustomerJobPositionDescription varchar(30),
+    CBSFullNumber varchar(30) not null,
+    skillType varchar(100)
+)
+
+
+ALTER TABLE [dbo].[expensesJob] WITH CHECK ADD CONSTRAINT fk_jobNo_expensesJob
+FOREIGN KEY (jobNo)
+REFERENCES job(jobNo) 
 go
 
-alter table midwest with check add constraint pk_idClient_weekend
- primary key (idClient , weekend)
- go
+ALTER TABLE [dbo].[expensesJob] WITH CHECK ADD CONSTRAINT fk_idExpenses_expensesJob
+FOREIGN KEY (idExpenses)
+REFERENCES expenses(idExpenses) 
+go
 
- alter table midwest with check add constraint fk_idClient_midwest
- foreign key (idClient) references clients (idClient)
- go
+ALTER TABLE [dbo].[expensesJob] ADD  CONSTRAINT [PK_CostCode_jobNo_CBSFullNumber_expensesJOb] PRIMARY KEY CLUSTERED 
+(
+	[CostCode] ASC,
+	[jobNo] ASC,
+	[idExpenses] ASC
+)
+
+--#############################################################################################
+--########## AQUI SE DEBEN COPIAR LOS RECORDS DE LA TABLA VIJA DE EXPENSES JOB ################
+--#############################################################################################
+insert into [dbo].[expensesJob] values
+('A3ED92AA-3867-466D-937F-5D3DEB720775',	2328180029	,'Labor',	'Billable',	'Standard Work','30.12.30.92.10', 'A',	'ALL-RA-ABT-JMN',	'35.12.800.10'	,	'LMA'		  )
+,('A3ED92AA-3867-466D-937F-5D3DEB720775',	2328180030	,'Labor',	'Billable',	'Standard Work','30.10.30.96.10', 'A',	'ALL-RA-SOFT-HLP',	'35.20.800.10'	,	'LMIB'		  )
+,('A3ED92AA-3867-466D-937F-5D3DEB720775',	2528180005	,'Labor',	'Labor',	'Subsistence Non Tax',	'30.10.10.14.10',	'I',	'Site Manager',	'35.30.800.10',	'Site Manager')
 
 
+--#############################################################################################################
+--########## AQUI SE DEBE DE ELIMNAR LA ANTIGUA TABLA DE PROJECT JOB Y CAMBIAR EL NOMBRE DE LA NUEVA ##########
+--#############################################################################################################
+
+DROP TABLE [dbo].[expensesJobs]
+GO
+
+EXEC SP_RENAME 'expensesJob',
+'expensesJobs'
+go

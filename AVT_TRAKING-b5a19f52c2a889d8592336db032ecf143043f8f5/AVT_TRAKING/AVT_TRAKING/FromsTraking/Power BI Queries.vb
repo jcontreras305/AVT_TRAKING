@@ -792,12 +792,11 @@ select distinct t1.[Year],t1.[Client],t1.[Month],t1.[MonthN],t1.[Work Code],
 count(distinct t1.numberEmploye)  as 'Count Employees'  
 ,
 sum(t1.hoursST + t1.hoursot)  as 'Total Hours' ,
-t1.[phase]
+t1.[Phase]
 into PBI.COUNTWCEMP
 from (
 
-
-select distinct YEAR(hw.dateWorked)as 'Year',jb.jobNo as 'Client',MONTH(hw.dateWorked) as 'Month',DATENAME(MONTH,hw.dateWorked)as 'MonthN'
+select  YEAR(hw.dateWorked)as 'Year',jb.jobNo as 'Client',MONTH(hw.dateWorked) as 'Month',DATENAME(MONTH,hw.dateWorked)as 'MonthN'
 ,case 
 	when subString(wc.name,1,2) Like 'CK%' then 'Secretary'
 	when subString(wc.name,1,3) Like 'FM%' then 'Foreman'
@@ -822,15 +821,16 @@ select distinct YEAR(hw.dateWorked)as 'Year',jb.jobNo as 'Client',MONTH(hw.dateW
 	emp.numberEmploye,
 	hw.hoursST,
 	hw.hoursOT,
-	tk.phase
-from hoursWorked as hw inner join workCode as wc on hw.idWorkCode = wc.idWorkCode and hw.jobNo = wc.jobNo
+	UPPER (tk.phase) AS 'Phase'
+from hoursWorked as hw 
 inner join task as tk on tk.idAux = hw.idAux 
 inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO 
 inner join projectOrder as po on po.idPO = wo.idPO and wo.jobNo = po.jobNo 
 inner join job as jb on jb.jobNo = po.jobNo
-left join employees as emp on emp.idEmployee = hw.idEmployee
+left join workCode as wc on hw.idWorkCode = wc.idWorkCode and jb.jobNo = wc.jobNo
+inner join employees as emp on emp.idEmployee = hw.idEmployee
 where hw.dateWorked between @StartDate and @EndDate and not(wc.name like '%Bereavement%' or wc.name like '%Holiday%'or wc.name like '%Safety%'or wc.name like '%Drugtest%'or wc.name like '%Vacation%'or wc.name like '%Travel%'or wc.name like '%Craft%')
-) as t1 GROUP BY  t1.[Year],t1.[Client],t1.[Month],t1.[MonthN],t1.[Work Code],t1.[phase]
+) as t1 GROUP BY  t1.[Year],t1.[Client],t1.[Month],t1.[MonthN],t1.[Work Code],t1.[Phase]
 "
 			Return _countWCEMP
 		End Get
