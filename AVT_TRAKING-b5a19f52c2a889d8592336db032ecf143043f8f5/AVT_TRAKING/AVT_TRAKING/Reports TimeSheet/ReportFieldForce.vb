@@ -105,8 +105,11 @@ Public Class ReportFieldForce
                         Hoja1.Cells(row.Index + 2, cell.ColumnIndex + 1) = cell.Value.ToString()
                         Hoja1.cells(row.Index + 2, cell.ColumnIndex + 1).NumberFormat = "@"
                     ElseIf cell.ColumnIndex = 18 Or cell.ColumnIndex = 19 Then
-                        Hoja1.Cells(row.Index + 2, cell.ColumnIndex + 1) = FormatNumber(cell.Value, 2)
-                        Hoja1.cells(row.Index + 2, cell.ColumnIndex + 1).NumberFormat = "#,##0.00"
+                        If cell.Value IsNot "" Then
+
+                            Hoja1.Cells(row.Index + 2, cell.ColumnIndex + 1) = FormatNumber(cell.Value, 2)
+                            Hoja1.cells(row.Index + 2, cell.ColumnIndex + 1).NumberFormat = "#,##0.00"
+                        End If
                     Else
                         Hoja1.Cells(row.Index + 2, cell.ColumnIndex + 1) = cell.Value
                     End If
@@ -199,8 +202,8 @@ select
 	wc.CustomerPositionID as 'Customer Position ID',
 	wc.CustomerJobPositionDescription as 'Customer Job Position Description',
 	wc.CBSFullNumber as 'CBS Full Number',
-	IIF (SUM (hw.hoursST) OVER(PARTITION BY SUBSTRING(CAST(jb.[postingProject] AS varchar),1,IIF(LEN(CAST(jb.[postingProject] AS VARCHAR))<=10,LEN(CAST(jb.[postingProject] AS VARCHAR)),10) ) , po.IdPO , wo.idWO , tk.task, CONVERT(varchar, hw.dateWorked,101),hw.schedule,em.numberEmploye,wc.CBSFullNumber)=0,'',CONCAT('',SUM (hw.hoursST) OVER(PARTITION BY SUBSTRING(CAST(jb.[postingProject] AS varchar),1,IIF(LEN(CAST(jb.[postingProject] AS VARCHAR))<=10,LEN(CAST(jb.[postingProject] AS VARCHAR)),10) ) , po.IdPO , wo.idWO , tk.task, CONVERT(varchar, hw.dateWorked,101),hw.schedule,em.numberEmploye,wc.CBSFullNumber)  ))  as 'Allocation ST',
-	IIF (SUM (hw.hoursOT) OVER(PARTITION BY SUBSTRING(CAST(jb.[postingProject] AS varchar),1,IIF(LEN(CAST(jb.[postingProject] AS VARCHAR))<=10,LEN(CAST(jb.[postingProject] AS VARCHAR)),10) ) , po.IdPO , wo.idWO , tk.task, CONVERT(varchar, hw.dateWorked,101),hw.schedule,em.numberEmploye,wc.CBSFullNumber)=0,'',CONCAT('',SUM (hw.hoursOT) OVER(PARTITION BY SUBSTRING(CAST(jb.[postingProject] AS varchar),1,IIF(LEN(CAST(jb.[postingProject] AS VARCHAR))<=10,LEN(CAST(jb.[postingProject] AS VARCHAR)),10) ) , po.IdPO , wo.idWO , tk.task, CONVERT(varchar, hw.dateWorked,101),hw.schedule,em.numberEmploye,wc.CBSFullNumber)  ))  as 'Allocation OT',
+	IIF (SUM (hw.hoursST) OVER(PARTITION BY SUBSTRING(CAST(jb.[postingProject] AS varchar),1,IIF(LEN(CAST(jb.[postingProject] AS VARCHAR))<=10,LEN(CAST(jb.[postingProject] AS VARCHAR)),10) ) , po.IdPO , wo.idWO , tk.task, CONVERT(varchar, hw.dateWorked,101),hw.schedule,em.numberEmploye,wc.CBSFullNumber)=0, '0' ,CONCAT('',SUM (hw.hoursST) OVER(PARTITION BY SUBSTRING(CAST(jb.[postingProject] AS varchar),1,IIF(LEN(CAST(jb.[postingProject] AS VARCHAR))<=10,LEN(CAST(jb.[postingProject] AS VARCHAR)),10) ) , po.IdPO , wo.idWO , tk.task, CONVERT(varchar, hw.dateWorked,101),hw.schedule,em.numberEmploye,wc.CBSFullNumber)  ))  as 'Allocation ST',
+	IIF (SUM (hw.hoursOT) OVER(PARTITION BY SUBSTRING(CAST(jb.[postingProject] AS varchar),1,IIF(LEN(CAST(jb.[postingProject] AS VARCHAR))<=10,LEN(CAST(jb.[postingProject] AS VARCHAR)),10) ) , po.IdPO , wo.idWO , tk.task, CONVERT(varchar, hw.dateWorked,101),hw.schedule,em.numberEmploye,wc.CBSFullNumber)=0, '0' ,CONCAT('',SUM (hw.hoursOT) OVER(PARTITION BY SUBSTRING(CAST(jb.[postingProject] AS varchar),1,IIF(LEN(CAST(jb.[postingProject] AS VARCHAR))<=10,LEN(CAST(jb.[postingProject] AS VARCHAR)),10) ) , po.IdPO , wo.idWO , tk.task, CONVERT(varchar, hw.dateWorked,101),hw.schedule,em.numberEmploye,wc.CBSFullNumber)  ))  as 'Allocation OT',
 	IIF (SUM (hw.hours3) OVER(PARTITION BY SUBSTRING(CAST(jb.[postingProject] AS varchar),1,IIF(LEN(CAST(jb.[postingProject] AS VARCHAR))<=10,LEN(CAST(jb.[postingProject] AS VARCHAR)),10) ) , po.IdPO , wo.idWO , tk.task, CONVERT(varchar, hw.dateWorked,101),hw.schedule,em.numberEmploye,wc.CBSFullNumber)=0,'',CONCAT('',SUM (hw.hours3) OVER(PARTITION BY jb.postingProject , po.IdPO , wo.idWO , tk.task, hw.dateWorked,hw.schedule,em.numberEmploye,wc.CBSFullNumber))) as 'Allocation DT',
 	'' as 'IsSubsistence',
     '' as 'Equipment ID',
@@ -230,18 +233,53 @@ distinct
 	wo.idWO as 'Work Order',
 	tk.task as 'Task',
 	'' as 'Sub Task',
-	isnull((select Top 1 [Category] from expensesJobs as exj where exj.idExpenses = exu.idExpense and exj.jobNo= jb.jobNo or exj.CostCode= wc.CostCode ),'') as 'Category',
+	isnull((select Top 1 [Category] from expensesJobs as exj where exj.idExpenses = exu.idExpense and exj.jobNo= jb.jobNo and exj.CostCode= wc.CostCode ),isnull( (select Top 1 [Category] from expensesJobs as exj where exj.idExpenses = exu.idExpense and exj.jobNo= jb.jobNo and exj.CostCode= (  (select top 1 T1.CostCode from(
+			select TOP 50 hw1.hoursST,hw1.hoursOT,wc1.CostCode , count(*) as 'Total'
+			from hoursWorked as hw1 inner join task as tk1 on tk1.idAux = hw1.idAux inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO inner join projectOrder as po1 on po1.idPO = wo1.idPO and po1.jobNo = wo1.jobNo inner join job as jb1 on jb1.jobNo = po1.jobNo left join workCode as wc1 on wc1.idWorkCode= hw1.idWorkCode and wc1.jobNo = jb1.jobNo inner join employees as emp1 on emp1.idEmployee = hw1.idEmployee 
+			where emp1.idEmployee= exu.idEmployee and hw1.dateWorked between DATEADD(DAY,-4 ,exu.dateExpense) AND exu.dateExpense
+			GROUP BY hw1.hoursST,hw1.hoursOT,wc1.CostCode ORDER BY 'Total' DESC
+			) as T1))),'')) as 'Category',
 	CONVERT(varchar,exu.dateExpense,101) as 'Time Sheet Date',
 	'Day' as 'Shift',
 	po.WBS as 'WBS',
-	isnull((select Top 1 [PayItemType]  from expensesJobs as exj where exj.idExpenses = exu.idExpense and exj.jobNo= jb.jobNo or exj.CostCode= wc.CostCode ),'') as 'Pay Item Type',
-	isnull((select Top 1 [WorkType] from expensesJobs as exj where exj.idExpenses = exu.idExpense and exj.jobNo= jb.jobNo or exj.CostCode= wc.CostCode ),'') as 'Work Type',
+	isnull((select Top 1 [PayItemType] from expensesJobs as exj where exj.idExpenses = exu.idExpense and exj.jobNo= jb.jobNo and exj.CostCode= wc.CostCode ),isnull( (select Top 1 [PayItemType] from expensesJobs as exj where exj.idExpenses = exu.idExpense and exj.jobNo= jb.jobNo and exj.CostCode= (  (select top 1 T1.CostCode from(
+			select TOP 50 hw1.hoursST,hw1.hoursOT,wc1.CostCode , count(*) as 'Total'
+			from hoursWorked as hw1 inner join task as tk1 on tk1.idAux = hw1.idAux inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO inner join projectOrder as po1 on po1.idPO = wo1.idPO and po1.jobNo = wo1.jobNo inner join job as jb1 on jb1.jobNo = po1.jobNo left join workCode as wc1 on wc1.idWorkCode= hw1.idWorkCode and wc1.jobNo = jb1.jobNo inner join employees as emp1 on emp1.idEmployee = hw1.idEmployee 
+			where emp1.idEmployee= exu.idEmployee and hw1.dateWorked between DATEADD(DAY,-4 ,exu.dateExpense) AND exu.dateExpense
+			GROUP BY hw1.hoursST,hw1.hoursOT,wc1.CostCode ORDER BY 'Total' DESC
+			) as T1))),'')) as 'Pay Item Type',
+	isnull((select Top 1 [WorkType] from expensesJobs as exj where exj.idExpenses = exu.idExpense and exj.jobNo= jb.jobNo and exj.CostCode= wc.CostCode ),isnull( (select Top 1 [WorkType] from expensesJobs as exj where exj.idExpenses = exu.idExpense and exj.jobNo= jb.jobNo and exj.CostCode= (  (select top 1 T1.CostCode from(
+			select TOP 50 hw1.hoursST,hw1.hoursOT,wc1.CostCode , count(*) as 'Total'
+			from hoursWorked as hw1 inner join task as tk1 on tk1.idAux = hw1.idAux inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO inner join projectOrder as po1 on po1.idPO = wo1.idPO and po1.jobNo = wo1.jobNo inner join job as jb1 on jb1.jobNo = po1.jobNo left join workCode as wc1 on wc1.idWorkCode= hw1.idWorkCode and wc1.jobNo = jb1.jobNo inner join employees as emp1 on emp1.idEmployee = hw1.idEmployee 
+			where emp1.idEmployee= exu.idEmployee and hw1.dateWorked between DATEADD(DAY,-4 ,exu.dateExpense) AND exu.dateExpense
+			GROUP BY hw1.hoursST,hw1.hoursOT,wc1.CostCode ORDER BY 'Total' DESC
+			) as T1))),'')) as 'Work Type',
 	em.numberEmploye as 'Brock ID',
-	isnull((select Top 1 [CostCode]  from expensesJobs as exj where exj.idExpenses = exu.idExpense and exj.jobNo= jb.jobNo or exj.CostCode= wc.CostCode ),'') as 'Cost Code',
+	isnull((select Top 1 [CostCode] from expensesJobs as exj where exj.idExpenses = exu.idExpense and exj.jobNo= jb.jobNo and exj.CostCode= wc.CostCode ),isnull( (select Top 1 [CostCode] from expensesJobs as exj where exj.idExpenses = exu.idExpense and exj.jobNo= jb.jobNo and exj.CostCode= (  (select top 1 T1.CostCode from(
+			select TOP 50 hw1.hoursST,hw1.hoursOT,wc1.CostCode , count(*) as 'Total'
+			from hoursWorked as hw1 inner join task as tk1 on tk1.idAux = hw1.idAux inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO inner join projectOrder as po1 on po1.idPO = wo1.idPO and po1.jobNo = wo1.jobNo inner join job as jb1 on jb1.jobNo = po1.jobNo left join workCode as wc1 on wc1.idWorkCode= hw1.idWorkCode and wc1.jobNo = jb1.jobNo inner join employees as emp1 on emp1.idEmployee = hw1.idEmployee 
+			where emp1.idEmployee= exu.idEmployee and hw1.dateWorked between DATEADD(DAY,-4 ,exu.dateExpense) AND exu.dateExpense
+			GROUP BY hw1.hoursST,hw1.hoursOT,wc1.CostCode ORDER BY 'Total' DESC
+			) as T1))),'')) as 'Cost Code',
 	
-	isnull((select Top 1 [CustomerPositionID] from expensesJobs as exj where exj.idExpenses = exu.idExpense and exj.jobNo= jb.jobNo or exj.CostCode= wc.CostCode ),'') as 'Customer Position ID',
-	isnull((select Top 1 [CustomerJobPositionDescription] from expensesJobs as exj where exj.idExpenses = exu.idExpense and exj.jobNo= jb.jobNo or exj.CostCode= wc.CostCode ),'') as 'Customer Job Position Description',
-	isnull((select Top 1 [CBSFullNumber] from expensesJobs as exj where exj.idExpenses = exu.idExpense and exj.jobNo= jb.jobNo or exj.CostCode= wc.CostCode ),'') as 'CBS Full Number'	,
+	isnull((select Top 1 [CustomerPositionID] from expensesJobs as exj where exj.idExpenses = exu.idExpense and exj.jobNo= jb.jobNo and exj.CostCode= wc.CostCode ),isnull( (select Top 1 [CustomerPositionID] from expensesJobs as exj where exj.idExpenses = exu.idExpense and exj.jobNo= jb.jobNo and exj.CostCode= (  (select top 1 T1.CostCode from(
+			select TOP 50 hw1.hoursST,hw1.hoursOT,wc1.CostCode , count(*) as 'Total'
+			from hoursWorked as hw1 inner join task as tk1 on tk1.idAux = hw1.idAux inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO inner join projectOrder as po1 on po1.idPO = wo1.idPO and po1.jobNo = wo1.jobNo inner join job as jb1 on jb1.jobNo = po1.jobNo left join workCode as wc1 on wc1.idWorkCode= hw1.idWorkCode and wc1.jobNo = jb1.jobNo inner join employees as emp1 on emp1.idEmployee = hw1.idEmployee 
+			where emp1.idEmployee= exu.idEmployee and hw1.dateWorked between DATEADD(DAY,-4 ,exu.dateExpense) AND exu.dateExpense
+			GROUP BY hw1.hoursST,hw1.hoursOT,wc1.CostCode ORDER BY 'Total' DESC
+			) as T1))),'')) as 'Customer Position ID',
+	isnull((select Top 1 [CustomerJobPositionDescription] from expensesJobs as exj where exj.idExpenses = exu.idExpense and exj.jobNo= jb.jobNo and exj.CostCode= wc.CostCode ),isnull( (select Top 1 [CustomerJobPositionDescription] from expensesJobs as exj where exj.idExpenses = exu.idExpense and exj.jobNo= jb.jobNo and exj.CostCode= (  (select top 1 T1.CostCode from(
+			select TOP 50 hw1.hoursST,hw1.hoursOT,wc1.CostCode , count(*) as 'Total'
+			from hoursWorked as hw1 inner join task as tk1 on tk1.idAux = hw1.idAux inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO inner join projectOrder as po1 on po1.idPO = wo1.idPO and po1.jobNo = wo1.jobNo inner join job as jb1 on jb1.jobNo = po1.jobNo left join workCode as wc1 on wc1.idWorkCode= hw1.idWorkCode and wc1.jobNo = jb1.jobNo inner join employees as emp1 on emp1.idEmployee = hw1.idEmployee 
+			where emp1.idEmployee= exu.idEmployee and hw1.dateWorked between DATEADD(DAY,-4 ,exu.dateExpense) AND exu.dateExpense
+			GROUP BY hw1.hoursST,hw1.hoursOT,wc1.CostCode ORDER BY 'Total' DESC
+			) as T1))),'')) as 'Customer Job Position Description',
+	isnull((select Top 1 [CBSFullNumber] from expensesJobs as exj where exj.idExpenses = exu.idExpense and exj.jobNo= jb.jobNo and exj.CostCode= wc.CostCode ),isnull( (select Top 1 [CBSFullNumber] from expensesJobs as exj where exj.idExpenses = exu.idExpense and exj.jobNo= jb.jobNo and exj.CostCode= (  (select top 1 T1.CostCode from(
+			select TOP 50 hw1.hoursST,hw1.hoursOT,wc1.CostCode , count(*) as 'Total'
+			from hoursWorked as hw1 inner join task as tk1 on tk1.idAux = hw1.idAux inner join workOrder as wo1 on wo1.idAuxWO = tk1.idAuxWO inner join projectOrder as po1 on po1.idPO = wo1.idPO and po1.jobNo = wo1.jobNo inner join job as jb1 on jb1.jobNo = po1.jobNo left join workCode as wc1 on wc1.idWorkCode= hw1.idWorkCode and wc1.jobNo = jb1.jobNo inner join employees as emp1 on emp1.idEmployee = hw1.idEmployee 
+			where emp1.idEmployee= exu.idEmployee and hw1.dateWorked between DATEADD(DAY,-4 ,exu.dateExpense) AND exu.dateExpense
+			GROUP BY hw1.hoursST,hw1.hoursOT,wc1.CostCode ORDER BY 'Total' DESC
+			) as T1))),'')) as 'CBS Full Number'	,
 	'' as 'Allocation ST',
 	'' as 'Allocation OT',
 	'' as 'Allocation DT',
@@ -265,8 +303,7 @@ where exu.dateExpense between @startDate and @endDate
 	  and jb.jobNo like iif(@jobNo= '','%', convert(nvarchar,@jobNo)) 
 	 
 )as T1
-order by [TS Gruping] asc
-", conn)
+order by [TS Gruping],[IsSubsistence] asc", conn)
             If cmd.ExecuteNonQuery Then
                 Dim da As New SqlDataAdapter(cmd)
                 Dim dt As New DataTable
