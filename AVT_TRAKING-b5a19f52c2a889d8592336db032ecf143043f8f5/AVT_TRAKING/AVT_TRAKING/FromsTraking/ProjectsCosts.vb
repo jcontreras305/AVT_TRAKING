@@ -1198,27 +1198,31 @@ Public Class ProjectsCosts
     '================ PROJECT ORDER DESCRIPTION ==============================================================================
     '=========================================================================================================================
     Private Sub txtPODescription_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtPODescription.KeyPress
-        If Asc(e.KeyChar) = Keys.Enter Or Asc(e.KeyChar) = Keys.Tab Then
-            If flagAddRecord Then
-                If validarPODescription() And txtPODescription.Text <> pjtNuevo.PODescription Then
-                    pjtNuevo.PODescription = txtPODescription.Text
-                Else
-                    txtPODescription.Text = pjtNuevo.PODescription
-                End If
-            Else
-                If validarPODescription() And txtPODescription.Text <> pjt.PODescription Then
-                    If mtdJobs.updatePODescription(txtPODescription.Text, pjt.idPO, pjt.jobNum) Then
-                        pjt.PODescription = txtPODescription.Text
+        Try
+            If Asc(e.KeyChar) = Keys.Enter Or Asc(e.KeyChar) = Keys.Tab Then
+                If flagAddRecord Then
+                    If validarPODescription() And txtPODescription.Text <> pjtNuevo.PODescription Then
+                        pjtNuevo.PODescription = txtPODescription.Text
                     Else
-                        txtPODescription.Text = pjt.PODescription
+                        txtPODescription.Text = pjtNuevo.PODescription
+                    End If
+                Else
+                    If validarPODescription() And txtPODescription.Text <> pjt.PODescription Then
+                        If mtdJobs.updatePODescription(txtPODescription.Text, pjt.idPO, pjt.jobNum) Then
+                            pjt.PODescription = txtPODescription.Text
+                        Else
+                            txtPODescription.Text = pjt.PODescription
+                        End If
                     End If
                 End If
             End If
-        End If
+        Catch ex As Exception
+            MsgBox(ex.Message())
+        End Try
     End Sub
 
 
-    Private Sub txtPoDescription_Leave(sender As Object, e As KeyPressEventArgs) Handles txtPODescription.Leave
+    Private Sub txtPoDescription_Leave(sender As Object, e As EventArgs) Handles txtPODescription.Leave
 
         If flagAddRecord Then
             If validarPODescription() And txtPODescription.Text <> pjtNuevo.PODescription Then
@@ -1228,7 +1232,7 @@ Public Class ProjectsCosts
             End If
         Else
             If validarPODescription() And txtPODescription.Text <> pjt.description Then
-                If mtdJobs.updatePODescription(txtProjectDescription.Text, pjt.idPO, pjt.jobNum) Then
+                If mtdJobs.updatePODescription(txtPODescription.Text, pjt.idPO, pjt.jobNum) Then
                     pjt.PODescription = txtPODescription.Text
                 Else
                     txtPODescription.Text = pjt.PODescription
