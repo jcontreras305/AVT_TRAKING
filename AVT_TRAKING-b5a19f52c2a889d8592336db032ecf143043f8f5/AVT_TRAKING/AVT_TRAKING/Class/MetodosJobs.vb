@@ -653,7 +653,7 @@ inner join employees as em on em.idEmployee = hw.idEmployee
 inner join workCode as wc on wc.idWorkCode = hw.idWorkCode 
 inner join task as tk on tk.idAux = hw.idAux 
 inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO
-inner join projectOrder as po on po.idPO = wo.idPO and wo.jobNo = po.jobNo
+inner join projectOrder as po on po.idPO = wo.idPO and wo.jobNo = po.jobNo and wo.jobNo = po.jobNo
 inner join job as jb on jb.jobNo= po.jobNo and jb.jobNo = wc.jobNo
 where  tk.task = '" + idTask + "' and tk.idAuxWO = '" + idWO + "'", conn)
             If cmd.ExecuteNonQuery Then
@@ -725,7 +725,7 @@ where tk.task = '" + idTask + "' and tk.idAuxWO = '" + idWO + "'", conn)
                 row = tabla.NewRow()
                 row("id") = reader("idExpenses")
                 row("expenseCode") = reader("expenseCode")
-                tabla.Rows.Add(Row)
+                tabla.Rows.Add(row)
                 cmbExpCode.Items.Add(reader("expenseCode"))
             End While
             desconectar()
@@ -994,7 +994,8 @@ tk.idAux,
 wo.idAuxWO,
 po.line,
 po.WBS,
-jb.Taxes
+jb.Taxes,
+po.descriptionPO
 from clients as cl inner join job as jb  on jb.idClient = cl.idClient
 inner join projectOrder as po on po.jobNo = jb.jobNo
 inner join workOrder as wo on wo.idPO = po.idPO and wo.jobNo = po.jobNo
@@ -1024,7 +1025,8 @@ tk.idAux,
 wo.idAuxWO,
 po.line,
 po.WBS,
-jb.postingProject
+jb.postingProject,
+po.descriptionPO
 from job as jb 
 inner join projectOrder as po on po.jobNo = jb.jobNo
 inner join workOrder as wo on wo.idPO = po.idPO and wo.jobNo = po.jobNo
@@ -1213,7 +1215,8 @@ po.WBS,
 tk.Area,
 jb.postingProject,
 tk.phase,
-jb.Taxes
+jb.Taxes,
+po.descriptionPO
 from 
 job as jb 
 inner join clients as cl on jb.idClient = cl.idClient
@@ -1247,6 +1250,7 @@ where jb.jobNo = " + If(idJob = "", "0", idJob).ToString() + " order by wo.idWO 
                 lstDatosPO.Add(If(reader("postingProject") Is DBNull.Value, "", reader("postingProject")))
                 lstDatosPO.Add(If(reader("phase") Is DBNull.Value, "", reader("phase")))
                 lstDatosPO.Add(If(reader("Taxes") Is DBNull.Value, "", reader("Taxes")))
+                lstDatosPO.Add(If(reader("descriptionPO") Is DBNull.Value, "", reader("descriptionPO")))
                 Exit While
             End While
             desconectar()
@@ -1284,7 +1288,8 @@ po.WBS,
 tk.Area,
 jb.postingProject,
 tk.phase,
-jb.Taxes
+jb.Taxes,
+po.descriptionPO
 from 
 job as jb 
 inner join clients as cl on jb.idClient = cl.idClient
@@ -1318,6 +1323,7 @@ where jb.jobNo = " + If(idJob = "", "0", idJob).ToString() + " and tk.task = '" 
                 lstDatosPO.Add(reader("postingProject"))
                 lstDatosPO.Add(reader("phase"))
                 lstDatosPO.Add(reader("Taxes"))
+                lstDatosPO.Add(reader("descriptionPO"))
                 Exit While
             End While
             desconectar()
@@ -1357,7 +1363,7 @@ where jb.jobNo = " + If(idJob = "", "0", idJob).ToString() + " and tk.task = '" 
 update task set Area = '" + AreaN + "' 
 from task as tk 
 inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO
-inner join projectOrder as po on po.idPO = wo.idPO
+inner join projectOrder as po on po.idPO = wo.idPO and wo.jobNo = po.jobNo
 inner join job as jb on jb.jobNo = po.jobNo 
 where tk.idAux = '" + idAux + "' and wo.idAuxWO = '" + WO + "'", conn)
             tran = conn.BeginTransaction()
@@ -1469,7 +1475,7 @@ begin
 	begin --no existe el WO en el PO ya insertado 
 		update workOrder set idPO = " + idPON + "  where idAuxWO =  (select top 1 wo.idAuxWO from workOrder as wo 
                                                                     inner join task as tk on tk.idAuxWO =wo.idAuxWO 
-                                                                    inner join projectOrder as po on po.idPO = wo.idPO and po.jobNo = wo.jobNo 
+                                                                    inner join projectOrder as po on po.idPO = wo.idPO and wo.jobNo = po.jobNo and po.jobNo = wo.jobNo 
                                                                     inner join job as jb on jb.jobNo = po.jobNo 
                                                                     where wo.idWO = '" + idWO + "' and task = '" + idtask + "' and po.idPO = " + idPOV + " and jb.jobNo = " + idJobNum + ")
 	end 
@@ -1479,7 +1485,7 @@ begin
 	insert into projectOrder values (" + idPON + "," + idJobNum + "," + If(line = "", "", "'" + line + "'") + "," + If(wbs = "", "''", "'" + wbs + "'") + ")
 	update workOrder set idPO = " + idPON + "  where idAuxWO =  (select top 1 wo.idAuxWO from workOrder as wo 
                                                                     inner join task as tk on tk.idAuxWO =wo.idAuxWO 
-                                                                    inner join projectOrder as po on po.idPO = wo.idPO and po.jobNo = wo.jobNo 
+                                                                    inner join projectOrder as po on po.idPO = wo.idPO and wo.jobNo = po.jobNo and po.jobNo = wo.jobNo 
                                                                     inner join job as jb on jb.jobNo = po.jobNo 
                                                                     where wo.idWO = '" + idWO + "' and task = '" + idtask + "' and po.idPO = " + idPOV + " and jb.jobNo = " + idJobNum + ")
 end", conn)
@@ -1519,7 +1525,7 @@ end", conn)
 update task set equipament = '" + equipamentN + "' 
 from task as tk 
 inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO
-inner join projectOrder as po on po.idPO = wo.idPO
+inner join projectOrder as po on po.idPO = wo.idPO and wo.jobNo = po.jobNo and wo.jobNo = po.jobNo
 inner join job as jb on jb.jobNo = po.jobNo 
 where tk.idAux = '" + idAux + "' and wo.idAuxWO = '" + WO + "'", conn)
             If cmd.ExecuteNonQuery > 0 Then
@@ -1561,7 +1567,7 @@ where jb.jobNo = '" + jobNo + "'", conn)
             Dim cmd As New SqlCommand("update task set manager = '" + managerN + "' 
 from task as tk 
 inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO
-inner join projectOrder as po on po.idPO = wo.idPO
+inner join projectOrder as po on po.idPO = wo.idPO and wo.jobNo = po.jobNo and wo.jobNo = po.jobNo
 inner join job as jb on jb.jobNo = po.jobNo 
 where tk.idAux = '" + idAux + "' and wo.idAuxWO = '" + WO + "'", conn)
             If cmd.ExecuteNonQuery > 0 Then
@@ -1583,9 +1589,27 @@ where tk.idAux = '" + idAux + "' and wo.idAuxWO = '" + WO + "'", conn)
             Dim cmd As New SqlCommand("update task set description = '" + description + "' 
 from task as tk 
 inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO
-inner join projectOrder as po on po.idPO = wo.idPO
+inner join projectOrder as po on po.idPO = wo.idPO and wo.jobNo = po.jobNo
 inner join job as jb on jb.jobNo = po.jobNo 
 where tk.idAux = '" + idAux + "' and wo.idAuxWO = '" + WO + "'", conn)
+            If cmd.ExecuteNonQuery > 0 Then
+                desconectar()
+                Return True
+            Else
+                desconectar()
+                Return False
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message)
+            Return False
+        End Try
+    End Function
+
+    Public Function updatePODescription(ByRef description As String, ByVal idPO As String, ByVal jobNo As String) As Boolean
+        Try
+            conectar()
+            Dim cmd As New SqlCommand("update projectOrder set descriptionPO =  '" + description + "' 
+from projectOrder as po where po.idPO = " + idPO + " and jobNo = " + jobNo, conn)
             If cmd.ExecuteNonQuery > 0 Then
                 desconectar()
                 Return True
@@ -1606,7 +1630,7 @@ where tk.idAux = '" + idAux + "' and wo.idAuxWO = '" + WO + "'", conn)
 update task set estTotalBilling = " + CStr(totalBillingN) + "
 from task as tk 
 inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO
-inner join projectOrder as po on po.idPO = wo.idPO
+inner join projectOrder as po on po.idPO = wo.idPO and wo.jobNo = po.jobNo
 inner join job as jb on jb.jobNo = po.jobNo 
 where tk.idAux = '" + idAux + "' and wo.idAuxWO = '" + WO + "'", conn)
             If cmd.ExecuteNonQuery > 0 Then
@@ -1628,7 +1652,7 @@ where tk.idAux = '" + idAux + "' and wo.idAuxWO = '" + WO + "'", conn)
             Dim cmd As New SqlCommand("update task set estimateHours = " + CStr(HoursN) + "
 from task as tk 
 inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO
-inner join projectOrder as po on po.idPO = wo.idPO
+inner join projectOrder as po on po.idPO = wo.idPO and wo.jobNo = po.jobNo
 inner join job as jb on jb.jobNo = po.jobNo 
 where tk.idAux = '" + idAux + "' and wo.idAuxWO = '" + WO + "'", conn)
             If cmd.ExecuteNonQuery > 0 Then
@@ -1650,7 +1674,7 @@ where tk.idAux = '" + idAux + "' and wo.idAuxWO = '" + WO + "'", conn)
             Dim cmd As New SqlCommand("update task set beginDate = '" + validaFechaParaSQl(beginDateN) + "'
 from task as tk 
 inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO
-inner join projectOrder as po on po.idPO = wo.idPO
+inner join projectOrder as po on po.idPO = wo.idPO and wo.jobNo = po.jobNo
 inner join job as jb on jb.jobNo = po.jobNo 
 where tk.idAux = '" + idAux + "' and wo.idAuxWO = '" + WO + "'", conn)
             If cmd.ExecuteNonQuery > 0 Then
@@ -1673,7 +1697,7 @@ where tk.idAux = '" + idAux + "' and wo.idAuxWO = '" + WO + "'", conn)
             Dim cmd As New SqlCommand("update task set endDate = '" + validaFechaParaSQl(EndDateN) + "'
 from task as tk 
 inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO
-inner join projectOrder as po on po.idPO = wo.idPO
+inner join projectOrder as po on po.idPO = wo.idPO and wo.jobNo = po.jobNo
 inner join job as jb on jb.jobNo = po.jobNo 
 where tk.idAux = '" + idAux + "' and wo.idAuxWO = '" + WO + "'", conn)
             If cmd.ExecuteNonQuery > 0 Then
@@ -1694,7 +1718,7 @@ where tk.idAux = '" + idAux + "' and wo.idAuxWO = '" + WO + "'", conn)
             Dim cmd As New SqlCommand("update task set accountNum = '" + accountN + "'
 from task as tk 
 inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO
-inner join projectOrder as po on po.idPO = wo.idPO
+inner join projectOrder as po on po.idPO = wo.idPO and wo.jobNo = po.jobNo
 inner join job as jb on jb.jobNo = po.jobNo 
 where tk.idAux = '" + idAux + "' and wo.idAuxWO = '" + WO + "'", conn)
             If cmd.ExecuteNonQuery > 0 Then
@@ -1715,7 +1739,7 @@ where tk.idAux = '" + idAux + "' and wo.idAuxWO = '" + WO + "'", conn)
             Dim cmd As New SqlCommand("update task set phase = '" + phaseN + "'
 from task as tk 
 inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO
-inner join projectOrder as po on po.idPO = wo.idPO
+inner join projectOrder as po on po.idPO = wo.idPO and wo.jobNo = po.jobNo
 inner join job as jb on jb.jobNo = po.jobNo 
 where tk.idAux = '" + idAux + "' and wo.idAuxWO = '" + WO + "'", conn)
             If cmd.ExecuteNonQuery > 0 Then
@@ -1755,7 +1779,7 @@ where idAux = '" + idAux + "' and idAuxWO = '" + WO + "'", conn)
             Dim cmd As New SqlCommand("update task set percentComplete  = " + percent.ToString() + "
 from task as tk 
 inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO
-inner join projectOrder as po on po.idPO = wo.idPO
+inner join projectOrder as po on po.idPO = wo.idPO and wo.jobNo = po.jobNo
 inner join job as jb on jb.jobNo = po.jobNo 
 where tk.idAux = '" + idAux + "' and wo.idAuxWO = '" + WO + "'", conn)
             If cmd.ExecuteNonQuery > 0 Then
@@ -1775,7 +1799,7 @@ where tk.idAux = '" + idAux + "' and wo.idAuxWO = '" + WO + "'", conn)
             conectar()
             Dim cmd As New SqlCommand("update workOrder set idWO = " + workOrderN + "  
 from projectOrder as po 
-inner join workOrder as wo on wo.idPO = po.idPO
+inner join workOrder as wo on wo.idPO = po.idPO and wo.jobNo = po.jobNo
 inner join job as jb on jb.jobNo = po.jobNo
 where  po.idPO = " + idPO + " and wo.idAuxWO = '" + workOrderV + "' and jb.jobNo = " + jobNO, conn)
             If cmd.ExecuteNonQuery > 0 Then
@@ -1795,7 +1819,7 @@ where  po.idPO = " + idPO + " and wo.idAuxWO = '" + workOrderV + "' and jb.jobNo
             Dim cmd As New SqlCommand("update task set expCode = '" + expCodeN + "'
 from task as tk 
 inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO
-inner join projectOrder as po on po.idPO = wo.idPO
+inner join projectOrder as po on po.idPO = wo.idPO and wo.jobNo = po.jobNo
 inner join job as jb on jb.jobNo = po.jobNo 
 where tk.idAux = '" + idAux + "' and wo.idAuxWO = '" + WO + "'", conn)
             If cmd.ExecuteNonQuery > 0 Then

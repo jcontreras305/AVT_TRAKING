@@ -84,6 +84,8 @@ Public Class FindTask
                 sprElement.Maximum = 100
             Case "postingProject"
                 ocultarElementos(txtElement)
+            Case "postingProject"
+                ocultarElementos(txtElement)
             Case Else
                 'txtElement.Visible = False
                 cmbElement.Visible = False
@@ -252,6 +254,9 @@ Public Class FindTask
                     mtdJobs.consultaWOFind(consulta, tblProjects, IdClient)
                 Case "postingProject"
                     consulta = "where jb.postingProject = " + txtElement.Text.ToString() + ""
+                    mtdJobs.consultaWOFind(consulta, tblProjects, IdClient)
+                Case "PODescription"
+                    consulta = "where po.descriptionPO = " + txtElement.Text.ToString() + ""
                     mtdJobs.consultaWOFind(consulta, tblProjects, IdClient)
             End Select
             If tblProjects.Rows.Count > 0 Then

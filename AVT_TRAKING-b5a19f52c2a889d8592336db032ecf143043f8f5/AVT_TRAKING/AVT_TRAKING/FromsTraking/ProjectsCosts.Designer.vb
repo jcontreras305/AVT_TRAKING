@@ -45,6 +45,8 @@ Partial Class ProjectsCosts
         Me.txtTask = New System.Windows.Forms.TextBox()
         Me.txtClientPO = New System.Windows.Forms.TextBox()
         Me.Panel6 = New System.Windows.Forms.Panel()
+        Me.Label38 = New System.Windows.Forms.Label()
+        Me.txtPODescription = New System.Windows.Forms.TextBox()
         Me.Label35 = New System.Windows.Forms.Label()
         Me.txtArea = New System.Windows.Forms.TextBox()
         Me.Label33 = New System.Windows.Forms.Label()
@@ -461,6 +463,8 @@ Partial Class ProjectsCosts
         'Panel6
         '
         Me.Panel6.BackColor = System.Drawing.Color.FromArgb(CType(CType(83, Byte), Integer), CType(CType(93, Byte), Integer), CType(CType(102, Byte), Integer))
+        Me.Panel6.Controls.Add(Me.Label38)
+        Me.Panel6.Controls.Add(Me.txtPODescription)
         Me.Panel6.Controls.Add(Me.Label35)
         Me.Panel6.Controls.Add(Me.txtArea)
         Me.Panel6.Controls.Add(Me.Label33)
@@ -484,10 +488,32 @@ Partial Class ProjectsCosts
         Me.Panel6.Size = New System.Drawing.Size(532, 250)
         Me.Panel6.TabIndex = 42
         '
+        'Label38
+        '
+        Me.Label38.AutoSize = True
+        Me.Label38.Location = New System.Drawing.Point(31, 221)
+        Me.Label38.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.Label38.Name = "Label38"
+        Me.Label38.Size = New System.Drawing.Size(111, 17)
+        Me.Label38.TabIndex = 42
+        Me.Label38.Text = "PO Description"
+        '
+        'txtPODescription
+        '
+        Me.txtPODescription.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.txtPODescription.Location = New System.Drawing.Point(165, 221)
+        Me.txtPODescription.Margin = New System.Windows.Forms.Padding(4)
+        Me.txtPODescription.MaxLength = 200
+        Me.txtPODescription.Multiline = True
+        Me.txtPODescription.Name = "txtPODescription"
+        Me.txtPODescription.Size = New System.Drawing.Size(361, 24)
+        Me.txtPODescription.TabIndex = 43
+        '
         'Label35
         '
         Me.Label35.AutoSize = True
-        Me.Label35.Location = New System.Drawing.Point(99, 203)
+        Me.Label35.Location = New System.Drawing.Point(99, 193)
         Me.Label35.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label35.Name = "Label35"
         Me.Label35.Size = New System.Drawing.Size(40, 17)
@@ -498,7 +524,7 @@ Partial Class ProjectsCosts
         '
         Me.txtArea.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.txtArea.Location = New System.Drawing.Point(165, 199)
+        Me.txtArea.Location = New System.Drawing.Point(165, 189)
         Me.txtArea.Margin = New System.Windows.Forms.Padding(4)
         Me.txtArea.MaxLength = 10
         Me.txtArea.Name = "txtArea"
@@ -508,7 +534,7 @@ Partial Class ProjectsCosts
         'Label33
         '
         Me.Label33.AutoSize = True
-        Me.Label33.Location = New System.Drawing.Point(99, 173)
+        Me.Label33.Location = New System.Drawing.Point(99, 162)
         Me.Label33.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label33.Name = "Label33"
         Me.Label33.Size = New System.Drawing.Size(43, 17)
@@ -519,7 +545,7 @@ Partial Class ProjectsCosts
         '
         Me.txtWBS.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.txtWBS.Location = New System.Drawing.Point(165, 169)
+        Me.txtWBS.Location = New System.Drawing.Point(165, 158)
         Me.txtWBS.Margin = New System.Windows.Forms.Padding(4)
         Me.txtWBS.MaxLength = 10
         Me.txtWBS.Name = "txtWBS"
@@ -529,17 +555,17 @@ Partial Class ProjectsCosts
         'Label7
         '
         Me.Label7.AutoSize = True
-        Me.Label7.Location = New System.Drawing.Point(9, 7)
+        Me.Label7.Location = New System.Drawing.Point(16, 7)
         Me.Label7.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(141, 17)
+        Me.Label7.Size = New System.Drawing.Size(123, 17)
         Me.Label7.TabIndex = 6
-        Me.Label7.Text = "Project Description"
+        Me.Label7.Text = "Task Description"
         '
         'Label8
         '
         Me.Label8.AutoSize = True
-        Me.Label8.Location = New System.Drawing.Point(23, 43)
+        Me.Label8.Location = New System.Drawing.Point(21, 39)
         Me.Label8.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label8.Name = "Label8"
         Me.Label8.Size = New System.Drawing.Size(127, 17)
@@ -549,7 +575,7 @@ Partial Class ProjectsCosts
         'Label9
         '
         Me.Label9.AutoSize = True
-        Me.Label9.Location = New System.Drawing.Point(9, 75)
+        Me.Label9.Location = New System.Drawing.Point(9, 68)
         Me.Label9.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label9.Name = "Label9"
         Me.Label9.Size = New System.Drawing.Size(139, 17)
@@ -559,7 +585,7 @@ Partial Class ProjectsCosts
         'labelEndDate
         '
         Me.labelEndDate.AutoSize = True
-        Me.labelEndDate.Location = New System.Drawing.Point(23, 107)
+        Me.labelEndDate.Location = New System.Drawing.Point(23, 100)
         Me.labelEndDate.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.labelEndDate.Name = "labelEndDate"
         Me.labelEndDate.Size = New System.Drawing.Size(127, 17)
@@ -569,7 +595,7 @@ Partial Class ProjectsCosts
         'Label11
         '
         Me.Label11.AutoSize = True
-        Me.Label11.Location = New System.Drawing.Point(31, 141)
+        Me.Label11.Location = New System.Drawing.Point(29, 132)
         Me.Label11.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label11.Name = "Label11"
         Me.Label11.Size = New System.Drawing.Size(121, 17)
@@ -582,9 +608,10 @@ Partial Class ProjectsCosts
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.txtProjectDescription.Location = New System.Drawing.Point(165, 4)
         Me.txtProjectDescription.Margin = New System.Windows.Forms.Padding(4)
+        Me.txtProjectDescription.MaxLength = 200
         Me.txtProjectDescription.Multiline = True
         Me.txtProjectDescription.Name = "txtProjectDescription"
-        Me.txtProjectDescription.Size = New System.Drawing.Size(361, 29)
+        Me.txtProjectDescription.Size = New System.Drawing.Size(361, 25)
         Me.txtProjectDescription.TabIndex = 8
         '
         'sprTotalBilling
@@ -593,7 +620,7 @@ Partial Class ProjectsCosts
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.sprTotalBilling.DecimalPlaces = 2
         Me.sprTotalBilling.Increment = New Decimal(New Integer() {5, 0, 0, 131072})
-        Me.sprTotalBilling.Location = New System.Drawing.Point(166, 38)
+        Me.sprTotalBilling.Location = New System.Drawing.Point(164, 34)
         Me.sprTotalBilling.Margin = New System.Windows.Forms.Padding(4)
         Me.sprTotalBilling.Maximum = New Decimal(New Integer() {1410065408, 2, 0, 0})
         Me.sprTotalBilling.Name = "sprTotalBilling"
@@ -606,7 +633,7 @@ Partial Class ProjectsCosts
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.dtpBeginDate.CustomFormat = "MM/dd/yyyy"
         Me.dtpBeginDate.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
-        Me.dtpBeginDate.Location = New System.Drawing.Point(165, 72)
+        Me.dtpBeginDate.Location = New System.Drawing.Point(165, 65)
         Me.dtpBeginDate.Margin = New System.Windows.Forms.Padding(4)
         Me.dtpBeginDate.Name = "dtpBeginDate"
         Me.dtpBeginDate.Size = New System.Drawing.Size(223, 24)
@@ -618,7 +645,7 @@ Partial Class ProjectsCosts
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.dtpEndDate.CustomFormat = "MM/dd/yyyy"
         Me.dtpEndDate.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
-        Me.dtpEndDate.Location = New System.Drawing.Point(166, 105)
+        Me.dtpEndDate.Location = New System.Drawing.Point(166, 98)
         Me.dtpEndDate.Margin = New System.Windows.Forms.Padding(4)
         Me.dtpEndDate.Name = "dtpEndDate"
         Me.dtpEndDate.Size = New System.Drawing.Size(221, 24)
@@ -628,7 +655,7 @@ Partial Class ProjectsCosts
         '
         Me.sprHoursEstimate.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.sprHoursEstimate.Location = New System.Drawing.Point(165, 137)
+        Me.sprHoursEstimate.Location = New System.Drawing.Point(163, 128)
         Me.sprHoursEstimate.Margin = New System.Windows.Forms.Padding(4)
         Me.sprHoursEstimate.Maximum = New Decimal(New Integer() {1410065408, 2, 0, 0})
         Me.sprHoursEstimate.Name = "sprHoursEstimate"
@@ -2144,4 +2171,6 @@ Partial Class ProjectsCosts
     Friend WithEvents txtTotalTaxes As TextBox
     Friend WithEvents Label37 As Label
     Friend WithEvents Panel24 As Panel
+    Friend WithEvents Label38 As Label
+    Public WithEvents txtPODescription As TextBox
 End Class

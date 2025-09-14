@@ -1,6 +1,6 @@
 ﻿Public Class Project
     Private _jobNum As Long
-    Private _accountNum, _equipament, _manager, _description, _expCode, _idWO, _idAuxWO, _idPO, _idAux, _idTask, _Line, _WBS, _Area, _postingProject, _phase, _Taxes As String
+    Private _accountNum, _equipament, _manager, _description, _expCode, _idWO, _idAuxWO, _idPO, _idAux, _idTask, _Line, _WBS, _Area, _postingProject, _phase, _Taxes, _PODescription As String
     Private _beginDate, _endDate As Date
     Private _estimateHours, _totalBilling, _PercentComplete As Double
     Private _status As Char
@@ -132,6 +132,14 @@
             _WBS = value
         End Set
     End Property
+    Public Property PODescription() As String
+        Get
+            Return _PODescription
+        End Get
+        Set(ByVal value As String)
+            _PODescription = value
+        End Set
+    End Property
     Public Property beginDate As Date
         Get
             Return _beginDate
@@ -237,5 +245,6 @@
         _Area = ""
         _postingProject = ""
         _phase = ""
+        _PODescription = ""
     End Sub
 End Class

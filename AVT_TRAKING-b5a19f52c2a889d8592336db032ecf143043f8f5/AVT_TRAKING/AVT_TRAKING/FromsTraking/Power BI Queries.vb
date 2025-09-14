@@ -359,7 +359,8 @@ select
 			0	--Caso 3 de ETC
 			)),0) ) as 'ETC',
 	T2.[Phase] as 'Phase',
-	Round((T2.[Billing ST]+ T2.[Billing OT]+T2.[Expenses]+T2.[Total Material])*(IIF( T2.[Taxes]>0,T2.[Taxes]/100,0)),2) as 'Taxes'
+	Round((T2.[Billing ST]+ T2.[Billing OT]+T2.[Expenses]+T2.[Total Material])*(IIF( T2.[Taxes]>0,T2.[Taxes]/100,0)),2) as 'Taxes',
+	T2.[PO Description]
 	INTO PBI.[ALL]
 from(
 	select 
@@ -379,7 +380,8 @@ from(
 	T1.[End Date],
 	T1.[Estimate Hours],
 	T1.[Phase],
-	T1.[Taxes]
+	T1.[Taxes],
+	T1.[PO Description]
 	from(
 		select 
 		DISTINCT
@@ -398,7 +400,8 @@ from(
 		CONVERT(nvarchar,tk.endDate,101) as 'End Date',
 		tk.estimateHours as 'Estimate Hours',
 		tk.phase as 'Phase',
-		jb.Taxes
+		jb.Taxes,
+		po.descriptionPO as 'PO Description'
 		from hoursWorked as hw 
 		inner join task as tk on tk.idAux = hw.idAux 
 		inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO
@@ -426,7 +429,8 @@ from(
 		CONVERT(nvarchar,tk.endDate,101) as 'End Date',
 		tk.estimateHours as 'Estimate Hours',
 		tk.phase as 'Phase',
-		jb.Taxes
+		jb.Taxes,
+		po.descriptionPO as 'PO Description'
 		from expensesUsed as exu
 		inner join expenses as ex on ex.idExpenses = exu.idExpense
 		inner join task as tk on tk.idAux = exu.idAux 
@@ -454,7 +458,8 @@ from(
 		CONVERT(nvarchar,tk.endDate,101) as 'End Date',
 		tk.estimateHours as 'Estimate Hours',
 		tk.phase as 'Phase',
-		jb.Taxes
+		jb.Taxes,
+		po.descriptionPO as 'PO Description'
 		from materialUsed as mau
 		inner join material as ma on ma.idMaterial = mau.idMaterial 
 		inner join task as tk on tk.idAux = mau.idAux 

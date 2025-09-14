@@ -434,6 +434,7 @@ Public Class ProjectsCosts
         txtWBS.Text = ""
         txtPostingProject.Text = ""
         txtPhase.Text = ""
+        txtPODescription.Text = ""
         Return True
     End Function
     Private Function llenarCampos(ByVal lstDatosPO As List(Of String)) As Boolean
@@ -474,6 +475,7 @@ Public Class ProjectsCosts
                 txtArea.Text = lstDatosPO(19)
                 txtPostingProject.Text = lstDatosPO(20)
                 txtPhase.Text = lstDatosPO(21)
+                txtPODescription.Text = lstDatosPO(23)
                 'cmbJobNumber.SelectedIndex = cmbJobNumber.FindString(JobNumber.ToString())
                 'AQUI SE CARGARAN LOS DATOS A LA CLASE DE PROJECT 
                 pjt.idPO = txtClientPO.Text
@@ -501,6 +503,7 @@ Public Class ProjectsCosts
                 pjt.postingProject = lstDatosPO(20)
                 pjt.Phase = lstDatosPO(21)
                 pjt.Taxes = lstDatosPO(22)
+                pjt.PODescription = lstDatosPO(23)
                 Dim tbl As New DataTable
                 mtdJobs.consultaJobs(tbl)
                 Dim arrayJob() As DataRow = tbl.Select("jobNo =" + pjt.jobNum.ToString)
@@ -1184,10 +1187,61 @@ Public Class ProjectsCosts
     End Sub
 
     Private Function validarDescription() As Boolean
-        If txtProjectDescription.Text.Length <= 100 Then
+        If txtProjectDescription.Text.Length <= 200 Then
             Return True
         Else
-            MessageBox.Show("The parameter 'Description' only permit an maximium of 100 caracters.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            MessageBox.Show("The parameter 'Description' only permit an maximium of 200 caracters.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            Return False
+        End If
+    End Function
+
+    '================ PROJECT ORDER DESCRIPTION ==============================================================================
+    '=========================================================================================================================
+    Private Sub txtPODescription_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtPODescription.KeyPress
+        If Asc(e.KeyChar) = Keys.Enter Or Asc(e.KeyChar) = Keys.Tab Then
+            If flagAddRecord Then
+                If validarPODescription() And txtPODescription.Text <> pjtNuevo.PODescription Then
+                    pjtNuevo.PODescription = txtPODescription.Text
+                Else
+                    txtPODescription.Text = pjtNuevo.PODescription
+                End If
+            Else
+                If validarPODescription() And txtPODescription.Text <> pjt.PODescription Then
+                    If mtdJobs.updatePODescription(txtPODescription.Text, pjt.idPO, pjt.jobNum) Then
+                        pjt.PODescription = txtPODescription.Text
+                    Else
+                        txtPODescription.Text = pjt.PODescription
+                    End If
+                End If
+            End If
+        End If
+    End Sub
+
+
+    Private Sub txtPoDescription_Leave(sender As Object, e As KeyPressEventArgs) Handles txtPODescription.Leave
+
+        If flagAddRecord Then
+            If validarPODescription() And txtPODescription.Text <> pjtNuevo.PODescription Then
+                pjtNuevo.PODescription = txtPODescription.Text
+            Else
+                txtPODescription.Text = pjtNuevo.PODescription
+            End If
+        Else
+            If validarPODescription() And txtPODescription.Text <> pjt.description Then
+                If mtdJobs.updatePODescription(txtProjectDescription.Text, pjt.idPO, pjt.jobNum) Then
+                    pjt.PODescription = txtPODescription.Text
+                Else
+                    txtPODescription.Text = pjt.PODescription
+                End If
+            End If
+        End If
+    End Sub
+
+    Private Function validarPODescription() As Boolean
+        If txtPODescription.Text.Length <= 200 Then
+            Return True
+        Else
+            MessageBox.Show("The parameter 'PO Description' only permit an maximium of 200 caracters.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
             Return False
         End If
     End Function
@@ -1746,6 +1800,7 @@ Public Class ProjectsCosts
         txtLine.Enabled = activar
         txtWBS.Enabled = activar
         txtPhase.Enabled = activar
+        txtPODescription.Enabled = activar
     End Sub
 
     Private Sub btnMaximize_Click(sender As Object, e As EventArgs) Handles btnMaximize.Click
@@ -1784,7 +1839,7 @@ Public Class ProjectsCosts
 
     End Sub
 
-    Private Sub cmbJobNumber_Enter(sender As Object, e As EventArgs) Handles cmbJobNumber.Enter, txtClientName.Enter, txtWokOrder.Enter, txtTask.Enter, txtEquipament.Enter, cmbProjectManager.Enter, txtClientPO.Enter, txtProjectDescription.Enter, sprTotalBilling.Enter, dtpBeginDate.Enter, dtpEndDate.Enter, sprHoursEstimate.Enter, cmbExpCode.Enter, txtAcountNo.Enter, sprPercentComplete.Enter, chbComplete.Enter, txtPostingProject.Enter, txtPhase.Enter
+    Private Sub cmbJobNumber_Enter(sender As Object, e As EventArgs) Handles cmbJobNumber.Enter, txtClientName.Enter, txtWokOrder.Enter, txtTask.Enter, txtEquipament.Enter, cmbProjectManager.Enter, txtClientPO.Enter, txtProjectDescription.Enter, sprTotalBilling.Enter, dtpBeginDate.Enter, dtpEndDate.Enter, sprHoursEstimate.Enter, cmbExpCode.Enter, txtAcountNo.Enter, sprPercentComplete.Enter, chbComplete.Enter, txtPostingProject.Enter, txtPhase.Enter, txtPODescription.Enter
         If cmbJobNumber.Focused Then
             FindElement = "Job No"
             Element = cmbJobNumber.Text
@@ -1842,6 +1897,9 @@ Public Class ProjectsCosts
         ElseIf txtPostingProject.Focused Then
             FindElement = "postingProject"
             Element = txtPostingProject.Text
+        ElseIf txtPODescription.Focused Then
+            FindElement = "PODescription"
+            Element = txtPODescription.Text
         End If
     End Sub
 
@@ -1874,14 +1932,6 @@ Public Class ProjectsCosts
     Private Sub btnMoveHours_Click(sender As Object, e As EventArgs) Handles btnMoveHours.Click
         Dim mvh As New MoveHours
         mvh.ShowDialog()
-    End Sub
-
-    Private Sub txtEquipament_TextChanged(sender As Object, e As EventArgs) Handles txtEquipament.TextChanged
-
-    End Sub
-
-    Private Sub Label4_Click(sender As Object, e As EventArgs) Handles Label4.Click
-
     End Sub
 
     Private Sub btnFindProject_Click(sender As Object, e As EventArgs) Handles btnFindProject.Click
