@@ -83,7 +83,7 @@ Public Class ReportFieldForce
         Try
             Dim Hoja1 = libro.Worksheets(1)
             Dim count As Integer = 1
-            With Hoja1.Range("A1:AA1")
+            With Hoja1.Range("A1:AI1")
                 .Font.Bold = True
                 .Font.ColorIndex = 2 'Color de texto
                 With .Interior
@@ -101,10 +101,10 @@ Public Class ReportFieldForce
             For Each row As DataGridViewRow In tblFieldForce.Rows
                 lastRow += 1
                 For Each cell As DataGridViewCell In row.Cells
-                    If cell.ColumnIndex = 2 Or cell.ColumnIndex = 4 Or cell.ColumnIndex = 5 Or cell.ColumnIndex = 8 Then 'se pone un espacio al incio
+                    If cell.ColumnIndex = 6 Or cell.ColumnIndex = 8 Or cell.ColumnIndex = 9 Or cell.ColumnIndex = 12 Then 'se pone un espacio al incio
                         Hoja1.Cells(row.Index + 2, cell.ColumnIndex + 1) = cell.Value.ToString()
                         Hoja1.cells(row.Index + 2, cell.ColumnIndex + 1).NumberFormat = "@"
-                    ElseIf cell.ColumnIndex = 18 Or cell.ColumnIndex = 19 Then
+                    ElseIf cell.ColumnIndex = 22 Or cell.ColumnIndex = 23 Then
                         If cell.Value IsNot "" Then
 
                             Hoja1.Cells(row.Index + 2, cell.ColumnIndex + 1) = FormatNumber(cell.Value, 2)
@@ -114,13 +114,6 @@ Public Class ReportFieldForce
                         Hoja1.Cells(row.Index + 2, cell.ColumnIndex + 1) = cell.Value
                     End If
 
-                    'If cell.ColumnIndex = 2 Or cell.ColumnIndex = 4 Then
-                    '    Hoja1.Cells(row.Index + 2, cell.ColumnIndex + 1).Style.NumberFormat = "#####"
-                    'ElseIf cell.ColumnIndex = 8 Then
-                    '    Hoja1.Cells(row.Index + 2, cell.ColumnIndex + 1).Style.NumberFormat = "mm/dd/yyyy"
-                    'Else
-                    '    Hoja1.Cells(row.Index + 2, cell.ColumnIndex + 1).Style.NumberFormat = "0"
-                    'End If
                     lblMesage.Text = "Message: " + "Writing row (" + row.Index.ToString() + ")..."
                 Next
             Next
@@ -186,6 +179,10 @@ select
 select 
 	DISTINCT
 	SUBSTRING(CAST(jb.[postingProject] AS varchar),1,IIF(LEN(CAST(jb.[postingProject] AS VARCHAR))<=10,LEN(CAST(jb.[postingProject] AS VARCHAR)),10) ) as 'Posting Project',
+	'' as 'TS_Foreman',	
+	'' as 'TS_Tag'	,
+	'' as 'TS_Qty'	,
+	'' as 'TS_UoM',
 	po.idPO as 'Purchase Order',
 	po.Line as 'Line .',
 	wo.idWO as 'Work Order',
@@ -206,6 +203,10 @@ select
 	IIF (SUM (hw.hoursOT) OVER(PARTITION BY SUBSTRING(CAST(jb.[postingProject] AS varchar),1,IIF(LEN(CAST(jb.[postingProject] AS VARCHAR))<=10,LEN(CAST(jb.[postingProject] AS VARCHAR)),10) ) , po.IdPO , wo.idWO , tk.task, CONVERT(varchar, hw.dateWorked,101),hw.schedule,em.numberEmploye,wc.CBSFullNumber)=0, '0' ,CONCAT('',SUM (hw.hoursOT) OVER(PARTITION BY SUBSTRING(CAST(jb.[postingProject] AS varchar),1,IIF(LEN(CAST(jb.[postingProject] AS VARCHAR))<=10,LEN(CAST(jb.[postingProject] AS VARCHAR)),10) ) , po.IdPO , wo.idWO , tk.task, CONVERT(varchar, hw.dateWorked,101),hw.schedule,em.numberEmploye,wc.CBSFullNumber)  ))  as 'Allocation OT',
 	IIF (SUM (hw.hours3) OVER(PARTITION BY SUBSTRING(CAST(jb.[postingProject] AS varchar),1,IIF(LEN(CAST(jb.[postingProject] AS VARCHAR))<=10,LEN(CAST(jb.[postingProject] AS VARCHAR)),10) ) , po.IdPO , wo.idWO , tk.task, CONVERT(varchar, hw.dateWorked,101),hw.schedule,em.numberEmploye,wc.CBSFullNumber)=0,'',CONCAT('',SUM (hw.hours3) OVER(PARTITION BY jb.postingProject , po.IdPO , wo.idWO , tk.task, hw.dateWorked,hw.schedule,em.numberEmploye,wc.CBSFullNumber))) as 'Allocation DT',
 	'' as 'IsSubsistence',
+	'' as 'ActivityForeman',	
+	'' as 'ActivityTag',
+	'' as 'ActivityQty',
+	'' as 'ActivityUoM',
     '' as 'Equipment ID',
 	'' as 'Customer Equipment ID',
 	'' as 'Customer Equipment Description',
@@ -228,6 +229,10 @@ UNION
 select 
 distinct
 	SUBSTRING(CAST(jb.[postingProject] AS varchar),1,IIF(LEN(CAST(jb.[postingProject] AS VARCHAR))<=10,LEN(CAST(jb.[postingProject] AS VARCHAR)),10) ) as 'Posting Project',
+	'' as 'TS_Foreman',	
+	'' as 'TS_Tag'	,
+	'' as 'TS_Qty'	,
+	'' as 'TS_UoM',
 	po.idPO as 'Purchase Order',
 	po.Line as 'Line .',
 	wo.idWO as 'Work Order',
@@ -284,6 +289,10 @@ distinct
 	'' as 'Allocation OT',
 	'' as 'Allocation DT',
 	IIF (exu.amount>0,'TRUE','')  as 'IsSubsistence',
+	'' as 'ActivityForeman',	
+	'' as 'ActivityTag',
+	'' as 'ActivityQty',
+	'' as 'ActivityUoM',
 	'' as 'Equipment ID',
 	'' as 'Customer Equipment ID',
 	'' as 'Customer Equipment Description',

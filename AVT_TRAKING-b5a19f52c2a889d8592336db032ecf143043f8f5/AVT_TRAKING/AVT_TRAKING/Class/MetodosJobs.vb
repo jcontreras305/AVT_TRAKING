@@ -525,7 +525,7 @@ from workOrder
                         End If
                     End If
                 Else ' en este caso se debe insertar un nuevo PO un WO y el nuevo TASK
-                    Dim cmdInsertNewPO As New SqlCommand("insert into projectOrder values (" + projectN.idPO + "," + CStr(projectN.jobNum) + ",0,'')", conn)
+                    Dim cmdInsertNewPO As New SqlCommand("insert into projectOrder values (" + projectN.idPO + "," + CStr(projectN.jobNum) + ",0,'','" + CStr(projectN.PODescription) + "')", conn)
                     Dim newWO = System.Guid.NewGuid.ToString()
                     Dim cmdInsertNewWO As New SqlCommand("insert into workOrder values('" + newWO + "','" + projectN.idWorkOrder + "'," + CStr(projectN.idPO) + ", " + CStr(projectN.jobNum) + ")", conn)
                     Dim cmdInsertTask2 As New SqlCommand("insert into task 
