@@ -4315,6 +4315,58 @@ where estCScf.projectId  = @projectId
 end
 GO
 --##############################################################################################
+--################## SP TAXES COST #############################################################
+--##############################################################################################
+--ALTER proc [dbo].[sp_taxes_cost]  
+CREATE proc [dbo].[sp_taxes_cost]
+@jobno as bigint ,
+@startDate as date,
+@endDate as date 
+as
+begin 
+	select cl.companyName, jb.jobNo , hw.dateWorked , CONCAT( em.firstName, ' ',em.lastname,' ', em.middleName)as 'Employee',
+sum(hw.hoursST) as 'Hours St',
+sum(hw.hoursOT) as 'Hours Ot',
+
+isnull(pr.payRate1,0) as 'Rate 1',
+isnull(pr.payRate2,0) as 'Rate 2',
+
+isnull(tx.FICA,0) as 'FICA',
+isnull(tx.FUI,0) as 'FUI',
+isnull(tx.SUI,0) as 'SUI',
+isnull(tx.WC,0) as 'WC',
+isnull(tx.GenLiab,0) as 'GenLiab',	
+isnull(tx.Umbr,0) as 'Umbr',
+isnull(tx.Pollution,0) as 'Pollution',
+isnull(tx.Healt,0) as 'Healt',
+isnull(tx.Fringe,0) as 'Fringe',
+isnull(tx.Small,0) as 'Small',
+isnull(tx.PPE,0) as 'PPE',
+isnull(tx.Consumable,0) as 'Consumable',
+isnull(tx.Scaffold,0) as 'Scaffold',
+isnull(tx.YoYo,0) as 'YOYO',
+isnull(tx.Mesh,0) as 'Mesh',
+isnull(tx.Miselaneos,0) as 'Miselaneos',
+isnull(tx.Overhead,0) as 'Overhead',
+isnull(tx.Profit,0) as 'Profit'
+ from hoursWorked as hw 
+inner join task as tk on hw.idAux = tk.idAux
+inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO 
+inner join projectOrder as po on po.idPO = wo.idPO and po.jobNo = wo.jobNo 
+inner join job as jb on jb.jobNo = po.jobNo
+inner join clients as cl on cl.idClient = jb.idClient
+inner join employees as em on em.idEmployee = hw.idEmployee
+left join payRate as  pr on em.idEmployee = pr.idEmployee
+left join taxesST as tx on tx.jobNo = jb.jobNo
+
+where hw.dateWorked between @startDate and @endDate and  jb.jobNo = @jobno and pr.datePayRate = (select max (datePayRate) from payRate as pr1 where em.idEmployee = pr1.idEmployee)
+group by cl.companyName, jb.jobNo , hw.dateWorked , CONCAT( em.firstName, ' ',em.lastname,' ', em.middleName),pr.payRate1,pr.payRate2,tx.FICA,
+tx.FUI,tx.SUI,tx.WC,tx.GenLiab,	tx.Umbr,tx.Pollution,tx.Healt,tx.Fringe,tx.Small,tx.PPE,tx.Consumable,tx.Scaffold,tx.YoYo,tx.Mesh,tx.Miselaneos,tx.Overhead,tx.Profit
+order by cl.companyName,jb.jobNo,CONCAT( em.firstName, ' ',em.lastname,' ', em.middleName),hw.dateWorked
+end
+go
+
+--##############################################################################################
 --################## SP UPDATE CLIENT ##########################################################
 --##############################################################################################
 --ALTER proc [dbo].[sp_Update_Client]

@@ -30,6 +30,7 @@ Public Class MetodosLogin
 begin 
 	update employees  set estatus = 'D' where 15 <= DATEDIFF(DAY, Convert( datetime, (select MAX(dateWorked) from hoursWorked as  hw where hw.idEmployee  = employees.idEmployee)), getdate() )
 end ", conn)
+                    cmdValidActiveEmployees.CommandTimeout = 200
                     cmdValidActiveEmployees.ExecuteNonQuery()
                 End If
                 Return flag

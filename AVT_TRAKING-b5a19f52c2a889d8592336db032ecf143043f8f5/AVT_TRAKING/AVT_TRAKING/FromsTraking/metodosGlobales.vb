@@ -119,8 +119,8 @@ order by CONCAT( numberClient,' ',companyName) asc", con.conn)
             If cmbJobNo.Items IsNot Nothing Then
                 cmbJobNo.Items.Clear()
             End If
-            If listClient.Count > 0 Then
-                For Each item In listClient
+            If listJobs.Count > 0 Then
+                For Each item In listJobs
                     cmbJobNo.Items.Add(item)
                 Next
                 Return True
@@ -134,7 +134,7 @@ from Clients as cl
 left join userClientAccess as uca on cl.idClient = uca.idClient
 left join users as us on us.idUsers = uca.idUsers and cl.idClient = uca.idClient 
 inner join job as jb on jb.idClient = cl.idClient
-where uca.access = 1  and us.nameUser = '" + UserName + "' " + If(numberClient = "", "", " and cl.numberClient = " + numberClient + ""), con.conn)
+where uca.access = 1  and us.nameUser = '" + userNameMTG + "' " + If(numberClient = "", "", " and cl.numberClient = " + numberClient + ""), con.conn)
                 Dim dr As SqlDataReader = cmd.ExecuteReader()
                 While dr.Read()
                     cmbJobNo.Items.Add(dr("jobNo"))

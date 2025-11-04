@@ -385,4 +385,9 @@ Public Class ReportsMenu
         Dim tse As New Midwest
         tse.ShowDialog()
     End Sub
+
+    Private Sub Button40_Click(sender As Object, e As EventArgs) Handles Button40.Click
+        Dim tse As New ReportTaxesCost
+        tse.ShowDialog()
+    End Sub
 End Class

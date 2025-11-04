@@ -5646,156 +5646,207 @@ GO
 --'expensesJobs'
 --go
 
-----| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-----| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-----V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V
 --#############################################################################################
 --########## ESTOS CODIGOS SON PARA AGREGAR EL CAMPO DE DESCRIPCION ES PROJECT ORDER ##########
 --#############################################################################################
 
---este comando es para agregar el campo
-alter table projectOrder 
-add descriptionPO nvarchar(200)
-go
---aqui solo le damos el valor para que no marque error por ser NULL
-update projectOrder set descriptionPO = ''
-go
+----este comando es para agregar el campo
+--alter table projectOrder 
+--add descriptionPO nvarchar(200)
+--go
+----aqui solo le damos el valor para que no marque error por ser NULL
+--update projectOrder set descriptionPO = ''
+--go
 
---esta es la consulta para el PBI Desues de este codigo se necesita refrescar el Excel ya le deje en TEAMS 
---como agregar la columna o si quiere descargar el alchivo lo voy a subir ya con el campo 
-declare @StartDate as date = '2025-01-01'  
-declare @EndDate as date = '2025-09-14'   
+----esta es la consulta para el PBI Desues de este codigo se necesita refrescar el Excel ya le deje en TEAMS 
+----como agregar la columna o si quiere descargar el alchivo lo voy a subir ya con el campo 
+--declare @StartDate as date = '2025-01-01'  
+--declare @EndDate as date = '2025-09-14'   
 
 
-IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES where TABLE_SCHEMA = 'PBI' and TABLE_NAME = 'ALL')
-BEGIN 
-	drop table PBI.[ALL]
-END
-select 
-	T2.[Year],T2.[ClientID],T2.[PO],T2.[MO#],T2.[ProjectDescription],T2.[ST],T2.[OT],
-	T2.[Billing ST],
-	T2.[Billing OT],
-	T2.[Expenses],
-	T2.[Total Material],
-	CAST(ROUND((T2.[Billing ST]+T2.[Billing OT]+T2.[Expenses]+T2.[Total Material]),2,1) as decimal(20,2)) as 'PO Spent',
-	CONCAT(CAST(ROUND((((T2.[Billing ST]+T2.[Billing OT]+T2.[Expenses]+T2.[Total Material])*100)/IIF(T2.[ProjectTotalBillingEstimate]=0,1,T2.[ProjectTotalBillingEstimate])),2,1) as decimal (20,2)),'%')  as 'PO%Spent',
-	CAST(ROUND(T2.[ProjectTotalBillingEstimate]-(T2.[Billing ST]+T2.[Billing OT]+T2.[Expenses]+T2.[Total Material]),2,1) as decimal(20,2)) as 'PO Left',
-	T2.[Comp],T2.[ProjectTotalBillingEstimate],T2.[PF],T2.[Earned],T2.[Begin Date],T2.[End Date],T2.[Estimate Hours],
-	(IIF(T2.[Comp]>0 and t2.[Comp]<100,IIF((T2.[ST] + T2.[OT])>T2.[Estimate Hours],
-			((T2.[Estimate Hours]-(T2.[ST] + T2.[OT]))*T2.[PF]) ,-- Caso 1 de ETC
-			iif((T2.[ST] + T2.[OT])>0,iif(T2.[Comp]>0,((T2.[ST] + T2.[OT])/(T2.[Comp]*0.01))-(T2.[ST] + T2.[OT]),0), -- Caso 2 de ETC
-			0	--Caso 3 de ETC
-			)),0) ) as 'ETC',
-	T2.[Phase] as 'Phase',
-	Round((T2.[Billing ST]+ T2.[Billing OT]+T2.[Expenses]+T2.[Total Material])*(IIF( T2.[Taxes]>0,T2.[Taxes]/100,0)),2) as 'Taxes',
-	T2.[PO Description]
-	INTO PBI.[ALL]
-from(
-	select 
-	DISTINCT
-	T1.[Year],T1.[ClientID],T1.[PO],T1.[MO#],T1.[ProjectDescription],
-	SUM(T1.[ST]) OVER (PARTITION BY T1.[MO#],T1.[PO],T1.[ClientID],T1.[Year],T1.[ProjectDescription]) as 'ST',
-	SUM(T1.[OT]) OVER (PARTITION BY T1.[MO#],T1.[PO],T1.[ClientID],T1.[Year],T1.[ProjectDescription]) as 'OT',
-	SUM(T1.[Billing ST]) OVER (PARTITION BY T1.[MO#],T1.[PO],T1.[ClientID],T1.[Year],T1.[ProjectDescription]) as 'Billing ST',
-	SUM(T1.[Billing OT]) OVER (PARTITION BY T1.[MO#],T1.[PO],T1.[ClientID],T1.[Year],T1.[ProjectDescription]) as 'Billing OT',
-	SUM(T1.[Expenses]) OVER (PARTITION BY T1.[MO#],T1.[PO],T1.[ClientID],T1.[Year],T1.[ProjectDescription]) as 'Expenses',
-	SUM(T1.[Total Material]) OVER (PARTITION BY T1.[MO#],T1.[PO],T1.[ClientID],T1.[Year],T1.[ProjectDescription]) as 'Total Material',
-	T1.[Comp],
-	T1.[ProjectTotalBillingEstimate],
-	ROUND(IIF((SUM(T1.[ST]) OVER (PARTITION BY T1.[MO#],T1.[PO],T1.[ClientID],T1.[Year],T1.[ProjectDescription]) + SUM(T1.[OT]) OVER (PARTITION BY T1.[MO#],T1.[PO],T1.[ClientID],T1.[Year],T1.[ProjectDescription]))=0,0,T1.earned/(SUM(T1.[ST]) OVER (PARTITION BY T1.[MO#],T1.[PO],T1.[ClientID],T1.[Year],T1.[ProjectDescription]) + SUM(T1.[OT]) OVER (PARTITION BY T1.[MO#],T1.[PO],T1.[ClientID],T1.[Year],T1.[ProjectDescription]))),2) as 'PF',
-	ROUND(T1.[earned],2) as 'Earned',
-	T1.[Begin Date],
-	T1.[End Date],
-	T1.[Estimate Hours],
-	T1.[Phase],
-	T1.[Taxes],
-	T1.[PO Description]
-	from(
-		select 
-		DISTINCT
-		YEAR(dateWorked) as 'Year',--MONTH(hw.dateWorked) as 'Month', 
-		jb.jobNo as 'ClientID', po.idPO as 'PO', CONCAT(wo.idWO,IIF(tk.task ='' , '','-'),tk.task) as 'MO#',tk.[description] as 'ProjectDescription',
-		SUM(hw.hoursST) OVER (PARTITION BY YEAR(dateWorked),jb.jobNo,po.idPO,CONCAT(wo.idWO,IIF(tk.task ='' , '','-'),tk.task),tk.[description]) as 'ST',
-		SUM(hw.hoursOT+hw.hours3) OVER (PARTITION BY YEAR(dateWorked),jb.jobNo,po.idPO,CONCAT(wo.idWO,IIF(tk.task='','','-'),tk.task),tk.[description]) as 'OT',
-		SUM(hw.hoursST * wc.billingRate1) OVER (PARTITION BY YEAR(dateWorked),jb.jobNo,po.idPO,CONCAT(wo.idWO,IIF(tk.task='','','-'),tk.task),tk.[description]) as 'Billing ST',
-		SUM((hw.hoursOT * wc.billingRateOT + hw.hours3 * wc.billingRate3)) OVER (PARTITION BY YEAR(dateWorked),jb.jobNo,po.idPO,CONCAT(wo.idWO,IIF(tk.task='','','-'),tk.task),tk.[description]) as 'Billing OT',
-		0 as 'Expenses',
-		0 as 'Total Material',
-		tk.[percentComplete] as 'Comp',
-		tk.estTotalBilling as 'ProjectTotalBillingEstimate',
-		(tk.estimateHours*tk.percentComplete)*0.01 as 'earned',
-		CONVERT(nvarchar,tk.beginDate,101) as 'Begin Date',
-		CONVERT(nvarchar,tk.endDate,101) as 'End Date',
-		tk.estimateHours as 'Estimate Hours',
-		tk.phase as 'Phase',
-		jb.Taxes,
-		po.descriptionPO as 'PO Description'
-		from hoursWorked as hw 
-		inner join task as tk on tk.idAux = hw.idAux 
-		inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO
-		inner join projectOrder as po on po.idPO = wo.idPO and po.jobNo = wo.jobNo
-		inner join job as jb on jb.jobNo = po.jobNo 
-		inner join clients as cl on cl.idClient = jb.idClient
-		inner join workCode as wc on wc.idWorkCode = hw.idWorkCode and wc.jobNo = jb.jobNo
-		where hw.dateWorked between @StartDate and @EndDate
+--IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES where TABLE_SCHEMA = 'PBI' and TABLE_NAME = 'ALL')
+--BEGIN 
+--	drop table PBI.[ALL]
+--END
+--select 
+--	T2.[Year],T2.[ClientID],T2.[PO],T2.[MO#],T2.[ProjectDescription],T2.[ST],T2.[OT],
+--	T2.[Billing ST],
+--	T2.[Billing OT],
+--	T2.[Expenses],
+--	T2.[Total Material],
+--	CAST(ROUND((T2.[Billing ST]+T2.[Billing OT]+T2.[Expenses]+T2.[Total Material]),2,1) as decimal(20,2)) as 'PO Spent',
+--	CONCAT(CAST(ROUND((((T2.[Billing ST]+T2.[Billing OT]+T2.[Expenses]+T2.[Total Material])*100)/IIF(T2.[ProjectTotalBillingEstimate]=0,1,T2.[ProjectTotalBillingEstimate])),2,1) as decimal (20,2)),'%')  as 'PO%Spent',
+--	CAST(ROUND(T2.[ProjectTotalBillingEstimate]-(T2.[Billing ST]+T2.[Billing OT]+T2.[Expenses]+T2.[Total Material]),2,1) as decimal(20,2)) as 'PO Left',
+--	T2.[Comp],T2.[ProjectTotalBillingEstimate],T2.[PF],T2.[Earned],T2.[Begin Date],T2.[End Date],T2.[Estimate Hours],
+--	(IIF(T2.[Comp]>0 and t2.[Comp]<100,IIF((T2.[ST] + T2.[OT])>T2.[Estimate Hours],
+--			((T2.[Estimate Hours]-(T2.[ST] + T2.[OT]))*T2.[PF]) ,-- Caso 1 de ETC
+--			iif((T2.[ST] + T2.[OT])>0,iif(T2.[Comp]>0,((T2.[ST] + T2.[OT])/(T2.[Comp]*0.01))-(T2.[ST] + T2.[OT]),0), -- Caso 2 de ETC
+--			0	--Caso 3 de ETC
+--			)),0) ) as 'ETC',
+--	T2.[Phase] as 'Phase',
+--	Round((T2.[Billing ST]+ T2.[Billing OT]+T2.[Expenses]+T2.[Total Material])*(IIF( T2.[Taxes]>0,T2.[Taxes]/100,0)),2) as 'Taxes',
+--	T2.[PO Description]
+--	INTO PBI.[ALL]
+--from(
+--	select 
+--	DISTINCT
+--	T1.[Year],T1.[ClientID],T1.[PO],T1.[MO#],T1.[ProjectDescription],
+--	SUM(T1.[ST]) OVER (PARTITION BY T1.[MO#],T1.[PO],T1.[ClientID],T1.[Year],T1.[ProjectDescription]) as 'ST',
+--	SUM(T1.[OT]) OVER (PARTITION BY T1.[MO#],T1.[PO],T1.[ClientID],T1.[Year],T1.[ProjectDescription]) as 'OT',
+--	SUM(T1.[Billing ST]) OVER (PARTITION BY T1.[MO#],T1.[PO],T1.[ClientID],T1.[Year],T1.[ProjectDescription]) as 'Billing ST',
+--	SUM(T1.[Billing OT]) OVER (PARTITION BY T1.[MO#],T1.[PO],T1.[ClientID],T1.[Year],T1.[ProjectDescription]) as 'Billing OT',
+--	SUM(T1.[Expenses]) OVER (PARTITION BY T1.[MO#],T1.[PO],T1.[ClientID],T1.[Year],T1.[ProjectDescription]) as 'Expenses',
+--	SUM(T1.[Total Material]) OVER (PARTITION BY T1.[MO#],T1.[PO],T1.[ClientID],T1.[Year],T1.[ProjectDescription]) as 'Total Material',
+--	T1.[Comp],
+--	T1.[ProjectTotalBillingEstimate],
+--	ROUND(IIF((SUM(T1.[ST]) OVER (PARTITION BY T1.[MO#],T1.[PO],T1.[ClientID],T1.[Year],T1.[ProjectDescription]) + SUM(T1.[OT]) OVER (PARTITION BY T1.[MO#],T1.[PO],T1.[ClientID],T1.[Year],T1.[ProjectDescription]))=0,0,T1.earned/(SUM(T1.[ST]) OVER (PARTITION BY T1.[MO#],T1.[PO],T1.[ClientID],T1.[Year],T1.[ProjectDescription]) + SUM(T1.[OT]) OVER (PARTITION BY T1.[MO#],T1.[PO],T1.[ClientID],T1.[Year],T1.[ProjectDescription]))),2) as 'PF',
+--	ROUND(T1.[earned],2) as 'Earned',
+--	T1.[Begin Date],
+--	T1.[End Date],
+--	T1.[Estimate Hours],
+--	T1.[Phase],
+--	T1.[Taxes],
+--	T1.[PO Description]
+--	from(
+--		select 
+--		DISTINCT
+--		YEAR(dateWorked) as 'Year',--MONTH(hw.dateWorked) as 'Month', 
+--		jb.jobNo as 'ClientID', po.idPO as 'PO', CONCAT(wo.idWO,IIF(tk.task ='' , '','-'),tk.task) as 'MO#',tk.[description] as 'ProjectDescription',
+--		SUM(hw.hoursST) OVER (PARTITION BY YEAR(dateWorked),jb.jobNo,po.idPO,CONCAT(wo.idWO,IIF(tk.task ='' , '','-'),tk.task),tk.[description]) as 'ST',
+--		SUM(hw.hoursOT+hw.hours3) OVER (PARTITION BY YEAR(dateWorked),jb.jobNo,po.idPO,CONCAT(wo.idWO,IIF(tk.task='','','-'),tk.task),tk.[description]) as 'OT',
+--		SUM(hw.hoursST * wc.billingRate1) OVER (PARTITION BY YEAR(dateWorked),jb.jobNo,po.idPO,CONCAT(wo.idWO,IIF(tk.task='','','-'),tk.task),tk.[description]) as 'Billing ST',
+--		SUM((hw.hoursOT * wc.billingRateOT + hw.hours3 * wc.billingRate3)) OVER (PARTITION BY YEAR(dateWorked),jb.jobNo,po.idPO,CONCAT(wo.idWO,IIF(tk.task='','','-'),tk.task),tk.[description]) as 'Billing OT',
+--		0 as 'Expenses',
+--		0 as 'Total Material',
+--		tk.[percentComplete] as 'Comp',
+--		tk.estTotalBilling as 'ProjectTotalBillingEstimate',
+--		(tk.estimateHours*tk.percentComplete)*0.01 as 'earned',
+--		CONVERT(nvarchar,tk.beginDate,101) as 'Begin Date',
+--		CONVERT(nvarchar,tk.endDate,101) as 'End Date',
+--		tk.estimateHours as 'Estimate Hours',
+--		tk.phase as 'Phase',
+--		jb.Taxes,
+--		po.descriptionPO as 'PO Description'
+--		from hoursWorked as hw 
+--		inner join task as tk on tk.idAux = hw.idAux 
+--		inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO
+--		inner join projectOrder as po on po.idPO = wo.idPO and po.jobNo = wo.jobNo
+--		inner join job as jb on jb.jobNo = po.jobNo 
+--		inner join clients as cl on cl.idClient = jb.idClient
+--		inner join workCode as wc on wc.idWorkCode = hw.idWorkCode and wc.jobNo = jb.jobNo
+--		where hw.dateWorked between @StartDate and @EndDate
 		
-		UNION ALL
+--		UNION ALL
 		
-		select
-		DISTINCT
-		YEAR(exu.dateExpense) as 'Year',jb.jobNo as 'ClientID', po.idPO as 'PO', CONCAT(wo.idWO,IIF(tk.task='','','-'),tk.task)as 'MO#',tk.[description] as 'ProjectDescrioption',
-		0 as 'ST',
-		0 as 'OT',
-		0 as 'Billing ST',
-		0 as 'Billing OT',
-		SUM(exu.amount) OVER (PARTITION BY YEAR(exu.dateExpense),tk.idAux,wo.idWO,po.idPO,jb.jobNo) as 'Expenses',
-		0 as 'Total Material',
-		tk.[percentComplete] as 'Complete',
-		tk.estTotalBilling as 'ProjectTotalBillingEstimate',
-		(tk.estimateHours*tk.percentComplete)*0.01 as 'earned',
-		CONVERT(nvarchar,tk.beginDate,101) as 'Begin Date',
-		CONVERT(nvarchar,tk.endDate,101) as 'End Date',
-		tk.estimateHours as 'Estimate Hours',
-		tk.phase as 'Phase',
-		jb.Taxes,
-		po.descriptionPO as 'PO Description'
-		from expensesUsed as exu
-		inner join expenses as ex on ex.idExpenses = exu.idExpense
-		inner join task as tk on tk.idAux = exu.idAux 
-		inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO
-		inner join projectOrder as po on po.idPO = wo.idPO and po.jobNo = wo.jobNo
-		inner join job as jb on jb.jobNo = po.jobNo 
-		inner join clients as cl on cl.idClient = jb.idClient
-		where exu.dateExpense between @StartDate and @EndDate
+--		select
+--		DISTINCT
+--		YEAR(exu.dateExpense) as 'Year',jb.jobNo as 'ClientID', po.idPO as 'PO', CONCAT(wo.idWO,IIF(tk.task='','','-'),tk.task)as 'MO#',tk.[description] as 'ProjectDescrioption',
+--		0 as 'ST',
+--		0 as 'OT',
+--		0 as 'Billing ST',
+--		0 as 'Billing OT',
+--		SUM(exu.amount) OVER (PARTITION BY YEAR(exu.dateExpense),tk.idAux,wo.idWO,po.idPO,jb.jobNo) as 'Expenses',
+--		0 as 'Total Material',
+--		tk.[percentComplete] as 'Complete',
+--		tk.estTotalBilling as 'ProjectTotalBillingEstimate',
+--		(tk.estimateHours*tk.percentComplete)*0.01 as 'earned',
+--		CONVERT(nvarchar,tk.beginDate,101) as 'Begin Date',
+--		CONVERT(nvarchar,tk.endDate,101) as 'End Date',
+--		tk.estimateHours as 'Estimate Hours',
+--		tk.phase as 'Phase',
+--		jb.Taxes,
+--		po.descriptionPO as 'PO Description'
+--		from expensesUsed as exu
+--		inner join expenses as ex on ex.idExpenses = exu.idExpense
+--		inner join task as tk on tk.idAux = exu.idAux 
+--		inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO
+--		inner join projectOrder as po on po.idPO = wo.idPO and po.jobNo = wo.jobNo
+--		inner join job as jb on jb.jobNo = po.jobNo 
+--		inner join clients as cl on cl.idClient = jb.idClient
+--		where exu.dateExpense between @StartDate and @EndDate
 
-		UNION ALL
+--		UNION ALL
 		
-		select 
-		DISTINCT
-		YEAR(mau.dateMaterial) as 'Year',jb.jobNo as 'ClientID', po.idPO as 'PO', CONCAT(wo.idWO,IIF(tk.task='','','-'),tk.task)as 'MO#',tk.[description] as 'ProjectDescrioption',
-		0 as 'ST',
-		0 as 'OT',
-		0 as 'Billing ST',
-		0 as 'Billing OT',
-		0 as 'Expenses',
-		SUM(mau.amount) OVER (PARTITION BY YEAR(mau.dateMaterial),tk.idAux,wo.idWO,po.idPO,jb.jobNo) as 'Total Material',
-		tk.[percentComplete] as 'Complete',
-		tk.estTotalBilling as 'ProjectTotalBillingEstimate',
-		(tk.estimateHours*tk.percentComplete)*0.01 as 'earned',
-		CONVERT(nvarchar,tk.beginDate,101) as 'Begin Date',
-		CONVERT(nvarchar,tk.endDate,101) as 'End Date',
-		tk.estimateHours as 'Estimate Hours',
-		tk.phase as 'Phase',
-		jb.Taxes,
-		po.descriptionPO as 'PO Description'
-		from materialUsed as mau
-		inner join material as ma on ma.idMaterial = mau.idMaterial 
-		inner join task as tk on tk.idAux = mau.idAux 
-		inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO
-		inner join projectOrder as po on po.idPO = wo.idPO and po.jobNo = wo.jobNo
-		inner join job as jb on jb.jobNo = po.jobNo 
-		inner join clients as  cl on cl.idClient = jb.idClient
-		where mau.dateMaterial between @StartDate and @EndDate
-	)as T1 WHERE t1.[Billing ST] > 0 or t1.[Billing OT]>0 or t1.Expenses> 0 or t1.[Total Material]>0
-)as T2
+--		select 
+--		DISTINCT
+--		YEAR(mau.dateMaterial) as 'Year',jb.jobNo as 'ClientID', po.idPO as 'PO', CONCAT(wo.idWO,IIF(tk.task='','','-'),tk.task)as 'MO#',tk.[description] as 'ProjectDescrioption',
+--		0 as 'ST',
+--		0 as 'OT',
+--		0 as 'Billing ST',
+--		0 as 'Billing OT',
+--		0 as 'Expenses',
+--		SUM(mau.amount) OVER (PARTITION BY YEAR(mau.dateMaterial),tk.idAux,wo.idWO,po.idPO,jb.jobNo) as 'Total Material',
+--		tk.[percentComplete] as 'Complete',
+--		tk.estTotalBilling as 'ProjectTotalBillingEstimate',
+--		(tk.estimateHours*tk.percentComplete)*0.01 as 'earned',
+--		CONVERT(nvarchar,tk.beginDate,101) as 'Begin Date',
+--		CONVERT(nvarchar,tk.endDate,101) as 'End Date',
+--		tk.estimateHours as 'Estimate Hours',
+--		tk.phase as 'Phase',
+--		jb.Taxes,
+--		po.descriptionPO as 'PO Description'
+--		from materialUsed as mau
+--		inner join material as ma on ma.idMaterial = mau.idMaterial 
+--		inner join task as tk on tk.idAux = mau.idAux 
+--		inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO
+--		inner join projectOrder as po on po.idPO = wo.idPO and po.jobNo = wo.jobNo
+--		inner join job as jb on jb.jobNo = po.jobNo 
+--		inner join clients as  cl on cl.idClient = jb.idClient
+--		where mau.dateMaterial between @StartDate and @EndDate
+--	)as T1 WHERE t1.[Billing ST] > 0 or t1.[Billing OT]>0 or t1.Expenses> 0 or t1.[Total Material]>0
+--)as T2
 
+
+----| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
+----| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
+----V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V
+--#############################################################################################
+--########## ESTE ES CODIGO PARA EL REPORTE DE TAXES COST #####################################
+--#############################################################################################
+
+CREATE proc [dbo].[sp_taxes_cost]
+@jobno as bigint ,
+@startDate as date,
+@endDate as date 
+as
+begin 
+	select cl.companyName, jb.jobNo , hw.dateWorked , CONCAT( em.firstName, ' ',em.lastname,' ', em.middleName)as 'Employee',
+sum(hw.hoursST) as 'Hours St',
+sum(hw.hoursOT) as 'Hours Ot',
+
+isnull(pr.payRate1,0) as 'Rate 1',
+isnull(pr.payRate2,0) as 'Rate 2',
+
+isnull(tx.FICA,0) as 'FICA',
+isnull(tx.FUI,0) as 'FUI',
+isnull(tx.SUI,0) as 'SUI',
+isnull(tx.WC,0) as 'WC',
+isnull(tx.GenLiab,0) as 'GenLiab',	
+isnull(tx.Umbr,0) as 'Umbr',
+isnull(tx.Pollution,0) as 'Pollution',
+isnull(tx.Healt,0) as 'Healt',
+isnull(tx.Fringe,0) as 'Fringe',
+isnull(tx.Small,0) as 'Small',
+isnull(tx.PPE,0) as 'PPE',
+isnull(tx.Consumable,0) as 'Consumable',
+isnull(tx.Scaffold,0) as 'Scaffold',
+isnull(tx.YoYo,0) as 'YOYO',
+isnull(tx.Mesh,0) as 'Mesh',
+isnull(tx.Miselaneos,0) as 'Miselaneos',
+isnull(tx.Overhead,0) as 'Overhead',
+isnull(tx.Profit,0) as 'Profit'
+ from hoursWorked as hw 
+inner join task as tk on hw.idAux = tk.idAux
+inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO 
+inner join projectOrder as po on po.idPO = wo.idPO and po.jobNo = wo.jobNo 
+inner join job as jb on jb.jobNo = po.jobNo
+inner join clients as cl on cl.idClient = jb.idClient
+inner join employees as em on em.idEmployee = hw.idEmployee
+left join payRate as  pr on em.idEmployee = pr.idEmployee
+left join taxesST as tx on tx.jobNo = jb.jobNo
+
+where hw.dateWorked between @startDate and @endDate and  jb.jobNo = @jobno and pr.datePayRate = (select max (datePayRate) from payRate as pr1 where em.idEmployee = pr1.idEmployee)
+group by cl.companyName, jb.jobNo , hw.dateWorked , CONCAT( em.firstName, ' ',em.lastname,' ', em.middleName),pr.payRate1,pr.payRate2,tx.FICA,
+tx.FUI,tx.SUI,tx.WC,tx.GenLiab,	tx.Umbr,tx.Pollution,tx.Healt,tx.Fringe,tx.Small,tx.PPE,tx.Consumable,tx.Scaffold,tx.YoYo,tx.Mesh,tx.Miselaneos,tx.Overhead,tx.Profit
+order by cl.companyName,jb.jobNo,CONCAT( em.firstName, ' ',em.lastname,' ', em.middleName),hw.dateWorked
+end

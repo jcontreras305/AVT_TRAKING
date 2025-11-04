@@ -770,6 +770,12 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Reports TimeSheet\ReportsExcel.vb" />
+    <Compile Include="Reports TimeSheet\ReportTaxesCost.Designer.vb">
+      <DependentUpon>ReportTaxesCost.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Reports TimeSheet\ReportTaxesCost.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Reports TimeSheet\ReportTimeSheetsPO.Designer.vb">
       <DependentUpon>ReportTimeSheetsPO.vb</DependentUpon>
     </Compile>
@@ -835,6 +841,12 @@
     </Compile>
     <Compile Include="Reports TimeSheet\ReportYearFinalHours.vb">
       <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Reports TimeSheet\TaxesCost.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TaxesCost.rpt</DependentUpon>
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="Reports TimeSheet\TimeSheetPO.vb">
       <AutoGen>True</AutoGen>
@@ -1388,6 +1400,9 @@
     <EmbeddedResource Include="Reports TimeSheet\ReportJNumber.resx">
       <DependentUpon>ReportJNumber.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reports TimeSheet\ReportTaxesCost.resx">
+      <DependentUpon>ReportTaxesCost.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reports TimeSheet\ReportTimeSheetsPO.resx">
       <DependentUpon>ReportTimeSheetsPO.vb</DependentUpon>
     </EmbeddedResource>
@@ -1422,6 +1437,10 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Reports TimeSheet\ReportScaffoldEstimate.resx">
       <DependentUpon>ReportScaffoldEstimate.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports TimeSheet\TaxesCost.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>TaxesCost.vb</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports TimeSheet\TimeSheetPO.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
