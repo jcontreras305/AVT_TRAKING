@@ -5804,49 +5804,182 @@ GO
 --########## ESTE ES CODIGO PARA EL REPORTE DE TAXES COST #####################################
 --#############################################################################################
 
-CREATE proc [dbo].[sp_taxes_cost]
-@jobno as bigint ,
-@startDate as date,
-@endDate as date 
-as
-begin 
-	select cl.companyName, jb.jobNo , hw.dateWorked , CONCAT( em.firstName, ' ',em.lastname,' ', em.middleName)as 'Employee',
-sum(hw.hoursST) as 'Hours St',
-sum(hw.hoursOT) as 'Hours Ot',
+--CREATE proc [dbo].[sp_taxes_cost]
+--@jobno as bigint ,
+--@startDate as date,
+--@endDate as date 
+--as
+--begin 
+--	select cl.companyName, jb.jobNo , hw.dateWorked , CONCAT( em.firstName, ' ',em.lastname,' ', em.middleName)as 'Employee',
+--sum(hw.hoursST) as 'Hours St',
+--sum(hw.hoursOT) as 'Hours Ot',
 
-isnull(pr.payRate1,0) as 'Rate 1',
-isnull(pr.payRate2,0) as 'Rate 2',
+--isnull(pr.payRate1,0) as 'Rate 1',
+--isnull(pr.payRate2,0) as 'Rate 2',
 
-isnull(tx.FICA,0) as 'FICA',
-isnull(tx.FUI,0) as 'FUI',
-isnull(tx.SUI,0) as 'SUI',
-isnull(tx.WC,0) as 'WC',
-isnull(tx.GenLiab,0) as 'GenLiab',	
-isnull(tx.Umbr,0) as 'Umbr',
-isnull(tx.Pollution,0) as 'Pollution',
-isnull(tx.Healt,0) as 'Healt',
-isnull(tx.Fringe,0) as 'Fringe',
-isnull(tx.Small,0) as 'Small',
-isnull(tx.PPE,0) as 'PPE',
-isnull(tx.Consumable,0) as 'Consumable',
-isnull(tx.Scaffold,0) as 'Scaffold',
-isnull(tx.YoYo,0) as 'YOYO',
-isnull(tx.Mesh,0) as 'Mesh',
-isnull(tx.Miselaneos,0) as 'Miselaneos',
-isnull(tx.Overhead,0) as 'Overhead',
-isnull(tx.Profit,0) as 'Profit'
- from hoursWorked as hw 
-inner join task as tk on hw.idAux = tk.idAux
-inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO 
-inner join projectOrder as po on po.idPO = wo.idPO and po.jobNo = wo.jobNo 
-inner join job as jb on jb.jobNo = po.jobNo
-inner join clients as cl on cl.idClient = jb.idClient
-inner join employees as em on em.idEmployee = hw.idEmployee
-left join payRate as  pr on em.idEmployee = pr.idEmployee
-left join taxesST as tx on tx.jobNo = jb.jobNo
+--isnull(tx.FICA,0) as 'FICA',
+--isnull(tx.FUI,0) as 'FUI',
+--isnull(tx.SUI,0) as 'SUI',
+--isnull(tx.WC,0) as 'WC',
+--isnull(tx.GenLiab,0) as 'GenLiab',	
+--isnull(tx.Umbr,0) as 'Umbr',
+--isnull(tx.Pollution,0) as 'Pollution',
+--isnull(tx.Healt,0) as 'Healt',
+--isnull(tx.Fringe,0) as 'Fringe',
+--isnull(tx.Small,0) as 'Small',
+--isnull(tx.PPE,0) as 'PPE',
+--isnull(tx.Consumable,0) as 'Consumable',
+--isnull(tx.Scaffold,0) as 'Scaffold',
+--isnull(tx.YoYo,0) as 'YOYO',
+--isnull(tx.Mesh,0) as 'Mesh',
+--isnull(tx.Miselaneos,0) as 'Miselaneos',
+--isnull(tx.Overhead,0) as 'Overhead',
+--isnull(tx.Profit,0) as 'Profit'
+-- from hoursWorked as hw 
+--inner join task as tk on hw.idAux = tk.idAux
+--inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO 
+--inner join projectOrder as po on po.idPO = wo.idPO and po.jobNo = wo.jobNo 
+--inner join job as jb on jb.jobNo = po.jobNo
+--inner join clients as cl on cl.idClient = jb.idClient
+--inner join employees as em on em.idEmployee = hw.idEmployee
+--left join payRate as  pr on em.idEmployee = pr.idEmployee
+--left join taxesST as tx on tx.jobNo = jb.jobNo
 
-where hw.dateWorked between @startDate and @endDate and  jb.jobNo = @jobno and pr.datePayRate = (select max (datePayRate) from payRate as pr1 where em.idEmployee = pr1.idEmployee)
-group by cl.companyName, jb.jobNo , hw.dateWorked , CONCAT( em.firstName, ' ',em.lastname,' ', em.middleName),pr.payRate1,pr.payRate2,tx.FICA,
-tx.FUI,tx.SUI,tx.WC,tx.GenLiab,	tx.Umbr,tx.Pollution,tx.Healt,tx.Fringe,tx.Small,tx.PPE,tx.Consumable,tx.Scaffold,tx.YoYo,tx.Mesh,tx.Miselaneos,tx.Overhead,tx.Profit
-order by cl.companyName,jb.jobNo,CONCAT( em.firstName, ' ',em.lastname,' ', em.middleName),hw.dateWorked
+--where hw.dateWorked between @startDate and @endDate and  jb.jobNo = @jobno and pr.datePayRate = (select max (datePayRate) from payRate as pr1 where em.idEmployee = pr1.idEmployee)
+--group by cl.companyName, jb.jobNo , hw.dateWorked , CONCAT( em.firstName, ' ',em.lastname,' ', em.middleName),pr.payRate1,pr.payRate2,tx.FICA,
+--tx.FUI,tx.SUI,tx.WC,tx.GenLiab,	tx.Umbr,tx.Pollution,tx.Healt,tx.Fringe,tx.Small,tx.PPE,tx.Consumable,tx.Scaffold,tx.YoYo,tx.Mesh,tx.Miselaneos,tx.Overhead,tx.Profit
+--order by cl.companyName,jb.jobNo,CONCAT( em.firstName, ' ',em.lastname,' ', em.middleName),hw.dateWorked
+--end
+
+
+
+----| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
+----| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
+----V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V
+--#############################################################################################
+--########## ESTE ES CODIGO PARA EL REPORTE DE TAXES COST #####################################
+--#############################################################################################
+Alter proc [dbo].[sp_SelectEstCostByProject]
+@projectId as varchar(40)
+as 
+begin
+-- scaffold
+--decks dismantle scf
+select po.ProjectId, po.[description],po.unit,
+cl.numberClient, cl.contactName, cl.companyName, cl.plant, ha.avenue, ha.city, ha.providence,
+dr.idDrawingNum,dr.[description],
+CONVERT(NVARCHAR, scfD.tag)as 'Tag' ,'SCF Deck DISM' as 'TASK',scfD.SHRD as 'HRS',scfD.DSCOSTL as 'COSTL',scfD.DSCOSTM as 'COSTM',scfD.SCOSTEDD as 'COSTE',scfD.DSCOSTL + scfD.DSCOSTMD + scfD.SCOSTEDD  as 'TCOST' 
+from EstCostDism as scfD
+inner join drawing as dr on dr.idDrawingNum = scfD.idDrawingNum
+inner join projectClientEst as po on po.projectId = scfD.projectId
+inner join clientsEst as cl on cl.idClientEst = po.idClientEst
+inner join HomeAddress as ha on ha.idHomeAdress = cl.idHomeAdress 
+where po.ProjectId = @projectId
+--decks build scf
+UNION ALL
+select po.ProjectId, po.[description],po.unit,
+cl.numberClient, cl.contactName, cl.companyName, cl.plant, ha.avenue, ha.city, ha.providence,
+dr.idDrawingNum,dr.[description],
+CONVERT(NVARCHAR, scfB.tag)as 'Tag' ,'SCF Deck Build' as 'TASK',scfB.SBHR as 'HRS',scfB.SCOSTLB as 'COSTL',scfB.SCOSTMB as 'COSTM',scfB.SCOSTEB as 'COSTE', scfB.STCOST as 'TCOST' 
+from EstCostBuild as scfB
+inner join drawing as dr on dr.idDrawingNum = scfB.idDrawingNum
+inner join projectClientEst as po on po.projectId = scfB.projectId
+inner join clientsEst as cl on cl.idClientEst = po.idClientEst
+inner join HomeAddress as ha on ha.idHomeAdress = cl.idHomeAdress 
+where po.ProjectId = @projectId
+--Build Scaffold
+UNION ALL
+select po.ProjectId, po.[description],po.unit,
+cl.numberClient, cl.contactName, cl.companyName, cl.plant, ha.avenue, ha.city, ha.providence,
+dr.idDrawingNum,dr.[description],
+CONVERT(NVARCHAR, scf.tag)as 'Tag' , 'Scf Build' as 'TASK', scf.SHR as 'HRS',scf.SCOSTL as 'COSTL',scf.SCOSTM as 'COSTM',scf.SCOSTE as 'COSTE',scf.STCOST as 'TCOST' 
+from EstCostScf as scf
+inner join drawing as dr on dr.idDrawingNum = scf.idDrawingNum
+inner join projectClientEst as po on po.projectId = scf.projectId
+inner join clientsEst as cl on cl.idClientEst = po.idClientEst
+inner join HomeAddress as ha on ha.idHomeAdress = cl.idHomeAdress 
+where po.ProjectId = @projectId
+--Dimantle Scaffold
+UNION ALL
+select po.ProjectId, po.[description],po.unit,
+cl.numberClient, cl.contactName, cl.companyName, cl.plant, ha.avenue, ha.city, ha.providence,
+dr.idDrawingNum,dr.[description],
+CONVERT(NVARCHAR, scf.tag)as 'Tag' , 'SCF Demo' as 'TASK', scf.SDHR as 'HRS',scf.SCOSTLD as 'COSTL',scf.SCOSTMD as 'COSTM',scf.SCOSTED as 'COSTE',scf.STCOSTD as 'TCOST' 
+from EstCostScf as scf
+inner join drawing as dr on dr.idDrawingNum = scf.idDrawingNum
+inner join projectClientEst as po on po.projectId = scf.projectId
+inner join clientsEst as cl on cl.idClientEst = po.idClientEst
+inner join HomeAddress as ha on ha.idHomeAdress = cl.idHomeAdress 
+where po.ProjectId = @projectId
+-- EQUIPMENT 
+--REMOVE
+UNION ALL
+select po.ProjectId, po.[description],po.unit,
+cl.numberClient, cl.contactName, cl.companyName, cl.plant, ha.avenue, ha.city, ha.providence,
+dr.idDrawingNum,dr.[description],
+CONVERT(NVARCHAR, eq.tag) as 'Tag', 'Remove' as 'TASK',eq.EIRHRS as 'HRS',eq.EIRCOSTL as 'COSTL',eq.EIRCOSTM as 'COSTM',eq.EIRCOSTE as 'COSTE', eq.EIRTCOST as 'TCOST'   from EstCostEq as eq
+inner join drawing as dr on dr.idDrawingNum = eq.idDrawingNum
+inner join projectClientEst as po on po.projectId = eq.projectId
+inner join clientsEst as cl on cl.idClientEst = po.idClientEst
+inner join HomeAddress as ha on ha.idHomeAdress = cl.idHomeAdress 
+where po.ProjectId = @projectId
+--INSTALATION
+UNION ALL 
+select po.ProjectId, po.[description],po.unit,
+cl.numberClient, cl.contactName, cl.companyName, cl.plant, ha.avenue, ha.city, ha.providence,
+dr.idDrawingNum,dr.[description],
+CONVERT(NVARCHAR, eq.tag) as 'Tag', 'Install' as 'TASK', eq.EIIHRS as 'HRS',eq.EIICOSTL as 'COSTL',eq.EIICOSTM as 'COSTM',eq.EIICOSTE as 'COSTE', eq.EIITCOST as 'TCOST'   from EstCostEq as eq
+inner join drawing as dr on dr.idDrawingNum = eq.idDrawingNum
+inner join projectClientEst as po on po.projectId = eq.projectId
+inner join clientsEst as cl on cl.idClientEst = po.idClientEst
+inner join HomeAddress as ha on ha.idHomeAdress = cl.idHomeAdress 
+where po.ProjectId = @projectId
+--PAINT
+UNION ALL
+select po.ProjectId, po.[description],po.unit,
+cl.numberClient, cl.contactName, cl.companyName, cl.plant, ha.avenue, ha.city, ha.providence,
+dr.idDrawingNum,dr.[description],
+CONVERT(NVARCHAR, pp.tag) as 'Tag','Paint' as 'TASK',pp.PPHRS as 'HRS',pp.PPCOSTL as 'COSTL',pp.PPCOSTM as 'COSTM',pp.PPCOSTE as 'COSTE', pp.PPTCOST as 'TCOST'  
+from EstCostPP as pp
+inner join drawing as dr on dr.idDrawingNum = pp.idDrawingNum
+inner join projectClientEst as po on po.projectId = pp.projectId
+inner join clientsEst as cl on cl.idClientEst = po.idClientEst
+inner join HomeAddress as ha on ha.idHomeAdress = cl.idHomeAdress 
+where po.ProjectId = @projectId
+--PIPING
+--REMOVE
+UNION ALL
+select po.ProjectId, po.[description],po.unit,
+cl.numberClient, cl.contactName, cl.companyName, cl.plant, ha.avenue, ha.city, ha.providence,
+dr.idDrawingNum,dr.[description],
+CONVERT(NVARCHAR , pp.tag) as 'TAG',  'Remove'as 'TASK', pp.PIRHRS as 'HRS', pp.PIRCOSTL as 'COSTL',pp.PIRCOSTM as 'COSTM',pp.PIRCOSTE as 'COSTE', pp.PIRTCOST as 'TCOST'  from EstCostPp as pp
+inner join drawing as dr on dr.idDrawingNum = pp.idDrawingNum
+inner join projectClientEst as po on po.projectId = pp.projectId
+inner join clientsEst as cl on cl.idClientEst = po.idClientEst
+inner join HomeAddress as ha on ha.idHomeAdress = cl.idHomeAdress 
+where po.ProjectId = @projectId
+--INSTALATION
+UNION ALL
+select po.ProjectId, po.[description],po.unit,
+cl.numberClient, cl.contactName, cl.companyName, cl.plant, ha.avenue, ha.city, ha.providence,
+dr.idDrawingNum,dr.[description],
+CONVERT(NVARCHAR , pp.tag) as 'TAG', 'Install' as 'TASK', pp.PIIHRS as 'HRS', pp.PIICOSTL as 'COSTL',pp.PIICOSTM as 'COSTM',pp.PIICOSTE as 'COSTE', pp.PIITCOST as 'TCOST'  from EstCostPp as pp
+inner join drawing as dr on dr.idDrawingNum = pp.idDrawingNum
+inner join projectClientEst as po on po.projectId = pp.projectId
+inner join clientsEst as cl on cl.idClientEst = po.idClientEst
+inner join HomeAddress as ha on ha.idHomeAdress = cl.idHomeAdress 
+where po.ProjectId = @projectId
+--PAINT
+UNION ALL
+select po.ProjectId, po.[description],po.unit,
+cl.numberClient, cl.contactName, cl.companyName, cl.plant, ha.avenue, ha.city, ha.providence,
+dr.idDrawingNum,dr.[description],
+CONVERT(NVARCHAR , pp.tag) as 'TAG','Paint' as 'TASK' , pp.PPHRS as 'HRS', pp.PPCOSTL as 'COSTL',pp.PPCOSTM as 'COSTM',pp.PPCOSTE as 'COSTE', pp.PPTCOST as 'TCOST'  
+from EstCostPp as pp
+inner join drawing as dr on dr.idDrawingNum = pp.idDrawingNum
+inner join projectClientEst as po on po.projectId = pp.projectId
+inner join clientsEst as cl on cl.idClientEst = po.idClientEst
+inner join HomeAddress as ha on ha.idHomeAdress = cl.idHomeAdress 
+where po.ProjectId = @projectId
 end
+GO

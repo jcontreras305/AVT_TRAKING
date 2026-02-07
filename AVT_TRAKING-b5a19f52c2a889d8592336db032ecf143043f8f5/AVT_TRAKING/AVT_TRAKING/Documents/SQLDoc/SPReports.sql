@@ -3970,9 +3970,10 @@ UNION ALL
 select po.ProjectId, po.[description],po.unit,
 cl.numberClient, cl.contactName, cl.companyName, cl.plant, ha.avenue, ha.city, ha.providence,
 dr.idDrawingNum,dr.[description],
-CONVERT(NVARCHAR, eq.tag) as 'Tag','Paint' as 'TASK',eq.EPHRS as 'HRS',eq.EPCOSTL as 'COSTL',eq.EPCOSTM as 'COSTM',eq.EPCOSTE as 'COSTE', eq.EPTCOST as 'TCOST'   from EstCostEq as eq
-inner join drawing as dr on dr.idDrawingNum = eq.idDrawingNum
-inner join projectClientEst as po on po.projectId = eq.projectId
+CONVERT(NVARCHAR, pp.tag) as 'Tag','Paint' as 'TASK',pp.PPHRS as 'HRS',pp.PPCOSTL as 'COSTL',pp.PPCOSTM as 'COSTM',pp.PPCOSTE as 'COSTE', pp.PPTCOST as 'TCOST'  
+from EstCostPP as pp
+inner join drawing as dr on dr.idDrawingNum = pp.idDrawingNum
+inner join projectClientEst as po on po.projectId = pp.projectId
 inner join clientsEst as cl on cl.idClientEst = po.idClientEst
 inner join HomeAddress as ha on ha.idHomeAdress = cl.idHomeAdress 
 where po.ProjectId = @projectId
@@ -4004,7 +4005,8 @@ UNION ALL
 select po.ProjectId, po.[description],po.unit,
 cl.numberClient, cl.contactName, cl.companyName, cl.plant, ha.avenue, ha.city, ha.providence,
 dr.idDrawingNum,dr.[description],
-CONVERT(NVARCHAR , pp.tag) as 'TAG','Paint' as 'TASK' , pp.PPHRS as 'HRS', pp.PPCOSTL as 'COSTL',pp.PPCOSTM as 'COSTM',pp.PPCOSTE as 'COSTE', pp.PPTCOST as 'TCOST'  from EstCostPp as pp
+CONVERT(NVARCHAR , pp.tag) as 'TAG','Paint' as 'TASK' , pp.PPHRS as 'HRS', pp.PPCOSTL as 'COSTL',pp.PPCOSTM as 'COSTM',pp.PPCOSTE as 'COSTE', pp.PPTCOST as 'TCOST'  
+from EstCostPp as pp
 inner join drawing as dr on dr.idDrawingNum = pp.idDrawingNum
 inner join projectClientEst as po on po.projectId = pp.projectId
 inner join clientsEst as cl on cl.idClientEst = po.idClientEst
