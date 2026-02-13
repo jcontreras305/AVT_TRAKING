@@ -897,7 +897,6 @@
         End Try
         selectTable = "eqJacketUnitRate"
     End Sub
-
     Private Sub btnExcelJacketPp_Click(sender As Object, e As EventArgs) Handles btnExcelJacketPp.Click
         Try
             Dim sheetName = InputBox("Please Write the name of the Sheet to Read.", "Find Excel Sheet", "Sheet 1")
@@ -1247,6 +1246,68 @@
     '############################################################################################################################################################################################################################################################
     '############################################################################################################################################################################################################################################################
 
+    Private Sub tblPipingIRHC_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles tblPipingIRHC.CellClick
+        Try
+            Select Case e.ColumnIndex
+                Case 4 ' Type
+                    Try
+                        If tblPipingIRHC.CurrentCell.GetType.Name = "DataGridViewTextBoxCell" Then
+                            Dim cmbType As New DataGridViewComboBoxCell
+                            With cmbType
+                                mtdFactor.llenarComboCellInsFitting(cmbType)
+                            End With
+                            tblPipingIRHC.CurrentRow.Cells("TypePPIRHC") = cmbType
+                        Else
+                            Dim cmbOption2 As DataGridViewComboBoxCell = tblPipingIRHC.CurrentRow.Cells("TypePPIRHC")
+                            With cmbOption2
+                                mtdFactor.llenarComboCellInsFitting(tblPipingIRHC.CurrentRow.Cells("TypePPIRHC"))
+                            End With
+                        End If
+                    Catch ex As Exception
+
+                    End Try
+            End Select
+        Catch ex As Exception
+            MsgBox(ex.Message())
+        End Try
+    End Sub
+
+
+    Public Sub cmb_SelectedIndexChanguedPipingIRHC(sender As Object, e As EventArgs)
+        Try
+            Dim cmb As ComboBox = CType(sender, ComboBox)
+            Select Case tblPipingIRHC.CurrentCell.ColumnIndex
+                Case 4 'type
+                    tblPipingIRHC.CurrentCell.Value = cmb.Text
+            End Select
+        Catch ex As Exception
+
+        End Try
+    End Sub
+    Private Sub tblPipingIRHC_EditingControlShowing(sender As Object, e As DataGridViewEditingControlShowingEventArgs) Handles tblPipingIRHC.EditingControlShowing
+        Try
+            Dim Index = tblPipingIRHC.CurrentCell.ColumnIndex
+            If Index = 4 Then ' Type
+                Dim typecell = tblPipingIRHC.CurrentCell.GetType.ToString
+                If Not typecell = "System.Windows.Forms.DataGridViewTextBoxCell" Then
+                    Dim cb As ComboBox = CType(e.Control, ComboBox)
+                    If e.Control IsNot Nothing Then
+                        RemoveHandler cb.SelectedIndexChanged, AddressOf cmb_SelectedIndexChanguedPipingIRHC
+                        AddHandler cb.SelectedIndexChanged, AddressOf cmb_SelectedIndexChanguedPipingIRHC
+                    End If
+                End If
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message())
+        End Try
+    End Sub
+
+    Private Sub tblPipingIRHC_DataError(sender As Object, e As DataGridViewDataErrorEventArgs) Handles tblPipingIRHC.DataError
+        If e.ColumnIndex = 4 Then
+            e.ThrowException = False
+        End If
+    End Sub
+
     Private Sub btnExcelEquipmentIRHC_Click(sender As Object, e As EventArgs) Handles btnExcelEquipmentIRHC.Click
         Try
             Dim sheetName = InputBox("Please Write the name of the Sheet to Read.", "Find Excel Sheet", "Sheet 1")
@@ -1273,6 +1334,69 @@
         selectTable = "EquipmentHC"
     End Sub
     '############################################################################################################################################################################################################################################################
+
+    Private Sub tblequipmentIRHC_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles tblEquipmentIRHC.CellClick
+        Try
+            Select Case e.ColumnIndex
+                Case 2 ' Type
+                    Try
+                        If tblEquipmentIRHC.CurrentCell.GetType.Name = "DataGridViewTextBoxCell" Then
+                            Dim cmbType As New DataGridViewComboBoxCell
+                            With cmbType
+                                mtdFactor.llenarComboCellInsFitting(cmbType)
+                            End With
+                            tblEquipmentIRHC.CurrentRow.Cells("TypeEqIRHC") = cmbType
+                        Else
+                            Dim cmbOption2 As DataGridViewComboBoxCell = tblEquipmentIRHC.CurrentRow.Cells("TypeEqIRHC")
+                            With cmbOption2
+                                mtdFactor.llenarComboCellInsFitting(tblEquipmentIRHC.CurrentRow.Cells("TypeEqIRHC"))
+                            End With
+                        End If
+                    Catch ex As Exception
+
+                    End Try
+            End Select
+        Catch ex As Exception
+            MsgBox(ex.Message())
+        End Try
+    End Sub
+
+
+    Public Sub cmb_SelectedIndexChanguedEquipmentIRHC(sender As Object, e As EventArgs)
+        Try
+            Dim cmb As ComboBox = CType(sender, ComboBox)
+            Select Case tblPipingIRHC.CurrentCell.ColumnIndex
+                Case 2 'type
+                    tblPipingIRHC.CurrentCell.Value = cmb.Text
+            End Select
+        Catch ex As Exception
+
+        End Try
+    End Sub
+    Private Sub tblEquipmentIRHC_EditingControlShowing(sender As Object, e As DataGridViewEditingControlShowingEventArgs) Handles tblPipingIRHC.EditingControlShowing
+        Try
+            Dim Index = tblEquipmentIRHC.CurrentCell.ColumnIndex
+            If Index = 2 Then ' Type
+                Dim typecell = tblEquipmentIRHC.CurrentCell.GetType.ToString
+                If Not typecell = "System.Windows.Forms.DataGridViewTextBoxCell" Then
+                    Dim cb As ComboBox = CType(e.Control, ComboBox)
+                    If e.Control IsNot Nothing Then
+                        RemoveHandler cb.SelectedIndexChanged, AddressOf cmb_SelectedIndexChanguedEquipmentIRHC
+                        AddHandler cb.SelectedIndexChanged, AddressOf cmb_SelectedIndexChanguedEquipmentIRHC
+                    End If
+                End If
+            End If
+        Catch ex As Exception
+            MsgBox(ex.Message())
+        End Try
+    End Sub
+
+    Private Sub tblEquipmentIRHC_DataError(sender As Object, e As DataGridViewDataErrorEventArgs) Handles tblEquipmentIRHC.DataError
+        If e.ColumnIndex = 2 Then
+            e.ThrowException = False
+        End If
+    End Sub
+
     '############################################################################################################################################################################################################################################################
     '############################################################################################################################################################################################################################################################
 
@@ -1395,4 +1519,6 @@
                 End If
         End Select
     End Sub
+
+
 End Class

@@ -5859,13 +5859,14 @@ GO
 --#############################################################################################
 --########## ESTE ES CODIGO PARA EL REPORTE DE TAXES COST #####################################
 --#############################################################################################
-Alter proc [dbo].[sp_SelectEstCostByProject]
+ALTER proc [dbo].[sp_SelectEstCostByProject]
 @projectId as varchar(40)
 as 
 begin
+select distinct * from( 
 -- scaffold
 --decks dismantle scf
-select po.ProjectId, po.[description],po.unit,
+select po.ProjectId, po.[description] as 'Descrip',po.unit,
 cl.numberClient, cl.contactName, cl.companyName, cl.plant, ha.avenue, ha.city, ha.providence,
 dr.idDrawingNum,dr.[description],
 CONVERT(NVARCHAR, scfD.tag)as 'Tag' ,'SCF Deck DISM' as 'TASK',scfD.SHRD as 'HRS',scfD.DSCOSTL as 'COSTL',scfD.DSCOSTM as 'COSTM',scfD.SCOSTEDD as 'COSTE',scfD.DSCOSTL + scfD.DSCOSTMD + scfD.SCOSTEDD  as 'TCOST' 
@@ -5877,7 +5878,7 @@ inner join HomeAddress as ha on ha.idHomeAdress = cl.idHomeAdress
 where po.ProjectId = @projectId
 --decks build scf
 UNION ALL
-select po.ProjectId, po.[description],po.unit,
+select po.ProjectId, po.[description] as 'Descrip',po.unit,
 cl.numberClient, cl.contactName, cl.companyName, cl.plant, ha.avenue, ha.city, ha.providence,
 dr.idDrawingNum,dr.[description],
 CONVERT(NVARCHAR, scfB.tag)as 'Tag' ,'SCF Deck Build' as 'TASK',scfB.SBHR as 'HRS',scfB.SCOSTLB as 'COSTL',scfB.SCOSTMB as 'COSTM',scfB.SCOSTEB as 'COSTE', scfB.STCOST as 'TCOST' 
@@ -5889,7 +5890,7 @@ inner join HomeAddress as ha on ha.idHomeAdress = cl.idHomeAdress
 where po.ProjectId = @projectId
 --Build Scaffold
 UNION ALL
-select po.ProjectId, po.[description],po.unit,
+select po.ProjectId, po.[description] as 'Descrip',po.unit,
 cl.numberClient, cl.contactName, cl.companyName, cl.plant, ha.avenue, ha.city, ha.providence,
 dr.idDrawingNum,dr.[description],
 CONVERT(NVARCHAR, scf.tag)as 'Tag' , 'Scf Build' as 'TASK', scf.SHR as 'HRS',scf.SCOSTL as 'COSTL',scf.SCOSTM as 'COSTM',scf.SCOSTE as 'COSTE',scf.STCOST as 'TCOST' 
@@ -5901,7 +5902,7 @@ inner join HomeAddress as ha on ha.idHomeAdress = cl.idHomeAdress
 where po.ProjectId = @projectId
 --Dimantle Scaffold
 UNION ALL
-select po.ProjectId, po.[description],po.unit,
+select po.ProjectId, po.[description] as 'Descrip',po.unit,
 cl.numberClient, cl.contactName, cl.companyName, cl.plant, ha.avenue, ha.city, ha.providence,
 dr.idDrawingNum,dr.[description],
 CONVERT(NVARCHAR, scf.tag)as 'Tag' , 'SCF Demo' as 'TASK', scf.SDHR as 'HRS',scf.SCOSTLD as 'COSTL',scf.SCOSTMD as 'COSTM',scf.SCOSTED as 'COSTE',scf.STCOSTD as 'TCOST' 
@@ -5914,10 +5915,11 @@ where po.ProjectId = @projectId
 -- EQUIPMENT 
 --REMOVE
 UNION ALL
-select po.ProjectId, po.[description],po.unit,
+select po.ProjectId, po.[description] as 'Descrip',po.unit,
 cl.numberClient, cl.contactName, cl.companyName, cl.plant, ha.avenue, ha.city, ha.providence,
 dr.idDrawingNum,dr.[description],
-CONVERT(NVARCHAR, eq.tag) as 'Tag', 'Remove' as 'TASK',eq.EIRHRS as 'HRS',eq.EIRCOSTL as 'COSTL',eq.EIRCOSTM as 'COSTM',eq.EIRCOSTE as 'COSTE', eq.EIRTCOST as 'TCOST'   from EstCostEq as eq
+CONVERT(NVARCHAR, eq.tag) as 'Tag', 'Remove' as 'TASK',eq.EIRHRS as 'HRS',eq.EIRCOSTL as 'COSTL',eq.EIRCOSTM as 'COSTM',eq.EIRCOSTE as 'COSTE', eq.EIRTCOST as 'TCOST'   
+from EstCostEq as eq
 inner join drawing as dr on dr.idDrawingNum = eq.idDrawingNum
 inner join projectClientEst as po on po.projectId = eq.projectId
 inner join clientsEst as cl on cl.idClientEst = po.idClientEst
@@ -5925,10 +5927,11 @@ inner join HomeAddress as ha on ha.idHomeAdress = cl.idHomeAdress
 where po.ProjectId = @projectId
 --INSTALATION
 UNION ALL 
-select po.ProjectId, po.[description],po.unit,
+select po.ProjectId, po.[description] as 'Descrip',po.unit,
 cl.numberClient, cl.contactName, cl.companyName, cl.plant, ha.avenue, ha.city, ha.providence,
 dr.idDrawingNum,dr.[description],
-CONVERT(NVARCHAR, eq.tag) as 'Tag', 'Install' as 'TASK', eq.EIIHRS as 'HRS',eq.EIICOSTL as 'COSTL',eq.EIICOSTM as 'COSTM',eq.EIICOSTE as 'COSTE', eq.EIITCOST as 'TCOST'   from EstCostEq as eq
+CONVERT(NVARCHAR, eq.tag) as 'Tag', 'Install' as 'TASK', eq.EIIHRS as 'HRS',eq.EIICOSTL as 'COSTL',eq.EIICOSTM as 'COSTM',eq.EIICOSTE as 'COSTE', eq.EIITCOST as 'TCOST'   
+from EstCostEq as eq
 inner join drawing as dr on dr.idDrawingNum = eq.idDrawingNum
 inner join projectClientEst as po on po.projectId = eq.projectId
 inner join clientsEst as cl on cl.idClientEst = po.idClientEst
@@ -5936,7 +5939,7 @@ inner join HomeAddress as ha on ha.idHomeAdress = cl.idHomeAdress
 where po.ProjectId = @projectId
 --PAINT
 UNION ALL
-select po.ProjectId, po.[description],po.unit,
+select po.ProjectId, po.[description] as 'Descrip',po.unit,
 cl.numberClient, cl.contactName, cl.companyName, cl.plant, ha.avenue, ha.city, ha.providence,
 dr.idDrawingNum,dr.[description],
 CONVERT(NVARCHAR, pp.tag) as 'Tag','Paint' as 'TASK',pp.PPHRS as 'HRS',pp.PPCOSTL as 'COSTL',pp.PPCOSTM as 'COSTM',pp.PPCOSTE as 'COSTE', pp.PPTCOST as 'TCOST'  
@@ -5949,10 +5952,11 @@ where po.ProjectId = @projectId
 --PIPING
 --REMOVE
 UNION ALL
-select po.ProjectId, po.[description],po.unit,
+select po.ProjectId, po.[description] as 'Descrip',po.unit,
 cl.numberClient, cl.contactName, cl.companyName, cl.plant, ha.avenue, ha.city, ha.providence,
 dr.idDrawingNum,dr.[description],
-CONVERT(NVARCHAR , pp.tag) as 'TAG',  'Remove'as 'TASK', pp.PIRHRS as 'HRS', pp.PIRCOSTL as 'COSTL',pp.PIRCOSTM as 'COSTM',pp.PIRCOSTE as 'COSTE', pp.PIRTCOST as 'TCOST'  from EstCostPp as pp
+CONVERT(NVARCHAR , pp.tag) as 'TAG',  'Remove'as 'TASK', pp.PIRHRS as 'HRS', pp.PIRCOSTL as 'COSTL',pp.PIRCOSTM as 'COSTM',pp.PIRCOSTE as 'COSTE', pp.PIRTCOST as 'TCOST'  
+from EstCostPp as pp
 inner join drawing as dr on dr.idDrawingNum = pp.idDrawingNum
 inner join projectClientEst as po on po.projectId = pp.projectId
 inner join clientsEst as cl on cl.idClientEst = po.idClientEst
@@ -5960,10 +5964,11 @@ inner join HomeAddress as ha on ha.idHomeAdress = cl.idHomeAdress
 where po.ProjectId = @projectId
 --INSTALATION
 UNION ALL
-select po.ProjectId, po.[description],po.unit,
+select po.ProjectId, po.[description] as 'Descrip',po.unit,
 cl.numberClient, cl.contactName, cl.companyName, cl.plant, ha.avenue, ha.city, ha.providence,
 dr.idDrawingNum,dr.[description],
-CONVERT(NVARCHAR , pp.tag) as 'TAG', 'Install' as 'TASK', pp.PIIHRS as 'HRS', pp.PIICOSTL as 'COSTL',pp.PIICOSTM as 'COSTM',pp.PIICOSTE as 'COSTE', pp.PIITCOST as 'TCOST'  from EstCostPp as pp
+CONVERT(NVARCHAR , pp.tag) as 'TAG', 'Install' as 'TASK', pp.PIIHRS as 'HRS', pp.PIICOSTL as 'COSTL',pp.PIICOSTM as 'COSTM',pp.PIICOSTE as 'COSTE', pp.PIITCOST as 'TCOST'  
+from EstCostPp as pp
 inner join drawing as dr on dr.idDrawingNum = pp.idDrawingNum
 inner join projectClientEst as po on po.projectId = pp.projectId
 inner join clientsEst as cl on cl.idClientEst = po.idClientEst
@@ -5971,7 +5976,7 @@ inner join HomeAddress as ha on ha.idHomeAdress = cl.idHomeAdress
 where po.ProjectId = @projectId
 --PAINT
 UNION ALL
-select po.ProjectId, po.[description],po.unit,
+select po.ProjectId, po.[description] as 'Descrip',po.unit,
 cl.numberClient, cl.contactName, cl.companyName, cl.plant, ha.avenue, ha.city, ha.providence,
 dr.idDrawingNum,dr.[description],
 CONVERT(NVARCHAR , pp.tag) as 'TAG','Paint' as 'TASK' , pp.PPHRS as 'HRS', pp.PPCOSTL as 'COSTL',pp.PPCOSTM as 'COSTM',pp.PPCOSTE as 'COSTE', pp.PPTCOST as 'TCOST'  
@@ -5980,6 +5985,7 @@ inner join drawing as dr on dr.idDrawingNum = pp.idDrawingNum
 inner join projectClientEst as po on po.projectId = pp.projectId
 inner join clientsEst as cl on cl.idClientEst = po.idClientEst
 inner join HomeAddress as ha on ha.idHomeAdress = cl.idHomeAdress 
-where po.ProjectId = @projectId
+where po.ProjectId = @projectId 
+) as T1
 end
 GO

@@ -379,7 +379,7 @@ Partial Class Factors
         Me.TableLayoutPanel1.Controls.Add(Me.Panel3, 0, 2)
         Me.TableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.TableLayoutPanel1.Location = New System.Drawing.Point(0, 0)
-        Me.TableLayoutPanel1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.TableLayoutPanel1.Margin = New System.Windows.Forms.Padding(4)
         Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
         Me.TableLayoutPanel1.RowCount = 3
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 14.67505!))
@@ -395,7 +395,7 @@ Partial Class Factors
         Me.Panel1.Controls.Add(Me.Label1)
         Me.Panel1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel1.Location = New System.Drawing.Point(4, 4)
-        Me.Panel1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.Panel1.Margin = New System.Windows.Forms.Padding(4)
         Me.Panel1.Name = "Panel1"
         Me.Panel1.Size = New System.Drawing.Size(1291, 78)
         Me.Panel1.TabIndex = 0
@@ -431,7 +431,7 @@ Partial Class Factors
         Me.Panel2.Controls.Add(Me.TableLayoutPanel2)
         Me.Panel2.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel2.Location = New System.Drawing.Point(4, 90)
-        Me.Panel2.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.Panel2.Margin = New System.Windows.Forms.Padding(4)
         Me.Panel2.Name = "Panel2"
         Me.Panel2.Size = New System.Drawing.Size(1291, 494)
         Me.Panel2.TabIndex = 1
@@ -444,7 +444,7 @@ Partial Class Factors
         Me.TableLayoutPanel2.Controls.Add(Me.TabControl1, 0, 1)
         Me.TableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill
         Me.TableLayoutPanel2.Location = New System.Drawing.Point(0, 0)
-        Me.TableLayoutPanel2.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.TableLayoutPanel2.Margin = New System.Windows.Forms.Padding(4)
         Me.TableLayoutPanel2.Name = "TableLayoutPanel2"
         Me.TableLayoutPanel2.RowCount = 2
         Me.TableLayoutPanel2.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 39.14141!))
@@ -458,9 +458,9 @@ Partial Class Factors
         Me.GroupBox1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.GroupBox1.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.GroupBox1.Location = New System.Drawing.Point(4, 4)
-        Me.GroupBox1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.GroupBox1.Margin = New System.Windows.Forms.Padding(4)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Padding = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.GroupBox1.Padding = New System.Windows.Forms.Padding(4)
         Me.GroupBox1.Size = New System.Drawing.Size(1283, 185)
         Me.GroupBox1.TabIndex = 0
         Me.GroupBox1.TabStop = False
@@ -476,7 +476,7 @@ Partial Class Factors
         Me.TableLayoutPanel3.Controls.Add(Me.Panel10, 0, 0)
         Me.TableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill
         Me.TableLayoutPanel3.Location = New System.Drawing.Point(4, 19)
-        Me.TableLayoutPanel3.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.TableLayoutPanel3.Margin = New System.Windows.Forms.Padding(4)
         Me.TableLayoutPanel3.Name = "TableLayoutPanel3"
         Me.TableLayoutPanel3.RowCount = 1
         Me.TableLayoutPanel3.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
@@ -489,7 +489,7 @@ Partial Class Factors
         Me.Panel4.Controls.Add(Me.btnSaveWWSLR)
         Me.Panel4.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel4.Location = New System.Drawing.Point(621, 4)
-        Me.Panel4.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.Panel4.Margin = New System.Windows.Forms.Padding(4)
         Me.Panel4.Name = "Panel4"
         Me.Panel4.Size = New System.Drawing.Size(264, 154)
         Me.Panel4.TabIndex = 1
@@ -504,7 +504,7 @@ Partial Class Factors
         Me.btnDropWWSLR.Image = Global.AVT_TRAKING.My.Resources.Resources.delete
         Me.btnDropWWSLR.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.btnDropWWSLR.Location = New System.Drawing.Point(20, 54)
-        Me.btnDropWWSLR.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btnDropWWSLR.Margin = New System.Windows.Forms.Padding(4)
         Me.btnDropWWSLR.Name = "btnDropWWSLR"
         Me.btnDropWWSLR.Size = New System.Drawing.Size(120, 43)
         Me.btnDropWWSLR.TabIndex = 30
@@ -522,7 +522,7 @@ Partial Class Factors
         Me.btnSaveWWSLR.Image = Global.AVT_TRAKING.My.Resources.Resources.save
         Me.btnSaveWWSLR.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.btnSaveWWSLR.Location = New System.Drawing.Point(20, 4)
-        Me.btnSaveWWSLR.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btnSaveWWSLR.Margin = New System.Windows.Forms.Padding(4)
         Me.btnSaveWWSLR.Name = "btnSaveWWSLR"
         Me.btnSaveWWSLR.Size = New System.Drawing.Size(120, 43)
         Me.btnSaveWWSLR.TabIndex = 29
@@ -536,7 +536,7 @@ Partial Class Factors
         Me.Panel10.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel10.ForeColor = System.Drawing.SystemColors.ControlText
         Me.Panel10.Location = New System.Drawing.Point(4, 4)
-        Me.Panel10.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.Panel10.Margin = New System.Windows.Forms.Padding(4)
         Me.Panel10.Name = "Panel10"
         Me.Panel10.Size = New System.Drawing.Size(609, 154)
         Me.Panel10.TabIndex = 2
@@ -556,7 +556,7 @@ Partial Class Factors
         Me.tblWorkWeekScheduleLaborRates.DefaultCellStyle = DataGridViewCellStyle1
         Me.tblWorkWeekScheduleLaborRates.Dock = System.Windows.Forms.DockStyle.Fill
         Me.tblWorkWeekScheduleLaborRates.Location = New System.Drawing.Point(0, 0)
-        Me.tblWorkWeekScheduleLaborRates.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.tblWorkWeekScheduleLaborRates.Margin = New System.Windows.Forms.Padding(4)
         Me.tblWorkWeekScheduleLaborRates.Name = "tblWorkWeekScheduleLaborRates"
         Me.tblWorkWeekScheduleLaborRates.RowHeadersWidth = 51
         Me.tblWorkWeekScheduleLaborRates.Size = New System.Drawing.Size(609, 154)
@@ -615,7 +615,7 @@ Partial Class Factors
         Me.TabControl1.Controls.Add(Me.TabPage12)
         Me.TabControl1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.TabControl1.Location = New System.Drawing.Point(4, 197)
-        Me.TabControl1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.TabControl1.Margin = New System.Windows.Forms.Padding(4)
         Me.TabControl1.Name = "TabControl1"
         Me.TabControl1.SelectedIndex = 0
         Me.TabControl1.Size = New System.Drawing.Size(1283, 293)
@@ -626,9 +626,9 @@ Partial Class Factors
         Me.TabPage1.BackColor = System.Drawing.Color.FromArgb(CType(CType(83, Byte), Integer), CType(CType(93, Byte), Integer), CType(CType(102, Byte), Integer))
         Me.TabPage1.Controls.Add(Me.Panel5)
         Me.TabPage1.Location = New System.Drawing.Point(4, 25)
-        Me.TabPage1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.TabPage1.Margin = New System.Windows.Forms.Padding(4)
         Me.TabPage1.Name = "TabPage1"
-        Me.TabPage1.Padding = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.TabPage1.Padding = New System.Windows.Forms.Padding(4)
         Me.TabPage1.Size = New System.Drawing.Size(1275, 264)
         Me.TabPage1.TabIndex = 0
         Me.TabPage1.Text = "Elevation Factors"
@@ -639,7 +639,7 @@ Partial Class Factors
         Me.Panel5.Controls.Add(Me.TableLayoutPanel4)
         Me.Panel5.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel5.Location = New System.Drawing.Point(4, 4)
-        Me.Panel5.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.Panel5.Margin = New System.Windows.Forms.Padding(4)
         Me.Panel5.Name = "Panel5"
         Me.Panel5.Size = New System.Drawing.Size(1267, 256)
         Me.Panel5.TabIndex = 0
@@ -653,7 +653,7 @@ Partial Class Factors
         Me.TableLayoutPanel4.Controls.Add(Me.GroupBox2, 0, 0)
         Me.TableLayoutPanel4.Dock = System.Windows.Forms.DockStyle.Fill
         Me.TableLayoutPanel4.Location = New System.Drawing.Point(0, 0)
-        Me.TableLayoutPanel4.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.TableLayoutPanel4.Margin = New System.Windows.Forms.Padding(4)
         Me.TableLayoutPanel4.Name = "TableLayoutPanel4"
         Me.TableLayoutPanel4.RowCount = 1
         Me.TableLayoutPanel4.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
@@ -666,9 +666,9 @@ Partial Class Factors
         Me.GroupBox3.Dock = System.Windows.Forms.DockStyle.Fill
         Me.GroupBox3.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.GroupBox3.Location = New System.Drawing.Point(637, 4)
-        Me.GroupBox3.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.GroupBox3.Margin = New System.Windows.Forms.Padding(4)
         Me.GroupBox3.Name = "GroupBox3"
-        Me.GroupBox3.Padding = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.GroupBox3.Padding = New System.Windows.Forms.Padding(4)
         Me.GroupBox3.Size = New System.Drawing.Size(626, 248)
         Me.GroupBox3.TabIndex = 1
         Me.GroupBox3.TabStop = False
@@ -683,11 +683,11 @@ Partial Class Factors
         Me.TableLayoutPanel6.Controls.Add(Me.Panel9, 0, 0)
         Me.TableLayoutPanel6.Dock = System.Windows.Forms.DockStyle.Fill
         Me.TableLayoutPanel6.Location = New System.Drawing.Point(4, 19)
-        Me.TableLayoutPanel6.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.TableLayoutPanel6.Margin = New System.Windows.Forms.Padding(4)
         Me.TableLayoutPanel6.Name = "TableLayoutPanel6"
         Me.TableLayoutPanel6.RowCount = 1
         Me.TableLayoutPanel6.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
-        Me.TableLayoutPanel6.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 222.0!))
+        Me.TableLayoutPanel6.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 225.0!))
         Me.TableLayoutPanel6.Size = New System.Drawing.Size(618, 225)
         Me.TableLayoutPanel6.TabIndex = 1
         '
@@ -696,7 +696,7 @@ Partial Class Factors
         Me.Panel7.Controls.Add(Me.btnExcelTblElevationPaint)
         Me.Panel7.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel7.Location = New System.Drawing.Point(283, 4)
-        Me.Panel7.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.Panel7.Margin = New System.Windows.Forms.Padding(4)
         Me.Panel7.Name = "Panel7"
         Me.Panel7.Size = New System.Drawing.Size(331, 217)
         Me.Panel7.TabIndex = 1
@@ -711,7 +711,7 @@ Partial Class Factors
         Me.btnExcelTblElevationPaint.Image = Global.AVT_TRAKING.My.Resources.Resources.excel
         Me.btnExcelTblElevationPaint.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.btnExcelTblElevationPaint.Location = New System.Drawing.Point(4, 4)
-        Me.btnExcelTblElevationPaint.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btnExcelTblElevationPaint.Margin = New System.Windows.Forms.Padding(4)
         Me.btnExcelTblElevationPaint.Name = "btnExcelTblElevationPaint"
         Me.btnExcelTblElevationPaint.Size = New System.Drawing.Size(133, 43)
         Me.btnExcelTblElevationPaint.TabIndex = 33
@@ -725,7 +725,7 @@ Partial Class Factors
         Me.Panel9.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel9.ForeColor = System.Drawing.SystemColors.ControlText
         Me.Panel9.Location = New System.Drawing.Point(4, 4)
-        Me.Panel9.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.Panel9.Margin = New System.Windows.Forms.Padding(4)
         Me.Panel9.Name = "Panel9"
         Me.Panel9.Size = New System.Drawing.Size(271, 217)
         Me.Panel9.TabIndex = 2
@@ -745,7 +745,7 @@ Partial Class Factors
         Me.tblPaintElevation.DefaultCellStyle = DataGridViewCellStyle2
         Me.tblPaintElevation.Dock = System.Windows.Forms.DockStyle.Fill
         Me.tblPaintElevation.Location = New System.Drawing.Point(0, 0)
-        Me.tblPaintElevation.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.tblPaintElevation.Margin = New System.Windows.Forms.Padding(4)
         Me.tblPaintElevation.Name = "tblPaintElevation"
         Me.tblPaintElevation.RowHeadersWidth = 51
         Me.tblPaintElevation.Size = New System.Drawing.Size(271, 217)
@@ -776,9 +776,9 @@ Partial Class Factors
         Me.GroupBox2.Dock = System.Windows.Forms.DockStyle.Fill
         Me.GroupBox2.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.GroupBox2.Location = New System.Drawing.Point(4, 4)
-        Me.GroupBox2.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.GroupBox2.Margin = New System.Windows.Forms.Padding(4)
         Me.GroupBox2.Name = "GroupBox2"
-        Me.GroupBox2.Padding = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.GroupBox2.Padding = New System.Windows.Forms.Padding(4)
         Me.GroupBox2.Size = New System.Drawing.Size(625, 248)
         Me.GroupBox2.TabIndex = 0
         Me.GroupBox2.TabStop = False
@@ -793,7 +793,7 @@ Partial Class Factors
         Me.TableLayoutPanel5.Controls.Add(Me.Panel8, 0, 0)
         Me.TableLayoutPanel5.Dock = System.Windows.Forms.DockStyle.Fill
         Me.TableLayoutPanel5.Location = New System.Drawing.Point(4, 19)
-        Me.TableLayoutPanel5.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.TableLayoutPanel5.Margin = New System.Windows.Forms.Padding(4)
         Me.TableLayoutPanel5.Name = "TableLayoutPanel5"
         Me.TableLayoutPanel5.RowCount = 1
         Me.TableLayoutPanel5.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
@@ -805,7 +805,7 @@ Partial Class Factors
         Me.Panel6.Controls.Add(Me.btnExcelTblElvationFactor)
         Me.Panel6.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel6.Location = New System.Drawing.Point(291, 4)
-        Me.Panel6.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.Panel6.Margin = New System.Windows.Forms.Padding(4)
         Me.Panel6.Name = "Panel6"
         Me.Panel6.Size = New System.Drawing.Size(322, 217)
         Me.Panel6.TabIndex = 1
@@ -820,7 +820,7 @@ Partial Class Factors
         Me.btnExcelTblElvationFactor.Image = Global.AVT_TRAKING.My.Resources.Resources.excel
         Me.btnExcelTblElvationFactor.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.btnExcelTblElvationFactor.Location = New System.Drawing.Point(4, 4)
-        Me.btnExcelTblElvationFactor.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btnExcelTblElvationFactor.Margin = New System.Windows.Forms.Padding(4)
         Me.btnExcelTblElvationFactor.Name = "btnExcelTblElvationFactor"
         Me.btnExcelTblElvationFactor.Size = New System.Drawing.Size(133, 43)
         Me.btnExcelTblElvationFactor.TabIndex = 32
@@ -834,7 +834,7 @@ Partial Class Factors
         Me.Panel8.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel8.ForeColor = System.Drawing.SystemColors.ControlText
         Me.Panel8.Location = New System.Drawing.Point(4, 4)
-        Me.Panel8.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.Panel8.Margin = New System.Windows.Forms.Padding(4)
         Me.Panel8.Name = "Panel8"
         Me.Panel8.Size = New System.Drawing.Size(279, 217)
         Me.Panel8.TabIndex = 2
@@ -854,7 +854,7 @@ Partial Class Factors
         Me.tblScafElevation.DefaultCellStyle = DataGridViewCellStyle3
         Me.tblScafElevation.Dock = System.Windows.Forms.DockStyle.Fill
         Me.tblScafElevation.Location = New System.Drawing.Point(0, 0)
-        Me.tblScafElevation.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.tblScafElevation.Margin = New System.Windows.Forms.Padding(4)
         Me.tblScafElevation.Name = "tblScafElevation"
         Me.tblScafElevation.RowHeadersWidth = 51
         Me.tblScafElevation.Size = New System.Drawing.Size(279, 217)
@@ -884,9 +884,9 @@ Partial Class Factors
         Me.TabPage2.BackColor = System.Drawing.Color.FromArgb(CType(CType(83, Byte), Integer), CType(CType(93, Byte), Integer), CType(CType(102, Byte), Integer))
         Me.TabPage2.Controls.Add(Me.GroupBox4)
         Me.TabPage2.Location = New System.Drawing.Point(4, 25)
-        Me.TabPage2.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.TabPage2.Margin = New System.Windows.Forms.Padding(4)
         Me.TabPage2.Name = "TabPage2"
-        Me.TabPage2.Padding = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.TabPage2.Padding = New System.Windows.Forms.Padding(4)
         Me.TabPage2.Size = New System.Drawing.Size(1275, 264)
         Me.TabPage2.TabIndex = 1
         Me.TabPage2.Text = "SCF Units Rates"
@@ -897,9 +897,9 @@ Partial Class Factors
         Me.GroupBox4.Dock = System.Windows.Forms.DockStyle.Fill
         Me.GroupBox4.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.GroupBox4.Location = New System.Drawing.Point(4, 4)
-        Me.GroupBox4.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.GroupBox4.Margin = New System.Windows.Forms.Padding(4)
         Me.GroupBox4.Name = "GroupBox4"
-        Me.GroupBox4.Padding = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.GroupBox4.Padding = New System.Windows.Forms.Padding(4)
         Me.GroupBox4.Size = New System.Drawing.Size(1267, 256)
         Me.GroupBox4.TabIndex = 0
         Me.GroupBox4.TabStop = False
@@ -914,7 +914,7 @@ Partial Class Factors
         Me.TableLayoutPanel7.Controls.Add(Me.Panel11, 0, 0)
         Me.TableLayoutPanel7.Dock = System.Windows.Forms.DockStyle.Fill
         Me.TableLayoutPanel7.Location = New System.Drawing.Point(4, 19)
-        Me.TableLayoutPanel7.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.TableLayoutPanel7.Margin = New System.Windows.Forms.Padding(4)
         Me.TableLayoutPanel7.Name = "TableLayoutPanel7"
         Me.TableLayoutPanel7.RowCount = 1
         Me.TableLayoutPanel7.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
@@ -931,7 +931,7 @@ Partial Class Factors
         Me.btnExcelScaffoldUnitRates.Image = Global.AVT_TRAKING.My.Resources.Resources.excel
         Me.btnExcelScaffoldUnitRates.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.btnExcelScaffoldUnitRates.Location = New System.Drawing.Point(1130, 4)
-        Me.btnExcelScaffoldUnitRates.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btnExcelScaffoldUnitRates.Margin = New System.Windows.Forms.Padding(4)
         Me.btnExcelScaffoldUnitRates.Name = "btnExcelScaffoldUnitRates"
         Me.btnExcelScaffoldUnitRates.Size = New System.Drawing.Size(125, 43)
         Me.btnExcelScaffoldUnitRates.TabIndex = 33
@@ -945,7 +945,7 @@ Partial Class Factors
         Me.Panel11.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel11.ForeColor = System.Drawing.SystemColors.ControlText
         Me.Panel11.Location = New System.Drawing.Point(4, 4)
-        Me.Panel11.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.Panel11.Margin = New System.Windows.Forms.Padding(4)
         Me.Panel11.Name = "Panel11"
         Me.Panel11.Size = New System.Drawing.Size(1118, 225)
         Me.Panel11.TabIndex = 0
@@ -957,7 +957,7 @@ Partial Class Factors
         Me.tblSCFUnitsRates.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.IdUnitRate, Me.DescriptionURSCF, Me.BuildPercent, Me.LaborProdBuild, Me.MaterialBuild, Me.EquipmentBuild, Me.DimantlePercent, Me.LaborProdDis, Me.MaterialDis, Me.EquipmentDis})
         Me.tblSCFUnitsRates.Dock = System.Windows.Forms.DockStyle.Fill
         Me.tblSCFUnitsRates.Location = New System.Drawing.Point(0, 0)
-        Me.tblSCFUnitsRates.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.tblSCFUnitsRates.Margin = New System.Windows.Forms.Padding(4)
         Me.tblSCFUnitsRates.Name = "tblSCFUnitsRates"
         Me.tblSCFUnitsRates.RowHeadersWidth = 51
         Me.tblSCFUnitsRates.Size = New System.Drawing.Size(1118, 225)
@@ -1028,7 +1028,7 @@ Partial Class Factors
         '
         Me.TabPage3.Controls.Add(Me.GroupBox5)
         Me.TabPage3.Location = New System.Drawing.Point(4, 25)
-        Me.TabPage3.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.TabPage3.Margin = New System.Windows.Forms.Padding(4)
         Me.TabPage3.Name = "TabPage3"
         Me.TabPage3.Size = New System.Drawing.Size(1275, 264)
         Me.TabPage3.TabIndex = 2
@@ -1042,9 +1042,9 @@ Partial Class Factors
         Me.GroupBox5.Dock = System.Windows.Forms.DockStyle.Fill
         Me.GroupBox5.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.GroupBox5.Location = New System.Drawing.Point(0, 0)
-        Me.GroupBox5.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.GroupBox5.Margin = New System.Windows.Forms.Padding(4)
         Me.GroupBox5.Name = "GroupBox5"
-        Me.GroupBox5.Padding = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.GroupBox5.Padding = New System.Windows.Forms.Padding(4)
         Me.GroupBox5.Size = New System.Drawing.Size(1275, 264)
         Me.GroupBox5.TabIndex = 1
         Me.GroupBox5.TabStop = False
@@ -1059,7 +1059,7 @@ Partial Class Factors
         Me.TableLayoutPanel8.Controls.Add(Me.Panel12, 0, 0)
         Me.TableLayoutPanel8.Dock = System.Windows.Forms.DockStyle.Fill
         Me.TableLayoutPanel8.Location = New System.Drawing.Point(4, 19)
-        Me.TableLayoutPanel8.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.TableLayoutPanel8.Margin = New System.Windows.Forms.Padding(4)
         Me.TableLayoutPanel8.Name = "TableLayoutPanel8"
         Me.TableLayoutPanel8.RowCount = 1
         Me.TableLayoutPanel8.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
@@ -1076,7 +1076,7 @@ Partial Class Factors
         Me.btnExcelSCFEnviroment.Image = Global.AVT_TRAKING.My.Resources.Resources.excel
         Me.btnExcelSCFEnviroment.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.btnExcelSCFEnviroment.Location = New System.Drawing.Point(540, 4)
-        Me.btnExcelSCFEnviroment.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btnExcelSCFEnviroment.Margin = New System.Windows.Forms.Padding(4)
         Me.btnExcelSCFEnviroment.Name = "btnExcelSCFEnviroment"
         Me.btnExcelSCFEnviroment.Size = New System.Drawing.Size(133, 43)
         Me.btnExcelSCFEnviroment.TabIndex = 33
@@ -1090,7 +1090,7 @@ Partial Class Factors
         Me.Panel12.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel12.ForeColor = System.Drawing.SystemColors.ControlText
         Me.Panel12.Location = New System.Drawing.Point(4, 4)
-        Me.Panel12.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.Panel12.Margin = New System.Windows.Forms.Padding(4)
         Me.Panel12.Name = "Panel12"
         Me.Panel12.Size = New System.Drawing.Size(528, 233)
         Me.Panel12.TabIndex = 0
@@ -1102,7 +1102,7 @@ Partial Class Factors
         Me.tblEnviroment.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.idEnviroment, Me.Enviroment, Me.RevitionDueDay})
         Me.tblEnviroment.Dock = System.Windows.Forms.DockStyle.Fill
         Me.tblEnviroment.Location = New System.Drawing.Point(0, 0)
-        Me.tblEnviroment.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.tblEnviroment.Margin = New System.Windows.Forms.Padding(4)
         Me.tblEnviroment.Name = "tblEnviroment"
         Me.tblEnviroment.RowHeadersWidth = 51
         Me.tblEnviroment.Size = New System.Drawing.Size(528, 233)
@@ -1132,7 +1132,7 @@ Partial Class Factors
         Me.TabPage4.BackColor = System.Drawing.Color.FromArgb(CType(CType(83, Byte), Integer), CType(CType(93, Byte), Integer), CType(CType(102, Byte), Integer))
         Me.TabPage4.Controls.Add(Me.TableLayoutPanel14)
         Me.TabPage4.Location = New System.Drawing.Point(4, 25)
-        Me.TabPage4.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.TabPage4.Margin = New System.Windows.Forms.Padding(4)
         Me.TabPage4.Name = "TabPage4"
         Me.TabPage4.Size = New System.Drawing.Size(1275, 264)
         Me.TabPage4.TabIndex = 3
@@ -1147,7 +1147,7 @@ Partial Class Factors
         Me.TableLayoutPanel14.Controls.Add(Me.GroupBox10, 0, 0)
         Me.TableLayoutPanel14.Dock = System.Windows.Forms.DockStyle.Fill
         Me.TableLayoutPanel14.Location = New System.Drawing.Point(0, 0)
-        Me.TableLayoutPanel14.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.TableLayoutPanel14.Margin = New System.Windows.Forms.Padding(4)
         Me.TableLayoutPanel14.Name = "TableLayoutPanel14"
         Me.TableLayoutPanel14.RowCount = 1
         Me.TableLayoutPanel14.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
@@ -1160,9 +1160,9 @@ Partial Class Factors
         Me.GroupBox11.Dock = System.Windows.Forms.DockStyle.Fill
         Me.GroupBox11.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.GroupBox11.Location = New System.Drawing.Point(641, 4)
-        Me.GroupBox11.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.GroupBox11.Margin = New System.Windows.Forms.Padding(4)
         Me.GroupBox11.Name = "GroupBox11"
-        Me.GroupBox11.Padding = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.GroupBox11.Padding = New System.Windows.Forms.Padding(4)
         Me.GroupBox11.Size = New System.Drawing.Size(630, 256)
         Me.GroupBox11.TabIndex = 1
         Me.GroupBox11.TabStop = False
@@ -1177,7 +1177,7 @@ Partial Class Factors
         Me.TableLayoutPanel16.Controls.Add(Me.Panel14, 0, 0)
         Me.TableLayoutPanel16.Dock = System.Windows.Forms.DockStyle.Fill
         Me.TableLayoutPanel16.Location = New System.Drawing.Point(4, 19)
-        Me.TableLayoutPanel16.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.TableLayoutPanel16.Margin = New System.Windows.Forms.Padding(4)
         Me.TableLayoutPanel16.Name = "TableLayoutPanel16"
         Me.TableLayoutPanel16.RowCount = 1
         Me.TableLayoutPanel16.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
@@ -1194,7 +1194,7 @@ Partial Class Factors
         Me.btnExcelUpdatePpInsUR.Image = Global.AVT_TRAKING.My.Resources.Resources.excel
         Me.btnExcelUpdatePpInsUR.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.btnExcelUpdatePpInsUR.Location = New System.Drawing.Point(493, 4)
-        Me.btnExcelUpdatePpInsUR.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btnExcelUpdatePpInsUR.Margin = New System.Windows.Forms.Padding(4)
         Me.btnExcelUpdatePpInsUR.Name = "btnExcelUpdatePpInsUR"
         Me.btnExcelUpdatePpInsUR.Size = New System.Drawing.Size(125, 43)
         Me.btnExcelUpdatePpInsUR.TabIndex = 35
@@ -1208,7 +1208,7 @@ Partial Class Factors
         Me.Panel14.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel14.ForeColor = System.Drawing.SystemColors.ControlText
         Me.Panel14.Location = New System.Drawing.Point(4, 4)
-        Me.Panel14.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.Panel14.Margin = New System.Windows.Forms.Padding(4)
         Me.Panel14.Name = "Panel14"
         Me.Panel14.Size = New System.Drawing.Size(481, 225)
         Me.Panel14.TabIndex = 0
@@ -1220,7 +1220,7 @@ Partial Class Factors
         Me.tblPpInsUnitRate.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.idSizePpIUR, Me.idTypePpIUR, Me.idThickPpIUR, Me.SizePpIUR, Me.typePpIUR, Me.thickPpIUR, Me.laborProdPpIUR, Me.matRatePpIUR, Me.eqRatePpIUR})
         Me.tblPpInsUnitRate.Dock = System.Windows.Forms.DockStyle.Fill
         Me.tblPpInsUnitRate.Location = New System.Drawing.Point(0, 0)
-        Me.tblPpInsUnitRate.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.tblPpInsUnitRate.Margin = New System.Windows.Forms.Padding(4)
         Me.tblPpInsUnitRate.Name = "tblPpInsUnitRate"
         Me.tblPpInsUnitRate.RowHeadersWidth = 51
         Me.tblPpInsUnitRate.Size = New System.Drawing.Size(481, 225)
@@ -1289,9 +1289,9 @@ Partial Class Factors
         Me.GroupBox10.Dock = System.Windows.Forms.DockStyle.Fill
         Me.GroupBox10.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.GroupBox10.Location = New System.Drawing.Point(4, 4)
-        Me.GroupBox10.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.GroupBox10.Margin = New System.Windows.Forms.Padding(4)
         Me.GroupBox10.Name = "GroupBox10"
-        Me.GroupBox10.Padding = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.GroupBox10.Padding = New System.Windows.Forms.Padding(4)
         Me.GroupBox10.Size = New System.Drawing.Size(629, 256)
         Me.GroupBox10.TabIndex = 0
         Me.GroupBox10.TabStop = False
@@ -1306,7 +1306,7 @@ Partial Class Factors
         Me.TableLayoutPanel15.Controls.Add(Me.Panel13, 0, 0)
         Me.TableLayoutPanel15.Dock = System.Windows.Forms.DockStyle.Fill
         Me.TableLayoutPanel15.Location = New System.Drawing.Point(4, 19)
-        Me.TableLayoutPanel15.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.TableLayoutPanel15.Margin = New System.Windows.Forms.Padding(4)
         Me.TableLayoutPanel15.Name = "TableLayoutPanel15"
         Me.TableLayoutPanel15.RowCount = 1
         Me.TableLayoutPanel15.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
@@ -1323,7 +1323,7 @@ Partial Class Factors
         Me.btnExcelUpdateEqInsUR.Image = Global.AVT_TRAKING.My.Resources.Resources.excel
         Me.btnExcelUpdateEqInsUR.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.btnExcelUpdateEqInsUR.Location = New System.Drawing.Point(492, 4)
-        Me.btnExcelUpdateEqInsUR.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btnExcelUpdateEqInsUR.Margin = New System.Windows.Forms.Padding(4)
         Me.btnExcelUpdateEqInsUR.Name = "btnExcelUpdateEqInsUR"
         Me.btnExcelUpdateEqInsUR.Size = New System.Drawing.Size(125, 43)
         Me.btnExcelUpdateEqInsUR.TabIndex = 35
@@ -1337,7 +1337,7 @@ Partial Class Factors
         Me.Panel13.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel13.ForeColor = System.Drawing.SystemColors.ControlText
         Me.Panel13.Location = New System.Drawing.Point(4, 4)
-        Me.Panel13.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.Panel13.Margin = New System.Windows.Forms.Padding(4)
         Me.Panel13.Name = "Panel13"
         Me.Panel13.Size = New System.Drawing.Size(480, 225)
         Me.Panel13.TabIndex = 0
@@ -1349,7 +1349,7 @@ Partial Class Factors
         Me.tblEqInsUnitRate.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.idTypeEQIUR, Me.idThickEQIUR, Me.typeEQIUR, Me.ThickEQIUR, Me.laborProdEQIUR, Me.matRateEQIUR, Me.eqRateEQIUR})
         Me.tblEqInsUnitRate.Dock = System.Windows.Forms.DockStyle.Fill
         Me.tblEqInsUnitRate.Location = New System.Drawing.Point(0, 0)
-        Me.tblEqInsUnitRate.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.tblEqInsUnitRate.Margin = New System.Windows.Forms.Padding(4)
         Me.tblEqInsUnitRate.Name = "tblEqInsUnitRate"
         Me.tblEqInsUnitRate.RowHeadersWidth = 51
         Me.tblEqInsUnitRate.Size = New System.Drawing.Size(480, 225)
@@ -1404,7 +1404,7 @@ Partial Class Factors
         Me.TabPage5.BackColor = System.Drawing.Color.FromArgb(CType(CType(83, Byte), Integer), CType(CType(93, Byte), Integer), CType(CType(102, Byte), Integer))
         Me.TabPage5.Controls.Add(Me.TableLayoutPanel17)
         Me.TabPage5.Location = New System.Drawing.Point(4, 25)
-        Me.TabPage5.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.TabPage5.Margin = New System.Windows.Forms.Padding(4)
         Me.TabPage5.Name = "TabPage5"
         Me.TabPage5.Size = New System.Drawing.Size(1275, 264)
         Me.TabPage5.TabIndex = 4
@@ -1419,7 +1419,7 @@ Partial Class Factors
         Me.TableLayoutPanel17.Controls.Add(Me.GroupBox13, 0, 0)
         Me.TableLayoutPanel17.Dock = System.Windows.Forms.DockStyle.Fill
         Me.TableLayoutPanel17.Location = New System.Drawing.Point(0, 0)
-        Me.TableLayoutPanel17.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.TableLayoutPanel17.Margin = New System.Windows.Forms.Padding(4)
         Me.TableLayoutPanel17.Name = "TableLayoutPanel17"
         Me.TableLayoutPanel17.RowCount = 1
         Me.TableLayoutPanel17.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
@@ -1432,9 +1432,9 @@ Partial Class Factors
         Me.GroupBox12.Dock = System.Windows.Forms.DockStyle.Fill
         Me.GroupBox12.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.GroupBox12.Location = New System.Drawing.Point(641, 4)
-        Me.GroupBox12.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.GroupBox12.Margin = New System.Windows.Forms.Padding(4)
         Me.GroupBox12.Name = "GroupBox12"
-        Me.GroupBox12.Padding = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.GroupBox12.Padding = New System.Windows.Forms.Padding(4)
         Me.GroupBox12.Size = New System.Drawing.Size(630, 256)
         Me.GroupBox12.TabIndex = 1
         Me.GroupBox12.TabStop = False
@@ -1449,7 +1449,7 @@ Partial Class Factors
         Me.TableLayoutPanel18.Controls.Add(Me.Panel15, 0, 0)
         Me.TableLayoutPanel18.Dock = System.Windows.Forms.DockStyle.Fill
         Me.TableLayoutPanel18.Location = New System.Drawing.Point(4, 19)
-        Me.TableLayoutPanel18.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.TableLayoutPanel18.Margin = New System.Windows.Forms.Padding(4)
         Me.TableLayoutPanel18.Name = "TableLayoutPanel18"
         Me.TableLayoutPanel18.RowCount = 1
         Me.TableLayoutPanel18.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
@@ -1466,7 +1466,7 @@ Partial Class Factors
         Me.btnExcelJacketPp.Image = Global.AVT_TRAKING.My.Resources.Resources.excel
         Me.btnExcelJacketPp.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.btnExcelJacketPp.Location = New System.Drawing.Point(493, 4)
-        Me.btnExcelJacketPp.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btnExcelJacketPp.Margin = New System.Windows.Forms.Padding(4)
         Me.btnExcelJacketPp.Name = "btnExcelJacketPp"
         Me.btnExcelJacketPp.Size = New System.Drawing.Size(125, 43)
         Me.btnExcelJacketPp.TabIndex = 35
@@ -1480,7 +1480,7 @@ Partial Class Factors
         Me.Panel15.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel15.ForeColor = System.Drawing.SystemColors.ControlText
         Me.Panel15.Location = New System.Drawing.Point(4, 4)
-        Me.Panel15.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.Panel15.Margin = New System.Windows.Forms.Padding(4)
         Me.Panel15.Name = "Panel15"
         Me.Panel15.Size = New System.Drawing.Size(481, 225)
         Me.Panel15.TabIndex = 0
@@ -1492,7 +1492,7 @@ Partial Class Factors
         Me.tblJacketPp.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.idJacketPp, Me.JacketTypePp, Me.jacketNamePp, Me.laborProdJckPp, Me.matFactorJckPp, Me.eqFactorJckPp})
         Me.tblJacketPp.Dock = System.Windows.Forms.DockStyle.Fill
         Me.tblJacketPp.Location = New System.Drawing.Point(0, 0)
-        Me.tblJacketPp.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.tblJacketPp.Margin = New System.Windows.Forms.Padding(4)
         Me.tblJacketPp.Name = "tblJacketPp"
         Me.tblJacketPp.RowHeadersWidth = 51
         Me.tblJacketPp.Size = New System.Drawing.Size(481, 225)
@@ -1541,9 +1541,9 @@ Partial Class Factors
         Me.GroupBox13.Dock = System.Windows.Forms.DockStyle.Fill
         Me.GroupBox13.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.GroupBox13.Location = New System.Drawing.Point(4, 4)
-        Me.GroupBox13.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.GroupBox13.Margin = New System.Windows.Forms.Padding(4)
         Me.GroupBox13.Name = "GroupBox13"
-        Me.GroupBox13.Padding = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.GroupBox13.Padding = New System.Windows.Forms.Padding(4)
         Me.GroupBox13.Size = New System.Drawing.Size(629, 256)
         Me.GroupBox13.TabIndex = 0
         Me.GroupBox13.TabStop = False
@@ -1558,7 +1558,7 @@ Partial Class Factors
         Me.TableLayoutPanel19.Controls.Add(Me.Panel16, 0, 0)
         Me.TableLayoutPanel19.Dock = System.Windows.Forms.DockStyle.Fill
         Me.TableLayoutPanel19.Location = New System.Drawing.Point(4, 19)
-        Me.TableLayoutPanel19.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.TableLayoutPanel19.Margin = New System.Windows.Forms.Padding(4)
         Me.TableLayoutPanel19.Name = "TableLayoutPanel19"
         Me.TableLayoutPanel19.RowCount = 1
         Me.TableLayoutPanel19.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
@@ -1575,7 +1575,7 @@ Partial Class Factors
         Me.btnExcelJacketEq.Image = Global.AVT_TRAKING.My.Resources.Resources.excel
         Me.btnExcelJacketEq.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.btnExcelJacketEq.Location = New System.Drawing.Point(492, 4)
-        Me.btnExcelJacketEq.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btnExcelJacketEq.Margin = New System.Windows.Forms.Padding(4)
         Me.btnExcelJacketEq.Name = "btnExcelJacketEq"
         Me.btnExcelJacketEq.Size = New System.Drawing.Size(125, 43)
         Me.btnExcelJacketEq.TabIndex = 35
@@ -1589,7 +1589,7 @@ Partial Class Factors
         Me.Panel16.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel16.ForeColor = System.Drawing.SystemColors.ControlText
         Me.Panel16.Location = New System.Drawing.Point(4, 4)
-        Me.Panel16.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.Panel16.Margin = New System.Windows.Forms.Padding(4)
         Me.Panel16.Name = "Panel16"
         Me.Panel16.Size = New System.Drawing.Size(480, 225)
         Me.Panel16.TabIndex = 0
@@ -1601,7 +1601,7 @@ Partial Class Factors
         Me.tblJacketEq.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.idJacket, Me.JacketType, Me.jacketName, Me.laborProdJckEq, Me.matFactorJckEq, Me.eqFactorJckEq})
         Me.tblJacketEq.Dock = System.Windows.Forms.DockStyle.Fill
         Me.tblJacketEq.Location = New System.Drawing.Point(0, 0)
-        Me.tblJacketEq.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.tblJacketEq.Margin = New System.Windows.Forms.Padding(4)
         Me.tblJacketEq.Name = "tblJacketEq"
         Me.tblJacketEq.RowHeadersWidth = 51
         Me.tblJacketEq.Size = New System.Drawing.Size(480, 225)
@@ -1649,7 +1649,7 @@ Partial Class Factors
         Me.TabPage6.BackColor = System.Drawing.Color.FromArgb(CType(CType(83, Byte), Integer), CType(CType(93, Byte), Integer), CType(CType(102, Byte), Integer))
         Me.TabPage6.Controls.Add(Me.TableLayoutPanel11)
         Me.TabPage6.Location = New System.Drawing.Point(4, 25)
-        Me.TabPage6.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.TabPage6.Margin = New System.Windows.Forms.Padding(4)
         Me.TabPage6.Name = "TabPage6"
         Me.TabPage6.Size = New System.Drawing.Size(1275, 264)
         Me.TabPage6.TabIndex = 5
@@ -1664,7 +1664,7 @@ Partial Class Factors
         Me.TableLayoutPanel11.Controls.Add(Me.GroupBox8, 0, 0)
         Me.TableLayoutPanel11.Dock = System.Windows.Forms.DockStyle.Fill
         Me.TableLayoutPanel11.Location = New System.Drawing.Point(0, 0)
-        Me.TableLayoutPanel11.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.TableLayoutPanel11.Margin = New System.Windows.Forms.Padding(4)
         Me.TableLayoutPanel11.Name = "TableLayoutPanel11"
         Me.TableLayoutPanel11.RowCount = 1
         Me.TableLayoutPanel11.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
@@ -1677,9 +1677,9 @@ Partial Class Factors
         Me.GroupBox9.Dock = System.Windows.Forms.DockStyle.Fill
         Me.GroupBox9.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.GroupBox9.Location = New System.Drawing.Point(641, 4)
-        Me.GroupBox9.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.GroupBox9.Margin = New System.Windows.Forms.Padding(4)
         Me.GroupBox9.Name = "GroupBox9"
-        Me.GroupBox9.Padding = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.GroupBox9.Padding = New System.Windows.Forms.Padding(4)
         Me.GroupBox9.Size = New System.Drawing.Size(630, 256)
         Me.GroupBox9.TabIndex = 1
         Me.GroupBox9.TabStop = False
@@ -1695,7 +1695,7 @@ Partial Class Factors
         Me.TableLayoutPanel13.Dock = System.Windows.Forms.DockStyle.Fill
         Me.TableLayoutPanel13.ForeColor = System.Drawing.SystemColors.ControlText
         Me.TableLayoutPanel13.Location = New System.Drawing.Point(4, 19)
-        Me.TableLayoutPanel13.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.TableLayoutPanel13.Margin = New System.Windows.Forms.Padding(4)
         Me.TableLayoutPanel13.Name = "TableLayoutPanel13"
         Me.TableLayoutPanel13.RowCount = 1
         Me.TableLayoutPanel13.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
@@ -1712,7 +1712,7 @@ Partial Class Factors
         Me.btnExcelPpPntUnitRate.Image = Global.AVT_TRAKING.My.Resources.Resources.excel
         Me.btnExcelPpPntUnitRate.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.btnExcelPpPntUnitRate.Location = New System.Drawing.Point(493, 4)
-        Me.btnExcelPpPntUnitRate.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btnExcelPpPntUnitRate.Margin = New System.Windows.Forms.Padding(4)
         Me.btnExcelPpPntUnitRate.Name = "btnExcelPpPntUnitRate"
         Me.btnExcelPpPntUnitRate.Size = New System.Drawing.Size(125, 43)
         Me.btnExcelPpPntUnitRate.TabIndex = 36
@@ -1727,7 +1727,7 @@ Partial Class Factors
         Me.tblPpPaintUnitRate.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.systemPPId, Me.optionPPId, Me.sizePPId, Me.SystemPP, Me.optionPP, Me.sizePP, Me.laborProdPP, Me.matRatePP, Me.eqRatePP})
         Me.tblPpPaintUnitRate.Dock = System.Windows.Forms.DockStyle.Fill
         Me.tblPpPaintUnitRate.Location = New System.Drawing.Point(4, 4)
-        Me.tblPpPaintUnitRate.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.tblPpPaintUnitRate.Margin = New System.Windows.Forms.Padding(4)
         Me.tblPpPaintUnitRate.Name = "tblPpPaintUnitRate"
         Me.tblPpPaintUnitRate.RowHeadersWidth = 51
         Me.tblPpPaintUnitRate.Size = New System.Drawing.Size(481, 225)
@@ -1796,9 +1796,9 @@ Partial Class Factors
         Me.GroupBox8.Dock = System.Windows.Forms.DockStyle.Fill
         Me.GroupBox8.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.GroupBox8.Location = New System.Drawing.Point(4, 4)
-        Me.GroupBox8.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.GroupBox8.Margin = New System.Windows.Forms.Padding(4)
         Me.GroupBox8.Name = "GroupBox8"
-        Me.GroupBox8.Padding = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.GroupBox8.Padding = New System.Windows.Forms.Padding(4)
         Me.GroupBox8.Size = New System.Drawing.Size(629, 256)
         Me.GroupBox8.TabIndex = 0
         Me.GroupBox8.TabStop = False
@@ -1814,7 +1814,7 @@ Partial Class Factors
         Me.TableLayoutPanel12.Dock = System.Windows.Forms.DockStyle.Fill
         Me.TableLayoutPanel12.ForeColor = System.Drawing.SystemColors.ControlText
         Me.TableLayoutPanel12.Location = New System.Drawing.Point(4, 19)
-        Me.TableLayoutPanel12.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.TableLayoutPanel12.Margin = New System.Windows.Forms.Padding(4)
         Me.TableLayoutPanel12.Name = "TableLayoutPanel12"
         Me.TableLayoutPanel12.RowCount = 1
         Me.TableLayoutPanel12.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
@@ -1831,7 +1831,7 @@ Partial Class Factors
         Me.btnExcelEqPntUnitRate.Image = Global.AVT_TRAKING.My.Resources.Resources.excel
         Me.btnExcelEqPntUnitRate.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.btnExcelEqPntUnitRate.Location = New System.Drawing.Point(492, 4)
-        Me.btnExcelEqPntUnitRate.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btnExcelEqPntUnitRate.Margin = New System.Windows.Forms.Padding(4)
         Me.btnExcelEqPntUnitRate.Name = "btnExcelEqPntUnitRate"
         Me.btnExcelEqPntUnitRate.Size = New System.Drawing.Size(125, 43)
         Me.btnExcelEqPntUnitRate.TabIndex = 35
@@ -1846,7 +1846,7 @@ Partial Class Factors
         Me.tblEqPaintUnitRate.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.SystemEqId, Me.OptionEQId, Me.SystemEq, Me.OptionEq, Me.laborProdEq, Me.materialRateEq, Me.eqRateEq})
         Me.tblEqPaintUnitRate.Dock = System.Windows.Forms.DockStyle.Fill
         Me.tblEqPaintUnitRate.Location = New System.Drawing.Point(4, 4)
-        Me.tblEqPaintUnitRate.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.tblEqPaintUnitRate.Margin = New System.Windows.Forms.Padding(4)
         Me.tblEqPaintUnitRate.Name = "tblEqPaintUnitRate"
         Me.tblEqPaintUnitRate.RowHeadersWidth = 51
         Me.tblEqPaintUnitRate.Size = New System.Drawing.Size(480, 225)
@@ -1901,7 +1901,7 @@ Partial Class Factors
         Me.TabPage7.BackColor = System.Drawing.Color.FromArgb(CType(CType(83, Byte), Integer), CType(CType(93, Byte), Integer), CType(CType(102, Byte), Integer))
         Me.TabPage7.Controls.Add(Me.GroupBox6)
         Me.TabPage7.Location = New System.Drawing.Point(4, 25)
-        Me.TabPage7.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.TabPage7.Margin = New System.Windows.Forms.Padding(4)
         Me.TabPage7.Name = "TabPage7"
         Me.TabPage7.Size = New System.Drawing.Size(1275, 264)
         Me.TabPage7.TabIndex = 6
@@ -1913,9 +1913,9 @@ Partial Class Factors
         Me.GroupBox6.Dock = System.Windows.Forms.DockStyle.Fill
         Me.GroupBox6.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.GroupBox6.Location = New System.Drawing.Point(0, 0)
-        Me.GroupBox6.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.GroupBox6.Margin = New System.Windows.Forms.Padding(4)
         Me.GroupBox6.Name = "GroupBox6"
-        Me.GroupBox6.Padding = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.GroupBox6.Padding = New System.Windows.Forms.Padding(4)
         Me.GroupBox6.Size = New System.Drawing.Size(1275, 264)
         Me.GroupBox6.TabIndex = 1
         Me.GroupBox6.TabStop = False
@@ -1931,7 +1931,7 @@ Partial Class Factors
         Me.TableLayoutPanel9.Dock = System.Windows.Forms.DockStyle.Fill
         Me.TableLayoutPanel9.ForeColor = System.Drawing.SystemColors.ControlText
         Me.TableLayoutPanel9.Location = New System.Drawing.Point(4, 19)
-        Me.TableLayoutPanel9.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.TableLayoutPanel9.Margin = New System.Windows.Forms.Padding(4)
         Me.TableLayoutPanel9.Name = "TableLayoutPanel9"
         Me.TableLayoutPanel9.RowCount = 1
         Me.TableLayoutPanel9.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
@@ -1948,7 +1948,7 @@ Partial Class Factors
         Me.btnExcelInsFitting.Image = Global.AVT_TRAKING.My.Resources.Resources.excel
         Me.btnExcelInsFitting.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.btnExcelInsFitting.Location = New System.Drawing.Point(1138, 4)
-        Me.btnExcelInsFitting.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btnExcelInsFitting.Margin = New System.Windows.Forms.Padding(4)
         Me.btnExcelInsFitting.Name = "btnExcelInsFitting"
         Me.btnExcelInsFitting.Size = New System.Drawing.Size(125, 43)
         Me.btnExcelInsFitting.TabIndex = 34
@@ -1963,7 +1963,7 @@ Partial Class Factors
         Me.tblInsFitting.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.typeId, Me.Type, Me.Support, Me.p90, Me.p45, Me.Bend, Me.TEE, Me.RED, Me.CAP, Me.FlangePair, Me.FlangeVlv, Me.ControlVlv, Me.WeldVlv, Me.Bebel, Me.CutOut})
         Me.tblInsFitting.Dock = System.Windows.Forms.DockStyle.Fill
         Me.tblInsFitting.Location = New System.Drawing.Point(4, 4)
-        Me.tblInsFitting.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.tblInsFitting.Margin = New System.Windows.Forms.Padding(4)
         Me.tblInsFitting.Name = "tblInsFitting"
         Me.tblInsFitting.RowHeadersWidth = 51
         Me.tblInsFitting.Size = New System.Drawing.Size(1126, 233)
@@ -2079,7 +2079,7 @@ Partial Class Factors
         Me.TabPage8.BackColor = System.Drawing.Color.FromArgb(CType(CType(83, Byte), Integer), CType(CType(93, Byte), Integer), CType(CType(102, Byte), Integer))
         Me.TabPage8.Controls.Add(Me.GroupBox7)
         Me.TabPage8.Location = New System.Drawing.Point(4, 25)
-        Me.TabPage8.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.TabPage8.Margin = New System.Windows.Forms.Padding(4)
         Me.TabPage8.Name = "TabPage8"
         Me.TabPage8.Size = New System.Drawing.Size(1275, 264)
         Me.TabPage8.TabIndex = 7
@@ -2091,9 +2091,9 @@ Partial Class Factors
         Me.GroupBox7.Dock = System.Windows.Forms.DockStyle.Fill
         Me.GroupBox7.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.GroupBox7.Location = New System.Drawing.Point(0, 0)
-        Me.GroupBox7.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.GroupBox7.Margin = New System.Windows.Forms.Padding(4)
         Me.GroupBox7.Name = "GroupBox7"
-        Me.GroupBox7.Padding = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.GroupBox7.Padding = New System.Windows.Forms.Padding(4)
         Me.GroupBox7.Size = New System.Drawing.Size(1275, 264)
         Me.GroupBox7.TabIndex = 0
         Me.GroupBox7.TabStop = False
@@ -2109,7 +2109,7 @@ Partial Class Factors
         Me.TableLayoutPanel10.Dock = System.Windows.Forms.DockStyle.Fill
         Me.TableLayoutPanel10.ForeColor = System.Drawing.SystemColors.ControlText
         Me.TableLayoutPanel10.Location = New System.Drawing.Point(4, 19)
-        Me.TableLayoutPanel10.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.TableLayoutPanel10.Margin = New System.Windows.Forms.Padding(4)
         Me.TableLayoutPanel10.Name = "TableLayoutPanel10"
         Me.TableLayoutPanel10.RowCount = 1
         Me.TableLayoutPanel10.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
@@ -2126,7 +2126,7 @@ Partial Class Factors
         Me.btnExcelPnpFitting.Image = Global.AVT_TRAKING.My.Resources.Resources.excel
         Me.btnExcelPnpFitting.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.btnExcelPnpFitting.Location = New System.Drawing.Point(1138, 4)
-        Me.btnExcelPnpFitting.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btnExcelPnpFitting.Margin = New System.Windows.Forms.Padding(4)
         Me.btnExcelPnpFitting.Name = "btnExcelPnpFitting"
         Me.btnExcelPnpFitting.Size = New System.Drawing.Size(125, 43)
         Me.btnExcelPnpFitting.TabIndex = 35
@@ -2140,7 +2140,7 @@ Partial Class Factors
         Me.tblPntFitting.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.idOption, Me.PaintOption, Me.p90p, Me.p45p, Me.TEEp, Me.FlangePairp, Me.FlangeVlvp, Me.ControlVlvp, Me.WeldedVlvp})
         Me.tblPntFitting.Dock = System.Windows.Forms.DockStyle.Fill
         Me.tblPntFitting.Location = New System.Drawing.Point(4, 4)
-        Me.tblPntFitting.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.tblPntFitting.Margin = New System.Windows.Forms.Padding(4)
         Me.tblPntFitting.Name = "tblPntFitting"
         Me.tblPntFitting.RowHeadersWidth = 51
         Me.tblPntFitting.Size = New System.Drawing.Size(1126, 233)
@@ -2215,7 +2215,7 @@ Partial Class Factors
         Me.TabPage9.BackColor = System.Drawing.Color.FromArgb(CType(CType(83, Byte), Integer), CType(CType(93, Byte), Integer), CType(CType(102, Byte), Integer))
         Me.TabPage9.Controls.Add(Me.TableLayoutPanel21)
         Me.TabPage9.Location = New System.Drawing.Point(4, 25)
-        Me.TabPage9.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.TabPage9.Margin = New System.Windows.Forms.Padding(4)
         Me.TabPage9.Name = "TabPage9"
         Me.TabPage9.Size = New System.Drawing.Size(1275, 264)
         Me.TabPage9.TabIndex = 8
@@ -2230,7 +2230,7 @@ Partial Class Factors
         Me.TableLayoutPanel21.Controls.Add(Me.GroupBox16, 0, 0)
         Me.TableLayoutPanel21.Dock = System.Windows.Forms.DockStyle.Fill
         Me.TableLayoutPanel21.Location = New System.Drawing.Point(0, 0)
-        Me.TableLayoutPanel21.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.TableLayoutPanel21.Margin = New System.Windows.Forms.Padding(4)
         Me.TableLayoutPanel21.Name = "TableLayoutPanel21"
         Me.TableLayoutPanel21.RowCount = 1
         Me.TableLayoutPanel21.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
@@ -2243,9 +2243,9 @@ Partial Class Factors
         Me.GroupBox15.Dock = System.Windows.Forms.DockStyle.Fill
         Me.GroupBox15.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.GroupBox15.Location = New System.Drawing.Point(641, 4)
-        Me.GroupBox15.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.GroupBox15.Margin = New System.Windows.Forms.Padding(4)
         Me.GroupBox15.Name = "GroupBox15"
-        Me.GroupBox15.Padding = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.GroupBox15.Padding = New System.Windows.Forms.Padding(4)
         Me.GroupBox15.Size = New System.Drawing.Size(630, 256)
         Me.GroupBox15.TabIndex = 1
         Me.GroupBox15.TabStop = False
@@ -2261,7 +2261,7 @@ Partial Class Factors
         Me.TableLayoutPanel22.Dock = System.Windows.Forms.DockStyle.Fill
         Me.TableLayoutPanel22.ForeColor = System.Drawing.SystemColors.ControlText
         Me.TableLayoutPanel22.Location = New System.Drawing.Point(4, 19)
-        Me.TableLayoutPanel22.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.TableLayoutPanel22.Margin = New System.Windows.Forms.Padding(4)
         Me.TableLayoutPanel22.Name = "TableLayoutPanel22"
         Me.TableLayoutPanel22.RowCount = 1
         Me.TableLayoutPanel22.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
@@ -2278,7 +2278,7 @@ Partial Class Factors
         Me.btnExcelPipingIRHC.Image = Global.AVT_TRAKING.My.Resources.Resources.excel
         Me.btnExcelPipingIRHC.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.btnExcelPipingIRHC.Location = New System.Drawing.Point(493, 4)
-        Me.btnExcelPipingIRHC.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btnExcelPipingIRHC.Margin = New System.Windows.Forms.Padding(4)
         Me.btnExcelPipingIRHC.Name = "btnExcelPipingIRHC"
         Me.btnExcelPipingIRHC.Size = New System.Drawing.Size(125, 43)
         Me.btnExcelPipingIRHC.TabIndex = 36
@@ -2293,7 +2293,7 @@ Partial Class Factors
         Me.tblPipingIRHC.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.idSizePPIRHC, Me.idTypePPIRHC, Me.idThicknessPPIRHC, Me.SizePPIRHC, Me.TypePPIRHC, Me.ThicknessPPIRHC, Me.LaborProdPPIRHC, Me.MaterialRatePPIRHC, Me.EquipmentRatePPIRHC})
         Me.tblPipingIRHC.Dock = System.Windows.Forms.DockStyle.Fill
         Me.tblPipingIRHC.Location = New System.Drawing.Point(4, 4)
-        Me.tblPipingIRHC.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.tblPipingIRHC.Margin = New System.Windows.Forms.Padding(4)
         Me.tblPipingIRHC.Name = "tblPipingIRHC"
         Me.tblPipingIRHC.RowHeadersWidth = 51
         Me.tblPipingIRHC.Size = New System.Drawing.Size(481, 225)
@@ -2362,9 +2362,9 @@ Partial Class Factors
         Me.GroupBox16.Dock = System.Windows.Forms.DockStyle.Fill
         Me.GroupBox16.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.GroupBox16.Location = New System.Drawing.Point(4, 4)
-        Me.GroupBox16.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.GroupBox16.Margin = New System.Windows.Forms.Padding(4)
         Me.GroupBox16.Name = "GroupBox16"
-        Me.GroupBox16.Padding = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.GroupBox16.Padding = New System.Windows.Forms.Padding(4)
         Me.GroupBox16.Size = New System.Drawing.Size(629, 256)
         Me.GroupBox16.TabIndex = 0
         Me.GroupBox16.TabStop = False
@@ -2380,7 +2380,7 @@ Partial Class Factors
         Me.TableLayoutPanel23.Dock = System.Windows.Forms.DockStyle.Fill
         Me.TableLayoutPanel23.ForeColor = System.Drawing.SystemColors.ControlText
         Me.TableLayoutPanel23.Location = New System.Drawing.Point(4, 19)
-        Me.TableLayoutPanel23.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.TableLayoutPanel23.Margin = New System.Windows.Forms.Padding(4)
         Me.TableLayoutPanel23.Name = "TableLayoutPanel23"
         Me.TableLayoutPanel23.RowCount = 1
         Me.TableLayoutPanel23.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
@@ -2397,7 +2397,7 @@ Partial Class Factors
         Me.btnExcelEquipmentIRHC.Image = Global.AVT_TRAKING.My.Resources.Resources.excel
         Me.btnExcelEquipmentIRHC.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.btnExcelEquipmentIRHC.Location = New System.Drawing.Point(492, 4)
-        Me.btnExcelEquipmentIRHC.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btnExcelEquipmentIRHC.Margin = New System.Windows.Forms.Padding(4)
         Me.btnExcelEquipmentIRHC.Name = "btnExcelEquipmentIRHC"
         Me.btnExcelEquipmentIRHC.Size = New System.Drawing.Size(125, 43)
         Me.btnExcelEquipmentIRHC.TabIndex = 35
@@ -2412,7 +2412,7 @@ Partial Class Factors
         Me.tblEquipmentIRHC.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.idTypeEqIRHC, Me.idThickIEqRHC, Me.TypeEqIRHC, Me.ThicknessEqIRHC, Me.LaborProdEqIRHC, Me.MaterialRateEqIRHC, Me.EquipmentEqIRHC})
         Me.tblEquipmentIRHC.Dock = System.Windows.Forms.DockStyle.Fill
         Me.tblEquipmentIRHC.Location = New System.Drawing.Point(4, 4)
-        Me.tblEquipmentIRHC.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.tblEquipmentIRHC.Margin = New System.Windows.Forms.Padding(4)
         Me.tblEquipmentIRHC.Name = "tblEquipmentIRHC"
         Me.tblEquipmentIRHC.RowHeadersWidth = 51
         Me.tblEquipmentIRHC.Size = New System.Drawing.Size(480, 225)
@@ -2467,7 +2467,7 @@ Partial Class Factors
         Me.TabPage10.BackColor = System.Drawing.Color.FromArgb(CType(CType(83, Byte), Integer), CType(CType(93, Byte), Integer), CType(CType(102, Byte), Integer))
         Me.TabPage10.Controls.Add(Me.GroupBox14)
         Me.TabPage10.Location = New System.Drawing.Point(4, 25)
-        Me.TabPage10.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.TabPage10.Margin = New System.Windows.Forms.Padding(4)
         Me.TabPage10.Name = "TabPage10"
         Me.TabPage10.Size = New System.Drawing.Size(1275, 264)
         Me.TabPage10.TabIndex = 9
@@ -2479,9 +2479,9 @@ Partial Class Factors
         Me.GroupBox14.Dock = System.Windows.Forms.DockStyle.Fill
         Me.GroupBox14.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.GroupBox14.Location = New System.Drawing.Point(0, 0)
-        Me.GroupBox14.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.GroupBox14.Margin = New System.Windows.Forms.Padding(4)
         Me.GroupBox14.Name = "GroupBox14"
-        Me.GroupBox14.Padding = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.GroupBox14.Padding = New System.Windows.Forms.Padding(4)
         Me.GroupBox14.Size = New System.Drawing.Size(1275, 264)
         Me.GroupBox14.TabIndex = 0
         Me.GroupBox14.TabStop = False
@@ -2497,7 +2497,7 @@ Partial Class Factors
         Me.TableLayoutPanel20.Controls.Add(Me.Panel17, 0, 0)
         Me.TableLayoutPanel20.Dock = System.Windows.Forms.DockStyle.Fill
         Me.TableLayoutPanel20.Location = New System.Drawing.Point(4, 19)
-        Me.TableLayoutPanel20.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.TableLayoutPanel20.Margin = New System.Windows.Forms.Padding(4)
         Me.TableLayoutPanel20.Name = "TableLayoutPanel20"
         Me.TableLayoutPanel20.RowCount = 1
         Me.TableLayoutPanel20.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
@@ -2515,7 +2515,7 @@ Partial Class Factors
         Me.btnExcelPipingMaterial.Image = Global.AVT_TRAKING.My.Resources.Resources.excel
         Me.btnExcelPipingMaterial.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.btnExcelPipingMaterial.Location = New System.Drawing.Point(858, 4)
-        Me.btnExcelPipingMaterial.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btnExcelPipingMaterial.Margin = New System.Windows.Forms.Padding(4)
         Me.btnExcelPipingMaterial.Name = "btnExcelPipingMaterial"
         Me.btnExcelPipingMaterial.Size = New System.Drawing.Size(120, 43)
         Me.btnExcelPipingMaterial.TabIndex = 35
@@ -2529,7 +2529,7 @@ Partial Class Factors
         Me.Panel17.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel17.ForeColor = System.Drawing.SystemColors.ControlText
         Me.Panel17.Location = New System.Drawing.Point(4, 4)
-        Me.Panel17.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.Panel17.Margin = New System.Windows.Forms.Padding(4)
         Me.Panel17.Name = "Panel17"
         Me.Panel17.Size = New System.Drawing.Size(846, 233)
         Me.Panel17.TabIndex = 36
@@ -2541,7 +2541,7 @@ Partial Class Factors
         Me.tblPipingMaterial.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.idSizeMat, Me.idTypeMat, Me.idThickMat, Me.SizeMat, Me.TypeMat, Me.ThickMat, Me.PriceMat, Me.DescriptionMat})
         Me.tblPipingMaterial.Dock = System.Windows.Forms.DockStyle.Fill
         Me.tblPipingMaterial.Location = New System.Drawing.Point(0, 0)
-        Me.tblPipingMaterial.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.tblPipingMaterial.Margin = New System.Windows.Forms.Padding(4)
         Me.tblPipingMaterial.Name = "tblPipingMaterial"
         Me.tblPipingMaterial.RowHeadersWidth = 51
         Me.tblPipingMaterial.Size = New System.Drawing.Size(846, 233)
@@ -2603,9 +2603,9 @@ Partial Class Factors
         Me.TabPage11.BackColor = System.Drawing.Color.FromArgb(CType(CType(83, Byte), Integer), CType(CType(93, Byte), Integer), CType(CType(102, Byte), Integer))
         Me.TabPage11.Controls.Add(Me.GroupBox17)
         Me.TabPage11.Location = New System.Drawing.Point(4, 25)
-        Me.TabPage11.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.TabPage11.Margin = New System.Windows.Forms.Padding(4)
         Me.TabPage11.Name = "TabPage11"
-        Me.TabPage11.Padding = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.TabPage11.Padding = New System.Windows.Forms.Padding(4)
         Me.TabPage11.Size = New System.Drawing.Size(1275, 264)
         Me.TabPage11.TabIndex = 10
         Me.TabPage11.Text = "EQ Material"
@@ -2616,9 +2616,9 @@ Partial Class Factors
         Me.GroupBox17.Dock = System.Windows.Forms.DockStyle.Fill
         Me.GroupBox17.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.GroupBox17.Location = New System.Drawing.Point(4, 4)
-        Me.GroupBox17.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.GroupBox17.Margin = New System.Windows.Forms.Padding(4)
         Me.GroupBox17.Name = "GroupBox17"
-        Me.GroupBox17.Padding = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.GroupBox17.Padding = New System.Windows.Forms.Padding(4)
         Me.GroupBox17.Size = New System.Drawing.Size(1267, 256)
         Me.GroupBox17.TabIndex = 1
         Me.GroupBox17.TabStop = False
@@ -2634,7 +2634,7 @@ Partial Class Factors
         Me.TableLayoutPanel24.Controls.Add(Me.Panel18, 0, 0)
         Me.TableLayoutPanel24.Dock = System.Windows.Forms.DockStyle.Fill
         Me.TableLayoutPanel24.Location = New System.Drawing.Point(4, 19)
-        Me.TableLayoutPanel24.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.TableLayoutPanel24.Margin = New System.Windows.Forms.Padding(4)
         Me.TableLayoutPanel24.Name = "TableLayoutPanel24"
         Me.TableLayoutPanel24.RowCount = 1
         Me.TableLayoutPanel24.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
@@ -2652,7 +2652,7 @@ Partial Class Factors
         Me.btnExcelTblEquipmentMaterial.Image = Global.AVT_TRAKING.My.Resources.Resources.excel
         Me.btnExcelTblEquipmentMaterial.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.btnExcelTblEquipmentMaterial.Location = New System.Drawing.Point(837, 4)
-        Me.btnExcelTblEquipmentMaterial.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btnExcelTblEquipmentMaterial.Margin = New System.Windows.Forms.Padding(4)
         Me.btnExcelTblEquipmentMaterial.Name = "btnExcelTblEquipmentMaterial"
         Me.btnExcelTblEquipmentMaterial.Size = New System.Drawing.Size(140, 43)
         Me.btnExcelTblEquipmentMaterial.TabIndex = 35
@@ -2666,7 +2666,7 @@ Partial Class Factors
         Me.Panel18.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel18.ForeColor = System.Drawing.SystemColors.ControlText
         Me.Panel18.Location = New System.Drawing.Point(4, 4)
-        Me.Panel18.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.Panel18.Margin = New System.Windows.Forms.Padding(4)
         Me.Panel18.Name = "Panel18"
         Me.Panel18.Size = New System.Drawing.Size(825, 225)
         Me.Panel18.TabIndex = 36
@@ -2678,7 +2678,7 @@ Partial Class Factors
         Me.tblEquipmentMaterial.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.idTypeEqMat, Me.idThickEqMat, Me.TypeEqMat, Me.ThickEqMat, Me.PriceEqMat, Me.DescriptionEqMat})
         Me.tblEquipmentMaterial.Dock = System.Windows.Forms.DockStyle.Fill
         Me.tblEquipmentMaterial.Location = New System.Drawing.Point(0, 0)
-        Me.tblEquipmentMaterial.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.tblEquipmentMaterial.Margin = New System.Windows.Forms.Padding(4)
         Me.tblEquipmentMaterial.Name = "tblEquipmentMaterial"
         Me.tblEquipmentMaterial.RowHeadersWidth = 51
         Me.tblEquipmentMaterial.Size = New System.Drawing.Size(825, 225)
@@ -2727,7 +2727,7 @@ Partial Class Factors
         Me.TabPage12.BackColor = System.Drawing.Color.FromArgb(CType(CType(83, Byte), Integer), CType(CType(93, Byte), Integer), CType(CType(102, Byte), Integer))
         Me.TabPage12.Controls.Add(Me.TableLayoutPanel25)
         Me.TabPage12.Location = New System.Drawing.Point(4, 25)
-        Me.TabPage12.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.TabPage12.Margin = New System.Windows.Forms.Padding(4)
         Me.TabPage12.Name = "TabPage12"
         Me.TabPage12.Size = New System.Drawing.Size(1275, 264)
         Me.TabPage12.TabIndex = 11
@@ -2743,7 +2743,7 @@ Partial Class Factors
         Me.TableLayoutPanel25.Controls.Add(Me.Panel19, 0, 0)
         Me.TableLayoutPanel25.Dock = System.Windows.Forms.DockStyle.Fill
         Me.TableLayoutPanel25.Location = New System.Drawing.Point(0, 0)
-        Me.TableLayoutPanel25.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.TableLayoutPanel25.Margin = New System.Windows.Forms.Padding(4)
         Me.TableLayoutPanel25.Name = "TableLayoutPanel25"
         Me.TableLayoutPanel25.RowCount = 1
         Me.TableLayoutPanel25.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
@@ -2761,7 +2761,7 @@ Partial Class Factors
         Me.btnExcelPPFittingMaterial.Image = Global.AVT_TRAKING.My.Resources.Resources.excel
         Me.btnExcelPPFittingMaterial.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.btnExcelPPFittingMaterial.Location = New System.Drawing.Point(941, 4)
-        Me.btnExcelPPFittingMaterial.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btnExcelPPFittingMaterial.Margin = New System.Windows.Forms.Padding(4)
         Me.btnExcelPPFittingMaterial.Name = "btnExcelPPFittingMaterial"
         Me.btnExcelPPFittingMaterial.Size = New System.Drawing.Size(124, 43)
         Me.btnExcelPPFittingMaterial.TabIndex = 35
@@ -2775,7 +2775,7 @@ Partial Class Factors
         Me.Panel19.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel19.ForeColor = System.Drawing.SystemColors.ControlText
         Me.Panel19.Location = New System.Drawing.Point(4, 4)
-        Me.Panel19.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.Panel19.Margin = New System.Windows.Forms.Padding(4)
         Me.Panel19.Name = "Panel19"
         Me.Panel19.Size = New System.Drawing.Size(929, 256)
         Me.Panel19.TabIndex = 36
@@ -2787,7 +2787,7 @@ Partial Class Factors
         Me.tblPPFittingMaterial.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.idSizePPFM, Me.idTypePPFM, Me.idThickPPFM, Me.idFittingPPFM, Me.SizePPFM, Me.TypePPFM, Me.ThickPPFM, Me.FittingPPFM, Me.PricePPFM, Me.DescriptionPPFM})
         Me.tblPPFittingMaterial.Dock = System.Windows.Forms.DockStyle.Fill
         Me.tblPPFittingMaterial.Location = New System.Drawing.Point(0, 0)
-        Me.tblPPFittingMaterial.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.tblPPFittingMaterial.Margin = New System.Windows.Forms.Padding(4)
         Me.tblPPFittingMaterial.Name = "tblPPFittingMaterial"
         Me.tblPPFittingMaterial.RowHeadersWidth = 51
         Me.tblPPFittingMaterial.Size = New System.Drawing.Size(929, 256)
@@ -2868,7 +2868,7 @@ Partial Class Factors
         Me.Panel3.Controls.Add(Me.pgbProgress)
         Me.Panel3.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel3.Location = New System.Drawing.Point(4, 592)
-        Me.Panel3.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.Panel3.Margin = New System.Windows.Forms.Padding(4)
         Me.Panel3.Name = "Panel3"
         Me.Panel3.Size = New System.Drawing.Size(1291, 48)
         Me.Panel3.TabIndex = 2
@@ -2884,7 +2884,7 @@ Partial Class Factors
         Me.btnDeleteFactorTbl.Image = Global.AVT_TRAKING.My.Resources.Resources.delete
         Me.btnDeleteFactorTbl.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.btnDeleteFactorTbl.Location = New System.Drawing.Point(896, 2)
-        Me.btnDeleteFactorTbl.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btnDeleteFactorTbl.Margin = New System.Windows.Forms.Padding(4)
         Me.btnDeleteFactorTbl.Name = "btnDeleteFactorTbl"
         Me.btnDeleteFactorTbl.Size = New System.Drawing.Size(116, 43)
         Me.btnDeleteFactorTbl.TabIndex = 32
@@ -2914,7 +2914,7 @@ Partial Class Factors
         Me.btnSaveFactorTbl.Image = Global.AVT_TRAKING.My.Resources.Resources.save
         Me.btnSaveFactorTbl.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.btnSaveFactorTbl.Location = New System.Drawing.Point(751, 2)
-        Me.btnSaveFactorTbl.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btnSaveFactorTbl.Margin = New System.Windows.Forms.Padding(4)
         Me.btnSaveFactorTbl.Name = "btnSaveFactorTbl"
         Me.btnSaveFactorTbl.Size = New System.Drawing.Size(120, 43)
         Me.btnSaveFactorTbl.TabIndex = 31
@@ -2926,7 +2926,7 @@ Partial Class Factors
         '
         Me.pgbProgress.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.pgbProgress.Location = New System.Drawing.Point(1025, 10)
-        Me.pgbProgress.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.pgbProgress.Margin = New System.Windows.Forms.Padding(4)
         Me.pgbProgress.Name = "pgbProgress"
         Me.pgbProgress.Size = New System.Drawing.Size(261, 28)
         Me.pgbProgress.TabIndex = 0
@@ -2938,7 +2938,7 @@ Partial Class Factors
         Me.ClientSize = New System.Drawing.Size(1299, 644)
         Me.Controls.Add(Me.TableLayoutPanel1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
-        Me.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.Margin = New System.Windows.Forms.Padding(4)
         Me.Name = "Factors"
         Me.Text = "Factors"
         Me.TableLayoutPanel1.ResumeLayout(False)
