@@ -19,7 +19,6 @@ Public Class ProjectsCosts
     '|
     Dim _dtpExpenses As New DateTimePicker
     Dim _dtpMaterial As New DateTimePicker
-
     Dim _rectangulo As New Rectangle
 
     Private Sub ProjectsCosts_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -2010,7 +2009,7 @@ Public Class ProjectsCosts
         totalTaxes = (totalCostHoursST + totalCostHoursOT + totalCostHours3 + totalExpences + totalMaterial) * If(CDbl(pjt.Taxes) > 0, CDbl(pjt.Taxes) / 100, 0)
         txtTotalTaxes.Text = "$" + (totalTaxes).ToString("N")
         txtProjectBilled.Text = "$" + ((totalCostHoursST + totalCostHoursOT + totalCostHours3 + totalExpences + totalMaterial) + totalTaxes).ToString("N")
-        txtLeftSpend.Text = (sprTotalBilling.Value - (totalCostHoursST + totalCostHoursOT + totalCostHours3 + totalExpences + totalMaterial)).ToString("N")
+        txtLeftSpend.Text = (sprTotalBilling.Value - (totalCostHoursST + totalCostHoursOT + totalCostHours3 + totalExpences + totalMaterial + totalTaxes)).ToString("N")
         txtLeftSpend.Text = "$" + txtLeftSpend.Text
         Dim mensaje As String = ""
 

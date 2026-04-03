@@ -1149,7 +1149,10 @@ ar.name as 'Unit',
 sc.location as 'Location',
 CONVERT(nvarchar, sc.buildDate,101)  as 'Date UP',
 IIF(DATEDIFF(DAY,sc.buildDate,ISNULL((select dismantleDate from dismantle as ds where ds.tag = sc.tag),GETDATE()))=0,1,DATEDIFF(DAY,sc.buildDate,ISNULL( (select  dismantleDate from dismantle as ds where ds.tag = sc.tag), GETDATE()))) as 'ACTIVEDAYS',
-ISNULL((select count(*) from productTotalScaffold as pt inner join product as pd on pd.idProduct = pt.idProduct where pt.tag= sc.tag and pd.name = '%YO-YO%'),0) as 'SRL''s', 
+
+ISNULL((select SUM(pt.quantity) from productScaffold as pt inner join product as pd on pd.idProduct = pt.idProduct where pt.tag= sc.tag and pd.name like '%YO-YO%'),0) as 'SRL''s', 
+
+
 ROUND(ISNULL((select SUM(pt.quantity*pd.dailyRentalRate) from productTotalScaffold as pt 
 inner join product as pd on pd.idProduct = pt.idProduct
 where pt.tag = sc.tag ) ,0),2) as 'M-Rent',
