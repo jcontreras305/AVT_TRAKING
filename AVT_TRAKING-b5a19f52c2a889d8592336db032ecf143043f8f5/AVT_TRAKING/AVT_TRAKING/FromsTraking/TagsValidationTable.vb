@@ -160,9 +160,11 @@ Public Class TagsValidationTable
         Next
         Return JobNoFind
     End Function
-    Private Function existQuantity(ByVal idProduct As String) As Boolean
+    Private Function existQuantity(ByVal idProduct As String, ByVal idTagProduct As String) As Boolean
         Dim exist As Boolean = False
-        Dim listRows() As Data.DataRow = tblProducts.Select("ID = " + CStr(idProduct))
+
+        Dim jobTagProduct As String = buscarJobTag(idTagProduct)
+        Dim listRows() As Data.DataRow = tblProducts.Select("ID = " + CStr(idProduct) + " and JobNo = " + jobTagProduct)
         Dim qtyActually = TotalQtyProductSheet(idProduct)
         If qtyActually <= CDec(listRows(0).ItemArray(10)) Then
             exist = True
@@ -603,8 +605,8 @@ Public Class TagsValidationTable
                 row.Cells("clmErrorP").Value = If(row.Cells("clmErrorP").Value <> "", row.Cells("clmErrorP").Value & ", The Product does not available to this Project.", "The Product does not available to this Project.")
                 tblProductSheet.Columns("clmErrorP").Visible = True
             End If
-            'validar las existencias 
-            If Not existQuantity(row.Cells("clmProductID").Value) Then
+            'validar las existencias
+            If Not existQuantity(row.Cells("clmProductID").Value, row.Cells("clmTagID").Value) Then
                 row.Cells("clmQuantity").Style.BackColor = Color.Red
                 row.Cells("clmErrorP").Value = If(row.Cells("clmErrorP").Value <> "", row.Cells("clmErrorP").Value & ", The Quantity is not enougth", "The Quantity is not enougth.")
                 tblProductSheet.Columns("clmErrorP").Visible = True

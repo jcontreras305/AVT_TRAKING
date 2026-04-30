@@ -59,7 +59,7 @@ Partial Class ScaffoldMaterialInventory
         Me.TableLayoutPanel1.Controls.Add(Me.Panel1, 0, 0)
         Me.TableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.TableLayoutPanel1.Location = New System.Drawing.Point(0, 0)
-        Me.TableLayoutPanel1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.TableLayoutPanel1.Margin = New System.Windows.Forms.Padding(4)
         Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
         Me.TableLayoutPanel1.RowCount = 3
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 71.0!))
@@ -73,7 +73,7 @@ Partial Class ScaffoldMaterialInventory
         Me.Panel3.Controls.Add(Me.crvReport)
         Me.Panel3.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel3.Location = New System.Drawing.Point(4, 139)
-        Me.Panel3.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.Panel3.Margin = New System.Windows.Forms.Padding(4)
         Me.Panel3.Name = "Panel3"
         Me.Panel3.Size = New System.Drawing.Size(1153, 460)
         Me.Panel3.TabIndex = 2
@@ -85,7 +85,7 @@ Partial Class ScaffoldMaterialInventory
         Me.crvReport.Cursor = System.Windows.Forms.Cursors.Default
         Me.crvReport.Dock = System.Windows.Forms.DockStyle.Fill
         Me.crvReport.Location = New System.Drawing.Point(0, 0)
-        Me.crvReport.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.crvReport.Margin = New System.Windows.Forms.Padding(4)
         Me.crvReport.Name = "crvReport"
         Me.crvReport.Size = New System.Drawing.Size(1153, 460)
         Me.crvReport.TabIndex = 0
@@ -101,7 +101,7 @@ Partial Class ScaffoldMaterialInventory
         Me.Panel2.Controls.Add(Me.PictureBox4)
         Me.Panel2.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel2.Location = New System.Drawing.Point(4, 75)
-        Me.Panel2.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.Panel2.Margin = New System.Windows.Forms.Padding(4)
         Me.Panel2.Name = "Panel2"
         Me.Panel2.Size = New System.Drawing.Size(1153, 56)
         Me.Panel2.TabIndex = 1
@@ -111,7 +111,7 @@ Partial Class ScaffoldMaterialInventory
         Me.chbAll.AutoSize = True
         Me.chbAll.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.chbAll.Location = New System.Drawing.Point(208, 15)
-        Me.chbAll.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.chbAll.Margin = New System.Windows.Forms.Padding(4)
         Me.chbAll.Name = "chbAll"
         Me.chbAll.Size = New System.Drawing.Size(44, 20)
         Me.chbAll.TabIndex = 16
@@ -122,7 +122,7 @@ Partial Class ScaffoldMaterialInventory
         '
         Me.cmbClients.FormattingEnabled = True
         Me.cmbClients.Location = New System.Drawing.Point(84, 11)
-        Me.cmbClients.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.cmbClients.Margin = New System.Windows.Forms.Padding(4)
         Me.cmbClients.Name = "cmbClients"
         Me.cmbClients.Size = New System.Drawing.Size(115, 24)
         Me.cmbClients.TabIndex = 15
@@ -137,7 +137,7 @@ Partial Class ScaffoldMaterialInventory
         Me.Button1.Image = Global.AVT_TRAKING.My.Resources.Resources.reportshow
         Me.Button1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.Button1.Location = New System.Drawing.Point(317, 4)
-        Me.Button1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.Button1.Margin = New System.Windows.Forms.Padding(4)
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(111, 41)
         Me.Button1.TabIndex = 14
@@ -162,7 +162,7 @@ Partial Class ScaffoldMaterialInventory
         Me.PictureBox4.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.PictureBox4.Image = Global.AVT_TRAKING.My.Resources.Resources._exit
         Me.PictureBox4.Location = New System.Drawing.Point(1100, 4)
-        Me.PictureBox4.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.PictureBox4.Margin = New System.Windows.Forms.Padding(4)
         Me.PictureBox4.Name = "PictureBox4"
         Me.PictureBox4.Size = New System.Drawing.Size(49, 36)
         Me.PictureBox4.TabIndex = 9
@@ -174,7 +174,7 @@ Partial Class ScaffoldMaterialInventory
         Me.Panel1.Controls.Add(Me.TitleBar)
         Me.Panel1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel1.Location = New System.Drawing.Point(4, 4)
-        Me.Panel1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.Panel1.Margin = New System.Windows.Forms.Padding(4)
         Me.Panel1.Name = "Panel1"
         Me.Panel1.Size = New System.Drawing.Size(1153, 63)
         Me.Panel1.TabIndex = 0
@@ -185,11 +185,11 @@ Partial Class ScaffoldMaterialInventory
         Me.TitleBar.Controls.Add(Me.PictureBox1)
         Me.TitleBar.Controls.Add(Me.Label3)
         Me.TitleBar.Controls.Add(Me.PictureBox3)
-        Me.TitleBar.Controls.Add(Me.btnMinimaize)
         Me.TitleBar.Controls.Add(Me.btnMaximize)
+        Me.TitleBar.Controls.Add(Me.btnMinimaize)
         Me.TitleBar.Dock = System.Windows.Forms.DockStyle.Fill
         Me.TitleBar.Location = New System.Drawing.Point(0, 0)
-        Me.TitleBar.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.TitleBar.Margin = New System.Windows.Forms.Padding(4)
         Me.TitleBar.Name = "TitleBar"
         Me.TitleBar.Size = New System.Drawing.Size(1153, 63)
         Me.TitleBar.TabIndex = 1
@@ -198,7 +198,7 @@ Partial Class ScaffoldMaterialInventory
         '
         Me.PictureBox1.Image = Global.AVT_TRAKING.My.Resources.Resources.project
         Me.PictureBox1.Location = New System.Drawing.Point(5, 6)
-        Me.PictureBox1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.PictureBox1.Margin = New System.Windows.Forms.Padding(4)
         Me.PictureBox1.Name = "PictureBox1"
         Me.PictureBox1.Size = New System.Drawing.Size(60, 52)
         Me.PictureBox1.TabIndex = 18
@@ -221,7 +221,7 @@ Partial Class ScaffoldMaterialInventory
         Me.PictureBox3.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.PictureBox3.Image = Global.AVT_TRAKING.My.Resources.Resources.minimize2
         Me.PictureBox3.Location = New System.Drawing.Point(1064, 6)
-        Me.PictureBox3.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.PictureBox3.Margin = New System.Windows.Forms.Padding(4)
         Me.PictureBox3.Name = "PictureBox3"
         Me.PictureBox3.Size = New System.Drawing.Size(36, 36)
         Me.PictureBox3.TabIndex = 9
@@ -231,8 +231,8 @@ Partial Class ScaffoldMaterialInventory
         '
         Me.btnMinimaize.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnMinimaize.Image = Global.AVT_TRAKING.My.Resources.Resources.restore2
-        Me.btnMinimaize.Location = New System.Drawing.Point(1107, 0)
-        Me.btnMinimaize.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btnMinimaize.Location = New System.Drawing.Point(1108, 4)
+        Me.btnMinimaize.Margin = New System.Windows.Forms.Padding(4)
         Me.btnMinimaize.Name = "btnMinimaize"
         Me.btnMinimaize.Size = New System.Drawing.Size(35, 36)
         Me.btnMinimaize.TabIndex = 8
@@ -242,8 +242,8 @@ Partial Class ScaffoldMaterialInventory
         '
         Me.btnMaximize.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnMaximize.Image = Global.AVT_TRAKING.My.Resources.Resources.maximize2
-        Me.btnMaximize.Location = New System.Drawing.Point(1108, 2)
-        Me.btnMaximize.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.btnMaximize.Location = New System.Drawing.Point(1108, 4)
+        Me.btnMaximize.Margin = New System.Windows.Forms.Padding(4)
         Me.btnMaximize.Name = "btnMaximize"
         Me.btnMaximize.Size = New System.Drawing.Size(41, 36)
         Me.btnMaximize.TabIndex = 7
@@ -257,7 +257,7 @@ Partial Class ScaffoldMaterialInventory
         Me.ClientSize = New System.Drawing.Size(1161, 603)
         Me.Controls.Add(Me.TableLayoutPanel1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
-        Me.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.Margin = New System.Windows.Forms.Padding(4)
         Me.Name = "ScaffoldMaterialInventory"
         Me.Text = "ScaffoldMaterialInventory"
         Me.TableLayoutPanel1.ResumeLayout(False)

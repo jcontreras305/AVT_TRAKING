@@ -1500,12 +1500,11 @@ order by pd.idProduct", conn)
             desconectar()
         End Try
     End Function
-
     Public Function llenarProduct(ByVal tabla As DataTable) As Boolean
         Try
             conectar()
             Dim cmd As New SqlCommand("select pd.idProduct  as 'ID',pd.name as 'Product Name', pd.um as 'UM',pd.class as 'Class', pd.weight as 'Weigth', pd.weightMeasure as 'Weigth Measure',pd.price as '$UM',pd.dailyRentalRate as 'Daily Rental Rate' ,pd.weeklyRentalRate as 'Weekly Rental Rate', pd.monthlyRentalRate as 'Monthly Rental Rate' ,
-quantity as 'QTY' , pd.QID, PLF, PSQF, pdj.jobNo as 'JobNo'
+pdj.qty  as 'QTY' , pd.QID, PLF, PSQF, pdj.jobNo as 'JobNo'
 from productJob as pdj
 inner join product as pd on pd.idProduct = pdj.idProduct 
 inner join unitMeassurements as um on pd.um = um.um

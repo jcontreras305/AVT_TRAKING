@@ -566,7 +566,7 @@ inner join task as tk on tk.idAux = sc.idAux
 inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO
 inner join projectOrder as po on po.idPO = wo.idPO and po.jobNo = wo.jobNo
 inner join job as jb on jb.jobNo = po.jobNo
-where md.idModAux = '42256164-7015-4b89-aa69-c376f1edbc49' )
+where md.idModAux = '" + ModAux + "' )
 inner join product as pd on pd.idProduct = pdj.idProduct
 where pm.idModAux = '" + ModAux + "' and tag='" + tag + "'", conn)
             Dim dr As SqlDataReader = cmd.ExecuteReader()

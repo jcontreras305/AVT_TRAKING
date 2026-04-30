@@ -9,6 +9,11 @@ Public Class ScaffoldMaterialInventory
         Me.Close()
     End Sub
     Private Sub btnMinimize_Click(sender As Object, e As EventArgs) Handles btnMinimaize.Click
+        WindowState = FormWindowState.Normal
+        btnMinimaize.Visible = False
+        btnMaximize.Visible = True
+    End Sub
+    Private Sub PictureBox3_Click(sender As Object, e As EventArgs) Handles PictureBox3.Click
         Me.WindowState = FormWindowState.Minimized
     End Sub
     Private Sub btnRestore_Click(sender As Object, e As EventArgs) Handles btnMinimaize.Click
@@ -66,4 +71,6 @@ Public Class ScaffoldMaterialInventory
             cmbClients.Enabled = True
         End If
     End Sub
+
+
 End Class
