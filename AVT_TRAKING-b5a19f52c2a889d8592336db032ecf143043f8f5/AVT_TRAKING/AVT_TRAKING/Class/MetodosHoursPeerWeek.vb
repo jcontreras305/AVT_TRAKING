@@ -673,7 +673,9 @@ tk.accountNum as 'Aco.N',
 tk.expCode as 'ExpCode',
 tk.estimateHours as 'Hours',
 po.idPO,
-po.jobNo
+po.jobNo,
+tk.phase,
+tk.estTotalBilling
 from task as tk 
 inner join workOrder as wo on tk.idAuxWO = wo.idAuxWO
 inner join projectOrder as po on po.idPO = wo.idPO

@@ -322,6 +322,8 @@ Public Class TimeSheet
                         tablaWO.Columns.Add("idAuxWO")
                         tablaWO.Columns.Add("Area")
                         tablaWO.Columns.Add("Phase")
+                        tablaWO.Columns.Add("Estimate")
+
                         Dim mensaje As String = ""
                         Dim contwo As Integer = 2
                         Dim filasError As String = ""
@@ -329,7 +331,7 @@ Public Class TimeSheet
                         While workOrders.Cells(contwo, 2).Text <> ""
                             Dim wo = workOrders.Cells(contwo, 2).Text.ToString().Replace(" ", "-")
                             Dim workOrder() As String = wo.Split("-") 'workOrder y task
-                            tablaWO.Rows.Add(CStr(contwo - 1), workOrder(0), If(workOrder.Length = 1, "", If(workOrder.Length = 3, workOrder(1) & "-" & workOrder(2), workOrder(1))), workOrders.Cells(contwo, 2).Text, workOrders.Cells(contwo, 3).Text, workOrders.Cells(contwo, 5).Text, workOrders.Cells(contwo, 6).Text, workOrders.Cells(contwo, 7).Text, workOrders.Cells(contwo, 8).Text, workOrders.Cells(contwo, 9).Text, workOrders.Cells(contwo, 1).Text, workOrders.Cells(contwo, 4).Text, workOrders.Cells(contwo, 10).Text)
+                            tablaWO.Rows.Add(CStr(contwo - 1), workOrder(0), If(workOrder.Length = 1, "", If(workOrder.Length = 3, workOrder(1) & "-" & workOrder(2), workOrder(1))), workOrders.Cells(contwo, 2).Text, workOrders.Cells(contwo, 3).Text, workOrders.Cells(contwo, 5).Text, workOrders.Cells(contwo, 6).Text, workOrders.Cells(contwo, 7).Text, workOrders.Cells(contwo, 8).Text, workOrders.Cells(contwo, 9).Text, workOrders.Cells(contwo, 1).Text, workOrders.Cells(contwo, 4).Text, workOrders.Cells(contwo, 10).Text, If(workOrders.Cells(contwo, 11).Text = "", "0.00", workOrders.Cells(contwo, 11).Text))
                             contwo += 1
                         End While
                         Dim listNewWorkOrders As New List(Of Data.DataRow)
@@ -337,7 +339,7 @@ Public Class TimeSheet
                         For Each row As DataRow In tablaWO.Rows()
                             flagExistWO = False
                             Dim rowsWorkOrder() As DataRow = tablaProject.Select("project = '" + row.ItemArray(3).ToString + "' and idPO = " + row.ItemArray(8).ToString + " and jobNo = " + row.ItemArray(9).ToString + "")
-                            If rowsWorkOrder.Length = 0 Then
+                            If rowsWorkOrder.Length < 1 Then
                                 listNewWorkOrders.Add(row)
                             End If
                             'For Each row1 As DataRow In tablaProject.Rows()
@@ -354,7 +356,7 @@ Public Class TimeSheet
                             'End If
                         Next
                         If listNewWorkOrders.Count > 0 Then
-                            txtSalidaCSV.Text = txtSalidaCSV.Text + vbCrLf + listNewWorkOrders.Count.ToString() + " New 'Work Codes', trying to insert the new 'Work Orders'."
+                            txtSalidaCSV.Text = txtSalidaCSV.Text + vbCrLf + listNewWorkOrders.Count.ToString() + " New 'Work Orders', trying to insert the new 'Work Orders'."
                             If DialogResult.Yes = MessageBox.Show("New 'Work Orders' found. Would you like to insert the new 'Work Orders'?", "Message", MessageBoxButtons.YesNo, MessageBoxIcon.Information) Then
                                 For Each item As DataRow In listNewWorkOrders
                                     Dim newPO As New Project
@@ -370,6 +372,7 @@ Public Class TimeSheet
                                     newPO.equipament = item.ItemArray(10)
                                     newPO.Area = item.ItemArray(11)
                                     newPO.Phase = item.ItemArray(12)
+                                    newPO.totalBilling = CDbl(item.Item(13).ToString.Replace("$", ""))
                                     Dim ListRows() As DataRow = tablaProject.Select("idWO = '" + newPO.idWorkOrder + "' and idPO = " + newPO.idPO.ToString() + " and jobNo = " + newPO.jobNum.ToString() + " ")
                                     If listRows.Length > 0 Then
                                         newPO.idAuxWO = listRows(0).ItemArray(5)
@@ -628,6 +631,8 @@ Public Class TimeSheet
                     sheetWorkCodes.Cells(cont, 7) = row.Item("Hours")
                     sheetWorkCodes.Cells(cont, 8) = row.Item("idPO")
                     sheetWorkCodes.Cells(cont, 9) = row.Item("jobNo")
+                    sheetWorkCodes.Cells(cont, 10) = row.Item("phase")
+                    sheetWorkCodes.Cells(cont, 11) = row.Item("estTotalBilling")
                     cont += 1
                 Next
             End If
