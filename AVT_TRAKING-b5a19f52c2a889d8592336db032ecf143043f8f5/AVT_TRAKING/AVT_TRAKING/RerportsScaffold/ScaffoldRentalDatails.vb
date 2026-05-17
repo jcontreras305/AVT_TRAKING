@@ -140,7 +140,8 @@ Public Class ScaffoldRentalDatails
                 mtdSc.actualizarInvoiceExcel(validaFechaParaSQl(dtpStartDate.Value), validaFechaParaSQl(dtpFinalDate.Value), array(0))
                 Cursor = Cursors.WaitCursor
                 Dim opFile As New OpenFileDialog
-                opFile.DefaultExt = "xlsx|xls"
+                opFile.Title = "Open Invoice Pieces"
+                opFile.Filter = "(*.xlsx)|*.xlsx"
                 opFile.FileName = "InvoicePieces"
                 If DialogResult.OK = opFile.ShowDialog() Then
                     Cursor = Cursors.WaitCursor

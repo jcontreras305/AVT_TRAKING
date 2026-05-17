@@ -3863,7 +3863,107 @@ inner join job as jb on jb.jobNo = po.jobNo
 inner join clients as cl on cl.idClient = jb.idClient
 where cl.numberClient = @numberClient
 ) AS T1
-WHERE T1.Pieces > 0  and T1.RDAYS > 0", conn)
+WHERE T1.Pieces > 0  and T1.RDAYS > 0
+
+--##################################################################################
+--########## HERE IS THE QUERY TO SELECT DE RENTAL OF YOYOS ########################
+--##################################################################################
+
+
+IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES where TABLE_SCHEMA = 'dbo' and TABLE_NAME = 'invoiceExcelYOYO')
+BEGIN 
+	drop table invoiceExcelYOYO
+END
+ 
+ 
+select
+distinct
+T1.[Labor WO / Network #],T1.[Type (O,M,T,C)],T1.[Tag #],
+SUM(T1.[SRLs]) OVER (PARTITION BY [Tag #] ,Work) as 'SRLS',
+T1.[UNIT],CONVERT(nvarchar, T1.[Location])as 'Location',T1.[Date UP],T1.[Date Down],
+SUM((T1.[Product Amount]*t1.[ACTIVEDAYS])) OVER (PARTITION BY [TAG #], Work) as 'Invoice Amount',
+T1.[ACTIVEDAYS],T1.[Work]
+into InvoiceExcelYOYO
+from (
+ 
+ 
+select wo.idWO as 'Labor WO / Network #',
+case  sj.[description] 
+when 'Operation' then 'O'
+when 'Maintenance' then 'M'
+when 'T/A' then 'T'
+when 'Capital' then 'C'
+when 'Winterization' then 'W'
+when 'All' then 'All'
+when NULL then ''
+else SUBSTRING(sj.[description],1,1) end  as 'Type (O,M,T,C)',
+sc.tag as 'Tag #',
+ 
+ISNULL((select sum(psc.quantity) from productScaffold as psc inner join product as pd on pd.idProduct = psc.idProduct where psc.tag = sc.tag and pd.name like '%YO-YO%' ),0) as 'SRLs',
+ar.name as 'UNIT',
+sc.location as 'Location',
+CONVERT(VARCHAR, sc.buildDate, 101) as 'Date UP',
+ISNULL(CONVERT(VARCHAR, ds.dismantleDate, 101),'') as 'Date Down',
+ISNULL((select sum(psc.quantity * pd.dailyRentalRate) from productScaffold as psc 
+inner join product as pd on pd.idProduct = psc.idProduct
+where psc.tag = sc.tag and pd.name like '%YO-YO%' ),0) as 'Product Amount',
+DATEDIFF(day,sc.buildDate, IIF(ds.dismantleDate is Null,GETDATE(),ds.dismantleDate)) as 'ACTIVEDAYS',
+'Build' as 'Work'
+from scaffoldTraking as sc
+left join dismantle as ds on ds.tag = sc.tag
+left join areas as ar on ar.idArea = sc.idArea
+left join subJobs as sj on sj.idSubJob = sc.idSubJob
+left join jobCat as jc on jc.idJobCat = sc.idJobCat
+left join task as tk on tk.idAux = sc.idAux
+inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO
+inner join projectOrder as po on po.idPO = wo.idPO and po.jobNo = wo.jobNo
+inner join job as jb on jb.jobNo = po.jobNo
+inner join clients as cl on cl.idClient = jb.idClient
+where cl.numberClient = @numberClient
+ 
+UNION ALL
+ 
+select wo.idWO as 'Labor WO / NERWORK #',
+case  sj.[description] 
+when 'Operation' then 'O'
+when 'Maintenance' then 'M'
+when 'T/A' then 'T'
+when 'Capital' then 'C'
+when 'Winterization' then 'W'
+when 'All' then 'All'
+when NULL then ''
+else SUBSTRING(sj.[description],1,1) end  as 'Type (O,M,T,C)',
+md.tag as 'Tag #',
+ 
+ISNULL((select sum(psc.quantity) from productModification as psc inner join product as pd on pd.idProduct = psc.idProduct where psc.tag = sc.tag and pd.name like '%YO-YO%' ),0) as 'SRLs',
+ar.name as 'UNIT',
+sc.location as 'Location',
+CONVERT(VARCHAR, md.modificationDate, 101) as 'Date UP',
+ISNULL(CONVERT(VARCHAR, ds.dismantleDate, 101),'') as 'Date Down',
+ISNULL((select sum(pmd.quantity * pd.dailyRentalRate) from productModification as pmd 
+inner join product as pd on pd.idProduct = pmd.idProduct
+where pmd.idModAux = md.idModAux and pd.name like '%YO-YO%' ),0) as 'Product Amount',
+DATEDIFF(day,sc.buildDate, IIF(ds.dismantleDate is Null,GETDATE(),ds.dismantleDate)) as 'ACTIVEDAYS',
+ 
+ 
+'Mod' as 'Work'
+from modification as md 
+left join scaffoldTraking as sc on sc.tag = md.tag
+left join dismantle as ds on ds.tag = sc.tag
+left join areas as ar on ar.idArea = sc.idArea
+left join subJobs as sj on sj.idSubJob = sc.idSubJob
+left join jobCat as jc on jc.idJobCat = sc.idJobCat
+left join task as tk on tk.idAux = sc.idAux
+inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO
+inner join projectOrder as po on po.idPO = wo.idPO and po.jobNo = wo.jobNo
+inner join job as jb on jb.jobNo = po.jobNo
+inner join clients as cl on cl.idClient = jb.idClient
+where cl.numberClient = @numberClient
+) AS T1
+WHERE T1.SRLs > 0  and T1.ACTIVEDAYS > 0
+ 
+SELECT * FROM InvoiceExcelYOYO
+", conn)
 
             If cmd.ExecuteNonQuery Then
                 Return True

@@ -875,28 +875,28 @@ BEGIN
 END
 
 select T2.[Year],T2.[PO],T2.[Weekly],T2.[ClientID],T2.[ST Hours],T2.[OT Hours],T2.[ST Cost],T2.[OT Cost],T2.[Total Mat],T2.[Total Exp],T2.[Total Rental 3rd party],T2.[Total In House],T2.[Total Company Equipment],T2.[Total Subcontract],T2.[Total Tools],T2.[Total Consumable],T2.[Total Other]
-,Round(iif(T2.[Taxes]>0,(T2.[ST Cost]+T2.[OT Cost]+T2.[Total Mat]+T2.[Total Exp]+T2.[Total Rental 3rd party]+T2.[Total In House]+T2.[Total Company Equipment]+T2.[Total Subcontract]+T2.[Total Tools]+T2.[Total Consumable]+T2.[Total Other])*(T2.[Taxes]/100),0),2) AS 'Taxes'
+,Round(iif(T2.[Taxes]>0,(T2.[ST Cost]+T2.[OT Cost]+T2.[Total Mat]+T2.[Total Exp]+T2.[Total Rental 3rd party]+T2.[Total In House]+T2.[Total Company Equipment]+T2.[Total Subcontract]+T2.[Total Tools]+T2.[Total Consumable]+T2.[Total Other])*(T2.[Taxes]/100),0),2) AS 'Taxes', T2.[Class]
 INTO PBI.CostHPTAS from (
 select DISTINCT
 T1.[Year],
 T1.[PO],
 T1.[Weekly],
 T1.[ClientID],
-SUM(T1.[ST Hours]) OVER (PARTITION BY T1.[Year],T1.[Weekly],T1.[PO],T1.[ClientID]) as 'ST Hours',
-SUM(T1.[OT Hours]) OVER (PARTITION BY T1.[Year],T1.[Weekly],T1.[PO],T1.[ClientID]) as 'OT Hours',
-SUM(T1.[OT Cost]) OVER (PARTITION BY T1.[Year],T1.[Weekly],T1.[PO],T1.[ClientID]) as 'OT Cost',
-SUM(T1.[ST Cost]) OVER (PARTITION BY T1.[Year],T1.[Weekly],T1.[PO],T1.[ClientID]) as 'ST Cost',
-SUM(T1.[Total Exp]) OVER (PARTITION BY T1.[Year],T1.[Weekly],T1.[PO],T1.[ClientID]) as 'Total Exp',
-SUM(T1.[Total Mat]) OVER (PARTITION BY T1.[Year],T1.[Weekly],T1.[PO],T1.[ClientID]) as 'Total Mat',
-SUM(T1.[Total Rental 3rd Party]) OVER (PARTITION BY T1.[Year],T1.[Weekly],T1.[PO],T1.[ClientID]) as 'Total Rental 3rd party',
-SUM(T1.[Total In House]) OVER (PARTITION BY T1.[Year],T1.[Weekly],T1.[PO],T1.[ClientID]) as 'Total In House',
-SUM(T1.[Total Company Equipment]) OVER (PARTITION BY T1.[Year],T1.[Weekly],T1.[PO],T1.[ClientID]) as 'Total Company Equipment',
-SUM(T1.[Total Subcontract]) OVER (PARTITION BY T1.[Year],T1.[Weekly],T1.[PO],T1.[ClientID]) as 'Total Subcontract',
-SUM(T1.[Total Tools]) OVER (PARTITION BY T1.[Year],T1.[Weekly],T1.[PO],T1.[ClientID]) as 'Total Tools',
-SUM(T1.[Total Consumables]) OVER (PARTITION BY T1.[Year],T1.[Weekly],T1.[PO],T1.[ClientID]) as 'Total Consumable',
-SUM(T1.[Total Other]) OVER (PARTITION BY T1.[Year],T1.[Weekly],T1.[PO],T1.[ClientID]) as 'Total Other',
-T1.[Taxes]
-
+SUM(T1.[ST Hours]) OVER (PARTITION BY T1.[Year],T1.[Weekly],T1.[PO],T1.[ClientID],T1.[Class]) as 'ST Hours',
+SUM(T1.[OT Hours]) OVER (PARTITION BY T1.[Year],T1.[Weekly],T1.[PO],T1.[ClientID],T1.[Class]) as 'OT Hours',
+SUM(T1.[OT Cost]) OVER (PARTITION BY T1.[Year],T1.[Weekly],T1.[PO],T1.[ClientID],T1.[Class]) as 'OT Cost',
+SUM(T1.[ST Cost]) OVER (PARTITION BY T1.[Year],T1.[Weekly],T1.[PO],T1.[ClientID],T1.[Class]) as 'ST Cost',
+SUM(T1.[Total Exp]) OVER (PARTITION BY T1.[Year],T1.[Weekly],T1.[PO],T1.[ClientID],T1.[Class]) as 'Total Exp',
+SUM(T1.[Total Mat]) OVER (PARTITION BY T1.[Year],T1.[Weekly],T1.[PO],T1.[ClientID],T1.[Class]) as 'Total Mat',
+SUM(T1.[Total Rental 3rd Party]) OVER (PARTITION BY T1.[Year],T1.[Weekly],T1.[PO],T1.[ClientID],T1.[Class]) as 'Total Rental 3rd party',
+SUM(T1.[Total In House]) OVER (PARTITION BY T1.[Year],T1.[Weekly],T1.[PO],T1.[ClientID],T1.[Class]) as 'Total In House',
+SUM(T1.[Total Company Equipment]) OVER (PARTITION BY T1.[Year],T1.[Weekly],T1.[PO],T1.[ClientID],T1.[Class]) as 'Total Company Equipment',
+SUM(T1.[Total Subcontract]) OVER (PARTITION BY T1.[Year],T1.[Weekly],T1.[PO],T1.[ClientID],T1.[Class]) as 'Total Subcontract',
+SUM(T1.[Total Tools]) OVER (PARTITION BY T1.[Year],T1.[Weekly],T1.[PO],T1.[ClientID],T1.[Class]) as 'Total Tools',
+SUM(T1.[Total Consumables]) OVER (PARTITION BY T1.[Year],T1.[Weekly],T1.[PO],T1.[ClientID],T1.[Class]) as 'Total Consumable',
+SUM(T1.[Total Other]) OVER (PARTITION BY T1.[Year],T1.[Weekly],T1.[PO],T1.[ClientID],T1.[Class]) as 'Total Other',
+T1.[Taxes],
+T1.[Class]
 from(
 
 select 
@@ -905,10 +905,10 @@ YEAR(hw.dateWorked) as 'Year',
 po.idPO	as 'PO',
 DATEADD(DAY,IIF( DATEPART(DW,hw.dateWorked)=1,0, 7-(DATEPART(DW,hw.dateWorked)-1)),hw.dateWorked) as 'Weekly',
 jb.jobNo as 'ClientID',
-SUM(hw.hoursST) OVER (PARTITION BY YEAR(hw.dateWorked),DATEADD(DAY,IIF( DATEPART(DW,hw.dateWorked)=1,0, 7-(DATEPART(DW,hw.dateWorked)-1)),hw.dateWorked),po.idPO,jb.jobNo) as 'ST Hours',
-SUM(hw.hoursOT+ hw.hours3) OVER (PARTITION BY YEAR(hw.dateWorked),DATEADD(DAY,IIF( DATEPART(DW,hw.dateWorked)=1,0, 7-(DATEPART(DW,hw.dateWorked)-1)),hw.dateWorked),po.idPO,jb.jobNo) as 'OT Hours',
-ROUND(SUM((hw.hoursOT*wc.billingRateOT) + (hw.hours3*wc.billingRate3)) OVER (PARTITION BY YEAR(hw.dateWorked),DATEADD(DAY,IIF( DATEPART(DW,hw.dateWorked)=1,0, 7-(DATEPART(DW,hw.dateWorked)-1)),hw.dateWorked),po.idPO,jb.jobNo),2) 'OT Cost',
-ROUND(SUM(hw.hoursST*wc.billingRate1) OVER (PARTITION BY YEAR(hw.dateWorked),DATEADD(DAY,IIF( DATEPART(DW,hw.dateWorked)=1,0, 7-(DATEPART(DW,hw.dateWorked)-1)),hw.dateWorked),po.idPO,jb.jobNo),2) as 'ST Cost',
+SUM(hw.hoursST) OVER (PARTITION BY YEAR(hw.dateWorked),DATEADD(DAY,IIF( DATEPART(DW,hw.dateWorked)=1,0, 7-(DATEPART(DW,hw.dateWorked)-1)),hw.dateWorked),po.idPO,jb.jobNo,wc.name) as 'ST Hours',
+SUM(hw.hoursOT+ hw.hours3) OVER (PARTITION BY YEAR(hw.dateWorked),DATEADD(DAY,IIF( DATEPART(DW,hw.dateWorked)=1,0, 7-(DATEPART(DW,hw.dateWorked)-1)),hw.dateWorked),po.idPO,jb.jobNo,wc.name) as 'OT Hours',
+ROUND(SUM((hw.hoursOT*wc.billingRateOT) + (hw.hours3*wc.billingRate3)) OVER (PARTITION BY YEAR(hw.dateWorked),DATEADD(DAY,IIF( DATEPART(DW,hw.dateWorked)=1,0, 7-(DATEPART(DW,hw.dateWorked)-1)),hw.dateWorked),po.idPO,jb.jobNo,wc.name),2) 'OT Cost',
+ROUND(SUM(hw.hoursST*wc.billingRate1) OVER (PARTITION BY YEAR(hw.dateWorked),DATEADD(DAY,IIF( DATEPART(DW,hw.dateWorked)=1,0, 7-(DATEPART(DW,hw.dateWorked)-1)),hw.dateWorked),po.idPO,jb.jobNo,wc.name),2) as 'ST Cost',
 0 as 'Total Exp',
 0 as 'Total Mat',
 0 as 'Total Rental 3rd Party',
@@ -918,7 +918,8 @@ ROUND(SUM(hw.hoursST*wc.billingRate1) OVER (PARTITION BY YEAR(hw.dateWorked),DAT
 0 as 'Total Tools',
 0 as 'Total Consumables',
 0 as 'Total Other',
-jb.Taxes
+jb.Taxes,
+wc.name as 'Class'
 from hoursWorked as hw 
 inner join task as tk on tk.idAux = hw.idAux
 inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO
@@ -946,7 +947,8 @@ exu.amount as 'Total Exp',
 0 as 'Total Tools',
 0 as 'Total Consumables',
 0 as 'Total Other',
-jb.Taxes
+jb.Taxes,
+'' as 'Class'
 from expensesUsed as exu 
 inner join expenses as ex on ex.idExpenses = exu.idExpense
 left join task as tk on tk.idAux = exu.idAux
@@ -975,7 +977,8 @@ IIF(subString(code,LEN(code),1) = 'S' , mau.amount,0) as 'Total Subcontract',
 IIF(subString(code,LEN(code),1) = 'T' , mau.amount,0) as 'Total Tools',
 IIF(subString(code,LEN(code),1) = 'V' , mau.amount,0) as 'Total Consumables',
 IIF(subString(code,LEN(code),1) = 'Y' , mau.amount,0) as 'Total Other',
-jb.Taxes
+jb.Taxes,
+'' as 'Class'
 from materialUsed as mau 
 inner join material as ma on ma.idMaterial = mau.idMaterial
 left join task as tk on tk.idAux = mau.idAux
