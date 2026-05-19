@@ -3757,6 +3757,11 @@ BEGIN
 	drop table invoiceExcel
 END
 
+IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES where TABLE_SCHEMA = 'dbo' and TABLE_NAME = 'invoiceExcel')
+BEGIN 
+	drop table invoiceExcel
+END
+
 select
 distinct
 T1.[Labor WO / Network #],T1.[Type (O,M,T,C)],T1.[Tag #],
@@ -3812,8 +3817,10 @@ inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO
 inner join projectOrder as po on po.idPO = wo.idPO and po.jobNo = wo.jobNo
 inner join job as jb on jb.jobNo = po.jobNo
 inner join clients as cl on cl.idClient = jb.idClient
-where cl.numberClient = @numberClient
+where cl.numberClient = @numberClient and sc.buildDate between @startDate and @FinalDate 
+
 UNION ALL
+
 select wo.idWO as 'Labor WO / NERWORK #',
 case  sj.[description] 
 when 'Operation' then 'O'
@@ -3861,7 +3868,7 @@ inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO
 inner join projectOrder as po on po.idPO = wo.idPO and po.jobNo = wo.jobNo
 inner join job as jb on jb.jobNo = po.jobNo
 inner join clients as cl on cl.idClient = jb.idClient
-where cl.numberClient = @numberClient
+where cl.numberClient = @numberClient and md.modificationDate between @startDate and @FinalDate 
 ) AS T1
 WHERE T1.Pieces > 0  and T1.RDAYS > 0
 
@@ -3919,7 +3926,7 @@ inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO
 inner join projectOrder as po on po.idPO = wo.idPO and po.jobNo = wo.jobNo
 inner join job as jb on jb.jobNo = po.jobNo
 inner join clients as cl on cl.idClient = jb.idClient
-where cl.numberClient = @numberClient
+where cl.numberClient = @numberClient and sc.buildDate between @startDate and @FinalDate 
  
 UNION ALL
  
@@ -3944,8 +3951,6 @@ ISNULL((select sum(pmd.quantity * pd.dailyRentalRate) from productModification a
 inner join product as pd on pd.idProduct = pmd.idProduct
 where pmd.idModAux = md.idModAux and pd.name like '%YO-YO%' ),0) as 'Product Amount',
 DATEDIFF(day,sc.buildDate, IIF(ds.dismantleDate is Null,GETDATE(),ds.dismantleDate)) as 'ACTIVEDAYS',
- 
- 
 'Mod' as 'Work'
 from modification as md 
 left join scaffoldTraking as sc on sc.tag = md.tag
@@ -3958,12 +3963,9 @@ inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO
 inner join projectOrder as po on po.idPO = wo.idPO and po.jobNo = wo.jobNo
 inner join job as jb on jb.jobNo = po.jobNo
 inner join clients as cl on cl.idClient = jb.idClient
-where cl.numberClient = @numberClient
+where cl.numberClient = @numberClient and md.modificationDate between @startDate and @FinalDate 
 ) AS T1
-WHERE T1.SRLs > 0  and T1.ACTIVEDAYS > 0
- 
-SELECT * FROM InvoiceExcelYOYO
-", conn)
+WHERE T1.SRLs > 0  and T1.ACTIVEDAYS > 0", conn)
 
             If cmd.ExecuteNonQuery Then
                 Return True
