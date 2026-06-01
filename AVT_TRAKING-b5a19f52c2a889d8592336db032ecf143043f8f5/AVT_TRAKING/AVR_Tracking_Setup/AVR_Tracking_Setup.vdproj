@@ -129,12 +129,6 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_13ADA89504574C38B969F80BA649D100"
-        "OwnerKey" = "8:_UNDEFINED"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
         "MsmKey" = "8:_16E392317A3CDF0EA32CB645E39D115C"
         "OwnerKey" = "8:_A5C4A0709A0B4D7BF7A74194A903FC56"
         "MsmSig" = "8:_UNDEFINED"
@@ -677,6 +671,12 @@
         {
         "MsmKey" = "8:_A1964C76B9D0C8DB8FCD2CA288F99DF1"
         "OwnerKey" = "8:_35482C579A224204BF89D8A72BBE8313"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_A33BF649BF1147B087DB520726F50FE8"
+        "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -1401,26 +1401,6 @@
             "Register" = "3:1"
             "Exclude" = "11:FALSE"
             "IsDependency" = "11:TRUE"
-            "IsolateTo" = "8:"
-            }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_13ADA89504574C38B969F80BA649D100"
-            {
-            "SourcePath" = "8:..\\..\\..\\..\\..\\..\\Downloads\\InvoicePieces.xlsx"
-            "TargetName" = "8:InvoicePieces.xlsx"
-            "Tag" = "8:"
-            "Folder" = "8:_5DC6EB9471034BC1BB287FB7F27996C3"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_16E392317A3CDF0EA32CB645E39D115C"
@@ -2161,6 +2141,26 @@
             "Register" = "3:1"
             "Exclude" = "11:FALSE"
             "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_A33BF649BF1147B087DB520726F50FE8"
+            {
+            "SourcePath" = "8:..\\..\\..\\..\\..\\..\\OneDrive\\Documentos\\EXCEL ANDRES\\InvoicePieces.xlsx"
+            "TargetName" = "8:InvoicePieces.xlsx"
+            "Tag" = "8:"
+            "Folder" = "8:_5DC6EB9471034BC1BB287FB7F27996C3"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_A576240621D85DCB2A2CE5D791726003"

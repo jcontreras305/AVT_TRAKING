@@ -38,8 +38,6 @@ Partial Class ScaffoldRentalDatails
         Me.PictureBox4 = New System.Windows.Forms.PictureBox()
         Me.btnReport = New System.Windows.Forms.Button()
         Me.cmbClient = New System.Windows.Forms.ComboBox()
-        Me.dtpFinalDate = New System.Windows.Forms.DateTimePicker()
-        Me.dtpStartDate = New System.Windows.Forms.DateTimePicker()
         Me.Panel3 = New System.Windows.Forms.Panel()
         Me.TabControl1 = New System.Windows.Forms.TabControl()
         Me.TabPage1 = New System.Windows.Forms.TabPage()
@@ -60,6 +58,8 @@ Partial Class ScaffoldRentalDatails
         Me.Email = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.SendName = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Send = New System.Windows.Forms.DataGridViewCheckBoxColumn()
+        Me.dtpStartDate = New System.Windows.Forms.ComboBox()
+        Me.dtpFinalDate = New System.Windows.Forms.ComboBox()
         Me.TableLayoutPanel1.SuspendLayout()
         Me.Panel1.SuspendLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -171,6 +171,8 @@ Partial Class ScaffoldRentalDatails
         'Panel2
         '
         Me.Panel2.BackColor = System.Drawing.Color.FromArgb(CType(CType(83, Byte), Integer), CType(CType(93, Byte), Integer), CType(CType(102, Byte), Integer))
+        Me.Panel2.Controls.Add(Me.dtpFinalDate)
+        Me.Panel2.Controls.Add(Me.dtpStartDate)
         Me.Panel2.Controls.Add(Me.btnDownloadExcel)
         Me.Panel2.Controls.Add(Me.btnSend)
         Me.Panel2.Controls.Add(Me.Label4)
@@ -179,8 +181,6 @@ Partial Class ScaffoldRentalDatails
         Me.Panel2.Controls.Add(Me.PictureBox4)
         Me.Panel2.Controls.Add(Me.btnReport)
         Me.Panel2.Controls.Add(Me.cmbClient)
-        Me.Panel2.Controls.Add(Me.dtpFinalDate)
-        Me.Panel2.Controls.Add(Me.dtpStartDate)
         Me.Panel2.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel2.Location = New System.Drawing.Point(4, 70)
         Me.Panel2.Margin = New System.Windows.Forms.Padding(4)
@@ -228,7 +228,7 @@ Partial Class ScaffoldRentalDatails
         '
         Me.Label4.AutoSize = True
         Me.Label4.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.Label4.Location = New System.Drawing.Point(369, 22)
+        Me.Label4.Location = New System.Drawing.Point(268, 23)
         Me.Label4.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(40, 16)
@@ -242,9 +242,9 @@ Partial Class ScaffoldRentalDatails
         Me.Label3.Location = New System.Drawing.Point(12, 62)
         Me.Label3.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(68, 16)
+        Me.Label3.Size = New System.Drawing.Size(43, 16)
         Me.Label3.TabIndex = 14
-        Me.Label3.Text = "Final Date"
+        Me.Label3.Text = "Month"
         '
         'Label2
         '
@@ -253,9 +253,9 @@ Partial Class ScaffoldRentalDatails
         Me.Label2.Location = New System.Drawing.Point(12, 22)
         Me.Label2.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(66, 16)
+        Me.Label2.Size = New System.Drawing.Size(36, 16)
         Me.Label2.TabIndex = 13
-        Me.Label2.Text = "Start Date"
+        Me.Label2.Text = "Year"
         '
         'PictureBox4
         '
@@ -289,31 +289,11 @@ Partial Class ScaffoldRentalDatails
         'cmbClient
         '
         Me.cmbClient.FormattingEnabled = True
-        Me.cmbClient.Location = New System.Drawing.Point(421, 14)
+        Me.cmbClient.Location = New System.Drawing.Point(320, 15)
         Me.cmbClient.Margin = New System.Windows.Forms.Padding(4)
         Me.cmbClient.Name = "cmbClient"
         Me.cmbClient.Size = New System.Drawing.Size(185, 24)
         Me.cmbClient.TabIndex = 2
-        '
-        'dtpFinalDate
-        '
-        Me.dtpFinalDate.CustomFormat = "MM/dd/yyyy"
-        Me.dtpFinalDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom
-        Me.dtpFinalDate.Location = New System.Drawing.Point(92, 54)
-        Me.dtpFinalDate.Margin = New System.Windows.Forms.Padding(4)
-        Me.dtpFinalDate.Name = "dtpFinalDate"
-        Me.dtpFinalDate.Size = New System.Drawing.Size(265, 22)
-        Me.dtpFinalDate.TabIndex = 1
-        '
-        'dtpStartDate
-        '
-        Me.dtpStartDate.CustomFormat = "MM/dd/yyyy"
-        Me.dtpStartDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom
-        Me.dtpStartDate.Location = New System.Drawing.Point(92, 15)
-        Me.dtpStartDate.Margin = New System.Windows.Forms.Padding(4)
-        Me.dtpStartDate.Name = "dtpStartDate"
-        Me.dtpStartDate.Size = New System.Drawing.Size(265, 22)
-        Me.dtpStartDate.TabIndex = 0
         '
         'Panel3
         '
@@ -568,6 +548,23 @@ Partial Class ScaffoldRentalDatails
         Me.Send.MinimumWidth = 6
         Me.Send.Name = "Send"
         '
+        'dtpStartDate
+        '
+        Me.dtpStartDate.FormattingEnabled = True
+        Me.dtpStartDate.Location = New System.Drawing.Point(92, 15)
+        Me.dtpStartDate.Name = "dtpStartDate"
+        Me.dtpStartDate.Size = New System.Drawing.Size(158, 24)
+        Me.dtpStartDate.TabIndex = 18
+        '
+        'dtpFinalDate
+        '
+        Me.dtpFinalDate.FormattingEnabled = True
+        Me.dtpFinalDate.Items.AddRange(New Object() {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"})
+        Me.dtpFinalDate.Location = New System.Drawing.Point(92, 62)
+        Me.dtpFinalDate.Name = "dtpFinalDate"
+        Me.dtpFinalDate.Size = New System.Drawing.Size(158, 24)
+        Me.dtpFinalDate.TabIndex = 19
+        '
         'ScaffoldRentalDatails
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
@@ -617,8 +614,6 @@ Partial Class ScaffoldRentalDatails
     Friend WithEvents PictureBox4 As PictureBox
     Friend WithEvents btnReport As Button
     Friend WithEvents cmbClient As ComboBox
-    Friend WithEvents dtpFinalDate As DateTimePicker
-    Friend WithEvents dtpStartDate As DateTimePicker
     Friend WithEvents Panel3 As Panel
     Friend WithEvents crvReport As CrystalDecisions.Windows.Forms.CrystalReportViewer
     Friend WithEvents TabControl1 As TabControl
@@ -641,4 +636,6 @@ Partial Class ScaffoldRentalDatails
     Friend WithEvents Send As DataGridViewCheckBoxColumn
     Friend WithEvents btnSend As Button
     Friend WithEvents btnDownloadExcel As Button
+    Friend WithEvents dtpFinalDate As ComboBox
+    Friend WithEvents dtpStartDate As ComboBox
 End Class

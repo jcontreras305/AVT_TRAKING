@@ -48,8 +48,13 @@ Public Class ScaffoldRentalDatails
             array = cmbClient.SelectedItem.ToString().Split(" ")
             Dim clNum As String = array(0)
             If clNum <> "" Or clNum IsNot Nothing Then
-                reportTs.SetParameterValue("@startDate", validaFechaParaSQl(dtpStartDate.Value.Date))
-                reportTs.SetParameterValue("@FinalDate", validaFechaParaSQl(dtpFinalDate.Value.Date))
+                Dim firstMotnthDay As Date = New DateTime(dtpStartDate.Items(dtpStartDate.SelectedIndex), dtpFinalDate.Items(dtpFinalDate.SelectedIndex), 1)
+                Dim lastMotnthDay As Date = New DateTime(dtpStartDate.Items(dtpStartDate.SelectedIndex), dtpFinalDate.Items(dtpFinalDate.SelectedIndex), DateTime.DaysInMonth(dtpStartDate.Items(dtpStartDate.SelectedIndex), dtpFinalDate.Items(dtpFinalDate.SelectedIndex)))
+
+                'reportTs.SetParameterValue("@startDate", validaFechaParaSQl(dtpStartDate.Value.Date))
+                'reportTs.SetParameterValue("@FinalDate", validaFechaParaSQl(dtpFinalDate.Value.Date))
+                reportTs.SetParameterValue("@startDate", validaFechaParaSQl(firstMotnthDay))
+                reportTs.SetParameterValue("@FinalDate", validaFechaParaSQl(lastMotnthDay))
                 reportTs.SetParameterValue("@numberClient", CInt(clNum))
                 reportTs.SetParameterValue("@CompanyName", "Brock")
                 If connecReport(reportTs) Then
@@ -137,7 +142,12 @@ Public Class ScaffoldRentalDatails
             Dim flagOpen As Boolean = False
             If cmbClient.SelectedItem IsNot Nothing Then
                 Dim array() As String = cmbClient.SelectedItem.ToString().Split(" ")
-                mtdSc.actualizarInvoiceExcel(validaFechaParaSQl(dtpStartDate.Value), validaFechaParaSQl(dtpFinalDate.Value), array(0))
+
+                Dim firstMotnthDay As Date = New DateTime(dtpStartDate.Items(dtpStartDate.SelectedIndex), dtpFinalDate.Items(dtpFinalDate.SelectedIndex), 1)
+                Dim lastMotnthDay As Date = New DateTime(dtpStartDate.Items(dtpStartDate.SelectedIndex), dtpFinalDate.Items(dtpFinalDate.SelectedIndex), DateTime.DaysInMonth(dtpStartDate.Items(dtpStartDate.SelectedIndex), dtpFinalDate.Items(dtpFinalDate.SelectedIndex)))
+
+
+                mtdSc.actualizarInvoiceExcel(validaFechaParaSQl(firstMotnthDay), validaFechaParaSQl(lastMotnthDay), array(0))
                 Cursor = Cursors.WaitCursor
                 Dim opFile As New OpenFileDialog
                 opFile.Title = "Open Invoice Pieces"
@@ -172,8 +182,8 @@ Public Class ScaffoldRentalDatails
 
                         If flagExist1 Then
                             Hoja1 = libro.Worksheets("Pieces")
-                            Hoja1.Cells(1, 10) = validaFechaParaSQl(dtpStartDate.Value)
-                            Hoja1.Cells(2, 10) = validaFechaParaSQl(dtpFinalDate.Value)
+                            Hoja1.Cells(1, 10) = validaFechaParaSQl(firstMotnthDay)
+                            Hoja1.Cells(2, 10) = validaFechaParaSQl(lastMotnthDay)
                             Dim nameClient() As String = array(1).Split("|")
                             Hoja1.Cells(4, 11) = "CALCULATED COLUMNS FOR " + nameClient(0) + " REVIEW"
                         Else
@@ -182,8 +192,8 @@ Public Class ScaffoldRentalDatails
 
                         If flagExist2 Then
                             Hoja2 = libro.Worksheets("SRLs")
-                            Hoja2.Cells(1, 10) = validaFechaParaSQl(dtpStartDate.Value)
-                            Hoja2.Cells(2, 10) = validaFechaParaSQl(dtpFinalDate.Value)
+                            Hoja2.Cells(1, 10) = validaFechaParaSQl(firstMotnthDay)
+                            Hoja2.Cells(2, 10) = validaFechaParaSQl(lastMotnthDay)
                         Else
                             MessageBox.Show("Sheet SRLs Not Found." + vbCrLf + "The Data was Updated but the excel could not be overwritten.", "Important")
                         End If
@@ -217,4 +227,5 @@ Public Class ScaffoldRentalDatails
             MsgBox(ex.Message)
         End Try
     End Sub
+
 End Class
