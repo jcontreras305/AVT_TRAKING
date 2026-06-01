@@ -9,11 +9,16 @@ Public Class ScaffoldRentalDatails
     Private Sub ScaffoldRentalDatails_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         'llenarComboClientsReports(cmbClient)
         llenarComboClientByUser(cmbClient)
+        For index = 0 To 5
+            dtpStartDate.Items.Add(Date.Today.Year - index)
+        Next
         btnSend.Enabled = False
         mtdOther.llenarTablaEmailReports(tblEmailsReports, "SCFRentalDetails")
         Dim list() = mtdOther.selectSubjectEmail(windowStart)
         txtSubject.Text = list(0)
         txtBodyEmail.Text = list(1)
+        dtpSD.CustomFormat = "MM/dd/yyyy"
+        dtpED.CustomFormat = "MM/dd/yyyy"
     End Sub
     Private Sub PictureBox4_Click(sender As Object, e As EventArgs) Handles PictureBox4.Click
         Me.Close()
@@ -48,13 +53,13 @@ Public Class ScaffoldRentalDatails
             array = cmbClient.SelectedItem.ToString().Split(" ")
             Dim clNum As String = array(0)
             If clNum <> "" Or clNum IsNot Nothing Then
-                Dim firstMotnthDay As Date = New DateTime(dtpStartDate.Items(dtpStartDate.SelectedIndex), dtpFinalDate.Items(dtpFinalDate.SelectedIndex), 1)
-                Dim lastMotnthDay As Date = New DateTime(dtpStartDate.Items(dtpStartDate.SelectedIndex), dtpFinalDate.Items(dtpFinalDate.SelectedIndex), DateTime.DaysInMonth(dtpStartDate.Items(dtpStartDate.SelectedIndex), dtpFinalDate.Items(dtpFinalDate.SelectedIndex)))
+                'Dim firstMotnthDay As Date = New DateTime(dtpStartDate.Items(dtpStartDate.SelectedIndex), dtpFinalDate.SelectedIndex + 1, 1)
+                'Dim lastMotnthDay As Date = New DateTime(dtpStartDate.Items(dtpStartDate.SelectedIndex), dtpFinalDate.SelectedIndex + 1, DateTime.DaysInMonth(dtpStartDate.Items(dtpStartDate.SelectedIndex), dtpFinalDate.SelectedIndex + 1))
 
-                'reportTs.SetParameterValue("@startDate", validaFechaParaSQl(dtpStartDate.Value.Date))
-                'reportTs.SetParameterValue("@FinalDate", validaFechaParaSQl(dtpFinalDate.Value.Date))
-                reportTs.SetParameterValue("@startDate", validaFechaParaSQl(firstMotnthDay))
-                reportTs.SetParameterValue("@FinalDate", validaFechaParaSQl(lastMotnthDay))
+                reportTs.SetParameterValue("@startDate", validaFechaParaSQl(dtpSD.Value.Date))
+                reportTs.SetParameterValue("@FinalDate", validaFechaParaSQl(dtpED.Value.Date))
+                'reportTs.SetParameterValue("@startDate", validaFechaParaSQl(firstMotnthDay))
+                'reportTs.SetParameterValue("@FinalDate", validaFechaParaSQl(lastMotnthDay))
                 reportTs.SetParameterValue("@numberClient", CInt(clNum))
                 reportTs.SetParameterValue("@CompanyName", "Brock")
                 If connecReport(reportTs) Then
@@ -143,8 +148,8 @@ Public Class ScaffoldRentalDatails
             If cmbClient.SelectedItem IsNot Nothing Then
                 Dim array() As String = cmbClient.SelectedItem.ToString().Split(" ")
 
-                Dim firstMotnthDay As Date = New DateTime(dtpStartDate.Items(dtpStartDate.SelectedIndex), dtpFinalDate.Items(dtpFinalDate.SelectedIndex), 1)
-                Dim lastMotnthDay As Date = New DateTime(dtpStartDate.Items(dtpStartDate.SelectedIndex), dtpFinalDate.Items(dtpFinalDate.SelectedIndex), DateTime.DaysInMonth(dtpStartDate.Items(dtpStartDate.SelectedIndex), dtpFinalDate.Items(dtpFinalDate.SelectedIndex)))
+                Dim firstMotnthDay As Date = New DateTime(dtpStartDate.Items(dtpStartDate.SelectedIndex), dtpFinalDate.SelectedIndex + 1, 1)
+                Dim lastMotnthDay As Date = New DateTime(dtpStartDate.Items(dtpStartDate.SelectedIndex), dtpFinalDate.SelectedIndex + 1, DateTime.DaysInMonth(dtpStartDate.Items(dtpStartDate.SelectedIndex), dtpFinalDate.SelectedIndex + 1))
 
 
                 mtdSc.actualizarInvoiceExcel(validaFechaParaSQl(firstMotnthDay), validaFechaParaSQl(lastMotnthDay), array(0))

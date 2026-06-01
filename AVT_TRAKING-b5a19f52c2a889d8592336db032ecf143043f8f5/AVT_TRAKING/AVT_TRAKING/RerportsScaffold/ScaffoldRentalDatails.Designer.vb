@@ -60,6 +60,10 @@ Partial Class ScaffoldRentalDatails
         Me.Send = New System.Windows.Forms.DataGridViewCheckBoxColumn()
         Me.dtpStartDate = New System.Windows.Forms.ComboBox()
         Me.dtpFinalDate = New System.Windows.Forms.ComboBox()
+        Me.Label7 = New System.Windows.Forms.Label()
+        Me.Label8 = New System.Windows.Forms.Label()
+        Me.dtpSD = New System.Windows.Forms.DateTimePicker()
+        Me.dtpED = New System.Windows.Forms.DateTimePicker()
         Me.TableLayoutPanel1.SuspendLayout()
         Me.Panel1.SuspendLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -171,6 +175,10 @@ Partial Class ScaffoldRentalDatails
         'Panel2
         '
         Me.Panel2.BackColor = System.Drawing.Color.FromArgb(CType(CType(83, Byte), Integer), CType(CType(93, Byte), Integer), CType(CType(102, Byte), Integer))
+        Me.Panel2.Controls.Add(Me.dtpED)
+        Me.Panel2.Controls.Add(Me.dtpSD)
+        Me.Panel2.Controls.Add(Me.Label7)
+        Me.Panel2.Controls.Add(Me.Label8)
         Me.Panel2.Controls.Add(Me.dtpFinalDate)
         Me.Panel2.Controls.Add(Me.dtpStartDate)
         Me.Panel2.Controls.Add(Me.btnDownloadExcel)
@@ -197,7 +205,7 @@ Partial Class ScaffoldRentalDatails
         Me.btnDownloadExcel.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.btnDownloadExcel.Image = Global.AVT_TRAKING.My.Resources.Resources.excel
         Me.btnDownloadExcel.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnDownloadExcel.Location = New System.Drawing.Point(915, 37)
+        Me.btnDownloadExcel.Location = New System.Drawing.Point(1016, 44)
         Me.btnDownloadExcel.Margin = New System.Windows.Forms.Padding(4)
         Me.btnDownloadExcel.Name = "btnDownloadExcel"
         Me.btnDownloadExcel.Size = New System.Drawing.Size(143, 42)
@@ -215,7 +223,7 @@ Partial Class ScaffoldRentalDatails
         Me.btnSend.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.btnSend.Image = Global.AVT_TRAKING.My.Resources.Resources.Send1
         Me.btnSend.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnSend.Location = New System.Drawing.Point(783, 38)
+        Me.btnSend.Location = New System.Drawing.Point(595, 50)
         Me.btnSend.Margin = New System.Windows.Forms.Padding(4)
         Me.btnSend.Name = "btnSend"
         Me.btnSend.Size = New System.Drawing.Size(124, 41)
@@ -228,7 +236,7 @@ Partial Class ScaffoldRentalDatails
         '
         Me.Label4.AutoSize = True
         Me.Label4.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.Label4.Location = New System.Drawing.Point(268, 23)
+        Me.Label4.Location = New System.Drawing.Point(325, 19)
         Me.Label4.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(40, 16)
@@ -239,7 +247,7 @@ Partial Class ScaffoldRentalDatails
         '
         Me.Label3.AutoSize = True
         Me.Label3.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.Label3.Location = New System.Drawing.Point(12, 62)
+        Me.Label3.Location = New System.Drawing.Point(765, 63)
         Me.Label3.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(43, 16)
@@ -250,7 +258,7 @@ Partial Class ScaffoldRentalDatails
         '
         Me.Label2.AutoSize = True
         Me.Label2.ForeColor = System.Drawing.SystemColors.ControlLightLight
-        Me.Label2.Location = New System.Drawing.Point(12, 22)
+        Me.Label2.Location = New System.Drawing.Point(765, 23)
         Me.Label2.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(36, 16)
@@ -277,7 +285,7 @@ Partial Class ScaffoldRentalDatails
         Me.btnReport.ForeColor = System.Drawing.SystemColors.ControlLightLight
         Me.btnReport.Image = Global.AVT_TRAKING.My.Resources.Resources.reportshow
         Me.btnReport.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnReport.Location = New System.Drawing.Point(645, 37)
+        Me.btnReport.Location = New System.Drawing.Point(457, 49)
         Me.btnReport.Margin = New System.Windows.Forms.Padding(4)
         Me.btnReport.Name = "btnReport"
         Me.btnReport.Size = New System.Drawing.Size(111, 41)
@@ -289,7 +297,7 @@ Partial Class ScaffoldRentalDatails
         'cmbClient
         '
         Me.cmbClient.FormattingEnabled = True
-        Me.cmbClient.Location = New System.Drawing.Point(320, 15)
+        Me.cmbClient.Location = New System.Drawing.Point(397, 11)
         Me.cmbClient.Margin = New System.Windows.Forms.Padding(4)
         Me.cmbClient.Name = "cmbClient"
         Me.cmbClient.Size = New System.Drawing.Size(185, 24)
@@ -551,7 +559,7 @@ Partial Class ScaffoldRentalDatails
         'dtpStartDate
         '
         Me.dtpStartDate.FormattingEnabled = True
-        Me.dtpStartDate.Location = New System.Drawing.Point(92, 15)
+        Me.dtpStartDate.Location = New System.Drawing.Point(845, 16)
         Me.dtpStartDate.Name = "dtpStartDate"
         Me.dtpStartDate.Size = New System.Drawing.Size(158, 24)
         Me.dtpStartDate.TabIndex = 18
@@ -560,10 +568,50 @@ Partial Class ScaffoldRentalDatails
         '
         Me.dtpFinalDate.FormattingEnabled = True
         Me.dtpFinalDate.Items.AddRange(New Object() {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"})
-        Me.dtpFinalDate.Location = New System.Drawing.Point(92, 62)
+        Me.dtpFinalDate.Location = New System.Drawing.Point(845, 63)
         Me.dtpFinalDate.Name = "dtpFinalDate"
         Me.dtpFinalDate.Size = New System.Drawing.Size(158, 24)
         Me.dtpFinalDate.TabIndex = 19
+        '
+        'Label7
+        '
+        Me.Label7.AutoSize = True
+        Me.Label7.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.Label7.Location = New System.Drawing.Point(43, 56)
+        Me.Label7.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.Label7.Name = "Label7"
+        Me.Label7.Size = New System.Drawing.Size(63, 16)
+        Me.Label7.TabIndex = 21
+        Me.Label7.Text = "End Date"
+        '
+        'Label8
+        '
+        Me.Label8.AutoSize = True
+        Me.Label8.ForeColor = System.Drawing.SystemColors.ControlLightLight
+        Me.Label8.Location = New System.Drawing.Point(43, 16)
+        Me.Label8.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.Label8.Name = "Label8"
+        Me.Label8.Size = New System.Drawing.Size(66, 16)
+        Me.Label8.TabIndex = 20
+        Me.Label8.Text = "Start Date"
+        '
+        'dtpSD
+        '
+        Me.dtpSD.CustomFormat = "MM/dd/yyyy"
+        Me.dtpSD.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
+        Me.dtpSD.Location = New System.Drawing.Point(118, 16)
+        Me.dtpSD.Name = "dtpSD"
+        Me.dtpSD.Size = New System.Drawing.Size(130, 22)
+        Me.dtpSD.TabIndex = 22
+        '
+        'dtpED
+        '
+        Me.dtpED.CustomFormat = "MM/dd/yyyy"
+        Me.dtpED.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
+        Me.dtpED.Location = New System.Drawing.Point(118, 57)
+        Me.dtpED.Name = "dtpED"
+        Me.dtpED.Size = New System.Drawing.Size(130, 22)
+        Me.dtpED.TabIndex = 23
         '
         'ScaffoldRentalDatails
         '
@@ -638,4 +686,8 @@ Partial Class ScaffoldRentalDatails
     Friend WithEvents btnDownloadExcel As Button
     Friend WithEvents dtpFinalDate As ComboBox
     Friend WithEvents dtpStartDate As ComboBox
+    Friend WithEvents dtpED As DateTimePicker
+    Friend WithEvents dtpSD As DateTimePicker
+    Friend WithEvents Label7 As Label
+    Friend WithEvents Label8 As Label
 End Class
