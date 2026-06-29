@@ -1612,11 +1612,11 @@ begin
 	update product set name = '" + nameProduct + "' ,weight= " + If(row.Cells(4).Value.ToString() = "", "0.0", row.Cells(4).Value.ToString()) + ", weightMeasure = " + If(row.Cells(5).Value.ToString() = "", "0.0", row.Cells(5).Value.ToString()) + ",price = " + If(row.Cells(6).Value.ToString() = "", "0.0", row.Cells(6).Value.ToString()) + ", dailyRentalRate= " + If(row.Cells(7).Value.ToString() = "", "0.0", row.Cells(7).Value.ToString()) + " ,weeklyRentalRate = " + If(row.Cells(8).Value.ToString() = "", "0.0", row.Cells(8).Value.ToString()) + ",monthlyRentalRate = " + If(row.Cells(9).Value.ToString() = "", "0.0", row.Cells(9).Value.ToString()) + ", QID = '" + row.Cells(11).Value.ToString() + "', um='" + row.Cells(2).Value.ToString() + "',class='" + row.Cells(3).Value.ToString() + "',quantity = " + If(row.Cells(10).Value.ToString() = "", "0.0", row.Cells(10).Value.ToString()) + " , PLF = " + If(row.Cells(12).Value.ToString() = "", "0.0", row.Cells(12).Value.ToString()) + ",PSQF = " + If(row.Cells(13).Value.ToString() = "", "0.0", row.Cells(13).Value.ToString()) + " where idProduct = " + row.Cells(0).Value.ToString() + "
 end", conn)
                     cmd.Transaction = tran
-                        If cmd.ExecuteNonQuery > 0 Then
-                            flag = +1
-                        Else
-                            listError.Add(flag)
-                        End If
+                    If cmd.ExecuteNonQuery > 0 Then
+                        flag = +1
+                    Else
+                        listError.Add(flag)
+                    End If
 
                 End If
             Next
@@ -1658,11 +1658,52 @@ If(flagIdProduct, "where pd.idProduct = " + text + " or pd.QID = '" + text + "'"
             desconectar()
         End Try
     End Function
+    Public Function saveProductByJob(ByVal idproduct As String, ByVal dailyRent As String, ByVal jb As String) As String
+        Try
+            conectar()
+            Dim cmd As New SqlCommand("update productJob set dailyRentJb = " + dailyRent + " from productJob as pj where pj.idProduct = " + idproduct + " and pj.jobNo = " + jb + "", conn)
+            If cmd.ExecuteNonQuery Then
+                Return ""
+            Else
+                Return idproduct
+            End If
+        Catch ex As Exception
+            Return idproduct
+        Finally
+            desconectar()
+        End Try
+    End Function
+    Public Function saveProductByJob(ByVal tblProductByJob As DataGridView, ByVal jb As String) As String
+        Dim listError As String = ""
+        Try
+            conectar()
+            If tblProductByJob.SelectedRows.Count > 0 Then
+                For Each row As DataGridViewRow In tblProductByJob.SelectedRows()
+                    Dim cmd As New SqlCommand("update productJob set dailyRentJb = " + If(row.Cells(8).Value IsNot DBNull.Value, row.Cells(8).Value.ToString, "0") + " from productJob as pj where pj.idProduct = " + row.Cells(0).Value.ToString + " and pj.jobNo = " + jb + "", conn)
+                    listError = row.Cells(0).Value
+                    If cmd.ExecuteNonQuery Then
+                        listError = ""
+                    End If
+                Next
+            Else
+                Dim cmd1 As New SqlCommand("update productJob set dailyRentJb = " + If(tblProductByJob.CurrentRow.Cells(8).Value IsNot DBNull.Value, tblProductByJob.CurrentRow.Cells(8).Value.ToString, "0") + " from productJob as pj where pj.idProduct = " + tblProductByJob.CurrentRow.Cells(0).Value.ToString + " and pj.jobNo = " + jb + "", conn)
+                listError = tblProductByJob.CurrentRow.Cells(0).Value
+                If cmd1.ExecuteNonQuery Then
+                    listError = ""
+                End If
+            End If
+            Return listError
+        Catch ex As Exception
+            Return listError
+        Finally
+            desconectar()
+        End Try
+    End Function
     Public Function llenarProductByJob(ByVal tabla As DataGridView, ByVal text As String, ByVal jobNo As String) As Boolean
         Try
             conectar()
             Dim cmd As New SqlCommand("
-select pd.idProduct, price, um,pd.name, pdj.qty as 'quantity',PLF, PSQF from productJob as pdj
+select pd.idProduct, price, um,pd.name, pdj.qty as 'quantity',PLF, PSQF, pdj.dailyRentJb as 'Rent by Job' from productJob as pdj
 inner join product as pd on pd.idProduct = pdj.idProduct
 inner join classification as cl on cl.class = pd.class 
 where (pd.idProduct like '%" + text + "%' or pd.QID like '%" + text + "%' or pd.name like '%" + text + "%' or cl.class Like '%" + text + "%' or cl.name like '%" + text + "%') and pdj.JobNo = " + jobNo + "
@@ -1854,11 +1895,11 @@ where inc.jobNo = pdj.jobNo and pinc.idProduct = pdj.idProduct),0)
 ISNULL((select sum(pout.quantity) from productOutGoing as pout 
 inner join outgoing as outg on outg.ticketNum = pout.ticketNum
 where outg.jobNo = pdj.jobNo and pout.idProduct = pdj.idProduct),0) as 'quantity',
-PLF, PSQF,QID from productJob as pdj
+PLF, PSQF,QID,pdj.dailyRentJb from productJob as pdj
 inner join product as pd on pd.idProduct = pdj.idProduct
 where  jobNo = " + jobno + ") as T1 where T1.quantity > 0 "
             Else
-                cmd.CommandText = "select idProduct, price, um,name,quantity,PLF,PSQF,QID from product"
+                cmd.CommandText = "select idProduct, price, um,name,quantity,PLF,PSQF,QID ,dailyRentalRate as 'dailyRent'  from product "
             End If
             If cmd.ExecuteNonQuery() Then
                 Dim da As New SqlDataAdapter(cmd)

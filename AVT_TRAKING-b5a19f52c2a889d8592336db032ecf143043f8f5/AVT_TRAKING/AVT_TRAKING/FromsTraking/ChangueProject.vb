@@ -105,8 +105,8 @@ Public Class ChangueProject
                             If cmdUpdateHW.ExecuteNonQuery() Then
                                 Dim cmdUpdateProject As New SqlCommand("if not exists(select * from projectOrder where jobNo = " + newJobNo + " and idPO = " + PO + " )
 begin 
-	insert into projectOrder values (" + PO + " ," + newJobNo + ",'','')
-	update workOrder set idPO =" + PO + " , jobNo = " + newJobNo + " where idWO = '" + IdWO + "'
+	insert into projectOrder values (" + PO + " ," + newJobNo + ",'','','')
+	update workOrder set idPO =" + PO + " , jobNo = " + newJobNo + " where idAuxWO = '" + IdWO + "'
 end
 else if exists(select * from projectOrder where jobNo = " + newJobNo + " and idPO = " + PO + " )
 begin 
@@ -129,8 +129,8 @@ end", con.conn)
                 Else
                     Dim cmdUpdateProject As New SqlCommand("if not exists(select * from projectOrder where jobNo = " + newJobNo + " and idPO = " + PO + " )
 begin 
-	insert into projectOrder values (" + PO + " ," + newJobNo + ",'','')
-	update workOrder set idPO =" + PO + " , jobNo = " + newJobNo + " where idWO = '" + IdWO + "'
+	insert into projectOrder values (" + PO + " ," + newJobNo + ",'','','')
+	update workOrder set idPO =" + PO + " , jobNo = " + newJobNo + " where idAuxWO = '" + IdWO + "'
 end
 else if exists(select * from projectOrder where jobNo = " + newJobNo + " and idPO = " + PO + " )
 begin 

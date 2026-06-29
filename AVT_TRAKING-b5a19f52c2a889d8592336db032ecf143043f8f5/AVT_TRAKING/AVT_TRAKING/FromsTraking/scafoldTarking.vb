@@ -1,5 +1,6 @@
-﻿Imports Microsoft.Office.Interop.Excel
-Imports System.Runtime.InteropServices
+﻿Imports System.Runtime.InteropServices
+Imports Microsoft.Office.Interop
+Imports Microsoft.Office.Interop.Excel
 Public Class scafoldTarking
     Public IdCliente, Company, NumberClient As String
 
@@ -749,65 +750,98 @@ Public Class scafoldTarking
     Private Sub btnRefreshTblProduct_Click(sender As Object, e As EventArgs) Handles btnRefreshTblProduct.Click
         mtdScaffold.llenarProduct(tblProduct)
         mtdScaffold.llenarProduct(tblProductosAux)
+
+        mtdScaffold.llenarTablaProductosByJobNo(tblProductByJobNo, If(cmbJobProduct.SelectedIndex > -1, cmbJobProduct.SelectedItem.ToString(), cmbJobProduct.Items(0)))
     End Sub
     Private Sub btnDownloadExcel_Click(sender As Object, e As EventArgs) Handles btnDownloadExcel.Click
         Dim ApExcel = New Microsoft.Office.Interop.Excel.Application
         Try
+            If TabControl2.SelectedTab.Text = "Inventory" Then
+                Dim cont = 1
 
-            Dim cont = 1
+                Dim libro = ApExcel.Workbooks.Add
 
-            Dim libro = ApExcel.Workbooks.Add
+                Dim colums2() As String = {"CLASS", "NAME"}
+                cont = 1
+                Dim hoja3 = libro.Sheets.Add()
+                hoja3.Name = "Class"
+                hoja3.cells(cont, 1) = colums2(0)
+                hoja3.cells(cont, 1).Interior.Color = RGB(255, 255, 0)
+                hoja3.cells(cont, 2) = colums2(1)
+                hoja3.cells(cont, 2).Interior.Color = RGB(255, 255, 0)
+                For Each row As DataGridViewRow In tblClassification.Rows
+                    If row.Cells(0).Value() IsNot Nothing Then
+                        cont += 1
+                        hoja3.cells(cont, 1) = row.Cells(0).Value.ToString()
+                        hoja3.cells(cont, 2) = row.Cells(1).Value.ToString()
+                    End If
+                Next
+                cont = 1
+                Dim colums1() As String = {"UM", "NAME"}
+                Dim hoja2 = libro.Sheets.Add()
+                hoja2.Name = "Units Meassurement"
+                hoja2.cells(cont, 1) = colums1(0)
+                hoja2.cells(cont, 1).Interior.Color = RGB(255, 255, 0)
+                hoja2.cells(cont, 2) = colums1(1)
+                hoja2.cells(cont, 2).Interior.Color = RGB(255, 255, 0)
+                For Each row As DataGridViewRow In tblUnitMeassurement.Rows
+                    If row.Cells(0).Value() IsNot Nothing Then
+                        cont += 1
+                        hoja2.cells(cont, 1) = row.Cells(0).Value.ToString()
+                        hoja2.cells(cont, 2) = row.Cells(1).Value.ToString()
+                    End If
+                Next
 
-            Dim colums2() As String = {"CLASS", "NAME"}
-            cont = 1
-            Dim hoja3 = libro.Sheets.Add()
-            hoja3.Name = "Class"
-            hoja3.cells(cont, 1) = colums2(0)
-            hoja3.cells(cont, 1).Interior.Color = RGB(255, 255, 0)
-            hoja3.cells(cont, 2) = colums2(1)
-            hoja3.cells(cont, 2).Interior.Color = RGB(255, 255, 0)
-            For Each row As DataGridViewRow In tblClassification.Rows
-                If row.Cells(0).Value() IsNot Nothing Then
-                    cont += 1
-                    hoja3.cells(cont, 1) = row.Cells(0).Value.ToString()
-                    hoja3.cells(cont, 2) = row.Cells(1).Value.ToString()
+                Dim hoja = libro.Sheets.Add()
+                hoja.Name = "Product"
+                Dim colums() As String = {"ID", "Product Name", "UM", "Class", "Cost", "Weight", "Weight Maessure", "Daily Rental Rate", "Weekly Rental Rate", "Monthly Rental Rate", "QTY", "QID", "PLF", "PSQF"}
+                For i As Int16 = 0 To colums.Length - 1
+                    hoja.cells(1, i + 1) = colums(i)
+                    hoja.cells(1, i + 1).Interior.Color = RGB(255, 255, 0)
+                Next
+
+                Dim sd As New SaveFileDialog
+                sd.DefaultExt = "*.xlsx"
+                sd.FileName = "ProductUploadExcel"
+                sd.Filter = "Archivos de Excel (*.xlsx)|*.xlsx"
+                sd.ShowDialog()
+
+                libro.SaveAs(sd.FileName)
+                NAR(hoja)
+                NAR(hoja2)
+                NAR(hoja3)
+                NAR(libro)
+            ElseIf TabControl2.SelectedTab.Text = "Inventory By Job No." Then
+                Dim cont = 1
+                Dim libro = ApExcel.Workbooks.Add
+                Dim colums() As String = {"IDProduct", "Name", "DailyRenteJB"}
+                Dim hoja1 As Worksheet = libro.Sheets(1)
+                hoja1.Name = "ProductByJob"
+                hoja1.cells(cont, 1) = colums(0)
+                hoja1.cells(cont, 2) = colums(1)
+                hoja1.cells(cont, 3) = colums(2)
+
+                For Each row As DataGridViewRow In tblProductByJobNo.Rows
+                    If row.Cells(0).Value() IsNot Nothing Then
+                        cont += 1
+                        hoja1.cells(cont, 1) = row.Cells(0).Value.ToString()
+                        hoja1.cells(cont, 2) = row.Cells(3).Value.ToString()
+                        hoja1.cells(cont, 3) = row.Cells(8).Value.ToString()
+                    End If
+                Next
+                Dim sd As New SaveFileDialog
+                sd.DefaultExt = "*.xlsx"
+                sd.FileName = "ProductCostByDailyRentByJob.xlsx"
+                sd.Filter = "Archivos de Excel (*.xlsx)|*.xlsx"
+                If Not DialogResult.Cancel = sd.ShowDialog() Then
+                    libro.SaveAs(sd.FileName)
+                Else
+                    libro.Close()
                 End If
-            Next
-            cont = 1
-            Dim colums1() As String = {"UM", "NAME"}
-            Dim hoja2 = libro.Sheets.Add()
-            hoja2.Name = "Units Meassurement"
-            hoja2.cells(cont, 1) = colums1(0)
-            hoja2.cells(cont, 1).Interior.Color = RGB(255, 255, 0)
-            hoja2.cells(cont, 2) = colums1(1)
-            hoja2.cells(cont, 2).Interior.Color = RGB(255, 255, 0)
-            For Each row As DataGridViewRow In tblUnitMeassurement.Rows
-                If row.Cells(0).Value() IsNot Nothing Then
-                    cont += 1
-                    hoja2.cells(cont, 1) = row.Cells(0).Value.ToString()
-                    hoja2.cells(cont, 2) = row.Cells(1).Value.ToString()
-                End If
-            Next
+                NAR(hoja1)
+                NAR(libro)
+            End If
 
-            Dim hoja = libro.Sheets.Add()
-            hoja.Name = "Product"
-            Dim colums() As String = {"ID", "Product Name", "UM", "Class", "Cost", "Weight", "Weight Maessure", "Daily Rental Rate", "Weekly Rental Rate", "Monthly Rental Rate", "QTY", "QID", "PLF", "PSQF"}
-            For i As Int16 = 0 To colums.Length - 1
-                hoja.cells(1, i + 1) = colums(i)
-                hoja.cells(1, i + 1).Interior.Color = RGB(255, 255, 0)
-            Next
-
-            Dim sd As New SaveFileDialog
-            sd.DefaultExt = "*.xlsx"
-            sd.FileName = "ProductUploadExcel"
-            sd.Filter = "Archivos de Excel (*.xlsx)|*.xlsx"
-            sd.ShowDialog()
-
-            libro.SaveAs(sd.FileName)
-            NAR(hoja)
-            NAR(hoja2)
-            NAR(hoja3)
-            NAR(libro)
         Catch ex As Exception
             MsgBox(ex.Message())
         Finally
@@ -819,54 +853,89 @@ Public Class scafoldTarking
     Private Sub btnUploadProducts_Click(sender As Object, e As EventArgs) Handles btnUploadProducts.Click
         Dim ApExcel = New Microsoft.Office.Interop.Excel.Application
         Try
-            Dim openFile As New OpenFileDialog
-            openFile.DefaultExt = "*.xlsm"
-            openFile.FileName = "ProyectosUploadExcel"
-            openFile.ShowDialog()
+            If TabControl2.SelectedTab.Text = "Inventory" Then
+                Dim openFile As New OpenFileDialog
+                openFile.DefaultExt = "*.xlsm"
+                openFile.FileName = "ProyectosUploadExcel"
+                openFile.ShowDialog()
 
-            Dim libro = ApExcel.Workbooks.Open(openFile.FileName)
-            Dim productos As New Worksheet
-            Dim unidades As New Worksheet
-            Dim classification As New Worksheet
-            Dim flagStatus As Boolean = True
-            If DialogResult.Yes = MessageBox.Show("Would you like to check if there is any new 'Material Classification'?", "Important", MessageBoxButtons.YesNo, MessageBoxIcon.Information) Then
-                Try
-                    classification = libro.Worksheets("Class")
-                    txtSalida.Text = txtSalida.Text + vbCrLf + "Open sheet 'Class'."
-                Catch ex As Exception
-                    classification = libro.Worksheets("class")
-                    txtSalida.Text = txtSalida.Text + vbCrLf + "Open sheet 'class'."
-                End Try
-                Dim flagClass = validarSheetClassification(classification)
-                If flagClass Then
-                    mtdScaffold.llenarClassification(tblClassification)
+                Dim libro = ApExcel.Workbooks.Open(openFile.FileName)
+                Dim productos As New Worksheet
+                Dim unidades As New Worksheet
+                Dim classification As New Worksheet
+                Dim flagStatus As Boolean = True
+                If DialogResult.Yes = MessageBox.Show("Would you like to check if there is any new 'Material Classification'?", "Important", MessageBoxButtons.YesNo, MessageBoxIcon.Information) Then
+                    Try
+                        classification = libro.Worksheets("Class")
+                        txtSalida.Text = txtSalida.Text + vbCrLf + "Open sheet 'Class'."
+                    Catch ex As Exception
+                        classification = libro.Worksheets("class")
+                        txtSalida.Text = txtSalida.Text + vbCrLf + "Open sheet 'class'."
+                    End Try
+                    Dim flagClass = validarSheetClassification(classification)
+                    If flagClass Then
+                        mtdScaffold.llenarClassification(tblClassification)
+                    End If
                 End If
-            End If
-            If DialogResult.Yes = MessageBox.Show("Would you like to check if there is any new 'Units Meassurement'?", "Important", MessageBoxButtons.YesNo, MessageBoxIcon.Information) Then
-                Try
-                    unidades = libro.Worksheets("Units Meassurement")
-                    txtSalida.Text = txtSalida.Text + vbCrLf + "Open sheet 'Units Meassurement'."
-                Catch ex As Exception
-                    unidades = libro.Worksheets("Units")
-                    txtSalida.Text = txtSalida.Text + vbCrLf + "Open sheet 'Units'."
-                End Try
-                Dim flagUnit = validarSheetUnits(unidades)
-                If flagUnit Then
-                    mtdScaffold.llenarUnitMeassurements(tblUnitMeassurement)
+                If DialogResult.Yes = MessageBox.Show("Would you like to check if there is any new 'Units Meassurement'?", "Important", MessageBoxButtons.YesNo, MessageBoxIcon.Information) Then
+                    Try
+                        unidades = libro.Worksheets("Units Meassurement")
+                        txtSalida.Text = txtSalida.Text + vbCrLf + "Open sheet 'Units Meassurement'."
+                    Catch ex As Exception
+                        unidades = libro.Worksheets("Units")
+                        txtSalida.Text = txtSalida.Text + vbCrLf + "Open sheet 'Units'."
+                    End Try
+                    Dim flagUnit = validarSheetUnits(unidades)
+                    If flagUnit Then
+                        mtdScaffold.llenarUnitMeassurements(tblUnitMeassurement)
+                    End If
                 End If
-            End If
-            If DialogResult.OK = MessageBox.Show("The insert the products it will being, Are you sure to continue?", "Important", MessageBoxButtons.OKCancel, MessageBoxIcon.Information) Then
-                Try
-                    productos = libro.Worksheets("Product")
-                    txtSalida.Text = txtSalida.Text + vbCrLf + "Open Sheet 'Product'"
-                Catch ex As Exception
-                    productos = libro.Worksheets("product")
-                    txtSalida.Text = txtSalida.Text + vbCrLf + "Open Sheet 'product'"
-                End Try
-                Dim flagProduct = validarSheetProducts(productos)
-                If flagProduct Then
-                    mtdScaffold.llenarProduct(tblProduct)
-                    mtdScaffold.llenarProduct(tblProductosAux)
+                If DialogResult.OK = MessageBox.Show("The insert the products it will being, Are you sure to continue?", "Important", MessageBoxButtons.OKCancel, MessageBoxIcon.Information) Then
+                    Try
+                        productos = libro.Worksheets("Product")
+                        txtSalida.Text = txtSalida.Text + vbCrLf + "Open Sheet 'Product'"
+                    Catch ex As Exception
+                        productos = libro.Worksheets("product")
+                        txtSalida.Text = txtSalida.Text + vbCrLf + "Open Sheet 'product'"
+                    End Try
+                    Dim flagProduct = validarSheetProducts(productos)
+                    If flagProduct Then
+                        mtdScaffold.llenarProduct(tblProduct)
+                        mtdScaffold.llenarProduct(tblProductosAux)
+                    End If
+                End If
+            ElseIf TabControl2.SelectedTab.Text = "Inventory By Job No." Then
+                Dim openFile As New OpenFileDialog
+                openFile.DefaultExt = "*.xlsx"
+                openFile.FileName = "ProductCostByDailyRentByJob.xlsx"
+                If DialogResult.OK = openFile.ShowDialog() Then
+                    Dim libro = ApExcel.Workbooks.Open(openFile.FileName)
+                    Dim productos As Worksheet = CType(libro.Sheets(1), Excel.Worksheet)
+                    Dim flagStatus As Boolean = True
+
+                    productos = libro.Worksheets("ProductByJob")
+                    txtSalida.Text = txtSalida.Text + vbCrLf + "Open sheet 'ProductByJob'."
+                    Dim contProduct As Integer = 2
+                    Dim mesage As String = "Error tring to add this products: "
+                    Dim flagerror As Boolean = False
+                    txtSalida.Text = txtSalida.Text + vbCrLf + "Reading row:"
+                    While productos.Cells(contProduct, 1).Text <> ""
+                        txtSalida.Text = "Reading row: " + contProduct.ToString() + "."
+                        Dim idProducto = productos.Cells(contProduct, 1).Text
+                        Dim dailyRentJb = productos.Cells(contProduct, 3).Text
+
+                        Dim flag = mtdScaffold.saveProductByJob(idProducto, dailyRentJb, cmbJobProduct.Items(cmbJobProduct.SelectedIndex).ToString)
+                        If Not flag = "" Then
+                            flagerror = True
+                            mesage = If(mesage = "Error tring to add this products: ", mesage + flag, ", " + mesage + flag)
+                        End If
+                        contProduct += 1
+                    End While
+                    txtSalida.Text = txtSalida.Text + vbCrLf + "End." + vbCrLf + mesage
+                    If flagerror Then
+                        MsgBox(mesage, MsgBoxStyle.OkOnly, "Error")
+
+                    End If
                 End If
             End If
         Catch ex As Exception
@@ -1472,7 +1541,12 @@ Public Class scafoldTarking
         End If
     End Sub
     Private Sub TabControl2_SelectedIndexChanged(sender As Object, e As EventArgs) Handles TabControl2.SelectedIndexChanged
-        If TabControl2.SelectedTab.Text = "Inventory By Job No." Or TabControl2.SelectedTab.Text = "Utilization" Then
+        If TabControl2.SelectedTab.Text = "Inventory By Job No." Then
+            btnSaveRowProduct.Enabled = True
+            btnDeleteProduct.Enabled = False
+            btnUploadProducts.Enabled = True
+            btnDownloadExcel.Enabled = True
+        ElseIf TabControl2.SelectedTab.Text = "Utilization" Then
             btnSaveRowProduct.Enabled = False
             btnDeleteProduct.Enabled = False
             btnUploadProducts.Enabled = False
@@ -1496,17 +1570,33 @@ Public Class scafoldTarking
         End Try
     End Sub
     Private Sub btnSaveRowProduct_Click(sender As Object, e As EventArgs) Handles btnSaveRowProduct.Click
-        If tblProduct.SelectedRows().Count > 0 Then
-            Dim lis = mtdScaffold.saveProducto(tblProduct, False)
-            If lis.Count = 0 Or lis IsNot Nothing Then
-                MsgBox("Sucessfull")
-                mtdScaffold.llenarProduct(tblProduct)
-                mtdScaffold.llenarProduct(tblProductosAux)
+        If TabControl2.SelectedTab.Text = "Invetory" Then
+            If tblProduct.SelectedRows().Count > 0 Then
+                Dim lis = mtdScaffold.saveProducto(tblProduct, False)
+                If lis.Count = 0 Or lis IsNot Nothing Then
+                    MsgBox("Sucessfull")
+                    mtdScaffold.llenarProduct(tblProduct)
+                    mtdScaffold.llenarProduct(tblProductosAux)
+                Else
+                    MsgBox("Error at line: " + lis(0))
+                End If
             Else
-                MsgBox("Error at line " + lis(0))
+                MsgBox("Please Select A Row.")
             End If
-        Else
-            MsgBox("Please Select A Row.")
+        ElseIf TabControl2.SelectedTab.Text = "Inventory By Job No." Then
+            If tblProductByJobNo.SelectedRows.Count > 0 Then
+                If cmbJobProduct.SelectedIndex > -1 Then
+                    Dim flag = mtdScaffold.saveProductByJob(tblProductByJobNo, cmbJobProduct.Items(cmbJobProduct.SelectedIndex).ToString)
+                    If flag = "" Then
+                        MsgBox("Successful.")
+                    Else
+                        MsgBox("Error at product: " + flag)
+                    End If
+                Else
+                    MsgBox("Please select a JobNo.")
+                End If
+
+            End If
         End If
     End Sub
 
@@ -4461,6 +4551,14 @@ Public Class scafoldTarking
             Else
                 mtdScaffold.llenarTablaProductosByJobNo(tblProductByJobNo)
             End If
+            For Each col As DataGridViewColumn In tblProductByJobNo.Columns
+                If col.Index = tblProductByJobNo.Columns.Count - 1 Then
+                    col.ReadOnly = False
+                Else
+                    col.ReadOnly = True
+                End If
+
+            Next
             mtdScaffold.llenarComboProductUtilization(cmbProductUtilization)
             'mtdScaffold.llenar
             'Out Going

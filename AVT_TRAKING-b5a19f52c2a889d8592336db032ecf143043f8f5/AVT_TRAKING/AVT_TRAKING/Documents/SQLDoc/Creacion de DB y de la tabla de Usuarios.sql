@@ -1423,10 +1423,11 @@ GO
 --##########################################################################################
 --##################  TABLA DE PRODUCT MODIFICATION ########################################
 --##########################################################################################
-CREATE TABLE [dbo].[productJob](
-	[idProduct] [int] NOT NULL,
-	[jobNo] [bigint] NOT NULL,
-	[qty] [float] NULL
+CREATE TABLE dbo.productJob(
+	idProduct int NOT NULL,
+	jobNo bigint NOT NULL,
+	qty float NULL,
+	dailyRentJb float
 )
 GO
 
@@ -1491,7 +1492,8 @@ create table projectOrder(
 	idPO bigint not null ,
 	jobNo bigint not null ,
 	Line varchar (10),
-	WBS varchar(10)
+	WBS varchar(10),
+	descriptionPO varchar(200)
 )
 GO
 ALTER TABLE projectOrder
@@ -5853,139 +5855,368 @@ GO
 
 
 
-----| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-----| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
-----V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V
 --#############################################################################################
 --########## ESTE ES CODIGO PARA EL REPORTE DE TAXES COST #####################################
 --#############################################################################################
-ALTER proc [dbo].[sp_SelectEstCostByProject]
-@projectId as varchar(40)
-as 
+--ALTER proc [dbo].[sp_SelectEstCostByProject]
+--@projectId as varchar(40)
+--as 
+--begin
+--select distinct * from( 
+---- scaffold
+----decks dismantle scf
+--select po.ProjectId, po.[description] as 'Descrip',po.unit,
+--cl.numberClient, cl.contactName, cl.companyName, cl.plant, ha.avenue, ha.city, ha.providence,
+--dr.idDrawingNum,dr.[description],
+--CONVERT(NVARCHAR, scfD.tag)as 'Tag' ,'SCF Deck DISM' as 'TASK',scfD.SHRD as 'HRS',scfD.DSCOSTL as 'COSTL',scfD.DSCOSTM as 'COSTM',scfD.SCOSTEDD as 'COSTE',scfD.DSCOSTL + scfD.DSCOSTMD + scfD.SCOSTEDD  as 'TCOST' 
+--from EstCostDism as scfD
+--inner join drawing as dr on dr.idDrawingNum = scfD.idDrawingNum
+--inner join projectClientEst as po on po.projectId = scfD.projectId
+--inner join clientsEst as cl on cl.idClientEst = po.idClientEst
+--inner join HomeAddress as ha on ha.idHomeAdress = cl.idHomeAdress 
+--where po.ProjectId = @projectId
+----decks build scf
+--UNION ALL
+--select po.ProjectId, po.[description] as 'Descrip',po.unit,
+--cl.numberClient, cl.contactName, cl.companyName, cl.plant, ha.avenue, ha.city, ha.providence,
+--dr.idDrawingNum,dr.[description],
+--CONVERT(NVARCHAR, scfB.tag)as 'Tag' ,'SCF Deck Build' as 'TASK',scfB.SBHR as 'HRS',scfB.SCOSTLB as 'COSTL',scfB.SCOSTMB as 'COSTM',scfB.SCOSTEB as 'COSTE', scfB.STCOST as 'TCOST' 
+--from EstCostBuild as scfB
+--inner join drawing as dr on dr.idDrawingNum = scfB.idDrawingNum
+--inner join projectClientEst as po on po.projectId = scfB.projectId
+--inner join clientsEst as cl on cl.idClientEst = po.idClientEst
+--inner join HomeAddress as ha on ha.idHomeAdress = cl.idHomeAdress 
+--where po.ProjectId = @projectId
+----Build Scaffold
+--UNION ALL
+--select po.ProjectId, po.[description] as 'Descrip',po.unit,
+--cl.numberClient, cl.contactName, cl.companyName, cl.plant, ha.avenue, ha.city, ha.providence,
+--dr.idDrawingNum,dr.[description],
+--CONVERT(NVARCHAR, scf.tag)as 'Tag' , 'Scf Build' as 'TASK', scf.SHR as 'HRS',scf.SCOSTL as 'COSTL',scf.SCOSTM as 'COSTM',scf.SCOSTE as 'COSTE',scf.STCOST as 'TCOST' 
+--from EstCostScf as scf
+--inner join drawing as dr on dr.idDrawingNum = scf.idDrawingNum
+--inner join projectClientEst as po on po.projectId = scf.projectId
+--inner join clientsEst as cl on cl.idClientEst = po.idClientEst
+--inner join HomeAddress as ha on ha.idHomeAdress = cl.idHomeAdress 
+--where po.ProjectId = @projectId
+----Dimantle Scaffold
+--UNION ALL
+--select po.ProjectId, po.[description] as 'Descrip',po.unit,
+--cl.numberClient, cl.contactName, cl.companyName, cl.plant, ha.avenue, ha.city, ha.providence,
+--dr.idDrawingNum,dr.[description],
+--CONVERT(NVARCHAR, scf.tag)as 'Tag' , 'SCF Demo' as 'TASK', scf.SDHR as 'HRS',scf.SCOSTLD as 'COSTL',scf.SCOSTMD as 'COSTM',scf.SCOSTED as 'COSTE',scf.STCOSTD as 'TCOST' 
+--from EstCostScf as scf
+--inner join drawing as dr on dr.idDrawingNum = scf.idDrawingNum
+--inner join projectClientEst as po on po.projectId = scf.projectId
+--inner join clientsEst as cl on cl.idClientEst = po.idClientEst
+--inner join HomeAddress as ha on ha.idHomeAdress = cl.idHomeAdress 
+--where po.ProjectId = @projectId
+---- EQUIPMENT 
+----REMOVE
+--UNION ALL
+--select po.ProjectId, po.[description] as 'Descrip',po.unit,
+--cl.numberClient, cl.contactName, cl.companyName, cl.plant, ha.avenue, ha.city, ha.providence,
+--dr.idDrawingNum,dr.[description],
+--CONVERT(NVARCHAR, eq.tag) as 'Tag', 'Remove' as 'TASK',eq.EIRHRS as 'HRS',eq.EIRCOSTL as 'COSTL',eq.EIRCOSTM as 'COSTM',eq.EIRCOSTE as 'COSTE', eq.EIRTCOST as 'TCOST'   
+--from EstCostEq as eq
+--inner join drawing as dr on dr.idDrawingNum = eq.idDrawingNum
+--inner join projectClientEst as po on po.projectId = eq.projectId
+--inner join clientsEst as cl on cl.idClientEst = po.idClientEst
+--inner join HomeAddress as ha on ha.idHomeAdress = cl.idHomeAdress 
+--where po.ProjectId = @projectId
+----INSTALATION
+--UNION ALL 
+--select po.ProjectId, po.[description] as 'Descrip',po.unit,
+--cl.numberClient, cl.contactName, cl.companyName, cl.plant, ha.avenue, ha.city, ha.providence,
+--dr.idDrawingNum,dr.[description],
+--CONVERT(NVARCHAR, eq.tag) as 'Tag', 'Install' as 'TASK', eq.EIIHRS as 'HRS',eq.EIICOSTL as 'COSTL',eq.EIICOSTM as 'COSTM',eq.EIICOSTE as 'COSTE', eq.EIITCOST as 'TCOST'   
+--from EstCostEq as eq
+--inner join drawing as dr on dr.idDrawingNum = eq.idDrawingNum
+--inner join projectClientEst as po on po.projectId = eq.projectId
+--inner join clientsEst as cl on cl.idClientEst = po.idClientEst
+--inner join HomeAddress as ha on ha.idHomeAdress = cl.idHomeAdress 
+--where po.ProjectId = @projectId
+----PAINT
+--UNION ALL
+--select po.ProjectId, po.[description] as 'Descrip',po.unit,
+--cl.numberClient, cl.contactName, cl.companyName, cl.plant, ha.avenue, ha.city, ha.providence,
+--dr.idDrawingNum,dr.[description],
+--CONVERT(NVARCHAR, pp.tag) as 'Tag','Paint' as 'TASK',pp.PPHRS as 'HRS',pp.PPCOSTL as 'COSTL',pp.PPCOSTM as 'COSTM',pp.PPCOSTE as 'COSTE', pp.PPTCOST as 'TCOST'  
+--from EstCostPP as pp
+--inner join drawing as dr on dr.idDrawingNum = pp.idDrawingNum
+--inner join projectClientEst as po on po.projectId = pp.projectId
+--inner join clientsEst as cl on cl.idClientEst = po.idClientEst
+--inner join HomeAddress as ha on ha.idHomeAdress = cl.idHomeAdress 
+--where po.ProjectId = @projectId
+----PIPING
+----REMOVE
+--UNION ALL
+--select po.ProjectId, po.[description] as 'Descrip',po.unit,
+--cl.numberClient, cl.contactName, cl.companyName, cl.plant, ha.avenue, ha.city, ha.providence,
+--dr.idDrawingNum,dr.[description],
+--CONVERT(NVARCHAR , pp.tag) as 'TAG',  'Remove'as 'TASK', pp.PIRHRS as 'HRS', pp.PIRCOSTL as 'COSTL',pp.PIRCOSTM as 'COSTM',pp.PIRCOSTE as 'COSTE', pp.PIRTCOST as 'TCOST'  
+--from EstCostPp as pp
+--inner join drawing as dr on dr.idDrawingNum = pp.idDrawingNum
+--inner join projectClientEst as po on po.projectId = pp.projectId
+--inner join clientsEst as cl on cl.idClientEst = po.idClientEst
+--inner join HomeAddress as ha on ha.idHomeAdress = cl.idHomeAdress 
+--where po.ProjectId = @projectId
+----INSTALATION
+--UNION ALL
+--select po.ProjectId, po.[description] as 'Descrip',po.unit,
+--cl.numberClient, cl.contactName, cl.companyName, cl.plant, ha.avenue, ha.city, ha.providence,
+--dr.idDrawingNum,dr.[description],
+--CONVERT(NVARCHAR , pp.tag) as 'TAG', 'Install' as 'TASK', pp.PIIHRS as 'HRS', pp.PIICOSTL as 'COSTL',pp.PIICOSTM as 'COSTM',pp.PIICOSTE as 'COSTE', pp.PIITCOST as 'TCOST'  
+--from EstCostPp as pp
+--inner join drawing as dr on dr.idDrawingNum = pp.idDrawingNum
+--inner join projectClientEst as po on po.projectId = pp.projectId
+--inner join clientsEst as cl on cl.idClientEst = po.idClientEst
+--inner join HomeAddress as ha on ha.idHomeAdress = cl.idHomeAdress 
+--where po.ProjectId = @projectId
+----PAINT
+--UNION ALL
+--select po.ProjectId, po.[description] as 'Descrip',po.unit,
+--cl.numberClient, cl.contactName, cl.companyName, cl.plant, ha.avenue, ha.city, ha.providence,
+--dr.idDrawingNum,dr.[description],
+--CONVERT(NVARCHAR , pp.tag) as 'TAG','Paint' as 'TASK' , pp.PPHRS as 'HRS', pp.PPCOSTL as 'COSTL',pp.PPCOSTM as 'COSTM',pp.PPCOSTE as 'COSTE', pp.PPTCOST as 'TCOST'  
+--from EstCostPp as pp
+--inner join drawing as dr on dr.idDrawingNum = pp.idDrawingNum
+--inner join projectClientEst as po on po.projectId = pp.projectId
+--inner join clientsEst as cl on cl.idClientEst = po.idClientEst
+--inner join HomeAddress as ha on ha.idHomeAdress = cl.idHomeAdress 
+--where po.ProjectId = @projectId 
+--) as T1
+--end
+--GO
+
+
+----| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
+----| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
+----V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V
+--#########################################################################################################
+--########## ESTE ES CODIGO PARA AGREGAR EL CAMPO DE DAILY RENTE POR JOB EN PRODUCTOS DE SCAFFOLD #########
+--#########################################################################################################
+
+
+Alter table productJob add dailyRentJb float
+go
+
+update productJob set dailyRentJb = p.dailyRentalRate from productJob as pj inner join product as p on p.idProduct = pj.idProduct 
+go
+
+
+
+ALTER proc [dbo].[sp_Scaffold_Product]
+@tagID as varchar(20) ,
+@modID as varchar(20) ,
+@scf as bit,
+@mod as bit,
+@dis as bit
+as
 begin
-select distinct * from( 
--- scaffold
---decks dismantle scf
-select po.ProjectId, po.[description] as 'Descrip',po.unit,
-cl.numberClient, cl.contactName, cl.companyName, cl.plant, ha.avenue, ha.city, ha.providence,
-dr.idDrawingNum,dr.[description],
-CONVERT(NVARCHAR, scfD.tag)as 'Tag' ,'SCF Deck DISM' as 'TASK',scfD.SHRD as 'HRS',scfD.DSCOSTL as 'COSTL',scfD.DSCOSTM as 'COSTM',scfD.SCOSTEDD as 'COSTE',scfD.DSCOSTL + scfD.DSCOSTMD + scfD.SCOSTEDD  as 'TCOST' 
-from EstCostDism as scfD
-inner join drawing as dr on dr.idDrawingNum = scfD.idDrawingNum
-inner join projectClientEst as po on po.projectId = scfD.projectId
-inner join clientsEst as cl on cl.idClientEst = po.idClientEst
-inner join HomeAddress as ha on ha.idHomeAdress = cl.idHomeAdress 
-where po.ProjectId = @projectId
---decks build scf
-UNION ALL
-select po.ProjectId, po.[description] as 'Descrip',po.unit,
-cl.numberClient, cl.contactName, cl.companyName, cl.plant, ha.avenue, ha.city, ha.providence,
-dr.idDrawingNum,dr.[description],
-CONVERT(NVARCHAR, scfB.tag)as 'Tag' ,'SCF Deck Build' as 'TASK',scfB.SBHR as 'HRS',scfB.SCOSTLB as 'COSTL',scfB.SCOSTMB as 'COSTM',scfB.SCOSTEB as 'COSTE', scfB.STCOST as 'TCOST' 
-from EstCostBuild as scfB
-inner join drawing as dr on dr.idDrawingNum = scfB.idDrawingNum
-inner join projectClientEst as po on po.projectId = scfB.projectId
-inner join clientsEst as cl on cl.idClientEst = po.idClientEst
-inner join HomeAddress as ha on ha.idHomeAdress = cl.idHomeAdress 
-where po.ProjectId = @projectId
---Build Scaffold
-UNION ALL
-select po.ProjectId, po.[description] as 'Descrip',po.unit,
-cl.numberClient, cl.contactName, cl.companyName, cl.plant, ha.avenue, ha.city, ha.providence,
-dr.idDrawingNum,dr.[description],
-CONVERT(NVARCHAR, scf.tag)as 'Tag' , 'Scf Build' as 'TASK', scf.SHR as 'HRS',scf.SCOSTL as 'COSTL',scf.SCOSTM as 'COSTM',scf.SCOSTE as 'COSTE',scf.STCOST as 'TCOST' 
-from EstCostScf as scf
-inner join drawing as dr on dr.idDrawingNum = scf.idDrawingNum
-inner join projectClientEst as po on po.projectId = scf.projectId
-inner join clientsEst as cl on cl.idClientEst = po.idClientEst
-inner join HomeAddress as ha on ha.idHomeAdress = cl.idHomeAdress 
-where po.ProjectId = @projectId
---Dimantle Scaffold
-UNION ALL
-select po.ProjectId, po.[description] as 'Descrip',po.unit,
-cl.numberClient, cl.contactName, cl.companyName, cl.plant, ha.avenue, ha.city, ha.providence,
-dr.idDrawingNum,dr.[description],
-CONVERT(NVARCHAR, scf.tag)as 'Tag' , 'SCF Demo' as 'TASK', scf.SDHR as 'HRS',scf.SCOSTLD as 'COSTL',scf.SCOSTMD as 'COSTM',scf.SCOSTED as 'COSTE',scf.STCOSTD as 'TCOST' 
-from EstCostScf as scf
-inner join drawing as dr on dr.idDrawingNum = scf.idDrawingNum
-inner join projectClientEst as po on po.projectId = scf.projectId
-inner join clientsEst as cl on cl.idClientEst = po.idClientEst
-inner join HomeAddress as ha on ha.idHomeAdress = cl.idHomeAdress 
-where po.ProjectId = @projectId
--- EQUIPMENT 
---REMOVE
-UNION ALL
-select po.ProjectId, po.[description] as 'Descrip',po.unit,
-cl.numberClient, cl.contactName, cl.companyName, cl.plant, ha.avenue, ha.city, ha.providence,
-dr.idDrawingNum,dr.[description],
-CONVERT(NVARCHAR, eq.tag) as 'Tag', 'Remove' as 'TASK',eq.EIRHRS as 'HRS',eq.EIRCOSTL as 'COSTL',eq.EIRCOSTM as 'COSTM',eq.EIRCOSTE as 'COSTE', eq.EIRTCOST as 'TCOST'   
-from EstCostEq as eq
-inner join drawing as dr on dr.idDrawingNum = eq.idDrawingNum
-inner join projectClientEst as po on po.projectId = eq.projectId
-inner join clientsEst as cl on cl.idClientEst = po.idClientEst
-inner join HomeAddress as ha on ha.idHomeAdress = cl.idHomeAdress 
-where po.ProjectId = @projectId
---INSTALATION
-UNION ALL 
-select po.ProjectId, po.[description] as 'Descrip',po.unit,
-cl.numberClient, cl.contactName, cl.companyName, cl.plant, ha.avenue, ha.city, ha.providence,
-dr.idDrawingNum,dr.[description],
-CONVERT(NVARCHAR, eq.tag) as 'Tag', 'Install' as 'TASK', eq.EIIHRS as 'HRS',eq.EIICOSTL as 'COSTL',eq.EIICOSTM as 'COSTM',eq.EIICOSTE as 'COSTE', eq.EIITCOST as 'TCOST'   
-from EstCostEq as eq
-inner join drawing as dr on dr.idDrawingNum = eq.idDrawingNum
-inner join projectClientEst as po on po.projectId = eq.projectId
-inner join clientsEst as cl on cl.idClientEst = po.idClientEst
-inner join HomeAddress as ha on ha.idHomeAdress = cl.idHomeAdress 
-where po.ProjectId = @projectId
---PAINT
-UNION ALL
-select po.ProjectId, po.[description] as 'Descrip',po.unit,
-cl.numberClient, cl.contactName, cl.companyName, cl.plant, ha.avenue, ha.city, ha.providence,
-dr.idDrawingNum,dr.[description],
-CONVERT(NVARCHAR, pp.tag) as 'Tag','Paint' as 'TASK',pp.PPHRS as 'HRS',pp.PPCOSTL as 'COSTL',pp.PPCOSTM as 'COSTM',pp.PPCOSTE as 'COSTE', pp.PPTCOST as 'TCOST'  
-from EstCostPP as pp
-inner join drawing as dr on dr.idDrawingNum = pp.idDrawingNum
-inner join projectClientEst as po on po.projectId = pp.projectId
-inner join clientsEst as cl on cl.idClientEst = po.idClientEst
-inner join HomeAddress as ha on ha.idHomeAdress = cl.idHomeAdress 
-where po.ProjectId = @projectId
---PIPING
---REMOVE
-UNION ALL
-select po.ProjectId, po.[description] as 'Descrip',po.unit,
-cl.numberClient, cl.contactName, cl.companyName, cl.plant, ha.avenue, ha.city, ha.providence,
-dr.idDrawingNum,dr.[description],
-CONVERT(NVARCHAR , pp.tag) as 'TAG',  'Remove'as 'TASK', pp.PIRHRS as 'HRS', pp.PIRCOSTL as 'COSTL',pp.PIRCOSTM as 'COSTM',pp.PIRCOSTE as 'COSTE', pp.PIRTCOST as 'TCOST'  
-from EstCostPp as pp
-inner join drawing as dr on dr.idDrawingNum = pp.idDrawingNum
-inner join projectClientEst as po on po.projectId = pp.projectId
-inner join clientsEst as cl on cl.idClientEst = po.idClientEst
-inner join HomeAddress as ha on ha.idHomeAdress = cl.idHomeAdress 
-where po.ProjectId = @projectId
---INSTALATION
-UNION ALL
-select po.ProjectId, po.[description] as 'Descrip',po.unit,
-cl.numberClient, cl.contactName, cl.companyName, cl.plant, ha.avenue, ha.city, ha.providence,
-dr.idDrawingNum,dr.[description],
-CONVERT(NVARCHAR , pp.tag) as 'TAG', 'Install' as 'TASK', pp.PIIHRS as 'HRS', pp.PIICOSTL as 'COSTL',pp.PIICOSTM as 'COSTM',pp.PIICOSTE as 'COSTE', pp.PIITCOST as 'TCOST'  
-from EstCostPp as pp
-inner join drawing as dr on dr.idDrawingNum = pp.idDrawingNum
-inner join projectClientEst as po on po.projectId = pp.projectId
-inner join clientsEst as cl on cl.idClientEst = po.idClientEst
-inner join HomeAddress as ha on ha.idHomeAdress = cl.idHomeAdress 
-where po.ProjectId = @projectId
---PAINT
-UNION ALL
-select po.ProjectId, po.[description] as 'Descrip',po.unit,
-cl.numberClient, cl.contactName, cl.companyName, cl.plant, ha.avenue, ha.city, ha.providence,
-dr.idDrawingNum,dr.[description],
-CONVERT(NVARCHAR , pp.tag) as 'TAG','Paint' as 'TASK' , pp.PPHRS as 'HRS', pp.PPCOSTL as 'COSTL',pp.PPCOSTM as 'COSTM',pp.PPCOSTE as 'COSTE', pp.PPTCOST as 'TCOST'  
-from EstCostPp as pp
-inner join drawing as dr on dr.idDrawingNum = pp.idDrawingNum
-inner join projectClientEst as po on po.projectId = pp.projectId
-inner join clientsEst as cl on cl.idClientEst = po.idClientEst
-inner join HomeAddress as ha on ha.idHomeAdress = cl.idHomeAdress 
-where po.ProjectId = @projectId 
-) as T1
+	if @scf = 1 
+	begin 
+	select 
+		sc.tag , 
+		cl.photo as 'imgClient' ,
+		ha.city as 'City',
+		ha.providence as 'Providence',
+		ha.postalCode as 'CP',
+		jb.jobNo ,
+		CONCAT(wo.idWO, '-' ,tk.task) as 'WO',
+		jc.cat as 'Area',
+		CONCAT(ar.idArea,'-',ar.name) as 'Unit',
+		sj.[description] as 'Sub Job',
+		sc.location as 'Location',
+		sc.purpose as 'Purpose',
+		sc.buildDate as 'BuildDate',
+		ds.dismantleDate as 'DemoDate',
+		sc.foreman as 'Foreman',
+		si.width as 'Width',
+		si.[length] as 'Length',
+		si.heigth as 'Heigth',
+		ISNULL((si.descks + si.extraDeck),0) as 'Decks',
+		ISNULL((select (ah.build + ah.material + ah.travel + ah.weather+ ah.alarm+ ah.[safety]+ ah.stdBy+ ah.other) from activityHours as ah where ah.tag = sc.tag and ah.idModAux IS NUll and ah.idDismantle IS NUll),0) as 'Erection Hours',
+		pd.QID as 'QuanID',
+		pd.idProduct as 'ProductId',
+		pd.name as 'Product Name',
+		ps.quantity as 'QTY',
+		pd.[weight] as 'Weight',
+		pdj.dailyRentJb as 'DailyRent'
+		from scaffoldTraking as sc
+		left join scaffoldInformation as si on si.tag = sc.tag
+		left join dismantle as ds on ds.tag = sc.tag
+		left join areas as ar on ar.idArea = sc.idArea 
+		left join subJobs as sj on sj.idSubJob = sc.idSubJob
+		left join jobCat as jc on jc.idJobCat = sc.idJobCat
+		left join task as tk on tk.idAux = sc.idAux
+		left join productScaffold as ps on ps.tag = sc.tag
+		inner join product as pd on pd.idProduct = ps.idProduct
+		inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO
+		inner join projectOrder as po on po.idPO = wo.idPO and po.jobNo = wo.jobNo
+		inner join job as jb on jb.jobNo = po.jobNo 
+		inner join clients as cl on cl.idClient = jb.idClient
+		left join HomeAddress as ha on ha.idHomeAdress = cl.idHomeAddress
+		left join productJob as pdj on pdj .jobNo = jb.jobNo and pd.idProduct = pdj.idProduct
+		where sc.tag = @tagID
+	end
+	else if @mod = 1 
+	begin 
+	select 
+		sc.tag , 
+		cl.photo as 'imgClient' ,
+		ha.city as 'City',
+		ha.providence as 'Providence',
+		ha.postalCode as 'CP',
+		jb.jobNo ,
+		CONCAT(wo.idWO, '-' ,tk.task) as 'WO',
+		jc.cat as 'Area',
+		CONCAT(ar.idArea,'-',ar.name) as 'Unit',
+		sj.[description] as 'Sub Job',
+		sc.location as 'Location',
+		sc.purpose as 'Purpose',
+		sc.buildDate as 'BuildDate',
+		ds.dismantleDate as 'DemoDate',
+		sc.foreman as 'Foreman',
+		si.width as 'Width',
+		si.[length] as 'Length',
+		si.heigth as 'Heigth',
+		ISNULL((si.descks + si.extraDeck),0) as 'Decks',
+		ISNULL((select (ah.build + ah.material + ah.travel + ah.weather+ ah.alarm+ ah.[safety]+ ah.stdBy+ ah.other) from activityHours as ah where ah.tag = sc.tag and ah.idModAux IS NUll and ah.idDismantle IS NUll),0) as 'Erection Hours',
+		pd.QID as 'QuanID',
+		pd.idProduct as 'ProductId',
+		pd.name as 'Product Name',
+		ps.quantity  - (isnull((select SUM(pm.quantity) from productModification as pm INNER JOIN modification as md on md.idModAux  = pm.idModAux where pm.tag = ps.tag and pm.idProduct = ps.idProduct and CONVERT(int, md.idModification)>CONVERT(int,@modID)),0))  as 'QTY',
+		pd.[weight] as 'Weight',
+		pdj.dailyRentJb as 'DailyRent'
+		from scaffoldTraking as sc
+		left join scaffoldInformation as si on si.tag = sc.tag
+		left join dismantle as ds on ds.tag = sc.tag
+		left join areas as ar on ar.idArea = sc.idArea 
+		left join subJobs as sj on sj.idSubJob = sc.idSubJob
+		left join jobCat as jc on jc.idJobCat = sc.idJobCat
+		left join task as tk on tk.idAux = sc.idAux
+		left join productTotalScaffold as ps on ps.tag = sc.tag
+		inner join product as pd on pd.idProduct = ps.idProduct
+		inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO 
+		inner join projectOrder as po on po.idPO = wo.idPO and po.jobNo = wo.jobNo
+		inner join job as jb on jb.jobNo = po.jobNo 
+		inner join clients as cl on cl.idClient = jb.idClient
+		left join HomeAddress as ha on ha.idHomeAdress = cl.idHomeAddress
+		left join productJob as pdj on pdj .jobNo = jb.jobNo and pd.idProduct = pdj.idProduct
+		where sc.tag = @tagID
+	end
+	else if @dis = 1
+	begin
+	select 
+		sc.tag , 
+		cl.photo as 'imgClient' ,
+		ha.city as 'City',
+		ha.providence as 'Providence',
+		ha.postalCode as 'CP',
+		jb.jobNo ,
+		CONCAT(wo.idWO, '-' ,tk.task) as 'WO',
+		jc.cat as 'Area',
+		CONCAT(ar.idArea,'-',ar.name) as 'Unit',
+		sj.[description] as 'Sub Job',
+		sc.location as 'Location',
+		sc.purpose as 'Purpose',
+		sc.buildDate as 'BuildDate',
+		ds.dismantleDate as 'DemoDate',
+		sc.foreman as 'Foreman',
+		si.width as 'Width',
+		si.[length] as 'Length',
+		si.heigth as 'Heigth',
+		ISNULL((si.descks + si.extraDeck),0) as 'Decks',
+		ISNULL((select (ah.build + ah.material + ah.travel + ah.weather+ ah.alarm+ ah.[safety]+ ah.stdBy+ ah.other) from activityHours as ah where ah.tag = sc.tag and ah.idModAux IS NUll and ah.idDismantle IS NUll),0) as 'Erection Hours',
+		pd.QID as 'QuanID',
+		pd.idProduct as 'ProductId',
+		pd.name as 'Product Name',
+		ps.quantity as 'QTY',
+		pd.[weight] as 'Weight',
+		pdj.dailyRentJb as 'DailyRent'
+		from scaffoldTraking as sc
+		left join scaffoldInformation as si on si.tag = sc.tag
+		left join dismantle as ds on ds.tag = sc.tag
+		left join areas as ar on ar.idArea = sc.idArea 
+		left join subJobs as sj on sj.idSubJob = sc.idSubJob
+		left join jobCat as jc on jc.idJobCat = sc.idJobCat
+		left join task as tk on tk.idAux = sc.idAux
+		left join productTotalScaffold as ps on ps.tag = sc.tag
+		inner join product as pd on pd.idProduct = ps.idProduct
+		inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO
+		inner join projectOrder as po on po.idPO = wo.idPO and po.jobNo = wo.jobNo
+		inner join job as jb on jb.jobNo = po.jobNo 
+		inner join clients as cl on cl.idClient = jb.idClient
+		left join HomeAddress as ha on ha.idHomeAdress = cl.idHomeAddress
+		left join productJob as pdj on pdj .jobNo = jb.jobNo and pd.idProduct = pdj.idProduct
+		where sc.tag = @tagID and ds.tag = @tagID
+	end
+end
+GO
+
+Alter proc [dbo].[sp_SCF_Rental_Details]
+@startDate date,
+@FinalDate  date,
+@numberClient int
+as
+begin 
+	select * 
+from(
+select 
+sc.tag,
+cl.companyName,
+sc.location as 'Location',
+sj.[description] , 
+CONCAT(wo.idWO,'-',tk.task) as 'PO/WONo',
+CONCAT(sci.[type],'- ',sci.[length],' x',sci.width,' x',sci.heigth,'- ',(sci.descks+sci.extraDeck),' Decks') as 'ScaffoldDescription',
+sc.reqComp as 'dateRequest',
+sc.contact as 'requestBy', 
+sc.buildDate as 'buildDate', 
+--DATEADD(DAY,isnull(jc.[days],0),sc.buildDate) as 'ContractEndDate',
+dis.dismantleDate as 'dismantleDate',
+dis.rentStopDate as 'rentStopDate',
+--isnull(jc.[days],0) as 'Contract days',
+DATEDIFF(DAY,sc.buildDate,ISNULL(dis.rentStopDate,GETDATE())) as 'ActivityDays',
+IIF(sc.tag is not null,'Build','Mod') as 'Task',
+
+IIF( ISNULL(dis.rentStopDate,GETDATE()) >= @startDate --and sc.buildDate <= @startDate 
+,
+	IIF( DATEADD(DAY,isnull(jc.[days],0),sc.buildDate) <= @FinalDate -- EL DIA FINAL DE RENTA GRATIS ES MENOR O IGUAL AL FINALDATE?
+	,-- SI ES MENOR O IGUAL POR LO TANTO SI HAY DIAS QUE COBRAR (ESTA DENTRO DEL RANGO)
+		IIF(DATEADD(DAY,isnull(jc.[days],0),sc.buildDate) > @startDate -- (PUNTO DE INICIO) EL DIA FINAL DE RENTA GRATIS ES MAYOR AL STARTDATE?
+		,--DIAFINAL DE RENTA GRATIS
+			IIF(ISNULL(dis.rentStopDate,GETDATE()) < @FinalDate -- EL DIA FINAL DE RENTA GRATIS ES MENOR QUE EL FINALDATE?
+			,DATEDIFF(DAY,DATEADD(DAY,isnull(jc.[days],0),DATEADD(DAY,-1,sc.buildDate)),ISNULL(dis.rentStopDate,GETDATE()))
+			,DATEDIFF(DAY,DATEADD(DAY,isnull(jc.[days],0),DATEADD(DAY,-1,sc.buildDate)),@FinalDate))
+		,--STARTDATE
+			IIF(ISNULL(dis.rentStopDate,GETDATE()) < @FinalDate, 
+				DATEDIFF(DAY,DATEADD(DAY,-1 ,@startDate),ISNULL(dis.rentStopDate,GETDATE())), 
+				DATEDIFF(DAY,DATEADD(DAY,-1 ,@startDate),@finalDate))
+		)	,-- NO ES MENOR O IGUAL POR ENDE NO HAY DIAS QUE COBAR (NO ESTA DENTRO DEL RANGO)
+	0),0)  AS 'DaysRent',
+--IIF(DATEADD(DAY,isnull(jc.[days],0),sc.buildDate)<@FinalDate,1,0) as 'ExedContractDate',
+(select COUNT(*) from productTotalScaffold where tag = sc.tag) AS 'QTY'
+,pts.idProduct as 'idPrduct',
+pts.quantity as 'qtyPoduct',
+pd.name as 'productName',
+ISNULL(pdj.dailyRentJb,0) as 'dailyRent',
+(pts.quantity * ISNULL(pdj.dailyRentJb,0)) as 'Total'
+from scaffoldTraking as sc 
+left join areas as ar on ar.idArea = sc.idArea
+left join subJobs as sj on sj.idSubJob = sc.idSubJob
+left join jobCat as jc on jc.idJobCat = sc.idJobCat
+left join scaffoldInformation as sci on sci.tag = sc.tag
+left join dismantle as dis on dis.tag = sc.tag
+left join productTotalScaffold as pts on pts.tag = sc.tag
+inner join product as pd on pd.idProduct= pts.idProduct
+inner join task as tk on tk.idAux = sc.idAux
+inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO
+inner join projectOrder as po on po.idPO = wo.idPO and po.jobNo = wo.jobNo
+inner join job as jb on jb.jobNo = po.jobNo 
+inner join clients as cl on cl.idClient = jb.idClient
+left join productJob as pdj on pdj .jobNo = jb.jobNo and pd.idProduct = pdj.idProduct
+where cl.numberClient = @numberClient
+) as T1 where T1.DaysRent > 0 
 end
 GO
