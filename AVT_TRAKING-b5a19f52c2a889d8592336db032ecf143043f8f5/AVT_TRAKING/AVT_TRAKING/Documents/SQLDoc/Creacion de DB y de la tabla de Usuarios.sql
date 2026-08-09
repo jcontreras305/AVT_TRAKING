@@ -5990,6 +5990,168 @@ GO
 --GO
 
 
+--#########################################################################################################
+--########## ESTE ES CODIGO PARA AGREGAR EL CAMPO DE DAILY RENTE POR JOB EN PRODUCTOS DE SCAFFOLD #########
+--#########################################################################################################
+
+
+--Alter table productJob add dailyRentJb float
+--go
+
+--update productJob set dailyRentJb = p.dailyRentalRate from productJob as pj inner join product as p on p.idProduct = pj.idProduct 
+--go
+
+
+
+--ALTER proc [dbo].[sp_Scaffold_Product]
+--@tagID as varchar(20) ,
+--@modID as varchar(20) ,
+--@scf as bit,
+--@mod as bit,
+--@dis as bit
+--as
+--begin
+--	if @scf = 1 
+--	begin 
+--	select 
+--		sc.tag , 
+--		cl.photo as 'imgClient' ,
+--		ha.city as 'City',
+--		ha.providence as 'Providence',
+--		ha.postalCode as 'CP',
+--		jb.jobNo ,
+--		CONCAT(wo.idWO, '-' ,tk.task) as 'WO',
+--		jc.cat as 'Area',
+--		CONCAT(ar.idArea,'-',ar.name) as 'Unit',
+--		sj.[description] as 'Sub Job',
+--		sc.location as 'Location',
+--		sc.purpose as 'Purpose',
+--		sc.buildDate as 'BuildDate',
+--		ds.dismantleDate as 'DemoDate',
+--		sc.foreman as 'Foreman',
+--		si.width as 'Width',
+--		si.[length] as 'Length',
+--		si.heigth as 'Heigth',
+--		ISNULL((si.descks + si.extraDeck),0) as 'Decks',
+--		ISNULL((select (ah.build + ah.material + ah.travel + ah.weather+ ah.alarm+ ah.[safety]+ ah.stdBy+ ah.other) from activityHours as ah where ah.tag = sc.tag and ah.idModAux IS NUll and ah.idDismantle IS NUll),0) as 'Erection Hours',
+--		pd.QID as 'QuanID',
+--		pd.idProduct as 'ProductId',
+--		pd.name as 'Product Name',
+--		ps.quantity as 'QTY',
+--		pd.[weight] as 'Weight',
+--		pdj.dailyRentJb as 'DailyRent'
+--		from scaffoldTraking as sc
+--		left join scaffoldInformation as si on si.tag = sc.tag
+--		left join dismantle as ds on ds.tag = sc.tag
+--		left join areas as ar on ar.idArea = sc.idArea 
+--		left join subJobs as sj on sj.idSubJob = sc.idSubJob
+--		left join jobCat as jc on jc.idJobCat = sc.idJobCat
+--		left join task as tk on tk.idAux = sc.idAux
+--		left join productScaffold as ps on ps.tag = sc.tag
+--		inner join product as pd on pd.idProduct = ps.idProduct
+--		inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO
+--		inner join projectOrder as po on po.idPO = wo.idPO and po.jobNo = wo.jobNo
+--		inner join job as jb on jb.jobNo = po.jobNo 
+--		inner join clients as cl on cl.idClient = jb.idClient
+--		left join HomeAddress as ha on ha.idHomeAdress = cl.idHomeAddress
+--		left join productJob as pdj on pdj .jobNo = jb.jobNo and pd.idProduct = pdj.idProduct
+--		where sc.tag = @tagID
+--	end
+--	else if @mod = 1 
+--	begin 
+--	select 
+--		sc.tag , 
+--		cl.photo as 'imgClient' ,
+--		ha.city as 'City',
+--		ha.providence as 'Providence',
+--		ha.postalCode as 'CP',
+--		jb.jobNo ,
+--		CONCAT(wo.idWO, '-' ,tk.task) as 'WO',
+--		jc.cat as 'Area',
+--		CONCAT(ar.idArea,'-',ar.name) as 'Unit',
+--		sj.[description] as 'Sub Job',
+--		sc.location as 'Location',
+--		sc.purpose as 'Purpose',
+--		sc.buildDate as 'BuildDate',
+--		ds.dismantleDate as 'DemoDate',
+--		sc.foreman as 'Foreman',
+--		si.width as 'Width',
+--		si.[length] as 'Length',
+--		si.heigth as 'Heigth',
+--		ISNULL((si.descks + si.extraDeck),0) as 'Decks',
+--		ISNULL((select (ah.build + ah.material + ah.travel + ah.weather+ ah.alarm+ ah.[safety]+ ah.stdBy+ ah.other) from activityHours as ah where ah.tag = sc.tag and ah.idModAux IS NUll and ah.idDismantle IS NUll),0) as 'Erection Hours',
+--		pd.QID as 'QuanID',
+--		pd.idProduct as 'ProductId',
+--		pd.name as 'Product Name',
+--		ps.quantity  - (isnull((select SUM(pm.quantity) from productModification as pm INNER JOIN modification as md on md.idModAux  = pm.idModAux where pm.tag = ps.tag and pm.idProduct = ps.idProduct and CONVERT(int, md.idModification)>CONVERT(int,@modID)),0))  as 'QTY',
+--		pd.[weight] as 'Weight',
+--		pdj.dailyRentJb as 'DailyRent'
+--		from scaffoldTraking as sc
+--		left join scaffoldInformation as si on si.tag = sc.tag
+--		left join dismantle as ds on ds.tag = sc.tag
+--		left join areas as ar on ar.idArea = sc.idArea 
+--		left join subJobs as sj on sj.idSubJob = sc.idSubJob
+--		left join jobCat as jc on jc.idJobCat = sc.idJobCat
+--		left join task as tk on tk.idAux = sc.idAux
+--		left join productTotalScaffold as ps on ps.tag = sc.tag
+--		inner join product as pd on pd.idProduct = ps.idProduct
+--		inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO 
+--		inner join projectOrder as po on po.idPO = wo.idPO and po.jobNo = wo.jobNo
+--		inner join job as jb on jb.jobNo = po.jobNo 
+--		inner join clients as cl on cl.idClient = jb.idClient
+--		left join HomeAddress as ha on ha.idHomeAdress = cl.idHomeAddress
+--		left join productJob as pdj on pdj .jobNo = jb.jobNo and pd.idProduct = pdj.idProduct
+--		where sc.tag = @tagID
+--	end
+--	else if @dis = 1
+--	begin
+--	select 
+--		sc.tag , 
+--		cl.photo as 'imgClient' ,
+--		ha.city as 'City',
+--		ha.providence as 'Providence',
+--		ha.postalCode as 'CP',
+--		jb.jobNo ,
+--		CONCAT(wo.idWO, '-' ,tk.task) as 'WO',
+--		jc.cat as 'Area',
+--		CONCAT(ar.idArea,'-',ar.name) as 'Unit',
+--		sj.[description] as 'Sub Job',
+--		sc.location as 'Location',
+--		sc.purpose as 'Purpose',
+--		sc.buildDate as 'BuildDate',
+--		ds.dismantleDate as 'DemoDate',
+--		sc.foreman as 'Foreman',
+--		si.width as 'Width',
+--		si.[length] as 'Length',
+--		si.heigth as 'Heigth',
+--		ISNULL((si.descks + si.extraDeck),0) as 'Decks',
+--		ISNULL((select (ah.build + ah.material + ah.travel + ah.weather+ ah.alarm+ ah.[safety]+ ah.stdBy+ ah.other) from activityHours as ah where ah.tag = sc.tag and ah.idModAux IS NUll and ah.idDismantle IS NUll),0) as 'Erection Hours',
+--		pd.QID as 'QuanID',
+--		pd.idProduct as 'ProductId',
+--		pd.name as 'Product Name',
+--		ps.quantity as 'QTY',
+--		pd.[weight] as 'Weight',
+--		pdj.dailyRentJb as 'DailyRent'
+--		from scaffoldTraking as sc
+--		left join scaffoldInformation as si on si.tag = sc.tag
+--		left join dismantle as ds on ds.tag = sc.tag
+--		left join areas as ar on ar.idArea = sc.idArea 
+--		left join subJobs as sj on sj.idSubJob = sc.idSubJob
+--		left join jobCat as jc on jc.idJobCat = sc.idJobCat
+--		left join task as tk on tk.idAux = sc.idAux
+--		left join productTotalScaffold as ps on ps.tag = sc.tag
+--		inner join product as pd on pd.idProduct = ps.idProduct
+--		inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO
+--		inner join projectOrder as po on po.idPO = wo.idPO and po.jobNo = wo.jobNo
+--		inner join job as jb on jb.jobNo = po.jobNo 
+--		inner join clients as cl on cl.idClient = jb.idClient
+--		left join HomeAddress as ha on ha.idHomeAdress = cl.idHomeAddress
+--		left join productJob as pdj on pdj .jobNo = jb.jobNo and pd.idProduct = pdj.idProduct
+--		where sc.tag = @tagID and ds.tag = @tagID
+--	end
+--end
+--GO
+
 ----| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
 ----| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
 ----V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V V
@@ -5998,175 +6160,18 @@ GO
 --#########################################################################################################
 
 
-Alter table productJob add dailyRentJb float
-go
-
-update productJob set dailyRentJb = p.dailyRentalRate from productJob as pj inner join product as p on p.idProduct = pj.idProduct 
-go
-
-
-
-ALTER proc [dbo].[sp_Scaffold_Product]
-@tagID as varchar(20) ,
-@modID as varchar(20) ,
-@scf as bit,
-@mod as bit,
-@dis as bit
-as
-begin
-	if @scf = 1 
-	begin 
-	select 
-		sc.tag , 
-		cl.photo as 'imgClient' ,
-		ha.city as 'City',
-		ha.providence as 'Providence',
-		ha.postalCode as 'CP',
-		jb.jobNo ,
-		CONCAT(wo.idWO, '-' ,tk.task) as 'WO',
-		jc.cat as 'Area',
-		CONCAT(ar.idArea,'-',ar.name) as 'Unit',
-		sj.[description] as 'Sub Job',
-		sc.location as 'Location',
-		sc.purpose as 'Purpose',
-		sc.buildDate as 'BuildDate',
-		ds.dismantleDate as 'DemoDate',
-		sc.foreman as 'Foreman',
-		si.width as 'Width',
-		si.[length] as 'Length',
-		si.heigth as 'Heigth',
-		ISNULL((si.descks + si.extraDeck),0) as 'Decks',
-		ISNULL((select (ah.build + ah.material + ah.travel + ah.weather+ ah.alarm+ ah.[safety]+ ah.stdBy+ ah.other) from activityHours as ah where ah.tag = sc.tag and ah.idModAux IS NUll and ah.idDismantle IS NUll),0) as 'Erection Hours',
-		pd.QID as 'QuanID',
-		pd.idProduct as 'ProductId',
-		pd.name as 'Product Name',
-		ps.quantity as 'QTY',
-		pd.[weight] as 'Weight',
-		pdj.dailyRentJb as 'DailyRent'
-		from scaffoldTraking as sc
-		left join scaffoldInformation as si on si.tag = sc.tag
-		left join dismantle as ds on ds.tag = sc.tag
-		left join areas as ar on ar.idArea = sc.idArea 
-		left join subJobs as sj on sj.idSubJob = sc.idSubJob
-		left join jobCat as jc on jc.idJobCat = sc.idJobCat
-		left join task as tk on tk.idAux = sc.idAux
-		left join productScaffold as ps on ps.tag = sc.tag
-		inner join product as pd on pd.idProduct = ps.idProduct
-		inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO
-		inner join projectOrder as po on po.idPO = wo.idPO and po.jobNo = wo.jobNo
-		inner join job as jb on jb.jobNo = po.jobNo 
-		inner join clients as cl on cl.idClient = jb.idClient
-		left join HomeAddress as ha on ha.idHomeAdress = cl.idHomeAddress
-		left join productJob as pdj on pdj .jobNo = jb.jobNo and pd.idProduct = pdj.idProduct
-		where sc.tag = @tagID
-	end
-	else if @mod = 1 
-	begin 
-	select 
-		sc.tag , 
-		cl.photo as 'imgClient' ,
-		ha.city as 'City',
-		ha.providence as 'Providence',
-		ha.postalCode as 'CP',
-		jb.jobNo ,
-		CONCAT(wo.idWO, '-' ,tk.task) as 'WO',
-		jc.cat as 'Area',
-		CONCAT(ar.idArea,'-',ar.name) as 'Unit',
-		sj.[description] as 'Sub Job',
-		sc.location as 'Location',
-		sc.purpose as 'Purpose',
-		sc.buildDate as 'BuildDate',
-		ds.dismantleDate as 'DemoDate',
-		sc.foreman as 'Foreman',
-		si.width as 'Width',
-		si.[length] as 'Length',
-		si.heigth as 'Heigth',
-		ISNULL((si.descks + si.extraDeck),0) as 'Decks',
-		ISNULL((select (ah.build + ah.material + ah.travel + ah.weather+ ah.alarm+ ah.[safety]+ ah.stdBy+ ah.other) from activityHours as ah where ah.tag = sc.tag and ah.idModAux IS NUll and ah.idDismantle IS NUll),0) as 'Erection Hours',
-		pd.QID as 'QuanID',
-		pd.idProduct as 'ProductId',
-		pd.name as 'Product Name',
-		ps.quantity  - (isnull((select SUM(pm.quantity) from productModification as pm INNER JOIN modification as md on md.idModAux  = pm.idModAux where pm.tag = ps.tag and pm.idProduct = ps.idProduct and CONVERT(int, md.idModification)>CONVERT(int,@modID)),0))  as 'QTY',
-		pd.[weight] as 'Weight',
-		pdj.dailyRentJb as 'DailyRent'
-		from scaffoldTraking as sc
-		left join scaffoldInformation as si on si.tag = sc.tag
-		left join dismantle as ds on ds.tag = sc.tag
-		left join areas as ar on ar.idArea = sc.idArea 
-		left join subJobs as sj on sj.idSubJob = sc.idSubJob
-		left join jobCat as jc on jc.idJobCat = sc.idJobCat
-		left join task as tk on tk.idAux = sc.idAux
-		left join productTotalScaffold as ps on ps.tag = sc.tag
-		inner join product as pd on pd.idProduct = ps.idProduct
-		inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO 
-		inner join projectOrder as po on po.idPO = wo.idPO and po.jobNo = wo.jobNo
-		inner join job as jb on jb.jobNo = po.jobNo 
-		inner join clients as cl on cl.idClient = jb.idClient
-		left join HomeAddress as ha on ha.idHomeAdress = cl.idHomeAddress
-		left join productJob as pdj on pdj .jobNo = jb.jobNo and pd.idProduct = pdj.idProduct
-		where sc.tag = @tagID
-	end
-	else if @dis = 1
-	begin
-	select 
-		sc.tag , 
-		cl.photo as 'imgClient' ,
-		ha.city as 'City',
-		ha.providence as 'Providence',
-		ha.postalCode as 'CP',
-		jb.jobNo ,
-		CONCAT(wo.idWO, '-' ,tk.task) as 'WO',
-		jc.cat as 'Area',
-		CONCAT(ar.idArea,'-',ar.name) as 'Unit',
-		sj.[description] as 'Sub Job',
-		sc.location as 'Location',
-		sc.purpose as 'Purpose',
-		sc.buildDate as 'BuildDate',
-		ds.dismantleDate as 'DemoDate',
-		sc.foreman as 'Foreman',
-		si.width as 'Width',
-		si.[length] as 'Length',
-		si.heigth as 'Heigth',
-		ISNULL((si.descks + si.extraDeck),0) as 'Decks',
-		ISNULL((select (ah.build + ah.material + ah.travel + ah.weather+ ah.alarm+ ah.[safety]+ ah.stdBy+ ah.other) from activityHours as ah where ah.tag = sc.tag and ah.idModAux IS NUll and ah.idDismantle IS NUll),0) as 'Erection Hours',
-		pd.QID as 'QuanID',
-		pd.idProduct as 'ProductId',
-		pd.name as 'Product Name',
-		ps.quantity as 'QTY',
-		pd.[weight] as 'Weight',
-		pdj.dailyRentJb as 'DailyRent'
-		from scaffoldTraking as sc
-		left join scaffoldInformation as si on si.tag = sc.tag
-		left join dismantle as ds on ds.tag = sc.tag
-		left join areas as ar on ar.idArea = sc.idArea 
-		left join subJobs as sj on sj.idSubJob = sc.idSubJob
-		left join jobCat as jc on jc.idJobCat = sc.idJobCat
-		left join task as tk on tk.idAux = sc.idAux
-		left join productTotalScaffold as ps on ps.tag = sc.tag
-		inner join product as pd on pd.idProduct = ps.idProduct
-		inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO
-		inner join projectOrder as po on po.idPO = wo.idPO and po.jobNo = wo.jobNo
-		inner join job as jb on jb.jobNo = po.jobNo 
-		inner join clients as cl on cl.idClient = jb.idClient
-		left join HomeAddress as ha on ha.idHomeAdress = cl.idHomeAddress
-		left join productJob as pdj on pdj .jobNo = jb.jobNo and pd.idProduct = pdj.idProduct
-		where sc.tag = @tagID and ds.tag = @tagID
-	end
-end
-GO
-
 Alter proc [dbo].[sp_SCF_Rental_Details]
 @startDate date,
 @FinalDate  date,
 @numberClient int
 as
 begin 
-	select * 
+	select distinct * 
 from(
 select 
 sc.tag,
 cl.companyName,
-sc.location as 'Location',
+convert(nvarchar, sc.location) as 'Location',
 sj.[description] , 
 CONCAT(wo.idWO,'-',tk.task) as 'PO/WONo',
 CONCAT(sci.[type],'- ',sci.[length],' x',sci.width,' x',sci.heigth,'- ',(sci.descks+sci.extraDeck),' Decks') as 'ScaffoldDescription',
@@ -6220,3 +6225,60 @@ where cl.numberClient = @numberClient
 ) as T1 where T1.DaysRent > 0 
 end
 GO
+
+alter proc [dbo].[sp_DeleteModAux]
+@tag varchar(20),
+@mod varchar(20),
+@modID varchar(36),
+@allRepeat bit,
+@msg varchar(120) output
+as
+declare @error as int = 0
+declare @flag as int
+declare @idProduct as int
+declare @qty as float
+begin 
+	if (select COUNT(*) from modification where idModAux = @modID and tag = @tag) >0 
+	begin 
+		begin tran	
+			begin try
+				set	@msg = CONCAT('Error trying to delete Activity Hours from Modification ',@mod)
+				delete ah from activityHours as ah inner join modification as md on md.idModAux = ah.idModAux 
+					 where ah.tag  = @tag and  md.idModification = @mod
+				set	@msg = CONCAT('Error trying to delete Material Handeling from Modification ',@mod)
+				delete mh from modification as md left join materialHandeling as mh  on md.idModAux = mh.idModAux
+					 where mh.tag = @tag and md.idModification = @mod
+				set	@msg = CONCAT('Error trying to delete Scaffold Information from Modification ',@mod)
+				delete si from scaffoldInformation as si inner join modification as md on md.idModAux = si.idModAux 
+					 where si.tag = @tag and md.idModification = @mod
+				set @flag = (select COUNT(*) from productModification where tag = @tag and idModAux = @modID )
+				while (@flag > 0)
+				begin
+					select  @qty = quantity ,@idProduct = idProduct from (select top 1  quantity,idProduct from productModification as pm inner join modification as md on md.idModAux	= pm.idModAux where md.tag = @tag and md.idModification = @mod and md.idModAux = @modID) as t1
+					set	@msg = CONCAT('Error trying to delete Product Modification Record from Modification: ', @mod,', with the idProduct: ',CONVERT(varchar(12), @idProduct))
+					select quantity from product where idProduct = @idProduct
+					update product set quantity = quantity + @qty where idProduct = @idProduct
+					select quantity from productTotalScaffold where idProduct = @idProduct and tag = @tag
+					update productTotalScaffold set quantity = quantity + IIF(@qty>0,@qty*-1,@qty*-1) where idProduct = @idProduct and tag = @tag
+					delete from productTotalScaffold where quantity = 0 and tag = @tag 
+					delete pm from productModification as pm inner join modification as md on md.idModAux = pm.idModAux 
+					 where idProduct = @idProduct and pm.tag = @tag and md.idModification = @mod and md.idModAux = @modID
+					set @flag = ( select COUNT(*) from productModification where tag = @tag and idModAux = @modID)
+				end
+				delete from modification where idModification = @mod and tag = @tag	and idModAux = @modID
+				set @msg = 'Successful'	 
+			end try
+			begin catch
+				set @error = 1
+				goto solveProblem
+			end catch
+		commit tran 
+		print @msg	
+		solveProblem:
+		if @error <> 0
+		begin 
+			rollback tran 
+		end
+	end
+end
+go

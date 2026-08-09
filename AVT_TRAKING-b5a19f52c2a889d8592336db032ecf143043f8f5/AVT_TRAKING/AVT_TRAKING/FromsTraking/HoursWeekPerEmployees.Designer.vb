@@ -101,6 +101,7 @@ Partial Class HoursWeekPerEmployees
         Me.btnInsert = New System.Windows.Forms.Button()
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
+        Me.btnModifyRecords = New System.Windows.Forms.Button()
         Me.Panel1.SuspendLayout()
         CType(Me.pcbCompany, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -495,6 +496,7 @@ Partial Class HoursWeekPerEmployees
         'GroupBox1
         '
         Me.GroupBox1.BackColor = System.Drawing.Color.FromArgb(CType(CType(83, Byte), Integer), CType(CType(93, Byte), Integer), CType(CType(102, Byte), Integer))
+        Me.GroupBox1.Controls.Add(Me.btnModifyRecords)
         Me.GroupBox1.Controls.Add(Me.btnWornHoursMatetial)
         Me.GroupBox1.Controls.Add(Me.btnDuplicateHour)
         Me.GroupBox1.Controls.Add(Me.txtFindFecha)
@@ -549,10 +551,10 @@ Partial Class HoursWeekPerEmployees
         Me.btnDuplicateHour.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnDuplicateHour.Image = Global.AVT_TRAKING.My.Resources.Resources.after
         Me.btnDuplicateHour.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnDuplicateHour.Location = New System.Drawing.Point(1279, 67)
+        Me.btnDuplicateHour.Location = New System.Drawing.Point(1235, 67)
         Me.btnDuplicateHour.Margin = New System.Windows.Forms.Padding(4)
         Me.btnDuplicateHour.Name = "btnDuplicateHour"
-        Me.btnDuplicateHour.Size = New System.Drawing.Size(188, 36)
+        Me.btnDuplicateHour.Size = New System.Drawing.Size(165, 36)
         Me.btnDuplicateHour.TabIndex = 25
         Me.btnDuplicateHour.Text = "Duplicate Hour"
         Me.btnDuplicateHour.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -606,10 +608,10 @@ Partial Class HoursWeekPerEmployees
         Me.Button12.Location = New System.Drawing.Point(1073, 67)
         Me.Button12.Margin = New System.Windows.Forms.Padding(4)
         Me.Button12.Name = "Button12"
-        Me.Button12.Size = New System.Drawing.Size(197, 36)
+        Me.Button12.Size = New System.Drawing.Size(154, 36)
         Me.Button12.TabIndex = 19
         Me.Button12.Text = "Daily Per Diem"
-        Me.Button12.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.Button12.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
         Me.Button12.UseVisualStyleBackColor = True
         '
         'btnNextEmploye
@@ -651,13 +653,13 @@ Partial Class HoursWeekPerEmployees
         Me.btnTime.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnTime.Image = Global.AVT_TRAKING.My.Resources.Resources.upload2
         Me.btnTime.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnTime.Location = New System.Drawing.Point(874, 23)
+        Me.btnTime.Location = New System.Drawing.Point(853, 21)
         Me.btnTime.Margin = New System.Windows.Forms.Padding(4)
         Me.btnTime.Name = "btnTime"
-        Me.btnTime.Size = New System.Drawing.Size(124, 32)
+        Me.btnTime.Size = New System.Drawing.Size(146, 42)
         Me.btnTime.TabIndex = 15
         Me.btnTime.Text = "Upload Time"
-        Me.btnTime.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.btnTime.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
         Me.btnTime.UseVisualStyleBackColor = True
         '
         'btnExpenses
@@ -667,7 +669,7 @@ Partial Class HoursWeekPerEmployees
         Me.btnExpenses.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnExpenses.Image = Global.AVT_TRAKING.My.Resources.Resources.payroll
         Me.btnExpenses.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnExpenses.Location = New System.Drawing.Point(1006, 20)
+        Me.btnExpenses.Location = New System.Drawing.Point(1006, 23)
         Me.btnExpenses.Margin = New System.Windows.Forms.Padding(4)
         Me.btnExpenses.Name = "btnExpenses"
         Me.btnExpenses.Size = New System.Drawing.Size(155, 39)
@@ -683,7 +685,7 @@ Partial Class HoursWeekPerEmployees
         Me.Button6.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.Button6.Image = Global.AVT_TRAKING.My.Resources.Resources.payroll
         Me.Button6.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.Button6.Location = New System.Drawing.Point(720, 20)
+        Me.Button6.Location = New System.Drawing.Point(719, 20)
         Me.Button6.Margin = New System.Windows.Forms.Padding(4)
         Me.Button6.Name = "Button6"
         Me.Button6.Size = New System.Drawing.Size(124, 39)
@@ -1056,6 +1058,23 @@ Partial Class HoursWeekPerEmployees
         Me.TableLayoutPanel1.Size = New System.Drawing.Size(1600, 738)
         Me.TableLayoutPanel1.TabIndex = 3
         '
+        'btnModifyRecords
+        '
+        Me.btnModifyRecords.FlatAppearance.BorderSize = 0
+        Me.btnModifyRecords.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(58, Byte), Integer), CType(CType(115, Byte), Integer))
+        Me.btnModifyRecords.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btnModifyRecords.Image = Global.AVT_TRAKING.My.Resources.Resources.refresh
+        Me.btnModifyRecords.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.btnModifyRecords.Location = New System.Drawing.Point(1396, 63)
+        Me.btnModifyRecords.Margin = New System.Windows.Forms.Padding(4)
+        Me.btnModifyRecords.Name = "btnModifyRecords"
+        Me.btnModifyRecords.Size = New System.Drawing.Size(188, 36)
+        Me.btnModifyRecords.TabIndex = 27
+        Me.btnModifyRecords.Text = "Modify Records"
+        Me.btnModifyRecords.TextAlign = System.Drawing.ContentAlignment.MiddleRight
+        Me.btnModifyRecords.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText
+        Me.btnModifyRecords.UseVisualStyleBackColor = True
+        '
         'HoursWeekPerEmployees
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
@@ -1164,4 +1183,5 @@ Partial Class HoursWeekPerEmployees
     Friend WithEvents btnPasteProject As Button
     Friend WithEvents lblProjectPaste As Label
     Friend WithEvents ToolTip1 As ToolTip
+    Friend WithEvents btnModifyRecords As Button
 End Class

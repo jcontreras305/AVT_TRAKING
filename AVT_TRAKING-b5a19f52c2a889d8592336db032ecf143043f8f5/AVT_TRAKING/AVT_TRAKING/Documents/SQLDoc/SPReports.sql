@@ -826,7 +826,9 @@ GO
 --ALTER proc [dbo].[sp_DeleteModAux]
 CREATE proc [dbo].[sp_DeleteModAux]
 @tag varchar(20),
+@mod varchar(20),
 @modID varchar(36),
+@allRepeat bit,
 @msg varchar(120) output
 as
 declare @error as int = 0
@@ -838,26 +840,30 @@ begin
 	begin 
 		begin tran	
 			begin try
-				set	@msg = CONCAT('Error trying to delete Activity Hours from Modification ',@modID)
-				delete from activityHours where tag = @tag and idModAux = @modID
-				set	@msg = CONCAT('Error trying to delete Material Handeling from Modification ',@modID)
-				delete from materialHandeling where tag = @tag and idModAux = @modID
-				set	@msg = CONCAT('Error trying to delete Scaffold Information from Modification ',@modID)
-				delete from scaffoldInformation where tag = @tag and idModAux=@modID
-				set @flag = (select COUNT(*) from productModification where tag = @tag and idModAux = @modID)
+				set	@msg = CONCAT('Error trying to delete Activity Hours from Modification ',@mod)
+				delete ah from activityHours as ah inner join modification as md on md.idModAux = ah.idModAux 
+					 where ah.tag  = @tag and  md.idModification = @mod
+				set	@msg = CONCAT('Error trying to delete Material Handeling from Modification ',@mod)
+				delete mh from modification as md left join materialHandeling as mh  on md.idModAux = mh.idModAux
+					 where mh.tag = @tag and md.idModification = @mod
+				set	@msg = CONCAT('Error trying to delete Scaffold Information from Modification ',@mod)
+				delete si from scaffoldInformation as si inner join modification as md on md.idModAux = si.idModAux 
+					 where si.tag = @tag and md.idModification = @mod
+				set @flag = (select COUNT(*) from productModification where tag = @tag and idModAux = @modID )
 				while (@flag > 0)
 				begin
-					select  @qty = quantity ,@idProduct = idProduct from (select top 1  quantity,idProduct from productModification where tag = @tag and idModAux = @modID) as t1
-					set	@msg = CONCAT('Error trying to delete Product Modification Record from Modification: ', @modID,', with the idProduct: ',CONVERT(varchar(12), @idProduct))
+					select  @qty = quantity ,@idProduct = idProduct from (select top 1  quantity,idProduct from productModification as pm inner join modification as md on md.idModAux	= pm.idModAux where md.tag = @tag and md.idModification = @mod and md.idModAux = @modID) as t1
+					set	@msg = CONCAT('Error trying to delete Product Modification Record from Modification: ', @mod,', with the idProduct: ',CONVERT(varchar(12), @idProduct))
 					select quantity from product where idProduct = @idProduct
 					update product set quantity = quantity + @qty where idProduct = @idProduct
 					select quantity from productTotalScaffold where idProduct = @idProduct and tag = @tag
 					update productTotalScaffold set quantity = quantity + IIF(@qty>0,@qty*-1,@qty*-1) where idProduct = @idProduct and tag = @tag
-					delete from productModification where idProduct = @idProduct and tag = @tag and idModAux = @modID
-					delete from productTotalScaffold where quantity = 0 and tag = @tag
+					delete from productTotalScaffold where quantity = 0 and tag = @tag 
+					delete pm from productModification as pm inner join modification as md on md.idModAux = pm.idModAux 
+					 where idProduct = @idProduct and pm.tag = @tag and md.idModification = @mod and md.idModAux = @modID
 					set @flag = ( select COUNT(*) from productModification where tag = @tag and idModAux = @modID)
 				end
-				delete from modification where idModification = @modID and tag = @tag	
+				delete from modification where idModification = @mod and tag = @tag	and idModAux = @modID
 				set @msg = 'Successful'	 
 			end try
 			begin catch

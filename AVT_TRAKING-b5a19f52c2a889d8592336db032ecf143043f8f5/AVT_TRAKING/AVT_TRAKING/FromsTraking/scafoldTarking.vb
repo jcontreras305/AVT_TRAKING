@@ -2,7 +2,9 @@
 Imports Microsoft.Office.Interop
 Imports Microsoft.Office.Interop.Excel
 Public Class scafoldTarking
-    Public IdCliente, Company, NumberClient As String
+    Public IdCliente As String = "79BE2DB5-7704-41EC-9AC9-E9510DA5E944"
+    Public Company As String = "Nutrien"
+    Public NumberClient As String = 115
 
     Dim tablaEmpleados As New Data.DataTable
     Dim tblProductInComing As New Data.DataTable
@@ -157,9 +159,9 @@ Public Class scafoldTarking
                     list.Add(txtCommentsInComing.Text)
                     list.Add(cmbJobNumInComing.SelectedItem)
                 ElseIf cmbJobNumInComing.SelectedItem Is Nothing Then
-                    MessageBox.Show("The Job Number is not selected, Please choose one and try again.", "Important", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                    MessageBox.Show("The Job Number Is Not selected, Please choose one And Try again.", "Important", MessageBoxButtons.OK, MessageBoxIcon.Error)
                 ElseIf txtTicketNumInComing.Text <> "" Then
-                    MessageBox.Show("The Ticket Number is not correct.", "Important", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                    MessageBox.Show("The Ticket Number Is Not correct.", "Important", MessageBoxButtons.OK, MessageBoxIcon.Error)
                 End If
                 If list.Count > 0 Then
                     If mtdScaffold.saveInComing(tblInComing, list, True) Then
@@ -178,9 +180,9 @@ Public Class scafoldTarking
                     list.Add(cmbSuperintendent.Text)
                     list.Add(cmbJobNumOutGoing.SelectedItem)
                 ElseIf cmbJobNumInComing.SelectedItem Is Nothing Then
-                    MessageBox.Show("The Job Number is not selected, Please choose one and try again.", "Important", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                    MessageBox.Show("The Job Number Is Not selected, Please choose one And Try again.", "Important", MessageBoxButtons.OK, MessageBoxIcon.Error)
                 ElseIf txtTicketNumInComing.Text <> "" Then
-                    MessageBox.Show("The Ticket Number is not correct.", "Important", MessageBoxButtons.OK, MessageBoxIcon.Error)
+                    MessageBox.Show("The Ticket Number Is Not correct.", "Important", MessageBoxButtons.OK, MessageBoxIcon.Error)
                 End If
                 If list.Count > 0 Then
                     If mtdScaffold.saveOutGoing(tblOutGoing, list, True) Then
@@ -630,25 +632,66 @@ Public Class scafoldTarking
                 End If
             Case "Mod"
                 If DialogResult.Yes = MessageBox.Show("The 'Modification Records' will be deleted. Would you like to continue?", "Important ", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) Then
-                    If (mtdScaffold.deleteModificaion(md.tag, md.ModAux)) Then
-                        If mtdScaffold.llenarModification(tblModification, IdCliente) Then
-                            If tblModification.Rows.Count > 0 Then
-                                md = mtdScaffold.llenarModificationData(tblModification.Rows(0).ItemArray(0), tblModification.Rows(0).ItemArray(5))
-                                If md.ModAux <> "" Then
-                                    cargarDatosModification(md.ModAux)
+                    Dim filasMod As DataRow() = tblModification.Select("tag = '" + md.tag + "' , idMidificacion  '" + md.ModID + "',  idModAux = '" + md.ModAux + "' ")
+                    If filasMod.Count > 1 Then
+                        Dim dr = MessageBox.Show("Important.", "There are " & filasMod.Count().ToString() & " duplicated modification ID , Do you want to delete just this Modification?", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Exclamation)
+                        If dr = DialogResult.Yes Then
+                            If (mtdScaffold.deleteModificaion(md.tag, md.ModID, md.ModAux, True)) Then
+                                If mtdScaffold.llenarModification(tblModification, IdCliente) Then
+                                    If tblModification.Rows.Count > 0 Then
+                                        md = mtdScaffold.llenarModificationData(tblModification.Rows(0).ItemArray(0), tblModification.Rows(0).ItemArray(5))
+                                        If md.ModAux <> "" Then
+                                            cargarDatosModification(md.ModAux)
+                                        End If
+                                    Else
+                                        md.Clear()
+                                        cargarDatosModification("")
+                                    End If
                                 End If
-                            Else
-                                md.Clear()
-                                cargarDatosModification("")
+                                mtdScaffold.llenarProduct(tblProduct)
+                                mtdScaffold.llenarProduct(tblProductosAux)
+                            End If
+                        ElseIf dr = DialogResult.No Then
+                            If (mtdScaffold.deleteModificaion(md.tag, md.ModID, md.ModAux, False)) Then
+                                If mtdScaffold.llenarModification(tblModification, IdCliente) Then
+                                    If tblModification.Rows.Count > 0 Then
+                                        md = mtdScaffold.llenarModificationData(tblModification.Rows(0).ItemArray(0), tblModification.Rows(0).ItemArray(5))
+                                        If md.ModAux <> "" Then
+                                            cargarDatosModification(md.ModAux)
+                                        End If
+                                    Else
+                                        md.Clear()
+                                        cargarDatosModification("")
+                                    End If
+                                End If
+                                mtdScaffold.llenarProduct(tblProduct)
+                                mtdScaffold.llenarProduct(tblProductosAux)
+                            End If
+                        Else
+                            If (mtdScaffold.deleteModificaion(md.tag, md.ModID, md.ModAux, False)) Then
+                                If mtdScaffold.llenarModification(tblModification, IdCliente) Then
+                                    If tblModification.Rows.Count > 0 Then
+                                        md = mtdScaffold.llenarModificationData(tblModification.Rows(0).ItemArray(0), tblModification.Rows(0).ItemArray(5))
+                                        If md.ModAux <> "" Then
+                                            cargarDatosModification(md.ModAux)
+                                        End If
+                                    Else
+                                        md.Clear()
+                                        cargarDatosModification("")
+                                    End If
+                                End If
+                                mtdScaffold.llenarProduct(tblProduct)
+                                mtdScaffold.llenarProduct(tblProductosAux)
                             End If
                         End If
-                        mtdScaffold.llenarProduct(tblProduct)
-                        mtdScaffold.llenarProduct(tblProductosAux)
+                    Else
+
                     End If
+
                 End If
             Case tblModificationProductMS.Name
                 If DialogResult.Yes = MessageBox.Show("The 'Modification Records' will be deleted. Would you like to continue?", "Important ", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) Then
-                    If (mtdScaffold.deleteModificaion(md.tag, md.ModAux)) Then
+                    If (mtdScaffold.deleteModificaion(md.tag, md.ModID, md.ModAux, False)) Then
                         If mtdScaffold.llenarModification(tblModification, IdCliente) Then
                             If tblModification.Rows.Count > 0 Then
                                 md.Clear()
@@ -3632,7 +3675,7 @@ Public Class scafoldTarking
                 If tblModification.Rows.Count > 0 Then
                     Dim cont As Integer = 0
                     For Each rowMod As DataRow In tblModification.Rows
-                        If md.ModID = rowMod.ItemArray(1) And md.tag And rowMod.ItemArray(5) Then
+                        If md.ModID = rowMod.ItemArray(1) And md.tag And rowMod.ItemArray(5) And md.ModAux = rowMod.ItemArray(0) Then
                             If cont = 0 Then 'es la primer fila 
                                 Dim ultimafila = tblModification.Rows().Count()
                                 md = mtdScaffold.llenarModificationData(tblModification.Rows(ultimafila - 1).ItemArray(0), tblModification.Rows(ultimafila - 1).ItemArray(5))
@@ -3661,7 +3704,7 @@ Public Class scafoldTarking
                 If tblModification.Rows.Count > 0 Then
                     Dim cont As Integer = 0
                     For Each rowMod As DataRow In tblModification.Rows
-                        If md.ModID = rowMod.ItemArray(1) And md.tag = rowMod.ItemArray(5) Then
+                        If md.ModID = rowMod.ItemArray(1) And md.tag = rowMod.ItemArray(5) And md.ModAux = rowMod.ItemArray(0) Then
                             If cont = tblModification.Rows.Count() - 1 Then 'es la ultima fila 
                                 md = mtdScaffold.llenarModificationData(tblModification.Rows(0).ItemArray(0), tblModification.Rows(0).ItemArray(5))
                                 If md.ModID <> "" Then
