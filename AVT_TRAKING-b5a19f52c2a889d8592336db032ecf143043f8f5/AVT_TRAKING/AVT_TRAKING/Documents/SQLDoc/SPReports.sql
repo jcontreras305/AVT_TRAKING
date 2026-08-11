@@ -3634,65 +3634,118 @@ CREATE proc [dbo].[sp_SCF_Rental_Details]
 @numberClient int
 as
 begin 
-	select * 
-from(
-select 
-sc.tag,
-cl.companyName,
-sc.location as 'Location',
-sj.[description] , 
+
+select * from (
+	select sc.tag , 
+cl.companyName ,
+CONVERT(NVARCHAR,sc.location) as 'Location',
+sj.[description] as  'description',
 CONCAT(wo.idWO,'-',tk.task) as 'PO/WONo',
 CONCAT(sci.[type],'- ',sci.[length],' x',sci.width,' x',sci.heigth,'- ',(sci.descks+sci.extraDeck),' Decks') as 'ScaffoldDescription',
 sc.reqComp as 'dateRequest',
 sc.contact as 'requestBy', 
 sc.buildDate as 'buildDate', 
 --DATEADD(DAY,isnull(jc.[days],0),sc.buildDate) as 'ContractEndDate',
-dis.dismantleDate as 'dismantleDate',
-dis.rentStopDate as 'rentStopDate',
+ds.dismantleDate as 'dismantleDate',
+ds.rentStopDate as 'rentStopDate',
 --isnull(jc.[days],0) as 'Contract days',
-DATEDIFF(DAY,sc.buildDate,ISNULL(dis.rentStopDate,GETDATE())) as 'ActivityDays',
+DATEDIFF(DAY,sc.buildDate,ISNULL(ds.rentStopDate,GETDATE())) as 'ActivityDays',
 IIF(sc.tag is not null,'Build','Mod') as 'Task',
-
-IIF( ISNULL(dis.rentStopDate,GETDATE()) >= @startDate --and sc.buildDate <= @startDate 
-,
-	IIF( DATEADD(DAY,isnull(jc.[days],0),sc.buildDate) <= @FinalDate -- EL DIA FINAL DE RENTA GRATIS ES MENOR O IGUAL AL FINALDATE?
-	,-- SI ES MENOR O IGUAL POR LO TANTO SI HAY DIAS QUE COBRAR (ESTA DENTRO DEL RANGO)
-		IIF(DATEADD(DAY,isnull(jc.[days],0),sc.buildDate) > @startDate -- (PUNTO DE INICIO) EL DIA FINAL DE RENTA GRATIS ES MAYOR AL STARTDATE?
-		,--DIAFINAL DE RENTA GRATIS
-			IIF(ISNULL(dis.rentStopDate,GETDATE()) < @FinalDate -- EL DIA FINAL DE RENTA GRATIS ES MENOR QUE EL FINALDATE?
-			,DATEDIFF(DAY,DATEADD(DAY,isnull(jc.[days],0),DATEADD(DAY,-1,sc.buildDate)),ISNULL(dis.rentStopDate,GETDATE()))
-			,DATEDIFF(DAY,DATEADD(DAY,isnull(jc.[days],0),DATEADD(DAY,-1,sc.buildDate)),@FinalDate))
-		,--STARTDATE
-			IIF(ISNULL(dis.rentStopDate,GETDATE()) < @FinalDate, 
-				DATEDIFF(DAY,DATEADD(DAY,-1 ,@startDate),ISNULL(dis.rentStopDate,GETDATE())), 
-				DATEDIFF(DAY,DATEADD(DAY,-1 ,@startDate),@finalDate))
-		)	,-- NO ES MENOR O IGUAL POR ENDE NO HAY DIAS QUE COBAR (NO ESTA DENTRO DEL RANGO)
-	0),0)  AS 'DaysRent',
---IIF(DATEADD(DAY,isnull(jc.[days],0),sc.buildDate)<@FinalDate,1,0) as 'ExedContractDate',
-(select COUNT(*) from productTotalScaffold where tag = sc.tag) AS 'QTY'
-,pts.idProduct as 'idPrduct',
-pts.quantity as 'qtyPoduct',
+IIF( ISNULL(ds.rentStopDate, @FinalDate)>= @startDate -- Esto es para saber si aun esta activo o dentro de los parametros de cosulta, si no existe el rentStopDate el sc. sigue activo 
+, 
+	--aqui verificamos si exede los dias de renta dentro de los parametros de consulta	
+	IIF( DATEADD(DAY,ISNULL(jc.[days],0),sc.buildDate) >= @startDate and DATEADD(DAY,ISNULL(jc.[days],0),sc.buildDate) <= @FinalDate , 
+		-- el ultimo dia de renta gratis esta entre las fechas de la consulta
+		IIF( isnull(ds.[rentStopdate],@FinalDate) <= @FinalDate,
+			 DATEDIFF(DAY,DATEADD(DAY,ISNULL(jc.[days],0),sc.buildDate) ,isnull(ds.[rentStopdate],@FinalDate) ) --Los dias empeizan a contar del ultimo dia gratis hasta que se desmonto
+			,DATEDIFF(DAY,DATEADD(DAY,ISNULL(jc.[days],0),sc.buildDate) , @FinalDate)) --Los dias empeizan a contar del ultimo dia gratis hasta la fecha final del reporte
+	,  -- el ultimo dia de renta gratis esta antes de la dehca de la consulta pero puede que termine antes o despues del rango de fechas 
+		IIF(DATEADD(DAY,ISNULL(jc.[days],0),sc.buildDate) < @startDate  , 
+			IIF(ds.[rentStopDate] is NULL , 
+				DATEDIFF(DAY,DATEADD(DAY,-1,@startDate),@FinalDate) , --aun no se desmonta el scaffold 
+				DATEDIFF(DAY,DATEADD(DAY,-1,@startDate),ds.[rentStopDate]) )-- ya se desmonto el scaffold
+, 0 )),0--no entra dentro del rango de fechas
+) as 'DaysRent',
+'' as 'QTY',
+psc.idProduct , 
+psc.quantity as 'qtyPoduct',
 pd.name as 'productName',
 ISNULL(pdj.dailyRentJb,0) as 'dailyRent',
-(pts.quantity * ISNULL(pdj.dailyRentJb,0)) as 'Total'
-from scaffoldTraking as sc 
+(psc.quantity * ISNULL(pdj.dailyRentJb,0)) as 'Total'
+from scaffoldTraking as sc
+left join scaffoldInformation as sci on sci.tag = sc.tag
+inner join productScaffold as psc on psc.tag = sc.tag 
+left join dismantle as ds on ds.tag = sc.tag
 left join areas as ar on ar.idArea = sc.idArea
 left join subJobs as sj on sj.idSubJob = sc.idSubJob
 left join jobCat as jc on jc.idJobCat = sc.idJobCat
-left join scaffoldInformation as sci on sci.tag = sc.tag
-left join dismantle as dis on dis.tag = sc.tag
-left join productTotalScaffold as pts on pts.tag = sc.tag
-inner join product as pd on pd.idProduct= pts.idProduct
-inner join task as tk on tk.idAux = sc.idAux
+left join task as tk on tk.idAux = sc.idAux
+inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO 
+inner join projectOrder as po on po.idPO = wo.idPO and po.jobNo = wo.jobNo
+inner join job as jb on jb.jobNo = po.jobNo
+left join productJob as pdj on pdj.idProduct = psc.idProduct and pdj.jobNo = jb.jobNo
+inner join product as pd on pd.idProduct = pdj.idProduct
+inner join clients as cl on cl.idClient = jb.idClient
+where cl.numberClient = @numberClient
+
+union all
+
+select distinct sc.tag ,
+cl.companyName ,
+CONVERT(NVARCHAR,sc.location) as 'Location',
+sj.[description] as  'description',
+CONCAT(wo.idWO,'-',tk.task) as 'PO/WONo',
+CONCAT(sci.[type],'- ',sci.[length],' x',sci.width,' x',sci.heigth,'- ',(sci.descks+sci.extraDeck),' Decks') as 'ScaffoldDescription',
+sc.reqComp as 'dateRequest',
+sc.contact as 'requestBy', 
+md.modificationDate as 'buildDate', 
+--DATEADD(DAY,isnull(jc.[days],0),sc.buildDate) as 'ContractEndDate',
+ds.dismantleDate as 'dismantleDate',
+ds.rentStopDate as 'rentStopDate',
+--isnull(jc.[days],0) as 'Contract days',
+DATEDIFF(DAY,sc.buildDate,ISNULL(ds.rentStopDate,GETDATE())) as 'ActivityDays',
+IIF(md.IdModification is not null,'Mod','Build') as 'Task',
+IIF( ISNULL(ds.rentStopDate, @FinalDate)>= @startDate -- Esto es para saber si aun esta activo o dentro de los parametros de cosulta, si no existe el rentStopDate el sc. sigue activo 
+, 
+	--aqui verificamos si exede los dias de renta dentro de los parametros de consulta	
+	IIF( DATEADD(DAY,ISNULL(jc.[days],0),md.modificationDate) >= @startDate and DATEADD(DAY,ISNULL(jc.[days],0),md.modificationDate) <= @FinalDate , 
+		-- el ultimo dia de renta gratis esta entre las fechas de la consulta
+		IIF( isnull(ds.[rentStopdate],@FinalDate) <= @FinalDate ,
+			 IIF( isnull(ds.[rentStopdate],@FinalDate) > dateadd(DAY,ISNULL( jc.[days],0),md.modificationDate),DATEDIFF(DAY,DATEADD(DAY,ISNULL(jc.[days],0),md.modificationDate) ,isnull(ds.[rentStopdate],@FinalDate))
+			 ,0) --Los dias empizan a contar del ultimo dia gratis hasta que se desmonto
+			,DATEDIFF(DAY,DATEADD(DAY,ISNULL(jc.[days],0),md.modificationDate) , @FinalDate )) --Los dias empeizan a contar del ultimo dia gratis hasta la fecha final del reporte
+	,  -- el ultimo dia de renta gratis esta antes de la dehca de la consulta pero puede que termine antes o despues del rango de fechas 
+		IIF(DATEADD(DAY,ISNULL(jc.[days],0),md.modificationDate) < @startDate  , 
+			IIF(ds.[rentStopDate] is NULL , 
+				DATEDIFF(DAY,DATEADD(DAY,-1,@startDate),@FinalDate) , --aun no se desmontado el scaffold 
+				DATEDIFF(DAY,DATEADD(DAY,-1,@startDate),ds.[rentStopDate]) )-- ya se desmonto el scaffold
+, 0 )),0--no entra dentro del rango de fechas
+) as 'DaysRent',
+0 as 'QTY',
+(select top 1 idProduct from product as pd where pd.idProduct = pmd.idProduct) as 'idProduct',
+sum( pmd.quantity) over(partition by pmd.idProduct,sc.tag, md.idModAux, convert(nvarchar , sc.Location) ,cl.companyName,  CONCAT(wo.idWO,'-',tk.task) ,jb.jobNo , md.modificationDate   )  as 'qtyProduct',
+pd.name as 'ProductName',
+pd.dailyRentalRate as 'dailyRent',
+((select top 1 idProduct from product as pd where pd.idProduct = pmd.idProduct) * ISNULL(pdj.dailyRentJb,0)) as 'Total'
+from modification as md 
+left join scaffoldTraking as sc on sc.tag = md.tag
+left join dismantle as ds on ds.tag = sc.tag
+left join areas as ar on ar.idArea = sc.idArea
+left join subJobs as sj on sj.idSubJob = sc.idSubJob
+left join jobCat as jc on jc.idJobCat = sc.idJobCat
+left join task as tk on tk.idAux = sc.idAux
+left join scaffoldInformation as sci on sci.tag =sc.tag 
 inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO
 inner join projectOrder as po on po.idPO = wo.idPO and po.jobNo = wo.jobNo
-inner join job as jb on jb.jobNo = po.jobNo 
+inner join job as jb on jb.jobNo = po.jobNo
 inner join clients as cl on cl.idClient = jb.idClient
-left join productJob as pdj on pdj .jobNo = jb.jobNo and pd.idProduct = pdj.idProduct
-where cl.numberClient = @numberClient
-) as T1 where T1.DaysRent > 0 
+inner join productModification as pmd on pmd.tag = md.tag and md.idModAux = pmd.idModAux 
+left join product as pd on pd.idProduct = pmd.idProduct 
+left join productJob as pdj on pdj.idProduct = pd.idProduct and pdj.jobNo = jb.jobNo
+where cl.numberClient = @numberClient) 
+as T1
 end
-GO
+go
 --##############################################################################################
 --################## SP REPORT SCAFFOLD ESTIMATE ###############################################
 --##############################################################################################

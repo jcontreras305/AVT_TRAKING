@@ -3804,7 +3804,7 @@ IF EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES where TABLE_SCHEMA = 'dbo' an
 BEGIN 
 	drop table invoicePieces
 END
-select distinct t1.[Tag #],
+select t1.[Tag #], t1.[MOD ID],
 t1.[Labor WO / Network #],
 t1.[Type (O,M,T,C)],
 t1.[Pieces],
@@ -3819,8 +3819,10 @@ t1.[Last Day Free Rent],
 t1.[TASK],
 t1.[RDays]
 
-into invoicePieces from(
+into invoicePieces 
+from(
 select sc.tag as 'Tag #', 
+'' as  'MOD ID',
 wo.idWO as 'Labor WO / Network #',
 case  sj.[description] 
 when 'Operation' then 'O'
@@ -3867,14 +3869,14 @@ inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO
 inner join projectOrder as po on po.idPO = wo.idPO and po.jobNo = wo.jobNo
 inner join job as jb on jb.jobNo = po.jobNo
 inner join clients as cl on cl.idClient = jb.idClient
-where cl.numberClient = @numberClient  --and sc.buildDate between @startDate and @FinalDate 
+where po. and cl.numberClient = @numberClient  --and sc.buildDate between @startDate and @FinalDate 
 --)as t1 order by t1.ACTIVEDAYS desc
 
 union all
 
-
 --select * from (
-select sc.tag as 'Tag #', 
+select distinct  sc.tag as 'Tag #', 
+md.idModification as  'MOD ID',
 wo.idWO as 'Labor WO / Network #',
 case  sj.[description] 
 when 'Operation' then 'O'
@@ -3885,9 +3887,9 @@ when 'Winterization' then 'W'
 when 'All' then 'All'
 when NULL then ''
 else SUBSTRING(sj.[description],1,1) end  as 'Type (O,M,T,C)',
-ISNULL((select sum(psc.quantity) from productScaffold as psc where psc.tag = sc.tag),0) as 'Pieces',
+ISNULL((select sum(psc.quantity) from productModification as psc where psc.tag = sc.tag and psc.idModAux= md.idModAux),0) as 'Pieces',
 ar.name as 'UNIT',
-CONVERT(NVARCHAR,sc.location) as 'Location',
+CONVERT(NVARCHAR, sc.location) as 'Location',
 CONVERT(VARCHAR, md.modificationDate, 101) as 'Date UP',
 ISNULL(CONVERT(VARCHAR, ds.dismantleDate, 101),'') as 'Date Down',
 ISNULL((select sum(psc.quantity * pd.dailyRentalRate) from productScaffold as psc 
@@ -3925,6 +3927,7 @@ inner join job as jb on jb.jobNo = po.jobNo
 inner join clients as cl on cl.idClient = jb.idClient
 where cl.numberClient = @numberClient 
 )as t1 where t1.RDays > 0  order by t1.ACTIVEDAYS desc
+
 
 --##################################################################################
 --########## HERE IS THE QUERY TO SELECT DE RENTAL OF YOYOS ########################
