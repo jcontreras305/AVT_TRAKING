@@ -3833,14 +3833,16 @@ when 'Winterization' then 'W'
 when 'All' then 'All'
 when NULL then ''
 else SUBSTRING(sj.[description],1,1) end  as 'Type (O,M,T,C)',
-ISNULL((select sum(psc.quantity) from productScaffold as psc where psc.tag = sc.tag),0) as 'Pieces',
+ISNULL((select sum(psc.quantity) from productScaffold as psc 
+inner join product as pd on pd.idProduct = psc.idProduct 
+where psc.tag = sc.tag and pd.name not like '%yo' ),0) as 'Pieces',
 ar.name as 'UNIT',
 CONVERT(NVARCHAR,sc.location) as 'Location',
 CONVERT(VARCHAR, sc.buildDate, 101) as 'Date UP',
 ISNULL(CONVERT(VARCHAR, ds.dismantleDate, 101),'') as 'Date Down',
 ISNULL((select sum(psc.quantity * pd.dailyRentalRate) from productScaffold as psc 
 inner join product as pd on pd.idProduct = psc.idProduct
-where psc.tag = sc.tag),0) as 'Product Amount',
+where psc.tag = sc.tag and pd.name not like '%yo' ),0) as 'Product Amount',
 DATEDIFF(day,sc.buildDate, IIF(ds.dismantleDate is Null,@FinalDate,ds.dismantleDate)) as 'ACTIVEDAYS',
 ISNULL(jc.[days],0) as 'Days Free Rent',
 CONVERT(nvarchar, dateadd(DAY,ISNULL( jc.[days],0),sc.buildDate),101) as 'Last Day Free Rent','BLD' as 'TASK',
@@ -3869,7 +3871,7 @@ inner join workOrder as wo on wo.idAuxWO = tk.idAuxWO
 inner join projectOrder as po on po.idPO = wo.idPO and po.jobNo = wo.jobNo
 inner join job as jb on jb.jobNo = po.jobNo
 inner join clients as cl on cl.idClient = jb.idClient
-where po. and cl.numberClient = @numberClient  --and sc.buildDate between @startDate and @FinalDate 
+where cl.numberClient = @numberClient  --and sc.buildDate between @startDate and @FinalDate 
 --)as t1 order by t1.ACTIVEDAYS desc
 
 union all
@@ -3887,14 +3889,16 @@ when 'Winterization' then 'W'
 when 'All' then 'All'
 when NULL then ''
 else SUBSTRING(sj.[description],1,1) end  as 'Type (O,M,T,C)',
-ISNULL((select sum(psc.quantity) from productModification as psc where psc.tag = sc.tag and psc.idModAux= md.idModAux),0) as 'Pieces',
+ISNULL((select sum(psc.quantity) from productModification as psc 
+inner join product as pd on pd.idProduct = psc.idProduct
+where psc.tag = sc.tag and psc.idModAux= md.idModAux and pd.name not like '%yo'  ),0) as 'Pieces',
 ar.name as 'UNIT',
 CONVERT(NVARCHAR, sc.location) as 'Location',
 CONVERT(VARCHAR, md.modificationDate, 101) as 'Date UP',
 ISNULL(CONVERT(VARCHAR, ds.dismantleDate, 101),'') as 'Date Down',
 ISNULL((select sum(psc.quantity * pd.dailyRentalRate) from productScaffold as psc 
 inner join product as pd on pd.idProduct = psc.idProduct
-where psc.tag = sc.tag),0) as 'Product Amount',
+where psc.tag = sc.tag and pd.name not like '%yo' ),0) as 'Product Amount',
 DATEDIFF(day,md.modificationDate, IIF(ds.dismantleDate is Null,@FinalDate,ds.dismantleDate)) as 'ACTIVEDAYS',
 ISNULL(jc.[days],0) as 'Days Free Rent',
 CONVERT(nvarchar, dateadd(DAY,ISNULL( jc.[days],0),md.modificationDate),101) as 'Last Day Free Rent','MOD' as 'Task',
